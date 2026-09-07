@@ -1,0 +1,21 @@
+# Datos restringidos: nunca versionar
+data/raw/
+data/private/
+data/audio/
+data/identities/
+consentimientos-firmados/
+
+# Credenciales y configuración local
+.env
+.env.*
+*.key
+*.pem
+
+# Artefactos grandes/regenerables
+models/checkpoints/
+artifacts/
+
+# Sistema y editores
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,30 @@
+name: Escritura
+description: Incorporar una sección revisable al Informe Final.
+title: "[Escritura] "
+labels: ["type:writing"]
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Propósito de la sección
+      description: Qué pregunta responde y para quién.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia disponible
+      description: Fuentes, decisiones, experimentos, tablas y figuras.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definición de terminado
+      value: |
+        - [ ] La sección responde su propósito y respeta el esqueleto.
+        - [ ] Cada afirmación material tiene una cita verificable.
+        - [ ] Tablas y figuras enlazan evidencia reproducible.
+        - [ ] La revisión cruzada fue incorporada.
+    validations:
+      required: true

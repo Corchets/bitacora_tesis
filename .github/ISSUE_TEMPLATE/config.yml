@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Método de trabajo
+    url: https://github.com/Corchets/bitacora_tesis/blob/main/docs/gestion/METODO-DE-TRABAJO.md
+    about: Revisar el flujo y elegir la plantilla correcta antes de abrir un issue.

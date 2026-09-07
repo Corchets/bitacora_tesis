@@ -1,0 +1,36 @@
+name: Experimento
+description: Responder una pregunta mediante datos y mediciones reproducibles.
+title: "[Experimento] "
+labels: ["type:experiment"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Pregunta y comparación
+      description: Qué se mide y qué variantes se comparan.
+    validations:
+      required: true
+  - type: textarea
+    id: data
+    attributes:
+      label: Datos y split
+      description: Versión, inclusión, exclusión y prevención de leakage.
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Métricas y criterio de interpretación
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definición de terminado
+      value: |
+        - [ ] Configuración, seed, commit y hardware registrados.
+        - [ ] Baseline y variante ejecutados bajo condiciones comparables.
+        - [ ] Salidas crudas y procedimiento de reproducción conservados.
+        - [ ] Resultado, errores y limitaciones interpretados.
+    validations:
+      required: true

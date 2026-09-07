@@ -1,0 +1,5 @@
+scenario_id,familia,clase,titulo,fuente,identidad_suplantada_o_contexto,objetivo,maniobras,accion_critica,negativo_pareado,estado,notas
+SC-BANK-OTP-01,banco,vishing,Compra sospechosa y pedido de código,pendiente,banco,obtener OTP,"autoridad;urgencia;aislamiento",REQUEST_AUTH_CODE,LG-BANK-ALERT-01,borrador,usar datos totalmente ficticios
+LG-BANK-ALERT-01,banco,legitima_dificil,Aviso legítimo de compra sospechosa,pendiente,banco,derivar a la app oficial,"autoridad;urgencia controlada",NONE,SC-BANK-OTP-01,borrador,nunca solicita código ni secreto
+SC-WA-CODE-01,whatsapp,vishing,Verificación falsa de WhatsApp,pendiente,soporte o conocido,obtener código de activación,"confianza;urgencia",REQUEST_AUTH_CODE,LG-SUPPORT-INFO-01,borrador,usar código ficticio
+LG-SUPPORT-INFO-01,soporte,legitima_dificil,Soporte informa pasos seguros,pendiente,soporte,orientar sin pedir secretos,"autoridad",NONE,SC-WA-CODE-01,borrador,deriva a canal oficial

@@ -1,0 +1,42 @@
+name: Decisión
+description: Resolver una elección que bloquea o condiciona trabajo.
+title: "[Decisión] "
+labels: ["type:decision"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Pregunta
+      description: Una decisión concreta, formulada como pregunta.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas
+      description: Opciones reales que deben compararse.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia necesaria
+      description: Qué prueba, fuente o conversación permite decidir.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencias y consecuencias
+      description: Qué bloquea esta decisión y qué trabajo desbloquea.
+  - type: textarea
+    id: done
+    attributes:
+      label: Definición de terminado
+      value: |
+        - [ ] La alternativa elegida y el motivo están registrados.
+        - [ ] La evidencia está enlazada.
+        - [ ] Las consecuencias y nuevos issues están registrados.
+        - [ ] Se creó un ADR si la decisión arquitectónica es duradera.
+    validations:
+      required: true

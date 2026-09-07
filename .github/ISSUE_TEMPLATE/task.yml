@@ -1,0 +1,26 @@
+name: Tarea
+description: Producir un artefacto verificable de código, datos o documentación.
+title: "[Tarea] "
+labels: ["type:task"]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Resultado observable
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto y dependencias
+  - type: textarea
+    id: done
+    attributes:
+      label: Definición de terminado
+      description: Lista exhaustiva y verificable.
+      value: |
+        - [ ] El artefacto está creado y enlazado.
+        - [ ] La verificación relevante está registrada.
+        - [ ] La fuente de verdad afectada está actualizada.
+    validations:
+      required: true

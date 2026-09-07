@@ -1,0 +1,35 @@
+name: Investigación
+description: Reunir evidencia externa para una afirmación o decisión.
+title: "[Investigación] "
+labels: ["type:research"]
+body:
+  - type: textarea
+    id: claim
+    attributes:
+      label: Pregunta o afirmación a verificar
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Alcance
+      description: Periodo, fuentes esperadas, idiomas, inclusiones y exclusiones.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Decisión o documento que utilizará el resultado
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definición de terminado
+      value: |
+        - [ ] Consultas y criterios registrados.
+        - [ ] Fuentes primarias verificadas y matriz actualizada.
+        - [ ] Evidencia contradictoria buscada y reconciliada.
+        - [ ] Síntesis, límites y decisión habilitada registrados.
+    validations:
+      required: true
