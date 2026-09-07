@@ -5,6 +5,17 @@ data/audio/
 data/identities/
 consentimientos-firmados/
 
+# Audio: nunca al repositorio (ver docs/datos-etica/CHECKLIST-ETICA.md)
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.ogg
+
+# Datos con identificadores personales
+*consentimiento*firmado*
+*.csv.personal
+
 # Credenciales y configuración local
 .env
 .env.*
@@ -19,3 +30,6 @@ artifacts/
 .DS_Store
 .idea/
 .vscode/
+
+# Temporales de Office / LibreOffice
+~$*
