@@ -289,34 +289,47 @@ directorios vacíos. Estructura objetivo:
 ```text
 bitacora_tesis/
 ├── README.md
+├── AGENTS.md
+├── deep-research-report.md
 ├── docs/
+│   ├── GUIA-DE-ARCHIVOS.md
+│   ├── GLOSARIO.md
 │   ├── gestion/
 │   │   ├── PLAN-MAESTRO.md
 │   │   ├── MAPA-DECISIONES.md
+│   │   ├── METODO-DE-TRABAJO.md
 │   │   ├── REGISTRO-RIESGOS.md
-│   │   └── seguimientos/YYYY-MM-DD.md
+│   │   ├── seguimientos/YYYY-MM-DD.md
+│   │   └── bitacora/YYYY-MM-semana-NN.md
 │   ├── propuesta/
 │   │   ├── PLAN-DE-TRABAJO.md
-│   │   ├── OBJETIVOS-Y-ALCANCE.md
-│   │   └── REQUISITOS-ACADEMICOS.md
+│   │   ├── ANTEPROYECTO.md
+│   │   ├── CORRECCIONES-ANTEPROYECTO.md
+│   │   ├── REQUISITOS-ACADEMICOS.md
+│   │   └── original/            # .docx congelado
 │   ├── investigacion/
 │   │   ├── PROTOCOLO-REVISION.md
+│   │   ├── PREGUNTAS-DE-INVESTIGACION.md
+│   │   ├── SINTESIS-ESTADO-DEL-ARTE.md
 │   │   ├── matriz-literatura.csv
-│   │   ├── preguntas-investigacion.md
+│   │   ├── lecturas/YYYY-autor-tema.md
 │   │   └── bibliografia.bib
 │   ├── datos-etica/
-│   │   ├── PLAN-DATOS.md
-│   │   ├── CONSENTIMIENTO.md
+│   │   ├── METODO-CREACION-CORPUS.md
 │   │   ├── MANUAL-ANOTACION.md
+│   │   ├── CHECKLIST-ETICA.md
+│   │   ├── CONSENTIMIENTO-BORRADOR.md
+│   │   ├── PLAN-DATOS.md
 │   │   └── ESQUEMA-DATASET.md
 │   ├── ingenieria/
-│   │   ├── REQUISITOS-SOFTWARE.md
+│   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md
 │   │   ├── ARQUITECTURA.md
+│   │   ├── REQUISITOS-SOFTWARE.md
 │   │   ├── adr/NNNN-decision.md
 │   │   └── PLAN-PRUEBAS.md
 │   ├── evaluacion/
-│   │   ├── PROTOCOLO-EXPERIMENTAL.md
 │   │   ├── METRICAS.md
+│   │   ├── PROTOCOLO-EXPERIMENTAL.md
 │   │   ├── AMENAZAS-VALIDEZ.md
 │   │   └── RESULTADOS.md
 │   └── tesis/
