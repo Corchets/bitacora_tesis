@@ -395,9 +395,8 @@ manifiestos pseudonimizados y datos explícitamente autorizados.
 - [ ] Acordar qué partes son núcleo, extensión y fuera de alcance.
 - [ ] Presentar al profesor cinco decisiones, no una lista abierta de tecnologías.
 
-Estas tareas se migran a GitHub Issues desde
-[BACKLOG-INICIAL.md](BACKLOG-INICIAL.md). La persona responsable se define por
-autoasignación.
+Estas tareas están migradas a GitHub Issues bajo el milestone `M0 — Dirección aprobada`
+(issues #15 a #22). La persona responsable se define por autoasignación.
 
 ## 13. Decisión sobre Wayfinder
 

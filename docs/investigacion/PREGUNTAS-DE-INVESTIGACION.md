@@ -13,19 +13,15 @@ responder. No presuponen un resultado favorable.
 
 ### Pregunta
 
-¿Con qué desempeño y tasa de falsas alarmas puede detectarse vishing utilizando
-solo la parte de la conversación disponible hasta cada instante?
+¿Con qué desempeño y tasa de falsas alarmas puede detectarse vishing utilizando solo la parte de la conversación disponible hasta cada instante?
 
 ### Qué busca responder
 
-Si las señales acumuladas permiten distinguir una llamada fraudulenta de una
-legítima antes de escucharla completa, y desde qué punto la predicción se vuelve
-estable.
+Si las señales acumuladas permiten distinguir una llamada fraudulenta de una legítima antes de escucharla completa, y desde qué punto la predicción se vuelve estable.
 
 ### Experimento
 
-Ejecutar el detector con prefijos sucesivos de cada conversación: primeros turnos,
-25%, 50%, 75% y 100%, o ventanas temporales equivalentes.
+Ejecutar el detector con prefijos sucesivos de cada conversación: primeros turnos, 25%, 50%, 75% y 100%, o ventanas temporales equivalentes.
 
 ### Resultados que se reportan
 
@@ -34,15 +30,13 @@ Ejecutar el detector con prefijos sucesivos de cada conversación: primeros turn
 - Falsas alertas por hora.
 - Curva de riesgo a lo largo del tiempo.
 
-No se busca un número elegido de antemano. Se busca caracterizar el compromiso:
-detectar antes normalmente implica más falsas alarmas.
+No se busca un número elegido de antemano. Se busca caracterizar el compromiso: detectar antes normalmente implica más falsas alarmas.
 
 ## PI2 — Utilidad temporal
 
 ### Pregunta
 
-¿Con cuánto margen respecto del primer pedido riesgoso y de la primera acción de
-cumplimiento puede emitirse una alerta estable?
+¿Con cuánto margen respecto del primer pedido riesgoso y de la primera acción de cumplimiento puede emitirse una alerta estable?
 
 ### Marcas necesarias
 
@@ -59,8 +53,7 @@ Ejemplo:
 01:04 “El código es...”                               T_C
 ```
 
-Si la alerta aparece a los 00:48, no anticipa el pedido, pero aparece 16 segundos
-antes de que el rol de víctima comience a compartir el código.
+Si la alerta aparece a los 00:48, no anticipa el pedido, pero aparece 16 segundos antes de que el rol de víctima comience a compartir el código.
 
 ### Resultados que se reportan
 
@@ -69,16 +62,13 @@ antes de que el rol de víctima comience a compartir el código.
 - `Preventive@5s`, `Preventive@10s` y `Preventive@20s`.
 - Casos detectados después del evento o nunca detectados.
 
-El resultado buscado es una distribución honesta de márgenes, no demostrar por
-fuerza que todos son positivos.
+El resultado buscado es una distribución honesta de márgenes, no demostrar por fuerza que todos son positivos.
 
 ## E1 — Impacto del ASR, evaluación diagnóstica obligatoria
 
 ### No es una pregunta central
 
-El producto recibe audio; por eso hay que separar errores del detector de errores
-de transcripción. Esta comparación es una evaluación del pipeline y puede aparecer
-como subpregunta de PI1/PI2 o como experimento de ablación.
+El producto recibe audio; por eso hay que separar errores del detector de errores de transcripción. Esta comparación es una evaluación del pipeline y puede aparecer como subpregunta de PI1/PI2 o como experimento de ablación.
 
 ### ¿Requiere llamadas reales?
 
@@ -109,8 +99,7 @@ Interpretaciones posibles:
 - buen resultado manual y malo con ASR: el cuello de botella es la transcripción;
 - ambos malos: falta señal temprana, datos o capacidad del detector;
 - ambos similares: el ASR elegido es suficiente para este corpus;
-- ASR mejora algún caso: revisar si normalización o ruido del texto manual explica
-  el efecto, sin asumir que la mejora es general.
+- ASR mejora algún caso: revisar si normalización o ruido del texto manual explica el efecto, sin asumir que la mejora es general.
 
 Si el alcance cambiara a un detector que recibe texto y no audio, E1 dejaría de ser
 necesaria. Mientras el producto prometa escuchar voz, esta comparación es parte de
@@ -128,12 +117,12 @@ PI1/PI2.
 
 ## Matriz pregunta–evidencia
 
-| Elemento | Datos necesarios | Comparación | Salida |
-|---|---|---|---|
-| PI1 | prefijos, clase y timestamps | reglas vs modelo; prefijos | curvas desempeño-tiempo y falsas alarmas |
-| PI2 | `T_A`, `T_R`, `T_C` | políticas de alerta | márgenes y Preventive@δ |
-| E1 | audio, texto manual y ASR | misma detección, entrada distinta | degradación, errores críticos y latencia |
-| E2 | etiquetas por turno | predicción vs anotación | fidelidad de explicación |
+| Elemento | Datos necesarios             | Comparación                       | Salida                                   |
+| -------- | ---------------------------- | --------------------------------- | ---------------------------------------- |
+| PI1      | prefijos, clase y timestamps | reglas vs modelo; prefijos        | curvas desempeño-tiempo y falsas alarmas |
+| PI2      | `T_A`, `T_R`, `T_C`          | políticas de alerta               | márgenes y Preventive@δ                  |
+| E1       | audio, texto manual y ASR    | misma detección, entrada distinta | degradación, errores críticos y latencia |
+| E2       | etiquetas por turno          | predicción vs anotación           | fidelidad de explicación                 |
 
 ## Propuesta al profesor
 

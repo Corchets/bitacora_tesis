@@ -8,7 +8,7 @@ incremental puede advertir un posible vishing antes de que la persona realice un
 acción riesgosa. El resultado incluye investigación, corpus controlado, software,
 evaluación reproducible e Informe Final.
 
-La pregunta central no es *"¿se puede clasificar la llamada?"* sino **con cuánta anticipación
+La pregunta central no es _"¿se puede clasificar la llamada?"_ sino **con cuánta anticipación
 respecto del momento crítico se puede intervenir de forma fiable**. Eso se mide con tres marcas
 temporales — `T_A` (alerta), `T_R` (pedido riesgoso), `T_C` (la persona empieza a cumplir) — y con
 `Preventive@δ`. Definiciones en [METRICAS.md](docs/evaluacion/METRICAS.md).
@@ -16,12 +16,10 @@ temporales — `T_A` (alerta), `T_R` (pedido riesgoso), `T_C` (la persona empiez
 ## ⚠️ Estado: casi nada está decidido todavía
 
 No están cerrados el alcance, la fuente de audio, la taxonomía, el corpus ni el protocolo
-experimental. Es el estado normal de la semana 1, pero conviene que sea explícito para que nadie
-tome estos documentos como decisiones tomadas.
+experimental. Es el estado normal de la semana 1, pero conviene que sea explícito para que nadie tome estos documentos como decisiones tomadas.
 
-**El archivo que ordena eso es [MAPA-DECISIONES.md](docs/gestion/MAPA-DECISIONES.md)**: qué se puede
-decidir ahora, qué está bloqueado y qué ya se cerró. Todo documento marcado como *"propuesta sin
-discutir"* es insumo para debatir, no algo resuelto.
+**El archivo que ordena eso es [MAPA-DECISIONES.md](docs/gestion/MAPA-DECISIONES.md)**: qué se puede decidir ahora, qué está bloqueado y qué ya se cerró. Todo documento marcado como _"propuesta sin
+discutir"_ es insumo para debatir, no algo resuelto.
 
 ## Empezar una sesión de trabajo
 
@@ -35,6 +33,8 @@ discutir"* es insumo para debatir, no algo resuelto.
 El flujo completo, los tipos de issue y las reglas de cierre están en
 [Método de trabajo](docs/gestion/METODO-DE-TRABAJO.md). La función y momento de
 actualización de cada archivo están en [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md).
+Para resolver issues paso a paso con asistentes de IA y plantillas de prompts, ver el
+[Runbook de resolución de issues](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md).
 Los asistentes de código deben leer [AGENTS.md](AGENTS.md).
 
 ## Para la próxima clase
@@ -47,29 +47,29 @@ Los asistentes de código deben leer [AGENTS.md](AGENTS.md).
 
 ## Documentos principales
 
-| Necesidad | Documento |
-|---|---|
-| Entender alcance, fases y fechas | [Plan maestro](docs/gestion/PLAN-MAESTRO.md) |
-| Saber qué falta decidir | [Mapa de decisiones](docs/gestion/MAPA-DECISIONES.md) |
-| Saber cómo trabajar cada sesión | [Método de trabajo](docs/gestion/METODO-DE-TRABAJO.md) |
-| Saber dónde registrar algo | [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md) |
-| Preparar la propuesta académica | [Plan de Trabajo](docs/propuesta/PLAN-DE-TRABAJO.md) · [Anteproyecto](docs/propuesta/ANTEPROYECTO.md) |
-| Investigar y registrar fuentes | [Protocolo bibliográfico](docs/investigacion/PROTOCOLO-REVISION.md) |
-| Ver qué hay hecho afuera | [Síntesis del estado del arte](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md) |
-| Diseñar grabaciones simuladas | [Método del corpus](docs/datos-etica/METODO-CREACION-CORPUS.md) |
-| Anotar una conversación | [Manual de anotación](docs/datos-etica/MANUAL-ANOTACION.md) |
-| Saber qué mide cada número | [Métricas](docs/evaluacion/METRICAS.md) |
-| Consultar riesgos activos | [Registro de riesgos](docs/gestion/REGISTRO-RIESGOS.md) |
-| Entender un término | [Glosario](docs/GLOSARIO.md) |
-| Redactar el informe | [Esqueleto del informe](docs/tesis/ESQUELETO-INFORME.md) |
+| Necesidad                        | Documento                                                                                             |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Entender alcance, fases y fechas | [Plan maestro](docs/gestion/PLAN-MAESTRO.md)                                                          |
+| Saber qué falta decidir          | [Mapa de decisiones](docs/gestion/MAPA-DECISIONES.md)                                                 |
+| Saber cómo trabajar cada sesión  | [Método de trabajo](docs/gestion/METODO-DE-TRABAJO.md)                                                |
+| Resolver issues con agentes      | [Runbook de resolución de issues](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md)                          |
+| Saber dónde registrar algo       | [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md)                                                          |
+| Preparar la propuesta académica  | [Plan de Trabajo](docs/propuesta/PLAN-DE-TRABAJO.md) · [Anteproyecto](docs/propuesta/ANTEPROYECTO.md) |
+| Investigar y registrar fuentes   | [Protocolo bibliográfico](docs/investigacion/PROTOCOLO-REVISION.md)                                   |
+| Ver qué hay hecho afuera         | [Síntesis del estado del arte](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md)                        |
+| Diseñar grabaciones simuladas    | [Método del corpus](docs/datos-etica/METODO-CREACION-CORPUS.md)                                       |
+| Anotar una conversación          | [Manual de anotación](docs/datos-etica/MANUAL-ANOTACION.md)                                           |
+| Saber qué mide cada número       | [Métricas](docs/evaluacion/METRICAS.md)                                                               |
+| Consultar riesgos activos        | [Registro de riesgos](docs/gestion/REGISTRO-RIESGOS.md)                                               |
+| Entender un término              | [Glosario](docs/GLOSARIO.md)                                                                          |
+| Redactar el informe              | [Esqueleto del informe](docs/tesis/ESQUELETO-INFORME.md)                                              |
 
 ## Fuentes de verdad
 
 - **Trabajo pendiente y responsables:** GitHub Issues.
 - **Fases y fechas:** `docs/gestion/PLAN-MAESTRO.md`.
 - **Decisiones abiertas y su numeración:** `docs/gestion/MAPA-DECISIONES.md`.
-- **Decisiones cerradas:** comentario de resolución del issue; un ADR si es una
-  decisión arquitectónica duradera.
+- **Decisiones cerradas:** comentario de resolución del issue; un ADR si es una decisión arquitectónica duradera.
 - **Fuentes y afirmaciones:** `matriz-literatura.csv` y documentos de investigación.
 - **Resultados:** configuración y salida versionada de cada experimento.
 - **Texto entregable:** `docs/tesis/`.
@@ -91,6 +91,5 @@ coordinan el trabajo.
 
 ## Estado de GitHub Issues
 
-Las plantillas están en `.github/ISSUE_TEMPLATE/`. Falta crear el backlog remoto a partir de
-[Backlog inicial](docs/gestion/BACKLOG-INICIAL.md); cuando se importe, ese archivo deja de
-actualizarse.
+El backlog inicial fue publicado en GitHub Issues bajo el milestone `M0 — Dirección aprobada` (issues #15 a #22). Las plantillas de nuevos issues están en `.github/ISSUE_TEMPLATE/`. Para resolverlos, consultar el [Runbook de resolución de issues](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md).
+

@@ -52,8 +52,7 @@ un problema grave en la defensa.
 
 ## Flujo obligatorio
 
-1. Leer el issue activo y autoasignarlo antes de modificar el repositorio. Durante el bootstrap sin
-   issues, usar [BACKLOG-INICIAL.md](docs/gestion/BACKLOG-INICIAL.md).
+1. Leer el issue activo en GitHub Issues y autoasignarlo antes de modificar el repositorio.
 2. Leer [el método](docs/gestion/METODO-DE-TRABAJO.md) cuando se planifique, cree, ejecute o cierre
    trabajo.
 3. Cargar solo la referencia disparada por la tarea:
@@ -112,6 +111,29 @@ La [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md) tiene el detalle de cuándo se 
   `⚠️[S1]`…`⚠️[S3]` = supuestos no decididos. No las borres sin aplicar la corrección
   correspondiente en [CORRECCIONES-ANTEPROYECTO.md](docs/propuesta/CORRECCIONES-ANTEPROYECTO.md).
 
+## Uso y sugerencia de Skills especializadas
+
+El repositorio cuenta con skills en `.agents/skills/`. El agente debe sugerir proactivamente al usuario ejecutarlas según la fase de trabajo:
+
+- **Decisiones abiertas, tickets ambiguos o diseño de alcance:** Sugerir `grill-me` o `grill-with-docs` para una entrevista estructurada que resuelva incertidumbres antes de escribir código o comprometer documentos.
+- **Implementación de código:** Sugerir `implement` (y `tdd` para módulos de cálculo de métricas, reglas o parsers) para construir código trazable y probado.
+- **Finalización de código o Pull Requests:** Sugerir `code-review` antes de mergear o cerrar el issue.
+- **Errores, excepciones o latencias inesperadas:** Sugerir `diagnosing-bugs` para aislar y resolver la causa raíz con pruebas.
+- **Pruebas de concepto rápidas o spikes descartables:** Sugerir `prototype`.
+- **Descomponer discusiones en issues para GitHub:** Sugerir `to-tickets` o `to-spec`.
+- **Resolución e integración de issues:** Usar `resolver-issue`.
+
+## Protocolo de resolución de issues y sincronización de estado
+
+Cuando el usuario indique que está trabajando en un issue (o acerque resultados/notas para integrar):
+1. **Identificar fuente de verdad:** Ubicar el documento canónico en `docs/` según el tipo de issue (ver tabla arriba y [RUNBOOK-RESOLUCION-ISSUES.md](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md)).
+2. **Aplicar cambios:** Editar la fuente de verdad respetando estrictamente las Reglas 1, 2 y 3 (no inventar decisiones ni citas, no audio/PII).
+3. **Sincronizar el estado vivo:**
+   - **Bitácora semanal (`docs/gestion/bitacora/`):** Agregar el trabajo y estado a la tabla de la semana en curso, y la viñeta en "Qué existe hoy".
+   - **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** Si resuelve o cambia una decisión, actualizar su estado; si es técnica duradera, redactar el ADR en `docs/ingenieria/adr/`.
+   - **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** Si mitiga un riesgo o descubre uno nuevo, ajustar o agregar la fila correspondiente.
+4. **Entregar comentario para GitHub:** Terminar siempre con un bloque Markdown formateado listo para copiar y pegar en el issue de GitHub (`Closes #N`, resumen, evidencia, decisiones y próxima acción).
+
 ## Al terminar un cambio
 
 1. Actualizá la fuente de verdad afectada, no varias copias.
@@ -122,3 +144,4 @@ La [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md) tiene el detalle de cuándo se 
 Una sesión termina con el issue actualizado, la evidencia enlazada, las fuentes de verdad
 consistentes y las verificaciones pertinentes ejecutadas. Si resta trabajo, el issue permanece
 abierto con una próxima acción concreta y un bloqueo explícito.
+

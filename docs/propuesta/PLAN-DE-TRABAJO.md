@@ -24,18 +24,10 @@
 
 ## 1. Resumen de la propuesta
 
-El vishing es una modalidad de ingeniería social realizada mediante llamadas de
-voz en la que un atacante intenta obtener información sensible, inducir una
-transferencia o provocar otra acción riesgosa. Las defensas basadas únicamente en
-la reputación del número no pueden reconocer necesariamente llamadas originadas
-desde números todavía no reportados ni explicar la maniobra que ocurre durante la
+El vishing es una modalidad de ingeniería social realizada mediante llamadas de voz en la que un atacante intenta obtener información sensible, inducir una transferencia o provocar otra acción riesgosa. Las defensas basadas únicamente en la reputación del número no pueden reconocer necesariamente llamadas originadas desde números todavía no reportados ni explicar la maniobra que ocurre durante la
 conversación.
 
-El proyecto propone diseñar, implementar y evaluar un prototipo que procese
-incrementalmente un flujo de audio en español, transcriba localmente la conversación,
-estime el riesgo de vishing e identifique señales como suplantación, urgencia,
-aislamiento y pedidos de códigos, secretos o transferencias. Cuando el riesgo supere
-una política definida, el sistema mostrará una advertencia contextual y accionable.
+El proyecto propone diseñar, implementar y evaluar un prototipo que procese incrementalmente un flujo de audio en español, transcriba localmente la conversación, estime el riesgo de vishing e identifique señales como suplantación, urgencia, aislamiento y pedidos de códigos, secretos o transferencias. Cuando el riesgo supere una política definida, el sistema mostrará una advertencia contextual y accionable.
 
 La evaluación se realizará sobre un corpus controlado de conversaciones simuladas
 de vishing y llamadas legítimas difíciles. Se compararán reglas, un modelo clásico
@@ -223,17 +215,17 @@ evaluar en computadora y desplegar el modelo seleccionado después.
 
 ## 11. Cronograma
 
-| Fechas | Resultado principal |
-|---|---|
-| 2–9 sep | propuesta, preguntas, alternativas de audio y decisiones al profesor |
-| 10–23 sep | alcance aprobado y vertical slice técnico |
-| 24 sep–7 oct | corpus/anotación piloto y protocolo ético |
-| 8–21 oct | benchmark ASR, reglas, TF–IDF y primer resultado temporal |
-| 22 oct–4 nov | corpus v1 y detector incremental |
-| 5–18 nov | integración end-to-end e instrumentación |
-| 19 nov–2 dic | congelamiento y evaluación final |
-| 3–16 dic | informe completo, defensa y reproducción |
-| 17–fin dic | correcciones, PDF y entrega |
+| Fechas       | Resultado principal                                                  |
+| ------------ | -------------------------------------------------------------------- |
+| 2–9 sep      | propuesta, preguntas, alternativas de audio y decisiones al profesor |
+| 10–23 sep    | alcance aprobado y vertical slice técnico                            |
+| 24 sep–7 oct | corpus/anotación piloto y protocolo ético                            |
+| 8–21 oct     | benchmark ASR, reglas, TF–IDF y primer resultado temporal            |
+| 22 oct–4 nov | corpus v1 y detector incremental                                     |
+| 5–18 nov     | integración end-to-end e instrumentación                             |
+| 19 nov–2 dic | congelamiento y evaluación final                                     |
+| 3–16 dic     | informe completo, defensa y reproducción                             |
+| 17–fin dic   | correcciones, PDF y entrega                                          |
 
 ## 12. Organización del equipo
 
@@ -264,11 +256,7 @@ La propuesta concreta de reclutamiento y escala está en
 
 ## 14. Criterio de éxito
 
-El proyecto será exitoso si responde las preguntas con un procedimiento honesto y
-reproducible, entrega un pipeline demostrable y documenta sus límites. No se fija
-una accuracy arbitraria como condición. Un resultado que muestre baja anticipación,
-degradación por ASR o superioridad de un baseline simple sigue siendo un resultado
-válido si el experimento está bien diseñado.
+El proyecto será exitoso si responde las preguntas con un procedimiento honesto y reproducible, entrega un pipeline demostrable y documenta sus límites. No se fija una accuracy arbitraria como condición. Un resultado que muestre baja anticipación, degradación por ASR o superioridad de un baseline simple sigue siendo un resultado válido si el experimento está bien diseñado.
 
 ## 15. Decisiones solicitadas al profesor el 9 de septiembre
 
@@ -282,6 +270,6 @@ válido si el experimento está bien diseñado.
 
 ## 16. Aprobaciones y cambios
 
-| Fecha | Versión | Decisión del profesor/tutor | Cambio requerido | Responsable |
-|---|---|---|---|---|
-| 2026-09-09 | 1.0 | pendiente | pendiente | por autoasignar |
+| Fecha      | Versión | Decisión del profesor/tutor | Cambio requerido | Responsable     |
+| ---------- | ------- | --------------------------- | ---------------- | --------------- |
+| 2026-09-09 | 1.0     | pendiente                   | pendiente        | por autoasignar |

@@ -29,7 +29,7 @@ actualizarlo. Los archivos futuros aparecen solo cuando su primera evidencia exi
 | `MAPA-DECISIONES.md` | índice temporal de decisiones iniciales y niebla de alcance | hasta migrar cada decisión abierta a GitHub; luego solo enlaza decisiones duraderas |
 | `REGISTRO-RIESGOS.md` | riesgos, señales, mitigaciones y contingencias | aparece evidencia que cambia probabilidad/impacto o un riesgo se materializa |
 | `PLANTILLA-SEGUIMIENTO.md` | molde para reuniones con el profesor | cambia el formato de seguimiento |
-| `BACKLOG-INICIAL.md` | semilla para crear los primeros issues | no se actualiza después de importar a GitHub |
+| `RUNBOOK-RESOLUCION-ISSUES.md` | guía práctica y prompts tipo para resolver issues asistido por agentes | cambia el flujo de interacción o templates de trabajo con agentes |
 | `seguimientos/AAAA-MM-DD.md` | preparación y minuta de una reunión con el profesor | 48 h antes y dentro de 24 h después de la reunión |
 | `bitacora/AAAA-MM-semana-NN.md` | registro interno de la semana: qué se hizo, qué apareció, qué bloquea | durante la semana, por quien coordina |
 | `bitacora/PLANTILLA-SEMANAL.md` | molde de la entrada semanal | cambia el formato de la bitácora |
