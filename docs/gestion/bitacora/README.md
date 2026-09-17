@@ -1,23 +1,18 @@
-# Bitácora semanal
+# Registro semanal del equipo (Bitácora)
 
-Registro cronológico interno del trabajo, una entrada por semana:
-**`AAAA-MM-semana-NN.md`**, escrita por quien coordina esa semana. Plantilla en
-[PLANTILLA-SEMANAL.md](PLANTILLA-SEMANAL.md).
+Esta carpeta contiene el historial cronológico del trabajo interno del equipo, organizado en una entrada por semana:
+**`AAAA-MM-semana-NN.md`**.
 
-No se superpone con [`seguimientos/`](../seguimientos/), que registra las reuniones con el profesor
-usando [PLANTILLA-SEGUIMIENTO.md](../PLANTILLA-SEGUIMIENTO.md). La bitácora es hacia adentro; el
-seguimiento es hacia la cátedra.
+---
 
-## Pautas
+## Pautas de redacción
 
-1. **Se escribe durante, no después.** Una bitácora reconstruida en la semana 15 no sirve ni al
-   equipo ni al capítulo de metodología.
-2. **Registrar los bloqueos, no solo los avances.** Un bloqueo anotado el martes se resuelve el
-   miércoles; uno que nadie anotó se descubre en la semana 12.
-3. **Las decisiones no viven acá.** Si en una reunión se decide algo, la entrada lo menciona y el
-   fundamento va al issue de decisión o a un [ADR](../../ingenieria/adr/). La bitácora dice *qué
-   pasó*; los ADRs dicen *por qué*.
-4. **Anotar también lo que se descartó y por qué.** El capítulo de metodología después se escribe
-   casi solo.
-5. **Nombres reales.** "Se avanzó con el corpus" no dice nada; "Fulano grabó 6 diálogos, faltan los
-   consentimientos" sí.
+No se utiliza una plantilla rígida. Cada semana puede estructurarse libremente según la naturaleza de las tareas, manteniendo este esquema básico y conciso:
+
+1. **Objetivo de la semana:** Una frase con el foco principal del ciclo.
+2. **Qué se hizo:** Breve tabla o lista de viñetas con el responsable, el avance y el enlace al issue de GitHub correspondiente.
+3. **Qué existe hoy que no existía la semana pasada:** 3 a 5 viñetas concretas (artefactos observables: un documento cerrado, un script probado, un catálogo iniciado, etc.).
+4. **Bloqueos y próximos pasos:** Dificultades que traban al equipo y qué se toma en la semana siguiente.
+
+> **Regla:** Mantener la redacción directa y basada en evidencia. No registrar horas individuales ni burocracia innecesaria.
+

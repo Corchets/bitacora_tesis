@@ -83,7 +83,7 @@ AND (vishing OR "voice phishing" OR "phone scam")
 2. Deduplicar por DOI/título.
 3. Cribado de título/resumen por una persona; revisar exclusiones dudosas en pareja.
 4. Texto completo y motivo de exclusión explícito.
-5. Extraer evidencia en `matriz-literatura.csv`.
+5. Extraer evidencia en la tabla de literatura primaria de [SINTESIS-ESTADO-DEL-ARTE.md](SINTESIS-ESTADO-DEL-ARTE.md).
 6. Hacer snowballing hacia atrás y adelante sobre los trabajos centrales.
 7. Detener cuando cada afirmación material tenga respaldo primario, las
    contradicciones estén acotadas y otra búsqueda no cambie decisiones.

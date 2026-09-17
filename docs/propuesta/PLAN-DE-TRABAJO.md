@@ -24,18 +24,10 @@
 
 ## 1. Resumen de la propuesta
 
-El vishing es una modalidad de ingeniería social realizada mediante llamadas de
-voz en la que un atacante intenta obtener información sensible, inducir una
-transferencia o provocar otra acción riesgosa. Las defensas basadas únicamente en
-la reputación del número no pueden reconocer necesariamente llamadas originadas
-desde números todavía no reportados ni explicar la maniobra que ocurre durante la
+El vishing es una modalidad de ingeniería social realizada mediante llamadas de voz en la que un atacante intenta obtener información sensible, inducir una transferencia o provocar otra acción riesgosa. Las defensas basadas únicamente en la reputación del número no pueden reconocer necesariamente llamadas originadas desde números todavía no reportados ni explicar la maniobra que ocurre durante la
 conversación.
 
-El proyecto propone diseñar, implementar y evaluar un prototipo que procese
-incrementalmente un flujo de audio en español, transcriba localmente la conversación,
-estime el riesgo de vishing e identifique señales como suplantación, urgencia,
-aislamiento y pedidos de códigos, secretos o transferencias. Cuando el riesgo supere
-una política definida, el sistema mostrará una advertencia contextual y accionable.
+El proyecto propone diseñar, implementar y evaluar un prototipo que procese incrementalmente un flujo de audio en español, transcriba localmente la conversación, estime el riesgo de vishing e identifique señales como suplantación, urgencia, aislamiento y pedidos de códigos, secretos o transferencias. Cuando el riesgo supere una política definida, el sistema mostrará una advertencia contextual y accionable.
 
 La evaluación se realizará sobre un corpus controlado de conversaciones simuladas
 de vishing y llamadas legítimas difíciles. Se compararán reglas, un modelo clásico
@@ -223,10 +215,11 @@ evaluar en computadora y desplegar el modelo seleccionado después.
 
 ## 11. Cronograma
 
-**Fechas de referencia.** La defensa se realiza el **20 de diciembre de 2026 como
-fecha más tardía**. El equipo fija el **1 de diciembre** como cierre de todo el
-trabajo: informe, código, resultados y presentación. Diciembre no es tiempo de
-producción, es margen para las correcciones que pida el tutor y para la defensa.
+**Fechas de referencia.** La defensa es presencial a fines de diciembre de 2026 y el
+día exacto sigue pendiente, según la [minuta del 9 de septiembre](../gestion/seguimientos/2026-09-09.md).
+El equipo fija además el **1 de diciembre** como cierre interno de informe, código,
+resultados y presentación. No es una exigencia de la cátedra: es el margen que se
+reserva para las correcciones del tutor y el ensayo de la defensa.
 
 | Fechas | Resultado principal |
 |---|---|
@@ -238,17 +231,16 @@ producción, es margen para las correcciones que pida el tutor y para la defensa
 | 3–9 nov | integración end-to-end e instrumentación |
 | 10–23 nov | congelamiento, test congelado y evaluación final |
 | 24–30 nov | informe completo, presentación y reproducción de tablas y figuras |
-| **1 dic** | **cierre: informe, código, resultados y presentación terminados** |
-| 2–20 dic | ventana de defensa; solo correcciones pedidas por el tutor |
+| **1 dic** | **cierre interno: informe, código, resultados y presentación terminados** |
+| 2 dic en adelante | ventana de defensa; solo correcciones pedidas por el tutor |
 
-> **Estado: propuesta sin discutir por los cuatro integrantes.** Las dos fechas —1 y
-> 20 de diciembre— fueron informadas por el equipo; el reparto de semanas que sigue
-> es una construcción a ratificar en la próxima reunión y con el tutor.
+> **Estado: propuesta sin discutir por los cuatro integrantes.** El reparto de
+> semanas es una construcción del equipo, a ratificar en la próxima reunión y con el
+> tutor.
 
 Este calendario comprime en doce semanas el trabajo que la versión anterior
-distribuía en dieciséis. El recorte no es parejo, y sigue la regla ya escrita en
-[PLAN-MAESTRO.md §14](../gestion/PLAN-MAESTRO.md#14-límites-de-esta-versión): si la fecha se adelanta se
-recortan extensiones y **no** se comprime la evaluación final.
+distribuía en dieciséis. El recorte no es parejo y sigue una regla fija: **si la
+fecha se adelanta se recortan extensiones y no se comprime la evaluación final.**
 
 - **Se preservan dos semanas completas de congelamiento y evaluación** (10–23 nov).
   Es el bloque que sostiene la credibilidad de los resultados y el único que no se
@@ -257,17 +249,18 @@ recortan extensiones y **no** se comprime la evaluación final.
   slice de septiembre: en noviembre se conecta un pipeline que ya funciona por
   partes, no se construye de cero.
 - **Informe baja de dos semanas a una** (24–30 nov). Lo hace viable escribir desde
-  octubre en paralelo al desarrollo, como ya pide la etapa 7 de la sección 8. Si en
-  noviembre el marco teórico todavía está en blanco, esta semana no alcanza.
+  octubre en paralelo al desarrollo, como ya pide la etapa 7 de la
+  [metodología](#8-metodología). Si en noviembre el marco teórico todavía está en
+  blanco, esta semana no alcanza.
 - **Desaparece el ciclo de correcciones de fin de diciembre.** Su función la cumple
-  la ventana 2–20 dic, que deja de ser tiempo de producción.
+  la ventana de defensa, que deja de ser tiempo de producción.
 
 El margen desapareció, y conviene decirlo ahora y no en noviembre: cualquier atraso
-se paga con las **extensiones condicionadas al avance** de la sección 6 —VoIP
-integrada, cuantización, features prosódicas, prueba de warnings con voluntarios,
-evaluación adversarial—, que son la primera reserva a sacrificar y no un compromiso.
-El núcleo obligatorio no se toca. Si un atraso llega a comprometerlo, la conversación
-que corresponde es con el tutor, no un recorte silencioso de la evaluación.
+se paga con las [extensiones condicionadas al avance](#6-alcance) —VoIP integrada,
+cuantización, features prosódicas, prueba de warnings con voluntarios, evaluación
+adversarial—, que son la primera reserva a sacrificar y no un compromiso. El núcleo
+obligatorio no se toca. Si un atraso llega a comprometerlo, la conversación que
+corresponde es con el tutor, no un recorte silencioso de la evaluación.
 
 ## 12. Organización del equipo
 
@@ -293,30 +286,23 @@ revisiones, sin imponer áreas permanentes por nombre.
 
 Las mitigaciones están en [REGISTRO-RIESGOS.md](../gestion/REGISTRO-RIESGOS.md).
 
-La propuesta concreta de reclutamiento y escala está en
-[PLAN-PARTICIPANTES-Y-CORPUS.md](../datos-etica/PLAN-PARTICIPANTES-Y-CORPUS.md).
+La propuesta de diseño del corpus está en
+[METODO-CREACION-CORPUS.md](../datos-etica/METODO-CREACION-CORPUS.md).
 
 ## 14. Criterio de éxito
 
-El proyecto será exitoso si responde las preguntas con un procedimiento honesto y
-reproducible, entrega un pipeline demostrable y documenta sus límites. No se fija
-una accuracy arbitraria como condición. Un resultado que muestre baja anticipación,
-degradación por ASR o superioridad de un baseline simple sigue siendo un resultado
-válido si el experimento está bien diseñado.
+El proyecto será exitoso si responde las preguntas con un procedimiento honesto y reproducible, entrega un pipeline demostrable y documenta sus límites. No se fija una accuracy arbitraria como condición. Un resultado que muestre baja anticipación, degradación por ASR o superioridad de un baseline simple sigue siendo un resultado válido si el experimento está bien diseñado.
 
-## 15. Decisiones solicitadas al profesor el 9 de septiembre
+## 15. Decisiones resueltas con el profesor el 9 de septiembre
 
-1. ¿Aprueba PI1 y PI2 como preguntas centrales, la comparación manual-vs-ASR como
-   evaluación diagnóstica y la explicación como objetivo secundario?
-2. ¿Aprueba replay como base experimental, altavoz externo como demo inicial y
-   VoIP controlado como integración objetivo?
-3. ¿Aprueba el alcance fuera de PSTN universal, deepfake e identificación de voz?
-4. ¿Qué aprobación requiere antes de grabar voces de voluntarios?
-5. ¿Qué plantilla, estilo bibliográfico, entregables y fecha exacta debemos usar?
+1. **Preguntas centrales:** Aprobadas PI1 y PI2 como preguntas principales; comparación manual vs. ASR como diagnóstica y explicación como objetivo secundario.
+2. **Fuente de audio:** Aprobada la estrategia escalonada: replay de grabaciones como base experimental reproducible y VoIP controlada como integración prototipo. Altavoz despriorizado.
+3. **Límites de alcance:** Aprobado dejar fuera PSTN universal, deepfake y biometría de voz.
+4. **Procedimiento ético y privacidad:** UNSTA no requiere comité de ética formal. El corpus se compone de simulaciones con datos ficticios y sin víctimas reales; la privacidad se garantiza por diseño en el dispositivo (*on-device*).
+5. **Requisitos académicos:** Defensa presencial última/penúltima semana de diciembre 2026. Tutor asignado: Ing. Ernesto Rico. Entrega digital promedio ~100 págs (ver [REQUISITOS-ACADEMICOS.md](REQUISITOS-ACADEMICOS.md)).
 
 ## 16. Aprobaciones y cambios
 
-| Fecha | Versión | Decisión del profesor/tutor | Cambio requerido | Responsable |
-|---|---|---|---|---|
-| 2026-09-09 | 1.0 | pendiente | pendiente | por autoasignar |
-| 2026-09-09 | 1.1 | sin pasar por el profesor todavía | cronograma comprimido contra el 1 de diciembre; tutor asentado | por autoasignar |
+| Fecha      | Versión | Decisión del profesor/tutor | Cambio requerido | Responsable |
+| ---------- | ------- | --------------------------- | ---------------- | ----------- |
+| 2026-09-09 | 1.0     | Dirección y alcance aprobados sin observaciones críticas. Sugirió investigar ventana de contexto, prefactibilidad, baselines, tipos de manipulación policial y estrategia de modelos. | Actualizar requisitos académicos, mapa de decisiones y avanzar a factibilidad técnica (Ciclo 1). | Equipo |

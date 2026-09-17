@@ -36,6 +36,9 @@ flowchart TD
 El rombo de decisión es donde vive la histéresis: `T_A` no es el primer cruce del umbral sino el
 primero que se sostiene dos actualizaciones. Ver [métricas](../evaluacion/METRICAS.md).
 
+Recorte de trabajo sobre ASR streaming y detector atómico (catálogo Hugging Face 2026-09-16):
+[PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
+
 ## Convención para diagramas
 
 Los diagramas van en `.md` con bloques ` ```mermaid `, **no** en archivos `.mmd`: GitHub renderiza
@@ -45,5 +48,6 @@ Mermaid dentro de Markdown, pero muestra un `.mmd` como texto plano.
 
 - Interfaces concretas entre componentes (nombres, tipos, contratos).
 - Dónde vive el umbral y cómo se calibra.
-- Presupuesto de latencia y memoria por etapa, una vez elegido el dispositivo objetivo.
+- Presupuesto de latencia y memoria por etapa: recorte de gamas y PC limitada en
+  [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
 - Separación entre motor evaluable y UI, requisito para poder medir sin la aplicación.
