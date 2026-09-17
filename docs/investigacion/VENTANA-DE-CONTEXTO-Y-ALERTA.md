@@ -149,7 +149,7 @@ Informe de deep research titulado «Análisis Técnico-Jurídico y Estrategia de
 |---|---|---|---|
 | 1 | **Ventana doble** | Separar el pedido explícito del contexto que lo vuelve sospechoso. | `W_loc` = 2–3 turnos del interlocutor externo · `W_ctx` = cola FIFO de 6–10 turnos, paso 1 · turnos cortados por VAD con silencio de 500–800 ms |
 | 2 | **Leaky integrator** | Que un indicio viejo se desvanezca si nadie lo corrobora. | `R_t = α·R_t−1 + (1−α)·s_t · τ = −1/ln α · α ∈ [0,70; 0,85]` |
-| 3 | **Acoplamiento multiplicativo** | Que un pedido legítimo no alerte si no hubo manipulación previa. | `S_t = C_t · σ(λ_1·M_t + λ_2·Σ w_i·M_t−i)  ·  M = manipulación, C = solicitud crítica` |
+| 3 | **Acoplamiento multiplicativo** | Que un pedido legítimo no alerte si no hubo manipulación previa. | `S_t = C_t · σ(λ_1·M_t + λ_2·Σ w_i·M_t−i)` · `M` = manipulación, `C` = solicitud crítica |
 | 4 | **Schmitt trigger** | Que la alerta no parpadee. | `θ_high` ≈ 0,75 para encender · `θ_low` ≈ 0,40 para apagar |
 
 ## 4. Revisión crítica de los cuatro métodos
