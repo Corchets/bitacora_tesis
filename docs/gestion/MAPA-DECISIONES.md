@@ -110,6 +110,14 @@ y carísimo de arreglar después.
 Falta fijar además la restricción de falsos positivos **antes** de medir. El anteproyecto la
 menciona pero no la define, y sin ese número la hipótesis no es falsable.
 
+- **Recorte de trabajo (2026-09-16, no cierra D08):**
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md).
+  Deriva el margen de aceptación desde el máximo de llamadas legítimas con alerta, en lugar de
+  fijar un umbral a ojo, y muestra cómo se acumulan las falsas alarmas con cada actualización.
+  Propone además ventana deslizante con decaimiento y un registro conjunto de eventos.
+  Los números salen de llamadas sintéticas: prueban el mecanismo, no miden rendimiento.
+  Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23).
+
 ### D09 — Elegir ASR y detector
 
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
