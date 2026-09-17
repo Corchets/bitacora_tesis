@@ -21,19 +21,20 @@ conversación permanecen en el mismo split.
 El equipo construye un catálogo a partir de:
 
 1. modalidades documentadas por organismos oficiales argentinos;
-2. tipologías y progresiones descriptas en literatura académica;
-3. negativos legítimos diseñados para compartir vocabulario con cada fraude;
-4. revisión del profesor/tutor para pertinencia y seguridad.
+2. alertas de prevención publicadas por entidades financieras reguladas;
+3. tipologías y progresiones descriptas en literatura académica;
+4. negativos legítimos diseñados para compartir vocabulario con cada fraude;
+5. revisión del profesor/tutor para pertinencia y seguridad.
+
+El punto 2 se agregó el 2026-09-17, al incorporar `SC-SOPORTE-REMOTO-01` con una alerta de Banco
+Galicia sobre estafa de pantalla compartida. El equipo considera válida esa clase de fuente para el
+estudio: son entidades reguladas que publican material de prevención sobre fraudes que ven en sus
+propios canales, y en este caso fue la única fuente encontrada que documenta el pedido de acceso
+remoto por teléfono en Argentina. Se registran igual que las demás: afirmación concreta, URL y fecha
+de consulta.
 
 El catálogo vive en `CATALOGO-ESCENARIOS.csv`. Una modalidad entra al corpus cuando
 tiene fuente, acción crítica, evidencia observable y un negativo comparable.
-
-> **Sin resolver (2026-09-17).** La lista de arriba no incluye a las entidades financieras
-> privadas. `SC-SOPORTE-REMOTO-01` entró al catálogo con una alerta de Banco Galicia, que es la
-> única fuente encontrada que documenta el pedido de acceso remoto o pantalla compartida por
-> teléfono en Argentina. Hay que decidir si se amplía esta sección para admitir entidades reguladas
-> como fuente de segundo nivel, o si esa semilla espera a que la misma modalidad aparezca en BCRA,
-> UFECI u otro organismo. Hasta entonces la fila queda marcada en sus `notas`.
 
 ### Columnas del catálogo
 
