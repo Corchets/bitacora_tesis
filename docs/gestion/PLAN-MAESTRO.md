@@ -3,9 +3,11 @@
 **Proyecto:** detección incremental y explicable de vishing en español  
 **Universidad:** UNSTA — Ingeniería en Informática, Plan 2008  
 **Equipo:** Albarracín Ignacio, Antenucci Mateo, Grosso Luciano y Villalobo Evaristo  
-**Versión:** 0.2 — 2 de septiembre de 2026  
+**Versión:** 0.3 — 9 de septiembre de 2026  
+**Tutor:** Ing. Ernesto Rico  
 **Próxima clase:** miércoles 9 de septiembre de 2026  
-**Entrega objetivo:** últimos días de diciembre de 2026; fecha exacta pendiente  
+**Defensa:** 20 de diciembre de 2026 como fecha más tardía; día exacto pendiente  
+**Cierre interno:** 1 de diciembre de 2026 — informe, código, resultados y presentación  
 **Estado:** propuesta para discutir y aprobar con el profesor/tutor
 
 ## 1. Respuesta ejecutiva
@@ -47,7 +49,7 @@ las instrucciones verbales del profesor constituyen el requisito vigente:
   comparaciones, metodologías utilizadas, etapas y conclusión;
 - extensión habitual aproximada de 100 páginas;
 - grupo de cuatro autorizado;
-- entrega hacia fines de diciembre de 2026.
+- defensa el 20 de diciembre de 2026 como fecha más tardía.
 
 El [Repositorio Digital Institucional de UNSTA](https://rdi.unsta.edu.ar/collections/6fbdcceb-6920-47f6-935d-7183c5692153)
 contiene proyectos finales de Ingeniería Informática. Uno de los ejemplos públicos
@@ -193,20 +195,29 @@ y eliminación como decisiones previas a la captura, no como un apéndice tardí
 
 ## 7. Roadmap hasta diciembre
 
-La planificación utiliza el miércoles 9 de septiembre como primer gate y reserva
-las últimas dos semanas para correcciones. La fecha final debe confirmarse.
+La planificación utiliza el miércoles 9 de septiembre como primer gate y trabaja
+contra un cierre interno el 1 de diciembre, con la defensa el 20 de diciembre como
+fecha más tardía. Diciembre deja de ser tiempo de producción y pasa a ser margen.
 
 | Ciclo | Fechas | Objetivo | Evidencia para mostrar al profesor | Gate de salida |
 |---:|---|---|---|---|
 | 0 | 2–9 sep | Definir la ruta | Plan de Trabajo v1, PI1–PI2, evaluaciones, alternativas de audio y preguntas | profesor corrige/aprueba dirección |
-| 1 | 10–23 sep | Alcance y factibilidad vertical | WAV→ASR local→regla→alerta, problema, usuario, requisitos y arquitectura v0 | cadena técnica y alcance base aprobados |
-| 2 | 24 sep–7 oct | Piloto de datos | consentimiento, taxonomía, manual y 10–20 diálogos doblemente anotados | se autoriza escalar el corpus |
-| 3 | 8–21 oct | Benchmark y baselines | 30–50 conversaciones, comparación ASR, reglas y TF–IDF, primer gráfico riesgo-tiempo | ASR y dataset elegidos por evidencia |
-| 4 | 22 oct–4 nov | Corpus y detector incremental | dataset v1, hard negatives, modelo principal y acumulador temporal | corpus casi congelado; pipeline reproducible |
-| 5 | 5–18 nov | Integración | audio→ASR→riesgo→warning en entorno controlado; latencia y memoria | demo end-to-end repetible |
-| 6 | 19 nov–2 dic | Congelamiento y evaluación | test congelado, gold vs ASR, falsos positivos, anticipación y ablations | resultados finales reproducidos |
-| 7 | 3–16 dic | Informe y defensa | informe completo, análisis de errores, amenazas, presentación y video de respaldo | revisión integral del tutor |
-| 8 | 17–fin dic | Correcciones y entrega | PDF final, anexos, código etiquetado y ensayo de defensa | entrega verificada |
+| 1 | 10–21 sep | Alcance y factibilidad vertical | WAV→ASR local→regla→alerta, problema, usuario, requisitos y arquitectura v0 | cadena técnica y alcance base aprobados |
+| 2 | 22 sep–5 oct | Piloto de datos | consentimiento, taxonomía, manual y 10–20 diálogos doblemente anotados; marco teórico iniciado | se autoriza escalar el corpus |
+| 3 | 6–19 oct | Benchmark y baselines | 30–50 conversaciones, comparación ASR, reglas y TF–IDF, primer gráfico riesgo-tiempo | ASR y dataset elegidos por evidencia |
+| 4 | 20 oct–2 nov | Corpus y detector incremental | dataset v1, hard negatives, modelo principal y acumulador temporal | corpus casi congelado; pipeline reproducible |
+| 5 | 3–9 nov | Integración | audio→ASR→riesgo→warning en entorno controlado; latencia y memoria | demo end-to-end repetible |
+| 6 | 10–23 nov | Congelamiento y evaluación | test congelado, gold vs ASR, falsos positivos, anticipación y ablations | resultados finales reproducidos |
+| 7 | 24–30 nov | Informe y presentación | informe completo, análisis de errores, amenazas, presentación y video de respaldo | revisión integral del tutor |
+| — | **1 dic** | **Cierre** | informe, código, resultados y presentación terminados | nada queda por producir |
+| 8 | 2–20 dic | Defensa | correcciones pedidas por el tutor y ensayo de defensa | defensa rendida |
+
+El ciclo 6 conserva sus dos semanas completas. El recorte respecto de la versión
+anterior cae sobre integración (de dos semanas a una, apoyada en el vertical slice
+del ciclo 1) e informe (de dos a una, apoyada en escribirlo desde octubre), y sobre
+el ciclo de correcciones de fin de diciembre, que desaparece. El detalle y su
+justificación están en
+[PLAN-DE-TRABAJO.md §11](../propuesta/PLAN-DE-TRABAJO.md#11-cronograma).
 
 ### Plan de contingencia
 
@@ -421,7 +432,8 @@ protocolo experimental.
   aprobación del uso de participantes.
 - La capacidad semanal todavía no fue registrada; el equipo limitará los issues del
   ciclo después de declarar disponibilidad real.
-- El cronograma asume entrega a fines de diciembre. Si la fecha se adelanta, se
-  recortan extensiones y no se comprime la evaluación final.
+- El cronograma trabaja contra el cierre interno del 1 de diciembre y la defensa
+  del 20. La regla se mantiene y ya se aplicó una vez: si la fecha se adelanta se
+  recortan extensiones y **no** se comprime la evaluación final.
 - La revisión hecha para este plan es de alcance y orientada a decisiones; no se
   presenta como revisión sistemática exhaustiva.

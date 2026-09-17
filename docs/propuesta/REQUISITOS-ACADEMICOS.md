@@ -4,7 +4,7 @@
 **Carrera:** Ingeniería en Informática  
 **Plan:** 2008  
 **Asignatura:** Proyecto Final Integrador  
-**Actualizado:** 2 de septiembre de 2026
+**Actualizado:** 9 de septiembre de 2026
 
 ## Confirmado
 
@@ -34,7 +34,11 @@
   - etapas del proyecto;
   - conclusión del trabajo.
 - La extensión habitual es aproximadamente 100 páginas.
-- La entrega será hacia los últimos días de diciembre de 2026.
+- El tutor del proyecto es el **ingeniero Ernesto Rico**.
+- La defensa se realizará el **20 de diciembre de 2026 como fecha más tardía**. El
+  equipo trabaja contra un cierre propio el **1 de diciembre**, que no es una
+  exigencia institucional sino el margen que se reservó para correcciones y ensayo
+  de la defensa.
 - No se exige evidencia individual ni registro formal de horas.
 
 La página oficial de la carrera confirma que el quinto año culmina con un
@@ -44,8 +48,9 @@ contiene ejemplos históricos de proyectos finales de Ingeniería Informática.
 
 ## Pendiente de confirmar el 9 de septiembre
 
-1. Fecha y hora exactas de entrega.
-2. Nombre y funciones del tutor.
+1. Fecha y hora exactas de entrega del documento, y fecha concreta de defensa dentro
+   del plazo que vence el 20 de diciembre.
+2. Funciones del ingeniero Rico como tutor y qué espera revisar en cada avance.
 3. Si existe una plantilla descargable.
 4. Tipografía, tamaño, interlineado, márgenes y numeración.
 5. Estilo bibliográfico esperado: IEEE, APA u otro.

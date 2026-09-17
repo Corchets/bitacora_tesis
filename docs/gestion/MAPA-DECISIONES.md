@@ -22,8 +22,9 @@ personas digan "D5" refiriéndose a cosas distintas. La correspondencia está al
 - **Responsable:** coordinador de la próxima clase.
 - **Evidencia:** minuta del 9 de septiembre validada.
 - **Desbloquea:** D02, D03, D10 y cronograma definitivo.
-- **Estado:** parcialmente resuelto; formato general, grupo y plazo aproximado ya
-  fueron informados.
+- **Estado:** parcialmente resuelto; formato general, grupo, tutor y techo de plazo
+  ya fueron informados. Falta la fecha exacta de entrega y de defensa, la plantilla,
+  el estilo de citas y los entregables que acompañan al PDF.
 
 ### D02 — Definir problema, usuario y necesidad
 
@@ -183,7 +184,12 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   como grupo de cuatro.
 - **Formato base:** entrega digital, A4, carilla simple, portada institucional,
   resúmenes español/inglés, cuerpo técnico y unas 100 páginas como referencia.
-- **Horizonte:** entrega hacia fines de diciembre de 2026; falta el día exacto.
+- **Tutor:** ingeniero Ernesto Rico.
+- **Horizonte:** la defensa ocurre el 20 de diciembre de 2026 como fecha más tardía.
+  El equipo fija el 1 de diciembre como cierre de informe, código, resultados y
+  presentación; diciembre queda como margen. El reparto de semanas que se deriva de
+  ahí está en [PLAN-DE-TRABAJO.md §11](../propuesta/PLAN-DE-TRABAJO.md#11-cronograma)
+  y todavía no fue discutido por los cuatro. Falta el día exacto de entrega.
 - **No basar la tesis en capturar cualquier llamada PSTN desde una app Android
   ordinaria:** la plataforma reserva esas fuentes a componentes privilegiados.
 - **Separar motor e integración:** replay en streaming es la base experimental;
