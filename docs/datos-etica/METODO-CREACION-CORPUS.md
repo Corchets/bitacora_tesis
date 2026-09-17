@@ -28,6 +28,13 @@ El equipo construye un catálogo a partir de:
 El catálogo vive en `CATALOGO-ESCENARIOS.csv`. Una modalidad entra al corpus cuando
 tiene fuente, acción crítica, evidencia observable y un negativo comparable.
 
+> **Sin resolver (2026-09-17).** La lista de arriba no incluye a las entidades financieras
+> privadas. `SC-SOPORTE-REMOTO-01` entró al catálogo con una alerta de Banco Galicia, que es la
+> única fuente encontrada que documenta el pedido de acceso remoto o pantalla compartida por
+> teléfono en Argentina. Hay que decidir si se amplía esta sección para admitir entidades reguladas
+> como fuente de segundo nivel, o si esa semilla espera a que la misma modalidad aparezca en BCRA,
+> UFECI u otro organismo. Hasta entonces la fila queda marcada en sus `notas`.
+
 ### Columnas del catálogo
 
 | Columna | Qué contiene |
@@ -75,7 +82,7 @@ mismo respaldo:
 | Parte | Quién la produjo |
 |---|---|
 | Las cuatro filas iniciales de banco y WhatsApp | El equipo, 2026-09-07 |
-| Las ocho semillas fraudulentas vigentes | Derivadas de modalidades que describen las fuentes oficiales citadas en cada fila |
+| Las nueve semillas fraudulentas vigentes | Derivadas de modalidades que describen las fuentes oficiales citadas en cada fila |
 | Los cinco negativos difíciles | Diseñados por el equipo. **Ninguna fuente los documenta**, y no corresponde que lo hagan: son controles experimentales, no modalidades de fraude |
 | La redacción de filas y la búsqueda de fuentes | Asistida por un modelo de lenguaje, con verificación humana de cada URL |
 

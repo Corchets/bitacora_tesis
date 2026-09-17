@@ -113,8 +113,10 @@ es maquillar el número: es que la taxonomía está mal definida y hay que arreg
 - ¿Adoptamos las 6+6 tal cual, o las derivamos de un relevamiento propio de modalidades argentinas
   (UFECI, ANSES, PAMI, BCRA, prensa)? **Primer dato empírico (2026-09-17):** el relevamiento del
   [catálogo](CATALOGO-ESCENARIOS.csv) sobre cuatro fuentes oficiales no encontró **ninguna**
-  modalidad que documente `REQUEST_REMOTE_ACCESS` por teléfono, y ninguna de las ocho semillas la
-  produce. Una etiqueta sin escenarios no va a aparecer en el corpus.
+  modalidad que documente `REQUEST_REMOTE_ACCESS` por teléfono. La única fuente que la describe es
+  una alerta de Banco Galicia sobre pantalla compartida, que no es un organismo oficial. La etiqueta
+  sobrevive con una sola semilla y con una fuente de clase discutida: conviene mirarla de nuevo al
+  cerrar D07.
 - Las modalidades argentinas concretas — código de WhatsApp, "premio de ANSES", falso soporte de
   billetera virtual — ¿son etiquetas nuevas o instancias de las existentes?
 - ¿Quién valida la taxonomía además del equipo? Evaluar si se consulta a personal con experiencia
