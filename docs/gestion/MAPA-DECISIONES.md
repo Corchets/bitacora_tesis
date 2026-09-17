@@ -133,9 +133,15 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
 - **Bloqueada por:** D05, D07 y benchmark piloto.
 - **Salida:** decisión basada en WER/recall crítico, F1/AUPRC, latencia y memoria.
-- **Candidatos a evaluar:** sherpa-onnx, Vosk y whisper.cpp para ASR; TF-IDF como baseline
+- **Candidatos a evaluar (mapa inicial):** sherpa-onnx, Vosk y whisper.cpp para ASR; TF-IDF como baseline
   obligatorio y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
   preferencia previa.
+- **Recorte de trabajo (2026-09-15/16, no cierra D09):**
+  [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
+  Catálogo de bajada = Hugging Face (consulta 2026-09-16). ASR del recorte:
+  Moonshine tiny-es (baja) y Zipformer Kroko ONNX (media/alta). Whisper solo comparación.
+  Vosk oficial queda fuera del recorte Hub. Detector: ALBETO tiny/base, DistilBETO, RoBERTuito.
+  Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28).
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -212,7 +218,22 @@ fueron discutidas por el grupo completo**; entran a la agenda de la próxima reu
 
 - Diseño exacto del warning y método de evaluación con usuarios.
 - Modelo de estado temporal que competirá con el acumulador probabilístico.
-- Dispositivo Android objetivo y presupuesto máximo de memoria/latencia.
+  Recorte de grilling: red de riesgo ve **solo el último turno**; el riesgo de la
+  llamada es el **máximo de los últimos k=3 turnos**, con histéresis de `T_A`,
+  **salvo** pedido crítico por reglas (capa 2), que avisa ya.
+  Ventana de la red en v0: **turno completo**; achique (5 s / 64 tokens) a medir
+  en el piloto. Desarrollo: **un programa, config por gama**; se arranca con
+  **alta** (Zipformer Kroko Hub + RoBERTuito; TF–IDF de baseline).
+  Baja `asr`: Moonshine tiny-es. Media `asr`: Zipformer Kroko.
+  Hilos de partida: baja 2 (1+1), media 4 (3+1), alta 6 (4+2).
+  RAM: **256 / 512 / 1024 MB**. Ver
+  [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
+- Dispositivo objetivo y presupuesto de memoria/latencia.
+  Recorte: prototipo de laboratorio en **PC** (techo de RAM, hilos de CPU y sin GPU
+  de escritorio, una config por gama); demo Android si hay tiempo; iPhone solo como
+  foto de gama alta. Ver
+  [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
+  iOS sigue en [fuera de alcance](#fuera-de-alcance-provisional).
 - Posibilidad y licencia de publicación del corpus o solo sus metadatos.
 - Técnica estadística final, que depende del tamaño y distribución obtenidos.
 

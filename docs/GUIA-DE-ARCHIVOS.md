@@ -53,6 +53,7 @@ actualizarlo. Los archivos futuros aparecen solo cuando su primera evidencia exi
 | `matriz-literatura.csv` | una fila por fuente leída y evidencia extraída | se termina de evaluar una fuente |
 | `report-source.md` | registro interno de fuentes usadas para fundamentar el plan | aparece evidencia que cambia el plan; no es el informe entregable |
 | `SINTESIS-ESTADO-DEL-ARTE.md` | comparación razonada de sistemas existentes y qué espacio queda | se verifica una fila contra su fuente primaria o entra un trabajo nuevo |
+| `PRIMERA-INVESTIGACION-MODELOS.md` | recorte de grilling sobre ASR streaming y detector atómico (D09); catálogo Hugging Face 2026-09-16; no es decisión cerrada | avanza la investigación de modelos on-device; no reemplaza el ADR ni el benchmark |
 | `lecturas/AAAA-autor-tema.md` | ficha de un paper leído, con lo que los propios autores declaran como límite | al terminar de leer un trabajo; después se carga su fila en la matriz |
 
 Archivos que se crearán cuando exista material:
