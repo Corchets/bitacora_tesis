@@ -28,6 +28,62 @@ El equipo construye un catálogo a partir de:
 El catálogo vive en `CATALOGO-ESCENARIOS.csv`. Una modalidad entra al corpus cuando
 tiene fuente, acción crítica, evidencia observable y un negativo comparable.
 
+### Columnas del catálogo
+
+| Columna | Qué contiene |
+|---|---|
+| `scenario_id` | Identificador estable. `SC-` para fraudulenta, `LG-` para legítima difícil |
+| `familia` | Modalidad amplia: `banco`, `soporte`, `organismo_previsional`, `familiar`, `premio` |
+| `clase` | `vishing` o `legitima_dificil` |
+| `titulo` | Nombre corto de la situación |
+| `fuente` | La afirmación concreta que respalda la modalidad, con URL y **fecha de consulta**. No alcanza con el nombre del organismo |
+| `identidad_suplantada_o_contexto` | Quién dice ser el llamante |
+| `objetivo` | Qué busca conseguir |
+| `maniobras` | Etiquetas de la capa 1 del [manual](MANUAL-ANOTACION.md#capa-1--técnicas-de-manipulación), separadas por `;` |
+| `accion_critica` | Etiqueta de la capa 2 que marca `T_R`, o `NONE` en las legítimas |
+| `negativo_pareado` | `scenario_id` de su contraparte |
+| `estado` | Ver abajo |
+| `notas` | Advertencias de seguridad y datos ficticios a usar |
+
+Las etiquetas de `maniobras` y `accion_critica` se definen en el
+[manual de anotación](MANUAL-ANOTACION.md), que es su única fuente de verdad. Usarlas acá en vez de
+prosa permite validar el catálogo con un script y evita que la semilla y la anotación hablen dos
+idiomas distintos.
+
+> **Estado: propuesta sin discutir.** Las filas originales escribían `maniobras` en prosa
+> (`autoridad;urgencia`). El pase a etiquetas toca la taxonomía y lo cierra
+> [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
+
+### Valores de `estado`
+
+| Valor | Significado | Qué habilita |
+|---|---|---|
+| `borrador` | La fila existe pero le falta algo: fuente, negativo pareado o definición | Nada. Es trabajo en curso |
+| `con_fuente` | Cada afirmación de la fila está respaldada por una fuente citada con fecha de consulta | Se puede discutir y revisar |
+| `revisado` | Otra persona del equipo verificó pertinencia y seguridad | Recién acá la semilla puede grabarse |
+| `descartado` | Se decidió no usarla. La fila **se conserva** con el motivo en `notas` | Nada, pero deja registro |
+
+Una semilla descartada no se borra. La sección 10 exige registrar las exclusiones con su motivo, y
+el mismo criterio vale acá: si alguien pregunta por qué una modalidad no está en el corpus, la
+respuesta tiene que estar en el catálogo y no en el historial de Git.
+
+### Procedencia del catálogo v0
+
+Quien revise el catálogo necesita saber cómo se construyó cada parte, porque no todas tienen el
+mismo respaldo:
+
+| Parte | Quién la produjo |
+|---|---|
+| Las cuatro filas iniciales de banco y WhatsApp | El equipo, 2026-09-07 |
+| Las ocho semillas fraudulentas vigentes | Derivadas de modalidades que describen las fuentes oficiales citadas en cada fila |
+| Los cinco negativos difíciles | Diseñados por el equipo. **Ninguna fuente los documenta**, y no corresponde que lo hagan: son controles experimentales, no modalidades de fraude |
+| La redacción de filas y la búsqueda de fuentes | Asistida por un modelo de lenguaje, con verificación humana de cada URL |
+
+Un intento previo construyó las semillas primero y buscó la fuente después. Se descartó: producía
+escenarios sin respaldo y dejaba afuera modalidades documentadas. El orden correcto es el de la
+sección 2 — la fuente primero, la semilla después — y el catálogo vigente se rehizo con ese orden.
+
+
 ## 3. Cómo se diseña una semilla fraudulenta
 
 Cada semilla especifica:
@@ -84,6 +140,14 @@ Los participantes reciben su propia ficha. Una persona del equipo controla que l
 grabación respete el escenario y detiene cualquier uso accidental de datos reales.
 
 ## 6. Piloto
+
+> **Sin resolver.** Esta sección pide 4 semillas fraudulentas y 4 legítimas; el
+> [issue #17](https://github.com/Corchets/bitacora_tesis/issues/17) pide 6–8 para el catálogo. Hoy
+> el catálogo tiene 8 y 5. No está definido si el piloto graba todas o un subconjunto, ni con qué
+> criterio se elegiría. Lo decide
+> [D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) vía
+> [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22), que es el que aprueba método y
+> tamaño del piloto. Hasta entonces los números de abajo son los originales, no una decisión nueva.
 
 1. Crear 4 semillas fraudulentas y 4 legítimas difíciles.
 2. Grabar 12–20 conversaciones con integrantes del equipo y colaboradores de confianza.
