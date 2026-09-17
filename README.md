@@ -1,95 +1,89 @@
-# Proyecto Final Integrador — detector de vishing
+# Detección incremental y explicable de vishing en español
 
-Repositorio de trabajo del Proyecto Final de Ingeniería en Informática, Plan 2008,
-UNSTA.
+**Universidad del Norte Santo Tomás de Aquino (UNSTA)**  
+**Facultad de Ingeniería — Ingeniería en Informática (Plan 2008)**  
+**Proyecto Final Integrador | Año 2026**  
 
-El proyecto investiga si un sistema que procesa audio en español de manera local e
-incremental puede advertir un posible vishing antes de que la persona realice una
-acción riesgosa. El resultado incluye investigación, corpus controlado, software,
-evaluación reproducible e Informe Final.
+- **Integrantes:** Albarracín Ignacio, Antenucci Mateo, Grosso Luciano, Villalobo Evaristo.  
+- **Tutor:** Ing. Ernesto Rico.  
+- **Defensa objetivo:** Última / penúltima semana de diciembre de 2026.
 
-La pregunta central no es _"¿se puede clasificar la llamada?"_ sino **con cuánta anticipación
-respecto del momento crítico se puede intervenir de forma fiable**. Eso se mide con tres marcas
-temporales — `T_A` (alerta), `T_R` (pedido riesgoso), `T_C` (la persona empieza a cumplir) — y con
-`Preventive@δ`. Definiciones en [METRICAS.md](docs/evaluacion/METRICAS.md).
+---
 
-## ⚠️ Estado: casi nada está decidido todavía
+## 1. Sobre el proyecto
 
-No están cerrados el alcance, la fuente de audio, la taxonomía, el corpus ni el protocolo
-experimental. Es el estado normal de la semana 1, pero conviene que sea explícito para que nadie tome estos documentos como decisiones tomadas.
+El proyecto diseña, implementa y evalúa un prototipo para la **detección temprana y explicable de vishing** (estafas por llamadas de voz) en español con foco en Argentina.
 
-**El archivo que ordena eso es [MAPA-DECISIONES.md](docs/gestion/MAPA-DECISIONES.md)**: qué se puede decidir ahora, qué está bloqueado y qué ya se cerró. Todo documento marcado como _"propuesta sin
-discutir"_ es insumo para debatir, no algo resuelto.
+La clave del problema no es clasificar la llamada cuando ya terminó, sino **intervenir con suficiente anticipación**: advertir al usuario en tiempo real antes de que realice una acción de riesgo (entregar un código OTP, transferir dinero o instalar una aplicación de acceso remoto).
 
-## Empezar una sesión de trabajo
+- **Inferencia local (*on-device*):** El audio y la transcripción se procesan en el dispositivo; ningún dato sale a la nube.
+- **Métricas temporales:** Evaluación basada en el margen de intervención ($L_R = T_R - T_A$, $L_C = T_C - T_A$) y la tasa de prevención ($Preventive@\delta$), no solo en exactitud tradicional.
 
-1. Abrir el backlog en GitHub Issues y elegir un issue no bloqueado.
-2. Autoasignarse antes de trabajar.
-3. Leer la definición de terminado del issue y la documentación que corresponda.
-4. Producir evidencia verificable: documento, decisión, código, prueba o resultado.
-5. Actualizar la fuente de verdad afectada y enlazar la evidencia en el issue.
-6. Cerrar el issue solo cuando cumple todos sus criterios.
+---
 
-El flujo completo, los tipos de issue y las reglas de cierre están en
-[Método de trabajo](docs/gestion/METODO-DE-TRABAJO.md). La función y momento de
-actualización de cada archivo están en [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md).
-Para resolver issues paso a paso con asistentes de IA y plantillas de prompts, ver el
-[Runbook de resolución de issues](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md).
-Los asistentes de código deben leer [AGENTS.md](AGENTS.md).
+## 2. Estado actual del proyecto
 
-## Para la próxima clase
+- **Fase en curso:** **Ciclo 1 — Factibilidad técnica** (septiembre 2026).
+- **Hito alcanzado (2026-09-09):** Dirección general, alcance núcleo y preguntas centrales PI1 y PI2 aprobadas por el tutor Ing. Ernesto Rico. Estrategia de audio confirmada con reproducción en streaming (*replay*) para la base experimental y llamada VoIP controlada para la demo del prototipo.
+- **Gestión activa:** El backlog vivo se administra a través de **GitHub Issues** bajo los hitos del cronograma.
 
-- [Paquete del 9 de septiembre](docs/gestion/seguimientos/2026-09-09.md)
-- [Plan de Trabajo v1](docs/propuesta/PLAN-DE-TRABAJO.md)
-- [Alternativas para obtener audio](docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)
-- [Preguntas de investigación](docs/investigacion/PREGUNTAS-DE-INVESTIGACION.md)
-- [Correcciones pendientes del anteproyecto](docs/propuesta/CORRECCIONES-ANTEPROYECTO.md) — 5 sin aplicar
+---
 
-## Documentos principales
+## 3. Mapa del repositorio (Estructura documental)
 
-| Necesidad                        | Documento                                                                                             |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Entender alcance, fases y fechas | [Plan maestro](docs/gestion/PLAN-MAESTRO.md)                                                          |
-| Saber qué falta decidir          | [Mapa de decisiones](docs/gestion/MAPA-DECISIONES.md)                                                 |
-| Saber cómo trabajar cada sesión  | [Método de trabajo](docs/gestion/METODO-DE-TRABAJO.md)                                                |
-| Resolver issues con agentes      | [Runbook de resolución de issues](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md)                          |
-| Saber dónde registrar algo       | [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md)                                                          |
-| Preparar la propuesta académica  | [Plan de Trabajo](docs/propuesta/PLAN-DE-TRABAJO.md) · [Anteproyecto](docs/propuesta/ANTEPROYECTO.md) |
-| Investigar y registrar fuentes   | [Protocolo bibliográfico](docs/investigacion/PROTOCOLO-REVISION.md)                                   |
-| Ver qué hay hecho afuera         | [Síntesis del estado del arte](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md)                        |
-| Diseñar grabaciones simuladas    | [Método del corpus](docs/datos-etica/METODO-CREACION-CORPUS.md)                                       |
-| Anotar una conversación          | [Manual de anotación](docs/datos-etica/MANUAL-ANOTACION.md)                                           |
-| Saber qué mide cada número       | [Métricas](docs/evaluacion/METRICAS.md)                                                               |
-| Consultar riesgos activos        | [Registro de riesgos](docs/gestion/REGISTRO-RIESGOS.md)                                               |
-| Entender un término              | [Glosario](docs/GLOSARIO.md)                                                                          |
-| Redactar el informe              | [Esqueleto del informe](docs/tesis/ESQUELETO-INFORME.md)                                              |
+Toda la documentación vive dentro de [`docs/`](docs/) organizada por áreas sin copias paralelas:
 
-## Fuentes de verdad
+```text
+bitacora_tesis/
+├── README.md                      # Esta guía de entrada y mapa para humanos
+├── AGENTS.md                      # Router operativo e instrucciones para asistentes de IA
+├── deep-research-report.md        # Investigación técnica inicial exhaustiva
+├── docs/
+│   ├── GLOSARIO.md                # Términos técnicos con sentido preciso (T_A, T_R, T_C, WER, etc.)
+│   ├── propuesta/
+│   │   ├── PLAN-DE-TRABAJO.md     # Fuente única de verdad: problema, objetivos, método y cronograma
+│   │   └── REQUISITOS-ACADEMICOS.md # Pautas formales de UNSTA (portada, ~100 págs, defensa)
+│   ├── gestion/
+│   │   ├── METODO-DE-TRABAJO.md   # Flujo de sesiones, tipos de issue y definiciones de terminado
+│   │   ├── MAPA-DECISIONES.md     # Registro vivo de decisiones abiertas y resueltas
+│   │   ├── REGISTRO-RIESGOS.md    # Matriz de riesgos técnicos, de datos y mitigaciones
+│   │   ├── RUNBOOK-RESOLUCION-ISSUES.md # Guía práctica y plantillas de prompts para issues
+│   │   ├── bitacora/              # Historial semanal del equipo (AAAA-MM-semana-NN.md)
+│   │   └── seguimientos/          # Consultas y minutas con el profesor (AAAA-MM-DD.md)
+│   ├── investigacion/
+│   │   ├── PREGUNTAS-DE-INVESTIGACION.md # Preguntas centrales PI1/PI2 y objetivos
+│   │   ├── PROTOCOLO-REVISION.md  # Método de búsqueda bibliográfica reproducible
+│   │   ├── SINTESIS-ESTADO-DEL-ARTE.md  # Literatura analizada, matriz comparativa y vacíos
+│   │   └── PRIMERA-INVESTIGACION-MODELOS.md # Recorte D09: ASR streaming + detector, catálogo Hugging Face
+│   ├── datos-etica/
+│   │   ├── PRIVACIDAD-DEL-SISTEMA.md    # Privacy by Design on-device, Ley 25.326 y permisos Android
+│   │   ├── METODO-CREACION-CORPUS.md    # Fichas de rol, diseño de semillas, negativos difíciles y parada
+│   │   ├── CATALOGO-ESCENARIOS.csv      # Inventario estructurado de semillas de fraude y control
+│   │   └── MANUAL-ANOTACION.md          # Taxonomía de etiquetas y protocolo por turnos
+│   ├── ingenieria/
+│   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md # Comparación replay vs VoIP vs altavoz vs telefonía
+│   │   ├── ARQUITECTURA.md              # Componentes conceptuales y pipeline de audio a alerta
+│   │   └── adr/                         # Architecture Decision Records duraderos
+│   ├── evaluacion/
+│   │   └── METRICAS.md            # Fórmulas de tiempos, márgenes de anticipación y falsas alarmas
+│   └── tesis/
+│       └── ESQUELETO-INFORME.md   # Estructura capitular e índice orientativo de páginas
+```
 
-- **Trabajo pendiente y responsables:** GitHub Issues.
-- **Fases y fechas:** `docs/gestion/PLAN-MAESTRO.md`.
-- **Decisiones abiertas y su numeración:** `docs/gestion/MAPA-DECISIONES.md`.
-- **Decisiones cerradas:** comentario de resolución del issue; un ADR si es una decisión arquitectónica duradera.
-- **Fuentes y afirmaciones:** `matriz-literatura.csv` y documentos de investigación.
-- **Resultados:** configuración y salida versionada de cada experimento.
-- **Texto entregable:** `docs/tesis/`.
+---
 
-Una tarea no se copia a varios documentos. Los documentos explican; los issues
-coordinan el trabajo.
+## 4. Dinámica de trabajo
 
-## Guardrails
+1. **Backlog en GitHub Issues:** Las tareas se toman por autoasignación desde los issues del milestone activo.
+2. **Desarrollo enfocado:** Cada integrante/asistente trabaja sobre la fuente de verdad primaria del issue (código en `src/`, experimentos en `experiments/` o textos en `docs/`).
+3. **Barrido Documental al cerrar:** Al terminar una tarea, se verifica la fuente de verdad, se registra el artefacto en la bitácora semanal (`docs/gestion/bitacora/`) y se actualiza el mapa de decisiones o riesgos si correspondió.
+4. **Trabajo asistido por IA:** El repositorio cuenta con skills en `.agents/skills/` y un flujo guiado en [RUNBOOK-RESOLUCION-ISSUES.md](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md). Los asistentes leen [AGENTS.md](AGENTS.md).
 
-- Audio, consentimientos firmados, datos identificables y credenciales viven fuera
-  de Git.
-- El corpus usa conversaciones representadas y datos ficticios.
-- Replay en streaming es la base reproducible; VoIP es una integración candidata.
-- La captura universal de llamadas celulares desde una app Android ordinaria queda
-  fuera del núcleo.
-- El anteproyecto se edita en Markdown; el `.docx` en `docs/propuesta/original/` es resguardo
-  histórico.
-- Un resultado negativo bien medido también es un resultado válido.
+---
 
-## Estado de GitHub Issues
+## 5. Reglas y Guardrails
 
-El backlog inicial fue publicado en GitHub Issues bajo el milestone `M0 — Dirección aprobada` (issues #15 a #22). Las plantillas de nuevos issues están en `.github/ISSUE_TEMPLATE/`. Para resolverlos, consultar el [Runbook de resolución de issues](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md).
-
+- **Audio fuera de Git:** Ningún archivo de audio (`.wav`, `.mp3`) se sube al repositorio (reglado por `.gitignore`).
+- **Datos ficticios:** Las grabaciones y guiones emplean identidades, cuentas y números ficticios; no se usan datos reales de víctimas.
+- **Privacidad desde el diseño:** Todo procesamiento conversacional es estrictamente local en el dispositivo.
+- **Alcance acotado:** La captura universal de llamadas PSTN estándar, la biometría vocal y la detección de deepfakes quedan formalmente fuera de alcance.

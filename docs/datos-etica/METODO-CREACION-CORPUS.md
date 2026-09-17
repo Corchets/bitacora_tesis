@@ -86,7 +86,7 @@ grabación respete el escenario y detiene cualquier uso accidental de datos real
 ## 6. Piloto
 
 1. Crear 4 semillas fraudulentas y 4 legítimas difíciles.
-2. Grabar 12–20 conversaciones con integrantes y voluntarios autorizados.
+2. Grabar 12–20 conversaciones con integrantes del equipo y colaboradores de confianza.
 3. Transcribirlas y anotar un subconjunto común entre los cuatro integrantes.
 4. Registrar ambigüedades, duraciones, fallas técnicas y tiempo de anotación.
 5. Revisar taxonomía, fichas y procedimiento.
@@ -151,8 +151,8 @@ particiones, y un script valida esa condición.
 
 Una grabación se acepta cuando:
 
-- existe consentimiento válido;
-- usa datos ficticios;
+- se acuerda la participación voluntaria con datos 100% ficticios;
+- no se utilizan datos de víctimas ni información real;
 - respeta la ficha sin ser una lectura mecánica;
 - ambos lados son inteligibles;
 - tiene ID, semilla, hablantes pseudónimos y condición acústica;

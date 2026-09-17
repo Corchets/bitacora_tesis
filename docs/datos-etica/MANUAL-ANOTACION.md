@@ -76,7 +76,7 @@ principio, aparecen rápido las frases ambiguas y las definiciones defectuosas. 
 duplicado una fracción del corpus y se adjudican las discrepancias. Esto ya está previsto en el
 paso 3 del piloto del [método de creación del corpus](METODO-CREACION-CORPUS.md#6-piloto).
 
-**El acuerdo entre anotadores no es un trámite.** El anteproyecto se compromete a validar la
+**El acuerdo entre anotadores no es un trámite.** El plan de trabajo exige validar la
 taxonomía "mediante acuerdo entre anotadores independientes". Si el kappa da bajo, la conclusión no
 es maquillar el número: es que la taxonomía está mal definida y hay que arreglarla.
 
@@ -102,5 +102,5 @@ es maquillar el número: es que la taxonomía está mal definida y hay que arreg
   (UFECI, ANSES, PAMI, BCRA, prensa)?
 - Las modalidades argentinas concretas — código de WhatsApp, "premio de ANSES", falso soporte de
   billetera virtual — ¿son etiquetas nuevas o instancias de las existentes?
-- ¿Quién valida la taxonomía además del equipo? El anteproyecto menciona "personas con experiencia
-  en prevención de fraude".
+- ¿Quién valida la taxonomía además del equipo? Evaluar si se consulta a personal con experiencia
+  en prevención de fraude institucional o bancario.

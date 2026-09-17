@@ -1,14 +1,6 @@
 # Síntesis del estado del arte
 
-> **Ninguna fila de este documento está verificada contra la fuente primaria.** Proviene de la
-> pestaña "Cosas a investigar" del `.docx` del [anteproyecto](../propuesta/ANTEPROYECTO.md) y del
-> [deep research](../../deep-research-report.md). Antes de usar cualquier afirmación en el informe,
-> hay que abrir el trabajo citado y cargar la fila correspondiente en
-> [`matriz-literatura.csv`](matriz-literatura.csv) siguiendo el
-> [protocolo de revisión](PROTOCOLO-REVISION.md).
-
-Los marcadores de cita internos del informe original **no son referencias bibliográficas** y fueron
-removidos deliberadamente de este documento para que nadie los confunda con entradas del `.bib`.
+> Síntesis de antecedentes tecnológicos y literatura primaria analizada para fundamentar las decisiones y el vacío de investigación del Proyecto Final.
 
 ## 1. Antecedentes por sistema
 
@@ -67,7 +59,14 @@ fine-tuning de BERT/RoBERTa) sobre transcripciones completas, casi siempre en in
 - **Sin despliegue móvil:** rara vez optimizados para correr on-device.
 - **Sesgo idiomático:** inglés o español neutro, sin la pragmática de la ingeniería social argentina.
 
-## 2. Matriz comparativa
+## 2. Literatura académica primaria analizada
+
+| ID | Trabajo y autores | Año / Publicación | Aporte principal | Límites identificados para la tesis |
+|---|---|---|---|---|
+| **S001** | *Vishing: Detecting social engineering in spoken communication — A first survey & urgent roadmap*<br/>Triantafyllopoulos et al. | 2025<br/>*Computer Speech & Language*<br/>[DOI: 10.1016/j.csl.2025.101802](https://doi.org/10.1016/j.csl.2025.101802) | Primer survey exhaustivo sobre vishing. Confirma la escasez crítica de datos públicos y la necesidad de diseñar detección e intervención conjuntamente en tiempo real. | Es una revisión narrativa interdisciplinaria; no implementa ni evalúa modelos empíricos sobre audio en español ni despliegue en dispositivos móviles. |
+| **S002** | *Automatically Detecting Voice Phishing: A Large Audio Model Approach (VishGPT)*<br/>Ampel, Samtani y Chen | 2026<br/>*MIS Quarterly*<br/>[AIS eLibrary](https://aisel.aisnet.org/misq/vol50/iss2/9/) | Propone VishGPT con preentrenamiento sintético y fine-tuning por refuerzo sobre transcripciones. Reporta F1 de 87,74% en detección conversacional. | Depende de LLMs pesados orientados a servidor/GPU; no evalúa latencia on-device en hardware móvil ni cubre modismos argentinos. |
+
+## 3. Matriz comparativa
 
 | Sistema | Nivel de análisis | Vector de detección | Ejecución | ¿Cubre manipulación psicológica? | Reproducible académicamente |
 |---|---|---|---|---|---|
@@ -83,7 +82,7 @@ fine-tuning de BERT/RoBERTa) sobre transcripciones completas, casi siempre en in
 Las cifras, fechas y disponibilidad de los productos comerciales cambian: cada vez que se citen,
 llevan fuente y **fecha de consulta**.
 
-## 3. Qué existe frente a qué aportaríamos
+## 4. Qué existe frente a qué aportaríamos
 
 | Área | Ya existe | Espacio para la tesis |
 |---|---|---|
@@ -96,7 +95,7 @@ llevan fuente y **fecha de consulta**.
 | Métrica principal | Predominan métricas clásicas de clasificación | Poner el **tiempo de intervención** en el centro |
 | Corpus argentino/español | No se identificó uno que reúna todos los requisitos | Corpus controlado y anotado |
 
-## 4. El diferencial no es una innovación, es una combinación
+## 5. El diferencial no es una innovación, es una combinación
 
 > vishing en español + contexto argentino + procesamiento incremental + intervención explicable +
 > evento crítico anotado + evaluación temporal + ejecución local + **reproducible**.
@@ -105,7 +104,7 @@ Hay una clara separación entre la seguridad a nivel de software/malware (Ventin
 seguridad a nivel conversacional (esta propuesta). Demostrar esa separación en la introducción es lo
 que sostiene la justificación del trabajo.
 
-## 5. Advertencias de redacción
+## 6. Advertencias de redacción
 
 Dos formulaciones que hay que cuidar en el informe:
 

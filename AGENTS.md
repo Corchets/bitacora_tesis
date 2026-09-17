@@ -8,7 +8,7 @@ técnica. Español de Argentina; los nombres de etiquetas técnicas quedan en in
 (`REQUEST_AUTH_CODE`).
 
 Documentación y código conviven en este repositorio. La estructura objetivo está en
-[PLAN-MAESTRO.md §10](docs/gestion/PLAN-MAESTRO.md#10-sistema-de-archivos): las carpetas se crean
+[README.md](README.md#3-mapa-del-repositorio-estructura-documental): las carpetas se crean
 cuando aparece el primer artefacto real, nunca antes.
 
 ---
@@ -44,9 +44,8 @@ un problema grave en la defensa.
 
 - **Nunca** agregues audio al repositorio (`.wav`, `.mp3`, `.m4a`, `.flac`, `.ogg`). Está en
   [.gitignore](.gitignore); no lo modifiques para permitirlos.
-- **Nunca** agregues consentimientos firmados, nombres de participantes, ni transcripciones con
-  datos identificatorios.
-- Ver [CHECKLIST-ETICA.md](docs/datos-etica/CHECKLIST-ETICA.md).
+- **Nunca** agregues datos identificatorios reales ni números privados.
+- Ver [PRIVACIDAD-DEL-SISTEMA.md](docs/datos-etica/PRIVACIDAD-DEL-SISTEMA.md).
 
 ---
 
@@ -57,9 +56,9 @@ un problema grave en la defensa.
    trabajo.
 3. Cargar solo la referencia disparada por la tarea:
    - **Investigación:** [PROTOCOLO-REVISION.md](docs/investigacion/PROTOCOLO-REVISION.md) y
-     actualizar [matriz-literatura.csv](docs/investigacion/matriz-literatura.csv).
-   - **Corpus o participantes:** [METODO-CREACION-CORPUS.md](docs/datos-etica/METODO-CREACION-CORPUS.md)
-     y [PLAN-PARTICIPANTES-Y-CORPUS.md](docs/datos-etica/PLAN-PARTICIPANTES-Y-CORPUS.md).
+     [SINTESIS-ESTADO-DEL-ARTE.md](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md).
+   - **Corpus o escenarios:** [METODO-CREACION-CORPUS.md](docs/datos-etica/METODO-CREACION-CORPUS.md)
+     y [CATALOGO-ESCENARIOS.csv](docs/datos-etica/CATALOGO-ESCENARIOS.csv).
    - **Anotación:** [MANUAL-ANOTACION.md](docs/datos-etica/MANUAL-ANOTACION.md).
    - **Experimento o métricas:** [PREGUNTAS-DE-INVESTIGACION.md](docs/investigacion/PREGUNTAS-DE-INVESTIGACION.md)
      y [METRICAS.md](docs/evaluacion/METRICAS.md).
@@ -81,25 +80,31 @@ un problema grave en la defensa.
 
 ---
 
-## Dónde va cada cosa
+### Dónde va cada cosa (Router del Repositorio)
 
-| Si el contenido es… | Va a |
-|---|---|
-| Una decisión **pendiente** | [MAPA-DECISIONES.md](docs/gestion/MAPA-DECISIONES.md), o un issue `type:decision` |
-| Una decisión **arquitectónica duradera ya tomada** | `docs/ingenieria/adr/NNNN-titulo.md`, copiando [PLANTILLA-ADR.md](docs/ingenieria/adr/PLANTILLA-ADR.md) |
-| Qué pasó esta semana | `docs/gestion/bitacora/AAAA-MM-semana-NN.md` |
-| Qué se habló con el profesor | `docs/gestion/seguimientos/AAAA-MM-DD.md` |
-| Un paper leído | `docs/investigacion/lecturas/AAAA-autor-tema.md` + fila en `matriz-literatura.csv` |
-| Comparación con otros sistemas | [SINTESIS-ESTADO-DEL-ARTE.md](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md) |
-| Definición de etiquetas o reglas de anotación | [MANUAL-ANOTACION.md](docs/datos-etica/MANUAL-ANOTACION.md) |
-| Definición de una métrica | [METRICAS.md](docs/evaluacion/METRICAS.md) |
-| Texto de la tesis | `docs/tesis/`. **No crear capítulos vacíos.** |
-| Un término que se usa con sentido preciso | [GLOSARIO.md](docs/GLOSARIO.md) |
-| Un diagrama | `.md` con bloque ` ```mermaid `. **No usar `.mmd`**: GitHub no lo renderiza |
-| Consentimiento, comité de ética o Ley 25.326 | `docs/datos-etica/` |
+Cada información tiene **una sola fuente de verdad**. Usar esta tabla para saber qué consultar y cuándo actualizar:
 
-La [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md) tiene el detalle de cuándo se actualiza cada uno.
-**No crear carpetas nuevas sin que el usuario lo pida.** Si algo no encaja en ninguna, preguntá.
+| Tarea o Contenido | Fuente de Verdad (Dónde vive) | Cuándo se lee / Cuándo se actualiza |
+|---|---|---|
+| **Plan general, alcance, cronograma** | [`docs/propuesta/PLAN-DE-TRABAJO.md`](docs/propuesta/PLAN-DE-TRABAJO.md) | **Lee:** para consultar metas, fases o exclusiones.<br/>**Actualiza:** solo si el tutor aprueba un cambio de alcance o metodología. |
+| **Requisitos UNSTA, formato y defensa** | [`docs/propuesta/REQUISITOS-ACADEMICOS.md`](docs/propuesta/REQUISITOS-ACADEMICOS.md) | **Lee:** para pautas formales de entrega (A4, ~100 págs, tribunal).<br/>**Actualiza:** ante novedades administrativas de la facultad. |
+| **Avance semanal del equipo** | `docs/gestion/bitacora/AAAA-MM-semana-NN.md` | **Actualiza:** al cerrar un issue o finalizar la semana, registrando qué se hizo y qué artefacto nuevo existe (ver [README](docs/gestion/bitacora/README.md)). |
+| **Reunión con el tutor (Ing. Rico)** | `docs/gestion/seguimientos/AAAA-MM-DD.md` | **Crea:** 24–48 h antes con dudas/consultas a llevar.<br/>**Actualiza:** dentro de las 24 h posteriores con la minuta de acuerdos (ver [README](docs/gestion/seguimientos/README.md)). |
+| **Decisiones abiertas o pendientes** | [`docs/gestion/MAPA-DECISIONES.md`](docs/gestion/MAPA-DECISIONES.md) | **Lee:** antes de asumir opciones de diseño.<br/>**Actualiza:** cuando un issue resuelve o desbloquea una disyuntiva del proyecto. |
+| **Decisión arquitectónica duradera (ADR)** | `docs/ingenieria/adr/NNNN-titulo.md` | **Crea:** solo cuando se congela una decisión técnica estructural permanente (ej. contratos de interfaz, pipeline de audio). |
+| **Riesgos del proyecto** | [`docs/gestion/REGISTRO-RIESGOS.md`](docs/gestion/REGISTRO-RIESGOS.md) | **Actualiza:** al descubrir un nuevo riesgo técnico/plataforma o validar una mitigación. |
+| **Privacidad del sistema y normativa** | [`docs/datos-etica/PRIVACIDAD-DEL-SISTEMA.md`](docs/datos-etica/PRIVACIDAD-DEL-SISTEMA.md) | **Lee:** para fundamentar inferencia *on-device*, descarte de audio y Ley 25.326. |
+| **Diseño del corpus y llamadas** | [`docs/datos-etica/METODO-CREACION-CORPUS.md`](docs/datos-etica/METODO-CREACION-CORPUS.md) | **Lee:** para crear semillas, fichas de rol y negativos difíciles.<br/>**Actualiza:** si cambia la metodología de recolección o parada. |
+| **Catálogo de escenarios y fraudes** | [`docs/datos-etica/CATALOGO-ESCENARIOS.csv`](docs/datos-etica/CATALOGO-ESCENARIOS.csv) | **Actualiza:** al incorporar, modificar o descartar una semilla de llamada. |
+| **Taxonomía y reglas de anotación** | [`docs/datos-etica/MANUAL-ANOTACION.md`](docs/datos-etica/MANUAL-ANOTACION.md) | **Actualiza:** si el piloto o el equipo redefinen una etiqueta de turno (`URGENCY`, `REQUEST_OTP`, etc.). |
+| **Definición de métricas y marcas** | [`docs/evaluacion/METRICAS.md`](docs/evaluacion/METRICAS.md) | **Fuente única:** para fórmulas de `T_A`, `T_R`, `T_C`, márgenes `L_R`, `L_C` y falsas alarmas. |
+| **Captura de audio y hardware** | [`docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md`](docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md) y [`ARQUITECTURA.md`](docs/ingenieria/ARQUITECTURA.md) | **Lee:** para diseñar interfaces de audio, ASR y prototipo. |
+| **Investigación y papers leídos** | [`docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md`](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md) | **Actualiza:** al analizar una fuente primaria siguiendo el [protocolo](docs/investigacion/PROTOCOLO-REVISION.md). |
+| **Recorte de modelos on-device (D09)** | [`docs/investigacion/PRIMERA-INVESTIGACION-MODELOS.md`](docs/investigacion/PRIMERA-INVESTIGACION-MODELOS.md) | **Lee:** contrato de laboratorio, gamas y catálogo Hugging Face.<br/>**No cierra D09.** |
+| **Texto final del informe de tesis** | `docs/tesis/` | **Actualiza:** redactando sobre capítulos reales según el [esqueleto](docs/tesis/ESQUELETO-INFORME.md). No crear capítulos vacíos. |
+| **Término con significado preciso** | [`docs/GLOSARIO.md`](docs/GLOSARIO.md) | **Actualiza:** cuando surge un término técnico nuevo o ambiguo. |
+
+**No crear carpetas nuevas sin que el usuario lo pida.** Si algo no encaja en ninguna, consultá. El [README.md](README.md) mantiene el mapa de la estructura global.
 
 ## Convenciones
 
@@ -107,9 +112,6 @@ La [Guía de archivos](docs/GUIA-DE-ARCHIVOS.md) tiene el detalle de cuándo se 
   `AAAA-MM-semana-NN.md`; seguimientos `AAAA-MM-DD.md`; ADRs `NNNN-titulo.md` con cuatro dígitos.
 - **Fechas:** siempre absolutas (`2026-09-02`), nunca "la semana pasada".
 - **Enlaces:** relativos entre documentos, formato Markdown. Verificá que resuelvan.
-- **Marcas de estado en el anteproyecto:** `⚠️[C1]`…`⚠️[C5]` = afirmaciones incorrectas;
-  `⚠️[S1]`…`⚠️[S3]` = supuestos no decididos. No las borres sin aplicar la corrección
-  correspondiente en [CORRECCIONES-ANTEPROYECTO.md](docs/propuesta/CORRECCIONES-ANTEPROYECTO.md).
 
 ## Uso y sugerencia de Skills especializadas
 
@@ -123,25 +125,24 @@ El repositorio cuenta con skills en `.agents/skills/`. El agente debe sugerir pr
 - **Descomponer discusiones en issues para GitHub:** Sugerir `to-tickets` o `to-spec`.
 - **Resolución e integración de issues:** Usar `resolver-issue`.
 
-## Protocolo de resolución de issues y sincronización de estado
+## Ciclo de trabajo con issues: Ejecución y Barrido Documental
 
-Cuando el usuario indique que está trabajando en un issue (o acerque resultados/notas para integrar):
-1. **Identificar fuente de verdad:** Ubicar el documento canónico en `docs/` según el tipo de issue (ver tabla arriba y [RUNBOOK-RESOLUCION-ISSUES.md](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md)).
-2. **Aplicar cambios:** Editar la fuente de verdad respetando estrictamente las Reglas 1, 2 y 3 (no inventar decisiones ni citas, no audio/PII).
-3. **Sincronizar el estado vivo:**
-   - **Bitácora semanal (`docs/gestion/bitacora/`):** Agregar el trabajo y estado a la tabla de la semana en curso, y la viñeta en "Qué existe hoy".
-   - **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** Si resuelve o cambia una decisión, actualizar su estado; si es técnica duradera, redactar el ADR en `docs/ingenieria/adr/`.
-   - **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** Si mitiga un riesgo o descubre uno nuevo, ajustar o agregar la fila correspondiente.
-4. **Entregar comentario para GitHub:** Terminar siempre con un bloque Markdown formateado listo para copiar y pegar en el issue de GitHub (`Closes #N`, resumen, evidencia, decisiones y próxima acción).
+Para mantener el repositorio sincronizado sin caer en micro-gestión constante, todo agente o integrante debe operar en dos fases bien diferenciadas:
 
-## Al terminar un cambio
+### Fase 1 — Durante la ejecución (Trabajo enfocado)
+- Trabajar **exclusivamente** sobre el problema del issue (escribir código, realizar un spike, analizar un paper o redactar un texto).
+- Editar **únicamente** la fuente de verdad primaria afectada (ej. archivo en `src/`, `experiments/`, `docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md` o un documento específico de `docs/`).
+- **No tocar** bitácoras, riesgos ni archivos de gestión mientras se está programando o investigando.
 
-1. Actualizá la fuente de verdad afectada, no varias copias.
-2. Si el cambio es sustantivo, anotalo en la bitácora de la semana en curso.
-3. Verificá que no quedaron enlaces rotos.
-4. **No hagas `git commit` salvo que te lo pidan.**
+### Fase 2 — Al cerrar el issue (Barrido Documental obligatorio)
+Una sesión termina ejecutando este barrido en orden para sincronizar el estado vivo del proyecto:
+1. **Verificar la fuente de verdad:** Asegurar que el cambio está completo, testeado y sin enlaces rotos relativos.
+2. **Bitácora semanal (`docs/gestion/bitacora/AAAA-MM-semana-NN.md`):** Agregar a la tabla de la semana en curso la fila del issue con su estado (☑), y una viñeta concreta en *"Qué existe hoy que no existía la semana pasada"* describiendo el artefacto generado.
+3. **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** Si el issue resolvió o redefinió una decisión abierta, actualizar su estado. Si se congeló una decisión arquitectónica duradera, redactar el ADR correspondiente en `docs/ingenieria/adr/`.
+4. **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** Si el trabajo mitigó un riesgo o descubrió uno nuevo, actualizar la matriz.
+5. **Comentario de cierre para GitHub:** Redactar y entregar el comentario listo para pegar en GitHub Issues (`Closes #N`, resumen, evidencia observable, decisiones y próxima acción).
 
-Una sesión termina con el issue actualizado, la evidencia enlazada, las fuentes de verdad
-consistentes y las verificaciones pertinentes ejecutadas. Si resta trabajo, el issue permanece
-abierto con una próxima acción concreta y un bloqueo explícito.
+### Reglas de higiene final
+- Actualizá la fuente de verdad afectada, **nunca mantengas copias paralelas**.
+- **No hagas `git commit`** salvo que el usuario lo pida explícitamente.
 

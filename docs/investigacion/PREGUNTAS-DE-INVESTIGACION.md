@@ -38,31 +38,13 @@ No se busca un número elegido de antemano. Se busca caracterizar el compromiso:
 
 ¿Con cuánto margen respecto del primer pedido riesgoso y de la primera acción de cumplimiento puede emitirse una alerta estable?
 
-### Marcas necesarias
+### Marcas y métricas de evaluación
 
-- `T_A`: momento de primera alerta estable.
-- `T_R`: comienzo del primer pedido de alto riesgo.
-- `T_C`: comienzo de la primera acción de cumplimiento ficticio.
+Para responder PI2 se analizan los márgenes de anticipación temporal respecto del pedido de alto riesgo (`L_R = T_R - T_A`) y respecto de la acción de cumplimiento ficticia (`L_C = T_C - T_A`), además de la tasa de llamadas advertidas con margen suficiente (`Preventive@δ`).
 
-Ejemplo:
+La definición matemática rigurosa, el tratamiento estadístico y el ejemplo temporal viven en [METRICAS.md](../evaluacion/METRICAS.md).
 
-```text
-00:30 “Tenemos que resolverlo ahora”                  urgencia
-00:45 “No cortes la llamada”                          aislamiento
-00:58 “Decime el código de seis dígitos”              T_R
-01:04 “El código es...”                               T_C
-```
-
-Si la alerta aparece a los 00:48, no anticipa el pedido, pero aparece 16 segundos antes de que el rol de víctima comience a compartir el código.
-
-### Resultados que se reportan
-
-- `L_R = T_R - T_A`.
-- `L_C = T_C - T_A`.
-- `Preventive@5s`, `Preventive@10s` y `Preventive@20s`.
-- Casos detectados después del evento o nunca detectados.
-
-El resultado buscado es una distribución honesta de márgenes, no demostrar por fuerza que todos son positivos.
+El objetivo es obtener una distribución honesta de márgenes y no forzar números arbitrarios.
 
 ## E1 — Impacto del ASR, evaluación diagnóstica obligatoria
 

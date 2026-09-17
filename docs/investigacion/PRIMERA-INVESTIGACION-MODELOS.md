@@ -163,7 +163,7 @@ El [mapa](../gestion/MAPA-DECISIONES.md) y el [plan de trabajo](../propuesta/PLA
 
 En criollo: no compramos tres teléfonos. En la computadora le decimos al programa “hacé de cuenta que sos un teléfono chico / mediano / caro” y miramos si los dos ayudantes siguen el ritmo de la charla.
 
-_Evitar:_ llamar “prototipo” a la app Android. En este recorte la app es **demo**. El [anteproyecto](../propuesta/ANTEPROYECTO.md) todavía habla de prototipo instalable en el teléfono: eso **no** se reescribió; choca con este recorte hasta que los cuatro lo ratifiquen.
+_Evitar:_ llamar “prototipo” a la app Android. En este recorte la app es **demo**. El [plan de trabajo](../propuesta/PLAN-DE-TRABAJO.md) habla de prototipo; acá el prototipo de laboratorio es la PC limitada, no una app instalable. Eso choca con una lectura “app en el teléfono” hasta que los cuatro lo ratifiquen.
 
 > **Estado: propuesta sin discutir.** Encaja con el principio de [ARQUITECTURA.md](../ingenieria/ARQUITECTURA.md) (“el motor no sabe de dónde viene el audio” y se puede medir sin la app). No cierra D03 ni D09.
 
