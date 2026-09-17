@@ -40,6 +40,27 @@ transcripción textual.
   todavía no está decidido —
   ver [D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico).
 
+### Defensas antifraude telefónico de Google (Pixel / Android)
+
+Ficha completa con fuentes primarias y fechas de consulta:
+[lecturas/2026-google-scam-detection.md](lecturas/2026-google-scam-detection.md)
+(consulta 2026-09-17).
+
+- **Qué son:** funciones comerciales cerradas, no un trabajo académico. No hay paper, ni código, ni
+  dataset. Primer anuncio de Scam Detection en llamadas: 13/11/2024.
+- **Cuidado con el nombre:** Google llama "Scam Detection" a cuatro cosas distintas (llamadas,
+  Google Messages, notificaciones de apps de terceros), y además existen "Fake Call Detection" y
+  "Call Screen". Las propias páginas de soporte mezclan sus listas de países e idiomas. La ficha los
+  separa; conviene no citarlos como si fueran un solo producto.
+- **Fuente más informativa:** la solicitud de patente US 2024/0388655 A1, *In-call scam detection*
+  (Google LLC, presentada el 13/05/2024). Describe el espacio de diseño reivindicado, no
+  necesariamente el producto que se envía: en la tesis se cita como *"una solicitud de patente de
+  Google describe…"*, nunca como la arquitectura de Scam Detection.
+- **Aporte a la justificación:** confirma que el análisis conversacional durante la llamada y
+  on-device ya es viable en producto, y que el hueco reproducible sigue abierto.
+- **Límite:** caja negra. No es comparable experimentalmente, y lo que Google no publica queda
+  marcado como no publicado en la ficha.
+
 ### Soluciones comerciales (INETCO, Brightside)
 
 - **INETCO (BullzAI / Insight):** ciberseguridad transaccional para instituciones financieras.
