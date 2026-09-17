@@ -33,3 +33,7 @@ artifacts/
 
 # Temporales de Office / LibreOffice
 ~$*
+
+# Skills de agents
+.agents/
+skills-lock.json

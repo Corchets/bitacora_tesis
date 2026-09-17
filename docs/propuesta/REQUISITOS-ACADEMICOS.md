@@ -1,66 +1,33 @@
-# Requisitos académicos disponibles
+# Requisitos académicos del Proyecto Final
 
 **Universidad:** Universidad del Norte Santo Tomás de Aquino (UNSTA)  
-**Carrera:** Ingeniería en Informática  
-**Plan:** 2008  
+**Facultad:** Ingeniería  
+**Carrera:** Ingeniería en Informática — Plan 2008  
 **Asignatura:** Proyecto Final Integrador  
-**Actualizado:** 2 de septiembre de 2026
+**Tutor:** Ing. Ernesto Rico  
+**Equipo:** Albarracín Ignacio, Antenucci Mateo, Grosso Luciano y Villalobo Evaristo  
 
-## Confirmado
+---
 
-- El grupo de cuatro integrantes está autorizado:
-  - Albarracín Ignacio.
-  - Antenucci Mateo.
-  - Grosso Luciano.
-  - Villalobo Evaristo.
-- La documentación se entrega digitalmente.
-- Formato A4, carilla simple.
-- La portada debe incluir:
-  - logo de UNSTA;
-  - nombre del proyecto;
-  - integrantes;
-  - tutor;
-  - año.
-- Debe incluir resumen en español e inglés.
-- Los agradecimientos son opcionales.
-- El contenido esperado incluye:
-  - introducción;
-  - objetivos;
-  - marco teórico;
-  - arquitecturas;
-  - tecnologías;
-  - comparaciones;
-  - metodologías utilizadas;
-  - etapas del proyecto;
-  - conclusión del trabajo.
-- La extensión habitual es aproximadamente 100 páginas.
-- La entrega será hacia los últimos días de diciembre de 2026.
-- No se exige evidencia individual ni registro formal de horas.
+## 1. Parámetros formales de entrega y defensa
 
-La página oficial de la carrera confirma que el quinto año culmina con un
-[Proyecto Final Integrador](https://www.unsta.edu.ar/ingenieria/ingenieria-informatica/).
-El [Repositorio Digital de UNSTA](https://rdi.unsta.edu.ar/collections/6fbdcceb-6920-47f6-935d-7183c5692153)
-contiene ejemplos históricos de proyectos finales de Ingeniería Informática.
+- **Fecha de defensa:** Presencial, durante la última o penúltima semana de diciembre de 2026 (exposición oral).
+- **Entrega previa:** Informe final en formato digital (PDF) para evaluación del tribunal.
+- **Extensión orientativa:** Promedio de ~100 páginas en hoja A4 carilla simple (incluyendo anexos, figuras y referencias).
+- **Estructura requerida del informe:**
+  - Portada oficial (logo UNSTA, título del proyecto, integrantes, tutor y año).
+  - Resumen en español e inglés (*abstract*).
+  - Agradecimientos (opcional).
+  - Introducción, objetivos, marco conceptual/tecnologías, metodología, arquitectura/implementación, evaluación/resultados y conclusiones.
+- **Plantilla:** Sin plantilla oficial descargable obligatoria. Se adopta el formato de proyectos finales recientes de la carrera disponibles en el [Repositorio Digital de UNSTA](https://rdi.unsta.edu.ar/collections/6fbdcceb-6920-47f6-935d-7183c5692153).
 
-## Pendiente de confirmar el 9 de septiembre
+## 2. Entregables adicionales
 
-1. Fecha y hora exactas de entrega.
-2. Nombre y funciones del tutor.
-3. Si existe una plantilla descargable.
-4. Tipografía, tamaño, interlineado, márgenes y numeración.
-5. Estilo bibliográfico esperado: IEEE, APA u otro.
-6. Si las 100 páginas son recomendación, mínimo, máximo o promedio.
-7. Si anexos y referencias cuentan dentro de esa extensión.
-8. Entregables adicionales: repositorio, código, APK, manuales, dataset, video,
-   presentación y/o póster.
-9. Frecuencia real de seguimientos y entregas intermedias.
-10. Procedimiento requerido antes de grabar voces de voluntarios.
-11. Duración y modalidad de la defensa.
-12. Si el profesor acepta replay en tiempo real como evaluación base y VoIP como
-    integración objetivo.
+- La cátedra califica formalmente el informe digital y la defensa oral.
+- El equipo entrega como respaldo técnico: repositorio de código versionado, suite de experimentos reproducibles y demostración del prototipo en entorno controlado.
 
-## Referencias que no son obligatorias
+## 3. Disposiciones institucionales
 
-Los reglamentos de otras universidades pueden servir para detectar omisiones y
-aprender buenas prácticas, pero no se presentarán como normas de UNSTA. Cualquier
-conflicto se resuelve a favor de las indicaciones del profesor/tutor.
+- **Comité de ética:** UNSTA no exige trámite ante comité formal de ética para este proyecto.
+- **Dedicación:** No se exige registro formal de horas por estudiante ni bitácora individual para la evaluación de la cátedra; el avance se valida en las reuniones periódicas con el tutor.
+

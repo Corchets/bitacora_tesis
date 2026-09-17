@@ -22,11 +22,11 @@ Tres palabras gobiernan el flujo:
 | Información | Fuente |
 |---|---|
 | Trabajo abierto, prioridad, responsable, bloqueos | GitHub Issues |
-| Hitos, gates y fechas | `PLAN-MAESTRO.md` |
+| Hitos, gates y fechas | `docs/propuesta/PLAN-DE-TRABAJO.md` |
 | Resultado de una decisión | comentario de cierre del issue; ADR si afecta arquitectura |
 | Riesgos | `REGISTRO-RIESGOS.md` |
 | Seguimientos con el profesor | `docs/gestion/seguimientos/AAAA-MM-DD.md` |
-| Evidencia bibliográfica | `matriz-literatura.csv` y síntesis temática |
+| Evidencia bibliográfica y estado del arte | `docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md` |
 | Diseño del corpus | `METODO-CREACION-CORPUS.md` y sus esquemas |
 | Reglas académicas | `REQUISITOS-ACADEMICOS.md` |
 | Manuscrito final | `docs/tesis/` |
@@ -50,7 +50,7 @@ restricción duradera, también existe un ADR.
 Busca evidencia externa para sostener una afirmación o decisión.
 
 **Terminado cuando:** las consultas y criterios están registrados, cada afirmación
-material tiene fuente verificable, la matriz bibliográfica fue actualizada y el
+material tiene fuente verificable, la síntesis del estado del arte fue actualizada y el
 issue contiene síntesis, incertidumbres y decisión habilitada.
 
 ### `type:experiment`
@@ -176,7 +176,7 @@ en notebooks personales, chats o memoria.
 
 ### Preparación, 48 horas antes
 
-1. Copiar `PLANTILLA-SEGUIMIENTO.md` a `seguimientos/AAAA-MM-DD.md`.
+1. Crear `seguimientos/AAAA-MM-DD.md` con los temas a consultar.
 2. Elegir como máximo tres decisiones que el equipo no puede cerrar solo.
 3. Enlazar evidencia verificable.
 4. Comparar compromisos anteriores con resultados.
@@ -207,7 +207,7 @@ o decisión explícita de no actuar.
 2. Buscar con el protocolo bibliográfico.
 3. Extraer fuente, población/datos, método, resultados y límites.
 4. Contrastar evidencia que pueda refutar la interpretación inicial.
-5. Actualizar la matriz y sintetizar solo lo necesario para decidir.
+5. Actualizar la síntesis del estado del arte con la evidencia primaria y lo necesario para decidir.
 
 **Terminado cuando:** la afirmación importante tiene evidencia primaria aplicable,
 las contradicciones están resueltas o declaradas y otra búsqueda no cambiaría la

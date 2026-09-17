@@ -7,11 +7,6 @@ Cada decisión debe tener una sola fuente de verdad. Cuando una decisión técni
 ADR en [`docs/ingenieria/adr/`](../ingenieria/adr/) y desde aquí solo se enlaza su conclusión.
 Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 
-**Este archivo es la única numeración válida.** Circuló una lista paralela `D1`–`D10` con otro
-criterio; sus entradas fueron absorbidas acá y esa numeración queda sin efecto para evitar que dos
-personas digan "D5" refiriéndose a cosas distintas. La correspondencia está al final, en
-[Migración de la numeración anterior](#migración-de-la-numeración-anterior).
-
 ## Frontera: decisiones que pueden tomarse ahora
 
 ### D01 — Completar el contrato académico
@@ -19,82 +14,69 @@ personas digan "D5" refiriéndose a cosas distintas. La correspondencia está al
 - **Pregunta:** ¿qué fecha exacta, plantilla, estilo bibliográfico, entregables
   adicionales y proceso ético aplican al grupo?
 - **Tipo:** conversación con profesor/tutor.
-- **Responsable:** coordinador de la próxima clase.
-- **Evidencia:** minuta del 9 de septiembre validada.
+- **Responsable:** Ing. Ernesto Rico (Tutor) / Equipo.
+- **Evidencia:** [minuta del 9 de septiembre](seguimientos/2026-09-09.md) y [REQUISITOS-ACADEMICOS.md](../propuesta/REQUISITOS-ACADEMICOS.md).
 - **Desbloquea:** D02, D03, D10 y cronograma definitivo.
-- **Estado:** parcialmente resuelto; formato general, grupo y plazo aproximado ya
-  fueron informados.
+- **Estado:** resuelto (2026-09-09). Defensa presencial a fines de diciembre 2026; tutor asignado; ~100 págs promedio digital; sin comité de ética universitario formal.
 
 ### D02 — Definir problema, usuario y necesidad
 
 - **Pregunta:** ¿quién necesita qué decisión o protección, en qué momento de la
   llamada y frente a qué daño?
 - **Tipo:** decisión de alcance con investigación del dominio.
-- **Responsable:** por autoasignación en GitHub.
+- **Responsable:** por autoasignación en GitHub (Issue #18).
 - **Evidencia:** problema en cinco líneas, persona/actor y tres escenarios.
-- **Bloqueada por:** D01 solo en su formulación final.
-- **Desbloquea:** D03, D04, D06 y requisitos.
-- **Estado:** abierto.
+- **Bloqueada por:** ninguna (D01 resuelto).
+- **Desbloquea:** D06 y requisitos.
+- **Estado:** en curso.
 
 ### D05 — Elegir la fuente de audio demostrable
 
 - **Pregunta:** ¿cuál será la integración objetivo entre replay en streaming, VoIP
   controlado y micrófono/altavoz de laboratorio?
-- **Tipo:** investigación + spike técnico.
-- **Responsable:** por autoasignación en GitHub.
-- **Evidencia:** prueba mínima, restricciones oficiales, latencia y riesgos.
-- **Desbloquea:** arquitectura y requisitos del prototipo, y D11.
-- **Estado:** abierto; replay es la base recomendada.
+- **Tipo:** decisión técnica con validación de cátedra.
+- **Responsable:** Equipo.
+- **Evidencia:** [minuta del 9 de septiembre](seguimientos/2026-09-09.md) e [Issue #16](https://github.com/Corchets/bitacora_tesis/issues/16).
+- **Desbloquea:** arquitectura y requisitos del prototipo.
+- **Estado:** resuelto (2026-09-09). Replay como base experimental reproducible obligatoria; llamada VoIP propia como integración objetivo del prototipo; altavoz externo despriorizado (no separa canales); PSTN universal fuera de alcance.
 
 Las cinco opciones sobre la mesa, con el detalle técnico en
 [ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md):
 
-| Opción | Qué demuestra | Lectura del deep research |
-|---|---|---|
-| Motor sobre grabaciones reproducidas como stream | Algoritmo completo, incrementalidad, latencia, anticipación | **Base experimental obligatoria** |
-| App con llamada VoIP controlada (el audio es de la app) | Funcionamiento durante una conversación real | **Objetivo principal del prototipo** |
-| Micrófono/altavoz en laboratorio | Concepto interactivo rápido | Útil al principio |
-| AOSP / root / app de sistema | Acceso privilegiado a telefonía | Solo *stretch goal* |
-| App stock escuchando cualquier llamada del dialer | Producto equivalente a integración OEM | **Fuera de alcance** |
-
-**La captura acústica por altavoz no está decidida.** El [anteproyecto](../propuesta/ANTEPROYECTO.md)
-(sección 8) la da por resuelta y hasta construye un argumento a favor —la población objetivo ya usa
-el altavoz—, pero entró como supuesto, no como decisión discutida. Está marcado como `S1` en
-[CORRECCIONES-ANTEPROYECTO.md](../propuesta/CORRECCIONES-ANTEPROYECTO.md).
-
-| | A favor | En contra |
-|---|---|---|
-| **Altavoz / micrófono** | Funciona en cualquier teléfono, sin permisos privilegiados; se alinea con el uso real de la población objetivo | Calidad muy inferior a la de línea; ruido, reverberación y cancelación de eco degradan el ASR; solo captura bien un lado |
-| **VoIP propia** | Audio limpio y separado por canal; es de la app, sin permisos especiales | No es una llamada telefónica real; hay que justificar la validez del escenario |
-| **Replay de grabaciones** | Determinista y reproducible; permite medir el algoritmo sin ruido de plataforma | No demuestra funcionamiento en vivo |
-
-No son excluyentes: lo más probable es que replay sea la base experimental y VoIP o altavoz la
-demostración. Pero hay que decidirlo y escribirlo.
+| Opción                                                  | Qué demuestra                                               | Estado post 9 de septiembre                       |
+| ------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------- |
+| Motor sobre grabaciones reproducidas como stream        | Algoritmo completo, incrementalidad, latencia, anticipación | **Base experimental obligatoria aprobada**        |
+| App con llamada VoIP controlada (el audio es de la app) | Funcionamiento durante una conversación real                | **Objetivo principal del prototipo aprobado**     |
+| Micrófono/altavoz en laboratorio                        | Concepto interactivo rápido                                 | **Despriorizado** (mezcla canales / mala calidad) |
+| AOSP / root / app de sistema                            | Acceso privilegiado a telefonía                             | Solo _stretch goal_                               |
+| App stock escuchando cualquier llamada del dialer       | Producto equivalente a integración OEM                      | **Fuera de alcance confirmado**                   |
 
 ### D06 — Definir la gobernanza de datos
 
 - **Pregunta:** ¿qué se grabará, con qué consentimiento, dónde vivirá, quién
   accederá, qué podrá publicarse y cuándo se eliminará?
-- **Tipo:** decisión ética con tutor.
-- **Responsable:** por autoasignación; validación del tutor.
-- **Evidencia:** plan de datos y consentimiento aprobados antes de grabar.
+- **Tipo:** decisión ética y metodológica interna.
+- **Responsable:** por autoasignación (Issue #22).
+- **Evidencia:** plan de datos y formulario de consentimiento informado simple.
 - **Desbloquea:** corpus piloto.
-- **Estado:** abierto.
+- **Estado:** abierto (UNSTA no exige trámite formal; autogestión de consentimiento con voluntarios).
 
-## Decisiones precisas pero bloqueadas
+## Decisiones precisas de alcance y experimentación
 
 ### D03 — Congelar alcance y contribución
 
 - **Pregunta:** ¿cuál es el núcleo obligatorio, cuáles son los stretch goals y qué
   queda fuera de alcance?
-- **Bloqueada por:** D01, D02 y D05.
+- **Evidencia:** [Plan de Trabajo §6 y §15](../propuesta/PLAN-DE-TRABAJO.md) y [minuta del 9 de septiembre](seguimientos/2026-09-09.md).
 - **Salida:** objetivos, aporte y lista explícita de exclusiones.
+- **Estado:** resuelto (2026-09-09). Núcleo obligatorio y exclusiones (no PSTN, no deepfakes, no biometría) aprobados.
 
 ### D04 — Aprobar preguntas e hipótesis
 
 - **Pregunta:** ¿qué afirmaciones se evaluarán y qué observación podría refutarlas?
-- **Bloqueada por:** D02 y D03.
-- **Salida:** PI1–PI2, evaluaciones E1–E2 y tabla pregunta→evidencia.
+- **Evidencia:** [Plan de Trabajo §5 y §15](../propuesta/PLAN-DE-TRABAJO.md) y [PREGUNTAS-DE-INVESTIGACION.md](../investigacion/PREGUNTAS-DE-INVESTIGACION.md).
+- **Salida:** PI1–PI2 aprobadas, evaluación E1 diagnóstica y E2 secundaria.
+- **Estado:** resuelto (2026-09-09). Aprobadas por el tutor sin objeciones.
 
 ### D07 — Aprobar taxonomía y evento crítico
 
@@ -160,13 +142,12 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 
 - **Pregunta:** ¿se mantiene el foco en adultos mayores y con qué justificación?
 - **Bloqueada por:** D02.
-- **Salida:** justificación reescrita en el anteproyecto y en el Plan de Trabajo.
+- **Salida:** justificación reescrita en el Plan de Trabajo.
 - **Detalle:** el deep research no pide abandonar el foco, pide **cambiar la justificación**: de
   "son los más afectados" —no demostrado para Argentina— a "gravedad potencial de las pérdidas y
   exposición a estafas de suplantación". También advierte no convertir el reclutamiento de adultos
   mayores en un bloqueo del corpus: mejor incluirlos en evaluación y en la prueba de usabilidad.
-  Corresponde a la corrección `C4` de
-  [CORRECCIONES-ANTEPROYECTO.md](../propuesta/CORRECCIONES-ANTEPROYECTO.md).
+  Esta corrección ya quedó integrada en el Plan de Trabajo.
 
 ### D13 — Título definitivo
 
@@ -191,22 +172,6 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **No hacer detección de deepfake en el núcleo:** responde una pregunta distinta
   a detectar manipulación y pedidos peligrosos.
 - **Mantener baselines simples:** reglas y TF–IDF son comparadores obligatorios.
-
-### Acordadas entre Antenucci y Grosso — a ratificar por los cuatro
-
-Las dos surgieron al unificar la documentación. Alinean con lo que ya estaba escrito, pero **no
-fueron discutidas por el grupo completo**; entran a la agenda de la próxima reunión.
-
-- **El tamaño del corpus se decide después del piloto**, con el criterio de
-  [METODO-CREACION-CORPUS.md §7](../datos-etica/METODO-CREACION-CORPUS.md#7-cómo-se-determina-el-tamaño-final):
-  diversidad, incertidumbre estadística, curva de aprendizaje y capacidad real. Quedan descartadas
-  las bandas fijas de 160/240/320 conversaciones que circulaban en la otra lista de decisiones.
-  Motivo: fijar el número antes del piloto obliga después a inventar una justificación
-  retrospectiva.
-- **Documentación y código conviven en este repositorio.** Rige la estructura objetivo de
-  [PLAN-MAESTRO.md §10](PLAN-MAESTRO.md#10-sistema-de-archivos): `src/`, `data/`, `experiments/` y
-  `tests/` se crean cuando exista el primer artefacto real, no antes. Queda sin efecto la idea de
-  llevar el prototipo a un repositorio aparte.
 
 ## No especificado todavía
 
@@ -235,22 +200,3 @@ discute tecnología bloqueada por una decisión anterior. Al cerrar una decisió
 3. actualizar bloqueos y promover lo que ya pueda especificarse;
 4. cambiar el Plan de Trabajo si altera alcance, tiempo o entregables;
 5. pedir validación al tutor si afecta el contrato académico o ético.
-
-## Migración de la numeración anterior
-
-Circuló una lista `D1`–`D10` con otro criterio de ordenamiento. Sus entradas están absorbidas acá.
-Esta tabla existe solo para que quien haya leído aquella lista encuentre dónde quedó cada cosa; la
-numeración vieja no debe volver a usarse.
-
-| Numeración anterior | Dónde quedó |
-|---|---|
-| D1 — alcance y método de captura | dividida en [D03](#d03--congelar-alcance-y-contribución) (alcance) y [D05](#d05--elegir-la-fuente-de-audio-demostrable) (captura) |
-| D2 — lingüístico vs. acústico | [D11](#d11--análisis-lingüístico-o-también-acústico) |
-| D3 — taxonomía de maniobras | [D07](#d07--aprobar-taxonomía-y-evento-crítico) |
-| D4 — construcción y tamaño del corpus | [D06](#d06--definir-la-gobernanza-de-datos) + método del corpus; el tamaño ya está resuelto |
-| D5 — partición train/val/test | [D08](#d08--congelar-protocolo-experimental) |
-| D6 — definición del momento crítico | [D07](#d07--aprobar-taxonomía-y-evento-crítico) |
-| D7 — ASR y modelo de clasificación | [D09](#d09--elegir-asr-y-detector) |
-| D8 — reparto del trabajo | resuelto: [PLAN-MAESTRO.md §8](PLAN-MAESTRO.md#8-líneas-de-trabajo-sin-asignación-fija) usa autoasignación por issues, sin responsables fijos |
-| D9 — foco en adultos mayores | [D12](#d12--encuadre-del-foco-en-adultos-mayores) |
-| D10 — título de la tesis | [D13](#d13--título-definitivo) |

@@ -16,7 +16,7 @@
 - Grosso Luciano.
 - Villalobo Evaristo.
 
-**Tutor:** pendiente de confirmación  
+**Tutor:** Ing. Ernesto Rico  
 **Año:** 2026
 
 > La versión final debe incorporar el logo oficial de UNSTA y respetar la plantilla
@@ -251,25 +251,23 @@ revisiones, sin imponer áreas permanentes por nombre.
 
 Las mitigaciones están en [REGISTRO-RIESGOS.md](../gestion/REGISTRO-RIESGOS.md).
 
-La propuesta concreta de reclutamiento y escala está en
-[PLAN-PARTICIPANTES-Y-CORPUS.md](../datos-etica/PLAN-PARTICIPANTES-Y-CORPUS.md).
+La propuesta de diseño del corpus está en
+[METODO-CREACION-CORPUS.md](../datos-etica/METODO-CREACION-CORPUS.md).
 
 ## 14. Criterio de éxito
 
 El proyecto será exitoso si responde las preguntas con un procedimiento honesto y reproducible, entrega un pipeline demostrable y documenta sus límites. No se fija una accuracy arbitraria como condición. Un resultado que muestre baja anticipación, degradación por ASR o superioridad de un baseline simple sigue siendo un resultado válido si el experimento está bien diseñado.
 
-## 15. Decisiones solicitadas al profesor el 9 de septiembre
+## 15. Decisiones resueltas con el profesor el 9 de septiembre
 
-1. ¿Aprueba PI1 y PI2 como preguntas centrales, la comparación manual-vs-ASR como
-   evaluación diagnóstica y la explicación como objetivo secundario?
-2. ¿Aprueba replay como base experimental, altavoz externo como demo inicial y
-   VoIP controlado como integración objetivo?
-3. ¿Aprueba el alcance fuera de PSTN universal, deepfake e identificación de voz?
-4. ¿Qué aprobación requiere antes de grabar voces de voluntarios?
-5. ¿Qué plantilla, estilo bibliográfico, entregables y fecha exacta debemos usar?
+1. **Preguntas centrales:** Aprobadas PI1 y PI2 como preguntas principales; comparación manual vs. ASR como diagnóstica y explicación como objetivo secundario.
+2. **Fuente de audio:** Aprobada la estrategia escalonada: replay de grabaciones como base experimental reproducible y VoIP controlada como integración prototipo. Altavoz despriorizado.
+3. **Límites de alcance:** Aprobado dejar fuera PSTN universal, deepfake y biometría de voz.
+4. **Procedimiento ético y privacidad:** UNSTA no requiere comité de ética formal. El corpus se compone de simulaciones con datos ficticios y sin víctimas reales; la privacidad se garantiza por diseño en el dispositivo (*on-device*).
+5. **Requisitos académicos:** Defensa presencial última/penúltima semana de diciembre 2026. Tutor asignado: Ing. Ernesto Rico. Entrega digital promedio ~100 págs (ver [REQUISITOS-ACADEMICOS.md](REQUISITOS-ACADEMICOS.md)).
 
 ## 16. Aprobaciones y cambios
 
-| Fecha      | Versión | Decisión del profesor/tutor | Cambio requerido | Responsable     |
-| ---------- | ------- | --------------------------- | ---------------- | --------------- |
-| 2026-09-09 | 1.0     | pendiente                   | pendiente        | por autoasignar |
+| Fecha      | Versión | Decisión del profesor/tutor | Cambio requerido | Responsable |
+| ---------- | ------- | --------------------------- | ---------------- | ----------- |
+| 2026-09-09 | 1.0     | Dirección y alcance aprobados sin observaciones críticas. Sugirió investigar ventana de contexto, prefactibilidad, baselines, tipos de manipulación policial y estrategia de modelos. | Actualizar requisitos académicos, mapa de decisiones y avanzar a factibilidad técnica (Ciclo 1). | Equipo |

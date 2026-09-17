@@ -20,7 +20,7 @@ de que la víctima entregó el código no protege a nadie. Esa distinción es la
 
 ## Tres marcas temporales, no una
 
-El [anteproyecto](../propuesta/ANTEPROYECTO.md) habla de un solo "momento crítico". Hacen falta
+El planteo preliminar hablaba de un solo "momento crítico". Hacen falta
 **tres**, y la distinción importa:
 
 | Marca | Definición |
@@ -120,6 +120,6 @@ Todo el resto del proyecto es, en esencia, lograr que esa figura sea científica
 
 - ¿Anotamos las tres marcas o solo `T_R`? Anotar `T_C` obliga a guionar también la reacción de la
   víctima, lo que encarece cada semilla del corpus.
-- ¿Cuál es la restricción de falsos positivos fijada de antemano? El anteproyecto la menciona pero
-  no la define. Sin ese número la hipótesis no es falsable.
+- ¿Cuál es la restricción de falsos positivos fijada de antemano? Debe definirse un umbral
+  concreto para que la hipótesis sea falsable.
 - ¿`Preventive@δ` contra `T_C` o contra `T_R`?

@@ -43,7 +43,7 @@ Acá tengo las notas y resultados obtenidos:
 <PEGAR NOTAS, RESPUESTAS DEL PROFESOR, ENLACES O DATOS>
 
 Por favor:
-1. Identificá qué fuentes de verdad del proyecto se ven afectadas (según AGENTS.md y GUIA-DE-ARCHIVOS.md) e integrá esta información.
+1. Identificá qué fuentes de verdad del proyecto se ven afectadas (según AGENTS.md y README.md) e integrá esta información.
 2. Si resuelve o altera alguna decisión de MAPA-DECISIONES.md, actualizala.
 3. Si impacta o mitiga riesgos en REGISTRO-RIESGOS.md, reflejalo.
 4. Registrá el avance en la bitácora semanal en curso (docs/gestion/bitacora/).
