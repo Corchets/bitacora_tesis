@@ -1,0 +1,29 @@
+{
+  "baja": {
+    "asr": "moonshine-ai/moonshine-streaming-tiny-es",
+    "detector": "tfidf",
+    "techo_mb": 256,
+    "hilos_total": 2,
+    "hilos_asr": 1,
+    "hilos_detector": 1,
+    "gpu": false
+  },
+  "media": {
+    "asr": "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "detector": "tfidf",
+    "techo_mb": 512,
+    "hilos_total": 4,
+    "hilos_asr": 3,
+    "hilos_detector": 1,
+    "gpu": false
+  },
+  "alta": {
+    "asr": "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "detector": "tfidf",
+    "techo_mb": 1024,
+    "hilos_total": 6,
+    "hilos_asr": 4,
+    "hilos_detector": 2,
+    "gpu": false
+  }
+}

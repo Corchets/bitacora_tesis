@@ -1,0 +1,23 @@
+{
+  "_nota": "Frases INVENTADAS por el equipo para el stub TF-IDF del spike #29. No son corpus, no son datos reales, no cierran D09.",
+  "estafa": [
+    "decime el codigo que te llego por mensaje para validar la cuenta",
+    "no cortes que se bloquea la transferencia pasame el token ahora",
+    "tenes que autorizar el pago urgente antes de que se caiga el sistema",
+    "instalá esta aplicacion para acceso remoto y compartime la pantalla",
+    "confirmame tu clave y los numeros de atras de la tarjeta",
+    "te llamo del banco hay un movimiento raro necesito tu cbu y alias",
+    "abri el enlace que te mande y pone tu contraseña para desbloquear",
+    "decime el pin de seis digitos rapido que se vence"
+  ],
+  "legitima": [
+    "hola llamo para confirmar el turno del dentista de mañana",
+    "el pedido llega mañana a la mañana avisame si no estas",
+    "te paso el resumen de la reunion del martes por correo",
+    "el taller termino el auto podes pasar a buscarlo a la tarde",
+    "mañana jugamos al futbol a las ocho traé la camiseta blanca",
+    "la farmacia ya tiene los remedios de la receta",
+    "el curso empieza la semana que viene te anoto si queres",
+    "llegamos tarde por el trafico nos vemos en la puerta"
+  ]
+}

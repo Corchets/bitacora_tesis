@@ -1,0 +1,8 @@
+# Llamada INVENTADA para --texto. Una linea = un turno. `#` y vacias se ignoran.
+hola hablo del banco tenemos un movimiento extraño en tu cuenta
+si digame que paso
+tenes que actuar rapido si no se bloquea la tarjeta
+bueno que tengo que hacer
+decime el codigo de seis digitos que te llego por mensaje
+el codigo dice cuatro cinco uno dos tres tres
+listo gracias ya esta cortamos aca

@@ -1,0 +1,26 @@
+# Spike #29: una corrida, no un servicio. Se usa con `docker compose run --rm`.
+# GAMA=alta  -> mem_limit 1g   (esta corrida)
+# GAMA=media -> mem_limit 512m (prevista, no correr en #29)
+# GAMA=baja  -> mem_limit 256m (prevista, no correr en #29)
+services:
+  corrida:
+    build: .
+    # Techo de RAM de los dos ayudantes juntos. Cambiar junto con GAMA.
+    mem_limit: 1g
+    # Sin GPUs: el contenedor no ve placa de escritorio. A proposito no hay
+    # `cpus:`: los hilos son config del proceso (hilos_asr/hilos_detector).
+    environment:
+      GAMA: ${GAMA:-alta}
+      HF_HUB_CACHE: /models/hf
+      # Tope para que ONNX/OpenMP no disparen hilos de mas. Alta=6, media=4, baja=2.
+      OMP_NUM_THREADS: "6"
+      OPENBLAS_NUM_THREADS: "6"
+      MKL_NUM_THREADS: "6"
+    volumes:
+      # WAV requerido por compose aunque corras --texto (ahi se ignora: WAV=/tmp/nada.wav alcanza).
+      - ${WAV:?Definí WAV=/ruta/a/llamada.wav (WAV 16kHz mono, fuera de Git)}:/data/llamada.wav:ro
+      - hf-cache:/models/hf
+      - ./artifacts:/app/artifacts
+
+volumes:
+  hf-cache:
