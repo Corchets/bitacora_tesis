@@ -108,10 +108,11 @@ fuera de alcance. Los tres escenarios no son equivalentes:
 
 Procesar en el extremo no implica necesariamente modificar ni interrumpir la red del prestador, pero
 tampoco convierte a la aplicación en jurídicamente neutra. Si el camino de producto exige integración
-con fabricante, sistema o prestador, habrá que determinar responsabilidades, avisos, consentimiento,
-seguridad y normativa sectorial para esa arquitectura concreta. El Proyecto Final documenta esa
-brecha como limitación y trabajo futuro; no afirma prefactibilidad legal ni técnica de captura PSTN
-universal.
+con fabricante, sistema o prestador, habrá que determinar la base jurídica aplicable y, según
+corresponda, los deberes de información o consentimiento, las responsabilidades de cada actor, las
+medidas de seguridad y la normativa sectorial para esa arquitectura concreta. El Proyecto Final
+documenta esa brecha como limitación y trabajo futuro; no afirma prefactibilidad legal ni técnica de
+captura PSTN universal.
 
 ## 6. Reglas éticas para los datos del corpus
 
