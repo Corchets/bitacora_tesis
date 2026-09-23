@@ -21,12 +21,82 @@ conversación permanecen en el mismo split.
 El equipo construye un catálogo a partir de:
 
 1. modalidades documentadas por organismos oficiales argentinos;
-2. tipologías y progresiones descriptas en literatura académica;
-3. negativos legítimos diseñados para compartir vocabulario con cada fraude;
-4. revisión del profesor/tutor para pertinencia y seguridad.
+2. alertas de prevención publicadas por entidades financieras reguladas;
+3. tipologías y progresiones descriptas en literatura académica;
+4. negativos legítimos diseñados para compartir vocabulario con cada fraude;
+5. revisión del profesor/tutor para pertinencia y seguridad.
+
+El punto 2 se agregó al incorporar `SC-SOPORTE-REMOTO-01` con una alerta de Banco Galicia sobre
+estafa de pantalla compartida. Mateo aprobó el 2026-09-23 usar alertas de entidades financieras
+reguladas como fuentes para el catálogo v0, además de las oficiales: pueden documentar una modalidad
+observada por la entidad, pero no permiten inferir su prevalencia nacional ni las prácticas de todos
+los bancos. Se registran igual que las demás: afirmación concreta, URL y fecha de consulta.
 
 El catálogo vive en `CATALOGO-ESCENARIOS.csv`. Una modalidad entra al corpus cuando
 tiene fuente, acción crítica, evidencia observable y un negativo comparable.
+
+### Columnas del catálogo
+
+| Columna | Qué contiene |
+|---|---|
+| `scenario_id` | Identificador estable. `SC-` para fraudulenta, `LG-` para legítima difícil |
+| `familia` | Modalidad amplia: `banco`, `soporte`, `organismo_previsional`, `familiar`, `premio` |
+| `clase` | `vishing` o `legitima_dificil` |
+| `titulo` | Nombre corto de la situación |
+| `fuente` | En una fraudulenta, afirmación concreta que respalda la modalidad. En una legítima difícil, **diseño ficticio del equipo** y fuente de la conducta segura, no de la llamada exacta. Incluir URL y **fecha de consulta** |
+| `identidad_suplantada_o_contexto` | Identidad que afirma el llamante o contexto de una consulta iniciada por la persona |
+| `objetivo` | Qué busca conseguir |
+| `maniobras` | Etiquetas de la capa 1 del [manual](MANUAL-ANOTACION.md#capa-1--técnicas-de-manipulación), separadas por `;` |
+| `accion_critica` | Etiqueta de la capa 2 que marca `T_R`, o `NONE` en las legítimas |
+| `negativo_pareado` | `scenario_id` de una contraparte comparable. Un negativo puede servir a varias semillas del mismo contexto; la relación no tiene que ser recíproca |
+| `estado` | Ver abajo |
+| `notas` | Advertencias de seguridad y datos ficticios a usar |
+
+Las etiquetas de `maniobras` y `accion_critica` se definen en el
+[manual de anotación](MANUAL-ANOTACION.md), que es su única fuente de verdad. Usarlas acá en vez de
+prosa permite validar el catálogo con un script y evita que la semilla y la anotación hablen dos
+idiomas distintos.
+
+Mateo aprobó el 2026-09-23 usar etiquetas de la capa 1 en `maniobras` como contrato de trabajo del
+catálogo v0. No se congela con esto la taxonomía completa ni las reglas temporales de
+[D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
+
+### Valores de `estado`
+
+| Valor | Significado | Qué habilita |
+|---|---|---|
+| `borrador` | La fila existe pero le falta algo: fuente, negativo pareado o definición | Nada. Es trabajo en curso |
+| `con_fuente` | La modalidad fraudulenta o la conducta segura del negativo tiene respaldo citado; el escenario legítimo concreto se identifica como ficticio | Se puede discutir y revisar |
+| `revisado` | Revisión cruzada de fuente, pertinencia, pareo y seguridad documentada bajo responsabilidad de un integrante distinto del autor; se declara si el contraste usó asistencia automatizada | Queda lista para seleccionar; la grabación sigue sujeta al método y consentimiento del piloto |
+| `descartado` | Se decidió no usarla. La fila **se conserva** con el motivo en `notas` | Nada, pero deja registro |
+
+La revisión cruzada del catálogo v0 se registró el 2026-09-23 bajo responsabilidad de Mateo, quien
+leyó y valoró los escenarios y encargó a Codex el contraste detallado de fuentes, pareos y seguridad.
+La revisión de las URL fue asistida; no se afirma que Mateo haya abierto personalmente cada una.
+Se corrigieron afirmaciones no respaldadas y se diseñaron negativos comparables. `revisado` no
+significa que una llamada haya sido grabada ni que el profesor haya aprobado el tamaño o la
+composición del piloto de [#22](https://github.com/Corchets/bitacora_tesis/issues/22).
+
+Una semilla descartada no se borra. La sección 10 exige registrar las exclusiones con su motivo, y
+el mismo criterio vale acá: si alguien pregunta por qué una modalidad no está en el corpus, la
+respuesta tiene que estar en el catálogo y no en el historial de Git.
+
+### Procedencia del catálogo v0
+
+Quien revise el catálogo necesita saber cómo se construyó cada parte, porque no todas tienen el
+mismo respaldo:
+
+| Parte | Quién la produjo |
+|---|---|
+| Las cuatro filas iniciales de banco y WhatsApp | El equipo, 2026-09-07 |
+| Las nueve semillas fraudulentas vigentes | Derivadas de modalidades que describen los organismos públicos y la entidad financiera regulada citados en cada fila; los detalles de dramatización son ficticios |
+| Los ocho negativos difíciles | Diseñados por el equipo. Las fuentes citadas respaldan conductas seguras, **no esas llamadas exactas** |
+| La redacción de filas y la búsqueda de fuentes | Asistida por modelos de lenguaje. Evaristo informó una primera comprobación de URL; Mateo encargó una segunda pasada asistida de afirmaciones y enlaces el 2026-09-23 |
+
+Un intento previo construyó las semillas primero y buscó la fuente después. Se descartó: producía
+escenarios sin respaldo y dejaba afuera modalidades documentadas. El orden correcto es el de la
+sección 2 — la fuente primero, la semilla después — y el catálogo vigente se rehizo con ese orden.
+
 
 ## 3. Cómo se diseña una semilla fraudulenta
 
@@ -45,6 +115,10 @@ Cada semilla especifica:
 
 La ficha contiene intenciones y restricciones, no frases obligatorias. Así se evita
 que todas las conversaciones sean copias léxicas.
+
+El campo `accion_critica` del catálogo fija el pedido riesgoso principal de la semilla. Si una
+dramatización agrega otro pedido de una clase distinta, se registra como variante y se anotan ambos
+eventos; no se usa ese agregado para atribuir a la fuente un detalle que no documenta.
 
 ## 4. Cómo se diseña el negativo difícil
 
@@ -84,6 +158,16 @@ Los participantes reciben su propia ficha. Una persona del equipo controla que l
 grabación respete el escenario y detiene cualquier uso accidental de datos reales.
 
 ## 6. Piloto
+
+> **Sin resolver.** El catálogo candidato tiene nueve semillas fraudulentas y ocho negativos
+> legítimos; no son diecisiete grabaciones obligatorias. Esta sección plantea cuatro semillas de
+> cada clase para el piloto y 12–20 conversaciones en total, que pueden ser distintas
+> interpretaciones de las semillas seleccionadas. La selección concreta, las repeticiones por
+> semilla y el tamaño se deciden en
+> [D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) vía
+> [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22), con validación del tutor antes
+> de grabar. Los números de abajo siguen siendo una propuesta de trabajo, no una aprobación del
+> piloto.
 
 1. Crear 4 semillas fraudulentas y 4 legítimas difíciles.
 2. Grabar 12–20 conversaciones con integrantes del equipo y colaboradores de confianza.
