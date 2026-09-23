@@ -26,12 +26,11 @@ etiquetas de ambas capas, o ninguna.
 | `TRUST_BUILDING` | Usa datos, procedimientos o jerga para parecer legítimo: menciona el DNI, dice un número de trámite, recita pasos | El solo hecho de ser legítimo. Un banco real que dice su nombre no construye confianza artificialmente |
 | `PERSISTENCE_DISTRACTION` | Insiste tras una objeción, redirige la duda o mantiene a la persona cognitivamente ocupada | Repreguntar una vez porque no se escuchó |
 
-> **Renombre propuesto (2026-09-17):** esta capa tenía la etiqueta `IMPERSONATION_AUTHORITY`. El
-> problema apareció al escribir los negativos difíciles del
-> [catálogo](CATALOGO-ESCENARIOS.csv): un banco real que llama **no suplanta a nadie**, pero presenta
-> autoridad igual, y esa es justamente la señal que el detector observa. `IMPERSONATION` nombraba la
-> ilicitud; `AUTHORITY_CLAIM` nombra la señal observable, que es lo que un anotador puede marcar sin
-> saber de antemano si la llamada es fraudulenta. Es parte de lo que cierra
+> **Aprobación parcial para el catálogo v0 (Mateo, 2026-09-23):** esta capa tenía la etiqueta
+> `IMPERSONATION_AUTHORITY`. Los negativos muestran por qué era equívoca: una entidad legítima no
+> suplanta a nadie, pero puede presentarse como autoridad. `AUTHORITY_CLAIM` nombra esa señal
+> observable sin presuponer fraude. El cambio queda adoptado como etiqueta de trabajo del catálogo;
+> la taxonomía completa y el marcado temporal siguen abiertos en
 > [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
 
 Se corresponden con las maniobras permitidas que el
@@ -112,10 +111,10 @@ es maquillar el número: es que la taxonomía está mal definida y hay que arreg
 
 - ¿Adoptamos las 6+6 tal cual, o las derivamos de un relevamiento propio de modalidades argentinas
   (UFECI, ANSES, PAMI, BCRA, prensa)? **Primer dato empírico (2026-09-17):** el relevamiento del
-  [catálogo](CATALOGO-ESCENARIOS.csv) sobre cuatro fuentes oficiales no encontró **ninguna**
-  modalidad que documente `REQUEST_REMOTE_ACCESS` por teléfono. La única fuente que la describe es
-  una alerta de Banco Galicia sobre pantalla compartida, admitida por el equipo como entidad
-  financiera regulada. La etiqueta sobrevive con **una sola semilla y una sola fuente**: conviene
+  [catálogo](CATALOGO-ESCENARIOS.csv) sobre fuentes oficiales no identificó una modalidad que
+  documente `REQUEST_REMOTE_ACCESS` por teléfono. La alerta de Banco Galicia sí describe la
+  pantalla compartida en una llamada; Mateo aprobó el 2026-09-23 usarla como fuente de una entidad
+  financiera regulada. La etiqueta tiene **una sola semilla documentada en el catálogo**: conviene
   mirarla de nuevo al cerrar D07.
 - Las modalidades argentinas concretas — código de WhatsApp, "premio de ANSES", falso soporte de
   billetera virtual — ¿son etiquetas nuevas o instancias de las existentes?
