@@ -60,9 +60,13 @@ Las cinco opciones sobre la mesa, con el detalle técnico en
   accederá, qué podrá publicarse y cuándo se eliminará?
 - **Tipo:** decisión ética y metodológica interna.
 - **Responsable:** por autoasignación (Issue #22).
-- **Evidencia:** plan de datos y formulario de consentimiento informado simple.
+- **Evidencia:** plan de datos, formulario de consentimiento informado simple y
+  [catálogo de escenarios revisado](../datos-etica/CATALOGO-ESCENARIOS.csv) (#17).
 - **Desbloquea:** corpus piloto.
 - **Estado:** abierto (UNSTA no exige trámite formal; autogestión de consentimiento con voluntarios).
+  El catálogo ofrece nueve semillas fraudulentas y ocho negativos candidatos; #22 debe decidir el
+  subconjunto del piloto, sus repeticiones, participantes, consentimiento y retención, con validación
+  del tutor antes de grabar. Tener escenarios revisados no aprueba todavía el piloto.
 
 ## Decisiones precisas de alcance y experimentación
 
@@ -86,6 +90,10 @@ Las cinco opciones sobre la mesa, con el detalle técnico en
 - **Pregunta:** ¿qué maniobras y pedidos se anotan, y cómo se marcan `T_R` y `T_C`?
 - **Bloqueada por:** D02, D04 y D06.
 - **Salida:** manual de anotación v0 probado por los cuatro integrantes.
+- **Estado:** abierto. Mateo aprobó el 2026-09-23 usar `AUTHORITY_CLAIM` en lugar de
+  `IMPERSONATION_AUTHORITY` y etiquetas de capa 1 en `maniobras` para el catálogo v0 (#17).
+  Es una aprobación parcial de trabajo: falta probar la taxonomía completa, adjudicar ambigüedades
+  y fijar las marcas temporales antes de cerrar D07.
 
 Hay una propuesta concreta de dos capas multi-label de 6 etiquetas cada una en
 [MANUAL-ANOTACION.md](../datos-etica/MANUAL-ANOTACION.md), con el principio de no superar la docena

@@ -103,6 +103,26 @@ El desarrollo completo y sus límites están en
 [PRIVACIDAD-DEL-SISTEMA.md](../datos-etica/PRIVACIDAD-DEL-SISTEMA.md). No se trata de un dictamen
 jurídico ni de una habilitación general para desplegar el sistema sobre llamadas reales.
 
+### 2.2. Fuentes primarias para escenarios argentinos (#17)
+
+La revisión cruzada del 2026-09-23 reunió modalidades documentadas de suplantación bancaria,
+familiar y previsional en la [advertencia de UFECRI](https://www.fiscales.gob.ar/procuracion-general/la-unidad-fiscal-especializada-en-investigacion-criminal-compleja-advierte-sobre-estafas-telefonicas-a-personas-mayores/),
+pedidos de códigos y secretos en las [recomendaciones del BCRA](https://www.bcra.gob.ar/como-prevenir-estafas-virtuales/),
+y falsos beneficios en la [alerta de ANSES](https://www.anses.gob.ar/noticias/anses-nunca-solicita-datos-personales-claves-o-informacion-bancaria-0).
+Para dos afirmaciones que exigían más precisión se incorporaron una [fuente oficial sobre el código
+de WhatsApp recibido por SMS](https://www.argentina.gob.ar/sites/default/files/2022/07/recomendaciones_evitar_fraudes_whatsapp.pdf)
+y una [advertencia del BCRA sobre ofertas de premios por teléfono](https://www.bcra.gob.ar/noticias/recomendaciones-en-el-dia-internacional-de-la-seguridad-de-la-informacion/).
+La [alerta de Banco Galicia](https://www.galicia.ar/personas/educacion-financiera/alerta-por-estafa-de-pantalla-compartida)
+respalda la semilla de pantalla compartida como reporte de una entidad financiera; no mide prevalencia
+en Argentina ni describe las prácticas de todos los bancos.
+
+Las afirmaciones exactas, fechas de consulta y límites por escenario viven en el
+[catálogo](../datos-etica/CATALOGO-ESCENARIOS.csv): nueve semillas fraudulentas candidatas y ocho
+negativos legítimos diseñados por el equipo. Estos negativos no son llamadas reales documentadas por
+las fuentes. El catálogo no determina cuántas conversaciones se grabarán; esa selección permanece
+abierta en [D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) y el
+[issue #22](https://github.com/Corchets/bitacora_tesis/issues/22).
+
 ## 3. Matriz comparativa
 
 | Sistema | Nivel de análisis | Vector de detección | Ejecución | ¿Cubre manipulación psicológica? | Reproducible académicamente |

@@ -70,9 +70,8 @@ o realizar una operación.
 
 - Líneas 1 a 3: las modalidades salen de las fuentes del
   [catálogo de escenarios](../datos-etica/CATALOGO-ESCENARIOS.csv) (issue
-  [#17](https://github.com/Corchets/bitacora_tesis/issues/17), con las fuentes incorporadas en el
-  PR [#31](https://github.com/Corchets/bitacora_tesis/pull/31), pendiente de revisión): BCRA, ANSES, UFECRI-MPF, Ministerio
-  de Seguridad y Banco Galicia, consultadas el 2026-09-17. Tres escenarios que ilustran el problema:
+  [#17](https://github.com/Corchets/bitacora_tesis/issues/17)): BCRA, ANSES, UFECRI-MPF, Ministerio
+  de Seguridad y Banco Galicia, con la fecha de consulta registrada en cada fila. Tres escenarios que ilustran el problema:
   `SC-BANK-OTP-01` (código de verificación), `SC-ORG-BENEFICIO-01` (beneficio inexistente) y
   `SC-FAMILIAR-DINERO-01` (familiar que pide dinero).
 - Línea 4: el "antes" es lo que mide PI2; ver `T_R` y `T_C` en
@@ -85,9 +84,9 @@ o realizar una operación.
 **Beneficiario y foco en adultos mayores:** queda abierto en
 [D12](../gestion/MAPA-DECISIONES.md#d12--encuadre-del-foco-en-adultos-mayores). La formulación no
 restringe el usuario por edad. Si el foco se mantiene, se justifica por la gravedad potencial de las
-pérdidas y la exposición a estafas de suplantación, no por "son los más afectados". UFECRI-MPF
-documenta la suplantación de familiares dirigida "generalmente" a personas mayores, lo que sostiene
-una modalidad, no una prevalencia.
+pérdidas y la exposición a estafas de suplantación, no por "son los más afectados". La advertencia
+de UFECRI-MPF que respalda `SC-FAMILIAR-DINERO-01` está dirigida a personas mayores: eso muestra que
+la modalidad las alcanza, no que sean las más afectadas.
 
 ## 3. Objetivo general
 
