@@ -52,6 +52,12 @@ llamada. Para el corpus piloto sí existe una grabación temporal y consentida; 
 define en el [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22) y no se cierra en este
 documento.
 
+La inferencia local, el descarte en RAM y la ausencia de cesión son salvaguardas de diseño; no
+prueban por sí solas el cumplimiento integral de la Ley 25.326. Para el corpus se deben completar,
+antes de grabar, la información y aceptación de ambas personas, la finalidad, los plazos, el acceso
+restringido y la atención de pedidos de retiro. Para un despliegue sobre llamadas reales, la base
+jurídica y los deberes frente al otro interlocutor requieren análisis de la arquitectura concreta.
+
 ## 3. Comunicaciones privadas y no interceptación
 
 El [Código Penal actualizado](https://www.argentina.gob.ar/normativa/nacional/16546/actualizacion)
@@ -76,6 +82,12 @@ administra el flujo en el extremo y ambos participantes saben y consienten que s
 esa base, la **hipótesis jurídica de trabajo** es que el prototipo controlado no constituye captación
 indebida por un tercero: no accede a sistemas restringidos ajenos, no elude permisos y no interrumpe
 ni desvía la comunicación. Esta es una inferencia de alcance académico, no una habilitación legal.
+
+El art. 197 se refiere a interrumpir o entorpecer la comunicación. Una alerta local para el usuario
+que no corta, bloquea, desvía ni altera el flujo de la llamada no debe equipararse automáticamente
+a esa conducta. El diseño exacto de la advertencia —visual, vibración o voz— sigue abierto: si se
+considera una salida hablada, habrá que comprobar que no tape el diálogo ni se inyecte en el canal
+del otro interlocutor.
 
 Esta conclusión es **acotada al laboratorio y a la VoIP propia y consentida**. No habilita capturar
 llamadas PSTN ajenas, activar escucha encubierta, instalar la herramienta en el dispositivo de otra

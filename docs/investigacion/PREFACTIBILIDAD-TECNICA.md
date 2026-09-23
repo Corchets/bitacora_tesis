@@ -27,6 +27,14 @@ operativo ni a las demás aplicaciones.
 | **Media (objetivo)** | **6–8 GB** | **512 MB** | **4 (3 ASR + 1 detector)** | **gate principal** |
 | Alta | clase 8 GB | 1024 MB | 6 (4 ASR + 2 detector) | sensibilidad / límite superior |
 
+**Origen de los presupuestos.** Los techos de 256/512/1024 MB y 2/4/6 hilos provienen del
+[recorte de modelos](PRIMERA-INVESTIGACION-MODELOS.md) como configuraciones iniciales para comparar
+tres perfiles. Duplicar el techo de memoria entre perfiles permite observar dónde deja de caber el
+pipeline; cuatro hilos en el perfil medio reservan un presupuesto conjunto para ASR y detector. Son
+límites de la prueba, no un relevamiento de la RAM o los núcleos promedio del mercado, ni una
+garantía de que los modelos entren en ellos. Los 6–8 GB físicos identifican una clase de dispositivo
+objetivo propuesta por el equipo; al medir en Android se registra el modelo y su hardware real.
+
 El prototipo obligatorio corre en una PC limitada a esos presupuestos, sobre CPU y sin GPU. Esa
 medición demuestra comportamiento bajo recursos acotados, pero **no equivale** a una medición en
 ARM ni habilita afirmar que el sistema ya funciona en un teléfono. La demo Android es la única que
@@ -50,6 +58,15 @@ las limitaciones de la simulación están en
 Los umbrales de latencia, memoria e hilos son criterios internos del proyecto. No se presentan como
 límites universales ni como resultados publicados por terceros.
 
+**Por qué estos umbrales.** `RTF < 1` es la condición mínima para que el procesamiento sostenido
+avance más rápido que el audio entrante; por sí sola no garantiza un aviso oportuno. El p95 de
+1,5 s por turno es un objetivo inicial de respuesta: exige que casi todos los turnos produzcan una
+actualización poco después de terminar. El corte de 2 s distingue una configuración degradada.
+Ninguno de esos dos tiempos proviene de un promedio de dispositivos o de una norma clínica: deberán
+contrastarse con el margen real entre la alerta y la solicitud o entrega riesgosa (`T_A`, `T_R`,
+`T_C`) y con pruebas de uso. Si los resultados muestran que el aviso llega tarde, se revisa el
+criterio y se registra la revisión; no se cambia retroactivamente para declarar éxito una corrida.
+
 ## 3. Batería y temperatura en la demo Android
 
 La PC limitada no permite concluir nada sobre consumo energético móvil. Si se ejecuta la demo
@@ -64,6 +81,8 @@ La demo se considera aceptable cuando:
 - no hay degradación que lleve el `RTF` a 1 o más durante la segunda mitad de la corrida.
 
 Estos números son un **gate operativo propuesto**, no una afirmación de autonomía comercial. Se
+eligieron como presupuesto exploratorio para comparar pipeline y control durante una sesión corta;
+no representan una media de consumo de teléfonos ni una recomendación del fabricante. Se
 registran modelo de teléfono, versión de Android, capacidad/estado de batería, temperatura ambiente,
 brillo y conectividad. Android recomienda medir el consumo con Power Profiler, métricas de potencia
 o `Batterystats`, y expone el estado térmico mediante `PowerManager` ([documentación de consumo](https://developer.android.com/topic/performance/power/battery-historian),
@@ -84,8 +103,9 @@ térmica móvil no evaluadas”**.
 
 ## 5. Regla de conclusión
 
-- **Prefactible para el objetivo:** el perfil medio cumple todos los gates de laboratorio y la demo
-  Android, si se hace, cumple batería y térmica.
+- **Prefactible para el objetivo Android:** el perfil medio cumple todos los gates de laboratorio,
+  existe una medición en un Android objetivo y esta cumple rendimiento, batería y térmica. El gate
+  de calidad crítica debe estar definido antes de clasificar el resultado.
 - **Prefactible solo en laboratorio:** cumple el perfil medio en PC limitada, pero no existe medición
   móvil.
 - **No prefactible con la configuración evaluada:** falla `RTF`, latencia, memoria, estabilidad o
