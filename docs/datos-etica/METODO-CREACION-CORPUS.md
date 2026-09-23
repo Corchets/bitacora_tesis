@@ -67,13 +67,15 @@ catálogo v0. No se congela con esto la taxonomía completa ni las reglas tempor
 |---|---|---|
 | `borrador` | La fila existe pero le falta algo: fuente, negativo pareado o definición | Nada. Es trabajo en curso |
 | `con_fuente` | La modalidad fraudulenta o la conducta segura del negativo tiene respaldo citado; el escenario legítimo concreto se identifica como ficticio | Se puede discutir y revisar |
-| `revisado` | Un integrante distinto de quien diseñó la fila verificó fuente, pertinencia, pareo y seguridad | Queda lista para seleccionar; la grabación sigue sujeta al método y consentimiento del piloto |
+| `revisado` | Revisión cruzada de fuente, pertinencia, pareo y seguridad documentada bajo responsabilidad de un integrante distinto del autor; se declara si el contraste usó asistencia automatizada | Queda lista para seleccionar; la grabación sigue sujeta al método y consentimiento del piloto |
 | `descartado` | Se decidió no usarla. La fila **se conserva** con el motivo en `notas` | Nada, pero deja registro |
 
-La revisión cruzada del catálogo v0 se registró el 2026-09-23 bajo responsabilidad de Mateo, con
-asistencia de Codex para contrastar fuentes y consistencia. Se corrigieron afirmaciones no respaldadas
-y se diseñaron negativos comparables. `revisado` no significa que una llamada haya sido grabada ni
-que el profesor haya aprobado el tamaño o la composición del piloto de [#22](https://github.com/Corchets/bitacora_tesis/issues/22).
+La revisión cruzada del catálogo v0 se registró el 2026-09-23 bajo responsabilidad de Mateo, quien
+leyó y valoró los escenarios y encargó a Codex el contraste detallado de fuentes, pareos y seguridad.
+La revisión de las URL fue asistida; no se afirma que Mateo haya abierto personalmente cada una.
+Se corrigieron afirmaciones no respaldadas y se diseñaron negativos comparables. `revisado` no
+significa que una llamada haya sido grabada ni que el profesor haya aprobado el tamaño o la
+composición del piloto de [#22](https://github.com/Corchets/bitacora_tesis/issues/22).
 
 Una semilla descartada no se borra. La sección 10 exige registrar las exclusiones con su motivo, y
 el mismo criterio vale acá: si alguien pregunta por qué una modalidad no está en el corpus, la
@@ -89,7 +91,7 @@ mismo respaldo:
 | Las cuatro filas iniciales de banco y WhatsApp | El equipo, 2026-09-07 |
 | Las nueve semillas fraudulentas vigentes | Derivadas de modalidades que describen los organismos públicos y la entidad financiera regulada citados en cada fila; los detalles de dramatización son ficticios |
 | Los ocho negativos difíciles | Diseñados por el equipo. Las fuentes citadas respaldan conductas seguras, **no esas llamadas exactas** |
-| La redacción de filas y la búsqueda de fuentes | Asistida por un modelo de lenguaje, con verificación humana de cada URL |
+| La redacción de filas y la búsqueda de fuentes | Asistida por modelos de lenguaje. Evaristo informó una primera comprobación de URL; Mateo encargó una segunda pasada asistida de afirmaciones y enlaces el 2026-09-23 |
 
 Un intento previo construyó las semillas primero y buscó la fuente después. Se descartó: producía
 escenarios sin respaldo y dejaba afuera modalidades documentadas. El orden correcto es el de la
