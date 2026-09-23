@@ -28,7 +28,10 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Evidencia:** problema en cinco líneas, persona/actor y tres escenarios.
 - **Bloqueada por:** ninguna (D01 resuelto).
 - **Desbloquea:** D06 y requisitos.
-- **Estado:** en curso.
+- **Estado:** en curso. Borrador escrito el 2026-09-23 en
+  [PLAN-DE-TRABAJO.md §2](../propuesta/PLAN-DE-TRABAJO.md#formulación-en-cinco-líneas), marcado como
+  propuesta sin discutir; falta la validación de los cuatro integrantes. El foco en adultos mayores
+  sigue en D12.
 
 ### D05 — Elegir la fuente de audio demostrable
 
