@@ -110,6 +110,14 @@ y carísimo de arreglar después.
 Falta fijar además la restricción de falsos positivos **antes** de medir. El anteproyecto la
 menciona pero no la define, y sin ese número la hipótesis no es falsable.
 
+- **Recorte de trabajo (2026-09-16, no cierra D08):**
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md).
+  Deriva el margen de aceptación desde el máximo de llamadas legítimas con alerta, en lugar de
+  fijar un umbral a ojo, y muestra cómo se acumulan las falsas alarmas con cada actualización.
+  Propone además ventana deslizante con decaimiento y un registro conjunto de eventos.
+  Los números salen de llamadas sintéticas: prueban el mecanismo, no miden rendimiento.
+  Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23).
+
 ### D09 — Elegir ASR y detector
 
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
@@ -170,7 +178,10 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   como grupo de cuatro.
 - **Formato base:** entrega digital, A4, carilla simple, portada institucional,
   resúmenes español/inglés, cuerpo técnico y unas 100 páginas como referencia.
-- **Horizonte:** entrega hacia fines de diciembre de 2026; falta el día exacto.
+- **Horizonte:** entrega hacia fines de diciembre de 2026; falta el día exacto. El
+  equipo trabaja contra un cierre interno propio el 1 de diciembre; el reparto de
+  semanas está en [PLAN-DE-TRABAJO.md §11](../propuesta/PLAN-DE-TRABAJO.md#11-cronograma)
+  y es propuesta sin discutir por los cuatro.
 - **No basar la tesis en capturar cualquier llamada PSTN desde una app Android
   ordinaria:** la plataforma reserva esas fuentes a componentes privilegiados.
 - **Separar motor e integración:** replay en streaming es la base experimental;
@@ -178,6 +189,10 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **No hacer detección de deepfake en el núcleo:** responde una pregunta distinta
   a detectar manipulación y pedidos peligrosos.
 - **Mantener baselines simples:** reglas y TF–IDF son comparadores obligatorios.
+- **Criterios de prefactibilidad (#24):** Mateo informó el 2026-09-22 que el equipo revisó y aprobó
+  los presupuestos y umbrales de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md)
+  como punto de partida para medir, no como evidencia de rendimiento. D09 y la elección de modelos
+  permanecen abiertas; la viabilidad en Android requiere medición en ese entorno.
 
 ## No especificado todavía
 
@@ -193,12 +208,10 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   Hilos de partida: baja 2 (1+1), media 4 (3+1), alta 6 (4+2).
   RAM: **256 / 512 / 1024 MB**. Ver
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
-- Dispositivo objetivo y presupuesto de memoria/latencia.
-  Recorte: prototipo de laboratorio en **PC** (techo de RAM, hilos de CPU y sin GPU
-  de escritorio, una config por gama); demo Android si hay tiempo; iPhone solo como
-  foto de gama alta. Ver
-  [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
-  iOS sigue en [fuera de alcance](#fuera-de-alcance-provisional).
+- Dispositivo Android concreto para la demo y mediciones de rendimiento, batería y temperatura.
+  Los presupuestos de laboratorio ya están definidos en
+  [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), pero no prueban
+  rendimiento móvil.
 - Posibilidad y licencia de publicación del corpus o solo sus metadatos.
 - Técnica estadística final, que depende del tamaño y distribución obtenidos.
 

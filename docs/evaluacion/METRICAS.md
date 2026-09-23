@@ -122,4 +122,8 @@ Todo el resto del proyecto es, en esencia, lograr que esa figura sea científica
   víctima, lo que encarece cada semilla del corpus.
 - ¿Cuál es la restricción de falsos positivos fijada de antemano? Debe definirse un umbral
   concreto para que la hipótesis sea falsable.
+  Método propuesto para derivarlo, en lugar de elegirlo a ojo:
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md) §7.1
+  (se fija primero el máximo de llamadas legítimas con alerta y de ahí sale cuán bueno tiene que
+  ser el detector por actualización). **Propuesta sin discutir.**
 - ¿`Preventive@δ` contra `T_C` o contra `T_R`?

@@ -215,17 +215,52 @@ evaluar en computadora y desplegar el modelo seleccionado después.
 
 ## 11. Cronograma
 
-| Fechas       | Resultado principal                                                  |
-| ------------ | -------------------------------------------------------------------- |
-| 2–9 sep      | propuesta, preguntas, alternativas de audio y decisiones al profesor |
-| 10–23 sep    | alcance aprobado y vertical slice técnico                            |
-| 24 sep–7 oct | corpus/anotación piloto y protocolo ético                            |
-| 8–21 oct     | benchmark ASR, reglas, TF–IDF y primer resultado temporal            |
-| 22 oct–4 nov | corpus v1 y detector incremental                                     |
-| 5–18 nov     | integración end-to-end e instrumentación                             |
-| 19 nov–2 dic | congelamiento y evaluación final                                     |
-| 3–16 dic     | informe completo, defensa y reproducción                             |
-| 17–fin dic   | correcciones, PDF y entrega                                          |
+**Fechas de referencia.** La defensa es presencial a fines de diciembre de 2026 y el
+día exacto sigue pendiente, según la [minuta del 9 de septiembre](../gestion/seguimientos/2026-09-09.md).
+El equipo fija además el **1 de diciembre** como cierre interno de informe, código,
+resultados y presentación. No es una exigencia de la cátedra: es el margen que se
+reserva para las correcciones del tutor y el ensayo de la defensa.
+
+| Fechas | Resultado principal |
+|---|---|
+| 2–9 sep | propuesta, preguntas, alternativas de audio y decisiones al profesor |
+| 10–21 sep | alcance aprobado y vertical slice técnico audio→ASR→regla→alerta |
+| 22 sep–5 oct | corpus/anotación piloto, protocolo ético y marco teórico en borrador |
+| 6–19 oct | benchmark ASR, reglas, TF–IDF y primer resultado temporal |
+| 20 oct–2 nov | corpus v1 y detector incremental |
+| 3–9 nov | integración end-to-end e instrumentación |
+| 10–23 nov | congelamiento, test congelado y evaluación final |
+| 24–30 nov | informe completo, presentación y reproducción de tablas y figuras |
+| **1 dic** | **cierre interno: informe, código, resultados y presentación terminados** |
+| 2 dic en adelante | ventana de defensa; solo correcciones pedidas por el tutor |
+
+> **Estado: propuesta sin discutir por los cuatro integrantes.** El reparto de
+> semanas es una construcción del equipo, a ratificar en la próxima reunión y con el
+> tutor.
+
+Este calendario comprime en doce semanas el trabajo que la versión anterior
+distribuía en dieciséis. El recorte no es parejo y sigue una regla fija: **si la
+fecha se adelanta se recortan extensiones y no se comprime la evaluación final.**
+
+- **Se preservan dos semanas completas de congelamiento y evaluación** (10–23 nov).
+  Es el bloque que sostiene la credibilidad de los resultados y el único que no se
+  toca.
+- **Integración baja de dos semanas a una** (3–9 nov). Lo hace viable el vertical
+  slice de septiembre: en noviembre se conecta un pipeline que ya funciona por
+  partes, no se construye de cero.
+- **Informe baja de dos semanas a una** (24–30 nov). Lo hace viable escribir desde
+  octubre en paralelo al desarrollo, como ya pide la etapa 7 de la
+  [metodología](#8-metodología). Si en noviembre el marco teórico todavía está en
+  blanco, esta semana no alcanza.
+- **Desaparece el ciclo de correcciones de fin de diciembre.** Su función la cumple
+  la ventana de defensa, que deja de ser tiempo de producción.
+
+El margen desapareció, y conviene decirlo ahora y no en noviembre: cualquier atraso
+se paga con las [extensiones condicionadas al avance](#6-alcance) —VoIP integrada,
+cuantización, features prosódicas, prueba de warnings con voluntarios, evaluación
+adversarial—, que son la primera reserva a sacrificar y no un compromiso. El núcleo
+obligatorio no se toca. Si un atraso llega a comprometerlo, la conversación que
+corresponde es con el tutor, no un recorte silencioso de la evaluación.
 
 ## 12. Organización del equipo
 

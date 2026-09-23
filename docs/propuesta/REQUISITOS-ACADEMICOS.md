@@ -13,6 +13,7 @@
 
 - **Fecha de defensa:** Presencial, durante la última o penúltima semana de diciembre de 2026 (exposición oral).
 - **Entrega previa:** Informe final en formato digital (PDF) para evaluación del tribunal.
+- **Cierre interno del equipo:** 1 de diciembre de 2026 para informe, código, resultados y presentación. No es una exigencia de la cátedra: es el margen que el equipo reserva para correcciones y ensayo. El reparto de semanas está en [PLAN-DE-TRABAJO.md §11](PLAN-DE-TRABAJO.md#11-cronograma) y todavía no fue discutido por los cuatro.
 - **Extensión orientativa:** Promedio de ~100 páginas en hoja A4 carilla simple (incluyendo anexos, figuras y referencias).
 - **Estructura requerida del informe:**
   - Portada oficial (logo UNSTA, título del proyecto, integrantes, tutor y año).
