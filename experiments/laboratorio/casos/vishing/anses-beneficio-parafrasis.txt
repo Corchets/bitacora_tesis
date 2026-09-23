@@ -1,0 +1,8 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing (paráfrasis anti-overfit de anses-beneficio.txt). Espera incendio: REQUEST_SECRET + REQUEST_TRANSFER (t3) y TRANSFER (t5). Goteo: sí (t5).
+# Fuente: ANSES, noticia oficial (misma modalidad que anses-beneficio.txt); redacción propia del equipo. Consulta 2026-09-23.
+te hablo de anses tenes un cobro pendiente para retirar
+no sabia nada de eso
+pasame la contraseña y el alias para habilitarlo
+eso no se dice por telefono
+si no lo haces hoy se cae el pago

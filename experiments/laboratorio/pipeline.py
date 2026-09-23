@@ -21,8 +21,16 @@ TERMINOS_CRITICOS = ("codigo", "token", "transferencia")
 VENTANA_GOTEO = 3
 
 
+def _puntaje(p: float | None) -> float | None:
+    """None queda null en el JSON: el turno es sin opinion."""
+    return None if p is None else round(p, 3)
+
+
 class ContadorGoteo:
-    """Maximo de los ultimos 3 puntajes; dispara si se mantiene alto dos turnos."""
+    """Maximo de los ultimos 3 puntajes con opinion; dispara si se mantiene alto dos turnos.
+
+    None es sin opinion: no entra en la ventana y no corta ni sostiene la racha.
+    """
 
     def __init__(self, umbral: float = 0.5, ventana: int = VENTANA_GOTEO):
         self._umbral = umbral
@@ -30,7 +38,9 @@ class ContadorGoteo:
         self._ps: list[float] = []
         self._prev_alto = False
 
-    def agregar(self, p: float) -> bool:
+    def agregar(self, p: float | None) -> bool:
+        if p is None:
+            return False
         self._ps.append(p)
         alto = max(self._ps[-self._ventana :]) >= self._umbral
         disparo = alto and self._prev_alto
@@ -111,7 +121,7 @@ def correr(
             t_goteo = round(t_s, 2)
             turno_goteo = n
         turnos.append(
-            {"n": n, "fin_s": round(t_s, 2), "texto": texto, "puntaje": round(p, 3)}
+            {"n": n, "fin_s": round(t_s, 2), "texto": texto, "puntaje": _puntaje(p)}
         )
         rec.reset(stream)
 
@@ -156,7 +166,7 @@ def correr(
         "latencia_decision_s": min(ts) if ts else None,
         "latencia_decision_turno": min(ns) if ns else None,
         "incendio": {"disparo": t_incendio is not None, "t_s": t_incendio, "eventos": eventos_incendio},
-        "goteo": {"disparo": t_goteo is not None, "t_s": t_goteo, "umbral": umbral_goteo},
+        "goteo": {"disparo": t_goteo is not None, "t_s": t_goteo, "turno": turno_goteo, "umbral": umbral_goteo},
         "texto_final": texto_final,
         "turnos": turnos,
         "terminos_criticos": {t: t in texto_final.lower() for t in TERMINOS_CRITICOS},
@@ -185,7 +195,7 @@ def correr_texto(
         p = det.puntaje(texto)
         if contador.agregar(p) and turno_goteo is None:
             turno_goteo = n
-        turnos.append({"n": n, "fin_s": None, "texto": texto, "puntaje": round(p, 3)})
+        turnos.append({"n": n, "fin_s": None, "texto": texto, "puntaje": _puntaje(p)})
     texto_final = " ".join(textos)
     ns = [n for n in (turno_incendio, turno_goteo) if n is not None]
     return {
@@ -196,7 +206,7 @@ def correr_texto(
         "latencia_decision_s": None,
         "latencia_decision_turno": min(ns) if ns else None,
         "incendio": {"disparo": turno_incendio is not None, "t_s": None, "eventos": eventos},
-        "goteo": {"disparo": turno_goteo is not None, "t_s": None, "umbral": umbral_goteo},
+        "goteo": {"disparo": turno_goteo is not None, "t_s": None, "turno": turno_goteo, "umbral": umbral_goteo},
         "texto_final": texto_final,
         "turnos": turnos,
         "terminos_criticos": {t: t in texto_final.lower() for t in TERMINOS_CRITICOS},

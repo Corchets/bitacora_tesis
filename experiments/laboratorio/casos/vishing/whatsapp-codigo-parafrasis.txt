@@ -1,0 +1,8 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing (paráfrasis anti-overfit de whatsapp-codigo.txt). Espera incendio: REQUEST_AUTH_CODE (t3). Goteo: sí (t2, antes que el incendio; t3 con opinión desde semilla verificacion P24).
+# Fuente: UFECI, nota del 30 de junio de 2025 (misma modalidad que whatsapp-codigo.txt); redacción propia del equipo. Consulta 2026-09-23.
+te llamo del soporte de mensajes hay un acceso raro
+como que acceso raro
+te mandamos un codigo de verificacion pasamelo
+te lo dicto uno siete dos nueve
+listo ya quedo bloqueado

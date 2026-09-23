@@ -233,6 +233,27 @@ _Evitar:_ promediar toda la llamada (un “pasame el código” se pierde entre 
 
 > **Estado: propuesta sin discutir.** El [mapa](../gestion/MAPA-DECISIONES.md) todavía dice “modelo con memoria o contador” como no resuelto. Este recorte elige este contador para el laboratorio. Probar con menos texto sigue abierto (abajo).
 
+### Sin opinión (spike #29)
+
+Un turno es **sin opinión** cuando, sacadas las palabras vacías, quedan menos de dos palabras que el stub conoce por `semillas.json`. No tiene puntaje. No entra en el máximo de 3 y no sostiene ni corta la racha de `T_A`. Un turno con puntaje sí entra, aunque quede bajo el umbral.
+
+El piso de dos palabras y el umbral 0,5 son parámetros de este spike. El piso arrancó en cuatro (2026-09-23): con los guiones de `experiments/laboratorio/casos/` el goteo no disparaba, porque casi ningún turno llegaba a cuatro palabras conocidas. Bajarlo a dos hizo disparar el goteo en 4 de 6 vishing y en 0 de 7 legítimas. En uno, disparaba también en 5 de 7 legítimas. No se agregan semillas de banco: enseñarle “banco legítimo” al stub de 16 frases bajaba el pedido del código por debajo de 0,5. Parecer una llamada buena sigue siendo trabajo del corpus y de los hard negatives.
+
+Medido el 2026-09-23 sobre el stub, sin corpus:
+
+| Frase | Puntaje |
+|---|---|
+| «decime el codigo de seis digitos…» | 0,613 |
+| «hola hablo del banco…» | 0,544 |
+| «tenes que actuar rapido…» | 0,586 |
+| «bueno que tengo que hacer» | sin opinión |
+| Llamada legítima del banco («su tarjeta está lista para retirar…») | sin opinión |
+| Frase de demostración del modelo de ASR | sin opinión |
+
+En `ejemplo.txt` el goteo dispara en el turno 3. El incendio sigue en el pedido del código. El primer turno queda en 0,544. Con el piso en dos, «bueno que tengo que hacer» sigue sin opinión.
+
+> **Estado: propuesta sin discutir.** No cierra D09 ni el umbral. Definición del término: [GLOSARIO.md](../GLOSARIO.md). `T_A`: [METRICAS.md](../evaluacion/METRICAS.md#definición-de-t_a-con-histéresis).
+
 ---
 
 ## Dos caminos de aviso

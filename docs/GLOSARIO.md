@@ -23,6 +23,7 @@ sentidos distintos, se define acá.
 | **Speaker-disjoint** | Partición en la que los hablantes de test no aparecen en entrenamiento. |
 | **Familia / semilla de guion** | Conjunto de conversaciones derivadas del mismo guion base. Todas deben caer en el mismo split, o hay contaminación. |
 | **Hard negative** | Llamada legítima deliberadamente parecida a un fraude. Es lo que distingue un sistema útil de uno molesto. |
+| **Sin opinión** | Turno en el que el goteo no tiene evidencia para puntuar el riesgo. No es una estafa ni una llamada que parece legítima, y no cuenta como actualización de `T_A`. Propuesta del spike #29 (2026-09-23); no cierra D09. |
 | **WER** | *Word Error Rate*. Métrica de calidad del ASR. |
 | **Real-time factor (RTF)** | Tiempo de procesamiento dividido por la duración del audio. RTF < 1 = procesa más rápido de lo que escucha. |
 | **Corrida** | Ejecución única del prototipo de laboratorio: entra, procesa un audio autorizado, escribe evidencia y termina. No es un servicio levantado ni la demo Android. |

@@ -8,7 +8,12 @@
     "confirmame tu clave y los numeros de atras de la tarjeta",
     "te llamo del banco hay un movimiento raro necesito tu cbu y alias",
     "abri el enlace que te mande y pone tu contraseña para desbloquear",
-    "decime el pin de seis digitos rapido que se vence"
+    "decime el pin de seis digitos rapido que se vence",
+    "si no instalas el programa no puedo frenar el debito de la tarjeta",
+    "si no me pasas el dato hoy se pierde el pago del beneficio",
+    "te llamo por un cobro duplicado de ayer",
+    "vimos un gasto raro en la cuenta",
+    "te mandamos el codigo de verificacion por mensaje"
   ],
   "legitima": [
     "hola llamo para confirmar el turno del dentista de mañana",
@@ -18,6 +23,9 @@
     "mañana jugamos al futbol a las ocho traé la camiseta blanca",
     "la farmacia ya tiene los remedios de la receta",
     "el curso empieza la semana que viene te anoto si queres",
-    "llegamos tarde por el trafico nos vemos en la puerta"
+    "llegamos tarde por el trafico nos vemos en la puerta",
+    "llamo al banco por la tarjeta y el codigo de la aplicacion",
+    "reviso el numero de atras de la tarjeta",
+    "llamo por el numero de la tarjeta"
   ]
 }

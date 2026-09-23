@@ -1,0 +1,8 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing (paráfrasis anti-overfit de arca-deuda.txt). Espera incendio: REQUEST_TRANSFER (t5); t4 («no pienso pagar nada») mudo por negación P21. Goteo: sí (t5).
+# Fuente: ARCA, alerta del 19 de junio de 2025 (misma modalidad que arca-deuda.txt); redacción propia del equipo. Consulta 2026-09-23.
+le habla el fisco tiene una intimacion pendiente
+de que me hablan
+regularice hoy con su homebanking o le embargo la cuenta
+no pienso pagar nada por telefono
+entonces deme el cbu para frenar esto

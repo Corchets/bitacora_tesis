@@ -1,0 +1,10 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing (paráfrasis anti-overfit de banco-codigo.txt). Espera incendio: REQUEST_AUTH_CODE (t5). Goteo: sí (t5, semilla gasto P16).
+# Fuente: BCRA, 6 de agosto de 2025 (misma modalidad que banco-codigo.txt); redacción propia del equipo. Consulta 2026-09-23.
+hola soy del banco vimos un gasto que no es tuyo
+cual gasto
+si no lo frenamos te sacan todo
+y que tengo que hacer
+decime el codigo que te mandamos al telefono
+dice ocho uno nueve dos siete cero
+listo ya lo freno desde aca

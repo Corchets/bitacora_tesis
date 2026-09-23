@@ -95,6 +95,8 @@ está en [METRICAS.md](../evaluacion/METRICAS.md). Dos puntos que esta decisión
 `T_A` se define con histéresis (no el primer cruce del umbral, sino el primero que se sostiene dos
 actualizaciones), y hay que elegir si `Preventive@δ` se mide contra `T_C` o contra `T_R`.
 
+- Evidencia nueva (2026-09-23, spike, no cierra D07): [sonda D](../../experiments/laboratorio/casos/README.md) — «código de la puerta» prende `REQUEST_AUTH_CODE` y «diez mil pesos» no prende nada; material para [Manual §4.2/§4.3](../datos-etica/MANUAL-ANOTACION.md#4-esqueleto-a-completar-después-del-piloto).
+
 ### D08 — Congelar protocolo experimental
 
 - **Pregunta:** ¿cómo se muestrea, divide y evalúa sin fuga de información?
@@ -109,6 +111,8 @@ y carísimo de arreglar después.
 
 Falta fijar además la restricción de falsos positivos **antes** de medir. El anteproyecto la
 menciona pero no la define, y sin ese número la hipótesis no es falsable.
+
+- Evidencia nueva (2026-09-23, spike, no cierra D08): la histéresis implementada dispara con un turno alto + cualquier opinión (no dos altos); el umbral 0,3–0,5 da idéntico; las semillas-espejo repiten el leakage que [§9](../datos-etica/METODO-CREACION-CORPUS.md#9-división-de-datos) prohíbe. Ver [pasadas 12 y 23](../../experiments/laboratorio/casos/README.md).
 
 ### D09 — Elegir ASR y detector
 

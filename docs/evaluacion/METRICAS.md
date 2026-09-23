@@ -77,6 +77,8 @@ dos actualizaciones consecutivas** (o una histéresis equivalente).
 Motivo: un pico aislado de 200 ms contaría fraudulentamente como "detección temprana" e infla los
 resultados. Sin esta regla, `Preventive@δ` es trivialmente manipulable bajando el umbral.
 
+> **Estado: propuesta sin discutir.** En el spike #29 (2026-09-23) un turno [sin opinión](../GLOSARIO.md) no es una actualización: no entra en la ventana ni sostiene la histéresis. Un turno con puntaje sí entra, aunque esté bajo el umbral. No cierra el umbral ni D09. El mecanismo del stub está en [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md#sin-opinión-spike-29).
+
 ## Evaluación completa
 
 La métrica temporal no reemplaza al resto. Se reporta:
