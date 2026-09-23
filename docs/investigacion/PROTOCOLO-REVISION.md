@@ -137,4 +137,4 @@ papers no es una métrica de avance.
 
 | Fecha | Base | Cadena/filtros | Resultados | Seleccionados | Responsable | Notas |
 |---|---|---|---:|---:|---|---|
-| | | | | | | |
+| 2026-09-17 | Argentina.gob.ar / Infoleg + Android Developers | `Ley 25.326 arts. 2, 4–6, 9–11; Decreto 1558/2001 art. 5; Código Penal arts. 153, 153 bis y 197; Ley 19.798 arts. 18–21; Ley 27.078 art. 5; Android voice call CAPTURE_AUDIO_OUTPUT` | 5 normas + 1 documento técnico | 6 | Mateo Antenucci | Consulta dirigida para #24; textos actualizados y fuentes primarias oficiales. |
