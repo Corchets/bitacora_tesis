@@ -122,8 +122,9 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
   Catálogo de bajada = Hugging Face (consulta 2026-09-16). ASR del recorte:
   Moonshine tiny-es (baja) y Zipformer Kroko ONNX (media/alta). Whisper solo comparación.
-  Vosk oficial queda fuera del recorte Hub. Detector: ALBETO tiny/base, DistilBETO, RoBERTuito.
-  Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28).
+  Vosk oficial queda fuera del recorte Hub. Detector: TF–IDF + reglas (las tres gamas).
+  ALBETO, DistilBETO y RoBERTuito no entran al recorte (2026-09-17).
+  Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28); corrida config `alta` (recorte 2026-09-17): [issue #29](https://github.com/Corchets/bitacora_tesis/issues/29).
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -188,7 +189,7 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   **salvo** pedido crítico por reglas (capa 2), que avisa ya.
   Ventana de la red en v0: **turno completo**; achique (5 s / 64 tokens) a medir
   en el piloto. Desarrollo: **un programa, config por gama**; se arranca con
-  **alta** (Zipformer Kroko Hub + RoBERTuito; TF–IDF de baseline).
+  **alta** (Zipformer Kroko Hub + TF–IDF; reglas de capa 2).
   Baja `asr`: Moonshine tiny-es. Media `asr`: Zipformer Kroko.
   Hilos de partida: baja 2 (1+1), media 4 (3+1), alta 6 (4+2).
   RAM: **256 / 512 / 1024 MB**. Ver

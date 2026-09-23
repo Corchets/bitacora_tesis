@@ -25,6 +25,8 @@ sentidos distintos, se define acá.
 | **Hard negative** | Llamada legítima deliberadamente parecida a un fraude. Es lo que distingue un sistema útil de uno molesto. |
 | **WER** | *Word Error Rate*. Métrica de calidad del ASR. |
 | **Real-time factor (RTF)** | Tiempo de procesamiento dividido por la duración del audio. RTF < 1 = procesa más rápido de lo que escucha. |
+| **Corrida** | Ejecución única del prototipo de laboratorio: entra, procesa un audio autorizado, escribe evidencia y termina. No es un servicio levantado ni la demo Android. |
+| **Replay en streaming** | Alimentar un WAV autorizado al ASR en pedazos ordenados, como si la llamada estuviera llegando. No es transcribir el archivo de un saque ni una llamada en vivo. |
 | **`CAPTURE_AUDIO_OUTPUT`** | Permiso de Android reservado a componentes privilegiados del sistema, necesario para capturar `VOICE_CALL` / `VOICE_UPLINK` / `VOICE_DOWNLINK`. Es la restricción que define el alcance del proyecto. |
 | **ADR** | *Architecture Decision Record*. Registro fechado de una decisión y sus alternativas descartadas. |
 | **UFECI** | Unidad Fiscal Especializada en Ciberdelincuencia (Argentina). |
