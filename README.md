@@ -37,7 +37,6 @@ Toda la documentación vive dentro de [`docs/`](docs/) organizada por áreas sin
 bitacora_tesis/
 ├── README.md                      # Esta guía de entrada y mapa para humanos
 ├── AGENTS.md                      # Router operativo e instrucciones para asistentes de IA
-├── deep-research-report.md        # Investigación técnica inicial exhaustiva
 ├── docs/
 │   ├── GLOSARIO.md                # Términos técnicos con sentido preciso (T_A, T_R, T_C, WER, etc.)
 │   ├── propuesta/
@@ -51,6 +50,7 @@ bitacora_tesis/
 │   │   ├── bitacora/              # Historial semanal del equipo (AAAA-MM-semana-NN.md)
 │   │   └── seguimientos/          # Consultas y minutas con el profesor (AAAA-MM-DD.md)
 │   ├── investigacion/
+│   │   ├── deep-research-report-00.md # Investigación técnica inicial exhaustiva
 │   │   ├── PREGUNTAS-DE-INVESTIGACION.md # Preguntas centrales PI1/PI2 y objetivos
 │   │   ├── PROTOCOLO-REVISION.md  # Método de búsqueda bibliográfica reproducible
 │   │   ├── SINTESIS-ESTADO-DEL-ARTE.md  # Literatura analizada, matriz comparativa y vacíos

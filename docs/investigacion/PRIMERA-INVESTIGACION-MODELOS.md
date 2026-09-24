@@ -135,7 +135,7 @@ Eso **no** quiere decir “van a entender una llamada de estafa argentina”. En
 
 Formulación correcta: *están hechos para español; no identificamos en las fichas un WER de llamadas argentinas.* El piloto lo mide. Eso es el riesgo [R06](../gestion/REGISTRO-RIESGOS.md).
 
-Un LLM local no entra en el núcleo: el [deep research](../../deep-research-report.md) lo descarta para cuatro meses y el mapa ya lo deja fuera.
+Un LLM local no entra en el núcleo: el [deep research](deep-research-report-00.md) lo descarta para cuatro meses y el mapa ya lo deja fuera.
 
 Fuentes ASR Hub: fichas enlazadas arriba, consulta **2026-09-16**. Fuentes detector: [ALBETO y DistilBETO (repo)](https://github.com/dccuchile/lightweight-spanish-language-models), paper LREC 2022 en ACL Anthology; [RoBERTuito](https://aclanthology.org/2022.lrec-1.785). Primera pasada de sitios (no Hub): 2026-09-15.
 
@@ -313,4 +313,4 @@ Esta ola de grilling ya tiene un contrato de laboratorio. No reemplaza el ADR ni
 - [MAPA-DECISIONES.md D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) — D09 abierta; este archivo es el recorte de trabajo.
 - Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28). Relacionados: #19 (WAV→ASR), #23 (contexto temporal), #27 (NLP local; no es LLM en el núcleo).
 - [METRICAS.md](../evaluacion/METRICAS.md) — `T_A`, histéresis, `RTF`.
-- [deep-research-report.md](../../deep-research-report.md) — sugiere; este archivo no lo convierte en decisión de equipo.
+- [deep-research-report-00.md](deep-research-report-00.md) — sugiere; este archivo no lo convierte en decisión de equipo.
