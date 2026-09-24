@@ -159,26 +159,77 @@ grabación respete el escenario y detiene cualquier uso accidental de datos real
 
 ## 6. Piloto
 
-> **Sin resolver.** El catálogo candidato tiene nueve semillas fraudulentas y ocho negativos
-> legítimos; no son diecisiete grabaciones obligatorias. Esta sección plantea cuatro semillas de
-> cada clase para el piloto y 12–20 conversaciones en total, que pueden ser distintas
-> interpretaciones de las semillas seleccionadas. La selección concreta, las repeticiones por
-> semilla y el tamaño se deciden en
+> **Estado: propuesta sin discutir.** El catálogo candidato tiene nueve semillas fraudulentas y
+> ocho negativos legítimos; no son diecisiete grabaciones obligatorias. El 4+4 y las 12–20
+> conversaciones del [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22) fueron un
+> punto de partida, no un requisito. Para probar el método se propone seleccionar escenarios por
+> cobertura de pedidos críticos, familias y negativos comparables, y ajustar el número de
+> interpretaciones al costo observado. La composición y el tamaño se deciden en
 > [D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) vía
 > [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22), con validación del tutor antes
-> de grabar. Los números de abajo siguen siendo una propuesta de trabajo, no una aprobación del
-> piloto.
+> de grabar.
 
-1. Crear 4 semillas fraudulentas y 4 legítimas difíciles.
-2. Grabar 12–20 conversaciones con integrantes del equipo y colaboradores de confianza.
+1. Elegir semillas fraudulentas que pongan a prueba cada clase de `accion_critica` y diseñar una
+   conversación legítima comparable para cada una; un mismo negativo puede tener dos
+   interpretaciones con distintos contextos.
+2. Estimar minutos de preparación, grabación y anotación con las primeras conversaciones y decidir
+   cuántas repeticiones dirigidas hacen falta sin desplazar el resto del proyecto.
 3. Transcribirlas y anotar un subconjunto común entre los cuatro integrantes.
 4. Registrar ambigüedades, duraciones, fallas técnicas y tiempo de anotación.
 5. Revisar taxonomía, fichas y procedimiento.
 6. Presentar resultados al profesor antes de escalar.
 
-**Piloto terminado cuando:** al menos 12 audios son utilizables, cada etiqueta tiene
-definición y ejemplo, los desacuerdos principales fueron adjudicados y puede
-estimarse el costo de producir/anotar una conversación adicional.
+**Piloto terminado cuando:** cada par de escenarios seleccionado tiene una conversación fraudulenta
+y una legítima utilizables, cada etiqueta tiene definición y ejemplo, los desacuerdos principales
+fueron adjudicados y puede estimarse el costo de producir/anotar una conversación adicional. El
+piloto prueba el procedimiento; no permite estimar con precisión la eficacia del detector.
+
+### Selección inicial para discutir
+
+> **Estado: propuesta sin discutir.** Una primera pasada de 14 conversaciones (siete fraudulentas y
+> siete legítimas) cubriría las seis clases de pedido crítico y las seis familias vigentes. No fija
+> una cuota para el corpus final. Si las primeras tomas revelan ambigüedades o fallas, se proponen
+> hasta seis repeticiones dirigidas; el intervalo de trabajo sería **14–20 conversaciones**, sujeto a
+> tiempo real de producción y validación del tutor.
+
+| Fraudulenta | Legítima comparable | Cobertura principal |
+|---|---|---|
+| `SC-WA-CODE-01` | `LG-WA-CONSULTA-01` | `REQUEST_AUTH_CODE`; familia WhatsApp |
+| `SC-SOPORTE-CLAVE-01` | `LG-SUPPORT-INFO-01` | `REQUEST_SECRET`; familia soporte |
+| `SC-ORG-BENEFICIO-01` | `LG-ORG-TURNO-01` | `REQUEST_PERSONAL_DATA`; familia organismo previsional |
+| `SC-PREMIO-01` | `LG-PREMIO-CONSULTA-01` | Segunda situación de datos personales; familia premio |
+| `SC-CLAVE-CAMBIO-01` | `LG-BANK-VERIF-01` | `REQUEST_SECURITY_ACTION`; familia banco |
+| `SC-FAMILIAR-DINERO-01` | `LG-FAMILIAR-LLAMADO-01` | `REQUEST_TRANSFER`; familia familiar |
+| `SC-SOPORTE-REMOTO-01` | `LG-SUPPORT-INFO-01` | `REQUEST_REMOTE_ACCESS`; otra interpretación del negativo de soporte |
+
+El negativo de soporte se grabaría en **dos interpretaciones**, una frente a contraseña y otra
+frente a acceso remoto: son siete conversaciones legítimas aunque haya seis IDs distintos. Las
+semillas `SC-BANK-OTP-01` y `SC-BANK-BILLETES-01` seguirían en el catálogo para ampliar el corpus;
+quedan fuera solo de esta propuesta de piloto porque su clase de pedido y la familia bancaria ya
+están representadas. Si en la primera prueba esa elección oculta errores relevantes, se reabre la
+selección antes de escalar.
+
+### Gobernanza propuesta para discutir en #22
+
+> **Estado: propuesta sin discutir.** El catálogo del [issue #17](https://github.com/Corchets/bitacora_tesis/issues/17)
+> ya está revisado, pero la selección y las repeticiones anteriores aún no están aprobadas. La
+> composición, los participantes y el protocolo deben ratificarse con el
+> equipo y el tutor **antes de grabar**.
+
+- Participarían personas adultas del equipo y colaboradores de confianza. Los diálogos usarían datos
+  100% ficticios, pero las voces seguirían siendo datos vinculables a personas.
+- Ambos interlocutores aceptarían por separado antes de cada grabación mediante el
+  [modelo de consentimiento informado](CONSENTIMIENTO-INFORMADO.md). Cada conversación llevaría un
+  ID interno que permita atender un pedido de acceso o eliminación sin incorporar nombres al dataset.
+- Audio, transcripciones vinculables y consentimientos firmados quedarían fuera de Git; los
+  consentimientos se guardarían separados del corpus. Se propone un contenedor cifrado sin copias en
+  nubes personales, pero falta designar custodio, ubicación, respaldo, personas con acceso y canal
+  de contacto. El eventual acceso del tutor requiere definición e información previa a participantes.
+- Se propone eliminar audio y transcripciones vinculables a más tardar el **2027-06-30**. El plazo
+  necesita justificación y ratificación; no es aún una fecha autorizada para el formulario final.
+- El permiso del piloto no cubriría publicar voces ni el corpus completo. Se propone limitar la
+  difusión a resultados agregados, metadatos disociados y fragmentos ficticios no identificables;
+  cualquier uso más amplio requeriría una decisión y autorización específicas.
 
 ## 7. Cómo se determina el tamaño final
 
@@ -189,7 +240,7 @@ Bandas de planificación:
 
 | Nivel | Conversaciones | Uso |
 |---|---:|---|
-| Piloto | 12–20 | corregir método; no reportar como evaluación final |
+| Piloto | 14–20 (propuesta actual) | corregir método; no reportar como evaluación final |
 | Mínimo defendible | 60–80 | baselines y evaluación exploratoria con límites explícitos |
 | Objetivo | 100–120 | más diversidad y un test menos inestable |
 | Extensión | 160–200 | solo si producción y anotación ya son sostenibles |
@@ -241,7 +292,8 @@ Una grabación se acepta cuando:
 - ambos lados son inteligibles;
 - tiene ID, semilla, hablantes pseudónimos y condición acústica;
 - puede anotarse `T_R` y, cuando corresponda, `T_C`;
-- no contiene información identificable accidental.
+- no contiene datos identificatorios reales adicionales en el diálogo o los metadatos; la voz se
+  resguarda como dato personal aun cuando el guion sea ficticio.
 
 Las exclusiones se registran con motivo; nunca se eliminan silenciosamente para
 mejorar métricas.
