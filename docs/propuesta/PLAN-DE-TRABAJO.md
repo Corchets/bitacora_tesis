@@ -62,8 +62,7 @@ o realizar una operación.
    decidir si dicta un código o una clave, transfiere dinero o comparte la pantalla.
 4. **Daño evitado:** que esa acción ocurra, y con ella la toma de la cuenta o la pérdida de dinero.
    Por eso la advertencia sirve solo si llega antes de que la persona cumpla el pedido, no después.
-5. **Límite de las defensas existentes:** la reputación del número no ve la conversación; el detector
-   conversacional de Google es cerrado y, al 2026-09-17, no está disponible en Argentina; las
+5. **Límite de las defensas existentes:** la reputación del número no ve la conversación; las
    recomendaciones de BCRA y ANSES dependen de que la persona las recuerde en el momento de presión.
 
 **Respaldo de cada línea:**
