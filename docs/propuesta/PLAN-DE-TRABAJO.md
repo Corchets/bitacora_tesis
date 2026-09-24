@@ -48,6 +48,45 @@ solicitud riesgosa mientras la llamada todavía está en curso, con una tasa de 
 alarma aceptable y una advertencia que permita actuar antes de compartir información
 o realizar una operación.
 
+### Formulación en cinco líneas
+
+> **Estado: propuesta sin discutir.** Borrador del [issue #18](https://github.com/Corchets/bitacora_tesis/issues/18);
+> cierra [D02](../gestion/MAPA-DECISIONES.md#d02--definir-problema-usuario-y-necesidad)
+> cuando lo validen los cuatro integrantes.
+
+1. **Usuario:** una persona en Argentina que atiende en su teléfono a alguien que dice llamar de su
+   banco, de un organismo como ANSES, de una mesa de soporte o de parte de un familiar.
+2. **Contexto:** el número no delata nada; el engaño se ve solo en lo que se dice: autoridad,
+   urgencia, pedido de secreto y, en algún momento, un pedido concreto.
+3. **Decisión bajo presión:** en pocos minutos y sin poder verificar al interlocutor, tiene que
+   decidir si dicta un código o una clave, transfiere dinero o comparte la pantalla.
+4. **Daño evitado:** que esa acción ocurra, y con ella la toma de la cuenta o la pérdida de dinero.
+   Por eso la advertencia sirve solo si llega antes de que la persona cumpla el pedido, no después.
+5. **Límite de las defensas existentes:** la reputación del número no ve la conversación; las
+   recomendaciones de BCRA y ANSES dependen de que la persona las recuerde en el momento de presión.
+
+**Respaldo de cada línea:**
+
+- Líneas 1 a 3: las modalidades salen de las fuentes del
+  [catálogo de escenarios](../datos-etica/CATALOGO-ESCENARIOS.csv) (issue
+  [#17](https://github.com/Corchets/bitacora_tesis/issues/17)): BCRA, ANSES, UFECRI-MPF, Ministerio
+  de Seguridad y Banco Galicia, con la fecha de consulta registrada en cada fila. Tres escenarios que ilustran el problema:
+  `SC-BANK-OTP-01` (código de verificación), `SC-ORG-BENEFICIO-01` (beneficio inexistente) y
+  `SC-FAMILIAR-DINERO-01` (familiar que pide dinero).
+- Línea 4: el "antes" es lo que mide PI2; ver `T_R` y `T_C` en
+  [METRICAS.md](../evaluacion/METRICAS.md).
+- Línea 5: disponibilidad de Google en
+  [lecturas/2026-google-scam-detection.md §6](../investigacion/lecturas/2026-google-scam-detection.md)
+  (consulta 2026-09-17). Que las recomendaciones dependan de la memoria de la persona es un argumento
+  del equipo, no una afirmación con fuente.
+
+**Beneficiario y foco en adultos mayores:** queda abierto en
+[D12](../gestion/MAPA-DECISIONES.md#d12--encuadre-del-foco-en-adultos-mayores). La formulación no
+restringe el usuario por edad. Si el foco se mantiene, se justifica por la gravedad potencial de las
+pérdidas y la exposición a estafas de suplantación, no por "son los más afectados". La advertencia
+de UFECRI-MPF que respalda `SC-FAMILIAR-DINERO-01` está dirigida a personas mayores: eso muestra que
+la modalidad las alcanza, no que sean las más afectadas.
+
 ## 3. Objetivo general
 
 Diseñar, implementar y evaluar un prototipo capaz de analizar incrementalmente un
