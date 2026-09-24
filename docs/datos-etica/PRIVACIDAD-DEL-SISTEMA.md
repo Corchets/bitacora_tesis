@@ -48,9 +48,10 @@ El diseño adopta los siguientes requisitos:
 
 Para el producto conceptual, la finalidad es la prevención inmediata del fraude; ASR y detector se
 ejecutan localmente, el contenido no sale del dispositivo y los buffers se destruyen al terminar la
-llamada. Para el corpus piloto sí existe una grabación temporal y consentida; su gobernanza se
-define en el [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22) y no se cierra en este
-documento.
+llamada. Para el corpus piloto sí existe una grabación temporal y consentida: la gobernanza se
+documenta en el [método del corpus](METODO-CREACION-CORPUS.md#resguardo-y-consentimiento-del-piloto)
+y en el [modelo de consentimiento](CONSENTIMIENTO-INFORMADO.md), pendientes de validación del tutor
+antes de grabar.
 
 La inferencia local, el descarte en RAM y la ausencia de cesión son salvaguardas de diseño; no
 prueban por sí solas el cumplimiento integral de la Ley 25.326. Para el corpus se deben completar,
@@ -133,6 +134,11 @@ Para la construcción del corpus de entrenamiento y evaluación:
 1. **Datos 100% ficticios:** En las simulaciones se emplean identidades, bancos, montos, códigos OTP y números de tarjeta completamente inventados.
 2. **Sin víctimas reales:** No se graban llamadas de incidentes reales de víctimas ni se realiza contacto encubierto con estafadores.
 3. **El audio no entra a Git:** Los archivos de audio (`.wav`) y cualquier material no anonimizado permanecen fuera del repositorio en cumplimiento de `.gitignore`. Git almacena exclusivamente código, esquemas y manifiestos de datos procesados.
+4. **Consentimiento de ambas partes:** Cada participante adulto acepta el
+   [consentimiento informado](CONSENTIMIENTO-INFORMADO.md) antes de grabar y puede detener la
+   actividad o retirar su consentimiento en las condiciones informadas.
+5. **Publicación limitada:** El piloto solo autoriza resultados agregados, metadatos disociados y
+   fragmentos ficticios no identificables. No autoriza publicar voces, firmas ni el corpus completo.
 
 ## 7. Fuentes normativas y técnicas consultadas
 
