@@ -60,13 +60,18 @@ Las cinco opciones sobre la mesa, con el detalle técnico en
   accederá, qué podrá publicarse y cuándo se eliminará?
 - **Tipo:** decisión ética y metodológica interna.
 - **Responsable:** por autoasignación (Issue #22).
-- **Evidencia:** plan de datos, formulario de consentimiento informado simple y
+- **Evidencia:** [método y selección del piloto](../datos-etica/METODO-CREACION-CORPUS.md#6-piloto),
+  [modelo de consentimiento](../datos-etica/CONSENTIMIENTO-INFORMADO.md) y
   [catálogo de escenarios revisado](../datos-etica/CATALOGO-ESCENARIOS.csv) (#17).
 - **Desbloquea:** corpus piloto.
-- **Estado:** abierto (UNSTA no exige trámite formal; autogestión de consentimiento con voluntarios).
-  El catálogo ofrece nueve semillas fraudulentas y ocho negativos candidatos; #22 debe decidir el
-  subconjunto del piloto, sus repeticiones, participantes, consentimiento y retención, con validación
-  del tutor antes de grabar. Tener escenarios revisados no aprueba todavía el piloto.
+- **Estado:** en curso. Mateo acordó el 2026-09-24 una primera pasada de 14 conversaciones con
+  hasta seis repeticiones dirigidas, participación de personas adultas con datos ficticios y
+  consentimiento de ambos interlocutores. Quedaron definidos el custodio operativo (Mateo), el
+  resguardo local cifrado y el plazo de eliminación; el permiso no incluye publicar voces. La
+  [PR #35](https://github.com/Corchets/bitacora_tesis/pull/35) documenta la decisión operativa,
+  pero **no habilita grabaciones**: falta validación del tutor sobre composición, participantes y
+  protocolo ([consulta pendiente](seguimientos/2026-09-09.md)),
+  y completar domicilio y contacto reales fuera de Git antes de invitar voluntarios.
 
 ## Decisiones precisas de alcance y experimentación
 
