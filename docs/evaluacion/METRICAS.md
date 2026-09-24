@@ -1,6 +1,6 @@
 # Métricas
 
-> **Estado: propuesta sin discutir.** Deriva del [deep research](../../deep-research-report.md), no
+> **Estado: propuesta sin discutir.** Deriva del [deep research](../investigacion/deep-research-report-00.md), no
 > de un relevamiento propio. Se congela al cerrar
 > [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y
 > [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).

@@ -1,7 +1,7 @@
 # Manual de anotación
 
 > **Estado: propuesta sin discutir.** La taxonomía deriva del
-> [deep research](../../deep-research-report.md), no de un relevamiento propio. Se congela al cerrar
+> [deep research](../investigacion/deep-research-report-00.md), no de un relevamiento propio. Se congela al cerrar
 > [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
 
 Protocolo que siguen los anotadores. Las secciones 1 y 2 son la propuesta de etiquetas; la sección 4
