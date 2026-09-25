@@ -126,13 +126,15 @@ y carísimo de arreglar después.
 Falta fijar además la restricción de falsos positivos **antes** de medir. El anteproyecto la
 menciona pero no la define, y sin ese número la hipótesis no es falsable.
 
-- **Recorte de trabajo (2026-09-16, no cierra D08):**
-  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md).
+- **Recorte de trabajo e investigación (#23, no cierra D08):**
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md) y
+  [DISENO-INTEGRADO.md](../investigacion/DISENO-INTEGRADO.md).
   Deriva el margen de aceptación desde el máximo de llamadas legítimas con alerta, en lugar de
   fijar un umbral a ojo, y muestra cómo se acumulan las falsas alarmas con cada actualización.
-  Propone además ventana deslizante con decaimiento y un registro conjunto de eventos.
+  Propone ventana deslizante con decaimiento, registro de eventos y compara las cuatro estrategias
+  de memoria para evaluar experimentalmente en dos brazos (base vs propuesta).
   Los números salen de llamadas sintéticas: prueban el mecanismo, no miden rendimiento.
-  Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23).
+  Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23) cerrado como investigación técnica; D08 permanece abierta.
 
 ### D09 — Elegir ASR y detector
 
@@ -224,6 +226,10 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   Hilos de partida: baja 2 (1+1), media 4 (3+1), alta 6 (4+2).
   RAM: **256 / 512 / 1024 MB**. Ver
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
+  **Observación (2026-09-18, issue #23):** con el máximo de 3 turnos, "dos veces seguidas" se
+  cumple con un solo pico y la histéresis no reduce las falsas alarmas. Compite con el riesgo con
+  decaimiento y doble umbral de la ventana de contexto. Cuenta y opciones en
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md §11](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#11-reconciliación-con-el-contador-del-recorte-de-modelos). Propuesta sin discutir.
 - Dispositivo Android concreto para la demo y mediciones de rendimiento, batería y temperatura.
   Los presupuestos de laboratorio ya están definidos en
   [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), pero no prueban

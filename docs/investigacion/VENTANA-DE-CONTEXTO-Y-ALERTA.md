@@ -1,11 +1,11 @@
 # Ventana de contexto y lógica de alerta
 
-**Fecha:** 2026-09-16 (consolidación v3)
+**Fecha:** 2026-09-16 (consolidación v3; secciones 11 y 12 agregadas el 2026-09-18)
 **Sobre:** el primer pedido del profesor —si el contexto acumulado degrada la performance en una
 llamada larga— y el margen de falsas alarmas de
 [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 Issue: [#23](https://github.com/Corchets/bitacora_tesis/issues/23).
-**Estado:** borrador de trabajo. **No cierra D08.** No es un ADR. A ratificar por los cuatro.
+**Estado:** propuesta técnica de diseño e investigación para el issue #23. **No cierra D08.** No es un ADR. A ratificar por los cuatro.
 
 Consolidación de lo trabajado sobre el primer pedido del profesor. Este archivo es la fuente de
 verdad de esta investigación; los documentos principales solo enlazan acá.
@@ -805,6 +805,8 @@ Ninguna está tomada. Son candidatas a cargar en el mapa de decisiones para disc
 | Eventos de la víctima | ¿Resistencia al modelo y cumplimiento solo como marca y freno aparte? | D07 · nueva |
 | Franjas de duración | ¿Qué franjas se reportan y qué peso tienen las llamadas cortas en la evaluación? | D08 · nueva |
 | Eje de ventana en PI1 | ¿Se agrega "cuánto contexto mira el detector" como variable del experimento? | D04 · nueva |
+| Persistencia del contador de goteo | ¿Dos seguidas sobre puntajes individuales, 2 de los últimos 3, o el diseño de este documento? (sección 11) | #28 / #29 · nueva |
+| Resumen de diálogo | ¿Se descarta el resumen generativo a favor del registro de eventos? (sección 12) | Arquitectura · nueva |
 
 ## 10. Próximos pasos
 
@@ -817,6 +819,111 @@ Ninguna está tomada. Son candidatas a cargar en el mapa de decisiones para disc
 | 5 | **Verificar con documentación oficial de Android** la sugerencia del profesor y la cancelación de eco. | Nada |
 | 5b | **Investigar la duración de las llamadas:** % que superan 5, 7, 10, 12 y 15 minutos, por separado para llamadas en general y para estafas, con fuentes (sección 7.4). | Nada |
 | 6 | **Llevar a la próxima clase** los resultados de la sección 7 y las decisiones de la sección 9. | Revisión del grupo |
+
+## 11. Reconciliación con el contador del recorte de modelos
+
+> **Agregada el 2026-09-18 para el [issue #23](https://github.com/Corchets/bitacora_tesis/issues/23).**
+> **Estado: propuesta sin discutir.** No cierra el modelo de estado temporal que el
+> [mapa de decisiones](../gestion/MAPA-DECISIONES.md#no-especificado-todavía) lista como abierto.
+
+El repositorio tiene hoy dos respuestas a la misma pregunta —cómo decide el sistema que el riesgo
+de la llamada es alto de manera sostenida—:
+
+- la de este documento: riesgo `S_t` con decaimiento por tipo de evento, encendido con `θ_high`
+  sostenido dos actualizaciones y apagado con `θ_low` (sección 5.7);
+- la del [recorte de modelos](PRIMERA-INVESTIGACION-MODELOS.md): el contador es el **máximo de los
+  últimos 3 turnos** y la alarma suena si ese máximo **se queda alto dos veces seguidas**. Es la
+  que implementa el `ContadorGoteo` del spike de laboratorio del
+  [issue #29](https://github.com/Corchets/bitacora_tesis/issues/29).
+
+### El máximo de 3 anula la regla de dos seguidas
+
+Un solo turno con puntaje alto deja al máximo de los últimos 3 arriba del umbral durante **tres
+turnos**: el propio y los dos siguientes. Entonces "alto dos veces seguidas" se cumple solo, un
+turno después del pico. La memoria que agrega el máximo es justamente lo que le saca a la regla la
+capacidad de distinguir un pico de un riesgo sostenido.
+
+Con el `ContadorGoteo` del spike, los puntajes `0,1 · 0,9 · 0,1 · 0,1` disparan la alarma en el
+tercer turno.
+
+La consecuencia se mide con la misma cuenta de la sección 7.1. Porcentaje de llamadas legítimas
+con al menos una alerta falsa, 80 revisiones por llamada, simulación de 200.000 llamadas:
+
+| **El detector acierta por revisión** | **Sin regla** | **Dos seguidas (7.1)** | **Máximo de 3 + dos seguidas** | **2 de los últimos 3** |
+|---|---|---|---|---|
+| 99,5% | 32,9% | 0,2% | **32,8%** | 0,4% |
+| 99% | 55,2% | 0,8% | **54,8%** | 1,5% |
+| 98% | 80,2% | 3,1% | **79,7%** | 5,9% |
+
+Las columnas "sin regla" y "dos seguidas" reproducen la tabla de la sección 7.1, lo que valida la
+simulación. La columna del contador queda prácticamente igual a no tener regla. La simulación
+supone errores independientes entre revisiones, como la 7.1: en la realidad los errores vienen en
+racha y todas las reglas protegen menos, pero el orden entre columnas no cambia.
+
+El spike implementa el recorte al pie de la letra. El problema está en la regla, no en el código.
+
+### Opciones
+
+| **Opción** | **Qué cambia** | **Costo** |
+|---|---|---|
+| A. Dos seguidas sobre el puntaje de cada turno | La persistencia se evalúa sobre los puntajes individuales. El máximo de 3 queda solo como nivel de riesgo que se muestra | Se pierde la tolerancia a un turno bajo en el medio: una estafa con un turno neutro intercalado reinicia la cuenta |
+| B. 2 de los últimos 3 | La alarma suena si al menos dos de los últimos tres turnos superan el umbral | Cambio mínimo sobre el spike: conserva la ventana de 3 turnos. Protege algo menos que la opción A (1,5% contra 0,8% al 99%) |
+| C. El diseño de este documento | Riesgo con decaimiento, doble umbral y dos actualizaciones sostenidas (5.5 y 5.7) | Más piezas para calibrar, y depende del detector de eventos, que no existe todavía |
+
+B es el arreglo inmediato para el spike: no cambia la arquitectura y devuelve casi toda la
+protección. C sigue siendo la propuesta de fondo de este documento. Elegir entre las dos es parte
+del modelo de estado temporal abierto en el mapa.
+
+### El camino de incendio no tiene histéresis
+
+Las reglas de pedido crítico avisan en el primer texto a medias que las contiene, sin esperar
+nada. La cuenta de la sección 7.1 se les aplica sin la protección de la regla: cada falso positivo
+de una regla es una alerta. Y el número de revisiones es mayor que el de turnos, porque en el
+spike las reglas miran el borrador del ASR cada 300 ms.
+
+Eso hace que la precisión de las reglas pese más que la del detector. Las definiciones de "qué no
+dispara" cada etiqueta que se están escribiendo para el manual de anotación
+([issue #17](https://github.com/Corchets/bitacora_tesis/issues/17)) son la especificación natural
+para esas reglas. El riesgo de que el incendio infle `Preventive@δ` ya está registrado como R14.
+
+## 12. Estrategias de memoria que compara el issue #23
+
+> **Agregada el 2026-09-18.** Análisis propio a partir del diseño de este documento y del recorte de
+> modelos. No cita fuentes externas. **Estado: propuesta sin discutir.**
+
+El issue pide comparar cuatro estrategias para que el contexto acumulado no degrade la latencia ni
+la precisión:
+
+| **Estrategia** | **Qué guarda** | **Costo en el teléfono** | **Qué resuelve** | **Problema** | **En este documento** |
+|---|---|---|---|---|---|
+| Ventana deslizante | El texto de los últimos turnos | Acotado por tokens, turnos y tiempo | La latencia y la pared de tokens | Olvida lo que quedó establecido al principio de la llamada | `W_loc` y `W_ctx`, secciones 5.2 y 7.2 |
+| Resumen de diálogo estructurado | Un texto reescrito que resume la llamada hasta el momento | Un modelo generativo corriendo en el teléfono junto al ASR y al detector | La memoria larga sin crecer en tokens | Ver abajo | No se adopta |
+| Buffer de entidades sospechosas | Hechos tipados con tiempo y rol | Prácticamente cero tokens | La memoria larga y el orden de la escalada | Depende de un detector de eventos que no existe todavía | Es el **registro de eventos**, sección 5.3 |
+| Reglas de contexto previo | Qué precursores ya ocurrieron | Mínimo | Que un pedido legítimo aislado no alerte | Frágiles si se escriben como lista de palabras | `C_t` graduado con precursores, sección 5.6 |
+
+### Por qué no un resumen generativo
+
+Un resumen de diálogo reescrito por un modelo resuelve el mismo problema que el registro de
+eventos —conservar lo importante de una llamada larga sin arrastrar todo el texto—, pero con tres
+costos que el registro no tiene:
+
+1. **Necesita un modelo generativo en el núcleo.** El recorte de modelos deja afuera un LLM local, y
+   el presupuesto de 256 a 1024 MB ya lo comparten el ASR y el detector.
+2. **No se puede auditar.** Si el resumen omite o inventa algo, la alerta y la explicación que ve la
+   persona se apoyan en un texto que nadie puede verificar contra la conversación. El registro, en
+   cambio, guarda cada hecho con su segundo, su rol y la frase que lo originó.
+3. **Suma un componente que habría que evaluar aparte.** Los errores del resumen se sumarían a los
+   del ASR y a los del detector, y la tesis tendría que medir los tres.
+
+El registro de eventos es un resumen estructurado **sin generación**: guarda lo que un buen resumen
+guardaría —quién, qué y cuándo— en un esquema fijo. Es lo que el issue llama "buffer de entidades
+sospechosas", con dos agregados: el rol de quien habla y los eventos de la víctima.
+
+### Dónde vive esto
+
+El issue pedía el documento en `docs/ingenieria/`. Queda en `docs/investigacion/` porque es una
+propuesta: si el equipo adopta el registro o una regla de persistencia, la parte duradera se escribe
+como ADR en `docs/ingenieria/adr/`, que es donde el repositorio guarda las decisiones tomadas.
 
 ## Anexo · Glosario de símbolos
 
