@@ -27,7 +27,7 @@ def _versiones() -> dict:
     try:
         from importlib import metadata
 
-        for pkg in ("sherpa-onnx", "huggingface-hub", "numpy", "scikit-learn", "scipy"):
+        for pkg in ("sherpa-onnx", "huggingface-hub", "numpy"):
             try:
                 vers[pkg] = metadata.version(pkg)
             except Exception:
@@ -47,7 +47,7 @@ def armar(gama, resultado: dict, entrada: str | Path, comando: str, chunk_ms: in
         "commit": _commit(),
         "gama": gama.nombre,
         "asr": "no-usado (modo texto)" if modo == "texto" else gama.asr,
-        "detector": detector_stub(),
+        "detector": detector_desc(),
         "techo_mb": gama.techo_mb,
         "hilos": {"total": gama.hilos_total, "asr": gama.hilos_asr, "detector": gama.hilos_detector},
         "gpu": gama.gpu,
@@ -63,10 +63,13 @@ def armar(gama, resultado: dict, entrada: str | Path, comando: str, chunk_ms: in
     }
 
 
-def detector_stub() -> str:
+def detector_desc() -> str:
     import detector as det
+    import os
 
-    return f"{det.DESCRIPCION_STUB} (seed {det.SEED})"
+    modo = os.environ.get("DETECTOR_MODO", "clasificador")
+    modelo = os.environ.get("LLM_MODEL", det.MODELO_DEFAULT)
+    return f"{det.DESCRIPCION}; modo={modo}; model={modelo}"
 
 
 def guardar(reporte: dict, salida: str | Path) -> Path:

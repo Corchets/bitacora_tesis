@@ -2,7 +2,7 @@
 """Corrida #29: entra, procesa, escribe JSON, termina.
 
 Audio (--wav, defecto): replay en streaming con Zipformer.
-Texto (--texto): reglas + TF-IDF + contador sobre transcripto, sin ASR.
+Texto (--texto): reglas + LLM + contador sobre transcripto, sin ASR.
 """
 
 import argparse
@@ -25,7 +25,6 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--texto", default=None, help="Transcripto: una linea = un turno")
     p.add_argument("--salida", default=None, help="Defecto: artifacts/corrida[.texto].json")
     p.add_argument("--gama", default=None, help="baja|media|alta (defecto: env GAMA o alta)")
-    p.add_argument("--semillas", default=str(AQUI / "semillas.json"))
     p.add_argument("--modelos", default=os.environ.get("MODELOS_DIR", "/models/hf"))
     p.add_argument("--chunk-ms", type=int, default=300)
     p.add_argument("--umbral", type=float, default=0.5, help="Umbral goteo, de spike")
@@ -36,9 +35,7 @@ def main() -> None:
     args = parse_args()
     gama = cargar_gama(args.gama)
     if args.texto:
-        resultado = correr_texto(
-            txt_path=args.texto, semillas_path=args.semillas, umbral_goteo=args.umbral
-        )
+        resultado = correr_texto(txt_path=args.texto, umbral_goteo=args.umbral)
         entrada, chunk_ms = args.texto, None
         defecto = AQUI / "artifacts" / "corrida-texto.json"
     else:
@@ -50,7 +47,6 @@ def main() -> None:
         resultado = correr(
             wav=args.wav,
             gama=gama,
-            semillas_path=args.semillas,
             modelos_dir=args.modelos,
             chunk_ms=args.chunk_ms,
             umbral_goteo=args.umbral,

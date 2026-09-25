@@ -1,9 +1,11 @@
 # Primera investigación — dos ayudantes en el teléfono
 
-**Fecha:** 2026-09-15; recortes del 2026-09-16 (catálogo Hugging Face) y 2026-09-17 (`detector` = TF–IDF)
+**Fecha:** 2026-09-15; recortes del 2026-09-16 (catálogo Hugging Face), 2026-09-17 (detector TF–IDF, **descartado**) y **2026-09-25** (`detector` = LLM/SLM local)
 **Sobre:** [D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)
 **Estado:** apuntes de trabajo de una charla de equipo. **No cierra D09.** No es un ADR.
 Lo tienen que revisar los cuatro.
+
+> **Pivote 2026-09-25 (propuesta sin discutir):** TF–IDF queda **fuera** del camino (no tests, no comparaciones, no baseline). El que lee es un **LLM/SLM local**. Variantes a medir: clasificador con contexto vs **agente**. Schema de etiquetas: [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) / [#32](https://github.com/Corchets/bitacora_tesis/issues/32).
 
 Este archivo es donde vive esta investigación. Los otros docs solo lo enlazan.
 
@@ -48,7 +50,7 @@ No ponemos un modelo que haga todo junto (urgencia + pedido + estafa + …). Eso
 | Dónde se prueba | **Laboratorio = PC.** **Demo en Android = solo si hay tiempo.** iPhone = solo foto de “alta” | — |
 | Cómo fingimos el teléfono | Techo de memoria + hilos + **sin placa de video**. Sin emulador Android | La PC es x86 y el teléfono es ARM |
 | Cómo programamos | **Un solo programa**, con una config por gama | Con qué herramienta se limita (no hay lenguaje elegido) |
-| Con qué arrancamos | Config **`alta`**: Zipformer Kroko + **TF–IDF**. Reglas en las tres | ALBETO, DistilBETO, RoBERTuito quedan afuera |
+| Con qué arrancamos | Config **`alta`**: Zipformer Kroko + **LLM/SLM local**. Reglas de incendio (capa 2) en las tres | TF–IDF descartado (2026-09-25); variante agente a medir |
 | De dónde se bajan | Catálogo de trabajo = **Hugging Face** (2026-09-16) | No valen copias de desconocidos |
 | `asr` de baja | **Moonshine tiny-es** (`moonshine-ai/moonshine-streaming-tiny-es`) | Vosk oficial no está en el Hub |
 | Hilos para arrancar | Baja **2** (1+1). Media **4** (3 / 1). Alta **6** (4 / 2) | — |
@@ -99,9 +101,14 @@ Acá solo entra lo que **abrimos** en el Hub. Una copia subida por un desconocid
 
 #### El que lee (texto)
 
-**TF–IDF + reglas.** No se baja ningún transformer. Se aprende en el laboratorio con nuestro corpus. Las reglas explican el porqué (“te apuran”, “te piden el código”).
+**LLM/SLM local** (candidato de arranque: `meta-llama/Llama-3.2-1B-Instruct`, vía API OpenAI-compatible en el lab: `LLM_BASE_URL`). Modos:
 
-ALBETO, DistilBETO y RoBERTuito **no** entran en este recorte (2026-09-17).
+- `clasificador` — ventana de turnos → `{"riesgo": 0..1}`
+- `agente` — misma salida tras checklist de etiquetas de [MANUAL-ANOTACION.md](../datos-etica/MANUAL-ANOTACION.md); a medir en [#27](https://github.com/Corchets/bitacora_tesis/issues/27) / [#29](https://github.com/Corchets/bitacora_tesis/issues/29)
+
+Las **reglas de incendio** (capa 2) siguen como disparo inmediato de pedido crítico. **TF–IDF eliminado** del lab (2026-09-25): no alimenta al LLM ni entra en comparaciones.
+
+> **Estado: propuesta sin discutir.** No cierra D09. Inferencia **local** (privacidad); nube fuera del núcleo.
 
 ### ¿Hablan español?
 
@@ -113,11 +120,9 @@ Pero ojo, eso **no** quiere decir “van a entender una llamada de estafa argent
 |---|---|---|
 | Moonshine tiny-es | Hecho para español. Tiene un poco de audio argentino **leído**. Se equivoca ~6 de cada 100 palabras en audio leído | Llamadas por teléfono, ruido de calle, voseo de todos los días. Gran parte se entrenó con etiquetas automáticas |
 | Zipformer Kroko | Paquete **español** en el Hub | Ninguna prueba en llamadas rioplatenses |
-| TF–IDF | Aprende el español **de nuestro corpus** | Todavía no hay corpus, así que tampoco hay números |
+| Llama 3.2 1B Instruct (candidato) | Instruct en varios idiomas; ficha Hub | Ninguna prueba propia aún en vishing rioplatense; se mide en #29 |
 
 Dicho bien: *están hechos para español; no encontramos en las fichas ninguna prueba en llamadas argentinas.* Eso lo mide nuestro piloto. Es el riesgo [R06](../gestion/REGISTRO-RIESGOS.md).
-
-Un modelo grande local no entra: el [deep research](../../deep-research-report.md) lo descarta para cuatro meses y el mapa ya lo deja afuera.
 
 Fuentes del ASR: fichas de arriba, vistas el **2026-09-16**. Primera pasada de páginas (no Hub): 2026-09-15.
 
@@ -160,7 +165,7 @@ No hacemos tres programas. Cambiamos un **config**:
 | Variable | Baja | Media | Alta (v0, se prende primero) |
 |---|---|---|---|
 | `asr` | **Moonshine tiny-es** [`moonshine-ai/moonshine-streaming-tiny-es`](https://huggingface.co/moonshine-ai/moonshine-streaming-tiny-es) | Zipformer Kroko [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | **Zipformer Kroko** (el mismo) |
-| `detector` | TF–IDF | TF–IDF | **TF–IDF** |
+| `detector` | LLM/SLM local | LLM/SLM local | **LLM/SLM local** (candidato Llama 3.2 1B Instruct) |
 | Techo de memoria (los dos juntos) | **256 MB** | **512 MB** | **1024 MB** |
 | Hilos (total) | **2** | **4** | **6** |
 | Hilos del que escribe / del que lee | **1 / 1** | **3 / 1** | **4 / 2** |
@@ -168,11 +173,11 @@ No hacemos tres programas. Cambiamos un **config**:
 
 Whisper por pedazos **no** va en `asr` de ninguna gama (rompe el streaming). Puede ser otra prueba de calidad, apagada en v0. Las **reglas** (capa 2) van en las tres gamas; no son un modelo de Hugging Face.
 
-**Orden de trabajo:** primero la config `alta` (vemos si la lógica anda con el ASR más pesado). Después pasamos a media y baja **sin reescribir el programa**. Si solo probamos alta, no podemos decir que entra en un teléfono chico.
+**Orden de trabajo:** primero la config `alta` (vemos si la lógica anda con ASR + LLM). Después pasamos a media y baja **sin reescribir el programa**. Si solo probamos alta, no podemos decir que entra en un teléfono chico.
 
-**Riesgo:** Zipformer Kroko (encoder ONNX ~155 MB) en CPU, sin placa de video, puede no seguir el ritmo. El TF–IDF pesa poco; si vamos tarde, la culpa es del que escribe.
+**Riesgo:** Zipformer + SLM juntos pueden pasarse del techo o del RTF (R08). Mitigar con cuantización / menos contexto / modelo más chico. Medir en #29.
 
-> **Estado: propuesta sin discutir.** No cierra D09: el piloto puede cambiar el ganador. Solo deja fijo *cómo programamos* y *con qué disfraz arrancamos*. Catálogo del Hub del 2026-09-16; `detector` = TF–IDF (sin ALBETO, DistilBETO ni RoBERTuito): **2026-09-17**.
+> **Estado: propuesta sin discutir.** No cierra D09: el piloto puede cambiar el ganador. Recorte detector LLM: **2026-09-25**.
 
 Comparar las tres configs es **extensión** del [plan de trabajo](../propuesta/PLAN-DE-TRABAJO.md) como “comparación de dispositivos”; acá es comparación de **techos en la PC**.
 
@@ -301,8 +306,8 @@ Qué anotar en cada fila: demora, memoria, RTF de los dos juntos, y **cuántas p
 
 ## Qué falta (próximo paso)
 
-- Prueba de laboratorio: issue **[#29](https://github.com/Corchets/bitacora_tesis/issues/29)** (hijo de [#28](https://github.com/Corchets/bitacora_tesis/issues/28); recorte TF–IDF del 2026-09-17).
-- Cómo se **ponen** los techos de memoria e hilos de forma que cualquiera los repita. La herramienta se elige al programar; este recorte no fija lenguaje.
+- Prueba de laboratorio: issue **[#29](https://github.com/Corchets/bitacora_tesis/issues/29)** (hijo de [#28](https://github.com/Corchets/bitacora_tesis/issues/28); recorte LLM 2026-09-25).
+- Cablear servidor local (`LLM_BASE_URL`) y fijar expectativas de goteo; medir clasificador vs agente.
 - Escribir las reglas de capa 2 (D07) y las llamadas buenas tramposas.
 - Elegir el modelo final con un piloto: errores, palabras clave, demora, memoria. Eso sí cierra D09.
 - D05 y D07 siguen trabando la elección final.
