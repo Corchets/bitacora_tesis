@@ -24,14 +24,16 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Pregunta:** ¿quién necesita qué decisión o protección, en qué momento de la
   llamada y frente a qué daño?
 - **Tipo:** decisión de alcance con investigación del dominio.
-- **Responsable:** por autoasignación en GitHub (Issue #18).
+- **Responsable:** equipo (el artefacto se produjo en el Issue #18).
 - **Evidencia:** problema en cinco líneas, persona/actor y tres escenarios.
 - **Bloqueada por:** ninguna (D01 resuelto).
 - **Desbloquea:** D06 y requisitos.
-- **Estado:** en curso. Borrador escrito el 2026-09-23 en
-  [PLAN-DE-TRABAJO.md §2](../propuesta/PLAN-DE-TRABAJO.md#formulación-en-cinco-líneas), marcado como
-  propuesta sin discutir; falta la validación de los cuatro integrantes. El foco en adultos mayores
-  sigue en D12.
+- **Estado:** ratificada por el equipo, pendiente del tutor. Mateo informó el 2026-09-25 que
+  los cuatro integrantes aprobaron sin cambios las cinco líneas de
+  [PLAN-DE-TRABAJO.md §2](../propuesta/PLAN-DE-TRABAJO.md#formulación-en-cinco-líneas),
+  producidas en el Issue #18 ya cerrado. Como decisión de alcance, D02 no se marca resuelta
+  hasta registrar la respuesta del tutor en el
+  [seguimiento del 2026-09-30](seguimientos/2026-09-30.md). El foco en adultos mayores sigue en D12.
 
 ### D05 — Elegir la fuente de audio demostrable
 
@@ -64,13 +66,15 @@ Las cinco opciones sobre la mesa, con el detalle técnico en
   [modelo de consentimiento](../datos-etica/CONSENTIMIENTO-INFORMADO.md) y
   [catálogo de escenarios revisado](../datos-etica/CATALOGO-ESCENARIOS.csv) (#17).
 - **Desbloquea:** corpus piloto.
+- **Ejecución posterior:** [issue #39](https://github.com/Corchets/bitacora_tesis/issues/39),
+  bloqueado hasta que #22 y la validación del tutor habiliten grabar.
 - **Estado:** en curso. Mateo acordó el 2026-09-24 una primera pasada de 14 conversaciones con
   hasta seis repeticiones dirigidas, participación de personas adultas con datos ficticios y
   consentimiento de ambos interlocutores. Quedaron definidos el custodio operativo (Mateo), el
   resguardo local cifrado y el plazo de eliminación; el permiso no incluye publicar voces. La
   [PR #35](https://github.com/Corchets/bitacora_tesis/pull/35) documenta la decisión operativa,
   pero **no habilita grabaciones**: falta validación del tutor sobre composición, participantes y
-  protocolo ([consulta pendiente](seguimientos/2026-09-09.md)),
+  protocolo ([consulta preparada para el 2026-09-30](seguimientos/2026-09-30.md)),
   y completar domicilio y contacto reales fuera de Git antes de invitar voluntarios.
 
 ## Decisiones precisas de alcance y experimentación
@@ -102,9 +106,9 @@ Las cinco opciones sobre la mesa, con el detalle técnico en
 
 Hay una propuesta concreta de dos capas multi-label de 6 etiquetas cada una en
 [MANUAL-ANOTACION.md](../datos-etica/MANUAL-ANOTACION.md), con el principio de no superar la docena
-de etiquetas: en cuatro meses las clases raras destruyen el análisis estadístico. Falta decidir si se
-adoptan tal cual o se derivan de un relevamiento propio de modalidades argentinas (UFECI, ANSES,
-PAMI, BCRA).
+de etiquetas: en cuatro meses las clases raras destruyen el análisis estadístico. El
+[catálogo #17](../datos-etica/CATALOGO-ESCENARIOS.csv) aporta escenarios para contrastarla; falta
+probar y ajustar el manual con las anotaciones del piloto antes de adoptar la taxonomía completa.
 
 Sobre el evento crítico, la definición de `T_A`, `T_R` y `T_C` y por qué hacen falta las tres marcas
 está en [METRICAS.md](../evaluacion/METRICAS.md). Dos puntos que esta decisión tiene que cerrar:
@@ -142,12 +146,16 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **Candidatos a evaluar (mapa inicial):** sherpa-onnx, Vosk y whisper.cpp para ASR; TF-IDF como baseline
   obligatorio y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
   preferencia previa.
-- **Recorte de trabajo (2026-09-15/16, no cierra D09):**
+- **Recorte de trabajo inicial (2026-09-15/16, no cierra D09):**
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
   Catálogo de bajada = Hugging Face (consulta 2026-09-16). ASR del recorte:
   Moonshine tiny-es (baja) y Zipformer Kroko ONNX (media/alta). Whisper solo comparación.
-  Vosk oficial queda fuera del recorte Hub. Detector: ALBETO tiny/base, DistilBETO, RoBERTuito.
-  Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28).
+  Vosk oficial queda fuera del recorte Hub. Los detectores neuronales de ese documento
+  son candidatos históricos, no una elección vigente.
+- **Recorte posterior (2026-09-17, también pendiente de ratificación):**
+  [issue #29](https://github.com/Corchets/bitacora_tesis/issues/29) plantea Moonshine tiny-es para baja,
+  Zipformer Kroko ONNX para media/alta y TF–IDF + reglas como detector en las tres gamas;
+  deja ALBETO, DistilBETO y RoBERTuito fuera de *ese spike*. No hay benchmark del piloto ni elección D09.
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -160,9 +168,8 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 
 - **Pregunta:** ¿el detector trabaja solo sobre la transcripción del ASR, o también sobre rasgos
   bioacústicos (tono, estrés vocal, MFCCs)?
-- **Bloqueada por:** D05. Si la captura termina siendo acústica por altavoz, la reverberación, el
-  ruido y la cancelación de eco del hardware destruyen justamente los rasgos que el análisis
-  acústico necesita, y la pregunta se responde sola.
+- **Bloqueada por:** ninguna; D05 ya descartó el altavoz como camino principal. Falta que el
+  equipo decida si el alcance se limita a la transcripción o incorpora rasgos acústicos.
 - **Salida:** alcance del stack de features y, con él, el esfuerzo de las próximas semanas.
 - **Recomendación del deep research:** solo NLP sobre la transcripción, con lo bioacústico como
   trabajo futuro declarado en las conclusiones. Ver
@@ -213,17 +220,13 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 ## No especificado todavía
 
 - Diseño exacto del warning y método de evaluación con usuarios.
-- Modelo de estado temporal que competirá con el acumulador probabilístico.
-  Recorte de grilling: red de riesgo ve **solo el último turno**; el riesgo de la
-  llamada es el **máximo de los últimos k=3 turnos**, con histéresis de `T_A`,
-  **salvo** pedido crítico por reglas (capa 2), que avisa ya.
-  Ventana de la red en v0: **turno completo**; achique (5 s / 64 tokens) a medir
-  en el piloto. Desarrollo: **un programa, config por gama**; se arranca con
-  **alta** (Zipformer Kroko Hub + RoBERTuito; TF–IDF de baseline).
-  Baja `asr`: Moonshine tiny-es. Media `asr`: Zipformer Kroko.
-  Hilos de partida: baja 2 (1+1), media 4 (3+1), alta 6 (4+2).
-  RAM: **256 / 512 / 1024 MB**. Ver
-  [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
+- Modelo de estado temporal, ventana y política final de alerta: los valores de
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)
+  son hipótesis de laboratorio, no D08 cerrada. Las configuraciones de memoria e hilos
+  de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md) son
+  presupuestos de medición, no evidencia de que una combinación de modelos funcione
+  en Android. El [recorte #29](https://github.com/Corchets/bitacora_tesis/issues/29)
+  tampoco cierra D09.
 - Dispositivo Android concreto para la demo y mediciones de rendimiento, batería y temperatura.
   Los presupuestos de laboratorio ya están definidos en
   [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), pero no prueban

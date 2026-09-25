@@ -5,7 +5,7 @@ Escala: probabilidad e impacto de 1 (bajo) a 5 (crítico). Revisar semanalmente.
 | ID | Riesgo | P | I | Señal temprana | Mitigación | Contingencia | Dueño | Estado |
 |---|---|---:|---:|---|---|---|---|---|
 | R01 | Pretender capturar llamadas PSTN en Android stock | 5 | 5 | spike requiere permisos privilegiados | motor desacoplado y replay/VoIP controlado | demo sobre streaming controlado | por autoasignar | mitigado por alcance |
-| R02 | Entregables interpretados incorrectamente por falta de guía | 3 | 5 | profesor pide formato o etapa no planificada | confirmar por escrito el 9 de septiembre | replanificar sin ampliar núcleo | por autoasignar | abierto |
+| R02 | Entregables interpretados incorrectamente por falta de guía | 3 | 5 | profesor pide formato o etapa no planificada | cotejar cada entrega con la [minuta del 2026-09-09](seguimientos/2026-09-09.md) y [requisitos académicos](../propuesta/REQUISITOS-ACADEMICOS.md); consultar novedades de cátedra | replanificar sin ampliar núcleo | por autoasignar | abierto |
 | R03 | Grabar personas sin protocolo suficiente | 2 | 5 | se invita a grabar antes del aval del tutor, falta una aceptación o aparece un dato real | [método](../datos-etica/METODO-CREACION-CORPUS.md#resguardo-y-consentimiento-del-piloto), consentimiento de ambos, custodio y eliminación definidos; validar con tutor y completar datos de contacto antes de grabar | detener y eliminar la toma; usar audio sintético si no puede garantizarse el protocolo | Mateo / #22 | abierto; protocolo documental no habilita grabaciones |
 | R04 | Corpus pequeño o artificial | 4 | 4 | pocas familias/hablantes o diálogos leídos | [catálogo #17](../datos-etica/CATALOGO-ESCENARIOS.csv) y piloto de 14 conversaciones con hasta seis repeticiones dirigidas; fichas semi-estructuradas y seguimiento semanal | revisar pares y profundizar calidad si el piloto no alcanza | equipo / #22 | abierto; diversidad diseñada, todavía no grabada ni evaluada |
 | R05 | Leakage entre train y test | 4 | 5 | variantes de una semilla aparecen en splits distintos | agrupar por semilla y hablante; congelar test | rehacer splits y resultados | por autoasignar | abierto |
@@ -17,7 +17,7 @@ Escala: probabilidad e impacto de 1 (bajo) a 5 (crítico). Revisar semanalmente.
 | R09 | Integración ocurre demasiado tarde | 4 | 4 | módulos solo funcionan en notebooks separados | vertical slice en ciclo 2 e integración semanal | replay CLI reproducible como demo base | por autoasignar | abierto |
 | R10 | Escritura se posterga | 4 | 4 | resultados sin explicación/versionado | documentar junto a cada decisión/experimento | semana de congelamiento, no de redacción inicial | todos | abierto |
 | R11 | Trabajo desigual o conocimiento en silos | 3 | 4 | solo una persona puede ejecutar/explicar un módulo | pareja revisora, rotación y contribuciones con evidencia | reasignar y hacer sesión de transferencia | todos | abierto |
-| R12 | La entrega es anterior a fin de diciembre | 3 | 5 | el profesor fija una fecha anticipada | confirmar día el 9 de septiembre y planificar hacia atrás | recortar extensiones inmediatamente | por autoasignar | abierto |
+| R12 | La entrega es anterior a fin de diciembre | 3 | 5 | el profesor fija una fecha anticipada | confirmar el día exacto, aún pendiente tras la [minuta del 2026-09-09](seguimientos/2026-09-09.md), y planificar hacia atrás | recortar extensiones inmediatamente | por autoasignar | abierto |
 
 ## Reglas
 

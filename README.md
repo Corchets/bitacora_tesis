@@ -2,10 +2,10 @@
 
 **Universidad del Norte Santo Tomás de Aquino (UNSTA)**  
 **Facultad de Ingeniería — Ingeniería en Informática (Plan 2008)**  
-**Proyecto Final Integrador | Año 2026**  
+**Proyecto Final Integrador | Año 2026**
 
-- **Integrantes:** Albarracín Ignacio, Antenucci Mateo, Grosso Luciano, Villalobo Evaristo.  
-- **Tutor:** Ing. Ernesto Rico.  
+- **Integrantes:** Albarracín Ignacio, Antenucci Mateo, Grosso Luciano, Villalobo Evaristo.
+- **Tutor:** Ing. Ernesto Rico.
 - **Defensa objetivo:** Última / penúltima semana de diciembre de 2026.
 
 ---
@@ -14,18 +14,17 @@
 
 El proyecto diseña, implementa y evalúa un prototipo para la **detección temprana y explicable de vishing** (estafas por llamadas de voz) en español con foco en Argentina.
 
-La clave del problema no es clasificar la llamada cuando ya terminó, sino **intervenir con suficiente anticipación**: advertir al usuario en tiempo real antes de que realice una acción de riesgo (entregar un código OTP, transferir dinero o instalar una aplicación de acceso remoto).
+La clave del problema es advertir al usuario en tiempo real antes de que realice una acción de riesgo (entregar un código OTP, transferir dinero o instalar una aplicación de acceso remoto).
 
-- **Inferencia local (*on-device*):** El audio y la transcripción se procesan en el dispositivo; ningún dato sale a la nube.
-- **Métricas temporales:** Evaluación basada en el margen de intervención ($L_R = T_R - T_A$, $L_C = T_C - T_A$) y la tasa de prevención ($Preventive@\delta$), no solo en exactitud tradicional.
+- **Procesamiento local (privacidad por diseño):** El procesamiento se realiza de forma local sin enviar audio ni transcripciones a la nube. La base experimental se evalúa sobre streaming de audio (_replay_) y la integración _on-device_ en Android permanece como objetivo sujeto a factibilidad técnica.
+- **Métricas temporales:** Evaluación orientada al margen de intervención (`L_R = T_R - T_A`, `L_C = T_C - T_A`) y a la tasa de prevención (`Preventive@δ`), no solo en la exactitud tradicional de fin de llamada.
+- **Exclusiones de alcance:** La captura universal de llamadas PSTN estándar, la biometría vocal y la detección de deepfakes quedan formalmente fuera de alcance.
 
 ---
 
 ## 2. Estado actual del proyecto
 
-- **Fase en curso:** **Ciclo 1 — Factibilidad técnica** (septiembre 2026).
-- **Hito alcanzado (2026-09-09):** Dirección general, alcance núcleo y preguntas centrales PI1 y PI2 aprobadas por el tutor Ing. Ernesto Rico. Estrategia de audio confirmada con reproducción en streaming (*replay*) para la base experimental y llamada VoIP controlada para la demo del prototipo.
-- **Gestión activa:** El backlog vivo se administra a través de **GitHub Issues** bajo los hitos del cronograma.
+- **Gestión activa:** El backlog vivo se administra en **GitHub Issues** bajo el [método de trabajo](docs/gestion/METODO-DE-TRABAJO.md). Para el avance semanal, ver la [bitácora](docs/gestion/bitacora/2026-09-semana-04.md); para decisiones abiertas, el [mapa](docs/gestion/MAPA-DECISIONES.md).
 
 ---
 
@@ -46,7 +45,6 @@ bitacora_tesis/
 │   │   ├── METODO-DE-TRABAJO.md   # Flujo de sesiones, tipos de issue y definiciones de terminado
 │   │   ├── MAPA-DECISIONES.md     # Registro vivo de decisiones abiertas y resueltas
 │   │   ├── REGISTRO-RIESGOS.md    # Matriz de riesgos técnicos, de datos y mitigaciones
-│   │   ├── RUNBOOK-RESOLUCION-ISSUES.md # Guía práctica y plantillas de prompts para issues
 │   │   ├── bitacora/              # Historial semanal del equipo (AAAA-MM-semana-NN.md)
 │   │   └── seguimientos/          # Consultas y minutas con el profesor (AAAA-MM-DD.md)
 │   ├── investigacion/
@@ -54,11 +52,14 @@ bitacora_tesis/
 │   │   ├── PREGUNTAS-DE-INVESTIGACION.md # Preguntas centrales PI1/PI2 y objetivos
 │   │   ├── PROTOCOLO-REVISION.md  # Método de búsqueda bibliográfica reproducible
 │   │   ├── SINTESIS-ESTADO-DEL-ARTE.md  # Literatura analizada, matriz comparativa y vacíos
-│   │   └── PRIMERA-INVESTIGACION-MODELOS.md # Recorte D09: ASR streaming + detector, catálogo Hugging Face
+│   │   ├── PRIMERA-INVESTIGACION-MODELOS.md # Recorte inicial D09: candidatos, no elección final
+│   │   ├── PREFACTIBILIDAD-TECNICA.md # Criterios de laboratorio y límite Android
+│   │   └── VENTANA-DE-CONTEXTO-Y-ALERTA.md # Recorte D08: contexto y alerta
 │   ├── datos-etica/
 │   │   ├── PRIVACIDAD-DEL-SISTEMA.md    # Privacy by Design on-device, Ley 25.326 y permisos Android
 │   │   ├── METODO-CREACION-CORPUS.md    # Fichas de rol, diseño de semillas, negativos difíciles y parada
 │   │   ├── CATALOGO-ESCENARIOS.csv      # Inventario estructurado de semillas de fraude y control
+│   │   ├── CONSENTIMIENTO-INFORMADO.md  # Modelo para participantes; firmas fuera de Git
 │   │   └── MANUAL-ANOTACION.md          # Taxonomía de etiquetas y protocolo por turnos
 │   ├── ingenieria/
 │   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md # Comparación replay vs VoIP vs altavoz vs telefonía
@@ -69,21 +70,3 @@ bitacora_tesis/
 │   └── tesis/
 │       └── ESQUELETO-INFORME.md   # Estructura capitular e índice orientativo de páginas
 ```
-
----
-
-## 4. Dinámica de trabajo
-
-1. **Backlog en GitHub Issues:** Las tareas se toman por autoasignación desde los issues del milestone activo.
-2. **Desarrollo enfocado:** Cada integrante/asistente trabaja sobre la fuente de verdad primaria del issue (código en `src/`, experimentos en `experiments/` o textos en `docs/`).
-3. **Barrido Documental al cerrar:** Al terminar una tarea, se verifica la fuente de verdad, se registra el artefacto en la bitácora semanal (`docs/gestion/bitacora/`) y se actualiza el mapa de decisiones o riesgos si correspondió.
-4. **Trabajo asistido por IA:** El repositorio cuenta con skills en `.agents/skills/` y un flujo guiado en [RUNBOOK-RESOLUCION-ISSUES.md](docs/gestion/RUNBOOK-RESOLUCION-ISSUES.md). Los asistentes leen [AGENTS.md](AGENTS.md).
-
----
-
-## 5. Reglas y Guardrails
-
-- **Audio fuera de Git:** Ningún archivo de audio (`.wav`, `.mp3`) se sube al repositorio (reglado por `.gitignore`).
-- **Datos ficticios:** Las grabaciones y guiones emplean identidades, cuentas y números ficticios; no se usan datos reales de víctimas.
-- **Privacidad desde el diseño:** Todo procesamiento conversacional es estrictamente local en el dispositivo.
-- **Alcance acotado:** La captura universal de llamadas PSTN estándar, la biometría vocal y la detección de deepfakes quedan formalmente fuera de alcance.

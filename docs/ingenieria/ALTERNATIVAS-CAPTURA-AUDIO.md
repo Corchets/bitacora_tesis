@@ -1,6 +1,6 @@
 # Alternativas para obtener el audio
 
-**Decisión a solicitar:** miércoles 9 de septiembre de 2026.
+**Estado:** comparación preparada para la reunión del 2026-09-09. La decisión D05 se tomó ese día; ver la [minuta](../gestion/seguimientos/2026-09-09.md) y el [mapa de decisiones](../gestion/MAPA-DECISIONES.md#d05--elegir-la-fuente-de-audio-demostrable).
 
 ## La distinción clave
 
@@ -18,7 +18,7 @@ Una sola alternativa no tiene por qué resolver ambas cosas.
 | Alternativa | Ventajas | Desventajas | Uso recomendado |
 |---|---|---|---|
 | Replay de WAV/FLAC como stream | reproducible, control temporal exacto, permite repetir modelos, medir latencia y testear cientos de llamadas | no es una llamada telefónica real | base obligatoria de experimentación y contingencia de demo |
-| Llamada en altavoz + micrófono externo | simple, intuitiva para una demostración, incorpora ruido y eco reales | audio variable, mezcla ambos hablantes, depende del ambiente, difícil de reproducir | demo temprana y prueba de robustez, no dataset principal |
+| Llamada en altavoz + micrófono externo | simple, intuitiva para una demostración, incorpora ruido y eco reales | audio variable, mezcla ambos hablantes, depende del ambiente, difícil de reproducir | despriorizada por mezcla de canales; no es la demo objetivo ni el dataset principal |
 | Misma app intentando grabar una llamada celular en altavoz | parece cercana al producto deseado | Android da prioridad a la llamada y no entrega uplink/downlink a apps ordinarias; puede recibir silencio o solo micrófono según dispositivo/estado | no usar como dependencia del proyecto |
 | Llamada VoIP controlada dentro de la solución | la app posee el flujo de audio, permite experiencia end-to-end y separa canales si se diseña así | integración, eco, red y permisos agregan trabajo; podría consumir varias semanas | integración objetivo después de validar el motor |
 | AOSP/root/app OEM privilegiada | acceso potencial al audio de telefonía del sistema | requiere dispositivo/ROM especial, permisos privilegiados, baja portabilidad y alto riesgo | únicamente extensión experimental, fuera del núcleo |
@@ -30,7 +30,7 @@ Las fuentes `VOICE_CALL`, `VOICE_UPLINK` y `VOICE_DOWNLINK` requieren ese permis
 que no está disponible para aplicaciones de terceros:
 [`MediaRecorder.AudioSource`](https://developer.android.com/reference/android/media/MediaRecorder.AudioSource).
 
-## Propuesta concreta
+## Implementación escalonada tras D05
 
 ### Nivel 1 — Base científica, obligatoria
 
@@ -46,38 +46,26 @@ riesgo + explicación + timestamp de alerta
 
 Sirve para entrenar, comparar, probar y reproducir los resultados.
 
-### Nivel 2 — Demo inmediata
-
-Una llamada entre dos dispositivos se reproduce por altavoz. Un tercer dispositivo
-o notebook capta el ambiente y ejecuta el detector. Demuestra interacción y ruido,
-pero sus resultados no reemplazan el benchmark reproducible.
-
-### Nivel 3 — Integración objetivo
+### Nivel 2 — Integración objetivo
 
 Una llamada VoIP controlada entrega a la aplicación el audio permitido. Solo se
 inicia cuando el Nivel 1 funciona y se mide el esfuerzo de integración.
 
-## Recomendación
+### Alternativa despriorizada — Altavoz externo
 
-Pedir al profesor que apruebe esta formulación:
+Una llamada entre dos dispositivos podría reproducirse por altavoz y captarse con
+un tercer dispositivo o notebook, pero mezcla hablantes y ambiente. El tutor la
+despriorizó el 2026-09-09; no reemplaza el benchmark reproducible ni es un hito
+obligatorio de demostración.
 
-> La evaluación principal será sobre grabaciones reproducidas como flujo en tiempo
-> real, para garantizar repetibilidad y marcas temporales. Se hará una demostración
-> temprana mediante altavoz y micrófono externo. La integración final deseada será
-> una llamada VoIP controlada, siempre que no comprometa la evaluación del motor.
-> La captura universal de llamadas celulares desde una aplicación Android ordinaria
-> queda fuera de alcance por restricciones documentadas de la plataforma.
+## Decisión validada el 2026-09-09
 
-## Preguntas al profesor
+El tutor aprobó el *replay* de grabaciones como base experimental reproducible y la
+llamada VoIP controlada como integración objetivo del prototipo. PSTN universal
+desde una app Android ordinaria queda fuera de alcance. Esta decisión no demuestra
+todavía la factibilidad de la integración VoIP ni el rendimiento en Android.
 
-1. ¿Considera suficiente replay en tiempo real para validar científicamente el
-   detector?
-2. ¿Acepta que la llamada VoIP sea integración objetivo y no requisito absoluto?
-3. ¿Desea una demostración con altavoz como evidencia de robustez/interacción?
-4. ¿Prefiere que el prototipo sea móvil desde el inicio o que primero se valide el
-   motor en computadora y luego se despliegue?
-
-## Spike de esta semana
+## Prueba mínima de factibilidad propuesta
 
 El issue del spike debe producir una evidencia mínima:
 
@@ -88,5 +76,5 @@ El issue del spike debe producir una evidencia mínima:
 5. marcar manualmente dónde debería aparecer una alerta por “código”;
 6. llevar a clase el resultado, aunque todavía sea imperfecto.
 
-No hace falta resolver VoIP esta semana. La finalidad es demostrar que el motor
+No hace falta resolver VoIP antes de esta prueba. La finalidad es demostrar que el motor
 puede recibir audio incremental y hacer visible el mayor riesgo técnico temprano.
