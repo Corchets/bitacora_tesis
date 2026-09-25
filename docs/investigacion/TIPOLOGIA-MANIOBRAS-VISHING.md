@@ -100,12 +100,31 @@ fuente que alguien del equipo abrió** (DOI, autores, año copiados de la fuente
 
 | Hueco | Por qué importa | Estado |
 |---|---|---|
-| UFECI (ciberdelincuencia) | El issue la pide; el catálogo cita UFECRI (criminal compleja), que es otra unidad | PENDIENTE |
+| UFECI (ciberdelincuencia) | El issue la pide; el catálogo cita UFECRI (criminal compleja), que es otra unidad | En curso: cuatro fuentes con canal telefónico confirmado (§6.1) |
 | Policía Federal / Policía de la Ciudad | El issue las pide; podrían respaldar la modalidad policial descartada | PENDIENTE |
 | Circulares o comunicaciones del BCRA | Solo se citan páginas de prevención, no normativa | PENDIENTE |
 | Compras en Marketplace | El issue la menciona; no hay semilla ni fuente | PENDIENTE |
 | Secuestro virtual | El issue la menciona; solo está cubierto en parte por "familiar en apuros" | PENDIENTE |
 | Llamada policial o judicial | Semilla descartada por falta de fuente | PENDIENTE |
+
+### 6.1 Fuentes de la UFECI en revisión
+
+Abiertas por Corchets el 2026-09-25: las cuatro mencionan la llamada telefónica como canal. Todavía
+**no** se extrajo qué entidad suplantan ni qué piden, así que no se usan para §3 ni para el
+catálogo hasta completar esas columnas con la frase y la página de la fuente.
+
+| Fuente | Publicación | Canal telefónico | Suplanta a | Pide | Página / frase |
+|---|---|---|---|---|---|
+| [Informe anual 2024](https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf) | 2025-06 (según URL) | sí | PENDIENTE | PENDIENTE | PENDIENTE |
+| [Capacitación UFECI–WhatsApp](https://www.fiscales.gob.ar/ciberdelincuencia/la-ufeci-y-whatsapp-capacitaron-a-personal-judicial-y-del-mpf-frente-a-las-maniobras-fraudulentas-para-tomar-control-de-las-cuentas-de-mensajeria/) | PENDIENTE | sí | PENDIENTE | PENDIENTE | PENDIENTE |
+| [Alerta de obtención de datos bajo engaño](https://www.fiscales.gob.ar/fiscalias/ufeci-alerta-sobre-una-nueva-campana-de-obtencion-de-datos-personales-bajo-engano/) | PENDIENTE | sí | PENDIENTE | PENDIENTE | PENDIENTE |
+| [Informe de pandemia](https://www.mpf.gob.ar/ufeci/files/2021/09/UFECI_informe-pandemia.pdf) | 2021-09, datos de 2020 | sí | PENDIENTE | PENDIENTE | PENDIENTE |
+
+El informe de pandemia no describe el presente: sirve para mostrar que una modalidad **persiste**
+desde 2020 si también aparece en el informe 2024, no como evidencia independiente de su vigencia.
+
+**Cifra no usada:** notas de prensa atribuyen a la UFECI un porcentaje de vishing sobre el total
+de reportes. No entra hasta verlo en el informe con su página y cómo se calculó.
 
 ## 7. Aporte a D07
 
