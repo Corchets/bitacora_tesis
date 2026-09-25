@@ -111,6 +111,8 @@ está en [METRICAS.md](../evaluacion/METRICAS.md). Dos puntos que esta decisión
 `T_A` se define con histéresis (no el primer cruce del umbral, sino el primero que se sostiene dos
 actualizaciones), y hay que elegir si `Preventive@δ` se mide contra `T_C` o contra `T_R`.
 
+- Evidencia nueva (2026-09-23, spike, no cierra D07): [sonda D](../../experiments/laboratorio/casos/README.md) — «código de la puerta» prende `REQUEST_AUTH_CODE` y «diez mil pesos» no prende nada; material para [Manual §4.2/§4.3](../datos-etica/MANUAL-ANOTACION.md#4-esqueleto-a-completar-después-del-piloto).
+
 ### D08 — Congelar protocolo experimental
 
 - **Pregunta:** ¿cómo se muestrea, divide y evalúa sin fuga de información?
@@ -133,6 +135,7 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   Propone además ventana deslizante con decaimiento y un registro conjunto de eventos.
   Los números salen de llamadas sintéticas: prueban el mecanismo, no miden rendimiento.
   Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23).
+- **Evidencia nueva (2026-09-23, spike, no cierra D08):** la histéresis implementada dispara con un turno alto + cualquier opinión (no dos altos); el umbral 0,3–0,5 da idéntico; las semillas-espejo repiten el leakage que [§9](../datos-etica/METODO-CREACION-CORPUS.md#9-división-de-datos) prohíbe. Ver [pasadas 12 y 23](../../experiments/laboratorio/casos/README.md).
 
 ### D09 — Elegir ASR y detector
 
@@ -146,8 +149,9 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
   Catálogo de bajada = Hugging Face (consulta 2026-09-16). ASR del recorte:
   Moonshine tiny-es (baja) y Zipformer Kroko ONNX (media/alta). Whisper solo comparación.
-  Vosk oficial queda fuera del recorte Hub. Detector: ALBETO tiny/base, DistilBETO, RoBERTuito.
-  Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28).
+  Vosk oficial queda fuera del recorte Hub. Detector: TF–IDF + reglas (las tres gamas).
+  ALBETO, DistilBETO y RoBERTuito no entran al recorte (2026-09-17).
+  Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28); corrida config `alta` (recorte 2026-09-17): [issue #29](https://github.com/Corchets/bitacora_tesis/issues/29).
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -219,7 +223,7 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   **salvo** pedido crítico por reglas (capa 2), que avisa ya.
   Ventana de la red en v0: **turno completo**; achique (5 s / 64 tokens) a medir
   en el piloto. Desarrollo: **un programa, config por gama**; se arranca con
-  **alta** (Zipformer Kroko Hub + RoBERTuito; TF–IDF de baseline).
+  **alta** (Zipformer Kroko Hub + TF–IDF; reglas de capa 2).
   Baja `asr`: Moonshine tiny-es. Media `asr`: Zipformer Kroko.
   Hilos de partida: baja 2 (1+1), media 4 (3+1), alta 6 (4+2).
   RAM: **256 / 512 / 1024 MB**. Ver
