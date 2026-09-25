@@ -139,7 +139,9 @@ Pendiente de leer, en este orden: Jones, K. S., Armstrong, M. E., Tornblad, M. K
 Computer Security* 29(2) — es el único sobre vishing y el que más puede aportar; el resto de la
 lista de principios de Stajano y Wilson (cubriría `PERSISTENCE_DISTRACTION`); la definición de
 *Distraction* y *Liking, Similarity & Deception* de Ferreira et al. (cubriría `TRUST_BUILDING`);
-y Cialdini para `THREAT_FEAR` (aversión a la pérdida).
+Cialdini queda **fuera del alcance de esta pasada**: el equipo no consiguió el libro (2026-09-25).
+`THREAT_FEAR` tendrá que apoyarse en la definición de *Distraction* de Ferreira et al., que nombra
+_"what they can lose or miss out on"_, o en otra fuente accesible.
 
 ### 5.3 Fuentes descartadas del deep research
 
