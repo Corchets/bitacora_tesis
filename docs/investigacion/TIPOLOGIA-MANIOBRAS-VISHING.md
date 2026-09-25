@@ -42,14 +42,14 @@ catálogo, donde está la URL y la fecha de consulta.
 | Modalidad | Se presenta como | Qué busca | Pedido crítico (capa 2) | Fuente (ver catálogo) |
 |---|---|---|---|---|
 | Compra sospechosa y pedido de código | banco | código de verificación | `REQUEST_AUTH_CODE` | BCRA — `SC-BANK-OTP-01` |
-| Verificación falsa de WhatsApp | soporte o conocido | código de activación de la cuenta | `REQUEST_AUTH_CODE` | Min. Seguridad — `SC-WA-CODE-01` |
+| Verificación falsa de WhatsApp | soporte o conocido | código de activación de la cuenta | `REQUEST_AUTH_CODE` | Min. Seguridad, UFECI — `SC-WA-CODE-01` |
 | Falso soporte que pide la clave | mesa de ayuda | usuario y contraseña | `REQUEST_SECRET` | BCRA — `SC-SOPORTE-CLAVE-01` |
 | Beneficio previsional falso | ANSES / organismo previsional | datos personales | `REQUEST_PERSONAL_DATA` | ANSES, UFECRI-MPF — `SC-ORG-BENEFICIO-01` |
 | Premio o sorteo | empresa u organizador | datos de cuenta o tarjeta | `REQUEST_PERSONAL_DATA` | BCRA, Min. Seguridad — `SC-PREMIO-01` |
 | Cambio de clave por teléfono | banco u organismo público | que la persona cambie o entregue la clave | `REQUEST_SECURITY_ACTION` | Min. Seguridad — `SC-CLAVE-CAMBIO-01` |
 | Familiar en apuros | familiar | dinero | `REQUEST_TRANSFER` | UFECRI-MPF — `SC-FAMILIAR-DINERO-01` |
 | Canje de billetes | entidad bancaria | efectivo o transferencia | `REQUEST_TRANSFER` | UFECRI-MPF — `SC-BANK-BILLETES-01` |
-| Pantalla compartida | banco, empresa de servicios o soporte | acceso al dispositivo | `REQUEST_REMOTE_ACCESS` | Banco Galicia — `SC-SOPORTE-REMOTO-01` |
+| Pantalla compartida | banco, empresa de servicios o soporte | acceso al dispositivo | `REQUEST_REMOTE_ACCESS` | Banco Galicia, UFECI — `SC-SOPORTE-REMOTO-01` |
 
 **Descartada por falta de fuente:** _resguardo de fondos por causa judicial_ (policía o fiscalía,
 `SC-POLICIA-RESGUARDO-01`). La propuso el modelo; UFECRI enumera familiar, entidad bancaria y
@@ -77,7 +77,9 @@ Lectura preliminar (sin valor estadístico, son 9 semillas diseñadas por el equ
 - La urgencia aparece en casi todas las modalidades: es la maniobra más transversal.
 - `THREAT_FEAR` y `PERSISTENCE_DISTRACTION` tienen dos semillas cada una. Si el corpus las
   reproduce en esa proporción, quedan en riesgo de ser clases raras (Manual §1).
-- `REQUEST_REMOTE_ACCESS` y `REQUEST_SECURITY_ACTION` tienen una sola semilla cada una.
+- `REQUEST_REMOTE_ACCESS` y `REQUEST_SECURITY_ACTION` tienen una sola semilla cada una. La de
+  acceso remoto tiene ahora dos fuentes oficiales (Banco Galicia y UFECI 2024); el problema es la
+  cantidad de semillas, no el respaldo.
 
 ## 5. Fundamento en la literatura de ingeniería social
 
@@ -100,7 +102,7 @@ fuente que alguien del equipo abrió** (DOI, autores, año copiados de la fuente
 
 | Hueco | Por qué importa | Estado |
 |---|---|---|
-| UFECI (ciberdelincuencia) | El issue la pide; el catálogo cita UFECRI (criminal compleja), que es otra unidad | Extraída (§6.1); falta cotejo literal y pasar al catálogo |
+| UFECI (ciberdelincuencia) | El issue la pide; el catálogo cita UFECRI (criminal compleja), que es otra unidad | Resuelto (§6.1): cotejada e incorporada al catálogo |
 | Policía Federal / Policía de la Ciudad | El issue las pide; podrían respaldar la modalidad policial descartada | PENDIENTE |
 | Circulares o comunicaciones del BCRA | Solo se citan páginas de prevención, no normativa | PENDIENTE |
 | Compras en Marketplace | El issue la menciona; no hay semilla ni fuente | PENDIENTE |
@@ -109,17 +111,16 @@ fuente que alguien del equipo abrió** (DOI, autores, año copiados de la fuente
 
 ### 6.1 Fuentes de la UFECI
 
-Abiertas y extraídas por Corchets el 2026-09-25. **Cotejo literal pendiente:** antes de pasar estas
-frases al catálogo, confirmar con Ctrl+F en la fuente que la cita textual y la página coinciden.
+Abiertas, extraídas y cotejadas literalmente por Corchets el 2026-09-25 (frase y página).
 
 | Fuente | Publicación | ¿Por llamada? | Suplanta a | Pide | Presión | Página |
 |---|---|---|---|---|---|---|
 | [Informe anual 2024](https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf) | junio 2025 | sí | bancos, billeteras digitales, tarjetas, empresas de servicios; soporte de WhatsApp | acceso remoto (vía link); código de WhatsApp | excusa de autorizar una compra o verificación de seguridad | 18, 19, 24 |
 | [Capacitación UFECI–WhatsApp](https://www.fiscales.gob.ar/ciberdelincuencia/la-ufeci-y-whatsapp-capacitaron-a-personal-judicial-y-del-mpf-frente-a-las-maniobras-fraudulentas-para-tomar-control-de-las-cuentas-de-mensajeria/) | 2021-11-24 | sí, y también mensajes | centro de vacunación; amigo o familiar | código de WhatsApp o captura de la verificación | familiar "con alguna urgencia" | web |
-| [Informe de pandemia](https://www.mpf.gob.ar/ufeci/files/2021/09/UFECI_informe-pandemia.pdf) | septiembre 2021 (datos 2020) | sí (reporta casos de vishing) | bancos / homebanking; ANSES y programas de ayuda | credenciales de homebanking; luego transferencias | no dice | 16–18 |
+| [Informe de pandemia](https://www.mpf.gob.ar/ufeci/files/2021/09/UFECI_informe-pandemia.pdf) | septiembre 2021 (datos 2020) | sí (275 casos de vishing, p. 17) | bancos / homebanking; ANSES y programas de ayuda | credenciales de homebanking; luego transferencias | no dice | 16–18 |
 | [Alerta de obtención de datos bajo engaño](https://www.fiscales.gob.ar/fiscalias/ufeci-alerta-sobre-una-nueva-campana-de-obtencion-de-datos-personales-bajo-engano/) | 2019-12-13 | **no** (WhatsApp + sitio web) | Ministerio de Trabajo | edad y teléfono | no dice | web |
 
-Frases de trabajo (a cotejar):
+Frases cotejadas:
 
 - Informe 2024: _"las víctimas reciben llamados de supuestos representantes de bancos, billeteras
   digitales, administradoras de tarjetas de crédito o empresas de servicios, usualmente con la
@@ -134,7 +135,7 @@ Frases de trabajo (a cotejar):
   incluso simulaciones en las que el estafador se hace pasar por algún amigo o familiar con alguna
   urgencia"_.
 
-**Qué cambia en la tipología (una vez cotejado):**
+**Qué cambia en la tipología:**
 
 | Hallazgo | Efecto |
 |---|---|
@@ -145,9 +146,9 @@ Frases de trabajo (a cotejar):
 | La alerta de 2019 no es por llamada | Queda fuera de la tipología (criterio de §2) |
 | El informe 2024 menciona PFA, AFIP/ARCA y Correo Argentino suplantados con falsas multas o citaciones, pero **por correo electrónico** | **No** recupera `SC-POLICIA-RESGUARDO-01`: sigue faltando una fuente de falso policía **por teléfono** |
 
-**Cifra pendiente:** el informe de pandemia reporta una cantidad de casos de vishing. Anotar el
-número exacto con su página antes de usarlo. El porcentaje atribuido por prensa al informe 2024
-sigue sin usarse.
+**Cifra:** el informe de pandemia registra **275 casos** de phishing telefónico o vishing (p. 17).
+Es una cantidad de casos reportados a la UFECI en el período del informe, no una medida de
+prevalencia. El porcentaje atribuido por prensa al informe 2024 sigue sin usarse.
 
 ## 7. Aporte a D07
 

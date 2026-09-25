@@ -114,8 +114,10 @@ es maquillar el número: es que la taxonomía está mal definida y hay que arreg
   [catálogo](CATALOGO-ESCENARIOS.csv) sobre fuentes oficiales no identificó una modalidad que
   documente `REQUEST_REMOTE_ACCESS` por teléfono. La alerta de Banco Galicia sí describe la
   pantalla compartida en una llamada; Mateo aprobó el 2026-09-23 usarla como fuente de una entidad
-  financiera regulada. La etiqueta tiene **una sola semilla documentada en el catálogo**: conviene
-  mirarla de nuevo al cerrar D07.
+  financiera regulada. El 2026-09-25 se sumó una segunda fuente oficial: el informe anual 2024 de la
+  UFECI describe llamados de falsos bancos o empresas que terminan instalando acceso remoto
+  ([tipología §6.1](../investigacion/TIPOLOGIA-MANIOBRAS-VISHING.md#61-fuentes-de-la-ufeci)). La
+  etiqueta sigue con **una sola semilla en el catálogo**: conviene mirarla de nuevo al cerrar D07.
 - Las modalidades argentinas concretas — código de WhatsApp, "premio de ANSES", falso soporte de
   billetera virtual — ¿son etiquetas nuevas o instancias de las existentes?
 - ¿Quién valida la taxonomía además del equipo? Evaluar si se consulta a personal con experiencia
