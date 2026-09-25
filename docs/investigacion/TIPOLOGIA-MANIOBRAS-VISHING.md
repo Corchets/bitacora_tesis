@@ -100,31 +100,54 @@ fuente que alguien del equipo abrió** (DOI, autores, año copiados de la fuente
 
 | Hueco | Por qué importa | Estado |
 |---|---|---|
-| UFECI (ciberdelincuencia) | El issue la pide; el catálogo cita UFECRI (criminal compleja), que es otra unidad | En curso: cuatro fuentes con canal telefónico confirmado (§6.1) |
+| UFECI (ciberdelincuencia) | El issue la pide; el catálogo cita UFECRI (criminal compleja), que es otra unidad | Extraída (§6.1); falta cotejo literal y pasar al catálogo |
 | Policía Federal / Policía de la Ciudad | El issue las pide; podrían respaldar la modalidad policial descartada | PENDIENTE |
 | Circulares o comunicaciones del BCRA | Solo se citan páginas de prevención, no normativa | PENDIENTE |
 | Compras en Marketplace | El issue la menciona; no hay semilla ni fuente | PENDIENTE |
 | Secuestro virtual | El issue la menciona; solo está cubierto en parte por "familiar en apuros" | PENDIENTE |
-| Llamada policial o judicial | Semilla descartada por falta de fuente | PENDIENTE |
+| Llamada policial o judicial | Semilla descartada por falta de fuente | PENDIENTE: la UFECI 2024 menciona PFA solo por correo electrónico |
 
-### 6.1 Fuentes de la UFECI en revisión
+### 6.1 Fuentes de la UFECI
 
-Abiertas por Corchets el 2026-09-25: las cuatro mencionan la llamada telefónica como canal. Todavía
-**no** se extrajo qué entidad suplantan ni qué piden, así que no se usan para §3 ni para el
-catálogo hasta completar esas columnas con la frase y la página de la fuente.
+Abiertas y extraídas por Corchets el 2026-09-25. **Cotejo literal pendiente:** antes de pasar estas
+frases al catálogo, confirmar con Ctrl+F en la fuente que la cita textual y la página coinciden.
 
-| Fuente | Publicación | Canal telefónico | Suplanta a | Pide | Página / frase |
-|---|---|---|---|---|---|
-| [Informe anual 2024](https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf) | 2025-06 (según URL) | sí | PENDIENTE | PENDIENTE | PENDIENTE |
-| [Capacitación UFECI–WhatsApp](https://www.fiscales.gob.ar/ciberdelincuencia/la-ufeci-y-whatsapp-capacitaron-a-personal-judicial-y-del-mpf-frente-a-las-maniobras-fraudulentas-para-tomar-control-de-las-cuentas-de-mensajeria/) | PENDIENTE | sí | PENDIENTE | PENDIENTE | PENDIENTE |
-| [Alerta de obtención de datos bajo engaño](https://www.fiscales.gob.ar/fiscalias/ufeci-alerta-sobre-una-nueva-campana-de-obtencion-de-datos-personales-bajo-engano/) | PENDIENTE | sí | PENDIENTE | PENDIENTE | PENDIENTE |
-| [Informe de pandemia](https://www.mpf.gob.ar/ufeci/files/2021/09/UFECI_informe-pandemia.pdf) | 2021-09, datos de 2020 | sí | PENDIENTE | PENDIENTE | PENDIENTE |
+| Fuente | Publicación | ¿Por llamada? | Suplanta a | Pide | Presión | Página |
+|---|---|---|---|---|---|---|
+| [Informe anual 2024](https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf) | junio 2025 | sí | bancos, billeteras digitales, tarjetas, empresas de servicios; soporte de WhatsApp | acceso remoto (vía link); código de WhatsApp | excusa de autorizar una compra o verificación de seguridad | 18, 19, 24 |
+| [Capacitación UFECI–WhatsApp](https://www.fiscales.gob.ar/ciberdelincuencia/la-ufeci-y-whatsapp-capacitaron-a-personal-judicial-y-del-mpf-frente-a-las-maniobras-fraudulentas-para-tomar-control-de-las-cuentas-de-mensajeria/) | 2021-11-24 | sí, y también mensajes | centro de vacunación; amigo o familiar | código de WhatsApp o captura de la verificación | familiar "con alguna urgencia" | web |
+| [Informe de pandemia](https://www.mpf.gob.ar/ufeci/files/2021/09/UFECI_informe-pandemia.pdf) | septiembre 2021 (datos 2020) | sí (reporta casos de vishing) | bancos / homebanking; ANSES y programas de ayuda | credenciales de homebanking; luego transferencias | no dice | 16–18 |
+| [Alerta de obtención de datos bajo engaño](https://www.fiscales.gob.ar/fiscalias/ufeci-alerta-sobre-una-nueva-campana-de-obtencion-de-datos-personales-bajo-engano/) | 2019-12-13 | **no** (WhatsApp + sitio web) | Ministerio de Trabajo | edad y teléfono | no dice | web |
 
-El informe de pandemia no describe el presente: sirve para mostrar que una modalidad **persiste**
-desde 2020 si también aparece en el informe 2024, no como evidencia independiente de su vigencia.
+Frases de trabajo (a cotejar):
 
-**Cifra no usada:** notas de prensa atribuyen a la UFECI un porcentaje de vishing sobre el total
-de reportes. No entra hasta verlo en el informe con su página y cómo se calculó.
+- Informe 2024: _"las víctimas reciben llamados de supuestos representantes de bancos, billeteras
+  digitales, administradoras de tarjetas de crédito o empresas de servicios, usualmente con la
+  excusa de autorizar una compra o realizar una verificación de seguridad. Luego, [...] envían
+  links a las víctimas, logrando instalar algún software de acceso remoto"_.
+- Informe 2024: _"las víctimas reciben llamados con diversas excusas (turnos por campañas de
+  vacunación, beneficios de algún organismo oficial, premios o descuentos de una empresa privada y
+  del supuesto servicio técnico de la misma aplicación de WhatsApp, etc.). Luego le solicitan a la
+  víctima que remita un código desde su teléfono"_.
+- Capacitación 2021: _"Un ardid frecuente para convencer a las personas a entregar el código son
+  llamados falsos para confirmar turnos en centros de vacunación contra la Covid-19. [...] o
+  incluso simulaciones en las que el estafador se hace pasar por algún amigo o familiar con alguna
+  urgencia"_.
+
+**Qué cambia en la tipología (una vez cotejado):**
+
+| Hallazgo | Efecto |
+|---|---|
+| El informe 2024 describe acceso remoto pedido en una llamada de falso banco o empresa | Segunda fuente oficial para `REQUEST_REMOTE_ACCESS` (antes solo Banco Galicia). Refuerza `SC-SOPORTE-REMOTO-01` |
+| El informe 2024 y la capacitación 2021 describen el pedido del código de WhatsApp por llamada | Refuerza `SC-WA-CODE-01` con fuente de la UFECI; la modalidad aparece en 2021 y en 2024 (persiste) |
+| Las excusas del código incluyen beneficio de organismo, premio y soporte de WhatsApp | Un mismo pedido (`REQUEST_AUTH_CODE`) con varios pretextos: el pretexto no define la modalidad, el pedido sí |
+| El informe de pandemia describe credenciales de homebanking seguidas de transferencia | Apoya `REQUEST_SECRET` → `REQUEST_TRANSFER` como secuencia; persistencia desde 2020 |
+| La alerta de 2019 no es por llamada | Queda fuera de la tipología (criterio de §2) |
+| El informe 2024 menciona PFA, AFIP/ARCA y Correo Argentino suplantados con falsas multas o citaciones, pero **por correo electrónico** | **No** recupera `SC-POLICIA-RESGUARDO-01`: sigue faltando una fuente de falso policía **por teléfono** |
+
+**Cifra pendiente:** el informe de pandemia reporta una cantidad de casos de vishing. Anotar el
+número exacto con su página antes de usarlo. El porcentaje atribuido por prensa al informe 2024
+sigue sin usarse.
 
 ## 7. Aporte a D07
 
