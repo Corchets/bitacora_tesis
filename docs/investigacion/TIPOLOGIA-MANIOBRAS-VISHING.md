@@ -96,29 +96,44 @@ Lectura preliminar (sin valor estadístico, son 9 semillas diseñadas por el equ
 
 | Fuente | Qué se verificó | Cómo |
 |---|---|---|
-| Ferreira, A., Coventry, L. y Lenzini, G. (2015). *Principles of persuasion in social engineering and their use in phishing*. HAS 2015, LNCS 9190, Springer. [PDF abierto](https://orbilu.uni.lu/bitstream/10993/20301/1/FerreiraAna-CameraReady.pdf) | Definiciones literales de *Authority* y *Social Proof*, y la figura que integra las taxonomías de Cialdini, Gragg y Stajano | Corchets leyó el PDF el 2026-09-25 |
+| Ferreira, A., Coventry, L. y Lenzini, G. (2015). *Principles of persuasion in social engineering and their use in phishing*. HAS 2015, LNCS 9190, Springer. [PDF abierto](https://orbilu.uni.lu/bitstream/10993/20301/1/FerreiraAna-CameraReady.pdf) | Los cinco *Principles of Persuasion in Social Engineering* (PPSE) con su definición literal, y la Fig. 2 que integra las taxonomías de Cialdini, Gragg y Stajano | Corchets leyó el PDF el 2026-09-25 |
 | Stajano, F. y Wilson, P. (2011). *Understanding scam victims: seven principles for systems security*. *Communications of the ACM*, 54(3). | Texto literal del *Time Principle* | Corchets leyó el artículo el 2026-09-25 |
 
-Citas literales cotejadas:
+Citas literales cotejadas (Ferreira et al., 2015):
 
-- Ferreira et al., *Authority (AUTH)*: _"Society trains people not to question authority so they are
-  conditioned to respond to it. People usually follow an expert or pretense of authority and do a
-  great deal for someone they think is an authority."_
-- Ferreira et al., *Social Proof (SP)*: _"People tend to mimic what the majority of people do or
-  seem to be doing. People let their guard and suspicion down when everyone else appears to share
-  the same behaviours and risks. In this way, they will not be held solely responsible for their
-  actions."_
-- Stajano y Wilson, *Time Principle*: _"When under time pressure to make an important decision, we
-  use a different decision strategy, and hustlers steer us toward one involving less reasoning."_
+- *Authority (AUTH)*: _"Society trains people not to question authority so they are conditioned to
+  respond to it. People usually follow an expert or pretense of authority and do a great deal for
+  someone they think is an authority."_
+- *Social Proof (SP)*: _"People tend to mimic what the majority of people do or seem to be doing.
+  People let their guard and suspicion down when everyone else appears to share the same behaviours
+  and risks. In this way, they will not be held solely responsible for their actions."_
+- *Liking, Similarity & Deception (LSD)*: _"People prefer to abide to whom (they think) they know or
+  like, or to whom they are similar to or familiar with, as well as attracted to."_
+- *Commitment, Reciprocation & Consistency (CRC)*: _"People feel more confident in their decision
+  once they commit (publically) to a specific action and need to follow it through until the end.
+  [...] There is an automatic response of repaying a favour."_
+- *Distraction (DIS)*: _"People focus on one thing and ignore other things that may happen without
+  them noticing; they focus attention on what they can gain, what they need, what they can lose or
+  miss out on, or if that thing will soon be unavailable, has been censored, restricted or will be
+  more expensive later. These distractions can heighten people's emotional state and make them
+  forget other logical facts to consider when making decisions."_
+
+Cita literal cotejada (Stajano y Wilson, 2011):
+
+- *Time Principle*: _"When under time pressure to make an important decision, we use a different
+  decision strategy, and hustlers steer us toward one involving less reasoning."_
 
 **Sobre las páginas:** el PDF abierto de Ferreira et al. no tiene la paginación del volumen LNCS, y
 del artículo de Stajano y Wilson se leyó el recuadro del principio sin registrar el número de
 página. Hasta resolverlo, estas citas se referencian **por nombre de principio**, no por página. El
 número de página se completa contra la versión publicada antes de que las citas entren al informe.
 
-**Nombre correcto del principio de Stajano y Wilson:** la figura de Ferreira et al. lo identifica
-como **Social compliance** (y el que se corresponde con *Social Proof*, como **Herd**). No es
-"Conformity": ese nombre apareció en el deep research y no está en las fuentes.
+**Nombres de los principios de Stajano y Wilson:** la Fig. 2 de Ferreira et al. los enumera como
+`S1` a `S7`. Se leyeron: `S1` *social compliance*, `S2` *herd*, `S3` *deception*, `S4` *dishonesty*,
+`S6` *need & greed*, `S7` *distraction*. `S5` no se distingue en la captura y el *Time Principle*
+del propio artículo no quedó mapeado a un número. Queda por completar contra el artículo original.
+Lo que sí está confirmado: **no existe un "Conformity Principle"** — ese nombre lo inventó el deep
+research; el principio correspondiente a autoridad es *social compliance*.
 
 ### 5.2 Correspondencia con nuestras etiquetas
 
@@ -127,21 +142,23 @@ Asignación del equipo, no de las fuentes. Solo filas con cita cotejada.
 | Etiqueta | Principio | Fuente | Solidez |
 |---|---|---|---|
 | `AUTHORITY_CLAIM` | *Authority (AUTH)* | Ferreira et al. (2015) | directa |
-| `AUTHORITY_CLAIM` | *Social compliance* | Stajano y Wilson (2011), vía la figura de Ferreira et al. | indirecta: el nombre se leyó en Ferreira, no en Stajano |
+| `AUTHORITY_CLAIM` | *social compliance* (`S1`) | Stajano y Wilson (2011), vía Fig. 2 de Ferreira et al. | indirecta: el nombre se leyó en Ferreira, no en Stajano |
 | `URGENCY_PRESSURE` | *Time Principle* | Stajano y Wilson (2011) | directa |
-| `THREAT_FEAR` | — | — | **sin respaldo verificado** |
-| `ISOLATION_SECRECY` | — | — | **sin respaldo verificado** (ver §5.4) |
-| `TRUST_BUILDING` | — | — | **sin respaldo verificado** |
-| `PERSISTENCE_DISTRACTION` | — | — | **sin respaldo verificado** |
+| `URGENCY_PRESSURE` | *Distraction (DIS)* | Ferreira et al. (2015) | interpretada: la premura aparece dentro de DIS (_"will soon be unavailable [...] or will be more expensive later"_), no como principio propio |
+| `THREAT_FEAR` | *Distraction (DIS)* | Ferreira et al. (2015) | interpretada: la pérdida aparece dentro de DIS (_"what they can lose or miss out on"_, _"heighten people's emotional state"_), no hay principio de miedo o amenaza |
+| `TRUST_BUILDING` | *Liking, Similarity & Deception (LSD)* | Ferreira et al. (2015) | interpretada: LSD cubre agrado y familiaridad; nuestra etiqueta apunta a la legitimidad **procedimental** (jerga, número de trámite), que LSD no nombra |
+| `PERSISTENCE_DISTRACTION` | *Distraction (DIS)* | Ferreira et al. (2015) | parcial: la ocupación cognitiva es directa; la **insistencia tras una objeción** no está en DIS |
+| `ISOLATION_SECRECY` | — | — | **sin respaldo** en ninguna de las tres taxonomías (ver §5.4) |
 
-Pendiente de leer, en este orden: Jones, K. S., Armstrong, M. E., Tornblad, M. K. y Siami Namin, A.
-(2021), *How social engineers use persuasion principles during vishing attacks*, *Information and
-Computer Security* 29(2) — es el único sobre vishing y el que más puede aportar; el resto de la
-lista de principios de Stajano y Wilson (cubriría `PERSISTENCE_DISTRACTION`); la definición de
-*Distraction* y *Liking, Similarity & Deception* de Ferreira et al. (cubriría `TRUST_BUILDING`);
-Cialdini queda **fuera del alcance de esta pasada**: el equipo no consiguió el libro (2026-09-25).
-`THREAT_FEAR` tendrá que apoyarse en la definición de *Distraction* de Ferreira et al., que nombra
-_"what they can lose or miss out on"_, o en otra fuente accesible.
+Cinco de seis etiquetas tienen ahora algún respaldo cotejado, pero solo dos lo tienen **directo**.
+Las tres interpretadas cuelgan del mismo principio (*Distraction*), lo que es un dato en sí mismo
+(§5.5).
+
+Pendiente de leer: Jones, K. S., Armstrong, M. E., Tornblad, M. K. y Siami Namin, A. (2021),
+*How social engineers use persuasion principles during vishing attacks*, *Information and Computer
+Security* 29(2) — el único sobre vishing, y el que podría convertir en directas varias de las
+interpretadas. Cialdini queda **fuera del alcance de esta pasada**: el equipo no consiguió el libro
+(2026-09-25); su ausencia ya no bloquea ninguna etiqueta.
 
 ### 5.3 Fuentes descartadas del deep research
 
@@ -163,8 +180,10 @@ desconfiar, no para celebrar.
 
 ### 5.4 Hallazgo: `ISOLATION_SECRECY` no está en las taxonomías clásicas
 
-Ni Ferreira et al. (2015) ni la lista de Stajano y Wilson (2011) incluyen el aislamiento de la
-víctima o la imposición de secreto como principio de persuasión. Es coherente: esas taxonomías se
+La Fig. 2 de Ferreira et al. integra en un solo diagrama **las tres taxonomías completas**
+(Cialdini `C1`–`C5`, Gragg `G1`–`G7`, Stajano `S1`–`S7`) y las reduce a cinco principios. Ninguno de
+los principios que aparecen ahí, ni de los cinco resultantes, nombra el aislamiento de la víctima o
+la imposición de secreto. Es coherente: esas taxonomías se
 construyeron sobre estafas presenciales y phishing por correo, donde no existe un canal abierto que
 el atacante deba monopolizar. La orden de no cortar solo tiene sentido operativo por teléfono.
 
@@ -174,6 +193,22 @@ el atacante deba monopolizar. La orden de no cortar solo tiene sentido operativo
 > Ciudad, que describe que los delincuentes "intentarán todo el tiempo tener el control de la
 > comunicación" (§6.1 y §6.2). Eso es defendible y además es una contribución, pero hay que
 > **decirlo**, no disimularlo con una cita forzada.
+
+### 5.5 Hallazgo: la literatura fusiona urgencia, miedo y distracción
+
+Ferreira et al. colocan dentro de un único principio, *Distraction*, tres cosas que nuestra
+taxonomía separa: la presión de tiempo (_"will soon be unavailable"_), la amenaza de pérdida
+(_"what they can lose or miss out on"_) y la ocupación de la atención. Para una taxonomía
+psicológica tiene sentido: el mecanismo subyacente es el mismo, estrechar el foco atencional.
+
+> **Estado: propuesta sin discutir.** Para un detector que trabaja sobre texto, mantenerlas
+> separadas parece preferible: `URGENCY_PRESSURE` y `THREAT_FEAR` se realizan con vocabulario
+> distinto ("en dos minutos" vs. "queda bloqueada la cuenta") y, sobre todo, nuestras etiquetas
+> existen para **explicarle a la persona qué le están haciendo**, no para clasificar el mecanismo
+> cognitivo (Manual §1). Decidirlo es parte de
+> [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico); acá solo queda
+> registrado que la separación es **nuestra** y que hay que justificarla, porque la fuente no la
+> hace.
 
 ## 6. Huecos conocidos
 
@@ -277,7 +312,7 @@ etiquetas, pero dos puntos quedan abiertos:
 
 ## 8. Terminado cuando
 
-- [ ] §5 tiene una fuente verificada por fila (hoy: 2 de 6 etiquetas con respaldo cotejado).
+- [ ] §5 tiene una fuente verificada por fila (hoy: 5 de 6, dos de ellas directas; `ISOLATION_SECRECY` sin respaldo por §5.4).
 - [ ] Leído Jones et al. (2021), el único trabajo sobre vishing de la lista.
 - [ ] §6 sin PENDIENTE, o con el motivo por el que el hueco queda abierto.
 - [ ] Búsquedas nuevas registradas en el [protocolo](PROTOCOLO-REVISION.md#registro-de-búsquedas).
