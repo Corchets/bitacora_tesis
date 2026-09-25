@@ -88,20 +88,90 @@ Lectura preliminar (sin valor estadístico, son 9 semillas diseñadas por el equ
 
 ## 5. Fundamento en la literatura de ingeniería social
 
-> **PENDIENTE.** Sin fuentes verificadas todavía. No completar con citas del
-> [deep research](deep-research-report-00.md) (sus marcadores no son referencias).
+> **Parcialmente verificado.** Solo entra acá lo que alguien del equipo leyó en el texto de la
+> fuente. Un intento de completar esta sección con deep research (2026-09-25) produjo citas y
+> fuentes que no resistieron el cotejo: quedan registradas en §5.3 para que nadie las reutilice.
 
-Tabla a llenar: cada maniobra de la capa 1 con el mecanismo psicológico que la explica y **una
-fuente que alguien del equipo abrió** (DOI, autores, año copiados de la fuente).
+### 5.1 Fuentes verificadas
 
-| Etiqueta | Mecanismo candidato | Fuente verificada |
+| Fuente | Qué se verificó | Cómo |
 |---|---|---|
-| `AUTHORITY_CLAIM` | obediencia a la autoridad | PENDIENTE |
-| `URGENCY_PRESSURE` | escasez de tiempo / decisión bajo presión | PENDIENTE |
-| `THREAT_FEAR` | apelación al miedo / aversión a la pérdida | PENDIENTE |
-| `ISOLATION_SECRECY` | aislamiento de la víctima de sus fuentes de verificación | PENDIENTE |
-| `TRUST_BUILDING` | construcción de credibilidad / pretexting | PENDIENTE |
-| `PERSISTENCE_DISTRACTION` | sobrecarga cognitiva / compromiso escalonado | PENDIENTE |
+| Ferreira, A., Coventry, L. y Lenzini, G. (2015). *Principles of persuasion in social engineering and their use in phishing*. HAS 2015, LNCS 9190, Springer. [PDF abierto](https://orbilu.uni.lu/bitstream/10993/20301/1/FerreiraAna-CameraReady.pdf) | Definiciones literales de *Authority* y *Social Proof*, y la figura que integra las taxonomías de Cialdini, Gragg y Stajano | Corchets leyó el PDF el 2026-09-25 |
+| Stajano, F. y Wilson, P. (2011). *Understanding scam victims: seven principles for systems security*. *Communications of the ACM*, 54(3). | Texto literal del *Time Principle* | Corchets leyó el artículo el 2026-09-25 |
+
+Citas literales cotejadas:
+
+- Ferreira et al., *Authority (AUTH)*: _"Society trains people not to question authority so they are
+  conditioned to respond to it. People usually follow an expert or pretense of authority and do a
+  great deal for someone they think is an authority."_
+- Ferreira et al., *Social Proof (SP)*: _"People tend to mimic what the majority of people do or
+  seem to be doing. People let their guard and suspicion down when everyone else appears to share
+  the same behaviours and risks. In this way, they will not be held solely responsible for their
+  actions."_
+- Stajano y Wilson, *Time Principle*: _"When under time pressure to make an important decision, we
+  use a different decision strategy, and hustlers steer us toward one involving less reasoning."_
+
+**Sobre las páginas:** el PDF abierto de Ferreira et al. no tiene la paginación del volumen LNCS, y
+del artículo de Stajano y Wilson se leyó el recuadro del principio sin registrar el número de
+página. Hasta resolverlo, estas citas se referencian **por nombre de principio**, no por página. El
+número de página se completa contra la versión publicada antes de que las citas entren al informe.
+
+**Nombre correcto del principio de Stajano y Wilson:** la figura de Ferreira et al. lo identifica
+como **Social compliance** (y el que se corresponde con *Social Proof*, como **Herd**). No es
+"Conformity": ese nombre apareció en el deep research y no está en las fuentes.
+
+### 5.2 Correspondencia con nuestras etiquetas
+
+Asignación del equipo, no de las fuentes. Solo filas con cita cotejada.
+
+| Etiqueta | Principio | Fuente | Solidez |
+|---|---|---|---|
+| `AUTHORITY_CLAIM` | *Authority (AUTH)* | Ferreira et al. (2015) | directa |
+| `AUTHORITY_CLAIM` | *Social compliance* | Stajano y Wilson (2011), vía la figura de Ferreira et al. | indirecta: el nombre se leyó en Ferreira, no en Stajano |
+| `URGENCY_PRESSURE` | *Time Principle* | Stajano y Wilson (2011) | directa |
+| `THREAT_FEAR` | — | — | **sin respaldo verificado** |
+| `ISOLATION_SECRECY` | — | — | **sin respaldo verificado** (ver §5.4) |
+| `TRUST_BUILDING` | — | — | **sin respaldo verificado** |
+| `PERSISTENCE_DISTRACTION` | — | — | **sin respaldo verificado** |
+
+Pendiente de leer, en este orden: Jones, K. S., Armstrong, M. E., Tornblad, M. K. y Siami Namin, A.
+(2021), *How social engineers use persuasion principles during vishing attacks*, *Information and
+Computer Security* 29(2) — es el único sobre vishing y el que más puede aportar; el resto de la
+lista de principios de Stajano y Wilson (cubriría `PERSISTENCE_DISTRACTION`); la definición de
+*Distraction* y *Liking, Similarity & Deception* de Ferreira et al. (cubriría `TRUST_BUILDING`);
+y Cialdini para `THREAT_FEAR` (aversión a la pérdida).
+
+### 5.3 Fuentes descartadas del deep research
+
+Un deep research del 2026-09-25 devolvió siete fuentes. Al cotejarlas:
+
+| Fuente propuesta | Resultado del cotejo |
+|---|---|
+| Rodríguez-Gómez, H. D. y Cárdenas-Sánchez, F. (2021), *Revista Criminalidad* 63(2) | **No se encontró.** No aparece en búsquedas y el informe no daba enlace. Se descarta |
+| Luong, H. T. y Nguyen, T. (2024), *Trends in Organized Crime* | **No se encontró** con ese título y esos autores. Se descarta |
+| Miramirkhani, N., Starov, O. y Nikiforakis, N. (2017), *Dial One for Scam*, NDSS | **El paper existe**, pero las frases que el informe le atribuía (*"stay on the line"*, *"tier-2"*) no aparecen en el texto. Las citas se descartan; el paper puede volver si alguien lo lee de verdad |
+| Citas atribuidas a Stajano y Wilson | **No coinciden con el texto.** El informe daba _"When you are under pressure to make a decision, you sacrifice full and proper assessment, reasoning and rationality"_; el original dice otra cosa (§5.1). Paráfrasis presentada como cita literal |
+| Nombre *Conformity Principle* | **Incorrecto**: es *Social compliance* |
+| Números de página de todas las fuentes | Sin verificar; al menos los de Ferreira et al. no pueden salir del PDF abierto, que no los tiene |
+
+Las tres fuentes que el informe marcaba como respaldo "directo" de las seis etiquetas son
+justamente las dos inexistentes y la que no dice lo que se le atribuía. **Lección metodológica:**
+cuando un deep research devuelve exactamente lo que se le pidió encontrar, ese es el motivo para
+desconfiar, no para celebrar.
+
+### 5.4 Hallazgo: `ISOLATION_SECRECY` no está en las taxonomías clásicas
+
+Ni Ferreira et al. (2015) ni la lista de Stajano y Wilson (2011) incluyen el aislamiento de la
+víctima o la imposición de secreto como principio de persuasión. Es coherente: esas taxonomías se
+construyeron sobre estafas presenciales y phishing por correo, donde no existe un canal abierto que
+el atacante deba monopolizar. La orden de no cortar solo tiene sentido operativo por teléfono.
+
+> **Estado: propuesta sin discutir.** Si se confirma al leer Jones et al. (2021), `ISOLATION_SECRECY`
+> quedaría como una etiqueta que **no** se hereda de la literatura de persuasión sino del canal, y
+> su respaldo serían las fuentes de vishing: el informe anual 2024 de la UFECI y la Policía de la
+> Ciudad, que describe que los delincuentes "intentarán todo el tiempo tener el control de la
+> comunicación" (§6.1 y §6.2). Eso es defendible y además es una contribución, pero hay que
+> **decirlo**, no disimularlo con una cita forzada.
 
 ## 6. Huecos conocidos
 
@@ -205,7 +275,8 @@ etiquetas, pero dos puntos quedan abiertos:
 
 ## 8. Terminado cuando
 
-- [ ] §5 tiene una fuente verificada por fila.
+- [ ] §5 tiene una fuente verificada por fila (hoy: 2 de 6 etiquetas con respaldo cotejado).
+- [ ] Leído Jones et al. (2021), el único trabajo sobre vishing de la lista.
 - [ ] §6 sin PENDIENTE, o con el motivo por el que el hueco queda abierto.
 - [ ] Búsquedas nuevas registradas en el [protocolo](PROTOCOLO-REVISION.md#registro-de-búsquedas).
 - [ ] Filas nuevas del catálogo con fuente y fecha de consulta.
