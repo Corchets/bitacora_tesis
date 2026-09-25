@@ -53,7 +53,12 @@ catálogo, donde está la URL y la fecha de consulta.
 
 **Descartada por falta de fuente:** _resguardo de fondos por causa judicial_ (policía o fiscalía,
 `SC-POLICIA-RESGUARDO-01`). La propuso el modelo; UFECRI enumera familiar, entidad bancaria y
-empleado público, no policía. Vuelve si esta investigación encuentra una fuente (ver §6).
+empleado público, no policía. El 2026-09-25 se revisaron además el informe anual 2024 de la UFECI,
+la Policía de la Ciudad y el Ministerio de Seguridad (§6.1 y §6.2): ninguna fuente describe un
+falso policía o fiscal **por teléfono**. Sigue descartada.
+
+**Documentada, sin semilla en el catálogo:** _secuestro virtual_ (§6.2). Si entra al catálogo es
+decisión del equipo; hasta entonces no se diseña semilla.
 
 ## 4. Maniobras por modalidad
 
@@ -103,11 +108,11 @@ fuente que alguien del equipo abrió** (DOI, autores, año copiados de la fuente
 | Hueco | Por qué importa | Estado |
 |---|---|---|
 | UFECI (ciberdelincuencia) | El issue la pide; el catálogo cita UFECRI (criminal compleja), que es otra unidad | Resuelto (§6.1): cotejada e incorporada al catálogo |
-| Policía Federal / Policía de la Ciudad | El issue las pide; podrían respaldar la modalidad policial descartada | PENDIENTE |
+| Policía Federal / Policía de la Ciudad | El issue las pide; podrían respaldar la modalidad policial descartada | Policía de la Ciudad revisada (§6.2); Policía Federal pendiente |
 | Circulares o comunicaciones del BCRA | Solo se citan páginas de prevención, no normativa | PENDIENTE |
 | Compras en Marketplace | El issue la menciona; no hay semilla ni fuente | PENDIENTE |
-| Secuestro virtual | El issue la menciona; solo está cubierto en parte por "familiar en apuros" | PENDIENTE |
-| Llamada policial o judicial | Semilla descartada por falta de fuente | PENDIENTE: la UFECI 2024 menciona PFA solo por correo electrónico |
+| Secuestro virtual | El issue la menciona; solo está cubierto en parte por "familiar en apuros" | Documentado (§6.2); falta decidir si entra al catálogo |
+| Llamada policial o judicial | Semilla descartada por falta de fuente | Sin fuente tras revisar UFECI, Policía de la Ciudad y Min. Seguridad; falta Policía Federal |
 
 ### 6.1 Fuentes de la UFECI
 
@@ -150,6 +155,36 @@ Frases cotejadas:
 Es una cantidad de casos reportados a la UFECI en el período del informe, no una medida de
 prevalencia. El porcentaje atribuido por prensa al informe 2024 sigue sin usarse.
 
+### 6.2 Policía de la Ciudad y Ministerio de Seguridad
+
+Abiertas por Corchets el 2026-09-25. La extracción agrupa las tres fuentes; la única frase literal
+registrada es _"intentarán todo el tiempo tener el control de la comunicación"_ (Policía de la
+Ciudad). Antes de citar una fuente en particular en el informe, anotar qué frase sale de cuál.
+
+| Fuente | Publicación | ¿Por llamada? |
+|---|---|---|
+| [Consejos de protección de la Policía de la Ciudad ante estafas telefónicas](https://buenosaires.gob.ar/noticias/consejos-de-proteccion-de-la-policia-de-la-ciudad-ante-estafas-telefonicas) | 2020-10-08 | sí |
+| [Consejos para evitar estafas virtuales y telefónicas](https://buenosaires.gob.ar/gcaba_historico/seguridad/consejos-para-evitar-estafas-virtuales-y-telefonicas) (GCBA, archivo histórico) | sin fecha visible | sí |
+| [Seguridad y fiscales evaluaron medidas contra los "secuestros virtuales"](https://www.argentina.gob.ar/noticias/gseguridad-y-fiscales-evaluaron-medidas-contra-fraudes-conocidos-popularmente-como-%E2%80%9Csecuestros) (Min. Seguridad) | 2014-06-23 | sí |
+
+**Secuestro virtual, según las tres fuentes:**
+
+- Quien llama se hace pasar por un hijo, nieto o familiar cercano, a veces distorsionando la voz.
+  No hay secuestrado real: es una simulación.
+- Piden dinero o joyas como rescate, o los ahorros guardados en el domicilio.
+- Presión: los delincuentes buscan tener el control de la comunicación. Las recomendaciones insisten
+  en cortar y verificar con el familiar o el 911. Ninguna cita una frase textual del tipo "no cortes".
+
+**Falso policía o fiscal:** ninguna de las tres lo menciona. La única mención a fiscales es la
+reunión institucional entre el Ministerio y la Procuración.
+
+**Codificación candidata** (asignación del equipo, no de la fuente):
+`TRUST_BUILDING` (se hace pasar por familiar), `THREAT_FEAR` (secuestro), `ISOLATION_SECRECY`
+(control de la comunicación) → `REQUEST_TRANSFER`. La urgencia no aparece explícita en lo extraído.
+
+**Antigüedad:** las tres son de 2014 a 2020 (una sin fecha). Muestran que la modalidad está
+documentada hace años, no que siga vigente. Para vigencia hace falta una fuente de 2024 o posterior.
+
 ## 7. Aporte a D07
 
 > **Estado: propuesta sin discutir.** Insumo para
@@ -163,7 +198,10 @@ etiquetas, pero dos puntos quedan abiertos:
 
 - `REQUEST_TRANSFER` agrupa transferencia y entrega de efectivo (canje de billetes). Hay que decidir
   si la entrega presencial se distingue.
-- Si §6 agrega secuestro virtual o Marketplace, hay que volver a verificar que entren en las 6+6.
+- El secuestro virtual (§6.2) entra en las 6+6 salvo por un detalle: se piden **joyas**, y la
+  definición de `REQUEST_TRANSFER` habla de mover dinero o entregar efectivo. Decidir si la entrega
+  de bienes de valor entra en esa etiqueta.
+- Si §6 agrega Marketplace, hay que volver a verificar que entre en las 6+6.
 
 ## 8. Terminado cuando
 
