@@ -150,6 +150,12 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   Moonshine tiny-es (baja) y Zipformer Kroko ONNX (media/alta). Whisper solo comparación.
   Vosk oficial queda fuera del recorte Hub. Detector: ALBETO tiny/base, DistilBETO, RoBERTuito.
   Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28).
+- **Estrategia NLP y compresión (#27, no cierra D09):**
+  [ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md).
+  Fundamenta la arquitectura en cascada jerárquica (RoBERTuito INT8 continuo en cada turno + SLM bajo demanda en zona gris con directiva institucional offline de 2 KB y LoRA).
+  Presenta la taxonomía comparativa entre clasificadores lineales (TF-IDF), Encoders (ALBETO, DistilBETO, RoBERTuito) y SLMs frontera 2024–2026 (Llama 3.2 1B, SmolLM2-360M, Qwen 2.5, Phi-4-mini).
+  Define el arnés de laboratorio reproducible ([benchmark_nlp.py](../../experiments/laboratorio/benchmark_nlp.py)) para medir latencia, memoria RAM física (RSS) y discriminación semántica.
+  Issue [#27](https://github.com/Corchets/bitacora_tesis/issues/27) cerrado como propuesta e investigación técnica; D09 permanece abierta hasta la ejecución y contraste empírico en el laboratorio ([#28](https://github.com/Corchets/bitacora_tesis/issues/28), [#29](https://github.com/Corchets/bitacora_tesis/issues/29)).
 
 ### D10 — Congelar estructura de entrega y defensa
 
