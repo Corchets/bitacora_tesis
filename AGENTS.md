@@ -13,62 +13,46 @@ cuando aparece el primer artefacto real, nunca antes.
 
 ---
 
-## Regla n.º 1 — No inventes decisiones
+## Regla - No inventes decisiones
 
-El error más caro que se puede cometer acá. El equipo todavía no cerró el alcance, el producto, la
-taxonomía ni el corpus. Antes de escribir, leer
+Antes de escribir, leer
 [MAPA-DECISIONES.md](docs/gestion/MAPA-DECISIONES.md): define qué está resuelto y qué no.
 
-- **Nunca** escribas un ADR para una decisión que el equipo no tomó. Un ADR "propuesto" parece
-  cerrado y nadie lo vuelve a mirar.
-- **Nunca** conviertas una recomendación del deep research en una afirmación del proyecto. El
-  informe _sugiere_; el equipo _decide_.
 - Si hace falta elegir para poder avanzar, escribí la opción **y** marcala:
   `> **Estado: propuesta sin discutir.**` con enlace a la decisión abierta correspondiente.
 - Si una decisión abierta te bloquea, decilo y parás. No la resuelvas por tu cuenta.
 
-## Regla n.º 2 — No inventes citas
-
-Las citas del [deep research](docs/investigacion/deep-research-report-00.md) son marcadores internos
-(`citeturn19view5`), **no** referencias bibliográficas. Una referencia inventada en una tesis es
-un problema grave en la defensa.
-
-- No crees ni completes `bibliografia.bib` con entradas que no viste en la fuente.
-- Una entrada entra al `.bib` solo cuando alguien abrió el paper y copió DOI, autores y año.
-- Cifras, fechas y disponibilidad de productos (Google Scam Detection, Samsung): siempre con fuente
-  y **fecha de consulta**, porque cambian.
-- Sobre la ausencia de corpus en español argentino, la formulación correcta es _"no identificamos en
-  la literatura revisada"_, nunca _"no existe"_.
-
-## Regla n.º 3 — Datos personales y audio
-
-- **Nunca** agregues audio al repositorio (`.wav`, `.mp3`, `.m4a`, `.flac`, `.ogg`). Está en
-  [.gitignore](.gitignore); no lo modifiques para permitirlos.
-- **Nunca** agregues datos identificatorios reales ni números privados.
-- Ver [PRIVACIDAD-DEL-SISTEMA.md](docs/datos-etica/PRIVACIDAD-DEL-SISTEMA.md).
-
 ---
 
-## Flujo obligatorio
+## Flujo de trabajo con issues
 
-1. Leer el issue activo en GitHub Issues y autoasignarlo antes de modificar el repositorio.
-2. Leer [el método](docs/gestion/METODO-DE-TRABAJO.md) cuando se planifique, cree, ejecute o cierre
-   trabajo.
-3. Cargar solo la referencia disparada por la tarea:
-   - **Investigación:** [PROTOCOLO-REVISION.md](docs/investigacion/PROTOCOLO-REVISION.md) y
-     [SINTESIS-ESTADO-DEL-ARTE.md](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md).
-   - **Corpus o escenarios:** [METODO-CREACION-CORPUS.md](docs/datos-etica/METODO-CREACION-CORPUS.md)
-     y [CATALOGO-ESCENARIOS.csv](docs/datos-etica/CATALOGO-ESCENARIOS.csv).
-   - **Anotación:** [MANUAL-ANOTACION.md](docs/datos-etica/MANUAL-ANOTACION.md).
-   - **Experimento o métricas:** [PREGUNTAS-DE-INVESTIGACION.md](docs/investigacion/PREGUNTAS-DE-INVESTIGACION.md)
-     y [METRICAS.md](docs/evaluacion/METRICAS.md).
-   - **Audio, Android o VoIP:** [ALTERNATIVAS-CAPTURA-AUDIO.md](docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md),
-     [ARQUITECTURA.md](docs/ingenieria/ARQUITECTURA.md) y los ADR relacionados.
-   - **Informe o entrega:** [REQUISITOS-ACADEMICOS.md](docs/propuesta/REQUISITOS-ACADEMICOS.md) y
-     [ESQUELETO-INFORME.md](docs/tesis/ESQUELETO-INFORME.md).
-4. Producir la evidencia exigida por la definición de terminado.
-5. Actualizar una sola fuente de verdad y enlazarla desde el issue.
-6. Registrar pruebas, limitaciones y decisiones antes de cerrar el issue.
+Todo trabajo parte de un issue en GitHub Issues y se ejecuta en tres momentos:
+
+### 1. Orientación y arranque
+
+- **Si no hay tarea clara o el usuario no sabe por dónde arrancar:** inspeccionar los issues abiertos del milestone activo en GitHub Issues, verificar bloqueos en [MAPA-DECISIONES.md](docs/gestion/MAPA-DECISIONES.md) y proponer la próxima tarea concreta de mayor impacto técnico.
+- **Si ya hay un issue asignado:** leer su objetivo y definición de terminado en [METODO-DE-TRABAJO.md](docs/gestion/METODO-DE-TRABAJO.md), autoasignarlo y cargar **únicamente** la referencia técnica que dispara la tarea (ver tabla _Dónde va cada cosa_).
+
+### 2. Ejecución (Trabajo enfocado)
+
+- Trabajar **exclusivamente** sobre el problema técnico del issue (código en `src/`, experimentos en `experiments/` o textos en `docs/`).
+- Editar **únicamente** la fuente de verdad primaria afectada.
+- No tocar bitácoras ni archivos de gestión mientras se está programando o investigando.
+
+### 3. Cierre (Barrido Documental e integración)
+
+Al completar el objetivo, sincronizar el repositorio en este orden antes de cerrar:
+
+1. **Fuente de verdad:** verificar cambios, pruebas y enlaces relativos.
+2. **Bitácora semanal (`docs/gestion/bitacora/AAAA-MM-semana-NN.md`):** registrar la fila en la tabla semanal con estado (`☑`) y agregar viñeta en _"Qué existe hoy que no existía la semana pasada"_ con el artefacto real generado.
+3. **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** actualizar estado si se resolvió una decisión abierta. Si congeló una decisión arquitectónica duradera, crear el ADR correspondiente en `docs/ingenieria/adr/`.
+4. **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** registrar mitigaciones o nuevos riesgos descubiertos.
+5. **Comentario para GitHub:** entregar el bloque Markdown listo para copiar y cerrar el issue (`Closes #N`, resumen, evidencia observable, decisiones y próxima acción).
+
+### Reglas de higiene
+
+- Actualizá la fuente de verdad afectada; nunca mantengas copias paralelas.
+- **No hagas `git commit`** salvo que el usuario lo pida explícitamente.
 
 ## Invariantes
 
@@ -76,7 +60,6 @@ un problema grave en la defensa.
 - Cada afirmación externa material tiene fuente verificable.
 - Cada experimento registra dataset/split, configuración, seed, versión de código, métricas y salida.
 - Audio, consentimientos firmados, datos identificables y secretos permanecen fuera de Git.
-- Las decisiones de alcance, participantes y publicación requieren validación del profesor/tutor.
 
 ---
 
@@ -86,8 +69,9 @@ Cada información tiene **una sola fuente de verdad**. Usar esta tabla para sabe
 
 | Tarea o Contenido                                | Fuente de Verdad (Dónde vive)                                                                                                                           | Cuándo se lee / Cuándo se actualiza                                                                                                                                                    |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Plan general, alcance, cronograma**            | [`docs/propuesta/PLAN-DE-TRABAJO.md`](docs/propuesta/PLAN-DE-TRABAJO.md)                                                                                | **Lee:** para consultar metas, fases o exclusiones.<br/>**Actualiza:** solo si el tutor aprueba un cambio de alcance o metodología.                                                    |
+| **Plan general, alcance, cronograma**            | [`docs/propuesta/PLAN-DE-TRABAJO.md`](docs/propuesta/PLAN-DE-TRABAJO.md)                                                                                | **Lee:** para consultar metas, fases o exclusiones.<br/>**Actualiza:** solo si se aprueba un cambio de alcance o metodología.                                                          |
 | **Requisitos UNSTA, formato y defensa**          | [`docs/propuesta/REQUISITOS-ACADEMICOS.md`](docs/propuesta/REQUISITOS-ACADEMICOS.md)                                                                    | **Lee:** para pautas formales de entrega (A4, ~100 págs, tribunal).<br/>**Actualiza:** ante novedades administrativas de la facultad.                                                  |
+| **Método de trabajo y flujo de issues**          | [`docs/gestion/METODO-DE-TRABAJO.md`](docs/gestion/METODO-DE-TRABAJO.md)                                                                                | **Lee:** al planificar, crear, ejecutar o cerrar trabajo.                                                                                                                              |
 | **Avance semanal del equipo**                    | `docs/gestion/bitacora/AAAA-MM-semana-NN.md`                                                                                                            | **Actualiza:** al cerrar un issue o finalizar la semana, registrando qué se hizo y qué artefacto nuevo existe (ver [README](docs/gestion/bitacora/README.md)).                         |
 | **Reunión con el tutor (Ing. Rico)**             | `docs/gestion/seguimientos/AAAA-MM-DD.md`                                                                                                               | **Crea:** 24–48 h antes con dudas/consultas a llevar.<br/>**Actualiza:** dentro de las 24 h posteriores con la minuta de acuerdos (ver [README](docs/gestion/seguimientos/README.md)). |
 | **Decisiones abiertas o pendientes**             | [`docs/gestion/MAPA-DECISIONES.md`](docs/gestion/MAPA-DECISIONES.md)                                                                                    | **Lee:** antes de asumir opciones de diseño.<br/>**Actualiza:** cuando un issue resuelve o desbloquea una disyuntiva del proyecto.                                                     |
@@ -118,35 +102,9 @@ Cada información tiene **una sola fuente de verdad**. Usar esta tabla para sabe
 
 El repositorio cuenta con skills en `.agents/skills/`. El agente debe sugerir proactivamente al usuario ejecutarlas según la fase de trabajo:
 
-- **Decisiones abiertas, tickets ambiguos o diseño de alcance:** Sugerir `grill-me` o `grill-with-docs` para una entrevista estructurada que resuelva incertidumbres antes de escribir código o comprometer documentos.
+- **Decisiones abiertas, tickets ambiguos o diseño de alcance:** Sugerir `grill-with-docs` para una entrevista estructurada que resuelva incertidumbres antes de escribir código o comprometer documentos.
 - **Implementación de código:** Sugerir `implement` (y `tdd` para módulos de cálculo de métricas, reglas o parsers) para construir código trazable y probado.
 - **Finalización de código o Pull Requests:** Sugerir `code-review` antes de mergear o cerrar el issue.
 - **Errores, excepciones o latencias inesperadas:** Sugerir `diagnosing-bugs` para aislar y resolver la causa raíz con pruebas.
 - **Pruebas de concepto rápidas o spikes descartables:** Sugerir `prototype`.
 - **Descomponer discusiones en issues para GitHub:** Sugerir `to-tickets` o `to-spec`.
-- **Resolución e integración de issues:** Usar `resolver-issue`.
-
-## Ciclo de trabajo con issues: Ejecución y Barrido Documental
-
-Para mantener el repositorio sincronizado sin caer en micro-gestión constante, todo agente o integrante debe operar en dos fases bien diferenciadas:
-
-### Fase 1 — Durante la ejecución (Trabajo enfocado)
-
-- Trabajar **exclusivamente** sobre el problema del issue (escribir código, realizar un spike, analizar un paper o redactar un texto).
-- Editar **únicamente** la fuente de verdad primaria afectada (ej. archivo en `src/`, `experiments/`, `docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md` o un documento específico de `docs/`).
-- **No tocar** bitácoras, riesgos ni archivos de gestión mientras se está programando o investigando.
-
-### Fase 2 — Al cerrar el issue (Barrido Documental obligatorio)
-
-Una sesión termina ejecutando este barrido en orden para sincronizar el estado vivo del proyecto:
-
-1. **Verificar la fuente de verdad:** Asegurar que el cambio está completo, testeado y sin enlaces rotos relativos.
-2. **Bitácora semanal (`docs/gestion/bitacora/AAAA-MM-semana-NN.md`):** Agregar a la tabla de la semana en curso la fila del issue con su estado (☑), y una viñeta concreta en _"Qué existe hoy que no existía la semana pasada"_ describiendo el artefacto generado.
-3. **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** Si el issue resolvió o redefinió una decisión abierta, actualizar su estado. Si se congeló una decisión arquitectónica duradera, redactar el ADR correspondiente en `docs/ingenieria/adr/`.
-4. **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** Si el trabajo mitigó un riesgo o descubrió uno nuevo, actualizar la matriz.
-5. **Comentario de cierre para GitHub:** Redactar y entregar el comentario listo para pegar en GitHub Issues (`Closes #N`, resumen, evidencia observable, decisiones y próxima acción).
-
-### Reglas de higiene final
-
-- Actualizá la fuente de verdad afectada, **nunca mantengas copias paralelas**.
-- **No hagas `git commit`** salvo que el usuario lo pida explícitamente.

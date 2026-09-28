@@ -119,9 +119,11 @@ en Argentina ni describe las prácticas de todos los bancos.
 Las afirmaciones exactas, fechas de consulta y límites por escenario viven en el
 [catálogo](../datos-etica/CATALOGO-ESCENARIOS.csv): nueve semillas fraudulentas candidatas y ocho
 negativos legítimos diseñados por el equipo. Estos negativos no son llamadas reales documentadas por
-las fuentes. El catálogo no determina cuántas conversaciones se grabarán; esa selección permanece
-abierta en [D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) y el
-[issue #22](https://github.com/Corchets/bitacora_tesis/issues/22).
+las fuentes. El catálogo por sí solo no determina cuántas conversaciones se grabarán: el
+[método del corpus §6](../datos-etica/METODO-CREACION-CORPUS.md#6-piloto) propone una primera pasada
+de 14 y hasta seis repeticiones dirigidas. Esa selección sigue pendiente de validación del tutor;
+[D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) y el
+[issue #22](https://github.com/Corchets/bitacora_tesis/issues/22) no habilitan grabar todavía.
 
 ## 3. Matriz comparativa
 
