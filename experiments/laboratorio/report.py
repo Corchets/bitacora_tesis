@@ -67,9 +67,17 @@ def detector_desc() -> str:
     import detector as det
     import os
 
+    tipo = os.environ.get("DETECTOR", "llm")
     modo = os.environ.get("DETECTOR_MODO", "clasificador")
     modelo = os.environ.get("LLM_MODEL", det.MODELO_DEFAULT)
-    return f"{det.DESCRIPCION}; modo={modo}; model={modelo}"
+    llm = f"{det.DESCRIPCION}; modo={modo}; model={modelo}"
+    if tipo == "llm":
+        return llm
+    enc = os.environ.get("ENCODER_MODEL", det.ENCODER_DEFAULT)
+    semillas = os.environ.get("SEMILLAS_PATH", "semillas.json")
+    if tipo == "encoder":
+        return f"encoder={enc}+LR; semillas={semillas}"
+    return f"cascada: encoder={enc}+LR; semillas={semillas}; zona gris 0.35-0.75 -> {llm}"
 
 
 def guardar(reporte: dict, salida: str | Path) -> Path:

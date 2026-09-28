@@ -33,6 +33,36 @@ WAV=/tmp/nada.wav LLM_BASE_URL=http://host.docker.internal:11434/v1 \
 
 La primera corrida de audio baja ~155 MB del Hub al volumen `hf-cache`.
 
+### Cascada encoder → SLM (2026-09-28)
+
+> **Estado: propuesta sin discutir.** Implementa la cascada de #27
+> ([PR #40](https://github.com/Corchets/bitacora_tesis/pull/40)): RoBERTuito puntúa cada turno y solo
+> la zona gris (0,35–0,75, ejemplo del PR, sin calibrar) va al SLM, con la base institucional del PR.
+> No cierra D09.
+
+```bash
+cd experiments/laboratorio
+E=/ruta/fuera-de-git/entrenamiento-lab     # esport/ + semillas.json
+# 1. SLM en su contenedor (el techo de alta es corrida + slm)
+WAV=/tmp/nada.wav docker compose --profile cascada up -d slm
+WAV=/tmp/nada.wav docker compose exec slm ollama pull llama3.2:1b-instruct-q4_K_M
+# 2. Semillas provisorias (texto fuera de Git; el manifiesto sí va en Git)
+python armar_semillas.py --entrenamiento $E
+# 3. Suite de texto (encoder solo y cascada) -> resultados/2026-09-28/ (mismas columnas que 2026-09-24)
+L="-e DETECTOR_MODO=base -e LLM_BASE_URL=http://slm:11434/v1 -e LLM_MODEL=llama3.2:1b-instruct-q4_K_M"
+WAV=/tmp/nada.wav ENTRENAMIENTO=$E docker compose run --rm -e COMMIT="$(git rev-parse HEAD)" $L \
+  -v "$PWD/resultados:/app/resultados" --entrypoint python corrida correr_cascada.py texto
+# 4. Las 4 grabaciones como texto plano (ASR guardado), en bloques de 25 palabras, sin audio
+WAV=/tmp/nada.wav ENTRENAMIENTO=$E docker compose run --rm -e COMMIT="$(git rev-parse HEAD)" $L \
+  -v "$PWD/resultados:/app/resultados" --entrypoint python corrida correr_cascada.py transcripciones \
+  artifacts/corrida-anses-yague-73BxIYoh7Rw.json artifacts/corrida-yapa-salta-HqR-vcondGk.json \
+  artifacts/corrida-jujuy-2016-eSJTfa5WQMM.json artifacts/corrida-ancasti-WZNk9yf5DMw.json
+```
+
+`armar_semillas.py` espera los ASR de las 8 grabaciones de entrenamiento en
+`artifacts/asr-ent-<id>.json` (`WAV=.../ent-<id>-16k.wav docker compose run --rm corrida --salida
+/app/artifacts/asr-ent-<id>.json`, sin servidor LLM). Ids y turnos etiquetados: `semillas_manifiesto.json`.
+
 ## Salida
 
 JSON por stdout y en `artifacts/` (gitignored): `corrida.json` (audio) o
@@ -47,11 +77,16 @@ Una sola lógica, tres configs (`GAMA` + `mem_limit` en
 
 | `GAMA` | `mem_limit` | Hilos ASR/detector | Estado en #29 |
 |---|---|---|---|
-| `alta` | `1g` | 4 / 2 | se corre |
+| `alta` | `2g` | 4 / 2 | se corre |
 | `media` | `512m` | 3 / 1 | prevista, no correr |
 | `baja` | `256m` | 1 / 1 | prevista; Moonshine es solo id, no motor |
 
 Sin GPU a propósito. Los hilos son config del proceso, no `cpus` de Compose.
+
+> **Estado: propuesta sin discutir (2026-09-28).** El techo de `alta` pasa de 1024 a
+> **2048 MB** para que entren ASR + encoder + SLM de la cascada (#27 / PR #40). Cambia el
+> presupuesto que #24 aprobó en [PREFACTIBILIDAD-TECNICA.md](PREFACTIBILIDAD-TECNICA.md) el
+> 2026-09-22; hay que avisar a Mateo y revalidarlo con el equipo.
 
 ## Límites (leer antes de citar un número)
 

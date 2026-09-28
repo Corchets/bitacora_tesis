@@ -63,3 +63,43 @@ Cinco guiones en `casos/dificiles/`, fuera del oracle de los 21. La fila `_suite
 | `dificiles/vishing/giro-sin-plata.txt` | Pide girar dinero sin plata, alias, CBU ni transferencia. |
 | `dificiles/legitima/portero-codigo-puerta.txt` | Dice «código» y es el de la puerta. |
 | `dificiles/legitima/banco-gasto-sin-pedido.txt` | Habla de un gasto del banco y no pide nada. |
+
+## Cascada encoder → SLM (2026-09-28)
+
+CSV en [2026-09-28/](2026-09-28/). Mismas columnas que arriba, más dos al final. La fila `_suite` resume los 21 casos más los 5 difíciles, en una sola pasada. Esta vez los difíciles no se sumaron después. `ejemplo.txt` va aparte.
+
+| Archivo | `detector_goteo` |
+|---|---|
+| `resultados-2026-09-28-robertuito-base-uncased.csv` | RoBERTuito + regresión logística, sin SLM. |
+| `resultados-2026-09-28-cascada-robertuito-llama3.2-1b-instruct-q4_K_M.csv` | El mismo encoder. Si el puntaje cae entre 0,35 y 0,75, puntúa `llama3.2:1b-instruct-q4_K_M` (Ollama) con el historial y la base institucional del PR #40. |
+| `resultados-2026-09-28-transcripciones.csv` | Las 4 grabaciones AR de YouTube como **texto plano**, sin audio, partidas en bloques. Una fila por grabación y detector. |
+
+La regresión ya no usa las 24 frases inventadas. Usa semillas provisorias que arma `armar_semillas.py` desde `semillas_manifiesto.json`. El texto queda fuera de Git.
+
+- **Estafa:** turnos del estafador en 8 grabaciones AR distintas de las de evaluación.
+- **Legítima:** turnos AR sin maniobra más turnos de ES-Port.
+
+No es corpus ni piloto. El reemplazo real se investiga en [#41](https://github.com/Corchets/bitacora_tesis/issues/41). Los 0,35 / 0,75 son el ejemplo del PR #40, sin calibrar.
+
+| Columna extra | Qué es |
+|---|---|
+| `turnos_zona_gris` | Turnos que el encoder mandó al SLM sobre turnos puntuados. En `_suite` incluye las pasadas de robustez. Vacío sin cascada. |
+| `memoria_slm_mb` | RAM del modelo cargado según Ollama (`/api/ps`). Va aparte de `memoria_pico_mb`: el SLM corre en otro contenedor y el techo de gama es la suma. |
+
+### Transcripciones en bloques
+
+No se corre audio. El texto es el `texto_final` que Zipformer Kroko dejó el 2026-09-25 en `artifacts/corrida-<caso>.json`. El cortador de turnos no está definido, así que el texto se parte en **bloques fijos de 25 palabras, sin solapamiento**: unos 10 segundos de habla. Cada bloque cuenta como un turno. `T_A_turno`, `T_R_turno` y `L_R_turnos` se miden en bloques. Los bloques quedan en `artifacts/transcripciones/`, fuera de Git porque son voces de terceros.
+
+> **Estado: propuesta sin discutir.** Los 25 palabras son un parámetro de laboratorio, no la definición del cortador (D08).
+
+En estas filas, `clase` es siempre `V`: son estafas editadas por medios, con narración. `falsa_alarma` y `cobertura_etiquetas` quedan vacías. `duracion_s` es el tiempo de puntuar esa grabación.
+
+| Columna extra | Qué es |
+|---|---|
+| `video_url` | Grabación de origen en YouTube. |
+| `duracion_audio_s` | Duración del audio original. Solo como referencia: no se procesa audio. |
+| `texto_fuente` | Artifact del que sale el texto, con su sha256 (12 caracteres). |
+| `asr_texto_fuente` | Modelo ASR y fecha en que se generó ese texto. |
+| `recorte` | Cómo se partió el texto. |
+| `archivo_bloques` | Archivo con un bloque por línea, con su sha256. |
+| `palabras` | Palabras del texto completo. |

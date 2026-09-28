@@ -20,7 +20,7 @@
   "alta": {
     "asr": "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
     "detector": "llm",
-    "techo_mb": 1024,
+    "techo_mb": 2048,
     "hilos_total": 6,
     "hilos_asr": 4,
     "hilos_detector": 2,

@@ -14,7 +14,7 @@ SEED = 42
 
 
 class DetectorEncoder:
-    def __init__(self, model_id: str, semillas_path: str | Path):
+    def __init__(self, model_id: str, semillas_path: str | Path, hilos: int | None = None):
         try:
             import torch
             from sklearn.linear_model import LogisticRegression
@@ -24,6 +24,8 @@ class DetectorEncoder:
 
         self.model_id = model_id
         self._torch = torch
+        if hilos:
+            torch.set_num_threads(hilos)
         semillas = json.loads(Path(semillas_path).read_text(encoding="utf-8"))
         textos = list(semillas["estafa"]) + list(semillas["legitima"])
         clases = [1] * len(semillas["estafa"]) + [0] * len(semillas["legitima"])
@@ -65,7 +67,7 @@ class DetectorEncoder:
                 lotes.append((suma / cuenta).squeeze(0).numpy())
         return np.vstack(lotes)
 
-    def puntaje(self, texto: str) -> float | None:
+    def puntaje(self, texto: str, historial: list[str] | None = None) -> float | None:
         """Probabilidad de estafa. None solo si el turno está vacío."""
         if not texto.strip():
             return None

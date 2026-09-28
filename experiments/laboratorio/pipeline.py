@@ -5,7 +5,7 @@ Sin sleep: el RTF es computo / duracion. No es llamada en vivo.
 Modo texto (--texto): misma logica sin ASR ni segundos, para el brazo
 "transcripcion manual" de E1. La latencia se reporta en turnos.
 
-Detector: LLM/SLM local (TF-IDF eliminado 2026-09-25).
+Detector: env DETECTOR = llm | encoder | cascada (TF-IDF eliminado 2026-09-25).
 """
 
 import time
@@ -100,7 +100,7 @@ def correr(
     model_dir = asr.descargar_modelo(gama.asr, modelos_dir)
     rec = asr.crear_reconocedor(model_dir, gama.hilos_asr)
     stream = rec.create_stream()
-    det = detector.DetectorLlm()
+    det = detector.crear(gama.hilos_detector)
     cortador = turns.CortadorTurnos(sample_rate=sr)
     contador = ContadorGoteo(umbral_goteo)
 
@@ -174,13 +174,14 @@ def correr(
         "texto_final": texto_final,
         "turnos": turnos,
         "terminos_criticos": {t: t in texto_final.lower() for t in TERMINOS_CRITICOS},
+        "detector_stats": det.stats() if hasattr(det, "stats") else None,
     }
 
 
 def correr_texto(txt_path: str | Path, umbral_goteo: float = 0.5) -> dict:
     """Corrida sobre transcripto: reglas + LLM + contador, sin ASR ni segundos."""
     textos = leer_turnos_txt(txt_path)
-    det = detector.DetectorLlm()
+    det = detector.crear()
     contador = ContadorGoteo(umbral_goteo)
     turnos: list[dict] = []
     historial: list[str] = []
@@ -214,5 +215,6 @@ def correr_texto(txt_path: str | Path, umbral_goteo: float = 0.5) -> dict:
         "texto_final": texto_final,
         "turnos": turnos,
         "terminos_criticos": {t: t in texto_final.lower() for t in TERMINOS_CRITICOS},
+        "detector_stats": det.stats() if hasattr(det, "stats") else None,
         "nota": "Sin audio: RTF y segundos no aplican; latencia en turnos. Goteo requiere LLM_BASE_URL.",
     }

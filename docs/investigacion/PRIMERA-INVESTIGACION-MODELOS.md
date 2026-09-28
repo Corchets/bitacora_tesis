@@ -46,7 +46,7 @@ No ponemos un modelo que haga todo junto (urgencia + pedido + estafa + …). Eso
 |---|---|---|
 | Cómo escribe | **ASR streaming** | Elegir el modelo final (Moonshine tiny-es o Zipformer Kroko). Eso cierra D09 |
 | Qué analiza | **Una pregunta de riesgo.** Las explicaciones las dan **las reglas** | Cerrar D09 y el umbral |
-| Tres tamaños de teléfono | Baja / media / alta. Memoria: **256 / 512 / 1024 MB**. Hilos: **2 / 4 / 6** | Cómo se limita eso en el programa |
+| Tres tamaños de teléfono | Baja / media / alta. Memoria: **256 / 512 / 2048 MB** (alta era 1024 hasta 2026-09-28). Hilos: **2 / 4 / 6** | Cómo se limita eso en el programa |
 | Dónde se prueba | **Laboratorio = PC.** **Demo en Android = solo si hay tiempo.** iPhone = solo foto de “alta” | — |
 | Cómo fingimos el teléfono | Techo de memoria + hilos + **sin placa de video**. Sin emulador Android | La PC es x86 y el teléfono es ARM |
 | Cómo programamos | **Un solo programa**, con una config por gama | Con qué herramienta se limita (no hay lenguaje elegido) |
@@ -138,7 +138,7 @@ No es la marca de la caja. Es cuánta memoria y aire les dejamos a **los dos** a
 |---|---|---|
 | **Baja** | Teléfono chico, 3–4 GB de memoria, chip simple | **256 MB**; 2 hilos |
 | **Media** | 6–8 GB | **512 MB**; 4 hilos |
-| **Alta** | Teléfono caro de ahora (foto: iPhone 15/16 Pro, 8 GB) | **1024 MB**; 6 hilos |
+| **Alta** | Teléfono caro de ahora (foto: iPhone 15/16 Pro, 8 GB) | **2048 MB**; 6 hilos |
 
 **El ejemplo de alta:** un iPhone moderno (tipo iPhone 15 Pro / 16 Pro: **8 GB** y un chip muy fuerte). Fuentes de la memoria: comparativas públicas PhoneArena / GSMArena; visto el 2026-09-15.
 
@@ -166,7 +166,7 @@ No hacemos tres programas. Cambiamos un **config**:
 |---|---|---|---|
 | `asr` | **Moonshine tiny-es** [`moonshine-ai/moonshine-streaming-tiny-es`](https://huggingface.co/moonshine-ai/moonshine-streaming-tiny-es) | Zipformer Kroko [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | **Zipformer Kroko** (el mismo) |
 | `detector` | LLM/SLM local | LLM/SLM local | **LLM/SLM local** (candidato Llama 3.2 1B Instruct) |
-| Techo de memoria (los dos juntos) | **256 MB** | **512 MB** | **1024 MB** |
+| Techo de memoria (los dos juntos) | **256 MB** | **512 MB** | **2048 MB** |
 | Hilos (total) | **2** | **4** | **6** |
 | Hilos del que escribe / del que lee | **1 / 1** | **3 / 1** | **4 / 2** |
 | Placa de video de escritorio | no | no | no |
@@ -178,6 +178,7 @@ Whisper por pedazos **no** va en `asr` de ninguna gama (rompe el streaming). Pue
 **Riesgo:** Zipformer + SLM juntos pueden pasarse del techo o del RTF (R08). Mitigar con cuantización / menos contexto / modelo más chico. Medir en #29.
 
 > **Estado: propuesta sin discutir.** No cierra D09: el piloto puede cambiar el ganador. Recorte detector LLM: **2026-09-25**.
+> Techo de alta subido de 1024 a **2048 MB** el **2026-09-28** para la cascada encoder → SLM (#27 / PR #40). Cambia lo aprobado en #24 ([PREFACTIBILIDAD-TECNICA.md](PREFACTIBILIDAD-TECNICA.md)); falta revalidarlo con el equipo.
 
 Comparar las tres configs es **extensión** del [plan de trabajo](../propuesta/PLAN-DE-TRABAJO.md) como “comparación de dispositivos”; acá es comparación de **techos en la PC**.
 
@@ -198,7 +199,7 @@ Comparar las tres configs es **extensión** del [plan de trabajo](../propuesta/P
 En criollo: no prendemos un Android de mentira en la pantalla. Le ponemos al programa tres reglas, como cuando en un juego le bajás los gráficos:
 
 1. **Memoria:** no puede usar más memoria que el techo de esa gama:
-   baja **256 MB**, media **512 MB**, alta **1024 MB** (los dos ayudantes juntos).
+   baja **256 MB**, media **512 MB**, alta **2048 MB** (los dos ayudantes juntos).
 2. **Hilos:** no puede usar todos los núcleos de la compu. Reparto:
    baja **2** (1 escribe / 1 lee), media **4** (3 / 1), alta **6** (4 / 2).
    El que escribe se lleva más porque no para. Se ajusta si vamos tarde.
