@@ -125,6 +125,48 @@ de 14 y hasta seis repeticiones dirigidas. Esa selección sigue pendiente de val
 [D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) y el
 [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22) no habilitan grabar todavía.
 
+### 2.3. Datasets candidatos para entrenar el goteo (#41)
+
+Relevamiento del 2026-09-28 para reemplazar las semillas provisorias del encoder
+([issue #41](https://github.com/Corchets/bitacora_tesis/issues/41)). Consultas en el
+[registro de búsquedas](PROTOCOLO-REVISION.md#registro-de-búsquedas).
+
+**Nivel de verificación.** *Abierta*: se leyó la página o el repositorio del dataset y, cuando se
+indica, se contaron los datos. *Solo buscador*: el dominio (`huggingface.co`, `zenodo.org`,
+`arxiv.org`, `nature.com`) no estuvo accesible desde el entorno de trabajo; la fila repite lo que
+dice el resultado del buscador y **no cuenta como fuente verificada** hasta que alguien la abra.
+
+| Fuente | Qué trae | Español / estafa | Licencia | Uso posible | Verificación |
+|---|---|---|---|---|---|
+| [ES-Port](https://github.com/Vicomtech/esport-corpus) (García-Sardiña, Serras y del Pozo, LREC 2018) | 1170 diálogos reales de soporte técnico de una operadora, transcriptos y anonimizados; JSON por turno | Español de España; **ninguna estafa** | CC BY-SA 3.0 España | Negativos legítimos por turno; no aporta voseo ni entidades AR | Abierta |
+| [rajkirant/scam-detection](https://github.com/rajkirant/scam-detection), `everything_7013.csv` (commit `439db80`) | 7013 llamadas etiquetadas scam/nonscam, pooled de varias fuentes | 89 filas en español, **todas legítimas** (fuente `CallHome_Spanish`); 0 estafas en español | MIT del repositorio; CallHome Spanish se distribuye originalmente por LDC y el repositorio no documenta ese permiso | Solo referencia de formato y columnas (`asks`, `signals`, `n_turns`); no usar las filas CallHome sin aclarar la licencia | Abierta, conteo propio |
+| [Robocall audio FTC](https://github.com/wspr-ncsu/robocall-audio-dataset) (Prasad y Reaves, TR-2023-1) | >1000 robocalls reales con transcripción Whisper | 96,2 % inglés, 3,8 % mandarín; **sin español** | Datos de dominio público; documentación CC BY-ND | Descartado para el goteo | Abierta |
+| [henryemdth/checkScam](https://github.com/henryemdth/checkScam) (commit `d58404b`) | App Android antivishing ajustada a Bolivia | La carpeta `dataset/` solo tiene un README; **sin datos publicados** | No declara licencia de datos | Solo referencia de taxonomía local (falso familiar, extorsión policial) | Abierta |
+| [Robocalls internacional](https://arxiv.org/abs/2606.31790) (preprint, 2026) | 839 transcripciones de robocalls verificadas por anotadores, 28 campañas | Incluye español (cantidad no verificada); monólogo, no diálogo | No verificada | Posibles positivos de estafa en español, sin turnos de víctima | Solo buscador |
+| VISH-GUARD ([Scientific Data, 2026](https://www.nature.com/articles/s41597-026-07724-z); Zenodo `10.5281/zenodo.17938406`) | 3000 llamadas sintéticas (TTS), mitad fraude y mitad legítimas, anotadas por estrategia de persuasión, marcadores de interacción y tono | Inglés, francés y árabe; **sin español** | No verificada | Referencia de cómo anotar estrategias de manipulación | Solo buscador |
+| [BothBosu/scam-dialogue](https://huggingface.co/datasets/BothBosu/scam-dialogue) | Diálogos sintéticos scam/no scam generados con Llama-3-70B | Inglés | Apache 2.0 según el buscador | Referencia de formato; traducirlo arrastra el desajuste de dominio | Solo buscador |
+| [menaattia/phone-scam-dataset](https://huggingface.co/datasets/menaattia/phone-scam-dataset) | Citado en #41 como ~4000 diálogos en inglés | Inglés | No verificada | — | No encontrado por el buscador |
+| Honeypot de llamadas reales ([preprint, 2026](https://arxiv.org/html/2609.29528)) | Corpus de conversaciones reales con un agente de voz señuelo | No verificado | No verificada | Pendiente de abrir | Solo buscador |
+
+**Qué muestra hasta ahora.**
+
+- No apareció ningún dataset público con **estafas telefónicas en español en formato diálogo**.
+  Lo que hay en español son llamadas legítimas (ES-Port, CallHome), útiles como negativos.
+- Los positivos en español tendrán que salir del equipo: guiones escritos a partir del
+  [catálogo](../datos-etica/CATALOGO-ESCENARIOS.csv) y del piloto
+  ([#39](https://github.com/Corchets/bitacora_tesis/issues/39)). Esto coincide con el vacío ya
+  señalado en la [sección 4](#4-qué-existe-frente-a-qué-aportaríamos).
+- Mezclar positivos argentinos con negativos de España o de CallHome reproduce el sesgo que
+  registró el spike [#29](https://github.com/Corchets/bitacora_tesis/issues/29) el 2026-09-28
+  (riesgo R16, todavía en la rama del spike): el modelo puede aprender el
+  dialecto en lugar de la maniobra. Hacen falta negativos argentinos escritos con el mismo
+  procedimiento que los positivos.
+
+> **Estado: propuesta sin discutir.** Estas conclusiones no eligen método de entrenamiento ni
+> esquema de dataset; eso sigue abierto en #41, D07
+> ([#32](https://github.com/Corchets/bitacora_tesis/issues/32)) y D08
+> ([#33](https://github.com/Corchets/bitacora_tesis/issues/33)).
+
 ## 3. Matriz comparativa
 
 | Sistema | Nivel de análisis | Vector de detección | Ejecución | ¿Cubre manipulación psicológica? | Reproducible académicamente |
