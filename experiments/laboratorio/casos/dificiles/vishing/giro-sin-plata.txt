@@ -1,0 +1,8 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing dificil. Pide girar dinero sin plata, alias, cbu ni transferencia.
+# Fuente: Ministerio de Justicia, junio de 2026. Redaccion propia. Consulta 2026-09-24.
+habla un amigo de tu hermano, tuvo un accidente
+dios que paso
+necesito que me gires ya a la cuenta que te dicto
+cuanto
+son diez mil, no cortes

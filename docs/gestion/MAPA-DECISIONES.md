@@ -142,16 +142,20 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
 - **Bloqueada por:** D05, D07 y benchmark piloto.
 - **Salida:** decisión basada en WER/recall crítico, F1/AUPRC, latencia y memoria.
-- **Candidatos a evaluar (mapa inicial):** sherpa-onnx, Vosk y whisper.cpp para ASR; TF-IDF como baseline
-  obligatorio y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
-  preferencia previa.
-- **Recorte de trabajo (2026-09-15/16, no cierra D09):**
+- **Candidatos a evaluar (mapa inicial, histórico):** sherpa-onnx, Vosk y whisper.cpp para ASR;
+  BETO/RoBERTuito u otros transformers. **Recorte activo 2026-09-25:** detector = **LLM/SLM local**
+  (clasificador vs agente a medir); **TF–IDF descartado** (no tests ni comparaciones).
+  La decisión final sigue saliendo del benchmark, no de preferencia previa. **No cierra D09.**
+- **Recorte de trabajo (2026-09-15/16; detector actualizado 2026-09-25, no cierra D09):**
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
   Catálogo de bajada = Hugging Face (consulta 2026-09-16). ASR del recorte:
   Moonshine tiny-es (baja) y Zipformer Kroko ONNX (media/alta). Whisper solo comparación.
-  Vosk oficial queda fuera del recorte Hub. Detector: TF–IDF + reglas (las tres gamas).
-  ALBETO, DistilBETO y RoBERTuito no entran al recorte (2026-09-17).
-  Spike de laboratorio: [issue #28](https://github.com/Corchets/bitacora_tesis/issues/28); corrida config `alta` (recorte 2026-09-17): [issue #29](https://github.com/Corchets/bitacora_tesis/issues/29).
+  Vosk oficial queda fuera del recorte Hub. Detector: **LLM/SLM local** (candidato
+  `meta-llama/Llama-3.2-1B-Instruct`; modos clasificador|agente). Reglas de incendio capa 2
+  siguen. Spike: [#28](https://github.com/Corchets/bitacora_tesis/issues/28);
+  corrida config `alta`: [#29](https://github.com/Corchets/bitacora_tesis/issues/29);
+  estrategia NLP: [#27](https://github.com/Corchets/bitacora_tesis/issues/27).
+  Taxonomía / schema de salida: D07 [#32](https://github.com/Corchets/bitacora_tesis/issues/32).
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -208,7 +212,9 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   VoIP controlado es la integración preferida si el spike confirma viabilidad.
 - **No hacer detección de deepfake en el núcleo:** responde una pregunta distinta
   a detectar manipulación y pedidos peligrosos.
-- **Mantener baselines simples:** reglas y TF–IDF son comparadores obligatorios.
+- **Comparar variantes del detector LLM** (clasificador vs agente) contra gold de anotación;
+  TF–IDF **fuera** del camino (2026-09-25, propuesta sin discutir). Reglas de incendio capa 2
+  siguen como disparo de pedido crítico.
 - **Criterios de prefactibilidad (#24):** Mateo informó el 2026-09-22 que el equipo revisó y aprobó
   los presupuestos y umbrales de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md)
   como punto de partida para medir, no como evidencia de rendimiento. D09 y la elección de modelos
@@ -223,11 +229,12 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   **salvo** pedido crítico por reglas (capa 2), que avisa ya.
   Ventana de la red en v0: **turno completo**; achique (5 s / 64 tokens) a medir
   en el piloto. Desarrollo: **un programa, config por gama**; se arranca con
-  **alta** (Zipformer Kroko Hub + TF–IDF; reglas de capa 2).
+  **alta** (Zipformer Kroko Hub + LLM/SLM local; reglas de capa 2; variante agente a medir).
   Baja `asr`: Moonshine tiny-es. Media `asr`: Zipformer Kroko.
   Hilos de partida: baja 2 (1+1), media 4 (3+1), alta 6 (4+2).
   RAM: **256 / 512 / 1024 MB**. Ver
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
+  TF–IDF descartado del recorte activo (2026-09-25).
 - Dispositivo Android concreto para la demo y mediciones de rendimiento, batería y temperatura.
   Los presupuestos de laboratorio ya están definidos en
   [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), pero no prueban
