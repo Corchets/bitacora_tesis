@@ -164,6 +164,13 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   descartado del spike. Reglas de incendio capa 2 siguen. Estrategia NLP:
   [#27](https://github.com/Corchets/bitacora_tesis/issues/27); schema de salida: D07
   [#32](https://github.com/Corchets/bitacora_tesis/issues/32). **No cierra D09.**
+- **Cascada del spike (2026-09-28, propuesta sin discutir):** RoBERTuito + LR puntúa cada turno y solo
+  la zona gris (0,35–0,75, ejemplo del [PR #40](https://github.com/Corchets/bitacora_tesis/pull/40)) va a
+  `llama3.2:1b-instruct-q4_K_M`; techo de alta propuesto en 2048 MB (cambia #24). Con semillas
+  provisorias, la cascada no mejora al encoder solo
+  ([resultados](../../experiments/laboratorio/resultados/GLOSARIO-COLUMNAS.md)). Datos:
+  [#41](https://github.com/Corchets/bitacora_tesis/issues/41); medición con WAV:
+  [#42](https://github.com/Corchets/bitacora_tesis/issues/42). #29 cerrado. **No cierra D09.**
 
 ### D10 — Congelar estructura de entrega y defensa
 
