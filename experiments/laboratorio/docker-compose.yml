@@ -16,6 +16,10 @@ services:
       OMP_NUM_THREADS: "6"
       OPENBLAS_NUM_THREADS: "6"
       MKL_NUM_THREADS: "6"
+      # LLM local (OpenAI-compatible). Vacio = goteo sin opinion; incendio por reglas igual corre.
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-meta-llama/Llama-3.2-1B-Instruct}
+      DETECTOR_MODO: ${DETECTOR_MODO:-clasificador}
     volumes:
       # WAV requerido por compose aunque corras --texto (ahi se ignora: WAV=/tmp/nada.wav alcanza).
       - ${WAV:?Definí WAV=/ruta/a/llamada.wav (WAV 16kHz mono, fuera de Git)}:/data/llamada.wav:ro

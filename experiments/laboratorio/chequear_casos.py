@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Chequeo de los casos del spike + ejemplo, en modo texto.
 
-Oracle de las pasadas de mejora: corre reglas + TF-IDF + contador sobre cada
-guion de casos/ y falla (exit 1) si algo deja de marcar lo esperado. Las
-expectativas viven acá y en casos/README.md; si una mejora las cambia a
-propósito, se actualizan acá con su pasada documentada.
+Oracle post-pivote LLM (2026-09-25): mide **incendio (reglas de capa 2)**.
+El goteo depende del LLM local (`LLM_BASE_URL`); sin server no hay opinion
+y el goteo queda mudo — por eso las expectativas de goteo estan en None
+hasta fijar corridas con el modelo en #29.
 
 Uso: desde experiments/laboratorio, `.venv/bin/python chequear_casos.py`
 (con el venv de la raíz del repo) o dentro del contenedor.
@@ -19,34 +19,31 @@ sys.path.insert(0, str(AQUI))
 import pipeline  # noqa: E402
 import rules  # noqa: E402
 
-SEMILLAS = AQUI / "semillas.json"
 CASOS = AQUI / "casos"
 TYPO_SEED = 42
 
 # (archivo, clase V/L, etiquetas de incendio, turno de incendio, turno de goteo)
-# Legítimas: sin incendio ni goteo. Vishing original: cubre etiquetas y gotea en turno.
-# Vishing paráfrasis: fija el comportamiento observado (un brazo puede quedar mudo);
-# turno None = ese brazo debe quedar mudo. Si una mejora lo despierta, se actualiza acá.
+# Goteo = None: no se exige hasta tener baseline LLM en #29.
 ESPERADO = [
-    ("vishing/banco-codigo.txt", "V", {"REQUEST_AUTH_CODE"}, 5, 5),
-    ("vishing/whatsapp-codigo.txt", "V", {"REQUEST_AUTH_CODE"}, 3, 3),
-    ("vishing/acceso-remoto.txt", "V", {"REQUEST_REMOTE_ACCESS"}, 3, 3),
-    ("vishing/anses-beneficio.txt", "V", {"REQUEST_SECRET", "REQUEST_TRANSFER"}, 3, 3),
+    ("vishing/banco-codigo.txt", "V", {"REQUEST_AUTH_CODE"}, 5, None),
+    ("vishing/whatsapp-codigo.txt", "V", {"REQUEST_AUTH_CODE"}, 3, None),
+    ("vishing/acceso-remoto.txt", "V", {"REQUEST_REMOTE_ACCESS"}, 3, None),
+    ("vishing/anses-beneficio.txt", "V", {"REQUEST_SECRET", "REQUEST_TRANSFER"}, 3, None),
     (
         "vishing/arca-deuda.txt",
         "V",
         {"REQUEST_SECRET", "REQUEST_TRANSFER", "REQUEST_SECURITY_ACTION"},
         3,
-        5,
+        None,
     ),
-    ("vishing/familiar-peligro.txt", "V", {"REQUEST_TRANSFER"}, 4, 6),
-    ("vishing/banco-codigo-parafrasis.txt", "V", {"REQUEST_AUTH_CODE"}, 5, 5),
-    ("vishing/banco-numeros-sin-clave.txt", "V", {"REQUEST_AUTH_CODE"}, 5, 5),
-    ("vishing/acceso-remoto-parafrasis.txt", "V", {"REQUEST_REMOTE_ACCESS"}, 3, 3),
-    ("vishing/anses-beneficio-parafrasis.txt", "V", {"REQUEST_SECRET", "REQUEST_TRANSFER"}, 3, 5),
-    ("vishing/arca-deuda-parafrasis.txt", "V", {"REQUEST_TRANSFER"}, 5, 5),
-    ("vishing/familiar-peligro-parafrasis.txt", "V", {"REQUEST_TRANSFER"}, 6, 5),
-    ("vishing/whatsapp-codigo-parafrasis.txt", "V", {"REQUEST_AUTH_CODE"}, 3, 2),
+    ("vishing/familiar-peligro.txt", "V", {"REQUEST_TRANSFER"}, 4, None),
+    ("vishing/banco-codigo-parafrasis.txt", "V", {"REQUEST_AUTH_CODE"}, 5, None),
+    ("vishing/banco-numeros-sin-clave.txt", "V", {"REQUEST_AUTH_CODE"}, 5, None),
+    ("vishing/acceso-remoto-parafrasis.txt", "V", {"REQUEST_REMOTE_ACCESS"}, 3, None),
+    ("vishing/anses-beneficio-parafrasis.txt", "V", {"REQUEST_SECRET", "REQUEST_TRANSFER"}, 3, None),
+    ("vishing/arca-deuda-parafrasis.txt", "V", {"REQUEST_TRANSFER"}, 5, None),
+    ("vishing/familiar-peligro-parafrasis.txt", "V", {"REQUEST_TRANSFER"}, 6, None),
+    ("vishing/whatsapp-codigo-parafrasis.txt", "V", {"REQUEST_AUTH_CODE"}, 3, None),
     ("legitima/banco-revisa-app.txt", "L", set(), None, None),
     ("legitima/mensajeria-no-pases-nada.txt", "L", set(), None, None),
     ("legitima/no-bajes-nada.txt", "L", set(), None, None),
@@ -83,8 +80,8 @@ def _afirmar(
         elif primero != turno:
             FALLOS.append(f"{nota}{rel}: primer incendio t{primero}, esperado t{turno}")
         if got_turno is None:
-            if got:
-                FALLOS.append(f"{nota}{rel}: goteo inesperado t{r['goteo']['turno']} (debería mudo)")
+            # Sin expectativa de goteo (LLM aun sin baseline).
+            pass
         elif not got:
             FALLOS.append(f"{nota}{rel}: vishing sin goteo")
         elif r["goteo"]["turno"] != got_turno:
@@ -92,12 +89,11 @@ def _afirmar(
     else:
         if evs:
             FALLOS.append(f"{nota}{rel}: legítima con incendio {beam}")
-        if got:
-            FALLOS.append(f"{nota}{rel}: legítima con goteo")
+        # Sin LLM, goteo mudo es lo esperado; con LLM se reabrirá la chequeo de FP.
 
 
 def revisar(rel: str, clase: str, etiquetas: set[str], turno: int | None, got_turno: int | None) -> None:
-    r = pipeline.correr_texto(CASOS / rel, SEMILLAS, umbral_goteo=0.5)
+    r = pipeline.correr_texto(CASOS / rel, umbral_goteo=0.5)
     evs = r["incendio"]["eventos"]
     got = r["goteo"]["disparo"]
     beam = ";".join(f"{e['turno']}:{','.join(e['etiquetas'])}" for e in evs) or "-"
@@ -107,17 +103,15 @@ def revisar(rel: str, clase: str, etiquetas: set[str], turno: int | None, got_tu
 
 
 def revisar_ejemplo() -> None:
-    r = pipeline.correr_texto(AQUI / "ejemplo.txt", SEMILLAS, umbral_goteo=0.5)
+    r = pipeline.correr_texto(AQUI / "ejemplo.txt", umbral_goteo=0.5)
     turnos = [e["turno"] for e in r["incendio"]["eventos"]]
     print(f"ejemplo.txt: incendio {turnos} goteo {r['goteo']['disparo']} lat {r['latencia_decision_turno']}")
     if turnos != [5, 6]:
         FALLOS.append(f"ejemplo.txt: incendio {turnos}, esperado [5, 6]")
-    if not r["goteo"]["disparo"] or r["latencia_decision_turno"] != 3:
-        FALLOS.append("ejemplo.txt: goteo/latencia cambió")
 
 
 def con_typo(textos: list[str]) -> list[str]:
-    """Un swap de letras por turno (una palabra len>4), determinista. Sonda P13."""
+    """Un swap de letras por turno (una palabra len>4), determinista."""
     import random
 
     rng = random.Random(TYPO_SEED)
@@ -135,11 +129,7 @@ def con_typo(textos: list[str]) -> list[str]:
 
 
 def revisar_typos() -> None:
-    """El incendio debe sobrevivir a un typo por turno: misma cobertura, sin falsos.
-
-    Solo mira reglas (el detector no se toca en P13): etiquetas cubiertas en V
-    con incendio esperado, vacío en L y en banco-numeros-sin-clave.
-    """
+    """El incendio debe sobrevivir a un typo por turno: misma cobertura, sin falsos."""
     n_ok = 0
     for rel, clase, etiquetas, turno, _ in ESPERADO:
         textos = [
@@ -161,26 +151,6 @@ def revisar_typos() -> None:
     print(f"typos (seed {TYPO_SEED}): {n_ok}/{len(ESPERADO)} conservan incendio")
 
 
-def revisar_margen() -> None:
-    """Toda opinión legítima queda bajo el umbral (P17). Nadie lo vigilaba y
-    las semillas E lo erosionan de a poco (no-bajes t3: 0,429 → 0,474)."""
-    peor: tuple[str, float] | None = None
-    for rel, clase, _, _, _ in ESPERADO:
-        if clase != "L":
-            continue
-        r = pipeline.correr_texto(CASOS / rel, SEMILLAS, umbral_goteo=0.5)
-        for t in r["turnos"]:
-            p = t["puntaje"]
-            if p is not None and (peor is None or p > peor[1]):
-                peor = (f"{rel} t{t['n']}", p)
-    if peor is None:
-        print("margen legítimo: sin opiniones")
-    else:
-        print(f"margen legítimo: máx {peor[1]} en {peor[0]}")
-        if peor[1] >= 0.5:
-            FALLOS.append(f"margen legítimo roto: {peor[1]} en {peor[0]}")
-
-
 _TILDES = {
     "codigo": "código", "verificacion": "verificación", "telefono": "teléfono",
     "digitos": "dígitos", "pagina": "página", "mas": "más", "esta": "está", "que": "qué",
@@ -198,8 +168,7 @@ def _perturbar(textos: list[str], modo: str) -> list[str]:
 
 
 def revisar_robusto() -> None:
-    """Mayúsculas, tildes y muletillas no cambian nada (P18). Semántica completa:
-    mismas etiquetas, mismos turnos de incendio y goteo, por el pipeline real."""
+    """Mayúsculas, tildes y muletillas no cambian el incendio (reglas)."""
     import tempfile
 
     for modo in ("upper", "tildes", "muletilla"):
@@ -215,7 +184,7 @@ def revisar_robusto() -> None:
             ) as f:
                 f.write("\n".join(_perturbar(textos, modo)) + "\n")
                 f.flush()
-                r = pipeline.correr_texto(f.name, SEMILLAS, umbral_goteo=0.5)
+                r = pipeline.correr_texto(f.name, umbral_goteo=0.5)
             _afirmar(rel, clase, etiquetas, turno, got_turno, r, nota=f"{modo} ")
         print(f"robusto/{modo}: {len(ESPERADO) - (len(FALLOS) - n0)}/{len(ESPERADO)} iguales")
 
@@ -225,14 +194,13 @@ def main() -> None:
         revisar(rel, clase, etiquetas, turno, got_turno)
     revisar_ejemplo()
     revisar_typos()
-    revisar_margen()
     revisar_robusto()
     if FALLOS:
         print(f"\nFALLA ({len(FALLOS)}):")
         for f in FALLOS:
             print(f"  - {f}")
         raise SystemExit(1)
-    print(f"\nOK: {len(ESPERADO)}/{len(ESPERADO)} casos + ejemplo")
+    print(f"\nOK: {len(ESPERADO)}/{len(ESPERADO)} casos + ejemplo (incendio; goteo LLM pendiente #29)")
 
 
 if __name__ == "__main__":

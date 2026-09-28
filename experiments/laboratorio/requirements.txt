@@ -1,4 +1,3 @@
 sherpa-onnx
 huggingface-hub
 numpy
-scikit-learn

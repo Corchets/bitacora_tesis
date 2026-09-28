@@ -5,6 +5,9 @@ Guiones **inventados** para correr el modo `--texto` del laboratorio. Una línea
 No son el corpus, no son fichas de rol y no entran en [CATALOGO-ESCENARIOS.csv](../../../docs/datos-etica/CATALOGO-ESCENARIOS.csv). Las fuentes oficiales justifican la modalidad; el diálogo lo escribimos nosotros, con datos ficticios. Consulta de las páginas: **2026-09-23**.
 
 > **Estado: propuesta sin discutir.** No cierra D09 ni D07.
+>
+> **Pivote 2026-09-25:** el detector activo es LLM/SLM local. Las pasadas 1–23 abajo
+> documentan el stub TF–IDF **histórico** (ya eliminado); no son el camino actual.
 
 ## Cómo correr uno
 
@@ -18,7 +21,7 @@ WAV=/tmp/nada.wav docker compose run --rm corrida --texto /app/casos/vishing/ban
 
 ## Chequeo completo (oracle)
 
-[chequear_casos.py](../chequear_casos.py) corre los 21 guiones + `ejemplo.txt` y falla (exit 1) si un incendio, un goteo o un turno cambia; también repite el incendio con un typo por turno (seed 42), exige toda opinión legítima bajo 0,5 y repite los 17 con mayúsculas, tildes y muletillas (idéntico resultado). Es lo que corren las pasadas de mejora; si una mejora cambia una expectativa a propósito, se actualiza ahí con su pasada documentada abajo.
+[chequear_casos.py](../chequear_casos.py) corre los 21 guiones + `ejemplo.txt` y falla (exit 1) si el **incendio** (reglas) no coincide. Tras el pivote LLM (2026-09-25), el **goteo** no se fija en el oracle hasta tener `LLM_BASE_URL` y corridas documentadas en #29.
 
 ## Qué hay
 
@@ -56,7 +59,7 @@ Pasada 1 de 5. Antes de la negación, 12 de 13 guiones coincidían con la tabla 
 
 Pasada 2 de 5. El incendio sigue en 13 de 13. El piso de palabras conocidas pasó de 4 a 2: con 4 el goteo no disparaba; con 1 disparaba en 5 de 7 legítimas. Con 2 dispara en `arca-deuda`, `banco-codigo`, `familiar-peligro` y `whatsapp-codigo`, y en ninguna legítima. Siguen quietos `acceso-remoto` y `anses-beneficio` (un solo turno con opinión). Tres legítimas puntúan alto una sola vez y no llegan a goteo: `banco-niega-el-codigo` 0,562, `mensajeria-no-pases-nada` 0,534, `no-bajes-nada` 0,570. `ejemplo.txt` sigue goteando en el turno 3.
 
-Pasada 3. Dos semillas inventadas de estafa en [semillas.json](../semillas.json) («si no instalas el programa no puedo frenar el debito de la tarjeta», «si no me pasas el dato hoy se pierde el pago del beneficio») para dar opinión a los turnos mudos de `acceso-remoto` y `anses-beneficio`. Goteo vishing 6 de 6, legítima 0 de 7, incendio 13 de 13. Efecto lateral: las tres legítimas aisladas subieron (0,582, 0,610, 0,625). `ejemplo.txt` igual (goteo turno 3, incendio 5–6).
+Pasada 3. Dos semillas inventadas de estafa en `semillas.json` (archivo eliminado 2026-09-25 con el stub TF–IDF) («si no instalas el programa…», «si no me pasas el dato…») para dar opinión a los turnos mudos de `acceso-remoto` y `anses-beneficio`. Goteo vishing 6 de 6, legítima 0 de 7, incendio 13 de 13. Efecto lateral: las tres legítimas aisladas subieron (0,582, 0,610, 0,625). `ejemplo.txt` igual (goteo turno 3, incendio 5–6).
 
 Pasada 4. `plata` entra a `REQUEST_TRANSFER` y `no saques` a las negaciones de [rules.py](../rules.py). `familiar-peligro` anticipa el incendio al turno 4 («necesito que saques la plata…», antes turno 6 por `alias`); la legítima pareja («no saques plata ni hables…») sigue muda por la negación. 13 de 13, 6 de 6, 0 de 7. `ejemplo.txt` igual.
 

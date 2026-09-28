@@ -4,6 +4,8 @@ Sin sleep: el RTF es computo / duracion. No es llamada en vivo.
 
 Modo texto (--texto): misma logica sin ASR ni segundos, para el brazo
 "transcripcion manual" de E1. La latencia se reporta en turnos.
+
+Detector: LLM/SLM local (TF-IDF eliminado 2026-09-25).
 """
 
 import time
@@ -89,22 +91,22 @@ def memoria_pico_mb() -> float | None:
 def correr(
     wav: str | Path,
     gama,
-    semillas_path: str | Path,
     modelos_dir: str | Path,
     chunk_ms: int = 300,
     umbral_goteo: float = 0.5,
 ) -> dict:
-    """Una corrida sobre audio: devuelve turnos, eventos, RTF y memoria."""
+    """Una corrida sobre audio: ASR + reglas + LLM + contador."""
     muestras, sr, duracion_s = leer_wav_mono_16k(wav)
     model_dir = asr.descargar_modelo(gama.asr, modelos_dir)
     rec = asr.crear_reconocedor(model_dir, gama.hilos_asr)
     stream = rec.create_stream()
-    det = detector.DetectorTfidf(semillas_path)
+    det = detector.DetectorLlm()
     cortador = turns.CortadorTurnos(sample_rate=sr)
     contador = ContadorGoteo(umbral_goteo)
 
     chunk_n = int(sr * chunk_ms / 1000)
     turnos: list[dict] = []
+    historial: list[str] = []
     eventos_incendio: list[dict] = []
     prev_etiquetas: set[str] = set()
     t_incendio: float | None = None
@@ -115,7 +117,7 @@ def correr(
 
     def cerrar_turno(t_s: float, texto: str):
         nonlocal t_goteo, turno_goteo
-        p = det.puntaje(texto)
+        p = det.puntaje(texto, historial)
         n = len(turnos) + 1
         if contador.agregar(p) and t_goteo is None:
             t_goteo = round(t_s, 2)
@@ -123,6 +125,8 @@ def correr(
         turnos.append(
             {"n": n, "fin_s": round(t_s, 2), "texto": texto, "puntaje": _puntaje(p)}
         )
+        if texto.strip():
+            historial.append(texto.strip())
         rec.reset(stream)
 
     for i in range(0, len(muestras), chunk_n):
@@ -173,14 +177,13 @@ def correr(
     }
 
 
-def correr_texto(
-    txt_path: str | Path, semillas_path: str | Path, umbral_goteo: float = 0.5
-) -> dict:
-    """Una corrida sobre transcripto: reglas + TF-IDF + contador, sin ASR ni segundos."""
+def correr_texto(txt_path: str | Path, umbral_goteo: float = 0.5) -> dict:
+    """Corrida sobre transcripto: reglas + LLM + contador, sin ASR ni segundos."""
     textos = leer_turnos_txt(txt_path)
-    det = detector.DetectorTfidf(semillas_path)
+    det = detector.DetectorLlm()
     contador = ContadorGoteo(umbral_goteo)
     turnos: list[dict] = []
+    historial: list[str] = []
     eventos: list[dict] = []
     turno_incendio: int | None = None
     turno_goteo: int | None = None
@@ -192,10 +195,11 @@ def correr_texto(
             )
             if turno_incendio is None:
                 turno_incendio = n
-        p = det.puntaje(texto)
+        p = det.puntaje(texto, historial)
         if contador.agregar(p) and turno_goteo is None:
             turno_goteo = n
         turnos.append({"n": n, "fin_s": None, "texto": texto, "puntaje": _puntaje(p)})
+        historial.append(texto)
     texto_final = " ".join(textos)
     ns = [n for n in (turno_incendio, turno_goteo) if n is not None]
     return {
@@ -210,5 +214,5 @@ def correr_texto(
         "texto_final": texto_final,
         "turnos": turnos,
         "terminos_criticos": {t: t in texto_final.lower() for t in TERMINOS_CRITICOS},
-        "nota": "Sin audio: RTF y segundos no aplican; latencia en turnos.",
+        "nota": "Sin audio: RTF y segundos no aplican; latencia en turnos. Goteo requiere LLM_BASE_URL.",
     }

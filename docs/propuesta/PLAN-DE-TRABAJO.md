@@ -154,7 +154,8 @@ demo temprana y VoIP como integración objetivo. La comparación completa está 
 
 ### Etapa 4 — Modelos y estado temporal
 
-- Implementar reglas y TF–IDF/regresión logística.
+- Implementar reglas de incendio y detector LLM/SLM local (clasificador; variante agente a medir).
+  TF–IDF fuera del camino (2026-09-25).
 - Evaluar un modelo neuronal liviano solo si existe evidencia para hacerlo.
 - Comparar predicción por turno con acumulación temporal e histéresis.
 
@@ -220,7 +221,7 @@ evaluar en computadora y desplegar el modelo seleccionado después.
 | 2–9 sep      | propuesta, preguntas, alternativas de audio y decisiones al profesor |
 | 10–23 sep    | alcance aprobado y vertical slice técnico                            |
 | 24 sep–7 oct | corpus/anotación piloto y protocolo ético                            |
-| 8–21 oct     | benchmark ASR, reglas, TF–IDF y primer resultado temporal            |
+| 8–21 oct     | benchmark ASR, LLM/SLM local y primer resultado temporal            |
 | 22 oct–4 nov | corpus v1 y detector incremental                                     |
 | 5–18 nov     | integración end-to-end e instrumentación                             |
 | 19 nov–2 dic | congelamiento y evaluación final                                     |
