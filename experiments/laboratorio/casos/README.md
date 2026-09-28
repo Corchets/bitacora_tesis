@@ -112,6 +112,10 @@ Pasada 24 (TDD: rojo t3-sin-opinión → verde). Semilla estafa «te mandamos el
 
 Pasada 25. Whatsapp-paráfrasis a la suite (21 casos; inc t3, goteo t2). Última modalidad sin paráfrasis cubierta.
 
+## Casos difíciles (2026-09-24)
+
+Cinco guiones en [dificiles/](dificiles/), fuera del oracle de los 21. No cierran D07. Están medidos en los CSV de [resultados/](../resultados/).
+
 ## Fuentes
 
 - Ministerio de Justicia, «¿Qué hago si me piden mis datos personales por teléfono?», información actualizada en junio de 2026. <https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/que-hago-si-me-piden-datos-personales-por-telefono>

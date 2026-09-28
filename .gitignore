@@ -25,6 +25,7 @@ consentimientos-firmados/
 # Artefactos grandes/regenerables
 models/checkpoints/
 artifacts/
+experiments/laboratorio/modelos/
 
 # Sistema y editores
 .DS_Store
