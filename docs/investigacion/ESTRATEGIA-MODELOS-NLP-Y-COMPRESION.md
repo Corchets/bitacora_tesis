@@ -8,8 +8,8 @@
 > **Revisión 2026-09-29 — marco teórico contrastado con el laboratorio.** Este documento es la
 > hipótesis de partida y se conserva como tal. Las cifras de latencia, memoria y tamaño de las
 > §1–§4 son valores de referencia que el equipo **no midió** y cuya fuente primaria no está
-> registrada. La salida de la §6.2 viene de una **simulación** (`benchmark_nlp.py` no carga
-> modelos), no de una medición. Lo que el spike [#29](https://github.com/Corchets/bitacora_tesis/issues/29)
+> registrada. La salida de la §6.2 viene de una **simulación** (`benchmark_nlp.py`, que no cargaba
+> modelos y se eliminó del repositorio el 2026-09-29), no de una medición. Lo que el spike [#29](https://github.com/Corchets/bitacora_tesis/issues/29)
 > sí midió el 2026-09-28, y qué hipótesis de este marco confirma, refuta o deja sin probar, está en
 > [CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
 
@@ -233,8 +233,9 @@ seleccionando aquella configuración que optimice la anticipación temporal prev
 
 Para contrastar el comportamiento de las diferentes familias de modelos sobre hardware representativo sin suposiciones analíticas previas, se ha estructurado un módulo de evaluación empírica reproducible: `experiments/laboratorio/benchmark_nlp.py`.
 
-> **Revisión 2026-09-29:** en su estado actual `benchmark_nlp.py` es una **simulación del flujo** de la
-> cascada, útil para mostrar la lógica de bifurcación, no un benchmark: no carga modelos. El arnés que
+> **Revisión 2026-09-29:** `benchmark_nlp.py` era una **simulación del flujo** de la cascada, no un
+> benchmark: no cargaba modelos. **Se eliminó del repositorio el 2026-09-29.** El diseño de esta sección
+> queda como registro de lo que se esperaba medir. El arnés que
 > sí mide con modelos reales es el del spike #29 (`correr_cascada.py`, `detector_cascada.py`), descrito en
 > [CONTRASTE §2](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#2-qué-construyó-ignacio-en-el-laboratorio).
 
@@ -262,7 +263,7 @@ flowchart TD
 ### 6.2 Salida ilustrativa del script de simulación (no es una medición)
 
 > **Revisión 2026-09-29.** La versión del 2026-09-26 presentaba esta tabla como *"la medición
-> obtenida"*. No lo es: `benchmark_nlp.py` no carga RoBERTuito, DistilBETO ni ningún SLM. Los
+> obtenida"*. No lo es: `benchmark_nlp.py` (eliminado) no cargaba RoBERTuito, DistilBETO ni ningún SLM. Los
 > "modelos" son reglas con puntajes fijos y la RAM de cada fila es una constante escrita en el
 > código. La tabla muestra **cómo se vería** la salida si las hipótesis del marco fueran ciertas.
 > Se conserva para que quede registrado qué se esperaba; las mediciones reales del spike #29 la

@@ -162,7 +162,7 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   [ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md).
   Propone la cascada encoder continuo (RoBERTuito) + SLM solo en zona gris, con base institucional
   offline. Es hipótesis: sus cifras de latencia y memoria no fueron medidas por el equipo y la salida
-  de [benchmark_nlp.py](../../experiments/laboratorio/benchmark_nlp.py) es simulada.
+  de `benchmark_nlp.py` era simulada (script eliminado el 2026-09-29).
   El contraste con lo medido en el spike #29 el 2026-09-28 (rama de Ignacio, laboratorio sin
   terminar) está en
   [CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md):

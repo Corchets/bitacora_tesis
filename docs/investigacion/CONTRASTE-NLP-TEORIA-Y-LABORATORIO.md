@@ -124,7 +124,7 @@ propio y que la primera medición real está lejos de ellas.
 | Turnos que van al SLM | Pocos: la simulación habla de "85% de turnos inocentes" | **126 de 523 (24%)** | Uno de cada cuatro turnos va al SLM, así que el costo del SLM no es marginal. |
 | Negación («no te voy a dar la clave») | Encoder 0,09 (simulado) | `banco-niega-el-codigo`: máximo 0,189, sin goteo | Coincide en el único caso probado. |
 | Mención inocente («código de la puerta») | Encoder 0,12 (simulado) | `portero-codigo-puerta`: goteo máximo 0,211, pero **las reglas sí disparan incendio** | El encoder no se confunde, pero la vía rápida por reglas sí. |
-| Charla familiar sobre un asado | Encoder 0,15 (simulado) | **0,99** según [R16](https://github.com/Corchets/bitacora_tesis/blob/5ac40b5bf3194e92b619802b7983ab61133d09fe/docs/gestion/REGISTRO-RIESGOS.md) | La frase del asado es un caso de `benchmark_nlp.py`. R16 no dice cómo se corrió esa sonda y no aparece en los CSV. Hay que confirmarlo con Ignacio. |
+| Charla familiar sobre un asado | Encoder 0,15 (simulado) | **0,99** según [R16](https://github.com/Corchets/bitacora_tesis/blob/5ac40b5bf3194e92b619802b7983ab61133d09fe/docs/gestion/REGISTRO-RIESGOS.md) | La frase del asado era un caso de `benchmark_nlp.py` (eliminado el 2026-09-29). R16 no dice cómo se corrió esa sonda y no aparece en los CSV. Hay que confirmarlo con Ignacio. |
 
 ### 3.1 RAM y disco no son lo mismo
 
@@ -279,7 +279,8 @@ alarmas puede venir de ahí y no del detector.
   incendio/goteo, la base institucional offline (que ya se usa), el protocolo de calibración de
   umbrales de la §5 y los casos trampa (negación, portero, asado), que ya sirvieron para medir.
 - **Se corrige** en el propio #27: las cifras quedan marcadas como referencia sin medir, la §6.2
-  como simulación, la bibliografía cotejada y `benchmark_nlp.py` rotulado como simulación.
+  como simulación, la bibliografía cotejada y `benchmark_nlp.py` eliminado, porque era una simulación que no cargaba
+  modelos.
 - **Próximas pruebas que tendrían sentido,** en este orden:
   1. Datos reales para el encoder ([#41](https://github.com/Corchets/bitacora_tesis/issues/41)). Sin
      esto, ninguna comparación de calidad sirve.
@@ -300,5 +301,5 @@ alarmas puede venir de ahí y no del detector.
   (2026-09-28) y cuerpo de [#42](https://github.com/Corchets/bitacora_tesis/issues/42), para la
   corrida de audio del 2026-09-25. Consulta: 2026-09-29.
 - [ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md](ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md) y
-  [`benchmark_nlp.py`](../../experiments/laboratorio/benchmark_nlp.py) (#27).
+  `benchmark_nlp.py` (#27, eliminado el 2026-09-29).
 - [VENTANA-DE-CONTEXTO-Y-ALERTA.md §11](VENTANA-DE-CONTEXTO-Y-ALERTA.md#11-reconciliación-con-el-contador-del-recorte-de-modelos) (#23).
