@@ -34,9 +34,9 @@ de vishing y llamadas legítimas difíciles. Se compararán reglas, un modelo cl
 y, si aporta una mejora justificable, un modelo neuronal liviano. Además de las
 métricas de clasificación, se medirá la falsa alarma, el efecto de los errores del
 reconocimiento de voz, la latencia y el tiempo de anticipación respecto de una
-acción crítica. El núcleo experimental utilizará reproducción en streaming; se
-evaluará una llamada VoIP controlada como integración y una prueba con altavoz como
-demostración de laboratorio.
+acción crítica. El núcleo experimental utilizará reproducción en streaming; la llamada
+VoIP controlada es la integración objetivo del prototipo, sujeta a una prueba de
+factibilidad. La captura por altavoz quedó despriorizada por su mezcla de canales.
 
 ## 2. Problema
 
@@ -50,9 +50,11 @@ o realizar una operación.
 
 ### Formulación en cinco líneas
 
-> **Estado: propuesta sin discutir.** Borrador del [issue #18](https://github.com/Corchets/bitacora_tesis/issues/18);
-> cierra [D02](../gestion/MAPA-DECISIONES.md#d02--definir-problema-usuario-y-necesidad)
-> cuando lo validen los cuatro integrantes.
+> **Estado: ratificada por el equipo; pendiente del tutor.** Mateo informó el 2026-09-25
+> que los cuatro integrantes aprobaron sin cambios estas cinco líneas del
+> [issue #18](https://github.com/Corchets/bitacora_tesis/issues/18). La decisión de alcance
+> [D02](../gestion/MAPA-DECISIONES.md#d02--definir-problema-usuario-y-necesidad)
+> permanece abierta hasta consultar el encuadre al tutor el 2026-09-30.
 
 1. **Usuario:** una persona en Argentina que atiende en su teléfono a alguien que dice llamar de su
    banco, de un organismo como ANSES, de una mesa de soporte o de parte de un familiar.
@@ -159,16 +161,19 @@ Las definiciones operativas y métricas están en
 
 ## 7. Alternativas para obtener el audio
 
-Se presentarán al profesor cuatro alternativas comparadas:
+El 2026-09-09 se presentaron al profesor cuatro alternativas comparadas:
 
 1. reproducción de grabaciones como stream;
 2. llamada en altavoz capturada por un micrófono externo;
 3. llamada VoIP controlada cuyo audio pertenece a la aplicación;
 4. integración privilegiada con telefonía mediante OEM/AOSP/root.
 
-La recomendación es aprobar **replay como base experimental**, altavoz externo como
-demo temprana y VoIP como integración objetivo. La comparación completa está en
-[ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md).
+Se aprobó **replay como base experimental reproducible** y **VoIP controlada como
+integración objetivo**, condicionada a la factibilidad del prototipo. El altavoz externo
+quedó despriorizado; la captura universal PSTN permanece fuera de alcance. La comparación
+y su decisión posterior están en
+[ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)
+y en la [minuta del 2026-09-09](../gestion/seguimientos/2026-09-09.md).
 
 ## 8. Metodología
 
@@ -337,7 +342,7 @@ El proyecto será exitoso si responde las preguntas con un procedimiento honesto
 1. **Preguntas centrales:** Aprobadas PI1 y PI2 como preguntas principales; comparación manual vs. ASR como diagnóstica y explicación como objetivo secundario.
 2. **Fuente de audio:** Aprobada la estrategia escalonada: replay de grabaciones como base experimental reproducible y VoIP controlada como integración prototipo. Altavoz despriorizado.
 3. **Límites de alcance:** Aprobado dejar fuera PSTN universal, deepfake y biometría de voz.
-4. **Procedimiento ético y privacidad:** UNSTA no requiere comité de ética formal. El corpus se compone de simulaciones con datos ficticios y sin víctimas reales; la privacidad se garantiza por diseño en el dispositivo (*on-device*).
+4. **Procedimiento ético y privacidad:** UNSTA no requiere comité de ética formal. El corpus se compone de simulaciones con datos ficticios y sin víctimas reales. El procesamiento local sin nube es un principio de diseño; su ejecución *on-device* en Android requiere medición.
 5. **Requisitos académicos:** Defensa presencial última/penúltima semana de diciembre 2026. Tutor asignado: Ing. Ernesto Rico. Entrega digital promedio ~100 págs (ver [REQUISITOS-ACADEMICOS.md](REQUISITOS-ACADEMICOS.md)).
 
 ## 16. Aprobaciones y cambios
