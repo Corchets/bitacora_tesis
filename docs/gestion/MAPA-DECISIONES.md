@@ -130,13 +130,15 @@ y carísimo de arreglar después.
 Falta fijar además la restricción de falsos positivos **antes** de medir. El anteproyecto la
 menciona pero no la define, y sin ese número la hipótesis no es falsable.
 
-- **Recorte de trabajo (2026-09-16, no cierra D08):**
-  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md).
+- **Recorte de trabajo e investigación (#23, no cierra D08):**
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md) y
+  [DISENO-INTEGRADO.md](../investigacion/DISENO-INTEGRADO.md).
   Deriva el margen de aceptación desde el máximo de llamadas legítimas con alerta, en lugar de
   fijar un umbral a ojo, y muestra cómo se acumulan las falsas alarmas con cada actualización.
-  Propone además ventana deslizante con decaimiento y un registro conjunto de eventos.
+  Propone ventana deslizante con decaimiento, registro de eventos y compara las cuatro estrategias
+  de memoria para evaluar experimentalmente en dos brazos (base vs propuesta).
   Los números salen de llamadas sintéticas: prueban el mecanismo, no miden rendimiento.
-  Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23).
+  Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23) cerrado como investigación técnica; D08 permanece abierta.
 
 ### D09 — Elegir ASR y detector
 
@@ -144,7 +146,7 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **Bloqueada por:** D05, D07 y benchmark piloto.
 - **Salida:** decisión basada en WER/recall crítico, F1/AUPRC, latencia y memoria.
 - **Candidatos a evaluar (mapa inicial):** sherpa-onnx, Vosk y whisper.cpp para ASR; TF-IDF como baseline
-  obligatorio y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
+  obligatorio (retirado el 2026-09-29: la línea base pasa a ser reglas solas) y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
   preferencia previa.
 - **Recorte de trabajo inicial (2026-09-15/16, no cierra D09):**
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
@@ -156,6 +158,16 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   [issue #29](https://github.com/Corchets/bitacora_tesis/issues/29) plantea Moonshine tiny-es para baja,
   Zipformer Kroko ONNX para media/alta y TF–IDF + reglas como detector en las tres gamas;
   deja ALBETO, DistilBETO y RoBERTuito fuera de *ese spike*. No hay benchmark del piloto ni elección D09.
+- **Marco teórico de modelos NLP y compresión (#27, no cierra D09):**
+  [ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md).
+  Propone la cascada encoder continuo (RoBERTuito) + SLM solo en zona gris, con base institucional
+  offline. Es hipótesis: sus cifras de latencia y memoria no fueron medidas por el equipo y la salida
+  de `benchmark_nlp.py` era simulada (script eliminado el 2026-09-29).
+  El contraste con lo medido en el spike #29 el 2026-09-28 (rama de Ignacio, laboratorio sin
+  terminar) está en
+  [CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md):
+  la cascada con Llama 3.2 1B sin ajuste no mejoró al encoder solo y la memoria y la latencia
+  medidas en PC superan las del marco. D09 sigue abierta.
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -211,7 +223,10 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   VoIP controlado es la integración preferida si el spike confirma viabilidad.
 - **No hacer detección de deepfake en el núcleo:** responde una pregunta distinta
   a detectar manipulación y pedidos peligrosos.
-- **Mantener baselines simples:** reglas y TF–IDF son comparadores obligatorios.
+- **Línea base del detector (2026-09-29, reemplaza "reglas y TF–IDF como comparadores obligatorios"):**
+  TF–IDF sale del proyecto. La línea base para comparar es **reglas solas**. Motivo: el stub TF–IDF
+  del spike #29 llegó a su techo con fuga de información en las semillas
+  ([contraste](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#7-dificultades-que-tuvo-ignacio)).
 - **Criterios de prefactibilidad (#24):** Mateo informó el 2026-09-22 que el equipo revisó y aprobó
   los presupuestos y umbrales de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md)
   como punto de partida para medir, no como evidencia de rendimiento. D09 y la elección de modelos
@@ -227,6 +242,10 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   presupuestos de medición, no evidencia de que una combinación de modelos funcione
   en Android. El [recorte #29](https://github.com/Corchets/bitacora_tesis/issues/29)
   tampoco cierra D09.
+  **Observación (2026-09-18, issue #23):** con el máximo de 3 turnos, "dos veces seguidas" se
+  cumple con un solo pico y la histéresis no reduce las falsas alarmas. Compite con el riesgo con
+  decaimiento y doble umbral de la ventana de contexto. Cuenta y opciones en
+  [VENTANA-DE-CONTEXTO-Y-ALERTA.md §11](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#11-reconciliación-con-el-contador-del-recorte-de-modelos). Propuesta sin discutir.
 - Dispositivo Android concreto para la demo y mediciones de rendimiento, batería y temperatura.
   Los presupuestos de laboratorio ya están definidos en
   [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), pero no prueban
