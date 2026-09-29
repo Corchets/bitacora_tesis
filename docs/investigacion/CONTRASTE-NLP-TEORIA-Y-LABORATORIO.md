@@ -28,8 +28,8 @@ todo lo que sea recomendación.
   se consulta en una minoría de turnos (24%).
 - **Lo que se refutó en esta corrida:** la cascada **empeoró** al encoder solo (goteo 12/16 → 7/16,
   AUROC 0,666 → 0,537, las mismas 5/10 falsas alarmas). El SLM tardó ~3,9 s por turno y no
-  450–850 ms. Encoder y SLM juntos ocupan ~1,7 GB sin contar el ASR, así que no entran en el techo
-  de 1024 MB de gama alta.
+  450–850 ms. Encoder y SLM juntos ocupan ~1,7 GB **de RAM** sin contar el ASR, así que no entran en
+  el techo de 1024 MB de RAM de gama alta. El disco no es la restricción (ver §3.1).
 - **Lo que queda sin probar:** el encoder cuantizado INT8/ONNX, el ajuste fino (LoRA o cabeza
   entrenada con datos reales), la calibración de umbrales, el audio y el hardware ARM.
 - **El resultado depende sobre todo de los datos.** Con semillas provisorias el encoder aprende
@@ -117,14 +117,30 @@ propio y que la primera medición real está lejos de ellas.
 | Qué | Marco #27 (supuesto, no medido) | Laboratorio 2026-09-28 (medido) | Lectura |
 |---|---|---|---|
 | RoBERTuito: ms por turno | 38–42 ms (INT8) | **~152 ms** (p50, fp32 + LR) | El marco suponía INT8, que no se probó. La cuantización queda pendiente de medir. |
-| RoBERTuito: RAM | 145 MB (INT8) | **~875 MB** de pico del proceso | El pico incluye PyTorch y transformers. No mide solo el modelo, pero es lo que ocupa hoy. |
+| RoBERTuito: RAM | 145 MB (INT8) | **~875 MB de RAM** (pico RSS del proceso) | El pico incluye PyTorch y transformers. No mide solo el modelo, pero es lo que ocupa hoy. |
 | Llama 3.2 1B Q4: ms por turno | 450–850 ms | **~3.884 ms** (p50) | Es ~5 veces lo supuesto, con contexto de 1024 tokens y en x86. |
-| Llama 3.2 1B Q4: RAM | 780 MB | **~860 MB** (Ollama `/api/ps`) | Del mismo orden. |
-| Encoder + SLM en gama alta | Entra en 1024 MB con el ASR | ~880 + ~860 MB, **sin el ASR** | No entra en 1024 MB. Ignacio propuso subir el techo a 2048 MB, lo que cambia lo aprobado en #24. |
+| Llama 3.2 1B Q4: RAM | 780 MB | **~860 MB de RAM** (Ollama `/api/ps`: pesos cargados + caché de contexto) | Del mismo orden. |
+| Encoder + SLM en gama alta | Entra en 1024 MB de RAM con el ASR | ~880 + ~860 MB de RAM, **sin el ASR** | No entra en 1024 MB de RAM. Ignacio propuso subir el techo a 2048 MB, lo que cambia lo aprobado en #24. |
 | Turnos que van al SLM | Pocos: la simulación habla de "85% de turnos inocentes" | **126 de 523 (24%)** | Uno de cada cuatro turnos va al SLM, así que el costo del SLM no es marginal. |
 | Negación («no te voy a dar la clave») | Encoder 0,09 (simulado) | `banco-niega-el-codigo`: máximo 0,189, sin goteo | Coincide en el único caso probado. |
 | Mención inocente («código de la puerta») | Encoder 0,12 (simulado) | `portero-codigo-puerta`: goteo máximo 0,211, pero **las reglas sí disparan incendio** | El encoder no se confunde, pero la vía rápida por reglas sí. |
 | Charla familiar sobre un asado | Encoder 0,15 (simulado) | **0,99** según [R16](https://github.com/Corchets/bitacora_tesis/blob/5ac40b5bf3194e92b619802b7983ab61133d09fe/docs/gestion/REGISTRO-RIESGOS.md) | La frase del asado es un caso de `benchmark_nlp.py`. R16 no dice cómo se corrió esa sonda y no aparece en los CSV. Hay que confirmarlo con Ignacio. |
+
+### 3.1 RAM y disco no son lo mismo
+
+Los techos de gama (256/512/1024 MB) son de **RAM**: pico de memoria residente del pipeline, según
+[PREFACTIBILIDAD-TECNICA.md](PREFACTIBILIDAD-TECNICA.md). Todas las cifras de memoria de este
+documento son RAM. El disco no es la restricción, porque un teléfono de 64–128 GB guarda sin
+problema los ~1,2 GB de archivos.
+
+| Modelo | Disco (archivo de pesos) | RAM medida al correr | Por qué se parecen o no |
+|---|---:|---:|---|
+| RoBERTuito fp32 | 415 MB (`model.safetensors` en Hugging Face, consulta 2026-09-29) | ~875 MB | La RAM suma los pesos más PyTorch, transformers y el tokenizador. En INT8/ONNX los pesos serían ~4 veces más chicos y el runtime más liviano (a medir). |
+| Llama 3.2 1B Q4_K_M | 808 MB (ficha de Ollama, consulta 2026-09-29) | ~860 MB | Casi igual: el modelo necesita todos sus pesos en RAM para generar cada token, más la caché de contexto. |
+
+Esto relativiza una idea de la §3.2 del #27: mapear el modelo con `mmap` no ahorra RAM mientras
+el SLM se consulta seguido. Solo le permite al sistema liberar esa memoria cuando el SLM está
+quieto.
 
 Otras corridas de referencia:
 
@@ -152,7 +168,7 @@ Otras corridas de referencia:
 | H5 | La base institucional offline le permite al SLM detectar la suplantación de ANSES | **Refutada en esta corrida** | En `anses-beneficio` el máximo baja de 0,536 (encoder) a 0,309 (cascada), y en su paráfrasis de 0,737 a 0,18. En ninguno de los dos hay goteo. |
 | H6 | El SLM responde en 450–850 ms | **Refutada en PC x86** | ~3,9 s por turno. |
 | H7 | El SLM se usa poco, así que el costo es bajo | **Parcial** | Va al SLM el 24% de los turnos. |
-| H8 | Llama 3.2 1B entra en gama alta (1024 MB) | **Refutada** | ~1,7 GB sin el ASR. SmolLM2-360M sigue como alternativa sin medir. |
+| H8 | Llama 3.2 1B entra en gama alta (1024 MB de RAM) | **Refutada** | ~1,7 GB de RAM sin el ASR. SmolLM2-360M sigue como alternativa sin medir. |
 | H9 | Umbrales 0,35/0,75 como punto de partida | **Usados, sin calibrar** | La calibración de la §5 del #27 no se hizo. |
 | H10 | Ajuste de dominio con LoRA | **Sin probar** | El encoder está congelado y el SLM no tiene ajuste. |
 | H11 | Fin de turno por VAD con 600 ms | **Sin probar** | El laboratorio usa 400 ms. Las transcripciones se partieron en bloques de 25 palabras porque el cortador no está definido. |
@@ -220,7 +236,7 @@ alarmas puede venir de ahí y no del detector.
 3. **El SLM chico sin ajuste no sirve como árbitro.** Sin `response_format` JSON, Llama 3.2 1B Q4
    contesta en prosa. Con JSON forzado responde riesgo 0 a casi todo.
 4. **Memoria.** Con el contexto por defecto de 4096 tokens, Ollama reservaba ~1,4 GB. Lo bajó a
-   1024 y recortó los turnos del historial a 300 caracteres. Aun así encoder y SLM suman ~1,7 GB,
+   1024 y recortó los turnos del historial a 300 caracteres. Aun así encoder y SLM suman ~1,7 GB de RAM,
    y por eso propuso subir el techo de alta a 2048 MB.
 5. **Lentitud.** La suite con cascada tardó ~624 s, contra ~100 s con el encoder solo, por los
    ~3,9 s de cada consulta al SLM.

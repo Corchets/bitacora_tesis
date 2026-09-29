@@ -92,7 +92,7 @@ Los modelos de lenguaje autorregresivos aportan capacidad de deducción lógica 
 > **valores de referencia sin medir y sin fuente primaria registrada**; no deben citarse como
 > resultados. Se conservan porque ordenan las familias de modelos. La corrida del spike #29 midió
 > órdenes de magnitud distintos en PC x86: RoBERTuito en PyTorch fp32 + regresión logística, ~875 MB
-> de pico y ~152 ms por turno, y `llama3.2:1b-instruct-q4_K_M` en Ollama, ~860 MB y ~3,9 s por turno.
+> de RAM pico y ~152 ms por turno, y `llama3.2:1b-instruct-q4_K_M` en Ollama, ~860 MB de RAM y ~3,9 s por turno.
 > No son comparables uno a uno (el marco supone ONNX INT8 en ARM). Ver
 > [CONTRASTE §3](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#3-cifras-del-marco-contra-cifras-medidas).
 
