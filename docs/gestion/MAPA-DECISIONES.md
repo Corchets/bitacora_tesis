@@ -146,7 +146,7 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **Bloqueada por:** D05, D07 y benchmark piloto.
 - **Salida:** decisión basada en WER/recall crítico, F1/AUPRC, latencia y memoria.
 - **Candidatos a evaluar (mapa inicial):** sherpa-onnx, Vosk y whisper.cpp para ASR; TF-IDF como baseline
-  obligatorio y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
+  obligatorio (retirado el 2026-09-29: la línea base pasa a ser reglas solas) y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
   preferencia previa.
 - **Recorte de trabajo inicial (2026-09-15/16, no cierra D09):**
   [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
@@ -223,7 +223,10 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   VoIP controlado es la integración preferida si el spike confirma viabilidad.
 - **No hacer detección de deepfake en el núcleo:** responde una pregunta distinta
   a detectar manipulación y pedidos peligrosos.
-- **Mantener baselines simples:** reglas y TF–IDF son comparadores obligatorios.
+- **Línea base del detector (2026-09-29, reemplaza "reglas y TF–IDF como comparadores obligatorios"):**
+  TF–IDF sale del proyecto. La línea base para comparar es **reglas solas**. Motivo: el stub TF–IDF
+  del spike #29 llegó a su techo con fuga de información en las semillas
+  ([contraste](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#7-dificultades-que-tuvo-ignacio)).
 - **Criterios de prefactibilidad (#24):** Mateo informó el 2026-09-22 que el equipo revisó y aprobó
   los presupuestos y umbrales de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md)
   como punto de partida para medir, no como evidencia de rendimiento. D09 y la elección de modelos

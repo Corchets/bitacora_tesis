@@ -190,7 +190,7 @@ hay evidencia a favor. Cualquier conclusión sobre la cascada tiene que esperar 
 | Encoder | RoBERTuito **ajustado** y cuantizado INT8 en ONNX | RoBERTuito **congelado** fp32 + regresión logística |
 | SLM | SmolLM2-360M en gama media y Llama 3.2 1B en alta, GGUF 4-bit con `mmap` | Llama 3.2 1B Q4_K_M en Ollama, contexto 1024 y respuesta JSON forzada |
 | Qué hace el SLM | "Modula" el evento y da un dictamen estructurado | Su puntaje **reemplaza** al del encoder |
-| TF-IDF | Baseline comparativo de control | **Eliminado** del camino el 2026-09-25 (ver §8) |
+| TF-IDF | Baseline comparativo de control | **Eliminado** del camino el 2026-09-25; fuera del proyecto desde el 2026-09-29 (línea base: reglas solas) |
 | Datos del detector | LoRA sobre el catálogo de escenarios (no existe todavía) | Semillas provisorias de YouTube + ES-Port, fuera de Git |
 | Memoria y alerta | Registro de eventos con decaimiento (#23) | `ContadorGoteo`: máximo de 3 + dos seguidas |
 | Techo de gama alta | 1024 MB | 2048 MB (propuesta) |
@@ -258,17 +258,13 @@ alarmas puede venir de ahí y no del detector.
 
 ## 8. Cosas a revisar antes de integrar la rama de Ignacio
 
-No son errores del laboratorio, pero tocan decisiones del equipo:
-
-- **Cambia una decisión cerrada.** En su rama, "Mantener baselines simples: reglas y TF–IDF son
-  comparadores obligatorios", que está en *Decisiones cerradas* de
-  [MAPA-DECISIONES.md](../gestion/MAPA-DECISIONES.md#decisiones-cerradas), pasa a "TF–IDF fuera
-  del camino". También edita [PLAN-DE-TRABAJO.md](../propuesta/PLAN-DE-TRABAJO.md) (etapa 4 y
-  cronograma). Las dos cosas son cambio de método: hay que discutirlas entre los cuatro y llevarlas
-  al tutor. Además chocan con el #27, que conserva TF-IDF como baseline de control.
-- **Techo de 2048 MB en gama alta.** Cambia lo aprobado en #24
-  ([PREFACTIBILIDAD-TECNICA.md](PREFACTIBILIDAD-TECNICA.md)). Está marcado como propuesta, pero
-  tiene que revalidarse.
+- **TF-IDF.** Decidido el 2026-09-29: sale del proyecto y la línea base pasa a ser **reglas
+  solas** ([MAPA-DECISIONES.md](../gestion/MAPA-DECISIONES.md#decisiones-cerradas)). Los cambios
+  de su rama a [PLAN-DE-TRABAJO.md](../propuesta/PLAN-DE-TRABAJO.md) (etapa 4 y cronograma) van en
+  esa dirección. El TF-IDF de la tabla del #27 queda como registro histórico.
+- **Techo de 2048 MB de RAM en gama alta.** No se sube todavía: primero se mide la configuración
+  más liviana (encoder INT8/ONNX + SmolLM2-360M) y solo si no entra en 1024 MB se revisa lo
+  aprobado en #24 ([PREFACTIBILIDAD-TECNICA.md](PREFACTIBILIDAD-TECNICA.md)).
 - **Uso de grabaciones de YouTube para entrenar.** El texto queda fuera de Git, pero conviene
   registrarlo en [PRIVACIDAD-DEL-SISTEMA.md](../datos-etica/PRIVACIDAD-DEL-SISTEMA.md) o en #41,
   porque son voces de terceros.
