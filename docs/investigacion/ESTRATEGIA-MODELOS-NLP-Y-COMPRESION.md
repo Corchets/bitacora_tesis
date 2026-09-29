@@ -5,6 +5,14 @@
 **Issue:** [#27](https://github.com/Corchets/bitacora_tesis/issues/27).  
 **Estado:** Propuesta técnica de investigación y diseño para discusión del equipo. **No cierra D09.** No constituye un ADR. Establece el marco analítico, metodológico y experimental para la implementación y evaluación empírica del detector de texto local en el laboratorio.
 
+> **Revisión 2026-09-29 — marco teórico contrastado con el laboratorio.** Este documento es la
+> hipótesis de partida y se conserva como tal. Las cifras de latencia, memoria y tamaño de las
+> §1–§4 son valores de referencia que el equipo **no midió** y cuya fuente primaria no está
+> registrada. La salida de la §6.2 viene de una **simulación** (`benchmark_nlp.py` no carga
+> modelos), no de una medición. Lo que el spike [#29](https://github.com/Corchets/bitacora_tesis/issues/29)
+> sí midió el 2026-09-28, y qué hipótesis de este marco confirma, refuta o deja sin probar, está en
+> [CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
+
 ---
 
 ## 1. Fundamentación técnica del procesamiento en dispositivo y arquitectura en cascada
@@ -13,7 +21,7 @@ El principio arquitectónico central del sistema radica en la ejecución **estri
 
 En este contexto, ni los sistemas basados exclusivamente en expresiones regulares (insensibles a la persuasión progresiva y a la variación sintáctica) ni los clasificadores estadísticos lineales sobre representaciones léxicas (TF-IDF, incapaces de resolver la composicionalidad sintáctica, dependencias de largo alcance o la polaridad de negaciones) satisfacen las exigencias de discriminación requeridas para detectar maniobras de ingeniería social. Se requiere la integración de modelos basados en representaciones semánticas profundas (redes neuronales basadas en la arquitectura Transformer).
 
-No obstante, las restricciones de despliegue en hardware móvil imponen un compromiso de ingeniería crítico: en condiciones reales de operación, **entre el 90% y el 95% de las llamadas recibidas por un usuario son legítimas** (comunicaciones familiares, laborales o transaccionales habituales).
+No obstante, las restricciones de despliegue en hardware móvil imponen un compromiso de ingeniería crítico: en condiciones reales de operación, **entre el 90% y el 95% de las llamadas recibidas por un usuario son legítimas** (comunicaciones familiares, laborales o transaccionales habituales). *(Revisión 2026-09-29: supuesto de trabajo sin fuente registrada. El argumento no depende del número exacto, solo de que la mayoría de las llamadas sean legítimas.)*
 - La ejecución ininterrumpida de un modelo de lenguaje generativo autorregresivo (*Small Language Model*, SLM) sobre la totalidad de los turnos de una conversación telefónica exigiría una ocupación continua de los núcleos de procesamiento (CPU/NPU) para decodificar secuencias de tokens. Esta carga constante induce un consumo de potencia eléctrica prohibitivo, genera sobrecalentamiento del terminal y provoca estrangulamiento térmico (*thermal throttling*), reduciendo drásticamente la autonomía de la batería e invalidando la viabilidad del sistema como servicio en segundo plano.
 - Por su parte, los modelos codificadores bidireccionales (*Encoders* compactos, tales como RoBERTuito o DistilBETO) computan la clasificación del turno completo en una única pasada hacia adelante (*single-shot forward pass*), alcanzando latencias inferiores a 45 ms con una huella energética mínima. Sin embargo, en fases de diálogo caracterizadas por una persuasión sutil o engaños progresivos donde aún no median solicitudes explícitas de credenciales, un clasificador discriminativo puede arrojar probabilidades intermedias (estados de alta incertidumbre o frontera de decisión ambigua).
 
@@ -79,6 +87,14 @@ Los modelos de lenguaje autorregresivos aportan capacidad de deducción lógica 
 ---
 
 ### 2.3 Matriz comparativa cuantitativa
+
+> **Revisión 2026-09-29:** los tamaños, la RAM y las latencias de esta matriz y de la §2.1–§2.2 son
+> **valores de referencia sin medir y sin fuente primaria registrada**; no deben citarse como
+> resultados. Se conservan porque ordenan las familias de modelos. La corrida del spike #29 midió
+> órdenes de magnitud distintos en PC x86: RoBERTuito en PyTorch fp32 + regresión logística, ~875 MB
+> de pico y ~152 ms por turno, y `llama3.2:1b-instruct-q4_K_M` en Ollama, ~860 MB y ~3,9 s por turno.
+> No son comparables uno a uno (el marco supone ONNX INT8 en ARM). Ver
+> [CONTRASTE §3](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#3-cifras-del-marco-contra-cifras-medidas).
 
 | Familia | Modelo | Parámetros | Tipo de Inferencia | Procedencia / Año | Tamaño INT8 / INT4 (GGUF) | RAM en Inferencia (MB) | Latencia por Turno (CPU ARM) | Rol Asignado en la Arquitectura |
 |---|---|---:|---|---|---:|---:|---:|---|
@@ -217,6 +233,11 @@ seleccionando aquella configuración que optimice la anticipación temporal prev
 
 Para contrastar el comportamiento de las diferentes familias de modelos sobre hardware representativo sin suposiciones analíticas previas, se ha estructurado un módulo de evaluación empírica reproducible: `experiments/laboratorio/benchmark_nlp.py`.
 
+> **Revisión 2026-09-29:** en su estado actual `benchmark_nlp.py` es una **simulación del flujo** de la
+> cascada, útil para mostrar la lógica de bifurcación, no un benchmark: no carga modelos. El arnés que
+> sí mide con modelos reales es el del spike #29 (`correr_cascada.py`, `detector_cascada.py`), descrito en
+> [CONTRASTE §2](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#2-qué-construyó-ignacio-en-el-laboratorio).
+
 ```mermaid
 flowchart TD
     Suite["Suite de Casos de Prueba<br/>(experiments/laboratorio/casos/)<br/>• Vishing explícito (OTP/CBU)<br/>• Suplantación sutil (ANSES/ARCA)<br/>• Casos negativos difíciles (Banca legítima)<br/>• Frases trampa con polaridad invertida"] --> Bench["Módulo de Evaluación: benchmark_nlp.py<br/>(Inferencia sobre CPU mononúcleo / multinúcleo)"]
@@ -238,9 +259,17 @@ flowchart TD
    - *Falsos positivos por coincidencia léxica superficial:* «El encargado me facilitó el código de acceso al edificio» $\rightarrow$ Evalúa si el modelo preserva el score por debajo de $\theta_{\text{low}}$ o si genera una falsa alarma.
    - *Persuasión y coacción sutil:* «Si no verifica la cuenta en este momento el beneficio pasa a archivo judicial» $\rightarrow$ Evalúa la identificación de urgencia temporal sin mención de credenciales bancarias.
 
-### 6.2 Resultados preliminares de control en entorno de laboratorio
+### 6.2 Salida ilustrativa del script de simulación (no es una medición)
 
-A continuación se reporta la medición obtenida mediante el módulo de prueba en el entorno de desarrollo sobre CPU:
+> **Revisión 2026-09-29.** La versión del 2026-09-26 presentaba esta tabla como *"la medición
+> obtenida"*. No lo es: `benchmark_nlp.py` no carga RoBERTuito, DistilBETO ni ningún SLM. Los
+> "modelos" son reglas con puntajes fijos y la RAM de cada fila es una constante escrita en el
+> código. La tabla muestra **cómo se vería** la salida si las hipótesis del marco fueran ciertas.
+> Se conserva para que quede registrado qué se esperaba; las mediciones reales del spike #29 la
+> contradicen en latencia, memoria y en el efecto de la cascada
+> ([CONTRASTE §3–§4](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#3-cifras-del-marco-contra-cifras-medidas)).
+
+Salida esperada según el marco (valores escritos en el script, no medidos):
 
 ```text
 =============================================================================================================
@@ -260,15 +289,32 @@ Llama 3.2 1B GGUF Q4        795.0 MB     810.0 ms  1.320.0 ms    OK (Discierne n
 
 ---
 
-## 7. Referencias bibliográficas verificadas
+## 7. Referencias bibliográficas
 
-- **Cañete, J., Chaperon, G., Fuentes, R., Ho, J. H., Kang, H., & Pérez, J. (2020).** *Spanish Pre-Trained BERT Model and Evaluation on Spanish Language Tasks.* PML4DC at ICLR 2020.
-- **Cañete, J., et al. (2022).** *ALBETO and DistilBETO: Lightweight Spanish Language Models.* Proceedings of the Language Resources and Evaluation Conference (LREC 2022), ACL Anthology, pp. 457–465.
-- **Pérez, J. M., Furman, D. A., Alemany, L. A., & Luque, F. M. (2022).** *RoBERTuito: a pre-trained language model for social media text in Spanish.* Proceedings of the Language Resources and Evaluation Conference (LREC 2022), pp. 785–795.
-- **Hsieh, C. Y., Li, C. L., Yeh, C. K., Nakhost, H., Fujii, Y., Ratner, A., Krishna, R., Chiu, C. Y., & Pfister, T. (2023).** *Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.* Findings of the ACL 2023, pp. 8003–8017.
-- **Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., & Chen, W. (2021).** *LoRA: Low-Rank Adaptation of Large Language Models.* arXiv preprint arXiv:2106.09685.
-- **Dubey, A., et al. / Meta AI. (2024).** *The Llama 3 Herd of Models (Llama 3.2 on-device).* arXiv preprint arXiv:2407.21783.
-- **Abdin, M., et al. / Microsoft. (2024).** *Phi-3 / Phi-4 Technical Report: High-Quality Small Language Models.* Microsoft Research.
-- **Qwen Team / Alibaba Cloud. (2024).** *Qwen2.5: A Party of Foundation and Large Language Models.* arXiv preprint arXiv:2412.15115.
-- **Loubser, L., et al. / Hugging Face. (2024).** *SmolLM2: Compact and Fast Language Models for Local Devices.* Hugging Face Technical Report.
-- **United States Patent Application Publication. (2024).** *Google LLC: Detection of Fraudulent Telephone Calls.* US Patent 2024/0388655 A1.
+> **Revisión 2026-09-29.** La versión anterior decía "verificadas" y tenía errores: páginas que eran
+> en realidad el número de artículo en ACL Anthology, títulos y autores cambiados y la patente con
+> otro título. Cada entrada se cotejó el 2026-09-29 con la página de la fuente indicada. Falta que
+> alguien del equipo abra los PDF antes de pasarlas a `bibliografia.bib`.
+
+- **Cañete, J., Chaperon, G., Fuentes, R., Ho, J.-H., Kang, H., & Pérez, J. (2020).** *Spanish Pre-Trained BERT Model and Evaluation Data.* PML4DC Workshop at ICLR 2020. <https://pml4dc.github.io/iclr2020/program/pml4dc_10.html> *(corregido: el título decía "…on Spanish Language Tasks")*.
+- **Cañete, J., Donoso, S., Bravo-Marquez, F., Carvallo, A., & Araujo, V. (2022).** *ALBETO and DistilBETO: Lightweight Spanish Language Models.* Proceedings of the Thirteenth Language Resources and Evaluation Conference (LREC 2022), pp. 4291–4298. <https://aclanthology.org/2022.lrec-1.457/> *(corregido: decía pp. 457–465, que es el número de artículo)*.
+- **Pérez, J. M., Furman, D. A., Alonso Alemany, L., & Luque, F. M. (2022).** *RoBERTuito: a pre-trained language model for social media text in Spanish.* Proceedings of the Thirteenth Language Resources and Evaluation Conference (LREC 2022), pp. 7235–7243. <https://aclanthology.org/2022.lrec-1.785/> *(corregido: decía pp. 785–795, que es el número de artículo)*.
+- **Hsieh, C.-Y., Li, C.-L., Yeh, C.-K., Nakhost, H., Fujii, Y., Ratner, A., Krishna, R., Lee, C.-Y., & Pfister, T. (2023).** *Distilling Step-by-Step! Outperforming Larger Language Models with Less Training Data and Smaller Model Sizes.* Findings of the ACL 2023, pp. 8003–8017. DOI: 10.18653/v1/2023.findings-acl.507 *(corregido: el octavo autor es Chen-Yu Lee)*.
+- **Hu, E. J., Shen, Y., Wallis, P., Allen-Zhu, Z., Li, Y., Wang, S., Wang, L., & Chen, W. (2021).** *LoRA: Low-Rank Adaptation of Large Language Models.* arXiv:2106.09685.
+- **Grattafiori, A., Dubey, A., et al. (2024).** *The Llama 3 Herd of Models.* arXiv:2407.21783. *(corregido: el primer autor es Grattafiori. El resumen no menciona Llama 3.2 ni los modelos de 1B, así que esta fuente no respalda las cifras de Llama 3.2 1B; hace falta la ficha del modelo)*.
+- **Abouelenin, A., Ashfaq, A., Atkinson, A., et al. / Microsoft (2025).** *Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs.* arXiv:2503.01743. *(corregido: decía "Abdin et al. 2024, Phi-3 / Phi-4 Technical Report", que mezclaba dos informes distintos)*.
+- **Qwen Team: Yang, A., Yang, B., et al. (2024).** *Qwen2.5 Technical Report.* arXiv:2412.15115. *(corregido: el título decía "A Party of Foundation…")*.
+- **Ben Allal, L., Lozhkov, A., Bakouch, E., Martín Blázquez, G., Penedo, G., et al. (2025).** *SmolLM2: When Smol Goes Big — Data-Centric Training of a Small Language Model.* arXiv:2502.02737. *(corregido: decía "Loubser, L., 2024", con otro título)*.
+- **Farafonova, L., Geng, Y., Abdullah, U., & Chiou, R. / Google LLC (2024).** *In-call scam detection.* US 2024/0388655 A1, publicada el 2024-11-21. <https://patents.google.com/patent/US20240388655A1/en> *(corregido: el título decía "Detection of Fraudulent Telephone Calls")*.
+
+---
+
+## 8. Contraste con el laboratorio
+
+Este marco se escribió **antes** de que existieran mediciones propias. El spike #29 de Ignacio
+implementó la cascada propuesta acá (RoBERTuito → SLM en la zona gris 0,35–0,75, con la base
+institucional de la §4) y la corrió en modo texto el 2026-09-28. La comparación completa, con lo
+que confirmó, lo que refutó y lo que falta probar, está en
+[CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md). El laboratorio
+no está terminado: falta la corrida con audio ([#42](https://github.com/Corchets/bitacora_tesis/issues/42))
+y datos de entrenamiento reales para el encoder ([#41](https://github.com/Corchets/bitacora_tesis/issues/41)).

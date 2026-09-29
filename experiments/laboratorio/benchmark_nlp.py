@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
-"""Benchmark comparativo de modelos NLP on-device para detección de vishing.
+"""Simulación del flujo de la cascada NLP on-device para detección de vishing (#27).
+
+SIMULACIÓN, NO BENCHMARK (revisión 2026-09-29). No carga ningún modelo: los
+"encoders" y el "SLM" son reglas con puntajes fijos, la RAM es una constante
+escrita a mano y la latencia es el tiempo de esas reglas más un valor fijo
+supuesto. Sirve para mostrar la lógica de bifurcación de la zona gris y las
+frases trampa, no para citar números. Las mediciones reales están en el spike
+#29 (correr_cascada.py) y el contraste en
+docs/investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md.
+
+Necesita semillas.json junto al script (formato {"estafa": [...], "legitima": [...]}),
+que no está versionado.
 
 Compara:
 1. Baseline Clásico: TF-IDF + Regresión Logística (stub de laboratorio).
@@ -7,9 +18,9 @@ Compara:
 3. SLM Causal (SmolLM2 / Llama 3.2 1B): Modelo generativo bajo demanda.
 4. Arquitectura Híbrida en Cascada: RoBERTuito continuo + SLM solo en Zona Gris.
 
-Mide:
+Simula (valores supuestos por el marco teórico, no medidos):
 - Latencia de inferencia por turno (p50, p95, máx en ms).
-- Memoria RAM residente (RSS en MB).
+- Memoria RAM (constante por modelo).
 - Acierto semántico en casos límite (negaciones complejas, menciones inocentes y estafa ANSES).
 """
 
@@ -140,12 +151,12 @@ class RoBERTuitoINT8:
     def __init__(self):
         self.nombre = "RoBERTuito INT8 (Encoder)"
         self.tipo = "Transformer Bidireccional (108M params)"
-        self.ram_overhead_mb = 144.6  # Peso en RAM medido en ONNX Runtime INT8
+        self.ram_overhead_mb = 144.6  # Valor supuesto del marco teórico, no medido
 
     def predecir(self, texto: str) -> float:
         t_norm = plegar(texto)
-        # Modelado contextual de atención:
-        # Detecta negaciones y anula falsos positivos léxicos
+        # Simulación: reglas con puntajes fijos en lugar del modelo real.
+        # Representan lo que el marco espera que haga RoBERTuito, no lo que hace.
         es_negacion = bool(re.search(r"\b(no\s+te\s+voy|ni\s+en\s+pedo|jamas|nunca)\b", t_norm))
         es_portero = "portero" in t_norm or "puerta" in t_norm
         es_anses_sutil = "anses" in t_norm and "reparacion historica" in t_norm
@@ -168,11 +179,11 @@ class SLMGenerativo:
     def __init__(self):
         self.nombre = "Llama 3.2 1B (SLM GGUF Q4)"
         self.tipo = "Decoder Causal Generativo (1.230M params)"
-        self.ram_overhead_mb = 780.0
+        self.ram_overhead_mb = 780.0  # Valor supuesto del marco teórico, no medido
 
     def razonar(self, texto: str, contexto_previo: str = "") -> tuple[float, str]:
         t_norm = plegar(texto)
-        # El SLM razona usando la base offline inyectada
+        # Simulación: reglas con puntajes fijos en lugar del SLM real.
         if "anses" in t_norm and ("reparacion historica" in t_norm or "bono" in t_norm):
             return 0.91, "Violación Regla 1: ANSES no contacta telefónicamente por reparaciones históricas."
         if "no te voy" in t_norm or "portero" in t_norm:
@@ -217,7 +228,7 @@ def ejecutar_benchmark():
         return
 
     print("=" * 95)
-    print(" INICIANDO BENCHMARK COMPARATIVO DE NLP ON-DEVICE (CPU ONLY)")
+    print(" SIMULACIÓN DEL FLUJO NLP ON-DEVICE (sin modelos cargados, valores supuestos)")
     print(" Evaluando: TF-IDF vs. RoBERTuito INT8 vs. SLM 1B vs. Cascada")
     print("=" * 95)
 
@@ -264,7 +275,7 @@ def ejecutar_benchmark():
                 resultados_latencia[nombre].append(lat_ms)
 
     print("\n--- 1. RESULTADOS DE LATENCIA Y MEMORIA RAM ---")
-    print(f"{'Modelo':<28} | {'RAM Estimada':<13} | {'p50 (ms)':<9} | {'p95 (ms)':<9} | {'Máx (ms)':<9} | {'Consumo Batería'}")
+    print(f"{'Modelo':<28} | {'RAM supuesta':<13} | {'p50 (ms)':<9} | {'p95 (ms)':<9} | {'Máx (ms)':<9} | {'Consumo Batería'}")
     print("-" * 95)
     for nombre, _, ram in modelos:
         lats = sorted(resultados_latencia[nombre])
@@ -297,7 +308,7 @@ def ejecutar_benchmark():
         print(f"{caso['tipo']:<28} | {v_tf:<10} | {v_rob:<10} | {v_slm:<10} | {v_casc:<10}")
 
     print("\n" + "=" * 95)
-    print(" CONCLUSIONES OBSERVABLES DEL BENCHMARK:")
+    print(" LO QUE EL MARCO ESPERA (simulado; el spike #29 del 2026-09-28 lo contradice en parte):")
     print(" 1. TF-IDF colapsa en negaciones y frases inocentes con palabras bancarias (falsas alarmas seguras).")
     print(" 2. RoBERTuito INT8 ejecuta en ~38 ms con 145 MB, resolviendo correctamente negaciones y palabras trampa.")
     print(" 3. En el caso sutil de ANSES, RoBERTuito arroja 0.52 (Zona Gris) y la Cascada invoca al SLM offline,")
