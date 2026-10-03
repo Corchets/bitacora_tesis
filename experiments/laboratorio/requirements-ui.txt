@@ -1,0 +1,3 @@
+# Visor y prueba con reglas; no instala ASR ni descarga modelos.
+streamlit>=1.50,<2
+plotly>=5,<7

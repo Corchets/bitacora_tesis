@@ -1,6 +1,8 @@
 # Métricas
 
-> **Estado: propuesta sin discutir.** Deriva del [deep research](../investigacion/deep-research-report-00.md), no
+> **Estado: propuesta con acuerdo parcial (Luciano, 2026-10-02).** Se acordó `T_C` como referencia
+> principal de `Preventive@δ` y reportar ambos márgenes; el resto del protocolo sigue pendiente.
+> Deriva del [deep research](../investigacion/deep-research-report-00.md), no
 > de un relevamiento propio. Se congela al cerrar
 > [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y
 > [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
@@ -66,8 +68,11 @@ Preventive@δ = #{ i : T_A,i ≤ T_C,i − δ } / #{ llamadas de vishing }
 
 Se reporta para δ = 5 s, 10 s y 20 s.
 
-**Pendiente de decidir:** si `Preventive@δ` se mide contra `T_C` o contra `T_R`. Son dos
-afirmaciones distintas en la defensa y hay que elegir una antes de congelar el test.
+**Acuerdo parcial (Luciano, entrevista del 2026-10-02, #32):** `Preventive@δ` usa **`T_C` como
+referencia principal**. Se reportan además **ambos márgenes**, `L_R` y `L_C`, para distinguir la
+anticipación del pedido de la intervención antes del cumplimiento. Este acuerdo no cierra D07 ni
+D08: faltan las marcas operativas y el protocolo. La fórmula requiere tiempos anotados; no se
+aplica a los CSV de texto que solo tienen turnos y carecen de `T_C`.
 
 ## Definición de `T_A` con histéresis
 
@@ -128,4 +133,5 @@ Todo el resto del proyecto es, en esencia, lograr que esa figura sea científica
   [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md) §7.1
   (se fija primero el máximo de llamadas legítimas con alerta y de ahí sale cuán bueno tiene que
   ser el detector por actualización). **Propuesta sin discutir.**
-- ¿`Preventive@δ` contra `T_C` o contra `T_R`?
+- ¿Cómo se reportan las llamadas sin acción de cumplimiento (`T_C` ausente)? La referencia
+  principal se acordó en `T_C`; falta el tratamiento operativo antes de congelar el test.

@@ -1,6 +1,7 @@
 # Manual de anotación
 
-> **Estado: propuesta sin discutir.** La taxonomía deriva del
+> **Estado: acuerdo parcial de trabajo (Luciano, 2026-10-02).** Se adoptan las 6+6 como selección
+> de etiquetas; su definición operativa y validación con el piloto siguen abiertas. La taxonomía deriva del
 > [deep research](../investigacion/deep-research-report-00.md), no de un relevamiento propio. Se congela al cerrar
 > [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
 
@@ -12,7 +13,7 @@ es el esqueleto que se completa **después** del piloto, cuando aparezcan las am
 **No hacer 30 etiquetas.** En cuatro meses las clases raras destruyen el análisis estadístico: si una
 etiqueta aparece cuatro veces en todo el corpus, no se puede reportar nada sobre ella.
 
-La propuesta son **dos capas multi-label** de ~6 etiquetas cada una. Un turno puede tener varias
+La selección de trabajo son **dos capas multi-label** de 6 etiquetas cada una. Un turno puede tener varias
 etiquetas de ambas capas, o ninguna.
 
 ### Capa 1 — Técnicas de manipulación
@@ -38,11 +39,14 @@ Se corresponden con las maniobras permitidas que el
 
 ### Capa 2 — Acciones solicitadas
 
-Más directamente protectoras: son las que definen el momento crítico y marcan `T_R`.
+Los pedidos de esta capa permiten marcar `T_R`. La presencia de una etiqueta por sí sola no
+determina esa marca: `REQUEST_AUTH_CODE` también incluye menciones, según el acuerdo del 2026-10-02.
+`T_R` conserva su definición como inicio del primer **pedido** de alto riesgo en
+[METRICAS.md](../evaluacion/METRICAS.md#tres-marcas-temporales-no-una).
 
 | Etiqueta | Qué la dispara (ejemplos) | Qué **no** la dispara |
 |---|---|---|
-| `REQUEST_AUTH_CODE` | Pide un código de un solo uso: OTP, token, código de WhatsApp | Mencionar que un código existe o que va a llegar, sin pedir que se lo dicte |
+| `REQUEST_AUTH_CODE` | Pide **o menciona** un código de autenticación: OTP, token, código de verificación de WhatsApp | Código ajeno a la autenticación, como el de una puerta. El tratamiento de recomendaciones de no compartir el código queda pendiente de precisar |
 | `REQUEST_SECRET` | Pide una credencial permanente: clave, PIN, CVV, contraseña, usuario | Pedir confirmar datos que la entidad ya tiene, como los últimos cuatro dígitos |
 | `REQUEST_PERSONAL_DATA` | Pide datos identificatorios: DNI, CUIL, domicilio, o una foto de identificación | Que la persona los diga por su cuenta sin que se los pidan |
 | `REQUEST_TRANSFER` | Pide mover dinero: transferencia, pago, cripto, entrega de efectivo, operar un cajero | Hablar de un movimiento de dinero ya ocurrido |
@@ -52,6 +56,13 @@ Más directamente protectoras: son las que definen el momento crítico y marcan 
 Las definiciones de "qué no la dispara" son una **primera pasada**. El esqueleto de la sección 4
 pide completarlas con dos ejemplos positivos y dos negativos por etiqueta **después** del piloto,
 cuando aparezcan las ambigüedades reales.
+
+> **Acuerdo parcial (Luciano, entrevista del 2026-10-02, #32):** incluir menciones de códigos de
+> autenticación en `REQUEST_AUTH_CODE`, aun sin un pedido de entrega, y trabajar con las 6+6.
+> Se conserva el nombre técnico. Esto no convierte cualquier mención en un pedido ni aprueba una
+> política de alerta. Falta precisar el caso «nunca compartas tu código de WhatsApp», completar
+> §4 y validar las etiquetas con el piloto antes de cerrar D07. No se modificaron las reglas del
+> spike ni sus resultados históricos.
 
 ### Por qué estas etiquetas y no las de Cialdini
 
@@ -109,8 +120,9 @@ es maquillar el número: es que la taxonomía está mal definida y hay que arreg
 
 ## 5. Preguntas abiertas para el equipo
 
-- ¿Adoptamos las 6+6 tal cual, o las derivamos de un relevamiento propio de modalidades argentinas
-  (UFECI, ANSES, PAMI, BCRA, prensa)? **Primer dato empírico (2026-09-17):** el relevamiento del
+- Selección acordada con Luciano el 2026-10-02: las **6+6**. Falta validar sus definiciones y
+  cobertura con el piloto y el relevamiento de modalidades argentinas.
+  **Primer dato empírico (2026-09-17):** el relevamiento del
   [catálogo](CATALOGO-ESCENARIOS.csv) sobre fuentes oficiales no identificó una modalidad que
   documente `REQUEST_REMOTE_ACCESS` por teléfono. La alerta de Banco Galicia sí describe la
   pantalla compartida en una llamada; Mateo aprobó el 2026-09-23 usarla como fuente de una entidad

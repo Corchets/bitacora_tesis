@@ -178,10 +178,15 @@ def correr(
     }
 
 
-def correr_texto(txt_path: str | Path, umbral_goteo: float = 0.5) -> dict:
-    """Corrida sobre transcripto: reglas + LLM + contador, sin ASR ni segundos."""
+def correr_texto(txt_path: str | Path, umbral_goteo: float = 0.5, *, det=None) -> dict:
+    """Corrida sobre transcripto: reglas + detector + contador, sin ASR ni segundos.
+
+    La UI puede inyectar un detector ya entrenado sin cambiar variables de entorno.
+    Sin det se conserva la selección de detector.crear().
+    """
     textos = leer_turnos_txt(txt_path)
-    det = detector.crear()
+    if det is None:
+        det = detector.crear()
     contador = ContadorGoteo(umbral_goteo)
     turnos: list[dict] = []
     historial: list[str] = []

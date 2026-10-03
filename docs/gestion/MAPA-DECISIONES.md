@@ -103,6 +103,12 @@ Las cinco opciones sobre la mesa, con el detalle técnico en
   `IMPERSONATION_AUTHORITY` y etiquetas de capa 1 en `maniobras` para el catálogo v0 (#17).
   Es una aprobación parcial de trabajo: falta probar la taxonomía completa, adjudicar ambigüedades
   y fijar las marcas temporales antes de cerrar D07.
+- **Acuerdos parciales de la entrevista (Luciano, 2026-10-02):** selección 6+6 e inclusión de
+  menciones de códigos de autenticación en `REQUEST_AUTH_CODE`, registrados en el
+  [manual](../datos-etica/MANUAL-ANOTACION.md#capa-2--acciones-solicitadas); `T_C` como referencia
+  principal de `Preventive@δ`, con ambos márgenes, registrado en
+  [métricas](../evaluacion/METRICAS.md#tasa-preventiva). Falta precisar las recomendaciones de no
+  compartir códigos y validar las definiciones con el piloto. **D07 sigue abierta.**
 
 Hay una propuesta concreta de dos capas multi-label de 6 etiquetas cada una en
 [MANUAL-ANOTACION.md](../datos-etica/MANUAL-ANOTACION.md), con el principio de no superar la docena
@@ -113,7 +119,8 @@ probar y ajustar el manual con las anotaciones del piloto antes de adoptar la ta
 Sobre el evento crítico, la definición de `T_A`, `T_R` y `T_C` y por qué hacen falta las tres marcas
 está en [METRICAS.md](../evaluacion/METRICAS.md). Dos puntos que esta decisión tiene que cerrar:
 `T_A` se define con histéresis (no el primer cruce del umbral, sino el primero que se sostiene dos
-actualizaciones), y hay que elegir si `Preventive@δ` se mide contra `T_C` o contra `T_R`.
+actualizaciones). La referencia principal de `Preventive@δ` se acordó en `T_C` el 2026-10-02;
+faltan las marcas operativas y el tratamiento de llamadas sin cumplimiento antes de congelar el protocolo.
 
 - Evidencia nueva (2026-09-23, spike, no cierra D07): [sonda D](../../experiments/laboratorio/casos/README.md) — «código de la puerta» prende `REQUEST_AUTH_CODE` y «diez mil pesos» no prende nada; material para [Manual §4.2/§4.3](../datos-etica/MANUAL-ANOTACION.md#4-esqueleto-a-completar-después-del-piloto).
 
