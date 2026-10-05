@@ -50,14 +50,12 @@ Para el producto conceptual, la finalidad es la prevención inmediata del fraude
 ejecutan localmente, el contenido no sale del dispositivo y los buffers se destruyen al terminar la
 llamada. Para el corpus piloto sí existe una grabación temporal y consentida: la gobernanza se
 documenta en el [método del corpus](METODO-CREACION-CORPUS.md#resguardo-y-consentimiento-del-piloto)
-y en el [modelo de consentimiento](CONSENTIMIENTO-INFORMADO.md), pendientes de validación del tutor
-antes de grabar.
 
 La inferencia local, el descarte en RAM y la ausencia de cesión son salvaguardas de diseño; no
-prueban por sí solas el cumplimiento integral de la Ley 25.326. Para el corpus se deben completar,
-antes de grabar, la información y aceptación de ambas personas, la finalidad, los plazos, el acceso
-restringido y la atención de pedidos de retiro. Para un despliegue sobre llamadas reales, la base
-jurídica y los deberes frente al otro interlocutor requieren análisis de la arquitectura concreta.
+prueban por sí solas el cumplimiento integral de la Ley 25.326. Para el corpus se debe solicitar
+la aceptación de ambas personas y eliminar las grabaciones una vez se termine el trabajo.
+Para un despliegue sobre llamadas reales, la basejurídica y los deberes frente al otro interlocutor
+requieren análisis de la arquitectura concreta.
 
 ## 3. Comunicaciones privadas y no interceptación
 
@@ -102,8 +100,7 @@ resuelven automáticamente el régimen aplicable a la comunicación del otro int
 Android restringe la captura del audio de llamadas telefónicas convencionales (`VOICE_UPLINK`,
 `VOICE_DOWNLINK`) a aplicaciones privilegiadas, preinstaladas y con `CAPTURE_AUDIO_OUTPUT`. Una
 aplicación ordinaria no obtiene ese flujo durante una llamada ([Android Developers: compartir la
-entrada de audio](https://developer.android.com/media/platform/sharing-audio-input), consulta
-2026-09-17).
+entrada de audio](https://developer.android.com/media/platform/sharing-audio-input), consulta 2026-09-17).
 
 - **Motivo de la restricción:** Proteger la privacidad de los interlocutores frente a aplicaciones espía de terceros.
 - **Decisión en la tesis:** En lugar de implementar exploits, root o técnicas de spyware, el proyecto asume formalmente esta restricción como parte del problema de ingeniería. Por ello, la experimentación se fundamenta en reproducción de audio (*replay*) y la integración de demostración en un flujo controlado (VoIP), donde el audio pertenece legítimamente a la aplicación.
@@ -134,9 +131,7 @@ Para la construcción del corpus de entrenamiento y evaluación:
 1. **Datos 100% ficticios:** En las simulaciones se emplean identidades, bancos, montos, códigos OTP y números de tarjeta completamente inventados.
 2. **Sin víctimas reales:** No se graban llamadas de incidentes reales de víctimas ni se realiza contacto encubierto con estafadores.
 3. **El audio no entra a Git:** Los archivos de audio (`.wav`) y cualquier material no anonimizado permanecen fuera del repositorio en cumplimiento de `.gitignore`. Git almacena exclusivamente código, esquemas y manifiestos de datos procesados.
-4. **Consentimiento de ambas partes:** Cada participante adulto acepta el
-   [consentimiento informado](CONSENTIMIENTO-INFORMADO.md) antes de grabar y puede detener la
-   actividad o retirar su consentimiento en las condiciones informadas.
+4. **Consentimiento de ambas partes:** Cada participante adulto acepta antes de grabar.
 5. **Publicación limitada:** El piloto solo autoriza resultados agregados, metadatos disociados y
    fragmentos ficticios no identificables. No autoriza publicar voces, firmas ni el corpus completo.
 

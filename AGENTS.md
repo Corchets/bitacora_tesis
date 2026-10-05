@@ -52,7 +52,6 @@ Al completar el objetivo, sincronizar el repositorio en este orden antes de cerr
 ### Reglas de higiene
 
 - Actualizá la fuente de verdad afectada; nunca mantengas copias paralelas.
-- **No hagas `git commit`** salvo que el usuario lo pida explícitamente.
 
 ## Invariantes
 
@@ -77,10 +76,10 @@ Cada información tiene **una sola fuente de verdad**. Usar esta tabla para sabe
 | **Decisiones abiertas o pendientes**             | [`docs/gestion/MAPA-DECISIONES.md`](docs/gestion/MAPA-DECISIONES.md)                                                                                    | **Lee:** antes de asumir opciones de diseño.<br/>**Actualiza:** cuando un issue resuelve o desbloquea una disyuntiva del proyecto.                                                     |
 | **Decisión arquitectónica duradera (ADR)**       | `docs/ingenieria/adr/NNNN-titulo.md`                                                                                                                    | **Crea:** solo cuando se congela una decisión técnica estructural permanente (ej. contratos de interfaz, pipeline de audio).                                                           |
 | **Riesgos del proyecto**                         | [`docs/gestion/REGISTRO-RIESGOS.md`](docs/gestion/REGISTRO-RIESGOS.md)                                                                                  | **Actualiza:** al descubrir un nuevo riesgo técnico/plataforma o validar una mitigación.                                                                                               |
-| **Privacidad del sistema y normativa**           | [`docs/datos-etica/PRIVACIDAD-DEL-SISTEMA.md`](docs/datos-etica/PRIVACIDAD-DEL-SISTEMA.md)                                                              | **Lee:** para fundamentar inferencia _on-device_, descarte de audio y Ley 25.326.                                                                                                      |
-| **Diseño del corpus y llamadas**                 | [`docs/datos-etica/METODO-CREACION-CORPUS.md`](docs/datos-etica/METODO-CREACION-CORPUS.md)                                                              | **Lee:** para crear semillas, fichas de rol y negativos difíciles.<br/>**Actualiza:** si cambia la metodología de recolección o parada.                                                |
-| **Catálogo de escenarios y fraudes**             | [`docs/datos-etica/CATALOGO-ESCENARIOS.csv`](docs/datos-etica/CATALOGO-ESCENARIOS.csv)                                                                  | **Actualiza:** al incorporar, modificar o descartar una semilla de llamada.                                                                                                            |
-| **Taxonomía y reglas de anotación**              | [`docs/datos-etica/MANUAL-ANOTACION.md`](docs/datos-etica/MANUAL-ANOTACION.md)                                                                          | **Actualiza:** si el piloto o el equipo redefinen una etiqueta de turno (`URGENCY`, `REQUEST_OTP`, etc.).                                                                              |
+| **Privacidad del sistema y normativa**           | [`docs/corpus/PRIVACIDAD-DEL-SISTEMA.md`](docs/corpus/PRIVACIDAD-DEL-SISTEMA.md)                                                              | **Lee:** para fundamentar inferencia _on-device_, descarte de audio y Ley 25.326.                                                                                                      |
+| **Diseño del corpus y llamadas**                 | [`docs/corpus/METODO-CREACION-CORPUS.md`](docs/corpus/METODO-CREACION-CORPUS.md)                                                              | **Lee:** para crear semillas, fichas de rol y negativos difíciles.<br/>**Actualiza:** si cambia la metodología de recolección o parada.                                                |
+| **Catálogo de escenarios y fraudes**             | [`docs/corpus/CATALOGO-ESCENARIOS.csv`](docs/corpus/CATALOGO-ESCENARIOS.csv)                                                                  | **Actualiza:** al incorporar, modificar o descartar una semilla de llamada.                                                                                                            |
+| **Taxonomía y reglas de anotación**              | [`docs/corpus/MANUAL-ANOTACION.md`](docs/corpus/MANUAL-ANOTACION.md)                                                                          | **Actualiza:** si se ajustan la referencia por conversación, las marcas o las etiquetas de evidencia (`URGENCY_PRESSURE`, `REQUEST_AUTH_CODE`).                                                                              |
 | **Definición de métricas y marcas**              | [`docs/evaluacion/METRICAS.md`](docs/evaluacion/METRICAS.md)                                                                                            | **Fuente única:** para fórmulas de `T_A`, `T_R`, `T_C`, márgenes `L_R`, `L_C` y falsas alarmas.                                                                                        |
 | **Captura de audio y hardware**                  | [`docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md`](docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md) y [`ARQUITECTURA.md`](docs/ingenieria/ARQUITECTURA.md) | **Lee:** para diseñar interfaces de audio, ASR y prototipo.                                                                                                                            |
 | **Investigación y papers leídos**                | [`docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md`](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md)                                                      | **Actualiza:** al analizar una fuente primaria siguiendo el [protocolo](docs/investigacion/PROTOCOLO-REVISION.md).                                                                     |
@@ -97,14 +96,3 @@ Cada información tiene **una sola fuente de verdad**. Usar esta tabla para sabe
   `AAAA-MM-semana-NN.md`; seguimientos `AAAA-MM-DD.md`; ADRs `NNNN-titulo.md` con cuatro dígitos.
 - **Fechas:** siempre absolutas (`2026-09-02`), nunca "la semana pasada".
 - **Enlaces:** relativos entre documentos, formato Markdown. Verificá que resuelvan.
-
-## Uso y sugerencia de Skills especializadas
-
-El repositorio cuenta con skills en `.agents/skills/`. El agente debe sugerir proactivamente al usuario ejecutarlas según la fase de trabajo:
-
-- **Decisiones abiertas, tickets ambiguos o diseño de alcance:** Sugerir `grill-with-docs` para una entrevista estructurada que resuelva incertidumbres antes de escribir código o comprometer documentos.
-- **Implementación de código:** Sugerir `implement` (y `tdd` para módulos de cálculo de métricas, reglas o parsers) para construir código trazable y probado.
-- **Finalización de código o Pull Requests:** Sugerir `code-review` antes de mergear o cerrar el issue.
-- **Errores, excepciones o latencias inesperadas:** Sugerir `diagnosing-bugs` para aislar y resolver la causa raíz con pruebas.
-- **Pruebas de concepto rápidas o spikes descartables:** Sugerir `prototype`.
-- **Descomponer discusiones en issues para GitHub:** Sugerir `to-tickets` o `to-spec`.

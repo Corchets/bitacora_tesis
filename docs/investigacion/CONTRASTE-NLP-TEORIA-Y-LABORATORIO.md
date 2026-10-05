@@ -226,7 +226,7 @@ alarmas puede venir de ahí y no del detector.
 1. **El stub TF-IDF llegó a su techo.** En 25 pasadas, cada ajuste de una palabra en las semillas
    ganaba margen en una clase y lo perdía en la otra. Además, las semillas espejaban los casos, lo
    que repite la fuga que prohíbe
-   [METODO-CREACION-CORPUS.md §9](../datos-etica/METODO-CREACION-CORPUS.md#9-división-de-datos).
+   [METODO-CREACION-CORPUS.md §9](../corpus/METODO-CREACION-CORPUS.md#9-división-de-datos).
    Eso motivó el pivote del 2026-09-25.
 2. **No hay datos de entrenamiento.** Con 24 frases inventadas los encoders dan alerta en todo.
    Para tener algo tuvo que armar semillas con grabaciones de YouTube (voces de terceros, que no
@@ -266,7 +266,7 @@ alarmas puede venir de ahí y no del detector.
   más liviana (encoder INT8/ONNX + SmolLM2-360M) y solo si no entra en 1024 MB se revisa lo
   aprobado en #24 ([PREFACTIBILIDAD-TECNICA.md](PREFACTIBILIDAD-TECNICA.md)).
 - **Uso de grabaciones de YouTube para entrenar.** El texto queda fuera de Git, pero conviene
-  registrarlo en [PRIVACIDAD-DEL-SISTEMA.md](../datos-etica/PRIVACIDAD-DEL-SISTEMA.md) o en #41,
+  registrarlo en [PRIVACIDAD-DEL-SISTEMA.md](../corpus/PRIVACIDAD-DEL-SISTEMA.md) o en #41,
   porque son voces de terceros.
 
 ---

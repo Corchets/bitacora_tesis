@@ -8,20 +8,17 @@ sentidos distintos, se define acá.
 | **Vishing** | *Voice phishing*. Estafa por ingeniería social ejecutada en una conversación de voz. |
 | **ASR** | *Automatic Speech Recognition*. Transcripción automática de voz a texto. |
 | **On-device / inferencia local** | Todo el procesamiento ocurre en el dispositivo; ni el audio ni la transcripción salen de él. |
-| **Turno conversacional** | Unidad de anotación: una intervención continua de un hablante. La definición operativa (qué pasa con solapamientos) está pendiente — ver [MANUAL-ANOTACION.md](datos-etica/MANUAL-ANOTACION.md). |
-| **`T_A`** | Momento en que el sistema emite la alerta. Definido con histéresis: primera predicción sobre el umbral que se sostiene dos actualizaciones. |
-| **`T_R`** | Momento en que el atacante hace el primer **pedido** de alto riesgo. |
-| **`T_C`** | Momento en que la víctima inicia la primera **acción de cumplimiento**. |
-| **`L_R`** | `T_R − T_A`. Anticipación respecto del pedido. Positivo = bien. |
-| **`L_C`** | `T_C − T_A`. Margen antes de que la víctima empiece a obedecer. Positivo = bien. |
-| **`Preventive@δ`** | Proporción de llamadas de vishing alertadas al menos δ segundos antes de `T_C`. |
-| **Detección incremental** | Decidir con información parcial, acumulando evidencia turno a turno, sin esperar a que la llamada termine. |
+| **Turno conversacional** | Intervención de un hablante. No tiene que coincidir con un bloque de audio ni una actualización del ASR. El [manual](corpus/MANUAL-ANOTACION.md) define cómo se usa al anotar. |
+| **`T_A`, `T_R`, `T_C`** | Marcas de alerta del sistema, pedido riesgoso y cumplimiento observable. Definiciones, fuentes y casos sin dato en [METRICAS.md](evaluacion/METRICAS.md#1-marcas-temporales). |
+| **`L_R`, `L_C`, `Preventive@δ`** | Márgenes y proporción de alertas con anticipación suficiente respecto de una referencia. Fórmulas y denominadores en [METRICAS.md](evaluacion/METRICAS.md). |
+| **Detección incremental** | Decidir con información disponible hasta cada actualización, usando contexto previo de la llamada, sin consultar lo que se dirá después. |
 | **Early classification** | Campo que estudia clasificar secuencias lo antes posible sin destruir el rendimiento predictivo. |
-| **Baseline** | Método de referencia contra el que se compara. Acá: un detector por palabras clave. Fija el piso: si el método incremental no lo supera, no hay aporte. |
+| **Baseline** | Método de referencia contra el que se compara. La línea base acordada son reglas solas; su implementación se debe explicitar. Que un candidato no la supere también es un resultado válido. |
 | **Multi-label** | Cada turno puede tener varias etiquetas simultáneas, o ninguna. |
 | **Kappa (Cohen / Fleiss)** | Coeficiente de acuerdo entre anotadores que descuenta el acuerdo por azar. Cohen para dos anotadores, Fleiss para más. |
 | **Speaker-disjoint** | Partición en la que los hablantes de test no aparecen en entrenamiento. |
-| **Familia / semilla de guion** | Conjunto de conversaciones derivadas del mismo guion base. Todas deben caer en el mismo split, o hay contaminación. |
+| **Familia** | Modalidad amplia, como banco o soporte. Puede contener varias semillas; ver [método del corpus](corpus/METODO-CREACION-CORPUS.md#1-unidad-del-corpus). |
+| **Semilla** | Situación concreta que puede tener distintas interpretaciones. Separación de variantes y particiones pendiente de adoptar en [D08](gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). |
 | **Hard negative** | Llamada legítima deliberadamente parecida a un fraude. Es lo que distingue un sistema útil de uno molesto. |
 | **WER** | *Word Error Rate*. Métrica de calidad del ASR. |
 | **Real-time factor (RTF)** | Tiempo de procesamiento dividido por la duración del audio. RTF < 1 = procesa más rápido de lo que escucha. |

@@ -1,131 +1,92 @@
-# Arquitectura v0 y avisos de riesgo
+# Arquitectura conceptual y aviso de riesgo
 
-> **Estado: propuesta sin discutir.** Artefacto del [issue #20](https://github.com/Corchets/bitacora_tesis/issues/20)
-> para revisión del equipo. La fuente de audio sí fue definida en
-> [D05](../gestion/MAPA-DECISIONES.md#d05--elegir-la-fuente-de-audio-demostrable): replay
-> reproducible como base experimental y VoIP propia como integración objetivo. Esta v0 no cierra
-> [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico),
-> [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental),
-> [D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) ni
-> [D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico).
+Este documento permite revisar el recorrido del sistema en [#20](https://github.com/Corchets/bitacora_tesis/issues/20).
+Describe qué información necesita cada parte; los modelos y las interfaces concretas
+se decidirán al implementar y comparar alternativas.
 
-## Recorrido de una llamada
+## 1. Restricciones acordadas
 
-El motor recibe el mismo tipo de fragmentos desde un replay de laboratorio o desde una llamada
-VoIP propia y consentida. No necesita saber cuál de las dos fuentes los produjo. El camino dibujado
-usa texto transcripto como entrada del detector para mostrar una interfaz mínima; agregar rasgos
-acústicos sigue abierto en D11. El procesamiento local y el descarte del contenido al terminar la
-sesión siguen la [política de privacidad](../datos-etica/PRIVACIDAD-DEL-SISTEMA.md).
+- El replay de grabaciones es la base reproducible. VoIP propia es la integración
+  objetivo, condicionada por la factibilidad; captura PSTN universal queda fuera.
+- ASR y detector se ejecutan localmente. El detector analiza texto y conserva contexto
+  de la llamada actual; no analiza tono ni otros rasgos acústicos para detectar fraude.
+- Agenda, historial, reputación del número y dirección entrante/saliente no son entradas.
+- Clase, escenario, etiquetas humanas, roles de atacante/víctima y `T_R`/`T_C` pertenecen
+  a la referencia de evaluación. El detector no recibe esas respuestas.
+
+Fuentes: [alcance del Plan](../propuesta/PLAN-DE-TRABAJO.md#6-alcance) y
+[mapa de decisiones](../gestion/MAPA-DECISIONES.md).
+
+## 2. Recorrido propuesto
+
+> **Estado: propuesta sin discutir.** La organización del flujo se revisa en #20;
+> la ventana y política siguen abiertas en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)
+> y los modelos en [D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
 
 ```mermaid
 flowchart LR
-    R["Replay de audio<br/>base experimental"] -.-> A
-    V["VoIP propia<br/>integración objetivo"] -.-> A
-    A["Adaptador de audio<br/>fragmentos + tiempo"] --> B["VAD / segmentación<br/>tramos de voz"]
-    B --> C["ASR local<br/>texto parcial o final"]
-    C --> D["Estado conversacional<br/>turnos + contexto"]
-    D --> E["Detector<br/>riesgo + evidencia"]
-    E --> F["Política de alerta<br/>nivel + estabilidad"]
-    F --> G["Presentación<br/>aviso comprensible"]
+    A[Audio en replay] --> B[ASR local]
+    B --> C[Texto y contexto de esta llamada]
+    T[Texto revisado para pruebas] --> C
+    C --> D[Detector]
+    D --> E[Política de alerta]
+    E --> F[Aviso]
 ```
 
-La política de alerta recibe el resultado del detector, decide si hay un aviso estable y entrega
-un evento a la presentación. Así se puede evaluar el motor con replay y registrar `T_A` sin abrir
-una pantalla. La definición vigente de trabajo para `T_A` exige dos actualizaciones consecutivas
-o una histéresis equivalente; los niveles, umbrales y cadencia todavía se deben fijar al cerrar D07
-y D08 ([métricas](../evaluacion/METRICAS.md#definición-de-t_a-con-histéresis)). Los valores y
-ejemplos de [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)
-son hipótesis de laboratorio, no rendimiento medido.
+La entrada de texto permite probar el detector antes de integrar ASR. Después se
+reproduce el audio y se compara qué cambia por errores o demora de transcripción.
+VoIP, si se integra, deberá alimentar ese mismo recorrido de audio.
 
-## Responsabilidades y contratos conceptuales
+| Parte | Recibe → produce | Qué hay que cuidar |
+|---|---|---|
+| Audio | Grabación → bloques de audio con relación temporal. | Entregar solo el audio disponible hasta ese momento. |
+| ASR | Audio → actualizaciones de texto, intervalo de origen y momento de disponibilidad. | Declarar si entrega parciales, finales o revisiones. La segmentación puede estar dentro del ASR; no exige otro módulo. |
+| Contexto | Actualizaciones → contenido disponible de esta llamada. | Incorporar revisiones sin duplicarlas y reiniciar al cambiar de llamada. |
+| Detector | Texto con contexto → indicios de riesgo y evidencia que los sustenta. | No consultar texto futuro ni referencia humana. Un puntaje, si existe, no equivale automáticamente a probabilidad. |
+| Política | Indicios → decisión de emitir un aviso y motivo. | Registrar la regla aplicada y el instante real de emisión. |
+| Aviso | Decisión → advertencia comprensible y acción sugerida. | Explicar el riesgo sin afirmar identidad o fraude confirmado. |
 
-| Componente | Responsabilidad | Entrada → salida mínima | Restricción principal |
-|---|---|---|---|
-| Adaptador de audio | Entregar fragmentos en orden temporal desde la fuente permitida. | Sesión de replay o VoIP → audio, tiempo relativo a la sesión y canal si se conoce. | El motor no depende de permisos de captura PSTN ni infiere quién habla cuando la fuente no separa canales. |
-| VAD / segmentación | Identificar tramos de voz y armar unidades aptas para el ASR. | Fragmentos → tramos con inicio y fin. | No perder la referencia temporal ni convertir silencio en texto. |
-| ASR local | Transcribir en forma incremental. | Tramos → texto parcial o final con intervalo temporal y revisión. | Los parciales pueden corregirse; una palabra reconocida no es evidencia infalible. |
-| Estado conversacional | Mantener turnos, contexto y la última revisión válida de cada tramo. | Transcripciones y revisiones → estado temporal consultable. | Reemplazar un parcial por su revisión final sin duplicar evidencia; descartar contenido al terminar. |
-| Detector | Estimar riesgo y señalar evidencia que lo sustenta. | Estado → puntaje, categorías de evidencia y referencia temporal. | No presentar un puntaje sin calibración como probabilidad de fraude; la taxonomía y el modelo siguen abiertos. |
-| Política de alerta | Decidir si corresponde emitir, mantener o escalar un aviso. | Puntaje, evidencia y tiempo → nivel, motivo y `T_A` si hay alerta estable. | Evitar picos aislados y repeticiones; calibrar niveles y umbrales con la restricción de falsas alarmas. |
-| Presentación | Mostrar una advertencia que permita actuar durante la conversación. | Evento de alerta → título, motivo, consecuencia y acción visible. | No afirmar que la llamada es una estafa ni prometer cortar o bloquear la llamada si la integración no lo hace. |
+Un bloque de audio, una actualización del ASR y un turno de conversación son cosas
+distintas. No hace falta identificar turnos perfectos ni quién es el atacante para
+empezar. Por ejemplo, el ASR puede entregar «pasame el código» y después completar
+«del candado»: el detector debe interpretar lo disponible con el contexto previo
+y la política debe decidir cómo tratar información todavía incompleta.
 
-Cada actualización debe conservar un identificador efímero de sesión, tiempo relativo al audio y
-versión del estado o de la revisión de ASR. Esto permite reconstruir qué evidencia produjo una
-alerta sin guardar audio ni transcripciones en el registro persistente. El registro mínimo de
-metadatos se rige por [PRIVACIDAD-DEL-SISTEMA.md](../datos-etica/PRIVACIDAD-DEL-SISTEMA.md);
-el contenido temporal vive solo en memoria. Los nombres y tipos concretos de estas interfaces se
-definen al implementarlas; esta tabla fija las obligaciones observables de cada componente.
+## 3. Referencia, tiempos y registros
 
-## Dos mockups de aviso
+La referencia humana se prepara por conversación según el [manual](../corpus/MANUAL-ANOTACION.md).
+`T_R` y `T_C` se marcan sobre la grabación; `T_A` sale de la ejecución del sistema.
+El intervalo al que corresponde un texto y el momento en que el sistema lo recibe
+son distintos. La alerta incluye la demora de ASR y procesamiento: no se fecha hacia
+atrás al comienzo o fin del fragmento. Las definiciones viven en [métricas](../evaluacion/METRICAS.md#1-marcas-temporales).
+En pruebas con texto sin audio se informa posición o actualización, sin inventar segundos.
 
-> **Estado: propuesta sin discutir.** Son textos y distribución de pantalla para el escenario
-> ficticio de un supuesto banco, no una UI implementada ni una política de clasificación aprobada.
-> La comprensión, accesibilidad, niveles y activación se deben revisar con el equipo y probar con
-> personas antes de congelarlos. Los ejemplos muestran evidencia distinta; no equivalen a umbrales
-> numéricos ni a una afirmación de que el detector ya reconoce esas frases.
+El experimento debe conservar datos, configuración y salidas suficientes para
+reconstruir qué información produjo cada aviso. Audio y materiales vinculables
+permanecen fuera de Git. Ese registro experimental se distingue del uso del prototipo,
+cuyo tratamiento de contenido sigue la [política de privacidad](../corpus/PRIVACIDAD-DEL-SISTEMA.md).
 
-### Riesgo moderado — presión para abrir la aplicación
+## 4. Ejemplo de aviso para revisar
 
-```text
-┌──────────────────────────────────────────┐
-│ Llamada en curso       ! RIESGO MODERADO  │
-│                                          │
-│ Revisá esta llamada                      │
-│                                          │
-│ Qué ocurre                               │
-│ Dice llamar del banco y te apura para    │
-│ abrir la aplicación.                     │
-│                                          │
-│ Por qué importa                          │
-│ La urgencia dificulta verificar quién    │
-│ llama. Puede ser un engaño.              │
-│                                          │
-│ Qué hacer                                │
-│ No compartas códigos ni claves. Buscá    │
-│ el número oficial y consultá vos.        │
-│                                          │
-│              [ Entendido ]               │
-└──────────────────────────────────────────┘
-```
+> **Estado: propuesta sin discutir.** Ilustra una solicitud de código de acceso
+> en un contexto de suplantación. No demuestra que el detector ya pueda reconocerla.
+>
+> **Revisá esta llamada.** Te están pidiendo un código que podría dar acceso a tu cuenta.
+> No lo compartas. Interrumpí la conversación y verificá el pedido por un canal conocido.
 
-### Riesgo alto — pedido de código
+El motivo debe corresponder a la evidencia: un código de candado en una conversación
+cotidiana no justifica este aviso. No se muestran códigos, claves ni citas sensibles.
+Una acción sugerida para la persona no implica que el sistema pueda cortar la llamada.
+Para H1 revisamos comprensión con el equipo; no se agrega un estudio de usuarios como
+condición del arranque.
 
-```text
-┌──────────────────────────────────────────┐
-│ Llamada en curso       !! RIESGO ALTO     │
-│                                          │
-│ No compartas el código                   │
-│                                          │
-│ Qué ocurre                               │
-│ En esta llamada te pidieron un código    │
-│ de verificación.                         │
-│                                          │
-│ Por qué importa                          │
-│ Alguien podría usarlo para entrar a tu   │
-│ cuenta. Puede ser una estafa.            │
-│                                          │
-│ Qué hacer                                │
-│ No lo dictes. Cortá y llamá vos al       │
-│ número oficial del banco.                │
-│                                          │
-│              [ Entendido ]               │
-└──────────────────────────────────────────┘
-```
+## 5. Qué queda abierto
 
-El texto, el signo `!` y el nombre del nivel comunican gravedad sin depender solo del color. La
-acción propuesta es una instrucción para la persona; `Entendido` solo cierra el aviso, no la llamada.
-Si la evidencia detectada es otra, el motivo y la acción deberán corresponder a esa evidencia; no
-se debe mostrar el ejemplo bancario como texto universal. Ningún aviso reproduce un código, una
-clave ni un fragmento literal de la conversación.
+- **D07:** probar con audio los criterios de referencia humana y los motivos observables.
+- **D08:** cuánto contexto usar, cuándo procesar, cómo tratar revisiones y cuándo alertar.
+  No quedan fijados niveles de riesgo, umbrales ni dos detecciones consecutivas.
+- **D09:** elegir ASR y detector mediante comparaciones. Se empieza con reglas sobre
+  texto; reutilizar el laboratorio depende de que sirva para estas tareas.
 
-## Lo que falta validar
-
-- D07 y D08: etiquetas que autorizan un motivo, regla de niveles, umbrales, cadencia y conteo de
-  falsas alarmas. El mockup no los congela.
-- D09 y D11: modelos, calidad del ASR y decisión sobre rasgos acústicos. Un motivo visible necesita
-  evidencia suficientemente confiable; el diseño no presupone que el ASR acierta.
-- Prueba de comprensión de los avisos, accesibilidad en pantalla chica y comportamiento ante una
-  alerta errónea o una escalada. Son parte del diseño de UI todavía abierto.
-
-Los diagramas se mantienen en Markdown con bloques Mermaid para que GitHub los renderice dentro
-del documento.
+H1 busca que el equipo entienda este recorrido y pueda preparar el primer par.
+La arquitectura ejecutable y sus ajustes se comprueban en H2–H4.

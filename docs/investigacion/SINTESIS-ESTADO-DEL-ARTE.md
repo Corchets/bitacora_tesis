@@ -35,10 +35,9 @@ transcripción textual.
 - **Viabilidad en móvil: media-baja.** El análisis acústico fino requiere señal limpia. Si la
   captura es acústica por altavoz, la reverberación, el ruido ambiental y la cancelación de eco del
   hardware distorsionan justamente los rasgos de tono y estrés.
-- **Consecuencia para la tesis:** es más prudente enfocar el prototipo en análisis lingüístico y
-  semántico sobre la transcripción del ASR, y reservar lo bioacústico como trabajo futuro. Esto
-  todavía no está decidido —
-  ver [D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico).
+- **Consecuencia para la tesis:** el 2026-10-04 se confirmó el detector sobre transcripción y
+  contexto de la llamada actual; los rasgos acústicos quedan como trabajo futuro según
+  [D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico).
 
 ### Defensas antifraude telefónico de Google (Pixel / Android)
 
@@ -100,7 +99,7 @@ Consulta dirigida en fuentes oficiales, 2026-09-17:
 | [Android Developers](https://developer.android.com/media/platform/sharing-audio-input) | Durante una llamada, una app ordinaria no recibe el flujo PSTN; la captura de la llamada exige una app privilegiada/preinstalada con `CAPTURE_AUDIO_OUTPUT`. | Replay y VoIP propia son evidencia válida del motor; la captura PSTN universal queda fuera de alcance y requeriría integración OEM o de sistema. |
 
 El desarrollo completo y sus límites están en
-[PRIVACIDAD-DEL-SISTEMA.md](../datos-etica/PRIVACIDAD-DEL-SISTEMA.md). No se trata de un dictamen
+[PRIVACIDAD-DEL-SISTEMA.md](../corpus/PRIVACIDAD-DEL-SISTEMA.md). No se trata de un dictamen
 jurídico ni de una habilitación general para desplegar el sistema sobre llamadas reales.
 
 ### 2.2. Fuentes primarias para escenarios argentinos (#17)
@@ -117,13 +116,68 @@ respalda la semilla de pantalla compartida como reporte de una entidad financier
 en Argentina ni describe las prácticas de todos los bancos.
 
 Las afirmaciones exactas, fechas de consulta y límites por escenario viven en el
-[catálogo](../datos-etica/CATALOGO-ESCENARIOS.csv): nueve semillas fraudulentas candidatas y ocho
+[catálogo](../corpus/CATALOGO-ESCENARIOS.csv): nueve semillas fraudulentas candidatas y ocho
 negativos legítimos diseñados por el equipo. Estos negativos no son llamadas reales documentadas por
-las fuentes. El catálogo por sí solo no determina cuántas conversaciones se grabarán: el
-[método del corpus §6](../datos-etica/METODO-CREACION-CORPUS.md#6-piloto) propone una primera pasada
-de 14 y hasta seis repeticiones dirigidas. Esa selección sigue pendiente de validación del tutor;
-[D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) y el
-[issue #22](https://github.com/Corchets/bitacora_tesis/issues/22) no habilitan grabar todavía.
+las fuentes. El catálogo por sí solo no determina cuántas conversaciones se grabarán: la selección inicial
+acordada en [D06](../gestion/MAPA-DECISIONES.md#d06--definir-corpus-y-piloto) comprende 14
+conversaciones y hasta seis repeticiones dirigidas. Su producción y resguardo siguen el
+[método del corpus §6](../corpus/METODO-CREACION-CORPUS.md#6-piloto); eso no fija el tamaño final
+ni valida la anotación o la evaluación.
+
+El 2026-10-04 se recuperó selectivamente el [PR #38](https://github.com/Corchets/bitacora_tesis/pull/38)
+(cabeza `c0e25fc9d32ac487f7b0390bd2ab12573ba89126`) para el alcance actual de
+[#26](https://github.com/Corchets/bitacora_tesis/issues/26). Las fuentes UFECI refuerzan dos
+escenarios en el catálogo; los fundamentos y límites de las correspondencias con etiquetas
+viven en el [manual](../corpus/MANUAL-ANOTACION.md#fundamentos-y-límites-del-vocabulario).
+No se importa la tipología como otra taxonomía ni se agregan cuotas de modalidades o etiquetas.
+Las citas no cotejadas de Ferreira y Jones y las referencias dudosas del borrador no se adoptan;
+la revisión de otra persona del equipo y la validación con el piloto siguen pendientes.
+
+### 2.3. Datasets y límites de reutilización (recuperación de #43)
+
+Se recupera el relevamiento del [PR #43](https://github.com/Corchets/bitacora_tesis/pull/43)
+(cabeza `0a468b1892000d2d30cf7f2e5d5ed77481c9724d`), con verificación dirigida de fuentes
+primarias el **2026-10-04**. Su propósito original era reemplazar semillas del encoder en
+[#41](https://github.com/Corchets/bitacora_tesis/issues/41); la matriz se conserva como antecedente
+para corpus y comparadores. No impone entrenamiento, encoder ni una arquitectura de “goteo”.
+El [registro de búsquedas](PROTOCOLO-REVISION.md#registro-de-búsquedas) permite repetir la consulta.
+Se leyeron documentación y metadatos; no se descargaron audios ni conversaciones.
+
+| Fuente primaria | Evidencia consultada | Licencia y acceso | Utilidad y límite |
+|---|---|---|---|
+| [ES-Port, Vicomtech](https://github.com/Vicomtech/esport-corpus) (2018) | El README describe 1170 transcripciones anonimizadas de soporte técnico de una operadora española, estructuradas por turnos en JSON. | Declara CC BY-SA 3.0 España para los recursos. | Antecedente de diálogos legítimos y formato; no documenta una clase de fraude ni representa por sí solo el dominio argentino. |
+| [rajkirant/scam-detection, versión `439db80`](https://github.com/rajkirant/scam-detection/tree/439db80) | README e inventario confirman `everything_7013.csv`: mezcla multilingüe de fuentes, 7013 filas según el autor. | El repositorio declara MIT; eso no verifica permisos de todos los datos agregados. [CALLHOME Spanish, LDC96T17](https://catalog.ldc.upenn.edu/LDC96T17), tiene acuerdo de uso propio. | Referencia de estructura y controles de sesgo. El conteo de 89 filas españolas legítimas atribuidas a CallHome proviene del PR y no se repitió en esta recuperación; queda pendiente si se considera reutilizarlo. |
+| [Robocall audio FTC, Prasad y Reaves](https://github.com/wspr-ncsu/robocall-audio-dataset) (2023) | README: 1432 registros, transcripción automática Whisper; 96,2 % inglés y 3,8 % mandarín. | Declara datos de dominio público y documentación CC BY-ND, por separado. | Antecedente de audio/transcripción de robocalls; no aporta español según esa descripción ni reemplaza conversaciones completas del piloto. |
+| [checkScam, versión `d58404b`](https://github.com/henryemdth/checkScam/tree/d58404b/dataset) | El inventario de `dataset/` contiene únicamente `.gitkeep` y README. | No se verificó una licencia de datos publicados. | Proyecto de referencia; esa versión no aporta un corpus descargable. Sus afirmaciones de funcionamiento no son resultados de esta tesis. |
+| [Robocalls internacional, Altwlkany et al.](https://arxiv.org/html/2606.31790v1) (preprint, 2026) | El texto describe 677 grabaciones y 839 transcripciones, incluyendo español; enlaza [Zenodo 21066049](https://zenodo.org/records/21066049). | Metadatos de Zenodo: título coincidente y CC BY-NC 4.0. No se inspeccionaron archivos. | Antecedente multilingüe; robocall no equivale a fraude. No se revalidó el conteo del PR de 84 audios españoles ni su clasificación; antes de usarlo hacen falta selección y referencia adecuadas. |
+| [VISHGUARD, repositorio de sus autores](https://github.com/yasserhmimou9/Data-Paper-Vish-Guard-Dataset) | README: 3000 llamadas sintéticas, inglés/francés/árabe, anotaciones de persuasión y emoción; indica que el repositorio es una descripción y restringe el acceso completo. | [Zenodo 17938406](https://zenodo.org/records/17938406) declara CC BY 4.0 para una versión de ese repositorio. No confirma por sí solo derechos/acceso a todos los audios. | Antecedente de anotación; no aporta español según el README. La [URL de Scientific Data citada en el PR](https://www.nature.com/articles/s41597-026-07724-z) no pudo leerse; sus metadatos editoriales y correspondencia quedan sin verificar. |
+| [BothBosu/scam-dialogue](https://huggingface.co/datasets/BothBosu/scam-dialogue) | Ficha accesible: 1600 diálogos sintéticos en inglés, generados con `meta-llama-3-70b-instruct`, columnas `dialogue`, `type` y `label`. | La ficha declara Apache 2.0 para el dataset. | Referencia de formato y clases; traducción y generación sintética requieren evaluar desajuste de dominio y dependencia entre variantes. |
+| [menaattia/phone-scam-dataset](https://huggingface.co/datasets/menaattia/phone-scam-dataset) | La página sí existe: visor de 4000 filas con `dialogue`/`label` y ejemplos en inglés; indica que no tiene dataset card. | No se identificó licencia ni documentación de origen en la ficha. | Descubrimiento confirmado, pero insuficiente para elegirlo como entrenamiento o evaluación: faltan procedencia, permisos y criterios de etiquetado. |
+| [Honeypot de agente de voz, Traister et al.](https://arxiv.org/html/2609.29528v1) (preprint, 2026) | Describe llamadas reales atendidas por un agente, etiquetas automáticas con revisión humana y un subconjunto de 1000 transcripciones desidentificadas: 500 scam y 500 spam, sin legítimas ni audio. | El paper declara CC BY-NC para el subconjunto; corpus completo/audio bajo acuerdo. No se verificó la descarga. | Antecedente conversacional y de particiones por llamante; selecciona conversaciones largas y su negativo es spam. No equivale al contraste fraude/legítima del piloto ni proporciona directamente `T_R`/`T_C`. |
+
+**Qué queda vigente.** En las fuentes verificadas no se identificó un corpus que reúna
+conversaciones fraudulentas y legítimas comparables del dominio argentino y las referencias
+temporales necesarias para esta evaluación. Esto acota el hallazgo a lo revisado; no afirma
+ausencia universal. El [corpus propio](../corpus/METODO-CREACION-CORPUS.md) sigue siendo la
+selección vigente; la matriz no altera su método ni demuestra que alguno de estos datasets sea
+apto para sustituirlo.
+
+**Relación con `laboratorio-main`.** La reserva de código contiene
+[`armar_semillas.py`](https://github.com/Corchets/bitacora_tesis/blob/48882776/experiments/laboratorio/armar_semillas.py)
+y su [manifiesto](https://github.com/Corchets/bitacora_tesis/blob/48882776/experiments/laboratorio/semillas_manifiesto.json),
+y el [contraste ya documentado](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md) registra semillas de
+grabaciones argentinas y negativos de ES-Port, con riesgo de aprender dialecto o procedencia
+en lugar de maniobras. El manifiesto también deja pendiente la revisión humana del etiquetado
+asistido: clase de llamada y etiqueta de un turno aislado no son intercambiables. El relevamiento
+aporta contexto para revisar esos posibles confundidores; no demuestra su efecto causal, no reemplaza
+automáticamente los datos ni valida las métricas del laboratorio. Recuperar su código requiere
+declarar datos y versión reutilizados y separar desarrollo de evaluación.
+
+> **Estado: propuesta sin discutir.** Si [D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)
+> justifica un comparador entrenado, revisar permisos por fuente, procedencia por clase y
+> separación de variantes antes de adoptarlo. Las marcas y particiones continúan abiertas en
+> [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y
+> [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
 ## 3. Matriz comparativa
 

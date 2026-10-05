@@ -7,7 +7,7 @@ archivo no enumera tareas.
 ## 1. Modelo de trabajo
 
 Se trabaja en ciclos semanales, agrupados por los hitos del roadmap. Cada issue
-produce un resultado observable y pertenece a un único tipo. El equipo toma trabajo
+produce un resultado observable. El equipo toma trabajo
 por autoasignación y revisa en pareja los cambios que afectan datos, métricas,
 arquitectura o el informe.
 
@@ -19,24 +19,24 @@ Tres palabras gobiernan el flujo:
 
 ## 2. Fuentes de verdad
 
-| Información | Fuente |
-|---|---|
-| Trabajo abierto, prioridad, responsable, bloqueos | GitHub Issues |
-| Hitos, gates y fechas | `docs/propuesta/PLAN-DE-TRABAJO.md` |
-| Resultado de una decisión | comentario de cierre del issue; ADR si afecta arquitectura |
-| Riesgos | `REGISTRO-RIESGOS.md` |
-| Seguimientos con el profesor | `docs/gestion/seguimientos/AAAA-MM-DD.md` |
-| Evidencia bibliográfica y estado del arte | `docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md` |
-| Diseño del corpus | `METODO-CREACION-CORPUS.md` y sus esquemas |
-| Reglas académicas | `REQUISITOS-ACADEMICOS.md` |
-| Manuscrito final | `docs/tesis/` |
+| Información                                       | Fuente                                                     |
+| ------------------------------------------------- | ---------------------------------------------------------- |
+| Trabajo abierto, prioridad, responsable, bloqueos | GitHub Issues                                              |
+| Hitos, gates y fechas                             | `docs/propuesta/PLAN-DE-TRABAJO.md`                        |
+| Resultado de una decisión                         | `MAPA-DECISIONES.md`; detalle técnico en su fuente o ADR    |
+| Riesgos                                           | `REGISTRO-RIESGOS.md`                                      |
+| Seguimientos con el profesor                      | `docs/gestion/seguimientos/AAAA-MM-DD.md`                  |
+| Evidencia bibliográfica y estado del arte         | `docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md`           |
+| Diseño y referencia del corpus                    | `docs/corpus/METODO-CREACION-CORPUS.md` y `MANUAL-ANOTACION.md` |
+| Reglas académicas                                 | `REQUISITOS-ACADEMICOS.md`                                 |
+| Manuscrito final                                  | `docs/tesis/`                                              |
 
 Cuando un issue cambia una de estas cosas, actualiza esa fuente. El issue enlaza el
 resultado; no lo duplica.
 
 ## 3. Tipos de issue
 
-### `type:decision`
+### Decisión
 
 Resuelve una elección que bloquea trabajo. La descripción contiene pregunta,
 alternativas, evidencia necesaria y quién debe validar.
@@ -45,7 +45,7 @@ alternativas, evidencia necesaria y quién debe validar.
 evidencia, consecuencias y nuevos issues. Si la decisión cambia una interfaz o una
 restricción duradera, también existe un ADR.
 
-### `type:research`
+### Investigación
 
 Busca evidencia externa para sostener una afirmación o decisión.
 
@@ -53,7 +53,7 @@ Busca evidencia externa para sostener una afirmación o decisión.
 material tiene fuente verificable, la síntesis del estado del arte fue actualizada y el
 issue contiene síntesis, incertidumbres y decisión habilitada.
 
-### `type:experiment`
+### Experimento
 
 Responde una pregunta mediante datos y mediciones.
 
@@ -61,50 +61,38 @@ Responde una pregunta mediante datos y mediciones.
 de código, hardware, métricas, salidas, interpretación, limitaciones y comando o
 procedimiento de reproducción.
 
-### `type:task`
+### Tarea
 
 Produce un artefacto necesario: código, esquema, guiones, UI, prueba o documento.
 
 **Terminado cuando:** el artefacto existe, satisface los criterios del issue, fue
 verificado y está enlazado.
 
-### `type:writing`
+### Redacción
 
 Actualiza una parte del Informe Final.
 
 **Terminado cuando:** la sección responde su objetivo, las afirmaciones están
 citadas, tablas/figuras son trazables y la revisión cruzada fue incorporada.
 
-## 4. Etiquetas mínimas
+## 4. Estado y bloqueos en GitHub
 
-Usar una etiqueta de tipo, una de área y como máximo una de prioridad.
+Los issues activos no necesitan etiquetas de tipo, área ni prioridad. El título
+explica el resultado; el milestone ubica el hito; el assignee identifica responsable.
 
-### Tipo
+Una dependencia que impide comenzar se registra en **Relationships → Blocked by**
+y se explica brevemente en el cuerpo. Una referencia relacionada no es un bloqueo.
+Las [relaciones nativas de GitHub](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/creating-issue-dependencies)
+permiten ver **Blocked by** y **Blocking**, con el indicador **Blocked** en los issues afectados.
 
-- `type:decision`
-- `type:research`
-- `type:experiment`
-- `type:task`
-- `type:writing`
+**Disponible para autoasignarse:** abierto, sin responsable, sin bloqueos pendientes
+y con datos/accesos disponibles. Elegir primero trabajo del hito actual. Una
+investigación sin bloqueos de un hito posterior puede adelantarse si ayuda al arranque;
+no desplaza la próxima entrega técnica.
 
-### Área
-
-- `area:planning`
-- `area:research`
-- `area:data-ethics`
-- `area:asr-audio`
-- `area:detector-eval`
-- `area:mobile-ux`
-- `area:thesis`
-
-### Prioridad
-
-- `priority:p0`: bloquea el hito actual.
-- `priority:p1`: necesario dentro del hito.
-- `priority:p2`: mejora postergable.
-
-El estado se representa con issue abierto/cerrado, responsable con assignee y plazo
-con milestone. No crear etiquetas que dupliquen esas funciones.
+Las dependencias apuntan a entregas completas. Si se necesita un resultado intermedio,
+se divide el issue: por ejemplo, el primer par de llamadas libera ASR y detector sin
+esperar todo el piloto. Una fecha orientativa no vuelve disponible una tarea bloqueada.
 
 ## 5. Inicio de una sesión
 
@@ -112,7 +100,7 @@ con milestone. No crear etiquetas que dupliquen esas funciones.
 2. Elegir un issue abierto, no bloqueado y sin responsable.
 3. Leer pregunta/resultado, dependencias y definición de terminado.
 4. Autoasignarse y comentar el enfoque inmediato en una o dos frases.
-5. Leer solo los documentos disparados por el tipo y área del issue.
+5. Leer solo las fuentes necesarias para el resultado del issue.
 
 **Listo para empezar cuando:** el resultado esperado es observable, las dependencias
 están resueltas, los datos/accesos necesarios existen y la definición de terminado
@@ -139,8 +127,12 @@ una fase posterior para “documentar todo”.
 3. Actualizar la fuente de verdad afectada.
 4. Enlazar commit, documento, datos, gráfico o salida reproducible.
 5. Registrar qué se aprendió, limitaciones y consecuencias.
-6. Cerrar si está completo. Si continúa abierto, escribir una próxima acción
+6. Cerrar si está completo y revisar qué dependientes quedaron habilitados. Si continúa abierto, escribir una próxima acción
    concreta y el bloqueo, sin declarar progreso genérico.
+
+Si una tarea se retira del compromiso actual, cerrar como **no planificada**
+(`not_planned`) y explicar el motivo y dónde continúa el trabajo útil. Ese cierre
+no se registra como implementación terminada; se conservan antecedentes y artefactos.
 
 **Sesión cerrada cuando:** otra persona puede entender qué cambió, verificarlo y
 continuar sin depender de una explicación oral.

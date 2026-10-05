@@ -258,7 +258,7 @@ En criollo: hay un botón de **incendio** y un botón de **esto se está poniend
 
 | Camino | Qué lo dispara | ¿Espera el 2 del contador? | ¿Espera el fin del turno? |
 |---|---|---|---|
-| **Incendio** | Reglas de **pedido crítico** (capa 2 del [manual](../datos-etica/MANUAL-ANOTACION.md): código, clave, transferencia, acceso remoto, etc.) | No | No, si ya se lee en el texto a medias |
+| **Incendio** | Reglas de **pedido crítico** (capa 2 del [manual](../corpus/MANUAL-ANOTACION.md): código, clave, transferencia, acceso remoto, etc.) | No | No, si ya se lee en el texto a medias |
 | **Goteo** | Red de riesgo + máximo de 3 turnos | Sí, dos actualizaciones | Sí: la red piensa al cerrar el turno |
 
 Las etiquetas de capa 2 son **propuesta** (D07 abierta). Este recorte las usa como lista de trabajo para las reglas; no congela el manual.
