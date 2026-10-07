@@ -1,0 +1,65 @@
+[
+  {
+    "id": "banco_F01",
+    "url": "https://www.bcra.gob.ar/como-prevenir-estafas-virtuales/",
+    "titulo": "Cómo prevenir estafas virtuales",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "El BCRA describe llamadas de vishing en las que quien llama se presenta como banco o billetera para pedir datos, claves o códigos; también registra ofertas de préstamos/reintegros, supuestos errores de transferencia, falsos representantes y pedidos de instalar asistencia remota. Recomienda verificar operaciones desde canales propios y oficiales. Esta fuente sustenta patrones de riesgo, no prácticas legítimas de entidades.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "banco_F02",
+    "url": "https://www.argentina.gob.ar/noticias/desarticulamos-una-banda-dedicada-estafas-por-home-banking-en-cordoba-y-buenos-aires",
+    "titulo": "Desarticulamos una banda dedicada a estafas por home banking en Córdoba y Buenos Aires",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "La comunicación de la Policía Federal informa una causa con engaños para acceder a cuentas, instalación de software de control remoto, captura de credenciales y tokens mediante páginas que suplantaban bancos, y transferencias posteriores a cuentas de terceros. Se usa como descripción de una causa concreta, no como medida de frecuencia general ni diálogo para copiar.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "banco_F03",
+    "url": "https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf",
+    "titulo": "Informe 2024: casos y modalidades reportadas a UFECI",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "El informe UFECI 2024 describe reportes de llamadas de supuestos representantes de bancos, billeteras y administradoras de tarjetas que alegan autorizar compras o verificar seguridad, envían enlaces para instalar acceso remoto y luego acceden a cuentas o generan préstamos. También describe una variante de llamada sobre billetera que pide credenciales o induce transferencias. Son reportes recibidos por UFECI; no prueban prevalencia poblacional ni representan transcripciones de este banco.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "banco_F04",
+    "url": "https://www.bcra.gob.ar/realizar-un-reclamo-ante-el-banco-central-por-fraude-o-estafa/",
+    "titulo": "Reclamar por fraude o estafa",
+    "consulta": "2026-10-02",
+    "uso": "contexto_legitimo",
+    "hallazgo": "El BCRA define el reclamo por operaciones no reconocidas y accesos vulnerados, y detalla que primero se reclama ante la entidad, se conserva constancia y, si no hay solución tras el plazo indicado, se puede acudir al BCRA. Sirve para crear contextos conversacionales sintéticos de consulta/reclamo y gestión segura; no se presenta como guía general de prácticas comerciales legítimas.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "banco_F05",
+    "url": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/como-me-protejo-al-utilizar-un-codigo-qr",
+    "titulo": "¿Cómo me protejo al utilizar un código QR?",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra_y_contexto_legitimo",
+    "hallazgo": "Con Vos en la Web explica que un QR puede dirigir a sitios falsos, iniciar sesiones o generar acciones en el dispositivo y recomienda verificar identidad, destino y datos antes de confirmar. Se usa para construir ejemplos sintéticos de autorización de dispositivos y pagos por QR, no como transcripción.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "banco_F06",
+    "url": "https://www.argentina.gob.ar/noticias/la-ssn-advierte-sobre-intentos-de-contacto-fraudulentos",
+    "titulo": "La SSN advierte sobre intentos de contacto fraudulentos",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_suplantacion_institucional",
+    "hallazgo": "La Superintendencia de Seguros de la Nación informó intentos de personas ajenas que se presentan en su nombre y solicitan información por teléfonos particulares o WhatsApp; precisa sus canales oficiales. Sustenta escenarios de suplantación vinculados a seguros, no afirma que cualquier llamado sobre seguros sea fraudulento.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "banco_F07",
+    "url": "https://www.argentina.gob.ar/noticias/advertencia-al-publico-inversor-sobre-nuevas-estafas-virtuales",
+    "titulo": "Advertencia al público inversor sobre nuevas estafas virtuales",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_cobros_inducidos_en_inversiones",
+    "hallazgo": "La CNV describe contactos que ofrecen rendimientos altos y luego solicitan transferencias sucesivas bajo pretextos como impuestos, tasas, derechos o fallas de plataforma. Se usa para ejemplos sintéticos de pedidos financieros encadenados, sin copiar texto fuente ni generalizar su frecuencia.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  }
+]

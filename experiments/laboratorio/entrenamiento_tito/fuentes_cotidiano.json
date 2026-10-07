@@ -1,0 +1,47 @@
+[
+  {
+    "id": "cotidiano_F01",
+    "url": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/que-hago-si-me-piden-datos-personales-por-telefono",
+    "titulo": "¿Qué hago si me piden mis datos personales por teléfono?",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "El Ministerio de Justicia describe el vishing como engaño telefónico, con relatos de familiares en peligro, falsa ayuda económica y presión para obtener información o dinero; recomienda verificar por vías conocidas. Sustenta patrones de suplantación y urgencia de las familias ficticias.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "cotidiano_F02",
+    "url": "https://www.argentina.gob.ar/node/66622",
+    "titulo": "Seguridad y fiscales evaluaron medidas contra fraudes conocidos popularmente como “secuestros virtuales”",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "El Ministerio de Seguridad y fiscales describen llamadas que simulan secuestros para forzar el pago de un rescate aunque no haya una persona secuestrada. Sustenta las familias ficticias de secuestro simulado y exigencia de efectivo.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "cotidiano_F03",
+    "url": "https://www.fiscales.gob.ar/procuracion-general/la-unidad-fiscal-especializada-en-investigacion-criminal-compleja-advierte-sobre-estafas-telefonicas-a-personas-mayores/",
+    "titulo": "La UFECRI advierte sobre estafas telefónicas a personas mayores",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "El Ministerio Público Fiscal describe llamadas que se hacen pasar por familiares o entidades bancarias y piden retirar depósitos o entregar dinero, incluyendo el pretexto de cambiar billetes por su supuesta salida de circulación. Es la fuente específica para las modalidades telefónicas de retiro de ahorros y cambio de billetes del lote. La nota es del 2020-08-28 y documenta patrones, no la vigencia de políticas bancarias o trámites en 2026.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "cotidiano_F04",
+    "url": "https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf",
+    "titulo": "Informe 2024: casos y modalidades reportadas a UFECI",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "La UFECI documenta fraudes en alquileres temporarios con inmuebles inexistentes o publicaciones de personas que no son sus dueños, y ofertas laborales fraudulentas. Sustenta familias ficticias sobre alquileres y empleos; el informe aporta contexto de modalidades reportadas, no transcripciones utilizadas como ejemplos.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "cotidiano_F05",
+    "url": "https://www.argentina.gob.ar/justicia/derechofacil/leysimple/defensa-del-consumidor",
+    "titulo": "Ley simple: Defensa del Consumidor",
+    "consulta": "2026-10-02",
+    "uso": "contexto_legitimo",
+    "hallazgo": "La guía oficial resume derechos y situaciones habituales de compras y contratación de servicios, incluyendo precio, información, presupuestos, garantías y reclamos. Se usa como referencia de contexto para escenas ficticias de intercambios cotidianos; no valida cada diálogo como conducta real ni segura.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  }
+]

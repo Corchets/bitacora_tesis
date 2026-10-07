@@ -125,6 +125,119 @@ de 14 y hasta seis repeticiones dirigidas. Esa selección sigue pendiente de val
 [D06](../gestion/MAPA-DECISIONES.md#d06--definir-la-gobernanza-de-datos) y el
 [issue #22](https://github.com/Corchets/bitacora_tesis/issues/22) no habilitan grabar todavía.
 
+### 2.3. Fuentes y producción de ejemplos argentinos para Tito (#41)
+
+**Consulta:** 2026-10-02. **Objetivo vigente:** obtener muchos ejemplos de texto en español
+argentino para entrenar el clasificador de Tito ([#41](https://github.com/Corchets/bitacora_tesis/issues/41)).
+Ignacio aclaró que la prioridad es ampliar frases y fragmentos de entrenamiento, con cobertura
+amplia, sin un proceso de anotación de conversaciones completas. El
+[issue #45](https://github.com/Corchets/bitacora_tesis/issues/45) conserva el reemplazo de la suite
+como trabajo de evaluación independiente. Las consultas quedaron en el [protocolo](PROTOCOLO-REVISION.md).
+
+**Restricción del usuario:** todos los ejemplos que reciba Tito deben estar en español argentino
+natural, sin caricaturizar la jerga. Textos ingleses pueden aportar situaciones si se adaptan al
+contexto local; no entran en su idioma original. Español de España queda fuera de la selección
+activa. Los casos y resultados previos no se usan para construir este conjunto.
+
+**Hallazgo:** hay fuentes y métodos aprovechables, pero la cantidad publicada no acredita
+utilidad para Tito. Separar datos locales generados de adaptaciones externas y conservar su
+procedencia permite revisar cobertura y evitar contar paráfrasis como situaciones independientes.
+
+| Fuente primaria | Contenido y acceso verificados | Utilidad y límites para entrenamiento local |
+|---|---|---|
+| [ES-Port: paper](https://aclanthology.org/L18-1125.pdf) y [repositorio original](https://github.com/Vicomtech/esport-corpus) | 1.170 conversaciones espontáneas de soporte de un operador español; transcripciones anonimizadas por turno. Repositorio declara CC BY-SA 3.0 España. Audio original no público. | Fuera de la selección activa por instrucción del usuario: es español de España. Se conserva como antecedente de la búsqueda, sin importar sus textos al entrenamiento. |
+| [ICFD-31k: ficha](https://github.com/SPELLAILab/ICFD-31k/blob/main/DATASET_CARD.md), [datos](https://huggingface.co/datasets/rishia2220/icfd-31k) y [licencia de datos](https://github.com/SPELLAILab/ICFD-31k/blob/main/LICENSE-DATA.md) | Declara 31.000 conversaciones sintéticas inglesas/Hinglish, contexto indio, veredicto final y análisis de prefijos. Ofrece ejemplos JSON, manifiesto y checksums; prefijos heredan split de la llamada. Licencia restringida a investigación/educación defensiva, distinta de MIT del código. | Referencia de generación reproducible. Las situaciones necesitarían adaptación local; las políticas bancarias y etiquetas no se trasladan automáticamente. Los tiempos son sintéticos y los autores reportan acuerdo humano moderado (κ=0,534). |
+| [Honeypot activo, preprint](https://arxiv.org/html/2609.29528v1) | Autores anuncian subset desidentificado de 1.000 llamadas reales con un agente: 500 scam y 500 spam, turnos completos, inglés/EE.UU.; sin audio ni legítimas. Declaran CC BY-NC para el release y DUA para el corpus completo. Enlace descargable persistente no localizado en la página inspeccionada. | Fuente de dinámica y ambigüedad scam/spam; etiquetas automáticas silver, corroboradas parcialmente por humanos. Selecciona llamadas largas: no representa tráfico ni prevalencia. Sugiere separación por caller; acceso a los datos sigue pendiente de verificar. |
+| [BothBosu/scam-dialogue](https://huggingface.co/datasets/BothBosu/scam-dialogue) | CSV inspeccionados: 1.600 diálogos (1.280 train, 320 test), con `dialogue`, `type`, `label`; inglés sintético generado con Llama 3 70B. Apache 2.0 declarada por quien publica. | Candidato para adaptar situaciones al español argentino bajo la licencia declarada. Categorías diferentes por clase y aperturas repetidas. No heredar la etiqueta de una llamada fraudulenta a todos sus fragmentos; tampoco usarlo como única fuente. |
+
+**Inspección de ejemplos, sin incorporar conversaciones externas al repositorio:**
+
+- ES-Port, tabla 4 del [paper](https://aclanthology.org/L18-1125.pdf): interlocutores buscan a otra
+  persona y acuerdan volver a llamar; aparecen risas, habla ininteligible y solapamientos. Es
+  conversación espontánea, no un conjunto de frases ni un robocall.
+- ICFD, [ejemplo bancario normal](https://github.com/SPELLAILab/ICFD-31k/blob/main/examples/source_conversations/banking/SCENARIO_16_Clear_Normal_1546_r1.json):
+  bloqueo de tarjeta con pedido de fecha de nacimiento y teléfono. La persona descrita como
+  reticente a dar información la entrega; los tiempos avanzan casi siempre cinco segundos y hay
+  despedidas seguidas de reapertura. **Observación propia:** una ficha rica no evita inconsistencias
+  ni cadencia artificial. No trasladar automáticamente ese negativo a Argentina.
+- BothBosu: primer positivo train suplantando seguridad social pide SSN; primer negativo de reparto
+  termina con verificación mediante un número dado por el propio llamante. **Observación propia:**
+  ese desenlace no prueba independencia de la verificación y exige revisión; las primeras aperturas
+  positivas del visor son muy similares. [CSV inspeccionado](https://huggingface.co/datasets/BothBosu/scam-dialogue/blob/main/scam-dialogue_train.csv).
+- Honeypot: el fragmento del [paper](https://arxiv.org/html/2609.29528v1) pasa de una cotización de
+  seguro a pedir datos sensibles; la respuesta cuestiona el pedido. Sirve para estudiar progresión,
+  pero inspeccionar ese fragmento no equivale a revisar el dataset anunciado.
+
+Otros candidatos no pasan todavía el filtro: [menaattia](https://huggingface.co/datasets/menaattia/phone-scam-dataset)
+tiene diálogos ingleses cortos y etiqueta binaria, sin ficha ni licencia visibles; no se verificó
+procedencia real/sintética. [VISH-GUARD](https://www.nature.com/articles/s41598-026-71813-7)
+anuncia audio sintético inglés/francés/árabe; la publicación temprana inspeccionada no permite
+verificar ejemplos o licencia del dataset (la licencia del artículo no lo reemplaza).
+[COVA-X](https://scamlingua.org/) anuncia unas 11.000 conversaciones inglesas sintéticas, acceso
+por solicitud y sin redistribución; no se obtuvieron datos ni muestras.
+[ScamBench](https://huggingface.co/datasets/shaw/scambench-training) anuncia español, pero las
+muestras inspeccionadas de otros idiomas usan roles de agente de IA y mezclan ataques escritos;
+no se verificó muestra española ni licencias de las fuentes agregadas. Descarte provisional por
+dominio/unidad, no evidencia de que no existan diálogos de fraude públicos en español.
+
+**Fuentes argentinas con funciones distintas:** la [PSA (2024-09-05)](https://www.argentina.gob.ar/node/440193)
+documenta falsa llamada de Salud → código SMS → toma de WhatsApp: respalda secuencia/modalidad,
+sin aportar transcripción. [Cadena 3 (2021-05-26)](https://www.cadena3.com/noticia/siempre-juntos/cronista-de-cadena-3-grabo-un-intento-de-estafa-telefonica_293301)
+es un candidato primario porque el cronista recibe y registra la llamada, pero la página anuncia
+una grabación parcial. No se escuchó audio ni verificó licencia: no es gold disponible.
+
+**Procedimiento propuesto para producir volumen:**
+
+> **Estado: propuesta sin discutir.** Vinculado a [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico),
+> [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental) y
+> [D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). La preferencia lingüística y el foco
+> en entrenamiento fueron indicados por el usuario; la composición y el procedimiento siguientes
+> son propuestas, sin congelar taxonomía, split ni modelo.
+
+1. Construir una matriz de cobertura de vocabulario y situaciones a partir del
+   [catálogo](../datos-etica/CATALOGO-ESCENARIOS.csv): códigos de autenticación, credenciales,
+   datos personales, movimientos de dinero, acceso remoto, enlaces y maniobras de presión.
+   Las palabras clave guían qué cubrir; cada ejemplo contiene una frase o fragmento con sentido.
+2. Producir lotes amplios directamente en español argentino natural, variando situación,
+   formulación, registro formal/informal, voseo/usted, longitud y contexto cotidiano. Incluir pedidos
+   explícitos e indirectos, menciones inocentes, negativas, referencias a acciones pasadas y
+   frases cotidianas ajenas a fraudes. No hacer que el acento, las muletillas o el origen distingan clases.
+3. Complementar con situaciones de datasets ingleses cuya licencia permita el uso. Adaptar
+   institución, producto, documento, moneda y práctica al contexto argentino; reemplazar referencias
+   extranjeras solo cuando la situación siga siendo coherente. Registrar origen y transformación.
+4. Entregar los textos en los dos grupos que consume el laboratorio (`estafa` y `legitima`). La
+   clasificación de frases/fragmentos es necesaria para entrenar; no exige anotar llamadas completas,
+   marcas temporales ni las 6+6 etiquetas. Conservar grupo de origen y fuente en el conjunto maestro.
+   Fragmentos ambiguos que dependen de contexto omitido quedan separados para revisión.
+5. Validar idioma, duplicados, contradicciones, cobertura y una muestra de cada lote. Los lotes
+   sintéticos o adaptados se identifican como tales. [Mirage](https://aclanthology.org/2026.findings-acl.1261/)
+   muestra que cumplir una consigna de generación no asegura realismo; es evidencia de contact
+   center, no validación del entrenamiento de Tito.
+6. Agrupar variantes y adaptaciones del mismo origen antes de dividir según el
+   [método §9](../datos-etica/METODO-CREACION-CORPUS.md#9-división-de-datos), y exportar solo train
+   al formato actual. Comprobar la mejora en textos independientes cuando se acuerde la evaluación;
+   cantidad de texto generado no equivale a calidad medida.
+
+**Escala inicial propuesta:** miles de ejemplos, con una banda operativa de 5.000–10.000 textos
+para organizar la producción por lotes. No es un mínimo científico ni una garantía de mejora;
+se debe informar también cuántas situaciones/formulaciones de base representan y su distribución.
+La primera salida buscada es un conjunto amplio utilizable por el clasificador, con procedencia y
+cobertura explícitas; no una nueva suite de cuatro conversaciones.
+
+**Producción materializada el 2026-10-02:** el [banco de Tito](../../experiments/laboratorio/entrenamiento_tito/README.md)
+contiene 6.000 textos sintéticos originales en español argentino, compuestos dentro de 300
+familias. No se importaron ni tradujeron datasets externos. Sus registros de fuentes contienen
+17 URL únicas que sustentan modalidades y contextos, no transcripciones. La inspección del
+coordinador y el filtro conservador apartaron 24 familias (480 textos) por ambigüedad o
+incoherencia; quedan 5.520 textos de desarrollo (2.620 `estafa`, 2.900 `legitima`) en el formato
+del clasificador actual. El preparador verifica referencias, cantidades y duplicados, con siete
+pruebas automatizadas. La comprobación con el tokenizador de RoBERTuito registró 14–52 tokens
+por texto, contando especiales y sin truncamiento; versión y hashes están en
+[tokens.json](../../experiments/laboratorio/entrenamiento_tito/tokens.json).
+Las variantes de una familia son dependientes, no se creó un test y no se entrenó el detector.
+Esta entrega habilita ajustar su cabeza en desarrollo; no acredita mejora, revisión humana
+exhaustiva ni el cierre del protocolo experimental.
+
 ## 3. Matriz comparativa
 
 | Sistema | Nivel de análisis | Vector de detección | Ejecución | ¿Cubre manipulación psicológica? | Reproducible académicamente |

@@ -1,0 +1,1225 @@
+{
+  "textos_generados": 6000,
+  "familias_generadas": 300,
+  "textos": 5520,
+  "familias": 276,
+  "pendientes_revision": 480,
+  "familias_excluidas": 24,
+  "por_clase": {
+    "estafa": 2620,
+    "legitima": 2900
+  },
+  "por_lote": {
+    "banco": 2000,
+    "identidad": 1880,
+    "cotidiano": 1640
+  },
+  "por_tema": {
+    "acceso_remoto": {
+      "estafa": 20
+    },
+    "accidente_fabricado": {
+      "estafa": 20
+    },
+    "actividad_taller": {
+      "legitima": 20
+    },
+    "ahorro_plazo_fijo": {
+      "legitima": 20
+    },
+    "alerta_linea_codigo_sms": {
+      "estafa": 20
+    },
+    "alquiler_habitacion": {
+      "legitima": 20
+    },
+    "alquiler_mensual": {
+      "legitima": 20
+    },
+    "alquiler_temporada": {
+      "legitima": 20
+    },
+    "anses_bono": {
+      "estafa": 20
+    },
+    "anses_bono_pendiente": {
+      "estafa": 20
+    },
+    "anses_consulta_iniciada": {
+      "legitima": 20
+    },
+    "anses_pension_reempadronamiento": {
+      "estafa": 20
+    },
+    "anses_turno_bloqueado": {
+      "estafa": 20
+    },
+    "anses_turno_presencial": {
+      "legitima": 20
+    },
+    "atencion_humana_informativa": {
+      "legitima": 20
+    },
+    "autogestion_codigo_sms_app": {
+      "legitima": 20
+    },
+    "autogestion_pin_app_abierta": {
+      "legitima": 20
+    },
+    "beneficio_app_remota_captura_cuenta": {
+      "estafa": 20
+    },
+    "beneficio_local_pedido_digitos": {
+      "estafa": 20
+    },
+    "beneficio_social_actualizacion": {
+      "estafa": 20
+    },
+    "beneficio_social_codigo_acceso": {
+      "estafa": 20
+    },
+    "beneficio_tarjeta_alimentar": {
+      "estafa": 20
+    },
+    "beneficio_telefonia_digitos": {
+      "estafa": 20
+    },
+    "biblioteca": {
+      "legitima": 20
+    },
+    "billetera_codigo": {
+      "estafa": 20
+    },
+    "billetes_a_domicilio": {
+      "estafa": 20
+    },
+    "bloqueo_tarjeta_viaje": {
+      "legitima": 20
+    },
+    "cajero_asistencia": {
+      "estafa": 20
+    },
+    "cambio_billetes": {
+      "estafa": 20
+    },
+    "cambio_cbu_haberes": {
+      "estafa": 20
+    },
+    "cambio_dispositivo": {
+      "estafa": 20
+    },
+    "cambio_sim": {
+      "estafa": 20
+    },
+    "centro_salud_confirmacion_turno": {
+      "legitima": 20
+    },
+    "charla_laburo_viaticos": {
+      "legitima": 20
+    },
+    "cierre_cuenta": {
+      "estafa": 20
+    },
+    "clave_cuenta_correo_recuperacion": {
+      "estafa": 20
+    },
+    "clave_dispositivo_actualizacion": {
+      "estafa": 20
+    },
+    "cobro_impuesto_multa": {
+      "estafa": 20
+    },
+    "cobro_pension": {
+      "legitima": 20
+    },
+    "cobro_sueldo": {
+      "legitima": 20
+    },
+    "cobro_venta": {
+      "legitima": 20
+    },
+    "codigo_app_mensajeria_usuario": {
+      "legitima": 20
+    },
+    "codigo_operacion_iniciada": {
+      "legitima": 20
+    },
+    "codigo_operacion_reserva": {
+      "legitima": 20
+    },
+    "codigo_porton_propio": {
+      "legitima": 20
+    },
+    "codigo_puerta_entrega": {
+      "legitima": 20
+    },
+    "codigo_reserva_hotel": {
+      "legitima": 20
+    },
+    "codigo_sin_nombre_recuperacion": {
+      "estafa": 20
+    },
+    "comida_panaderia": {
+      "legitima": 20
+    },
+    "comida_pedido": {
+      "legitima": 20
+    },
+    "comida_reserva": {
+      "legitima": 20
+    },
+    "companeros_cambio_horario": {
+      "legitima": 20
+    },
+    "companeros_trabajo_coordinacion": {
+      "legitima": 20
+    },
+    "compartir_pantalla_banco": {
+      "estafa": 20
+    },
+    "compañia_telefonica_portabilidad": {
+      "estafa": 20
+    },
+    "compra_bicicleta": {
+      "legitima": 20
+    },
+    "compra_comercio": {
+      "legitima": 20
+    },
+    "compra_cuotas": {
+      "estafa": 20
+    },
+    "compra_en_cuotas": {
+      "legitima": 20
+    },
+    "compra_libros": {
+      "legitima": 20
+    },
+    "compra_muebles": {
+      "legitima": 20
+    },
+    "compra_online": {
+      "legitima": 20
+    },
+    "compra_premio_sorteo_real": {
+      "legitima": 20
+    },
+    "compra_qr_reversa": {
+      "estafa": 20
+    },
+    "compra_tarjeta": {
+      "estafa": 20
+    },
+    "compra_verdura": {
+      "legitima": 20
+    },
+    "consulta_compra_propia": {
+      "legitima": 20
+    },
+    "consulta_deuda_canal_verificado": {
+      "legitima": 20
+    },
+    "consulta_devolucion_servicio": {
+      "legitima": 20
+    },
+    "consulta_saldo": {
+      "legitima": 20
+    },
+    "consulta_seguro_poliza": {
+      "legitima": 20
+    },
+    "costura": {
+      "legitima": 20
+    },
+    "cuenta_compartida": {
+      "legitima": 20
+    },
+    "cuenta_inversion": {
+      "estafa": 20
+    },
+    "cuenta_mensajeria_copia_sesion": {
+      "estafa": 20
+    },
+    "cuenta_puente": {
+      "estafa": 20
+    },
+    "cuenta_verificada_deuda": {
+      "legitima": 20
+    },
+    "cuota_credito": {
+      "estafa": 20
+    },
+    "cuota_prestamo_genuino": {
+      "legitima": 20
+    },
+    "datos_tarjeta_promocion": {
+      "estafa": 20
+    },
+    "denuncia_intento_estafa": {
+      "legitima": 20
+    },
+    "deporte_club": {
+      "legitima": 20
+    },
+    "desbloqueo_billetera": {
+      "estafa": 20
+    },
+    "desconocer_compra": {
+      "estafa": 20
+    },
+    "deuda_regularizacion": {
+      "estafa": 20
+    },
+    "devolucion_compra": {
+      "estafa": 20
+    },
+    "devolucion_compra_comprobada": {
+      "legitima": 20
+    },
+    "devolucion_compra_legitima": {
+      "legitima": 20
+    },
+    "devolucion_cuota_comprobada": {
+      "legitima": 20
+    },
+    "empresa_luz_corte_pendiente": {
+      "estafa": 20
+    },
+    "escuela_retiro": {
+      "legitima": 20
+    },
+    "escuela_reunion": {
+      "legitima": 20
+    },
+    "escuela_tarea": {
+      "legitima": 20
+    },
+    "evento_familiar": {
+      "legitima": 20
+    },
+    "falsa_compra_muebles": {
+      "estafa": 20
+    },
+    "falsa_devolucion": {
+      "estafa": 20
+    },
+    "falsa_encomienda": {
+      "estafa": 20
+    },
+    "falsa_herencia": {
+      "estafa": 20
+    },
+    "falsa_multa": {
+      "estafa": 20
+    },
+    "falsa_obra": {
+      "estafa": 20
+    },
+    "falsa_reserva_cabaña": {
+      "estafa": 20
+    },
+    "falsa_seña_evento": {
+      "estafa": 20
+    },
+    "falsa_venta_celular": {
+      "estafa": 20
+    },
+    "falsa_venta_herramienta": {
+      "estafa": 20
+    },
+    "falso_abogado": {
+      "estafa": 20
+    },
+    "falso_alquiler": {
+      "estafa": 20
+    },
+    "falso_arreglo": {
+      "estafa": 20
+    },
+    "falso_arreglo_auto": {
+      "estafa": 20
+    },
+    "falso_cambio_cuidador": {
+      "estafa": 20
+    },
+    "falso_cambio_domicilio": {
+      "estafa": 20
+    },
+    "falso_familiar_hospital": {
+      "estafa": 20
+    },
+    "falso_flete": {
+      "estafa": 20
+    },
+    "falso_plan_salud": {
+      "estafa": 20
+    },
+    "falso_premio": {
+      "estafa": 20
+    },
+    "falso_premio_radio": {
+      "estafa": 20
+    },
+    "falso_prestamo": {
+      "estafa": 20
+    },
+    "falso_rescate_mascota": {
+      "estafa": 20
+    },
+    "falso_servicio": {
+      "estafa": 20
+    },
+    "falso_tecnico_camara": {
+      "estafa": 20
+    },
+    "falso_tecnico_celular": {
+      "estafa": 20
+    },
+    "falso_tecnico_pc": {
+      "estafa": 20
+    },
+    "falso_trabajo_domestico": {
+      "estafa": 20
+    },
+    "falso_viaje": {
+      "estafa": 20
+    },
+    "familia_almuerzo": {
+      "legitima": 20
+    },
+    "familia_coordinacion_cotidiana": {
+      "legitima": 20
+    },
+    "familia_cumpleanos": {
+      "legitima": 20
+    },
+    "familia_medicacion": {
+      "legitima": 20
+    },
+    "familia_transferencia_gasto_compartido": {
+      "legitima": 20
+    },
+    "familia_visita": {
+      "legitima": 20
+    },
+    "familiar_en_peligro": {
+      "estafa": 20
+    },
+    "gastos_familia": {
+      "legitima": 20
+    },
+    "google_cuenta_bloqueada": {
+      "estafa": 20
+    },
+    "impuesto_inversion": {
+      "estafa": 20
+    },
+    "instagram_cuenta_verificada": {
+      "estafa": 20
+    },
+    "internet_corte_inminente": {
+      "estafa": 20
+    },
+    "inversion_consulta_riesgo": {
+      "legitima": 20
+    },
+    "inversion_propios": {
+      "legitima": 20
+    },
+    "inversion_segura": {
+      "estafa": 20
+    },
+    "jardin": {
+      "legitima": 20
+    },
+    "laburo_cliente": {
+      "legitima": 20
+    },
+    "laburo_sueldo": {
+      "legitima": 20
+    },
+    "laburo_turno": {
+      "legitima": 20
+    },
+    "lavadero": {
+      "legitima": 20
+    },
+    "limite_transferencia": {
+      "estafa": 20
+    },
+    "llamada_familia_mensaje_comun": {
+      "legitima": 20
+    },
+    "llamada_organismo_verificada": {
+      "legitima": 20
+    },
+    "mascota_paseo": {
+      "legitima": 20
+    },
+    "mascota_veterinaria": {
+      "legitima": 20
+    },
+    "medicamento_receta": {
+      "legitima": 20
+    },
+    "medicamentos_gratis": {
+      "estafa": 20
+    },
+    "mi_argentina_codigo_acceso": {
+      "estafa": 20
+    },
+    "mi_argentina_recuperar_acceso": {
+      "legitima": 20
+    },
+    "mudanza_flete": {
+      "legitima": 20
+    },
+    "negocio_pedido_proveedor": {
+      "legitima": 20
+    },
+    "numero_pedido_retiro_local": {
+      "legitima": 20
+    },
+    "numero_turno_consultorio": {
+      "legitima": 20
+    },
+    "obra_social_beneficio_acceso": {
+      "estafa": 20
+    },
+    "obra_social_carnet_digital": {
+      "estafa": 20
+    },
+    "obra_social_cartilla": {
+      "legitima": 20
+    },
+    "obra_social_reintegro": {
+      "estafa": 20
+    },
+    "obra_social_reintegro_falso": {
+      "estafa": 20
+    },
+    "obra_social_reintegro_propio": {
+      "legitima": 20
+    },
+    "pago_clase": {
+      "legitima": 20
+    },
+    "pago_consorcio": {
+      "legitima": 20
+    },
+    "pago_deuda_genuina": {
+      "legitima": 20
+    },
+    "pago_impuesto_propios": {
+      "legitima": 20
+    },
+    "pago_impuestos": {
+      "legitima": 20
+    },
+    "pago_prestamo_canal_contrato": {
+      "legitima": 20
+    },
+    "pago_servicio": {
+      "legitima": 20
+    },
+    "pago_servicio_debito": {
+      "legitima": 20
+    },
+    "pago_seña_servicio_contrato": {
+      "legitima": 20
+    },
+    "pago_tarjeta": {
+      "legitima": 20
+    },
+    "pantalla_compartida_billetera": {
+      "estafa": 20
+    },
+    "paqueteria": {
+      "legitima": 20
+    },
+    "pedido_comercio_numero": {
+      "legitima": 20
+    },
+    "pedido_retiro_numero_referencia": {
+      "legitima": 20
+    },
+    "pin_app_banco_usuario_presente": {
+      "legitima": 20
+    },
+    "premio_bancario": {
+      "estafa": 20
+    },
+    "premio_beneficio_clave_app": {
+      "estafa": 20
+    },
+    "premio_local_cuenta_pago": {
+      "estafa": 20
+    },
+    "premio_organismo": {
+      "estafa": 20
+    },
+    "premio_sorteo_supermercado": {
+      "estafa": 20
+    },
+    "premio_televisivo": {
+      "estafa": 20
+    },
+    "prestamo_aprobado": {
+      "estafa": 20
+    },
+    "prestamo_cancelar_prestamo": {
+      "estafa": 20
+    },
+    "prestamo_codigo_sms": {
+      "estafa": 20
+    },
+    "prestamo_cuota_seguro": {
+      "estafa": 20
+    },
+    "presupuesto_bancario": {
+      "legitima": 20
+    },
+    "promo_cupon_captura_correo": {
+      "estafa": 20
+    },
+    "promocion_sorteo_datos_y_qr": {
+      "estafa": 20
+    },
+    "qr_autorizacion_dispositivo": {
+      "estafa": 20
+    },
+    "qr_promocion_captura_acceso": {
+      "estafa": 20
+    },
+    "qr_reintegro": {
+      "estafa": 20
+    },
+    "qr_sesion_mensajeria": {
+      "estafa": 20
+    },
+    "reclamo_compra": {
+      "legitima": 20
+    },
+    "reclamo_fraude_pasado": {
+      "legitima": 20
+    },
+    "reclamo_transferencia": {
+      "legitima": 20
+    },
+    "recuperar_clave_app_propia": {
+      "legitima": 20
+    },
+    "reintegro_pendiente": {
+      "estafa": 20
+    },
+    "reparacion_electricista": {
+      "legitima": 20
+    },
+    "reparacion_gas": {
+      "legitima": 20
+    },
+    "reparacion_pintura": {
+      "legitima": 20
+    },
+    "reparacion_plomero": {
+      "legitima": 20
+    },
+    "retiro_efectivo": {
+      "legitima": 20
+    },
+    "retiro_inversion": {
+      "estafa": 20
+    },
+    "retiro_por_seguridad": {
+      "estafa": 20
+    },
+    "salud_farmacia": {
+      "legitima": 20
+    },
+    "salud_obra_social": {
+      "legitima": 20
+    },
+    "salud_recordatorio_receta": {
+      "legitima": 20
+    },
+    "salud_resultado": {
+      "legitima": 20
+    },
+    "salud_resultado_estudio": {
+      "legitima": 20
+    },
+    "salud_turno": {
+      "legitima": 20
+    },
+    "salud_turno_vacunacion": {
+      "legitima": 20
+    },
+    "secuestro_simulado": {
+      "estafa": 20
+    },
+    "seguro_datos_cuenta": {
+      "estafa": 20
+    },
+    "seguro_indemnizacion": {
+      "estafa": 20
+    },
+    "servicio_agua": {
+      "legitima": 20
+    },
+    "servicio_hogar_cambio_clave": {
+      "estafa": 20
+    },
+    "servicio_hogar_reparacion_real": {
+      "legitima": 20
+    },
+    "servicio_internet": {
+      "legitima": 20
+    },
+    "servicio_internet_soporte": {
+      "legitima": 20
+    },
+    "servicio_luz": {
+      "legitima": 20
+    },
+    "servicio_luz_factura": {
+      "legitima": 20
+    },
+    "servicio_municipal": {
+      "legitima": 20
+    },
+    "sms_acceso_perfil": {
+      "estafa": 20
+    },
+    "sms_billetera_vinculacion": {
+      "estafa": 20
+    },
+    "sms_cambio_clave": {
+      "estafa": 20
+    },
+    "sms_compra_frenada": {
+      "estafa": 20
+    },
+    "sms_envio_dinero": {
+      "estafa": 20
+    },
+    "soporte_banco_clave": {
+      "estafa": 20
+    },
+    "soporte_pc_proveedor_conocido": {
+      "legitima": 20
+    },
+    "subsidio_consulta_servicio": {
+      "legitima": 20
+    },
+    "subsidio_servicios_hogar": {
+      "estafa": 20
+    },
+    "tarjeta_bloqueo": {
+      "estafa": 20
+    },
+    "tarjeta_reposicion": {
+      "estafa": 20
+    },
+    "tasa_inversion": {
+      "estafa": 20
+    },
+    "tecnico_internet_visita_acordada": {
+      "legitima": 20
+    },
+    "telefonia_cambio_plan": {
+      "legitima": 20
+    },
+    "telefonia_portabilidad_digitos": {
+      "estafa": 20
+    },
+    "telefonia_reposicion_sim": {
+      "estafa": 20
+    },
+    "telefono_actualizacion_agenda": {
+      "legitima": 20
+    },
+    "telemedicina_pago_urgente": {
+      "estafa": 20
+    },
+    "token_cierre_sesion": {
+      "estafa": 20
+    },
+    "token_operacion": {
+      "estafa": 20
+    },
+    "tramite_mi_argentina_turno": {
+      "legitima": 20
+    },
+    "transferencia_amigo": {
+      "legitima": 20
+    },
+    "transferencia_conocido_verificado": {
+      "legitima": 20
+    },
+    "transferencia_error": {
+      "estafa": 20
+    },
+    "transferencia_proveedor": {
+      "legitima": 20
+    },
+    "transferencia_urgente_conocido": {
+      "legitima": 20
+    },
+    "transporte_colectivo": {
+      "legitima": 20
+    },
+    "transporte_familiar": {
+      "legitima": 20
+    },
+    "transporte_remis": {
+      "legitima": 20
+    },
+    "trámite_documentación_presencial": {
+      "legitima": 20
+    },
+    "turno_autorizacion_confirmacion": {
+      "legitima": 20
+    },
+    "turno_bancario_comprobante": {
+      "legitima": 20
+    },
+    "turno_pedido_y_confirmado": {
+      "legitima": 20
+    },
+    "urgencia_familiar_atencion_real": {
+      "legitima": 20
+    },
+    "urgencia_medica_servicio_real": {
+      "legitima": 20
+    },
+    "vacuna_campaña_turno_falso": {
+      "estafa": 20
+    },
+    "vacunatorio_duda_esquema": {
+      "legitima": 20
+    },
+    "venta_ropa": {
+      "legitima": 20
+    },
+    "verificacion_identidad": {
+      "estafa": 20
+    },
+    "viaje_familia": {
+      "legitima": 20
+    },
+    "voluntariado": {
+      "legitima": 20
+    },
+    "whatsapp_ayuda_familiar": {
+      "legitima": 20
+    },
+    "whatsapp_buzon_voz": {
+      "estafa": 20
+    },
+    "whatsapp_codigo_no_solicitado": {
+      "legitima": 20
+    },
+    "whatsapp_codigo_reenvio": {
+      "estafa": 20
+    },
+    "whatsapp_configuracion_propia": {
+      "legitima": 20
+    },
+    "whatsapp_grupo_cotidiano": {
+      "legitima": 20
+    },
+    "whatsapp_pedido_de_dinero": {
+      "estafa": 20
+    },
+    "whatsapp_pedido_familiar_codigo": {
+      "estafa": 20
+    },
+    "whatsapp_pin_dos_pasos": {
+      "estafa": 20
+    },
+    "whatsapp_registro_codigo_toma_cuenta": {
+      "estafa": 20
+    },
+    "whatsapp_vincular_dispositivo": {
+      "estafa": 20
+    }
+  },
+  "palabras": {
+    "min": 10,
+    "max": 39
+  },
+  "vocabulario": {
+    "autenticacion": {
+      "código": {
+        "estafa": 444,
+        "legitima": 110
+      },
+      "clave": {
+        "estafa": 406,
+        "legitima": 68
+      },
+      "token": {
+        "estafa": 95
+      },
+      "contraseña": {
+        "estafa": 91,
+        "legitima": 23
+      },
+      "pin": {
+        "estafa": 64,
+        "legitima": 34
+      },
+      "dígitos": {
+        "estafa": 70
+      },
+      "seis cifras": {
+        "estafa": 10,
+        "legitima": 1
+      },
+      "números": {
+        "estafa": 105
+      },
+      "sms": {
+        "estafa": 155,
+        "legitima": 9
+      },
+      "seguridad": {
+        "estafa": 191,
+        "legitima": 20
+      },
+      "dictame": {
+        "estafa": 329
+      },
+      "leeme": {
+        "estafa": 272
+      },
+      "pasame": {
+        "estafa": 414
+      }
+    },
+    "dinero": {
+      "transferencia": {
+        "estafa": 120,
+        "legitima": 68
+      },
+      "transferí": {
+        "estafa": 152,
+        "legitima": 12
+      },
+      "alias": {
+        "estafa": 83,
+        "legitima": 25
+      },
+      "cbu": {
+        "estafa": 28
+      },
+      "efectivo": {
+        "legitima": 16,
+        "estafa": 44
+      },
+      "plata": {
+        "estafa": 13,
+        "legitima": 9
+      },
+      "pesos": {},
+      "seña": {
+        "legitima": 39,
+        "estafa": 10
+      },
+      "préstamo": {
+        "estafa": 81,
+        "legitima": 48
+      },
+      "cuota": {
+        "estafa": 44,
+        "legitima": 81
+      },
+      "deuda": {
+        "estafa": 34,
+        "legitima": 16
+      },
+      "saldo": {
+        "estafa": 143,
+        "legitima": 71
+      },
+      "reintegro": {
+        "estafa": 160,
+        "legitima": 42
+      },
+      "acreditado": {
+        "legitima": 9,
+        "estafa": 10
+      }
+    },
+    "canales": {
+      "whatsapp": {
+        "estafa": 103,
+        "legitima": 48
+      },
+      "aplicación": {
+        "estafa": 146,
+        "legitima": 234
+      },
+      "pantalla": {
+        "estafa": 140,
+        "legitima": 76
+      },
+      "enlace": {
+        "estafa": 30,
+        "legitima": 5
+      },
+      "mensaje": {
+        "estafa": 140,
+        "legitima": 13
+      },
+      "llamada": {
+        "estafa": 36,
+        "legitima": 24
+      },
+      "dispositivo": {
+        "estafa": 51,
+        "legitima": 8
+      },
+      "conectarme": {
+        "estafa": 4
+      },
+      "cuenta": {
+        "estafa": 744,
+        "legitima": 332
+      },
+      "teléfono": {
+        "estafa": 263,
+        "legitima": 132
+      },
+      "computadora": {
+        "estafa": 30,
+        "legitima": 22
+      },
+      "qr": {
+        "estafa": 78,
+        "legitima": 4
+      }
+    },
+    "instituciones": {
+      "banco": {
+        "estafa": 223,
+        "legitima": 67
+      },
+      "billetera": {
+        "estafa": 138,
+        "legitima": 8
+      },
+      "anses": {
+        "estafa": 50,
+        "legitima": 16
+      },
+      "obra social": {
+        "estafa": 37,
+        "legitima": 4
+      },
+      "salud": {
+        "estafa": 16,
+        "legitima": 33
+      },
+      "jubilación": {
+        "legitima": 8
+      },
+      "vacuna": {
+        "estafa": 4,
+        "legitima": 8
+      },
+      "consultorio": {
+        "legitima": 53
+      },
+      "empresa": {
+        "legitima": 26,
+        "estafa": 31
+      },
+      "soporte": {
+        "estafa": 184,
+        "legitima": 12
+      }
+    },
+    "presion": {
+      "urgente": {
+        "legitima": 20,
+        "estafa": 48
+      },
+      "ahora": {
+        "estafa": 356,
+        "legitima": 50
+      },
+      "bloqueo": {
+        "estafa": 36,
+        "legitima": 9
+      },
+      "bloqueada": {
+        "estafa": 8
+      },
+      "premio": {
+        "estafa": 140,
+        "legitima": 8
+      },
+      "beneficio": {
+        "estafa": 116
+      },
+      "vence": {
+        "estafa": 53,
+        "legitima": 28
+      },
+      "no cortes": {
+        "estafa": 65
+      },
+      "no llames": {
+        "estafa": 75
+      },
+      "secreto": {
+        "estafa": 55
+      },
+      "hoy": {
+        "estafa": 169,
+        "legitima": 47
+      },
+      "rescate": {
+        "estafa": 26
+      }
+    },
+    "cotidiano": {
+      "turno": {
+        "legitima": 183,
+        "estafa": 29
+      },
+      "pedido": {
+        "legitima": 133,
+        "estafa": 15
+      },
+      "escuela": {
+        "legitima": 9
+      },
+      "comida": {
+        "legitima": 22,
+        "estafa": 8
+      },
+      "laburo": {
+        "legitima": 5
+      },
+      "familia": {
+        "legitima": 23,
+        "estafa": 29
+      },
+      "puerta": {
+        "legitima": 40,
+        "estafa": 5
+      },
+      "reserva": {
+        "legitima": 65,
+        "estafa": 24
+      },
+      "asado": {
+        "legitima": 20
+      },
+      "portón": {
+        "legitima": 13
+      },
+      "presupuesto": {
+        "legitima": 61,
+        "estafa": 4
+      },
+      "comprobante": {
+        "legitima": 163,
+        "estafa": 34
+      },
+      "factura": {
+        "legitima": 135,
+        "estafa": 12
+      }
+    }
+  },
+  "aperturas_mas_frecuentes": {
+    "estafa": [
+      [
+        "¿podés escucharme un minuto?",
+        84
+      ],
+      [
+        "buenas, te hablo por",
+        84
+      ],
+      [
+        "¿me oís bien? te",
+        84
+      ],
+      [
+        "hola, quedate en línea",
+        84
+      ],
+      [
+        "te llamo desde el",
+        72
+      ],
+      [
+        "me comunico desde el",
+        72
+      ],
+      [
+        "atención telefónica desde el",
+        72
+      ],
+      [
+        "«te llamo por el",
+        60
+      ],
+      [
+        "«buen día, soy de",
+        52
+      ],
+      [
+        "«te contacto por el",
+        48
+      ]
+    ],
+    "legitima": [
+      [
+        "hola, te llamo un",
+        160
+      ],
+      [
+        "buenas, quería preguntarte algo.",
+        160
+      ],
+      [
+        "che, cuando puedas escuchame.",
+        160
+      ],
+      [
+        "te contacto por una",
+        84
+      ],
+      [
+        "¿tenés un minuto? hola,",
+        84
+      ],
+      [
+        "buenas, te llamo porque",
+        72
+      ],
+      [
+        "llamo para consultar esto:",
+        72
+      ],
+      [
+        "¿tenés un minuto? buenas,",
+        32
+      ],
+      [
+        "te contacto por la",
+        20
+      ],
+      [
+        "te contacto por el",
+        16
+      ]
+    ]
+  },
+  "limite": "Conteos y chequeos estructurales; no prueban calidad semántica ni rendimiento."
+}

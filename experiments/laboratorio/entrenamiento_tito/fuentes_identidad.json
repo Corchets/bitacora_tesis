@@ -1,0 +1,74 @@
+[
+  {
+    "id": "identidad_F01",
+    "url": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/como-configurar-la-seguridad-en-whatsapp",
+    "titulo": "¿Cómo configuro la seguridad en WhatsApp?",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "La guía explica el código SMS de registro, el PIN de verificación en dos pasos y los ajustes para proteger la cuenta. Sustenta las familias sintéticas de toma de cuentas y, como contexto legítimo, la autogestión del registro y la seguridad desde la propia aplicación. No describe una práctica legítima de soporte que solicite esos secretos por llamada.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "identidad_F02",
+    "url": "https://www.argentina.gob.ar/noticias/advertencia-sobre-fraudes-y-estafas-vinculadas-programas-sociales",
+    "titulo": "Advertencia sobre fraudes y estafas vinculadas a programas sociales",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "El Ministerio de Desarrollo Social documenta contactos telefónicos, correo y mensajería de personas que se hacen pasar por funcionarios y ofrecen programas o microcréditos para obtener datos personales y bancarios. Sustenta el patrón de falsa gestión de beneficios y solicitud de secretos o dinero; no prueba que cada servicio público use exactamente los procesos dialogados en estas escenas.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "identidad_F03",
+    "url": "https://www.argentina.gob.ar/sssalud/tramites-y-servicios",
+    "titulo": "Trámites, denuncias y consultas",
+    "consulta": "2026-10-02",
+    "uso": "contexto_legitimo",
+    "hallazgo": "La Superintendencia de Servicios de Salud informa que se pueden gestionar trámites digitalmente, pedir turnos para atención presencial y resolver problemas de Mi Argentina mediante su mesa de ayuda. Se usa como contexto de autogestión y consultas legítimas de salud/obra social, sin atribuir requisitos no publicados ni afirmar que toda llamada recibida sea oficial.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "identidad_F04",
+    "url": "https://www.argentina.gob.ar/node/156386",
+    "titulo": "¿Cómo reconozco una página falsa de internet?",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "La guía oficial describe mensajes que se hacen pasar por organismos o redes, incluido el pretexto de una cuenta de Mi Argentina bloqueada para obtener datos, además de enlaces a páginas imitadas y promociones. Sustenta las familias de trámites y beneficios suplantados; las frases y procedimientos específicos de cada ejemplo son sintéticos.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "identidad_F07",
+    "url": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/como-me-protejo-al-utilizar-un-codigo-qr",
+    "titulo": "¿Cómo me protejo al utilizar un código QR?",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "La guía oficial explica riesgos de QRishing y QRLjacking, incluido el secuestro de inicios de sesión de servicios que usan QR como WhatsApp Web; también menciona páginas falsas que solicitan datos. Fundamenta las familias de sesiones y QR de promociones. Las escenas dialogadas son originales sintéticas y no describen un procedimiento oficial ni reproducen transcripciones.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "identidad_F08",
+    "url": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/que-hago-si-me-piden-datos-personales-por-telefono",
+    "titulo": "¿Qué hago si me piden mis datos personales por teléfono?",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "La guía oficial describe el vishing como intento telefónico de obtener información personal, financiera y contraseñas mediante engaño. Respalda el patrón general de solicitudes de claves/datos por llamada, no las frases ni supuestos procedimientos particulares inventados en los ejemplos.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "identidad_F05",
+    "url": "https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/que-son-los-concursos-en-redes-sociales",
+    "titulo": "¿Qué son los concursos en redes sociales?",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "La guía oficial, actualizada en junio de 2026, describe concursos falsos difundidos por redes que invitan a compartir publicaciones, ingresar datos personales o número de teléfono y seguir enlaces. Respalda el contexto de promociones y concursos como pretexto; los diálogos creados acá no son citas ni reproducen un proceso oficial.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  },
+  {
+    "id": "identidad_F06",
+    "url": "https://www.argentina.gob.ar/sites/default/files/ciberestafas.pdf",
+    "titulo": "Ciberestafas y reclamos",
+    "consulta": "2026-10-02",
+    "uso": "patron_de_maniobra",
+    "hallazgo": "El material oficial explica SIM swapping como técnica de ingeniería social para tomar control de una línea y recomienda alertar a la empresa ante reposiciones no solicitadas. Se usa solo como respaldo del riesgo general de línea/SIM, no como descripción de un trámite telefónico particular.",
+    "licencia_textos": "no importados: ejemplos originales sintéticos"
+  }
+]

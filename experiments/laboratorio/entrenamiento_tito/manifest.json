@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "issue": 41,
+  "fecha": "2026-10-02",
+  "seed": null,
+  "generacion": "Modelos y despachos en orquestacion.json; textos materializados por familia.",
+  "split": null,
+  "uso": "entrenamiento_desarrollo",
+  "entrada_sha256": {
+    "exclusiones.json": "2b7f88b39f10153762a192b6d50d62026655ba288253f27317fc967656a99b24",
+    "familias_banco.json": "9fa80769ba894ecbb8b6a22a7f6244e9c306894c3956996a43c7276ce031b3fc",
+    "familias_cotidiano.json": "57385ea33150cd56e980f8ef0b60f38d94f8b942cbe91d94014a40e7fc5e28eb",
+    "familias_identidad.json": "90fb0735ea385225e78e6d5142d1e2bf43f9b522bb681ca8f4a753aa9bda52ca",
+    "fuentes_banco.json": "18ed8b9a89a4d3f45389f9a711c6a47df59fed3c3c020ee422ba05aeb49aa3bc",
+    "fuentes_cotidiano.json": "fcb4bab9744593c4c79cce94d7a6d0d4cf5706133d3a023abb09e886f790be84",
+    "fuentes_identidad.json": "db8f9a079a06a0ec3354e4d84f125d0cdd98acaef62b373d65b22a3687de10c2"
+  },
+  "codigo_sha256": "aa35c5e0e5361cd634b098a40c2c76433f9d51b9bbb439c3bb0648d9f88f3ed6",
+  "configuracion": {
+    "lotes": [
+      "banco",
+      "identidad",
+      "cotidiano"
+    ],
+    "familias_por_lote": 100,
+    "textos_por_familia": 20
+  },
+  "fuentes_registradas": 20,
+  "urls_fuente_unicas": 17,
+  "cobertura": "cobertura.json",
+  "evaluacion": "No ejecutada; no hay test ni métricas del detector."
+}

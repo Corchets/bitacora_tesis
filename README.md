@@ -24,7 +24,7 @@ La clave del problema es advertir al usuario en tiempo real antes de que realice
 
 ## 2. Estado actual del proyecto
 
-- **Gestión activa:** El backlog vivo se administra en **GitHub Issues** bajo el [método de trabajo](docs/gestion/METODO-DE-TRABAJO.md). Para el avance semanal, ver la [bitácora](docs/gestion/bitacora/2026-09-semana-04.md); para decisiones abiertas, el [mapa](docs/gestion/MAPA-DECISIONES.md).
+- **Gestión activa:** El backlog vivo se administra en **GitHub Issues** bajo el [método de trabajo](docs/gestion/METODO-DE-TRABAJO.md). Para el avance semanal, ver la [bitácora](docs/gestion/bitacora/2026-10-semana-01.md); para decisiones abiertas, el [mapa](docs/gestion/MAPA-DECISIONES.md).
 
 ---
 
@@ -36,6 +36,9 @@ Toda la documentación vive dentro de [`docs/`](docs/) organizada por áreas sin
 bitacora_tesis/
 ├── README.md                      # Esta guía de entrada y mapa para humanos
 ├── AGENTS.md                      # Router operativo e instrucciones para asistentes de IA
+├── experiments/
+│   └── laboratorio/
+│       └── entrenamiento_tito/    # Textos argentinos sintéticos, fuentes y exportación para #41
 ├── docs/
 │   ├── GLOSARIO.md                # Términos técnicos con sentido preciso (T_A, T_R, T_C, WER, etc.)
 │   ├── propuesta/
@@ -70,3 +73,6 @@ bitacora_tesis/
 │   └── tesis/
 │       └── ESQUELETO-INFORME.md   # Estructura capitular e índice orientativo de páginas
 ```
+
+El [banco de entrenamiento de Tito](experiments/laboratorio/entrenamiento_tito/README.md)
+documenta sus fuentes, filtros, reproducción y uso con el clasificador de esta rama.

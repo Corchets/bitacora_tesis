@@ -1,0 +1,506 @@
+{
+  "skill": "orchestration",
+  "cli": "/home/chato/.config/orca/linux-orca-cli-shim/orca",
+  "run": "run_d5449a0042dd",
+  "fecha_local": "2026-10-02",
+  "base_commit": "a5eca9696512d82941552f6c6cf331a0e2e24eae",
+  "rama": "nacho1706/feature-training-data",
+  "sin_commit": true,
+  "workers": [
+    {
+      "task": "task_fd20c028d5fd",
+      "dispatch": "ctx_c4843ca012af",
+      "outcome": "completed",
+      "retry_of": "ctx_63fb9349e19a",
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T01:17:41.027Z"
+    },
+    {
+      "task": "task_c1407a0cd793",
+      "dispatch": "ctx_d5fdc7b6b852",
+      "outcome": "completed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T01:06:35.852Z"
+    },
+    {
+      "task": "task_fd20c028d5fd",
+      "dispatch": "ctx_63fb9349e19a",
+      "outcome": "failed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:56:19.616Z"
+    },
+    {
+      "task": "task_c0e48f8108eb",
+      "dispatch": "ctx_cf18c4861b8c",
+      "outcome": "failed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:48:37.359Z"
+    },
+    {
+      "task": "task_813ca120d7a3",
+      "dispatch": "ctx_d2b51129c676",
+      "outcome": "completed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:43:05.855Z"
+    },
+    {
+      "task": "task_85ce94b2f7a6",
+      "dispatch": "ctx_7cae57aafcbb",
+      "outcome": "completed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:47:56.776Z"
+    },
+    {
+      "task": "task_1fbcf26a9810",
+      "dispatch": "ctx_23174c7d844c",
+      "outcome": "completed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:48:20.550Z"
+    },
+    {
+      "task": "task_b97e681f333c",
+      "dispatch": "ctx_e0dbf239a0f7",
+      "outcome": "failed",
+      "retry_of": "ctx_b6e35e048952",
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:34:42.077Z"
+    },
+    {
+      "task": "task_7429ab3f651d",
+      "dispatch": "ctx_b0ef6391ca44",
+      "outcome": "completed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:37:13.366Z"
+    },
+    {
+      "task": "task_b97e681f333c",
+      "dispatch": "ctx_b6e35e048952",
+      "outcome": "failed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:33:29.250Z"
+    },
+    {
+      "task": "task_f64337f0c778",
+      "dispatch": "ctx_8ffca6316606",
+      "outcome": "failed",
+      "retry_of": null,
+      "terminal_state": "released",
+      "launch": {
+        "requested": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        },
+        "effective": {
+          "agent": "codex",
+          "model": "gpt-6-luna",
+          "effort": "medium"
+        }
+      },
+      "modo": {
+        "mode": "structured",
+        "preferred": "structured",
+        "reason": "user_default",
+        "detail": "Started a structured chat session worker, the default for new agent tabs in your settings."
+      },
+      "completed_at_utc": "2026-10-03T00:35:03.225Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_f64337f0c778",
+      "parent": null,
+      "titulo": "Tito: fuentes y 1000 textos banco/pagos",
+      "status": "failed",
+      "spec": "Issue #41. El usuario autorizó producir muchos ejemplos para alimentar el encoder de Tito en esta rama y una carpeta nueva experiments/laboratorio/entrenamiento_tito/. No reutilizar casos, resultados ni semillas viejas. No es un proyecto de anotación de conversaciones. Leer AGENTS.md y docs/gestion/MAPA-DECISIONES.md; no cerrar D07/D08/D09. No commits, no GitHub mensajes, no tocar gestión/documentos/otros archivos. Trabajar en esta misma carpeta compartida; no delegar a otros agentes. El coordinador integra y valida.\nOBJETIVO: búsqueda de fuentes primarias argentinas + generación de banco nativo argentino de frases y fragmentos autosuficientes, ficticios, útiles para clasificador binario estafa/legitima.\nCONTRATO: un JSON UTF-8 listado de 100 familias EXACTAS, 50 estafa y 50 legitima, cada familia con 10 textos DIFERENTES escritos explícitamente: 1000 textos base sustantivos. No llenar el volumen con prefijos, nombres, montos ni puntuación. Cada familia: {\"id\":\"banco_001\", \"tema\":\"slug\", \"etiqueta\":\"estafa\"|\"legitima\", \"fuentes\":[\"banco_F01\"], \"textos\":[10 strings]}. Las diez versiones deben variar formulación, orden, explicitud o contexto, siempre sosteniendo etiqueta. 6 a 65 palabras cada texto. 100 familias distintas en acciones/contextos; familias relacionadas podrán agruparse luego, no inventar independencia estadística.\nIdioma final exclusivamente español argentino natural: voseo cuando corresponda, sin exagerar che/boludo ni español peninsular (vosotros, vale, ordenador, móvil), ni inglés salvo nombres comunes WhatsApp/CBU/alias. Frases formales argentinas también. No datos reales, teléfonos, URLs peligrosas, DNI completos ni números de cuenta. No sugerir que autoridad, urgencia, códigos o transferencias aislados son fraude. Pedidos riesgosos deben traer contexto de engaño/suplantación externo y destino/control del atacante; evitar etiquetar como legítima una conducta insegura solo porque dice banco. Negativos cotidianos amplios y difíciles con vocabulario compartido, sin hacer que todos expliquen 'no te pido claves'. Un fragmento legítimo puede describir/denunciar una estafa: incluir quién habla y qué hace. Nada de textos ambiguos aislados tipo 'pasamelo' sin antecedente. No etiquetas técnicas multilabel ni marcas de tiempo. No prometer que datos sintéticos prueban mejora.\nINVESTIGACIÓN: usar búsquedas web y abrir al menos 3 páginas de fuentes primarias argentinas pertinentes (organismos/instituciones con material verificable); fuentes pueden compartirse entre lotes. Se pueden consultar fuentes inglesas pero NO copiar/traducir datasets sin licencia comprobada. Preferir todos textos originales nativos; registrar que fuentes sustentan maniobras, NO que son transcripciones reales. Archivo fuentes_banco.json: lista {id,url,titulo,consulta:\"2026-10-02\",uso:\"patron_de_maniobra\"|\"contexto_legitimo\",hallazgo,licencia_textos:\"no importados: ejemplos originales sintéticos\"}. Fecha consulta si reloj local cambia usar fecha absoluta real. Archivo informe_banco.md: fuentes comprobadas, cobertura y limitaciones, counts reales. Fuente verdad ejemplos el JSON; scripts auxiliares solo /tmp, no crear carpetas.\nACEPTACIÓN: Python json.load, 100 familias, 50/50, 10 versiones/familia, strings distintas y no vacías; inspección semántica y lingüística de todas las familias; fuentes reales con URLs abiertas, no atribuciones inventadas. Coordinar por inbox antes de worker_done. Reportar éxito solo con archivos completos, no un generador que promete mil pero entrega cien.\n\nTARGET/OWNERSHIP: editar únicamente experiments/laboratorio/entrenamiento_tito/familias_banco.json, fuentes_banco.json e informe_banco.md en esa misma carpeta. Título: Banco, billeteras y pagos. Límites: banco/billetera, token/clave/código de autenticación, débito/crédito, préstamo, inversión, devolución, transferencia, cuenta puente, bloqueo ficticio, soporte remoto o pantalla compartida ligados a banco. Negativos: compras, pagar servicios, devolución real por canal iniciado por cliente, transferencias a conocidos con contexto, autogestión autenticación, consultas comerciales, errores de pago, negociación de deudas sin pedir secretos. No hacer familias de WhatsApp ni falso familiar (otros workers).\n",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "failed",
+        "messageId": "msg_9a09306d0874",
+        "reportedBy": "structworker_83c4ad1f-6f77-41bb-b628-d9811edd54c6",
+        "subject": "Investigación completada; banco pendiente",
+        "body": "Verifiqué y abrí cuatro fuentes primarias argentinas, y registré sus URLs, hallazgos y uso previsto en los metadatos de fuentes. No produje familias porque el contrato de 1.000 textos contradice el ajuste posterior a 2.000 y no podía entregar el volumen con la revisión semántica exigida en esta ejecución; el informe deja conteos 0 familias y 0 textos. Queda pendiente resolver qué volumen rige y completar el archivo familias_banco.json.",
+        "completedBy": "structworker_83c4ad1f-6f77-41bb-b628-d9811edd54c6",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/fuentes_banco.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_banco.md"
+        ],
+        "reportPath": null,
+        "completedAt": "2026-10-03T00:35:03.225Z"
+      }
+    },
+    {
+      "id": "task_b97e681f333c",
+      "parent": null,
+      "titulo": "Tito: fuentes y 1000 textos identidad/organismos",
+      "status": "failed",
+      "spec": "Issue #41. El usuario autorizó producir muchos ejemplos para alimentar el encoder de Tito en esta rama y una carpeta nueva experiments/laboratorio/entrenamiento_tito/. No reutilizar casos, resultados ni semillas viejas. No es un proyecto de anotación de conversaciones. Leer AGENTS.md y docs/gestion/MAPA-DECISIONES.md; no cerrar D07/D08/D09. No commits, no GitHub mensajes, no tocar gestión/documentos/otros archivos. Trabajar en esta misma carpeta compartida; no delegar a otros agentes. El coordinador integra y valida.\nOBJETIVO: búsqueda de fuentes primarias argentinas + generación de banco nativo argentino de frases y fragmentos autosuficientes, ficticios, útiles para clasificador binario estafa/legitima.\nCONTRATO: un JSON UTF-8 listado de 100 familias EXACTAS, 50 estafa y 50 legitima, cada familia con 10 textos DIFERENTES escritos explícitamente: 1000 textos base sustantivos. No llenar el volumen con prefijos, nombres, montos ni puntuación. Cada familia: {\"id\":\"identidad_001\", \"tema\":\"slug\", \"etiqueta\":\"estafa\"|\"legitima\", \"fuentes\":[\"identidad_F01\"], \"textos\":[10 strings]}. Las diez versiones deben variar formulación, orden, explicitud o contexto, siempre sosteniendo etiqueta. 6 a 65 palabras cada texto. 100 familias distintas en acciones/contextos; familias relacionadas podrán agruparse luego, no inventar independencia estadística.\nIdioma final exclusivamente español argentino natural: voseo cuando corresponda, sin exagerar che/boludo ni español peninsular (vosotros, vale, ordenador, móvil), ni inglés salvo nombres comunes WhatsApp/CBU/alias. Frases formales argentinas también. No datos reales, teléfonos, URLs peligrosas, DNI completos ni números de cuenta. No sugerir que autoridad, urgencia, códigos o transferencias aislados son fraude. Pedidos riesgosos deben traer contexto de engaño/suplantación externo y destino/control del atacante; evitar etiquetar como legítima una conducta insegura solo porque dice banco. Negativos cotidianos amplios y difíciles con vocabulario compartido, sin hacer que todos expliquen 'no te pido claves'. Un fragmento legítimo puede describir/denunciar una estafa: incluir quién habla y qué hace. Nada de textos ambiguos aislados tipo 'pasamelo' sin antecedente. No etiquetas técnicas multilabel ni marcas de tiempo. No prometer que datos sintéticos prueban mejora.\nINVESTIGACIÓN: usar búsquedas web y abrir al menos 3 páginas de fuentes primarias argentinas pertinentes (organismos/instituciones con material verificable); fuentes pueden compartirse entre lotes. Se pueden consultar fuentes inglesas pero NO copiar/traducir datasets sin licencia comprobada. Preferir todos textos originales nativos; registrar que fuentes sustentan maniobras, NO que son transcripciones reales. Archivo fuentes_identidad.json: lista {id,url,titulo,consulta:\"2026-10-02\",uso:\"patron_de_maniobra\"|\"contexto_legitimo\",hallazgo,licencia_textos:\"no importados: ejemplos originales sintéticos\"}. Fecha consulta si reloj local cambia usar fecha absoluta real. Archivo informe_identidad.md: fuentes comprobadas, cobertura y limitaciones, counts reales. Fuente verdad ejemplos el JSON; scripts auxiliares solo /tmp, no crear carpetas.\nACEPTACIÓN: Python json.load, 100 familias, 50/50, 10 versiones/familia, strings distintas y no vacías; inspección semántica y lingüística de todas las familias; fuentes reales con URLs abiertas, no atribuciones inventadas. Coordinar por inbox antes de worker_done. Reportar éxito solo con archivos completos, no un generador que promete mil pero entrega cien.\n\nTARGET/OWNERSHIP: editar únicamente experiments/laboratorio/entrenamiento_tito/familias_identidad.json, fuentes_identidad.json e informe_identidad.md en esa misma carpeta. Título: WhatsApp, organismos, beneficios y suplantación. Límites: toma de WhatsApp, verificación cuenta/dispositivo, ANSES, salud/vacunas, obra social, subsidios, premios/promociones, empresa de telefonía/servicios, falsos técnicos. Negativos: turnos salud, trámites, uso propio de código/canal iniciado, atención de servicio y autorizaciones ordinarias con contexto. No bancos/transferencias de familiares/compraventa (otros workers).\n",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "failed",
+        "messageId": "msg_d0abe132f42f",
+        "reportedBy": "structworker_a7eebbcb-12ef-4c4a-96c9-8315fadb9cd2",
+        "subject": "Issue #41 bloqueado: banco incompleto",
+        "body": "Leí AGENTS.md, MAPA-DECISIONES.md y METODO-DE-TRABAJO.md, y abrí fuentes primarias argentinas sobre suplantación por WhatsApp, beneficios sociales, ANAC y recomendaciones generales. No generé archivos porque no llegué a producir e inspeccionar semánticamente las 100 familias completas exigidas; dejar un subconjunto habría incumplido el criterio explícito de informar éxito solo con archivos completos. Queda pendiente crear el banco íntegro de 1000 textos y sus metadatos e informe, manteniendo D07/D08/D09 abiertas.",
+        "completedBy": "structworker_a7eebbcb-12ef-4c4a-96c9-8315fadb9cd2",
+        "filesModified": [],
+        "reportPath": null,
+        "completedAt": "2026-10-03T00:34:42.077Z"
+      }
+    },
+    {
+      "id": "task_7429ab3f651d",
+      "parent": null,
+      "titulo": "Tito: fuentes y 1000 textos familia/vida cotidiana",
+      "status": "completed",
+      "spec": "Issue #41. El usuario autorizó producir muchos ejemplos para alimentar el encoder de Tito en esta rama y una carpeta nueva experiments/laboratorio/entrenamiento_tito/. No reutilizar casos, resultados ni semillas viejas. No es un proyecto de anotación de conversaciones. Leer AGENTS.md y docs/gestion/MAPA-DECISIONES.md; no cerrar D07/D08/D09. No commits, no GitHub mensajes, no tocar gestión/documentos/otros archivos. Trabajar en esta misma carpeta compartida; no delegar a otros agentes. El coordinador integra y valida.\nOBJETIVO: búsqueda de fuentes primarias argentinas + generación de banco nativo argentino de frases y fragmentos autosuficientes, ficticios, útiles para clasificador binario estafa/legitima.\nCONTRATO: un JSON UTF-8 listado de 100 familias EXACTAS, 50 estafa y 50 legitima, cada familia con 10 textos DIFERENTES escritos explícitamente: 1000 textos base sustantivos. No llenar el volumen con prefijos, nombres, montos ni puntuación. Cada familia: {\"id\":\"cotidiano_001\", \"tema\":\"slug\", \"etiqueta\":\"estafa\"|\"legitima\", \"fuentes\":[\"cotidiano_F01\"], \"textos\":[10 strings]}. Las diez versiones deben variar formulación, orden, explicitud o contexto, siempre sosteniendo etiqueta. 6 a 65 palabras cada texto. 100 familias distintas en acciones/contextos; familias relacionadas podrán agruparse luego, no inventar independencia estadística.\nIdioma final exclusivamente español argentino natural: voseo cuando corresponda, sin exagerar che/boludo ni español peninsular (vosotros, vale, ordenador, móvil), ni inglés salvo nombres comunes WhatsApp/CBU/alias. Frases formales argentinas también. No datos reales, teléfonos, URLs peligrosas, DNI completos ni números de cuenta. No sugerir que autoridad, urgencia, códigos o transferencias aislados son fraude. Pedidos riesgosos deben traer contexto de engaño/suplantación externo y destino/control del atacante; evitar etiquetar como legítima una conducta insegura solo porque dice banco. Negativos cotidianos amplios y difíciles con vocabulario compartido, sin hacer que todos expliquen 'no te pido claves'. Un fragmento legítimo puede describir/denunciar una estafa: incluir quién habla y qué hace. Nada de textos ambiguos aislados tipo 'pasamelo' sin antecedente. No etiquetas técnicas multilabel ni marcas de tiempo. No prometer que datos sintéticos prueban mejora.\nINVESTIGACIÓN: usar búsquedas web y abrir al menos 3 páginas de fuentes primarias argentinas pertinentes (organismos/instituciones con material verificable); fuentes pueden compartirse entre lotes. Se pueden consultar fuentes inglesas pero NO copiar/traducir datasets sin licencia comprobada. Preferir todos textos originales nativos; registrar que fuentes sustentan maniobras, NO que son transcripciones reales. Archivo fuentes_cotidiano.json: lista {id,url,titulo,consulta:\"2026-10-02\",uso:\"patron_de_maniobra\"|\"contexto_legitimo\",hallazgo,licencia_textos:\"no importados: ejemplos originales sintéticos\"}. Fecha consulta si reloj local cambia usar fecha absoluta real. Archivo informe_cotidiano.md: fuentes comprobadas, cobertura y limitaciones, counts reales. Fuente verdad ejemplos el JSON; scripts auxiliares solo /tmp, no crear carpetas.\nACEPTACIÓN: Python json.load, 100 familias, 50/50, 10 versiones/familia, strings distintas y no vacías; inspección semántica y lingüística de todas las familias; fuentes reales con URLs abiertas, no atribuciones inventadas. Coordinar por inbox antes de worker_done. Reportar éxito solo con archivos completos, no un generador que promete mil pero entrega cien.\n\nTARGET/OWNERSHIP: editar únicamente experiments/laboratorio/entrenamiento_tito/familias_cotidiano.json, fuentes_cotidiano.json e informe_cotidiano.md en esa misma carpeta. Título: Familia, compraventa, trabajo y vida cotidiana. Límites: falso familiar/nuevo número/urgencia, secuestro virtual, retiro de efectivo/cambio de billetes, compraventa/reserva/encomienda/alquiler/trabajo estafas telefónicas. Negativos muchos cotidianos (familia, salud privada, comida, transporte, escuela, laburo, reparaciones, compra/venta real) y difíciles con urgencia, códigos de puerta/reserva, efectivo y transferencias verificadas. No bancos o WhatsApp toma de cuenta/organismos (otros workers).\n",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "succeeded",
+        "messageId": "msg_6a6eda0401ec",
+        "reportedBy": "structworker_99ef7a44-f4bc-4af1-9746-fc7db059a198",
+        "subject": "Issue #41: lote cotidiano materializado",
+        "body": "Materialicé los tres artefactos del lote con 100 familias (50/50) y 2.000 textos únicos, además de cinco fuentes primarias argentinas abiertas y documentadas. La validación encontró 20 textos por familia, 6–65 palabras y cero errores estructurales; las fuentes sostienen patrones, no transcripciones, y el informe explicita que son 100 marcos semánticos con realizaciones sintéticas relacionadas. Queda para integración la revisión del coordinador; D07, D08 y D09 permanecen abiertos y no se tocaron archivos de gestión.",
+        "completedBy": "structworker_99ef7a44-f4bc-4af1-9746-fc7db059a198",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/familias_cotidiano.json",
+          "experiments/laboratorio/entrenamiento_tito/fuentes_cotidiano.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_cotidiano.md"
+        ],
+        "reportPath": null,
+        "completedAt": "2026-10-03T00:37:13.365Z"
+      }
+    },
+    {
+      "id": "task_1fbcf26a9810",
+      "parent": "task_f64337f0c778",
+      "titulo": "Tito banco: etapa 1, 50 familias composicionales",
+      "status": "completed",
+      "spec": "Target: experiments/laboratorio/entrenamiento_tito/. Issue #41: producir muchos ejemplos para alimentar Tito en español argentino natural. Usuario autorizó carpeta nueva y orquestación con GPT-6 Luna medium. Leer AGENTS.md y MAPA-DECISIONES. No decisiones finales D07/D08/D09, no Git commits, no otros archivos/gestión/Slack/GitHub, no delegar, sin casos ni resultados existentes.\nChange: esta es UNA ETAPA pequeña y completa de producción composicional: 50 familias, 25 estafa y 25 legitima, cada una 20 realizaciones materializadas mediante Python. No hay límite de tiempo artificial; trabajar en tandas internas y persistir. Está expresamente permitida composición de 5 contextos y 4 acciones/expresiones específicas por familia. NO se piden mil redactados manualmente ni revisión humana exhaustiva. Se pide coherencia de los bloques y su combinación y conteos honestos (50 marcos, 1000 realizaciones; no 1000 escenarios independientes).\nFormato archivo JSON listado [{\"id\":\"banco_001\", \"tema\":\"slug\", \"etiqueta\":\"estafa\"|\"legitima\", \"fuentes\":[\"banco_F01\"], \"textos\":[20 strings]}]. IDs banco_001 a banco_050. 6–65 palabras por texto, naturales, autosuficientes. Tandas de 10 familias, materializar JSON final, no anunciar fallo por tamaño estimado sin intentar escribir.\nMUY IMPORTANTE: textos deben ser cosas que alguien DIRÍA EN UNA LLAMADA, frases y fragmentos de conversación argentinos; NO narración de manual como 'un desconocido inventa/pretexta una deuda'. No meter en estafa etiquetas explícitas 'falso', 'estafador', 'inventa', 'suplantación', 'bajo control del atacante'; eso da respuesta al modelo y no sirve. Positivos: voz del interlocutor que pide acción riesgosa y contexto concreto suficiente (se presenta como soporte/banco/familiar sin verificación, pide secreto para usar él, pago externo injustificado, coacción). Negativos: charlas ordinarias y difíciles, transferencias/códigos con contexto de autogestión/contacto conocido/verificación independiente, sin hacerlos todos con frases 'no te pido...'. No convertir alerta educativa/cita de fraude pasada en positiva; si incluyes negativos de denuncia deben quedar claros. No 'pasamelo' sin antecedente.\nArgentino natural con voseo/usted; nada peninsular, sin jerga exagerada ni inglés salvo nombres propios comunes. No teléfonos/URLs/DNI/datos reales. Veinte variantes deben variar algo más que nombres/montos/prefijos; composición específica sí, coletillas genéricas repetidas como principal diversidad no. Scripts auxiliares /tmp; fuente final es JSON. No simular ASR, no crear test ni medir modelo.\nInvestigación: abrir 3 páginas primarias argentinas pertinentes si no hay fuentes existentes verificadas. Archivo fuentes_banco.json listado [{id,url,titulo,consulta:\"2026-10-02\",uso:\"patron_de_maniobra\"|\"contexto_legitimo\",hallazgo,licencia_textos:\"no importados: ejemplos originales sintéticos\"}]. Sustentan patrones, no son transcripciones de fuente ni prácticas oficiales legítimas inventadas. Verificar la página completa. Informe_banco.md: conteos actuales, fuentes y límites claros.\nOwnership: ÚNICAMENTE familias_banco.json, fuentes_banco.json, informe_banco.md. Los demás agentes editan otros lotes; coordinador integra. Observable acceptance: json.load, 50 familias 25/25 y 20 textos distintos por familia, longitudes 6–65, muestra de todas familias coherente, idioma argentino; fuentes existentes. Después otra etapa agregará 50, por ahora entregar ESTA etapa completa. Revisar inbox antes worker_done; enviar resumen con archivos reales y outcome. No pedir confirmación del volumen ni limitar a dos ejemplos; contrato ya autorizado y manejable por bloques.\n\nCobertura de esta etapa: Banco/billetera/clave/token/cuenta/transferencia/débito/crédito/préstamo/inversión/devolución/acceso remoto bancario. Negativos comerciales/cotidianos financieros, autogestión, pagos, compras, deudas genuinas con contexto. Excluir WhatsApp/organismos/familia estafas porque otros lotes.",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "succeeded",
+        "messageId": "msg_66b25649aff3",
+        "reportedBy": "structworker_575184b1-ebcb-4088-8827-1c672694c6c3",
+        "subject": "Lote banco completo: 50 familias",
+        "body": "Produje el lote banco con 50 familias (25 estafa y 25 legitima) y 1.000 realizaciones combinatorias, junto con fuentes verificadas e informe actualizado. La validación confirmó IDs consecutivos, 20 textos únicos por familia y 6–65 palabras por texto; corregí las ambigüedades semánticas señaladas en seis familias. No quedan tareas de este lote; el material representa marcos sintéticos y no 1.000 escenarios independientes.",
+        "completedBy": "structworker_575184b1-ebcb-4088-8827-1c672694c6c3",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/familias_banco.json",
+          "experiments/laboratorio/entrenamiento_tito/fuentes_banco.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_banco.md"
+        ],
+        "reportPath": null,
+        "completedAt": "2026-10-03T00:48:20.550Z"
+      }
+    },
+    {
+      "id": "task_85ce94b2f7a6",
+      "parent": "task_b97e681f333c",
+      "titulo": "Tito identidad: etapa 1, 50 familias composicionales",
+      "status": "completed",
+      "spec": "Target: experiments/laboratorio/entrenamiento_tito/. Issue #41: producir muchos ejemplos para alimentar Tito en español argentino natural. Usuario autorizó carpeta nueva y orquestación con GPT-6 Luna medium. Leer AGENTS.md y MAPA-DECISIONES. No decisiones finales D07/D08/D09, no Git commits, no otros archivos/gestión/Slack/GitHub, no delegar, sin casos ni resultados existentes.\nChange: esta es UNA ETAPA pequeña y completa de producción composicional: 50 familias, 25 estafa y 25 legitima, cada una 20 realizaciones materializadas mediante Python. No hay límite de tiempo artificial; trabajar en tandas internas y persistir. Está expresamente permitida composición de 5 contextos y 4 acciones/expresiones específicas por familia. NO se piden mil redactados manualmente ni revisión humana exhaustiva. Se pide coherencia de los bloques y su combinación y conteos honestos (50 marcos, 1000 realizaciones; no 1000 escenarios independientes).\nFormato archivo JSON listado [{\"id\":\"identidad_001\", \"tema\":\"slug\", \"etiqueta\":\"estafa\"|\"legitima\", \"fuentes\":[\"identidad_F01\"], \"textos\":[20 strings]}]. IDs identidad_001 a identidad_050. 6–65 palabras por texto, naturales, autosuficientes. Tandas de 10 familias, materializar JSON final, no anunciar fallo por tamaño estimado sin intentar escribir.\nMUY IMPORTANTE: textos deben ser cosas que alguien DIRÍA EN UNA LLAMADA, frases y fragmentos de conversación argentinos; NO narración de manual como 'un desconocido inventa/pretexta una deuda'. No meter en estafa etiquetas explícitas 'falso', 'estafador', 'inventa', 'suplantación', 'bajo control del atacante'; eso da respuesta al modelo y no sirve. Positivos: voz del interlocutor que pide acción riesgosa y contexto concreto suficiente (se presenta como soporte/banco/familiar sin verificación, pide secreto para usar él, pago externo injustificado, coacción). Negativos: charlas ordinarias y difíciles, transferencias/códigos con contexto de autogestión/contacto conocido/verificación independiente, sin hacerlos todos con frases 'no te pido...'. No convertir alerta educativa/cita de fraude pasada en positiva; si incluyes negativos de denuncia deben quedar claros. No 'pasamelo' sin antecedente.\nArgentino natural con voseo/usted; nada peninsular, sin jerga exagerada ni inglés salvo nombres propios comunes. No teléfonos/URLs/DNI/datos reales. Veinte variantes deben variar algo más que nombres/montos/prefijos; composición específica sí, coletillas genéricas repetidas como principal diversidad no. Scripts auxiliares /tmp; fuente final es JSON. No simular ASR, no crear test ni medir modelo.\nInvestigación: abrir 3 páginas primarias argentinas pertinentes si no hay fuentes existentes verificadas. Archivo fuentes_identidad.json listado [{id,url,titulo,consulta:\"2026-10-02\",uso:\"patron_de_maniobra\"|\"contexto_legitimo\",hallazgo,licencia_textos:\"no importados: ejemplos originales sintéticos\"}]. Sustentan patrones, no son transcripciones de fuente ni prácticas oficiales legítimas inventadas. Verificar la página completa. Informe_identidad.md: conteos actuales, fuentes y límites claros.\nOwnership: ÚNICAMENTE familias_identidad.json, fuentes_identidad.json, informe_identidad.md. Los demás agentes editan otros lotes; coordinador integra. Observable acceptance: json.load, 50 familias 25/25 y 20 textos distintos por familia, longitudes 6–65, muestra de todas familias coherente, idioma argentino; fuentes existentes. Después otra etapa agregará 50, por ahora entregar ESTA etapa completa. Revisar inbox antes worker_done; enviar resumen con archivos reales y outcome. No pedir confirmación del volumen ni limitar a dos ejemplos; contrato ya autorizado y manejable por bloques.\n\nCobertura de esta etapa: WhatsApp/toma de cuentas/ANSES/Salud/vacunas/obra social/beneficios/premios/servicios/telefonía/falso técnico. Negativos salud/turnos/trámites y servicios reales con contexto, códigos de autogestión, conversación cotidiana con vocabulario compartido. No bancos ni falso familiar/compraventa.",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "succeeded",
+        "messageId": "msg_6e368df409bc",
+        "reportedBy": "structworker_e698a3e2-128a-4433-a445-7eedd0085200",
+        "subject": "Primera etapa identidad materializada y validada",
+        "body": "Produje las 50 familias de identidad y sus 1.000 realizaciones sintéticas; incorporé la revisión del coordinador para balancear voces presentes y variar pedidos indirectos en ambas clases. La validación encontró 25 ejemplos por etiqueta, 20 textos distintos por familia, longitudes de 17–35 palabras y cuatro fuentes oficiales verificadas, con sus límites documentados. Queda para el coordinador integrar esta etapa con los demás lotes; D07, D08 y D09 permanecen abiertas.",
+        "completedBy": "structworker_e698a3e2-128a-4433-a445-7eedd0085200",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/familias_identidad.json",
+          "experiments/laboratorio/entrenamiento_tito/fuentes_identidad.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_identidad.md"
+        ],
+        "reportPath": null,
+        "completedAt": "2026-10-03T00:47:56.776Z"
+      }
+    },
+    {
+      "id": "task_813ca120d7a3",
+      "parent": "task_7429ab3f651d",
+      "titulo": "Tito cotidiano: reescribir relatos como palabras de llamadas",
+      "status": "completed",
+      "spec": "Target y Ownership: SOLO familias_cotidiano.json e informe_cotidiano.md en experiments/laboratorio/entrenamiento_tito/; fuentes_cotidiano.json leer y preservar. Issue #41. Usuario pidió muchos ejemplos argentinos para alimentar Tito, nueva carpeta y GPT-6 Luna medium. Leer AGENTS y MAPA-DECISIONES; no commits ni otros archivos ni casos/resultados viejos; no delegar.\nProblema observado: el banco actual son relatos en tercera persona: «un supuesto médico dice... inventa... bajo control del llamante...». Eso NO sirve al encoder que lee PALABRAS DE UNA LLAMADA: revela la etiqueta por narración. REESCRIBIR todo a discurso directo/plausible fragmento de llamada argentina, NO simple sustitución del prefijo ni descripción narrativa. No 'falso', 'estafador', 'inventa', 'supuesto', 'maniobra', 'víctima' en los positivos como voz externa que revela clase. Ejemplo directo estafa: «Mamá, tengo otro número. Mandame plata a la cuenta de un amigo ahora; no llames al de siempre porque se rompió». Legítimo: «Mamá, estoy usando el teléfono de Ana. Llamame al número que tenés agendado antes de transferirme lo del alquiler». Otro legítimo genuino: «El código del portón cambió; cuando pases a buscar la bici avisame y te abro». Positivos siempre contexto suficiente de pedido engañoso/externo; negativos cotidianos no todos se defienden de estafas.\nMantener 100 familias (50 estafa y 50 legitima), cada una20 textos distintos (2000 realizaciones). PERMITIDA COMPOSICIÓN EN PYTHON de bloques particulares por familia (cinco contextos de enunciación x cuatro pedidos/respuestas compatibles). No es escritura manual independiente de2000 textos ni revisión humana de todos; revisar los marcos/bloques y materializar JSON completo. Diferencias reales de formulación y contenido, no nombres/montos/puntuación/muletillas. 6–65 palabras por texto, voseo/usted argentinos naturales, sin exagerar jerga ni inglés ni peninsular ni datos reales ni URLs ni números largos. IDs y campos actuales preservados; ver preparar.py chequeos de normalización y fuente. Trabajar por tandas internas hasta completar, sin límite artificial de tiempo y sin afirmar imposible por volumen. Puedes usar los marcos semánticos actuales como guía, reescribir frases coherentes de quién pide y escucha. No repetir narrativa con código combinatorio; generar frases en primera/segunda persona.\nObservable acceptance: JSON100/2000, 20 distintos incluso sin puntuación/tildes por familia, textos realmente dichos durante llamadas; muestra primera/última familia coherente, informe explica marcos versus realizaciones sintéticas composicionales, revisión real y límites. No cierra D07/08/09. Leer inbox antes worker_done y reportar evidence/archivos reales, no éxito parcial.",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "succeeded",
+        "messageId": "msg_13ed954f4b13",
+        "reportedBy": "structworker_69005824-88bc-4bae-86ca-73dd4b57d71f",
+        "subject": "Issue #41: cotidiano reescrito",
+        "body": "Reescribí las 100 familias como fragmentos de llamada en discurso directo y actualicé el informe para describir el diseño composicional y sus límites. La validación del lote cotidiano dio 2.000 textos, 50 familias por etiqueta, cero errores de esquema/longitud/duplicados normalizados y la fuente existente quedó preservada. Queda revisión cruzada humana antes de usarlo en evaluación; D07, D08 y D09 siguen abiertas.",
+        "completedBy": "structworker_69005824-88bc-4bae-86ca-73dd4b57d71f",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/familias_cotidiano.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_cotidiano.md"
+        ],
+        "reportPath": null,
+        "completedAt": "2026-10-03T00:43:05.855Z"
+      }
+    },
+    {
+      "id": "task_c0e48f8108eb",
+      "parent": "task_813ca120d7a3",
+      "titulo": "Tito cotidiano: corregir ambiguos y agregar negativos difíciles",
+      "status": "failed",
+      "spec": "Target/Ownership: solo familias_cotidiano.json e informe_cotidiano.md en experiments/laboratorio/entrenamiento_tito/; fuentes leer/preservar. Issue #41, sin commits, otros archivos, delegación ni casos/resultados viejos. Leer MAPA-DECISIONES; no cerrar D07/08/09. Worker GPT-6 Luna medium.\nCorrección SEMÁNTICA puntual de la entrega existente: positivos cotidiano_015,020,029,030,031,032,033,035,038,039,043,046,048,049,050 podrían ser comercio o ayuda familiar real. Pedir seña antes de ver un celular, pago al taller particular o transferencia a socio NO basta para etiqueta estafa. Reescribí todas20 variantes de esas familias con engaño/pedido riesgoso explícito en PALABRAS DE LA LLAMADA (pedir clave de cuenta para reservar/devolver; suplantar autoridad para retirar ahorros; familiar nuevo número impide verificación conocida; pagar para cobrar premio no solicitado; presión por mantener en secreto y mentir a entidad). Evitá usar narrativa «falso/inventa/supuesto/estafador/maniobra/víctima» que revela clase. Si el marco no sostiene20 variaciones claras reemplazalo por otra modalidad telefónica. Contexto autosuficiente para la acción, sin clasificar como fraude un pago por adelantado ordinario.\nAdemás cambiar al menos10 familias negativas fáciles por negativos difíciles de vocabulario común: transferencia urgente a familiar CONTACTO CONOCIDO y verificado, seña al vendedor ya visitado, pago a taller por presupuesto aprobado, código de puerta/reserva (distinto a acceso cuenta), pagar encomienda en ventanilla, cambio billetes presencial a cajero reconocido. NO todos negativos 'no te pido claves'; mantener charlas inocentes variadas y registro voseo/usted argentino. Reescribir las20 variantes coherentes, no solo la primera. Quitar rol artificial 'Médico:' en positivos si aparece; las palabras deben ser pronunciadas realmente, las referencias de familia/metadatos guardan contexto, no son palabras del entrenamiento. Dos turnos opcionales con estilo igual entre clases.\nMétodo composicional Python permitido bloques específicos por familia, nada de variaciones solo por nombres/montos/puntuación;100familias50/50,20textos/familia,6–65palabras. No ampliar corpus ni crear un test. Leer preparar.py chequeos. Acceptance: conteos preservados2000, duplicados normalizados cero, semántica corregida de TODAS variantes indicadas, primera+última de familias afectadas revisadas; informe describe exactamente qué se corrigió y límites. Reportá worker_done una vez, leer inbox antes; persistir sin decir que500textos obligan a escritura manual. Guardar JSONfinal completo.",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "failed",
+        "messageId": "msg_1bbe89e7b526",
+        "reportedBy": "structworker_a5f74cbb-3fa8-47eb-acb2-0a34553ca28d",
+        "subject": "Cotidiano ajustado con limitaciones semánticas pendientes",
+        "body": "Reescribí familias positivas señaladas y diez familias negativas, manteniendo 100 familias, 2.000 textos, cero duplicados normalizados y longitudes de 10–40 palabras; actualicé el informe y quité el rol Médico. La validación de estructura local pasa, pero el chequeo completo no puede ejecutarse porque faltan los lotes banco e identidad, y una revisión encontró todavía algunas variantes con formulación editorial o engaño insuficientemente específico. Queda una revisión semántica completa de esas variantes y la validación integrada cuando los otros lotes estén disponibles.",
+        "completedBy": "structworker_a5f74cbb-3fa8-47eb-acb2-0a34553ca28d",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/familias_cotidiano.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_cotidiano.md"
+        ],
+        "reportPath": null,
+        "completedAt": "2026-10-03T00:48:37.359Z"
+      }
+    },
+    {
+      "id": "task_fd20c028d5fd",
+      "parent": "task_85ce94b2f7a6",
+      "titulo": "Tito identidad: etapa 2, ampliar a 2000 textos",
+      "status": "completed",
+      "spec": "Target/Ownership SOLO familias_identidad.json, fuentes_identidad.json e informe_identidad.md en experiments/laboratorio/entrenamiento_tito/. Issue #41, usuario autorizó carpeta y miles de datos argentinos, GPT-6 Luna medium. Leer AGENTS y MAPA-DECISIONES. Sin commits, delegación, otros documentos ni casos/resultados viejos. D07/08/09 abiertas.\nEtapa2: sumar50familias NUEVAS (identidad_051–100),25estafa25legitima,20realizaciones cada una. Partir de las50actuales, PRESERVARLAS (ya revisadas y concorrecciones), JSONfinal100 familias50/50,2000textos. Fuenteverdad familiasJSON, scripts auxiliares/tmp. Generación composicional permitida 5contextos x4acciones compatibles ESPECÍFICOS por familia. No se pide escritura manual de1000independientes ni revisión humana exhaustiva. Persistir por tandas pequeñas sin plazo artificial. Cada texto6–65palabras, distinto incluso sin caja/tildes/puntuación, frases reales de llamada en voseo/usted argentino natural, no lenguaEspaña/inglés/caricatura; no datos reales URLs/correos/numeroslargo.\nCobertura COMPLEMENTARIA: leer temasactuales y no duplicar. Variar pedidos indirectos de números/dígitos SMS sin decir «código», QR o dispositivo para tomarcuenta, claves de dispositivos vs acceso propio, engaños ligados a turnos/beneficios/promociones/locales/telefonía; contexto suficiente cada fragmento, no saludoetiquetado porintenciónfutura. PositiveNO descripción «falso/supuesto/inventa/estafador/víctima» ni pagoordinario como fraudepor urgencia/cuentapersonal. Si tema no tiene señales claras elegirotro. Las solicitudes de datos meramente de contacto tampoco son por sífraude.\nNegativos nuevos MUYdiversos y actuales: autorizaciones y números de turno/pedido, transferencias reales porprestación acordada, urgencia médica/servicioreal, intercambiofamilia/compañeros sinjergaexagerada, autogestióncódigo/PIN en appabierta porusuario, ayudaremota técnica solicitada yconocida que no accedea cuentasbancarias. Deben mencionar contexto legítimosuficiente, nofrases ambiguaspeladas. No todos negativos «no compartasclaves»/«no te pido»/«solo» ni relatos pasados Llamé/Fui/Saqué; al menos20de25negativos nuevos envozpresente como frases dichasdurantellamada, salvo denunciasrecuerdos explícitos útiles. Compartir registros/formas/tiempos en ambasclases. Positivos formal/informal ydistintasaperturas, no siempre «Te llamo de...».\nFuentes: ya4verificadas, usarpara patrones; abriruna primaria adicional si incorporásmaniobras que norespaldan. No copiartranscripciones niimportardatasets. No inventarprácticasoficiales niatribuirejemplosliterales a fuente;hallazgo factualenmetadatos. InformeACTUALIZARaltotal100/2000,nomantenercopiaetapa1y2;conteosfuentes/límites/revisiónhecha reales.\nAcceptance JSONfinal10050/50x20=2000, ids001–100únicos, enlacesfuentes existentes, noduplicadosnormalizados, 6–65palabras, revisiónprimerayúltimatodasNUEVASfamilias ycombinacionesdebloques coherentes. Tomápreparar.py sololectura comocontrato de validación. Revisarinbox antesworker_done y reportarartefactos completos. No detenerporquevolumenestimado: usoPythoncomposicional autorizado.",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "succeeded",
+        "messageId": "msg_aa2553d22d4c",
+        "reportedBy": "structworker_981faba8-eab2-4d79-bc72-c3cad7aec2de",
+        "subject": "Etapa 2 de identidad corregida y validada",
+        "body": "Restauré y conservé las primeras 50 familias originales, corregí léxico y puntuación puntuales, y reescribí las 50 nuevas con contextos hablados y acciones compatibles, además de actualizar el informe. El JSON quedó en 100 familias 50/50 y 2.000 textos; las comprobaciones encontraron 2.000 textos únicos normalizados, IDs y fuentes válidos, 14–35 palabras por texto y ningún identificador prohibido. No se ejecutó entrenamiento ni evaluación del detector; D07, D08 y D09 permanecen abiertas.",
+        "completedBy": "structworker_981faba8-eab2-4d79-bc72-c3cad7aec2de",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/familias_identidad.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_identidad.md"
+        ],
+        "reportPath": "experiments/laboratorio/entrenamiento_tito/informe_identidad.md",
+        "completedAt": "2026-10-03T01:17:41.027Z"
+      }
+    },
+    {
+      "id": "task_c1407a0cd793",
+      "parent": "task_1fbcf26a9810",
+      "titulo": "Tito banco: etapa 2, ampliar a 2000 textos",
+      "status": "completed",
+      "spec": "Target y Ownership: SOLO familias_banco.json, fuentes_banco.json e informe_banco.md en experiments/laboratorio/entrenamiento_tito/. Issue #41. Usuario autorizó miles de ejemplos argentinos, carpeta nueva y GPT-6 Luna medium. Leer AGENTS y MAPA-DECISIONES; sin commits, delegación, otros documentos ni casos/resultados viejos. No cerrar D07/08/09.\nEtapa2: sumar 50 familias NUEVAS banco_051 a banco_100, 25 estafa y25 legitima, cada una20 realizaciones. Leer las50 actuales y PRESERVARLAS: ya revisadas con correcciones de seis familias. JSON final100 familias50/50,2000 textos. Generación composicional en Python PERMITIDA: cinco contextos de enunciación x cuatro pedidos/respuestas ESPECÍFICOS y compatibles por familia. No se exige escritura manual independiente de mil textos ni revisión humana exhaustiva. Persistir por tandas pequeñas, sin límite artificial de tiempo. Textos materializados, fuente final JSON, auxiliares/tmp.\nCobertura complementaria leyendo temas actuales: incluir distintas instituciones/productos locales y formulaciones financieras indirectas, órdenes/pedidos sin las palabras exactas clave/código/transferencia cuando contexto muestra secreto/dinero/acceso; pedir los numeritos que aparecen en SMS, acceso mediante pantalla compartida, ordenar préstamo para cancelar otro, QR/autorización de dispositivo, gastos bancarios/devoluciones/impuestos/seguros falsos con acción crítica. Contexto autosuficiente en6–65palabras. Las llamadas se presentan como de organismo/banco/soporte no iniciado por persona y piden un secreto para que caller lo use; NO meter narración «falso/inventa/estafador/supuesto/víctima/maniobra» que revela etiqueta. Pago a cuenta particular/urgencia/seña solos pueden ser normales: nunca etiquetarlos fraude sin otro pedido/contexto concreto.\nNegativos: al menos15 nuevos difíciles con códigos de reserva/puerta/operación propia iniciada, transferencias urgentes a conocidos ya verificados, recuperar clave ingresándola en app propia, devoluciones de compras comprobadas, pago de préstamo en canal del contrato, atención humana genuina que da información sin obligar a secretos, reclamo de fraude pasado con voz inequívoca de víctima (esta palabra puede aparecer en denuncia legítima). Además charlas comunes argentinas de gastos/negocios/laburo, no todos consejos 'no compartas claves', 'no te pido' o 'solo'. Ambas clases con estilos y tiempos compartidos, presentes y formal/informal sin caricatura; no todos positivos Te llamo de... ni todos negativos Llamé/Fui/Me dijeron. No roles artificiales, no identificadores reales, URLs, correos ni números largos. Evitar voces mezcladas sin indicar cambio de interlocutor.\nFuentes primarias existentes ya verificadas; abrir otra fuente primaria si nuevos patrones lo necesitan, sin importaciones de texto externo ni traducciones sin licencia. Actualizar informe al total final, contar marcos semánticos vs realizaciones relacionadas. Leer preparar.py solo lectura: normaliza caja/tildes/puntuación para duplicados, 20 textos/familia. Acceptance: JSON final100/2000, IDs001–100,50/50, cero duplicados normalizados y contradicciones, enlaces fuentes presentes,6–65palabras, revisadas primera y última de cada nueva familia y coherencia de sus bloques. Revisar inbox antes worker_done y reportar completa esta etapa.",
+      "result": {
+        "provenance": "worker_report",
+        "outcome": "succeeded",
+        "messageId": "msg_491f2631b5fe",
+        "reportedBy": "structworker_cec784f0-fb28-4273-a71b-1c0ef3a775d8",
+        "subject": "Etapa 2 banco completa: 100 familias y 2.000 textos",
+        "body": "Agregué banco_051–banco_100, preservé exactamente las primeras 50 familias y amplié el registro con tres fuentes primarias verificadas; informe y fuentes reflejan los 100 marcos y 2.000 realizaciones. La validación de preparar.py para el lote banco dio cero errores: IDs 001–100, balance 50/50, textos únicos normalizados, cinco contextos por familia nueva, longitudes y enlaces válidos; revisé muestras iniciales y finales y corregí los casos semánticos señalados. Esta etapa queda completa; la integración de otros lotes y la evaluación quedan fuera de este despacho, y D07/D08/D09 siguen abiertas.",
+        "completedBy": "structworker_cec784f0-fb28-4273-a71b-1c0ef3a775d8",
+        "filesModified": [
+          "experiments/laboratorio/entrenamiento_tito/familias_banco.json",
+          "experiments/laboratorio/entrenamiento_tito/fuentes_banco.json",
+          "experiments/laboratorio/entrenamiento_tito/informe_banco.md"
+        ],
+        "reportPath": null,
+        "completedAt": "2026-10-03T01:06:35.852Z"
+      }
+    }
+  ],
+  "integracion": "El coordinador integra, revisa muestras por familia y separa familias excluidas. Los intentos fallidos se conservan en esta trazabilidad; no implican que sus textos estén habilitados para entrenar.",
+  "limite": "La generación es composicional y sintética. La reproducción desde los JSON es determinista; una nueva llamada al LLM puede variar.",
+  "revision_coordinador": {
+    "familias_excluidas": 24,
+    "textos_excluidos": 480,
+    "fuente": "exclusiones.json",
+    "intervenciones": "Recuperación determinista del lote inicial de identidad desde scripts de Luna; verificación de fuentes y sustitución de la referencia de falsificación presencial por UFECRI; filtros conservadores de ambigüedad y voces incompatibles."
+  }
+}
