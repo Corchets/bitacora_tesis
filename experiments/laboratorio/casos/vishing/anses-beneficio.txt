@@ -1,0 +1,8 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing. Espera incendio: REQUEST_SECRET y REQUEST_TRANSFER
+# Fuente: ANSES, noticia oficial de que no pide datos ni claves por telefono. Consulta 2026-09-23. Sin fecha de publicacion en el extracto.
+hablo de anses hay un beneficio extra para cobrar esta semana
+ah no sabia
+para habilitarlo pasame la clave de la seguridad social y el cbu
+eso no lo digo por telefono
+si no me lo das hoy se pierde el pago

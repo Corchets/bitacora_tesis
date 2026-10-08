@@ -20,8 +20,11 @@ sentidos distintos, se define acá.
 | **Familia** | Modalidad amplia, como banco o soporte. Puede contener varias semillas; ver [método del corpus](corpus/METODO-CREACION-CORPUS.md#1-unidad-del-corpus). |
 | **Semilla** | Situación concreta que puede tener distintas interpretaciones. Separación de variantes y particiones pendiente de adoptar en [D08](gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). |
 | **Hard negative** | Llamada legítima deliberadamente parecida a un fraude. Es lo que distingue un sistema útil de uno molesto. |
+| **Sin opinión** | Turno en el que el goteo no tiene evidencia para puntuar el riesgo. No es una estafa ni una llamada que parece legítima, y no cuenta como actualización de `T_A`. Propuesta del spike #29 (2026-09-23); no cierra D09. |
 | **WER** | *Word Error Rate*. Métrica de calidad del ASR. |
 | **Real-time factor (RTF)** | Tiempo de procesamiento dividido por la duración del audio. RTF < 1 = procesa más rápido de lo que escucha. |
+| **Corrida** | Ejecución única del prototipo de laboratorio: entra, procesa un audio autorizado, escribe evidencia y termina. No es un servicio levantado ni la demo Android. |
+| **Replay en streaming** | Alimentar un WAV autorizado al ASR en pedazos ordenados, como si la llamada estuviera llegando. No es transcribir el archivo de un saque ni una llamada en vivo. |
 | **`CAPTURE_AUDIO_OUTPUT`** | Permiso de Android reservado a componentes privilegiados del sistema, necesario para capturar `VOICE_CALL` / `VOICE_UPLINK` / `VOICE_DOWNLINK`. Es la restricción que define el alcance del proyecto. |
 | **ADR** | *Architecture Decision Record*. Registro fechado de una decisión y sus alternativas descartadas. |
 | **UFECI** | Unidad Fiscal Especializada en Ciberdelincuencia (Argentina). |

@@ -1,0 +1,10 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing. Espera incendio: REQUEST_SECRET, REQUEST_TRANSFER y REQUEST_SECURITY_ACTION
+# REQUEST_SECURITY_ACTION sale porque la regla busca el trozo «autoriza».
+# Fuente: ARCA, alerta del 19 de junio de 2025. El aviso documenta correos, y dice que tampoco se contactan por telefono.
+# Este guion telefonico es una transposicion de prueba, no una llamada publicada.
+le habla un inspector hay una deuda de una fiscalizacion y un embargo
+yo no tengo nada de eso
+tiene que autorizar con su clave fiscal o transferir hoy
+no voy a dar la clave
+entonces pasame el alias para frenar el embargo

@@ -1,0 +1,4 @@
+-r requirements-ui.txt
+torch>=2.2,<3
+transformers>=4.40,<6
+scikit-learn>=1.4,<2
