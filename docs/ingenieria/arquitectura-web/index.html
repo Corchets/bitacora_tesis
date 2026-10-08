@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arquitectura — visualización</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%23faf9f6'/%3E%3Cpath d='M2 8h3l2-4 2 8 2-4h3' fill='none' stroke='%2392392c' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="cabecera-texto">
+    <h1 id="titulo-pagina"></h1>
+    <p class="subtitulo" id="subtitulo-pagina"></p>
+  </div>
+  <div class="cabecera-lado">
+    <p class="badge-estado" id="nota-estado"></p>
+    <nav class="nav-principal" aria-label="Páginas de la visualización">
+      <a href="../" class="nav-volver">← Ayuda memoria</a>
+      <span class="nav-actual" aria-current="page">Diagrama de arquitectura</span>
+      <a href="riesgo.html">Simulador de riesgo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="seccion" id="seccion-toggle" aria-labelledby="h-version">
+    <h2 id="h-version" class="sr-only">Versión del detector</h2>
+    <div class="toggle-version" id="toggle-version" role="group" aria-label="Versión del detector"></div>
+    <article class="tarjeta-version" id="tarjeta-version" aria-live="polite"></article>
+  </section>
+
+  <section class="seccion" id="seccion-diagrama" aria-labelledby="h-diagrama">
+    <h2 id="h-diagrama">Diagrama</h2>
+    <p class="ayuda">Pasá el mouse (o el foco) sobre un nodo para el resumen; hacé clic para la ficha completa. Los chips D0x abren la decisión.</p>
+    <div class="lienzo-scroll" tabindex="0" aria-label="Diagrama del pipeline, con scroll horizontal en pantallas angostas">
+      <div class="lienzo" id="lienzo">
+        <svg class="capa-aristas" id="aristas" aria-hidden="true"></svg>
+      </div>
+    </div>
+    <ul class="leyenda" id="leyenda" aria-label="Referencia de capas"></ul>
+  </section>
+
+  <section class="seccion" id="seccion-versiones" aria-labelledby="h-versiones">
+    <h2 id="h-versiones">Versiones del detector</h2>
+    <div class="grilla-2" id="tarjetas-versiones"></div>
+  </section>
+
+  <section class="seccion" id="seccion-gamas" aria-labelledby="h-gamas">
+    <h2 id="h-gamas">Gamas de hardware</h2>
+    <p class="nota" id="gamas-nota"></p>
+    <div class="tabla-scroll"><table id="tabla-gamas"></table></div>
+    <p class="nota" id="gamas-regla"></p>
+  </section>
+
+  <section class="seccion" id="seccion-mediciones" aria-labelledby="h-mediciones">
+    <h2 id="h-mediciones">Mediciones: marco vs laboratorio</h2>
+    <p class="nota" id="mediciones-nota"></p>
+    <div class="tabla-scroll"><table id="tabla-mediciones"></table></div>
+  </section>
+
+  <section class="seccion" id="seccion-metricas" aria-labelledby="h-metricas">
+    <h2 id="h-metricas">Métricas y marcas temporales</h2>
+    <div id="bloque-metricas"></div>
+  </section>
+
+  <section class="seccion" id="seccion-taxonomia" aria-labelledby="h-taxonomia">
+    <h2 id="h-taxonomia">Taxonomía 6+6</h2>
+    <p class="nota" id="taxonomia-nota"></p>
+    <div class="grilla-2" id="taxonomia-capas"></div>
+  </section>
+
+  <section class="seccion" id="seccion-avisos" aria-labelledby="h-avisos">
+    <h2 id="h-avisos">Avisos: escalera y mockups</h2>
+    <div class="tabla-scroll"><table id="tabla-escalera"></table></div>
+    <div class="grilla-telefonos" id="mockups"></div>
+  </section>
+
+  <section class="seccion" id="seccion-laboratorio" aria-labelledby="h-laboratorio">
+    <h2 id="h-laboratorio">Mapa de archivos del laboratorio</h2>
+    <p class="nota" id="laboratorio-nota"></p>
+    <div class="tabla-scroll"><table id="tabla-laboratorio"></table></div>
+  </section>
+
+  <section class="seccion" id="seccion-simple" aria-labelledby="h-simple">
+    <h2 id="h-simple">En simple</h2>
+    <ul class="lista-simple" id="lista-simple"></ul>
+  </section>
+
+  <section class="seccion" id="seccion-emergentes" aria-labelledby="h-emergentes">
+    <h2 id="h-emergentes">Decisiones emergentes</h2>
+    <p class="nota">Candidatas surgidas del análisis de la ventana de contexto; ninguna está tomada.</p>
+    <div class="tabla-scroll"><table id="tabla-emergentes"></table></div>
+  </section>
+</main>
+
+<footer class="pie">
+  <h2 class="pie-titulo">Fuentes</h2>
+  <ul class="lista-fuentes" id="lista-fuentes"></ul>
+  <p class="pie-fecha" id="pie-fecha"></p>
+</footer>
+
+<div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+<div class="velo" id="velo" hidden></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="false" aria-labelledby="drawer-titulo" hidden>
+  <div class="drawer-cab">
+    <h2 id="drawer-titulo"></h2>
+    <button type="button" class="btn-cerrar" id="drawer-cerrar" aria-label="Cerrar panel">×</button>
+  </div>
+  <div class="drawer-cuerpo" id="drawer-cuerpo"></div>
+</aside>
+
+<div class="modal-velo" id="modal-velo" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <div class="modal-cab">
+      <h2 id="modal-titulo"></h2>
+      <button type="button" class="btn-cerrar" id="modal-cerrar" aria-label="Cerrar decisión">×</button>
+    </div>
+    <div class="modal-cuerpo" id="modal-cuerpo"></div>
+  </div>
+</div>
+
+<script src="datos.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

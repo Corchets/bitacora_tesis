@@ -122,6 +122,17 @@ const roadmap = {
 const snapshot = { version: 1, repository: config.repository, generatedAt: new Date().toISOString(),
   defaultBranch: config.defaultBranch, issues, milestones, dependencies, branches, roadmap };
 await mkdir(path.join(root, 'dist'), { recursive: true });
-if (!process.argv.includes('--data-only')) await cp(path.join(root, 'public'), path.join(root, 'dist'), { recursive: true });
+if (!process.argv.includes('--data-only')) {
+  await cp(path.join(root, 'public'), path.join(root, 'dist'), { recursive: true });
+  // Apartado estático: la visualización de arquitectura vive en docs/ y viaja con el sitio.
+  // Si la carpeta no existe en la rama (ej. checkout viejo de laboratorio-main), se avisa y no se corta el build.
+  const arquitecturaSrc = path.join(root, '../docs/ingenieria/arquitectura-web');
+  try {
+    await cp(arquitecturaSrc, path.join(root, 'dist/arquitectura'), { recursive: true });
+    console.log('Apartado /arquitectura/ copiado desde docs/ingenieria/arquitectura-web.');
+  } catch {
+    console.warn('Sin docs/ingenieria/arquitectura-web en esta revisión: se publica sin el apartado /arquitectura/.');
+  }
+}
 await writeFile(path.join(root, 'dist/data.json'), JSON.stringify(snapshot));
 console.log(`Generado: ${issues.length} issues, ${branches.length} ramas. ${branches.map(branch => `${branch.name}@${branch.sha.slice(0,7)}`).join(' · ')}`);

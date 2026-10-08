@@ -82,6 +82,12 @@ de Main como si ya estuviera integrado allí.
 El proyecto de Vercel recibe **solo `dist/`**, que incluye su `vercel.json` y
 fuentes tipográficas locales. No se sube el resto del repositorio.
 
+El build también copia `docs/ingenieria/arquitectura-web/` a `dist/arquitectura/`:
+es la visualización interactiva de la arquitectura (diagrama con decisiones por
+componente y simulador de riesgo). Queda publicada en `/arquitectura/` y enlazada
+desde el nav. Su fuente de verdad son los documentos de `docs/`; si la carpeta no
+existe en la revisión, el build avisa y publica sin el apartado.
+
 Con una cuenta conectada a la CLI:
 
 ```bash
