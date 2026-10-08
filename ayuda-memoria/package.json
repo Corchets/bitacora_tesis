@@ -1,0 +1,12 @@
+{
+  "name": "bitacora-ayuda-memoria",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "preview": "node scripts/serve.mjs",
+    "revisar-brief": "node scripts/review-brief.mjs"
+  }
+}

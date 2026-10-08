@@ -158,6 +158,16 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Regla:** no cerrarlo antes de tener el corpus. Un título que promete "español argentino" obliga
   a un corpus que lo sostenga.
 
+### D14 — Ayuda memoria visual del proyecto
+
+- **Pregunta:** ¿cómo facilitar al equipo de cuatro la reincorporación al trabajo, la consulta de hitos y la entrada a los issues sin añadir sobrecarga de gestión en GitHub ni crear un segundo backlog?
+- **Tipo:** herramienta de coordinación interna y consulta del repositorio.
+- **Responsable:** Mateo Antenucci / Equipo.
+- **Evidencia:** [issue #57](https://github.com/Corchets/bitacora_tesis/issues/57), [README de ayuda-memoria](../../ayuda-memoria/README.md), [sistema de diseño](../../ayuda-memoria/DESIGN.md) y [skill de proyecto](../../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
+- **Desbloquea:** incorporación fluida del equipo al hito H2 sin fricción ni reconstrucción del repositorio.
+- **Estado:** resuelta (2026-10-07).
+- **Conclusión:** sitio web estático (`ayuda-memoria/`, HTML/CSS/JS con generador Node sin dependencias de aplicación) con vistas para `laboratorio-main` (entrada principal) y `main`. Muestra hitos, issues abiertos agrupados, roadmap, glosario y briefs de arranque para H2 (#19, #32, #39, #50, #54). Los briefs son orientaciones mantenidas en la web, no campos obligatorios de los issues en GitHub ni un segundo backlog. Se actualizan mediante la skill explícita `$actualizar-ayuda-memoria` a nivel proyecto. El build consulta datos de GitHub y archivos de cada commit sin publicar copias viejas. Publicación por enlace en Vercel alimentada por workflow ante pushes y cambios en issues (requiere secrets de despliegue). No altera el alcance de tesis, no ejecuta IA desatendida y no cierra D07/D08/D09.
+
 ## Decisiones cerradas
 
 - **Institución y equipo:** UNSTA, Ingeniería en Informática, Plan 2008; Albarracín

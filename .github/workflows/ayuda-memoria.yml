@@ -1,0 +1,62 @@
+name: Actualizar ayuda memoria
+
+on:
+  push:
+    branches: [main, laboratorio-main]
+  issues:
+    types: [opened, edited, closed, reopened, assigned, unassigned, labeled, unlabeled, milestoned, demilestoned, deleted, transferred]
+  issue_comment:
+    types: [created, edited, deleted]
+  milestone:
+    types: [created, edited, opened, closed, deleted]
+  schedule:
+    # También recupera cambios de dependencias nativas y reintenta fallos transitorios.
+    - cron: '23 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: ayuda-memoria
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    if: github.event_name != 'issue_comment' || !github.event.issue.pull_request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # La web se mantiene en main y consulta las fuentes de ambas ramas.
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar y generar fuentes actuales
+        working-directory: ayuda-memoria
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          npm test
+          npm run build
+      - name: Conservar versión verificable
+        uses: actions/upload-artifact@v4
+        with:
+          name: ayuda-memoria
+          path: ayuda-memoria/dist
+          retention-days: 7
+      - name: Publicar en Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [ -z "${!name}" ]; then
+              echo "Falta el secret $name. Ver ayuda-memoria/README.md. La versión generada quedó como artifact."
+              exit 1
+            fi
+          done
+          npx --yes vercel@62.7.0 deploy ayuda-memoria/dist --prod --yes --token "$VERCEL_TOKEN"

@@ -26,3 +26,4 @@ sentidos distintos, se define acá.
 | **ADR** | *Architecture Decision Record*. Registro fechado de una decisión y sus alternativas descartadas. |
 | **UFECI** | Unidad Fiscal Especializada en Ciberdelincuencia (Argentina). |
 | **Ley 25.326** | Ley argentina de Protección de Datos Personales. |
+| **Brief** | En el ayuda memoria del proyecto: orientación técnica breve derivada para un issue que explica resultado observable, contexto necesario (fuentes de esa rama), primer paso ejecutable y evidencia de terminado. No es un campo obligatorio del issue en GitHub ni un segundo backlog. |
