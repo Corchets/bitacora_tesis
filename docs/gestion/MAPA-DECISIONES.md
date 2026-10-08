@@ -7,6 +7,14 @@ Cada decisión debe tener una sola fuente de verdad. Cuando una decisión técni
 ADR en [`docs/ingenieria/adr/`](../ingenieria/adr/) y desde aquí solo se enlaza su conclusión.
 Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 
+> **Adopción 2026-10-08 (PR #58):** se integró la consolidación de arquitectura y
+> estados de decisión elaborada por Luciano en `docs/ingenieria/arquitectura-web/`.
+> Su contenido sustantivo se migró a este mapa — D02 y D06 como parciales, D11
+> abierta, D12 parcial, y precisiones de D03, D04, D05, D07, D08, D09, D10 y D13
+> rotuladas «consolidación PR #58» — conservando en cada ficha el antecedente que
+> tenía registrado. No expresa una aprobación nueva del tutor ni del equipo: es la
+> lectura consolidada que el usuario pidió adoptar.
+
 ## Frontera: decisiones que pueden tomarse ahora
 
 ### D01 — Completar el contrato académico
@@ -24,16 +32,15 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Pregunta:** ¿quién necesita qué decisión o protección, en qué momento de la
   llamada y frente a qué daño?
 - **Tipo:** decisión de alcance con investigación del dominio.
-- **Responsable:** equipo (el artefacto se produjo en el Issue #18).
+- **Responsable:** equipo.
 - **Evidencia:** problema en cinco líneas, persona/actor y tres escenarios.
 - **Bloqueada por:** ninguna (D01 resuelto).
 - **Desbloquea:** D06 y requisitos.
-- **Estado:** ratificada por el equipo, pendiente del tutor. Mateo informó el 2026-09-25 que
-  los cuatro integrantes aprobaron sin cambios las cinco líneas de
-  [PLAN-DE-TRABAJO.md §2](../propuesta/PLAN-DE-TRABAJO.md#formulación-en-cinco-líneas),
-  producidas en el Issue #18 ya cerrado. Como decisión de alcance, D02 no se marca resuelta
-  hasta registrar la respuesta del tutor en el
-  [seguimiento del 2026-09-30](seguimientos/2026-09-30.md). El foco en adultos mayores sigue en D12.
+- **Estado:** ratificada por el equipo en [PLAN-DE-TRABAJO.md §2](../propuesta/PLAN-DE-TRABAJO.md#formulación-en-cinco-líneas);
+  pendiente la respuesta del tutor anotada en el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
+  (parcial, según la consolidación del PR #58).
+- **Cómo seguir:** esperar la ratificación del tutor; si cambia el encuadre,
+  revisar presentación y corpus.
 
 ### D05 — Elegir la fuente de audio demostrable
 
@@ -41,41 +48,37 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
   controlado y micrófono/altavoz de laboratorio?
 - **Tipo:** decisión técnica con validación de cátedra.
 - **Responsable:** Equipo.
-- **Evidencia:** [minuta del 9 de septiembre](seguimientos/2026-09-09.md) e [Issue #16](https://github.com/Corchets/bitacora_tesis/issues/16).
+- **Evidencia:** [minuta del 9 de septiembre](seguimientos/2026-09-09.md).
 - **Desbloquea:** arquitectura y requisitos del prototipo.
 - **Estado:** resuelto (2026-09-09). Replay como base experimental reproducible obligatoria; llamada VoIP propia como integración objetivo del prototipo; altavoz externo despriorizado (no separa canales); PSTN universal fuera de alcance.
+- **Cómo seguir (consolidación PR #58):** construir el entorno de pruebas VoIP con
+  conversaciones simuladas por canal — paso 0 de VENTANA §10.
 
-Las cinco opciones sobre la mesa, con el detalle técnico en
-[ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md):
+Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md):
 
-| Opción                                                  | Qué demuestra                                               | Estado post 9 de septiembre                       |
-| ------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------- |
-| Motor sobre grabaciones reproducidas como stream        | Algoritmo completo, incrementalidad, latencia, anticipación | **Base experimental obligatoria aprobada**        |
-| App con llamada VoIP controlada (el audio es de la app) | Funcionamiento durante una conversación real                | **Objetivo principal del prototipo aprobado**     |
-| Micrófono/altavoz en laboratorio                        | Concepto interactivo rápido                                 | **Despriorizado** (mezcla canales / mala calidad) |
-| AOSP / root / app de sistema                            | Acceso privilegiado a telefonía                             | Solo _stretch goal_                               |
-| App stock escuchando cualquier llamada del dialer       | Producto equivalente a integración OEM                      | **Fuera de alcance confirmado**                   |
+### D06 — Definir corpus y piloto
 
-### D06 — Definir la gobernanza de datos
-
-- **Pregunta:** ¿qué se grabará, con qué consentimiento, dónde vivirá, quién
-  accederá, qué podrá publicarse y cuándo se eliminará?
-- **Tipo:** decisión ética y metodológica interna.
-- **Responsable:** por autoasignación (Issue #22).
-- **Evidencia:** [método y selección del piloto](../datos-etica/METODO-CREACION-CORPUS.md#6-piloto),
-  [modelo de consentimiento](../datos-etica/CONSENTIMIENTO-INFORMADO.md) y
-  [catálogo de escenarios revisado](../datos-etica/CATALOGO-ESCENARIOS.csv) (#17).
-- **Desbloquea:** corpus piloto.
-- **Ejecución posterior:** [issue #39](https://github.com/Corchets/bitacora_tesis/issues/39),
-  bloqueado hasta que #22 y la validación del tutor habiliten grabar.
-- **Estado:** en curso. Mateo acordó el 2026-09-24 una primera pasada de 14 conversaciones con
-  hasta seis repeticiones dirigidas, participación de personas adultas con datos ficticios y
-  consentimiento de ambos interlocutores. Quedaron definidos el custodio operativo (Mateo), el
-  resguardo local cifrado y el plazo de eliminación; el permiso no incluye publicar voces. La
-  [PR #35](https://github.com/Corchets/bitacora_tesis/pull/35) documenta la decisión operativa,
-  pero **no habilita grabaciones**: falta validación del tutor sobre composición, participantes y
-  protocolo ([consulta preparada para el 2026-09-30](seguimientos/2026-09-30.md)),
-  y completar domicilio y contacto reales fuera de Git antes de invitar voluntarios.
+- **Pregunta:** ¿qué conversaciones se producirán y con qué piloto se probará el método?
+- **Estado:** selección inicial resuelta. Se producirán conversaciones ficticias
+  fraudulentas y legítimas comparables, interpretadas por el equipo o familiares.
+- **Piloto:** 14 conversaciones iniciales, siete de cada clase, con hasta seis
+  repeticiones dirigidas por problemas concretos. No fija el tamaño del corpus final.
+- **Fuente:** [método y selección del piloto](../corpus/METODO-CREACION-CORPUS.md#6-piloto)
+  y [catálogo](../corpus/CATALOGO-ESCENARIOS.csv).
+- **Ejecución:** [primer par #39](https://github.com/Corchets/bitacora_tesis/issues/39)
+  y [piloto completo #54](https://github.com/Corchets/bitacora_tesis/issues/54).
+  El piloto permite revisar escenarios, calidad de grabación, anotación y costo.
+- **Condiciones operativas (acordadas el 2026-09-24, [PR #35](https://github.com/Corchets/bitacora_tesis/pull/35)):**
+  participantes adultos con datos ficticios, consentimiento previo de ambos
+  interlocutores, resguardo local a cargo de Mateo, sin permiso de publicar voces.
+  El PR #35 documenta la decisión operativa pero no habilita a grabar: falta la
+  validación del tutor anotada en el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
+  y completar domicilio/contacto reales fuera de Git.
+- **Desbloquea:** piloto del corpus.
+- **Cómo seguir:** llevar composición, participantes y protocolo al tutor; sin su
+  validación no se graba (consolidación PR #58).
+- **Pendiente en D08:** tamaño y composición final, particiones y criterio de parada.
+  El resguardo de los materiales se consulta en el método; no exige otro documento.
 
 ## Decisiones precisas de alcance y experimentación
 
@@ -83,113 +86,111 @@ Las cinco opciones sobre la mesa, con el detalle técnico en
 
 - **Pregunta:** ¿cuál es el núcleo obligatorio, cuáles son los stretch goals y qué
   queda fuera de alcance?
-- **Evidencia:** [Plan de Trabajo §6 y §15](../propuesta/PLAN-DE-TRABAJO.md) y [minuta del 9 de septiembre](seguimientos/2026-09-09.md).
+- **Evidencia:** [Plan de Trabajo §6](../propuesta/PLAN-DE-TRABAJO.md#6-alcance) y [minuta del 9 de septiembre](seguimientos/2026-09-09.md).
 - **Salida:** objetivos, aporte y lista explícita de exclusiones.
 - **Estado:** resuelto (2026-09-09). Núcleo obligatorio y exclusiones (no PSTN, no deepfakes, no biometría) aprobados.
+- **Precisión de alcance (2026-10-04, confirmada por Mateo):** el detector conserva
+  contexto de la llamada actual y recibe solo su contenido transcripto. Agenda,
+  historial, memoria entre sesiones, reputación y dirección entrante/saliente quedan
+  fuera de sus entradas. La ventana y la política de alerta siguen abiertas en D08.
+- **Público (2026-10-04, confirmado por Mateo; antecedente superado por la
+  consolidación del PR #58):** se registró «sin foco etario específico» y se
+  retiró D12 como decisión pendiente. La participación de personas adultas en el
+  corpus sigue siendo una condición de producción, no una promesa de rendimiento
+  para un grupo etario. El encuadre vigente de D12 quedó parcial: ver
+  [D12](#d12--encuadre-del-foco-en-adultos-mayores).
+- **Contribución defendible (consolidación PR #58):** la arquitectura incremental
+  documentada (capas 3 y 4 del [diseño integrado](../investigacion/DISENO-INTEGRADO.md)),
+  el hueco que deja la patente de Google US 2024/0388655 A1.
+- **Cómo seguir:** toda nueva funcionalidad se contrasta contra la lista de
+  exclusiones aprobada.
 
 ### D04 — Aprobar preguntas e hipótesis
 
 - **Pregunta:** ¿qué afirmaciones se evaluarán y qué observación podría refutarlas?
-- **Evidencia:** [Plan de Trabajo §5 y §15](../propuesta/PLAN-DE-TRABAJO.md) y [PREGUNTAS-DE-INVESTIGACION.md](../investigacion/PREGUNTAS-DE-INVESTIGACION.md).
+- **Evidencia:** [Plan de Trabajo §5](../propuesta/PLAN-DE-TRABAJO.md#5-preguntas-de-investigación) y [PREGUNTAS-DE-INVESTIGACION.md](../investigacion/PREGUNTAS-DE-INVESTIGACION.md).
 - **Salida:** PI1–PI2 aprobadas, evaluación E1 diagnóstica y E2 secundaria.
-- **Estado:** resuelto (2026-09-09). Aprobadas por el tutor sin objeciones.
+- **Estado:** resuelto (2026-09-09).
+- **Candidata nueva (consolidación PR #58):** discutir entre los cuatro agregar
+  «cuánto contexto mira el detector» como eje de PI1 (VENTANA §9).
 
 ### D07 — Aprobar taxonomía y evento crítico
 
-- **Pregunta:** ¿qué maniobras y pedidos se anotan, y cómo se marcan `T_R` y `T_C`?
-- **Bloqueada por:** D02, D04 y D06.
-- **Salida:** manual de anotación v0 probado por los cuatro integrantes.
-- **Estado:** abierto. Mateo aprobó el 2026-09-23 usar `AUTHORITY_CLAIM` en lugar de
-  `IMPERSONATION_AUTHORITY` y etiquetas de capa 1 en `maniobras` para el catálogo v0 (#17).
-  Es una aprobación parcial de trabajo: falta probar la taxonomía completa, adjudicar ambigüedades
-  y fijar las marcas temporales antes de cerrar D07.
-- **Acuerdos parciales de la entrevista (Luciano, 2026-10-02):** selección 6+6 e inclusión de
-  menciones de códigos de autenticación en `REQUEST_AUTH_CODE`, registrados en el
-  [manual](../datos-etica/MANUAL-ANOTACION.md#capa-2--acciones-solicitadas); `T_C` como referencia
-  principal de `Preventive@δ`, con ambos márgenes, registrado en
-  [métricas](../evaluacion/METRICAS.md#tasa-preventiva). Falta precisar las recomendaciones de no
-  compartir códigos y validar las definiciones con el piloto. **D07 sigue abierta.**
+- **Pregunta:** ¿qué referencia humana necesita la evaluación y cómo se anotan
+  pedidos, cumplimiento y evidencia sin confundirlos con solicitudes legítimas?
+- **Estado:** abierta. La referencia mínima del piloto fue acordada por Mateo el
+  2026-10-04: clase por conversación, `T_R`/`T_C` cuando correspondan y evidencia
+  seleccionada, sin etiquetado exhaustivo por turno. Falta probar las reglas con
+  el piloto y resolver sus ambigüedades.
+- **Para empezar:** una versión de trabajo del manual con criterios aplicables a
+  los primeros casos. El piloto prueba esa versión; no necesita D07 cerrada.
+- **Selección de trabajo (acuerdo del 2026-10-02, consolidación PR #58):**
+  taxonomía de dos capas multi-label de seis etiquetas cada una (6+6) como
+  vocabulario candidato — no la taxonomía final. `REQUEST_AUTH_CODE` incluye
+  menciones de códigos; `T_C` es la referencia principal de `Preventive@δ`
+  reportando ambos márgenes; `T_A` se define con histéresis (primer cruce que se
+  sostiene dos actualizaciones). Queda abierta hasta probarla con el piloto y
+  adjudicar ambigüedades.
+- **Para cerrar:** manual probado en una muestra común por los cuatro integrantes,
+  anotaciones originales conservadas y desacuerdos adjudicados.
+- **Fuente:** [MANUAL-ANOTACION.md](../corpus/MANUAL-ANOTACION.md). Sus dos capas de
+  etiquetas son un vocabulario candidato para fichas y explicaciones. El
+  [catálogo](../corpus/CATALOGO-ESCENARIOS.csv) aporta casos para
+  contrastar sus definiciones.
 
-Hay una propuesta concreta de dos capas multi-label de 6 etiquetas cada una en
-[MANUAL-ANOTACION.md](../datos-etica/MANUAL-ANOTACION.md), con el principio de no superar la docena
-de etiquetas: en cuatro meses las clases raras destruyen el análisis estadístico. El
-[catálogo #17](../datos-etica/CATALOGO-ESCENARIOS.csv) aporta escenarios para contrastarla; falta
-probar y ajustar el manual con las anotaciones del piloto antes de adoptar la taxonomía completa.
-
-Sobre el evento crítico, la definición de `T_A`, `T_R` y `T_C` y por qué hacen falta las tres marcas
-está en [METRICAS.md](../evaluacion/METRICAS.md). Dos puntos que esta decisión tiene que cerrar:
-`T_A` se define con histéresis (no el primer cruce del umbral, sino el primero que se sostiene dos
-actualizaciones). La referencia principal de `Preventive@δ` se acordó en `T_C` el 2026-10-02;
-faltan las marcas operativas y el tratamiento de llamadas sin cumplimiento antes de congelar el protocolo.
-
-- Evidencia nueva (2026-09-23, spike, no cierra D07): [sonda D](../../experiments/laboratorio/casos/README.md) — «código de la puerta» prende `REQUEST_AUTH_CODE` y «diez mil pesos» no prende nada; material para [Manual §4.2/§4.3](../datos-etica/MANUAL-ANOTACION.md#4-esqueleto-a-completar-después-del-piloto).
+Las definiciones de las marcas viven en [METRICAS.md](../evaluacion/METRICAS.md).
+D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A`.
 
 ### D08 — Congelar protocolo experimental
 
 - **Pregunta:** ¿cómo se muestrea, divide y evalúa sin fuga de información?
-- **Bloqueada por:** D04 y D07.
-- **Salida:** splits, baselines, métricas, seeds, test congelado y amenazas.
-
-Este punto puede determinar la credibilidad completa de los resultados: si dos variantes del mismo
-guion caen una en train y otra en test, el modelo ya vio el escenario. El procedimiento de división
-está en [METODO-CREACION-CORPUS.md §9](../datos-etica/METODO-CREACION-CORPUS.md#9-división-de-datos)
-y las definiciones de métrica en [METRICAS.md](../evaluacion/METRICAS.md). Adoptarlo es barato ahora
-y carísimo de arreglar después.
-
-Falta fijar además la restricción de falsos positivos **antes** de medir. El anteproyecto la
-menciona pero no la define, y sin ese número la hipótesis no es falsable.
-
-- **Recorte de trabajo e investigación (#23, no cierra D08):**
-  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md) y
-  [DISENO-INTEGRADO.md](../investigacion/DISENO-INTEGRADO.md).
-  Deriva el margen de aceptación desde el máximo de llamadas legítimas con alerta, en lugar de
-  fijar un umbral a ojo, y muestra cómo se acumulan las falsas alarmas con cada actualización.
-  Propone ventana deslizante con decaimiento, registro de eventos y compara las cuatro estrategias
-  de memoria para evaluar experimentalmente en dos brazos (base vs propuesta).
-  Los números salen de llamadas sintéticas: prueban el mecanismo, no miden rendimiento.
-  Issue [#23](https://github.com/Corchets/bitacora_tesis/issues/23) cerrado como investigación técnica; D08 permanece abierta.
-- **Evidencia nueva (2026-09-23, spike, no cierra D08):** la histéresis implementada dispara con un turno alto + cualquier opinión (no dos altos); el umbral 0,3–0,5 da idéntico; las semillas-espejo repiten el leakage que [§9](../datos-etica/METODO-CREACION-CORPUS.md#9-división-de-datos) prohíbe. Ver [pasadas 12 y 23](../../experiments/laboratorio/casos/README.md).
+- **Estado:** abierta. Puede prepararse el diseño con el piloto; se congela antes de
+  la evaluación final, con D07 resuelta y una configuración elegida sobre desarrollo.
+- **Salida:** composición del corpus, particiones, comparadores, política de alerta,
+  métricas y criterio de interpretación definidos; test reservado y procedimiento repetible.
+- **Antes de ampliar:** acordar separación de semillas y variantes en
+  [#55](https://github.com/Corchets/bitacora_tesis/issues/55). Ver
+  [método del corpus §9](../corpus/METODO-CREACION-CORPUS.md#9-división-de-datos).
+- **Antes del test:** congelar el protocolo en
+  [#33](https://github.com/Corchets/bitacora_tesis/issues/33): unidades e instantes de evaluación, falsas alarmas,
+  referencias temporales, configuración e incertidumbre a informar. Ver
+  [METRICAS.md](../evaluacion/METRICAS.md#5-pendientes-para-congelar-la-evaluación).
+  Las preguntas caracterizan desempeño; no requieren inventar un umbral de éxito.
+- **Antecedentes:** [ventana y alerta](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)
+  y [diseño integrado](../investigacion/DISENO-INTEGRADO.md) proponen mecanismos.
+  Sus números sintéticos no prueban rendimiento ni congelan el protocolo.
+- **Por fijar antes de medir (consolidación PR #58):** la restricción de falsos
+  positivos por revisión (VENTANA §7.1: máximo de llamadas legítimas con alerta y
+  acierto requerido derivado), la regla de persistencia del contador (opciones
+  A/B/C en VENTANA §11), el reloj de actualización, el conteo de alertas y las
+  franjas de duración.
 
 ### D09 — Elegir ASR y detector
 
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
-- **Bloqueada por:** D05, D07 y benchmark piloto.
-- **Salida:** decisión basada en WER/recall crítico, F1/AUPRC, latencia y memoria.
-- **Candidatos a evaluar (mapa inicial):** sherpa-onnx, Vosk y whisper.cpp para ASR; TF-IDF como baseline
-  obligatorio (retirado el 2026-09-29: la línea base pasa a ser reglas solas) y BETO o RoBERTuito para español. La decisión sale del benchmark, no de una
-  preferencia previa.
-- **Recorte de trabajo inicial (2026-09-15/16, no cierra D09):**
-  [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md).
-  Catálogo de bajada = Hugging Face (consulta 2026-09-16). ASR del recorte:
-  Moonshine tiny-es (baja) y Zipformer Kroko ONNX (media/alta). Whisper solo comparación.
-  Vosk oficial queda fuera del recorte Hub. Los detectores neuronales de ese documento
-  son candidatos históricos, no una elección vigente.
-- **Recorte posterior (2026-09-17, también pendiente de ratificación):**
-  [issue #29](https://github.com/Corchets/bitacora_tesis/issues/29) plantea Moonshine tiny-es para baja,
-  Zipformer Kroko ONNX para media/alta y TF–IDF + reglas como detector en las tres gamas;
-  deja ALBETO, DistilBETO y RoBERTuito fuera de *ese spike*. No hay benchmark del piloto ni elección D09.
-- **Pivote del spike (2026-09-25, propuesta sin discutir):** detector = **LLM/SLM local**
-  (candidato `meta-llama/Llama-3.2-1B-Instruct`; modos clasificador|agente a medir); TF–IDF
-  descartado del spike. Reglas de incendio capa 2 siguen. Estrategia NLP:
-  [#27](https://github.com/Corchets/bitacora_tesis/issues/27); schema de salida: D07
-  [#32](https://github.com/Corchets/bitacora_tesis/issues/32). **No cierra D09.**
-- **Cascada del spike (2026-09-28, propuesta sin discutir):** RoBERTuito + LR puntúa cada turno y solo
-  la zona gris (0,35–0,75, ejemplo del [PR #40](https://github.com/Corchets/bitacora_tesis/pull/40)) va a
-  `llama3.2:1b-instruct-q4_K_M`; techo de alta propuesto en 2048 MB (cambia #24). Con semillas
-  provisorias, la cascada no mejora al encoder solo
-  ([resultados](../../experiments/laboratorio/resultados/GLOSARIO-COLUMNAS.md)). Datos:
-  [#41](https://github.com/Corchets/bitacora_tesis/issues/41); medición con WAV:
-  [#42](https://github.com/Corchets/bitacora_tesis/issues/42). #29 cerrado. **No cierra D09.**
-- **Marco teórico de modelos NLP y compresión (#27, no cierra D09):**
-  [ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md).
-  Propone la cascada encoder continuo (RoBERTuito) + SLM solo en zona gris, con base institucional
-  offline. Es hipótesis: sus cifras de latencia y memoria no fueron medidas por el equipo y la salida
-  de `benchmark_nlp.py` era simulada (script eliminado el 2026-09-29).
-  El contraste con lo medido en el spike #29 el 2026-09-28 (rama de Ignacio, laboratorio sin
-  terminar) está en
-  [CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md):
-  la cascada con Llama 3.2 1B sin ajuste no mejoró al encoder solo y la memoria y la latencia
-  medidas en PC superan las del marco. D09 sigue abierta.
+- **Ejecución:** [issue #51](https://github.com/Corchets/bitacora_tesis/issues/51).
+- **Estado:** abierta. La elección final necesita audio y referencia del piloto,
+  comparaciones sobre desarrollo y mediciones del flujo completo.
+- **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
+  detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
+- **Línea base vigente:** reglas solas. Ningún encoder, modelo generativo, cascada,
+  entrenamiento ni conjunto de gamas está impuesto como arquitectura final.
+- **Material para consultar cuando corresponda:**
+  [recorte inicial de modelos](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md),
+  [estrategia NLP](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md) y
+  [contraste con el laboratorio](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
+  Son antecedentes de candidatos y pruebas, no requisitos nuevos. La comparación
+  debe declarar qué código y datos reutiliza y qué cambió.
+- **Antecedentes del laboratorio (spike #29, medidos con semillas provisorias con
+  sesgo de dialecto — no cierran D09):** la cascada RoBERTuito+LR→SLM (zona gris
+  0,35–0,75) no mejoró al encoder solo en la corrida del 2026-09-28 (goteo
+  12/16→7/16, AUROC 0,666→0,537, mismas 5/10 falsas alarmas) y no entra en el
+  presupuesto de 1024 MB junto al SLM (~1,7 GB sin ASR). Candidatos de trabajo
+  propuestos: Moonshine tiny-es en gama baja y Zipformer Kroko ONNX en media/alta
+  para ASR; SLM local directo (p. ej. Llama-3.2-1B) como detector. La
+  recomendación del laboratorio de retomar datos reales para encoder y cascada
+  (#41/#42) está retirada como `not_planned` en GitHub: revivirla exige una
+  replanificación acordada; se evalúa como alternativa en #51, no como tarea abierta.
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -197,28 +198,35 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   entregan?
 - **Bloqueada por:** D01 y resultados de evaluación.
 - **Salida:** checklist final aceptado por el tutor.
+- **Alcance (consolidación PR #58):** incluye el diseño exacto del aviso y el
+  método de evaluación con usuarios, todavía no especificado.
+- **Cómo seguir:** definir la demo (replay/VoIP) y la prueba de comprensión de
+  avisos con personas.
 
 ### D11 — Análisis lingüístico o también acústico
 
-- **Pregunta:** ¿el detector trabaja solo sobre la transcripción del ASR, o también sobre rasgos
-  bioacústicos (tono, estrés vocal, MFCCs)?
-- **Bloqueada por:** ninguna; D05 ya descartó el altavoz como camino principal. Falta que el
-  equipo decida si el alcance se limita a la transcripción o incorpora rasgos acústicos.
-- **Salida:** alcance del stack de features y, con él, el esfuerzo de las próximas semanas.
-- **Recomendación del deep research:** solo NLP sobre la transcripción, con lo bioacústico como
-  trabajo futuro declarado en las conclusiones. Ver
-  [SINTESIS-ESTADO-DEL-ARTE.md](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md).
+- **Estado:** abierta. Antecedente: el 2026-10-04 Mateo la registró cerrada con
+  «detector sobre transcripción y contexto de la llamada actual; los rasgos
+  acústicos quedan como trabajo futuro». La consolidación del PR #58 (2026-10-07)
+  la vuelve a listar abierta hasta que los cuatro ratifiquen «solo transcripción»;
+  su recomendación coincide con ese registro.
+- **Decisión registrada:** detector sobre transcripción y contexto de la llamada
+  actual. El audio se usa para ASR y mediciones; los rasgos acústicos quedan como
+  trabajo futuro.
+- **Cómo seguir:** ratificar entre los cuatro «solo transcripción» para acotar el
+  pipeline; seguimiento en
+  [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
 
 ### D12 — Encuadre del foco en adultos mayores
 
 - **Pregunta:** ¿se mantiene el foco en adultos mayores y con qué justificación?
-- **Bloqueada por:** D02.
-- **Salida:** justificación reescrita en el Plan de Trabajo.
-- **Detalle:** el deep research no pide abandonar el foco, pide **cambiar la justificación**: de
-  "son los más afectados" —no demostrado para Argentina— a "gravedad potencial de las pérdidas y
-  exposición a estafas de suplantación". También advierte no convertir el reclutamiento de adultos
-  mayores en un bloqueo del corpus: mejor incluirlos en evaluación y en la prueba de usabilidad.
-  Esta corrección ya quedó integrada en el Plan de Trabajo.
+- **Estado:** parcial. Antecedente: la precisión de alcance del 2026-10-04 (ver
+  D03) la retiró como decisión pendiente y dejó el público «sin foco etario
+  específico». La consolidación del PR #58 (2026-10-07) la mantiene parcial: el
+  foco se conserva pero cambia su justificación —gravedad potencial de las
+  pérdidas y exposición a suplantación— y las personas adultas mayores entran por
+  evaluación y prueba de usabilidad, no como requisito del corpus.
+- **Fuente:** [PLAN-DE-TRABAJO.md](../propuesta/PLAN-DE-TRABAJO.md).
 
 ### D13 — Título definitivo
 
@@ -227,6 +235,19 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
 - **Salida:** título consistente con lo que el corpus efectivamente cubre.
 - **Regla:** no cerrarlo antes de tener el corpus. Un título que promete "español argentino" obliga
   a un corpus que lo sostenga.
+- **Cómo seguir:** definirlo al conocer la cobertura real del corpus
+  (consolidación PR #58).
+
+### D14 — Ayuda memoria visual del proyecto
+
+- **Pregunta:** ¿cómo facilitar al equipo de cuatro la reincorporación al trabajo, la consulta de hitos y la entrada a los issues sin añadir sobrecarga de gestión en GitHub ni crear un segundo backlog?
+- **Tipo:** herramienta de coordinación interna y consulta del repositorio.
+- **Responsable:** Mateo Antenucci / Equipo.
+- **Evidencia:** [issue #57](https://github.com/Corchets/bitacora_tesis/issues/57), [README de ayuda-memoria](../../ayuda-memoria/README.md), [sistema de diseño](../../ayuda-memoria/DESIGN.md) y [skill de proyecto](../../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
+- **Desbloquea:** incorporación fluida del equipo al hito H2 sin fricción ni reconstrucción del repositorio.
+- **Estado:** resuelta (2026-10-07).
+- **Conclusión:** sitio web estático (`ayuda-memoria/`, HTML/CSS/JS con generador Node y Cytoscape.js para el roadmap interactivo) con vistas para `laboratorio-main` (entrada principal) y `main`. Muestra hitos, issues abiertos agrupados, roadmap, glosario y briefs de arranque para H2 (#19, #32, #39, #50, #54). Los briefs son orientaciones mantenidas en la web, no campos obligatorios de los issues en GitHub ni un segundo backlog. Se actualizan mediante la skill explícita `$actualizar-ayuda-memoria` a nivel proyecto. El build consulta datos de GitHub y archivos de cada commit sin publicar copias viejas. Publicación por enlace en Vercel alimentada por workflow ante pushes y cambios en issues (requiere secrets de despliegue). No altera el alcance de tesis, no ejecuta IA desatendida y no cierra D07/D08/D09.
+- **Evolución (2026-10-08):** por pedido del usuario, el roadmap local pasa a un grafo navegable de dependencias reales con filtros, zoom, panel de contexto y alternativa accesible en lista. [Diseño y fuentes de la librería](../../ayuda-memoria/DESIGN.md#24-componentes-del-mapa-de-entregas-roadmap). Bundle y licencia servidos localmente, versión fijada en lockfile. PR #58 agrega la vista de arquitectura y simulador ilustrativo, con decisiones cargadas desde el mapa adoptado. Estas mejoras están en el árbol local; falta integrar y publicar la rama.
 
 ## Decisiones cerradas
 
@@ -245,12 +266,16 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   VoIP controlado es la integración preferida si el spike confirma viabilidad.
 - **No hacer detección de deepfake en el núcleo:** responde una pregunta distinta
   a detectar manipulación y pedidos peligrosos.
-- **Línea base del detector (2026-09-29, reemplaza "reglas y TF–IDF como comparadores obligatorios"):**
-  TF–IDF sale del proyecto. La línea base para comparar es **reglas solas**. Motivo: el stub TF–IDF
-  del spike #29 llegó a su techo con fuga de información en las semillas
-  ([contraste](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md#7-dificultades-que-tuvo-ignacio)).
-- **Criterios de prefactibilidad (#24):** Mateo informó el 2026-09-22 que el equipo revisó y aprobó
-  los presupuestos y umbrales de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md)
+- **Línea base registrada:** reglas solas, según el cambio documental del
+  [2026-09-29](https://github.com/Corchets/bitacora_tesis/commit/9eda2948321466124ec4789882882fb0ab8ce154).
+  Ese cambio también retiró TF–IDF basándose en el laboratorio. La justificación
+  debe revisarse en D09: una prueba con datos reutilizados o fuga no demuestra que
+  el método sea inútil en general.
+
+  > **Estado: propuesta sin discutir.** Mantener reglas como referencia inicial y
+  > revisar la exclusión general de TF–IDF cuando se elijan comparadores en
+  > [D09](#d09--elegir-asr-y-detector). No hace falta agregarlo como trabajo obligatorio.
+- **Criterios de prefactibilidad (#24):** Se definieron presupuestos y umbrales de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md)
   como punto de partida para medir, no como evidencia de rendimiento. D09 y la elección de modelos
   permanecen abiertas; la viabilidad en Android requiere medición en ese entorno.
 
@@ -264,8 +289,6 @@ menciona pero no la define, y sin ese número la hipótesis no es falsable.
   presupuestos de medición, no evidencia de que una combinación de modelos funcione
   en Android. El [recorte #29](https://github.com/Corchets/bitacora_tesis/issues/29)
   tampoco cierra D09.
-  El spike arranca con **alta** (Zipformer Kroko + LLM/SLM local + reglas de capa 2);
-  TF–IDF descartado del recorte activo (2026-09-25).
   **Observación (2026-09-18, issue #23):** con el máximo de 3 turnos, "dos veces seguidas" se
   cumple con un solo pico y la histéresis no reduce las falsas alarmas. Compite con el riesgo con
   decaimiento y doble umbral de la ventana de contexto. Cuenta y opciones en
@@ -295,4 +318,3 @@ discute tecnología bloqueada por una decisión anterior. Al cerrar una decisió
 2. escribir conclusión y consecuencias;
 3. actualizar bloqueos y promover lo que ya pueda especificarse;
 4. cambiar el Plan de Trabajo si altera alcance, tiempo o entregables;
-5. pedir validación al tutor si afecta el contrato académico o ético.

@@ -1,137 +1,124 @@
 # Métricas
 
-> **Estado: propuesta con acuerdo parcial (Luciano, 2026-10-02).** Se acordó `T_C` como referencia
-> principal de `Preventive@δ` y reportar ambos márgenes; el resto del protocolo sigue pendiente.
-> Deriva del [deep research](../investigacion/deep-research-report-00.md), no
-> de un relevamiento propio. Se congela al cerrar
-> [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y
+> **Estado: propuesta sin discutir.** Definiciones para revisar junto al equipo.
+> Las marcas de referencia se precisan en
+> [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico)
+> y la política de alerta y evaluación en
 > [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-Definición única de cada métrica y sus unidades. Si dos documentos reportan un número con el mismo
-nombre, la definición que vale es la de acá.
+Define las mediciones de las [preguntas del proyecto](../investigacion/PREGUNTAS-DE-INVESTIGACION.md):
+detección incremental (PI1) y margen temporal de la alerta (PI2).
 
-## Por qué la métrica temporal es la que diferencia la tesis
+## 1. Marcas temporales
 
-El objetivo de la defensa es poder decir:
+Todas se expresan en segundos desde el inicio de la grabación.
 
-> "El 72% de las estafas fue advertido al menos diez segundos antes de la primera acción crítica."
+| Marca | Qué representa | De dónde sale |
+|---|---|---|
+| `T_A` | Momento en que el sistema emite la primera alerta según la política evaluada | Registro de ejecución del sistema |
+| `T_R` | Inicio del primer pedido de alto riesgo | Anotación humana de la conversación |
+| `T_C` | Inicio del primer cumplimiento observable del pedido por la víctima simulada | Anotación humana; queda sin dato si no ocurre o no se puede observar |
 
-y no simplemente *"obtuvimos accuracy de 91,4%"*. Un detector que acierta la clasificación después
-de que la víctima entregó el código no protege a nadie. Esa distinción es la que
-[PI2](../investigacion/PREGUNTAS-DE-INVESTIGACION.md) tiene que poder responder con números.
+El [manual de anotación](../corpus/MANUAL-ANOTACION.md) debe precisar pedido,
+cumplimiento y ambigüedades. Un disparo de reglas no determina el `T_R` de referencia.
 
-## Tres marcas temporales, no una
+`T_R` y `T_C` pueden caer dentro de una intervención: no se asignan automáticamente
+al comienzo del turno que los contiene. Al comparar tiempos se usa el mismo origen
+temporal. `T_A` registra la emisión efectiva del aviso, incluidas las demoras del ASR
+y del detector; no se retrotrae al instante del audio que produjo la evidencia.
 
-El planteo preliminar hablaba de un solo "momento crítico". Hacen falta
-**tres**, y la distinción importa:
+La política que produce `T_A` se fija antes de evaluar. Exigir dos actualizaciones
+es una alternativa pendiente en D08. Si hay varios caminos de alerta, se registran
+por separado y se identifica cuál generó el primer aviso mostrado.
 
-| Marca | Definición |
-|---|---|
-| `T_A` | Momento de la alerta del sistema |
-| `T_R` | Inicio del primer **pedido** de alto riesgo (el atacante lo pide) |
-| `T_C` | Inicio de la primera **acción de cumplimiento** de la víctima (empieza a obedecer) |
+## 2. Margen de la alerta
 
-Ejemplo:
+- `L_R = T_R − T_A`: margen respecto del pedido peligroso.
+- `L_C = T_C − T_A`: margen respecto del cumplimiento simulado.
 
-```text
-00:31 atacante: "tenemos que resolver esto ahora"     URGENCY
-00:43 atacante: "no cortes la llamada"                ISOLATION
-00:58 atacante: "decime el código que recibiste"      ← T_R
-01:04 víctima:  "el código dice..."                   ← T_C
-```
+Positivo significa que la alerta llegó antes; cero, al mismo tiempo; negativo,
+después. Por ejemplo:
 
-Si el sistema avisa en `00:47`, **no** anticipó el pedido (`L_R` < 0), pero **sí** protegió a la
-víctima antes de que revelara el código (`L_C` > 0). Con una sola marca esa distinción se pierde, y
-es justamente la que hace útil al sistema.
+| Evento | Tiempo |
+|---|---:|
+| Atacante empieza a pedir el código (`T_R`) | 58 s |
+| Sistema alerta (`T_A`) | 61 s |
+| Víctima empieza a dictarlo (`T_C`) | 64 s |
 
-El [método de creación del corpus](../datos-etica/METODO-CREACION-CORPUS.md) ya especifica `T_R` y
-`T_C` como parte de cada semilla, y el [manual de anotación](../datos-etica/MANUAL-ANOTACION.md)
-define cómo se marcan.
+En ese caso, `L_R = −3 s` y `L_C = 3 s`: el aviso llegó después del pedido y antes
+del cumplimiento. Esto describe la simulación; no demuestra que una persona real
+habría evitado el daño.
 
-## Márgenes
+Se informa la distribución, mediana y rango intercuartil de los márgenes y cuántas
+conversaciones permiten calcularlos. Sin alerta, la llamada cuenta como no detectada
+y el margen queda sin dato. Sin cumplimiento, no se infiere prevención lograda.
 
-Valores positivos = el sistema llegó a tiempo.
+## 3. Alertas con margen suficiente
 
-- `L_R = T_R − T_A` — anticipación respecto del primer pedido riesgoso.
-- `L_C = T_C − T_A` — margen de intervención antes de que la víctima empiece a cumplir.
-
-Se reporta la mediana y el rango intercuartil, no el promedio: la distribución tiene cola y el
-promedio la esconde.
-
-## Tasa preventiva
-
-La métrica de titular:
-
-```
-Preventive@δ = #{ i : T_A,i ≤ T_C,i − δ } / #{ llamadas de vishing }
-```
-
-Se reporta para δ = 5 s, 10 s y 20 s.
-
-**Acuerdo parcial (Luciano, entrevista del 2026-10-02, #32):** `Preventive@δ` usa **`T_C` como
-referencia principal**. Se reportan además **ambos márgenes**, `L_R` y `L_C`, para distinguir la
-anticipación del pedido de la intervención antes del cumplimiento. Este acuerdo no cierra D07 ni
-D08: faltan las marcas operativas y el protocolo. La fórmula requiere tiempos anotados; no se
-aplica a los CSV de texto que solo tienen turnos y carecen de `T_C`.
-
-## Definición de `T_A` con histéresis
-
-`T_A` **no** es la primera predicción que cruza el umbral. Es la primera que **se mantiene durante
-dos actualizaciones consecutivas** (o una histéresis equivalente).
-
-Motivo: un pico aislado de 200 ms contaría fraudulentamente como "detección temprana" e infla los
-resultados. Sin esta regla, `Preventive@δ` es trivialmente manipulable bajando el umbral.
-
-> **Estado: propuesta sin discutir.** En el spike #29 (2026-09-23) un turno [sin opinión](../GLOSARIO.md) no es una actualización: no entra en la ventana ni sostiene la histéresis. Un turno con puntaje sí entra, aunque esté bajo el umbral. No cierra el umbral ni D09. El mecanismo del stub está en [PRIMERA-INVESTIGACION-MODELOS.md](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md#sin-opinión-spike-29).
-
-## Evaluación completa
-
-La métrica temporal no reemplaza al resto. Se reporta:
-
-| Dimensión | Métricas |
-|---|---|
-| ASR | WER, recall de términos críticos |
-| Clasificación global | precision, recall, F1, AUPRC, AUROC |
-| Llamadas legítimas | % con al menos una falsa alarma |
-| Carga de falsas alarmas | falsas alertas por hora |
-| Detección temporal | `Preventive@5/10/20s`, mediana de `L_R` y `L_C` |
-| Evolución | métricas usando solo 25%, 50%, 75% y 100% de la llamada |
-| Maniobras | macro-F1 de etiquetas multi-label |
-| Latencia | p50/p95 desde audio hasta decisión |
-| Rendimiento móvil | memoria, CPU, real-time factor |
-| Explicación | correspondencia entre motivo mostrado y etiqueta real |
-
-La curva de evolución (25/50/75/100%) es la evidencia directa de que la detección es incremental y
-no una clasificación offline disfrazada.
-
-## El primer gráfico que hay que producir
-
-**Riesgo vs. tiempo**, con las tres marcas superpuestas:
+`Preventive@δ` mide la proporción de llamadas de vishing advertidas al menos `δ`
+segundos antes de una marca de referencia `X`:
 
 ```text
-riesgo
-1.0 |                             █████████
-0.8 |              █████████ █████
-0.6 |         █████
-0.4 |    ████
-0.2 |████
-0.0 +-------------------------------------- tiempo
-        autoridad   urgencia     código
-                      ↑            ↑
-                   ALERTA       CRÍTICO
+Preventive@δ(X) = (llamadas de vishing con T_A ≤ X − δ) / (llamadas de vishing evaluables para X)
 ```
 
-Todo el resto del proyecto es, en esencia, lograr que esa figura sea científicamente válida.
+Se identifica la referencia (`T_R` o `T_C`). Las llamadas sin alerta permanecen en
+el denominador. Si falta una marca, se informa cuántas quedaron fuera y por qué.
 
-## Preguntas abiertas
+La referencia principal y los valores de `δ` se acuerdan en D07/D08 antes del test.
+Los 5, 10 y 20 segundos del borrador anterior son candidatos, sin aprobación registrada.
 
-- ¿Anotamos las tres marcas o solo `T_R`? Anotar `T_C` obliga a guionar también la reacción de la
-  víctima, lo que encarece cada semilla del corpus.
-- ¿Cuál es la restricción de falsos positivos fijada de antemano? Debe definirse un umbral
-  concreto para que la hipótesis sea falsable.
-  Método propuesto para derivarlo, en lugar de elegirlo a ojo:
-  [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md) §7.1
-  (se fija primero el máximo de llamadas legítimas con alerta y de ahí sale cuán bueno tiene que
-  ser el detector por actualización). **Propuesta sin discutir.**
-- ¿Cómo se reportan las llamadas sin acción de cumplimiento (`T_C` ausente)? La referencia
-  principal se acordó en `T_C`; falta el tratamiento operativo antes de congelar el test.
+## 4. Qué se mide
+
+| Pregunta | Medida e interpretación |
+|---|---|
+| ¿Distingue fraude de llamadas legítimas? | Precision, recall y F1 sobre decisiones tomadas con prefijos de la conversación. Se define qué instante y qué unidad se comparan. |
+| ¿Cuántas legítimas reciben un aviso incorrecto? | Llamadas legítimas con al menos una alerta / total de llamadas legítimas evaluadas. |
+| ¿Cuándo avisa? | Llamadas detectadas y sin alerta; márgenes `L_R` y `L_C`; alertas con margen suficiente. |
+| ¿Qué cambia por el ASR? | Mismo detector sobre texto manual y texto reconocido: errores de transcripción (WER), términos críticos perdidos y cambios en detección, falsas alarmas y márgenes. |
+| ¿Sigue el ritmo del audio? | Tiempo de cómputo / duración del audio (`RTF`), demora entre evidencia disponible y aviso, y memoria usada. Se registra el hardware. |
+| ¿Explica el motivo correctamente? | Revisión del motivo mostrado contra los fragmentos humanos de referencia; declarar qué casos se revisaron. Una anotación parcial no permite medir todas las etiquetas como presentes/ausentes. |
+
+AUPRC/AUROC requieren puntajes; macro-F1, etiquetas por clase. Falsas alertas por hora
+requiere definir avisos distintos. Su uso se acuerda en el protocolo.
+
+En texto sin timestamps se informa el turno del aviso, sin convertirlo a segundos
+con una duración supuesta. Las mediciones en computadora se reportan como tales.
+
+### Balance y precisión de las alertas
+
+La precisión observada depende de la proporción de fraude del conjunto evaluado;
+no se traslada directamente de un corpus balanceado al uso cotidiano.
+[Williams (2021)](https://arxiv.org/abs/2007.01905) explica esta relación.
+
+> **Estado: propuesta sin discutir.** Analizar frecuencias hipotéticas de fraude
+> como parte de [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
+Para decisiones por conversación, si `r` es la proporción de fraudes con alerta,
+`f` la proporción de legítimas con alerta y `p` la frecuencia hipotética de fraude:
+
+```text
+precision(p) = (p × r) / (p × r + (1 − p) × f)
+```
+
+Se usa la misma política y horizonte de evaluación para `r` y `f`. Este cálculo
+supone que ambas tasas se mantienen al cambiar `p`; es un análisis de sensibilidad,
+no evidencia de rendimiento real ni una estimación de la frecuencia de estafas.
+No se calcula precisión si el denominador es cero.
+
+Se informan conteos y denominadores de detección y falsas alarmas, junto con su
+incertidumbre. Si se incluyen legítimas cotidianas y negativos difíciles, se
+desglosan: tampoco se supone que su mezcla represente el uso cotidiano.
+
+## 5. Pendientes para congelar la evaluación
+
+- Validar las marcas `T_R`/`T_C` y la referencia mínima por conversación (D07).
+- Acordar la política de alerta que produce `T_A` y las referencias de `Preventive@δ` (D08).
+- Elegir los instantes o prefijos comparables y los márgenes `δ` (D08).
+- Fijar el criterio de falsas alarmas, los datos para ajustar y el test reservado (D08).
+- Acordar la composición de legítimas, el análisis de frecuencias hipotéticas y cómo
+  informar incertidumbre con el tamaño obtenido (D08).
+
+El primer resultado útil es una conversación con su evidencia disponible, alertas
+y marcas de referencia sobre una línea de tiempo. Si el detector produce un puntaje,
+se agrega su evolución. La figura debe mostrar también los errores y avisos tardíos.

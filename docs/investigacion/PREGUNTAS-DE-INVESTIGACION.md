@@ -89,13 +89,13 @@ una evaluación responsable.
 
 ## E2 — Explicación, objetivo secundario
 
-El sistema puede identificar señales como suplantación, urgencia, aislamiento,
-pedido de código, pedido de secreto o transferencia. Esas etiquetas alimentan
-mensajes deterministas.
+Se revisa si el motivo mostrado corresponde a evidencia disponible en la llamada,
+sin inventar una maniobra ni repetir el mismo mensaje para todos los casos. La
+referencia mínima del piloto permite una revisión de casos y fragmentos seleccionados.
 
-Se reportará macro-F1 por etiqueta y correspondencia entre motivo mostrado y
-etiqueta real. Una prueba con usuarios solo se hará si se aprueba y no compromete
-PI1/PI2.
+No se promete macro-F1 de doce etiquetas con una anotación parcial. Una medición
+exhaustiva por etiqueta requiere datos y protocolo adicionales acordados en D07/D08.
+Una prueba con usuarios es una extensión condicionada al avance de PI1/PI2.
 
 ## Matriz pregunta–evidencia
 
@@ -104,11 +104,4 @@ PI1/PI2.
 | PI1      | prefijos, clase y timestamps | reglas vs modelo; prefijos        | curvas desempeño-tiempo y falsas alarmas |
 | PI2      | `T_A`, `T_R`, `T_C`          | políticas de alerta               | márgenes y Preventive@δ                  |
 | E1       | audio, texto manual y ASR    | misma detección, entrada distinta | degradación, errores críticos y latencia |
-| E2       | etiquetas por turno          | predicción vs anotación           | fidelidad de explicación                 |
-
-## Propuesta al profesor
-
-Pedir aprobación para PI1 y PI2 como preguntas centrales, E1 como evaluación
-diagnóstica obligatoria y E2 como objetivo secundario. Preguntar si prefiere que el
-informe use la expresión “preguntas de investigación” o que estas aparezcan como
-criterios de evaluación dentro de los objetivos específicos.
+| E2       | evidencia seleccionada       | motivo mostrado vs evidencia     | correspondencia y errores de explicación |

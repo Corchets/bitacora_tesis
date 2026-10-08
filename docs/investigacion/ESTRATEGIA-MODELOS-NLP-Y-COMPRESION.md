@@ -17,7 +17,7 @@
 
 ## 1. Fundamentación técnica del procesamiento en dispositivo y arquitectura en cascada
 
-El principio arquitectónico central del sistema radica en la ejecución **estrictamente local en el dispositivo (*on-device*)**, asegurando la preservación de la privacidad del usuario y la operatividad en ausencia de conectividad a redes de datos ([PRIVACIDAD-DEL-SISTEMA.md](../datos-etica/PRIVACIDAD-DEL-SISTEMA.md)).
+El principio arquitectónico central del sistema radica en la ejecución **estrictamente local en el dispositivo (*on-device*)**, asegurando la preservación de la privacidad del usuario y la operatividad en ausencia de conectividad a redes de datos ([PRIVACIDAD-DEL-SISTEMA.md](../corpus/PRIVACIDAD-DEL-SISTEMA.md)).
 
 En este contexto, ni los sistemas basados exclusivamente en expresiones regulares (insensibles a la persuasión progresiva y a la variación sintáctica) ni los clasificadores estadísticos lineales sobre representaciones léxicas (TF-IDF, incapaces de resolver la composicionalidad sintáctica, dependencias de largo alcance o la polaridad de negaciones) satisfacen las exigencias de discriminación requeridas para detectar maniobras de ingeniería social. Se requiere la integración de modelos basados en representaciones semánticas profundas (redes neuronales basadas en la arquitectura Transformer).
 
@@ -168,7 +168,7 @@ El sistema resuelve esta inferencia mediante dos mecanismos locales independient
    Esta base de hechos pesa menos de 2 kilobytes de texto en memoria.
 
 2. **Adaptación de dominio mediante LoRA (Low-Rank Adaptation):**  
-   A través del ajuste fino de matrices de bajo rango sobre el corpus de escenarios y transcripciones telefónicas argentinas ([CATALOGO-ESCENARIOS.csv](../datos-etica/CATALOGO-ESCENARIOS.csv)), los pesos internos de las capas de atención del modelo codificador y del SLM incorporan las correlaciones semánticas existentes entre señuelos recurrentes ("reparación histórica", "trámite de AFIP", "reclamación de subsidio") y el vector de coacción delictiva.
+   A través del ajuste fino de matrices de bajo rango sobre el corpus de escenarios y transcripciones telefónicas argentinas ([CATALOGO-ESCENARIOS.csv](../corpus/CATALOGO-ESCENARIOS.csv)), los pesos internos de las capas de atención del modelo codificador y del SLM incorporan las correlaciones semánticas existentes entre señuelos recurrentes ("reparación histórica", "trámite de AFIP", "reclamación de subsidio") y el vector de coacción delictiva.
 
 ### 4.1 Traza de ejecución paso a paso
 

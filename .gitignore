@@ -36,5 +36,14 @@ experiments/laboratorio/modelos/
 ~$*
 
 # Skills de agents
-.agents/
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/actualizar-ayuda-memoria/
 skills-lock.json
+
+# Ayuda memoria: salidas generadas y configuración local
+ayuda-memoria/dist/
+ayuda-memoria/node_modules/
+ayuda-memoria/.vercel/
+.impeccable/

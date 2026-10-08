@@ -1,0 +1,245 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-08",
+  "currentLocation": {
+    "summary": "H1 cerrado formalmente mediante PR #56 (#20). El equipo arranca el hito H2 con frentes paralelos: en detección, probar un SLM directo con contexto y aviso único en #50 (acordado el 2026-10-08 en el issue #50; las reglas se comparan por separado y D09 sigue abierta); en corpus, preparación del primer par (#39), con la grabación condicionada a la validación del tutor (D06); y en metodología, revisión de antecedentes (#25) sin bloqueos.",
+    "activeMilestone": "H2 — Piloto del corpus y primeras pruebas",
+    "nextActions": [
+      {
+        "frontId": "deteccion",
+        "issue": 50,
+        "title": "Probar un SLM directo con contexto y aviso único",
+        "description": "Acordado con Mateo el 2026-10-08 (issue #50): el ensayo usa un SLM local directo sobre el par escrito de H1, sin esperar audio. Las reglas simples se ejecutan como comparador independiente sobre los mismos casos; no habilitan ni bloquean el SLM.",
+        "urgency": "inmediato"
+      },
+      {
+        "frontId": "corpus",
+        "issue": 39,
+        "title": "Preparar el primer par y validar las condiciones de grabación",
+        "description": "D06 exige la validación del tutor de las condiciones de consentimiento y custodia antes de grabar (pendiente de respuesta al 2026-10-08). El paso inmediato es preparar el primer par contrastante y gestionar esa validación; grabar queda condicionado. El par habilita ASR local (#19) y alimenta el piloto (#54).",
+        "urgency": "inmediato"
+      },
+      {
+        "frontId": "metodologia",
+        "issue": 25,
+        "title": "Revisar antecedentes para interpretar la evaluación",
+        "description": "Completar la síntesis de literatura en SINTESIS-ESTADO-DEL-ARTE.md sobre métricas temporales de vishing, ejecutable en paralelo sin dependencias.",
+        "urgency": "disponible"
+      }
+    ]
+  },
+  "parallelFronts": [
+    {
+      "id": "corpus",
+      "name": "Corpus y Referencia Humana",
+      "tag": "Frente A · Datos y Llamadas",
+      "state": "activo",
+      "stateLabel": "Activo",
+      "purpose": "Producción de llamadas simuladas de vishing y legítimas difíciles, grabación, transcripción y validación del criterio de anotación humana (D07).",
+      "whatExists": "Fichas de rol y par escrito de WhatsApp en docs/ingenieria/ARQUITECTURA.md §4; catálogo de 9 escenarios (CATALOGO-ESCENARIOS.csv); método del corpus y manual de anotación con referencia mínima acordada.",
+      "nextStep": "Grabar y transcribir el primer par (#39) con audio utilizable y referencia mínima, sin esperar las 14 tomas del piloto.",
+      "evidence": {
+        "label": "ARQUITECTURA.md §4",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/ingenieria/ARQUITECTURA.md#4-primer-par-escrito-del-escenario-al-aviso",
+        "detail": "Fichas de rol y diálogos del par WhatsApp integrados vía PR #56"
+      },
+      "issues": [39, 32, 54, 55, 45],
+      "activeIssue": 39
+    },
+    {
+      "id": "deteccion",
+      "name": "Reconocimiento y Detección Base",
+      "tag": "Frente B · ASR, Reglas y Replay",
+      "state": "activo",
+      "stateLabel": "Activo",
+      "purpose": "Implementar el pipeline mínimo ejecutable demostrable: detector SLM que puntúa cada turno cerrado sobre texto incremental, ASR local sobre audio propio e integración de streaming en replay. La cascada encoder→SLM queda como alternativa a medir con datos reales.",
+      "whatExists": "Par escrito de WhatsApp y recorrido conceptual de actualizaciones en ARQUITECTURA.md §4 (cerrado en #20 / PR #56); condiciones del ensayo SLM acordadas el 2026-10-08 en el issue #50: contexto de la llamada, aviso único ante el primer true válido y reglas de incendio como comparador independiente. La visualización del pipeline propuesto vive en /arquitectura/ (adoptada del PR #58).",
+      "nextStep": "Ejecutar #50 con el par escrito de H1 y casos de desarrollo, sin esperar audio. Al contar con las grabaciones de #39, probar ASR local en #19 e integrar SLM y transcripción en #28.",
+      "evidence": {
+        "label": "Issue #50",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/50",
+        "detail": "Condiciones del ensayo SLM acordadas el 2026-10-08: aviso único, reglas comparadas por separado. Son condiciones del ensayo, no cierre de D08/D09."
+      },
+      "archLink": "/arquitectura/",
+      "issues": [50, 19, 28],
+      "activeIssue": 50
+    },
+    {
+      "id": "metodologia",
+      "name": "Antecedentes, Protocolo y Selección",
+      "tag": "Frente C · D08, D09 y Metodología",
+      "state": "disponible",
+      "stateLabel": "Disponible",
+      "purpose": "Sintetizar la literatura relevante, congelar el protocolo experimental sin fugas temporales (D08) y seleccionar el detector y ASR final (D09).",
+      "whatExists": "Síntesis del estado del arte en SINTESIS-ESTADO-DEL-ARTE.md; ventana de contexto y alerta con decaimiento y la escalera de avisos como propuestas; taxonomía 6+6 como selección de trabajo de D07 (abierta); D11 abierta según la consolidación del PR #58; presupuestos de prefactibilidad técnica (#24).",
+      "nextStep": "Avanzar con la síntesis de literatura en #25 (abierto, sin bloqueos). Usar la integración de #28 para comparar candidatos en #51 y congelar protocolo en #33.",
+      "evidence": {
+        "label": "MAPA-DECISIONES.md (D08/D09)",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación",
+        "detail": "D08 y D09 siguen abiertas; la selección de detector y ASR sale de las comparaciones de #51."
+      },
+      "archLink": "/arquitectura/riesgo.html",
+      "issues": [25, 33, 51],
+      "activeIssue": 25
+    },
+    {
+      "id": "cierre",
+      "name": "Evaluación Final y Cierre Académico",
+      "tag": "Frente D · H5 y H6",
+      "state": "espera",
+      "stateLabel": "Previsto (más adelante)",
+      "purpose": "Ejecutar la evaluación final sobre test reservado para responder PI1, PI2 y E1; redactar el informe digital (~100 págs), demo y defensa ante UNSTA.",
+      "whatExists": "Definición rigurosa de métricas (T_A, T_R, T_C, L_R, L_C) en METRICAS.md; requisitos académicos y esqueleto de informe aprobados.",
+      "nextStep": "Horizonte futuro: esperar protocolo congelado (#33) y test reservado (#45) para correr la evaluación final en #52 sin sesgo. Redactar capítulos técnicos en #53.",
+      "evidence": {
+        "label": "METRICAS.md",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/evaluacion/METRICAS.md",
+        "detail": "Métricas unificadas de evaluación incremental de vishing"
+      },
+      "issues": [52, 53],
+      "activeIssue": 52
+    }
+  ],
+  "concludedContext": {
+    "id": "concluido",
+    "name": "Concluido",
+    "tag": "Contexto previo · Trabajo ya terminado",
+    "stateLabel": "Concluido",
+    "purpose": "Entregas cerradas que habilitan el trabajo actual (por ejemplo #20, que cerró H1, y #26). No son pendientes: aparecen para explicar de dónde viene el mapa."
+  },
+  "suspendedFront": {
+    "id": "laboratorio_tito",
+    "title": "Frente Experimental de Laboratorio (En Suspensión)",
+    "tag": "Desarrollo pausado · No bloquea el avance",
+    "state": "pausado",
+    "stateLabel": "Pausado (conservado)",
+    "resumeFromIssue": 51,
+    "summary": "Línea experimental con modelo preentrenado (RoBERTuito / Tito), generador de textos sintéticos argentinos, UI de escritorio en Python y cascada jerárquica con SLM local.",
+    "whySuspended": "Despriorizado el 2026-10-04 (cierre not_planned) para no comprometer arquitecturas complejas ni modelos pesados antes de tener corpus real y comparaciones. D09 permanece abierta: ningún detector quedó elegido.",
+    "howToResume": {
+      "condition": "Solo si la comparación sistemática de candidatos en H4 (#51 / D09) justifica evaluar un encoder o cascada frente al detector vigente.",
+      "branches": [
+        {
+          "name": "nacho1706/feature-training-data",
+          "ref": "bb542e130e7a67a82e376a75a0438a15de32f4a6",
+          "purpose": "Conserva el banco argentino de 6.000 textos sintéticos (300 familias) en experiments/laboratorio/entrenamiento_tito/ y scripts de entrenamiento.",
+          "url": "https://github.com/Corchets/bitacora_tesis/tree/nacho1706/feature-training-data"
+        },
+        {
+          "name": "origin/laboratorio-main",
+          "ref": "48882776ccd49560690057b991152862b648f5f4",
+          "purpose": "Conserva la UI local en Python (#44) para explorar CSVs de corridas, turnos y comparaciones.",
+          "url": "https://github.com/Corchets/bitacora_tesis/tree/laboratorio-main"
+        },
+        {
+          "name": "origin/nacho1706/experimento-spike-config-alta-zipformer-kroko-tf",
+          "ref": "5ac40b5",
+          "purpose": "Conserva el spike previo de cascada alta con Zipformer Kroko + TF-IDF (#29).",
+          "url": "https://github.com/Corchets/bitacora_tesis/tree/nacho1706/experimento-spike-config-alta-zipformer-kroko-tf"
+        }
+      ],
+      "precautions": "Verificar compatibilidad con avances de main; respetar particiones acordadas en #33/#55 para evitar fugas entre entrenamiento sintético y test reservado."
+    },
+    "evidence": {
+      "commentUrl": "https://github.com/Corchets/bitacora_tesis/issues/49#issuecomment-6048514393",
+      "author": "nacho1706 (2026-10-07)",
+      "text": "Cierre como no planificado, no completado. Artefactos en rama remota nacho1706/feature-training-data. No adopta RoBERTuito definitivo."
+    },
+    "retiredRecommendations": {
+      "text": "El análisis de laboratorio (CONTRASTE §9, consolidado en el PR #58) recomendaba retomar datos reales para el encoder (#41) y la cascada con audio (#42), además del banco y la UI (#46–#49). Todas están retiradas como not_planned en GitHub: volver a proponerlas exige una replanificación acordada por el equipo (D09 / #51), no se reabren solas.",
+      "issues": [41, 42]
+    },
+    "issues": [
+      {
+        "number": 46,
+        "title": "[Tarea] Revisar y corregir las familias del banco argentino de Tito",
+        "state": "closed",
+        "resolution": "not_planned",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/46",
+        "commentUrl": "https://github.com/Corchets/bitacora_tesis/issues/46#issuecomment-6048513276"
+      },
+      {
+        "number": 47,
+        "title": "[Tarea] Entrenar y guardar la cabeza de Tito con el banco argentino revisado",
+        "state": "closed",
+        "resolution": "not_planned",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/47",
+        "commentUrl": "https://github.com/Corchets/bitacora_tesis/issues/47#issuecomment-6048513729"
+      },
+      {
+        "number": 48,
+        "title": "[Tarea] Crear textos argentinos independientes para evaluar la cabeza de Tito",
+        "state": "closed",
+        "resolution": "not_planned",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/48",
+        "commentUrl": "https://github.com/Corchets/bitacora_tesis/issues/48#issuecomment-6048514058"
+      },
+      {
+        "number": 49,
+        "title": "[Experimento] Medir la cabeza de Tito en textos argentinos independientes",
+        "state": "closed",
+        "resolution": "not_planned",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/49",
+        "commentUrl": "https://github.com/Corchets/bitacora_tesis/issues/49#issuecomment-6048514393"
+      },
+      {
+        "number": 41,
+        "title": "[Investigación] Datos de entrenamiento para el encoder del goteo",
+        "state": "closed",
+        "resolution": "not_planned",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/41",
+        "commentUrl": null
+      },
+      {
+        "number": 42,
+        "title": "[Experimento] Medir con WAV la config alta con cascada: RTF y memoria conjunta",
+        "state": "closed",
+        "resolution": "not_planned",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/42",
+        "commentUrl": null
+      },
+      {
+        "number": 44,
+        "title": "[Tarea] UI Python del laboratorio: resultados y prueba de texto",
+        "state": "closed",
+        "resolution": "not_planned",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/44",
+        "commentUrl": null
+      }
+    ]
+  },
+  "edgeNotes": {
+    "20>39": "El par escrito de H1 habilita la grabación.",
+    "20>50": "El par escrito y el recorrido de H1 habilitan el ensayo del SLM.",
+    "39>19": "El audio del primer par habilita la prueba de ASR.",
+    "39>54": "El primer par revisado ordena la producción del piloto.",
+    "19>28": "La transcripción local alimenta la integración replay.",
+    "50>28": "La salida del SLM se integra en la corrida replay.",
+    "51>laboratorio": "Condición de retomo: solo si la comparación de D09 lo justifica."
+  },
+  "archComponents": {
+    "50": { "components": ["detector", "contador", "alerta"], "decisions": ["D09"] },
+    "28": { "components": ["adaptador", "estado", "contador", "alerta", "salida"], "decisions": ["D08"] },
+    "19": { "components": ["vad", "asr"], "decisions": ["D09"] },
+    "39": { "components": ["fuente-replay", "adaptador"], "decisions": ["D06"] },
+    "54": { "components": ["fuente-replay", "adaptador"], "decisions": ["D06"] },
+    "32": { "components": [], "decisions": ["D07"], "section": "seccion-taxonomia" },
+    "33": { "components": ["contador", "alerta", "salida"], "decisions": ["D08"] },
+    "51": { "components": ["asr", "detector", "encoder", "cascada"], "decisions": ["D09", "D11"] },
+    "55": { "components": ["salida"], "decisions": ["D08"] },
+    "45": { "components": ["salida"], "decisions": [] },
+    "52": { "components": ["salida"], "decisions": ["D04"] },
+    "53": { "components": ["presentacion", "salida"], "decisions": ["D10", "D12"] },
+    "25": { "components": [], "decisions": [] },
+    "20": { "components": ["fuente-replay", "adaptador"], "decisions": ["D05"] }
+  },
+  "issueConditions": {
+    "39": [
+      {
+        "label": "Condición documental previa (D06)",
+        "text": "D06 exige la validación del tutor de las condiciones de consentimiento y custodia antes de grabar (condiciones documentadas en el PR #35; consulta del 2026-09-30 pendiente de respuesta al 2026-10-08). Preparar el primer par puede avanzar; grabar queda condicionado a esa validación.",
+        "source": "docs/gestion/MAPA-DECISIONES.md"
+      }
+    ]
+  }
+}

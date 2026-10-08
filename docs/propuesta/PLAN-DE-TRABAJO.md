@@ -19,8 +19,7 @@
 **Tutor:** Ing. Ernesto Rico  
 **Año:** 2026
 
-> La versión final debe incorporar el logo oficial de UNSTA y respetar la plantilla
-> o reglas tipográficas que confirme el profesor.
+> La versión final debe respetar los [requisitos académicos](REQUISITOS-ACADEMICOS.md).
 
 ## 1. Resumen de la propuesta
 
@@ -30,8 +29,8 @@ conversación.
 El proyecto propone diseñar, implementar y evaluar un prototipo que procese incrementalmente un flujo de audio en español, transcriba localmente la conversación, estime el riesgo de vishing e identifique señales como suplantación, urgencia, aislamiento y pedidos de códigos, secretos o transferencias. Cuando el riesgo supere una política definida, el sistema mostrará una advertencia contextual y accionable.
 
 La evaluación se realizará sobre un corpus controlado de conversaciones simuladas
-de vishing y llamadas legítimas difíciles. Se compararán reglas, un modelo clásico
-y, si aporta una mejora justificable, un modelo neuronal liviano. Además de las
+de vishing y llamadas legítimas difíciles. Se compararán reglas solas con los
+detectores candidatos y su acumulación temporal de evidencia. Además de las
 métricas de clasificación, se medirá la falsa alarma, el efecto de los errores del
 reconocimiento de voz, la latencia y el tiempo de anticipación respecto de una
 acción crítica. El núcleo experimental utilizará reproducción en streaming; la llamada
@@ -40,54 +39,26 @@ factibilidad. La captura por altavoz quedó despriorizada por su mezcla de canal
 
 ## 2. Problema
 
-Durante una llamada de vishing, la víctima debe decidir bajo presión y con escaso
-tiempo para verificar la identidad del interlocutor. Un número puede parecer normal
-y el peligro solo hacerse visible en el contenido y la evolución de la conversación.
-El problema de ingeniería es detectar evidencia suficiente de manipulación y de una
+Un número puede parecer normal y el peligro solo hacerse visible en el contenido y la evolución de la conversación. El problema de ingeniería es detectar evidencia suficiente de manipulación y de una
 solicitud riesgosa mientras la llamada todavía está en curso, con una tasa de falsa
 alarma aceptable y una advertencia que permita actuar antes de compartir información
 o realizar una operación.
 
+Las modalidades y sus fuentes están en el [catálogo de escenarios](../corpus/CATALOGO-ESCENARIOS.csv).
+
 ### Formulación en cinco líneas
 
-> **Estado: ratificada por el equipo; pendiente del tutor.** Mateo informó el 2026-09-25
-> que los cuatro integrantes aprobaron sin cambios estas cinco líneas del
-> [issue #18](https://github.com/Corchets/bitacora_tesis/issues/18). La decisión de alcance
-> [D02](../gestion/MAPA-DECISIONES.md#d02--definir-problema-usuario-y-necesidad)
-> permanece abierta hasta consultar el encuadre al tutor el 2026-09-30.
-
-1. **Usuario:** una persona en Argentina que atiende en su teléfono a alguien que dice llamar de su
+1. **Usuario:** una persona en Argentina que conversa por teléfono con alguien que dice llamar de su
    banco, de un organismo como ANSES, de una mesa de soporte o de parte de un familiar.
-2. **Contexto:** el número no delata nada; el engaño se ve solo en lo que se dice: autoridad,
-   urgencia, pedido de secreto y, en algún momento, un pedido concreto.
+2. **Contexto:** el prototipo analiza lo dicho durante la llamada y su evolución.
+   Una mención de un código, una urgencia o un pedido de dinero necesita contexto;
+   también puede aparecer en una conversación legítima.
 3. **Decisión bajo presión:** en pocos minutos y sin poder verificar al interlocutor, tiene que
    decidir si dicta un código o una clave, transfiere dinero o comparte la pantalla.
 4. **Daño evitado:** que esa acción ocurra, y con ella la toma de la cuenta o la pérdida de dinero.
    Por eso la advertencia sirve solo si llega antes de que la persona cumpla el pedido, no después.
 5. **Límite de las defensas existentes:** la reputación del número no ve la conversación; las
    recomendaciones de BCRA y ANSES dependen de que la persona las recuerde en el momento de presión.
-
-**Respaldo de cada línea:**
-
-- Líneas 1 a 3: las modalidades salen de las fuentes del
-  [catálogo de escenarios](../datos-etica/CATALOGO-ESCENARIOS.csv) (issue
-  [#17](https://github.com/Corchets/bitacora_tesis/issues/17)): BCRA, ANSES, UFECRI-MPF, Ministerio
-  de Seguridad y Banco Galicia, con la fecha de consulta registrada en cada fila. Tres escenarios que ilustran el problema:
-  `SC-BANK-OTP-01` (código de verificación), `SC-ORG-BENEFICIO-01` (beneficio inexistente) y
-  `SC-FAMILIAR-DINERO-01` (familiar que pide dinero).
-- Línea 4: el "antes" es lo que mide PI2; ver `T_R` y `T_C` en
-  [METRICAS.md](../evaluacion/METRICAS.md).
-- Línea 5: disponibilidad de Google en
-  [lecturas/2026-google-scam-detection.md §6](../investigacion/lecturas/2026-google-scam-detection.md)
-  (consulta 2026-09-17). Que las recomendaciones dependan de la memoria de la persona es un argumento
-  del equipo, no una afirmación con fuente.
-
-**Beneficiario y foco en adultos mayores:** queda abierto en
-[D12](../gestion/MAPA-DECISIONES.md#d12--encuadre-del-foco-en-adultos-mayores). La formulación no
-restringe el usuario por edad. Si el foco se mantiene, se justifica por la gravedad potencial de las
-pérdidas y la exposición a estafas de suplantación, no por "son los más afectados". La advertencia
-de UFECRI-MPF que respalda `SC-FAMILIAR-DINERO-01` está dirigida a personas mayores: eso muestra que
-la modalidad las alcanza, no que sean las más afectadas.
 
 ## 3. Objetivo general
 
@@ -105,7 +76,7 @@ desempeño, falsas alarmas, latencia y margen temporal de intervención.
 3. Construir un corpus controlado y documentado de conversaciones simuladas de
    vishing y llamadas legítimas en español.
 4. Comparar alternativas de reconocimiento de voz local sobre audio representativo.
-5. Implementar baselines de reglas y aprendizaje automático clásico.
+5. Evaluar reglas solas como línea base para comparar los detectores candidatos.
 6. Desarrollar un detector incremental que acumule evidencia a lo largo del tiempo.
 7. Diseñar advertencias explicables derivadas de las señales detectadas.
 8. Integrar la cadena audio→ASR→detección→advertencia en un entorno controlado.
@@ -133,9 +104,16 @@ Las definiciones operativas y métricas están en
 ### Núcleo obligatorio
 
 - Español, priorizando variedad argentina sin afirmar representatividad nacional.
+- **Encuadre parcial adoptado el 2026-10-08 (D12; PR #58):** el proyecto conserva
+  el foco en personas adultas mayores por la gravedad potencial de las pérdidas y
+  su exposición a la suplantación. Su participación corresponde a evaluación y
+  prueba de usabilidad, no es requisito del corpus ni permite prometer rendimiento
+  para ese grupo. La composición del corpus limita las conclusiones; falta discutir
+  y ratificar el encuadre con el equipo.
 - Corpus de llamadas simuladas/representadas y llamadas legítimas difíciles.
-- Transcripción local.
-- Detección semántica y conversacional incremental.
+- Transcripción local del audio.
+- Detector sobre texto, conservando contexto de la llamada actual. La representación
+  y la ventana de contexto se elegirán mediante pruebas.
 - Maniobras de ingeniería social y solicitudes de alto riesgo.
 - Evento crítico y medición de anticipación.
 - Advertencia explicable.
@@ -146,7 +124,6 @@ Las definiciones operativas y métricas están en
 
 - Llamada VoIP integrada en la aplicación.
 - Cuantización avanzada y comparación de dispositivos.
-- Features prosódicas.
 - Prueba de comprensión de warnings con voluntarios.
 - Evaluación adversarial o fuera de distribución.
 
@@ -154,74 +131,75 @@ Las definiciones operativas y métricas están en
 
 - Captura universal de llamadas PSTN desde una app Android ordinaria.
 - Identificación biométrica o detección de voces clonadas/deepfake.
-- Reputación de números y detección de spoofing.
-- iOS, múltiples idiomas, SMS, WhatsApp y malware.
+- Agenda, historial de llamadas, memoria entre sesiones, reputación de números y
+  detección de spoofing. La dirección entrante/saliente tampoco será una entrada del detector.
+- Rasgos acústicos para detectar fraude, como tono o estrés vocal. El audio se usa
+  para transcribir y medir tiempos y calidad del ASR.
+- App iOS, múltiples idiomas, análisis de mensajes de SMS/WhatsApp y detección de malware.
 - Backend de producción o publicación comercial en Play Store.
 - Estudio poblacional representativo con víctimas reales.
 
-## 7. Alternativas para obtener el audio
+El contenido de la llamada permite evaluar señales de riesgo, pero no verificar la
+identidad del interlocutor. Si dos llamadas tienen el mismo contenido observable,
+el detector dispone de la misma evidencia aunque una sea legítima y la otra no.
+Este límite debe aparecer en los casos de evaluación y en las conclusiones.
 
-El 2026-09-09 se presentaron al profesor cuatro alternativas comparadas:
+## 7. Alternativas para obtener el audio
 
 1. reproducción de grabaciones como stream;
 2. llamada en altavoz capturada por un micrófono externo;
 3. llamada VoIP controlada cuyo audio pertenece a la aplicación;
 4. integración privilegiada con telefonía mediante OEM/AOSP/root.
 
-Se aprobó **replay como base experimental reproducible** y **VoIP controlada como
-integración objetivo**, condicionada a la factibilidad del prototipo. El altavoz externo
+Se aprobó **replay como base experimental reproducible** y **VoIP controlada como integración objetivo**, condicionada a la factibilidad del prototipo. El altavoz externo
 quedó despriorizado; la captura universal PSTN permanece fuera de alcance. La comparación
 y su decisión posterior están en
 [ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)
 y en la [minuta del 2026-09-09](../gestion/seguimientos/2026-09-09.md).
 
-## 8. Metodología
+## 8. Recorrido del desarrollo
 
-### Etapa 1 — Definición y revisión
+> **Estado: propuesta sin discutir.** Orden de hitos para revisar con el equipo.
+> Las reglas de anotación, el protocolo y los modelos siguen abiertos en
+> [D07, D08 y D09](../gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación).
 
-- Cerrar problema, interesados, alcance y preguntas.
-- Ejecutar una revisión bibliográfica reproducible.
-- Consolidar requisitos funcionales, no funcionales y éticos.
+| Hito | Resultado que habilita el siguiente paso | Dependencia |
+|---|---|---|
+| **[H1](https://github.com/Corchets/bitacora_tesis/milestone/2) — Acuerdo mínimo** | Alcance y preguntas claros; un ejemplo contrastante trabajado; reglas iniciales de anotación y entradas/salidas conceptuales acordadas; primeras tareas listas para ejecutar. | Revisión del Plan, corpus, anotación, métricas y arquitectura. |
+| **[H2](https://github.com/Corchets/bitacora_tesis/milestone/3) — Piloto del corpus y primeras pruebas** | Piloto con audio, texto revisado y referencia humana; desacuerdos y costo conocidos. Primer detector con reglas sobre texto incremental y prueba de ASR local con errores, tiempos y recursos registrados. | H1. Los primeros textos habilitan el detector; las primeras grabaciones habilitan ASR. No hace falta esperar a completar el piloto para empezar esas pruebas. |
+| **[H3](https://github.com/Corchets/bitacora_tesis/milestone/4) — Primera integración medible** | Un replay recorre audio→ASR→reglas→aviso. Otra persona puede repetirlo y comparar alertas con la referencia humana, sin confundir sus marcas. | Primeros casos revisados, detector sobre texto y ASR ejecutable de H2; puede comenzar antes de completar el piloto. |
+| **[H4](https://github.com/Corchets/bitacora_tesis/milestone/5) — Desarrollo, comparación y selección del detector** | Candidatos implementados o adaptados y, si corresponde, entrenados. Comparación sobre desarrollo, revisión del contexto y política de alerta, análisis del efecto del ASR y selección por calidad, falsas alarmas y costo. | Primeras exploraciones pueden comenzar en H2. La selección requiere el piloto revisado y una integración medible; alimenta D08 y D09. |
+| **[H5](https://github.com/Corchets/bitacora_tesis/milestone/6) — Evaluación final** | Corpus y particiones versionados; protocolo, configuración y test reservados antes de medir. Resultados reproducibles responden PI1, PI2 y E1 e incluyen errores y límites. | H4 y cierre de las decisiones necesarias para interpretar la evaluación. |
+| **[H6](https://github.com/Corchets/bitacora_tesis/milestone/7) — Entrega y defensa** | Informe coherente con los resultados, paquete reproducible, presentación, demo y video de respaldo revisados. | H5; redacción y bibliografía acompañan los hitos anteriores. |
 
-### Etapa 2 — Factibilidad técnica
+Los hitos definen resultados, no una arquitectura obligatoria. El laboratorio
+existente se evalúa cuando una tarea necesita esa función: se puede reutilizar,
+adaptar o reemplazar. Entrenar un modelo, usar una cascada o desarrollar una UI
+completa requieren justificar su aporte a la comparación. No son condiciones para
+obtener la primera ejecución medible.
 
-- Probar audio→ASR local→regla→alerta.
-- Medir latencia básica y documentar restricciones de plataforma.
-- Elegir las interfaces entre audio, ASR, detector y UI.
+**H1 termina cuando** se puede recorrer un ejemplo escrito fraudulento y uno legítimo
+desde su preparación hasta la referencia que se anotaría, distinguir esa referencia
+de la salida esperada del detector y explicar el flujo conceptual. Es un recorrido
+ilustrativo; las grabaciones y las mediciones reales pertenecen a los hitos posteriores.
+Además, los issues del arranque deben
+tener resultado observable, dependencias y criterio de revisión. La elección de
+modelos y la política final de alerta se resuelven con las pruebas posteriores.
 
-### Etapa 3 — Corpus y anotación
+“Piloto” se refiere al corpus y a su procedimiento de producción y anotación.
+El detector tiene primeras versiones que se prueban con esos datos. Su desarrollo
+atraviesa H2, H3 y H4; no se reduce a ejecutar modelos ya hechos.
 
-- Definir escenarios, guiones semi-estructurados y hard negatives.
-- Aprobar consentimiento, almacenamiento, acceso y retención.
-- Grabar un piloto, transcribir y anotar por más de un integrante.
-- Ajustar manual y medir acuerdo antes de escalar.
+Corpus, detector y ASR avanzan con intercambios pequeños: primero textos para probar
+la detección con contexto; después las grabaciones permiten medir el ASR e integrar
+audio y tiempos. El ASR se incorpora mediante motores existentes, cuya calidad y
+costo se prueban. La arquitectura se detalla al implementar y se revisa cuando las
+pruebas muestran qué interfaces o componentes conviene cambiar.
 
-### Etapa 4 — Modelos y estado temporal
-
-- Implementar reglas de incendio y detector LLM/SLM local (clasificador; variante agente a medir).
-  TF–IDF fuera del camino (2026-09-25).
-- Evaluar un modelo neuronal liviano solo si existe evidencia para hacerlo.
-- Comparar predicción por turno con acumulación temporal e histéresis.
-
-### Etapa 5 — Integración
-
-- Construir el pipeline end-to-end.
-- Mostrar riesgo, evidencia y acción recomendada.
-- Instrumentar tiempos, memoria, errores y versiones.
-
-### Etapa 6 — Evaluación
-
-- Congelar test antes del ajuste final.
-- Evaluar transcripción manual frente a ASR.
-- Medir precisión, recall, F1/AUPRC, llamadas con falsa alarma, falsas alertas por
-  hora, anticipación, latencia p50/p95 y consumo de recursos.
-- Analizar casos de error y amenazas a la validez.
-
-### Etapa 7 — Documentación y defensa
-
-- Mantener el informe durante todo el proyecto.
-- Reproducir tablas y figuras desde configuraciones versionadas.
-- Preparar PDF, anexos, código, demo y video de respaldo.
+Antes de ampliar el corpus se acuerda cómo separar semillas y variantes entre
+desarrollo y test. El piloto sirve para ajustar el método; no se presenta como test
+final. La evaluación con transcripción manual y ASR, las marcas y las métricas se
+rigen por sus documentos, sin repetir aquí sus fórmulas.
 
 ## 9. Arquitectura conceptual
 
@@ -234,120 +212,90 @@ ASR local con texto parcial y timestamps
           ↓
 Estado de conversación
           ↓
-Detector de riesgo + etiquetas explicativas
+Detector de riesgo + evidencia explicativa
           ↓
-Acumulador temporal / umbral / histéresis
+Política de alerta (pendiente de evaluación)
           ↓
 Advertencia: qué ocurre + por qué importa + qué hacer
 ```
 
-La interfaz se diseñará de forma independiente de Android para poder entrenar y
-evaluar en computadora y desplegar el modelo seleccionado después.
+El motor y la interfaz se mantienen separados para poder desarrollar y evaluar en
+computadora. La integración móvil se considera según la evidencia de factibilidad.
 
 ## 10. Entregables
 
-- Plan de Trabajo aprobado.
-- Revisión y matriz bibliográfica.
-- Requisitos y arquitectura.
-- Plan de datos, consentimiento, esquema y manual de anotación.
-- Corpus controlado y sus manifiestos autorizados.
-- Baselines y detector incremental.
-- Pipeline local e integración/demostración.
-- Suite de pruebas.
-- Protocolo experimental, resultados y análisis de errores.
-- Informe Final digital, resúmenes español/inglés y anexos.
-- Presentación, demo y respaldo audiovisual.
+| Entregable                     | Qué permite comprobar                                                                                                                                                                                                                                                                                 |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Prototipo local ejecutable** | Una grabación reproducida como stream recorre audio→ASR→detector→alerta; se observan transcripción, motivo y momento de cada aviso. Incluye instrucciones de ejecución y pruebas de los comportamientos críticos.                                                                                     |
+| **Corpus controlado**          | Conversaciones simuladas fraudulentas y legítimas difíciles, con transcripciones, anotaciones y separación de datos para desarrollo y evaluación. Audio y datos identificables permanecen fuera de Git; el repositorio conserva método y metadatos disociados.                                        |
+| **Experimentos reproducibles** | Comparación de reglas solas y detectores candidatos, texto manual frente a ASR y detección por turno frente a acumulación temporal. Cada corrida registra datos/split, configuración, seed, versión de código, hardware, salidas y análisis de errores; permite regenerar métricas, tablas y figuras. |
+| **Informe Final digital**      | Problema, antecedentes con fuentes verificadas, requisitos, arquitectura, método, resultados y límites; resúmenes español/inglés y anexos según los [requisitos académicos](REQUISITOS-ACADEMICOS.md).                                                                                                |
+| **Defensa y demostración**     | Presentación que explica el aporte y los resultados, demo repetible y video de respaldo.                                                                                                                                                                                                              |
+
+El Plan de Trabajo y la documentación técnica guían estos entregables. Cada contenido
+se mantiene en su fuente de verdad y se incorpora al informe cuando corresponde.
 
 ## 11. Cronograma
 
-**Fechas de referencia.** La defensa es presencial a fines de diciembre de 2026 y el
-día exacto sigue pendiente, según la [minuta del 9 de septiembre](../gestion/seguimientos/2026-09-09.md).
-El equipo fija además el **1 de diciembre** como cierre interno de informe, código,
-resultados y presentación. No es una exigencia de la cátedra: es el margen que se
-reserva para las correcciones del tutor y el ensayo de la defensa.
+> **Estado: propuesta sin discutir.** Calendario de referencia desde el lunes
+> 2026-10-05. Se revisa con el equipo según disponibilidad y evidencia; no supone
+> que el laboratorio existente ya cumple los hitos.
 
-| Fechas | Resultado principal |
-|---|---|
-| 2–9 sep | propuesta, preguntas, alternativas de audio y decisiones al profesor |
-| 10–21 sep | alcance aprobado y vertical slice técnico audio→ASR→regla→alerta |
-| 22 sep–5 oct | corpus/anotación piloto, protocolo ético y marco teórico en borrador |
-| 6–19 oct | benchmark ASR, reglas, LLM/SLM local y primer resultado temporal |
-| 20 oct–2 nov | corpus v1 y detector incremental |
-| 3–9 nov | integración end-to-end e instrumentación |
-| 10–23 nov | congelamiento, test congelado y evaluación final |
-| 24–30 nov | informe completo, presentación y reproducción de tablas y figuras |
-| **1 dic** | **cierre interno: informe, código, resultados y presentación terminados** |
-| 2 dic en adelante | ventana de defensa; solo correcciones pedidas por el tutor |
+El acuerdo mínimo de H1 debe permitir el arranque. No hace falta cerrar de antemano
+todas las decisiones de modelos y evaluación final.
 
-> **Estado: propuesta sin discutir por los cuatro integrantes.** El reparto de
-> semanas es una construcción del equipo, a ratificar en la próxima reunión y con el
-> tutor.
+| Fechas                  | Resultado verificable esperado                                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 2026-10-05 a 2026-10-11 | H2: probar el procedimiento con un par de casos contrastantes; producir texto, audio y referencia humana. En paralelo, probar un primer detector con reglas sobre texto incremental y ASR local sobre las grabaciones. |
+| 2026-10-12 a 2026-10-18 | Completar y revisar el piloto de H2. H3: obtener el primer replay completo con reglas, aviso y tiempos verificables por otra persona. Acordar separación de datos antes de ampliar. |
+| 2026-10-19 a 2026-10-25 | H4: comparar reglas y pocos candidatos sobre desarrollo; probar contexto y revisar errores con texto manual y ASR. Decidir qué alternativas merecen continuar. |
+| 2026-10-26 a 2026-11-08 | Continuar H4: corregir y comparar candidatos; completar los datos necesarios según cobertura y costo del piloto. Elegir configuración y cerrar el protocolo para H5; reservar test y verificar reproducción antes de medirlo. |
+| 2026-11-09 a 2026-11-22 | Ejecutar la evaluación final sobre el test reservado; generar tablas y figuras, analizar errores y responder PI1 y PI2 sin ajustar el detector mirando ese test.               |
+| 2026-11-23 a 2026-11-30 | Completar y revisar el informe, verificar reproducción de resultados, preparar presentación, demo y video de respaldo.                                                         |
+| **2026-12-01**          | **Objetivo de cierre interno: informe, código, resultados y presentación disponibles para revisión.**                                                                          |
+| Desde 2026-12-02        | Correcciones del tutor y ensayo de defensa; fecha exacta de entrega y defensa pendiente de confirmación.                                                                       |
 
-Este calendario comprime en doce semanas el trabajo que la versión anterior
-distribuía en dieciséis. El recorte no es parejo y sigue una regla fija: **si la
-fecha se adelanta se recortan extensiones y no se comprime la evaluación final.**
-
-- **Se preservan dos semanas completas de congelamiento y evaluación** (10–23 nov).
-  Es el bloque que sostiene la credibilidad de los resultados y el único que no se
-  toca.
-- **Integración baja de dos semanas a una** (3–9 nov). Lo hace viable el vertical
-  slice de septiembre: en noviembre se conecta un pipeline que ya funciona por
-  partes, no se construye de cero.
-- **Informe baja de dos semanas a una** (24–30 nov). Lo hace viable escribir desde
-  octubre en paralelo al desarrollo, como ya pide la etapa 7 de la
-  [metodología](#8-metodología). Si en noviembre el marco teórico todavía está en
-  blanco, esta semana no alcanza.
-- **Desaparece el ciclo de correcciones de fin de diciembre.** Su función la cumple
-  la ventana de defensa, que deja de ser tiempo de producción.
-
-El margen desapareció, y conviene decirlo ahora y no en noviembre: cualquier atraso
-se paga con las [extensiones condicionadas al avance](#6-alcance) —VoIP integrada,
-cuantización, features prosódicas, prueba de warnings con voluntarios, evaluación
-adversarial—, que son la primera reserva a sacrificar y no un compromiso. El núcleo
-obligatorio no se toca. Si un atraso llega a comprometerlo, la conversación que
-corresponde es con el tutor, no un recorte silencioso de la evaluación.
+El informe se escribe junto a cada resultado desde 2026-10-05. Cada semana se revisa
+el avance mostrando una corrida, datos anotados o resultados verificables; se puede
+adelantar trabajo si sus dependencias están resueltas. Si hay atraso, se replanifica
+y se postergan primero las [extensiones](#extensiones-condicionadas-al-avance).
+Se reservan dos semanas para evaluación final. El **2026-12-01** es una referencia
+interna, y la defensa prevista para fines de diciembre surge de la
+[minuta del 2026-09-09](../gestion/seguimientos/2026-09-09.md).
 
 ## 12. Organización del equipo
 
-El trabajo se organiza en cuatro líneas: investigación/datos/ética, ML/evaluación,
-audio/ASR y producto/integración. Las tareas se publican como GitHub Issues y cada
-integrante se autoasigna según capacidad. Todo issue tiene una persona responsable
-y una revisora distinta cuando afecta datos, métricas, arquitectura o el informe.
+> **Estado: propuesta sin discutir.** Distribución operativa para revisar con los
+> cuatro integrantes; acompaña el cronograma y las decisiones pendientes de
+> [corpus, evaluación y modelos](../gestion/MAPA-DECISIONES.md).
 
-Todo el equipo participa del piloto de anotación, integración, revisión del informe
-y ensayo de defensa. La contribución se hace visible mediante issues, commits y
-revisiones, sin imponer áreas permanentes por nombre.
+El equipo elige pocas tareas según el resultado del hito actual y las publica como
+GitHub Issues. Cada tarea tiene una persona responsable y una revisora distinta
+cuando afecta datos, métricas, arquitectura o conclusiones del informe.
+
+| Momento                               | Organización sugerida                                                                                                                      |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Arranque: corpus y primeras pruebas | Una pareja prepara, graba y revisa los primeros casos. La otra reparte detector sobre texto y prueba de ASR; ambos trabajos usan esos casos y acuerdan el formato compartido. Todo el equipo revisa un ejemplo de principio a fin. |
+| Detector e integración de audio       | Una pareja trabaja en datos, reglas y detector; otra en ASR, integración y mediciones. Ambas usan los mismos formatos de entrada y salida. |
+| Evaluación final y entrega            | Se reparte ejecución, análisis y redacción; otra persona verifica cada resultado relevante y reproduce la demo.                            |
+
+Las parejas pueden rotar según disponibilidad y conocimiento. La bibliografía y la
+redacción se distribuyen junto al trabajo técnico que las necesita. Todo el equipo
+participa de una muestra común de anotación, comprende el flujo completo y ensaya
+la defensa. Los nombres y compromisos concretos se acuerdan en los issues.
+
+El reparto sigue las tareas del hito, sin fijar líneas permanentes por persona.
+Cada semana termina mostrando el resultado y su revisión; una lista de issues
+cerrados por sí sola no demuestra avance.
 
 ## 13. Riesgos principales
 
-- Captura PSTN no disponible para apps ordinarias.
-- Corpus poco realista o insuficiente.
-- Fuga de información entre entrenamiento y test.
-- ASR deficiente con español argentino y ruido.
-- Falsas alarmas excesivas.
-- Integración o escritura tardías.
-- Modelo demasiado pesado para el dispositivo.
-- Tratamiento inadecuado de voces/transcripciones.
-
-Las mitigaciones están en [REGISTRO-RIESGOS.md](../gestion/REGISTRO-RIESGOS.md).
-
-La propuesta de diseño del corpus está en
-[METODO-CREACION-CORPUS.md](../datos-etica/METODO-CREACION-CORPUS.md).
+Los riesgos activos se mantienen en el
+[REGISTRO-RIESGOS.md](../gestion/REGISTRO-RIESGOS.md): corpus insuficiente, fuga entre
+desarrollo y test, errores del ASR, falsas alarmas, costo de ejecución, integración
+tardía y medición incorrecta de la anticipación. Probabilidad, impacto, responsables
+y mitigaciones se actualizan en esa matriz.
 
 ## 14. Criterio de éxito
 
 El proyecto será exitoso si responde las preguntas con un procedimiento honesto y reproducible, entrega un pipeline demostrable y documenta sus límites. No se fija una accuracy arbitraria como condición. Un resultado que muestre baja anticipación, degradación por ASR o superioridad de un baseline simple sigue siendo un resultado válido si el experimento está bien diseñado.
-
-## 15. Decisiones resueltas con el profesor el 9 de septiembre
-
-1. **Preguntas centrales:** Aprobadas PI1 y PI2 como preguntas principales; comparación manual vs. ASR como diagnóstica y explicación como objetivo secundario.
-2. **Fuente de audio:** Aprobada la estrategia escalonada: replay de grabaciones como base experimental reproducible y VoIP controlada como integración prototipo. Altavoz despriorizado.
-3. **Límites de alcance:** Aprobado dejar fuera PSTN universal, deepfake y biometría de voz.
-4. **Procedimiento ético y privacidad:** UNSTA no requiere comité de ética formal. El corpus se compone de simulaciones con datos ficticios y sin víctimas reales. El procesamiento local sin nube es un principio de diseño; su ejecución *on-device* en Android requiere medición.
-5. **Requisitos académicos:** Defensa presencial última/penúltima semana de diciembre 2026. Tutor asignado: Ing. Ernesto Rico. Entrega digital promedio ~100 págs (ver [REQUISITOS-ACADEMICOS.md](REQUISITOS-ACADEMICOS.md)).
-
-## 16. Aprobaciones y cambios
-
-| Fecha      | Versión | Decisión del profesor/tutor | Cambio requerido | Responsable |
-| ---------- | ------- | --------------------------- | ---------------- | ----------- |
-| 2026-09-09 | 1.0     | Dirección y alcance aprobados sin observaciones críticas. Sugirió investigar ventana de contexto, prefactibilidad, baselines, tipos de manipulación policial y estrategia de modelos. | Actualizar requisitos académicos, mapa de decisiones y avanzar a factibilidad técnica (Ciclo 1). | Equipo |
