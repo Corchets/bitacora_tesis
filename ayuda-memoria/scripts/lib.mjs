@@ -24,8 +24,29 @@ export function glossary(text, terms) {
 }
 export function decisions(text) {
   return [...text.matchAll(/^### (D\d+) [—–-] (.+)\n([\s\S]*?)(?=^### |^## |$(?![\s\S]))/gm)].map(match => {
-    const state = match[3].match(/^- \*\*Estado:\*\* (.+)/m)?.[1] ?? 'Estado no explicitado; consultar la fuente.';
-    return { id: match[1], title: match[2], state: plain(state), open: !/^(resuelt[oa]|cerrad[oa]|.*resuelta)/i.test(plain(state)) };
+    const block = match[3].trim();
+    const field = (...names) => {
+      for (const name of names) {
+        const found = block.match(new RegExp(`^- \\*\\*${name}:\\*\\*\\s*([\\s\\S]*?)(?=^- \\*\\*|$(?![\\s\\S]))`, 'm'));
+        if (found) return plain(found[1].replace(/\s+/g, ' '));
+      }
+      return '';
+    };
+    const state = field('Estado') || 'Estado no explicitado; consultar la fuente.';
+    /* detalle: narrativa del bloque. Se excluyen solo las viñetas de metadata ya
+       extraídas como campos; el resto de las viñetas rotuladas (Precisión de
+       alcance, Público, Piloto…) son contenido y se conservan con su rótulo. */
+    const META = /^(Pregunta|Estado|Bloqueada por|Desbloquea|Evidencia|Fuente|Tipo|Responsable|Cómo seguir|Para empezar|Para cerrar|Salida):/;
+    const detalle = block.split('\n')
+      .map(line => line.replace(/^- \*\*([^*]+):\*\*\s*/, (m, name) => META.test(name + ':') ? '' : `${name}: `))
+      .map(line => plain(line)).filter(Boolean).join(' ');
+    return {
+      id: match[1], title: match[2], state, open: !/^\s*(resuelt[oa]|cerrad[oa])/i.test(state),
+      pregunta: field('Pregunta'), bloqueadaPor: field('Bloqueada por'), desbloquea: field('Desbloquea'),
+      evidencia: field('Evidencia', 'Fuente'), comoSeguir: field('Cómo seguir', 'Para empezar', 'Salida'),
+      paraCerrar: field('Para cerrar'),
+      detalle
+    };
   });
 }
 export function fingerprint(issue, blockers, sources, documents) {
@@ -73,5 +94,11 @@ export function validateRoadmap(roadmap) {
     if (!front.id || !front.name || !front.state || !Array.isArray(front.issues)) {
       throw new Error(`Frente inválido: ${front.id ?? 'sin id'}`);
     }
+  }
+  if (roadmap.suspendedFront.resumeFromIssue !== undefined && !Number.isInteger(roadmap.suspendedFront.resumeFromIssue)) {
+    throw new Error('suspendedFront.resumeFromIssue debe ser un número de issue.');
+  }
+  for (const key of Object.keys(roadmap.edgeNotes ?? {})) {
+    if (!/^\d+>(\d+|laboratorio)$/.test(key)) throw new Error(`edgeNotes: clave inválida ${key}`);
   }
 }

@@ -7,6 +7,14 @@ Cada decisión debe tener una sola fuente de verdad. Cuando una decisión técni
 ADR en [`docs/ingenieria/adr/`](../ingenieria/adr/) y desde aquí solo se enlaza su conclusión.
 Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 
+> **Adopción 2026-10-08 (PR #58):** se integró la consolidación de arquitectura y
+> estados de decisión elaborada por Luciano en `docs/ingenieria/arquitectura-web/`.
+> Su contenido sustantivo se migró a este mapa — D02 y D06 como parciales, D11
+> abierta, D12 parcial, y precisiones de D03, D04, D05, D07, D08, D09, D10 y D13
+> rotuladas «consolidación PR #58» — conservando en cada ficha el antecedente que
+> tenía registrado. No expresa una aprobación nueva del tutor ni del equipo: es la
+> lectura consolidada que el usuario pidió adoptar.
+
 ## Frontera: decisiones que pueden tomarse ahora
 
 ### D01 — Completar el contrato académico
@@ -28,7 +36,11 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Evidencia:** problema en cinco líneas, persona/actor y tres escenarios.
 - **Bloqueada por:** ninguna (D01 resuelto).
 - **Desbloquea:** D06 y requisitos.
-- **Estado:** ratificada por el equipo en [PLAN-DE-TRABAJO.md §2](../propuesta/PLAN-DE-TRABAJO.md#formulación-en-cinco-líneas)
+- **Estado:** ratificada por el equipo en [PLAN-DE-TRABAJO.md §2](../propuesta/PLAN-DE-TRABAJO.md#formulación-en-cinco-líneas);
+  pendiente la respuesta del tutor anotada en el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
+  (parcial, según la consolidación del PR #58).
+- **Cómo seguir:** esperar la ratificación del tutor; si cambia el encuadre,
+  revisar presentación y corpus.
 
 ### D05 — Elegir la fuente de audio demostrable
 
@@ -39,6 +51,8 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Evidencia:** [minuta del 9 de septiembre](seguimientos/2026-09-09.md).
 - **Desbloquea:** arquitectura y requisitos del prototipo.
 - **Estado:** resuelto (2026-09-09). Replay como base experimental reproducible obligatoria; llamada VoIP propia como integración objetivo del prototipo; altavoz externo despriorizado (no separa canales); PSTN universal fuera de alcance.
+- **Cómo seguir (consolidación PR #58):** construir el entorno de pruebas VoIP con
+  conversaciones simuladas por canal — paso 0 de VENTANA §10.
 
 Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md):
 
@@ -54,6 +68,15 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
 - **Ejecución:** [primer par #39](https://github.com/Corchets/bitacora_tesis/issues/39)
   y [piloto completo #54](https://github.com/Corchets/bitacora_tesis/issues/54).
   El piloto permite revisar escenarios, calidad de grabación, anotación y costo.
+- **Condiciones operativas (acordadas el 2026-09-24, [PR #35](https://github.com/Corchets/bitacora_tesis/pull/35)):**
+  participantes adultos con datos ficticios, consentimiento previo de ambos
+  interlocutores, resguardo local a cargo de Mateo, sin permiso de publicar voces.
+  El PR #35 documenta la decisión operativa pero no habilita a grabar: falta la
+  validación del tutor anotada en el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
+  y completar domicilio/contacto reales fuera de Git.
+- **Desbloquea:** piloto del corpus.
+- **Cómo seguir:** llevar composición, participantes y protocolo al tutor; sin su
+  validación no se graba (consolidación PR #58).
 - **Pendiente en D08:** tamaño y composición final, particiones y criterio de parada.
   El resguardo de los materiales se consulta en el método; no exige otro documento.
 
@@ -70,9 +93,17 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   contexto de la llamada actual y recibe solo su contenido transcripto. Agenda,
   historial, memoria entre sesiones, reputación y dirección entrante/saliente quedan
   fuera de sus entradas. La ventana y la política de alerta siguen abiertas en D08.
-- **Público (2026-10-04, confirmado por Mateo):** sin foco etario específico. Se retira
-  D12 como decisión pendiente. La participación de personas adultas en el corpus es
-  una condición de producción, no una promesa de rendimiento para un grupo etario.
+- **Público (2026-10-04, confirmado por Mateo; antecedente superado por la
+  consolidación del PR #58):** se registró «sin foco etario específico» y se
+  retiró D12 como decisión pendiente. La participación de personas adultas en el
+  corpus sigue siendo una condición de producción, no una promesa de rendimiento
+  para un grupo etario. El encuadre vigente de D12 quedó parcial: ver
+  [D12](#d12--encuadre-del-foco-en-adultos-mayores).
+- **Contribución defendible (consolidación PR #58):** la arquitectura incremental
+  documentada (capas 3 y 4 del [diseño integrado](../investigacion/DISENO-INTEGRADO.md)),
+  el hueco que deja la patente de Google US 2024/0388655 A1.
+- **Cómo seguir:** toda nueva funcionalidad se contrasta contra la lista de
+  exclusiones aprobada.
 
 ### D04 — Aprobar preguntas e hipótesis
 
@@ -80,6 +111,8 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
 - **Evidencia:** [Plan de Trabajo §5](../propuesta/PLAN-DE-TRABAJO.md#5-preguntas-de-investigación) y [PREGUNTAS-DE-INVESTIGACION.md](../investigacion/PREGUNTAS-DE-INVESTIGACION.md).
 - **Salida:** PI1–PI2 aprobadas, evaluación E1 diagnóstica y E2 secundaria.
 - **Estado:** resuelto (2026-09-09).
+- **Candidata nueva (consolidación PR #58):** discutir entre los cuatro agregar
+  «cuánto contexto mira el detector» como eje de PI1 (VENTANA §9).
 
 ### D07 — Aprobar taxonomía y evento crítico
 
@@ -91,6 +124,13 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   el piloto y resolver sus ambigüedades.
 - **Para empezar:** una versión de trabajo del manual con criterios aplicables a
   los primeros casos. El piloto prueba esa versión; no necesita D07 cerrada.
+- **Selección de trabajo (acuerdo del 2026-10-02, consolidación PR #58):**
+  taxonomía de dos capas multi-label de seis etiquetas cada una (6+6) como
+  vocabulario candidato — no la taxonomía final. `REQUEST_AUTH_CODE` incluye
+  menciones de códigos; `T_C` es la referencia principal de `Preventive@δ`
+  reportando ambos márgenes; `T_A` se define con histéresis (primer cruce que se
+  sostiene dos actualizaciones). Queda abierta hasta probarla con el piloto y
+  adjudicar ambigüedades.
 - **Para cerrar:** manual probado en una muestra común por los cuatro integrantes,
   anotaciones originales conservadas y desacuerdos adjudicados.
 - **Fuente:** [MANUAL-ANOTACION.md](../corpus/MANUAL-ANOTACION.md). Sus dos capas de
@@ -119,6 +159,11 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Antecedentes:** [ventana y alerta](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)
   y [diseño integrado](../investigacion/DISENO-INTEGRADO.md) proponen mecanismos.
   Sus números sintéticos no prueban rendimiento ni congelan el protocolo.
+- **Por fijar antes de medir (consolidación PR #58):** la restricción de falsos
+  positivos por revisión (VENTANA §7.1: máximo de llamadas legítimas con alerta y
+  acierto requerido derivado), la regla de persistencia del contador (opciones
+  A/B/C en VENTANA §11), el reloj de actualización, el conteo de alertas y las
+  franjas de duración.
 
 ### D09 — Elegir ASR y detector
 
@@ -136,6 +181,16 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [contraste con el laboratorio](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
   Son antecedentes de candidatos y pruebas, no requisitos nuevos. La comparación
   debe declarar qué código y datos reutiliza y qué cambió.
+- **Antecedentes del laboratorio (spike #29, medidos con semillas provisorias con
+  sesgo de dialecto — no cierran D09):** la cascada RoBERTuito+LR→SLM (zona gris
+  0,35–0,75) no mejoró al encoder solo en la corrida del 2026-09-28 (goteo
+  12/16→7/16, AUROC 0,666→0,537, mismas 5/10 falsas alarmas) y no entra en el
+  presupuesto de 1024 MB junto al SLM (~1,7 GB sin ASR). Candidatos de trabajo
+  propuestos: Moonshine tiny-es en gama baja y Zipformer Kroko ONNX en media/alta
+  para ASR; SLM local directo (p. ej. Llama-3.2-1B) como detector. La
+  recomendación del laboratorio de retomar datos reales para encoder y cascada
+  (#41/#42) está retirada como `not_planned` en GitHub: revivirla exige una
+  replanificación acordada; se evalúa como alternativa en #51, no como tarea abierta.
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -143,12 +198,35 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   entregan?
 - **Bloqueada por:** D01 y resultados de evaluación.
 - **Salida:** checklist final aceptado por el tutor.
+- **Alcance (consolidación PR #58):** incluye el diseño exacto del aviso y el
+  método de evaluación con usuarios, todavía no especificado.
+- **Cómo seguir:** definir la demo (replay/VoIP) y la prueba de comprensión de
+  avisos con personas.
 
 ### D11 — Análisis lingüístico o también acústico
 
-- **Estado:** cerrada (2026-10-04), confirmada por Mateo.
-- **Decisión:** detector sobre transcripción y contexto de la llamada actual.
-  El audio se usa para ASR y mediciones; los rasgos acústicos quedan como trabajo futuro.
+- **Estado:** abierta. Antecedente: el 2026-10-04 Mateo la registró cerrada con
+  «detector sobre transcripción y contexto de la llamada actual; los rasgos
+  acústicos quedan como trabajo futuro». La consolidación del PR #58 (2026-10-07)
+  la vuelve a listar abierta hasta que los cuatro ratifiquen «solo transcripción»;
+  su recomendación coincide con ese registro.
+- **Decisión registrada:** detector sobre transcripción y contexto de la llamada
+  actual. El audio se usa para ASR y mediciones; los rasgos acústicos quedan como
+  trabajo futuro.
+- **Cómo seguir:** ratificar entre los cuatro «solo transcripción» para acotar el
+  pipeline; seguimiento en
+  [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
+
+### D12 — Encuadre del foco en adultos mayores
+
+- **Pregunta:** ¿se mantiene el foco en adultos mayores y con qué justificación?
+- **Estado:** parcial. Antecedente: la precisión de alcance del 2026-10-04 (ver
+  D03) la retiró como decisión pendiente y dejó el público «sin foco etario
+  específico». La consolidación del PR #58 (2026-10-07) la mantiene parcial: el
+  foco se conserva pero cambia su justificación —gravedad potencial de las
+  pérdidas y exposición a suplantación— y las personas adultas mayores entran por
+  evaluación y prueba de usabilidad, no como requisito del corpus.
+- **Fuente:** [PLAN-DE-TRABAJO.md](../propuesta/PLAN-DE-TRABAJO.md).
 
 ### D13 — Título definitivo
 
@@ -157,6 +235,8 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Salida:** título consistente con lo que el corpus efectivamente cubre.
 - **Regla:** no cerrarlo antes de tener el corpus. Un título que promete "español argentino" obliga
   a un corpus que lo sostenga.
+- **Cómo seguir:** definirlo al conocer la cobertura real del corpus
+  (consolidación PR #58).
 
 ### D14 — Ayuda memoria visual del proyecto
 
@@ -166,7 +246,8 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Evidencia:** [issue #57](https://github.com/Corchets/bitacora_tesis/issues/57), [README de ayuda-memoria](../../ayuda-memoria/README.md), [sistema de diseño](../../ayuda-memoria/DESIGN.md) y [skill de proyecto](../../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
 - **Desbloquea:** incorporación fluida del equipo al hito H2 sin fricción ni reconstrucción del repositorio.
 - **Estado:** resuelta (2026-10-07).
-- **Conclusión:** sitio web estático (`ayuda-memoria/`, HTML/CSS/JS con generador Node sin dependencias de aplicación) con vistas para `laboratorio-main` (entrada principal) y `main`. Muestra hitos, issues abiertos agrupados, roadmap, glosario y briefs de arranque para H2 (#19, #32, #39, #50, #54). Los briefs son orientaciones mantenidas en la web, no campos obligatorios de los issues en GitHub ni un segundo backlog. Se actualizan mediante la skill explícita `$actualizar-ayuda-memoria` a nivel proyecto. El build consulta datos de GitHub y archivos de cada commit sin publicar copias viejas. Publicación por enlace en Vercel alimentada por workflow ante pushes y cambios en issues (requiere secrets de despliegue). No altera el alcance de tesis, no ejecuta IA desatendida y no cierra D07/D08/D09.
+- **Conclusión:** sitio web estático (`ayuda-memoria/`, HTML/CSS/JS con generador Node y Cytoscape.js para el roadmap interactivo) con vistas para `laboratorio-main` (entrada principal) y `main`. Muestra hitos, issues abiertos agrupados, roadmap, glosario y briefs de arranque para H2 (#19, #32, #39, #50, #54). Los briefs son orientaciones mantenidas en la web, no campos obligatorios de los issues en GitHub ni un segundo backlog. Se actualizan mediante la skill explícita `$actualizar-ayuda-memoria` a nivel proyecto. El build consulta datos de GitHub y archivos de cada commit sin publicar copias viejas. Publicación por enlace en Vercel alimentada por workflow ante pushes y cambios en issues (requiere secrets de despliegue). No altera el alcance de tesis, no ejecuta IA desatendida y no cierra D07/D08/D09.
+- **Evolución (2026-10-08):** por pedido del usuario, el roadmap local pasa a un grafo navegable de dependencias reales con filtros, zoom, panel de contexto y alternativa accesible en lista. [Diseño y fuentes de la librería](../../ayuda-memoria/DESIGN.md#24-componentes-del-mapa-de-entregas-roadmap). Bundle y licencia servidos localmente, versión fijada en lockfile. PR #58 agrega la vista de arquitectura y simulador ilustrativo, con decisiones cargadas desde el mapa adoptado. Estas mejoras están en el árbol local; falta integrar y publicar la rama.
 
 ## Decisiones cerradas
 

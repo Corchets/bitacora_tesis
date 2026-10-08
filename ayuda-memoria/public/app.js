@@ -9,10 +9,13 @@ let selected = Number(params.get('issue')) || null;
 let milestoneFilter = params.get('hito') || 'all';
 let search = '';
 let glossarySearch = '';
-let selectedRoadmapNode = null;
-let drawerIssue = null;
-let lastFocusedNodeId = null;
-let lastIsMobile = typeof window !== 'undefined' ? window.innerWidth <= 700 : false;
+let selectedGraphId = null;
+let roadmapMode = null;
+let frontFilter = 'all';
+let onlyAvailable = false;
+let focusNext = false;
+let cy = null;
+let cyModule = null;
 const escape = text => String(text ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
 const plain = text => String(text ?? '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '').replace(/^>\s?/gm, '').trim();
 const repo = 'https://github.com/Corchets/bitacora_tesis';
@@ -27,9 +30,11 @@ const fullDate = value => `${date(value)} · ${new Intl.DateTimeFormat('es-AR', 
 const branch = () => data.branches.find(item => item.name === branchName);
 const currentMilestone = () => data.milestones.find(item => item.state === 'open' && item.open > 0);
 const blockers = issue => (data.dependencies[issue.number] ?? []).filter(item => item.state === 'open');
+const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const iconArrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>';
 const externalIcon = '<svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>';
 function link(url, label, className = '') { return `<a href="${escape(url)}" class="${className}" target="_blank" rel="noopener noreferrer">${escape(label)} ${externalIcon}</a>`; }
+function ilink(url, label) { return `<a href="${escape(url)}" class="d-iss-link">${escape(label)} →</a>`; }
 function rich(text, documentPath) {
   // Source Markdown is rendered as text plus safe links, never as raw HTML.
   const doc = branch()?.documents[documentPath];
@@ -58,6 +63,8 @@ function urlState() {
   if (view !== 'ahora') url.searchParams.set('vista', view);
   if (selected && ['ahora','issues'].includes(view)) url.searchParams.set('issue', selected);
   if (milestoneFilter !== 'all' && view === 'issues') url.searchParams.set('hito', milestoneFilter);
+  if (view === 'roadmap' && roadmapMode === 'lista') url.searchParams.set('modo', 'lista');
+  if (view === 'roadmap' && selectedGraphId) url.searchParams.set('nodo', selectedGraphId);
   history.replaceState(null, '', url);
 }
 function heading(title, description, action = '') {
@@ -121,548 +128,567 @@ function workView(now) {
     + branchNotice() + (now ? phaseRail() + `<section class="current-stage"><div><h2>${escape(currentName)}</h2><p>${escape(current?.description.split('. La documentación')[0] ?? 'Consultá el estado de los hitos en GitHub.')}</p></div><div class="stage-date"><span>Referencia del hito</span><strong>${dueDate(current?.dueAt)}</strong><span>Fecha orientativa</span></div></section>` : '')
     + `<div class="work-layout"><section class="issues-pane" aria-label="Elegir un issue"><div class="issues-toolbar"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="issue-search" type="search" placeholder="Buscar issue, número o responsable" aria-label="Buscar issues" value="${escape(search)}"></label>${!now ? `<label class="filter-label"><span class="sr-only">Filtrar por hito</span><select id="milestone-filter"><option value="all">Todos los hitos</option>${data.milestones.map(item => `<option value="${item.number}" ${milestoneFilter === String(item.number) ? 'selected' : ''}>${escape(item.title)}</option>`).join('')}<option value="none" ${milestoneFilter === 'none' ? 'selected' : ''}>Sin hito</option></select></label>` : ''}</div><div class="issue-results" aria-live="polite">${visible.length ? groups.map(group => `<div class="issue-group"><div class="group-heading"><h2>${escape(group.title)}</h2><span>${group.items.length} ${group.items.length === 1 ? 'issue' : 'issues'}</span></div>${group.items.map(issueRow).join('')}</div>`).join('') : `<div class="empty"><h2>${search ? 'No encontramos ese issue.' : 'No hay issues abiertos acá.'}</h2><p>${search ? 'Probá otro término, número o responsable.' : 'Podés consultar otros hitos desde Todos los issues.'}</p></div>`}</div></section>${issueDetail(visible.find(issue => issue.number === selected))}</div>`;
 }
-function getRoadmapNodes() {
-  const rm = data.roadmap;
-  const sf = rm.suspendedFront;
+
+// ---------- Roadmap: grafo interactivo de entregas ----------
+// Las aristas salen de las dependencias nativas de GitHub (data.roadmap.graph);
+// roadmap.json aporta la orientación editorial (frentes, próximos pasos, laboratorio).
+const FRONT_COLORS = { corpus:'#365b35', deteccion:'#203e37', metodologia:'#5a6a62', cierre:'#9fae9e', concluido:'#427345', laboratorio:'#ad452b' };
+const FRONT_BG = { corpus:'#eef3e2', deteccion:'#e9efe4', metodologia:'#f1f4ec', cierre:'#f6f9f3', concluido:'#e8eddb', laboratorio:'#faf3ed' };
+const rm = () => data.roadmap;
+const graphNode = id => rm().graph?.nodes.find(n => n.id === id);
+const nextActionIds = () => new Set((rm().currentLocation.nextActions ?? []).map(a => `i${a.issue}`));
+const milestoneCode = num => data.milestones.find(m => m.number === num)?.title.split(' — ')[0] ?? null;
+
+function graphFronts() {
+  const fronts = [...rm().parallelFronts];
+  if (rm().concludedContext) fronts.push({ ...rm().concludedContext, concluded: true, state: 'done',
+    issues: (rm().graph?.nodes ?? []).filter(n => n.front === 'concluido').map(n => n.number) });
+  const sf = rm().suspendedFront;
+  if (sf) fronts.push({ id: 'laboratorio', name: 'Laboratorio (pausado)', tag: sf.tag, state: 'pausado',
+    stateLabel: sf.stateLabel, paused: true, issues: (sf.issues ?? []).map(i => i.number) });
+  return fronts;
+}
+function nodeStatus(n) {
+  if (n.kind === 'paused') return { label: 'Pausado (conservado)', cls: 'status-paused' };
+  if (n.state === 'closed') return n.stateReason === 'not_planned'
+    ? { label: 'Cerrado sin hacer', cls: 'status-paused' }
+    : { label: 'Completado', cls: 'status-done' };
+  if (n.state === 'open') {
+    if (n.openBlockers.length) return { label: `Espera ${n.openBlockers.map(num => `#${num}`).join(', ')}`, cls: 'status-espera' };
+    if (n.conditions?.length) return { label: 'Disponible con condición', cls: 'status-espera' };
+    return { label: 'Disponible', cls: 'status-disponible' };
+  }
+  return { label: 'Sin verificar', cls: 'status-espera' };
+}
+function nodeClasses(n) {
+  const cls = [`front-${n.front}`];
+  if (n.kind === 'paused') cls.push('is-paused');
+  else if (n.state === 'closed') cls.push(n.stateReason === 'not_planned' ? 'is-notplanned' : 'is-done');
+  else if (n.state !== 'open') cls.push('is-unknown');
+  else cls.push(n.openBlockers.length ? 'is-blocked' : (n.conditions?.length ? 'is-conditional' : 'is-free'));
+  if (nextActionIds().has(n.id)) cls.push('is-next');
+  return cls.join(' ');
+}
+function shortTitle(title) {
+  if (title.length <= 42) return title;
+  const cut = title.slice(0, 42);
+  return `${cut.slice(0, cut.lastIndexOf(' '))}…`;
+}
+function cyStyle() {
+  const frontRules = Object.entries(FRONT_COLORS).map(([id, color]) => (
+    { selector: `node:parent.front-${id}`, style: { 'background-color': FRONT_BG[id], 'border-color': color } }
+  ));
   return [
-    {
-      id: 'laboratorio',
-      type: 'paused',
-      name: 'Laboratorio (En pausa)',
-      subtitle: 'Tito, UI y cascada · Pausado',
-      tag: 'Archipiélago experimental · En suspensión',
-      state: 'pausado',
-      stateLabel: 'Pausado (conservado)',
-      iconSvg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 2v5.5L4 19a2 2 0 0 0 1.7 3h12.6a2 2 0 0 0 1.7-3L14 7.5V2M9 12h6M9 16h6"/></svg>',
-      actionTitle: 'Frente suspendido formalmente el 2026-10-04 (not_planned)',
-      actionDetail: 'Despriorizado en bloque (#41, #42, #44, #46, #47, #48, #49) para no asumir arquitecturas complejas (RoBERTuito o cascada con SLM) antes de validar la línea base simple (reglas) y el corpus piloto. No es un fracaso ni bloquea el avance principal; las ramas remotas se conservan intactas.',
-      howToResume: 'Coordinado en #51 (D09): solo si la comparación sistemática de candidatos en H4 justifica evaluar un modelo más pesado frente a la línea base simple de reglas.',
-      branches: [
-        { name: 'nacho1706/feature-training-data', ref: 'bb542e1', purpose: 'Banco de 6.000 textos sintéticos argentinos en experiments/laboratorio/entrenamiento_tito/ y scripts de entrenamiento.', url: 'https://github.com/Corchets/bitacora_tesis/tree/nacho1706/feature-training-data' },
-        { name: 'origin/laboratorio-main', ref: '4888277', purpose: 'UI local en Python (#44) para explorar CSVs de corridas, turnos y comparaciones.', url: 'https://github.com/Corchets/bitacora_tesis/tree/laboratorio-main' },
-        { name: 'origin/nacho1706/experimento-spike-config-alta...', ref: '5ac40b5', purpose: 'Spike previo de cascada alta con Zipformer Kroko + TF-IDF (#29).', url: 'https://github.com/Corchets/bitacora_tesis/tree/nacho1706/experimento-spike-config-alta-zipformer-kroko-tf' }
-      ],
-      quote: { text: 'Cierre como no planificado, no completado. Artefactos en rama remota nacho1706/feature-training-data. No adopta RoBERTuito definitivo.', author: 'nacho1706 (2026-10-07)', url: 'https://github.com/Corchets/bitacora_tesis/issues/49#issuecomment-6048514393' },
-      reading: { label: 'Issue #49 (Resolución nacho1706)', url: 'https://github.com/Corchets/bitacora_tesis/issues/49#issuecomment-6048514393', detail: 'Fundamentación de preservación de artefactos en ramas remotas' },
-      issues: [46, 47, 48, 49, 41, 42, 44],
-      activeIssue: null
-    },
-    {
-      id: 'deteccion',
-      type: 'actionable',
-      name: 'Alinear detector',
-      subtitle: 'Texto incremental · #50',
-      tag: 'Frente B · ASR, Reglas y Replay',
-      state: 'activo',
-      stateLabel: 'Listo',
-      iconSvg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 4-4 4 4"/><path d="M8 3v13"/><rect x="4" y="16" width="16" height="5" rx="2"/><path d="M14 8h6M14 12h4"/></svg>',
-      actionTitle: 'Alinear disyuntiva de alcance de Mateo (#20) antes de codificar',
-      actionDetail: 'En el cierre de #20, Mateo Antenucci propuso priorizar un prototipo de SLM liviano sobre texto incremental. Sin embargo, el contrato formal de #50 exige implementar reglas heurísticas como baseline estricto. Alinear esta disyuntiva sin cerrar prematuramente D09 (que compara reglas vs SLM vs Tito en H4, con reglas como línea base oficial).',
-      reading: { label: 'Issue #20 (Comentario de cierre)', url: 'https://github.com/Corchets/bitacora_tesis/issues/20#issuecomment-6048718768', detail: 'Disyuntiva de alcance de Mateo: SLM liviano vs contrato de reglas de #50' },
-      issues: [50, 19, 28],
-      activeIssue: 50
-    },
-    {
-      id: 'estamos_aca',
-      type: 'current',
-      name: 'Estamos acá',
-      subtitle: 'Hito 2 en curso',
-      tag: 'Núcleo activo · H2',
-      state: 'en_curso',
-      stateLabel: 'En curso',
-      iconSvg: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>',
-      actionTitle: 'H1 cerrado (PR #56), H2 en marcha con 3 frentes concurrentes',
-      actionDetail: 'El PR #56 completó #20 (catálogo sintético y par de WhatsApp) cerrando formalmente el Hito 1. El Hito 2 avanza en paralelo sobre texto (#50), audio (#39) y metodología (#25). No requiere esperar a que un frente termine para comenzar otro.',
-      reading: { label: 'docs/propuesta/PLAN-DE-TRABAJO.md §10', url: 'https://github.com/Corchets/bitacora_tesis/blob/main/docs/propuesta/PLAN-DE-TRABAJO.md#10-hitos-y-entregables', detail: 'Hitos, fases y entregables aprobados del Plan de Trabajo' },
-      issues: [50, 39, 25],
-      activeIssue: null
-    },
-    {
-      id: 'corpus',
-      type: 'actionable',
-      name: 'Grabar primer par',
-      subtitle: 'Datos y audio · #39',
-      tag: 'Frente A · Datos y Llamadas',
-      state: 'activo',
-      stateLabel: 'Listo',
-      iconSvg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M8 22h8"/></svg>',
-      actionTitle: 'Coordinar la grabación del primer par contrastante WhatsApp',
-      actionDetail: 'Grabar y transcribir el primer par contrastante (1 llamada vishing, 1 legítima) con audio en dos canales. Esto habilita de inmediato la prueba de ASR local (#19) y la calibración del manual de anotación humana D07 (#32), sin esperar las 14 tomas del piloto completo (#54).',
-      reading: { label: 'docs/ingenieria/ARQUITECTURA.md §4', url: 'https://github.com/Corchets/bitacora_tesis/blob/main/docs/ingenieria/ARQUITECTURA.md#4-primer-par-escrito-del-escenario-al-aviso', detail: 'Fichas de rol y guión del par WhatsApp integrado vía PR #56' },
-      issues: [39, 32, 54, 55, 45],
-      activeIssue: 39
-    },
-    {
-      id: 'metodologia',
-      type: 'actionable',
-      name: 'Investigar antecedentes',
-      subtitle: 'Literatura y métricas · #25',
-      tag: 'Frente C · D08, D09 y Metodología',
-      state: 'disponible',
-      stateLabel: 'Disponible',
-      iconSvg: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>',
-      actionTitle: 'Sintetizar antecedentes sobre métricas temporales de vishing',
-      actionDetail: 'Completar en SINTESIS-ESTADO-DEL-ARTE.md la literatura sobre anticipación y métricas temporales (T_A, T_R, márgenes L_R, L_C). Este frente es totalmente autónomo y no depende de audio grabado ni de código del detector.',
-      reading: { label: 'docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md', url: 'https://github.com/Corchets/bitacora_tesis/blob/main/docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md', detail: 'Estado del arte vivo sobre detección incremental y anticipación' },
-      issues: [25, 33, 51],
-      activeIssue: 25
-    },
-    {
-      id: 'futuro',
-      type: 'future',
-      name: 'Horizonte futuro',
-      subtitle: 'H4 a H6 · Test y defensa',
-      tag: 'Horizonte metodológico · Previsto',
-      state: 'espera',
-      stateLabel: 'Previsto (más adelante)',
-      iconSvg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"/></svg>',
-      actionTitle: 'Etapas avanzadas: congelar protocolo, test ciego y defensa',
-      actionDetail: 'Horizonte metodológico futuro: requiere completar el piloto (#54) y congelar particiones (#55) y protocolo (#33 / D08) antes de ejecutar la medición sobre el conjunto de test ciego (#52). Culmina con informe de tesis (~100 págs), demo y defensa ante tribunal UNSTA (#53).',
-      reading: { label: 'docs/evaluacion/METRICAS.md', url: 'https://github.com/Corchets/bitacora_tesis/blob/main/docs/evaluacion/METRICAS.md', detail: 'Fórmulas unificadas de T_A, T_R, márgenes y evaluación temporal' },
-      issues: [55, 45, 33, 51, 52, 53],
-      activeIssue: null
-    }
+    { selector: 'node', style: {
+      'font-family': 'Manrope, sans-serif', 'font-size': 12.5, 'font-weight': 700, 'color': '#203e37',
+      'label': 'data(label)', 'text-wrap': 'wrap', 'text-max-width': '170px', 'text-valign': 'bottom', 'text-margin-y': 7,
+      'text-line-height': 1.3, 'text-background-color': '#fffef9', 'text-background-opacity': 0.9,
+      'text-background-padding': '2.5px', 'text-background-shape': 'roundrectangle',
+      'width': 34, 'height': 34, 'border-width': 2.2, 'border-color': '#203e37', 'background-color': '#fffef9',
+      'overlay-opacity': 0
+    }},
+    { selector: 'node:parent', style: {
+      'label': 'data(label)', 'text-valign': 'top', 'text-halign': 'center', 'text-margin-y': -10,
+      'font-size': 10, 'font-weight': 800, 'color': '#5a6a62', 'text-background-opacity': 0,
+      'background-opacity': 0.55, 'border-width': 1.4, 'border-style': 'solid', 'border-color': '#c8d5c0',
+      'padding': 18, 'shape': 'round-rectangle', 'text-wrap': 'wrap', 'text-max-width': '230px', 'min-zoomed-font-size': 8
+    }},
+    ...frontRules,
+    { selector: 'node:parent.front-laboratorio', style: { 'border-style': 'dashed', 'border-width': 1.8, 'color': '#76331f' } },
+    { selector: 'node.is-done', style: { 'background-color': '#427345', 'border-color': '#365b35' } },
+    { selector: 'node.is-notplanned', style: { 'background-color': '#f9ece1', 'border-color': '#ad452b', 'border-style': 'dashed' } },
+    { selector: 'node.is-unknown', style: { 'background-color': '#fffef9', 'border-color': '#9fae9e', 'border-style': 'dashed' } },
+    { selector: 'node.is-free', style: { 'background-color': '#fffef9', 'border-color': '#203e37' } },
+    { selector: 'node.is-conditional', style: { 'background-color': '#fffef9', 'border-color': '#ad452b', 'border-style': 'dashed' } },
+    { selector: 'node.is-blocked', style: { 'background-color': '#f9ece1', 'border-color': '#ad452b', 'border-width': 2.4 } },
+    { selector: 'node.is-next', style: { 'underlay-color': '#d7e9af', 'underlay-opacity': 0.95, 'underlay-padding': 9, 'underlay-shape': 'ellipse' } },
+    { selector: 'node.is-paused', style: { 'background-color': '#f9ece1', 'border-color': '#ad452b', 'border-style': 'dashed', 'shape': 'round-rectangle', 'width': 56, 'height': 38 } },
+    { selector: 'edge', style: {
+      'width': 1.8, 'line-color': '#9fae9e', 'curve-style': 'bezier',
+      'target-arrow-shape': 'triangle', 'target-arrow-color': '#9fae9e', 'arrow-scale': 1.05,
+      'font-size': 9, 'color': '#5a6a62'
+    }},
+    { selector: 'edge.edge-pending', style: { 'line-color': '#ad452b', 'target-arrow-color': '#ad452b', 'width': 2.4 } },
+    { selector: 'edge.edge-satisfied', style: { 'line-color': '#427345', 'target-arrow-color': '#427345', 'width': 1.7 } },
+    { selector: 'edge.edge-not_planned', style: { 'line-color': '#b9a99c', 'target-arrow-color': '#b9a99c', 'line-style': 'dashed' } },
+    { selector: 'edge.edge-unknown', style: { 'line-color': '#9fae9e', 'target-arrow-color': '#9fae9e', 'line-style': 'dashed' } },
+    { selector: 'edge.edge-conditional', style: { 'line-color': '#ad452b', 'target-arrow-color': '#ad452b', 'line-style': 'dashed', 'width': 1.7, 'line-dash-pattern': [6,4],
+      'label': 'data(note)', 'font-size': 9.5, 'font-weight': 700, 'color': '#76331f', 'text-wrap': 'wrap', 'text-max-width': '160px',
+      'text-background-color': '#fffef9', 'text-background-opacity': 0.9, 'text-background-padding': '3px', 'text-background-shape': 'roundrectangle', 'text-margin-y': -10 } },
+    { selector: 'node.sel', style: { 'border-color': '#203e37', 'border-width': 3.4, 'overlay-color': '#d7e9af', 'overlay-opacity': 0.4, 'overlay-padding': 7 } },
+    { selector: 'edge.dep-in', style: { 'line-color': '#ad452b', 'target-arrow-color': '#ad452b', 'width': 3 } },
+    { selector: 'node.dep-in', style: { 'border-color': '#ad452b', 'border-width': 3 } },
+    { selector: 'edge.dep-out', style: { 'line-color': '#365b35', 'target-arrow-color': '#365b35', 'width': 3 } },
+    { selector: 'node.dep-out', style: { 'border-color': '#365b35', 'border-width': 3 } },
+    { selector: '.dimmed', style: { 'opacity': 0.2 } },
+    { selector: '.focus-dim', style: { 'opacity': 0.15 } },
+    { selector: '.f-hidden', style: { 'display': 'none' } }
   ];
 }
-
-function renderSpatialSvg(isMobile) {
-  if (isMobile) {
-    return `<svg class="spatial-svg" viewBox="0 0 420 620" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-      <defs>
-        <pattern id="sp-grid-m" width="30" height="30" patternUnits="userSpaceOnUse">
-          <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#e8ede2" stroke-width="0.8"/>
-        </pattern>
-        <marker id="sp-arr-ink-m" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#203e37" stroke="none"/>
-        </marker>
-        <marker id="sp-arr-coral-m" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#ad452b" stroke="none"/>
-        </marker>
-        <marker id="sp-arr-green-m" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#365b35" stroke="none"/>
-        </marker>
-      </defs>
-
-      <rect width="420" height="620" fill="url(#sp-grid-m)" rx="10"/>
-
-      <!-- Isla Pausada (Top) -->
-      <rect x="20" y="15" width="380" height="90" rx="10" fill="#faf3ed" stroke="#d4b49e" stroke-width="1.6" stroke-dasharray="5 3"/>
-      <text x="32" y="32" font-size="9" font-weight="800" fill="#76331f" letter-spacing="0.04em" stroke="none">ARCHIPIÉLAGO PAUSADO · RAMAS CONSERVADAS</text>
-
-      <!-- Active territory (Center) -->
-      <rect x="15" y="125" width="390" height="375" rx="12" fill="#ffffff" fill-opacity="0.85" stroke="#c8d5c0" stroke-width="1.5"/>
-
-      <!-- PR #56 Badge -->
-      <g transform="translate(210, 145)">
-        <rect x="-80" y="-12" width="160" height="24" rx="12" fill="#203e37"/>
-        <text text-anchor="middle" y="4" font-size="10" font-weight="800" fill="#d7e9af" stroke="none">PR #56 (cerró #20) · H1 ✓</text>
-      </g>
-
-      <path d="M 160 157 C 120 170 115 175 115 180" fill="none" stroke="#365b35" stroke-width="1.8" stroke-dasharray="3 3"/>
-      <path d="M 210 160 L 210 270" stroke="#203e37" stroke-width="2" marker-end="url(#sp-arr-ink-m)"/>
-
-      <path d="M 170 295 L 125 240" stroke="#203e37" stroke-width="2" marker-end="url(#sp-arr-ink-m)"/>
-      <path d="M 250 295 L 295 240" stroke="#203e37" stroke-width="2" marker-end="url(#sp-arr-ink-m)"/>
-      <path d="M 190 350 L 140 405" stroke="#203e37" stroke-width="2" marker-end="url(#sp-arr-ink-m)"/>
-
-      <!-- Audio and text feeding Replay at (210, 385) -->
-      <path d="M 115 245 C 115 320 170 380 195 385" fill="none" stroke="#203e37" stroke-width="1.6" stroke-dasharray="3 3"/>
-      <path d="M 305 245 C 305 320 250 380 225 385" fill="none" stroke="#203e37" stroke-width="1.6" stroke-dasharray="3 3"/>
-      <circle cx="210" cy="385" r="7" fill="#e8eddb" stroke="#203e37" stroke-width="1.8"/>
-      <text x="210" y="405" text-anchor="middle" font-size="9" font-weight="800" fill="#203e37" stroke="none">H3 Replay (#28)</text>
-
-      <!-- Conditional dashed path to Paused Lab -->
-      <path d="M 70 200 C 40 160 50 115 70 105" fill="none" stroke="#ad452b" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#sp-arr-coral-m)"/>
-
-      <!-- Isla Futura (Bottom) -->
-      <rect x="20" y="515" width="380" height="90" rx="10" fill="#f4f7f2" stroke="#abbcb0" stroke-width="1.6" stroke-dasharray="4 4"/>
-      <text x="32" y="532" font-size="9" font-weight="800" fill="#203e37" letter-spacing="0.04em" stroke="none">HORIZONTE FUTURO · H4 A H6</text>
-      <path d="M 210 395 C 210 450 250 490 270 515" fill="none" stroke="#5a6a62" stroke-width="1.8" marker-end="url(#sp-arr-ink-m)"/>
-    </svg>`;
-  }
-
-  return `<svg class="spatial-svg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-    <defs>
-      <pattern id="sp-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e8ede2" stroke-width="0.8"/>
-      </pattern>
-      <marker id="sp-arr-ink" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#203e37" stroke="none"/>
-      </marker>
-      <marker id="sp-arr-coral" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#ad452b" stroke="none"/>
-      </marker>
-      <marker id="sp-arr-green" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#365b35" stroke="none"/>
-      </marker>
-      <marker id="sp-arr-muted" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#5a6a62" stroke="none"/>
-      </marker>
-    </defs>
-
-    <rect width="1000" height="520" fill="url(#sp-grid)" rx="12"/>
-
-    <!-- 1. Isla Pausada (Top Left) -->
-    <rect x="20" y="12" width="250" height="115" rx="12" fill="#faf3ed" stroke="#d4b49e" stroke-width="1.8" stroke-dasharray="6 4"/>
-    <rect x="30" y="20" width="160" height="18" rx="4" fill="#f4e0d2"/>
-    <text x="38" y="33" font-size="9" font-weight="800" fill="#76331f" letter-spacing="0.04em" stroke="none">ARCHIPIÉLAGO PAUSADO</text>
-    <text x="30" y="112" font-size="9.5" font-weight="600" fill="#8c5847" stroke="none">Pausado 2026-10-04 · Ramas intactas</text>
-    <path d="M 280 15 Q 270 70 275 130" fill="none" stroke="#d5decb" stroke-width="2" stroke-dasharray="3 4"/>
-
-    <!-- 2. Active Territory (Left-Center) -->
-    <path d="M 60 170 C 60 155 360 145 615 155 C 640 155 650 330 635 370 C 610 410 560 500 220 500 C 80 500 50 390 60 170 Z" fill="#ffffff" fill-opacity="0.84" stroke="#c8d5c0" stroke-width="1.5"/>
-
-    <!-- 3. Isla Futura (Bottom Right of active zone, shifted left) -->
-    <rect x="430" y="360" width="200" height="145" rx="12" fill="#f4f7f2" stroke="#abbcb0" stroke-width="1.8" stroke-dasharray="4 4"/>
-    <rect x="440" y="370" width="135" height="18" rx="4" fill="#e5ece1"/>
-    <text x="448" y="383" font-size="9" font-weight="800" fill="#203e37" letter-spacing="0.04em" stroke="none">HORIZONTE FUTURO</text>
-    <text x="440" y="490" font-size="9.5" font-weight="600" fill="#5a6a62" stroke="none">H4 a H6 · Test ciego y defensa</text>
-
-    <!-- Right Territory: Clean North Orientation -->
-    <g transform="translate(860, 110)">
-      <circle r="30" fill="none" stroke="#d5decb" stroke-width="1.2" stroke-dasharray="2 3"/>
-      <path d="M 0 -30 L 0 30 M -30 0 L 30 0" stroke="#d5decb" stroke-width="1"/>
-      <polygon points="0,-26 6,-6 0,-11 -6,-6" fill="#203e37" stroke="none"/>
-      <polygon points="0,26 6,6 0,11 -6,6" fill="#5a6a62" stroke="none"/>
-      <text y="-34" text-anchor="middle" font-size="9" font-weight="800" fill="#203e37" stroke="none">N</text>
-      <text y="44" text-anchor="middle" font-size="8" font-weight="700" fill="#5a6a62" stroke="none">ORIENTACIÓN</text>
-    </g>
-
-    <!-- PR #56 Anchor -->
-    <g transform="translate(360, 130)">
-      <circle r="12" fill="#203e37"/>
-      <text text-anchor="middle" y="4" font-size="9" font-weight="800" fill="#d7e9af" stroke="none">H1 ✓</text>
-      <text text-anchor="middle" y="-16" font-size="10.5" font-weight="700" fill="#203e37" stroke="none">PR #56 completó #20</text>
-    </g>
-
-    <path d="M 360 142 L 360 215" stroke="#203e37" stroke-width="2.5" marker-end="url(#sp-arr-ink)"/>
-    <path d="M 345 132 C 260 140 200 170 180 205" fill="none" stroke="#365b35" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#sp-arr-green)"/>
-    <rect x="210" y="150" width="130" height="18" rx="4" fill="#e8eddb" stroke="#c9d6b7"/>
-    <text x="275" y="163" text-anchor="middle" font-size="8.5" font-weight="700" fill="#365b35" stroke="none">Texto sin esperar audio</text>
-
-    <!-- Estamos acá hacia Alinear detector (Frente B) -->
-    <path d="M 310 250 L 240 245" stroke="#203e37" stroke-width="2.2" marker-end="url(#sp-arr-ink)"/>
-
-    <!-- Estamos acá hacia Grabar primer par (Frente A) -->
-    <path d="M 410 250 L 480 245" stroke="#203e37" stroke-width="2.2" marker-end="url(#sp-arr-ink)"/>
-
-    <!-- Estamos acá hacia Investigar antecedentes (Frente C) -->
-    <path d="M 330 280 L 265 375" stroke="#203e37" stroke-width="2.2" marker-end="url(#sp-arr-ink)"/>
-
-    <!-- #39 Audio and #50 Text to Replay -->
-    <path d="M 510 275 C 470 320 435 340 405 345" fill="none" stroke="#203e37" stroke-width="1.8" stroke-dasharray="4 3"/>
-    <text x="455" y="318" font-size="9" font-weight="700" fill="#203e37" stroke="none">Audio #39</text>
-
-    <path d="M 215 275 C 255 320 325 340 355 345" fill="none" stroke="#203e37" stroke-width="1.8" stroke-dasharray="4 3"/>
-    <text x="260" y="318" font-size="9" font-weight="700" fill="#203e37" stroke="none">Texto #50</text>
-
-    <!-- Waypoint H3 Replay (#28) -->
-    <g transform="translate(380, 345)">
-      <circle r="9" fill="#e8eddb" stroke="#203e37" stroke-width="2"/>
-      <text text-anchor="middle" y="3" font-size="8" font-weight="800" fill="#203e37" stroke="none">H3</text>
-      <text text-anchor="middle" y="20" font-size="9.5" font-weight="800" fill="#203e37" stroke="none">Replay streaming (#28)</text>
-    </g>
-
-    <!-- #25 Advances in parallel towards D08/D09 -->
-    <path d="M 270 445 C 330 470 420 470 470 445" fill="none" stroke="#5a6a62" stroke-width="1.6" stroke-dasharray="3 3"/>
-    <text x="370" y="465" text-anchor="middle" font-size="9" font-weight="600" fill="#5a6a62" stroke="none">Paralelo independiente hacia D08/D09</text>
-
-    <!-- Replay to Future Horizon -->
-    <path d="M 395 355 C 430 375 465 400 490 420" fill="none" stroke="#5a6a62" stroke-width="1.8" marker-end="url(#sp-arr-muted)"/>
-
-    <!-- Conditional path to Paused Laboratory -->
-    <path d="M 360 340 C 270 340 140 250 130 135" fill="none" stroke="#ad452b" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#sp-arr-coral)"/>
-    <rect x="100" y="185" width="150" height="18" rx="4" fill="#f9ece1" stroke="#ebd0be"/>
-    <text x="175" y="197" text-anchor="middle" font-size="8.5" font-weight="800" fill="#76331f" stroke="none">Solo si #51 (D09) justifica</text>
-  </svg>`;
+// Carriles: cada frente es una columna y las dependencias reales fluyen de
+// izquierda a derecha. El laboratorio queda separado y debajo: está pausado y
+// nunca bloquea. Posiciones fijas (sin simulación), ordenadas por profundidad.
+const LANE_ORDER = ['concluido', 'corpus', 'deteccion', 'metodologia', 'cierre'];
+const LANE_X = 236, NODE_Y = 118;
+function graphDepths(g) {
+  const preds = {};
+  for (const e of g.edges) if (e.kind === 'dependency') (preds[e.target] ??= []).push(e.source);
+  const memo = {};
+  const visit = (id, seen) => {
+    if (id in memo) return memo[id];
+    if (seen.has(id)) return 0;
+    return memo[id] = preds[id]?.length ? 1 + Math.max(...preds[id].map(p => visit(p, new Set([...seen, id])))) : 0;
+  };
+  for (const n of g.nodes) visit(n.id, new Set());
+  return memo;
 }
-
-function getNodeCoordinates(nodeId, isMobile) {
-  if (isMobile) {
-    switch (nodeId) {
-      case 'laboratorio': return 'left:50%;top:11%;';
-      case 'deteccion': return 'left:28%;top:32%;';
-      case 'corpus': return 'left:72%;top:32%;';
-      case 'estamos_aca': return 'left:50%;top:51%;';
-      case 'metodologia': return 'left:31%;top:72%;';
-      case 'futuro': return 'left:69%;top:86%;';
-      default: return 'left:50%;top:50%;';
-    }
+function graphPositions(g) {
+  const depth = graphDepths(g);
+  const lanes = new Map();
+  for (const n of g.nodes) {
+    const lane = LANE_ORDER.includes(n.front) ? n.front : n.front === 'laboratorio' ? 'laboratorio' : 'concluido';
+    if (!lanes.has(lane)) lanes.set(lane, []);
+    lanes.get(lane).push(n);
   }
-  switch (nodeId) {
-    case 'laboratorio': return 'left:15%;top:14%;';
-    case 'deteccion': return 'left:18%;top:46%;';
-    case 'estamos_aca': return 'left:36%;top:48%;';
-    case 'corpus': return 'left:54%;top:46%;';
-    case 'metodologia': return 'left:24%;top:80%;';
-    case 'futuro': return 'left:54%;top:81%;';
-    default: return 'left:50%;top:50%;';
+  const pos = {};
+  let bottom = 0;
+  for (const lane of LANE_ORDER) {
+    const list = lanes.get(lane) ?? [];
+    list.sort((a, b) => (depth[a.id] - depth[b.id]) || (a.number - b.number));
+    const x = LANE_ORDER.indexOf(lane) * LANE_X;
+    list.forEach((n, i) => { pos[n.id] = { x, y: i * NODE_Y }; });
+    bottom = Math.max(bottom, list.length * NODE_Y);
   }
+  (lanes.get('laboratorio') ?? []).forEach((n, i) => { pos[n.id] = { x: 2 * LANE_X + i * 110, y: bottom + 96 }; });
+  return pos;
 }
-
-function drawerIssueButton(num, activeNum) {
-  const issue = data.issues.find(i => i.number === num);
-  const suspIssue = data.roadmap.suspendedFront?.issues?.find(i => i.number === num);
-  let title = issue?.title || suspIssue?.title || `#${num}`;
-  let stateLabel = 'Listo';
-  let pillClass = 'status-disponible';
-  if (suspIssue) {
-    if (suspIssue.state === 'open') {
-      stateLabel = 'Reabierto en GitHub';
-      pillClass = 'status-activo';
-    } else {
-      stateLabel = 'Pausado (not planned)';
-      pillClass = 'status-paused';
-    }
-  } else if (issue) {
-    const pending = blockers(issue);
-    if (pending.length > 0) {
-      stateLabel = `Espera ${pending.length}`;
-      pillClass = 'status-espera';
-    } else if (num === activeNum) {
-      stateLabel = 'Próximo';
-      pillClass = 'status-activo';
-    } else {
-      stateLabel = 'Listo';
-      pillClass = 'status-disponible';
-    }
-  } else {
-    stateLabel = 'Sin verificar';
-    pillClass = 'status-espera';
+const edgeNoteKey = (src, dst) => `${String(src).replace(/^i/, '')}>${String(dst).replace(/^i/, '')}`;
+async function initCy() {
+  if (cy || roadmapMode === 'lista') return;
+  const container = document.querySelector('#cy-roadmap');
+  if (!container || !rm().graph) return;
+  if (!cyModule) {
+    try { cyModule = (await import('./cytoscape.esm.min.js')).default; }
+    catch { document.querySelector('.cy-fallback')?.removeAttribute('hidden'); return; }
   }
-  return `<button type="button" class="drawer-issue-btn ${num === activeNum ? 'is-active-issue' : ''}" data-drawer-issue="${num}">
-    <span class="d-iss-num">#${num}</span>
-    <span class="d-iss-title">${escape(title)}</span>
-    <span class="d-iss-status ${pillClass}">${escape(stateLabel)}</span>
-    <span class="d-iss-arrow" aria-hidden="true">→</span>
-  </button>`;
+  try { await Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 700))]); } catch { /* Manrope puede tardar; el fallback sigue legible. */ }
+  const g = rm().graph;
+  const pos = graphPositions(g);
+  const notes = g.edgeNotes ?? {};
+  const elements = [];
+  for (const f of graphFronts()) {
+    elements.push({ group: 'nodes', selectable: true, grabbable: false,
+      data: { id: `frente-${f.id}`, kind: 'front', label: f.name, frontId: f.id },
+      classes: `front-${f.id}` });
+  }
+  for (const n of g.nodes) {
+    elements.push({ group: 'nodes', position: pos[n.id],
+      data: { id: n.id, parent: `frente-${n.front}`, front: n.front, kind: n.kind,
+        state: n.state, blocked: n.openBlockers.length > 0, conditional: (n.conditions?.length ?? 0) > 0,
+        label: n.kind === 'paused' ? `Laboratorio\n${n.issueCount} issues en pausa` : `#${n.number}\n${shortTitle(n.title)}` },
+      classes: nodeClasses(n) });
+  }
+  for (const e of g.edges) elements.push({ group: 'edges',
+    data: { id: e.id, source: e.source, target: e.target, note: notes[edgeNoteKey(e.source, e.target)] ?? '' },
+    classes: `edge-${e.state}` });
+  cy = cyModule({
+    container, elements, style: cyStyle(),
+    wheelSensitivity: 1.5, minZoom: 0.25, maxZoom: 2.8,
+    layout: { name: 'preset', fit: false, animate: false }
+  });
+  cy.on('tap', 'node', event => selectGraph(event.target.id()));
+  cy.on('tap', event => { if (event.target === cy) clearGraphSelection(); });
+  applyGraphFilters();
+  applyFocus();
+  updateGraphSelection();
+  cy.fit(cy.elements().not('.f-hidden'), 36);
 }
-
-function renderDrawerIssueBrief(num, node) {
-  const issue = data.issues.find(i => i.number === num);
-  const suspIssue = data.roadmap.suspendedFront?.issues?.find(i => i.number === num);
-  const b = branch();
-  const brief = b.briefs[num];
-  const pending = issue ? blockers(issue) : [];
-
-  if (suspIssue && !issue) {
-    return `<div class="drawer-subnav">
-        <button type="button" class="drawer-back-btn" data-drawer-back="true">← Volver a ${escape(node.name)}</button>
-      </div>
-      <div class="drawer-brief-content">
-        <header class="drawer-brief-header">
-          <span class="brief-tag status-paused">Issue pausado en rama remota</span>
-          <h3>#${suspIssue.number} · ${escape(suspIssue.title)}</h3>
-          <div class="drawer-issue-links">
-            ${link(suspIssue.url, 'Ver en GitHub')}
-            ${suspIssue.commentUrl ? link(suspIssue.commentUrl, 'Comentario de resolución') : ''}
-          </div>
-        </header>
-        <div class="drawer-action-callout" style="background:var(--coral);border-color:#ebd0be">
-          <strong style="color:#76331f">Estado: cerrado como no planificado (2026-10-04)</strong>
-          <p>Este issue pertenecía a la línea experimental de laboratorio (RoBERTuito/Tito o cascada). Fue cerrado para priorizar la línea base simple. Los artefactos y código están preservados en la rama <code>nacho1706/feature-training-data</code>.</p>
-        </div>
-        <div class="drawer-reading-box">
-          <span class="callout-label">Condición para reabrir</span>
-          <p class="reading-detail">Solo se retoma si la comparación de candidatos en #51 (D09) en el Hito 4 justifica contrastar este modelo frente a la línea base simple de reglas.</p>
-        </div>
-      </div>`;
-  }
-
-  if (!issue) {
-    return `<div class="drawer-subnav">
-        <button type="button" class="drawer-back-btn" data-drawer-back="true">← Volver a ${escape(node.name)}</button>
-      </div>
-      <div class="drawer-brief-content">
-        <h3>Issue #${num}</h3>
-        <p>No encontramos detalles locales para este issue.</p>
-        ${link(`${repo}/issues/${num}`, 'Abrir en GitHub')}
-      </div>`;
-  }
-
-  const reviewed = brief?.status === 'reviewed';
-  const rawDone = (issue.done || '').split('\n').filter(line => /^\s*- \[[ xX]\]/.test(line));
-
-  return `<div class="drawer-subnav">
-      <button type="button" class="drawer-back-btn" data-drawer-back="true">← Volver a ${escape(node.name)}</button>
-    </div>
-    <div class="drawer-brief-content">
-      <header class="drawer-brief-header">
-        <span class="brief-tag ${reviewed ? 'reviewed' : ''}">${briefStatus(brief)}</span>
-        <h3>#${issue.number} · ${escape(issue.title)}</h3>
-        <div class="drawer-issue-links">
-          ${link(issue.url, 'Ver en GitHub')}
-          <button type="button" class="drawer-jump-issue-btn" data-jump-issue="${issue.number}">Abrir en vista de trabajo →</button>
-        </div>
-      </header>
-      ${pending.length ? `<div class="blocker-note"><strong>Antes de ejecutar, resolver ${pending.map(item => link(item.url, `#${item.number}`)).join(', ')}.</strong><p>Podés consultar el contexto mientras tanto.</p></div>` : ''}
-      <section class="brief-section">
-        <h4>Qué vas a lograr</h4>
-        ${paragraphs(reviewed ? brief.goal : issue.goal || 'Consultá el resultado en el issue original.')}
-      </section>
-      ${reviewed ? `
-        <section class="brief-section">
-          <h4>Para entrar en contexto</h4>
-          ${documentSources(brief)}
-        </section>
-        <section class="brief-section start-section">
-          <h4>Tu primer paso</h4>
-          ${paragraphs(brief.start)}
-        </section>
-        <section class="brief-section">
-          <h4>Cómo saber que terminaste</h4>
-          ${paragraphs(brief.done)}
-        </section>
-      ` : `
-        <section class="brief-section">
-          <h4>Contexto del issue</h4>
-          ${paragraphs(issue.context || 'Consultá el contrato completo en GitHub.')}
-        </section>
-        <section class="brief-section">
-          <h4>Para empezar</h4>
-          <p>Revisá el issue y sus dependencias. La skill <code>actualizar-ayuda-memoria</code> puede preparar este brief.</p>
-          ${brief?.sources?.length ? documentSources(brief) : ''}
-        </section>
-        <section class="brief-section">
-          <h4>Criterios de término</h4>
-          ${rawDone.length ? `<ul class="criteria">${rawDone.map(line => `<li>${escape(plain(line.replace(/^\s*- \[[ xX]\]\s*/, '')))}</li>`).join('')}</ul>` : paragraphs(issue.done || 'Consultá en GitHub.')}
-        </section>
-      `}
-    </div>`;
+function nodeHiddenByFilter(n) {
+  if (n.isParent()) return frontFilter !== 'all' && n.data('frontId') !== frontFilter;
+  if (frontFilter !== 'all' && n.data('front') !== frontFilter) return true;
+  if (onlyAvailable && !(n.data('state') === 'open' && !n.data('blocked') && !n.data('conditional'))) return true;
+  return false;
 }
-
-function renderDrawerBody(node) {
-  if (drawerIssue) {
-    return renderDrawerIssueBrief(drawerIssue, node);
-  }
-
-  let branchesHtml = '';
-  if (node.id === 'laboratorio') {
-    const hasReopened = (node.issues || []).some(num => {
-      const iss = data.roadmap.suspendedFront?.issues?.find(i => i.number === num);
-      return iss?.state === 'open';
+function applyGraphFilters() {
+  if (cy) {
+    cy.batch(() => {
+      cy.elements().removeClass('f-hidden');
+      cy.nodes().filter(nodeHiddenByFilter).addClass('f-hidden');
+      cy.nodes().filter(n => n.isParent() && !n.hasClass('f-hidden') && n.descendants().not('.f-hidden').length === 0).addClass('f-hidden');
+      cy.edges().filter(e => e.source().hasClass('f-hidden') || e.target().hasClass('f-hidden')).addClass('f-hidden');
     });
-    branchesHtml = `<div class="drawer-branches-box">
-      <span class="callout-label">Ramas y artefactos conservados</span>
-      <div class="branches-mini-list">
-        ${node.branches.map(br => `
-          <div class="branch-mini-item">
-            <div class="branch-mini-top"><code>${escape(br.name)}</code> · <small>${escape(br.ref)}</small></div>
-            <p>${escape(br.purpose)}</p>
-            ${link(br.url, 'Ver rama')}
-          </div>
-        `).join('')}
-      </div>
-      <div class="drawer-quote-wrap">
-        <blockquote class="drawer-quote">
-          <p>«${escape(node.quote.text)}»</p>
-          <cite>— ${link(node.quote.url, node.quote.author)}</cite>
-        </blockquote>
-      </div>
-      ${hasReopened ? `
-        <div class="resume-precautions drawer-resume-notice">
-          <strong>Aviso de discrepancia:</strong>
-          <p>Se detectaron issues de este frente reabiertos en GitHub. Requiere revisión de orientación.</p>
-        </div>
-      ` : ''}
-    </div>`;
   }
-
-  return `
-    <div class="drawer-action-callout">
-      <span class="callout-label">Próximo paso concreto</span>
-      <strong>${escape(node.actionTitle)}</strong>
-      <p>${escape(node.actionDetail)}</p>
-    </div>
-    <div class="drawer-reading-box">
-      <span class="callout-label">Qué leer / Fuente primaria</span>
-      <div class="reading-link">${link(node.reading.url, node.reading.label)}</div>
-      <p class="reading-detail">${escape(node.reading.detail)}</p>
-    </div>
-    ${branchesHtml}
-    <div class="drawer-issues-box">
-      <span class="callout-label">Issues del frente (${node.issues.length})</span>
-      <p class="drawer-issues-help">Hacé clic en un issue para ver su brief y contexto aquí mismo:</p>
-      <div class="drawer-issues-list">
-        ${node.issues.map(num => drawerIssueButton(num, node.activeIssue)).join('')}
-      </div>
-    </div>
-  `;
+  renderRoadmapList();
 }
-
+function applyFocus() {
+  if (!cy) return;
+  cy.batch(() => {
+    cy.elements().removeClass('focus-dim');
+    if (!focusNext) return;
+    const ids = nextActionIds();
+    const keep = cy.nodes().filter(n => ids.has(n.id()) || n.isParent());
+    const keepEdges = cy.edges().filter(e => ids.has(e.source().id()) || ids.has(e.target().id()));
+    cy.elements().difference(keep.union(keepEdges)).addClass('focus-dim');
+  });
+}
+function updateGraphSelection() {
+  if (cy) {
+    cy.elements().removeClass('sel dep-in dep-out dimmed');
+    const ele = selectedGraphId ? cy.getElementById(selectedGraphId) : null;
+    if (ele?.length) {
+      ele.addClass('sel');
+      if (ele.isParent()) {
+        ele.union(ele.descendants()).removeClass('focus-dim');
+        ele.descendants().addClass('dep-out');
+        cy.nodes().filter(n => !n.isParent() && n.data('front') !== ele.data('frontId')).addClass('dimmed');
+      } else {
+        const incoming = ele.predecessors().filter(el => !el.isParent());
+        const outgoing = ele.successors().filter(el => !el.isParent());
+        incoming.addClass('dep-in');
+        outgoing.addClass('dep-out');
+        ele.union(incoming).union(outgoing).removeClass('focus-dim');
+        cy.nodes().filter(n => !n.isParent() && n !== ele && !incoming.contains(n) && !outgoing.contains(n)).addClass('dimmed');
+        cy.edges().filter(e => !incoming.contains(e) && !outgoing.contains(e)).addClass('dimmed');
+      }
+    }
+  }
+  document.querySelectorAll('[data-graph-id]').forEach(btn => {
+    const on = btn.dataset.graphId === selectedGraphId;
+    btn.classList.toggle('is-selected', on);
+    if (btn.classList.contains('rl-node')) btn.setAttribute('aria-pressed', on);
+  });
+  renderRoadmapPanel();
+  urlState();
+}
+function selectGraph(id) {
+  selectedGraphId = id;
+  const ele = cy?.getElementById(id);
+  if (ele?.length && ele.hasClass('f-hidden')) {
+    frontFilter = 'all'; onlyAvailable = false;
+    const sel = document.querySelector('#rm-front-filter'); if (sel) sel.value = 'all';
+    const chk = document.querySelector('#rm-available'); if (chk) chk.checked = false;
+    applyGraphFilters();
+  }
+  updateGraphSelection();
+}
+function clearGraphSelection() { selectedGraphId = null; updateGraphSelection(); }
+function setRoadmapMode(mode) {
+  roadmapMode = mode;
+  document.querySelector('.spatial-roadmap')?.classList.toggle('mode-lista', mode === 'lista');
+  document.querySelectorAll('[data-rm-mode]').forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.rmMode === mode)));
+  if (mode === 'mapa') { initCy(); requestAnimationFrame(() => cy?.resize()); }
+  urlState();
+}
+function handleRmAction(action) {
+  if (action === 'focus-next') {
+    focusNext = !focusNext;
+    document.querySelector('[data-rm-action="focus-next"]')?.setAttribute('aria-pressed', String(focusNext));
+    applyFocus();
+    return;
+  }
+  if (action === 'clear') { clearGraphSelection(); return; }
+  if (!cy) return;
+  const rect = cy.container().getBoundingClientRect();
+  const center = { x: rect.width / 2, y: rect.height / 2 };
+  if (action === 'zoom-in') cy.zoom({ level: cy.zoom() * 1.3, renderedPosition: center });
+  if (action === 'zoom-out') cy.zoom({ level: cy.zoom() / 1.3, renderedPosition: center });
+  if (action === 'fit') cy.fit(cy.elements().not('.f-hidden'), 36);
+  if (action === 'reset') {
+    frontFilter = 'all'; onlyAvailable = false; focusNext = false;
+    selectedGraphId = null;
+    const sel = document.querySelector('#rm-front-filter'); if (sel) sel.value = 'all';
+    const chk = document.querySelector('#rm-available'); if (chk) chk.checked = false;
+    document.querySelector('[data-rm-action="focus-next"]')?.setAttribute('aria-pressed', 'false');
+    applyGraphFilters();
+    applyFocus();
+    cy.fit(cy.elements().not('.f-hidden'), 36);
+    updateGraphSelection();
+  }
+}
+function renderRoadmapList() {
+  const container = document.querySelector('#rm-list');
+  if (container) container.innerHTML = roadmapListHTML();
+}
+function renderRoadmapPanel() {
+  const container = document.querySelector('#rm-panel-body');
+  if (container) container.innerHTML = roadmapPanelHTML();
+  document.querySelector('.rm-panel')?.classList.toggle('has-sel', !!selectedGraphId);
+}
+function roadmapListHTML() {
+  const groups = graphFronts().filter(f => frontFilter === 'all' || f.id === frontFilter);
+  return groups.map(f => {
+    const nodes = (rm().graph?.nodes ?? []).filter(n => n.front === f.id)
+      .filter(n => !onlyAvailable || (n.state === 'open' && n.openBlockers.length === 0 && !(n.conditions?.length)));
+    return `<section class="rl-front rl-front-${f.id}">
+      <h3><span class="rl-dot" aria-hidden="true" style="background:${FRONT_COLORS[f.id] ?? '#5a6a62'}"></span>${escape(f.name)}<span class="rl-state">${escape(f.stateLabel ?? '')}</span></h3>
+      ${nodes.length ? `<ul class="rl-items">${nodes.map(n => {
+        const st = nodeStatus(n);
+        return `<li><button type="button" class="rl-node ${selectedGraphId === n.id ? 'is-selected' : ''}" data-graph-id="${n.id}" aria-pressed="${selectedGraphId === n.id}">
+          <span class="rl-num">${n.kind === 'paused' ? 'LAB' : `#${n.number}`}</span>
+          <span class="rl-title">${escape(n.title)}</span>
+          ${n.milestone ? `<span class="rl-ms">${escape(milestoneCode(n.milestone) ?? '')}</span>` : ''}
+          <span class="rl-pill ${st.cls}">${escape(st.label)}</span>
+        </button></li>`;
+      }).join('')}</ul>` : '<p class="rl-empty">Sin entregas con este filtro.</p>'}
+    </section>`;
+  }).join('');
+}
+function panelHeader(tag, title, pill) {
+  return `<header class="drawer-header">
+    <div class="drawer-header-top">
+      <span class="drawer-tag">${escape(tag)}</span>
+      <button type="button" class="drawer-close-btn" data-rm-action="clear" aria-label="Limpiar selección y cerrar detalle">✕ <kbd>Esc</kbd></button>
+    </div>
+    <div class="drawer-title-row"><h2>${title}</h2>${pill}</div>
+  </header>`;
+}
+function depEdgeList(ids, emptyText, noteFor) {
+  if (!ids.length) return `<p class="rm-rel-empty">${escape(emptyText)}</p>`;
+  return `<ul class="rm-rel-list">${ids.map(id => {
+    const n = graphNode(id);
+    if (!n) return '';
+    const st = nodeStatus(n);
+    const num = n.kind === 'paused' ? 'LAB' : `#${n.number}`;
+    const note = noteFor?.(n);
+    return `<li><button type="button" class="rm-rel-btn" data-graph-id="${n.id}"><span class="rl-num">${num}</span><span class="rl-title">${escape(n.title)}</span><span class="rl-pill ${st.cls}">${escape(st.label)}</span></button>${note ? `<p class="rm-edge-note">${escape(note)}</p>` : ''}</li>`;
+  }).join('')}</ul>`;
+}
+/* Vínculos del roadmap hacia la vista de arquitectura (PR #58): la
+ * correspondencia issue→componentes/decisiones es editorial y vive en
+ * roadmap.json > archComponents. */
+function archLinksHTML(num) {
+  const meta = (rm().archComponents || {})[num];
+  if (!meta || (!(meta.components || []).length && !(meta.decisions || []).length && !meta.section)) return '';
+  const parts = [];
+  for (const c of meta.components || []) parts.push(ilink(`/arquitectura/?c=${encodeURIComponent(c)}`, `componente ${c}`));
+  for (const d of meta.decisions || []) parts.push(ilink(`/arquitectura/?d=${encodeURIComponent(d)}`, `decisión ${d}`));
+  if (meta.section) parts.push(ilink(`/arquitectura/#${encodeURIComponent(meta.section)}`, 'sección del visor'));
+  return `<div class="drawer-reading-box"><span class="callout-label">En arquitectura</span><div class="rm-arch-links">${parts.join(' ')}</div></div>`;
+}
+function issueNodeDetailHTML(n) {
+  const issue = data.issues.find(i => i.number === n.number);
+  const brief = branch().briefs[n.number];
+  const reviewed = brief?.status === 'reviewed';
+  const st = nodeStatus(n);
+  const front = graphFronts().find(f => f.id === n.front);
+  const edges = rm().graph?.edges ?? [];
+  const incoming = edges.filter(e => e.target === n.id);
+  const pending = incoming.filter(e => e.state === 'pending').map(e => e.source);
+  const doneDeps = incoming.filter(e => e.state === 'satisfied').map(e => e.source);
+  const unknownDeps = incoming.filter(e => e.state === 'unknown' || e.state === 'not_planned').map(e => e.source);
+  const unlocks = edges.filter(e => e.source === n.id && e.kind === 'dependency').map(e => e.target);
+  const conditional = edges.filter(e => e.source === n.id && e.kind === 'conditional').map(e => e.target);
+  const notes = rm().graph?.edgeNotes ?? {};
+  const keyOf = other => other.kind === 'paused' ? 'laboratorio' : String(other.number);
+  const inNote = id => { const o = graphNode(id); return o ? notes[`${keyOf(o)}>${n.number}`] : null; };
+  const outNote = id => { const o = graphNode(id); return o ? notes[`${n.number}>${keyOf(o)}`] : null; };
+  const ms = milestoneCode(n.milestone);
+  const rawDone = (issue?.done ?? '').split('\n').filter(line => /^\s*- \[[ xX]\]/.test(line));
+  const closed = n.state === 'closed';
+  return panelHeader(front ? `${front.tag}` : 'Entrega', `${escape(`#${n.number} · ${n.title}`)}`,
+      `<span class="drawer-status-pill ${st.cls}">${escape(st.label)}</span>`)
+    + `<div class="drawer-body">
+      <div class="rm-panel-meta">
+        ${ms ? `<span class="rl-ms">${escape(ms)}</span>` : ''}
+        ${front ? `<button type="button" class="rm-front-chip" data-graph-id="frente-${front.id}">Frente: ${escape(front.name)} →</button>` : ''}
+        ${n.assignees.length ? `<span class="rm-assignee">${escape(n.assignees.join(', '))}</span>` : '<span class="rm-assignee">Sin responsable</span>'}
+      </div>
+      <div class="drawer-issue-links">
+        ${link(n.url, 'Ver en GitHub')}
+        ${issue ? `<button type="button" class="drawer-jump-issue-btn" data-jump-issue="${n.number}">Abrir en vista de trabajo →</button>` : ''}
+      </div>
+      ${closed ? (n.stateReason === 'not_planned'
+        ? `<div class="drawer-action-callout" style="background:var(--coral);border-color:#ebd0be"><span class="callout-label">Retirada sin hacerse</span><p>Esta entrega se cerró como no planificada: no es trabajo completado. Aparece en el mapa solo como contexto.</p></div>`
+        : `<div class="drawer-action-callout" style="background:var(--green);border-color:#c9d6b7"><span class="callout-label">Ya terminada</span><p>Esta entrega está cerrada como completada. Aparece en el mapa como contexto de lo que habilitó el trabajo actual.</p></div>`) : ''}
+      ${unknownDeps.length ? `<div class="drawer-issues-box"><span class="callout-label">Dependencias sin verificar</span><p class="drawer-issues-help">GitHub marca estas relaciones, pero el issue origen no está en el snapshot actual.</p>${depEdgeList(unknownDeps, '', inNote)}</div>` : ''}
+      ${pending.length ? `<div class="blocker-note"><strong>Espera a ${pending.map(id => `#${graphNode(id)?.number}`).join(', ')}.</strong><p>Podés leer el contexto, pero la ejecución depende de esas entregas.</p></div>
+        <div class="drawer-issues-box"><span class="callout-label">Bloqueos vigentes</span>${depEdgeList(pending, '', inNote)}</div>` : ''}
+      ${!closed && (n.conditions?.length) ? `<div class="drawer-action-callout" style="background:var(--paper);border-color:#d8b98a"><span class="callout-label">Condición documental previa</span>${n.conditions.map(c => `<p>${escape(c.text)}</p>`).join('')}<p class="rm-rel-note">No es un bloqueo de GitHub: viene del mapa de decisiones adoptado.</p></div>` : ''}
+      ${!closed && issue ? `
+        ${reviewed ? `<div class="brief-state fresh">${briefStatus(brief)}<span>Revisado el ${date(brief.review.at)}</span></div>` : `<div class="brief-state pending">${briefStatus(brief)}<span>${brief?.status === 'stale' ? 'Cambió el issue o una fuente; la orientación espera revisión.' : 'Sin orientación revisada en esta rama; se muestra el contrato del issue.'}</span></div>`}
+        <section class="brief-section"><h4>Qué vas a lograr</h4>${paragraphs(reviewed ? brief.goal : issue.goal || 'Consultá el resultado en el issue original.')}</section>
+        <section class="brief-section start-section"><h4>Siguiente acción</h4>${paragraphs(reviewed ? brief.start : issue.context || 'Revisá el issue completo en GitHub y sus dependencias.')}</section>
+        ${reviewed ? `<section class="brief-section"><h4>Para entrar en contexto</h4>${documentSources(brief)}</section>` : ''}
+        <section class="brief-section"><h4>Cómo saber que terminaste</h4>${rawDone.length ? `<ul class="criteria">${rawDone.map(line => `<li>${escape(plain(line.replace(/^\s*- \[[ xX]\]\s*/, '')))}</li>`).join('')}</ul>` : paragraphs(reviewed ? brief.done : issue.done || 'Consultá los criterios en GitHub.')}</section>` : ''}
+      ${!closed && !issue ? '<p>No encontramos el detalle local del issue; consultalo en GitHub.</p>' : ''}
+      ${unlocks.length || conditional.length ? `<div class="drawer-issues-box"><span class="callout-label">Al terminar, desbloquea</span>${depEdgeList([...unlocks, ...conditional], '', outNote)}${conditional.length ? '<p class="rm-rel-note">La flecha hacia el laboratorio es una condición de retomo, no un bloqueo.</p>' : ''}</div>` : ''}
+      ${doneDeps.length ? `<div class="drawer-issues-box"><span class="callout-label">Habilitada por (ya cerradas)</span>${depEdgeList(doneDeps, '', inNote)}</div>` : ''}
+      ${front?.evidence ? `<div class="drawer-reading-box"><span class="callout-label">Evidencia del frente</span><div class="reading-link">${link(front.evidence.url, front.evidence.label)}</div><p class="reading-detail">${escape(front.evidence.detail)}</p></div>` : ''}
+      ${archLinksHTML(n.number)}
+    </div>`;
+}
+function frontIssueButton(num) {
+  const n = graphNode(`i${num}`);
+  const susp = rm().suspendedFront?.issues?.find(i => i.number === num);
+  const title = n?.title ?? susp?.title ?? `Issue #${num}`;
+  const st = n ? nodeStatus(n) : { label: susp ? 'Pausado (not planned)' : 'Sin verificar', cls: susp ? 'status-paused' : 'status-espera' };
+  if (!n) {
+    const url = susp?.url ?? `${repo}/issues/${num}`;
+    return `<a class="drawer-issue-btn" href="${escape(url)}" target="_blank" rel="noopener noreferrer">
+      <span class="d-iss-num">#${num}</span><span class="d-iss-title">${escape(title)}</span>
+      <span class="d-iss-status ${st.cls}">${escape(st.label)}</span>${externalIcon}</a>`;
+  }
+  return `<button type="button" class="drawer-issue-btn ${selectedGraphId === n.id ? 'is-active-issue' : ''}" data-graph-id="${n.id}">
+    <span class="d-iss-num">#${num}</span><span class="d-iss-title">${escape(title)}</span>
+    <span class="d-iss-status ${st.cls}">${escape(st.label)}</span><span class="d-iss-arrow" aria-hidden="true">→</span></button>`;
+}
+function frontDetailHTML(front) {
+  const issueNums = front.paused ? [] : (front.concluded ? (rm().graph?.nodes ?? []).filter(n => n.front === 'concluido').map(n => n.number) : front.issues);
+  return panelHeader(front.tag ?? 'Frente', escape(front.name),
+      `<span class="drawer-status-pill status-${front.state === 'pausado' ? 'paused' : (front.state ?? 'activo')}">${escape(front.stateLabel ?? '')}</span>`)
+    + `<div class="drawer-body">
+      ${front.purpose ? `<div class="drawer-reading-box"><span class="callout-label">Para qué existe</span><p class="reading-detail">${escape(front.purpose)}</p></div>` : ''}
+      ${front.whatExists ? `<div class="drawer-reading-box"><span class="callout-label">Qué existe hoy</span><p class="reading-detail">${escape(front.whatExists)}</p></div>` : ''}
+      ${front.nextStep ? `<div class="drawer-action-callout"><span class="callout-label">Siguiente paso del frente</span><p>${escape(front.nextStep)}</p></div>` : ''}
+      ${front.evidence ? `<div class="drawer-reading-box"><span class="callout-label">Evidencia</span><div class="reading-link">${link(front.evidence.url, front.evidence.label)}</div><p class="reading-detail">${escape(front.evidence.detail)}</p></div>` : ''}
+      ${issueNums.length ? `<div class="drawer-issues-box"><span class="callout-label">Entregas del frente (${issueNums.length})</span><p class="drawer-issues-help">Elegí una entrega para ver su detalle:</p><div class="drawer-issues-list">${issueNums.map(frontIssueButton).join('')}</div></div>` : ''}
+      ${front.archLink ? `<div class="drawer-reading-box"><span class="callout-label">Visualización</span><div class="rm-arch-links">${ilink(front.archLink, 'Ver en la visualización de arquitectura (pipeline propuesto)')}</div></div>` : ''}
+    </div>`;
+}
+function pausedDetailHTML() {
+  const sf = rm().suspendedFront;
+  if (!sf) return '';
+  const hasReopened = (sf.issues ?? []).some(i => i.state === 'open');
+  return panelHeader(sf.tag ?? 'Laboratorio', escape('Laboratorio (pausado)'),
+      `<span class="drawer-status-pill status-paused">${escape(sf.stateLabel ?? 'Pausado')}</span>`)
+    + `<div class="drawer-body">
+      <div class="drawer-action-callout" style="background:var(--coral);border-color:#ebd0be">
+        <strong style="color:#76331f">${escape(sf.title)}</strong>
+        <p>${escape(sf.summary)}</p>
+      </div>
+      <div class="drawer-reading-box"><span class="callout-label">Por qué está pausado</span><p class="reading-detail">${escape(sf.whySuspended)}</p></div>
+      <div class="drawer-reading-box"><span class="callout-label">Condición de retomo</span><p class="reading-detail">${escape(sf.howToResume?.condition ?? 'Sin condición registrada.')}</p></div>
+      <div class="drawer-branches-box"><span class="callout-label">Ramas y artefactos conservados</span>
+        <div class="branches-mini-list">${(sf.howToResume?.branches ?? []).map(br => `
+          <div class="branch-mini-item"><div class="branch-mini-top"><code>${escape(br.name)}</code> · <small>${escape(br.ref)}</small></div>
+          <p>${escape(br.purpose)}</p>${link(br.url, 'Ver rama')}</div>`).join('')}
+        </div>
+        <div class="drawer-quote-wrap"><blockquote class="drawer-quote"><p>«${escape(sf.evidence?.text ?? '')}»</p><cite>— ${link(sf.evidence?.commentUrl ?? `${repo}/issues`, sf.evidence?.author ?? 'Comentario')}</cite></blockquote></div>
+        ${sf.howToResume?.precautions ? `<p class="reading-detail" style="margin-top:10px">${escape(sf.howToResume.precautions)}</p>` : ''}
+        ${hasReopened ? `<div class="resume-precautions drawer-resume-notice"><strong>Aviso de discrepancia:</strong><p>Se detectaron issues de este frente reabiertos en GitHub. Requiere revisión de orientación.</p></div>` : ''}
+      </div>
+      <div class="drawer-issues-box"><span class="callout-label">Issues conservados (${(sf.issues ?? []).length})</span>
+        <div class="drawer-issues-list">${(sf.issues ?? []).map(i => frontIssueButton(i.number)).join('')}</div>
+        <p class="drawer-issues-help">Nunca cuentan como bloqueo ni como trabajo completado: son piezas pausadas en sus ramas.</p>
+      </div>
+      ${sf.retiredRecommendations ? `<div class="drawer-issues-box"><span class="callout-label">Recomendaciones del análisis (requieren replanificación)</span>
+        <p class="drawer-issues-help">${escape(sf.retiredRecommendations.text)}</p>
+        <div class="rm-arch-links">${ilink('/arquitectura/#seccion-laboratorio', 'Mapa del código de laboratorio en arquitectura')}</div>
+      </div>` : ''}
+    </div>`;
+}
+function roadmapPanelHTML() {
+  const id = selectedGraphId;
+  if (!id) return `<div class="rm-panel-empty"><span class="callout-label">Detalle</span><h2>Elegí una entrega</h2><p>Tocá un nodo del mapa o de la lista para ver qué existe, la siguiente acción, sus bloqueos y su evidencia.</p><p>Los recuadros agrupan frentes; las flechas muestran dependencias reales de GitHub.</p></div>`;
+  if (id === 'laboratorio' || id === 'frente-laboratorio') return pausedDetailHTML();
+  if (id.startsWith('frente-')) {
+    const front = graphFronts().find(f => f.id === id.slice(7));
+    return front ? frontDetailHTML(front) : '';
+  }
+  const n = graphNode(id);
+  return n ? issueNodeDetailHTML(n) : '';
+}
+function legendHTML() {
+  return `<div class="rm-legend-body">
+    <div class="rm-legend-group"><span class="callout-label">Frentes</span><ul>${graphFronts().map(f => `<li><span class="rl-dot" style="background:${FRONT_COLORS[f.id] ?? '#5a6a62'}"></span>${escape(f.name)}</li>`).join('')}</ul></div>
+    <div class="rm-legend-group"><span class="callout-label">Estado del nodo</span><ul>
+      <li><span class="lg-node lg-free"></span>Disponible</li>
+      <li><span class="lg-node lg-conditional"></span>Con condición documental</li>
+      <li><span class="lg-node lg-blocked"></span>Espera otra entrega</li>
+      <li><span class="lg-node lg-done"></span>Completado</li>
+      <li><span class="lg-node lg-paused"></span>Pausado (no bloquea)</li>
+      <li><span class="lg-node lg-unknown"></span>Sin verificar</li>
+      <li><span class="lg-node lg-next"></span>Próximo paso sugerido</li>
+    </ul></div>
+    <div class="rm-legend-group"><span class="callout-label">Flechas</span><ul>
+      <li><span class="lg-edge" style="background:#ad452b"></span>Bloqueo vigente</li>
+      <li><span class="lg-edge" style="background:#427345"></span>Dependencia ya resuelta</li>
+      <li><span class="lg-edge lg-dashed"></span>Condición de retomo / sin verificar</li>
+    </ul></div>
+  </div>`;
+}
+function branchDiffHTML() {
+  const diff = data.branchDiff;
+  if (!diff || !diff.differing.length) return '';
+  const [a, b] = diff.base === branchName ? [diff.base, diff.other] : [diff.other, diff.base];
+  return `<details class="rm-diff"><summary>${escape(a)} difiere de ${escape(b)} en ${diff.differing.length} de ${diff.total} fuentes consultadas</summary><ul>${diff.differing.map(p => `<li><code>${escape(p)}</code></li>`).join('')}</ul></details>`;
+}
 function roadmapView() {
   const b = branch();
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 700;
-  const nodes = getRoadmapNodes();
-  const currentNode = nodes.find(n => n.id === selectedRoadmapNode) || null;
-
-  return heading('Mapa visual del proyecto.', 'Frentes de trabajo en paralelo, estado real de ejecución y opciones para retomar.', link(b.documents['docs/propuesta/PLAN-DE-TRABAJO.md'].url, 'Leer Plan de Trabajo', 'text-action'))
+  const rmData = rm();
+  const nextActions = rmData.currentLocation.nextActions ?? [];
+  const params = new URLSearchParams(location.search);
+  roadmapMode ??= (params.get('modo') === 'lista' || (typeof window !== 'undefined' && window.innerWidth <= 700)) ? 'lista' : 'mapa';
+  const nodoParam = params.get('nodo');
+  if (nodoParam && selectedGraphId === null && (graphNode(nodoParam) || graphFronts().some(f => `frente-${f.id}` === nodoParam))) selectedGraphId = nodoParam;
+  return heading('Mapa de entregas.', 'Grafo de issues y dependencias reales de GitHub: qué está hecho, qué espera a qué y por dónde seguir.', link(b.documents['docs/propuesta/PLAN-DE-TRABAJO.md'].url, 'Leer Plan de Trabajo', 'text-action'))
     + branchNotice()
-    + `<div class="spatial-roadmap">
-        <div class="roadmap-guide-bar">
-          <div class="roadmap-guide-prompt">
-            <strong>Estamos en H2.</strong> Elegí uno de los 3 frentes próximos para ver qué hacer: <strong>Grabar primer par</strong> (#39), <strong>Alinear detector</strong> (#50) o <strong>Investigar antecedentes</strong> (#25).
-          </div>
-          <div class="roadmap-guide-actions">
-            ${link(repo + '/issues', 'Backlog en GitHub')}
-          </div>
+    + `<div class="spatial-roadmap ${roadmapMode === 'lista' ? 'mode-lista' : 'mode-mapa'}">
+      <div class="roadmap-guide-bar">
+        <div class="roadmap-guide-prompt">
+          <strong>${escape(rmData.currentLocation.activeMilestone ?? 'Hito actual')}.</strong> Próximos pasos sugeridos:
+          ${nextActions.map(a => `<button type="button" class="rm-next-btn" data-graph-id="i${a.issue}" title="${escape(a.description)}"><span class="rm-next-num">#${a.issue}</span> ${escape(a.title)}</button>`).join('')}
         </div>
-
-        <div class="spatial-canvas-wrap">
-          ${renderSpatialSvg(isMobile)}
-
-          <div class="spatial-nodes-layer" role="group" aria-label="Nodos del mapa interactivo">
-            ${nodes.map(node => `
-              <button type="button" class="spatial-node-btn node-${node.id} node-${node.type} ${selectedRoadmapNode === node.id ? 'is-selected' : ''}" data-node-id="${node.id}" aria-expanded="${selectedRoadmapNode === node.id}" aria-haspopup="dialog" aria-label="Nodo ${escape(node.name)} (${escape(node.stateLabel)}). Clic para abrir detalle.">
-                <div class="node-icon-row">${node.iconSvg}<span class="node-title">${escape(node.name)}</span></div>
-                <span class="node-sub">${escape(node.subtitle)}</span>
-                <span class="node-pill">${escape(node.stateLabel)}</span>
-              </button>
-            `).join('')}
-          </div>
-
-          <div class="drawer-backdrop ${currentNode ? 'is-open' : ''}" data-drawer-close="true"></div>
-
-          <aside class="roadmap-drawer ${currentNode ? 'is-open' : ''}" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-label="Detalle del nodo ${currentNode ? escape(currentNode.name) : ''}">
-            ${currentNode ? `
-              <header class="drawer-header">
-                <div class="drawer-header-top">
-                  <span class="drawer-tag">${escape(currentNode.tag)}</span>
-                  <button type="button" class="drawer-close-btn" data-drawer-close="true" aria-label="Cerrar panel de detalle">✕ Cerrar <kbd>Esc</kbd></button>
-                </div>
-                <div class="drawer-title-row">
-                  <h2 id="drawer-title">${escape(currentNode.name)}</h2>
-                  <span class="drawer-status-pill status-${currentNode.state}">${escape(currentNode.stateLabel)}</span>
-                </div>
-              </header>
-              <div class="drawer-body">
-                ${renderDrawerBody(currentNode)}
+        <div class="roadmap-guide-actions">${link(repo + '/issues', 'Backlog en GitHub')}</div>
+      </div>
+      <div class="rm-toolbar">
+        <div class="rm-modes" role="group" aria-label="Cómo ver el roadmap">
+          <button type="button" data-rm-mode="mapa" aria-pressed="${roadmapMode !== 'lista'}">Mapa</button>
+          <button type="button" data-rm-mode="lista" aria-pressed="${roadmapMode === 'lista'}">Lista</button>
+        </div>
+        <label class="rm-filter"><span>Frente</span><select id="rm-front-filter" aria-label="Filtrar por frente">
+          <option value="all">Todos</option>
+          ${graphFronts().map(f => `<option value="${f.id}" ${frontFilter === f.id ? 'selected' : ''}>${escape(f.name)}</option>`).join('')}
+        </select></label>
+        <label class="rm-check"><input type="checkbox" id="rm-available" ${onlyAvailable ? 'checked' : ''}> Solo disponibles</label>
+        <button type="button" class="rm-focus-btn" data-rm-action="focus-next" aria-pressed="${focusNext}">Foco en próximos pasos</button>
+        <div class="rm-zoom" role="group" aria-label="Controles del mapa">
+          <button type="button" data-rm-action="zoom-out" aria-label="Alejar el mapa">−</button>
+          <button type="button" data-rm-action="zoom-in" aria-label="Acercar el mapa">+</button>
+          <button type="button" data-rm-action="fit">Encuadrar</button>
+          <button type="button" data-rm-action="reset" title="Restablecer vista, filtros y selección">Restablecer</button>
+        </div>
+        <details class="rm-legend"><summary>Leyenda</summary>${legendHTML()}</details>
+      </div>
+      <div class="rm-meta">
+        <span>Snapshot: ${fullDate(data.generatedAt)} (Argentina)</span>
+        ${branchDiffHTML()}
+      </div>
+      <div class="roadmap-body">
+        <div class="cy-wrap">
+          <div id="cy-roadmap" class="cy-canvas" role="application" aria-label="Mapa interactivo de entregas y dependencias"></div>
+          <p class="cy-fallback" hidden>No pudimos cargar el grafo interactivo. Cambiá a la vista <strong>Lista</strong>, que tiene la misma información.</p>
+        </div>
+        <div class="roadmap-list" id="rm-list">${roadmapListHTML()}</div>
+        <aside class="rm-panel" aria-label="Detalle de la entrega seleccionada">
+          <div id="rm-panel-body" aria-live="polite">${roadmapPanelHTML()}</div>
+        </aside>
+      </div>
+      <details class="roadmap-secondary-accordion">
+        <summary>Consultar calendario académico y decisiones abiertas de la rama</summary>
+        <div class="roadmap-secondary-body">
+          <div class="roadmap-bottom-grid">
+            <section class="calendar-pane">
+              <h2>Calendario académico de ${branchName === 'main' ? 'Main' : 'Laboratorio'}</h2>
+              <div class="calendar-state">${b.timelineProposed ? 'Propuesta sin discutir' : 'Consultar validación en el Plan'}<p>Las fechas orientan el trabajo; no acreditan que una etapa esté terminada.</p></div>
+              <ol class="calendar">${b.timeline.map(row => `<li><strong>${escape(plain(row.date))}</strong><p>${escape(plain(row.goal))}</p></li>`).join('')}</ol>
+              ${link(b.documents['docs/propuesta/PLAN-DE-TRABAJO.md'].url + '#11-cronograma', 'Ver calendario en la fuente')}
+            </section>
+            <section class="decisions-section">
+              <div class="section-heading">
+                <div><h2>Decisiones para tener presentes</h2><p>Estado declarado en los documentos de esta rama.</p></div>
+                ${link(b.documents['docs/gestion/MAPA-DECISIONES.md'].url, 'Abrir mapa de decisiones')}
               </div>
-            ` : ''}
-          </aside>
-        </div>
-
-        <details class="roadmap-secondary-accordion">
-          <summary>Consultar calendario académico y decisiones abiertas de la rama</summary>
-          <div class="roadmap-secondary-body">
-            <div class="roadmap-bottom-grid">
-              <section class="calendar-pane">
-                <h2>Calendario académico de ${branchName === 'main' ? 'Main' : 'Laboratorio'}</h2>
-                <div class="calendar-state">${b.timelineProposed ? 'Propuesta sin discutir' : 'Consultar validación en el Plan'}<p>Las fechas orientan el trabajo; no acreditan que una etapa esté terminada.</p></div>
-                <ol class="calendar">${b.timeline.map(row => `<li><strong>${escape(plain(row.date))}</strong><p>${escape(plain(row.goal))}</p></li>`).join('')}</ol>
-                ${link(b.documents['docs/propuesta/PLAN-DE-TRABAJO.md'].url + '#11-cronograma', 'Ver calendario en la fuente')}
-              </section>
-              <section class="decisions-section">
-                <div class="section-heading">
-                  <div><h2>Decisiones para tener presentes</h2><p>Estado declarado en los documentos de esta rama.</p></div>
-                  ${link(b.documents['docs/gestion/MAPA-DECISIONES.md'].url, 'Abrir mapa de decisiones')}
-                </div>
-                <div class="decision-list">${b.decisions.filter(item => item.open).map(item => `<article><span>${escape(item.id)}</span><div><h3>${escape(item.title)}</h3><p>${escape(item.state)}</p></div></article>`).join('')}</div>
-              </section>
-            </div>
+              <div class="decision-list">${b.decisions.filter(item => item.open).map(item => `<article><span>${escape(item.id)}</span><div><h3>${escape(item.title)}</h3><p>${escape(item.state)}</p></div></article>`).join('')}</div>
+            </section>
           </div>
-        </details>
-      </div>`;
+        </div>
+      </details>
+    </div>`;
+}
+function setupRoadmap() {
+  if (cy) { cy.destroy(); cy = null; }
+  if (roadmapMode !== 'lista') initCy();
 }
 function glossaryView() {
   const b = branch();
@@ -685,27 +711,16 @@ function render() {
   const b = branch();
   document.querySelector('#source-footer').innerHTML = `<span>Datos consultados: ${fullDate(data.generatedAt)} (Argentina)</span><span>${link(`${repo}/commit/${b.sha}`, `${b.name} · ${b.sha.slice(0,7)}`)} · fuentes del ${date(b.committedAt)}</span>`;
   if (Date.now() - Date.parse(data.generatedAt) > 24 * 60 * 60 * 1000) document.querySelector('#source-footer').insertAdjacentHTML('afterbegin', '<strong class="stale-snapshot">Esta publicación tiene más de 24 horas. Verificá el estado actual en GitHub.</strong>');
+  if (view === 'roadmap') setupRoadmap();
   urlState();
 }
 document.addEventListener('click', event => {
-  const closeTrigger = event.target.closest('[data-drawer-close]');
-  if (closeTrigger && selectedRoadmapNode) {
-    const restoreId = lastFocusedNodeId || selectedRoadmapNode;
-    selectedRoadmapNode = null;
-    drawerIssue = null;
-    render();
-    if (restoreId) document.querySelector(`[data-node-id="${restoreId}"]`)?.focus();
-    return;
-  }
-
-  if (selectedRoadmapNode && !event.target.closest('.roadmap-drawer') && !event.target.closest('.spatial-node-btn')) {
-    const restoreId = lastFocusedNodeId || selectedRoadmapNode;
-    selectedRoadmapNode = null;
-    drawerIssue = null;
-    render();
-    if (restoreId) document.querySelector(`[data-node-id="${restoreId}"]`)?.focus();
-    return;
-  }
+  const rmMode = event.target.closest('[data-rm-mode]');
+  if (rmMode && data) { setRoadmapMode(rmMode.dataset.rmMode); return; }
+  const rmAction = event.target.closest('[data-rm-action]');
+  if (rmAction && data) { handleRmAction(rmAction.dataset.rmAction); return; }
+  const graphBtn = event.target.closest('[data-graph-id]');
+  if (graphBtn && data) { selectGraph(graphBtn.dataset.graphId); return; }
 
   const button = event.target.closest('button');
   if (!button || !data) return;
@@ -713,42 +728,20 @@ document.addEventListener('click', event => {
     view = button.dataset.view;
     search = '';
     selected = null;
-    selectedRoadmapNode = null;
-    drawerIssue = null;
+    selectedGraphId = null;
     render();
     main.focus({ preventScroll:true });
     main.scrollIntoView({ behavior:'instant', block:'start' });
   }
   if (button.dataset.branch) { branchName = button.dataset.branch; render(); }
   if (button.dataset.phase) { milestoneFilter = button.dataset.phase; view = 'issues'; selected = null; search = ''; render(); main.focus({ preventScroll:true }); main.scrollIntoView({ behavior:'instant', block:'start' }); }
-  if (button.dataset.nodeId) {
-    lastFocusedNodeId = button.dataset.nodeId;
-    selectedRoadmapNode = button.dataset.nodeId;
-    drawerIssue = null;
-    render();
-    const closeBtn = document.querySelector('.drawer-close-btn');
-    closeBtn?.focus();
-  }
-  if (button.dataset.drawerIssue) {
-    drawerIssue = Number(button.dataset.drawerIssue);
-    render();
-    const backBtn = document.querySelector('.drawer-back-btn');
-    backBtn?.focus();
-  }
-  if (button.dataset.drawerBack) {
-    drawerIssue = null;
-    render();
-    const closeBtn = document.querySelector('.drawer-close-btn');
-    closeBtn?.focus();
-  }
   if (button.dataset.jumpIssue) {
     const targetNum = Number(button.dataset.jumpIssue);
     const targetIssue = data.issues.find(i => i.number === targetNum);
     const current = currentMilestone();
     selected = targetNum;
     search = '';
-    selectedRoadmapNode = null;
-    drawerIssue = null;
+    selectedGraphId = null;
     if (targetIssue && targetIssue.milestone === current?.number) {
       milestoneFilter = 'all';
       view = 'ahora';
@@ -764,9 +757,9 @@ document.addEventListener('click', event => {
       const panel = document.querySelector('#brief-panel');
       panel?.setAttribute('tabindex', '-1');
       panel?.focus({ preventScroll: true });
-      panel?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+      panel?.scrollIntoView({ behavior: reducedMotion() ? 'instant' : 'smooth', block: 'start' });
     } else {
-      row?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'nearest' });
+      row?.scrollIntoView({ behavior: reducedMotion() ? 'instant' : 'smooth', block: 'nearest' });
     }
   }
   if (button.dataset.issue) {
@@ -775,28 +768,21 @@ document.addEventListener('click', event => {
     row?.focus({ preventScroll:true });
     if (innerWidth <= 1000) {
       const panel = document.querySelector('#brief-panel');
-      panel?.setAttribute('tabindex', '-1'); panel?.focus({ preventScroll:true }); panel?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block:'start' });
+      panel?.setAttribute('tabindex', '-1'); panel?.focus({ preventScroll:true }); panel?.scrollIntoView({ behavior: reducedMotion() ? 'instant' : 'smooth', block:'start' });
     }
   }
 });
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && selectedRoadmapNode) {
+  if (event.key === 'Escape' && selectedGraphId) {
     event.preventDefault();
-    const restoreId = lastFocusedNodeId || selectedRoadmapNode;
-    selectedRoadmapNode = null;
-    drawerIssue = null;
-    render();
-    if (restoreId) document.querySelector(`[data-node-id="${restoreId}"]`)?.focus();
+    clearGraphSelection();
   }
 });
+let resizeTimer = null;
 window.addEventListener('resize', () => {
-  if (view === 'roadmap') {
-    const currentIsMobile = window.innerWidth <= 700;
-    if (currentIsMobile !== lastIsMobile) {
-      lastIsMobile = currentIsMobile;
-      render();
-    }
-  }
+  if (view !== 'roadmap' || !cy) return;
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => cy?.resize(), 120);
 });
 document.addEventListener('input', event => {
   if (event.target.id === 'issue-search') {
@@ -807,7 +793,11 @@ document.addEventListener('input', event => {
   }
   if (event.target.id === 'glossary-search') { glossarySearch = event.target.value; document.querySelector('.glossary-list').innerHTML = glossaryRows(); }
 });
-document.addEventListener('change', event => { if (event.target.id === 'milestone-filter') { milestoneFilter = event.target.value; selected = null; render(); document.querySelector('#milestone-filter')?.focus({ preventScroll:true }); } });
+document.addEventListener('change', event => {
+  if (event.target.id === 'milestone-filter') { milestoneFilter = event.target.value; selected = null; render(); document.querySelector('#milestone-filter')?.focus({ preventScroll:true }); }
+  if (event.target.id === 'rm-front-filter') { frontFilter = event.target.value; applyGraphFilters(); }
+  if (event.target.id === 'rm-available') { onlyAvailable = event.target.checked; applyGraphFilters(); }
+});
 async function load() {
   main.setAttribute('aria-busy', 'true');
   try {

@@ -1,22 +1,22 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-07",
+  "updatedAt": "2026-10-08",
   "currentLocation": {
-    "summary": "H1 cerrado formalmente mediante PR #56 (#20). El equipo arranca el hito H2 con frentes paralelos: en detección, alinear alcance formal reglas vs SLM en #50 (según comentario de cierre de #20, manteniendo D09 abierta); en corpus, producción del primer par grabado de audio (#39); y en metodología, revisión de antecedentes (#25) sin bloqueos.",
+    "summary": "H1 cerrado formalmente mediante PR #56 (#20). El equipo arranca el hito H2 con frentes paralelos: en detección, probar un SLM directo con contexto y aviso único en #50 (acordado el 2026-10-08 en el issue #50; las reglas se comparan por separado y D09 sigue abierta); en corpus, preparación del primer par (#39), con la grabación condicionada a la validación del tutor (D06); y en metodología, revisión de antecedentes (#25) sin bloqueos.",
     "activeMilestone": "H2 — Piloto del corpus y primeras pruebas",
     "nextActions": [
       {
         "frontId": "deteccion",
         "issue": 50,
-        "title": "Alinear alcance reglas/SLM y probar texto incremental",
-        "description": "Mateo propone prototipo SLM sobre texto (#20) mientras #50 exige reglas iniciales. Definir con el equipo si se aborda primero la línea base de reglas o SLM, manteniendo D09 abierta.",
-        "urgency": "alinear_alcance"
+        "title": "Probar un SLM directo con contexto y aviso único",
+        "description": "Acordado con Mateo el 2026-10-08 (issue #50): el ensayo usa un SLM local directo sobre el par escrito de H1, sin esperar audio. Las reglas simples se ejecutan como comparador independiente sobre los mismos casos; no habilitan ni bloquean el SLM.",
+        "urgency": "inmediato"
       },
       {
         "frontId": "corpus",
         "issue": 39,
-        "title": "Producir y revisar el primer par de llamadas",
-        "description": "Grabar y transcribir el primer par contrastante (1 vishing, 1 legítimo) para habilitar ASR local (#19) y validar la referencia humana (#32).",
+        "title": "Preparar el primer par y validar las condiciones de grabación",
+        "description": "D06 exige la validación del tutor de las condiciones de consentimiento y custodia antes de grabar (pendiente de respuesta al 2026-10-08). El paso inmediato es preparar el primer par contrastante y gestionar esa validación; grabar queda condicionado. El par habilita ASR local (#19) y alimenta el piloto (#54).",
         "urgency": "inmediato"
       },
       {
@@ -52,14 +52,15 @@
       "tag": "Frente B · ASR, Reglas y Replay",
       "state": "activo",
       "stateLabel": "Activo",
-      "purpose": "Implementar el pipeline mínimo ejecutable demostrable: detector sobre texto incremental, ASR local sobre audio propio e integración de streaming en replay.",
-      "whatExists": "Par escrito de WhatsApp y recorrido conceptual de actualizaciones en ARQUITECTURA.md §4 (cerrado en #20 / PR #56); especificación de entrada/salida sin texto futuro.",
-      "nextStep": "Definir con el equipo si se aborda primero la línea base de reglas según el contrato formal de #50 o si se explora el prototipo de SLM liviano propuesto por Mateo en #20. Al contar con audio de #39, probar ASR local en #19 e integrar en #28.",
+      "purpose": "Implementar el pipeline mínimo ejecutable demostrable: detector SLM que puntúa cada turno cerrado sobre texto incremental, ASR local sobre audio propio e integración de streaming en replay. La cascada encoder→SLM queda como alternativa a medir con datos reales.",
+      "whatExists": "Par escrito de WhatsApp y recorrido conceptual de actualizaciones en ARQUITECTURA.md §4 (cerrado en #20 / PR #56); condiciones del ensayo SLM acordadas el 2026-10-08 en el issue #50: contexto de la llamada, aviso único ante el primer true válido y reglas de incendio como comparador independiente. La visualización del pipeline propuesto vive en /arquitectura/ (adoptada del PR #58).",
+      "nextStep": "Ejecutar #50 con el par escrito de H1 y casos de desarrollo, sin esperar audio. Al contar con las grabaciones de #39, probar ASR local en #19 e integrar SLM y transcripción en #28.",
       "evidence": {
-        "label": "Issue #20 (Comentario de cierre)",
-        "url": "https://github.com/Corchets/bitacora_tesis/issues/20#issuecomment-6048718768",
-        "detail": "Cierre de #20 vía PR #56; Mateo propone prototipo SLM sobre texto mientras #50 exige reglas iniciales (disyuntiva abierta de alcance antes de implementar). D09 abierta."
+        "label": "Issue #50",
+        "url": "https://github.com/Corchets/bitacora_tesis/issues/50",
+        "detail": "Condiciones del ensayo SLM acordadas el 2026-10-08: aviso único, reglas comparadas por separado. Son condiciones del ensayo, no cierre de D08/D09."
       },
+      "archLink": "/arquitectura/",
       "issues": [50, 19, 28],
       "activeIssue": 50
     },
@@ -70,13 +71,14 @@
       "state": "disponible",
       "stateLabel": "Disponible",
       "purpose": "Sintetizar la literatura relevante, congelar el protocolo experimental sin fugas temporales (D08) y seleccionar el detector y ASR final (D09).",
-      "whatExists": "Síntesis del estado del arte en SINTESIS-ESTADO-DEL-ARTE.md; ventana de contexto y alerta con decaimiento; presupuestos de prefactibilidad técnica (#24).",
+      "whatExists": "Síntesis del estado del arte en SINTESIS-ESTADO-DEL-ARTE.md; ventana de contexto y alerta con decaimiento y la escalera de avisos como propuestas; taxonomía 6+6 como selección de trabajo de D07 (abierta); D11 abierta según la consolidación del PR #58; presupuestos de prefactibilidad técnica (#24).",
       "nextStep": "Avanzar con la síntesis de literatura en #25 (abierto, sin bloqueos). Usar la integración de #28 para comparar candidatos en #51 y congelar protocolo en #33.",
       "evidence": {
         "label": "MAPA-DECISIONES.md (D08/D09)",
         "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación",
-        "detail": "D08 y D09 abiertas; línea base vigente: reglas solas"
+        "detail": "D08 y D09 siguen abiertas; la selección de detector y ASR sale de las comparaciones de #51."
       },
+      "archLink": "/arquitectura/riesgo.html",
       "issues": [25, 33, 51],
       "activeIssue": 25
     },
@@ -98,16 +100,24 @@
       "activeIssue": 52
     }
   ],
+  "concludedContext": {
+    "id": "concluido",
+    "name": "Concluido",
+    "tag": "Contexto previo · Trabajo ya terminado",
+    "stateLabel": "Concluido",
+    "purpose": "Entregas cerradas que habilitan el trabajo actual (por ejemplo #20, que cerró H1, y #26). No son pendientes: aparecen para explicar de dónde viene el mapa."
+  },
   "suspendedFront": {
     "id": "laboratorio_tito",
     "title": "Frente Experimental de Laboratorio (En Suspensión)",
     "tag": "Desarrollo pausado · No bloquea el avance",
     "state": "pausado",
     "stateLabel": "Pausado (conservado)",
+    "resumeFromIssue": 51,
     "summary": "Línea experimental con modelo preentrenado (RoBERTuito / Tito), generador de textos sintéticos argentinos, UI de escritorio en Python y cascada jerárquica con SLM local.",
-    "whySuspended": "Despriorizado el 2026-10-04 (cierre not_planned) para no comprometer arquitecturas complejas ni modelos pesados antes de validar la línea base simple (reglas heurísticas) y el corpus real del piloto. D09 permanece abierta con línea base oficial de 'reglas solas'.",
+    "whySuspended": "Despriorizado el 2026-10-04 (cierre not_planned) para no comprometer arquitecturas complejas ni modelos pesados antes de tener corpus real y comparaciones. D09 permanece abierta: ningún detector quedó elegido.",
     "howToResume": {
-      "condition": "Solo si la comparación sistemática de candidatos en H4 (#51 / D09) justifica evaluar un encoder o cascada frente a la línea base simple.",
+      "condition": "Solo si la comparación sistemática de candidatos en H4 (#51 / D09) justifica evaluar un encoder o cascada frente al detector vigente.",
       "branches": [
         {
           "name": "nacho1706/feature-training-data",
@@ -134,6 +144,10 @@
       "commentUrl": "https://github.com/Corchets/bitacora_tesis/issues/49#issuecomment-6048514393",
       "author": "nacho1706 (2026-10-07)",
       "text": "Cierre como no planificado, no completado. Artefactos en rama remota nacho1706/feature-training-data. No adopta RoBERTuito definitivo."
+    },
+    "retiredRecommendations": {
+      "text": "El análisis de laboratorio (CONTRASTE §9, consolidado en el PR #58) recomendaba retomar datos reales para el encoder (#41) y la cascada con audio (#42), además del banco y la UI (#46–#49). Todas están retiradas como not_planned en GitHub: volver a proponerlas exige una replanificación acordada por el equipo (D09 / #51), no se reabren solas.",
+      "issues": [41, 42]
     },
     "issues": [
       {
@@ -194,42 +208,38 @@
       }
     ]
   },
-  "keyConnectors": [
-    {
-      "from": "#39 (Primer par grabado)",
-      "to": "#19 (ASR local de audio) y #32 (Validación referencia D07)",
-      "type": "unblocks",
-      "label": "El audio y las transcripciones revisadas del primer par habilitan el ASR y la calibración del manual de anotación."
-    },
-    {
-      "from": "#50 (Reglas sobre texto) + #19 (ASR local)",
-      "to": "#28 (Primera integración replay en H3)",
-      "type": "integrates",
-      "label": "Unen la transcripción incremental y el detector de riesgo en una primera corrida conjunta medible en PC."
-    },
-    {
-      "from": "#28 (Integración) + #54 (Piloto 14 casos) + #55 (Particiones)",
-      "to": "#51 (Comparación de candidatos D09 en H4)",
-      "type": "evaluates",
-      "label": "Habilita comparar objetivamente detectores (reglas vs candidatos) sobre desarrollo con métricas de tiempo real."
-    },
-    {
-      "from": "#51 (Comparación candidatos D09)",
-      "to": "Frente Suspendido (Tito / Cascada / UI)",
-      "type": "resumes",
-      "label": "Solo si la comparación en #51 justifica probar un modelo más complejo que las reglas, se reactivan las ramas conservadas."
-    },
-    {
-      "from": "#51 (D09) + #33 (D08 congelar protocolo) + #45 (Corpus ampliado)",
-      "to": "#52 (Evaluación final sobre test en H5)",
-      "type": "locks",
-      "label": "Se congela el protocolo, métricas y configuración antes de tocar el test reservado para responder PI1, PI2 y E1."
-    },
-    {
-      "from": "#52 (Evaluación final)",
-      "to": "#53 (Informe final, demo y defensa H6)",
-      "type": "completes",
-      "label": "Los resultados empíricos alimentan las conclusiones del informe escrito de tesis y la presentación ante el tribunal."
-    }
-  ]
+  "edgeNotes": {
+    "20>39": "El par escrito de H1 habilita la grabación.",
+    "20>50": "El par escrito y el recorrido de H1 habilitan el ensayo del SLM.",
+    "39>19": "El audio del primer par habilita la prueba de ASR.",
+    "39>54": "El primer par revisado ordena la producción del piloto.",
+    "19>28": "La transcripción local alimenta la integración replay.",
+    "50>28": "La salida del SLM se integra en la corrida replay.",
+    "51>laboratorio": "Condición de retomo: solo si la comparación de D09 lo justifica."
+  },
+  "archComponents": {
+    "50": { "components": ["detector", "contador", "alerta"], "decisions": ["D09"] },
+    "28": { "components": ["adaptador", "estado", "contador", "alerta", "salida"], "decisions": ["D08"] },
+    "19": { "components": ["vad", "asr"], "decisions": ["D09"] },
+    "39": { "components": ["fuente-replay", "adaptador"], "decisions": ["D06"] },
+    "54": { "components": ["fuente-replay", "adaptador"], "decisions": ["D06"] },
+    "32": { "components": [], "decisions": ["D07"], "section": "seccion-taxonomia" },
+    "33": { "components": ["contador", "alerta", "salida"], "decisions": ["D08"] },
+    "51": { "components": ["asr", "detector", "encoder", "cascada"], "decisions": ["D09", "D11"] },
+    "55": { "components": ["salida"], "decisions": ["D08"] },
+    "45": { "components": ["salida"], "decisions": [] },
+    "52": { "components": ["salida"], "decisions": ["D04"] },
+    "53": { "components": ["presentacion", "salida"], "decisions": ["D10", "D12"] },
+    "25": { "components": [], "decisions": [] },
+    "20": { "components": ["fuente-replay", "adaptador"], "decisions": ["D05"] }
+  },
+  "issueConditions": {
+    "39": [
+      {
+        "label": "Condición documental previa (D06)",
+        "text": "D06 exige la validación del tutor de las condiciones de consentimiento y custodia antes de grabar (condiciones documentadas en el PR #35; consulta del 2026-09-30 pendiente de respuesta al 2026-10-08). Preparar el primer par puede avanzar; grabar queda condicionado a esa validación.",
+        "source": "docs/gestion/MAPA-DECISIONES.md"
+      }
+    ]
+  }
 }

@@ -80,6 +80,7 @@ const milestones = rawMilestones.map(milestone => ({ number: milestone.number, t
   open: allIssues.filter(issue => issue.milestone?.number === milestone.number && issue.state === 'open').length,
   closed: allIssues.filter(issue => issue.milestone?.number === milestone.number && issue.state === 'closed').length
 })).sort((a,b) => a.number - b.number);
+const issueByNumber = Object.fromEntries(allIssues.map(issue => [issue.number, issue]));
 const roadmap = {
   ...roadmapRaw,
   parallelFronts: roadmapRaw.parallelFronts.map(front => ({
@@ -119,9 +120,85 @@ const roadmap = {
     })
   } : undefined
 };
+// Grafo de entregas: nodos = issues de los frentes editoriales + los bloqueos que
+// referencian (incluidos cerrados, con state_reason para distinguir completed de
+// not_planned). Aristas = dependencias nativas de GitHub, nunca texto narrativo.
+const frontOfIssue = new Map();
+for (const front of roadmapRaw.parallelFronts) for (const num of front.issues) frontOfIssue.set(num, front.id);
+const graphed = new Set(frontOfIssue.keys());
+for (const num of [...graphed]) for (const dep of dependencies[num] ?? []) graphed.add(dep.number);
+const graphNodes = [...graphed].map(num => {
+  const issue = issueByNumber[num];
+  const deps = dependencies[num] ?? [];
+  return {
+    id: `i${num}`, kind: 'issue', number: num,
+    title: issue?.title ?? `Issue #${num}`,
+    state: issue?.state ?? 'unknown',
+    stateReason: issue?.state_reason ?? null,
+    milestone: issue?.milestone?.number ?? null,
+    assignees: (issue?.assignees ?? []).map(person => person.login ?? person),
+    url: issue?.html_url ?? `https://github.com/${config.repository}/issues/${num}`,
+    front: frontOfIssue.get(num) ?? 'concluido',
+    openBlockers: deps.filter(dep => dep.state === 'open').map(dep => dep.number),
+    /* Condiciones documentales previas (p. ej. D06 para #39): no son bloqueos
+     * nativos de GitHub ni aristas del grafo; restringen la ejecución libre. */
+    conditions: (roadmapRaw.issueConditions ?? {})[num] ?? []
+  };
+});
+const suspended = roadmapRaw.suspendedFront;
+if (suspended) graphNodes.push({
+  id: 'laboratorio', kind: 'paused', title: suspended.title,
+  state: 'closed', stateReason: 'not_planned', milestone: null, assignees: [],
+  url: suspended.evidence?.commentUrl ?? `https://github.com/${config.repository}/issues`,
+  front: 'laboratorio', openBlockers: [], conditions: [], issueCount: (suspended.issues ?? []).length
+});
+const graphEdges = [];
+for (const num of graphed) for (const dep of dependencies[num] ?? []) {
+  const blocker = issueByNumber[dep.number];
+  graphEdges.push({ id: `e${dep.number}-${num}`, source: `i${dep.number}`, target: `i${num}`, kind: 'dependency',
+    state: !blocker ? 'unknown' : blocker.state === 'open' ? 'pending' : blocker.state_reason === 'not_planned' ? 'not_planned' : 'satisfied' });
+}
+if (suspended?.resumeFromIssue && graphed.has(suspended.resumeFromIssue)) {
+  graphEdges.push({ id: 'e-resume-lab', source: `i${suspended.resumeFromIssue}`, target: 'laboratorio',
+    kind: 'conditional', state: 'conditional' });
+}
+roadmap.graph = { nodes: graphNodes, edges: graphEdges, edgeNotes: roadmapRaw.edgeNotes ?? {} };
+// Diferencia de fuentes consultadas entre ramas (misma lista de documentos).
+const branchDiff = branches.length === 2 ? (() => {
+  const paths = new Set([...Object.keys(branches[0].documents), ...Object.keys(branches[1].documents)]);
+  const differing = [...paths].filter(file => branches[0].documents[file]?.hash !== branches[1].documents[file]?.hash).sort();
+  return { base: branches[0].name, other: branches[1].name, differing, total: paths.size };
+})() : null;
+// Adopción local (PR #58, 2026-10-08): la vista de arquitectura toma las
+// decisiones del MAPA del árbol de trabajo, que puede diferir de las ramas
+// remotas publicadas. Se declara su procedencia; no se disfraza de main.
+const adoption = await readFile(path.join(root, '../docs/gestion/MAPA-DECISIONES.md'), 'utf8')
+  .then(content => ({
+    source: 'docs/gestion/MAPA-DECISIONES.md (árbol de trabajo; adopción local del contenido del PR #58, 2026-10-08)',
+    hash: hash(content),
+    decisions: decisions(content)
+  }))
+  .catch(() => null);
 const snapshot = { version: 1, repository: config.repository, generatedAt: new Date().toISOString(),
-  defaultBranch: config.defaultBranch, issues, milestones, dependencies, branches, roadmap };
+  defaultBranch: config.defaultBranch, issues, milestones, dependencies, branches, roadmap, branchDiff, adoption };
 await mkdir(path.join(root, 'dist'), { recursive: true });
-if (!process.argv.includes('--data-only')) await cp(path.join(root, 'public'), path.join(root, 'dist'), { recursive: true });
+if (!process.argv.includes('--data-only')) {
+  await cp(path.join(root, 'public'), path.join(root, 'dist'), { recursive: true });
+  try {
+    await cp(path.join(root, 'node_modules/cytoscape/dist/cytoscape.esm.min.mjs'), path.join(root, 'dist/cytoscape.esm.min.js'));
+    await cp(path.join(root, 'node_modules/cytoscape/LICENSE'), path.join(root, 'dist/cytoscape.LICENSE.txt'));
+  } catch {
+    throw new Error('Falta el bundle de cytoscape. Ejecutá `npm install` en ayuda-memoria antes de generar.');
+  }
+  // Apartado estático: la visualización de arquitectura (PR #58) viaja con el sitio.
+  // Si la carpeta no existe en la revisión, se avisa y no se corta el build.
+  const arquitecturaSrc = path.join(root, '../docs/ingenieria/arquitectura-web');
+  try {
+    await cp(arquitecturaSrc, path.join(root, 'dist/arquitectura'), { recursive: true });
+    console.log('Apartado /arquitectura/ copiado desde docs/ingenieria/arquitectura-web.');
+  } catch {
+    console.warn('docs/ingenieria/arquitectura-web no existe en esta revisión: se publica sin /arquitectura/.');
+  }
+}
 await writeFile(path.join(root, 'dist/data.json'), JSON.stringify(snapshot));
 console.log(`Generado: ${issues.length} issues, ${branches.length} ramas. ${branches.map(branch => `${branch.name}@${branch.sha.slice(0,7)}`).join(' · ')}`);

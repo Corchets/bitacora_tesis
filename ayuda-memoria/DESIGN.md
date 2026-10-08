@@ -61,36 +61,24 @@ Los tokens están implementados en `ayuda-memoria/public/styles.css` sobre `:roo
 
 ---
 
-## 2.4 Componentes del Mapa Espacial Ilustrativo (Roadmap)
+## 2.4 Componentes del Mapa de Entregas (Roadmap)
 
-La vista de Roadmap (`roadmapView`) implementa un mapa espacial no lineal en SVG nativo donde la carga inicial encaja confortablemente en una pantalla de escritorio sin exponer tarjetas largas ni detalles hasta que el usuario interactúa:
+La vista de Roadmap (`roadmapView`) implementa un grafo de dependencias no lineal con [Cytoscape.js](https://js.cytoscape.org/), librería vanilla de grafos (zoom, paneo, arrastre y selección por canvas) que no exige framework: su bundle ESM minificado se fija en `package.json`/`package-lock.json` y `scripts/build.mjs` lo copia a `dist/` junto con su licencia, sin CDN. Las aristas provienen exclusivamente de las dependencias nativas de GitHub (`data.roadmap.graph`, construido desde la API `blocked_by`); `roadmap.json` aporta solo la orientación editorial (frentes, próximos pasos, notas de arista, laboratorio) y los issues cerrados necesarios entran al grafo con su `state_reason` para distinguir `completed` de `not_planned`.
 
-1. **Cabecera de orientación (`.spatial-header`):**
-   - Presenta el título del mapa y una guía concisa de 3 opciones accionables: *Elegir Crear primer par (#39), Alinear detector (#50) o Investigar antecedentes (#25)*.
-   - Brinda un botón accesible de ayuda rápida (`.spatial-help-toggle`) y atajo de teclado (`Esc`).
-2. **Lienzo espacial nativo (`.spatial-canvas-wrap` y `.spatial-svg`):**
-   - Renderizado vectorial SVG con viewBox responsivo (`1000x560` en escritorio, `420x620` en móvil) y marcadores de flecha semánticos (`#arrow-active`, `#arrow-future`, `#arrow-paused`).
-   - Ilustraciones de zonas espaciales:
-     - **Isla suspendida de laboratorio** (`.svg-zone-paused`): Desarrollos de pipeline/cascada pausados (#41, #42, #44, #46–#49) en ramas `nacho1706/feature-training-data` (`bb542e1`) y `origin/laboratorio-main` (`4888277`), con condición de reanudación en #51 (D09).
-     - **Zona de ejecución activa** (`.svg-zone-active`): Hito 1 consolidado (PR #56) y punto neurálgico "Estamos acá".
-     - **Opciones de avance inmediato**: Tres ramas vectoriales directas hacia *Crear primer par* (#39), *Alinear detector* (#50) e *Investigar antecedentes* (#25).
-     - **Horizonte futuro** (`.svg-zone-future`): Hitos posteriores desacoplados (#55, #45, #33, #51, #52, #53).
-3. **Botones accesibles superpuestos (`.spatial-node-btn`):**
-   - Elementos `<button>` nativos HTML posicionados por porcentaje sobre el SVG con `min-height: 44px` y padding ergonómico para interacción táctil y por teclado.
-   - Contienen badge de estado (`.spatial-node-badge`), etiqueta concisa (`.spatial-node-title`) y metadato descriptivo (`.spatial-node-meta`).
-   - Atributos accesibles completos: `aria-expanded`, `aria-controls="roadmap-drawer"`, `:focus-visible` con halo acentuado (`var(--accent)`).
-4. **Drawer enfocado único (`.roadmap-drawer`):**
-   - Panel lateral derecho de ancho fijo (`380px` en escritorio, overlay completo en móvil) que se despliega al seleccionar cualquier nodo interactivo.
-   - En escritorio se ubica a la derecha sin solapar ninguno de los nodos espaciales (los nodos residen en el 65% izquierdo).
-   - Al seleccionar otro nodo, el drawer **reemplaza** inmediatamente el contenido sin acumulación.
-   - Incorpora:
-     - **Acción siguiente concreta (`.drawer-action-callout`):** Qué hacer ahora de forma unívoca.
-     - **Qué leer primero (`.drawer-reading-box`):** Fuente primaria clave enlazada.
-     - **Issues del frente (`.drawer-issues-box`):** Botones accesibles de issues (`.drawer-issue-btn`) con estado y título.
-5. **Drill-down contextual de issues (`renderDrawerIssueBrief`):**
-   - Al pulsar un botón de issue en el drawer, la vista del issue se despliega dentro del mismo panel sin abandonar la vista del mapa ni recargar la página.
-   - Incluye botón *← Volver a opciones del nodo* (`.drawer-back-btn`) y botón de cerrar (`×`).
-   - Cierre con tecla Escape o clic fuera del drawer restaura el foco accesible al botón del nodo previamente seleccionado.
+1. **Carriles por frente (`node:parent.front-*`):**
+   - Cada frente editorial es un recuadro contenedor con fondo tenue (`FRONT_BG`) y filete del color del frente (`FRONT_COLORS`); las columnas se ordenan de izquierda a derecha según el flujo de dependencias (Concluido → Corpus → Detección → Metodología → Cierre) y cada issue ocupa una posición fija ordenada por profundidad — no hay simulación en movimiento.
+   - El laboratorio es un carril separado, debajo y con filete punteado terracota: nunca cuenta como bloqueo ni como trabajo completado. Su única arista (`#51 → laboratorio`) es `conditional` (punteada, con la nota editorial de retomo).
+2. **Nodos de entrega:**
+   - Círculos de 34px con etiqueta `#NN` y título abreviado (el título completo va al panel): disponibles (`is-free`, filete ink sobre blanco), en espera (`is-blocked`, fondo coral y filete terracota), completados (`is-done`, verde relleno), retirados (`is-notplanned`, punteado terracota), sin verificar (`is-unknown`, punteado gris) y pausados (`is-paused`, punteado terracota). Los próximos pasos sugeridos llevan halo lima (`is-next`, `underlay`).
+   - Flechas: bloqueo vigente en terracota, dependencia ya resuelta en verde y condición de retomo punteada con su nota editorial (`edgeNotes` de `roadmap.json`).
+3. **Barra de herramientas (`.rm-toolbar`):**
+   - Alternancia Mapa/Lista (`.rm-modes`), filtro por frente, «Solo disponibles», «Foco en próximos pasos» (atenua lo demás sin reencuadrar), zoom −/+, Encuadrar, Restablecer y una leyenda desplegable (`.rm-legend`) con frentes, estados y tipos de flecha.
+   - Filtros y foco solo ocultan o atenúan elementos (`f-hidden`, `focus-dim`): nunca regeneran el lienzo ni reinician el encuadre. La selección persiste en la URL (`?vista=roadmap&nodo=i50`, `modo=lista`) para compartir una vista.
+4. **Lista accesible (`.roadmap-list`):**
+   - Modo Lista con la misma información en botones DOM (`.rl-node`): número, título, hito y píldora de estado (`Disponible`, `Espera #NN`, `Completado`, `Pausado`). Es la vista por defecto en pantallas ≤ 700px y la alternativa completa para teclado y lectores de pantalla.
+5. **Panel de detalle (`.rm-panel`):**
+   - En modo Mapa el lienzo ocupa todo el ancho disponible y el panel aparece como capa superpuesta a la derecha (`.rm-panel.has-sel`, `position: absolute`) recién al seleccionar: no roba ancho inicial ni reinicia el zoom. En modo Lista queda debajo de la lista, en flujo normal. Muestra hito, frente, responsable, enlaces a GitHub y a la vista de trabajo, estado del brief, qué se logra, siguiente acción, bloqueos vigentes como lista navegable con notas de arista (`.rm-edge-note`), dependencias sin verificar, entregas que desbloquea y evidencia del frente.
+   - Al seleccionar un nodo, el grafo atenúa lo no relacionado (`.dimmed`) y colorea entrantes (terracota, `.dep-in`) y salientes (verde, `.dep-out`); Escape o tocar el fondo limpia la selección.
 
 ---
 
@@ -118,6 +106,7 @@ El layout se organiza en una grilla de dos columnas principales: barra lateral d
    - La barra lateral se convierte en cabecera estática superior con navegación en grilla de 2 columnas de botones táctiles (mínimo `44px` de altura).
    - Ocultamiento de metadatos no críticos en el riel de fases (conserva códigos táctiles `H0`–`H5`).
    - Filas de issues optimizadas en espaciado horizontal.
+   - El roadmap abre en modo Lista (`.roadmap-list`, alternable a Mapa) y el panel de detalle se apila debajo de la lista.
 
 ---
 

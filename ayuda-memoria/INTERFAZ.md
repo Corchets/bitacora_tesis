@@ -14,9 +14,10 @@ seleccionada. Manrope da una voz precisa y amable. Filas con separadores para
 escanear trabajo; un panel continuo para leer; bordes suaves solo en superficies
 de agrupación. El color de advertencia identifica pendientes concretos.
 
-**STORY:** Ubicarse en el hito con trabajo abierto, elegir un issue, leer su brief
-y abrir la fuente o GitHub. Los pendientes de revisión y las diferencias de ramas
-permanecen visibles.
+**STORY:** Ubicarse en el hito con trabajo abierto, recorrer el mapa de entregas
+para ver qué espera a qué, elegir un issue, leer su brief y abrir la fuente o
+GitHub. Los pendientes de revisión y las diferencias de ramas permanecen
+visibles.
 
 **FIRST VIEWPORT:** Navegación angosta a la izquierda, selector de rama arriba.
 Rail de seis hitos y banda del hito activo. Lista de issues a la izquierda y panel
@@ -32,5 +33,8 @@ seguir etapas y elegir una entrada prima sobre metáforas instrumentales.
 ## Verificación
 
 Escritorio y celular, ambas ramas, navegación entre vistas, búsqueda, filtros,
-selección de issues, enlaces, estado de revisión y carga fallida. Las imágenes de
-la interfaz son evidencia local de revisión; no se sirven junto con la web.
+selección de issues, enlaces, estado de revisión y carga fallida. En el roadmap:
+alternancia Mapa/Lista, zoom y encuadre, arrastre de nodos, resaltado de
+dependencias al seleccionar, filtros por frente y disponibles, panel de detalle y
+fallback de la lista. Las imágenes de la interfaz son evidencia local de
+revisión; no se sirven junto con la web.
