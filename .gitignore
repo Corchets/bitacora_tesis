@@ -26,6 +26,10 @@ consentimientos-firmados/
 models/checkpoints/
 artifacts/
 
+# Python
+__pycache__/
+*.pyc
+
 # Sistema y editores
 .DS_Store
 .idea/
