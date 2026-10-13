@@ -1,0 +1,24 @@
+{
+  "case_id": "LG-PREMIO-CONSULTA-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "LG-PREMIO-CONSULTA-01",
+  "par": "SC-PREMIO-01-e01",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 2, "evento": "contexto", "etiquetas": []},
+    {"linea": 5, "evento": "mencion", "etiquetas": []},
+    {"linea": 6, "evento": "mencion", "etiquetas": []},
+    {"linea": 7, "evento": "mencion", "etiquetas": []},
+    {"linea": 8, "evento": "mencion", "etiquetas": []},
+    {"linea": 9, "evento": "rechazo", "etiquetas": []},
+    {"linea": 11, "evento": "mencion", "etiquetas": []}
+  ],
+  "que_prueba": "Comparte con su par premio, sorteo, ticket, foto del documento, WhatsApp, pago y transferencia, pero solo como negaciones, como descripción de un trámite presencial y como un dato que ofrece quien consulta y quien atiende rechaza. No hay pedido de alto riesgo.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla LG-PREMIO-CONSULTA-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "La línea 7 («venís al local con tu documento») describe un trámite presencial futuro, no un pedido de datos por teléfono, aunque una regla de palabras clave puede leerla como REQUEST_PERSONAL_DATA. En la línea 8 el dato lo ofrece B, no quien atiende. El texto no permite comprobar que el número del cartel sea el oficial; se toma de la ficha («canal que verificó»). AUTHORITY_CLAIM se anota en quien atiende (A), aunque el manual §5 la define para quien llama: la ficha del catálogo la incluye; revisar en D07."
+}

@@ -1,0 +1,11 @@
+A: Buenas noches, te hablo del área de seguridad del banco, mi nombre es Ramiro Sosa. ¿Sos el titular de la cuenta?
+B: Sí, soy yo. ¿Qué pasó?
+A: Hace diez minutos entraron a tu home banking desde un celular que no es el tuyo y dejaron cargada una transferencia de trescientos mil pesos.
+A: Todavía no salió, pero si no la frenamos ahora, esa plata la perdés y el banco no te la puede devolver.
+B: ¿Qué? Yo no hice nada. ¿Cómo la freno?
+A: Yo desde acá no la veo como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando en la aplicación del banco para anularla.
+B: ¿Compartir la pantalla? No, eso no lo hago. Mañana voy a la sucursal y lo veo ahí.
+A: Mañana ya está acreditada. Y te pido que no cortes ni llames a nadie, porque si se cierra esta gestión el bloqueo se cae.
+B: Si sos del banco, no te molesta que corte y llame al número que está atrás de la tarjeta.
+A: Si cortás, el sistema toma la operación como autorizada por vos y después no hay reclamo que valga.
+B: Lo arreglo con el banco por mi cuenta. No voy a compartir nada. Hasta luego.

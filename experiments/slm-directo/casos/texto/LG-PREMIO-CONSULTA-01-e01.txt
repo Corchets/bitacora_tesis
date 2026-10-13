@@ -1,0 +1,12 @@
+A: Atención al cliente de la promoción aniversario, buenas tardes. Te atiende Carla.
+B: Hola, Carla. Saqué este número del cartel que está en las cajas del supermercado. Quería consultar por el sorteo.
+A: Sí, claro, decime.
+B: Compré el sábado con la tarjeta del club de descuentos y me dijeron que con eso ya participaba. ¿Cómo me entero si gané?
+A: Los ganadores se publican el lunes en el local y en la página de la promoción. Nosotros no llamamos para avisar ni pedimos datos por teléfono.
+B: Ah, mirá. ¿Y si sale mi ticket, cómo se acredita el premio? ¿Hay que mandar una foto del documento o algo así?
+A: No, nada de fotos ni por WhatsApp. Venís al local con tu documento y el ticket, y lo retirás en el mostrador de atención.
+B: ¿Querés que te pase mi número de documento así ya me dejás anotada?
+A: No hace falta, no me lo digas. Acá no se anota a nadie por teléfono: participan todos los tickets cargados con la tarjeta.
+B: ¿Y hay que pagar algo para retirarlo? ¿Un gasto de envío, algo así?
+A: Nada. Si alguien te pide un pago o una transferencia para entregarte un premio, no es de nuestra promoción. Ante cualquier duda, llamá a este número del cartel.
+B: Perfecto, me quedó clarísimo. Gracias, Carla.

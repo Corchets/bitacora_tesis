@@ -1,0 +1,13 @@
+A: Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar?
+B: Hola, los llamo por el número que figura en la aplicación. No puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos.
+A: Bien, lo vemos. Antes que nada, no me digas ni tu usuario ni tu contraseña; para esto no los necesito.
+B: Ah, yo te los iba a pasar para que te fijes vos si están bien.
+A: No hace falta. Nosotros no vemos tu clave y nadie de la mesa de ayuda te la va a pedir.
+B: ¿Y entonces cómo lo arreglo? Tengo que pagar algo hoy.
+A: En la pantalla de ingreso tocá «Olvidé mi contraseña». Te va a llegar un correo a la dirección que tenés registrada.
+B: Ya me llegó. ¿Te leo lo que dice?
+A: No, ese correo es para vos. Seguí los pasos ahí mismo y elegí una clave nueva que no uses en otro lado.
+B: Listo, ya la cambié. ¿Querés que te la diga para que quede anotada?
+A: No, por favor. La clave nueva no se la digas a nadie, tampoco a nosotros. Probá entrar ahora.
+B: Entré. Uy, gracias, pensé que me habían bloqueado la cuenta.
+A: De nada. Si alguna vez te llaman diciendo que son de soporte y te piden el usuario o la clave, cortá y escribinos desde la aplicación.

@@ -1,0 +1,13 @@
+A: Buen día, ¿hablo con la señora Elena Ríos?
+B: Sí, ella habla. ¿Quién es?
+A: Te llamo del organismo previsional, del área de beneficios; mi nombre es Daniel Ferreyra. Te figura un refuerzo de cuarenta mil pesos que todavía no cobraste.
+B: ¿Un refuerzo? No sabía nada. Nadie me avisó.
+A: Salió para los jubilados que cobran la mínima, y vos estás en el listado. El tema es que el plazo para validarlo vence hoy a las seis.
+B: Ay, ¿y qué tengo que hacer? Yo hoy no tengo cómo ir hasta la oficina.
+A: Quedate tranquila, lo hacemos ahora por teléfono. Necesito que me confirmes tu fecha de nacimiento y el domicilio donde vivís.
+B: Nací el doce de mayo del cincuenta y uno, y vivo en Los Aromos cuatrocientos veinte.
+A: Perfecto, coincide con lo que tengo. Ahora mandame por mensaje a este mismo número una foto del documento, de frente y de dorso, así lo cargo en el sistema.
+B: ¿La foto? Eso no lo sé hacer bien con el celular.
+A: Es sacarle una foto como a cualquier cosa. Sin la foto no te lo puedo acreditar, y después de las seis ya no entra.
+B: Bueno, cuando vuelva mi hija le pido que me ayude y te la manda ella.
+A: Dale, pero que sea antes de las seis, ¿eh? Así no perdés el refuerzo.

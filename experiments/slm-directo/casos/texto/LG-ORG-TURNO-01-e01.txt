@@ -1,0 +1,13 @@
+A: Buen día, te atiende Sofía, de atención telefónica del organismo previsional. ¿En qué te puedo ayudar?
+B: Hola, buen día. Escuché en la radio que hay un refuerzo para los jubilados que cobran la mínima y quería saber si me toca.
+A: Sí, es un refuerzo de cuarenta mil pesos. Se cobra automáticamente junto con el haber de este mes; no hay que hacer ningún trámite.
+B: ¿Seguro? Porque a una vecina la llamaron diciendo que eran de acá, y le pidieron el domicilio y una foto del documento para cargárselo.
+A: Eso no lo hacemos nosotros. Por teléfono no pedimos fotos del documento, claves ni datos del banco. Si la vuelven a llamar, que corte.
+B: ¿Y vos no necesitás mis datos para fijarte si estoy en el listado?
+A: Por acá no hace falta. Si querés verlo con tu nombre, entrás a la página oficial con tu clave y lo consultás vos.
+B: Yo con la computadora me pierdo. ¿No puedo ir a la oficina?
+A: Sí, claro. Sacás un turno en la página oficial o lo pedís en la misma oficina, y llevás el documento.
+B: ¿Y el turno no me lo podés sacar vos? Te paso el número de documento, si querés.
+A: No hace falta que me pases nada. Para este refuerzo no tenés que ir: si cobrás la mínima, te llega solo con el haber.
+B: Ah, bueno. Entonces lo espero con el cobro de este mes.
+A: Exacto. Y acordate: nadie del organismo te va a llamar para pedirte datos ni para apurarte con un plazo.

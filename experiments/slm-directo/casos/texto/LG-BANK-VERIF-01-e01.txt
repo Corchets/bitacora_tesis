@@ -1,0 +1,12 @@
+A: Banco, buenas tardes, te atiende Lucía, del centro de atención. ¿En qué te puedo ayudar?
+B: Hola, Lucía. Llamo al número que está atrás de mi tarjeta. Me llegó un aviso en la app de un ingreso desde un dispositivo nuevo y quiero cambiar la clave.
+A: Bien. El cambio lo hacés vos desde la app oficial o desde el home banking, en el menú Seguridad, opción Cambiar clave.
+B: ¿No me pueden mandar un enlace por mensaje de texto, así lo hago más rápido?
+A: No, no mandamos enlaces para cambiar la clave. Entrá desde la app que ya tenés instalada.
+B: Dale. ¿Querés que te diga los últimos números de la tarjeta para que me identifiques?
+A: No hace falta. Por teléfono no confirmamos datos de la tarjeta, y tampoco te voy a pedir la clave, ni la vieja ni la nueva.
+B: Perfecto. ¿Y si ese dispositivo nuevo era de otra persona?
+A: Cuando termines, fijate en Seguridad la lista de dispositivos y quitá el que no reconozcas. Si ves un movimiento que no hiciste, desconocelo desde la app o volvé a llamar a este número.
+B: Listo, lo hago ahora. ¿Tengo que quedarme en línea mientras lo cambio?
+A: No, podés cortar tranquilo y hacerlo a tu ritmo. Para esto no hace falta que nadie te guíe por teléfono.
+B: Buenísimo. Gracias, Lucía.

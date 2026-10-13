@@ -1,0 +1,19 @@
+{
+  "case_id": "LG-WA-CONSULTA-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "LG-WA-CONSULTA-01",
+  "par": "SC-WA-CODE-01-e01",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "mencion", "etiquetas": []},
+    {"linea": 2, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "rechazo", "etiquetas": []}
+  ],
+  "que_prueba": "Habla del mismo código de WhatsApp, pero para no compartirlo. La negación «no hace falta que me digas ningún código» no es un pedido.",
+  "origen": "Diálogo L1–L4 de docs/ingenieria/ARQUITECTURA.md §4 (adaptación asistida del 2026-10-07), sin cambios de texto.",
+  "revision_humana": false,
+  "notas": "La línea 3 es una pregunta de quien recibió el código; no la hace quien orienta."
+}

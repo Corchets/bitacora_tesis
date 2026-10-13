@@ -1,0 +1,25 @@
+{
+  "case_id": "LG-SUPPORT-INFO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "LG-SUPPORT-INFO-01",
+  "par": "SC-SOPORTE-CLAVE-01-e01",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "mencion", "etiquetas": []},
+    {"linea": 4, "evento": "mencion", "etiquetas": []},
+    {"linea": 5, "evento": "rechazo", "etiquetas": []},
+    {"linea": 7, "evento": "contexto", "etiquetas": []},
+    {"linea": 9, "evento": "rechazo", "etiquetas": []},
+    {"linea": 10, "evento": "mencion", "etiquetas": []},
+    {"linea": 11, "evento": "rechazo", "etiquetas": []},
+    {"linea": 13, "evento": "mencion", "etiquetas": []}
+  ],
+  "que_prueba": "Mismo tema y vocabulario que SC-SOPORTE-CLAVE-01-e01 (mesa de ayuda, billetera, usuario, contraseña, clave nueva), en una llamada que inició la persona. Quien orienta nunca pide credenciales y rechaza tres ofrecimientos de la persona (pasar los datos, leer el correo, dictar la clave nueva). Negaciones como «no me digas ni tu usuario ni tu contraseña» y la advertencia final engañan a una regla de palabras clave.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla LG-SUPPORT-INFO-01 del catálogo (versión comparable al pedido de usuario y contraseña); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "La línea 9 recomienda crear una clave nueva siguiendo el correo que la persona pidió desde la aplicación: el manual no lo cuenta como REQUEST_SECURITY_ACTION porque es cambiar la clave por el canal oficial, pero una regla de palabras clave podría marcarlo. AUTHORITY_CLAIM en la línea 1 la hace quien atiende una llamada entrante, no quien llama; el catálogo la lista como maniobra de la semilla y el manual la define para «quien llama» (discutir en D07)."
+}

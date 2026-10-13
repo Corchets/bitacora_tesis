@@ -1,0 +1,234 @@
+# Ensayo #50 — SLM local directo sobre texto incremental
+
+> **Estado: propuesta sin discutir.** Material de desarrollo para
+> [#50](https://github.com/Corchets/bitacora_tesis/issues/50). No elige modelo
+> ([D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)), no congela
+> la política de alerta ([D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental))
+> ni valida la referencia humana ([D07](../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico)).
+
+## 1. Qué queremos saber
+
+1. Si un SLM local que lee la llamada **línea por línea**, con todo lo dicho hasta
+   ese momento, avisa en las conversaciones fraudulentas y no en las legítimas difíciles.
+2. **Cuándo** avisa: antes del pedido peligroso, en el pedido, después o recién
+   cuando la víctima ya cumplió.
+3. **Desde qué tamaño de modelo** funciona y cuánto cuesta (tiempo y memoria), para
+   argumentar en qué gama de celular podría correr (sección 6).
+4. Cómo le va, sobre los mismos casos, a las **reglas de palabras** del laboratorio.
+
+## 2. Cómo funciona
+
+```mermaid
+flowchart LR
+    T["casos/texto/&lt;id&gt;.txt"] -->|"una línea por vez"| L["Llamada:<br/>líneas disponibles"]
+    L --> S["SLM en Ollama<br/>prompt + transcripción hasta ahora"]
+    L --> R["Reglas del laboratorio<br/>solo la línea nueva"]
+    S --> V{"¿Respuesta válida?"}
+    V -->|no| F["Fallo registrado"]
+    V -->|sí| P["Política: primer<br/>alerta_sugerida=true → aviso único"]
+    R --> P2["Misma política,<br/>registro separado"]
+    P --> C["actualizaciones.csv"]
+    P2 --> C
+    F --> C
+    C --> Z["resumen.py compara con<br/>casos/referencia/ (recién acá)"]
+```
+
+En cada actualización el SLM recibe un prompt fijo y la transcripción disponible
+numerada, y responde un JSON:
+
+```json
+{"riesgo": 0.93, "alerta_sugerida": true,
+ "motivo": "Te están pidiendo un código que da acceso a tu cuenta",
+ "evidencia": "Decime el código de activación que recibiste por SMS."}
+```
+
+- La respuesta se **valida**. Si el JSON está roto, falta un campo, el riesgo está
+  fuera de 0–1, hay alerta sin motivo, se pasa el tiempo o el texto no entra en el
+  contexto, queda como **fallo**. Nunca se toma un fallo como «sin riesgo».
+- El **aviso es único**: sale en la primera respuesta válida con `alerta_sugerida`
+  verdadera. Las respuestas siguientes se registran, pero no vuelven a avisar.
+- `riesgo` **no está calibrado**: no es una probabilidad de fraude.
+- `evidencia` es un agregado de este ensayo a lo que pide #50. Permite controlar si
+  el modelo cita algo que realmente se dijo o si lo inventa (`evidencia_en_texto`).
+- El estado se reinicia en cada llamada. El detector nunca recibe la clase, el
+  escenario, las marcas ni el nombre del caso.
+
+## 3. Qué se compara
+
+| Variable | Valores | Pregunta |
+|---|---|---|
+| Modelo (`--modelos`) | Escalera de tamaños, sección 6 | ¿Desde qué tamaño funciona? ¿Cuánto tarda y ocupa? |
+| Prompt (`--prompts`) | `tarea`, `tarea+base` | ¿Ayuda darle la «base institucional» del #27? ([prompts](prompts/README.md)) |
+| Hablantes (`--hablantes`) | `ab`, `sin` | ¿Cambia el resultado si sabe quién dice cada línea? |
+| Reglas | Fijas, siempre incluidas | ¿Qué agrega el SLM frente a buscar palabras? |
+
+**Sobre los hablantes.** El SLM no distingue voces: solo sabe quién habla si se lo
+decimos en el texto. Que lo reciba o no depende de la captura de audio: con VoIP
+propia cada lado de la llamada llega por un canal separado y se sabe qué dijo cada
+uno sin adivinar; con una grabación mezclada habría que separar voces, que es otro
+problema. Este ensayo mide cuánto importa esa información antes de decidir. Las
+letras A/B son neutras: A es quien habla primero, sin indicar quién llamó ni quién
+es sospechoso. Lo que nunca recibe es «atacante» o «víctima», porque eso es la
+respuesta.
+
+## 4. Casos
+
+Formato y reglas en [casos/README.md](casos/README.md). Tres grupos:
+
+- **`piloto_escrito`:** versión escrita de los 7 pares del
+  [piloto](../../docs/corpus/METODO-CREACION-CORPUS.md#selección-inicial-del-piloto).
+  Sirve también como insumo para preparar las fichas de grabación de
+  [#39](https://github.com/Corchets/bitacora_tesis/issues/39).
+- **`trampa`:** lo que pide #50: pedidos indirectos, menciones legítimas parecidas,
+  negaciones, pedidos partidos como los entregaría un ASR, evidencia separada por
+  mucho texto y conversaciones largas.
+- **`laboratorio`:** los guiones del laboratorio de Ignacio convertidos al formato,
+  para comparar con lo que se midió ahí.
+
+`python casos.py --listar` muestra todos. Fueron redactados con asistencia y
+**ninguno tiene revisión humana todavía** (`revision_humana: false`).
+
+## 5. Cómo correrlo en tu PC
+
+Requisitos: Python 3.10 o posterior (no hace falta instalar paquetes) y
+[Ollama](https://ollama.com) 0.5 o posterior.
+
+```bash
+cd experiments/slm-directo
+
+# 1. Verificar que el código y los casos están bien (no necesita Ollama)
+python -m unittest discover -s tests
+python casos.py --listar
+
+# 2. Línea base: solo reglas, tarda segundos
+python correr.py --solo-reglas
+python resumen.py corridas/<carpeta-que-imprime>
+
+# 3. Bajar un modelo y hacer la demo con el par de WhatsApp
+ollama pull qwen3.5:2b
+python correr.py --modelos qwen3.5:2b --casos SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01 --detalle
+```
+
+`--detalle` muestra cada línea y la respuesta del modelo a medida que «avanza la
+llamada»: es la demo para mostrar al equipo.
+
+**Orden sugerido para no tardar horas.** Cada configuración procesa todas las
+líneas de todos los casos, y un modelo en CPU puede tardar segundos por línea.
+Conviene avanzar por etapas y anotar cada corrida en la sección 8:
+
+| Etapa | Comando | Para qué |
+|---|---|---|
+| 1 | `python correr.py --solo-reglas` | Línea base. |
+| 2 | `python correr.py --modelos qwen3.5:2b --grupo piloto_escrito` | Ver que funciona y cuánto tarda por línea en tu PC. |
+| 3 | `python correr.py --modelos qwen3.5:0.8b,qwen3.5:2b,qwen3.5:4b` | Escalera completa con `tarea` y `ab`, sobre todos los casos. |
+| 4 | `python correr.py --modelos <mejor>,<más chico que sirva> --prompts tarea,tarea+base --hablantes ab,sin` | Efecto del prompt y de los hablantes. |
+| 5 | `python correr.py --modelos llama3.2:1b` | Comparar con el modelo que probó el laboratorio. |
+
+Cada corrida queda en `corridas/<fecha>_<hora>/` con `manifiesto.json` (modelo y
+digest, prompts completos con hash, casos con hash, commit, máquina, versión de
+Ollama y memoria informada) y `actualizaciones.csv` (una fila por línea, con la
+respuesta cruda). `resumen.py` agrega `resumen.md` en la misma carpeta. Con
+`--etiqueta` se le pone un nombre a la carpeta. Si se corta con Ctrl+C, lo
+procesado queda guardado.
+
+## 6. Escalera de modelos y gamas de celular
+
+La **escalera** es probar el mismo detector, con el mismo prompt y los mismos casos,
+con modelos de **una misma familia** en tamaños crecientes. Al cambiar solo el
+tamaño, la diferencia de resultados se debe al tamaño y no a otra familia o a otro
+entrenamiento.
+
+> **Estado: propuesta sin discutir.** Candidatos consultados el 2026-10-13; verificar
+> las etiquetas con `ollama pull` antes de usarlas.
+
+| Escalón | Etiqueta de Ollama | Por qué |
+|---|---|---|
+| 1 | `qwen3.5:0.8b` | El más chico de la familia. |
+| 2 | `qwen3.5:2b` | Intermedio; buen primer candidato. |
+| 3 | `qwen3.5:4b` | Techo razonable para una PC común. |
+| 4 | `qwen3.5:9b` | Solo si la PC lo soporta; marca el techo de calidad. |
+| Ref. | `llama3.2:1b` | El que usó el laboratorio ([contraste](../../docs/investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md)). |
+
+Qwen 3.5 razona antes de responder por defecto. Eso lo vuelve mucho más lento, así
+que `correr.py` le envía `think: false` cuando el modelo lo acepta; el manifiesto
+registra si se aplicó.
+
+**Cómo se usa para la tesis.** La escalera responde «desde qué tamaño la tarea
+funciona». Con ese tamaño y la memoria medida se compara contra los presupuestos de
+[PREFACTIBILIDAD-TECNICA.md](../../docs/investigacion/PREFACTIBILIDAD-TECNICA.md):
+256, 512 y 1024 MB para **todo** el pipeline, ASR incluido, en gamas baja, media y
+alta. El laboratorio midió Llama 3.2 1B en ~860 MB de RAM y ~3,9 s por turno en una
+PC x86. Con eso hay tres conclusiones posibles, todas defendibles si están medidas:
+
+- funciona con un modelo que entra en el presupuesto de alguna gama;
+- funciona solo con modelos más grandes: se argumenta qué gama haría falta o que
+  hoy no corre en un celular promedio;
+- no funciona en ningún tamaño probado sin ajuste: la evidencia apunta a entrenar o
+  a otra arquitectura.
+
+Lo medido en una PC con Ollama **no es una medición en Android**
+([R13](../../docs/gestion/REGISTRO-RIESGOS.md)): sirve para ordenar candidatos, no para
+afirmar rendimiento móvil.
+
+## 7. Cómo leer el resumen
+
+- **Vishing con aviso:** llamadas fraudulentas en las que hubo aviso.
+- **Antes del pedido / en el pedido / después / en o después del cumplimiento:**
+  dónde cayó el aviso respecto de `T_R` y `T_C` de la referencia. Es el equivalente
+  en líneas de los márgenes de [METRICAS.md](../../docs/evaluacion/METRICAS.md#2-margen-de-la-alerta).
+  Avisar recién en el cumplimiento llega tarde.
+- **Falsas alarmas:** legítimas con aviso. Descartar un aviso no convierte una
+  llamada en legítima de referencia.
+- **Fallos:** actualizaciones sin respuesta válida, sobre el total.
+- **ms p50 / p95:** tiempo por actualización en esa PC, sin contar la carga del modelo.
+- **Evidencia textual:** avisos cuya cita aparece en lo que realmente se dijo.
+- **Para revisar:** cada falsa alarma con su motivo y cada vishing sin aviso. Es lo
+  que conviene mirar en equipo: #50 pide revisar al menos un aviso y un error.
+
+## 8. Registro del proceso
+
+| Fecha | Qué se hizo | Resultado |
+|---|---|---|
+| 2026-10-13 | Armado del ensayo: formato de casos, casos escritos (piloto, trampas, laboratorio) con revisión adversarial automatizada, prompts v1, cliente de Ollama, reglas del laboratorio como comparador, `correr.py`, `resumen.py` y tests. | Tests pasan sin modelo, con un Ollama falso. **Todavía no se corrió ningún modelo real**: el entorno donde se armó no permite descargar modelos. |
+
+Cada corrida real se anota acá: fecha, quién, máquina, comando, carpeta y una línea
+con lo observado. Las conclusiones van en `resumen.md` de esa corrida y, cuando
+correspondan, en los documentos de decisión.
+
+## 9. Decisiones de este ensayo
+
+> **Estado: propuesta sin discutir.** Todas se pueden cambiar; las corridas guardan
+> con qué configuración se hicieron.
+
+| Decisión | Alternativa descartada por ahora | Motivo |
+|---|---|---|
+| Una línea = una actualización (turno cerrado). | Fragmentos de ASR o ventanas de tiempo. | Es lo que fija #50 y la [arquitectura §6](https://github.com/Corchets/bitacora_tesis/blob/feat/ayuda-memoria/docs/ingenieria/ARQUITECTURA.md#6-dirección-del-detector-y-visualización-consolidada). |
+| Prefijo completo en cada actualización; fallo si no entra en `num_ctx` (4096). | Recortar historial (el laboratorio usaba 1024 tokens y 300 caracteres por turno). | #50 pide no recortar en silencio. |
+| Temperatura 0 y `seed` 42. | Muestreo con temperatura. | Repetibilidad. |
+| Salida forzada con esquema JSON y validada. | Texto libre. | El laboratorio vio respuestas en prosa sin forzar el formato. |
+| Reglas del laboratorio sin cambios, solo sobre la línea nueva. | Ajustar las reglas a estos casos. | Comparar contra lo que ya existía, sin sobreajustar. |
+| `A`/`B` = quien habla primero. | Etiquetar por rol o por canal local/remoto. | Neutral; el rol es la respuesta y el canal depende de la captura. |
+
+## 10. Límites
+
+- Casos **escritos con asistencia y sin revisión humana**. Casos y prompt salieron
+  del mismo trabajo asistido: sirven para encontrar errores, no para medir
+  rendimiento. Ajustar el prompt mirando estos casos lo sobreajusta: la evaluación
+  final necesita casos reservados
+  ([#55](https://github.com/Corchets/bitacora_tesis/issues/55)).
+- Texto **revisado**, sin errores de ASR, salvo los casos del laboratorio, que están
+  en minúsculas y sin acentos. El efecto del ASR se mide aparte
+  ([#52](https://github.com/Corchets/bitacora_tesis/issues/52)).
+- Posiciones en **líneas**, no en segundos: no se calculan `L_R` ni `L_C`.
+- PC con Ollama ≠ Android. La memoria es la que informa Ollama, no un RSS medido.
+
+## 11. Estado frente a lo que pide #50
+
+| #50 pide | Estado |
+|---|---|
+| Comando que procesa actualizaciones sin texto futuro, sin recorte silencioso y con estado reiniciado entre llamadas. | ☑ Implementado y probado (`tests/`). |
+| Salida validada con puntaje 0–1, `alerta_sugerida` y `motivo`; inválida o timeout = fallo. | ☑ Implementado y probado. |
+| Aviso único ante el primer true válido; conserva predicciones posteriores. | ☑ Implementado y probado. |
+| SLM y reglas por separado sobre el par y casos de desarrollo difíciles. | ◐ Casos y comparador listos; **falta correr modelos reales**. |
+| Datos, modelo, prompt, configuración, código, hardware, seed y salidas para repetir. | ☑ En `manifiesto.json` y `actualizaciones.csv`. |
+| Otra persona ejecuta la prueba y revisa un aviso y un error. | ☐ Pendiente. |
