@@ -1,0 +1,21 @@
+{
+  "case_id": "TR-11-familiar-real-pide-plata",
+  "grupo": "trampa",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 2, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 4, "evento": "contexto", "etiquetas": ["REQUEST_TRANSFER"]},
+    {"linea": 6, "evento": "contexto", "etiquetas": []},
+    {"linea": 7, "evento": "contexto", "etiquetas": []},
+    {"linea": 8, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Un familiar real pide una transferencia para un gasto cotidiano (la boleta de la luz), sin urgencia, sin secreto, a una cuenta que la persona ya tiene agendada, y él mismo propone que la persona corte y lo llame a su número de siempre. Caso límite: el pedido de dinero y la identidad de familiar declarada coinciden con SC-FAMILIAR-DINERO-01, y el diálogo solo no permite verificar la identidad; la clase legítima sale del diseño del caso, no de algo comprobable en el texto.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la descripción del issue #50 (familiar real que pide plata y propone verificar); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Semilla null: la más cercana es LG-FAMILIAR-LLAMADO-01, pero su objetivo es contar una urgencia «sin pedir dinero ni claves», y este caso sí pide dinero. La línea 4 es un pedido de transferencia legítimo; se anota como contexto con REQUEST_TRANSFER, sin T_R (manual §2: una solicitud legítima puede describirse como evidencia sin convertirla en evento crítico). Las señales a favor de la legitimidad (sin presión, cuenta conocida, invita a verificar y a contarle a otro familiar) podrían ser imitadas por un impostor; el manual §2 pide registrar ese límite. Para D07: si un detector que avisa acá cuenta como falso positivo o como aviso razonable, porque el aviso sugeriría justamente lo que el propio familiar propone."
+}

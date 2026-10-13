@@ -1,0 +1,18 @@
+{
+  "case_id": "LAB-banco-niega-el-codigo",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "mencion", "etiquetas": []},
+    {"linea": 2, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Niega el pedido usando la palabra «codigo» («ningun banco te pide el codigo por telefono»): sirve para ver un falso disparo por palabra clave.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/legitima/banco-niega-el-codigo.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Hablantes: las dos líneas se leen como consejo de la misma persona (A, A); dudoso, la línea 2 podría ser de otra persona que refuerza el consejo. Incendio esperado por el laboratorio: ninguno (tabla y comentario); el guion existe para ver el falso incendio de esa lista: en la pasada 1 las reglas marcaban REQUEST_AUTH_CODE en t1, hasta que se agregó la negación. Coincide con t_r_linea null. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

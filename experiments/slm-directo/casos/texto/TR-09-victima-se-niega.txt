@@ -1,0 +1,12 @@
+A: Hola, ¿hablo con Marta Giménez?
+B: Sí, ¿quién habla?
+A: Te llamo del área de prevención del banco, me llamo Diego. Tenemos retenida una compra de ochenta y cinco mil pesos con tu tarjeta de débito en una tienda de electrónica. ¿La hiciste vos?
+B: No, yo no compré nada.
+A: Bien, entonces la damos de baja. Te acaba de llegar un SMS con un código de seis números; leémelo así anulo la compra.
+B: Ay, no sé... El mensaje dice que no se lo pase a nadie.
+A: Claro, es un mensaje automático. Pero yo soy del banco y lo necesito para cargar la baja. Tenemos dos minutos antes de que se acredite.
+B: Prefiero cortar y llamar yo al número que figura atrás de la tarjeta.
+A: Si cortás, el reclamo se cae y la compra ya no se puede revertir. Es un segundo: decime los seis números y queda resuelto.
+B: No, no te voy a pasar ningún código.
+A: Marta, te estoy queriendo ayudar. Ya va un minuto y, si se acredita, no hay vuelta atrás.
+B: Te dije que no. Llamo yo al banco. Chau.

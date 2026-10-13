@@ -1,0 +1,21 @@
+{
+  "case_id": "LAB-familiar-peligro",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 4,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "contexto", "etiquetas": ["ISOLATION_SECRECY", "THREAT_FEAR"]},
+    {"linea": 4, "evento": "pedido", "etiquetas": ["REQUEST_TRANSFER"]},
+    {"linea": 5, "evento": "rechazo", "etiquetas": []},
+    {"linea": 6, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION", "URGENCY_PRESSURE"]}
+  ],
+  "que_prueba": "Familiar en problemas e intermediario que aísla y pide sacar la plata de la cuenta y pasársela.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/vishing/familiar-peligro.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: Ministerio de Justicia, página actualizada en junio de 2026; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Incendio esperado por el laboratorio: REQUEST_TRANSFER (tabla y comentario), en t4 según chequear_casos.py desde la pasada 4 (antes t6, por «alias»). Coincide con t_r_linea = 4. Hablantes: las líneas 3 y 4 son de A seguidas. Sin cumplimiento: B se niega en la línea 5 y A insiste en la 6; «pasame el alias» es ambiguo (el alias de B o adónde transferir) y no se etiqueta como pedido. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

@@ -1,0 +1,25 @@
+{
+  "case_id": "TR-09-victima-se-niega",
+  "grupo": "trampa",
+  "semilla": "SC-BANK-OTP-01",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 5,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 5, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+    {"linea": 6, "evento": "contexto", "etiquetas": []},
+    {"linea": 7, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION", "URGENCY_PRESSURE"]},
+    {"linea": 8, "evento": "rechazo", "etiquetas": []},
+    {"linea": 9, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE", "PERSISTENCE_DISTRACTION", "URGENCY_PRESSURE", "THREAT_FEAR", "ISOLATION_SECRECY"]},
+    {"linea": 10, "evento": "rechazo", "etiquetas": []},
+    {"linea": 11, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION", "URGENCY_PRESSURE"]},
+    {"linea": 12, "evento": "rechazo", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido directo de código (línea 5) seguido de duda, insistencia con presión de tiempo y desaliento a verificar por otro canal, y negativa final sin cumplimiento. Prueba que el detector sostenga el riesgo a través de las negativas de la persona (las frases «no te voy a pasar ningún código» y «te dije que no» no deben bajar la alerta) y que no necesite un T_C para avisar.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-BANK-OTP-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "T_C queda sin dato: la persona nunca dicta el código. Según METRICAS.md §2, sin cumplimiento no se infiere prevención lograda y L_C no se calcula. La línea 9 repite el pedido; se anota como segundo pedido para explicar posibles alertas tardías. ISOLATION_SECRECY en la línea 9 sale de «si cortás, el reclamo se cae», que desalienta verificar por otro canal."
+}

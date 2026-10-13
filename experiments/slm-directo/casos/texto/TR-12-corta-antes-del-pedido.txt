@@ -1,0 +1,10 @@
+A: ¿Hola?
+B: Abu... Abu, ¿me escuchás? Soy yo.
+A: ¿Quién habla? ¿Martín?
+B: Sí, abu, Martín. Tuve un accidente con el auto, choqué a un señor y estoy en la comisaría.
+A: ¡Ay, Dios mío! ¿Estás lastimado? ¿Dónde estás?
+B: Estoy bien, un poco golpeado. Escuchame: no cortes y no hables con nadie, ni con mamá, que si se entera se muere.
+B: Esto hay que arreglarlo ahora, antes de que me pasen al juzgado. Te paso con el abogado que me está ayudando, ¿sí?
+A: Esperá, Martín. Te escucho rara la voz. Voy a cortar y llamo a tu mamá.
+B: ¡No, abu, no cortes! Si cortás va a ser peor para mí. Quedate en línea un minuto.
+A: No, querido. Corto y la llamo a ella.

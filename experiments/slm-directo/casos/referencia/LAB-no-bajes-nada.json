@@ -1,0 +1,19 @@
+{
+  "case_id": "LAB-no-bajes-nada",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "mencion", "etiquetas": []},
+    {"linea": 2, "evento": "contexto", "etiquetas": []},
+    {"linea": 3, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Mismo tema que el acceso remoto (bajar un programa y mostrar el celular), contado para no hacerlo y llamar al banco por el número de la tarjeta.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/legitima/no-bajes-nada.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: UFECI, nota del 30 de junio de 2025; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Pareja en el laboratorio: vishing/acceso-remoto.txt (LAB-acceso-remoto); par null. Incendio esperado por el laboratorio: ninguno (tabla y comentario); coincide con t_r_linea null. La línea 1 relata un pedido de acceso remoto hecho por terceros en otra llamada: es mención, no pedido. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

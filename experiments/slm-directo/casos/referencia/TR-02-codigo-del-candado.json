@@ -1,0 +1,22 @@
+{
+  "case_id": "TR-02-codigo-del-candado",
+  "grupo": "trampa",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": []},
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": []},
+    {"linea": 5, "evento": "contexto", "etiquetas": []},
+    {"linea": 6, "evento": "contexto", "etiquetas": []},
+    {"linea": 8, "evento": "mencion", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido real y explícito de un «código» («¿cuál era el código del candado?») seguido de su dictado en cifras, dos veces, entre personas que se conocen y para un objeto físico. No es un pedido de alto riesgo: no hay entidad, ni presión, ni código de un solo uso, ni credencial de una cuenta. Prueba que el detector no confunda el patrón «pedir código y dictar cifras» con REQUEST_AUTH_CODE.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la descripción del caso trampa del issue #50 (pedido legítimo de un código no sensible); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Las líneas 3 y 5 son pedidos de un código y las líneas 4 y 6 lo entregan; se anotan como contexto, no como pedido ni cumplimiento, porque la clase es legítima. El vocabulario del manual §5 no dice si la combinación de un candado o de una puerta cuenta como REQUEST_SECRET (credencial permanente); acá no se etiquetó porque no protege una cuenta ni dinero. Discutir en D07 dónde termina un «secreto» de alto riesgo. El texto no prueba que A sea realmente conocida de B; se apoya en el contexto (habían quedado, la bici del hermano). Cifras ficticias."
+}

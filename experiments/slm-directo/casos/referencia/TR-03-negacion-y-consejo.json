@@ -1,0 +1,23 @@
+{
+  "case_id": "TR-03-negacion-y-consejo",
+  "grupo": "trampa",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 2, "evento": "mencion", "etiquetas": []},
+    {"linea": 4, "evento": "mencion", "etiquetas": []},
+    {"linea": 5, "evento": "mencion", "etiquetas": []},
+    {"linea": 6, "evento": "mencion", "etiquetas": []},
+    {"linea": 7, "evento": "mencion", "etiquetas": []},
+    {"linea": 8, "evento": "mencion", "etiquetas": []},
+    {"linea": 10, "evento": "mencion", "etiquetas": []}
+  ],
+  "que_prueba": "Densidad alta de vocabulario de riesgo (clave, código por mensaje, PIN, instalar, transferir, bloquear la cuenta, compartir pantalla) siempre negado o dentro de un consejo («nunca le pases la clave», «no te va a pedir el código», «no transfieras nada»). Además, las líneas 5 y 7 describen pedidos hipotéticos de un tercero en forma de pregunta. Nadie pide nada a nadie: prueba que el detector distinga negación, consejo y pedido citado de un pedido real.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la descripción del caso trampa del issue #50 (negaciones y consejo); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Las líneas 5 y 7 tienen forma de pedido («que tengo que transferir», «que comparta la pantalla») pero reportan lo que podría decir un tercero; se anotan como mención sin etiqueta REQUEST_*. La línea 6 recomienda llamar al número del dorso de la tarjeta: es conducta segura, no un pedido. La línea 8 («me esperás y lo vemos juntos») no es ISOLATION_SECRECY: alienta consultar a un tercero de confianza. Vínculo y situación ficticios."
+}

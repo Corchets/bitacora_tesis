@@ -1,0 +1,12 @@
+A: Centro de salud, buen día, te atiende Carla.
+B: Hola, buen día. Quería sacar un turno con clínica médica, para un control.
+A: Sí, cómo no. ¿Ya te atendiste alguna vez acá?
+B: Sí, el año pasado vine con la doctora por la presión.
+A: Bien. Decime tu número de documento y la fecha de nacimiento, así te busco en el sistema.
+B: Doce millones trescientos cuarenta y cinco mil seiscientos setenta y ocho. Nací el tres de marzo del sesenta y ocho.
+A: Ahí te encontré: Graciela Funes, ¿no? ¿Seguís con la misma obra social?
+B: Sí, la misma.
+A: Tengo turno el jueves a las diez y cuarto con la doctora Ibáñez. ¿Te sirve?
+B: Sí, perfecto.
+A: Listo, quedó agendado. El día anterior te llega un mensaje de recordatorio. Traé el documento y la credencial, y llegá diez minutos antes.
+B: Muchas gracias. Hasta luego.

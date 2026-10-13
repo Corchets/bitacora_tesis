@@ -1,0 +1,27 @@
+A: ¡Eh, Martín! ¿Cómo va? ¿Venís el sábado al asado en lo de Gonza?
+B: ¡Obvio! ¿A qué hora arrancan?
+A: Tipo una. Gonza prende el fuego a las doce, así que si caés antes, ayudás.
+B: Jaja, dale. ¿Llevo carbón?
+A: No, el carbón ya lo compró él. Escuchá, te llamaba por la plata, que la estoy juntando yo.
+B: Sí, decime cuánto es.
+A: Fui a la carnicería con Lucho: vacío, chorizo, morcilla y unas mollejas. Salió todo ciento veinte mil.
+B: Uh. ¿Y cuántos somos?
+A: Ocho, contando a la novia de Gonza. Son quince lucas por cabeza, más la bebida.
+B: ¿Y la bebida cuánto es?
+A: La trae Pato, que tiene la distribuidora del cuñado. Calculá cinco más, veinte en total.
+B: Bueno, veinte mil. ¿Te los doy en efectivo el sábado?
+A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.
+B: Dale, no hay drama. Mandame el alias que ahora no lo tengo a mano.
+A: Te lo mando por el grupo. Es el mismo de la vaquita del cumple de Lucho.
+B: Ah, ese lo tengo agendado, entonces.
+A: Fijate que te aparezca mi nombre, Nicolás Peralta, antes de confirmar, no sea cosa que se lo mandes a otro.
+B: Sí, sí. Ahí está, te lo mandé. Veinte mil.
+A: Joya, me llegó. Gracias, sos el primero en pagar, como siempre.
+B: Jaja. ¿Y los demás?
+A: Pato me paga en efectivo el sábado, y Gonza no pone porque pone la casa.
+B: Me parece justo. ¿Llevo algo más? ¿Pan, ensalada?
+A: Traé pan y algo de postre si querés. La ensalada la hace la novia de Gonza.
+B: Listo. ¿Es la casa del pasaje o la otra?
+A: La del pasaje, la del portón verde. Te mando la ubicación por el grupo.
+B: Dale. Nos vemos el sábado, entonces.
+A: Nos vemos. ¡Y no te olvides el pan!

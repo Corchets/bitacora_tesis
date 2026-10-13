@@ -1,0 +1,20 @@
+{
+  "case_id": "LAB-banco-revisa-app",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "mencion", "etiquetas": []},
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": []},
+    {"linea": 5, "evento": "rechazo", "etiquetas": []}
+  ],
+  "que_prueba": "Misma zona que el vishing del banco (un consumo en la tarjeta), pero deriva a la aplicación oficial y aclara que no pide datos.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/legitima/banco-revisa-app.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Pareja en el laboratorio: vishing/banco-codigo.txt (LAB-banco-codigo); par null. Incendio esperado por el laboratorio: ninguno (tabla y comentario); coincide con t_r_linea null. A no se presenta como banco: el diálogo no tiene evidencia para saber quién llama ni si es auténtico. La línea 5 niega pedir datos (se anota como rechazo, igual que en LG-WA-CONSULTA-01-e01). Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

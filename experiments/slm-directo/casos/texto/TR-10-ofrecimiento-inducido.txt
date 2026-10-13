@@ -1,0 +1,13 @@
+A: Hola, ¿hablo con Julián Paredes?
+B: Sí, soy yo. ¿Quién habla?
+A: Te hablo del área de verificación de cuentas de WhatsApp. Estamos viendo que alguien intenta abrir tu cuenta en otro teléfono y lo tenemos retenido.
+B: ¿Cómo en otro teléfono? Yo no hice nada.
+A: Por eso te llamo. Fijate que te tuvo que haber llegado un SMS hace un ratito.
+B: Sí, acá está. Un mensaje con unos números.
+A: Bien. Para frenarlo necesito que me confirmes lo que te mandamos; el bloqueo se libera en unos minutos.
+B: ¿Confirmar cómo? ¿Le respondo el mensaje?
+A: No, no respondas nada ni lo reenvíes. Vos sabés qué hacer con lo que te llegó: yo de este lado lo cargo y queda frenado.
+B: Ah... ¿Te leo el código, entonces?
+A: Dale, cuando quieras.
+B: Es uno, dos, tres, cuatro, cinco, seis.
+A: Perfecto, ya quedó. Tu cuenta sigue siendo tuya.
