@@ -112,26 +112,43 @@ def analizar(manifiesto: dict, filas: list[dict]) -> dict:
     return resultado
 
 
+def metricas(cs: dict) -> dict:
+    """Totales de una configuración: los mismos números que muestran resumen.md y el visor."""
+    vish = [c for c in cs.values() if c["ref"]["clase"] == "vishing"]
+    legit = [c for c in cs.values() if c["ref"]["clase"] == "legitima_dificil"]
+    cat = Counter(c["categoria"] for c in cs.values())
+    ms = [m for c in cs.values() for m in c["ms"]]
+    avisos = [c["aviso_fila"] for c in cs.values() if c["aviso_fila"]]
+    return {
+        "vishing_con_aviso": sum(1 for c in vish if c["aviso"] is not None),
+        "vishing": len(vish),
+        "antes_del_pedido": cat["antes_del_pedido"],
+        "en_el_pedido": cat["en_el_pedido"],
+        "despues_del_pedido": cat["despues_del_pedido"],
+        "en_o_despues_del_cumplimiento": cat["en_o_despues_del_cumplimiento"],
+        "falsas_alarmas": cat["falsa_alarma"],
+        "legitimas": len(legit),
+        "fallos": sum(len(c["fallos"]) for c in cs.values()),
+        "actualizaciones": sum(len(c["riesgos"]) for c in cs.values()),
+        "ms_p50": percentil(ms, 50),
+        "ms_p95": percentil(ms, 95),
+        "avisos": len(avisos),
+        "avisos_con_cita_textual": sum(1 for a in avisos if a["evidencia_en_texto"] == "true"),
+    }
+
+
 def tabla_general(analisis: dict) -> list[str]:
     filas = [
         "| Configuración | Vishing con aviso | Antes del pedido | En el pedido | Después del pedido | En/después del cumplimiento | Falsas alarmas | Fallos | ms p50 | ms p95 | Evidencia textual |",
         "|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for config, cs in analisis.items():
-        vish = [c for c in cs.values() if c["ref"]["clase"] == "vishing"]
-        legit = [c for c in cs.values() if c["ref"]["clase"] == "legitima_dificil"]
-        cat = Counter(c["categoria"] for c in cs.values())
-        con_aviso = sum(1 for c in vish if c["aviso"] is not None)
-        total_act = sum(len(c["riesgos"]) for c in cs.values())
-        fallos = sum(len(c["fallos"]) for c in cs.values())
-        ms = [m for c in cs.values() for m in c["ms"]]
-        avisos = [c["aviso_fila"] for c in cs.values() if c["aviso_fila"]]
-        textual = sum(1 for a in avisos if a["evidencia_en_texto"] == "true")
+        m = metricas(cs)
         filas.append(
-            f"| {_celda(config)} | {con_aviso}/{len(vish)} | {cat['antes_del_pedido']} | {cat['en_el_pedido']} | "
-            f"{cat['despues_del_pedido']} | {cat['en_o_despues_del_cumplimiento']} | "
-            f"{cat['falsa_alarma']}/{len(legit)} | {fallos}/{total_act} | {_ms(percentil(ms, 50))} | "
-            f"{_ms(percentil(ms, 95))} | {textual}/{len(avisos)} |"
+            f"| {_celda(config)} | {m['vishing_con_aviso']}/{m['vishing']} | {m['antes_del_pedido']} | {m['en_el_pedido']} | "
+            f"{m['despues_del_pedido']} | {m['en_o_despues_del_cumplimiento']} | "
+            f"{m['falsas_alarmas']}/{m['legitimas']} | {m['fallos']}/{m['actualizaciones']} | {_ms(m['ms_p50'])} | "
+            f"{_ms(m['ms_p95'])} | {m['avisos_con_cita_textual']}/{m['avisos']} |"
         )
     return filas
 

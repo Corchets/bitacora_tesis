@@ -25,6 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import casos  # noqa: E402
 import correr  # noqa: E402
 import resumen  # noqa: E402
+import visor  # noqa: E402
 from casos import Linea  # noqa: E402
 from cliente_ollama import ClienteOllama  # noqa: E402
 from detectores import (  # noqa: E402
@@ -303,6 +304,32 @@ class TestCorridaDePuntaAPunta(unittest.TestCase):
         self.assertIn("| `slm\\|modelo-falso:1b\\|tarea\\|ab` | 1/1 | 0 | 1 | 0 | 0 | 0/1 |", texto)
         self.assertIn("=R L4", texto)
         self.assertIn("[0.95]", texto)
+
+    def test_visor_embebe_datos_que_se_pueden_leer(self):
+        servidor = HTTPServer(("127.0.0.1", 0), OllamaFalso)
+        threading.Thread(target=servidor.serve_forever, daemon=True).start()
+        try:
+            with tempfile.TemporaryDirectory() as tmp, redirect_stdout(io.StringIO()):
+                correr.main([
+                    "--modelos", "modelo-falso:1b",
+                    "--casos", "SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01",
+                    "--url", f"http://127.0.0.1:{servidor.server_port}",
+                    "--salida", tmp,
+                ])
+                (carpeta,) = Path(tmp).iterdir()
+                pagina = visor.armar_html(visor.datos_de_corridas([carpeta]))
+        finally:
+            servidor.shutdown()
+            servidor.server_close()
+        inicio = pagina.index('<script type="application/json" id="datos">') + len('<script type="application/json" id="datos">')
+        crudo = pagina[inicio:pagina.index("</script>", inicio)]
+        self.assertNotIn("/*__DATOS__*/", pagina)
+        datos = json.loads(crudo)
+        self.assertEqual([c["id"] for c in datos["configs"]], ["reglas", "slm|modelo-falso:1b|tarea|ab"])
+        wa = datos["resultados"]["slm|modelo-falso:1b|tarea|ab"]["SC-WA-CODE-01-e01"]
+        self.assertEqual((wa["aviso"], wa["categoria"]), (4, "en_el_pedido"))
+        self.assertEqual(datos["resultados"]["reglas"]["LG-WA-CONSULTA-01-e01"]["categoria"], "falsa_alarma")
+        self.assertEqual(datos["metricas"]["reglas"]["falsas_alarmas"], 1)
 
 
 class TestCasos(unittest.TestCase):

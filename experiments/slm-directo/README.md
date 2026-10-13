@@ -90,8 +90,45 @@ Formato y reglas en [casos/README.md](casos/README.md). Tres grupos:
 
 ## 5. Cómo correrlo en tu PC
 
-Requisitos: Python 3.10 o posterior (no hace falta instalar paquetes) y
-[Ollama](https://ollama.com) 0.5 o posterior.
+### Con un solo comando
+
+Desde la raíz del repositorio, en la rama del ensayo:
+
+| Sistema | Comando |
+|---|---|
+| Windows (PowerShell) | `powershell -ExecutionPolicy Bypass -File experiments\slm-directo\demo.ps1` |
+| macOS o Linux | `bash experiments/slm-directo/demo.sh` |
+
+El script hace todo en orden y frena con un mensaje claro si algo falla:
+
+1. Busca Python 3.10 o posterior y, si falta, pregunta antes de instalarlo
+   (winget en Windows, Homebrew en macOS, apt en Linux).
+2. Busca [Ollama](https://ollama.com), el programa que corre los modelos en tu PC; si
+   falta, pregunta antes de instalarlo y lo deja funcionando.
+3. Descarga el modelo (por defecto `qwen3.5:2b`; la primera vez tarda).
+4. Corre los tests, que no necesitan modelo.
+5. Corre el detector sobre 8 conversaciones elegidas para la demo y muestra en la
+   terminal cada línea y lo que respondió el modelo.
+6. Escribe `resumen.md` y abre `visor.html` en el navegador.
+
+Opciones: `-Modelo qwen3.5:0.8b` / `--modelo qwen3.5:0.8b` para otro modelo (conviene
+si la PC tiene menos de 8 GB de RAM), `-Completo` / `--completo` para las 53
+conversaciones, `-Si` / `--si` para que no pregunte antes de instalar.
+
+### El visor
+
+`visor.html` reproduce la llamada línea por línea: lo que se dijo hasta ese momento,
+lo que devolvió el detector (riesgo, alerta, motivo, evidencia y la respuesta cruda
+del modelo), un gráfico del riesgo y el aviso cuando sale. Permite cambiar de
+conversación y de detector, comparar cómo le fue a cada uno con la misma
+conversación y ocultar la referencia humana. Es un archivo autocontenido: se puede
+mandar al equipo. Para armarlo con cualquier conjunto de corridas:
+
+```bash
+python visor.py corridas/<una> corridas/<otra> --abrir
+```
+
+### Paso a paso, sin el script
 
 ```bash
 cd experiments/slm-directo
@@ -107,10 +144,11 @@ python resumen.py corridas/<carpeta-que-imprime>
 # 3. Bajar un modelo y hacer la demo con el par de WhatsApp
 ollama pull qwen3.5:2b
 python correr.py --modelos qwen3.5:2b --casos SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01 --detalle
+python visor.py corridas/<carpeta-que-imprime> --abrir
 ```
 
 `--detalle` muestra cada línea y la respuesta del modelo a medida que «avanza la
-llamada»: es la demo para mostrar al equipo.
+llamada».
 
 **Orden sugerido para no tardar horas.** Cada configuración procesa todas las
 líneas de todos los casos, y un modelo en CPU puede tardar segundos por línea.
