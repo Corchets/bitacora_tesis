@@ -2,7 +2,7 @@ A: Hola, buenas tardes. ¿Hablo con Julieta Medina?
 B: Sí, soy yo. ¿Quién es?
 A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.
 B: ¿Qué consumo?
-A: Una compra de ochenta y cinco mil pesos en una tienda en línea, hoy a las once y cuarto. ¿La reconocés?
+A: Una compra de sesenta y dos mil pesos en una tienda en línea, hoy a las once y cuarto. ¿La reconocés?
 B: No, no compré nada. ¿Me la anulan ustedes?
 A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.
 B: Bueno. ¿Y entonces cómo la freno?

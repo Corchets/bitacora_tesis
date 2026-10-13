@@ -4,21 +4,21 @@
   "semilla": "SC-WA-CODE-01",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 7,
-  "t_c_linea": 12,
+  "t_r_linea": 8,
+  "t_c_linea": 13,
   "pedido": "REQUEST_AUTH_CODE",
   "evidencia": [
-    {"linea": 3, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM", "THREAT_FEAR"]},
-    {"linea": 5, "evento": "mencion", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM", "THREAT_FEAR"]},
     {"linea": 6, "evento": "mencion", "etiquetas": []},
-    {"linea": 7, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE", "URGENCY_PRESSURE"]},
-    {"linea": 9, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE", "PERSISTENCE_DISTRACTION", "TRUST_BUILDING"]},
-    {"linea": 10, "evento": "contexto", "etiquetas": []},
-    {"linea": 11, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
-    {"linea": 12, "evento": "cumplimiento", "etiquetas": []}
+    {"linea": 7, "evento": "mencion", "etiquetas": []},
+    {"linea": 8, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE", "URGENCY_PRESSURE"]},
+    {"linea": 10, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE", "PERSISTENCE_DISTRACTION", "TRUST_BUILDING"]},
+    {"linea": 11, "evento": "contexto", "etiquetas": []},
+    {"linea": 12, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+    {"linea": 13, "evento": "cumplimiento", "etiquetas": []}
   ],
-  "que_prueba": "Pedido inducido: quien llama nunca dice «decime el código»; habla de «confirmar lo que te mandamos» y de que la persona «sabe qué hacer con lo que le llegó», hasta que es la propia persona quien ofrece leer el código (línea 10) y quien llama acepta (línea 11). Prueba si el detector reconoce un pedido de código sin las palabras del pedido directo y si no atribuye el pedido a quien lo ofrece.",
+  "que_prueba": "Pedido inducido: quien llama nunca dice «decime el código»; habla de «confirmar lo que te mandamos» y de que, «con lo que te llegó», lo carga de su lado, hasta que es la propia persona quien ofrece leer el código (línea 11) y quien llama acepta (línea 12). Prueba si el detector reconoce un pedido de código sin las palabras del pedido directo y si no atribuye el pedido a quien lo ofrece.",
   "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-WA-CODE-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
   "revision_humana": false,
-  "notas": "Para discutir en D07: dónde cae T_R en un pedido inducido. Se eligió la línea 7 porque es la primera en la que quien llama pide que le transmitan («me confirmes») el contenido del SMS que ya quedó identificado en las líneas 5 y 6; en ese contexto «lo que te mandamos» solo puede ser el código, y la duda de B en la línea 8 muestra que el pedido es indirecto, no que falte. Alternativas: línea 9, si se exige que quede claro que el código tiene que llegar a quien llama («yo de este lado lo cargo»); línea 11, si solo se cuenta un pedido explícito, aunque ahí es una aceptación. La línea 10 no puede ser T_R: es un ofrecimiento de quien recibió el código, no un pedido. La elección cambia L_R y Preventive@δ. Las líneas 5 y 6 mencionan el SMS sin pedirlo. «No respondas nada ni lo reenvíes» (línea 9) suena a consejo de seguridad y puede confundir al detector."
+  "notas": "Para discutir en D07: dónde cae T_R en un pedido inducido. Se eligió la línea 8 porque es la primera en la que quien llama pide que le transmitan («me confirmes») el contenido del SMS que ya quedó identificado en las líneas 6 y 7; en ese contexto «lo que te mandamos» solo puede ser el código, y la duda de A en la línea 9 muestra que el pedido es indirecto, no que falte. Alternativas: línea 10, si se exige que quede claro que el código tiene que llegar a quien llama («yo de este lado lo cargo»); línea 12, si solo se cuenta un pedido explícito, aunque ahí es una aceptación. La línea 11 no puede ser T_R: es un ofrecimiento de quien recibió el código, no un pedido. La elección cambia L_R y Preventive@δ. Las líneas 6 y 7 mencionan el SMS sin pedirlo. «No respondas nada ni lo reenvíes» (línea 10) suena a consejo de seguridad y puede confundir al detector. Acá A es quien atiende y B quien llama, al revés que en TR-09 y en la mayoría de los fraudes escritos, para que la letra del hablante no anticipe el rol. Nombre y código ficticios."
 }

@@ -2,9 +2,9 @@ A: Buenas tardes, ¿Sergio Paz? Te hablo de atención al cliente del banco, me l
 B: Sí, soy yo. ¿Qué pasó?
 A: Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?
 B: No, yo tengo solo este celular. ¿Me entraron a la cuenta?
-A: Todavía no pudieron operar, por eso te llamo ya. Te mandé un mensaje para desvincularlo.
-B: Sí, acá me llegó algo recién.
-A: Dale, pasame lo que te llegó...
-A: ...los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.
+A: Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.
+B: Sí, me entró uno recién. ¿Qué tengo que hacer?
+A: Solamente pasame lo que te llegó
+A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.
 B: A ver... cero, cero, cero, cero, cero, cero.
 A: Perfecto, ya quedó desvinculado. Por las dudas no entres a la aplicación hasta mañana, que se está actualizando.

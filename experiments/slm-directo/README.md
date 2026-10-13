@@ -189,7 +189,8 @@ afirmar rendimiento móvil.
 
 | Fecha | Qué se hizo | Resultado |
 |---|---|---|
-| 2026-10-13 | Armado del ensayo: formato de casos, casos escritos (piloto, trampas, laboratorio) con revisión adversarial automatizada, prompts v1, cliente de Ollama, reglas del laboratorio como comparador, `correr.py`, `resumen.py` y tests. | Tests pasan sin modelo, con un Ollama falso. **Todavía no se corrió ningún modelo real**: el entorno donde se armó no permite descargar modelos. |
+| 2026-10-13 | Armado del ensayo: formato de casos, 53 casos escritos (14 del piloto, 13 trampas, 26 del laboratorio) con revisión adversarial automatizada, prompts v1, cliente de Ollama, reglas del laboratorio como comparador, `correr.py`, `resumen.py` y tests. | Tests pasan sin modelo, con un Ollama falso. **Todavía no se corrió ningún modelo real**: el entorno donde se armó no permite descargar modelos. |
+| 2026-10-13 | Línea base de reglas sobre los 53 casos: [`corridas/2026-10-13_224314_linea-base-reglas`](corridas/2026-10-13_224314_linea-base-reglas/resumen.md). | Aviso en 23 de 29 vishing y **falsa alarma en 14 de 24 legítimas**. Los 5 avisos «antes del pedido» no son anticipación: son palabras sueltas en el contexto (`plata`, `pago`, `verificacion`; `plata` incluso dentro de «plataforma»). No avisan en pedidos sin palabra clave (`TR-01`, `LAB-digitos-sin-palabra`, `LAB-pantalla-sin-programa`) ni en `SC-PREMIO-01-e01`. Es la vara que el SLM tiene que superar: distinguir mención de pedido. |
 
 Cada corrida real se anota acá: fecha, quién, máquina, comando, carpeta y una línea
 con lo observado. Las conclusiones van en `resumen.md` de esa corrida y, cuando
@@ -220,6 +221,17 @@ correspondan, en los documentos de decisión.
   en minúsculas y sin acentos. El efecto del ASR se mide aparte
   ([#52](https://github.com/Corchets/bitacora_tesis/issues/52)).
 - Posiciones en **líneas**, no en segundos: no se calculan `L_R` ni `L_C`.
+- **Atajo por el saludo.** En los casos escritos, «la entidad atiende» abre 5 legítimas
+  y ningún fraude, y «quien llama pregunta por la persona» abre 7 fraudes y una
+  legítima. Viene del catálogo: las legítimas del piloto son consultas que inicia la
+  persona. Un detector puede acertar por el saludo y no por el pedido; con `--hablantes ab`
+  la letra A suma la misma pista. Antes de sacar conclusiones conviene revisar los
+  aciertos que dependan del comienzo de la llamada y agregar legítimas en las que la
+  entidad llama (como `TR-06`).
+- **Legítimas didácticas.** Muchas incluyen consejos de seguridad («no te vamos a pedir
+  la clave»), que una llamada real no siempre trae y que pueden facilitar la detección.
+- Los casos del laboratorio conservan el texto original: minúsculas, sin acentos y,
+  en algunos, nombres de entidades reales.
 - PC con Ollama ≠ Android. La memoria es la que informa Ollama, no un RSS medido.
 
 ## 11. Estado frente a lo que pide #50
@@ -232,3 +244,23 @@ correspondan, en los documentos de decisión.
 | SLM y reglas por separado sobre el par y casos de desarrollo difíciles. | ◐ Casos y comparador listos; **falta correr modelos reales**. |
 | Datos, modelo, prompt, configuración, código, hardware, seed y salidas para repetir. | ☑ En `manifiesto.json` y `actualizaciones.csv`. |
 | Otra persona ejecuta la prueba y revisa un aviso y un error. | ☐ Pendiente. |
+
+## 12. Preguntas para el equipo
+
+Surgieron al escribir y revisar los casos. Ninguna se resolvió acá: cada caso afectado
+deja la duda en `notas` de su referencia. Las de anotación corresponden a
+[#32](https://github.com/Corchets/bitacora_tesis/issues/32) (D07) y las de política a
+[#33](https://github.com/Corchets/bitacora_tesis/issues/33) (D08).
+
+| Pregunta | Casos | Decisión |
+|---|---|---|
+| Pedido partido en dos líneas: ¿`T_R` donde empieza o donde se vuelve explícito? | `TR-07` | D07 |
+| Pedido indirecto o inducido sin la palabra «código»: ¿dónde va `T_R`? | `TR-01`, `TR-10` | D07 |
+| Confirmar un dato que la entidad dice tener (domicilio): ¿es pedido de datos? | `TR-04`, `SC-ORG-BENEFICIO-01-e01` | D07 |
+| ¿El usuario solo ya es credencial, o `T_C` espera la contraseña? | `SC-SOPORTE-CLAVE-01-e01` | D07 |
+| Cumplimiento por otro canal, solo anunciado en la llamada: ¿cuenta como `T_C`? | `SC-PREMIO-01-e01` | D07 |
+| `AUTHORITY_CLAIM` dicho por quien atiende, no por quien llama. | Legítimas del piloto | D07 |
+| Vishing que termina antes de cualquier pedido: ¿un aviso cuenta como detección? | `TR-12` | D07/D08 |
+| Aviso por un fragmento que la línea siguiente aclara: ¿falsa alarma? | `TR-08` | D08 |
+| Familiar que pide dinero sin presión y propone verificar: ¿un aviso es falsa alarma? | `TR-11` | D08 |
+| ¿Cuántos consejos de seguridad se toleran en las legítimas? ¿Puede quien atiende pedir un dato de bajo riesgo? | Legítimas del piloto | Fichas (#39) |
