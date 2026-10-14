@@ -24,8 +24,12 @@ LEYENDA = (
     "`=R` aviso en la línea del pedido (`T_R`) · `<R` antes del pedido · "
     "`>R` después del pedido y antes del cumplimiento · `≥C` en o después del "
     "cumplimiento (`T_C`) · `FA` falsa alarma en una legítima · `ok` legítima sin aviso · "
-    "`—` vishing sin aviso · `(xN)` N actualizaciones fallidas en el caso."
+    "`—` vishing sin aviso · `…` sin evaluar: la corrida se cortó antes de terminar el caso · "
+    "`x` sin evaluar: ninguna respuesta válida · `(xN)` N actualizaciones fallidas en el caso."
 )
+
+# Casos que no dicen nada sobre el detector: no se cuentan como aciertos ni como errores.
+SIN_EVALUAR = ("incompleto", "sin_respuesta_valida")
 
 
 def categoria(ref: dict, aviso: int | None) -> str:
@@ -47,6 +51,8 @@ def categoria(ref: dict, aviso: int | None) -> str:
 
 
 CODIGOS = {
+    "incompleto": "…",
+    "sin_respuesta_valida": "x",
     "falsa_alarma": "FA",
     "sin_aviso_correcto": "ok",
     "sin_aviso": "—",
@@ -56,6 +62,10 @@ CODIGOS = {
     "en_el_pedido": "=R",
     "despues_del_pedido": ">R",
 }
+
+
+def commit_corto(commit: str) -> str:
+    return commit[:10] if commit != "desconocido" else commit
 
 
 def _celda(texto: str) -> str:
@@ -93,20 +103,32 @@ def analizar(manifiesto: dict, filas: list[dict]) -> dict:
     for config in configs:
         casos_cfg = {}
         for case_id, ref in refs.items():
-            actualizaciones = sorted(por[config].get(case_id, []), key=lambda f: int(f["linea"]))
+            # Una fila por línea, en orden; si una línea aparece dos veces, vale la primera.
+            por_linea: dict[int, dict] = {}
+            for f in por[config].get(case_id, []):
+                por_linea.setdefault(int(f["linea"]), f)
+            actualizaciones = [por_linea[n] for n in sorted(por_linea)]
             if not actualizaciones:
                 continue  # corrida interrumpida antes de este caso
             aviso_fila = next((f for f in actualizaciones if f["aviso"] == "true"), None)
             aviso = int(aviso_fila["linea"]) if aviso_fila else None
+            fallos = [f for f in actualizaciones if f["valida"] != "true"]
+            completo = len(actualizaciones) == len(casos.cargar_texto(case_id))
+            if not completo:
+                cat = "incompleto"
+            elif len(fallos) == len(actualizaciones):
+                cat = "sin_respuesta_valida"
+            else:
+                cat = categoria(ref, aviso)
             casos_cfg[case_id] = {
                 "ref": ref,
                 "aviso": aviso,
                 "aviso_fila": aviso_fila,
-                "categoria": categoria(ref, aviso),
-                "fallos": [f for f in actualizaciones if f["valida"] != "true"],
+                "categoria": cat,
+                "fallos": fallos,
                 "riesgos": [f["riesgo"] for f in actualizaciones],
                 "ms": [float(f["ms"]) for f in actualizaciones if f["ms"] and f["valida"] == "true"],
-                "completo": len(actualizaciones) == len(casos.cargar_texto(case_id)),
+                "completo": completo,
             }
         resultado[config] = casos_cfg
     return resultado
@@ -114,12 +136,14 @@ def analizar(manifiesto: dict, filas: list[dict]) -> dict:
 
 def metricas(cs: dict) -> dict:
     """Totales de una configuración: los mismos números que muestran resumen.md y el visor."""
-    vish = [c for c in cs.values() if c["ref"]["clase"] == "vishing"]
-    legit = [c for c in cs.values() if c["ref"]["clase"] == "legitima_dificil"]
+    evaluados = [c for c in cs.values() if c["categoria"] not in SIN_EVALUAR]
+    vish = [c for c in evaluados if c["ref"]["clase"] == "vishing"]
+    legit = [c for c in evaluados if c["ref"]["clase"] == "legitima_dificil"]
     cat = Counter(c["categoria"] for c in cs.values())
     ms = [m for c in cs.values() for m in c["ms"]]
-    avisos = [c["aviso_fila"] for c in cs.values() if c["aviso_fila"]]
+    avisos = [c["aviso_fila"] for c in evaluados if c["aviso_fila"]]
     return {
+        "sin_evaluar": cat["incompleto"] + cat["sin_respuesta_valida"],
         "vishing_con_aviso": sum(1 for c in vish if c["aviso"] is not None),
         "vishing": len(vish),
         "antes_del_pedido": cat["antes_del_pedido"],
@@ -139,8 +163,8 @@ def metricas(cs: dict) -> dict:
 
 def tabla_general(analisis: dict) -> list[str]:
     filas = [
-        "| Configuración | Vishing con aviso | Antes del pedido | En el pedido | Después del pedido | En/después del cumplimiento | Falsas alarmas | Fallos | ms p50 | ms p95 | Evidencia textual |",
-        "|---|---|---|---|---|---|---|---|---|---|---|",
+        "| Configuración | Vishing con aviso | Antes del pedido | En el pedido | Después del pedido | En/después del cumplimiento | Falsas alarmas | Fallos | ms p50 | ms p95 | Evidencia textual | Sin evaluar |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for config, cs in analisis.items():
         m = metricas(cs)
@@ -148,7 +172,7 @@ def tabla_general(analisis: dict) -> list[str]:
             f"| {_celda(config)} | {m['vishing_con_aviso']}/{m['vishing']} | {m['antes_del_pedido']} | {m['en_el_pedido']} | "
             f"{m['despues_del_pedido']} | {m['en_o_despues_del_cumplimiento']} | "
             f"{m['falsas_alarmas']}/{m['legitimas']} | {m['fallos']}/{m['actualizaciones']} | {_ms(m['ms_p50'])} | "
-            f"{_ms(m['ms_p95'])} | {m['avisos_con_cita_textual']}/{m['avisos']} |"
+            f"{_ms(m['ms_p95'])} | {m['avisos_con_cita_textual']}/{m['avisos']} | {m['sin_evaluar']} |"
         )
     return filas
 
@@ -203,6 +227,16 @@ def para_revisar(analisis: dict) -> list[str]:
                 salida.append(f"- `{case_id}` · `{config}` · {maximo}")
     if not hubo:
         salida.append("Ninguno.")
+    salida += ["", "### Sin evaluar", ""]
+    hubo = False
+    for config, cs in analisis.items():
+        for case_id, c in cs.items():
+            if c["categoria"] in SIN_EVALUAR:
+                hubo = True
+                motivo = "la corrida se cortó antes de terminarlo" if c["categoria"] == "incompleto" else "ninguna respuesta válida"
+                salida.append(f"- `{case_id}` · `{config}` · {motivo}")
+    if not hubo:
+        salida.append("Ninguno.")
     salida += ["", "### Fallos por tipo", ""]
     tipos = Counter((config, f["error"].split(":")[0]) for config, cs in analisis.items() for c in cs.values() for f in c["fallos"])
     if tipos:
@@ -245,7 +279,7 @@ def armar_resumen(carpeta: Path, con_trayectorias: bool = False) -> str:
         f"- **Comando:** `{manifiesto['comando']}`",
         f"- **Inicio / fin:** {manifiesto['inicio']} / {manifiesto['fin'] or 'sin terminar'}"
         + (" — **interrumpida**" if manifiesto["interrumpida"] else ""),
-        f"- **Código:** `{codigo['commit'][:10]}`" + (" con cambios sin commit en la carpeta" if codigo["cambios_sin_commit_en_la_carpeta"] else ""),
+        f"- **Código:** `{commit_corto(codigo['commit'])}`" + (" con cambios sin commit en la carpeta" if codigo["cambios_sin_commit_en_la_carpeta"] else ""),
         f"- **Máquina:** {maquina['sistema']}, {maquina['nucleos_logicos']} núcleos lógicos, {maquina['ram_total_gb']} GB de RAM",
         f"- **Ollama:** {ollama.get('version', 'no usado')} · **Política:** {manifiesto['politica']}",
         f"- **Casos:** {len(refs)} ({clases['vishing']} vishing, {clases['legitima_dificil']} legítimas); "
@@ -255,6 +289,7 @@ def armar_resumen(carpeta: Path, con_trayectorias: bool = False) -> str:
         "",
         *tabla_general(analisis),
         "",
+        "«Sin evaluar» son casos cortados o sin ninguna respuesta válida: no se cuentan en las demás columnas. "
         "«Antes del pedido» cuenta avisos previos a `T_R`; en vishing sin pedido de referencia el aviso se cuenta "
         "solo en «Vishing con aviso». «Evidencia textual» cuenta avisos cuya cita aparece en el texto disponible.",
         "",

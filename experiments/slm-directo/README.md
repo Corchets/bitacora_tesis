@@ -101,7 +101,7 @@ Desde la raíz del repositorio, en la rama del ensayo:
 
 El script hace todo en orden y frena con un mensaje claro si algo falla:
 
-1. Busca Python 3.10 o posterior y, si falta, pregunta antes de instalarlo
+1. Busca Python 3.9 o posterior y, si falta, pregunta antes de instalarlo
    (winget en Windows, Homebrew en macOS, apt en Linux).
 2. Busca [Ollama](https://ollama.com), el programa que corre los modelos en tu PC; si
    falta, pregunta antes de instalarlo y lo deja funcionando.
@@ -219,6 +219,9 @@ afirmar rendimiento móvil.
   llamada en legítima de referencia.
 - **Fallos:** actualizaciones sin respuesta válida, sobre el total.
 - **ms p50 / p95:** tiempo por actualización en esa PC, sin contar la carga del modelo.
+  Incluye procesar la parte de la transcripción que Ollama no reutilice de la caché.
+- **Sin evaluar:** conversaciones que la corrida no terminó (se cortó con Ctrl+C) o en
+  las que fallaron todas las respuestas. No cuentan como aciertos ni como errores.
 - **Evidencia textual:** avisos cuya cita aparece en lo que realmente se dijo.
 - **Para revisar:** cada falsa alarma con su motivo y cada vishing sin aviso. Es lo
   que conviene mirar en equipo: #50 pide revisar al menos un aviso y un error.
@@ -245,6 +248,8 @@ correspondan, en los documentos de decisión.
 | Prefijo completo en cada actualización; fallo si no entra en `num_ctx` (4096). | Recortar historial (el laboratorio usaba 1024 tokens y 300 caracteres por turno). | #50 pide no recortar en silencio. |
 | Temperatura 0 y `seed` 42. | Muestreo con temperatura. | Repetibilidad. |
 | Salida forzada con esquema JSON y validada. | Texto libre. | El laboratorio vio respuestas en prosa sin forzar el formato. |
+| Antes de medir, un pedido de prueba comprueba que Ollama respete el esquema; si no, la corrida frena. | Confiar en la versión instalada. | Algunas versiones de Ollama ignoran el esquema cuando el modelo razona. |
+| Tope de 512 tokens por respuesta; si se alcanza, la actualización queda como fallo `salida_cortada`. | Sin tope. | Un modelo en bucle tardaría minutos en llegar al timeout. |
 | Reglas del laboratorio sin cambios, solo sobre la línea nueva. | Ajustar las reglas a estos casos. | Comparar contra lo que ya existía, sin sobreajustar. |
 | `A`/`B` = quien habla primero. | Etiquetar por rol o por canal local/remoto. | Neutral; el rol es la respuesta y el canal depende de la captura. |
 

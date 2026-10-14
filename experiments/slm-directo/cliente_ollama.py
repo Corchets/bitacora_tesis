@@ -1,17 +1,24 @@
 """Cliente mínimo de la API local de Ollama (https://github.com/ollama/ollama/blob/main/docs/api.md).
 
-Solo usa la biblioteca estándar. Requiere Ollama 0.5 o posterior, que acepta un
-esquema JSON en el campo `format` para forzar la forma de la respuesta.
+Solo usa la biblioteca estándar. Necesita un Ollama que respete el esquema JSON del
+campo `format`; algunas versiones lo ignoran cuando el modelo razona, y por eso
+correr.calentar() lo comprueba antes de medir y pide actualizar si no se cumple.
 """
 
 from __future__ import annotations
 
+import http.client
 import json
 import socket
 import urllib.error
 import urllib.request
 
-URL_POR_DEFECTO = "http://localhost:11434"
+# 127.0.0.1 y no "localhost": Ollama escucha solo en IPv4 y, en Windows, "localhost"
+# prueba primero ::1 y suma cerca de un segundo a cada pedido.
+URL_POR_DEFECTO = "http://127.0.0.1:11434"
+
+# Sin proxies: un proxy del sistema no debe interceptar pedidos a la propia PC.
+_ABRIDOR = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 
 class ErrorOllama(Exception):
@@ -32,7 +39,7 @@ class ClienteOllama:
             method="GET" if cuerpo is None else "POST",
         )
         try:
-            with urllib.request.urlopen(pedido, timeout=self.timeout_s) as r:
+            with _ABRIDOR.open(pedido, timeout=self.timeout_s) as r:
                 return json.loads(r.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             detalle = e.read().decode("utf-8", errors="replace")[:300]
@@ -43,6 +50,11 @@ class ClienteOllama:
             if isinstance(e.reason, (socket.timeout, TimeoutError)):
                 raise ErrorOllama("timeout") from e
             raise ErrorOllama(f"sin_conexion: {e.reason}") from e
+        except (http.client.HTTPException, ConnectionError, OSError) as e:
+            # Ollama se cerró o se reinició en medio del pedido.
+            raise ErrorOllama(f"conexion_cortada: {e}") from e
+        except json.JSONDecodeError as e:
+            raise ErrorOllama(f"respuesta_no_json: {e}") from e
 
     def chat(
         self, modelo: str, mensajes: list[dict], formato: dict, opciones: dict, pensar: bool | None = None

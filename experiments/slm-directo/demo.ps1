@@ -6,7 +6,7 @@
 #   powershell -ExecutionPolicy Bypass -File experiments\slm-directo\demo.ps1 -Modelo qwen3.5:0.8b
 #   powershell -ExecutionPolicy Bypass -File experiments\slm-directo\demo.ps1 -Si
 #
-# Instala lo que falte (Python 3.10+ y Ollama con winget, preguntando antes), descarga
+# Instala lo que falte (Python 3.9+ y Ollama con winget, preguntando antes), descarga
 # el modelo, verifica el codigo, corre el detector mostrando cada linea y abre el visor.
 # El archivo esta escrito sin tildes a proposito: Windows PowerShell 5.1 las lee mal.
 
@@ -20,11 +20,18 @@ param(
 # (como ollama al descargar) cortaria el script. Los errores se revisan con $LASTEXITCODE.
 $ErrorActionPreference = "Continue"
 $ProgressPreference = "SilentlyContinue"
-Set-Location -Path $PSScriptRoot
+# -LiteralPath: una carpeta con corchetes en el nombre ("Tesis [UNSTA]") no es un comodin.
+try {
+  Set-Location -LiteralPath $PSScriptRoot -ErrorAction Stop
+} catch {
+  Write-Host "No pude entrar a la carpeta del ensayo ($PSScriptRoot): $($_.Exception.Message)" -ForegroundColor Red
+  exit 1
+}
 $env:PYTHONUTF8 = "1"
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }
 
-$Url = "http://localhost:11434"
+# 127.0.0.1 y no "localhost": Ollama escucha solo en IPv4 y localhost suma un segundo por pedido.
+$Url = "http://127.0.0.1:11434"
 $CasosDemo = "SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01,SC-SOPORTE-CLAVE-01-e01,LG-SUPPORT-INFO-01-e01,TR-01-pedido-indirecto-digitos,TR-02-codigo-del-candado,TR-08-frase-cortada-candado,TR-12-corta-antes-del-pedido"
 $script:PyExe = $null
 $script:PyArgs = @()
@@ -57,7 +64,7 @@ function Buscar-Python {
     $programa = Get-Command $c.Exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
     if ($programa) {
       # El "python" de Microsoft Store es un atajo que no ejecuta nada: devuelve un codigo distinto de 0.
-      & $programa.Source @($c.Args) -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>$null | Out-Null
+      & $programa.Source @($c.Args) -c "import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)" 2>$null | Out-Null
       if ($LASTEXITCODE -eq 0) {
         $script:PyExe = $programa.Source
         $script:PyArgs = $c.Args
@@ -81,6 +88,11 @@ function Instalar-Con-Winget([string]$Id, [string]$Nombre, [string]$Pagina) {
     Terminar "Instalalo desde $Pagina y volve a correr este script."
   }
   & winget install -e --id $Id --accept-source-agreements --accept-package-agreements
+  $codigo = $LASTEXITCODE
+  # 0: instalado. -1978335189 y -1978335135: ya estaba instalado (codigos documentados de winget).
+  if ($codigo -ne 0 -and $codigo -ne -1978335189 -and $codigo -ne -1978335135) {
+    Terminar "winget no pudo instalar $Nombre (codigo $codigo). Revisa tu conexion o instalalo a mano desde $Pagina y volve a correr este script."
+  }
   Refrescar-Path
 }
 
@@ -115,7 +127,7 @@ if (-not (Get-Command ollama -ErrorAction SilentlyContinue)) {
 if (-not (Servidor-Listo)) {
   Write-Host "Iniciando Ollama en segundo plano..."
   Start-Process -FilePath "ollama" -ArgumentList "serve" -WindowStyle Hidden
-  for ($i = 0; $i -lt 30; $i++) {
+  for ($i = 0; $i -lt 45; $i++) {
     if (Servidor-Listo) { break }
     Start-Sleep -Seconds 1
   }
@@ -123,7 +135,8 @@ if (-not (Servidor-Listo)) {
     Terminar "Ollama no respondio en $Url. Abri la aplicacion de Ollama desde el menu Inicio y volve a correr el script."
   }
 }
-Write-Host "Ollama responde en $Url."
+try { $versionOllama = (Invoke-RestMethod -Uri "$Url/api/version" -TimeoutSec 3).version } catch { $versionOllama = "?" }
+Write-Host "Ollama $versionOllama responde en $Url."
 
 Paso "3/6 Modelo $Modelo"
 Write-Host "La primera vez descarga el modelo (puede tardar varios minutos)."

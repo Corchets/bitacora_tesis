@@ -47,7 +47,7 @@ def datos_de_corridas(carpetas: list[Path]) -> dict:
                 "comando": manifiesto["comando"],
                 "inicio": manifiesto["inicio"],
                 "interrumpida": manifiesto["interrumpida"],
-                "commit": manifiesto["codigo"]["commit"][:10],
+                "commit": resumen.commit_corto(manifiesto["codigo"]["commit"]),
                 "maquina": manifiesto["maquina"],
                 "ollama": (manifiesto.get("ollama") or {}).get("version"),
                 "modelos": manifiesto.get("modelos", {}),
@@ -60,14 +60,20 @@ def datos_de_corridas(carpetas: list[Path]) -> dict:
             nombre = config if config not in resultados else f"{config} ({carpeta.name})"
             configs.append({"id": nombre, "corrida": carpeta.name, "detector": "reglas" if config == "reglas" else "slm"})
             metricas[nombre] = resumen.metricas(cs)
+            # Mismo texto que resumen.md, para que los dos muestren el mismo número.
+            metricas[nombre]["ms_p50_texto"] = resumen._ms(metricas[nombre]["ms_p50"])
             resultados[nombre] = {}
             for case_id, c in cs.items():
                 ids.add(case_id)
-                actualizaciones = sorted(por_config[config][case_id], key=lambda f: int(f["linea"]))
+                por_linea: dict[int, dict] = {}
+                for f in por_config[config][case_id]:
+                    por_linea.setdefault(int(f["linea"]), f)  # igual que resumen.analizar
+                actualizaciones = [por_linea[n] for n in sorted(por_linea)]
                 resultados[nombre][case_id] = {
                     "aviso": c["aviso"],
                     "categoria": c["categoria"],
                     "codigo": resumen.CODIGOS[c["categoria"]],
+                    "completo": c["completo"],
                     "lineas": [
                         {
                             "valida": f["valida"] == "true",
@@ -104,8 +110,9 @@ def armar_html(datos: dict, documento_completo: bool = True) -> str:
     """Inserta los datos en la plantilla. Sin documento completo, deja solo el contenido
     (para publicarlo en un sitio que agrega su propio <html>, <head> y <body>)."""
     plantilla = PLANTILLA.read_text(encoding="utf-8")
-    # "</" dentro de un <script> cerraría la etiqueta antes de tiempo.
-    carga = json.dumps(datos, ensure_ascii=False).replace("</", "<\\/")
+    # Sin ningún "<" literal, el texto de los datos no puede cerrar ni alterar el <script>.
+    # Es JSON válido: "<" solo aparece dentro de cadenas y JSON.parse lo decodifica.
+    carga = json.dumps(datos, ensure_ascii=False).replace("<", "\\u003c")
     contenido = plantilla.replace("/*__DATOS__*/null", carga)
     if not documento_completo:
         return contenido
@@ -126,8 +133,11 @@ def main(argv: list[str] | None = None) -> int:
     for carpeta in args.carpetas:
         if not (carpeta / "actualizaciones.csv").exists():
             sys.exit(f"{carpeta} no parece una corrida: falta actualizaciones.csv")
+    datos = datos_de_corridas(args.carpetas)
+    if not datos["casos"]:
+        sys.exit("Las corridas no tienen ninguna conversación procesada: no hay nada que mostrar.")
     salida = args.salida or args.carpetas[0] / "visor.html"
-    salida.write_text(armar_html(datos_de_corridas(args.carpetas), not args.solo_contenido), encoding="utf-8")
+    salida.write_text(armar_html(datos, not args.solo_contenido), encoding="utf-8")
     print(f"Visor: {salida}")
     if args.abrir:
         webbrowser.open(salida.resolve().as_uri())

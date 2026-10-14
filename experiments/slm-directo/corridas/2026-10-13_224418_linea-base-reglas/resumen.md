@@ -13,17 +13,17 @@
 
 ## Resultados por configuración
 
-| Configuración | Vishing con aviso | Antes del pedido | En el pedido | Después del pedido | En/después del cumplimiento | Falsas alarmas | Fallos | ms p50 | ms p95 | Evidencia textual |
-|---|---|---|---|---|---|---|---|---|---|---|
-| `reglas` | 23/29 | 5 | 15 | 3 | 0 | 14/24 | 0/464 | 7 | 18 | 37/37 |
+| Configuración | Vishing con aviso | Antes del pedido | En el pedido | Después del pedido | En/después del cumplimiento | Falsas alarmas | Fallos | ms p50 | ms p95 | Evidencia textual | Sin evaluar |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| `reglas` | 23/29 | 5 | 15 | 3 | 0 | 14/24 | 0/464 | 7 | 18 | 37/37 | 0 |
 
-«Antes del pedido» cuenta avisos previos a `T_R`; en vishing sin pedido de referencia el aviso se cuenta solo en «Vishing con aviso». «Evidencia textual» cuenta avisos cuya cita aparece en el texto disponible.
+«Sin evaluar» son casos cortados o sin ninguna respuesta válida: no se cuentan en las demás columnas. «Antes del pedido» cuenta avisos previos a `T_R`; en vishing sin pedido de referencia el aviso se cuenta solo en «Vishing con aviso». «Evidencia textual» cuenta avisos cuya cita aparece en el texto disponible.
 
 ## Caso por caso
 
 Configuraciones: **C1** `reglas`
 
-`=R` aviso en la línea del pedido (`T_R`) · `<R` antes del pedido · `>R` después del pedido y antes del cumplimiento · `≥C` en o después del cumplimiento (`T_C`) · `FA` falsa alarma en una legítima · `ok` legítima sin aviso · `—` vishing sin aviso · `(xN)` N actualizaciones fallidas en el caso.
+`=R` aviso en la línea del pedido (`T_R`) · `<R` antes del pedido · `>R` después del pedido y antes del cumplimiento · `≥C` en o después del cumplimiento (`T_C`) · `FA` falsa alarma en una legítima · `ok` legítima sin aviso · `—` vishing sin aviso · `…` sin evaluar: la corrida se cortó antes de terminar el caso · `x` sin evaluar: ninguna respuesta válida · `(xN)` N actualizaciones fallidas en el caso.
 
 | Caso | Clase | T_R | T_C | C1 |
 |---|---|---|---|---|
@@ -108,6 +108,10 @@ Configuraciones: **C1** `reglas`
 - `SC-PREMIO-01-e01` · `reglas` · sin riesgo registrado
 - `TR-01-pedido-indirecto-digitos` · `reglas` · sin riesgo registrado
 - `TR-12-corta-antes-del-pedido` · `reglas` · sin riesgo registrado
+
+### Sin evaluar
+
+Ninguno.
 
 ### Fallos por tipo
 

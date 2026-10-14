@@ -187,6 +187,7 @@ class OllamaFalso(BaseHTTPRequestHandler):
     """Imita /api/chat de Ollama. La respuesta depende de una palabra en el mensaje."""
 
     pedidos: list[dict] = []
+    ignorar_esquema = False  # imita versiones de Ollama que no respetan `format`
 
     def log_message(self, *args):
         pass
@@ -211,7 +212,9 @@ class OllamaFalso(BaseHTTPRequestHandler):
         pedido = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         OllamaFalso.pedidos.append(pedido)
         usuario = pedido["messages"][-1]["content"]
-        if "ROMPER" in usuario:
+        if "ok" in pedido["format"].get("properties", {}):  # calentamiento de correr.py
+            contenido = "Hola" if OllamaFalso.ignorar_esquema else json.dumps({"ok": True})
+        elif "ROMPER" in usuario:
             contenido = "esto no es json"
         elif "Decime el código" in usuario:
             contenido = json.dumps({"riesgo": 0.95, "alerta_sugerida": True, "motivo": "Te piden un código", "evidencia": "Decime el código de activación"})
@@ -242,7 +245,7 @@ class TestClienteYDetectorContraOllamaFalso(unittest.TestCase):
         self.detector(num_ctx=2048, seed=7).evaluar(DIALOGO[:1])
         pedido = OllamaFalso.pedidos[0]
         self.assertEqual(pedido["format"]["required"], ["riesgo", "alerta_sugerida", "motivo", "evidencia"])
-        self.assertEqual(pedido["options"], {"temperature": 0.0, "seed": 7, "num_ctx": 2048})
+        self.assertEqual(pedido["options"], {"temperature": 0.0, "seed": 7, "num_ctx": 2048, "num_predict": 512})
         self.assertFalse(pedido["stream"])
         self.assertEqual(pedido["messages"][0]["role"], "system")
 
@@ -330,6 +333,31 @@ class TestCorridaDePuntaAPunta(unittest.TestCase):
         self.assertEqual((wa["aviso"], wa["categoria"]), (4, "en_el_pedido"))
         self.assertEqual(datos["resultados"]["reglas"]["LG-WA-CONSULTA-01-e01"]["categoria"], "falsa_alarma")
         self.assertEqual(datos["metricas"]["reglas"]["falsas_alarmas"], 1)
+
+
+class TestCalentamiento(unittest.TestCase):
+    def test_frena_si_ollama_ignora_el_esquema(self):
+        servidor = HTTPServer(("127.0.0.1", 0), OllamaFalso)
+        threading.Thread(target=servidor.serve_forever, daemon=True).start()
+        OllamaFalso.ignorar_esquema = True
+        try:
+            with tempfile.TemporaryDirectory() as tmp, redirect_stdout(io.StringIO()):
+                with self.assertRaises(SystemExit) as salida:
+                    correr.main([
+                        "--modelos", "modelo-falso:1b", "--sin-reglas",
+                        "--casos", "SC-WA-CODE-01-e01",
+                        "--url", f"http://127.0.0.1:{servidor.server_port}",
+                        "--salida", tmp,
+                    ])
+                (carpeta,) = Path(tmp).iterdir()
+                manifiesto = json.loads((carpeta / "manifiesto.json").read_text(encoding="utf-8"))
+        finally:
+            OllamaFalso.ignorar_esquema = False
+            servidor.shutdown()
+            servidor.server_close()
+        self.assertIn("ignoró el formato JSON", str(salida.exception.code))
+        self.assertTrue(manifiesto["interrumpida"])
+        self.assertIn("error", manifiesto["modelos"]["modelo-falso:1b"])
 
 
 class TestCasos(unittest.TestCase):

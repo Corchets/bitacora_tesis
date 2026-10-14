@@ -232,6 +232,8 @@ td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-
     en_o_despues_del_cumplimiento: ["Avisó tarde: ya cumplió", "mal"],
     sin_aviso: ["No avisó", "mal"],
     aviso_sin_pedido_de_referencia: ["Avisó (sin pedido en la referencia)", "bien"],
+    incompleto: ["Sin evaluar: corrida cortada", ""],
+    sin_respuesta_valida: ["Sin evaluar: todas las respuestas fallaron", ""],
     falsa_alarma: ["Falsa alarma", "mal"],
     sin_aviso_correcto: ["No avisó (correcto)", "bien"]
   };
@@ -342,6 +344,7 @@ td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-
     if (!r) { caja.appendChild(el("p", "tenue", "Este detector no procesó esta conversación.")); return; }
     if (estado.pos === 0) { caja.appendChild(el("p", "tenue", "Todavía no hay texto: el detector responde después de cada línea.")); return; }
     var resp = r.lineas[estado.pos - 1];
+    if (!resp) { caja.appendChild(el("p", "tenue", "El detector no llegó a esta línea: la corrida se cortó antes.")); return; }
     caja.appendChild(el("p", "dato tenue", "Después de la línea " + estado.pos + (resp.ms !== null ? " · " + Math.round(resp.ms) + " ms" : "")));
     if (!resp.valida) {
       caja.appendChild(el("p", null, "Fallo: " + resp.error + ". Se registra como fallo, no como «sin riesgo»."));
@@ -384,8 +387,13 @@ td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-
     var r = resultado(), c = caso(), caja = $("grafico");
     caja.textContent = "";
     if (!r) return;
+    if (r.lineas.length && r.lineas.every(function (l) { return !l.valida; })) {
+      caja.appendChild(el("p", "tenue", "Todas las respuestas de este detector fallaron en esta conversación: no hay nada que graficar."));
+      return;
+    }
     var tienePuntaje = r.lineas.some(function (l) { return l.riesgo !== null; });
     if (!tienePuntaje) { caja.appendChild(el("p", "tenue", "Este detector no da puntaje. Mirá en la conversación dónde avisó.")); return; }
+    var hasta = Math.min(estado.pos, r.lineas.length);
     var n = c.lineas.length, W = 340, H = 150, izq = 30, der = 10, arr = 14, abj = 22;
     var x = function (i) { return n === 1 ? izq : izq + (i - 1) * (W - izq - der) / (n - 1); };
     var y = function (v) { return arr + (1 - v) * (H - arr - abj); };
@@ -407,13 +415,13 @@ td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-
     if (r.aviso !== null && estado.pos >= r.aviso) vertical(r.aviso, "marca-aviso", "aviso", "texto-aviso", arr - 4);
     var tramo = [];
     function cerrar() { if (tramo.length > 1) svg.appendChild(s("polyline", { class: "curva", points: tramo.join(" ") })); tramo = []; }
-    for (var j = 1; j <= estado.pos; j++) {
+    for (var j = 1; j <= hasta; j++) {
       var l = r.lineas[j - 1];
       if (!l.valida || l.riesgo === null) { cerrar(); continue; }
       tramo.push(x(j) + "," + y(l.riesgo));
     }
     cerrar();
-    for (var k = 1; k <= estado.pos; k++) {
+    for (var k = 1; k <= hasta; k++) {
       var p = r.lineas[k - 1];
       if (p.valida && p.riesgo !== null) svg.appendChild(s("circle", { class: "punto" + (p.alerta ? " alerta" : ""), cx: x(k), cy: y(p.riesgo), r: k === estado.pos ? 4 : 2.6 }));
     }
@@ -461,14 +469,14 @@ td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-
     var t = $("totales");
     t.textContent = "";
     var enc = el("tr");
-    ["Detector", "Vishing con aviso", "Antes del pedido", "En el pedido", "Después", "Ya cumplió", "Falsas alarmas", "Fallos", "ms p50"].forEach(function (h) { enc.appendChild(el("th", null, h)); });
+    ["Detector", "Vishing con aviso", "Antes del pedido", "En el pedido", "Después", "Ya cumplió", "Falsas alarmas", "Fallos", "ms p50", "Sin evaluar"].forEach(function (h) { enc.appendChild(el("th", null, h)); });
     var thead = el("thead"); thead.appendChild(enc); t.appendChild(thead);
     var tbody = el("tbody");
     D.configs.forEach(function (cfg) {
       var m = D.metricas[cfg.id], tr = el("tr");
       tr.appendChild(el("td", "dato", cfg.id));
       [m.vishing_con_aviso + " / " + m.vishing, m.antes_del_pedido, m.en_el_pedido, m.despues_del_pedido, m.en_o_despues_del_cumplimiento,
-        m.falsas_alarmas + " / " + m.legitimas, m.fallos + " / " + m.actualizaciones, m.ms_p50 === null ? "—" : Math.round(m.ms_p50)]
+        m.falsas_alarmas + " / " + m.legitimas, m.fallos + " / " + m.actualizaciones, m.ms_p50_texto, m.sin_evaluar]
         .forEach(function (v) { tr.appendChild(el("td", "n", String(v))); });
       tbody.appendChild(tr);
     });
@@ -520,12 +528,14 @@ td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-
   }
   function elegirConfig(id) { estado.config = id; $("sel-config").value = id; guardado("config", id); pintar(); }
 
-  $("sel-config").addEventListener("change", function (e) { elegirConfig(e.target.value); });
+  // Después de elegir con un desplegable, el foco vuelve a la página para que las flechas muevan la llamada.
+  $("sel-config").addEventListener("change", function (e) { elegirConfig(e.target.value); e.target.blur(); });
   $("sel-caso").addEventListener("change", function (e) {
     pausar(); estado.caso = e.target.value; guardado("caso", estado.caso); estado.avisoMostrado = false; irA(caso().lineas.length);
+    e.target.blur();
   });
   $("ver-referencia").addEventListener("change", function (e) { guardado("referencia", e.target.checked ? "1" : "0"); pintar(); });
-  $("sel-velocidad").addEventListener("change", function () { if (estado.reproduciendo) { pausar(); reproducir(); } });
+  $("sel-velocidad").addEventListener("change", function (e) { e.target.blur(); if (estado.reproduciendo) { pausar(); reproducir(); } });
   $("btn-inicio").addEventListener("click", function () { pausar(); estado.avisoMostrado = false; irA(0); });
   $("btn-anterior").addEventListener("click", function () { pausar(); irA(estado.pos - 1); });
   $("btn-siguiente").addEventListener("click", function () { pausar(); irA(estado.pos + 1); });
@@ -533,12 +543,13 @@ td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-
   $("btn-reproducir").addEventListener("click", reproducir);
   document.addEventListener("keydown", function (e) {
     var t = e.target.tagName;
-    if (t === "SELECT" || t === "INPUT" || (t === "BUTTON" && e.key === " ")) return;
+    if (t === "SELECT" || t === "INPUT" || t === "TEXTAREA") return;
+    if (e.key === " " && (t === "BUTTON" || t === "SUMMARY" || t === "A")) return;
     if (e.key === "ArrowRight") { pausar(); irA(estado.pos + 1); e.preventDefault(); }
     else if (e.key === "ArrowLeft") { pausar(); irA(estado.pos - 1); e.preventDefault(); }
     else if (e.key === " ") { reproducir(); e.preventDefault(); }
-    else if (e.key === "Home") { pausar(); irA(0); }
-    else if (e.key === "End") { pausar(); irA(caso().lineas.length); }
+    else if (e.key === "Home") { pausar(); irA(0); e.preventDefault(); }
+    else if (e.key === "End") { pausar(); irA(caso().lineas.length); e.preventDefault(); }
   });
 
   pintarTotales();

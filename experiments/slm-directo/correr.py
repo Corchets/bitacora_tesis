@@ -146,7 +146,8 @@ def info_maquina() -> dict:
 
 
 def _lista(valor: str) -> list[str]:
-    return [v.strip() for v in valor.split(",") if v.strip()]
+    """Valores separados por coma, sin vacíos ni repetidos (un repetido duplicaría filas)."""
+    return list(dict.fromkeys(v.strip() for v in valor.split(",") if v.strip()))
 
 
 def elegir_casos(args) -> list[str]:
@@ -179,29 +180,46 @@ def preparar_ollama(cliente: ClienteOllama, modelos: list[str]) -> dict:
     return {"version": version, "digests": {m: instalados.get(m) or instalados.get(f"{m}:latest") for m in modelos}}
 
 
-def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int) -> dict:
-    """Carga el modelo antes de medir, para que la primera actualización no incluya la carga.
+class FalloAlCalentar(Exception):
+    """El modelo no quedó listo para medir: la corrida no debe seguir con él."""
 
-    También averigua si el modelo acepta `think: false`. Los que razonan por defecto
-    (p. ej. qwen3.5) lo necesitan para responder rápido; los que no tienen esa opción
-    pueden rechazar el campo, y entonces no se envía.
+
+def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int) -> dict:
+    """Carga el modelo antes de medir y comprueba que respete el formato JSON.
+
+    - La carga no se cuenta en la primera actualización.
+    - Se envía `think: false`, que los modelos que razonan por defecto (p. ej. qwen3.5)
+      necesitan para responder rápido. Si el modelo rechaza el campo, se reintenta sin él.
+    - El pedido de prueba no menciona JSON: si la respuesta no es el objeto del esquema,
+      esta versión de Ollama está ignorando `format` y las respuestas serían inválidas.
     """
-    mensajes = [{"role": "user", "content": "Respondé {\"ok\": true}"}]
+    mensajes = [{"role": "user", "content": "Saludá con una sola palabra."}]
     formato = {"type": "object", "properties": {"ok": {"type": "boolean"}}, "required": ["ok"]}
-    opciones = {"temperature": 0, "num_ctx": num_ctx}
+    opciones = {"temperature": 0, "num_ctx": num_ctx, "num_predict": 64}
     inicio = time.perf_counter()
     pensar: bool | None = False
     try:
-        cliente.chat(modelo, mensajes, formato, opciones, pensar=False)
+        r = cliente.chat(modelo, mensajes, formato, opciones, pensar=False)
     except ErrorOllama as e:
         if "think" not in str(e).lower():
-            return {"carga_ms": None, "error": str(e), "memoria": None, "pensar": None}
+            raise FalloAlCalentar(f"{modelo} no respondió al cargarlo ({e}).") from e
         pensar = None
         try:
-            cliente.chat(modelo, mensajes, formato, opciones)
+            r = cliente.chat(modelo, mensajes, formato, opciones)
         except ErrorOllama as e2:
-            return {"carga_ms": None, "error": str(e2), "memoria": None, "pensar": None}
+            raise FalloAlCalentar(f"{modelo} no respondió al cargarlo ({e2}).") from e2
     carga_ms = round((time.perf_counter() - inicio) * 1000)
+    contenido = (r.get("message") or {}).get("content", "")
+    try:
+        respeta_esquema = isinstance(json.loads(contenido).get("ok"), bool)
+    except (json.JSONDecodeError, AttributeError):
+        respeta_esquema = False
+    if not respeta_esquema:
+        raise FalloAlCalentar(
+            f"Ollama ignoró el formato JSON pedido con {modelo} (respondió {contenido[:80]!r}). "
+            "Pasa con algunas versiones de Ollama: actualizalo desde https://ollama.com/download "
+            "y volvé a correr."
+        )
     try:
         memoria = cliente.memoria_cargada(modelo)
     except ErrorOllama:
@@ -293,6 +311,8 @@ def main(argv: list[str] | None = None) -> int:
     ids = elegir_casos(args)
 
     cliente = ClienteOllama(args.url, args.timeout)
+    # La primera carga de un modelo grande desde el disco puede tardar varios minutos.
+    cliente_carga = ClienteOllama(args.url, max(args.timeout, 600.0))
     ollama = preparar_ollama(cliente, modelos) if modelos else None
 
     detectores = []
@@ -342,13 +362,17 @@ def main(argv: list[str] | None = None) -> int:
                 if config["modelo"] and config["modelo"] != modelo_actual:
                     modelo_actual = config["modelo"]
                     print(f"Cargando {modelo_actual}...", end=" ", flush=True)
-                    carga = calentar(cliente, modelo_actual, args.num_ctx)
+                    try:
+                        carga = calentar(cliente_carga, modelo_actual, args.num_ctx)
+                    except FalloAlCalentar as e:
+                        manifiesto["modelos"][modelo_actual] = {"error": str(e)}
+                        raise
                     manifiesto["modelos"][modelo_actual] = carga
                     guardar_manifiesto()
                     for c, d in detectores:
                         if c["modelo"] == modelo_actual:
                             d.pensar = carga["pensar"]
-                    print("listo." if not carga["error"] else f"no respondió ({carga['error']}); sus actualizaciones quedarán como fallos.")
+                    print(f"listo ({carga['carga_ms'] / 1000:.1f} s).")
                 print(f"== {config['config']}")
                 for case_id in ids:
                     lineas = casos.cargar_texto(case_id)
@@ -367,6 +391,12 @@ def main(argv: list[str] | None = None) -> int:
     except KeyboardInterrupt:
         manifiesto["interrumpida"] = True
         print("\nCorrida interrumpida: lo procesado hasta acá quedó guardado.")
+    except FalloAlCalentar as e:
+        manifiesto["interrumpida"] = True
+        manifiesto["fin"] = datetime.now().isoformat(timespec="seconds")
+        guardar_manifiesto()
+        print("no quedó listo.")
+        sys.exit(f"\n{e}\nLo procesado hasta acá quedó en {_mostrar(carpeta)}.")
     manifiesto["fin"] = datetime.now().isoformat(timespec="seconds")
     guardar_manifiesto()
     print(f"\nListo. Resumen: python resumen.py {_mostrar(carpeta)}")

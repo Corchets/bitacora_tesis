@@ -44,8 +44,13 @@ ESQUEMA_SALIDA = {
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
+# Es la única protección contra el recorte: Ollama recorta un prompt largo sin avisar
+# y lo que informa después no permite detectarlo con seguridad.
 CARACTERES_POR_TOKEN = 3
 FRACCION_MAXIMA_DEL_CONTEXTO = 0.9
+# Tope de tokens por respuesta: el JSON esperado usa menos de 200. Evita que un modelo
+# que entra en bucle tarde minutos en llegar al timeout.
+MAXIMO_TOKENS_RESPUESTA = 512
 
 
 @dataclass
@@ -90,8 +95,10 @@ def armar_mensaje_usuario(lineas: list[Linea] | tuple[Linea, ...], hablantes: st
     else:
         aclaracion = "Las líneas no indican quién habla."
         cuerpo = "\n".join(f"{i}. {l.texto}" for i, l in enumerate(lineas, start=1))
+    # El número de líneas va solo al final: así el comienzo del mensaje es igual entre
+    # actualizaciones y Ollama puede reutilizar lo ya procesado.
     return (
-        f"Transcripción disponible hasta ahora (líneas 1 a {n}; la llamada sigue). {aclaracion}\n\n"
+        f"Transcripción disponible hasta ahora; la llamada sigue. {aclaracion}\n\n"
         f"{cuerpo}\n\n"
         f"Evaluá la llamada con lo disponible hasta la línea {n}."
     )
@@ -154,7 +161,12 @@ class DetectorSLM:
     nombre = "slm"
 
     def opciones(self) -> dict:
-        return {"temperature": self.temperatura, "seed": self.seed, "num_ctx": self.num_ctx}
+        return {
+            "temperature": self.temperatura,
+            "seed": self.seed,
+            "num_ctx": self.num_ctx,
+            "num_predict": MAXIMO_TOKENS_RESPUESTA,
+        }
 
     def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
         usuario = armar_mensaje_usuario(lineas, self.hablantes)
@@ -172,8 +184,8 @@ class DetectorSLM:
         crudo = r.get("message", {}).get("content", "")
         tokens_prompt, tokens_salida = r.get("prompt_eval_count"), r.get("eval_count")
         comun = dict(crudo=crudo, ms=ms, tokens_prompt=tokens_prompt, tokens_salida=tokens_salida)
-        if tokens_prompt is not None and tokens_prompt + (tokens_salida or 0) >= self.num_ctx:
-            return Respuesta(valida=False, error="contexto_posiblemente_recortado", **comun)
+        if r.get("done_reason") == "length":
+            return Respuesta(valida=False, error="salida_cortada", **comun)
         salida, error = validar_salida(crudo)
         if salida is None:
             return Respuesta(valida=False, error=error, **comun)
