@@ -150,6 +150,12 @@ class TestMensajeYEvidencia(unittest.TestCase):
         self.assertTrue(evidencia_en_texto("4. A: Decime el codigo de activacion", DIALOGO))
         self.assertTrue(evidencia_en_texto("«decime el código de activación que recibiste»", DIALOGO))
 
+    def test_evidencia_de_varias_lineas_numeradas(self):
+        # Forma real en que citó qwen3.5:2b en la primera corrida (2026-10-14).
+        cita = "A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.\n2. B: Me acaba de llegar un SMS. No pedí activar nada."
+        self.assertTrue(evidencia_en_texto(cita, DIALOGO))
+        self.assertFalse(evidencia_en_texto(cita + "\n3. A: Pasame la clave del banco.", DIALOGO))
+
     def test_evidencia_inventada_o_futura_no_es_textual(self):
         self.assertFalse(evidencia_en_texto("Pasame la clave del banco", DIALOGO))
         self.assertFalse(evidencia_en_texto("Decime el código", DIALOGO[:3]))

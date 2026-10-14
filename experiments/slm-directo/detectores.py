@@ -113,14 +113,20 @@ def _normalizar(texto: str) -> str:
 
 def evidencia_en_texto(evidencia: str, lineas: list[Linea] | tuple[Linea, ...]) -> bool:
     """True si la evidencia citada aparece en lo disponible (sin contar acentos, signos,
-    numeración ni la letra del hablante). Detecta citas inventadas o parafraseadas."""
-    cita = _normalizar(evidencia)
-    cita = re.sub(r"^\d+\s+", "", cita)
-    cita = re.sub(r"^[ab]\s+", "", cita)
-    if not cita:
-        return False
+    numeración ni la letra del hablante). Detecta citas inventadas o parafraseadas.
+
+    Si el modelo cita varias líneas (una por renglón, a veces con «2. B:» adelante),
+    cada renglón tiene que aparecer en lo dicho.
+    """
     disponible = " ".join(_normalizar(l.texto) for l in lineas)
-    return cita in disponible
+    partes = []
+    for renglon in evidencia.splitlines():
+        cita = _normalizar(renglon)
+        cita = re.sub(r"^\d+\s+", "", cita)
+        cita = re.sub(r"^[ab]\s+", "", cita)
+        if cita:
+            partes.append(cita)
+    return bool(partes) and all(cita in disponible for cita in partes)
 
 
 def validar_salida(crudo: str) -> tuple[dict | None, str]:
