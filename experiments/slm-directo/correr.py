@@ -103,7 +103,8 @@ def _git(*args: str) -> str:
 
 def info_codigo() -> dict:
     commit = _git("rev-parse", "HEAD") or "desconocido"
-    cambios = _git("status", "--porcelain", "--", ".")
+    # Las corridas guardadas no son cambios de código: no cuentan.
+    cambios = _git("status", "--porcelain", "--", ".", ":(exclude)corridas")
     return {"commit": commit, "cambios_sin_commit_en_la_carpeta": bool(cambios)}
 
 
