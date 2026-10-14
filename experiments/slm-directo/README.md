@@ -169,6 +169,20 @@ respuesta cruda). `resumen.py` agrega `resumen.md` en la misma carpeta. Con
 `--etiqueta` se le pone un nombre a la carpeta. Si se corta con Ctrl+C, lo
 procesado queda guardado.
 
+### Actualizar el código
+
+Cuando una corrida tuya ya se subió al repositorio, `git pull` se frena con
+«untracked working tree files would be overwritten by merge»: tu copia local de esa
+carpeta choca con la que trae el repositorio, aunque sean iguales. Guardá lo local
+aparte y actualizá:
+
+```bash
+git stash push --include-untracked -m "corridas locales antes de actualizar"
+git pull
+```
+
+Lo guardado queda en `git stash list` por si hace falta recuperarlo.
+
 ## 6. Escalera de modelos y gamas de celular
 
 La **escalera** es probar el mismo detector, con el mismo prompt y los mismos casos,
