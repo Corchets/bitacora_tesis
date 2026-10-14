@@ -185,7 +185,7 @@ class FalloAlCalentar(Exception):
     """El modelo no quedó listo para medir: la corrida no debe seguir con él."""
 
 
-def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int) -> dict:
+def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int, extra: dict | None = None) -> dict:
     """Carga el modelo antes de medir y comprueba que respete el formato JSON.
 
     - La carga no se cuenta en la primera actualización.
@@ -196,7 +196,8 @@ def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int) -> dict:
     """
     mensajes = [{"role": "user", "content": "Saludá con una sola palabra."}]
     formato = {"type": "object", "properties": {"ok": {"type": "boolean"}}, "required": ["ok"]}
-    opciones = {"temperature": 0, "num_ctx": num_ctx, "num_predict": 64}
+    # Mismas opciones de hardware que la corrida: el modelo queda cargado como se va a medir.
+    opciones = {"temperature": 0, "num_ctx": num_ctx, "num_predict": 64, **(extra or {})}
     inicio = time.perf_counter()
     pensar: bool | None = False
     try:
@@ -284,6 +285,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--num-ctx", type=int, default=4096, help="contexto del modelo en tokens")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--timeout", type=float, default=120.0, help="segundos máximos por actualización")
+    p.add_argument("--solo-cpu", action="store_true", help="no usar la placa de video (más parecido a un celular)")
+    p.add_argument("--hilos", type=int, help="hilos de CPU para el modelo, p. ej. 2 (presupuesto de gama alta)")
     p.add_argument("--etiqueta", default="", help="texto corto para el nombre de la carpeta")
     p.add_argument("--salida", type=Path, default=RAIZ / "corridas", help="dónde crear la carpeta de la corrida")
     p.add_argument("--detalle", action="store_true", help="mostrar cada línea y la respuesta (modo demo)")
@@ -316,13 +319,21 @@ def main(argv: list[str] | None = None) -> int:
     cliente_carga = ClienteOllama(args.url, max(args.timeout, 600.0))
     ollama = preparar_ollama(cliente, modelos) if modelos else None
 
+    # Opciones de hardware de Ollama: num_gpu=0 deja todo el modelo en la CPU.
+    extra = {}
+    if args.solo_cpu:
+        extra["num_gpu"] = 0
+    if args.hilos:
+        extra["num_thread"] = args.hilos
+    extra = extra or None
+
     detectores = []
     if not args.sin_reglas:
         detectores.append(({"config": "reglas", "detector": "reglas", "modelo": "", "prompt": "", "hablantes": ""}, DetectorReglas()))
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed)
+                d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra)
                 etiqueta = {"config": f"slm|{modelo}|{variante}|{h}", "detector": "slm", "modelo": modelo, "prompt": variante, "hablantes": h}
                 detectores.append((etiqueta, d))
     if not detectores:
@@ -338,7 +349,7 @@ def main(argv: list[str] | None = None) -> int:
         "maquina": info_maquina(),
         "politica": POLITICA,
         "ollama": None if ollama is None else {"url": args.url, **ollama},
-        "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout},
+        "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
         "prompts": {v: {"huella": huella(cargar_prompt(v)), "texto": cargar_prompt(v)} for v in prompts} if modelos else {},
         "configs": [c for c, _ in detectores],
         "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
@@ -364,7 +375,7 @@ def main(argv: list[str] | None = None) -> int:
                     modelo_actual = config["modelo"]
                     print(f"Cargando {modelo_actual}...", end=" ", flush=True)
                     try:
-                        carga = calentar(cliente_carga, modelo_actual, args.num_ctx)
+                        carga = calentar(cliente_carga, modelo_actual, args.num_ctx, extra)
                     except FalloAlCalentar as e:
                         manifiesto["modelos"][modelo_actual] = {"error": str(e)}
                         raise

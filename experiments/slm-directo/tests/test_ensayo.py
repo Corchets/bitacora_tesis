@@ -255,6 +255,11 @@ class TestClienteYDetectorContraOllamaFalso(unittest.TestCase):
         self.assertFalse(pedido["stream"])
         self.assertEqual(pedido["messages"][0]["role"], "system")
 
+    def test_opciones_de_hardware_llegan_a_ollama(self):
+        self.detector(extra={"num_gpu": 0, "num_thread": 2}).evaluar(DIALOGO[:1])
+        opciones = OllamaFalso.pedidos[0]["options"]
+        self.assertEqual((opciones["num_gpu"], opciones["num_thread"]), (0, 2))
+
     def test_recorrido_completo_con_aviso_unico(self):
         resultados = list(correr.procesar_caso(self.detector(), DIALOGO))
         avisos = [n for n, _, _, aviso in resultados if aviso]

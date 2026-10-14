@@ -204,6 +204,17 @@ PC x86. Con eso hay tres conclusiones posibles, todas defendibles si están medi
 - no funciona en ningún tamaño probado sin ajuste: la evidencia apunta a entrenar o
   a otra arquitectura.
 
+**Velocidad parecida a un celular.** Con placa de video, una PC responde mucho más
+rápido que un teléfono. Para acercarse a los presupuestos de gama, se puede correr
+solo con la CPU y pocos hilos (la gama alta reserva 2 hilos al detector):
+
+```bash
+python correr.py --modelos qwen3.5:0.8b --grupo piloto_escrito --solo-cpu --hilos 2 --etiqueta cpu-2hilos
+```
+
+El manifiesto registra esas opciones en `parametros_slm.hardware`. Sigue siendo una
+PC x86, no un ARM; sirve como cota, no como medición del teléfono.
+
 Lo medido en una PC con Ollama **no es una medición en Android**
 ([R13](../../docs/gestion/REGISTRO-RIESGOS.md)): sirve para ordenar candidatos, no para
 afirmar rendimiento móvil.
@@ -311,3 +322,34 @@ deja la duda en `notas` de su referencia. Las de anotación corresponden a
 | Aviso por un fragmento que la línea siguiente aclara: ¿falsa alarma? | `TR-08` | D08 |
 | Familiar que pide dinero sin presión y propone verificar: ¿un aviso es falsa alarma? | `TR-11` | D08 |
 | ¿Cuántos consejos de seguridad se toleran en las legítimas? ¿Puede quien atiende pedir un dato de bajo riesgo? | Legítimas del piloto | Fichas (#39) |
+
+## 13. Primera escalera (2026-10-14)
+
+> **Estado: propuesta sin discutir.** Casos escritos de desarrollo, prompt v1 y una
+> sola PC con GPU. Describe conductas; no mide rendimiento ni elige modelo.
+
+| Detector | Vishing con aviso | Falsas alarmas | Avisos apoyados en un pedido real | Memoria | Tiempo por línea (GPU) |
+|---|---|---|---|---|---|
+| Reglas | 23/29 | 14/24 | — | — | — |
+| `qwen3.5:0.8b` | 26/29 | 8/24 | 21 de 34 (12 inventan el pedido) | 545 MB | 0,28 s |
+| `qwen3.5:2b` (dos corridas) | 20 y 21/29 | **2/24** | **19 de 22** | 2,2 GB | 0,52 s |
+| `qwen3.5:4b` | **29/29** | 15/24 | 14 de 44 (21 avisan por sospecha) | 2,9 GB | 0,90 s |
+
+La columna «apoyados en un pedido real» sale de una
+[clasificación a ciegas](analisis/2026-10-14-fundamento-de-avisos/README.md) de cada
+primer aviso, hecha por dos revisores automáticos que coincidieron en 99 de 100.
+
+- **Más grande no fue mejor.** El 2B es el único que avisa casi siempre por un pedido
+  real y con pocas falsas alarmas. El 0.8B inventa pedidos y el 4B avisa por sospecha,
+  incluso ante pedidos que alguien solo cuenta.
+- **Pedido o sospecha.** El 2B avisa en el pedido; el 4B anticipa por suplantación o
+  presión, pero con muchas falsas alarmas. Qué debe provocar el aviso es una decisión
+  de [D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+- **Memoria contra criterio.** Solo el 0.8B queda cerca del presupuesto de gama alta
+  (1024 MB para todo el pipeline, ASR incluido), y es el que peor razona. El 2B, que
+  razona mejor, ocupa más del doble.
+- **Sin determinismo.** Dos corridas iguales del 2B difirieron en 2 de 53 casos:
+  cada configuración se tiene que repetir e informar con su variación.
+- **El prompt v1 sesga los motivos** hacia «código» por su ejemplo. Es el primer
+  cambio candidato para un prompt v2, junto con aclarar que un pedido relatado o
+  negado no cuenta.

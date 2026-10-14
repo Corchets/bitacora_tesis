@@ -164,6 +164,7 @@ class DetectorSLM:
     seed: int = 42
     temperatura: float = 0.0
     pensar: bool | None = None  # False: sin razonamiento previo; None: no se envía (ver correr.calentar)
+    extra: dict | None = None  # opciones de hardware de Ollama, p. ej. {"num_gpu": 0, "num_thread": 2}
     nombre = "slm"
 
     def opciones(self) -> dict:
@@ -172,6 +173,7 @@ class DetectorSLM:
             "seed": self.seed,
             "num_ctx": self.num_ctx,
             "num_predict": MAXIMO_TOKENS_RESPUESTA,
+            **(self.extra or {}),
         }
 
     def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
