@@ -1,0 +1,74 @@
+[
+ {
+  "orden": 1,
+  "fecha": "2026-10-13",
+  "etapa": "Punto de partida",
+  "que_se_hizo": "Tomamos lo que ya pedía el issue #50: un SLM local que lee la llamada línea por línea, con todo lo dicho antes, y emite un solo aviso. Las reglas de palabras del laboratorio quedan como comparador.",
+  "resultado": "Diseño del ensayo: qué se compara y cómo se registra cada corrida.",
+  "donde": "experiments/slm-directo/README.md"
+ },
+ {
+  "orden": 2,
+  "fecha": "2026-10-13",
+  "etapa": "Casos de prueba",
+  "que_se_hizo": "Escribimos 53 conversaciones ficticias: 14 versiones escritas de los pares del piloto, 13 trampas (pedidos indirectos o partidos, negaciones, legítimas con dinero o datos) y 26 guiones del laboratorio. El texto que ve el detector está separado de la referencia humana.",
+  "resultado": "Redactadas y revisadas por agentes, con una revisión adversarial por tanda. Ninguna tiene revisión humana todavía.",
+  "donde": "experiments/slm-directo/casos/"
+ },
+ {
+  "orden": 3,
+  "fecha": "2026-10-13",
+  "etapa": "Detector y comparador",
+  "que_se_hizo": "Programamos el recorrido: cada línea nueva va al modelo con lo dicho antes, la respuesta se valida y la primera alerta válida dispara el aviso único. Una respuesta rota cuenta como fallo, nunca como «sin riesgo».",
+  "resultado": "30 pruebas automáticas que no necesitan el modelo.",
+  "donde": "correr.py, detectores.py, tests/"
+ },
+ {
+  "orden": 4,
+  "fecha": "2026-10-13",
+  "etapa": "Línea base de reglas",
+  "que_se_hizo": "Corrimos las reglas del laboratorio sobre las 53 conversaciones.",
+  "resultado": "Avisan en 23 de 29 estafas, pero también en 14 de 24 legítimas: no distinguen mencionar de pedir.",
+  "donde": "corridas/2026-10-13_224418_linea-base-reglas"
+ },
+ {
+  "orden": 5,
+  "fecha": "2026-10-14",
+  "etapa": "Demo de un comando y visor",
+  "que_se_hizo": "Un script instala lo que falta, descarga el modelo, corre todo y abre una página que reproduce cada llamada. Cuatro revisiones independientes buscaron problemas en Windows, macOS, la API de Ollama y el visor.",
+  "resultado": "25 problemas encontrados y corregidos antes de usarlo.",
+  "donde": "demo.ps1, demo.sh, visor.py"
+ },
+ {
+  "orden": 6,
+  "fecha": "2026-10-14",
+  "etapa": "Primera corrida real",
+  "que_se_hizo": "qwen3.5 2B en una PC con Windows, sobre 8 conversaciones.",
+  "resultado": "Ningún fallo. Mostró un error del verificador de citas, corregido el mismo día.",
+  "donde": "corridas/2026-10-14_172248_demo-qwen3.5-2b"
+ },
+ {
+  "orden": 7,
+  "fecha": "2026-10-14",
+  "etapa": "Escalera de modelos",
+  "que_se_hizo": "Corrimos 0.8B, 2B (dos veces, igual) y 4B sobre las 53 conversaciones, en la misma PC.",
+  "resultado": "Más grande no fue mejor. Las dos corridas iguales del 2B no dieron idéntico.",
+  "donde": "corridas/"
+ },
+ {
+  "orden": 8,
+  "fecha": "2026-10-14",
+  "etapa": "¿En qué se apoya cada aviso?",
+  "que_se_hizo": "Dos revisores automáticos clasificaron a ciegas cada primer aviso: si respondía a un pedido real, a una sospecha, a algo relatado o a un pedido inventado.",
+  "resultado": "Coincidieron en 99 de 100. El 0.8B inventa pedidos y el 4B avisa por sospecha.",
+  "donde": "analisis/2026-10-14-fundamento-de-avisos/"
+ },
+ {
+  "orden": 9,
+  "fecha": "Pendiente",
+  "etapa": "Medición solo con CPU",
+  "que_se_hizo": "Correr 0.8B y 2B sin placa de video y con 2 hilos, como el presupuesto de gama alta.",
+  "resultado": "Va a dar una velocidad más parecida a la de un celular.",
+  "donde": "python correr.py … --solo-cpu --hilos 2"
+ }
+]

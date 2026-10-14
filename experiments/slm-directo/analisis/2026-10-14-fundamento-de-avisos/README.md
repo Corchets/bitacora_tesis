@@ -46,7 +46,7 @@ mostró el modelo se apoya en lo dicho hasta esa línea.
 |---|---|---|---|---|---|---|
 | 0.8B | 34 | 12 | 9 | 1 | 0 | **12** |
 | 2B | 22 | **13** | 6 | 1 | 0 | 2 |
-| 4B | 44 | 14 | 0 | 7 | **21** | 1 |
+| 4B | 44 | 15 | 0 | 7 | **21** | 1 |
 
 Separado por clase de la conversación (dato que los revisores no vieron):
 

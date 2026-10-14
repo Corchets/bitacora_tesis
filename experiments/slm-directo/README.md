@@ -333,7 +333,7 @@ deja la duda en `notas` de su referencia. Las de anotación corresponden a
 | Reglas | 23/29 | 14/24 | — | — | — |
 | `qwen3.5:0.8b` | 26/29 | 8/24 | 21 de 34 (12 inventan el pedido) | 545 MB | 0,28 s |
 | `qwen3.5:2b` (dos corridas) | 20 y 21/29 | **2/24** | **19 de 22** | 2,2 GB | 0,52 s |
-| `qwen3.5:4b` | **29/29** | 15/24 | 14 de 44 (21 avisan por sospecha) | 2,9 GB | 0,90 s |
+| `qwen3.5:4b` | **29/29** | 15/24 | 15 de 44 (21 avisan por sospecha) | 2,9 GB | 0,90 s |
 
 La columna «apoyados en un pedido real» sale de una
 [clasificación a ciegas](analisis/2026-10-14-fundamento-de-avisos/README.md) de cada
@@ -353,3 +353,9 @@ primer aviso, hecha por dos revisores automáticos que coincidieron en 99 de 100
 - **El prompt v1 sesga los motivos** hacia «código» por su ejemplo. Es el primer
   cambio candidato para un prompt v2, junto con aclarar que un pedido relatado o
   negado no cuenta.
+
+**Tablero.** Los gráficos, las estadísticas (intervalos del 95% y comparaciones de a
+pares), el paso a paso y las preguntas abiertas están en
+[`analisis/tablero/`](analisis/tablero/): `python analisis/tablero/armar_datos.py`
+regenera los datos desde las corridas y la clasificación de avisos, e `index.html` es
+la página que los dibuja.

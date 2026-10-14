@@ -1,0 +1,12 @@
+[
+ {
+  "caso": "LAB-pantalla-sin-programa",
+  "corrida_1": "—",
+  "corrida_2": "=R L3"
+ },
+ {
+  "caso": "TR-09-victima-se-niega",
+  "corrida_1": ">R L7",
+  "corrida_2": ">R L6"
+ }
+]

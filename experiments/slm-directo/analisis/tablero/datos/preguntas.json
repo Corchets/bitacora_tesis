@@ -1,0 +1,72 @@
+[
+ {
+  "orden": 1,
+  "tema": "Qué provoca el aviso",
+  "decide": "D08",
+  "pregunta": "¿El aviso tiene que salir solo cuando alguien pide algo de riesgo, o también ante la sospecha (suplantación, presión, «no cortes»)?",
+  "por_que": "El 2B avisa en el pedido y casi no se equivoca; el 4B anticipa por sospecha pero da falsa alarma en muchas legítimas. No hay una respuesta técnica: es una decisión de diseño."
+ },
+ {
+  "orden": 2,
+  "tema": "Prompt v2",
+  "decide": "Ensayo #50",
+  "pregunta": "¿Quién redacta la versión 2 del prompt y con qué casos la probamos sin ajustarla a las respuestas?",
+  "por_que": "El ejemplo del prompt v1 hace que los modelos digan «código» aunque pidan dinero o la pantalla, y no aclara que un pedido relatado o negado no cuenta."
+ },
+ {
+  "orden": 3,
+  "tema": "Tamaño y gama",
+  "decide": "D09",
+  "pregunta": "¿Seguimos con el 2B y argumentamos qué gama hace falta, probamos otras familias (Gemma, Llama 3.2 del laboratorio) o probamos ajustar un modelo chico?",
+  "por_que": "El único cerca del presupuesto de gama alta es el 0.8B, y es el que inventa pedidos."
+ },
+ {
+  "orden": 4,
+  "tema": "Repeticiones",
+  "decide": "D08",
+  "pregunta": "¿Cuántas veces repetimos cada configuración y cómo informamos la variación?",
+  "por_que": "Dos corridas iguales del 2B difirieron en el resultado de 2 de 53 conversaciones, con temperatura 0 y semilla fija."
+ },
+ {
+  "orden": 5,
+  "tema": "Variantes sin probar",
+  "decide": "Ensayo #50",
+  "pregunta": "¿Probamos el detector sin decirle quién habla (A/B) y con la base institucional del #27?",
+  "por_que": "Todas las corridas usaron hablantes A/B y el prompt solo con la tarea. Además, en los casos escritos la letra A coincide casi siempre con quien llama."
+ },
+ {
+  "orden": 6,
+  "tema": "Calidad de los casos",
+  "decide": "D07",
+  "pregunta": "¿Quién revisa los 53 casos y cómo corregimos el atajo del saludo y las legítimas «didácticas»?",
+  "por_que": "Ningún caso tiene revisión humana. En las legítimas escritas suele atender la entidad, y en las estafas llama quien pregunta por la persona: un modelo podría acertar por el saludo."
+ },
+ {
+  "orden": 7,
+  "tema": "Dónde va el pedido",
+  "decide": "D07",
+  "pregunta": "En pedidos partidos, indirectos o inducidos, ¿en qué línea marcamos el pedido? ¿Y una estafa que se corta antes de pedir nada cuenta como detectada si hay aviso?",
+  "por_que": "Esas marcas definen si un aviso llegó antes, en o después del pedido; las dudas están anotadas caso por caso."
+ },
+ {
+  "orden": 8,
+  "tema": "Celular",
+  "decide": "D09",
+  "pregunta": "¿Cuánto tarda cada modelo solo con CPU y 2 hilos? ¿Cuándo y en qué teléfono medimos de verdad?",
+  "por_que": "Todo lo medido hasta ahora usó la placa de video de una PC; un celular no la tiene."
+ },
+ {
+  "orden": 9,
+  "tema": "Del texto al audio",
+  "decide": "Plan H2–H3",
+  "pregunta": "¿Cuándo pasamos a las grabaciones del piloto para medir cuánto empeora todo con los errores del reconocimiento de voz?",
+  "por_que": "Estas pruebas usan texto perfecto. El primer par grabado está pendiente en el issue #39."
+ },
+ {
+  "orden": 10,
+  "tema": "Revisión humana del análisis",
+  "decide": "Ensayo #50",
+  "pregunta": "¿Quién revisa una muestra de la clasificación de avisos antes de citarla en el informe?",
+  "por_que": "La clasificaron dos revisores automáticos del mismo tipo; coinciden mucho, pero pueden compartir sesgos."
+ }
+]
