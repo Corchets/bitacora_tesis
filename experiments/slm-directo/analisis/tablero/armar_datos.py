@@ -34,6 +34,9 @@ DETECTORES = [
     {"id": "q4", "nombre": "qwen3.5 4B", "corrida": "2026-10-14_174602_demo-qwen3.5-4b"},
 ]
 REPETICION_2B = "2026-10-14_175451_demo-qwen3.5-2b"
+# Misma PC sin placa de video y con 2 hilos, sobre el piloto escrito (0.8B y 2B).
+CORRIDA_CPU = "2026-10-14_191429_cpu-2hilos"
+CONFIG_CPU = {"q08": "slm|qwen3.5:0.8b|tarea|ab", "q2": "slm|qwen3.5:2b|tarea|ab"}
 CASOS_TRAYECTORIA = {
     "SC-SOPORTE-CLAVE-01-e01": "Falsa mesa de ayuda pide la contraseña (estafa)",
     "TR-01-pedido-indirecto-digitos": "«Leeme lo que te llegó, de a uno» (estafa)",
@@ -201,13 +204,78 @@ def main() -> int:
     }])
     guardar("repeticion_casos", distintos)
 
-    # 7. Referencias externas, citadas con su fuente
+    # 7. Solo CPU contra placa de video, sobre las mismas conversaciones del piloto escrito
+    m_cpu, filas_cpu = resumen.leer_corrida(RAIZ / "corridas" / CORRIDA_CPU)
+    an_cpu = resumen.analizar(m_cpu, filas_cpu)
+    casos_cpu = set(an_cpu[CONFIG_CPU["q08"]])
+
+    def segundos(ms):
+        return None if ms is None else round(ms / 1000, 2)
+
+    def tiempos(filas, cs):
+        """Segundos por línea de unas filas: mediana, p95, máximo y mediana de las líneas con aviso."""
+        ms = [float(f["ms"]) for f in filas if f["ms"] != ""]
+        aviso = [float(f["ms"]) for f in filas if f["aviso"] == "true"]
+        m = resumen.metricas(cs)
+        return {
+            "lineas": len(ms), "s_p50": segundos(m["ms_p50"]), "s_p95": segundos(m["ms_p95"]),
+            "s_max": segundos(max(ms)), "s_aviso_p50": segundos(resumen.percentil(aviso, 50)) if aviso else None,
+        }
+
+    velocidad, cpu_vs_gpu, cpu_vs_gpu_casos = [], [], []
+    for d in DETECTORES[1:]:
+        manifiesto, filas, cs = corridas[d["id"]]
+        sub = {k: v for k, v in cs.items() if k in casos_cpu}
+        f_gpu = [f for f in filas if f["case_id"] in casos_cpu]
+        mem = next(iter(manifiesto["modelos"].values()))["memoria"]
+        velocidad.append({
+            "clave": f"{d['id']}|gpu", "detector": d["id"], "nombre": d["nombre"], "hardware": "Placa de video",
+            "etiqueta": f"{d['nombre']} · placa de video", "corrida": d["corrida"], "conversaciones": len(sub),
+            **tiempos(f_gpu, sub), "memoria_mb": round(mem["size_bytes"] / 1024**2),
+        })
+        if d["id"] not in CONFIG_CPU:
+            continue
+        cfg = CONFIG_CPU[d["id"]]
+        cs_cpu = an_cpu[cfg]
+        f_cpu = [f for f in filas_cpu if f["config"] == cfg]
+        mem_cpu = m_cpu["modelos"][cfg.split("|")[1]]["memoria"]
+        velocidad.append({
+            "clave": f"{d['id']}|cpu", "detector": d["id"], "nombre": d["nombre"], "hardware": "Solo CPU, 2 hilos",
+            "etiqueta": f"{d['nombre']} · solo CPU", "corrida": CORRIDA_CPU, "conversaciones": len(cs_cpu),
+            **tiempos(f_cpu, cs_cpu), "memoria_mb": round(mem_cpu["size_bytes"] / 1024**2),
+        })
+        G = {(f["case_id"], f["linea"]): f for f in f_gpu}
+        C = {(f["case_id"], f["linea"]): f for f in f_cpu}
+        comunes = sorted(set(G) & set(C))
+        distintos = [k for k in sorted(cs_cpu) if (cs_cpu[k]["categoria"], cs_cpu[k]["aviso"]) != (sub[k]["categoria"], sub[k]["aviso"])]
+        mg, mc = resumen.metricas(sub), resumen.metricas(cs_cpu)
+        cpu_vs_gpu.append({
+            "detector": d["id"], "nombre": d["nombre"], "lineas": len(comunes),
+            "riesgos_distintos": sum(1 for k in comunes if G[k]["riesgo"] != C[k]["riesgo"]),
+            "alertas_distintas": sum(1 for k in comunes if G[k]["alerta_sugerida"] != C[k]["alerta_sugerida"]),
+            "conversaciones": len(cs_cpu), "conversaciones_con_otro_resultado": len(distintos),
+            "vishing": mc["vishing"], "vishing_con_aviso_gpu": mg["vishing_con_aviso"], "vishing_con_aviso_cpu": mc["vishing_con_aviso"],
+            "legitimas": mc["legitimas"], "falsas_alarmas_gpu": mg["falsas_alarmas"], "falsas_alarmas_cpu": mc["falsas_alarmas"],
+        })
+        cpu_vs_gpu_casos += [
+            {"clave": f"{d['id']}|{k}", "nombre": d["nombre"], "caso": k, "placa_de_video": codigo(sub[k]), "solo_cpu": codigo(cs_cpu[k])}
+            for k in distintos
+        ]
+    guardar("velocidad", velocidad)
+    guardar("cpu_vs_gpu", cpu_vs_gpu)
+    guardar("cpu_vs_gpu_casos", cpu_vs_gpu_casos)
+
+    # 8. Referencias externas, citadas con su fuente
     guardar("gamas", [
         {"gama": "Baja", "techo_mb": 256, "hilos_detector": 1, "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md"},
         {"gama": "Media", "techo_mb": 512, "hilos_detector": 1, "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md"},
         {"gama": "Alta", "techo_mb": 1024, "hilos_detector": 2, "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md"},
         # Pico de la corrida de audio del laboratorio: ASR más un detector TF-IDF muy liviano.
         {"gama": "ASR del laboratorio (aprox.)", "techo_mb": 420, "hilos_detector": None, "fuente": "docs/investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md, corrida de audio del 2026-09-25 (ASR con detector TF-IDF)"},
+    ])
+    guardar("umbrales", [
+        {"umbral": "Objetivo", "p95_s": 1.5, "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md, gate de latencia por turno"},
+        {"umbral": "Límite", "p95_s": 2.0, "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md, gate de latencia por turno"},
     ])
     return 0
 

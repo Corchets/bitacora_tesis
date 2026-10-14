@@ -35,7 +35,7 @@
   #grafico-fundamento { min-height: 172px; }
   #grafico-momento { min-height: 210px; }
   #grafico-memoria { min-height: 204px; }
-  #grafico-velocidad { min-height: 160px; }
+  #grafico-velocidad { min-height: 230px; }
   #grafico-trayectorias { min-height: 700px; }
   .slm-tick { fill: var(--color-fg-muted); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
   .slm-label { fill: var(--color-fg); font-size: var(--cds-font-size-caption); }
@@ -133,11 +133,19 @@
       <span class="slm-v dash-skeleton" data-source="detectores" data-field="falsas_alarmas" data-where="id=q4">—</span> falsas alarmas;
       las reglas del laboratorio dieron <span class="slm-v dash-skeleton" data-source="detectores" data-field="falsas_alarmas" data-where="id=reglas">—</span>.
     </p>
+    <p class="slm-takeaway" id="conclusion-cpu">
+      <b>Y sin placa de video no llega a tiempo.</b>
+      Solo con CPU y 2 hilos, el 95% de las líneas tarda hasta
+      <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_p95" data-where="clave=q08|cpu" data-fmt="s1">—</span> s con el 0.8B y
+      <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_p95" data-where="clave=q2|cpu" data-fmt="s1">—</span> s con el 2B;
+      el objetivo del documento de prefactibilidad es
+      <span class="slm-v dash-skeleton" data-source="umbrales" data-field="p95_s" data-where="umbral=Objetivo" data-fmt="s1">—</span> s.
+    </p>
     <p class="slm-context">
       <span class="slm-v dash-skeleton" data-source="conteo" data-field="conversaciones" data-row="0">—</span> conversaciones escritas
       (<span class="slm-v dash-skeleton" data-source="conteo" data-field="estafas" data-row="0">—</span> estafas y
       <span class="slm-v dash-skeleton" data-source="conteo" data-field="legitimas" data-row="0">—</span> legítimas) · prompt v1 ·
-      modelos qwen3.5 en Ollama · una PC con placa de video · sin revisión humana todavía.
+      modelos qwen3.5 en Ollama · una PC, con y sin placa de video · sin revisión humana todavía.
     </p>
     <p class="slm-estado"><b>Estado: propuesta sin discutir.</b> Muestra lo que dio el ensayo; no elige modelo (D09) ni política de aviso (D08).</p>
   </header>
@@ -153,7 +161,7 @@
       <button data-ir="deteccion">Detección</button>
       <button data-ir="fundamento">Por qué avisa</button>
       <button data-ir="momento">Cuándo avisa</button>
-      <button data-ir="celular">¿Entra en un celular?</button>
+      <button data-ir="celular">¿Anda en un celular?</button>
       <button data-ir="repeticion">¿Da siempre lo mismo?</button>
       <button data-ir="trayectorias">Ejemplos línea por línea</button>
       <button data-ir="casos">Caso por caso</button>
@@ -288,8 +296,19 @@
     </section>
 
     <section class="slm-section" id="celular">
-      <h2>¿Entra en un celular?</h2>
-      <p class="slm-lead">El producto tiene que correr en el teléfono. Acá se compara lo que ocupa cada modelo, sumado al reconocimiento de voz, con el techo de memoria para todo el sistema que propone el documento de prefactibilidad. El objetivo es la gama media; baja y alta sirven de límites para comparar.</p>
+      <h2>¿Anda en un celular?</h2>
+      <p class="slm-lead">El producto tiene que correr en el teléfono, sin placa de video. Acá se compara cuánto tarda cada línea y cuánta memoria ocupa cada modelo con los objetivos del documento de prefactibilidad. Todavía no se midió en un teléfono: es la misma PC, con y sin placa de video.</p>
+      <div class="slm-card" id="card-velocidad">
+        <h3>Tiempo por línea, con y sin placa de video</h3>
+        <p class="slm-note">Las mismas 14 conversaciones del piloto escrito, en la misma PC. Punto: mediana; la línea llega hasta el percentil 95. Líneas punteadas: objetivo y límite de latencia por turno del documento de prefactibilidad, medidos sobre el percentil 95.</p>
+        <div class="slm-chart dash-skeleton" id="grafico-velocidad" data-source="velocidad umbrales"></div>
+        <p class="slm-note">
+          Solo con CPU, el aviso del 2B llegaría unos
+          <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_aviso_p50" data-where="clave=q2|cpu" data-fmt="s1">—</span> s después de que termina la frase del pedido
+          (mediana de las líneas donde avisó), sin contar el reconocimiento de voz: esas líneas tardan más porque el modelo escribe el motivo y la cita.
+          Un procesador de celular de gama media probablemente sea más lento que el de esta PC. El 4B no se midió sin placa de video.
+        </p>
+      </div>
       <div class="slm-grid">
         <div class="slm-card" id="card-memoria">
           <h3>Memoria del detector más el reconocimiento de voz</h3>
@@ -300,13 +319,51 @@
             <span class="slm-v dash-skeleton" data-source="memoria_pipeline" data-field="entra_en" data-where="id=q08" data-fmt="t">—</span>, con
             <span class="slm-v dash-skeleton" data-source="memoria_pipeline" data-field="margen_alta_mb" data-where="id=q08">—</span> MB de margen.
             El 2B se pasa por <span class="slm-v dash-skeleton" data-source="memoria_pipeline" data-field="exceso_alta_mb" data-where="id=q2">—</span> MB.
+            Sin placa de video ocupa casi lo mismo:
+            <span class="slm-v dash-skeleton" data-source="velocidad" data-field="memoria_mb" data-where="clave=q08|cpu">—</span> MB el 0.8B y
+            <span class="slm-v dash-skeleton" data-source="velocidad" data-field="memoria_mb" data-where="clave=q2|cpu">—</span> MB el 2B.
             Es la memoria que informa Ollama en la PC, con el contexto del ensayo; en un celular, con otro motor, puede cambiar.
           </p>
         </div>
-        <div class="slm-card" id="card-velocidad">
-          <h3>Tiempo de respuesta por línea</h3>
-          <p class="slm-note">Medido en la PC con placa de video. Falta medir solo con CPU y dos hilos, que se parece más a un celular (ver Paso a paso).</p>
-          <div class="slm-chart dash-skeleton" id="grafico-velocidad" data-source="detectores"></div>
+        <div class="slm-card" id="card-cpu-vs-gpu">
+          <h3>¿Cambian los resultados sin placa de video?</h3>
+          <p class="slm-note">Misma configuración y mismas 14 conversaciones. Cambian algunos valores de riesgo, pero casi no cambia cuándo avisa.</p>
+          <div class="slm-table-box">
+            <table id="tabla-cpu-vs-gpu" data-source="cpu_vs_gpu" data-row-key="detector">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th class="slm-num" data-field="lineas">Líneas</th>
+                <th class="slm-num" data-field="riesgos_distintos">Otro riesgo</th>
+                <th class="slm-num" data-field="alertas_distintas">Otra alerta</th>
+                <th class="slm-num" data-field="conversaciones_con_otro_resultado">Otro resultado</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="slm-table-box">
+            <table id="tabla-cpu-vs-gpu-totales" data-source="cpu_vs_gpu" data-row-key="detector">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th class="slm-num" data-field="vishing_con_aviso_gpu">Estafas con aviso, con placa</th>
+                <th class="slm-num" data-field="vishing_con_aviso_cpu">Solo CPU</th>
+                <th class="slm-num" data-field="falsas_alarmas_gpu">Falsas alarmas, con placa</th>
+                <th class="slm-num" data-field="falsas_alarmas_cpu">Solo CPU</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="slm-note">Las conversaciones que cambiaron (mismo código que en la tabla caso por caso):</p>
+          <div class="slm-table-box">
+            <table id="tabla-cpu-vs-gpu-casos" data-source="cpu_vs_gpu_casos" data-row-key="clave">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th data-field="caso">Conversación</th>
+                <th data-field="placa_de_video">Con placa</th>
+                <th data-field="solo_cpu">Solo CPU</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -400,7 +457,7 @@
         <ul class="slm-list">
           <li>Son conversaciones escritas por el equipo con ayuda de agentes, no llamadas reales ni audio: no miden los errores del reconocimiento de voz.</li>
           <li>No son una muestra al azar de llamadas. Los porcentajes sirven para comparar detectores entre sí sobre estos casos, no para estimar cómo andaría en la calle.</li>
-          <li>Todo corrió en una sola PC con placa de video. La memoria y el tiempo son los de esa PC, no los de un celular.</li>
+          <li>Todo corrió en una sola PC de escritorio, con y sin placa de video. La memoria y el tiempo son los de esa PC: no se midió en un celular.</li>
           <li>Una corrida por modelo (el 2B, dos), todas con el prompt v1 y diciéndole al modelo quién habla (A/B).</li>
           <li>La clasificación de los avisos la hicieron revisores automáticos; falta que una persona revise una muestra.</li>
           <li>En los casos escritos quien llama suele aparecer primero, y en las legítimas suele atender la entidad: un modelo podría acertar por cómo empieza la llamada.</li>
@@ -503,7 +560,8 @@
   const fmtPval = (p) => (p >= 0.01 ? es.format('.2f')(p) : es.format('.4f')(p));
   const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
   const fmtFecha = (f) => (/^\d{4}-\d{2}-\d{2}$/.test(f) ? `${Number(f.slice(8, 10))} ${MESES[Number(f.slice(5, 7)) - 1]} ${f.slice(0, 4)}` : f);
-  const FORMATOS = { n: (v) => fmtN(v), t: (v) => String(v) };
+  const fmtS1 = es.format('.1f');
+  const FORMATOS = { n: (v) => fmtN(v), t: (v) => String(v), s1: (v) => fmtS1(v) };
   const COLOR = { reglas: 'var(--cds-chart-muted)', q08: dash.colors[0], q2: dash.colors[1], q4: dash.colors[2] };
   const SLM = ['q08', 'q2', 'q4'];
   const CATEGORIA_COLOR = {
@@ -868,37 +926,53 @@
   }
 
   function dibujarVelocidad(box) {
-    const d = dash.data('detectores');
-    if (!lista(box, d)) return;
-    const rs = d.data.filter((r) => r.ms_p50 != null);
-    leyenda(box, [[sw(null, 'slm-sw-dot'), 'Mediana: la mitad de las líneas tarda menos'], [sw('var(--color-fg-muted)', 'slm-sw-line'), 'Hasta el percentil 95']]);
+    const d = dash.data('velocidad');
+    const u = dash.data('umbrales');
+    if (!lista(box, d.status === 'ok' ? u : d)) return;
+    const rs = d.data;
+    const umbrales = filas(u).slice().sort((a, b) => a.p95_s - b.p95_s);
+    leyenda(box, [[sw(null, 'slm-sw-dot'), 'Mediana: la mitad de las líneas tarda menos'], [sw('var(--color-fg-muted)', 'slm-sw-line'), 'Hasta el percentil 95'], [el('span', 'slm-sw-dash'), 'Objetivo y límite de latencia']]);
     const chart = el('div', 'slm-chart');
     box.append(chart);
-    const filaAlto = 30, arriba = 4, abajo = 40;
+    const filaAlto = 30, arriba = umbrales.length * 15 + 6, abajo = 40;
     const alto = arriba + rs.length * filaAlto + abajo;
-    const { svg, ancho } = nuevoSvg(chart, alto, 'Milisegundos por línea, mediana y percentil 95, por modelo');
-    const finales = rs.map((r) => `${fmtN(r.ms_p50)} · ${fmtN(r.ms_p95)} ms`);
-    const izq = medir(svg, rs.map((r) => r.nombre), 'slm-label') + 12;
+    const { svg, ancho } = nuevoSvg(chart, alto, 'Segundos por línea, mediana y percentil 95, con y sin placa de video');
+    const finales = rs.map((r) => `${fmtS1(r.s_p50)} · ${fmtS1(r.s_p95)} s`);
+    const izq = medir(svg, rs.map((r) => r.etiqueta), 'slm-label') + 12;
     const der = medir(svg, finales, 'slm-end') + 14;
-    const x = d3.scaleLinear([0, d3.max(rs, (r) => Number(r.ms_p95))], [izq, ancho - der]).nice();
+    const x = d3.scaleLinear([0, Math.max(d3.max(rs, (r) => Number(r.s_p95)), d3.max(umbrales, (r) => Number(r.p95_s)))], [izq, ancho - der]).nice();
     const y = (i) => arriba + i * filaAlto + filaAlto / 2;
-    const marcas = x.ticks(ancho - der - izq < 220 ? 2 : 4);
+    const marcas = x.ticks(ancho - der - izq < 220 ? 3 : 6);
     svg.append('g').selectAll('line').data(marcas).join('line').attr('class', 'slm-grid-line')
       .attr('x1', (v) => x(v)).attr('x2', (v) => x(v)).attr('y1', arriba).attr('y2', alto - abajo);
     svg.append('g').selectAll('text').data(marcas).join('text').attr('class', 'slm-tick')
       .attr('x', (v) => x(v)).attr('y', alto - abajo + 16).attr('text-anchor', 'middle').text((v) => fmtN(v));
-    svg.append('text').attr('class', 'slm-tick').attr('x', (izq + ancho - der) / 2).attr('y', alto - 4).attr('text-anchor', 'middle').text('milisegundos por línea');
+    svg.append('text').attr('class', 'slm-tick').attr('x', (izq + ancho - der) / 2).attr('y', alto - 4).attr('text-anchor', 'middle').text('segundos por línea');
+    umbrales.forEach((g, j) => {
+      const xr = x(Number(g.p95_s));
+      svg.append('line').attr('class', 'slm-ref').attr('x1', xr).attr('x2', xr).attr('y1', j * 15 + 6).attr('y2', alto - abajo);
+      const lbl = svg.append('text').attr('class', 'slm-ref-label').attr('x', xr + 4).attr('y', j * 15 + 11).text(`${g.umbral} · ${fmtS1(g.p95_s)} s`);
+      if (xr + 4 + lbl.node().getComputedTextLength() > ancho) lbl.attr('x', xr - 4).attr('text-anchor', 'end');
+    });
     const t = tooltip(chart);
     rs.forEach((r, i) => {
-      svg.append('text').attr('class', 'slm-label').attr('x', izq - 12).attr('y', y(i)).attr('dy', '0.32em').attr('text-anchor', 'end').text(r.nombre);
-      svg.append('line').attr('class', 'slm-ci').style('stroke', COLOR[r.id]).attr('x1', x(r.ms_p50)).attr('x2', x(r.ms_p95)).attr('y1', y(i)).attr('y2', y(i));
-      svg.append('line').attr('class', 'slm-line').style('stroke', COLOR[r.id]).attr('x1', x(r.ms_p95)).attr('x2', x(r.ms_p95)).attr('y1', y(i) - 6).attr('y2', y(i) + 6);
-      svg.append('circle').attr('class', 'slm-dot').style('fill', COLOR[r.id]).attr('r', 5).attr('cx', x(r.ms_p50)).attr('cy', y(i));
+      svg.append('text').attr('class', 'slm-label').attr('x', izq - 12).attr('y', y(i)).attr('dy', '0.32em').attr('text-anchor', 'end').text(r.etiqueta);
+      svg.append('line').attr('class', 'slm-ci').style('stroke', COLOR[r.detector]).attr('x1', x(r.s_p50)).attr('x2', x(r.s_p95)).attr('y1', y(i)).attr('y2', y(i));
+      svg.append('line').attr('class', 'slm-line').style('stroke', COLOR[r.detector]).attr('x1', x(r.s_p95)).attr('x2', x(r.s_p95)).attr('y1', y(i) - 6).attr('y2', y(i) + 6);
+      svg.append('circle').attr('class', 'slm-dot').style('fill', COLOR[r.detector]).attr('r', 5).attr('cx', x(r.s_p50)).attr('cy', y(i));
       svg.append('text').attr('class', 'slm-end').attr('x', ancho - der + 14).attr('y', y(i)).attr('dy', '0.32em').text(finales[i]);
       svg.append('rect').attr('class', 'slm-hit').attr('x', 0).attr('width', ancho).attr('y', y(i) - filaAlto / 2).attr('height', filaAlto)
         .on('pointerenter pointermove', (ev) => {
           const [px, py] = d3.pointer(ev, chart);
-          mostrar(chart, t, [cabeza(r.nombre), renglon(COLOR[r.id], 'Mediana', `${fmtN(r.ms_p50)} ms`), renglon(null, 'Percentil 95', `${fmtN(r.ms_p95)} ms`)], px, py);
+          const nodos = [
+            cabeza(`${r.nombre} · ${r.hardware}`),
+            renglon(COLOR[r.detector], 'Mediana', `${fmtS1(r.s_p50)} s`),
+            renglon(null, 'Percentil 95', `${fmtS1(r.s_p95)} s`),
+            renglon(null, 'Máximo', `${fmtS1(r.s_max)} s`),
+          ];
+          if (r.s_aviso_p50 != null) nodos.push(renglon(null, 'Líneas con aviso (mediana)', `${fmtS1(r.s_aviso_p50)} s`));
+          nodos.push(renglon(null, 'Memoria', `${fmtN(r.memoria_mb)} MB`), renglon(null, 'Conversaciones', fmtN(r.conversaciones)));
+          mostrar(chart, t, nodos, px, py);
         })
         .on('pointerleave', () => { t.hidden = true; });
     });
@@ -1081,6 +1155,9 @@
     tablaDe('fundamento', document.getElementById('tabla-fundamento'));
     tablaDe('detectores', document.getElementById('tabla-momento'));
     tablaDe('repeticion_casos', document.getElementById('tabla-repeticion'));
+    tablaDe('cpu_vs_gpu', document.getElementById('tabla-cpu-vs-gpu'));
+    tablaDe('cpu_vs_gpu', document.getElementById('tabla-cpu-vs-gpu-totales'));
+    tablaDe('cpu_vs_gpu_casos', document.getElementById('tabla-cpu-vs-gpu-casos'));
     dibujarCasos();
     dibujarLeyendaTrayectorias(document.getElementById('leyenda-trayectorias'));
     dibujarPasos(document.getElementById('lista-pasos'));

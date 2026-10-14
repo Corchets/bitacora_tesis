@@ -1,0 +1,16 @@
+[
+ {
+  "clave": "q08|SC-FAMILIAR-DINERO-01-e01",
+  "nombre": "qwen3.5 0.8B",
+  "caso": "SC-FAMILIAR-DINERO-01-e01",
+  "placa_de_video": "=R L9",
+  "solo_cpu": "<R L8"
+ },
+ {
+  "clave": "q08|SC-PREMIO-01-e01",
+  "nombre": "qwen3.5 0.8B",
+  "caso": "SC-PREMIO-01-e01",
+  "placa_de_video": "=R L8",
+  "solo_cpu": "<R L6"
+ }
+]

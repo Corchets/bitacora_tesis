@@ -50,10 +50,10 @@
  },
  {
   "orden": 8,
-  "tema": "Celular",
+  "tema": "Celular y latencia",
   "decide": "D09",
-  "pregunta": "¿Cuánto tarda cada modelo solo con CPU y 2 hilos? ¿Cuándo y en qué teléfono medimos de verdad?",
-  "por_que": "Todo lo medido hasta ahora usó la placa de video de una PC; un celular no la tiene."
+  "pregunta": "Solo con CPU, ni el 0.8B se acerca al objetivo de latencia (95% de las líneas en 1,5 s o menos). ¿Achicamos lo que el modelo escribe, probamos un modelo más chico o dejamos de llamar al SLM en cada línea?",
+  "por_que": "Con 2 hilos, el 95% de las líneas tarda hasta 7,3 s con el 0.8B y 13 s con el 2B, y las líneas con aviso tardan casi el doble porque el modelo escribe el motivo y la cita. La cascada del #27 llamaba al SLM solo en algunos turnos, pero en el laboratorio empeoró la detección."
  },
  {
   "orden": 9,

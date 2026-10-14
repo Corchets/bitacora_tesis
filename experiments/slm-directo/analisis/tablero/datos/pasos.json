@@ -65,10 +65,10 @@
  },
  {
   "orden": 9,
-  "fecha": "Pendiente",
+  "fecha": "2026-10-14",
   "etapa": "Medición solo con CPU",
-  "que_se_hizo": "Correr 0.8B y 2B sin placa de video y con 2 hilos, como el presupuesto de gama alta.",
-  "resultado": "Va a dar una velocidad más parecida a la de un celular.",
-  "donde": "python correr.py … --solo-cpu --hilos 2"
+  "que_se_hizo": "Corrimos 0.8B y 2B sin placa de video y con 2 hilos, los que el documento de prefactibilidad le da al detector en gama alta, sobre las 14 conversaciones del piloto escrito.",
+  "resultado": "Los resultados casi no cambian: el 2B dio lo mismo en las 14 y el 0.8B adelantó el aviso en 2. Pero cada línea tarda unas 15 veces más: mediana de 3,9 s con el 0.8B y 8,2 s con el 2B, cuando el objetivo del documento es que el 95% tarde como mucho 1,5 s.",
+  "donde": "corridas/2026-10-14_191429_cpu-2hilos"
  }
 ]
