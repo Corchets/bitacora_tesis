@@ -275,7 +275,9 @@ class TestClienteYDetectorContraOllamaFalso(unittest.TestCase):
         caido = DetectorSLM(ClienteOllama("http://127.0.0.1:9", timeout_s=2), "m", cargar_prompt("tarea"))
         r = caido.evaluar(DIALOGO[:1])
         self.assertFalse(r.valida)
-        self.assertTrue(r.error.startswith("sin_conexion"), r.error)
+        # Linux y macOS rechazan la conexión enseguida (sin_conexion); Windows la reintenta
+        # unos segundos y puede llegar antes el timeout. Las dos quedan como fallo.
+        self.assertTrue(r.error.startswith(("sin_conexion", "timeout")), r.error)
 
 
 class TestCorridaDePuntaAPunta(unittest.TestCase):

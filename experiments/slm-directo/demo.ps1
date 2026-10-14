@@ -49,8 +49,10 @@ function Preguntar([string]$Texto) {
   return ($respuesta -eq "" -or $respuesta -match "^[sSyY]")
 }
 
+# Una ventana abierta antes de instalar un programa no ve el PATH nuevo. Se agrega lo que
+# esta registrado en Windows, sin quitar lo que la ventana ya tenia.
 function Refrescar-Path {
-  $env:Path = [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User")
+  $env:Path = $env:Path + ";" + [Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [Environment]::GetEnvironmentVariable("Path", "User")
 }
 
 function Buscar-Python {
@@ -61,8 +63,8 @@ function Buscar-Python {
   )
   foreach ($c in $candidatos) {
     # -CommandType Application: buscar solo programas instalados, nunca funciones de este script.
-    $programa = Get-Command $c.Exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
-    if ($programa) {
+    # -All: revisar cada copia del PATH, no solo la primera (puede ser el atajo de Microsoft Store).
+    foreach ($programa in @(Get-Command $c.Exe -CommandType Application -All -ErrorAction SilentlyContinue)) {
       # El "python" de Microsoft Store es un atajo que no ejecuta nada: devuelve un codigo distinto de 0.
       & $programa.Source @($c.Args) -c "import sys; sys.exit(0 if sys.version_info >= (3, 9) else 1)" 2>$null | Out-Null
       if ($LASTEXITCODE -eq 0) {
@@ -84,7 +86,7 @@ function Instalar-Con-Winget([string]$Id, [string]$Nombre, [string]$Pagina) {
   if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
     Terminar "No encuentro winget para instalar $Nombre. Instalalo desde $Pagina y volve a correr este script."
   }
-  if (-not (Preguntar "Falta $Nombre. Lo instalo con winget?")) {
+  if (-not (Preguntar "Instalo $Nombre con winget?")) {
     Terminar "Instalalo desde $Pagina y volve a correr este script."
   }
   & winget install -e --id $Id --accept-source-agreements --accept-package-agreements
@@ -105,8 +107,11 @@ function Servidor-Listo {
   }
 }
 
+Refrescar-Path
+
 Paso "1/6 Python"
 if (-not (Buscar-Python)) {
+  Write-Host "No encuentro Python 3.9 o posterior."
   Instalar-Con-Winget "Python.Python.3.12" "Python 3.12" "https://www.python.org/downloads/"
   if (-not (Buscar-Python)) {
     Terminar "Python quedo instalado pero esta ventana no lo ve. Cerra PowerShell, abri una nueva y volve a correr el script."
