@@ -52,8 +52,8 @@
   "orden": 8,
   "tema": "Celular y latencia",
   "decide": "D09",
-  "pregunta": "Solo con CPU, ni el 0.8B se acerca al objetivo de latencia (95% de las líneas en 1,5 s o menos). ¿Achicamos lo que el modelo escribe, probamos un modelo más chico o dejamos de llamar al SLM en cada línea?",
-  "por_que": "Con 2 hilos, el 95% de las líneas tarda hasta 7,3 s con el 0.8B y 13 s con el 2B, y las líneas con aviso tardan casi el doble porque el modelo escribe el motivo y la cita. La cascada del #27 llamaba al SLM solo en algunos turnos, pero en el laboratorio empeoró la detección."
+  "pregunta": "Solo con CPU, ni el 0.8B se acerca al objetivo de latencia (95% de las líneas en 1,5 s o menos). ¿Probamos modelos más chicos o dejamos de llamar al SLM en cada línea?",
+  "por_que": "Con 2 hilos, el 95% de las líneas tarda hasta 7,3 s con el 0.8B y 13 s con el 2B. Achicar lo que escribe no alcanza: las líneas sin alerta ya tardan 3,4 s y 7,6 s de mediana. La cascada del #27 llamaba al SLM solo en algunos turnos, pero en el laboratorio empeoró la detección."
  },
  {
   "orden": 9,

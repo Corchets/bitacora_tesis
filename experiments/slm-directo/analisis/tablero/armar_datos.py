@@ -212,10 +212,10 @@ def main() -> int:
     def segundos(ms):
         return None if ms is None else round(ms / 1000, 2)
 
-    def tiempos(filas, cs):
-        """Segundos por línea de unas filas: mediana, p95, máximo y mediana de las líneas con aviso."""
-        ms = [float(f["ms"]) for f in filas if f["ms"] != ""]
-        aviso = [float(f["ms"]) for f in filas if f["aviso"] == "true"]
+    def tiempos(cs):
+        """Segundos por línea válida de unos casos: mediana, p95, máximo y mediana de las líneas del aviso."""
+        ms = [x for c in cs.values() for x in c["ms"]]
+        aviso = [float(c["aviso_fila"]["ms"]) for c in cs.values() if c["aviso_fila"]]
         m = resumen.metricas(cs)
         return {
             "lineas": len(ms), "s_p50": segundos(m["ms_p50"]), "s_p95": segundos(m["ms_p95"]),
@@ -226,12 +226,14 @@ def main() -> int:
     for d in DETECTORES[1:]:
         manifiesto, filas, cs = corridas[d["id"]]
         sub = {k: v for k, v in cs.items() if k in casos_cpu}
-        f_gpu = [f for f in filas if f["case_id"] in casos_cpu]
+        cfg_gpu = manifiesto["configs"][0]["config"]
+        f_gpu = [f for f in filas if f["case_id"] in casos_cpu and f["config"] == cfg_gpu]
         mem = next(iter(manifiesto["modelos"].values()))["memoria"]
+        corto = d["nombre"].split()[-1]
         velocidad.append({
             "clave": f"{d['id']}|gpu", "detector": d["id"], "nombre": d["nombre"], "hardware": "Placa de video",
-            "etiqueta": f"{d['nombre']} · placa de video", "corrida": d["corrida"], "conversaciones": len(sub),
-            **tiempos(f_gpu, sub), "memoria_mb": round(mem["size_bytes"] / 1024**2),
+            "etiqueta": f"{corto} · con placa", "corrida": d["corrida"], "conversaciones": len(sub),
+            **tiempos(sub), "memoria_mb": round(mem["size_bytes"] / 1024**2),
         })
         if d["id"] not in CONFIG_CPU:
             continue
@@ -241,8 +243,8 @@ def main() -> int:
         mem_cpu = m_cpu["modelos"][cfg.split("|")[1]]["memoria"]
         velocidad.append({
             "clave": f"{d['id']}|cpu", "detector": d["id"], "nombre": d["nombre"], "hardware": "Solo CPU, 2 hilos",
-            "etiqueta": f"{d['nombre']} · solo CPU", "corrida": CORRIDA_CPU, "conversaciones": len(cs_cpu),
-            **tiempos(f_cpu, cs_cpu), "memoria_mb": round(mem_cpu["size_bytes"] / 1024**2),
+            "etiqueta": f"{corto} · solo CPU", "corrida": CORRIDA_CPU, "conversaciones": len(cs_cpu),
+            **tiempos(cs_cpu), "memoria_mb": round(mem_cpu["size_bytes"] / 1024**2),
         })
         G = {(f["case_id"], f["linea"]): f for f in f_gpu}
         C = {(f["case_id"], f["linea"]): f for f in f_cpu}

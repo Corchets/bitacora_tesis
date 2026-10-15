@@ -230,9 +230,9 @@ El manifiesto registra esas opciones en `parametros_slm.hardware`. Sigue siendo 
 PC x86, no un ARM; sirve como cota, no como medición del teléfono.
 
 Primera medición (2026-10-14, [`cpu-2hilos`](corridas/2026-10-14_191429_cpu-2hilos/resumen.md),
-0.8B y 2B sobre el piloto escrito): los resultados casi no cambian, pero el tiempo por
-línea sube unas 15 veces (mediana de 3,9 s y 8,2 s; p95 de 7,3 s y 13,0 s). Ninguno
-cumple el gate de latencia por turno de PREFACTIBILIDAD-TECNICA (p95 ≤ 1,5 s).
+0.8B y 2B sobre el piloto escrito): los totales no cambian, pero la mediana por línea
+sube unas 15 veces (3,9 s y 8,2 s) y el p95 unas 11 (7,3 s y 13,0 s). Ninguno cumple el
+gate de latencia por turno de PREFACTIBILIDAD-TECNICA (p95 ≤ 1,5 s).
 
 Lo medido en una PC con Ollama **no es una medición en Android**
 ([R13](../../docs/gestion/REGISTRO-RIESGOS.md)): sirve para ordenar candidatos, no para
@@ -266,7 +266,7 @@ afirmar rendimiento móvil.
 | 2026-10-14 | `qwen3.5:0.8b` sobre los 53 casos (prompt `tarea`, hablantes `ab`), en la misma PC: [`corridas/2026-10-14_173532_demo-qwen3.5-0.8b`](corridas/2026-10-14_173532_demo-qwen3.5-0.8b/resumen.md). El resumen se reprodujo idéntico a partir de los datos crudos. | 464 respuestas válidas. Aviso en 26 de 29 vishing y falsa alarma en 8 de 24 legítimas (reglas: 23/29 y 14/24). Mejor que las reglas en piloto y trampas (falsas alarmas 2/7 y 2/7, contra 7/7 y 6/7) y peor en las legítimas del laboratorio (4/10 contra 1/10). Pero **el riesgo es binario** (solo 0 o 1) y **el modelo inventa pedidos**: los 7 avisos «antes del pedido» y las falsas alarmas en llamadas de banco dicen «te están pidiendo un código» cuando nadie lo pidió todavía. Reacciona al contexto (banco + urgencia), no al pedido, así que esos avisos tempranos no son anticipación. 545 MB de memoria y 0,28 s por línea (p50) con GPU: el único tamaño probado cerca del presupuesto de gama alta. |
 | 2026-10-14 | `qwen3.5:2b` sobre los 53 casos, **dos veces con la misma configuración**: [`172930`](corridas/2026-10-14_172930_demo-qwen3.5-2b/resumen.md) y [`175451`](corridas/2026-10-14_175451_demo-qwen3.5-2b/resumen.md). Se suma el `manifiesto.json` de la primera demo ([`172248`](corridas/2026-10-14_172248_demo-qwen3.5-2b/resumen.md)). | Aviso en 20 y 21 de 29 vishing y falsa alarma en **2 de 24** legítimas (`TR-03`, consejo lleno de negaciones; `TR-05`, transferencia entre amigos). Riesgo graduado (13 valores distintos). Falla en pedidos indirectos y en varios guiones del laboratorio (`LAB-arca-deuda`, `LAB-giro-sin-plata`, `LAB-digitos-sin-palabra`). **Las dos corridas iguales no dieron lo mismo**: difieren 60 de 464 respuestas y el resultado de 2 casos (`LAB-pantalla-sin-programa` avisa en una y no en la otra; `TR-09` avisa en L7 o L6). Con temperatura 0 y semilla fija, en esta PC con GPU no hay determinismo: hay que repetir cada configuración e informar la variación. 2,2 GB y 0,52 s por línea. |
 | 2026-10-14 | `qwen3.5:4b` sobre los 53 casos ([`174602`](corridas/2026-10-14_174602_demo-qwen3.5-4b/resumen.md)) y demo de 8 ([`182137`](corridas/2026-10-14_182137_demo-qwen3.5-4b/resumen.md)). | Aviso en **29 de 29** vishing, pero falsa alarma en **15 de 24** (más que las reglas) y 17 avisos antes del pedido. Marca alerta en 220 de 464 líneas: avisa por sospecha de suplantación («te están simulando ser soporte») y trata pedidos relatados como actuales («me llamaron para que baje un programa»). 2,9 GB y 0,90 s por línea. Con el prompt v1, más grande no fue mejor: fue más alarmista. |
-| 2026-10-14 | **Solo CPU, 2 hilos**: `qwen3.5:0.8b` y `qwen3.5:2b` con `--solo-cpu --hilos 2` sobre las 14 conversaciones del piloto escrito, en la misma PC: [`corridas/2026-10-14_191429_cpu-2hilos`](corridas/2026-10-14_191429_cpu-2hilos/resumen.md). El manifiesto registra `num_gpu: 0` y `num_thread: 2`, y Ollama informa 0 MB en GPU. | 322 respuestas del SLM (161 por modelo), todas válidas. **Los resultados casi no cambian**: el 2B dio el mismo resultado que las dos corridas con GPU en las 14 conversaciones (contra la primera, 13 de 161 líneas con otro riesgo y 1 con otra alerta); el 0.8B adelantó el aviso en `SC-FAMILIAR-DINERO-01-e01` (L9 → L8) y `SC-PREMIO-01-e01` (L8 → L6), con los mismos totales (7/7 y 2/7). **El tiempo sí**: mediana de 3,9 s por línea con el 0.8B y 8,2 s con el 2B (con GPU, 0,27 y 0,52 s en esas mismas conversaciones), p95 de 7,3 s y 13,0 s, máximo de 9,1 s y 20,9 s. Las líneas donde avisa tardan casi el doble (el modelo escribe motivo y cita): el aviso del 2B llegaría unos 11,7 s después de la frase del pedido. Ambos quedan muy lejos del gate de latencia de [PREFACTIBILIDAD-TECNICA](../../docs/investigacion/PREFACTIBILIDAD-TECNICA.md) (p95 ≤ 1,5 s; más de 2,0 s no es aceptable). La memoria es casi la misma: 547 MB y 2,2 GB. Las reglas, que corren en la misma tanda, dieron idéntico a la línea base. Es una PC x86 de escritorio, no un teléfono. |
+| 2026-10-14 | **Solo CPU, 2 hilos**: `qwen3.5:0.8b` y `qwen3.5:2b` con `--solo-cpu --hilos 2` sobre las 14 conversaciones del piloto escrito, en la misma PC: [`corridas/2026-10-14_191429_cpu-2hilos`](corridas/2026-10-14_191429_cpu-2hilos/resumen.md). El manifiesto registra `num_gpu: 0` y `num_thread: 2`, y Ollama informa 0 MB en GPU. | 322 respuestas del SLM (161 por modelo), todas válidas. **Los totales no cambian**: el 2B dio el mismo resultado que las dos corridas con GPU en las 14 conversaciones (contra la primera, 13 de 161 líneas con otro riesgo y 1 con otra alerta). El 0.8B mantuvo 7/7 y 2/7, pero pasó a avisar antes del pedido en `SC-FAMILIAR-DINERO-01-e01` (L8 en vez de L9) y `SC-PREMIO-01-e01` (L6 en vez de L8), las dos veces diciendo que piden un «código» que nadie pidió: no es anticipación. **El tiempo sí**: mediana de 3,9 s por línea con el 0.8B y 8,2 s con el 2B (con GPU, 0,27 y 0,52 s en esas mismas conversaciones), p95 de 7,3 s y 13,0 s, máximo de 9,1 s y 20,9 s. Las líneas con alerta tardan casi el doble que las otras (el modelo escribe motivo y cita), pero las otras ya tardan 3,4 s y 7,6 s de mediana y ninguna bajó de 2 s. El aviso del 2B llegaría al menos 11,7 s después de la frase del pedido (mediana de esas líneas), y más si las líneas se encolan. Ambos quedan muy lejos del gate de latencia de [PREFACTIBILIDAD-TECNICA](../../docs/investigacion/PREFACTIBILIDAD-TECNICA.md) (p95 ≤ 1,5 s; más de 2,0 s no es aceptable). La memoria es casi la misma: 547 MB y 2,2 GB. Las reglas, que corren en la misma tanda, dieron idéntico a la línea base. Es una PC x86 de escritorio, no un teléfono. |
 
 Cada corrida real se anota acá: fecha, quién, máquina, comando, carpeta y una línea
 con lo observado. Las conclusiones van en `resumen.md` de esa corrida y, cuando
@@ -346,7 +346,8 @@ deja la duda en `notas` de su referencia. Las de anotación corresponden a
 ## 13. Primera escalera (2026-10-14)
 
 > **Estado: propuesta sin discutir.** Casos escritos de desarrollo, prompt v1 y una
-> sola PC con GPU. Describe conductas; no mide rendimiento ni elige modelo.
+> sola PC, con GPU y una prueba solo con CPU. Describe conductas y tiempos en esa PC; no
+> mide rendimiento en un teléfono ni elige modelo.
 
 | Detector | Vishing con aviso | Falsas alarmas | Avisos apoyados en un pedido real | Memoria | Tiempo por línea (GPU) |
 |---|---|---|---|---|---|
@@ -374,13 +375,15 @@ primer aviso, hecha por dos revisores automáticos que coincidieron en 99 de 100
   cambio candidato para un prompt v2, junto con aclarar que un pedido relatado o
   negado no cuenta.
 
-- **Sin placa de video no llega a tiempo.** Solo con CPU y 2 hilos, los resultados casi
-  no cambian, pero el 95% de las líneas tarda hasta 7,3 s con el 0.8B y 13,0 s con el
-  2B, contra un objetivo de 1,5 s (gate propuesto en
-  [PREFACTIBILIDAD-TECNICA](../../docs/investigacion/PREFACTIBILIDAD-TECNICA.md), todavía
-  sin ratificar). Esta configuración (un SLM que escribe motivo y cita en cada línea)
-  falla la latencia en esta PC aun sin el reconocimiento de voz; según la regla de ese
-  documento, eso descarta la configuración, no necesariamente la idea.
+- **Sin placa de video no llega a tiempo.** Solo con CPU y 2 hilos, en las 14
+  conversaciones del piloto escrito, los totales no cambian, pero el 95% de las líneas
+  tarda hasta 7,3 s con el 0.8B y 13,0 s con el 2B, contra un objetivo de 1,5 s (gate de
+  [PREFACTIBILIDAD-TECNICA](../../docs/investigacion/PREFACTIBILIDAD-TECNICA.md),
+  aprobado por el equipo en #24). Esta configuración (un SLM consultado en cada línea con
+  todo lo dicho antes) falla la latencia en esta PC aun sin el reconocimiento de voz, y
+  achicar la salida no alcanza: las líneas sin alerta ya tardan 3,4 s y 7,6 s de mediana.
+  Según la regla de ese documento, eso descarta la configuración, no necesariamente la
+  arquitectura.
 
 **Tablero.** Los gráficos, las estadísticas (intervalos del 95% y comparaciones de a
 pares), el paso a paso y las preguntas abiertas están en

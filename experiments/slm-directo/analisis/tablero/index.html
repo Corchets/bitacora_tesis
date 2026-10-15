@@ -135,7 +135,9 @@
     </p>
     <p class="slm-takeaway" id="conclusion-cpu">
       <b>Y sin placa de video no llega a tiempo.</b>
-      Solo con CPU y 2 hilos, el 95% de las líneas tarda hasta
+      Solo con CPU y 2 hilos, en las
+      <span class="slm-v dash-skeleton" data-source="velocidad" data-field="conversaciones" data-where="clave=q2|cpu">—</span> conversaciones del piloto escrito,
+      el 95% de las líneas tarda hasta
       <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_p95" data-where="clave=q08|cpu" data-fmt="s1">—</span> s con el 0.8B y
       <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_p95" data-where="clave=q2|cpu" data-fmt="s1">—</span> s con el 2B;
       el objetivo del documento de prefactibilidad es
@@ -145,7 +147,7 @@
       <span class="slm-v dash-skeleton" data-source="conteo" data-field="conversaciones" data-row="0">—</span> conversaciones escritas
       (<span class="slm-v dash-skeleton" data-source="conteo" data-field="estafas" data-row="0">—</span> estafas y
       <span class="slm-v dash-skeleton" data-source="conteo" data-field="legitimas" data-row="0">—</span> legítimas) · prompt v1 ·
-      modelos qwen3.5 en Ollama · una PC, con y sin placa de video · sin revisión humana todavía.
+      modelos qwen3.5 en Ollama · una PC con placa de video (y una prueba solo con CPU) · sin revisión humana todavía.
     </p>
     <p class="slm-estado"><b>Estado: propuesta sin discutir.</b> Muestra lo que dio el ensayo; no elige modelo (D09) ni política de aviso (D08).</p>
   </header>
@@ -300,12 +302,13 @@
       <p class="slm-lead">El producto tiene que correr en el teléfono, sin placa de video. Acá se compara cuánto tarda cada línea y cuánta memoria ocupa cada modelo con los objetivos del documento de prefactibilidad. Todavía no se midió en un teléfono: es la misma PC, con y sin placa de video.</p>
       <div class="slm-card" id="card-velocidad">
         <h3>Tiempo por línea, con y sin placa de video</h3>
-        <p class="slm-note">Las mismas 14 conversaciones del piloto escrito, en la misma PC. Punto: mediana; la línea llega hasta el percentil 95. Líneas punteadas: objetivo y límite de latencia por turno del documento de prefactibilidad, medidos sobre el percentil 95.</p>
+        <p class="slm-note">Las mismas conversaciones del piloto escrito, en la misma PC. Punto: mediana; la línea llega hasta el percentil 95. Líneas punteadas: objetivo y límite de latencia por turno del documento de prefactibilidad, medidos sobre el percentil 95.</p>
         <div class="slm-chart dash-skeleton" id="grafico-velocidad" data-source="velocidad umbrales"></div>
         <p class="slm-note">
-          Solo con CPU, el aviso del 2B llegaría unos
+          Solo con CPU, el aviso del 2B llegaría al menos
           <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_aviso_p50" data-where="clave=q2|cpu" data-fmt="s1">—</span> s después de que termina la frase del pedido
-          (mediana de las líneas donde avisó), sin contar el reconocimiento de voz: esas líneas tardan más porque el modelo escribe el motivo y la cita.
+          (mediana de las líneas donde avisó), sin contar el reconocimiento de voz, y más si las líneas llegan más rápido de lo que el modelo las procesa.
+          Las líneas con alerta tardan más porque el modelo escribe el motivo y la cita, pero achicar la salida no alcanza: las líneas sin alerta también quedan lejos del objetivo.
           Un procesador de celular de gama media probablemente sea más lento que el de esta PC. El 4B no se midió sin placa de video.
         </p>
       </div>
@@ -327,7 +330,7 @@
         </div>
         <div class="slm-card" id="card-cpu-vs-gpu">
           <h3>¿Cambian los resultados sin placa de video?</h3>
-          <p class="slm-note">Misma configuración y mismas 14 conversaciones. Cambian algunos valores de riesgo, pero casi no cambia cuándo avisa.</p>
+          <p class="slm-note">Misma configuración y mismas conversaciones del piloto escrito. El 2B dio el mismo resultado en todas. El 0.8B cambió dos: avisó antes del pedido, diciendo que pedían un código que nadie pidió.</p>
           <div class="slm-table-box">
             <table id="tabla-cpu-vs-gpu" data-source="cpu_vs_gpu" data-row-key="detector">
               <thead><tr>
@@ -457,8 +460,8 @@
         <ul class="slm-list">
           <li>Son conversaciones escritas por el equipo con ayuda de agentes, no llamadas reales ni audio: no miden los errores del reconocimiento de voz.</li>
           <li>No son una muestra al azar de llamadas. Los porcentajes sirven para comparar detectores entre sí sobre estos casos, no para estimar cómo andaría en la calle.</li>
-          <li>Todo corrió en una sola PC de escritorio, con y sin placa de video. La memoria y el tiempo son los de esa PC: no se midió en un celular.</li>
-          <li>Una corrida por modelo (el 2B, dos), todas con el prompt v1 y diciéndole al modelo quién habla (A/B).</li>
+          <li>Los modelos corrieron en una sola PC de escritorio, con y sin placa de video; la línea base de reglas, en otra máquina, con el mismo resultado. La memoria y el tiempo son los de esa PC: no se midió en un celular.</li>
+          <li>Con placa de video, una corrida por modelo sobre todas las conversaciones (el 2B, dos); solo con CPU, una del 0.8B y otra del 2B sobre el piloto escrito. Todas con el prompt v1 y diciéndole al modelo quién habla (A/B).</li>
           <li>La clasificación de los avisos la hicieron revisores automáticos; falta que una persona revise una muestra.</li>
           <li>En los casos escritos quien llama suele aparecer primero, y en las legítimas suele atender la entidad: un modelo podría acertar por cómo empieza la llamada.</li>
         </ul>
@@ -937,9 +940,10 @@
     const filaAlto = 30, arriba = umbrales.length * 15 + 6, abajo = 40;
     const alto = arriba + rs.length * filaAlto + abajo;
     const { svg, ancho } = nuevoSvg(chart, alto, 'Segundos por línea, mediana y percentil 95, con y sin placa de video');
+    const conFinales = ancho >= 420;
     const finales = rs.map((r) => `${fmtS1(r.s_p50)} · ${fmtS1(r.s_p95)} s`);
     const izq = medir(svg, rs.map((r) => r.etiqueta), 'slm-label') + 12;
-    const der = medir(svg, finales, 'slm-end') + 14;
+    const der = conFinales ? medir(svg, finales, 'slm-end') + 14 : 12;
     const x = d3.scaleLinear([0, Math.max(d3.max(rs, (r) => Number(r.s_p95)), d3.max(umbrales, (r) => Number(r.p95_s)))], [izq, ancho - der]).nice();
     const y = (i) => arriba + i * filaAlto + filaAlto / 2;
     const marcas = x.ticks(ancho - der - izq < 220 ? 3 : 6);
@@ -960,7 +964,7 @@
       svg.append('line').attr('class', 'slm-ci').style('stroke', COLOR[r.detector]).attr('x1', x(r.s_p50)).attr('x2', x(r.s_p95)).attr('y1', y(i)).attr('y2', y(i));
       svg.append('line').attr('class', 'slm-line').style('stroke', COLOR[r.detector]).attr('x1', x(r.s_p95)).attr('x2', x(r.s_p95)).attr('y1', y(i) - 6).attr('y2', y(i) + 6);
       svg.append('circle').attr('class', 'slm-dot').style('fill', COLOR[r.detector]).attr('r', 5).attr('cx', x(r.s_p50)).attr('cy', y(i));
-      svg.append('text').attr('class', 'slm-end').attr('x', ancho - der + 14).attr('y', y(i)).attr('dy', '0.32em').text(finales[i]);
+      if (conFinales) svg.append('text').attr('class', 'slm-end').attr('x', ancho - der + 14).attr('y', y(i)).attr('dy', '0.32em').text(finales[i]);
       svg.append('rect').attr('class', 'slm-hit').attr('x', 0).attr('width', ancho).attr('y', y(i) - filaAlto / 2).attr('height', filaAlto)
         .on('pointerenter pointermove', (ev) => {
           const [px, py] = d3.pointer(ev, chart);
