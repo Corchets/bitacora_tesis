@@ -105,7 +105,7 @@ El script hace todo en orden y frena con un mensaje claro si algo falla:
    (winget en Windows, Homebrew en macOS, apt en Linux).
 2. Busca [Ollama](https://ollama.com), el programa que corre los modelos en tu PC; si
    falta, pregunta antes de instalarlo y lo deja funcionando.
-3. Descarga el modelo (por defecto `qwen3.5:2b`; la primera vez tarda).
+3. Descarga el modelo (por defecto `qwen3.5:2b`, o `qwen3.5:2b-q8_0` en macOS porque el runner MLX por defecto no soporta salida estructurada; la primera vez tarda).
 4. Corre los tests, que no necesitan modelo.
 5. Corre el detector sobre 8 conversaciones elegidas para la demo y muestra en la
    terminal cada línea y lo que respondió el modelo.

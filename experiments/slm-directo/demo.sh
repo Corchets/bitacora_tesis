@@ -12,7 +12,11 @@
 
 set -euo pipefail
 
-MODELO="qwen3.5:2b"
+if [ "$(uname)" = "Darwin" ]; then
+  MODELO="qwen3.5:2b-q8_0"
+else
+  MODELO="qwen3.5:2b"
+fi
 COMPLETO=0
 SI=0
 URL="http://127.0.0.1:11434"  # Ollama escucha en IPv4
@@ -164,6 +168,22 @@ echo "La primera vez descarga el modelo (puede tardar varios minutos)."
 if ! "$OLLAMA" pull "$MODELO"; then
   echo "No pude descargar $MODELO. Revisá el nombre en https://ollama.com/library y tu conexión."
   exit 1
+fi
+if [ "$(uname)" = "Darwin" ]; then
+  RUNNER=$("$PY" - "$URL" "$MODELO" <<'FIN' 2>/dev/null || true
+import json, sys, urllib.request
+abridor = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+req = urllib.request.Request(sys.argv[1] + "/api/show", data=json.dumps({"name": sys.argv[2]}).encode("utf-8"), headers={"Content-Type": "application/json"})
+try:
+    resp = json.load(abridor.open(req, timeout=3))
+    print(resp.get("details", {}).get("runner", "") or "")
+except Exception:
+    pass
+FIN
+)
+  if [ "$RUNNER" = "mlx" ]; then
+    echo "Advertencia: $MODELO usa el runner MLX en macOS, que no soporta salida estructurada en este Ollama. Si falla, usá una variante GGUF (ej. $MODELO-q8_0)."
+  fi
 fi
 
 paso "4/6 Verificar el código (sin modelo)"

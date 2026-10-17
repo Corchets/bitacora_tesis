@@ -34,6 +34,7 @@ for p in (DIR_REPLAY, DIR_SLM_DIRECTO):
         sys.path.insert(0, str(p))
 
 import detectores
+import replay
 from contexto import Actualizacion, ContextoLlamada
 from replay import (
     cargar_actualizaciones_jsonl,
@@ -73,6 +74,43 @@ class FakeDetector:
 
 
 class TestReplay(unittest.TestCase):
+
+    def test_calentamiento_configura_pensar_false_en_consulta_slm(self):
+        """El calentamiento compartido desactiva el razonamiento para la consulta real."""
+        class ClienteOllamaFalso:
+            def __init__(self, _url):
+                self.pensar_enviado = []
+
+            def chat(self, modelo, mensajes, formato, opciones, pensar=None):
+                self.pensar_enviado.append(pensar)
+                if "ok" in formato.get("properties", {}):
+                    contenido = json.dumps({"ok": True})
+                else:
+                    contenido = json.dumps({
+                        "riesgo": 0.1,
+                        "alerta_sugerida": False,
+                        "motivo": "",
+                        "evidencia": "",
+                    })
+                return {"message": {"content": contenido}, "eval_count": 3}
+
+            def memoria_cargada(self, _modelo):
+                return {"size_bytes": 123}
+
+        cliente = ClienteOllamaFalso("http://ollama-falso")
+        original = replay.cliente_ollama.ClienteOllama
+        replay.cliente_ollama.ClienteOllama = lambda _url: cliente
+        try:
+            detector = replay.construir_detector(
+                "slm", modelo="modelo-falso:1b", hablantes="sin"
+            )
+            detector.evaluar((detectores.Linea(None, "hola"),))
+        finally:
+            replay.cliente_ollama.ClienteOllama = original
+
+        self.assertEqual(cliente.pensar_enviado, [False, False])
+        self.assertFalse(detector.pensar)
+        self.assertEqual(detector.carga["pensar"], False)
 
     def test_parcial_reemplaza(self):
         """Un parcial posterior del mismo segmento reemplaza al anterior sin duplicar líneas."""

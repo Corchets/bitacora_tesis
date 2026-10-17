@@ -1,0 +1,1917 @@
+{
+  "advertencia": "> **Advertencia de validez metodológica:** Material de desarrollo con audio TTS y referencias temporales derivadas del guion; casos escritos sin revisión humana. No es test reservado ni evidencia de rendimiento final. D07 (marcas) y D08 (política y protocolo) permanecen abiertas; D09 (elección de ASR/detector) no se decide con estas corridas.",
+  "evaluaciones": [
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-reglas-sc_wa_code_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/SC-WA-CODE-01-tts.json",
+        "referencia_sha256": "309e83fdad63ea5f755e08f7485e44510569b25b38feaa82a2f599a0a8bddf93",
+        "case_id_referencia": "SC-WA-CODE-01-tts",
+        "case_id_replay": "SC-WA-CODE-01-tts",
+        "normalizacion_id": "sin cambios",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 1,
+      "legitimas_total": 0,
+      "clasificacion": {
+        "tp": 1,
+        "fn": 0,
+        "fp": 0,
+        "tn": 0,
+        "total_vishing": 1,
+        "total_legitimas": 0,
+        "total_conversaciones": 1,
+        "precision": 1.0,
+        "precision_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "recall": 1.0,
+        "recall_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "f1": 1.0
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 0,
+        "total_legitimas": 0,
+        "tasa": null,
+        "ic95": null
+      },
+      "margenes": {
+        "l_r": {
+          "n": 1,
+          "mediana": -4.608400000000001,
+          "q1": -4.608400000000001,
+          "q3": -4.608400000000001,
+          "iqr": 0.0,
+          "min": -4.608400000000001,
+          "max": -4.608400000000001
+        },
+        "l_c": {
+          "n": 1,
+          "mediana": 0.20860000000000056,
+          "q1": 0.20860000000000056,
+          "q3": 0.20860000000000056,
+          "iqr": 0.0,
+          "min": 0.20860000000000056,
+          "max": 0.20860000000000056
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 1,
+          "vishing_con_aviso": 1,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "legitimas": 0,
+          "falsas_alarmas": 0,
+          "tasa_fa": null,
+          "tasa_fa_ic95": null,
+          "mediana_lr": -4.608400000000001,
+          "iqr_lr": 0.0,
+          "n_lr": 1,
+          "mediana_lc": 0.20860000000000056,
+          "iqr_lc": 0.0,
+          "n_lc": 1
+        }
+      },
+      "desglose_legitimas": {
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 11.4,
+        "ms_p95": 20.08,
+        "rtf": 0.003280537669784274
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-reglas-lg_wa_consulta_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/LG-WA-CONSULTA-01-tts.json",
+        "referencia_sha256": "14fd542da8afa1291e44855210d7535caaa371f620aac39b06df1ca7a357f766",
+        "case_id_referencia": "LG-WA-CONSULTA-01-tts",
+        "case_id_replay": "LG-WA-CONSULTA-01-tts",
+        "normalizacion_id": "sin cambios",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 0,
+      "legitimas_total": 1,
+      "clasificacion": {
+        "tp": 0,
+        "fn": 0,
+        "fp": 1,
+        "tn": 0,
+        "total_vishing": 0,
+        "total_legitimas": 1,
+        "total_conversaciones": 1,
+        "precision": 0.0,
+        "precision_ic95": [
+          0.0,
+          0.7934506856227626
+        ],
+        "recall": null,
+        "recall_ic95": null,
+        "f1": null
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 1,
+        "total_legitimas": 1,
+        "tasa": 1.0,
+        "ic95": [
+          0.20654931437723745,
+          1.0
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        },
+        "l_c": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 0,
+          "vishing_con_aviso": 0,
+          "recall": null,
+          "recall_ic95": null,
+          "legitimas": 1,
+          "falsas_alarmas": 1,
+          "tasa_fa": 1.0,
+          "tasa_fa_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "mediana_lr": null,
+          "iqr_lr": null,
+          "n_lr": 0,
+          "mediana_lc": null,
+          "iqr_lc": null,
+          "n_lc": 0
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 1,
+          "falsas_alarmas": 1,
+          "tasa": 1.0,
+          "ic95": [
+            0.20654931437723745,
+            1.0
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 6.75,
+        "ms_p95": 14.495,
+        "rtf": 0.0018430516311328026
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-0.8b-q8_0-mono-sc_wa_code_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/SC-WA-CODE-01-tts.json",
+        "referencia_sha256": "309e83fdad63ea5f755e08f7485e44510569b25b38feaa82a2f599a0a8bddf93",
+        "case_id_referencia": "SC-WA-CODE-01-tts",
+        "case_id_replay": "SC-WA-CODE-01-tts",
+        "normalizacion_id": "sin cambios",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 1,
+      "legitimas_total": 0,
+      "clasificacion": {
+        "tp": 1,
+        "fn": 0,
+        "fp": 0,
+        "tn": 0,
+        "total_vishing": 1,
+        "total_legitimas": 0,
+        "total_conversaciones": 1,
+        "precision": 1.0,
+        "precision_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "recall": 1.0,
+        "recall_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "f1": 1.0
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 0,
+        "total_legitimas": 0,
+        "tasa": null,
+        "ic95": null
+      },
+      "margenes": {
+        "l_r": {
+          "n": 1,
+          "mediana": -1.7429000000000006,
+          "q1": -1.7429000000000006,
+          "q3": -1.7429000000000006,
+          "iqr": 0.0,
+          "min": -1.7429000000000006,
+          "max": -1.7429000000000006
+        },
+        "l_c": {
+          "n": 1,
+          "mediana": 3.0741000000000014,
+          "q1": 3.0741000000000014,
+          "q3": 3.0741000000000014,
+          "iqr": 0.0,
+          "min": 3.0741000000000014,
+          "max": 3.0741000000000014
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 1,
+          "vishing_con_aviso": 1,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "legitimas": 0,
+          "falsas_alarmas": 0,
+          "tasa_fa": null,
+          "tasa_fa_ic95": null,
+          "mediana_lr": -1.7429000000000006,
+          "iqr_lr": 0.0,
+          "n_lr": 1,
+          "mediana_lc": 3.0741000000000014,
+          "iqr_lc": 0.0,
+          "n_lc": 1
+        }
+      },
+      "desglose_legitimas": {
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 1952.9,
+        "ms_p95": 3205.94,
+        "rtf": 0.49577008036847303
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-0.8b-q8_0-mono-lg_wa_consulta_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/LG-WA-CONSULTA-01-tts.json",
+        "referencia_sha256": "14fd542da8afa1291e44855210d7535caaa371f620aac39b06df1ca7a357f766",
+        "case_id_referencia": "LG-WA-CONSULTA-01-tts",
+        "case_id_replay": "LG-WA-CONSULTA-01-tts",
+        "normalizacion_id": "sin cambios",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 0,
+      "legitimas_total": 1,
+      "clasificacion": {
+        "tp": 0,
+        "fn": 0,
+        "fp": 1,
+        "tn": 0,
+        "total_vishing": 0,
+        "total_legitimas": 1,
+        "total_conversaciones": 1,
+        "precision": 0.0,
+        "precision_ic95": [
+          0.0,
+          0.7934506856227626
+        ],
+        "recall": null,
+        "recall_ic95": null,
+        "f1": null
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 1,
+        "total_legitimas": 1,
+        "tasa": 1.0,
+        "ic95": [
+          0.20654931437723745,
+          1.0
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        },
+        "l_c": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 0,
+          "vishing_con_aviso": 0,
+          "recall": null,
+          "recall_ic95": null,
+          "legitimas": 1,
+          "falsas_alarmas": 1,
+          "tasa_fa": 1.0,
+          "tasa_fa_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "mediana_lr": null,
+          "iqr_lr": null,
+          "n_lr": 0,
+          "mediana_lc": null,
+          "iqr_lc": null,
+          "n_lc": 0
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 1,
+          "falsas_alarmas": 1,
+          "tasa": 1.0,
+          "ic95": [
+            0.20654931437723745,
+            1.0
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 3663.25,
+        "ms_p95": 7947.22,
+        "rtf": 1.095626765990239
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-0.8b-q8_0-estereo-sc_wa_code_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/SC-WA-CODE-01-tts.json",
+        "referencia_sha256": "309e83fdad63ea5f755e08f7485e44510569b25b38feaa82a2f599a0a8bddf93",
+        "case_id_referencia": "SC-WA-CODE-01-tts",
+        "case_id_replay": "SC-WA-CODE-01-tts-estereo",
+        "normalizacion_id": "sufijo -estereo agregado",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 1,
+      "legitimas_total": 0,
+      "clasificacion": {
+        "tp": 1,
+        "fn": 0,
+        "fp": 0,
+        "tn": 0,
+        "total_vishing": 1,
+        "total_legitimas": 0,
+        "total_conversaciones": 1,
+        "precision": 1.0,
+        "precision_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "recall": 1.0,
+        "recall_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "f1": 1.0
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 0,
+        "total_legitimas": 0,
+        "tasa": null,
+        "ic95": null
+      },
+      "margenes": {
+        "l_r": {
+          "n": 1,
+          "mediana": -6.9717,
+          "q1": -6.9717,
+          "q3": -6.9717,
+          "iqr": 0.0,
+          "min": -6.9717,
+          "max": -6.9717
+        },
+        "l_c": {
+          "n": 1,
+          "mediana": -2.1546999999999983,
+          "q1": -2.1546999999999983,
+          "q3": -2.1546999999999983,
+          "iqr": 0.0,
+          "min": -2.1546999999999983,
+          "max": -2.1546999999999983
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 1,
+          "vishing_con_aviso": 1,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "legitimas": 0,
+          "falsas_alarmas": 0,
+          "tasa_fa": null,
+          "tasa_fa_ic95": null,
+          "mediana_lr": -6.9717,
+          "iqr_lr": 0.0,
+          "n_lr": 1,
+          "mediana_lc": -2.1546999999999983,
+          "iqr_lc": 0.0,
+          "n_lc": 1
+        }
+      },
+      "desglose_legitimas": {
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 1299.3,
+        "ms_p95": 2339.43,
+        "rtf": 0.555670442261597
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-0.8b-q8_0-estereo-lg_wa_consulta_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/LG-WA-CONSULTA-01-tts.json",
+        "referencia_sha256": "14fd542da8afa1291e44855210d7535caaa371f620aac39b06df1ca7a357f766",
+        "case_id_referencia": "LG-WA-CONSULTA-01-tts",
+        "case_id_replay": "LG-WA-CONSULTA-01-tts-estereo",
+        "normalizacion_id": "sufijo -estereo agregado",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 0,
+      "legitimas_total": 1,
+      "clasificacion": {
+        "tp": 0,
+        "fn": 0,
+        "fp": 1,
+        "tn": 0,
+        "total_vishing": 0,
+        "total_legitimas": 1,
+        "total_conversaciones": 1,
+        "precision": 0.0,
+        "precision_ic95": [
+          0.0,
+          0.7934506856227626
+        ],
+        "recall": null,
+        "recall_ic95": null,
+        "f1": null
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 1,
+        "total_legitimas": 1,
+        "tasa": 1.0,
+        "ic95": [
+          0.20654931437723745,
+          1.0
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        },
+        "l_c": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 0,
+          "vishing_con_aviso": 0,
+          "recall": null,
+          "recall_ic95": null,
+          "legitimas": 1,
+          "falsas_alarmas": 1,
+          "tasa_fa": 1.0,
+          "tasa_fa_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "mediana_lr": null,
+          "iqr_lr": null,
+          "n_lr": 0,
+          "mediana_lc": null,
+          "iqr_lc": null,
+          "n_lc": 0
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 1,
+          "falsas_alarmas": 1,
+          "tasa": 1.0,
+          "ic95": [
+            0.20654931437723745,
+            1.0
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 1214.6,
+        "ms_p95": 2254.53,
+        "rtf": 0.6396994605702543
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-2b-q8_0-mono-sc_wa_code_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/SC-WA-CODE-01-tts.json",
+        "referencia_sha256": "309e83fdad63ea5f755e08f7485e44510569b25b38feaa82a2f599a0a8bddf93",
+        "case_id_referencia": "SC-WA-CODE-01-tts",
+        "case_id_replay": "SC-WA-CODE-01-tts",
+        "normalizacion_id": "sin cambios",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 1,
+      "legitimas_total": 0,
+      "clasificacion": {
+        "tp": 1,
+        "fn": 0,
+        "fp": 0,
+        "tn": 0,
+        "total_vishing": 1,
+        "total_legitimas": 0,
+        "total_conversaciones": 1,
+        "precision": 1.0,
+        "precision_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "recall": 1.0,
+        "recall_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "f1": 1.0
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 0,
+        "total_legitimas": 0,
+        "tasa": null,
+        "ic95": null
+      },
+      "margenes": {
+        "l_r": {
+          "n": 1,
+          "mediana": -8.600300000000002,
+          "q1": -8.600300000000002,
+          "q3": -8.600300000000002,
+          "iqr": 0.0,
+          "min": -8.600300000000002,
+          "max": -8.600300000000002
+        },
+        "l_c": {
+          "n": 1,
+          "mediana": -3.7833000000000006,
+          "q1": -3.7833000000000006,
+          "q3": -3.7833000000000006,
+          "iqr": 0.0,
+          "min": -3.7833000000000006,
+          "max": -3.7833000000000006
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 1,
+          "vishing_con_aviso": 1,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "legitimas": 0,
+          "falsas_alarmas": 0,
+          "tasa_fa": null,
+          "tasa_fa_ic95": null,
+          "mediana_lr": -8.600300000000002,
+          "iqr_lr": 0.0,
+          "n_lr": 1,
+          "mediana_lc": -3.7833000000000006,
+          "iqr_lc": 0.0,
+          "n_lc": 1
+        }
+      },
+      "desglose_legitimas": {
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 4003.3,
+        "ms_p95": 4302.36,
+        "rtf": 0.9163979884382196
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-2b-q8_0-mono-lg_wa_consulta_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/LG-WA-CONSULTA-01-tts.json",
+        "referencia_sha256": "14fd542da8afa1291e44855210d7535caaa371f620aac39b06df1ca7a357f766",
+        "case_id_referencia": "LG-WA-CONSULTA-01-tts",
+        "case_id_replay": "LG-WA-CONSULTA-01-tts",
+        "normalizacion_id": "sin cambios",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 0,
+      "legitimas_total": 1,
+      "clasificacion": {
+        "tp": 0,
+        "fn": 0,
+        "fp": 1,
+        "tn": 0,
+        "total_vishing": 0,
+        "total_legitimas": 1,
+        "total_conversaciones": 1,
+        "precision": 0.0,
+        "precision_ic95": [
+          0.0,
+          0.7934506856227626
+        ],
+        "recall": null,
+        "recall_ic95": null,
+        "f1": null
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 1,
+        "total_legitimas": 1,
+        "tasa": 1.0,
+        "ic95": [
+          0.20654931437723745,
+          1.0
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        },
+        "l_c": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 0,
+          "vishing_con_aviso": 0,
+          "recall": null,
+          "recall_ic95": null,
+          "legitimas": 1,
+          "falsas_alarmas": 1,
+          "tasa_fa": 1.0,
+          "tasa_fa_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "mediana_lr": null,
+          "iqr_lr": null,
+          "n_lr": 0,
+          "mediana_lc": null,
+          "iqr_lc": null,
+          "n_lc": 0
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 1,
+          "falsas_alarmas": 1,
+          "tasa": 1.0,
+          "ic95": [
+            0.20654931437723745,
+            1.0
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 5227.3,
+        "ms_p95": 6031.89,
+        "rtf": 1.3271127665039817
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-2b-q8_0-estereo-sc_wa_code_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/SC-WA-CODE-01-tts.json",
+        "referencia_sha256": "309e83fdad63ea5f755e08f7485e44510569b25b38feaa82a2f599a0a8bddf93",
+        "case_id_referencia": "SC-WA-CODE-01-tts",
+        "case_id_replay": "SC-WA-CODE-01-tts-estereo",
+        "normalizacion_id": "sufijo -estereo agregado",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 1,
+      "legitimas_total": 0,
+      "clasificacion": {
+        "tp": 1,
+        "fn": 0,
+        "fp": 0,
+        "tn": 0,
+        "total_vishing": 1,
+        "total_legitimas": 0,
+        "total_conversaciones": 1,
+        "precision": 1.0,
+        "precision_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "recall": 1.0,
+        "recall_ic95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "f1": 1.0
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 0,
+        "total_legitimas": 0,
+        "tasa": null,
+        "ic95": null
+      },
+      "margenes": {
+        "l_r": {
+          "n": 1,
+          "mediana": -15.855200000000002,
+          "q1": -15.855200000000002,
+          "q3": -15.855200000000002,
+          "iqr": 0.0,
+          "min": -15.855200000000002,
+          "max": -15.855200000000002
+        },
+        "l_c": {
+          "n": 1,
+          "mediana": -11.0382,
+          "q1": -11.0382,
+          "q3": -11.0382,
+          "iqr": 0.0,
+          "min": -11.0382,
+          "max": -11.0382
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 1,
+            "proporcion": 0.0,
+            "ic95": [
+              0.0,
+              0.7934506856227626
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 1
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 1,
+          "vishing_con_aviso": 1,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "legitimas": 0,
+          "falsas_alarmas": 0,
+          "tasa_fa": null,
+          "tasa_fa_ic95": null,
+          "mediana_lr": -15.855200000000002,
+          "iqr_lr": 0.0,
+          "n_lr": 1,
+          "mediana_lc": -11.0382,
+          "iqr_lc": 0.0,
+          "n_lc": 1
+        }
+      },
+      "desglose_legitimas": {
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 5150.9,
+        "ms_p95": 6919.68,
+        "rtf": 1.6709827513277247
+      }
+    },
+    {
+      "configuracion": "replay | replay",
+      "unidad": "segundos",
+      "metadatos": {
+        "origen": "replay",
+        "eventos": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-2b-q8_0-estereo-lg_wa_consulta_01/eventos.csv",
+        "referencia_fuente": "experiments/asr-local/audio-referencia/LG-WA-CONSULTA-01-tts.json",
+        "referencia_sha256": "14fd542da8afa1291e44855210d7535caaa371f620aac39b06df1ca7a357f766",
+        "case_id_referencia": "LG-WA-CONSULTA-01-tts",
+        "case_id_replay": "LG-WA-CONSULTA-01-tts-estereo",
+        "normalizacion_id": "sufijo -estereo agregado",
+        "origen_referencia": "derivado de la construcción del audio TTS, no anotación humana"
+      },
+      "casos_totales": 1,
+      "vishing_total": 0,
+      "legitimas_total": 1,
+      "clasificacion": {
+        "tp": 0,
+        "fn": 0,
+        "fp": 0,
+        "tn": 1,
+        "total_vishing": 0,
+        "total_legitimas": 1,
+        "total_conversaciones": 1,
+        "precision": null,
+        "precision_ic95": null,
+        "recall": null,
+        "recall_ic95": null,
+        "f1": null
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 0,
+        "total_legitimas": 1,
+        "tasa": 0.0,
+        "ic95": [
+          0.0,
+          0.7934506856227626
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        },
+        "l_c": {
+          "n": 0,
+          "mediana": null,
+          "q1": null,
+          "q3": null,
+          "iqr": null,
+          "min": null,
+          "max": null
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_R",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 5.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 10.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          },
+          {
+            "referencia": "T_C",
+            "delta": 20.0,
+            "numerador": 0,
+            "denominador": 0,
+            "proporcion": null,
+            "ic95": null,
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 0
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": null,
+        "1.0%": null,
+        "5.0%": null,
+        "10.0%": null,
+        "50.0%": null
+      },
+      "desglose_grupos": {
+        "piloto_escrito": {
+          "total": 1,
+          "vishing": 0,
+          "vishing_con_aviso": 0,
+          "recall": null,
+          "recall_ic95": null,
+          "legitimas": 1,
+          "falsas_alarmas": 0,
+          "tasa_fa": 0.0,
+          "tasa_fa_ic95": [
+            0.0,
+            0.7934506856227626
+          ],
+          "mediana_lr": null,
+          "iqr_lr": null,
+          "n_lr": 0,
+          "mediana_lc": null,
+          "iqr_lc": null,
+          "n_lc": 0
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 1,
+          "falsas_alarmas": 0,
+          "tasa": 0.0,
+          "ic95": [
+            0.0,
+            0.7934506856227626
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 4441.6,
+        "ms_p95": 5086.34,
+        "rtf": 1.9917865399434882
+      }
+    }
+  ]
+}

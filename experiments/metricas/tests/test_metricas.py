@@ -4,7 +4,10 @@ Uso:
     python3 -m unittest discover -s experiments/metricas/tests
 """
 
+import csv
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -351,6 +354,46 @@ class TestReplayAdapter(unittest.TestCase):
             md = armar_reporte_md([ev])
             self.assertIn("cfg_replay", md)
             self.assertIn("segundos", md)
+
+    def test_cargar_salida_replay_con_columnas_reales(self):
+        """Verifica que el adaptador cargue eventos.csv con las columnas reales de replay:
+        llamada_id, ms_detector, t_a, fin_audio_s y sin columna config."""
+        try:
+            from evaluar import cargar_salida_replay
+        except ImportError:
+            from experiments.metricas.evaluar import cargar_salida_replay  # type: ignore
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            ref_path = tmp / "SC-WA-CODE-01-tts.json"
+            ref_path.write_text(json.dumps({
+                "case_id": "SC-WA-CODE-01-tts",
+                "clase": "vishing",
+                "grupo": "piloto",
+                "t_r": 13.0,
+                "t_c": 17.8,
+            }), encoding="utf-8")
+
+            eventos_path = tmp / "eventos.csv"
+            with eventos_path.open("w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                writer.writerow(["llamada_id", "n", "tipo", "segmento", "canal", "texto", "inicio_audio_s", "fin_audio_s", "disponible_s", "ms_detector", "aviso", "t_a"])
+                writer.writerow(["SC-WA-CODE-01-tts", "1", "parcial", "1", "A", "hola", "0.0", "1.0", "1.1", "15.0", "false", ""])
+                writer.writerow(["SC-WA-CODE-01-tts", "2", "final", "1", "A", "hola", "0.0", "1.5", "1.6", "20.0", "false", ""])
+                writer.writerow(["SC-WA-CODE-01-tts", "3", "final", "2", "A", "codigo", "1.5", "14.0", "14.1", "25.0", "true", "14.125"])
+
+            cargados = cargar_salida_replay(eventos_path, ref_path)
+            self.assertIn("replay", cargados)
+            caso = cargados["replay"][0]
+            self.assertEqual(caso.case_id, "SC-WA-CODE-01-tts")
+            self.assertTrue(caso.aviso)
+            self.assertEqual(caso.t_a, 14.125)
+            self.assertEqual(caso.t_r, 13.0)
+            self.assertEqual(caso.t_c, 17.8)
+            self.assertAlmostEqual(caso.l_r, -1.125)
+            self.assertAlmostEqual(caso.l_c, 3.675)
+            self.assertEqual(caso.duracion_audio_s, 14.0)
+            self.assertEqual(caso.tiempo_computo_s, 0.060)
 
 
 if __name__ == "__main__":
