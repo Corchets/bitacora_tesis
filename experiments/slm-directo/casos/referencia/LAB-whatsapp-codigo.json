@@ -1,0 +1,19 @@
+{
+  "case_id": "LAB-whatsapp-codigo",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 3,
+  "t_c_linea": 4,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM", "THREAT_FEAR"]},
+    {"linea": 3, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+    {"linea": 4, "evento": "cumplimiento", "etiquetas": []}
+  ],
+  "que_prueba": "Falso soporte de WhatsApp que pide el código de verificación de seis dígitos para quedarse con la cuenta, con cumplimiento.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/vishing/whatsapp-codigo.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: UFECI, nota del 30 de junio de 2025, accesos a WhatsApp; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Incendio esperado por el laboratorio: REQUEST_AUTH_CODE (tabla y comentario), en t3 según chequear_casos.py; antes de la pasada 8 disparaba en t1 por la palabra «whatsapp» del saludo. Coincide con t_r_linea = 3. Cumplimiento en la línea 4: dicta seis cifras ficticias. El guion nombra una aplicación real («whatsapp»), igual que el caso modelo SC-WA-CODE-01-e01. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

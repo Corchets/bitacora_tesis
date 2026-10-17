@@ -1,0 +1,20 @@
+{
+  "case_id": "LAB-arca-deuda",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 3,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM", "THREAT_FEAR"]},
+    {"linea": 3, "evento": "pedido", "etiquetas": ["REQUEST_TRANSFER", "REQUEST_SECRET", "REQUEST_SECURITY_ACTION", "URGENCY_PRESSURE"]},
+    {"linea": 4, "evento": "rechazo", "etiquetas": []},
+    {"linea": 5, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION"]}
+  ],
+  "que_prueba": "Supuesto inspector con deuda y embargo que pide autorizar con la clave fiscal o transferir hoy; transposición telefónica de un aviso publicado por correo.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/vishing/arca-deuda.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: ARCA, alerta del 19 de junio de 2025. El aviso documenta correos y dice que tampoco se contactan por teléfono; este guion telefónico es una transposición de prueba, no una llamada publicada. El guion no indica fecha de consulta; el README del laboratorio la fija en 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Incendio esperado por el laboratorio: REQUEST_SECRET, REQUEST_TRANSFER y REQUEST_SECURITY_ACTION (tabla y comentario), en t3 según chequear_casos.py; el propio guion aclara que REQUEST_SECURITY_ACTION sale porque la regla busca el trozo «autoriza». t_r_linea = 3 coincide. Etiquetas: la línea 3 ofrece dos pedidos alternativos; se toma REQUEST_TRANSFER («transferir hoy») como `pedido` por ser el explícito. «autorizar con su clave fiscal» puede leerse como pedido de la clave (REQUEST_SECRET, así lo entiende B en la línea 4) o como acción de seguridad (REQUEST_SECURITY_ACTION); se dejan las dos en la evidencia para discutir en D07. Sin cumplimiento: B se niega y A insiste con el alias en la línea 5 (pedir el alias tampoco es mover dinero según el manual §5). Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

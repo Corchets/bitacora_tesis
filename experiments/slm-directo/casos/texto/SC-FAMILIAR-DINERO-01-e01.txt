@@ -1,0 +1,12 @@
+A: ¿Hola?
+B: Hola, tía, ¿cómo andás? Soy yo... ¿no me reconocés?
+A: ¿Quién habla? ¿Nicolás?
+B: Sí, tía, Nico. Te llamo de otro número porque se me rompió el celular. Estoy en un problema y no sabía a quién llamar.
+A: ¿Qué pasó? Te escucho raro.
+B: Choqué con el auto de papá y el señor del otro auto dice que si no le pago el arreglo ahora, hace la denuncia y me quedo sin registro. Estoy acá al lado de él.
+B: Por favor, no le digas nada a mamá, que se va a poner como loca. Lo quiero arreglar yo antes de que se entere.
+A: Pero ¿qué querés que haga yo?
+B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.
+A: Mirá, Nico, así no. Cortame y te llamo yo a tu número de siempre, o llamo a tu mamá.
+B: No, tía, no me cortes, que el celular quedó destrozado en el choque. Y si llamás a mamá se arma lío. El señor me está apurando, dame cinco minutos nada más.
+A: Entonces que tu mamá se ocupe. Yo no transfiero nada sin hablar antes con ella. Te corto y la llamo.

@@ -1,0 +1,5 @@
+A: soy de la tarjeta tenes un cobro duplicado
+B: yo no compre nada
+A: instala el programa que te digo y mostrame la pantalla
+B: no entiendo nada de eso
+A: si no lo haces no lo puedo anular

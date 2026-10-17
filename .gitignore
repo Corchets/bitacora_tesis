@@ -27,6 +27,10 @@ models/checkpoints/
 artifacts/
 experiments/laboratorio/modelos/
 
+# Python
+__pycache__/
+*.pyc
+
 # Sistema y editores
 .DS_Store
 .idea/

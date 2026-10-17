@@ -1,0 +1,5 @@
+A: te llama la tarjeta hay un debito duplicado
+B: no fui yo
+A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo
+B: no se como se hace eso
+A: si no lo instalas no puedo parar el debito

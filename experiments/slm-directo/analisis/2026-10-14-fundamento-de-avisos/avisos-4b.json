@@ -1,0 +1,511 @@
+[
+ {
+  "id": "LAB-acceso-remoto@L3",
+  "dialogo_disponible": [
+   "1. A: te llama la tarjeta hay un debito duplicado",
+   "2. B: no fui yo",
+   "3. A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo compartir tu pantalla para instalar un programa de acceso remoto",
+  "evidencia_del_modelo": "te mando el acceso remoto para que me compartas la pantalla y lo freno yo"
+ },
+ {
+  "id": "LAB-acceso-remoto-parafrasis@L3",
+  "dialogo_disponible": [
+   "1. A: soy de la tarjeta tenes un cobro duplicado",
+   "2. B: yo no compre nada",
+   "3. A: instala el programa que te digo y mostrame la pantalla"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo instalar un programa para acceder a tu pantalla y robar tus datos",
+  "evidencia_del_modelo": "instala el programa que te digo y mostrame la pantalla"
+ },
+ {
+  "id": "LAB-anses-beneficio@L3",
+  "dialogo_disponible": [
+   "1. A: hablo de anses hay un beneficio extra para cobrar esta semana",
+   "2. B: ah no sabia",
+   "3. A: para habilitarlo pasame la clave de la seguridad social y el cbu"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo tu clave de seguridad social y CBU para un beneficio falso",
+  "evidencia_del_modelo": "para habilitarlo pasame la clave de la seguridad social y el cbu"
+ },
+ {
+  "id": "LAB-anses-beneficio-parafrasis@L3",
+  "dialogo_disponible": [
+   "1. A: te hablo de anses tenes un cobro pendiente para retirar",
+   "2. B: no sabia nada de eso",
+   "3. A: pasame la contraseña y el alias para habilitarlo"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo tu contraseña y alias para acceder a una cuenta",
+  "evidencia_del_modelo": "\"pasame la contraseña y el alias para habilitarlo\""
+ },
+ {
+  "id": "LAB-anses-canal-oficial@L1",
+  "dialogo_disponible": [
+   "1. A: me ofrecieron un bono si les doy datos del organismo"
+  ],
+  "linea_del_aviso": 1,
+  "motivo_del_modelo": "Te están pidiendo datos personales bajo amenaza de un bono",
+  "evidencia_del_modelo": "me ofrecieron un bono si les doy datos del organismo"
+ },
+ {
+  "id": "LAB-arca-deuda@L3",
+  "dialogo_disponible": [
+   "1. A: le habla un inspector hay una deuda de una fiscalizacion y un embargo",
+   "2. B: yo no tengo nada de eso",
+   "3. A: tiene que autorizar con su clave fiscal o transferir hoy"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo que transfieras dinero o uses tu clave fiscal para pagar una deuda falsa.",
+  "evidencia_del_modelo": "tiene que autorizar con su clave fiscal o transferir hoy"
+ },
+ {
+  "id": "LAB-arca-deuda-parafrasis@L3",
+  "dialogo_disponible": [
+   "1. A: le habla el fisco tiene una intimacion pendiente",
+   "2. B: de que me hablan",
+   "3. A: regularice hoy con su homebanking o le embargo la cuenta"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están presionando para que regularices tu cuenta hoy o te embarguen.",
+  "evidencia_del_modelo": "regularice hoy con su homebanking o le embargo la cuenta"
+ },
+ {
+  "id": "LAB-banco-app-parafrasis@L1",
+  "dialogo_disponible": [
+   "1. A: corta aca y fijate vos en la app del banco"
+  ],
+  "linea_del_aviso": 1,
+  "motivo_del_modelo": "Te están pidiendo que veas una aplicación bancaria para posiblemente robar tus datos o dinero",
+  "evidencia_del_modelo": "corta aca y fijate vos en la app del banco"
+ },
+ {
+  "id": "LAB-banco-codigo@L3",
+  "dialogo_disponible": [
+   "1. A: hola te llamo del banco hay una compra que no reconocemos",
+   "2. B: ah si cual",
+   "3. A: si no la frenamos ahora te vacian la cuenta"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están presionando para que no te vacíen la cuenta y piden frenar una compra",
+  "evidencia_del_modelo": "si no la frenamos ahora te vacian la cuenta"
+ },
+ {
+  "id": "LAB-banco-codigo-parafrasis@L2",
+  "dialogo_disponible": [
+   "1. A: hola soy del banco vimos un gasto que no es tuyo",
+   "2. B: cual gasto"
+  ],
+  "linea_del_aviso": 2,
+  "motivo_del_modelo": "Te están simulando ser del banco para pedirte información sobre un gasto que no es tuyo",
+  "evidencia_del_modelo": "hola soy del banco vimos un gasto que no es tuyo"
+ },
+ {
+  "id": "LAB-banco-numeros-sin-clave@L2",
+  "dialogo_disponible": [
+   "1. A: che te hablo del banco hay un consumo raro en la tarjeta",
+   "2. B: en serio cual"
+  ],
+  "linea_del_aviso": 2,
+  "motivo_del_modelo": "Te están simulando ser del banco para pedir información sobre tu tarjeta",
+  "evidencia_del_modelo": "A: che te hablo del banco hay un consumo raro en la tarjeta"
+ },
+ {
+  "id": "LAB-banco-revisa-app@L3",
+  "dialogo_disponible": [
+   "1. A: te aviso que hubo un consumo en la tarjeta",
+   "2. B: ok donde lo miro",
+   "3. A: corta esta comunicacion y entra vos a la aplicacion oficial"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo que cortes la comunicación y accedas a una aplicación para verificar un consumo en tu tarjeta.",
+  "evidencia_del_modelo": "corta esta comunicacion y entra vos a la aplicacion oficial"
+ },
+ {
+  "id": "LAB-digitos-sin-palabra@L3",
+  "dialogo_disponible": [
+   "1. A: hola te llamo de la tarjeta por un cargo que no reconocemos",
+   "2. B: ah si cual",
+   "3. A: se cae la operacion si no lo confirmas ahora"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están presionando para confirmar un cargo sin darte tiempo de verificarlo",
+  "evidencia_del_modelo": "se cae la operacion si no lo confirmas ahora"
+ },
+ {
+  "id": "LAB-familiar-peligro@L4",
+  "dialogo_disponible": [
+   "1. A: escucha tu hermano esta en un problema grave y yo soy el intermediario",
+   "2. B: que le paso",
+   "3. A: no llames a nadie si no se complica",
+   "4. A: necesito que saques la plata de la cuenta y me la pases"
+  ],
+  "linea_del_aviso": 4,
+  "motivo_del_modelo": "Te están pidiendo dinero bajo amenaza de un problema grave",
+  "evidencia_del_modelo": "necesito que saques la plata de la cuenta y me la pases"
+ },
+ {
+  "id": "LAB-familiar-peligro-parafrasis@L3",
+  "dialogo_disponible": [
+   "1. A: hola soy un amigo de tu hijo tuvo un accidente",
+   "2. B: que paso esta bien",
+   "3. A: no avises a nadie venite ya"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están presionando para que no avises a nadie y te piden venir ya.",
+  "evidencia_del_modelo": "no avises a nadie venite ya"
+ },
+ {
+  "id": "LAB-giro-sin-plata@L3",
+  "dialogo_disponible": [
+   "1. A: habla un amigo de tu hermano, tuvo un accidente",
+   "2. B: dios que paso",
+   "3. A: necesito que me gires ya a la cuenta que te dicto"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo dinero bajo una excusa de emergencia",
+  "evidencia_del_modelo": "necesito que me gires ya a la cuenta que te dicto"
+ },
+ {
+  "id": "LAB-mensajeria-no-pases-nada@L2",
+  "dialogo_disponible": [
+   "1. A: me llamo alguien que dice ser soporte de la aplicacion de mensajes",
+   "2. B: no le contestes"
+  ],
+  "linea_del_aviso": 2,
+  "motivo_del_modelo": "Te están fingiendo ser soporte técnico para intentar engañarte",
+  "evidencia_del_modelo": "A: me llamo alguien que dice ser soporte de la aplicacion de mensajes"
+ },
+ {
+  "id": "LAB-no-bajes-nada@L1",
+  "dialogo_disponible": [
+   "1. A: me llamaron para que baje un programa y les muestre el celular"
+  ],
+  "linea_del_aviso": 1,
+  "motivo_del_modelo": "Te están pidiendo que bajes un programa y les muestres el celular para acceder a tus datos",
+  "evidencia_del_modelo": "me llamaron para que baje un programa y les muestre el celular"
+ },
+ {
+  "id": "LAB-pantalla-sin-programa@L3",
+  "dialogo_disponible": [
+   "1. A: soy del soporte de tu banco",
+   "2. B: que paso",
+   "3. A: bajate este programita y dejame mirar lo que ves en el celular"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo instalar un programa para acceder a tu celular",
+  "evidencia_del_modelo": "bajate este programita y dejame mirar lo que ves en el celular"
+ },
+ {
+  "id": "LAB-whatsapp-codigo@L1",
+  "dialogo_disponible": [
+   "1. A: hola soy del soporte de whatsapp se quiere meter alguien en tu cuenta"
+  ],
+  "linea_del_aviso": 1,
+  "motivo_del_modelo": "Te están intentando acceder a tu WhatsApp sin tu permiso",
+  "evidencia_del_modelo": "hola soy del soporte de whatsapp se quiere meter alguien en tu cuenta"
+ },
+ {
+  "id": "LAB-whatsapp-codigo-parafrasis@L3",
+  "dialogo_disponible": [
+   "1. A: te llamo del soporte de mensajes hay un acceso raro",
+   "2. B: como que acceso raro",
+   "3. A: te mandamos un codigo de verificacion pasamelo"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo un código de verificación que da acceso a tu cuenta",
+  "evidencia_del_modelo": "te mandamos un codigo de verificacion pasamelo"
+ },
+ {
+  "id": "LG-BANK-VERIF-01-e01@L2",
+  "dialogo_disponible": [
+   "1. A: Buenas tardes, centro de atención del banco, habla Lucía.",
+   "2. B: Hola, Lucía. Llamo al número que está atrás de mi tarjeta. Me llegó un aviso en la app de un ingreso desde un dispositivo nuevo y quiero cambiar la clave."
+  ],
+  "linea_del_aviso": 2,
+  "motivo_del_modelo": "Te están pidiendo que cambies tu clave por un aviso de ingreso sospechoso",
+  "evidencia_del_modelo": "Me llegó un aviso en la app de un ingreso desde un dispositivo nuevo y quiero cambiar la clave."
+ },
+ {
+  "id": "LG-ORG-TURNO-01-e01@L10",
+  "dialogo_disponible": [
+   "1. A: Buen día, te atiende Sofía, de atención telefónica del organismo previsional. ¿En qué te puedo ayudar?",
+   "2. B: Hola, buen día. Escuché en la radio que hay un refuerzo para los jubilados que cobran la mínima y quería saber si me toca.",
+   "3. A: Sí, es un refuerzo de cuarenta mil pesos. Se cobra automáticamente junto con el haber de este mes; no hay que hacer ningún trámite.",
+   "4. B: ¿Seguro? Porque a una vecina la llamaron diciendo que eran de acá, y le pidieron el domicilio y una foto con el documento en la mano para cargárselo.",
+   "5. A: Eso no lo hacemos nosotros. Por teléfono no pedimos fotos del documento, claves ni datos del banco. Si la vuelven a llamar, que corte.",
+   "6. B: ¿Y vos no necesitás mis datos para fijarte si estoy en el listado?",
+   "7. A: Por acá no hace falta. Si querés verlo con tu nombre, entrás a la página oficial con tu clave y lo consultás vos.",
+   "8. B: Yo con la computadora me pierdo. ¿No puedo ir a la oficina?",
+   "9. A: Sí, claro. Sacás un turno en la página oficial o lo pedís en la misma oficina, y llevás el documento.",
+   "10. B: ¿Y el turno no me lo podés sacar vos? Te paso el número de documento, si querés."
+  ],
+  "linea_del_aviso": 10,
+  "motivo_del_modelo": "Te están pidiendo tu número de documento para que te saquen un turno por teléfono.",
+  "evidencia_del_modelo": "10: B: ¿Y el turno no me lo podés sacar vos? Te paso el número de documento, si querés."
+ },
+ {
+  "id": "LG-SUPPORT-INFO-01-e01@L4",
+  "dialogo_disponible": [
+   "1. A: Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar?",
+   "2. B: Hola, ¿qué tal? Los llamo porque no puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos.",
+   "3. A: Bien, lo vemos. Antes que nada, no me digas ni tu usuario ni tu contraseña; para esto no los necesito.",
+   "4. B: Ah, yo te los iba a pasar para que te fijes vos si están bien."
+  ],
+  "linea_del_aviso": 4,
+  "motivo_del_modelo": "Te están pidiendo que entregues tu usuario y contraseña para verificar si son correctos.",
+  "evidencia_del_modelo": "B: Ah, yo te los iba a pasar para que te fijes vos si están bien."
+ },
+ {
+  "id": "LG-WA-CONSULTA-01-e01@L1",
+  "dialogo_disponible": [
+   "1. A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí."
+  ],
+  "linea_del_aviso": 1,
+  "motivo_del_modelo": "Te están pidiendo un código de activación que no solicitaste",
+  "evidencia_del_modelo": "Me llegó por SMS un código para activar WhatsApp y yo no lo pedí."
+ },
+ {
+  "id": "SC-CLAVE-CAMBIO-01-e01@L2",
+  "dialogo_disponible": [
+   "1. A: ¿Hola?",
+   "2. B: Buenas tardes, ¿hablo con Raúl Quiroga? Te llamo del área de seguridad del banco por un movimiento en tu cuenta."
+  ],
+  "linea_del_aviso": 2,
+  "motivo_del_modelo": "Te están simulando ser el banco para pedirte información sobre tu cuenta",
+  "evidencia_del_modelo": "B: Buenas tardes, ¿hablo con Raúl Quiroga? Te llamo del área de seguridad del banco por un movimiento en tu cuenta."
+ },
+ {
+  "id": "SC-FAMILIAR-DINERO-01-e01@L9",
+  "dialogo_disponible": [
+   "1. A: ¿Hola?",
+   "2. B: Hola, tía, ¿cómo andás? Soy yo... ¿no me reconocés?",
+   "3. A: ¿Quién habla? ¿Nicolás?",
+   "4. B: Sí, tía, Nico. Te llamo de otro número porque se me rompió el celular. Estoy en un problema y no sabía a quién llamar.",
+   "5. A: ¿Qué pasó? Te escucho raro.",
+   "6. B: Choqué con el auto de papá y el señor del otro auto dice que si no le pago el arreglo ahora, hace la denuncia y me quedo sin registro. Estoy acá al lado de él.",
+   "7. B: Por favor, no le digas nada a mamá, que se va a poner como loca. Lo quiero arreglar yo antes de que se entere.",
+   "8. A: Pero ¿qué querés que haga yo?",
+   "9. B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo."
+  ],
+  "linea_del_aviso": 9,
+  "motivo_del_modelo": "Te están pidiendo transferir dinero urgente bajo amenaza de denuncia",
+  "evidencia_del_modelo": "Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo."
+ },
+ {
+  "id": "SC-ORG-BENEFICIO-01-e01@L4",
+  "dialogo_disponible": [
+   "1. A: Buen día, ¿hablo con la señora Elena Ríos?",
+   "2. B: Sí, soy yo. ¿De dónde me llaman?",
+   "3. A: Te llamo del organismo previsional, del área de beneficios; mi nombre es Daniel Ferreyra. Te figura un refuerzo de cuarenta mil pesos que todavía no cobraste.",
+   "4. B: ¿Un refuerzo? No sabía nada. Nadie me avisó."
+  ],
+  "linea_del_aviso": 4,
+  "motivo_del_modelo": "Te están simulando ser el organismo previsional para avisarte un refuerzo de dinero que no has solicitado.",
+  "evidencia_del_modelo": "A: Te llamo del organismo previsional, del área de beneficios; mi nombre es Daniel Ferreyra. Te figura un refuerzo de cuarenta mil pesos que todavía no cobraste."
+ },
+ {
+  "id": "SC-PREMIO-01-e01@L6",
+  "dialogo_disponible": [
+   "1. A: ¡Buenas tardes! ¿Me comunico con Norma Villegas?",
+   "2. B: Sí, ella habla. ¿De parte de quién?",
+   "3. A: Te habla Javier Ledesma, de la promoción aniversario del supermercado. Te llamo porque tu ticket salió sorteado el sábado.",
+   "4. B: ¿En serio? Sí, compro siempre ahí, pero no me acuerdo de haberme anotado en nada.",
+   "5. A: Se participa automáticamente con la tarjeta del club de descuentos. Ganaste una orden de compra por trescientos mil pesos y el escribano ya labró el acta con tu nombre.",
+   "6. B: ¡No lo puedo creer! ¿Y qué tengo que hacer?"
+  ],
+  "linea_del_aviso": 6,
+  "motivo_del_modelo": "Te están simulando un sorteo y te piden que entregues datos para cobrar el premio",
+  "evidencia_del_modelo": "Ganaste una orden de compra por trescientos mil pesos y el escribano ya labró el acta con tu nombre."
+ },
+ {
+  "id": "SC-SOPORTE-CLAVE-01-e01@L3",
+  "dialogo_disponible": [
+   "1. A: Hola, buenas tardes. ¿Hablo con Laura Domínguez?",
+   "2. B: Sí, soy yo. ¿Quién habla?",
+   "3. A: Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino."
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están simulando un problema técnico para que te pidan datos o códigos de acceso a tu billetera.",
+  "evidencia_del_modelo": "Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino."
+ },
+ {
+  "id": "SC-SOPORTE-REMOTO-01-e01@L1",
+  "dialogo_disponible": [
+   "1. A: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?"
+  ],
+  "linea_del_aviso": 1,
+  "motivo_del_modelo": "Te están simulando ser del banco para pedir si sos titular de una cuenta",
+  "evidencia_del_modelo": "Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?"
+ },
+ {
+  "id": "SC-WA-CODE-01-e01@L1",
+  "dialogo_disponible": [
+   "1. A: Te llamo de soporte por la activación de tu cuenta de WhatsApp."
+  ],
+  "linea_del_aviso": 1,
+  "motivo_del_modelo": "Te están simulando ser soporte técnico para activar tu cuenta de WhatsApp",
+  "evidencia_del_modelo": "Te llamo de soporte por la activación de tu cuenta de WhatsApp."
+ },
+ {
+  "id": "TR-01-pedido-indirecto-digitos@L3",
+  "dialogo_disponible": [
+   "1. A: Hola, buenas tardes. ¿Hablo con Mariela Sosa?",
+   "2. B: Sí, ella habla.",
+   "3. A: Mariela, te llamo del área de seguridad de la tarjeta. Estamos viendo un consumo en curso en un local de deportes, por ciento cuarenta mil pesos. ¿Lo estás haciendo vos?"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo confirmar un gasto y posiblemente pedirte datos para verificarlo.",
+  "evidencia_del_modelo": "\"Estamos viendo un consumo en curso en un local de deportes, por ciento cuarenta mil pesos. ¿Lo estás haciendo vos?\""
+ },
+ {
+  "id": "TR-03-negacion-y-consejo@L7",
+  "dialogo_disponible": [
+   "1. A: Hola, hijo. Te llamo porque en la tele dijeron algo de unas llamadas raras y me quedé preocupada.",
+   "2. B: Bien que me llames, ma. Escuchame una cosa: nunca le pases la clave del banco a nadie, ni a mí.",
+   "3. A: ¿Ni aunque me llamen del banco?",
+   "4. B: Menos. El banco no te va a pedir el código que te llega por mensaje, ni el PIN, ni que instales nada en el celular.",
+   "5. A: ¿Y si me dicen que tengo que transferir para que no me bloqueen la cuenta?",
+   "6. B: No transfieras nada. Cortás, y si querés llamás vos al número que está atrás de la tarjeta.",
+   "7. A: ¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?"
+  ],
+  "linea_del_aviso": 7,
+  "motivo_del_modelo": "Te están pidiendo compartir tu pantalla para acceder a tus cuentas",
+  "evidencia_del_modelo": "¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?"
+ },
+ {
+  "id": "TR-04-pedido-tras-charla-larga@L3",
+  "dialogo_disponible": [
+   "1. A: Hola, buenas tardes. ¿Hablo con Rubén Aguirre?",
+   "2. B: Sí, soy yo. ¿Quién habla?",
+   "3. A: Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina."
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están simulando ser del banco para pedir información sobre tu cuenta de jubilación",
+  "evidencia_del_modelo": "Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina."
+ },
+ {
+  "id": "TR-05-asado-con-transferencia@L13",
+  "dialogo_disponible": [
+   "1. A: ¡Eh, Martín! ¿Cómo va? ¿Venís el sábado al asado en lo de Gonza?",
+   "2. B: ¡Obvio! ¿A qué hora arrancan?",
+   "3. A: Tipo una. Gonza prende el fuego a las doce, así que si caés antes, ayudás.",
+   "4. B: Jaja, dale. ¿Llevo carbón?",
+   "5. A: No, el carbón ya lo compró él. Escuchá, te llamaba por la plata, que la estoy juntando yo.",
+   "6. B: Sí, decime cuánto es.",
+   "7. A: Fui a la carnicería con Lucho: vacío, chorizo, morcilla y unas mollejas. Salió todo ciento treinta y seis mil.",
+   "8. B: Uh. ¿Y cuántos somos?",
+   "9. A: Ocho, contando a la novia de Gonza. Son diecisiete lucas por cabeza, más la bebida.",
+   "10. B: ¿Y la bebida cuánto es?",
+   "11. A: La trae Pato, que tiene la distribuidora del cuñado. Calculá cinco más, veintidós en total.",
+   "12. B: Bueno, veintidós mil. ¿Te los doy en efectivo el sábado?",
+   "13. A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta."
+  ],
+  "linea_del_aviso": 13,
+  "motivo_del_modelo": "Te están pidiendo transferir dinero antes del viernes para pagar a un tercero.",
+  "evidencia_del_modelo": "\"Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.\""
+ },
+ {
+  "id": "TR-06-banco-alerta-legitima@L3",
+  "dialogo_disponible": [
+   "1. A: Hola, buenas tardes. ¿Hablo con Julieta Medina?",
+   "2. B: Sí, soy yo. ¿Quién es?",
+   "3. A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito."
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están simulando ser del banco para pedirte información sobre tu tarjeta de crédito",
+  "evidencia_del_modelo": "Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito."
+ },
+ {
+  "id": "TR-07-pedido-partido-en-dos-lineas@L3",
+  "dialogo_disponible": [
+   "1. A: Buenas tardes, ¿Sergio Paz? Te hablo de atención al cliente del banco, me llamo Andrea.",
+   "2. B: Sí, soy yo. ¿Qué pasó?",
+   "3. A: Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están indicando que se vinculó un dispositivo nuevo a tu cuenta para intentar robar tus datos o dinero.",
+  "evidencia_del_modelo": "Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?"
+ },
+ {
+  "id": "TR-08-frase-cortada-candado@L3",
+  "dialogo_disponible": [
+   "1. A: Hola, Lu, ¿estás muy ocupada?",
+   "2. B: No, decime. Estoy saliendo del laburo.",
+   "3. A: Pasame el código"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están pidiendo un código de acceso a tu cuenta o servicio",
+  "evidencia_del_modelo": "Pasame el código"
+ },
+ {
+  "id": "TR-09-victima-se-niega@L3",
+  "dialogo_disponible": [
+   "1. A: Hola, ¿hablo con Marta Giménez?",
+   "2. B: Sí, ¿quién habla?",
+   "3. A: Te llamo del área de prevención del banco, me llamo Diego. Tenemos retenida una compra de doscientos treinta mil pesos con tu tarjeta de débito, en una página de venta de pasajes. ¿La hiciste vos?"
+  ],
+  "linea_del_aviso": 3,
+  "motivo_del_modelo": "Te están simulando ser el banco para pedirte información de tu tarjeta y una compra que no hiciste.",
+  "evidencia_del_modelo": "Tenemos retenida una compra de doscientos treinta mil pesos con tu tarjeta de débito, en una página de venta de pasajes. ¿La hiciste vos?"
+ },
+ {
+  "id": "TR-10-ofrecimiento-inducido@L4",
+  "dialogo_disponible": [
+   "1. A: ¿Hola?",
+   "2. B: Buenas tardes, ¿Julián Paredes?",
+   "3. A: Sí, soy yo. ¿Quién habla?",
+   "4. B: Te hablo del área de verificación de cuentas de WhatsApp. Estamos viendo que alguien intenta abrir tu cuenta en otro teléfono y lo tenemos retenido."
+  ],
+  "linea_del_aviso": 4,
+  "motivo_del_modelo": "Te están simulando ser el soporte de WhatsApp para retenerte por un supuesto intento de acceso a tu cuenta.",
+  "evidencia_del_modelo": "B: Te hablo del área de verificación de cuentas de WhatsApp. Estamos viendo que alguien intenta abrir tu cuenta en otro teléfono y lo tenemos retenido."
+ },
+ {
+  "id": "TR-11-familiar-real-pide-plata@L4",
+  "dialogo_disponible": [
+   "1. A: ¿Hola?",
+   "2. B: Hola, má. ¿Te agarro en mal momento?",
+   "3. A: No, hijo, estoy acá tomando mate. ¿Qué pasó?",
+   "4. B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?"
+  ],
+  "linea_del_aviso": 4,
+  "motivo_del_modelo": "Te están pidiendo dinero bajo una excusa falsa sobre un recibo de luz.",
+  "evidencia_del_modelo": "Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?"
+ },
+ {
+  "id": "TR-12-corta-antes-del-pedido@L10",
+  "dialogo_disponible": [
+   "1. A: ¿Hola?",
+   "2. B: Abu... Abu, ¿me escuchás? Soy yo.",
+   "3. A: ¿Quién habla? ¿Martín?",
+   "4. B: Sí, abu, Martín. Tuve un problema con la moto: atropellé a una señora en una esquina y me trajeron a la comisaría.",
+   "5. A: ¡Ay, Dios mío! ¿Vos estás bien? ¿Y la señora?",
+   "6. B: Yo estoy bien, un poco golpeado. A ella se la llevaron al hospital. Escuchame: no cortes y no le cuentes a nadie, ni al abuelo, que con lo del corazón no se puede enterar.",
+   "7. B: Esto hay que arreglarlo hoy, antes de que me pasen al juzgado. Te paso con el abogado que me está ayudando, ¿sí?",
+   "8. A: Esperá, Martín. Antes de nada quiero hablar con tu papá. Te corto y lo llamo.",
+   "9. B: ¡No, abu, no cortes! Si cortás va a ser peor para mí. Quedate en línea un minuto.",
+   "10. A: No, querido. Te corto."
+  ],
+  "linea_del_aviso": 10,
+  "motivo_del_modelo": "Te están presionando a cortar la llamada para evitar que hables con tu padre.",
+  "evidencia_del_modelo": "A: Esperá, Martín. Antes de nada quiero hablar con tu papá. Te corto y lo llamo.\nB: ¡No, abu, no cortes! Si cortás va a ser peor para mí. Quedate en línea un minuto.\nA: No, querido. Te corto."
+ },
+ {
+  "id": "TR-13-turno-medico-pide-dni@L5",
+  "dialogo_disponible": [
+   "1. A: Centro de salud, buen día, te atiende Carla.",
+   "2. B: Hola, buen día. Quería sacar un turno con clínica médica, para un control.",
+   "3. A: Sí, cómo no. ¿Ya te atendiste alguna vez acá?",
+   "4. B: Sí, el año pasado vine con la doctora por la presión.",
+   "5. A: Bien. Decime tu número de documento y la fecha de nacimiento, así te busco en el sistema."
+  ],
+  "linea_del_aviso": 5,
+  "motivo_del_modelo": "Te están pidiendo datos personales (DNI y fecha de nacimiento) bajo el pretexto de un centro de salud.",
+  "evidencia_del_modelo": "\"Decime tu número de documento y la fecha de nacimiento, así te busco en el sistema.\""
+ }
+]

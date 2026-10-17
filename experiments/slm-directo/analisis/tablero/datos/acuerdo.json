@@ -1,0 +1,23 @@
+[
+ {
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "avisos": 34,
+  "coinciden": 34,
+  "kappa": 1.0
+ },
+ {
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "avisos": 22,
+  "coinciden": 22,
+  "kappa": 1.0
+ },
+ {
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "avisos": 44,
+  "coinciden": 43,
+  "kappa": 0.96
+ }
+]

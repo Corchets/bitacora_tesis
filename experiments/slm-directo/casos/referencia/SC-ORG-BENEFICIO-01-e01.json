@@ -1,0 +1,23 @@
+{
+  "case_id": "SC-ORG-BENEFICIO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "SC-ORG-BENEFICIO-01",
+  "par": "LG-ORG-TURNO-01-e01",
+  "clase": "vishing",
+  "t_r_linea": 7,
+  "t_c_linea": 8,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM", "TRUST_BUILDING"]},
+    {"linea": 5, "evento": "contexto", "etiquetas": ["TRUST_BUILDING", "URGENCY_PRESSURE"]},
+    {"linea": 7, "evento": "pedido", "etiquetas": ["REQUEST_PERSONAL_DATA"]},
+    {"linea": 8, "evento": "cumplimiento", "etiquetas": []},
+    {"linea": 9, "evento": "pedido", "etiquetas": ["REQUEST_PERSONAL_DATA", "TRUST_BUILDING"]},
+    {"linea": 11, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE", "PERSISTENCE_DISTRACTION"]},
+    {"linea": 12, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Refuerzo con monto y plazo concretos que, según quien llama, hay que «validar» por teléfono, para una persona confiada. El primer pedido (fecha de nacimiento y domicilio) se formula como «confirmar» y se cumple en la línea siguiente; después llega un segundo pedido (una foto sosteniendo el documento) que queda prometido, no cumplido.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-ORG-BENEFICIO-01 del catálogo; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "La línea 7 dice «confirmes»: podría leerse como verificación de datos que el organismo ya tiene (el manual hace esa excepción para REQUEST_SECRET, no para REQUEST_PERSONAL_DATA). Se marca como pedido porque la llamada no la inició la persona y los datos son identificatorios (discutir en D07). En la línea 12 la persona promete mandar la foto más tarde: no es cumplimiento observable. El nombre del organismo se reemplazó por el tipo de entidad; en una llamada real se nombraría. El catálogo describe un «beneficio inexistente», pero el par LG-ORG-TURNO-01-e01 trata el mismo refuerzo como real y automático: acá lo falso es el trámite de validación, no el refuerzo (discutir si la semilla admite que el fraude se apoye en un beneficio anunciado). El plazo («cierra mañana a primera hora») y la foto con el documento en la mano se eligieron para no repetir el «hoy antes de las seis» y la foto de frente y dorso de SC-PREMIO-01-e01."
+}

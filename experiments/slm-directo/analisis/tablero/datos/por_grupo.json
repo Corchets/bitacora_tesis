@@ -1,0 +1,122 @@
+[
+ {
+  "clave": "reglas|piloto_escrito",
+  "detector": "reglas",
+  "nombre": "Reglas",
+  "grupo": "Piloto escrito",
+  "vishing_con_aviso": 6,
+  "vishing": 7,
+  "falsas_alarmas": 7,
+  "legitimas": 7
+ },
+ {
+  "clave": "reglas|trampa",
+  "detector": "reglas",
+  "nombre": "Reglas",
+  "grupo": "Trampas",
+  "vishing_con_aviso": 4,
+  "vishing": 6,
+  "falsas_alarmas": 6,
+  "legitimas": 7
+ },
+ {
+  "clave": "reglas|laboratorio",
+  "detector": "reglas",
+  "nombre": "Reglas",
+  "grupo": "Laboratorio",
+  "vishing_con_aviso": 13,
+  "vishing": 16,
+  "falsas_alarmas": 1,
+  "legitimas": 10
+ },
+ {
+  "clave": "q08|piloto_escrito",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "grupo": "Piloto escrito",
+  "vishing_con_aviso": 7,
+  "vishing": 7,
+  "falsas_alarmas": 2,
+  "legitimas": 7
+ },
+ {
+  "clave": "q08|trampa",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "grupo": "Trampas",
+  "vishing_con_aviso": 5,
+  "vishing": 6,
+  "falsas_alarmas": 2,
+  "legitimas": 7
+ },
+ {
+  "clave": "q08|laboratorio",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "grupo": "Laboratorio",
+  "vishing_con_aviso": 14,
+  "vishing": 16,
+  "falsas_alarmas": 4,
+  "legitimas": 10
+ },
+ {
+  "clave": "q2|piloto_escrito",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "grupo": "Piloto escrito",
+  "vishing_con_aviso": 6,
+  "vishing": 7,
+  "falsas_alarmas": 0,
+  "legitimas": 7
+ },
+ {
+  "clave": "q2|trampa",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "grupo": "Trampas",
+  "vishing_con_aviso": 4,
+  "vishing": 6,
+  "falsas_alarmas": 2,
+  "legitimas": 7
+ },
+ {
+  "clave": "q2|laboratorio",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "grupo": "Laboratorio",
+  "vishing_con_aviso": 10,
+  "vishing": 16,
+  "falsas_alarmas": 0,
+  "legitimas": 10
+ },
+ {
+  "clave": "q4|piloto_escrito",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "grupo": "Piloto escrito",
+  "vishing_con_aviso": 7,
+  "vishing": 7,
+  "falsas_alarmas": 4,
+  "legitimas": 7
+ },
+ {
+  "clave": "q4|trampa",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "grupo": "Trampas",
+  "vishing_con_aviso": 6,
+  "vishing": 6,
+  "falsas_alarmas": 6,
+  "legitimas": 7
+ },
+ {
+  "clave": "q4|laboratorio",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "grupo": "Laboratorio",
+  "vishing_con_aviso": 16,
+  "vishing": 16,
+  "falsas_alarmas": 5,
+  "legitimas": 10
+ }
+]

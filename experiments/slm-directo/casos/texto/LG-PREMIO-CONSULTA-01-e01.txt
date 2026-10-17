@@ -1,0 +1,12 @@
+A: Atención al cliente de la promoción aniversario, buenas tardes. Te atiende Romina.
+B: Hola, Romina. Saqué este número del cartel que está en las cajas del supermercado. Quería consultar por el sorteo.
+A: Sí, claro, decime.
+B: Compré el sábado con la tarjeta del club de descuentos y me dijeron que con eso ya participaba. ¿Cómo me entero si gané?
+A: Los ganadores se publican el lunes en el local y en la página de la promoción. Nosotros no llamamos para avisar ni pedimos datos por teléfono.
+B: Ah, mirá. ¿Y si sale mi ticket, cómo se acredita el premio? ¿Hay que mandarles algo antes, una foto del documento o algo así?
+A: No, nada de fotos ni por WhatsApp. Venís al local con tu documento y el ticket, y lo retirás en el mostrador de atención.
+A: ¿Tenés el ticket a mano? Fijate si abajo de todo dice «participa del sorteo aniversario».
+B: A ver... sí, acá lo dice. ¿Y hay que pagar algo para retirarlo? ¿Un gasto de envío, algo así?
+A: Nada, el retiro es sin cargo. Eso sí, guardá bien el ticket, porque sin el ticket no se entrega.
+A: Y tenés treinta días desde la publicación para pasar a buscarlo; después el premio pasa al suplente.
+B: Perfecto, me quedó clarísimo. Gracias, Romina.

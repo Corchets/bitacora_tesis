@@ -1,0 +1,32 @@
+[
+ {
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "lineas": 161,
+  "riesgos_distintos": 2,
+  "alertas_distintas": 2,
+  "conversaciones": 14,
+  "conversaciones_con_otro_resultado": 2,
+  "vishing": 7,
+  "vishing_con_aviso_gpu": 7,
+  "vishing_con_aviso_cpu": 7,
+  "legitimas": 7,
+  "falsas_alarmas_gpu": 2,
+  "falsas_alarmas_cpu": 2
+ },
+ {
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "lineas": 161,
+  "riesgos_distintos": 13,
+  "alertas_distintas": 1,
+  "conversaciones": 14,
+  "conversaciones_con_otro_resultado": 0,
+  "vishing": 7,
+  "vishing_con_aviso_gpu": 6,
+  "vishing_con_aviso_cpu": 6,
+  "legitimas": 7,
+  "falsas_alarmas_gpu": 0,
+  "falsas_alarmas_cpu": 0
+ }
+]

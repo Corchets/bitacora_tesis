@@ -1,0 +1,11 @@
+A: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?
+B: Sí, soy yo. ¿Qué pasó?
+A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.
+A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.
+B: ¿Qué? Yo no pedí ningún préstamo. ¿Cómo lo freno?
+A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.
+B: ¿Compartir la pantalla? No, eso no lo hago. Mañana voy a la sucursal y lo veo ahí.
+A: Mañana la transferencia ya salió. Y te pido que no cortes ni llames a nadie, porque si se cierra esta gestión el bloqueo se cae.
+B: Si sos del banco, no te va a molestar que corte y me fije yo en la aplicación si ese préstamo existe.
+A: Si cortás, el sistema toma el préstamo como autorizado por vos y después no hay reclamo que valga.
+B: Lo arreglo con el banco por mi cuenta. No voy a compartir nada. Hasta luego.
