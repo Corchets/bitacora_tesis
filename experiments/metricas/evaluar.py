@@ -211,7 +211,9 @@ def cargar_salida_replay(
     por_cfg_caso: dict[str, dict[str, list[dict[str, Any]]]] = defaultdict(lambda: defaultdict(list))
     for fila in filas:
         cfg = fila.get("config", "replay")
-        cid = fila["case_id"]
+        cid = fila.get("case_id") or fila.get("llamada_id")
+        if not cid:
+            continue
         por_cfg_caso[cfg][cid].append(fila)
 
     resultado: dict[str, list[CasoEvaluado]] = {}
@@ -232,7 +234,7 @@ def cargar_salida_replay(
             for e in evs:
                 av = str(e.get("aviso", "")).strip().lower()
                 if av in ("true", "1", "t", "yes"):
-                    ts = e.get("disponible_s") or e.get("t_a") or e.get("T_A")
+                    ts = e.get("t_a") or e.get("T_A") or e.get("disponible_s")
                     if ts is not None and ts != "":
                         t_a = float(ts)
                         break
@@ -247,14 +249,20 @@ def cargar_salida_replay(
             lr, lc = calcular_margenes(t_a=t_a, t_r=t_r, t_c=t_c)
 
             # Tiempos de cómputo y duración de audio si existen
-            dur = ref.get("duracion_s") or (
-                float(evs[0]["duracion_audio_s"]) if evs and "duracion_audio_s" in evs[0] and evs[0]["duracion_audio_s"] else None
-            )
+            dur = ref.get("duracion_s") or ref.get("duracion_audio_s")
+            if dur is None:
+                for e in evs:
+                    if e.get("duracion_audio_s"):
+                        dur = float(e["duracion_audio_s"])
+                        break
+                    if e.get("fin_audio_s"):
+                        dur = max(dur or 0.0, float(e["fin_audio_s"]))
             comp_s = None
             ms_vals = []
             for e in evs:
-                if "ms" in e and e["ms"]:
-                    ms_vals.append(float(e["ms"]))
+                ms_val = e.get("ms") or e.get("ms_detector")
+                if ms_val:
+                    ms_vals.append(float(ms_val))
                 elif "tiempo_computo_s" in e and e["tiempo_computo_s"]:
                     comp_s = (comp_s or 0.0) + float(e["tiempo_computo_s"])
             if ms_vals and comp_s is None:
