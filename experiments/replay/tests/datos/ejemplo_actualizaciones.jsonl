@@ -1,0 +1,9 @@
+{"meta": {"motor": "whisper-simulado", "modelo": "tiny-es", "version": "1.0-ficticio", "sample_rate": 16000, "hilos": 2, "hardware": "Apple M1", "nota": "Datos ficticios para pruebas de replay"}}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 1, "tipo": "parcial", "segmento": 0, "texto": "hola buenas", "inicio_audio_s": 0.0, "fin_audio_s": 1.0, "disponible_s": 1.2, "proceso_ms": 200.0, "canal": null}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 2, "tipo": "parcial", "segmento": 0, "texto": "hola buenas tardes", "inicio_audio_s": 0.0, "fin_audio_s": 1.8, "disponible_s": 2.0, "proceso_ms": 200.0, "canal": null}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 3, "tipo": "final", "segmento": 0, "texto": "hola buenas tardes", "inicio_audio_s": 0.0, "fin_audio_s": 2.1, "disponible_s": 2.3, "proceso_ms": 200.0, "canal": null}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 4, "tipo": "parcial", "segmento": 1, "texto": "te llamo de soporte", "inicio_audio_s": 2.5, "fin_audio_s": 3.6, "disponible_s": 3.8, "proceso_ms": 200.0, "canal": null}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 5, "tipo": "final", "segmento": 1, "texto": "te llamo de soporte técnico", "inicio_audio_s": 2.5, "fin_audio_s": 4.5, "disponible_s": 4.75, "proceso_ms": 250.0, "canal": null}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 6, "tipo": "parcial", "segmento": 2, "texto": "pasame el codigo", "inicio_audio_s": 5.0, "fin_audio_s": 6.2, "disponible_s": 6.45, "proceso_ms": 250.0, "canal": null}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 7, "tipo": "final", "segmento": 2, "texto": "pasame el codigo de verificacion que te llego", "inicio_audio_s": 5.0, "fin_audio_s": 7.8, "disponible_s": 8.1, "proceso_ms": 300.0, "canal": null}
+{"llamada_id": "SC-WA-CODE-01-tts", "n": 8, "tipo": "final", "segmento": 3, "texto": "es para validar tu identidad", "inicio_audio_s": 8.5, "fin_audio_s": 10.0, "disponible_s": 10.3, "proceso_ms": 300.0, "canal": null}
