@@ -92,6 +92,8 @@ class MotorSherpaZipformer(MotorASR):
         self.rule1_silence = rule1_silence
         self.rule2_silence = rule2_silence
         self.rule3_utterance = rule3_utterance
+        self.corte_silencio_s = 0.8
+        self.umbral_rms_silencio = 0.005
 
         self.model_dir: Path | None = None
         self.recognizer: Any = None
@@ -100,6 +102,7 @@ class MotorSherpaZipformer(MotorASR):
         self.segmento_actual: int = 1
         self.inicio_segmento_s: float = 0.0
         self.ultimo_texto_parcial: str = ""
+        self.silencio_acum_s: float = 0.0
 
     def _asegurar_modelo(self) -> Path:
         """Verifica existencia local o descarga del Hugging Face Hub."""
@@ -150,6 +153,7 @@ class MotorSherpaZipformer(MotorASR):
         self.segmento_actual = 1
         self.inicio_segmento_s = 0.0
         self.ultimo_texto_parcial = ""
+        self.silencio_acum_s = 0.0
 
     def procesar_bloque(
         self,
@@ -164,13 +168,33 @@ class MotorSherpaZipformer(MotorASR):
         if muestras.dtype != np.float32:
             muestras = muestras.astype(np.float32)
 
+        dur_bloque_s = fin_bloque_s - inicio_bloque_s
+        rms = float(np.sqrt(np.mean(muestras**2))) if len(muestras) > 0 else 0.0
+        if rms < self.umbral_rms_silencio:
+            self.silencio_acum_s += dur_bloque_s
+        else:
+            self.silencio_acum_s = 0.0
+
         self.stream.accept_waveform(self.sample_rate, muestras)
         while self.recognizer.is_ready(self.stream):
             self.recognizer.decode_stream(self.stream)
 
         t_proc_ms = (time.perf_counter() - t0) * 1000.0
 
+        # Condición de fin de segmento: endpoint del reconocedor o corte por silencio acumulado con texto previo
+        es_endpoint = False
         if self.enable_endpoint and self.recognizer.is_endpoint(self.stream):
+            es_endpoint = True
+        elif self.silencio_acum_s >= self.corte_silencio_s and bool(self.ultimo_texto_parcial):
+            es_endpoint = True
+
+        if es_endpoint:
+            # Purgar lookahead del modelo con 0.3s de silencio antes de leer el texto definitivo
+            purgar = np.zeros(int(0.3 * self.sample_rate), dtype=np.float32)
+            self.stream.accept_waveform(self.sample_rate, purgar)
+            while self.recognizer.is_ready(self.stream):
+                self.recognizer.decode_stream(self.stream)
+
             texto = self.recognizer.get_result(self.stream).strip()
             if texto:
                 eventos.append(
@@ -187,6 +211,7 @@ class MotorSherpaZipformer(MotorASR):
                 self.inicio_segmento_s = fin_bloque_s
                 self.ultimo_texto_parcial = ""
             self.recognizer.reset(self.stream)
+            self.silencio_acum_s = 0.0
         else:
             texto = self.recognizer.get_result(self.stream).strip()
             if texto and texto != self.ultimo_texto_parcial:
@@ -208,8 +233,9 @@ class MotorSherpaZipformer(MotorASR):
         t0 = time.perf_counter()
         eventos: list[EventoASR] = []
 
-        # Alimentar silencio de cierre y finalizar stream
-        cola = np.zeros(int(0.5 * self.sample_rate), dtype=np.float32)
+        # Cola de lookahead extendida (2.0s de silencio) para garantizar que el encoder streaming
+        # procese hasta la última palabra del audio sin truncamiento
+        cola = np.zeros(int(2.0 * self.sample_rate), dtype=np.float32)
         self.stream.accept_waveform(self.sample_rate, cola)
         self.stream.input_finished()
 

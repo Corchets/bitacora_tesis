@@ -215,6 +215,43 @@ class TestContratoJSONL(unittest.TestCase):
         )
         self.assertIn("Estado: propuesta sin discutir.", contenido_md)
 
+    def test_vaciar_final_entrega_ultimo_bloque(self):
+        """Verifica que vaciar_final entrega el texto del último bloque aunque no haya endpoint previo."""
+        eventos = [
+            {"tiempo_audio_s": 0.8, "tipo": "final", "segmento": 1, "texto": "Primer turno."},
+            # Este evento representa habla que llega hasta el final del audio (tiempo_audio_s > duracion de bloques)
+            {"tiempo_audio_s": 3.2, "tipo": "final", "segmento": 2, "texto": "Es cero, cero, cero, cero, cero, cero."},
+        ]
+        motor = MotorFalso(eventos_programados=eventos)
+
+        manifiesto = transcribir_audio(
+            audio_path=self.audio_wav,  # duracion_s = 3.0
+            motor=motor,
+            salida_dir=self.salida_dir / "test_vaciado",
+            bloque_ms=100,
+            simular_tiempo_real=False,
+            llamada_id="TEST-VACIADO-01",
+        )
+
+        ruta_jsonl = self.salida_dir / "test_vaciado" / "actualizaciones.jsonl"
+        with open(ruta_jsonl, "r", encoding="utf-8") as f:
+            lineas = [json.loads(line) for line in f if line.strip()]
+
+        actualizaciones = lineas[1:]
+        self.assertGreaterEqual(len(actualizaciones), 2)
+
+        # La última actualización fue entregada por vaciar_final
+        ultima_act = actualizaciones[-1]
+        self.assertEqual(ultima_act["tipo"], "final")
+        self.assertEqual(ultima_act["segmento"], 2)
+        self.assertEqual(ultima_act["texto"], "Es cero, cero, cero, cero, cero, cero.")
+        self.assertGreaterEqual(ultima_act["disponible_s"], ultima_act["fin_audio_s"])
+
+        # Verificar que la transcripción final en manifiesto incluye el último bloque
+        self.assertIn("Es cero, cero, cero, cero, cero, cero.", manifiesto["texto_transcrito_final"])
+        # La duración del audio registrada sigue siendo 3.0s (la cola de vaciado no la infla)
+        self.assertEqual(manifiesto["audio_duracion_s"], 3.0)
+
 
 if __name__ == "__main__":
     unittest.main()

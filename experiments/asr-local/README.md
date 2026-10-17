@@ -39,7 +39,7 @@ El archivo `actualizaciones.jsonl` contiene:
 
 | Motor | Modelo | Modo | Tipo de entrega | Endpoint / Segmentación |
 |---|---|---|---|---|
-| `sherpa-zipformer` (principal) | [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | Streaming en tiempo real | Parciales y finales | Endpoint detection nativo de Sherpa ONNX (`rule2_min_trailing_silence=1.0s`) |
+| `sherpa-zipformer` (principal) | [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | Streaming en tiempo real | Parciales y finales | Segmentación por silencio (`corte_silencio_s=0.8s`, `umbral_rms=0.005`) y endpoint nativo con purga de lookahead (0.3s) y cola de vaciado final (2.0s) |
 | `whisper` (secundario) | `faster-whisper-base` (int8 CPU) | NO streaming (por lotes/segmentos) | Finales por segmento | Filtro VAD integrado de Whisper (`min_silence_duration_ms=500ms`) |
 
 ---
@@ -85,6 +85,8 @@ Esto toma los diálogos del par H1 en `experiments/slm-directo/casos/texto/` (`S
 - `SC-WA-CODE-01-tts-estereo.wav` (estéreo 16 kHz: canal izquierdo=A, canal derecho=B)
 - `LG-WA-CONSULTA-01-tts.wav` (mono 16 kHz)
 - `LG-WA-CONSULTA-01-tts-estereo.wav` (estéreo 16 kHz)
+
+> **Nota sobre pausas en audio sintético:** Se inserta un silencio de 1,0 s entre turnos como convención de audio de humo sintético para permitir ejercitar la segmentación automática por turnos; no representa una propiedad de una llamada real donde los interlocutores pueden solaparse o pausar con tiempos variables.
 
 ---
 

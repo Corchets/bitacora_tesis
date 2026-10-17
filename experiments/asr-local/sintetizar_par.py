@@ -139,7 +139,7 @@ def generar_audio_caso(
     salida_dir: Path,
     voz_a: str = "Paulina",
     voz_b: str = "Mónica",
-    pausa_turno_s: float = 0.8,
+    pausa_turno_s: float = 1.0,  # Convención del audio de humo: 1.0s para permitir corte de turno
     generar_estereo: bool = True,
 ) -> dict[str, Path]:
     """Genera audio WAV mono y opcionalmente estéreo para un caso."""
@@ -276,8 +276,8 @@ def main() -> None:
     parser.add_argument(
         "--pausa-s",
         type=float,
-        default=0.8,
-        help="Pausa de silencio en segundos entre turnos (defecto: 0.8).",
+        default=1.0,
+        help="Pausa de silencio en segundos entre turnos (defecto: 1.0s, convención de humo).",
     )
     parser.add_argument(
         "--sin-estereo",

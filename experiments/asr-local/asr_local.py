@@ -88,7 +88,7 @@ def obtener_info_git() -> dict[str, Any]:
             ["git", "rev-parse", "HEAD"], text=True, stderr=subprocess.DEVNULL
         ).strip()
         diff = subprocess.check_output(
-            ["git", "status", "--porcelain"], text=True, stderr=subprocess.DEVNULL
+            ["git", "status", "--porcelain", "-uno"], text=True, stderr=subprocess.DEVNULL
         ).strip()
         es_dirty = len(diff) > 0
     except Exception:
