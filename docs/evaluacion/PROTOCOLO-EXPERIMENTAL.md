@@ -51,7 +51,7 @@ flowchart TD
 - **Variable medida:** La decisión binaria de alerta (`alerta_emitida` $\in \{\text{true}, \text{false}\}$) y el puntaje de riesgo emitido por el detector evaluando prefijos sucesivos de la llamada (a los primeros turnos, al 25 %, 50 %, 75 % y 100 % de la duración, o por actualización/turno cerrado) y al corte final de la llamada.
 - **Métricas asociadas ([METRICAS.md §4](METRICAS.md#4-qué-se-mide)):**
   - **Recall de vishing:** Proporción de llamadas fraudulentas que reciben al menos una alerta válida antes del fin de la llamada ($TP / P$).
-  - **Tasa de falsas alarmas en legítimas ($f$):** Proporción de llamadas legítimas con al menos una alerta emitida ($FP / N$). Desglosada obligatoriamente entre llamadas legítimas cotidianas inocuas y "negativos difíciles" con temática bancaria/seguridad.
+  - **Tasa de falsas alarmas en legítimas ($f$):** Proporción de llamadas legítimas con al menos una alerta emitida ($FP / N$). Desglosada entre llamadas legítimas cotidianas inocuas y "negativos difíciles" con temática bancaria/seguridad.
   - **Precision y F1 por conversación:** Calculadas sobre la matriz de confusión binaria a nivel de llamada completa y por punto de prefijo.
   - **Incertidumbre estadística:** Intervalo de confianza de Wilson al 95 % para todas las proporciones binomiales reportadas.
 - **Criterio de lectura:** La evaluación busca caracterizar el compromiso (*trade-off*) entre precocidad y falsas alarmas: decisiones más tempranas suelen asociarse a mayor inestabilidad o alertas infundadas. No se impone un umbral dogmático de éxito a priori; el resultado describe la curva empírica de desempeño en función del avance temporal de la conversación.
@@ -68,8 +68,8 @@ flowchart TD
     $$\text{Preventive}@\delta(X) = \frac{\text{llamadas de vishing con } T_A \le X - \delta}{\text{llamadas de vishing evaluables para } X}$$
     para $X \in \{T_R, T_C\}$ y valores de $\delta \in \{5\,\text{s}, 10\,\text{s}, 20\,\text{s}\}$.
 - **Criterio de lectura:** 
-  - Siguiendo los antecedentes de literatura primaria analizados en [SINTESIS-ESTADO-DEL-ARTE.md §2.4.1 y §7](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#7-qué-cambia-para-la-evaluación), este protocolo **descarta formalmente las funciones de penalización abstractas tipo ERDE** (Losada & Crestani 2016, [S003](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s003--losada-crestani-y-parapar-2016-2017-early-risk-detection-error-erde)) y las métricas de precocidad normalizada por duración total ($\tau / T$ de Mori et al. 2018, [S004](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s004--mori-mendiburu-dasgupta-y-lozano-2018-earliness-accuracy-trade-off-en-series-temporales)). En telefonía la duración total $T$ es desconocida durante la llamada y penalizar turnos iniciales inocuos carece de anclaje operativo.
-  - Los márgenes físicos en segundos ($L_R, L_C$) y $\text{Preventive}@\delta$ constituyen las únicas medidas directas de utilidad preventiva. Un aviso con $L_C > 0$ indica que la alerta llegó antes de que la víctima revelara el código o ejecutara la transferencia; $L_R > 0$ indica que advirtió antes de que el atacante formulara la exigencia explícita.
+  - Siguiendo los antecedentes de literatura primaria analizados en [SINTESIS-ESTADO-DEL-ARTE.md §2.4.1 y §7](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#7-qué-cambia-para-la-evaluación), este protocolo descarta las funciones de penalización abstractas tipo ERDE (Losada & Crestani 2016, [S003](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s003--losada-crestani-y-parapar-2016-2017-early-risk-detection-error-erde)) y las métricas de precocidad normalizada por duración total ($\tau / T$ de Mori et al. 2018, [S004](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s004--mori-mendiburu-dasgupta-y-lozano-2018-earliness-accuracy-trade-off-en-series-temporales)). En telefonía la duración total $T$ es desconocida durante la llamada y penalizar turnos iniciales inocuos carece de anclaje operativo.
+  - Los márgenes físicos en segundos ($L_R, L_C$) y $\text{Preventive}@\delta$ constituyen las medidas directas de utilidad preventiva propuestas. Un aviso con $L_C > 0$ indica que la alerta llegó antes de que la víctima revelara el código o ejecutara la transferencia; $L_R > 0$ indica que advirtió antes de que el atacante formulara la exigencia explícita.
 
 ### 1.3. E1 — Impacto diagnóstico del ASR local
 
@@ -85,7 +85,7 @@ flowchart TD
   - **Variación de falsas alarmas:** Llamadas legítimas que no disparan alerta en texto manual pero alertan bajo ASR (o viceversa) debido a alucinaciones o sustituciones fonéticas.
   - **Factor de tiempo real (RTF) y latencia:** $\text{RTF} = \text{tiempo\_cómputo} / \text{duración\_audio}$ y percentil 95 de latencia por actualización.
 - **Criterio de lectura:** 
-  - Siguiendo a Balagopalan et al. (2019, [S007](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s007--balagopalan-shkaruta-y-novikova-2019-asimetría-de-errores-de-asr)) y Zhou et al. (2022, [S008](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s008--zhou-chong-wang-y-zeng-2022-deriva-semántica-por-errores-de-asr-en-slu)), el WER agregado es insuficiente para evaluar el reconocedor en seguridad: las eliminaciones de palabras clave provocan fallas catastróficas o demoras severas en el clasificador posterior.
+  - Siguiendo a Balagopalan et al. (2019, [S007](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s007--balagopalan-shkaruta-y-novikova-2019-asimetría-de-errores-de-asr)) y Zhou et al. (2022, [S008](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s008--zhou-chong-wang-y-zeng-2022-deriva-semántica-por-errores-de-asr-en-slu)), el WER agregado es insuficiente para evaluar el reconocedor en seguridad: las eliminaciones de palabras clave provocan fallas severas o demoras en el clasificador posterior.
   - E1 permite aislar las causas de fallo: si el detector rinde bien con texto manual y colapsa con ASR, el cuello de botella radica en la deriva semántica del transcriptor acústico; si rinde mal en ambos, la debilidad reside en la representación semántica o en la política de alerta.
 
 ### 1.4. E2 — Explicabilidad contextual (objetivo secundario)
@@ -94,14 +94,14 @@ flowchart TD
 - **Variable medida:** La coincidencia cualitativa del campo `motivo` y del fragmento `evidencia` devueltos por el detector respecto a los fragmentos de justificación humana anotados en la referencia (`evidence` en [MANUAL-ANOTACION.md §3](../corpus/MANUAL-ANOTACION.md#3-ejemplo-de-referencia-de-una-conversación)).
 - **Métricas asociadas:**
   - **Verificación de presencia textual:** Indicador booleano `evidencia_en_texto` (implementado en `experiments/slm-directo/`) que valida que la frase citada como evidencia por el modelo haya sido efectivamente pronunciada en la llamada y no constituya una alucinación.
-  - **Revisión pericial de concordancia de maniobra:** Evaluación sobre una muestra seleccionada de avisos para verificar que la razón informada ("Te están pidiendo un código de WhatsApp") describa la maniobra real en curso.
-- **Criterio de lectura:** No se promete calcular un macro-F1 formal sobre las doce etiquetas de la taxonomía candidata (6+6) mientras la anotación humana del corpus sea parcial y orientada a eventos mínimos, tal como estipula [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
+  - **Revisión pericial de concordancia de maniobra:** Evaluación sobre una muestra seleccionada de avisos para verificar que la razón informada describa la maniobra real en curso.
+- **Criterio de lectura:** No se propone calcular un macro-F1 formal sobre las doce etiquetas de la taxonomía candidata (6+6) mientras la anotación humana del corpus sea parcial y orientada a eventos mínimos, tal como estipula [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
 
 ---
 
 ## 2. Unidades de análisis y sincronización del reloj experimental
 
-Para garantizar comparabilidad entre experimentos en streaming de audio y ensayos directos sobre transcripción, se establecen unidades estrictas y reglas de reloj independientes de supuestos no verificables.
+Para garantizar comparabilidad entre experimentos en streaming de audio y ensayos directos sobre transcripción, se establecen unidades y reglas de reloj independientes de supuestos no verificables.
 
 ```mermaid
 sequenceDiagram
@@ -123,25 +123,27 @@ sequenceDiagram
 ### 2.1. Experimentos con audio (streaming o replay)
 
 1. **Origen temporal:** Todas las marcas ($T_A, T_R, T_C$) se miden en **segundos continuos** desde el inicio de la grabación ($t = 0{,}00\,\text{s}$).
-2. **Reloj de emisión efectiva ($T_A$):** $T_A$ representa el instante en que el sistema expone el aviso al usuario. **Incluye estrictamente la latencia del ASR y el tiempo de encolado/cómputo del detector.** Nunca se retrotrae al instante en que el hablante pronunció la palabra clave o evidencia.
+2. **Reloj de emisión efectiva ($T_A$):** $T_A$ representa el instante en que el sistema expone el aviso al usuario. **Incluye la latencia del ASR y el tiempo de encolado/cómputo del detector.** No se retrotrae al instante en que el hablante pronunció la palabra clave o evidencia.
 3. **Modelado de cola secuencial del detector:**
    Tal como implementa el motor de replay en [`experiments/replay/replay.py`](../../experiments/replay/README.md#3-política-de-aviso-único-y-cola-del-detector), el detector opera como un recurso computacional secuencial único (un solo hilo/proceso de inferencia). Si el audio avanza más rápido que el tiempo de cómputo del modelo, las evaluaciones se encolan. En el reloj del audio:
    $$\text{inicio\_eval}_n = \max(\text{disponible\_s}_n, \text{fin\_eval}_{n-1})$$
    $$\text{fin\_eval}_n = \text{inicio\_eval}_n + \frac{\text{ms\_detector}_n}{1000}$$
    $$\text{espera\_cola\_ms} = (\text{inicio\_eval}_n - \text{disponible\_s}_n) \times 1000$$
    donde $\text{disponible\_s}_n$ es el momento en que el ASR entregó el texto (con $\text{disponible\_s} \ge \text{fin\_audio\_s}$).
-4. **Instante de disparo:** En la primera actualización $n$ que satisface la política de alerta acordada, se emite el aviso con:
+4. **Instante de disparo:** En la primera actualización $n$ que satisface la política de alerta evaluada, se emite el aviso con:
    $$T_A = \text{fin\_eval}_n$$
 5. **Aislamiento de llamadas:** El estado acumulado del contexto y la cola de procesamiento se reinician a cero entre llamadas distintas.
 
 ### 2.2. Experimentos sobre texto sin audio
 
-1. **Unidades de análisis:** La posición y los márgenes se miden exclusivamente en unidades discretas de **líneas** o **turnos cerrados**.
-2. **Prohibición de segundos inventados:** Está terminantemente prohibido convertir líneas a segundos asumiendo duraciones arbitrarias por palabra, tiempos de lectura supuestos o pausas artificiales. Los márgenes $L_R$ y $L_C$ en texto directo se reportan en delta de líneas ($L_R = \text{línea\_pedido} - \text{línea\_aviso}$).
+1. **Unidades de análisis:** La posición y los márgenes se miden en unidades discretas de **líneas** o **turnos cerrados**.
+2. **Regla de unidades en texto:** No se inventan segundos convirtiendo líneas con duraciones supuestas ni silencios arbitrarios. Los márgenes $L_R$ y $L_C$ en texto directo se reportan en delta de líneas ($L_R = \text{línea\_pedido} - \text{línea\_aviso}$).
 
 ---
 
 ## 3. Particiones del corpus y reglas anti-fuga
+
+> **Estado: propuesta sin discutir.** Criterios de partición y reglas anti-fuga para discutir y ratificar en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
 Para impedir que el detector memorice fórmulas léxicas, modismos de actores específicos o estructuras de un mismo guionista, la partición de datos debe responder a criterios rigurosos de aislamiento.
 
@@ -151,10 +153,10 @@ flowchart TD
         Semillas["Semillas de Escenarios (scenario_id)"]
     end
 
-    subgraph Particion["Partición Estricta (caller/seed-disjoint)"]
+    subgraph Particion["Partición Propuesta (caller/seed-disjoint)"]
         Dev["Partición Desarrollo<br/>- 53 casos escritos actuales<br/>- Audio TTS de humo<br/>- Calibración de prompts y código"]
         Piloto["Partición Piloto (#54)<br/>- 14 conversaciones con voz humana<br/>- Medición de costos y ASR<br/>- Ajuste de hiperparámetros D08/D09"]
-        Test["Partición Test Reservado (#45)<br/>- Escenarios y semillas no vistas<br/>- Actores/llamantes disjuntos<br/>- Congelado bajo hash SHA-256"]
+        Test["Partición Test Reservado (#45)<br/>- Escenarios y semillas no vistas<br/>- Actores/llamantes disjuntos<br/>- Resguardado bajo hash SHA-256"]
     end
 
     Semillas -->|Semillas grupo A| Dev
@@ -165,36 +167,40 @@ flowchart TD
 ### 3.1. Definición de las tres particiones
 
 1. **Conjunto de Desarrollo (abierto):**
-   - **Composición actual:** 53 casos de texto estructurado en [`experiments/slm-directo/casos/`](../../experiments/slm-directo/casos/) (14 del piloto escrito, 13 trampas adversariales, 26 del laboratorio de Ignacio) y audios sintéticos TTS generados con `say` en [`experiments/asr-local/`](../../experiments/asr-local/).
-   - **Uso permitido:** Desarrollo de código, ajuste de parsers JSON, diseño inicial de prompts, desarrollo del arnés de métricas y pruebas de humo del pipeline.
+   - **Composición actual:** 53 casos de texto estructurado en [`experiments/slm-directo/casos/`](../../experiments/slm-directo/casos/) (14 del piloto escrito, 13 trampas adversariales, 26 del laboratorio de Ignacio, ver [`experiments/slm-directo/README.md §4`](../../experiments/slm-directo/README.md#4-casos)) y audios sintéticos TTS generados con `say` en [`experiments/asr-local/`](../../experiments/asr-local/).
+   - **Uso previsto:** Desarrollo de código, ajuste de parsers JSON, diseño inicial de prompts, desarrollo del arnés de métricas y pruebas de humo del pipeline.
 2. **Conjunto Piloto (#54):**
-   - **Composición:** 14 conversaciones grabadas con voz humana según la selección inicial de [D06](../gestion/MAPA-DECISIONES.md#d06--definir-corpus-y-piloto) (7 vishing y 7 legítimas difíciles que cubren las 6 clases de pedido crítico y las 6 familias del catálogo), más hasta 6 repeticiones dirigidas.
-   - **Uso permitido:** Estimar tiempos y costos de producción/anotación, adjudicar desacuerdos de anotación ([D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico)), validar la calidad y velocidad del ASR en voz real ([D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)) y calibrar los hiperparámetros de la política de alerta sobre audio real.
+   - **Composición:** 14 conversaciones grabadas con voz humana según la selección inicial acordada en [D06](../gestion/MAPA-DECISIONES.md#d06--definir-corpus-y-piloto) (7 vishing y 7 legítimas difíciles que cubren las 6 clases de pedido crítico y las 6 familias del catálogo, ver [`docs/corpus/METODO-CREACION-CORPUS.md §6`](../corpus/METODO-CREACION-CORPUS.md#6-piloto)), más hasta 6 repeticiones dirigidas.
+   - **Uso previsto:** Estimar tiempos y costos de producción/anotación, adjudicar desacuerdos de anotación ([D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico)), validar la calidad y velocidad del ASR en voz real ([D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)) y calibrar los hiperparámetros de la política de alerta sobre audio real.
 3. **Conjunto de Test Reservado (#45, #52):**
    - **Composición:** Muestra independiente de conversaciones grabadas con escenarios fraudulentos y legítimos comparables.
-   - **Uso permitido:** Evaluación final ciega y única del prototipo. Queda terminantemente prohibido utilizar el test reservado para seleccionar modelos, afinar prompts, ajustar listas de palabras de reglas o recalibrar umbrales.
+   - **Uso previsto:** Evaluación final ciega y única del prototipo. Propuesta de control: el test reservado se utiliza únicamente para la evaluación final y no para seleccionar modelos, afinar prompts, ajustar listas de palabras de reglas ni recalibrar umbrales.
 
-### 3.2. Reglas anti-fuga innegociables (*caller/seed-disjoint*)
+### 3.2. Criterios anti-fuga propuestos (*caller/seed-disjoint*)
 
-Siguiendo la advertencia de Traister et al. (2026, [S006, §2.4.2](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#242-detección-de-vishing-y-fraude-telefónico-sobre-transcripciones-o-en-streaming)), quienes demostraron que particiones aleatorias sobre llamadas con guiones o llamantes repetidos sufren una fuga del 42 % inflando artificialmente el rendimiento ($F_1$ de 1.00 en sintético que colapsa a 0.02 en condiciones reales):
+La propuesta de separar por semilla y llamante se apoya en dos hallazgos de Traister et al. (2026, [S006, §2.4.2](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#242-detección-de-vishing-y-fraude-telefónico-sobre-transcripciones-o-en-streaming)):
+1. En su subconjunto de 1.000 llamadas reales, **420 llamadas (42 %)** provenían de un llamante que también aparecía en otra llamada del subconjunto. Por ese motivo, los autores advierten el riesgo de fuga por memorización y publican particiones disjuntas por llamante (*caller-disjoint*).
+2. Asimismo, demostraron empíricamente que modelos ajustados sobre diálogos sintéticos colapsan en precisión al pasar a llamadas reales (donde el $F_1$ cae de 1,00 a **0,02–0,40**).
 
-1. **Disyunción estricta por semilla (*seed-disjoint*):** Ningún escenario (`scenario_id` del [`CATALOGO-ESCENARIOS.csv`](../corpus/CATALOGO-ESCENARIOS.csv)), ni ninguna de sus variantes, adaptaciones o paráfrasis presentes en Desarrollo o Piloto, puede formar parte del Test Reservado.
-2. **Disyunción estricta por llamante / actor (*caller-disjoint*):** Los participantes que actúen en el rol del atacante en el test reservado no deben haber interpretado llamadas de fraude en el conjunto de desarrollo. Si la escasez de voluntarios obligara a reutilizar participantes, sus grabaciones en test deben corresponder a semillas totalmente inéditas y se declarará la limitación en las amenazas a la validez.
-3. **Prohibición de partición aleatoria ingenua:** Queda prohibido mezclar llamadas y realizar splits aleatorios ($k$-fold o train/test split) a nivel de turnos o llamadas individuales.
-4. **Ceguera previa al congelamiento:** Ningún miembro del equipo abocado al desarrollo del detector puede inspeccionar las transcripciones ni escuchar los audios del conjunto de test reservado antes de congelar formalmente el sistema.
+Para mitigar estos riesgos en la evaluación del proyecto, se proponen las siguientes reglas:
+
+1. **Disyunción por semilla (*seed-disjoint*):** Ningún escenario (`scenario_id` del [`CATALOGO-ESCENARIOS.csv`](../corpus/CATALOGO-ESCENARIOS.csv)), ni ninguna de sus variantes o paráfrasis presentes en Desarrollo o Piloto, formará parte del Test Reservado.
+2. **Disyunción por llamante / actor (*caller-disjoint*):** Se propone que los participantes que actúen en el rol del atacante en el test reservado no hayan interpretado llamadas de fraude en el conjunto de desarrollo. Si la disponibilidad de voluntarios obligara a compartir participantes, sus grabaciones en test corresponderán a semillas totalmente inéditas y se declarará la limitación en las amenazas a la validez.
+3. **Criterio de partición:** No realizar splits aleatorios ingenuos ($k$-fold o train/test split) a nivel de turnos o llamadas individuales.
+4. **Ceguera previa al congelamiento:** Se propone que los integrantes del equipo abocados al desarrollo del detector no inspeccionen transcripciones ni escuchen los audios del conjunto de test reservado antes de congelar formalmente el sistema.
 
 ### 3.3. Propuesta de custodia y resguardo del test
 
-> **Estado: propuesta sin discutir.** Vinculada a [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
-
 Para garantizar la integridad metodológica frente al tribunal evaluador:
-- **Custodio designado:** Un integrante del equipo (o un colaborador externo al desarrollo del detector) asume la custodia exclusiva del conjunto de test (#45).
+- **Custodio propuesto:** Un integrante del equipo (o un colaborador externo al desarrollo del detector) asume la custodia exclusiva del conjunto de test (#45).
 - **Sellado criptográfico:** Antes de congelar D08, el custodio publica en el repositorio un manifiesto que contiene únicamente los identificadores disociados y los hashes criptográficos SHA-256 de cada archivo de audio y de su referencia humana sellada, resguardando los audios y textos en almacenamiento local cifrado fuera de Git (en conformidad con la Ley 25.326 y [PRIVACIDAD-DEL-SISTEMA.md](../corpus/PRIVACIDAD-DEL-SISTEMA.md)).
 - **Ejecución desatendida:** Llegado el hito H5 ([PLAN-DE-TRABAJO.md §8](../propuesta/PLAN-DE-TRABAJO.md#8-recorrido-del-desarrollo)), el arnés de evaluación se ejecuta de manera automatizada y desatendida sobre los datos del test; el resultado obtenido se vuelca directamente al informe sin segundas pasadas de ajuste.
 
 ---
 
-## 4. Configuraciones candidatas a comparar en #51 y parámetros fijos
+## 4. Configuraciones candidatas a comparar en #51 y parámetros propuestos
+
+> **Estado: propuesta sin discutir.** Espacio de búsqueda de [D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) y parámetros de ejecución propuestos para congelar en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
 El experimento comparativo multidimensional previsto en el [issue #51](https://github.com/Corchets/bitacora_tesis/issues/51) contrastará las siguientes combinaciones de la cadena de procesamiento:
 
@@ -234,40 +240,40 @@ flowchart LR
    - `whisper`: `faster-whisper-base` cuantizado en int8 (no-streaming, segmentado por lotes mediante VAD integrado).
    - `oraculo`: Transcripción manual limpia revisada (control pareado para la evaluación E1).
 2. **Detectores candidatos ([D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)):**
-   - **Línea base de reglas:** Reglas de palabras clave del laboratorio de Ignacio aplicadas sobre la última línea cerrada; actúa como comparador obligatorio para justificar si un modelo neuronal aporta valor frente a heurísticas léxicas simples.
-   - **Escalera de Small Language Models (SLM) locales:** Inferencia local sobre Ollama:
+   - **Línea base de reglas:** Reglas de palabras clave del laboratorio de Ignacio aplicadas sobre la última línea cerrada; actúa como comparador propuesto para justificar si un modelo neuronal aporta valor frente a heurísticas léxicas simples.
+   - **Escalera de Small Language Models (SLM) locales:** Inferencia local sobre Ollama (ver [`experiments/slm-directo/README.md §6`](../../experiments/slm-directo/README.md#6-escalera-de-modelos-y-gamas-de-celular)):
      - `qwen3.5:0.8b`: Candidato para perfil de hardware bajo/medio (RAM contenida ~545 MB).
      - `qwen3.5:2b`: Candidato principal para perfil medio/alto (~2.2 GB).
      - `llama3.2:1b`: Modelo de referencia del spike de laboratorio previo.
      - `qwen3.5:4b`: Referencia de calidad máxima en PC (no apto para móvil, cota superior analítica).
 3. **Variantes de Prompt:**
-   - `tarea`: Prompt directo y conciso de clasificación de vishing y extracción de motivo/evidencia en formato JSON estricto.
+   - `tarea`: Prompt directo de clasificación de vishing y extracción de motivo/evidencia en formato JSON estructurado.
    - `tarea+base`: Incorpora la base de conocimiento institucional de fraudes bancarios y suplantación desarrollada en el issue #27.
 4. **Información de hablantes / canal:**
    - `ab`: Transcripción con prefijo de hablante/canal alternado (`A:` / `B:`), representativo de la captura VoIP donde cada interlocutor llega por un canal estéreo disjunto.
    - `sin`: Transcripción de texto ciego continuo sin indicación de hablante (representativo de un entorno con diarización ausente o captura mono por altavoz).
 
-### 4.2. Parámetros congelados (Invariantes de ejecución)
+### 4.2. Parámetros de ejecución: valores usados en desarrollo, propuestos para congelar
 
-Para asegurar la repetibilidad absoluta entre corridas, se fijan de antemano los siguientes parámetros técnicos:
+Para asegurar la repetibilidad entre corridas, se proponen los siguientes parámetros técnicos basados en los valores utilizados durante el desarrollo (ver [`experiments/slm-directo/README.md §9`](../../experiments/slm-directo/README.md#9-decisiones-de-este-ensayo) y [`experiments/replay/README.md §2`](../../experiments/replay/README.md#2-cómo-correrlo)):
 
-| Parámetro | Valor fijo | Justificación técnica |
+| Parámetro | Valor propuesto | Justificación técnica |
 |---|---|---|
 | `seed` | `42` (`no-aplica` en reglas) | Elimina la dispersión en el muestreo de los SLMs. |
 | `temperature` | `0.0` | Inferencia determinista de máxima verosimilitud (*greedy decoding*). |
-| `num_ctx` | `4096` | Contexto de ventana suficiente para llamadas completas sin recorte silencioso. Si se excede, el arnés registra un fallo explícito por desborde. |
-| `num_predict` | `512` | Límite superior estricto de generación; evita bucles infinitos ante fallas del decodificador (fallo `salida_cortada`). |
+| `num_ctx` | `4096` | Contexto de ventana para llamadas completas sin recorte silencioso. Si se excede, el arnés registra un fallo explícito por desborde. |
+| `num_predict` | `512` | Límite superior de generación; evita bucles infinitos ante fallas del decodificador (fallo `salida_cortada`). |
 | `formato_salida` | JSON Schema estricto | Obliga al motor a emitir los campos `{riesgo, alerta_sugerida, motivo, evidencia}` validados por parser estructurado. |
-| `disparo` | `final` (segmento cerrado) | El detector solo se invoca cuando el ASR detecta un fin de turno o silencio; no dispara en cada borrador parcial de 100 ms para preservar CPU y evitar ruido transitorio. |
+| `disparo` | `final` (segmento cerrado) | El detector se invoca cuando el ASR detecta fin de turno o silencio; no dispara en borradores parciales de 100 ms para preservar CPU. |
 | `politica_aviso` | Aviso único | Emitido el primer aviso válido, las actualizaciones posteriores se registran pero no generan nuevas alertas en pantalla. |
 
 ---
 
 ## 5. Política de alerta a congelar: opciones y evidencia observada
 
-La política de alerta define cómo se transforma la secuencia de predicciones del detector en el instante efectivo de aviso $T_A$. Su elección define el balance crítico entre precocidad ($L_R, L_C$) y supresión de falsas alarmas.
+> **Estado: propuesta sin discutir.** Opciones de política de alerta para ratificación colegiada en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-> **Estado: propuesta sin discutir.** Opciones abiertas para ratificación colegiada en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+La política de alerta define cómo se transforma la secuencia de predicciones del detector en el instante efectivo de aviso $T_A$. Su elección define el balance crítico entre precocidad ($L_R, L_C$) y supresión de falsas alarmas.
 
 ```mermaid
 flowchart TD
@@ -279,77 +285,77 @@ flowchart TD
     end
 
     OpA -->|Pros: Mínima latencia| R1["Riesgo: 58.3% FA en reglas, 62.5% en 4B"]
-    OpB -->|Pros: Abate FA al 0.8%| R2["Riesgo: Retrasa el aviso de 3 a 10 s"]
+    OpB -->|Pros: Abate FA al 0.8%| R2["Riesgo: Agrega al menos una actualización de demora"]
     OpC -->|Pros: Evita parpadeo| R3["Riesgo: SLMs devuelven riesgo no calibrado"]
-    OpD -->|Pros: Anticipa 35 s| R4["Riesgo: Requiere detector de 12 eventos inexistente"]
+    OpD -->|Pros: Anticipa 35 s en sintético| R4["Riesgo: Requiere detector de 12 eventos inexistente"]
 ```
 
 ### 5.1. Comparativa técnica de opciones
 
 | Opción de política | Mecanismo de disparo | Ventajas técnicas | Desventajas y riesgos | Evidencia observada en el repositorio |
 |---|---|---|---|---|
-| **A. Aviso único al primer `true` válido** *(vigente en desarrollo)* | $T_A$ se emite en la primera actualización $n$ donde el detector devuelve un JSON válido con `alerta_sugerida == true`. | - Mínima latencia de intervención.<br/>- Maximiza la precocidad $L_R$ y $L_C$.<br/>- Implementada y testeada en `experiments/slm-directo/` y `experiments/replay/`. | - Extremadamente sensible a falsas alarmas si el modelo reacciona a palabras sueltas sin esperar el contexto completo. | En [`experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md`](../../experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md), esta política produjo una tasa de falsas alarmas en negativos difíciles de **58.3 % en reglas**, **62.5 % en Qwen 4B** y **33.3 % en Qwen 0.8B**. Solo Qwen 2B la contuvo en **8.3 %**, pero a costa de perder recall (69.0 %). |
-| **B. Persistencia de dos actualizaciones consecutivas** *(o 2 de las últimas 3)* | Exige que `alerta_sugerida == true` (o riesgo $\ge \theta$) se mantenga en 2 actualizaciones seguidas para emitir $T_A$. | - Supresión masiva de picos transitorios y falsas alarmas espurias.<br/>- Formalizada en [METRICAS.md §1](METRICAS.md#1-marcas-temporales) y respaldada matemáticamente en [VENTANA-DE-CONTEXTO-Y-ALERTA.md §7.1](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#71-las-falsas-alarmas-se-acumulan-con-cada-revisión). | - Consume entre 3 y 10 segundos de tiempo de reacción, pudiendo convertir una alerta oportuna en tardía ($L_C < 0$).<br/>- Si una frase neutra se intercala entre dos pedidos, reinicia la cuenta. | La simulación teórica en [VENTANA-DE-CONTEXTO-Y-ALERTA.md §7.1](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#71-las-falsas-alarmas-se-acumulan-con-cada-revisión) demostró que en una llamada de 20 min (80 revisiones), un detector con 99 % de acierto por revisión pasa de un 55.2 % de llamadas legítimas con falsa alarma a solo **0.8 %** aplicando la regla de dos seguidas. |
-| **C. Doble umbral continuo con histéresis (Schmitt Trigger)** | Alerta enciende si el riesgo compuesto $S_t \ge \theta_{\text{high}}$ (ej. 0.75) y solo se apaga si cae por debajo de $\theta_{\text{low}}$ (ej. 0.40). | - Evita el parpadeo de alertas y fatiga del usuario.<br/>- Gradúa la severidad entre riesgo medio y alto. | - Requiere un score continuo y bien calibrado. Los detectores actuales no ofrecen probabilidades calibradas. | En `experiments/slm-directo/README.md §8` se constató que Qwen 0.8B devuelve riesgos puramente binarios (0 o 1) y Qwen 2B discretiza en solo 13 valores sin calibración empírica. Las reglas léxicas no generan score probabilístico continuo. |
-| **D. Registro conjunto de eventos y acoplamiento no lineal** | Acoplamiento multiplicativo $S_t = \sigma(a M_t + b C_t + c M_t C_t + \text{sesgo})$ con memoria de decaimiento por tipo de evento. | - Resuelve estructuralmente el dilema "pasame el código en contexto inocuo".<br/>- En trazas sintéticas logró anticipar hasta 35 s antes del pedido de código. | - Depende de un detector multi-clase de 12 eventos que hoy no existe.<br/>- Complejidad arquitectónica elevada; agrega múltiples parámetros a calibrar. | Desarrollada exhaustivamente en [VENTANA-DE-CONTEXTO-Y-ALERTA.md §5–6](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#5-diseño-propuesto). Demostró conceptualmente la viabilidad de la anticipación, pero sus parámetros numéricos fueron ajustados sobre llamadas sintéticas a mano. |
+| **A. Aviso único al primer `true` válido** *(usada en desarrollo)* | $T_A$ se emite en la primera actualización $n$ donde el detector devuelve un JSON válido con `alerta_sugerida == true`. | - Mínima latencia de intervención.<br/>- Maximiza la precocidad $L_R$ y $L_C$.<br/>- Implementada y probada en `experiments/slm-directo/` y `experiments/replay/`. | - Sensible a falsas alarmas si el modelo reacciona a palabras sueltas sin esperar el contexto completo. | En [`experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md`](../../experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md), esta política produjo una tasa de falsas alarmas en negativos difíciles de **58.3 % en reglas** (14/24), **62.5 % en Qwen 4B** (15/24) y **33.3 % en Qwen 0.8B** (8/24). Solo Qwen 2B la contuvo en **8.3 %** (2/24), con un recall de 69.0 % (20/29). |
+| **B. Persistencia de dos actualizaciones consecutivas** *(o 2 de las últimas 3)* | Exige que `alerta_sugerida == true` (o riesgo $\ge \theta$) se mantenga en 2 actualizaciones seguidas para emitir $T_A$. | - Supresión de picos transitorios y falsas alarmas espurias.<br/>- Formalizada en [METRICAS.md §1](METRICAS.md#1-marcas-temporales) y modelada en [VENTANA-DE-CONTEXTO-Y-ALERTA.md §7.1](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#71-las-falsas-alarmas-se-acumulan-con-cada-revisión). | - Agrega al menos una actualización de demora; su costo en segundos debe medirse en audio real. Como referencia de desarrollo sobre texto, en la corrida CPU 2 hilos sobre el piloto escrito ([`experiments/slm-directo/corridas/2026-10-14_191429_cpu-2hilos/resumen.md`](../../experiments/slm-directo/corridas/2026-10-14_191429_cpu-2hilos/resumen.md)), una línea adicional requirió una mediana de 3,9 s en Qwen 0.8B y 8,2 s en Qwen 2B.<br/>- Si una frase neutra se intercala entre dos pedidos, reinicia la cuenta. | La simulación en [VENTANA-DE-CONTEXTO-Y-ALERTA.md §7.1](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#71-las-falsas-alarmas-se-acumulan-con-cada-revisión) mostró que en una llamada de 20 min (80 revisiones), un detector con 99 % de acierto por revisión pasa de un 55.2 % de llamadas legítimas con falsa alarma a **0.8 %** aplicando la regla de dos seguidas. |
+| **C. Doble umbral continuo con histéresis (Schmitt Trigger)** | Alerta enciende si el riesgo compuesto $S_t \ge \theta_{\text{high}}$ (ej. 0.75) y solo se apaga si cae por debajo de $\theta_{\text{low}}$ (ej. 0.40). | - Evita el parpadeo de alertas y fatiga del usuario.<br/>- Permite graduar la severidad entre riesgo medio y alto. | - Requiere un score continuo y bien calibrado. Los detectores actuales no ofrecen probabilidades calibradas. | En [`experiments/slm-directo/README.md §8`](../../experiments/slm-directo/README.md#8-registro-del-proceso) se constató que Qwen 0.8B devuelve riesgos puramente binarios (0 o 1) y Qwen 2B discretiza en solo 13 valores sin calibración empírica. Las reglas léxicas no generan score probabilístico continuo. |
+| **D. Registro conjunto de eventos y acoplamiento no lineal** | Acoplamiento multiplicativo $S_t = \sigma(a M_t + b C_t + c M_t C_t + \text{sesgo})$ con memoria de decaimiento por tipo de evento. | - Resuelve conceptualmente el dilema "pasame el código en contexto inocuo".<br/>- En la traza sintética de [`VENTANA-DE-CONTEXTO-Y-ALERTA.md §6.3`](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#63-versión-2-diseño-corregido) logró anticipar 35 s antes del pedido de código (número ilustrativo obtenido sobre llamadas construidas a mano, no rendimiento medido). | - Depende de un detector multi-clase de 12 eventos que hoy no existe.<br/>- Complejidad arquitectónica elevada; agrega múltiples parámetros a calibrar. | Desarrollada en [VENTANA-DE-CONTEXTO-Y-ALERTA.md §5–6](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md#5-diseño-propuesto). Mostró conceptualmente la viabilidad de la anticipación, pero sus parámetros numéricos fueron ajustados sobre llamadas sintéticas a mano. |
 
 ### 5.2. Propuesta de recomendación para la discusión de D08
 
-Se propone adoptar como **política canónica de evaluación en D08 la Opción A (Aviso único al primer true válido)** combinada con una evaluación comparativa en validación de la **Opción B (persistencia de 2 de las últimas 3 actualizaciones)**. Esto permite caracterizar explícitamente cuántos segundos de margen preventivo ($L_R, L_C$) cuesta proteger al sistema contra la acumulación de falsas alarmas demostrada en la sección 7.1 de Ventana.
+Se propone adoptar como **política de referencia propuesta para la evaluación en D08 la Opción A (Aviso único al primer true válido)** combinada con una evaluación comparativa en validación de la **Opción B (persistencia de 2 de las últimas 3 actualizaciones)**. Esto permite caracterizar explícitamente cuántos segundos de margen preventivo ($L_R, L_C$) cuesta proteger al sistema contra la acumulación de falsas alarmas demostrada en la sección 7.1 de Ventana.
 
 ---
 
 ## 6. Presupuesto de falsas alarmas, umbrales $\delta$ de Preventive@δ y prevalencia
 
-> **Estado: propuesta sin discutir.** Parámetros sujetos a ratificación colegiada en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+> **Estado: propuesta sin discutir.** Presupuesto de falsas alarmas, umbrales temporales y análisis de sensibilidad para ratificación colegiada en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-### 6.1. Presupuesto máximo admisible de falsas alarmas ($f_{\text{max}}$)
+### 6.1. Presupuesto propuesto de falsas alarmas ($f_{\text{max}}$)
 
-Siguiendo la formalización de la falacia de la tasa base en seguridad (Axelsson 2000, [S010](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s010--axelsson-2000-la-falacia-de-la-tasa-base-en-sistemas-de-detección)):
-- En telefonía personal, el vishing es un evento de baja prevalencia (típicamente $p \le 0{,}01$, es decir menos del 1 % de las llamadas entrantes).
-- Si un sistema de defensa exhibe una tasa de falsas alarmas del 20 % o 30 % en llamadas legítimas, el usuario experimentará decenas de avisos erróneos por cada llamada fraudulenta real, provocando el rechazo o la desinstalación inmediata de la aplicación.
+Siguiendo la formalización de la falacia de la tasa base en seguridad (Axelsson 2000, [S010](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s010--axelsson-2000-la-falacia-de-la-tasa-base-en-sistemas-de-detección)), ante eventos de baja prevalencia la tasa de falsas alarmas es el factor dominante en la tasa bayesiana de detección. En lugar de asumir una prevalencia poblacional fija sin datos verificados, $p$ se trata como un parámetro hipotético en el análisis de sensibilidad ([METRICAS.md §4](METRICAS.md#balance-y-precisión-de-las-alertas)).
 
-Se propone congelar el siguiente **presupuesto de tolerancia máxima de falsas alarmas por llamada legítima evaluada**:
-- **Llamadas legítimas cotidianas neutras:** $f_{\text{max}} \le 5\,\%$ a $10\,\%$.
-- **Negativos difíciles (llamadas legítimas bancarias o de soporte con palabras clave sensibles):** $f_{\text{max}} \le 15\,\%$.
+Para la discusión de [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental), se proponen como valores de trabajo a discutir con el equipo y el tutor:
+- **Llamadas legítimas cotidianas neutras:** propuesta $f_{\text{max}} \le 5\,\%$ a $10\,\%$.
+- **Negativos difíciles (llamadas legítimas con vocabulario bancario o de soporte):** propuesta $f_{\text{max}} \le 15\,\%$.
 
-Cualquier configuración cuyo límite superior del intervalo de Wilson al 95 % supere estos valores en el conjunto de prueba se considerará degradada para uso operativo.
+Estos umbrales no provienen de una norma externa; son cotas propuestas para contrastar el comportamiento del sistema. Si una configuración evaluada supera estos valores (tomando el límite superior del intervalo de Wilson al 95 %), se propone reportarla como degradada respecto de esta propuesta.
 
 ### 6.2. Umbrales temporales $\delta$ para Preventive@δ
 
-En [METRICAS.md §3](METRICAS.md#3-alertas-con-margen-suficiente) se definieron los valores de $\delta \in \{5\,\text{s}, 10\,\text{s}, 20\,\text{s}\}$ como candidatos de trabajo. Se propone fundamentar y congelar estos valores según criterios ergonómicos y cognitivos de reacción humana:
+En [METRICAS.md §3](METRICAS.md#3-alertas-con-margen-suficiente) se definieron los valores de $\delta \in \{5\,\text{s}, 10\,\text{s}, 20\,\text{s}\}$ como candidatos de trabajo. Se propone la siguiente lectura para su discusión:
 
 | Umbral $\delta$ | Justificación operativa y cognitiva | Significado del cumplimiento preventivo ($\text{Preventive}@\delta(T_C)$) |
 |---|---|---|
-| **$\delta = 5\,\text{s}$** | **Tiempo mínimo de reacción motriz:** Permite al usuario percibir el estímulo visual/háptico del aviso, procesar la interrupción y detener el dictado verbal del código o suspender la pulsación en pantalla. | La alerta ocurrió al menos 5 segundos antes de que la víctima comenzara a revelar la credencial o presionar "transferir". |
-| **$\delta = 10\,\text{s}$** | **Tiempo de lectura contextual:** Permite leer la explicación breve en pantalla ("Te están pidiendo un código confidencial por llamada") y formular una respuesta de duda o rechazo frente al interlocutor. | Ventana cómoda de intervención explicada. |
-| **$\delta = 20\,\text{s}$** | **Anticipación estructural:** Alerta emitida durante la fase previa de manipulación (urgencia, suplantación o pedido de abrir la app bancaria), antes de que el atacante formule la exigencia crítica. | Máximo nivel de protección preventiva. |
+| **$\delta = 5\,\text{s}$** | **Hipótesis de trabajo sin fuente** (requiere respaldo bibliográfico o prueba con usuarios): tiempo estimado de reacción motriz para interrumpir el dictado verbal o suspender una acción en pantalla. | La alerta ocurrió al menos 5 segundos antes de que la víctima comenzara a revelar la credencial o presionar "transferir". |
+| **$\delta = 10\,\text{s}$** | **Hipótesis de trabajo sin fuente** (requiere respaldo bibliográfico o prueba con usuarios): tiempo estimado para leer la explicación contextual y formular una duda frente al interlocutor. | Ventana de intervención con lectura de advertencia. |
+| **$\delta = 20\,\text{s}$** | **Hipótesis de trabajo sin fuente** (requiere respaldo bibliográfico o prueba con usuarios): anticipación durante la fase previa de manipulación, antes del pedido explícito. | Nivel de protección anticipada. |
 
-- **Referencia principal acordada:** Se propone adoptar $T_C$ (cumplimiento simulado) como referencia primaria de efectividad preventiva para el informe final, reportando obligatoriamente los valores sobre $T_R$ (inicio del pedido) para evaluar la capacidad de anticipación a la exigencia del atacante.
+- **Referencia principal propuesta:** Se propone adoptar $T_C$ (cumplimiento simulado) como referencia primaria de efectividad preventiva para el informe final, reportando en paralelo los valores sobre $T_R$ (inicio del pedido) para evaluar la capacidad de anticipación a la exigencia del atacante.
 - En pruebas sobre texto directo sin audio, los valores candidatos equivalentes corresponden a $\delta \in \{0, 1, 2\}$ líneas o turnos de antelación.
 
-### 6.3. Análisis obligatorio de sensibilidad a la prevalencia
+### 6.3. Análisis de sensibilidad a la prevalencia
 
 Conforme a la demostración matemática de Williams (2021, [S009](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s009--williams-2021-desbalance-de-clases-y-curvas-precision-recall)):
 - La precisión observada sobre un corpus experimental balanceado (50 % vishing y 50 % legítimas) es un artefacto de laboratorio que no refleja el valor predictivo positivo en un entorno real.
-- **Prohibición metodológica:** Queda prohibido presentar la precisión o el puntaje F1 medidos sobre el dataset de test como una estimación del rendimiento operativo en despliegue.
+- **Criterio metodológico propuesto:** No presentar la precisión o el puntaje F1 medidos sobre el dataset de test como una estimación del rendimiento operativo en despliegue.
 - **Fórmula de sensibilidad requerida ([METRICAS.md §4](METRICAS.md#balance-y-precisión-de-las-alertas)):**
   $$\text{precision}(p) = \frac{p \times r}{p \times r + (1 - p) \times f}$$
   donde $r$ es el recall de vishing, $f$ es la tasa de falsas alarmas en legítimas, y $p$ es la prevalencia hipotética de fraude telefónico.
-- Se reportará obligatoriamente una tabla y gráfico de sensibilidad para una grilla representativa de prevalencias:
+- Se propone reportar una tabla y gráfico de sensibilidad para una grilla representativa de prevalencias hipotéticas:
   $$p \in \{0{,}001\, (0{,}1\,\%),\; 0{,}01\, (1{,}0\,\%),\; 0{,}05\, (5{,}0\,\%),\; 0{,}10\, (10{,}0\,\%),\; 0{,}50\, (50{,}0\,\%)\}$$
 
 ---
 
 ## 7. Tamaño muestral, incertidumbre estadística y amenazas a la validez
 
+> **Estado: propuesta sin discutir.** Criterios de reporte estadístico y análisis de amenazas a la validez vinculados a [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
 ### 7.1. Tratamiento estadístico con muestras acotadas ($n$ chico)
 
 Debido a que la producción de grabaciones de voz estructuradas con dos actores y consentimiento informado limita el tamaño muestral a un orden de decenas de conversaciones (14 del piloto y una ampliación acotada para test):
 
-1. **Prohibición de p-valores inflados:** No se reportarán pruebas de hipótesis nula ($p$-values) ni pruebas $t$ de Student que presupongan normalidad o tamaños asintóticos que no se cumplen en la muestra.
-2. **Conteos y denominadores explícitos:** Cada métrica porcentual irá indefectiblemente acompañada de su fracción real ($TP/P$, $FP/N$, casos evaluables).
-3. **Intervalos de confianza de Wilson al 95 %:** Todas las proporciones estimadas (recall, tasa de falsas alarmas, $\text{Preventive}@\delta$) se informarán con el intervalo de Wilson al 95 %, ya implementado y validado en [`experiments/metricas/metricas.py`](../../experiments/metricas/README.md#1-qué-calcula-y-de-dónde-sale-cada-fórmula), por su probada robustez frente a muestras pequeñas y proporciones cercanas a 0 o 1.
+1. **Criterio sobre inferencia asintótica:** No reportar pruebas de hipótesis nula ($p$-values) ni pruebas $t$ de Student que presupongan normalidad o tamaños asintóticos que no se cumplen con $n$ acotado.
+2. **Conteos y denominadores explícitos:** Cada métrica porcentual irá acompañada de su fracción real ($TP/P$, $FP/N$, casos evaluables).
+3. **Intervalos de confianza de Wilson al 95 %:** Todas las proporciones estimadas (recall, tasa de falsas alarmas, $\text{Preventive}@\delta$) se informarán con el intervalo de Wilson al 95 %, implementado y probado en [`experiments/metricas/metricas.py`](../../experiments/metricas/README.md#1-qué-calcula-y-de-dónde-sale-cada-fórmula), por su probada robustez frente a muestras pequeñas y proporciones cercanas a 0 o 1.
 4. **Tratamiento no paramétrico de márgenes:** Los márgenes de anticipación ($L_R, L_C$) se resumirán mediante estadística descriptiva no paramétrica: **mediana, cuartiles ($Q_1, Q_3$) y rango intercuartil ($IQR$)**, junto con diagramas de caja (*boxplots*) o líneas temporales individuales.
 
 ### 7.2. Amenazas a la validez
@@ -358,7 +364,7 @@ Debido a que la producción de grabaciones de voz estructuradas con dos actores 
   - *Cumplimiento simulado vs real:* Las marcas $T_C$ corresponden a una actuación voluntaria bajo guion donde la víctima simulada accede a dictar el código para verificar el sistema. Esto permite medir márgenes temporales de ingeniería, pero no demuestra que una víctima real bajo manipulación psicológica y estrés cognitivo suspenda la acción al ver la alerta.
   - *Referencia mínima por conversación:* Anotar únicamente marcas críticas ($T_R, T_C$) en lugar de etiquetar exhaustivamente cada palabra evita la dispersión pericial pero impide medir la sensibilidad a maniobras secundarias aisladas.
 - **Validez interna:**
-  - *Variabilidad estocástica de SLMs en GPU:* Tal como se documentó en `experiments/slm-directo/README.md §8` (dos corridas idénticas de Qwen 2B con GPU discreta y temperatura 0 difirieron en 60 de 464 respuestas por no-determinismo de coma flotante en hardware paralelo), es obligatorio promediar al menos 3 repeticiones fijando la semilla o evaluar exclusivamente sobre CPU para congelar la salida.
+  - *Variabilidad estocástica de SLMs en GPU:* Dos corridas idénticas de Qwen 2B con GPU discreta y temperatura 0 difirieron en 60 de 464 respuestas por no-determinismo de coma flotante en hardware paralelo (registrado en [`experiments/slm-directo/README.md §8`](../../experiments/slm-directo/README.md#8-registro-del-proceso)). Se recomienda promediar al menos 3 repeticiones fijando la semilla o evaluar exclusivamente sobre CPU.
   - *Fuga por guion o dialecto:* El uso de modismos exclusivamente rioplatenses o la reutilización de estructuras dramáticas puede inducir sobreajuste al estilo de redacción del equipo.
 - **Validez externa:**
   - *Desajuste entre PC y hardware móvil (R13):* Medir latencias y consumo de memoria en una computadora de escritorio con procesador x86/Apple Silicon proporciona cotas teóricas de viabilidad, pero no equivale a una ejecución en el SoC ARM de un teléfono Android bajo restricciones térmicas y de batería ([PREFACTIBILIDAD-TECNICA.md §1 y §3](../investigacion/PREFACTIBILIDAD-TECNICA.md#1-hardware-objetivo-y-entorno-de-referencia)).
@@ -368,9 +374,11 @@ Debido a que la producción de grabaciones de voz estructuradas con dos actores 
 
 ## 8. Registro, reproducibilidad y checklist previa a la corrida
 
+> **Estado: propuesta sin discutir.** Estructura de registro, artefactos reproducibles y checklist de corrida para [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
 ### 8.1. Manifiesto estructurado y trazabilidad
 
-Cada corrida experimental generará de manera automática e inmutable los siguientes artefactos estandarizados en su directorio de salida:
+Cada corrida experimental generará de manera automática los siguientes artefactos estandarizados en su directorio de salida:
 
 1. **`manifiesto.json`:**
    - Hash del commit de Git exacto y estado del árbol de trabajo (`git status --porcelain`).
@@ -383,20 +391,22 @@ Cada corrida experimental generará de manera automática e inmutable los siguie
 3. **`resumen.md` y `metricas.json`:**
    - Reporte tabular procesado automáticamente por [`experiments/metricas/evaluar.py`](../../experiments/metricas/README.md#2-estructura-del-módulo) con las tablas de clasificación, márgenes y sensibilidad a prevalencia.
 
-### 8.2. Checklist previa a la ejecución sobre el test reservado
+### 8.2. Checklist propuesta previa a la ejecución sobre el test reservado
 
-Antes de autorizar la corrida del sistema sobre el conjunto de test reservado (#45), el equipo debe verificar que se cumpla la siguiente lista de control de higiene experimental:
+Checklist propuesta para verificar antes de la ejecución sobre el test reservado (#45):
 
 - [ ] **Código congelado:** El repositorio se encuentra en un commit específico con etiqueta de versión (*tag* de Git), sin cambios pendientes ni archivos sin seguimiento en el árbol de trabajo.
 - [ ] **Aislamiento del test verificado:** Se confirmó que ninguna semilla, escenario ni actor del conjunto de test reservado fue utilizado en desarrollo ni en el ajuste de prompts o reglas.
 - [ ] **Pruebas unitarias en verde:** La suite de pruebas de los arneses experimentales (`python -m unittest discover -s experiments/metricas/tests` y `experiments/replay/tests`) pasa al 100 % sin advertencias.
 - [ ] **Configuración e hiperparámetros congelados:** El modelo, prompt, temperatura, ventana `num_ctx`, motor ASR y política de alerta están registrados en el manifiesto previo.
-- [ ] **Inferencia local estricta:** La máquina de prueba se encuentra desconectada de Internet (modo avión o cable desconectado) para certificar que el pipeline opera exclusivamente *on-device* sin llamadas a APIs externas ni filtración de transcripciones.
+- [ ] **Inferencia local:** La máquina de prueba se encuentra desconectada de Internet (modo avión o cable desconectado) para certificar que el pipeline opera exclusivamente *on-device* sin llamadas a APIs externas ni filtración de transcripciones.
 - [ ] **Cero reintentos manuales:** Se acuerda formalmente que la corrida sobre test se ejecuta una sola vez de punta a punta; si un caso arroja un fallo técnico del modelo, se contabiliza como fallo en las métricas y no se reinicia selectivamente la llamada.
 
 ---
 
 ## 9. Checklist de congelamiento formal de D08
+
+> **Estado: propuesta sin discutir.** Lista de verificación que el equipo y el tutor completan para declarar cerrada la decisión [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
 > **Instrucciones para el equipo:** Esta lista de casillas debe ser completada y firmada por los integrantes del proyecto en conjunto con el tutor para declarar formalmente cerrada la decisión [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental) en el mapa de decisiones. **Las casillas permanecen desmarcadas en este borrador de protocolo.**
 
