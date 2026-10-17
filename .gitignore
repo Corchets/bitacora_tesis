@@ -26,8 +26,10 @@ consentimientos-firmados/
 models/checkpoints/
 artifacts/
 experiments/laboratorio/modelos/
+experiments/asr-local/modelos/
 
 # Python
+.venv/
 __pycache__/
 *.pyc
 

@@ -1,0 +1,122 @@
+{
+  "audio_path": "experiments/asr-local/audio/SC-WA-CODE-01-tts.wav",
+  "audio_duracion_s": 20.476,
+  "sample_rate": 16000,
+  "llamada_id": "SC-WA-CODE-01-tts",
+  "canal": null,
+  "motor": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 4,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    }
+  },
+  "bloque_ms": 100,
+  "modo": "rapido",
+  "duracion_total_ejecucion_s": 3.337,
+  "tiempo_proceso_total_s": 3.319,
+  "rtf": 0.1621,
+  "memoria_pico_mb": 391.11,
+  "total_actualizaciones": 16,
+  "total_parciales": 14,
+  "total_finales": 2,
+  "total_segmentos": 2,
+  "hardware": {
+    "sistema": "Darwin",
+    "release": "25.6.0",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_cpu": 8,
+    "ram_total_gb": 8.0
+  },
+  "git": {
+    "hash": "d975d2519961494c578769f5be6ec46b1870c9d3",
+    "dirty": true
+  },
+  "versiones": {
+    "python": "3.14.3",
+    "sherpa_onnx": "1.13.8",
+    "onnxruntime": "1.31.0",
+    "faster_whisper": "1.2.1",
+    "soundfile": "0.14.0",
+    "numpy": "2.5.4"
+  },
+  "texto_transcrito_final": "Te llamo de soporte por la activación de tu cuenta de WhatsApp. Me acaba de llegar un sms, no pedí activar nada. Para cancelar esa activación tenemos que resolverlo ahora. decime el código de activación que recibiste por sms. cero, cero, cer",
+  "evaluacion": {
+    "referencia_path": "experiments/slm-directo/casos/texto/SC-WA-CODE-01-e01.txt",
+    "texto_referencia": "Te llamo de soporte por la activación de tu cuenta de WhatsApp. Me acaba de llegar un SMS. No pedí activar nada. Para cancelar esa activación tenemos que resolverlo ahora. Decime el código de activación que recibiste por SMS. Es cero, cero, cero, cero, cero, cero.",
+    "wer": {
+      "wer": 0.1087,
+      "distancia": 5,
+      "sustituciones": 1,
+      "eliminaciones": 4,
+      "inserciones": 0,
+      "palabras_referencia": 46,
+      "palabras_hipotesis": 42,
+      "ref_normalizada": "te llamo de soporte por la activacion de tu cuenta de whatsapp me acaba de llegar un sms no pedi activar nada para cancelar esa activacion tenemos que resolverlo ahora decime el codigo de activacion que recibiste por sms es cero cero cero cero cero cero",
+      "hyp_normalizada": "te llamo de soporte por la activacion de tu cuenta de whatsapp me acaba de llegar un sms no pedi activar nada para cancelar esa activacion tenemos que resolverlo ahora decime el codigo de activacion que recibiste por sms cero cero cer"
+    },
+    "cer": {
+      "cer": 0.0751,
+      "distancia": 19,
+      "sustituciones": 0,
+      "eliminaciones": 19,
+      "inserciones": 0,
+      "caracteres_referencia": 253,
+      "caracteres_hipotesis": 234
+    },
+    "analisis_palabras_clave": [
+      {
+        "palabra_clave": "codigo",
+        "conteo_referencia": 1,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "cero",
+        "conteo_referencia": 6,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "whatsapp",
+        "conteo_referencia": 1,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "sms",
+        "conteo_referencia": 2,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "activacion",
+        "conteo_referencia": 3,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "soporte",
+        "conteo_referencia": 1,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "cuenta",
+        "conteo_referencia": 1,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      }
+    ]
+  }
+}
