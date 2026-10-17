@@ -1,9 +1,0 @@
-llamada_id,n,tipo,segmento,canal,texto,texto_disponible_resumido,inicio_audio_s,fin_audio_s,disponible_s,ms_detector,riesgo,alerta_sugerida,motivo,evidencia,valida,error,aviso,t_a
-SC-WA-CODE-01-tts,1,parcial,0,,hola buenas,hola buenas,0.00,1.00,1.200,,,,,,,,false,
-SC-WA-CODE-01-tts,2,parcial,0,,hola buenas tardes,hola buenas tardes,0.00,1.80,2.000,,,,,,,,false,
-SC-WA-CODE-01-tts,3,final,0,,hola buenas tardes,hola buenas tardes,0.00,2.10,2.300,4.7,,false,,,true,,false,
-SC-WA-CODE-01-tts,4,parcial,1,,te llamo de soporte,hola buenas tardes // te llamo de soporte,2.50,3.60,3.800,,,,,,,,false,
-SC-WA-CODE-01-tts,5,final,1,,te llamo de soporte técnico,hola buenas tardes // te llamo de soporte técnico,2.50,4.50,4.750,225.3,,false,,,true,,false,
-SC-WA-CODE-01-tts,6,parcial,2,,pasame el codigo,hola buenas tardes // te llamo de soporte técnico // pasame el codigo,5.00,6.20,6.450,,,,,,,,false,
-SC-WA-CODE-01-tts,7,final,2,,pasame el codigo de verificacion que te llego,hola buenas tardes // te llamo de soporte técnico // pasame el codigo de verificacion que te llego,5.00,7.80,8.100,14.8,,true,"REQUEST_AUTH_CODE (patrón: codigo, verificacion)",pasame el codigo de verificacion que te llego,true,,true,8.1148
-SC-WA-CODE-01-tts,8,final,3,,es para validar tu identidad,hola buenas tardes // te llamo de soporte técnico // pasame el codigo de verificacion que te llego // es para validar tu identidad,8.50,10.00,10.300,10.1,,true,REQUEST_PERSONAL_DATA (patrón: identidad),es para validar tu identidad,true,,false,

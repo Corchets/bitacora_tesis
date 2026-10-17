@@ -4,7 +4,7 @@ Herramienta de simulación de streaming para evaluar el pipeline completo de det
 incremental de vishing: consume actualizaciones de ASR (o casos de texto), mantiene el
 contexto acumulado de la llamada, invoca el detector (reglas de laboratorio o SLM local)
 y aplica la política de aviso único, midiendo el instante efectivo de aviso (`T_A`) en el reloj
-de la llamada.
+de la llamada con modelado de cola secuencial.
 
 ---
 
@@ -15,9 +15,10 @@ flowchart TD
     Audio["Audio de llamada (streaming)"] --> ASR["ASR local (actualizaciones.jsonl)"]
     ASR -->|"Actualización (parcial / final)"| Replay["Motor Replay (replay.py)"]
     Replay --> Contexto["Contexto incremental<br/>- Parcial: reemplaza borrador abierto<br/>- Final: acumula línea cerrada"]
-    Contexto -->|"Disparo (final / parcial)"| Detector["Detector<br/>- Reglas (comparador)<br/>- SLM directo (Ollama)"]
+    Contexto -->|"Disparo (final / parcial)"| Cola["Cola secuencial del detector<br/>inicio_eval = max(disponible_s, fin_eval_prev)"]
+    Cola --> Detector["Detector<br/>- Reglas (comparador)<br/>- SLM directo (Ollama)"]
     Detector -->|"Respuesta (riesgo, alerta_sugerida, motivo, evidencia)"| Politica["Política de aviso único"]
-    Politica -->|"Primer alerta válida = true"| Aviso["Emisión de aviso (T_A)<br/>T_A = disponible_s + t_detector"]
+    Politica -->|"Primer alerta válida = true"| Aviso["Emisión de aviso (T_A)<br/>T_A = fin_eval_n"]
     Politica -->|"Sin alerta o alertas posteriores"| Registro["Registro de evento (eventos.csv)"]
     Aviso --> Registro
 ```
@@ -31,7 +32,7 @@ streaming de audio ASR (`--actualizaciones`) y casos de texto sin audio (`--text
 
 ### A. Simulación de audio ASR (JSONL)
 
-Con detector de reglas de laboratorio:
+Con detector de reglas de laboratorio sobre el archivo de prueba ficticio `FICTICIO-01`:
 ```bash
 python replay.py \
   --actualizaciones tests/datos/ejemplo_actualizaciones.jsonl \
@@ -77,19 +78,22 @@ python replay.py \
 
 ---
 
-## 3. Política de aviso único
+## 3. Política de aviso único y cola del detector
 
 > **Estado: propuesta sin discutir.** Ver [D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-En este ensayo se aplica la política `aviso_unico_primer_true_valido`:
+En este ensayo se aplica la política `aviso_unico_primer_true_valido` con un detector modelado como único recurso secuencial:
 1. El detector evalúa lo disponible hasta el instante actual `disponible_s`.
-2. El primer resultado válido con `alerta_sugerida = True` emite el aviso de la llamada.
-3. Respuestas inválidas (error de JSON, recorte de contexto o timeout) cuentan como **fallos**, nunca como predicción, y no impiden que una actualización posterior válida genere el aviso.
-4. Una vez emitido el aviso, las actualizaciones posteriores se siguen registrando pero tienen `aviso = false`.
-5. En audio, el instante del aviso se calcula como:
-   $$T_A = \text{disponible\_s} + \frac{\text{ms\_detector}}{1000}$$
-   representando el segundo real del reloj de audio en que el usuario recibiría la notificación.
+2. Una evaluación no puede comenzar antes de que finalice la anterior. En el reloj de audio:
+   $$\text{inicio\_eval}_n = \max(\text{disponible\_s}_n, \text{fin\_eval}_{n-1})$$
+   $$\text{fin\_eval}_n = \text{inicio\_eval}_n + \frac{\text{ms}_n}{1000}$$
+   $$\text{espera\_cola\_ms} = (\text{inicio\_eval}_n - \text{disponible\_s}_n) \times 1000$$
+3. El primer resultado válido con `alerta_sugerida = True` emite el aviso de la llamada en su instante de fin de cómputo:
+   $$T_A = \text{fin\_eval}_n$$
+4. Respuestas inválidas (error de JSON, recorte de contexto o timeout) cuentan como **fallos**, nunca como predicción, y no impiden que una actualización posterior válida genere el aviso.
+5. Una vez emitido el aviso, las actualizaciones posteriores se siguen registrando pero tienen `aviso = false`.
 6. En modo texto, no hay reloj de audio: las columnas de tiempo quedan vacías y el aviso informa el turno/línea correspondiente.
+7. La cola de procesamiento se reinicia completamente entre llamadas distintas.
 
 ---
 
@@ -101,6 +105,7 @@ Cada ejecución en `--salida <dir>` produce tres archivos:
    - `llamada_id`, `n`, `tipo` (`parcial`/`final`), `segmento`, `canal`, `texto`.
    - `texto_disponible_resumido`: texto acumulado disponible en ese instante exacto.
    - `inicio_audio_s`, `fin_audio_s`, `disponible_s`.
+   - `inicio_eval_s`, `fin_eval_s`, `espera_cola_ms`: modelado temporal de la cola secuencial.
    - `ms_detector`, `riesgo`, `alerta_sugerida`, `motivo`, `evidencia`, `valida`, `error`.
    - `aviso` (`true`/`false`), `t_a` (segundos del audio si emite aviso).
 2. **`manifiesto.json`**: procedencia técnica completa:
@@ -112,12 +117,14 @@ Cada ejecución en `--salida <dir>` produce tres archivos:
 3. **`resumen.md`**: reporte sintetizado:
    - Si hubo aviso, instante `T_A`, motivo, evidencia y actualización desencadenante.
    - Transcripción completa disponible al momento exacto del aviso (permite auditar qué información provocó la alerta).
+   - Espera máxima en cola y atraso del detector respecto del flujo de audio.
    - Total de actualizaciones, evaluaciones, fallos y tiempos de respuesta.
 
 ---
 
 ## 5. Límites y alcance metodológico
 
+- **Datos de prueba ficticios:** el archivo `tests/datos/ejemplo_actualizaciones.jsonl` contiene la llamada sintética `FICTICIO-01` escrita a mano para pruebas unitarias y de humo, no audio real de ASR.
 - **Sin etiquetas de referencia en runtime:** el runner jamás recibe clases (`vishing`/`legítima`), escenarios, roles ni marcas humanas (`T_R`/`T_C`). La evaluación contra referencia humana se realiza en etapas posteriores de análisis.
 - **Sin segundos inventados en texto:** en modo `--texto` los tiempos quedan en blanco; no se asumen duraciones artificiales por palabra ni silencios.
 - **Garantía temporal incremental:** el contexto disponible solo contiene segmentos entregados hasta `disponible_s`.
