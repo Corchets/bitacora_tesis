@@ -164,6 +164,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   acierto requerido derivado), la regla de persistencia del contador (opciones
   A/B/C en VENTANA §11), el reloj de actualización, el conteo de alertas y las
   franjas de duración.
+- **Evidencia nueva disponible (2026-10-17, material de desarrollo, no test):**
+  - Módulo de cálculo según `METRICAS.md` probado en [`experiments/metricas/`](../../experiments/metricas/) y evaluado sobre los 53 casos de `slm-directo` ([`experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md`](../../experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md)); revela alta sensibilidad a falsas alarmas en negativos difíciles (58.3 % en reglas, 62.5 % en Qwen3.5 4B, 33.3 % en 0.8B y 8.3 % en 2B).
+  - Simulación incremental con cola secuencial y política de aviso único implementada en [`experiments/replay/`](../../experiments/replay/) ([#28](https://github.com/Corchets/bitacora_tesis/issues/28)), con corrida de punta a punta sobre ASR de audio sintético TTS ([`experiments/replay/corridas/2026-10-17_e2e-zipformer-reglas-sc_wa_code_01/`](../../experiments/replay/corridas/2026-10-17_e2e-zipformer-reglas-sc_wa_code_01/)).
+  - Cuatro propuestas metodológicas derivadas de literatura para congelar el protocolo experimental en D08 documentadas en [`docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md §7`](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#7-qué-cambia-para-la-evaluación) ([#25](https://github.com/Corchets/bitacora_tesis/issues/25)).
 
 ### D09 — Elegir ASR y detector
 
@@ -191,6 +195,9 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   recomendación del laboratorio de retomar datos reales para encoder y cascada
   (#41/#42) está retirada como `not_planned` en GitHub: revivirla exige una
   replanificación acordada; se evalúa como alternativa en #51, no como tarea abierta.
+- **Evidencia nueva disponible (2026-10-17, material de desarrollo, no test):**
+  - ASR local repetible en [`experiments/asr-local/`](../../experiments/asr-local/) ([#19](https://github.com/Corchets/bitacora_tesis/issues/19)) con Zipformer Kroko (streaming, RTF 0.10–0.17, RSS ~357–423 MB, WER 4.35–5.00 % sobre audio TTS de humo) y Faster-Whisper base (lotes, RTF 0.27, WER 17.39 % con pérdida de dígitos "cero"); la corrida de entrega espera audio humano de #39.
+  - Ensayo SLM local directo en [`experiments/slm-directo/`](../../experiments/slm-directo/) ([#50](https://github.com/Corchets/bitacora_tesis/issues/50)) sobre 53 casos de texto con Qwen3.5 (0.8B, 2B, 4B); en CPU con 2 hilos la latencia p50 sube a 3.9 s (0.8B) y 8.2 s (2B), superando el presupuesto de tiempo real. Corridas completas comparadas frente a reglas en [`experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md`](../../experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md).
 
 ### D10 — Congelar estructura de entrega y defensa
 

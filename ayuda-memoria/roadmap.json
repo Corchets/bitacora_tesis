@@ -1,29 +1,29 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08",
+  "updatedAt": "2026-10-17",
   "currentLocation": {
-    "summary": "H1 cerrado formalmente mediante PR #56 (#20). El equipo arranca el hito H2 con frentes paralelos: en detección, probar un SLM directo con contexto y aviso único en #50 (acordado el 2026-10-08 en el issue #50; las reglas se comparan por separado y D09 sigue abierta); en corpus, preparación del primer par (#39), con la grabación condicionada a la validación del tutor (D06); y en metodología, revisión de antecedentes (#25) sin bloqueos.",
+    "summary": "H2 en desarrollo activo. El ensayo #50 evaluó SLM directo (Qwen3.5 0.8B, 2B, 4B) y reglas sobre 53 casos de texto en experiments/slm-directo/; el kit del primer par y la planilla de revisión están listos en docs/corpus/KIT-PRIMER-PAR.md (#39, grabación sujeta a D06); se estableció el procedimiento repetible de ASR local en experiments/asr-local/ (#19) y la simulación replay con cola secuencial y corrida de punta a punta en experiments/replay/ (#28); se incorporó literatura y 4 propuestas para D08 en docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md (#25); y se preparó el cálculo de métricas en experiments/metricas/ (#52).",
     "activeMilestone": "H2 — Piloto del corpus y primeras pruebas",
     "nextActions": [
       {
-        "frontId": "deteccion",
-        "issue": 50,
-        "title": "Probar un SLM directo con contexto y aviso único",
-        "description": "Acordado con Mateo el 2026-10-08 (issue #50): el ensayo usa un SLM local directo sobre el par escrito de H1, sin esperar audio. Las reglas simples se ejecutan como comparador independiente sobre los mismos casos; no habilitan ni bloquean el SLM.",
+        "frontId": "corpus",
+        "issue": 39,
+        "title": "Gestionar validación del tutor (D06) y grabar el primer par",
+        "description": "Con el kit operativo y planilla listos en docs/corpus/KIT-PRIMER-PAR.md, gestionar la aprobación formal de D06 con el Ing. Ernesto Rico para grabar el audio del par contrastante SC-WA-CODE-01 y LG-WA-CONSULTA-01 fuera de Git, habilitando la evaluación de ASR (#19) y replay (#28) sobre voz humana.",
         "urgency": "inmediato"
       },
       {
-        "frontId": "corpus",
-        "issue": 39,
-        "title": "Preparar el primer par y validar las condiciones de grabación",
-        "description": "D06 exige la validación del tutor de las condiciones de consentimiento y custodia antes de grabar (pendiente de respuesta al 2026-10-08). El paso inmediato es preparar el primer par contrastante y gestionar esa validación; grabar queda condicionado. El par habilita ASR local (#19) y alimenta el piloto (#54).",
+        "frontId": "deteccion",
+        "issue": 28,
+        "title": "Integrar SLM local en el replay de punta a punta",
+        "description": "Conectar el detector SLM local en experiments/replay/ sobre streaming de ASR en un entorno con Ollama disponible y auditar la reducción de falsas alarmas observadas en el clasificador de reglas sobre llamadas legítimas difíciles.",
         "urgency": "inmediato"
       },
       {
         "frontId": "metodologia",
-        "issue": 25,
-        "title": "Revisar antecedentes para interpretar la evaluación",
-        "description": "Completar la síntesis de literatura en SINTESIS-ESTADO-DEL-ARTE.md sobre métricas temporales de vishing, ejecutable en paralelo sin dependencias.",
+        "issue": 33,
+        "title": "Congelar el protocolo experimental en D08",
+        "description": "Discutir y acordar en el equipo las 4 propuestas metodológicas de #25 (márgenes físicos, evaluación de ASR por omisiones críticas, particiones disjuntas y análisis de sensibilidad por prevalencia) e incorporar el cálculo de experiments/metricas/ (#52).",
         "urgency": "disponible"
       }
     ]
@@ -36,8 +36,8 @@
       "state": "activo",
       "stateLabel": "Activo",
       "purpose": "Producción de llamadas simuladas de vishing y legítimas difíciles, grabación, transcripción y validación del criterio de anotación humana (D07).",
-      "whatExists": "Fichas de rol y par escrito de WhatsApp en docs/ingenieria/ARQUITECTURA.md §4; catálogo de 9 escenarios (CATALOGO-ESCENARIOS.csv); método del corpus y manual de anotación con referencia mínima acordada.",
-      "nextStep": "Grabar y transcribir el primer par (#39) con audio utilizable y referencia mínima, sin esperar las 14 tomas del piloto.",
+      "whatExists": "Kit operativo del primer par en docs/corpus/KIT-PRIMER-PAR.md y planilla de control en docs/corpus/PLANILLA-REVISION-TOMAS.csv (#39); fichas de rol y par escrito de WhatsApp en docs/ingenieria/ARQUITECTURA.md §4; catálogo de escenarios (CATALOGO-ESCENARIOS.csv); método del corpus y manual de anotación con referencia acordada.",
+      "nextStep": "Gestionar la validación formal del tutor (D06) sobre protocolo y custodia de datos para ejecutar la grabación de audio humano del primer par con el kit preparado (#39), sin esperar las 14 tomas del piloto.",
       "evidence": {
         "label": "ARQUITECTURA.md §4",
         "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/ingenieria/ARQUITECTURA.md#4-primer-par-escrito-del-escenario-al-aviso",
@@ -53,8 +53,8 @@
       "state": "activo",
       "stateLabel": "Activo",
       "purpose": "Implementar el pipeline mínimo ejecutable demostrable: detector SLM que puntúa cada turno cerrado sobre texto incremental, ASR local sobre audio propio e integración de streaming en replay. La cascada encoder→SLM queda como alternativa a medir con datos reales.",
-      "whatExists": "Par escrito de WhatsApp y recorrido conceptual de actualizaciones en ARQUITECTURA.md §4 (cerrado en #20 / PR #56); condiciones del ensayo SLM acordadas el 2026-10-08 en el issue #50: contexto de la llamada, aviso único ante el primer true válido y reglas de incendio como comparador independiente. La visualización del pipeline propuesto vive en /arquitectura/ (adoptada del PR #58).",
-      "nextStep": "Ejecutar #50 con el par escrito de H1 y casos de desarrollo, sin esperar audio. Al contar con las grabaciones de #39, probar ASR local en #19 e integrar SLM y transcripción en #28.",
+      "whatExists": "Ensayo SLM directo en experiments/slm-directo/ (#50) sobre 53 casos de texto con Qwen3.5 (0.8B, 2B, 4B), reglas, visor HTML y medición en CPU; procedimiento de ASR local streaming con Zipformer Kroko y Whisper en experiments/asr-local/ (#19); motor replay incremental con cola secuencial y política de aviso único en experiments/replay/ (#28), con corrida e2e de Zipformer a reglas registrada.",
+      "nextStep": "Ejecutar la corrida replay de punta a punta con SLM local en entorno con Ollama; comparar candidatos y evaluar con las grabaciones humanas de #39 cuando estén disponibles (#51 / D09).",
       "evidence": {
         "label": "Issue #50",
         "url": "https://github.com/Corchets/bitacora_tesis/issues/50",
@@ -71,8 +71,8 @@
       "state": "disponible",
       "stateLabel": "Disponible",
       "purpose": "Sintetizar la literatura relevante, congelar el protocolo experimental sin fugas temporales (D08) y seleccionar el detector y ASR final (D09).",
-      "whatExists": "Síntesis del estado del arte en SINTESIS-ESTADO-DEL-ARTE.md; ventana de contexto y alerta con decaimiento y la escalera de avisos como propuestas; taxonomía 6+6 como selección de trabajo de D07 (abierta); D11 abierta según la consolidación del PR #58; presupuestos de prefactibilidad técnica (#24).",
-      "nextStep": "Avanzar con la síntesis de literatura en #25 (abierto, sin bloqueos). Usar la integración de #28 para comparar candidatos en #51 y congelar protocolo en #33.",
+      "whatExists": "Síntesis del estado del arte ampliada en docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md (§2.4 y §7, #25) con 8 estudios y 4 propuestas para D08; ventana de contexto y alerta con decaimiento; taxonomía 6+6 como selección de trabajo de D07 (abierta); presupuestos de prefactibilidad técnica (#24); D06, D07, D08, D09 y D11 abiertas.",
+      "nextStep": "Acordar en el equipo las propuestas metodológicas de #25 para congelar el protocolo experimental en #33 (D08) y avanzar hacia la selección de ASR y detector en #51 (D09).",
       "evidence": {
         "label": "MAPA-DECISIONES.md (D08/D09)",
         "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación",
@@ -89,8 +89,8 @@
       "state": "espera",
       "stateLabel": "Previsto (más adelante)",
       "purpose": "Ejecutar la evaluación final sobre test reservado para responder PI1, PI2 y E1; redactar el informe digital (~100 págs), demo y defensa ante UNSTA.",
-      "whatExists": "Definición rigurosa de métricas (T_A, T_R, T_C, L_R, L_C) en METRICAS.md; requisitos académicos y esqueleto de informe aprobados.",
-      "nextStep": "Horizonte futuro: esperar protocolo congelado (#33) y test reservado (#45) para correr la evaluación final en #52 sin sesgo. Redactar capítulos técnicos en #53.",
+      "whatExists": "Módulo ejecutable de cálculo y reporte de métricas en experiments/metricas/ (#52) conforme a docs/evaluacion/METRICAS.md (márgenes L_R/L_C, Preventive@δ, falsas alarmas, intervalos de Wilson 95%, RTF y sensibilidad a prevalencia), evaluado sobre corridas de desarrollo; requisitos académicos y esqueleto de informe aprobados.",
+      "nextStep": "Esperar protocolo congelado (#33) y test reservado (#45) con audio real para ejecutar la evaluación formal en #52 sin sesgo ni fuga; redactar capítulos en #53.",
       "evidence": {
         "label": "METRICAS.md",
         "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/evaluacion/METRICAS.md",

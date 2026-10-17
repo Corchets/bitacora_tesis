@@ -80,4 +80,10 @@ bitacora_tesis/
 │   │   └── METRICAS.md            # Fórmulas de tiempos, márgenes de anticipación y falsas alarmas
 │   └── tesis/
 │       └── ESQUELETO-INFORME.md   # Estructura capitular e índice orientativo de páginas
+├── experiments/
+│   ├── asr-local/                 # Procedimiento repetible de ASR local streaming/segmentado (#19)
+│   ├── laboratorio/               # UI y exploraciones previas de laboratorio (#44)
+│   ├── metricas/                  # Módulo de cálculo y reporte de métricas según METRICAS.md (#52)
+│   ├── replay/                    # Simulación de streaming, cola secuencial y política de aviso único (#28)
+│   └── slm-directo/               # Ensayo de SLM local directo y reglas sobre texto incremental (#50)
 ```

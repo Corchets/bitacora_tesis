@@ -1,4 +1,4 @@
-# Kit para producir y revisar el primer par de llamadas (Hito H1)
+# Kit para producir y revisar el primer par de llamadas (Hito H2)
 
 Este documento es el kit operativo para preparar, simular, registrar y revisar el
 **primer par de conversaciones contrastantes** del proyecto:
@@ -302,16 +302,32 @@ El revisor debe realizar el siguiente contraste metódico:
 Una vez que el archivo `.wav` de una toma fue revisado, aprobado y anotado en la planilla, pasa a alimentar los componentes experimentales en curso:
 
 1. **Experimento ASR Local ([issue #19](https://github.com/Corchets/bitacora_tesis/issues/19)):**
-   - **Ruta:** `experiments/asr-local/` (desarrollado en paralelo).
-   - **Función:** El audio WAV de la toma se procesa con el transcriptor local en *streaming* (ej. Zipformer / Whisper) para evaluar la tasa de error por palabra (WER), el retardo de transcripción y la preservación de los términos críticos («código», «WhatsApp», «SMS»). Consultar el archivo `README.md` de dicha carpeta para los comandos exactos de ejecución.
+   - **Ruta:** `experiments/asr-local/`.
+   - **Función:** El audio WAV de la toma se procesa con el transcriptor local en *streaming* (Zipformer Kroko ONNX como motor principal o Faster-Whisper como comparador secundario) para evaluar la tasa de error por palabra (WER), el retardo de transcripción y la preservación de los términos críticos («código», «WhatsApp», «SMS»).
+   - **Comando de ejecución:**
+     ```bash
+     python3 experiments/asr-local/asr_local.py /ruta/a/toma.wav \
+         --salida experiments/asr-local/corridas/mi_corrida \
+         --motor sherpa-zipformer \
+         --referencia /ruta/a/transcripcion_revisada.txt
+     ```
+     (Ver `experiments/asr-local/README.md` para opciones adicionales como `--simular-tiempo-real` y `--canal A`).
+
 2. **Experimento de Replay y Detección Incremental ([issue #28](https://github.com/Corchets/bitacora_tesis/issues/28)):**
-   - **Ruta:** `experiments/replay/` (y prototipo en `experiments/laboratorio/`).
-   - **Función:** El audio WAV se reproduce en fragmentos temporizados (*replay* en trozos de audio o turnos transcriptos) hacia el detector de vishing para medir:
-     - El instante de alerta del sistema (`T_A`).
+   - **Ruta:** `experiments/replay/`.
+   - **Función:** Consume el flujo de actualizaciones emitido por el ASR (`actualizaciones.jsonl`), modela la cola secuencial del detector y aplica la política de aviso único ante el primer *true* válido, registrando en `eventos.csv`:
+     - El instante de alerta del sistema ($T_A$ en el reloj de audio).
      - El margen de anticipación respecto al pedido: $L_R = T_R - T_A$.
      - El margen de anticipación respecto al cumplimiento: $L_C = T_C - T_A$.
      - La presencia o ausencia de falsas alarmas en la conversación legítima contrastante.
-   - Consultar el `README.md` de `experiments/replay/` y las opciones de ejecución con variables de entorno (ej. `WAV=/ruta/al/audio.wav`).
+   - **Comando de ejecución:**
+     ```bash
+     python experiments/replay/replay.py \
+         --actualizaciones experiments/asr-local/corridas/mi_corrida/actualizaciones.jsonl \
+         --detector reglas \
+         --salida experiments/replay/corridas/mi_corrida_replay
+     ```
+     (Para usar SLM local con Ollama se especifica `--detector slm --modelo qwen3.5:2b`; ver `experiments/replay/README.md`).
 
 ---
 
