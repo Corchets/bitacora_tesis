@@ -48,7 +48,7 @@ En la siguiente tabla se resumen las entradas, salidas y restricciones críticas
 | **Audio** | Flujo acústico bruto (WAV/FLAC mono o estéreo, 16 kHz). | Bloques de PCM con marcas de tiempo. | Prohibido entregar muestras acústicas con timestamp posterior al reloj actual. |
 | **ASR local** | Bloques de PCM de 100 ms. | Eventos de transcripción (`parcial` o `final`). | $t_{\text{disp}} \ge \tau_{\text{fin}}$. La latencia de cómputo se suma hacia adelante; no se reasignan marcas al pasado. |
 | **Contexto** | Actualización de ASR (`tipo`, `segmento`, `texto`). | Tupla inmutable de líneas de diálogo cerradas y abiertas. | Aislamiento estricto entre llamadas: al cambiar de sesión el estado se vacía totalmente. |
-| **Cola de evaluación** | Líneas de diálogo en $t_{\text{disp}}$ y estado del detector. | Turno de cómputo secuencial con inicio y fin de evaluación. | Inferencia monohilo: la evaluación $n$ no puede iniciar antes de que termine la $n-1$. |
+| **Cola de evaluación** | Líneas de diálogo en $t_{\text{disp}}$ y estado del detector. | Turno de cómputo secuencial con inicio y fin de evaluación. | Recurso secuencial (una inferencia a la vez): la evaluación $n$ no puede iniciar antes de que termine la $n-1$. |
 | **Detector** | Prefijo conversacional acumulado hasta la línea actual. | Objeto de respuesta tipado (`riesgo`, `alerta_sugerida`, `motivo`, `evidencia`). | Ceguera hacia el futuro y ausencia de datos de referencia humana (clase, rol, marcas $T_R$/$T_C$). |
 | **Política de alerta** | Respuesta del detector y estado de avisos previos. | Disparo del aviso definitivo y marca $T_A$. | Principio de aviso único: a lo sumo un aviso principal por sesión para prevenir fatiga. |
 
@@ -122,7 +122,7 @@ Este mecanismo garantiza dos propiedades estructurales:
 
 ### 5.4.2. Modelado de la cola secuencial del detector
 
-Un dispositivo móvil de gama media cuenta con recursos computacionales acotados. Por ende, el detector lingüístico no puede concebirse como un servicio paralelizable sin límites: constituye un **recurso monohilo estrictamente secuencial**. Si el reconocedor ASR emite actualizaciones a un ritmo superior a la velocidad de inferencia del detector, las solicitudes de análisis deben encolarse.
+Un dispositivo móvil de gama media cuenta con recursos computacionales acotados. Por ende, el detector lingüístico no puede concebirse como un servicio paralelizable sin límites: constituye un **recurso secuencial (una inferencia a la vez)**. Si el reconocedor ASR emite actualizaciones a un ritmo superior a la velocidad de inferencia del detector, las solicitudes de análisis deben encolarse.
 
 El simulador implementa el cálculo exacto de la cola secuencial en el reloj continuo del audio:
 
