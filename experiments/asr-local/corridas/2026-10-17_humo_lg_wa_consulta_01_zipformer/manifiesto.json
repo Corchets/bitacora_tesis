@@ -1,0 +1,104 @@
+{
+  "audio_path": "experiments/asr-local/audio/LG-WA-CONSULTA-01-tts.wav",
+  "audio_duracion_s": 15.572,
+  "sample_rate": 16000,
+  "llamada_id": "LG-WA-CONSULTA-01-tts",
+  "canal": null,
+  "motor": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 4,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    }
+  },
+  "bloque_ms": 100,
+  "modo": "rapido",
+  "duracion_total_ejecucion_s": 1.613,
+  "tiempo_proceso_total_s": 1.608,
+  "rtf": 0.1032,
+  "memoria_pico_mb": 422.7,
+  "total_actualizaciones": 14,
+  "total_parciales": 10,
+  "total_finales": 4,
+  "total_segmentos": 4,
+  "hardware": {
+    "sistema": "Darwin",
+    "release": "25.6.0",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_cpu": 8,
+    "ram_total_gb": 8.0
+  },
+  "git": {
+    "hash": "b29ff73e863e388904703e0181a2d6f6d773c7f1",
+    "dirty": false
+  },
+  "versiones": {
+    "python": "3.14.3",
+    "sherpa_onnx": "1.13.8",
+    "onnxruntime": "1.31.0",
+    "faster_whisper": "1.2.1",
+    "soundfile": "0.14.0",
+    "numpy": "2.5.4"
+  },
+  "texto_transcrito_final": "Me llegó por SMS un código para activar WhatsApp y yo no lo pedí . No me lo leas ni lo compartas, revisa la seguridad desde la aplicación . Necesitas verlo para ayudar me? No, no hace falta que me digas ningún código.",
+  "evaluacion": {
+    "referencia_path": "experiments/slm-directo/casos/texto/LG-WA-CONSULTA-01-e01.txt",
+    "texto_referencia": "Me llegó por SMS un código para activar WhatsApp y yo no lo pedí. No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación. ¿Necesitás verlo para ayudarme? No. No hace falta que me digas ningún código.",
+    "wer": {
+      "wer": 0.05,
+      "distancia": 2,
+      "sustituciones": 1,
+      "eliminaciones": 0,
+      "inserciones": 1,
+      "palabras_referencia": 40,
+      "palabras_hipotesis": 41,
+      "ref_normalizada": "me llego por sms un codigo para activar whatsapp y yo no lo pedi no me lo leas ni lo compartas revisa la seguridad desde la aplicacion necesitas verlo para ayudarme no no hace falta que me digas ningun codigo",
+      "hyp_normalizada": "me llego por sms un codigo para activar whatsapp y yo no lo pedi no me lo leas ni lo compartas revisa la seguridad desde la aplicacion necesitas verlo para ayudar me no no hace falta que me digas ningun codigo"
+    },
+    "cer": {
+      "cer": 0.0048,
+      "distancia": 1,
+      "sustituciones": 0,
+      "eliminaciones": 0,
+      "inserciones": 1,
+      "caracteres_referencia": 208,
+      "caracteres_hipotesis": 209
+    },
+    "analisis_palabras_clave": [
+      {
+        "palabra_clave": "codigo",
+        "conteo_referencia": 2,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "whatsapp",
+        "conteo_referencia": 1,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "sms",
+        "conteo_referencia": 1,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      },
+      {
+        "palabra_clave": "seguridad",
+        "conteo_referencia": 1,
+        "detectada_en_hipotesis": true,
+        "estado": "OK"
+      }
+    ]
+  }
+}
