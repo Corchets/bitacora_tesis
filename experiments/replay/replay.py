@@ -41,6 +41,7 @@ if str(DIR_REPLAY) not in sys.path:
     sys.path.insert(0, str(DIR_REPLAY))
 
 import cliente_ollama
+import correr
 import detectores
 from contexto import Actualizacion, ContextoLlamada
 
@@ -226,7 +227,7 @@ def construir_detector(
     elif nombre == "slm":
         prompt_str = detectores.cargar_prompt(prompt_nombre)
         cliente = cliente_ollama.ClienteOllama(ollama_url)
-        return detectores.DetectorSLM(
+        detector = detectores.DetectorSLM(
             cliente=cliente,
             modelo=modelo,
             prompt=prompt_str,
@@ -234,6 +235,11 @@ def construir_detector(
             num_ctx=num_ctx,
             seed=seed,
         )
+        # Compartir el calentamiento y la negociación de `think` con slm-directo.
+        # Qwen3.5 necesita pensar=False para responder dentro del formato y presupuesto.
+        detector.carga = correr.calentar(cliente, modelo, num_ctx)
+        detector.pensar = detector.carga["pensar"]
+        return detector
     else:
         raise ValueError(f"Detector desconocido {nombre!r}; opciones: 'reglas', 'slm'")
 
@@ -357,6 +363,7 @@ def guardar_manifiesto(
     disparo: str,
     seed: int | str,
     asr_meta: dict | None = None,
+    carga: dict | None = None,
 ) -> None:
     manifiesto = {
         "fecha_hora": datetime.now().isoformat(timespec="seconds"),
@@ -379,6 +386,8 @@ def guardar_manifiesto(
         "codigo": info_codigo(),
         "hardware": info_maquina(),
     }
+    if detector_nombre == "slm":
+        manifiesto["carga"] = carga
     if asr_meta:
         manifiesto["asr_meta"] = asr_meta
 
@@ -643,6 +652,7 @@ def main() -> None:
         disparo=args.disparo,
         seed=args.seed,
         asr_meta=asr_meta,
+        carga=getattr(detector, "carga", None),
     )
 
     guardar_resumen(

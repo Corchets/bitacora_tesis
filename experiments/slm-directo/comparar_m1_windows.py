@@ -53,7 +53,17 @@ def cargar_avisos_y_tiempos(ruta_actualizaciones: Path, modelo_filtro: str | Non
                     "motivo_aviso": "",
                     "evidencia_aviso": "",
                     "ms_lista": [],
+                    "lineas": set(),
+                    "lineas_invalidas": set(),
                 }
+
+            try:
+                numero_linea = int(fila["linea"])
+                casos[cid]["lineas"].add(numero_linea)
+                if str(fila.get("valida", "")).strip().lower() not in ("true", "1"):
+                    casos[cid]["lineas_invalidas"].add(numero_linea)
+            except (KeyError, TypeError, ValueError):
+                pass
 
             if fila.get("ms"):
                 try:
@@ -84,7 +94,7 @@ def calcular_percentiles(valores: list[float]) -> tuple[float | None, float | No
     return round(p50, 1), round(p95, 1)
 
 
-def comparar_modelos(carpeta_m1: Path) -> dict[str, Any]:
+def comparar_modelos(carpeta_m1: Path, corridas_windows: dict[str, Path] | None = None) -> dict[str, Any]:
     ruta_act_m1 = carpeta_m1 / "actualizaciones.csv"
     if not ruta_act_m1.exists():
         raise FileNotFoundError(f"No existe {ruta_act_m1}")
@@ -103,9 +113,10 @@ def comparar_modelos(carpeta_m1: Path) -> dict[str, Any]:
         "2b": "qwen3.5:2b-q8_0",
         "4b": "qwen3.5:4b-q4_K_M",
     }
+    corridas_windows = corridas_windows or CORRIDAS_WINDOWS
 
     for clave_tam, mod_m1 in mapeo_modelos.items():
-        dir_win = CORRIDAS_WINDOWS[clave_tam]
+        dir_win = corridas_windows[clave_tam]
         if not dir_win.exists():
             continue
         manifiesto_win = json.loads((dir_win / "manifiesto.json").read_text(encoding="utf-8"))
@@ -116,7 +127,32 @@ def comparar_modelos(carpeta_m1: Path) -> dict[str, Any]:
         if not datos_m1:
             continue
 
-        todos_casos = sorted(set(datos_win.keys()) | set(datos_m1.keys()))
+        candidatos = sorted(set(datos_win.keys()) | set(datos_m1.keys()))
+        excluidos: list[dict[str, str]] = []
+        todos_casos = []
+        for cid in candidatos:
+            cw, cm = datos_win.get(cid), datos_m1.get(cid)
+            if cw is None:
+                excluidos.append({"case_id": cid, "motivo": "sin_evaluaciones_en_windows"})
+                continue
+            if cm is None:
+                excluidos.append({"case_id": cid, "motivo": "sin_evaluaciones_en_m1"})
+                continue
+            razones = []
+            if cw["lineas_invalidas"]:
+                razones.append("windows_tiene_lineas_invalidas")
+            if cm["lineas_invalidas"]:
+                razones.append("m1_tiene_lineas_invalidas")
+            faltan_m1 = sorted(cw["lineas"] - cm["lineas"])
+            sobran_m1 = sorted(cm["lineas"] - cw["lineas"])
+            if faltan_m1:
+                razones.append("m1_sin_lineas:" + ",".join(map(str, faltan_m1)))
+            if sobran_m1:
+                razones.append("m1_lineas_no_presentes_en_windows:" + ",".join(map(str, sobran_m1)))
+            if razones:
+                excluidos.append({"case_id": cid, "motivo": ";".join(razones)})
+                continue
+            todos_casos.append(cid)
 
         coincidencias_aviso = 0
         coincidencias_linea = 0
@@ -127,8 +163,8 @@ def comparar_modelos(carpeta_m1: Path) -> dict[str, Any]:
         todos_ms_m1 = []
 
         for cid in todos_casos:
-            cw = datos_win.get(cid, {"aviso": False, "linea_aviso": None, "motivo_aviso": "", "ms_lista": []})
-            cm = datos_m1.get(cid, {"aviso": False, "linea_aviso": None, "motivo_aviso": "", "ms_lista": []})
+            cw = datos_win[cid]
+            cm = datos_m1[cid]
 
             todos_ms_win.extend(cw["ms_lista"])
             todos_ms_m1.extend(cm["ms_lista"])
@@ -169,6 +205,9 @@ def comparar_modelos(carpeta_m1: Path) -> dict[str, Any]:
             "modelo_win": manifiesto_win.get("comando", ""),
             "modelo_m1": mod_m1,
             "total_casos": total_casos,
+            "casos_incluidos": todos_casos,
+            "total_excluidos": len(excluidos),
+            "casos_excluidos": excluidos,
             "coincidencias_aviso": coincidencias_aviso,
             "tasa_coincidencia_aviso": round(coincidencias_aviso / total_casos, 3) if total_casos else 0.0,
             "coincidencias_linea": coincidencias_linea,
@@ -195,6 +234,7 @@ def generar_markdown(res: dict[str, Any], ruta_md: Path) -> None:
         "",
         f"- **Corrida M1:** `{res['m1_corrida']}`",
         f"- **Fecha M1:** {res.get('m1_inicio', 'desconocido')} a {res.get('m1_fin', 'desconocido')}",
+        "- **Interrupción 4B:** SIGINT del coordinador a las 16:21 por swap de 15 GB y 3,5 GB libres en disco, con la VM de Docker del usuario activa y 8 GB de RAM.",
         "",
         "## 1. Resumen de Acuerdo por Modelo",
         "",
@@ -210,6 +250,20 @@ def generar_markdown(res: dict[str, Any], ruta_md: Path) -> None:
         lineas.append(f"| **{tam.upper()}** (`{info['modelo_m1']}`) | {info['total_casos']} | {ac_aviso} | {ac_lin} | {lat_m1} | {lat_win} |")
 
     lineas.append("")
+    lineas.append("## 2. Casos excluidos por evaluación incompleta")
+    lineas.append("")
+    lineas.append("Solo se comparan casos cuyas líneas fueron evaluadas y válidas en ambas máquinas. Las latencias también se calculan sobre esas líneas incluidas.")
+    lineas.append("")
+    for tam, info in res["modelos"].items():
+        lineas.append(f"### Modelo {tam.upper()}: {info['total_excluidos']} excluidos")
+        lineas.append("")
+        if info["casos_excluidos"]:
+            lineas.extend(["| Caso | Motivo |", "|---|---|"])
+            for caso in info["casos_excluidos"]:
+                lineas.append(f"| `{caso['case_id']}` | `{caso['motivo']}` |")
+        else:
+            lineas.append("No hubo casos excluidos.")
+        lineas.append("")
     lineas.append("## 2. Diferencias Observadas Caso por Caso")
     lineas.append("")
 
@@ -232,7 +286,7 @@ def generar_markdown(res: dict[str, Any], ruta_md: Path) -> None:
         lineas.append("")
 
     ruta_md.parent.mkdir(parents=True, exist_ok=True)
-    ruta_md.write_text("\n".join(lineas) + "\n", encoding="utf-8")
+    ruta_md.write_text("\n".join(lineas).rstrip() + "\n", encoding="utf-8")
 
 
 def main() -> None:
