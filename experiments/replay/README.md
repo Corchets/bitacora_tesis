@@ -52,6 +52,8 @@ python replay.py \
   --salida corridas/demo_slm
 ```
 
+> **Nota para macOS y modelos Qwen 3.5:** En macOS (Apple Silicon), las etiquetas de Ollama sin sufijo descargan la variante MLX, que no soporta salida estructurada (`format: json`) en Ollama 0.40.5; se deben usar etiquetas GGUF explícitas (p. ej. `qwen3.5:0.8b-q8_0` o `qwen3.5:2b-q8_0`). Asimismo, `replay.py` comparte la negociación de `pensar=False` (`think: false` vía `correr.calentar`) para evitar que el razonamiento interno de Qwen 3.5 consuma el límite de tokens y genere fallos por `salida_cortada`.
+
 ### B. Modo texto sin audio
 
 Reproduce un caso de `experiments/slm-directo/casos/texto/`:

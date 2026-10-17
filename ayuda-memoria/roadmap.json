@@ -2,7 +2,7 @@
   "version": 1,
   "updatedAt": "2026-10-17",
   "currentLocation": {
-    "summary": "H2 en desarrollo activo. El ensayo #50 evaluó SLM directo (Qwen3.5 0.8B, 2B, 4B) y reglas sobre 53 casos de texto en experiments/slm-directo/; el kit del primer par y la planilla de revisión están listos en docs/corpus/KIT-PRIMER-PAR.md (#39, grabación sujeta a D06); se estableció el procedimiento repetible de ASR local en experiments/asr-local/ (#19) y la simulación replay con cola secuencial y corrida de punta a punta en experiments/replay/ (#28); se incorporó literatura y 4 propuestas para D08 en docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md (#25); y se preparó el cálculo de métricas en experiments/metricas/ (#52).",
+    "summary": "H2 en desarrollo activo. El ensayo #50 evaluó SLM directo (Qwen3.5 0.8B, 2B, 4B) y reglas sobre 53 casos de texto en experiments/slm-directo/, incluyendo corridas en Apple M1 (GGUF bajo Metal) y comparación M1 vs Windows 11; el kit del primer par y la planilla de revisión están listos en docs/corpus/KIT-PRIMER-PAR.md (#39, grabación sujeta a D06); se estableció el procedimiento repetible de ASR local en experiments/asr-local/ (#19) y la simulación replay con cola secuencial y corridas e2e con reglas y SLM (mono y estéreo) en experiments/replay/ (#28); se formalizó el cálculo de métricas en experiments/metricas/ (#52); se redactó la propuesta de protocolo experimental en docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md (#33), la comparación de candidatos en docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51) y los borradores de capítulos 5 a 8 en docs/tesis/ (#53).",
     "activeMilestone": "H2 — Piloto del corpus y primeras pruebas",
     "nextActions": [
       {
@@ -14,16 +14,16 @@
       },
       {
         "frontId": "deteccion",
-        "issue": 28,
-        "title": "Integrar SLM local en el replay de punta a punta",
-        "description": "Conectar el detector SLM local en experiments/replay/ sobre streaming de ASR en un entorno con Ollama disponible y auditar la reducción de falsas alarmas observadas en el clasificador de reglas sobre llamadas legítimas difíciles.",
+        "issue": 51,
+        "title": "Auditar falsas alarmas sin hablantes y avanzar en D09",
+        "description": "Auditar la confusión de roles observada en el replay mono de experiments/replay/ (falsas alarmas por mención de códigos sin etiquetas de hablante) y evaluar mitigaciones acústico-lingüísticas (D11) en la comparación sistemática de candidatos de docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51).",
         "urgency": "inmediato"
       },
       {
         "frontId": "metodologia",
         "issue": 33,
         "title": "Congelar el protocolo experimental en D08",
-        "description": "Discutir y acordar en el equipo las 4 propuestas metodológicas de #25 (márgenes físicos, evaluación de ASR por omisiones críticas, particiones disjuntas y análisis de sensibilidad por prevalencia) e incorporar el cálculo de experiments/metricas/ (#52).",
+        "description": "Revisar y acordar en equipo la propuesta metodológica de docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md (#33) integrando las métricas formales de experiments/metricas/ (#52) y definiendo las particiones disjuntas por llamante y semilla sin fuga.",
         "urgency": "disponible"
       }
     ]
@@ -53,34 +53,34 @@
       "state": "activo",
       "stateLabel": "Activo",
       "purpose": "Implementar el pipeline mínimo ejecutable demostrable: detector SLM que puntúa cada turno cerrado sobre texto incremental, ASR local sobre audio propio e integración de streaming en replay. La cascada encoder→SLM queda como alternativa a medir con datos reales.",
-      "whatExists": "Ensayo SLM directo en experiments/slm-directo/ (#50) sobre 53 casos de texto con Qwen3.5 (0.8B, 2B, 4B), reglas, visor HTML y medición en CPU; procedimiento de ASR local streaming con Zipformer Kroko y Whisper en experiments/asr-local/ (#19); motor replay incremental con cola secuencial y política de aviso único en experiments/replay/ (#28), con corrida e2e de Zipformer a reglas registrada.",
-      "nextStep": "Ejecutar la corrida replay de punta a punta con SLM local en entorno con Ollama; comparar candidatos y evaluar con las grabaciones humanas de #39 cuando estén disponibles (#51 / D09).",
+      "whatExists": "Ensayo SLM directo en experiments/slm-directo/ (#50) sobre 53 casos con Qwen3.5 (0.8B, 2B, 4B) en Windows y Apple M1 (tags GGUF bajo Metal, 4B interrumpido por memoria), visor HTML y comparación M1 vs Windows; procedimiento de ASR local streaming con Zipformer Kroko y Whisper en experiments/asr-local/ (#19) con mezcla de canales estéreo y referencia temporal TTS; motor replay incremental con cola secuencial y política de aviso único en experiments/replay/ (#28), con corridas e2e registradas para reglas y SLM (0.8B y 2B) en mono y estéreo (experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md).",
+      "nextStep": "Auditar en equipo la confusión de roles en transcripción sin hablantes; comparar candidatos frente a los gates de prefactibilidad (#51 / D09) y evaluar el pipeline sobre las grabaciones humanas de #39 cuando estén disponibles.",
       "evidence": {
-        "label": "Issue #50",
-        "url": "https://github.com/Corchets/bitacora_tesis/issues/50",
-        "detail": "Condiciones del ensayo SLM acordadas el 2026-10-08: aviso único, reglas comparadas por separado. Son condiciones del ensayo, no cierre de D08/D09."
+        "label": "RESUMEN-E2E.md",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md",
+        "detail": "Resumen de corridas E2E de punta a punta Zipformer → replay con reglas y SLM sobre audio TTS mono y estéreo."
       },
       "archLink": "/arquitectura/",
-      "issues": [50, 19, 28],
-      "activeIssue": 50
+      "issues": [50, 19, 28, 51],
+      "activeIssue": 51
     },
     {
       "id": "metodologia",
       "name": "Antecedentes, Protocolo y Selección",
       "tag": "Frente C · D08, D09 y Metodología",
-      "state": "disponible",
-      "stateLabel": "Disponible",
+      "state": "activo",
+      "stateLabel": "Activo",
       "purpose": "Sintetizar la literatura relevante, congelar el protocolo experimental sin fugas temporales (D08) y seleccionar el detector y ASR final (D09).",
-      "whatExists": "Síntesis del estado del arte ampliada en docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md (§2.4 y §7, #25) con 8 estudios y 4 propuestas para D08; ventana de contexto y alerta con decaimiento; taxonomía 6+6 como selección de trabajo de D07 (abierta); presupuestos de prefactibilidad técnica (#24); D06, D07, D08, D09 y D11 abiertas.",
-      "nextStep": "Acordar en el equipo las propuestas metodológicas de #25 para congelar el protocolo experimental en #33 (D08) y avanzar hacia la selección de ASR y detector en #51 (D09).",
+      "whatExists": "Propuesta de protocolo experimental para congelar en docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md (#33); comparación de candidatos sobre desarrollo en docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51); síntesis del estado del arte ampliada en docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md (§2.4 y §7, #25) con 8 estudios; ventana de contexto y alerta con decaimiento; presupuestos de prefactibilidad técnica (#24); D06, D07, D08, D09 y D11 abiertas.",
+      "nextStep": "Acordar en equipo el congelamiento formal del protocolo experimental en #33 (D08) y utilizarlo como base para la selección definitiva de ASR y detector en #51 (D09).",
       "evidence": {
-        "label": "MAPA-DECISIONES.md (D08/D09)",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación",
-        "detail": "D08 y D09 siguen abiertas; la selección de detector y ASR sale de las comparaciones de #51."
+        "label": "PROTOCOLO-EXPERIMENTAL.md",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md",
+        "detail": "Borrador de protocolo experimental propuesto para congelar D08."
       },
       "archLink": "/arquitectura/riesgo.html",
       "issues": [25, 33, 51],
-      "activeIssue": 25
+      "activeIssue": 33
     },
     {
       "id": "cierre",
@@ -89,15 +89,15 @@
       "state": "espera",
       "stateLabel": "Previsto (más adelante)",
       "purpose": "Ejecutar la evaluación final sobre test reservado para responder PI1, PI2 y E1; redactar el informe digital (~100 págs), demo y defensa ante UNSTA.",
-      "whatExists": "Módulo ejecutable de cálculo y reporte de métricas en experiments/metricas/ (#52) conforme a docs/evaluacion/METRICAS.md (márgenes L_R/L_C, Preventive@δ, falsas alarmas, intervalos de Wilson 95%, RTF y sensibilidad a prevalencia), evaluado sobre corridas de desarrollo; requisitos académicos y esqueleto de informe aprobados.",
-      "nextStep": "Esperar protocolo congelado (#33) y test reservado (#45) con audio real para ejecutar la evaluación formal en #52 sin sesgo ni fuga; redactar capítulos en #53.",
+      "whatExists": "Borradores preliminares de capítulos del informe en docs/tesis/ (#53: Capítulos 5, 6, 7 y 8); módulo ejecutable de cálculo y reporte de métricas en experiments/metricas/ (#52) conforme a docs/evaluacion/METRICAS.md (márgenes L_R/L_C, Preventive@δ, falsas alarmas con Wilson 95%, RTF y sensibilidad a prevalencia), evaluado sobre corridas de desarrollo; requisitos académicos y esqueleto aprobados.",
+      "nextStep": "Esperar protocolo congelado (#33) y test reservado (#45) con audio real para ejecutar la evaluación formal en #52 sin sesgo ni fuga; iterar redacción de capítulos de tesis en #53 con el tutor.",
       "evidence": {
-        "label": "METRICAS.md",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/evaluacion/METRICAS.md",
-        "detail": "Métricas unificadas de evaluación incremental de vishing"
+        "label": "CAP-05 a CAP-08",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/tesis/CAP-05-DISENO-Y-ARQUITECTURA.md",
+        "detail": "Borradores de capítulos de diseño, implementación, pruebas y resultados experimentales."
       },
       "issues": [52, 53],
-      "activeIssue": 52
+      "activeIssue": 53
     }
   ],
   "concludedContext": {
