@@ -1,0 +1,26 @@
+A: Buenas, en la constancia que me dieron hay un código 31 al pie y no sé si es el número de trámite.
+B: Hola. ¿La constancia es de una atención reciente?
+A: Sí, fui el martes a preguntar por una asignación.
+B: ¿Tiene otro número junto al nombre del trámite?
+A: Sí, arriba dice 5078. El 31 está en el margen derecho.
+B: Entonces 5078 es la referencia de tu consulta. El 31 puede identificar la oficina o el formulario.
+A: ¿Tengo que anotarlo para volver a preguntar?
+B: Con el 5078 alcanza para buscar esa atención.
+A: ¿El martes quedó iniciado el trámite o solo fue una consulta?
+B: En el registro figura una orientación, todavía no una solicitud formal.
+A: Me dieron una lista de papeles para juntar.
+B: Sí, veo que anotaron certificado escolar y comprobante de domicilio.
+A: El certificado lo puedo pedir mañana en la escuela.
+B: Cuando tengas todo, podés reservar una cita para iniciar la solicitud.
+A: ¿La fecha del comprobante de domicilio tiene que ser reciente?
+B: La oficina te va a indicar qué período acepta al presentar los documentos.
+A: No tengo factura a mi nombre, vivo con mi hermana.
+B: Podés llevar una constancia de residencia si la emitieron en tu localidad.
+A: Tengo una de hace dos meses. La voy a revisar.
+B: ¿Querés que te reserve un turno tentativo para la semana que viene?
+A: Mejor espero a tener el certificado escolar primero.
+B: Está bien. La consulta del martes queda registrada con la referencia 5078.
+A: Entonces ignoro el 31 por ahora.
+B: Sí, no hace falta para continuar.
+A: Perfecto, gracias por explicarlo.
+B: A vos.

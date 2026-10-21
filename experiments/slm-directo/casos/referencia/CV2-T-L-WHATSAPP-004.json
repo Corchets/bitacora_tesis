@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-L-WHATSAPP-004",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-WHATSAPP-004",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 6,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Una madre pide a la entrenadora que la agregue al grupo informativo de hockey y confirma nombre y equipo de su hija.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una madre pide a la entrenadora que la agregue al grupo informativo de hockey y confirma nombre y equipo de su hija.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "Una madre pide a la entrenadora que la agregue al grupo informativo de hockey y confirma nombre y equipo de su hija."
+}

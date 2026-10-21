@@ -1,0 +1,31 @@
+A: ¿Te llegó el correo del camping para el fin de semana largo?
+B: Sí, confirma la parcela cuatro y la entrada del viernes.
+A: En el asunto figura un código de reserva, pero no sé si hay que presentarlo en la entrada.
+B: El correo dice que lo muestres junto con el nombre de quien reservó.
+A: ¿A nombre de quién quedó?
+B: A nombre de Juan Vela, que hizo la reserva desde la página.
+A: Entonces le pido que lo reenvíe al grupo para que lo tengamos todos.
+B: Ya lo mandó. El código termina en 68.
+A: ¿Hace falta imprimirlo?
+B: No, en la recepción pueden buscarlo por nombre, pero mejor llevarlo en el teléfono.
+A: ¿A qué hora dejan entrar?
+B: Desde las dos de la tarde. Yo salgo del trabajo al mediodía.
+A: Puedo pasar por tu casa y cargamos las carpas juntos.
+B: La mía está en el altillo, hay que bajar también las estacas.
+A: ¿Tenés el martillo de goma o llevo el mío?
+B: El tuyo está mejor. El mío se quedó en la casa de la costa.
+A: Lo pongo en el baúl. ¿Quién lleva la conservadora?
+B: Mi hermana lleva una grande y yo compro hielo en el camino.
+A: ¿Comemos al llegar o paramos a almorzar?
+B: Mejor almorzamos antes, así no armamos campamento con hambre.
+A: Hay una estación con comedor a veinte minutos de la entrada.
+B: La conozco, tiene mesas afuera y espacio para estacionar.
+A: ¿Llevamos bicicletas?
+B: Sí, los chicos quieren dar una vuelta por el sendero.
+A: ¿El camping presta casco?
+B: No, cada uno lleva el suyo.
+A: ¿El código de reserva sirve también para la salida?
+B: El correo dice que solo lo usan al ingresar.
+A: Bueno, lo dejo fijado en el grupo.
+B: Gracias. ¿Nos vemos el viernes a las once?
+A: Sí, paso por tu casa a esa hora.

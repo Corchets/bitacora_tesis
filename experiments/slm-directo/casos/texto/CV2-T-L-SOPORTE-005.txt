@@ -1,0 +1,26 @@
+A: Buenas, me mudo el fin de semana y quiero saber cómo pasar internet al departamento nuevo.
+B: Hola. ¿El servicio está a tu nombre?
+A: Sí, Clara Vildoza. Estoy en la calle Pueyrredón y me voy a Lapacho 705.
+B: ¿El domicilio actual es Pueyrredón 113?
+A: Sí, piso dos. El nuevo es Lapacho 705, departamento 8.
+B: Gracias. ¿La mudanza es el sábado o el domingo?
+A: El domingo a la mañana. Quería tener conexión el lunes si se puede.
+B: Puedo revisar cobertura en el domicilio nuevo. ¿Es edificio con portería?
+A: No, hay un encargado hasta las seis. El acceso al cuarto de cables está cerrado.
+B: La persona técnica necesitaría que alguien le abra ese cuarto.
+A: El encargado está al tanto y dijo que puede atender el lunes.
+B: Hay un turno entre las diez y la una. ¿Te sirve?
+A: Sí, yo voy a estar desembalando todo.
+B: ¿Querés llevarte el módem actual o preferís que revisen si sirve para la nueva conexión?
+A: Es el modelo chico. Si funciona, me lo llevo.
+B: Lo pueden revisar en el domicilio. Si no es compatible, te dejan otro equipo.
+A: ¿Me cobran la visita?
+B: No hay cargo por traslado del servicio; te informan si hay alguna instalación adicional.
+A: Dejo pagada la factura anterior antes de irme.
+B: Está bien. ¿El número de contacto termina en 92?
+A: Sí, es el mío.
+B: Anoto el turno para el lunes. La dirección anterior queda activa hasta el domingo.
+A: Perfecto, así no me quedo sin internet en la casa nueva.
+B: Te llega la confirmación por correo.
+A: Ya la recibí. Gracias por encontrarme un horario.
+B: A vos, buen traslado.

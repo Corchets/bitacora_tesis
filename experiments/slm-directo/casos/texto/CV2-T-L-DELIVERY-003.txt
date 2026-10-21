@@ -1,0 +1,28 @@
+A: Hola, el repartidor llamó por un paquete de la casa de al lado.
+B: ¿La vecina te pidió que lo recibieras?
+A: Sí, me escribió ayer. Está en la oficina hasta las seis.
+B: ¿El envío requiere firma?
+A: No sé. La etiqueta dice una caja de libros.
+B: ¿Podés preguntarle si acepta que lo dejes en tu entrada?
+A: Ya le escribí. Dice que sí, pero que no quede a la vista desde la calle.
+B: ¿Tenés un lugar seguro bajo el alero?
+A: Sí, detrás del banco de madera. No se moja y no se ve desde la vereda.
+B: ¿Querés decirle al repartidor que lo deje ahí?
+A: Mejor que toque primero. Si estoy en casa se lo recibo.
+B: ¿A qué hora vas a salir?
+A: A las cuatro y media llevo a mi hijo a música.
+B: Entonces quizás te encuentre antes.
+A: Le digo que llame al timbre de la casa 62, no al de la 64.
+B: Las dos tienen la misma entrada, ¿no?
+A: Sí, pero la nuestra tiene una maceta grande al lado de la puerta.
+B: Bien, agrego esa referencia.
+A: ¿Necesitás el nombre de mi vecina?
+B: Solo para asociar el paquete a la dirección correcta.
+A: Se llama Marta Beiró, vive en la casa 64.
+B: Gracias. ¿El teléfono que figura en el envío sigue activo?
+A: Sí, termina en 18.
+B: Le van a mandar un aviso cuando quede entregado.
+A: Perfecto. Si no estoy, lo guardo detrás del banco y le aviso.
+B: Quedó anotado.
+A: Gracias por coordinarlo.
+B: De nada.

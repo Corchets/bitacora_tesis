@@ -1,0 +1,30 @@
+{
+  "case_id": "CV2-T-L-ORGANISMO_PREVISIONAL-004",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-ORGANISMO_PREVISIONAL-004",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 6,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Un trabajador llama por una diferencia en el registro de una prestación familiar; aporta el mes y el nombre del empleador para pedir revisión.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño un trabajador llama por una diferencia en el registro de una prestación familiar; aporta el mes y el nombre del empleador para pedir revisión.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": true,
+  "escenario_base": "LG-ORG-TURNO-01",
+  "situacion": "Un trabajador llama por una diferencia en el registro de una prestación familiar; aporta el mes y el nombre del empleador para pedir revisión."
+}

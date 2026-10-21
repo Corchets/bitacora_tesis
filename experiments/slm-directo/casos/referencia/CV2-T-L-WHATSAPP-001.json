@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-WHATSAPP-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-WHATSAPP-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una vecina llama para solicitar el contacto de la administradora y la invitación al grupo del edificio, para coordinar una reparación común.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una vecina llama para solicitar el contacto de la administradora y la invitación al grupo del edificio, para coordinar una reparación común.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "Una vecina llama para solicitar el contacto de la administradora y la invitación al grupo del edificio, para coordinar una reparación común."
+}

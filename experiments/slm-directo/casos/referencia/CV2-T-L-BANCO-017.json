@@ -1,0 +1,33 @@
+{
+  "case_id": "CV2-T-L-BANCO-017",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-017",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 7,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 23,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La persona recuerda que anotó el PIN en una hoja para una compra grande y pregunta cómo modificar un límite de uso desde la app.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona recuerda que anotó el pin en una hoja para una compra grande y pregunta cómo modificar un límite de uso desde la app.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-ALERT-01",
+  "situacion": "La persona recuerda que anotó el PIN en una hoja para una compra grande y pregunta cómo modificar un límite de uso desde la app."
+}

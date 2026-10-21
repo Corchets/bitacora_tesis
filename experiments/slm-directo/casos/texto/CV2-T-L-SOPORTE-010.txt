@@ -1,0 +1,28 @@
+A: hola abrí el programa de dibujo y aparece clave de producto
+B: buen día cambiaste algo en la computadora
+A: se actualizó anoche y ahora muestra una ventana nueva
+B: la ventana te pide iniciar sesión o ingresar una licencia
+A: dice licencia de producto y tiene un espacio en blanco
+B: el programa antes funcionaba con una compra única
+A: sí lo compré para hacer afiches del club hace dos años
+B: tenés el correo de confirmación de la compra
+A: creo que está en una cuenta vieja que casi no uso
+B: podés buscar por el nombre del programa y la fecha aproximada
+A: se llama trazo y lo compré en julio
+B: el equipo es el mismo donde lo instalaste antes
+A: sí la computadora no cambió
+B: entonces la actualización pudo haber pedido validar la licencia otra vez
+A: me acuerdo que la clave estaba en un archivo de texto
+B: la encontraste en la carpeta de documentos
+A: sí hay un archivo que dice licencia trazo
+B: abrilo en tu equipo y fijate si el programa acepta la clave
+A: la copié y ahora dice licencia activada
+B: bien también podés guardar el correo original como respaldo
+A: ya encontré el comprobante de compra
+B: volvieron a aparecer tus proyectos
+A: sí están todos menos el afiche que hice ayer
+B: revisá la carpeta de guardado reciente
+A: estaba en el escritorio sin guardar lo muevo a proyectos
+B: perfecto así queda en la misma carpeta
+A: gracias pensé que había perdido el acceso
+B: quedó activado de nuevo

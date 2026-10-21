@@ -1,0 +1,28 @@
+A: hola dejé la carpeta de facturas en la sede de la avenida
+B: uy la necesitás hoy para cerrar la caja
+A: sí el contador pasa mañana temprano
+B: está en el escritorio de recepción o en la sala chica
+A: en la sala chica arriba del armario bajo
+B: yo estoy yendo para esa sede puedo buscarla
+A: gracias es una carpeta azul con una etiqueta del mes
+B: dice septiembre o octubre
+A: octubre tiene los comprobantes de esta semana
+B: la veo acá hay dos carpetas una dice octubre y otra archivo
+A: la de octubre es la que tiene el lomo ancho
+B: sí ya la encontré
+A: podés traerla al local antes de las cinco
+B: voy para allá en veinte minutos
+A: te dejo la puerta lateral sin llave
+B: no hace falta avisale a julia en recepción y te la alcanza
+A: ella está atendiendo pero le mando un mensaje
+B: listo la guardo en mi bolso para que no quede en el mostrador
+A: también quedó el sobre de las notas de crédito
+B: hay uno blanco pegado a la carpeta
+A: ese también lo necesito
+B: lo pongo adentro así viaja junto
+A: el contador va a revisar solo las facturas grandes
+B: las de los proveedores o las de caja
+A: las de proveedores de esta semana
+B: perfecto te lo llevo todo
+A: avisame cuando estés cerca
+B: salgo ahora

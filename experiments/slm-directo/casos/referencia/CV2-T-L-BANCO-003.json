@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-BANCO-003",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-003",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "El titular llama para pedir una constancia de titularidad para presentar en el trabajo; se identifica la cuenta y se genera el documento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño el titular llama para pedir una constancia de titularidad para presentar en el trabajo; se identifica la cuenta y se genera el documento.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "El titular llama para pedir una constancia de titularidad para presentar en el trabajo; se identifica la cuenta y se genera el documento."
+}

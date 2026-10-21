@@ -1,0 +1,33 @@
+{
+  "case_id": "CV2-T-L-WHATSAPP-006",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-WHATSAPP-006",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una persona comenta que apareció un número de verificación mientras usaba la función de dispositivos vinculados; pregunta por sesiones abiertas.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona comenta que apareció un número de verificación mientras usaba la función de dispositivos vinculados; pregunta por sesiones abiertas.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "Una persona comenta que apareció un número de verificación mientras usaba la función de dispositivos vinculados; pregunta por sesiones abiertas."
+}

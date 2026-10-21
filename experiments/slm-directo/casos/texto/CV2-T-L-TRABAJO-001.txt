@@ -1,0 +1,26 @@
+A: ¿Podés cubrirme el jueves de seis a diez? Me pusieron el examen final a la noche.
+B: Puedo hasta las nueve, después tengo que buscar a mi hija.
+A: ¿Y si entro yo una hora antes el viernes para compensarte?
+B: Sí, el viernes puedo hacer el cierre hasta las diez.
+A: ¿La encargada ya sabe del cambio?
+B: Le mandé un mensaje, pero todavía no lo vio.
+A: Mejor anotémoslo en el cuaderno de turnos para que no se superpongan las horas.
+B: Yo escribo jueves de seis a nueve y vos de cinco a diez el viernes.
+A: El jueves el proveedor trae verduras a las siete.
+B: ¿Quién recibe el pedido si yo estoy en caja?
+A: Le aviso a Mauro para que lo revise y guarde las cajas.
+B: ¿Tiene la lista de cantidades?
+A: Está en el correo del local. La imprimí esta mañana.
+B: Le dejo el sobre junto a la balanza.
+A: ¿El menú de ese día ya está cerrado?
+B: Faltan confirmar las sopas. La cocinera dijo zapallo o lentejas.
+A: Hagamos zapallo, hay varias personas que pidieron opción sin carne.
+B: Bien, entonces actualizo el pizarrón.
+A: La encargada contestó, dice que el intercambio está aprobado.
+B: Perfecto, ¿querés que te deje la llave del depósito en caja?
+A: No, la busco el jueves antes de entrar.
+B: El cajón tiene también la llave del freezer, no las confundas.
+A: Las distingo por el llavero rojo. Gracias por cubrirme.
+B: No hay problema. Que te vaya bien en el examen.
+A: Después te cuento cómo me fue.
+B: Dale, nos vemos mañana.

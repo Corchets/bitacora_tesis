@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-T-L-FAMILIAR-010",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-FAMILIAR-010",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una prima pide que le devuelvan una parte de un adelanto para un viaje familiar; acuerdan importe y plazo y comprueban el pago.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una prima pide que le devuelvan una parte de un adelanto para un viaje familiar; acuerdan importe y plazo y comprueban el pago.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": true,
+  "escenario_base": "LG-FAMILIAR-LLAMADO-01",
+  "situacion": "Una prima pide que le devuelvan una parte de un adelanto para un viaje familiar; acuerdan importe y plazo y comprueban el pago."
+}

@@ -1,0 +1,30 @@
+A: ¿La panadería confirmó la torta para el aniversario de mamá?
+B: Sí, la tienen para retirar el sábado a las once.
+A: ¿Qué sabor eligieron al final?
+B: Chocolate y naranja, con una parte sin nueces para la tía.
+A: ¿Cuánto salió todo?
+B: 28.000. Dejé una seña de ocho y queda pagar veinte al retirarla.
+A: ¿Te transfiero mi parte ahora o después?
+B: Si podés mandame 10.000 hoy, así no me queda todo a mí.
+A: Dale. ¿Uso el alias que está a tu nombre?
+B: Sí, termina en flor.casa. Te lo mando por mensaje para que lo copies.
+A: Me llegó. Veo que figura como Valen Ocampo, ¿es tu cuenta?
+B: Sí, la misma donde te deposité lo de la entrada del teatro.
+A: Ya te mandé los diez mil. ¿Te apareció?
+B: Sí, recibí diez. Gracias.
+A: Entonces vos ponés los otros diez cuando la retires.
+B: Exacto, la tía me debe su parte de las bebidas.
+A: ¿La torta va en heladera hasta la tarde?
+B: Sí, pero no en el estante de arriba porque ahí hace frío de más.
+A: ¿Quién la pasa a buscar?
+B: Yo puedo, estoy cerca de la panadería.
+A: ¿Te acompaño para llevarla en el auto?
+B: Si querés. La caja es grande y no entra en mi moto.
+A: Te paso a buscar a las diez y cuarenta.
+B: ¿Vamos a la casa de mamá directo o buscamos primero a la tía?
+A: Primero a la tía, vive a tres cuadras.
+B: Bueno. Ella va a estar lista desde las doce.
+A: La reunión empieza a la una y media.
+B: Perfecto, llegamos con tiempo.
+A: Gracias por encargarla.
+B: De nada, va a quedar linda.

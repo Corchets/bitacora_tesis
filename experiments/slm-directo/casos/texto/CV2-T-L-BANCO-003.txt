@@ -1,0 +1,27 @@
+A: Buenas tardes. Necesito una constancia de que la cuenta sueldo está a mi nombre.
+B: Hola. ¿La vas a presentar en una empresa o en otro organismo?
+A: En el trabajo nuevo, para que depositen el primer sueldo.
+B: ¿Querés una constancia de titularidad o un certificado de CBU?
+A: Me pidieron ambas cosas, pero no sé si son documentos separados.
+B: La constancia muestra tu nombre y los últimos datos de la cuenta. El certificado de CBU trae la numeración completa.
+A: Entonces necesito el certificado de CBU también.
+B: Puedo guiarte para descargar los dos desde la aplicación. ¿Tenés acceso ahora?
+A: Sí, estoy mirando la pantalla de inicio.
+B: Entrá en cuentas y elegí la cuenta donde recibís el sueldo.
+A: Veo “datos de cuenta” y “movimientos”.
+B: Tocá datos de cuenta; ahí aparece la opción para compartir constancia.
+A: Me pregunta si quiero PDF o enviarlo por correo.
+B: Podés guardarlo como PDF y revisar el archivo antes de mandarlo a tu empleador.
+A: El certificado incluye el CBU completo, ¿no?
+B: Sí. Confirmá que la empresa lo necesita antes de enviarlo, porque es información de tu cuenta.
+A: Me lo pidieron para el alta. Lo mando al correo de recursos humanos.
+B: Bien. ¿Te aparece el nombre correcto en el documento?
+A: Sí, figura Diego Mores y la cuenta termina en 6428.
+B: Entonces descargaste la cuenta indicada.
+A: ¿La constancia tiene fecha de hoy?
+B: Se genera con la fecha en que la descargás.
+A: Listo, ya la guardé. No hace falta que me la mandes vos.
+B: Exacto, queda en tu teléfono.
+A: Muchas gracias, me salvaste tiempo antes de entrar al trabajo.
+B: De nada. ¿Queda algo pendiente?
+A: No, ya tengo los dos archivos.

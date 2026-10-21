@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-TRABAJO-005",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-TRABAJO-005",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un técnico de campo informa que terminó una instalación y coordina con la oficina la devolución de herramientas y una segunda visita para revisar una medición.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño un técnico de campo informa que terminó una instalación y coordina con la oficina la devolución de herramientas y una segunda visita para revisar una medición.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "trabajo",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": true,
+  "escenario_base": null,
+  "situacion": "Un técnico de campo informa que terminó una instalación y coordina con la oficina la devolución de herramientas y una segunda visita para revisar una medición."
+}

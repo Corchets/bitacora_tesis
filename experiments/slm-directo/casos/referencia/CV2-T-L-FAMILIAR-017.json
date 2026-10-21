@@ -1,0 +1,43 @@
+{
+  "case_id": "CV2-T-L-FAMILIAR-017",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-FAMILIAR-017",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 2,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 5,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Dos hermanas conversan sobre el estéreo del auto familiar y recuerdan el PIN de fábrica impreso en el manual; coordinan una visita al taller.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos hermanas conversan sobre el estéreo del auto familiar y recuerdan el pin de fábrica impreso en el manual; coordinan una visita al taller.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-FAMILIAR-LLAMADO-01",
+  "situacion": "Dos hermanas conversan sobre el estéreo del auto familiar y recuerdan el PIN de fábrica impreso en el manual; coordinan una visita al taller."
+}

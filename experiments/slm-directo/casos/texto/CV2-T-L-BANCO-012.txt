@@ -1,0 +1,29 @@
+A: Atención del banco, buen día. ¿En qué puedo ayudarte?
+B: Buenas, quiero cambiar el correo donde me llegan los avisos del resumen.
+A: Hola. ¿El correo anterior ya no lo usás?
+B: Lo cerré cuando cambié de trabajo. El banco sigue mandando ahí los vencimientos.
+A: Para modificarlo, confirmame el correo nuevo que querés dejar registrado.
+B: maru punto alvez arroba correo ejemplo.
+A: Lo repito: maru punto alvez. ¿Está escrito con zeta o con ese al final?
+B: Con zeta en Alvez.
+A: Gracias. ¿Querés que actualice también el correo para recibir comprobantes?
+B: Sí, si es el mismo dato. El correo de trabajo anterior ya no lo tengo.
+A: El aviso de resumen y los comprobantes usan el correo principal. Lo cambio para ambos.
+B: ¿Después tengo que confirmar desde un enlace?
+A: Te llega un mensaje automático para verificar que la dirección funcione.
+B: ¿Ese mensaje tiene algún código?
+A: Te llega un mensaje automático con un botón para verificar que la dirección funcione.
+B: Lo voy a abrir cuando llegue. ¿Cuánto tarda en dejar de usar el anterior?
+A: Apenas confirmes el nuevo, los avisos siguientes se envían ahí.
+B: El resumen de este mes ya está emitido. ¿También me llega al correo nuevo?
+A: Si todavía está pendiente el envío, sí. Si ya salió al correo anterior, podés descargarlo en la aplicación.
+B: Lo vi en la aplicación, así que no hay problema.
+A: ¿Querés que te confirme los últimos cuatro de la tarjeta vinculada?
+B: Termina en 1706.
+A: Gracias, coincide con el perfil. Ya registré la dirección nueva.
+B: ¿Me mandás una confirmación para comprobar la escritura?
+A: Sí, te mando un correo de prueba ahora.
+B: Ya llegó, está bien escrito.
+A: Perfecto. La actualización quedó completa.
+B: Gracias, era algo que venía postergando.
+A: De nada.

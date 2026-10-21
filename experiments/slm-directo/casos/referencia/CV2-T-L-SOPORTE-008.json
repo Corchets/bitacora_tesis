@@ -1,0 +1,33 @@
+{
+  "case_id": "CV2-T-L-SOPORTE-008",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-SOPORTE-008",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 11,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La persona pregunta por una frase “código de error” en un router que se reinicia; se contrastan las luces y el horario de los cortes.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona pregunta por una frase “código de error” en un router que se reinicia; se contrastan las luces y el horario de los cortes.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-SUPPORT-INFO-01",
+  "situacion": "La persona pregunta por una frase “código de error” en un router que se reinicia; se contrastan las luces y el horario de los cortes."
+}

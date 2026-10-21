@@ -1,0 +1,28 @@
+A: Che, llegó el aviso de la cuota de la pileta para este verano.
+B: Sí, ya pagué la reserva para que no perdiéramos el lugar.
+A: ¿Cuánto te transfiero por mi parte?
+B: La cuota familiar fue 120.000; si la dividimos entre cuatro, son 30.000 cada uno.
+A: Yo y los chicos somos dos, así que te debo 60.000.
+B: Correcto. ¿Lo podés mandar esta semana?
+A: Sí, hoy tengo que ir al banco y después te lo paso.
+B: El alias sigue igual, pileta.familia, a nombre de Marcos Veira.
+A: Me aparece ese nombre. ¿Querés que te mande la mitad ahora y la otra mañana?
+B: Como te quede cómodo. Yo ya cubrí el pago completo.
+A: Prefiero transferir los 60.000 de una vez y cerrar el gasto.
+B: Bueno, avisame cuando lo hagas así registro quién pagó.
+A: Ya salió. ¿Te entró?
+B: Sí, veo 60.000 a las 11:42.
+A: Te mando el comprobante para que lo guardes con la reserva.
+B: Llegó. ¿La pileta abre el sábado o el domingo?
+A: El sábado, pero la colonia de los chicos arranca el lunes.
+B: ¿Hay que llevar certificado médico?
+A: La administración pidió el del año pasado, no uno nuevo.
+B: Lo busco en la carpeta de la escuela.
+A: Si no aparece, decime y le pido una copia al pediatra.
+B: ¿Vos vas a ir el primer día?
+A: Sí, los llevo y me quedo un rato para ordenar las cosas.
+B: El vestuario infantil queda del lado del jardín.
+A: Me acuerdo, ahí dejaron los flotadores.
+B: Perfecto. Ya quedó la cuota repartida.
+A: Gracias por adelantarla.
+B: De nada, después nos vemos en la pileta.

@@ -1,0 +1,28 @@
+A: Hola, llamo por la guitarra que dejé para cambiarle las cuerdas.
+B: Buenas. ¿La trajiste el lunes o el martes?
+A: El lunes a la tarde, con un estuche bordó.
+B: Veo una guitarra acústica a nombre de Abril Casas.
+A: Sí, soy yo. ¿Ya está lista para retirar?
+B: El trabajo terminó ayer. Cambiaron las seis cuerdas y ajustaron el puente.
+A: ¿La puedo retirar después de las seis?
+B: Hoy cerramos a las siete y media.
+A: Llego cerca de las seis y cuarto, salgo de la facultad a las seis.
+B: ¿Tenés el recibo de ingreso?
+A: Sí, está guardado en la funda exterior del estuche.
+B: Perfecto. ¿Querés probarla antes de llevarla?
+A: Sí, me gustaría ver si quedó cómoda la altura.
+B: Hay una sala chica al fondo donde podés tocar un rato.
+A: ¿Puede ir conmigo mi profesor?
+B: Sí, no hay problema. Que avise en el mostrador.
+A: ¿La guitarra incluye una funda nueva o queda la que llevé?
+B: Queda tu estuche bordó. La reparación no incluye funda.
+A: Está bien, la funda todavía sirve.
+B: ¿Querés que te enviemos una foto del instrumento antes de que vengas?
+A: No hace falta, lo reconozco por una marca en el costado.
+B: Anoto que pasás hoy después de las seis.
+A: ¿Puedo pagar lo que falta con débito?
+B: Sí, aceptamos tarjeta o efectivo.
+A: Perfecto. ¿El taller queda abierto durante la pausa del mediodía?
+B: No, de una a dos está cerrado.
+A: Voy al final de la tarde entonces.
+B: Te esperamos.

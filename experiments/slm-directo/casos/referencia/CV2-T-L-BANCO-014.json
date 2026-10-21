@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-BANCO-014",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-014",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 5,
+      "evento": "pedido",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La persona solicita cerrar una cuenta secundaria sin saldo y comprueba qué débitos automáticos están asociados antes de confirmar.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona solicita cerrar una cuenta secundaria sin saldo y comprueba qué débitos automáticos están asociados antes de confirmar.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "La persona solicita cerrar una cuenta secundaria sin saldo y comprueba qué débitos automáticos están asociados antes de confirmar."
+}

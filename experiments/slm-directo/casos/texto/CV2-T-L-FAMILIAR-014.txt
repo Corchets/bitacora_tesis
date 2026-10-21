@@ -1,0 +1,28 @@
+A: ¿Vas a pasar por lo de mamá antes de la cena?
+B: Sí, le llevo las cajas que quedaron en el auto.
+A: El portón a veces no abre con el control. Ayer usó el código del teclado.
+B: ¿Todavía está pegada la etiqueta con las instrucciones?
+A: Sí, está en la pared de adentro, al lado del tablero.
+B: Pensé que la habían sacado cuando pintaron.
+A: Sacaron la vieja, pero dejaron una nueva con el número de mantenimiento.
+B: ¿Mamá sabe usar el teclado?
+A: Sí, lo usa cuando se le queda el control sin pila.
+B: ¿La pila del control está gastada?
+A: Probablemente, el botón hay que apretarlo varias veces.
+B: Compro una pila cuando pase por el negocio.
+A: ¿Sabés qué modelo lleva?
+B: Es una redonda chiquita. Le saco una foto antes de salir.
+A: También habría que revisar la luz del pasillo.
+B: ¿La que parpadea cerca del lavadero?
+A: Esa misma. La lámpara de repuesto está en el mueble de la cocina.
+B: La cambio cuando llegue, no hace falta que llames a nadie.
+A: Si no funciona, dejamos la otra para el sábado.
+B: ¿Mamá va a estar en casa a las seis?
+A: Sí, dijo que vuelve de la plaza a esa hora.
+B: Entonces paso después de dejar a los chicos.
+A: ¿Le llevo el diario también?
+B: Sí, lo compré en el kiosco. Está en el asiento de atrás.
+A: Le va a gustar, viene el suplemento de cocina.
+B: Bueno, te escribo cuando salga para allá.
+A: Dale. Yo me quedo terminando la cena.
+B: Nos vemos más tarde.

@@ -1,0 +1,30 @@
+A: Hola, el cajero del barrio tiene un cartel de fuera de servicio. Necesito retirar efectivo para pagar el alquiler del local.
+B: Buen día. ¿Querés saber si podés retirar por caja en otra sucursal?
+A: Sí, pero es una suma grande y no quiero ir hasta el centro para que me digan que no hay.
+B: ¿En qué sucursal pensabas hacerlo?
+A: En la de la avenida Sur, la que está frente a la terminal.
+B: ¿Qué importe aproximado querés retirar?
+A: Unos 320 mil. El dueño del local cobra en efectivo.
+B: Para revisar disponibilidad me alcanza con el importe y la sucursal. ¿Para qué día lo necesitás?
+A: Mañana después de las diez.
+B: Esa sede abre a las diez y hay atención por caja. No puedo garantizar el efectivo hasta que confirmes el retiro.
+A: ¿Tengo que pedir turno antes?
+B: Para ese monto conviene reservar un turno de caja. ¿Querés que lo solicite para mañana a las once?
+A: Sí, a esa hora me queda bien. ¿Qué documento tengo que llevar?
+B: El documento del titular de la cuenta y la tarjeta asociada, si la tenés.
+A: La cuenta está a nombre de Lucio Fara. Yo soy él.
+B: Perfecto. ¿Querés que la notificación llegue al correo que termina en sur?
+A: Sí, ese sigo usando.
+B: ¿La cuenta de donde vas a retirar termina en 2040?
+A: Sí. Tengo otra cuenta de ahorro, pero de ahí no voy a sacar.
+B: Ya quedó agendado el turno, referencia 8812. Acordate de llevar el documento.
+A: ¿Puedo cambiar el importe mañana si al final necesito menos?
+B: Sí, lo confirmás en caja. Si necesitás más, pueden pedirte otra reserva.
+A: El alquiler es 295 mil, pero llevo un poco extra para comprar una cerradura.
+B: Entiendo. ¿Querés que te explique cómo llegar a la caja de atención?
+A: No, conozco la sucursal. ¿Hay estacionamiento cerca?
+B: Hay un estacionamiento pago a media cuadra.
+A: Bueno, voy a dejar el auto ahí.
+B: Te llega ahora el correo con los datos del turno.
+A: Ya llegó, dice mañana 11:00. Gracias.
+B: Que te vaya bien.

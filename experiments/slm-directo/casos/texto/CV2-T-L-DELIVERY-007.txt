@@ -1,0 +1,29 @@
+A: Buenas, armamos la biblioteca que llegó hoy y falta una de las tablas laterales.
+B: Hola. ¿Tenés el número del pedido o el nombre de compra?
+A: Pedido 58130, está a nombre de Sonia Recalde.
+B: Encontré el paquete. ¿Qué pieza falta según el manual?
+A: La marcada como lateral B, mide un metro ochenta.
+B: ¿La caja llegó abierta o con el embalaje entero?
+A: El cartón estaba cerrado, pero una esquina se veía hundida.
+B: ¿La tabla llegó rota o no estaba?
+A: No estaba. Revisamos todo el poliestireno y el resto de los tornillos.
+B: ¿Podés mandar una foto de las piezas que sí llegaron y del embalaje?
+A: Sí, las saco con el teléfono y las adjunto al formulario.
+B: Gracias. ¿La dirección de entrega sigue siendo la calle Paz 203?
+A: Sí, departamento 6. El timbre dice Recalde.
+B: Puedo pedir que envíen la pieza faltante. El plazo estimado es de cuatro días.
+A: ¿Tengo que desarmar todo lo que ya hicimos?
+B: No, pueden dejar la estructura armada y colocar la pieza cuando llegue.
+A: ¿La entrega viene en una caja aparte?
+B: Sí, es un paquete largo con la etiqueta del modelo.
+A: ¿Puedo elegir un horario de tarde? A la mañana no hay nadie.
+B: La logística permite marcar preferencia después de las dos, pero no garantiza una hora.
+A: Está bien, trabajo desde casa esos días.
+B: ¿Querés que la persona repartidora llame antes de subir?
+A: Sí, el edificio tiene dos entradas parecidas.
+B: Anoto entrada por calle Paz, puerta gris.
+A: ¿Me mandan un número de seguimiento cuando salga?
+B: Sí, llega al correo de la compra.
+A: Ya envié las fotos. ¿Las pudiste ver?
+B: Sí, quedó abierta la solicitud de reposición.
+A: Perfecto, gracias por resolverlo.

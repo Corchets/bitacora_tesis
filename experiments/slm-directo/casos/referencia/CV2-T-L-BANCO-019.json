@@ -1,0 +1,48 @@
+{
+  "case_id": "CV2-T-L-BANCO-019",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-019",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 5,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 13,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 17,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un usuario llama para diferenciar el código de autorización de una compra del número de operación; revisan una compra aprobada.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño un usuario llama para diferenciar el código de autorización de una compra del número de operación; revisan una compra aprobada.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-ALERT-01",
+  "situacion": "Un usuario llama para diferenciar el código de autorización de una compra del número de operación; revisan una compra aprobada."
+}

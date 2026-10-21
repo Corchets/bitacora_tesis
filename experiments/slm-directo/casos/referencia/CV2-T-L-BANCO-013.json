@@ -1,0 +1,30 @@
+{
+  "case_id": "CV2-T-L-BANCO-013",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-013",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Un comerciante llama por un pago con tarjeta que quedó duplicado en la terminal; confirma comercio, importe y horario para abrir revisión.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño un comerciante llama por un pago con tarjeta que quedó duplicado en la terminal; confirma comercio, importe y horario para abrir revisión.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Un comerciante llama por un pago con tarjeta que quedó duplicado en la terminal; confirma comercio, importe y horario para abrir revisión."
+}

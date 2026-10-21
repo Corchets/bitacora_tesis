@@ -1,0 +1,25 @@
+A: Hola, ¿pudiste hablar con la chica que va a ayudar en la feria?
+B: Sí, se llama Maia. Puede venir los sábados por la mañana.
+A: Buenísimo. ¿Le pedimos que se sume al grupo de organización?
+B: Sí, pero primero necesito el número que usa para WhatsApp.
+A: Me lo pasó por correo, termina en 43. ¿Querés que te lo reenvíe?
+B: Mandámelo por el correo de la cooperadora, así queda en la lista de voluntarios.
+A: Ya está. ¿La agregás vos o le mando una invitación?
+B: Prefiero mandarle una invitación y explicarle que el grupo es solo para las tareas de la feria.
+A: Tiene sentido. En el grupo de familias se mezclan muchos temas.
+B: ¿Qué tarea le asignamos primero?
+A: Puede ayudar a ordenar las mesas y registrar qué puestos necesitan alargue.
+B: ¿Ya tenemos el plano del patio?
+A: Sí, lo mandó el profesor de música. Lo imprimí ayer.
+B: Entonces le paso el plano cuando confirme que entró al grupo.
+A: Me respondió que recibió la invitación, pero el enlace le abre una página en blanco.
+B: Capaz tiene una versión vieja de la aplicación. ¿Puede actualizarla desde la tienda del teléfono?
+A: Sí, me dijo que la va a actualizar en el recreo.
+B: Si sigue igual, la agrego manualmente después de que me escriba desde su número.
+A: Ya abrió. Dice que está viendo el mensaje fijado.
+B: Perfecto, ahí están el horario y el lugar de encuentro.
+A: Le aviso que traiga ropa cómoda, vamos a mover bancos.
+B: Y guantes, quedaron algunos en el depósito.
+A: Dale. La lista de voluntarios ya tiene su nombre.
+B: Gracias por coordinarlo.
+A: De nada, nos vemos el sábado.

@@ -1,0 +1,32 @@
+A: Hola, dejé el cuaderno de música en la mesa de casa y lo necesito para la presentación.
+B: Buen día. ¿La presentación es hoy a la tarde?
+A: Sí, el grupo ensaya en el segundo recreo y después toca en el acto.
+B: ¿Tenés el teléfono de alguien de tu curso que pueda acercarlo?
+A: Mi amiga Sol vive a tres cuadras. Le escribí recién.
+B: ¿Te contestó si puede pasar por tu casa?
+A: Sí, su hermano va a buscarlo porque tiene que salir para la escuela.
+B: ¿Querés que lo deje en recepción o lo lleve al aula de música?
+A: En recepción, así no interrumpe la clase.
+B: ¿Cómo se llama tu curso?
+A: Primero C, turno tarde.
+B: Lo anoto para que se lo alcancen a la profesora.
+A: El cuaderno es verde, con una etiqueta que dice “percusión”.
+B: Perfecto. ¿La profesora ya tiene las partituras?
+A: Sí, ella imprimió una copia para todos.
+B: Entonces el cuaderno es para seguir las notas que marcaste.
+A: Claro. La canción que hacemos tiene un cambio de ritmo y me pierdo.
+B: ¿Ensayaron el final ayer?
+A: Sí, pero yo salí antes para ir a inglés.
+B: ¿Podés practicarlo con la grabación que mandó la profesora?
+A: La tengo en el grupo de la clase.
+B: Escuchala en casa mientras llega el cuaderno.
+A: Ya me escribió Sol, el hermano está saliendo.
+B: ¿Sabés a qué hora llega?
+A: En quince minutos. ¿Recepción sigue abierta durante el recreo?
+B: Sí, la persona de turno está hasta las cinco.
+A: Bueno, le aviso a la profesora que lo va a dejar ahí.
+B: Ya le mandé una nota interna.
+A: Gracias. Me daba miedo quedarme sin las marcas del ensayo.
+B: Seguro llega a tiempo.
+A: Nos vemos después del acto.
+B: Suerte con la presentación.

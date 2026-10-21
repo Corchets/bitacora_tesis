@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-L-ORGANISMO_PREVISIONAL-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-ORGANISMO_PREVISIONAL-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 26,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "La persona llama para consultar por una constancia de aportes que no aparece en el portal; confirma período trabajado y número de trámite.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama para consultar por una constancia de aportes que no aparece en el portal; confirma período trabajado y número de trámite.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": true,
+  "escenario_base": "LG-ORG-TURNO-01",
+  "situacion": "La persona llama para consultar por una constancia de aportes que no aparece en el portal; confirma período trabajado y número de trámite."
+}

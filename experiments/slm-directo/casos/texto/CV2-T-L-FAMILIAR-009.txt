@@ -1,0 +1,30 @@
+A: Hola, el mecánico terminó de arreglar el auto de papá.
+B: ¿Quedó bien el ruido del motor?
+A: Sí, era una correa y un tensor. El total fue 92.000.
+B: ¿Papá ya sabe cuánto salió?
+A: Le mandé el presupuesto antes de autorizar el cambio.
+B: ¿Cuánto te corresponde a vos y cuánto a mí?
+A: Si ponemos mitad cada uno, son 46.000.
+B: Yo puedo cubrir los 46 ahora y vos me devolvés cuando cobres.
+A: Prefiero poner 30.000 hoy y completar la semana que viene.
+B: Está bien, no hace falta que te quedes sin plata para los gastos del mes.
+A: ¿Me transferís el total al mecánico y yo te mando la primera parte?
+B: Sí. ¿La cuenta del taller sigue siendo la que termina en rueda.34?
+A: Sí, está a nombre de Mica Suárez. Lo tengo guardado del cambio de aceite.
+B: ¿Querés que espere a que me mandes el presupuesto antes de transferir?
+A: Te reenvío la foto ahora. Está separado el repuesto y la mano de obra.
+B: Ya lo vi. Mando los 92.000 al taller.
+A: Avisame cuando salga para mostrarle el comprobante al mecánico.
+B: Listo, lo envié y figura recibido.
+A: Gracias. Yo te mando los 30.000 ahora desde mi cuenta.
+B: Apareció. Quedan 16.000 para la semana que viene.
+A: Sí, te los paso el viernes después de cobrar.
+B: No hay apuro, con que lo dejemos anotado alcanza.
+A: ¿Papá puede retirar el auto antes de las seis?
+B: El mecánico dijo que sí, pero que lo llamemos media hora antes.
+A: Lo llamo cuando salga de la oficina.
+B: ¿Querés que lo pase a buscar yo?
+A: Sí, así no tiene que volver en colectivo con las herramientas.
+B: Dale, voy a las cinco.
+A: Te mando el número del taller por si se demora.
+B: Ya lo tengo. Gracias por coordinar.

@@ -1,0 +1,31 @@
+A: la tabla de atención que imprimimos tiene mal la fecha del viernes
+B: qué fecha aparece
+A: pone 21 de noviembre pero el viernes es 20
+B: el archivo fuente también está mal o solo la impresión
+B: el archivo fuente también está mal o solo la impresión
+A: el archivo fuente está bien creo que abrí una versión anterior
+B: cuál es el nombre del documento que mandaste a imprimir
+A: horarios noviembre final dos
+B: hay tres con nombres parecidos en la carpeta compartida
+A: el correcto se guardó ayer a las cinco y doce
+B: entonces el que imprimiste parece ser el de la semana pasada
+A: sí tiene una nota de reunión que ya se canceló
+B: podemos reutilizar el papel del lado en blanco
+A: no tiene datos de la atención anterior por atrás
+B: mejor lo trituramos antes de imprimir la versión nueva
+A: ya lo puse en la caja de documentos para destruir
+B: querés que comparemos los horarios del lunes también
+A: sí porque la oficina abre media hora antes este mes
+B: el lunes dice nueve debería decir ocho y media
+A: el cambio está aprobado desde el primero
+B: actualizo la tabla y te mando el pdf para revisar
+A: abrí el archivo ahora dice viernes 20 y lunes 8:30
+B: la dirección y el teléfono de atención están correctos
+A: sí son los mismos que en el sitio de la oficina
+B: imprimí una copia de prueba antes de sacar las veinte
+A: la prueba salió alineada y sin cortes
+B: entonces podemos reemplazar el cartel del mostrador
+A: lo llevo ahora avisás a recepción del cambio
+B: sí les mando la tabla nueva por el canal interno
+A: gracias por detectar la fecha
+B: de nada mejor corregirlo antes de que venga gente

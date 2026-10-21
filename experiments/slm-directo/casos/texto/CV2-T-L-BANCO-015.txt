@@ -1,0 +1,28 @@
+A: la aplicación cambió de aspecto y ahora no encuentro el botón de movimientos
+B: hola qué teléfono usás
+A: un yuyo 4 lo compré hace varios años y funciona todavía
+B: actualizaste la aplicación o se actualizó sola
+A: se actualizó anoche y me pidió volver a entrar
+B: pudiste iniciar sesión
+A: sí tuve que buscar la clave vieja que tenía guardada en un cuaderno
+B: ahora aparece tu cuenta y el saldo habitual
+A: sí pero la pantalla principal está distinta
+B: abajo deberías ver inicio cuentas tarjetas y ayuda
+A: a mí me aparece inicio transferencias tarjetas perfil
+B: tocá cuentas desde perfil o buscá movimientos dentro de cada cuenta
+A: ahí encontré la cuenta sueldo pero no el filtro de fechas
+B: abrí los tres puntos en la parte superior derecha
+A: veo descargar resumen y buscar por importe
+B: para un movimiento concreto podés escribir el importe aproximado
+A: era una compra de 6400 en una ferretería el sábado
+B: aparece ferretería norte a las 12 17
+A: sí esa es la compra que buscaba
+B: el saldo que ves coincide con el de la pantalla inicial
+A: sí coincide lo que no encontraba era la lista
+B: bien para la próxima actualización la aplicación te va a mostrar un aviso antes de cambiar los botones
+A: no me llegó aviso creo que lo cerré sin mirar
+B: puede ser se muestra al abrir por primera vez después de la actualización
+A: bueno ya lo tengo encontrado
+B: querés consultar algo más
+A: no era solo ubicar los movimientos
+B: perfecto

@@ -1,0 +1,29 @@
+A: ¿Tenés la lista de parlantes que pidió el centro cultural?
+B: Sí, son dos cajas activas, cuatro micrófonos y los soportes.
+A: ¿Los cables van incluidos o usan los que ya tienen?
+B: Nos pidieron nuestros cables porque los del salón hacen falso contacto.
+A: ¿Hay lugar en la camioneta para todo?
+B: Si saco las sillas plegables, entra sin problema.
+A: Las sillas las necesita el taller de teatro a las cinco.
+B: Entonces puedo hacer dos viajes. Primero llevo el sonido y vuelvo por las sillas.
+A: La actividad empieza a las seis y media, tenemos margen.
+B: ¿Quién recibe los equipos en el salón?
+A: Marina, la coordinadora. Está al tanto del inventario.
+B: ¿Me pasás su contacto para avisarle cuando esté saliendo?
+A: Sí, lo pongo en el grupo del proyecto.
+B: ¿El salón tiene ascensor de carga?
+A: No, pero la entrada lateral tiene una rampa corta.
+B: Mejor llevo el carro de mano del depósito.
+A: Está junto a las cajas de herramientas.
+B: ¿Los micrófonos están cargados?
+A: Los dejé conectados después del ensayo de ayer.
+B: Voy a revisar las pilas antes de cargarlos.
+A: ¿La consola está configurada para cuatro canales?
+B: Sí, pero hay que llevar el adaptador del proyector también.
+A: Lo agrego a la lista para no olvidarlo.
+B: ¿Quién devuelve los equipos al cierre?
+A: Me quedo hasta que termine la actividad y los llevo de vuelta.
+B: Yo vuelvo con las sillas, entonces.
+A: Dale. ¿Nos encontramos a las cuatro en el galpón?
+B: Sí, cargo primero los cables.
+A: Perfecto, te mando el inventario actualizado.

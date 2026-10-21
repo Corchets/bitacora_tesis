@@ -1,0 +1,29 @@
+A: buen día el escáner deja unas líneas grises en todas las hojas
+B: hola empezó hoy o ya venía pasando
+A: hoy después de limpiar la mesa de entrada
+B: qué modelo de equipo es
+A: bruma scan tres está en la oficina de archivo
+B: me decís el número de serie que figura atrás
+A: dice bs 8142
+B: gracias aparece en el registro de mantenimiento
+A: la hoja sale con dos bandas verticales sobre el margen derecho
+B: pasa también cuando copiás o solo al escanear
+A: también en las copias
+B: puede haberse ensuciado el cristal angosto del alimentador
+A: lo puedo limpiar con el paño que usamos para los lentes
+B: sí pero apagá el equipo y usá un paño seco que no deje pelusa
+A: ya lo apagué el cristal tiene una manchita cerca del borde
+B: pasá el paño sin presionar la superficie
+A: la mancha salió y prendí el equipo de nuevo
+B: probá con una hoja limpia desde el alimentador
+A: ahora sale mejor pero queda una línea muy finita
+B: la línea aparece siempre en el mismo lugar
+A: sí como a dos centímetros del borde
+B: voy a dejar pedido de mantenimiento para que revisen el rodillo
+A: qué día pueden venir
+B: hay disponibilidad el jueves de nueve a doce
+A: el jueves el archivo abre a las diez pero yo llego antes
+B: dejo esa referencia para que te llamen al llegar
+A: anotá que el equipo está en la oficina del fondo
+B: listo serie bs 8142 jueves por la mañana
+A: gracias así seguimos digitalizando los legajos
