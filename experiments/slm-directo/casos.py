@@ -128,6 +128,8 @@ def validar_caso(case_id: str, todos: set[str], semillas: set[str]) -> list[str]
         ref = cargar_referencia(case_id)
     except json.JSONDecodeError as e:
         return errores + [f"{case_id}.json: JSON inválido ({e})"]
+    if not isinstance(ref, dict):
+        return errores + [f"{case_id}.json: la referencia debe ser un objeto"]
 
     faltan = [c for c in CAMPOS if c not in ref]
     sobran = [c for c in ref if c not in set(CAMPOS) | CAMPOS_V2]
@@ -249,6 +251,8 @@ def validar_manifiesto() -> list[str]:
         catalogo = manifiesto["catalogo_sha256"]
     except (ValueError, KeyError, TypeError) as e:
         return [f"Manifiesto de reserva inválido: {e}"]
+    if not isinstance(esperados, dict) or not isinstance(catalogo, str):
+        return ["Manifiesto de reserva inválido: casos debe ser un objeto y catalogo_sha256 texto"]
     actuales = huellas_de_casos()
     errores = [f"{c}: no coincide con la reserva SHA-256 (alta, baja o modificación; revisar D08)"
                for c in sorted(esperados.keys() | actuales.keys()) if esperados.get(c) != actuales.get(c)]

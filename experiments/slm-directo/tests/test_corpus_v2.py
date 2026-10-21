@@ -2,6 +2,7 @@
 
 import importlib.util
 import json
+from collections import Counter
 from pathlib import Path
 from types import SimpleNamespace
 import tempfile
@@ -11,6 +12,28 @@ from unittest.mock import patch
 import casos
 import correr
 import resumen
+
+
+class TestInventarioV2(unittest.TestCase):
+    def test_balance_reserva_y_cobertura_de_las_cuotas_acordadas(self):
+        refs = [casos.cargar_referencia(c) for c in casos.ids_de_casos()]
+        balance = Counter((r.get("particion", "desarrollo"), r["clase"] == "vishing") for r in refs)
+        self.assertEqual(balance, Counter({("desarrollo", True): 75, ("desarrollo", False): 75,
+                                           ("test_reservado", True): 100, ("test_reservado", False): 100}))
+        nuevos = [r for r in refs if r["grupo"] == "corpus_v2"]
+        self.assertEqual(len(nuevos), 297)
+        self.assertEqual(Counter((r["particion"], r["dificultad"]) for r in nuevos), Counter({
+            ("desarrollo", "directo"): 18, ("desarrollo", "indirecto"): 18, ("desarrollo", "sin_pedido"): 10,
+            ("desarrollo", "cotidiana"): 25, ("desarrollo", "pedido_razonable"): 16, ("desarrollo", "mencion_sin_pedido"): 10,
+            ("test_reservado", "directo"): 40, ("test_reservado", "indirecto"): 40, ("test_reservado", "sin_pedido"): 20,
+            ("test_reservado", "cotidiana"): 40, ("test_reservado", "pedido_razonable"): 35, ("test_reservado", "mencion_sin_pedido"): 25,
+        }))
+        self.assertEqual(Counter((r["particion"], r["clase"]) for r in nuevos if r["variante_asr"]), Counter({
+            ("desarrollo", "vishing"): 12, ("desarrollo", "legitima"): 12,
+            ("test_reservado", "vishing"): 30, ("test_reservado", "legitima"): 30,
+        }))
+        largos = sum(len(casos.cargar_texto(r["case_id"])) >= 20 for r in nuevos)
+        self.assertGreater(largos, len(nuevos) / 2)
 
 
 class TestReserva(unittest.TestCase):
@@ -82,6 +105,13 @@ class TestReserva(unittest.TestCase):
         original = self.manifiesto.read_bytes()
         self.assertEqual(casos.main(["--congelar"]), 1)
         self.assertEqual(self.manifiesto.read_bytes(), original)
+
+    def test_referencia_y_reserva_malformadas_informan_error(self):
+        self.manifiesto.write_text('{"casos": [], "catalogo_sha256": 0}', encoding="utf-8")
+        self.assertTrue(any("Manifiesto de reserva inválido" in e for e in casos.validar_todos()))
+        self.manifiesto.unlink()
+        (self.referencia / "T.json").write_text("[]", encoding="utf-8")
+        self.assertTrue(any("referencia debe ser un objeto" in e for e in casos.validar_todos()))
 
     def test_una_legitima_nueva_sigue_contando_como_legitima(self):
         self.assertEqual(resumen.categoria(dict(clase="legitima"), 1), "falsa_alarma")

@@ -350,6 +350,7 @@ def main(argv: list[str] | None = None) -> int:
         "codigo": info_codigo(),
         "maquina": info_maquina(),
         "politica": POLITICA,
+        "particion": args.particion,
         "ollama": None if ollama is None else {"url": args.url, **ollama},
         "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
         "prompts": {v: {"huella": huella(cargar_prompt(v)), "texto": cargar_prompt(v)} for v in prompts} if modelos else {},
