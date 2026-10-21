@@ -128,6 +128,21 @@ mandar al equipo. Para armarlo con cualquier conjunto de corridas:
 python visor.py corridas/<una> corridas/<otra> --abrir
 ```
 
+### El panel
+
+`analisis/tablero/panel.html` junta en una página el estado del proyecto, el plan de
+trabajo, las corridas guardadas, los 53 casos y un probador en vivo contra Ollama. En
+«Afinar» recalcula estafas con aviso y falsas alarmas al mover el umbral de `riesgo` y
+la persistencia, sin volver a correr nada. Se arma desde la raíz del repositorio:
+
+```bash
+python3 experiments/slm-directo/analisis/tablero/armar_panel.py --servir
+```
+
+`--servir` hace falta porque Ollama rechaza páginas abiertas como archivo. Las reglas del
+probador son una copia en JavaScript de `reglas.py`; las corridas que se hacen ahí son
+exploratorias y no escriben manifiesto.
+
 ### Paso a paso, sin el script
 
 ```bash

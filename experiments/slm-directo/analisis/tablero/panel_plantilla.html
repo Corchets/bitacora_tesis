@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel del proyecto · detección incremental de vishing</title>
+<style>
+:root{--bg:#fbfaf7;--panel:#fff;--fg:#1d2321;--mu:#5f6b66;--bd:#e3e0d8;--pr:#1f5f4a;--pr2:#e8f1ec;--ok:#15803d;--bad:#b91c1c;--warn:#b45309;--vi:#dc2626;--le:#16a34a;
+--c0:#6b7280;--c1:#2563eb;--c2:#d97706;--c3:#7c3aed;--c4:#0891b2;--c5:#db2777;--c6:#65a30d;--c7:#9333ea;--c8:#0f766e;--c9:#ea580c}
+*{box-sizing:border-box}
+body{margin:0;font:14.5px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--fg)}
+header{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--bd)}
+.top{display:flex;align-items:baseline;gap:14px;padding:10px 22px 0;flex-wrap:wrap}
+.top h1{font-size:17px;margin:0}.top .mu{font-size:12.5px}
+nav{display:flex;gap:2px;padding:6px 16px 0;overflow-x:auto}
+nav button{border:0;background:none;padding:8px 12px;font:inherit;font-size:13.5px;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav button.on{color:var(--pr);border-bottom-color:var(--pr);font-weight:600}
+main{max-width:1240px;margin:0 auto;padding:18px 22px 60px}
+section{display:none}section.on{display:block}
+h2{font-size:19px;margin:6px 0 4px}h3{font-size:15px;margin:22px 0 6px}
+.mu{color:var(--mu)}.chico{font-size:12.5px}
+code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;background:#f0eee8;padding:1px 5px;border-radius:4px}
+pre{font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:#f3f1ea;padding:10px 12px;border-radius:8px;overflow:auto;margin:6px 0}
+.card{background:var(--panel);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:10px 0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+.aviso{border-left:4px solid var(--warn);background:#fff8eb;padding:8px 12px;border-radius:6px;font-size:13px;margin:10px 0}
+.nota{border-left:4px solid var(--pr);background:var(--pr2);padding:8px 12px;border-radius:6px;font-size:13px;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid var(--bd);padding:6px 7px;text-align:left;vertical-align:top}
+th{color:var(--mu);font-weight:600;font-size:12px;background:#f7f5f0;position:sticky;top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:9px;white-space:nowrap}
+.tv{background:#fde2e2;color:#991b1b}.tl{background:#dcfce7;color:#166534}.tg{background:#eceae4;color:#444}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+details{margin:6px 0}summary{cursor:pointer;font-weight:600}
+.faq summary{font-size:14.5px;padding:4px 0}.faq .card{margin:6px 0}
+button.b,label.b,select,input[type=text],input[type=number],textarea{font:inherit;font-size:13px;border:1px solid var(--bd);border-radius:7px;padding:5px 9px;background:var(--panel);color:var(--fg)}
+button.b,label.b{cursor:pointer;display:inline-block}button.b.pri{background:var(--pr);color:#fff;border-color:var(--pr)}button.b:disabled{opacity:.5;cursor:default}
+.fila{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}
+label.ctl{display:flex;flex-direction:column;font-size:12px;color:var(--mu);gap:2px}
+.kpi{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}
+.kpi div{background:var(--panel);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;min-width:150px}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}.kpi span{font-size:12px;color:var(--mu)}
+.etapa{border:1px solid var(--bd);border-radius:10px;background:var(--panel);margin:10px 0}
+.etapa>summary{padding:10px 14px;display:flex;gap:10px;align-items:center;list-style:none}
+.etapa>summary::-webkit-details-marker{display:none}
+.etapa .num{background:var(--pr);color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.etapa .cuerpo{padding:0 16px 12px 52px;font-size:13.5px}
+.etapa ul{margin:4px 0 8px;padding-left:18px}.etapa li{margin:2px 0}
+.prog{height:6px;background:#eceae4;border-radius:3px;overflow:hidden;width:120px;margin-left:auto;flex:none}.prog i{display:block;height:100%;background:var(--pr)}
+.chk{list-style:none;padding-left:0!important}.chk li{display:flex;gap:6px;align-items:flex-start}
+.lista{max-height:560px;overflow:auto;border:1px solid var(--bd);border-radius:8px;background:var(--panel)}
+.it{padding:6px 10px;border-bottom:1px solid var(--bd);cursor:pointer;font-size:12.5px;display:flex;justify-content:space-between;gap:6px}
+.it:hover,.it.sel{background:var(--pr2)}
+.lin{display:grid;grid-template-columns:30px 22px 1fr 150px;gap:6px;padding:4px 6px;border-radius:6px;font-size:13px;align-items:start}
+.lin .n{color:var(--mu);font-variant-numeric:tabular-nums}
+.lin.tr{background:#fff4d6}.lin.tc{background:#fde2e2}.lin.av{outline:2px solid var(--c1);outline-offset:-2px}
+.riesgo{height:8px;border-radius:4px;background:#eceae4;position:relative;margin-top:6px}.riesgo i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.mot{font-size:11.5px;color:var(--mu)}
+.dos{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px}@media(max-width:900px){.dos{grid-template-columns:1fr}}
+svg text{font-family:system-ui,sans-serif}
+.ley{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mu);margin:4px 0}.ley i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.estado{font-size:12.5px;padding:3px 9px;border-radius:9px}.estado.si{background:#dcfce7;color:#166534}.estado.no{background:#fde2e2;color:#991b1b}
+textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospace}
+.log{max-height:420px;overflow:auto}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><h1>Detección incremental de vishing · panel del proyecto</h1>
+  <span class="mu">rama <code>laboratorio-luciano</code> · material de desarrollo (casos escritos sin revisión humana y audio TTS), no test · D07, D08, D09 y D11 abiertas</span></div>
+  <nav id="nav"></nav>
+</header>
+<main>
+
+<!-- ============================ RESUMEN ============================ -->
+<section id="s-resumen" data-titulo="Resumen y opinión">
+<h2>Cómo va el proyecto</h2>
+<p class="mu">Lectura personal de Claude sobre lo que hay en la rama al 2026-10-21. Las cifras salen de las corridas y documentos enlazados en cada pestaña.</p>
+<div class="grid3">
+  <div class="card"><b class="ok">✔ La base técnica está bien hecha</b><p class="chico">Pipeline incremental (ASR → contexto → cola → detector → aviso único), replay que mide la demora real, métricas con intervalos de confianza, manifiestos reproducibles y 84 tests. Eso es defendible y se reutiliza para todo lo que sigue.</p></div>
+  <div class="card"><b class="bad">✘ La detección todavía no está</b><p class="chico">Ningún candidato se acerca a 95 % / 5 %. El 0.8B tiene el mejor recall (26/29), pero alarma 1 de cada 3 legítimas y 12 de sus 34 avisos se apoyan en un pedido que nadie hizo: acierta muchas veces por el motivo equivocado. El 2B avisa por pedidos reales y casi no se equivoca en legítimas (2/24), pero se le escapa ~30 % de las estafas. El 4B avisa en todo.</p></div>
+  <div class="card"><b class="warn">⚠ Lo que más limita hoy es la evidencia, no el modelo</b><p class="chico">53 casos sin revisión humana, solo 24 legítimas, ninguna legítima cotidiana, un único prompt, sin repeticiones y 2 audios TTS. Con 24 legítimas, aun con 0 falsas alarmas, el intervalo del 95 % llega a 13,8 %: <b>no se puede demostrar ≤ 5 % aunque se logre</b>.</p></div>
+  <div class="card"><b>? No sabemos el techo</b><p class="chico">Nunca se probó un modelo grande ni otra familia. «Fuertes primero» es la pregunta que más información da ahora: si un modelo grande tampoco llega a 95/5, el problema está en los casos o en la definición de «pedido» (D07), no en el tamaño.</p></div>
+  <div class="card"><b>⏱ La latencia tiene arreglos de software</b><p class="chico">Además del hardware: reutilizar la caché del prefijo (hoy se reenvía toda la transcripción en cada línea), evaluar solo al cerrar el turno, respuesta más corta y un filtro liviano antes del SLM.</p></div>
+  <div class="card"><b>📱 Gama alta es probablemente la conclusión honesta</b><p class="chico">Pero hoy el objetivo aprobado en #24 es Android gama media (512 MB para todo el pipeline). Cambiarlo es decisión del equipo y conviene respaldarlo con una medición en un teléfono real.</p></div>
+</div>
+<div class="aviso"><b>¿Alcanza con mover el umbral?</b> No. Probé todas las combinaciones de umbral de riesgo (0 a 1), persistencia de 1 o 2 líneas y condición (<code>alerta_sugerida</code> o solo riesgo) sobre las corridas guardadas, y <b>ninguna llega a 95/5</b>. Lo mejor fue usar el riesgo en vez de la alerta: el <b>2B con riesgo ≥ 0,65</b> da 24/29 estafas (83 %) y 4/24 falsas alarmas (17 %), y el <b>4B con riesgo ≥ 0,9 en dos líneas seguidas</b> da 24/29 y 3/24 (12,5 %). Es optimista, porque se eligió mirando los mismos casos. Lo podés reproducir en <a href="#afinar">Afinar</a>. Conclusión: hace falta mejor modelo, mejor prompt o mejores casos; el umbral solo no alcanza.</div>
+<div class="nota"><b>Recomendación de arranque:</b> etapa 0 (dejar todo a salvo), diseño del corpus v2 (etapa 1) y, en paralelo, una corrida exploratoria con modelos fuertes sobre los 53 casos actuales (etapa 2) para conocer el techo. Ver la pestaña <a href="#plan">Plan de trabajo</a>.</div>
+
+<h3>Tus preguntas</h3>
+<div class="faq" id="faq"></div>
+</section>
+
+<!-- ============================ PLAN ============================ -->
+<section id="s-plan" data-titulo="Plan de trabajo">
+<h2>Plan de trabajo por etapas</h2>
+<p class="mu">Orden propuesto para ir por partes. Las casillas se guardan en este navegador (localStorage). Todo lo que fija un umbral, una gama o una referencia se marca <b>propuesta sin discutir</b> hasta que lo ratifique el equipo, según AGENTS.md.</p>
+<div class="aviso"><b>Meta de calidad propuesta:</b> ≥ 95 % de estafas con aviso y ≤ 5 % de legítimas con falsa alarma, por conversación, con aviso único, medido una sola vez sobre un test congelado. Hoy no hay gate de calidad aprobado: <code>PREFACTIBILIDAD-TECNICA.md</code> §2 lo deja para D09. <b>Propuesta sin discutir.</b></div>
+<div id="plan"></div>
+</section>
+
+<!-- ============================ ARQUITECTURA ============================ -->
+<section id="s-arq" data-titulo="Arquitectura">
+<h2>Arquitectura y archivos</h2>
+<div class="card" id="arq-svg"></div>
+<p class="chico mu">L_R &gt; 0: avisó antes del pedido peligroso. L_C &gt; 0: avisó antes de que la persona cumpliera. Las reglas corren como comparador; el detector propuesto es el SLM directo (#50). La cascada encoder→SLM del spike #29 quedó como alternativa a medir.</p>
+<h3>Cómo se llegó hasta acá</h3>
+<div class="card"><table id="historia"></table></div>
+<h3>Mapa de archivos</h3>
+<div class="card"><table id="archivos"></table></div>
+</section>
+
+<!-- ============================ RESULTADOS ============================ -->
+<section id="s-res" data-titulo="Resultados">
+<h2>Resultados sobre los 53 casos escritos</h2>
+<p class="mu">29 estafas y 24 legítimas difíciles. Puntos: lo observado. Barras: intervalo de Wilson del 95 %. La zona verde es la meta propuesta (≥ 95 % / ≤ 5 %). Se calcula con la política de la pestaña <a href="#afinar">Afinar</a> (por defecto: primer <code>alerta_sugerida=true</code> válido, igual que las corridas registradas).</p>
+<div class="card"><div id="dispersion"></div><div class="ley" id="ley-disp"></div></div>
+<div class="card"><table id="tabla-res"></table></div>
+<h3>Tiempo por línea: con y sin placa de video</h3>
+<p class="mu chico">p50 y p95 por línea en segundos. Línea punteada: gate de latencia p95 ≤ 1,5 s (máximo 2,0 s) de PREFACTIBILIDAD-TECNICA. «Solo CPU, 2 hilos» corrió en las 14 conversaciones del piloto escrito, con 2 hilos de la CPU de la PC con Windows, para parecerse a lo que el teléfono le reservaría al detector.</p>
+<div class="card"><div id="latencia"></div></div>
+<h3>Memoria del detector más el reconocimiento de voz</h3>
+<div class="card"><div id="memoria"></div><p class="chico mu">Tamaño de modelo informado por Ollama más ~400 MB del ASR Zipformer medido (357–423 MB). No es un pico RSS medido del pipeline completo. Techos de PREFACTIBILIDAD-TECNICA: 256 / 512 / 1024 MB para todo el pipeline.</p></div>
+</section>
+
+<!-- ============================ AFINAR ============================ -->
+<section id="s-afinar" data-titulo="Afinar umbrales">
+<h2>Afinar umbral y política sobre corridas guardadas</h2>
+<p class="mu">Recalcula sin volver a correr nada: cada corrida guardó el <code>riesgo</code> y la <code>alerta_sugerida</code> de cada línea. También aparecen acá las corridas que hagas en el <a href="#probador">Probador</a>.</p>
+<div class="aviso">Afinar sobre los mismos 53 casos que se usan para medir sobreajusta: sirve para explorar, no para reportar. Los números para la tesis tienen que salir de un test que no se usó para elegir el umbral (etapa 1 del plan). El <code>riesgo</code> no está calibrado.</div>
+<div class="card">
+<div class="fila">
+ <label class="ctl">Corrida<select id="af-corrida"></select></label>
+ <label class="ctl">Condición de alerta<select id="af-base"><option value="alerta">alerta_sugerida = true y riesgo ≥ τ</option><option value="riesgo">solo riesgo ≥ τ</option></select></label>
+ <label class="ctl">Umbral τ: <b id="af-tau-v">0,00</b><input type="range" id="af-tau" min="0" max="1" step="0.05" value="0"></label>
+ <label class="ctl">Persistencia k (líneas seguidas)<input type="number" id="af-k" min="1" max="5" value="1" style="width:70px"></label>
+ <button class="b" id="af-reset">Volver a la política registrada</button>
+</div>
+<div class="kpi" id="af-kpi"></div>
+</div>
+<div class="grid2">
+ <div class="card"><b>Barrido de τ con k fijo</b><div id="af-barrido"></div><div class="ley"><span><i style="background:var(--vi)"></i>estafas con aviso</span><span><i style="background:var(--le)"></i>legítimas con falsa alarma</span></div></div>
+ <div class="card"><b>Cuándo avisa en las estafas (por línea)</b><div id="af-pos"></div></div>
+</div>
+<div class="card"><b>Caso por caso con esta política</b><div class="mu chico">Primero los errores. Clic en un caso para verlo línea por línea.</div><div style="max-height:480px;overflow:auto"><table id="af-casos"></table></div></div>
+</section>
+
+<!-- ============================ TIEMPOS ============================ -->
+<section id="s-tiempos" data-titulo="Tiempos T_R · T_A · T_C">
+<h2>La pregunta central: ¿avisa a tiempo?</h2>
+<div class="grid2">
+<div class="card">
+<p><b>T_R</b>: el momento en que alguien pide algo peligroso (código, clave, transferencia…). <b>T_C</b>: cuando la persona cumple. <b>T_A</b>: cuando el sistema avisa, con la demora del ASR y del detector incluida.</p>
+<p><b>L_R = T_R − T_A</b> &gt; 0: avisó antes del pedido (anticipación, suele costar falsas alarmas).<br><b>L_C = T_C − T_A</b> &gt; 0: avisó antes de que la persona cumpliera. <b>Es lo que realmente la protege.</b></p>
+<p class="chico mu">Definiciones en <code>docs/evaluacion/METRICAS.md</code>. <code>Preventive@δ</code> = proporción de estafas avisadas al menos δ antes de la referencia; δ y la política se acuerdan en D08.</p>
+</div>
+<div class="card" id="tiempos-svg"></div>
+</div>
+<h3>Replay de punta a punta sobre audio TTS</h3>
+<p class="mu chico">SC-WA-CODE-01 (estafa) y LG-WA-CONSULTA-01 (legítima): audio TTS → Zipformer → replay con cola → detector. Las barras son los turnos del audio; los puntos, el T_A. Cualquier punto en la legítima es una falsa alarma. Fuente: <code>experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md</code>.</p>
+<div class="card"><div id="e2e"></div></div>
+<div class="card"><table id="e2e-tabla"></table></div>
+<div class="nota">Lectura: en texto, el 2B avisa casi siempre en la línea del pedido (L_R ≈ 0) y antes del cumplimiento. Con audio, la demora del ASR y la <b>cola</b> del detector (cada evaluación espera a que termine la anterior) empujan el aviso: el 2B estéreo avisó a 29,1 s, 11 s después del cumplimiento y ya terminado el audio. La latencia por línea no es un detalle: decide si L_C es positivo.</div>
+</section>
+
+<!-- ============================ CASOS ============================ -->
+<section id="s-casos" data-titulo="Casos">
+<h2>Los casos de prueba</h2>
+<p class="mu">Viven en <code>experiments/slm-directo/casos/texto/&lt;id&gt;.txt</code> (diálogo <code>A: …</code> / <code>B: …</code>) y <code>casos/referencia/&lt;id&gt;.json</code> (clase, líneas de T_R/T_C, evidencia, qué prueba y notas). Formato en <code>casos/README.md</code>; validación con <code>python3 casos.py --listar</code>. Ninguno tiene revisión humana.</p>
+<div class="kpi" id="casos-kpi"></div>
+<div class="dos">
+ <div><div class="fila" id="casos-filtros"></div><div class="lista" id="casos-lista"></div></div>
+ <div>
+  <div class="fila"><label class="ctl">Mostrar respuestas de<select id="casos-corrida"></select></label><button class="b" id="casos-probar">Probar este caso en vivo →</button></div>
+  <div id="casos-det"></div>
+ </div>
+</div>
+</section>
+
+<!-- ============================ PROBADOR ============================ -->
+<section id="s-probador" data-titulo="Probador en vivo">
+<h2>Probador en vivo</h2>
+<p class="mu">Corre las reglas (copia en JavaScript de <code>reglas.py</code>) y un modelo de Ollama línea por línea, con el mismo prompt, esquema JSON y opciones que <code>correr.py</code> (temperatura 0, seed 42, num_ctx 4096, <code>think: false</code>). Es exploratorio: no escribe manifiesto. Para corridas registrables usá <code>correr.py</code>.</p>
+<div class="card">
+<div class="fila"><span>Ollama:</span><span id="ol-estado" class="estado no">sin comprobar</span>
+ <input type="text" id="ol-url" value="http://127.0.0.1:11434" style="width:200px">
+ <button class="b" id="ol-check">Comprobar</button>
+ <span class="mu chico" id="ol-ayuda"></span></div>
+<div class="fila">
+ <label class="ctl">Modelo<select id="pr-modelo"><option value="">(comprobá Ollama)</option></select></label>
+ <label class="ctl">Prompt<select id="pr-prompt"></select></label>
+ <label class="ctl">Hablantes<select id="pr-hab"><option value="ab">ab: el modelo ve A/B</option><option value="sin">sin: no los ve</option></select></label>
+ <label class="ctl">Solo reglas<select id="pr-soloreglas"><option value="no">no</option><option value="si">sí (sin Ollama)</option></select></label>
+</div>
+</div>
+<div class="grid2">
+<div class="card"><b>Una conversación</b>
+ <div class="fila"><select id="pr-caso"></select><button class="b" id="pr-cargar">Cargar caso</button></div>
+ <textarea id="pr-texto" placeholder="A: Hola, te llamo del banco...&#10;B: Sí, ¿qué pasó?"></textarea>
+ <div class="chico mu" style="margin:6px 0">Una línea por renglón, empezando con <code>A: </code> o <code>B: </code>. Marcá opcionalmente la línea del pedido y del cumplimiento:</div>
+ <div class="fila"><label class="ctl">Línea T_R<input type="number" id="pr-tr" min="1" style="width:80px"></label><label class="ctl">Línea T_C<input type="number" id="pr-tc" min="1" style="width:80px"></label><label class="ctl">Clase<select id="pr-clase"><option value="">sin indicar</option><option value="vishing">vishing</option><option value="legitima_dificil">legítima</option></select></label></div>
+ <div class="fila"><button class="b pri" id="pr-correr">▶ Correr línea por línea</button><button class="b" id="pr-parar" disabled>■ Parar</button></div>
+</div>
+<div class="card"><b>Lote de casos</b>
+ <p class="chico mu">Corre el modelo elegido sobre varios casos y suma una corrida nueva a Resultados y Afinar. Tiempo estimado: ~464 líneas por los 53 casos; con el 2B en un M1 ≈ 20 minutos.</p>
+ <div class="fila"><label class="ctl">Casos<select id="lo-grupo"><option value="todos">los 53</option><option value="piloto_escrito">piloto escrito (14)</option><option value="trampa">trampa (13)</option><option value="laboratorio">laboratorio (26)</option><option value="par">solo el par de WhatsApp</option></select></label></div>
+ <div class="fila"><button class="b pri" id="lo-correr">▶ Correr lote</button><button class="b" id="lo-parar" disabled>■ Parar</button><button class="b" id="lo-exportar">Exportar corridas en vivo (JSON)</button><label class="b" style="cursor:pointer">Importar JSON<input type="file" id="lo-importar" accept=".json" hidden></label></div>
+ <div id="lo-prog" class="chico mu"></div>
+ <div class="kpi" id="lo-kpi"></div>
+</div>
+</div>
+<div class="card"><b>Resultado línea por línea</b><div id="pr-resumen" class="kpi"></div><div id="pr-salida" class="log"></div></div>
+</section>
+
+<!-- ============================ CÓMO CORRER ============================ -->
+<section id="s-correr" data-titulo="Cómo probar todo">
+<h2>Cómo probar todo</h2>
+<div class="grid2">
+<div class="card"><b>1. Este panel</b>
+<pre>python3 experiments/slm-directo/analisis/tablero/armar_panel.py --servir
+# abre http://127.0.0.1:8765/experiments/slm-directo/analisis/tablero/panel.html</pre>
+<span class="chico mu">Hace falta servirlo: Ollama rechaza páginas abiertas con doble clic (origen <code>null</code>). Regeneralo después de nuevas corridas o casos.</span></div>
+<div class="card"><b>2. Tests (no necesitan modelos)</b>: 84, todos pasan al 2026-10-21.
+<pre>cd experiments/slm-directo &amp;&amp; python3 -m unittest discover -s tests   # 31
+cd ../replay   &amp;&amp; python3 -m unittest discover -s tests   # 12
+cd ../metricas &amp;&amp; python3 -m unittest discover -s tests   # 28
+cd .. &amp;&amp; uv run --with numpy --with soundfile \
+  python -m unittest discover -s asr-local/tests        # 13</pre></div>
+<div class="card"><b>3. Detector SLM sobre texto (#50)</b>
+<pre>bash experiments/slm-directo/demo.sh             # instala lo que falte, 8 casos y abre el visor
+bash experiments/slm-directo/demo.sh --completo  # los 53
+cd experiments/slm-directo
+python3 casos.py --listar
+python3 correr.py --solo-reglas
+python3 correr.py --modelos qwen3.5:2b-q8_0 --grupo piloto_escrito --detalle
+python3 correr.py --modelos qwen3.5:0.8b --solo-cpu --hilos 2   # cota sin placa
+python3 resumen.py corridas/&lt;carpeta&gt;
+python3 visor.py corridas/&lt;carpeta&gt; [corridas/&lt;otra&gt;] --abrir</pre>
+<span class="chico mu">En macOS usá etiquetas GGUF (<code>-q8_0</code>, <code>-q4_K_M</code>): la variante MLX devuelve HTTP 501 con salida estructurada (R21).</span></div>
+<div class="card"><b>4. ASR local (#19)</b>
+<pre>cd experiments/asr-local
+pip install -r requirements.txt
+bash sintetizar_par.sh                       # audios TTS del par
+python3 asr_local.py --help                  # Zipformer o Whisper → actualizaciones.jsonl
+python3 mezclar_canales.py --help            # estéreo A/B ordenado por disponible_s
+python3 wer.py --help</pre></div>
+<div class="card"><b>5. Replay de punta a punta (#28)</b>
+<pre>cd experiments/replay
+python3 replay.py --texto ../slm-directo/casos/texto/LAB-whatsapp-codigo.txt \
+  --detector reglas --salida corridas/demo_texto
+python3 replay.py --actualizaciones tests/datos/ejemplo_actualizaciones.jsonl \
+  --detector slm --modelo qwen3.5:2b-q8_0 --prompt tarea --hablantes ab \
+  --disparo final --salida corridas/demo_slm</pre></div>
+<div class="card"><b>6. Métricas (#52)</b>
+<pre>cd experiments/metricas
+python3 evaluar.py --help   # corridas de slm-directo o replay → metricas.md y metricas.json</pre></div>
+<div class="card"><b>7. Otras interfaces</b>
+<pre># UI Streamlit del laboratorio (#44)
+uv venv /tmp/ui-venv
+uv pip install --python /tmp/ui-venv/bin/python -r experiments/laboratorio/requirements-ui.txt
+/tmp/ui-venv/bin/python -m streamlit run experiments/laboratorio/ui_laboratorio.py
+# Ayuda-memoria y arquitectura interactiva
+cd ayuda-memoria &amp;&amp; npm install &amp;&amp; npm run build &amp;&amp; npm run preview</pre>
+<span class="chico mu">Visor guardado: <a href="../../corridas/2026-10-17_145806_demo-qwen3.5-2b-q8_0/visor.html">corrida 2B M1 (8 casos)</a> · <a href="index.html">tablero del ensayo</a> (necesita el entorno donde se creó).</span></div>
+</div>
+</section>
+</main>
+
+<script>
+const D = /*__DATOS__*/null;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const pct = (x, d = 0) => x == null ? '—' : (100 * x).toFixed(d).replace('.', ',') + ' %';
+const num = (x, d = 2) => x == null ? '—' : x.toFixed(d).replace('.', ',');
+const CASOS = Object.fromEntries(D.casos.map(c => [c.id, c]));
+const COLORES = ['var(--c0)','var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)','var(--c6)','var(--c7)','var(--c8)','var(--c9)'];
+
+// ---------------- Navegación ----------------
+const SECC = [...document.querySelectorAll('main>section')];
+const IDS = {resumen:'s-resumen',plan:'s-plan',arquitectura:'s-arq',resultados:'s-res',afinar:'s-afinar',tiempos:'s-tiempos',casos:'s-casos',probador:'s-probador',correr:'s-correr'};
+$('#nav').innerHTML = Object.entries(IDS).map(([h, id]) => `<button data-h="${h}">${$('#' + id).dataset.titulo}</button>`).join('');
+function ir() {
+  const h = (location.hash || '#resumen').slice(1);
+  const id = IDS[h] || 's-resumen';
+  SECC.forEach(s => s.classList.toggle('on', s.id === id));
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', IDS[b.dataset.h] === id));
+  if (id === 's-res') pintarResultados();
+  if (id === 's-afinar') pintarAfinar();
+  window.scrollTo(0, 0);
+}
+$('#nav').onclick = e => { if (e.target.dataset.h) location.hash = e.target.dataset.h; };
+window.addEventListener('hashchange', ir);
+
+// ---------------- Estadística ----------------
+function wilson(k, n, z = 1.96) {
+  if (!n) return [null, null];
+  const p = k / n, d = 1 + z * z / n, c = p + z * z / (2 * n), m = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+  return [Math.max(0, (c - m) / d), Math.min(1, (c + m) / d)];
+}
+
+// ---------------- Corridas y política ----------------
+// fila: [caso, linea, valida, riesgo, alerta, ms, motivo, evidencia]
+const CORRIDAS = D.corridas.map(c => ({...c, vivo: false}));
+const POLITICA_REGISTRADA = {base: 'alerta', tau: 0, k: 1};
+let politica = {...POLITICA_REGISTRADA};
+function porCaso(corrida) {
+  if (corrida._porCaso) return corrida._porCaso;
+  const m = {};
+  for (const f of corrida.filas) (m[f[0]] ||= []).push(f);
+  Object.values(m).forEach(l => l.sort((a, b) => a[1] - b[1]));
+  return (corrida._porCaso = m);
+}
+function dispara(f, p) {
+  const [, , valida, riesgo, alerta] = f;
+  if (!valida) return false;
+  if (p.base === 'riesgo' && riesgo != null) return riesgo >= p.tau;
+  return alerta && (riesgo == null || riesgo >= p.tau);
+}
+function avisoEn(filas, p) {
+  let racha = 0;
+  for (const f of filas) { racha = dispara(f, p) ? racha + 1 : 0; if (racha >= p.k) return f; }
+  return null;
+}
+function posicion(c, linea) {
+  if (linea == null) return 'sin aviso';
+  if (c.tr == null) return 'sin T_R';
+  if (c.tc != null && linea >= c.tc) return 'ya cumplió';
+  if (linea < c.tr) return 'antes';
+  if (linea === c.tr) return 'en el pedido';
+  return 'después';
+}
+function evaluar(corrida, p = politica) {
+  const pc = porCaso(corrida), filas = [];
+  let tp = 0, nv = 0, fp = 0, nl = 0, fallos = 0, pos = {};
+  for (const [id, lineas] of Object.entries(pc)) {
+    const c = CASOS[id]; if (!c) continue;
+    const ultima = Math.max(...lineas.map(f => f[1]));
+    const completo = ultima >= c.lineas.length;
+    if (!completo) continue;
+    fallos += lineas.filter(f => !f[2]).length;
+    const av = avisoEn(lineas, p), linea = av ? av[1] : null;
+    if (c.clase === 'vishing') { nv++; if (av) tp++; const ps = posicion(c, linea); pos[ps] = (pos[ps] || 0) + 1; }
+    else { nl++; if (av) fp++; }
+    filas.push({c, linea, av, ok: c.clase === 'vishing' ? !!av : !av, pos: c.clase === 'vishing' ? posicion(c, linea) : (av ? 'falsa alarma' : 'ok')});
+  }
+  const ms = corrida.filas.map(f => f[5]).filter(x => x != null).sort((a, b) => a - b);
+  const q = x => ms.length ? ms[Math.min(ms.length - 1, Math.floor(x * (ms.length - 1) + 0.5))] : null;
+  return {tp, nv, fp, nl, rec: nv ? tp / nv : null, fa: nl ? fp / nl : null, ciR: wilson(tp, nv), ciF: wilson(fp, nl), pos, filas, fallos, p50: q(0.5), p95: q(0.95)};
+}
+
+// ---------------- Gráficos SVG ----------------
+const NS = 'http://www.w3.org/2000/svg';
+function svg(w, h) { const s = document.createElementNS(NS, 'svg'); s.setAttribute('viewBox', `0 0 ${w} ${h}`); s.setAttribute('width', '100%'); return s; }
+function el(s, n, a, t) { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; s.appendChild(e); return e; }
+
+function pintarDispersion() {
+  const W = 760, H = 430, x0 = 60, y0 = 20, w = 640, h = 360;
+  const s = svg(W, H), X = v => x0 + v * w, Y = v => y0 + (1 - v) * h;
+  el(s, 'rect', {x: X(0), y: Y(1), width: X(0.05) - X(0), height: Y(0.95) - Y(1), fill: '#dcfce7', stroke: '#15803d', 'stroke-dasharray': '4 3'});
+  el(s, 'text', {x: X(0.055), y: Y(0.975), 'font-size': 11, fill: '#15803d'}, 'meta 95/5');
+  for (let v = 0; v <= 1.001; v += 0.25) {
+    el(s, 'line', {x1: X(v), x2: X(v), y1: Y(0), y2: Y(1), stroke: '#eceae4'});
+    el(s, 'line', {x1: X(0), x2: X(1), y1: Y(v), y2: Y(v), stroke: '#eceae4'});
+    el(s, 'text', {x: X(v), y: Y(0) + 16, 'text-anchor': 'middle', 'font-size': 11, fill: '#5f6b66'}, pct(v));
+    el(s, 'text', {x: X(0) - 6, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#5f6b66'}, pct(v));
+  }
+  el(s, 'text', {x: X(0.5), y: H - 4, 'text-anchor': 'middle', 'font-size': 12, fill: '#1d2321'}, 'Legítimas con falsa alarma →  (menos es mejor)');
+  const ty = el(s, 'text', {x: 14, y: Y(0.5), 'text-anchor': 'middle', 'font-size': 12, fill: '#1d2321', transform: `rotate(-90 14 ${Y(0.5)})`}, 'Estafas con aviso ↑ (más es mejor)');
+  const ley = [];
+  CORRIDAS.forEach((c, i) => {
+    const r = evaluar(c); if (!r.nv || !r.nl) return;
+    const col = COLORES[i % COLORES.length];
+    el(s, 'line', {x1: X(r.ciF[0]), x2: X(r.ciF[1]), y1: Y(r.rec), y2: Y(r.rec), stroke: col, 'stroke-opacity': .45, 'stroke-width': 2});
+    el(s, 'line', {x1: X(r.fa), x2: X(r.fa), y1: Y(r.ciR[0]), y2: Y(r.ciR[1]), stroke: col, 'stroke-opacity': .45, 'stroke-width': 2});
+    const p = el(s, 'circle', {cx: X(r.fa), cy: Y(r.rec), r: 6, fill: col, stroke: '#fff', 'stroke-width': 1.5});
+    el(p, 'title', {}, `${c.nombre}: ${r.tp}/${r.nv} estafas, ${r.fp}/${r.nl} falsas alarmas`);
+    ley.push(`<span><i style="background:${col}"></i>${esc(c.nombre)}${c.vivo ? ' (en vivo)' : ''}</span>`);
+  });
+  $('#dispersion').replaceChildren(s); $('#ley-disp').innerHTML = ley.join('');
+}
+function pintarTablaRes() {
+  const filas = CORRIDAS.map((c, i) => {
+    const r = evaluar(c); if (!r.nv && !r.nl) return '';
+    const okR = r.rec >= 0.95, okF = r.fa != null && r.fa <= 0.05;
+    return `<tr><td><span class="tag" style="background:${COLORES[i % COLORES.length]};color:#fff">&nbsp;</span> ${esc(c.nombre)}${c.vivo ? ' <span class="tag tg">en vivo</span>' : ''}</td>
+      <td class="n ${okR ? 'ok' : ''}">${r.tp}/${r.nv} (${pct(r.rec, 1)})<div class="mot">${pct(r.ciR[0])}–${pct(r.ciR[1])}</div></td>
+      <td class="n ${okF ? 'ok' : ''}">${r.fp}/${r.nl} (${pct(r.fa, 1)})<div class="mot">${pct(r.ciF[0])}–${pct(r.ciF[1])}</div></td>
+      <td class="n">${r.pos['antes'] || 0} / ${r.pos['en el pedido'] || 0} / ${r.pos['después'] || 0} / ${r.pos['ya cumplió'] || 0}</td>
+      <td class="n">${r.p50 == null ? '—' : num(r.p50 / 1000)} / ${r.p95 == null ? '—' : num(r.p95 / 1000)} s</td>
+      <td class="n">${r.fallos}</td><td class="mot">${esc(c.carpeta || '')}</td></tr>`;
+  }).join('');
+  $('#tabla-res').innerHTML = `<tr><th>Detector</th><th class="n">Estafas con aviso (IC 95 %)</th><th class="n">Falsas alarmas (IC 95 %)</th><th class="n">Antes / en / después / ya cumplió</th><th class="n">Latencia p50 / p95</th><th class="n">Fallos</th><th>Corrida</th></tr>${filas}`;
+}
+function pintarLatencia() {
+  const v = D.velocidad.filter(x => x.s_p50 != null);
+  const W = 760, fila = 30, H = 40 + v.length * fila, x0 = 190, w = 520, max = Math.max(14, ...v.map(x => x.s_p95));
+  const s = svg(W, H), X = t => x0 + t / max * w;
+  for (let t = 0; t <= max; t += 2) { el(s, 'line', {x1: X(t), x2: X(t), y1: 10, y2: H - 22, stroke: '#eceae4'}); el(s, 'text', {x: X(t), y: H - 6, 'text-anchor': 'middle', 'font-size': 11, fill: '#5f6b66'}, t + ' s'); }
+  [[1.5, '#15803d'], [2, '#b45309']].forEach(([t, c]) => el(s, 'line', {x1: X(t), x2: X(t), y1: 10, y2: H - 22, stroke: c, 'stroke-dasharray': '4 3'}));
+  v.forEach((x, i) => {
+    const y = 18 + i * fila, cpu = /CPU/.test(x.hardware);
+    el(s, 'text', {x: x0 - 8, y: y + 12, 'text-anchor': 'end', 'font-size': 12}, x.etiqueta);
+    el(s, 'rect', {x: X(0), y, width: X(x.s_p95) - X(0), height: 16, rx: 3, fill: cpu ? '#fca5a5' : '#93c5fd'});
+    el(s, 'rect', {x: X(0), y, width: X(x.s_p50) - X(0), height: 16, rx: 3, fill: cpu ? '#b91c1c' : '#1d4ed8'});
+    el(s, 'text', {x: X(x.s_p95) + 6, y: y + 12, 'font-size': 11}, `p50 ${num(x.s_p50)} · p95 ${num(x.s_p95)} s`);
+  });
+  const m1 = CORRIDAS.filter(c => /M1/.test(c.nombre) && !/Reglas/.test(c.nombre)).map(c => { const r = evaluar(c, POLITICA_REGISTRADA); return `${esc(c.nombre)}: p50 ${num(r.p50 / 1000)} s · p95 ${num(r.p95 / 1000)} s`; });
+  $('#latencia').replaceChildren(s);
+  $('#latencia').insertAdjacentHTML('beforeend', `<div class="ley"><span><i style="background:#1d4ed8"></i>con placa de video (p50 oscuro, p95 claro)</span><span><i style="background:#b91c1c"></i>solo CPU, 2 hilos</span></div><p class="chico mu">Apple M1 (GPU integrada, Metal, 8 GB), sobre los 53 casos: ${m1.join(' · ')}.</p>`);
+}
+function pintarMemoria() {
+  const mods = [['Qwen3.5 0.8B', 545], ['Qwen3.5 2B', 2255], ['Qwen3.5 4B', 2995]], asr = 400;
+  const W = 760, H = 170, x0 = 120, w = 600, max = 3600, s = svg(W, H), X = v => x0 + v / max * w;
+  [[256, 'baja'], [512, 'media (objetivo)'], [1024, 'alta']].forEach(([v, n]) => { el(s, 'line', {x1: X(v), x2: X(v), y1: 8, y2: H - 30, stroke: '#b45309', 'stroke-dasharray': '4 3'}); el(s, 'text', {x: X(v) + 3, y: H - 18, 'font-size': 10.5, fill: '#b45309'}, `${n} ${v} MB`); });
+  mods.forEach(([n, mb], i) => {
+    const y = 14 + i * 32;
+    el(s, 'text', {x: x0 - 8, y: y + 13, 'text-anchor': 'end', 'font-size': 12}, n);
+    el(s, 'rect', {x: X(0), y, width: X(asr) - X(0), height: 18, fill: '#a7f3d0'});
+    el(s, 'rect', {x: X(asr), y, width: X(asr + mb) - X(asr), height: 18, fill: '#93c5fd'});
+    el(s, 'text', {x: X(asr + mb) + 6, y: y + 13, 'font-size': 11}, `${asr + mb} MB`);
+  });
+  $('#memoria').replaceChildren(s);
+  $('#memoria').insertAdjacentHTML('beforeend', '<div class="ley"><span><i style="background:#a7f3d0"></i>ASR Zipformer (~400 MB)</span><span><i style="background:#93c5fd"></i>modelo del detector</span></div>');
+}
+function pintarResultados() { pintarDispersion(); pintarTablaRes(); pintarLatencia(); pintarMemoria(); }
+
+// ---------------- Afinar ----------------
+function opcionesCorridas(sel, conVacia) {
+  const v = sel.value;
+  sel.innerHTML = (conVacia ? '<option value="">(ninguna)</option>' : '') + CORRIDAS.map((c, i) => `<option value="${i}">${esc(c.nombre)}${c.vivo ? ' · en vivo' : ''}</option>`).join('');
+  if (v !== '' && sel.querySelector(`option[value="${v}"]`)) sel.value = v;
+}
+function leerPolitica() { politica = {base: $('#af-base').value, tau: +$('#af-tau').value, k: Math.max(1, +$('#af-k').value || 1)}; $('#af-tau-v').textContent = num(politica.tau); }
+function kpi(r) {
+  const okR = r.rec != null && r.rec >= 0.95, okF = r.fa != null && r.fa <= 0.05;
+  return `<div><span>Estafas con aviso</span><b class="${okR ? 'ok' : 'bad'}">${pct(r.rec, 1)}</b><span>${r.tp}/${r.nv} · IC ${pct(r.ciR[0])}–${pct(r.ciR[1])}</span></div>
+  <div><span>Legítimas con falsa alarma</span><b class="${okF ? 'ok' : 'bad'}">${pct(r.fa, 1)}</b><span>${r.fp}/${r.nl} · IC ${pct(r.ciF[0])}–${pct(r.ciF[1])}</span></div>
+  <div><span>Avisos antes o en el pedido</span><b>${(r.pos['antes'] || 0) + (r.pos['en el pedido'] || 0)}</b><span>de ${r.tp} avisos en estafas</span></div>
+  <div><span>Avisos con la persona ya cumpliendo</span><b>${r.pos['ya cumplió'] || 0}</b><span>tarde: L_C ≤ 0</span></div>`;
+}
+function pintarAfinar() {
+  opcionesCorridas($('#af-corrida'));
+  leerPolitica();
+  const c = CORRIDAS[+$('#af-corrida').value || 0]; if (!c) return;
+  const r = evaluar(c);
+  $('#af-kpi').innerHTML = kpi(r);
+  // barrido
+  const W = 560, H = 260, x0 = 46, y0 = 12, w = 490, h = 210, s = svg(W, H), X = v => x0 + v * w, Y = v => y0 + (1 - v) * h;
+  for (let v = 0; v <= 1.001; v += 0.25) { el(s, 'line', {x1: X(0), x2: X(1), y1: Y(v), y2: Y(v), stroke: '#eceae4'}); el(s, 'text', {x: X(0) - 5, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 10.5, fill: '#5f6b66'}, pct(v)); el(s, 'text', {x: X(v), y: Y(0) + 15, 'text-anchor': 'middle', 'font-size': 10.5, fill: '#5f6b66'}, num(v)); }
+  el(s, 'line', {x1: X(0), x2: X(1), y1: Y(0.95), y2: Y(0.95), stroke: '#dc2626', 'stroke-dasharray': '3 3', 'stroke-opacity': .6});
+  el(s, 'line', {x1: X(0), x2: X(1), y1: Y(0.05), y2: Y(0.05), stroke: '#16a34a', 'stroke-dasharray': '3 3', 'stroke-opacity': .6});
+  const pts = []; for (let t = 0; t <= 1.0001; t += 0.05) { const e = evaluar(c, {...politica, tau: +t.toFixed(2)}); pts.push([t, e.rec, e.fa]); }
+  [[1, '#dc2626'], [2, '#16a34a']].forEach(([j, col]) => el(s, 'polyline', {points: pts.filter(p => p[j] != null).map(p => `${X(p[0])},${Y(p[j])}`).join(' '), fill: 'none', stroke: col, 'stroke-width': 2}));
+  el(s, 'line', {x1: X(politica.tau), x2: X(politica.tau), y1: Y(0), y2: Y(1), stroke: '#1d2321', 'stroke-opacity': .4});
+  el(s, 'text', {x: X(0.5), y: H - 2, 'text-anchor': 'middle', 'font-size': 11}, `umbral τ (k = ${politica.k}${politica.base === 'riesgo' ? ', solo riesgo' : ''})`);
+  $('#af-barrido').replaceChildren(s);
+  if (c.filas.every(f => f[3] == null)) $('#af-barrido').insertAdjacentHTML('beforeend', '<p class="chico mu">Las reglas no dan riesgo: solo cambia k.</p>');
+  // posiciones
+  const cats = [['antes', '#1f2937'], ['en el pedido', '#6b7280'], ['después', '#a3a3a3'], ['ya cumplió', '#fca5a5'], ['sin T_R', '#c4b5fd'], ['sin aviso', '#ffffff']];
+  const tot = r.nv || 1, s2 = svg(560, 70); let acc = 0;
+  cats.forEach(([k, col]) => { const n = r.pos[k] || 0; if (!n) return; const x = 10 + acc / tot * 540, ww = n / tot * 540; el(s2, 'rect', {x, y: 10, width: ww, height: 26, fill: col, stroke: '#9ca3af'}); if (ww > 18) el(s2, 'text', {x: x + ww / 2, y: 28, 'text-anchor': 'middle', 'font-size': 11, fill: k === 'antes' || k === 'en el pedido' ? '#fff' : '#111'}, n); acc += n; });
+  $('#af-pos').replaceChildren(s2);
+  $('#af-pos').insertAdjacentHTML('beforeend', `<div class="ley">${cats.map(([k, col]) => `<span><i style="background:${col};border:1px solid #9ca3af"></i>${k}</span>`).join('')}</div>`);
+  // casos
+  const ref = evaluar(c, POLITICA_REGISTRADA), refm = Object.fromEntries(ref.filas.map(f => [f.c.id, f]));
+  $('#af-casos').innerHTML = `<tr><th>Caso</th><th>Clase</th><th>Grupo</th><th class="n">T_R / T_C</th><th class="n">Aviso (línea)</th><th>Resultado</th><th>Cambio vs registrada</th><th>Motivo del modelo</th></tr>` +
+    r.filas.sort((a, b) => (a.ok - b.ok) || b.c.clase.localeCompare(a.c.clase) || a.c.id.localeCompare(b.c.id)).map(f => {
+      const antes = refm[f.c.id], cambio = antes && antes.linea !== f.linea ? `${antes.linea ?? '—'} → ${f.linea ?? '—'}` : '';
+      return `<tr style="cursor:pointer" onclick="verCaso('${f.c.id}', ${+$('#af-corrida').value})"><td>${f.c.id}</td><td><span class="tag ${f.c.clase === 'vishing' ? 'tv' : 'tl'}">${f.c.clase === 'vishing' ? 'vishing' : 'legítima'}</span></td><td class="mot">${f.c.grupo}</td><td class="n">${f.c.tr ?? '—'} / ${f.c.tc ?? '—'}</td><td class="n">${f.linea ?? '—'}</td><td class="${f.ok ? 'ok' : 'bad'}">${f.pos}</td><td class="warn">${cambio}</td><td class="mot">${esc(f.av ? f.av[6] : '')}</td></tr>`;
+    }).join('');
+}
+['#af-corrida', '#af-base', '#af-tau', '#af-k'].forEach(s => $(s).addEventListener('input', pintarAfinar));
+$('#af-reset').onclick = () => { $('#af-base').value = 'alerta'; $('#af-tau').value = 0; $('#af-k').value = 1; pintarAfinar(); };
+
+// ---------------- Tiempos ----------------
+(function pintarTiempos() {
+  const s = svg(520, 150);
+  el(s, 'line', {x1: 20, x2: 500, y1: 70, y2: 70, stroke: '#9ca3af', 'stroke-width': 2});
+  [[200, 'T_R', 'pedido', '#b45309'], [330, 'T_C', 'cumple', '#dc2626']].forEach(([x, n, d, c]) => { el(s, 'line', {x1: x, x2: x, y1: 40, y2: 100, stroke: c, 'stroke-dasharray': '4 3'}); el(s, 'text', {x, y: 32, 'text-anchor': 'middle', 'font-size': 13, 'font-weight': 700, fill: c}, n); el(s, 'text', {x, y: 116, 'text-anchor': 'middle', 'font-size': 11, fill: c}, d); });
+  [[140, 'T_A temprano', '#15803d', 'L_R > 0'], [270, 'T_A a tiempo', '#2563eb', 'L_C > 0'], [400, 'T_A tarde', '#991b1b', 'L_C < 0']].forEach(([x, n, c, l]) => { el(s, 'circle', {cx: x, cy: 70, r: 7, fill: c}); el(s, 'text', {x, y: 140, 'text-anchor': 'middle', 'font-size': 11, fill: c}, `${n} · ${l}`); });
+  el(s, 'text', {x: 20, y: 60, 'font-size': 11, fill: '#5f6b66'}, 'llamada →');
+  $('#tiempos-svg').replaceChildren(s);
+  // E2E
+  const refs = Object.fromEntries(D.audio_ref.map(r => [r.case_id.replace('-tts', ''), r]));
+  const dets = [...new Set(D.e2e.map(f => f.detector + ' ' + f.variante))].filter(k => D.e2e.some(f => (f.detector + ' ' + f.variante) === k && f.p50 != null));
+  const cols = ['#6b7280', '#2563eb', '#60a5fa', '#d97706', '#f59e0b'];
+  const TM = 34, W = 980, x0 = 170, w = 780, X = t => x0 + t / TM * w, bloque = 40 + dets.length * 22, H = 2 * bloque + 50;
+  const s2 = svg(W, H);
+  for (let t = 0; t <= TM; t += 5) { el(s2, 'line', {x1: X(t), x2: X(t), y1: 14, y2: H - 22, stroke: '#eceae4'}); el(s2, 'text', {x: X(t), y: H - 6, 'text-anchor': 'middle', 'font-size': 11, fill: '#5f6b66'}, t + ' s'); }
+  ['SC-WA-CODE-01', 'LG-WA-CONSULTA-01'].forEach((id, i) => {
+    const r = refs[id], y0 = 24 + i * bloque;
+    el(s2, 'text', {x: 8, y: y0 + 13, 'font-size': 13, 'font-weight': 700}, i ? 'Legítima' : 'Estafa');
+    r.turnos.forEach(t => { el(s2, 'rect', {x: X(t.inicio_s), y: y0, width: X(t.fin_s) - X(t.inicio_s), height: 18, rx: 3, fill: i ? '#bbf7d0' : '#fecaca'}); el(s2, 'text', {x: (X(t.inicio_s) + X(t.fin_s)) / 2, y: y0 + 13, 'text-anchor': 'middle', 'font-size': 10}, t.hablante); });
+    if (r.t_r != null) [[r.t_r, 'T_R', '#b45309'], [r.t_c, 'T_C', '#dc2626']].forEach(([t, n, c]) => { el(s2, 'line', {x1: X(t), x2: X(t), y1: y0 - 4, y2: y0 + bloque - 14, stroke: c, 'stroke-dasharray': '4 3'}); el(s2, 'text', {x: X(t) + 3, y: y0 - 6, 'font-size': 10.5, fill: c}, `${n} ${num(t, 1)} s`); });
+    el(s2, 'line', {x1: X(r.duracion_s), x2: X(r.duracion_s), y1: y0, y2: y0 + bloque - 14, stroke: '#9ca3af'});
+    dets.forEach((k, j) => {
+      const f = D.e2e.find(f => (f.detector + ' ' + f.variante) === k && f.llamada === id), y = y0 + 34 + j * 22;
+      el(s2, 'text', {x: 20, y: y + 4, 'font-size': 11, fill: cols[j]}, k);
+      if (!f || f.ta == null) { el(s2, 'text', {x: X(0) + 4, y: y + 4, 'font-size': 11, fill: '#15803d'}, 'sin aviso'); return; }
+      el(s2, 'line', {x1: X(0), x2: X(f.ta), y1: y, y2: y, stroke: cols[j], 'stroke-opacity': .3});
+      el(s2, 'circle', {cx: X(f.ta), cy: y, r: 5, fill: cols[j]});
+      el(s2, 'text', {x: X(f.ta) + 8, y: y + 4, 'font-size': 10.5}, `${num(f.ta, 1)} s${i ? ' · falsa alarma' : ` · L_C ${f.lc > 0 ? '+' : ''}${num(f.lc, 1)} s`}`);
+    });
+  });
+  $('#e2e').replaceChildren(s2);
+  $('#e2e-tabla').innerHTML = '<tr><th>Detector</th><th>Variante</th><th>Llamada</th><th class="n">T_A</th><th class="n">L_R</th><th class="n">L_C</th><th>Falsa alarma</th><th class="n">p50 detector</th><th class="n">Cola máx.</th></tr>' +
+    D.e2e.filter(f => f.p50 != null).map(f => `<tr><td>${f.detector}</td><td>${f.variante}</td><td>${f.llamada}</td><td class="n">${f.ta == null ? '—' : num(f.ta, 1) + ' s'}</td><td class="n">${num(f.lr, 1)}</td><td class="n ${f.lc > 0 ? 'ok' : f.lc != null ? 'bad' : ''}">${num(f.lc, 1)}</td><td>${f.fa}</td><td class="n">${num(f.p50, 0)} ms</td><td class="n">${num(f.cola, 0)} ms</td></tr>`).join('');
+})();
+
+// ---------------- Casos ----------------
+let filtroCasos = 'todos', casoSel = 'SC-WA-CODE-01-e01';
+function pintarCasos() {
+  const n = g => D.casos.filter(c => c.grupo === g || c.clase === g).length;
+  $('#casos-kpi').innerHTML = `<div><b>${D.casos.length}</b><span>casos</span></div><div><b>${n('vishing')}</b><span>vishing</span></div><div><b>${D.casos.length - n('vishing')}</b><span>legítimas difíciles</span></div><div><b>0</b><span>legítimas cotidianas</span></div><div><b>0</b><span>con revisión humana</span></div>`;
+  const F = ['todos', 'piloto_escrito', 'trampa', 'laboratorio', 'vishing', 'legitima_dificil'];
+  $('#casos-filtros').innerHTML = F.map(f => `<button class="b ${f === filtroCasos ? 'pri' : ''}" data-f="${f}">${f.replace('_', ' ')}</button>`).join('');
+  const L = D.casos.filter(c => filtroCasos === 'todos' || c.grupo === filtroCasos || c.clase === filtroCasos);
+  $('#casos-lista').innerHTML = L.map(c => `<div class="it ${c.id === casoSel ? 'sel' : ''}" data-id="${c.id}"><span>${c.id}</span><span class="tag ${c.clase === 'vishing' ? 'tv' : 'tl'}">${c.clase === 'vishing' ? 'vishing' : 'legítima'}</span></div>`).join('');
+  pintarCaso();
+}
+function pintarCaso() {
+  const c = CASOS[casoSel], ci = $('#casos-corrida').value, corr = ci === '' ? null : CORRIDAS[+ci];
+  const filas = corr ? (porCaso(corr)[c.id] || []) : [], fm = Object.fromEntries(filas.map(f => [f[1], f]));
+  const av = corr ? avisoEn(filas, politica) : null;
+  const win = Object.entries({reglas: 'Reglas', q08: '0.8B', q2: '2B', q4: '4B'}).map(([k, n]) => `<span class="tag tg">${n}: ${esc(c.win[k] ?? '—')}</span>`).join(' ');
+  $('#casos-det').innerHTML = `<div class="card"><h3 style="margin:0">${c.id}</h3>
+   <div class="mu chico">${c.grupo} · ${c.clase}${c.pedido ? ' · pedido ' + c.pedido : ''} · T_R línea ${c.tr ?? '—'} · T_C línea ${c.tc ?? '—'}</div>
+   <div class="fila chico">Windows GPU: ${win}</div>
+   <div class="chico mu">«&lt;R L3»: avisó en la línea 3, antes del pedido · «=R»: en el pedido · «&gt;R»: después · «FA L2»: falsa alarma en la línea 2 · «ok»: sin aviso en una legítima · «—»: no avisó.</div>
+   <div style="margin-top:8px">${c.lineas.map(([h, t], i) => { const n = i + 1, f = fm[n];
+     const r = f && f[3] != null ? `<div class="riesgo" title="riesgo ${num(f[3])}"><i style="width:${f[3] * 100}%;background:${f[3] >= .5 ? '#dc2626' : '#f59e0b'}"></i></div>` : '';
+     const a = f ? (f[2] ? (f[4] ? '<span class="bad">alerta</span>' : '<span class="mu">—</span>') : '<span class="warn">fallo</span>') : '';
+     return `<div class="lin ${n === c.tr ? 'tr' : n === c.tc ? 'tc' : ''} ${av && av[1] === n ? 'av' : ''}"><span class="n">${n}</span><b>${h}</b><span>${esc(t)}${f && f[4] && f[6] ? `<div class="mot">↳ ${esc(f[6])}</div>` : ''}</span><span class="chico">${a}${f && f[3] != null ? ' · ' + num(f[3]) : ''}${r}</span></div>`; }).join('')}</div>
+   <div class="ley"><span><i style="background:#fff4d6"></i>línea del pedido (T_R)</span><span><i style="background:#fde2e2"></i>línea del cumplimiento (T_C)</span><span><i style="border:2px solid var(--c1)"></i>aviso con la política actual</span></div></div>
+   <div class="card"><b>Qué prueba</b><p class="chico">${esc(c.prueba)}</p>${c.notas ? `<b>Notas de la referencia</b><p class="chico">${esc(c.notas)}</p>` : ''}</div>`;
+}
+$('#casos-filtros').onclick = e => { if (e.target.dataset.f) { filtroCasos = e.target.dataset.f; pintarCasos(); } };
+$('#casos-lista').onclick = e => { const it = e.target.closest('.it'); if (it) { casoSel = it.dataset.id; pintarCasos(); } };
+$('#casos-corrida').onchange = pintarCaso;
+$('#casos-probar').onclick = () => { $('#pr-caso').value = casoSel; cargarCaso(); location.hash = 'probador'; };
+window.verCaso = (id, corrida) => { casoSel = id; filtroCasos = 'todos'; opcionesCorridas($('#casos-corrida'), true); $('#casos-corrida').value = corrida; pintarCasos(); location.hash = 'casos'; };
+
+// ---------------- Reglas (copia de reglas.py) ----------------
+const PATRONES = {
+  REQUEST_AUTH_CODE: ['codigo', 'otp', 'token', 'verificacion', 'seis digitos', 'numeros'],
+  REQUEST_SECRET: ['clave', 'pin', 'cvv', 'contrasena', 'password'],
+  REQUEST_TRANSFER: ['transferencia', 'transferi', 'pago', 'paga', 'cripto', 'efectivo', 'alias', 'cbu', 'plata'],
+  REQUEST_PERSONAL_DATA: ['dni', 'domicilio', 'identidad', 'cuil'],
+  REQUEST_REMOTE_ACCESS: ['acceso remoto', 'teamviewer', 'anydesk', 'comparti pantalla', 'instala'],
+  REQUEST_SECURITY_ACTION: ['abri el enlace', 'link', 'autoriza', 'configuracion'],
+};
+const MIN_FUZZY = 6, SOLO_EXACTO = new Set(['numeros']);
+const NEGACIONES = ['ningun ', 'ninguna ', 'no te pide', 'no pide ', 'no voy a dar', 'no voy a pasar', 'no te pido', 'no pido ', 'no saques', 'no pienso'];
+const IMPERATIVOS = ['pasame', 'decime', 'dame', 'mandame', 'confirmame', 'transferi', 'autoriz', 'instal', 'compart', 'necesito que', 'tenes que', 'tiene que'];
+const normalizar = t => t.toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, '').split(/\s+/).filter(Boolean).join(' ');
+function edicion1(a, b) {
+  if (a === b) return true;
+  const la = a.length, lb = b.length;
+  if (Math.abs(la - lb) > 1) return false;
+  if (la === lb) {
+    const d = []; for (let i = 0; i < la; i++) if (a[i] !== b[i]) d.push(i);
+    if (d.length <= 1) return true;
+    return d.length === 2 && d[1] === d[0] + 1 && a[d[0]] === b[d[1]] && a[d[1]] === b[d[0]];
+  }
+  const [corta, larga] = la < lb ? [a, b] : [b, a];
+  for (let i = 0; i < larga.length; i++) if (larga.slice(0, i) + larga.slice(i + 1) === corta) return true;
+  return false;
+}
+function cerca(hay, p) {
+  if (hay.includes(p)) return true;
+  if (p.length < MIN_FUZZY || SOLO_EXACTO.has(p)) return false;
+  for (const n of [p.length - 1, p.length, p.length + 1]) for (let i = 0; i < Math.max(0, hay.length - n + 1); i++) if (edicion1(hay.slice(i, i + n), p)) return true;
+  return false;
+}
+function coincidencias(texto) {
+  const norm = normalizar(texto);
+  if (!norm) return [];
+  if (NEGACIONES.some(n => cerca(norm, n)) && !IMPERATIVOS.some(i => norm.includes(i))) return [];
+  const out = []; for (const [et, ps] of Object.entries(PATRONES)) for (const p of ps) if (cerca(norm, p)) out.push([et, p]);
+  return out;
+}
+window.coincidencias = coincidencias;
+
+// ---------------- Ollama ----------------
+let pensarOK = true;
+const urlOllama = () => $('#ol-url').value.replace(/\/$/, '');
+async function comprobarOllama() {
+  const e = $('#ol-estado');
+  try {
+    const r = await fetch(urlOllama() + '/api/tags'); if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json(), mods = j.models.map(m => m.name).sort();
+    e.className = 'estado si'; e.textContent = `conectado · ${mods.length} modelos`;
+    $('#pr-modelo').innerHTML = mods.map(m => `<option>${m}</option>`).join('');
+    $('#ol-ayuda').textContent = '';
+  } catch (err) {
+    e.className = 'estado no'; e.textContent = 'sin conexión';
+    $('#ol-ayuda').innerHTML = location.protocol === 'file:' ? 'Abriste el archivo con doble clic: Ollama lo rechaza. Usá <code>armar_panel.py --servir</code>.' : 'Prendé Ollama (<code>ollama serve</code>) y descargá un modelo (<code>ollama pull qwen3.5:2b-q8_0</code>).';
+  }
+}
+$('#ol-check').onclick = comprobarOllama;
+function mensajeUsuario(lineas, hab) {
+  const n = lineas.length;
+  const acl = hab === 'ab' ? 'Cada línea indica quién habla con A o B. A es quien habló primero; las letras no indican quién llamó ni quién es sospechoso.' : 'Las líneas no indican quién habla.';
+  const cuerpo = lineas.map(([h, t], i) => hab === 'ab' ? `${i + 1}. ${h}: ${t}` : `${i + 1}. ${t}`).join('\n');
+  return `Transcripción disponible hasta ahora; la llamada sigue. ${acl}\n\n${cuerpo}\n\nEvaluá la llamada con lo disponible hasta la línea ${n}.`;
+}
+function validar(crudo) {
+  let s; try { s = JSON.parse(crudo); } catch { return [null, 'json_invalido']; }
+  if (!s || typeof s !== 'object' || Array.isArray(s)) return [null, 'json_no_es_objeto'];
+  const faltan = D.esquema.required.filter(k => !(k in s)); if (faltan.length) return [null, 'faltan_campos: ' + faltan];
+  if (typeof s.riesgo !== 'number' || !isFinite(s.riesgo)) return [null, 'riesgo_no_numerico'];
+  if (s.riesgo < 0 || s.riesgo > 1) return [null, 'riesgo_fuera_de_rango'];
+  if (typeof s.alerta_sugerida !== 'boolean') return [null, 'alerta_no_booleana'];
+  if (typeof s.motivo !== 'string' || typeof s.evidencia !== 'string') return [null, 'motivo_o_evidencia_no_texto'];
+  if (s.alerta_sugerida && !s.motivo.trim()) return [null, 'alerta_sin_motivo'];
+  return [s, ''];
+}
+async function evaluarSLM(modelo, prompt, hab, lineas, senal) {
+  const cuerpo = {model: modelo, messages: [{role: 'system', content: D.prompts[prompt]}, {role: 'user', content: mensajeUsuario(lineas, hab)}], format: D.esquema, options: D.opciones, stream: false};
+  if (pensarOK) cuerpo.think = false;
+  const t0 = performance.now();
+  let r = await fetch(urlOllama() + '/api/chat', {method: 'POST', body: JSON.stringify(cuerpo), signal: senal});
+  if (!r.ok) {
+    const txt = await r.text();
+    if (pensarOK && /think/i.test(txt)) { pensarOK = false; return evaluarSLM(modelo, prompt, hab, lineas, senal); }
+    return {valida: false, error: `HTTP ${r.status}: ${txt.slice(0, 120)}`, ms: performance.now() - t0};
+  }
+  const j = await r.json(), ms = performance.now() - t0, crudo = j.message?.content ?? '';
+  if (j.done_reason === 'length') return {valida: false, error: 'salida_cortada', ms, crudo};
+  const [s, err] = validar(crudo);
+  if (!s) return {valida: false, error: err, ms, crudo};
+  return {valida: true, riesgo: s.riesgo, alerta: s.alerta_sugerida, motivo: s.motivo.trim(), evidencia: s.evidencia.trim(), ms, crudo};
+}
+
+// ---------------- Probador: una conversación ----------------
+$('#pr-prompt').innerHTML = Object.keys(D.prompts).map(p => `<option>${p}</option>`).join('');
+$('#pr-caso').innerHTML = D.casos.map(c => `<option>${c.id}</option>`).join('');
+function cargarCaso() { const c = CASOS[$('#pr-caso').value]; $('#pr-texto').value = c.lineas.map(([h, t]) => `${h}: ${t}`).join('\n'); $('#pr-tr').value = c.tr ?? ''; $('#pr-tc').value = c.tc ?? ''; $('#pr-clase').value = c.clase; }
+$('#pr-cargar').onclick = cargarCaso;
+function leerTexto() {
+  const out = [];
+  for (const [i, r] of $('#pr-texto').value.split('\n').entries()) { if (!r.trim()) continue; const m = r.trim().match(/^(A|B):\s*(\S.*)$/); if (!m) throw new Error(`Renglón ${i + 1}: tiene que empezar con «A: » o «B: »`); out.push([m[1], m[2]]); }
+  if (!out.length) throw new Error('No hay líneas.');
+  return out;
+}
+let control = null;
+$('#pr-parar').onclick = () => control?.abort();
+$('#pr-correr').onclick = async () => {
+  let lineas; try { lineas = leerTexto(); } catch (e) { alert(e.message); return; }
+  const soloReglas = $('#pr-soloreglas').value === 'si', modelo = $('#pr-modelo').value, prompt = $('#pr-prompt').value, hab = $('#pr-hab').value;
+  if (!soloReglas && !modelo) { alert('Comprobá Ollama y elegí un modelo, o elegí «Solo reglas: sí».'); return; }
+  const tr = +$('#pr-tr').value || null, tc = +$('#pr-tc').value || null, clase = $('#pr-clase').value;
+  control = new AbortController(); $('#pr-correr').disabled = true; $('#pr-parar').disabled = false;
+  const sal = $('#pr-salida'); sal.innerHTML = '';
+  let avR = null, avS = null, msT = [], racha = 0;
+  try {
+    for (let i = 0; i < lineas.length; i++) {
+      const n = i + 1, [h, t] = lineas[i], co = coincidencias(t);
+      if (co.length && avR == null) avR = n;
+      let res = null;
+      const fila = document.createElement('div'); fila.className = `lin ${n === tr ? 'tr' : n === tc ? 'tc' : ''}`;
+      fila.innerHTML = `<span class="n">${n}</span><b>${h}</b><span>${esc(t)}<div class="mot">reglas: ${co.length ? '<span class="bad">' + esc([...new Set(co.map(x => x[0]))].join(', ')) + '</span> (' + esc(co.map(x => x[1]).join(', ')) + ')' : 'sin coincidencias'}</div><div class="mot slm">${soloReglas ? '' : 'SLM: evaluando…'}</div></span><span class="chico est"></span>`;
+      sal.appendChild(fila); fila.scrollIntoView({block: 'nearest'});
+      if (!soloReglas) {
+        res = await evaluarSLM(modelo, prompt, hab, lineas.slice(0, n), control.signal); msT.push(res.ms);
+        racha = dispara([null, n, res.valida, res.riesgo ?? null, !!res.alerta], politica) ? racha + 1 : 0;
+        if (racha >= politica.k && avS == null) avS = n;
+        fila.querySelector('.slm').innerHTML = res.valida ? `SLM: ${res.alerta ? '<span class="bad">alerta</span>' : 'sin alerta'} · riesgo ${num(res.riesgo)}${res.motivo ? ' · ' + esc(res.motivo) : ''}${res.evidencia ? `<br>evidencia: «${esc(res.evidencia)}»` : ''}` : `<span class="warn">SLM: fallo (${esc(res.error)})</span>`;
+        fila.querySelector('.est').innerHTML = `${num(res.ms / 1000)} s${res.valida ? `<div class="riesgo"><i style="width:${res.riesgo * 100}%;background:${res.riesgo >= .5 ? '#dc2626' : '#f59e0b'}"></i></div>` : ''}`;
+        if (avS === n) fila.classList.add('av');
+      }
+    }
+  } catch (e) { if (e.name !== 'AbortError') sal.insertAdjacentHTML('beforeend', `<p class="bad">${esc(e.message)}</p>`); }
+  $('#pr-correr').disabled = false; $('#pr-parar').disabled = true;
+  const pos = l => { if (l == null) return clase === 'legitima_dificil' ? '<span class="ok">sin aviso ✓</span>' : 'sin aviso'; if (clase === 'legitima_dificil') return '<span class="bad">falsa alarma</span>'; return posicion({tr, tc}, l); };
+  const ms = msT.sort((a, b) => a - b);
+  $('#pr-resumen').innerHTML = `<div><span>Aviso de reglas (línea)</span><b>${avR ?? '—'}</b><span>${pos(avR)}</span></div>` + (soloReglas ? '' : `<div><span>Aviso del SLM (línea, política actual)</span><b>${avS ?? '—'}</b><span>${pos(avS)}</span></div><div><span>Latencia por línea</span><b>${ms.length ? num(ms[Math.floor(ms.length / 2)] / 1000) : '—'} s</b><span>mediana · máx. ${ms.length ? num(ms[ms.length - 1] / 1000) : '—'} s</span></div>`);
+};
+
+// ---------------- Probador: lote ----------------
+let controlLote = null;
+$('#lo-parar').onclick = () => controlLote?.abort();
+$('#lo-correr').onclick = async () => {
+  const modelo = $('#pr-modelo').value, prompt = $('#pr-prompt').value, hab = $('#pr-hab').value;
+  if (!modelo) { alert('Comprobá Ollama y elegí un modelo.'); return; }
+  const g = $('#lo-grupo').value;
+  const lista = D.casos.filter(c => g === 'todos' || c.grupo === g || (g === 'par' && /^(SC-WA-CODE-01|LG-WA-CONSULTA-01)/.test(c.id)));
+  const total = lista.reduce((a, c) => a + c.lineas.length, 0);
+  const corrida = {id: `vivo|${Date.now()}`, carpeta: `en vivo ${new Date().toLocaleString('es-AR')}`, modelo, nombre: `${modelo} · ${prompt} · ${hab} · en vivo`, filas: [], vivo: true, prompt, hab};
+  CORRIDAS.push(corrida);
+  controlLote = new AbortController(); $('#lo-correr').disabled = true; $('#lo-parar').disabled = false;
+  let hechas = 0; const t0 = performance.now();
+  try {
+    for (const c of lista) for (let n = 1; n <= c.lineas.length; n++) {
+      const r = await evaluarSLM(modelo, prompt, hab, c.lineas.slice(0, n), controlLote.signal);
+      corrida.filas.push([c.id, n, r.valida, r.riesgo ?? null, !!r.alerta, Math.round(r.ms), r.motivo || r.error || '', r.evidencia || '']);
+      corrida._porCaso = null; hechas++;
+      const seg = (performance.now() - t0) / 1000, resta = seg / hechas * (total - hechas);
+      $('#lo-prog').textContent = `${hechas}/${total} líneas · caso ${c.id} · faltan ~${Math.ceil(resta / 60)} min`;
+      if (n === c.lineas.length) { const e = evaluar(corrida); $('#lo-kpi').innerHTML = kpi(e); }
+    }
+  } catch (e) { if (e.name !== 'AbortError') alert(e.message); }
+  $('#lo-correr').disabled = false; $('#lo-parar').disabled = true;
+  $('#lo-prog').textContent += ' · listo: la corrida aparece en Resultados, Afinar y Casos.';
+  guardarVivas();
+};
+function guardarVivas() { try { localStorage.setItem('panel-corridas-vivas', JSON.stringify(CORRIDAS.filter(c => c.vivo).map(({_porCaso, ...c}) => c))); } catch { /* sin espacio: queda exportar */ } }
+(function cargarVivas() { try { (JSON.parse(localStorage.getItem('panel-corridas-vivas') || '[]')).forEach(c => CORRIDAS.push(c)); } catch {} })();
+$('#lo-exportar').onclick = () => { const b = new Blob([JSON.stringify(CORRIDAS.filter(c => c.vivo).map(({_porCaso, ...c}) => c), null, 1)], {type: 'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'corridas-en-vivo.json'; a.click(); };
+$('#lo-importar').onchange = async e => { const f = e.target.files[0]; if (!f) return; JSON.parse(await f.text()).forEach(c => CORRIDAS.push({...c, vivo: true})); guardarVivas(); alert('Corridas importadas.'); };
+
+// ---------------- Contenido: FAQ, plan, arquitectura ----------------
+const FAQ = [
+['¿Ya probaste los ASR? ¿Cómo funcionan?', `<p>Sí, pero solo en una <b>prueba de humo</b>: los dos audios TTS del par de WhatsApp (voces de sistema de macOS), en mono y en estéreo con un canal por hablante. En <code>experiments/asr-local/</code>.</p>
+<table><tr><th>Motor</th><th class="n">WER</th><th class="n">RTF</th><th class="n">Memoria</th><th>Palabras críticas</th></tr>
+<tr><td>Zipformer Kroko (streaming, sherpa-onnx), mono</td><td class="n">4,35 % / 5,00 %</td><td class="n">0,17 / 0,10</td><td class="n">357–423 MB</td><td class="ok">conservó «código», «cero», «SMS»</td></tr>
+<tr><td>Faster-Whisper base (por lotes), mono</td><td class="n">17,4 %</td><td class="n">0,27</td><td class="n">277 MB</td><td class="bad">perdió los seis «cero»; «SMS» → «SMDG»</td></tr>
+<tr><td>Zipformer estéreo (A+B por separado)</td><td class="n">10,9 % / 10,0 %</td><td class="n">0,06</td><td class="n">—</td><td>frases partidas y segmentos «.» al mezclar</td></tr></table>
+<p class="chico">RTF 0,1 = transcribe 10 veces más rápido que el audio. Zipformer anda bien y es el candidato natural para llamada (streaming). Whisper perdió justo los dígitos, que son la evidencia del cumplimiento. <b>Límite:</b> TTS limpio no es voz humana por teléfono; falta audio real (#39, bloqueado por la aprobación del tutor, D06).</p>`],
+['¿Usaste solo SLM o también RoBERTuito?', `<p>En el ensayo #50 solo <b>SLM (Qwen3.5) y reglas</b>. RoBERTuito se probó antes, en el <b>spike #29</b> (septiembre, <code>experiments/laboratorio/</code>): RoBERTuito + regresión logística dio AUROC 0,666 y la cascada RoBERTuito → Llama 3.2 1B <b>empeoró</b> (0,537), con las mismas 5/10 falsas alarmas. Además, la cascada no entraba en 1024 MB (~1,7 GB sin ASR). Tenía pocos datos y semillas con sesgo de dialecto, así que no prueba que no sirva.</p><p class="chico">Retomarlo tiene sentido en la etapa 7: entrenarlo con miles de turnos etiquetados por el mejor SLM (destilación) para tener un filtro liviano. Ojo: los issues #41/#42 de encoder quedaron <code>not_planned</code>, así que hay que replanificarlo con el equipo.</p>`],
+['¿En qué archivo están las conversaciones?', `<ul><li><code>experiments/slm-directo/casos/texto/&lt;id&gt;.txt</code>: el diálogo, una línea por renglón con <code>A: </code> o <code>B: </code>.</li><li><code>experiments/slm-directo/casos/referencia/&lt;id&gt;.json</code>: clase, líneas de T_R y T_C, evidencia con etiquetas, «qué prueba», origen y notas.</li><li><code>experiments/slm-directo/casos/README.md</code>: formato y reglas. <code>python3 casos.py --listar</code> valida los 53.</li><li>Fuentes: <code>docs/corpus/CATALOGO-ESCENARIOS.csv</code> (19 escenarios) y <code>docs/corpus/METODO-CREACION-CORPUS.md</code>; guiones originales del laboratorio en <code>experiments/laboratorio/casos/</code>; audio TTS en <code>experiments/asr-local/audio-referencia/</code>.</li></ul>
+<p><b>Coincido en que se pueden armar mucho mejor:</b> 26/53 vienen del laboratorio, con 2–7 líneas, en minúscula, y 10 son paráfrasis del mismo guion. No hay ninguna legítima cotidiana, que es la llamada más común de la vida real. Las legítimas del piloto traen consejos de seguridad explícitos («no te vamos a pedir la clave») que facilitan la detección, y ninguno tiene revisión humana. Recorrelos en la pestaña <a href="#casos">Casos</a>.</p>`],
+['¿Por qué solo Qwen?', `<p>Fue a propósito: una «escalera» de <b>una sola familia</b> (0.8B, 2B, 4B) para que la diferencia se deba al tamaño y no al entrenamiento. Qwen3.5 tiene muchos tamaños chicos, buen español y anda con salida JSON en Ollama. El límite es que <b>no sabemos si otra familia</b> (Gemma, Llama, Phi, Mistral…) rinde más con el mismo tamaño, ni cuál es el techo con un modelo grande.</p><p>Tu orden es mejor para decidir: <b>primero el más fuerte</b>. Si ese no llega a 95/5, achicar no tiene sentido y el problema está en los casos, el prompt o la definición. Si llega, se baja de tamaño hasta donde aguante (etapas 2 y 4).</p>`],
+['Tiempo por línea con y sin placa: ¿hace falta sí o sí una placa? ¿Y con una CPU más potente?', `<p>Lo medido (p50 / p95 por línea): 0.8B con placa <b>0,28 / 0,71 s</b>; solo CPU con 2 hilos <b>3,9 / 7,3 s</b>; Apple M1 con GPU integrada <b>1,3 / 3,5 s</b>. El 2B: 0,52 / 1,12 · 8,2 / 13,0 · 2,6 / 6,0 s. El gate es p95 ≤ 1,5 s.</p>
+<p><b>No hace falta una «placa» como tal: hace falta un acelerador o mucho ancho de banda de memoria.</b> Cada línea tiene dos costos. (1) <i>Leer el prompt</i>: hoy se reenvía toda la transcripción en cada línea y es cálculo puro; lo aceleran mucho la GPU o la NPU. (2) <i>Escribir la respuesta</i>: depende del ancho de banda de memoria. Una CPU más potente (más núcleos, AVX-512, más ancho de banda) ayuda, pero rinde bastante menos que una GPU. Los teléfonos de gama alta no tienen placa, pero sí GPU integrada y NPU (Qualcomm Hexagon, Google Tensor, Apple Neural Engine), que se usan con runtimes como llama.cpp, MLC LLM, LiteRT/MediaPipe o Core ML. Los 2 hilos de x86 eran una cota pesimista: el número real sale solo midiendo en el teléfono (R13).</p>
+<p><b>Palancas de software que bajan mucho la latencia sin cambiar hardware:</b> reusar la caché del prefijo (la transcripción vieja no se recalcula), evaluar solo al cierre de turno, pedir una respuesta más corta y poner un filtro liviano antes del SLM.</p>`],
+['¿Apuntar solo a gama alta (últimos Samsung, Pixel, iPhone)?', `<p>Coincido como dirección: si los modelos chicos detectan mal, no sirve largarlos. El README del ensayo ya contempla esa conclusión como válida («funciona solo con modelos más grandes: se argumenta qué gama haría falta»). Pero:</p><ul>
+<li>El objetivo aprobado en #24 es <b>Android gama media, 6–8 GB, 512 MB para todo el pipeline</b> (<code>PREFACTIBILIDAD-TECNICA.md</code>). Cambiarlo es <b>decisión del equipo</b> y hay que registrarlo. Lo dejo como <b>propuesta sin discutir</b>.</li>
+<li>El techo de gama alta hoy es 1024 MB para todo. El ASR ya usa ~400 MB: al detector le quedan ~600, así que entra el 0.8B y no el 2B (2,2 GB). Apuntar a 12–16 GB de RAM implica redefinir ese techo (por ejemplo, 2–3 GB).</li>
+<li><b>iPhone:</b> iOS no deja que una app escuche las llamadas telefónicas comunes. Solo funcionaría con la VoIP propia, que es la integración objetivo de D03. No conviene prometer protección de llamadas normales en iPhone.</li></ul>`],
+['¿Dónde están los umbrales?', `<p>Los únicos gates aprobados están en <code>docs/investigacion/PREFACTIBILIDAD-TECNICA.md</code> §2: latencia por turno p95 ≤ 1,5 s (inaceptable si supera 2,0 s), memoria pico ≤ 512 MB en gama media (256 en baja, 1024 en alta), RTF &lt; 1, hilos, batería y temperatura. <b>No hay umbral de calidad</b>: el documento lo deja para D09 con el piloto.</p><p>Tu <b>95/5</b> sería el primer gate de calidad (<b>propuesta sin discutir</b>). Para que se pueda demostrar:</p><ul><li>Hay que definirlo por conversación, con aviso único y sobre un test que no se use para afinar.</li><li>Hacen falta casos. Con 24 legítimas, aun con 0 falsas alarmas, el máximo del IC 95 % es 13,8 %. Para mostrar ≤ 5 % hacen falta ~75 legítimas sin ninguna falsa alarma, o ~100 con una. Lo mismo vale para las estafas.</li></ul><p>En <a href="#afinar">Afinar</a> se mueven el umbral de riesgo y la persistencia sobre las corridas guardadas. Ya lo barrí entero: ninguna corrida llega a 95/5. Lo mejor es el 2B con riesgo ≥ 0,65 (24/29 y 4/24) o el 4B con riesgo ≥ 0,9 en dos líneas seguidas (24/29 y 3/24).</p>`],
+['¿Y T_R, T_A y T_C?', `<p>Es la pregunta central y está en la pestaña <a href="#tiempos">Tiempos</a>. En texto, el 2B avisa casi siempre <b>en la línea del pedido</b> (15 de 20 avisos) y antes de que la persona cumpla. El 4B anticipa (17 avisos antes del pedido), pero a costa de 15/24 falsas alarmas. Con audio, la demora del ASR y la cola del detector cambian todo: el 0.8B mono avisó 3,1 s antes del cumplimiento, el 2B mono 3,8 s después y el 2B estéreo 11 s después. Por eso la latencia por línea y la cola forman parte de la etapa 5.</p>`],
+];
+$('#faq').innerHTML = FAQ.map(([q, a], i) => `<details><summary>${q}</summary><div class="card">${a}</div></details>`).join('');
+
+const PLAN = [
+ {t: 'Ordenar y dejar todo a salvo', cuando: 'ahora', obj: 'Que nada viva solo en esta carpeta y que cada etapa tenga su issue.', tareas: ['Commit y push de la verificación del 2026-10-17 y de este panel', 'Abrir issues en GitHub para las etapas 1–8 (el backlog vive en Issues)', 'Llevar al equipo las decisiones de abajo: meta 95/5, gama objetivo, uso de modelos por API como cota'], sale: 'Rama con upstream, árbol limpio e issues creados.', decide: 'Equipo: qué etapas se priorizan y quién las toma.'},
+ {t: 'Corpus v2: más y mejores casos', cuando: 'empieza ya, en paralelo con la 2', obj: 'Tener suficientes conversaciones, bien armadas, para poder medir 95/5 con intervalos que lo respalden.', tareas: ['Auditar los 53: duplicados, guiones muy cortos, consejos de seguridad que regalan la respuesta, nombres de entidades reales', 'Diseñar cuotas por familia del catálogo (19 escenarios), dificultad, largo y región', 'Agregar legítimas cotidianas (familia, trabajo, delivery, médico), que hoy son 0', 'Agregar legítimas que sí piden un dato (banco que verifica identidad, turno con DNI) y estafas sin palabras clave', 'Variantes «tipo ASR»: sin puntuación, cortes, errores de transcripción, conversaciones largas', 'Tamaño meta: desarrollo ~150 (75/75) para afinar y test congelado ~200 (100/100) que no se mira hasta el final', 'Revisión humana de una muestra por dos personas y medición de acuerdo', 'Validación con casos.py, partición congelada con hash'], sale: 'Corpus v2 validado, partición desarrollo/test congelada y muestra revisada.', decide: 'Equipo: cuotas y dónde va T_R en pedidos partidos o indirectos (D07); partición disjunta (D08).'},
+ {t: 'Techo de calidad con modelos fuertes', cuando: 'exploratorio ya sobre los 53; confirmatorio con el corpus v2', obj: 'Saber si 95/5 es alcanzable y con qué modelo, antes de achicar.', tareas: ['Saber qué placa de video tiene la PC con Windows (32 GB de RAM): define si entran modelos de 9–14B o más', 'Correr la escalera hacia arriba: Qwen3.5 9B y otras familias de 7–14B (Gemma, Llama, Phi, Mistral; verificar las etiquetas en Ollama)', 'Opcional: un modelo de frontera por API como cota superior (los casos son ficticios, pero es un servicio externo: hay que aprobarlo)', 'Análisis de errores: ¿falla por capacidad del modelo o por casos ambiguos?', 'Repetir cada configuración al menos 3 veces (el 2B cambió 2/53 entre corridas iguales)'], sale: 'Curva de calidad por tamaño y familia, y diagnóstico de los errores que quedan.', decide: 'Nadie aún; alimenta D09.'},
+ {t: 'Afinar: prompt, umbral, política y reglas', cuando: 'después de la 3', obj: 'Llevar el mejor modelo lo más cerca posible de 95/5 sin tocar el test.', tareas: ['Prompt v2: sacar el sesgo hacia «código» del ejemplo, aclarar que un pedido relatado o negado no cuenta, sumar pocos ejemplos', 'Barrer umbral de riesgo τ y persistencia k (pestaña Afinar), sobre desarrollo', 'Comparar con y sin hablantes A/B, y con y sin base institucional', 'Reglas v2: menos falsas alarmas (hoy 14/24), como filtro barato o segunda opinión', 'Congelar la configuración candidata: modelo, prompt, τ y k'], sale: 'Configuración candidata congelada con su desempeño en desarrollo.', decide: 'Equipo: política de aviso (D08).'},
+ {t: 'Bajar de tamaño hasta donde aguante', cuando: 'después de la 4', obj: 'Encontrar el modelo más chico que mantiene la meta, por batería, RAM y equipos más chicos.', tareas: ['Escalera descendente con la configuración congelada (por ejemplo 9B → 4B → 2B → 0.8B, y equivalentes de otras familias)', 'Medir memoria RSS y latencia p50/p95 por turno: placa, M1, CPU potente y CPU limitada', 'Cuantizaciones (q8, q4) y su efecto en calidad', 'Proponer la gama objetivo con datos: probablemente alta, y actualizar PREFACTIBILIDAD con acuerdo del equipo', 'Ideal: medir en un teléfono de gama alta real (llama.cpp, MLC o LiteRT)'], sale: 'Modelo mínimo que conserva la meta, o curva documentada de lo que se pierde al achicar.', decide: 'Equipo: gama objetivo y techo de memoria (cambia un gate aprobado en #24).'},
+ {t: 'Tiempos: T_R, T_A, T_C', cuando: 'atraviesa la 4 a la 6', obj: 'Responder la pregunta central: cuántas estafas se avisan antes de que la persona cumpla y con cuánto margen.', tareas: ['En texto: posición del aviso frente al pedido y al cumplimiento, y Preventive@δ por líneas', 'En audio: replay de punta a punta con cola; L_R y L_C en segundos, con intervalos', 'Bajar la latencia: caché de prefijo, evaluar al cierre de turno, salida corta, filtro previo', 'Acordar δ y la política de aviso (D08)'], sale: 'Tabla de L_R, L_C y Preventive@δ para la configuración elegida, en texto y audio.', decide: 'Equipo: δ y política (D08).'},
+ {t: 'ASR para llamada real', cuando: 'en paralelo desde la 3', obj: 'Que el pipeline funcione con voz, no solo con texto.', tareas: ['Más audio: TTS con varias voces y degradación telefónica (8 kHz, códec, ruido) para una muestra del corpus v2', 'Comparar Zipformer, Whisper y Moonshine u otros: WER y recall de términos críticos («cero», «código»)', 'Estéreo por canal (VoIP propia) frente a mono', 'Grabaciones humanas del primer par (#39) cuando el tutor apruebe D06'], sale: 'ASR elegido con WER, RTF y memoria medidos, y punta a punta con voz humana.', decide: 'D09 (ASR) y D06.'},
+ {t: 'RoBERTuito: versión liviana', cuando: 'después de la 5', obj: 'Ver si un clasificador chico mantiene la calidad con menos memoria y latencia.', tareas: ['Destilación: el mejor SLM etiqueta miles de turnos sintéticos y se ajusta RoBERTuito como detector de pedido peligroso por turno', 'Variantes: encoder solo, o encoder que filtra y SLM que confirma (cascada)', 'Medir con las mismas métricas y casos que el SLM', 'Replanificar con el equipo (#41/#42 quedaron not_planned)'], sale: 'Comparación liviano contra SLM: calidad, memoria y latencia.', decide: 'Equipo: si entra en el alcance.'},
+ {t: 'Documentar y cerrar', cuando: 'al final', obj: 'Dejar la tesis con resultados finales y decisiones cerradas.', tareas: ['Una sola corrida final sobre el test congelado', 'Cerrar D09 (ASR y detector) y D08 (protocolo), con un ADR del pipeline', 'Capítulos 7 y 8 con los números finales, bitácora y riesgos', 'Paquete reproducible para la defensa (D10)'], sale: 'Decisiones cerradas y capítulos con resultados finales.', decide: 'Equipo y tutor.'},
+];
+function pintarPlan() {
+  const est = JSON.parse(localStorage.getItem('panel-plan') || '{}');
+  $('#plan').innerHTML = PLAN.map((e, i) => {
+    const hechas = e.tareas.filter((_, j) => est[`${i}-${j}`]).length;
+    return `<details class="etapa" ${i < 3 ? 'open' : ''}><summary><span class="num">${i}</span><b>${e.t}</b><span class="mu chico">${e.cuando}</span><span class="prog"><i style="width:${hechas / e.tareas.length * 100}%"></i></span><span class="mu chico">${hechas}/${e.tareas.length}</span></summary>
+    <div class="cuerpo"><p><b>Para qué:</b> ${e.obj}</p><ul class="chk">${e.tareas.map((t, j) => `<li><input type="checkbox" data-k="${i}-${j}" ${est[`${i}-${j}`] ? 'checked' : ''}><span>${t}</span></li>`).join('')}</ul>
+    <p class="chico"><b>Sale cuando:</b> ${e.sale}<br><b>Decide:</b> ${e.decide}</p></div></details>`;
+  }).join('');
+}
+$('#plan').addEventListener('change', e => { const k = e.target.dataset.k; if (!k) return; const est = JSON.parse(localStorage.getItem('panel-plan') || '{}'); est[k] = e.target.checked; localStorage.setItem('panel-plan', JSON.stringify(est)); const abiertas = [...document.querySelectorAll('.etapa')].map(d => d.open); pintarPlan(); document.querySelectorAll('.etapa').forEach((d, i) => d.open = abiertas[i]); });
+
+$('#arq-svg').innerHTML = `<svg viewBox="0 0 1000 370" width="100%"><defs><marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#888"/></marker></defs>
+<style>.bx{fill:#eef4ff;stroke:#2563eb;stroke-width:1.3}.bx2{fill:#fff4e6;stroke:#d97706;stroke-width:1.3}.bx3{fill:#ecfdf3;stroke:#16a34a;stroke-width:1.3}.g{fill:none;stroke:#d6d3cb;stroke-dasharray:4 3}.ar{stroke:#888;stroke-width:1.4;fill:none;marker-end:url(#m)}.f{font:10.5px ui-monospace,Menlo,monospace;fill:#5f6b66}.t{font-weight:600;font-size:13.5px}.s{font-size:11px}</style>
+<rect class="g" x="8" y="8" width="984" height="218" rx="10"/><text x="20" y="26" class="f">PIPELINE (lo que haría el teléfono)</text>
+<rect class="bx" x="22" y="50" width="130" height="66" rx="8"/><text x="87" y="76" text-anchor="middle" class="t">Audio</text><text x="87" y="94" text-anchor="middle" class="s">mono o estéreo A/B</text><text x="87" y="108" text-anchor="middle" class="f">sintetizar_par.sh</text>
+<rect class="bx" x="190" y="50" width="150" height="66" rx="8"/><text x="265" y="76" text-anchor="middle" class="t">ASR local</text><text x="265" y="94" text-anchor="middle" class="s">Zipformer / Whisper</text><text x="265" y="108" text-anchor="middle" class="f">asr-local/asr_local.py</text>
+<rect class="bx" x="378" y="50" width="160" height="66" rx="8"/><text x="458" y="76" text-anchor="middle" class="t">Contexto</text><text x="458" y="94" text-anchor="middle" class="s">lo dicho hasta ahora</text><text x="458" y="108" text-anchor="middle" class="f">replay/contexto.py</text>
+<rect class="bx" x="576" y="50" width="170" height="66" rx="8"/><text x="661" y="76" text-anchor="middle" class="t">Cola + Detector</text><text x="661" y="94" text-anchor="middle" class="s">SLM Qwen3.5 (Ollama) o reglas</text><text x="661" y="108" text-anchor="middle" class="f">replay/replay.py</text>
+<rect class="bx" x="784" y="50" width="196" height="66" rx="8"/><text x="882" y="76" text-anchor="middle" class="t">Política → Aviso</text><text x="882" y="94" text-anchor="middle" class="s">primer true válido = aviso único</text><text x="882" y="108" text-anchor="middle" class="f">T_A = fin de esa evaluación</text>
+<path class="ar" d="M152 83H188"/><path class="ar" d="M340 83H376"/><path class="ar" d="M538 83H574"/><path class="ar" d="M746 83H782"/>
+<text x="265" y="140" text-anchor="middle" class="f">actualizaciones.jsonl</text><text x="265" y="153" text-anchor="middle" class="f">(texto, inicio, fin, disponible_s)</text>
+<text x="661" y="140" text-anchor="middle" class="f">inicio = max(disponible_s, fin_prev)</text><text x="661" y="153" text-anchor="middle" class="f">→ {riesgo, alerta_sugerida, motivo, evidencia}</text>
+<rect class="bx2" x="378" y="168" width="368" height="44" rx="8"/><text x="562" y="187" text-anchor="middle" class="t" style="font-size:12.5px">Atajo sin audio: casos de texto línea por línea</text><text x="562" y="203" text-anchor="middle" class="f">slm-directo/correr.py · casos/texto/*.txt (53)</text>
+<path class="ar" d="M458 168V118"/>
+<rect class="g" x="8" y="240" width="984" height="122" rx="10"/><text x="20" y="258" class="f">EVALUACIÓN (el detector nunca ve esto)</text>
+<rect class="bx3" x="22" y="275" width="230" height="72" rx="8"/><text x="137" y="298" text-anchor="middle" class="t">Referencia</text><text x="137" y="315" text-anchor="middle" class="s">clase, T_R (pedido), T_C (cumplió)</text><text x="137" y="332" text-anchor="middle" class="f">casos/referencia · audio-referencia</text>
+<rect class="bx3" x="300" y="275" width="250" height="72" rx="8"/><text x="425" y="298" text-anchor="middle" class="t">Trazas de la corrida</text><text x="425" y="315" text-anchor="middle" class="s">eventos.csv / actualizaciones.csv</text><text x="425" y="332" text-anchor="middle" class="f">+ manifiesto.json (hardware, hashes)</text>
+<rect class="bx3" x="598" y="275" width="382" height="72" rx="8"/><text x="789" y="298" text-anchor="middle" class="t">Métricas (METRICAS.md)</text><text x="789" y="315" text-anchor="middle" class="s">L_R = T_R − T_A · L_C = T_C − T_A · recall · FA con IC de Wilson · RTF</text><text x="789" y="332" text-anchor="middle" class="f">metricas/evaluar.py → salidas/*/metricas.md</text>
+<path class="ar" d="M252 311H298"/><path class="ar" d="M550 311H596"/><path class="ar" d="M746 108 L790 108 L790 233 L480 233 L480 273"/></svg>`;
+
+$('#historia').innerHTML = '<tr><th>Fecha</th><th>Qué se hizo</th></tr>' + [
+ ['2026-09-02 → 09-17', 'Repositorio, anteproyecto, ventana de contexto y lógica de alerta, recorte de modelos on-device.'],
+ ['2026-09-17 → 09-28', '<b>Spike #29</b> en <code>experiments/laboratorio/</code>: reglas, encoders y cascada RoBERTuito→SLM sobre una suite de 21 casos. Se descartó TF-IDF y se giró hacia un SLM local.'],
+ ['2026-09-22 → 09-24', 'Prefactibilidad técnica y legal (#24), catálogo de escenarios argentinos (#31), piloto inicial (#22).'],
+ ['2026-10-03', '<b>UI Streamlit del laboratorio</b> (#44): texto, comparaciones y manual.'],
+ ['2026-10-07 → 10-08', 'Primer par escrito (WhatsApp); web de arquitectura y gráfico del roadmap en <code>ayuda-memoria</code>.'],
+ ['2026-10-13 → 10-15', '<b>Ensayo SLM directo #50</b>: 53 casos, reglas, escalera Qwen3.5 0.8B/2B/4B en Windows con placa y con solo CPU, demo de un comando, <b>visor</b> y <b>tablero</b>.'],
+ ['2026-10-17', 'Día principal, 28 commits: ASR local (#19), replay incremental con cola (#28), métricas (#52), corridas en Apple M1 (el 4B se cortó por swap), replay de punta a punta mono y estéreo, comparación de candidatos (#51), protocolo (#33) y capítulos 5–8 (#53).'],
+ ['2026-10-17 (cierre)', 'Verificación: el evaluador rechaza referencias ausentes, se corrigieron 43 enlaces y se acotaron R19, R20 y D11.'],
+ ['2026-10-21', 'Este panel y el plan de trabajo por etapas.'],
+].map(([f, t]) => `<tr><td style="white-space:nowrap">${f}</td><td>${t}</td></tr>`).join('');
+
+$('#archivos').innerHTML = '<tr><th>Carpeta</th><th>Qué hace</th><th>Piezas clave</th><th>Issue</th></tr>' + [
+ ['experiments/slm-directo/', 'Detector SLM sobre texto incremental y los 53 casos', 'correr.py, detectores.py, cliente_ollama.py, reglas.py, resumen.py, visor.py, demo.sh/.ps1, prompts/, casos/, analisis/ (tablero y este panel)', '#50'],
+ ['experiments/asr-local/', 'Transcripción local repetible con WER y RTF', 'asr_local.py, motores.py, sintetizar_par.sh, mezclar_canales.py, calcular_audio_referencia.py, wer.py', '#19'],
+ ['experiments/replay/', 'Simula la llamada en tiempo real: contexto, cola y aviso único', 'replay.py, contexto.py, corridas/2026-10-17_RESUMEN-E2E.md', '#28'],
+ ['experiments/metricas/', 'T_A, L_R, L_C, recall, FA con IC de Wilson, prevalencia, RTF', 'metricas.py, evaluar.py, salidas/2026-10-17-{desarrollo,m1,e2e-tts}/', '#52'],
+ ['experiments/laboratorio/', 'Spike anterior: reglas, encoders, cascada y UI Streamlit', 'ui_laboratorio.py, ui_resultados.py, pipeline.py, detector_cascada.py, detector_encoder.py', '#29, #44'],
+ ['docs/', 'Decisiones, riesgos, bitácora, evaluación y tesis', 'ingenieria/ARQUITECTURA.md, evaluacion/{METRICAS, PROTOCOLO-EXPERIMENTAL, COMPARACION-CANDIDATOS-DESARROLLO}.md, gestion/{MAPA-DECISIONES, REGISTRO-RIESGOS}.md, investigacion/PREFACTIBILIDAD-TECNICA.md, tesis/', '#33, #51, #53'],
+ ['ayuda-memoria/ + docs/ingenieria/arquitectura-web/', 'Web de roadmap y briefs, y diagrama interactivo con simulador de riesgo', 'npm run build && npm run preview → /arquitectura/', 'R17'],
+].map(([a, b, c, d]) => `<tr><td><code>${a}</code></td><td>${b}</td><td class="mot"><code>${esc(c)}</code></td><td>${d}</td></tr>`).join('');
+
+// ---------------- Inicio ----------------
+pintarPlan(); opcionesCorridas($('#af-corrida')); opcionesCorridas($('#casos-corrida'), true);
+$('#af-corrida').value = String(CORRIDAS.findIndex(c => c.nombre.startsWith('Qwen3.5 2B · Windows GPU (1)')));
+$('#casos-corrida').value = $('#af-corrida').value;
+pintarCasos(); ir(); comprobarOllama();
+</script>
+</body>
+</html>
