@@ -15,7 +15,7 @@ escanear trabajo; un panel continuo para leer; bordes suaves solo en superficies
 de agrupación. El color de advertencia identifica pendientes concretos.
 
 **STORY:** Ubicarse en el hito con trabajo abierto, recorrer el mapa de entregas
-para ver qué espera a qué, elegir un issue, leer su brief y abrir la fuente o
+por componentes para ver avances y faltantes, elegir un issue, leer su brief y abrir la fuente o
 GitHub. Los pendientes de revisión y las diferencias de ramas permanecen
 visibles.
 
@@ -34,7 +34,11 @@ seguir etapas y elegir una entrada prima sobre metáforas instrumentales.
 
 Escritorio y celular, ambas ramas, navegación entre vistas, búsqueda, filtros,
 selección de issues, enlaces, estado de revisión y carga fallida. En el roadmap:
-alternancia Mapa/Lista, zoom y encuadre, arrastre de nodos, resaltado de
-dependencias al seleccionar, filtros por frente y disponibles, panel de detalle y
-fallback de la lista. Las imágenes de la interfaz son evidencia local de
-revisión; no se sirven junto con la web.
+alternancia Mapa/Lista, selección de componentes e issues, filtros de abiertos,
+sin bloqueos, pendientes y sin issue específico, retorno al componente, Escape
+y enlaces compartibles con componente/issue/filtro. En celular los bloques se
+apilan en orden de recorrido; todos son botones HTML accesibles por teclado.
+
+Revisión del 2026-10-21: build, suite existente, sintaxis y comprobación de
+renderizado de ambas ramas. No hubo navegador disponible en esta sesión para
+revisión visual de escritorio o celular; esos controles quedan pendientes.
