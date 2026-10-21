@@ -51,7 +51,8 @@ def nuevas() -> list[tuple[str, str, str]]:
         for config in configs:
             _, modelo, prompt, _ = config.split("|")
             tam = modelo.split(":")[1].split("-")[0].upper()
-            salida.append((carpeta, config, f"{tam} {PROMPT.get(prompt, prompt)} · M1 nb32 · {carpeta[:17]}"))
+            maquina = "Windows" if "_win-" in carpeta else "M1"
+            salida.append((carpeta, config, f"{tam} {PROMPT.get(prompt, prompt)} · {maquina} nb32 · {carpeta[:17]}"))
     return salida
 
 
