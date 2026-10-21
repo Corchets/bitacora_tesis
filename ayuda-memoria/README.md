@@ -57,12 +57,45 @@ Si una consulta falla, el build falla: no publica un snapshot viejo como actual.
 La última publicación válida sigue disponible con su fecha; después de 24 horas
 muestra una advertencia para contrastar el estado en GitHub.
 
-## Revisar briefs con la skill
+## Cerrar trabajo con la skill
 
 Invocar [`$actualizar-ayuda-memoria`](../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
-Es una skill del proyecto, disponible por invocación explícita. `AGENTS.md` no
-necesita nuevas reglas. La primera versión prioriza los cinco issues de H2;
-el resto conserva el contrato original y muestra el brief pendiente.
+Es una skill compartida en el repositorio, disponible por invocación explícita
+desde el asistente. Después de actualizar su copia de la rama, cada integrante
+puede pedir, reemplazando el número por su issue:
+
+```text
+$actualizar-ayuda-memoria terminé el issue #50; prepará el PR hacia laboratorio-main.
+```
+
+Revisa la evidencia y los criterios del issue, actualiza únicamente las fuentes,
+componentes del roadmap y briefs afectados, completa el cierre documental,
+verifica los cambios y prepara el commit, push y PR. Si se invoca desde la ficha
+de la skill, el prompt sugerido usa el issue terminado en esa sesión. Si no puede
+identificarlo, pregunta el número. El PR queda listo para revisión del equipo.
+
+Para continuar también con la integración y comprobar el deploy:
+
+```text
+$actualizar-ayuda-memoria terminé el issue #50; integrá y publicá en laboratorio-main.
+```
+
+Respeta checks, revisiones, permisos y decisiones abiertas; comprueba Actions y
+la versión pública antes de informar que se publicó. El deploy de GitHub sigue
+siendo automático al integrar; esta skill hace la revisión editorial y acompaña
+el flujo. Los secrets ya están en GitHub y no se comparten entre compañeros.
+
+El uso anterior permanece disponible:
+
+```text
+$actualizar-ayuda-memoria solo briefs del issue #50 en laboratorio-main.
+```
+
+Ese modo revisa únicamente briefs y verifica localmente. `AGENTS.md` conserva sus
+reglas y GitHub continúa como único backlog. Las instrucciones completas y los
+límites de cada modo viven en el `SKILL.md` enlazado arriba.
+
+### Formato y revisión de briefs
 
 Cada entrada de `briefs.json` tiene:
 
@@ -89,6 +122,12 @@ huella. Se muestra «Revisar brief» y se usa el contrato original del issue mie
 espera revisión. Una fuente ausente se identifica como pendiente. Revisado
 significa que la orientación se contrastó; no significa que el issue terminó ni
 que el código citado cumple su contrato.
+
+El build consulta commits remotos de las ramas configuradas. Un cambio local o
+todavía en un PR no aparece como fuente de la rama destino: el brief puede
+redactarse, pero su revisión queda pendiente hasta poder contrastar la fuente
+integrada. La skill retoma esa revisión después del merge cuando se pidió el
+modo de integración y publicación.
 
 Los documentos de laboratorio conservan acuerdos anteriores a Main. Sus briefs
 señalan la diferencia y empiezan por verificar versiones; no trasladan el método
