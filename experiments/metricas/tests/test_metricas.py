@@ -296,6 +296,39 @@ class TestRTF(unittest.TestCase):
 
 
 class TestReplayAdapter(unittest.TestCase):
+    def test_replay_exige_referencia_y_clase_explicitas(self):
+        from evaluar import cargar_salida_replay
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = Path(tmpdir)
+            eventos = tmp / "eventos.csv"
+            eventos.write_text("llamada_id,aviso,t_a\ncall-01,true,4.0\n", encoding="utf-8")
+            referencia = tmp / "referencia.json"
+            for datos in ({}, {"call-01": {"t_r": 5.0}}, {"call-01": {"clase": "vishign"}}):
+                with self.subTest(referencia=datos):
+                    referencia.write_text(json.dumps(datos), encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        cargar_salida_replay(eventos, referencia)
+
+    def test_reporte_conserva_columnas_y_enlaces_desde_salida(self):
+        import re
+        from evaluar import armar_reporte_md, evaluar_configuracion
+
+        salida = _DIR_METRICAS / "tests" / "metricas.md"
+        evaluacion = evaluar_configuracion("corrida | slm|modelo|tarea|ab", [], "lineas")
+        md = armar_reporte_md([evaluacion], ruta_salida=salida)
+        ancho = None
+        for linea in md.splitlines():
+            if not linea.startswith("|"):
+                ancho = None
+                continue
+            columnas = len(re.split(r"(?<!\\)\|", linea))
+            if ancho is None:
+                ancho = columnas
+            self.assertEqual(columnas, ancho, linea)
+        for enlace in re.findall(r"\]\(([^)]+)\)", md):
+            self.assertTrue((salida.parent / enlace.split("#")[0]).exists(), enlace)
+
     def test_adaptador_replay_y_evaluacion(self):
         import csv
         import json
@@ -398,4 +431,3 @@ class TestReplayAdapter(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

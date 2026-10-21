@@ -75,6 +75,10 @@ Archivo JSON o carpeta de JSONs con:
 - `t_c` (o `t_c_s`): Segundo donde inicia el primer cumplimiento observable (o `null`).
 - `duracion_s`: Duración del audio en segundos (opcional).
 
+Cada llamada de la traza debe tener una referencia con el mismo identificador y una
+clase explícita de las enumeradas. El adaptador rechaza referencias ausentes o clases
+desconocidas: no deduce la clase a partir de `T_R` ni clasifica por defecto como legítima.
+
 ---
 
 ## 4. Cómo correrlo

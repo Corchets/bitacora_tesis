@@ -16,7 +16,7 @@
         "frontId": "deteccion",
         "issue": 51,
         "title": "Auditar falsas alarmas sin hablantes y avanzar en D09",
-        "description": "Auditar la confusión de roles observada en el replay mono de experiments/replay/ (falsas alarmas por mención de códigos sin etiquetas de hablante) y evaluar mitigaciones acústico-lingüísticas (D11) en la comparación sistemática de candidatos de docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51).",
+        "description": "Auditar la confusión de roles observada en el replay mono de experiments/replay/ (falsas alarmas por mención de códigos sin etiquetas de hablante) y contrastar el efecto del contexto de hablantes y la segmentación, sin adoptar una solución para D11, en la comparación sistemática de candidatos de docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51).",
         "urgency": "inmediato"
       },
       {

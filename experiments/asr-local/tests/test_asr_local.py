@@ -144,6 +144,9 @@ class TestContratoJSONL(unittest.TestCase):
         self.assertTrue(ruta_jsonl.exists())
         self.assertTrue(ruta_man.exists())
         self.assertTrue(ruta_res.exists())
+        import re
+        for enlace in re.findall(r"\]\(([^)]+)\)", ruta_res.read_text(encoding="utf-8")):
+            self.assertTrue((ruta_res.parent / enlace.split("#")[0]).exists(), enlace)
 
         # Leer JSONL línea por línea
         with open(ruta_jsonl, "r", encoding="utf-8") as f:

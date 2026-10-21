@@ -43,13 +43,13 @@ Son muestras de dos audios TTS breves, generados con voces de sistema; no miden 
 
 Las métricas se toman del [resumen E2E](../../experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md); las trazas y manifiestos individuales están bajo [`corridas/`](../../experiments/replay/corridas/). `T_A`, `L_R` y `L_C` son segundos, salvo espera de cola en milisegundos.
 
-| Detector | Variante | Vishing SC: `T_A / L_R / L_C` | Legítima LG: falsa alarma / `T_A` | p50 detector | espera cola máxima |
+| Detector | Variante | Vishing SC: `T_A / L_R / L_C` | Legítima LG: falsa alarma / `T_A` | p50 detector SC / LG | espera cola máxima SC / LG |
 |---|---|---|---:|---:|---:|
-| Reglas | mono | 17,821 / −4,608 / +0,209 | Sí / 5,292 | 11,4 ms | 0,0 ms |
-| 0.8B | mono | 14,956 / −1,743 / +3,074 | Sí / 12,923 | 1.952,9 ms | 1.461,2 ms |
-| 0.8B | estéreo | 20,185 / −6,972 / −2,155 | Sí / 18,105 | 1.299,3 ms | 2.497,1 ms |
-| 2B | mono | 21,813 / −8,600 / −3,783 | Sí / 9,441 | 5.227,3 ms | 4.634,9 ms |
-| 2B | estéreo | 29,068 / −15,855 / −11,038 | No / — | 5.150,9 ms | 17.377,3 ms |
+| Reglas | mono | 17,821 / −4,608 / +0,209 | Sí / 5,292 | 11,4 / 6,8 ms | 0,0 / 0,0 ms |
+| 0.8B | mono | 14,956 / −1,743 / +3,074 | Sí / 12,923 | 1.952,9 / 3.663,2 ms | 0,0 / 1.461,2 ms |
+| 0.8B | estéreo | 20,185 / −6,972 / −2,155 | Sí / 18,105 | 1.299,3 / 1.214,6 ms | 1.584,7 / 2.497,1 ms |
+| 2B | mono | 21,813 / −8,600 / −3,783 | Sí / 9,441 | 4.003,3 / 5.227,3 ms | 354,3 / 4.634,9 ms |
+| 2B | estéreo | 29,068 / −15,855 / −11,038 | No / — | 5.150,9 / 4.441,6 ms | 12.908,1 / 17.377,3 ms |
 
 En 3/4 configuraciones SLM hubo falsa alarma en la única legítima LG-WA-CONSULTA-01 TTS. En texto manual A/B el 2B no había alertado ese caso; en el replay mono, sin etiquetas de hablante, trató «Me llegó por SMS un código…» como solicitud. Esta es una observación de un par TTS, no un efecto demostrado. La segmentación estéreo partió frases y generó segmentos `.`; el 2B estéreo avisó a 29,1 s, después de terminar el audio, con una cola máxima de 12,9 s. Los resúmenes de ASR dan RTF mono 0,171/0,103 (SC/LG) y estéreo 0,063/0,066; referencias y detalle en [E2E](../../experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md).
 

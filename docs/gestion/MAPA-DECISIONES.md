@@ -222,7 +222,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Decisión registrada:** detector sobre transcripción y contexto de la llamada
   actual. El audio se usa para ASR y mediciones; los rasgos acústicos quedan como
   trabajo futuro.
-- **Evidencia nueva disponible (2026-10-17, material de desarrollo, no test):** En el replay E2E sobre audio TTS ([`experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md`](../../experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md) y [`docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md`](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md)), la transcripción mono sin distinción de hablantes provocó falsas alarmas en el detector SLM (0.8B y 2B) al interpretar un relato de la víctima como un pedido del atacante, evidenciando la relevancia de la separación de canales o turnos en el pipeline acústico-lingüístico.
+- **Evidencia nueva disponible (2026-10-17, material de desarrollo, no test):** En el replay E2E sobre audio TTS ([`experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md`](../../experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md) y [`docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md`](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md)), se observaron falsas alarmas de 0.8B y 2B en la única legítima mono y una confusión de mención con pedido. Cambian también la segmentación y las latencias entre mono y estéreo: este par TTS no aísla el efecto del hablante ni establece la separación de canales como requisito. D11 sigue abierta.
 - **Cómo seguir:** ratificar entre los cuatro «solo transcripción» para acotar el
   pipeline; seguimiento en
   [#51](https://github.com/Corchets/bitacora_tesis/issues/51).

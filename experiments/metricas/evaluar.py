@@ -13,6 +13,7 @@ import argparse
 import csv
 import json
 import math
+import os
 import sys
 from collections import defaultdict
 from dataclasses import asdict, dataclass
@@ -220,8 +221,12 @@ def cargar_salida_replay(
     for cfg, casos_dict in por_cfg_caso.items():
         lista: list[CasoEvaluado] = []
         for case_id, evs in casos_dict.items():
-            ref = refs.get(case_id, {})
-            clase = ref.get("clase", "vishing" if ("t_r" in ref or "t_r_s" in ref) else "legitima_dificil")
+            if case_id not in refs:
+                raise ValueError(f"Falta referencia explícita para la llamada {case_id!r}.")
+            ref = refs[case_id]
+            clase = ref.get("clase")
+            if clase not in {"vishing", "legitima", "legitima_dificil", "legitima_cotidiana"}:
+                raise ValueError(f"Clase ausente o desconocida en la referencia de {case_id!r}: {clase!r}.")
             grupo = ref.get("grupo", "desconocido")
             subtipo = (
                 "negativo_dificil"
@@ -420,7 +425,11 @@ def evaluar_configuracion(
     }
 
 
-def armar_reporte_md(evaluaciones: list[dict[str, Any]], titulo: str = "Evaluación de Métricas") -> str:
+def armar_reporte_md(
+    evaluaciones: list[dict[str, Any]],
+    titulo: str = "Evaluación de Métricas",
+    ruta_salida: Path | None = None,
+) -> str:
     """Genera un informe Markdown exhaustivo y autocontenido según METRICAS.md."""
     lineas: list[str] = [
         f"# {titulo}",
@@ -440,7 +449,7 @@ def armar_reporte_md(evaluaciones: list[dict[str, Any]], titulo: str = "Evaluaci
     ]
 
     for ev in evaluaciones:
-        cfg = ev["configuracion"]
+        cfg = ev["configuracion"].replace("|", "\\|")
         u = ev["unidad"]
         cl = ev["clasificacion"]
         fa = ev["falsas_alarmas"]
@@ -476,7 +485,7 @@ def armar_reporte_md(evaluaciones: list[dict[str, Any]], titulo: str = "Evaluaci
     ]
 
     for ev in evaluaciones:
-        cfg = ev["configuracion"]
+        cfg = ev["configuracion"].replace("|", "\\|")
         u = ev["unidad"]
         for p in ev["preventive_at"]["t_r"]:
             d_label = f"{p['delta']} {u}"
@@ -500,7 +509,7 @@ def armar_reporte_md(evaluaciones: list[dict[str, Any]], titulo: str = "Evaluaci
     ]
 
     for ev in evaluaciones:
-        cfg = ev["configuracion"]
+        cfg = ev["configuracion"].replace("|", "\\|")
         for g, d in ev["desglose_grupos"].items():
             rec_str = f"{d['vishing_con_aviso']}/{d['vishing']} ({_porcentaje(d['recall'])})" if d["vishing"] > 0 else "0/0"
             fa_str = f"{d['falsas_alarmas']}/{d['legitimas']} ({_porcentaje(d['tasa_fa'])})" if d["legitimas"] > 0 else "0/0"
@@ -517,7 +526,7 @@ def armar_reporte_md(evaluaciones: list[dict[str, Any]], titulo: str = "Evaluaci
     ]
 
     for ev in evaluaciones:
-        cfg = ev["configuracion"]
+        cfg = ev["configuracion"].replace("|", "\\|")
         for st, d in ev["desglose_legitimas"].items():
             if d["total"] == 0:
                 lineas.append(f"| `{cfg}` | `{st}` | 0 | 0 | — | — (no disponible en este set) |")
@@ -539,7 +548,7 @@ def armar_reporte_md(evaluaciones: list[dict[str, Any]], titulo: str = "Evaluaci
     ]
 
     for ev in evaluaciones:
-        cfg = ev["configuracion"]
+        cfg = ev["configuracion"].replace("|", "\\|")
         r = ev["clasificacion"]["recall"]
         f_val = ev["falsas_alarmas"]["tasa"]
         sens = ev["sensibilidad_prevalencia"]
@@ -553,7 +562,9 @@ def armar_reporte_md(evaluaciones: list[dict[str, Any]], titulo: str = "Evaluaci
         )
 
     lineas.append("")
-    return "\n".join(lineas)
+    base = ruta_salida.resolve().parent if ruta_salida else Path.cwd()
+    mapa = os.path.relpath(_DIR_REPO / "docs/gestion/MAPA-DECISIONES.md", base)
+    return "\n".join(lineas).replace("../../docs/gestion/MAPA-DECISIONES.md", mapa)
 
 
 def parsear_argumentos(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -672,7 +683,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         salida_md_path = salida_md_path or (salida_dir / "metricas.md")
         salida_json_path = salida_json_path or (salida_dir / "metricas.json")
 
-    contenido_md = armar_reporte_md(evaluaciones)
+    contenido_md = armar_reporte_md(evaluaciones, ruta_salida=salida_md_path)
 
     if salida_md_path:
         salida_md_path.parent.mkdir(parents=True, exist_ok=True)

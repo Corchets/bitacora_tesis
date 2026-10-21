@@ -354,6 +354,10 @@ def transcribir_audio(
 
 def generar_resumen_md(ruta_resumen: Path, m: dict[str, Any]) -> None:
     """Genera resumen legible con advertencias metodológicas obligatorias."""
+    mapa = os.path.relpath(
+        Path(__file__).resolve().parents[2] / "docs/gestion/MAPA-DECISIONES.md",
+        ruta_resumen.resolve().parent,
+    )
     eval_info = m.get("evaluacion", {})
     wer_info = eval_info.get("wer")
     cer_info = eval_info.get("cer")
@@ -365,7 +369,7 @@ def generar_resumen_md(ruta_resumen: Path, m: dict[str, Any]) -> None:
         "> **ADVERTENCIA: audio sintético TTS, no es evidencia de rendimiento sobre voz humana ni cierra D09; la corrida de entrega espera las grabaciones de #39.**",
         "",
         "> **Estado: propuesta sin discutir.** Motor propuesto como procedimiento repetible; no cierra D09 "
-        "(ver [MAPA-DECISIONES.md](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)).",
+        f"(ver [MAPA-DECISIONES.md]({mapa}#d09--elegir-asr-y-detector)).",
         "",
         "## 1. Identificación y Hardware",
         "",
