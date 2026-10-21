@@ -1,0 +1,6 @@
+{
+  "repository": "Corchets/bitacora_tesis",
+  "branches": ["laboratorio-main", "main"],
+  "defaultBranch": "laboratorio-main",
+  "glossaryTerms": ["Vishing", "ASR", "Detección incremental", "Baseline", "T_A", "T_R", "T_C", "L_R", "L_C", "Preventive", "Hard negative", "WER", "Real-time factor", "Semilla", "Familia", "On-device", "Brief"]
+}

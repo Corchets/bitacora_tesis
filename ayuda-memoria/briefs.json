@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "briefs": [
+    {
+      "branch": "laboratorio-main",
+      "issue": 39,
+      "goal": "Producir un primer par de conversaciones contrastantes con audio utilizable, texto revisado y referencia humana mínima. Este par permite arrancar ASR y reglas sin esperar el piloto completo. La guía de esta rama comienza por verificar diferencias de versión.",
+      "start": "Esta rama conserva versiones anteriores del método y del manual; el contrato actual del issue refiere a H1 y a docs/corpus/ en Main. Localizá esa versión o integrala antes de aplicar el procedimiento. Verificá el par escrito de H1 (SC-WA-CODE-01 / LG-WA-CONSULTA-01), prepará las fichas separadas de cada rol y acordá quién revisa las tomas. Antes de grabar, comprobá las condiciones del método; usá datos y acciones ficticios.",
+      "done": "Otra persona puede revisar la coherencia entre audio, texto y referencia. Quedan identificados semilla, condiciones, esfuerzo y problemas. Audio y materiales vinculables permanecen fuera de Git.",
+      "sources": [
+        {
+          "path": "docs/ingenieria/ARQUITECTURA.md",
+          "label": "Arquitectura y primer par",
+          "why": "Arquitectura anterior del spike: no contiene el par H1 vigente de Main. Revisá diferencias, no asumas cumplimiento del contrato."
+        },
+        {
+          "path": "docs/datos-etica/METODO-CREACION-CORPUS.md",
+          "label": "Método del corpus",
+          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+        },
+        {
+          "path": "docs/datos-etica/MANUAL-ANOTACION.md",
+          "label": "Referencia humana mínima",
+          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+        }
+      ],
+      "review": {
+        "at": "2026-10-07T23:30:06.970Z",
+        "branchSha": "48882776ccd49560690057b991152862b648f5f4",
+        "fingerprint": "ddffb20b374682c5e2d7325b6acf66d057cf9f31a593748bd8742ca7cf2f3cd6"
+      }
+    },
+    {
+      "branch": "laboratorio-main",
+      "issue": 50,
+      "goal": "Un comando procesa actualizaciones de texto y devuelve decisiones y avisos con motivo. Usa el prefijo disponible y el contexto de esa llamada; permite reiniciar para una sesión nueva. La guía de esta rama comienza por verificar diferencias de versión.",
+      "start": "Contrastá el código del spike con el contrato actual #50 y el par H1 de Main antes de reutilizarlo. Esta rama no contiene ese par actualizado; su arquitectura y métricas conservan propuestas anteriores. Prepará el contraste sobre prefijos, separación de sesiones y avisos; no presentes umbrales o histéresis del spike como elección final.",
+      "done": "Se reproducen los recorridos fraudulento y legítimo. Las pruebas verifican uso de prefijos, separación de sesiones y avisos según la política elegida. Quedan reglas, datos, versiones y errores identificados; en texto sin audio se informa posición, no segundos inventados.",
+      "sources": [
+        {
+          "path": "docs/ingenieria/ARQUITECTURA.md",
+          "label": "Contrato y casos de H1",
+          "why": "Arquitectura anterior del spike: no contiene el par H1 vigente de Main. Revisá diferencias, no asumas cumplimiento del contrato."
+        },
+        {
+          "path": "docs/datos-etica/MANUAL-ANOTACION.md",
+          "label": "Qué significa la evidencia",
+          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+        },
+        {
+          "path": "docs/evaluacion/METRICAS.md",
+          "label": "Marcas y medición",
+          "why": "Métricas conservadas en esta rama; sus propuestas anteriores no congelan la política del issue actual."
+        },
+        {
+          "path": "docs/investigacion/GUIA-CORRIDA-LABORATORIO.md",
+          "label": "Guía del laboratorio",
+          "why": "Permite ubicar la UI y el código reutilizable. El spike no acredita el contrato #50 ni fija la política final."
+        }
+      ],
+      "review": {
+        "at": "2026-10-07T23:30:07.101Z",
+        "branchSha": "48882776ccd49560690057b991152862b648f5f4",
+        "fingerprint": "bee6c73de04cc5eb72415f8e637ee16b4cf87a0f012519660df8d80c3baca698"
+      }
+    },
+    {
+      "branch": "laboratorio-main",
+      "issue": 19,
+      "goal": "Transcribir localmente el primer par grabado con un procedimiento repetible. Conservar salida, relación temporal con audio, configuración y errores relevantes frente al texto revisado. La guía de esta rama comienza por verificar diferencias de versión.",
+      "start": "Mientras #39 siga abierto, revisá instalación y salidas temporales del motor provisional del laboratorio. Contrastá su contrato con el issue actual y la arquitectura de Main. La corrida requiere el primer par propio revisado; los resultados del spike no reemplazan esa evidencia ni cierran D09.",
+      "done": "Otra persona ejecuta la misma prueba. Motor, modelo, versiones y configuración están identificados; se informa si entrega lotes, streaming, parciales o revisiones. La medición en PC se declara como tal.",
+      "sources": [
+        {
+          "path": "docs/ingenieria/ARQUITECTURA.md",
+          "label": "Lugar del ASR en el recorrido",
+          "why": "Arquitectura anterior del spike: no contiene el par H1 vigente de Main. Revisá diferencias, no asumas cumplimiento del contrato."
+        },
+        {
+          "path": "docs/evaluacion/METRICAS.md",
+          "label": "Qué medir y comparar",
+          "why": "Métricas conservadas en esta rama; sus propuestas anteriores no congelan la política del issue actual."
+        },
+        {
+          "path": "docs/investigacion/GUIA-CORRIDA-LABORATORIO.md",
+          "label": "Motor provisional y corrida",
+          "why": "Ubica instalación y ASR del spike. Sus resultados no sustituyen el primer par propio ni demuestran rendimiento Android."
+        }
+      ],
+      "review": {
+        "at": "2026-10-07T23:30:07.252Z",
+        "branchSha": "48882776ccd49560690057b991152862b648f5f4",
+        "fingerprint": "634452048a29b600d5e667649013702e5aab5f8203da9208d29461b4664f0c7b"
+      }
+    },
+    {
+      "branch": "laboratorio-main",
+      "issue": 54,
+      "goal": "Completar las 14 conversaciones del piloto: siete fraudulentas y siete legítimas, incluyendo el primer par. Conocer calidad, cobertura y costo antes de ampliar. La guía de esta rama comienza por verificar diferencias de versión.",
+      "start": "Esta rama conserva versiones anteriores del método y del manual; el contrato actual del issue refiere a H1 y a docs/corpus/ en Main. Localizá esa versión o integrala antes de aplicar el procedimiento. Esperá la revisión de #39 para incorporar las correcciones observadas al procedimiento. Después prepará las fichas restantes y elegí la muestra común antes de que los cuatro anoten de forma independiente. La producción no espera ASR ni D07 cerrada.",
+      "done": "Las 14 conversaciones tienen tomas utilizables, texto y referencia revisados. Se conservan originales y desacuerdos de la muestra común; esfuerzo, fallas y repeticiones quedan registrados. El balance 7/7 no demuestra prevalencia ni eficacia final.",
+      "sources": [
+        {
+          "path": "docs/datos-etica/METODO-CREACION-CORPUS.md",
+          "label": "Selección y criterio de piloto",
+          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+        },
+        {
+          "path": "docs/datos-etica/MANUAL-ANOTACION.md",
+          "label": "Qué anotar y cómo revisar",
+          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+        },
+        {
+          "path": "docs/gestion/MAPA-DECISIONES.md",
+          "label": "D06 y D07",
+          "why": "D06 fija la selección inicial; completar el piloto no cierra automáticamente D07."
+        }
+      ],
+      "review": {
+        "at": "2026-10-07T23:30:07.354Z",
+        "branchSha": "48882776ccd49560690057b991152862b648f5f4",
+        "fingerprint": "52626fa0f2544b26e51eb2adbecd4ae8c031a33f37a6da73d01ae381d4f116fb"
+      }
+    },
+    {
+      "branch": "laboratorio-main",
+      "issue": 32,
+      "goal": "Validar con el piloto el manual y la referencia humana mínima. Conservar anotaciones originales, comparar desacuerdos y adjudicar una referencia que permita interpretar resultados. La guía de esta rama comienza por verificar diferencias de versión.",
+      "start": "Esta rama conserva versiones anteriores del método y del manual; el contrato actual del issue refiere a H1 y a docs/corpus/ en Main. Localizá esa versión o integrala antes de aplicar el procedimiento. El responsable puede preparar el procedimiento y contrastar la versión del manual. Para validar necesita el piloto reunido en #54. Acordá muestra, herramienta y precisión antes de anotar; conservá las respuestas independientes sin mostrarlas a los demás.",
+      "done": "Otra persona aplica el manual y puede explicar las marcas. Quedan originales, desacuerdos, adjudicación y revisión acordada; D07 registra su conclusión. Este trabajo no congela la política que produce T_A ni los modelos.",
+      "sources": [
+        {
+          "path": "docs/datos-etica/MANUAL-ANOTACION.md",
+          "label": "Manual y revisión compartida",
+          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+        },
+        {
+          "path": "docs/evaluacion/METRICAS.md",
+          "label": "Separar marcas humanas y del sistema",
+          "why": "Métricas conservadas en esta rama; sus propuestas anteriores no congelan la política del issue actual."
+        },
+        {
+          "path": "docs/gestion/MAPA-DECISIONES.md",
+          "label": "Qué falta cerrar en D07",
+          "why": "La validación requiere evidencia del piloto; D08 y D09 permanecen abiertas."
+        }
+      ],
+      "review": {
+        "at": "2026-10-07T23:30:07.464Z",
+        "branchSha": "48882776ccd49560690057b991152862b648f5f4",
+        "fingerprint": "b8bcf747729b4e27076043a85f5bcf90d47a84643d1cf6f095e4e282d0e7af06"
+      }
+    },
+    {
+      "issue": 39,
+      "goal": "Producir un primer par de conversaciones contrastantes con audio utilizable, texto revisado y referencia humana mínima. Este par permite arrancar ASR y reglas sin esperar el piloto completo.",
+      "start": "Verificá el par escrito de H1 (SC-WA-CODE-01 / LG-WA-CONSULTA-01), prepará las fichas separadas de cada rol y acordá quién revisa las tomas. Antes de grabar, comprobá las condiciones del método; usá datos y acciones ficticios.",
+      "done": "Otra persona puede revisar la coherencia entre audio, texto y referencia. Quedan identificados semilla, condiciones, esfuerzo y problemas. Audio y materiales vinculables permanecen fuera de Git.",
+      "sources": [
+        {
+          "path": "docs/ingenieria/ARQUITECTURA.md",
+          "label": "Arquitectura y primer par",
+          "why": "En §4 está el par escrito revisado de H1 y su recorrido incremental."
+        },
+        {
+          "path": "docs/corpus/METODO-CREACION-CORPUS.md",
+          "label": "Método del corpus",
+          "why": "Leé fichas de rol (§5), piloto (§6) y resguardo de materiales (§10)."
+        },
+        {
+          "path": "docs/corpus/MANUAL-ANOTACION.md",
+          "label": "Referencia humana mínima",
+          "why": "§1 precisa qué registrar por conversación; T_A sale del sistema, no de la anotación."
+        }
+      ],
+      "branch": "main",
+      "review": {
+        "at": "2026-10-07T23:30:07.566Z",
+        "branchSha": "d359da58ac8c20c3f1498849114f4de9e906d810",
+        "fingerprint": "fe74643a627616e9dd0b2cbfdf16de551933274173511b0b8a02141d8aa4d98d"
+      }
+    },
+    {
+      "issue": 50,
+      "goal": "Un comando procesa actualizaciones de texto y devuelve decisiones y avisos con motivo. Usa el prefijo disponible y el contexto de esa llamada; permite reiniciar para una sesión nueva.",
+      "start": "Tomá el par escrito de H1 como casos de desarrollo. Definí entradas y salidas del comando y explicitá una política inicial reproducible. Podés avanzar en paralelo con #39, sin esperar audio; D08 conserva la elección final de la política.",
+      "done": "Se reproducen los recorridos fraudulento y legítimo. Las pruebas verifican uso de prefijos, separación de sesiones y avisos según la política elegida. Quedan reglas, datos, versiones y errores identificados; en texto sin audio se informa posición, no segundos inventados.",
+      "sources": [
+        {
+          "path": "docs/ingenieria/ARQUITECTURA.md",
+          "label": "Contrato y casos de H1",
+          "why": "§2 separa las entradas del detector de la referencia humana; §4 aporta el par escrito."
+        },
+        {
+          "path": "docs/corpus/MANUAL-ANOTACION.md",
+          "label": "Qué significa la evidencia",
+          "why": "Consultá el vocabulario y los casos ambiguos; una palabra sensible no determina por sí sola fraude."
+        },
+        {
+          "path": "docs/evaluacion/METRICAS.md",
+          "label": "Marcas y medición",
+          "why": "Distingue alerta emitida de pedido y cumplimiento. La política final permanece en D08."
+        }
+      ],
+      "branch": "main",
+      "review": {
+        "at": "2026-10-07T23:30:07.674Z",
+        "branchSha": "d359da58ac8c20c3f1498849114f4de9e906d810",
+        "fingerprint": "825b2305238174783eb03f6f48a5245414fa28bff46a10783b61f9d42c44916a"
+      }
+    },
+    {
+      "issue": 19,
+      "goal": "Transcribir localmente el primer par grabado con un procedimiento repetible. Conservar salida, relación temporal con audio, configuración y errores relevantes frente al texto revisado.",
+      "start": "Mientras #39 siga abierto, prepará la instalación y cómo registrar hardware, duración, tiempo de proceso y memoria. La corrida de esta entrega requiere las grabaciones y textos revisados del primer par; un motor provisional no cierra D09.",
+      "done": "Otra persona ejecuta la misma prueba. Motor, modelo, versiones y configuración están identificados; se informa si entrega lotes, streaming, parciales o revisiones. La medición en PC se declara como tal.",
+      "sources": [
+        {
+          "path": "docs/ingenieria/ARQUITECTURA.md",
+          "label": "Lugar del ASR en el recorrido",
+          "why": "§2–3 distinguen el intervalo de audio de cuándo queda disponible una transcripción."
+        },
+        {
+          "path": "docs/evaluacion/METRICAS.md",
+          "label": "Qué medir y comparar",
+          "why": "Leé las marcas y medidas de ASR, RTF, demora y memoria; evitá tiempos inferidos de texto."
+        }
+      ],
+      "branch": "main",
+      "review": {
+        "at": "2026-10-07T23:30:07.814Z",
+        "branchSha": "d359da58ac8c20c3f1498849114f4de9e906d810",
+        "fingerprint": "9398c65c8d8b678d22e04d70f6551ff282a170333ee826e634d42d995117d2b5"
+      }
+    },
+    {
+      "issue": 54,
+      "goal": "Completar las 14 conversaciones del piloto: siete fraudulentas y siete legítimas, incluyendo el primer par. Conocer calidad, cobertura y costo antes de ampliar.",
+      "start": "Esperá la revisión de #39 para incorporar las correcciones observadas al procedimiento. Después prepará las fichas restantes y elegí la muestra común antes de que los cuatro anoten de forma independiente. La producción no espera ASR ni D07 cerrada.",
+      "done": "Las 14 conversaciones tienen tomas utilizables, texto y referencia revisados. Se conservan originales y desacuerdos de la muestra común; esfuerzo, fallas y repeticiones quedan registrados. El balance 7/7 no demuestra prevalencia ni eficacia final.",
+      "sources": [
+        {
+          "path": "docs/corpus/METODO-CREACION-CORPUS.md",
+          "label": "Selección y criterio de piloto",
+          "why": "§6 define los siete pares y las repeticiones dirigidas; §10 indica cómo resguardar materiales."
+        },
+        {
+          "path": "docs/corpus/MANUAL-ANOTACION.md",
+          "label": "Qué anotar y cómo revisar",
+          "why": "La referencia mínima es por conversación. Los cuatro anotan independientemente la muestra acordada."
+        },
+        {
+          "path": "docs/gestion/MAPA-DECISIONES.md",
+          "label": "D06 y D07",
+          "why": "D06 fija la selección inicial; completar el piloto no cierra automáticamente D07."
+        }
+      ],
+      "branch": "main",
+      "review": {
+        "at": "2026-10-07T23:30:07.957Z",
+        "branchSha": "d359da58ac8c20c3f1498849114f4de9e906d810",
+        "fingerprint": "f72d73423ab84056c147699b14fd57ac753b9c0f5024fbc8922ae971ba67feeb"
+      }
+    },
+    {
+      "issue": 32,
+      "goal": "Validar con el piloto el manual y la referencia humana mínima. Conservar anotaciones originales, comparar desacuerdos y adjudicar una referencia que permita interpretar resultados.",
+      "start": "El responsable puede preparar el procedimiento y contrastar la versión del manual. Para validar necesita el piloto reunido en #54. Acordá muestra, herramienta y precisión antes de anotar; conservá las respuestas independientes sin mostrarlas a los demás.",
+      "done": "Otra persona aplica el manual y puede explicar las marcas. Quedan originales, desacuerdos, adjudicación y revisión acordada; D07 registra su conclusión. Este trabajo no congela la política que produce T_A ni los modelos.",
+      "sources": [
+        {
+          "path": "docs/corpus/MANUAL-ANOTACION.md",
+          "label": "Manual y revisión compartida",
+          "why": "Leé referencia mínima, eventos ambiguos y trabajo asistido; las etiquetas no son anotación exhaustiva obligatoria."
+        },
+        {
+          "path": "docs/evaluacion/METRICAS.md",
+          "label": "Separar marcas humanas y del sistema",
+          "why": "T_R y T_C se observan; T_A sale de la ejecución. Los eventos ausentes quedan sin dato."
+        },
+        {
+          "path": "docs/gestion/MAPA-DECISIONES.md",
+          "label": "Qué falta cerrar en D07",
+          "why": "La validación requiere evidencia del piloto; D08 y D09 permanecen abiertas."
+        }
+      ],
+      "branch": "main",
+      "review": {
+        "at": "2026-10-07T23:30:08.055Z",
+        "branchSha": "d359da58ac8c20c3f1498849114f4de9e906d810",
+        "fingerprint": "746beff829ea7fa9a71bd41316b6bbde4ff9889f7fe9f0d8939c94196b816a35"
+      }
+    }
+  ]
+}

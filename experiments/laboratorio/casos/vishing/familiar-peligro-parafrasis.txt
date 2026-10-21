@@ -1,0 +1,9 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing (paráfrasis anti-overfit de familiar-peligro.txt). Espera incendio: REQUEST_TRANSFER (t6); t4 («diez mil pesos») es hueco conocido de reglas (conservador: marca tarde, no temprano). Goteo: sí (t5, antes que el incendio).
+# Fuente: Ministerio de Justicia, pagina de vishing actualizada en junio de 2026 (misma modalidad que familiar-peligro.txt); redacción propia del equipo. Consulta 2026-09-23.
+hola soy un amigo de tu hijo tuvo un accidente
+que paso esta bien
+no avises a nadie venite ya
+trae diez mil pesos a la plaza ahora
+no puedo ir tan rapido
+bueno transferime a este alias entonces

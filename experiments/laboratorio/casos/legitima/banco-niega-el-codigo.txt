@@ -1,0 +1,6 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: legitima dificil. Espera incendio: ninguno
+# Niega el pedido y usa la palabra «codigo». Sirve para el falso incendio de esa lista.
+# Fuente: BCRA, 6 de agosto de 2025. Consulta 2026-09-23.
+ningun banco te pide el codigo por telefono
+corta y revisa la aplicacion oficial

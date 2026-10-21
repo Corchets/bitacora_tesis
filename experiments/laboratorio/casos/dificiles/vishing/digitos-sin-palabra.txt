@@ -1,0 +1,8 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing dificil. Pide los digitos del mensaje sin decir codigo, token ni numeros.
+# Fuente: BCRA, 6 de agosto de 2025. Redaccion propia. Consulta 2026-09-24.
+hola te llamo de la tarjeta por un cargo que no reconocemos
+ah si cual
+se cae la operacion si no lo confirmas ahora
+y como lo confirmo
+leeme lo que te acaba de llegar al telefono, de a uno

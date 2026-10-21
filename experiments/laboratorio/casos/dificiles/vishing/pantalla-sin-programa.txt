@@ -1,0 +1,8 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: vishing dificil. Pide ver la pantalla sin teamviewer, anydesk ni «instala».
+# Fuente: BCRA, 6 de agosto de 2025. Redaccion propia. Consulta 2026-09-24.
+soy del soporte de tu banco
+que paso
+bajate este programita y dejame mirar lo que ves en el celular
+no entiendo
+asi freno el debito que te estan haciendo

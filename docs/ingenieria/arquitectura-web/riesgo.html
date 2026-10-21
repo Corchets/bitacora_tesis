@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulador de riesgo y falsas alarmas — Arquitectura incremental de detección de vishing</title>
+<link rel="stylesheet" href="riesgo.css">
+</head>
+<body>
+
+<noscript><p class="sinjs">Esta página necesita JavaScript: todo el contenido se genera desde <code>datos.js</code>.</p></noscript>
+
+<header class="top">
+  <div class="top-fila">
+    <div class="top-titulos">
+      <p class="miga"><a href="../">Ayuda memoria</a> · <a href="index.html">Diagrama de arquitectura</a></p>
+      <h1>Simulador de riesgo y falsas alarmas</h1>
+      <p class="sub">La capa de decisión del motor: por qué la alerta dispara o no, y cuánto cuesta equivocarse.</p>
+    </div>
+  </div>
+  <nav class="sec-nav" aria-label="Secciones de la página">
+    <a href="#traza">Traza</a>
+    <a href="#registro">Registro de eventos</a>
+    <a href="#formula">Fórmula</a>
+    <a href="#falsas">Falsas alarmas</a>
+    <a href="#avisos">Escalera</a>
+    <a href="#ventana">Ventana vs decaimiento</a>
+    <a href="#decisiones">Decisiones</a>
+  </nav>
+  <p class="badge-estado" id="badge-estado"></p>
+</header>
+
+<main>
+
+  <!-- ============ 1. TRAZA DE LLAMADA ============ -->
+  <section id="traza" aria-labelledby="h-traza">
+    <h2 id="h-traza">Traza de riesgo durante la llamada</h2>
+    <p class="sec-desc">La llamada «falso soporte bancario» recorrida por el score S<sub>t</sub>: la fórmula original del informe y el diseño corregido. Los puntos sobre el eje son los hechos del registro de eventos.</p>
+
+    <div class="chart-wrap" id="chart-wrap">
+      <svg id="chart" role="img" aria-label="Gráfico de riesgo en función del tiempo de la llamada"></svg>
+      <div class="tooltip" id="tooltip" role="status" hidden></div>
+    </div>
+    <div class="leyenda" id="leyenda"></div>
+
+    <div class="cards" id="traza-cards"></div>
+
+    <h3 class="h3">Controles: lo que NO debería alertar</h3>
+    <div class="tabla-scroll" id="controles-tabla"></div>
+
+    <p class="nota-pie" id="nota-traza"></p>
+  </section>
+
+  <!-- ============ 2. REGISTRO DE EVENTOS ============ -->
+  <section id="registro" aria-labelledby="h-registro">
+    <h2 id="h-registro">Registro de eventos con decaimiento</h2>
+    <p class="sec-desc">El anotador guarda solo los hechos tipados — no la charla. Cada hecho pesa según el tiempo que pasó desde que ocurrió: <code class="eq-inline">peso = c · 0,5<sup>(t − τ)/h</sup></code>, donde <em>h</em> es la vida media del tipo de evento.</p>
+
+    <div class="control-tiempo">
+      <label for="slider-tiempo">Tiempo actual de la llamada</label>
+      <input type="range" id="slider-tiempo" min="0" max="300" step="5" value="200">
+      <output id="out-tiempo" for="slider-tiempo">t = 200 s</output>
+    </div>
+    <p class="pesos-resumen" id="pesos-resumen" aria-live="polite"></p>
+
+    <div class="tabla-scroll" id="registro-tabla"></div>
+    <p class="nota-pie">«—» en peso: el tipo de evento no tiene vida media definida en los datos, o todavía no ocurrió al tiempo elegido. Coeficiente c = 1 para todos los hechos (valores ilustrativos).</p>
+
+    <h3 class="h3">Vidas medias por tipo de evento</h3>
+    <div class="tabla-scroll" id="vidas-tabla"></div>
+    <p class="nota-pie">Vidas medias ilustrativas, no calibradas (a fijar en validación).</p>
+
+    <h3 class="h3">Los tres indicadores del registro</h3>
+    <div class="cards" id="indicadores-cards"></div>
+  </section>
+
+  <!-- ============ 3. FÓRMULA DE RIESGO ============ -->
+  <section id="formula" aria-labelledby="h-formula">
+    <h2 id="h-formula">Fórmula de riesgo</h2>
+    <p class="sec-desc">El score combina la manipulación acumulada (M<sub>t</sub>) con la escalada del pedido (C<sub>t</sub>). Ninguno solo alcanza: hace falta presión <em>y</em> pedido juntos.</p>
+
+    <div class="eq-grid" id="formula-bloques"></div>
+
+    <h3 class="h3">Qué da la fórmula en cada caso</h3>
+    <div class="tabla-scroll" id="tabla-casos"></div>
+    <p class="nota-pie">Coeficientes elegidos a mano para mostrar el mecanismo; no son umbrales calibrados.</p>
+  </section>
+
+  <!-- ============ 4. CALCULADORA DE FALSAS ALARMAS ============ -->
+  <section id="falsas" aria-labelledby="h-falsas">
+    <h2 id="h-falsas">Calculadora de falsas alarmas</h2>
+    <p class="sec-desc">La cuenta de probabilidad que vale para cualquier detector, sea cual sea el modelo: si cada revisión puede equivocarse con probabilidad <em>p</em>, revisar seguido junta falsas alarmas.</p>
+
+    <div class="calc">
+      <div class="calc-inputs">
+        <div class="calc-campo">
+          <label for="in-p">Probabilidad de error por revisión (p)</label>
+          <div class="calc-fila">
+            <input type="range" id="in-p" min="0.1" max="5" step="0.1" value="1">
+            <output id="out-p">p = 1%</output>
+          </div>
+        </div>
+        <div class="calc-campo">
+          <label for="in-cad">Cadencia de revisión</label>
+          <div class="calc-fila">
+            <input type="range" id="in-cad" min="5" max="60" step="5" value="15">
+            <output id="out-cad">cada 15 s</output>
+          </div>
+        </div>
+        <div class="calc-campo">
+          <label for="in-dur">Duración de la llamada</label>
+          <div class="calc-fila">
+            <input type="range" id="in-dur" min="5" max="60" step="5" value="20">
+            <output id="out-dur">20 min</output>
+          </div>
+        </div>
+      </div>
+      <div class="calc-res" aria-live="polite">
+        <p class="calc-formula" id="calc-formula"></p>
+        <p class="calc-n" id="calc-n"></p>
+        <p class="calc-p" id="calc-p"></p>
+        <p class="calc-leyenda">de las llamadas legítimas terminan con al menos una falsa alarma</p>
+      </div>
+    </div>
+
+    <h3 class="h3">Cadencia × acierto por revisión (llamada de 20 min)</h3>
+    <div class="tabla-scroll" id="tabla-cadencia"></div>
+    <p class="nota-pie">La celda resaltada sigue a la calculadora cuando p y la cadencia coinciden con una columna y una fila.</p>
+
+    <h3 class="h3">Margen de aceptación: primero se fija la tolerancia</h3>
+    <p class="sec-desc">Se fija cuántas llamadas legítimas con alerta se toleran → de ahí sale cuánto puede errar el detector por revisión.</p>
+    <div class="tabla-scroll" id="tabla-margen"></div>
+
+    <h3 class="h3">Reglas de persistencia comparadas</h3>
+    <div class="tabla-scroll" id="tabla-regla"></div>
+    <p class="nota-pie" id="nota-regla"></p>
+  </section>
+
+  <!-- ============ 5. ESCALERA DE AVISOS ============ -->
+  <section id="avisos" aria-labelledby="h-avisos">
+    <h2 id="h-avisos">Escalera de avisos</h2>
+    <p class="sec-desc">Tres niveles, un aviso por nivel por llamada y solo se escala. Sin corte automático: un falso positivo cortaría una llamada legítima. El pedido crítico es la excepción escrita: dispara sin histéresis porque es el momento de mayor daño.</p>
+
+    <div class="escalera" id="escalera-cards"></div>
+
+    <h3 class="h3">Mockups propuestos (sin discutir)</h3>
+    <div class="mockups" id="mockups"></div>
+  </section>
+
+  <!-- ============ 6. VENTANA VS DECAIMIENTO ============ -->
+  <section id="ventana" aria-labelledby="h-ventana">
+    <h2 id="h-ventana">Ventana dura vs decaimiento</h2>
+    <p class="sec-desc">La misma llamada de 19 min evaluada de dos maneras: sin ventana el ruido viejo ensucia el orden de la escalada; con ventana deslizante de 300 s el orden queda limpio pero corta brusco. Por eso se propone decaimiento por tipo de evento.</p>
+    <div class="ventana-grid" id="ventana-tablas"></div>
+    <p class="nota-pie" id="nota-ventana"></p>
+  </section>
+
+  <!-- ============ 7. DECISIONES RELACIONADAS ============ -->
+  <section id="decisiones" aria-labelledby="h-decisiones">
+    <h2 id="h-decisiones">Decisiones relacionadas</h2>
+    <p class="sec-desc">Esta capa de decisión todavía no está congelada: lo que se ve acá es la propuesta vigente sobre decisiones abiertas. Clic en cada una para ver el detalle completo.</p>
+    <p class="nota-pie" id="origen-estados">Las decisiones se leen del MAPA adoptado vía data.json del build; sin él se muestran como no disponibles.</p>
+    <div class="chips" id="chips-decisiones"></div>
+  </section>
+
+</main>
+
+<div class="panel-overlay" id="panel-overlay" hidden>
+  <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="panel-titulo" id="panel">
+    <button type="button" class="panel-cerrar" id="panel-cerrar" aria-label="Cerrar panel">×</button>
+    <div id="panel-contenido"></div>
+  </aside>
+</div>
+
+<footer class="pie">
+  <h2 class="pie-h">Fuentes de esta página</h2>
+  <ul class="fuentes" id="fuentes-list"></ul>
+  <p class="pie-meta" id="pie-meta"></p>
+  <p class="miga"><a href="../">Ayuda memoria</a> · <a href="index.html">Volver al diagrama de arquitectura</a></p>
+</footer>
+
+<script src="datos.js"></script>
+<script src="canon.js"></script>
+<script src="riesgo.js"></script>
+</body>
+</html>

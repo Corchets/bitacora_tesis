@@ -1,0 +1,6 @@
+sherpa-onnx
+huggingface-hub
+numpy
+# encoder de la cascada (torch CPU se instala aparte en el Dockerfile)
+transformers
+scikit-learn

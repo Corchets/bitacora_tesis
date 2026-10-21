@@ -25,6 +25,7 @@ La clave del problema es advertir al usuario en tiempo real antes de que realice
 ## 2. Estado actual del proyecto
 
 - **Gestión activa:** El backlog vivo se administra en **GitHub Issues** bajo el [método de trabajo](docs/gestion/METODO-DE-TRABAJO.md). Para el historial semanal, ver la [bitácora](docs/gestion/bitacora/README.md); para decisiones abiertas, el [mapa](docs/gestion/MAPA-DECISIONES.md).
+- **Ayuda memoria:** Entrada visual para el equipo en [`ayuda-memoria/`](ayuda-memoria/README.md), con vistas por rama (`laboratorio-main` y `main`), hitos, briefs de arranque para H2 y glosario.
 - **Issues por hito:** [H1 — acuerdo mínimo](https://github.com/Corchets/bitacora_tesis/milestone/2) y [H2 — piloto y primeras pruebas](https://github.com/Corchets/bitacora_tesis/milestone/3). Elegir trabajo por el hito y sus dependencias.
 - **Próximo recorrido:** [alcance, hitos y calendario de referencia](docs/propuesta/PLAN-DE-TRABAJO.md#8-recorrido-del-desarrollo). El laboratorio existente es material para evaluar y reutilizar según las tareas; no determina la arquitectura final.
 
@@ -32,12 +33,21 @@ La clave del problema es advertir al usuario en tiempo real antes de que realice
 
 ## 3. Mapa del repositorio (Estructura documental)
 
-Toda la documentación vive dentro de [`docs/`](docs/) organizada por áreas sin copias paralelas:
+Toda la documentación vive dentro de [`docs/`](docs/) organizada por áreas sin copias paralelas; la web de orientación interna vive en [`ayuda-memoria/`](ayuda-memoria/):
 
 ```text
 bitacora_tesis/
 ├── README.md                      # Esta guía de entrada y mapa para humanos
 ├── AGENTS.md                      # Router operativo e instrucciones para asistentes de IA
+├── ayuda-memoria/                 # Web visual de orientación, roadmap, glosario y briefs del equipo
+│   ├── README.md                  # Uso local, fuentes y publicación en Vercel
+│   ├── PRODUCT.md                 # Propósito, usuarios, principios y alcance del producto
+│   ├── INTERFAZ.md                # Contrato de dirección y superficies (seed 35b1f183)
+│   ├── DESIGN.md                  # Tokens reales, escalas, composición y accesibilidad
+│   ├── briefs.json                # Orientaciones editoriales de arranque por rama e issue
+│   ├── config.json                # Configuración de repositorio, ramas y glosario
+│   ├── public/                    # Fuentes estáticas (HTML, CSS, JS, fuentes Manrope WOFF2)
+│   └── scripts/                   # Generador Node (build, serve, review-brief)
 ├── docs/
 │   ├── GLOSARIO.md                # Términos técnicos con sentido preciso (T_A, T_R, T_C, WER, etc.)
 │   ├── propuesta/

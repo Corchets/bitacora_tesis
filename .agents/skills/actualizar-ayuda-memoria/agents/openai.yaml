@@ -1,0 +1,6 @@
+interface:
+  display_name: "Actualizar ayuda memoria"
+  short_description: "Revisa los briefs visuales para retomar issues"
+  default_prompt: "Usá $actualizar-ayuda-memoria para revisar los briefs afectados por los últimos cambios del proyecto."
+policy:
+  allow_implicit_invocation: false

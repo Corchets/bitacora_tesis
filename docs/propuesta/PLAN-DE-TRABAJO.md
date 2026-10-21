@@ -104,8 +104,12 @@ Las definiciones operativas y métricas están en
 ### Núcleo obligatorio
 
 - Español, priorizando variedad argentina sin afirmar representatividad nacional.
-- Público sin foco etario específico. La composición del corpus limita las
-  conclusiones; no se promete rendimiento para todos los públicos.
+- **Encuadre parcial adoptado el 2026-10-08 (D12; PR #58):** el proyecto conserva
+  el foco en personas adultas mayores por la gravedad potencial de las pérdidas y
+  su exposición a la suplantación. Su participación corresponde a evaluación y
+  prueba de usabilidad, no es requisito del corpus ni permite prometer rendimiento
+  para ese grupo. La composición del corpus limita las conclusiones; falta discutir
+  y ratificar el encuadre con el equipo.
 - Corpus de llamadas simuladas/representadas y llamadas legítimas difíciles.
 - Transcripción local del audio.
 - Detector sobre texto, conservando contexto de la llamada actual. La representación

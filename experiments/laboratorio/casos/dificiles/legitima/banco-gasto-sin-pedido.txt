@@ -1,0 +1,6 @@
+# Guion INVENTADO. Una linea = un turno. No es una llamada real.
+# Clase: legitima dificil. Habla de un gasto en el banco y no pide nada.
+# Fuente: BCRA, 6 de agosto de 2025. Redaccion propia. Consulta 2026-09-24.
+te llama el banco porque vimos un gasto que no cierra
+no hagas nada por telefono
+entra vos a la aplicacion cuando puedas y fijate

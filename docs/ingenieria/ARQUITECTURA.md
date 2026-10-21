@@ -183,3 +183,28 @@ validación de D07 con audio.
 
 H1 busca que el equipo entienda este recorrido y pueda preparar el primer par.
 La arquitectura ejecutable y sus ajustes se comprueban en H2–H4.
+
+## 6. Dirección del detector y visualización consolidada
+
+Acordado el 2026-10-08 en el [issue #50](https://github.com/Corchets/bitacora_tesis/issues/50):
+el ensayo corre con un SLM local directo que puntúa cada turno cerrado sobre el
+texto incremental con el contexto de la llamada actual, y emite un aviso único
+ante el primer resultado verdadero válido. Las reglas de incendio se ejecutan
+como comparador independiente, no como arquitectura oficial. La cascada
+encoder→SLM queda como alternativa a medir con datos reales; ninguna de las dos
+variantes elige el detector final de D09.
+
+> **Estado: propuesta sin discutir.** La política de persistencia del contador,
+> la escalera de avisos y la ventana con decaimiento siguen siendo mecanismos
+> propuestos en [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md);
+> su congelamiento corresponde a D08.
+
+Además, el 2026-10-08 se adoptó en esta rama la consolidación del PR #58: una
+visualización estática del pipeline propuesto y un simulador de riesgo en
+`docs/ingenieria/arquitectura-web/`, publicados dentro del sitio de
+ayuda-memoria bajo `/arquitectura/`. Sus estados de decisión se leen en vivo
+desde [MAPA-DECISIONES.md](../gestion/MAPA-DECISIONES.md) a través del `data.json`
+que genera el build; el resto del contenido es editorial del PR. El simulador
+usa valores sintéticos e ilustrativos elegidos a mano: no son mediciones de
+rendimiento y no cierran D08. Esta adopción no resuelve D07, D08, D09 ni D11
+(abierta hasta que los cuatro ratifiquen «solo transcripción»).

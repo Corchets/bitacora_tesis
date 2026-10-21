@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#203e37">
+  <meta name="description" content="El mapa visual del Proyecto Final: hitos, issues y contexto para retomar el trabajo en equipo.">
+  <title>Ayuda memoria · Proyecto Final</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip" href="#contenido">Ir al contenido</a>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <a class="brand" href="/" aria-label="Ayuda memoria, inicio">
+        <svg viewBox="0 0 36 36" aria-hidden="true"><path d="M8 27V9h9v9h11v9M8 18h9M28 9v9"/></svg>
+        <span>Ayuda<br> memoria<span class="brand-sub">Proyecto Final · UNSTA</span></span>
+      </a>
+      <nav class="nav">
+        <button type="button" data-view="ahora" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 6.3L21 12l-6.3 2.7L12 21l-2.7-6.3L3 12l6.3-2.7Z"/></svg>Por dónde seguir</button>
+        <button type="button" data-view="roadmap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16M6 6h11v6H6M6 16h11"/></svg>Roadmap</button>
+        <button type="button" data-view="issues"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 15h5"/></svg>Todos los issues</button>
+        <button type="button" data-view="glosario"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6C9 4 6 4 3 5v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg>Glosario breve</button>
+        <a class="nav-link" href="/arquitectura/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="7" height="6" rx="1.5"/><rect x="14" y="4" width="7" height="6" rx="1.5"/><rect x="8.5" y="15" width="7" height="6" rx="1.5"/><path d="M10 7h4M12 10v5"/></svg>Arquitectura</a>
+      </nav>
+      <div class="sidebar-footer">
+        <p>Una entrada al proyecto.<br>Las fuentes están a un clic.</p>
+        <a href="https://github.com/Corchets/bitacora_tesis" target="_blank" rel="noopener noreferrer">Abrir repositorio <svg class="external-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+      </div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <span class="project-name">Detección incremental de vishing</span>
+        <div class="branches" role="group" aria-label="Documentación por rama">
+          <button type="button" data-branch="laboratorio-main" aria-pressed="true">Laboratorio</button>
+          <button type="button" data-branch="main" aria-pressed="false">Main</button>
+        </div>
+      </header>
+      <main id="contenido" tabindex="-1" aria-busy="true">
+        <div id="app" class="loading" role="status"><h1>Recuperando el contexto…</h1><p>Hitos, issues y fuentes del proyecto.</p><div class="loading-line"></div></div>
+      </main>
+      <footer class="source-footer" id="source-footer"></footer>
+    </div>
+  </div>
+  <noscript><p>Para explorar los briefs activá JavaScript. También podés consultar el <a href="https://github.com/Corchets/bitacora_tesis">repositorio y sus issues</a>.</p></noscript>
+</body>
+</html>

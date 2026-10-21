@@ -1,0 +1,21 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import { fingerprint, validateBriefs } from './lib.mjs';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const [branchName, issueNumber] = process.argv.slice(2);
+const issueId = Number(issueNumber);
+const file = JSON.parse(await readFile(path.join(root, 'briefs.json'), 'utf8'));
+const config = JSON.parse(await readFile(path.join(root, 'config.json'), 'utf8'));
+validateBriefs(file, config.branches);
+const snapshot = JSON.parse(await readFile(path.join(root, 'dist/data.json'), 'utf8'));
+if (Date.now() - Date.parse(snapshot.generatedAt) > 60 * 60 * 1000) throw new Error('Generá un snapshot actual antes de registrar la revisión.');
+const branch = snapshot.branches.find(branch => branch.name === branchName);
+const issue = snapshot.issues.find(issue => issue.number === issueId);
+const brief = file.briefs.find(brief => brief.branch === branchName && brief.issue === issueId);
+if (!branch || !issue || !brief) throw new Error('Uso: npm run revisar-brief -- <rama> <numero>. El brief y el issue deben existir.');
+for (const source of brief.sources) if (!branch.documents[source.path]) throw new Error(`Fuente ausente: ${source.path}. Generá de nuevo después de agregar fuentes.`);
+brief.review = { at: new Date().toISOString(), branchSha: branch.sha,
+  fingerprint: fingerprint(issue, snapshot.dependencies[issueId], brief.sources, branch.documents) };
+await writeFile(path.join(root, 'briefs.json'), `${JSON.stringify(file, null, 2)}\n`);
+console.log(`Registrada revisión de ${branchName} #${issueId}. Volvé a generar para verla en la web.`);
