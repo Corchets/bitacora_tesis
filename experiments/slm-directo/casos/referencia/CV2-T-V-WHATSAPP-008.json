@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-WHATSAPP-008",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-WHATSAPP-008",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 15,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    }
+  ],
+  "que_prueba": "Una lista de retiro escolar se usa para inducir el código de registro de WhatsApp como validación de contacto. Prueba petición diferida hasta que la persona pregunta si realmente se le está pidiendo el dato.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 15, donde comienza el pedido indirecto; también podría ubicarse en línea 16, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 15, primera solicitud inequívoca de los dígitos; sin cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Una lista de retiro escolar se usa para inducir el código de registro de WhatsApp como validación de contacto. Prueba petición diferida hasta que la persona pregunta si realmente se le está pidiendo el dato."
+}

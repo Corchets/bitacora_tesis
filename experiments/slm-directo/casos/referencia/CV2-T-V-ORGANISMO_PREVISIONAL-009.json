@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-ORGANISMO_PREVISIONAL-009",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-009",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Una supuesta pausa en pagos y presión por cierre generan alarma, pero la llamada termina antes de pedir datos o una acción. Prueba sospecha institucional sin solicitud crítica observable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No hay T_R/T_C. La identidad y la causa no se verifican en el diálogo; no exigir que el detector deduzca fraude no expresado. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Una supuesta pausa en pagos y presión por cierre generan alarma, pero la llamada termina antes de pedir datos o una acción. Prueba sospecha institucional sin solicitud crítica observable."
+}

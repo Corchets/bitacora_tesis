@@ -1,0 +1,20 @@
+A: Te llamo del banco por un pago de patente que no se terminó de presentar
+B: Lo pagué desde la computadora
+A: El débito está pero el comprovante quedó asociado a un acceso anterior
+B: Cambié la clave hace poco
+A: Eso coincide con el error que vemos
+B: Qué hago para recuperar el comprobante
+A: Entrá al portal y andá a dispositivos vinculados
+B: Me aparece la computadora vieja
+A: Hay que dejar como principal el equipo desde donde hiciste el pago
+B: Selecciono esta computadora
+A: Para recuperar el comprobante ingresá la clave que usás para entrar al portal
+B: Me pide autorizar un dispositivo nuevo
+A: Primero ingresá la clave actual y después revisamos el dispositivo
+B: El aviso dice que no comparta mi contraseña
+A: No la compartís conmigo la cargás en tu sesión
+B: No sé si este era el equipo donde pagué
+A: Si no se actualiza el recibo queda asociado al perfil anterior
+B: Voy a descargarlo desde el correo en vez de seguir por acá
+A: El correo no tiene el asiento bancario
+B: Prefiero no ingresar mi clave

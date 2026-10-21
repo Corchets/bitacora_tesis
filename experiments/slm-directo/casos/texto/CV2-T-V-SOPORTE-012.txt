@@ -1,0 +1,20 @@
+A: Hola te llamo del portal de proveedores por el cambio de razón social
+B: Yo solo actualicé el domicilio fiscal
+A: La cuenta quedó con dos perfiles y las facturas salen con el nombre anterior
+B: Qué tengo que cambiar
+A: Hay que volver a validar la empresa que figura como titular
+B: Dónde lo hago
+A: Abrí datos de facturación y elegí corregir perfil
+B: Me pide confirmar el usuario administrador
+A: Escribí el que usás en el portal el sistema lo compara con el registro
+B: También va la clave
+A: Sí completá las dos casillas para conservar el historial
+B: Ya puse talleradmin y la clave Bruma-52 en el formulario
+A: Apareció el perfil de la empresa
+B: Qué pasa con las facturas anteriores
+A: Quedan bajo el mismo historial
+B: Voy a revisar si figura el domicilio nuevo
+A: Ahora aparece la dirección actualizada
+B: Bien eso era lo que necesitaba
+A: Listo
+B: Chau

@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-023",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-023",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Una conciliación de efectivo genera un relato de irregularidad, pero no llega a pedir dinero ni datos antes de que la persona cierre la conversación. Prueba un escenario bancario inquietante sin solicitud crítica.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-BILLETES-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R y T_C nulos. El diálogo no prueba si la alerta es genuina o una preparación fraudulenta; no exigir al detector clasificar intención invisible. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-BANK-BILLETES-01",
+  "situacion": "Una conciliación de efectivo genera un relato de irregularidad, pero no llega a pedir dinero ni datos antes de que la persona cierre la conversación. Prueba un escenario bancario inquietante sin solicitud crítica."
+}

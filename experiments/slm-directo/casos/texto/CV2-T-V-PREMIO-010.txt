@@ -1,0 +1,20 @@
+A: Te llamo del concurso de cocina de la feria regional
+B: Salió el resultado
+A: Tu receta quedó entre las finalistas y hay un equipo de cocina pa la persona ganadora
+B: Cuándo anuncian
+A: Mañana en las redes de la feria
+B: Por qué me llaman hoy
+A: Estamos cerrando la información para la entrega
+B: Necesitan mi nombre
+A: El formulario ya tiene tu nombre pero no el código de seguridad de la cuenta donde querés recibir el vale
+B: Qué código
+A: Los tres números que están atrás de la tarjeta que usás para comprar
+B: Eso no es el código de seguridad
+A: Sí se usa para vincular el vale al titular de la tarjeta
+B: No voy a dar los números de mi tarjeta
+A: No se hace ningún cobro es una verificación
+B: Espero el anuncio de mañana
+A: El registro de ganadores cierra hoy
+B: Prefiero esperar
+A: Está bien
+B: Chau

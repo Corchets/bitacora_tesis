@@ -1,0 +1,20 @@
+A: Te llamo de soporte de reloj de asistencia. El turno noche quedó con marcas duplicadas.
+B: El encargado ya corrigió las de ayer.
+A: Sí, pero la tarjeta de administrador no se sincronizó.
+B: ¿Hay que volver a cargar las fichadas?
+A: No, primero hay que asegurar que el perfil tenga el permiso de edición.
+B: ¿Dónde está ese permiso?
+A: En configuración de cuenta, opción administrador de sede.
+B: Me aparece un botón que dice recuperar permisos.
+A: Tocá recuperar y completá el dato que usás para entrar al sistema.
+B: ¿El PIN del reloj?
+A: Sí, el mismo número que identifica al administrador.
+B: No quiero decirte mi PIN.
+A: No lo digas, ingresalo en la ventana y avisame si se habilita el botón.
+B: Voy a consultar con recursos humanos.
+A: El cierre de horas es hoy.
+B: Igual lo verifico antes.
+A: Sin permiso no se puede exportar la planilla.
+B: La exporto mañana con el encargado.
+A: De acuerdo.
+B: Chau.

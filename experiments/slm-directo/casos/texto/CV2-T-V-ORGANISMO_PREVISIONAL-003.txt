@@ -1,0 +1,30 @@
+A: Hola, llamo del organismo por la escolaridad de una persona a cargo.
+B: ¿La de mi hija?
+A: La constancia se recibió, pero el nombre de la escuela no coincide con el registro anterior.
+B: Cambió de escuela este año.
+A: Para actualizar el legajo necesito el nombre completo de la menor y su fecha de nacimiento.
+B: ¿No alcanza con el certificado?
+A: El certificado no muestra el número de documento en esta vista.
+B: La ficha escolar dice Mili Sosa, nacida el tres de abril de 2014.
+A: Sin asociar el dato, el complemento escolar queda pendiente.
+B: ¿Puedo presentarlo en la oficina?
+A: Sí, con turno y copia del documento.
+B: Prefiero hacerlo de esa manera.
+A: La fecha límite es fin de mes.
+B: Todavía tengo tiempo.
+A: El horario de atención está en la página institucional.
+B: La voy a consultar.
+A: ¿Necesitás que te pase el enlace?
+B: No, lo busco por mi cuenta.
+A: De acuerdo.
+B: Chau.
+A: Con los datos ya puedo dejar asentada la actualización.
+B: ¿Me van a mandar una constancia?
+A: Si queda aceptada, aparece en el próximo resumen.
+B: No quiero que quede un dato mal cargado.
+A: Podés volver a corregirlo en la oficina.
+B: ¿Necesito turno?
+A: Sí, con la copia del certificado escolar.
+B: Voy a revisar qué oficinas tienen atención esta semana.
+A: La fecha límite es el último día del mes.
+B: Entonces tengo tiempo para llevarlo en persona.

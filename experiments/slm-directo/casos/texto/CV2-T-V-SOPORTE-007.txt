@@ -1,0 +1,20 @@
+A: Te llamo de soporte de Factura Simple por una exportación de proveedores incompleta.
+B: Faltan los datos de dos facturas.
+A: El sistema guardó la exportación en una sesión de invitado.
+B: Yo entro con mi cuenta de siempre.
+A: Puede haber vencido la clave del perfil administrador.
+B: ¿Cómo lo compruebo?
+A: Abrí el menú de usuarios y tocá revalidar administrador.
+B: Me pide el usuario y la contraseña.
+A: Confirmalos ahí para que el sistema reconstruya el permiso.
+B: ¿Te los paso a vos?
+A: No, escribilos en la ventana del portal.
+B: La dirección no es la que uso normalmente.
+A: Es una página temporal de recuperación.
+B: ¿Puedo volver al sitio principal?
+A: La exportación puede perder el vínculo con las facturas.
+B: No voy a ingresar credenciales en otro sitio.
+A: Entonces no puedo recuperar esos comprobantes.
+B: Los descargo uno por uno desde el portal habitual.
+A: Como prefieras.
+B: Chau.

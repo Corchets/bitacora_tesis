@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-014",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-014",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "La devolución de una cuota se usa para solicitar el PIN de cajero en una pantalla telefónica. Prueba un pedido de secreto permanente dentro de una gestión de reintegro; no hay cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 9, instrucción directa de ingresar el PIN. La persona no lo carga.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "La devolución de una cuota se usa para inducir cambios en el límite de compras en línea. Prueba una acción de seguridad indirecta cuya operación es reversible en pantalla pero puede habilitar compras."
+}

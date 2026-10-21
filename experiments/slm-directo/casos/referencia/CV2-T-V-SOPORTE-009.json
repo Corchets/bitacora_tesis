@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-SOPORTE-009",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-SOPORTE-009",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 16,
+  "pedido": "REQUEST_REMOTE_ACCESS",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_REMOTE_ACCESS"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un fallo de sincronización del lector induce a abrir una sesión de control remoto y compartir una serie temporal. Prueba un pedido indirecto presentado como visualización en vivo.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, primera instrucción de aceptar y compartir el código. T_C línea 16, la persona confirma el acceso remoto y dicta un código ficticio.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-SOPORTE-REMOTO-01",
+  "situacion": "Un fallo de sincronización del lector induce a abrir una sesión de control remoto y compartir una serie temporal. Prueba un pedido indirecto presentado como visualización en vivo."
+}

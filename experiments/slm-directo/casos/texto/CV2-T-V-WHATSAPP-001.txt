@@ -1,0 +1,26 @@
+A: Hola hablo de la organización de la salida al dique Sos Laura
+B: Sí me anoté con mis amigas
+A: Te llamamos porque el grupo de coordinación se va a pasar a una lista cerrada
+B: La salida sigue siendo el sábado
+A: Sí pero hay dos micros y tenemos que separar quién sube en la terminal y quién en la plaza
+B: Yo subo en la terminal
+A: En el formulario quedaste en la otra parada
+B: Qué raro lo había cambiado ayer
+A: Puede ser que no se haya actualizado el contacto con el grupo nuevo
+B: Cómo lo arreglo
+A: Te mandé una validación al WhatsApp Decime los seis números así te cambio de lista
+B: El mensage dice que no comparta el código
+A: Es la advertencia automática sirve para confirmar que sos vos
+B: No lo podés cambiar desde el formulario
+A: La planilla ya se cerró para pasarla a la empresa de transporte
+B: A qué hora sale el micro
+A: El de la terminal sale a las siete menos cuarto
+B: No quiero perder el lugar
+A: Si no actualizamos ahora te queda la parada de la plaza
+B: El código dice 598604 anotame en la terminal
+A: Ya está quedó corregido
+B: Me mandan la ubicación del punto de encuentro
+A: Sí al grupo nuevo cuando se active
+B: Bueno gracias
+A: Que tengas buena tarde
+B: Chau

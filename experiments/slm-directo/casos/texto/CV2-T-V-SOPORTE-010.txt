@@ -1,0 +1,30 @@
+A: Te llamo del servicio de respaldo Nube Clara. El archivo de fotos familiares quedó en cola.
+B: ¿Se perdió?
+A: No, la copia existe, pero el acceso está vinculado a un dispositivo que ya no responde.
+B: Cambié la tablet el fin de semana.
+A: Para asociar la nueva hay que recuperar el perfil anterior.
+B: ¿Qué me pide?
+A: Entrá a la cuenta y seleccioná restaurar acceso.
+B: Veo correo y una frase de recuperación.
+A: Ingresá la frase de recuperación que usabas cuando configuraste la primera copia.
+B: ¿La contraseña?
+A: Sí, el sistema compara la contraseña anterior con el registro de respaldo.
+B: No me acuerdo de la vieja.
+A: Podés probar la que usabas el año pasado.
+B: ¿La escribo en esta ventana?
+A: Sí, así evita reiniciar toda la carga.
+B: No voy a poner mi clave en una ventana que abrí desde tu mensaje.
+A: Si se reinicia, puede tardar toda la noche.
+B: Prefiero empezar una copia nueva.
+A: De acuerdo.
+B: Gracias.
+B: No voy a probar una contraseña vieja en una ventana que abrí desde un mensaje.
+A: La recuperación se corta si cerrás ahora.
+B: Puedo iniciar el proceso desde la aplicación oficial.
+A: No es necesario empezar de cero.
+B: Quiero revisar primero qué dirección tiene abierta el navegador.
+A: El respaldo puede quedar en espera hasta mañana.
+B: No hay problema, las fotos siguen en el dispositivo anterior.
+A: Entonces no borres ninguna copia todavía.
+B: Voy a consultar con el soporte que aparece en mi cuenta.
+A: De acuerdo.

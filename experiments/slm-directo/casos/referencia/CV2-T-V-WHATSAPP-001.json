@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-WHATSAPP-001",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-WHATSAPP-001",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 20,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una excursión grupal se usa como contexto para solicitar un código de activación y cambiar la parada de salida. La persona dicta un marcador ficticio; prueba cumplimiento de OTP disfrazado de actualización logística.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 11, pedido directo del código. T_C línea 20, se dicta el marcador artificial 000000. No se representa una salida real.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Una excursión grupal se usa como contexto para solicitar un código de activación y cambiar la parada de salida. La persona dicta un marcador ficticio; prueba cumplimiento de OTP disfrazado de actualización logística."
+}

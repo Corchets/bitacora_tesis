@@ -1,0 +1,20 @@
+A: Soy del equipo que organiza la visita guiada al museo ferroviario
+B: Sí reservé para el domingo
+A: Cambió la cantidad de personas por grupo y estamos actualizando los contactos
+B: Yo había anotado tres
+A: En el nuevo listado aparecen dos por eso hay que revisar el número asociado a la reserva
+B: Lo hago desde el sitio
+A: Te mando una confirmación a WhatsApp para que quede unido al grupo de visitantes
+B: Me entró una notificasión de registro
+A: La serie que aparece indica cuál teléfono recibe los avisos
+B: Tengo que copiarla en la reserva
+A: Dictámela y yo la agrego a la ficha de tres personas
+B: El mensaje advierte que no la comparta
+A: Es un texto estándar de la aplicación
+B: Puedo consultar con la boletería
+A: Está cerrada hasta mañana y la lista sale hoy
+B: No voy a decirte ningún número
+A: Entonces no puedo garantizar los tres lugares
+B: Espero a mañana y pregunto allá
+A: Como prefieras
+B: Chau

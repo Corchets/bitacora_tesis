@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-017",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-017",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 7,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "Una tarjeta virtual inesperada se usa para solicitar el código de seguridad del plástico físico. Prueba un pedido de secreto financiero disfrazado de identificación de duplicado; no hay cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 7, instrucción de ingresar el código de seguridad de la tarjeta. La persona no lo comparte.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Una tarjeta virtual inesperada da pie a reemplazar y vincular medios de pago desde la aplicación. Prueba una acción de seguridad inducida que puede redirigir pagos y que la persona rechaza."
+}

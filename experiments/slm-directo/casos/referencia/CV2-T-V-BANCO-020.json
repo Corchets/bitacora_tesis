@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-020",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-020",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    }
+  ],
+  "que_prueba": "Una supuesta tarjeta retenida induce a suspender y reactivar el plástico. La aplicación advierte que no se proceda si la solicitud no es reconocida; la persona se niega. Prueba un pedido de acción de seguridad y señal contradictoria.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 9, donde comienza el pedido indirecto; también podría ubicarse en línea 10, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 9, primer paso para cambiar el estado de seguridad. No hay cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Una supuesta tarjeta retenida induce a suspender y reactivar el plástico. La aplicación advierte que no se proceda si la solicitud no es reconocida; la persona se niega. Prueba un pedido de acción de seguridad y señal contradictoria."
+}

@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-PREMIO-009",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-009",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 16,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una cena de premio requiere una seña pagada a un encargado sin restaurante definido. Prueba un pedido económico inducido que aparece como reserva, no como precio del premio.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, solicitud de transferir la seña. T_C línea 16, confirmación explícita del pago ficticio; importe sin destinatario bancario operable.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Una cena de premio requiere una seña pagada a un encargado sin restaurante definido. Prueba un pedido económico inducido que aparece como reserva, no como precio del premio."
+}

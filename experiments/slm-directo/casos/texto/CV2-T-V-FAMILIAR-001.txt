@@ -1,0 +1,22 @@
+A: Hola, soy el hermano de Leo. ¿Está en la casa?
+B: No, salió a comprar. ¿Qué pasó?
+A: Estoy con él en la estación de servicio, se le quedó la billetera en el colectivo.
+B: ¿Se quedó sin documento también?
+A: Sí, el colectivero ya siguió viaje y tenemos que volver a la ciudad.
+B: ¿No puede pedir que le guarden la billetera?
+A: Llamó a la terminal y le dijeron que recién revisan al final del recorrido.
+B: ¿Y vos por qué llamás desde otro número?
+A: El celular de Leo se apagó y el mío quedó sin saldo.
+B: ¿Cuánto necesitan?
+A: Entre el viaje y un remis hasta la parada son treinta y dos mil.
+B: ¿No tienen para pagar con tarjeta?
+A: El chofer del remis cobra en efectivo, el micro sí toma transferencia. Si podés, mandame el importe y lo saco acá.
+B: ¿A qué alias te lo mando?
+A: mate.ruta.siete, a nombre de Bruno.
+B: ¿Leo ya pudo cargar el celular?
+A: Sigue buscando un cargador en el kiosco.
+B: Bueno, te transfiero treinta y dos mil.
+A: Me llegó el aviso, ya compramos los pasajes.
+B: ¿Cuándo salen?
+A: En cuanto llegue el micro que viene de la terminal.
+B: Cuando vuelva Leo que me llame.

@@ -1,0 +1,20 @@
+A: Hola, te contacto por un obsequio de la campaña de consumo responsable.
+B: ¿Qué obsequio?
+A: Una lámpara recargable que se sortea entre quienes completaron la encuesta.
+B: Yo respondí desde el celular.
+A: La respuesta quedó asociada a una cuenta de correo, pero no al domicilio de entrega.
+B: ¿Tengo que pasarles mi dirección?
+A: El formulario te pide confirmar la zona para asignar el reparto.
+B: Veo un campo con mi barrio.
+A: Sí, completá calle y altura para que el paquete no vuelva.
+B: ¿Necesitan también un documento?
+A: El correo lo solicita si el destinatario es mayor de edad.
+B: ¿Puedo retirar en un punto?
+A: No para este lote, ya se armó la ruta por domicilio.
+B: Bueno, mi dirección es Los Talas 184, departamento dos.
+A: Gracias, ahora aparece la zona de entrega.
+B: ¿Cuándo llega?
+A: El jueves entre la mañana y el mediodía.
+B: Voy a estar.
+A: Te avisamos antes.
+B: Perfecto.

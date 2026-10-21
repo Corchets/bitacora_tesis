@@ -1,0 +1,18 @@
+A: Hola, llamo por una sesión de asistencia que quedó abierta en la computadora de recepción.
+B: Esa computadora se apaga al final del día.
+A: El registro dice que una ventana de soporte siguió activa después del cierre.
+B: ¿Qué ventana?
+A: Todavía no puedo ver el nombre del programa.
+B: ¿Tengo que ir a la oficina?
+A: No, solo estoy confirmando el estado antes de escalar el incidente.
+B: ¿Quién abrió la sesión?
+A: El historial aún no cargó ese dato.
+B: ¿Me das el número de incidente?
+A: Aparece como pendiente de clasificar.
+B: ¿Hay riesgo para los archivos?
+A: No puedo saberlo hasta que termine el análisis.
+B: Voy a avisarle al responsable de recepción.
+A: Esperá, estoy esperando otra pantalla.
+B: No te puedo ayudar desde acá.
+A: De acuerdo, lo retomamos por el canal interno.
+B: Chau.

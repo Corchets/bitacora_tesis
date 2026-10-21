@@ -1,0 +1,20 @@
+A: Te llamo del equipo técnico de la plataforma de reservas. Se abrió una sesión con el usuario de la recepción.
+B: ¿Se modificaron turnos?
+A: Todavía no aparece ningún cambio guardado.
+B: ¿Qué usuario figura?
+A: La búsqueda está en curso.
+B: ¿Puedo revisar el historial desde mi cuenta?
+A: La pantalla de auditoría está demorada.
+B: ¿Cuánto tarda?
+A: Puede quedar cargando unos minutos.
+B: ¿Hay un número de caso?
+A: No se generó hasta que se identifique la sesión.
+B: La recepción me dijo que nadie llamó.
+A: Puede haberse abierto desde una actualización automática.
+B: Entonces no entiendo por qué me llamás.
+A: Estamos avisando antes de cerrar el acceso.
+B: ¿Me podés decir qué equipo?
+A: Todavía no aparece en el panel.
+B: Voy a pedirle a la encargada que revise mañana.
+A: Está bien, quedamos en contacto.
+B: Chau.

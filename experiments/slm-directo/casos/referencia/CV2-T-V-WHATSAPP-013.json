@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-WHATSAPP-013",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-WHATSAPP-013",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "La llamada advierte sobre un registro desconocido y pide mantener abierta la aplicación, pero termina antes de solicitar un código o acción de seguridad. Prueba una preparación sospechosa con la identidad sin verificar.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No hay solicitud crítica ni cumplimiento; T_R y T_C nulos. El texto no permite saber si el registro fue real o una suplantación; no exigir clasificación de intención invisible. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "La llamada advierte sobre un registro desconocido y pide mantener abierta la aplicación, pero termina antes de solicitar un código o acción de seguridad. Prueba una preparación sospechosa con la identidad sin verificar."
+}

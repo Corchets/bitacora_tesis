@@ -1,0 +1,20 @@
+A: Hola del soporte del sistema de cámaras del vivero El historial no muestra las grabaciones del fin de semana
+B: Las cámaras estuvieron encendidas
+A: Sí pero el almacenamiento quedó conectado a otra cuenta
+B: Se puede recuperar
+A: Si vemos el panel en vivo puedo identificar cuál disco quedó sin asociar
+B: Necesitás entrar a la computadora
+A: La asistencia se abre desde la opción de diagnóstico
+B: Me pide habilitar micrófono y compartir pantalla
+A: Aceptá ambos permisos para que cargue la ventana del grabador
+B: Por qué necesita el micrófono
+A: El módulo chequea audio y video juntos
+B: Ya acepté los permisos y quedó abierta la sesión
+A: Puedo ver que el disco está fuera de línea
+B: Se puede recuperar el historial
+A: Voy a probar una sincronisación
+B: Aparecieron las grabaciones del sábado
+A: Bien la cuenta quedó conectada
+B: Ahora sí lo veo
+A: Cerrá la sesión cuando termine de cargar
+B: Listo

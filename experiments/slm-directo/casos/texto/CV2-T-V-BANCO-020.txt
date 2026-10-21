@@ -1,0 +1,20 @@
+A: Soy del banco Te aviso que el cajero del centro registró una tarjeta retenida con tu nombre
+B: No estuve en ese cajero hoy
+A: La tarjeta aparece retenida desde anoche
+B: Yo la tengo conmigo
+A: Puede ser una duplicación de perfil hay que validar cuál de las dos sigue activa
+B: Cómo lo compruebo
+A: Entrá a tarjetas elegí la que termina en 52 y buscá estado de plástico
+B: Dice activa
+A: Cambiá la tarjeta a modo suspendido y después reactivala para limpiar el estado viejo
+B: No es más seguro dejarla suspendida
+A: El modo suspendido impide compras pero el reinicio actualiza el chip
+B: La app me advierte que no debo hacer esto si no reconozco la solicitud
+A: Es una instrucción general para cambios no iniciados por el titular
+B: Justamente yo no lo inicié
+A: Si no la reiniciamos el cajero puede seguir marcándola como retenida
+B: Puedo pedir una nueva tarjeta en una sucusal
+A: Sí pero tarda más de una semana
+B: Prefiero esperar y consultar por el canal oficial
+A: Como quieras
+B: Gracias

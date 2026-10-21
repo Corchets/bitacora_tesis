@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-SOPORTE-012",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-SOPORTE-012",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 12,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una corrección de razón social se usa para inducir el ingreso de usuario y contraseña de administrador. Prueba un pedido de credenciales presentado como conservación del historial de facturas.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, primera solicitud de ingresar la clave junto con el usuario. T_C línea 12, entrega de credenciales artificiales e ingreso confirmado.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-SOPORTE-CLAVE-01",
+  "situacion": "Una corrección de razón social se usa para inducir el ingreso de usuario y contraseña de administrador. Prueba un pedido de credenciales presentado como conservación del historial de facturas."
+}

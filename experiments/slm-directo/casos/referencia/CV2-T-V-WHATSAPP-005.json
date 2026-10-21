@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-WHATSAPP-005",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-WHATSAPP-005",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 7,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    }
+  ],
+  "que_prueba": "Una galería escolar se usa para pedir el código de WhatsApp bajo el argumento de limitar quién ve fotos. Prueba una solicitud sensible con datos de contexto que parecen precisos, pero no prueban identidad.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 7, primera solicitud del código; no hay cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Una galería escolar se usa para pedir el código de WhatsApp bajo el argumento de limitar quién ve fotos. Prueba una solicitud sensible con datos de contexto que parecen precisos, pero no prueban identidad."
+}

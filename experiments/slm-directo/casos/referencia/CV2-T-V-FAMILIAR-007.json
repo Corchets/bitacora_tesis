@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-FAMILIAR-007",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-FAMILIAR-007",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 17,
+  "t_c_linea": 18,
+  "pedido": "REQUEST_REMOTE_ACCESS",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_REMOTE_ACCESS"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una falsa ayuda para recuperar fotos induce a instalar una herramienta y compartir la pantalla, exponiendo otras aplicaciones; B confirma que habilitó la pantalla compartida antes de detenerse. Prueba cumplimiento parcial de acceso remoto en una escena familiar cotidiana.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 17, donde comienza el pedido indirecto; también podría ubicarse en línea 18, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta de T_R línea 17 por pedido de compartir pantalla; línea 15 presenta la herramienta y puede ser inicio del pedido, queda abierto D07. T_C línea 18 confirma acción observable. Enlace no operativo ni incluido en el diálogo.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Una falsa ayuda para recuperar fotos induce a instalar una herramienta y compartir la pantalla, exponiendo otras aplicaciones; B confirma que habilitó la pantalla compartida antes de detenerse. Prueba cumplimiento parcial de acceso remoto en una escena familiar cotidiana."
+}

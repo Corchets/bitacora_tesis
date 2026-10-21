@@ -1,0 +1,20 @@
+A: Buenas, soporte del proyector del auditorio. La señal se corta cuando conectan la computadora.
+B: Ayer funcionaba.
+A: El controlador quedó con una versión anterior.
+B: ¿Hay que instalar una nueva?
+A: Te puedo guiar para comprobarlo.
+B: ¿Qué hago?
+A: Abrí la pantalla de dispositivos y fijate si aparece una alerta amarilla.
+B: Sí, al lado del proyector.
+A: Para ver el detalle hace falta habilitar la asistencia técnica del fabricante.
+B: ¿Eso comparte todo el escritorio?
+A: Solo la aplicación de presentación.
+B: El aviso dice que el técnico puede controlar el equipo.
+A: El control queda habilitado mientras se instala el controlador.
+B: ¿Lo acepto?
+A: Sí, autorizá la sesión y me aparece el diagnóstico.
+B: No quiero dar control de la computadora del auditorio.
+A: Sin ese acceso no puedo revisar la señal.
+B: Voy a llamar al encargado de la sala.
+A: Está bien.
+B: Chau.

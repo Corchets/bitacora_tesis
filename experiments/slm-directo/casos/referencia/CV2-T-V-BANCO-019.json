@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-019",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-019",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 7,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    }
+  ],
+  "que_prueba": "Un destinatario desconocido se presenta como proveedor importado y se pide una transferencia mínima para verificarlo. Prueba una solicitud directa de movimiento de dinero distinta de un código o clave.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 7, primera instrucción de transferir un importe de prueba a una cuenta nueva. No hay transferencia.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Un contacto de proveedor inesperado se usa para inducir una autorización que, según el llamante, habilitaría el bloqueo posterior. Prueba una acción de seguridad contradictoria y la resistencia de la persona."
+}

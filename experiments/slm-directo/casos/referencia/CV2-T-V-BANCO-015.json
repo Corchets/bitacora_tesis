@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-015",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-015",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 13,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    }
+  ],
+  "que_prueba": "Una falla de cajero se usa para inducir que la persona prepare un importe equivalente para que un técnico lo coteje. Prueba solicitud indirecta de efectivo sin nombrar desde el principio una entrega al llamante.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-BILLETES-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nDuda D07: línea 9 sugiere tener un importe disponible, línea 11 explica su uso y línea 13 instruye dejar efectivo preparado. Se marca la primera instrucción de preparar dinero; no hay entrega.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-BANK-BILLETES-01",
+  "situacion": "Una falla de cajero se usa para inducir que la persona prepare un importe equivalente para que un técnico lo coteje. Prueba solicitud indirecta de efectivo sin nombrar desde el principio una entrega al llamante."
+}

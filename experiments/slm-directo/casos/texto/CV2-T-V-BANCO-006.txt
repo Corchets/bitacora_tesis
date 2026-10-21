@@ -1,0 +1,22 @@
+A: Soy de coordinación de retiros del banco. La caja de seguridad del cajero no cerró bien después de tu depósito.
+B: ¿Qué deposité?
+A: Efectivo en el autoservicio de la sucursal del norte, ayer a la tarde.
+B: Sí, deposité lo de una venta.
+A: El sobre quedó registrado, pero hace falta verificar el total para completar el asiento.
+B: ¿No cuenta el comprobante?
+A: El comprobante muestra el monto declarado, falta cotejarlo con la caja.
+B: ¿Qué hago?
+A: Un supervisor puede pasar por tu domicilio y retirar el sobre original si todavía lo tenés.
+B: Yo no guardé ningún sobre, lo dejé en el cajero.
+A: Entonces tendría que entregarle un importe equivalente para que haga el cierre físico.
+B: ¿Me pedís efectivo?
+A: Sí, prepará el monto del depósito para que el supervisor lo selle y lo devuelva.
+B: ¿Cuánto decía el comprobante?
+A: Ciento ochenta y seis mil, según el registro.
+B: No voy a entregar plata a nadie que venga a casa.
+A: La visita se puede identificar con una credencial del banco.
+B: Prefiero volver a la sucursal con el comprobante.
+A: El cajero puede tardar varios días en resolverlo.
+B: El técnico llegó y le entregué el sobre con el importe que decía el comprobante.
+A: Ya figura el cotejo, gracias por colaborar.
+A: Ya figura el cotejo, gracias por colaborar.

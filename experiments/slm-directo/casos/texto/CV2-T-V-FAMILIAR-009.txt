@@ -1,0 +1,18 @@
+A: Buen día soy la encargada de la colonia de vacaciones Hablo con el papá de Benja
+B: Sí
+A: Estamos cargando la autorización de salida pa la visita al museo
+B: No me llegó ninguna nota
+A: La maestra dijo que mandaron el papel en la mochila pero faltan algunas firmas
+B: A qué hora vuelven
+A: Antes del almuerzo el micro sale a las nueve
+B: Qué necesitan de mí
+A: Confirmar identidad para que el sistema habilite la lista decime la contraseña que usás para entrar al portal de familias
+B: La contraseña del portal
+A: Sí así verifico tu perfil y dejo asentado el permiso
+B: No te puedo dar mi contraseña
+A: Si no queda aprobado Benja no puede subir al micro mañana
+B: Me pasás el número de la institución
+A: Estoy cubriendo el teléfono de recepción no tengo a mano la agenda completa
+B: Voy a llamar al colegio desde el número de siempre
+A: Bueno pero avisame apenas lo resuelvas
+B: Primero voy a hablar con la maestra

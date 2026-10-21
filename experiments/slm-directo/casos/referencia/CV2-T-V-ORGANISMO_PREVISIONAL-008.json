@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-ORGANISMO_PREVISIONAL-008",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-008",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 14,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un expediente de una persona fallecida se usa para inducir la entrega de DNI y domicilio de una familiar. Prueba un pedido sensible a un tercero envuelto en “cierre administrativo”; la persona rechaza actuar.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, instrucción de completar datos para el legajo; la solicitud de DNI se hace explícita en línea 13. T_C línea 14, entrega del marcador 00.000.000.",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Un expediente de una persona fallecida se usa para inducir la entrega de DNI y domicilio de una familiar. Prueba un pedido sensible a un tercero envuelto en “cierre administrativo”; la persona rechaza actuar."
+}

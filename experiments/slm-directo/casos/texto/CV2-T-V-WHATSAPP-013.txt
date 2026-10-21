@@ -1,0 +1,18 @@
+A: Buenas, te contacto por un inicio de registro de WhatsApp que aparece asociado a tu número.
+B: Yo no estoy instalando nada.
+A: La solicitud sigue abierta, pero todavía no figura un dispositivo confirmado.
+B: ¿Desde qué equipo la iniciaron?
+A: El detalle está en otra pantalla de la mesa de control.
+B: ¿Me podés mandar una alerta a la aplicación?
+A: Todavía no, primero tengo que confirmar si el registro pertenece al grupo de trabajo.
+B: ¿Qué grupo?
+A: El que administra los avisos del centro cultural.
+B: Yo estoy en varios grupos.
+A: No cierres la aplicación mientras revisamos la solicitud.
+B: No tengo ninguna abierta.
+A: Esperá un momento, el sistema está cargando el número de origen.
+B: ¿Cuál es tu nombre?
+A: Soy de soporte de cuentas, la línea sale como centralizada.
+B: Voy a revisar desde mi aplicación y cortar.
+A: Aguantá un minuto más, todavía no terminó.
+B: No, prefiero verificar por mi cuenta.
