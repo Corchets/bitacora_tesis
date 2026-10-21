@@ -1,6 +1,6 @@
 # Qué grabar para probar ASR — corpus v2
 
-Fecha: 2026-10-21. Lista de preparación para Luciano Grosso. Todos los diálogos son ficticios.
+Fecha: 2026-10-21, guiones revisados en r02. Lista de preparación para Luciano Grosso. Todos los diálogos son ficticios.
 
 > **Estado: propuesta sin discutir.** La selección es una primera prueba exploratoria de ASR,
 > no un tamaño mínimo validado ni la evaluación final. Se vincula con
@@ -19,20 +19,20 @@ Los textos elegidos son limpios: no hay que leer errores artificiales de transcr
 |---|---|---:|---|
 | [CV2-D-V-BANCO-001](texto/CV2-D-V-BANCO-001.txt) | vishing | 38 | Pedido tardío en una charla extensa; el atacante es B. Retención de contexto y cifras del aviso. |
 | [CV2-D-V-WHATSAPP-006](texto/CV2-D-V-WHATSAPP-006.txt) | vishing | 36 | Pedido indirecto partido en dos líneas; dictado de seis cifras con ceros después de una charla larga. |
-| [CV2-D-V-SOPORTE-001](texto/CV2-D-V-SOPORTE-001.txt) | vishing | 20 | Credenciales dentro de instrucciones de soporte; distinguir el campo de ingreso de un relato. |
-| [CV2-D-V-PREMIO-004](texto/CV2-D-V-PREMIO-004.txt) | vishing | 20 | Datos de tarjeta y CVV solicitados de forma indirecta; preservar negaciones y preguntas de aclaración. |
-| [CV2-D-V-ORGANISMO_PREVISIONAL-001](texto/CV2-D-V-ORGANISMO_PREVISIONAL-001.txt) | vishing | 20 | DNI y fecha de nacimiento; dictado de números y parentesco del titular. |
-| [CV2-D-V-PREMIO-003](texto/CV2-D-V-PREMIO-003.txt) | vishing | 20 | Solicitud indirecta de documento; distinguir descripción del formulario e instrucción de completarlo. |
-| [CV2-D-V-BANCO-008](texto/CV2-D-V-BANCO-008.txt) | vishing | 22 | Entrega de efectivo solicitada sin empezar por nombrar una transferencia; objeción y cuantificadores. |
-| [CV2-D-V-FAMILIAR-002](texto/CV2-D-V-FAMILIAR-002.txt) | vishing | 20 | Transferencia bajo suplantación familiar; importe y confirmación de ejecución. |
+| [CV2-D-V-SOPORTE-001](texto/CV2-D-V-SOPORTE-001.txt) | vishing | 21 | Credenciales dentro de instrucciones de soporte; distinguir el campo de ingreso de un relato. |
+| [CV2-D-V-PREMIO-004](texto/CV2-D-V-PREMIO-004.txt) | vishing | 21 | Datos de tarjeta y CVV solicitados de forma indirecta; preservar negaciones y preguntas de aclaración. |
+| [CV2-D-V-ORGANISMO_PREVISIONAL-001](texto/CV2-D-V-ORGANISMO_PREVISIONAL-001.txt) | vishing | 27 | DNI y fecha de nacimiento; dictado de números y parentesco del titular. |
+| [CV2-D-V-PREMIO-003](texto/CV2-D-V-PREMIO-003.txt) | vishing | 28 | Solicitud indirecta de documento; distinguir descripción del formulario e instrucción de completarlo. |
+| [CV2-D-V-BANCO-008](texto/CV2-D-V-BANCO-008.txt) | vishing | 23 | Entrega de efectivo solicitada sin empezar por nombrar una transferencia; objeción y cuantificadores. |
+| [CV2-D-V-FAMILIAR-002](texto/CV2-D-V-FAMILIAR-002.txt) | vishing | 29 | Transferencia bajo suplantación familiar; importe y confirmación de ejecución. |
 | [CV2-D-V-SOPORTE-002](texto/CV2-D-V-SOPORTE-002.txt) | vishing | 24 | Instalación y acceso remoto: secuencia de pasos, número de sesión y cumplimiento. |
-| [CV2-D-V-SOPORTE-004](texto/CV2-D-V-SOPORTE-004.txt) | vishing | 20 | Permiso de control remoto expresado con eufemismos; distinguirlo de mirar la propia pantalla. |
-| [CV2-D-V-BANCO-002](texto/CV2-D-V-BANCO-002.txt) | vishing | 20 | Autorización de dispositivo presentada como gestión bancaria; conservar el sentido de alta/baja. |
-| [CV2-D-V-BANCO-007](texto/CV2-D-V-BANCO-007.txt) | vishing | 20 | Cambio de dispositivo inducido; referencia de una acción a lo dicho en turnos previos. |
+| [CV2-D-V-SOPORTE-004](texto/CV2-D-V-SOPORTE-004.txt) | vishing | 30 | Permiso de control remoto expresado con eufemismos; distinguirlo de mirar la propia pantalla. |
+| [CV2-D-V-BANCO-002](texto/CV2-D-V-BANCO-002.txt) | vishing | 31 | Autorización de equipo desconocido para operar; conservar la diferencia entre el teléfono propio y el equipo ajeno. |
+| [CV2-D-V-BANCO-007](texto/CV2-D-V-BANCO-007.txt) | vishing | 30 | Cambio del teléfono receptor de verificaciones a uno ajeno; referencia de una acción a lo dicho en turnos previos. |
 | [CV2-D-L-BANCO-002](texto/CV2-D-L-BANCO-002.txt) | legítima | 24 | La persona llama al banco; pide comprobante de una transferencia ya realizada y confirma referencias limitadas. |
 | [CV2-D-L-BANCO-007](texto/CV2-D-L-BANCO-007.txt) | legítima | 23 | La palabra clave describe el resumen; cambios de tema y autocorrección farmacia/ferretería. |
-| [CV2-D-L-FAMILIAR-002](texto/CV2-D-L-FAMILIAR-002.txt) | legítima | 25 | Transferencia familiar normal, con pedido y ejecución; contraste con suplantación sin depender de la palabra transferir. |
-| [CV2-D-L-FAMILIAR-005](texto/CV2-D-L-FAMILIAR-005.txt) | legítima | 27 | Otro gasto compartido con transferencia legítima; importe, acuerdo y recepción. |
+| [CV2-D-L-FAMILIAR-002](texto/CV2-D-L-FAMILIAR-002.txt) | legítima | 20 | Transferencia familiar normal, con pedido y ejecución; contraste con suplantación sin depender de la palabra transferir. |
+| [CV2-D-L-FAMILIAR-005](texto/CV2-D-L-FAMILIAR-005.txt) | legítima | 23 | Otro gasto compartido con transferencia legítima; importe, acuerdo y recepción. |
 | [CV2-D-L-DELIVERY-004](texto/CV2-D-L-DELIVERY-004.txt) | legítima | 24 | Reprogramación de entrega: horarios, número de pedido y acceso al edificio. |
 | [TR-13-turno-medico-pide-dni](texto/TR-13-turno-medico-pide-dni.txt) | legítima | 12 | Antecedente útil: la persona llama por un turno y dicta DNI y nacimiento. Caso limpio de pedido legítimo de datos. |
 | [CV2-D-L-ESCUELA-001](texto/CV2-D-L-ESCUELA-001.txt) | legítima | 24 | Llamada escolar cotidiana, horarios y coordinación de personas; voz sin vocabulario deliberado de fraude. |

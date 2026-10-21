@@ -79,8 +79,12 @@ esta separación evita mezclas accidentales, no es un control de acceso.
 `MANIFIESTO-CORPUS-V2.json` registra SHA-256 de los textos, referencias, asignaciones y
 catálogo. Se crea una sola vez con `python3 casos.py --congelar`, luego de la revisión
 técnica. `python3 casos.py --listar` detecta altas, bajas y modificaciones posteriores.
-El comando no sobrescribe una reserva existente. Una revisión humana que cambie
-referencias requiere una nueva versión acordada en D08 y sus nuevas huellas.
+El comando no sobrescribe una reserva existente. La corrección técnica `r02`, pedida
+por Luciano antes de evaluar, actualiza las huellas de los candidatos y registra en
+`revision_tecnica` el commit y SHA-256 del manifiesto anterior, los IDs modificados y
+sus motivos. La versión anterior permanece íntegra en Git (`acdf4642073bbee0fea4d2d8a2fe5ea819c51527`).
+Esto no homologa la reserva ni resuelve D08; cualquier cambio posterior debe conservar
+la misma trazabilidad y distinguir qué resultados corresponden a cada versión.
 
 ## Referencia y calidad
 
