@@ -101,4 +101,37 @@ export function validateRoadmap(roadmap) {
   for (const key of Object.keys(roadmap.edgeNotes ?? {})) {
     if (!/^\d+>(\d+|laboratorio)$/.test(key)) throw new Error(`edgeNotes: clave inválida ${key}`);
   }
+  if (roadmap.systemMap) {
+    const { components, groups } = roadmap.systemMap;
+    if (!Array.isArray(components) || !components.length || !Array.isArray(groups) || !groups.length) {
+      throw new Error('systemMap requiere componentes y grupos.');
+    }
+    const ids = new Set();
+    for (const component of components) {
+      if (!/^[a-z][a-z0-9-]*$/.test(component.id) || ids.has(component.id)) throw new Error('Componente inválido o repetido.');
+      ids.add(component.id);
+      if (component.archComponent && !/^[a-z][a-z0-9-]*$/.test(component.archComponent)) throw new Error(`${component.id}: enlace de arquitectura inválido.`);
+      for (const field of ['name', 'role', 'missing']) {
+        if (typeof component[field] !== 'string' || !component[field].trim()) throw new Error(`${component.id}: falta ${field}.`);
+      }
+      if (typeof component.exists !== 'string' || !Array.isArray(component.issues) || !component.issues.every(n => Number.isInteger(n) && n > 0)) {
+        throw new Error(`${component.id}: avances o issues inválidos.`);
+      }
+      if (!Array.isArray(component.artifacts) || !component.artifacts.every(p => /^(docs|experiments)\//.test(p) && !p.includes('..'))) {
+        throw new Error(`${component.id}: artefactos inválidos.`);
+      }
+      if (!Array.isArray(component.decisions) || !component.decisions.every(id => /^D\d+$/.test(id))) throw new Error(`${component.id}: decisiones inválidas.`);
+    }
+    const placed = new Set();
+    const groupIds = new Set();
+    for (const group of groups) {
+      if (!/^[a-z][a-z0-9-]*$/.test(group.id) || groupIds.has(group.id) || !group.name || !group.flow || !Array.isArray(group.components)) throw new Error('Grupo de componentes inválido.');
+      groupIds.add(group.id);
+      for (const id of group.components) {
+        if (!ids.has(id) || placed.has(id)) throw new Error(`Componente desconocido o ubicado dos veces: ${id}.`);
+        placed.add(id);
+      }
+    }
+    if (placed.size !== ids.size) throw new Error('Hay componentes sin grupo en systemMap.');
+  }
 }

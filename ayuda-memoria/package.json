@@ -10,8 +10,5 @@
     "test": "node --test scripts/*.test.mjs",
     "preview": "node scripts/serve.mjs",
     "revisar-brief": "node scripts/review-brief.mjs"
-  },
-  "dependencies": {
-    "cytoscape": "3.34.3"
   }
 }

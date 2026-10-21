@@ -17,10 +17,9 @@ npm run build
 npm run preview
 ```
 
-Abrir `http://127.0.0.1:4173`. La única dependencia de aplicación es
-[Cytoscape.js](https://js.cytoscape.org/) (grafo del roadmap): está fijada en
-`package.json`/`package-lock.json` y `npm run build` copia su bundle ESM y la
-licencia dentro de `dist/`, de modo que la web no usa CDN.
+Abrir `http://127.0.0.1:4173` o ir directamente al roadmap con
+`http://127.0.0.1:4173/?vista=roadmap`.
+La interfaz usa HTML, CSS y JavaScript sin dependencias de aplicación ni CDN.
 El generador acepta `GH_TOKEN`/`GITHUB_TOKEN`; localmente también puede usar la
 sesión existente de `gh`. El token se usa solamente para leer GitHub y no se
 escribe en los datos de la web. Sin token aplican los límites de la API pública.
@@ -37,11 +36,20 @@ dependencias nativas. Usa archivos de cada commit, con enlaces a esa revisión.
 - Términos: `docs/GLOSARIO.md` de cada rama.
 - Decisiones: `docs/gestion/MAPA-DECISIONES.md` de cada rama.
 - Estado, responsable y bloqueos: GitHub, sin inferirlos de un brief.
-- Grafo del roadmap: `data.roadmap.graph` se arma desde las dependencias nativas
-  (`blocked_by`) de los issues de los frentes y de los bloqueos que esos issues
-  referencian, incluidos cerrados con su `state_reason`. `roadmap.json` aporta la
-  orientación editorial (frentes, próximos pasos, `edgeNotes`, laboratorio en
-  suspenso); nunca define bloqueos en texto narrativo.
+- Roadmap por componentes: `roadmap.json > systemMap` es la correspondencia
+  editorial única entre los bloques del sistema, sus artefactos, pendientes e
+  issues. La vista sigue el recorrido de audio a evaluación, con corpus,
+  protocolo e informe como soporte. Los enlaces llevan al mismo componente de
+  arquitectura, sin modificar aquella visualización.
+- Estados y dependencias del roadmap: `data.roadmap.graph` conserva los issues
+  asociados y sus bloqueos nativos de GitHub, incluidos cerrados con
+  `state_reason`. El panel permite navegar esas relaciones. `completed` y
+  `not_planned` se distinguen; documentos y código experimental se muestran
+  como avances parciales cuando existen en el árbol de la rama seleccionada.
+  «Entregas cerradas» exige que todos los issues asociados estén completados;
+  no certifica la validación integral del componente. Un bloque sin issue
+  específico sigue visible. Los avances editoriales recientes conservan sus
+  fuentes enlazadas y pueden corresponder a otra rama.
 - Orientaciones editoriales: `briefs.json`. No son campos obligatorios del issue
   ni un segundo registro de su estado.
 
@@ -103,8 +111,7 @@ El proyecto de producción asociado es `bitacora-tesis-ayuda-memoria` (equipo
 `https://bitacora-tesis-ayuda-memoria.vercel.app`.
 
 El [workflow](../.github/workflows/ayuda-memoria.yml) usa el código de la web en
-`main` y consulta las dos ramas. Corre `npm ci` antes de generar para tener el
-bundle fijado de Cytoscape. Publica después de pushes, cambios de issues,
+`main` y consulta las dos ramas. Corre `npm ci` antes de generar. Publica después de pushes, cambios de issues,
 comentarios y milestones. La revisión horaria recupera también cambios de
 dependencias nativas; no se promete actualización instantánea de esas relaciones.
 La redacción de los briefs se revisa con la skill; el workflow no ejecuta IA.

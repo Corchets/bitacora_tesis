@@ -11,11 +11,8 @@ let search = '';
 let glossarySearch = '';
 let selectedGraphId = null;
 let roadmapMode = null;
-let frontFilter = 'all';
-let onlyAvailable = false;
-let focusNext = false;
-let cy = null;
-let cyModule = null;
+let componentFilter = 'all';
+let selectedComponentId = null;
 const escape = text => String(text ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
 const plain = text => String(text ?? '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/[*`]/g, '').replace(/^>\s?/gm, '').trim();
 const repo = 'https://github.com/Corchets/bitacora_tesis';
@@ -65,6 +62,8 @@ function urlState() {
   if (milestoneFilter !== 'all' && view === 'issues') url.searchParams.set('hito', milestoneFilter);
   if (view === 'roadmap' && roadmapMode === 'lista') url.searchParams.set('modo', 'lista');
   if (view === 'roadmap' && selectedGraphId) url.searchParams.set('nodo', selectedGraphId);
+  if (view === 'roadmap' && selectedComponentId) url.searchParams.set('componente', selectedComponentId);
+  if (view === 'roadmap' && componentFilter !== 'all') url.searchParams.set('filtro', componentFilter);
   history.replaceState(null, '', url);
 }
 function heading(title, description, action = '') {
@@ -129,14 +128,10 @@ function workView(now) {
     + `<div class="work-layout"><section class="issues-pane" aria-label="Elegir un issue"><div class="issues-toolbar"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="issue-search" type="search" placeholder="Buscar issue, número o responsable" aria-label="Buscar issues" value="${escape(search)}"></label>${!now ? `<label class="filter-label"><span class="sr-only">Filtrar por hito</span><select id="milestone-filter"><option value="all">Todos los hitos</option>${data.milestones.map(item => `<option value="${item.number}" ${milestoneFilter === String(item.number) ? 'selected' : ''}>${escape(item.title)}</option>`).join('')}<option value="none" ${milestoneFilter === 'none' ? 'selected' : ''}>Sin hito</option></select></label>` : ''}</div><div class="issue-results" aria-live="polite">${visible.length ? groups.map(group => `<div class="issue-group"><div class="group-heading"><h2>${escape(group.title)}</h2><span>${group.items.length} ${group.items.length === 1 ? 'issue' : 'issues'}</span></div>${group.items.map(issueRow).join('')}</div>`).join('') : `<div class="empty"><h2>${search ? 'No encontramos ese issue.' : 'No hay issues abiertos acá.'}</h2><p>${search ? 'Probá otro término, número o responsable.' : 'Podés consultar otros hitos desde Todos los issues.'}</p></div>`}</div></section>${issueDetail(visible.find(issue => issue.number === selected))}</div>`;
 }
 
-// ---------- Roadmap: grafo interactivo de entregas ----------
-// Las aristas salen de las dependencias nativas de GitHub (data.roadmap.graph);
-// roadmap.json aporta la orientación editorial (frentes, próximos pasos, laboratorio).
-const FRONT_COLORS = { corpus:'#365b35', deteccion:'#203e37', metodologia:'#5a6a62', cierre:'#9fae9e', concluido:'#427345', laboratorio:'#ad452b' };
-const FRONT_BG = { corpus:'#eef3e2', deteccion:'#e9efe4', metodologia:'#f1f4ec', cierre:'#f6f9f3', concluido:'#e8eddb', laboratorio:'#faf3ed' };
+// ---------- Roadmap por componentes del sistema ----------
+// Componentes y avances editoriales: roadmap.json. Estados y bloqueos: GitHub.
 const rm = () => data.roadmap;
 const graphNode = id => rm().graph?.nodes.find(n => n.id === id);
-const nextActionIds = () => new Set((rm().currentLocation.nextActions ?? []).map(a => `i${a.issue}`));
 const milestoneCode = num => data.milestones.find(m => m.number === num)?.title.split(' — ')[0] ?? null;
 
 function graphFronts() {
@@ -160,250 +155,100 @@ function nodeStatus(n) {
   }
   return { label: 'Sin verificar', cls: 'status-espera' };
 }
-function nodeClasses(n) {
-  const cls = [`front-${n.front}`];
-  if (n.kind === 'paused') cls.push('is-paused');
-  else if (n.state === 'closed') cls.push(n.stateReason === 'not_planned' ? 'is-notplanned' : 'is-done');
-  else if (n.state !== 'open') cls.push('is-unknown');
-  else cls.push(n.openBlockers.length ? 'is-blocked' : (n.conditions?.length ? 'is-conditional' : 'is-free'));
-  if (nextActionIds().has(n.id)) cls.push('is-next');
-  return cls.join(' ');
-}
-function shortTitle(title) {
-  if (title.length <= 42) return title;
-  const cut = title.slice(0, 42);
-  return `${cut.slice(0, cut.lastIndexOf(' '))}…`;
-}
-function cyStyle() {
-  const frontRules = Object.entries(FRONT_COLORS).map(([id, color]) => (
-    { selector: `node:parent.front-${id}`, style: { 'background-color': FRONT_BG[id], 'border-color': color } }
-  ));
-  return [
-    { selector: 'node', style: {
-      'font-family': 'Manrope, sans-serif', 'font-size': 12.5, 'font-weight': 700, 'color': '#203e37',
-      'label': 'data(label)', 'text-wrap': 'wrap', 'text-max-width': '170px', 'text-valign': 'bottom', 'text-margin-y': 7,
-      'text-line-height': 1.3, 'text-background-color': '#fffef9', 'text-background-opacity': 0.9,
-      'text-background-padding': '2.5px', 'text-background-shape': 'roundrectangle',
-      'width': 34, 'height': 34, 'border-width': 2.2, 'border-color': '#203e37', 'background-color': '#fffef9',
-      'overlay-opacity': 0
-    }},
-    { selector: 'node:parent', style: {
-      'label': 'data(label)', 'text-valign': 'top', 'text-halign': 'center', 'text-margin-y': -10,
-      'font-size': 10, 'font-weight': 800, 'color': '#5a6a62', 'text-background-opacity': 0,
-      'background-opacity': 0.55, 'border-width': 1.4, 'border-style': 'solid', 'border-color': '#c8d5c0',
-      'padding': 18, 'shape': 'round-rectangle', 'text-wrap': 'wrap', 'text-max-width': '230px', 'min-zoomed-font-size': 8
-    }},
-    ...frontRules,
-    { selector: 'node:parent.front-laboratorio', style: { 'border-style': 'dashed', 'border-width': 1.8, 'color': '#76331f' } },
-    { selector: 'node.is-done', style: { 'background-color': '#427345', 'border-color': '#365b35' } },
-    { selector: 'node.is-notplanned', style: { 'background-color': '#f9ece1', 'border-color': '#ad452b', 'border-style': 'dashed' } },
-    { selector: 'node.is-unknown', style: { 'background-color': '#fffef9', 'border-color': '#9fae9e', 'border-style': 'dashed' } },
-    { selector: 'node.is-free', style: { 'background-color': '#fffef9', 'border-color': '#203e37' } },
-    { selector: 'node.is-conditional', style: { 'background-color': '#fffef9', 'border-color': '#ad452b', 'border-style': 'dashed' } },
-    { selector: 'node.is-blocked', style: { 'background-color': '#f9ece1', 'border-color': '#ad452b', 'border-width': 2.4 } },
-    { selector: 'node.is-next', style: { 'underlay-color': '#d7e9af', 'underlay-opacity': 0.95, 'underlay-padding': 9, 'underlay-shape': 'ellipse' } },
-    { selector: 'node.is-paused', style: { 'background-color': '#f9ece1', 'border-color': '#ad452b', 'border-style': 'dashed', 'shape': 'round-rectangle', 'width': 56, 'height': 38 } },
-    { selector: 'edge', style: {
-      'width': 1.8, 'line-color': '#9fae9e', 'curve-style': 'bezier',
-      'target-arrow-shape': 'triangle', 'target-arrow-color': '#9fae9e', 'arrow-scale': 1.05,
-      'font-size': 9, 'color': '#5a6a62'
-    }},
-    { selector: 'edge.edge-pending', style: { 'line-color': '#ad452b', 'target-arrow-color': '#ad452b', 'width': 2.4 } },
-    { selector: 'edge.edge-satisfied', style: { 'line-color': '#427345', 'target-arrow-color': '#427345', 'width': 1.7 } },
-    { selector: 'edge.edge-not_planned', style: { 'line-color': '#b9a99c', 'target-arrow-color': '#b9a99c', 'line-style': 'dashed' } },
-    { selector: 'edge.edge-unknown', style: { 'line-color': '#9fae9e', 'target-arrow-color': '#9fae9e', 'line-style': 'dashed' } },
-    { selector: 'edge.edge-conditional', style: { 'line-color': '#ad452b', 'target-arrow-color': '#ad452b', 'line-style': 'dashed', 'width': 1.7, 'line-dash-pattern': [6,4],
-      'label': 'data(note)', 'font-size': 9.5, 'font-weight': 700, 'color': '#76331f', 'text-wrap': 'wrap', 'text-max-width': '160px',
-      'text-background-color': '#fffef9', 'text-background-opacity': 0.9, 'text-background-padding': '3px', 'text-background-shape': 'roundrectangle', 'text-margin-y': -10 } },
-    { selector: 'node.sel', style: { 'border-color': '#203e37', 'border-width': 3.4, 'overlay-color': '#d7e9af', 'overlay-opacity': 0.4, 'overlay-padding': 7 } },
-    { selector: 'edge.dep-in', style: { 'line-color': '#ad452b', 'target-arrow-color': '#ad452b', 'width': 3 } },
-    { selector: 'node.dep-in', style: { 'border-color': '#ad452b', 'border-width': 3 } },
-    { selector: 'edge.dep-out', style: { 'line-color': '#365b35', 'target-arrow-color': '#365b35', 'width': 3 } },
-    { selector: 'node.dep-out', style: { 'border-color': '#365b35', 'border-width': 3 } },
-    { selector: '.dimmed', style: { 'opacity': 0.2 } },
-    { selector: '.focus-dim', style: { 'opacity': 0.15 } },
-    { selector: '.f-hidden', style: { 'display': 'none' } }
-  ];
-}
-// Carriles: cada frente es una columna y las dependencias reales fluyen de
-// izquierda a derecha. El laboratorio queda separado y debajo: está pausado y
-// nunca bloquea. Posiciones fijas (sin simulación), ordenadas por profundidad.
-const LANE_ORDER = ['concluido', 'corpus', 'deteccion', 'metodologia', 'cierre'];
-const LANE_X = 236, NODE_Y = 118;
-function graphDepths(g) {
-  const preds = {};
-  for (const e of g.edges) if (e.kind === 'dependency') (preds[e.target] ??= []).push(e.source);
-  const memo = {};
-  const visit = (id, seen) => {
-    if (id in memo) return memo[id];
-    if (seen.has(id)) return 0;
-    return memo[id] = preds[id]?.length ? 1 + Math.max(...preds[id].map(p => visit(p, new Set([...seen, id])))) : 0;
-  };
-  for (const n of g.nodes) visit(n.id, new Set());
-  return memo;
-}
-function graphPositions(g) {
-  const depth = graphDepths(g);
-  const lanes = new Map();
-  for (const n of g.nodes) {
-    const lane = LANE_ORDER.includes(n.front) ? n.front : n.front === 'laboratorio' ? 'laboratorio' : 'concluido';
-    if (!lanes.has(lane)) lanes.set(lane, []);
-    lanes.get(lane).push(n);
+const systemComponents = () => rm().systemMap?.components ?? [];
+const componentById = id => systemComponents().find(c => c.id === id);
+const componentNodes = c => c.issues.map(num => graphNode(`i${num}`)).filter(Boolean);
+const componentArtifacts = c => c.artifacts.filter(path => branch().paths.includes(path));
+const availableNode = n => n.state === 'open' && !n.openBlockers.length && !n.conditions?.length;
+function componentStatus(c) {
+  const nodes = componentNodes(c);
+  if (c.issues.length && nodes.length === c.issues.length && nodes.every(n => n.state === 'closed' && n.stateReason === 'completed')) {
+    return { key:'done', label:'Entregas cerradas', symbol:'✓' };
   }
-  const pos = {};
-  let bottom = 0;
-  for (const lane of LANE_ORDER) {
-    const list = lanes.get(lane) ?? [];
-    list.sort((a, b) => (depth[a.id] - depth[b.id]) || (a.number - b.number));
-    const x = LANE_ORDER.indexOf(lane) * LANE_X;
-    list.forEach((n, i) => { pos[n.id] = { x, y: i * NODE_Y }; });
-    bottom = Math.max(bottom, list.length * NODE_Y);
-  }
-  (lanes.get('laboratorio') ?? []).forEach((n, i) => { pos[n.id] = { x: 2 * LANE_X + i * 110, y: bottom + 96 }; });
-  return pos;
+  if (c.exists && componentArtifacts(c).length) return { key:'partial', label:'Avance parcial', symbol:'◐' };
+  return { key:'pending', label:'Pendiente', symbol:'○' };
 }
-const edgeNoteKey = (src, dst) => `${String(src).replace(/^i/, '')}>${String(dst).replace(/^i/, '')}`;
-async function initCy() {
-  if (cy || roadmapMode === 'lista') return;
-  const container = document.querySelector('#cy-roadmap');
-  if (!container || !rm().graph) return;
-  if (!cyModule) {
-    try { cyModule = (await import('./cytoscape.esm.min.js')).default; }
-    catch { document.querySelector('.cy-fallback')?.removeAttribute('hidden'); return; }
-  }
-  try { await Promise.race([document.fonts.ready, new Promise(resolve => setTimeout(resolve, 700))]); } catch { /* Manrope puede tardar; el fallback sigue legible. */ }
-  const g = rm().graph;
-  const pos = graphPositions(g);
-  const notes = g.edgeNotes ?? {};
-  const elements = [];
-  for (const f of graphFronts()) {
-    elements.push({ group: 'nodes', selectable: true, grabbable: false,
-      data: { id: `frente-${f.id}`, kind: 'front', label: f.name, frontId: f.id },
-      classes: `front-${f.id}` });
-  }
-  for (const n of g.nodes) {
-    elements.push({ group: 'nodes', position: pos[n.id],
-      data: { id: n.id, parent: `frente-${n.front}`, front: n.front, kind: n.kind,
-        state: n.state, blocked: n.openBlockers.length > 0, conditional: (n.conditions?.length ?? 0) > 0,
-        label: n.kind === 'paused' ? `Laboratorio\n${n.issueCount} issues en pausa` : `#${n.number}\n${shortTitle(n.title)}` },
-      classes: nodeClasses(n) });
-  }
-  for (const e of g.edges) elements.push({ group: 'edges',
-    data: { id: e.id, source: e.source, target: e.target, note: notes[edgeNoteKey(e.source, e.target)] ?? '' },
-    classes: `edge-${e.state}` });
-  cy = cyModule({
-    container, elements, style: cyStyle(),
-    wheelSensitivity: 1.5, minZoom: 0.25, maxZoom: 2.8,
-    layout: { name: 'preset', fit: false, animate: false }
-  });
-  cy.on('tap', 'node', event => selectGraph(event.target.id()));
-  cy.on('tap', event => { if (event.target === cy) clearGraphSelection(); });
-  applyGraphFilters();
-  applyFocus();
-  updateGraphSelection();
-  cy.fit(cy.elements().not('.f-hidden'), 36);
+function componentVisible(c) {
+  const nodes = componentNodes(c);
+  if (componentFilter === 'open') return nodes.some(n => n.state === 'open');
+  if (componentFilter === 'available') return nodes.some(availableNode);
+  if (componentFilter === 'untracked') return !c.issues.length;
+  if (componentFilter === 'pending') return componentStatus(c).key !== 'done';
+  return true;
 }
-function nodeHiddenByFilter(n) {
-  if (n.isParent()) return frontFilter !== 'all' && n.data('frontId') !== frontFilter;
-  if (frontFilter !== 'all' && n.data('front') !== frontFilter) return true;
-  if (onlyAvailable && !(n.data('state') === 'open' && !n.data('blocked') && !n.data('conditional'))) return true;
-  return false;
+function componentCardHTML(c, index) {
+  const status = componentStatus(c);
+  const nodes = componentNodes(c);
+  const open = nodes.filter(n => n.state === 'open');
+  const done = nodes.filter(n => n.state === 'closed' && n.stateReason === 'completed');
+  const available = open.filter(availableNode).length;
+  return `<button type="button" class="system-node progress-${status.key} ${selectedComponentId === c.id ? 'is-selected' : ''}" data-component="${escape(c.id)}" aria-pressed="${selectedComponentId === c.id}" aria-controls="rm-panel-body">
+    <span class="system-node-top"><span class="system-code">${String(index + 1).padStart(2, '0')}</span><span class="progress-label"><span aria-hidden="true">${status.symbol}</span> ${status.label}</span></span>
+    <strong>${escape(c.name)}</strong><span class="system-role">${escape(c.role)}</span><span class="system-missing-preview"><b>Falta</b> ${escape(c.missing)}</span>
+    <span class="system-node-bottom">${open.length ? `<b>${open.length} ${open.length === 1 ? 'issue abierto' : 'issues abiertos'}</b>` : c.issues.length ? '<b>Sin issues abiertos</b>' : '<b class="untracked">Sin issue específico</b>'}<span>${available ? `${available} sin bloqueos` : done.length ? `${done.length} completado${done.length === 1 ? '' : 's'}` : 'Ver qué falta'} →</span></span>
+  </button>`;
 }
-function applyGraphFilters() {
-  if (cy) {
-    cy.batch(() => {
-      cy.elements().removeClass('f-hidden');
-      cy.nodes().filter(nodeHiddenByFilter).addClass('f-hidden');
-      cy.nodes().filter(n => n.isParent() && !n.hasClass('f-hidden') && n.descendants().not('.f-hidden').length === 0).addClass('f-hidden');
-      cy.edges().filter(e => e.source().hasClass('f-hidden') || e.target().hasClass('f-hidden')).addClass('f-hidden');
-    });
-  }
-  renderRoadmapList();
-}
-function applyFocus() {
-  if (!cy) return;
-  cy.batch(() => {
-    cy.elements().removeClass('focus-dim');
-    if (!focusNext) return;
-    const ids = nextActionIds();
-    const keep = cy.nodes().filter(n => ids.has(n.id()) || n.isParent());
-    const keepEdges = cy.edges().filter(e => ids.has(e.source().id()) || ids.has(e.target().id()));
-    cy.elements().difference(keep.union(keepEdges)).addClass('focus-dim');
-  });
+function roadmapListHTML() {
+  const groups = rm().systemMap?.groups ?? [];
+  let index = 0;
+  const html = groups.map((group, i) => {
+    const components = group.components.map(componentById).filter(Boolean);
+    const cards = components.map(c => { const cardIndex = index++; return componentVisible(c) ? componentCardHTML(c, cardIndex) : ''; }).join('');
+    if (!cards) return '';
+    return `<section class="system-group ${group.support ? 'system-support' : ''}" aria-labelledby="system-group-${escape(group.id)}">
+      <header><span class="system-step">${group.support ? '+' : String(i + 1).padStart(2, '0')}</span><div><h2 id="system-group-${escape(group.id)}">${escape(group.name)}</h2><p>${escape(group.flow)}</p></div>${!group.support && i < 4 ? '<span class="system-flow-arrow" aria-hidden="true">→</span>' : ''}</header>
+      <div class="system-group-nodes">${cards}</div></section>`;
+  }).join('');
+  return html || '<p class="empty">No hay componentes con este filtro. Elegí «Todo el sistema» para volver al mapa completo.</p>';
 }
 function updateGraphSelection() {
-  if (cy) {
-    cy.elements().removeClass('sel dep-in dep-out dimmed');
-    const ele = selectedGraphId ? cy.getElementById(selectedGraphId) : null;
-    if (ele?.length) {
-      ele.addClass('sel');
-      if (ele.isParent()) {
-        ele.union(ele.descendants()).removeClass('focus-dim');
-        ele.descendants().addClass('dep-out');
-        cy.nodes().filter(n => !n.isParent() && n.data('front') !== ele.data('frontId')).addClass('dimmed');
-      } else {
-        const incoming = ele.predecessors().filter(el => !el.isParent());
-        const outgoing = ele.successors().filter(el => !el.isParent());
-        incoming.addClass('dep-in');
-        outgoing.addClass('dep-out');
-        ele.union(incoming).union(outgoing).removeClass('focus-dim');
-        cy.nodes().filter(n => !n.isParent() && n !== ele && !incoming.contains(n) && !outgoing.contains(n)).addClass('dimmed');
-        cy.edges().filter(e => !incoming.contains(e) && !outgoing.contains(e)).addClass('dimmed');
-      }
-    }
-  }
   document.querySelectorAll('[data-graph-id]').forEach(btn => {
     const on = btn.dataset.graphId === selectedGraphId;
     btn.classList.toggle('is-selected', on);
-    if (btn.classList.contains('rl-node')) btn.setAttribute('aria-pressed', on);
+    btn.setAttribute('aria-pressed', String(on));
+  });
+  document.querySelectorAll('[data-component]').forEach(btn => {
+    const on = btn.dataset.component === selectedComponentId;
+    btn.classList.toggle('is-selected', on);
+    btn.setAttribute('aria-pressed', String(on));
   });
   renderRoadmapPanel();
   urlState();
 }
+function focusRoadmapPanel() {
+  const panel = document.querySelector('#rm-panel-body');
+  panel?.focus({ preventScroll:true });
+  panel?.scrollIntoView({ behavior:reducedMotion() ? 'instant' : 'smooth', block:'start' });
+}
+function selectComponent(id) {
+  if (!componentById(id)) return;
+  selectedComponentId = id;
+  selectedGraphId = null;
+  updateGraphSelection();
+  focusRoadmapPanel();
+}
 function selectGraph(id) {
   selectedGraphId = id;
-  const ele = cy?.getElementById(id);
-  if (ele?.length && ele.hasClass('f-hidden')) {
-    frontFilter = 'all'; onlyAvailable = false;
-    const sel = document.querySelector('#rm-front-filter'); if (sel) sel.value = 'all';
-    const chk = document.querySelector('#rm-available'); if (chk) chk.checked = false;
-    applyGraphFilters();
-  }
   updateGraphSelection();
+  focusRoadmapPanel();
 }
-function clearGraphSelection() { selectedGraphId = null; updateGraphSelection(); }
+function clearGraphSelection() {
+  const component = selectedComponentId;
+  selectedComponentId = null;
+  selectedGraphId = null;
+  updateGraphSelection();
+  document.querySelector(`[data-component="${component}"]`)?.focus({ preventScroll:true });
+}
 function setRoadmapMode(mode) {
   roadmapMode = mode;
-  document.querySelector('.spatial-roadmap')?.classList.toggle('mode-lista', mode === 'lista');
+  document.querySelector('.system-roadmap')?.classList.toggle('mode-lista', mode === 'lista');
   document.querySelectorAll('[data-rm-mode]').forEach(btn => btn.setAttribute('aria-pressed', String(btn.dataset.rmMode === mode)));
-  if (mode === 'mapa') { initCy(); requestAnimationFrame(() => cy?.resize()); }
   urlState();
 }
 function handleRmAction(action) {
-  if (action === 'focus-next') {
-    focusNext = !focusNext;
-    document.querySelector('[data-rm-action="focus-next"]')?.setAttribute('aria-pressed', String(focusNext));
-    applyFocus();
-    return;
-  }
-  if (action === 'clear') { clearGraphSelection(); return; }
-  if (!cy) return;
-  const rect = cy.container().getBoundingClientRect();
-  const center = { x: rect.width / 2, y: rect.height / 2 };
-  if (action === 'zoom-in') cy.zoom({ level: cy.zoom() * 1.3, renderedPosition: center });
-  if (action === 'zoom-out') cy.zoom({ level: cy.zoom() / 1.3, renderedPosition: center });
-  if (action === 'fit') cy.fit(cy.elements().not('.f-hidden'), 36);
-  if (action === 'reset') {
-    frontFilter = 'all'; onlyAvailable = false; focusNext = false;
-    selectedGraphId = null;
-    const sel = document.querySelector('#rm-front-filter'); if (sel) sel.value = 'all';
-    const chk = document.querySelector('#rm-available'); if (chk) chk.checked = false;
-    document.querySelector('[data-rm-action="focus-next"]')?.setAttribute('aria-pressed', 'false');
-    applyGraphFilters();
-    applyFocus();
-    cy.fit(cy.elements().not('.f-hidden'), 36);
-    updateGraphSelection();
-  }
+  if (action === 'clear') clearGraphSelection();
+  if (action === 'back-component') { selectedGraphId = null; updateGraphSelection(); focusRoadmapPanel(); }
+  if (action === 'reset') { componentFilter = 'all'; selectedComponentId = null; selectedGraphId = null; render(); }
 }
 function renderRoadmapList() {
   const container = document.querySelector('#rm-list');
@@ -412,26 +257,31 @@ function renderRoadmapList() {
 function renderRoadmapPanel() {
   const container = document.querySelector('#rm-panel-body');
   if (container) container.innerHTML = roadmapPanelHTML();
-  document.querySelector('.rm-panel')?.classList.toggle('has-sel', !!selectedGraphId);
 }
-function roadmapListHTML() {
-  const groups = graphFronts().filter(f => frontFilter === 'all' || f.id === frontFilter);
-  return groups.map(f => {
-    const nodes = (rm().graph?.nodes ?? []).filter(n => n.front === f.id)
-      .filter(n => !onlyAvailable || (n.state === 'open' && n.openBlockers.length === 0 && !(n.conditions?.length)));
-    return `<section class="rl-front rl-front-${f.id}">
-      <h3><span class="rl-dot" aria-hidden="true" style="background:${FRONT_COLORS[f.id] ?? '#5a6a62'}"></span>${escape(f.name)}<span class="rl-state">${escape(f.stateLabel ?? '')}</span></h3>
-      ${nodes.length ? `<ul class="rl-items">${nodes.map(n => {
-        const st = nodeStatus(n);
-        return `<li><button type="button" class="rl-node ${selectedGraphId === n.id ? 'is-selected' : ''}" data-graph-id="${n.id}" aria-pressed="${selectedGraphId === n.id}">
-          <span class="rl-num">${n.kind === 'paused' ? 'LAB' : `#${n.number}`}</span>
-          <span class="rl-title">${escape(n.title)}</span>
-          ${n.milestone ? `<span class="rl-ms">${escape(milestoneCode(n.milestone) ?? '')}</span>` : ''}
-          <span class="rl-pill ${st.cls}">${escape(st.label)}</span>
-        </button></li>`;
-      }).join('')}</ul>` : '<p class="rl-empty">Sin entregas con este filtro.</p>'}
-    </section>`;
-  }).join('');
+function componentDetailHTML(c) {
+  const st = componentStatus(c);
+  const nodes = componentNodes(c);
+  const open = nodes.filter(n => n.state === 'open');
+  const closed = nodes.filter(n => n.state === 'closed');
+  const artifacts = componentArtifacts(c);
+  const front = rm().parallelFronts.find(f => f.id === c.front);
+  const decisions = c.decisions.map(id => branch().decisions.find(d => d.id === id)).filter(Boolean);
+  const isArchComponent = Boolean(c.archComponent);
+  return panelHeader('Componente del sistema', escape(c.name), `<span class="progress-label progress-${st.key}">${st.symbol} ${st.label}</span>`)
+    + `<div class="drawer-body component-detail">
+      <div><section class="component-section"><h3>Qué existe hoy</h3><p>${escape(artifacts.length ? c.exists : 'No hay un artefacto identificado en las fuentes de esta rama.')}</p>
+      ${artifacts.length ? `<ul class="component-artifacts">${artifacts.map(path => `<li>${link(`${repo}/blob/${branch().sha}/${path}`, path)}</li>`).join('')}</ul>` : ''}</section>
+      <section class="component-section component-missing"><h3>Qué falta</h3><p>${escape(c.missing)}</p></section>
+      ${isArchComponent ? `<p class="component-arch-link">${ilink(`/arquitectura/?c=${encodeURIComponent(c.archComponent)}`, 'Ver este componente en arquitectura')}</p>` : ''}
+      ${decisions.length ? `<section class="component-section"><h3>Decisiones relacionadas · ${escape(branchName)}</h3><ul class="component-decisions">${decisions.map(d => `<li>${link(`${branch().documents['docs/gestion/MAPA-DECISIONES.md'].url}#${d.id.toLowerCase()}--${d.title.toLowerCase().replace(/[^\p{L}\p{N}_ -]/gu,'').replace(/ /g,'-')}`, `${d.id} · ${d.title}`)}<p>${escape(d.state)}</p></li>`).join('')}</ul></section>` : ''}
+      </div><div>
+      <section class="component-section"><h3>Issues abiertos relacionados <span>(${open.length})</span></h3>
+        ${open.length ? `<p class="drawer-issues-help">Elegí uno para ver objetivo, responsable, condiciones y dependencias.</p><div class="drawer-issues-list">${open.map(n => frontIssueButton(n.number)).join('')}</div>` : `<p>${c.issues.length ? 'No hay issues abiertos relacionados en este snapshot.' : 'Este componente todavía no tiene un issue específico asociado. El pendiente sigue visible para planificarlo.'}</p>`}
+      </section>
+      ${closed.length ? `<details class="component-history"><summary>Entregas cerradas relacionadas (${closed.length})</summary><div class="drawer-issues-list">${closed.map(n => frontIssueButton(n.number)).join('')}</div></details>` : ''}
+      ${front ? `<details class="component-history"><summary>Avances y evidencia del frente · ${escape(front.name)}</summary><p>${escape(front.whatExists)}</p>${link(front.evidence.url, front.evidence.label)}<p>${escape(front.evidence.detail)}</p><p class="rm-rel-note">Actualización editorial: ${escape(rm().updatedAt)}. La fuente enlazada puede pertenecer a otra rama.</p></details>` : ''}
+      </div>
+    </div>`;
 }
 function panelHeader(tag, title, pill) {
   return `<header class="drawer-header">
@@ -454,13 +304,14 @@ function depEdgeList(ids, emptyText, noteFor) {
   }).join('')}</ul>`;
 }
 /* Vínculos del roadmap hacia la vista de arquitectura (PR #58): la
- * correspondencia issue→componentes/decisiones es editorial y vive en
- * roadmap.json > archComponents. */
+ * correspondencia componente→issues vive en systemMap; archComponents
+ * conserva únicamente decisiones y secciones complementarias. */
 function archLinksHTML(num) {
-  const meta = (rm().archComponents || {})[num];
-  if (!meta || (!(meta.components || []).length && !(meta.decisions || []).length && !meta.section)) return '';
+  const meta = (rm().archComponents || {})[num] ?? {};
+  const components = systemComponents().filter(c => c.archComponent && c.issues.includes(num)).map(c => c.archComponent);
+  if (!components.length && !(meta.decisions || []).length && !meta.section) return '';
   const parts = [];
-  for (const c of meta.components || []) parts.push(ilink(`/arquitectura/?c=${encodeURIComponent(c)}`, `componente ${c}`));
+  for (const c of components) parts.push(ilink(`/arquitectura/?c=${encodeURIComponent(c)}`, `componente ${c}`));
   for (const d of meta.decisions || []) parts.push(ilink(`/arquitectura/?d=${encodeURIComponent(d)}`, `decisión ${d}`));
   if (meta.section) parts.push(ilink(`/arquitectura/#${encodeURIComponent(meta.section)}`, 'sección del visor'));
   return `<div class="drawer-reading-box"><span class="callout-label">En arquitectura</span><div class="rm-arch-links">${parts.join(' ')}</div></div>`;
@@ -579,33 +430,15 @@ function pausedDetailHTML() {
 }
 function roadmapPanelHTML() {
   const id = selectedGraphId;
-  if (!id) return `<div class="rm-panel-empty"><span class="callout-label">Detalle</span><h2>Elegí una entrega</h2><p>Tocá un nodo del mapa o de la lista para ver qué existe, la siguiente acción, sus bloqueos y su evidencia.</p><p>Los recuadros agrupan frentes; las flechas muestran dependencias reales de GitHub.</p></div>`;
+  if (!id && selectedComponentId) return componentDetailHTML(componentById(selectedComponentId));
+  if (!id) return `<div class="rm-panel-empty"><span class="callout-label">Del sistema al trabajo concreto</span><h2>Elegí un componente</h2><p>Vas a ver qué existe, qué falta y los issues abiertos para trabajar en ese tema.</p></div>`;
   if (id === 'laboratorio' || id === 'frente-laboratorio') return pausedDetailHTML();
   if (id.startsWith('frente-')) {
     const front = graphFronts().find(f => f.id === id.slice(7));
     return front ? frontDetailHTML(front) : '';
   }
   const n = graphNode(id);
-  return n ? issueNodeDetailHTML(n) : '';
-}
-function legendHTML() {
-  return `<div class="rm-legend-body">
-    <div class="rm-legend-group"><span class="callout-label">Frentes</span><ul>${graphFronts().map(f => `<li><span class="rl-dot" style="background:${FRONT_COLORS[f.id] ?? '#5a6a62'}"></span>${escape(f.name)}</li>`).join('')}</ul></div>
-    <div class="rm-legend-group"><span class="callout-label">Estado del nodo</span><ul>
-      <li><span class="lg-node lg-free"></span>Disponible</li>
-      <li><span class="lg-node lg-conditional"></span>Con condición documental</li>
-      <li><span class="lg-node lg-blocked"></span>Espera otra entrega</li>
-      <li><span class="lg-node lg-done"></span>Completado</li>
-      <li><span class="lg-node lg-paused"></span>Pausado (no bloquea)</li>
-      <li><span class="lg-node lg-unknown"></span>Sin verificar</li>
-      <li><span class="lg-node lg-next"></span>Próximo paso sugerido</li>
-    </ul></div>
-    <div class="rm-legend-group"><span class="callout-label">Flechas</span><ul>
-      <li><span class="lg-edge" style="background:#ad452b"></span>Bloqueo vigente</li>
-      <li><span class="lg-edge" style="background:#427345"></span>Dependencia ya resuelta</li>
-      <li><span class="lg-edge lg-dashed"></span>Condición de retomo / sin verificar</li>
-    </ul></div>
-  </div>`;
+  return n ? `${selectedComponentId ? '<button type="button" class="component-back" data-rm-action="back-component">← Volver al componente</button>' : ''}${issueNodeDetailHTML(n)}` : '';
 }
 function branchDiffHTML() {
   const diff = data.branchDiff;
@@ -617,53 +450,29 @@ function roadmapView() {
   const b = branch();
   const rmData = rm();
   const nextActions = rmData.currentLocation.nextActions ?? [];
-  const params = new URLSearchParams(location.search);
-  roadmapMode ??= (params.get('modo') === 'lista' || (typeof window !== 'undefined' && window.innerWidth <= 700)) ? 'lista' : 'mapa';
-  const nodoParam = params.get('nodo');
-  if (nodoParam && selectedGraphId === null && (graphNode(nodoParam) || graphFronts().some(f => `frente-${f.id}` === nodoParam))) selectedGraphId = nodoParam;
-  return heading('Mapa de entregas.', 'Grafo de issues y dependencias reales de GitHub: qué está hecho, qué espera a qué y por dónde seguir.', link(b.documents['docs/propuesta/PLAN-DE-TRABAJO.md'].url, 'Leer Plan de Trabajo', 'text-action'))
+  roadmapMode ??= params.get('modo') === 'lista' ? 'lista' : 'mapa';
+  if (!['all','open','available','untracked','pending'].includes(componentFilter)) componentFilter = 'all';
+  const components = systemComponents();
+  const partial = components.filter(c => componentStatus(c).key === 'partial').length;
+  const pending = components.filter(c => componentStatus(c).key === 'pending').length;
+  const done = components.filter(c => componentStatus(c).key === 'done').length;
+  const untracked = components.filter(c => !c.issues.length).length;
+  const openCount = new Set(components.flatMap(c => componentNodes(c).filter(n => n.state === 'open').map(n => n.number))).size;
+  return heading('El sistema, de punta a punta.', 'Recorré los componentes, ubicá lo que falta y elegí los issues para avanzar.', ilink('/arquitectura/', 'Ver arquitectura'))
     + branchNotice()
-    + `<div class="spatial-roadmap ${roadmapMode === 'lista' ? 'mode-lista' : 'mode-mapa'}">
-      <div class="roadmap-guide-bar">
-        <div class="roadmap-guide-prompt">
-          <strong>${escape(rmData.currentLocation.activeMilestone ?? 'Hito actual')}.</strong> Próximos pasos sugeridos:
-          ${nextActions.map(a => `<button type="button" class="rm-next-btn" data-graph-id="i${a.issue}" title="${escape(a.description)}"><span class="rm-next-num">#${a.issue}</span> ${escape(a.title)}</button>`).join('')}
-        </div>
-        <div class="roadmap-guide-actions">${link(repo + '/issues', 'Backlog en GitHub')}</div>
-      </div>
+    + `<div class="system-roadmap ${roadmapMode === 'lista' ? 'mode-lista' : ''}">
+      <div class="system-overview"><div><span class="callout-label">${escape(currentMilestone()?.title ?? 'Roadmap del proyecto')}</span><h2>¿En qué parte querés trabajar?</h2><p>Elegí un bloque del recorrido para ver sus avances y pendientes.</p></div><div class="system-totals"><span><strong>${partial}</strong> con avances</span><span><strong>${pending}</strong> pendientes</span>${done ? `<span><strong>${done}</strong> con entregas cerradas</span>` : ''}<span><strong>${openCount}</strong> issues abiertos</span></div></div>
       <div class="rm-toolbar">
-        <div class="rm-modes" role="group" aria-label="Cómo ver el roadmap">
-          <button type="button" data-rm-mode="mapa" aria-pressed="${roadmapMode !== 'lista'}">Mapa</button>
-          <button type="button" data-rm-mode="lista" aria-pressed="${roadmapMode === 'lista'}">Lista</button>
-        </div>
-        <label class="rm-filter"><span>Frente</span><select id="rm-front-filter" aria-label="Filtrar por frente">
-          <option value="all">Todos</option>
-          ${graphFronts().map(f => `<option value="${f.id}" ${frontFilter === f.id ? 'selected' : ''}>${escape(f.name)}</option>`).join('')}
-        </select></label>
-        <label class="rm-check"><input type="checkbox" id="rm-available" ${onlyAvailable ? 'checked' : ''}> Solo disponibles</label>
-        <button type="button" class="rm-focus-btn" data-rm-action="focus-next" aria-pressed="${focusNext}">Foco en próximos pasos</button>
-        <div class="rm-zoom" role="group" aria-label="Controles del mapa">
-          <button type="button" data-rm-action="zoom-out" aria-label="Alejar el mapa">−</button>
-          <button type="button" data-rm-action="zoom-in" aria-label="Acercar el mapa">+</button>
-          <button type="button" data-rm-action="fit">Encuadrar</button>
-          <button type="button" data-rm-action="reset" title="Restablecer vista, filtros y selección">Restablecer</button>
-        </div>
-        <details class="rm-legend"><summary>Leyenda</summary>${legendHTML()}</details>
+        <div class="rm-modes" role="group" aria-label="Cómo ver el roadmap"><button type="button" data-rm-mode="mapa" aria-pressed="${roadmapMode !== 'lista'}">Mapa del sistema</button><button type="button" data-rm-mode="lista" aria-pressed="${roadmapMode === 'lista'}">Lista</button></div>
+        <label class="rm-filter"><span>Mostrar</span><select id="rm-component-filter" aria-label="Filtrar componentes">${[['all','Todo el sistema'],['open','Con issues abiertos'],['available','Con issues sin bloqueos'],['pending','Con trabajo pendiente'],['untracked',`Sin issue específico (${untracked})`]].map(([value,label]) => `<option value="${value}" ${componentFilter === value ? 'selected' : ''}>${label}</option>`).join('')}</select></label>
+        <button type="button" class="rm-focus-btn" data-rm-action="reset">Restablecer</button>
+        <span class="system-flow-note">Las etapas indican el recorrido del sistema.</span>
       </div>
-      <div class="rm-meta">
-        <span>Snapshot: ${fullDate(data.generatedAt)} (Argentina)</span>
-        ${branchDiffHTML()}
-      </div>
-      <div class="roadmap-body">
-        <div class="cy-wrap">
-          <div id="cy-roadmap" class="cy-canvas" role="application" aria-label="Mapa interactivo de entregas y dependencias"></div>
-          <p class="cy-fallback" hidden>No pudimos cargar el grafo interactivo. Cambiá a la vista <strong>Lista</strong>, que tiene la misma información.</p>
-        </div>
-        <div class="roadmap-list" id="rm-list">${roadmapListHTML()}</div>
-        <aside class="rm-panel" aria-label="Detalle de la entrega seleccionada">
-          <div id="rm-panel-body" aria-live="polite">${roadmapPanelHTML()}</div>
-        </aside>
-      </div>
+      <div class="system-legend" aria-label="Cómo leer el avance"><span class="progress-label progress-done">✓ Entregas cerradas</span><span class="progress-label progress-partial">◐ Avance parcial</span><span class="progress-label progress-pending">○ Pendiente</span><p>El código experimental y los documentos son avances parciales. Un issue cerrado como no planificado no cuenta como completado.</p></div>
+      <div class="system-map-scroll" role="region" tabindex="0" aria-label="Recorrido de componentes; desplazamiento horizontal en pantallas angostas"><div class="system-map" id="rm-list">${roadmapListHTML()}</div></div>
+      <aside class="rm-panel system-detail" aria-label="Detalle del componente o issue seleccionado"><div id="rm-panel-body" tabindex="-1">${roadmapPanelHTML()}</div></aside>
+      <details class="system-context"><summary>Por dónde seguir · avances recientes y laboratorio en pausa</summary><p>${escape(rmData.currentLocation.summary)}</p><p class="rm-rel-note">Actualización editorial: ${escape(rmData.updatedAt)}; fuentes enlazadas en cada componente.</p><div class="roadmap-guide-bar"><div class="roadmap-guide-prompt">${nextActions.map(a => `<button type="button" class="rm-next-btn" data-graph-id="i${a.issue}" title="${escape(a.description)}"><span class="rm-next-num">#${a.issue}</span> ${escape(a.title)}</button>`).join('')}</div></div><button type="button" class="component-back" data-graph-id="laboratorio">Consultar encoder y cascada · laboratorio en pausa →</button></details>
+      <div class="rm-meta"><span>GitHub consultado: ${fullDate(data.generatedAt)} (Argentina)</span>${branchDiffHTML()}${link(repo + '/issues', 'Backlog en GitHub')}</div>
       <details class="roadmap-secondary-accordion">
         <summary>Consultar calendario académico y decisiones abiertas de la rama</summary>
         <div class="roadmap-secondary-body">
@@ -686,10 +495,6 @@ function roadmapView() {
       </details>
     </div>`;
 }
-function setupRoadmap() {
-  if (cy) { cy.destroy(); cy = null; }
-  if (roadmapMode !== 'lista') initCy();
-}
 function glossaryView() {
   const b = branch();
   return heading('Las palabras que más usamos.', 'Una selección breve para leer issues, corridas y resultados con el mismo significado.', link(b.documents['docs/GLOSARIO.md'].url, 'Abrir glosario completo', 'text-action')) + branchNotice()
@@ -711,10 +516,11 @@ function render() {
   const b = branch();
   document.querySelector('#source-footer').innerHTML = `<span>Datos consultados: ${fullDate(data.generatedAt)} (Argentina)</span><span>${link(`${repo}/commit/${b.sha}`, `${b.name} · ${b.sha.slice(0,7)}`)} · fuentes del ${date(b.committedAt)}</span>`;
   if (Date.now() - Date.parse(data.generatedAt) > 24 * 60 * 60 * 1000) document.querySelector('#source-footer').insertAdjacentHTML('afterbegin', '<strong class="stale-snapshot">Esta publicación tiene más de 24 horas. Verificá el estado actual en GitHub.</strong>');
-  if (view === 'roadmap') setupRoadmap();
   urlState();
 }
 document.addEventListener('click', event => {
+  const componentBtn = event.target.closest('[data-component]');
+  if (componentBtn && data) { selectComponent(componentBtn.dataset.component); return; }
   const rmMode = event.target.closest('[data-rm-mode]');
   if (rmMode && data) { setRoadmapMode(rmMode.dataset.rmMode); return; }
   const rmAction = event.target.closest('[data-rm-action]');
@@ -729,6 +535,7 @@ document.addEventListener('click', event => {
     search = '';
     selected = null;
     selectedGraphId = null;
+    selectedComponentId = null;
     render();
     main.focus({ preventScroll:true });
     main.scrollIntoView({ behavior:'instant', block:'start' });
@@ -773,16 +580,10 @@ document.addEventListener('click', event => {
   }
 });
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && selectedGraphId) {
+  if (event.key === 'Escape' && (selectedGraphId || selectedComponentId)) {
     event.preventDefault();
     clearGraphSelection();
   }
-});
-let resizeTimer = null;
-window.addEventListener('resize', () => {
-  if (view !== 'roadmap' || !cy) return;
-  clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => cy?.resize(), 120);
 });
 document.addEventListener('input', event => {
   if (event.target.id === 'issue-search') {
@@ -795,8 +596,7 @@ document.addEventListener('input', event => {
 });
 document.addEventListener('change', event => {
   if (event.target.id === 'milestone-filter') { milestoneFilter = event.target.value; selected = null; render(); document.querySelector('#milestone-filter')?.focus({ preventScroll:true }); }
-  if (event.target.id === 'rm-front-filter') { frontFilter = event.target.value; applyGraphFilters(); }
-  if (event.target.id === 'rm-available') { onlyAvailable = event.target.checked; applyGraphFilters(); }
+  if (event.target.id === 'rm-component-filter') { componentFilter = event.target.value; renderRoadmapList(); urlState(); }
 });
 async function load() {
   main.setAttribute('aria-busy', 'true');
@@ -805,6 +605,11 @@ async function load() {
     if (!response.ok) throw new Error('No se pudieron cargar los datos.');
     data = await response.json();
     if (data.version !== 1 || !data.branches?.some(item => item.name === branchName)) throw new Error('Formato de datos no disponible.');
+    const component = params.get('componente');
+    if (componentById(component)) selectedComponentId = component;
+    const node = params.get('nodo');
+    if (graphNode(node) || graphFronts().some(f => `frente-${f.id}` === node)) selectedGraphId = node;
+    componentFilter = params.get('filtro') || 'all';
     render();
   } catch {
     main.setAttribute('aria-busy', 'false');
