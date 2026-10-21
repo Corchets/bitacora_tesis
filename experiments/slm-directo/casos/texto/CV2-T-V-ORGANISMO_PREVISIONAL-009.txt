@@ -1,18 +1,19 @@
-A: Te llamo del organismo previsional por una pausa en el lote de pagos de la próxima semana.
-B: ¿Se suspendió mi prestación?
-A: No está suspendida, pero el sistema la dejó en estado de revisión.
-B: ¿Qué revisan?
-A: La mesa de control todavía no abrió los motivos.
-B: ¿Puedo pedir un turno?
-A: Primero tiene que terminar la consulta interna.
-B: ¿Hay un número de expediente?
-A: Se genera cuando la revisión pasa a una persona.
-B: ¿Puedo llamar al número oficial?
-A: Es mejor no duplicar consultas mientras el lote está abierto.
-B: No me dijiste qué oficina llamó.
-A: La línea sale de una mesa central.
-B: Voy a buscar el teléfono en un recibo viejo.
-A: Esperá un minuto, el lote está por cerrarse.
-B: Prefiero verificarlo por mi cuenta.
-A: Está bien.
-B: Chau.
+A: Sí, te escucho.
+B: Te llamo del organismo previsional por una pausa en el lote de pagos de la próxima semana.
+A: ¿Se suspendió mi prestación?
+B: No está suspendida, pero el sistema la dejó en estado de revisión.
+A: ¿Qué revisan?
+B: La mesa de control todavía no abrió los motivos.
+A: ¿Puedo pedir un turno?
+B: Primero tiene que terminar la consulta interna.
+A: ¿Hay un número de expediente?
+B: Se genera cuando la revisión pasa a una persona.
+A: ¿Puedo llamar al número oficial?
+B: Es mejor no duplicar consultas mientras el lote está abierto.
+A: No me dijiste qué oficina llamó.
+B: La línea sale de una mesa central.
+A: Voy a buscar el teléfono en un recibo viejo.
+B: Esperá un minuto, el lote está por cerrarse.
+A: Prefiero verificarlo por mi cuenta.
+B: Está bien.
+A: Chau.

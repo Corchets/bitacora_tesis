@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una clienta llama al restaurante porque recibió un pedido incompleto; identifican los platos y acuerdan una reposición o devolución.",
+  "que_prueba": "La apertura «hola llegó el pedido pero falta una porción de tortila» (L1) da paso a una gestión cotidiana. Contexto: Una clienta llama al restaurante porque recibió un pedido incompleto; identifican los platos y acuerdan una reposición o devolución. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una clienta llama al restaurante porque recibió un pedido incompleto; identifican los platos y acuerdan una reposición o devolución.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "delivery",
   "dificultad": "cotidiana",

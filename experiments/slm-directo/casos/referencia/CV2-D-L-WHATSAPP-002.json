@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona llama para pedir que retiren su número de un grupo vecinal creado por error; se confirma el nombre visible y se explica el trámite.",
+  "que_prueba": "La conversación arranca con «Buenas, necesito resolver algo del grupo de la feria. Me agregaron con el número viejo.» (L1). Contexto: Una persona llama para pedir que retiren su número de un grupo vecinal creado por error; se confirma el nombre visible y se explica el trámite. La dificultad es considerar para qué se confirma la información antes de alertar solo por la presencia de datos personales.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona llama para pedir que retiren su número de un grupo vecinal creado por error; se confirma el nombre visible y se explica el trámite.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "whatsapp",
   "dificultad": "pedido_razonable",

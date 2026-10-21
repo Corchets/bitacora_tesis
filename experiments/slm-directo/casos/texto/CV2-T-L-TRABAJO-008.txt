@@ -2,7 +2,6 @@ A: la tabla de atención que imprimimos tiene mal la fecha del viernes
 B: qué fecha aparece
 A: pone 21 de noviembre pero el viernes es 20
 B: el archivo fuente también está mal o solo la impresión
-B: el archivo fuente también está mal o solo la impresión
 A: el archivo fuente está bien creo que abrí una versión anterior
 B: cuál es el nombre del documento que mandaste a imprimir
 A: horarios noviembre final dos

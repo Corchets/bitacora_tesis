@@ -1,20 +1,21 @@
-A: Buenas, te llamo del sector de órdenes programadas del banco.
-B: ¿Por qué?
-A: Hay un pago de alquiler que quedó duplicado y estamos revisando la segunda orden.
-B: Yo hice una sola transferencia.
-A: La segunda está en cola para mañana, todavía se puede cancelar.
-B: ¿La puedo ver en el historial?
-A: No hasta que se confirme el beneficiario.
-B: ¿Qué necesitás para cancelarla?
-A: Te voy a pedir el token que llega al teléfono para vincular la consulta.
-B: Me llegó una clave temporal.
-A: Dictámela y cierro la orden duplicada.
-B: Dice que no la comparta.
-A: Esa leyenda se muestra en cualquier transacción de seguridad.
-B: ¿El alquiler era a nombre de quién?
-A: No puedo divulgar datos del destinatario antes de confirmar la titularidad.
-B: Entonces menos te doy el token.
-A: Si no se cancela antes de medianoche, sale el segundo pago.
-B: ¿Puedo llamar desde el número del resumen?
-A: La línea está saturada en este horario.
-B: Corto y uso el canal de la aplicación.
+A: Sí, te escucho.
+B: Buenas, te llamo del sector de órdenes programadas del banco.
+A: ¿Por qué?
+B: Hay un pago de alquiler que quedó duplicado y estamos revisando la segunda orden.
+A: Yo hice una sola transferencia.
+B: La segunda está en cola para mañana, todavía se puede cancelar.
+A: ¿La puedo ver en el historial?
+B: No hasta que se confirme el beneficiario.
+A: ¿Qué necesitás para cancelarla?
+B: Te voy a pedir el token que llega al teléfono para vincular la consulta.
+A: Me llegó una clave temporal.
+B: Dictámela y cierro la orden duplicada.
+A: Dice que no la comparta.
+B: Esa leyenda se muestra en cualquier transacción de seguridad.
+A: ¿El alquiler era a nombre de quién?
+B: No puedo divulgar datos del destinatario antes de confirmar la titularidad.
+A: Entonces menos te doy el token.
+B: Si no se cancela antes de medianoche, sale el segundo pago.
+A: ¿Puedo llamar desde el número del resumen?
+B: La línea está saturada en este horario.
+A: Corto y uso el canal de la aplicación.

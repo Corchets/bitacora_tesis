@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona llama a una farmacia para saber si llegó un medicamento que encargó para su padre; confirma presentación y coordina retiro.",
+  "que_prueba": "La apertura «Hola, ayer encargué la crema que usa mi papá y quería saber si llegó.» (L1) da paso a una gestión cotidiana. Contexto: Una persona llama a una farmacia para saber si llegó un medicamento que encargó para su padre; confirma presentación y coordina retiro. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona llama a una farmacia para saber si llegó un medicamento que encargó para su padre; confirma presentación y coordina retiro.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "medico",
   "dificultad": "cotidiana",

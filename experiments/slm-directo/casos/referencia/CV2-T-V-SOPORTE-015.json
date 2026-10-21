@@ -4,39 +4,39 @@
   "semilla": "SC-CV2-T-SOPORTE-015",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
-  "t_c_linea": 12,
+  "t_r_linea": 14,
+  "t_c_linea": 15,
   "pedido": "REQUEST_REMOTE_ACCESS",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 9,
+      "linea": 14,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_REMOTE_ACCESS"
       ]
     },
     {
-      "linea": 12,
+      "linea": 15,
       "evento": "cumplimiento",
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un historial de cámaras perdido se usa para pedir compartir pantalla y habilitar micrófono desde una asistencia. Prueba una solicitud indirecta de acceso remoto con permiso adicional innecesario; no hay cumplimiento.",
+  "que_prueba": "El control remoto inicialmente ofrecido para recuperar un video deriva en acceso a usuarios y un administrador desconocido. La persona acepta el control y luego lo revoca: prueba no borrar el cumplimiento previo por una negativa posterior ni tomar cualquier soporte remoto como fraude.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 9, instrucción de aceptar permisos de pantalla. T_C línea 12, la persona confirma que los habilitó y que se abrió la sesión remota.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia D07/D08 abierta. T_R línea 14 pide aceptar ambos permisos, T_C línea 15 confirma la apertura. La cuenta administradora aparece después como indicio de desvío del propósito declarado, sin afirmar qué hizo realmente el llamante. El cierre en línea 21 no revierte el acceso previo. Sin revisión humana. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-SOPORTE-REMOTO-01",
-  "situacion": "Un historial de cámaras perdido se usa para pedir compartir pantalla y habilitar micrófono desde una asistencia. Prueba una solicitud indirecta de acceso remoto con permiso adicional innecesario; no hay cumplimiento."
+  "situacion": "Una supuesta recuperación de video obtiene control del equipo y deriva en exportar usuarios y agregar una cuenta administradora desconocida; la persona corta la sesión después de haberla autorizado."
 }

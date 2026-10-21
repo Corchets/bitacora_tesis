@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un paciente llama al laboratorio para confirmar si debe retirar en persona un resultado que ya figura disponible; compara el número de orden y el horario.",
+  "que_prueba": "La apertura «hola me hice un análisis de sangre el lunes y el portal dice que está listo» (L1) da paso a una gestión cotidiana. Contexto: Un paciente llama al laboratorio para confirmar si debe retirar en persona un resultado que ya figura disponible; compara el número de orden y el horario. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un paciente llama al laboratorio para confirmar si debe retirar en persona un resultado que ya figura disponible; compara el número de orden y el horario.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "medico",
   "dificultad": "cotidiana",

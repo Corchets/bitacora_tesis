@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una hermana llama para reorganizar la visita del domingo por un cambio de horario; acuerdan quién lleva comida, a quién recoger y dónde almuerzan.",
+  "que_prueba": "La apertura «¿Seguimos yendo a lo de la tía el domingo o cambió el plan?» (L1) da paso a una gestión cotidiana. Contexto: Una hermana llama para reorganizar la visita del domingo por un cambio de horario; acuerdan quién lleva comida, a quién recoger y dónde almuerzan. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una hermana llama para reorganizar la visita del domingo por un cambio de horario; acuerdan quién lleva comida, a quién recoger y dónde almuerzan.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "cotidiana",

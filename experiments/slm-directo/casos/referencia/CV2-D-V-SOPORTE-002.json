@@ -31,12 +31,12 @@
   "que_prueba": "Un error de calendario deriva en instalar una herramienta y compartir un código de control remoto. La persona expresa una advertencia, pero termina compartiendo el código y el llamante confirma la conexión. Prueba solicitud y cumplimiento de acceso remoto.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, instrucción de instalar y compartir acceso. T_C línea 20, entrega del código de acceso remoto; no se toma la mera descarga de la herramienta como cumplimiento completo.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, instrucción de instalar y compartir acceso. T_C línea 20, entrega del código de acceso remoto; no se toma la mera descarga de la herramienta como cumplimiento completo. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "soporte",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-SOPORTE-REMOTO-01",
-  "situacion": "Un fallo de calendario deriva en instalar una herramienta y compartir el código de control remoto. Prueba un pedido directo de acceso a distancia con una advertencia visible que la persona consulta; no hay instalación ni cumplimiento."
+  "situacion": "Una asistencia de calendario termina pidiendo acceso remoto; la persona comparte el código y el llamante confirma la conexión."
 }

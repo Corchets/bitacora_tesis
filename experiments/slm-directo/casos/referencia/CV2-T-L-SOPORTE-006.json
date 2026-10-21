@@ -24,10 +24,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un empleado menciona que una contraseña temporal quedó en un papel después de actualizar una impresora compartida; consulta cómo cambiar el nombre del dispositivo.",
+  "que_prueba": "En L7 aparece «¿Necesitás que te pase la contraseña temporal que dejó el técnico?» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un empleado menciona que una contraseña temporal quedó en un papel después de actualizar una impresora compartida; consulta cómo cambiar el nombre del dispositivo.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "mencion_sin_pedido",

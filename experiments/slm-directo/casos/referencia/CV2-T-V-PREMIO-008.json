@@ -4,8 +4,8 @@
   "semilla": "SC-CV2-T-PREMIO-008",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
-  "t_c_linea": 14,
+  "t_r_linea": 13,
+  "t_c_linea": null,
   "pedido": "REQUEST_PERSONAL_DATA",
   "evidencia": [
     {
@@ -16,27 +16,27 @@
       ]
     },
     {
-      "linea": 9,
+      "linea": 13,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_PERSONAL_DATA"
       ]
     },
     {
-      "linea": 14,
-      "evento": "cumplimiento",
+      "linea": 18,
+      "evento": "rechazo",
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un premio de una encuesta deriva en completar calle y altura en un formulario logístico. La persona facilita una dirección concreta luego de una solicitud indirecta de ubicación para reparto.",
+  "que_prueba": "Un obsequio no reconocido se vincula a un correo ajeno y deriva a un enlace enviado desde un número desconocido; quien llama presiona con una lista que cierra ese día. B no abre el enlace ni comparte domicilio. Prueba pedido indirecto de dirección con canal no verificado y rechazo.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 9, donde comienza el pedido indirecto; también podría ubicarse en línea 10, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta provisional D07: línea 7 inicia la confirmación de zona; T_R línea 9, instrucción de completar calle y altura. T_C línea 14, entrega de domicilio. Calle, altura y personas son inventadas.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. Propuesta de T_R línea 13, instrucción de cargar calle y altura en un formulario; línea 9 introduce la urgencia y línea 13 es la primera solicitud concreta. T_C null: B rechaza abrir el enlace y compartir el domicilio en línea 18. Campaña, número y correo son ficticios.",
   "particion": "test_reservado",
   "familia": "premio",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-PREMIO-01",
-  "situacion": "Un premio de una encuesta deriva en completar calle y altura en un formulario logístico. La persona facilita una dirección de marcador ficticio. Prueba un dato personal solicitado de forma indirecta como requisito de reparto."
+  "situacion": "Una llamada ofrece un obsequio que la persona no recuerda y señala un correo ajeno; el domicilio debe cargarse en un enlace de un número desconocido antes de un cierre ese día. B rechaza abrirlo y no comparte la dirección."
 }

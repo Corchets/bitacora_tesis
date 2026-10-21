@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una empleada informa que dejó una carpeta de facturas en otra sede y acuerda con un compañero cómo recogerla antes del cierre.",
+  "que_prueba": "La apertura «hola dejé la carpeta de facturas en la sede de la avenida» (L1) da paso a una gestión cotidiana. Contexto: Una empleada informa que dejó una carpeta de facturas en otra sede y acuerda con un compañero cómo recogerla antes del cierre. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una empleada informa que dejó una carpeta de facturas en otra sede y acuerda con un compañero cómo recogerla antes del cierre.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "trabajo",
   "dificultad": "cotidiana",

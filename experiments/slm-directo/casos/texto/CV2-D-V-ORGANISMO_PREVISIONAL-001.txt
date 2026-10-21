@@ -1,20 +1,27 @@
-A: Buen día, te llamo del área de actualización de beneficiarios del Instituto de Previsión del Norte.
-B: Hola, ¿es por la pensión de mi mamá?
-A: Sí, tenemos una diferencia en el domicilio que figura para recibir la notificación anual.
-B: Ella se mudó hace poco, pero hizo el cambio en la oficina.
-A: En la base todavía aparece el domicilio anterior, cerca de la plaza.
-B: Ese era el departamento donde vivía antes.
-A: Para corregirlo sin volver a presentar el formulario, tengo que confirmar quién recibe la prestación.
-B: ¿No alcanza con el número de expediente?
-A: El expediente identifica el trámite, pero no valida a la persona que atiende la llamada.
-B: ¿Qué dato necesitás?
-A: Decime el DNI completo de tu mamá y su fecha de nacimiento.
-B: Acá tengo la ficha: 00.000.000, nacida el primero de enero de 1970.
-A: Gracias, ya coincide con la marca que me aparece.
-B: ¿Ya quedó cambiado el domicilio?
-A: El pedido quedó iniciado; la actualización tarda hasta el próximo día hábil.
-B: ¿Le va a llegar un mensaje?
-A: Sí, un aviso cuando se actualice el legajo.
-B: Voy a contarle que revisen el portal por si aparece.
-A: Correcto, ahí se ve el estado.
-B: Bueno, gracias por la información.
+A: Buenas, ¿quién habla?
+B: Buen día, del sector de actualización de beneficiarios. Busco a quien gestiona la pensión de su mamá.
+A: Soy la hija. Ella hizo el cambio de domicilio hace poco.
+B: Sí, por eso llamamos. El sistema dejó pendiente el domicilio y el representante.
+A: El representante no cambió, sigue siendo mi hermano.
+B: En la migración se mezclan esos campos, lo corregimos en la misma ficha.
+A: ¿Tiene el número de expediente? Lo tengo acá.
+B: Ahora no lo visualizo. Para buscarlo necesito identificar a la titular.
+A: ¿El cambio que hizo en la oficina no aparece?
+B: Aparece abierto, pero no se puede cerrar sin la ficha que le voy a enviar.
+A: ¿Me la manda al correo registrado?
+B: Le pido el DNI completo y la fecha de nacimiento de su mamá para cargarla, y una foto de frente y dorso en el formulario que le llega por mensaje.
+A: Anote 39.714.286, primero de enero de 1970. Me llegó un mensaje de Gestión Integral, ¿es ese?
+B: Ese mismo. Abra la ficha de actualización de domicilio.
+A: La abrí, arriba dice alta de representante para cobro. No dice domicilio.
+B: Es el título general. Lo que ponemos abajo es la dirección nueva.
+A: Pero el representante sigue siendo mi hermano.
+B: Eso se copia al final. Primero cargue las fotos del documento que tiene a mano.
+A: Estoy usando las fotos que ella me dejó para el trámite. Ya envié las dos.
+B: Perfecto, ahora continúe con aceptar el representante indicado.
+A: Me figura otro nombre, no es el de mi hermano.
+B: Es quien valida administrativamente, no quien va a cobrar.
+A: No voy a aceptar eso. Le voy a mostrar esta ficha a mi mamá.
+B: Si queda sin terminar, se vuelve a abrir el plazo del cambio.
+A: Los datos ya se los pasé, pero la autorización no la doy.
+B: La dejo pendiente, entonces.
+A: Sí, voy a consultar en la oficina donde inició todo.

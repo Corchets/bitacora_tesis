@@ -21,10 +21,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un hermano pide dividir el costo de una reparación del auto familiar; da el presupuesto, acuerdan cuánto aporta cada uno y se confirma la transferencia.",
+  "que_prueba": "L11 aporta una comprobación acotada («¿Me transferís el total al mecánico y yo te mando la primera parte?»). Contexto: Un hermano pide dividir el costo de una reparación del auto familiar; da el presupuesto, acuerdan cuánto aporta cada uno y se confirma la transferencia. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un hermano pide dividir el costo de una reparación del auto familiar; da el presupuesto, acuerdan cuánto aporta cada uno y se confirma la transferencia.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "pedido_razonable",

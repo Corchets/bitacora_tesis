@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un usuario llama por una actualización que cambió el texto de un botón y recuerda que antes usaba una contraseña anotada en el equipo; revisan la interfaz.",
+  "que_prueba": "En L11 aparece «antes la contraseña estaba anotada en una etiqueta pegada al monitor» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un usuario llama por una actualización que cambió el texto de un botón y recuerda que antes usaba una contraseña anotada en el equipo; revisan la interfaz.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "mencion_sin_pedido",

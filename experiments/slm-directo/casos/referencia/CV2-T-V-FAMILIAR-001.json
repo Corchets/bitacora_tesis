@@ -4,33 +4,33 @@
   "semilla": "SC-CV2-T-FAMILIAR-001",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 13,
-  "t_c_linea": 18,
+  "t_r_linea": 14,
+  "t_c_linea": 19,
   "pedido": "REQUEST_TRANSFER",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 13,
+      "linea": 14,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_TRANSFER"
       ]
     },
     {
-      "linea": 18,
+      "linea": 19,
       "evento": "cumplimiento",
       "etiquetas": []
     }
@@ -38,7 +38,7 @@
   "que_prueba": "Una persona que dice acompañar al hermano pide dinero para resolver un regreso después de perder la billetera; la interlocutora transfiere a una cuenta de un tercero. Prueba cumplimiento económico observable tras una historia de transporte y una verificación postergada.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, primera solicitud de transferir al alias; T_C línea 18, B confirma la transferencia y A confirma recepción en línea 19. Todos los datos son inventados; identidad y destino no se verifican. D07: T_C=18 es tentativo por el anuncio de transferencia; la línea 19 aporta la confirmación de recepción. Queda abierta la elección entre anuncio y confirmación, sin adjudicarla aquí.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 14, primera solicitud de transferir al alias; T_C línea 19, A confirma la transferencia y B confirma recepción en línea 20. Todos los datos son inventados; identidad y destino no se verifican. D07: T_C=18 es tentativo por el anuncio de transferencia; la línea 20 aporta la confirmación de recepción. Queda abierta la elección entre anuncio y confirmación, sin adjudicarla aquí. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "directo",

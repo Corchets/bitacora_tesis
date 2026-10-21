@@ -23,10 +23,10 @@
       ]
     }
   ],
-  "que_prueba": "Una madre pide a la entrenadora que la agregue al grupo informativo de hockey y confirma nombre y equipo de su hija.",
+  "que_prueba": "L6 aporta una comprobación acotada («Decime tu nombre como aparece en la lista de contactos de la escuela.»). Contexto: Una madre pide a la entrenadora que la agregue al grupo informativo de hockey y confirma nombre y equipo de su hija. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una madre pide a la entrenadora que la agregue al grupo informativo de hockey y confirma nombre y equipo de su hija.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "whatsapp",
   "dificultad": "pedido_razonable",

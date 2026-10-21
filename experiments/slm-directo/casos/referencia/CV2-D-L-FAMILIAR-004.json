@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La hija avisa que no podrá pasar a cocinar y coordina con su padre una compra y el reparto de tareas para la semana.",
+  "que_prueba": "La apertura «Pa, te aviso que hoy no llego a cocinarte. Se alargó la reunión en el instituto.» (L1) da paso a una gestión cotidiana. Contexto: La hija avisa que no podrá pasar a cocinar y coordina con su padre una compra y el reparto de tareas para la semana. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la hija avisa que no podrá pasar a cocinar y coordina con su padre una compra y el reparto de tareas para la semana.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "familiar",
   "dificultad": "cotidiana",

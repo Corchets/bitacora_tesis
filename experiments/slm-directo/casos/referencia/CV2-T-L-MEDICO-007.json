@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una paciente llama a la clínica para consultar si el informe de una radiografía puede enviarse a su médica antes del control; confirma sede, fecha y destinataria.",
+  "que_prueba": "La apertura «hola me hicieron una radiografía el jueves» (L1) da paso a una gestión cotidiana. Contexto: Una paciente llama a la clínica para consultar si el informe de una radiografía puede enviarse a su médica antes del control; confirma sede, fecha y destinataria. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una paciente llama a la clínica para consultar si el informe de una radiografía puede enviarse a su médica antes del control; confirma sede, fecha y destinataria.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "medico",
   "dificultad": "cotidiana",

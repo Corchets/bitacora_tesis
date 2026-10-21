@@ -14,15 +14,15 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un paciente llama para corregir un teléfono de contacto del turno y pedir indicaciones para llegar; se actualiza un dato y se aclara qué no hace falta.",
-  "origen": "Redacción ficticia asistida, 2026-10-21; diseño un paciente llama para corregir un teléfono de contacto del turno y pedir indicaciones para llegar; se actualiza un dato y se aclara qué no hace falta.; sin revisión humana.",
+  "que_prueba": "La apertura «Buenas, tengo turno de odontología mañana y el teléfono de la ficha quedó viejo.» (L1) da paso a una gestión cotidiana. Contexto: Un paciente llama para actualizar el teléfono de contacto del turno; confirma la terminación 0026 que cargó en el formulario y pide indicaciones para llegar. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño confirmación de contacto ya cargado para un turno odontológico y orientación de llegada; sin revisión humana. Actualización narrativa r02.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "medico",
   "dificultad": "cotidiana",
   "tipo_legitima": "cotidiana",
   "variante_asr": false,
   "escenario_base": null,
-  "situacion": "Un paciente llama para corregir un teléfono de contacto del turno y pedir indicaciones para llegar; se actualiza un dato y se aclara qué no hace falta."
+  "situacion": "Un paciente llama para actualizar el teléfono de contacto del turno; confirma la terminación 0026 que cargó en el formulario y pide indicaciones para llegar."
 }

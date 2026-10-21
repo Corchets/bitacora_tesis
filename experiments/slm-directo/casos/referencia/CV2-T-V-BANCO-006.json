@@ -4,8 +4,8 @@
   "semilla": "SC-CV2-T-BANCO-006",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 13,
-  "t_c_linea": 20,
+  "t_r_linea": 11,
+  "t_c_linea": 22,
   "pedido": "REQUEST_TRANSFER",
   "evidencia": [
     {
@@ -16,27 +16,27 @@
       ]
     },
     {
-      "linea": 13,
+      "linea": 11,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_TRANSFER"
       ]
     },
     {
-      "linea": 20,
+      "linea": 22,
       "evento": "cumplimiento",
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un depósito de efectivo en autoservicio se usa para pedir una entrega de dinero en casa como “cotejo físico”. Prueba solicitud directa de transferencia en efectivo bajo una explicación de conciliación y sin cumplimiento.",
+  "que_prueba": "Un supuesto cierre de depósito deriva en entregar efectivo a un mensajero sin recibo y sin posibilidad de verificarlo en la sucursal; B finalmente confirma la entrega. Prueba presión temporal, cambio a cobro presencial y cumplimiento observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-BILLETES-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, primer pedido de preparar y entregar efectivo. T_C línea 20, la persona confirma entrega al supuesto técnico; importe ficticio.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. T_R línea 11: primera instrucción concreta de preparar el efectivo. T_C línea 22: B afirma haber entregado el sobre. El diálogo no acredita la identidad del mensajero ni la recepción efectiva por el banco; queda como cumplimiento declarado por B.",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-BANK-BILLETES-01",
-  "situacion": "Un depósito de efectivo en autoservicio se usa para pedir una entrega de dinero en casa como “cotejo físico”. Prueba solicitud directa de transferencia en efectivo bajo una explicación de conciliación y sin cumplimiento."
+  "situacion": "Tras un depósito en autoservicio, quien llama atribuye una diferencia al contenido del sobre y pide efectivo en domicilio; rechaza emitir recibo y desalienta consultar la sucursal. B termina entregando el importe a un mensajero no identificado."
 }

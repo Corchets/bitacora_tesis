@@ -1,22 +1,23 @@
-A: Hola te llamo de la organización del Festival del Patio por una consulta sobre el sorteo de entradas
-B: Qué consulta
-A: Tu número quedó asociado a una selección preliminar pa el pase doble
-B: Yo participé
-A: Sí en la encuesta que se hizo durante la transmisión
-B: No me acuerdo de haber completado nada
-A: La lista final se publica esta tarde antes hay que dejar cerradas las reservas
-B: Cómo sé si soy una de las personas elegidas
-A: No podemos informar nombres hasta que cierre el registro
-B: Quién organiza el sorteo
-A: El equipo de producción del festival
-B: Hay un sitio con las condiciones
-A: Está por actualizarse no te conviene entrar todavía porque muestra la lista anterior
-B: Y si espero a la publicación
-A: El pase puede liberarse si no contestamos a tiempo
-B: Cuánto tiempo tengo
-A: Hasta las cinco después se cierra la asignación
-B: No voy a seguir instrucciones sin ver las condiciones
-A: Dame un minuto que busco el enlace actualizado
-B: Voy a consultar las redes oficiales del festival
-A: Esperá todavía no cortes
-B: No prefiero revisar por mi cuenta
+A: hola buen día
+B: Hola te llamo de la organización del Festival del Patio por una consulta sobre el sorteo de entradas
+A: Qué consulta
+B: Tu número quedó asociado a una selección preliminar pa el pase doble
+A: Yo participé
+B: Sí en la encuesta que se hizo durante la transmisión
+A: No me acuerdo de haber completado nada
+B: La lista final se publica esta tarde antes hay que dejar cerradas las reservas
+A: Cómo sé si soy una de las personas elegidas
+B: No podemos informar nombres hasta que cierre el registro
+A: Quién organiza el sorteo
+B: El equipo de producción del festival
+A: Hay un sitio con las condiciones
+B: Está por actualizarse no te conviene entrar todavía porque muestra la lista anterior
+A: Y si espero a la publicación
+B: El pase puede liberarse si no contestamos a tiempo
+A: Cuánto tiempo tengo
+B: Hasta las cinco después se cierra la asignación
+A: No voy a seguir instrucciones sin ver las condiciones
+B: Dame un minuto que busco el enlace actualizado
+A: Voy a consultar las redes oficiales del festival
+B: Esperá todavía no cortes
+A: No prefiero revisar por mi cuenta

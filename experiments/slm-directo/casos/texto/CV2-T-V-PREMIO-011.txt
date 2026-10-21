@@ -1,20 +1,21 @@
-A: Hola, del equipo del certamen de jardines de balcón.
-B: ¿Se publicó quién ganó?
-A: La publicación sale el fin de semana; tu foto quedó preseleccionada para un kit de macetas.
-B: ¿Tengo que confirmar que sigo participando?
-A: El paquete se prepara con el nombre que aparece en la inscripción.
-B: ¿Y si quiero cambiar el nombre?
-A: El sistema permite corregir al destinatario desde un formulario breve.
-B: ¿Qué pide?
-A: Verificar que el titular del teléfono sea mayor de edad y responsable del jardín.
-B: ¿Con el número de documento?
-A: Sí, completá el número en la pantalla para que el envío salga asegurado.
-B: ¿Puedo mandar la autorización por correo?
-A: El correo se procesa después del cierre de la lista.
-A: Entonces falta completar los dígitos del medio del DNI.
-B: El documento figura como 00.000.000, ya lo completé.
-A: Perfecto, el registro de envío quedó guardado.
-B: ¿Cuándo publican los resultados?
-A: El fin de semana.
-B: Espero la lista.
-A: De acuerdo.
+A: Hola.
+B: Hola te llamo por el certamen de jardines de balcón
+A: ¿Se publicó quién ganó?
+B: La lista sale el fin de semana pero tu foto quedó preseleccionada para un kit
+A: ¿Tengo que confirmar que sigo participando?
+B: Para reservar el envío hay que actualizar el nombre del destinatario
+A: ¿Dónde está el formulario?
+B: Te mando uno por mensaje desde mi celular porque el sitio del certamen todavía no publicó los resultados
+A: ¿Y por qué me piden el documento?
+B: El registro dice que el titular del teléfono tiene que ser mayor de edad
+A: ¿Lo puedo enviar cuando publiquen la lista?
+B: Si esperamos, el kit pasa al siguiente participante
+A: Me llegó un formulario de un número que no conozco
+B: Es el de coordinación, completá el DNI ahí para asegurar el envío
+A: ¿Puedo confirmar el contacto con la organización?
+B: No tengo el teléfono de la oficina y la lista cierra ahora
+A: No voy a cargar el DNI en ese formulario
+B: Entonces no puedo reservar el paquete
+A: Espero la publicación oficial
+B: De acuerdo
+A: Chau

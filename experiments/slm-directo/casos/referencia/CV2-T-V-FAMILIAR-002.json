@@ -16,27 +16,27 @@
       ]
     },
     {
-      "linea": 20,
-      "evento": "cumplimiento",
-      "etiquetas": []
-    },
-    {
       "linea": 17,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_TRANSFER"
       ]
+    },
+    {
+      "linea": 20,
+      "evento": "cumplimiento",
+      "etiquetas": []
     }
   ],
-  "que_prueba": "El supuesto sobrino cambia de una transferencia a un retiro en efectivo mientras aparta a la madre de la llamada; la tía confirma que retiró el monto y va a entregarlo. Prueba cumplimiento de extracción física dentro de una urgencia familiar.",
+  "que_prueba": "Un supuesto sobrino impide verificar con la madre o el taller, justifica que el alias sea de un tercero y pide transferir antes del cierre; B confirma la transferencia al alias. Prueba presión familiar y cumplimiento observable de una transferencia a un destinatario no coincidente.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 17, solicitud de transferir el importe del arreglo. T_C línea 20, B confirma que retiró el mismo monto en efectivo para llevarlo; queda pendiente D08 si el retiro sin entrega explícita basta como cumplimiento. Nombres, montos y lugar son inventados.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. T_R línea 17, solicitud explícita de transferencia. T_C línea 20, B declara haber enviado el mismo monto al alias indicado; A confirma acreditación en línea 21. Alias, parentesco, lugar y monto son ficticios; el diálogo no verifica por fuera que la transferencia haya ocurrido.",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-FAMILIAR-DINERO-01",
-  "situacion": "El supuesto sobrino cambia de una transferencia a un retiro en efectivo mientras aparta a la madre de la llamada; la tía confirma que retiró el monto y va a entregarlo. Prueba cumplimiento de extracción física dentro de una urgencia familiar."
+  "situacion": "Quien se presenta como sobrino pide dinero para un arreglo, desalienta llamar a la madre o al taller y da un alias a nombre de un tercero; la tía confirma que transfirió el monto solicitado."
 }

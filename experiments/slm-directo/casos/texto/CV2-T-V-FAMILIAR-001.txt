@@ -1,22 +1,23 @@
-A: Hola, soy el hermano de Leo. ¿Está en la casa?
-B: No, salió a comprar. ¿Qué pasó?
-A: Estoy con él en la estación de servicio, se le quedó la billetera en el colectivo.
-B: ¿Se quedó sin documento también?
-A: Sí, el colectivero ya siguió viaje y tenemos que volver a la ciudad.
-B: ¿No puede pedir que le guarden la billetera?
-A: Llamó a la terminal y le dijeron que recién revisan al final del recorrido.
-B: ¿Y vos por qué llamás desde otro número?
-A: El celular de Leo se apagó y el mío quedó sin saldo.
-B: ¿Cuánto necesitan?
-A: Entre el viaje y un remis hasta la parada son treinta y dos mil.
-B: ¿No tienen para pagar con tarjeta?
-A: El chofer del remis cobra en efectivo, el micro sí toma transferencia. Si podés, mandame el importe y lo saco acá.
-B: ¿A qué alias te lo mando?
-A: mate.ruta.siete, a nombre de Bruno.
-B: ¿Leo ya pudo cargar el celular?
-A: Sigue buscando un cargador en el kiosco.
-B: Bueno, te transfiero treinta y dos mil.
-A: Me llegó el aviso, ya compramos los pasajes.
-B: ¿Cuándo salen?
-A: En cuanto llegue el micro que viene de la terminal.
-B: Cuando vuelva Leo que me llame.
+A: Buenas, ¿quién habla?
+B: Hola, soy el hermano de Leo. ¿Está en la casa?
+A: No, salió a comprar. ¿Qué pasó?
+B: Estoy con él en la estación de servicio, se le quedó la billetera en el colectivo.
+A: ¿Se quedó sin documento también?
+B: Sí, el colectivero ya siguió viaje y tenemos que volver a la ciudad.
+A: ¿No puede pedir que le guarden la billetera?
+B: Llamó a la terminal y le dijeron que recién revisan al final del recorrido.
+A: ¿Y vos por qué llamás desde otro número?
+B: El celular de Leo se apagó y el mío quedó sin saldo.
+A: ¿Cuánto necesitan?
+B: Entre el viaje y un remis hasta la parada son treinta y dos mil.
+A: ¿No tienen para pagar con tarjeta?
+B: El chofer del remis cobra en efectivo, el micro sí toma transferencia. Si podés, mandame el importe y lo saco acá.
+A: ¿A qué alias te lo mando?
+B: mate.ruta.siete, a nombre de Bruno.
+A: ¿Leo ya pudo cargar el celular?
+B: Sigue buscando un cargador en el kiosco.
+A: Bueno, te transfiero treinta y dos mil.
+B: Me llegó el aviso, ya compramos los pasajes.
+A: ¿Cuándo salen?
+B: En cuanto llegue el micro que viene de la terminal.
+A: Cuando vuelva Leo que me llame.

@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una familia pregunta a la escuela cómo recuperar una tarjeta de biblioteca que un alumno dejó en el comedor; se identifica curso y horario para buscarla.",
+  "que_prueba": "La apertura «Buenas, mi hijo dice que dejó la tarjeta de biblioteca en el comedor.» (L1) da paso a una gestión cotidiana. Contexto: Una familia pregunta a la escuela cómo recuperar una tarjeta de biblioteca que un alumno dejó en el comedor; se identifica curso y horario para buscarla. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una familia pregunta a la escuela cómo recuperar una tarjeta de biblioteca que un alumno dejó en el comedor; se identifica curso y horario para buscarla.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "escuela",
   "dificultad": "cotidiana",

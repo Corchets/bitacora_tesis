@@ -1,20 +1,21 @@
-A: Buenas, soy de la producción del festival de música del valle.
-B: ¿Es por la pulsera que encontré?
-A: Es por la encuesta que completaste al salir; quedaste seleccionado para una cena con el grupo.
-B: No me acuerdo de haber participado.
-A: La encuesta se abrió al escanear la entrada.
-B: ¿Cuándo es la cena?
-A: El miércoles, después de la prueba de sonido.
-B: ¿Puedo ir con alguien?
-A: El premio incluye dos lugares, pero hay que asegurar la reserva del restaurante.
-B: ¿Qué tengo que hacer?
-A: Transferir una seña de cinco mil al encargado y se descuenta de la cuenta final.
-B: ¿No hay una confirmación oficial?
-A: La invitación se manda cuando el restaurante recibe la seña.
-B: ¿Me pasás el nombre del lugar?
-A: Lo define producción según el horario del grupo.
-B: Ya transferí la seña de cinco mil al encargado.
-A: Recibido, la reserva queda confirmada.
-B: ¿Me pasás el nombre del lugar?
-A: Producción lo confirma mañana.
-B: Espero la información.
+A: ¿Sí?
+B: Buenas, soy de la producción del festival de música del valle.
+A: ¿Es por la pulsera que encontré?
+B: Es por la encuesta que completaste al salir; quedaste seleccionado para una cena con el grupo.
+A: No me acuerdo de haber participado.
+B: La encuesta se abrió al escanear la entrada.
+A: ¿Cuándo es la cena?
+B: El miércoles, después de la prueba de sonido.
+A: ¿Puedo ir con alguien?
+B: El premio incluye dos lugares, pero hay que asegurar la reserva del restaurante.
+A: ¿Qué tengo que hacer?
+B: Transferir una seña de cinco mil al encargado y se descuenta de la cuenta final.
+A: ¿No hay una confirmación oficial?
+B: La invitación se manda cuando el restaurante recibe la seña.
+A: ¿Me pasás el nombre del lugar?
+B: Lo define producción según el horario del grupo.
+A: Ya transferí la seña de cinco mil al encargado.
+B: Recibido, la reserva queda confirmada.
+A: ¿Me pasás el nombre del lugar?
+B: Producción lo confirma mañana.
+A: Espero la información.

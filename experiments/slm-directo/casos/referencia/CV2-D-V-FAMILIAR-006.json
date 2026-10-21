@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-D-FAMILIAR-006",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 21,
+  "t_r_linea": 22,
   "t_c_linea": null,
   "pedido": "REQUEST_TRANSFER",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 21,
+      "linea": 22,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_TRANSFER"
@@ -26,12 +26,12 @@
   "que_prueba": "La prima describe una urgencia veterinaria y falta de dinero, buscando que la persona ofrezca ayuda. Solo al final pide cubrir la seña, que sería devuelta después; la interlocutora detiene el pago para verificar. Prueba una solicitud económica inducida y diferida.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: la necesidad económica se comunica en líneas 5–13; T_R se marca en línea 21, primera solicitud de cubrir la seña. No hay cumplimiento. Revisar si la situación previa basta para anticipar el pedido; la identidad no es verificable solo por el diálogo.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: la necesidad económica se comunica en líneas 6–14; T_R se marca en línea 22, primera solicitud de cubrir la seña. No hay cumplimiento. Revisar si la situación previa basta para anticipar el pedido; la identidad no es verificable solo por el diálogo. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "familiar",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-FAMILIAR-DINERO-01",
-  "situacion": "La prima describe una urgencia veterinaria y una falta de dinero, buscando que la persona ofrezca ayuda; no formula el pedido de transferencia antes de ser verificada. Prueba una inducción por necesidad económica cuyo cierre mantiene T_R nulo."
+  "situacion": "Una supuesta prima describe una urgencia veterinaria e induce a cubrir una seña; la interlocutora detiene el pago para verificar, sin cumplimiento."
 }

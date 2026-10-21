@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una estudiante llama desde casa porque olvidó un cuaderno de música y coordina con una compañera la entrega antes de una presentación.",
+  "que_prueba": "La apertura «Hola, dejé el cuaderno de música en la mesa de casa y lo necesito para la presentación.» (L1) da paso a una gestión cotidiana. Contexto: Una estudiante llama desde casa porque olvidó un cuaderno de música y coordina con una compañera la entrega antes de una presentación. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una estudiante llama desde casa porque olvidó un cuaderno de música y coordina con una compañera la entrega antes de una presentación.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "escuela",
   "dificultad": "cotidiana",

@@ -19,10 +19,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Dos hermanos organizan una visita a la casa de su madre y comentan que el código del portón aparece escrito en una etiqueta antigua, sin solicitar que nadie lo revele.",
+  "que_prueba": "En L3 aparece «El portón a veces no abre con el control. Ayer usó el código del teclado.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos hermanos organizan una visita a la casa de su madre y comentan que el código del portón aparece escrito en una etiqueta antigua, sin solicitar que nadie lo revele.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "mencion_sin_pedido",

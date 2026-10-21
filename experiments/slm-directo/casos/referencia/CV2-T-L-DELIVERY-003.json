@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una vecina coordina la recepción de un paquete para otra persona que trabaja fuera de casa y confirma el horario y lugar donde se dejará.",
+  "que_prueba": "La apertura «Hola, el repartidor llamó por un paquete de la casa de al lado.» (L1) da paso a una gestión cotidiana. Contexto: Una vecina coordina la recepción de un paquete para otra persona que trabaja fuera de casa y confirma el horario y lugar donde se dejará. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una vecina coordina la recepción de un paquete para otra persona que trabaja fuera de casa y confirma el horario y lugar donde se dejará.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "delivery",
   "dificultad": "cotidiana",

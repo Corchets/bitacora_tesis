@@ -1,20 +1,21 @@
-A: Hola, del soporte de inventario de Taller Norte. El lector de códigos no sincroniza las entradas.
-B: Las lecturas quedan en el aparato pero no en la computadora.
-A: Puede que el puerto de comunicación esté usando otra sesión.
-B: ¿Se puede ver el registro?
-A: Sí, si me mostrás la pantalla donde aparece el lote.
-B: ¿Te mando una captura?
-A: Necesito una vista en vivo para detectar en qué momento se corta.
-B: ¿Eso es compartir pantalla?
-A: El programa de ayuda da un código temporal para abrir la sesión.
-B: Me apareció una ventana que dice permitir control del equipo.
-A: Aceptá y pasame la serie que sale abajo.
-B: ¿Podés mirar solo el lector?
-A: Sí, no necesito ver otras aplicaciones.
-B: La computadora es compartida con caja.
-A: La sesión se cierra cuando terminamos.
-B: Bueno, acepté el control; el código es 3168.
-A: Ya veo la pantalla y el lector.
-B: ¿Qué está fallando?
-A: La cola quedó pausada, la voy a reanudar.
-B: Ahora aparece la última lectura.
+A: Hola.
+B: Hola, del soporte de inventario de Taller Norte. El lector de códigos no sincroniza las entradas.
+A: Las lecturas quedan en el aparato pero no en la computadora.
+B: Puede que el puerto de comunicación esté usando otra sesión.
+A: ¿Se puede ver el registro?
+B: Sí, si me mostrás la pantalla donde aparece el lote.
+A: ¿Te mando una captura?
+B: Necesito una vista en vivo para detectar en qué momento se corta.
+A: ¿Eso es compartir pantalla?
+B: El programa de ayuda da un código temporal para abrir la sesión.
+A: Me apareció una ventana que dice permitir control del equipo.
+B: Aceptá y pasame la serie que sale abajo.
+A: ¿Podés mirar solo el lector?
+B: Sí, no necesito ver otras aplicaciones.
+A: La computadora es compartida con caja.
+B: La sesión se cierra cuando terminamos.
+A: Bueno, acepté el control; el código es 3168.
+B: Ya veo la pantalla y el lector.
+A: ¿Qué está fallando?
+B: La cola quedó pausada, la voy a reanudar.
+A: Ahora aparece la última lectura.

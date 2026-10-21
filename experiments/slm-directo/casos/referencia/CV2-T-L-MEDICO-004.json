@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un paciente solicita cambiar la sede de una consulta de kinesiología por una dificultad de transporte; confirma identidad y elige un horario accesible.",
+  "que_prueba": "La apertura «hola tengo kinesiología mañana en la sede del centro y se me complicó el traslado» (L1) da paso a una gestión cotidiana. Contexto: Un paciente solicita cambiar la sede de una consulta de kinesiología por una dificultad de transporte; confirma identidad y elige un horario accesible. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un paciente solicita cambiar la sede de una consulta de kinesiología por una dificultad de transporte; confirma identidad y elige un horario accesible.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "medico",
   "dificultad": "cotidiana",

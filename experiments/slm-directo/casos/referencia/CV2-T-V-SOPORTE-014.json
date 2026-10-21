@@ -21,17 +21,22 @@
       "etiquetas": [
         "REQUEST_PERSONAL_DATA"
       ]
+    },
+    {
+      "linea": 18,
+      "evento": "rechazo",
+      "etiquetas": []
     }
   ],
-  "que_prueba": "Una agenda duplicada de clínica se usa para pedir el correo de administrador y preparar un cambio de responsable. Prueba una solicitud inducida de dato de contacto como etapa previa a una acción más sensible; la persona se niega.",
+  "que_prueba": "Quien dice atender una agenda abierta por una cuenta de proveedor pide el correo administrador, impide avisar a recepción y anuncia una verificación posterior. B no entrega el correo ni cierra sesiones. Prueba una solicitud de dato de contacto como primer paso de un cambio no verificado.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 11, donde comienza el pedido indirecto; también podría ubicarse en línea 12, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 11, primera solicitud de confirmar el correo. No se comparte dato. El pedido posterior de código se anuncia como posibilidad, no ocurre en la llamada.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. T_R línea 11, primera instrucción concreta de confirmar el correo del administrador. T_C null: B se niega en línea 18. El código se plantea como posibilidad en línea 17, pero no llega a solicitarse ni recibirse.",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-SOPORTE-CLAVE-01",
-  "situacion": "Una agenda duplicada de clínica se usa para pedir el correo de administrador y preparar un cambio de responsable. Prueba una solicitud inducida de dato de contacto como etapa previa a una acción más sensible; la persona se niega."
+  "situacion": "Una llamada sobre una agenda creada por una cuenta de proveedor pide el correo administrador y dice no avisar a recepción hasta completar una reasignación; B rechaza compartirlo y verifica que la agenda sea real por el contacto habitual."
 }

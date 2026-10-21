@@ -19,10 +19,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una clienta llama por una tarjeta retenida por el cajero; informa ubicación y hora para iniciar la consulta con el operador de la red.",
+  "que_prueba": "L10 aporta una comprobación acotada («Gracias. Para cuidarte, puedo bloquearla y pedir una reposición. ¿Querés hacerlo ahora?»). Contexto: Una clienta llama por una tarjeta retenida por el cajero; informa ubicación y hora para iniciar la consulta con el operador de la red. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una clienta llama por una tarjeta retenida por el cajero; informa ubicación y hora para iniciar la consulta con el operador de la red.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "pedido_razonable",

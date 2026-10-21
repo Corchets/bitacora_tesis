@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-BANCO-019",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 7,
+  "t_r_linea": 8,
   "t_c_linea": null,
   "pedido": "REQUEST_TRANSFER",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 7,
+      "linea": 8,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_TRANSFER"
@@ -26,7 +26,7 @@
   "que_prueba": "Un destinatario desconocido se presenta como proveedor importado y se pide una transferencia mínima para verificarlo. Prueba una solicitud directa de movimiento de dinero distinta de un código o clave.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 7, primera instrucción de transferir un importe de prueba a una cuenta nueva. No hay transferencia.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 8, primera instrucción de transferir un importe de prueba a una cuenta nueva. No hay transferencia. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "indirecto",

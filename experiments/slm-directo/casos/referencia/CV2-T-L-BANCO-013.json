@@ -16,10 +16,10 @@
       ]
     }
   ],
-  "que_prueba": "Un comerciante llama por un pago con tarjeta que quedó duplicado en la terminal; confirma comercio, importe y horario para abrir revisión.",
+  "que_prueba": "L8 aporta una comprobación acotada («Para buscarlo, confirmame la sucursal donde está asociada la terminal.»). Contexto: Un comerciante llama por un pago con tarjeta que quedó duplicado en la terminal; confirma comercio, importe y horario para abrir revisión. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un comerciante llama por un pago con tarjeta que quedó duplicado en la terminal; confirma comercio, importe y horario para abrir revisión.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "pedido_razonable",

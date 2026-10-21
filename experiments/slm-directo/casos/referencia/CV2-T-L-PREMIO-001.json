@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "El ganador de una rifa barrial llama para coordinar el retiro de una bicicleta; confirma el número del talón y consulta cómo transportarla.",
+  "que_prueba": "La conversación arranca con «hola llamo por el sorteo de la asociación del barrio creo que salió mi número» (L1). Contexto: El ganador de una rifa barrial llama para coordinar el retiro de una bicicleta; confirma el número del talón y consulta cómo transportarla. La dificultad es considerar para qué se confirma la información antes de alertar solo por la presencia de datos personales.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño el ganador de una rifa barrial llama para coordinar el retiro de una bicicleta; confirma el número del talón y consulta cómo transportarla.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "premio",
   "dificultad": "pedido_razonable",

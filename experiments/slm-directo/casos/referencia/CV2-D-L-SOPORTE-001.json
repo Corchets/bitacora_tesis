@@ -21,10 +21,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona llama al proveedor por cortes de internet y confirma domicilio de instalación y franja horaria para una visita técnica.",
+  "que_prueba": "L6 aporta una comprobación acotada («Voy a revisar la línea. ¿Me confirmás la calle y la altura donde está instalado?»). Contexto: La persona llama al proveedor por cortes de internet y confirma domicilio de instalación y franja horaria para una visita técnica. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama al proveedor por cortes de internet y confirma domicilio de instalación y franja horaria para una visita técnica.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "soporte",
   "dificultad": "pedido_razonable",

@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una estudiante adulta llama para corregir el correo que recibe avisos de una capacitación; se comprueba curso y se modifica el dato de contacto.",
+  "que_prueba": "La apertura «Hola, estoy haciendo el curso de auxiliar y los avisos me llegan a un correo que ya no uso.» (L1) da paso a una gestión cotidiana. Contexto: Una estudiante adulta llama para corregir el correo que recibe avisos de una capacitación; se comprueba curso y se modifica el dato de contacto. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una estudiante adulta llama para corregir el correo que recibe avisos de una capacitación; se comprueba curso y se modifica el dato de contacto.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "escuela",
   "dificultad": "cotidiana",

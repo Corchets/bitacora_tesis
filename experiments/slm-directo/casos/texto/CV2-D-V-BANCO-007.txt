@@ -1,20 +1,30 @@
-A: Buenas, del banco. ¿Te figura la cuenta de ahorro en cero?
-B: No, tengo saldo. ¿Por qué me llamás?
-A: Hubo una actualización de saldos y algunas cuentas quedaron mostrando el disponible anterior.
-B: La app me anda normal.
-A: Sí, pero el registro interno puede tardar en sincronizarse con la aplicación.
-B: ¿Hay algún movimiento que no reconozco?
-A: Ninguno confirmado. Para descartar una diferencia te voy guiando por el menú de seguridad.
-B: ¿Qué menú?
-A: Abrí el mensaje de actualización que te llegó y tocá revisar dispositivo.
-B: Me sale un equipo que no reconozco.
-A: Elegí quitarlo y después confirmar que este teléfono sea el principal.
-B: ¿No puedo llamar a la sucursal primero?
-A: Si cerrás la sesión, el equipo desconocido puede quedar activo hasta mañana.
-B: Ahora me pide autorizar la baja del otro equipo.
-A: Confirmá la operación para completar el cambio.
-B: ¿Con eso se bloquea el equipo anterior?
-A: Sí, queda fuera del perfil.
-B: Voy a leer el aviso completo.
-A: No cortes todavía; la solicitud vence en unos minutos.
-B: Ya confirmé la baja y el sistema dice que el teléfono anterior se quitó.
+A: Buenas, te llamo del banco por una autorización que quedó esperando.
+B: ¿Una compra? No hice ninguna hoy.
+A: No es una compra, es un cambio en la cuenta. ¿Te entró un aviso?
+B: Veo uno, pero no lo abrí todavía.
+A: Lo podés consultar desde la aplicación, en las operaciones pendientes.
+B: Ahí está. Dice que quieren cambiar el teléfono que recibe los avisos de acceso.
+A: Ese es el registro viejo que estamos retirando.
+B: El número que aparece termina en 804. Nunca tuve ese número.
+A: Es el número temporal que usa el área de recuperación durante el cambio.
+B: ¿Y por qué los avisos de mi cuenta irían a otro teléfono?
+A: Van a pasar por ahí mientras el sistema libera el anterior.
+B: Yo no pedí cambiar el que tengo ahora.
+A: Se abrió por una diferencia entre el padrón de atención y tu perfil.
+B: ¿No pueden corregir ese padrón sin tocar mi cuenta?
+A: El cambio tiene que quedar autorizado desde tu sesión.
+B: La pantalla dice que el destinatario va a recibir verificaciones de acceso.
+A: Entonces elegí ese número terminado en 804 y confirmá que reciba las verificaciones.
+B: Eso parece reemplazar mi teléfono, no retirar uno viejo.
+A: Primero se pasa al temporal y después lo volvemos a dejar como estaba.
+B: ¿Me mandan una constancia de que van a devolverlo al mío?
+A: Te queda el número de gestión; la constancia sale al final.
+B: Preferiría esperar hasta mañana y hablar con la sucursal.
+A: Si vence la solicitud, queda una revisión manual y durante ese tiempo podés perder los avisos.
+B: Bueno, pero dejá anotado que quiero mantener mi número.
+A: Lo dejo asentado. Ahora confirmá el destinatario temporal.
+B: Ya lo acepté. La aplicación muestra el 804 como receptor de verificaciones.
+A: Bien, estoy terminando la parte interna.
+B: ¿Cuándo vuelve a quedar el mío?
+A: Cuando cierre la gestión. No cortes todavía.
+B: Espero unos minutos, después voy a consultar por la otra línea.

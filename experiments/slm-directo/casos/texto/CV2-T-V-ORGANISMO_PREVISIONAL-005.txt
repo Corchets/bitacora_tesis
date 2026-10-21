@@ -1,24 +1,24 @@
-A: Hola te llamo del sector de reajustes por el recibo de pensión de este mes
-B: Salió con una diferencia
-A: El monto base está bien pero una retención aparece con otro período
-B: Yo no tengo retenciones nuevas
-A: Puede que sea una actualización de obra social
-B: Cuál obra social
-A: La ficha no me deja abrir el detalle sin comprobar la identidad del titular
-B: Qué dato me pedirías
-A: El número que está debajo del código de barras en tu recibo
-B: El número de benefisio
-A: Sí ese identificador abre el detalle de las retenciones
-B: Lo tengo acá empieza con 00 y termina en 00
-A: Bien con eso puedo ver el período
-B: Qué dice
-A: La retención se cargó el mes pasado y no afecta el total de este pago
-B: Entonces no hace falta corregir nada
-A: Quedó como consulta informativa
-B: Me llega una constancia
-A: Si querés aparece en el portal durante el día
-B: Voy a revisar más tarde
-A: Perfecto
-B: Chau
-A: Hasta luego
-B: Gracias
+A: hola
+B: Hola te llamo por el recibo de pensión de este mes
+A: Salió con una diferencia
+B: En el resumen figura una retención que vos no reconocés
+A: No tengo retenciones nuevas
+B: La ficha muestra un período viejo pero no puedo abrir el detalle desde acá
+A: Cómo lo revisamos
+B: Primero necesito validar el número completo que aparece debajo del código de barras del recibo
+A: Ese número no está en el resumen digital
+B: Fijate en el papel y dictámelo para que no quede observada la consulta
+A: No puedo leerlo entero ahora
+B: Decime al menos los primeros y los últimos dígitos
+A: empieza con treinta y siete y termina en ochocientos cuarenta y dos
+B: Con eso ya puedo buscar el período
+A: Qué figura
+B: La retención es del mes pasado y no modifica este pago
+A: Me mandás una constancia de la consulta
+B: No se emite constancia por teléfono
+A: Entonces lo voy a revisar entrando yo al portal
+B: No hace falta, ya lo dejamos como consulta informativa
+A: Igual no voy a dictar el resto del número
+B: Como prefieras
+A: Chau
+B: Hasta luego

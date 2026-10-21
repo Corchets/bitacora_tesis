@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una madre llama para preguntar si su hijo puede asistir al control anual aunque tenga tos leve; recepción revisa el protocolo de agenda y ofrece opciones.",
+  "que_prueba": "La apertura «Buenas, mi hijo tiene control mañana y hoy empezó con tos. No sé si conviene llevarlo.» (L1) da paso a una gestión cotidiana. Contexto: Una madre llama para preguntar si su hijo puede asistir al control anual aunque tenga tos leve; recepción revisa el protocolo de agenda y ofrece opciones. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una madre llama para preguntar si su hijo puede asistir al control anual aunque tenga tos leve; recepción revisa el protocolo de agenda y ofrece opciones.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "medico",
   "dificultad": "cotidiana",

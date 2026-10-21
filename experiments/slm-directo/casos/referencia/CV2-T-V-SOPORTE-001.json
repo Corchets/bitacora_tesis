@@ -4,26 +4,26 @@
   "semilla": "SC-CV2-T-SOPORTE-001",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 15,
-  "t_c_linea": 16,
+  "t_r_linea": 16,
+  "t_c_linea": 17,
   "pedido": "REQUEST_REMOTE_ACCESS",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 15,
+      "linea": 16,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_REMOTE_ACCESS"
       ]
     },
     {
-      "linea": 16,
+      "linea": 17,
       "evento": "cumplimiento",
       "etiquetas": []
     }
@@ -31,7 +31,7 @@
   "que_prueba": "Una cola de impresión bloqueada sirve para solicitar instalación de control remoto y compartir el código de sesión. La persona lo entrega y el supuesto técnico confirma el acceso. Prueba cumplimiento de acceso remoto en un entorno de depósito.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 15, pedido de compartir el código. T_C línea 16, entrega del código ficticio 4816.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 16, pedido de compartir el código. T_C línea 17, entrega del código ficticio 4816. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "directo",

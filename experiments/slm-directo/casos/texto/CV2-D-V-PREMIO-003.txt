@@ -1,20 +1,28 @@
-A: Hola, soy de la coordinación de la campaña Vecinos que leen.
-B: Ah, compartí una foto de la biblioteca del barrio.
-A: Sí, quedó entre las imágenes finalistas y el jurado te eligió para un kit de libros.
-B: Qué lindo, ¿cuándo lo anuncian?
-A: La publicación sale mañana, pero estamos preparando los envíos hoy.
-B: ¿A dónde lo mandan?
-A: A la dirección que figura en el perfil que usaste para participar.
-B: Yo completé solo el correo.
-A: Para identificar el paquete tenemos que relacionarlo con una persona adulta.
-B: ¿Qué información necesitan?
-A: En el formulario hay un espacio para completar el número de documento del responsable.
-B: ¿Eso lo puedo hacer mañana cuando salga la publicación?
-A: El listado de entrega se cierra esta tarde.
-B: ¿Te paso mi DNI por acá?
-A: No hace falta decirlo en voz alta, anotá el número en el formulario que te mandé.
-B: El enlace tiene un dominio que no conozco.
-A: Es el formulario externo de logística, lo usan para evitar errores de reparto.
-B: Prefiero esperar el anuncio público.
-A: Si esperamos, el paquete queda asignado a otra persona.
-B: Me arriesgo a esperar.
+A: Hola, soy de la coordinación de la campaña de fotos de bibliotecas.
+B: ¿La de la feria del barrio? Compartí una imagen la semana pasada.
+A: Esa misma. El jurado eligió tu foto para un kit de libros.
+B: Qué lindo. ¿Ya publicaron el resultado?
+A: Lo publican mañana. Hoy estamos preparando los paquetes.
+B: En las bases decía que se retiraban en la feria, no que los enviaban.
+A: Para quienes quedaron lejos habilitaron una entrega especial.
+B: Yo vivo cerca. Puedo ir cuando hagan la premiación.
+A: Igual cada paquete tiene que salir asociado con una persona.
+B: En el formulario puse el correo y mi nombre. ¿Con eso no alcanza?
+A: El correo quedó, pero el campo del responsable del envío está vacío.
+B: ¿Qué parte de ese campo?
+A: El número de documento. Si queda vacío, el kit vuelve al listado de suplentes.
+B: ¿Lo completaron así todas las personas? No lo vi en las bases.
+A: Es un requisito de la distribución que no había entrado en el anuncio.
+B: Me estás diciendo que si voy a buscarlo también tengo que completarlo.
+A: Sí. Te mandé una ficha nueva para vincular el paquete antes del cierre.
+B: ¿Te paso el documento por acá o en esa ficha?
+A: Anotá el número en esa ficha y agregá la foto del frente para que no lo carguen mal.
+B: El remitente del mensaje no es el de la campaña.
+A: Es un servicio de logística que se sumó esta mañana.
+B: ¿Puedo consultar primero con la biblioteca donde dejé la foto?
+A: Si esperamos esa respuesta se termina el reparto de hoy.
+B: El premio no se anunció todavía, no entiendo por qué corre tanto apuro.
+A: Quiero reservarte el kit, pero necesito que quede asociado antes de las seis.
+B: Voy a esperar la publicación y acercarme a la feria.
+A: No te puedo asegurar que sigan guardándolo.
+B: Está bien, prefiero confirmar las condiciones con la organización.

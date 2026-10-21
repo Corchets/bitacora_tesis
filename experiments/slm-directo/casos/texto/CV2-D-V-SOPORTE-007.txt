@@ -1,20 +1,21 @@
-A: Buenas, te llamo de soporte de Clima Hogar por una actividad inusual en el perfil de consumo.
-B: ¿Qué actividad?
-A: Se abrió una sesión desde un equipo que no coincide con el domicilio.
-B: Yo estoy en mi casa y solo uso el teléfono.
-A: La consulta quedó en revisión; no cierres la pantalla del medidor por ahora.
-B: No abrí ninguna pantalla.
-A: El sistema mantiene la sesión activa aunque la aplicación esté en segundo plano.
-B: ¿Puedo ver desde dónde se conectaron?
-A: La ubicación aparece cuando termine el diagnóstico.
-B: ¿Qué quieren revisar?
-A: Primero tenemos que dejar el perfil quieto para que no se renueve el acceso.
-B: ¿Eso quiere decir que no use la aplicación?
-A: Por unos minutos, sí. Si se actualiza, se pierde el registro de la incidencia.
-B: No voy a dejar de usarla porque me lo digas por teléfono.
-A: No te estoy pidiendo datos, solo que esperes mientras verifico.
-B: ¿Cuál es el número de reclamo?
-A: Lo estoy buscando en otra pantalla.
-B: Lo voy a consultar desde mi factura.
-A: Esperá, ahora te explico el paso siguiente.
-B: Prefiero cortar y llamar al servicio técnico que figura ahí.
+A: Hola, decime.
+B: Buenas, te llamo de soporte de Clima Hogar por una actividad inusual en el perfil de consumo.
+A: ¿Qué actividad?
+B: Se abrió una sesión desde un equipo que no coincide con el domicilio.
+A: Yo estoy en mi casa y solo uso el teléfono.
+B: La consulta quedó en revisión; no cierres la pantalla del medidor por ahora.
+A: No abrí ninguna pantalla.
+B: El sistema mantiene la sesión activa aunque la aplicación esté en segundo plano.
+A: ¿Puedo ver desde dónde se conectaron?
+B: La ubicación aparece cuando termine el diagnóstico.
+A: ¿Qué quieren revisar?
+B: Primero tenemos que dejar el perfil quieto para que no se renueve el acceso.
+A: ¿Eso quiere decir que no use la aplicación?
+B: Por unos minutos, sí. Si se actualiza, se pierde el registro de la incidencia.
+A: No voy a dejar de usarla porque me lo digas por teléfono.
+B: No te estoy pidiendo datos, solo que esperes mientras verifico.
+A: ¿Cuál es el número de reclamo?
+B: Lo estoy buscando en otra pantalla.
+A: Lo voy a consultar desde mi factura.
+B: Esperá, ahora te explico el paso siguiente.
+A: Prefiero cortar y llamar al servicio técnico que figura ahí.

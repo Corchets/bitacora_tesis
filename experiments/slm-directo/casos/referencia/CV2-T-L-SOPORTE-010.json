@@ -24,10 +24,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona pregunta por el texto “clave de producto” que muestra una aplicación de dibujo después de una actualización; se aclara la diferencia con la cuenta de usuario.",
+  "que_prueba": "En L1 aparece «hola abrí el programa de dibujo y aparece clave de producto» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona pregunta por el texto “clave de producto” que muestra una aplicación de dibujo después de una actualización; se aclara la diferencia con la cuenta de usuario.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "mencion_sin_pedido",

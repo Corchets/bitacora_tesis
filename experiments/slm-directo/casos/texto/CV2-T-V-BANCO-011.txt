@@ -1,20 +1,21 @@
-A: Hola, del banco. Estoy mirando una transferencia que figura como devuelta por el comercio.
-B: ¿Cuál transferencia?
-A: La de la ferretería El Tala, por el arreglo del portón.
-B: Esa la pagué la semana pasada.
-A: Sí, quedó debitada pero el comercio no confirmó la recepción.
-B: ¿La plata me volvió?
-A: Todavía no. Para recuperar la operación hay que localizar la autorización que llegó al teléfono.
-B: Tengo varios mensajes.
-A: Buscá el que dice movimiento pendiente y fijate en la serie corta que aparece al final.
-B: ¿El código de ingreso?
-A: Ese es el que me sirve para comprobar qué autorización quedó asociada.
-B: ¿Querés que te pase los números?
-A: Sí, así reviso el movimiento y te digo si vuelve al saldo.
-B: El mensaje dice que no comparta códigos.
-A: Lo entiendo, pero este es el canal de conciliación.
-B: No te voy a dictar nada.
-A: Si no identificamos la autorización, la devolución queda para el mes siguiente.
-B: Voy a preguntarle a la ferretería primero.
-A: El comercio no puede ver el lado bancario.
-B: Igual lo verifico por mi cuenta.
+A: Hola, buen día.
+B: Hola, del banco. Estoy mirando una transferencia que figura como devuelta por el comercio.
+A: ¿Cuál transferencia?
+B: La de la ferretería El Tala, por el arreglo del portón.
+A: Esa la pagué la semana pasada.
+B: Sí, quedó debitada pero el comercio no confirmó la recepción.
+A: ¿La plata me volvió?
+B: Todavía no. Para recuperar la operación hay que localizar la autorización que llegó al teléfono.
+A: Tengo varios mensajes.
+B: Buscá el que dice movimiento pendiente y fijate en la serie corta que aparece al final.
+A: ¿El código de ingreso?
+B: Ese es el que me sirve para comprobar qué autorización quedó asociada.
+A: ¿Querés que te pase los números?
+B: Sí, así reviso el movimiento y te digo si vuelve al saldo.
+A: El mensaje dice que no comparta códigos.
+B: Lo entiendo, pero este es el canal de conciliación.
+A: No te voy a dictar nada.
+B: Si no identificamos la autorización, la devolución queda para el mes siguiente.
+A: Voy a preguntarle a la ferretería primero.
+B: El comercio no puede ver el lado bancario.
+A: Igual lo verifico por mi cuenta.

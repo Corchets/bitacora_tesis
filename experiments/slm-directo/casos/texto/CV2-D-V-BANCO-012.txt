@@ -1,21 +1,21 @@
-A: Te llamo de control de operaciones del banco. Detectamos un intento de alta de destinatario en tu perfil.
-B: Yo no agregué a nadie.
-A: La orden quedó abierta hace unos minutos.
-B: ¿Se llegó a transferir plata?
-A: No hay débito confirmado todavía.
-B: ¿Qué cuenta aparece como destinataria?
-A: El dato está retenido hasta que cierre la revisión interna.
-B: ¿Por qué me llaman desde un celular?
-A: La mesa de control usa líneas rotativas cuando hay una operación en curso.
-B: ¿Puedo cortar y llamar a la sucursal?
-A: No conviene interrumpir mientras el registro está pendiente.
-B: Si no sé quién sos, justamente quiero verificar.
-A: Entiendo la duda, pero la transferencia puede salir si se vence el tiempo.
-B: ¿Cuánto tiempo queda?
-A: Menos de cinco minutos, el sistema no pausa la orden.
-B: En la aplicación no veo nada.
-A: Las operaciones retenidas no se muestran hasta que termina el control.
-B: No voy a seguir una llamada que no puedo confirmar.
-A: Esperá, todavía no te expliqué cómo se cancela.
-B: No hace falta, voy a llamar yo al número oficial.
-A: Si cortás, ya no puedo sostener la revisión.
+A: Buenas tardes, de control de operaciones. Quedó pendiente un alta de destinatario en su cuenta.
+B: Estoy cocinando, se escucha medio bajo. ¿Del banco me dice?
+A: Sí, por una orden que entró hace unos minutos.
+B: Hoy no hice pagos. Ayer pagué la expensa, nomás.
+A: No es ese pago, es un destinatario nuevo que quedó en espera.
+B: ¿A nombre de quién?
+A: En esta pantalla no se abre el nombre hasta que cierra la revisión.
+B: Bueno, yo no agregué a nadie.
+A: Eso es lo que hay que determinar antes del cierre del lote.
+B: ¿Qué pasa si cierro el banco en el teléfono? Ni lo tengo abierto.
+A: La orden sigue en el sistema aunque cierre la aplicación.
+B: Ah, no sabía. Pará que bajo la hornalla.
+A: Le queda poco tiempo al control, por eso lo estamos llamando ahora.
+B: Ya volví. ¿Me decía de qué sucursal?
+A: Es una mesa central, no trabaja por sucursal.
+B: ¿Tiene algo que ver con una compra en cuotas? Estoy esperando un resumen.
+A: No, esto es un alta. Si no cierra la revisión pasa a la tanda siguiente.
+B: Me están tocando el timbre, debe ser mi vecina.
+A: Es importante que terminemos antes de que venza la ventana.
+B: Un momento, atiendo y vuelvo.
+B: ¿Hola? ¿Sigue ahí? Se quedó muda la llamada.

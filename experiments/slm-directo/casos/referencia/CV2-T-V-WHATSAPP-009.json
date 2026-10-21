@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-WHATSAPP-009",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 13,
+  "t_r_linea": 14,
   "t_c_linea": null,
   "pedido": "REQUEST_AUTH_CODE",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 13,
+      "linea": 14,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_AUTH_CODE"
@@ -26,7 +26,7 @@
   "que_prueba": "La migración de un grupo de comisión deriva en mandar por privado una serie de registro para cruzarla con una planilla. Prueba un pedido de autenticación presentado como dato de afiliación, sin que el llamante diga “código”.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 13, donde comienza el pedido indirecto; también podría ubicarse en línea 14, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 13, primera solicitud de compartir la serie; la línea 11 la identifica como número asociado a la cuenta. Sin cumplimiento.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 14, donde comienza el pedido indirecto; también podría ubicarse en línea 15, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 14, primera solicitud de compartir la serie; la línea 12 la identifica como número asociado a la cuenta. Sin cumplimiento. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "whatsapp",
   "dificultad": "indirecto",

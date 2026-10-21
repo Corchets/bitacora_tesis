@@ -1,20 +1,21 @@
-A: Te llamo del soporte de Dibujo Sur por una licencia que quedó en modo de prueba.
-B: Yo pagué el plan anual la semana pasada.
-A: El pago se registró, pero la licencia no se enlazó con tu equipo nuevo.
-B: Cambié la computadora ayer.
-A: Para activar la licencia, confirmá el usuario y la clave del programa.
-B: ¿La contraseña de mi cuenta?
-A: Sí, ingresala en el cuadro de activación que te mandé.
-B: ¿Ese cuadro está dentro de la aplicación?
-A: Se abre aparte porque la aplicación todavía no reconoce el equipo.
-B: El sitio tiene otro dominio.
-A: Es el proveedor que gestiona licencias para la región.
-B: ¿Puedo consultar con la tienda donde compré el plan?
-A: Ellos no ven la parte técnica.
-B: No quiero escribir la clave en una página que no conozco.
-A: Si no se completa hoy, la licencia vuelve al modo de prueba.
-B: Voy a abrir un ticket desde la aplicación oficial.
-A: El ticket puede demorar varios días.
-B: Prefiero esperar.
-A: Como quieras.
-B: Chau.
+A: Hola, decime.
+B: Te llamo del soporte de Dibujo Sur por una licencia que quedó en modo de prueba.
+A: Yo pagué el plan anual la semana pasada.
+B: El pago se registró, pero la licencia no se enlazó con tu equipo nuevo.
+A: Cambié la computadora ayer.
+B: Para activar la licencia, confirmá el usuario y la clave del programa.
+A: ¿La contraseña de mi cuenta?
+B: Sí, ingresala en el cuadro de activación que te mandé.
+A: ¿Ese cuadro está dentro de la aplicación?
+B: Se abre aparte porque la aplicación todavía no reconoce el equipo.
+A: El sitio tiene otro dominio.
+B: Es el proveedor que gestiona licencias para la región.
+A: ¿Puedo consultar con la tienda donde compré el plan?
+B: Ellos no ven la parte técnica.
+A: No quiero escribir la clave en una página que no conozco.
+B: Si no se completa hoy, la licencia vuelve al modo de prueba.
+A: Voy a abrir un ticket desde la aplicación oficial.
+B: El ticket puede demorar varios días.
+A: Prefiero esperar.
+B: Como quieras.
+A: Chau.

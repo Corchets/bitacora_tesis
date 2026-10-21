@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-FAMILIAR-011",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 11,
+  "t_r_linea": 12,
   "t_c_linea": null,
   "pedido": "REQUEST_PERSONAL_DATA",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 11,
+      "linea": 12,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_PERSONAL_DATA"
@@ -26,7 +26,7 @@
   "que_prueba": "Un supuesto estudio usa una sucesión antigua y una demora posible para pedir documento y domicilio sin identificar expediente ni escribanía; la persona no entrega datos. Prueba extracción de información personal mediante trámite patrimonial familiar.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). T_R tentativo en la línea 11: A responde a la pregunta por los datos describiendo un requisito del trámite, y B lo interpreta como una solicitud en la 12. No hay una orden literal posterior de dictarlos. Queda abierta la decisión de si esa formulación indirecta basta para marcar pedido; no se adjudica D07. La línea 13 agrega presión por demora, no menciona ni solicita nuevos datos. No se observa entrega de información. Reserva de trabajo pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). T_R tentativo en la línea 12: B responde a la pregunta por los datos describiendo un requisito del trámite, y A lo interpreta como una solicitud en la 12. No hay una orden literal posterior de dictarlos. Queda abierta la decisión de si esa formulación indirecta basta para marcar pedido; no se adjudica D07. La línea 14 agrega presión por demora, no menciona ni solicita nuevos datos. No se observa entrega de información. Reserva de trabajo pendiente de D08. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "indirecto",

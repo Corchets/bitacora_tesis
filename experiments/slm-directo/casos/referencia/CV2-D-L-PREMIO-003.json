@@ -16,10 +16,10 @@
       ]
     }
   ],
-  "que_prueba": "La persona consulta por un premio recibido en una competencia de fotografía comunitaria; se confirma el nombre público y el horario de entrega.",
+  "que_prueba": "L4 aporta una comprobación acotada («¿Con qué nombre la presentaste?»). Contexto: La persona consulta por un premio recibido en una competencia de fotografía comunitaria; se confirma el nombre público y el horario de entrega. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona consulta por un premio recibido en una competencia de fotografía comunitaria; se confirma el nombre público y el horario de entrega.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "premio",
   "dificultad": "pedido_razonable",

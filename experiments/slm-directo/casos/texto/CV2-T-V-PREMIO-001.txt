@@ -1,32 +1,31 @@
-A: Buenas te llamo de la organización de la Feria de Ciencias del Valle
-B: Hola qué necesitan
-A: La maqueta de energía solar que presentaste quedó seleccionada pa una mención especial
-B: La de la escuela técnica
-A: Sí el jurado la eligió junto con otros dos proyectos
-B: Cuándo es la entrega
-A: El viernes a las seis en el auditorio municipal
-B: Tengo que llevar la maqueta
-A: No ya quedó en la muestra El premio se entrega a una persona responsable
-B: Qué dato tengo que confirmar
-A: El DNI completo de quien la inscribió y la fecha de nacimiento
-B: Yo hice el formulario
-A: Entonces los datos tienen que coincidir con la ficha de participación
-B: Me mandan una notificación escrita
-A: La invitación formal sale después de cerrar el registro de premios
-B: Qué tipo de premio es
-A: Una beca de materiales para el próximo proyecto y un diploma
-B: La beca se deposita
-A: No es un cupón para comprar herramientas
-B: Mi documento figura como 35654800 nací el primero de enero del 70
-A: Ya coincide con el registro
-B: Me mandan la invitación al correo
-A: Sí debería llegar dentro de una hora
-B: Puedo llevar a mi profesora
-A: Claro puede acompañarte al auditorio
-B: Hay que confirmar asistencia
-A: Con la invitación alcanza
-B: Bueno espero el correo
-A: Gracias por participar
-B: Hasta luego
+A: buenas quién habla
+B: Buenas te llamo por la Feria de Ciencias del Valle
+A: ¿Qué necesitan?
+B: La maqueta solar que anotaste quedó preseleccionada para una mención
+A: ¿Ya publicaron los resultados?
+B: Todavía no salen, pero estamos cerrando los datos antes del viernes
+A: ¿Dónde puedo ver el listado?
+B: La publicación se demora; por eso estamos confirmando por teléfono
+A: ¿Y el premio cuál sería?
+B: Una beca de materiales y un diploma si queda seleccionada
+A: ¿Me mandan una notificación formal?
+B: Después de cerrar el registro; ahora necesito el DNI completo de quien anotó el proyecto y su fecha de nacimiento
+A: ¿Para qué necesitan esos datos antes de publicar?
+B: Para reservar el beneficio a tu nombre
+A: ¿Los puedo mandar por el correo de la feria?
+B: No uses el correo general porque se demora; decímelos por acá así no perdés el lugar
+A: ¿Me podés mandar la convocatoria escrita?
+B: No tengo una versión para enviar hasta que cierre la lista
+A: La profesora hizo la inscripción, no yo
+B: Entonces pasame los datos de quien la registró
+A: No voy a dar el DNI ni la fecha de otra persona por teléfono
+B: Si no queda confirmado hoy puede pasar al siguiente proyecto
+A: Voy a consultar a la escuela y a la organización por los contactos que ya tengo
+B: Bueno queda pendiente
 A: Chau
-B: Chau
+B: Hasta luego
+A: Voy a esperar una comunicación oficial
+B: Está bien
+A: No me mandes ningún enlace
+B: No te iba a mandar uno
+A: Chau

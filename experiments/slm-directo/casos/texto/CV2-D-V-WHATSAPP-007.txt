@@ -1,20 +1,21 @@
-A: Hola, llamo del equipo de soporte de WhatsApp por un registro de cuenta iniciado desde otro teléfono.
-B: Yo no estoy cambiando de teléfono.
-A: La solicitud figura en curso y puede afectar el acceso al número.
-B: ¿Qué dispositivo la inició?
-A: Esa información aparece recién cuando termina la revisión.
-B: ¿Me llegó algún aviso?
-A: Puede llegar un mensaje automático, pero no lo abras mientras la llamada siga activa.
-B: ¿Por qué no?
-A: Para evitar que se superpongan dos verificaciones.
-B: No me gusta que me digas que no lo abra.
-A: Lo importante es que no cierres la llamada hasta que el sistema deje de mostrar el intento.
-B: ¿Cómo sabés que está pasando?
-A: Nos entra una alerta cuando el número está siendo asociado en otro equipo.
-B: ¿Me podés decir el nombre de la cuenta que figura?
-A: Todavía no aparece, está en proceso.
-B: Voy a avisarle a mi hermana por otro teléfono.
-A: No lo comentes en el grupo todavía, puede generar más solicitudes.
-B: Eso suena raro.
-A: Esperá un momento, estoy revisando el estado.
-B: No, voy a cortar y abrir la aplicación desde mi celular.
+A: Buenas tardes.
+B: Hola, llamo del equipo de soporte de WhatsApp por un registro de cuenta iniciado desde otro teléfono.
+A: Yo no estoy cambiando de teléfono.
+B: La solicitud figura en curso y puede afectar el acceso al número.
+A: ¿Qué dispositivo la inició?
+B: Esa información aparece recién cuando termina la revisión.
+A: ¿Me llegó algún aviso?
+B: Puede llegar un mensaje automático, pero no lo abras mientras la llamada siga activa.
+A: ¿Por qué no?
+B: Para evitar que se superpongan dos verificaciones.
+A: No me gusta que me digas que no lo abra.
+B: Lo importante es que no cierres la llamada hasta que el sistema deje de mostrar el intento.
+A: ¿Cómo sabés que está pasando?
+B: Nos entra una alerta cuando el número está siendo asociado en otro equipo.
+A: ¿Me podés decir el nombre de la cuenta que figura?
+B: Todavía no aparece, está en proceso.
+A: Voy a avisarle a mi hermana por otro teléfono.
+B: No lo comentes en el grupo todavía, puede generar más solicitudes.
+A: Eso suena raro.
+B: Esperá un momento, estoy revisando el estado.
+A: No, voy a cortar y abrir la aplicación desde mi celular.

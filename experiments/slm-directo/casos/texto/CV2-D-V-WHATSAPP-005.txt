@@ -1,20 +1,21 @@
-A: Buenas, te llamo de la coordinación del club Horizonte por el equipo de básquet infantil.
-B: Sí, mi sobrino juega los sábados.
-A: Estamos pasando los avisos de horario a un canal nuevo porque el grupo viejo se llenó.
-B: ¿Hay que volver a inscribirse?
-A: No, la lista ya está. Nos falta validar algunos teléfonos de familiares.
-B: El mío aparece en la ficha, creo.
-A: Sí, pero el canal nuevo requiere una confirmación para que no entre alguien ajeno.
-B: ¿Qué confirmación?
-A: Te mandé una solicitud. Mirá el mensaje de WhatsApp que acaba de entrar.
-B: Tengo un aviso de registro de cuenta.
-A: Es la pantalla de control que usa la aplicación cuando se agrega un número a un grupo.
-B: Me pide un código de seis cifras.
-A: Decime la serie y dejo tu contacto aprobado para recibir los cambios de cancha.
-B: ¿Vos trabajás en el club?
-A: Estoy colaborando con la secretaría esta semana.
-B: ¿Podés decirme el nombre del entrenador?
-A: Hay varios equipos, no quiero confundirte.
-B: No te voy a pasar un código de registro.
-A: Si queda pendiente, puede que no te llegue el aviso de mañana.
-B: Le escribo a mi hermana, que es la que figura en la ficha.
+A: ¿Sí?
+B: Buenas, te llamo de la coordinación del club Horizonte por el equipo de básquet infantil.
+A: Sí, mi sobrino juega los sábados.
+B: Estamos pasando los avisos de horario a un canal nuevo porque el grupo viejo se llenó.
+A: ¿Hay que volver a inscribirse?
+B: No, la lista ya está. Nos falta validar algunos teléfonos de familiares.
+A: El mío aparece en la ficha, creo.
+B: Sí, pero el canal nuevo requiere una confirmación para que no entre alguien ajeno.
+A: ¿Qué confirmación?
+B: Te mandé una solicitud. Mirá el mensaje de WhatsApp que acaba de entrar.
+A: Tengo un aviso de registro de cuenta.
+B: Es la pantalla de control que usa la aplicación cuando se agrega un número a un grupo.
+A: Me pide un código de seis cifras.
+B: Decime la serie y dejo tu contacto aprobado para recibir los cambios de cancha.
+A: ¿Vos trabajás en el club?
+B: Estoy colaborando con la secretaría esta semana.
+A: ¿Podés decirme el nombre del entrenador?
+B: Hay varios equipos, no quiero confundirte.
+A: No te voy a pasar un código de registro.
+B: Si queda pendiente, puede que no te llegue el aviso de mañana.
+A: Le escribo a mi hermana, que es la que figura en la ficha.

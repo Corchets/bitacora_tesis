@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un usuario informa que el escáner de una oficina deja bandas en las páginas; da modelo y serie del equipo para registrar mantenimiento.",
+  "que_prueba": "L6 aporta una comprobación acotada («me decís el número de serie que figura atrás»). Contexto: Un usuario informa que el escáner de una oficina deja bandas en las páginas; da modelo y serie del equipo para registrar mantenimiento. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un usuario informa que el escáner de una oficina deja bandas en las páginas; da modelo y serie del equipo para registrar mantenimiento.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "pedido_razonable",

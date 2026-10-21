@@ -21,10 +21,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona llama para actualizar la sede de atención que le corresponde luego de una mudanza; confirma localidad y domicilio para recibir notificaciones.",
+  "que_prueba": "L6 aporta una comprobación acotada («¿Me confirmás el barrio para asignar la sede?»). Contexto: La persona llama para actualizar la sede de atención que le corresponde luego de una mudanza; confirma localidad y domicilio para recibir notificaciones. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama para actualizar la sede de atención que le corresponde luego de una mudanza; confirma localidad y domicilio para recibir notificaciones.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "organismo_previsional",
   "dificultad": "pedido_razonable",

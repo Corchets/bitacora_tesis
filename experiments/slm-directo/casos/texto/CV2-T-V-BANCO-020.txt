@@ -1,20 +1,20 @@
-A: Soy del banco Te aviso que el cajero del centro registró una tarjeta retenida con tu nombre
-B: No estuve en ese cajero hoy
-A: La tarjeta aparece retenida desde anoche
-B: Yo la tengo conmigo
-A: Puede ser una duplicación de perfil hay que validar cuál de las dos sigue activa
-B: Cómo lo compruebo
-A: Entrá a tarjetas elegí la que termina en 52 y buscá estado de plástico
-B: Dice activa
-A: Cambiá la tarjeta a modo suspendido y después reactivala para limpiar el estado viejo
-B: No es más seguro dejarla suspendida
-A: El modo suspendido impide compras pero el reinicio actualiza el chip
-B: La app me advierte que no debo hacer esto si no reconozco la solicitud
-A: Es una instrucción general para cambios no iniciados por el titular
-B: Justamente yo no lo inicié
-A: Si no la reiniciamos el cajero puede seguir marcándola como retenida
-B: Puedo pedir una nueva tarjeta en una sucusal
-A: Sí pero tarda más de una semana
-B: Prefiero esperar y consultar por el canal oficial
-A: Como quieras
-B: Gracias
+A: soy del banco el cajero del centro marcó una tarjeta duplicada con tu nombre
+B: no estuve en ese cajero mi tarjeta está conmigo
+A: puede ser un plástico virtual emitido desde otra sesión
+B: lo puedo revisar sin dar de baja la que tengo
+A: sí mirá las autorizaciones pendientes de la aplicación
+B: veo una que dice agregar tarjeta a una billetera digital
+A: esa es la copia que estamos retirando
+B: la billetera tiene otro nombre y el dispositivo termina en 52 no son míos
+A: son los datos que dejó el duplicado necesitamos validar la baja desde tu cuenta
+B: por qué el aviso dice agregar en vez de eliminar
+A: primero se confirma la asociación para poder bloquearla desde el área de tarjetas
+B: no quiero habilitar pagos desde ese otro dispositivo
+A: aceptá que se agregue a esa billetera así puedo retirarla antes de que hagan una compra
+B: estaría autorizando a alguien que no conozco
+A: si rechazás ahora desaparece la solicitud y no puedo rastrear de dónde salió
+B: me podés pasar el número del reclamo sin que yo acepte eso
+A: el número se genera cuando se vincula la operación
+B: voy a dejarla pendiente y consultar por el canal que uso siempre
+A: no conviene demorarla porque puede entrar otra autorización
+B: no acepté el agregado lo voy a revisar con la sucursal

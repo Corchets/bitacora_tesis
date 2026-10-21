@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona pide reprogramar la entrega de una mesa por una obra en el pasillo; se consulta disponibilidad y se acuerda una nueva fecha.",
+  "que_prueba": "La apertura «Buen día, necesito cambiar la entrega de la mesa que compré. Están pintando el pasillo.» (L1) da paso a una gestión cotidiana. Contexto: La persona pide reprogramar la entrega de una mesa por una obra en el pasillo; se consulta disponibilidad y se acuerda una nueva fecha. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona pide reprogramar la entrega de una mesa por una obra en el pasillo; se consulta disponibilidad y se acuerda una nueva fecha.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "delivery",
   "dificultad": "cotidiana",

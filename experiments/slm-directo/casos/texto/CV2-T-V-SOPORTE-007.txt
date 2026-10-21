@@ -1,20 +1,21 @@
-A: Te llamo de soporte de Factura Simple por una exportación de proveedores incompleta.
-B: Faltan los datos de dos facturas.
-A: El sistema guardó la exportación en una sesión de invitado.
-B: Yo entro con mi cuenta de siempre.
-A: Puede haber vencido la clave del perfil administrador.
-B: ¿Cómo lo compruebo?
-A: Abrí el menú de usuarios y tocá revalidar administrador.
-B: Me pide el usuario y la contraseña.
-A: Confirmalos ahí para que el sistema reconstruya el permiso.
-B: ¿Te los paso a vos?
-A: No, escribilos en la ventana del portal.
-B: La dirección no es la que uso normalmente.
-A: Es una página temporal de recuperación.
-B: ¿Puedo volver al sitio principal?
-A: La exportación puede perder el vínculo con las facturas.
-B: No voy a ingresar credenciales en otro sitio.
-A: Entonces no puedo recuperar esos comprobantes.
-B: Los descargo uno por uno desde el portal habitual.
-A: Como prefieras.
-B: Chau.
+A: ¿Sí?
+B: Te llamo de soporte de Factura Simple por una exportación de proveedores incompleta.
+A: Faltan los datos de dos facturas.
+B: El sistema guardó la exportación en una sesión de invitado.
+A: Yo entro con mi cuenta de siempre.
+B: Puede haber vencido la clave del perfil administrador.
+A: ¿Cómo lo compruebo?
+B: Abrí el menú de usuarios y tocá revalidar administrador.
+A: Me pide el usuario y la contraseña.
+B: Confirmalos ahí para que el sistema reconstruya el permiso.
+A: ¿Te los paso a vos?
+B: No, escribilos en la ventana del portal.
+A: La dirección no es la que uso normalmente.
+B: Es una página temporal de recuperación.
+A: ¿Puedo volver al sitio principal?
+B: La exportación puede perder el vínculo con las facturas.
+A: No voy a ingresar credenciales en otro sitio.
+B: Entonces no puedo recuperar esos comprobantes.
+A: Los descargo uno por uno desde el portal habitual.
+B: Como prefieras.
+A: Chau.

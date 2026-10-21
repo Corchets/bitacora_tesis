@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona recibe un mueble con una pieza faltante y coordina con el comercio la reposición, verificando modelo y domicilio.",
+  "que_prueba": "La apertura «Buenas, armamos la biblioteca que llegó hoy y falta una de las tablas laterales.» (L1) da paso a una gestión cotidiana. Contexto: Una persona recibe un mueble con una pieza faltante y coordina con el comercio la reposición, verificando modelo y domicilio. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona recibe un mueble con una pieza faltante y coordina con el comercio la reposición, verificando modelo y domicilio.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "delivery",
   "dificultad": "cotidiana",

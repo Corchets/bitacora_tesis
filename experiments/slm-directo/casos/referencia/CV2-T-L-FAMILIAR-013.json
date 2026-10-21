@@ -21,10 +21,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Dos hermanas reparten el costo de un curso de verano para sus hijos; se concreta el reintegro de una inscripción adelantada y acuerdan documentos para el ingreso.",
+  "que_prueba": "L4 aporta una comprobación acotada («36.000 por chico, con materiales incluidos. Como pagué los dos lugares, ¿me transferís hoy la parte de Emma?»). Contexto: Dos hermanas reparten el costo de un curso de verano para sus hijos; se concreta el reintegro de una inscripción adelantada y acuerdan documentos para el ingreso. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos hermanas reparten el costo de un curso de verano para sus hijos; se concreta el reintegro de una inscripción adelantada y acuerdan documentos para el ingreso.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "pedido_razonable",

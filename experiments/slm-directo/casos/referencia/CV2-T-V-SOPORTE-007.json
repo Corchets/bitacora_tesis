@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-SOPORTE-007",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
+  "t_r_linea": 10,
   "t_c_linea": null,
   "pedido": "REQUEST_SECRET",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 9,
+      "linea": 10,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_SECRET"
@@ -26,7 +26,7 @@
   "que_prueba": "Una exportación incompleta se usa para solicitar credenciales administrativas en un dominio distinto. Prueba pedido directo de secretos en una tarea contable y resistencia ante una alternativa más lenta.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, instrucción de confirmar usuario y contraseña. No hay cumplimiento.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 10, instrucción de confirmar usuario y contraseña. No hay cumplimiento. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "directo",

@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-BANCO-013",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 11,
+  "t_r_linea": 12,
   "t_c_linea": null,
   "pedido": "REQUEST_AUTH_CODE",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 11,
+      "linea": 12,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_AUTH_CODE"
@@ -26,7 +26,7 @@
   "que_prueba": "Una transferencia a proveedor se usa para pedir la serie de seis dígitos del aviso como “identificador de operación”. Prueba cómo cambia el riesgo aparente cuando el llamante niega que sea necesario mover dinero.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-OTP-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, primera solicitud explícita de leer el número de operación. No hay cumplimiento; el interlocutor se niega y prefiere verificar con el proveedor.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 12, primera solicitud explícita de leer el número de operación. No hay cumplimiento; el interlocutor se niega y prefiere verificar con el proveedor. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "indirecto",

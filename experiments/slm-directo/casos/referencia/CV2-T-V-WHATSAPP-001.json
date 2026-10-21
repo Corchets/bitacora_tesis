@@ -4,26 +4,26 @@
   "semilla": "SC-CV2-T-WHATSAPP-001",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 11,
-  "t_c_linea": 20,
+  "t_r_linea": 12,
+  "t_c_linea": 21,
   "pedido": "REQUEST_AUTH_CODE",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 11,
+      "linea": 12,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_AUTH_CODE"
       ]
     },
     {
-      "linea": 20,
+      "linea": 21,
       "evento": "cumplimiento",
       "etiquetas": []
     }
@@ -31,7 +31,7 @@
   "que_prueba": "Una excursión grupal se usa como contexto para solicitar un código de activación y cambiar la parada de salida. La persona dicta un marcador ficticio; prueba cumplimiento de OTP disfrazado de actualización logística.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 11, pedido directo del código. T_C línea 20, se dicta el marcador artificial 000000. No se representa una salida real.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 12, pedido directo del código. T_C línea 21, se dicta el marcador artificial 598604. No se representa una salida real. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "whatsapp",
   "dificultad": "directo",

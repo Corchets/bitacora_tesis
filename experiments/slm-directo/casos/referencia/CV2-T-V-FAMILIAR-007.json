@@ -4,39 +4,39 @@
   "semilla": "SC-CV2-T-FAMILIAR-007",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 17,
-  "t_c_linea": 18,
+  "t_r_linea": 18,
+  "t_c_linea": 19,
   "pedido": "REQUEST_REMOTE_ACCESS",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 17,
+      "linea": 18,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_REMOTE_ACCESS"
       ]
     },
     {
-      "linea": 18,
+      "linea": 19,
       "evento": "cumplimiento",
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una falsa ayuda para recuperar fotos induce a instalar una herramienta y compartir la pantalla, exponiendo otras aplicaciones; B confirma que habilitó la pantalla compartida antes de detenerse. Prueba cumplimiento parcial de acceso remoto en una escena familiar cotidiana.",
+  "que_prueba": "Una falsa ayuda para recuperar fotos induce a instalar una herramienta y compartir la pantalla, exponiendo otras aplicaciones; A confirma que habilitó la pantalla compartida antes de detenerse. Prueba cumplimiento parcial de acceso remoto en una escena familiar cotidiana.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 17, donde comienza el pedido indirecto; también podría ubicarse en línea 18, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta de T_R línea 17 por pedido de compartir pantalla; línea 15 presenta la herramienta y puede ser inicio del pedido, queda abierto D07. T_C línea 18 confirma acción observable. Enlace no operativo ni incluido en el diálogo.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 18, donde comienza el pedido indirecto; también podría ubicarse en línea 19, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta de T_R línea 18 por pedido de compartir pantalla; línea 16 presenta la herramienta y puede ser inicio del pedido, queda abierto D07. T_C línea 19 confirma acción observable. Enlace no operativo ni incluido en el diálogo. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-FAMILIAR-DINERO-01",
-  "situacion": "Una falsa ayuda para recuperar fotos induce a instalar una herramienta y compartir la pantalla, exponiendo otras aplicaciones; B confirma que habilitó la pantalla compartida antes de detenerse. Prueba cumplimiento parcial de acceso remoto en una escena familiar cotidiana."
+  "situacion": "Una falsa ayuda para recuperar fotos induce a instalar una herramienta y compartir la pantalla, exponiendo otras aplicaciones; A confirma que habilitó la pantalla compartida antes de detenerse. Prueba cumplimiento parcial de acceso remoto en una escena familiar cotidiana."
 }

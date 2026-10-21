@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un técnico de campo informa que terminó una instalación y coordina con la oficina la devolución de herramientas y una segunda visita para revisar una medición.",
+  "que_prueba": "La apertura «hola terminé la instalación de la bomba en el vivero» (L1) da paso a una gestión cotidiana. Contexto: Un técnico de campo informa que terminó una instalación y coordina con la oficina la devolución de herramientas y una segunda visita para revisar una medición. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un técnico de campo informa que terminó una instalación y coordina con la oficina la devolución de herramientas y una segunda visita para revisar una medición.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "trabajo",
   "dificultad": "cotidiana",

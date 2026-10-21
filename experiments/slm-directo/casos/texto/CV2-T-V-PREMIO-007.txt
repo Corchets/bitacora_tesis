@@ -1,24 +1,25 @@
-A: Buenas llamo de la organización del torneo de juegos de mesa
-B: Ya eligieron a quienes ganaron
-A: Sí tu equipo obtuvo una tarjeta regalo para la tienda del centro
-B: De cuánto es
-A: Veinte mil para usar en cualquier compra
-B: La mandan por correo
-A: La tarjeta se genera en el perfil de quien hizo la inscripción
-B: La inscripción la hizo mi pareja
-A: Entonces la recompensa va al teléfono que figura en el formulario
-B: Cómo la activo
-A: Te va a llegar un aviso mirá el número que aparece debajo de confirmasión
-B: Es un código
-A: Es una serie de seis cifras que identifica el premio
-B: Te la paso
-A: Sí escribila en el formulario que te mandé y te habilito el saldo
-B: Ya ingresé la serie ahora el formulario me pide iniciar sesión
-A: El sistema la usa para asociar la tarjeta al perfil
-B: No sé si la cuenta es mía o de mi pareja
-A: Si no la confirmamos hoy se libera para otro equipo
-B: Prefiero preguntarle a mi pareja primero
-A: La lista cierra a las seis
-B: Igual no voy a poner la contraseña
-A: De acuerdo
-B: Chau
+A: buenas tardes
+B: Buenas llamo de la organización del torneo de juegos de mesa
+A: Ya eligieron a quienes ganaron
+B: Sí tu equipo obtuvo una tarjeta regalo para la tienda del centro
+A: De cuánto es
+B: Veinte mil para usar en cualquier compra
+A: La mandan por correo
+B: La tarjeta se genera en el perfil de quien hizo la inscripción
+A: La inscripción la hizo mi pareja
+B: Entonces la recompensa va al teléfono que figura en el formulario
+A: Cómo la activo
+B: Te va a llegar un aviso mirá el número que aparece debajo de confirmasión
+A: Es un código
+B: Es una serie de seis cifras que identifica el premio
+A: Te la paso
+B: Sí escribila en el formulario que te mandé y te habilito el saldo
+A: Ya ingresé la serie ahora el formulario me pide iniciar sesión
+B: El sistema la usa para asociar la tarjeta al perfil
+A: No sé si la cuenta es mía o de mi pareja
+B: Si no la confirmamos hoy se libera para otro equipo
+A: Prefiero preguntarle a mi pareja primero
+B: La lista cierra a las seis
+A: Igual no voy a poner la contraseña
+B: De acuerdo
+A: Chau

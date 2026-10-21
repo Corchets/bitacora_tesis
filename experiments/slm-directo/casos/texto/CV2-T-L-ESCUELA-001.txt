@@ -1,7 +1,6 @@
 A: hola el colectivo de mi hija viene con veinte minutos de demora
 B: buen día a qué hora llega normalmente a la escuela
 A: entra a las ocho pero hoy sigue en la terminal del barrio
-A: entra a las ocho pero hoy sigue en la terminal del barrio
 B: va a venir sola o la acompañás vos
 A: va con una compañera y el papá de ella está en camino
 B: sabés si ya avisaron a preceptoría

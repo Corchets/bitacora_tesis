@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-BANCO-011",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 13,
+  "t_r_linea": 14,
   "t_c_linea": null,
   "pedido": "REQUEST_AUTH_CODE",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 13,
+      "linea": 14,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_AUTH_CODE"
@@ -26,7 +26,7 @@
   "que_prueba": "Una compra habitual se usa para pedir los números de una autorización pendiente sin empezar por llamar código al mensaje. Prueba un pedido inducido cuya función se aclara por preguntas de la persona.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-OTP-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nDuda D07: la línea 9 señala la serie y la 11 explica que podría identificar la operación; la solicitud de dictarla aparece en línea 13. Se marca esa primera petición explícita; sin cumplimiento.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nDuda D07: la línea 10 señala la serie y la 11 explica que podría identificar la operación; la solicitud de dictarla aparece en línea 14. Se marca esa primera petición explícita; sin cumplimiento. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "indirecto",

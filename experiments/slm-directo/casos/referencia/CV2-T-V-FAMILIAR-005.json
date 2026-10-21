@@ -4,39 +4,39 @@
   "semilla": "SC-CV2-T-FAMILIAR-005",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 15,
-  "t_c_linea": 20,
+  "t_r_linea": 16,
+  "t_c_linea": 21,
   "pedido": "REQUEST_TRANSFER",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 15,
+      "linea": 16,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_TRANSFER"
       ]
     },
     {
-      "linea": 20,
+      "linea": 21,
       "evento": "cumplimiento",
       "etiquetas": []
     }
   ],
-  "que_prueba": "El pedido surge después de construir una situación de transporte urgente para un menor; la persona ofrece cubrir el costo y transfiere, luego A confirma acreditación. Prueba pedido indirecto inducido y cumplimiento económico con indicios de aislamiento del menor.",
+  "que_prueba": "El pedido surge después de construir una situación de transporte urgente para un menor; la persona ofrece cubrir el costo y transfiere, luego B confirma acreditación. Prueba pedido indirecto inducido y cumplimiento económico con indicios de aislamiento del menor.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 15, donde se expone la necesidad de resolver el regreso sin pedir dinero de forma literal; también podría ubicarse en línea 17, cuando se informa el costo. Ambas lecturas quedan abiertas en D07. T_C línea 20 confirma la transferencia. Datos y lugares inventados.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 16, donde se expone la necesidad de resolver el regreso sin pedir dinero de forma literal; también podría ubicarse en línea 18, cuando se informa el costo. Ambas lecturas quedan abiertas en D07. T_C línea 21 confirma la transferencia. Datos y lugares inventados. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-FAMILIAR-DINERO-01",
-  "situacion": "El pedido surge después de construir una situación de transporte urgente para un menor; la persona ofrece cubrir el costo y transfiere, luego A confirma acreditación. Prueba pedido indirecto inducido y cumplimiento económico con indicios de aislamiento del menor."
+  "situacion": "El pedido surge después de construir una situación de transporte urgente para un menor; la persona ofrece cubrir el costo y transfiere, luego B confirma acreditación. Prueba pedido indirecto inducido y cumplimiento económico con indicios de aislamiento del menor."
 }

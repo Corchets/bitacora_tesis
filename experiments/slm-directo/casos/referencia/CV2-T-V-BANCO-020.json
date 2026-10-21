@@ -4,7 +4,7 @@
   "semilla": "SC-CV2-T-BANCO-020",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
+  "t_r_linea": 13,
   "t_c_linea": null,
   "pedido": "REQUEST_SECURITY_ACTION",
   "evidencia": [
@@ -16,22 +16,44 @@
       ]
     },
     {
-      "linea": 9,
+      "linea": 8,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 10,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 13,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_SECURITY_ACTION"
       ]
+    },
+    {
+      "linea": 15,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "rechazo",
+      "etiquetas": []
     }
   ],
-  "que_prueba": "Una supuesta tarjeta retenida induce a suspender y reactivar el plástico. La aplicación advierte que no se proceda si la solicitud no es reconocida; la persona se niega. Prueba un pedido de acción de seguridad y señal contradictoria.",
-  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "que_prueba": "Un supuesto duplicado de tarjeta lleva a pedir que se habilite una billetera y un dispositivo ajenos. La pantalla anuncia agregar mientras el llamante afirma que está dando de baja; la negativa evita atribuir cumplimiento a un simple cambio de estado de la tarjeta propia.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 9, donde comienza el pedido indirecto; también podría ubicarse en línea 10, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 9, primer paso para cambiar el estado de seguridad. No hay cumplimiento.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en el pedido de aceptar el agregado a la billetera ajena; las consultas previas solo sirven para identificar la solicitud. T_C queda nulo porque la persona dice que no aceptó. Se eliminó la secuencia de suspender y reactivar la propia tarjeta, que no mostraba por sí sola un beneficio al supuesto atacante. Interfaces y procedimiento ficticios; D07 permanece abierta. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-CLAVE-CAMBIO-01",
-  "situacion": "Una supuesta tarjeta retenida induce a suspender y reactivar el plástico. La aplicación advierte que no se proceda si la solicitud no es reconocida; la persona se niega. Prueba un pedido de acción de seguridad y señal contradictoria."
+  "situacion": "Un falso operador usa una alerta de tarjeta duplicada para intentar que se autorice una billetera digital y un dispositivo que la persona no reconoce."
 }

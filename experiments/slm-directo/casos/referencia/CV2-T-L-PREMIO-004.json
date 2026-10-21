@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La ganadora de un concurso de cocina consulta si el premio incluye una clase presencial o un vale para comprar utensilios; aclara el modo de entrega.",
+  "que_prueba": "La conversación arranca con «Hola, me avisaron que gané algo en el concurso de recetas, pero no entendí qué premio es.» (L1). Contexto: La ganadora de un concurso de cocina consulta si el premio incluye una clase presencial o un vale para comprar utensilios; aclara el modo de entrega. La dificultad es considerar para qué se confirma la información antes de alertar solo por la presencia de datos personales.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la ganadora de un concurso de cocina consulta si el premio incluye una clase presencial o un vale para comprar utensilios; aclara el modo de entrega.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "premio",
   "dificultad": "pedido_razonable",

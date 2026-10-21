@@ -24,10 +24,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona llama para entender una comisión de mantenimiento que figura con un código corto; aporta período y monto, sin revelar claves.",
+  "que_prueba": "En L1 aparece «Hola, en el resumen aparece “código 07” y una comisión de 1.200 pesos. No sé de qué es.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama para entender una comisión de mantenimiento que figura con un código corto; aporta período y monto, sin revelar claves.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "mencion_sin_pedido",

@@ -24,10 +24,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una usuaria comenta que el cajero pidió una clave de operación al retirar efectivo; pregunta por un error de impresión, sin revelar su PIN.",
+  "que_prueba": "En L3 aparece «Sí, saqué 12 mil. En la pantalla apareció “clave de operación” antes de terminar.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una usuaria comenta que el cajero pidió una clave de operación al retirar efectivo; pregunta por un error de impresión, sin revelar su pin.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "mencion_sin_pedido",

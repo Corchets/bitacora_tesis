@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un paciente consulta si puede cambiar una sesión de fisioterapia por un turno más corto debido a que debe volver al trabajo; acuerda fecha y modalidad.",
+  "que_prueba": "La apertura «Buenas, tengo sesión el jueves a las dos pero me convocaron a una reunión de trabajo.» (L1) da paso a una gestión cotidiana. Contexto: Un paciente consulta si puede cambiar una sesión de fisioterapia por un turno más corto debido a que debe volver al trabajo; acuerda fecha y modalidad. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un paciente consulta si puede cambiar una sesión de fisioterapia por un turno más corto debido a que debe volver al trabajo; acuerda fecha y modalidad.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "medico",
   "dificultad": "cotidiana",

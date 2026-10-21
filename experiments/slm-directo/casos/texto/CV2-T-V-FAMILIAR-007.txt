@@ -1,21 +1,22 @@
-A: Hola, soy la prima de Fabi, ¿está en su casa?
-B: Sí, estoy acá. ¿Qué necesitás?
-A: Se le trabó la aplicación de fotos y me pidió que la ayude a guardar las imágenes del cumpleaños.
-B: ¿No las puede mandar por mensaje?
-A: Son muchas y el teléfono no le deja abrir la galería.
-B: ¿Qué aplicación tiene?
-A: Una para compartir pantalla que me pasó un chico del local donde compró el celular.
-B: ¿Vos estás con ella ahora?
-A: No, me llamó desde el teléfono de una vecina porque el suyo se reinicia.
-B: ¿Y por qué no espera a que la vea?
-A: Está por salir a una consulta y quería tener las fotos antes.
-B: ¿No puede llevarlo al local?
-A: Cierra temprano y no queda otro cerca.
-B: ¿Qué te pide la aplicación?
-A: Que alguien de confianza se conecte para mostrar dónde están los ajustes.
-B: Yo no sé arreglar teléfonos.
-A: Solo necesito que abras el enlace que te mandé y compartas la pantalla, no hay que cambiar nada.
-B: Ya la abrí y toqué compartir pantalla.
-A: Perfecto, ahora voy guiándote para entrar a la cuenta de fotos.
-B: Me aparece también el banco y los mensajes, voy a cortar.
-A: Esperá, todavía no llegué a las fotos.
+A: ¿Sí?
+B: Hola, soy la prima de Fabi, ¿está en su casa?
+A: Sí, estoy acá. ¿Qué necesitás?
+B: Se le trabó la aplicación de fotos y me pidió que la ayude a guardar las imágenes del cumpleaños.
+A: ¿No las puede mandar por mensaje?
+B: Son muchas y el teléfono no le deja abrir la galería.
+A: ¿Qué aplicación tiene?
+B: Una para compartir pantalla que me pasó un chico del local donde compró el celular.
+A: ¿Vos estás con ella ahora?
+B: No, me llamó desde el teléfono de una vecina porque el suyo se reinicia.
+A: ¿Y por qué no espera a que la vea?
+B: Está por salir a una consulta y quería tener las fotos antes.
+A: ¿No puede llevarlo al local?
+B: Cierra temprano y no queda otro cerca.
+A: ¿Qué te pide la aplicación?
+B: Que alguien de confianza se conecte para mostrar dónde están los ajustes.
+A: Yo no sé arreglar teléfonos.
+B: Solo necesito que abras el enlace que te mandé y compartas la pantalla, no hay que cambiar nada.
+A: Ya la abrí y toqué compartir pantalla.
+B: Perfecto, ahora voy guiándote para entrar a la cuenta de fotos.
+A: Me aparece también el banco y los mensajes, voy a cortar.
+B: Esperá, todavía no llegué a las fotos.

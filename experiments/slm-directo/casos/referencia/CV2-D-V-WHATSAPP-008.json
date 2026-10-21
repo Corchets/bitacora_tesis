@@ -30,15 +30,15 @@
       ]
     }
   ],
-  "que_prueba": "La llamada presenta una alerta verosímil y maniobras de presión, control o demora de verificación, pero termina antes de pedir un código, secreto, dato personal, transferencia, acceso remoto o acción de seguridad. Prueba el límite de un escenario sospechoso sin solicitud observable.",
+  "que_prueba": "La feria y su grupo aportan un contexto comunitario plausible, pero el llamante no identifica a la organizadora y desalienta mensajes independientes. Prueba una escena sospechosa que termina sin pedir el código de registro.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "whatsapp",
   "dificultad": "sin_pedido",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-WA-CODE-01",
-  "situacion": "Un aviso sobre cambios de grupo de mensajería no termina en pedido de código, dato o acción crítica. Prueba que la sola mención de WhatsApp o de una invitación no dispara una alerta de vishing."
+  "situacion": "Un supuesto administrador de feria anuncia cambios de cuenta en el grupo sin poder identificar a la organizadora; no solicita código ni permiso crítico."
 }
