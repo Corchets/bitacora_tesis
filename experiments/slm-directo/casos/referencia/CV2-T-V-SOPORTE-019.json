@@ -9,14 +9,14 @@
   "pedido": null,
   "evidencia": [
     {
-      "linea": 2,
+      "linea": 3,
       "evento": "contexto",
       "etiquetas": [
         "TRUST_BUILDING"
       ]
     },
     {
-      "linea": 20,
+      "linea": 21,
       "evento": "contexto",
       "etiquetas": [
         "URGENCY_PRESSURE"
@@ -26,7 +26,7 @@
   "que_prueba": "Una sesión desconocida en una plataforma de reservas genera una llamada de alerta, pero no llega a pedir clave o acceso. Prueba sospecha contextual sin acción crítica observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Sin T_R/T_C. La llamada puede ser legítima; no se puede confirmar fraude por su intención alegada. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Sin T_R/T_C. La llamada puede ser legítima; no se puede confirmar fraude por su intención alegada. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07). En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "sin_pedido",

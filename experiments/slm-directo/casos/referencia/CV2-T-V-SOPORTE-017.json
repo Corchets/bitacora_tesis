@@ -9,14 +9,14 @@
   "pedido": null,
   "evidencia": [
     {
-      "linea": 2,
+      "linea": 3,
       "evento": "contexto",
       "etiquetas": [
         "TRUST_BUILDING"
       ]
     },
     {
-      "linea": 18,
+      "linea": 19,
       "evento": "contexto",
       "etiquetas": [
         "URGENCY_PRESSURE"
@@ -26,7 +26,7 @@
   "que_prueba": "Una supuesta edición de archivo fuera de horario y una llamada centralizada crean sospecha, pero no llega un pedido de contraseña, acceso remoto u otra acción crítica. Prueba preparación sin solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R/T_C nulos. La actividad puede ser real; la clase del escenario no se confirma por el texto y no debe exigirse detectar una intención no expresada. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R/T_C nulos. La actividad puede ser real; la clase del escenario no se confirma por el texto y no debe exigirse detectar una intención no expresada. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07). En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "sin_pedido",

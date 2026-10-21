@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-FAMILIAR-003",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 11,
+  "t_r_linea": 12,
   "t_c_linea": null,
   "pedido": "REQUEST_TRANSFER",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 11,
+      "linea": 12,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_TRANSFER"
@@ -26,7 +26,7 @@
   "que_prueba": "Una supuesta conocida pide pagar de nuevo un alquiler por un supuesto error de destinatario, con vencimiento inmediato y sin contacto verificable del administrador. Prueba una petición económica directa asociada a un pago cotidiano y documentación incompleta.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 11, solicitud explícita de transferir al alias del supuesto administrador. No hay cumplimiento; B pide verificar la reserva y el contrato. Alias, nombres y montos son inventados.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 12, solicitud explícita de transferir al alias del supuesto administrador. No hay cumplimiento; A pide verificar la reserva y el contrato. Alias, nombres y montos son inventados. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "directo",

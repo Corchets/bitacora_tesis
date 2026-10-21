@@ -1,20 +1,21 @@
-A: Te llamo de la oficina de la liga de ajedrez por la lista de partidas del sábado.
-B: ¿Me cambiaron de mesa?
-A: El sistema no puede confirmar tu inscripción porque falta unir el número de contacto al perfil.
-B: Yo me anoté por el formulario.
-A: La ficha está, pero el grupo de avisos se reinició.
-B: ¿Qué hay que hacer?
-A: Abrí el mensaje que te acaba de llegar y mirá la referencia de seis dígitos.
-B: Dice iniciar registro.
-A: Esa referencia es la que me permite volver a asociarte a la lista.
-B: ¿La querés para cargarla en el formulario?
-A: Sí, pasámela y te confirmo la mesa.
-B: ¿Me podés decir qué mesa tenía antes?
-A: Cuatro, junto a la ventana.
-B: ¿Y ahora cuál sería?
-A: No aparece hasta que se complete la asociación.
-B: No voy a compartir el registro.
-A: Entonces te dejamos como suplente.
-B: Prefiero llamar a la liga directamente.
-A: Está bien.
-B: Hasta luego.
+A: ¿Hola?
+B: Te llamo de la oficina de la liga de ajedrez por la lista de partidas del sábado.
+A: ¿Me cambiaron de mesa?
+B: El sistema no puede confirmar tu inscripción porque falta unir el número de contacto al perfil.
+A: Yo me anoté por el formulario.
+B: La ficha está, pero el grupo de avisos se reinició.
+A: ¿Qué hay que hacer?
+B: Abrí el mensaje que te acaba de llegar y mirá la referencia de seis dígitos.
+A: Dice iniciar registro.
+B: Esa referencia es la que me permite volver a asociarte a la lista.
+A: ¿La querés para cargarla en el formulario?
+B: Sí, pasámela y te confirmo la mesa.
+A: ¿Me podés decir qué mesa tenía antes?
+B: Cuatro, junto a la ventana.
+A: ¿Y ahora cuál sería?
+B: No aparece hasta que se complete la asociación.
+A: No voy a compartir el registro.
+B: Entonces te dejamos como suplente.
+A: Prefiero llamar a la liga directamente.
+B: Está bien.
+A: Hasta luego.

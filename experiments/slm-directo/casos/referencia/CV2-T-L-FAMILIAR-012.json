@@ -21,10 +21,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una nieta coordina con su abuela la compra de un colchón que ambas habían elegido; paga la abuela y acuerdan la devolución familiar sin presión.",
+  "que_prueba": "L6 aporta una comprobación acotada («¿Podés transferirme los 80.000 que habíamos acordado para el colchón hoy? Tengo que completar el pago con la tienda.»). Contexto: Una nieta coordina con su abuela la compra de un colchón que ambas habían elegido; paga la abuela y acuerdan la devolución familiar sin presión. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una nieta coordina con su abuela la compra de un colchón que ambas habían elegido; paga la abuela y acuerdan la devolución familiar sin presión.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "pedido_razonable",

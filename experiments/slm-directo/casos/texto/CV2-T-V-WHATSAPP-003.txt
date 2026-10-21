@@ -1,20 +1,21 @@
-A: Hola soy de la comisión de la peña del barrio Vos estás en el grupo de ensayo
-B: Sí voy los jueves
-A: Se reinició el teléfono que usamos para pasar las partituras y tenemos que volver a asociar los contactos
-B: Se perdió el grupo
-A: No quedó guardado pero la cuenta de la peña necesita una validación nueva
-B: Me tengo que salir y volver a entrar
-A: No te mando el código de confirmación por mensage
-B: Me acaba de llegar uno
-A: Decime los seis dígitos y te sumo al listado de ensayo
-B: El mensaje dice que alguien quiere registrar mi número
-A: Sí es la verificación estándar
-B: Vos sos quien lleva las partituras
-A: Estoy cubriendo a la secretaria esta semana
-B: Cómo se llama ella
-A: No tengo el teléfono de la oficina acá
-B: El código es 299127
-A: Gracias ahora te tendría que aparecer la invitación
-B: Todavía no la veo
-A: Esperá un poco puede tardar
-B: Bueno le aviso a la comisión
+A: hola decime
+B: Hola soy de la comisión de la peña del barrio vos estás en el grupo de ensayo
+A: Sí voy los jueves
+B: Se reinició el teléfono que usamos para pasar las partituras y tenemos que volver a asociar los contactos
+A: Se perdió el grupo
+B: No quedó guardado pero la cuenta de la peña necesita una validación nueva
+A: Me tengo que salir y volver a entrar
+B: Te va a llegar un código de confirmación por mensaje al número que está registrado
+A: Me acaba de llegar uno
+B: Decime los seis dígitos y te sumo al listado de ensayo
+A: El mensaje dice que alguien quiere registrar mi número
+B: Sí es la verificación estándar para recuperar la cuenta de la peña
+A: Vos sos quien lleva las partituras
+B: Estoy cubriendo a la secretaria esta semana
+A: Cómo se llama ella
+B: No tengo el teléfono de la oficina acá
+A: El código es 299127
+B: Gracias ahora te tendría que aparecer la invitación
+A: Todavía no la veo
+B: Esperá un poco puede tardar
+A: Bueno le aviso a la comisión

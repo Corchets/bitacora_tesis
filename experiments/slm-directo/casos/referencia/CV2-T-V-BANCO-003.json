@@ -4,34 +4,56 @@
   "semilla": "SC-CV2-T-BANCO-003",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
+  "t_r_linea": 14,
   "t_c_linea": null,
   "pedido": "REQUEST_SECURITY_ACTION",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 9,
+      "linea": 5,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 13,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 14,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_SECURITY_ACTION"
       ]
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 25,
+      "evento": "rechazo",
+      "etiquetas": []
     }
   ],
-  "que_prueba": "Una falla alegada del chip se usa para inducir la aceptación de una reposición y el bloqueo inmediato de una tarjeta. Prueba una acción de seguridad directa sobre un instrumento distinto del cambio de dispositivo.",
-  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "que_prueba": "La reposición de una tarjeta se convierte en una solicitud de autorizar retiro por un tercero en una dirección ajena. El riesgo observable es esa autorización no iniciada, no reemplazar una tarjeta propia; la persona no la concede.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No hay aceptación ni bloqueo observable. T_R línea 9, primera instrucción de iniciar la reposición.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la solicitud de autorizar el retiro por un tercero; mirar el estado de una reposición en la propia aplicación no se toma automáticamente como pedido crítico. No hubo autorización ni retiro observable. El procedimiento es ficción de laboratorio, no una descripción de la operativa de un banco real; D07 revisará la marca. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-CLAVE-CAMBIO-01",
-  "situacion": "Una falla alegada del chip se usa para inducir la aceptación de una reposición y el bloqueo inmediato de una tarjeta. Prueba una acción de seguridad directa sobre un instrumento distinto del cambio de dispositivo."
+  "situacion": "Un falso sector de tarjetas usa un error de chip para conseguir autorización de retiro por un tercero en un punto que la titular no reconoce."
 }

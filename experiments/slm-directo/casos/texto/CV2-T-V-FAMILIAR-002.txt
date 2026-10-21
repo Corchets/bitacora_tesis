@@ -1,22 +1,24 @@
 A: Hola tía Soy Santi el hijo de Nora
 B: Sí Santi decime
-A: Estoy en el taller con el auto de mamá Se rompió la correa y no la pueden dejar salir así
+A: Estoy en el taller con el auto de mamá se rompió la correa y no la pueden dejar salir así
 B: Ella está ahí con vos
-A: Sí fue a hablar con el mecánico pero está muy nerviosa
+A: Sí pero tiene el teléfono descargado y está hablando con el mecánico
 B: Que me llame cuando pueda
-A: Tiene el teléfono descargado y me pidió que resolviera el pago
+A: Me pidió que resolviera el pago antes de que cierre el taller
 B: Cuánto es
 A: Ciento noventa mil entre repuesto y mano de obra
-B: Te pasaron presupuesto
-A: Me lo mostraron en el mostrador pero no me dieron copia todavía
-B: Se puede pagar con tarjeta
-A: El posnet no funciona El dueño dice que solo recibe efectivo hoy
-B: Dónde están
-A: En el taller de la calle San Martín a dos cuadras de la plaza chica
-B: Voy pa allá y hablo con tu mamá
-A: No llegás antes del cierre tía Transferime ciento noventa mil y le pago al mecánico
-B: A qué dirección te mando el auto
-A: Mejor pedile al remisero que te espere en el cajero voy yo a buscar la plata
-B: Ya saqué ciento noventa mil y estoy en camino
-A: Te espero en la esquina del taller
-B: En diez minutos estoy
+B: Pasame el presupuesto así lo miro
+A: No me dieron copia y el posnet no funciona
+B: Puedo acercarme y hablar con Nora
+A: No llegás antes del cierre y no quiero que mamá se preocupe
+B: Entonces llamo al taller
+A: No llames porque están atendiendo autos y se van a enojar
+B: ¿A quién le transfiero?
+A: Transferime ciento noventa mil al alias taller.resuelve, está a nombre de otra persona porque el dueño cambió la cuenta
+B: ¿Por qué está a nombre de otra persona?
+A: Es el alias de quien compra el repuesto, después mamá te explica
+B: Ya hice la transferencia por ciento noventa mil al alias que me pasaste
+A: Listo, me figura acreditada, ahora sacan el auto
+B: Le voy a preguntar a Nora apenas vuelva a tener el teléfono
+A: Sí, después hablan
+B: Chau

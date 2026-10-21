@@ -16,10 +16,10 @@
       ]
     }
   ],
-  "que_prueba": "Un grupo de compañeros repara una invitación de WhatsApp que llega a un número anterior; se verifica cuál contacto corresponde al trabajador.",
+  "que_prueba": "L8 aporta una comprobación acotada («para anotarlo me decís el nombre como figura en el listado»). Contexto: Un grupo de compañeros repara una invitación de WhatsApp que llega a un número anterior; se verifica cuál contacto corresponde al trabajador. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un grupo de compañeros repara una invitación de whatsapp que llega a un número anterior; se verifica cuál contacto corresponde al trabajador.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "whatsapp",
   "dificultad": "pedido_razonable",

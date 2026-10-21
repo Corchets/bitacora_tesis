@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-D-BANCO-006",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 13,
+  "t_r_linea": 14,
   "t_c_linea": null,
   "pedido": "REQUEST_AUTH_CODE",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 13,
+      "linea": 14,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_AUTH_CODE"
@@ -26,7 +26,7 @@
   "que_prueba": "Una compra conocida sirve de anzuelo y el pedido de OTP aparece después de describir una conciliación que la persona no inició. El pedido se formula como “pasame esos seis números”, sin llamarlos clave. Prueba el límite entre dato operativo y código de autenticación.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-OTP-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Duda D07: “esos seis números” se pide en línea 13, pero el llamante no aclara que sean de acceso hasta línea 15. La referencia ubica T_R en la primera solicitud concreta; revisar si el contexto posterior debe desplazarla. No hay cumplimiento.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Duda D07: “esos seis números” se pide en línea 14, pero el llamante no aclara que sean de acceso hasta línea 16. La referencia ubica T_R en la primera solicitud concreta; revisar si el contexto posterior debe desplazarla. No hay cumplimiento. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "banco",
   "dificultad": "indirecto",

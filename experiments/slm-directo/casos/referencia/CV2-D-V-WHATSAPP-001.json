@@ -31,12 +31,12 @@
   "que_prueba": "Una actividad de voluntariado se usa para pedir el código de activación de WhatsApp. La llamada no puede identificar a la coordinadora, pero la persona termina compartiendo el código; prueba una solicitud de OTP con cumplimiento y contexto comunitario.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, primera solicitud de dictar los seis números. T_C línea 20, lectura del código inventado.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, primera solicitud de dictar los seis números. T_C línea 20, lectura del código inventado. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "whatsapp",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-WA-CODE-01",
-  "situacion": "El pretexto de una lista de voluntarios y un evento vecinal lleva a pedir el código de activación de WhatsApp. La persona intenta verificar al contacto mediante una coordinadora que el llamante no puede identificar. Prueba una identidad comunitaria de confianza y solicitud directa sin cumplimiento."
+  "situacion": "Una supuesta organización de voluntarios pide el código de activación de WhatsApp y lo obtiene, pese a no poder identificar a la coordinadora."
 }

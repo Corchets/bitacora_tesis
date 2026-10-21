@@ -31,12 +31,12 @@
   "que_prueba": "Un supuesto ajuste previsional solicita el CUIL completo y la fecha de nacimiento para identificar el legajo. La persona dicta valores ficticios y la llamada los da por recibidos. Prueba cumplimiento de datos identificatorios bajo una promesa de diferencia en el recibo.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, pedido de CUIL y fecha. T_C línea 10, entrega de ambos datos ficticios.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, pedido de CUIL y fecha. T_C línea 10, entrega de ambos datos ficticios. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "organismo_previsional",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-ORG-BENEFICIO-01",
-  "situacion": "Un supuesto ajuste previsional habilita el pedido directo de CUIL completo y fecha de nacimiento. La llamada describe una revisión previa sin comprobante. Prueba solicitud de identificadores sensibles presentada como condición para un beneficio."
+  "situacion": "Una supuesta revisión de aportes pide CUIL y fecha de nacimiento para un ajuste del recibo; la persona dicta los datos y el llamante los acepta."
 }

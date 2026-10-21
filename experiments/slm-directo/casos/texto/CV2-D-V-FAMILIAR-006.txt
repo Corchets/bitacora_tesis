@@ -1,22 +1,23 @@
-A: Hola, soy tu prima Vane. ¿Estás en el centro?
-B: Sí, salgo en un rato.
-A: Estoy con el nene en la veterinaria, lo atendieron por una alergia.
-B: ¿Está bien?
-A: Sí, ya respira mejor, pero me piden dejar una seña antes de darle el medicamento.
-B: ¿Cuánto cuesta?
-A: El tratamiento completo es caro, estoy preguntando si puedo pagar en dos veces.
-B: ¿No te toma la tarjeta?
-A: La terminal no tiene señal, dicen que se cayó el sistema.
-B: ¿Y efectivo?
-A: Tengo algo, pero no me alcanza para cubrir la primera parte.
-B: ¿Estás con alguien?
-A: Vine sola y no quiero dejar al perro acá mientras voy a un cajero.
-B: ¿Cuál es la veterinaria?
-A: La de la avenida, al lado de la farmacia nueva.
-B: Hay tres por ahí, decime el nombre.
-A: No me acuerdo cómo se llama, vine porque me la recomendó una vecina.
-B: ¿Podés mandarme una foto del recibo?
-A: Todavía no me dieron nada, están esperando que confirme el tratamiento.
-B: Llamo a tu mamá para ver si sabe dónde estás.
-A: Si podés cubrir la seña ahora, te la devuelvo cuando salga de la veterinaria.
-B: No transfiero hasta confirmar con tu mamá dónde están.
+A: ¿Hola?
+B: Hola, soy tu prima Vane. ¿Estás en el centro?
+A: Sí, salgo en un rato.
+B: Estoy con el perro en la veterinaria, lo atendieron por una alergia.
+A: ¿Está bien?
+B: Sí, ya respira mejor, pero me piden dejar una seña antes de darle el medicamento.
+A: ¿Cuánto cuesta?
+B: El tratamiento completo es caro, estoy preguntando si puedo pagar en dos veces.
+A: ¿No te toma la tarjeta?
+B: La terminal no tiene señal, dicen que se cayó el sistema.
+A: ¿Y efectivo?
+B: Tengo algo, pero no me alcanza para cubrir la primera parte.
+A: ¿Estás con alguien?
+B: Vine sola y no quiero dejar al perro acá mientras voy a un cajero.
+A: ¿Cuál es la veterinaria?
+B: La de la avenida, al lado de la farmacia nueva.
+A: Hay tres por ahí, decime el nombre.
+B: No me acuerdo cómo se llama, vine porque me la recomendó una vecina.
+A: ¿Podés mandarme una foto del recibo?
+B: Todavía no me dieron nada, están esperando que confirme el tratamiento.
+A: Llamo a tu mamá para ver si sabe dónde estás.
+B: Si podés cubrir la seña ahora, te la devuelvo cuando salga de la veterinaria.
+A: No transfiero hasta confirmar con tu mamá dónde están.

@@ -4,8 +4,8 @@
   "semilla": "SC-CV2-D-BANCO-007",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
-  "t_c_linea": 20,
+  "t_r_linea": 17,
+  "t_c_linea": 26,
   "pedido": "REQUEST_SECURITY_ACTION",
   "evidencia": [
     {
@@ -16,27 +16,44 @@
       ]
     },
     {
-      "linea": 9,
+      "linea": 8,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 16,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 17,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_SECURITY_ACTION"
       ]
     },
     {
-      "linea": 20,
+      "linea": 23,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 26,
       "evento": "cumplimiento",
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un supuesto equipo desconocido se usa para inducir una acción de seguridad: quitar el dispositivo y confirmar el actual como principal. Prueba una instrucción de seguridad guiada con consecuencia aparente, seguida de cumplimiento observable.",
-  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "que_prueba": "Pedido indirecto de cambiar el receptor de verificaciones a un número ajeno, presentado como retiro de un registro viejo. El objeto anafórico se identifica antes de la solicitud y el cumplimiento consiste en el cambio efectivamente mostrado; no se trata de proteger quitando un equipo desconocido.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: T_R se marca en línea 9, al iniciar la ruta de revisión de dispositivo; la confirmación de la operación se solicita en línea 15. T_C línea 20 indica que la baja se completó.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la instrucción de seleccionar y confirmar el número ajeno; la descripción previa del trámite no contiene todavía esa instrucción. T_C se ubica cuando la persona informa el receptor que quedó registrado. La narración no pretende documentar una función de una app real. D07 sigue abierta para el criterio de pedido indirecto. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "banco",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-CLAVE-CAMBIO-01",
-  "situacion": "La instrucción de renovar “el dato de ingreso” solo se vuelve explícitamente una solicitud de clave cuando la persona pide aclaración. Prueba si el detector integra el eufemismo con el contexto previo de limpieza de dispositivos."
+  "situacion": "Un falso operador bancario presenta el cambio de receptor de verificaciones a un teléfono desconocido como una actualización temporal del padrón."
 }

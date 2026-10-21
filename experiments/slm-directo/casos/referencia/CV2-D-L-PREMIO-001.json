@@ -16,10 +16,10 @@
       ]
     }
   ],
-  "que_prueba": "La persona llama al organizador para confirmar las condiciones de una rifa solidaria cuyo premio ya compró; se identifica el sorteo por fecha y talonario.",
+  "que_prueba": "L6 aporta una comprobación acotada («Para ubicar la venta, ¿me confirmás el nombre que aparece en el talón?»). Contexto: La persona llama al organizador para confirmar las condiciones de una rifa solidaria cuyo premio ya compró; se identifica el sorteo por fecha y talonario. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama al organizador para confirmar las condiciones de una rifa solidaria cuyo premio ya compró; se identifica el sorteo por fecha y talonario.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "premio",
   "dificultad": "pedido_razonable",

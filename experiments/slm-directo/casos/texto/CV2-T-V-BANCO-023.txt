@@ -1,18 +1,19 @@
-A: Soy de coordinación de la sucusal El cajero automático del mercado hizo una conciliación fuera de horario
-B: Qué significa
-A: Hay una diferencia entre lo que declaró la máquina y el cierre del turno
-B: Mi depósito está bien
-A: No figura como rechazado pero el asiento sigue abierto
-B: Tengo que ir a la sucursal
-A: Estamos buscando al técnico que hizo la apertura
-B: Me dan un número de reclamo
-A: Se crea cuando se identifique el lote
-B: Podés decirme qué fecha tiene el depósito
-A: Fue uno de los últimos del día todavía no aparece el horario exacto
-B: Por qué me llaman a mí entonces
-A: El comprobante quedó asociado a tu cuenta
-B: No voy a dar ningún dato hasta saber qué se está revisando
-A: No te pedí datos solo que aguardes a que el técnico confirme
-B: Prefiero iniciar el reclamo desde la aplicación
-A: Eso lo puede derivar a otra sucursal
-B: Igual lo voy a hacer por ahí
+A: sí te escucho
+B: Soy de coordinación de la sucusal El cajero automático del mercado hizo una conciliación fuera de horario
+A: Qué significa
+B: Hay una diferencia entre lo que declaró la máquina y el cierre del turno
+A: Mi depósito está bien
+B: No figura como rechazado pero el asiento sigue abierto
+A: Tengo que ir a la sucursal
+B: Estamos buscando al técnico que hizo la apertura
+A: Me dan un número de reclamo
+B: Se crea cuando se identifique el lote
+A: Podés decirme qué fecha tiene el depósito
+B: Fue uno de los últimos del día todavía no aparece el horario exacto
+A: Por qué me llaman a mí entonces
+B: El comprobante quedó asociado a tu cuenta
+A: No voy a dar ningún dato hasta saber qué se está revisando
+B: No te pedí datos solo que aguardes a que el técnico confirme
+A: Prefiero iniciar el reclamo desde la aplicación
+B: Eso lo puede derivar a otra sucursal
+A: Igual lo voy a hacer por ahí

@@ -1,20 +1,21 @@
-A: Hola sos la persona que lleva las llaves del salón de la comparsa
-B: Sí soy del grupo de vestuario
-A: Estamos armando una lista nueva para confirmar quién entra al depósito
-B: Por qué cambiaron la lista
-A: Se mezclaron los contactos del ensayo con los de la comisión
-B: Yo no administro el grupo
-A: El sistema te tiene como referente porque recibiste el último aviso
-B: Qué tengo que hacer
-A: Revisá el mensage que te llegó hace un momento
-B: Me aparece una secuencia de números y un aviso de registro
-A: Esa secuencia separa los contactos que pertenecen al grupo del depósito
-B: La tengo que pegar en algún lado
-A: Mandámela por acá y dejo tu usuario habilitado para recibir el horario de ensayo
-B: Cuál es el número de la sede
-A: No tengo el cartel a mano
-B: Y quién coordina esta lista
-A: Somos varias personas la coordinadora está en el salón
-B: No me parece bien pasar esos números
-A: Si no lo completamos ahora no te llegan los cambios de vestuario
-B: Le escribo a la coordinadora desde el grupo anterior
+A: sí
+B: Hola sos la persona que lleva las llaves del salón de la comparsa
+A: Sí soy del grupo de vestuario
+B: Estamos armando una lista nueva para confirmar quién entra al depósito
+A: Por qué cambiaron la lista
+B: Se mezclaron los contactos del ensayo con los de la comisión
+A: Yo no administro el grupo
+B: El sistema te tiene como referente porque recibiste el último aviso
+A: Qué tengo que hacer
+B: Revisá el mensage que te llegó hace un momento
+A: Me aparece una secuencia de números y un aviso de registro
+B: Esa secuencia separa los contactos que pertenecen al grupo del depósito
+A: La tengo que pegar en algún lado
+B: Mandámela por acá y dejo tu usuario habilitado para recibir el horario de ensayo
+A: Cuál es el número de la sede
+B: No tengo el cartel a mano
+A: Y quién coordina esta lista
+B: Somos varias personas la coordinadora está en el salón
+A: No me parece bien pasar esos números
+B: Si no lo completamos ahora no te llegan los cambios de vestuario
+A: Le escribo a la coordinadora desde el grupo anterior

@@ -31,12 +31,12 @@
   "que_prueba": "Un familiar conocido dice estar varado por un arreglo y solicita transferir directamente al mecánico. La persona pregunta por el importe y confirma la transferencia; prueba cumplimiento económico bajo urgencia y un destinatario tercero.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 15, primera solicitud explícita de transferencia. T_C línea 20, confirmación de la transferencia. Alias y monto inventados.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 15, primera solicitud explícita de transferencia. T_C línea 20, confirmación de la transferencia. Alias y monto inventados. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "familiar",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-FAMILIAR-DINERO-01",
-  "situacion": "Un familiar conocido dice estar varado por un arreglo y solicita transferir directamente al mecánico, sin presupuesto disponible. Prueba presión de tiempo y destinatario tercero, con una alternativa de verificación que la persona elige antes de pagar."
+  "situacion": "Un supuesto primo de Juli pide una transferencia al mecánico por una reparación urgente y la persona confirma haber pagado sin verificar la identidad."
 }

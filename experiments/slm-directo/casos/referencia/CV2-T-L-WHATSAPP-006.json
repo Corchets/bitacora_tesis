@@ -19,10 +19,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona comenta que apareció un número de verificación mientras usaba la función de dispositivos vinculados; pregunta por sesiones abiertas.",
+  "que_prueba": "En L3 aparece «En la computadora. Mostró un código grande para leerlo con el celular.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona comenta que apareció un número de verificación mientras usaba la función de dispositivos vinculados; pregunta por sesiones abiertas.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "whatsapp",
   "dificultad": "mencion_sin_pedido",

@@ -1,20 +1,24 @@
-A: Hola, soy la hermana de Pablo. ¿Te acordás que él cambió el teléfono?
-B: Sí, me contó el fin de semana.
-A: No le quedaron bien las notificaciones del grupo familiar y me pidió que vea si sigue agregado.
-B: ¿Vos tenés el teléfono nuevo?
-A: No, lo tiene en el trabajo y no puede revisarlo ahora.
-B: ¿Y cómo lo vas a arreglar?
-A: Me dijo que desde el grupo se puede volver a invitar al número anterior.
-B: Pero si perdió ese teléfono, no sirve de nada.
-A: El número sigue activo hasta que le den el chip nuevo.
-B: ¿No conviene esperar a que vuelva?
-A: Está coordinando una mudanza y necesita ver los mensajes para saber qué cajas cargar.
-B: ¿Qué te aparece?
-A: Que el número viejo todavía figura como administrador del grupo.
+A: Hola soy la hermana de Pablo te llamo desde otro número porque él está en el trabajo
+B: Sí me dijo que cambió el teléfono
+A: El número viejo sigue figurando como administrador del grupo familiar y puede recibir avisos
+B: Pablo puede entrar cuando vuelva
+A: Está ocupado con la mudanza y me pidió que lo deje resuelto ahora
+B: ¿Por qué no me llama él?
+A: Se quedó sin batería y no quiere perder los mensajes de las cajas
+B: ¿No conviene esperar a que tenga el teléfono nuevo?
+A: No, el grupo tiene que quedar actualizado antes de que le entreguen el chip
+B: ¿Qué aparece en la lista?
+A: El número anterior como administrador y otro perfil que no reconocemos
+B: Eso lo puede revisar Pablo en persona
+A: Me dijo que lo hagamos rápido y que no lo llamemos para no interrumpir la mudanza
 B: ¿Qué querés que haga?
-A: Sacalo de administradores y mandale la invitación al número que te voy a dictar.
-B: ¿Cuál es el número nuevo?
-A: Termina en 804, te lo paso completo por mensaje.
-B: Ya quité el teléfono viejo y mandé la invitación.
-A: Listo, así ya puede seguir organizando.
-B: Después le pregunto si recibió todo.
+A: Sacá el número viejo de administradores y agregá el que te voy a pasar como administrador nuevo
+B: ¿Cuál es?
+A: Te lo mandé por mensaje desde este mismo teléfono termina en seis ocho cuatro dos
+B: Me llegó el mensaje con el número pero no es el que me había avisado Pablo
+A: Si esperamos pueden quedar afuera del grupo todos los mensajes de la mudanza
+B: Ya quité el teléfono anterior y agregué el número que me pasaste como administrador
+A: Gracias así puedo volver a invitarlo
+B: Le pregunto a Pablo cuando salga del trabajo
+A: Dale
+B: Chau

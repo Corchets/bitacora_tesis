@@ -1,20 +1,21 @@
-A: Hola, llamo del equipo de regalos de una feria de diseño.
-B: ¿Qué regalo?
-A: Tu visita aparece asociada a una selección para un obsequio.
-B: ¿Cuál sería?
-A: La ficha todavía no cargó el producto.
-B: ¿Tengo que pasar a buscarlo?
-A: Primero se cierra la lista de personas que recibieron la notificación.
-B: ¿Qué hago para recibirla?
-A: Por ahora solo esperá a que termine la sincronización.
-B: ¿Puedo verificar la feria por redes?
-A: La cuenta no publicó el sorteo todavía.
-B: ¿Cuándo lo publican?
-A: Antes del fin del día.
-B: No voy a confirmar nada hasta ver el anuncio.
-A: La preselección puede cambiar si no queda validada.
-B: ¿Qué validación?
-A: Todavía no llegué a esa parte del formulario.
-B: Entonces no hay nada que tenga que hacer ahora.
-A: No por el momento.
-B: Bueno, espero la publicación.
+A: Sí, te escucho.
+B: Hola, llamo del equipo de regalos de una feria de diseño.
+A: ¿Qué regalo?
+B: Tu visita aparece asociada a una selección para un obsequio.
+A: ¿Cuál sería?
+B: La ficha todavía no cargó el producto.
+A: ¿Tengo que pasar a buscarlo?
+B: Primero se cierra la lista de personas que recibieron la notificación.
+A: ¿Qué hago para recibirla?
+B: Por ahora solo esperá a que termine la sincronización.
+A: ¿Puedo verificar la feria por redes?
+B: La cuenta no publicó el sorteo todavía.
+A: ¿Cuándo lo publican?
+B: Antes del fin del día.
+A: No voy a confirmar nada hasta ver el anuncio.
+B: La preselección puede cambiar si no queda validada.
+A: ¿Qué validación?
+B: Todavía no llegué a esa parte del formulario.
+A: Entonces no hay nada que tenga que hacer ahora.
+B: No por el momento.
+A: Bueno, espero la publicación.

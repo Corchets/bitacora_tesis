@@ -129,8 +129,11 @@ Revisa los dos archivos de cada caso y termina con error si alguno no cumple est
 formato. Con `--listar` muestra la tabla de casos.
 
 También verifica las huellas de `MANIFIESTO-CORPUS-V2.json` cuando existe. La reserva
-se crea una vez con `python3 casos.py --congelar`; no se sobrescribe. Cualquier
-modificación posterior se detecta y requiere revisar/versionar la reserva en D08.
+se crea con `python3 casos.py --congelar`; ese comando rechaza sobrescribirla. Cualquier
+modificación posterior se detecta. La corrección técnica `r02` de los candidatos,
+solicitada por Luciano, registra las nuevas huellas y la recuperación del manifiesto
+anterior en Git; ver [revisión y límites](REVISION-CORPUS-V2.md). No congela D08 ni
+sustituye la revisión humana.
 
 `correr.py` usa desarrollo por defecto. `--casos` no permite mezclar casos de otra
 partición. `--particion test_reservado` es una selección explícita para la evaluación

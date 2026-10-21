@@ -29,10 +29,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Dos hermanas conversan sobre el estéreo del auto familiar y recuerdan el PIN de fábrica impreso en el manual; coordinan una visita al taller.",
+  "que_prueba": "En L1 aparece «¿El estéreo del auto de mamá sigue pidiendo una clave cada vez que se prende?» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos hermanas conversan sobre el estéreo del auto familiar y recuerdan el pin de fábrica impreso en el manual; coordinan una visita al taller.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "mencion_sin_pedido",

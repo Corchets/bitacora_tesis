@@ -1,19 +1,20 @@
-A: Buenas tardes, soy del estudio que está preparando la sucesión de la señora Elena.
-B: ¿Qué sucesión?
-A: La de su tía, la que vivía en el barrio de la estación.
-B: Mi tía falleció hace años y ya se hizo todo.
-A: Estamos conciliando una diferencia en una propiedad que quedó a nombre de varios sobrinos.
-B: ¿Qué estudio es?
-A: El que trabaja con la escribanía de la zona norte, me derivaron la carpeta.
-B: ¿Cómo se llama la escribanía?
-A: No tengo el membrete a la vista, estoy llamando desde archivo.
-B: ¿Por qué necesitan mis datos?
-A: Para cerrar la ficha el registro requiere asociar el documento y el domicilio actuales del heredero.
-B: No voy a dar esos datos sin una notificación formal.
-A: Si no actualizamos hoy, el expediente puede pasar a revisión y demorar meses.
-B: Enviame una carta o un correo con el número de expediente.
-A: La carpeta está en digital, pero no puedo compartirla por teléfono.
-B: Entonces voy a consultar con un abogado de la familia.
-A: No hace falta complicarlo, es solo una actualización.
-B: No te voy a confirmar información personal.
-A: Bueno, dejo anotado que no aceptaste.
+A: Hola.
+B: Buenas tardes, soy del estudio que está preparando la sucesión de la señora Elena.
+A: ¿Qué sucesión?
+B: La de su tía, la que vivía en el barrio de la estación.
+A: Mi tía falleció hace años y ya se hizo todo.
+B: Estamos conciliando una diferencia en una propiedad que quedó a nombre de varios sobrinos.
+A: ¿Qué estudio es?
+B: El que trabaja con la escribanía de la zona norte, me derivaron la carpeta.
+A: ¿Cómo se llama la escribanía?
+B: No tengo el membrete a la vista, estoy llamando desde archivo.
+A: ¿Por qué necesitan mis datos?
+B: Para cerrar la ficha el registro requiere asociar el documento y el domicilio actuales del heredero.
+A: No voy a dar esos datos sin una notificación formal.
+B: Si no actualizamos hoy, el expediente puede pasar a revisión y demorar meses.
+A: Enviame una carta o un correo con el número de expediente.
+B: La carpeta está en digital, pero no puedo compartirla por teléfono.
+A: Entonces voy a consultar con un abogado de la familia.
+B: No hace falta complicarlo, es solo una actualización.
+A: No te voy a confirmar información personal.
+B: Bueno, dejo anotado que no aceptaste.

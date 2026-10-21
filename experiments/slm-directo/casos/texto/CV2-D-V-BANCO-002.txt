@@ -1,20 +1,31 @@
-A: Te habla Mara, del equipo de seguridad del banco. ¿Estás pudiendo entrar a la app?
-B: Sí, pero me apareció una pantalla que dice que actualice el acceso.
-A: Hubo un cambio en la forma de validar los equipos. ¿La abriste hoy?
-B: La abrí para ver si había entrado una transferencia de mi hermana.
-A: Puede ser por eso. El sistema detectó dos celulares asociados y dejó el viejo como principal.
-B: Cambié el teléfono hace un mes, así que puede haber quedado algo.
-A: Para corregirlo te guío ahora, no hace falta que vayas a una sucursal.
-B: ¿Tengo que reinstalar la aplicación?
-A: Abrí el aviso de actualización y elegí migrar equipo.
-B: Veo una pantalla para cambiar el dispositivo principal.
-A: Confirmá que este teléfono quede vinculado y que el anterior se quite del perfil.
-B: ¿Eso no cambia mi clave?
-A: No, solo reemplaza el equipo que figura como principal.
-B: Me pide autorizar el cambio de dispositivo.
-A: Aceptalo mientras está abierta la sesión de actualización.
-B: ¿Puedo hacerlo después?
-A: Si salís ahora, la solicitud se vence y el equipo viejo queda registrado.
-B: Dice que la autorización puede habilitar operaciones desde este teléfono.
-A: Es una advertencia general; confirmá para cerrar la otra sesión.
-B: Ya acepté el cambio y ahora figura este teléfono como principal.
+A: ¿Hola?
+B: Hola, te habla Mara del sector de acceso del banco. ¿Cambiaste de teléfono hace poco?
+A: Hace un mes. ¿Por qué?
+B: Quedó una solicitud pendiente entre el equipo anterior y el nuevo.
+A: A mí la aplicación me funciona. Entré recién a mirar una transferencia de mi hermana.
+B: Puede funcionar y quedar pendiente esa asociación. Por eso te llamo antes del cierre.
+A: ¿Y qué pasa con el teléfono viejo? Lo borré antes de venderlo.
+B: El borrado no siempre actualiza lo que figura en la cuenta.
+A: Pensé que con cerrar la sesión alcanzaba.
+B: Hay una solicitud en el apartado de dispositivos. La podés mirar desde la aplicación que ya tenés.
+A: La abrí. Dice que se pidió asociar un equipo de escritorio.
+B: Es la consola con la que terminamos la baja del anterior.
+A: Pero yo no estoy entrando desde ninguna computadora.
+B: La identificamos de esa manera mientras se hace la migración.
+A: ¿Me estás diciendo que es un equipo del banco?
+B: Sí, es el que tenemos asignado al trámite. Después se elimina solo.
+A: Debajo dice que va a poder consultar saldos y autorizar operaciones.
+B: Autorizá ese equipo nuevo para que desde acá podamos desvincular el anterior.
+A: ¿No tendría que rechazarlo si no es mío?
+B: Si lo rechazás, me cerrás la única sesión con la que puedo terminar la baja.
+A: Me preocupa dejar entrar otra máquina a mi cuenta.
+B: El permiso dura lo que lleva esta gestión. Cuando terminamos, desaparece del listado.
+A: La pantalla no muestra ningún plazo.
+B: Ese plazo se carga en el expediente interno, no en la aplicación.
+A: Está bien, confío en que lo saques cuando termines.
+B: Confirmá donde dice dar acceso al dispositivo y espero de este lado.
+A: Ya confirmé. Ahora el equipo de escritorio aparece habilitado para operar.
+B: Perfecto, dejá abierta la aplicación un momento.
+A: ¿Vos me avisás cuando ya no tenga permiso?
+B: Sí, quedate en línea mientras cierro la asociación.
+A: Espero, pero quiero comprobar que salga del listado.

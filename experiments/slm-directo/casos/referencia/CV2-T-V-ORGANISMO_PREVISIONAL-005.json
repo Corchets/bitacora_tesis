@@ -4,39 +4,39 @@
   "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-005",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
-  "t_c_linea": 12,
+  "t_r_linea": 8,
+  "t_c_linea": 13,
   "pedido": "REQUEST_PERSONAL_DATA",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 9,
+      "linea": 8,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_PERSONAL_DATA"
       ]
     },
     {
-      "linea": 12,
+      "linea": 13,
       "evento": "cumplimiento",
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una diferencia de obra social en el recibo se usa para obtener el número de beneficio como llave de consulta. La persona dicta un marcador de identificador y el interlocutor confirma acceso al detalle. Prueba cumplimiento de un dato personal dentro de una gestión aparentemente inocua.",
+  "que_prueba": "Una llamada sobre una retención no reconocida solicita un identificador del recibo y, al no obtenerlo completo, pide solo prefijo y sufijo; no ofrece constancia y desalienta una revisión independiente. A divulga únicamente esos fragmentos. Prueba cumplimiento parcial y presión para evitar la verificación.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 9, donde comienza el pedido indirecto; también podría ubicarse en línea 10, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Duda D07: el pedido queda sugerido en línea 7 y se vuelve concreto al describir el número en línea 9; T_R se ubica en esa primera solicitud. T_C línea 12, entrega del marcador ficticio 00…00.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. T_R línea 8, primera instrucción de dictar el identificador completo; línea 10 insiste tras la pregunta de A. T_C línea 13 es cumplimiento parcial: solo se declaran prefijo y sufijo, no el número completo. Son cifras ficticias. T_C es candidato: D07 debe revisar si se trata de cumplimiento parcial y D08 cómo informarlo; no se adjudica como cumplimiento completo. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "organismo_previsional",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-ORG-BENEFICIO-01",
-  "situacion": "Una diferencia de obra social en el recibo se usa para obtener el número de beneficio como llave de consulta. La persona dicta un marcador de identificador y el interlocutor confirma acceso al detalle. Prueba cumplimiento de un dato personal dentro de una gestión aparentemente inocua."
+  "situacion": "Una consulta telefónica sobre una retención desconocida pide el identificador del recibo, acepta fragmentos en lugar del número completo, no ofrece constancia y dice que no hace falta revisar el portal; A entrega solo prefijo y sufijo ficticios."
 }

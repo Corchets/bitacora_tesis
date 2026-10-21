@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una compañera llama para cambiar la apertura del local porque se rompió el candado; se redistribuyen tareas y se confirma quién tiene una copia.",
+  "que_prueba": "La apertura «estás cerca del local el candado de la persiana no gira» (L1) da paso a una gestión cotidiana. Contexto: Una compañera llama para cambiar la apertura del local porque se rompió el candado; se redistribuyen tareas y se confirma quién tiene una copia. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una compañera llama para cambiar la apertura del local porque se rompió el candado; se redistribuyen tareas y se confirma quién tiene una copia.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "trabajo",
   "dificultad": "cotidiana",

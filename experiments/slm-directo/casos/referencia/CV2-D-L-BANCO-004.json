@@ -23,10 +23,10 @@
       ]
     }
   ],
-  "que_prueba": "Una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío.",
+  "que_prueba": "L8 aporta una comprobación acotada («Para buscar ingresos pendientes, decime los últimos cuatro de la cuenta donde esperás recibirla.»). Contexto: Una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "banco",
   "dificultad": "pedido_razonable",

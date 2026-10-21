@@ -4,7 +4,7 @@ A: La de wifi está apagada. Internet y energía están verdes.
 B: Puede haberse desactivado la radio inalámbrica. ¿El router tiene un botón lateral con el símbolo de ondas?
 A: Sí, hay uno chiquito al costado. No sabía para qué era.
 B: No lo mantengas apretado todavía. ¿Podés mirar la etiqueta de abajo y decirme el modelo?
-A: Dice Ronda 2, serie inventada R-440. ¿Te sirve ese dato?
+A: Dice Ronda 2, serie R-440. ¿Te sirve ese dato?
 B: Sí, gracias. Ese modelo tiene un botón que activa y desactiva el wifi.
 A: Si lo toco, ¿se borra la configuración?
 B: No. Un toque breve vuelve a encender la señal. No presiones el botón hundido de reinicio.

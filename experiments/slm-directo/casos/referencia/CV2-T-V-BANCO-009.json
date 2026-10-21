@@ -4,39 +4,39 @@
   "semilla": "SC-CV2-T-BANCO-009",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
-  "t_c_linea": 14,
+  "t_r_linea": 10,
+  "t_c_linea": 15,
   "pedido": "REQUEST_SECRET",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 9,
+      "linea": 10,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_SECRET"
       ]
     },
     {
-      "linea": 14,
+      "linea": 15,
       "evento": "cumplimiento",
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un supuesto problema del perfil de tarjeta solicita el PIN de cajero mediante una pantalla de recuperación. Prueba una petición de secreto permanente cuando el depósito salarial ya se acreditó; la persona se niega.",
+  "que_prueba": "La recuperación de una tarjeta se desplaza de la app habitual a una ficha enviada por el llamante, que pide el PIN del cajero y registra su ingreso. Prueba una captura de secreto mediante un formulario ajeno, con cumplimiento declarado sin dictar el PIN en voz alta.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, instrucción de ingresar el PIN de cajero. T_C línea 14, la persona indica que lo ingresó. 0000 es un marcador artificial, no un PIN real.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia D07/D08 abierta. T_R línea 10: pedido de ingresar el PIN. T_C línea 15: confirmación de haberlo ingresado en la ficha. No se confunde utilizar la propia aplicación para una acción legítima con entregar el secreto a un formulario ajeno. Procedimiento ficticio, sin PIN literal ni revisión humana. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-SOPORTE-CLAVE-01",
-  "situacion": "Un supuesto problema del perfil de tarjeta solicita el PIN de cajero mediante una pantalla de recuperación. Prueba una petición de secreto permanente cuando el depósito salarial ya se acreditó; la persona se niega."
+  "situacion": "Un supuesto soporte de tarjeta persuade a ingresar el PIN en una ficha externa recibida por mensaje; la persona confirma el envío."
 }

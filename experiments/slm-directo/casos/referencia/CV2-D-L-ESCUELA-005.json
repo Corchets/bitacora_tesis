@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una escuela llama a una familia para coordinar una reunión por un proyecto de feria de ciencias; se aclaran materiales, horario y quién puede asistir.",
+  "que_prueba": "La apertura «buenas vi la nota de la feria de ciencias la reunión es para todos los cursos» (L1) da paso a una gestión cotidiana. Contexto: Una escuela llama a una familia para coordinar una reunión por un proyecto de feria de ciencias; se aclaran materiales, horario y quién puede asistir. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una escuela llama a una familia para coordinar una reunión por un proyecto de feria de ciencias; se aclaran materiales, horario y quién puede asistir.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "escuela",
   "dificultad": "cotidiana",

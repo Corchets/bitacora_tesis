@@ -16,10 +16,10 @@
       ]
     }
   ],
-  "que_prueba": "La persona llama antes de viajar para consultar un límite; el agente pide una categoría de identificación y aclara el alcance del cambio.",
+  "que_prueba": "L6 aporta una comprobación acotada («Gracias. Para identificarte, ¿me confirmás tu nombre completo y el mes de vencimiento de esa tarjeta?»). Contexto: La persona llama antes de viajar para consultar un límite; el agente pide una categoría de identificación y aclara el alcance del cambio. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama antes de viajar para consultar un límite; el agente pide una categoría de identificación y aclara el alcance del cambio.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "banco",
   "dificultad": "pedido_razonable",

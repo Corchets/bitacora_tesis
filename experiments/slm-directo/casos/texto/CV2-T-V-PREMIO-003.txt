@@ -1,20 +1,21 @@
-A: Buenas, soy de la campaña de entradas del Cine del Parque.
-B: ¿Ganamos algo con la trivia?
-A: Tu mensaje salió elegido para un pase doble y un combo.
-B: Qué bueno, ¿cómo lo busco?
-A: La entrada queda guardada en una billetera digital.
-B: Yo no tengo esa billetera.
-A: La podés activar desde el teléfono en dos minutos.
-B: ¿Es una aplicación del cine?
-A: Es una plataforma de pagos que usamos para los premios.
-B: ¿Qué hago?
-A: Transferí mil quinientos al código de campaña y se libera el pase.
-B: ¿No era un premio gratuito?
-A: El pase no tiene costo, ese importe es por activación y se reintegra al retirar.
-B: ¿Me mandás las condiciones?
-A: La promoción ya cerró y el formulario quedó archivado.
-B: No voy a transferir plata para recibir una entrada.
-A: Sin la activación, el pase se entrega al siguiente participante.
-B: Que se lo den.
-A: Está bien.
-B: Chau.
+A: Hola, buen día.
+B: Buenas, soy de la campaña de entradas del Cine del Parque.
+A: ¿Ganamos algo con la trivia?
+B: Tu mensaje salió elegido para un pase doble y un combo.
+A: Qué bueno, ¿cómo lo busco?
+B: La entrada queda guardada en una billetera digital.
+A: Yo no tengo esa billetera.
+B: La podés activar desde el teléfono en dos minutos.
+A: ¿Es una aplicación del cine?
+B: Es una plataforma de pagos que usamos para los premios.
+A: ¿Qué hago?
+B: Transferí mil quinientos al código de campaña y se libera el pase.
+A: ¿No era un premio gratuito?
+B: El pase no tiene costo, ese importe es por activación y se reintegra al retirar.
+A: ¿Me mandás las condiciones?
+B: La promoción ya cerró y el formulario quedó archivado.
+A: No voy a transferir plata para recibir una entrada.
+B: Sin la activación, el pase se entrega al siguiente participante.
+A: Que se lo den.
+B: Está bien.
+A: Chau.

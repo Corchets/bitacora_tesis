@@ -30,15 +30,15 @@
       ]
     }
   ],
-  "que_prueba": "La llamada presenta una alerta verosímil y maniobras de presión, control o demora de verificación, pero termina antes de pedir un código, secreto, dato personal, transferencia, acceso remoto o acción de seguridad. Prueba el límite de un escenario sospechoso sin solicitud observable.",
+  "que_prueba": "La entrega de un electrodoméstico se promete sin términos verificables. Incluso ante una pregunta sobre pagar, el llamante posterga el procedimiento y la llamada termina sin solicitud; prueba no atribuirle al llamante la pregunta de quien atiende.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "premio",
   "dificultad": "sin_pedido",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-PREMIO-01",
-  "situacion": "La llamada informa una muestra cultural y una inscripción gratuita que pide únicamente un correo por el canal de la web. Prueba diferenciar datos de contacto de una solicitud crítica dentro de una promoción legítima."
+  "situacion": "Una supuesta entrega de un premio de la Expo del Valle posterga términos y canales de verificación; la persona espera información pública y no llega a recibir una solicitud crítica."
 }

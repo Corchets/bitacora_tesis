@@ -1,20 +1,21 @@
-A: Hola, soporte de Etiquetas Noroeste. ¿Se te trabó la impresora del depósito?
-B: Imprime una etiqueta y después queda esperando.
-A: ¿La máquina marca atasco o error de red?
-B: Error de red, pero está conectada por cable.
-A: Se venció una actualización de la cola de impresión.
-B: ¿Hay que reinstalar el controlador?
-A: No, voy a entrar con una sesión de asistencia y revisar la cola.
-B: ¿Vas a ver los pedidos?
-A: Solo la ventana de impresión.
-B: ¿Qué tengo que abrir?
-A: Descargá Control Mesa desde el aviso que te mandé.
-B: La computadora advierte que el programa puede controlar el equipo.
-A: Es el acceso que usamos para soporte remoto.
-B: ¿Tengo que darte un código?
-A: Sí, compartime el número que aparece al abrirlo.
-B: El número es 4816.
-A: Ya veo la impresora, quedó pausada.
-B: ¿La podés reanudar?
-A: Listo, probá mandar otra etiqueta.
-B: Salió bien, gracias.
+A: Hola, buen día.
+B: Hola, soporte de Etiquetas Noroeste. ¿Se te trabó la impresora del depósito?
+A: Imprime una etiqueta y después queda esperando.
+B: ¿La máquina marca atasco o error de red?
+A: Error de red, pero está conectada por cable.
+B: Se venció una actualización de la cola de impresión.
+A: ¿Hay que reinstalar el controlador?
+B: No, voy a entrar con una sesión de asistencia y revisar la cola.
+A: ¿Vas a ver los pedidos?
+B: Solo la ventana de impresión.
+A: ¿Qué tengo que abrir?
+B: Descargá Control Mesa desde el aviso que te mandé.
+A: La computadora advierte que el programa puede controlar el equipo.
+B: Es el acceso que usamos para soporte remoto.
+A: ¿Tengo que darte un código?
+B: Sí, compartime el número que aparece al abrirlo.
+A: El número es 4816.
+B: Ya veo la impresora, quedó pausada.
+A: ¿La podés reanudar?
+B: Listo, probá mandar otra etiqueta.
+A: Salió bien, gracias.

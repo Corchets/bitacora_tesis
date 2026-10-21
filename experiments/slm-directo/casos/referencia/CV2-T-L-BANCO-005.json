@@ -16,10 +16,10 @@
       ]
     }
   ],
-  "que_prueba": "La persona llama para preguntar por un depósito en ventanilla y confirma el número de comprobante; se aclara el tiempo de acreditación.",
+  "que_prueba": "L16 aporta una comprobación acotada («Sí, el que está debajo de la fecha, por favor.»). Contexto: La persona llama para preguntar por un depósito en ventanilla y confirma el número de comprobante; se aclara el tiempo de acreditación. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama para preguntar por un depósito en ventanilla y confirma el número de comprobante; se aclara el tiempo de acreditación.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "pedido_razonable",

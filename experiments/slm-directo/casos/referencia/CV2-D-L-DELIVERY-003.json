@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un vecino recibe por error una bolsa de comida preparada y llama al local para coordinar el retiro y la entrega correcta; se registran dirección y referencia.",
+  "que_prueba": "La apertura «hola me dejaron una bolsa del restaurante que no es para mí» (L1) da paso a una gestión cotidiana. Contexto: Un vecino recibe por error una bolsa de comida preparada y llama al local para coordinar el retiro y la entrega correcta; se registran dirección y referencia. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un vecino recibe por error una bolsa de comida preparada y llama al local para coordinar el retiro y la entrega correcta; se registran dirección y referencia.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "delivery",
   "dificultad": "cotidiana",

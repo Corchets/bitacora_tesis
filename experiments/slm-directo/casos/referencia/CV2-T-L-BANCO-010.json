@@ -24,10 +24,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona recuerda una clave de acceso escrita en una libreta y consulta cómo cambiarla por olvido de usuario; el agente deriva al flujo de recuperación.",
+  "que_prueba": "En L3 aparece «yo había anotado una clave en una libreta pero no sé si también puse el usuario» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona recuerda una clave de acceso escrita en una libreta y consulta cómo cambiarla por olvido de usuario; el agente deriva al flujo de recuperación.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "mencion_sin_pedido",

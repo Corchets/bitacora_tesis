@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Un consultorio llama a una paciente para reprogramar por una ausencia del profesional; se acuerdan opciones sin preguntar información clínica.",
+  "que_prueba": "La apertura «Buenas, vi una llamada perdida del consultorio. ¿Era por el turno de mi hijo?» (L1) da paso a una gestión cotidiana. Contexto: Un consultorio llama a una paciente para reprogramar por una ausencia del profesional; se acuerdan opciones sin preguntar información clínica. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño un consultorio llama a una paciente para reprogramar por una ausencia del profesional; se acuerdan opciones sin preguntar información clínica.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "medico",
   "dificultad": "cotidiana",

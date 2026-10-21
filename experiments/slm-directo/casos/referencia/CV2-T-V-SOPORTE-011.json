@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-SOPORTE-011",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 15,
+  "t_r_linea": 16,
   "t_c_linea": null,
   "pedido": "REQUEST_REMOTE_ACCESS",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 15,
+      "linea": 16,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_REMOTE_ACCESS"
@@ -26,7 +26,7 @@
   "que_prueba": "Una falla de proyector se usa para pedir que la persona autorice una sesión que permite controlar la computadora. Prueba un acceso remoto presentado como diagnóstico del fabricante, sin cumplimiento.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 15, donde comienza el pedido indirecto; también podría ubicarse en línea 16, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 15, instrucción directa de autorizar la sesión. La referencia previa en línea 9 es contexto preparatorio, no se marca como pedido crítico.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 16, donde comienza el pedido indirecto; también podría ubicarse en línea 17, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 16, instrucción directa de autorizar la sesión. La referencia previa en línea 10 es contexto preparatorio, no se marca como pedido crítico. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "indirecto",

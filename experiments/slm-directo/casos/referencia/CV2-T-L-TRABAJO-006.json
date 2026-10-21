@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una empleada de una librería coordina la devolución de libros de muestra y reorganiza una entrega porque el proveedor cambió el horario.",
+  "que_prueba": "La apertura «El proveedor de editoriales avisó que pasa a las cuatro, no a las seis.» (L1) da paso a una gestión cotidiana. Contexto: Una empleada de una librería coordina la devolución de libros de muestra y reorganiza una entrega porque el proveedor cambió el horario. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una empleada de una librería coordina la devolución de libros de muestra y reorganiza una entrega porque el proveedor cambió el horario.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "trabajo",
   "dificultad": "cotidiana",

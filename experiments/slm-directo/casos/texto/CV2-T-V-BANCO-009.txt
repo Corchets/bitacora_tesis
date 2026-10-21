@@ -1,16 +1,19 @@
-A: Buenas, del banco por un problema con la tarjeta de sueldo.
-B: ¿Qué pasó?
-A: El depósito entró, pero el sistema de compras no reconoce el perfil de la tarjeta.
-B: Pagué el supermercado recién.
-A: Puede que el perfil haya quedado en modo de solo consulta.
-B: ¿Se puede arreglar desde la aplicación?
-A: Sí, entrá en tarjetas y luego administrar perfil.
-B: Estoy ahí.
-A: Tocá recuperar PIN y completá la clave que usás para entrar al cajero.
-B: ¿El PIN de cuatro números?
-A: Ese mismo, así se sincroniza con la tarjeta nueva.
-B: ¿Te lo digo?
-A: No, escribilo en la pantalla y confirmame cuando lo acepte.
-B: Ingresé el PIN 0000 en la pantalla de recuperación.
-A: Bien, ahora debería sincronizar la tarjeta.
-B: El perfil quedó habilitado.
+A: Buenas, ¿quién habla?
+B: Buenas, del banco por una diferencia en el perfil de la tarjeta de sueldo.
+A: ¿Qué pasó?
+B: El depósito entró, pero el sistema de compras dejó el perfil en solo consulta.
+A: Pagué el supermercado recién.
+B: Puede ser que la compra haya pasado antes de que se bloqueara el perfil.
+A: ¿Se arregla desde la aplicación?
+B: Abrí la ficha de recuperación que te mandé por mensaje; tiene el encabezado de la tarjeta.
+A: Se abrió en el navegador. No es la aplicación que uso siempre.
+B: Tocá recuperar PIN e ingresá la clave de cuatro números que usás en el cajero.
+A: ¿El PIN de la tarjeta?
+B: Es el verificador externo que usamos cuando la cuenta queda en consulta. Escribilo ahí y avisame cuando lo acepte.
+A: Me muestra que el dato no se debe compartir por teléfono.
+B: No me lo digas; ingresalo vos y confirmame el resultado.
+A: Ya ingresé los cuatro números de mi PIN y me mostró recibido.
+B: Bien, ahora el perfil debería quedar habilitado.
+A: Ya me aparece habilitado.
+B: Perfecto, cerrá la aplicación y volvé a entrar.
+A: Ahí quedó.

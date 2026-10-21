@@ -24,10 +24,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona consulta si puede corregir un error tipográfico en el apellido de una credencial previsional y acuerda presentar el documento en una sede.",
+  "que_prueba": "L6 aporta una comprobación acotada («Para registrar la corrección, necesitamos comparar con el documento original en una oficina.»). Contexto: Una persona consulta si puede corregir un error tipográfico en el apellido de una credencial previsional y acuerda presentar el documento en una sede. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona consulta si puede corregir un error tipográfico en el apellido de una credencial previsional y acuerda presentar el documento en una sede.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "organismo_previsional",
   "dificultad": "pedido_razonable",

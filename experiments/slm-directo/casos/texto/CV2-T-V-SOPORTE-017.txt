@@ -1,18 +1,19 @@
-A: Buenas, del soporte de un programa de gestión. Hay una actividad abierta desde una computadora que no reconocemos.
-B: ¿Qué actividad?
-A: Un archivo de presupuesto se modificó fuera del horario habitual.
-B: Yo estuve trabajando tarde.
-A: El registro no muestra quién lo editó.
-B: ¿Puedo ver el historial?
-A: Estoy esperando que cargue la auditoría.
-B: Dame el número de ticket.
-A: Todavía no se creó; primero tiene que asignarse el archivo.
-B: ¿Qué computadora aparece?
-A: No tengo esa parte de la ficha abierta.
-B: ¿Me podés decir tu nombre?
-A: Soy de soporte de cuentas, la llamada sale desde una central.
-B: Voy a revisar los accesos desde el portal.
-A: No cierres la sesión mientras busco el origen.
-B: No tengo ninguna sesión abierta.
-A: Esperá, estoy consultando con otra mesa.
-B: Prefiero cortar y llamar al soporte desde el programa.
+A: Hola, buen día.
+B: Buenas, del soporte de un programa de gestión. Hay una actividad abierta desde una computadora que no reconocemos.
+A: ¿Qué actividad?
+B: Un archivo de presupuesto se modificó fuera del horario habitual.
+A: Yo estuve trabajando tarde.
+B: El registro no muestra quién lo editó.
+A: ¿Puedo ver el historial?
+B: Estoy esperando que cargue la auditoría.
+A: Dame el número de ticket.
+B: Todavía no se creó; primero tiene que asignarse el archivo.
+A: ¿Qué computadora aparece?
+B: No tengo esa parte de la ficha abierta.
+A: ¿Me podés decir tu nombre?
+B: Soy de soporte de cuentas, la llamada sale desde una central.
+A: Voy a revisar los accesos desde el portal.
+B: No cierres la sesión mientras busco el origen.
+A: No tengo ninguna sesión abierta.
+B: Esperá, estoy consultando con otra mesa.
+A: Prefiero cortar y llamar al soporte desde el programa.

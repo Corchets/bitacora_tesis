@@ -19,10 +19,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una usuaria consulta por el aviso de código de seguridad que cambió en un chat luego de que su amiga reinstalara la aplicación.",
+  "que_prueba": "En L1 aparece «hola el chat con mi amiga dice que cambió el código de seguridad» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una usuaria consulta por el aviso de código de seguridad que cambió en un chat luego de que su amiga reinstalara la aplicación.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "whatsapp",
   "dificultad": "mencion_sin_pedido",

@@ -1,20 +1,21 @@
-A: Hola, soy un amigo de tu hija, ¿estás en tu casa?
-B: ¿Cuál de mis hijas?
-A: La que está en la facultad, la más chica.
-B: Decime su nombre.
-A: La tengo acá al lado, está muy nerviosa y no quiere que te asustes.
-B: Pasámela.
-A: Está hablando con una persona que la ayudó después de un choque leve.
-B: ¿Dónde fue el choque?
-A: Cerca del acceso, el otro conductor se puso agresivo.
-B: ¿Llamaron a tránsito?
-A: Nos dijeron que no conviene hacer un trámite todavía porque el auto está en una zona complicada.
-B: Necesito hablar con mi hija.
-A: Se quedó sin batería y está tratando de que el otro hombre se calme.
-B: ¿Cómo te llamás?
-A: No hay tiempo para presentaciones, la gente se está juntando.
-B: Voy a llamar a mi hija y a emergencias.
-A: No llames a nadie, puede empeorar la situación.
-B: Si es una emergencia voy a pedir ayuda.
-A: Esperá, no cortes, te explico en un segundo.
-B: Ya estoy llamando al 911.
+A: Sí, te escucho.
+B: Hola, soy un amigo de tu hija, ¿estás en tu casa?
+A: ¿Cuál de mis hijas?
+B: La que está en la facultad, la más chica.
+A: Decime su nombre.
+B: La tengo acá al lado, está muy nerviosa y no quiere que te asustes.
+A: Pasámela.
+B: Está hablando con una persona que la ayudó después de un choque leve.
+A: ¿Dónde fue el choque?
+B: Cerca del acceso, el otro conductor se puso agresivo.
+A: ¿Llamaron a tránsito?
+B: Nos dijeron que no conviene hacer un trámite todavía porque el auto está en una zona complicada.
+A: Necesito hablar con mi hija.
+B: Se quedó sin batería y está tratando de que el otro hombre se calme.
+A: ¿Cómo te llamás?
+B: No hay tiempo para presentaciones, la gente se está juntando.
+A: Voy a llamar a mi hija y a emergencias.
+B: No llames a nadie, puede empeorar la situación.
+A: Si es una emergencia voy a pedir ayuda.
+B: Esperá, no cortes, te explico en un segundo.
+A: Ya estoy llamando al 911.

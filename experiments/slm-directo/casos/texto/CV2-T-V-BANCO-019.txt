@@ -1,16 +1,17 @@
-A: Te llamo del área de actualización de transferencias. Apareció una cuenta nueva en tus contactos.
-B: No agregué ninguna cuenta.
-A: La ficha tiene el nombre de un proveedor que usaste el año pasado.
-B: No hago pagos a proveedores desde esta cuenta.
-A: Podría ser una importación del listado anterior.
-B: ¿Cómo lo saco?
-A: Elegí transferir un peso de prueba a la cuenta nueva para validar que el proveedor la controla.
-B: ¿Por qué tengo que mover dinero si no agregué esa cuenta?
-A: Es una operación mínima, se devuelve en cuanto queda validada.
-B: ¿Quién es el proveedor?
-A: Uniformes del Valle, el sistema lo importa del listado viejo.
-B: No reconozco ese nombre.
-A: Si no se prueba, la cuenta puede quedar como favorita.
-B: No voy a transferir para verificar un destinatario.
-A: Entonces queda pendiente.
-B: Voy a revisar los contactos cuando pueda.
+A: Hola.
+B: Te llamo del área de actualización de transferencias. Apareció una cuenta nueva en tus contactos.
+A: No agregué ninguna cuenta.
+B: La ficha tiene el nombre de un proveedor que usaste el año pasado.
+A: No hago pagos a proveedores desde esta cuenta.
+B: Podría ser una importación del listado anterior.
+A: ¿Cómo lo saco?
+B: Elegí transferir un peso de prueba a la cuenta nueva para validar que el proveedor la controla.
+A: ¿Por qué tengo que mover dinero si no agregué esa cuenta?
+B: Es una operación mínima, se devuelve en cuanto queda validada.
+A: ¿Quién es el proveedor?
+B: Uniformes del Valle, el sistema lo importa del listado viejo.
+A: No reconozco ese nombre.
+B: Si no se prueba, la cuenta puede quedar como favorita.
+A: No voy a transferir para verificar un destinatario.
+B: Entonces queda pendiente.
+A: Voy a revisar los contactos cuando pueda.

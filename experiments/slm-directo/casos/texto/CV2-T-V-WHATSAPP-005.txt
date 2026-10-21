@@ -1,20 +1,21 @@
-A: Buen día, llamo del equipo de fotos del jardín Rayito por la carpeta compartida.
-B: ¿Se subieron las fotos del acto?
-A: Sí, pero estamos habilitando el acceso por familia porque el enlace anterior circuló afuera.
-B: ¿Tengo que volver a registrarme?
-A: Te va a llegar un código para asociar tu número al álbum.
-B: ¿Es un código de WhatsApp?
-A: Sí, decímelo y te agrego como adulto responsable.
-B: ¿No lo puede hacer la maestra?
-A: Ella nos pasó los contactos, pero la carga la hacemos desde administración.
-B: ¿Me podés dar el número de sala?
-A: Sala amarilla, turno mañana.
-B: Sí, esa es la sala de mi nena.
-A: Entonces pasame el código que te llegó.
-B: ¿Lo puedo mirar primero?
-A: Sí, pero la carpeta cierra hoy para que no se descarguen imágenes sin permiso.
-B: No voy a compartir un código de registro por teléfono.
-A: Si no lo validamos, vas a tener que pedir las fotos impresas.
-B: Las pido en la escuela.
-A: Bueno, queda anotado.
-B: Chau.
+A: Buenas tardes.
+B: Buen día, llamo del equipo de fotos del jardín Rayito por la carpeta compartida.
+A: ¿Se subieron las fotos del acto?
+B: Sí, pero estamos habilitando el acceso por familia porque el enlace anterior circuló afuera.
+A: ¿Tengo que volver a registrarme?
+B: Te va a llegar un código para asociar tu número al álbum.
+A: ¿Es un código de WhatsApp?
+B: Sí, decímelo y te agrego como adulto responsable.
+A: ¿No lo puede hacer la maestra?
+B: Ella nos pasó los contactos, pero la carga la hacemos desde administración.
+A: ¿Me podés dar el número de sala?
+B: Sala amarilla, turno mañana.
+A: Sí, esa es la sala de mi nena.
+B: Entonces pasame el código que te llegó.
+A: ¿Lo puedo mirar primero?
+B: Sí, pero la carpeta cierra hoy para que no se descarguen imágenes sin permiso.
+A: No voy a compartir un código de registro por teléfono.
+B: Si no lo validamos, vas a tener que pedir las fotos impresas.
+A: Las pido en la escuela.
+B: Bueno, queda anotado.
+A: Chau.

@@ -1,21 +1,22 @@
-A: Buenas, soy del servicio técnico de la empresa de internet. ¿Te anda lento el router?
-B: A la mañana se cortó dos veces, después volvió.
-A: Estamos revisando una falla de notificaciones en algunos celulares conectados al wifi.
-B: ¿Eso tiene que ver con el router?
-A: En algunos casos sí, porque se demora la confirmación entre la línea y WhatsApp.
-B: No entiendo mucho de eso.
-A: No te preocupes, primero revisamos si la cuenta sigue asociada a tu número.
-B: ¿Tengo que hacer algo?
-A: Te va a llegar un código de seis números. Leémelo así cierro el diagnóstico.
-B: ¿El de WhatsApp?
-A: Sí, el que aparece con el aviso de no compartir. Es automático, no es una clave bancaria.
-B: Si no se comparte, ¿por qué me lo pedís?
-A: Es una verificación corta que habilita el canal de soporte.
-B: ¿No se puede arreglar reiniciando el equipo?
-A: Eso ya lo hiciste al volver la conexión; falta completar el enlace del número.
-B: El aviso dice que alguien quiere registrar mi cuenta.
-A: Es la misma pantalla que usa el sistema para probar la línea.
-B: No te lo voy a leer.
-A: Si querés, te espero mientras buscás el mensaje.
-B: No, voy a cortar y llamar a la empresa por mi factura.
-A: Como prefieras.
+A: Hola, decime.
+B: Buenas, soy del servicio técnico de la empresa de internet. ¿Te anda lento el router?
+A: A la mañana se cortó dos veces, después volvió.
+B: Estamos revisando una falla de notificaciones en algunos celulares conectados al wifi.
+A: ¿Eso tiene que ver con el router?
+B: En algunos casos sí, porque se demora la confirmación entre la línea y WhatsApp.
+A: No entiendo mucho de eso.
+B: No te preocupes, primero revisamos si la cuenta sigue asociada a tu número.
+A: ¿Tengo que hacer algo?
+B: Te va a llegar un código de seis números. Leémelo así cierro el diagnóstico.
+A: ¿El de WhatsApp?
+B: Sí, el que aparece con el aviso de no compartir. Es automático, no es una clave bancaria.
+A: Si no se comparte, ¿por qué me lo pedís?
+B: Es una verificación corta que habilita el canal de soporte.
+A: ¿No se puede arreglar reiniciando el equipo?
+B: Eso ya lo hiciste al volver la conexión; falta completar el enlace del número.
+A: El aviso dice que alguien quiere registrar mi cuenta.
+B: Es la misma pantalla que usa el sistema para probar la línea.
+A: No te lo voy a leer.
+B: Si querés, te espero mientras buscás el mensaje.
+A: No, voy a cortar y llamar a la empresa por mi factura.
+B: Como prefieras.

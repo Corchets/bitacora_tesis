@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona llama porque un familiar mayor cambió de teléfono y no logra recuperar el grupo de consorcio; se consulta el texto del aviso sin revelar código.",
+  "que_prueba": "La conversación arranca con «Hola, llamo yo. Mi tía cambió el teléfono y ahora no aparece el grupo del edificio.» (L1). Contexto: La persona llama porque un familiar mayor cambió de teléfono y no logra recuperar el grupo de consorcio; se consulta el texto del aviso sin revelar código. La dificultad es considerar para qué se confirma la información antes de alertar solo por la presencia de datos personales.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama porque un familiar mayor cambió de teléfono y no logra recuperar el grupo de consorcio; se consulta el texto del aviso sin revelar código.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "whatsapp",
   "dificultad": "pedido_razonable",

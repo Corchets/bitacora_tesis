@@ -2,7 +2,7 @@ A: hola intento hacer una copia de los chats y siempre termina con el mismo erro
 B: te muestra una palabra o algún número
 A: dice código 17 pero no sé si eso sirve no es un mensaje de texto aparece en la pantalla
 B: sí esa referencia nos ayuda a buscar el tipo de problema qué teléfono usás
-A: un modelo inventado llamado bruma tiene tres años y todavía anda bien
+A: un Bruma tiene tres años y todavía anda bien
 B: la copia queda en la nube o en el almacenamiento del teléfono
 A: en la nube ayer borré un montón de fotos para hacer lugar
 B: cuánto espacio libre te quedó

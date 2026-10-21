@@ -21,10 +21,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una familia coordina el pago y la entrega de una torta encargada para una reunión; una persona adelanta el costo y otra transfiere su parte.",
+  "que_prueba": "La apertura «¿La panadería confirmó la torta para el aniversario de mamá?» (L1) da paso a una gestión cotidiana. Contexto: Una familia coordina el pago y la entrega de una torta encargada para una reunión; una persona adelanta el costo y otra transfiere su parte. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una familia coordina el pago y la entrega de una torta encargada para una reunión; una persona adelanta el costo y otra transfiere su parte.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "familiar",
   "dificultad": "cotidiana",

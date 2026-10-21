@@ -4,12 +4,12 @@
   "semilla": "SC-CV2-D-SOPORTE-004",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 13,
+  "t_r_linea": 14,
   "t_c_linea": null,
   "pedido": "REQUEST_REMOTE_ACCESS",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
@@ -17,21 +17,50 @@
     },
     {
       "linea": 13,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 14,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_REMOTE_ACCESS"
       ]
+    },
+    {
+      "linea": 19,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": [
+        "PERSISTENCE_DISTRACTION"
+      ]
+    },
+    {
+      "linea": 26,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 29,
+      "evento": "rechazo",
+      "etiquetas": []
     }
   ],
-  "que_prueba": "Una falla concreta al emitir una factura justifica la petición de una clave temporal de control remoto. La solicitud empieza como permiso para conectar y se vuelve inequívoca al pedir que la persona comparta la clave.",
-  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
+  "que_prueba": "Una asistencia remota ofrecida para un error de facturación deriva en pedir control del cursor y conservar abierta la cuenta bancaria del local. El objeto de riesgo surge en el diálogo y la persona rechaza el permiso; no se convierte cualquier asistencia técnica en fraude.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta de T_R en línea 13, donde comienza el pedido indirecto; también podría ubicarse en línea 14, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta de T_R en línea 13, donde se solicita habilitar control; también puede ubicarse en línea 15, cuando se pide entregar la clave temporal. Ambas lecturas quedan pendientes de D07. Sin cumplimiento.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la solicitud de conceder control a la ventana de asistencia. Las descripciones anteriores no conceden el permiso; la petición posterior de mantener abierto el banco muestra el alcance que pretende el supuesto soporte. No hubo aceptación ni control observable, por eso T_C queda nulo. D07 sigue abierta para distinguir el comienzo del pedido de su confirmación semántica en el contexto posterior. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "soporte",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-SOPORTE-REMOTO-01",
-  "situacion": "Una falla concreta al emitir una factura justifica la petición de una clave temporal de control remoto. La solicitud empieza como permiso para conectar y se vuelve inequívoca al pedir que la persona comparta la clave."
+  "situacion": "Un falso mantenimiento de facturación ofrece destrabar una factura y solicita control de la computadora, incluyendo acceso a la pestaña bancaria del negocio."
 }

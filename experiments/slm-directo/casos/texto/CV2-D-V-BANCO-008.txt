@@ -1,22 +1,23 @@
-A: Buenas noches, llamo del banco por una inconsistencia en la caja de seguridad.
-B: No tengo caja de seguridad con ustedes.
-A: Disculpá, entonces es la cuenta sueldo. Veo que hiciste una extracción grande el lunes.
-B: Saqué para pagar el arreglo del techo.
-A: La sucursal detectó que una parte corresponde a billetes de una serie que van a retirar.
-B: ¿Ahora también retiran billetes?
-A: Se reemplazan de forma gradual. No hay que alarmarse.
-B: ¿Tengo que ir a cambiarlos?
-A: Podemos coordinar que un operador pase a verificar el lote y te deje el recibo.
-B: ¿En mi casa?
-A: Sí, es un procedimiento de resguardo. El operador trae una credencial numerada.
-B: ¿Y cómo sé que es del banco?
-A: Te puedo dar el código de visita cuando quede asignado.
-B: Bueno, ¿qué tendría que tener listo?
-A: Poné en un sobre todo el efectivo que retiraste, así lo cuenta el operador sin mezclarlo.
-B: ¿Todo lo que saqué?
-A: La cantidad completa, unos doscientos mil según el registro.
-B: Eso es bastante plata para dejar en un sobre.
-A: Si no hacemos el control hoy, después la sucursal no puede certificar la serie.
-B: No voy a preparar efectivo para alguien que todavía no conozco.
-A: Te explico que el operador se identifica al llegar.
-B: Prefiero terminar la llamada y consultar en la sucursal.
+A: Hola, buen día.
+B: Buenas noches, llamo del banco por una inconsistencia en la caja de seguridad.
+A: No tengo caja de seguridad con ustedes.
+B: Disculpá, entonces es la cuenta sueldo. Veo que hiciste una extracción grande el lunes.
+A: Saqué para pagar el arreglo del techo.
+B: La sucursal detectó que una parte corresponde a billetes de una serie que van a retirar.
+A: ¿Ahora también retiran billetes?
+B: Se reemplazan de forma gradual. No hay que alarmarse.
+A: ¿Tengo que ir a cambiarlos?
+B: Podemos coordinar que un operador pase a verificar el lote y te deje el recibo.
+A: ¿En mi casa?
+B: Sí, es un procedimiento de resguardo. El operador trae una credencial numerada.
+A: ¿Y cómo sé que es del banco?
+B: Te puedo dar el código de visita cuando quede asignado.
+A: Bueno, ¿qué tendría que tener listo?
+B: Poné en un sobre todo el efectivo que retiraste, así lo cuenta el operador sin mezclarlo.
+A: ¿Todo lo que saqué?
+B: La cantidad completa, unos doscientos mil según el registro.
+A: Eso es bastante plata para dejar en un sobre.
+B: Si no hacemos el control hoy, después la sucursal no puede certificar la serie.
+A: No voy a preparar efectivo para alguien que todavía no conozco.
+B: Te explico que el operador se identifica al llegar.
+A: Prefiero terminar la llamada y consultar en la sucursal.

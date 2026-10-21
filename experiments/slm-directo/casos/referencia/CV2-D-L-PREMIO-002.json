@@ -21,10 +21,10 @@
       ]
     }
   ],
-  "que_prueba": "Quien compró una entrada para un sorteo de una feria llama para corregir el correo de notificación; se verifica el evento y el número de entrada.",
+  "que_prueba": "L2 aporta una comprobación acotada («Buen día. ¿Tenés el número de entrada?»). Contexto: Quien compró una entrada para un sorteo de una feria llama para corregir el correo de notificación; se verifica el evento y el número de entrada. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño quien compró una entrada para un sorteo de una feria llama para corregir el correo de notificación; se verifica el evento y el número de entrada.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "premio",
   "dificultad": "pedido_razonable",

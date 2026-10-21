@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La madre de una estudiante llama a la escuela porque el colectivo se demoró y coordina el ingreso tardío; acuerdan cómo registrar la asistencia.",
+  "que_prueba": "La apertura «hola el colectivo de mi hija viene con veinte minutos de demora» (L1) da paso a una gestión cotidiana. Contexto: La madre de una estudiante llama a la escuela porque el colectivo se demoró y coordina el ingreso tardío; acuerdan cómo registrar la asistencia. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la madre de una estudiante llama a la escuela porque el colectivo se demoró y coordina el ingreso tardío; acuerdan cómo registrar la asistencia.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "escuela",
   "dificultad": "cotidiana",

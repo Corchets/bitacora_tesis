@@ -1,20 +1,21 @@
-A: Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes
-B: No sabía que había una devolución
-A: Es una revisión de períodos viejos no se acredita automáticamente
-B: De qué período hablan
-A: Entre el primer trabajo y el alta de la prestación
-B: Eso fue hace muchos años
-A: Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano
-B: Sí pero no quiero mandar una foto por mensaje
-A: No hace falta foto Podés mirar el reverso donde está impreso el número de trámite
-B: Ese número sirve pa la devolución
-A: Identifica al titular y habilita a consultar la liquidación provisoria
-B: El número es largo no lo leo bien
-A: Decime los últimos cuatro y la fecha de emisión que figura abajo
-B: No es un dato personal
-A: Es una referencia administrativa no un código de acceso
-B: Si es una devolución no debería recibir una carta
-A: La carta se genera cuando el titular confirma la liquidación
-B: No quiero confirmar algo que no vi
-A: La cifra se puede leer una vez que se abre el legajo
-B: Entonces prefiero pedir turno y revisarlo en persona
+A: hola buen día
+B: Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes
+A: No sabía que había una devolución
+B: Es una revisión de períodos viejos no se acredita automáticamente
+A: De qué período hablan
+B: Entre el primer trabajo y el alta de la prestación
+A: Eso fue hace muchos años
+B: Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano
+A: Sí pero no quiero mandar una foto por mensaje
+B: No hace falta foto Podés mirar el reverso donde está impreso el número de trámite
+A: Ese número sirve pa la devolución
+B: Identifica al titular y habilita a consultar la liquidación provisoria
+A: El número es largo no lo leo bien
+B: Decime los últimos cuatro y la fecha de emisión que figura abajo
+A: No es un dato personal
+B: Es una referencia administrativa no un código de acceso
+A: Si es una devolución no debería recibir una carta
+B: La carta se genera cuando el titular confirma la liquidación
+A: No quiero confirmar algo que no vi
+B: La cifra se puede leer una vez que se abre el legajo
+A: Entonces prefiero pedir turno y revisarlo en persona

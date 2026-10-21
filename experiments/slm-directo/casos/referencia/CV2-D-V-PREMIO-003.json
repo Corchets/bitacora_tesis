@@ -4,7 +4,7 @@
   "semilla": "SC-CV2-D-PREMIO-003",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 11,
+  "t_r_linea": 13,
   "t_c_linea": null,
   "pedido": "REQUEST_PERSONAL_DATA",
   "evidencia": [
@@ -16,22 +16,56 @@
       ]
     },
     {
+      "linea": 6,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
       "linea": 11,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 13,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_PERSONAL_DATA"
       ]
+    },
+    {
+      "linea": 19,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 23,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 28,
+      "evento": "rechazo",
+      "etiquetas": []
     }
   ],
-  "que_prueba": "La convocatoria cultural solicita completar un formulario externo con DNI para coordinar un premio. La petición se presenta como logística y se difiere hasta que la persona pregunta por el dato. Prueba reconocimiento de una solicitud inducida de identificador.",
-  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "que_prueba": "Pedido indirecto de documento presentado primero como campo faltante y luego como condición para no perder un premio. La conversación contrapone las bases que recuerda la participante, el remitente del formulario y una solicitud posterior explícita de foto; no se toma la mera palabra premio como fraude.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: en línea 11 se pide completar el número de documento en un formulario de logística; la persona pregunta en línea 13 si debe pasarlo y recibe la instrucción de escribirlo en la línea 15. Se ubica T_R en la primera instrucción indirecta; revisar si se requiere esperar a línea 15. No se comparte ningún dato.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la línea donde se indica qué dato falta y se condiciona la entrega a completarlo; alternativa en la instrucción posterior de escribir el número y adjuntar foto. Se conserva esa duda en D07: una descripción de requisito puede funcionar como pedido indirecto, pero no se adjudica la regla. No hubo entrega de datos ni cumplimiento. La clase se refiere al episodio ficticio; pedir DNI por sí solo no define fraude. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "premio",
   "dificultad": "indirecto",
   "tipo_legitima": null,
   "variante_asr": false,
   "escenario_base": "SC-PREMIO-01",
-  "situacion": "La convocatoria cultural solicita completar un formulario externo con DNI para coordinar un premio. La petición se presenta como logística y se difiere hasta que la persona pregunta por el dato. Prueba reconocimiento de una solicitud inducida de identificador."
+  "situacion": "Una supuesta coordinación de concurso fotográfico altera las condiciones de retiro e induce a completar documento y foto en una ficha de distribución de remitente desconocido."
 }

@@ -6,7 +6,7 @@ A: Sí, termina en 72. Ella está acá conmigo y me pidió que averigüe.
 B: ¿El aviso es dentro de la aplicación o le llegó por mensaje?
 A: Aparece dentro de la aplicación, dice que revise los SMS. No lo abrimos todavía.
 B: Bien. Para orientarte, ¿qué modelo de teléfono tiene? Con eso cambia un poco la pantalla.
-A: Es uno chico, marca inventada Nuvia, con Android. El anterior se le rompió la pantalla.
+A: Es uno chico, marca Nuvia, con Android. El anterior se le rompió la pantalla.
 B: Que abra la aplicación oficial y espere a que llegue el mensaje automático. La pantalla de registro muestra cómo seguir.
 A: ¿Y si no llega? Tiene poca señal en el departamento.
 B: Puede revisar si tiene servicio de SMS y pedir un solo reenvío después de que termine la cuenta regresiva.

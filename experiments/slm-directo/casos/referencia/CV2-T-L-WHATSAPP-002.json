@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Dos integrantes de una cooperadora coordinan incorporar a una voluntaria al grupo de trabajo y verifican qué número debe usarse.",
+  "que_prueba": "La conversación arranca con «Hola, ¿pudiste hablar con la chica que va a ayudar en la feria?» (L1). Contexto: Dos integrantes de una cooperadora coordinan incorporar a una voluntaria al grupo de trabajo y verifican qué número debe usarse. La dificultad es considerar para qué se confirma la información antes de alertar solo por la presencia de datos personales.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos integrantes de una cooperadora coordinan incorporar a una voluntaria al grupo de trabajo y verifican qué número debe usarse.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "whatsapp",
   "dificultad": "pedido_razonable",

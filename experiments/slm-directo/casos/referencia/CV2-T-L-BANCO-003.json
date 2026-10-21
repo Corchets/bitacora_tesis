@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "El titular llama para pedir una constancia de titularidad para presentar en el trabajo; se identifica la cuenta y se genera el documento.",
+  "que_prueba": "L4 aporta una comprobación acotada («¿Querés una constancia de titularidad o un certificado de CBU?»). Contexto: El titular llama para pedir una constancia de titularidad para presentar en el trabajo; se identifica la cuenta y se genera el documento. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño el titular llama para pedir una constancia de titularidad para presentar en el trabajo; se identifica la cuenta y se genera el documento.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "pedido_razonable",

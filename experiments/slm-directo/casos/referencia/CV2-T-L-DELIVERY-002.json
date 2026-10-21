@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona consulta al correo local porque el paquete figura como domicilio cerrado; corrige la referencia de la casa y acuerda un nuevo intento.",
+  "que_prueba": "La apertura «hola el seguimiento dice que no había nadie pero estuve en casa todo el día» (L1) da paso a una gestión cotidiana. Contexto: Una persona consulta al correo local porque el paquete figura como domicilio cerrado; corrige la referencia de la casa y acuerda un nuevo intento. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona consulta al correo local porque el paquete figura como domicilio cerrado; corrige la referencia de la casa y acuerda un nuevo intento.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "delivery",
   "dificultad": "cotidiana",

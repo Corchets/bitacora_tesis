@@ -4,26 +4,26 @@
   "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-001",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 9,
-  "t_c_linea": 14,
+  "t_r_linea": 10,
+  "t_c_linea": 15,
   "pedido": "REQUEST_PERSONAL_DATA",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 9,
+      "linea": 10,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_PERSONAL_DATA"
       ]
     },
     {
-      "linea": 14,
+      "linea": 15,
       "evento": "cumplimiento",
       "etiquetas": []
     }
@@ -31,7 +31,7 @@
   "que_prueba": "Una constancia de supervivencia se usa para pedir datos de la hija que atiende, aunque el beneficio corresponda a su padre. La persona aporta identificadores de marcador y el interlocutor confirma el registro. Prueba cumplimiento de datos personales de una tercera persona.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, pedido de DNI y fecha. T_C línea 14, entrega de valores de marcador; conversación de 30 turnos para probar presión y continuidad. No hay identidad real.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 10, pedido de DNI y fecha. T_C línea 15, entrega de valores de marcador; conversación de 30 turnos para probar presión y continuidad. No hay identidad real. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "organismo_previsional",
   "dificultad": "directo",

@@ -1,20 +1,21 @@
-A: Hola, soy del equipo de administración del grupo de la feria de ciencias.
-B: ¿Qué pasó?
-A: Tenemos un aviso de cambio de número asociado a una cuenta de expositor.
-B: Yo no pedí cambiar el número.
-A: La actualización no terminó y todavía no se modificó la lista pública.
-B: ¿Podés decirme qué cuenta?
-A: El sistema la muestra con el nombre del puesto, no con el de la persona.
-B: ¿Qué puesto aparece?
-A: Hay varios registros en espera, todavía estoy revisando cuál corresponde.
-B: ¿Puedo mirar el grupo desde mi teléfono?
-A: No cierres la pantalla de chats hasta que termine la sincronización.
-B: No veo ningún aviso.
-A: Puede tardar un rato en aparecer.
-B: ¿Llamo a la organizadora?
-A: Ella está en el predio y no tiene acceso a la planilla.
-B: ¿Me das un interno?
-A: La línea es saliente y no recibe llamadas.
-B: Voy a escribir al grupo de expositores.
-A: Esperá hasta que te confirme el registro.
-B: No, prefiero verificarlo ahí.
+A: Buenas, ¿quién habla?
+B: Hola, soy del equipo de administración del grupo de la feria de ciencias.
+A: ¿Qué pasó?
+B: Tenemos un aviso de cambio de número asociado a una cuenta de expositor.
+A: Yo no pedí cambiar el número.
+B: La actualización no terminó y todavía no se modificó la lista pública.
+A: ¿Podés decirme qué cuenta?
+B: El sistema la muestra con el nombre del puesto, no con el de la persona.
+A: ¿Qué puesto aparece?
+B: Hay varios registros en espera, todavía estoy revisando cuál corresponde.
+A: ¿Puedo mirar el grupo desde mi teléfono?
+B: No cierres la pantalla de chats hasta que termine la sincronización.
+A: No veo ningún aviso.
+B: Puede tardar un rato en aparecer.
+A: ¿Llamo a la organizadora?
+B: Ella está en el predio y no tiene acceso a la planilla.
+A: ¿Me das un interno?
+B: La línea es saliente y no recibe llamadas.
+A: Voy a escribir al grupo de expositores.
+B: Esperá hasta que te confirme el registro.
+A: No, prefiero verificarlo ahí.

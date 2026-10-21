@@ -4,19 +4,19 @@
   "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-007",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 11,
+  "t_r_linea": 12,
   "t_c_linea": null,
   "pedido": "REQUEST_AUTH_CODE",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 11,
+      "linea": 12,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_AUTH_CODE"
@@ -26,7 +26,7 @@
   "que_prueba": "Una reorganización de sucursales se usa para solicitar un código de acceso con la excusa de conservar la boca de pago. Prueba un pedido inducido donde el llamante sostiene que el código confirma una negativa.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 11, donde comienza el pedido indirecto; también podría ubicarse en línea 12, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Duda D07: la función se explica en línea 9; T_R se marca en línea 11, cuando el llamante solicita dictar la serie. No hay cumplimiento.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 12, donde comienza el pedido indirecto; también podría ubicarse en línea 13, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Duda D07: la función se explica en línea 10; T_R se marca en línea 12, cuando el llamante solicita dictar la serie. No hay cumplimiento. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "organismo_previsional",
   "dificultad": "indirecto",

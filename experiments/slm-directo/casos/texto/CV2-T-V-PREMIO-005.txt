@@ -1,20 +1,21 @@
-A: Buen día, te hablo de la librería que organizó la búsqueda del tesoro infantil.
-B: ¿La del sábado en la plaza?
-A: Sí, tu equipo ganó una caja de libros para la escuela.
-B: ¿La tiene que retirar la maestra?
-A: Puede retirarla una persona adulta que figure en la autorización.
-B: Yo soy la mamá de una de las chicas.
-A: Entonces necesito registrar el nombre completo de la nena y su documento.
-B: ¿No basta con el nombre de la escuela?
-A: El seguro de entrega exige identificar a quien recibió el premio.
-B: No me parece necesario dar el documento de una menor.
-A: Sin ese dato, la caja vuelve al depósito.
-B: ¿Puedo mandar una nota firmada a la escuela?
-A: No, el registro se hace en línea.
-B: Entonces que la retire la docente.
-A: Ella no está en la lista del equipo.
-B: La puedo consultar antes.
-A: El depósito cierra a las cinco.
-B: No voy a pasar el documento.
-A: Entiendo.
-B: Chau.
+A: Hola, decime.
+B: Buen día, te hablo de la librería que organizó la búsqueda del tesoro infantil.
+A: ¿La del sábado en la plaza?
+B: Sí, tu equipo ganó una caja de libros para la escuela.
+A: ¿La tiene que retirar la maestra?
+B: Puede retirarla una persona adulta que figure en la autorización.
+A: Yo soy la mamá de una de las chicas.
+B: Entonces necesito registrar el nombre completo de la nena y su documento.
+A: ¿No basta con el nombre de la escuela?
+B: El seguro de entrega exige identificar a quien recibió el premio.
+A: No me parece necesario dar el documento de una menor.
+B: Sin ese dato, la caja vuelve al depósito.
+A: ¿Puedo mandar una nota firmada a la escuela?
+B: No, el registro se hace en línea.
+A: Entonces que la retire la docente.
+B: Ella no está en la lista del equipo.
+A: La puedo consultar antes.
+B: El depósito cierra a las cinco.
+A: No voy a pasar el documento.
+B: Entiendo.
+A: Chau.

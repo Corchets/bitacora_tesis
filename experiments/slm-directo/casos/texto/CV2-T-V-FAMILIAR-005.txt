@@ -1,21 +1,22 @@
-A: Hola, soy el papá de Nico, ¿está tu hijo en casa?
-B: Sí, pero está estudiando. ¿Qué pasó?
-A: El mío se quedó en el club después del entrenamiento, el micro que lo trae se rompió.
-B: ¿No hay otro transporte de la institución?
-A: El coordinador dice que cada familia tiene que resolver cómo vuelven.
-B: ¿A qué hora termina?
-A: Ya tendría que haber llegado hace cuarenta minutos.
-B: ¿Está solo?
-A: Hay un compañero con él, pero viven para el otro lado.
-B: ¿No podés ir a buscarlo?
-A: Estoy llevando a mi mamá a una consulta y no llego antes de que cierre el club.
-B: ¿Dónde queda exactamente?
-A: En el predio de la ruta, del lado del puente nuevo.
-B: ¿Y qué necesitás de mí?
-A: El chofer dice que no puede esperar y estoy viendo cómo hago para que llegue a casa.
-B: ¿Cuánto sale el viaje?
-A: Veintiséis mil, el chofer dice que espera diez minutos nomás.
-B: Bueno, te mando para el viaje.
-A: Te paso mi alias ahora.
-B: Ya salió la transferencia.
-A: Me figura acreditada, lo busco y te aviso.
+A: Buenas tardes.
+B: Hola, soy el papá de Nico, ¿está tu hijo en casa?
+A: Sí, pero está estudiando. ¿Qué pasó?
+B: El mío se quedó en el club después del entrenamiento, el micro que lo trae se rompió.
+A: ¿No hay otro transporte de la institución?
+B: El coordinador dice que cada familia tiene que resolver cómo vuelven.
+A: ¿A qué hora termina?
+B: Ya tendría que haber llegado hace cuarenta minutos.
+A: ¿Está solo?
+B: Hay un compañero con él, pero viven para el otro lado.
+A: ¿No podés ir a buscarlo?
+B: Estoy llevando a mi mamá a una consulta y no llego antes de que cierre el club.
+A: ¿Dónde queda exactamente?
+B: En el predio de la ruta, del lado del puente nuevo.
+A: ¿Y qué necesitás de mí?
+B: El chofer dice que no puede esperar y estoy viendo cómo hago para que llegue a casa.
+A: ¿Cuánto sale el viaje?
+B: Veintiséis mil, el chofer dice que espera diez minutos nomás.
+A: Bueno, te mando para el viaje.
+B: Te paso mi alias ahora.
+A: Ya salió la transferencia.
+B: Me figura acreditada, lo busco y te aviso.

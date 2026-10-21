@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona que espera un paquete llama a la tienda porque la dirección tiene una referencia incompleta; confirma ubicación y franja horaria.",
+  "que_prueba": "La apertura «hola llamo por el pedido de una pava electrica la entrega figura para hoy pero falta el departamento» (L1) da paso a una gestión cotidiana. Contexto: Una persona que espera un paquete llama a la tienda porque la dirección tiene una referencia incompleta; confirma ubicación y franja horaria. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona que espera un paquete llama a la tienda porque la dirección tiene una referencia incompleta; confirma ubicación y franja horaria.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "delivery",
   "dificultad": "cotidiana",

@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una oficina coordina la entrega de cajas de papel y tintas; se confirma la puerta de recepción y un horario en que queda alguien para firmar.",
+  "que_prueba": "La apertura «Hola, el proveedor de oficina dijo que llega mañana con las cajas de papel.» (L1) da paso a una gestión cotidiana. Contexto: Una oficina coordina la entrega de cajas de papel y tintas; se confirma la puerta de recepción y un horario en que queda alguien para firmar. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una oficina coordina la entrega de cajas de papel y tintas; se confirma la puerta de recepción y un horario en que queda alguien para firmar.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "delivery",
   "dificultad": "cotidiana",

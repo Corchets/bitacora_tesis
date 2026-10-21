@@ -54,10 +54,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona pregunta por una alerta que muestra un código de error de impresora; se comenta una contraseña de wifi como dato privado que ella no revela.",
+  "que_prueba": "En L1 aparece «Buenas, la impresora dejó de conectarse y muestra el código E-14.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona pregunta por una alerta que muestra un código de error de impresora; se comenta una contraseña de wifi como dato privado que ella no revela.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "soporte",
   "dificultad": "mencion_sin_pedido",

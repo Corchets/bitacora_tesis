@@ -1,20 +1,21 @@
-A: Buenas, del área de movimientos del banco. ¿Estás en un lugar donde puedas hablar sin que te interrumpan?
-B: Estoy en casa, ¿por qué?
-A: Apareció una transferencia que no coincide con los hábitos de la cuenta.
-B: ¿A quién se transfirió?
-A: Todavía no está confirmada, por eso te llamo antes del cierre.
-B: ¿La veo en la aplicación?
-A: Puede tardar. Lo importante es que no cierres la sesión mientras hago la consulta.
-B: Yo no abrí ninguna sesión.
-A: El sistema la mantiene activa desde que se inició la orden.
-B: ¿Qué orden?
-A: Un movimiento a una cuenta nueva. No voy a decirte el nombre hasta bloquearlo.
-B: Decime el número de operación y llamo a la sucursal.
-A: No cortes, porque si vuelve a entrar la validación queda autorizada.
-B: ¿Me estás diciendo que no llame al banco?
-A: Te digo que esperes un minuto; la línea tiene que quedar abierta.
-B: Esto no me cierra. Voy a buscar el número que está en mi tarjeta.
-A: Si cortás ahora, puede procesarse mientras te atienden.
-B: Prefiero verificarlo por mi cuenta.
-A: Dame un segundo, todavía estoy viendo el estado.
-B: No, corto y llamo por el canal que ya conozco.
+A: Sí, te escucho.
+B: Buenas, del área de movimientos del banco. ¿Estás en un lugar donde puedas hablar sin que te interrumpan?
+A: Estoy en casa, ¿por qué?
+B: Apareció una transferencia que no coincide con los hábitos de la cuenta.
+A: ¿A quién se transfirió?
+B: Todavía no está confirmada, por eso te llamo antes del cierre.
+A: ¿La veo en la aplicación?
+B: Puede tardar. Lo importante es que no cierres la sesión mientras hago la consulta.
+A: Yo no abrí ninguna sesión.
+B: El sistema la mantiene activa desde que se inició la orden.
+A: ¿Qué orden?
+B: Un movimiento a una cuenta nueva. No voy a decirte el nombre hasta bloquearlo.
+A: Decime el número de operación y llamo a la sucursal.
+B: No cortes, porque si vuelve a entrar la validación queda autorizada.
+A: ¿Me estás diciendo que no llame al banco?
+B: Te digo que esperes un minuto; la línea tiene que quedar abierta.
+A: Esto no me cierra. Voy a buscar el número que está en mi tarjeta.
+B: Si cortás ahora, puede procesarse mientras te atienden.
+A: Prefiero verificarlo por mi cuenta.
+B: Dame un segundo, todavía estoy viendo el estado.
+A: No, corto y llamo por el canal que ya conozco.

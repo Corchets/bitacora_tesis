@@ -4,26 +4,26 @@
   "semilla": "SC-CV2-T-SOPORTE-009",
   "par": null,
   "clase": "vishing",
-  "t_r_linea": 11,
-  "t_c_linea": 16,
+  "t_r_linea": 12,
+  "t_c_linea": 17,
   "pedido": "REQUEST_REMOTE_ACCESS",
   "evidencia": [
     {
-      "linea": 1,
+      "linea": 2,
       "evento": "contexto",
       "etiquetas": [
         "AUTHORITY_CLAIM"
       ]
     },
     {
-      "linea": 11,
+      "linea": 12,
       "evento": "pedido",
       "etiquetas": [
         "REQUEST_REMOTE_ACCESS"
       ]
     },
     {
-      "linea": 16,
+      "linea": 17,
       "evento": "cumplimiento",
       "etiquetas": []
     }
@@ -31,7 +31,7 @@
   "que_prueba": "Un fallo de sincronización del lector induce a abrir una sesión de control remoto y compartir una serie temporal. Prueba un pedido indirecto presentado como visualización en vivo.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, primera instrucción de aceptar y compartir el código. T_C línea 16, la persona confirma el acceso remoto y dicta un código ficticio.",
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 12, primera instrucción de aceptar y compartir el código. T_C línea 17, la persona confirma el acceso remoto y dicta un código ficticio. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
   "particion": "test_reservado",
   "familia": "soporte",
   "dificultad": "indirecto",

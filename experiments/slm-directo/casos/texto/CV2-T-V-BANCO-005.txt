@@ -1,18 +1,19 @@
-A: Hola soporte de la billetera del banco Te falla el pago con QR
-B: Ayer me rebotó una compra sí
-A: El comercio recibió el pago pero no llegó la confirmación de tu cuenta
-B: Me cobraron igual
-A: El movimiento figura en tránsito
-B: Cómo lo destrabo
-A: Entrá en pagos y abrí el comprovante pendiente
-B: Me pide volver a iniciar sesión
-A: Para reconocer el perfil escribí tu contraseña habitual en la ventana de soporte
-B: La misma clave del banco
-A: Sí así compara el usuario con la billetera y confirma el pago
-B: No debería dar mi contraseña a soporte
-A: No me la decís a mí la cargás en tu teléfono
-B: Bueno ya ingresé la contraseña Girasol-31 en la ventana
-A: El pago quedó asociado al perfil
-B: Espero que no me vuelva a cobrar
-A: Sin el acceso no puedo ver el movimiento en tránsito
-B: Corto y abro el reclamo desde el historial
+A: hola
+B: Hola soporte de la billetera del banco Te falla el pago con QR
+A: Ayer me rebotó una compra sí
+B: El comercio recibió el pago pero no llegó la confirmación de tu cuenta
+A: Me cobraron igual
+B: El movimiento figura en tránsito
+A: Cómo lo destrabo
+B: Entrá en pagos y abrí el comprovante pendiente
+A: Me pide volver a iniciar sesión
+B: Para reconocer el perfil escribí tu contraseña habitual en la ventana de soporte
+A: La misma clave del banco
+B: Sí así compara el usuario con la billetera y confirma el pago
+A: No debería dar mi contraseña a soporte
+B: No me la decís a mí la cargás en tu teléfono
+A: Bueno ya ingresé la contraseña Girasol-31 en la ventana
+B: El pago quedó asociado al perfil
+A: Espero que no me vuelva a cobrar
+B: Sin el acceso no puedo ver el movimiento en tránsito
+A: Corto y abro el reclamo desde el historial

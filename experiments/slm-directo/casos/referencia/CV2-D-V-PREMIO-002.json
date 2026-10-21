@@ -31,12 +31,12 @@
   "que_prueba": "La llamada por un premio radial pide una transferencia de activación antes de entregar el artículo. La persona realiza el pago ficticio y el supuesto productor confirma el envío. Prueba cumplimiento de movimiento de dinero tras un premio.",
   "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, solicitud de transferencia. T_C línea 16, confirmación explícita de haber transferido. Montos y cuenta son inventados y no se incluye CBU/alias real.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, solicitud de transferencia. T_C línea 16, confirmación explícita de haber transferido. Montos y cuenta son inventados y no se incluye CBU/alias real. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "premio",
   "dificultad": "directo",
   "tipo_legitima": null,
   "variante_asr": true,
   "escenario_base": "SC-PREMIO-01",
-  "situacion": "La llamada por un premio radial pide una transferencia de activación a una cuenta puente antes de entregar el artículo. Prueba si el modelo detecta un movimiento de dinero cuando no se solicitan claves ni códigos."
+  "situacion": "Un supuesto premio radial requiere pagar una activación a una cuenta presentada como de producción; la persona confirma la transferencia."
 }

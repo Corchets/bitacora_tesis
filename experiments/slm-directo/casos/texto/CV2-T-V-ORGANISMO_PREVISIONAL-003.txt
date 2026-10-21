@@ -1,30 +1,24 @@
-A: Hola, llamo del organismo por la escolaridad de una persona a cargo.
-B: ¿La de mi hija?
-A: La constancia se recibió, pero el nombre de la escuela no coincide con el registro anterior.
-B: Cambió de escuela este año.
-A: Para actualizar el legajo necesito el nombre completo de la menor y su fecha de nacimiento.
-B: ¿No alcanza con el certificado?
-A: El certificado no muestra el número de documento en esta vista.
-B: La ficha escolar dice Mili Sosa, nacida el tres de abril de 2014.
-A: Sin asociar el dato, el complemento escolar queda pendiente.
-B: ¿Puedo presentarlo en la oficina?
-A: Sí, con turno y copia del documento.
-B: Prefiero hacerlo de esa manera.
-A: La fecha límite es fin de mes.
-B: Todavía tengo tiempo.
-A: El horario de atención está en la página institucional.
-B: La voy a consultar.
-A: ¿Necesitás que te pase el enlace?
-B: No, lo busco por mi cuenta.
-A: De acuerdo.
+A: ¿Sí?
+B: Hola, llamo del organismo por el complemento de escolaridad de una persona a cargo.
+A: ¿El de mi hija?
+B: Sí. La constancia quedó marcada para revisión porque cambió de escuela.
+A: Cambió este año y tengo el certificado.
+B: Para destrabarlo necesito que me dictes el nombre completo de la menor y la fecha de nacimiento.
+A: ¿No alcanza con el certificado que presenté?
+B: No lo tengo abierto y por este teléfono lo puedo cargar ahora.
+A: La ficha dice Mili Sosa, nacida el tres de abril de 2014.
+B: También necesito el documento de la persona que cobra el beneficio.
+A: ¿Para qué si estamos hablando de la escolaridad?
+B: El sistema vincula a la menor con quien recibe el pago.
+A: Prefiero llevar el certificado a una oficina.
+B: No lo cargues por el portal porque puede duplicar el trámite.
+A: ¿Dónde dice eso?
+B: No tengo un aviso escrito para mandarte.
+A: Entonces voy a consultar el portal por mi cuenta.
+B: Si esperás, puede quedar pendiente el próximo pago.
+A: Igual no te voy a dar el documento por teléfono.
+B: Ya anoté los datos de la menor.
+A: No cargues nada más, voy a verificarlo por un canal oficial.
+B: Está bien, queda pendiente.
+A: Chau.
 B: Chau.
-A: Con los datos ya puedo dejar asentada la actualización.
-B: ¿Me van a mandar una constancia?
-A: Si queda aceptada, aparece en el próximo resumen.
-B: No quiero que quede un dato mal cargado.
-A: Podés volver a corregirlo en la oficina.
-B: ¿Necesito turno?
-A: Sí, con la copia del certificado escolar.
-B: Voy a revisar qué oficinas tienen atención esta semana.
-A: La fecha límite es el último día del mes.
-B: Entonces tengo tiempo para llevarlo en persona.

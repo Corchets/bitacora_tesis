@@ -24,10 +24,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una clienta consulta por una leyenda que menciona clave de comercio en un pago de estacionamiento; distingue una referencia del cargo de su clave personal.",
+  "que_prueba": "En L1 aparece «Buen día, pagué el estacionamiento del hospital y en la app aparece “clave comercio 12”.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una clienta consulta por una leyenda que menciona clave de comercio en un pago de estacionamiento; distingue una referencia del cargo de su clave personal.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "banco",
   "dificultad": "mencion_sin_pedido",

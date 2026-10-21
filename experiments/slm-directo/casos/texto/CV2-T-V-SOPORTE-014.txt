@@ -1,20 +1,20 @@
-A: Buenas te llamo del sistema de turnos de la clínica Se abrió una agenda nueva con tu nombre
-B: Yo no cargué una agenda
-A: Puede ser una duplicación del perfil que usa recepción
-B: Se ven los pacientes
-A: No hasta que la agenda queda activa
-B: Cómo la desactivo
+A: Buenas te llamo por una agenda nueva que apareció en el sistema de turnos de la clínica
+B: Yo no cargué ninguna agenda
+A: Se abrió con una cuenta de proveedor y quedó asociada al perfil de recepción
+B: ¿Se pueden ver los pacientes?
+A: Todavía no hasta que alguien confirme el responsable
+B: ¿Cómo la desactivo?
 A: Entrá en usuarios y buscá sesiones abiertas
 B: Veo una que dice recepción auxiliar
-A: Esa puede ser la duplicada
-B: La cierro
-A: Primero confirmá el correo de administrador para separar las dos agendas
-B: Querés que te pase el correo
-A: Sí el que está asociado al perfil
-B: Y después
-A: Te va a llegar una verificación pa cambiar el responsable de la agenda
-B: Tengo que darte el código también
-A: Si aparece lo cargamos para que el cambio quede confirmado
-B: No voy a cerrar nada hasta hablar con la clínica
-A: Puede quedar la agenda duplicada
-B: Lo vemos con recepción
+A: Esa no la cierres porque podrías bloquear la agenda principal
+B: ¿Cómo verifico quién la abrió?
+A: Confirmá el correo de administrador para que te mande la solicitud de reasignación
+B: ¿Querés que te pase el correo?
+A: Sí, el que está asociado al perfil
+B: ¿No podés mandar la solicitud al correo institucional?
+A: No, la validación va al contacto que me dictes y no hay que avisar a recepción hasta terminar
+B: ¿Y después me llega un código?
+A: Si aparece, lo cargamos para que el cambio de responsable quede confirmado
+B: No voy a darte el correo ni a cerrar nada antes de hablar con la clínica
+A: Puede quedar la agenda nueva activa
+B: Lo revisamos con recepción por el número que ya tenemos

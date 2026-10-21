@@ -14,10 +14,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "Una persona llama para consultar cuándo se acredita un reintegro de medicamentos ya aprobado; se ubica la solicitud por mes y referencia.",
+  "que_prueba": "La conversación arranca con «Hola, me aprobaron un reintegro por medicamentos y no sé cuándo lo depositan.» (L1). Contexto: Una persona llama para consultar cuándo se acredita un reintegro de medicamentos ya aprobado; se ubica la solicitud por mes y referencia. La dificultad es considerar para qué se confirma la información antes de alertar solo por la presencia de datos personales.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona llama para consultar cuándo se acredita un reintegro de medicamentos ya aprobado; se ubica la solicitud por mes y referencia.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "test_reservado",
   "familia": "organismo_previsional",
   "dificultad": "pedido_razonable",

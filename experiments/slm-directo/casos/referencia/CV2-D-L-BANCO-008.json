@@ -19,10 +19,10 @@
       "etiquetas": []
     }
   ],
-  "que_prueba": "La persona consulta por un cajero que rechazó billetes; la palabra “clave” aparece en una anécdota ajena, sin pedido.",
+  "que_prueba": "En L3 aparece «Rechazó dos. En casa me dijeron que capaz tenían una clave marcada, pero no sé qué significa eso.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
   "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona consulta por un cajero que rechazó billetes; la palabra “clave” aparece en una anécdota ajena, sin pedido.; sin revisión humana.",
   "revision_humana": false,
-  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
   "particion": "desarrollo",
   "familia": "banco",
   "dificultad": "mencion_sin_pedido",
