@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-WHATSAPP-003",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-WHATSAPP-003",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La persona pide ayuda para exportar una conversación laboral propia antes de cambiar de equipo; se solicita contexto y nombre del grupo, no contenidos privados.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona pide ayuda para exportar una conversación laboral propia antes de cambiar de equipo; se solicita contexto y nombre del grupo, no contenidos privados.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "La persona pide ayuda para exportar una conversación laboral propia antes de cambiar de equipo; se solicita contexto y nombre del grupo, no contenidos privados."
+}

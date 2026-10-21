@@ -1,0 +1,25 @@
+A: Buen día. El wifi desapareció de casa, pero la computadora sigue conectada por cable.
+B: Hola. ¿Se apagó alguna luz del router o está todo encendido?
+A: La de wifi está apagada. Internet y energía están verdes.
+B: Puede haberse desactivado la radio inalámbrica. ¿El router tiene un botón lateral con el símbolo de ondas?
+A: Sí, hay uno chiquito al costado. No sabía para qué era.
+B: No lo mantengas apretado todavía. ¿Podés mirar la etiqueta de abajo y decirme el modelo?
+A: Dice Ronda 2, serie inventada R-440. ¿Te sirve ese dato?
+B: Sí, gracias. Ese modelo tiene un botón que activa y desactiva el wifi.
+A: Si lo toco, ¿se borra la configuración?
+B: No. Un toque breve vuelve a encender la señal. No presiones el botón hundido de reinicio.
+A: Ya lo toqué una vez. La luz empezó a parpadear.
+B: Esperá un minuto y buscá la red habitual desde el teléfono.
+A: Aparecieron dos redes, una termina en 2G y otra en 5G.
+B: ¿Cuál usabas antes?
+A: La de 2G, porque llega hasta el patio. La otra no aparece en el dormitorio.
+B: Conectate a esa y fijate si carga una página.
+A: Sí, abrió. El televisor también se conectó solo.
+B: Entonces quedó resuelto. Si vuelve a pasar, puede ser un toque accidental sobre el botón.
+A: Mi gato se sube a la repisa donde está el router, capaz fue eso.
+B: Puede ser. Si querés, movelo a un lugar ventilado donde no lo alcancen.
+A: ¿Hace falta que actualice algo ahora?
+B: No, el equipo volvió a la configuración anterior. No instalamos nada ni necesitamos acceder a tu pantalla.
+A: Bien, era lo que me preocupaba. Gracias.
+B: De nada. ¿Hay otro problema de conexión?
+A: No, ahora funciona todo.

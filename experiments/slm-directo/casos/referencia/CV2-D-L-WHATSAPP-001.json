@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-WHATSAPP-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-WHATSAPP-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La persona llama porque un familiar mayor cambió de teléfono y no logra recuperar el grupo de consorcio; se consulta el texto del aviso sin revelar código.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama porque un familiar mayor cambió de teléfono y no logra recuperar el grupo de consorcio; se consulta el texto del aviso sin revelar código.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "La persona llama porque un familiar mayor cambió de teléfono y no logra recuperar el grupo de consorcio; se consulta el texto del aviso sin revelar código."
+}

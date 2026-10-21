@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-ORGANISMO_PREVISIONAL-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una persona llama por el estado de un trámite de pensión iniciado presencialmente; se comprueba el turno y se aclara qué documento falta.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona llama por el estado de un trámite de pensión iniciado presencialmente; se comprueba el turno y se aclara qué documento falta.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "organismo_previsional",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-ORG-TURNO-01",
+  "situacion": "Una persona llama por el estado de un trámite de pensión iniciado presencialmente; se comprueba el turno y se aclara qué documento falta."
+}

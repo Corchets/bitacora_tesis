@@ -1,0 +1,25 @@
+A: no se si eso se saca acá
+B: buenas tardes la constancia es de una cuenta bancaria o de un trámite impositivo
+A: de un trámite impositivo creo que para justificar un pago yo con esas cosas me pierdo
+B: la clave fiscal corresponde al organismo tributario no al banco
+A: entonces el banco no me la puede recuperar
+B: no porque no la administramos si querés te digo dónde encontrar el comprobante de la transferencia que hiciste
+A: eso sí me vendría bien le pagué a la contadora el martes
+B: recordás el monto aproximado
+A: cuarenta y dos mil fue desde la cuenta donde cobro la jubilación
+B: para ubicarla confirmame los últimos cuatro números de esa cuenta
+A: 9903
+B: veo una transferencia de 42000 a nombre de paula virel es tu contadora
+A: sí correcto la conozco hace bastante
+B: en el detalle tenés la opción ver comprobante podés guardarlo o compartirlo desde ahí
+A: si lo comparto se manda directo a ella
+B: no hasta que elijas el contacto primero te muestra una vista previa
+A: bien no quiero mandarlo al grupo de la familia por equivocación
+B: podés guardarlo como archivo y después adjuntarlo al correo que ya usás con ella
+A: mejor hago eso la clave que mencionó ella puede ser la de la cuenta del banco
+B: son claves distintas para el trámite preguntale cuál necesita pero no compartas la clave bancaria
+A: sí eso lo tengo claro solo quería saber si el banco emitía esa constancia
+B: la constancia de transferencia sí la clave fiscal no
+A: listo ya encontré el botón gracias por la paciencia
+B: no hay problema terminamos
+A: sí muchas gracias

@@ -1,0 +1,33 @@
+{
+  "case_id": "CV2-D-L-WHATSAPP-004",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-WHATSAPP-004",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 9,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 12,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Durante una consulta sobre notificaciones tardías, la persona relata que recibió un código en otra ocasión; no se solicita ni reproduce.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño durante una consulta sobre notificaciones tardías, la persona relata que recibió un código en otra ocasión; no se solicita ni reproduce.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "Durante una consulta sobre notificaciones tardías, la persona relata que recibió un código en otra ocasión; no se solicita ni reproduce."
+}

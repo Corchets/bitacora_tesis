@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-D-L-BANCO-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": []
+    },
+    {
+      "linea": 12,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Consulta saliente por un débito de transporte que la persona no reconoce; se valida el movimiento con datos limitados y se abre un reclamo.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño consulta saliente por un débito de transporte que la persona no reconoce; se valida el movimiento con datos limitados y se abre un reclamo.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": true,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Consulta saliente por un débito de transporte que la persona no reconoce; se valida el movimiento con datos limitados y se abre un reclamo."
+}

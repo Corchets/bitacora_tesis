@@ -1,0 +1,23 @@
+A: estás cerca del local el candado de la persiana no gira
+B: voy en camino pero estoy a veinte minutos se trabó la llave o no entra
+A: entra hasta la mitad y después queda dura no quiero forzarla
+B: bien dejala quieta probaste con la copia que está en el cajón de caja
+A: sí hace lo mismo capaz se mojó con la lluvia de anoche
+B: puede ser le escribo al cerrajero que arregló la puerta del depósito
+A: lo conocés vos o lo busco en el teléfono del negocio
+B: lo tengo agendado se llama fabián y ya vino el mes pasado
+A: le digo que venga ahora o esperamos a que llegues
+B: decile que estamos en el local y que nos confirme cuánto tarda no le entregues la llave a nadie hasta que llegue alguno de los dos
+A: me contestó dice que puede pasar a las nueve y cuarto
+B: entonces abro la puerta de atrás cuando llegue vos podés atender mientras tanto las consultas de pedidos
+A: sí tengo la lista impresa el primero pasa a retirar una caja de vasos
+B: la caja está en el depósito pero no abras esa puerta si el cerrajero todavía no vio el candado
+A: la dejo preparada acá afuera avisamos al grupo que abrimos media hora más tarde
+B: sí escribí que hubo un problema con la persiana y damos horario estimado a las diez
+A: ya lo mandé una clienta preguntó si puede retirar al mediodía
+B: decile que sí así nos da margen yo voy a buscar café mientras espero el colectivo
+A: querés que pida también para vos
+B: sí uno chico sin azúcar después te transfiero lo mío
+A: dale te mando el importe por el grupo del local
+B: listo avisame si el cerrajero cambia la hora
+A: te escribo cuando esté acá

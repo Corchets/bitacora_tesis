@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-D-L-FAMILIAR-002",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-FAMILIAR-002",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una hermana pide dividir el gasto real de una compra compartida para el cumpleaños; se acuerdan monto, plazo y comprobación con autonomía para aceptar.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una hermana pide dividir el gasto real de una compra compartida para el cumpleaños; se acuerdan monto, plazo y comprobación con autonomía para aceptar.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una hermana pide dividir el gasto real de una compra compartida para el cumpleaños; se acuerdan monto, plazo y comprobación con autonomía para aceptar."
+}

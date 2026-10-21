@@ -1,0 +1,30 @@
+{
+  "case_id": "CV2-D-L-PREMIO-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-PREMIO-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 6,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "La persona llama al organizador para confirmar las condiciones de una rifa solidaria cuyo premio ya compró; se identifica el sorteo por fecha y talonario.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona llama al organizador para confirmar las condiciones de una rifa solidaria cuyo premio ya compró; se identifica el sorteo por fecha y talonario.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "premio",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-PREMIO-CONSULTA-01",
+  "situacion": "La persona llama al organizador para confirmar las condiciones de una rifa solidaria cuyo premio ya compró; se identifica el sorteo por fecha y talonario."
+}

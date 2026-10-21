@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-DELIVERY-002",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-DELIVERY-002",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una clienta coordina con el comercio una ventana de entrega de verduras frescas y da instrucciones sobre sustituciones y acceso al edificio.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una clienta coordina con el comercio una ventana de entrega de verduras frescas y da instrucciones sobre sustituciones y acceso al edificio.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "delivery",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una clienta coordina con el comercio una ventana de entrega de verduras frescas y da instrucciones sobre sustituciones y acceso al edificio."
+}

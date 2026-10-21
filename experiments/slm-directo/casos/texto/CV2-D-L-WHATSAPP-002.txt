@@ -1,0 +1,23 @@
+A: Buenas, necesito resolver algo del grupo de la feria. Me agregaron con el número viejo.
+B: Hola. ¿Querés salir del grupo o cambiar el número asociado a tu cuenta?
+A: Quiero salir. El teléfono viejo ahora lo usa mi hijo y le llegan todos los mensajes.
+B: ¿Todavía tenés acceso a esa cuenta?
+A: Sí, en mi equipo nuevo. El anterior quedó guardado en casa.
+B: Si entrás desde el nuevo, podés abrir la información del grupo y elegir salir.
+A: Ya lo hice, pero me sigue apareciendo en la lista de chats archivados.
+B: ¿Te figura como grupo o como conversación individual?
+A: Como grupo. Se llama Feria del Parque, los sábados.
+B: ¿Ves quién lo creó o quién administra?
+A: Mi vecina Inés. Le mandé un mensaje y me dijo que ella ya quitó el número anterior.
+B: Puede que veas un historial que quedó descargado. ¿Te llegan mensajes nuevos desde que saliste?
+A: No, el último es del martes. Hoy es jueves.
+B: Entonces ya no recibís novedades. Para ocultar ese historial, mantené apretado el chat y tocá eliminar.
+A: Me pregunta si también quiero borrar los archivos.
+B: Si no los necesitás, podés borrar todo. Si tenés fotos que querés guardar, descargalas antes.
+A: Hay una lista de precios que me sirve para el puesto. La voy a guardar primero.
+B: Bien. ¿Querés que revisemos si el número anterior sigue vinculado en otro equipo?
+A: Sí, porque eso es lo que me preocupa.
+B: En dispositivos vinculados podés cerrar la sesión de la computadora vieja.
+A: Lo veo, solo aparece mi tablet.
+B: Entonces el teléfono viejo ya no tiene una sesión activa de esa cuenta.
+A: Listo, cierro el chat y guardo la lista. Gracias.

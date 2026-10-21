@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-D-L-FAMILIAR-005",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-FAMILIAR-005",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 10,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 24,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una familia se organiza para pagar una reparación ya realizada en la casa común; se aclara el comprobante y quién administra los gastos.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una familia se organiza para pagar una reparación ya realizada en la casa común; se aclara el comprobante y quién administra los gastos.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una familia se organiza para pagar una reparación ya realizada en la casa común; se aclara el comprobante y quién administra los gastos."
+}

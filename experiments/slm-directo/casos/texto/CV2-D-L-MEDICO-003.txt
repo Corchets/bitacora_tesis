@@ -1,0 +1,25 @@
+A: Buenas, vi una llamada perdida del consultorio. ¿Era por el turno de mi hijo?
+B: Sí, te llamamos porque la pediatra no va a atender el miércoles.
+A: Ah, justo ese día le toca el control de crecimiento.
+B: Podemos ofrecerte jueves a las tres o viernes a las diez.
+A: El jueves tiene escuela hasta las cuatro. ¿Hay algo después?
+B: El viernes a las diez es el único horario de esta semana.
+A: ¿Puedo llevarlo yo aunque el turno esté a nombre de su papá?
+B: Sí, si sos la madre registrada. ¿El apellido es Lorea?
+A: Sí, Lorea. Yo soy Paula.
+B: Perfecto. ¿Querés que te reserve el viernes?
+A: Sí, pero tiene natación a las once y media. La consulta alcanza en una hora, ¿no?
+B: Normalmente dura veinte o treinta minutos, aunque puede haber espera.
+A: Entonces llegamos bien. ¿Tengo que llevar la libreta de vacunas?
+B: Sí, si la tenés. La pediatra va a revisar el calendario.
+A: Está en la mochila, la llevo siempre.
+B: ¿Querés conservar el turno original si aparece otro profesional el miércoles?
+A: Prefiero la misma pediatra. Esperamos al viernes.
+B: Listo, lo cambio para el viernes 13 a las diez.
+A: Gracias por avisarme con tiempo. ¿Le mandan mensaje también al papá?
+B: El recordatorio sale al teléfono principal que figura en la ficha.
+A: Ese es el mío. Después le cuento a él.
+B: De acuerdo. Si aparece una cancelación antes, te podemos llamar.
+A: Sí, avisame solo si es después de las cuatro el jueves.
+B: Lo anoto como preferencia, no como turno confirmado.
+A: Perfecto, gracias.

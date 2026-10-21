@@ -1,0 +1,58 @@
+{
+  "case_id": "CV2-D-L-SOPORTE-004",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-SOPORTE-004",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 2,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 3,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 5,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 11,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 13,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 23,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Consulta por una clave de producto olvidada en un programa de dibujo; se aclara que no corresponde al acceso de cuenta.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño consulta por una clave de producto olvidada en un programa de dibujo; se aclara que no corresponde al acceso de cuenta.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-SUPPORT-INFO-01",
+  "situacion": "Consulta por una clave de producto olvidada en un programa de dibujo; se aclara que no corresponde al acceso de cuenta."
+}

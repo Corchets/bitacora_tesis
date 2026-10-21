@@ -1,0 +1,27 @@
+A: Hola, estoy mirando el presupuesto del plomero y no entiendo qué parte quedó pendiente.
+B: El trabajo del baño ya está pago. Falta la visita de la cocina, que la hicimos ayer.
+A: ¿Esa fue la que cambió la llave de paso?
+B: Sí. Cobró 38.000 entre repuesto y mano de obra.
+A: Mamá me había dicho que eran treinta. Capaz no sumó el repuesto.
+B: El repuesto salió 9.500. Le pedí que lo pusiera por separado en el recibo.
+A: ¿Te dejó el recibo en papel o lo mandó por mensaje?
+B: Lo mandó en una foto, se ve medio borroso.
+A: Mandámelo de nuevo, que así lo guardo en la carpeta de gastos de la casa.
+B: Te lo reenvío. ¿Vos podés poner algo esta semana?
+A: Sí, puedo transferir 15.000 ahora y el resto cuando cobre el viernes.
+B: No hace falta cubrirlo todo vos. Yo pongo lo mismo y mamá completa cuando cobre.
+A: Bueno, hagamos eso. ¿A qué cuenta te lo mando?
+B: Usá el alias de la caja común que ya tenés guardado, termina en casa.rio.
+A: Me aparece a nombre de Elena Varo, ¿es la cuenta de mamá?
+B: Sí, ella la dejó para los gastos compartidos. Igual mandame captura del comprobante así lo registro.
+A: Te la paso por el grupo de hermanos, no por privado porque después se pierde.
+B: Dale. Anoto que es para la reparación de la cocina.
+A: ¿El plomero vuelve la semana que viene o ya quedó terminado?
+B: Dijo que no hace falta volver, salvo que siga goteando.
+A: Hoy revisé y está seco. Parece que quedó bien.
+B: Buenísimo. Entonces cierro ese gasto en la planilla.
+A: Ya salió la transferencia de 15.000 a la cuenta de mamá.
+B: Me avisó que entró. Anoto tu aporte y el mío en la planilla.
+A: El viernes completo los 4.000 que faltan.
+B: Dale, lo dejamos así hasta que cobre ella.
+A: Dale, abrazo.

@@ -1,0 +1,24 @@
+A: hola llamo por el pedido de una pava electrica la entrega figura para hoy pero falta el departamento
+B: buen día tenés el número de compra
+A: es 63018 lo hice con el correo de mi pareja pero el domicilio es el mío
+B: encontré el pedido la dirección dice calle lapacho 220 sin piso ni departamento
+A: es segundo b edificio del portón gris entre la farmacia y la plaza
+B: el timbre tiene tu apellido o el de tu pareja
+A: tiene el de mi pareja ocampo yo estoy en el trabajo hasta las cuatro
+B: la entrega está asignada entre las dos y las seis
+A: puedo cambiarla para después de las cinco mi vecina puede recibirla si la autorizo
+B: puedo dejar asentado que consulten en portería pero el repartidor define el recorrido
+A: en el edificio no hay portería te paso el número de la vecina
+B: si ella acepta podemos agregar un teléfono de contacto para esta entrega
+A: sí me dijo que está en casa hasta las seis termina en 63
+B: lo agrego como referencia temporal querés que la llamen antes de subir
+A: sí así baja a abrirles no le dejen el paquete en el pasillo
+B: queda indicado el paquete requiere firma de quien lo recibe
+A: puede firmar con su nombre aunque la compra esté a nombre de ocampo
+B: sí anotamos que es una persona autorizada por vos
+A: bueno me llega el cambio por correo
+B: sí mandamos una actualización al correo de la compra
+A: ya entró dice que agregaron segundo b y el contacto
+B: perfecto querés que revise algo más
+A: no con eso alcanza gracias por la ayuda
+B: que llegue bien el pedido

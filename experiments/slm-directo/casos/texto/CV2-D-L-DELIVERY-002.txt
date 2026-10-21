@@ -1,0 +1,25 @@
+A: Buenas, quería consultar si el cajón de verduras sale hoy o mañana.
+B: Hola. ¿El pedido está a nombre de quién?
+A: De Pilar Sosa. Lo hice anoche desde la página del mercado.
+B: Veo que está preparado para el turno de la tarde.
+A: ¿Más o menos a qué hora? Tengo que salir a buscar a los chicos.
+B: El recorrido va de cuatro a siete, no tenemos una hora exacta.
+A: ¿Se puede dejar con el kiosquero de la esquina si no estoy?
+B: Podemos anotarlo, pero necesitamos que vos confirmes que lo acepta.
+A: Ya le pregunté. Me dijo que sí, mientras el cajón esté cerrado.
+B: ¿Querés que se lo entreguen a nombre del kiosco o que te llamen primero?
+A: Mejor que me llamen. Si estoy a diez minutos vuelvo y lo recibo.
+B: Para contactar al repartidor, ¿el número termina en 51?
+A: Sí, es el mío.
+B: También veo que pediste tomates maduros. Si no hay, ¿preferís que los cambien por perita o que los saquen?
+A: Perita está bien, pero que no reemplacen la rúcula. Esa sí la necesito para la cena.
+B: Dejo anotado: reemplazo solo de tomate, no de rúcula.
+A: ¿La bolsa de papas viene separada? Voy a llevar el pedido en colectivo.
+B: Sí, viene en una bolsa aparte para que sea más fácil.
+A: Perfecto. ¿Puedo pagar la diferencia del reemplazo cuando llegue?
+B: Si cambia el precio, te avisamos antes de cerrar el pedido. No hace falta que adelantes nada.
+A: Ya pagué con la tarjeta, pero no vi si quedó confirmado.
+B: Figura aprobado. El detalle aparece en tu cuenta del mercado.
+A: Listo, entonces espero el llamado.
+B: Gracias por confirmar lo del kiosco.
+A: Gracias a vos. Hasta luego.

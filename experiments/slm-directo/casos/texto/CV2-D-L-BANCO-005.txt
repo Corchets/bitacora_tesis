@@ -1,0 +1,24 @@
+A: Buenas tardes, llamo yo porque veo dos veces el mismo pago del alquiler.
+B: Hola, vamos a revisar. ¿Es un débito automático o lo transferiste manualmente?
+A: Lo transferí desde el teléfono el lunes. El dueño dice que le entró una sola vez.
+B: ¿Los dos movimientos tienen el mismo importe?
+A: Sí, 145.000 cada uno. Uno dice 11:06 y el otro 11:08.
+B: ¿Ambos figuran completados o uno está pendiente?
+A: Uno completado y el otro en revisión. No sé por qué quedó así.
+B: Para encontrar la cuenta, me confirmás los últimos cuatro dígitos, por favor.
+A: 7210.
+B: Gracias. ¿Podés leerme el concepto de los dos movimientos?
+A: El primero dice alquiler junio y el segundo no tiene concepto.
+B: Veo que el segundo es una autorización que todavía no se confirmó. No es un débito asentado.
+A: Ah, pero me baja el saldo disponible. Por eso pensé que me habían cobrado doble.
+B: Entiendo. Cuando expire la autorización, el saldo se actualiza automáticamente. No puedo cancelarla mientras esté en ese estado.
+A: ¿Cuánto puede tardar?
+B: Hasta dos días hábiles, según la respuesta del otro banco.
+A: El propietario me mandó el recibo, así que por lo menos sé que recibió uno.
+B: Sí, en nuestro registro hay un solo movimiento completado hacia ese destinatario.
+A: ¿La autorización pendiente puede volverse un segundo pago después?
+B: En esta operación no: el sistema la marca como intento duplicado y espera que expire.
+A: Bueno, voy a revisar mañana. Si sigue igual, vuelvo a llamar.
+B: Dale. Queda registrada la consulta con el número 3915.
+A: Gracias, me quedo más tranquila con el detalle.
+B: A vos. Buenas tardes.
