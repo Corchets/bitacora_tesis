@@ -1,0 +1,24 @@
+A: Hola, estoy llamando yo. Me pagaron un trabajo ayer y todavía no lo veo acreditado.
+B: Buenas, vemos qué puede haber pasado. ¿Te dijeron desde qué banco salió?
+A: Desde una billetera, no sé el nombre exacto. El cliente me mandó una captura.
+B: ¿La transferencia estaba hecha a tu alias o a tu CBU?
+A: A mi alias, que es nube.mate. La cuenta está a mi nombre.
+B: ¿La captura muestra horario e importe?
+A: Sí, son 86.000 pesos a las 17:12. La fecha es de ayer.
+B: Para buscar ingresos pendientes, decime los últimos cuatro de la cuenta donde esperás recibirla.
+A: 3358.
+B: Gracias. Veo una acreditación entrante de 86.000, pero todavía aparece en proceso. El banco emisor la liberó fuera del horario habitual.
+A: ¿Puede quedar así hasta mañana? El cliente dice que ya salió.
+B: Sí, algunas transferencias tardan en asentarse. Desde acá no podemos confirmar el estado del lado de la billetera.
+A: ¿Te sirve que te diga el nombre que aparece como remitente?
+B: Sí, solo el nombre que ves en el comprobante, si lo tenés a mano.
+A: Dice Néstor Viale, que es el dueño del local donde hice el catálogo.
+B: Coincide con el ingreso pendiente. ¿El alias de destino que figura en la captura es nube.mate?
+A: Ahora que lo miro dice nube.mateo. Me comí una letra al pasárselo.
+B: Ahí está la diferencia. El pago salió a otro alias, así que el banco no puede redirigirlo.
+A: Qué macana. ¿Tengo que hacer algún reclamo acá?
+B: No por este ingreso. Quien envió debe consultar con su proveedor y pedir la devolución al destinatario equivocado.
+A: Le voy a avisar antes de que cierre el local. ¿Me queda alguna constancia de esta consulta?
+B: Sí, quedó con el número 6402. No cambia nada en tu cuenta.
+A: Gracias, me sirve para entender que no era una demora nomás.
+B: De nada. Ojalá lo resuelvan rápido.

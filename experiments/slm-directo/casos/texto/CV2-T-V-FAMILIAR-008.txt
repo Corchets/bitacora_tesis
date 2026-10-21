@@ -1,0 +1,20 @@
+A: Hola, soy la hermana de Pablo. ¿Te acordás que él cambió el teléfono?
+B: Sí, me contó el fin de semana.
+A: No le quedaron bien las notificaciones del grupo familiar y me pidió que vea si sigue agregado.
+B: ¿Vos tenés el teléfono nuevo?
+A: No, lo tiene en el trabajo y no puede revisarlo ahora.
+B: ¿Y cómo lo vas a arreglar?
+A: Me dijo que desde el grupo se puede volver a invitar al número anterior.
+B: Pero si perdió ese teléfono, no sirve de nada.
+A: El número sigue activo hasta que le den el chip nuevo.
+B: ¿No conviene esperar a que vuelva?
+A: Está coordinando una mudanza y necesita ver los mensajes para saber qué cajas cargar.
+B: ¿Qué te aparece?
+A: Que el número viejo todavía figura como administrador del grupo.
+B: ¿Qué querés que haga?
+A: Sacalo de administradores y mandale la invitación al número que te voy a dictar.
+B: ¿Cuál es el número nuevo?
+A: Termina en 804, te lo paso completo por mensaje.
+B: Ya quité el teléfono viejo y mandé la invitación.
+A: Listo, así ya puede seguir organizando.
+B: Después le pregunto si recibió todo.

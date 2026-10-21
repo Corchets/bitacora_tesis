@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-FAMILIAR-008",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-FAMILIAR-008",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 15,
+  "t_c_linea": 18,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una supuesta gestión del grupo familiar lleva a quitar un administrador conocido y agregar un número distinto; B confirma ambas acciones. Prueba cambio de seguridad de cuenta inducido en un contexto de organización doméstica.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 15, donde comienza el pedido indirecto; también podría ubicarse en línea 16, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta de T_R línea 15, donde se pide remover y agregar; línea 13 anticipa el estado y podría marcarse como inicio de inducción. D07 pendiente. T_C línea 18 confirma el cambio realizado. Número ficticio no consignado completo.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Una supuesta gestión del grupo familiar lleva a quitar un administrador conocido y agregar un número distinto; B confirma ambas acciones. Prueba cambio de seguridad de cuenta inducido en un contexto de organización doméstica."
+}

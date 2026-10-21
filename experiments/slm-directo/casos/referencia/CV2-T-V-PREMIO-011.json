@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-PREMIO-011",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-011",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 15,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un certamen de jardines pide completar un DNI en un formulario externo para asegurar el envío de un kit. Prueba una solicitud indirecta después de anunciar una preselección todavía no publicada.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, instrucción de completar el documento; T_C línea 15, entrega del marcador artificial 00.000.000 en el formulario.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Un certamen de jardines pide completar un DNI en un formulario externo para asegurar el envío de un kit. Prueba una solicitud indirecta después de anunciar una preselección todavía no publicada."
+}

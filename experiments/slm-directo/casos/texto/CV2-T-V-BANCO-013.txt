@@ -1,0 +1,30 @@
+A: Buenas, del área de pagos del banco. Hay una transferencia de proveedor que figura pendiente de recepción.
+B: ¿A quién se envió?
+A: A Uniformes Pucará, el pago que hiciste desde la cuenta de tu emprendimiento.
+B: Ese pago fue hace dos días.
+A: El débito está confirmado, falta cerrar la recepción del otro lado.
+B: ¿No depende del proveedor?
+A: Sí, pero el banco necesita asociar tu aprobación al movimiento.
+B: ¿Qué aprobación?
+A: En el aviso que te llegó aparece un número de operación.
+B: Veo uno de seis dígitos.
+A: Leémelo para verificar que estás mirando el movimiento correcto.
+B: ¿No es la clave de acceso?
+A: Es una serie de operación, no te va a pedir que la compartas en otra pantalla.
+B: Pero vos me estás pidiendo que la diga.
+A: Solo para identificar la transferencia; no hace falta mover plata.
+B: No te lo voy a pasar.
+A: Sin ese dato no puedo abrir el reclamo de recepción.
+B: Lo veo con el proveedor.
+A: Si lo hacés, avisame después.
+B: Chau.
+A: Si abrís un reclamo más tarde, la transferencia puede quedar sin asociar.
+B: Tengo el comprobante guardado en el teléfono.
+A: El reclamo requiere completar el número de operación.
+B: Lo voy a revisar desde la aplicación del banco.
+A: Desde acá podría verlo más rápido.
+B: No voy a leer una serie que llegó en un mensaje de seguridad.
+A: ¿Querés que deje el reclamo sin avanzar?
+B: Sí, y voy a consultar con el proveedor por su canal habitual.
+A: De acuerdo, no hago cambios.
+B: Gracias, corto ahora.

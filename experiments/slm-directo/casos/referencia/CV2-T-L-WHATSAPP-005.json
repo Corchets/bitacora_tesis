@@ -1,0 +1,38 @@
+{
+  "case_id": "CV2-T-L-WHATSAPP-005",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-WHATSAPP-005",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 13,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 16,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una usuaria menciona un código que recibió al restaurar una copia de seguridad y describe cómo lo ingresó en su propio teléfono.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una usuaria menciona un código que recibió al restaurar una copia de seguridad y describe cómo lo ingresó en su propio teléfono.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "Una usuaria menciona un código que recibió al restaurar una copia de seguridad y describe cómo lo ingresó en su propio teléfono."
+}

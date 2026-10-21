@@ -1,0 +1,38 @@
+{
+  "case_id": "CV2-T-L-FAMILIAR-016",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-FAMILIAR-016",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 5,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 11,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 15,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una nieta llama para consultar a qué hora llega su abuelo y menciona que el teléfono le mostró un código al volver a iniciar sesión después de una reparación.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una nieta llama para consultar a qué hora llega su abuelo y menciona que el teléfono le mostró un código al volver a iniciar sesión después de una reparación.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": "LG-FAMILIAR-LLAMADO-01",
+  "situacion": "Una nieta llama para consultar a qué hora llega su abuelo y menciona que el teléfono le mostró un código al volver a iniciar sesión después de una reparación."
+}

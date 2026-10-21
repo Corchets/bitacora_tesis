@@ -1,0 +1,21 @@
+A: Buenas, soy el sobrino de Marta, ¿hablo con la tía Ana?
+B: Sí, ¿quién sos?
+A: El que fue al asado el mes pasado, el hijo de Rubén.
+B: Ah, ¿Fede?
+A: Sí, me quedé sin teléfono y estoy llamando desde el de un compañero.
+B: ¿Qué pasó?
+A: Estoy en la terminal, tenía que viajar a casa y se me venció el pasaje.
+B: ¿Cómo se vence un pasaje?
+A: La empresa cambió el horario y me lo tomó como no presentado.
+B: ¿No podés hablar con boletería?
+A: Hay una fila larga y el micro sale en veinte minutos.
+B: ¿Cuánto sale uno nuevo?
+A: Unos cuarenta mil, pero lo puedo devolver cuando llegue.
+B: ¿No tenés la tarjeta?
+A: La billetera quedó en la mochila que está abajo del equipaje.
+B: ¿No podés pedir ayuda al chofer?
+A: Me dijo que no puede esperar mucho más.
+B: Mandame una foto del pasaje viejo.
+A: No puedo entrar al correo sin el teléfono.
+A: Si alguien pudiera comprarlo por internet ahora, te lo devuelvo apenas llegue a casa.
+B: No voy a pagar sin hablar con Rubén primero.

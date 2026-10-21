@@ -1,0 +1,26 @@
+A: buenas tengo la aplicación abierta pero no me acuerdo el usuario que usé
+B: hola el usuario suele ser el correo que registraste o un nombre que elegiste
+A: yo había anotado una clave en una libreta pero no sé si también puse el usuario
+B: la aplicación te deja tocar olvidé mi usuario
+A: sí lo veo debajo del botón de entrar
+B: elegí esa opción y seguí las indicaciones que aparecen en pantalla
+A: me pide el correo con el que abrí la cuenta hace años
+B: te acordás cuál usabas entonces
+A: creo que era lila punto sur arroba correo ejemplo
+B: Probá ese correo en el formulario; te va a indicar si corresponde a la cuenta.
+A: me dice que mandó una confirmación pero no llegó todavía
+B: revisá correo no deseado y esperá unos minutos
+A: ya llegó aparece un botón para recuperar usuario
+B: abrilo desde el mismo teléfono donde estás haciendo la consulta
+A: ahora veo una parte del usuario con estrellas y el final parece 28
+B: te resulta conocido ese nombre
+A: sí creo que lo anoté en la libreta al lado de la clave
+B: podés probarlo en la aplicación y si no coincide volvés al flujo de recuperación
+A: entré era ese y me pide actualizar la clave porque hace mucho que no cambio
+B: seguí el proceso desde la pantalla y guardala en un lugar privado
+A: ya quedó abierta la cuenta
+B: pudiste ver el saldo y los movimientos
+A: sí aparecen bien
+B: perfecto entonces se resolvió el acceso
+A: gracias ya puedo hacer el pago que tenía pendiente
+B: de nada que tengas buen día

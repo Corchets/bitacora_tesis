@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-PREMIO-005",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-PREMIO-005",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "El organizador de una caminata solidaria pregunta cómo entregar el premio a un equipo que no puede asistir a la ceremonia; se verifica la inscripción y se coordina el retiro.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño el organizador de una caminata solidaria pregunta cómo entregar el premio a un equipo que no puede asistir a la ceremonia; se verifica la inscripción y se coordina el retiro.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-PREMIO-CONSULTA-01",
+  "situacion": "El organizador de una caminata solidaria pregunta cómo entregar el premio a un equipo que no puede asistir a la ceremonia; se verifica la inscripción y se coordina el retiro."
+}

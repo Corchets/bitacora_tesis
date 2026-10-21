@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-PREMIO-008",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-008",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 14,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un premio de una encuesta deriva en completar calle y altura en un formulario logístico. La persona facilita una dirección concreta luego de una solicitud indirecta de ubicación para reparto.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 9, donde comienza el pedido indirecto; también podría ubicarse en línea 10, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta provisional D07: línea 7 inicia la confirmación de zona; T_R línea 9, instrucción de completar calle y altura. T_C línea 14, entrega de domicilio. Calle, altura y personas son inventadas.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Un premio de una encuesta deriva en completar calle y altura en un formulario logístico. La persona facilita una dirección de marcador ficticio. Prueba un dato personal solicitado de forma indirecta como requisito de reparto."
+}

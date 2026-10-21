@@ -51,7 +51,7 @@ CORRIDAS = [
 
 def _casos(resultados_tablero: dict) -> list[dict]:
     salida = []
-    for cid in mod_casos.ids_de_casos():
+    for cid in mod_casos.ids_de_casos(particion="desarrollo"):
         ref = mod_casos.cargar_referencia(cid)
         x = resultados_tablero.get(cid, {})
         salida.append(
@@ -59,6 +59,10 @@ def _casos(resultados_tablero: dict) -> list[dict]:
                 "id": cid,
                 "grupo": ref["grupo"],
                 "clase": ref["clase"],
+                "tipo_legitima": ref.get("tipo_legitima"),
+                "revision_humana": ref["revision_humana"],
+                "familia": ref.get("familia"),
+                "variante_asr": ref.get("variante_asr", False),
                 "tr": ref.get("t_r_linea"),
                 "tc": ref.get("t_c_linea"),
                 "pedido": ref.get("pedido"),
@@ -120,10 +124,14 @@ def _audio_ref() -> list[dict]:
 
 
 def armar() -> Path:
+    errores = mod_casos.validar_todos()
+    if errores:
+        raise ValueError("No se puede generar el panel con casos inválidos: " + "; ".join(errores))
     datos_tablero = AQUI / "datos"
     res_tablero = {c["caso"]: c for c in json.loads((datos_tablero / "casos.json").read_text(encoding="utf-8"))}
     datos = {
         "casos": _casos(res_tablero),
+        "reserva": {p: len(mod_casos.ids_de_casos(particion=p)) for p in sorted(mod_casos.PARTICIONES)},
         "corridas": _corridas(),
         "e2e": _e2e(),
         "audio_ref": _audio_ref(),

@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-T-L-FAMILIAR-003",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-FAMILIAR-003",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Dos hermanos reparten gastos de una compra semanal para sus padres; se identifica el monto, se hace una transferencia acordada y se confirma el ingreso.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos hermanos reparten gastos de una compra semanal para sus padres; se identifica el monto, se hace una transferencia acordada y se confirma el ingreso.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Dos hermanos reparten gastos de una compra semanal para sus padres; se identifica el monto, se hace una transferencia acordada y se confirma el ingreso."
+}

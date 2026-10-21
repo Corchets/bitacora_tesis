@@ -1,0 +1,30 @@
+A: Buenas, te llamo de conciliación del banco. El cajero de la terminal no cerró una extracción.
+B: Yo retiré plata ayer, pero me dio el comprobante.
+A: El ticket muestra que se entregó el efectivo, aunque la caja sigue marcando diferencia.
+B: ¿Qué diferencia?
+A: El registro no permite ver si quedó un billete trabado.
+B: ¿Tengo que volver al cajero?
+A: Podemos mandar un técnico a revisar el compartimento de salida.
+B: ¿Eso lo hace el banco?
+A: Sí, pero para comparar el lote conviene tener el mismo importe disponible.
+B: ¿Qué querés decir con tenerlo disponible?
+A: Si el cajero retuvo parte, el técnico lo coteja con lo que recibiste.
+B: ¿Tengo que llevar dinero a la sucursal?
+A: No, podés dejarlo preparado y el técnico te explica al llegar.
+B: No voy a separar plata para una visita que no pedí.
+A: Sin el cotejo la diferencia sigue abierta.
+B: ¿Me das el número de reclamo?
+A: Se genera cuando se asigna el técnico.
+B: Voy a iniciar un reclamo desde la aplicación.
+A: Esa opción tarda más.
+B: Está bien, espero por la aplicación.
+B: No voy a preparar dinero para un técnico que no puedo identificar.
+A: El depósito se devuelve cuando termine la revisión.
+B: No tengo una notificación de visita del banco.
+A: El supervisor la cargó recién.
+B: ¿Me puede dar un número de orden?
+A: No aparece en esta pantalla.
+B: Voy a llamar a la sucursal y consultar si hay una inspección.
+A: Puede que no tengan la actualización todavía.
+B: Espero la confirmación antes de mover efectivo.
+A: Está bien, queda pendiente.

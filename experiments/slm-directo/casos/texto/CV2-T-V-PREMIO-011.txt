@@ -1,0 +1,20 @@
+A: Hola, del equipo del certamen de jardines de balcón.
+B: ¿Se publicó quién ganó?
+A: La publicación sale el fin de semana; tu foto quedó preseleccionada para un kit de macetas.
+B: ¿Tengo que confirmar que sigo participando?
+A: El paquete se prepara con el nombre que aparece en la inscripción.
+B: ¿Y si quiero cambiar el nombre?
+A: El sistema permite corregir al destinatario desde un formulario breve.
+B: ¿Qué pide?
+A: Verificar que el titular del teléfono sea mayor de edad y responsable del jardín.
+B: ¿Con el número de documento?
+A: Sí, completá el número en la pantalla para que el envío salga asegurado.
+B: ¿Puedo mandar la autorización por correo?
+A: El correo se procesa después del cierre de la lista.
+A: Entonces falta completar los dígitos del medio del DNI.
+B: El documento figura como 00.000.000, ya lo completé.
+A: Perfecto, el registro de envío quedó guardado.
+B: ¿Cuándo publican los resultados?
+A: El fin de semana.
+B: Espero la lista.
+A: De acuerdo.

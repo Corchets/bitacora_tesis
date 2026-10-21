@@ -73,7 +73,7 @@ respuesta.
 
 ## 4. Casos
 
-Formato y reglas en [casos/README.md](casos/README.md). Tres grupos:
+Formato y reglas en [casos/README.md](casos/README.md). Cuatro grupos:
 
 - **`piloto_escrito`:** versión escrita de los 7 pares del
   [piloto](../../docs/corpus/METODO-CREACION-CORPUS.md#selección-inicial-del-piloto).
@@ -84,6 +84,14 @@ Formato y reglas en [casos/README.md](casos/README.md). Tres grupos:
   mucho texto y conversaciones largas.
 - **`laboratorio`:** los guiones del laboratorio de Ignacio convertidos al formato,
   para comparar con lo que se midió ahí.
+- **`corpus_v2`:** 297 conversaciones nuevas, con datos y transferencias legítimas,
+  cotidianas, pedidos indirectos y variantes de transcripción. El inventario total
+  tiene 150 de desarrollo (75/75) y 200 reservadas (100/100). Ver
+  [diseño y límites](casos/DISENO-CORPUS-V2.md) y [qué grabar para ASR](casos/GRABACIONES-ASR.md).
+
+> **Estado: propuesta sin discutir.** El runner usa desarrollo por defecto y el
+> panel excluye los textos reservados. La independencia de semillas y la evaluación
+> final siguen pendientes de D08; las referencias siguen pendientes de D07.
 
 `python casos.py --listar` muestra todos. Fueron redactados con asistencia y
 **ninguno tiene revisión humana todavía** (`revision_humana: false`).
@@ -112,8 +120,8 @@ El script hace todo en orden y frena con un mensaje claro si algo falla:
 6. Escribe `resumen.md` y abre `visor.html` en el navegador.
 
 Opciones: `-Modelo qwen3.5:0.8b` / `--modelo qwen3.5:0.8b` para otro modelo (conviene
-si la PC tiene menos de 8 GB de RAM), `-Completo` / `--completo` para las 53
-conversaciones, `-Si` / `--si` para que no pregunte antes de instalar.
+si la PC tiene menos de 8 GB de RAM), `-Completo` / `--completo` para las 150
+conversaciones de desarrollo, `-Si` / `--si` para que no pregunte antes de instalar.
 
 ### El visor
 
@@ -131,7 +139,8 @@ python visor.py corridas/<una> corridas/<otra> --abrir
 ### El panel
 
 `analisis/tablero/panel.html` junta en una página el estado del proyecto, el plan de
-trabajo, las corridas guardadas, los 53 casos y un probador en vivo contra Ollama. En
+trabajo, las corridas históricas sobre los 53 antecedentes, los 150 casos de desarrollo
+y un probador en vivo contra Ollama. En
 «Afinar» recalcula estafas con aviso y falsas alarmas al mover el umbral de `riesgo` y
 la persistencia, sin volver a correr nada. Se arma desde la raíz del repositorio:
 

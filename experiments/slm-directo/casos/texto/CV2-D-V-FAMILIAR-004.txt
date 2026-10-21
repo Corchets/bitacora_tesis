@@ -1,0 +1,20 @@
+A: Hola, soy Caro, la hermana de Nico. ¿Él está con vos?
+B: No, ¿por qué?
+A: Se quedó sin batería cuando salió del trabajo y no puedo ubicarlo.
+B: ¿Le pasó algo?
+A: No sé. Me escribió desde el teléfono de un compañero que tenía que volver en remís.
+B: ¿A dónde iba?
+A: A casa, pero el viaje se le hizo más caro de lo que pensaba.
+B: ¿No tiene la tarjeta de transporte?
+A: Sí, pero el remís no le acepta pago con tarjeta.
+B: ¿Cuánto le falta?
+A: Le cobran nueve mil y solo tiene efectivo para una parte.
+B: ¿Te pidió que lo ayudes?
+A: Me puso “estoy complicado, no sé cómo vuelvo”.
+B: ¿Podés llamarlo desde el teléfono de su compañero?
+A: Ahora no responde, capaz se quedó sin señal.
+B: ¿Tenés la ubicación?
+A: No, pero está cerca de la estación vieja.
+B: Si me pasás el número del remís puedo hablar con el chofer.
+A: Mejor mandame a mí lo que falta y se lo llevo cuando llegue.
+B: No transfiero hasta confirmar con Nico.

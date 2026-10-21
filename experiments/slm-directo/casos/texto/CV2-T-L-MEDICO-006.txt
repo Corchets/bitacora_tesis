@@ -1,0 +1,30 @@
+A: Hola, mi mamá empieza terapia ocupacional la semana que viene y quería saber cómo llegar.
+B: Buen día. ¿En qué sede tiene la primera sesión?
+A: En la del parque, el martes a las diez.
+B: ¿Viene en auto o en transporte público?
+A: La llevo en auto. Usa bastón y caminar mucho le cuesta.
+B: Hay un espacio para dejar pasajeros justo en la entrada.
+A: ¿Se puede estacionar ahí mientras la acompaño?
+B: Solo unos minutos. Hay estacionamiento pago a media cuadra.
+A: Está bien, puedo dejar el auto ahí después.
+B: ¿Tenés la orden de terapia y el informe del médico?
+A: Sí, me los dieron en el hospital, los llevo impresos.
+B: También conviene traer lentes o audífonos que use habitualmente.
+A: Usa anteojos para leer, los meto en la cartera.
+B: ¿La sesión es individual o con otras personas?
+A: No sé, en el papel dice evaluación inicial.
+B: La primera vez la terapeuta conversa con ella y prueba actividades sencillas.
+A: ¿Tengo que quedarme durante toda la sesión?
+B: Podés acompañarla al ingreso y esperar en la sala.
+A: A ella le da más tranquilidad que esté cerca.
+B: Se lo podés comentar a la terapeuta cuando lleguen.
+A: ¿Hay baño accesible en esa planta?
+B: Sí, junto a la sala de espera.
+A: Perfecto, la otra vez tuvimos que subir una escalera en una clínica.
+B: En esta sede no hay escalones desde la entrada hasta el ascensor.
+A: ¿El ascensor es amplio para el andador?
+B: Sí, entra una silla de ruedas también.
+A: Bien. ¿Confirmás que el turno es el martes 10 a las diez?
+B: Sí, a nombre de Elsa Soria.
+A: Correcto. Gracias por darme los detalles.
+B: De nada, que tengan buen viaje.

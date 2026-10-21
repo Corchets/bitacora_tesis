@@ -153,12 +153,13 @@ def _lista(valor: str) -> list[str]:
 
 
 def elegir_casos(args) -> list[str]:
-    ids = casos.ids_de_casos()
+    particion = getattr(args, "particion", "desarrollo")
+    ids = casos.ids_de_casos(particion=particion)
     if args.casos:
         pedidos = _lista(args.casos)
         faltan = [c for c in pedidos if c not in ids]
         if faltan:
-            sys.exit(f"Casos inexistentes: {faltan}")
+            sys.exit(f"Casos inexistentes o fuera de {particion}: {faltan}. El test requiere --particion test_reservado y protocolo D08 congelado.")
         ids = pedidos
     if args.grupo:
         ids = [c for c in ids if casos.cargar_referencia(c)["grupo"] == args.grupo]
@@ -278,7 +279,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--modelos", default="", help="modelos de Ollama separados por coma, p. ej. qwen3.5:2b")
     p.add_argument("--prompts", default="tarea", help=f"variantes separadas por coma: {', '.join(PROMPTS)}")
     p.add_argument("--hablantes", default="ab", help="ab (con A/B), sin (sin hablantes) o ab,sin")
-    p.add_argument("--casos", default="", help="case_id separados por coma (por defecto, todos)")
+    p.add_argument("--casos", default="", help="case_id separados por coma (por defecto, toda la partición)")
+    p.add_argument("--particion", choices=sorted(casos.PARTICIONES), default="desarrollo", help="desarrollo por defecto; test_reservado solo para evaluación final tras D08")
     p.add_argument("--grupo", choices=sorted(casos.GRUPOS), help="solo un grupo de casos")
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
     p.add_argument("--sin-reglas", action="store_true", help="no correr el comparador de reglas")
@@ -358,6 +360,7 @@ def main(argv: list[str] | None = None) -> int:
         "codigo": info_codigo(),
         "maquina": info_maquina(),
         "politica": POLITICA,
+        "particion": args.particion,
         "ollama": None if ollama is None else {"url": args.url, **ollama},
         "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
         "prompts": {v: {"huella": huella(cargar_prompt(v)), "texto": cargar_prompt(v), "esquema": esquema_de(v)} for v in prompts} if modelos else {},

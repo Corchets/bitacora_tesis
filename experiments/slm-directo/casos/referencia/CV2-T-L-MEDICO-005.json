@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-MEDICO-005",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-MEDICO-005",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una madre llama para preguntar si su hijo puede asistir al control anual aunque tenga tos leve; recepción revisa el protocolo de agenda y ofrece opciones.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una madre llama para preguntar si su hijo puede asistir al control anual aunque tenga tos leve; recepción revisa el protocolo de agenda y ofrece opciones.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "medico",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una madre llama para preguntar si su hijo puede asistir al control anual aunque tenga tos leve; recepción revisa el protocolo de agenda y ofrece opciones."
+}

@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-D-L-PREMIO-002",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-PREMIO-002",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "pedido",
+      "etiquetas": []
+    },
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Quien compró una entrada para un sorteo de una feria llama para corregir el correo de notificación; se verifica el evento y el número de entrada.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño quien compró una entrada para un sorteo de una feria llama para corregir el correo de notificación; se verifica el evento y el número de entrada.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "premio",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-PREMIO-CONSULTA-01",
+  "situacion": "Quien compró una entrada para un sorteo de una feria llama para corregir el correo de notificación; se verifica el evento y el número de entrada."
+}

@@ -1,0 +1,28 @@
+A: Buenas, guardé la planilla de asistencia en una carpeta que no encuentro.
+B: Hola. ¿Estabas trabajando desde la plataforma de la escuela?
+A: Sí, desde la computadora de secretaría.
+B: ¿Qué curso y mes tiene el archivo?
+A: Tercer grado, octubre. La planilla la cerré ayer a la tarde.
+B: ¿La habías guardado con el nombre del curso o con una fecha?
+A: Creo que le puse “asistencia octubre final”.
+B: Voy a buscar por ese nombre. ¿La carpeta era compartida con dirección?
+A: Sí, pero no sé si dentro de “turno mañana” o “documentación general”.
+B: Aparece en la carpeta de dirección, dentro de “archivos recientes”.
+A: ¿Me la podés mover a turno mañana?
+B: Puedo guiarte. ¿Tenés abierto el menú de carpetas?
+A: Sí. Veo la planilla y un archivo de septiembre con nombre parecido.
+B: Seleccioná solo la de octubre y elegí mover.
+A: Me pide elegir destino. ¿Pongo “turno mañana”?
+B: Sí, luego revisá que la fecha del archivo sea la de ayer.
+A: Dice 19 de octubre, a las 16:42.
+B: Esa es la versión nueva. La de septiembre está abajo y no hay que tocarla.
+A: Ya la moví. ¿Puedo abrirla para asegurarme de que tiene todas las filas?
+B: Sí, revisá el curso y los nombres antes de cerrar.
+A: Están los veintitrés alumnos. Pensé que había perdido toda la tarde de carga.
+B: Bien, ahora la va a ver la directora desde la carpeta compartida.
+A: ¿Queda guardado quién la movió?
+B: Sí, el historial muestra el usuario y la hora del cambio.
+A: Perfecto. Le escribo a dirección para avisar.
+B: ¿Te queda otra consulta de la plataforma?
+A: No, gracias por encontrarla.
+B: De nada, buen día.

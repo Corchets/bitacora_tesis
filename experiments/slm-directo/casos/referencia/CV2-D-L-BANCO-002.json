@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-D-L-BANCO-002",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-002",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "pedido",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Consulta iniciada por la persona para recuperar el comprobante de una transferencia ya hecha; se localiza la operación con fecha e importe aproximados.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño consulta iniciada por la persona para recuperar el comprobante de una transferencia ya hecha; se localiza la operación con fecha e importe aproximados.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08. La conversación inicia con atención bancaria y mantiene A/B según el orden de habla.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Consulta iniciada por la persona para recuperar el comprobante de una transferencia ya hecha; se localiza la operación con fecha e importe aproximados."
+}

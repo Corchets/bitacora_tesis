@@ -1,0 +1,30 @@
+A: Te hablo de tarjetas del banco; el plástico que termina en 64 quedó marcado como dañado.
+B: La tarjeta anda, la usé ayer.
+A: Puede ser un problema del chip, no de la banda.
+B: ¿Tengo que ir a cambiarla?
+A: Podemos dejar pedida una reposición desde esta llamada.
+B: ¿La mandan a mi domicilio?
+A: Sí, pero primero tenés que confirmar la nueva emisión en la aplicación.
+B: ¿Dónde aparece?
+A: Abrí el aviso de reposición y elegí reemplazar tarjeta.
+B: Me ofrece confirmar o rechazar.
+A: Confirmá para que se genere el envío y se bloquee la anterior.
+B: ¿No puedo ir a una sucursal?
+A: Se puede, pero tardan más en imprimirla.
+B: El mensaje advierte que el bloqueo es inmediato.
+A: Es para que nadie use el plástico anterior.
+B: ¿Tengo que cortar la tarjeta ahora?
+A: No, la app la desactiva cuando aceptás el pedido.
+B: Prefiero esperar hasta poder hablar con alguien de la sucursal.
+A: Se puede, pero la reposición queda en pausa.
+B: La dejo en pausa.
+B: No voy a reemplazar la tarjeta desde un aviso que no inicié.
+A: Si esperás, puede quedar bloqueada la compra que sí querés hacer.
+B: La voy a dejar como está hasta hablar con alguien del banco.
+A: El cambio tarda menos de un minuto.
+B: Prefiero demorarme antes que confirmar algo que no pedí.
+A: ¿Tenés la tarjeta física a mano?
+B: Sí, la guardo y no voy a dictar números.
+A: Puedo dejar la solicitud abierta por hoy.
+B: Cerrala y voy a consultar desde la aplicación que ya tengo instalada.
+A: Está bien, queda pendiente.

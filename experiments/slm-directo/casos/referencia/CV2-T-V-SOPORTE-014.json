@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-SOPORTE-014",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-SOPORTE-014",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": null,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Una agenda duplicada de clínica se usa para pedir el correo de administrador y preparar un cambio de responsable. Prueba una solicitud inducida de dato de contacto como etapa previa a una acción más sensible; la persona se niega.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 11, donde comienza el pedido indirecto; también podría ubicarse en línea 12, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 11, primera solicitud de confirmar el correo. No se comparte dato. El pedido posterior de código se anuncia como posibilidad, no ocurre en la llamada.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-SOPORTE-CLAVE-01",
+  "situacion": "Una agenda duplicada de clínica se usa para pedir el correo de administrador y preparar un cambio de responsable. Prueba una solicitud inducida de dato de contacto como etapa previa a una acción más sensible; la persona se niega."
+}

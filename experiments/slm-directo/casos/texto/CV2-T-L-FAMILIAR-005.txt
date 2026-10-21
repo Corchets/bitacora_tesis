@@ -1,0 +1,28 @@
+A: Hola, el ensayo de los chicos se movió al sábado a las tres.
+B: Ah, yo había anotado el domingo. ¿En qué salón es?
+A: En el centro cultural de la estación, el de la entrada azul.
+B: ¿Llevo a los dos o uno va con el papá?
+A: El papá trabaja hasta las cuatro. Si podés llevarlos a los dos, te lo agradezco.
+B: Sí, entro al barrio por la avenida a las dos y media.
+A: ¿Pasás primero por casa o los espero en la esquina?
+B: Mejor paso por casa, así cargamos el teclado.
+A: El teclado está en el comedor, con la funda gris.
+B: ¿También llevo el atril plegable?
+A: Sí, lo necesitan para la canción nueva.
+B: ¿Tienen las partituras impresas?
+A: Una está en la carpeta roja y la otra la mandó el profesor por correo.
+B: La imprimo en casa antes de salir.
+A: ¿Querés que te mande el correo del profesor?
+B: Sí, así no busco en el grupo de la escuela.
+A: Te lo reenvío. ¿Sabés dónde está la cochera del centro cultural?
+B: La vez pasada entré por la calle de atrás, al lado de la estación.
+A: Esa entrada está cerrada por obras. Se entra por la puerta principal.
+B: Bien que me avisás. ¿Hay lugar para estacionar unos minutos?
+A: Sí, dejan subir y bajar instrumentos en la vereda.
+B: ¿A qué hora termina el ensayo?
+A: A las cinco, pero quizá se alargue diez minutos.
+B: Después los llevo a la casa de su papá.
+A: Perfecto. ¿Querés que te prepare una merienda para el camino?
+B: No, llevo agua y fruta.
+A: Entonces te espero el sábado a las dos y media.
+B: Dale, nos vemos.

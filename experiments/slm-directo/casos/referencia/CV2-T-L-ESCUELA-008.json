@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-ESCUELA-008",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-ESCUELA-008",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La escuela llama a una familia para coordinar una exposición de proyectos y confirma qué materiales pueden llevar los alumnos y en qué horario llegar.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la escuela llama a una familia para coordinar una exposición de proyectos y confirma qué materiales pueden llevar los alumnos y en qué horario llegar.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "escuela",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": true,
+  "escenario_base": null,
+  "situacion": "La escuela llama a una familia para coordinar una exposición de proyectos y confirma qué materiales pueden llevar los alumnos y en qué horario llegar."
+}

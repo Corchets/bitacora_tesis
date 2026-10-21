@@ -1,0 +1,26 @@
+A: Buenas, tengo turno de odontología mañana y el teléfono de la ficha quedó viejo.
+B: Hola. ¿Me decís tu nombre y la hora del turno?
+A: Darío Funes, a las cinco y cuarto.
+B: Ya lo encontré. ¿Querés cambiar el teléfono de contacto?
+A: Sí, ahora uso uno que termina en 26. El anterior lo di de baja.
+B: Lo actualizo para los recordatorios del consultorio.
+A: ¿Necesitás el número completo?
+B: Sí, para cambiarlo en la ficha. Podés dictarlo despacio.
+A: 381, 555, 0026.
+B: Lo repito: 381, 555, 0026. ¿Está bien?
+A: Sí, ese es.
+B: Listo. ¿Querés que revisemos cómo llegar a la sede?
+A: Sí, siempre me confundo con la entrada porque están haciendo obras.
+B: Entrás por la calle lateral, la que está frente a la plaza chica.
+A: ¿Por la puerta de vidrio o por el portón blanco?
+B: Por la puerta de vidrio. El portón es el acceso del estacionamiento.
+A: ¿Hay lugar para dejar la bicicleta adentro?
+B: Hay un bicicletero junto a recepción, pero no se puede dejar durante la noche.
+A: La voy a dejar ahí mientras dure la consulta.
+B: Perfecto. ¿Tenés una radiografía reciente para llevar?
+A: No, la última es de enero. ¿Hace falta que la busque?
+B: No, la odontóloga decide si necesita una nueva.
+A: Bueno. ¿El pago es al salir?
+B: Sí, en recepción después de la consulta.
+A: Listo. Ya tengo el teléfono actualizado y la entrada clara.
+B: Te esperamos mañana. Que andes bien.

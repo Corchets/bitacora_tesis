@@ -1,0 +1,30 @@
+A: Hola, soy del almacén La Esquina. A una clienta le figura dos veces el pago de ayer.
+B: Buenas. ¿La terminal del local es de este banco?
+A: Sí, la portátil que usamos para cobrar con débito.
+B: ¿Qué importe aparece duplicado?
+A: 9.600 pesos, a las siete menos cuarto de la tarde.
+B: ¿Tenés el número de lote del cierre?
+A: El cierre está guardado en el cajón. Dice lote 582.
+B: Para buscarlo, confirmame la sucursal donde está asociada la terminal.
+A: La del barrio Jardín, calle Lima 41.
+B: ¿La clienta tiene el comprobante de las dos operaciones o solo uno?
+A: Tiene uno impreso. En el papel de la caja sale un único cobro.
+B: ¿La terminal se reinició o marcó error en ese momento?
+A: Se congeló y volvimos a pasar la tarjeta. La primera pantalla no decía aprobado ni rechazado.
+B: Veo dos autorizaciones por el mismo monto. Una está pendiente de confirmación.
+A: ¿Eso significa que se va a cobrar dos veces?
+B: No necesariamente. La autorización pendiente puede liberarse cuando el cierre del comercio confirme que no hubo venta.
+A: ¿Tenemos que hacer una anulación desde el local?
+B: No hagas otra operación sobre esa tarjeta. Puedo abrir una consulta y pedir que revisen el lote.
+A: ¿Qué información te sirve del comprobante?
+B: Fecha, importe y número de lote. No necesito el nombre ni el número de tarjeta de la clienta.
+A: El comprobante dice 9.600 y el lote es 582.
+B: Gracias. ¿Tenés el cierre disponible para adjuntarlo desde el portal de comercios?
+A: Sí, lo subo después de atender a la gente que está esperando.
+B: Bien. La consulta queda como 4148. La clienta puede iniciar su propio reclamo si el cargo se asienta.
+A: Le avisamos que por ahora vemos una operación pendiente.
+B: Correcto. No prometas una fecha exacta hasta que se libere.
+A: Está bien. Le doy una copia del ticket que sí salió.
+B: Eso le sirve para respaldar la compra real.
+A: Gracias por aclarar qué dato necesitamos guardar.
+B: A vos.

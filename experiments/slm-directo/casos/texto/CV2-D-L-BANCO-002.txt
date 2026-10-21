@@ -1,0 +1,24 @@
+A: Atención del banco, buen día. ¿En qué puedo ayudarte?
+B: Hola, llamo porque hice una transferencia ayer y no encuentro el comprobante.
+A: Buenas, te ayudo a ubicarla. ¿Fue desde la cuenta en pesos o desde la de ahorro programado?
+B: La de pesos, después de las ocho de la noche. Era para pagar una seña.
+A: ¿Recordás el importe aproximado?
+B: Treinta y dos mil, puede haber sido treinta y dos quinientos.
+A: Con ese rango y la fecha puedo buscar las últimas operaciones. Para identificar la cuenta, decime los últimos cuatro dígitos.
+B: Termina en 6174.
+A: Gracias. ¿La transferencia la hiciste a un alias o a un contacto guardado?
+B: A un alias que me pasó la ceramista, algo como taller.luna. No sé si quedó bien escrito.
+A: Veo una operación por 32.500 con un alias terminado en luna. ¿Te suena el nombre de destino, Eva Montal?
+B: Sí, es ella. Le encargué unos platos para el cumpleaños de mi vieja.
+A: Entonces encontramos la operación correcta. El comprobante se puede descargar desde el detalle.
+B: En el detalle me aparece “compartir”, pero no descargar.
+A: Probá tocando los tres puntos de arriba. Si estás en la versión nueva, aparece “guardar comprobante”.
+B: Ahí está. Me pide elegir dónde guardarlo.
+A: Podés dejarlo en archivos o mandártelo por correo.
+B: No me llegó nada, solo estaba buscando el papel. ¿Me confirmás si se acreditó?
+A: Figura completada ayer a las 20:41. El banco no puede confirmar que la otra persona ya la haya visto.
+B: Sí, ella me escribió esta mañana que le entró. Quería tenerlo para ordenar los gastos.
+A: Claro, te sirve como constancia del envío.
+B: Listo, ya lo guardé en el teléfono. Gracias por explicarme dónde estaba.
+A: De nada. ¿Querés que revise otra operación?
+B: No, con eso alcanza. Que tengas buen día.

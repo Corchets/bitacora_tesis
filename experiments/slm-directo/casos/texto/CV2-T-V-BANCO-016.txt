@@ -1,0 +1,20 @@
+A: Te llamo por la orden de pago de la cooperativa de agua.
+B: ¿Se acreditó?
+A: Figura debitada, pero falta registrar que reconocés el servicio.
+B: Yo pagué el importe del mes.
+A: Sí, la operación está bien. Te va a aparecer una notificación de validación.
+B: ¿Tengo que aceptar algo?
+A: Solo marcar que la transferencia la hiciste vos.
+B: Me llegó un código de ingreso.
+A: Pasame la serie completa para asociarla al pago de agua.
+B: ¿La serie del código?
+A: Sí, son los dígitos que aparecen debajo del aviso.
+B: No quiero compartir códigos por teléfono.
+A: No es una contraseña, es el comprobante de voluntad.
+B: El mensaje dice que sirve para ingresar a mi cuenta.
+A: El texto es genérico; no va a cambiar nada de tu saldo.
+B: Entonces puedo confirmarlo desde la aplicación.
+A: La aplicación no muestra la notificación hasta que queda identificada.
+B: Lo reviso desde el banco.
+A: Está bien, queda a tu criterio.
+B: Chau.

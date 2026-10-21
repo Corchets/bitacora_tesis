@@ -1,0 +1,20 @@
+A: Te llamamos del centro de orientación previsional por la consulta que dejaste sobre aportes.
+B: Yo pregunté por unos años que no me aparecen.
+A: Sí, figura una diferencia entre los períodos declarados y los del registro.
+B: ¿Eso se puede revisar?
+A: Hay que vincular el formulario con la historia laboral para ver dónde falta información.
+B: ¿Tengo que sacar un turno?
+A: Si completamos la identificación telefónica, quizá no haga falta que vuelvas a presentar todo.
+B: ¿Qué dato tengo que confirmar?
+A: En la ficha aparece un número de documento que termina en 6.
+B: ¿De quién es?
+A: Del titular de la consulta. Para que el sistema abra el detalle, me faltan los dígitos del medio.
+B: ¿Querés que te diga el DNI entero?
+A: Solo completá lo que falta y verifico que la historia laboral corresponda.
+B: No sé quién dejó la consulta, la hice con mi pareja.
+A: Si el documento empieza con 28, puede ser el tuyo.
+B: Prefiero entrar al portal y mirar el turno.
+A: El portal no muestra el detalle hasta que se valide el formulario.
+B: ¿Podés decirme el número del trámite?
+A: No aparece en esta pantalla, está en otra área.
+B: Entonces no te doy el resto del documento.

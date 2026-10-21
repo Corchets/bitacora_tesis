@@ -1,0 +1,20 @@
+A: Buenas, te llamo del área de legajos por una prestación de tu abuelo.
+B: Él falleció hace dos años.
+A: Justamente, el expediente conserva un período de cobro que necesita cierre administrativo.
+B: La familia informó el fallecimiento.
+A: La notificación puede haber quedado en otra oficina.
+B: ¿Qué tengo que hacer?
+A: Si confirmás quién quedó a cargo de las pertenencias, puedo derivar la consulta sin reabrir el expediente.
+B: ¿Qué significa “a cargo”?
+A: El nombre de la persona que recibió la última correspondencia.
+B: Mi mamá recibía las cartas.
+A: Entonces completá el registro con su número de documento y el domicilio que figuraba.
+B: ¿Tengo que darte el documento de mi mamá?
+A: Sí, para que el legajo no pase a revisión presencial.
+B: El documento de mi mamá figura como 00.000.000.
+A: Sin la información, el trámite queda observado.
+B: Que lo revise la oficina.
+A: Puede tardar varias semanas.
+B: Está bien, no voy a completar nada por esta llamada.
+A: Como prefieras.
+B: Chau.

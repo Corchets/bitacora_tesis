@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-T-L-FAMILIAR-012",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-FAMILIAR-012",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 6,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una nieta coordina con su abuela la compra de un colchón que ambas habían elegido; paga la abuela y acuerdan la devolución familiar sin presión.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una nieta coordina con su abuela la compra de un colchón que ambas habían elegido; paga la abuela y acuerdan la devolución familiar sin presión.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-FAMILIAR-LLAMADO-01",
+  "situacion": "Una nieta coordina con su abuela la compra de un colchón que ambas habían elegido; paga la abuela y acuerdan la devolución familiar sin presión."
+}

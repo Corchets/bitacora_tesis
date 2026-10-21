@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-SOPORTE-007",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-SOPORTE-007",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 11,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un usuario llama por una actualización que cambió el texto de un botón y recuerda que antes usaba una contraseña anotada en el equipo; revisan la interfaz.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño un usuario llama por una actualización que cambió el texto de un botón y recuerda que antes usaba una contraseña anotada en el equipo; revisan la interfaz.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": "LG-SUPPORT-INFO-01",
+  "situacion": "Un usuario llama por una actualización que cambió el texto de un botón y recuerda que antes usaba una contraseña anotada en el equipo; revisan la interfaz."
+}

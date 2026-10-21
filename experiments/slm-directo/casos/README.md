@@ -1,11 +1,13 @@
 # Casos de prueba del ensayo #50
 
 Conversaciones **escritas y ficticias** para probar el detector sobre texto antes de
-tener audio. Son material de **desarrollo**: sirven para ajustar el prompt y el
-código. No son el corpus, no reemplazan las grabaciones del piloto
+tener audio. Los 53 antecedentes son material de **desarrollo**. Corpus v2 agrega
+97 conversaciones de desarrollo y 200 candidatas reservadas: ver
+[diseño y límites](DISENO-CORPUS-V2.md), [selección para grabar](GRABACIONES-ASR.md)
+y [revisión técnica](REVISION-CORPUS-V2.md). No reemplazan las grabaciones del piloto
 ([#39](https://github.com/Corchets/bitacora_tesis/issues/39) /
 [#54](https://github.com/Corchets/bitacora_tesis/issues/54)) y no se usan como test
-final ([#55](https://github.com/Corchets/bitacora_tesis/issues/55)).
+final aprobado ([#55](https://github.com/Corchets/bitacora_tesis/issues/55)).
 
 > **Estado: propuesta sin discutir.** Redacción asistida. Ningún caso tiene revisión
 > humana hasta que el campo `revision_humana` diga `true`. No cierra D07.
@@ -39,7 +41,10 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
   persona dice dos cosas seguidas que conviene evaluar por separado, van en dos
   líneas con la misma letra.
 - Español rioplatense hablado, con voseo. Se escribe con acentos y puntuación, como
-  una transcripción revisada.
+  una transcripción revisada, salvo los casos `variante_asr:true`, que simulan cortes,
+  omisiones de puntuación y errores. Esa simulación no es una medición de ASR.
+- Los nuevos `corpus_v2` tienen entre 12 y 40 líneas. Los antecedentes conservan sus
+  textos y limitaciones para reproducir las corridas históricas.
 - **Solo datos ficticios:** códigos tipo `000000`, nombres inventados, sin DNI,
   CBU, teléfonos ni enlaces reales.
 
@@ -70,10 +75,10 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
 | Campo | Regla |
 |---|---|
 | `case_id` | Igual al nombre del archivo sin extensión. |
-| `grupo` | `piloto_escrito`, `trampa` o `laboratorio`. |
+| `grupo` | `piloto_escrito`, `trampa`, `laboratorio` o `corpus_v2`. |
 | `semilla` | `scenario_id` del [catálogo](../../../docs/corpus/CATALOGO-ESCENARIOS.csv) o `null`. |
 | `par` | `case_id` del caso contrastante, o `null`. |
-| `clase` | `vishing` o `legitima_dificil`. |
+| `clase` | `vishing`, `legitima` (nuevas) o `legitima_dificil` (antecedentes). Ambas legítimas se cuentan como legítimas al evaluar. |
 | `t_r_linea` | Línea (desde 1) del **primer pedido de alto riesgo**, según el [manual](../../../docs/corpus/MANUAL-ANOTACION.md#2-cómo-ubicar-las-marcas-y-resolver-dudas). Mencionar un código no es pedirlo. `null` si no hay pedido. En una legítima es siempre `null`. |
 | `t_c_linea` | Línea del **primer cumplimiento observable** del pedido. `null` si no hay cumplimiento, por ejemplo si la persona se niega. |
 | `pedido` | Etiqueta `REQUEST_*` del primer pedido, o `null` si `t_r_linea` es `null`. |
@@ -82,6 +87,24 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
 | `origen` | De dónde sale el texto y en qué fecha. |
 | `revision_humana` | `false` hasta que una persona del equipo lo revise. |
 | `notas` | Ambigüedades o diferencias con la ficha. |
+
+> **Estado: propuesta sin discutir.** Los campos siguientes son obligatorios en
+> `corpus_v2` y se precisan en el [diseño](DISENO-CORPUS-V2.md), pendientes de
+> [D07/D08](../../../docs/gestion/MAPA-DECISIONES.md). No llegan al detector.
+
+| Campo nuevo | Regla |
+|---|---|
+| `particion` | `desarrollo` o `test_reservado`. En los antecedentes ausente equivale a desarrollo. Semillas y pares no cruzan particiones. |
+| `familia` | Familia del catálogo o contexto cotidiano (`trabajo`, `delivery`, `medico`, `escuela`). |
+| `situacion` | Descripción concreta de la semilla propuesta; debe distinguir el episodio, no solo un nombre o un monto. |
+| `escenario_base` | Antecedente activo del catálogo que respalda la modalidad; `null` en diseños cotidianos sin antecedente. No vuelve independientes sus derivados. |
+| `dificultad` | En vishing: `directo`, `indirecto`, `sin_pedido`. En legítimas coincide con `tipo_legitima`. Es una categoría de diseño, no dificultad medida. |
+| `tipo_legitima` | `cotidiana`, `pedido_razonable` o `mencion_sin_pedido`; `null` en vishing. |
+| `variante_asr` | Booleano. Texto con alteraciones artificiales de transcripción, sin audio medido. |
+
+Una legítima puede tener evidencia de pedido o cumplimiento razonable sin marcas
+críticas de fraude. En una llamada abortada sin pedido estas marcas quedan nulas;
+la evidencia disponible y los límites de inferir intención se explicitan en notas.
 
 Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan tiempos
 ([arquitectura §3](../../../docs/ingenieria/ARQUITECTURA.md#3-referencia-tiempos-y-registros)).
@@ -93,12 +116,23 @@ Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan t
 | `piloto_escrito` | `<semilla>-e01` (`-e02` si la semilla tiene una segunda versión) | Versión escrita de cada par de la [selección del piloto](../../../docs/corpus/METODO-CREACION-CORPUS.md#selección-inicial-del-piloto). |
 | `trampa` | `TR-NN-<descripcion-corta>` | Casos difíciles pedidos por #50: pedidos indirectos, menciones legítimas parecidas, negaciones, evidencia separada por texto intermedio y conversaciones largas. |
 | `laboratorio` | `LAB-<nombre-original>` | Guiones del laboratorio de Ignacio (`laboratorio-main`, `experiments/laboratorio/casos/`), convertidos a este formato. |
+| `corpus_v2` | `CV2-D-<V/L>-<FAMILIA>-NNN` o `CV2-T-<V/L>-<FAMILIA>-NNN` | Nuevas situaciones; el campo `particion`, y no el prefijo, gobierna la selección. |
 
 ## Validar
 
 ```bash
 python casos.py
+python casos.py --listar
 ```
 
 Revisa los dos archivos de cada caso y termina con error si alguno no cumple este
 formato. Con `--listar` muestra la tabla de casos.
+
+También verifica las huellas de `MANIFIESTO-CORPUS-V2.json` cuando existe. La reserva
+se crea una vez con `python3 casos.py --congelar`; no se sobrescribe. Cualquier
+modificación posterior se detecta y requiere revisar/versionar la reserva en D08.
+
+`correr.py` usa desarrollo por defecto. `--casos` no permite mezclar casos de otra
+partición. `--particion test_reservado` es una selección explícita para la evaluación
+final una vez acordado D08, no un recurso para afinar. El panel excluye de sus datos
+los textos y las referencias reservadas.

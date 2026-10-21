@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-SOPORTE-015",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-SOPORTE-015",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 12,
+  "pedido": "REQUEST_REMOTE_ACCESS",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_REMOTE_ACCESS"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un historial de cámaras perdido se usa para pedir compartir pantalla y habilitar micrófono desde una asistencia. Prueba una solicitud indirecta de acceso remoto con permiso adicional innecesario; no hay cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 9, instrucción de aceptar permisos de pantalla. T_C línea 12, la persona confirma que los habilitó y que se abrió la sesión remota.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-SOPORTE-REMOTO-01",
+  "situacion": "Un historial de cámaras perdido se usa para pedir compartir pantalla y habilitar micrófono desde una asistencia. Prueba una solicitud indirecta de acceso remoto con permiso adicional innecesario; no hay cumplimiento."
+}

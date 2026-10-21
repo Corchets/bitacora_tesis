@@ -1,0 +1,30 @@
+{
+  "case_id": "CV2-T-L-BANCO-012",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-012",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 5,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "La titular llama para actualizar el correo de un aviso de vencimiento y confirma la nueva dirección; se diferencia de las credenciales de acceso.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la titular llama para actualizar el correo de un aviso de vencimiento y confirma la nueva dirección; se diferencia de las credenciales de acceso.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. La conversación inicia con atención bancaria y mantiene A/B según el orden de habla.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "La titular llama para actualizar el correo de un aviso de vencimiento y confirma la nueva dirección; se diferencia de las credenciales de acceso."
+}

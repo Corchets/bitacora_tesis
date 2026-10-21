@@ -1,0 +1,24 @@
+A: Hola, llamo porque el saldo que me muestra la pantalla no coincide con mi cuenta.
+B: Buen día. ¿Qué importe esperabas ver?
+A: Unos 54 mil. Ayer cobré una changa y hoy aparecen 19 mil.
+B: ¿Tuviste algún gasto con tarjeta desde ayer?
+A: Compré remedios y pagué el gas. No me acuerdo los importes exactos.
+B: Podemos recorrer los últimos movimientos. ¿La cuenta termina en 2609?
+A: Sí, esa misma.
+B: Veo un pago de farmacia por 12.800 y uno de servicios por 21.340.
+A: Eso explica una parte. También me apareció un mensaje con un código cuando abrí la app, pero yo no estaba entrando.
+B: ¿Te llegó como notificación del banco o como mensaje de texto?
+A: Como notificación. Después cerré la aplicación porque pensé que toqué algo sin querer.
+B: El mensaje no figura como ingreso validado de sesión. Revisá si tenés la app abierta en otro dispositivo.
+A: La tengo en la tablet, pero hace meses que no la uso.
+B: Podés cerrar esa sesión desde el menú de seguridad cuando tengas la tablet a mano.
+A: ¿Eso me cambia la clave?
+B: No. Solo termina esa sesión. Si querés cambiar la clave, hacelo después desde la aplicación.
+A: Entiendo. ¿El saldo restante puede ser una compra pendiente?
+B: Hay una autorización de combustible por 8.500 que todavía no se asentó.
+A: Ah, cargué en la ruta el domingo. No lo había relacionado.
+B: Cuando se cierre, el saldo disponible se ajusta. El movimiento debería aparecer con el nombre de la estación.
+A: Bien. Me voy a fijar en la tablet esta noche.
+B: Te registro la consulta así queda asentado el problema de la notificación.
+A: Dale, gracias. Lo hago cuando llegue a casa.
+B: No, con contarme que apareció alcanza.

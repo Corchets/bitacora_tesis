@@ -1,0 +1,56 @@
+{
+  "case_id": "CV2-D-V-WHATSAPP-006",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-WHATSAPP-006",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 25,
+  "t_c_linea": 31,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 21,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 25,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    },
+    {
+      "linea": 30,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 31,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una conversación de 36 líneas sobre materiales, horarios y vacantes termina en una inducción a revelar el OTP. El atacante no usa código ni clave: pide una referencia anafórica en las líneas 25–26, luego de que B describe la notificación. Se registra dictado completo en la 31. Prueba unir fragmentos del mismo hablante y distinguir ausencia de cobro de ausencia de fraude.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** D07: T_R tentativo en la línea 25, comienzo de la petición incompleta; alternativa en la 26, donde aparece el objeto solicitado. No se adjudica esa diferencia. T_C tentativo en la 31, dictado completo de las seis cifras; no se inventan segundos. D08: semilla y reserva son de trabajo, sin revisión humana.",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "La inscripción a una clase de prueba de cerámica se convierte en un alta falsa de grupo de WhatsApp; una petición de la serie de registro queda partida en dos líneas del mismo hablante."
+}

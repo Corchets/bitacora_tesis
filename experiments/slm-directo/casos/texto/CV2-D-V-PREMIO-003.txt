@@ -1,0 +1,20 @@
+A: Hola, soy de la coordinación de la campaña Vecinos que leen.
+B: Ah, compartí una foto de la biblioteca del barrio.
+A: Sí, quedó entre las imágenes finalistas y el jurado te eligió para un kit de libros.
+B: Qué lindo, ¿cuándo lo anuncian?
+A: La publicación sale mañana, pero estamos preparando los envíos hoy.
+B: ¿A dónde lo mandan?
+A: A la dirección que figura en el perfil que usaste para participar.
+B: Yo completé solo el correo.
+A: Para identificar el paquete tenemos que relacionarlo con una persona adulta.
+B: ¿Qué información necesitan?
+A: En el formulario hay un espacio para completar el número de documento del responsable.
+B: ¿Eso lo puedo hacer mañana cuando salga la publicación?
+A: El listado de entrega se cierra esta tarde.
+B: ¿Te paso mi DNI por acá?
+A: No hace falta decirlo en voz alta, anotá el número en el formulario que te mandé.
+B: El enlace tiene un dominio que no conozco.
+A: Es el formulario externo de logística, lo usan para evitar errores de reparto.
+B: Prefiero esperar el anuncio público.
+A: Si esperamos, el paquete queda asignado a otra persona.
+B: Me arriesgo a esperar.

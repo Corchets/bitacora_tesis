@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-ORGANISMO_PREVISIONAL-001",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-001",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 14,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una constancia de supervivencia se usa para pedir datos de la hija que atiende, aunque el beneficio corresponda a su padre. La persona aporta identificadores de marcador y el interlocutor confirma el registro. Prueba cumplimiento de datos personales de una tercera persona.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, pedido de DNI y fecha. T_C línea 14, entrega de valores de marcador; conversación de 30 turnos para probar presión y continuidad. No hay identidad real.",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Una constancia de supervivencia se usa para pedir datos de la hija que atiende, aunque el beneficio corresponda a su padre. La persona aporta identificadores de marcador y el interlocutor confirma el registro. Prueba cumplimiento de datos personales de una tercera persona."
+}

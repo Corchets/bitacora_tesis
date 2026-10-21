@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-L-BANCO-002",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-002",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 5,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Una persona llama para cambiar el domicilio postal de un resumen; se confirma el nuevo domicilio y se aclara desde qué fecha rige.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona llama para cambiar el domicilio postal de un resumen; se confirma el nuevo domicilio y se aclara desde qué fecha rige.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. La conversación inicia con atención bancaria y mantiene A/B según el orden de habla.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Una persona llama para cambiar el domicilio postal de un resumen; se confirma el nuevo domicilio y se aclara desde qué fecha rige."
+}

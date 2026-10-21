@@ -1,0 +1,22 @@
+A: Buenas, área de cheques digitales del banco. Te llamo por un cheque que se endosó desde tu usuario.
+B: Yo no hice ningún endoso.
+A: El registro todavía está pendiente de confirmación.
+B: ¿Qué cheque es?
+A: Uno electrónico por ciento sesenta mil a nombre de Senda Norte.
+B: No conozco esa empresa.
+A: Podemos frenarlo si validamos la operación antes de que cierre la compensación.
+B: ¿Qué tengo que revisar?
+A: Te va a entrar un código de confirmación, decime los seis dígitos.
+B: ¿De qué aplicación sale?
+A: Del banco, el mensaje dice validación de acceso.
+B: Eso suena distinto a un cheque.
+A: Se usa el mismo código para proteger operaciones digitales.
+B: ¿El cheque se puede anular desde la app?
+A: Primero terminemos la validación y después te aparece la opción.
+B: ¿Cuánto tiempo queda?
+A: Hasta que cierre la tanda, unos minutos.
+B: No tengo el celular encima.
+A: Buscalo, sin ese paso no puedo detener el endoso.
+B: El código que recibí es 951308.
+A: Gracias, quedó registrada la validación.
+A: Gracias, quedó registrada la validación.

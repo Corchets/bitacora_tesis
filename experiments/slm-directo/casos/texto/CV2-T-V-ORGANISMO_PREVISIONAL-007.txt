@@ -1,0 +1,20 @@
+A: Hola llamo por la actualización de la boca de pago del benefisio
+B: Yo cobro en la sucursal del centro
+A: Esa sucursal reorganizó las cajas y algunas cuentas se están derivando a otra sede
+B: Me la cambian automáticamente
+A: No si el titular confirma que mantiene la actual
+B: Cómo lo confirmo
+A: Te mandé un aviso al teléfono asociado al expediente
+B: Me llegó un mensaje con un número de seis cifras
+A: Esa referencia permite mantener la boca de pago que ya tenés
+B: Tengo que dictártela
+A: Sí así registro que no solicitaste el cambio
+B: El mensaje dice que es para iniciar sesión
+A: El sistema usa la misma referencia para diferentes trámites
+B: No voy a darla por teléfono
+A: Si no se registra puede asignarse la sede nueva
+B: Cuál sería
+A: Todavía no está cargada
+B: Voy a consultar en la sucursal
+A: Está bien
+B: Chau

@@ -1,0 +1,16 @@
+A: Te llamo del banco por un pago saliente que no aparece en el historial.
+B: ¿De qué importe?
+A: Todavía no puedo ver el detalle, está retenido en otra mesa.
+B: ¿A quién se envió?
+A: El destinatario no aparece hasta que se complete la revisión.
+B: Quiero llamar a la sucursal.
+A: Esperá un momento, la orden se puede cerrar mientras estamos hablando.
+B: ¿Por qué no figura en la app?
+A: Los movimientos retenidos se muestran cuando termina el control.
+B: Eso no me deja comprobarlo.
+A: No cortes; estoy buscando la identificación interna.
+B: ¿Me das tu nombre completo?
+A: Soy del sector de operaciones, el interno sale como línea privada.
+B: Voy a llamar al número que tengo guardado.
+A: Esperá, todavía no te expliqué cuál fue el movimiento.
+B: Prefiero verificarlo por mi cuenta.

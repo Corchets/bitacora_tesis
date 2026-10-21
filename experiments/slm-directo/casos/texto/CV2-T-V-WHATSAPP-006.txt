@@ -1,0 +1,30 @@
+A: Hola, te llamo por el grupo de intercambio de libros de la plaza.
+B: Sí, publiqué una novela para cambiar.
+A: La persona interesada no puede ver tu número porque el grupo está configurado como cerrado.
+B: ¿Le puedo escribir yo?
+A: Primero tenemos que habilitar el contacto directo.
+B: ¿Cómo?
+A: Te mando una confirmación por WhatsApp y me leés el código que aparece.
+B: ¿Es de seis números?
+A: Exacto, lo ingresamos en el panel del grupo.
+B: El aviso dice que no se lo pase a nadie.
+A: Es un mensaje general, acá estamos haciendo un intercambio entre vecinos.
+B: ¿Quién es la persona que quiere el libro?
+A: Está con el nombre de usuario, todavía no me dio su teléfono.
+B: Entonces no le puedo escribir.
+A: El contacto se habilita recién cuando confirmamos tu cuenta.
+B: No voy a dictar el código.
+A: Sin eso no puedo cerrar el intercambio.
+B: Le contesto por el grupo cuando vuelva a entrar.
+A: Está bien.
+B: Gracias.
+B: No voy a compartir un código que el mensaje dice que no entregue.
+A: El aviso está redactado para casos generales.
+B: No sé quién sos y no pedí que me agregaran a otra lista.
+A: La coordinación cambia cada temporada.
+B: Le voy a escribir a la persona que organizó el ensayo pasado.
+A: Puede que esté ocupada ahora.
+B: Espero a que me conteste por el chat que ya conozco.
+A: Entonces queda pendiente el alta.
+B: Sí, no hagas ningún cambio.
+A: De acuerdo.

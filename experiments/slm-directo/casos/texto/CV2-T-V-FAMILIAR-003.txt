@@ -1,0 +1,30 @@
+A: Hola, soy Meli, la hija de tu amiga Paula. ¿Está ella?
+B: No, está en una clase. ¿Necesitás algo?
+A: Me confundí con el pago del alquiler y mandé la plata a una cuenta vieja.
+B: ¿No podés pedir que la devuelvan?
+A: El dueño dice que el vencimiento es hoy y me cobra recargo si no entra ahora.
+B: ¿Tu mamá no puede ayudarte?
+A: Se quedó sin batería y no quiero hacerla volver hasta el centro.
+B: ¿Cuánto te falta?
+A: Ochenta y seis mil. Tengo el comprobante del primer envío, pero no me aceptan esperar.
+B: ¿A quién hay que pagarle?
+A: Al administrador Transferile ahora a ese alias así sostiene la fecha del salón
+B: ¿Por qué no lo llamás vos?
+A: Estoy en el colectivo, si corto pierdo la comunicación con el dueño.
+B: Mandame el contacto del administrador.
+A: No lo tengo guardado, solo me llegó el alias por mensaje.
+B: ¿Y la cuenta vieja?
+A: La maneja una inmobiliaria anterior, ya no responde nadie ahí.
+B: Le voy a escribir a Paula primero.
+A: Dale, pero avisame rápido porque vence en veinte minutos.
+B: No voy a transferir hasta confirmar el contrato.
+B: No voy a mandar una seña a un alias personal sin ver la reserva.
+A: El dueño me dijo que el lugar se puede perder hoy.
+B: Le escribo al salón con el número que aparece en su página.
+A: Capaz no atienden porque están trabajando.
+B: Espero una respuesta antes de pagar.
+A: Si te contesta, avisame.
+B: También voy a consultar con mi hermana, que organizó la fiesta.
+A: Ella está en una reunión todavía.
+B: La llamo cuando salga.
+A: Bueno, no transfieras hasta confirmar.

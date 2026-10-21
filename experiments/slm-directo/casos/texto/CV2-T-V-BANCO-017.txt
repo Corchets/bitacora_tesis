@@ -1,0 +1,16 @@
+A: Hola del banco Hay una tarjeta virtual que se creó pa tu cuenta pero quedó sin nombre
+B: Yo no hice ninguna
+A: Puede ser una conversión automática de la tarjeta física
+B: Puedo ver cuándo se creó
+A: Entrá al panel de tarjetas y tocá administrar virtuales
+B: Veo una que dice nueva
+A: Para confirmar si la tarjeta virtual salió de tu perfil ingresá los tres números de seguridad de la tarjeta física
+B: El código que está atrás
+A: Sí el código de seguridad no el PIN
+B: No alcanza con que la bloquee desde la aplicación
+A: El código permite distinguir el plástico original del duplicado
+B: Me parece raro darlo por teléfono
+A: Si no lo identificamos la tarjeta virtual puede seguir habilitada
+B: Voy a bloquearla desde la app por mi cuenta
+A: La aplicación te va a pedir otra validación
+B: Está bien lo hago yo

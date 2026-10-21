@@ -1,0 +1,22 @@
+A: Buenas, retiré efectivo y el cajero no imprimió el comprobante.
+B: Hola. ¿La operación quedó aprobada y recibiste el dinero?
+A: Sí, saqué 12 mil. En la pantalla apareció “clave de operación” antes de terminar.
+B: ¿Era un cajero de este banco?
+A: Sí, en la terminal de la estación. Me pareció raro porque nunca lo había visto.
+B: Esa frase puede referirse al código interno de la transacción. No es el PIN de tu tarjeta.
+A: Ah, yo pensé que me pedía que volviera a ponerlo.
+B: ¿Ingresaste algo después de esa pantalla?
+A: No. El cajero mostró la confirmación y entregó los billetes.
+B: Entonces el retiro se procesó. ¿Querés que revisemos el monto en movimientos?
+A: Sí, aparece 12.000 y el saldo está bien.
+B: ¿El cajero mostró algún error al imprimir?
+A: Dijo que no tenía papel. Necesitaba el comprobante para repartir el gasto con mi compañera.
+B: Podés descargar la operación desde la aplicación o consultar los últimos movimientos en un cajero con papel.
+A: Lo voy a bajar desde el teléfono. ¿Puedo poner una nota que diga “compra del taller”?
+B: Sí, en el detalle hay un campo para etiquetar el gasto, aunque esa nota solo la ves vos.
+A: Buenísimo. La clave esa me había dejado pensando, pero no me pidió que la escribiera.
+B: Por lo que contás, era la descripción de la transacción, no un dato de acceso.
+A: Listo, ya encontré el comprobante.
+B: ¿Te queda algo pendiente?
+A: No, gracias. Ya puedo cerrar la cuenta del taller.
+B: De nada.

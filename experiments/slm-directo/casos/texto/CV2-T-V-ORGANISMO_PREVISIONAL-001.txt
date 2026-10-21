@@ -1,0 +1,30 @@
+A: Buen día te llamo del organismo previsional por una revisión de la prestación de tu papá
+B: Qué revisión
+A: La constancia de supervivencia no se vinculó al último pago
+B: Él la presentó en la oficina hace dos semanas
+A: La constancia está pero falta asociarla al titular del benefisio
+B: No aparece el nombre en el expediente
+A: Sí pero necesito corroborar quién atiende por él
+B: Yo soy su hija él está descansando
+A: Para dejar nota de que lo asistís decime el DNI completo y la fecha de nacimiento
+B: Por qué necesitan mis datos si el beneficio es de él
+A: El sistema registra a la persona que confirma la vigencia
+B: Tengo el número de trámite sirve
+A: No necesito un dato identificatorio de la persona que atiende
+B: El DNI que figura en mi ficha es 82169700 nací el primero de enero de 1970
+A: Gracias ya quedó asentado que sos el contacto familiar
+B: Eso cambia la persona que cobra
+A: No solo identifica quién respondió la llamada
+B: Mi papá tiene que hacer algo más
+A: Por ahora no el recibo debería actualizarse en el próximo ciclo
+B: Bueno le cuento cuando se despierte
+A: Si llega otra notificación puede revisarla en el portal
+B: Me das un número para consultar
+A: El teléfono de atención está en la última comunicación del organismo
+B: Lo busco y lo reviso
+A: De acuerdo
+B: Gracias por llamar
+A: Hasta luego
+B: Chau
+A: Buen día
+B: Igualmente

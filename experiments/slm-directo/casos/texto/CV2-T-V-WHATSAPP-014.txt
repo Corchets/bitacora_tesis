@@ -1,0 +1,20 @@
+A: Te llamamos por la organización del campeonato de truco del club.
+B: ¿Se modificó el horario?
+A: El grupo donde compartimos las mesas se va a reorganizar esta tarde.
+B: Yo estoy en el grupo general.
+A: Sí, pero hubo una solicitud de mover a varios participantes a una lista distinta.
+B: ¿Quién la inició?
+A: Todavía no se puede ver desde la pantalla de coordinación.
+B: ¿Me afecta la inscripción?
+A: La inscripción figura, pero el teléfono aparece como contacto pendiente.
+B: ¿Tengo que hacer algo?
+A: Por ahora no; quedate en línea mientras termina la revisión.
+B: ¿Por qué no me lo mandan por el grupo?
+A: Hay que evitar que se publiquen datos antes de cerrar la lista.
+B: ¿Quién está coordinando?
+A: La comisión completa.
+B: Voy a escribir al presidente del club.
+A: No lo interrumpas ahora, está en la sede.
+B: Bueno, le escribo después.
+A: La revisión todavía está en curso.
+B: Corto, tengo que salir.

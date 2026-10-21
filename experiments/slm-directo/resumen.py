@@ -34,7 +34,7 @@ SIN_EVALUAR = ("incompleto", "sin_respuesta_valida")
 
 def categoria(ref: dict, aviso: int | None) -> str:
     """Ubicación del aviso respecto de las marcas humanas."""
-    if ref["clase"] == "legitima_dificil":
+    if ref["clase"] in casos.LEGITIMAS:
         return "falsa_alarma" if aviso else "sin_aviso_correcto"
     if aviso is None:
         return "sin_aviso"
@@ -138,7 +138,7 @@ def metricas(cs: dict) -> dict:
     """Totales de una configuración: los mismos números que muestran resumen.md y el visor."""
     evaluados = [c for c in cs.values() if c["categoria"] not in SIN_EVALUAR]
     vish = [c for c in evaluados if c["ref"]["clase"] == "vishing"]
-    legit = [c for c in evaluados if c["ref"]["clase"] == "legitima_dificil"]
+    legit = [c for c in evaluados if c["ref"]["clase"] in casos.LEGITIMAS]
     cat = Counter(c["categoria"] for c in cs.values())
     ms = [m for c in cs.values() for m in c["ms"]]
     avisos = [c["aviso_fila"] for c in evaluados if c["aviso_fila"]]
@@ -282,7 +282,7 @@ def armar_resumen(carpeta: Path, con_trayectorias: bool = False) -> str:
         f"- **Código:** `{commit_corto(codigo['commit'])}`" + (" con cambios sin commit en la carpeta" if codigo["cambios_sin_commit_en_la_carpeta"] else ""),
         f"- **Máquina:** {maquina['sistema']}, {maquina['nucleos_logicos']} núcleos lógicos, {maquina['ram_total_gb']} GB de RAM",
         f"- **Ollama:** {ollama.get('version', 'no usado')} · **Política:** {manifiesto['politica']}",
-        f"- **Casos:** {len(refs)} ({clases['vishing']} vishing, {clases['legitima_dificil']} legítimas); "
+        f"- **Casos:** {len(refs)} ({clases['vishing']} vishing, {sum(clases[c] for c in casos.LEGITIMAS)} legítimas); "
         f"{sin_revision} todavía sin revisión humana",
         "",
         "## Resultados por configuración",

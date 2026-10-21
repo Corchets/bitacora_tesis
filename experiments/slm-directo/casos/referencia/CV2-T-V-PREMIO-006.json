@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-PREMIO-006",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-006",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "Un premio de una encuesta se usa para pedir una contraseña existente de correo, con vencimiento esa misma noche; la persona se niega. Prueba extracción directa de un secreto reutilizable bajo pretexto de activar un beneficio.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, solicitud directa de la contraseña existente. No se divulga el secreto. El festival y el beneficio son ficticios.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Un pase de teatro se usa para pedir que la persona dicte una contraseña nueva por teléfono. Prueba solicitud directa de un secreto permanente que no debería ser necesaria para un premio."
+}

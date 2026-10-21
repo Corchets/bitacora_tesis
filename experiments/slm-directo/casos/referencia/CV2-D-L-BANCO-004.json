@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-L-BANCO-004",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-004",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío."
+}

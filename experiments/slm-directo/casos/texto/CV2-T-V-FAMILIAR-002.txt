@@ -1,0 +1,22 @@
+A: Hola tía Soy Santi el hijo de Nora
+B: Sí Santi decime
+A: Estoy en el taller con el auto de mamá Se rompió la correa y no la pueden dejar salir así
+B: Ella está ahí con vos
+A: Sí fue a hablar con el mecánico pero está muy nerviosa
+B: Que me llame cuando pueda
+A: Tiene el teléfono descargado y me pidió que resolviera el pago
+B: Cuánto es
+A: Ciento noventa mil entre repuesto y mano de obra
+B: Te pasaron presupuesto
+A: Me lo mostraron en el mostrador pero no me dieron copia todavía
+B: Se puede pagar con tarjeta
+A: El posnet no funciona El dueño dice que solo recibe efectivo hoy
+B: Dónde están
+A: En el taller de la calle San Martín a dos cuadras de la plaza chica
+B: Voy pa allá y hablo con tu mamá
+A: No llegás antes del cierre tía Transferime ciento noventa mil y le pago al mecánico
+B: A qué dirección te mando el auto
+A: Mejor pedile al remisero que te espere en el cajero voy yo a buscar la plata
+B: Ya saqué ciento noventa mil y estoy en camino
+A: Te espero en la esquina del taller
+B: En diez minutos estoy

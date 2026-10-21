@@ -1,0 +1,16 @@
+A: Buenas, del banco por un problema con la tarjeta de sueldo.
+B: ¿Qué pasó?
+A: El depósito entró, pero el sistema de compras no reconoce el perfil de la tarjeta.
+B: Pagué el supermercado recién.
+A: Puede que el perfil haya quedado en modo de solo consulta.
+B: ¿Se puede arreglar desde la aplicación?
+A: Sí, entrá en tarjetas y luego administrar perfil.
+B: Estoy ahí.
+A: Tocá recuperar PIN y completá la clave que usás para entrar al cajero.
+B: ¿El PIN de cuatro números?
+A: Ese mismo, así se sincroniza con la tarjeta nueva.
+B: ¿Te lo digo?
+A: No, escribilo en la pantalla y confirmame cuando lo acepte.
+B: Ingresé el PIN 0000 en la pantalla de recuperación.
+A: Bien, ahora debería sincronizar la tarjeta.
+B: El perfil quedó habilitado.

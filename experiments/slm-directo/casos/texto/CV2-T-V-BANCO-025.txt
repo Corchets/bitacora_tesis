@@ -1,0 +1,18 @@
+A: Buenas, del banco. Tenemos una transferencia que aparece como iniciada desde un dispositivo nuevo.
+B: No agregué ningún dispositivo.
+A: La orden todavía está en espera, no figura como debitada.
+B: ¿Puedo cancelarla desde mi usuario?
+A: Primero hay que identificar qué equipo hizo el intento.
+B: ¿Me decís cuál aparece?
+A: Estoy esperando que abra el registro técnico.
+B: ¿Puedo colgar y entrar a la app?
+A: Mejor no cierres esta llamada hasta que el sistema termine la consulta.
+B: ¿Eso es una instrucción del banco?
+A: Es el procedimiento de la mesa de prevención.
+B: Necesito un número de caso.
+A: Se genera una vez que se asigna el dispositivo.
+B: Voy a llamar al número que tengo en la tarjeta.
+A: No hace falta duplicar el reclamo.
+B: No me diste datos para verificarlo.
+A: Dame un momento más.
+B: No, corto y llamo por el canal oficial.

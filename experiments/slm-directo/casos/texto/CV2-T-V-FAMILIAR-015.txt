@@ -1,0 +1,20 @@
+A: Hola soy la secretaria del club donde juega Mateo Hablo con su mamá
+B: Sí qué pasó
+A: Estamos actualizando la lista de autorizados pa el torneo del sábado
+B: La planilla la completé la semana pasada
+A: Sí pero se cambió el sistema y algunos adultos no quedaron vinculados al perfil del chico
+B: Qué tengo que llevar
+A: Nada podemos validar desde acá con el contacto que figura en la ficha
+B: No lo puede hacer el entrenador
+A: Está en la cancha y no tiene acceso al panel ahora
+B: Qué necesitás de mí
+A: Te va a llegar un número al celular para confirmar que sos la persona responsable
+B: Me llegó un mensaje con seis números
+A: Leémelos y te dejo habilitada para retirar a Mateo después del partido
+B: Dice que no comparta el código de acceso
+A: Es el texto estándar pero sin validarlo no aparece tu autorización
+B: Bueno dice 482731
+A: Perfecto ya quedó asociado el teléfono
+B: Me mandás la confirmación
+A: Te la manda el sistema en unos minutos
+B: Voy a preguntarle al entrenador igual

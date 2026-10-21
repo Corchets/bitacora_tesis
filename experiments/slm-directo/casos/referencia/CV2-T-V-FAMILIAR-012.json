@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-FAMILIAR-012",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-FAMILIAR-012",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Un llamante que no confirma identidad afirma estar retenido, pide secreto y desaconseja que la familia se acerque, pero termina antes de formular qué necesita. Prueba preparación sospechosa de una maniobra familiar con urgencia y aislamiento, sin pedido observable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se registra pedido ni cumplimiento. Las señales de presión e identidad inconsistente son observables, pero no demuestran por sí solas fraude; no se espera detectar una intención invisible. T_R/T_C nulos, pendiente D07. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Un llamante que no confirma identidad afirma estar retenido, pide secreto y desaconseja que la familia se acerque, pero termina antes de formular qué necesita. Prueba preparación sospechosa de una maniobra familiar con urgencia y aislamiento, sin pedido observable."
+}

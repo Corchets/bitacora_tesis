@@ -131,9 +131,9 @@ def cargar_corrida_slm(carpeta: Path) -> dict[str, list[CasoEvaluado]]:
             ref = c["ref"]
             clase = ref["clase"]
             grupo = ref.get("grupo", "desconocido")
-            subtipo = "negativo_dificil" if clase == "legitima_dificil" else (
+            subtipo = ref.get("tipo_legitima") or ("negativo_dificil" if clase == "legitima_dificil" else (
                 "cotidiana" if "cotidiana" in clase else "no_aplica"
-            )
+            ))
             t_a = c["aviso"]
             t_r = ref.get("t_r_linea")
             t_c = ref.get("t_c_linea")
@@ -228,7 +228,7 @@ def cargar_salida_replay(
             if clase not in {"vishing", "legitima", "legitima_dificil", "legitima_cotidiana"}:
                 raise ValueError(f"Clase ausente o desconocida en la referencia de {case_id!r}: {clase!r}.")
             grupo = ref.get("grupo", "desconocido")
-            subtipo = (
+            subtipo = ref.get("tipo_legitima") or (
                 "negativo_dificil"
                 if clase == "legitima_dificil"
                 else ("cotidiana" if "cotidiana" in clase else "no_aplica")

@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-PREMIO-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": null,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Un concurso fotográfico se usa para pedir DNI y domicilio antes de liberar un premio. Prueba solicitud directa de identificadores y dirección; la persona no los comparte.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, primera petición de datos personales. Sin cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Un concurso fotográfico se usa para pedir DNI y domicilio antes de liberar un premio. Prueba solicitud directa de identificadores y dirección; la persona no los comparte."
+}

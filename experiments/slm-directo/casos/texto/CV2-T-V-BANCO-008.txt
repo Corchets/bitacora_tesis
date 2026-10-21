@@ -1,0 +1,20 @@
+A: Hola soy de prevención del banco El débito de la cuota de natación volvió rechazado
+B: La pagué desde la cuenta el lunes
+A: El comercio recibió una autorización parcial pero la confirmación final no llegó
+B: Tengo que pagar otra vez
+A: No hasta que cerremos la devolución parcial
+B: Cómo se hace
+A: Te llega un código de reversa en el celular
+B: Acaba de entrar uno
+A: Leémelo y lo registro para que no te cobren dos veces
+B: Es 578334
+A: Gracias el reclamo quedó abierto
+B: Me das el número
+A: Lo vas a ver en la aplicación cuando actualice
+B: Cuánto tarda
+A: Un rato guardá el comprovante del pago original
+B: Lo tengo en el correo
+A: Bien con eso alcanza por ahora
+B: Gracias
+A: Hasta luego
+B: Chau

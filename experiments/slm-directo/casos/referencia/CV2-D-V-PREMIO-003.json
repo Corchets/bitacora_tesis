@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-PREMIO-003",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-PREMIO-003",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": null,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "La convocatoria cultural solicita completar un formulario externo con DNI para coordinar un premio. La petición se presenta como logística y se difiere hasta que la persona pregunta por el dato. Prueba reconocimiento de una solicitud inducida de identificador.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: en línea 11 se pide completar el número de documento en un formulario de logística; la persona pregunta en línea 13 si debe pasarlo y recibe la instrucción de escribirlo en la línea 15. Se ubica T_R en la primera instrucción indirecta; revisar si se requiere esperar a línea 15. No se comparte ningún dato.",
+  "particion": "desarrollo",
+  "familia": "premio",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "La convocatoria cultural solicita completar un formulario externo con DNI para coordinar un premio. La petición se presenta como logística y se difiere hasta que la persona pregunta por el dato. Prueba reconocimiento de una solicitud inducida de identificador."
+}

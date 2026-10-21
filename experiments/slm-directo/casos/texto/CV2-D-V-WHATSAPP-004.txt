@@ -1,0 +1,21 @@
+A: Hola, soy Julián, del grupo de consorcio de la torre B. ¿Te llegó el archivo de expensas?
+B: Sí, lo mandó la administradora ayer.
+A: Estamos ordenando quiénes reciben las avisos, porque a algunos les aparece el número anterior.
+B: A mí me llega todo bien.
+A: Puede ser que tu cuenta esté duplicada en el listado nuevo.
+B: ¿Por qué estaría duplicada?
+A: Se migraron los grupos y quedó un teléfono pendiente de confirmar.
+B: Yo no hice ninguna migración.
+A: No hace falta que hagas nada, solo revisá el mensaje que te acaba de entrar.
+B: Me aparece un código de registro.
+A: Bien, ese es el que identifica cuál de los dos números queda asociado al consorcio.
+B: ¿Lo copio en el grupo?
+A: No, pasámelo por acá y lo pongo en la planilla de altas.
+B: ¿Vos sos el encargado del edificio?
+A: Ayudo a la administración con lo digital.
+B: ¿Cómo se llama la administradora?
+A: No me acuerdo el apellido, la ubico por el interno.
+B: Entonces no voy a mandarte nada.
+A: Si no lo registramos ahora, te quedás afuera de los avisos de mantenimiento.
+B: Le pregunto directamente a la administración.
+A: Dale, no hay problema.

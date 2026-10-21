@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-SOPORTE-011",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-SOPORTE-011",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 15,
+  "t_c_linea": null,
+  "pedido": "REQUEST_REMOTE_ACCESS",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_REMOTE_ACCESS"
+      ]
+    }
+  ],
+  "que_prueba": "Una falla de proyector se usa para pedir que la persona autorice una sesión que permite controlar la computadora. Prueba un acceso remoto presentado como diagnóstico del fabricante, sin cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-REMOTO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 15, donde comienza el pedido indirecto; también podría ubicarse en línea 16, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 15, instrucción directa de autorizar la sesión. La referencia previa en línea 9 es contexto preparatorio, no se marca como pedido crítico.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-SOPORTE-REMOTO-01",
+  "situacion": "Una falla de proyector se usa para pedir que la persona autorice una sesión que permite controlar la computadora. Prueba un acceso remoto presentado como diagnóstico del fabricante, sin cumplimiento."
+}

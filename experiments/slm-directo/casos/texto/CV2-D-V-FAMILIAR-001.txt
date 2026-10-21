@@ -1,0 +1,20 @@
+A: Hola soy el primo de Juli estás en tu casa
+B: Sí qué pasó
+A: Estoy con la camioneta en el taller de la ruta Se cortó una manguera y no me la largan hasta pagar el repuesto
+B: No tenías el seguro pa auxilio
+A: Sí pero el seguro cubre el remolque no los arreglos
+B: Cuánto te cobran
+A: Ciento treinta y ocho mil con mano de obra incluida
+B: Es un montón para una manguera
+A: Me mostraron que también se dañó el tensor Te mando una foto cuando salga de acá
+B: Por qué no le pedís a tu papá
+A: Está manejando de vuelta de Tafí y no quiero que se desvíe
+B: Te pueden esperar hasta mañana
+A: El taller cierra en media hora y mañana me cobran otra noche de guardado
+B: No tengo tanto efectivo
+A: No hace falta efectivo haceme una transferencia y te lo devuelvo cuando cobre el viernes
+B: A qué cuenta
+A: Usá el alias tallermonteverde está a nombre del mecánico
+B: El importe era ciento treinta y ocho
+A: Sí exactamente para que lo dejen retirar la camioneta
+B: Listo ya transferí ese monto Avisame cuando te den el vehículo

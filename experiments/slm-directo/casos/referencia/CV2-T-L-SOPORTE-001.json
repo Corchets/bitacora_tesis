@@ -1,0 +1,30 @@
+{
+  "case_id": "CV2-T-L-SOPORTE-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-SOPORTE-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 10,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "El usuario llama porque el programa de inventario muestra cantidades antiguas después de un cierre; informa tienda, equipo y hora para comparar la sincronización.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño el usuario llama porque el programa de inventario muestra cantidades antiguas después de un cierre; informa tienda, equipo y hora para comparar la sincronización.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-SUPPORT-INFO-01",
+  "situacion": "El usuario llama porque el programa de inventario muestra cantidades antiguas después de un cierre; informa tienda, equipo y hora para comparar la sincronización."
+}

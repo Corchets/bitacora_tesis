@@ -1,0 +1,21 @@
+A: Buenas, soy del servicio técnico de la empresa de internet. ¿Te anda lento el router?
+B: A la mañana se cortó dos veces, después volvió.
+A: Estamos revisando una falla de notificaciones en algunos celulares conectados al wifi.
+B: ¿Eso tiene que ver con el router?
+A: En algunos casos sí, porque se demora la confirmación entre la línea y WhatsApp.
+B: No entiendo mucho de eso.
+A: No te preocupes, primero revisamos si la cuenta sigue asociada a tu número.
+B: ¿Tengo que hacer algo?
+A: Te va a llegar un código de seis números. Leémelo así cierro el diagnóstico.
+B: ¿El de WhatsApp?
+A: Sí, el que aparece con el aviso de no compartir. Es automático, no es una clave bancaria.
+B: Si no se comparte, ¿por qué me lo pedís?
+A: Es una verificación corta que habilita el canal de soporte.
+B: ¿No se puede arreglar reiniciando el equipo?
+A: Eso ya lo hiciste al volver la conexión; falta completar el enlace del número.
+B: El aviso dice que alguien quiere registrar mi cuenta.
+A: Es la misma pantalla que usa el sistema para probar la línea.
+B: No te lo voy a leer.
+A: Si querés, te espero mientras buscás el mensaje.
+B: No, voy a cortar y llamar a la empresa por mi factura.
+A: Como prefieras.

@@ -1,0 +1,30 @@
+{
+  "case_id": "CV2-T-L-WHATSAPP-003",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-WHATSAPP-003",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Un grupo de compañeros repara una invitación de WhatsApp que llega a un número anterior; se verifica cuál contacto corresponde al trabajador.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño un grupo de compañeros repara una invitación de whatsapp que llega a un número anterior; se verifica cuál contacto corresponde al trabajador.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": true,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "Un grupo de compañeros repara una invitación de WhatsApp que llega a un número anterior; se verifica cuál contacto corresponde al trabajador."
+}

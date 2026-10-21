@@ -1,0 +1,29 @@
+A: hola el sábado no vamos a estar para recibir el pan
+B: buen día querés pausar la entrega de esta semana
+A: sí solo este sábado volvemos el domingo a la noche
+B: la pausa es para el pedido de la casa de lapacho
+A: sí para el de lapacho 92
+B: querés que se retome el sábado siguiente
+A: correcto el del 14 de noviembre
+B: veo que tenés dos productos pan de campo y seis medialunas
+A: dejá solo el pan de campo para la próxima semana
+B: sacamos las medialunas desde ahora o solo esta vez
+A: sacalas de todas las semanas por favor
+B: listo quedan suspendidas desde el próximo reparto
+A: el pan se paga en la puerta o ya queda cobrado
+B: lo tenés cargado al saldo semanal
+A: me queda un saldo de una entrega anterior
+B: sí aparece un crédito de 2200 pesos
+A: se descuenta automáticamente del próximo pedido
+B: correcto se aplica al sábado 14
+A: buenísimo no quiero que lo pierda el repartidor
+B: la nota queda en la cuenta y también se informa en la ruta
+A: pueden dejar el pan con el vecino si un día no estamos
+B: podemos agregar una preferencia pero necesitamos que el vecino acepte
+A: mi vecina de la casa 94 ya me dijo que sí
+B: anoto casa 94 puerta azul
+A: ella trabaja hasta las seis entre semana
+B: el reparto pasa los sábados entre las ocho y las diez
+A: entonces suele estar en casa
+B: perfecto queda la indicación
+A: gracias

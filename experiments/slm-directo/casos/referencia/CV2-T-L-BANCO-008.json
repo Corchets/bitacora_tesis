@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-BANCO-008",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-008",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Consulta por un resumen que usa la palabra “código” para describir una comisión; se compara el período y el movimiento sin pedir credenciales.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño consulta por un resumen que usa la palabra “código” para describir una comisión; se compara el período y el movimiento sin pedir credenciales.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Consulta por un resumen que usa la palabra “código” para describir una comisión; se compara el período y el movimiento sin pedir credenciales."
+}

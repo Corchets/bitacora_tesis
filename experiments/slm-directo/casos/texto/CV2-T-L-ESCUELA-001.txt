@@ -1,0 +1,33 @@
+A: hola el colectivo de mi hija viene con veinte minutos de demora
+B: buen día a qué hora llega normalmente a la escuela
+A: entra a las ocho pero hoy sigue en la terminal del barrio
+A: entra a las ocho pero hoy sigue en la terminal del barrio
+B: va a venir sola o la acompañás vos
+A: va con una compañera y el papá de ella está en camino
+B: sabés si ya avisaron a preceptoría
+A: no recién me mandaron un mensaje
+B: puedo dejar una nota para que la esperen en la entrada
+A: la van a marcar ausente si llega después de la primera hora
+B: la registran como llegada tarde no como ausencia completa
+A: tiene una evaluación de lengua a primera hora
+B: la profesora ya está en la escuela le aviso que va a llegar unos minutos después
+A: puede rendirla cuando entre o pasa a otra fecha
+B: eso lo decide la profesora según cuánto se demore
+A: el transporte dice que llega en diez minutos
+B: la compañera también tiene la misma evaluación
+A: sí están en el mismo curso
+B: entonces pueden entrar juntas por la puerta de la avenida
+A: alguien de recepción va a estar ahí
+B: sí la portera abre hasta las nueve
+A: le digo a mi hija que no se quede esperando afuera
+B: también le puedo avisar a la preceptora de segundo b
+A: gracias ella se llama micaela prado
+B: la encuentro en la lista del curso
+A: me confirmás cuando ya haya entrado
+B: puedo pedirle a recepción que te llame al teléfono registrado
+A: ese es el que termina en 62
+B: sí lo veo queda anotada la demora
+A: llegó el colectivo ya están subiendo
+B: perfecto les aviso que las esperamos
+A: gracias por la ayuda
+B: de nada buen día

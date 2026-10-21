@@ -1,0 +1,32 @@
+A: hola llegó el pedido pero falta una porción de tortila
+A: y no sé si se quedó en el local
+B: buenas me decís el número que aparece en la bolsa
+A: es 260 pedimos dos tortillas y una ensalada
+B: en la comanda veo dos tortillas una ensalada y una bebida
+A: la bebida sí llegó pero había una sola tortilla
+B: la bolsa estaba cerrada cuando la recibiste
+A: sí con el precinto del local la abrí recién en la mesa
+B: la caja de la tortilla faltante tiene alguna etiqueta
+A: hay una etiqueta que dice uno de dos
+B: entonces puede haberse quedado en la cocina querés que la mandemos ahora
+A: si tarda menos de media hora sí estamos por cenar
+B: el repartidor está cerca y puede llevarla en quince minutos
+A: perfecto necesita que baje a buscarla
+B: puede subir al departamento cuatro timbre ledesma
+A: el ascensor está en mantenimiento mejor que me llame cuando llegue y bajo
+B: anoto esa indicación seguís en la dirección de la avenida norte 400
+A: sí torre b entrada por la calle lateral
+B: gracias la tortilla era de papa o de verdura
+A: de papa sin cebolla
+B: lo confirmo con cocina para que no manden otra distinta
+A: la que llegó tiene cebolla
+B: no la etiqueta dice sin cebolla
+A: bien cuando llegue la otra reviso que sea igual
+B: si preferís devolver el importe también podemos hacerlo
+A: no esperamos la porción el resto estaba rico
+B: está en camino querés que te avise cuando salga del local
+A: sí así bajo al hall
+B: ya salió llega en unos minutos
+A: listo la recibí ahora sí está completa
+B: gracias por avisarnos
+A: gracias por resolverlo rápido

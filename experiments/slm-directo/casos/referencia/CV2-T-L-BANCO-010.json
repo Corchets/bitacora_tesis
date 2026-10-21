@@ -1,0 +1,38 @@
+{
+  "case_id": "CV2-T-L-BANCO-010",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-010",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 17,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La persona recuerda una clave de acceso escrita en una libreta y consulta cómo cambiarla por olvido de usuario; el agente deriva al flujo de recuperación.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona recuerda una clave de acceso escrita en una libreta y consulta cómo cambiarla por olvido de usuario; el agente deriva al flujo de recuperación.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "La persona recuerda una clave de acceso escrita en una libreta y consulta cómo cambiarla por olvido de usuario; el agente deriva al flujo de recuperación."
+}

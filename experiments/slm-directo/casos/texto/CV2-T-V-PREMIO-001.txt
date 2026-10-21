@@ -1,0 +1,32 @@
+A: Buenas te llamo de la organización de la Feria de Ciencias del Valle
+B: Hola qué necesitan
+A: La maqueta de energía solar que presentaste quedó seleccionada pa una mención especial
+B: La de la escuela técnica
+A: Sí el jurado la eligió junto con otros dos proyectos
+B: Cuándo es la entrega
+A: El viernes a las seis en el auditorio municipal
+B: Tengo que llevar la maqueta
+A: No ya quedó en la muestra El premio se entrega a una persona responsable
+B: Qué dato tengo que confirmar
+A: El DNI completo de quien la inscribió y la fecha de nacimiento
+B: Yo hice el formulario
+A: Entonces los datos tienen que coincidir con la ficha de participación
+B: Me mandan una notificación escrita
+A: La invitación formal sale después de cerrar el registro de premios
+B: Qué tipo de premio es
+A: Una beca de materiales para el próximo proyecto y un diploma
+B: La beca se deposita
+A: No es un cupón para comprar herramientas
+B: Mi documento figura como 35654800 nací el primero de enero del 70
+A: Ya coincide con el registro
+B: Me mandan la invitación al correo
+A: Sí debería llegar dentro de una hora
+B: Puedo llevar a mi profesora
+A: Claro puede acompañarte al auditorio
+B: Hay que confirmar asistencia
+A: Con la invitación alcanza
+B: Bueno espero el correo
+A: Gracias por participar
+B: Hasta luego
+A: Chau
+B: Chau

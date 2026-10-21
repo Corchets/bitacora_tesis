@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-BANCO-006",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-006",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 13,
+  "t_c_linea": 20,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un depósito de efectivo en autoservicio se usa para pedir una entrega de dinero en casa como “cotejo físico”. Prueba solicitud directa de transferencia en efectivo bajo una explicación de conciliación y sin cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-BILLETES-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, primer pedido de preparar y entregar efectivo. T_C línea 20, la persona confirma entrega al supuesto técnico; importe ficticio.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-BANK-BILLETES-01",
+  "situacion": "Un depósito de efectivo en autoservicio se usa para pedir una entrega de dinero en casa como “cotejo físico”. Prueba solicitud directa de transferencia en efectivo bajo una explicación de conciliación y sin cumplimiento."
+}

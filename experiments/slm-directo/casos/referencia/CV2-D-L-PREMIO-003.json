@@ -1,0 +1,30 @@
+{
+  "case_id": "CV2-D-L-PREMIO-003",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-PREMIO-003",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "La persona consulta por un premio recibido en una competencia de fotografía comunitaria; se confirma el nombre público y el horario de entrega.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona consulta por un premio recibido en una competencia de fotografía comunitaria; se confirma el nombre público y el horario de entrega.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "premio",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-PREMIO-CONSULTA-01",
+  "situacion": "La persona consulta por un premio recibido en una competencia de fotografía comunitaria; se confirma el nombre público y el horario de entrega."
+}

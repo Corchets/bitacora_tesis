@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-WHATSAPP-015",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-WHATSAPP-015",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Una supuesta migración de número y un pedido de no cerrar chats crean tensión, pero el interlocutor termina antes de solicitar el código o la aprobación. Prueba una sospecha que no contiene un evento crítico observable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R y T_C quedan nulos. La afirmación de autoridad, por sí sola, no demuestra que la llamada sea fraude; revisar la clase hipotética en D07. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Una supuesta migración de número y un pedido de no cerrar chats crean tensión, pero el interlocutor termina antes de solicitar el código o la aprobación. Prueba una sospecha que no contiene un evento crítico observable."
+}

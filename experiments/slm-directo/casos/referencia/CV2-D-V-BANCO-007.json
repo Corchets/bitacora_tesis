@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-BANCO-007",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-007",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 20,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un supuesto equipo desconocido se usa para inducir una acción de seguridad: quitar el dispositivo y confirmar el actual como principal. Prueba una instrucción de seguridad guiada con consecuencia aparente, seguida de cumplimiento observable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: T_R se marca en línea 9, al iniciar la ruta de revisión de dispositivo; la confirmación de la operación se solicita en línea 15. T_C línea 20 indica que la baja se completó.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "La instrucción de renovar “el dato de ingreso” solo se vuelve explícitamente una solicitud de clave cuando la persona pide aclaración. Prueba si el detector integra el eufemismo con el contexto previo de limpieza de dispositivos."
+}

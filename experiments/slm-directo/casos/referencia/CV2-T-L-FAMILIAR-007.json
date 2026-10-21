@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-T-L-FAMILIAR-007",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-FAMILIAR-007",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una familia coordina el pago y la entrega de una torta encargada para una reunión; una persona adelanta el costo y otra transfiere su parte.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una familia coordina el pago y la entrega de una torta encargada para una reunión; una persona adelanta el costo y otra transfiere su parte.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una familia coordina el pago y la entrega de una torta encargada para una reunión; una persona adelanta el costo y otra transfiere su parte."
+}

@@ -1,0 +1,1761 @@
+{
+  "fecha": "2026-10-21",
+  "estado": "propuesta sin discutir; reserva técnica, no evaluación final aprobada",
+  "decisiones_pendientes": [
+    "D07",
+    "D08"
+  ],
+  "catalogo_sha256": "9c9707f76ee74de8e2441bc3e748d6ebdfb136402f655a64ac989949c348780e",
+  "casos": {
+    "CV2-D-L-BANCO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "10d9a2f2d202aa47412b83c7f8fabf358a8b1965ba2d1c22fa7b2f68976d7b4c",
+      "referencia_sha256": "00a2fa774002eaea1af71d4296ee29b6bb1cd248c2518b9e4d531497882f0bcd"
+    },
+    "CV2-D-L-BANCO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "cbf7f731ce8eadbe32470e7698e5150f8705f3fb79dcc8879673f66e549fd68a",
+      "referencia_sha256": "9ec5d98728e6ff83685954f4b452db7d29543ad6dea30d55dd42e1db36f3da8b"
+    },
+    "CV2-D-L-BANCO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "bb34b2861e1e2b5c00904e7974bc77611b7735de921a79462329f399aed72f6f",
+      "referencia_sha256": "d17c1b4573a9cff5e38057c963633f29d7ffc58f3d340aa4fc3abce5839efd47"
+    },
+    "CV2-D-L-BANCO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "b446ab9d0f38d7863d5ef0464a52a8f34b2cf8d4ff94b53240d080593078ffba",
+      "referencia_sha256": "3bd5b6640ad697c4f30efce2212d0fe6f08329993313083394f5991b953b5b6b"
+    },
+    "CV2-D-L-BANCO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "d141616f2611e70847b7dd00ae766f6562235a5ddea483be7e4bc20ad70e8d13",
+      "referencia_sha256": "6e02ad91d8426e578e7a497c6254c576af5370cb6adaf5bbb92ee8043497204c"
+    },
+    "CV2-D-L-BANCO-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "d8ef699ad730f8472f5f1fd3cddaadb61ef4d92897392c4a4922a56983f17bab",
+      "referencia_sha256": "74a040f775fe22d5f07d31660e7faa932a313f21bfa5dbaedbae743ad0f6b165"
+    },
+    "CV2-D-L-BANCO-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "4f80a484014b9cc9e27269e77c783e9eef505d4dfdcf3e2184333b57a79cb00d",
+      "referencia_sha256": "1f265898da8aefb0eb62b1c85d21893511120b8a087627d63728caad0f2c4e34"
+    },
+    "CV2-D-L-BANCO-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "508e71b0026f25bd42559d0ab59e476b8ac54aecfb3325a27222721505d78df7",
+      "referencia_sha256": "3a484986d95524954bf60b53b1c94a7ea100dd1f045865da1b1ef9bfe0e26053"
+    },
+    "CV2-D-L-BANCO-009": {
+      "particion": "desarrollo",
+      "texto_sha256": "6d31a562291150991d7753fafd62f8329acfcf5cd25f86eeb6a013e61024bf7a",
+      "referencia_sha256": "64d46856b7eb22c77ef77eed05a3f4a1a8e062597648a5b4ec28d1d898e727e7"
+    },
+    "CV2-D-L-BANCO-010": {
+      "particion": "desarrollo",
+      "texto_sha256": "5813083216e0af4500971e7770b680632801f283d3a08db668568613bfed8384",
+      "referencia_sha256": "8034e4c3d429d81c4b583cb0186c6454a6a226fad839bdd564634bdb6e21daf1"
+    },
+    "CV2-D-L-DELIVERY-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "ee7932e8924132c176a362941de7fef5a36767660a67746f8f37a372a67c9eb3",
+      "referencia_sha256": "38c8beb9aa1a3aff2d714c901dc89bd3fb67312fd4765ea6e6228b79608c1182"
+    },
+    "CV2-D-L-DELIVERY-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "43df2527ce801baee168427b8fffa843ebdc37eb884ac27d7c7f82f13f14e405",
+      "referencia_sha256": "df6d454657966ba623f55f49aa4f7485a7ab45300bb20b854168efe13d54ddf8"
+    },
+    "CV2-D-L-DELIVERY-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "b9bb7755bb97f5359c3cb476734e9f1533104cf3f0b66fa9af9b49a47de0905a",
+      "referencia_sha256": "3f16ad695d45625fd16be3bf6e8f3f8c32285474ed23774ab9d1b524e7d48794"
+    },
+    "CV2-D-L-DELIVERY-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "5c27934d0e3285cc5919e3ff056763d996e7973e37d08469808a69372e42b132",
+      "referencia_sha256": "7f485d8592d531e43d3ee8eacc4d83ffb174359a55544b407d7fe07feef5ccc2"
+    },
+    "CV2-D-L-DELIVERY-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "1cfa5c7a51545877fcd0e875f41031561caac0f3ae331df821810f64cf5e2d91",
+      "referencia_sha256": "fb182b63717e46794b10def241197c160c0c4e3a2096f40a9edab80076f096a1"
+    },
+    "CV2-D-L-ESCUELA-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "243975f0e5bb4b703e2776e2c88745df81f042aedb998fdfefb3654cc78f82cc",
+      "referencia_sha256": "be21322291bc3c8d34be74f54c3bdbc8853c7b468460e0ce475f23c25b243e35"
+    },
+    "CV2-D-L-ESCUELA-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "414451cc7aae4ac665001d82d7d7c2d10fb414a5036e0ac4f3721663c3141f0b",
+      "referencia_sha256": "ff8fa61c38e7692ae3cc9819a8b0d13f9f0b4627dc145b8ab8ea1696a1a0defa"
+    },
+    "CV2-D-L-ESCUELA-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "705f70f45ff82d3acf6147bde189bc26eac6937c30db868992212a9e7dbb0885",
+      "referencia_sha256": "95701dacee7f3c88f8d2bb9ac7950c213139015710a36420cdc32f45b3faa759"
+    },
+    "CV2-D-L-ESCUELA-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "c204363ba63fa120b827b4c98f6f6bc562819daf40d3bfa3971e6a26c275e37f",
+      "referencia_sha256": "3f0464e687a7751edc824b72aae0d7a1f91b2f2026864afc28d35e7326459869"
+    },
+    "CV2-D-L-ESCUELA-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "e134b147d33dc9bf48488f69c5cd9155eb1a3c9d89e979e4d80efd6947cab22c",
+      "referencia_sha256": "395f42c5da0961e502013bf5d387a3ca01dd490b0615f26360c0f6476da91888"
+    },
+    "CV2-D-L-FAMILIAR-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "50a486aa265a3f255d5cf64958cba36a43047b8df1e18f642058ddc57b96d367",
+      "referencia_sha256": "7328914acbe6d6fd9b524f2618b40152abe3fd09155e1647b9e4b95dde938db9"
+    },
+    "CV2-D-L-FAMILIAR-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "6760306db3d3031f153e00bbc6dfa30c73adb157034ee9f94918e9525d7b5534",
+      "referencia_sha256": "a25c111cc3df59e65b9e3d401056f7372fc3358681e967d3502ac652a808553a"
+    },
+    "CV2-D-L-FAMILIAR-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "3325c6aeb68b3df09dcdb6531ae944c4c2aacf0684972c263db57c38478c8867",
+      "referencia_sha256": "720682d06d3d168c80f82c71776854ba2e4d9386fb80b66035a0a685a63928bf"
+    },
+    "CV2-D-L-FAMILIAR-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "3d2271dc73cb4e1f5f6f4d4ecd506c2ce5fbaeb56b57a6561fc3e35391a42c35",
+      "referencia_sha256": "2fc0c82014eb23481aac77a767b92a6f7e3a6e1dffcae76016dbbb5f6a00c54d"
+    },
+    "CV2-D-L-FAMILIAR-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "f3a077ffe9b1c3e528d4a06e0c9cc64521e9ec3043bbf174ece9643974c63db9",
+      "referencia_sha256": "fae20eacb0efc41bbe7a64f3da003eae4b5f82f2b0673bf87c75b5de371c58b6"
+    },
+    "CV2-D-L-MEDICO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "62b0315ecaae12308959baf89e6b65d1ddeb8e4af7f29220d82179bff8f5b273",
+      "referencia_sha256": "a90ef593a8c859b4cf1bed5dd3c6cd9a59543c0035dcd69b2073c3ed0b18a26f"
+    },
+    "CV2-D-L-MEDICO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "d4771b07cd286c02052108047323732031f8b27a39e48cdc6c599dfa2b0f735c",
+      "referencia_sha256": "c9c88bfe89be8d9aca887cd3edbdbf4c5986fdbfa672f97372f7d20316bdb1ef"
+    },
+    "CV2-D-L-MEDICO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "0617bc3fbedfb999127187ff0ebd88b314ae72951f491a749142eff09555a5a6",
+      "referencia_sha256": "f1d6f9a9f1a407e6d7123c99236837c2dd25800328b6d0a33fa9d43a8fdd2f08"
+    },
+    "CV2-D-L-MEDICO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "e3fb3d8f5abafa7153d0cae821b0685f14b225dfa3cf89c85a5606a6ee28893e",
+      "referencia_sha256": "ac98de5e3943e6544afb529f2899407561e5d70c36f507bc37ff0d7306a53c11"
+    },
+    "CV2-D-L-MEDICO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "144b3245cd19a6669f02c25d579f76efc07589a85670c1fc46bd401f32a7a5b7",
+      "referencia_sha256": "74faebb84b4edc8d0b24a4c4a4e85c4396a19ee6fe6203edabdf1b8743caf623"
+    },
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "ba6390bcc9ead422a5b9760693c4a835e445694c78ede434504e02973ffab10b",
+      "referencia_sha256": "77f9bac9a4aebd998356a44a9a9b1d584d07a0c960f1b6cde889e66b3df1c40a"
+    },
+    "CV2-D-L-ORGANISMO_PREVISIONAL-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "14f3077fc974c80d89e98e544f1ff49b6facb54e72b077dbb6a653dcb4faef7b",
+      "referencia_sha256": "6e319c25fea1b84616e52f92be446acab2b35fa909dea11dc8fde12ab73e7aa5"
+    },
+    "CV2-D-L-ORGANISMO_PREVISIONAL-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "20f242ca8fc7585f1004c5b4ad90c88a9ec3a5b707e2d3d3ab4242f921aa9d48",
+      "referencia_sha256": "5f8cbd174b0fabae7f23a702187cdfc99b3ab85852a3020c2517e883446f5cde"
+    },
+    "CV2-D-L-PREMIO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "bbcd27e268ae2d67f2ea76fcb4624684d764d8a513a7509cefd8d9171390c874",
+      "referencia_sha256": "fcacc334de646839c0bf2a5610d0518fac9670d563abedf7159c2a2f157ad09e"
+    },
+    "CV2-D-L-PREMIO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "25205aaa8ad29b507506e33fafb18980ecaad79f5b64c63f85934cf3d70cbe04",
+      "referencia_sha256": "32d27e12e35c35b1e52cbdad69921c0b71de7c30272729c937b67d1ad341a242"
+    },
+    "CV2-D-L-PREMIO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "3b2542cdfe10691c7544580252512fc87f416c79f4a0644b198cd58c1efcc620",
+      "referencia_sha256": "1de8c0b14c8303c01b9128e2edfebbd24b2b20ac6c259399ad66b4e285227729"
+    },
+    "CV2-D-L-SOPORTE-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "e2a262eb132ba4fc25583f1d8bde5b6c47751f012e1673738aa1000d3d028106",
+      "referencia_sha256": "61677c1160f589d45a6e6adcc0a5f6c25a400383852ae5318a32a2b10a56249c"
+    },
+    "CV2-D-L-SOPORTE-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "71a1cebc18f6401b28c71a78e21b3a662b4a5da5aefa2f104cbf012c6e6fb3bd",
+      "referencia_sha256": "2d885ca2672cd283e80c73fc1299020d68dd11f68b1518d73fb7d90e1bdd476e"
+    },
+    "CV2-D-L-SOPORTE-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "9b91c4b372d27bbe57ea8f5f6a6f761dad82c105a6adfa8fb9bb111fcccd489d",
+      "referencia_sha256": "85159d13f863c4224b41945a8d9df02ee18723a7c82af842a6a6e8a57028070a"
+    },
+    "CV2-D-L-SOPORTE-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "72ee0911073e1a32aa89c4577caa6dfc388a0afd27f8c9c90b15d5a7ac59b5c0",
+      "referencia_sha256": "00fd8b1555a6e1a2c7fdfc81de12c77c1a22af3f13deaffa548c004c648d27c4"
+    },
+    "CV2-D-L-SOPORTE-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "4b0b4fa268bd5c21d97a4edaea0f79a08195c95c901f86c7a8079e37cd61ce75",
+      "referencia_sha256": "15deb54e1422d64ad153dadd6e286bacfc0f70f679f39e43e4205331b6b5fc61"
+    },
+    "CV2-D-L-TRABAJO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "fd87646b62bcc89cadc5afe39d74f0f3eb4afee421ee6cd326beb5c5b87d3311",
+      "referencia_sha256": "b0f4cce85e14636704cce9de5f287868eb756b21c474553ba3400a5c442c98b8"
+    },
+    "CV2-D-L-TRABAJO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "4a1926d2015dc537468d3f8a15656864bfd8cf70fb3881264377addbeae44a4a",
+      "referencia_sha256": "32749842a48df7c04dd6b46dc061553580b6e017b7d846256cc099376d972cc8"
+    },
+    "CV2-D-L-TRABAJO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "2075eb3051c3f923d2a2da9798e9c5fe33139de87f4d505cbe7455de7a7e4511",
+      "referencia_sha256": "bdd3333cf6c3252e18589f1a3fb9789e8836f9895515a0e366d792a33a80e284"
+    },
+    "CV2-D-L-TRABAJO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "593c4a420c7f3a1fcf2c46e9e48de7a63e4f678d1b22a70eea104f9dedf2db90",
+      "referencia_sha256": "58f85d74080d1f64ca0b9a43b2298878a042699900beb9c700d407f103519dbd"
+    },
+    "CV2-D-L-TRABAJO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "d0012c9a2da781c596732750a7dc7752cfffef0e52990946eee880825af531cd",
+      "referencia_sha256": "274289798d8f7838cdbe52205edc91cc1cbce58879ac0df0c6945f7ff58e711d"
+    },
+    "CV2-D-L-WHATSAPP-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "dc5265912a0d09802770889d0d0c6ce4b923d4cf1604320215dc517058d0359c",
+      "referencia_sha256": "cc9d981da546407c068e21a45cfe957f0cb2792a1e8ff623de9fbf397ac538df"
+    },
+    "CV2-D-L-WHATSAPP-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "91392fc1478d397f9995d81d293c7761df9565656c60bc00f53ecd8ff653d123",
+      "referencia_sha256": "785d563cb488fdd0d5e375e9267cbd3585dca7f864390cd7bb7e8f536dd182dd"
+    },
+    "CV2-D-L-WHATSAPP-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "2b75f2e0b2f28bc1d459babac962c18c76a813ca887bea3aa3afbfbad9895dc8",
+      "referencia_sha256": "e9df1307c704f8e338692f024ec69f88de5c8a4ad2904cffc852138fe460b9a5"
+    },
+    "CV2-D-L-WHATSAPP-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "011b0a62eeb83f326ea6d0c60f34069775d376dfb05f6988a56c6656bac63982",
+      "referencia_sha256": "bed8f29bd1bb2d2b96eb5e818e9f75dcd0dc017ad582a72c49101367b82210ca"
+    },
+    "CV2-D-L-WHATSAPP-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "b24154bb41621ef21e74d55b624c1e80796c2cdcddabb6787931df182b100861",
+      "referencia_sha256": "0197f76ccc67faa49b2cff053a49c761e869dc5a6b1a199dc1ffb75d36d87c7f"
+    },
+    "CV2-D-V-BANCO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "0affbb8ce80874baa7a5d2b24537d33ca3f38a43d4a35c717d1587987a4a937d",
+      "referencia_sha256": "5a4a52d22240341b736277de5ac313945788e07791ea822aa48fedbbc33db64e"
+    },
+    "CV2-D-V-BANCO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "2fbbd8fc71df134e1f25b542cf2d9ed8e4e87341cf2c2b3b7225765b1f180deb",
+      "referencia_sha256": "4b65fb9dd3e9c2c277a02f85a43fc9b03aaaca33ee5350f98e9bbafccdd75500"
+    },
+    "CV2-D-V-BANCO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "efc9897cb609ce1e801b5278dfb73601a0f813d0fe3156072c778458716129f3",
+      "referencia_sha256": "9776b7e981911c3cbdfd2e44ebcd8fd4ba43f41d3b83282e453ee7cc76f0842f"
+    },
+    "CV2-D-V-BANCO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "c3774106d725071e944d1b5bc6c1806c1dc75b8714924d60777461ec044ed598",
+      "referencia_sha256": "ed60ed39ebbea6daad520d51cfc3040d53585aca30e7e9e2ff013918ecf28c24"
+    },
+    "CV2-D-V-BANCO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "ae1b7410257af5076ce301e12ae435116afaff311cdac3da36dd53263230b49f",
+      "referencia_sha256": "e57526891d66802bfef35c4cf09598398ff1664eee1b9052b93a348e21f9c580"
+    },
+    "CV2-D-V-BANCO-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "855f99667c6c8141070194733d12a8e2f945122129cbbf6c4f52a2d8e0fc6e25",
+      "referencia_sha256": "120cdf995be479258f0dd83cec9dfdfdabc9aa703cb5826c948d2b6cd0982248"
+    },
+    "CV2-D-V-BANCO-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "6379ae36eb63f6dc28246fd4a04aae99b01e37f94a5c82469cfd55c96a71ceda",
+      "referencia_sha256": "7c2e2d399b4e21c04d62cd8095b96aef5c68b0a02f1447f6dbb481ab5632d779"
+    },
+    "CV2-D-V-BANCO-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "4fb551011f413b0601d6da1a83e616daa30ed5e45b842a892699423e49f2e9d5",
+      "referencia_sha256": "2359949a267c9fdbbae5bbee51a12ae3c1404e9beb0f50d6f20cca379b7440a7"
+    },
+    "CV2-D-V-BANCO-009": {
+      "particion": "desarrollo",
+      "texto_sha256": "3a0af933bc2fe01c06938ab4fd86df72897e453d4ada430cf1e8ad4ca6cfc26e",
+      "referencia_sha256": "6fb0bb2f9fdca3ae2f1a5ed4ea72837e09eec6a162faf5df6b8aea933062d0e5"
+    },
+    "CV2-D-V-BANCO-010": {
+      "particion": "desarrollo",
+      "texto_sha256": "5af8b1d901066fbc8e02c918aeb66ee2eb4e3920e2cebf2fa812c42faa57c6d2",
+      "referencia_sha256": "78c710d70aafca8ac80f908674c88fec35c3d0ec548a0d7c8d23dd5db8671110"
+    },
+    "CV2-D-V-BANCO-011": {
+      "particion": "desarrollo",
+      "texto_sha256": "8afee9a423bf7498585c42aded24e8405b50e53d1416f1c82d93123e392cd194",
+      "referencia_sha256": "bba24c0b154e51ae24749256f622ffbe87345ea7a25daafba86e0bd535bc4c26"
+    },
+    "CV2-D-V-BANCO-012": {
+      "particion": "desarrollo",
+      "texto_sha256": "4bcc6b4b43150411a37c86a13de6462165a53230c0c6e20e71d774b38b4b3671",
+      "referencia_sha256": "d909cbfe314fd4fb915e76472c759d651c39d05483fa07f86d9a368c024796e9"
+    },
+    "CV2-D-V-FAMILIAR-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "5c8809013a80e6a0f3b00947df794ec63be982f284157fac74dfe1bea8068a97",
+      "referencia_sha256": "7aa0b1c49d542bf44584c6dd1dc73845defd7079caa2b421be132b2d4bc07a3d"
+    },
+    "CV2-D-V-FAMILIAR-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "5d359196f65fee457c7affce6492b10f2c3e6681561cc00654265be060fb0f0e",
+      "referencia_sha256": "12d1c03dbba99597c61bcc678d022c4f713e4d5c48470dbfe377924adf71fd85"
+    },
+    "CV2-D-V-FAMILIAR-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "b9019aa90aea099a416ad6d8c633a2b81321226e34fa797f0f1015598d675f2b",
+      "referencia_sha256": "ff53e813f6c401c5cb2c229522fff2d38f914ebf703d526d6b1557eb3e0264ca"
+    },
+    "CV2-D-V-FAMILIAR-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "db1fbddeb18679ba38641214157dc9e5aac50678d6dbac19eb3561af98dd171c",
+      "referencia_sha256": "efac295d9d17e50d2e74a2a2068777d5d306501d2e393d5e25830b4825dc661d"
+    },
+    "CV2-D-V-FAMILIAR-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "9c0a1b2e5fa4b0acd160881142a6cf2c87f8421cc6edac3e74b89a12c8ccb1f7",
+      "referencia_sha256": "546e37f1833bead82cb2025dba469a72d22e4429f347f010e27fe1f8de5e19ce"
+    },
+    "CV2-D-V-FAMILIAR-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "557bfd0d97d997d81921778f67b0a9175af63b5f40f046167eb00937e5347ce9",
+      "referencia_sha256": "679c3652b44a2b4c6212fa02dcf257b2ede1b934a452259d004d3ea2a8949f50"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "ad3665ceca42542b8cec08a2ca986ab6a2bd5ef7823f4adae4ddc4ecf26a99a3",
+      "referencia_sha256": "91791294f109b4cca93e7bdd63d185289734bb730b6deef9d4ff124fe53f63b2"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "1d5e8849c7256fbd9886b9cc8a0e30817cf5350d422dde8b8ef3feab6a08d612",
+      "referencia_sha256": "746b9c12cae1d32b1254550302a3447fe50ad351c6ad63acf22d6754de6d9043"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "df7cdeed732f44e863958944bcade132f6cfe34dd3bed8bd0f2ea62b859fd6eb",
+      "referencia_sha256": "ace93799e0ac5acf173b3b56581313a348cc44450046eb68dbb4476900e5966a"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "cba70ab4c661f9eb48d2bb5f50d8834e9d92a7fe4c73a45e5452b0c85bd8ff6a",
+      "referencia_sha256": "2071f0cbddb9da27d5933660f5e6dfd389d2f234d0b9cc2c934c6fc278ac28b1"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "da83d70459c9617375a92d42868a56a7565c405d5df10e91e8f3a446e99c1ef3",
+      "referencia_sha256": "4a72add34350ae30165660df3eb1146ef8ab03a8cf8823a20d375caecfd09e1e"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "33fc58457273932a1f2ed2fe9952b79d4654cc62097357fe416a7824d192a9c2",
+      "referencia_sha256": "b02b90a2417a01a147c408de858da63b5a72fb1d6ba269362783ffb84aaa833d"
+    },
+    "CV2-D-V-PREMIO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "8185814f3330f5a9098ab40864e4f3e7ec0c4f23c0a1a365e1cf7aea4d904e65",
+      "referencia_sha256": "b2821aca19fe48013bc2d134a34d3aeb1233af8274887c74448606c367f652ff"
+    },
+    "CV2-D-V-PREMIO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "7a5f5f017a3fff25edc3457504403a0f39fa8bfec7f846d475ca260426099ac4",
+      "referencia_sha256": "87e8fe8b593c8ee94ec571bf5078c45a80cdc5213fbe17d68e105db596891e4b"
+    },
+    "CV2-D-V-PREMIO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "7976e160e550354670cf3cd29db1509e53123f57bc9b52fae6522b54c9db6266",
+      "referencia_sha256": "778b7cf74813bebdaa9ab7204e2227b569f04e3605c132efa933dba041abd86b"
+    },
+    "CV2-D-V-PREMIO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "446604c98c26138d5503d137e8558ab4211eb0aeb33c01c5e9ddf2aa03af2e19",
+      "referencia_sha256": "534c6ac5a4094749def6baaaf19ad78b586eccf70fe8acf58b4a245b6546ca76"
+    },
+    "CV2-D-V-PREMIO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "bd2a9f81369af48ce585b8030bd57f45ff7e3ea4eec2471a0494f81e9a04d2b7",
+      "referencia_sha256": "576f912b3cf94926e64380a24b077f78f3a7d9cd6af3ab33948efad3ecd7d575"
+    },
+    "CV2-D-V-PREMIO-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "4fdb909d566f2c065364092f8ae5458c5eb3315c71baaf328e4f70119a59c617",
+      "referencia_sha256": "4ca49678f6fe01d5416a3670e59c2a3f473971bad37786a44593a56d7714e310"
+    },
+    "CV2-D-V-SOPORTE-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "e0ae0ed4b314aa9050be7077750e2c1fa4b2eb91dd2eba106b016d73307a03b1",
+      "referencia_sha256": "d1de856d00e521ff1cb7dd9bd2f93845cc5f36235b99fc97cc693b325bbc6e10"
+    },
+    "CV2-D-V-SOPORTE-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "aff317d0f7c4c8e31e2f0fa98eacbe9383f4daf67dddefe896a5c648ecdebd6f",
+      "referencia_sha256": "0c676e7dabf700e8d9fda06d4e93ca6a045bd5b51d700a4324f81b5cc23369b4"
+    },
+    "CV2-D-V-SOPORTE-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "4a1b8606dc198e0c56d9d6515df38371717a8dde6f0aa4f3c8d0c64f795c0ce8",
+      "referencia_sha256": "45b90e60a1268e3895ab7c206638dfd135a9098f9a5b69804965978dbd6755c3"
+    },
+    "CV2-D-V-SOPORTE-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "3aabeae071b8aae98f99edbfdf5226cb7f94b692d91c3618a2dde91bbc5a0a1a",
+      "referencia_sha256": "ab42a0f79a71031f52d1fff7085af6ce9070ed7f63da0666499d8deef59ddbb3"
+    },
+    "CV2-D-V-SOPORTE-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "add5daa816009606e404efeb8971e9c48dca553bb62abb272fafd028eeef33f5",
+      "referencia_sha256": "8248765c49144fcaa9966cadf0d42256788577ff596b3ec5dd438eb1b4a55fed"
+    },
+    "CV2-D-V-SOPORTE-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "0b466b6d69a203f6d57a54c1e80698a825fe8780542d195c77bc3300441e3dd6",
+      "referencia_sha256": "a54e47b9932b1fa37da4d2b17791e04fe8a5c9579e53b373eccfabb49a144789"
+    },
+    "CV2-D-V-SOPORTE-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "5b1f96bfe776235b6c8edbe21859f8a6fc093a38cd5738cfdfd764cfed513fd9",
+      "referencia_sha256": "745d75c0fef18be7c4690b35444c0db8754389e95845fb37228f567befeb00d6"
+    },
+    "CV2-D-V-SOPORTE-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "1a405249187004b47205167be041396db0bd4e665350c4d4407895e307d1e96a",
+      "referencia_sha256": "2193aeac61b4ff814702572f64587bd4476256942dbfcdb8c0c293c5253f8a04"
+    },
+    "CV2-D-V-WHATSAPP-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "c252a11566d56851ff7c741a8c30f5166c1bd85f44b7a5ce154f6b610758543f",
+      "referencia_sha256": "0e360849dee6b754b760eb84029c987d90cd804601360f8474078de462d599eb"
+    },
+    "CV2-D-V-WHATSAPP-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "33bd0bf187735d565128d591511043807c3f1fa19238afe1a15630025e8b025e",
+      "referencia_sha256": "1ff1ee7893dc5234f1ffeb76311bc6abe7fadfc2d64d1e170356718763a2f7de"
+    },
+    "CV2-D-V-WHATSAPP-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "c0778cbfcb9b6cdb72e1bbfb7eabe3d26ce67756df24c77d12b020f5485f9d72",
+      "referencia_sha256": "7c6d869ba26d79ca6f0f98f417c5b6b5380e4d86931223ed5bfbd0ee1d6e8f7e"
+    },
+    "CV2-D-V-WHATSAPP-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "65ab833af1c63bef3da6dc242870d65aa33ba25604ebbc923bdc1d5b51680ae6",
+      "referencia_sha256": "b1c752f4c92c59c1d74fac39b3139dbed7bb0d20d97df9adc9712753461c4607"
+    },
+    "CV2-D-V-WHATSAPP-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "7cdc2ad41e176f350abe06545dc472cc987e31d3cc6b27896796839b6e3b3213",
+      "referencia_sha256": "9b758892c92534b85548e53592278710229dfdd324b979968e196608b4fab77a"
+    },
+    "CV2-D-V-WHATSAPP-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "d108b5f5b91893f6ebd6e3dc2eee30474215d28e4443095b2c25547ab5abdfb2",
+      "referencia_sha256": "47394c145233912ca5596a0690e250e00c0687d9b40c3ac2898f6a26407a07e8"
+    },
+    "CV2-D-V-WHATSAPP-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "f2a5f97f03f9e8fd1e6db06eac1174be1904235cc6c608c6eb933ebaba6bd857",
+      "referencia_sha256": "656a9e5eee0294beae685b9cef30ba72edf4d1a0b3fd4545acba0c8c7071b458"
+    },
+    "CV2-D-V-WHATSAPP-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "1731498528fd57150001bc7930a080e7a05388b954efd78c6167f9ae95a9b190",
+      "referencia_sha256": "5b7f799a73ebafe92647576bed3cfb68ab4b5ff9d9ef443aaf6686eb1049e7ec"
+    },
+    "CV2-T-L-BANCO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "c032846875d447875c226023ad06ed7f655f05554ce0235d5be47261cf059180",
+      "referencia_sha256": "4e6bc36f669dcfac1b071ac8f5133c1a52efb091dd1123c158ad6b513d7ab2c8"
+    },
+    "CV2-T-L-BANCO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "bec422644875691d3b2fc5a75e02e6dfef8fa3037df1b407bf2d281a413a4d6c",
+      "referencia_sha256": "f62b96267b29e572eed76c4dd8e856a88ee8c7a087a2dd840490128bb859c1b1"
+    },
+    "CV2-T-L-BANCO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "c4bc20b17b8ca23573e12d89b2f8a2ce41785516ec772ddc4268cd0c1efde647",
+      "referencia_sha256": "20297d8bb6b41738d21478a9ac3fda1a2d8e714f910904d8d3e50ab827473584"
+    },
+    "CV2-T-L-BANCO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "b8763b2eef68a7fbb3d4f71441b3dd4e4a422f15aeb6cbd9455b4517db17b3d4",
+      "referencia_sha256": "384bea56f737690f09cf17447b1a8bdab34bd5d12b1e846a107e84a5b07649b0"
+    },
+    "CV2-T-L-BANCO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "797d7e6edcb49bee6061cdfc2919ee475e4fb2c0235de71a485ff7847fcfa7a7",
+      "referencia_sha256": "d4a47fd24727ea2376b79973cc47a3b5fce097500050849508d0dd543dbdb07f"
+    },
+    "CV2-T-L-BANCO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "fe1ab00fa66167433b5ef43bfd4ad537cfb82ea7ef74d2fb63091a042f9cce95",
+      "referencia_sha256": "e4ddf40a67e1d43fd00f5a44744590bcd2296999d637c9292a0ab3beacad0072"
+    },
+    "CV2-T-L-BANCO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "f85452b40cab97685ca9586840f1b45f15009eaf56f2a36a7f06cd2af1f75e95",
+      "referencia_sha256": "dcd4d107801e58857909bd61a3192a7257ed9cf541a4d5766ee54478930203a1"
+    },
+    "CV2-T-L-BANCO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "050047949cf9edb761dd0e0f50896f4422e611884299bc31dd63beeba538d3a4",
+      "referencia_sha256": "6adfb60a0a21e1ebc71ffa590395ed049b9af24a5e11510fa9d3f4c3f2609b29"
+    },
+    "CV2-T-L-BANCO-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "7969138a061e0e5e4b4b52232cdf2b7c047a05a856131ffd5b88cac657869d87",
+      "referencia_sha256": "13917b1905b8d287493ba1a7608a6aec4b72f1101662d2e9a6c3eda3154ff6a8"
+    },
+    "CV2-T-L-BANCO-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "152d1a4f8cb6fd24c95a6b8b95ace38ec38f3b5baca4cda3821d2b1d2ace812a",
+      "referencia_sha256": "40269107ea3ac16a02abbaff472ed69189a3be8b1f73834169a99872390f98b4"
+    },
+    "CV2-T-L-BANCO-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "1179e512513da86e5dc05bf31634df30c674302d978af58c6844395944e2856b",
+      "referencia_sha256": "33618d40685885f4026244df6604fdeb571fcfe08af94cf5f02b255ce2c58a61"
+    },
+    "CV2-T-L-BANCO-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "0c4dad4cf2349569829ff740991f159941d4f68f316f91efbb42194e3d105707",
+      "referencia_sha256": "3dbb80b78674512800d94f5f35e2db679d31cc8b3870fc9716586d7816127ce2"
+    },
+    "CV2-T-L-BANCO-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "9f376597c19514541526aa444fe4545d6614094654b047809ae0e00a5488b1d9",
+      "referencia_sha256": "4de7c6884d4e442c24540ab6fad3bba85b942568fa63a3764aea2271409f3b87"
+    },
+    "CV2-T-L-BANCO-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "46eebfd2b7a2be27caacbffbaa7d6dc17844877c08329c618321f8fb77bdf157",
+      "referencia_sha256": "083fd11e88541e9ff59b521be3a98f5920f7591531d223d3b2f2b2f81b3a9b5e"
+    },
+    "CV2-T-L-BANCO-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "520fb79e0aab32f2bbe7f18dab956e2385ddba9bb0c384c78e5240a91620924e",
+      "referencia_sha256": "6b58e84598f9e92b8d4471c3244a94328f23c6d43128d100569e0b0f3fc4b960"
+    },
+    "CV2-T-L-BANCO-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "72ca4f6aed21d5f4f99bfe0138a238f57ef885d7a732acad752e0fdfe3b19f33",
+      "referencia_sha256": "77cc8fe33e39bde1e43bfe36e63fb30844307cb098f672bbac02fb60b106bcd5"
+    },
+    "CV2-T-L-BANCO-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "200a96602fd3e06403b43d151ac6170071383e2e236a4a72bfedad4b5e3de162",
+      "referencia_sha256": "50e61a85e6245a9e008f5d7a6d3ed3c40bfd525c7dfb0c13e83939067f12815c"
+    },
+    "CV2-T-L-BANCO-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "f18a93f92ba9e80f2214d47ddc665984136619ddceebd0456829e0a03ba6f6a5",
+      "referencia_sha256": "3bd6ce219af5a35b035cde4f0734351163366493590699338f1f022194664125"
+    },
+    "CV2-T-L-BANCO-019": {
+      "particion": "test_reservado",
+      "texto_sha256": "74642c2ca3b5893bdaa359316f1cc1e34debd6096096db396636bc0aa18489a2",
+      "referencia_sha256": "402c9899dd4fe6dd27a185a3fbc2a83cb31441bad56855ab8f0d047990f90e49"
+    },
+    "CV2-T-L-BANCO-020": {
+      "particion": "test_reservado",
+      "texto_sha256": "4a5bd7799834b37c24888e6c9839f892ee9cab709372296f6f03aa3fcd6b583d",
+      "referencia_sha256": "ae0d1b71db457bb82953c768af46829c7d2436fa3768a3f54ef4fadfa1b33259"
+    },
+    "CV2-T-L-DELIVERY-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "5b761fae2562b2f7dc06ebb71ede25f857214bb591c169aca58f7aa6ece33384",
+      "referencia_sha256": "1dc31385fa0793f544b0becb0090d9b5444b877afe41cb5ed75dded89ce7ece1"
+    },
+    "CV2-T-L-DELIVERY-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "2e2cef6a1b1d4c50ac95b06dbb6c8d4f04f25fedcf26698435f90fe61f7334c1",
+      "referencia_sha256": "4f897ba50d7939220baafd770f4731596a6d732978c2e56f6d877fc8f78b994e"
+    },
+    "CV2-T-L-DELIVERY-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "e4f838c26d25e437dd29b7e2ec6bf1aa484bf916527319ee311af4eec51d3d46",
+      "referencia_sha256": "fdfec07ca0040cc010734bb08cfd7714f5c0680c86966eff097528d6e2fe695d"
+    },
+    "CV2-T-L-DELIVERY-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "dd5bb19a4f5725473ca5a17aaa03a60c782bf219746073b8e00ebb54cf516ca0",
+      "referencia_sha256": "c38c8d27294f2384713e1709b5cedc0d17ba4045d2f69f67897106dad6384c6b"
+    },
+    "CV2-T-L-DELIVERY-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "162e9146863892d476635192785de3d76dcb4f5c9d585378e410819d2adece7e",
+      "referencia_sha256": "be271271efac601cd874f49684b8773a814aebc6d7f4e9c44a6cb081f1ab95d6"
+    },
+    "CV2-T-L-DELIVERY-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "c6e1c39364cc300bb45e74b2c2202773190c164b255a5aeea46c65cd400b3570",
+      "referencia_sha256": "5f74b2940001a66c69a2fdec96a6278a4f1b8d50053aecdc9e0bf5b9f1089997"
+    },
+    "CV2-T-L-DELIVERY-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "b92a2d7169ab0307dcb787b05591a02d64788899e90cad65268677111faf2ac6",
+      "referencia_sha256": "3845a69c596cc844256ad3ba59237a3ffd43320458476cf730da6ae9f817f92d"
+    },
+    "CV2-T-L-DELIVERY-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "5e4c65d071d8f800e48606ba8c90bfa59b3abb9801acd779890616f145e6e67d",
+      "referencia_sha256": "960c84ed4580a39f9e80e71595d0036106edfece5097486ed0b09c0fc2d30b6d"
+    },
+    "CV2-T-L-ESCUELA-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "ac2d120400c7326b0be0f6c6def41dd5e7130bc882b27d01c14cca564725ae9b",
+      "referencia_sha256": "ba77ed3459ceb0fea41d1918e39468de2c79aa26643b5fdb9bc7bd76531da7bd"
+    },
+    "CV2-T-L-ESCUELA-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "af0739899c99bd231242418d9e4268ecc162548af27b7354b1046eeb5e1da92f",
+      "referencia_sha256": "285310225ff127aa1b09acf7cc4c9c989c232cb97481c085c9ee9abd9663dcab"
+    },
+    "CV2-T-L-ESCUELA-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "e8c60b3b8ef83f45699373445b4ef698e759b8c651e3c8af179690288f3f0bc5",
+      "referencia_sha256": "e70c835e66b7dc31c4792dc37f4cb88891193c13d3dec944c0cf80911e176930"
+    },
+    "CV2-T-L-ESCUELA-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "6adc1eb63eba5cece7a8e813d6b3f60f701223ae9fcecfb86e2c3945b2790f77",
+      "referencia_sha256": "2247448f261f97d4bdc6b94ef6b06fa2123882754596dc40abff13ff0a7a8580"
+    },
+    "CV2-T-L-ESCUELA-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "a2884df88486f0069ad6edc9642c5da280c8f6aaf2856696eb5233fcf9faca33",
+      "referencia_sha256": "391b7a35e0e4c7e25eabd6d913f563c43acceb1a52f2051399fc6071f04143df"
+    },
+    "CV2-T-L-ESCUELA-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "85f762cdde88af9a2e72bbb441bfb1864e7e18bb46133015400c099d8fa117d1",
+      "referencia_sha256": "2b7ffaea8ad6f3ce9eefd508b46d94f3ffaaf0b3ebc50a6e6a1d7a0cdf03c465"
+    },
+    "CV2-T-L-ESCUELA-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "59ce56af7185a949104cb00a04991db4f1bf08c008db4a761627bf7bf2846a76",
+      "referencia_sha256": "dc3d549e51e7f9c3d89d252de4298410becdf9b32b27ddf7294f05226db457ce"
+    },
+    "CV2-T-L-ESCUELA-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "6db9fc22aa3d5dfd8cb17eb6069096f5c3677a0ac5a4b0c491dff7a2c362b051",
+      "referencia_sha256": "e55cbf79f0131022a0a3b72b90eda49ee9e622e5d5f346eb83455d80b54ca97c"
+    },
+    "CV2-T-L-FAMILIAR-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "df563a6280609548b1b095e5c53d70eb3492e49c91f3d9bac4ebf559e3ed6f2c",
+      "referencia_sha256": "2b6bb8a129bc84970d9e28418984570ad0adc235a08a9761feb41edffc00ce56"
+    },
+    "CV2-T-L-FAMILIAR-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "9fca4a18e4cf6f5ddcb85b45257c0846a4707afbad96291f04c15e4d1fa98ec8",
+      "referencia_sha256": "57040dfe800ac244dd5365289cdcdc0d060a15429fda883eeed10b4387bd1252"
+    },
+    "CV2-T-L-FAMILIAR-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "63d27b338f55b395ba9eda03ef28797655f6ebab4fe0ac287cc388b7d8c70266",
+      "referencia_sha256": "bdf495858323a2b27fca8409b7c16c2e6efd297c85c3405d472f5c41029ead4c"
+    },
+    "CV2-T-L-FAMILIAR-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "c812425eab2e39608faa5ff145f2c4961be6f6e18c8f5272ed20b8bbc5f500ca",
+      "referencia_sha256": "b71d670996fb2593ccd7b350e2811e5c58bb11a6d0394f9517c26f43d2229a2d"
+    },
+    "CV2-T-L-FAMILIAR-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "ab7b51f9a31350d15bad5057bde339cf52347ae4167cead6d8f4e9918597d646",
+      "referencia_sha256": "51e716d560b124a08e0adb72f93f37c60c1b3f95baaa0ef07a280bdfe177f916"
+    },
+    "CV2-T-L-FAMILIAR-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "eddbf880572e3ffaf6c0c6e5838fc0e5a4613cbcfa972e1f8424aee6cd6c5c1e",
+      "referencia_sha256": "f9362dd09867bffdc21a71496eec50f8ec14694eb952767a8bb00514be4d4135"
+    },
+    "CV2-T-L-FAMILIAR-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "dbbd4df218d01772925719b487f7179e50c9a528e18376b861cdbc6593a90724",
+      "referencia_sha256": "c23c221b01b93e07c35db5023e4d55ff9a65841c7b9efdf8d0ea99af4de5fefa"
+    },
+    "CV2-T-L-FAMILIAR-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "5dc42cf9f84cdcc1c869a8ecc2419e2ae23163ad73e3d75046fcb5ca1483dad2",
+      "referencia_sha256": "cab9f01b390146b517daa3fdf99d3acd47e8582f2271c4789d41eec09693b233"
+    },
+    "CV2-T-L-FAMILIAR-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "b0a81302fa60dbca3b95b66fd528fcfc8f791fe20dbd70603fa25b31e99ee3a3",
+      "referencia_sha256": "682a704eae3dcd7e1b9d1a52d5c294c456aaa0c7174f6c4a94f6472d4258f505"
+    },
+    "CV2-T-L-FAMILIAR-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "3c17ef6b2b087f52600726caaf8576bc5b249ee96665f29368774f5523b6f963",
+      "referencia_sha256": "7ff10d93bce9ceab1f9061420c3fe2288f384a0cadbea8c42465be5530ad94ab"
+    },
+    "CV2-T-L-FAMILIAR-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "708517b1a55baefc8b11dcd2001578478e17d862ac87a9bfc6d62b7d20fad419",
+      "referencia_sha256": "1965dfe2303bf6cf6bcc3193ef20f8b1d0a8e5150bebd8ab55f0a2437a0e5c5b"
+    },
+    "CV2-T-L-FAMILIAR-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "64507088dc2ac572694208c6c06d1b60ee698f66a99fe9588958c3f55230ee9a",
+      "referencia_sha256": "d492985808f1871d5009d6b0b7dabe359d05b55159f5c5664d9071ac9443b18e"
+    },
+    "CV2-T-L-FAMILIAR-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "3340c5af8ad09ec8c55c910c8d3763ecbd1300682def363b2c395ad18882ddc9",
+      "referencia_sha256": "54940b2b7915d31d3c130760196c0e13e0f7e3c6870d97f7bca74d6c366620c4"
+    },
+    "CV2-T-L-FAMILIAR-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "7c9382f52a6f0a1c606992ec832c8904092106ac5bc34e92bb8ee2a6f98ddfe8",
+      "referencia_sha256": "81a5a5dd93a96529d7cb33efa9372a9a8c108aabe536c587a153e832aa6a283f"
+    },
+    "CV2-T-L-FAMILIAR-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "20a45534b8f87f75971e1c6a14a020ac3613cf93e94ec3e602b9cbe3ed64a70b",
+      "referencia_sha256": "1f66ee469d0a38b344035a12ba9e2c765002ac54eb1d96aba5011fa328268cc1"
+    },
+    "CV2-T-L-FAMILIAR-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "969e7180d3757f1ad1c5775bba9a7532d84279f9fcadd47784679d95e688ac5c",
+      "referencia_sha256": "3e01106510e299a2a1ef4b70a2ebce8bd8fc813987868805de87745d89ad828e"
+    },
+    "CV2-T-L-FAMILIAR-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "df06b396b8577340e114474534cd54c984f407fc2a35a3d2a93b9c56c0afa1e8",
+      "referencia_sha256": "982cf299c443e9ae4c256f589b37d48635ab7557809d3b8ff0545c4d5fd6165e"
+    },
+    "CV2-T-L-FAMILIAR-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "abf383fc0fd668e971dab8a9b290187664428af3b91c5c363dd860ea250451cb",
+      "referencia_sha256": "cc6fdd51e92c9df596dcd7c6fed138cbddd2a291354e29fccddde628c637bd11"
+    },
+    "CV2-T-L-MEDICO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "7f5a5114d4b8e3f4e682887105b79376e9f29fc2f0b1ec6de04d9efafb6ff552",
+      "referencia_sha256": "6d9d7fc12bb3cceb5cf3a0a5c8343373ef200d6f0dfd4804c82904110dc6b67d"
+    },
+    "CV2-T-L-MEDICO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "4de74fc16bb94caa3731b114fc53e79de15187330554f63e9c59fa1c38e40a3f",
+      "referencia_sha256": "440087dc933700c25b9ac40fa55ba5c6bc68e43e7b82fb9e49250aa5a269b36b"
+    },
+    "CV2-T-L-MEDICO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "c92d11f4a2c9e383cdb07689522331866e95d3fa94e6eca25884c75d2d417530",
+      "referencia_sha256": "63e72f1ddd6bdabe8497af098c867f0024e999ea46bcde89a056008b39bf79d1"
+    },
+    "CV2-T-L-MEDICO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "51afe9622105fd985e8907a90a4aad7990cb2b30042ab44584f6a46ec0e48372",
+      "referencia_sha256": "91887a5a7a9d5cfe611f668f1dc2375432c6d2e6d96793d655ba7e01cf46fb6b"
+    },
+    "CV2-T-L-MEDICO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "89858d656b29df9ee234f05aa94679b870d864b7d8b38bd09b35c0ef798a10d1",
+      "referencia_sha256": "22649d4eb59e33fb610dbbacbed7cf05131bece840ef49a7cd8ff0614dcd453f"
+    },
+    "CV2-T-L-MEDICO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "93de24fb8f39960827e55dd5daf815852a3e2f26287300df4db9c56d9bf7b3e4",
+      "referencia_sha256": "4ec219c874cf89aa5d1db289eb4139e4c8902dfcdaeb729906fa96cff64baab5"
+    },
+    "CV2-T-L-MEDICO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "bf1948541052752013a432d110d8ef47209da3d36fd15fe1a5c9d0ba4e9044fe",
+      "referencia_sha256": "dab5ff110d2f233be4057257cffd6abd653cf1987a4f9e4de59234e321becbe1"
+    },
+    "CV2-T-L-MEDICO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "048d213e6ff7400ca404b749b69b4059ece8859aeeaca2e4c2d4affa10cd7181",
+      "referencia_sha256": "3b0de888d2345157401a5ea83466cfe8aea1c5740b803994d3357a6b7232ea94"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "2058bfaac5998d88a13a6730355164b34943dc51c258c41084aa440c44308bc4",
+      "referencia_sha256": "bbd4a304b38b907b8319fbf41c4a6eb3b61a25731f1346a481d9472d693b8993"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "d0ff4934187899638049cd78ddf3b0e8af05ff008d466f8df68621f2f6ac1415",
+      "referencia_sha256": "cda9c1e5e9b4e7821918846b198f0397088b9e04b644e761f621e8b234da5559"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "61ce0a0f10c4443bf676c595e01dfbaeb050be0282cf97117380e0369d019bfc",
+      "referencia_sha256": "6192383e1b9e3883c6b7a2d422e0a3ab50f0efcf56fca4c3dbcf3a5e4cdf6aad"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "b5c33177fda7467290236f804afc40fb5722a2e1f208603dfcbb2be82bf9b903",
+      "referencia_sha256": "276aaf7e4c6319bf79796660b6efcc47573802596abb4c36890939f676511459"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "801917007afda531d49bd7ae7daacd3fade2ee055620612ad80b582482b6c0e2",
+      "referencia_sha256": "98329d8f5131d833061bb07cde8340542e878813b3dd41b4b31fcfa0f0e2be2e"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "7e7893bd078ed3af6a10f0596183f057f74d225168b9ff1a8b580932730ebee7",
+      "referencia_sha256": "3f57e206009ea303b5f2b50660b0cf61b5c499a31cf89247cc5e7f2fcb8eda38"
+    },
+    "CV2-T-L-PREMIO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "62bb35a6ad327c3b9c9cfc23122035c4d40d5ad35d061e5b8cc88722d3da00cb",
+      "referencia_sha256": "ba38ef546d60fa71a9494a402992145642c7b45cbdcc5e81986008a6671e0f85"
+    },
+    "CV2-T-L-PREMIO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "c5a1e2a7a58a709f71975f855e594bb2edb57027221b4c7bdc349a03e2a2ccd1",
+      "referencia_sha256": "087a3d96a6e34adfe6f918aea58f22b255648d7d6cedc7130bc259541f4ef10f"
+    },
+    "CV2-T-L-PREMIO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "3bba9fbdbeb02864baa0763aab9fde238e5f90857fab6fba0ba605ac7aecab11",
+      "referencia_sha256": "561a231fbf32d8431133a12ab7d64aa9b3a8819dd4c478686d5bda37d18e1979"
+    },
+    "CV2-T-L-PREMIO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "3e230b029ccf4c00c7d82a6485f44f00777d7222b282f69869ec81842a75a05f",
+      "referencia_sha256": "3fb2d34f516403df42466b70301ddf7ce8f6087cd88c9678c1cf4ad987e89926"
+    },
+    "CV2-T-L-PREMIO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "70abab8fc8b3028ebec0e095534768ce37d51886be005b82fbc25010ecc6ef2f",
+      "referencia_sha256": "138bf1b2e9437cb92aabbc75e1f7c87ca58e1f79ac2da177560b124b0040489d"
+    },
+    "CV2-T-L-PREMIO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "8c945df32cbc4284a5e50c0a41a198ff15aae0a4cde0618cf8ea7cc518d8d7cd",
+      "referencia_sha256": "6df0e478e7f654e004a94210abdec5d70281c158784ead5f6d1c787b4cb6cef1"
+    },
+    "CV2-T-L-SOPORTE-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "98a13c5b4ed0a55ba7094504e2f7c94c9f18c766b1df1f907371b4a2b8113b95",
+      "referencia_sha256": "b5de3893bd825dfa9113fdf70a2efb4f9f642930bdf7582d3b897c016011fb93"
+    },
+    "CV2-T-L-SOPORTE-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "97bee58f12e68be082cc077c456922b008f5b0dd45562ecd553e061e23c6666b",
+      "referencia_sha256": "29b1f54a9f598abffbf3d861b8c3d7bd3dbb487940ade467ebb924dd134af478"
+    },
+    "CV2-T-L-SOPORTE-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "70c6ce65a4b448d2b60149f542a2f83df1b832baf8adf897b233f242aa744cc9",
+      "referencia_sha256": "c08782340162e7fbf279193ef5c6a1d3eaec17ad556d69389e80405069fd334e"
+    },
+    "CV2-T-L-SOPORTE-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "90058754d0080d26983978d195bab1a9900288dc084b5cde2a5a762ce64391be",
+      "referencia_sha256": "8b8211cab75648d5e4591feb438f49f077a83e1072e49f4a8e5b796b5e0c1f85"
+    },
+    "CV2-T-L-SOPORTE-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "947e6872b06c0014f290161ec5f4fa09b398f4bfa2a66543e02c54eded5f441e",
+      "referencia_sha256": "c3d0e958570ad87ec0cac27119401074f557945ed9105581d1c932298e6cda87"
+    },
+    "CV2-T-L-SOPORTE-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "be163fb4e7bbaf8efac569b4584adb3bd24066605029e84103cd7b2e09c10a49",
+      "referencia_sha256": "5d2675040e0e98cf16cec873f3b09663b91e6d1fa232dde81ad267d629932293"
+    },
+    "CV2-T-L-SOPORTE-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "7f5c2e62217e4865667a6a2fad58dc0bf1491764a03a8cc9fd4e383aa81a9633",
+      "referencia_sha256": "4c02524223f93e8b7407e67baacd23f55608d98368ded873c227e6b9c744bd04"
+    },
+    "CV2-T-L-SOPORTE-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "613475ab9d1edfb29801caf9530e6f09d6efd3168eb0ca5ce0362af07664e548",
+      "referencia_sha256": "a84c73b7722f28a010f6215c2a5b94ee75f18981fd338fbe1ffa5cf6bbeeaad1"
+    },
+    "CV2-T-L-SOPORTE-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "82b0c2d8f89a66780ed8d29653830f6d072f906a62107d08a4441b14fcfbac4a",
+      "referencia_sha256": "b2a38183f5d2b3cf226be762df0a550f906a8d977759f723d0af621123310af0"
+    },
+    "CV2-T-L-SOPORTE-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "4daefdf406363a96c4ccffa76a697760ab38c6c389797d33beb55c166c9c57ec",
+      "referencia_sha256": "180b05f77898d8077aba430242e41ad70131c6942895efea332a93d16e257b39"
+    },
+    "CV2-T-L-TRABAJO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "df4487ca7052699c27af951ee71663ab513758d8476ac1cfab35098da43e1d2e",
+      "referencia_sha256": "63e42efbcbb3246d8ff84a0655d8e489e0b634a08e2d7aff6bf9d1fb020b0417"
+    },
+    "CV2-T-L-TRABAJO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "72bc528964fa4baa3e338258ae5610b8948591a874c50690e09acbdd5971a56d",
+      "referencia_sha256": "042ea0ea9483996b693272d76b7d360c3d948c935bd63d3b97ad4aa5e2cdf31b"
+    },
+    "CV2-T-L-TRABAJO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "b977c7a77815daef73223dd5a9141fe5c7aa71ac1ed9646c61f50055dbf1873f",
+      "referencia_sha256": "cf9a74812c14d017542ec8d20b51027f4d7e1be548a5b00828f3b3b38ebc9037"
+    },
+    "CV2-T-L-TRABAJO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "820f17bffa759b24596bf6880e62b2255ea6ed45780a06d81781b12c733fc447",
+      "referencia_sha256": "d3dafd3de730d01b9fe4b9babcf32ad7c4e3d54b5a4015cae4fcae2e5ddf286f"
+    },
+    "CV2-T-L-TRABAJO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "b8c295ef4b6a525d94dc53123b56d1c2ff804f04e2278d9479402a7c1b7ccd50",
+      "referencia_sha256": "b720692b753688bdd0a9729801f796eb3d30b88190b8662a4d3c6667bd34b4c9"
+    },
+    "CV2-T-L-TRABAJO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "2f173d4073147be6bc87f13e0ffc410af65b5b0f5fe27e6f2284297bbdd6437e",
+      "referencia_sha256": "00186e4f8108ef504864d18668272752579a323f765b9eac3fb2f961653cfaa1"
+    },
+    "CV2-T-L-TRABAJO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "51557f73563f01a686d04b8b02b8a16c1f93e27bb256ff1adaf6fbbf4976bc0c",
+      "referencia_sha256": "e276a054a6f1d9c359d274af14a11706d0c5a3b2601ae26ef34207700600206f"
+    },
+    "CV2-T-L-TRABAJO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "971b3722a2bc5431afea82a5f156ecc0b46200e10648a6c4c80ab2637b627d88",
+      "referencia_sha256": "f0371a6036ed2da2bd36a84f1e80d93a2dc2f0ebc8d61686894e372f1adfa1f9"
+    },
+    "CV2-T-L-WHATSAPP-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "dd30d010c75c4f428efe1d30ac2f973f3ffb13c28a78bb1c4466a5e65ab1a651",
+      "referencia_sha256": "dd66ce47a1b28e5a69cd50a68b7dc8c012bf59dbd12d69cec991e55a44b0828b"
+    },
+    "CV2-T-L-WHATSAPP-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "a5c67fcf684b2f4a433441bcda8619037a17d36fb9ea4636906ec7ad21d0d39f",
+      "referencia_sha256": "14020a75dfb399a8407912dcef6f2801b858c00484f1a08ec3e57afa74803b1f"
+    },
+    "CV2-T-L-WHATSAPP-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "d2b45ab33f95b1b75b6a9f2a8019f74bae05ad7b9e67c31e8347a7a63919120d",
+      "referencia_sha256": "59d28e4d5ebe77f1e82ec9465dfd38cd5bb2eb2f66afd967cd5c4551c06f8bfc"
+    },
+    "CV2-T-L-WHATSAPP-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "2e90cc8930028afb79efad22147e319f38c8185e6b647bd1fc5540a5fdf50d63",
+      "referencia_sha256": "a8b434edd264c7b7d20a35800ba7a01dad42aea3d539d7d8bda8446924e22686"
+    },
+    "CV2-T-L-WHATSAPP-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "4db7a9a8d3167a39cb1ae6d9c0f1653dc09b5bc02a21733140caab00daf40d0a",
+      "referencia_sha256": "79900154590da9c8940371cdb005563e7c769666e44a448d7a09d2f9ecbc8b4b"
+    },
+    "CV2-T-L-WHATSAPP-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "654e84ea326f37c75f0a7944b48c49ab11856a6c1de8c1ec0b13da81ebcc962a",
+      "referencia_sha256": "6df2097e0c48b52ad63c6791deca22e26cff1e46969d589d978bde306bef21ce"
+    },
+    "CV2-T-L-WHATSAPP-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "54e2b321d0f00df0c8673f4b222f1928b542be351b567c4e8a0929905cefaaee",
+      "referencia_sha256": "8c93f240d99b31516556c7b95d5a275e0ade7dd4fdcb0e8bd169e7dd373bf0f7"
+    },
+    "CV2-T-L-WHATSAPP-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "039d9bc337203bc98f0a4e9c7bbca8856b1ca3b791a2b6449db11f1c3d2cdc87",
+      "referencia_sha256": "afce113c8d34dda3443ac8f5e5093261298161b37dfeae298a4e00e5ef8af55a"
+    },
+    "CV2-T-V-BANCO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "4633773f23dbce348733406eeda0decb48e293cefc6e9c72151c067654238181",
+      "referencia_sha256": "07f9608e6048529e44bbbc5171a423c1379c06ae932e63dcc7d273d3e3c41b16"
+    },
+    "CV2-T-V-BANCO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "740dede6e4bb06ee8b3160327874d2fa3dae25d23749467b16da555c53bb8c72",
+      "referencia_sha256": "8b8ef43e8f02ea9e626706152289c1ab44cd7ed3c9731ba5ad113fabea294c5b"
+    },
+    "CV2-T-V-BANCO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "b177c11447fa082d51bd1f565b008e8cf467fa89101bc97d6fb7ec502b733ef2",
+      "referencia_sha256": "78ed04212f95604789b2edd13c83f178f888171eabed8cba3f12b92ee1d4eef5"
+    },
+    "CV2-T-V-BANCO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "95ebc7892ea4ec76826f3c6e5d3cc8ec38205ed3ca4797b102c10f6af291443f",
+      "referencia_sha256": "3702b8dcca03ff2b06830d3bd3d97bbeba19fd5dea886be5fa275471b4aad3e2"
+    },
+    "CV2-T-V-BANCO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "9784a47b3978cf5b317a04b88952f31563ced1cac844d5d6d6f8c9253bdac7d8",
+      "referencia_sha256": "d0af9e11150fee066db65d0ff26545007a69a179e1b80fc4651e95f8cecb31f1"
+    },
+    "CV2-T-V-BANCO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "143215a3fe6af85c21efefacde2c9dfe6c1d4730a5dc9b59c188675288c7f3f3",
+      "referencia_sha256": "a6f315772b90c65bf8392e26ec5614dfbea19699f7af64a71efeef941562322f"
+    },
+    "CV2-T-V-BANCO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "12f2eb1034ab49af79f210596750468e6839b650632198e339a976eb7abe882c",
+      "referencia_sha256": "3f958b00cfe8253aada22daff3190e10504e9bc0bcd7e915eb52a790ec8c3485"
+    },
+    "CV2-T-V-BANCO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "1de9d61cef96853a1f593b3f70556dc797b63938c9079a442f98a9ab90945117",
+      "referencia_sha256": "900fbd702c8a60570af9d2604520a14d38e41a7cb24f39698e864ea4417f95c9"
+    },
+    "CV2-T-V-BANCO-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "9784ccd77af804e309247a1c4349121ea7470a88f09d820772bd80fc6a7955cd",
+      "referencia_sha256": "18b9a7305e9f19471f569513e80ef95d6f08e31f741f7154fb256c19128869f1"
+    },
+    "CV2-T-V-BANCO-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "a712f3d2d2cc0330d1aa52c32c4cc166bccf59d1db630e60171257e5e20f65a9",
+      "referencia_sha256": "7951448a400329152d1c0e637f6bb07519222495bd63031d26877eebf5c5fd53"
+    },
+    "CV2-T-V-BANCO-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "d768ebbba86e4a36421124f6b9bf4e03140442fd854ec0f325fe6a92029c5ec1",
+      "referencia_sha256": "7e8df2cfea6d917fe3de0c4f4aa8bca11e61627ade847360c8986767c73d6a1a"
+    },
+    "CV2-T-V-BANCO-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "953e461436d9532b25be90c4dc1eccb7253e878f86185e35769842c5ff666090",
+      "referencia_sha256": "438802c10d3c98e9f4d4e644c5696b9d36bc40f38b8500c61313297a2e1c420d"
+    },
+    "CV2-T-V-BANCO-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "e9c465e993a88ae6a8fa6d5ff4731fad0ba2e5b8b2179b038de2d7792f7302a7",
+      "referencia_sha256": "d9f2ecd7d1699cdfb2b2c803f50831b5f2018faae604ab2f43d3329bb81b9203"
+    },
+    "CV2-T-V-BANCO-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "78b969ed91d01d810c56c13a7d1d3aef1d4442561cc9986621fe391bd625ab28",
+      "referencia_sha256": "f345a74c0b7bfaf7d743e11796786c335d5557b66a544761553ba5661f73bfa4"
+    },
+    "CV2-T-V-BANCO-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "56d1d038cda11600ef8f06372c417944d7eb4bad961eba08ac685ffd36d12891",
+      "referencia_sha256": "7e95e4a241b3f4e442020ec0764bc3d9e0384222615f86f92f869a1ef4c25182"
+    },
+    "CV2-T-V-BANCO-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "2e0278ec6ddc7cd63e640379d7e05d6b314e48d9a6a6a248dac24dbc0bd13fb6",
+      "referencia_sha256": "d2bdb850669386095ac1958842bedc6b0b50d654a8e5f7dded9fd1284b443d58"
+    },
+    "CV2-T-V-BANCO-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "26f7a5773cde9117f10e9d0662a56d9685b6d47d7a242746b243427bcb1b0cc8",
+      "referencia_sha256": "aed52c21bd1315519ec74696f1d166e1e174828648fdd0dc6c3ffc42fe67eff8"
+    },
+    "CV2-T-V-BANCO-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "50c58bc548c2f4b085e22ef91652066c6f096091c0a732152bbb2c70883bf45b",
+      "referencia_sha256": "fccaf2180c338e8e3fca653afadcc7dc3d0f46b164d4b77591ea96314d042f02"
+    },
+    "CV2-T-V-BANCO-019": {
+      "particion": "test_reservado",
+      "texto_sha256": "e84404db3dedbc3635a8acecf22521961a9a5a86933d3e6f0c721af18f1c0e5e",
+      "referencia_sha256": "0fa1fd221c6eae570e09808063bce8a4aca041038b31ceb75a0fe15e2bc0e986"
+    },
+    "CV2-T-V-BANCO-020": {
+      "particion": "test_reservado",
+      "texto_sha256": "e904dec4e8f86877430f55f08cc3443e9e90d1de0a6d1b105894f85808f5b0f7",
+      "referencia_sha256": "9aaf8773e9d0d423f02dfb7ca5c92cb91996e83efe1390690b5029741bc95674"
+    },
+    "CV2-T-V-BANCO-021": {
+      "particion": "test_reservado",
+      "texto_sha256": "489d6dc35ac3941df478204c1ac633e66e59076d55b20c5f46a7074424c519f8",
+      "referencia_sha256": "b0b45b6031abf42cbc5ce3b6901cd70845ef8a5e813bdbd51401be4ab37921cd"
+    },
+    "CV2-T-V-BANCO-022": {
+      "particion": "test_reservado",
+      "texto_sha256": "2c5509ffb8da9dadd4a314cc9b916ea2186545d2350afb38c4be2fa79cadbb43",
+      "referencia_sha256": "4c8be1035d083e8c62b67ed85283dabdeb9cb1e067b99e40d9e3a66231292e63"
+    },
+    "CV2-T-V-BANCO-023": {
+      "particion": "test_reservado",
+      "texto_sha256": "37b2978d49d7841370eeab51670a55cacb9ba99a369ee674f6c29a37e700ac85",
+      "referencia_sha256": "18b526a11978d9fe15c60375f081d660de6cdc53590d40a19c6c3269b054fcd4"
+    },
+    "CV2-T-V-BANCO-024": {
+      "particion": "test_reservado",
+      "texto_sha256": "87922a071a0431892ee1c1f3c6b7ccdbc4f9fab6a85d6ec2f4b8de0ef74fa415",
+      "referencia_sha256": "6aa84d9d2f1400e9869c67bd71050d8d7b10fb4c3f522d06cafa1ca2ed46b909"
+    },
+    "CV2-T-V-BANCO-025": {
+      "particion": "test_reservado",
+      "texto_sha256": "cd1e2c6ad1a5ca80b1c0a7c27d09e072a5ac294f01b64d350365e9d12daa9bc6",
+      "referencia_sha256": "9cdd378d3b9e0f07782cdc64e976ddf1acce63b8504056ba306d129588108abb"
+    },
+    "CV2-T-V-FAMILIAR-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "12d3ffdfaa56d37294e942cf3420318474ca33c542d29ffa1879509b3318b060",
+      "referencia_sha256": "e799ed0d4bb611481dae63d6bbb45befb9c3040f2033dec81c89994f9e02328d"
+    },
+    "CV2-T-V-FAMILIAR-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "d285ca439ba2d68455a9cf219fd99255765f23bb7d666f0bd4c62756dbd57f0a",
+      "referencia_sha256": "5e40ba381e5637af464da2e8869b6ebc93716788fe8829596ddf7f4451f8e821"
+    },
+    "CV2-T-V-FAMILIAR-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "2345e495c25bce26d6fa90f454ef40e572030cfc1810d7e11001817527be9d5a",
+      "referencia_sha256": "8c24c82973ce5ed0977209a0947e5c66aebe9113cf64ed29a2db90a5def4246d"
+    },
+    "CV2-T-V-FAMILIAR-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "df5a57b209f96766a5eaacee5e3c24ddeb1f24ed572252172ee7b076696aeb2e",
+      "referencia_sha256": "36afba40b93a570776902850dfdec4444942105d0dbb0fecad537973751b8efa"
+    },
+    "CV2-T-V-FAMILIAR-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "c730c7f31b262cfc6722551eceea34f85c7a6c9221bc309f698c8ee3b4b185a0",
+      "referencia_sha256": "ba9564bb7bac26c527ce5b0f7a9c6ee5f3d43bbbc0a502ab080c7c4a67b59198"
+    },
+    "CV2-T-V-FAMILIAR-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "ad033732397d6a6081a3684f70a50aec8db366be2d481c7b99610f63fd094638",
+      "referencia_sha256": "0576e653b313ef9ca4e61dae9fea4ba568786e8bd78beb3da9c0dded02ebf188"
+    },
+    "CV2-T-V-FAMILIAR-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "2eb8604e2d96e864bf789a95b113128d42a15f160956c611eab735750d34c819",
+      "referencia_sha256": "4e46dfedf3bb6eff30398d20e7a033cdbe26f2c0bf4ff849d6a7e323a8a3710e"
+    },
+    "CV2-T-V-FAMILIAR-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "423867110d1d3e9a1f5dacca2951bdc0fab5eeb6bcfc0711c80a061a204b4ba1",
+      "referencia_sha256": "346f64d2673c439bb84310157e780f687433d7b0634e5e21f3dfd856004965d5"
+    },
+    "CV2-T-V-FAMILIAR-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "5a990f2edb09b48ae5d7bc3f93abb334d5afb16b4c73b2f9a733ef822d6c05c1",
+      "referencia_sha256": "9e727a742da9a76678acb65cd3467f1cac0d42f7b441c6b321284d9254ab1894"
+    },
+    "CV2-T-V-FAMILIAR-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "baa95380a97b5acc7c9b24be48c70ec6a8f3999a81390ffccd9678a3743d4bc1",
+      "referencia_sha256": "80cc55a52a48ef3b717101b72be209f79ae13d3912b152697a5df0be4577d7ff"
+    },
+    "CV2-T-V-FAMILIAR-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "1987e9a6a14c4a34dc8679ed75d89b934b8239cb4196003aed484da835fb3c88",
+      "referencia_sha256": "414c54a6e965d8a3c11a64489debb3c672d148e6d36de69c2897fb89fe6a381d"
+    },
+    "CV2-T-V-FAMILIAR-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "c0c97d67f8745fde1cbb27d16cb2650351ec00c4bcbd7929765a4e374da28a21",
+      "referencia_sha256": "ab62086c855b0edd1541a4091121de304f581c03f413f4e2457b882c8ce01640"
+    },
+    "CV2-T-V-FAMILIAR-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "caf2768acb756d44d7031bb26aac10270b9fca93bb021ecddba8911b51e288a1",
+      "referencia_sha256": "9ca81ea88a8233d33a693da6d8951271f1e39fb979a28a4d1600b893e810cfda"
+    },
+    "CV2-T-V-FAMILIAR-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "db8acecfc442d5057360ea30a553dec1a7ecb9eded6ebaf7a87657fe68a53ecd",
+      "referencia_sha256": "e4a3e5e993c1009bd917a6f41a4c6b0b9d910ef25288a0e880443122e76650f9"
+    },
+    "CV2-T-V-FAMILIAR-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "82625ba45941b005aa4de9f2e117f7bac9c87ed5a7cb99b414f74334c6a96523",
+      "referencia_sha256": "06d0f158047313569d7c2c9933fccf338b1fdfcf9d4b7f0cf496e910f61a1bed"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "7fa14a30187be706c90444dd0cde1b2a1880101586cc16974c495b449f36c23f",
+      "referencia_sha256": "ffffceaa9475dbed0733c3cdc21b23480e67e87247a20a39eeb97d9cc513072a"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "265753b206bdc130b66bfc30b572e0288812486976d7d5aa2be0a120ccc3fae5",
+      "referencia_sha256": "323102612dce5f943e06b680a1a78c2f3132fea9b38e4d49c372cb7585069942"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "dc8ae8f3ba29b71df0b770ee84b1974990a822c1fa044bdd3a9b30ec6ce10a45",
+      "referencia_sha256": "e0090640702b04bc6d14198be7823b265312804305da2b1bd946847abe40bdc6"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "e1619df6618ad218e566cdba06ead6e8a43c9171c3f3cd129acc36b9dfc439e6",
+      "referencia_sha256": "901d4dcd418a01e93751864b0e054c853850f4ca40d9422a448a5897fe1994d0"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "5e0062d646d674f0e2f9d8ae7aeae27ac171e6c4e9c5b5f93181bebd32c9d99e",
+      "referencia_sha256": "cd28220f2bcffcd30567806d59d202159d4445d940eddaad2ccc88a591c0f9d2"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "3faf17ae7a4cda9983c6ca3b307864c75bfed7ed0b0c6f8cc48987e690655827",
+      "referencia_sha256": "252114ae43dca4e8a6ef220e1b074352cdb7feb9998ccdcb9ac4f2aea14e30c6"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "00a0a8f4607c47f8b5c6bc1c29fb1ca14da8bbcaa2633343df9133cdb8cfaa24",
+      "referencia_sha256": "ab8d9de47d0e9f8d06007504bc389198ed38f929de990b0c9b7b8969c2f2acec"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "2d91c0b1fcc736b2b1385038524c5fbc5c500dbd11a8e7a52188d4906d9c1e5a",
+      "referencia_sha256": "3506991019aeb4a38e57acfb1248dfc8d7e3e4623ed8b29fae4b12d37e8d6663"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "64cd685c137d50d379df13f845a9875728b251b95572a3cad0ceca1b35e591bc",
+      "referencia_sha256": "2b06c001042b9a39ea30721843f6c1767f68d71e6565037383f3b9c664802e55"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "e53acc2dad5949d4f414d832cf9784ee8b2427606ecc667c7a83baf9372c2c2f",
+      "referencia_sha256": "ceabf8870f2e5d2e65698784d2638bd7eb16a616c804c905256b90e9cbfde23c"
+    },
+    "CV2-T-V-PREMIO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "1b6ca73fa84c5c962a5118cb80cfcd3b432a4fbb2f5e071f52c1dc229ff9cd04",
+      "referencia_sha256": "b23828ec89b63f4ca874a8d49e97b704126b42c1197b234f29a80b9a9b266a13"
+    },
+    "CV2-T-V-PREMIO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "656402675c0764a8e71eb6f9d02daf233b8983ec7e86e8d65ec4955f629f352d",
+      "referencia_sha256": "09c8205d5e10425df0322398e3d6798165c62f10740e345ab05bad868272f722"
+    },
+    "CV2-T-V-PREMIO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "3f8267f962a7183ae25ce4791b00aaa99698b233e6805f81880f232edb96ca16",
+      "referencia_sha256": "230864f9771cc8e6aaaba951b3813a23b9fa9d62e2057af9f9c979c7fc99e267"
+    },
+    "CV2-T-V-PREMIO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "78ddafa1deb782350c684155a77f007a605dc4387cddf1dfef03c4a73b4c480f",
+      "referencia_sha256": "c9b12ecf2a7b772a672b449b8a8a3c60e59fb6df38fcbf957c5a327e24789c8b"
+    },
+    "CV2-T-V-PREMIO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "f66b9f379c7f6f4db647b6caddd24c2533b80ffb1b6c7b967833ceb64bd1eac6",
+      "referencia_sha256": "d8d87f75fefc9b994e2cbe46a7eb85de063216c7ecd66b8660a76d3cb9f8d2b2"
+    },
+    "CV2-T-V-PREMIO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "9fb5359e46e087105b41cf973d8bc59b77bb01f9e7118e3b150f7611d825a0b9",
+      "referencia_sha256": "a0057f112aca746de115317168f030338852628abf946b30a3390aa7aac006a6"
+    },
+    "CV2-T-V-PREMIO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "1948c70e5bcdd915d56ee7dfc9e23857eee7f4416eee72006fc9a6d65d519d16",
+      "referencia_sha256": "e85afbc2b67605ababe9b463de85cd6fe1d0231503b67d9bb664e5d5bcf01a4d"
+    },
+    "CV2-T-V-PREMIO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "22b19e574b1881b4d3ec1d42dd92763af0196faf612de945159d0ec2ac06ac52",
+      "referencia_sha256": "6ae2b889ed1cab2f1b0b8ba221f3aa154ac1d2f6ef30b11cf205f16de6a7223a"
+    },
+    "CV2-T-V-PREMIO-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "ec28e9e5c1145e4ecb92a04edbee64fb20b099432a35daf1fe4de4c13390746a",
+      "referencia_sha256": "bf68755e56c2a0beba73066365209e54ef13d51e3c0e6c82d91b9fe7e2b1e673"
+    },
+    "CV2-T-V-PREMIO-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "c580c1ea06e9b31ab3ab98d0277dfcf8f8254c4b3da7d897e6b04849642093e1",
+      "referencia_sha256": "d1170819e747cc0c6870d47e803ad9e18c7b6bf77ef9ffa4698550d0623644d6"
+    },
+    "CV2-T-V-PREMIO-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "47dbabad38e606ba588c5ac906b144e0a511f25704c6be9b7f692dec8aee3fa8",
+      "referencia_sha256": "3ee3d610b9829fc9cce1c309733d08828bfbdc81ef53124154830e7ab824cce6"
+    },
+    "CV2-T-V-PREMIO-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "3efefd04bbe92a8af77c5f01633fd964e8e06ac31183165597563455f229a584",
+      "referencia_sha256": "75889d1e3e71c0f12fde1d940976be8c8088fcc75f3036b499481bbf33c4b1d2"
+    },
+    "CV2-T-V-PREMIO-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "67e93aebfd043251bc62059542cf3031bb5495d53a5ae3005a22995cb8ed0abc",
+      "referencia_sha256": "b7c4eb82615bbe15b557a23c717a5b11ef29ff94c6d39941dfe8c4ef57cd61f8"
+    },
+    "CV2-T-V-PREMIO-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "3468c8932d7fb4c8c31ce83d59731ba1f6854919c219b3f7a071dbe584880c47",
+      "referencia_sha256": "e96b61fe286edf15c6f9fa533eda1eaf50518de05d6ba3263c363e05c68cb2ae"
+    },
+    "CV2-T-V-PREMIO-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "c88c26592a46b6f2cf98959c78dc146fc344b66e23090ca8b6745e5f3a2e021f",
+      "referencia_sha256": "801d21e75c60f3760bf642f5e017100f7133ec1cc130f4b51e82f5ddebf451a5"
+    },
+    "CV2-T-V-SOPORTE-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "68650694586bb219b26efeee877066ca59afd0bc7790813e9bbe288bfff79e6c",
+      "referencia_sha256": "5521142ff90bc58f642321156b32c4f8931cdc57264c037b689b3b406f08ddc0"
+    },
+    "CV2-T-V-SOPORTE-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "11396c6e6ea8a421b2052227c0a4b7de55d15f72751bf767a4167de298b556ec",
+      "referencia_sha256": "200a11f97e0f1278b944f241993923d712b107625807746c3725d8f8d3c54958"
+    },
+    "CV2-T-V-SOPORTE-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "5719fc27aa4eac9c7077e4808ea1d5b2df624518bf6940d39b15a33e573a3dce",
+      "referencia_sha256": "7cf3579c5a15069e671801f5bac2df3f3cd3f12ff7e1919439ff43b09c4642f9"
+    },
+    "CV2-T-V-SOPORTE-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "12ae07bdf2681265417254e2b883d9d40f2aa3ca80775f9d8e26174f32b4f5a6",
+      "referencia_sha256": "7e82b688319c7dc3bfd9cb782b17549d6b203180559a3e3892b9fc459c4078b8"
+    },
+    "CV2-T-V-SOPORTE-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "ab57ba7726ca309db6dc5b0dda7a5024872ba4c6ea5387b1e76eb34ab74d2aa2",
+      "referencia_sha256": "a72f5b21ffaf9e992c8180e54e1d30ae8135163da64cd8d043d05fcd121871ce"
+    },
+    "CV2-T-V-SOPORTE-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "565fe377e3d0059e9698850558781c5153ea766f7d9054c570ebeac9715b8617",
+      "referencia_sha256": "2c9b25a7ed350ce5be400c09155e0a14424cde7acb308d5a53b8d603e483225f"
+    },
+    "CV2-T-V-SOPORTE-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "6258ffffdd85950ee786dca10212763ae31e34610c6f98d296748c466e02cd54",
+      "referencia_sha256": "e9d7577b73242d251bc994a7862fb1cb737dcb90f5c2ef2a6f5deee03e4fdf7b"
+    },
+    "CV2-T-V-SOPORTE-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "7815a661f6a8a2ce4852288cf0a99383ce683eaff7243fecd375bc32ab859608",
+      "referencia_sha256": "9ce993f78419a6799441408e6746b2c99e575bb967d64903c0e7dcf33c8668fd"
+    },
+    "CV2-T-V-SOPORTE-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "e718ce93443e32b2a86a673a73abd499b24cfd28fef6cd4cbf368f665fe02378",
+      "referencia_sha256": "532c2840574f575fbbf05d4946b35265a40bfef9e85c76c3d42b5e87ea79e811"
+    },
+    "CV2-T-V-SOPORTE-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "5458c9d7cc300b7d5245974d4387d36feeed575fe9786ce2426e0673f4b90e6e",
+      "referencia_sha256": "89d9c938806dc3837ef9cebd933137ecb781837c8bc2b2781dded55155f27156"
+    },
+    "CV2-T-V-SOPORTE-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "e4c5384649d3a8fe8a06712a684b8d4ca74033943b9ed2836003bb6f6465aa22",
+      "referencia_sha256": "2aa23a2b40af06cda7f87eb7ec9ea43790e0f19f82b72af9820b8ff730a45f08"
+    },
+    "CV2-T-V-SOPORTE-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "79ec01c5875c957cd292fcb3a529542407f24d99cf0baf9af7fededd104d44b5",
+      "referencia_sha256": "9907615cd130cb27e2c042386095e78833348b507630166f8a45a2f216206875"
+    },
+    "CV2-T-V-SOPORTE-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "ddf1a5ab16526cb234d0b04109669e1934f4706b902f87221a629fe9fac9b3f2",
+      "referencia_sha256": "90b545e8715a33b437e037a9349c8e6aa3b775cf913bdf78d636c1f2c6781607"
+    },
+    "CV2-T-V-SOPORTE-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "5b7150400f00a52229c8a75f48785533ab46bd0d4ae8de6266431e7232860b15",
+      "referencia_sha256": "1ef0bb5cd6db0c758fee3ee9600b02141c49cf4d1f5e25f3a1c2bae6abe4eec9"
+    },
+    "CV2-T-V-SOPORTE-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "dd4d157559d638217cca122b33d99d414e3c0c6cbc08eba71f233a1f11f1b053",
+      "referencia_sha256": "d2e8b259721ef8b6cebbcfec74c42da26811a3821a0026f402807410f7e2ec1e"
+    },
+    "CV2-T-V-SOPORTE-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "0bc3a8b0515816681162c1fcf10c3acdc3c301937e0654fb4bcd032b6160433b",
+      "referencia_sha256": "aad1aa2c93a64fe729a92bd9ed604c09b3935390a5c1cc69765a18c1225495f7"
+    },
+    "CV2-T-V-SOPORTE-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "2a292f5093b9a869dc1c61d71dcf6a3ed74ba6fc9af1dc21ac01553cc54493e2",
+      "referencia_sha256": "26277203f1d7b971509d832514f253aadad0f93a87cd3c819927bfe1b57db040"
+    },
+    "CV2-T-V-SOPORTE-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "42c6fd6d76ab95febc430f770379269e7318e5de10d23d0250d2f5c4f0c46a1d",
+      "referencia_sha256": "e30e3023f7be0eb4d9b91593e02d6cf2c91c791bbad932a83f2451fbb8eb0688"
+    },
+    "CV2-T-V-SOPORTE-019": {
+      "particion": "test_reservado",
+      "texto_sha256": "9cb39b62aec89a6bc453b85e1d054561a29ca30dd29163bf0cbc7901b177add5",
+      "referencia_sha256": "c3c3eb1993ef98e38f205f357b3619f8695f74b4a51361cfce90ec7c574a5c9b"
+    },
+    "CV2-T-V-SOPORTE-020": {
+      "particion": "test_reservado",
+      "texto_sha256": "df30060f5b25fec4dae19d320f40b37768cbbbd1b20d342eb73ec3904f6d5791",
+      "referencia_sha256": "1ee79c4e45dcf91bf2a74f464a31378daa7b803024609090e27b3154192baddb"
+    },
+    "CV2-T-V-WHATSAPP-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "cffc607abea56f8dc5ca49bf5e8af1105cd73ddf62449d63419a823cecf32227",
+      "referencia_sha256": "32f9a8fcf332c4c253418b8d9aaaed8a9bb538ae5d119895c9b7e2228c374651"
+    },
+    "CV2-T-V-WHATSAPP-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "e778ca5b2d5d5878918534ec734b1de3646a06c139b2b78d9591e40a49140451",
+      "referencia_sha256": "1f786a7fb016b9f7a90fa6d4a42452b4b0a730a467333c9209ef6fcdb29d27b1"
+    },
+    "CV2-T-V-WHATSAPP-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "7c98709ed5e3c2143edde4e97fe81a46815b5826fd7addeed5935fe86612c55d",
+      "referencia_sha256": "e6a003c90a05c0a4500ed5c07cc089bd3f146fbf79097e563cc9e140fc221c01"
+    },
+    "CV2-T-V-WHATSAPP-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "0b996a50859d343633f2086ff912b35077a04319dfa69c7ae5db2ce6f23c1e47",
+      "referencia_sha256": "a71ba26b38143659d77b713a0020fae3501a80619c2064aa4909891d3304757c"
+    },
+    "CV2-T-V-WHATSAPP-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "c3346cfbd693a7825311054aa3aa5eb28ccf3e50e2ebb2eecb9f51d2cdc2a636",
+      "referencia_sha256": "0c70fab58c7f92e00b8426439652a825c2710fccf4dd2a9913362c664a91316f"
+    },
+    "CV2-T-V-WHATSAPP-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "99effbf2de1ad10971829b37eadc66f35a0b3df875939fa97318d6a7e698a62a",
+      "referencia_sha256": "4e680a63952935b1beb4c0a16dc6a56f0bb5a7c10634459985036b68e66677cd"
+    },
+    "CV2-T-V-WHATSAPP-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "666889685ffb97a8ae24c2f0409f7c1530b7e80298ce814a72ce8c6f0a3cc61a",
+      "referencia_sha256": "33dddde1dc083e184b8737fc41b32d2eb2781c4a3a413d510e0636271c9aae10"
+    },
+    "CV2-T-V-WHATSAPP-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "7adfd41992fc9ac769e546756b127bbeefba8f9e36aa52191f03d041d749003b",
+      "referencia_sha256": "2293733fa0a65f97c0e7b057d86524aad94880a8f31caf2ec38bdd07ad43296b"
+    },
+    "CV2-T-V-WHATSAPP-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "174a0f4adf10f53d20d742605e2ae031626ce384fb627ffda2c704cd93202491",
+      "referencia_sha256": "95f5b51e2de01247cff9ba937b7245cfaed01b7e6549e9626be9373c4b1a26fd"
+    },
+    "CV2-T-V-WHATSAPP-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "d8d398bfb234d38c84f56e96279741e8ccdc7c97470bdc69c6fbcb0065ddf807",
+      "referencia_sha256": "1601580defd144e3f55ddbd2a8bbe01b2dd8199784cd22f37b7584e8cba2941c"
+    },
+    "CV2-T-V-WHATSAPP-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "8879970bef42489c64f9e8456c02176de6e30e267a95d98a8268a3122c4de5f6",
+      "referencia_sha256": "c61800507f96a4d6e157754b4c1c3d72bd8f02c9af1f9ab4e02b98cd17053a7e"
+    },
+    "CV2-T-V-WHATSAPP-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "5fde0f4b354a11a9bbf34653ad44d4083e3688b59ee6283845c457c7bd86b454",
+      "referencia_sha256": "9cfa9d691f49fe7cb9ad3b356b9a1e4ab35436faa6d06c060cfde802e609495d"
+    },
+    "CV2-T-V-WHATSAPP-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "c3917ce81dc96dc86dae8478593595675fb925b45f21d1231367657f0d5df997",
+      "referencia_sha256": "eeec0eeaa2425a90211faec30ee3f1d6f517695d42e833609efce0bdb958e221"
+    },
+    "CV2-T-V-WHATSAPP-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "242aada111f829f8c52c4b21c6754c4418076a9f9e2c0e0feddfc81e7a566c5f",
+      "referencia_sha256": "bece6e9287497581ea723cf09ae7a3b35685f5506964b5c13a1c0921a0187b7e"
+    },
+    "CV2-T-V-WHATSAPP-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "3492b9b1a3009384be8b3da757c7e8c9ecc1a3c86434a16833fc20936eb7ac27",
+      "referencia_sha256": "cb67237cd03193420d38fd0634e86c69c99c29f902c1bfd59f6064a4edf93523"
+    },
+    "LAB-acceso-remoto": {
+      "particion": "desarrollo",
+      "texto_sha256": "abbdb60023a5c6e49dc9c1738ef2f881e457ec406edb21977f86aa6648ef1592",
+      "referencia_sha256": "c53010ba3bd1765320509573f0a7f892163a51ed9f0d965ff62ef0baeb5c5d9d"
+    },
+    "LAB-acceso-remoto-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "3c11fa1e1f388c953c2afd0929d7be3f8f1c2d8f8dbf254f3aae74129c7ed9b6",
+      "referencia_sha256": "1ccbb0950cade553140910d7d65850010241394af5687a283fb60f0a0a422c15"
+    },
+    "LAB-anses-beneficio": {
+      "particion": "desarrollo",
+      "texto_sha256": "1dbe40e4c2e4dd59bde0fb7ac2ab71c6343e5bca103c782b31bac20ad8ddccad",
+      "referencia_sha256": "3206dd05d65a51d925f718f922d91e3608ebd5dd89de46d18b2303678d919a07"
+    },
+    "LAB-anses-beneficio-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "59df1a67abcc885e0471a7bb16bab3638b3461528918a8908a2c004e6608b79f",
+      "referencia_sha256": "4777b6a21e85b0d51d5c7b2da0e0038641f0840ac714591642ef5a6509548e73"
+    },
+    "LAB-anses-canal-oficial": {
+      "particion": "desarrollo",
+      "texto_sha256": "b17f2a7515ced50890ca548a2aaea2d9ed0971365f9cd116d0965108bd2920d7",
+      "referencia_sha256": "c95a70ce04958e8a00f6035161e577eab8d73d54dafc93603c7eb1989da2fdcb"
+    },
+    "LAB-arca-canal-oficial": {
+      "particion": "desarrollo",
+      "texto_sha256": "fa29e387532b00e30406b14611951e5a0d9846fdddf575d8f84667bd1ede9529",
+      "referencia_sha256": "046d1ea6cf0d2e9e3b805c42a3485611aa4f03a51a38b7b39a2a15e40063d1af"
+    },
+    "LAB-arca-deuda": {
+      "particion": "desarrollo",
+      "texto_sha256": "56bf96377060bb3083f461275a296c8e33a60fc2e9b36f6d356e52ea42553ae9",
+      "referencia_sha256": "56804c016001f5191ce3e2bf5ff2080d1640afe5ab511f34726024104913df09"
+    },
+    "LAB-arca-deuda-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "f77bf6a51727318ee6358d1f15ef75ef6047dda05db1e82062da980f557f8b1c",
+      "referencia_sha256": "779b19534bab625e610a34cc1813f0066ebbec1909b63b35d282cdae0d691694"
+    },
+    "LAB-banco-app-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "915ce0b33ce326922917cfee477b06680d1b17957a85257d399ad3f9b9046247",
+      "referencia_sha256": "c316742f44bda77c87f89c13d0ed86f70d9aa05daa967a5773f31623c50f5d63"
+    },
+    "LAB-banco-codigo": {
+      "particion": "desarrollo",
+      "texto_sha256": "bfaf844390c391abb385f521a3a4a35afbf19b73566bf6ab3181671f78878191",
+      "referencia_sha256": "21a80cb01103b8c561322415dd95184004d9e20fab224295739dc873b46c3dcd"
+    },
+    "LAB-banco-codigo-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "a23180a44841e9400398fc8455c7bbeebe182c66210fc3285263dd163cb2bc29",
+      "referencia_sha256": "fa64dc5ca0b39cbb48dfbdf507a8857db75544061e8b94556e23305f58ce688f"
+    },
+    "LAB-banco-gasto-sin-pedido": {
+      "particion": "desarrollo",
+      "texto_sha256": "710720c289b5b209dd1603477682849f0dd40dec0f92c5dacf0b873e9186c3b9",
+      "referencia_sha256": "4c8319c39001aa406c43b00aabf9872154d7861a8e1b2c32e26bd56907f4b148"
+    },
+    "LAB-banco-niega-el-codigo": {
+      "particion": "desarrollo",
+      "texto_sha256": "5234e0f0954246df489f4aba37f7be5f6b2cda1982f3e80998b3505b903376ce",
+      "referencia_sha256": "6ba816235c2a52c4377fab6eb6d3f76fb773ac13b58dc6cb6fb9c35beb0fb471"
+    },
+    "LAB-banco-numeros-sin-clave": {
+      "particion": "desarrollo",
+      "texto_sha256": "336741e4a9b815313a47800c90063331cb7236c3361cf6d5a81342cb9d0d8d86",
+      "referencia_sha256": "24f22a698c63683695d0d0c6cf3b9069afed4ca4afc7d11d845037534605dbbd"
+    },
+    "LAB-banco-revisa-app": {
+      "particion": "desarrollo",
+      "texto_sha256": "a5575307e6144a19507ca0ff93e2f875f98bc2e92eae8b95cbf96b7c621d0619",
+      "referencia_sha256": "d2e9b7519a557cb1873bbbbeac8db882a30efb474d58ccb6cdee07bc6c03cb4d"
+    },
+    "LAB-digitos-sin-palabra": {
+      "particion": "desarrollo",
+      "texto_sha256": "eac0d9632aeb975264fe90e294406fc62e309fe2ed07f6185400f32542077338",
+      "referencia_sha256": "77b8ad49fe4f0ef350bec8bbf6fcb45185ebef0bbb5f6ebc4daf494d4702cefd"
+    },
+    "LAB-familiar-llama-vos": {
+      "particion": "desarrollo",
+      "texto_sha256": "a408533b543156f3cd3a525f4988de645b57a131e854206485a96014e54daa8d",
+      "referencia_sha256": "773916096d522feba5ceefe97eb1ce9f46a6a85ec83996bf8f775ec5dae5c6ed"
+    },
+    "LAB-familiar-peligro": {
+      "particion": "desarrollo",
+      "texto_sha256": "feab2aa7b4ec9b957c8f30919bdbcf8f8d30e2f67216aa780efa8b966fd126e9",
+      "referencia_sha256": "8120edb15628934f2b7d2cbda2b660e36d2b21d1d1bc70e283c50e05926ba56d"
+    },
+    "LAB-familiar-peligro-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "1f68006dfc825131cd2bd5223fa91c03ed73e2f2455434e7327a983a215a311c",
+      "referencia_sha256": "76baf686fe5dc67448d6ac23e319556c77c3ce06316ffc03a5e1b218872b2190"
+    },
+    "LAB-giro-sin-plata": {
+      "particion": "desarrollo",
+      "texto_sha256": "5e124d7fbb6de63116f3a778cbe073260624918b20a0e411e893a502174a4c79",
+      "referencia_sha256": "9ecbdbd11733a04d8bfdfee7ac0e82788380752438383b9f769ec5afef89de8c"
+    },
+    "LAB-mensajeria-no-pases-nada": {
+      "particion": "desarrollo",
+      "texto_sha256": "21cbcde55261624568ad9f4430002b99ce7f54db4f2ba33511cf1fbe69ebec41",
+      "referencia_sha256": "eb44dddc95c10e5b804145830f830491aef64c377dd076414c5adb3c853f82ae"
+    },
+    "LAB-no-bajes-nada": {
+      "particion": "desarrollo",
+      "texto_sha256": "786d0708380936691fde1ba88f80dbe723f6562c274f1a0d5120f94dd7a191bc",
+      "referencia_sha256": "e5ce5b8f5f059da91f0ca2cda1c812eba453796f0edc48f8b2ba212db2b46546"
+    },
+    "LAB-pantalla-sin-programa": {
+      "particion": "desarrollo",
+      "texto_sha256": "8e2f69c90446ade906f88c16c6ac1fcefe0530d983aea197d9cf0f5ba01761b6",
+      "referencia_sha256": "8c0658f0f646f505a556a3adcb780f0e6fa5ead5b5bff3d75f29b102810dc487"
+    },
+    "LAB-portero-codigo-puerta": {
+      "particion": "desarrollo",
+      "texto_sha256": "1d1a5dc0d307d9742d01ff9a04005f04e6d801dd49a07875182a225f346dbf41",
+      "referencia_sha256": "c44bd3df12ee52b65069ef416849ef6f1506c094f7421bf8b82d00ed321836dc"
+    },
+    "LAB-whatsapp-codigo": {
+      "particion": "desarrollo",
+      "texto_sha256": "9c3504a055060d623b1cf39078694418bd3ceb75c14f1e7ed1d911d11bdf5e00",
+      "referencia_sha256": "82981ceb530d25c0c42cdbb3074e125b19c74a13ea71006546e9f7c7f127b830"
+    },
+    "LAB-whatsapp-codigo-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "ab663e341dbf93442f5314a7a6216c65fd18b093db7366de6f896e904be09ddd",
+      "referencia_sha256": "7cb04635b6d3e01e71d1c669c6a93ee7b5271d8f7c43011e41780837a9ec8af6"
+    },
+    "LG-BANK-VERIF-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "0ff25c270609ce3803e3845853d205d25aa54eed33e96c85f3becf05a56b4edf",
+      "referencia_sha256": "1f171a95f83423b017f51113554aca444fe7e70de41344dc91de7315d0327648"
+    },
+    "LG-FAMILIAR-LLAMADO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "9bfe1a2fb98c07605c428c442c7eea1910c04f0b0add9e933937fe602b959fa7",
+      "referencia_sha256": "58be3e3a597ffdcddfea758089fe5f54cb8d1106d57a91e28de4bade225143d7"
+    },
+    "LG-ORG-TURNO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "75d820b85eec9b4595f5db3b64691e1669ea47f0710d3b8eb8aeedb469dd3052",
+      "referencia_sha256": "977be95cc77c7c1b12d2eee8edcfe4f918a5399198e58d21cbf4f61eedf366cd"
+    },
+    "LG-PREMIO-CONSULTA-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "6890873d49f488272394371e08cefcea3c3a1b0d05da03f5242f2c80dd24fb4d",
+      "referencia_sha256": "77c40b6a75cdb4adb59841c2c0a8c10e34f55fab5b099a8a620daab9e1053891"
+    },
+    "LG-SUPPORT-INFO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "7a871ce393b68837e0d425f9a7be311c5109ebac1e4b6ad62d7d85a000169dc0",
+      "referencia_sha256": "2a074eb89ffb16f13ff56955638e34f93cfaa785fd63b4fe265812dc60ffaca0"
+    },
+    "LG-SUPPORT-INFO-01-e02": {
+      "particion": "desarrollo",
+      "texto_sha256": "bd004ebe89fed558533af1de1d4750dc6077267a0ed41c206500bc0e52cc3894",
+      "referencia_sha256": "b2e3daf03db86250615e7956669a749433e7f99c995eec6ebe120aae473be759"
+    },
+    "LG-WA-CONSULTA-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "e587a7e119ea41d4447e72f870392bad2845a47e6428c39fcfc84ba18cc6b0d2",
+      "referencia_sha256": "80181c691758384d93989a272fa5691edea7349d0de3f3776d63f39616aeaa12"
+    },
+    "SC-CLAVE-CAMBIO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "fc2ba2e80855b40a3db355fab8c441d850b65519891259aaffd3abc52a0ffcf9",
+      "referencia_sha256": "b4d8daeb06e82e87e854bb4a9d549c3a302352667e610d4ee1b2bda29c9dec25"
+    },
+    "SC-FAMILIAR-DINERO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "ca983cbec39404771a2e97f50f302ac855299e3c2dbf86aacf5526599856ca1f",
+      "referencia_sha256": "e0f40734fdec2294129d11afa3addf741b70e5632135633e23e3f9c6c54519f2"
+    },
+    "SC-ORG-BENEFICIO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "c1aa9aa10c9d977c618a7257b8bfcc720d38e6317baa0b56ed13b21137329915",
+      "referencia_sha256": "71f7498b4f73227224ea84fa6880fba3f1c45504043b89bac7e8bcec598d71ae"
+    },
+    "SC-PREMIO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "c395af5186c2e49b176b87e6a3ab02eec0d04b0816f148757656aa935a7b8e67",
+      "referencia_sha256": "02177805718fdd6cb4462f87682307d949b7fbcc40fe3c9365bcadff0fb7df80"
+    },
+    "SC-SOPORTE-CLAVE-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "a9fbc8f4029b1aa357397972fc3c2d93e4d2cd1534f9bc08c9b221b486ee743e",
+      "referencia_sha256": "c9cb289fda3e9690cd82c893abc7e1f5d9a844d200e13a3643ec0c98152dcd8d"
+    },
+    "SC-SOPORTE-REMOTO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "f9986a5f33faf52d8c408fe98062818884c24dec12885aafb57b4002a9ada111",
+      "referencia_sha256": "81d22d068c3ae4182381a2837bb16ff3ef529fe44b68a58c6f544ef9b153cbde"
+    },
+    "SC-WA-CODE-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "f13b4b33a64d33d8baa44fe0e7cc57f217f99d14b2cd685ee6244c4681bc4d7a",
+      "referencia_sha256": "433ab214be80eb83e446ab5edb44ac477c8a772a47d97af0e962e24a8c67ad8a"
+    },
+    "TR-01-pedido-indirecto-digitos": {
+      "particion": "desarrollo",
+      "texto_sha256": "676b7839fa6bc4eb35a075d766343d92c18e6595754f4dabd36dad88f5c2cad3",
+      "referencia_sha256": "6a9cf4bc91f737317d7d4827493091d7533d49ae27083dc4fc7ccdb61968e2ee"
+    },
+    "TR-02-codigo-del-candado": {
+      "particion": "desarrollo",
+      "texto_sha256": "66fff3c538daa3cba002c402963833a6d753e521adc4419e3112d225e6fd0e64",
+      "referencia_sha256": "225a69c45e25ecd23d8cf262ae0e075aa41b2dbf1ab84f28f130c8c8cf98ac7d"
+    },
+    "TR-03-negacion-y-consejo": {
+      "particion": "desarrollo",
+      "texto_sha256": "035be565ed66795b0f4476f3e5779e85f0cbef1b8230513d41f7d3a55942882d",
+      "referencia_sha256": "7d6d4fc25eaaaa12113932da91b48784843d5357d821b1e5685b2c83328a016b"
+    },
+    "TR-04-pedido-tras-charla-larga": {
+      "particion": "desarrollo",
+      "texto_sha256": "7b73594c98f6bc57a325eb9141b4cdd680746ba4ac7936f1bec9b0c97cd5cd1c",
+      "referencia_sha256": "6be9f8c033678cf3ee702c0b5d86e08b9b0f57c1d714ca705f64b1f6c49217b5"
+    },
+    "TR-05-asado-con-transferencia": {
+      "particion": "desarrollo",
+      "texto_sha256": "a47dbee0f5a8c5c59ecfba926cfa76585ca7a08d77baf74021a78e31dc7d89dd",
+      "referencia_sha256": "6110fbec4f630af61c1b7658e1bd90c29abe8fd3e9879274c41fbc75ad4429ae"
+    },
+    "TR-06-banco-alerta-legitima": {
+      "particion": "desarrollo",
+      "texto_sha256": "eff36493e443525dd1fe87a7e15ed8ce3a5379c1670b77fa03683e0281e836b8",
+      "referencia_sha256": "e6890b7e4b6048b39c11de099be811d3f1eb3020183245ce1a9b5bf602d51b30"
+    },
+    "TR-07-pedido-partido-en-dos-lineas": {
+      "particion": "desarrollo",
+      "texto_sha256": "ebe24b27f413c6583b86ba258eb157f1f9c92e567ee6b6764b42f97b845c555d",
+      "referencia_sha256": "3c5bd0132b6ad314194de264132e9b1c5b0871a3545cf65f6ed52ae5d834dc42"
+    },
+    "TR-08-frase-cortada-candado": {
+      "particion": "desarrollo",
+      "texto_sha256": "ad03a06952b2db74912b3b9451b4a536a8307c21118bbef1bf433ef24631a7ab",
+      "referencia_sha256": "8b418d9387e541d9d21f80ae5a0e199da8744a69ad2bd4594e37a6daae52c285"
+    },
+    "TR-09-victima-se-niega": {
+      "particion": "desarrollo",
+      "texto_sha256": "3768ac43c750dd33823922739885aa8dec6a47aa0a44014f0900bee593a6bf21",
+      "referencia_sha256": "6d1f5b798028b5460c56aac5054c253fba6775ba316a3fe877ecb03a1f0ee825"
+    },
+    "TR-10-ofrecimiento-inducido": {
+      "particion": "desarrollo",
+      "texto_sha256": "381b278ac0e7128446d921499c4a059182093e8a8ca261ccbc5b9201e9bc8387",
+      "referencia_sha256": "3aeb211e43254cdd22c0fb66e6a7ac781f240f8b554d884525f9da824260a06a"
+    },
+    "TR-11-familiar-real-pide-plata": {
+      "particion": "desarrollo",
+      "texto_sha256": "a6e867d07e90d9b2687b5b3b5582e330f8713aaff8e0b21bd8ef691095ae774a",
+      "referencia_sha256": "0bed2fd5e67c2b0733c9be10238050970caa862dabf22eb5c6f4be7f1e162b83"
+    },
+    "TR-12-corta-antes-del-pedido": {
+      "particion": "desarrollo",
+      "texto_sha256": "4dd762fc0531a0677764410857196df4453e7153b6286763a1fb735b988202d3",
+      "referencia_sha256": "1ab5533a53462cfe6b12e147e3ecab1608653c8104ae6167877c7493d134d82e"
+    },
+    "TR-13-turno-medico-pide-dni": {
+      "particion": "desarrollo",
+      "texto_sha256": "5f87eeccc837367ce270401acee1c76da081cf7e3b767839dde9d4583f998909",
+      "referencia_sha256": "147a55720ce0f33fa516a30314809fbcc0961560e672452711427f9dd8d0305d"
+    }
+  }
+}

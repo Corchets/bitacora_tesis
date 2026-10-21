@@ -1,0 +1,31 @@
+A: hola me hicieron una radiografía el jueves
+A: y tengo consulta con mi médica mañana
+B: buenas en qué sede te la hicieron
+A: en la de la avenida a las nueve de la mañana
+B: tenés el número de orden
+A: 9205 está en el comprobante
+B: encontré el estudio el informe quedó disponible hoy
+A: se puede enviar directamente a la doctora o lo tengo que retirar yo
+B: podemos compartirlo con la profesional si está registrada en la orden
+A: la médica es laura cejas atiende en el centro de la plaza
+B: es la profesional que solicitó el estudio
+A: sí ella me dio la orden
+B: entonces ya aparece como destinataria querés que confirmemos el envío ahora
+A: sí por favor mi turno con ella es mañana a las once
+B: el sistema lo mandó esta mañana pero puedo verificar que se haya recibido
+A: necesitás el correo de la doctora
+B: no la orden tiene su identificador de profesional
+A: me podés mandar una copia a mí también
+B: sí puedo habilitar la descarga en tu portal
+A: tengo que crear una cuenta nueva
+B: no entrás con el mismo acceso que usaste para reservar
+A: ya veo el estudio la imagen carga pero el informe no
+B: esperá unos segundos el pdf se abre aparte
+A: ahora apareció dice radiografía de tórax ese es el estudio
+B: correcto
+A: lo descargo por si la clínica no lo encuentra
+B: está bien querés que revisemos otro estudio
+A: no era este
+B: queda disponible en tu portal
+A: gracias por verificarlo
+B: de nada hasta luego

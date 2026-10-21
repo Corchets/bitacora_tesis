@@ -1,0 +1,20 @@
+A: Te contacto del centro de orientación previsional por la prestación de tu tía.
+B: Yo la acompaño a los turnos.
+A: En el expediente aparece un período sin aportes entre dos empleos.
+B: Ella trabajó por temporada en un comedor.
+A: Para buscarlo hay que cruzar la fecha de ingreso con el nombre del establecimiento.
+B: ¿Ella tiene que llamar?
+A: Si me confirmás el año aproximado, puedo ubicar la ficha sin que venga a la oficina.
+B: Debe haber sido cerca de 1998.
+A: En la base aparece una fecha de alta en marzo.
+B: ¿Querés que te diga el DNI para encontrarla?
+A: Sí, anotame el número completo del documento de ella.
+B: El DNI que figura en la copia es 00.000.000.
+A: Puede estar en una fotocopia del legajo.
+B: No voy a buscar papeles mientras estoy en la calle.
+A: Sin ese dato no puedo confirmar el período.
+B: Prefiero pedirle a ella que llame.
+A: Está bien, el horario de atención es de mañana.
+B: Lo anoto.
+A: Gracias.
+B: Chau.

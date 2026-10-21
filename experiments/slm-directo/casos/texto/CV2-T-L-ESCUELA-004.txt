@@ -1,0 +1,31 @@
+A: Hola, vi la circular de la salida en bicicleta y quería saber si necesitan acompañantes.
+B: Buen día. ¿Tu hija está en quinto grado?
+A: Sí, en quinto A. Ella ya tiene casco y bicicleta.
+B: La salida es el jueves por la mañana, desde la escuela hasta el parque del río.
+A: ¿Van por la avenida o por las calles internas?
+B: El grupo va por la ciclovía y cruza en el semáforo de la plaza.
+A: Yo puedo acompañar desde atrás, si hace falta.
+B: Tenemos tres adultos confirmados, pero todavía falta uno para cerrar el grupo.
+A: ¿Qué documentación necesitan de mi parte?
+B: Completar la autorización de acompañante y dejar un teléfono de contacto.
+A: ¿La autorización está en la circular o la busco en secretaría?
+B: Está al dorso de la hoja que mandamos ayer.
+A: La tengo en casa, la firmo esta tarde.
+B: ¿Podés venir a una reunión breve el miércoles a las cinco?
+A: Sí, salgo del trabajo a las cuatro y media.
+B: Vamos a explicar el recorrido y las paradas.
+A: ¿Los chicos llevan agua en la mochila?
+B: Sí, cada uno lleva su botella y una colación.
+A: ¿El parque tiene baños abiertos a esa hora?
+B: El área central abre desde las nueve.
+A: ¿A qué hora vuelven a la escuela?
+B: Cerca del mediodía.
+A: Tengo que avisar en mi oficina que llego más tarde.
+B: La dirección puede darte una constancia de participación si la necesitás.
+A: Bueno, la pido después de la reunión.
+B: ¿Confirmo tu nombre en la lista?
+A: Sí, soy Darío Acosta, papá de Elena.
+B: Quedaste anotado como acompañante pendiente de la autorización.
+A: Perfecto, mañana llevo la hoja.
+B: Gracias por ofrecerte.
+A: Nos vemos el miércoles.

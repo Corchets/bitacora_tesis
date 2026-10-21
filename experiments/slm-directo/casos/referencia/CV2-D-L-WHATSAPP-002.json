@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-WHATSAPP-002",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-WHATSAPP-002",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una persona llama para pedir que retiren su número de un grupo vecinal creado por error; se confirma el nombre visible y se explica el trámite.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona llama para pedir que retiren su número de un grupo vecinal creado por error; se confirma el nombre visible y se explica el trámite.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición reservada según propuesta pendiente de D08.",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-WA-CONSULTA-01",
+  "situacion": "Una persona llama para pedir que retiren su número de un grupo vecinal creado por error; se confirma el nombre visible y se explica el trámite."
+}

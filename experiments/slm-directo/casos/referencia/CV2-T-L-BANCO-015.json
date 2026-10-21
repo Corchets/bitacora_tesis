@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-T-L-BANCO-015",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-BANCO-015",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 7,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una persona menciona de pasada una clave de acceso antigua al consultar por una app que se actualizó; la conversación trata sobre compatibilidad y bloqueo.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona menciona de pasada una clave de acceso antigua al consultar por una app que se actualizó; la conversación trata sobre compatibilidad y bloqueo.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Una persona menciona de pasada una clave de acceso antigua al consultar por una app que se actualizó; la conversación trata sobre compatibilidad y bloqueo."
+}

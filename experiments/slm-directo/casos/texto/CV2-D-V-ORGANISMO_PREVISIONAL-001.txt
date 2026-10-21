@@ -1,0 +1,20 @@
+A: Buen día, te llamo del área de actualización de beneficiarios del Instituto de Previsión del Norte.
+B: Hola, ¿es por la pensión de mi mamá?
+A: Sí, tenemos una diferencia en el domicilio que figura para recibir la notificación anual.
+B: Ella se mudó hace poco, pero hizo el cambio en la oficina.
+A: En la base todavía aparece el domicilio anterior, cerca de la plaza.
+B: Ese era el departamento donde vivía antes.
+A: Para corregirlo sin volver a presentar el formulario, tengo que confirmar quién recibe la prestación.
+B: ¿No alcanza con el número de expediente?
+A: El expediente identifica el trámite, pero no valida a la persona que atiende la llamada.
+B: ¿Qué dato necesitás?
+A: Decime el DNI completo de tu mamá y su fecha de nacimiento.
+B: Acá tengo la ficha: 00.000.000, nacida el primero de enero de 1970.
+A: Gracias, ya coincide con la marca que me aparece.
+B: ¿Ya quedó cambiado el domicilio?
+A: El pedido quedó iniciado; la actualización tarda hasta el próximo día hábil.
+B: ¿Le va a llegar un mensaje?
+A: Sí, un aviso cuando se actualice el legajo.
+B: Voy a contarle que revisen el portal por si aparece.
+A: Correcto, ahí se ve el estado.
+B: Bueno, gracias por la información.

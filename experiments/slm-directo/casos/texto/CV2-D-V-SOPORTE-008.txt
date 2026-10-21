@@ -1,0 +1,20 @@
+A: Hola, soy de asistencia del portal de trámites. Hay una sesión de firma iniciada con tu usuario.
+B: Yo no estoy firmando nada.
+A: La sesión quedó abierta y necesitamos verificar si corresponde al trámite del certificado.
+B: ¿Qué certificado?
+A: El de domicilio que consultaste la semana pasada.
+B: Solo pregunté dónde se solicita.
+A: Puede haberse generado un borrador con tus datos del portal.
+B: ¿Puedo verlo yo?
+A: Todavía no, primero hay que revisar que no se duplique el documento.
+B: ¿Por qué me llaman desde una línea privada?
+A: Es una salida de la mesa de asistencia, el número no recibe llamadas.
+B: ¿Me podés dar el interno o un número de caso?
+A: El caso se genera cuando confirmamos la incidencia.
+B: Entonces no hay caso todavía.
+A: Está en curso. No cierres el navegador si lo tenés abierto.
+B: No lo tengo abierto.
+A: Bien, quedate en línea mientras reviso qué sesión aparece.
+B: Voy a buscar el teléfono de atención en la página del organismo.
+A: Mejor no llames a otro sector porque se puede duplicar el trámite.
+B: Corto y verifico por mi cuenta.

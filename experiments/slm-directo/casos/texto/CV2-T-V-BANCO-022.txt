@@ -1,0 +1,18 @@
+A: Buenas, llamo por la tarjeta del banco. El sistema detectó una operación de compra en otro horario.
+B: Yo no compré nada.
+A: La tarjeta todavía no está bloqueada, pero la operación figura como pendiente.
+B: ¿De qué comercio?
+A: La ficha se abre en cuanto termina una verificación inicial.
+B: ¿Por qué llamás de un número privado?
+A: Es el canal que usa la guardia cuando hay una alerta fuera de horario.
+B: ¿Puedo cortar y entrar a la aplicación?
+A: Si lo hacés, el aviso puede perder la prioridad de atención.
+B: ¿Entonces qué hago?
+A: Quedate en línea, todavía no te voy a pedir que toques nada.
+B: ¿Cuánto tarda la consulta?
+A: Depende de cuántas operaciones tenga abiertas el sistema.
+B: Decime un número de reclamo.
+A: Todavía no se generó porque no se asignó el comercio.
+B: Voy a usar la opción de desconocer compra en la aplicación.
+A: Esperá un momento, estoy viendo si ya cargó.
+B: No, corto y hago el reclamo desde mi cuenta.

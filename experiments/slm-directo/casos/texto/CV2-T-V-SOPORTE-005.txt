@@ -1,0 +1,20 @@
+A: Buenas del soporte del calendario compartido de Estudio Río
+B: Los eventos aparecen corridos una hora
+A: Se modificó la zona horaria del servidor
+B: En mi celular están bien
+A: La computadora tiene una sesión vieja abierta
+B: La cierro
+A: Antes activá la sincronisación asistida desde el menú de cuenta
+B: Me pide aprobar un acceso temporal
+A: Aceptalo para que el calendario vuelva a tomar la hora local
+B: Eso les permite ver los eventos privados
+A: Solo durante el diagnóstico
+B: Puedo exportar el calendario en vez de habilitar acceso
+A: El archivo exportado no incluye la regla de zona horaria
+B: Me aparece una alerta de compartir pantalla
+A: Es la ventana de la asistencia remota confirmala y seguimos
+B: Bueno acepté la sesión
+A: Ya veo la configuración estaba seleccionada otra zona
+B: La cambiaste
+A: Sí ahora el horario coincide
+B: Gracias quedó bien

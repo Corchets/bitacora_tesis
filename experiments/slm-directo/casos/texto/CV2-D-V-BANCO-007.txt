@@ -1,0 +1,20 @@
+A: Buenas, del banco. ¿Te figura la cuenta de ahorro en cero?
+B: No, tengo saldo. ¿Por qué me llamás?
+A: Hubo una actualización de saldos y algunas cuentas quedaron mostrando el disponible anterior.
+B: La app me anda normal.
+A: Sí, pero el registro interno puede tardar en sincronizarse con la aplicación.
+B: ¿Hay algún movimiento que no reconozco?
+A: Ninguno confirmado. Para descartar una diferencia te voy guiando por el menú de seguridad.
+B: ¿Qué menú?
+A: Abrí el mensaje de actualización que te llegó y tocá revisar dispositivo.
+B: Me sale un equipo que no reconozco.
+A: Elegí quitarlo y después confirmar que este teléfono sea el principal.
+B: ¿No puedo llamar a la sucursal primero?
+A: Si cerrás la sesión, el equipo desconocido puede quedar activo hasta mañana.
+B: Ahora me pide autorizar la baja del otro equipo.
+A: Confirmá la operación para completar el cambio.
+B: ¿Con eso se bloquea el equipo anterior?
+A: Sí, queda fuera del perfil.
+B: Voy a leer el aviso completo.
+A: No cortes todavía; la solicitud vence en unos minutos.
+B: Ya confirmé la baja y el sistema dice que el teléfono anterior se quitó.

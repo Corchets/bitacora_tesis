@@ -1,0 +1,27 @@
+A: Buenas, tengo sesión el jueves a las dos pero me convocaron a una reunión de trabajo.
+B: Hola. ¿Querés pasarla para otro día?
+A: Si hay algo el mismo jueves temprano, me sirve.
+B: Hay un espacio a las doce y media, de cuarenta minutos.
+A: La sesión normal dura una hora, ¿se puede hacer el tratamiento completo?
+B: La profesional puede revisar qué ejercicios priorizar; no podemos acortar sin consultarle.
+A: ¿Podés preguntarle si le sirve ese horario?
+B: Sí, espero un minuto. ¿La sesión es por la rodilla?
+A: Sí, es la quinta desde que empecé.
+B: Dice que puede atenderte a las doce y media, pero terminan a la una y cuarto.
+A: Tengo que volver a la oficina a las dos, llego bien.
+B: ¿Querés que confirme el cambio?
+A: Sí, por favor. ¿La sede sigue siendo la de la calle Mitre?
+B: Sí, consultorio del primer piso.
+A: ¿Me llevo la banda que me prestaron?
+B: Sí, la profesional pidió que la traigas para practicar el ejercicio.
+A: La tengo en el bolso del gimnasio.
+B: Listo, cambié la sesión a las doce y media.
+A: ¿Puedo hacer la próxima semana en horario de tarde?
+B: La agenda de la semana próxima todavía no abrió.
+A: ¿Me avisás cuando haya turnos después de las cinco?
+B: Puedo dejar una nota de preferencia, pero la confirmación depende de la disponibilidad.
+A: Está bien. Los jueves a la tarde suelen ser complicados para mí.
+B: Lo anoté en la ficha de turnos.
+A: Gracias por encontrarme un lugar antes de la reunión.
+B: De nada, nos vemos el jueves.
+A: Hasta luego.
