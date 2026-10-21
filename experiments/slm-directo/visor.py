@@ -58,7 +58,7 @@ def datos_de_corridas(carpetas: list[Path]) -> dict:
             por_config.setdefault(fila["config"], {}).setdefault(fila["case_id"], []).append(fila)
         for config, cs in analisis.items():
             nombre = config if config not in resultados else f"{config} ({carpeta.name})"
-            configs.append({"id": nombre, "corrida": carpeta.name, "detector": "reglas" if config == "reglas" else "slm"})
+            configs.append({"id": nombre, "corrida": carpeta.name, "detector": "reglas" if config.startswith("reglas") else "slm"})
             metricas[nombre] = resumen.metricas(cs)
             # Mismo texto que resumen.md, para que los dos muestren el mismo número.
             metricas[nombre]["ms_p50_texto"] = resumen._ms(metricas[nombre]["ms_p50"])

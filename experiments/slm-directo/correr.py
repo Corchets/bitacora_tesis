@@ -284,6 +284,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--grupo", choices=sorted(casos.GRUPOS), help="solo un grupo de casos")
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
     p.add_argument("--sin-reglas", action="store_true", help="no correr el comparador de reglas")
+    p.add_argument("--reglas", default="v1", help="versiones del comparador de reglas separadas por coma: v1 (laboratorio) y/o v2 (reglas_v2.py)")
     p.add_argument("--url", default=URL_POR_DEFECTO, help="dirección de Ollama")
     p.add_argument("--num-ctx", type=int, default=4096, help="contexto del modelo en tokens")
     p.add_argument("--seed", type=int, default=42)
@@ -340,8 +341,14 @@ def main(argv: list[str] | None = None) -> int:
     extra = extra or None
 
     detectores = []
+    versiones_reglas = _lista(args.reglas)
+    for v in versiones_reglas:
+        if v not in ("v1", "v2"):
+            sys.exit(f"Reglas desconocidas {v!r}. Opciones: v1, v2")
     if not args.sin_reglas:
-        detectores.append(({"config": "reglas", "detector": "reglas", "modelo": "", "prompt": "", "hablantes": ""}, DetectorReglas()))
+        for v in versiones_reglas:
+            d = DetectorReglas(v)
+            detectores.append(({"config": d.nombre, "detector": "reglas", "modelo": "", "prompt": "", "hablantes": ""}, d))
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:

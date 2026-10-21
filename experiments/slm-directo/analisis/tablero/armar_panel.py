@@ -47,6 +47,8 @@ CORRIDAS = [
     ("2026-10-17_150516_m1-gguf", "qwen3.5:4b-q4_K_M", "Qwen3.5 4B · M1 (parcial, 42/53)"),
     ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "qwen3.5:0.8b-q8_0", "Qwen3.5 0.8B · M1 · num_batch 32", "tarea"),
     ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "qwen3.5:0.8b-q8_0", "Qwen3.5 0.8B · M1 · prompt v2 (parcial, 24/53)", "v2"),
+    ("2026-10-21_200147_m1-reglas-150", "reglas", "Reglas v1 · M1 · 150 casos"),
+    ("2026-10-21_201914_m1-reglas-v2-150", "reglas", "Reglas v2 · M1 · 150 casos"),
 ]
 PROMPT = {"tarea": "v1", "v2": "v2"}
 

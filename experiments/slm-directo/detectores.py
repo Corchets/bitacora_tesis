@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import reglas
+import reglas_v2
 from casos import Linea
 from cliente_ollama import ClienteOllama, ErrorOllama
 
@@ -225,13 +226,24 @@ class DetectorSLM:
 
 
 class DetectorReglas:
-    """Reglas del laboratorio sobre la línea nueva. No usan contexto ni hablantes."""
+    """Reglas del laboratorio sobre la línea nueva. No usan hablantes.
 
-    nombre = "reglas"
+    v1 (por defecto) es el comparador del laboratorio. v2 (reglas_v2.py) exige además que el
+    pedido vaya dirigido a la otra persona. Las dos miran solo la línea nueva.
+    """
+
+    def __init__(self, version: str = "v1") -> None:
+        if version not in ("v1", "v2"):
+            raise ValueError(f"Versión de reglas desconocida: {version!r}")
+        self.version = version
+        self.nombre = "reglas" if version == "v1" else "reglas_v2"
 
     def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
         inicio = time.perf_counter()
-        hallazgos = reglas.coincidencias(lineas[-1].texto)
+        if self.version == "v1":
+            hallazgos = reglas.coincidencias(lineas[-1].texto)
+        else:
+            hallazgos = reglas_v2.coincidencias_v2(lineas[-1].texto)
         ms = (time.perf_counter() - inicio) * 1000
         if not hallazgos:
             return Respuesta(valida=True, alerta_sugerida=False, ms=ms)
