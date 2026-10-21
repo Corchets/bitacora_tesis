@@ -23,6 +23,7 @@ import csv
 import json
 import os
 import platform
+import signal
 import subprocess
 import sys
 import time
@@ -32,7 +33,7 @@ from pathlib import Path
 
 import casos
 from cliente_ollama import URL_POR_DEFECTO, ClienteOllama, ErrorOllama
-from detectores import HABLANTES, PROMPTS, DetectorReglas, DetectorSLM, Respuesta, cargar_prompt, huella
+from detectores import HABLANTES, PROMPTS, DetectorReglas, DetectorSLM, Respuesta, cargar_prompt, esquema_de, huella
 
 RAIZ = Path(__file__).resolve().parent
 POLITICA = "aviso_unico_primer_true_valido"
@@ -287,10 +288,17 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--timeout", type=float, default=120.0, help="segundos máximos por actualización")
     p.add_argument("--solo-cpu", action="store_true", help="no usar la placa de video (más parecido a un celular)")
     p.add_argument("--hilos", type=int, help="hilos de CPU para el modelo, p. ej. 2 (presupuesto de gama alta)")
+    p.add_argument(
+        "--num-batch", type=int,
+        help="tokens por lote al procesar el prompt; 32 deja reutilizar la caché en qwen3.5 (ver analisis/2026-10-21-cache-prefijo)",
+    )
     p.add_argument("--etiqueta", default="", help="texto corto para el nombre de la carpeta")
     p.add_argument("--salida", type=Path, default=RAIZ / "corridas", help="dónde crear la carpeta de la corrida")
     p.add_argument("--detalle", action="store_true", help="mostrar cada línea y la respuesta (modo demo)")
     args = p.parse_args(argv)
+    # Un proceso lanzado en segundo plano desde un script hereda SIGINT ignorado; así un
+    # vigilante (o Ctrl+C) siempre corta guardando el manifiesto.
+    signal.signal(signal.SIGINT, signal.default_int_handler)
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     except (AttributeError, ValueError):
@@ -325,6 +333,8 @@ def main(argv: list[str] | None = None) -> int:
         extra["num_gpu"] = 0
     if args.hilos:
         extra["num_thread"] = args.hilos
+    if args.num_batch:
+        extra["num_batch"] = args.num_batch
     extra = extra or None
 
     detectores = []
@@ -333,7 +343,7 @@ def main(argv: list[str] | None = None) -> int:
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra)
+                d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
                 etiqueta = {"config": f"slm|{modelo}|{variante}|{h}", "detector": "slm", "modelo": modelo, "prompt": variante, "hablantes": h}
                 detectores.append((etiqueta, d))
     if not detectores:
@@ -350,7 +360,7 @@ def main(argv: list[str] | None = None) -> int:
         "politica": POLITICA,
         "ollama": None if ollama is None else {"url": args.url, **ollama},
         "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
-        "prompts": {v: {"huella": huella(cargar_prompt(v)), "texto": cargar_prompt(v)} for v in prompts} if modelos else {},
+        "prompts": {v: {"huella": huella(cargar_prompt(v)), "texto": cargar_prompt(v), "esquema": esquema_de(v)} for v in prompts} if modelos else {},
         "configs": [c for c, _ in detectores],
         "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
         "modelos": {},

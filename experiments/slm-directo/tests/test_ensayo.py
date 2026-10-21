@@ -34,6 +34,7 @@ from detectores import (  # noqa: E402
     Respuesta,
     armar_mensaje_usuario,
     cargar_prompt,
+    esquema_de,
     evidencia_en_texto,
     validar_salida,
 )
@@ -167,6 +168,11 @@ class TestMensajeYEvidencia(unittest.TestCase):
         self.assertIn("ANSES", con_base)
         self.assertNotIn("ANSES", tarea)
 
+    def test_el_v2_pide_la_cita_antes_de_decidir(self):
+        self.assertNotIn("código que da acceso", cargar_prompt("v2"))
+        self.assertEqual(list(esquema_de("v2")["properties"])[0], "evidencia")
+        self.assertEqual(sorted(esquema_de("v2")["required"]), sorted(esquema_de("tarea")["required"]))
+
 
 class TestReglas(unittest.TestCase):
     def evaluar(self, texto: str) -> Respuesta:
@@ -259,6 +265,10 @@ class TestClienteYDetectorContraOllamaFalso(unittest.TestCase):
         self.detector(extra={"num_gpu": 0, "num_thread": 2}).evaluar(DIALOGO[:1])
         opciones = OllamaFalso.pedidos[0]["options"]
         self.assertEqual((opciones["num_gpu"], opciones["num_thread"]), (0, 2))
+
+    def test_el_esquema_del_v2_llega_a_ollama(self):
+        self.detector(esquema=esquema_de("v2")).evaluar(DIALOGO[:1])
+        self.assertEqual(list(OllamaFalso.pedidos[0]["format"]["properties"])[0], "evidencia")
 
     def test_recorrido_completo_con_aviso_unico(self):
         resultados = list(correr.procesar_caso(self.detector(), DIALOGO))

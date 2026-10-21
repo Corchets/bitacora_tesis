@@ -234,6 +234,7 @@ def construir_detector(
             hablantes=hablantes,
             num_ctx=num_ctx,
             seed=seed,
+            esquema=detectores.esquema_de(prompt_nombre),
         )
         # Compartir el calentamiento y la negociación de `think` con slm-directo.
         # Qwen3.5 necesita pensar=False para responder dentro del formato y presupuesto.
