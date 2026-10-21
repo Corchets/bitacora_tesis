@@ -4,7 +4,9 @@ Para cada configuración (corrida + config) calcula:
 - estafas con aviso y falsas alarmas, con la política del ensayo (primer alerta_sugerida);
 - las mismas cuentas exigiendo además que la cita aparezca en lo dicho (`evidencia_en_texto`);
 - líneas con riesgo >= 0,6 y sin alerta, y con alerta y riesgo < 0,5 (incoherencias);
-- para cada estafa sin aviso: riesgo en la línea del pedido y riesgo máximo.
+- para cada estafa sin aviso: riesgo en la línea del pedido y riesgo máximo;
+- Preventive@δ en líneas (METRICAS.md): estafas con aviso en la línea T_X − δ o antes,
+  sobre las estafas que tienen esa marca, para δ = 0, 1 y 2 y X = T_R o T_C.
 
 Cada configuración se informa sobre todos sus casos completos y por separado sobre los 53
 históricos y los 97 de corpus_v2 (el v2 se escribió mirando solo los históricos).
@@ -37,6 +39,7 @@ CONFIGS = [
 ]
 # Corridas nuevas: todas las configs SLM de las carpetas *-nb32 (cola_m1.sh), en orden.
 PROMPT = {"tarea": "v1", "v2": "v2"}
+DELTAS = (0, 1, 2)
 GRUPOS = [("todos", None), ("53 históricos", lambda g: g != "corpus_v2"), ("corpus_v2", lambda g: g == "corpus_v2")]
 
 
@@ -70,11 +73,18 @@ def analizar(carpeta: str, config: str, filtro=None) -> dict:
     cuenta = dict.fromkeys(["vishing", "legitima", "vishing_aviso", "legitima_aviso", "vishing_aviso_con_cita",
                             "legitima_aviso_con_cita", "lineas", "alertas", "riesgo_alto_sin_alerta",
                             "alerta_con_riesgo_bajo"], 0)
+    preventive = {f"{x}@{d}": [0, 0] for x in ("t_r", "t_c") for d in DELTAS}
     perdidas = []
     for cid, filas in sorted(datos.items()):
         ref = casos.cargar_referencia(cid)
         validas = [r for r in filas if r["valida"] == "true"]
         aviso = any(r["alerta_sugerida"] == "true" for r in validas)
+        t_a = next((int(r["linea"]) for r in validas if r["alerta_sugerida"] == "true"), None)
+        for x in ("t_r", "t_c"):
+            marca = ref.get(f"{x}_linea") if ref["clase"] == "vishing" else None
+            for d in DELTAS if marca else ():
+                preventive[f"{x}@{d}"][0] += t_a is not None and t_a <= marca - d
+                preventive[f"{x}@{d}"][1] += 1
         con_cita = any(r["alerta_sugerida"] == "true" and r["evidencia_en_texto"] == "true" for r in validas)
         clase = "vishing" if ref["clase"] == "vishing" else "legitima"
         cuenta[clase] += 1
@@ -91,7 +101,7 @@ def analizar(carpeta: str, config: str, filtro=None) -> dict:
             en_tr = next((float(r["riesgo"]) for r in validas if tr and int(r["linea"]) == tr), None)
             perdidas.append({"caso": cid, "pedido": ref.get("pedido"), "t_r": tr, "riesgo_en_t_r": en_tr,
                              "riesgo_max": max((float(r["riesgo"]) for r in validas), default=None)})
-    return {"corrida": carpeta, "config": config, **cuenta, "vishing_sin_aviso": perdidas}
+    return {"corrida": carpeta, "config": config, **cuenta, "preventive": preventive, "vishing_sin_aviso": perdidas}
 
 
 def wilson(k: int, n: int, z: float = 1.96) -> str:
@@ -118,6 +128,12 @@ def main() -> int:
                   f"{r['legitima_aviso']}/{r['legitima']} | {wilson(r['legitima_aviso'], r['legitima'])} | "
                   f"{r['vishing_aviso_con_cita']}/{r['vishing']} · {r['legitima_aviso_con_cita']}/{r['legitima']} | "
                   f"{r['riesgo_alto_sin_alerta']} de {r['lineas']} | {r['alerta_con_riesgo_bajo']} de {r['alertas']} |")
+    print()
+    print("| Configuración | Casos | " + " | ".join(f"Prev@{d} T_R" for d in DELTAS) + " | " + " | ".join(f"Prev@{d} T_C" for d in DELTAS) + " |")
+    print("|---|---|" + "---|" * 2 * len(DELTAS))
+    for r in resultados:
+        pr = r["preventive"]
+        print(f"| {r['nombre']} | {r['grupo']} | " + " | ".join(f"{pr[k][0]}/{pr[k][1]}" for k in pr) + " |")
     print()
     for r in resultados:
         if r["vishing_sin_aviso"] and r["grupo"] == "todos":
