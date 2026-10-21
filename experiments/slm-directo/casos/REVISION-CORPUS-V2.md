@@ -40,6 +40,12 @@ el segundo mantiene abierta la duda de dónde anotar el comienzo del pedido.
 
 ## Verificación reproducible
 
+Verificado después de integrar `886cff0`: **42 tests de `slm-directo`, 28 de métricas
+y 12 de replay pasan**. El humo real de dos casos de desarrollo produjo manifiesto
+y resumen con las nuevas legítimas bien contadas. Un ID reservado pasado al runner
+por defecto fue rechazado antes de crear una corrida. Se comprobaron 240 enlaces
+locales en los siete Markdown afectados y la sintaxis JavaScript del panel.
+
 Desde `experiments/slm-directo/`:
 
 ```bash
