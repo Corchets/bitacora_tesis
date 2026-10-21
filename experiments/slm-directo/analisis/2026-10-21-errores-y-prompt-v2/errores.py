@@ -6,6 +6,9 @@ Para cada configuración (corrida + config) calcula:
 - líneas con riesgo >= 0,6 y sin alerta, y con alerta y riesgo < 0,5 (incoherencias);
 - para cada estafa sin aviso: riesgo en la línea del pedido y riesgo máximo.
 
+Cada configuración se informa sobre todos sus casos completos y por separado sobre los 53
+históricos y los 97 de corpus_v2 (el v2 se escribió mirando solo los históricos).
+
     python analisis/2026-10-21-errores-y-prompt-v2/errores.py
 """
 
@@ -32,11 +35,21 @@ CONFIGS = [
     ("2026-10-17_150516_m1-gguf", "slm|qwen3.5:2b-q8_0|tarea|ab", "2B v1 · M1"),
     ("2026-10-17_150516_m1-gguf", "slm|qwen3.5:4b-q4_K_M|tarea|ab", "4B v1 · M1 (parcial)"),
 ]
-# Corridas nuevas: se agregan si existen.
-NUEVAS = [
-    ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "slm|qwen3.5:0.8b-q8_0|tarea|ab", "0.8B v1 · M1 nb32"),
-    ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "slm|qwen3.5:0.8b-q8_0|v2|ab", "0.8B v2 · M1 nb32"),
-]
+# Corridas nuevas: todas las configs SLM de las carpetas *-nb32 (cola_m1.sh), en orden.
+PROMPT = {"tarea": "v1", "v2": "v2"}
+GRUPOS = [("todos", None), ("53 históricos", lambda g: g != "corpus_v2"), ("corpus_v2", lambda g: g == "corpus_v2")]
+
+
+def nuevas() -> list[tuple[str, str, str]]:
+    salida = []
+    for carpeta in sorted(p.name for p in (SLM / "corridas").glob("*-nb32") if (p / "actualizaciones.csv").exists()):
+        with (SLM / "corridas" / carpeta / "actualizaciones.csv").open(encoding="utf-8-sig") as f:
+            configs = dict.fromkeys(r["config"] for r in csv.DictReader(f) if r["detector"] == "slm")
+        for config in configs:
+            _, modelo, prompt, _ = config.split("|")
+            tam = modelo.split(":")[1].split("-")[0].upper()
+            salida.append((carpeta, config, f"{tam} {PROMPT.get(prompt, prompt)} · M1 nb32 · {carpeta[:17]}"))
+    return salida
 
 
 def leer(carpeta: str, config: str) -> dict[str, list[dict]]:
@@ -50,9 +63,13 @@ def leer(carpeta: str, config: str) -> dict[str, list[dict]]:
     return {c: filas for c, filas in por_caso.items() if len(filas) == len(casos.cargar_texto(c))}
 
 
-def analizar(carpeta: str, config: str) -> dict:
+def analizar(carpeta: str, config: str, filtro=None) -> dict:
     datos = leer(carpeta, config)
-    cuenta = defaultdict(int)
+    if filtro:
+        datos = {c: f for c, f in datos.items() if filtro(casos.cargar_referencia(c)["grupo"])}
+    cuenta = dict.fromkeys(["vishing", "legitima", "vishing_aviso", "legitima_aviso", "vishing_aviso_con_cita",
+                            "legitima_aviso_con_cita", "lineas", "alertas", "riesgo_alto_sin_alerta",
+                            "alerta_con_riesgo_bajo"], 0)
     perdidas = []
     for cid, filas in sorted(datos.items()):
         ref = casos.cargar_referencia(cid)
@@ -77,23 +94,33 @@ def analizar(carpeta: str, config: str) -> dict:
     return {"corrida": carpeta, "config": config, **cuenta, "vishing_sin_aviso": perdidas}
 
 
+def wilson(k: int, n: int, z: float = 1.96) -> str:
+    if not n:
+        return "—"
+    p, d = k / n, 1 + z * z / n
+    c, m = p + z * z / (2 * n), z * (p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5
+    return f"{100 * max(0, (c - m) / d):.0f}–{100 * min(1, (c + m) / d):.0f} %"
+
+
 def main() -> int:
-    configs = CONFIGS + [c for c in NUEVAS if (SLM / "corridas" / c[0] / "actualizaciones.csv").exists()]
+    configs = CONFIGS + nuevas()
     resultados = []
-    print("| Configuración | Estafas con aviso | Falsas alarmas | Con cita verificada: estafas / FA | Riesgo ≥ 0,6 sin alerta | Alerta con riesgo < 0,5 |")
-    print("|---|---|---|---|---|---|")
+    print("| Configuración | Casos | Estafas con aviso | IC 95 % | Falsas alarmas | IC 95 % | Con cita verificada: estafas / FA | Riesgo ≥ 0,6 sin alerta | Alerta con riesgo < 0,5 |")
+    print("|---|---|---|---|---|---|---|---|---|")
     for carpeta, config, nombre in configs:
-        r = analizar(carpeta, config)
-        if not r.get("lineas"):
-            continue
-        r["nombre"] = nombre
-        resultados.append(r)
-        print(f"| {nombre} | {r['vishing_aviso']}/{r['vishing']} | {r['legitima_aviso']}/{r['legitima']} | "
-              f"{r['vishing_aviso_con_cita']}/{r['vishing']} · {r['legitima_aviso_con_cita']}/{r['legitima']} | "
-              f"{r['riesgo_alto_sin_alerta']} de {r['lineas']} | {r['alerta_con_riesgo_bajo']} de {r['alertas']} |")
+        for grupo, filtro in GRUPOS:
+            r = analizar(carpeta, config, filtro)
+            if not r.get("lineas"):
+                continue
+            r["nombre"], r["grupo"] = nombre, grupo
+            resultados.append(r)
+            print(f"| {nombre} | {grupo} | {r['vishing_aviso']}/{r['vishing']} | {wilson(r['vishing_aviso'], r['vishing'])} | "
+                  f"{r['legitima_aviso']}/{r['legitima']} | {wilson(r['legitima_aviso'], r['legitima'])} | "
+                  f"{r['vishing_aviso_con_cita']}/{r['vishing']} · {r['legitima_aviso_con_cita']}/{r['legitima']} | "
+                  f"{r['riesgo_alto_sin_alerta']} de {r['lineas']} | {r['alerta_con_riesgo_bajo']} de {r['alertas']} |")
     print()
     for r in resultados:
-        if r["vishing_sin_aviso"]:
+        if r["vishing_sin_aviso"] and r["grupo"] == "todos":
             print(f"{r['nombre']}: " + ", ".join(
                 f"{p['caso']} ({p['pedido']}, riesgo en T_R {p['riesgo_en_t_r']}, máx {p['riesgo_max']})" for p in r["vishing_sin_aviso"]))
     (AQUI / "errores.json").write_text(json.dumps(resultados, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -50,7 +50,7 @@ label.ctl{display:flex;flex-direction:column;font-size:12px;color:var(--mu);gap:
 .etapa .cuerpo{padding:0 16px 12px 52px;font-size:13.5px}
 .etapa ul{margin:4px 0 8px;padding-left:18px}.etapa li{margin:2px 0}
 .prog{height:6px;background:#eceae4;border-radius:3px;overflow:hidden;width:120px;margin-left:auto;flex:none}.prog i{display:block;height:100%;background:var(--pr)}
-.chk{list-style:none;padding-left:0!important}.chk li{display:flex;gap:6px;align-items:flex-start}
+.chk{list-style:none;padding-left:0!important}.chk .hecha s{color:var(--mu)}.chk li{display:flex;gap:6px;align-items:flex-start}
 .lista{max-height:560px;overflow:auto;border:1px solid var(--bd);border-radius:8px;background:var(--panel)}
 .it{padding:6px 10px;border-bottom:1px solid var(--bd);cursor:pointer;font-size:12.5px;display:flex;justify-content:space-between;gap:6px}
 .it:hover,.it.sel{background:var(--pr2)}
@@ -97,7 +97,7 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <!-- ============================ PLAN ============================ -->
 <section id="s-plan" data-titulo="Plan de trabajo">
 <h2>Plan de trabajo por etapas</h2>
-<p class="mu">Orden propuesto para ir por partes. Las casillas se guardan en este navegador (localStorage). Todo lo que fija un umbral, una gama o una referencia se marca <b>propuesta sin discutir</b> hasta que lo ratifique el equipo, según AGENTS.md.</p>
+<p class="mu">Orden propuesto para ir por partes. Lo terminado aparece tachado, con su evidencia, y lo que está en marcha, con ⏳; esas marcas viven en el código del panel. Las demás casillas se guardan solo en este navegador (localStorage). Todo lo que fija un umbral, una gama o una referencia se marca <b>propuesta sin discutir</b> hasta que lo ratifique el equipo, según AGENTS.md.</p>
 <div class="aviso"><b>Meta de calidad propuesta:</b> ≥ 95 % de estafas con aviso y ≤ 5 % de legítimas con falsa alarma, por conversación, con aviso único, medido una sola vez sobre un test congelado. Hoy no hay gate de calidad aprobado: <code>PREFACTIBILIDAD-TECNICA.md</code> §2 lo deja para D09. <b>Propuesta sin discutir.</b></div>
 <div id="plan"></div>
 </section>
@@ -115,8 +115,9 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 
 <!-- ============================ RESULTADOS ============================ -->
 <section id="s-res" data-titulo="Resultados">
-<h2>Resultados sobre los 53 casos escritos</h2>
-<p class="mu">29 estafas y 24 legítimas difíciles. Puntos: lo observado. Barras: intervalo de Wilson del 95 %. La zona verde es la meta propuesta (≥ 95 % / ≤ 5 %). Se calcula con la política de la pestaña <a href="#afinar">Afinar</a> (por defecto: primer <code>alerta_sugerida=true</code> válido, igual que las corridas registradas).</p>
+<h2>Resultados sobre los casos de desarrollo</h2>
+<div class="fila"><label class="ctl">Casos<select class="sel-grupo"><option value="todos">todo desarrollo (150)</option><option value="historicos">53 históricos</option><option value="corpus_v2">corpus v2 de desarrollo (97)</option></select></label></div>
+<p class="mu"><span id="res-n"></span> Cada corrida se cuenta sobre sus casos completos de ese conjunto: las anteriores al 2026-10-21 solo tienen los 53 históricos, así que para compararlas con las nuevas elegí «53 históricos». Puntos: lo observado. Barras: intervalo de Wilson del 95 %. La zona verde es la meta propuesta (≥ 95 % / ≤ 5 %). Se calcula con la política de la pestaña <a href="#afinar">Afinar</a> (por defecto: primer <code>alerta_sugerida=true</code> válido, igual que las corridas registradas).</p>
 <div class="card"><div id="dispersion"></div><div class="ley" id="ley-disp"></div></div>
 <div class="card"><table id="tabla-res"></table></div>
 <h3>Tiempo por línea: con y sin placa de video</h3>
@@ -130,10 +131,11 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <section id="s-afinar" data-titulo="Afinar umbrales">
 <h2>Afinar umbral y política sobre corridas guardadas</h2>
 <p class="mu">Recalcula sin volver a correr nada: cada corrida guardó el <code>riesgo</code> y la <code>alerta_sugerida</code> de cada línea. También aparecen acá las corridas que hagas en el <a href="#probador">Probador</a>.</p>
-<div class="aviso">Afinar sobre los mismos 53 casos que se usan para medir sobreajusta: sirve para explorar, no para reportar. Los números para la tesis tienen que salir de un test que no se usó para elegir el umbral (etapa 1 del plan). El <code>riesgo</code> no está calibrado.</div>
+<div class="aviso">Afinar sobre los mismos casos de desarrollo que se usan para medir sobreajusta: sirve para explorar, no para reportar. Los números para la tesis tienen que salir de un test que no se usó para elegir el umbral (etapa 1 del plan). El <code>riesgo</code> no está calibrado.</div>
 <div class="card">
 <div class="fila">
  <label class="ctl">Corrida<select id="af-corrida"></select></label>
+ <label class="ctl">Casos<select class="sel-grupo"><option value="todos">todo desarrollo (150)</option><option value="historicos">53 históricos</option><option value="corpus_v2">corpus v2 de desarrollo (97)</option></select></label>
  <label class="ctl">Condición de alerta<select id="af-base"><option value="alerta">alerta_sugerida = true y riesgo ≥ τ</option><option value="riesgo">solo riesgo ≥ τ</option></select></label>
  <label class="ctl">Umbral τ: <b id="af-tau-v">0,00</b><input type="range" id="af-tau" min="0" max="1" step="0.05" value="0"></label>
  <label class="ctl">Persistencia k (líneas seguidas)<input type="number" id="af-k" min="1" max="5" value="1" style="width:70px"></label>
@@ -334,11 +336,21 @@ function posicion(c, linea) {
   if (linea === c.tr) return 'en el pedido';
   return 'después';
 }
+let grupoEval = 'todos';
+const enGrupo = c => grupoEval === 'todos' || (grupoEval === 'corpus_v2') === (c.grupo === 'corpus_v2');
+function nGrupo() {
+  const L = D.casos.filter(enGrupo), v = L.filter(c => c.clase === 'vishing').length;
+  return `${L.length} casos: ${v} estafas y ${L.length - v} legítimas.`;
+}
+document.querySelectorAll('.sel-grupo').forEach(s => s.addEventListener('input', () => {
+  grupoEval = s.value; document.querySelectorAll('.sel-grupo').forEach(o => o.value = grupoEval);
+  pintarResultados(); pintarAfinar();
+}));
 function evaluar(corrida, p = politica) {
   const pc = porCaso(corrida), filas = [];
   let tp = 0, nv = 0, fp = 0, nl = 0, fallos = 0, pos = {};
   for (const [id, lineas] of Object.entries(pc)) {
-    const c = CASOS[id]; if (!c) continue;
+    const c = CASOS[id]; if (!c || !enGrupo(c)) continue;
     const ultima = Math.max(...lineas.map(f => f[1]));
     const completo = ultima >= c.lineas.length;
     if (!completo) continue;
@@ -427,7 +439,7 @@ function pintarMemoria() {
   $('#memoria').replaceChildren(s);
   $('#memoria').insertAdjacentHTML('beforeend', '<div class="ley"><span><i style="background:#a7f3d0"></i>ASR Zipformer (~400 MB)</span><span><i style="background:#93c5fd"></i>modelo del detector</span></div>');
 }
-function pintarResultados() { pintarDispersion(); pintarTablaRes(); pintarLatencia(); pintarMemoria(); }
+function pintarResultados() { $('#res-n').textContent = nGrupo(); pintarDispersion(); pintarTablaRes(); pintarLatencia(); pintarMemoria(); }
 
 // ---------------- Afinar ----------------
 function opcionesCorridas(sel, conVacia) {
@@ -740,22 +752,30 @@ const FAQ = [
 $('#faq').innerHTML = FAQ.map(([q, a], i) => `<details><summary>${q}</summary><div class="card">${a}</div></details>`).join('');
 
 const PLAN = [
- {t: 'Ordenar y dejar todo a salvo', cuando: 'ahora', obj: 'Que nada viva solo en esta carpeta y que cada etapa tenga su issue.', tareas: ['Commit y push de la verificación del 2026-10-17 y de este panel', 'Abrir issues en GitHub para las etapas 1–8 (el backlog vive en Issues)', 'Llevar al equipo las decisiones de abajo: meta 95/5, gama objetivo, uso de modelos por API como cota'], sale: 'Rama con upstream, árbol limpio e issues creados.', decide: 'Equipo: qué etapas se priorizan y quién las toma.'},
- {t: 'Corpus v2: más y mejores casos', cuando: 'empieza ya, en paralelo con la 2', obj: 'Tener suficientes conversaciones, bien armadas, para poder medir 95/5 con intervalos que lo respalden.', tareas: ['Auditar los 53: duplicados, guiones muy cortos, consejos de seguridad que regalan la respuesta, nombres de entidades reales', 'Diseñar cuotas por familia del catálogo (19 escenarios), dificultad, largo y región', 'Agregar legítimas cotidianas (familia, trabajo, delivery, médico), que hoy son 0', 'Agregar legítimas que sí piden un dato (banco que verifica identidad, turno con DNI) y estafas sin palabras clave', 'Variantes «tipo ASR»: sin puntuación, cortes, errores de transcripción, conversaciones largas', 'Tamaño meta: desarrollo ~150 (75/75) para afinar y test congelado ~200 (100/100) que no se mira hasta el final', 'Revisión humana de una muestra por dos personas y medición de acuerdo', 'Validación con casos.py, partición congelada con hash'], sale: 'Corpus v2 validado, partición desarrollo/test congelada y muestra revisada.', decide: 'Equipo: cuotas y dónde va T_R en pedidos partidos o indirectos (D07); partición disjunta (D08).'},
- {t: 'Techo de calidad con modelos fuertes', cuando: 'exploratorio ya sobre los 53; confirmatorio con el corpus v2', obj: 'Saber si 95/5 es alcanzable y con qué modelo, antes de achicar.', tareas: ['Saber qué placa de video tiene la PC con Windows (32 GB de RAM): define si entran modelos de 9–14B o más', 'Correr la escalera hacia arriba: Qwen3.5 9B (<code>qwen3.5:9b-q4_K_M</code> ya descargado en la M1; corre con <code>cola_m1.sh</code> y Docker cerrado) y otras familias de 7–14B (Gemma, Llama, Phi, Mistral; verificar las etiquetas en Ollama)', 'Opcional: un modelo de frontera por API como cota superior (los casos son ficticios, pero es un servicio externo: hay que aprobarlo)', 'Análisis de errores: ¿falla por capacidad del modelo o por casos ambiguos?', 'Repetir cada configuración al menos 3 veces (el 2B cambió 2/53 entre corridas iguales)'], sale: 'Curva de calidad por tamaño y familia, y diagnóstico de los errores que quedan.', decide: 'Nadie aún; alimenta D09.'},
- {t: 'Afinar: prompt, umbral, política y reglas', cuando: 'después de la 3', obj: 'Llevar el mejor modelo lo más cerca posible de 95/5 sin tocar el test.', tareas: ['Prompt v2 (escrito el 2026-10-21, <code>--prompts v2</code>; falta correrlo completo con <code>cola_m1.sh</code>): sin el ejemplo del «código», cita antes de decidir, pedidos sin palabra clave, relatado o negado no cuenta', 'Barrer umbral de riesgo τ y persistencia k (pestaña Afinar), sobre desarrollo', 'Comparar con y sin hablantes A/B, y con y sin base institucional', 'Reglas v2: menos falsas alarmas (hoy 14/24), como filtro barato o segunda opinión', 'Congelar la configuración candidata: modelo, prompt, τ y k'], sale: 'Configuración candidata congelada con su desempeño en desarrollo.', decide: 'Equipo: política de aviso (D08).'},
+ {t: 'Ordenar y dejar todo a salvo', cuando: 'ahora', obj: 'Que nada viva solo en esta carpeta y que cada etapa tenga su issue.', tareas: [{t: 'Commit y push de la verificación del 2026-10-17 y de este panel', hecho: '2026-10-21: <code>886cff0</code> en <code>origin/laboratorio-luciano</code>.'}, 'Abrir issues en GitHub para las etapas 1–8 (el backlog vive en Issues)', 'Llevar al equipo las decisiones de abajo: meta 95/5, gama objetivo, uso de modelos por API como cota'], sale: 'Rama con upstream, árbol limpio e issues creados.', decide: 'Equipo: qué etapas se priorizan y quién las toma.'},
+ {t: 'Corpus v2: más y mejores casos', cuando: 'empieza ya, en paralelo con la 2', obj: 'Tener suficientes conversaciones, bien armadas, para poder medir 95/5 con intervalos que lo respalden.', tareas: [{t: 'Auditar los 53: duplicados, guiones muy cortos, consejos de seguridad que regalan la respuesta, nombres de entidades reales', curso: '2026-10-21: en curso; los 53 se conservan byte por byte y la auditoría solo recomienda.'}, {t: 'Diseñar cuotas por familia del catálogo (19 escenarios), dificultad, largo y región', hecho: '2026-10-21: <code>casos/DISENO-CORPUS-V2.md</code>, con 10 familias, 6 dificultades y 12–40 líneas. La región no tiene cuota.'}, {t: 'Agregar legítimas cotidianas (familia, trabajo, delivery, médico), que hoy son 0', hecho: '2026-10-21: 25 en desarrollo y 40 en reserva (familia, trabajo, delivery, médico y escuela).'}, {t: 'Agregar legítimas que sí piden un dato (banco que verifica identidad, turno con DNI) y estafas sin palabras clave', hecho: '2026-10-21: en desarrollo, 16 legítimas con pedido razonable y 18 estafas indirectas, inducidas o partidas (en reserva, 35 y 40).'}, {t: 'Variantes «tipo ASR»: sin puntuación, cortes, errores de transcripción, conversaciones largas', hecho: '2026-10-21: 24 en desarrollo y 60 en reserva, escritas a mano (no son salida de un ASR). 50 de los casos nuevos tienen 30–40 líneas.'}, {t: 'Tamaño meta: desarrollo ~150 (75/75) para afinar y test congelado ~200 (100/100) que no se mira hasta el final', hecho: '2026-10-21: 150 de desarrollo (75/75) y 200 reservados (100/100), sin mirar.'}, 'Revisión humana de una muestra por dos personas y medición de acuerdo', {t: 'Validación con casos.py, partición congelada con hash', hecho: '2026-10-21: <code>MANIFIESTO-CORPUS-V2.json</code> con SHA-256 y revisión técnica r02 (<code>casos/REVISION-CORPUS-V2.md</code>). La partición es candidata hasta D08.'}], sale: 'Corpus v2 validado, partición desarrollo/test congelada y muestra revisada.', decide: 'Equipo: cuotas y dónde va T_R en pedidos partidos o indirectos (D07); partición disjunta (D08).'},
+ {t: 'Techo de calidad con modelos fuertes', cuando: 'exploratorio ya sobre los 53; confirmatorio con el corpus v2', obj: 'Saber si 95/5 es alcanzable y con qué modelo, antes de achicar.', tareas: ['Saber qué placa de video tiene la PC con Windows (32 GB de RAM): define si entran modelos de 9–14B o más', {t: 'Correr la escalera hacia arriba: Qwen3.5 9B (<code>qwen3.5:9b-q4_K_M</code> ya descargado en la M1; corre con <code>cola_m1.sh</code> y Docker cerrado) y otras familias de 7–14B (Gemma, Llama, Phi, Mistral; verificar las etiquetas en Ollama)', curso: '<code>qwen3.5:9b-q4_K_M</code> descargado; el piloto va después del 4B (<code>cola_m1.sh 9b</code>).'}, 'Opcional: un modelo de frontera por API como cota superior (los casos son ficticios, pero es un servicio externo: hay que aprobarlo)', {t: 'Análisis de errores: ¿falla por capacidad del modelo o por casos ambiguos?', curso: '2026-10-21: <code>errores.py</code> sobre los 53 (el 2B pierde pedidos de dinero con excusa creíble y pedidos indirectos de código). Ahora separa los 53 históricos de corpus_v2; falta correrlo con las corridas nuevas.'}, {t: 'Repetir cada configuración al menos 3 veces (el 2B cambió 2/53 entre corridas iguales)', curso: '2B v1: la tercera repetición sobre los 53 está en la cola del 2026-10-21.'}], sale: 'Curva de calidad por tamaño y familia, y diagnóstico de los errores que quedan.', decide: 'Nadie aún; alimenta D09.'},
+ {t: 'Afinar: prompt, umbral, política y reglas', cuando: 'después de la 3', obj: 'Llevar el mejor modelo lo más cerca posible de 95/5 sin tocar el test.', tareas: [{t: 'Prompt v2 (escrito el 2026-10-21, <code>--prompts v2</code>): sin el ejemplo del «código», cita antes de decidir, pedidos sin palabra clave, relatado o negado no cuenta', curso: '2026-10-21 19:54: corre v1 contra v2 en los 150 de desarrollo (2B, después 0.8B y 4B). Los 97 de corpus_v2 son su primera prueba honesta.'}, 'Barrer umbral de riesgo τ y persistencia k (pestaña Afinar), sobre desarrollo', 'Comparar con y sin hablantes A/B, y con y sin base institucional', {t: 'Reglas v2: menos falsas alarmas (hoy 14/24), como filtro barato o segunda opinión', curso: '2026-10-21: en curso, como variante aparte; la v1 se conserva para reproducir.'}, 'Congelar la configuración candidata: modelo, prompt, τ y k'], sale: 'Configuración candidata congelada con su desempeño en desarrollo.', decide: 'Equipo: política de aviso (D08).'},
  {t: 'Bajar de tamaño hasta donde aguante', cuando: 'después de la 4', obj: 'Encontrar el modelo más chico que mantiene la meta, por batería, RAM y equipos más chicos.', tareas: ['Escalera descendente con la configuración congelada (por ejemplo 9B → 4B → 2B → 0.8B, y equivalentes de otras familias)', 'Medir memoria RSS y latencia p50/p95 por turno: placa, M1, CPU potente y CPU limitada', 'Cuantizaciones (q8, q4) y su efecto en calidad', 'Proponer la gama objetivo con datos: probablemente alta, y actualizar PREFACTIBILIDAD con acuerdo del equipo', 'Ideal: medir en un teléfono de gama alta real (llama.cpp, MLC o LiteRT)'], sale: 'Modelo mínimo que conserva la meta, o curva documentada de lo que se pierde al achicar.', decide: 'Equipo: gama objetivo y techo de memoria (cambia un gate aprobado en #24).'},
- {t: 'Tiempos: T_R, T_A, T_C', cuando: 'atraviesa la 4 a la 6', obj: 'Responder la pregunta central: cuántas estafas se avisan antes de que la persona cumpla y con cuánto margen.', tareas: ['En texto: posición del aviso frente al pedido y al cumplimiento, y Preventive@δ por líneas', 'En audio: replay de punta a punta con cola; L_R y L_C en segundos, con intervalos', 'Bajar la latencia: caché de prefijo (medido el 2026-10-21: <code>--num-batch 32</code>, p50 −21 % en el 0.8B), evaluar al cierre de turno, salida corta, filtro previo', 'Acordar δ y la política de aviso (D08)'], sale: 'Tabla de L_R, L_C y Preventive@δ para la configuración elegida, en texto y audio.', decide: 'Equipo: δ y política (D08).'},
+ {t: 'Tiempos: T_R, T_A, T_C', cuando: 'atraviesa la 4 a la 6', obj: 'Responder la pregunta central: cuántas estafas se avisan antes de que la persona cumpla y con cuánto margen.', tareas: ['En texto: posición del aviso frente al pedido y al cumplimiento, y Preventive@δ por líneas', 'En audio: replay de punta a punta con cola; L_R y L_C en segundos, con intervalos', {t: 'Bajar la latencia: caché de prefijo (medido el 2026-10-21: <code>--num-batch 32</code>, p50 −21 % en el 0.8B), evaluar al cierre de turno, salida corta, filtro previo', curso: 'Caché de prefijo medida y aplicada en la cola. Faltan cierre de turno, salida corta y filtro previo.'}, 'Acordar δ y la política de aviso (D08)'], sale: 'Tabla de L_R, L_C y Preventive@δ para la configuración elegida, en texto y audio.', decide: 'Equipo: δ y política (D08).'},
  {t: 'ASR para llamada real', cuando: 'en paralelo desde la 3', obj: 'Que el pipeline funcione con voz, no solo con texto.', tareas: ['Más audio: TTS con varias voces y degradación telefónica (8 kHz, códec, ruido) para una muestra del corpus v2', 'Comparar Zipformer, Whisper y Moonshine u otros: WER y recall de términos críticos («cero», «código»)', 'Estéreo por canal (VoIP propia) frente a mono', 'Grabaciones humanas del primer par (#39) cuando el tutor apruebe D06'], sale: 'ASR elegido con WER, RTF y memoria medidos, y punta a punta con voz humana.', decide: 'D09 (ASR) y D06.'},
  {t: 'RoBERTuito: versión liviana', cuando: 'después de la 5', obj: 'Ver si un clasificador chico mantiene la calidad con menos memoria y latencia.', tareas: ['Destilación: el mejor SLM etiqueta miles de turnos sintéticos y se ajusta RoBERTuito como detector de pedido peligroso por turno', 'Variantes: encoder solo, o encoder que filtra y SLM que confirma (cascada)', 'Medir con las mismas métricas y casos que el SLM', 'Replanificar con el equipo (#41/#42 quedaron not_planned)'], sale: 'Comparación liviano contra SLM: calidad, memoria y latencia.', decide: 'Equipo: si entra en el alcance.'},
  {t: 'Documentar y cerrar', cuando: 'al final', obj: 'Dejar la tesis con resultados finales y decisiones cerradas.', tareas: ['Una sola corrida final sobre el test congelado', 'Cerrar D09 (ASR y detector) y D08 (protocolo), con un ADR del pipeline', 'Capítulos 7 y 8 con los números finales, bitácora y riesgos', 'Paquete reproducible para la defensa (D10)'], sale: 'Decisiones cerradas y capítulos con resultados finales.', decide: 'Equipo y tutor.'},
 ];
+// Tarea: texto, o {t, hecho} (tachada, con la evidencia) o {t, curso} (en curso). Las casillas
+// del navegador solo valen para las tareas sin marcar en el código.
+const tarea = x => typeof x === 'string' ? {t: x} : x;
+function itemPlan(x, k, est) {
+  const {t, hecho, curso} = tarea(x);
+  if (hecho) return `<li class="hecha"><input type="checkbox" checked disabled><span><s>${t}</s><br><span class="mu chico">✔ ${hecho}</span></span></li>`;
+  return `<li><input type="checkbox" data-k="${k}" ${est[k] ? 'checked' : ''}><span>${t}${curso ? `<br><span class="chico" style="color:var(--warn)">⏳ ${curso}</span>` : ''}</span></li>`;
+}
 function pintarPlan() {
   const est = JSON.parse(localStorage.getItem('panel-plan') || '{}');
   $('#plan').innerHTML = PLAN.map((e, i) => {
-    const hechas = e.tareas.filter((_, j) => est[`${i}-${j}`]).length;
+    const hechas = e.tareas.filter((x, j) => tarea(x).hecho || est[`${i}-${j}`]).length;
     return `<details class="etapa" ${i < 3 ? 'open' : ''}><summary><span class="num">${i}</span><b>${e.t}</b><span class="mu chico">${e.cuando}</span><span class="prog"><i style="width:${hechas / e.tareas.length * 100}%"></i></span><span class="mu chico">${hechas}/${e.tareas.length}</span></summary>
-    <div class="cuerpo"><p><b>Para qué:</b> ${e.obj}</p><ul class="chk">${e.tareas.map((t, j) => `<li><input type="checkbox" data-k="${i}-${j}" ${est[`${i}-${j}`] ? 'checked' : ''}><span>${t}</span></li>`).join('')}</ul>
+    <div class="cuerpo"><p><b>Para qué:</b> ${e.obj}</p><ul class="chk">${e.tareas.map((x, j) => itemPlan(x, `${i}-${j}`, est)).join('')}</ul>
     <p class="chico"><b>Sale cuando:</b> ${e.sale}<br><b>Decide:</b> ${e.decide}</p></div></details>`;
   }).join('');
 }

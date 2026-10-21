@@ -32,7 +32,8 @@ sys.path.insert(0, str(SLM))
 import casos as mod_casos  # noqa: E402
 import detectores  # noqa: E402
 
-# Corridas completas sobre los 53 casos, más el 4B de M1 interrumpido (se marca parcial).
+# Corridas sobre los 53 casos históricos, más el 4B de M1 interrumpido (se marca parcial).
+# Las de cola_m1.sh posteriores se agregan solas (_corridas_de_la_cola).
 # Cuarto campo opcional: el prompt, cuando una carpeta tiene más de uno.
 CORRIDAS = [
     ("2026-10-13_224418_linea-base-reglas", "reglas", "Reglas · Windows"),
@@ -47,6 +48,25 @@ CORRIDAS = [
     ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "qwen3.5:0.8b-q8_0", "Qwen3.5 0.8B · M1 · num_batch 32", "tarea"),
     ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "qwen3.5:0.8b-q8_0", "Qwen3.5 0.8B · M1 · prompt v2 (parcial, 24/53)", "v2"),
 ]
+PROMPT = {"tarea": "v1", "v2": "v2"}
+
+
+def _corridas_de_la_cola() -> list[tuple]:
+    """Corridas de cola_m1.sh posteriores a las listadas (carpetas *-nb32), una por modelo y prompt."""
+    vistas = {c[0] for c in CORRIDAS}
+    salida = []
+    for d in sorted((SLM / "corridas").glob("*-nb32")):
+        if d.name in vistas or not (d / "actualizaciones.csv").exists():
+            continue
+        m = json.loads((d / "manifiesto.json").read_text(encoding="utf-8"))
+        estado = "interrumpida" if m.get("interrumpida") else ("" if m.get("fin") else "en curso")
+        with (d / "actualizaciones.csv").open(encoding="utf-8-sig", newline="") as f:
+            pares = dict.fromkeys((r["modelo"], r["prompt"]) for r in csv.DictReader(f) if r["detector"] == "slm")
+        for modelo, prompt in pares:
+            tam = modelo.split(":")[1].split("-")[0].upper()
+            nombre = f"Qwen3.5 {tam} · M1 · {PROMPT.get(prompt, prompt)} · {d.name[:10]}" + (f" ({estado})" if estado else "")
+            salida.append((d.name, modelo, nombre, prompt))
+    return salida
 
 
 def _casos(resultados_tablero: dict) -> list[dict]:
@@ -77,7 +97,7 @@ def _casos(resultados_tablero: dict) -> list[dict]:
 
 def _corridas() -> list[dict]:
     salida = []
-    for carpeta, modelo, nombre, *prompt in CORRIDAS:
+    for carpeta, modelo, nombre, *prompt in CORRIDAS + _corridas_de_la_cola():
         prompt = prompt[0] if prompt else None
         ruta = SLM / "corridas" / carpeta / "actualizaciones.csv"
         filas = []
