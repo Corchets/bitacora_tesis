@@ -1,0 +1,22 @@
+A: Buenas, te llamo de control de prestaciones. Hay una revisión sobre el pago que entró este mes.
+B: ¿Qué problema tiene?
+A: No figura como rechazado, pero quedó marcado para una verificación adicional.
+B: ¿A mí me falta hacer algo?
+A: Todavía no, primero tenemos que ver si el expediente coincide con la oficina que lo procesa.
+B: Yo tengo el comprobante del depósito.
+A: Guardalo y no lo reenvíes a nadie hasta que cerremos la revisión.
+B: ¿Por qué no lo puedo consultar en el portal?
+A: La pantalla está actualizando los pagos; durante ese rato puede mostrar datos viejos.
+B: ¿Me van a suspender el beneficio?
+A: No puedo asegurarte nada hasta que termine el control.
+B: ¿Cuándo termina?
+A: El lote se cierra al mediodía.
+B: ¿Cuál es el número de expediente que están revisando?
+A: Estoy esperando que cargue la ficha.
+B: ¿Me das el nombre del organismo?
+A: Es la oficina de prestaciones, la línea sale centralizada.
+B: No me dijiste de qué sede llamás.
+A: No cortes, así no se pierde el turno de revisión.
+B: Voy a llamar yo al número de atención que ya tengo.
+A: Esperá un momento, todavía no terminé de consultar.
+B: No, corto y verifico.

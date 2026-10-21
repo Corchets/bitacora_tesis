@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-ORGANISMO_PREVISIONAL-001",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 12,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un trámite previsional conocido se usa para solicitar el DNI y fecha de nacimiento de una tercera persona. La persona aporta datos completamente ficticios y la interlocutora confirma que los acepta. Prueba cumplimiento de identificación personal en una llamada no solicitada.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 11, pedido de DNI y fecha. T_C línea 12, la persona entrega ambos datos ficticios; revisión humana pendiente.",
+  "particion": "desarrollo",
+  "familia": "organismo_previsional",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Una actualización de domicilio vinculada a una prestación conocida sirve para solicitar el DNI completo y fecha de nacimiento de un tercero. Prueba petición directa de datos identificatorios, con demora administrativa como presión; la persona se niega."
+}

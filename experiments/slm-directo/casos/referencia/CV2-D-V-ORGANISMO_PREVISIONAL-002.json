@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-ORGANISMO_PREVISIONAL-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 10,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 10,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un supuesto ajuste previsional solicita el CUIL completo y la fecha de nacimiento para identificar el legajo. La persona dicta valores ficticios y la llamada los da por recibidos. Prueba cumplimiento de datos identificatorios bajo una promesa de diferencia en el recibo.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, pedido de CUIL y fecha. T_C línea 10, entrega de ambos datos ficticios.",
+  "particion": "desarrollo",
+  "familia": "organismo_previsional",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Un supuesto ajuste previsional habilita el pedido directo de CUIL completo y fecha de nacimiento. La llamada describe una revisión previa sin comprobante. Prueba solicitud de identificadores sensibles presentada como condición para un beneficio."
+}

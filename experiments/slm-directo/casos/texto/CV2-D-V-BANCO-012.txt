@@ -1,0 +1,21 @@
+A: Te llamo de control de operaciones del banco. Detectamos un intento de alta de destinatario en tu perfil.
+B: Yo no agregué a nadie.
+A: La orden quedó abierta hace unos minutos.
+B: ¿Se llegó a transferir plata?
+A: No hay débito confirmado todavía.
+B: ¿Qué cuenta aparece como destinataria?
+A: El dato está retenido hasta que cierre la revisión interna.
+B: ¿Por qué me llaman desde un celular?
+A: La mesa de control usa líneas rotativas cuando hay una operación en curso.
+B: ¿Puedo cortar y llamar a la sucursal?
+A: No conviene interrumpir mientras el registro está pendiente.
+B: Si no sé quién sos, justamente quiero verificar.
+A: Entiendo la duda, pero la transferencia puede salir si se vence el tiempo.
+B: ¿Cuánto tiempo queda?
+A: Menos de cinco minutos, el sistema no pausa la orden.
+B: En la aplicación no veo nada.
+A: Las operaciones retenidas no se muestran hasta que termina el control.
+B: No voy a seguir una llamada que no puedo confirmar.
+A: Esperá, todavía no te expliqué cómo se cancela.
+B: No hace falta, voy a llamar yo al número oficial.
+A: Si cortás, ya no puedo sostener la revisión.

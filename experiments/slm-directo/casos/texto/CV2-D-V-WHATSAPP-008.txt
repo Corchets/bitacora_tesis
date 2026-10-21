@@ -1,0 +1,20 @@
+A: Buenas, soy del equipo que administra el grupo de la feria de emprendedores.
+B: ¿El de los puestos del domingo?
+A: Sí. Detectamos que una cuenta está intentando cambiar el número asociado al grupo.
+B: ¿La mía?
+A: La alerta está vinculada a tu contacto, pero todavía no puedo confirmar quién inició el cambio.
+B: Yo no pedí ningún cambio.
+A: Por eso te llamamos antes de cerrar el listado de participantes.
+B: ¿Qué tengo que revisar?
+A: Primero dejá abierto WhatsApp; no salgas de la pantalla de chats.
+B: ¿Para qué?
+A: Así la actualización no pisa la sesión anterior.
+B: No veo ningún cambio en el grupo.
+A: Puede tardar en mostrarse. No respondas a mensajes nuevos hasta que te confirmemos.
+B: ¿Y si le escribo a la organizadora?
+A: Ella está armando los puestos y todavía no conoce esta incidencia.
+B: ¿Cómo se llama la organizadora?
+A: Somos varias personas, no tengo la lista delante.
+B: Entonces le voy a preguntar directamente.
+A: Esperá, estoy buscando la incidencia para pasarte el número.
+B: No, corto y consulto por el canal del evento.

@@ -1,0 +1,22 @@
+A: Hola, soy Paula del banco. ¿Te llegó el aviso de devolución de comisión?
+B: Me llegó una notificación, pero no la abrí.
+A: Es por el paquete que te cobraron dos veces en agosto. El reintegro es de ocho mil cuatrocientos.
+B: Ah, yo había hecho el reclamo desde la web.
+A: Sí, figura asociado a la tarjeta terminada en 18.
+B: Esa es la mía.
+A: Para que el depósito no vuelva rechazado, tengo que verificar el teléfono donde recibís alertas.
+B: ¿No alcanza con el reclamo que ya está cargado?
+A: El reintegro se procesa separado. Te mando un código para confirmar que sos titular.
+B: ¿Un código al celular?
+A: Sí, son seis números y vence enseguida.
+B: Me llegó uno, pero dice acceso a cuenta.
+A: El sistema reutiliza el mismo formato para distintas operaciones.
+B: ¿Te leo el número?
+A: Sí, decímelo tal cual aparece y valido la acreditación.
+B: No me parece que un reintegro necesite un código de acceso.
+A: Si no cerramos ahora, el lote de hoy se libera y queda para la próxima semana.
+B: ¿Me confirmás el importe del reintegro?
+A: Ocho mil cuatrocientos, asociado a la tarjeta terminada en 18.
+B: El código que recibí es 735204.
+A: Bien, ya quedó asociado el teléfono al reclamo.
+B: Espero que se acredite como dijiste.

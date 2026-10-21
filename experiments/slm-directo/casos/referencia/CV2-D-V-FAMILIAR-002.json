@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-FAMILIAR-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-FAMILIAR-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 18,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una voz que dice ser un hijo accidentado pide pagar al tercero que reclama el arreglo. La persona transfiere antes de poder verificar por otro canal. Prueba cumplimiento bajo urgencia y presión de un supuesto accidente.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: en línea 9 el llamante introduce la demanda de pagar el arreglo atribuida al tercero; línea 17 aporta la cuenta para ese pago. La pregunta de la víctima en línea 16 no se marca como pedido. T_C línea 18 confirma transferencia ficticia.",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "La voz dice ser un hijo accidentado y pide pagar al tercero que reclama el arreglo, usando urgencia e impedimento para verificar. Prueba una transferencia familiar directa donde la persona suspende el pago y busca confirmar identidad."
+}

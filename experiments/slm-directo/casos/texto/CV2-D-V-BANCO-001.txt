@@ -1,0 +1,38 @@
+A: Sí, recién puedo atender. ¿Por qué me habían dejado un mensaje?
+B: Soy del sector de medios de pago del banco, por el reclamo de un cargo.
+A: ¿El del abono de la cochera? Porque eso ya lo hablé con el encargado.
+B: Me aparece una gestión vinculada con un cobro mensual que se repitió.
+A: El encargado dice que uno corresponde a septiembre y el otro a octubre.
+B: Puede ser. Si son dos períodos distintos no corresponde hacer una devolución.
+A: Eso quería saber. En el resumen figuran los dos con fecha de octubre.
+B: La fecha que ves puede ser la de presentación, distinta del período del abono.
+A: Claro, porque en septiembre se les había roto la terminal.
+B: ¿Llegaron a cobrarte ese mes por otro medio?
+A: Lo pagué en efectivo. Me dejaron un recibo de papel en el auto.
+B: Entonces podría haber una duplicación de ese primer período.
+A: El recibo lo tengo en casa, ahora estoy saliendo de trabajar.
+B: Te explico las alternativas y después ves si querés mantener el reclamo.
+A: Bueno, decime. No quiero que le retengan plata al encargado si no corresponde.
+B: Si el comercio reconoce el cobro, presenta una anulación y queda compensado en el cierre.
+A: Me dijo que podía tardar hasta el próximo resumen.
+B: Es una posibilidad. También puede quedar un saldo a favor para el período siguiente.
+A: Pero si yo doy de baja la cochera no me sirve un saldo a favor.
+B: En ese caso la discusión sería sobre la devolución del importe.
+A: Ya le avisé que dejo el lugar en noviembre porque me mudo más cerca del trabajo.
+B: Entiendo. No hace falta que resuelvas ahora cómo seguís con el abono.
+A: ¿El reclamo que hice ayer sigue abierto entonces?
+B: Sí, mientras el comercio no presente la respuesta queda en revisión.
+A: Perfecto. Cuando llegue busco el recibo y hablo con él otra vez.
+B: Antes de cerrar la consulta me apareció una verificación pendiente del teléfono.
+A: ¿Eso es por la cochera también?
+B: Se adjunta al expediente, para que no se separen las dos gestiones.
+A: Acaba de entrar un mensaje. Dice que alguien quiere acceder a mi cuenta.
+B: Es el aviso automático que genera la vinculación. Tiene una vigencia corta.
+A: No entiendo qué tiene que ver entrar a mi cuenta con un recibo de la cochera.
+B: Ahora sí, decime el código de seis cifras del mensaje y lo asocio al reclamo.
+A: No. Una cosa es discutir el cobro y otra darte lo que permite entrar.
+B: Si vence, esta revisión vuelve al final de la cola y puede llegar al cierre sin respuesta.
+A: Que vuelva a la cola. Prefiero llevar el recibo a la sucursal.
+B: Puedo dejar constancia de que no completaste la verificación.
+A: Dejá constancia también de que voy a consultar yo. Corto acá.
+B: Bueno, queda pendiente.

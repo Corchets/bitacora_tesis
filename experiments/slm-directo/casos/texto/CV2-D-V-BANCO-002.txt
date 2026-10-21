@@ -1,0 +1,20 @@
+A: Te habla Mara, del equipo de seguridad del banco. ¿Estás pudiendo entrar a la app?
+B: Sí, pero me apareció una pantalla que dice que actualice el acceso.
+A: Hubo un cambio en la forma de validar los equipos. ¿La abriste hoy?
+B: La abrí para ver si había entrado una transferencia de mi hermana.
+A: Puede ser por eso. El sistema detectó dos celulares asociados y dejó el viejo como principal.
+B: Cambié el teléfono hace un mes, así que puede haber quedado algo.
+A: Para corregirlo te guío ahora, no hace falta que vayas a una sucursal.
+B: ¿Tengo que reinstalar la aplicación?
+A: Abrí el aviso de actualización y elegí migrar equipo.
+B: Veo una pantalla para cambiar el dispositivo principal.
+A: Confirmá que este teléfono quede vinculado y que el anterior se quite del perfil.
+B: ¿Eso no cambia mi clave?
+A: No, solo reemplaza el equipo que figura como principal.
+B: Me pide autorizar el cambio de dispositivo.
+A: Aceptalo mientras está abierta la sesión de actualización.
+B: ¿Puedo hacerlo después?
+A: Si salís ahora, la solicitud se vence y el equipo viejo queda registrado.
+B: Dice que la autorización puede habilitar operaciones desde este teléfono.
+A: Es una advertencia general; confirmá para cerrar la otra sesión.
+B: Ya acepté el cambio y ahora figura este teléfono como principal.

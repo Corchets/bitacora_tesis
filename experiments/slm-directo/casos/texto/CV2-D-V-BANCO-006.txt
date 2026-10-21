@@ -1,0 +1,20 @@
+A: Soy Leo, del banco. Te llamo por la devolución de una compra que quedó duplicada.
+B: ¿Cuál compra?
+A: La de Casa Nube, el sábado a la tarde. Una quedó pendiente y la otra se debitó.
+B: Sí, compré una lámpara, pero no vi dos débitos.
+A: El segundo todavía no impacta en el resumen. Si no lo conciliamos, puede aparecer mañana.
+B: ¿Cómo lo conciliamos?
+A: Te va a llegar una notificación para enlazar la operación con tu reclamo.
+B: No hice reclamo todavía.
+A: Puedo abrirlo yo desde esta llamada. El sistema necesita que confirmemos que el teléfono es tuyo.
+B: ¿Confirmar cómo?
+A: Cuando aparezca el mensaje, fijate en el número que está debajo del título.
+B: Me acaba de llegar uno.
+A: Bien. Para que no se venza, pasame esos seis números y lo adjunto al movimiento.
+B: Dice que es un código para iniciar sesión.
+A: Es el formato automático, pero en este caso queda vinculado al reclamo.
+B: ¿Lo tengo que leer completo?
+A: Sí, así verifico el número y cierro el duplicado.
+B: No voy a leer un código de acceso.
+A: Si no se vincula ahora, el sistema toma las dos compras como correctas.
+B: Lo reviso yo desde la app y corto.

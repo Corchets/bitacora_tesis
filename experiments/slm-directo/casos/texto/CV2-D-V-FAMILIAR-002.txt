@@ -1,0 +1,20 @@
+A: Ma, soy Tomi. ¿Podés hablar un segundo?
+B: Sí, ¿estás bien?
+A: Estoy en la guardia con la moto. Me chocaron en la esquina de la plaza.
+B: ¿Te lastimaste?
+A: Tengo el brazo golpeado, pero estoy esperando al médico.
+B: ¿Llamaste a tu papá?
+A: No tiene señal donde está trabajando.
+B: ¿Necesitás que vaya?
+A: Después te digo. Ahora el otro conductor dice que tengo que pagar el arreglo antes de que se vaya.
+B: ¿Hay policía o alguien del seguro?
+A: No, fue un golpe chico y no quiero que se arme lío.
+B: ¿Cuánto te está pidiendo?
+A: Doscientos diez mil para el faro y el guardabarros.
+B: ¿Tenés una foto de la moto?
+A: No puedo sacar el teléfono, tengo el brazo apoyado.
+B: ¿A quién le transfiero?
+A: A la cuenta de la hermana del chico, después te paso la factura.
+B: Ya transferí los doscientos diez mil. ¿Me escuchás bien?
+A: Sí, acá estoy. No cortes todavía.
+B: Bueno, cuando te atienda el médico avisame.

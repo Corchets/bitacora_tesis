@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-BANCO-009",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-009",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 13,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "La solicitud evita la palabra PIN y se presenta como ingreso local de los números de la clave de cajero. Prueba una petición de secreto permanente inducida mediante una interfaz supuestamente segura.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta de T_R en línea 13, donde comienza el pedido indirecto; también podría ubicarse en línea 14, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta de T_R en línea 13, donde se indica completar los seis casilleros con el PIN; también podría marcarse línea 14, cuando la persona lo identifica como PIN. Pendiente de D07. No hay cumplimiento.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "La solicitud evita la palabra PIN y se presenta como ingreso local de los números de la clave de cajero. Prueba una petición de secreto permanente inducida mediante una interfaz supuestamente segura."
+}

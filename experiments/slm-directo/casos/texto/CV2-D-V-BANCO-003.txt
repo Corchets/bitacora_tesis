@@ -1,0 +1,26 @@
+A: Buenas tardes soy Esteban de la mesa de efectivo del banco
+B: Hola qué pasó
+A: Estamos ordenando los billetes de la serie anterior y vimos que tenés una extracción reciente
+B: Saqué para pagar una reparación no sabía que hubiera un problema
+A: No es una denuncia Es un recambio preventivo para que no te queden unidades fuera de circulación
+B: Y eso se hace en caja
+A: En general sí pero hoy tenemos un equipo móvil pasando por la zona
+B: No pedí que viniera nadie
+A: La visita es opcional si preferís podés resolverlo por teléfono
+B: Qué tendría que hacer
+A: Separá los billetes y anotá los números de serie que empiezan con 74
+B: Y después
+A: El mensajero lleva un sobre del banco y te entrega el comprovante del recambio
+B: Me estás diciendo que le dé efectivo a alguien que no conozco
+A: Te muestra una credencial cuando llega Por eso llamo antes para reservar el paso
+B: Yo podría ir mañana a la sucursal
+A: Mañana ya no puedo garantizar que acepten esa serie en caja
+B: Cuánto efectivo tendría que preparar
+A: Todo lo que tengas de esa numeración prepará el sobre y entregáselo al operador
+B: No se deja constancia en una caja
+A: El mensajero te firma el recibo cuando recibe el dinero
+B: El recibo lleva mi nombre
+A: Sí y detalla el monto que se lleva a reemplazo
+B: Y el dinero vuelve hoy
+A: Te dejan el comprobante y se acredita el cambio en la cuenta durante el día
+B: El operador ya está abajo le entregué el sobre y me dejó un recibo

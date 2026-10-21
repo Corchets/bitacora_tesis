@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-FAMILIAR-004",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-FAMILIAR-004",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 19,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 19,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    }
+  ],
+  "que_prueba": "La llamada transmite una necesidad sin pedir dinero de forma directa al principio; el pedido de enviarle dinero aparece recién al final. Prueba solicitud inducida y demora de la marca hasta que el familiar define la transferencia.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta de T_R en línea 19, donde comienza el pedido indirecto; también podría ubicarse en línea 20, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta provisional D07: la situación de necesidad se instala en líneas 3–13; T_R se ubica en línea 19, primera solicitud explícita de enviar dinero. No hay cumplimiento. Verificar si el pedido indirecto debe marcarse antes, cuando la necesidad ya se comunica.",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "La llamada transmite una necesidad sin pedir dinero de forma directa al principio; el pedido de enviarle dinero aparece recién al final. Prueba solicitud inducida y demora de la marca hasta que el familiar define la transferencia."
+}

@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-BANCO-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 20,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La llamada guía a autorizar la migración de dispositivo desde un aviso, usando una transferencia familiar como contexto de confianza. Prueba un pedido de acción de seguridad distinto de un pedido de clave; la persona confirma el cambio en pantalla.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, primera instrucción de iniciar la migración; T_C línea 20, confirmación explícita de que la autorización se completó. La advertencia de riesgo en línea 18 es evidencia del sistema, no una negativa.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "La llamada usa un cambio de dispositivo como motivo para que la persona escriba su clave habitual en un flujo de restablecimiento guiado. Prueba pedido directo de credencial permanente después de varias instrucciones; la persona se niega y no se observa cumplimiento."
+}

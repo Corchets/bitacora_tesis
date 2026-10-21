@@ -1,0 +1,20 @@
+A: Buen día te llamo de soporte de la biblioteca digital Lectura Abierta
+B: Hola no puedo devolver un libro desde la tablet
+A: Te muestra el préstamo o queda en blanco
+B: Me aparece el título pero el botón está gris
+A: Puede estar asociado a una sesión antigua del equipo
+B: La tablet es nueva la compré hace poco
+A: Entonces necesitamos limpiar la sesión que quedó en el perfil anterior
+B: Se borra mi lista de lectura
+A: No se conserva en la cuenta Abrí el menú de perfil y elegí recuperar acceso
+B: Me pide una palabra de seguridad
+A: Esa es la frase que usás pa entrar cuando olvidás la clave
+B: Yo tengo una contraseña no una frase
+A: Puede ser la contraseña que usás habitualmente el sistema la compara con la cuenta
+B: Te la tengo que decir
+A: No ingresala en el campo y avisame si desaparece el botón gris
+B: No quiero cargarla desde un enlace que me mandaron
+A: El enlace abre la misma pantalla de recuperación
+B: Puedo hacerlo entrando desde la página que ya conozco
+A: Sí aunque ahí la sesión antigua puede seguir guardada
+B: Lo pruebo por mi cuenta gracias
