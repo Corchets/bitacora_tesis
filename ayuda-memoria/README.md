@@ -110,23 +110,35 @@ El proyecto de producción asociado es `bitacora-tesis-ayuda-memoria` (equipo
 `nacho1706s-projects`), disponible públicamente por enlace en
 `https://bitacora-tesis-ayuda-memoria.vercel.app`.
 
-El [workflow](../.github/workflows/ayuda-memoria.yml) usa el código de la web en
-`main` y consulta las dos ramas. Corre `npm ci` antes de generar. Publica después de pushes, cambios de issues,
-comentarios y milestones. La revisión horaria recupera también cambios de
-dependencias nativas; no se promete actualización instantánea de esas relaciones.
+El [workflow](../.github/workflows/ayuda-memoria.yml) publica al recibir pushes en
+`main` o `laboratorio-main`. Descarga el commit exacto que disparó la ejecución:
+un push a laboratorio publica su interfaz; un push a main publica la de main.
+En ejecución manual usa el commit de la rama elegida en **Run workflow**.
+La generación sigue consultando documentos e issues de ambas ramas.
+
+Las dos ramas publican al mismo proyecto y URL de producción. Las ejecuciones
+comparten una cola; el último deploy exitoso es el visible. No se crean sitios
+separados por rama. Corre `npm ci`, las pruebas y el build antes de publicar.
+
+Los cambios de issues, comentarios, milestones y la revisión horaria se ejecutan
+desde la rama predeterminada del repositorio (`main`). El workflow debe existir
+allí para recibir esos eventos, y esas ejecuciones publican la interfaz de main.
+La revisión horaria recupera también cambios de dependencias nativas; no se
+promete actualización instantánea de esas relaciones.
 La redacción de los briefs se revisa con la skill; el workflow no ejecuta IA.
 
 Para activarlo:
 
-1. Integrar estos archivos en `main`; el workflow también debe existir en
-   `laboratorio-main` para recibir sus pushes. No requiere trasladar ni reescribir
-   los documentos de laboratorio.
+1. Integrar la web y el workflow en cada rama que deba publicar por push
+   (`main` y `laboratorio-main`). Mantener el workflow en `main` también habilita
+   eventos del repositorio y ejecuciones programadas. No requiere trasladar ni
+   reescribir los documentos de laboratorio.
 2. Proyecto en Vercel creado y configurado (`bitacora-tesis-ayuda-memoria`):
    protección SSO desactivada y URL pública verificada de forma anónima sin inicio de sesión.
-3. Secrets en GitHub Actions: `VERCEL_ORG_ID` y `VERCEL_PROJECT_ID` ya están
-   configurados en el repositorio. Falta `VERCEL_TOKEN` (requiere crear un
-   personal access token clásico en `https://vercel.com/account/tokens`, ya que la
-   sesión OAuth de la CLI es de corta duración y no permite emitir tokens desatendidos).
+3. Secrets en GitHub Actions: `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` y
+   `VERCEL_TOKEN` están configurados en el repositorio (verificado el
+   2026-10-21). Mantener vigente el token de acceso de Vercel, creado en
+   `https://vercel.com/account/tokens`; sus valores permanecen fuera de Git.
 4. Ejecutar «Actualizar ayuda memoria» desde Actions → Run workflow una vez
    cargado `VERCEL_TOKEN` y realizada la integración.
 
