@@ -1,0 +1,412 @@
+[
+  {
+    "corrida": "2026-10-14_173532_demo-qwen3.5-0.8b",
+    "config": "slm|qwen3.5:0.8b|tarea|ab",
+    "vishing": 29,
+    "vishing_aviso": 26,
+    "vishing_aviso_con_cita": 24,
+    "lineas": 464,
+    "alertas": 95,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 24,
+    "legitima_aviso": 8,
+    "legitima_aviso_con_cita": 7,
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "LAB-whatsapp-codigo",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      }
+    ],
+    "nombre": "0.8B v1 · Windows"
+  },
+  {
+    "corrida": "2026-10-14_172930_demo-qwen3.5-2b",
+    "config": "slm|qwen3.5:2b|tarea|ab",
+    "vishing": 29,
+    "vishing_aviso": 20,
+    "vishing_aviso_con_cita": 20,
+    "lineas": 464,
+    "alertas": 53,
+    "riesgo_alto_sin_alerta": 49,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 24,
+    "legitima_aviso": 2,
+    "legitima_aviso_con_cita": 2,
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · Windows (1)"
+  },
+  {
+    "corrida": "2026-10-14_175451_demo-qwen3.5-2b",
+    "config": "slm|qwen3.5:2b|tarea|ab",
+    "vishing": 29,
+    "vishing_aviso": 21,
+    "vishing_aviso_con_cita": 21,
+    "lineas": 464,
+    "alertas": 55,
+    "riesgo_alto_sin_alerta": 49,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 24,
+    "legitima_aviso": 2,
+    "legitima_aviso_con_cita": 2,
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · Windows (2)"
+  },
+  {
+    "corrida": "2026-10-14_174602_demo-qwen3.5-4b",
+    "config": "slm|qwen3.5:4b|tarea|ab",
+    "vishing": 29,
+    "vishing_aviso": 29,
+    "vishing_aviso_con_cita": 29,
+    "lineas": 464,
+    "alertas": 220,
+    "riesgo_alto_sin_alerta": 6,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 24,
+    "legitima_aviso": 15,
+    "legitima_aviso_con_cita": 15,
+    "vishing_sin_aviso": [],
+    "nombre": "4B v1 · Windows"
+  },
+  {
+    "corrida": "2026-10-17_150516_m1-gguf",
+    "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab",
+    "vishing": 29,
+    "vishing_aviso": 27,
+    "vishing_aviso_con_cita": 26,
+    "lineas": 464,
+    "alertas": 100,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 24,
+    "legitima_aviso": 9,
+    "legitima_aviso_con_cita": 8,
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "LAB-whatsapp-codigo",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      }
+    ],
+    "nombre": "0.8B v1 · M1"
+  },
+  {
+    "corrida": "2026-10-17_150516_m1-gguf",
+    "config": "slm|qwen3.5:2b-q8_0|tarea|ab",
+    "vishing": 29,
+    "vishing_aviso": 20,
+    "vishing_aviso_con_cita": 19,
+    "lineas": 464,
+    "alertas": 56,
+    "riesgo_alto_sin_alerta": 49,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 24,
+    "legitima_aviso": 2,
+    "legitima_aviso_con_cita": 2,
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · M1"
+  },
+  {
+    "corrida": "2026-10-17_150516_m1-gguf",
+    "config": "slm|qwen3.5:4b-q4_K_M|tarea|ab",
+    "vishing": 24,
+    "vishing_aviso": 24,
+    "vishing_aviso_con_cita": 24,
+    "lineas": 310,
+    "alertas": 151,
+    "riesgo_alto_sin_alerta": 7,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 18,
+    "legitima_aviso": 9,
+    "legitima_aviso_con_cita": 9,
+    "vishing_sin_aviso": [],
+    "nombre": "4B v1 · M1 (parcial)"
+  },
+  {
+    "corrida": "2026-10-21_182201_m1-0.8b-v1v2-nb32",
+    "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab",
+    "vishing": 29,
+    "vishing_aviso": 26,
+    "vishing_aviso_con_cita": 26,
+    "lineas": 464,
+    "alertas": 97,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 24,
+    "legitima_aviso": 9,
+    "legitima_aviso_con_cita": 8,
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "LAB-whatsapp-codigo",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      }
+    ],
+    "nombre": "0.8B v1 · M1 nb32"
+  },
+  {
+    "corrida": "2026-10-21_182201_m1-0.8b-v1v2-nb32",
+    "config": "slm|qwen3.5:0.8b-q8_0|v2|ab",
+    "vishing": 14,
+    "vishing_aviso": 11,
+    "vishing_aviso_con_cita": 11,
+    "lineas": 119,
+    "alertas": 38,
+    "riesgo_alto_sin_alerta": 5,
+    "alerta_con_riesgo_bajo": 0,
+    "legitima": 10,
+    "legitima_aviso": 2,
+    "legitima_aviso_con_cita": 2,
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.5,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.5
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.5,
+        "riesgo_max": 0.8
+      }
+    ],
+    "nombre": "0.8B v2 · M1 nb32"
+  }
+]

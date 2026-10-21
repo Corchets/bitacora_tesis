@@ -33,6 +33,7 @@ import casos as mod_casos  # noqa: E402
 import detectores  # noqa: E402
 
 # Corridas completas sobre los 53 casos, más el 4B de M1 interrumpido (se marca parcial).
+# Cuarto campo opcional: el prompt, cuando una carpeta tiene más de uno.
 CORRIDAS = [
     ("2026-10-13_224418_linea-base-reglas", "reglas", "Reglas · Windows"),
     ("2026-10-14_173532_demo-qwen3.5-0.8b", "qwen3.5:0.8b", "Qwen3.5 0.8B · Windows GPU"),
@@ -43,6 +44,8 @@ CORRIDAS = [
     ("2026-10-17_150516_m1-gguf", "qwen3.5:0.8b-q8_0", "Qwen3.5 0.8B · M1"),
     ("2026-10-17_150516_m1-gguf", "qwen3.5:2b-q8_0", "Qwen3.5 2B · M1"),
     ("2026-10-17_150516_m1-gguf", "qwen3.5:4b-q4_K_M", "Qwen3.5 4B · M1 (parcial, 42/53)"),
+    ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "qwen3.5:0.8b-q8_0", "Qwen3.5 0.8B · M1 · num_batch 32", "tarea"),
+    ("2026-10-21_182201_m1-0.8b-v1v2-nb32", "qwen3.5:0.8b-q8_0", "Qwen3.5 0.8B · M1 · prompt v2 (parcial, 24/53)", "v2"),
 ]
 
 
@@ -74,12 +77,13 @@ def _casos(resultados_tablero: dict) -> list[dict]:
 
 def _corridas() -> list[dict]:
     salida = []
-    for carpeta, modelo, nombre in CORRIDAS:
+    for carpeta, modelo, nombre, *prompt in CORRIDAS:
+        prompt = prompt[0] if prompt else None
         ruta = SLM / "corridas" / carpeta / "actualizaciones.csv"
         filas = []
         with ruta.open(encoding="utf-8-sig", newline="") as f:
             for r in csv.DictReader(f):
-                if (r["modelo"] or "reglas") != modelo:
+                if (r["modelo"] or "reglas") != modelo or (prompt and r["prompt"] != prompt):
                     continue
                 filas.append(
                     [
@@ -93,7 +97,7 @@ def _corridas() -> list[dict]:
                         r["evidencia"][:200],
                     ]
                 )
-        salida.append({"id": f"{carpeta}|{modelo}", "carpeta": carpeta, "modelo": modelo, "nombre": nombre, "filas": filas})
+        salida.append({"id": f"{carpeta}|{modelo}" + (f"|{prompt}" if prompt else ""), "carpeta": carpeta, "modelo": modelo, "nombre": nombre, "filas": filas})
     return salida
 
 
@@ -133,7 +137,7 @@ def armar() -> Path:
         "audio_ref": _audio_ref(),
         "velocidad": json.loads((datos_tablero / "velocidad.json").read_text(encoding="utf-8")),
         "prompts": {v: detectores.cargar_prompt(v) for v in detectores.PROMPTS},
-        "esquema": detectores.ESQUEMA_SALIDA,
+        "esquemas": {v: detectores.esquema_de(v) for v in detectores.PROMPTS},
         "opciones": {"temperature": 0.0, "seed": 42, "num_ctx": 4096, "num_predict": detectores.MAXIMO_TOKENS_RESPUESTA},
     }
     plantilla = (AQUI / "panel_plantilla.html").read_text(encoding="utf-8")

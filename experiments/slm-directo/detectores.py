@@ -26,6 +26,7 @@ DIR_PROMPTS = Path(__file__).resolve().parent / "prompts"
 PROMPTS = {
     "tarea": ("tarea.txt",),
     "tarea+base": ("tarea.txt", "base_institucional.txt"),
+    "v2": ("tarea_v2.txt",),
 }
 HABLANTES = ("ab", "sin")
 
@@ -41,6 +42,13 @@ ESQUEMA_SALIDA = {
     },
     "required": ["riesgo", "alerta_sugerida", "motivo", "evidencia"],
 }
+# El v2 pide la cita antes de decidir: Ollama genera los campos en el orden del esquema.
+ESQUEMA_SALIDA_V2 = {
+    "type": "object",
+    "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "alerta_sugerida", "riesgo", "motivo")},
+    "required": ["evidencia", "alerta_sugerida", "riesgo", "motivo"],
+}
+ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2}
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -75,6 +83,12 @@ def cargar_prompt(variante: str) -> str:
         raise ValueError(f"prompt desconocido {variante!r}; opciones: {sorted(PROMPTS)}")
     partes = [(DIR_PROMPTS / nombre).read_text(encoding="utf-8").strip() for nombre in PROMPTS[variante]]
     return "\n\n".join(partes)
+
+
+def esquema_de(variante: str) -> dict:
+    if variante not in ESQUEMAS:
+        raise ValueError(f"prompt desconocido {variante!r}; opciones: {sorted(ESQUEMAS)}")
+    return ESQUEMAS[variante]
 
 
 def huella(texto: str) -> str:
@@ -165,6 +179,7 @@ class DetectorSLM:
     temperatura: float = 0.0
     pensar: bool | None = None  # False: sin razonamiento previo; None: no se envía (ver correr.calentar)
     extra: dict | None = None  # opciones de hardware de Ollama, p. ej. {"num_gpu": 0, "num_thread": 2}
+    esquema: dict | None = None  # None: ESQUEMA_SALIDA (prompt v1)
     nombre = "slm"
 
     def opciones(self) -> dict:
@@ -185,7 +200,7 @@ class DetectorSLM:
         mensajes = [{"role": "system", "content": self.prompt}, {"role": "user", "content": usuario}]
         inicio = time.perf_counter()
         try:
-            r = self.cliente.chat(self.modelo, mensajes, ESQUEMA_SALIDA, self.opciones(), self.pensar)
+            r = self.cliente.chat(self.modelo, mensajes, self.esquema or ESQUEMA_SALIDA, self.opciones(), self.pensar)
         except ErrorOllama as e:
             return Respuesta(valida=False, error=str(e), ms=(time.perf_counter() - inicio) * 1000)
         ms = (time.perf_counter() - inicio) * 1000

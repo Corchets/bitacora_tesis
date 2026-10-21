@@ -1,0 +1,151 @@
+{
+  "modelo": "qwen3.5:0.8b-q8_0",
+  "digest": "7c00f78aed0fd757e9ba2f2720896768fd22da24b7fb6fe17096bb1e85bb2d25",
+  "ollama": "0.40.5",
+  "maquina": "macOS-27.0.1-arm64-arm-64bit",
+  "caso": "TR-04-pedido-tras-charla-larga",
+  "opciones": {
+    "temperature": 0.0,
+    "seed": 42,
+    "num_ctx": 4096,
+    "num_predict": 512,
+    "num_batch": 32
+  },
+  "filas": [
+    {
+      "linea": 5,
+      "modo": "secuencial",
+      "tokens_prompt": 588,
+      "ms_prompt": 175.4,
+      "tokens_salida": 39,
+      "ms_salida": 773.7,
+      "ms_total": 954.2
+    },
+    {
+      "linea": 5,
+      "modo": "repetido",
+      "tokens_prompt": 588,
+      "ms_prompt": 28.8,
+      "tokens_salida": 39,
+      "ms_salida": 795.9,
+      "ms_total": 832.1
+    },
+    {
+      "linea": 5,
+      "modo": "frio",
+      "tokens_prompt": 618,
+      "ms_prompt": 630.4,
+      "tokens_salida": 39,
+      "ms_salida": 771.5,
+      "ms_total": 1451.3
+    },
+    {
+      "linea": 10,
+      "modo": "secuencial",
+      "tokens_prompt": 744,
+      "ms_prompt": 112.8,
+      "tokens_salida": 39,
+      "ms_salida": 802.1,
+      "ms_total": 919.5
+    },
+    {
+      "linea": 10,
+      "modo": "repetido",
+      "tokens_prompt": 744,
+      "ms_prompt": 30.8,
+      "tokens_salida": 39,
+      "ms_salida": 776.6,
+      "ms_total": 812.9
+    },
+    {
+      "linea": 10,
+      "modo": "frio",
+      "tokens_prompt": 779,
+      "ms_prompt": 793.1,
+      "tokens_salida": 39,
+      "ms_salida": 792.3,
+      "ms_total": 1644.9
+    },
+    {
+      "linea": 15,
+      "modo": "secuencial",
+      "tokens_prompt": 879,
+      "ms_prompt": 124.2,
+      "tokens_salida": 39,
+      "ms_salida": 899.0,
+      "ms_total": 1028.1
+    },
+    {
+      "linea": 15,
+      "modo": "repetido",
+      "tokens_prompt": 879,
+      "ms_prompt": 29.9,
+      "tokens_salida": 39,
+      "ms_salida": 787.7,
+      "ms_total": 823.4
+    },
+    {
+      "linea": 15,
+      "modo": "frio",
+      "tokens_prompt": 913,
+      "ms_prompt": 919.9,
+      "tokens_salida": 39,
+      "ms_salida": 833.1,
+      "ms_total": 1824.2
+    },
+    {
+      "linea": 20,
+      "modo": "secuencial",
+      "tokens_prompt": 1012,
+      "ms_prompt": 96.6,
+      "tokens_salida": 100,
+      "ms_salida": 2186.3,
+      "ms_total": 2289.2
+    },
+    {
+      "linea": 20,
+      "modo": "repetido",
+      "tokens_prompt": 1012,
+      "ms_prompt": 34.5,
+      "tokens_salida": 100,
+      "ms_salida": 2126.6,
+      "ms_total": 2171.1
+    },
+    {
+      "linea": 20,
+      "modo": "frio",
+      "tokens_prompt": 1045,
+      "ms_prompt": 1035.6,
+      "tokens_salida": 100,
+      "ms_salida": 2193.4,
+      "ms_total": 3320.6
+    },
+    {
+      "linea": 25,
+      "modo": "secuencial",
+      "tokens_prompt": 1152,
+      "ms_prompt": 106.7,
+      "tokens_salida": 39,
+      "ms_salida": 824.2,
+      "ms_total": 937.8
+    },
+    {
+      "linea": 25,
+      "modo": "repetido",
+      "tokens_prompt": 1152,
+      "ms_prompt": 28.5,
+      "tokens_salida": 39,
+      "ms_salida": 874.7,
+      "ms_total": 910.8
+    },
+    {
+      "linea": 25,
+      "modo": "frio",
+      "tokens_prompt": 1179,
+      "ms_prompt": 1190.6,
+      "tokens_salida": 39,
+      "ms_salida": 798.8,
+      "ms_total": 2114.5
+    }
+  ]
+}

@@ -58,7 +58,7 @@ numerada, y responde un JSON:
 | Variable | Valores | Pregunta |
 |---|---|---|
 | Modelo (`--modelos`) | Escalera de tamaños, sección 6 | ¿Desde qué tamaño funciona? ¿Cuánto tarda y ocupa? |
-| Prompt (`--prompts`) | `tarea`, `tarea+base` | ¿Ayuda darle la «base institucional» del #27? ([prompts](prompts/README.md)) |
+| Prompt (`--prompts`) | `tarea`, `tarea+base`, `v2` | ¿Ayuda darle la «base institucional» del #27? ¿Corrige el v2 los errores del v1? ([prompts](prompts/README.md)) |
 | Hablantes (`--hablantes`) | `ab`, `sin` | ¿Cambia el resultado si sabe quién dice cada línea? |
 | Reglas | Fijas, siempre incluidas | ¿Qué agrega el SLM frente a buscar palabras? |
 
@@ -249,6 +249,12 @@ Primera medición (2026-10-14, [`cpu-2hilos`](corridas/2026-10-14_191429_cpu-2hi
 sube unas 15 veces (3,9 s y 8,2 s) y el p95 unas 11 (7,3 s y 13,0 s). Ninguno cumple el
 gate de latencia por turno de PREFACTIBILIDAD-TECNICA (p95 ≤ 1,5 s).
 
+**En la MacBook M1 de 8 GB** las corridas pendientes (v2 con 0.8B y 2B, 4B completo y
+`qwen3.5:9b-q4_K_M`, 5,6 GB más 0,9 GB de proyector) se corren de a una con
+`bash cola_m1.sh`, con Docker cerrado: corta cada corrida si el swap pasa de 6 GB y lo
+procesado queda guardado. `--num-batch 32` hace que Ollama reutilice la transcripción
+ya procesada ([caché](analisis/2026-10-21-cache-prefijo/README.md)).
+
 Lo medido en una PC con Ollama **no es una medición en Android**
 ([R13](../../docs/gestion/REGISTRO-RIESGOS.md)): sirve para ordenar candidatos, no para
 afirmar rendimiento móvil.
@@ -285,6 +291,8 @@ afirmar rendimiento móvil.
 | 2026-10-17 | Línea base de reglas en Apple M1 (8 núcleos, 8 GB RAM): [`corridas/2026-10-17_150455_m1-reglas`](corridas/2026-10-17_150455_m1-reglas/resumen.md). | Aviso en 23 de 29 vishing y falsa alarma en 14 de 24 legítimas (idéntico a la línea base en Windows). Latencia p50 de 5 ms y p95 de 13 ms. |
 | 2026-10-17 | Escalera en Apple M1 (GPU Metal GGUF) con Ollama 0.40.5 sobre 53 casos: [`corridas/2026-10-17_150516_m1-gguf`](corridas/2026-10-17_150516_m1-gguf/resumen.md). Modelos `qwen3.5:0.8b-q8_0`, `2b-q8_0` y `4b-q4_K_M`. | 0.8B y 2B completaron los 53 casos. 0.8B: 27/29 vishing con aviso, 9/24 falsas alarmas, p50 de 1282 ms y p95 de 3462 ms. 2B: 20/29 vishing con aviso, 2/24 falsas alarmas, p50 de 2646 ms y p95 de 6036 ms. El 4B completó 42 casos (24/24 vishing, 9/18 falsas alarmas, p50 6606 ms) y fue interrumpido por el coordinador a las 16:21 por presión severa de memoria (swap de 15 GB, 3.5 GB libres en disco y VM Docker activa en 8 GB de RAM). |
 | 2026-10-17 | Comparación de reproducibilidad M1 vs Windows 11 sobre casos válidos comunes en ambas plataformas: [`analisis/2026-10-17-m1-vs-windows/`](analisis/2026-10-17-m1-vs-windows/README.md) (`comparar_m1_windows.py`). | Acuerdo en decisión de aviso de 51/53 (96.2%) en 0.8B, 52/53 (98.1%) en 2B y 40/42 (95.2%) en 4B evaluados. Acuerdo en línea exacta de 90.6% (0.8B), 96.2% (2B) y 88.1% (4B). Latencias en M1 fueron ~4.6x mayores en 0.8B y ~5.0x en 2B respecto de Windows con GPU. |
+| 2026-10-21 | **Caché del prefijo** en M1 con `qwen3.5:0.8b-q8_0` y `TR-04`: [`analisis/2026-10-21-cache-prefijo/`](analisis/2026-10-21-cache-prefijo/README.md). | Qwen 3.5 es híbrido y Ollama 0.40.5 solo retoma desde puntos guardados: cada línea vuelve a procesar ~530–630 tokens (480–1150 ms), no solo la línea nueva. Con `--num-batch 32`, 51–153 tokens (100–175 ms). Sobre los 53 casos, 453 de 464 respuestas idénticas y el mismo aviso en 52 de 53; p50 de 1282 a 1017 ms y p95 de 3465 a 2993 ms. |
+| 2026-10-21 | Análisis de errores del prompt v1 y **prompt v2** (`--prompts v2`): [`analisis/2026-10-21-errores-y-prompt-v2/`](analisis/2026-10-21-errores-y-prompt-v2/README.md). Corrida [`2026-10-21_182201_m1-0.8b-v1v2-nb32`](corridas/2026-10-21_182201_m1-0.8b-v1v2-nb32/resumen.md). | El 2B pierde siempre las mismas estafas: pedidos de dinero con razón creíble o sin palabra clave y pedidos indirectos de código; deja 49 líneas con riesgo ≥ 0,6 sin alerta. Exigir que la cita esté en el texto no ayuda. El v2 con el 0.8B quedó en los 24 casos del laboratorio, cortado por memoria con Docker abierto (el swap llegó a 9,4 GB porque el primer vigilante no podía cortar; corregido): 11/14 estafas y 2/10 falsas alarmas contra 13/14 y 4/10 del v1, sin motivos de «código» inventados. No alcanza para comparar. |
 
 Cada corrida real se anota acá: fecha, quién, máquina, comando, carpeta y una línea
 con lo observado. Las conclusiones van en `resumen.md` de esa corrida y, cuando
@@ -389,9 +397,9 @@ primer aviso, hecha por dos revisores automáticos que coincidieron en 99 de 100
   razona mejor, ocupa más del doble.
 - **Sin determinismo.** Dos corridas iguales del 2B difirieron en 2 de 53 casos:
   cada configuración se tiene que repetir e informar con su variación.
-- **El prompt v1 sesga los motivos** hacia «código» por su ejemplo. Es el primer
-  cambio candidato para un prompt v2, junto con aclarar que un pedido relatado o
-  negado no cuenta.
+- **El prompt v1 sesga los motivos** hacia «código» por su ejemplo. El prompt v2
+  (2026-10-21) lo saca y aclara que un pedido relatado o negado no cuenta
+  ([análisis](analisis/2026-10-21-errores-y-prompt-v2/README.md)).
 
 - **Sin placa de video no llega a tiempo.** Solo con CPU y 2 hilos, en las 14
   conversaciones del piloto escrito, los totales no cambian, pero el 95% de las líneas
