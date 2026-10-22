@@ -3,15 +3,41 @@
     "corrida": "2026-10-14_173532_demo-qwen3.5-0.8b",
     "config": "slm|qwen3.5:0.8b|tarea|ab",
     "vishing": 29,
+    "legitima": 24,
     "vishing_aviso": 26,
+    "legitima_aviso": 8,
     "vishing_aviso_con_cita": 24,
+    "legitima_aviso_con_cita": 7,
     "lineas": 464,
     "alertas": 95,
     "riesgo_alto_sin_alerta": 0,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 24,
-    "legitima_aviso": 8,
-    "legitima_aviso_con_cita": 7,
+    "preventive": {
+      "t_r@0": [
+        19,
+        28
+      ],
+      "t_r@1": [
+        7,
+        28
+      ],
+      "t_r@2": [
+        7,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        10,
+        14
+      ],
+      "t_c@2": [
+        8,
+        14
+      ]
+    },
     "vishing_sin_aviso": [
       {
         "caso": "LAB-pantalla-sin-programa",
@@ -35,21 +61,113 @@
         "riesgo_max": 0.0
       }
     ],
-    "nombre": "0.8B v1 · Windows"
+    "nombre": "0.8B v1 · Windows",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-14_173532_demo-qwen3.5-0.8b",
+    "config": "slm|qwen3.5:0.8b|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 26,
+    "legitima_aviso": 8,
+    "vishing_aviso_con_cita": 24,
+    "legitima_aviso_con_cita": 7,
+    "lineas": 464,
+    "alertas": 95,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        19,
+        28
+      ],
+      "t_r@1": [
+        7,
+        28
+      ],
+      "t_r@2": [
+        7,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        10,
+        14
+      ],
+      "t_c@2": [
+        8,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "LAB-whatsapp-codigo",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      }
+    ],
+    "nombre": "0.8B v1 · Windows",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-14_172930_demo-qwen3.5-2b",
     "config": "slm|qwen3.5:2b|tarea|ab",
     "vishing": 29,
+    "legitima": 24,
     "vishing_aviso": 20,
+    "legitima_aviso": 2,
     "vishing_aviso_con_cita": 20,
+    "legitima_aviso_con_cita": 2,
     "lineas": 464,
     "alertas": 53,
     "riesgo_alto_sin_alerta": 49,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 24,
-    "legitima_aviso": 2,
-    "legitima_aviso_con_cita": 2,
+    "preventive": {
+      "t_r@0": [
+        17,
+        28
+      ],
+      "t_r@1": [
+        2,
+        28
+      ],
+      "t_r@2": [
+        2,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        5,
+        14
+      ]
+    },
     "vishing_sin_aviso": [
       {
         "caso": "LAB-arca-deuda",
@@ -115,21 +233,155 @@
         "riesgo_max": 0.2
       }
     ],
-    "nombre": "2B v1 · Windows (1)"
+    "nombre": "2B v1 · Windows (1)",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-14_172930_demo-qwen3.5-2b",
+    "config": "slm|qwen3.5:2b|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 20,
+    "legitima_aviso": 2,
+    "vishing_aviso_con_cita": 20,
+    "legitima_aviso_con_cita": 2,
+    "lineas": 464,
+    "alertas": 53,
+    "riesgo_alto_sin_alerta": 49,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        17,
+        28
+      ],
+      "t_r@1": [
+        2,
+        28
+      ],
+      "t_r@2": [
+        2,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        5,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · Windows (1)",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-14_175451_demo-qwen3.5-2b",
     "config": "slm|qwen3.5:2b|tarea|ab",
     "vishing": 29,
+    "legitima": 24,
     "vishing_aviso": 21,
+    "legitima_aviso": 2,
     "vishing_aviso_con_cita": 21,
+    "legitima_aviso_con_cita": 2,
     "lineas": 464,
     "alertas": 55,
     "riesgo_alto_sin_alerta": 49,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 24,
-    "legitima_aviso": 2,
-    "legitima_aviso_con_cita": 2,
+    "preventive": {
+      "t_r@0": [
+        18,
+        28
+      ],
+      "t_r@1": [
+        2,
+        28
+      ],
+      "t_r@2": [
+        2,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        5,
+        14
+      ]
+    },
     "vishing_sin_aviso": [
       {
         "caso": "LAB-arca-deuda",
@@ -188,37 +440,234 @@
         "riesgo_max": 0.2
       }
     ],
-    "nombre": "2B v1 · Windows (2)"
+    "nombre": "2B v1 · Windows (2)",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-14_175451_demo-qwen3.5-2b",
+    "config": "slm|qwen3.5:2b|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 21,
+    "legitima_aviso": 2,
+    "vishing_aviso_con_cita": 21,
+    "legitima_aviso_con_cita": 2,
+    "lineas": 464,
+    "alertas": 55,
+    "riesgo_alto_sin_alerta": 49,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        18,
+        28
+      ],
+      "t_r@1": [
+        2,
+        28
+      ],
+      "t_r@2": [
+        2,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        5,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · Windows (2)",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-14_174602_demo-qwen3.5-4b",
     "config": "slm|qwen3.5:4b|tarea|ab",
     "vishing": 29,
+    "legitima": 24,
     "vishing_aviso": 29,
+    "legitima_aviso": 15,
     "vishing_aviso_con_cita": 29,
+    "legitima_aviso_con_cita": 15,
     "lineas": 464,
     "alertas": 220,
     "riesgo_alto_sin_alerta": 6,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 24,
-    "legitima_aviso": 15,
-    "legitima_aviso_con_cita": 15,
+    "preventive": {
+      "t_r@0": [
+        28,
+        28
+      ],
+      "t_r@1": [
+        17,
+        28
+      ],
+      "t_r@2": [
+        16,
+        28
+      ],
+      "t_c@0": [
+        14,
+        14
+      ],
+      "t_c@1": [
+        14,
+        14
+      ],
+      "t_c@2": [
+        13,
+        14
+      ]
+    },
     "vishing_sin_aviso": [],
-    "nombre": "4B v1 · Windows"
+    "nombre": "4B v1 · Windows",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-14_174602_demo-qwen3.5-4b",
+    "config": "slm|qwen3.5:4b|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 29,
+    "legitima_aviso": 15,
+    "vishing_aviso_con_cita": 29,
+    "legitima_aviso_con_cita": 15,
+    "lineas": 464,
+    "alertas": 220,
+    "riesgo_alto_sin_alerta": 6,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        28,
+        28
+      ],
+      "t_r@1": [
+        17,
+        28
+      ],
+      "t_r@2": [
+        16,
+        28
+      ],
+      "t_c@0": [
+        14,
+        14
+      ],
+      "t_c@1": [
+        14,
+        14
+      ],
+      "t_c@2": [
+        13,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [],
+    "nombre": "4B v1 · Windows",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-17_150516_m1-gguf",
     "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab",
     "vishing": 29,
+    "legitima": 24,
     "vishing_aviso": 27,
+    "legitima_aviso": 9,
     "vishing_aviso_con_cita": 26,
+    "legitima_aviso_con_cita": 8,
     "lineas": 464,
     "alertas": 100,
     "riesgo_alto_sin_alerta": 0,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 24,
-    "legitima_aviso": 9,
-    "legitima_aviso_con_cita": 8,
+    "preventive": {
+      "t_r@0": [
+        20,
+        28
+      ],
+      "t_r@1": [
+        8,
+        28
+      ],
+      "t_r@2": [
+        7,
+        28
+      ],
+      "t_c@0": [
+        12,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        9,
+        14
+      ]
+    },
     "vishing_sin_aviso": [
       {
         "caso": "LAB-pantalla-sin-programa",
@@ -235,21 +684,106 @@
         "riesgo_max": 0.0
       }
     ],
-    "nombre": "0.8B v1 · M1"
+    "nombre": "0.8B v1 · M1",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-17_150516_m1-gguf",
+    "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 27,
+    "legitima_aviso": 9,
+    "vishing_aviso_con_cita": 26,
+    "legitima_aviso_con_cita": 8,
+    "lineas": 464,
+    "alertas": 100,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        20,
+        28
+      ],
+      "t_r@1": [
+        8,
+        28
+      ],
+      "t_r@2": [
+        7,
+        28
+      ],
+      "t_c@0": [
+        12,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        9,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "LAB-whatsapp-codigo",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      }
+    ],
+    "nombre": "0.8B v1 · M1",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-17_150516_m1-gguf",
     "config": "slm|qwen3.5:2b-q8_0|tarea|ab",
     "vishing": 29,
+    "legitima": 24,
     "vishing_aviso": 20,
+    "legitima_aviso": 2,
     "vishing_aviso_con_cita": 19,
+    "legitima_aviso_con_cita": 2,
     "lineas": 464,
     "alertas": 56,
     "riesgo_alto_sin_alerta": 49,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 24,
-    "legitima_aviso": 2,
-    "legitima_aviso_con_cita": 2,
+    "preventive": {
+      "t_r@0": [
+        17,
+        28
+      ],
+      "t_r@1": [
+        2,
+        28
+      ],
+      "t_r@2": [
+        2,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        5,
+        14
+      ]
+    },
     "vishing_sin_aviso": [
       {
         "caso": "LAB-arca-deuda",
@@ -315,37 +849,241 @@
         "riesgo_max": 0.2
       }
     ],
-    "nombre": "2B v1 · M1"
+    "nombre": "2B v1 · M1",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-17_150516_m1-gguf",
+    "config": "slm|qwen3.5:2b-q8_0|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 20,
+    "legitima_aviso": 2,
+    "vishing_aviso_con_cita": 19,
+    "legitima_aviso_con_cita": 2,
+    "lineas": 464,
+    "alertas": 56,
+    "riesgo_alto_sin_alerta": 49,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        17,
+        28
+      ],
+      "t_r@1": [
+        2,
+        28
+      ],
+      "t_r@2": [
+        2,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        5,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · M1",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-17_150516_m1-gguf",
     "config": "slm|qwen3.5:4b-q4_K_M|tarea|ab",
     "vishing": 24,
+    "legitima": 18,
     "vishing_aviso": 24,
+    "legitima_aviso": 9,
     "vishing_aviso_con_cita": 24,
+    "legitima_aviso_con_cita": 9,
     "lineas": 310,
     "alertas": 151,
     "riesgo_alto_sin_alerta": 7,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 18,
-    "legitima_aviso": 9,
-    "legitima_aviso_con_cita": 9,
+    "preventive": {
+      "t_r@0": [
+        24,
+        24
+      ],
+      "t_r@1": [
+        13,
+        24
+      ],
+      "t_r@2": [
+        12,
+        24
+      ],
+      "t_c@0": [
+        11,
+        11
+      ],
+      "t_c@1": [
+        11,
+        11
+      ],
+      "t_c@2": [
+        10,
+        11
+      ]
+    },
     "vishing_sin_aviso": [],
-    "nombre": "4B v1 · M1 (parcial)"
+    "nombre": "4B v1 · M1 (parcial)",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-17_150516_m1-gguf",
+    "config": "slm|qwen3.5:4b-q4_K_M|tarea|ab",
+    "vishing": 24,
+    "legitima": 18,
+    "vishing_aviso": 24,
+    "legitima_aviso": 9,
+    "vishing_aviso_con_cita": 24,
+    "legitima_aviso_con_cita": 9,
+    "lineas": 310,
+    "alertas": 151,
+    "riesgo_alto_sin_alerta": 7,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        24,
+        24
+      ],
+      "t_r@1": [
+        13,
+        24
+      ],
+      "t_r@2": [
+        12,
+        24
+      ],
+      "t_c@0": [
+        11,
+        11
+      ],
+      "t_c@1": [
+        11,
+        11
+      ],
+      "t_c@2": [
+        10,
+        11
+      ]
+    },
+    "vishing_sin_aviso": [],
+    "nombre": "4B v1 · M1 (parcial)",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-21_182201_m1-0.8b-v1v2-nb32",
     "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab",
     "vishing": 29,
+    "legitima": 24,
     "vishing_aviso": 26,
+    "legitima_aviso": 9,
     "vishing_aviso_con_cita": 26,
+    "legitima_aviso_con_cita": 8,
     "lineas": 464,
     "alertas": 97,
     "riesgo_alto_sin_alerta": 0,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 24,
-    "legitima_aviso": 9,
-    "legitima_aviso_con_cita": 8,
+    "preventive": {
+      "t_r@0": [
+        20,
+        28
+      ],
+      "t_r@1": [
+        8,
+        28
+      ],
+      "t_r@2": [
+        7,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        10,
+        14
+      ],
+      "t_c@2": [
+        8,
+        14
+      ]
+    },
     "vishing_sin_aviso": [
       {
         "caso": "LAB-pantalla-sin-programa",
@@ -369,21 +1107,113 @@
         "riesgo_max": 0.0
       }
     ],
-    "nombre": "0.8B v1 · M1 nb32"
+    "nombre": "0.8B v1 · M1 nb32 · 2026-10-21_182201",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-21_182201_m1-0.8b-v1v2-nb32",
+    "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 26,
+    "legitima_aviso": 9,
+    "vishing_aviso_con_cita": 26,
+    "legitima_aviso_con_cita": 8,
+    "lineas": 464,
+    "alertas": 97,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        20,
+        28
+      ],
+      "t_r@1": [
+        8,
+        28
+      ],
+      "t_r@2": [
+        7,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        10,
+        14
+      ],
+      "t_c@2": [
+        8,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "LAB-whatsapp-codigo",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.0,
+        "riesgo_max": 0.0
+      }
+    ],
+    "nombre": "0.8B v1 · M1 nb32 · 2026-10-21_182201",
+    "grupo": "53 históricos"
   },
   {
     "corrida": "2026-10-21_182201_m1-0.8b-v1v2-nb32",
     "config": "slm|qwen3.5:0.8b-q8_0|v2|ab",
     "vishing": 14,
+    "legitima": 10,
     "vishing_aviso": 11,
+    "legitima_aviso": 2,
     "vishing_aviso_con_cita": 11,
+    "legitima_aviso_con_cita": 2,
     "lineas": 119,
     "alertas": 38,
     "riesgo_alto_sin_alerta": 5,
     "alerta_con_riesgo_bajo": 0,
-    "legitima": 10,
-    "legitima_aviso": 2,
-    "legitima_aviso_con_cita": 2,
+    "preventive": {
+      "t_r@0": [
+        10,
+        14
+      ],
+      "t_r@1": [
+        2,
+        14
+      ],
+      "t_r@2": [
+        1,
+        14
+      ],
+      "t_c@0": [
+        3,
+        3
+      ],
+      "t_c@1": [
+        3,
+        3
+      ],
+      "t_c@2": [
+        2,
+        3
+      ]
+    },
     "vishing_sin_aviso": [
       {
         "caso": "LAB-arca-deuda-parafrasis",
@@ -407,6 +1237,1190 @@
         "riesgo_max": 0.8
       }
     ],
-    "nombre": "0.8B v2 · M1 nb32"
+    "nombre": "0.8B v2 · M1 nb32 · 2026-10-21_182201",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-21_182201_m1-0.8b-v1v2-nb32",
+    "config": "slm|qwen3.5:0.8b-q8_0|v2|ab",
+    "vishing": 14,
+    "legitima": 10,
+    "vishing_aviso": 11,
+    "legitima_aviso": 2,
+    "vishing_aviso_con_cita": 11,
+    "legitima_aviso_con_cita": 2,
+    "lineas": 119,
+    "alertas": 38,
+    "riesgo_alto_sin_alerta": 5,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        10,
+        14
+      ],
+      "t_r@1": [
+        2,
+        14
+      ],
+      "t_r@2": [
+        1,
+        14
+      ],
+      "t_c@0": [
+        3,
+        3
+      ],
+      "t_c@1": [
+        3,
+        3
+      ],
+      "t_c@2": [
+        2,
+        3
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.5,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.5
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.5,
+        "riesgo_max": 0.8
+      }
+    ],
+    "nombre": "0.8B v2 · M1 nb32 · 2026-10-21_182201",
+    "grupo": "53 históricos"
+  },
+  {
+    "corrida": "2026-10-21_201039_m1-2b-v1v2-nb32",
+    "config": "slm|qwen3.5:2b-q8_0|tarea|ab",
+    "vishing": 75,
+    "legitima": 75,
+    "vishing_aviso": 42,
+    "legitima_aviso": 8,
+    "vishing_aviso_con_cita": 41,
+    "legitima_aviso_con_cita": 6,
+    "lineas": 2773,
+    "alertas": 189,
+    "riesgo_alto_sin_alerta": 124,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        34,
+        64
+      ],
+      "t_r@1": [
+        12,
+        64
+      ],
+      "t_r@2": [
+        8,
+        64
+      ],
+      "t_c@0": [
+        22,
+        29
+      ],
+      "t_c@1": [
+        22,
+        29
+      ],
+      "t_c@2": [
+        16,
+        29
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "CV2-D-V-BANCO-008",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.25,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-BANCO-010",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-BANCO-011",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "CV2-D-V-BANCO-012",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-003",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 15,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-004",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 22,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.6
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-005",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 20,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 12,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-002",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 9,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.4
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 11,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-004",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-001",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 10,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.15
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-004",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-005",
+        "pedido": "REQUEST_SECRET",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-004",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · M1 nb32 · 2026-10-21_201039",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-21_201039_m1-2b-v1v2-nb32",
+    "config": "slm|qwen3.5:2b-q8_0|tarea|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 20,
+    "legitima_aviso": 2,
+    "vishing_aviso_con_cita": 19,
+    "legitima_aviso_con_cita": 2,
+    "lineas": 464,
+    "alertas": 56,
+    "riesgo_alto_sin_alerta": 49,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        17,
+        28
+      ],
+      "t_r@1": [
+        2,
+        28
+      ],
+      "t_r@2": [
+        2,
+        28
+      ],
+      "t_c@0": [
+        11,
+        14
+      ],
+      "t_c@1": [
+        11,
+        14
+      ],
+      "t_c@2": [
+        5,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-familiar-peligro-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 4,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "LAB-giro-sin-plata",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.8,
+        "riesgo_max": 0.8
+      },
+      {
+        "caso": "SC-ORG-BENEFICIO-01-e01",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 7,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · M1 nb32 · 2026-10-21_201039",
+    "grupo": "53 históricos"
+  },
+  {
+    "corrida": "2026-10-21_201039_m1-2b-v1v2-nb32",
+    "config": "slm|qwen3.5:2b-q8_0|tarea|ab",
+    "vishing": 46,
+    "legitima": 51,
+    "vishing_aviso": 22,
+    "legitima_aviso": 6,
+    "vishing_aviso_con_cita": 22,
+    "legitima_aviso_con_cita": 4,
+    "lineas": 2309,
+    "alertas": 133,
+    "riesgo_alto_sin_alerta": 75,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        17,
+        36
+      ],
+      "t_r@1": [
+        10,
+        36
+      ],
+      "t_r@2": [
+        6,
+        36
+      ],
+      "t_c@0": [
+        11,
+        15
+      ],
+      "t_c@1": [
+        11,
+        15
+      ],
+      "t_c@2": [
+        11,
+        15
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "CV2-D-V-BANCO-008",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.25,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-BANCO-010",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-BANCO-011",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.85
+      },
+      {
+        "caso": "CV2-D-V-BANCO-012",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-003",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 15,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-004",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 22,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.6
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-005",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 20,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 12,
+        "riesgo_en_t_r": 0.65,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-002",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 9,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.4
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 11,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-004",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-001",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 10,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.15
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-004",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-005",
+        "pedido": "REQUEST_SECRET",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.35,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-004",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.35
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.65
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v1 · M1 nb32 · 2026-10-21_201039",
+    "grupo": "corpus_v2"
+  },
+  {
+    "corrida": "2026-10-21_201039_m1-2b-v1v2-nb32",
+    "config": "slm|qwen3.5:2b-q8_0|v2|ab",
+    "vishing": 75,
+    "legitima": 75,
+    "vishing_aviso": 47,
+    "legitima_aviso": 15,
+    "vishing_aviso_con_cita": 47,
+    "legitima_aviso_con_cita": 15,
+    "lineas": 2773,
+    "alertas": 281,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        42,
+        64
+      ],
+      "t_r@1": [
+        15,
+        64
+      ],
+      "t_r@2": [
+        10,
+        64
+      ],
+      "t_c@0": [
+        26,
+        29
+      ],
+      "t_c@1": [
+        26,
+        29
+      ],
+      "t_c@2": [
+        19,
+        29
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "CV2-D-V-BANCO-008",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-BANCO-010",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-BANCO-011",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-BANCO-012",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-004",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 22,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-005",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 20,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-006",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 22,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-002",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 9,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 11,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-004",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-004",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-005",
+        "pedido": "REQUEST_SECRET",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-003",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 12,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-004",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.15
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v2 · M1 nb32 · 2026-10-21_201039",
+    "grupo": "todos"
+  },
+  {
+    "corrida": "2026-10-21_201039_m1-2b-v1v2-nb32",
+    "config": "slm|qwen3.5:2b-q8_0|v2|ab",
+    "vishing": 29,
+    "legitima": 24,
+    "vishing_aviso": 24,
+    "legitima_aviso": 4,
+    "vishing_aviso_con_cita": 24,
+    "legitima_aviso_con_cita": 4,
+    "lineas": 464,
+    "alertas": 94,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        21,
+        28
+      ],
+      "t_r@1": [
+        5,
+        28
+      ],
+      "t_r@2": [
+        3,
+        28
+      ],
+      "t_c@0": [
+        13,
+        14
+      ],
+      "t_c@1": [
+        13,
+        14
+      ],
+      "t_c@2": [
+        6,
+        14
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "LAB-arca-deuda-parafrasis",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "LAB-digitos-sin-palabra",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 5,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "LAB-pantalla-sin-programa",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 3,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.15
+      },
+      {
+        "caso": "TR-01-pedido-indirecto-digitos",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 8,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "TR-12-corta-antes-del-pedido",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v2 · M1 nb32 · 2026-10-21_201039",
+    "grupo": "53 históricos"
+  },
+  {
+    "corrida": "2026-10-21_201039_m1-2b-v1v2-nb32",
+    "config": "slm|qwen3.5:2b-q8_0|v2|ab",
+    "vishing": 46,
+    "legitima": 51,
+    "vishing_aviso": 23,
+    "legitima_aviso": 11,
+    "vishing_aviso_con_cita": 23,
+    "legitima_aviso_con_cita": 11,
+    "lineas": 2309,
+    "alertas": 187,
+    "riesgo_alto_sin_alerta": 0,
+    "alerta_con_riesgo_bajo": 0,
+    "preventive": {
+      "t_r@0": [
+        21,
+        36
+      ],
+      "t_r@1": [
+        10,
+        36
+      ],
+      "t_r@2": [
+        7,
+        36
+      ],
+      "t_c@0": [
+        13,
+        15
+      ],
+      "t_c@1": [
+        13,
+        15
+      ],
+      "t_c@2": [
+        13,
+        15
+      ]
+    },
+    "vishing_sin_aviso": [
+      {
+        "caso": "CV2-D-V-BANCO-008",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-BANCO-010",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-BANCO-011",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-BANCO-012",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-004",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 22,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-005",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 20,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-FAMILIAR-006",
+        "pedido": "REQUEST_TRANSFER",
+        "t_r": 22,
+        "riesgo_en_t_r": 0.15,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-002",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 9,
+        "riesgo_en_t_r": 0.1,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 11,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-004",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-003",
+        "pedido": "REQUEST_PERSONAL_DATA",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-005",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-PREMIO-006",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-004",
+        "pedido": "REQUEST_REMOTE_ACCESS",
+        "t_r": 14,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-005",
+        "pedido": "REQUEST_SECRET",
+        "t_r": 16,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-SOPORTE-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-003",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 12,
+        "riesgo_en_t_r": 0.3,
+        "riesgo_max": 0.3
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-004",
+        "pedido": "REQUEST_AUTH_CODE",
+        "t_r": 13,
+        "riesgo_en_t_r": 0.2,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-007",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      },
+      {
+        "caso": "CV2-D-V-WHATSAPP-008",
+        "pedido": null,
+        "t_r": null,
+        "riesgo_en_t_r": null,
+        "riesgo_max": 0.2
+      }
+    ],
+    "nombre": "2B v2 · M1 nb32 · 2026-10-21_201039",
+    "grupo": "corpus_v2"
   }
 ]
