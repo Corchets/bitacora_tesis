@@ -1,4 +1,5 @@
 name: Actualizar ayuda memoria
+run-name: Ayuda memoria · ${{ github.ref_name }} · ${{ github.event_name }}
 
 on:
   push:
@@ -29,8 +30,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # La web se mantiene en main y consulta las fuentes de ambas ramas.
-          ref: main
+          # Push/manual: el commit de la rama seleccionada. Los eventos del
+          # repositorio y el cron usan el commit de la rama predeterminada.
+          ref: ${{ github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

@@ -23,6 +23,8 @@ consentimientos-firmados/
 *.pem
 
 # Artefactos grandes/regenerables
+__pycache__/
+*.py[cod]
 models/checkpoints/
 artifacts/
 experiments/laboratorio/modelos/
