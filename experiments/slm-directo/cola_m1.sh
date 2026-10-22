@@ -7,16 +7,18 @@
 #
 # Por defecto corre toda la partición de desarrollo (150 casos, 2773 líneas por config).
 #
-# Antes: cerrar Docker y las apps pesadas. No arranca si Docker está abierto o si el swap
-# ya pasa del límite. Cada corrida se corta con SIGINT (lo procesado queda guardado y el
-# manifiesto dice «interrumpida») si el swap usado pasa de LIMITE_SWAP_MB (6144 por
-# defecto) o la memoria libre baja de MIN_LIBRE % (5). El swap de macOS solo baja al
-# reiniciar o al liberar lo que estaba en él: si queda alto con Docker cerrado, reiniciar.
+# Antes: cerrar Docker y las apps pesadas, y enchufar la Mac. No arranca si Docker está
+# abierto, si está a batería (el 2026-10-21 hibernó al 1 % en plena corrida) o si el swap
+# ya pasa del límite. Mientras corre, caffeinate evita que se duerma. Cada corrida se corta
+# con SIGINT (lo procesado queda guardado y el manifiesto dice «interrumpida») si la
+# memoria libre baja de MIN_LIBRE % (8) o el swap usado pasa de LIMITE_SWAP_MB (16384).
+# El swap de macOS crece y no baja hasta reiniciar aunque sobre memoria (llegó a 12 GB con
+# 23 % libre): por eso el corte principal es la memoria libre y el swap es el último límite.
 #
 # > Estado: propuesta sin discutir. Material de desarrollo; no elige modelo (D09).
 set -u
-LIMITE_SWAP_MB=${LIMITE_SWAP_MB:-6144}
-MIN_LIBRE=${MIN_LIBRE:-5}
+LIMITE_SWAP_MB=${LIMITE_SWAP_MB:-16384}
+MIN_LIBRE=${MIN_LIBRE:-8}
 DIR="$(cd "$(dirname "$0")" && pwd)"
 LOGS="${TMPDIR:-/tmp}/cola_m1"; mkdir -p "$LOGS"
 GRUPO_ARGS=(); [ -n "${GRUPO:-}" ] && GRUPO_ARGS=(--grupo "$GRUPO")
@@ -27,6 +29,10 @@ libre() { memory_pressure | tail -1 | sed -E 's/.*: ([0-9]+)%/\1/'; }
 if pgrep -q -f "Docker.app/Contents/MacOS/com.docker.virtualization"; then
   echo "Docker está abierto: cerralo antes de correr la cola."; exit 1
 fi
+if ! pmset -g batt | grep -q "AC Power"; then
+  echo "La Mac está a batería: enchufala antes de correr la cola."; exit 1
+fi
+caffeinate -is -w $$ &
 if [ "$(swap)" -gt "$LIMITE_SWAP_MB" ]; then
   echo "El swap ya está en $(swap) MB (límite $LIMITE_SWAP_MB). Reiniciá o subí LIMITE_SWAP_MB."; exit 1
 fi
