@@ -97,9 +97,48 @@ Docker abierto. Comparación sobre esos 24 casos:
 - Son 24 casos cortos, un modelo y una corrida: **no alcanza para decir que el v2 es
   mejor.** Falta el v2 completo con 0.8B, 2B y 4B.
 
+### 2B sobre los 150 de desarrollo
+
+Corrida [`2026-10-21_201039_m1-2b-v1v2-nb32`](../../corridas/2026-10-21_201039_m1-2b-v1v2-nb32/),
+`qwen3.5:2b-q8_0` en M1 con `--num-batch 32`, v1 y v2 completos, 0 fallos. Intervalos de
+Wilson del 95 % (`errores.py`). El v2 se escribió mirando los 53 históricos: los 97 de
+corpus_v2 son su primera prueba.
+
+| 2B | Casos | Estafas con aviso | Falsas alarmas |
+|---|---|---|---|
+| v1 | 53 históricos | 20/29 (51–83 %) | 2/24 (2–26 %) |
+| v2 | 53 históricos | 24/29 (65–92 %) | 4/24 (7–36 %) |
+| v1 | corpus_v2 | 22/46 (34–62 %) | 6/51 (6–23 %) |
+| v2 | corpus_v2 | 23/46 (36–64 %) | 11/51 (12–35 %) |
+
+- **En los 53 históricos el v1 repite exactamente** los números del 2026-10-17 (tercera
+  repetición): `--num-batch 32` no cambió la calidad.
+- **En los históricos el v2 gana lo que se buscaba:** detecta 4 pedidos de dinero o datos
+  que el v1 perdía (`LAB-arca-deuda`, `LAB-familiar-peligro-parafrasis`, `LAB-giro-sin-plata`,
+  `SC-ORG-BENEFICIO-01-e01`). A cambio, suma 2 falsas alarmas en legítimas que piden un dato
+  (`LG-BANK-VERIF-01-e01`, `TR-13-turno-medico-pide-dni`).
+- **En corpus_v2 el v2 no mejora al 2B:** gana 3 estafas y pierde 2 (neto +1), y casi
+  duplica las falsas alarmas (de 6 a 11). Las 5 nuevas son una transferencia entre
+  familiares, un médico que confirma nombre y fecha de nacimiento, y tres de soporte
+  donde una pregunta o un relato («¿Me vas a pedir que te pase la clave…?», «¿Ayer te
+  pidieron cambiar la contraseña…?») cuenta como pedido. La instrucción «cuenta aunque la
+  excusa parezca válida» choca con las legítimas que piden algo razonable, y «lo relatado
+  no cuenta» no le alcanza al 2B.
+- **Las estafas que cortan antes del pedido** (10 de las 46 de corpus_v2) quedan en 0/10
+  con los dos prompts: un detector de pedidos no las puede ver. Con ellas en el
+  denominador, el máximo posible en desarrollo es 65/75 (87 %). Si la meta de 95 % se
+  mide sobre todas las estafas o solo sobre las que tienen pedido es parte de
+  [D07](../../../../docs/gestion/MAPA-DECISIONES.md)/D08. **Estado: propuesta sin discutir.**
+- Por tipo, el v1 en corpus_v2 avisa en 14/18 pedidos directos y en 8/18 indirectos o partidos.
+- Latencia por línea: p50 1,9 s y p95 4,5 s con el v1, prácticamente igual con el v2.
+
+**Lectura:** para el 2B, el v2 corre el punto de operación (más avisos en todo) en lugar
+de separar mejor. Lo que distingue una legítima con pedido razonable de una estafa no
+está en la forma del pedido sino en quién llama, quién inició y si el pedido encaja con
+el motivo de la llamada. Falta ver 0.8B y 4B antes de decidir.
+
 ## 4. Pendiente
 
-Cuando Docker esté cerrado, `bash experiments/slm-directo/cola_m1.sh` corre, en orden: el
-v2 completo con el 0.8B, v1 y v2 con el 2B (tercera repetición del v1), v1 y v2 con el 4B
-sobre los 53 casos y el 9B. Corta cada corrida si el swap pasa de 6 GB. Con esas
-corridas se completa la sección 3 y se vuelve a correr `errores.py`.
+La cola del 2026-10-21 sigue con v1 y v2 del 0.8B y del 4B sobre los 150 de desarrollo;
+el 9B queda para la PC con Windows (etiqueta `win-`). Con esas corridas se completa esta
+sección y se vuelve a correr `errores.py`.
