@@ -1,0 +1,345 @@
+{
+  "mitad_a": [
+    "CV2-D-V-FAMILIAR-004",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-006",
+    "CV2-D-V-WHATSAPP-003",
+    "CV2-D-V-FAMILIAR-001",
+    "CV2-D-V-BANCO-001",
+    "CV2-D-V-WHATSAPP-005",
+    "CV2-D-V-PREMIO-004",
+    "CV2-D-V-BANCO-005",
+    "CV2-D-V-BANCO-006",
+    "CV2-D-V-BANCO-003",
+    "CV2-D-V-SOPORTE-005",
+    "CV2-D-V-WHATSAPP-001",
+    "CV2-D-V-FAMILIAR-005",
+    "CV2-D-V-BANCO-008",
+    "CV2-D-V-SOPORTE-001",
+    "CV2-D-V-FAMILIAR-003",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-002",
+    "CV2-D-V-SOPORTE-008",
+    "CV2-D-V-PREMIO-006",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004",
+    "CV2-D-V-BANCO-010",
+    "CV2-D-V-BANCO-012",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-L-WHATSAPP-002",
+    "CV2-D-L-TRABAJO-005",
+    "CV2-D-L-DELIVERY-003",
+    "CV2-D-L-MEDICO-002",
+    "CV2-D-L-ESCUELA-003",
+    "CV2-D-L-ESCUELA-005",
+    "CV2-D-L-SOPORTE-005",
+    "CV2-D-L-WHATSAPP-001",
+    "CV2-D-L-PREMIO-001",
+    "CV2-D-L-BANCO-010",
+    "CV2-D-L-BANCO-009",
+    "CV2-D-L-FAMILIAR-005",
+    "CV2-D-L-MEDICO-001",
+    "CV2-D-L-SOPORTE-002",
+    "CV2-D-L-WHATSAPP-003",
+    "CV2-D-L-FAMILIAR-002",
+    "CV2-D-L-DELIVERY-004",
+    "CV2-D-L-SOPORTE-003",
+    "CV2-D-L-FAMILIAR-004",
+    "CV2-D-L-TRABAJO-002",
+    "CV2-D-L-BANCO-005",
+    "CV2-D-L-BANCO-008",
+    "CV2-D-L-WHATSAPP-005",
+    "CV2-D-L-PREMIO-002",
+    "CV2-D-L-FAMILIAR-003",
+    "CV2-D-L-MEDICO-005"
+  ],
+  "mitad_b": [
+    "CV2-D-V-PREMIO-005",
+    "CV2-D-V-BANCO-004",
+    "CV2-D-V-SOPORTE-002",
+    "CV2-D-V-FAMILIAR-002",
+    "CV2-D-V-SOPORTE-003",
+    "CV2-D-V-WHATSAPP-006",
+    "CV2-D-V-PREMIO-002",
+    "CV2-D-V-SOPORTE-006",
+    "CV2-D-V-WHATSAPP-002",
+    "CV2-D-V-BANCO-009",
+    "CV2-D-V-BANCO-002",
+    "CV2-D-V-WHATSAPP-004",
+    "CV2-D-V-BANCO-011",
+    "CV2-D-V-BANCO-007",
+    "CV2-D-V-PREMIO-001",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-005",
+    "CV2-D-V-PREMIO-003",
+    "CV2-D-V-WHATSAPP-008",
+    "CV2-D-V-WHATSAPP-007",
+    "CV2-D-V-FAMILIAR-006",
+    "CV2-D-V-SOPORTE-004",
+    "CV2-D-V-SOPORTE-007",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-003",
+    "CV2-D-L-ESCUELA-001",
+    "CV2-D-L-TRABAJO-001",
+    "CV2-D-L-SOPORTE-004",
+    "CV2-D-L-BANCO-002",
+    "CV2-D-L-DELIVERY-001",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-002",
+    "CV2-D-L-DELIVERY-005",
+    "CV2-D-L-BANCO-001",
+    "CV2-D-L-ESCUELA-002",
+    "CV2-D-L-TRABAJO-003",
+    "CV2-D-L-WHATSAPP-004",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-L-PREMIO-003",
+    "CV2-D-L-MEDICO-004",
+    "CV2-D-L-DELIVERY-002",
+    "CV2-D-L-BANCO-007",
+    "CV2-D-L-SOPORTE-001",
+    "CV2-D-L-BANCO-006",
+    "CV2-D-L-ESCUELA-004",
+    "CV2-D-L-MEDICO-003",
+    "CV2-D-L-BANCO-004",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-003",
+    "CV2-D-L-FAMILIAR-001",
+    "CV2-D-L-BANCO-003",
+    "CV2-D-L-TRABAJO-004"
+  ],
+  "filas": [
+    {
+      "eleccion": "FA ≤ 5% · 2B v1",
+      "config": "2B v1 · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 18,
+        "nv": 52,
+        "fp": 1,
+        "nl": 50,
+        "tp_p": 18,
+        "nv_p": 47,
+        "rec": 0.34615384615384615,
+        "fa": 0.02
+      },
+      "mitad_b": {
+        "tp": 9,
+        "nv": 23,
+        "fp": 1,
+        "nl": 25,
+        "tp_p": 9,
+        "nv_p": 17,
+        "rec": 0.391304347826087,
+        "fa": 0.04
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 2B v2",
+      "config": "2B v2 · alerta ≥ 0.90 · k=2",
+      "seleccion": {
+        "tp": 1,
+        "nv": 52,
+        "fp": 1,
+        "nl": 50,
+        "tp_p": 1,
+        "nv_p": 47,
+        "rec": 0.019230769230769232,
+        "fa": 0.02
+      },
+      "mitad_b": {
+        "tp": 4,
+        "nv": 23,
+        "fp": 0,
+        "nl": 25,
+        "tp_p": 4,
+        "nv_p": 17,
+        "rec": 0.17391304347826086,
+        "fa": 0.0
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · **mejor de todo**",
+      "config": "(reglas v2 · alerta ≥ 0.00) Y (2B v1 · riesgo ≥ 0.35) · k=1",
+      "seleccion": {
+        "tp": 24,
+        "nv": 52,
+        "fp": 2,
+        "nl": 50,
+        "tp_p": 24,
+        "nv_p": 47,
+        "rec": 0.46153846153846156,
+        "fa": 0.04
+      },
+      "mitad_b": {
+        "tp": 3,
+        "nv": 23,
+        "fp": 0,
+        "nl": 25,
+        "tp_p": 3,
+        "nv_p": 17,
+        "rec": 0.13043478260869565,
+        "fa": 0.0
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 2B v1",
+      "config": "2B v1 · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 30,
+        "nv": 52,
+        "fp": 5,
+        "nl": 50,
+        "tp_p": 30,
+        "nv_p": 47,
+        "rec": 0.5769230769230769,
+        "fa": 0.1
+      },
+      "mitad_b": {
+        "tp": 12,
+        "nv": 23,
+        "fp": 3,
+        "nl": 25,
+        "tp_p": 12,
+        "nv_p": 17,
+        "rec": 0.5217391304347826,
+        "fa": 0.12
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 2B v2",
+      "config": "2B v2 · alerta ≥ 0.00 · k=3",
+      "seleccion": {
+        "tp": 20,
+        "nv": 52,
+        "fp": 5,
+        "nl": 50,
+        "tp_p": 20,
+        "nv_p": 47,
+        "rec": 0.38461538461538464,
+        "fa": 0.1
+      },
+      "mitad_b": {
+        "tp": 9,
+        "nv": 23,
+        "fp": 2,
+        "nl": 25,
+        "tp_p": 9,
+        "nv_p": 17,
+        "rec": 0.391304347826087,
+        "fa": 0.08
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · **mejor de todo**",
+      "config": "(2B v1 · riesgo ≥ 0.45) Y (2B v2 · riesgo ≥ 0.25) · k=1",
+      "seleccion": {
+        "tp": 34,
+        "nv": 52,
+        "fp": 5,
+        "nl": 50,
+        "tp_p": 34,
+        "nv_p": 47,
+        "rec": 0.6538461538461539,
+        "fa": 0.1
+      },
+      "mitad_b": {
+        "tp": 11,
+        "nv": 23,
+        "fp": 5,
+        "nl": 25,
+        "tp_p": 11,
+        "nv_p": 17,
+        "rec": 0.4782608695652174,
+        "fa": 0.2
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · reglas v2",
+      "config": "reglas v2 · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 27,
+        "nv": 52,
+        "fp": 6,
+        "nl": 50,
+        "tp_p": 27,
+        "nv_p": 47,
+        "rec": 0.5192307692307693,
+        "fa": 0.12
+      },
+      "mitad_b": {
+        "tp": 5,
+        "nv": 23,
+        "fp": 2,
+        "nl": 25,
+        "tp_p": 5,
+        "nv_p": 17,
+        "rec": 0.21739130434782608,
+        "fa": 0.08
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 2B v1",
+      "config": "2B v1 · riesgo ≥ 0.40 · k=1",
+      "seleccion": {
+        "tp": 39,
+        "nv": 52,
+        "fp": 10,
+        "nl": 50,
+        "tp_p": 39,
+        "nv_p": 47,
+        "rec": 0.75,
+        "fa": 0.2
+      },
+      "mitad_b": {
+        "tp": 15,
+        "nv": 23,
+        "fp": 5,
+        "nl": 25,
+        "tp_p": 13,
+        "nv_p": 17,
+        "rec": 0.6521739130434783,
+        "fa": 0.2
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 2B v2",
+      "config": "2B v2 · alerta ≥ 0.80 · k=1",
+      "seleccion": {
+        "tp": 35,
+        "nv": 52,
+        "fp": 9,
+        "nl": 50,
+        "tp_p": 35,
+        "nv_p": 47,
+        "rec": 0.6730769230769231,
+        "fa": 0.18
+      },
+      "mitad_b": {
+        "tp": 12,
+        "nv": 23,
+        "fp": 4,
+        "nl": 25,
+        "tp_p": 12,
+        "nv_p": 17,
+        "rec": 0.5217391304347826,
+        "fa": 0.16
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · **mejor de todo**",
+      "config": "2B v1 · riesgo ≥ 0.40 · k=1",
+      "seleccion": {
+        "tp": 39,
+        "nv": 52,
+        "fp": 10,
+        "nl": 50,
+        "tp_p": 39,
+        "nv_p": 47,
+        "rec": 0.75,
+        "fa": 0.2
+      },
+      "mitad_b": {
+        "tp": 15,
+        "nv": 23,
+        "fp": 5,
+        "nl": 25,
+        "tp_p": 13,
+        "nv_p": 17,
+        "rec": 0.6521739130434783,
+        "fa": 0.2
+      }
+    }
+  ]
+}
