@@ -219,7 +219,7 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <!-- ============================ PROBADOR ============================ -->
 <section id="s-probador" data-titulo="Probador en vivo">
 <h2>Probador en vivo</h2>
-<p class="mu">Corre las reglas (copia en JavaScript de <code>reglas.py</code>) y un modelo de Ollama línea por línea, con el mismo prompt, esquema JSON y opciones que <code>correr.py</code> (temperatura 0, seed 42, num_ctx 4096, <code>think: false</code>). Es exploratorio: no escribe manifiesto. Para corridas registrables usá <code>correr.py</code>.</p>
+<p class="mu">Corre las reglas (copia en JavaScript de <code>reglas.py</code>) y un modelo de Ollama línea por línea, con el mismo prompt, esquema JSON y opciones que <code>correr.py</code> (temperatura 0, seed 42, num_ctx 4096, <code>think: false</code>; <code>num_batch</code> 32 como las corridas <code>-nb32</code>, o el valor de Ollama). Las reglas son las v1. Es exploratorio: no escribe manifiesto. Para corridas registrables usá <code>correr.py</code>. Para usarlo con el archivo suelto, ver <a href="#correr">Cómo probar todo</a>.</p>
 <div class="card">
 <div class="fila"><span>Ollama:</span><span id="ol-estado" class="estado no">sin comprobar</span>
  <input type="text" id="ol-url" value="http://127.0.0.1:11434" style="width:200px">
@@ -229,6 +229,7 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
  <label class="ctl">Modelo<select id="pr-modelo"><option value="">(comprobá Ollama)</option></select></label>
  <label class="ctl">Prompt<select id="pr-prompt"></select></label>
  <label class="ctl">Hablantes<select id="pr-hab"><option value="ab">ab: el modelo ve A/B</option><option value="sin">sin: no los ve</option></select></label>
+ <label class="ctl">num_batch<select id="pr-nb"><option value="32">32 (corridas -nb32)</option><option value="">el de Ollama</option></select></label>
  <label class="ctl">Solo reglas<select id="pr-soloreglas"><option value="no">no</option><option value="si">sí (sin Ollama)</option></select></label>
 </div>
 </div>
@@ -254,51 +255,78 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <!-- ============================ CÓMO CORRER ============================ -->
 <section id="s-correr" data-titulo="Cómo probar todo">
 <h2>Cómo probar todo</h2>
+<div class="nota"><b>La reserva no se corre ni se mira.</b> Los 200 casos <code>CV2-T-*</code> son el test final: se corren una sola vez, con la configuración congelada y después de acordar D08. Desde el 2026-10-23 están en GitHub (rama <code>laboratorio-luciano</code>), pero este panel no los trae y <code>correr.py</code> usa solo desarrollo. No uses <code>--particion test_reservado</code> ni abras <code>casos/texto/CV2-T-*</code> (<a href="../../../../docs/gestion/REGISTRO-RIESGOS.md">R05</a>).</div>
 <div class="grid2">
-<div class="card"><b>1. Este panel</b>
-<pre>python3 experiments/slm-directo/analisis/tablero/armar_panel.py --servir
+<div class="card"><b>1. Si te llegó solo este archivo</b>
+<p class="chico">Con doble clic ves todo: resumen, plan, resultados, afinar, tiempos y casos. En el <a href="#probador">Probador</a> anda <b>Solo reglas: sí</b>. Los enlaces a documentos y corridas necesitan el repositorio (tarjeta 2).</p>
+<p class="chico">Para probar modelos hace falta <a href="https://ollama.com/download">Ollama</a> y servir el archivo, porque Ollama rechaza las páginas abiertas con doble clic (HTTP 403). Otros modelos: <code>2b-q8_0</code> (2,7 GB), <code>4b-q4_K_M</code> (3,3 GB) y <code>9b-q4_K_M</code> (6,6 GB).</p>
+<pre>ollama pull qwen3.5:0.8b-q8_0        # 1,0 GB
+cd &lt;carpeta donde guardaste panel.html&gt;
+python3 -m http.server 8765          # en Windows: py -m http.server 8765
+# abrí http://127.0.0.1:8765/panel.html#probador y tocá «Comprobar»</pre>
+<span class="chico mu">Probado el 2026-10-23 con el archivo suelto en la M1: 0.8B con el prompt v2 sobre <code>LAB-whatsapp-codigo</code>, 2,5 s por línea (mediana). En macOS usá etiquetas GGUF (<code>-q8_0</code>, <code>-q4_K_M</code>): la variante MLX devuelve HTTP 501 con salida estructurada (R21).</span></div>
+<div class="card"><b>2. Con el repositorio</b>
+<pre>git clone https://github.com/Corchets/bitacora_tesis.git
+cd bitacora_tesis
+git switch laboratorio-luciano       # este panel (trae la reserva: no correrla)
+python3 experiments/slm-directo/analisis/tablero/armar_panel.py --servir
 # abre http://127.0.0.1:8765/experiments/slm-directo/analisis/tablero/panel.html</pre>
-<span class="chico mu">Hace falta servirlo: Ollama rechaza páginas abiertas con doble clic (origen <code>null</code>). Regeneralo después de nuevas corridas o casos.</span></div>
-<div class="card"><b>2. Tests (no necesitan modelos)</b>: 84, todos pasan al 2026-10-21.
-<pre>cd experiments/slm-directo &amp;&amp; python3 -m unittest discover -s tests   # 31
+<span class="chico mu"><code>--servir</code> sirve la raíz del repositorio, así también abren los enlaces. Sin <code>--servir</code>, solo regenera el panel (hacelo después de nuevas corridas o casos). <code>laboratorio-main</code> tiene los 150 de desarrollo sin la reserva, con una versión anterior del panel.</span></div>
+<div class="card"><b>3. Devolver lo que probaste</b>
+<p class="chico"><b>Probador</b> (exploratorio): corré un lote, tocá «Exportar corridas en vivo (JSON)» y mandá el archivo. Quien lo recibe lo carga con «Importar JSON» y aparece en Resultados y Afinar.</p>
+<p class="chico"><b>Corridas registrables</b>: <code>correr.py</code> (tarjeta 5) crea <code>corridas/&lt;fecha&gt;_&lt;hora&gt;_&lt;etiqueta&gt;/</code> con <code>manifiesto.json</code> y <code>actualizaciones.csv</code>. Mandá esa carpeta entera.</p>
+<span class="chico mu">Con Ollama, una sola instancia por máquina: dos a la vez se pisan la memoria y los tiempos.</span></div>
+<div class="card"><b>4. Tests (no necesitan modelos)</b>: 107, todos pasan al 2026-10-23.
+<pre>cd experiments/slm-directo &amp;&amp; python3 casos.py &amp;&amp; python3 -m unittest discover -s tests   # 54
 cd ../replay   &amp;&amp; python3 -m unittest discover -s tests   # 12
 cd ../metricas &amp;&amp; python3 -m unittest discover -s tests   # 28
 cd .. &amp;&amp; uv run --with numpy --with soundfile \
-  python -m unittest discover -s asr-local/tests        # 13</pre></div>
-<div class="card"><b>3. Detector SLM sobre texto (#50)</b>
+  python -m unittest discover -s asr-local/tests        # 13</pre>
+<span class="chico mu"><code>casos.py</code> valida textos, referencias, catálogo y huellas SHA-256 del corpus.</span></div>
+<div class="card"><b>5. Detector SLM sobre texto (#50)</b>
 <pre>bash experiments/slm-directo/demo.sh             # instala lo que falte, 8 casos y abre el visor
-bash experiments/slm-directo/demo.sh --completo  # los 53
+bash experiments/slm-directo/demo.sh --completo  # los 150 de desarrollo (en Windows: demo.ps1)
 cd experiments/slm-directo
 python3 casos.py --listar
-python3 correr.py --solo-reglas
+python3 correr.py --solo-reglas --reglas v1,v2
 python3 correr.py --modelos qwen3.5:2b-q8_0 --grupo piloto_escrito --detalle
-python3 correr.py --modelos qwen3.5:0.8b --solo-cpu --hilos 2   # cota sin placa
+python3 correr.py --modelos qwen3.5:4b-q4_K_M --prompts tarea,v2 \
+  --grupo corpus_v2 --num-batch 32 --etiqueta linux-4b-cv2-nb32   # como las de Linux
+python3 correr.py --modelos qwen3.5:0.8b-q8_0 --solo-cpu --hilos 2   # cota sin placa
+bash cola_m1.sh                                  # M1 de 8 GB: de a una y corta por memoria
 python3 resumen.py corridas/&lt;carpeta&gt;
 python3 visor.py corridas/&lt;carpeta&gt; [corridas/&lt;otra&gt;] --abrir</pre>
-<span class="chico mu">En macOS usá etiquetas GGUF (<code>-q8_0</code>, <code>-q4_K_M</code>): la variante MLX devuelve HTTP 501 con salida estructurada (R21).</span></div>
-<div class="card"><b>4. ASR local (#19)</b>
+<span class="chico mu">Prompts: <code>tarea</code> (v1), <code>v2</code> (cita antes de decidir) y <code>tarea+base</code>. <code>--num-batch 32</code> deja reutilizar la caché del prefijo en Qwen3.5.</span></div>
+<div class="card"><b>6. Análisis de lo guardado (sin correr modelos)</b>
+<pre>cd experiments/slm-directo/analisis
+python3 2026-10-21-errores-y-prompt-v2/errores.py    # errores de v1 y v2 por corrida
+python3 2026-10-21-pasada-0/combinar.py              # umbral, persistencia y cascadas (150)
+python3 2026-10-21-pasada-0/combinar.py --casos 53   # con el 4B y el 9B de Linux
+python3 tablero/armar_panel.py                       # regenerar este panel</pre>
+<span class="chico mu">Detalle: <a href="../2026-10-21-errores-y-prompt-v2/README.md">errores y prompt v2</a> · <a href="../2026-10-21-pasada-0/README.md">pasada 0</a>.</span></div>
+<div class="card"><b>7. ASR local (#19)</b>
 <pre>cd experiments/asr-local
 pip install -r requirements.txt
-bash sintetizar_par.sh                       # audios TTS del par
+bash sintetizar_par.sh                       # audios TTS del par (macOS, usa say)
 python3 asr_local.py --help                  # Zipformer o Whisper → actualizaciones.jsonl
 python3 mezclar_canales.py --help            # estéreo A/B ordenado por disponible_s
 python3 wer.py --help</pre></div>
-<div class="card"><b>5. Replay de punta a punta (#28)</b>
+<div class="card"><b>8. Replay de punta a punta (#28)</b>
 <pre>cd experiments/replay
 python3 replay.py --texto ../slm-directo/casos/texto/LAB-whatsapp-codigo.txt \
   --detector reglas --salida corridas/demo_texto
 python3 replay.py --actualizaciones tests/datos/ejemplo_actualizaciones.jsonl \
   --detector slm --modelo qwen3.5:2b-q8_0 --prompt tarea --hablantes ab \
   --disparo final --salida corridas/demo_slm</pre></div>
-<div class="card"><b>6. Métricas (#52)</b>
+<div class="card"><b>9. Métricas (#52)</b>
 <pre>cd experiments/metricas
 python3 evaluar.py --help   # corridas de slm-directo o replay → metricas.md y metricas.json</pre></div>
-<div class="card"><b>7. Otras interfaces</b>
+<div class="card"><b>10. Otras interfaces</b>
 <pre># UI Streamlit del laboratorio (#44)
 uv venv /tmp/ui-venv
 uv pip install --python /tmp/ui-venv/bin/python -r experiments/laboratorio/requirements-ui.txt
 /tmp/ui-venv/bin/python -m streamlit run experiments/laboratorio/ui_laboratorio.py
-# Ayuda-memoria y arquitectura interactiva
+# Ayuda memoria y arquitectura interactiva
 cd ayuda-memoria &amp;&amp; npm install &amp;&amp; npm run build &amp;&amp; npm run preview</pre>
 <span class="chico mu">Visor guardado: <a href="../../corridas/2026-10-17_145806_demo-qwen3.5-2b-q8_0/visor.html">corrida 2B M1 (8 casos)</a> · <a href="index.html">tablero del ensayo</a> (necesita el entorno donde se creó).</span></div>
 </div>
@@ -644,7 +672,7 @@ async function comprobarOllama() {
     $('#ol-ayuda').textContent = '';
   } catch (err) {
     e.className = 'estado no'; e.textContent = 'sin conexión';
-    $('#ol-ayuda').innerHTML = location.protocol === 'file:' ? 'Abriste el archivo con doble clic: Ollama lo rechaza. Usá <code>armar_panel.py --servir</code>.' : 'Prendé Ollama (<code>ollama serve</code>) y descargá un modelo (<code>ollama pull qwen3.5:2b-q8_0</code>).';
+    $('#ol-ayuda').innerHTML = location.protocol === 'file:' ? 'Abriste el archivo con doble clic y Ollama lo rechaza. En la carpeta del archivo corré <code>python3 -m http.server 8765</code> y abrí <code>http://127.0.0.1:8765/panel.html</code> (ver <a href="#correr">Cómo probar todo</a>).' : 'Prendé Ollama (<code>ollama serve</code>) y descargá un modelo (<code>ollama pull qwen3.5:2b-q8_0</code>).';
   }
 }
 $('#ol-check').onclick = comprobarOllama;
@@ -666,7 +694,7 @@ function validar(crudo) {
   return [s, ''];
 }
 async function evaluarSLM(modelo, prompt, hab, lineas, senal) {
-  const cuerpo = {model: modelo, messages: [{role: 'system', content: D.prompts[prompt]}, {role: 'user', content: mensajeUsuario(lineas, hab)}], format: D.esquemas[prompt], options: D.opciones, stream: false};
+  const cuerpo = {model: modelo, messages: [{role: 'system', content: D.prompts[prompt]}, {role: 'user', content: mensajeUsuario(lineas, hab)}], format: D.esquemas[prompt], options: {...D.opciones, ...($('#pr-nb').value ? {num_batch: +$('#pr-nb').value} : {})}, stream: false};
   if (pensarOK) cuerpo.think = false;
   const t0 = performance.now();
   let r = await fetch(urlOllama() + '/api/chat', {method: 'POST', body: JSON.stringify(cuerpo), signal: senal});
