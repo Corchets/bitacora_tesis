@@ -255,7 +255,7 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <!-- ============================ CÓMO CORRER ============================ -->
 <section id="s-correr" data-titulo="Cómo probar todo">
 <h2>Cómo probar todo</h2>
-<div class="nota"><b>La reserva no se corre ni se mira.</b> Los 200 casos <code>CV2-T-*</code> son el test final: se corren una sola vez, con la configuración congelada y después de acordar D08. Desde el 2026-10-23 están en GitHub (rama <code>laboratorio-luciano</code>), pero este panel no los trae y <code>correr.py</code> usa solo desarrollo. No uses <code>--particion test_reservado</code> ni abras <code>casos/texto/CV2-T-*</code> (<a href="../../../../docs/gestion/REGISTRO-RIESGOS.md">R05</a>).</div>
+<div class="nota"><b>La reserva no se corre ni se mira.</b> Los 200 casos <code>CV2-T-*</code> son el test final: se corren una sola vez, con la configuración congelada y después de acordar D08. Desde el 2026-10-23 están en GitHub (rama <code>laboratorio-luciano</code>), pero ni <code>laboratorio-main</code> ni este panel los traen y <code>correr.py</code> usa solo desarrollo. No uses <code>--particion test_reservado</code> ni abras <code>casos/texto/CV2-T-*</code> (<a href="../../../../docs/gestion/REGISTRO-RIESGOS.md">R05</a>).</div>
 <div class="grid2">
 <div class="card"><b>1. Si te llegó solo este archivo</b>
 <p class="chico">Con doble clic ves todo: resumen, plan, resultados, afinar, tiempos y casos. En el <a href="#probador">Probador</a> anda <b>Solo reglas: sí</b>. Los enlaces a documentos y corridas necesitan el repositorio (tarjeta 2).</p>
@@ -268,10 +268,10 @@ python3 -m http.server 8765          # en Windows: py -m http.server 8765
 <div class="card"><b>2. Con el repositorio</b>
 <pre>git clone https://github.com/Corchets/bitacora_tesis.git
 cd bitacora_tesis
-git switch laboratorio-luciano       # este panel (trae la reserva: no correrla)
+git switch laboratorio-main          # la rama de trabajo de todos
 python3 experiments/slm-directo/analisis/tablero/armar_panel.py --servir
 # abre http://127.0.0.1:8765/experiments/slm-directo/analisis/tablero/panel.html</pre>
-<span class="chico mu"><code>--servir</code> sirve la raíz del repositorio, así también abren los enlaces. Sin <code>--servir</code>, solo regenera el panel (hacelo después de nuevas corridas o casos). <code>laboratorio-main</code> tiene los 150 de desarrollo sin la reserva, con una versión anterior del panel.</span></div>
+<span class="chico mu"><code>--servir</code> sirve la raíz del repositorio, así también abren los enlaces. Sin <code>--servir</code>, solo regenera el panel (hacelo después de nuevas corridas o casos). <code>laboratorio-main</code> tiene los 150 de desarrollo y no la reserva; <code>laboratorio-luciano</code> queda quieta hasta la evaluación final.</span></div>
 <div class="card"><b>3. Devolver lo que probaste</b>
 <p class="chico"><b>Probador</b> (exploratorio): corré un lote, tocá «Exportar corridas en vivo (JSON)» y mandá el archivo. Quien lo recibe lo carga con «Importar JSON» y aparece en Resultados y Afinar.</p>
 <p class="chico"><b>Corridas registrables</b>: <code>correr.py</code> (tarjeta 5) crea <code>corridas/&lt;fecha&gt;_&lt;hora&gt;_&lt;etiqueta&gt;/</code> con <code>manifiesto.json</code> y <code>actualizaciones.csv</code>. Mandá esa carpeta entera.</p>
