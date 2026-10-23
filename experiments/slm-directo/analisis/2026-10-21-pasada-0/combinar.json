@@ -1,4 +1,31 @@
 {
+  "casos": "150",
+  "detectores": {
+    "reglas v1": [
+      [
+        "2026-10-21_200147_m1-reglas-150"
+      ],
+      "reglas"
+    ],
+    "reglas v2": [
+      [
+        "2026-10-21_201914_m1-reglas-v2-150"
+      ],
+      "reglas_v2"
+    ],
+    "2B v1 (M1)": [
+      [
+        "2026-10-21_201039_m1-2b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:2b-q8_0|tarea|ab"
+    ],
+    "2B v2 (M1)": [
+      [
+        "2026-10-21_201039_m1-2b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:2b-q8_0|v2|ab"
+    ]
+  },
   "mitad_a": [
     "CV2-D-V-FAMILIAR-004",
     "CV2-D-V-ORGANISMO_PREVISIONAL-006",
@@ -102,8 +129,8 @@
   ],
   "filas": [
     {
-      "eleccion": "FA ≤ 5% · 2B v1",
-      "config": "2B v1 · alerta ≥ 0.00 · k=2",
+      "eleccion": "FA ≤ 5% · 2B v1 (M1)",
+      "config": "2B v1 (M1) · alerta ≥ 0.00 · k=2",
       "seleccion": {
         "tp": 18,
         "nv": 52,
@@ -126,8 +153,8 @@
       }
     },
     {
-      "eleccion": "FA ≤ 5% · 2B v2",
-      "config": "2B v2 · alerta ≥ 0.90 · k=2",
+      "eleccion": "FA ≤ 5% · 2B v2 (M1)",
+      "config": "2B v2 (M1) · alerta ≥ 0.90 · k=2",
       "seleccion": {
         "tp": 1,
         "nv": 52,
@@ -151,7 +178,7 @@
     },
     {
       "eleccion": "FA ≤ 5% · **mejor de todo**",
-      "config": "(reglas v2 · alerta ≥ 0.00) Y (2B v1 · riesgo ≥ 0.35) · k=1",
+      "config": "(reglas v2 · alerta ≥ 0.00) Y (2B v1 (M1) · riesgo ≥ 0.35) · k=1",
       "seleccion": {
         "tp": 24,
         "nv": 52,
@@ -174,8 +201,8 @@
       }
     },
     {
-      "eleccion": "FA ≤ 10% · 2B v1",
-      "config": "2B v1 · alerta ≥ 0.00 · k=1",
+      "eleccion": "FA ≤ 10% · 2B v1 (M1)",
+      "config": "2B v1 (M1) · alerta ≥ 0.00 · k=1",
       "seleccion": {
         "tp": 30,
         "nv": 52,
@@ -198,8 +225,8 @@
       }
     },
     {
-      "eleccion": "FA ≤ 10% · 2B v2",
-      "config": "2B v2 · alerta ≥ 0.00 · k=3",
+      "eleccion": "FA ≤ 10% · 2B v2 (M1)",
+      "config": "2B v2 (M1) · alerta ≥ 0.00 · k=3",
       "seleccion": {
         "tp": 20,
         "nv": 52,
@@ -223,7 +250,7 @@
     },
     {
       "eleccion": "FA ≤ 10% · **mejor de todo**",
-      "config": "(2B v1 · riesgo ≥ 0.45) Y (2B v2 · riesgo ≥ 0.25) · k=1",
+      "config": "(2B v1 (M1) · riesgo ≥ 0.45) Y (2B v2 (M1) · riesgo ≥ 0.25) · k=1",
       "seleccion": {
         "tp": 34,
         "nv": 52,
@@ -270,8 +297,8 @@
       }
     },
     {
-      "eleccion": "FA ≤ 20% · 2B v1",
-      "config": "2B v1 · riesgo ≥ 0.40 · k=1",
+      "eleccion": "FA ≤ 20% · 2B v1 (M1)",
+      "config": "2B v1 (M1) · riesgo ≥ 0.40 · k=1",
       "seleccion": {
         "tp": 39,
         "nv": 52,
@@ -294,8 +321,8 @@
       }
     },
     {
-      "eleccion": "FA ≤ 20% · 2B v2",
-      "config": "2B v2 · alerta ≥ 0.80 · k=1",
+      "eleccion": "FA ≤ 20% · 2B v2 (M1)",
+      "config": "2B v2 (M1) · alerta ≥ 0.80 · k=1",
       "seleccion": {
         "tp": 35,
         "nv": 52,
@@ -319,7 +346,7 @@
     },
     {
       "eleccion": "FA ≤ 20% · **mejor de todo**",
-      "config": "2B v1 · riesgo ≥ 0.40 · k=1",
+      "config": "2B v1 (M1) · riesgo ≥ 0.40 · k=1",
       "seleccion": {
         "tp": 39,
         "nv": 52,

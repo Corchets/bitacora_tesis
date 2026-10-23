@@ -53,8 +53,14 @@ CORRIDAS = [
 PROMPT = {"tarea": "v1", "v2": "v2"}
 
 
+def maquina(manifiesto: dict) -> str:
+    """Rótulo corto de la máquina según el manifiesto (no según la etiqueta de la carpeta)."""
+    sistema = manifiesto.get("maquina", {}).get("sistema", "")
+    return "M1" if sistema.startswith("macOS") else sistema.split("-")[0] or "?"
+
+
 def _corridas_de_la_cola() -> list[tuple]:
-    """Corridas posteriores a las listadas (carpetas *-nb32, de la M1 o con etiqueta win-), una por modelo y prompt."""
+    """Corridas posteriores a las listadas (carpetas *-nb32 de cualquier máquina), una por modelo y prompt."""
     vistas = {c[0] for c in CORRIDAS}
     salida = []
     for d in sorted((SLM / "corridas").glob("*-nb32")):
@@ -66,8 +72,7 @@ def _corridas_de_la_cola() -> list[tuple]:
             pares = dict.fromkeys((r["modelo"], r["prompt"]) for r in csv.DictReader(f) if r["detector"] == "slm")
         for modelo, prompt in pares:
             tam = modelo.split(":")[1].split("-")[0].upper()
-            maquina = "Windows" if "_win-" in d.name else "M1"
-            nombre = f"Qwen3.5 {tam} · {maquina} · {PROMPT.get(prompt, prompt)} · {d.name[:10]}" + (f" ({estado})" if estado else "")
+            nombre = f"Qwen3.5 {tam} · {maquina(m)} · {PROMPT.get(prompt, prompt)} · {d.name[:10]}" + (f" ({estado})" if estado else "")
             salida.append((d.name, modelo, nombre, prompt))
     return salida
 

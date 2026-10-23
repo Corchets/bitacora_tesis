@@ -137,8 +137,59 @@ de separar mejor. Lo que distingue una legítima con pedido razonable de una est
 está en la forma del pedido sino en quién llama, quién inició y si el pedido encaja con
 el motivo de la llamada. Falta ver 0.8B y 4B antes de decidir.
 
+### 0.8B, 4B y 9B en Linux, solo los 53 históricos
+
+Corridas de Ignacio Albarracin del 2026-10-22 (commit `4fbe3d1`): Linux Omarchy, 16 hilos,
+30,5 GB, Ollama 0.40.8, `--num-batch 32`, 0 fallos. La etiqueta `win-` de las carpetas es
+errónea; desde el 2026-10-23 `errores.py` y el panel rotulan la máquina leyendo
+`manifiesto["maquina"]["sistema"]`. Corrieron con el código `886cff0`, anterior a corpus_v2:
+**solo cubren los 53**, donde el v2 es optimista porque se escribió mirándolos.
+
+| 53 históricos | v1: estafas · FA | v2: estafas · FA |
+|---|---|---|
+| 0.8B (`qwen3.5:0.8b`, Linux) | 26/29 · 8/24 | 23/29 · 8/24 |
+| 2B (`qwen3.5:2b-q8_0`, M1) | 20/29 · 2/24 | 24/29 · 4/24 |
+| 4B (`qwen3.5:4b`, Linux) | 29/29 · 15/24 | 24/29 · 3/24 |
+| 9B (`qwen3.5:9b-q4_K_M`, Linux) | 29/29 · 17/24 | 28/29 · 8/24 |
+
+- **En el 4B y el 9B el v2 hace lo que se buscaba:** las FA bajan de 15 a 3 y de 17 a 8.
+  El 9B pierde una sola estafa, `TR-12-corta-antes-del-pedido`, que no tiene pedido. El 4B
+  pierde cinco: `LAB-digitos-sin-palabra`, `SC-PREMIO-01-e01`, `SC-SOPORTE-REMOTO-01-e01`,
+  `TR-01-pedido-indirecto-digitos` y `TR-12`, casi todas con pedidos indirectos o
+  partidos.
+- **En el 0.8B el v2 no ayuda:** pierde 4 estafas, gana 1 y las FA quedan igual (8/24).
+- Las FA que siguen con el v2 en el 4B y el 9B son legítimas con vocabulario de banco o de
+  código (`LAB-banco-revisa-app`, `TR-08-frase-cortada-candado`) y un familiar real que pide
+  plata (`TR-11`). En el 9B se suman avisos de organismos y soporte legítimos.
+- **Latencia:** el 9B da p50 0,95 s y p95 2,9 s por línea con el v1. La del 4B (p50 2,5 s,
+  más lenta que el 9B) y la del 0.8B no se pueden comparar, porque corrieron contra otra
+  instancia de Ollama (`--url 127.0.0.1:11435`), quizás en paralelo.
+- Ninguno llega a 95/5, ni siquiera en estos 53.
+
+### Comparación con las corridas de Evaristo (Windows, 2026-10-14)
+
+Evaristo Villalobo corrió el 0.8B, el 2B y el 4B con el v1 sobre los mismos 53, en Windows 11
+con GPU, sin `--num-batch` ni prompt v2. En el 0.8B (`de63045f…`) y el 4B (`d8b0f5e9…`) el digest
+es el mismo que el de Linux. En el 2B (`0689d440…`) es el mismo que en la M1.
+
+| v1, 53 históricos | Windows (Evaristo) | Linux (Ignacio) | M1 | Mismo aviso sí/no | Misma línea |
+|---|---|---|---|---|---|
+| 0.8B | 26/29 · 8/24 | 26/29 · 8/24 | 27/29 · 9/24 (q8_0, otro digest) | 51/53 Win–Linux | 49/53 |
+| 2B | 20/29 · 2/24 y 21/29 · 2/24 (dos corridas) | — | 20/29 · 2/24 | 53/53 Win(1)–M1 | 51/53 |
+| 4B | 29/29 · 15/24 | 29/29 · 15/24 | parcial (42/53) | 53/53 Win–Linux | 45/53 |
+
+- **Las cifras se reproducen entre tres máquinas, tres sistemas y dos versiones de Ollama.**
+  Cambia la línea exacta del aviso en algunos casos, que suele quedar una línea antes o
+  después, y casi nunca el resultado por caso. Con `seed` 42 y temperatura 0, la
+  diferencia entre detectores pesa mucho más que la máquina.
+- Las de Evaristo no tienen v2 ni corpus_v2, así que no agregan información sobre el v2.
+  Sirven como tercera repetición del v1.
+- Latencia con GPU en Windows: 0.8B p50 0,28 s, 2B 0,53 s y 4B 0,90 s por línea. Con CPU y
+  2 hilos (`2026-10-14_191429_cpu-2hilos`): 3,9 s y 8,2 s.
+
 ## 4. Pendiente
 
-La cola del 2026-10-21 sigue con v1 y v2 del 0.8B y del 4B sobre los 150 de desarrollo;
-el 9B queda para la PC con Windows (etiqueta `win-`). Con esas corridas se completa esta
-sección y se vuelve a correr `errores.py`.
+- Ignacio vuelve a correr el 4B y el 9B con `--grupo corpus_v2` (etiqueta
+  `linux-…-cv2-nb32`) y el 0.8B `q8_0` sobre los 150. `combinar.py` ya junta las dos carpetas
+  de cada modelo. Con eso se completa esta sección y se vuelve a correr `errores.py`.
+- El 0.8B y el 4B de la M1 quedaron cancelados. La M1 de 8 GB tarda ~6 s por línea con el 4B.

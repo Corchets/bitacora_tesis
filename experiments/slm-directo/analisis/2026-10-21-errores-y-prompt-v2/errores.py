@@ -40,19 +40,27 @@ CONFIGS = [
 # Corridas nuevas: todas las configs SLM de las carpetas *-nb32 (cola_m1.sh), en orden.
 PROMPT = {"tarea": "v1", "v2": "v2"}
 DELTAS = (0, 1, 2)
+
+
+def maquina(manifiesto: dict) -> str:
+    """Rótulo corto de la máquina según el manifiesto (no según la etiqueta de la carpeta)."""
+    sistema = manifiesto.get("maquina", {}).get("sistema", "")
+    return "M1" if sistema.startswith("macOS") else sistema.split("-")[0] or "?"
+
+
 GRUPOS = [("todos", None), ("53 históricos", lambda g: g != "corpus_v2"), ("corpus_v2", lambda g: g == "corpus_v2")]
 
 
 def nuevas() -> list[tuple[str, str, str]]:
-    salida = []
+    salida, maquinas = [], {}
     for carpeta in sorted(p.name for p in (SLM / "corridas").glob("*-nb32") if (p / "actualizaciones.csv").exists()):
+        maquinas[carpeta] = maquina(json.loads((SLM / "corridas" / carpeta / "manifiesto.json").read_text(encoding="utf-8")))
         with (SLM / "corridas" / carpeta / "actualizaciones.csv").open(encoding="utf-8-sig") as f:
             configs = dict.fromkeys(r["config"] for r in csv.DictReader(f) if r["detector"] == "slm")
         for config in configs:
             _, modelo, prompt, _ = config.split("|")
             tam = modelo.split(":")[1].split("-")[0].upper()
-            maquina = "Windows" if "_win-" in carpeta else "M1"
-            salida.append((carpeta, config, f"{tam} {PROMPT.get(prompt, prompt)} · {maquina} nb32 · {carpeta[:17]}"))
+            salida.append((carpeta, config, f"{tam} {PROMPT.get(prompt, prompt)} · {maquinas[carpeta]} nb32 · {carpeta[:17]}"))
     return salida
 
 

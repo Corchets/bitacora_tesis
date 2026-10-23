@@ -3,14 +3,21 @@
 Prueba, sobre las corridas completas de los 150 de desarrollo:
 - cada detector solo, con condición (`alerta_sugerida` y riesgo ≥ τ, o solo riesgo ≥ τ)
   y persistencia k (líneas seguidas);
-- pares de detectores: Y (los dos disparan en la misma línea) y O (cualquiera).
+- pares de detectores: Y (los dos disparan en la misma línea), O (cualquiera) y
+  «luego» (cascada: avisa cuando los dos ya dispararon alguna vez, en cualquier orden;
+  p. ej. «el 9B avisa y el 2B confirma»).
 
 Para no elegir y medir sobre lo mismo, corpus_v2 se parte en dos mitades fijas (A y B,
 por SHA-256 del case_id, balanceadas por clase). Se elige mirando los 53 históricos + A y
 se informa B. Regla de elección: el mayor recall con falsas alarmas ≤ presupuesto en la
 selección (5, 10 y 20 %), para ver la curva y no solo el punto de la meta.
 
-    python analisis/2026-10-21-pasada-0/combinar.py
+Con `--casos 53` usa solo los 53 históricos, para los detectores que todavía no corrieron
+corpus_v2 (4B y 9B de Linux): se elige con la mitad A de los 53 y se informa la B. Es
+optimista dos veces: el v2 se escribió mirando estos casos y cada mitad tiene ~26.
+
+    python analisis/2026-10-21-pasada-0/combinar.py              # 150
+    python analisis/2026-10-21-pasada-0/combinar.py --casos 53   # solo históricos
 
 > **Estado: propuesta sin discutir.** La meta 95/5, la partición A/B y la regla de elección
 > son propuestas (D08). Todo es desarrollo: no reemplaza el test reservado.
@@ -18,6 +25,7 @@ selección (5, 10 y 20 %), para ver la curva y no solo el punto de la meta.
 
 from __future__ import annotations
 
+import argparse
 import csv
 import hashlib
 import itertools
@@ -39,33 +47,46 @@ def _ultima(patron: str) -> str | None:
     return hay[-1] if hay else None
 
 
-# nombre: (carpeta, config). Los que no estén completos en los 150 se saltean.
+def _ultimas(*patrones: str) -> list[str]:
+    """La última carpeta de cada patrón que exista; se leen juntas (p. ej. los 53 + corpus_v2)."""
+    return [x for x in map(_ultima, patrones) if x]
+
+
+# nombre: (carpetas, config). Los que no estén completos en los casos pedidos se saltean.
+# Las de Linux (Ignacio) llevan la etiqueta win- hasta el 2026-10-22; las nuevas, linux-.
 DETECTORES = {
-    "reglas v1": ("2026-10-21_200147_m1-reglas-150", "reglas"),
-    "reglas v2": ("2026-10-21_201914_m1-reglas-v2-150", "reglas_v2"),
-    "0.8B v1": (_ultima("*_m1-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b-q8_0|tarea|ab"),
-    "0.8B v2": (_ultima("*_m1-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b-q8_0|v2|ab"),
-    "2B v1": (_ultima("*_m1-2b-v1v2-nb32"), "slm|qwen3.5:2b-q8_0|tarea|ab"),
-    "2B v2": (_ultima("*_m1-2b-v1v2-nb32"), "slm|qwen3.5:2b-q8_0|v2|ab"),
-    "4B v1": (_ultima("*_m1-4b-v1v2-nb32"), "slm|qwen3.5:4b-q4_K_M|tarea|ab"),
-    "4B v2": (_ultima("*_m1-4b-v1v2-nb32"), "slm|qwen3.5:4b-q4_K_M|v2|ab"),
+    "reglas v1": (["2026-10-21_200147_m1-reglas-150"], "reglas"),
+    "reglas v2": (["2026-10-21_201914_m1-reglas-v2-150"], "reglas_v2"),
+    "0.8B v1 (M1)": (_ultimas("*_m1-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b-q8_0|tarea|ab"),
+    "0.8B v2 (M1)": (_ultimas("*_m1-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b-q8_0|v2|ab"),
+    "0.8B v1 (Linux)": (_ultimas("*_win-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b|tarea|ab"),
+    "0.8B v2 (Linux)": (_ultimas("*_win-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b|v2|ab"),
+    "0.8B q8 v1 (Linux)": (_ultimas("*_linux-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b-q8_0|tarea|ab"),
+    "0.8B q8 v2 (Linux)": (_ultimas("*_linux-0.8b-v1v2-nb32"), "slm|qwen3.5:0.8b-q8_0|v2|ab"),
+    "2B v1 (M1)": (_ultimas("*_m1-2b-v1v2-nb32"), "slm|qwen3.5:2b-q8_0|tarea|ab"),
+    "2B v2 (M1)": (_ultimas("*_m1-2b-v1v2-nb32"), "slm|qwen3.5:2b-q8_0|v2|ab"),
+    "4B v1 (Linux)": (_ultimas("*_win-4b-v1v2-nb32", "*_linux-4b-v1v2-cv2-nb32"), "slm|qwen3.5:4b|tarea|ab"),
+    "4B v2 (Linux)": (_ultimas("*_win-4b-v1v2-nb32", "*_linux-4b-v1v2-cv2-nb32"), "slm|qwen3.5:4b|v2|ab"),
+    "9B v1 (Linux)": (_ultimas("*_win-9b-v1v2-nb32", "*_linux-9b-v1v2-cv2-nb32"), "slm|qwen3.5:9b-q4_K_M|tarea|ab"),
+    "9B v2 (Linux)": (_ultimas("*_win-9b-v1v2-nb32", "*_linux-9b-v1v2-cv2-nb32"), "slm|qwen3.5:9b-q4_K_M|v2|ab"),
 }
 TAUS = [round(0.05 * i, 2) for i in range(21)]
 KS = (1, 2, 3)
 PRESUPUESTOS = (0.05, 0.10, 0.20)
 
 
-def cargar(carpeta: str, config: str, ids: list[str]) -> dict | None:
+def cargar(carpetas: list[str], config: str, ids: list[str]) -> dict | None:
     """case_id -> lista por línea de (dispara_alerta, riesgo), o None si falta algún caso."""
     por_caso: dict[str, dict[int, tuple[bool, float]]] = {}
-    with (CORRIDAS / carpeta / "actualizaciones.csv").open(encoding="utf-8-sig") as f:
-        for r in csv.DictReader(f):
-            if r["config"] != config:
-                continue
-            valida = r["valida"] == "true"
-            alerta = valida and r["alerta_sugerida"] == "true"
-            riesgo = float(r["riesgo"]) if valida and r["riesgo"] else (1.0 if alerta else 0.0)
-            por_caso.setdefault(r["case_id"], {})[int(r["linea"])] = (alerta, riesgo)
+    for carpeta in carpetas:
+        with (CORRIDAS / carpeta / "actualizaciones.csv").open(encoding="utf-8-sig") as f:
+            for r in csv.DictReader(f):
+                if r["config"] != config:
+                    continue
+                valida = r["valida"] == "true"
+                alerta = valida and r["alerta_sugerida"] == "true"
+                riesgo = float(r["riesgo"]) if valida and r["riesgo"] else (1.0 if alerta else 0.0)
+                por_caso.setdefault(r["case_id"], {})[int(r["linea"])] = (alerta, riesgo)
     salida = {}
     for cid in ids:
         n = len(casos.cargar_texto(cid))
@@ -136,22 +157,44 @@ def elegir(candidatos: list[dict], presupuesto: float) -> dict | None:
     return max(ok, key=lambda x: (x["sel"]["rec"], -x["sel"]["fa"], -x["piezas"])) if ok else None
 
 
-def main() -> int:
+def _acumulada(xs: list[bool]) -> list[bool]:
+    return list(itertools.accumulate(xs, lambda p, q: p or q))
+
+
+# operador: (función sobre las dos señales de un caso, persistencias que se prueban)
+OPERADORES = {
+    "Y": (lambda s1, s2: [p and q for p, q in zip(s1, s2)], (1, 2)),
+    "O": (lambda s1, s2: [p or q for p, q in zip(s1, s2)], (1, 2)),
+    "luego": (lambda s1, s2: [p and q for p, q in zip(_acumulada(s1), _acumulada(s2))], (1,)),
+}
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--casos", choices=("150", "53"), default="150")
+    args = ap.parse_args(argv)
     ids = casos.ids_de_casos(particion="desarrollo")
     refs = {c: casos.cargar_referencia(c) for c in ids}
     hist = [c for c in ids if refs[c]["grupo"] != "corpus_v2"]
-    a, b = mitades([c for c in ids if refs[c]["grupo"] == "corpus_v2"], refs)
-    sel = hist + a
+    if args.casos == "53":
+        ids = hist
+        sel, b = mitades(hist, refs)
+        a = sel
+        texto_sel = f"mitad A de los 53 históricos ({len(a)})"
+    else:
+        a, b = mitades([c for c in ids if refs[c]["grupo"] == "corpus_v2"], refs)
+        sel = hist + a
+        texto_sel = f"53 históricos + mitad A de corpus_v2 ({len(a)})"
 
     datos = {}
-    for nombre, (carpeta, config) in DETECTORES.items():
-        d = cargar(carpeta, config, ids) if carpeta else None
+    for nombre, (carpetas, config) in DETECTORES.items():
+        d = cargar(carpetas, config, ids) if carpetas else None
         if d is None:
             print(f"(salteo {nombre}: corrida incompleta o inexistente)")
             continue
         datos[nombre] = d
     print(f"Detectores completos: {', '.join(datos)}")
-    print(f"Selección: 53 históricos + mitad A ({len(a)}); verificación: mitad B ({len(b)}).\n")
+    print(f"Selección: {texto_sel}; verificación: mitad B ({len(b)}).\n")
 
     # Señales por detector y política; se guardan las de la frontera de selección para combinar.
     senales, solos = {}, []
@@ -161,7 +204,7 @@ def main() -> int:
             s = senal(d, pol)
             senales[(nombre, pol)] = s
             for k in KS:
-                solos.append({"desc": f"{nombre} · {pol[0]} ≥ {pol[1]:.2f} · k={k}", "sen": s, "k": k, "piezas": 1,
+                solos.append({"det": nombre, "desc": f"{nombre} · {pol[0]} ≥ {pol[1]:.2f} · k={k}", "sen": s, "k": k, "piezas": 1,
                               "sel": medir(s, k, sel, refs)})
 
     def frontera(xs: list[dict], n: int = 6) -> list:
@@ -176,15 +219,15 @@ def main() -> int:
     por_detector = {}
     for x in solos:
         if x["k"] == 1:
-            por_detector.setdefault(x["desc"].split(" · ")[0], []).append(x)
+            por_detector.setdefault(x["det"], []).append(x)
     base = {n: frontera(xs) for n, xs in por_detector.items()}
 
     combos = []
     for (n1, xs1), (n2, xs2) in itertools.combinations(base.items(), 2):
         for x1, x2 in itertools.product(xs1, xs2):
-            for op, f in (("Y", lambda p, q: p and q), ("O", lambda p, q: p or q)):
-                s = {c: [f(p, q) for p, q in zip(x1["sen"][c], x2["sen"][c])] for c in ids}
-                for k in (1, 2):
+            for op, (f, ks) in OPERADORES.items():
+                s = {c: f(x1["sen"][c], x2["sen"][c]) for c in ids}
+                for k in ks:
                     d1, d2 = x1["desc"].rsplit(" · k=", 1)[0], x2["desc"].rsplit(" · k=", 1)[0]
                     combos.append({"desc": f"({d1}) {op} ({d2}) · k={k}", "sen": s, "k": k, "piezas": 2,
                                    "sel": medir(s, k, sel, refs)})
@@ -192,7 +235,7 @@ def main() -> int:
     filas = []
     for pres in PRESUPUESTOS:
         for nombre in datos:
-            mios = [x for x in solos if x["desc"].startswith(nombre + " ·")]
+            mios = [x for x in solos if x["det"] == nombre]
             filas.append((f"FA ≤ {pres:.0%} · {nombre}", elegir(mios, pres)))
         filas.append((f"FA ≤ {pres:.0%} · **mejor de todo**", elegir(solos + combos, pres)))
     filas = [(t, x) for t, x in filas if x and x["sel"]["tp"]]
@@ -209,7 +252,9 @@ def main() -> int:
         salida.append({"eleccion": titulo, "config": x["desc"], "seleccion": s, "mitad_b": v})
     alcanza = [x for x in combos + solos if x["sel"]["fa"] <= 0.05 and x["sel"]["rec"] >= 0.95]
     print(f"\nConfiguraciones con ≥ 95 % y ≤ 5 % en la selección: {len(alcanza)} de {len(solos) + len(combos)}.")
-    (AQUI / "combinar.json").write_text(json.dumps({"mitad_a": a, "mitad_b": b, "filas": salida},
+    nombre_json = "combinar.json" if args.casos == "150" else "combinar-53.json"
+    (AQUI / nombre_json).write_text(json.dumps({"casos": args.casos, "detectores": {n: DETECTORES[n] for n in datos},
+                                                "mitad_a": a, "mitad_b": b, "filas": salida},
                                                    ensure_ascii=False, indent=2), encoding="utf-8")
     return 0
 
