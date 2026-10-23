@@ -14,6 +14,7 @@ import correr
 import resumen
 
 
+@unittest.skipIf(casos.SIN_RESERVA.exists(), "copia pública: la reserva no está en el repositorio")
 class TestInventarioV2(unittest.TestCase):
     def test_balance_reserva_y_cobertura_de_las_cuotas_acordadas(self):
         refs = [casos.cargar_referencia(c) for c in casos.ids_de_casos()]
@@ -48,8 +49,10 @@ class TestReserva(unittest.TestCase):
         self.catalogo = self.raiz / "catalogo.csv"
         self.catalogo.write_text("scenario_id,estado\nS-D,borrador\nS-T,borrador\n", encoding="utf-8")
         self.manifiesto = self.raiz / "manifiesto.json"
+        self.sin_reserva = self.raiz / "RESERVA-FUERA-DEL-REPO.md"
         for nombre, valor in (("DIR_TEXTO", self.texto), ("DIR_REFERENCIA", self.referencia),
-                              ("CATALOGO", self.catalogo), ("MANIFIESTO", self.manifiesto)):
+                              ("CATALOGO", self.catalogo), ("MANIFIESTO", self.manifiesto),
+                              ("SIN_RESERVA", self.sin_reserva)):
             parche = patch.object(casos, nombre, valor)
             parche.start()
             self.addCleanup(parche.stop)
@@ -99,6 +102,27 @@ class TestReserva(unittest.TestCase):
         (self.texto / "T.txt").unlink()
         (self.referencia / "T.json").unlink()
         self.assertTrue(any("T: no coincide" in e for e in casos.validar_todos()))
+
+    def test_copia_publica_sin_reserva(self):
+        self.catalogo.write_text("scenario_id,estado\nS-D,borrador\nSC-CV2-T-1,borrador\n", encoding="utf-8")
+        self.escribir("T", "test_reservado", "SC-CV2-T-1")
+        self.assertEqual(casos.main(["--congelar"]), 0)
+        # Sin la marca, que falte la reserva es una baja.
+        (self.texto / "T.txt").unlink()
+        (self.referencia / "T.json").unlink()
+        self.assertTrue(any("T: no coincide" in e for e in casos.validar_todos()))
+        # Con la marca y el catálogo sin sus filas, valida lo que queda.
+        self.sin_reserva.write_text("La reserva quedó fuera.\n", encoding="utf-8")
+        self.assertTrue(any("semillas de la reserva" in e for e in casos.validar_todos()))
+        self.catalogo.write_bytes(casos.catalogo_sin_reserva(self.catalogo.read_bytes()))
+        self.assertEqual(casos.validar_todos(), [])
+        # Un caso de desarrollo modificado se sigue detectando.
+        (self.texto / "D.txt").write_text("A: ¿Venís?\nB: Sí.\n", encoding="utf-8")
+        self.assertTrue(any("D: no coincide" in e for e in casos.validar_todos()))
+        # Con la marca, un caso reservado presente es un error.
+        self.escribir("D", "desarrollo", "S-D")
+        self.escribir("T", "test_reservado", "SC-CV2-T-1")
+        self.assertTrue(any("no debe contener casos reservados" in e for e in casos.validar_todos()))
 
     def test_reserva_existente_no_se_sobrescribe(self):
         self.assertEqual(casos.main(["--congelar"]), 0)

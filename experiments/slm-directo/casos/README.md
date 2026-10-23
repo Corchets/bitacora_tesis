@@ -139,3 +139,21 @@ sustituye la revisión humana.
 partición. `--particion test_reservado` es una selección explícita para la evaluación
 final una vez acordado D08, no un recurso para afinar. El panel excluye de sus datos
 los textos y las referencias reservadas.
+
+## Copia pública (`laboratorio-main`)
+
+El repositorio es público. `laboratorio-main` lleva los 150 de desarrollo, pero no los 200
+reservados (`CV2-T-*`) ni sus filas del catálogo (`*-CV2-T-*`), que resumen cada escenario.
+Ahí existe `RESERVA-FUERA-DEL-REPO.md`, y con esa marca `casos.py`:
+
+- falla si encuentra un caso reservado o una semilla reservada en el catálogo;
+- verifica las huellas de desarrollo y `catalogo_desarrollo_sha256` (el catálogo sin la
+  reserva), en lugar de las de la reserva completa.
+
+Sin la marca, que falte la reserva es un error. Las huellas SHA-256 de los 200 siguen en el
+manifiesto: sirven para probar después que la reserva no cambió.
+
+La reserva completa vive en `laboratorio-luciano`, que no se sube, y se comparte en privado
+(bundle). **No mergear `laboratorio-luciano` en `laboratorio-main`**: traería la reserva en la
+historia. Para integrar se arma un único commit con `git merge --squash`, se sacan los
+`CV2-T-*`, se filtra el catálogo con `casos.catalogo_sin_reserva` y se agrega la marca.

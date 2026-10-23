@@ -25,6 +25,9 @@ DIR_TEXTO = RAIZ / "casos" / "texto"
 DIR_REFERENCIA = RAIZ / "casos" / "referencia"
 CATALOGO = RAIZ.parents[1] / "docs" / "corpus" / "CATALOGO-ESCENARIOS.csv"
 MANIFIESTO = RAIZ / "casos" / "MANIFIESTO-CORPUS-V2.json"
+# Solo existe en la copia pública (laboratorio-main): la reserva y sus filas del catálogo
+# quedaron fuera del repositorio a propósito. Ver casos/README.md.
+SIN_RESERVA = RAIZ / "casos" / "RESERVA-FUERA-DEL-REPO.md"
 
 LEGITIMAS = {"legitima", "legitima_dificil"}
 CLASES = {"vishing"} | LEGITIMAS
@@ -242,6 +245,12 @@ def huellas_de_casos() -> dict:
     }
 
 
+def catalogo_sin_reserva(crudo: bytes) -> bytes:
+    """El catálogo sin las semillas de la reserva (`*-CV2-T-*`), como queda en la copia pública."""
+    lineas = crudo.splitlines(keepends=True)
+    return b"".join(lineas[:1] + [x for x in lineas[1:] if b"-CV2-T-" not in x.split(b",", 1)[0]])
+
+
 def validar_manifiesto() -> list[str]:
     if not MANIFIESTO.exists():
         return []
@@ -254,15 +263,27 @@ def validar_manifiesto() -> list[str]:
     if not isinstance(esperados, dict) or not isinstance(catalogo, str):
         return ["Manifiesto de reserva inválido: casos debe ser un objeto y catalogo_sha256 texto"]
     actuales = huellas_de_casos()
+    crudo = CATALOGO.read_bytes()
+    if SIN_RESERVA.exists():
+        if catalogo_sin_reserva(crudo) != crudo:
+            return ["El catálogo de la copia pública no debe contener semillas de la reserva (*-CV2-T-*)"]
+        esperados = {c: h for c, h in esperados.items() if h.get("particion") != "test_reservado"}
+        catalogo, crudo = manifiesto.get("catalogo_desarrollo_sha256"), catalogo_sin_reserva(crudo)
     errores = [f"{c}: no coincide con la reserva SHA-256 (alta, baja o modificación; revisar D08)"
                for c in sorted(esperados.keys() | actuales.keys()) if esperados.get(c) != actuales.get(c)]
-    if catalogo != hashlib.sha256(CATALOGO.read_bytes()).hexdigest():
+    if catalogo != hashlib.sha256(crudo).hexdigest():
         errores.append("El catálogo cambió respecto de la reserva SHA-256; revisar D08")
     return errores
 
 
 def validar_todos() -> list[str]:
     ids = ids_de_casos()
+    if SIN_RESERVA.exists():
+        # Copia pública: la reserva no debe estar, ni entera ni en parte.
+        presentes = [c for c in ids if (DIR_REFERENCIA / f"{c}.json").exists()
+                     and cargar_referencia(c).get("particion") == "test_reservado"]
+        if presentes:
+            return [f"{c}: la copia pública no debe contener casos reservados" for c in presentes]
     todos = set(ids)
     semillas = _semillas_del_catalogo()
     errores = []
@@ -312,6 +333,7 @@ def main(argv: list[str]) -> int:
             "estado": "propuesta sin discutir; reserva técnica, no evaluación final aprobada",
             "decisiones_pendientes": ["D07", "D08"],
             "catalogo_sha256": hashlib.sha256(CATALOGO.read_bytes()).hexdigest(),
+            "catalogo_desarrollo_sha256": hashlib.sha256(catalogo_sin_reserva(CATALOGO.read_bytes())).hexdigest(),
             "casos": huellas_de_casos(),
         }
         MANIFIESTO.write_text(json.dumps(manifiesto, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

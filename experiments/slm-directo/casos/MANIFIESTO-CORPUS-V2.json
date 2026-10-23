@@ -6,6 +6,7 @@
     "D08"
   ],
   "catalogo_sha256": "46f74d30ce0ccc2702c0285b6f0b83c5a2ea621f01951016ed91e4903f58ab8d",
+  "catalogo_desarrollo_sha256": "c4439f09cfeb56108ceaa33a135f31afbfeca1e50a3e31f2f51c31165bd75d93",
   "casos": {
     "CV2-D-L-BANCO-001": {
       "particion": "desarrollo",
