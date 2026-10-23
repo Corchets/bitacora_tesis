@@ -153,7 +153,15 @@ Ahí existe `RESERVA-FUERA-DEL-REPO.md`, y con esa marca `casos.py`:
 Sin la marca, que falte la reserva es un error. Las huellas SHA-256 de los 200 siguen en el
 manifiesto: sirven para probar después que la reserva no cambió.
 
-La reserva completa vive en `laboratorio-luciano`, que no se sube, y se comparte en privado
-(bundle). **No mergear `laboratorio-luciano` en `laboratorio-main`**: traería la reserva en la
-historia. Para integrar se arma un único commit con `git merge --squash`, se sacan los
-`CV2-T-*`, se filtra el catálogo con `casos.catalogo_sin_reserva` y se agrega la marca.
+La reserva completa vive en `laboratorio-luciano`. **Esa rama está en GitHub desde el
+2026-10-23**, por decisión de Luciano, así que la reserva es pública. La regla pasa a ser no
+correrla ni mirarla, ni con personas ni con modelos, hasta la evaluación final (sigue
+`--particion test_reservado`, después de acordar D08). Solo vale como test para modelos
+publicados antes del 2026-10-23, que no pudieron entrenarse con ella (Qwen3.5, por ejemplo);
+con uno posterior hay que declarar la posible contaminación
+([R05](../../../docs/gestion/REGISTRO-RIESGOS.md)).
+
+**No mergear `laboratorio-luciano` en `laboratorio-main`**: traería la reserva en la historia
+de la rama de integración, donde se corre sin pensar. Para integrar se arma un único commit con
+`git merge --squash`, se sacan los `CV2-T-*`, se filtra el catálogo con
+`casos.catalogo_sin_reserva` y se agrega la marca.
