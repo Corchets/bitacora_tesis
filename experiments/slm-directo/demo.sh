@@ -3,7 +3,7 @@
 #
 # Uso, desde la raíz del repositorio:
 #   bash experiments/slm-directo/demo.sh                 demo con 8 conversaciones
-#   bash experiments/slm-directo/demo.sh --completo      las 53 conversaciones
+#   bash experiments/slm-directo/demo.sh --completo      los 150 casos de desarrollo
 #   bash experiments/slm-directo/demo.sh --modelo qwen3.5:0.8b
 #   bash experiments/slm-directo/demo.sh --si            no pregunta antes de instalar
 #
@@ -197,7 +197,7 @@ if [ -z "$BASE" ]; then
 fi
 ETIQUETA="demo-${MODELO//[:\/]/-}"
 if [ "$COMPLETO" = 1 ]; then
-  echo "Corre las 53 conversaciones: puede tardar bastante según tu PC."
+  echo "Corre los 150 casos de desarrollo: puede tardar bastante según tu PC."
   "$PY" correr.py --modelos "$MODELO" --sin-reglas --detalle --etiqueta "$ETIQUETA"
 else
   echo "Corre 8 conversaciones. Vas a ver cada línea y lo que respondió el modelo."

@@ -159,7 +159,7 @@ if (-not $base) {
 }
 $etiqueta = "demo-" + ($Modelo -replace "[:/\\]", "-")
 if ($Completo) {
-  Write-Host "Corre las 53 conversaciones: puede tardar bastante segun tu PC."
+  Write-Host "Corre los 150 casos de desarrollo: puede tardar bastante segun tu PC."
   Ejecutar-Python correr.py --modelos $Modelo --sin-reglas --detalle --etiqueta $etiqueta
 } else {
   Write-Host "Corre 8 conversaciones. Vas a ver cada linea y lo que respondio el modelo."
