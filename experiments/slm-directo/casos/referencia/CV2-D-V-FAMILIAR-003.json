@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-FAMILIAR-003",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-FAMILIAR-003",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 15,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    }
+  ],
+  "que_prueba": "Un supuesto familiar pide completar la seña de un salón para una reunión y propone pagar a un alias personal sin enviar el comprobante previo. Prueba solicitud económica dentro de un plan familiar compartido, sin claves ni códigos.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: el primer pedido indirecto está en línea 15, cuando A ofrece que B cubra el saldo a cambio de enviar el comprobante después. La pregunta de B en línea 16 no es el pedido; línea 17 identifica al destinatario. Sin cumplimiento.",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Un supuesto familiar pide completar la seña de un salón para una reunión y propone pagar a un alias personal sin enviar el comprobante previo. Prueba solicitud económica dentro de un plan familiar compartido, sin claves ni códigos."
+}

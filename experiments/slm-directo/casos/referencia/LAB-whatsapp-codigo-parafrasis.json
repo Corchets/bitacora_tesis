@@ -1,0 +1,19 @@
+{
+  "case_id": "LAB-whatsapp-codigo-parafrasis",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 3,
+  "t_c_linea": 4,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+    {"linea": 4, "evento": "cumplimiento", "etiquetas": []}
+  ],
+  "que_prueba": "Paráfrasis anti-overfit del falso soporte de mensajería: acceso raro y pedido del código de verificación, con cumplimiento.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/vishing/whatsapp-codigo-parafrasis.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: UFECI, nota del 30 de junio de 2025 (misma modalidad que whatsapp-codigo.txt), redacción propia del equipo; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Paráfrasis de LAB-whatsapp-codigo en el laboratorio; par null. Incendio esperado por el laboratorio: REQUEST_AUTH_CODE en t3; goteo en t2, antes del incendio. Coincide con t_r_linea = 3. Cumplimiento en la línea 4: dicta cuatro cifras ficticias (en esta paráfrasis el código tiene cuatro dígitos, no seis). Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

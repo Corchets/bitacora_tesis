@@ -1,0 +1,24 @@
+A: ¿Seguís en el centro o ya saliste para lo de la abuela?
+B: Estoy esperando el colectivo. Se demoró el que pasa por la plaza.
+A: Si querés te busco, pero tengo que pasar por la farmacia antes.
+B: No hace falta, el siguiente viene en diez minutos según la aplicación.
+A: ¿La farmacia era la de la esquina o la que está frente al hospital?
+B: La de la esquina. El remedio quedó encargado a nombre de Tere.
+A: Paso por ahí entonces. ¿Llevo algo para la merienda?
+B: Ella dijo que había hecho budín, pero si comprás leche nos viene bien.
+A: Dale. ¿La querés común o sin lactosa?
+B: Sin lactosa, la azul. Yo llevo yerba y unas naranjas.
+A: Bueno. ¿A qué hora querés que estemos allá?
+B: Antes de las seis, porque después la cuidadora se va y hay que dejarle la cena preparada.
+A: Llego cinco y cuarto, si no se hace mucho la cola.
+B: Si ves que se demora, avisame y caliento yo la comida.
+A: ¿La llave la tiene el vecino o quedó en la maceta?
+B: La tiene el vecino. Ayer la dejé en su buzón y me dijo que la guardaba.
+A: Le escribo cuando esté cerca. ¿Me mandás la dirección de la farmacia?
+B: Es la de siempre, sobre San Martín, a mitad de cuadra.
+A: Sí, ya sé cuál. ¿La abuela está mejor de la tos?
+B: Mejor, pero no quiere quedarse sola después de anoche.
+A: Entonces pasamos todos un rato. Mi nena sale del taller a las cinco.
+B: Que venga también, le va a hacer bien verla.
+A: Listo, llevo leche y paso por vos si todavía no llegó el colectivo.
+B: Te aviso apenas suba. Gracias.

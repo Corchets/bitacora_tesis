@@ -1,0 +1,946 @@
+{
+  "casos": "53",
+  "detectores": {
+    "reglas v1": [
+      [
+        "2026-10-21_200147_m1-reglas-150"
+      ],
+      "reglas"
+    ],
+    "reglas v2": [
+      [
+        "2026-10-21_201914_m1-reglas-v2-150"
+      ],
+      "reglas_v2"
+    ],
+    "0.8B v1 (M1)": [
+      [
+        "2026-10-21_182201_m1-0.8b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:0.8b-q8_0|tarea|ab"
+    ],
+    "0.8B v1 (Linux)": [
+      [
+        "2026-10-22_111736_win-0.8b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:0.8b|tarea|ab"
+    ],
+    "0.8B v2 (Linux)": [
+      [
+        "2026-10-22_111736_win-0.8b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:0.8b|v2|ab"
+    ],
+    "2B v1 (M1)": [
+      [
+        "2026-10-21_201039_m1-2b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:2b-q8_0|tarea|ab"
+    ],
+    "2B v2 (M1)": [
+      [
+        "2026-10-21_201039_m1-2b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:2b-q8_0|v2|ab"
+    ],
+    "4B v1 (Linux)": [
+      [
+        "2026-10-22_103341_win-4b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:4b|tarea|ab"
+    ],
+    "4B v2 (Linux)": [
+      [
+        "2026-10-22_103341_win-4b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:4b|v2|ab"
+    ],
+    "9B v1 (Linux)": [
+      [
+        "2026-10-22_112250_win-9b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:9b-q4_K_M|tarea|ab"
+    ],
+    "9B v2 (Linux)": [
+      [
+        "2026-10-22_112250_win-9b-v1v2-nb32"
+      ],
+      "slm|qwen3.5:9b-q4_K_M|v2|ab"
+    ]
+  },
+  "mitad_a": [
+    "TR-09-victima-se-niega",
+    "TR-01-pedido-indirecto-digitos",
+    "TR-04-pedido-tras-charla-larga",
+    "LAB-familiar-peligro-parafrasis",
+    "TR-07-pedido-partido-en-dos-lineas",
+    "SC-PREMIO-01-e01",
+    "LAB-anses-beneficio",
+    "TR-12-corta-antes-del-pedido",
+    "LAB-acceso-remoto-parafrasis",
+    "LAB-acceso-remoto",
+    "SC-FAMILIAR-DINERO-01-e01",
+    "LAB-pantalla-sin-programa",
+    "LAB-banco-codigo",
+    "SC-CLAVE-CAMBIO-01-e01",
+    "TR-10-ofrecimiento-inducido",
+    "LG-PREMIO-CONSULTA-01-e01",
+    "LAB-mensajeria-no-pases-nada",
+    "LAB-familiar-llama-vos",
+    "LG-SUPPORT-INFO-01-e01",
+    "LAB-portero-codigo-puerta",
+    "LG-FAMILIAR-LLAMADO-01-e01",
+    "LG-WA-CONSULTA-01-e01",
+    "TR-13-turno-medico-pide-dni",
+    "TR-08-frase-cortada-candado",
+    "LAB-arca-canal-oficial",
+    "LAB-banco-revisa-app",
+    "LAB-no-bajes-nada"
+  ],
+  "mitad_b": [
+    "LAB-arca-deuda",
+    "SC-WA-CODE-01-e01",
+    "LAB-arca-deuda-parafrasis",
+    "LAB-banco-codigo-parafrasis",
+    "LAB-digitos-sin-palabra",
+    "SC-ORG-BENEFICIO-01-e01",
+    "LAB-giro-sin-plata",
+    "LAB-familiar-peligro",
+    "LAB-whatsapp-codigo-parafrasis",
+    "LAB-anses-beneficio-parafrasis",
+    "SC-SOPORTE-REMOTO-01-e01",
+    "LAB-whatsapp-codigo",
+    "LAB-banco-numeros-sin-clave",
+    "SC-SOPORTE-CLAVE-01-e01",
+    "TR-11-familiar-real-pide-plata",
+    "TR-05-asado-con-transferencia",
+    "TR-06-banco-alerta-legitima",
+    "LAB-anses-canal-oficial",
+    "LG-ORG-TURNO-01-e01",
+    "LG-SUPPORT-INFO-01-e02",
+    "LAB-banco-gasto-sin-pedido",
+    "TR-02-codigo-del-candado",
+    "LAB-banco-niega-el-codigo",
+    "LAB-banco-app-parafrasis",
+    "LG-BANK-VERIF-01-e01",
+    "TR-03-negacion-y-consejo"
+  ],
+  "filas": [
+    {
+      "eleccion": "FA ≤ 5% · 0.8B v1 (M1)",
+      "config": "0.8B v1 (M1) · alerta ≥ 0.00 · k=3",
+      "seleccion": {
+        "tp": 8,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 8,
+        "nv_p": 14,
+        "rec": 0.5333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 7,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 7,
+        "nv_p": 14,
+        "rec": 0.5,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 0.8B v1 (Linux)",
+      "config": "0.8B v1 (Linux) · alerta ≥ 0.00 · k=3",
+      "seleccion": {
+        "tp": 8,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 8,
+        "nv_p": 14,
+        "rec": 0.5333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 7,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 7,
+        "nv_p": 14,
+        "rec": 0.5,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 0.8B v2 (Linux)",
+      "config": "0.8B v2 (Linux) · alerta ≥ 0.95 · k=3",
+      "seleccion": {
+        "tp": 2,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 2,
+        "nv_p": 14,
+        "rec": 0.13333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 0,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 0,
+        "nv_p": 14,
+        "rec": 0.0,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 2B v1 (M1)",
+      "config": "2B v1 (M1) · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 11,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 11,
+        "nv_p": 14,
+        "rec": 0.7333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 9,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6428571428571429,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 2B v2 (M1)",
+      "config": "2B v2 (M1) · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 8,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 8,
+        "nv_p": 14,
+        "rec": 0.5333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 8,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 8,
+        "nv_p": 14,
+        "rec": 0.5714285714285714,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 4B v1 (Linux)",
+      "config": "4B v1 (Linux) · alerta ≥ 1.00 · k=1",
+      "seleccion": {
+        "tp": 2,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 2,
+        "nv_p": 14,
+        "rec": 0.13333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 0,
+        "nv": 14,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 0,
+        "nv_p": 14,
+        "rec": 0.0,
+        "fa": 0.0
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 4B v2 (Linux)",
+      "config": "4B v2 (Linux) · riesgo ≥ 0.35 · k=2",
+      "seleccion": {
+        "tp": 13,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.8666666666666667,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 11,
+        "nv": 14,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 11,
+        "nv_p": 14,
+        "rec": 0.7857142857142857,
+        "fa": 0.0
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 9B v1 (Linux)",
+      "config": "9B v1 (Linux) · alerta ≥ 0.95 · k=3",
+      "seleccion": {
+        "tp": 13,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.8666666666666667,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · 9B v2 (Linux)",
+      "config": "9B v2 (Linux) · alerta ≥ 0.80 · k=3",
+      "seleccion": {
+        "tp": 14,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 0.9333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 5% · **mejor de todo**",
+      "config": "(2B v2 (M1) · riesgo ≥ 0.15) Y (9B v1 (Linux) · alerta ≥ 0.95) · k=1",
+      "seleccion": {
+        "tp": 15,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 1.0,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 13,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.9285714285714286,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · reglas v1",
+      "config": "reglas v1 · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 2,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 2,
+        "nv_p": 14,
+        "rec": 0.13333333333333333,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 2,
+        "nv": 14,
+        "fp": 5,
+        "nl": 12,
+        "tp_p": 2,
+        "nv_p": 14,
+        "rec": 0.14285714285714285,
+        "fa": 0.4166666666666667
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · reglas v2",
+      "config": "reglas v2 · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 9,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 12,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8571428571428571,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 0.8B v1 (M1)",
+      "config": "0.8B v1 (M1) · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 10,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6666666666666666,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 0.8B v1 (Linux)",
+      "config": "0.8B v1 (Linux) · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 10,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6666666666666666,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 0.8B v2 (Linux)",
+      "config": "0.8B v2 (Linux) · alerta ≥ 0.95 · k=3",
+      "seleccion": {
+        "tp": 2,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 2,
+        "nv_p": 14,
+        "rec": 0.13333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 0,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 0,
+        "nv_p": 14,
+        "rec": 0.0,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 2B v1 (M1)",
+      "config": "2B v1 (M1) · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 11,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 11,
+        "nv_p": 14,
+        "rec": 0.7333333333333333,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 9,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6428571428571429,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 2B v2 (M1)",
+      "config": "2B v2 (M1) · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 12,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 12,
+        "nv": 14,
+        "fp": 3,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8571428571428571,
+        "fa": 0.25
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 4B v1 (Linux)",
+      "config": "4B v1 (Linux) · alerta ≥ 0.90 · k=3",
+      "seleccion": {
+        "tp": 12,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.0
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 4B v2 (Linux)",
+      "config": "4B v2 (Linux) · riesgo ≥ 0.35 · k=2",
+      "seleccion": {
+        "tp": 13,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.8666666666666667,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 11,
+        "nv": 14,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 11,
+        "nv_p": 14,
+        "rec": 0.7857142857142857,
+        "fa": 0.0
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 9B v1 (Linux)",
+      "config": "9B v1 (Linux) · alerta ≥ 0.90 · k=3",
+      "seleccion": {
+        "tp": 14,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 0.9333333333333333,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 12,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8571428571428571,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · 9B v2 (Linux)",
+      "config": "9B v2 (Linux) · riesgo ≥ 0.25 · k=3",
+      "seleccion": {
+        "tp": 15,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 1.0,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 13,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.9285714285714286,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 10% · **mejor de todo**",
+      "config": "(2B v2 (M1) · riesgo ≥ 0.15) Y (9B v1 (Linux) · alerta ≥ 0.95) · k=1",
+      "seleccion": {
+        "tp": 15,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 1.0,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 13,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.9285714285714286,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · reglas v1",
+      "config": "reglas v1 · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 2,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 2,
+        "nv_p": 14,
+        "rec": 0.13333333333333333,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 2,
+        "nv": 14,
+        "fp": 5,
+        "nl": 12,
+        "tp_p": 2,
+        "nv_p": 14,
+        "rec": 0.14285714285714285,
+        "fa": 0.4166666666666667
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · reglas v2",
+      "config": "reglas v2 · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 9,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 12,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8571428571428571,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 0.8B v1 (M1)",
+      "config": "0.8B v1 (M1) · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 10,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6666666666666666,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 0.8B v1 (Linux)",
+      "config": "0.8B v1 (Linux) · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 10,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6666666666666666,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 0.8B v2 (Linux)",
+      "config": "0.8B v2 (Linux) · alerta ≥ 0.00 · k=2",
+      "seleccion": {
+        "tp": 8,
+        "nv": 15,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 8,
+        "nv_p": 14,
+        "rec": 0.5333333333333333,
+        "fa": 0.16666666666666666
+      },
+      "mitad_b": {
+        "tp": 10,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 10,
+        "nv_p": 14,
+        "rec": 0.7142857142857143,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 2B v1 (M1)",
+      "config": "2B v1 (M1) · riesgo ≥ 0.25 · k=2",
+      "seleccion": {
+        "tp": 13,
+        "nv": 15,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.8666666666666667,
+        "fa": 0.16666666666666666
+      },
+      "mitad_b": {
+        "tp": 9,
+        "nv": 14,
+        "fp": 6,
+        "nl": 12,
+        "tp_p": 9,
+        "nv_p": 14,
+        "rec": 0.6428571428571429,
+        "fa": 0.5
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 2B v2 (M1)",
+      "config": "2B v2 (M1) · alerta ≥ 0.00 · k=1",
+      "seleccion": {
+        "tp": 12,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 12,
+        "nv": 14,
+        "fp": 3,
+        "nl": 12,
+        "tp_p": 12,
+        "nv_p": 14,
+        "rec": 0.8571428571428571,
+        "fa": 0.25
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 4B v1 (Linux)",
+      "config": "4B v1 (Linux) · alerta ≥ 0.85 · k=3",
+      "seleccion": {
+        "tp": 13,
+        "nv": 15,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.8666666666666667,
+        "fa": 0.16666666666666666
+      },
+      "mitad_b": {
+        "tp": 13,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.9285714285714286,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 4B v2 (Linux)",
+      "config": "4B v2 (Linux) · riesgo ≥ 0.35 · k=2",
+      "seleccion": {
+        "tp": 13,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.8666666666666667,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 11,
+        "nv": 14,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 11,
+        "nv_p": 14,
+        "rec": 0.7857142857142857,
+        "fa": 0.0
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 9B v1 (Linux)",
+      "config": "9B v1 (Linux) · alerta ≥ 0.85 · k=3",
+      "seleccion": {
+        "tp": 15,
+        "nv": 15,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 1.0,
+        "fa": 0.16666666666666666
+      },
+      "mitad_b": {
+        "tp": 14,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 1.0,
+        "fa": 0.16666666666666666
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · 9B v2 (Linux)",
+      "config": "9B v2 (Linux) · riesgo ≥ 0.25 · k=3",
+      "seleccion": {
+        "tp": 15,
+        "nv": 15,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 1.0,
+        "fa": 0.08333333333333333
+      },
+      "mitad_b": {
+        "tp": 13,
+        "nv": 14,
+        "fp": 1,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.9285714285714286,
+        "fa": 0.08333333333333333
+      }
+    },
+    {
+      "eleccion": "FA ≤ 20% · **mejor de todo**",
+      "config": "(2B v2 (M1) · riesgo ≥ 0.15) Y (9B v1 (Linux) · alerta ≥ 0.95) · k=1",
+      "seleccion": {
+        "tp": 15,
+        "nv": 15,
+        "fp": 0,
+        "nl": 12,
+        "tp_p": 14,
+        "nv_p": 14,
+        "rec": 1.0,
+        "fa": 0.0
+      },
+      "mitad_b": {
+        "tp": 13,
+        "nv": 14,
+        "fp": 2,
+        "nl": 12,
+        "tp_p": 13,
+        "nv_p": 14,
+        "rec": 0.9285714285714286,
+        "fa": 0.16666666666666666
+      }
+    }
+  ]
+}

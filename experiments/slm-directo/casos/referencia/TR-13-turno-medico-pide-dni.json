@@ -1,0 +1,21 @@
+{
+  "case_id": "TR-13-turno-medico-pide-dni",
+  "grupo": "trampa",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 2, "evento": "contexto", "etiquetas": []},
+    {"linea": 5, "evento": "contexto", "etiquetas": ["REQUEST_PERSONAL_DATA"]},
+    {"linea": 6, "evento": "contexto", "etiquetas": []},
+    {"linea": 11, "evento": "mencion", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido legítimo de datos personales (número de documento y fecha de nacimiento) para buscar a la persona en el sistema, dentro de una llamada que la propia persona hace a un centro de salud para pedir un turno; los datos se dicen en voz alta. Prueba que el detector no trate cualquier REQUEST_PERSONAL_DATA como pedido de alto riesgo cuando el contexto lo vuelve razonable.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la descripción del issue #50 (consulta de turno médico con pedido de DNI); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Semilla null: ninguna del catálogo cubre salud. El texto no dice quién inició la llamada; solo se deduce del saludo de la línea 1 (A atiende con el nombre del centro) y del pedido de turno de B. Sin las letras de hablante (--hablantes) es más difícil inferirlo. Es la variante que LG-ORG-TURNO-01-e01 evitó a propósito: queda para D07 si un pedido de documento en una consulta iniciada por la persona se anota solo como contexto, como acá, y qué pasaría con el mismo pedido en una llamada entrante. El documento dictado (12.345.678) es el número de ejemplo secuencial, no un dato real; la fecha de nacimiento se eligió coherente con ese rango. «Decime tu número de documento» comparte la forma de los pedidos de los casos fraudulentos («decime el código»). AUTHORITY_CLAIM en la línea 1 la hace quien atiende, no quien llama (misma duda que en LG-ORG-TURNO-01-e01 y LG-SUPPORT-INFO-01-e01)."
+}

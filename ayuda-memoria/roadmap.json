@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-21",
+  "updatedAt": "2026-10-23",
   "currentLocation": {
-    "summary": "H2 sigue activo. En #50 se ejecutó el ensayo de SLM directo y reglas sobre 53 casos escritos, con corridas en Windows y Apple M1, replay E2E con ASR sobre audio TTS y análisis de caché. El último reporte M1 del 0.8B con num_batch 32 obtuvo p95 de 2.993 s, todavía sobre el gate de 1.5 s; falta la revisión independiente del ensayo y D09 sigue abierta. El kit de #39 está listo, pero grabar depende de la validación del tutor (D06); #33 mantiene abierto el protocolo (D08).",
+    "summary": "H2 sigue activo. En #50 el ensayo de SLM directo pasó a 150 casos de desarrollo (corpus v2) con Qwen3.5 0.8B a 9B y prompts v1 y v2; ninguna configuración llega todavía a la meta propuesta 95/5 y faltan el 4B y el 9B sobre corpus_v2. El test reservado (200 casos) queda fuera del repositorio público. El kit de #39 está listo, pero grabar depende de la validación del tutor (D06); #33 mantiene abierto el protocolo (D08).",
     "activeMilestone": "H2 — Piloto del corpus y primeras pruebas",
     "nextActions": [
       {
@@ -502,11 +502,12 @@
           50,
           51
         ],
-        "exists": "Existe código experimental del detector. Los avances recientes y sus límites están enlazados en el frente de detección.",
-        "missing": "Completar la revisión independiente de #50 y seleccionar candidatos con evidencia en #51.",
+        "exists": "Ensayo SLM directo con Qwen3.5 0.8B, 2B, 4B y 9B y prompts v1 y v2 sobre 150 casos de desarrollo (53 históricos y 97 de corpus_v2), con corridas en Windows, Linux y M1 que se reproducen entre máquinas. Ninguna configuración llega a la meta propuesta 95/5; la combinación de detectores guardados está en la pasada 0.",
+        "missing": "Correr el 4B y el 9B sobre corpus_v2, repetir la pasada 0 con los 150 y completar la revisión independiente de #50. D09 sigue abierta.",
         "artifacts": [
-          "experiments/laboratorio/detector.py",
-          "experiments/slm-directo/README.md"
+          "experiments/slm-directo/README.md",
+          "experiments/slm-directo/analisis/2026-10-21-errores-y-prompt-v2/README.md",
+          "experiments/slm-directo/analisis/2026-10-21-pasada-0/README.md"
         ],
         "decisions": [
           "D09",
@@ -522,11 +523,11 @@
         "issues": [
           50
         ],
-        "exists": "Hay reglas de laboratorio; en el ensayo #50 se comparan por separado.",
-        "missing": "Revisar avisos y errores sobre los mismos casos que el SLM.",
+        "exists": "Reglas v1 y reglas v2 (pedido dirigido) sobre los 150 de desarrollo: las v2 bajan las falsas alarmas de 51/75 a 8/75, pero avisan 32/75 estafas.",
+        "missing": "Usarlas como segunda opinión, no como filtro solo; revisar avisos y errores sobre los mismos casos que el SLM.",
         "artifacts": [
-          "experiments/laboratorio/rules.py",
-          "experiments/slm-directo/README.md"
+          "experiments/slm-directo/reglas_v2.py",
+          "experiments/slm-directo/analisis/2026-10-21-reglas-v2/README.md"
         ],
         "decisions": [
           "D07"
@@ -627,12 +628,13 @@
           55,
           45
         ],
-        "exists": "Hay un par escrito, catálogo, método y manual de anotación. Los avances de preparación están enlazados en el frente de corpus.",
-        "missing": "Validar las condiciones de D06 antes de grabar; revisar el piloto y preparar particiones y test.",
+        "exists": "Corpus v2 escrito: 150 casos de desarrollo (75 estafas y 75 legítimas) en esta rama y 200 reservados para el test final, que no están en el repositorio público (solo sus huellas SHA-256). Auditoría de los 53 históricos. Par escrito, catálogo, método y manual de anotación.",
+        "missing": "Revisión humana de una muestra por dos personas; validar D06 antes de grabar; acordar particiones en D08.",
         "artifacts": [
-          "docs/ingenieria/ARQUITECTURA.md",
-          "docs/corpus/METODO-CREACION-CORPUS.md",
-          "docs/corpus/MANUAL-ANOTACION.md"
+          "experiments/slm-directo/casos/DISENO-CORPUS-V2.md",
+          "experiments/slm-directo/casos/RESERVA-FUERA-DEL-REPO.md",
+          "experiments/slm-directo/casos/AUDITORIA-53-HISTORICOS.md",
+          "docs/corpus/METODO-CREACION-CORPUS.md"
         ],
         "decisions": [
           "D06",
@@ -649,10 +651,11 @@
           33,
           51
         ],
-        "exists": "Hay antecedentes, métricas y propuestas metodológicas. D08 y D09 siguen abiertas.",
-        "missing": "Acordar protocolo, comparar candidatos y congelar la configuración antes del test.",
+        "exists": "Antecedentes, métricas y propuestas metodológicas. Propuestas sin discutir del 2026-10-23: meta 95/5 y gama alta como objetivo (D08/D09). D08 y D09 siguen abiertas.",
+        "missing": "Aprobar la meta con el tutor y decidir si las estafas que cortan antes del pedido cuentan en el denominador; congelar la configuración antes del test.",
         "artifacts": [
-          "docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md",
+          "docs/gestion/MAPA-DECISIONES.md",
+          "experiments/slm-directo/analisis/2026-10-21-pasada-0/README.md",
           "docs/evaluacion/METRICAS.md"
         ],
         "decisions": [

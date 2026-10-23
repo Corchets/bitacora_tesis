@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-ORGANISMO_PREVISIONAL-002",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-ORGANISMO_PREVISIONAL-002",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La conversación arranca con «Hola, llamo porque el depósito de mi papá suele entrar el día 12 y este mes todavía no aparece.» (L1). Contexto: La persona consulta un cambio de fecha de cobro y confirma identidad del titular con nombre y localidad; se aclara que el calendario no se modifica. La dificultad es considerar para qué se confirma la información antes de alertar solo por la presencia de datos personales.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño la persona consulta un cambio de fecha de cobro y confirma identidad del titular con nombre y localidad; se aclara que el calendario no se modifica.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "organismo_previsional",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-ORG-TURNO-01",
+  "situacion": "La persona consulta un cambio de fecha de cobro y confirma identidad del titular con nombre y localidad; se aclara que el calendario no se modifica."
+}

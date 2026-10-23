@@ -1,0 +1,24 @@
+{
+  "case_id": "SC-SOPORTE-CLAVE-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "SC-SOPORTE-CLAVE-01",
+  "par": "LG-SUPPORT-INFO-01-e01",
+  "clase": "vishing",
+  "t_r_linea": 6,
+  "t_c_linea": 11,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 5, "evento": "contexto", "etiquetas": ["TRUST_BUILDING"]},
+    {"linea": 6, "evento": "pedido", "etiquetas": ["REQUEST_SECRET"]},
+    {"linea": 7, "evento": "contexto", "etiquetas": []},
+    {"linea": 8, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION"]},
+    {"linea": 10, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION"]},
+    {"linea": 11, "evento": "cumplimiento", "etiquetas": []},
+    {"linea": 13, "evento": "cumplimiento", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido de usuario y contraseña con pretexto de migración de plataforma y un número de gestión como respaldo. La persona duda citando el aviso de la propia aplicación y cede después de dos redirecciones. Las cinco líneas previas al pedido no contienen ninguna palabra de alto riesgo.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-SOPORTE-CLAVE-01 del catálogo; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "T_C se marca en la línea 11 (usuario) porque el manual incluye «usuario» en REQUEST_SECRET; si el equipo decide que el usuario solo no es una credencial, T_C pasaría a la línea 13 (contraseña). En la línea 4 es la persona quien aporta el fallo de ingreso que el llamante aprovecha en la línea 5; esa línea 4 no es TRUST_BUILDING del llamante (discutir en D07 cómo anotar un respaldo que ofrece la propia víctima). La línea 7 es una duda, no un rechazo."
+}

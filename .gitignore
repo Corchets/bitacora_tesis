@@ -28,6 +28,12 @@ __pycache__/
 models/checkpoints/
 artifacts/
 experiments/laboratorio/modelos/
+experiments/asr-local/modelos/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
 
 # Sistema y editores
 .DS_Store
@@ -49,3 +55,7 @@ ayuda-memoria/dist/
 ayuda-memoria/node_modules/
 ayuda-memoria/.vercel/
 .impeccable/
+
+# Reserva del corpus v2: no se publica (ver experiments/slm-directo/casos/RESERVA-FUERA-DEL-REPO.md)
+experiments/slm-directo/casos/texto/CV2-T-*
+experiments/slm-directo/casos/referencia/CV2-T-*

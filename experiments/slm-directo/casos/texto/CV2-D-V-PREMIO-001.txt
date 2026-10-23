@@ -1,0 +1,21 @@
+A: Hola, decime.
+B: Hola, te llamo de la organización del sorteo de la Expo del Río. ¿Participaste con una compra en los puestos?
+A: Sí, llené un cupón en el stand de plantas.
+B: Saliste seleccionado para una bicicleta urbana, felicitaciones.
+A: ¿En serio? No me acuerdo del sorteo.
+B: Fue durante el cierre del domingo. El premio está reservado a tu nombre.
+A: ¿Y cómo lo retiro?
+B: Primero tenemos que registrar quién lo recibe porque la factura sale nominada.
+A: ¿Qué dato necesitan?
+B: El DNI completo y una foto del frente para cargarlo en el acta.
+A: ¿Por qué necesitan una foto?
+B: Para comprobar que el nombre coincida con la lista de ganadores.
+A: El documento dice 00.000.000, ya cargué la imagen en el formulario.
+B: Perfecto, te quedó el registro terminado.
+A: ¿Puedo acercarme a la Expo?
+B: El predio ya cerró, la entrega se hace desde administración.
+A: ¿Dónde queda?
+B: Estamos en un depósito por la ruta, pero podemos coordinar después.
+A: ¿Y cuándo me entregan la bicicleta?
+B: Te llamamos mañana para acordar el horario.
+A: Está bien, espero la llamada.

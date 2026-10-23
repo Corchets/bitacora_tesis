@@ -1,0 +1,48 @@
+{
+  "case_id": "CV2-D-L-BANCO-010",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-010",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 4,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 20,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 22,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "En L1 aparece «no se si eso se saca acá» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño llamado iniciado por una jubilada ficticia que pregunta por “clave fiscal” en un trámite contable; el banco deriva sin pedir credenciales.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Llamado iniciado por una jubilada ficticia que pregunta por “clave fiscal” en un trámite contable; el banco deriva sin pedir credenciales."
+}

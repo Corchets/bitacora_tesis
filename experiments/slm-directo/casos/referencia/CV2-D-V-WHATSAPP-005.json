@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-WHATSAPP-005",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-WHATSAPP-005",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 14,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    }
+  ],
+  "que_prueba": "Un cambio de canal de avisos deportivos sirve para inducir el código de registro; la presión se apoya en no recibir un cambio de cancha. Prueba un pedido explícito precedido por una explicación plausible y una identidad de colaborador difícil de verificar.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta de T_R en línea 14, pedido ya directo; podría considerarse línea 12, donde se atribuye el aviso al control de altas del grupo. La ubicación depende de cuándo se entiende el contexto como solicitud; revisar D07. Sin cumplimiento. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Un cambio de canal de avisos deportivos sirve para inducir el código de registro; la presión se apoya en no recibir un cambio de cancha. Prueba un pedido explícito precedido por una explicación plausible y una identidad de colaborador difícil de verificar."
+}

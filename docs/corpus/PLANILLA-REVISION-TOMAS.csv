@@ -1,0 +1,2 @@
+toma_id,scenario_id,par_id,clase,hablante_a_id,hablante_b_id,canal_a,canal_b,formato_audio,archivo_audio_relativo,duracion_s,t_r_s,t_c_s,accion_critica,cumplimiento_observado,estado_toma,revisor_id,fecha_revision,esfuerzo_minutos,problemas_observados,notas
+SC-WA-CODE-01-t01,SC-WA-CODE-01,PAR-01,vishing,H01,H02,ch1_izq,ch2_der,wav_16k_stereo_16bit,data/audio/SC-WA-CODE-01-t01.wav,24.50,14.20,18.00,REQUEST_AUTH_CODE,si,aceptada,,2026-10-18,15,ninguno,Toma piloto ficticia de prueba del procedimiento

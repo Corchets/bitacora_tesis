@@ -1,0 +1,22 @@
+{
+  "case_id": "TR-05-asado-con-transferencia",
+  "grupo": "trampa",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": []},
+    {"linea": 5, "evento": "contexto", "etiquetas": []},
+    {"linea": 13, "evento": "contexto", "etiquetas": ["REQUEST_TRANSFER"]},
+    {"linea": 14, "evento": "mencion", "etiquetas": []},
+    {"linea": 17, "evento": "contexto", "etiquetas": []},
+    {"linea": 18, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido de transferencia legítimo y explícito entre amigos («pasámelos por transferencia antes del viernes», «mandame el alias»), con monto, plazo y una transferencia que efectivamente se hace en la línea 18. Comparte con SC-FAMILIAR-DINERO-01 el pedido de dinero y un plazo, pero hay contexto compartido verificable (el asado, la carnicería, los nombres del grupo), nadie se presenta como autoridad y quien cobra hasta recomienda verificar el nombre del destinatario. Prueba que el detector no convierta cualquier REQUEST_TRANSFER seguido de un «te lo mandé» en un fraude con T_R y T_C.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la descripción del caso trampa del issue #50 (pedido de transferencia legítimo entre conocidos); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "La línea 13 se anota como contexto con REQUEST_TRANSFER porque describe lo dicho (manual §5: un pedido de transferencia también aparece en conversaciones legítimas), pero no es evento crítico: t_r_linea y pedido quedan null. La línea 18 sería un cumplimiento si la clase fuera vishing; acá es contexto. «Antes del viernes» es un plazo real del grupo, no URGENCY_PRESSURE. En la línea 14 es quien paga el que pide el alias; el alias nunca se dice en el diálogo. El texto no permite verificar que A sea quien dice ser: la legitimidad se apoya en el contexto compartido; registrar ese límite en D07. Nombres y montos ficticios."
+}

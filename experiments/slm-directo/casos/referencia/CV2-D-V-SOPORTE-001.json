@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-SOPORTE-001",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-SOPORTE-001",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 14,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "Un problema realista de descarga se usa para pedir la contraseña en un panel guiado. El llamante afirma que no la verá, pero no puede identificar un ticket. Prueba una solicitud explícita de credencial permanente dentro de una explicación técnica gradual.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 14, solicitud de ingresar las credenciales. T_C nulo: la persona no introduce la contraseña. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-SOPORTE-CLAVE-01",
+  "situacion": "Un problema realista de descarga se usa para pedir la contraseña en un panel guiado. El llamante afirma que no la verá, pero no puede identificar un ticket. Prueba una solicitud explícita de credencial permanente dentro de una explicación técnica gradual."
+}

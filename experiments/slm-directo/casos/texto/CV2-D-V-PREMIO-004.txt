@@ -1,0 +1,21 @@
+A: Buenas tardes.
+B: Buen día, te contacto por una promoción de Mercado del Parque que se hizo en septiembre.
+A: ¿Cuál promoción?
+B: La de compras con tarjeta; tu ticket quedó seleccionado para un vale de supermercado.
+A: ¿De cuánto es?
+B: Cuarenta mil pesos, para usar en una compra.
+A: ¿Lo puedo retirar en el local?
+B: Sí, pero la caja necesita validar que el beneficio quede asociado al titular de la compra.
+A: Yo pagué con una tarjeta adicional.
+B: Entonces el titular tiene que autorizar el canje desde su banco.
+A: ¿Qué tiene que hacer?
+B: Le mandamos un aviso de operación y tiene que confirmar los datos de la tarjeta para habilitar el cupón.
+A: ¿Los datos completos?
+B: El nombre, la fecha de vencimiento y los tres números de seguridad que están atrás.
+A: Eso es el código de seguridad.
+B: Es la validación del titular, no se almacena.
+A: No voy a pedirle que comparta esos números por una promoción.
+B: Si no se valida hoy, el vale se libera para el siguiente ticket.
+A: Que se libere entonces.
+B: ¿No querés aprovecharlo?
+A: No si implica dar datos de la tarjeta.

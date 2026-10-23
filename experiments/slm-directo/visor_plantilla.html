@@ -1,0 +1,560 @@
+<title>Llamada en curso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: barra de control arriba; transcripción de la llamada a la izquierda y lo que respondió el detector a la derecha; tablas de comparación debajo. */
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --surface-2: #e9edf2;
+  --ink: #16202b;
+  --muted: #586473;
+  --line: #d5dce4;
+  --accent: #2557a7;
+  --accent-soft: #dfe8f7;
+  --aviso: #b8321d;
+  --aviso-soft: #fbe6e1;
+  --alerta: #9a6411;
+  --alerta-soft: #f8edd8;
+  --ok: #2c7349;
+  --ok-soft: #e0f0e6;
+  --ref: #6a4fa3;
+  --font-text: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e141b; --surface: #151d27; --surface-2: #1d2733; --ink: #e5ebf1; --muted: #9aa7b5;
+    --line: #2a3644; --accent: #82aaf0; --accent-soft: #1f3150; --aviso: #f2826b; --aviso-soft: #3d1f1a;
+    --alerta: #e3b35a; --alerta-soft: #3a2e18; --ok: #72c495; --ok-soft: #183526; --ref: #b8a1ea;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e141b; --surface: #151d27; --surface-2: #1d2733; --ink: #e5ebf1; --muted: #9aa7b5;
+  --line: #2a3644; --accent: #82aaf0; --accent-soft: #1f3150; --aviso: #f2826b; --aviso-soft: #3d1f1a;
+  --alerta: #e3b35a; --alerta-soft: #3a2e18; --ok: #72c495; --ok-soft: #183526; --ref: #b8a1ea;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-text); font-size: 15px; line-height: 1.5; margin: 0; }
+.envoltura { max-width: 1240px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 40px; display: grid; gap: 20px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
+h1 { font-size: 1.5rem; }
+h2 { font-size: 1.05rem; }
+h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
+.dato { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.tenue { color: var(--muted); }
+button, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.cabecera { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; justify-content: space-between; }
+.cabecera p { margin: 0; max-width: 70ch; }
+
+.controles { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: end; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.campo { display: grid; gap: 4px; min-width: 0; }
+.campo label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
+select { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; max-width: 100%; }
+.campo-ancho { flex: 1 1 260px; }
+.campo-ancho select { width: 100%; }
+.casilla { display: flex; gap: 8px; align-items: center; padding-block: 7px; }
+.casilla input { accent-color: var(--ref); width: 18px; height: 18px; }
+
+.reproductor { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.boton { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; cursor: pointer; min-height: 38px; }
+.boton:hover { border-color: var(--accent); }
+.boton-principal { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 700; min-width: 9.5em; }
+.posicion { font-family: var(--font-data); font-size: 0.85rem; color: var(--muted); min-width: 9em; }
+
+.escenario { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 860px) { .escenario { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: grid; gap: 12px; min-width: 0; }
+
+.aviso { border-radius: 14px; padding: 14px 16px; background: var(--aviso-soft); border: 1px solid var(--aviso); display: grid; gap: 4px; }
+.aviso strong { color: var(--aviso); font-size: 1.05rem; }
+.aviso .dato { font-size: 0.8rem; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .aviso.nuevo { animation: entra 260ms ease-out; } .linea.nueva { animation: aparece 180ms ease-out; } }
+@keyframes entra { from { transform: translateY(-6px); opacity: 0.4; } to { transform: none; opacity: 1; } }
+@keyframes aparece { from { opacity: 0.3; } to { opacity: 1; } }
+
+.transcripcion { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.linea { display: grid; grid-template-columns: 2.4em 2em minmax(0, 1fr) auto; gap: 8px; align-items: start; padding: 8px 10px; border-radius: 8px; border: 1px solid transparent; }
+.linea.actual { background: var(--accent-soft); border-color: var(--accent); }
+.linea.con-aviso { border-color: var(--aviso); }
+.num { font-family: var(--font-data); font-size: 0.8rem; color: var(--muted); padding-top: 2px; }
+.hablante { font-family: var(--font-data); font-weight: 500; font-size: 0.8rem; text-align: center; border-radius: 6px; padding: 1px 0; background: var(--surface-2); }
+.hablante.b { background: transparent; border: 1px solid var(--line); }
+.texto { overflow-wrap: anywhere; }
+.marcas { display: flex; flex-wrap: wrap; gap: 4px; justify-content: end; }
+.ficha { font-family: var(--font-data); font-size: 0.72rem; border-radius: 999px; padding: 1px 8px; white-space: nowrap; border: 1px solid var(--line); color: var(--muted); }
+.ficha.riesgo-alto { color: var(--aviso); border-color: var(--aviso); }
+.ficha.riesgo-medio { color: var(--alerta); border-color: var(--alerta); }
+.ficha.alerta { background: var(--alerta-soft); color: var(--alerta); border-color: var(--alerta); }
+.ficha.emitido { background: var(--aviso); color: var(--surface); border-color: var(--aviso); font-weight: 500; }
+.ficha.fallo { background: var(--surface-2); color: var(--ink); border-style: dashed; }
+.ficha.ref { color: var(--ref); border-color: var(--ref); border-style: dashed; }
+.pendiente { color: var(--muted); font-style: italic; padding: 8px 10px; border: 1px dashed var(--line); border-radius: 8px; }
+
+.respuesta { display: grid; gap: 10px; }
+.medidor { height: 10px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.medidor span { display: block; height: 100%; background: var(--accent); }
+.medidor.alto span { background: var(--aviso); }
+.medidor.medio span { background: var(--alerta); }
+.par { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 4px 12px; margin: 0; }
+.par dt { color: var(--muted); font-size: 0.85rem; }
+.par dd { margin: 0; overflow-wrap: anywhere; }
+details summary { cursor: pointer; color: var(--accent); }
+pre { font-family: var(--font-data); font-size: 0.78rem; background: var(--surface-2); border-radius: 8px; padding: 10px; overflow-x: auto; white-space: pre-wrap; overflow-wrap: anywhere; margin: 8px 0 0; }
+
+.grafico svg { width: 100%; height: auto; display: block; }
+.grafico .eje { stroke: var(--line); stroke-width: 1; }
+.grafico .rotulo { fill: var(--muted); font-family: var(--font-data); font-size: 9px; }
+.grafico .curva { fill: none; stroke: var(--accent); stroke-width: 2; }
+.grafico .punto { fill: var(--accent); }
+.grafico .punto.alerta { fill: var(--alerta); }
+.grafico .marca-aviso { stroke: var(--aviso); stroke-width: 2; }
+.grafico .marca-ref { stroke: var(--ref); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.grafico .texto-aviso { fill: var(--aviso); font-family: var(--font-data); font-size: 9px; }
+.grafico .texto-ref { fill: var(--ref); font-family: var(--font-data); font-size: 9px; }
+
+.comparacion { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.comparacion button { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; text-align: left; background: transparent; border: 1px solid transparent; border-radius: 8px; padding: 6px 8px; cursor: pointer; }
+.comparacion button:hover { border-color: var(--line); }
+.comparacion button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.comparacion .nombre { font-family: var(--font-data); font-size: 0.78rem; overflow-wrap: anywhere; }
+.resultado { font-family: var(--font-data); font-size: 0.78rem; font-weight: 500; }
+.resultado.bien { color: var(--ok); }
+.resultado.mal { color: var(--aviso); }
+
+.lateral { display: grid; gap: 20px; min-width: 0; }
+.nota { margin: 0; }
+.referencia { border-left: 3px solid var(--ref); padding-left: 12px; display: grid; gap: 6px; }
+.referencia p { margin: 0; }
+
+.tabla { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+td.n { font-family: var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pie { font-size: 0.8rem; color: var(--muted); display: grid; gap: 4px; }
+.pie p { margin: 0; overflow-wrap: anywhere; }
+</style>
+
+<div class="envoltura">
+  <header class="cabecera">
+    <h1>Llamada en curso</h1>
+    <p class="tenue">Ensayo #50: el detector recibe la llamada línea por línea, sin ver lo que viene después. Material de desarrollo con casos escritos; el riesgo no es una probabilidad.</p>
+  </header>
+
+  <section class="controles" aria-label="Elegir qué ver">
+    <div class="campo campo-ancho">
+      <label for="sel-config">Detector</label>
+      <select id="sel-config"></select>
+    </div>
+    <div class="campo campo-ancho">
+      <label for="sel-caso">Conversación</label>
+      <select id="sel-caso"></select>
+    </div>
+    <div class="casilla">
+      <input type="checkbox" id="ver-referencia" checked>
+      <label for="ver-referencia">Mostrar referencia humana</label>
+    </div>
+  </section>
+
+  <section class="controles reproductor" aria-label="Reproducir la llamada">
+    <button class="boton" id="btn-inicio" type="button" title="Volver al comienzo (Inicio)">Desde el comienzo</button>
+    <button class="boton" id="btn-anterior" type="button" title="Línea anterior (flecha izquierda)">◀ Anterior</button>
+    <button class="boton boton-principal" id="btn-reproducir" type="button" title="Reproducir o pausar (espacio)">▶ Reproducir</button>
+    <button class="boton" id="btn-siguiente" type="button" title="Línea siguiente (flecha derecha)">Siguiente ▶</button>
+    <button class="boton" id="btn-final" type="button" title="Ir al final (Fin)">Hasta el final</button>
+    <div class="campo">
+      <label for="sel-velocidad">Velocidad</label>
+      <select id="sel-velocidad">
+        <option value="1800">Lenta</option>
+        <option value="1000" selected>Normal</option>
+        <option value="450">Rápida</option>
+      </select>
+    </div>
+    <span class="posicion" id="posicion" aria-live="polite"></span>
+  </section>
+
+  <div class="escenario">
+    <section class="panel" aria-labelledby="titulo-llamada">
+      <h2 id="titulo-llamada">Lo que se dijo hasta ahora</h2>
+      <div id="aviso" hidden></div>
+      <ol class="transcripcion" id="transcripcion"></ol>
+    </section>
+
+    <div class="lateral">
+      <section class="panel" aria-labelledby="titulo-respuesta">
+        <h2 id="titulo-respuesta">Lo que devolvió el detector</h2>
+        <div class="respuesta" id="respuesta"></div>
+      </section>
+      <section class="panel grafico" aria-labelledby="titulo-grafico">
+        <h3 id="titulo-grafico">Riesgo línea por línea</h3>
+        <div id="grafico"></div>
+      </section>
+      <section class="panel" aria-labelledby="titulo-comparacion">
+        <h3 id="titulo-comparacion">Esta conversación con cada detector</h3>
+        <ul class="comparacion" id="comparacion"></ul>
+      </section>
+      <section class="panel" id="panel-referencia" aria-labelledby="titulo-referencia">
+        <h3 id="titulo-referencia">Referencia humana (el detector no la ve)</h3>
+        <div class="referencia" id="referencia"></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="panel" aria-labelledby="titulo-totales">
+    <h2 id="titulo-totales">Totales por detector</h2>
+    <div class="tabla"><table id="totales"></table></div>
+    <p class="tenue nota">«Antes del pedido» con reglas suele venir de palabras sueltas, no de anticipación. Revisá cada aviso en la conversación antes de sacar conclusiones.</p>
+  </section>
+
+  <footer class="pie" id="pie"></footer>
+</div>
+
+<script type="application/json" id="datos">/*__DATOS__*/null</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("datos").textContent);
+  var $ = function (id) { return document.getElementById(id); };
+  var GRUPOS = { piloto_escrito: "Piloto escrito", trampa: "Trampas", laboratorio: "Laboratorio", corpus_v2: "Corpus v2" };
+  var CLASES = { vishing: "vishing", legitima_dificil: "legítima difícil", legitima: "legítima" };
+  var CATEGORIAS = {
+    antes_del_pedido: ["Avisó antes del pedido", "bien"],
+    en_el_pedido: ["Avisó en el pedido", "bien"],
+    despues_del_pedido: ["Avisó después del pedido", "mal"],
+    en_o_despues_del_cumplimiento: ["Avisó tarde: ya cumplió", "mal"],
+    sin_aviso: ["No avisó", "mal"],
+    aviso_sin_pedido_de_referencia: ["Avisó (sin pedido en la referencia)", "bien"],
+    incompleto: ["Sin evaluar: corrida cortada", ""],
+    sin_respuesta_valida: ["Sin evaluar: todas las respuestas fallaron", ""],
+    falsa_alarma: ["Falsa alarma", "mal"],
+    sin_aviso_correcto: ["No avisó (correcto)", "bien"]
+  };
+
+  function guardado(clave, valor) {
+    try {
+      if (valor === undefined) return localStorage.getItem("visor50:" + clave);
+      localStorage.setItem("visor50:" + clave, valor);
+    } catch (e) { return null; }
+    return null;
+  }
+  function el(etiqueta, clase, texto) {
+    var n = document.createElement(etiqueta);
+    if (clase) n.className = clase;
+    if (texto !== undefined && texto !== null) n.textContent = texto;
+    return n;
+  }
+  function nivel(r) { return r === null ? "" : r >= 0.7 ? "alto" : r >= 0.4 ? "medio" : ""; }
+  function fmtRiesgo(r) { return r === null || r === undefined ? "—" : r.toFixed(2); }
+
+  var estado = { config: null, caso: null, pos: 0, reproduciendo: null, avisoMostrado: false };
+  var ids = Object.keys(D.casos);
+
+  // Selectores
+  D.configs.forEach(function (c) {
+    var o = el("option", null, c.id + (D.corridas.length > 1 ? "  ·  " + c.corrida : ""));
+    o.value = c.id;
+    $("sel-config").appendChild(o);
+  });
+  Object.keys(GRUPOS).forEach(function (g) {
+    var lista = ids.filter(function (id) { return D.casos[id].grupo === g; });
+    if (!lista.length) return;
+    var grupo = el("optgroup");
+    grupo.label = GRUPOS[g];
+    lista.forEach(function (id) {
+      var o = el("option", null, id + "  ·  " + CLASES[D.casos[id].clase]);
+      o.value = id;
+      grupo.appendChild(o);
+    });
+    $("sel-caso").appendChild(grupo);
+  });
+
+  var porDefectoConfig = (D.configs.filter(function (c) { return c.detector === "slm"; })[0] || D.configs[0]).id;
+  var configGuardada = guardado("config");
+  estado.config = D.configs.some(function (c) { return c.id === configGuardada; }) ? configGuardada : porDefectoConfig;
+  var casoGuardado = guardado("caso");
+  estado.caso = D.casos[casoGuardado] ? casoGuardado : (D.casos["SC-WA-CODE-01-e01"] ? "SC-WA-CODE-01-e01" : ids[0]);
+  $("sel-config").value = estado.config;
+  $("sel-caso").value = estado.caso;
+  var refGuardada = guardado("referencia");
+  if (refGuardada !== null) $("ver-referencia").checked = refGuardada === "1";
+
+  function resultado() { return (D.resultados[estado.config] || {})[estado.caso] || null; }
+  function caso() { return D.casos[estado.caso]; }
+  function verRef() { return $("ver-referencia").checked; }
+
+  function pintarTranscripcion() {
+    var c = caso(), r = resultado(), lista = $("transcripcion");
+    lista.textContent = "";
+    for (var i = 0; i < estado.pos; i++) {
+      var n = i + 1, linea = c.lineas[i], resp = r ? r.lineas[i] : null;
+      var li = el("li", "linea" + (n === estado.pos ? " actual nueva" : "") + (r && r.aviso === n ? " con-aviso" : ""));
+      li.appendChild(el("span", "num", "L" + n));
+      li.appendChild(el("span", "hablante" + (linea.h === "B" ? " b" : ""), linea.h));
+      li.appendChild(el("span", "texto", linea.t));
+      var marcas = el("span", "marcas");
+      if (resp) {
+        if (!resp.valida) marcas.appendChild(el("span", "ficha fallo", "fallo"));
+        else {
+          if (resp.riesgo !== null) marcas.appendChild(el("span", "ficha riesgo-" + (nivel(resp.riesgo) || "bajo"), fmtRiesgo(resp.riesgo)));
+          if (r.aviso === n) marcas.appendChild(el("span", "ficha emitido", "AVISO"));
+          else if (resp.alerta) marcas.appendChild(el("span", "ficha alerta", "alerta"));
+        }
+      }
+      if (verRef()) {
+        if (c.t_r === n) marcas.appendChild(el("span", "ficha ref", "T_R pedido"));
+        if (c.t_c === n) marcas.appendChild(el("span", "ficha ref", "T_C cumple"));
+      }
+      li.appendChild(marcas);
+      lista.appendChild(li);
+    }
+    var faltan = c.lineas.length - estado.pos;
+    if (faltan > 0) {
+      lista.appendChild(el("li", "pendiente", estado.pos === 0
+        ? "La llamada todavía no empezó. Tocá Reproducir o Siguiente."
+        : "La llamada sigue… (" + faltan + (faltan === 1 ? " línea más" : " líneas más") + "; el detector todavía no las vio)"));
+    }
+    var actual = lista.querySelector(".actual");
+    if (actual && estado.reproduciendo) actual.scrollIntoView({ block: "nearest" });
+  }
+
+  function pintarAviso() {
+    var r = resultado(), caja = $("aviso");
+    if (!r || r.aviso === null || estado.pos < r.aviso) { caja.hidden = true; estado.avisoMostrado = false; return; }
+    var resp = r.lineas[r.aviso - 1];
+    caja.className = "aviso" + (estado.avisoMostrado ? "" : " nuevo");
+    caja.textContent = "";
+    caja.appendChild(el("strong", null, "Revisá esta llamada"));
+    caja.appendChild(el("span", null, resp.motivo || "El detector sugirió una alerta."));
+    caja.appendChild(el("span", "dato", "Aviso único emitido después de la línea " + r.aviso + ". Las alertas siguientes se registran sin volver a avisar."));
+    caja.hidden = false;
+    estado.avisoMostrado = true;
+  }
+
+  function pintarRespuesta() {
+    var r = resultado(), caja = $("respuesta");
+    caja.textContent = "";
+    if (!r) { caja.appendChild(el("p", "tenue", "Este detector no procesó esta conversación.")); return; }
+    if (estado.pos === 0) { caja.appendChild(el("p", "tenue", "Todavía no hay texto: el detector responde después de cada línea.")); return; }
+    var resp = r.lineas[estado.pos - 1];
+    if (!resp) { caja.appendChild(el("p", "tenue", "El detector no llegó a esta línea: la corrida se cortó antes.")); return; }
+    caja.appendChild(el("p", "dato tenue", "Después de la línea " + estado.pos + (resp.ms !== null ? " · " + Math.round(resp.ms) + " ms" : "")));
+    if (!resp.valida) {
+      caja.appendChild(el("p", null, "Fallo: " + resp.error + ". Se registra como fallo, no como «sin riesgo»."));
+    } else {
+      var dl = el("dl", "par");
+      function fila(t, v) { dl.appendChild(el("dt", null, t)); var dd = el("dd"); if (typeof v === "string") dd.textContent = v; else dd.appendChild(v); dl.appendChild(dd); }
+      if (resp.riesgo !== null) {
+        var cont = el("div");
+        cont.appendChild(el("span", "dato", fmtRiesgo(resp.riesgo)));
+        var med = el("div", "medidor " + nivel(resp.riesgo));
+        var barra = el("span"); barra.style.width = Math.round(resp.riesgo * 100) + "%";
+        med.appendChild(barra); cont.appendChild(med);
+        fila("Riesgo", cont);
+      } else {
+        fila("Riesgo", "Las reglas no dan puntaje: solo buscan palabras.");
+      }
+      fila("Alerta", resp.alerta ? (r.aviso === estado.pos ? "Sí: acá sale el aviso" : r.aviso !== null && r.aviso < estado.pos ? "Sí (el aviso ya había salido)" : "Sí") : "No");
+      if (resp.alerta) {
+        fila("Motivo", resp.motivo || "—");
+        fila("Evidencia", resp.evidencia ? "«" + resp.evidencia + "»" + (resp.textual === false ? "  (no aparece textual en lo dicho)" : "") : "—");
+      }
+      caja.appendChild(dl);
+    }
+    if (resp.crudo) {
+      var det = el("details");
+      det.appendChild(el("summary", null, "Respuesta cruda del modelo"));
+      det.appendChild(el("pre", null, resp.crudo));
+      caja.appendChild(det);
+    }
+  }
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function s(etiqueta, attrs, texto) {
+    var n = document.createElementNS(SVGNS, etiqueta);
+    Object.keys(attrs || {}).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (texto !== undefined) n.textContent = texto;
+    return n;
+  }
+  function pintarGrafico() {
+    var r = resultado(), c = caso(), caja = $("grafico");
+    caja.textContent = "";
+    if (!r) return;
+    if (r.lineas.length && r.lineas.every(function (l) { return !l.valida; })) {
+      caja.appendChild(el("p", "tenue", "Todas las respuestas de este detector fallaron en esta conversación: no hay nada que graficar."));
+      return;
+    }
+    var tienePuntaje = r.lineas.some(function (l) { return l.riesgo !== null; });
+    if (!tienePuntaje) { caja.appendChild(el("p", "tenue", "Este detector no da puntaje. Mirá en la conversación dónde avisó.")); return; }
+    var hasta = Math.min(estado.pos, r.lineas.length);
+    var n = c.lineas.length, W = 340, H = 150, izq = 30, der = 10, arr = 14, abj = 22;
+    var x = function (i) { return n === 1 ? izq : izq + (i - 1) * (W - izq - der) / (n - 1); };
+    var y = function (v) { return arr + (1 - v) * (H - arr - abj); };
+    var svg = s("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Riesgo por línea hasta la línea " + estado.pos });
+    [0, 0.5, 1].forEach(function (v) {
+      svg.appendChild(s("line", { class: "eje", x1: izq, x2: W - der, y1: y(v), y2: y(v) }));
+      svg.appendChild(s("text", { class: "rotulo", x: izq - 6, y: y(v) + 3, "text-anchor": "end" }, v.toFixed(1)));
+    });
+    var paso = n <= 16 ? 1 : Math.ceil(n / 12);
+    for (var i = 1; i <= n; i += paso) svg.appendChild(s("text", { class: "rotulo", x: x(i), y: H - 6, "text-anchor": "middle" }, "L" + i));
+    // El aviso se rotula arriba y la referencia abajo, para que no se pisen si caen en la misma línea.
+    function vertical(linea, clase, rotulo, claseTexto, yTexto) {
+      var cerca = x(linea) > W - 40;
+      svg.appendChild(s("line", { class: clase, x1: x(linea), x2: x(linea), y1: arr - 4, y2: H - abj }));
+      svg.appendChild(s("text", { class: claseTexto, x: x(linea) + (cerca ? -3 : 3), y: yTexto, "text-anchor": cerca ? "end" : "start" }, rotulo));
+    }
+    if (verRef() && c.t_r) vertical(c.t_r, "marca-ref", "T_R", "texto-ref", H - abj - 4);
+    if (verRef() && c.t_c) vertical(c.t_c, "marca-ref", "T_C", "texto-ref", H - abj - 14);
+    if (r.aviso !== null && estado.pos >= r.aviso) vertical(r.aviso, "marca-aviso", "aviso", "texto-aviso", arr - 4);
+    var tramo = [];
+    function cerrar() { if (tramo.length > 1) svg.appendChild(s("polyline", { class: "curva", points: tramo.join(" ") })); tramo = []; }
+    for (var j = 1; j <= hasta; j++) {
+      var l = r.lineas[j - 1];
+      if (!l.valida || l.riesgo === null) { cerrar(); continue; }
+      tramo.push(x(j) + "," + y(l.riesgo));
+    }
+    cerrar();
+    for (var k = 1; k <= hasta; k++) {
+      var p = r.lineas[k - 1];
+      if (p.valida && p.riesgo !== null) svg.appendChild(s("circle", { class: "punto" + (p.alerta ? " alerta" : ""), cx: x(k), cy: y(p.riesgo), r: k === estado.pos ? 4 : 2.6 }));
+    }
+    caja.appendChild(svg);
+  }
+
+  function pintarComparacion() {
+    var lista = $("comparacion");
+    lista.textContent = "";
+    D.configs.forEach(function (cfg) {
+      var r = (D.resultados[cfg.id] || {})[estado.caso];
+      var li = el("li"), b = el("button");
+      b.type = "button";
+      b.setAttribute("aria-pressed", cfg.id === estado.config ? "true" : "false");
+      b.appendChild(el("span", "nombre", cfg.id));
+      if (r) {
+        var cat = CATEGORIAS[r.categoria] || [r.categoria, ""];
+        var fallos = r.lineas.filter(function (l) { return !l.valida; }).length;
+        b.appendChild(el("span", "resultado " + cat[1], cat[0] + (r.aviso ? " · L" + r.aviso : "") + (fallos ? " · " + fallos + " fallos" : "")));
+      } else {
+        b.appendChild(el("span", "resultado", "sin datos"));
+      }
+      b.addEventListener("click", function () { elegirConfig(cfg.id); });
+      li.appendChild(b);
+      lista.appendChild(li);
+    });
+  }
+
+  function pintarReferencia() {
+    var panel = $("panel-referencia"), c = caso(), caja = $("referencia");
+    panel.hidden = !verRef();
+    caja.textContent = "";
+    var dl = el("dl", "par");
+    function fila(t, v) { dl.appendChild(el("dt", null, t)); dl.appendChild(el("dd", null, v)); }
+    fila("Clase", CLASES[c.clase] + " · " + GRUPOS[c.grupo]);
+    fila("Pedido (T_R)", c.t_r ? "línea " + c.t_r + " · " + c.pedido : "no hay");
+    fila("Cumple (T_C)", c.t_c ? "línea " + c.t_c : "no hay");
+    fila("Qué prueba", c.que_prueba);
+    caja.appendChild(dl);
+    if (c.notas) caja.appendChild(el("p", "tenue", c.notas));
+    caja.appendChild(el("p", "dato tenue", c.revision_humana ? "Revisado por el equipo." : "Sin revisión humana todavía."));
+  }
+
+  function pintarTotales() {
+    var t = $("totales");
+    t.textContent = "";
+    var enc = el("tr");
+    ["Detector", "Vishing con aviso", "Antes del pedido", "En el pedido", "Después", "Ya cumplió", "Falsas alarmas", "Fallos", "ms p50", "Sin evaluar"].forEach(function (h) { enc.appendChild(el("th", null, h)); });
+    var thead = el("thead"); thead.appendChild(enc); t.appendChild(thead);
+    var tbody = el("tbody");
+    D.configs.forEach(function (cfg) {
+      var m = D.metricas[cfg.id], tr = el("tr");
+      tr.appendChild(el("td", "dato", cfg.id));
+      [m.vishing_con_aviso + " / " + m.vishing, m.antes_del_pedido, m.en_el_pedido, m.despues_del_pedido, m.en_o_despues_del_cumplimiento,
+        m.falsas_alarmas + " / " + m.legitimas, m.fallos + " / " + m.actualizaciones, m.ms_p50_texto, m.sin_evaluar]
+        .forEach(function (v) { tr.appendChild(el("td", "n", String(v))); });
+      tbody.appendChild(tr);
+    });
+    t.appendChild(tbody);
+  }
+
+  function pintarPie() {
+    var pie = $("pie");
+    pie.textContent = "";
+    D.corridas.forEach(function (c) {
+      var m = c.maquina || {};
+      pie.appendChild(el("p", null, "Corrida " + c.nombre + (c.interrumpida ? " (interrumpida)" : "") + " · " + c.comando));
+      var modelos = Object.keys(c.modelos || {}).map(function (k) {
+        var mem = (c.modelos[k] || {}).memoria;
+        return k + (mem && mem.size_bytes ? " " + Math.round(mem.size_bytes / 1048576) + " MB" : "");
+      });
+      pie.appendChild(el("p", "dato", "commit " + c.commit + " · " + (m.sistema || "") + " · " + (m.nucleos_logicos || "?") + " núcleos · " +
+        (m.ram_total_gb || "?") + " GB RAM" + (c.ollama ? " · Ollama " + c.ollama : "") + (modelos.length ? " · " + modelos.join(", ") : "")));
+    });
+  }
+
+  function pintarPosicion() {
+    var n = caso().lineas.length;
+    $("posicion").textContent = "Línea " + estado.pos + " de " + n;
+    $("btn-anterior").disabled = estado.pos === 0;
+    $("btn-siguiente").disabled = estado.pos === n;
+    $("btn-reproducir").textContent = estado.reproduciendo ? "❚❚ Pausar" : (estado.pos === n ? "▶ Repetir llamada" : "▶ Reproducir");
+  }
+
+  function pintar() {
+    pintarTranscripcion(); pintarAviso(); pintarRespuesta(); pintarGrafico(); pintarComparacion(); pintarReferencia(); pintarPosicion();
+  }
+
+  function irA(pos) {
+    var n = caso().lineas.length;
+    estado.pos = Math.max(0, Math.min(n, pos));
+    pintar();
+  }
+  function pausar() { if (estado.reproduciendo) { clearInterval(estado.reproduciendo); estado.reproduciendo = null; } pintarPosicion(); }
+  function reproducir() {
+    if (estado.reproduciendo) { pausar(); return; }
+    if (estado.pos === caso().lineas.length) { estado.avisoMostrado = false; irA(0); }
+    irA(estado.pos + 1);
+    estado.reproduciendo = setInterval(function () {
+      if (estado.pos >= caso().lineas.length) { pausar(); return; }
+      irA(estado.pos + 1);
+    }, Number($("sel-velocidad").value));
+    pintarPosicion();
+  }
+  function elegirConfig(id) { estado.config = id; $("sel-config").value = id; guardado("config", id); pintar(); }
+
+  // Después de elegir con un desplegable, el foco vuelve a la página para que las flechas muevan la llamada.
+  $("sel-config").addEventListener("change", function (e) { elegirConfig(e.target.value); e.target.blur(); });
+  $("sel-caso").addEventListener("change", function (e) {
+    pausar(); estado.caso = e.target.value; guardado("caso", estado.caso); estado.avisoMostrado = false; irA(caso().lineas.length);
+    e.target.blur();
+  });
+  $("ver-referencia").addEventListener("change", function (e) { guardado("referencia", e.target.checked ? "1" : "0"); pintar(); });
+  $("sel-velocidad").addEventListener("change", function (e) { e.target.blur(); if (estado.reproduciendo) { pausar(); reproducir(); } });
+  $("btn-inicio").addEventListener("click", function () { pausar(); estado.avisoMostrado = false; irA(0); });
+  $("btn-anterior").addEventListener("click", function () { pausar(); irA(estado.pos - 1); });
+  $("btn-siguiente").addEventListener("click", function () { pausar(); irA(estado.pos + 1); });
+  $("btn-final").addEventListener("click", function () { pausar(); irA(caso().lineas.length); });
+  $("btn-reproducir").addEventListener("click", reproducir);
+  document.addEventListener("keydown", function (e) {
+    var t = e.target.tagName;
+    if (t === "SELECT" || t === "INPUT" || t === "TEXTAREA") return;
+    if (e.key === " " && (t === "BUTTON" || t === "SUMMARY" || t === "A")) return;
+    if (e.key === "ArrowRight") { pausar(); irA(estado.pos + 1); e.preventDefault(); }
+    else if (e.key === "ArrowLeft") { pausar(); irA(estado.pos - 1); e.preventDefault(); }
+    else if (e.key === " ") { reproducir(); e.preventDefault(); }
+    else if (e.key === "Home") { pausar(); irA(0); e.preventDefault(); }
+    else if (e.key === "End") { pausar(); irA(caso().lineas.length); e.preventDefault(); }
+  });
+
+  pintarTotales();
+  pintarPie();
+  estado.avisoMostrado = true;
+  irA(caso().lineas.length);
+})();
+</script>

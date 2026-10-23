@@ -1,0 +1,22 @@
+A: Buen día, te contacto del equipo de beneficios de la Expo del Valle. Tu cupón quedó seleccionado.
+B: ¿Para qué premio?
+A: Un equipo de cocina que se sorteó entre las personas que visitaron los stands.
+B: Yo fui el domingo, pero no recuerdo haber dejado datos.
+A: La selección se hace con las entradas escaneadas, por eso figura tu teléfono.
+B: ¿Dónde publicaron el resultado?
+A: La publicación sale cuando se confirma la entrega.
+B: ¿Quién hace la entrega?
+A: La empresa de logística que trabaja con la Expo.
+B: ¿Me pueden llamar ellos?
+A: No, primero cerramos la reserva desde producción.
+B: ¿Tengo que pagar algo?
+A: Todavía no llegamos a esa parte, primero tengo que revisar el formulario de aceptación.
+B: ¿Qué pide el formulario?
+A: No lo tengo abierto en esta línea, estoy esperando que sincronice.
+B: ¿Me mandás un correo con los términos?
+A: La plataforma de correo está con demora, lo más rápido es dejar la reserva ahora.
+B: ¿A qué número puedo llamar a la Expo?
+A: La central está cerrada por montaje.
+B: Entonces lo reviso cuando publiquen la lista.
+A: Puede que el premio ya no esté disponible.
+B: Está bien, espero a tener información pública.

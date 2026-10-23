@@ -1,0 +1,21 @@
+A: buenas tardes
+B: Hola te llamo por la inscripción al taller de huerta de la biblioteca
+A: Ah sí llené el formulario ayer
+B: Estamos armando el grupo pa compartir el material antes del primer encuentro
+A: Ya tienen fecha
+B: El jueves que viene a las seis Seguís pudiendo venir
+A: Sí salvo que cambie el horario del trabajo
+B: Buenísimo Para agregarte el sistema manda un código de invitación a tu WhatsApp
+A: Pensé que me agregaban con un enlace
+B: Es la modalidad nueva así comprobamos que el número está activo
+A: Me llegó algo recién
+B: Leeme los seis dígitos y te incorporo al grupo
+A: El texto dice que no lo comparta con nadie
+B: Es una advertencia general de la aplicación pero yo soy quien gestiona el taller
+A: Cómo se llama la bibliotecaria que lleva la inscripción
+B: No tengo ese dato me encargo solo de los grupos
+A: Cuánto tarda en llegar la invitación
+B: Unos minutos cuando queda validada la cuenta
+A: El código dice 481037
+B: Listo ya quedó registrado el número
+A: Espero que me llegue el grupo

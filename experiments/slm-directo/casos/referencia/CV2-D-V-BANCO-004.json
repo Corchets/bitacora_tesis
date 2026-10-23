@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-BANCO-004",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-004",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 16,
+  "t_c_linea": 21,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    },
+    {
+      "linea": 21,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una devolución que la persona pidió con anterioridad se usa para justificar un código de acceso. La llamada confirma detalles del reclamo y obtiene el código; prueba cuánto pesa el contexto legítimo cuando hay cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-OTP-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 16, solicitud directa de dictar el código. T_C línea 21, lectura explícita de un código inventado para la conversación. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-BANK-OTP-01",
+  "situacion": "Un reintegro solicitado previamente sirve de contexto para pedir el código de acceso recibido por SMS; la persona termina dictándolo."
+}

@@ -1,0 +1,29 @@
+A: ¿Sí?
+B: Ma, soy Tomi. ¿Podés hablar un segundo?
+A: ¿Qué te pasó? Me sale un número que no tengo.
+B: Estoy en la guardia por un golpe con la moto. Uso el teléfono de un chico.
+A: ¿La moto? Si me dijiste que estaba en el taller.
+B: La retiré esta mañana, después te cuento eso.
+A: ¿Estás lastimado?
+B: El brazo, nada más. Estoy esperando que me llamen.
+A: Voy para allá, ¿en qué guardia estás?
+B: Todavía no vengas. Primero tengo que resolver con el otro conductor.
+A: ¿Hicieron la denuncia al seguro?
+B: El tipo no quiere, dice que le pague el faro y el guardabarros.
+A: ¿Hay alguien con vos?
+B: El dueño de este teléfono. Me lo presta un rato nomás.
+A: Llamo a tu papá y vemos qué hacer.
+B: No, está trabajando sin señal. Transferile vos los doscientos diez mil a la cuenta que te paso por mensaje.
+A: Esperá, no voy tan rápido. ¿La cuenta de quién es?
+B: De la hermana del conductor. Él tiene la suya bloqueada.
+A: Me llegó un alias, dice Lidia Almanza. ¿No es el nombre del chico?
+B: Es la hermana, por eso. Si no pagamos ahora, se lleva mi documento.
+A: ¿Por qué tiene él tu documento?
+B: Me lo pidió para el seguro. No discutamos eso ahora, me están por llamar.
+A: Puedo pagar una parte con lo que tengo en esta cuenta.
+B: Necesita el total para dejarme ir. Después arreglamos entre nosotros.
+A: Bueno, estoy abriendo el banco.
+B: Avisame cuando te muestre la confirmación.
+A: Ya transferí los doscientos diez mil al alias que me mandaste.
+B: Bien. Quedate en la línea un poco más.
+A: Ahora sí decime en qué guardia estás, que voy a buscarte.

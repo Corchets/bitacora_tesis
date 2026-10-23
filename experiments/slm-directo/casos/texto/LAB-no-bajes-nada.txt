@@ -1,0 +1,4 @@
+A: me llamaron para que baje un programa y les muestre el celular
+B: no bajes nada
+A: corto y llamo yo al banco por el numero de atras de la tarjeta
+B: bien

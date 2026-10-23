@@ -1,0 +1,18 @@
+{
+  "case_id": "LAB-portero-codigo-puerta",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "mencion", "etiquetas": []},
+    {"linea": 2, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Dice «codigo», pero es el código de la puerta que pasó el portero y nadie lo pide: mencionar un código no es pedirlo.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/dificiles/legitima/portero-codigo-puerta.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025 (redacción propia); consulta 2026-09-24.",
+  "revision_humana": false,
+  "notas": "Hablantes dudosos: la línea 2 se asignó a B (advierte a quien recibió el código que no lo comparta); también puede leerse como continuación de A. Incendio esperado por el laboratorio: ninguno, por ser legítima; el guion existe para mostrar el falso incendio de REQUEST_AUTH_CODE en t1 por la palabra «codigo» (Sonda D del README del laboratorio; resultados-2026-09-24.csv: incendio falso en t1). Coincide con t_r_linea null. El laboratorio no lo sumó a su oracle: lo deja como evidencia para D07 (palabra clave no es pedido). Si un código de puerta cuenta como secreto de alto riesgo queda para D07, como en TR-02-codigo-del-candado. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

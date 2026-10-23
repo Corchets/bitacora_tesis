@@ -1,0 +1,24 @@
+A: Buenas, quería preguntar cómo justifico que Tomás falte el viernes y el lunes.
+B: Hola. ¿Es por una consulta médica o por un viaje?
+A: Vamos a visitar a mi mamá, que vive lejos. Salimos el jueves a la noche.
+B: En ese caso alcanza con una nota firmada por una persona responsable.
+A: ¿La mando por el cuaderno o por correo?
+B: Puede ser por el cuaderno. Si querés dejar constancia antes, mandala al correo de preceptoría.
+A: ¿Pongo los motivos del viaje o solo las fechas?
+B: Con las fechas y tu firma alcanza. No hace falta explicar detalles familiares.
+A: Bien. ¿A quién va dirigida?
+B: A la preceptora de segundo B, que es el curso de Tomás.
+A: ¿Tiene que recuperar una evaluación el viernes?
+B: Sí, tiene una evaluación de ciencias. La docente coordinará la recuperación cuando vuelva.
+A: ¿Le aviso directamente a la docente también?
+B: Podés escribirle por el cuaderno para que prepare otra fecha.
+A: No quiero que pierda el tema. ¿Hay una guía para llevar?
+B: Hay una actividad en el aula virtual, pero se puede entregar la semana siguiente.
+A: ¿Necesita una autorización especial para entrar el martes?
+B: No, vuelve a su horario habitual. Solo presentá la nota.
+A: Perfecto. ¿Me confirmás que figura en el curso correcto?
+B: Sí, Tomás Varela, segundo B.
+A: Es él. Gracias por orientarme.
+B: De nada. Que tengan buen viaje.
+A: Le aviso que lleve el cuaderno así no se atrasa.
+B: Muy bien, hasta luego.

@@ -1,0 +1,24 @@
+{
+  "case_id": "LG-SUPPORT-INFO-01-e02",
+  "grupo": "piloto_escrito",
+  "semilla": "LG-SUPPORT-INFO-01",
+  "par": "SC-SOPORTE-REMOTO-01-e01",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 2, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "mencion", "etiquetas": []},
+    {"linea": 4, "evento": "rechazo", "etiquetas": []},
+    {"linea": 6, "evento": "contexto", "etiquetas": []},
+    {"linea": 8, "evento": "contexto", "etiquetas": []},
+    {"linea": 10, "evento": "contexto", "etiquetas": []},
+    {"linea": 11, "evento": "mencion", "etiquetas": []},
+    {"linea": 12, "evento": "rechazo", "etiquetas": []}
+  ],
+  "que_prueba": "Comparte con su par SC-SOPORTE-REMOTO-01-e01 la aplicación del banco, «compartir la pantalla» y la videollamada, y suma «instalar», la tienda de aplicaciones y el número de la tarjeta; pero quien orienta rechaza la conexión remota que propone la propia persona y la guía para que mire su pantalla y le cuente. Prueba la diferencia entre «contame qué te aparece en la pantalla» y pedir que la comparta.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla LG-SUPPORT-INFO-01 del catálogo (versión comparable al acceso remoto); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Acá A es quien llamó al soporte y quien primero propone una conexión remota (línea 3); en el par, A es quien la pide. Sirve para ver si el detector se apoya en la letra del hablante. La línea 6 pide actualizar la aplicación oficial desde la tienda: el manual no lo cubre de forma explícita; se toma como «abrir una app para mirar algo uno mismo», no como REQUEST_REMOTE_ACCESS ni REQUEST_SECURITY_ACTION (discutir en D07)."
+}

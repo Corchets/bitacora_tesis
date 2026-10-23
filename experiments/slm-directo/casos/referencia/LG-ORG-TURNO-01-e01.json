@@ -1,0 +1,24 @@
+{
+  "case_id": "LG-ORG-TURNO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "LG-ORG-TURNO-01",
+  "par": "SC-ORG-BENEFICIO-01-e01",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "mencion", "etiquetas": []},
+    {"linea": 5, "evento": "mencion", "etiquetas": []},
+    {"linea": 7, "evento": "mencion", "etiquetas": []},
+    {"linea": 10, "evento": "mencion", "etiquetas": []},
+    {"linea": 11, "evento": "rechazo", "etiquetas": []},
+    {"linea": 13, "evento": "mencion", "etiquetas": []}
+  ],
+  "que_prueba": "Mismo beneficio, monto y vocabulario que SC-ORG-BENEFICIO-01-e01 (refuerzo, cuarenta mil pesos, jubilados de la mínima, listado, oficina, domicilio, foto con el documento), en una consulta que inicia la persona. El relato del pedido que recibió una vecina, la mención de la clave para la página oficial y el número de documento que se ofrece y no se acepta, y el aviso final de tenerlo a mano para otra llamada, prueban que el detector no confunda tema con pedido.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla LG-ORG-TURNO-01 del catálogo; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Se evitó que quien atiende pida un número de identificación para consultar el caso, aunque en una consulta iniciada por la persona podría ser razonable. Una variante con ese pedido en llamada entrante sería un negativo más difícil y obligaría a decidir en D07 si cuenta como pedido. AUTHORITY_CLAIM en la línea 1 la hace quien atiende, no quien llama (misma duda que en LG-SUPPORT-INFO-01-e01). La línea 13 anticipa que, si la persona vuelve a llamar, le van a pedir el número de documento: se anota como mención, no como pedido."
+}

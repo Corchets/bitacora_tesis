@@ -1,0 +1,13 @@
+A: ¿Hola?
+B: Buenas tardes, ¿hablo con Raúl Quiroga? Te llamo del área de seguridad del banco por un movimiento en tu cuenta.
+A: Sí, soy yo. ¿Qué movimiento?
+B: Hace veinte minutos se registró un ingreso a tu home banking desde un dispositivo que no tenemos asociado. Te contacto antes de que se haga alguna operación.
+A: Yo no entré desde ningún lado nuevo. ¿Y ahora qué hago?
+B: Hay que hacer el procedimiento de resguardo ahora, mientras seguimos en línea. Si cortamos, el sistema bloquea la cuenta cuarenta y ocho horas y no vas a poder usar la tarjeta.
+A: Pará un poco. ¿No es mejor que llame yo al número que está atrás de la tarjeta?
+B: Podés, pero ahí entrás como un caso nuevo y la demora es de dos o tres días hábiles. En ese tiempo te pueden vaciar la cuenta. No te conviene cortar.
+B: Te acabo de mandar un mensaje de texto con el enlace de seguridad. Abrilo y cambiá la clave ahí; yo te voy guiando.
+A: Sí, me llegó. ¿Lo abro desde el celular?
+B: Sí, desde el celular. Poné tu usuario, la clave que usás ahora y después la nueva, dos veces.
+A: Bueno, a ver... listo, ya puse todo. Me sale que el cambio de clave se realizó con éxito.
+B: Perfecto, Raúl. Ahora no entres al home banking por dos horas ni se lo comentes a nadie, así el caso se cierra sin problemas.

@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-D-L-BANCO-005",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-005",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 10,
+      "evento": "pedido",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "L8 aporta una comprobación acotada («Para encontrar la cuenta, me confirmás los últimos cuatro dígitos, por favor.»). Contexto: Consulta saliente por una transferencia duplicada; se comparan importes y hora sin pedir claves ni códigos. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño consulta saliente por una transferencia duplicada; se comparan importes y hora sin pedir claves ni códigos.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "SC-BANK-OTP-01",
+  "situacion": "Consulta saliente por una transferencia duplicada; se comparan importes y hora sin pedir claves ni códigos."
+}

@@ -1,0 +1,25 @@
+A: hola tengo una ecografía el viernes en la sede norte y se me complicó llegar hasta allá
+B: buen día tenés el turno a nombre de quién
+A: de silvia rueda es a las nueve de la mañana
+B: me confirmás tu fecha de nacimiento para ubicar el estudio
+A: el 22 de julio del 74
+B: gracias veo el turno de abdomen para el viernes 20
+A: hay otra sede más cerca del centro que haga el mismo estudio
+B: sí la sede de la plaza tiene ecografía general pero no tiene cupo hasta la semana siguiente
+A: me podrían pasar para el lunes
+B: hay un espacio el lunes a las ocho y cuarto
+A: mi orden vence este mes sigue siendo válida ese día
+B: la orden dice válida hasta fin de noviembre así que sí
+A: tengo que volver a pedir autorización a la obra social
+B: la autorización ya está asociada al turno si cambiamos la sede vuelve a revisión
+A: puede tardar y quedarme sin fecha
+B: puede demorar un día si preferís mantenemos el viernes y no perdés el espacio
+A: mejor no lo muevo entonces voy a pedirle a mi hermana que me acerque
+B: está bien necesitás que anotemos alguna asistencia para llegar
+A: no es solo el transporte tengo que ir en ayunas
+B: la indicación de preparación está en la orden para ese estudio dice cuatro horas sin comida
+A: ah lo tengo anotado llevo también el informe anterior
+B: sí eso puede servirle al profesional
+A: entonces confirmo viernes nueve en sede norte
+B: queda igual te mandamos el recordatorio el día anterior
+A: muchas gracias ya lo coordiné con mi hermana
