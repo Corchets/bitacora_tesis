@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-SOPORTE-005",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-SOPORTE-005",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 16,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "Un error de exportación deriva de modo indirecto a una ventana de recuperación que solicita la contraseña anterior. Prueba detectar una credencial aun cuando la instrucción se presente como ingreso local y la solicitud se completa tras aclaraciones.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta de T_R en línea 16, donde se especifica que use la contraseña anterior; también podría ubicarse línea 14, al pedir la contraseña anterior en el formulario. D07 debe decidir si es pedido crítico desde la primera indicación. Sin cumplimiento. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-SOPORTE-CLAVE-01",
+  "situacion": "Un error de exportación deriva de modo indirecto a una ventana de recuperación que solicita la contraseña anterior. Prueba detectar una credencial aun cuando la instrucción se presente como ingreso local y la solicitud se completa tras aclaraciones."
+}

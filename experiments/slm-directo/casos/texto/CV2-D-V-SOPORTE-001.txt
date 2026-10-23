@@ -1,0 +1,21 @@
+A: Hola.
+B: Buenas, soy Daniela del servicio de ayuda de Nube Taller. ¿Te puedo hacer unas preguntas sobre el acceso?
+A: Sí, no me deja descargar las facturas.
+B: ¿Te aparece un cartel de sesión vencida o queda cargando?
+A: Queda cargando y después vuelve al inicio.
+B: ¿Probaste entrar desde otro navegador?
+A: Desde el teléfono sí, en la computadora no.
+B: Puede estar guardada una credencial vieja en esa computadora.
+A: La cambié hace unos días porque me lo pidió el sistema.
+B: Eso explica el error. Para comparar el perfil necesito que abras el panel de cuenta.
+A: Ya estoy adentro desde el teléfono.
+B: Buscá soporte avanzado, después diagnóstico de usuario.
+A: Me pide correo y contraseña de nuevo.
+B: Ingresá los datos con los que entrás normalmente, así veo qué perfil carga.
+A: ¿Tengo que decirte la contraseña?
+B: No, escribila ahí. Yo veo solamente si valida o no.
+A: Pero me llamaste vos, no abrí un ticket.
+B: El sistema abre el aviso cuando detecta varios intentos fallidos.
+A: ¿Podés darme el número del ticket?
+B: Ahora no tengo acceso a esa parte, pero si no hacemos el diagnóstico se cierra la sesión de soporte.
+A: No voy a escribir la clave mientras sigo en esta llamada.

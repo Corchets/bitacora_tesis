@@ -1,0 +1,2851 @@
+{
+  "fecha": "2026-10-21",
+  "estado": "propuesta sin discutir; reserva técnica, no evaluación final aprobada",
+  "decisiones_pendientes": [
+    "D07",
+    "D08"
+  ],
+  "catalogo_sha256": "46f74d30ce0ccc2702c0285b6f0b83c5a2ea621f01951016ed91e4903f58ab8d",
+  "catalogo_desarrollo_sha256": "c4439f09cfeb56108ceaa33a135f31afbfeca1e50a3e31f2f51c31165bd75d93",
+  "casos": {
+    "CV2-D-L-BANCO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "10d9a2f2d202aa47412b83c7f8fabf358a8b1965ba2d1c22fa7b2f68976d7b4c",
+      "referencia_sha256": "b58cc11934d5fc06401c5a2f4d74420bb42950660e9048a4bdca847992cc911f"
+    },
+    "CV2-D-L-BANCO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "cbf7f731ce8eadbe32470e7698e5150f8705f3fb79dcc8879673f66e549fd68a",
+      "referencia_sha256": "a61e060b23ee3acfc6fb4c1da42f4a7bb3158a8d605248571eafc7bf0cfba316"
+    },
+    "CV2-D-L-BANCO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "bb34b2861e1e2b5c00904e7974bc77611b7735de921a79462329f399aed72f6f",
+      "referencia_sha256": "eab14cb615bc6e5c4e8c832f05129d86dc328326aae23a70b8ecd88c57946dcf"
+    },
+    "CV2-D-L-BANCO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "b446ab9d0f38d7863d5ef0464a52a8f34b2cf8d4ff94b53240d080593078ffba",
+      "referencia_sha256": "ecd1e50213ac0abe422b1e9cb62e807125d7038904d7f52e72869ab3d736ec03"
+    },
+    "CV2-D-L-BANCO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "d141616f2611e70847b7dd00ae766f6562235a5ddea483be7e4bc20ad70e8d13",
+      "referencia_sha256": "77d5fb14e60c5abdf340f1bbe585a48ff335a02b21007e21fa3722cd0fb648ab"
+    },
+    "CV2-D-L-BANCO-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "d8ef699ad730f8472f5f1fd3cddaadb61ef4d92897392c4a4922a56983f17bab",
+      "referencia_sha256": "37ee5b5f7ab15ff13dcc174b36bbe2876c4544872878c7c6b9916ca6bafd4388"
+    },
+    "CV2-D-L-BANCO-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "4f80a484014b9cc9e27269e77c783e9eef505d4dfdcf3e2184333b57a79cb00d",
+      "referencia_sha256": "846a8015d373304eedb72dd22c690dd3c890251585d982a0e926061bd83ca834"
+    },
+    "CV2-D-L-BANCO-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "508e71b0026f25bd42559d0ab59e476b8ac54aecfb3325a27222721505d78df7",
+      "referencia_sha256": "9230f5c008ed934e02f810db1358c9325438a44c951791309e9d61b1f9dadf54"
+    },
+    "CV2-D-L-BANCO-009": {
+      "particion": "desarrollo",
+      "texto_sha256": "6d31a562291150991d7753fafd62f8329acfcf5cd25f86eeb6a013e61024bf7a",
+      "referencia_sha256": "a676e3224ed4d1f81ac3d6c6a02f7bce8e059e591f8b66b189baa0c76b2e0be2"
+    },
+    "CV2-D-L-BANCO-010": {
+      "particion": "desarrollo",
+      "texto_sha256": "5813083216e0af4500971e7770b680632801f283d3a08db668568613bfed8384",
+      "referencia_sha256": "f90c8658a700920b2131e276d9f084440f005b3461396da2393c34f48ab4d4fa"
+    },
+    "CV2-D-L-DELIVERY-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "ee7932e8924132c176a362941de7fef5a36767660a67746f8f37a372a67c9eb3",
+      "referencia_sha256": "7eceff7c03eca80ece3e7b8965994469f8ace418a261cafc698fa1c872c91f6c"
+    },
+    "CV2-D-L-DELIVERY-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "43df2527ce801baee168427b8fffa843ebdc37eb884ac27d7c7f82f13f14e405",
+      "referencia_sha256": "9d2cf8feabb1c141eac085cbe888e97572777a2b131babd3b1af59701474d083"
+    },
+    "CV2-D-L-DELIVERY-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "b9bb7755bb97f5359c3cb476734e9f1533104cf3f0b66fa9af9b49a47de0905a",
+      "referencia_sha256": "36d4778538389b92b717b71e4d4ed4115a5e143e0d8841167073a53dd020c34e"
+    },
+    "CV2-D-L-DELIVERY-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "5c27934d0e3285cc5919e3ff056763d996e7973e37d08469808a69372e42b132",
+      "referencia_sha256": "8e615a06ba593409f4cf4df54b6c935a7a4ece03d2cc4f8078f17d9b24e677be"
+    },
+    "CV2-D-L-DELIVERY-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "1cfa5c7a51545877fcd0e875f41031561caac0f3ae331df821810f64cf5e2d91",
+      "referencia_sha256": "6e537d296c9eac8c6a2664b4caa1937eef08af56deefe3abd624659192fab744"
+    },
+    "CV2-D-L-ESCUELA-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "243975f0e5bb4b703e2776e2c88745df81f042aedb998fdfefb3654cc78f82cc",
+      "referencia_sha256": "a55af0c222307b708674878dca059d6797937b51eae0e6d54c7f6643a16e72c5"
+    },
+    "CV2-D-L-ESCUELA-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "414451cc7aae4ac665001d82d7d7c2d10fb414a5036e0ac4f3721663c3141f0b",
+      "referencia_sha256": "864b85dc5f406e224adcbe06bcad71462416c84b419374ccb8f57007cee85104"
+    },
+    "CV2-D-L-ESCUELA-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "705f70f45ff82d3acf6147bde189bc26eac6937c30db868992212a9e7dbb0885",
+      "referencia_sha256": "78cc3f190773c32fb4e030d3214e874180fa63be6c559e04e8e8f505e2115e8f"
+    },
+    "CV2-D-L-ESCUELA-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "c204363ba63fa120b827b4c98f6f6bc562819daf40d3bfa3971e6a26c275e37f",
+      "referencia_sha256": "1531f6d5cd000d029dbafa3c9b7955269e46d4867881875d100655f2549918cb"
+    },
+    "CV2-D-L-ESCUELA-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "e134b147d33dc9bf48488f69c5cd9155eb1a3c9d89e979e4d80efd6947cab22c",
+      "referencia_sha256": "fc7bdb85402cca8dfc4c85be572dd774e09081f76023cf811cece5f6f15f90c1"
+    },
+    "CV2-D-L-FAMILIAR-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "50a486aa265a3f255d5cf64958cba36a43047b8df1e18f642058ddc57b96d367",
+      "referencia_sha256": "005de7ad0fa60d9b6fb5db73cee38b5137108563771596f1dafabe23ddb66614"
+    },
+    "CV2-D-L-FAMILIAR-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "41c3bfd2524a7aaa37b0ed804d5c7721b3b9cda51ec338aeb6b229c88719aba0",
+      "referencia_sha256": "2f0a22b95a1d2c862bfb3a696eeffda2bfeeb37c77953e2faa9cf511a8af35ae"
+    },
+    "CV2-D-L-FAMILIAR-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "3325c6aeb68b3df09dcdb6531ae944c4c2aacf0684972c263db57c38478c8867",
+      "referencia_sha256": "33b4801252b7908973e39c843c384f16bbd07f8f2b679f4de8772c6b658f576e"
+    },
+    "CV2-D-L-FAMILIAR-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "3d2271dc73cb4e1f5f6f4d4ecd506c2ce5fbaeb56b57a6561fc3e35391a42c35",
+      "referencia_sha256": "0105373c1965388575bbf9ee5ccae26b075d16298894b00fcb8813cf9ee858a0"
+    },
+    "CV2-D-L-FAMILIAR-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "ec291e098f4c69edc49abd05fd1bb7ea2364f68370a9a351e4b6970b323066f0",
+      "referencia_sha256": "25503d07d3a5aa99258ced16b29664a769e463c7ef6fdc6c1376868bbd97047e"
+    },
+    "CV2-D-L-MEDICO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "62b0315ecaae12308959baf89e6b65d1ddeb8e4af7f29220d82179bff8f5b273",
+      "referencia_sha256": "5adb023050a051347a882e4f343bedffbdb0890ab49aca7333e7ff6615b7cba5"
+    },
+    "CV2-D-L-MEDICO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "d4771b07cd286c02052108047323732031f8b27a39e48cdc6c599dfa2b0f735c",
+      "referencia_sha256": "1479211d933c44759488fa6d67884079d60de82df781c10070c5046f588d0685"
+    },
+    "CV2-D-L-MEDICO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "0617bc3fbedfb999127187ff0ebd88b314ae72951f491a749142eff09555a5a6",
+      "referencia_sha256": "abcd626a1f8fcc151b72f6a99808d40a99504928f4768404627bfbe721c21ece"
+    },
+    "CV2-D-L-MEDICO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "e3fb3d8f5abafa7153d0cae821b0685f14b225dfa3cf89c85a5606a6ee28893e",
+      "referencia_sha256": "4a8e93d91fe34278cc135570faf39d2f07697eaae38cef7a2daa5e0a3f0a4d95"
+    },
+    "CV2-D-L-MEDICO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "83839f23d0a976f33a08b503d0a78a2b89081e8931aaf28b6826a691e78e6417",
+      "referencia_sha256": "33b4bb7963dd212180181aa973c3e236ce01fcc048e6c287a91e9430b7ccfb28"
+    },
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "ba6390bcc9ead422a5b9760693c4a835e445694c78ede434504e02973ffab10b",
+      "referencia_sha256": "6e4f9fba950f590df0fede9b9a0858f7d78724f7ff97dedac4397e40c9cfe64c"
+    },
+    "CV2-D-L-ORGANISMO_PREVISIONAL-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "14f3077fc974c80d89e98e544f1ff49b6facb54e72b077dbb6a653dcb4faef7b",
+      "referencia_sha256": "6c8679706505a1ae0ddb3d8e3cc7ee37821b9aa990677880a549c482ab4a88e8"
+    },
+    "CV2-D-L-ORGANISMO_PREVISIONAL-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "20f242ca8fc7585f1004c5b4ad90c88a9ec3a5b707e2d3d3ab4242f921aa9d48",
+      "referencia_sha256": "7a8e9e9a85f4520b05c8ae6314464300801271e8e227ee72c0460d1b192d5d8c"
+    },
+    "CV2-D-L-PREMIO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "bbcd27e268ae2d67f2ea76fcb4624684d764d8a513a7509cefd8d9171390c874",
+      "referencia_sha256": "131842e9cb691cc8d8f6fa849e8ede67dfb8f493d224994e00cec3da23da2a24"
+    },
+    "CV2-D-L-PREMIO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "25205aaa8ad29b507506e33fafb18980ecaad79f5b64c63f85934cf3d70cbe04",
+      "referencia_sha256": "5a53054c0fbe4e1258b7dc04a11ba2517c5f19a4aa6395faf43c760f9b640443"
+    },
+    "CV2-D-L-PREMIO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "3b2542cdfe10691c7544580252512fc87f416c79f4a0644b198cd58c1efcc620",
+      "referencia_sha256": "ceee9fcbb853fa7d80a1e36241485dbbc7eb3ba4e0df5217749e7c245530e2ab"
+    },
+    "CV2-D-L-SOPORTE-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "e2a262eb132ba4fc25583f1d8bde5b6c47751f012e1673738aa1000d3d028106",
+      "referencia_sha256": "c9e8df5b86dbf144de6678d202db46addbe11c7f0a2c68927070ab5e8c288a14"
+    },
+    "CV2-D-L-SOPORTE-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "71a1cebc18f6401b28c71a78e21b3a662b4a5da5aefa2f104cbf012c6e6fb3bd",
+      "referencia_sha256": "ce8b82279c96ce75a03343e1c0020bf87a6b6de9fe1b324f1b2ee8140fd15b55"
+    },
+    "CV2-D-L-SOPORTE-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "fa5be71994d9dc0f6ff36445fe319c17ae6f2cc31f3f058fc87b109512040323",
+      "referencia_sha256": "ac9cc03d5afd18a929753aad8aa35ed2cc5fbe4a65838b5904fea9856739618a"
+    },
+    "CV2-D-L-SOPORTE-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "72ee0911073e1a32aa89c4577caa6dfc388a0afd27f8c9c90b15d5a7ac59b5c0",
+      "referencia_sha256": "977e6db0b306150832a3cca7f593c4a2f4153eb50a511e7f7fdc81a6c5b81a94"
+    },
+    "CV2-D-L-SOPORTE-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "4b0b4fa268bd5c21d97a4edaea0f79a08195c95c901f86c7a8079e37cd61ce75",
+      "referencia_sha256": "3c61dfad1cfc7674841b88ff903906a2d40480d29e57989bab38c3f419bd19cf"
+    },
+    "CV2-D-L-TRABAJO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "fd87646b62bcc89cadc5afe39d74f0f3eb4afee421ee6cd326beb5c5b87d3311",
+      "referencia_sha256": "5abccf9a03ea1d70a2aed0df514dfe244617451d6cb397a7110fbbf3df056290"
+    },
+    "CV2-D-L-TRABAJO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "4a1926d2015dc537468d3f8a15656864bfd8cf70fb3881264377addbeae44a4a",
+      "referencia_sha256": "a998d347a4d47020e7178cb4e2965d240b0c523e8b208f352701b21a8e7a845c"
+    },
+    "CV2-D-L-TRABAJO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "2075eb3051c3f923d2a2da9798e9c5fe33139de87f4d505cbe7455de7a7e4511",
+      "referencia_sha256": "a041dd59590a7016e1b58386ca1b82d99051666fcff79c8b67f49ec73c74383c"
+    },
+    "CV2-D-L-TRABAJO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "593c4a420c7f3a1fcf2c46e9e48de7a63e4f678d1b22a70eea104f9dedf2db90",
+      "referencia_sha256": "b7a6fe1769c4be991ec62e91c1aba3a22cc14f1f2847fd3b4933cd029e5b3c0a"
+    },
+    "CV2-D-L-TRABAJO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "d0012c9a2da781c596732750a7dc7752cfffef0e52990946eee880825af531cd",
+      "referencia_sha256": "a2048ae59029c4b1036c53befc1430f34ee008d828ab0dd381a9f418b3d2d430"
+    },
+    "CV2-D-L-WHATSAPP-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "74b54e1f77b122109e735565b186ebbabe378d0d3a08011b81c433c2a6891291",
+      "referencia_sha256": "cfb8b9232758974ee0b4d1e04c988430ea8effe68a31df348677ffe8611e1e7c"
+    },
+    "CV2-D-L-WHATSAPP-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "91392fc1478d397f9995d81d293c7761df9565656c60bc00f53ecd8ff653d123",
+      "referencia_sha256": "82ed439349af158a445aee8246601fa78f9a59102ed9af3d80199197315e3ffa"
+    },
+    "CV2-D-L-WHATSAPP-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "2b75f2e0b2f28bc1d459babac962c18c76a813ca887bea3aa3afbfbad9895dc8",
+      "referencia_sha256": "ba4d605d5887fa94ce253fe6942d072015926d8d1a0b4f36445ec996bf22a828"
+    },
+    "CV2-D-L-WHATSAPP-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "011b0a62eeb83f326ea6d0c60f34069775d376dfb05f6988a56c6656bac63982",
+      "referencia_sha256": "d336cb8b0e998b586608284f50c54609d9153755088573bc66309505d3744213"
+    },
+    "CV2-D-L-WHATSAPP-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "137f4127192c21c9e8a7c0c05dc9d1167613a75a618cc5d52c3d3fde34f56d51",
+      "referencia_sha256": "4948611cb3adb54b0792559f95418aab14f16a6b1ab4f10d75587a1ed627813b"
+    },
+    "CV2-D-V-BANCO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "0affbb8ce80874baa7a5d2b24537d33ca3f38a43d4a35c717d1587987a4a937d",
+      "referencia_sha256": "5a4a52d22240341b736277de5ac313945788e07791ea822aa48fedbbc33db64e"
+    },
+    "CV2-D-V-BANCO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "408fa71f0df52a5e67cb1d0c7810778242b8323a1b7107984be36e9ad33882c9",
+      "referencia_sha256": "9ed20a3bdebfef35e13dd7b9604280784d0ab2393bff9c3e7499bad892443ed8"
+    },
+    "CV2-D-V-BANCO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "efc9897cb609ce1e801b5278dfb73601a0f813d0fe3156072c778458716129f3",
+      "referencia_sha256": "9776b7e981911c3cbdfd2e44ebcd8fd4ba43f41d3b83282e453ee7cc76f0842f"
+    },
+    "CV2-D-V-BANCO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "45c6a92386bf8bee15f0cbf31c5e73752c6b7b1b40b39506ff461a99b8a7a13e",
+      "referencia_sha256": "ed9a36b8223de5599392f35df2b3b4acb04d1f3fd5ce1d9ba1181d29c42fe116"
+    },
+    "CV2-D-V-BANCO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "ae1b7410257af5076ce301e12ae435116afaff311cdac3da36dd53263230b49f",
+      "referencia_sha256": "e57526891d66802bfef35c4cf09598398ff1664eee1b9052b93a348e21f9c580"
+    },
+    "CV2-D-V-BANCO-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "18831328dda6ea0cf37557346ca4a6f1ed8d74487903a219c98744ef3ef2c0e2",
+      "referencia_sha256": "f36e4b7240b35a2424bf08fe08c1f87e1dc00e6fdb8d9d2079e9e02b7290f7d8"
+    },
+    "CV2-D-V-BANCO-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "6aa5fdd522005cf06d0439d17ce2eb8c6d02ff5d22c7d4efe2c970665a5a68f7",
+      "referencia_sha256": "f8b1991f2ba11ae63f593c230cbb8d44684547b866ccd81aa3be784e3486cbe0"
+    },
+    "CV2-D-V-BANCO-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "e6c068d275f987b4764bcf79efb0630d6211347d45891b5328ebab94e9bd8dc0",
+      "referencia_sha256": "9d63f1fd1bd86174feac28e9af67a45433932ff1af2de08555d00031ecf73014"
+    },
+    "CV2-D-V-BANCO-009": {
+      "particion": "desarrollo",
+      "texto_sha256": "3a0af933bc2fe01c06938ab4fd86df72897e453d4ada430cf1e8ad4ca6cfc26e",
+      "referencia_sha256": "81b145135794ea67d2fa609096bf1e41e7fc29d0bdd991a91a1e19b0b8b2fc5b"
+    },
+    "CV2-D-V-BANCO-010": {
+      "particion": "desarrollo",
+      "texto_sha256": "5af8b1d901066fbc8e02c918aeb66ee2eb4e3920e2cebf2fa812c42faa57c6d2",
+      "referencia_sha256": "fdec92c889f918f518fd44034b0739c61fd75e4e26aa3cf6d73fe4053594a9b7"
+    },
+    "CV2-D-V-BANCO-011": {
+      "particion": "desarrollo",
+      "texto_sha256": "2e1f43d5829645e59e3faed42c395e5b403452f351ae8f7ebaf47e82c9209c76",
+      "referencia_sha256": "08131639601ef738af8a932496dc4ac30e81f09da4946a7f9db8dfb77a4d5ab7"
+    },
+    "CV2-D-V-BANCO-012": {
+      "particion": "desarrollo",
+      "texto_sha256": "8276300a5773280e3e185b11bd57e22def09d30c93ff39e1ef29276e61fcda34",
+      "referencia_sha256": "2d95314e4b55a0ebba8cd5c4921156caadbe95a72748156bf97fe28652311f46"
+    },
+    "CV2-D-V-FAMILIAR-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "5c8809013a80e6a0f3b00947df794ec63be982f284157fac74dfe1bea8068a97",
+      "referencia_sha256": "b951615108e2ff68cfcfa0fe3d8022291f1535e480579955845decb111849ec2"
+    },
+    "CV2-D-V-FAMILIAR-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "f77138c8fd31590adfe22c908754bf4a4d5df3702a310113d183c6703d839e61",
+      "referencia_sha256": "56390b368eec09eb7f64d11635f181b13b3fc44c0e1ffde0dac66cd6d56547b1"
+    },
+    "CV2-D-V-FAMILIAR-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "b9019aa90aea099a416ad6d8c633a2b81321226e34fa797f0f1015598d675f2b",
+      "referencia_sha256": "ff53e813f6c401c5cb2c229522fff2d38f914ebf703d526d6b1557eb3e0264ca"
+    },
+    "CV2-D-V-FAMILIAR-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "32cec8673724c98cefabbfcca5f853930859a86051f50b71fb113a564edb0d6d",
+      "referencia_sha256": "b660ada4d23470abaa88871709a8c34115ed21b5a410e8e33f0ba7a9b9b78c37"
+    },
+    "CV2-D-V-FAMILIAR-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "9c0a1b2e5fa4b0acd160881142a6cf2c87f8421cc6edac3e74b89a12c8ccb1f7",
+      "referencia_sha256": "bf4527c706a026392edb5bef8d25d26725c87d4af8b4ebaf8bdb05db2f1b2d7b"
+    },
+    "CV2-D-V-FAMILIAR-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "48d8241dba895f2012a6b98af5284ff096865f6087a15334f23120228a5922f8",
+      "referencia_sha256": "ac97de49371cadd9dacfbdec8888b27d0851d4916ac312bd1f69dd3417f348c1"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "c3a8aab157a40397a16126ee7548910db3a01c52ef1bd37c9f78a049c9619a61",
+      "referencia_sha256": "18d4d4c53c82c7634bf1c7378d06094b3a5b5daf100faf6974a7f8d8c3160553"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "1d5e8849c7256fbd9886b9cc8a0e30817cf5350d422dde8b8ef3feab6a08d612",
+      "referencia_sha256": "15b512c2710750413f517e21b080a77cca7128a9c74c93b39f09a89f7b6aad7c"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "df7cdeed732f44e863958944bcade132f6cfe34dd3bed8bd0f2ea62b859fd6eb",
+      "referencia_sha256": "17c7e0ec3eab868e429e82872ed69ee0a3223c4e2cae786812ac194baf0ceb7f"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "7872ce24b1edf4fe489b2182f31638ca797b06bb01fd3d88b75d6ba19d020dac",
+      "referencia_sha256": "1e0cbdf0b6b6d97e5a2e2f5df096f7077ad931ab472e7149cb55ec84be88c38a"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "9a5b67084dd19dc9e8d94607bd9347aee7652d3e05e4f17790b66304fc063f1c",
+      "referencia_sha256": "2a9e2d67cc6eea3bfe19f2af338fed4f069581d248e8a3524d6365746cebb9ca"
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "33fc58457273932a1f2ed2fe9952b79d4654cc62097357fe416a7824d192a9c2",
+      "referencia_sha256": "8e473c61d27295b11cc01419e66121f9e5a8a4a19a19e5586c17bbf0ddf2f011"
+    },
+    "CV2-D-V-PREMIO-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "1c361029eae7092b0eb661b82cc177c76642424b87ac07d1c7420862a6fc3d7a",
+      "referencia_sha256": "54b49723a80f000bd17027878247a2ec33b52313979f0162a5273b8cd267b122"
+    },
+    "CV2-D-V-PREMIO-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "7a5f5f017a3fff25edc3457504403a0f39fa8bfec7f846d475ca260426099ac4",
+      "referencia_sha256": "d1235ccd6e137257becdff0f7b3e1c907e428efcbab6764d11997d77365a0a32"
+    },
+    "CV2-D-V-PREMIO-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "981c6c200b193589d41b6c888b4155ad9307916cffc450f895e97db63d5b2cd3",
+      "referencia_sha256": "5996b9cb585ce787087ca04b11d9a61e3abb71b442792e948bee19c10a61e513"
+    },
+    "CV2-D-V-PREMIO-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "efd49ed9cc707e5db35845d58b594e253cc9e7b5f203851bb309a1ad83871c68",
+      "referencia_sha256": "712abd2b0beed5b4caae040e3c654d734f8055a09e76819e0a296a67b0cce1c5"
+    },
+    "CV2-D-V-PREMIO-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "7a0bb0f8c694b0d21616167cf7e863a6ae69d93534b5ed6f8cffe3b7f058f613",
+      "referencia_sha256": "a4bf9787bd6c35a35fa6506448879c68dd96f3518db6c91d51a64b0b59ce7790"
+    },
+    "CV2-D-V-PREMIO-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "4fdb909d566f2c065364092f8ae5458c5eb3315c71baaf328e4f70119a59c617",
+      "referencia_sha256": "dece200f52c548063522a5dae563d0e10c8114c72a7afbdd05c53b52a21f6c1a"
+    },
+    "CV2-D-V-SOPORTE-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "2615b852062e8ece6151c9511af49bc4d6bd5b22876e61eb9f91440c6dcf8861",
+      "referencia_sha256": "09e5b4a2324785e872215376892c49021e959720243ca8af1a128c74c3cd7bc8"
+    },
+    "CV2-D-V-SOPORTE-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "aff317d0f7c4c8e31e2f0fa98eacbe9383f4daf67dddefe896a5c648ecdebd6f",
+      "referencia_sha256": "bc751a47f407830aeb1d7af5bdef00003f4524a22c628cd78a44c4105d2459c9"
+    },
+    "CV2-D-V-SOPORTE-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "c7c415cd71d46d70691436f0279bd04c8d9f62a8d1939a2565428cf5ee82b0d1",
+      "referencia_sha256": "3842b7bb4c28361ab3b667623de292c6f38b062ddcd8eb6f8b9717fb9c3fa4b9"
+    },
+    "CV2-D-V-SOPORTE-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "8b9704896f78485257858dc1e99c885e9ebdef6f65ea665e3b3afc7f4e90d550",
+      "referencia_sha256": "34cef6db63b4cd378d2ee84ff1511727585dbc55a5a3ee3a37a5e12fa705de8d"
+    },
+    "CV2-D-V-SOPORTE-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "3e8ba6494816b8d123ff6a8bd459a57286caee5035114867a6ddf4a8a1f927e4",
+      "referencia_sha256": "c79e6ad3ba403042972f0367763691a4bbe281e20c41473636f86380a135e96b"
+    },
+    "CV2-D-V-SOPORTE-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "0b466b6d69a203f6d57a54c1e80698a825fe8780542d195c77bc3300441e3dd6",
+      "referencia_sha256": "a54e47b9932b1fa37da4d2b17791e04fe8a5c9579e53b373eccfabb49a144789"
+    },
+    "CV2-D-V-SOPORTE-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "ed1fa97cc65853b87094201a6ddfe7227a868ac8e35010c0ede95b9bb269ee83",
+      "referencia_sha256": "e353862bff0e808b76fc9775444dbe2c1b04d8932ca4b000a149c88f300dbd0a"
+    },
+    "CV2-D-V-SOPORTE-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "74ffd452a121b33215c9cf0cbd8cbb221ffbd5c3df7270a45efcf66648b03eff",
+      "referencia_sha256": "29ad3372e64115dc1e58dd8c661a1f8079f1965c57fc25bc7706c09f1f2729a2"
+    },
+    "CV2-D-V-WHATSAPP-001": {
+      "particion": "desarrollo",
+      "texto_sha256": "c252a11566d56851ff7c741a8c30f5166c1bd85f44b7a5ce154f6b610758543f",
+      "referencia_sha256": "be50213e37541b093212e5b7b0b560030e05b39a00f15bd897946a6810f97d31"
+    },
+    "CV2-D-V-WHATSAPP-002": {
+      "particion": "desarrollo",
+      "texto_sha256": "68caf4afa149904d9680c21c0b66fa0a90de13c1d2d3a69cbb150051e957c88d",
+      "referencia_sha256": "8d45e02fbcab84e168f19fd449a42630fbf78a3cef08186d2f11ff0a51df0f01"
+    },
+    "CV2-D-V-WHATSAPP-003": {
+      "particion": "desarrollo",
+      "texto_sha256": "20133a1b5d0f13c01d55d65b2339d146983c436547b0094607325c89368c35d1",
+      "referencia_sha256": "75e6258492ccc7dd8ce85af642bde3edf7c733e8a4dbd78c0969e7abb02401f3"
+    },
+    "CV2-D-V-WHATSAPP-004": {
+      "particion": "desarrollo",
+      "texto_sha256": "65ab833af1c63bef3da6dc242870d65aa33ba25604ebbc923bdc1d5b51680ae6",
+      "referencia_sha256": "33c4c47ca896b89a454c2266b88fe3a9995336b99a5edcfe1a21f92aa0c8aa21"
+    },
+    "CV2-D-V-WHATSAPP-005": {
+      "particion": "desarrollo",
+      "texto_sha256": "db93ee2fc909f09ad6267ca47d505178e80a60544b335f8014c743a18106c443",
+      "referencia_sha256": "1c0731ab43f8f5b472e3f4b5d690f147855ee3a53259b2f74e644416c999ab9b"
+    },
+    "CV2-D-V-WHATSAPP-006": {
+      "particion": "desarrollo",
+      "texto_sha256": "d108b5f5b91893f6ebd6e3dc2eee30474215d28e4443095b2c25547ab5abdfb2",
+      "referencia_sha256": "47394c145233912ca5596a0690e250e00c0687d9b40c3ac2898f6a26407a07e8"
+    },
+    "CV2-D-V-WHATSAPP-007": {
+      "particion": "desarrollo",
+      "texto_sha256": "468b3fde01b8d84f33d27090439ff5d1f773cc9a70c70564206241e45f5a7573",
+      "referencia_sha256": "beb8556abd918c760a159a165038119ceb61213c97d36d2f2ff9149b337cad67"
+    },
+    "CV2-D-V-WHATSAPP-008": {
+      "particion": "desarrollo",
+      "texto_sha256": "1731498528fd57150001bc7930a080e7a05388b954efd78c6167f9ae95a9b190",
+      "referencia_sha256": "307e7d4821ac2a250906ddd9dc1bbd69e7c19f3b40495e95aa871e1b36d6a051"
+    },
+    "CV2-T-L-BANCO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "c032846875d447875c226023ad06ed7f655f05554ce0235d5be47261cf059180",
+      "referencia_sha256": "2f96a4aec3ccb7e55211691d0d0fc8533ff01ac6f9d297fc1cbfd32f638cddbb"
+    },
+    "CV2-T-L-BANCO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "bec422644875691d3b2fc5a75e02e6dfef8fa3037df1b407bf2d281a413a4d6c",
+      "referencia_sha256": "3c89c655f6c1a94730c1dfc8ac97489e6569f08d7f1f3be9d8f19a719ac23982"
+    },
+    "CV2-T-L-BANCO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "c4bc20b17b8ca23573e12d89b2f8a2ce41785516ec772ddc4268cd0c1efde647",
+      "referencia_sha256": "3ce830f1bd194da95c9946d2502fcd347bd6e85e44a04473f10aa7f9be10b07f"
+    },
+    "CV2-T-L-BANCO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "b8763b2eef68a7fbb3d4f71441b3dd4e4a422f15aeb6cbd9455b4517db17b3d4",
+      "referencia_sha256": "85bf139a6a38cb01b0a72d13565957e934a545b0a1b90df674ae4d7524d896f3"
+    },
+    "CV2-T-L-BANCO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "797d7e6edcb49bee6061cdfc2919ee475e4fb2c0235de71a485ff7847fcfa7a7",
+      "referencia_sha256": "fc9c6b98b74df800fa8ae28ec5a6fa656a5c02ebdfe1047da7ede47c169fe753"
+    },
+    "CV2-T-L-BANCO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "fe1ab00fa66167433b5ef43bfd4ad537cfb82ea7ef74d2fb63091a042f9cce95",
+      "referencia_sha256": "c6ab91b35470138f60191745e2b2bd5683922071147e2484a5440c69a6dbe38f"
+    },
+    "CV2-T-L-BANCO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "f85452b40cab97685ca9586840f1b45f15009eaf56f2a36a7f06cd2af1f75e95",
+      "referencia_sha256": "66653e1728f94cb49610a849f9b3dffc63c6a2074b9e021665833abbda92da98"
+    },
+    "CV2-T-L-BANCO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "050047949cf9edb761dd0e0f50896f4422e611884299bc31dd63beeba538d3a4",
+      "referencia_sha256": "f534d3f0f23ec78f5e8480b6058f577a737e55c671ffe4e3bed40b78aa66b04c"
+    },
+    "CV2-T-L-BANCO-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "7969138a061e0e5e4b4b52232cdf2b7c047a05a856131ffd5b88cac657869d87",
+      "referencia_sha256": "3e6661483b9a4896c676dc48a2edeeedc74e32d247c01917d7f35dd61c54b241"
+    },
+    "CV2-T-L-BANCO-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "152d1a4f8cb6fd24c95a6b8b95ace38ec38f3b5baca4cda3821d2b1d2ace812a",
+      "referencia_sha256": "4f4b592609a7e60eeca46f3626be179b256ddd81991b8ca8f6b44f8ff03f4ea4"
+    },
+    "CV2-T-L-BANCO-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "1179e512513da86e5dc05bf31634df30c674302d978af58c6844395944e2856b",
+      "referencia_sha256": "044d189b934c269d383ecea6d5b293335c08af8e4603375c4ebaef630e240c06"
+    },
+    "CV2-T-L-BANCO-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "0c4dad4cf2349569829ff740991f159941d4f68f316f91efbb42194e3d105707",
+      "referencia_sha256": "e5ebd722af988be86151819f29e97e36d467148696b1590525005fa9131035fa"
+    },
+    "CV2-T-L-BANCO-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "9f376597c19514541526aa444fe4545d6614094654b047809ae0e00a5488b1d9",
+      "referencia_sha256": "deed9b5611335d91f304598f0e4f5ee53059d8dd728a2ebe5364a02ac315dfe3"
+    },
+    "CV2-T-L-BANCO-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "46eebfd2b7a2be27caacbffbaa7d6dc17844877c08329c618321f8fb77bdf157",
+      "referencia_sha256": "dcfb05578da721b5e1afbf3532acc8391974e15788600cc8c6e4c854cc85f9e1"
+    },
+    "CV2-T-L-BANCO-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "520fb79e0aab32f2bbe7f18dab956e2385ddba9bb0c384c78e5240a91620924e",
+      "referencia_sha256": "f03e59bfed41bd2d0afc9c224b36234aab0402c02867bcc0cb530fa20fa9cc5d"
+    },
+    "CV2-T-L-BANCO-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "72ca4f6aed21d5f4f99bfe0138a238f57ef885d7a732acad752e0fdfe3b19f33",
+      "referencia_sha256": "6fcf7548c22d8022b346f4b8f3b5a049de7fc5c3e0cddabb897dd392ba2e9831"
+    },
+    "CV2-T-L-BANCO-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "200a96602fd3e06403b43d151ac6170071383e2e236a4a72bfedad4b5e3de162",
+      "referencia_sha256": "e5e8f9e22b2ff9ba9a7fb00969bb02706d743e52eec6ccecf5061f357b138e07"
+    },
+    "CV2-T-L-BANCO-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "f18a93f92ba9e80f2214d47ddc665984136619ddceebd0456829e0a03ba6f6a5",
+      "referencia_sha256": "1ebe67ce978d4fa474e28bb40231b8cf34204bb0675c12dded6c7e1637c09ed8"
+    },
+    "CV2-T-L-BANCO-019": {
+      "particion": "test_reservado",
+      "texto_sha256": "74642c2ca3b5893bdaa359316f1cc1e34debd6096096db396636bc0aa18489a2",
+      "referencia_sha256": "e9921e541d75860fb06fe173e61c6d5b9b6fe7a468c56646d969303525545468"
+    },
+    "CV2-T-L-BANCO-020": {
+      "particion": "test_reservado",
+      "texto_sha256": "4a5bd7799834b37c24888e6c9839f892ee9cab709372296f6f03aa3fcd6b583d",
+      "referencia_sha256": "b3d7fcedf25f2c5a9fd9b8206851ca48b6371347fbf7f249c4b6d85c8d86664e"
+    },
+    "CV2-T-L-DELIVERY-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "5b761fae2562b2f7dc06ebb71ede25f857214bb591c169aca58f7aa6ece33384",
+      "referencia_sha256": "1927830281b23971863f535a41b5efb9013ffe67a0c9bf34731a29d08d2ef2fd"
+    },
+    "CV2-T-L-DELIVERY-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "2e2cef6a1b1d4c50ac95b06dbb6c8d4f04f25fedcf26698435f90fe61f7334c1",
+      "referencia_sha256": "dbf0db43f875baf439b9b0ac30a9397bc0839fb3cda78e7dadea3291fde09775"
+    },
+    "CV2-T-L-DELIVERY-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "e4f838c26d25e437dd29b7e2ec6bf1aa484bf916527319ee311af4eec51d3d46",
+      "referencia_sha256": "fcfa6cfc0d0cd09b6f0553318b2e0e1c4f306b1edabebaaeb8be0af709c5f659"
+    },
+    "CV2-T-L-DELIVERY-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "dd5bb19a4f5725473ca5a17aaa03a60c782bf219746073b8e00ebb54cf516ca0",
+      "referencia_sha256": "ba57d179515fb2d2c7f3b3449bc9a459dfecb58d4b80dffe99134bd346802fd6"
+    },
+    "CV2-T-L-DELIVERY-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "162e9146863892d476635192785de3d76dcb4f5c9d585378e410819d2adece7e",
+      "referencia_sha256": "3080f0f9dbb725e45f6ab9f59d21aae0cd3fa6caa99b38fc007859c4c5fccd26"
+    },
+    "CV2-T-L-DELIVERY-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "c6e1c39364cc300bb45e74b2c2202773190c164b255a5aeea46c65cd400b3570",
+      "referencia_sha256": "6069ce29dd6ca66a63f64a9803e8b0a1c7f08b77c860d6408fe13d93ba71ef2d"
+    },
+    "CV2-T-L-DELIVERY-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "b92a2d7169ab0307dcb787b05591a02d64788899e90cad65268677111faf2ac6",
+      "referencia_sha256": "d235717d23ec2304c32b6166766edaf242c64582684148b94843753e248195c0"
+    },
+    "CV2-T-L-DELIVERY-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "5e4c65d071d8f800e48606ba8c90bfa59b3abb9801acd779890616f145e6e67d",
+      "referencia_sha256": "1780e781076d35af372dcf7f1e991a1a5ebf75eb6c64569368e669cc922f81ee"
+    },
+    "CV2-T-L-ESCUELA-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "d4c41353feb8ee65f01ed2bd4d9a61044084e9305c745a019e6b3766bf6eae75",
+      "referencia_sha256": "b3746382841e8ec94b9b5da5b51e37cd07dab73e9e750d30e42cf6ae7d29cb2a"
+    },
+    "CV2-T-L-ESCUELA-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "af0739899c99bd231242418d9e4268ecc162548af27b7354b1046eeb5e1da92f",
+      "referencia_sha256": "711ddd1225826ae33d2b541bd365d2582ab7f2f9fb210dd5f9896a5191f450cd"
+    },
+    "CV2-T-L-ESCUELA-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "e8c60b3b8ef83f45699373445b4ef698e759b8c651e3c8af179690288f3f0bc5",
+      "referencia_sha256": "404bd42ee0d4d8f5b85c71b6fdcbce636f6512683f013c54e66cd4b05743b344"
+    },
+    "CV2-T-L-ESCUELA-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "6adc1eb63eba5cece7a8e813d6b3f60f701223ae9fcecfb86e2c3945b2790f77",
+      "referencia_sha256": "34668fd4021f5de93376f074c5a06331797461f5beab72b538c8e10aa389561d"
+    },
+    "CV2-T-L-ESCUELA-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "a2884df88486f0069ad6edc9642c5da280c8f6aaf2856696eb5233fcf9faca33",
+      "referencia_sha256": "0f29f2b61d414581c22864be15211817a37dd10207b27082503420b2e4122f03"
+    },
+    "CV2-T-L-ESCUELA-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "85f762cdde88af9a2e72bbb441bfb1864e7e18bb46133015400c099d8fa117d1",
+      "referencia_sha256": "2bb3b6638f3496a370608eb21a54ad4af6c16c0d4313d55b0303ad7148c93011"
+    },
+    "CV2-T-L-ESCUELA-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "59ce56af7185a949104cb00a04991db4f1bf08c008db4a761627bf7bf2846a76",
+      "referencia_sha256": "1d37131d1e03ab1d3ed5daba5ef081a142e3d9d717596b4ea2c754bc228d5176"
+    },
+    "CV2-T-L-ESCUELA-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "6db9fc22aa3d5dfd8cb17eb6069096f5c3677a0ac5a4b0c491dff7a2c362b051",
+      "referencia_sha256": "5a27486890c22314040b34ff7a18d63585e20cf44e190141909ddaa8e0a6a969"
+    },
+    "CV2-T-L-FAMILIAR-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "df563a6280609548b1b095e5c53d70eb3492e49c91f3d9bac4ebf559e3ed6f2c",
+      "referencia_sha256": "62c3adcefd61e7f16c970b2b104a7c43bdf1ad584a66658bcf34955586094f0f"
+    },
+    "CV2-T-L-FAMILIAR-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "9fca4a18e4cf6f5ddcb85b45257c0846a4707afbad96291f04c15e4d1fa98ec8",
+      "referencia_sha256": "7c79aacea2bb1710dc97d85ab002d026dece31f388693a54ca2c68d1491b2c0f"
+    },
+    "CV2-T-L-FAMILIAR-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "63d27b338f55b395ba9eda03ef28797655f6ebab4fe0ac287cc388b7d8c70266",
+      "referencia_sha256": "5f7c8ba8c7fbba77de6cf4179c9c9fc9ab673a8d700e4528a929b8beb25a41c3"
+    },
+    "CV2-T-L-FAMILIAR-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "c812425eab2e39608faa5ff145f2c4961be6f6e18c8f5272ed20b8bbc5f500ca",
+      "referencia_sha256": "a7ee9ea707e9bb25458c472ff126781c0df2e36ca2cce4fbb5a203ac1743e2f6"
+    },
+    "CV2-T-L-FAMILIAR-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "ab7b51f9a31350d15bad5057bde339cf52347ae4167cead6d8f4e9918597d646",
+      "referencia_sha256": "45384c58995e5f3521fe8d1f6949f3196516f1e8f0891cd39dec409d6cccce7c"
+    },
+    "CV2-T-L-FAMILIAR-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "eddbf880572e3ffaf6c0c6e5838fc0e5a4613cbcfa972e1f8424aee6cd6c5c1e",
+      "referencia_sha256": "71c9de93b5a544baf92a04c315fc7696eb1c2e55e4eec03a5b021974a6b06059"
+    },
+    "CV2-T-L-FAMILIAR-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "dbbd4df218d01772925719b487f7179e50c9a528e18376b861cdbc6593a90724",
+      "referencia_sha256": "869919306e7966676b7670c0726e52c7644d0d89b61038ddef5b4f1ab8658cc3"
+    },
+    "CV2-T-L-FAMILIAR-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "5dc42cf9f84cdcc1c869a8ecc2419e2ae23163ad73e3d75046fcb5ca1483dad2",
+      "referencia_sha256": "9f638de23f73be5ae11656b3e9ef01820e8f937ce4b6a2abd5f11a3510923dd9"
+    },
+    "CV2-T-L-FAMILIAR-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "b0a81302fa60dbca3b95b66fd528fcfc8f791fe20dbd70603fa25b31e99ee3a3",
+      "referencia_sha256": "743b5eb4d8fbd4079834e00fe9b77f5bdde858189b05e636bd75e7d68cfc6e8c"
+    },
+    "CV2-T-L-FAMILIAR-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "3c17ef6b2b087f52600726caaf8576bc5b249ee96665f29368774f5523b6f963",
+      "referencia_sha256": "ee5a990f1d563f6277a77be6353e3219261070056c9ae223fcabb9795ee0691d"
+    },
+    "CV2-T-L-FAMILIAR-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "708517b1a55baefc8b11dcd2001578478e17d862ac87a9bfc6d62b7d20fad419",
+      "referencia_sha256": "2480632b8274a745784c53e47737984d0e78e107bc43db87c4758c0f3daf66be"
+    },
+    "CV2-T-L-FAMILIAR-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "64507088dc2ac572694208c6c06d1b60ee698f66a99fe9588958c3f55230ee9a",
+      "referencia_sha256": "c986b0e4b5c1772fae62e5dfedc270e9863ddc0011ebcd6025bfa1fdf9d62778"
+    },
+    "CV2-T-L-FAMILIAR-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "3340c5af8ad09ec8c55c910c8d3763ecbd1300682def363b2c395ad18882ddc9",
+      "referencia_sha256": "d4fe8d1a41c5cdaa88f36f93de9c5ac720c1f7c37dcf59cf4b460abc910c093d"
+    },
+    "CV2-T-L-FAMILIAR-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "7c9382f52a6f0a1c606992ec832c8904092106ac5bc34e92bb8ee2a6f98ddfe8",
+      "referencia_sha256": "ddad677abdb6fb44099a3b8dfa3493179fe53e74f119506b911475b69071a73d"
+    },
+    "CV2-T-L-FAMILIAR-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "20a45534b8f87f75971e1c6a14a020ac3613cf93e94ec3e602b9cbe3ed64a70b",
+      "referencia_sha256": "77e7b9f3b27412092605ed47b33105b11784b80016599d39717bec09fd8c45e1"
+    },
+    "CV2-T-L-FAMILIAR-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "969e7180d3757f1ad1c5775bba9a7532d84279f9fcadd47784679d95e688ac5c",
+      "referencia_sha256": "105c40e708ab6c47f335c314960858daa74efc52f3f0ac2450e62a3755b8f87a"
+    },
+    "CV2-T-L-FAMILIAR-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "df06b396b8577340e114474534cd54c984f407fc2a35a3d2a93b9c56c0afa1e8",
+      "referencia_sha256": "89dbf6b12efa66e42339b62f8839567832241fa265e5d7c6c623de206908fa92"
+    },
+    "CV2-T-L-FAMILIAR-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "abf383fc0fd668e971dab8a9b290187664428af3b91c5c363dd860ea250451cb",
+      "referencia_sha256": "4154e5024c5fc7eda8e01759b97760aba2109cb2a8798d919fa79a5db2e27566"
+    },
+    "CV2-T-L-MEDICO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "7f5a5114d4b8e3f4e682887105b79376e9f29fc2f0b1ec6de04d9efafb6ff552",
+      "referencia_sha256": "e1d4a8053e848ff7cc47e3c404a27bac76a08957aec101dfa05532427b2c3dee"
+    },
+    "CV2-T-L-MEDICO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "4de74fc16bb94caa3731b114fc53e79de15187330554f63e9c59fa1c38e40a3f",
+      "referencia_sha256": "fe5fb9a6f549e19fe11272b27364e3e377e3ea176fbe8c1366fcc788a60b0a25"
+    },
+    "CV2-T-L-MEDICO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "c92d11f4a2c9e383cdb07689522331866e95d3fa94e6eca25884c75d2d417530",
+      "referencia_sha256": "0e26d69b545628440b0f54bd44e079c6999a894e2c1674f701e7493b7e5ee8d4"
+    },
+    "CV2-T-L-MEDICO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "51afe9622105fd985e8907a90a4aad7990cb2b30042ab44584f6a46ec0e48372",
+      "referencia_sha256": "bb1449c7368ff7c695b11016cf36f369c9885d383088df6cf522945ac1dc4c2b"
+    },
+    "CV2-T-L-MEDICO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "89858d656b29df9ee234f05aa94679b870d864b7d8b38bd09b35c0ef798a10d1",
+      "referencia_sha256": "1d3a584f53d45db5685a1328dcdd4274cde31f278cb9a91fb040760906011b19"
+    },
+    "CV2-T-L-MEDICO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "93de24fb8f39960827e55dd5daf815852a3e2f26287300df4db9c56d9bf7b3e4",
+      "referencia_sha256": "47e866e803473f8232621e375f40d33a4b5f18ffebaf9c6cd53815861ee2f9f4"
+    },
+    "CV2-T-L-MEDICO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "bf1948541052752013a432d110d8ef47209da3d36fd15fe1a5c9d0ba4e9044fe",
+      "referencia_sha256": "b1cc45aa447092b5a0110833606bb985395f368e5211cc396bae7e731721dd23"
+    },
+    "CV2-T-L-MEDICO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "048d213e6ff7400ca404b749b69b4059ece8859aeeaca2e4c2d4affa10cd7181",
+      "referencia_sha256": "a38b22fd9db1c9a530facfc71efed60e852e1f67f2fa5dfb0e031bd6ab41c3e8"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "2058bfaac5998d88a13a6730355164b34943dc51c258c41084aa440c44308bc4",
+      "referencia_sha256": "e023d58562a0c6a09fbafdd5836e3fb54143a16f6544bcd43ff68339a88804a2"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "d0ff4934187899638049cd78ddf3b0e8af05ff008d466f8df68621f2f6ac1415",
+      "referencia_sha256": "0feec2fe191815aeb68bbb5baf1e902adf4d7ee846ec97673e33589ca8062176"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "61ce0a0f10c4443bf676c595e01dfbaeb050be0282cf97117380e0369d019bfc",
+      "referencia_sha256": "548b008164afa1bce1df65225d0d07c019a241db97fa8a49800b4ab94e14dfc1"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "b5c33177fda7467290236f804afc40fb5722a2e1f208603dfcbb2be82bf9b903",
+      "referencia_sha256": "44b2bb3715d0295a07dec51ae9a199d0f6ab6010ff2413d94fcf9b0a5e7b9fcf"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "801917007afda531d49bd7ae7daacd3fade2ee055620612ad80b582482b6c0e2",
+      "referencia_sha256": "ee13e8add2370c1c05090c46713829de3a16e94e8a2b59990c7598ac4f8dba20"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "7e7893bd078ed3af6a10f0596183f057f74d225168b9ff1a8b580932730ebee7",
+      "referencia_sha256": "1c0eaf2e91e25ad5ff6fd123b0e99158d5ce8ab206a74eb854322796502113d2"
+    },
+    "CV2-T-L-PREMIO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "62bb35a6ad327c3b9c9cfc23122035c4d40d5ad35d061e5b8cc88722d3da00cb",
+      "referencia_sha256": "5ec0970d0328fcdec3ca86effe29e22e68b04e8f87634dfabd4d19c7794c15a5"
+    },
+    "CV2-T-L-PREMIO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "c5a1e2a7a58a709f71975f855e594bb2edb57027221b4c7bdc349a03e2a2ccd1",
+      "referencia_sha256": "12b61d4309d0a0a5db0c0b6c8c8f9e4cff91df9e9e86459edcc411dfbc9ca417"
+    },
+    "CV2-T-L-PREMIO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "3bba9fbdbeb02864baa0763aab9fde238e5f90857fab6fba0ba605ac7aecab11",
+      "referencia_sha256": "e0dad1ea25d27780facab8c97f14d3d626c6dfcde441c35c41d7fed404118752"
+    },
+    "CV2-T-L-PREMIO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "3e230b029ccf4c00c7d82a6485f44f00777d7222b282f69869ec81842a75a05f",
+      "referencia_sha256": "29100d2687f95b87ed6436acf618d2b8ffee31d1a2a4eb101b4da141a9456df2"
+    },
+    "CV2-T-L-PREMIO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "70abab8fc8b3028ebec0e095534768ce37d51886be005b82fbc25010ecc6ef2f",
+      "referencia_sha256": "705dd6de5f0c815bbb9231c6fede5540f71cd64e24eed15e0b13b457cd3e1a2f"
+    },
+    "CV2-T-L-PREMIO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "8c945df32cbc4284a5e50c0a41a198ff15aae0a4cde0618cf8ea7cc518d8d7cd",
+      "referencia_sha256": "1e8f0038ef760c6371424861532ff73c509ba11f2c3ac7c4175e0607fb523e43"
+    },
+    "CV2-T-L-SOPORTE-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "98a13c5b4ed0a55ba7094504e2f7c94c9f18c766b1df1f907371b4a2b8113b95",
+      "referencia_sha256": "509b9d552183e763692d5a4ae598af3a406a9c152e2df6b35ee81284bf9e300e"
+    },
+    "CV2-T-L-SOPORTE-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "97bee58f12e68be082cc077c456922b008f5b0dd45562ecd553e061e23c6666b",
+      "referencia_sha256": "7362be85cf1fa8ef32ae2b02de2f3115691de32331b5b22a0892e9c434a3145d"
+    },
+    "CV2-T-L-SOPORTE-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "70c6ce65a4b448d2b60149f542a2f83df1b832baf8adf897b233f242aa744cc9",
+      "referencia_sha256": "a1a9ec33a2b7118f0b67f4eefc9432b0b37948db57ee7bf05c32af80cf7a722c"
+    },
+    "CV2-T-L-SOPORTE-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "90058754d0080d26983978d195bab1a9900288dc084b5cde2a5a762ce64391be",
+      "referencia_sha256": "4b6f86c0fc9b86c60e55b94c234505d3223aff3d8d181120b687e0d8efb76660"
+    },
+    "CV2-T-L-SOPORTE-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "947e6872b06c0014f290161ec5f4fa09b398f4bfa2a66543e02c54eded5f441e",
+      "referencia_sha256": "4739a04a99684b971d4b5779210d9ccfe362fea7c335c7e8099f722d18d6b164"
+    },
+    "CV2-T-L-SOPORTE-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "be163fb4e7bbaf8efac569b4584adb3bd24066605029e84103cd7b2e09c10a49",
+      "referencia_sha256": "fbead8a162a66fa40bc805ee4ed2525dfece77d196554d808a732dbc23a1f0ee"
+    },
+    "CV2-T-L-SOPORTE-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "7f5c2e62217e4865667a6a2fad58dc0bf1491764a03a8cc9fd4e383aa81a9633",
+      "referencia_sha256": "02f573c38d3251f3af10459d25d92951d16749c32e42c5dfff87f3950f6ccd99"
+    },
+    "CV2-T-L-SOPORTE-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "613475ab9d1edfb29801caf9530e6f09d6efd3168eb0ca5ce0362af07664e548",
+      "referencia_sha256": "20758d01987b5f8809480479a308cb7415d16a3da8174eaf3cccb4a92b01f11e"
+    },
+    "CV2-T-L-SOPORTE-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "82b0c2d8f89a66780ed8d29653830f6d072f906a62107d08a4441b14fcfbac4a",
+      "referencia_sha256": "80b78fab50afc771e9386c833526fe047db117b9b299fddbe8db4b92dd408700"
+    },
+    "CV2-T-L-SOPORTE-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "4daefdf406363a96c4ccffa76a697760ab38c6c389797d33beb55c166c9c57ec",
+      "referencia_sha256": "967d09746dc014fc558775f401b8e93016c72b801ef777c157af251a9b2f977c"
+    },
+    "CV2-T-L-TRABAJO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "df4487ca7052699c27af951ee71663ab513758d8476ac1cfab35098da43e1d2e",
+      "referencia_sha256": "4cee8afb56ea49ac7908a478a849e4f6fa9af3879236a3cd60a444c92b1c5a0e"
+    },
+    "CV2-T-L-TRABAJO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "72bc528964fa4baa3e338258ae5610b8948591a874c50690e09acbdd5971a56d",
+      "referencia_sha256": "654a35d9497ab0bde9b422890b159f9c85b1bc2a72dfc5fece1654e1399a7f8e"
+    },
+    "CV2-T-L-TRABAJO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "b977c7a77815daef73223dd5a9141fe5c7aa71ac1ed9646c61f50055dbf1873f",
+      "referencia_sha256": "cab385658be3208d8d81586115ea00bc83dc4a96b12aacc468a9b4f574dc3716"
+    },
+    "CV2-T-L-TRABAJO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "820f17bffa759b24596bf6880e62b2255ea6ed45780a06d81781b12c733fc447",
+      "referencia_sha256": "59d2a3eaa920f9682d2359d169c53713de24fc5da8dad116cc6a6d4b3612fee6"
+    },
+    "CV2-T-L-TRABAJO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "b8c295ef4b6a525d94dc53123b56d1c2ff804f04e2278d9479402a7c1b7ccd50",
+      "referencia_sha256": "c59bf5d5f3d7fe90aa57ae271b364ede2870bef0eef9558096d3240bfe3ba04f"
+    },
+    "CV2-T-L-TRABAJO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "2f173d4073147be6bc87f13e0ffc410af65b5b0f5fe27e6f2284297bbdd6437e",
+      "referencia_sha256": "38e983137746485709ce9ea1494c50f35db5fc19f5913d09824d3e4e9456b569"
+    },
+    "CV2-T-L-TRABAJO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "51557f73563f01a686d04b8b02b8a16c1f93e27bb256ff1adaf6fbbf4976bc0c",
+      "referencia_sha256": "c70d907fff25e6e921702b42e8cc9e50e9ed852d4c92a68a1ae1f47641e67b2b"
+    },
+    "CV2-T-L-TRABAJO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "c9c89492c8f32df541e0a248efd70cba07d7db3975ca701a44ff0c72acbe4afd",
+      "referencia_sha256": "97aa35846eb133cb20a77360b0761f55be5d39986e0a1b0660fd281c92bc0e35"
+    },
+    "CV2-T-L-WHATSAPP-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "dd30d010c75c4f428efe1d30ac2f973f3ffb13c28a78bb1c4466a5e65ab1a651",
+      "referencia_sha256": "156eb76fc5258209ca696c474ea077516739f7f0816b77631925564aa88abd33"
+    },
+    "CV2-T-L-WHATSAPP-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "a5c67fcf684b2f4a433441bcda8619037a17d36fb9ea4636906ec7ad21d0d39f",
+      "referencia_sha256": "a6eb5b25a7e16626116748498d0f1246218c4647fcb5e23dfda5731041a9b82e"
+    },
+    "CV2-T-L-WHATSAPP-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "d2b45ab33f95b1b75b6a9f2a8019f74bae05ad7b9e67c31e8347a7a63919120d",
+      "referencia_sha256": "70168b6796d96177d1f2b424678bf6dbd6c8b703845799c4549d724e306ff2ef"
+    },
+    "CV2-T-L-WHATSAPP-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "2e90cc8930028afb79efad22147e319f38c8185e6b647bd1fc5540a5fdf50d63",
+      "referencia_sha256": "222126bb9b36bef7f8997723a7bfdf82d35f7d382763f18884808e4741f5c1f4"
+    },
+    "CV2-T-L-WHATSAPP-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "4db7a9a8d3167a39cb1ae6d9c0f1653dc09b5bc02a21733140caab00daf40d0a",
+      "referencia_sha256": "cf173ab184eb5943db4a5fcf01d61d6a48363cad8ef9af7685c2719637db16e7"
+    },
+    "CV2-T-L-WHATSAPP-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "654e84ea326f37c75f0a7944b48c49ab11856a6c1de8c1ec0b13da81ebcc962a",
+      "referencia_sha256": "2715d6b1729cf5bda12e5dac69ab8bc2cefd59997b3858d214da8a0eaad1ea0f"
+    },
+    "CV2-T-L-WHATSAPP-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "54e2b321d0f00df0c8673f4b222f1928b542be351b567c4e8a0929905cefaaee",
+      "referencia_sha256": "d7367ab7e5f4d9466c0234e477b7dbc14796cb030c36ed15a10a31dadaf2f87e"
+    },
+    "CV2-T-L-WHATSAPP-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "039d9bc337203bc98f0a4e9c7bbca8856b1ca3b791a2b6449db11f1c3d2cdc87",
+      "referencia_sha256": "1c6feffed1eeb59f4016caf094f48c97e4be0c77f8a93362c2803e99e2c3ae77"
+    },
+    "CV2-T-V-BANCO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "0f7f85fb774d15f2513f9ed8023ee98d7e34c78ea52a8e4f7c717bc7374497bd",
+      "referencia_sha256": "9aa7f84e085634536d77d91d9cd637058844558ddbd1053737c216cd91955ed7"
+    },
+    "CV2-T-V-BANCO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "740dede6e4bb06ee8b3160327874d2fa3dae25d23749467b16da555c53bb8c72",
+      "referencia_sha256": "8bddfa1511351cc5573ac413f853d6d2db12a89b462f6723c49076aec676dfe7"
+    },
+    "CV2-T-V-BANCO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "031feba5c8964d9ecce3c67bfc11daafa5d8dce523453302d6ee97dfa2da41c0",
+      "referencia_sha256": "8e1e8dd5e0b22ac0d2328cd7d895e7ac0055321a5f10bde157a197378f2c56e7"
+    },
+    "CV2-T-V-BANCO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "95ebc7892ea4ec76826f3c6e5d3cc8ec38205ed3ca4797b102c10f6af291443f",
+      "referencia_sha256": "3702b8dcca03ff2b06830d3bd3d97bbeba19fd5dea886be5fa275471b4aad3e2"
+    },
+    "CV2-T-V-BANCO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "2678de757210b0116b0b0786de63a63d6efcb30ff82bb9e58476bb277b52a6d2",
+      "referencia_sha256": "ac9dfec071310642d39d68caab916fc1d3139e1357c7b4d40369399afa076bb7"
+    },
+    "CV2-T-V-BANCO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "b6ac51d50d7871b2020d7623306f32f2e8ef5f4656469b4fde2592597eedb406",
+      "referencia_sha256": "8c20105d60b9d4e5908df56f67fb69157228a06c566a994a69f88600083a922c"
+    },
+    "CV2-T-V-BANCO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "8b01c2d12e89c2f3f642eb27df118d672c2add281dd8f4ff3ef1a425ed4f74bc",
+      "referencia_sha256": "4a4bd20e9d15020a281907c15d6a830af12c1327ae62a519ce76c56e9be40a15"
+    },
+    "CV2-T-V-BANCO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "1de9d61cef96853a1f593b3f70556dc797b63938c9079a442f98a9ab90945117",
+      "referencia_sha256": "048877e6efc3faf5bd64d1305704da307dbeb4ca903d52ab0187c35a1031cee3"
+    },
+    "CV2-T-V-BANCO-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "43d3abec3ddc54b5e595914e887d6f34fea37888fc91d2318c824652965cbad7",
+      "referencia_sha256": "a0923cc2157cc47e851765b3b10b19fc6ea9f73a20c4ecd3f10400a5ee2ad611"
+    },
+    "CV2-T-V-BANCO-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "a712f3d2d2cc0330d1aa52c32c4cc166bccf59d1db630e60171257e5e20f65a9",
+      "referencia_sha256": "7951448a400329152d1c0e637f6bb07519222495bd63031d26877eebf5c5fd53"
+    },
+    "CV2-T-V-BANCO-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "cf6997531a3eaa3f541a59aa1007db7f048bb90f16b1b17e485cb84068787484",
+      "referencia_sha256": "0f6a5ee062a93e51a073cf01b89eed3d48d5fe4b705a741b5dbb58baae71664b"
+    },
+    "CV2-T-V-BANCO-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "953e461436d9532b25be90c4dc1eccb7253e878f86185e35769842c5ff666090",
+      "referencia_sha256": "438802c10d3c98e9f4d4e644c5696b9d36bc40f38b8500c61313297a2e1c420d"
+    },
+    "CV2-T-V-BANCO-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "1f3b2805f1d58f60236c236a3385d565250659532c7928ede990582c4e4a936d",
+      "referencia_sha256": "9d6a00df13cf823d7ea8f2bffc7f671bb07e44d51b0be7fbdad40a274af2e827"
+    },
+    "CV2-T-V-BANCO-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "78b969ed91d01d810c56c13a7d1d3aef1d4442561cc9986621fe391bd625ab28",
+      "referencia_sha256": "f345a74c0b7bfaf7d743e11796786c335d5557b66a544761553ba5661f73bfa4"
+    },
+    "CV2-T-V-BANCO-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "98800c1fb04251ef7f411ee82386954ecfd19a183ae59d8382d3b4ace8eb2400",
+      "referencia_sha256": "bf84cdd72a03a22cd830cf9290008e967364f5f2548ad983548d3f0087a70cca"
+    },
+    "CV2-T-V-BANCO-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "2e0278ec6ddc7cd63e640379d7e05d6b314e48d9a6a6a248dac24dbc0bd13fb6",
+      "referencia_sha256": "d2bdb850669386095ac1958842bedc6b0b50d654a8e5f7dded9fd1284b443d58"
+    },
+    "CV2-T-V-BANCO-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "6bd361d52717891c5c938ed1d0f237f5ed19c2490d55e496af00887e5f06c332",
+      "referencia_sha256": "6ea2493c2fd131146c9e2004f2e63533b97c3b75353e114d252731a04cb7b2f8"
+    },
+    "CV2-T-V-BANCO-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "50c58bc548c2f4b085e22ef91652066c6f096091c0a732152bbb2c70883bf45b",
+      "referencia_sha256": "fccaf2180c338e8e3fca653afadcc7dc3d0f46b164d4b77591ea96314d042f02"
+    },
+    "CV2-T-V-BANCO-019": {
+      "particion": "test_reservado",
+      "texto_sha256": "8fe36707469648fce2e5d0f6bfe05b60f3d3880eeb6c1a89c71e341ed4ba51fd",
+      "referencia_sha256": "29bc891809ac79103691acf5c187fe61dba447b7571f7e9abb34848143fdb620"
+    },
+    "CV2-T-V-BANCO-020": {
+      "particion": "test_reservado",
+      "texto_sha256": "d929b0e625d414cacd312b25edc7d6f27d6215044fd89940a12bd2782e8568fe",
+      "referencia_sha256": "5f34b08a7846a4fd73f275f76fb10695590e68f9eef4c98df8bc654e9f669495"
+    },
+    "CV2-T-V-BANCO-021": {
+      "particion": "test_reservado",
+      "texto_sha256": "07550072b67971483ad87eb1a0c2fe56889b896721ba70b5ae10e7ec5fa3f184",
+      "referencia_sha256": "9a8b528b5a08d8afdaccfbf46ba2aa61fc8ae74663a805f93346637831c8be50"
+    },
+    "CV2-T-V-BANCO-022": {
+      "particion": "test_reservado",
+      "texto_sha256": "2c5509ffb8da9dadd4a314cc9b916ea2186545d2350afb38c4be2fa79cadbb43",
+      "referencia_sha256": "4c8be1035d083e8c62b67ed85283dabdeb9cb1e067b99e40d9e3a66231292e63"
+    },
+    "CV2-T-V-BANCO-023": {
+      "particion": "test_reservado",
+      "texto_sha256": "aea5b06779b4035082f0bd87f05426f646efb0cb929c3d628b4924c03f4c1aa4",
+      "referencia_sha256": "080ee6a7dfd2927c08e20bf1ad533d8bc5b34410753783fd43f81a65eb3a2792"
+    },
+    "CV2-T-V-BANCO-024": {
+      "particion": "test_reservado",
+      "texto_sha256": "87922a071a0431892ee1c1f3c6b7ccdbc4f9fab6a85d6ec2f4b8de0ef74fa415",
+      "referencia_sha256": "6aa84d9d2f1400e9869c67bd71050d8d7b10fb4c3f522d06cafa1ca2ed46b909"
+    },
+    "CV2-T-V-BANCO-025": {
+      "particion": "test_reservado",
+      "texto_sha256": "d36ae45859af5def9fc1a559938e19162edafb3679f9a352566b5023b7df2eec",
+      "referencia_sha256": "e5853de2e3d7620fed9cf34c35f9f335350114baa0fd87b5c8c949d75f6e74a0"
+    },
+    "CV2-T-V-FAMILIAR-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "21cdecef83af3afc365879239bcb96559cc18448a5997cfb0a95596cc70b3d30",
+      "referencia_sha256": "136ddc2df591f709ad315680b78ee4fd587af67392dc405e566d62be34ae7e83"
+    },
+    "CV2-T-V-FAMILIAR-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "ec62d8c32f2484be8e71ef7713ebb40a644430aa202c497f8cdb2a4048b9a166",
+      "referencia_sha256": "d48baee60b881a07a7c83b099d916d134a8191fce35a62e9363c5757c6a2a6f3"
+    },
+    "CV2-T-V-FAMILIAR-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "adc2620a2f92e3b4bab0cf2dec0ad055514287c48398e611eaeb0a19e59e5935",
+      "referencia_sha256": "ffd601b19c2b85e065249153d493b3fa8b32ee1e72521f10e8fbfe301566b81f"
+    },
+    "CV2-T-V-FAMILIAR-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "df5a57b209f96766a5eaacee5e3c24ddeb1f24ed572252172ee7b076696aeb2e",
+      "referencia_sha256": "36afba40b93a570776902850dfdec4444942105d0dbb0fecad537973751b8efa"
+    },
+    "CV2-T-V-FAMILIAR-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "d13a2698f624bac4886b91d739e276faa998df847251827edec8dc9c041b8493",
+      "referencia_sha256": "12c017f222abf11a6211b53eba5b41ecf2b4ad80faf583c6bb052bb77389075b"
+    },
+    "CV2-T-V-FAMILIAR-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "ad033732397d6a6081a3684f70a50aec8db366be2d481c7b99610f63fd094638",
+      "referencia_sha256": "0576e653b313ef9ca4e61dae9fea4ba568786e8bd78beb3da9c0dded02ebf188"
+    },
+    "CV2-T-V-FAMILIAR-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "746d16e80eb6cf2f4a8ede135c8a2b6712c79ee15a5fee78453a7716467aca78",
+      "referencia_sha256": "bbdac8a88b01f4fe80a09c649bb6ed0bbcdd4a528f5da1b227f717dba5ba004d"
+    },
+    "CV2-T-V-FAMILIAR-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "828d586e85e24394e1abfff2a9900c6df64a16f31a10c907b47679d6b6f01c9d",
+      "referencia_sha256": "9135b7bdb4751d7462aea42ca4ca43061a73c3a5e918a3d83e2447be966e7a02"
+    },
+    "CV2-T-V-FAMILIAR-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "5125ce4378bc953e4f38c5e226db88ff81dca79652570e17c6dcda17766d8e12",
+      "referencia_sha256": "c73f025858098ae701fe77cfbeaff73a04c445fa891105b6cb3d15a42923bb5a"
+    },
+    "CV2-T-V-FAMILIAR-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "baa95380a97b5acc7c9b24be48c70ec6a8f3999a81390ffccd9678a3743d4bc1",
+      "referencia_sha256": "80cc55a52a48ef3b717101b72be209f79ae13d3912b152697a5df0be4577d7ff"
+    },
+    "CV2-T-V-FAMILIAR-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "78028bec1869334c2298c1ba95a1e7b57e4179ba760558551bef643b76c594cc",
+      "referencia_sha256": "390f4d98aa02be761ec4f881990e3097d9e43a99627b45fb267b0ff520ef4630"
+    },
+    "CV2-T-V-FAMILIAR-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "4cbd934f5cccef6565efaa8c53467be4be4fb8cb8ba1a5801649f92c268492cd",
+      "referencia_sha256": "64871157bdaebcf5a041f224e8e353ccec12289af493176c2a920622eada3655"
+    },
+    "CV2-T-V-FAMILIAR-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "caf2768acb756d44d7031bb26aac10270b9fca93bb021ecddba8911b51e288a1",
+      "referencia_sha256": "9ca81ea88a8233d33a693da6d8951271f1e39fb979a28a4d1600b893e810cfda"
+    },
+    "CV2-T-V-FAMILIAR-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "257846ee030fe7bc604fc11b76b586826ccebce9078b2da86ec6dbb50cd856fb",
+      "referencia_sha256": "9a25df248cee32f4ce5f1e6fdaa9b1fd43499800177053c71be4a287327cdf55"
+    },
+    "CV2-T-V-FAMILIAR-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "82625ba45941b005aa4de9f2e117f7bac9c87ed5a7cb99b414f74334c6a96523",
+      "referencia_sha256": "06d0f158047313569d7c2c9933fccf338b1fdfcf9d4b7f0cf496e910f61a1bed"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "f3c25892750a5c0384f5b342f6530f7d646042b2919827d596be1eef2e5d8d9a",
+      "referencia_sha256": "4c2c2c820130442f89ae808e3d129e8b186dbdad103e18ad99c9528dafb9329c"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "265753b206bdc130b66bfc30b572e0288812486976d7d5aa2be0a120ccc3fae5",
+      "referencia_sha256": "323102612dce5f943e06b680a1a78c2f3132fea9b38e4d49c372cb7585069942"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "df8f92367538911ca560319489b932b47ad87b60262fa058e7b1bc696c5a9c44",
+      "referencia_sha256": "c783e3842c2ca4da4479e84d0b24b1534c47c89651ebe3c561d83626d6e210f5"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "e1619df6618ad218e566cdba06ead6e8a43c9171c3f3cd129acc36b9dfc439e6",
+      "referencia_sha256": "901d4dcd418a01e93751864b0e054c853850f4ca40d9422a448a5897fe1994d0"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "c583286792e11c38fefffbfdcf0ecf4f2d66d05c5dfc0ada157ddf5bccce448d",
+      "referencia_sha256": "699296e887cf5fe3b6a89cc460e7e56cc4a5c3283cd44cc1182551b9149a2e42"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "3faf17ae7a4cda9983c6ca3b307864c75bfed7ed0b0c6f8cc48987e690655827",
+      "referencia_sha256": "252114ae43dca4e8a6ef220e1b074352cdb7feb9998ccdcb9ac4f2aea14e30c6"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "c5abbb868f37c1f317406f99f61406afbe7c9621becace75f000a5383aff73e6",
+      "referencia_sha256": "b65639d17197baa58058ffd5b2d6970e852beefc4fc55708157788b6cb078d61"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "c1300f66451962679e3f23ab83f38b8b5d6311e15e436451f05e3682ff0ab9a2",
+      "referencia_sha256": "05630beac5226ed244f162ee1dda6f1af063154b2ba17fa9a566521e6f3e042b"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "981d2590f50bbea864f95c9448e1092b1fa20f713041daf31425f1f04a18a4c9",
+      "referencia_sha256": "3b2b5cf8914ac4c37652edb28d1a0670acf5c2e4688d62fd0df7d8fd65d73194"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "e53acc2dad5949d4f414d832cf9784ee8b2427606ecc667c7a83baf9372c2c2f",
+      "referencia_sha256": "ceabf8870f2e5d2e65698784d2638bd7eb16a616c804c905256b90e9cbfde23c"
+    },
+    "CV2-T-V-PREMIO-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "7aa19dede9458381308fd2eb61d2e6d46f35ae9713540fd2e0470f1487714637",
+      "referencia_sha256": "f9448e39254900d210dd504d81c8827ce53b35bac4eee40977bb1a768f0d86f2"
+    },
+    "CV2-T-V-PREMIO-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "656402675c0764a8e71eb6f9d02daf233b8983ec7e86e8d65ec4955f629f352d",
+      "referencia_sha256": "09c8205d5e10425df0322398e3d6798165c62f10740e345ab05bad868272f722"
+    },
+    "CV2-T-V-PREMIO-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "627505dbc557b8d852804e13f24e86215e06686bf4aa24661eb9788d27fa42d9",
+      "referencia_sha256": "3ff1ac31ede991f02389a64ec3fceec8af16cfe832898a07736675fdbe96b063"
+    },
+    "CV2-T-V-PREMIO-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "78ddafa1deb782350c684155a77f007a605dc4387cddf1dfef03c4a73b4c480f",
+      "referencia_sha256": "c9b12ecf2a7b772a672b449b8a8a3c60e59fb6df38fcbf957c5a327e24789c8b"
+    },
+    "CV2-T-V-PREMIO-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "4296366618c4524ca1daf0ccecf07e2e00b12dff14c1f9645542b1f669a1f7b1",
+      "referencia_sha256": "a8206208b2a9ac483e12c5ae437f8fe9608da37984b002c337579b1b55c5ace3"
+    },
+    "CV2-T-V-PREMIO-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "f7ebf95077dd18c765b41f56fe4d82d70400f5976e75ff1c6676a0287b0a99e5",
+      "referencia_sha256": "18aa6ac611174266d242fef7657fbd4ac5a9d9d2bf31e5510e7f650b6fb89857"
+    },
+    "CV2-T-V-PREMIO-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "40ef52a782e9d70075d6a82f360153d6235fef2e8fa1d9863495153c2624eda9",
+      "referencia_sha256": "7237111c031b211037c67d82114c0c66aa705207e92a1feae15d9468b6af2565"
+    },
+    "CV2-T-V-PREMIO-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "7a9d1105b37fceb9e1016ae81408e3afeee560cd92267a7e980c76cc4d787b0b",
+      "referencia_sha256": "75685e4eaec5822f186dc7bfe4cf423e59aa9bc3e8f04135ba9af11ec1199c16"
+    },
+    "CV2-T-V-PREMIO-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "399c9ac9cf3212606c14a8bbd14866aeeec0c06db7c918e3d0ea6a0bda24dce4",
+      "referencia_sha256": "4ec20402b387c22da7dc9aa7aa7e8bbe7e58d74da59363a50df7bdc91b6e23ed"
+    },
+    "CV2-T-V-PREMIO-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "c580c1ea06e9b31ab3ab98d0277dfcf8f8254c4b3da7d897e6b04849642093e1",
+      "referencia_sha256": "d1170819e747cc0c6870d47e803ad9e18c7b6bf77ef9ffa4698550d0623644d6"
+    },
+    "CV2-T-V-PREMIO-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "db0c9da8e358670bdb44d77840ae13b5d3f4dfa1770c3b0e96e8a5d5eec50006",
+      "referencia_sha256": "93f5f158bb243eefa7be44ae0dcce926cac2c86a878f9644231ccd5839ce413c"
+    },
+    "CV2-T-V-PREMIO-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "3efefd04bbe92a8af77c5f01633fd964e8e06ac31183165597563455f229a584",
+      "referencia_sha256": "75889d1e3e71c0f12fde1d940976be8c8088fcc75f3036b499481bbf33c4b1d2"
+    },
+    "CV2-T-V-PREMIO-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "b9d62160c155e0fa77e487d608d21da5e4559d5d09b1c1eeeeab3bca61031aa0",
+      "referencia_sha256": "3ecdf460f0f4593b16c893432807751f5bb37317ceef4ca379aa7852317581c3"
+    },
+    "CV2-T-V-PREMIO-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "3468c8932d7fb4c8c31ce83d59731ba1f6854919c219b3f7a071dbe584880c47",
+      "referencia_sha256": "e96b61fe286edf15c6f9fa533eda1eaf50518de05d6ba3263c363e05c68cb2ae"
+    },
+    "CV2-T-V-PREMIO-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "293d3df83c5ce4f1c846e50facb65d2c7c3cb2882bb1a5dc0ab712a2a09687be",
+      "referencia_sha256": "507c9255a0ccbdfa8096732407b2800a7c8c6d2f5073c3c721d7eef1dc883859"
+    },
+    "CV2-T-V-SOPORTE-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "945ae780120d14dd6f23f21cb8907ea9127dba4baa22dc0c7225a08228120b3f",
+      "referencia_sha256": "f1d9b456dbc78bb4b8d91525601200de0d59fc65052fa886c342e69a54109e90"
+    },
+    "CV2-T-V-SOPORTE-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "11396c6e6ea8a421b2052227c0a4b7de55d15f72751bf767a4167de298b556ec",
+      "referencia_sha256": "200a11f97e0f1278b944f241993923d712b107625807746c3725d8f8d3c54958"
+    },
+    "CV2-T-V-SOPORTE-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "a906da15c1dd59ae3e55734128b12bccabda6f372e974b5f6379ffe8d3685a3d",
+      "referencia_sha256": "3313103480a8d86e3d3a7da30e9de4e2616ca20ce251661db393ff1192482d08"
+    },
+    "CV2-T-V-SOPORTE-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "12ae07bdf2681265417254e2b883d9d40f2aa3ca80775f9d8e26174f32b4f5a6",
+      "referencia_sha256": "7e82b688319c7dc3bfd9cb782b17549d6b203180559a3e3892b9fc459c4078b8"
+    },
+    "CV2-T-V-SOPORTE-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "09f6857582e0344f60f9a66676349480bdb514655c9f8385fc95abd0a6e6e0a8",
+      "referencia_sha256": "0a704af0b482a74d5b0eaed84fc928b89d00a686351e1e93e4cad530b070a42a"
+    },
+    "CV2-T-V-SOPORTE-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "565fe377e3d0059e9698850558781c5153ea766f7d9054c570ebeac9715b8617",
+      "referencia_sha256": "acefc88ef79bd6f54bdfe8fd83a0ef0695cacedc8878e367d0f00cb92337bf43"
+    },
+    "CV2-T-V-SOPORTE-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "919d6019628afc3006193b0f8f49d3b6e04d8cb7218d25ebad260c525b683419",
+      "referencia_sha256": "ea1b6908b8267ec502e7786c24c6e4dd125c15037fe2d622d95f1cdb546f1b4c"
+    },
+    "CV2-T-V-SOPORTE-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "7815a661f6a8a2ce4852288cf0a99383ce683eaff7243fecd375bc32ab859608",
+      "referencia_sha256": "9ce993f78419a6799441408e6746b2c99e575bb967d64903c0e7dcf33c8668fd"
+    },
+    "CV2-T-V-SOPORTE-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "0206c012e67b1454a9797cb4cd63562d4e135a85e62f025301d776238f1da4d8",
+      "referencia_sha256": "81fffd3226b1ac4115bf83095ba0d45e7593a394831f1b4e411760284875cc9b"
+    },
+    "CV2-T-V-SOPORTE-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "5458c9d7cc300b7d5245974d4387d36feeed575fe9786ce2426e0673f4b90e6e",
+      "referencia_sha256": "89d9c938806dc3837ef9cebd933137ecb781837c8bc2b2781dded55155f27156"
+    },
+    "CV2-T-V-SOPORTE-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "cab512fdcd848fe41afe0648af11d51a5670e634742bfe1b11bd8e45996c0535",
+      "referencia_sha256": "566cc072604eaf971168005f2b0d54692045c861cd604cde2fa75d0e1e6b12fe"
+    },
+    "CV2-T-V-SOPORTE-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "79ec01c5875c957cd292fcb3a529542407f24d99cf0baf9af7fededd104d44b5",
+      "referencia_sha256": "9907615cd130cb27e2c042386095e78833348b507630166f8a45a2f216206875"
+    },
+    "CV2-T-V-SOPORTE-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "4a9361309b9aaa91daca96a6fdab5eb26e4c62d218adc37d708f035d563d5100",
+      "referencia_sha256": "145dc81d8476468c6733d362d6d31ae9937b777c0d53ddedee7ebeb43fbade48"
+    },
+    "CV2-T-V-SOPORTE-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "d8ca75aa7a3542572ee75fa47b81656434108dddce7e24eda8de6e01578224c9",
+      "referencia_sha256": "7b04bfd71be39ae241d4765fea3eb57d23ea9ede3bb0492cbef1e0fd68271236"
+    },
+    "CV2-T-V-SOPORTE-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "8aed4ba92c7f5705ec2885e3731911915a6e5a30c9d57dbf1895bcdd23e4c825",
+      "referencia_sha256": "97a50c6f3c9d0583905a005cd6b6b27a34d31110120cb8b494007ab9f2dcb301"
+    },
+    "CV2-T-V-SOPORTE-016": {
+      "particion": "test_reservado",
+      "texto_sha256": "0bc3a8b0515816681162c1fcf10c3acdc3c301937e0654fb4bcd032b6160433b",
+      "referencia_sha256": "aad1aa2c93a64fe729a92bd9ed604c09b3935390a5c1cc69765a18c1225495f7"
+    },
+    "CV2-T-V-SOPORTE-017": {
+      "particion": "test_reservado",
+      "texto_sha256": "05323c06c5b4938ff0f75b3dd615b70f142dabaff8f26a3d47f60511c5a626f5",
+      "referencia_sha256": "df881ccfbed0b457ef9ebbffcabd1da134d3c1261f110091d437e365ec3ee628"
+    },
+    "CV2-T-V-SOPORTE-018": {
+      "particion": "test_reservado",
+      "texto_sha256": "42c6fd6d76ab95febc430f770379269e7318e5de10d23d0250d2f5c4f0c46a1d",
+      "referencia_sha256": "e30e3023f7be0eb4d9b91593e02d6cf2c91c791bbad932a83f2451fbb8eb0688"
+    },
+    "CV2-T-V-SOPORTE-019": {
+      "particion": "test_reservado",
+      "texto_sha256": "8ff7f2198fab9a6ac57bdf0ebad5538c1b4c27d7411c5cc21301f1460e669dde",
+      "referencia_sha256": "e005ab91b5c80cd66d41eb7c15a930cffb455afe60e94712118f2269c3cf897d"
+    },
+    "CV2-T-V-SOPORTE-020": {
+      "particion": "test_reservado",
+      "texto_sha256": "df30060f5b25fec4dae19d320f40b37768cbbbd1b20d342eb73ec3904f6d5791",
+      "referencia_sha256": "1ee79c4e45dcf91bf2a74f464a31378daa7b803024609090e27b3154192baddb"
+    },
+    "CV2-T-V-WHATSAPP-001": {
+      "particion": "test_reservado",
+      "texto_sha256": "462bd4168cc959b7d88e9a0510e46d6d6d1fc66da966fa3944566380afcf8f9e",
+      "referencia_sha256": "5d127d9e7ba737ea5f55624c94b4e2227c2ca8f245b33c9a1eeb92b06fcd5164"
+    },
+    "CV2-T-V-WHATSAPP-002": {
+      "particion": "test_reservado",
+      "texto_sha256": "e778ca5b2d5d5878918534ec734b1de3646a06c139b2b78d9591e40a49140451",
+      "referencia_sha256": "1f786a7fb016b9f7a90fa6d4a42452b4b0a730a467333c9209ef6fcdb29d27b1"
+    },
+    "CV2-T-V-WHATSAPP-003": {
+      "particion": "test_reservado",
+      "texto_sha256": "c4bf856dd86b44a8f150c5393a78da15c8901a3cf6f4217cc2c75f4b7811e118",
+      "referencia_sha256": "2fee4f2e25795bbe66119140c06031dea23a04ee1e381b72d302cd23721494c9"
+    },
+    "CV2-T-V-WHATSAPP-004": {
+      "particion": "test_reservado",
+      "texto_sha256": "0b996a50859d343633f2086ff912b35077a04319dfa69c7ae5db2ce6f23c1e47",
+      "referencia_sha256": "a71ba26b38143659d77b713a0020fae3501a80619c2064aa4909891d3304757c"
+    },
+    "CV2-T-V-WHATSAPP-005": {
+      "particion": "test_reservado",
+      "texto_sha256": "cc8016a0edc88aed0f690d6b4e81c30217b5af3ce10c9c80c1171782ed7d4df3",
+      "referencia_sha256": "4429521de2fbdbb26ef932e1b59ee2727dfaccaac2a0444391ba1cd94c8d7327"
+    },
+    "CV2-T-V-WHATSAPP-006": {
+      "particion": "test_reservado",
+      "texto_sha256": "99effbf2de1ad10971829b37eadc66f35a0b3df875939fa97318d6a7e698a62a",
+      "referencia_sha256": "4e680a63952935b1beb4c0a16dc6a56f0bb5a7c10634459985036b68e66677cd"
+    },
+    "CV2-T-V-WHATSAPP-007": {
+      "particion": "test_reservado",
+      "texto_sha256": "7f6c74ac27daac8f22b80324fcf2289c2482499317bfa677d1c64fdd4741ce6a",
+      "referencia_sha256": "6e598277a1d1369ff227facb6978d14f678364f01320b498fd056799fcee7145"
+    },
+    "CV2-T-V-WHATSAPP-008": {
+      "particion": "test_reservado",
+      "texto_sha256": "7adfd41992fc9ac769e546756b127bbeefba8f9e36aa52191f03d041d749003b",
+      "referencia_sha256": "2293733fa0a65f97c0e7b057d86524aad94880a8f31caf2ec38bdd07ad43296b"
+    },
+    "CV2-T-V-WHATSAPP-009": {
+      "particion": "test_reservado",
+      "texto_sha256": "58f678d2b5db3d3b52e5334052792381f040b0c165aa819b59336cd42152b81f",
+      "referencia_sha256": "a3667a55f3bd7785959d6351161d99de7cbc385b3d62e21032127d53275f408b"
+    },
+    "CV2-T-V-WHATSAPP-010": {
+      "particion": "test_reservado",
+      "texto_sha256": "d8d398bfb234d38c84f56e96279741e8ccdc7c97470bdc69c6fbcb0065ddf807",
+      "referencia_sha256": "1601580defd144e3f55ddbd2a8bbe01b2dd8199784cd22f37b7584e8cba2941c"
+    },
+    "CV2-T-V-WHATSAPP-011": {
+      "particion": "test_reservado",
+      "texto_sha256": "95e591f2ca00a4ebfb82cdf502edd6974839713b233d907e8cc54de3fdd9c838",
+      "referencia_sha256": "31ab647db693d87f049780850b1ca35234ace26a28922385aad54c1ececa9bb8"
+    },
+    "CV2-T-V-WHATSAPP-012": {
+      "particion": "test_reservado",
+      "texto_sha256": "5fde0f4b354a11a9bbf34653ad44d4083e3688b59ee6283845c457c7bd86b454",
+      "referencia_sha256": "9cfa9d691f49fe7cb9ad3b356b9a1e4ab35436faa6d06c060cfde802e609495d"
+    },
+    "CV2-T-V-WHATSAPP-013": {
+      "particion": "test_reservado",
+      "texto_sha256": "2c106087af1da5ceada6216d0cea74cff2ad273e015fa90596dcd7bb8811217b",
+      "referencia_sha256": "77ba7f66089ad20a1a3c5e2bc48b69fbe66214e65e1a2d1f506f6efb74353e47"
+    },
+    "CV2-T-V-WHATSAPP-014": {
+      "particion": "test_reservado",
+      "texto_sha256": "242aada111f829f8c52c4b21c6754c4418076a9f9e2c0e0feddfc81e7a566c5f",
+      "referencia_sha256": "bece6e9287497581ea723cf09ae7a3b35685f5506964b5c13a1c0921a0187b7e"
+    },
+    "CV2-T-V-WHATSAPP-015": {
+      "particion": "test_reservado",
+      "texto_sha256": "3cc781a0022a8e120018d2ea7012ca4e405450e789698074b65005ebf141ae86",
+      "referencia_sha256": "8c3645d3a3f7b21b39a06ff2745a5adc7cc3a061c21e36cc89bbbb97ca2e1234"
+    },
+    "LAB-acceso-remoto": {
+      "particion": "desarrollo",
+      "texto_sha256": "abbdb60023a5c6e49dc9c1738ef2f881e457ec406edb21977f86aa6648ef1592",
+      "referencia_sha256": "c53010ba3bd1765320509573f0a7f892163a51ed9f0d965ff62ef0baeb5c5d9d"
+    },
+    "LAB-acceso-remoto-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "3c11fa1e1f388c953c2afd0929d7be3f8f1c2d8f8dbf254f3aae74129c7ed9b6",
+      "referencia_sha256": "1ccbb0950cade553140910d7d65850010241394af5687a283fb60f0a0a422c15"
+    },
+    "LAB-anses-beneficio": {
+      "particion": "desarrollo",
+      "texto_sha256": "1dbe40e4c2e4dd59bde0fb7ac2ab71c6343e5bca103c782b31bac20ad8ddccad",
+      "referencia_sha256": "3206dd05d65a51d925f718f922d91e3608ebd5dd89de46d18b2303678d919a07"
+    },
+    "LAB-anses-beneficio-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "59df1a67abcc885e0471a7bb16bab3638b3461528918a8908a2c004e6608b79f",
+      "referencia_sha256": "4777b6a21e85b0d51d5c7b2da0e0038641f0840ac714591642ef5a6509548e73"
+    },
+    "LAB-anses-canal-oficial": {
+      "particion": "desarrollo",
+      "texto_sha256": "b17f2a7515ced50890ca548a2aaea2d9ed0971365f9cd116d0965108bd2920d7",
+      "referencia_sha256": "c95a70ce04958e8a00f6035161e577eab8d73d54dafc93603c7eb1989da2fdcb"
+    },
+    "LAB-arca-canal-oficial": {
+      "particion": "desarrollo",
+      "texto_sha256": "fa29e387532b00e30406b14611951e5a0d9846fdddf575d8f84667bd1ede9529",
+      "referencia_sha256": "046d1ea6cf0d2e9e3b805c42a3485611aa4f03a51a38b7b39a2a15e40063d1af"
+    },
+    "LAB-arca-deuda": {
+      "particion": "desarrollo",
+      "texto_sha256": "56bf96377060bb3083f461275a296c8e33a60fc2e9b36f6d356e52ea42553ae9",
+      "referencia_sha256": "56804c016001f5191ce3e2bf5ff2080d1640afe5ab511f34726024104913df09"
+    },
+    "LAB-arca-deuda-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "f77bf6a51727318ee6358d1f15ef75ef6047dda05db1e82062da980f557f8b1c",
+      "referencia_sha256": "779b19534bab625e610a34cc1813f0066ebbec1909b63b35d282cdae0d691694"
+    },
+    "LAB-banco-app-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "915ce0b33ce326922917cfee477b06680d1b17957a85257d399ad3f9b9046247",
+      "referencia_sha256": "c316742f44bda77c87f89c13d0ed86f70d9aa05daa967a5773f31623c50f5d63"
+    },
+    "LAB-banco-codigo": {
+      "particion": "desarrollo",
+      "texto_sha256": "bfaf844390c391abb385f521a3a4a35afbf19b73566bf6ab3181671f78878191",
+      "referencia_sha256": "21a80cb01103b8c561322415dd95184004d9e20fab224295739dc873b46c3dcd"
+    },
+    "LAB-banco-codigo-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "a23180a44841e9400398fc8455c7bbeebe182c66210fc3285263dd163cb2bc29",
+      "referencia_sha256": "fa64dc5ca0b39cbb48dfbdf507a8857db75544061e8b94556e23305f58ce688f"
+    },
+    "LAB-banco-gasto-sin-pedido": {
+      "particion": "desarrollo",
+      "texto_sha256": "710720c289b5b209dd1603477682849f0dd40dec0f92c5dacf0b873e9186c3b9",
+      "referencia_sha256": "4c8319c39001aa406c43b00aabf9872154d7861a8e1b2c32e26bd56907f4b148"
+    },
+    "LAB-banco-niega-el-codigo": {
+      "particion": "desarrollo",
+      "texto_sha256": "5234e0f0954246df489f4aba37f7be5f6b2cda1982f3e80998b3505b903376ce",
+      "referencia_sha256": "6ba816235c2a52c4377fab6eb6d3f76fb773ac13b58dc6cb6fb9c35beb0fb471"
+    },
+    "LAB-banco-numeros-sin-clave": {
+      "particion": "desarrollo",
+      "texto_sha256": "336741e4a9b815313a47800c90063331cb7236c3361cf6d5a81342cb9d0d8d86",
+      "referencia_sha256": "24f22a698c63683695d0d0c6cf3b9069afed4ca4afc7d11d845037534605dbbd"
+    },
+    "LAB-banco-revisa-app": {
+      "particion": "desarrollo",
+      "texto_sha256": "a5575307e6144a19507ca0ff93e2f875f98bc2e92eae8b95cbf96b7c621d0619",
+      "referencia_sha256": "d2e9b7519a557cb1873bbbbeac8db882a30efb474d58ccb6cdee07bc6c03cb4d"
+    },
+    "LAB-digitos-sin-palabra": {
+      "particion": "desarrollo",
+      "texto_sha256": "eac0d9632aeb975264fe90e294406fc62e309fe2ed07f6185400f32542077338",
+      "referencia_sha256": "77b8ad49fe4f0ef350bec8bbf6fcb45185ebef0bbb5f6ebc4daf494d4702cefd"
+    },
+    "LAB-familiar-llama-vos": {
+      "particion": "desarrollo",
+      "texto_sha256": "a408533b543156f3cd3a525f4988de645b57a131e854206485a96014e54daa8d",
+      "referencia_sha256": "773916096d522feba5ceefe97eb1ce9f46a6a85ec83996bf8f775ec5dae5c6ed"
+    },
+    "LAB-familiar-peligro": {
+      "particion": "desarrollo",
+      "texto_sha256": "feab2aa7b4ec9b957c8f30919bdbcf8f8d30e2f67216aa780efa8b966fd126e9",
+      "referencia_sha256": "8120edb15628934f2b7d2cbda2b660e36d2b21d1d1bc70e283c50e05926ba56d"
+    },
+    "LAB-familiar-peligro-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "1f68006dfc825131cd2bd5223fa91c03ed73e2f2455434e7327a983a215a311c",
+      "referencia_sha256": "76baf686fe5dc67448d6ac23e319556c77c3ce06316ffc03a5e1b218872b2190"
+    },
+    "LAB-giro-sin-plata": {
+      "particion": "desarrollo",
+      "texto_sha256": "5e124d7fbb6de63116f3a778cbe073260624918b20a0e411e893a502174a4c79",
+      "referencia_sha256": "9ecbdbd11733a04d8bfdfee7ac0e82788380752438383b9f769ec5afef89de8c"
+    },
+    "LAB-mensajeria-no-pases-nada": {
+      "particion": "desarrollo",
+      "texto_sha256": "21cbcde55261624568ad9f4430002b99ce7f54db4f2ba33511cf1fbe69ebec41",
+      "referencia_sha256": "eb44dddc95c10e5b804145830f830491aef64c377dd076414c5adb3c853f82ae"
+    },
+    "LAB-no-bajes-nada": {
+      "particion": "desarrollo",
+      "texto_sha256": "786d0708380936691fde1ba88f80dbe723f6562c274f1a0d5120f94dd7a191bc",
+      "referencia_sha256": "e5ce5b8f5f059da91f0ca2cda1c812eba453796f0edc48f8b2ba212db2b46546"
+    },
+    "LAB-pantalla-sin-programa": {
+      "particion": "desarrollo",
+      "texto_sha256": "8e2f69c90446ade906f88c16c6ac1fcefe0530d983aea197d9cf0f5ba01761b6",
+      "referencia_sha256": "8c0658f0f646f505a556a3adcb780f0e6fa5ead5b5bff3d75f29b102810dc487"
+    },
+    "LAB-portero-codigo-puerta": {
+      "particion": "desarrollo",
+      "texto_sha256": "1d1a5dc0d307d9742d01ff9a04005f04e6d801dd49a07875182a225f346dbf41",
+      "referencia_sha256": "c44bd3df12ee52b65069ef416849ef6f1506c094f7421bf8b82d00ed321836dc"
+    },
+    "LAB-whatsapp-codigo": {
+      "particion": "desarrollo",
+      "texto_sha256": "9c3504a055060d623b1cf39078694418bd3ceb75c14f1e7ed1d911d11bdf5e00",
+      "referencia_sha256": "82981ceb530d25c0c42cdbb3074e125b19c74a13ea71006546e9f7c7f127b830"
+    },
+    "LAB-whatsapp-codigo-parafrasis": {
+      "particion": "desarrollo",
+      "texto_sha256": "ab663e341dbf93442f5314a7a6216c65fd18b093db7366de6f896e904be09ddd",
+      "referencia_sha256": "7cb04635b6d3e01e71d1c669c6a93ee7b5271d8f7c43011e41780837a9ec8af6"
+    },
+    "LG-BANK-VERIF-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "0ff25c270609ce3803e3845853d205d25aa54eed33e96c85f3becf05a56b4edf",
+      "referencia_sha256": "1f171a95f83423b017f51113554aca444fe7e70de41344dc91de7315d0327648"
+    },
+    "LG-FAMILIAR-LLAMADO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "9bfe1a2fb98c07605c428c442c7eea1910c04f0b0add9e933937fe602b959fa7",
+      "referencia_sha256": "58be3e3a597ffdcddfea758089fe5f54cb8d1106d57a91e28de4bade225143d7"
+    },
+    "LG-ORG-TURNO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "75d820b85eec9b4595f5db3b64691e1669ea47f0710d3b8eb8aeedb469dd3052",
+      "referencia_sha256": "977be95cc77c7c1b12d2eee8edcfe4f918a5399198e58d21cbf4f61eedf366cd"
+    },
+    "LG-PREMIO-CONSULTA-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "6890873d49f488272394371e08cefcea3c3a1b0d05da03f5242f2c80dd24fb4d",
+      "referencia_sha256": "77c40b6a75cdb4adb59841c2c0a8c10e34f55fab5b099a8a620daab9e1053891"
+    },
+    "LG-SUPPORT-INFO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "7a871ce393b68837e0d425f9a7be311c5109ebac1e4b6ad62d7d85a000169dc0",
+      "referencia_sha256": "2a074eb89ffb16f13ff56955638e34f93cfaa785fd63b4fe265812dc60ffaca0"
+    },
+    "LG-SUPPORT-INFO-01-e02": {
+      "particion": "desarrollo",
+      "texto_sha256": "bd004ebe89fed558533af1de1d4750dc6077267a0ed41c206500bc0e52cc3894",
+      "referencia_sha256": "b2e3daf03db86250615e7956669a749433e7f99c995eec6ebe120aae473be759"
+    },
+    "LG-WA-CONSULTA-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "e587a7e119ea41d4447e72f870392bad2845a47e6428c39fcfc84ba18cc6b0d2",
+      "referencia_sha256": "80181c691758384d93989a272fa5691edea7349d0de3f3776d63f39616aeaa12"
+    },
+    "SC-CLAVE-CAMBIO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "fc2ba2e80855b40a3db355fab8c441d850b65519891259aaffd3abc52a0ffcf9",
+      "referencia_sha256": "b4d8daeb06e82e87e854bb4a9d549c3a302352667e610d4ee1b2bda29c9dec25"
+    },
+    "SC-FAMILIAR-DINERO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "ca983cbec39404771a2e97f50f302ac855299e3c2dbf86aacf5526599856ca1f",
+      "referencia_sha256": "e0f40734fdec2294129d11afa3addf741b70e5632135633e23e3f9c6c54519f2"
+    },
+    "SC-ORG-BENEFICIO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "c1aa9aa10c9d977c618a7257b8bfcc720d38e6317baa0b56ed13b21137329915",
+      "referencia_sha256": "71f7498b4f73227224ea84fa6880fba3f1c45504043b89bac7e8bcec598d71ae"
+    },
+    "SC-PREMIO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "c395af5186c2e49b176b87e6a3ab02eec0d04b0816f148757656aa935a7b8e67",
+      "referencia_sha256": "02177805718fdd6cb4462f87682307d949b7fbcc40fe3c9365bcadff0fb7df80"
+    },
+    "SC-SOPORTE-CLAVE-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "a9fbc8f4029b1aa357397972fc3c2d93e4d2cd1534f9bc08c9b221b486ee743e",
+      "referencia_sha256": "c9cb289fda3e9690cd82c893abc7e1f5d9a844d200e13a3643ec0c98152dcd8d"
+    },
+    "SC-SOPORTE-REMOTO-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "f9986a5f33faf52d8c408fe98062818884c24dec12885aafb57b4002a9ada111",
+      "referencia_sha256": "81d22d068c3ae4182381a2837bb16ff3ef529fe44b68a58c6f544ef9b153cbde"
+    },
+    "SC-WA-CODE-01-e01": {
+      "particion": "desarrollo",
+      "texto_sha256": "f13b4b33a64d33d8baa44fe0e7cc57f217f99d14b2cd685ee6244c4681bc4d7a",
+      "referencia_sha256": "433ab214be80eb83e446ab5edb44ac477c8a772a47d97af0e962e24a8c67ad8a"
+    },
+    "TR-01-pedido-indirecto-digitos": {
+      "particion": "desarrollo",
+      "texto_sha256": "676b7839fa6bc4eb35a075d766343d92c18e6595754f4dabd36dad88f5c2cad3",
+      "referencia_sha256": "6a9cf4bc91f737317d7d4827493091d7533d49ae27083dc4fc7ccdb61968e2ee"
+    },
+    "TR-02-codigo-del-candado": {
+      "particion": "desarrollo",
+      "texto_sha256": "66fff3c538daa3cba002c402963833a6d753e521adc4419e3112d225e6fd0e64",
+      "referencia_sha256": "225a69c45e25ecd23d8cf262ae0e075aa41b2dbf1ab84f28f130c8c8cf98ac7d"
+    },
+    "TR-03-negacion-y-consejo": {
+      "particion": "desarrollo",
+      "texto_sha256": "035be565ed66795b0f4476f3e5779e85f0cbef1b8230513d41f7d3a55942882d",
+      "referencia_sha256": "7d6d4fc25eaaaa12113932da91b48784843d5357d821b1e5685b2c83328a016b"
+    },
+    "TR-04-pedido-tras-charla-larga": {
+      "particion": "desarrollo",
+      "texto_sha256": "7b73594c98f6bc57a325eb9141b4cdd680746ba4ac7936f1bec9b0c97cd5cd1c",
+      "referencia_sha256": "6be9f8c033678cf3ee702c0b5d86e08b9b0f57c1d714ca705f64b1f6c49217b5"
+    },
+    "TR-05-asado-con-transferencia": {
+      "particion": "desarrollo",
+      "texto_sha256": "a47dbee0f5a8c5c59ecfba926cfa76585ca7a08d77baf74021a78e31dc7d89dd",
+      "referencia_sha256": "6110fbec4f630af61c1b7658e1bd90c29abe8fd3e9879274c41fbc75ad4429ae"
+    },
+    "TR-06-banco-alerta-legitima": {
+      "particion": "desarrollo",
+      "texto_sha256": "eff36493e443525dd1fe87a7e15ed8ce3a5379c1670b77fa03683e0281e836b8",
+      "referencia_sha256": "e6890b7e4b6048b39c11de099be811d3f1eb3020183245ce1a9b5bf602d51b30"
+    },
+    "TR-07-pedido-partido-en-dos-lineas": {
+      "particion": "desarrollo",
+      "texto_sha256": "ebe24b27f413c6583b86ba258eb157f1f9c92e567ee6b6764b42f97b845c555d",
+      "referencia_sha256": "3c5bd0132b6ad314194de264132e9b1c5b0871a3545cf65f6ed52ae5d834dc42"
+    },
+    "TR-08-frase-cortada-candado": {
+      "particion": "desarrollo",
+      "texto_sha256": "ad03a06952b2db74912b3b9451b4a536a8307c21118bbef1bf433ef24631a7ab",
+      "referencia_sha256": "8b418d9387e541d9d21f80ae5a0e199da8744a69ad2bd4594e37a6daae52c285"
+    },
+    "TR-09-victima-se-niega": {
+      "particion": "desarrollo",
+      "texto_sha256": "3768ac43c750dd33823922739885aa8dec6a47aa0a44014f0900bee593a6bf21",
+      "referencia_sha256": "6d1f5b798028b5460c56aac5054c253fba6775ba316a3fe877ecb03a1f0ee825"
+    },
+    "TR-10-ofrecimiento-inducido": {
+      "particion": "desarrollo",
+      "texto_sha256": "381b278ac0e7128446d921499c4a059182093e8a8ca261ccbc5b9201e9bc8387",
+      "referencia_sha256": "3aeb211e43254cdd22c0fb66e6a7ac781f240f8b554d884525f9da824260a06a"
+    },
+    "TR-11-familiar-real-pide-plata": {
+      "particion": "desarrollo",
+      "texto_sha256": "a6e867d07e90d9b2687b5b3b5582e330f8713aaff8e0b21bd8ef691095ae774a",
+      "referencia_sha256": "0bed2fd5e67c2b0733c9be10238050970caa862dabf22eb5c6f4be7f1e162b83"
+    },
+    "TR-12-corta-antes-del-pedido": {
+      "particion": "desarrollo",
+      "texto_sha256": "4dd762fc0531a0677764410857196df4453e7153b6286763a1fb735b988202d3",
+      "referencia_sha256": "1ab5533a53462cfe6b12e147e3ecab1608653c8104ae6167877c7493d134d82e"
+    },
+    "TR-13-turno-medico-pide-dni": {
+      "particion": "desarrollo",
+      "texto_sha256": "5f87eeccc837367ce270401acee1c76da081cf7e3b767839dde9d4583f998909",
+      "referencia_sha256": "147a55720ce0f33fa516a30314809fbcc0961560e672452711427f9dd8d0305d"
+    }
+  },
+  "revision_tecnica": {
+    "id": "r02",
+    "fecha": "2026-10-21",
+    "autorizacion": "Pedido de Luciano en la conversación: mejorar los casos necesarios y corregir las inconsistencias de la revisión.",
+    "estado": "propuesta sin discutir; revisión técnica de candidatos, no adjudicación humana ni protocolo D08 aprobado",
+    "anterior": {
+      "git_commit": "acdf4642073bbee0fea4d2d8a2fe5ea819c51527",
+      "ruta": "experiments/slm-directo/casos/MANIFIESTO-CORPUS-V2.json",
+      "sha256": "fab60ea3ee3bb498926406f8597a8f34efcd3415414269b0f2104bbb3cd27bfa"
+    },
+    "casos_modificados": {
+      "CV2-D-L-BANCO-001": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-002": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-003": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-004": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-005": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-006": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-007": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-008": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-009": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-BANCO-010": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-DELIVERY-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-DELIVERY-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-DELIVERY-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-DELIVERY-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-DELIVERY-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ESCUELA-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ESCUELA-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ESCUELA-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ESCUELA-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ESCUELA-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-FAMILIAR-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-FAMILIAR-002": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Explicación concreta de reparto, saldo y transferencia legítima.",
+        "Explicitar por qué paga ahora después de haber ofrecido pagar a la noche.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-FAMILIAR-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-FAMILIAR-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-FAMILIAR-005": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Explicación concreta de reparto, saldo y transferencia legítima.",
+        "Diálogo natural al confirmar que el aporte acordado está saldado.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-MEDICO-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-MEDICO-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-MEDICO-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-MEDICO-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-MEDICO-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reemplacé el dictado del teléfono completo por confirmación de la terminación 0026 ya cargada.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ORGANISMO_PREVISIONAL-001": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ORGANISMO_PREVISIONAL-002": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-ORGANISMO_PREVISIONAL-003": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-PREMIO-001": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-PREMIO-002": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-PREMIO-003": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-SOPORTE-001": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-SOPORTE-002": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-SOPORTE-003": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Quité “inventada” de la serie del router.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-SOPORTE-004": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-SOPORTE-005": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-TRABAJO-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-TRABAJO-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-TRABAJO-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-TRABAJO-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-TRABAJO-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-WHATSAPP-001": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Quité “inventada” de la marca del teléfono.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-WHATSAPP-002": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-WHATSAPP-003": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-WHATSAPP-004": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-L-WHATSAPP-005": [
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Quité “inventado” del modelo del teléfono.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-D-V-BANCO-002": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-004": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-006": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-007": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-008": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-009": [
+        "Eliminación de alternativa genérica duplicada en notas; se conserva la duda concreta D07.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-010": [
+        "Eliminación de alternativa genérica duplicada en notas; se conserva la duda concreta D07.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-011": [
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-BANCO-012": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-FAMILIAR-001": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-FAMILIAR-002": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-FAMILIAR-004": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-FAMILIAR-005": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-FAMILIAR-006": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-ORGANISMO_PREVISIONAL-001": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Corrección de continuidad, acciones observables y datos ficticios expresados naturalmente.",
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-ORGANISMO_PREVISIONAL-002": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-ORGANISMO_PREVISIONAL-003": [
+        "Eliminación de alternativa genérica duplicada en notas; se conserva la duda concreta D07.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-ORGANISMO_PREVISIONAL-004": [
+        "Eliminación de alternativa genérica duplicada en notas; se conserva la duda concreta D07.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-ORGANISMO_PREVISIONAL-005": [
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-ORGANISMO_PREVISIONAL-006": [
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-PREMIO-001": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-PREMIO-002": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-PREMIO-003": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-PREMIO-004": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-PREMIO-005": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-PREMIO-006": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-SOPORTE-001": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-SOPORTE-002": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-SOPORTE-003": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-SOPORTE-004": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-SOPORTE-005": [
+        "Eliminación de alternativa genérica duplicada en notas; se conserva la duda concreta D07.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-SOPORTE-007": [
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-SOPORTE-008": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Alineación del vocabulario y de la descripción de partición con el formato vigente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-WHATSAPP-001": [
+        "Corrección de descripción/resultado para que coincida con el diálogo y la referencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-WHATSAPP-002": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-WHATSAPP-003": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-WHATSAPP-004": [
+        "Eliminación de alternativa genérica duplicada en notas; se conserva la duda concreta D07.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-WHATSAPP-005": [
+        "Eliminación de alternativa genérica duplicada en notas; se conserva la duda concreta D07.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-WHATSAPP-007": [
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-D-V-WHATSAPP-008": [
+        "Descripción específica y límites de evidencia para un escenario sin pedido; no adjudica D07/D08.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-L-BANCO-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-009": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-010": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-011": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-012": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-013": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-014": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-015": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-016": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-017": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-018": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-019": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-BANCO-020": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-DELIVERY-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Eliminé la repetición exacta de la línea 4; revisé/recalculé índices de evidencia y referencias a líneas.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ESCUELA-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-009": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-010": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-011": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-012": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-013": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-014": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-015": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-016": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-017": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-FAMILIAR-018": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-MEDICO-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ORGANISMO_PREVISIONAL-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ORGANISMO_PREVISIONAL-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ORGANISMO_PREVISIONAL-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ORGANISMO_PREVISIONAL-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ORGANISMO_PREVISIONAL-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-ORGANISMO_PREVISIONAL-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-PREMIO-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-PREMIO-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-PREMIO-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-PREMIO-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-PREMIO-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-PREMIO-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-009": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-SOPORTE-010": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-TRABAJO-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Eliminé la repetición exacta de la línea 5; revisé/recalculé índices de evidencia y referencias a líneas.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-001": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-002": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-003": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-004": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-005": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-006": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-007": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-L-WHATSAPP-008": [
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Reescribí que_prueba para que explicite la dificultad concreta y cite evidencia del diálogo, diferenciándola de situacion."
+      ],
+      "CV2-T-V-BANCO-001": [
+        "Eliminación de turno idéntico consecutivo y remapeo de evidencia.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-BANCO-002": [
+        "Corregir el código citado en notas para que coincida con el dictado ficticio del diálogo."
+      ],
+      "CV2-T-V-BANCO-003": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-BANCO-005": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-BANCO-006": [
+        "Corrección técnica de coherencia narrativa, descripción y anclaje de referencia; sin ejecución de detectores.",
+        "Se eliminó el salto entre negativa y entrega; el pedido de efectivo sin recibo y la entrega declarada ahora concuerdan con T_R/T_C y que_prueba.",
+        "Mostrar el cambio de decisión antes de la entrega de efectivo, en lugar de un salto inexplicado tras la negativa."
+      ],
+      "CV2-T-V-BANCO-007": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-BANCO-008": [
+        "Corregir el código citado en notas para que coincida con el dictado ficticio del diálogo."
+      ],
+      "CV2-T-V-BANCO-009": [
+        "Corrección de continuidad, acciones observables y datos ficticios expresados naturalmente.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Se alineó que_prueba con el ingreso del PIN indicado por T_C y se hizo explícito que se usa una ficha ajena que contradice la app habitual."
+      ],
+      "CV2-T-V-BANCO-011": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-BANCO-013": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-BANCO-015": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-BANCO-017": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-BANCO-019": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-BANCO-020": [
+        "Reescritura de coherencia narrativa y anclaje de evidencia al diálogo.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-BANCO-021": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-BANCO-023": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-BANCO-025": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-FAMILIAR-001": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-FAMILIAR-002": [
+        "Corrección técnica de coherencia narrativa, descripción y anclaje de referencia; sin ejecución de detectores.",
+        "Se quitó la confusión transferencia/retiro de efectivo; el alias a nombre de tercero, la solicitud de transferencia y su confirmación quedan alineados."
+      ],
+      "CV2-T-V-FAMILIAR-003": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-FAMILIAR-005": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-FAMILIAR-007": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-FAMILIAR-008": [
+        "Corrección de continuidad, acciones observables y datos ficticios expresados naturalmente.",
+        "Se mostró el número nuevo recibido por mensaje con terminación 6842; T_C confirma que B removió al administrador conocido y agregó el desconocido.",
+        "Actualizar la sinopsis con la forma y el alcance de la entrega expresada en el diálogo."
+      ],
+      "CV2-T-V-FAMILIAR-009": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-FAMILIAR-011": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-FAMILIAR-012": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-FAMILIAR-014": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-ORGANISMO_PREVISIONAL-001": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-ORGANISMO_PREVISIONAL-003": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Distinguir cumplimiento del primer pedido y rechazo de una solicitud posterior.",
+        "Se reescribió el contexto y se distinguió el cumplimiento completo del primer pedido de nombre/fecha del rechazo posterior a entregar documento."
+      ],
+      "CV2-T-V-ORGANISMO_PREVISIONAL-005": [
+        "Corrección de continuidad, acciones observables y datos ficticios expresados naturalmente.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Se ajustó T_C/nota para describir solo entrega de prefijo y sufijo; se explicitó la falta de constancia y el desaliento a verificar por portal."
+      ],
+      "CV2-T-V-ORGANISMO_PREVISIONAL-007": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-ORGANISMO_PREVISIONAL-008": [
+        "Corrección de continuidad, acciones observables y datos ficticios expresados naturalmente.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Se divulga el documento completo ficticio de un tercero, se rechaza el domicilio y se deja abierta la duda D07 sobre cumplimiento del pedido compuesto.",
+        "Actualizar la sinopsis con la forma y el alcance de la entrega expresada en el diálogo."
+      ],
+      "CV2-T-V-ORGANISMO_PREVISIONAL-009": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-PREMIO-001": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Se reforzó la señal observable de pedido de DNI/fecha por canal telefónico no verificable; la negativa queda sin cumplimiento."
+      ],
+      "CV2-T-V-PREMIO-003": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-PREMIO-005": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-PREMIO-006": [
+        "Corrección técnica de coherencia narrativa, descripción y anclaje de referencia; sin ejecución de detectores.",
+        "Se eliminó la contradicción entre crear una clave nueva y pedir la contraseña existente; se conserva la negativa."
+      ],
+      "CV2-T-V-PREMIO-007": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-PREMIO-008": [
+        "Corrección técnica de coherencia narrativa, descripción y anclaje de referencia; sin ejecución de detectores.",
+        "Se convirtió el pedido aparentemente ordinario de domicilio en un formulario de número desconocido para un obsequio no reconocido; se conserva el rechazo."
+      ],
+      "CV2-T-V-PREMIO-009": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-PREMIO-011": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Se reemplazó la verificación aparentemente ordinaria por un formulario de celular desconocido antes de publicar resultados; se actualizó T_C a null por rechazo."
+      ],
+      "CV2-T-V-PREMIO-013": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-PREMIO-015": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-SOPORTE-001": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-SOPORTE-003": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-SOPORTE-005": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-SOPORTE-006": [
+        "Corregir el código citado en notas para que coincida con el dictado ficticio del diálogo."
+      ],
+      "CV2-T-V-SOPORTE-007": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-SOPORTE-009": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-SOPORTE-011": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-SOPORTE-013": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-SOPORTE-014": [
+        "Corrección técnica de coherencia narrativa, descripción y anclaje de referencia; sin ejecución de detectores.",
+        "Se hizo observable el riesgo de reasignación desde una cuenta de proveedor y la instrucción de ocultarlo a recepción; B rechaza compartir correo."
+      ],
+      "CV2-T-V-SOPORTE-015": [
+        "Desvío observable del alcance del soporte; cumplimiento previo y revocación posterior diferenciados.",
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Se corrigió que_prueba y se hizo visible el desvío: diagnóstico de solo lectura frente a permiso de control total y exportación de usuarios."
+      ],
+      "CV2-T-V-SOPORTE-017": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-SOPORTE-019": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-WHATSAPP-001": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva.",
+        "Corregir el código citado en notas para que coincida con el dictado ficticio del diálogo."
+      ],
+      "CV2-T-V-WHATSAPP-003": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Se corrigió la frase con polaridad ambigua y se alineó la nota de T_C con el código ficticio 299127 leído."
+      ],
+      "CV2-T-V-WHATSAPP-005": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-WHATSAPP-007": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-WHATSAPP-009": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-WHATSAPP-011": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia."
+      ],
+      "CV2-T-V-WHATSAPP-013": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ],
+      "CV2-T-V-WHATSAPP-015": [
+        "Diversificación de quién habla primero; reasignación completa de A/B y desplazamiento de marcas/evidencia.",
+        "Enlaces a las decisiones abiertas que gobiernan las referencias y la reserva."
+      ]
+    },
+    "alcance": {
+      "casos": 254,
+      "textos": 95,
+      "referencias": 254
+    },
+    "no_ejecutado": "No se ejecutaron detectores ni se usaron resultados de test para estas correcciones. revision_humana permanece false."
+  }
+}

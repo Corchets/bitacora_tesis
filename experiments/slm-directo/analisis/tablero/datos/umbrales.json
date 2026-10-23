@@ -1,0 +1,12 @@
+[
+ {
+  "umbral": "Objetivo",
+  "p95_s": 1.5,
+  "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md, gate de latencia por turno"
+ },
+ {
+  "umbral": "Límite",
+  "p95_s": 2.0,
+  "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md, gate de latencia por turno"
+ }
+]

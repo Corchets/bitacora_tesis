@@ -1,0 +1,7 @@
+A: hola te llamo del banco hay una compra que no reconocemos
+B: ah si cual
+A: si no la frenamos ahora te vacian la cuenta
+B: bueno y que hago
+A: no cortes y decime el codigo de seis digitos que te acaba de llegar
+B: el codigo es nueve ocho siete seis cinco cuatro
+A: listo con eso la cancelo desde aca

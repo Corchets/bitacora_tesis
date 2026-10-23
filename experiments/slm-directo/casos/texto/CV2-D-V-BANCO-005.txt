@@ -1,0 +1,20 @@
+A: Buen día Nicolás de operaciones digitales del banco Vos hiciste una trasferencia a la cooperativa La Esquina
+B: Sí pagué una cuota el viernes
+A: Quedó registrada con un alias que el sistema todavía no reconoce como frecuente
+B: La cooperativa me lo pasó por mensaje es la primera vez que transfiero
+A: Bien Para dar de alta al destinatario hay una verificación de seguridad pendiente
+B: La transferencia salió
+A: Sí pero el comprobante quedó sujeto a confirmar el perfil
+B: No entiendo qué tengo que hacer
+A: Entrá a la app y buscá la opción de administrar destinatarios
+B: Estoy ahí veo la cooperativa
+A: Tocá editar y elegí validar acceso Te va a pedir tu clave de seis dígitos
+B: La clave de ingreso a la app
+A: Esa La cargás y yo te voy confirmando los pasos
+B: No es mejor que lo haga yo sola
+A: Si salís de la llamada se vence la sesión especial y el destinatario queda limitado
+B: Puedo volver a empezar más tarde
+A: También se puede pero el pago va a quedar marcado como pendiente hasta que validemos
+B: No voy a compartir la clave con alguien que me llamó
+A: No la digas en voz alta escribila en la pantalla y avisame cuando aparezca el tilde
+B: Tampoco voy a cargarla por una indicación tuya

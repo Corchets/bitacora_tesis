@@ -1,0 +1,28 @@
+A: Hola, soy de la coordinación de la campaña de fotos de bibliotecas.
+B: ¿La de la feria del barrio? Compartí una imagen la semana pasada.
+A: Esa misma. El jurado eligió tu foto para un kit de libros.
+B: Qué lindo. ¿Ya publicaron el resultado?
+A: Lo publican mañana. Hoy estamos preparando los paquetes.
+B: En las bases decía que se retiraban en la feria, no que los enviaban.
+A: Para quienes quedaron lejos habilitaron una entrega especial.
+B: Yo vivo cerca. Puedo ir cuando hagan la premiación.
+A: Igual cada paquete tiene que salir asociado con una persona.
+B: En el formulario puse el correo y mi nombre. ¿Con eso no alcanza?
+A: El correo quedó, pero el campo del responsable del envío está vacío.
+B: ¿Qué parte de ese campo?
+A: El número de documento. Si queda vacío, el kit vuelve al listado de suplentes.
+B: ¿Lo completaron así todas las personas? No lo vi en las bases.
+A: Es un requisito de la distribución que no había entrado en el anuncio.
+B: Me estás diciendo que si voy a buscarlo también tengo que completarlo.
+A: Sí. Te mandé una ficha nueva para vincular el paquete antes del cierre.
+B: ¿Te paso el documento por acá o en esa ficha?
+A: Anotá el número en esa ficha y agregá la foto del frente para que no lo carguen mal.
+B: El remitente del mensaje no es el de la campaña.
+A: Es un servicio de logística que se sumó esta mañana.
+B: ¿Puedo consultar primero con la biblioteca donde dejé la foto?
+A: Si esperamos esa respuesta se termina el reparto de hoy.
+B: El premio no se anunció todavía, no entiendo por qué corre tanto apuro.
+A: Quiero reservarte el kit, pero necesito que quede asociado antes de las seis.
+B: Voy a esperar la publicación y acercarme a la feria.
+A: No te puedo asegurar que sigan guardándolo.
+B: Está bien, prefiero confirmar las condiciones con la organización.

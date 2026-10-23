@@ -1,0 +1,22 @@
+A: Buenas, me aparece una compra de ayer como pendiente y el negocio dice que la canceló.
+B: Hola, ¿fue con tarjeta de débito o crédito?
+A: Débito, en una casa de decoración. La vendedora probó dos veces porque la primera pantalla quedó congelada.
+B: ¿Ves dos movimientos o uno solo?
+A: Uno pendiente por 27.900. Me acuerdo que marqué el PIN y después quedó cargando.
+B: Gracias. ¿El local te entregó un recibo de cancelación?
+A: Sí, un papelito que dice operación anulada.
+B: ¿Tiene fecha y últimos dígitos de la tarjeta?
+A: Tiene fecha de ayer y termina en 4086.
+B: Coincide con el movimiento que aparece acá. La autorización está pendiente y debería liberarse sola.
+A: ¿El local tiene que hacer algo más?
+B: Si emitieron la anulación, deberían conservar el comprobante. Si el débito se asienta, podés iniciar un reclamo con ese papel.
+A: ¿Cuántos días espero antes de llamar de nuevo?
+B: Revisá en 48 horas hábiles. El sistema actualiza según el cierre del comercio.
+A: Está bien. Lo que me preocupaba era que la vendedora me hizo intentar dos veces.
+B: En el registro hay una sola autorización, no aparecen dos cargos.
+A: Qué bueno. Guardé el papel con la factura.
+B: Te dejo anotado que consultaste por la operación pendiente, así tenemos el contexto.
+A: Perfecto. ¿Me mandan una confirmación?
+B: Te figura en la sección de atención, con referencia 5140.
+A: Ya la veo. Gracias.
+B: A vos. Que tengas buena tarde.

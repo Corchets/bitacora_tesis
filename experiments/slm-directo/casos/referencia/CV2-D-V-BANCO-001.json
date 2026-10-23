@@ -1,0 +1,51 @@
+{
+  "case_id": "CV2-D-V-BANCO-001",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-001",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 32,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 30,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 32,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    },
+    {
+      "linea": 34,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "La autoridad aparece en la línea 2 y el primer pedido crítico recién en la 32, luego de una negociación administrativa plausible. A habla primero y es quien recibe el intento. Prueba retención del contexto distante y el cambio de una consulta sobre un cobro a una solicitud de autenticación; no se observa cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-OTP-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07/D08. Se ubica T_R en la primera solicitud explícita del OTP, no al mencionar el mensaje ni al discutir el recibo. El contexto previo no autentica al interlocutor. Sin cumplimiento observable.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-BANK-OTP-01",
+  "situacion": "Una discusión extensa sobre dos períodos de abono de cochera y un recibo en efectivo precede a la conversión del reclamo en un pedido de OTP de acceso a la cuenta."
+}

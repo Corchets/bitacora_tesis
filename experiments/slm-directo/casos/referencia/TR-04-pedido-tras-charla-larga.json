@@ -1,0 +1,23 @@
+{
+  "case_id": "TR-04-pedido-tras-charla-larga",
+  "grupo": "trampa",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 26,
+  "t_c_linea": 27,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM", "TRUST_BUILDING"]},
+    {"linea": 7, "evento": "contexto", "etiquetas": ["TRUST_BUILDING"]},
+    {"linea": 9, "evento": "contexto", "etiquetas": ["TRUST_BUILDING"]},
+    {"linea": 21, "evento": "contexto", "etiquetas": ["TRUST_BUILDING"]},
+    {"linea": 23, "evento": "mencion", "etiquetas": []},
+    {"linea": 26, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+    {"linea": 27, "evento": "cumplimiento", "etiquetas": []}
+  ],
+  "que_prueba": "Conversación larga (30 líneas) y amable: la presentación como sucursal del banco está en la línea 3 y el primer pedido de alto riesgo recién en la línea 26, separados por veintidós líneas: el trámite de la tarjeta y, en el medio, once líneas de charla cotidiana (líneas 8 a 18: el empleado anterior, la viudez de Rubén, las hijas, el clima, los malvones), sin urgencia ni amenaza. Prueba si el detector conserva el contexto de autoridad del comienzo y no se diluye con el texto intermedio, y si reacciona a un pedido directo que llega cuando la confianza ya está construida.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la descripción del caso trampa del issue #50 (evidencia separada por texto intermedio y conversación larga); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "No hay semilla del catálogo que corresponda claramente: es banco y REQUEST_AUTH_CODE como SC-BANK-OTP-01, pero el pretexto es el recambio de la tarjeta, no una compra sospechosa, y faltan la urgencia y el aislamiento de esa ficha. En la línea 9 quien llama adopta el nombre «Ramiro» que aportó B en la línea 8; se anota TRUST_BUILDING. La línea 21 pide confirmar un domicilio que quien llama ya dice tener; no se marca como pedido porque solo busca un «sí» sobre ese dato (se anota TRUST_BUILDING). El manual §5 excluye «confirmar datos que la entidad ya tiene» solo en REQUEST_SECRET; REQUEST_PERSONAL_DATA incluye el domicilio y no trae esa excepción, y el prompt del detector lista el domicilio como dato que justifica alerta. Si el equipo decide que confirmar el domicilio es REQUEST_PERSONAL_DATA, T_R pasaría a la línea 21 y T_C a la 22. Discutir en D07. La línea 23 anuncia el mensaje sin pedirlo. No hay URGENCY_PRESSURE ni THREAT_FEAR: la falta de presión es parte de la dificultad. Nombres, calle y cifras ficticios."
+}

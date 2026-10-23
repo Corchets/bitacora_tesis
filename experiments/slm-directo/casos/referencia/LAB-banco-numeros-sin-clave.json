@@ -1,0 +1,20 @@
+{
+  "case_id": "LAB-banco-numeros-sin-clave",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 5,
+  "t_c_linea": 6,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE", "THREAT_FEAR"]},
+    {"linea": 5, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+    {"linea": 6, "evento": "cumplimiento", "etiquetas": []}
+  ],
+  "que_prueba": "Pide «los seis numeros» que llegaron al celular sin decir «codigo», con cumplimiento.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/vishing/banco-numeros-sin-clave.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025 (misma modalidad que banco-codigo.txt), redacción propia del equipo; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Paráfrasis de LAB-banco-codigo sin la palabra «codigo» en el laboratorio; par null. Incendio esperado por el laboratorio: REQUEST_AUTH_CODE en t5 (patrón «numeros», pasada 14), goteo en t5. Coincide con t_r_linea = 5. La línea 3 («tenes que hacerlo ya») presiona antes de decir qué hay que hacer. Cumplimiento en la línea 6: dicta seis cifras ficticias. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

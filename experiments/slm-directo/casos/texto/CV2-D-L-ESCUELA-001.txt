@@ -1,0 +1,24 @@
+A: Hola, soy el papá de Nina. Me dejaron un mensaje para coordinar una reunión.
+B: Buenas tardes. Sí, queríamos conversar sobre cómo se está integrando al grupo.
+A: ¿Pasó algo hoy en el recreo? La noté callada cuando salió.
+B: Hubo un desacuerdo por un juego, pero no hubo golpes ni se lastimó nadie.
+A: ¿Ella discutió con alguna compañera?
+B: Se enojó porque cambiaron las reglas y se fue a leer a un banco.
+A: En casa también se frustra cuando siente que no la escuchan.
+B: Queremos saber qué estrategias le funcionan y compartir lo que vemos en la escuela.
+A: Está bien. ¿La reunión puede ser después de las cuatro? Trabajo hasta esa hora.
+B: El miércoles a las cuatro y media puede la maestra y la orientadora.
+A: Sí, me sirve. ¿Tengo que ir con la mamá o puede ir uno solo?
+B: Puede venir cualquiera de las dos personas responsables. Si pueden venir ambos, mejor, pero no es obligatorio.
+A: Le pregunto a ella. ¿La reunión es en el aula o en dirección?
+B: En el aula de tercer grado, al lado de la biblioteca.
+A: ¿Hay que avisar en recepción cuando lleguemos?
+B: Sí, firman la entrada y esperan a la maestra en el patio cubierto.
+A: Perfecto. ¿Me mandan la citación por el cuaderno?
+B: Sí, va a ir una nota para que quede asentada la fecha.
+A: La revisamos esta noche. No quiero que Nina piense que hizo algo grave.
+B: Vamos a explicarle que es una conversación para acompañarla, no un reto.
+A: Gracias. ¿La pueden dejar salir con su tía mañana como siempre?
+B: Sí, su tía figura autorizada para retirarla.
+A: Buenísimo. Queda confirmado miércoles cuatro y media.
+B: Así es. Nos vemos entonces.

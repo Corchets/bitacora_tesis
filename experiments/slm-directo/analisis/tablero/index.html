@@ -1,0 +1,1181 @@
+<style>
+  .slm { max-width: 72rem; margin-inline: auto; font-family: var(--font-anthropic-sans); color: var(--color-fg); font-size: var(--cds-font-size-body); line-height: 1.5; }
+  .slm h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.2; margin: 0 0 var(--cds-gap-sm); }
+  .slm h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0 0 var(--cds-gap-xs); }
+  .slm h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .slm p { margin: 0; }
+  .slm code { font-size: var(--cds-font-size-caption); overflow-wrap: anywhere; }
+  .slm-kicker { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin-bottom: var(--cds-gap-xs); }
+  .slm-takeaway { max-width: 48rem; margin-bottom: var(--cds-gap-sm); }
+  .slm-takeaway .slm-v, .slm-context .slm-v { font-variant-numeric: tabular-nums; }
+  .slm-context, .slm-estado, .slm-note, .slm-lead { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); max-width: 48rem; }
+  .slm-estado { margin-top: var(--cds-gap-xs); }
+  .slm-lead { font-size: var(--cds-font-size-body); margin-bottom: var(--cds-gap-md); }
+
+  .slm-tabs { display: flex; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); margin: var(--cds-gap-lg) 0 var(--cds-gap-lg); overflow-x: auto; }
+  .slm-tab { appearance: none; background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-sm) var(--cds-pad-md); font: inherit; color: var(--color-fg-muted); cursor: pointer; white-space: nowrap; }
+  .slm-tab[aria-selected="true"] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+  .slm-tab:focus-visible, .slm-jump button:focus-visible, .slm-sort:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  .slm-jump { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); margin-bottom: var(--cds-gap-lg); font-size: var(--cds-font-size-caption); }
+  .slm-jump button { appearance: none; font: inherit; color: var(--color-fg-muted); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); cursor: pointer; }
+  .slm-jump button:hover { color: var(--color-fg); }
+
+  .slm-section { margin-bottom: var(--cds-gap-xl); scroll-margin-top: var(--cds-gap-lg); }
+  .slm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--cds-gap-md); margin-bottom: var(--cds-gap-md); }
+  .slm-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; margin-bottom: var(--cds-gap-md); }
+  .slm-grid > .slm-card { margin-bottom: 0; }
+  .slm-card > .slm-note { margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
+  .slm-card > .slm-note:last-child { margin-bottom: 0; }
+  details.slm-card > summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+  details.slm-card[open] > summary { margin-bottom: var(--cds-gap-sm); }
+
+  .slm-chart { position: relative; min-width: 0; }
+  .slm-chart svg { display: block; overflow: visible; }
+  #grafico-deteccion, #grafico-falsas { min-height: 154px; }
+  #grafico-fundamento { min-height: 172px; }
+  #grafico-momento { min-height: 210px; }
+  #grafico-memoria { min-height: 204px; }
+  #grafico-velocidad { min-height: 230px; }
+  #grafico-trayectorias { min-height: 700px; }
+  .slm-tick { fill: var(--color-fg-muted); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .slm-label { fill: var(--color-fg); font-size: var(--cds-font-size-caption); }
+  .slm-end { fill: var(--color-fg-muted); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .slm-grid-line { stroke: var(--cds-chart-grid); stroke-width: 1; }
+  .slm-axis { stroke: var(--cds-chart-axis); stroke-width: 1; }
+  .slm-ref { stroke: var(--cds-chart-reference); stroke-width: 1; stroke-dasharray: 4 3; }
+  .slm-ref-label { fill: var(--color-fg-muted); font-size: var(--cds-font-size-caption); paint-order: stroke; stroke: var(--color-panel); stroke-width: 3px; stroke-linejoin: round; }
+  .slm-ci { stroke-width: 2; stroke-linecap: round; opacity: .55; }
+  .slm-dot { stroke: var(--color-panel); stroke-width: 2; }
+  .slm-line { fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .slm-rule { stroke: var(--cds-chart-axis); stroke-width: 1; }
+  .slm-hit { fill: transparent; }
+  .slm-seg-vacio { fill: none; stroke: var(--color-fg-muted); stroke-width: 1; stroke-dasharray: 3 2; pointer-events: all; }
+
+  .slm-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs) var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+  .slm-legend span { display: inline-flex; align-items: center; gap: var(--cds-gap-xs); }
+  .slm-sw { display: inline-block; width: .75rem; height: .75rem; border-radius: 2px; flex: none; }
+  .slm-sw-line { display: inline-block; width: 1rem; height: 2px; border-radius: 1px; flex: none; }
+  .slm-sw-dash { display: inline-block; width: 1rem; border-top: 1px dashed var(--cds-chart-reference); flex: none; }
+  .slm-sw-dot { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; background: var(--color-fg-muted); flex: none; }
+  .slm-sw-rombo { display: inline-block; width: .5rem; height: .5rem; background: var(--color-fg-muted); transform: rotate(45deg); flex: none; }
+  .slm-sw-vacio { border: 1px dashed var(--color-fg-muted); }
+  .slm-sw-trama { background: repeating-linear-gradient(45deg, var(--color-fg-muted) 0 1.5px, transparent 1.5px 4px); }
+
+  .slm-tip { position: absolute; z-index: 3; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); max-width: 18rem; }
+  .slm-tip-head { color: var(--cds-text-secondary); margin-bottom: 2px; }
+  .slm-tip-text { margin-bottom: 4px; }
+  .slm-tip-row { display: flex; align-items: center; gap: var(--cds-gap-xs); white-space: nowrap; }
+  .slm-tip-row b { margin-left: auto; padding-left: var(--cds-gap-sm); font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; }
+
+  .slm-table-box { overflow: auto; }
+  .slm-table-box.slm-alto { max-height: 30rem; }
+  .slm table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .slm th, .slm td { text-align: left; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+  .slm th { font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); position: sticky; top: 0; background: var(--color-panel); z-index: 1; }
+  .slm td.slm-num, .slm th.slm-num { text-align: right; }
+  .slm td.slm-bien { color: var(--color-ok); }
+  .slm td.slm-mal { color: var(--color-bad); }
+  .slm-sort { appearance: none; background: none; border: 0; padding: 0; font: inherit; color: inherit; cursor: pointer; text-align: inherit; }
+  .slm th[aria-sort="ascending"] .slm-sort::after { content: " ↑"; }
+  .slm th[aria-sort="descending"] .slm-sort::after { content: " ↓"; }
+  .slm-tools { display: flex; flex-wrap: wrap; gap: var(--cds-gap-sm); align-items: center; margin-bottom: var(--cds-gap-sm); }
+  .slm-tools input { font: inherit; font-size: var(--cds-font-size-caption); color: var(--color-fg); background: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); min-width: 0; flex: 1 1 12rem; max-width: 20rem; }
+  .slm-cuenta { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+
+  .slm-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); margin-bottom: var(--cds-gap-md); }
+  .slm-tile { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); }
+  .slm-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .slm-big .slm-de { font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); color: var(--color-fg-muted); }
+  .slm-tile-label { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+
+  .slm-multiple { margin: 0 0 var(--cds-gap-lg); }
+  .slm-multiple:last-child { margin-bottom: 0; }
+  .slm-multiple figcaption { display: flex; flex-wrap: wrap; gap: 0 var(--cds-gap-sm); align-items: baseline; margin-bottom: var(--cds-gap-xs); }
+  .slm-mult-title { font-weight: var(--cds-font-weight-medium); }
+  .slm-mult-id { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+
+  .slm-list { margin: 0; padding-left: 1.2rem; }
+  .slm-list li { margin-bottom: var(--cds-gap-xs); }
+  .slm-pasos { list-style: none; margin: 0; padding: 0; }
+  .slm-paso { display: grid; grid-template-columns: 2rem 1fr; gap: var(--cds-gap-md); padding-bottom: var(--cds-gap-lg); position: relative; }
+  .slm-paso::before { content: ""; position: absolute; left: calc(1rem - .5px); top: 2rem; bottom: 0; border-left: 1px solid var(--color-border-line); }
+  .slm-paso:last-child::before { display: none; }
+  .slm-paso-n { width: 2rem; height: 2rem; border-radius: 50%; border: 1px solid var(--color-border-line); background: var(--color-panel); display: flex; align-items: center; justify-content: center; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .slm-paso-pendiente .slm-paso-n { border-style: dashed; color: var(--color-fg-muted); }
+  .slm-paso-meta { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .slm-paso h3 { margin-bottom: var(--cds-gap-xs); }
+  .slm-paso p + p { margin-top: var(--cds-gap-xs); }
+  .slm-preguntas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: var(--cds-gap-md); }
+  .slm-pregunta { margin: 0; display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
+  .slm-pregunta-top { display: flex; justify-content: space-between; gap: var(--cds-gap-sm); align-items: baseline; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .slm-chip { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 0 var(--cds-pad-xs); white-space: nowrap; }
+  .slm-pregunta-q { font-weight: var(--cds-font-weight-medium); }
+  .slm-pregunta-why { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+
+  .slm-fail { display: flex; align-items: center; justify-content: center; gap: var(--cds-gap-xs); min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .slm-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+  .slm [data-dash-source-state="refreshing"] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  .slm [data-dash-source-state="empty"] { color: transparent; }
+</style>
+
+<div class="slm">
+  <header id="inicio">
+    <p class="slm-kicker">Ensayo del issue #50 · experiments/slm-directo</p>
+    <h1>Ensayo SLM directo</h1>
+    <p class="slm-takeaway" id="conclusion">
+      <b>Más grande no fue mejor.</b>
+      El 2B avisó en <span class="slm-v dash-skeleton" data-source="detectores" data-field="vishing_con_aviso" data-where="id=q2">—</span>
+      de <span class="slm-v dash-skeleton" data-source="detectores" data-field="vishing" data-where="id=q2">—</span> estafas
+      con <span class="slm-v dash-skeleton" data-source="detectores" data-field="falsas_alarmas" data-where="id=q2">—</span> falsas alarmas
+      en <span class="slm-v dash-skeleton" data-source="detectores" data-field="legitimas" data-where="id=q2">—</span> legítimas.
+      El 4B avisó en <span class="slm-v dash-skeleton" data-source="detectores" data-field="vishing_con_aviso" data-where="id=q4">—</span>
+      de <span class="slm-v dash-skeleton" data-source="detectores" data-field="vishing" data-where="id=q4">—</span>, pero con
+      <span class="slm-v dash-skeleton" data-source="detectores" data-field="falsas_alarmas" data-where="id=q4">—</span> falsas alarmas;
+      las reglas del laboratorio dieron <span class="slm-v dash-skeleton" data-source="detectores" data-field="falsas_alarmas" data-where="id=reglas">—</span>.
+    </p>
+    <p class="slm-takeaway" id="conclusion-cpu">
+      <b>Y sin placa de video no llega a tiempo.</b>
+      Solo con CPU y 2 hilos, en las
+      <span class="slm-v dash-skeleton" data-source="velocidad" data-field="conversaciones" data-where="clave=q2|cpu">—</span> conversaciones del piloto escrito,
+      el 95% de las líneas tarda hasta
+      <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_p95" data-where="clave=q08|cpu" data-fmt="s1">—</span> s con el 0.8B y
+      <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_p95" data-where="clave=q2|cpu" data-fmt="s1">—</span> s con el 2B;
+      el objetivo del documento de prefactibilidad es
+      <span class="slm-v dash-skeleton" data-source="umbrales" data-field="p95_s" data-where="umbral=Objetivo" data-fmt="s1">—</span> s.
+    </p>
+    <p class="slm-context">
+      <span class="slm-v dash-skeleton" data-source="conteo" data-field="conversaciones" data-row="0">—</span> conversaciones escritas
+      (<span class="slm-v dash-skeleton" data-source="conteo" data-field="estafas" data-row="0">—</span> estafas y
+      <span class="slm-v dash-skeleton" data-source="conteo" data-field="legitimas" data-row="0">—</span> legítimas) · prompt v1 ·
+      modelos qwen3.5 en Ollama · una PC con placa de video (y una prueba solo con CPU) · sin revisión humana todavía.
+    </p>
+    <p class="slm-estado"><b>Estado: propuesta sin discutir.</b> Muestra lo que dio el ensayo; no elige modelo (D09) ni política de aviso (D08).</p>
+  </header>
+
+  <div class="slm-tabs" role="tablist" aria-label="Partes del tablero">
+    <button class="slm-tab" role="tab" id="tab-resultados" aria-controls="resultados" aria-selected="true">Resultados</button>
+    <button class="slm-tab" role="tab" id="tab-paso-a-paso" aria-controls="paso-a-paso" aria-selected="false" tabindex="-1">Paso a paso</button>
+    <button class="slm-tab" role="tab" id="tab-preguntas" aria-controls="preguntas" aria-selected="false" tabindex="-1">Preguntas abiertas</button>
+  </div>
+
+  <div role="tabpanel" id="resultados" aria-labelledby="tab-resultados">
+    <nav class="slm-jump" aria-label="Ir a">
+      <button data-ir="deteccion">Detección</button>
+      <button data-ir="fundamento">Por qué avisa</button>
+      <button data-ir="momento">Cuándo avisa</button>
+      <button data-ir="celular">¿Anda en un celular?</button>
+      <button data-ir="repeticion">¿Da siempre lo mismo?</button>
+      <button data-ir="trayectorias">Ejemplos línea por línea</button>
+      <button data-ir="casos">Caso por caso</button>
+      <button data-ir="limites">Qué no dicen estos datos</button>
+    </nav>
+
+    <section class="slm-section" id="deteccion">
+      <h2>¿Avisa en las estafas? ¿Se equivoca en las legítimas?</h2>
+      <p class="slm-lead">Cada detector leyó las mismas conversaciones línea por línea, con todo lo dicho antes. Cuenta solo el primer aviso de cada conversación, que es el único que vería la persona.</p>
+      <div class="slm-grid">
+        <div class="slm-card" id="card-deteccion">
+          <h3>Estafas con aviso</h3>
+          <p class="slm-note">Más es mejor. Punto: lo observado. Línea: intervalo del 95%.</p>
+          <div class="slm-chart dash-skeleton" id="grafico-deteccion" data-source="tasas"></div>
+        </div>
+        <div class="slm-card" id="card-falsas">
+          <h3>Legítimas con falsa alarma</h3>
+          <p class="slm-note">Menos es mejor. Con tan pocos casos los intervalos son anchos.</p>
+          <div class="slm-chart dash-skeleton" id="grafico-falsas" data-source="tasas"></div>
+        </div>
+      </div>
+
+      <div class="slm-card" id="card-pares">
+        <h3>¿La diferencia con el 2B es más que azar?</h3>
+        <p class="slm-note">Todos leyeron las mismas conversaciones, así que se comparan de a pares: en cuántas avisó solo el otro detector y en cuántas solo el 2B (prueba de McNemar exacta). Una p menor que 0,05 es una diferencia difícil de explicar por azar en estos casos; no dice cómo andaría con llamadas reales.</p>
+        <div class="slm-table-box">
+          <table id="tabla-pares" data-source="pares" data-row-key="clave">
+            <thead><tr>
+              <th data-field="comparacion">Comparación</th>
+              <th data-field="clase">Conversaciones</th>
+              <th class="slm-num" data-field="solo_otro">Avisa solo el otro</th>
+              <th class="slm-num" data-field="solo_2b">Avisa solo el 2B</th>
+              <th class="slm-num" data-field="p">p</th>
+              <th data-field="lectura">Lectura</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="slm-note">
+          Ningún modelo devolvió respuestas inválidas: fallos del 0.8B
+          <span class="slm-v dash-skeleton" data-source="detectores" data-field="fallos" data-where="id=q08">—</span>, del 2B
+          <span class="slm-v dash-skeleton" data-source="detectores" data-field="fallos" data-where="id=q2">—</span> y del 4B
+          <span class="slm-v dash-skeleton" data-source="detectores" data-field="fallos" data-where="id=q4">—</span>, en
+          <span class="slm-v dash-skeleton" data-source="detectores" data-field="actualizaciones" data-where="id=q2">—</span> líneas cada uno.
+        </p>
+      </div>
+
+      <details class="slm-card" id="card-por-grupo">
+        <summary>Separado por grupo de casos</summary>
+        <p class="slm-note">Piloto escrito: versiones escritas de los pares del piloto. Trampas: casos hechos para confundir. Laboratorio: los guiones con los que se armaron las reglas, por eso ahí las reglas dan pocas falsas alarmas.</p>
+        <div class="slm-table-box">
+          <table id="tabla-por-grupo" data-source="por_grupo" data-row-key="clave">
+            <thead><tr>
+              <th data-field="nombre">Detector</th>
+              <th data-field="grupo">Grupo</th>
+              <th class="slm-num" data-field="vishing_con_aviso">Estafas con aviso</th>
+              <th class="slm-num" data-field="vishing">Estafas</th>
+              <th class="slm-num" data-field="falsas_alarmas">Falsas alarmas</th>
+              <th class="slm-num" data-field="legitimas">Legítimas</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="slm-section" id="fundamento">
+      <h2>¿Por qué avisa?</h2>
+      <p class="slm-lead">Contar avisos no alcanza: un modelo puede acertar por la razón equivocada. Dos revisores automáticos clasificaron cada primer aviso mirando solo lo dicho hasta esa línea y el motivo del modelo, sin saber si era estafa.</p>
+      <div class="slm-card" id="card-fundamento">
+        <h3>Primeros avisos según en qué se apoyan</h3>
+        <p class="slm-note">El 0.8B inventa pedidos que nadie hizo; el 4B avisa por sospecha y toma como actuales pedidos que alguien cuenta. Las reglas no entran: no dan motivo.</p>
+        <div class="slm-chart dash-skeleton" id="grafico-fundamento" data-source="fundamento"></div>
+      </div>
+      <div class="slm-grid">
+        <div class="slm-card" id="card-acuerdo">
+          <h3>Acuerdo entre los dos revisores</h3>
+          <p class="slm-note">Kappa de Cohen: 1 es acuerdo total. Son revisores del mismo tipo y pueden compartir sesgos; falta una revisión humana.</p>
+          <div class="slm-table-box">
+            <table id="tabla-acuerdo" data-source="acuerdo" data-row-key="detector">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th class="slm-num" data-field="avisos">Avisos</th>
+                <th class="slm-num" data-field="coinciden">Coinciden</th>
+                <th class="slm-num" data-field="kappa">Kappa</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <details class="slm-card" id="card-fundamento-tabla">
+          <summary>Ver en tabla, separado por clase</summary>
+          <p class="slm-note">La clase de la conversación no la vieron los revisores.</p>
+          <div class="slm-table-box">
+            <table id="tabla-fundamento" data-source="fundamento" data-row-key="clave">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th data-field="etiqueta">En qué se apoya</th>
+                <th class="slm-num" data-field="avisos">Avisos</th>
+                <th class="slm-num" data-field="en_estafas">En estafas</th>
+                <th class="slm-num" data-field="en_legitimas">En legítimas</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="slm-section" id="momento">
+      <h2>¿Cuándo avisa en las estafas?</h2>
+      <p class="slm-lead">Cada estafa tiene marcada la línea donde se pide algo de riesgo y la línea donde la persona cumple. Avisar antes del pedido es anticipar; avisar cuando ya cumplió es tarde.</p>
+      <div class="slm-card" id="card-momento">
+        <h3>Primer aviso en las estafas, según la línea del pedido</h3>
+        <p class="slm-note">El 4B anticipa en muchas estafas, pero por sospecha: la misma conducta le da falsas alarmas en las legítimas.</p>
+        <div class="slm-chart dash-skeleton" id="grafico-momento" data-source="detectores"></div>
+        <div class="slm-table-box">
+          <table id="tabla-momento" data-source="detectores" data-row-key="id">
+            <thead><tr>
+              <th data-field="nombre">Detector</th>
+              <th class="slm-num" data-field="antes_del_pedido">Antes</th>
+              <th class="slm-num" data-field="en_el_pedido">En el pedido</th>
+              <th class="slm-num" data-field="despues_del_pedido">Después</th>
+              <th class="slm-num" data-field="despues_del_cumplimiento">Ya cumplió</th>
+              <th class="slm-num" data-field="aviso_sin_pedido_de_referencia">Sin pedido marcado</th>
+              <th class="slm-num" data-field="vishing_sin_aviso">No avisó</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="slm-section" id="celular">
+      <h2>¿Anda en un celular?</h2>
+      <p class="slm-lead">El producto tiene que correr en el teléfono, sin placa de video. Acá se compara cuánto tarda cada línea y cuánta memoria ocupa cada modelo con los objetivos del documento de prefactibilidad. Todavía no se midió en un teléfono: es la misma PC, con y sin placa de video.</p>
+      <div class="slm-card" id="card-velocidad">
+        <h3>Tiempo por línea, con y sin placa de video</h3>
+        <p class="slm-note">Las mismas conversaciones del piloto escrito, en la misma PC. Punto: mediana; la línea llega hasta el percentil 95. Líneas punteadas: objetivo y límite de latencia por turno del documento de prefactibilidad, medidos sobre el percentil 95.</p>
+        <div class="slm-chart dash-skeleton" id="grafico-velocidad" data-source="velocidad umbrales"></div>
+        <p class="slm-note">
+          Solo con CPU, el aviso del 2B llegaría al menos
+          <span class="slm-v dash-skeleton" data-source="velocidad" data-field="s_aviso_p50" data-where="clave=q2|cpu" data-fmt="s1">—</span> s después de que termina la frase del pedido
+          (mediana de las líneas donde avisó), sin contar el reconocimiento de voz, y más si las líneas llegan más rápido de lo que el modelo las procesa.
+          Las líneas con alerta tardan más porque el modelo escribe el motivo y la cita, pero achicar la salida no alcanza: las líneas sin alerta también quedan lejos del objetivo.
+          Un procesador de celular de gama media probablemente sea más lento que el de esta PC. El 4B no se midió sin placa de video.
+        </p>
+      </div>
+      <div class="slm-grid">
+        <div class="slm-card" id="card-memoria">
+          <h3>Memoria del detector más el reconocimiento de voz</h3>
+          <p class="slm-note">Techos por gama: docs/investigacion/PREFACTIBILIDAD-TECNICA.md. Reconocimiento de voz: el pico de la corrida de audio del laboratorio (ASR con un detector TF-IDF muy liviano), aproximado.</p>
+          <div class="slm-chart dash-skeleton" id="grafico-memoria" data-source="memoria_pipeline gamas"></div>
+          <p class="slm-note">
+            Solo el 0.8B queda debajo de un techo, el de gama
+            <span class="slm-v dash-skeleton" data-source="memoria_pipeline" data-field="entra_en" data-where="id=q08" data-fmt="t">—</span>, con
+            <span class="slm-v dash-skeleton" data-source="memoria_pipeline" data-field="margen_alta_mb" data-where="id=q08">—</span> MB de margen.
+            El 2B se pasa por <span class="slm-v dash-skeleton" data-source="memoria_pipeline" data-field="exceso_alta_mb" data-where="id=q2">—</span> MB.
+            Sin placa de video ocupa casi lo mismo:
+            <span class="slm-v dash-skeleton" data-source="velocidad" data-field="memoria_mb" data-where="clave=q08|cpu">—</span> MB el 0.8B y
+            <span class="slm-v dash-skeleton" data-source="velocidad" data-field="memoria_mb" data-where="clave=q2|cpu">—</span> MB el 2B.
+            Es la memoria que informa Ollama en la PC, con el contexto del ensayo; en un celular, con otro motor, puede cambiar.
+          </p>
+        </div>
+        <div class="slm-card" id="card-cpu-vs-gpu">
+          <h3>¿Cambian los resultados sin placa de video?</h3>
+          <p class="slm-note">Misma configuración y mismas conversaciones del piloto escrito. El 2B dio el mismo resultado en todas. El 0.8B cambió dos: avisó antes del pedido, diciendo que pedían un código que nadie pidió.</p>
+          <div class="slm-table-box">
+            <table id="tabla-cpu-vs-gpu" data-source="cpu_vs_gpu" data-row-key="detector">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th class="slm-num" data-field="lineas">Líneas</th>
+                <th class="slm-num" data-field="riesgos_distintos">Otro riesgo</th>
+                <th class="slm-num" data-field="alertas_distintas">Otra alerta</th>
+                <th class="slm-num" data-field="conversaciones_con_otro_resultado">Otro resultado</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="slm-table-box">
+            <table id="tabla-cpu-vs-gpu-totales" data-source="cpu_vs_gpu" data-row-key="detector">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th class="slm-num" data-field="vishing_con_aviso_gpu">Estafas con aviso, con placa</th>
+                <th class="slm-num" data-field="vishing_con_aviso_cpu">Solo CPU</th>
+                <th class="slm-num" data-field="falsas_alarmas_gpu">Falsas alarmas, con placa</th>
+                <th class="slm-num" data-field="falsas_alarmas_cpu">Solo CPU</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="slm-note">Las conversaciones que cambiaron (mismo código que en la tabla caso por caso):</p>
+          <div class="slm-table-box">
+            <table id="tabla-cpu-vs-gpu-casos" data-source="cpu_vs_gpu_casos" data-row-key="clave">
+              <thead><tr>
+                <th data-field="nombre">Modelo</th>
+                <th data-field="caso">Conversación</th>
+                <th data-field="placa_de_video">Con placa</th>
+                <th data-field="solo_cpu">Solo CPU</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slm-section" id="repeticion">
+      <h2>¿Da siempre lo mismo?</h2>
+      <p class="slm-lead">Corrimos el 2B dos veces con la misma configuración (temperatura 0 y semilla fija). Con placa de video el cálculo no es exactamente reproducible.</p>
+      <div class="slm-card" id="card-repeticion">
+        <div class="slm-tiles">
+          <div class="slm-tile">
+            <div class="slm-big"><span class="slm-v dash-skeleton" data-source="repeticion" data-field="respuestas_distintas" data-row="0">—</span><span class="slm-de"> de <span class="slm-v dash-skeleton" data-source="repeticion" data-field="actualizaciones" data-row="0">—</span></span></div>
+            <div class="slm-tile-label">líneas con alguna diferencia en la respuesta</div>
+          </div>
+          <div class="slm-tile">
+            <div class="slm-big"><span class="slm-v dash-skeleton" data-source="repeticion" data-field="riesgos_distintos" data-row="0">—</span><span class="slm-de"> de <span class="slm-v dash-skeleton" data-source="repeticion" data-field="actualizaciones" data-row="0">—</span></span></div>
+            <div class="slm-tile-label">líneas con otro valor de riesgo</div>
+          </div>
+          <div class="slm-tile">
+            <div class="slm-big"><span class="slm-v dash-skeleton" data-source="repeticion" data-field="conversaciones_con_otro_resultado" data-row="0">—</span><span class="slm-de"> de <span class="slm-v dash-skeleton" data-source="repeticion" data-field="conversaciones" data-row="0">—</span></span></div>
+            <div class="slm-tile-label">conversaciones con otro resultado final</div>
+          </div>
+          <div class="slm-tile">
+            <div class="slm-big"><span class="slm-v dash-skeleton" data-source="repeticion" data-field="vishing_con_aviso_1" data-row="0">—</span><span class="slm-de"> y </span><span class="slm-v dash-skeleton" data-source="repeticion" data-field="vishing_con_aviso_2" data-row="0">—</span></div>
+            <div class="slm-tile-label">estafas con aviso en la corrida 1 y en la 2</div>
+          </div>
+        </div>
+        <h3>Las conversaciones que cambiaron</h3>
+        <p class="slm-note">Mismo código que en la tabla caso por caso.</p>
+        <div class="slm-table-box">
+          <table id="tabla-repeticion" data-source="repeticion_casos" data-row-key="caso">
+            <thead><tr>
+              <th data-field="caso">Conversación</th>
+              <th data-field="corrida_1">Corrida 1</th>
+              <th data-field="corrida_2">Corrida 2</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="slm-section" id="trayectorias">
+      <h2>Cómo sube el riesgo, línea por línea</h2>
+      <p class="slm-lead">Tres conversaciones de ejemplo. En cada línea el modelo devuelve un riesgo de 0 a 1 y decide si alerta; el punto grande es el primer aviso. Pasá el mouse para leer cada línea.</p>
+      <div class="slm-card" id="card-trayectorias">
+        <div class="slm-legend" id="leyenda-trayectorias" data-source="trayectorias"></div>
+        <div class="slm-chart dash-skeleton" id="grafico-trayectorias" data-source="trayectorias"></div>
+        <p class="slm-note">
+          El 0.8B usó solo <span class="slm-v dash-skeleton" data-source="detectores" data-field="valores_de_riesgo" data-where="id=q08">—</span> valores distintos de riesgo en toda la corrida;
+          el 2B, <span class="slm-v dash-skeleton" data-source="detectores" data-field="valores_de_riesgo" data-where="id=q2">—</span>, y el 4B,
+          <span class="slm-v dash-skeleton" data-source="detectores" data-field="valores_de_riesgo" data-where="id=q4">—</span>. Las reglas no dan riesgo: solo avisan.
+        </p>
+      </div>
+    </section>
+
+    <section class="slm-section" id="casos">
+      <h2>Caso por caso</h2>
+      <p class="slm-lead">Qué hizo cada detector en cada conversación. Tocá un encabezado para ordenar.</p>
+      <div class="slm-card" id="card-casos">
+        <div class="slm-tools">
+          <input type="search" id="buscar-casos" placeholder="Buscar caso, grupo o código" aria-label="Buscar en la tabla de casos">
+          <span class="slm-cuenta" id="cuenta-casos" aria-live="polite"></span>
+        </div>
+        <div class="slm-table-box slm-alto">
+          <table id="tabla-casos" data-source="casos" data-row-key="caso">
+            <thead><tr>
+              <th data-field="caso">Conversación</th>
+              <th data-field="grupo">Grupo</th>
+              <th data-field="clase">Clase</th>
+              <th class="slm-num" data-field="pedido_linea">Línea del pedido</th>
+              <th data-field="reglas">Reglas</th>
+              <th data-field="q08">0.8B</th>
+              <th data-field="q2">2B</th>
+              <th data-field="q4">4B</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="slm-note">
+          <b>Cómo leer el código:</b> &lt;R avisó antes del pedido · =R en la línea del pedido · &gt;R después del pedido ·
+          ≥C cuando la persona ya había cumplido · «aviso»: avisó en una estafa sin línea de pedido marcada · — no avisó en una estafa ·
+          ok: no avisó en una legítima · FA: falsa alarma · L seguido de un número: la línea del aviso.
+          En verde lo que cuenta como acierto; en rojo, falsa alarma, aviso tardío o estafa sin aviso.
+        </p>
+      </div>
+    </section>
+
+    <section class="slm-section" id="limites">
+      <h2>Qué no dicen estos datos</h2>
+      <div class="slm-card">
+        <ul class="slm-list">
+          <li>Son conversaciones escritas por el equipo con ayuda de agentes, no llamadas reales ni audio: no miden los errores del reconocimiento de voz.</li>
+          <li>No son una muestra al azar de llamadas. Los porcentajes sirven para comparar detectores entre sí sobre estos casos, no para estimar cómo andaría en la calle.</li>
+          <li>Los modelos corrieron en una sola PC de escritorio, con y sin placa de video; la línea base de reglas, en otra máquina, con el mismo resultado. La memoria y el tiempo son los de esa PC: no se midió en un celular.</li>
+          <li>Con placa de video, una corrida por modelo sobre todas las conversaciones (el 2B, dos); solo con CPU, una del 0.8B y otra del 2B sobre el piloto escrito. Todas con el prompt v1 y diciéndole al modelo quién habla (A/B).</li>
+          <li>La clasificación de los avisos la hicieron revisores automáticos; falta que una persona revise una muestra.</li>
+          <li>En los casos escritos quien llama suele aparecer primero, y en las legítimas suele atender la entidad: un modelo podría acertar por cómo empieza la llamada.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div role="tabpanel" id="paso-a-paso" aria-labelledby="tab-paso-a-paso" hidden>
+    <p class="slm-lead">Lo que hicimos, en orden. Cada paso dice dónde está en el repositorio.</p>
+    <div class="slm-card">
+      <ol class="slm-pasos dash-skeleton" id="lista-pasos" data-source="pasos"></ol>
+    </div>
+  </div>
+
+  <div role="tabpanel" id="preguntas" aria-labelledby="tab-preguntas" hidden>
+    <p class="slm-lead">Lo que hoy necesitamos decidir o hacer para seguir. Cada pregunta dice qué decisión toca y por qué la plantean los datos.</p>
+    <div class="slm-preguntas dash-skeleton" id="lista-preguntas" data-source="preguntas"></div>
+  </div>
+</div>
+
+<script>
+  // ---------- Cálculos (los ve quien abre Sources) ----------
+  dash.calc('conteo', {
+    inputs: ['casos'],
+    title: 'Conversaciones por clase',
+    description: 'Cuenta las conversaciones del ensayo, en total y por clase.',
+    fn: (casos) => [{
+      conversaciones: casos.length,
+      estafas: casos.filter((c) => c.clase === 'estafa').length,
+      legitimas: casos.filter((c) => c.clase === 'legítima').length,
+    }],
+  });
+
+  dash.calc('tasas', {
+    inputs: ['detectores'],
+    title: 'Tasas con intervalo del 95%',
+    description: 'Proporción de estafas con aviso y de legítimas con falsa alarma por detector, con intervalo de Wilson del 95%.',
+    fn: (detectores) => detectores.flatMap((d) => [
+      ['deteccion', Number(d.vishing_con_aviso), Number(d.vishing)],
+      ['falsas_alarmas', Number(d.falsas_alarmas), Number(d.legitimas)],
+    ].map(([medida, k, n]) => {
+      const z = 1.96, p = k / n, den = 1 + z * z / n;
+      const centro = (p + z * z / (2 * n)) / den;
+      const ancho = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / den;
+      return { clave: d.id + '|' + medida, id: d.id, nombre: d.nombre, medida, k, n, tasa: p, desde: Math.max(0, centro - ancho), hasta: Math.min(1, centro + ancho) };
+    })),
+  });
+
+  dash.calc('pares', {
+    inputs: ['casos', 'detectores'],
+    title: 'Diferencias contra el 2B',
+    description: 'Prueba de McNemar exacta sobre las mismas conversaciones: en cuántas avisa solo un detector y en cuántas solo el 2B.',
+    fn: (casos, detectores) => {
+      const comb = (n, k) => { let r = 1; for (let i = 1; i <= k; i++) r = r * (n - k + i) / i; return r; };
+      const otros = detectores.filter((d) => d.id !== 'q2');
+      return ['estafa', 'legítima'].flatMap((clase) => otros.map((otro) => {
+        const filas = casos.filter((c) => c.clase === clase);
+        const soloOtro = filas.filter((c) => c[otro.id + '_avisa'] && !c.q2_avisa).length;
+        const solo2b = filas.filter((c) => c.q2_avisa && !c[otro.id + '_avisa']).length;
+        const n = soloOtro + solo2b;
+        let cola = 0;
+        for (let i = 0; i <= Math.min(soloOtro, solo2b); i++) cola += comb(n, i);
+        const p = n === 0 ? 1 : Math.min(1, 2 * cola / 2 ** n);
+        return {
+          clave: otro.id + '|' + clase, comparacion: otro.nombre + ' contra 2B', clase: clase === 'estafa' ? 'Estafas' : 'Legítimas',
+          solo_otro: soloOtro, solo_2b: solo2b, p: Math.round(p * 10000) / 10000,
+          lectura: p < 0.05 ? 'Diferencia clara' : 'Puede ser azar',
+        };
+      }));
+    },
+  });
+
+  dash.calc('memoria_pipeline', {
+    inputs: ['detectores', 'gamas'],
+    title: 'Memoria con el ASR',
+    description: 'Memoria de cada modelo más la del reconocimiento de voz del laboratorio, contra el techo de cada gama de celular.',
+    fn: (detectores, gamas) => {
+      const asr = Number(gamas.find((g) => g.gama.startsWith('ASR')).techo_mb);
+      const techos = gamas.filter((g) => !g.gama.startsWith('ASR')).sort((a, b) => a.techo_mb - b.techo_mb);
+      const alta = Number(techos[techos.length - 1].techo_mb);
+      return detectores.filter((d) => d.memoria_mb != null).map((d) => {
+        const total = Number(d.memoria_mb) + asr;
+        const entra = techos.find((g) => total <= Number(g.techo_mb));
+        return {
+          id: d.id, nombre: d.nombre, detector_mb: Number(d.memoria_mb), asr_mb: asr, total_mb: total,
+          entra_en: entra ? entra.gama.toLowerCase() : 'ninguna',
+          margen_alta_mb: Math.max(0, alta - total), exceso_alta_mb: Math.max(0, total - alta),
+        };
+      });
+    },
+  });
+
+  // ---------- Formatos y ayudas ----------
+  const es = d3.formatLocale({ decimal: ',', thousands: '.', grouping: [3], currency: ['$', ''] });
+  const fmtN = es.format('d');
+  const fmtP = es.format('.0%');
+  const fmtR = es.format('.2f');
+  const fmtR1 = es.format('.1~f');
+  const fmtPval = (p) => (p >= 0.01 ? es.format('.2f')(p) : es.format('.4f')(p));
+  const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  const fmtFecha = (f) => (/^\d{4}-\d{2}-\d{2}$/.test(f) ? `${Number(f.slice(8, 10))} ${MESES[Number(f.slice(5, 7)) - 1]} ${f.slice(0, 4)}` : f);
+  const fmtS1 = es.format('.1f');
+  const FORMATOS = { n: (v) => fmtN(v), t: (v) => String(v), s1: (v) => fmtS1(v) };
+  const COLOR = { reglas: 'var(--cds-chart-muted)', q08: dash.colors[0], q2: dash.colors[1], q4: dash.colors[2] };
+  const SLM = ['q08', 'q2', 'q4'];
+  const CATEGORIA_COLOR = {
+    pedido_presente_bien_descrito: dash.colors[5],
+    pedido_presente_mal_descrito: dash.colors[3],
+    pedido_relatado_o_negado: dash.colors[4],
+    sospecha_sin_pedido: dash.colors[6],
+    pedido_inventado: dash.colors[7],
+  };
+  const MOMENTOS = [
+    { campo: 'antes_del_pedido', etiqueta: 'Antes del pedido', opacidad: 0.85 },
+    { campo: 'en_el_pedido', etiqueta: 'En la línea del pedido', opacidad: 0.6 },
+    { campo: 'despues_del_pedido', etiqueta: 'Después del pedido', opacidad: 0.38 },
+    { campo: 'despues_del_cumplimiento', etiqueta: 'Cuando ya cumplió', opacidad: 0.2 },
+    { campo: 'aviso_sin_pedido_de_referencia', etiqueta: 'Sin línea de pedido marcada', trama: true },
+    { campo: 'vishing_sin_aviso', etiqueta: 'No avisó', vacio: true },
+  ];
+
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  const sw = (color, cls = 'slm-sw') => {
+    const s = el('span', cls);
+    if (color) s.style.background = color;
+    return s;
+  };
+  const failLine = () => el('div', 'slm-fail', 'No se pudo cargar');
+  const filas = (d) => (Array.isArray(d.data) ? d.data : d.data ? [d.data] : []);
+
+  // Deja la caja lista: esqueleto mientras carga, una línea si falla.
+  function lista(box, d) {
+    box.classList.toggle('dash-skeleton', d.status === 'loading');
+    box.replaceChildren();
+    if (d.status === 'ok') return true;
+    if (d.status !== 'loading') box.append(failLine());
+    return false;
+  }
+
+  function nuevoSvg(box, alto, etiqueta) {
+    const ancho = Math.max(260, box.clientWidth);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${ancho} ${alto}`)
+      .attr('role', 'img').attr('aria-label', etiqueta);
+    return { svg, ancho };
+  }
+
+  function medir(svg, textos, cls) {
+    const g = svg.append('g');
+    let max = 0;
+    textos.forEach((t) => { max = Math.max(max, g.append('text').attr('class', cls).text(t).node().getComputedTextLength()); });
+    g.remove();
+    return max;
+  }
+
+  function tooltip(box) {
+    const t = el('div', 'slm-tip');
+    t.hidden = true;
+    box.append(t);
+    return t;
+  }
+  function mostrar(box, t, nodos, x, y) {
+    t.replaceChildren(...nodos);
+    t.hidden = false;
+    const bw = box.clientWidth, tw = t.offsetWidth, th = t.offsetHeight;
+    let left = x + 14;
+    if (left + tw > bw) left = x - 14 - tw;
+    t.style.left = Math.max(0, Math.min(left, bw - tw)) + 'px';
+    t.style.top = (y - th - 10 < 0 ? y + 16 : y - th - 10) + 'px';
+  }
+  const cabeza = (texto) => el('div', 'slm-tip-head', texto);
+  function renglon(color, etiqueta, valor) {
+    const r = el('div', 'slm-tip-row');
+    if (color) r.append(sw(color));
+    r.append(el('span', null, etiqueta));
+    if (valor != null) r.append(el('b', null, valor));
+    return r;
+  }
+
+  // ---------- Cifras sueltas en el texto ----------
+  function llenarCifras() {
+    document.querySelectorAll('.slm .slm-v').forEach((nodo) => {
+      const d = dash.data(nodo.dataset.source);
+      nodo.classList.toggle('dash-skeleton', d.status === 'loading');
+      if (d.status !== 'ok') { nodo.textContent = '—'; return; }
+      const rs = filas(d);
+      let fila;
+      if (nodo.dataset.where) {
+        const conds = nodo.dataset.where.split('&').map((p) => p.split('=').map(decodeURIComponent));
+        fila = rs.find((r) => conds.every(([k, v]) => String(r[k]) === v));
+      } else {
+        fila = rs[Number(nodo.dataset.row || 0)];
+      }
+      const v = fila ? fila[nodo.dataset.field] : null;
+      nodo.textContent = v == null ? '—' : FORMATOS[nodo.dataset.fmt || 'n'](v);
+    });
+  }
+
+  // ---------- Tablas ----------
+  function celda(v) {
+    if (v == null || v === '') return '—';
+    if (typeof v === 'number') return Number.isInteger(v) ? fmtN(v) : es.format('.2f')(v);
+    return String(v);
+  }
+  function llenarTabla(tabla, rs, opciones = {}) {
+    const campos = [...tabla.tHead.rows[0].cells].map((th) => ({ campo: th.dataset.field, num: th.classList.contains('slm-num') }));
+    const clave = tabla.dataset.rowKey;
+    const tbody = tabla.tBodies[0];
+    tbody.replaceChildren(...rs.map((r) => {
+      const tr = el('tr');
+      tr.dataset.key = String(r[clave]);
+      campos.forEach(({ campo, num }) => {
+        const formato = opciones.formatos && opciones.formatos[campo];
+        const td = el('td', num ? 'slm-num' : null, formato ? formato(r[campo], r) : celda(r[campo]));
+        const extra = opciones.clase && opciones.clase(campo, r);
+        if (extra) td.classList.add(extra);
+        tr.append(td);
+      });
+      return tr;
+    }));
+  }
+  function tablaDe(id, tabla, opciones) {
+    const d = dash.data(id);
+    const tbody = tabla.tBodies[0];
+    if (d.status !== 'ok') {
+      const tr = el('tr');
+      const td = el('td');
+      td.colSpan = tabla.tHead.rows[0].cells.length;
+      td.append(d.status === 'loading' ? el('span', 'dash-skeleton', '—') : failLine());
+      tr.append(td);
+      tbody.replaceChildren(tr);
+      return null;
+    }
+    const rs = opciones && opciones.preparar ? opciones.preparar(filas(d)) : filas(d);
+    llenarTabla(tabla, rs, opciones);
+    return rs;
+  }
+
+  // Tabla de casos: búsqueda y orden
+  const tablaCasos = document.getElementById('tabla-casos');
+  const buscar = document.getElementById('buscar-casos');
+  const cuentaCasos = document.getElementById('cuenta-casos');
+  const orden = { campo: null, dir: 1 };
+  const normalizar = (s) => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  [...tablaCasos.tHead.rows[0].cells].forEach((th) => {
+    const b = el('button', 'slm-sort', th.textContent);
+    b.type = 'button';
+    th.replaceChildren(b);
+    th.setAttribute('aria-sort', 'none');
+  });
+  tablaCasos.tHead.addEventListener('click', (ev) => {
+    const th = ev.target.closest('th');
+    if (!th) return;
+    const campo = th.dataset.field;
+    orden.dir = orden.campo === campo ? -orden.dir : 1;
+    orden.campo = campo;
+    [...tablaCasos.tHead.rows[0].cells].forEach((c) => c.setAttribute('aria-sort', c === th ? (orden.dir > 0 ? 'ascending' : 'descending') : 'none'));
+    dibujarCasos();
+  });
+  buscar.addEventListener('input', () => dibujarCasos());
+  function dibujarCasos() {
+    const q = normalizar(buscar.value.trim());
+    const total = filas(dash.data('casos')).length;
+    const rs = tablaDe('casos', tablaCasos, {
+      preparar: (rs) => {
+        let out = rs.filter((r) => !q || ['caso', 'grupo', 'clase', 'reglas', 'q08', 'q2', 'q4'].some((c) => normalizar(r[c]).includes(q)));
+        if (orden.campo) {
+          const c = orden.campo;
+          out = [...out].sort((a, b) => {
+            const va = a[c], vb = b[c];
+            if (va == null && vb == null) return 0;
+            if (va == null) return 1;
+            if (vb == null) return -1;
+            return (typeof va === 'number' && typeof vb === 'number' ? va - vb : String(va).localeCompare(String(vb), 'es', { numeric: true })) * orden.dir;
+          });
+        }
+        return out;
+      },
+      clase: (campo, r) => (campo in COLOR ? (r[campo + '_acierta'] ? 'slm-bien' : 'slm-mal') : null),
+    });
+    cuentaCasos.textContent = rs ? `${fmtN(rs.length)} de ${fmtN(total)} conversaciones` : '';
+  }
+
+  // ---------- Gráficos ----------
+  function dibujarTasas(box, medida) {
+    const d = dash.data('tasas');
+    if (!lista(box, d)) return;
+    const rs = d.data.filter((r) => r.medida === medida);
+    const filaAlto = 30, arriba = 6, abajo = 26;
+    const alto = arriba + rs.length * filaAlto + abajo;
+    const titulo = medida === 'deteccion' ? 'Estafas con aviso' : 'Legítimas con falsa alarma';
+    const { svg, ancho } = nuevoSvg(box, alto, titulo + ' por detector, con intervalo del 95%');
+    const finales = rs.map((r) => `${fmtN(r.k)} de ${fmtN(r.n)}`);
+    const izq = medir(svg, rs.map((r) => r.nombre), 'slm-label') + 12;
+    const der = medir(svg, finales, 'slm-end') + 14;
+    const x = d3.scaleLinear([0, 1], [izq, ancho - der]);
+    const y = (i) => arriba + i * filaAlto + filaAlto / 2;
+    const marcas = ancho - der - izq < 220 ? [0, 0.5, 1] : [0, 0.25, 0.5, 0.75, 1];
+    svg.append('g').selectAll('line').data(marcas).join('line').attr('class', 'slm-grid-line')
+      .attr('x1', (v) => x(v)).attr('x2', (v) => x(v)).attr('y1', arriba).attr('y2', alto - abajo);
+    svg.append('g').selectAll('text').data(marcas).join('text').attr('class', 'slm-tick')
+      .attr('x', (v) => x(v)).attr('y', alto - abajo + 16).attr('text-anchor', 'middle').text((v) => fmtP(v));
+    rs.forEach((r, i) => {
+      svg.append('text').attr('class', 'slm-label').attr('x', izq - 12).attr('y', y(i)).attr('dy', '0.32em').attr('text-anchor', 'end').text(r.nombre);
+      svg.append('line').attr('class', 'slm-ci').style('stroke', COLOR[r.id])
+        .attr('x1', x(r.desde)).attr('x2', x(r.hasta)).attr('y1', y(i)).attr('y2', y(i));
+      svg.append('circle').attr('class', 'slm-dot').style('fill', COLOR[r.id]).attr('r', 5).attr('cx', x(r.tasa)).attr('cy', y(i));
+      svg.append('text').attr('class', 'slm-end').attr('x', ancho - der + 14).attr('y', y(i)).attr('dy', '0.32em').text(finales[i]);
+    });
+    const t = tooltip(box);
+    svg.append('g').selectAll('rect').data(rs).join('rect').attr('class', 'slm-hit')
+      .attr('x', 0).attr('width', ancho).attr('y', (r, i) => y(i) - filaAlto / 2).attr('height', filaAlto)
+      .on('pointerenter pointermove', (ev, r) => {
+        const [px, py] = d3.pointer(ev, box);
+        mostrar(box, t, [cabeza(r.nombre), renglon(COLOR[r.id], titulo, `${fmtN(r.k)} de ${fmtN(r.n)} (${fmtP(r.tasa)})`), renglon(null, 'Intervalo del 95%', `${fmtP(r.desde)} a ${fmtP(r.hasta)}`)], px, py);
+      })
+      .on('pointerleave', () => { t.hidden = true; });
+  }
+
+  function barrasApiladas(box, { filasDatos, segmentos, total, etiqueta, finalDe, tip }) {
+    const filaAlto = 34, barra = 20, arriba = 4, abajo = 26;
+    const alto = arriba + filasDatos.length * filaAlto + abajo;
+    const { svg, ancho } = nuevoSvg(box, alto, etiqueta);
+    const finales = filasDatos.map(finalDe);
+    const izq = medir(svg, filasDatos.map((f) => f.nombre), 'slm-label') + 12;
+    const der = medir(svg, finales, 'slm-end') + 14;
+    const x = d3.scaleLinear([0, total], [izq, ancho - der]);
+    const y = (i) => arriba + i * filaAlto + (filaAlto - barra) / 2;
+    const marcas = x.ticks(ancho - der - izq < 220 ? 3 : 6).filter(Number.isInteger);
+    svg.append('g').selectAll('line').data(marcas).join('line').attr('class', 'slm-grid-line')
+      .attr('x1', (v) => x(v)).attr('x2', (v) => x(v)).attr('y1', arriba).attr('y2', alto - abajo);
+    svg.append('g').selectAll('text').data(marcas).join('text').attr('class', 'slm-tick')
+      .attr('x', (v) => x(v)).attr('y', alto - abajo + 16).attr('text-anchor', 'middle').text((v) => fmtN(v));
+    const defs = svg.append('defs');
+    const trama = 'trama-' + box.id;
+    defs.append('pattern').attr('id', trama).attr('patternUnits', 'userSpaceOnUse').attr('width', 5).attr('height', 5).attr('patternTransform', 'rotate(45)')
+      .append('rect').attr('width', 1.5).attr('height', 5).style('fill', 'var(--color-fg-muted)');
+    const t = tooltip(box);
+    filasDatos.forEach((f, i) => {
+      svg.append('text').attr('class', 'slm-label').attr('x', izq - 12).attr('y', y(i) + barra / 2).attr('dy', '0.32em').attr('text-anchor', 'end').text(f.nombre);
+      let acum = 0;
+      segmentos.forEach((s) => {
+        const v = Number(s.valor(f)) || 0;
+        if (v <= 0) return;
+        const x0 = x(acum), x1 = x(acum + v);
+        acum += v;
+        const w = Math.max(1, x1 - x0 - 2);
+        const rect = svg.append('rect').attr('x', x0).attr('y', y(i)).attr('width', w).attr('height', barra).attr('rx', 2);
+        if (s.vacio) rect.attr('class', 'slm-seg-vacio');
+        else if (s.trama) rect.style('fill', `url(#${trama})`);
+        else rect.style('fill', s.color).style('fill-opacity', s.opacidad ?? 1);
+        rect.on('pointerenter pointermove', (ev) => {
+          const [px, py] = d3.pointer(ev, box);
+          mostrar(box, t, tip(f, s, v), px, py);
+        }).on('pointerleave', () => { t.hidden = true; });
+      });
+      svg.append('text').attr('class', 'slm-end').attr('x', ancho - der + 14).attr('y', y(i) + barra / 2).attr('dy', '0.32em').text(finales[i]);
+    });
+  }
+
+  function leyenda(contenedor, items) {
+    const l = el('div', 'slm-legend');
+    items.forEach(([marca, texto]) => { const s = el('span'); s.append(marca, el('span', null, texto)); l.append(s); });
+    contenedor.append(l);
+  }
+
+  function dibujarFundamento(box) {
+    const d = dash.data('fundamento');
+    if (!lista(box, d)) return;
+    const categorias = [...new Map(d.data.map((r) => [r.categoria, r.etiqueta])).entries()];
+    leyenda(box, categorias.map(([c, e]) => [sw(CATEGORIA_COLOR[c]), e]));
+    const porModelo = d3.groups(d.data, (r) => r.detector).map(([id, rs]) => ({ id, nombre: rs[0].nombre, rs, total: d3.sum(rs, (r) => Number(r.avisos)) }));
+    const chart = el('div', 'slm-chart');
+    chart.id = 'grafico-fundamento-barras';
+    box.append(chart);
+    barrasApiladas(chart, {
+      filasDatos: porModelo,
+      segmentos: categorias.map(([c, e]) => ({ categoria: c, etiqueta: e, color: CATEGORIA_COLOR[c], valor: (f) => f.rs.find((r) => r.categoria === c).avisos })),
+      total: d3.max(porModelo, (f) => f.total),
+      etiqueta: 'Primeros avisos de cada modelo según en qué se apoyan',
+      finalDe: (f) => `${fmtN(f.total)} avisos`,
+      tip: (f, s) => {
+        const r = f.rs.find((x) => x.categoria === s.categoria);
+        return [cabeza(f.nombre), renglon(s.color, s.etiqueta, fmtN(r.avisos)), renglon(null, 'En estafas', fmtN(r.en_estafas)), renglon(null, 'En legítimas', fmtN(r.en_legitimas))];
+      },
+    });
+  }
+
+  function dibujarMomento(box) {
+    const d = dash.data('detectores');
+    if (!lista(box, d)) return;
+    leyenda(box, MOMENTOS.map((m) => {
+      const s = sw(m.trama || m.vacio ? null : 'var(--color-fg)', 'slm-sw' + (m.trama ? ' slm-sw-trama' : '') + (m.vacio ? ' slm-sw-vacio' : ''));
+      if (m.opacidad) s.style.opacity = m.opacidad;
+      return [s, m.etiqueta];
+    }));
+    const chart = el('div', 'slm-chart');
+    chart.id = 'grafico-momento-barras';
+    box.append(chart);
+    barrasApiladas(chart, {
+      filasDatos: d.data,
+      segmentos: MOMENTOS.map((m) => ({ ...m, color: 'var(--color-fg)', valor: (f) => f[m.campo] })),
+      total: d3.max(d.data, (f) => Number(f.vishing)),
+      etiqueta: 'Momento del primer aviso en las estafas, por detector',
+      finalDe: (f) => `${fmtN(f.vishing_con_aviso)} con aviso`,
+      tip: (f, s, v) => [cabeza(f.nombre), renglon(null, s.etiqueta, `${fmtN(v)} de ${fmtN(f.vishing)} estafas`)],
+    });
+  }
+
+  function dibujarMemoria(box) {
+    const d = dash.data('memoria_pipeline');
+    const g = dash.data('gamas');
+    if (!lista(box, d.status === 'ok' ? g : d)) return;
+    const rs = d.data;
+    const techos = filas(g).filter((r) => !r.gama.startsWith('ASR')).sort((a, b) => a.techo_mb - b.techo_mb);
+    const mezcla = el('span', 'slm-sw');
+    mezcla.style.background = `linear-gradient(90deg, ${COLOR.q08} 0 33%, ${COLOR.q2} 33% 66%, ${COLOR.q4} 66%)`;
+    const ref = el('span', 'slm-sw-dash');
+    leyenda(box, [[sw('var(--cds-chart-muted)'), 'Reconocimiento de voz (aprox.)'], [mezcla, 'Modelo detector'], [ref, 'Techo de la gama']]);
+    const chart = el('div', 'slm-chart');
+    box.append(chart);
+    const filaAlto = 34, barra = 20, arriba = techos.length * 15 + 6, abajo = 26;
+    const alto = arriba + rs.length * filaAlto + abajo;
+    const { svg, ancho } = nuevoSvg(chart, alto, 'Memoria del detector más el reconocimiento de voz, contra el techo de cada gama');
+    const finales = rs.map((r) => `${fmtN(r.total_mb)} MB`);
+    const izq = medir(svg, rs.map((r) => r.nombre), 'slm-label') + 12;
+    const der = medir(svg, finales, 'slm-end') + 14;
+    const x = d3.scaleLinear([0, Math.max(d3.max(rs, (r) => r.total_mb), d3.max(techos, (r) => Number(r.techo_mb)))], [izq, ancho - der]).nice();
+    const y = (i) => arriba + i * filaAlto + (filaAlto - barra) / 2;
+    const marcas = x.ticks(ancho - der - izq < 220 ? 2 : 4);
+    svg.append('g').selectAll('line').data(marcas).join('line').attr('class', 'slm-grid-line')
+      .attr('x1', (v) => x(v)).attr('x2', (v) => x(v)).attr('y1', arriba).attr('y2', alto - abajo);
+    svg.append('g').selectAll('text').data(marcas).join('text').attr('class', 'slm-tick')
+      .attr('x', (v) => x(v)).attr('y', alto - abajo + 16).attr('text-anchor', 'middle').text((v) => fmtN(v));
+    const t = tooltip(chart);
+    rs.forEach((r, i) => {
+      svg.append('text').attr('class', 'slm-label').attr('x', izq - 12).attr('y', y(i) + barra / 2).attr('dy', '0.32em').attr('text-anchor', 'end').text(r.nombre);
+      const xa = x(0), xb = x(r.asr_mb), xc = x(r.total_mb);
+      svg.append('rect').attr('x', xa).attr('y', y(i)).attr('width', Math.max(1, xb - xa - 2)).attr('height', barra).attr('rx', 2).style('fill', 'var(--cds-chart-muted)');
+      svg.append('rect').attr('x', xb).attr('y', y(i)).attr('width', Math.max(1, xc - xb)).attr('height', barra).attr('rx', 2).style('fill', COLOR[r.id]);
+      svg.append('text').attr('class', 'slm-end').attr('x', ancho - der + 14).attr('y', y(i) + barra / 2).attr('dy', '0.32em').text(finales[i]);
+      svg.append('rect').attr('class', 'slm-hit').attr('x', 0).attr('width', ancho).attr('y', y(i) - (filaAlto - barra) / 2).attr('height', filaAlto)
+        .on('pointerenter pointermove', (ev) => {
+          const [px, py] = d3.pointer(ev, chart);
+          mostrar(chart, t, [
+            cabeza(r.nombre),
+            renglon(COLOR[r.id], 'Modelo detector', `${fmtN(r.detector_mb)} MB`),
+            renglon('var(--cds-chart-muted)', 'Reconocimiento de voz', `${fmtN(r.asr_mb)} MB`),
+            renglon(null, 'Total', `${fmtN(r.total_mb)} MB`),
+            renglon(null, 'Entra en la gama', r.entra_en),
+          ], px, py);
+        })
+        .on('pointerleave', () => { t.hidden = true; });
+    });
+    techos.forEach((g, j) => {
+      const xr = x(Number(g.techo_mb));
+      svg.append('line').attr('class', 'slm-ref').attr('x1', xr).attr('x2', xr).attr('y1', j * 15 + 6).attr('y2', alto - abajo);
+      const lbl = svg.append('text').attr('class', 'slm-ref-label').attr('x', xr + 4).attr('y', j * 15 + 11).text(`${g.gama} · ${fmtN(g.techo_mb)} MB`);
+      if (xr + 4 + lbl.node().getComputedTextLength() > ancho) lbl.attr('x', xr - 4).attr('text-anchor', 'end');
+    });
+  }
+
+  function dibujarVelocidad(box) {
+    const d = dash.data('velocidad');
+    const u = dash.data('umbrales');
+    if (!lista(box, d.status === 'ok' ? u : d)) return;
+    const rs = d.data;
+    const umbrales = filas(u).slice().sort((a, b) => a.p95_s - b.p95_s);
+    leyenda(box, [[sw(null, 'slm-sw-dot'), 'Mediana: la mitad de las líneas tarda menos'], [sw('var(--color-fg-muted)', 'slm-sw-line'), 'Hasta el percentil 95'], [el('span', 'slm-sw-dash'), 'Objetivo y límite de latencia']]);
+    const chart = el('div', 'slm-chart');
+    box.append(chart);
+    const filaAlto = 30, arriba = umbrales.length * 15 + 6, abajo = 40;
+    const alto = arriba + rs.length * filaAlto + abajo;
+    const { svg, ancho } = nuevoSvg(chart, alto, 'Segundos por línea, mediana y percentil 95, con y sin placa de video');
+    const conFinales = ancho >= 420;
+    const finales = rs.map((r) => `${fmtS1(r.s_p50)} · ${fmtS1(r.s_p95)} s`);
+    const izq = medir(svg, rs.map((r) => r.etiqueta), 'slm-label') + 12;
+    const der = conFinales ? medir(svg, finales, 'slm-end') + 14 : 12;
+    const x = d3.scaleLinear([0, Math.max(d3.max(rs, (r) => Number(r.s_p95)), d3.max(umbrales, (r) => Number(r.p95_s)))], [izq, ancho - der]).nice();
+    const y = (i) => arriba + i * filaAlto + filaAlto / 2;
+    const marcas = x.ticks(ancho - der - izq < 220 ? 3 : 6);
+    svg.append('g').selectAll('line').data(marcas).join('line').attr('class', 'slm-grid-line')
+      .attr('x1', (v) => x(v)).attr('x2', (v) => x(v)).attr('y1', arriba).attr('y2', alto - abajo);
+    svg.append('g').selectAll('text').data(marcas).join('text').attr('class', 'slm-tick')
+      .attr('x', (v) => x(v)).attr('y', alto - abajo + 16).attr('text-anchor', 'middle').text((v) => fmtN(v));
+    svg.append('text').attr('class', 'slm-tick').attr('x', (izq + ancho - der) / 2).attr('y', alto - 4).attr('text-anchor', 'middle').text('segundos por línea');
+    umbrales.forEach((g, j) => {
+      const xr = x(Number(g.p95_s));
+      svg.append('line').attr('class', 'slm-ref').attr('x1', xr).attr('x2', xr).attr('y1', j * 15 + 6).attr('y2', alto - abajo);
+      const lbl = svg.append('text').attr('class', 'slm-ref-label').attr('x', xr + 4).attr('y', j * 15 + 11).text(`${g.umbral} · ${fmtS1(g.p95_s)} s`);
+      if (xr + 4 + lbl.node().getComputedTextLength() > ancho) lbl.attr('x', xr - 4).attr('text-anchor', 'end');
+    });
+    const t = tooltip(chart);
+    rs.forEach((r, i) => {
+      svg.append('text').attr('class', 'slm-label').attr('x', izq - 12).attr('y', y(i)).attr('dy', '0.32em').attr('text-anchor', 'end').text(r.etiqueta);
+      svg.append('line').attr('class', 'slm-ci').style('stroke', COLOR[r.detector]).attr('x1', x(r.s_p50)).attr('x2', x(r.s_p95)).attr('y1', y(i)).attr('y2', y(i));
+      svg.append('line').attr('class', 'slm-line').style('stroke', COLOR[r.detector]).attr('x1', x(r.s_p95)).attr('x2', x(r.s_p95)).attr('y1', y(i) - 6).attr('y2', y(i) + 6);
+      svg.append('circle').attr('class', 'slm-dot').style('fill', COLOR[r.detector]).attr('r', 5).attr('cx', x(r.s_p50)).attr('cy', y(i));
+      if (conFinales) svg.append('text').attr('class', 'slm-end').attr('x', ancho - der + 14).attr('y', y(i)).attr('dy', '0.32em').text(finales[i]);
+      svg.append('rect').attr('class', 'slm-hit').attr('x', 0).attr('width', ancho).attr('y', y(i) - filaAlto / 2).attr('height', filaAlto)
+        .on('pointerenter pointermove', (ev) => {
+          const [px, py] = d3.pointer(ev, chart);
+          const nodos = [
+            cabeza(`${r.nombre} · ${r.hardware}`),
+            renglon(COLOR[r.detector], 'Mediana', `${fmtS1(r.s_p50)} s`),
+            renglon(null, 'Percentil 95', `${fmtS1(r.s_p95)} s`),
+            renglon(null, 'Máximo', `${fmtS1(r.s_max)} s`),
+          ];
+          if (r.s_aviso_p50 != null) nodos.push(renglon(null, 'Líneas con aviso (mediana)', `${fmtS1(r.s_aviso_p50)} s`));
+          nodos.push(renglon(null, 'Memoria', `${fmtN(r.memoria_mb)} MB`), renglon(null, 'Conversaciones', fmtN(r.conversaciones)));
+          mostrar(chart, t, nodos, px, py);
+        })
+        .on('pointerleave', () => { t.hidden = true; });
+    });
+  }
+
+  function dibujarLeyendaTrayectorias(box) {
+    const d = dash.data('trayectorias');
+    box.replaceChildren();
+    if (d.status !== 'ok') return;
+    const nombres = new Map(d.data.map((r) => [r.detector, r.nombre]));
+    SLM.forEach((id) => {
+      const s = el('span');
+      s.append(sw(COLOR[id], 'slm-sw-line'), el('span', null, nombres.get(id)));
+      box.append(s);
+    });
+    [[sw(null, 'slm-sw-dot'), 'Primer aviso'], [sw(null, 'slm-sw-rombo'), 'Aviso de las reglas'], [el('span', 'slm-sw-dash'), 'Línea del pedido y del cumplimiento']].forEach(([m, txt]) => {
+      const s = el('span');
+      s.append(m, el('span', null, txt));
+      box.append(s);
+    });
+  }
+
+  function dibujarTrayectorias(box) {
+    const d = dash.data('trayectorias');
+    if (!lista(box, d)) return;
+    d3.groups(d.data, (r) => r.caso).forEach(([caso, rs]) => {
+      const fig = el('figure', 'slm-multiple');
+      const cap = el('figcaption');
+      cap.append(el('span', 'slm-mult-title', rs[0].titulo), el('span', 'slm-mult-id', caso));
+      const chart = el('div', 'slm-chart');
+      fig.append(cap, chart);
+      box.append(fig);
+      unaTrayectoria(chart, rs);
+    });
+  }
+
+  function unaTrayectoria(box, rs) {
+    const arriba = 30, plotAlto = 110, ejeX = arriba + plotAlto, reglasY = ejeX + 34, alto = reglasY + 12;
+    const n = d3.max(rs, (r) => Number(r.linea));
+    const { svg, ancho } = nuevoSvg(box, alto, 'Riesgo por línea de cada modelo en ' + rs[0].caso);
+    const izq = Math.max(medir(svg, ['Reglas'], 'slm-tick'), medir(svg, ['0,5'], 'slm-tick')) + 12;
+    const der = 12;
+    const x = d3.scaleLinear([1, n], [izq + 8, ancho - der]);
+    const y = d3.scaleLinear([0, 1], [ejeX, arriba]);
+    [0, 0.5, 1].forEach((v) => {
+      svg.append('line').attr('class', v === 0 ? 'slm-axis' : 'slm-grid-line').attr('x1', izq).attr('x2', ancho - der).attr('y1', y(v)).attr('y2', y(v));
+      svg.append('text').attr('class', 'slm-tick').attr('x', izq - 6).attr('y', y(v)).attr('dy', '0.32em').attr('text-anchor', 'end').text(fmtR1(v));
+    });
+    const paso = (ancho - der - izq) / Math.max(1, n - 1) < 22 ? 2 : 1;
+    d3.range(1, n + 1, paso).forEach((l) => {
+      svg.append('text').attr('class', 'slm-tick').attr('x', x(l)).attr('y', ejeX + 15).attr('text-anchor', 'middle').text(fmtN(l));
+    });
+    svg.append('line').attr('class', 'slm-grid-line').attr('x1', izq).attr('x2', ancho - der).attr('y1', reglasY).attr('y2', reglasY);
+    svg.append('text').attr('class', 'slm-tick').attr('x', izq - 6).attr('y', reglasY).attr('dy', '0.32em').attr('text-anchor', 'end').text('Reglas');
+    const base = rs[0];
+    [[base.pedido_linea, 'pedido', 10], [base.cumplimiento_linea, 'cumple', 23]].forEach(([l, texto, ty]) => {
+      if (l == null) return;
+      const xr = x(Number(l));
+      svg.append('line').attr('class', 'slm-ref').attr('x1', xr).attr('x2', xr).attr('y1', ty + 3).attr('y2', reglasY + 6);
+      svg.append('text').attr('class', 'slm-ref-label').attr('x', xr).attr('y', ty).attr('text-anchor', xr > ancho - 40 ? 'end' : 'middle').text(texto);
+    });
+    const series = SLM.map((id) => ({ id, puntos: rs.filter((r) => r.detector === id && r.riesgo != null).sort((a, b) => a.linea - b.linea) }));
+    series.forEach((s) => {
+      svg.append('path').datum(s.puntos).attr('class', 'slm-line').style('stroke', COLOR[s.id])
+        .attr('d', d3.line((r) => x(Number(r.linea)), (r) => y(Number(r.riesgo))));
+    });
+    series.forEach((s) => {
+      const av = s.puntos.find((r) => r.aviso);
+      if (av) svg.append('circle').attr('class', 'slm-dot').style('fill', COLOR[s.id]).attr('r', 6).attr('cx', x(Number(av.linea))).attr('cy', y(Number(av.riesgo)));
+    });
+    const avReglas = rs.find((r) => r.detector === 'reglas' && r.aviso);
+    if (avReglas) {
+      svg.append('rect').attr('width', 9).attr('height', 9).style('fill', 'var(--color-fg-muted)')
+        .attr('transform', `translate(${x(Number(avReglas.linea))},${reglasY - 6.4}) rotate(45)`);
+    }
+    const regla = svg.append('line').attr('class', 'slm-rule').attr('y1', arriba).attr('y2', reglasY + 6).style('display', 'none');
+    const t = tooltip(box);
+    svg.append('rect').attr('class', 'slm-hit').attr('x', izq).attr('width', ancho - der - izq + 6).attr('y', 0).attr('height', alto)
+      .on('pointerenter pointermove', (ev) => {
+        const [px, py] = d3.pointer(ev, box);
+        const [sx] = d3.pointer(ev, svg.node());
+        const l = Math.max(1, Math.min(n, Math.round(x.invert(sx))));
+        regla.attr('x1', x(l)).attr('x2', x(l)).style('display', null);
+        const deLinea = rs.filter((r) => Number(r.linea) === l);
+        const nodos = [cabeza(`Línea ${fmtN(l)}`), el('div', 'slm-tip-text', deLinea[0].texto)];
+        SLM.forEach((id) => {
+          const r = deLinea.find((x2) => x2.detector === id);
+          if (r) nodos.push(renglon(COLOR[id], r.nombre + (r.aviso ? ' · primer aviso' : ''), r.riesgo == null ? '—' : fmtR(r.riesgo)));
+        });
+        const rr = deLinea.find((x2) => x2.detector === 'reglas');
+        if (rr && rr.aviso) nodos.push(renglon('var(--color-fg-muted)', 'Reglas · aviso', null));
+        mostrar(box, t, nodos, px, py);
+      })
+      .on('pointerleave', () => { t.hidden = true; regla.style('display', 'none'); });
+  }
+
+  // ---------- Paso a paso y preguntas ----------
+  function dibujarPasos(box) {
+    const d = dash.data('pasos');
+    if (!lista(box, d)) return;
+    [...d.data].sort((a, b) => a.orden - b.orden).forEach((p) => {
+      const li = el('li', 'slm-paso' + (/^\d{4}-/.test(p.fecha) ? '' : ' slm-paso-pendiente'));
+      const cuerpo = el('div');
+      cuerpo.append(
+        el('div', 'slm-paso-meta', fmtFecha(p.fecha)),
+        el('h3', null, p.etapa),
+        el('p', null, p.que_se_hizo),
+      );
+      const res = el('p');
+      res.append(el('b', null, 'Resultado: '), document.createTextNode(p.resultado));
+      const donde = el('p', 'slm-paso-meta');
+      donde.append(el('code', null, p.donde));
+      cuerpo.append(res, donde);
+      li.append(el('div', 'slm-paso-n', fmtN(p.orden)), cuerpo);
+      box.append(li);
+    });
+  }
+
+  function dibujarPreguntas(box) {
+    const d = dash.data('preguntas');
+    if (!lista(box, d)) return;
+    [...d.data].sort((a, b) => a.orden - b.orden).forEach((q) => {
+      const card = el('article', 'slm-card slm-pregunta');
+      const top = el('div', 'slm-pregunta-top');
+      top.append(el('span', null, `${fmtN(q.orden)} · ${q.tema}`), el('span', 'slm-chip', q.decide));
+      card.append(top, el('p', 'slm-pregunta-q', q.pregunta), el('p', 'slm-pregunta-why', q.por_que));
+      box.append(card);
+    });
+  }
+
+  // ---------- Pestañas y enlaces ----------
+  const pestanas = [...document.querySelectorAll('.slm-tab')];
+  const panel = (tab) => document.getElementById(tab.getAttribute('aria-controls'));
+  const panelResultados = document.getElementById('resultados');
+  function mostrarPestana(tab, enlazar = true) {
+    pestanas.forEach((t) => {
+      const activa = t === tab;
+      t.setAttribute('aria-selected', String(activa));
+      t.tabIndex = activa ? 0 : -1;
+      panel(t).hidden = !activa;
+    });
+    if (tab.id === 'tab-resultados') dibujarGraficos();
+    if (enlazar) dash.setLink(panel(tab).id);
+  }
+  pestanas.forEach((tab, i) => {
+    tab.addEventListener('click', () => mostrarPestana(tab));
+    tab.addEventListener('keydown', (ev) => {
+      if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft') return;
+      const otra = pestanas[(i + (ev.key === 'ArrowRight' ? 1 : pestanas.length - 1)) % pestanas.length];
+      otra.focus();
+      mostrarPestana(otra);
+    });
+  });
+  document.querySelectorAll('.slm-jump button').forEach((b) => {
+    b.addEventListener('click', () => {
+      const destino = document.getElementById(b.dataset.ir);
+      destino.scrollIntoView({ block: 'start' });
+      dash.setLink(destino.id);
+    });
+  });
+
+  // ---------- Dibujo ----------
+  function dibujarGraficos() {
+    if (panelResultados.hidden) return;
+    dibujarTasas(document.getElementById('grafico-deteccion'), 'deteccion');
+    dibujarTasas(document.getElementById('grafico-falsas'), 'falsas_alarmas');
+    dibujarFundamento(document.getElementById('grafico-fundamento'));
+    dibujarMomento(document.getElementById('grafico-momento'));
+    dibujarMemoria(document.getElementById('grafico-memoria'));
+    dibujarVelocidad(document.getElementById('grafico-velocidad'));
+    dibujarTrayectorias(document.getElementById('grafico-trayectorias'));
+  }
+
+  let enlaceAbierto = false;
+  dash.onData(() => {
+    llenarCifras();
+    tablaDe('pares', document.getElementById('tabla-pares'), { formatos: { p: (v) => fmtPval(v) } });
+    tablaDe('por_grupo', document.getElementById('tabla-por-grupo'));
+    tablaDe('acuerdo', document.getElementById('tabla-acuerdo'), { formatos: { kappa: (v) => es.format('.2f')(v) } });
+    tablaDe('fundamento', document.getElementById('tabla-fundamento'));
+    tablaDe('detectores', document.getElementById('tabla-momento'));
+    tablaDe('repeticion_casos', document.getElementById('tabla-repeticion'));
+    tablaDe('cpu_vs_gpu', document.getElementById('tabla-cpu-vs-gpu'));
+    tablaDe('cpu_vs_gpu', document.getElementById('tabla-cpu-vs-gpu-totales'));
+    tablaDe('cpu_vs_gpu_casos', document.getElementById('tabla-cpu-vs-gpu-casos'));
+    dibujarCasos();
+    dibujarLeyendaTrayectorias(document.getElementById('leyenda-trayectorias'));
+    dibujarPasos(document.getElementById('lista-pasos'));
+    dibujarPreguntas(document.getElementById('lista-preguntas'));
+    dibujarGraficos();
+    if (!enlaceAbierto && dash.data('casos').status === 'ok') {
+      enlaceAbierto = true;
+      const nombre = location.hash.slice(1);
+      const destino = nombre && document.getElementById(nombre);
+      if (destino && destino.closest('.slm')) {
+        const tab = pestanas.find((t) => panel(t).contains(destino));
+        if (tab) mostrarPestana(tab, false);
+        destino.scrollIntoView({ block: 'start' });
+      }
+    }
+  });
+</script>

@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-BANCO-012",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-012",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Una alerta de destinatario desconocido genera presión y evasivas de identificación, pero la conversación se interrumpe por una situación doméstica antes de cualquier solicitud crítica. No termina con una negativa de seguridad ni se inventa un pedido que habría ocurrido después.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R y T_C nulos: no se observa pedido de secreto, dato personal, dinero ni permiso. La clase vishing es una hipótesis del escenario autoral y no se demuestra solo con esta transcripción truncada. D07 debe revisar si este caso pertenece a una categoría indeterminada, y D08 cómo se evalúa; no se fija una regla de falsa alarma. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Un supuesto control bancario anuncia un alta de destinatario y apura una revisión; la llamada se pierde mientras la persona atiende el timbre, sin pedido crítico observable."
+}

@@ -1,0 +1,59 @@
+{
+  "case_id": "CV2-D-V-BANCO-007",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-007",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 17,
+  "t_c_linea": 26,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 8,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 16,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 17,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    },
+    {
+      "linea": 23,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 26,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Pedido indirecto de cambiar el receptor de verificaciones a un número ajeno, presentado como retiro de un registro viejo. El objeto anafórico se identifica antes de la solicitud y el cumplimiento consiste en el cambio efectivamente mostrado; no se trata de proteger quitando un equipo desconocido.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la instrucción de seleccionar y confirmar el número ajeno; la descripción previa del trámite no contiene todavía esa instrucción. T_C se ubica cuando la persona informa el receptor que quedó registrado. La narración no pretende documentar una función de una app real. D07 sigue abierta para el criterio de pedido indirecto. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Un falso operador bancario presenta el cambio de receptor de verificaciones a un teléfono desconocido como una actualización temporal del padrón."
+}

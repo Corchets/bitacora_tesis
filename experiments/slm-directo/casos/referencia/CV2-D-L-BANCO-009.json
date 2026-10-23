@@ -1,0 +1,33 @@
+{
+  "case_id": "CV2-D-L-BANCO-009",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-009",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 5,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 6,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "En L5 aparece «Uno pendiente por 27.900. Me acuerdo que marqué el PIN y después quedó cargando.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una clienta consulta cómo revertir una compra autorizada que no se asentó; menciona el pin de su tarjeta como recuerdo, sin dictarlo.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "SC-BANK-OTP-01",
+  "situacion": "Una clienta consulta cómo revertir una compra autorizada que no se asentó; menciona el PIN de su tarjeta como recuerdo, sin dictarlo."
+}

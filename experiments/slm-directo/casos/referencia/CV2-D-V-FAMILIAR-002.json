@@ -1,0 +1,47 @@
+{
+  "case_id": "CV2-D-V-FAMILIAR-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-FAMILIAR-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 16,
+  "t_c_linea": 27,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 6,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 16,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 27,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una supuesta emergencia familiar combina un número prestado, una contradicción sobre la moto y un destinatario ajeno. El pedido de transferir aparece después de varios intentos de ubicar al familiar; se observa el pago completo, sin confundir la pregunta de la destinataria con el pedido del llamante.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la primera instrucción explícita de transferir, no en el relato de que el conductor exige dinero. T_C en la confirmación del pago completo. Los indicios de identidad contradictoria apoyan la escena autoral, pero no prueban quién llama: D07 debe revisar la clase y las marcas. Alias y nombres son ficticios. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Un supuesto hijo lesionado exige pagar a una tercera persona antes de permitir que la madre lo ubique, y ella confirma la transferencia."
+}

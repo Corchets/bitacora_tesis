@@ -1,0 +1,44 @@
+{
+  "case_id": "CV2-D-V-PREMIO-005",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-PREMIO-005",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "contexto",
+      "etiquetas": [
+        "ISOLATION_SECRECY"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "La supuesta selección de entradas del Festival del Patio exige responder a tiempo y desalienta consultar condiciones públicas, sin concretar un pedido de datos o dinero. Prueba no confundir una reserva sugerida con un pedido crítico ya ocurrido.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "premio",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Una supuesta selección del Festival del Patio presiona para reservar antes de una publicación pública; la persona decide esperar y la llamada termina sin pedido crítico."
+}

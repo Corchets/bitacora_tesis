@@ -1,0 +1,19 @@
+{
+  "case_id": "LAB-banco-app-parafrasis",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": []},
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Paráfrasis anti-overfit de la legítima del banco: consejo de cortar y revisar uno mismo la app, sin pedido.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/legitima/banco-app-parafrasis.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025 (misma modalidad que banco-revisa-app.txt), redacción propia del equipo; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Paráfrasis de LAB-banco-revisa-app en el laboratorio; par null. Incendio esperado por el laboratorio: ninguno y sin goteo (comentario del guion); coincide con t_r_linea null. Hablantes: la línea 5 se asignó a A por alternancia; también podría decirla B después de revisar los movimientos. «entra con tu huella» se refiere a la app propia de B: no es pedido de credencial ni de acceso. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

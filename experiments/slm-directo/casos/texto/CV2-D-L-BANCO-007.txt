@@ -1,0 +1,23 @@
+A: Llamo por el resumen de la tarjeta. Hay una línea que dice “clave de comercio” y no entiendo qué significa.
+B: Buenas, ¿la ves dentro del detalle de un consumo?
+A: Sí, al lado de una compra en una librería. Dice CLAVE 04, nada más.
+B: Eso puede ser la descripción que envió el local. ¿Qué importe figura?
+A: 6.240 pesos. El sábado compré cuadernos y una carpeta.
+B: ¿Coincide con lo que pagaste?
+A: Más o menos. Creo que eran seis mil y algo.
+B: Entonces probablemente sea el mismo consumo. Estamos mirando solo el texto del resumen.
+A: Claro, yo no estaba pensando en la clave de la cuenta. Me llamó la atención la palabra.
+B: Tiene sentido. A veces el nombre del comercio se corta o muestra una abreviatura interna.
+A: ¿Puedo cambiar cómo se ve eso en la aplicación?
+B: No desde el banco. La descripción viene informada por el negocio.
+A: Bueno. Aprovecho y te pregunto por el pago mínimo, porque me cambió bastante.
+B: El mes pasado tenías menos compras en cuotas. ¿Querés que comparemos el detalle?
+A: Sí, me gustaría entenderlo antes del vencimiento.
+B: Veo dos cuotas nuevas de la heladera y una compra en tres pagos de la farmacia.
+A: La heladera sí, pero la farmacia la pagué de una. ¿Puede estar mal?
+B: La farmacia aparece como un solo consumo, sin cuotas. Capaz estás viendo el total financiado de otra compra.
+A: Ahí encontré la línea, dice ferretería, no farmacia. Es por una caja de herramientas.
+B: Entonces coincide con lo que recordás. El resumen cierra el jueves.
+A: Listo. Gracias por ayudarme a leerlo.
+B: De nada. ¿Queda alguna otra consulta?
+A: No, eso era todo.

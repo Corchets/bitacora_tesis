@@ -1,0 +1,40 @@
+{
+  "fecha_hora": "2026-10-17T13:12:21",
+  "comando": "experiments/replay/replay.py --actualizaciones experiments/replay/tests/datos/ejemplo_actualizaciones.jsonl --detector reglas --salida experiments/replay/corridas/2026-10-17_131215_humo-reglas",
+  "entradas": {
+    "ruta": "experiments/replay/tests/datos/ejemplo_actualizaciones.jsonl",
+    "sha256": "3c0b384c6deeca25b2923bc73f29efa8f613dfaeb39b64aee8f34b296275b43a",
+    "tamano_bytes": 1855,
+    "tipo": "actualizaciones_jsonl"
+  },
+  "config": {
+    "detector": "reglas",
+    "modelo": null,
+    "prompt": null,
+    "hablantes": "sin",
+    "disparo": "final",
+    "politica": "aviso_unico_primer_true_valido",
+    "seed": "no-aplica"
+  },
+  "codigo": {
+    "commit": "5776460818d36d5f6c158658cf85bc78e1e499aa",
+    "cambios_sin_commit": false
+  },
+  "hardware": {
+    "sistema": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.14.3"
+  },
+  "asr_meta": {
+    "motor": "whisper-simulado",
+    "modelo": "tiny-es",
+    "version": "1.0-ficticio",
+    "sample_rate": 16000,
+    "hilos": 2,
+    "hardware": "Apple M1",
+    "nota": "Datos ficticios para pruebas de replay"
+  }
+}

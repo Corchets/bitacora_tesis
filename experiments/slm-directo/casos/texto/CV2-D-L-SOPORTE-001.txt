@@ -1,0 +1,25 @@
+A: Buenas, llamo yo porque desde ayer se corta internet cada veinte minutos.
+B: Hola, ¿pasa en todos los equipos o solamente en la computadora?
+A: En todos. El televisor queda cargando y el teléfono se pasa a datos.
+B: ¿Las luces del módem cambian cuando se corta?
+A: La de internet se pone naranja. Después vuelve sola al rato.
+B: Voy a revisar la línea. ¿Me confirmás la calle y la altura donde está instalado?
+A: Pasaje Molino 184, departamento tres. Es la casa del fondo.
+B: Gracias. ¿El servicio está a nombre de vos o de otra persona?
+A: A nombre de mi pareja, Nadia Cores. Ella está trabajando y me pidió que llamara.
+B: Veo una intermitencia en el equipo. ¿Podés mirar si el cable que entra en la pared está flojo?
+A: Está firme. Lo acomodé ayer, pero no cambió nada.
+B: No hace falta abrir el módem ni tocar la instalación. Puedo pedir una revisión a domicilio.
+A: ¿Qué horarios tienen? A la mañana no queda nadie.
+B: Hay una visita el jueves entre las dos y las cinco, o el viernes después de las seis.
+A: El jueves puede venir mi cuñado, pero no sé si va a llegar a las dos.
+B: La franja es amplia. Si querés, dejamos el viernes que es más seguro.
+A: Sí, viernes. ¿Necesitás el documento de Nadia?
+B: No para agendar la visita. Confirmame un teléfono de contacto, pero podés dar el que ya figura terminado en 31.
+A: Ese es el mío, lo tengo conmigo.
+B: Bien, quedó para el viernes. La persona técnica va a llamar antes de salir.
+A: ¿Tengo que pagar algo por la revisión?
+B: No hay cargo si el problema es del equipo o de la línea. Si es una instalación interna, te informan antes de hacer un trabajo adicional.
+A: Perfecto, así sabemos qué esperar.
+B: Te paso el número de orden: 2865.
+A: Lo anoté. Gracias por la ayuda.

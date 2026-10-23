@@ -1,0 +1,20 @@
+{
+  "case_id": "SC-WA-CODE-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "SC-WA-CODE-01",
+  "par": "LG-WA-CONSULTA-01-e01",
+  "clase": "vishing",
+  "t_r_linea": 4,
+  "t_c_linea": 5,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE"]},
+    {"linea": 4, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+    {"linea": 5, "evento": "cumplimiento", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido directo del código de activación, con contexto previo de soporte y urgencia. Caso fácil de referencia.",
+  "origen": "Diálogo F1–F5 de docs/ingenieria/ARQUITECTURA.md §4 (adaptación asistida del 2026-10-07), sin cambios de texto.",
+  "revision_humana": false,
+  "notas": "En ARQUITECTURA §4, F1–F2 forman una sola actualización (U1). Acá cada línea es una actualización, como pide #50 (turno cerrado)."
+}

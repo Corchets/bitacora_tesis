@@ -1,0 +1,20 @@
+{
+  "case_id": "LAB-anses-beneficio-parafrasis",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 3,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "pedido", "etiquetas": ["REQUEST_SECRET"]},
+    {"linea": 4, "evento": "rechazo", "etiquetas": []},
+    {"linea": 5, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE", "PERSISTENCE_DISTRACTION"]}
+  ],
+  "que_prueba": "Paráfrasis anti-overfit del beneficio del organismo: un cobro pendiente a cambio de la contraseña y el alias.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/vishing/anses-beneficio-parafrasis.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: ANSES, noticia oficial (misma modalidad que anses-beneficio.txt), redacción propia del equipo; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Paráfrasis de LAB-anses-beneficio en el laboratorio; par null. Incendio esperado por el laboratorio: REQUEST_SECRET + REQUEST_TRANSFER en t3 y REQUEST_TRANSFER en t5; goteo en t5. t_r_linea = 3 coincide con el primer incendio. Diferencias de etiqueta: (1) pedir «el alias» de la cuenta de B no es «mover dinero» según el manual §5, así que no se etiquetó REQUEST_TRANSFER; queda para D07 si el alias cuenta como dato personal o bancario. (2) La línea 5 («si no lo haces hoy se cae el pago») es presión e insistencia tras la negativa, no un pedido de transferencia: el REQUEST_TRANSFER de t5 del laboratorio sale de la palabra «pago». Sin cumplimiento: B se niega en la línea 4. El guion nombra un organismo real («anses»); la conversión conserva el texto, pero las reglas de redacción del ensayo piden no nombrar entidades reales: decidir si se reemplaza. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

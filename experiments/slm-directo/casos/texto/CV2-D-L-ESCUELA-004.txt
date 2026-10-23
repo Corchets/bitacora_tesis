@@ -1,0 +1,26 @@
+A: Hola, estoy haciendo el curso de auxiliar y los avisos me llegan a un correo que ya no uso.
+B: Buen día. ¿En qué sede estás cursando?
+A: En la sede del barrio oeste, turno noche.
+B: ¿Me decís tu nombre y el nombre del curso?
+A: Nadia Peralta, auxiliar de biblioteca.
+B: Gracias. ¿Querés actualizar el correo en la ficha de estudiante?
+A: Sí. Ahora uso uno que empieza por nadia punto p y termina en correo ejemplo.
+B: ¿Me lo podés dictar completo para evitar un error?
+A: nadia punto peralta arroba correo ejemplo.
+B: Lo tengo. ¿Querés que enviemos un mensaje de prueba para confirmar que funciona?
+A: Sí, porque la semana pasada no vi el aviso de cambio de aula.
+B: Ya salió. ¿Lo recibiste?
+A: Todavía no. A veces tarda un rato.
+B: ¿Revisaste la carpeta de correo no deseado?
+A: Ahora llegó, estaba ahí. Lo marco como remitente conocido.
+B: Bien. El próximo aviso va a salir por ese mismo canal.
+A: ¿También mandan las notas por correo?
+B: Las notas se consultan en el portal. El correo solo avisa cuando hay una actualización.
+A: Ah, pensé que llegaban adjuntas.
+B: No, por privacidad el detalle queda dentro del portal.
+A: ¿Necesito cambiar mi usuario también?
+B: No, el usuario sigue igual. Solo actualizamos el correo de contacto.
+A: Perfecto. ¿Puedo pedir una constancia de asistencia del mes pasado?
+B: Sí, completá el formulario de certificados y elegí el mes.
+A: Lo hago después de clase. Gracias por corregir el dato.
+B: De nada. Que tengas buena cursada.

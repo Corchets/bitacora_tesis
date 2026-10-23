@@ -1,0 +1,27 @@
+A: ¿Tenés la notebook gris? La necesita el equipo de sonido para la prueba.
+B: Sí, la tengo en el armario. ¿La pasan a buscar hoy?
+A: A las cuatro. Me preguntaron si tiene instalado el programa de edición.
+B: Tiene la versión vieja, la que usamos para el evento de mayo.
+A: ¿Conviene actualizarla antes de prestarla?
+B: Mejor consultemos a sistemas. Si cambian la versión, capaz deja de abrir el proyecto anterior.
+A: En la carpeta compartida está la exportación final, pero no el archivo editable.
+B: El editable está en el disco externo negro. Lo guardé después de la última reunión.
+A: ¿Ese disco se queda con nosotros o va con la notebook?
+B: Se queda acá. Hay material de otros eventos que no corresponde entregar.
+A: ¿Podemos copiar solo el proyecto de sonido a un pendrive vacío?
+B: Sí, pero primero confirmá que no tenga nombres de asistentes ni listas de contacto.
+A: Lo revisé ayer. Solo hay pistas y nombres de canales.
+B: Entonces copiá esa carpeta y probá abrirla en la otra computadora.
+A: Ya estoy en eso. Carga, pero me muestra que falta una fuente de audio.
+B: ¿Es la pista ambiente de la sala?
+A: Sí. Está en el escritorio de la notebook, no en la carpeta del proyecto.
+B: Copiala también y anotá el nombre en el inventario de préstamo.
+A: Hecho. ¿Qué ponemos como fecha de devolución?
+B: El lunes a la mañana. El miércoles la usa administración para la capacitación.
+A: Aviso al grupo que la notebook sale a las cuatro y vuelve el lunes.
+B: Agregá que entregamos cargador y funda, pero no el disco externo.
+A: Listo, ya respondieron que pasan a horario.
+B: Cuando se la lleven, anotá quién la retiró.
+A: Sí, queda asentado en el cuaderno de equipos.
+B: Gracias. ¿Te fijás también que vuelva con la funda?
+A: Obvio, la marco en la lista.

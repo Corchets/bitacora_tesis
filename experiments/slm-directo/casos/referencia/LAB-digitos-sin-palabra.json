@@ -1,0 +1,19 @@
+{
+  "case_id": "LAB-digitos-sin-palabra",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 5,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE"]},
+    {"linea": 5, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]}
+  ],
+  "que_prueba": "Pide leer, de a uno, los dígitos del mensaje recién llegado sin decir «codigo», «token» ni «numeros».",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/dificiles/vishing/digitos-sin-palabra.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025 (redacción propia); consulta 2026-09-24.",
+  "revision_humana": false,
+  "notas": "Incendio esperado por el laboratorio: el guion no fija turno; la etiqueta esperada es REQUEST_AUTH_CODE y el texto está escrito para que las reglas no disparen (resultados-2026-09-24.csv: sin incendio ni goteo). t_r_linea = 5: «leeme lo que te acaba de llegar al telefono, de a uno» es el primer pedido de alto riesgo, indirecto (no nombra el código, pero pide dictarlo). La línea 3 pide «confirmar» sin decir cómo; no se toma como pedido. Sin cumplimiento: el guion termina en el pedido. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

@@ -1,0 +1,1220 @@
+{
+ "0.8b": {
+  "revisor_1": [
+   {
+    "id": "LAB-acceso-remoto@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo",
+    "justificacion": "A pide ahora acceso remoto y que B comparta la pantalla, y el motivo nombra eso mismo. Lee mal el 'lo freno' (habla de frenar el dispositivo), pero el objeto y la acción coinciden."
+   },
+   {
+    "id": "LAB-acceso-remoto-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: instala el programa que te digo y mostrame la pantalla",
+    "justificacion": "A pide ahora que B instale un programa y le muestre la pantalla, y el motivo describe esa misma acción de acceso remoto con pantalla compartida."
+   },
+   {
+    "id": "LAB-anses-beneficio@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: para habilitarlo pasame la clave de la seguridad social y el cbu",
+    "justificacion": "A pide ahora la clave de la seguridad social y el CBU, y el motivo nombra exactamente esas dos cosas."
+   },
+   {
+    "id": "LAB-anses-beneficio-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: pasame la contraseña y el alias para habilitarlo",
+    "justificacion": "A pide ahora la contraseña y el motivo la nombra, aunque la pone como alternativa a un 'código de verificación' que nadie pidió."
+   },
+   {
+    "id": "LAB-arca-deuda@L5",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "3. A: tiene que autorizar con su clave fiscal o transferir hoy",
+    "justificacion": "Lo que se pide es la clave fiscal, una transferencia y el alias, pero el motivo habla de un 'código de verificación o activación', que es otro objeto."
+   },
+   {
+    "id": "LAB-arca-deuda-parafrasis@L5",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "3. A: regularice hoy con su homebanking o le embargo la cuenta",
+    "justificacion": "A induce a B a pagar por homebanking y le pide el CBU, pero el motivo dice que piden un código de verificación o activación, que nunca se mencionó."
+   },
+   {
+    "id": "LAB-banco-app-parafrasis@L5",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: entra con tu huella y revisa los movimientos",
+    "justificacion": "Solo se le sugiere a B que revise su propia app, sin entregar nada. El motivo afirma que piden un código de verificación que no aparece en el diálogo."
+   },
+   {
+    "id": "LAB-banco-codigo@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: si no la frenamos ahora te vacian la cuenta",
+    "justificacion": "Hasta la línea 3 solo hay urgencia y amenaza, ningún pedido. El motivo afirma que piden un código de verificación que no aparece."
+   },
+   {
+    "id": "LAB-banco-codigo-parafrasis@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: si no lo frenamos te sacan todo",
+    "justificacion": "Hay presión pero ningún pedido, y el motivo afirma que piden un código de verificación que no se mencionó."
+   },
+   {
+    "id": "LAB-banco-gasto-sin-pedido@L3",
+    "categoria": "pedido_inventado",
+    "cita": "2. A: no hagas nada por telefono",
+    "justificacion": "A desaconseja hacer cosas por teléfono y manda a revisar la app, pero el motivo afirma que piden un código de verificación que no aparece."
+   },
+   {
+    "id": "LAB-banco-numeros-sin-clave@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: tenes que hacerlo ya sino se bloquea todo",
+    "justificacion": "Hay un 'hacerlo' urgente sin objeto concreto, y el motivo afirma que piden un código de verificación que nadie mencionó."
+   },
+   {
+    "id": "LAB-banco-revisa-app@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: corta esta comunicacion y entra vos a la aplicacion oficial",
+    "justificacion": "A solo le dice a B que corte y entre a la app oficial por su cuenta, pero el motivo afirma que piden un código de verificación inexistente."
+   },
+   {
+    "id": "LAB-digitos-sin-palabra@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: se cae la operacion si no lo confirmas ahora",
+    "justificacion": "Solo piden confirmar la operación, sin ningún código ni otra cosa de la lista. El motivo afirma que piden un código de verificación que no aparece."
+   },
+   {
+    "id": "LAB-familiar-llama-vos@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. B: llama vos al numero que tenes guardado",
+    "justificacion": "B solo aconseja llamar al número que la persona ya tiene guardado. El motivo dice que le piden 'un número de teléfono que no tienes guardado', algo que nadie pidió."
+   },
+   {
+    "id": "LAB-familiar-peligro@L4",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "4. A: necesito que saques la plata de la cuenta y me la pases",
+    "justificacion": "Se pide ahora sacar plata y entregarla, pero el motivo dice que piden un código de verificación o acceso a la cuenta, que es otro objeto."
+   },
+   {
+    "id": "LAB-familiar-peligro-parafrasis@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: bueno transferime a este alias entonces",
+    "justificacion": "Se pide una transferencia a un alias (y antes, llevar efectivo), pero el motivo dice que piden un código de verificación o activación."
+   },
+   {
+    "id": "LAB-giro-sin-plata@L3",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "3. A: necesito que me gires ya a la cuenta que te dicto",
+    "justificacion": "Se pide un giro de dinero a una cuenta, pero el motivo dice que piden un código de verificación para acceder a la cuenta bancaria."
+   },
+   {
+    "id": "LAB-whatsapp-codigo-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mandamos un codigo de verificacion pasamelo",
+    "justificacion": "A pide ahora el código de verificación y el motivo nombra exactamente eso."
+   },
+   {
+    "id": "LG-ORG-TURNO-01-e01@L9",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "4. B: ¿Seguro? Porque a una vecina la llamaron diciendo que eran de acá, y le pidieron el domicilio y una foto con el documento en la mano para cargárselo.",
+    "justificacion": "El domicilio y la foto del documento aparecen solo en el relato de lo que le pasó a una vecina, y A lo niega después. El motivo además agrega una transferencia o pago que nadie mencionó."
+   },
+   {
+    "id": "LG-SUPPORT-INFO-01-e01@L9",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "9. A: No, ese correo es para vos. Seguí los pasos ahí mismo y elegí una clave nueva que no uses en otro lado.",
+    "justificacion": "A guía ahora a B para cambiar su clave por su cuenta, pero el motivo lo presenta como que le 'solicitan' la clave nueva. Es una acción distinta (entregarla) que el propio A negó explícitamente."
+   },
+   {
+    "id": "SC-CLAVE-CAMBIO-01-e01@L7",
+    "categoria": "pedido_inventado",
+    "cita": "6. B: Hay que hacer el procedimiento de resguardo ahora, mientras seguimos en línea. Si cortamos, el sistema bloquea la cuenta cuarenta y ocho horas y no vas a poder usar la tarjeta.",
+    "justificacion": "Hasta la línea 7 solo hay un 'procedimiento' sin especificar y presión para no cortar. El motivo afirma que piden un código de verificación que nunca se mencionó."
+   },
+   {
+    "id": "SC-FAMILIAR-DINERO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+    "justificacion": "B pide ahora una transferencia de 180.000 pesos y el motivo describe esa misma transferencia y la presión que la acompaña."
+   },
+   {
+    "id": "SC-ORG-BENEFICIO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. A: Perfecto, coincide con lo que tengo. Ahora te escribo a este número y me contestás con una foto tuya sosteniendo el documento al lado de la cara, así queda validado que sos vos.",
+    "justificacion": "A pide ahora una foto de B sosteniendo el documento (y antes, fecha de nacimiento y domicilio), y el motivo describe eso mismo."
+   },
+   {
+    "id": "SC-PREMIO-01-e01@L8",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "8. A: Para acreditarlo a tu nombre necesito que me mandes una foto del documento, de frente y de dorso, por WhatsApp a este mismo número.",
+    "justificacion": "Se pide una foto del documento de frente y dorso, pero el motivo dice que piden un código de verificación o activación, que es otro objeto."
+   },
+   {
+    "id": "SC-SOPORTE-CLAVE-01-e01@L6",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "6. A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.",
+    "justificacion": "A pide ahora el usuario y la contraseña y el motivo nombra exactamente eso, aunque la evidencia que cita el modelo es otra línea."
+   },
+   {
+    "id": "SC-SOPORTE-REMOTO-01-e01@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",
+    "justificacion": "Se pide compartir la pantalla en una videollamada guiada, pero el motivo dice que piden un código de verificación o activación."
+   },
+   {
+    "id": "SC-WA-CODE-01-e01@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: Decime el código de activación que recibiste por SMS.",
+    "justificacion": "A pide ahora el código de activación recibido por SMS y el motivo nombra eso mismo."
+   },
+   {
+    "id": "TR-04-pedido-tras-charla-larga@L20",
+    "categoria": "pedido_inventado",
+    "cita": "19. A: Gracias, Rubén. Bueno, no te quiero robar mucho tiempo, que lo de la tarjeta es cortito.",
+    "justificacion": "Hasta la línea 20 solo hay charla y el anuncio del recambio de tarjetas, sin ningún pedido. El motivo afirma que piden un código de verificación inexistente."
+   },
+   {
+    "id": "TR-05-asado-con-transferencia@L20",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "13. A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.",
+    "justificacion": "En esta llamada se pide una transferencia de 22.000 pesos, pero el motivo dice que piden un código de verificación y le agrega hechos inventados sobre los fondos de Nicolás."
+   },
+   {
+    "id": "TR-07-pedido-partido-en-dos-lineas@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+    "justificacion": "A pide ahora los seis números del SMS del banco, que es un código de un solo uso, y el motivo lo describe como un código de verificación."
+   },
+   {
+    "id": "TR-08-frase-cortada-candado@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir.",
+    "justificacion": "Se pide ahora un código (la clave del candado de una valija) y el motivo nombra ese mismo código de la valija. Lo pido así por la letra de la lista, aunque el contexto sea inofensivo."
+   },
+   {
+    "id": "TR-09-victima-se-niega@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: Te llamo del área de prevención del banco, me llamo Diego. Tenemos retenida una compra de doscientos treinta mil pesos con tu tarjeta de débito, en una página de venta de pasajes. ¿La hiciste vos?",
+    "justificacion": "A solo pregunta si B hizo la compra, sin pedir nada. El motivo afirma que piden un código de verificación que no aparece."
+   },
+   {
+    "id": "TR-10-ofrecimiento-inducido@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. B: Bien. Para frenarlo necesito que me confirmes lo que te mandamos; la retención dura unos minutos nada más.",
+    "justificacion": "B induce ahora a que A le confirme el contenido del SMS con números, que es un código de verificación, y el motivo describe ese código y la presión."
+   },
+   {
+    "id": "TR-12-corta-antes-del-pedido@L9",
+    "categoria": "pedido_inventado",
+    "cita": "7. B: Esto hay que arreglarlo hoy, antes de que me pasen al juzgado. Te paso con el abogado que me está ayudando, ¿sí?",
+    "justificacion": "Hasta la línea 9 hay urgencia, secreto y presión para no cortar, pero nadie pidió dinero ni códigos. El motivo afirma que piden una transferencia y un código de verificación."
+   }
+  ],
+  "revisor_2": [
+   {
+    "id": "LAB-acceso-remoto@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo",
+    "justificacion": "A pide ahora acceso remoto y compartir pantalla, y el motivo describe justo eso. Lo de \"frenar tu dispositivo\" es una lectura confusa pero menor."
+   },
+   {
+    "id": "LAB-acceso-remoto-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: instala el programa que te digo y mostrame la pantalla",
+    "justificacion": "A pide instalar un programa y mostrar la pantalla, y el motivo describe esa misma acción de acceso remoto y pantalla compartida."
+   },
+   {
+    "id": "LAB-anses-beneficio@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: para habilitarlo pasame la clave de la seguridad social y el cbu",
+    "justificacion": "A pide en esta llamada la clave de la seguridad social y el CBU, y el motivo nombra exactamente esos dos datos."
+   },
+   {
+    "id": "LAB-anses-beneficio-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: pasame la contraseña y el alias para habilitarlo",
+    "justificacion": "A pide la contraseña y el motivo la nombra. Lo hace en una disyunción con \"código de verificación\", que no se pidió, pero el objeto pedido sí figura."
+   },
+   {
+    "id": "LAB-arca-deuda@L5",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "3. A: tiene que autorizar con su clave fiscal o transferir hoy",
+    "justificacion": "Lo que se pidió fue la clave fiscal, una transferencia y después el alias, pero el motivo habla de un \"código de verificación o activación\", que es otro objeto."
+   },
+   {
+    "id": "LAB-arca-deuda-parafrasis@L5",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "3. A: regularice hoy con su homebanking o le embargo la cuenta",
+    "justificacion": "Hay un pedido actual de pagar por homebanking y de dar el CBU, pero el motivo lo describe como un pedido de código de verificación o activación, que nadie mencionó."
+   },
+   {
+    "id": "LAB-banco-app-parafrasis@L5",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: entra con tu huella y revisa los movimientos",
+    "justificacion": "Solo le dicen que revise sus movimientos en su propia app. El motivo afirma que le piden un código de verificación que no aparece en ningún momento."
+   },
+   {
+    "id": "LAB-banco-codigo@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: si no la frenamos ahora te vacian la cuenta",
+    "justificacion": "Hasta la línea 3 solo hay alarma y urgencia, sin ningún pedido. Aun así, el motivo afirma que piden un código de verificación."
+   },
+   {
+    "id": "LAB-banco-codigo-parafrasis@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: si no lo frenamos te sacan todo",
+    "justificacion": "El diálogo solo trae urgencia y ninguna mención de código, pero el motivo afirma que se pide un código de verificación o activación."
+   },
+   {
+    "id": "LAB-banco-gasto-sin-pedido@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: entra vos a la aplicacion cuando puedas y fijate",
+    "justificacion": "A le dice que no haga nada por teléfono y que revise la app por su cuenta. El motivo inventa un pedido de código que no existe."
+   },
+   {
+    "id": "LAB-banco-numeros-sin-clave@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: tenes que hacerlo ya sino se bloquea todo",
+    "justificacion": "\"Hacerlo\" es vago y no nombra nada de la lista. El motivo afirma un pedido concreto de código de verificación que no aparece."
+   },
+   {
+    "id": "LAB-banco-revisa-app@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: corta esta comunicacion y entra vos a la aplicacion oficial",
+    "justificacion": "A solo indica cortar y entrar a la aplicación oficial. El motivo afirma un pedido de código de verificación inexistente."
+   },
+   {
+    "id": "LAB-digitos-sin-palabra@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: se cae la operacion si no lo confirmas ahora",
+    "justificacion": "Se pide confirmar una operación, sin mencionar códigos ni nada de la lista. Aun así, el motivo afirma que se pide un código de verificación."
+   },
+   {
+    "id": "LAB-familiar-llama-vos@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. B: llama vos al numero que tenes guardado",
+    "justificacion": "Nadie pide un número de teléfono ni nada de la lista: B solo aconseja cortar y llamar al número guardado. El motivo inventa una solicitud de \"un número que no tienes guardado\"."
+   },
+   {
+    "id": "LAB-familiar-peligro@L4",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "4. A: necesito que saques la plata de la cuenta y me la pases",
+    "justificacion": "Se pide una entrega de dinero, pero el motivo la presenta como un pedido de código de verificación o de acceso a la cuenta, que es otro objeto."
+   },
+   {
+    "id": "LAB-familiar-peligro-parafrasis@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: bueno transferime a este alias entonces",
+    "justificacion": "Se pide una transferencia a un alias, pero el motivo dice que se solicita un código de verificación o activación, que nadie pidió."
+   },
+   {
+    "id": "LAB-giro-sin-plata@L3",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "3. A: necesito que me gires ya a la cuenta que te dicto",
+    "justificacion": "El pedido actual es un giro de dinero a una cuenta, pero el motivo lo describe como un código de verificación para acceder a la cuenta bancaria."
+   },
+   {
+    "id": "LAB-whatsapp-codigo-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mandamos un codigo de verificacion pasamelo",
+    "justificacion": "A pide en esta llamada un código de verificación, y el motivo describe exactamente ese objeto."
+   },
+   {
+    "id": "LG-ORG-TURNO-01-e01@L9",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "4. B: ¿Seguro? Porque a una vecina la llamaron diciendo que eran de acá, y le pidieron el domicilio y una foto con el documento en la mano para cargárselo.",
+    "justificacion": "El pedido de domicilio y foto del documento es un relato sobre otra llamada a una vecina, y A lo desmiente después. Nadie se lo pide a B ahora, y el motivo además le agrega el DNI y una transferencia."
+   },
+   {
+    "id": "LG-SUPPORT-INFO-01-e01@L9",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "9. A: No, ese correo es para vos. Seguí los pasos ahí mismo y elegí una clave nueva que no uses en otro lado.",
+    "justificacion": "Lo único actual es una acción guiada para que B cambie su propia clave, y A aclara que nadie se la va a pedir. El motivo lo presenta como si le estuvieran solicitando la clave."
+   },
+   {
+    "id": "SC-CLAVE-CAMBIO-01-e01@L7",
+    "categoria": "pedido_inventado",
+    "cita": "6. B: Hay que hacer el procedimiento de resguardo ahora, mientras seguimos en línea. Si cortamos, el sistema bloquea la cuenta cuarenta y ocho horas y no vas a poder usar la tarjeta.",
+    "justificacion": "Hasta la línea 7 solo hay un \"procedimiento de resguardo\" sin especificar y presión para no cortar. El motivo afirma un pedido de código de verificación que no aparece."
+   },
+   {
+    "id": "SC-FAMILIAR-DINERO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+    "justificacion": "B pide ahora una transferencia de 180 mil pesos, y el motivo describe esa misma transferencia y la presión."
+   },
+   {
+    "id": "SC-ORG-BENEFICIO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. A: Perfecto, coincide con lo que tengo. Ahora te escribo a este número y me contestás con una foto tuya sosteniendo el documento al lado de la cara, así queda validado que sos vos.",
+    "justificacion": "A pide una foto sosteniendo el documento, después de haber pedido la fecha de nacimiento y el domicilio, y el motivo describe esa misma foto para validar identidad."
+   },
+   {
+    "id": "SC-PREMIO-01-e01@L8",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "8. A: Para acreditarlo a tu nombre necesito que me mandes una foto del documento, de frente y de dorso, por WhatsApp a este mismo número.",
+    "justificacion": "Lo que se pide es una foto del documento (dato personal), pero el motivo habla de un código de verificación o activación."
+   },
+   {
+    "id": "SC-SOPORTE-CLAVE-01-e01@L6",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "6. A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.",
+    "justificacion": "A pide en esta llamada el usuario y la contraseña, y el motivo nombra exactamente esos datos, aunque la evidencia citada sea otra línea."
+   },
+   {
+    "id": "SC-SOPORTE-REMOTO-01-e01@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",
+    "justificacion": "El pedido actual es compartir la pantalla en una videollamada guiada, pero el motivo lo describe como un pedido de código de verificación o activación."
+   },
+   {
+    "id": "SC-WA-CODE-01-e01@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: Decime el código de activación que recibiste por SMS.",
+    "justificacion": "A pide el código de activación recibido por SMS, y el motivo describe ese mismo código."
+   },
+   {
+    "id": "TR-04-pedido-tras-charla-larga@L20",
+    "categoria": "pedido_inventado",
+    "cita": "19. A: Gracias, Rubén. Bueno, no te quiero robar mucho tiempo, que lo de la tarjeta es cortito.",
+    "justificacion": "Hasta la línea 20 solo hay charla y el anuncio del recambio de tarjetas, sin pedido alguno. El motivo afirma que se pide un código de verificación."
+   },
+   {
+    "id": "TR-05-asado-con-transferencia@L20",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "13. A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.",
+    "justificacion": "Hubo un pedido actual de transferencia de dinero, pero el motivo lo describe como un pedido de código de verificación y agrega hechos no dichos, como verificar los fondos de Nicolás."
+   },
+   {
+    "id": "TR-07-pedido-partido-en-dos-lineas@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+    "justificacion": "A pide los seis números del SMS del banco, un código de un solo uso, y el motivo describe un código de verificación o desvinculación."
+   },
+   {
+    "id": "TR-08-frase-cortada-candado@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir.",
+    "justificacion": "A pide ahora la clave o combinación del candado de una valija, y el motivo identifica ese mismo objeto. Confunde el propósito (cerrar en vez de abrir) y el objeto es un candado físico, no una credencial de cuenta."
+   },
+   {
+    "id": "TR-09-victima-se-niega@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: Te llamo del área de prevención del banco, me llamo Diego. Tenemos retenida una compra de doscientos treinta mil pesos con tu tarjeta de débito, en una página de venta de pasajes. ¿La hiciste vos?",
+    "justificacion": "A solo informa una compra retenida y pregunta si la hizo, sin pedir nada. El motivo afirma un pedido de código de verificación inexistente."
+   },
+   {
+    "id": "TR-10-ofrecimiento-inducido@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. B: Bien. Para frenarlo necesito que me confirmes lo que te mandamos; la retención dura unos minutos nada más.",
+    "justificacion": "B induce a A a pasarle los números del SMS que recibió, un código de verificación, con presión de tiempo, y el motivo describe ese mismo código y esa presión."
+   },
+   {
+    "id": "TR-12-corta-antes-del-pedido@L9",
+    "categoria": "pedido_inventado",
+    "cita": "7. B: Esto hay que arreglarlo hoy, antes de que me pasen al juzgado. Te paso con el abogado que me está ayudando, ¿sí?",
+    "justificacion": "Hasta la línea 9 hay urgencia, secreto y presión para no cortar, pero no se pidió dinero ni código. El motivo afirma ambos pedidos."
+   }
+  ]
+ },
+ "2b": {
+  "revisor_1": [
+   {
+    "id": "LAB-acceso-remoto@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo",
+    "justificacion": "A le pide ahora a B que use un acceso remoto y comparta la pantalla, y el motivo describe exactamente eso."
+   },
+   {
+    "id": "LAB-acceso-remoto-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: instala el programa que te digo y mostrame la pantalla",
+    "justificacion": "Hay un pedido actual de instalar un programa y mostrar la pantalla, y el motivo nombra esa misma acción; el cobro duplicado ya figura en la línea 1."
+   },
+   {
+    "id": "LAB-anses-beneficio@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: para habilitarlo pasame la clave de la seguridad social y el cbu",
+    "justificacion": "A pide la clave de la seguridad social y el CBU para habilitar un beneficio, y el motivo lo describe tal cual."
+   },
+   {
+    "id": "LAB-anses-beneficio-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: pasame la contraseña y el alias para habilitarlo",
+    "justificacion": "Hay un pedido actual de contraseña y alias, y el motivo menciona esos mismos objetos."
+   },
+   {
+    "id": "LAB-banco-codigo@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: si no la frenamos ahora te vacian la cuenta",
+    "justificacion": "Hasta la línea 3 solo hay suplantación y urgencia, nadie pide un código, pero el motivo afirma que se lo están pidiendo."
+   },
+   {
+    "id": "LAB-banco-codigo-parafrasis@L5",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: decime el codigo que te mandamos al telefono",
+    "justificacion": "A pide ahora el código que llegó al teléfono, y el motivo describe un código."
+   },
+   {
+    "id": "LAB-banco-numeros-sin-clave@L5",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: pasame los seis numeros que te llegaron al celular",
+    "justificacion": "Los seis números que llegaron al celular son un código de un solo uso, y el motivo los describe como código de verificación."
+   },
+   {
+    "id": "LAB-familiar-peligro@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: necesito que saques la plata de la cuenta y me la pases",
+    "justificacion": "Hay un pedido actual de sacar dinero de la cuenta y entregarlo, y el motivo describe esa entrega de dinero, aunque con el sentido de la entrega invertido."
+   },
+   {
+    "id": "LAB-whatsapp-codigo@L1",
+    "categoria": "pedido_inventado",
+    "cita": "1. A: hola soy del soporte de whatsapp se quiere meter alguien en tu cuenta",
+    "justificacion": "La única línea disponible es una presentación con alarma y no menciona ningún código, pero el motivo afirma que se lo están pidiendo."
+   },
+   {
+    "id": "LAB-whatsapp-codigo-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mandamos un codigo de verificacion pasamelo",
+    "justificacion": "A pide ahora el código de verificación, y el motivo describe ese mismo código."
+   },
+   {
+    "id": "SC-CLAVE-CAMBIO-01-e01@L9",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "9. B: Te acabo de mandar un mensaje de texto con el enlace de seguridad. Abrilo y cambiá la clave ahí; yo te voy guiando.",
+    "justificacion": "El pedido actual es abrir un enlace enviado y cambiar la clave con guía, pero el motivo dice que le están pidiendo un enlace y le agrega que sirve para acceder a la cuenta, así que la acción descrita es otra."
+   },
+   {
+    "id": "SC-FAMILIAR-DINERO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+    "justificacion": "Hay un pedido actual de transferir 180 mil pesos para pagar un arreglo y el motivo lo describe bien; lo de los datos ofrecidos sale de 'te paso los datos', aunque llamarlos 'datos personales' es una exageración menor."
+   },
+   {
+    "id": "SC-PREMIO-01-e01@L8",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "8. A: Para acreditarlo a tu nombre necesito que me mandes una foto del documento, de frente y de dorso, por WhatsApp a este mismo número.",
+    "justificacion": "Se pide una foto del documento, que es lo que nombra el motivo, pero el motivo agrega un hecho que nadie dijo: que el premio 'te lo han robado'."
+   },
+   {
+    "id": "SC-SOPORTE-CLAVE-01-e01@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.",
+    "justificacion": "Se piden usuario y contraseña, pero el motivo dice código de verificación y contraseña, así que agrega un código que nadie pidió y omite el usuario."
+   },
+   {
+    "id": "SC-SOPORTE-REMOTO-01-e01@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",
+    "justificacion": "El pedido actual es compartir la pantalla en una videollamada, pero el motivo describe un código de acceso, que es otro objeto."
+   },
+   {
+    "id": "SC-WA-CODE-01-e01@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: Decime el código de activación que recibiste por SMS.",
+    "justificacion": "A pide ahora el código de activación recibido por SMS, y el motivo describe ese código."
+   },
+   {
+    "id": "TR-03-negacion-y-consejo@L7",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "7. A: ¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?",
+    "justificacion": "Compartir la pantalla aparece solo como pregunta hipotética, dentro de una charla de consejos que desaconseja entregar datos, no como pedido actual a la otra persona."
+   },
+   {
+    "id": "TR-04-pedido-tras-charla-larga@L26",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.",
+    "justificacion": "El código sí se pide, pero para confirmar el envío de una tarjeta; el motivo le atribuye un fin que nadie mencionó: activar una transferencia o un pago inmediato."
+   },
+   {
+    "id": "TR-05-asado-con-transferencia@L17",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "13. A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.",
+    "justificacion": "En el diálogo hay un pedido actual de transferir dinero, pero el motivo habla de un código de verificación que nunca se mencionó, así que describe otro objeto."
+   },
+   {
+    "id": "TR-07-pedido-partido-en-dos-lineas@L8",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+    "justificacion": "Entre las líneas 7 y 8, A pide los seis números del mensaje del banco, que son un código de un solo uso, como dice el motivo."
+   },
+   {
+    "id": "TR-09-victima-se-niega@L7",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: Bien, entonces la damos de baja. Te acaba de llegar un SMS con un código de seis números; leémelo así anulo la compra.",
+    "justificacion": "A pidió el código del SMS en esta llamada y en la línea 7 insiste en que lo necesita, y el motivo describe un código."
+   },
+   {
+    "id": "TR-10-ofrecimiento-inducido@L14",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. B: Bien. Para frenarlo necesito que me confirmes lo que te mandamos; la retención dura unos minutos nada más.",
+    "justificacion": "B induce en la llamada a que le pasen lo que llegó por SMS y acepta que le lean el código, y el motivo describe un código de verificación."
+   }
+  ],
+  "revisor_2": [
+   {
+    "id": "LAB-acceso-remoto@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo",
+    "justificacion": "A pide en ese momento instalar acceso remoto y compartir la pantalla, y el motivo nombra exactamente eso."
+   },
+   {
+    "id": "LAB-acceso-remoto-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: instala el programa que te digo y mostrame la pantalla",
+    "justificacion": "Hay un pedido actual de instalar un programa y mostrar la pantalla, y el motivo describe esa misma acción; la mención del cobro duplicado sale del contexto de la línea 1."
+   },
+   {
+    "id": "LAB-anses-beneficio@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: para habilitarlo pasame la clave de la seguridad social y el cbu",
+    "justificacion": "Piden en ese momento la clave de la seguridad social y el CBU, y el motivo nombra los mismos dos datos con el mismo fin."
+   },
+   {
+    "id": "LAB-anses-beneficio-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: pasame la contraseña y el alias para habilitarlo",
+    "justificacion": "Piden en ese momento la contraseña y el alias, y el motivo describe exactamente esos dos datos."
+   },
+   {
+    "id": "LAB-banco-codigo@L3",
+    "categoria": "pedido_inventado",
+    "cita": "3. A: si no la frenamos ahora te vacian la cuenta",
+    "justificacion": "Hasta la línea 3 solo hay urgencia y amenaza, sin ningún pedido de código, pero el motivo afirma que te están pidiendo un código."
+   },
+   {
+    "id": "LAB-banco-codigo-parafrasis@L5",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: decime el codigo que te mandamos al telefono",
+    "justificacion": "A pide en ese momento el código que llegó al teléfono, y el motivo describe un código."
+   },
+   {
+    "id": "LAB-banco-numeros-sin-clave@L5",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: pasame los seis numeros que te llegaron al celular",
+    "justificacion": "Los seis números que llegaron al celular son un código de un solo uso pedido en ese momento, y el motivo lo describe como código de verificación."
+   },
+   {
+    "id": "LAB-familiar-peligro@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: necesito que saques la plata de la cuenta y me la pases",
+    "justificacion": "Hay un pedido actual de sacar dinero y entregarlo, y el motivo describe esa misma entrega de dinero aunque invierte el pronombre."
+   },
+   {
+    "id": "LAB-whatsapp-codigo@L1",
+    "categoria": "pedido_inventado",
+    "cita": "1. A: hola soy del soporte de whatsapp se quiere meter alguien en tu cuenta",
+    "justificacion": "La única línea disponible plantea una suplantación de soporte y una amenaza, sin ningún pedido, pero el motivo afirma que te están pidiendo un código."
+   },
+   {
+    "id": "LAB-whatsapp-codigo-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mandamos un codigo de verificacion pasamelo",
+    "justificacion": "A pide en ese momento el código de verificación, y el motivo describe exactamente ese código."
+   },
+   {
+    "id": "SC-CLAVE-CAMBIO-01-e01@L9",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "9. B: Te acabo de mandar un mensaje de texto con el enlace de seguridad. Abrilo y cambiá la clave ahí; yo te voy guiando.",
+    "justificacion": "El pedido actual es abrir un enlace y cambiar la clave con guía, pero el motivo dice que te piden entregar un enlace y le agrega que da acceso a tu cuenta, cosa que nadie dijo."
+   },
+   {
+    "id": "SC-FAMILIAR-DINERO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+    "justificacion": "Piden en ese momento transferir 180 mil pesos, y el motivo describe esa transferencia; lo de los «datos personales» es una paráfrasis floja de «te paso los datos» (los de la cuenta del señor)."
+   },
+   {
+    "id": "SC-PREMIO-01-e01@L8",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "8. A: Para acreditarlo a tu nombre necesito que me mandes una foto del documento, de frente y de dorso, por WhatsApp a este mismo número.",
+    "justificacion": "El objeto pedido (foto del documento) es el correcto, pero el motivo agrega que el premio «te lo han robado», algo que nadie dijo."
+   },
+   {
+    "id": "SC-SOPORTE-CLAVE-01-e01@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.",
+    "justificacion": "Piden usuario y contraseña, pero el motivo habla de un código de verificación que no se pidió y omite el usuario."
+   },
+   {
+    "id": "SC-SOPORTE-REMOTO-01-e01@L6",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",
+    "justificacion": "El pedido actual es compartir la pantalla por videollamada, pero el motivo dice que te piden un código."
+   },
+   {
+    "id": "SC-WA-CODE-01-e01@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: Decime el código de activación que recibiste por SMS.",
+    "justificacion": "A pide en ese momento el código de activación recibido por SMS, y el motivo nombra ese mismo código."
+   },
+   {
+    "id": "TR-03-negacion-y-consejo@L7",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "7. A: ¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?",
+    "justificacion": "Lo de compartir la pantalla aparece solo como hipótesis de la madre, dentro de una charla de consejos, no como un pedido actual a nadie."
+   },
+   {
+    "id": "TR-04-pedido-tras-charla-larga@L26",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.",
+    "justificacion": "Hay un pedido actual del código del SMS, pero el motivo le atribuye un fin (activar una transferencia o pago inmediato) que no se dijo; la llamada habla de confirmar el envío de la tarjeta."
+   },
+   {
+    "id": "TR-05-asado-con-transferencia@L17",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "13. A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.",
+    "justificacion": "Hay un pedido actual de una transferencia de dinero, pero el motivo dice que te piden un código de verificación, algo que nunca aparece."
+   },
+   {
+    "id": "TR-07-pedido-partido-en-dos-lineas@L8",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+    "justificacion": "Entre las líneas 7 y 8 piden en ese momento los seis números del SMS del banco (un código de un solo uso), y el motivo lo describe como código de verificación."
+   },
+   {
+    "id": "TR-09-victima-se-niega@L7",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: Bien, entonces la damos de baja. Te acaba de llegar un SMS con un código de seis números; leémelo así anulo la compra.",
+    "justificacion": "Piden el código del SMS en la línea 5 y vuelven a insistir en la 7 pese a las dudas de la víctima, y el motivo describe un código."
+   },
+   {
+    "id": "TR-10-ofrecimiento-inducido@L14",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "8. B: Bien. Para frenarlo necesito que me confirmes lo que te mandamos; la retención dura unos minutos nada más.",
+    "justificacion": "B lleva a la víctima a pasar el código del SMS («necesito que me confirmes lo que te mandamos», «Dale, cuando quieras»), y el motivo describe ese código de verificación."
+   }
+  ]
+ },
+ "4b": {
+  "revisor_1": [
+   {
+    "id": "LAB-acceso-remoto@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo",
+    "justificacion": "A pide ahora usar acceso remoto y compartir la pantalla, y el motivo describe justamente compartir pantalla y un programa de acceso remoto."
+   },
+   {
+    "id": "LAB-acceso-remoto-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: instala el programa que te digo y mostrame la pantalla",
+    "justificacion": "Hay un pedido actual de instalar un programa y mostrar la pantalla, y el motivo describe lo mismo; lo de robar datos es solo la finalidad que supone el modelo."
+   },
+   {
+    "id": "LAB-anses-beneficio@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: para habilitarlo pasame la clave de la seguridad social y el cbu",
+    "justificacion": "A pide ahora la clave de la seguridad social y el CBU, y el motivo nombra esas mismas dos cosas."
+   },
+   {
+    "id": "LAB-anses-beneficio-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: pasame la contraseña y el alias para habilitarlo",
+    "justificacion": "A pide ahora la contraseña y el alias, y el motivo describe esos mismos datos."
+   },
+   {
+    "id": "LAB-anses-canal-oficial@L1",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "1. A: me ofrecieron un bono si les doy datos del organismo",
+    "justificacion": "A cuenta un ofrecimiento que le hicieron antes ('me ofrecieron'), no es un pedido actual al interlocutor; aun así el motivo lo presenta como un pedido de datos en curso."
+   },
+   {
+    "id": "LAB-arca-deuda@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: tiene que autorizar con su clave fiscal o transferir hoy",
+    "justificacion": "A exige ahora autorizar con la clave fiscal o transferir, y el motivo describe esa misma transferencia y esa clave."
+   },
+   {
+    "id": "LAB-arca-deuda-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: regularice hoy con su homebanking o le embargo la cuenta",
+    "justificacion": "A induce ahora a pagar ('regularizar') por homebanking bajo amenaza de embargo, y el motivo describe esa misma acción de regularizar hoy con esa presión."
+   },
+   {
+    "id": "LAB-banco-app-parafrasis@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: corta aca y fijate vos en la app del banco",
+    "justificacion": "Decirle a alguien que corte y revise la app por su cuenta no está en la lista de riesgos; el motivo describe esa indicación y solo supone una intención de robo."
+   },
+   {
+    "id": "LAB-banco-codigo@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: si no la frenamos ahora te vacian la cuenta",
+    "justificacion": "Hasta acá nadie pide nada de la lista y el motivo avisa por presión y urgencia, sin afirmar que se pidan códigos, claves ni datos."
+   },
+   {
+    "id": "LAB-banco-codigo-parafrasis@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: hola soy del banco vimos un gasto que no es tuyo",
+    "justificacion": "No hay ningún pedido de la lista; el motivo avisa por posible suplantación del banco y menciona pedir información solo como finalidad supuesta."
+   },
+   {
+    "id": "LAB-banco-numeros-sin-clave@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: che te hablo del banco hay un consumo raro en la tarjeta",
+    "justificacion": "No se pidió nada de la lista; el motivo avisa por posible suplantación del banco y presenta el pedido de información como intención supuesta, no como algo dicho."
+   },
+   {
+    "id": "LAB-banco-revisa-app@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: corta esta comunicacion y entra vos a la aplicacion oficial",
+    "justificacion": "La indicación de cortar y entrar uno mismo a la app oficial no es un pedido de la lista, y el motivo solo la describe sin afirmar que se pidan códigos, claves, datos ni dinero."
+   },
+   {
+    "id": "LAB-digitos-sin-palabra@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: se cae la operacion si no lo confirmas ahora",
+    "justificacion": "Pedir que se confirme un cargo no está en la lista, y el motivo avisa por presión y urgencia sin afirmar que se pidan códigos, claves ni datos."
+   },
+   {
+    "id": "LAB-familiar-peligro@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: necesito que saques la plata de la cuenta y me la pases",
+    "justificacion": "A pide ahora que le entreguen dinero, y el motivo describe un pedido de dinero en el contexto amenazante que se planteó."
+   },
+   {
+    "id": "LAB-familiar-peligro-parafrasis@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: no avises a nadie venite ya",
+    "justificacion": "Pedir que no avise a nadie y que venga no está en la lista, y el motivo avisa por presión y aislamiento sin afirmar que se pida dinero, datos ni claves."
+   },
+   {
+    "id": "LAB-giro-sin-plata@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: necesito que me gires ya a la cuenta que te dicto",
+    "justificacion": "A pide ahora un giro a una cuenta, que es una transferencia, y el motivo describe un pedido de dinero."
+   },
+   {
+    "id": "LAB-mensajeria-no-pases-nada@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: me llamo alguien que dice ser soporte de la aplicacion de mensajes",
+    "justificacion": "No hay ningún pedido de la lista (solo se cuenta una llamada y B aconseja no contestar), y el motivo avisa por suplantación de soporte sin afirmar un pedido."
+   },
+   {
+    "id": "LAB-no-bajes-nada@L1",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "1. A: me llamaron para que baje un programa y les muestre el celular",
+    "justificacion": "Es el relato de un pedido que le hicieron antes ('me llamaron para que...'), no un pedido actual al interlocutor; aun así el motivo lo presenta como un pedido en curso."
+   },
+   {
+    "id": "LAB-pantalla-sin-programa@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: bajate este programita y dejame mirar lo que ves en el celular",
+    "justificacion": "A pide ahora instalar un programa y ver la pantalla del celular, y el motivo describe instalar un programa para acceder al celular."
+   },
+   {
+    "id": "LAB-whatsapp-codigo@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: hola soy del soporte de whatsapp se quiere meter alguien en tu cuenta",
+    "justificacion": "Todavía no se pidió nada de la lista; el motivo avisa por el contexto de supuesto soporte y un intento de acceso, sin afirmar que se pida un código."
+   },
+   {
+    "id": "LAB-whatsapp-codigo-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mandamos un codigo de verificacion pasamelo",
+    "justificacion": "A pide ahora el código de verificación, y el motivo describe justamente un código de verificación."
+   },
+   {
+    "id": "LG-BANK-VERIF-01-e01@L2",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "2. B: Hola, Lucía. Llamo al número que está atrás de mi tarjeta. Me llegó un aviso en la app de un ingreso desde un dispositivo nuevo y quiero cambiar la clave.",
+    "justificacion": "'Cambiar la clave' aparece como intención propia de B, que cuenta un aviso que recibió en la app; nadie se lo pide, pero el motivo lo presenta como un pedido."
+   },
+   {
+    "id": "LG-ORG-TURNO-01-e01@L10",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "10. B: ¿Y el turno no me lo podés sacar vos? Te paso el número de documento, si querés.",
+    "justificacion": "El documento aparece en un relato ajeno (la vecina), en la negativa de A ('Por teléfono no pedimos fotos del documento') y en un ofrecimiento espontáneo de B; nadie se lo pide, pero el motivo afirma que se lo están pidiendo."
+   },
+   {
+    "id": "LG-SUPPORT-INFO-01-e01@L4",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "3. A: Bien, lo vemos. Antes que nada, no me digas ni tu usuario ni tu contraseña; para esto no los necesito.",
+    "justificacion": "A dice expresamente que no le pasen usuario ni contraseña, y B solo cuenta que pensaba hacerlo; no hay pedido actual, aunque el motivo dice que sí."
+   },
+   {
+    "id": "LG-WA-CONSULTA-01-e01@L1",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "1. A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.",
+    "justificacion": "El código de activación aparece porque A cuenta que lo recibió sin pedirlo, no porque alguien se lo pida; aun así el motivo afirma que se lo están pidiendo."
+   },
+   {
+    "id": "SC-CLAVE-CAMBIO-01-e01@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "2. B: Buenas tardes, ¿hablo con Raúl Quiroga? Te llamo del área de seguridad del banco por un movimiento en tu cuenta.",
+    "justificacion": "Hasta acá no se pidió nada de la lista; el motivo avisa por posible suplantación del banco y menciona pedir información solo como intención supuesta."
+   },
+   {
+    "id": "SC-FAMILIAR-DINERO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+    "justificacion": "B pide ahora una transferencia de dinero, y el motivo describe esa transferencia urgente con la amenaza de denuncia que se planteó en la línea 6."
+   },
+   {
+    "id": "SC-ORG-BENEFICIO-01-e01@L4",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo del organismo previsional, del área de beneficios; mi nombre es Daniel Ferreyra. Te figura un refuerzo de cuarenta mil pesos que todavía no cobraste.",
+    "justificacion": "No hay ningún pedido de la lista; el motivo avisa por posible suplantación del organismo y por el anuncio de un beneficio inesperado."
+   },
+   {
+    "id": "SC-PREMIO-01-e01@L6",
+    "categoria": "pedido_inventado",
+    "cita": "6. B: ¡No lo puedo creer! ¿Y qué tengo que hacer?",
+    "justificacion": "El motivo afirma 'te piden que entregues datos', pero hasta la línea 6 A solo anunció el premio y nadie pidió datos, ni siquiera en un relato."
+   },
+   {
+    "id": "SC-SOPORTE-CLAVE-01-e01@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino.",
+    "justificacion": "No se pidió nada de la lista; el motivo avisa por un problema técnico que sospecha inventado y plantea el pedido de datos o códigos como algo que puede venir, no como algo ya dicho."
+   },
+   {
+    "id": "SC-SOPORTE-REMOTO-01-e01@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",
+    "justificacion": "Preguntar si es el titular no está en la lista, y el motivo avisa por posible suplantación del banco describiendo solo esa pregunta."
+   },
+   {
+    "id": "SC-WA-CODE-01-e01@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.",
+    "justificacion": "Todavía no se pidió nada de la lista; el motivo avisa por posible suplantación de soporte, sin afirmar que se pida un código."
+   },
+   {
+    "id": "TR-01-pedido-indirecto-digitos@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Mariela, te llamo del área de seguridad de la tarjeta. Estamos viendo un consumo en curso en un local de deportes, por ciento cuarenta mil pesos. ¿Lo estás haciendo vos?",
+    "justificacion": "Preguntar si reconoce un consumo no está en la lista, y el motivo presenta el pedido de datos solo como algo posible ('posiblemente'), no como algo ya dicho."
+   },
+   {
+    "id": "TR-03-negacion-y-consejo@L7",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "7. A: ¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?",
+    "justificacion": "Compartir la pantalla aparece como hipótesis ('¿y si me piden...?') dentro de una charla de consejos, no como pedido actual; aun así el motivo afirma que se lo están pidiendo."
+   },
+   {
+    "id": "TR-04-pedido-tras-charla-larga@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina.",
+    "justificacion": "Hasta acá no se pidió nada de la lista; el motivo avisa por posible suplantación del banco y menciona pedir información solo como intención supuesta."
+   },
+   {
+    "id": "TR-05-asado-con-transferencia@L13",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "13. A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.",
+    "justificacion": "A pide ahora una transferencia de dinero antes del viernes para devolvérselo a un tercero, y el motivo describe exactamente eso."
+   },
+   {
+    "id": "TR-06-banco-alerta-legitima@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",
+    "justificacion": "No hay ningún pedido de la lista; el motivo avisa por posible suplantación del banco y menciona pedir información solo como intención supuesta."
+   },
+   {
+    "id": "TR-07-pedido-partido-en-dos-lineas@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?",
+    "justificacion": "A solo informa y pregunta por un dispositivo vinculado, sin pedir nada de la lista; el motivo avisa por ese contexto sin afirmar un pedido."
+   },
+   {
+    "id": "TR-08-frase-cortada-candado@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: Pasame el código",
+    "justificacion": "Con lo dicho hasta acá, A pide un código, y el motivo describe un código; lo de 'acceso a tu cuenta o servicio' es una glosa genérica, aunque el texto no aclara de qué código se trata."
+   },
+   {
+    "id": "TR-09-victima-se-niega@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo del área de prevención del banco, me llamo Diego. Tenemos retenida una compra de doscientos treinta mil pesos con tu tarjeta de débito, en una página de venta de pasajes. ¿La hiciste vos?",
+    "justificacion": "Preguntar si reconoce una compra no está en la lista; el motivo avisa por posible suplantación del banco y presenta el pedido de información de la tarjeta como intención supuesta."
+   },
+   {
+    "id": "TR-10-ofrecimiento-inducido@L4",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "4. B: Te hablo del área de verificación de cuentas de WhatsApp. Estamos viendo que alguien intenta abrir tu cuenta en otro teléfono y lo tenemos retenido.",
+    "justificacion": "Todavía no se pidió nada de la lista; el motivo avisa por posible suplantación del soporte de WhatsApp y por el contexto del supuesto intento de acceso."
+   },
+   {
+    "id": "TR-11-familiar-real-pide-plata@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?",
+    "justificacion": "B pide ahora una transferencia de dinero, y el motivo describe un pedido de dinero; decir que la excusa es 'falsa' es un juicio del modelo, no cambia qué se pidió."
+   },
+   {
+    "id": "TR-12-corta-antes-del-pedido@L10",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "9. B: ¡No, abu, no cortes! Si cortás va a ser peor para mí. Quedate en línea un minuto.",
+    "justificacion": "Hasta la línea 10 nadie pidió dinero, datos ni claves; el motivo avisa por presión (aunque la describe al revés: le piden no cortar) sin afirmar un pedido de la lista."
+   },
+   {
+    "id": "TR-13-turno-medico-pide-dni@L5",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: Bien. Decime tu número de documento y la fecha de nacimiento, así te busco en el sistema.",
+    "justificacion": "A pide ahora el número de documento y la fecha de nacimiento, y el motivo nombra esos mismos datos personales."
+   }
+  ],
+  "revisor_2": [
+   {
+    "id": "LAB-acceso-remoto@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mando el acceso remoto para que me compartas la pantalla y lo freno yo",
+    "justificacion": "A le pide ahora usar un acceso remoto y compartir la pantalla, y el motivo nombra esas mismas dos cosas."
+   },
+   {
+    "id": "LAB-acceso-remoto-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: instala el programa que te digo y mostrame la pantalla",
+    "justificacion": "Hay un pedido actual de instalar un programa y mostrar la pantalla, y el motivo describe eso mismo; lo de robar datos es una interpretación de la intención, no un dato nuevo sobre el pedido."
+   },
+   {
+    "id": "LAB-anses-beneficio@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: para habilitarlo pasame la clave de la seguridad social y el cbu",
+    "justificacion": "A pide ahora la clave de la seguridad social y el CBU, y el motivo nombra exactamente esas dos cosas."
+   },
+   {
+    "id": "LAB-anses-beneficio-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: pasame la contraseña y el alias para habilitarlo",
+    "justificacion": "A pide ahora la contraseña y el alias, y el motivo nombra esas mismas dos cosas."
+   },
+   {
+    "id": "LAB-anses-canal-oficial@L1",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "1. A: me ofrecieron un bono si les doy datos del organismo",
+    "justificacion": "El hablante cuenta un ofrecimiento que le hicieron otros en el pasado; nadie le pide datos a la otra persona en esta llamada, aunque el motivo lo presenta como un pedido actual."
+   },
+   {
+    "id": "LAB-arca-deuda@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: tiene que autorizar con su clave fiscal o transferir hoy",
+    "justificacion": "A pide ahora autorizar con la clave fiscal o transferir, y el motivo menciona justamente transferir dinero o usar la clave fiscal."
+   },
+   {
+    "id": "LAB-arca-deuda-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: regularice hoy con su homebanking o le embargo la cuenta",
+    "justificacion": "Regularizar la deuda hoy por homebanking es un pago inducido, y el motivo describe esa misma acción (regularizar hoy) junto con la amenaza de embargo que se dijo."
+   },
+   {
+    "id": "LAB-banco-app-parafrasis@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: corta aca y fijate vos en la app del banco",
+    "justificacion": "Lo único que se pide es cortar y revisar uno mismo la app del banco, que no está en la lista, así que el aviso se apoya en una sospecha (\"posiblemente robar\") y no en un pedido de riesgo."
+   },
+   {
+    "id": "LAB-banco-codigo@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: si no la frenamos ahora te vacian la cuenta",
+    "justificacion": "Hasta acá no se pide nada de la lista: hay presión y urgencia sobre una compra, y el motivo avisa por esa presión."
+   },
+   {
+    "id": "LAB-banco-codigo-parafrasis@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: hola soy del banco vimos un gasto que no es tuyo",
+    "justificacion": "Solo hay alguien que dice ser del banco y menciona un gasto, sin pedir nada de la lista, y el motivo avisa por posible suplantación."
+   },
+   {
+    "id": "LAB-banco-numeros-sin-clave@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: che te hablo del banco hay un consumo raro en la tarjeta",
+    "justificacion": "Nadie pidió datos ni claves todavía; el motivo avisa por una posible suplantación del banco y presenta el pedido de información solo como intención."
+   },
+   {
+    "id": "LAB-banco-revisa-app@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: corta esta comunicacion y entra vos a la aplicacion oficial",
+    "justificacion": "La indicación es cortar y entrar uno mismo a la app oficial, que no es nada de la lista, y el motivo solo describe ese contexto sin afirmar un pedido de riesgo."
+   },
+   {
+    "id": "LAB-digitos-sin-palabra@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: se cae la operacion si no lo confirmas ahora",
+    "justificacion": "Confirmar si un cargo es propio no está en la lista, y el motivo avisa por la presión y la urgencia."
+   },
+   {
+    "id": "LAB-familiar-peligro@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. A: necesito que saques la plata de la cuenta y me la pases",
+    "justificacion": "A pide ahora que le entreguen plata, y el motivo describe un pedido de dinero bajo amenaza, que coincide con lo dicho en las líneas 1 a 4."
+   },
+   {
+    "id": "LAB-familiar-peligro-parafrasis@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: no avises a nadie venite ya",
+    "justificacion": "Pedirle a alguien que no avise y que vaya no está en la lista, y el motivo describe esa presión sin hablar de dinero ni de datos."
+   },
+   {
+    "id": "LAB-giro-sin-plata@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: necesito que me gires ya a la cuenta que te dicto",
+    "justificacion": "Girar a una cuenta es un pedido actual de transferencia, y el motivo lo describe como un pedido de dinero."
+   },
+   {
+    "id": "LAB-mensajeria-no-pases-nada@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: me llamo alguien que dice ser soporte de la aplicacion de mensajes",
+    "justificacion": "No aparece ningún pedido de la lista, ni siquiera relatado, y el motivo solo avisa por una posible suplantación de soporte técnico."
+   },
+   {
+    "id": "LAB-no-bajes-nada@L1",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "1. A: me llamaron para que baje un programa y les muestre el celular",
+    "justificacion": "El pedido de bajar un programa y mostrar el celular se cuenta como algo que le pasó al hablante, no como un pedido actual a la otra persona."
+   },
+   {
+    "id": "LAB-pantalla-sin-programa@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: bajate este programita y dejame mirar lo que ves en el celular",
+    "justificacion": "A pide ahora instalar un programa para ver el celular, y el motivo describe justamente instalar un programa para acceder al celular."
+   },
+   {
+    "id": "LAB-whatsapp-codigo@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: hola soy del soporte de whatsapp se quiere meter alguien en tu cuenta",
+    "justificacion": "Todavía no se pide ningún código ni dato, y el motivo avisa por el contexto de supuesto soporte y acceso indebido, sin afirmar un pedido."
+   },
+   {
+    "id": "LAB-whatsapp-codigo-parafrasis@L3",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "3. A: te mandamos un codigo de verificacion pasamelo",
+    "justificacion": "A pide ahora el código de verificación, y el motivo nombra ese mismo código."
+   },
+   {
+    "id": "LG-BANK-VERIF-01-e01@L2",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "2. B: Hola, Lucía. Llamo al número que está atrás de mi tarjeta. Me llegó un aviso en la app de un ingreso desde un dispositivo nuevo y quiero cambiar la clave.",
+    "justificacion": "\"Cambiar la clave\" aparece como intención propia de B, que lo cuenta; nadie le está pidiendo que lo haga, aunque el motivo dice \"te están pidiendo\"."
+   },
+   {
+    "id": "LG-ORG-TURNO-01-e01@L10",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "10. B: ¿Y el turno no me lo podés sacar vos? Te paso el número de documento, si querés.",
+    "justificacion": "El número de documento lo ofrece B por su cuenta, y antes A ya había dicho que no hacía falta, así que no hay un pedido actual de A."
+   },
+   {
+    "id": "LG-SUPPORT-INFO-01-e01@L4",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "3. A: Bien, lo vemos. Antes que nada, no me digas ni tu usuario ni tu contraseña; para esto no los necesito.",
+    "justificacion": "A dice explícitamente que no quiere el usuario ni la contraseña, y B solo cuenta que pensaba pasárselos, así que es un pedido negado y no actual."
+   },
+   {
+    "id": "LG-WA-CONSULTA-01-e01@L1",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "1. A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.",
+    "justificacion": "El código aparece en el relato de un SMS que le llegó al hablante, pero nadie le pide que lo entregue, aunque el motivo lo presenta como un pedido actual."
+   },
+   {
+    "id": "SC-CLAVE-CAMBIO-01-e01@L2",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "2. B: Buenas tardes, ¿hablo con Raúl Quiroga? Te llamo del área de seguridad del banco por un movimiento en tu cuenta.",
+    "justificacion": "Hasta acá solo hay una presentación como área de seguridad del banco, sin ningún pedido de la lista, y el motivo avisa por posible suplantación."
+   },
+   {
+    "id": "SC-FAMILIAR-DINERO-01-e01@L9",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "9. B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+    "justificacion": "B pide ahora una transferencia de dinero, y el motivo la describe como tal; la amenaza de denuncia sí se mencionó en la línea 6."
+   },
+   {
+    "id": "SC-ORG-BENEFICIO-01-e01@L4",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo del organismo previsional, del área de beneficios; mi nombre es Daniel Ferreyra. Te figura un refuerzo de cuarenta mil pesos que todavía no cobraste.",
+    "justificacion": "Solo se anuncia un refuerzo, sin pedir nada de la lista, y el motivo avisa por posible suplantación del organismo."
+   },
+   {
+    "id": "SC-PREMIO-01-e01@L6",
+    "categoria": "pedido_inventado",
+    "cita": "6. B: ¡No lo puedo creer! ¿Y qué tengo que hacer?",
+    "justificacion": "El motivo afirma que piden entregar datos para cobrar el premio, pero hasta la línea 6 solo se anunció el premio y B recién pregunta qué tiene que hacer: nadie pidió datos."
+   },
+   {
+    "id": "SC-SOPORTE-CLAVE-01-e01@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino.",
+    "justificacion": "No se pidió ningún dato ni código; el motivo plantea el pedido solo como una intención futura (\"para que te pidan\") y se apoya en la sospecha de un problema técnico inventado."
+   },
+   {
+    "id": "SC-SOPORTE-REMOTO-01-e01@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",
+    "justificacion": "Preguntar si es titular de la cuenta no está en la lista, y el motivo avisa por posible suplantación del banco."
+   },
+   {
+    "id": "SC-WA-CODE-01-e01@L1",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "1. A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.",
+    "justificacion": "Todavía no se pide ningún código, y el motivo solo avisa por un posible soporte falso."
+   },
+   {
+    "id": "TR-01-pedido-indirecto-digitos@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Mariela, te llamo del área de seguridad de la tarjeta. Estamos viendo un consumo en curso en un local de deportes, por ciento cuarenta mil pesos. ¿Lo estás haciendo vos?",
+    "justificacion": "Solo se pregunta si el consumo es propio, que no está en la lista, y el motivo trata el pedido de datos como una posibilidad futura, sin afirmarlo."
+   },
+   {
+    "id": "TR-03-negacion-y-consejo@L7",
+    "categoria": "pedido_relatado_o_negado",
+    "cita": "7. A: ¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?",
+    "justificacion": "Compartir la pantalla se plantea como hipótesis dentro de una charla de consejos, no como un pedido actual a la otra persona."
+   },
+   {
+    "id": "TR-04-pedido-tras-charla-larga@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina.",
+    "justificacion": "Hasta acá solo hay una presentación como sucursal del banco, sin pedidos, y el motivo avisa por posible suplantación."
+   },
+   {
+    "id": "TR-05-asado-con-transferencia@L13",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "13. A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta.",
+    "justificacion": "A pide ahora una transferencia antes del viernes para devolverle a Lucho, y el motivo describe esa misma transferencia y su destino."
+   },
+   {
+    "id": "TR-06-banco-alerta-legitima@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",
+    "justificacion": "Solo se anuncia un consumo sospechoso, sin pedir nada de la lista, y el motivo avisa por posible suplantación."
+   },
+   {
+    "id": "TR-07-pedido-partido-en-dos-lineas@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?",
+    "justificacion": "Se informa que se vinculó un dispositivo y se pregunta si fue la persona, pero no se le pide autorizar nada; el motivo avisa por sospecha sin afirmar un pedido."
+   },
+   {
+    "id": "TR-08-frase-cortada-candado@L3",
+    "categoria": "pedido_presente_mal_descrito",
+    "cita": "3. A: Pasame el código",
+    "justificacion": "Hay un pedido actual de \"el código\" sin decir de qué es, pero el motivo agrega que es un código de acceso a una cuenta o servicio, algo que nadie dijo en esta charla entre conocidos."
+   },
+   {
+    "id": "TR-09-victima-se-niega@L3",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "3. A: Te llamo del área de prevención del banco, me llamo Diego. Tenemos retenida una compra de doscientos treinta mil pesos con tu tarjeta de débito, en una página de venta de pasajes. ¿La hiciste vos?",
+    "justificacion": "Solo se pregunta si la compra es propia, sin pedir datos de la lista, y el motivo avisa por posible suplantación del banco."
+   },
+   {
+    "id": "TR-10-ofrecimiento-inducido@L4",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "4. B: Te hablo del área de verificación de cuentas de WhatsApp. Estamos viendo que alguien intenta abrir tu cuenta en otro teléfono y lo tenemos retenido.",
+    "justificacion": "Todavía no se pide ningún código ni dato, y el motivo avisa por posible suplantación del soporte de WhatsApp."
+   },
+   {
+    "id": "TR-11-familiar-real-pide-plata@L4",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "4. B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?",
+    "justificacion": "B pide ahora una transferencia de dinero, y el motivo describe un pedido de dinero; lo de \"excusa falsa\" es una valoración del modelo, no un cambio en el objeto pedido."
+   },
+   {
+    "id": "TR-12-corta-antes-del-pedido@L10",
+    "categoria": "sospecha_sin_pedido",
+    "cita": "9. B: ¡No, abu, no cortes! Si cortás va a ser peor para mí. Quedate en línea un minuto.",
+    "justificacion": "No se llegó a pedir dinero ni nada de la lista, y el motivo avisa por presión, aunque la describe al revés (la presión es para no cortar)."
+   },
+   {
+    "id": "TR-13-turno-medico-pide-dni@L5",
+    "categoria": "pedido_presente_bien_descrito",
+    "cita": "5. A: Bien. Decime tu número de documento y la fecha de nacimiento, así te busco en el sistema.",
+    "justificacion": "A pide ahora el número de documento y la fecha de nacimiento, y el motivo nombra exactamente esos datos personales."
+   }
+  ]
+ }
+}

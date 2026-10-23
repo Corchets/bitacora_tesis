@@ -1,0 +1,20 @@
+{
+  "case_id": "LAB-familiar-peligro-parafrasis",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 4,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "contexto", "etiquetas": ["ISOLATION_SECRECY", "URGENCY_PRESSURE"]},
+    {"linea": 4, "evento": "pedido", "etiquetas": ["REQUEST_TRANSFER", "URGENCY_PRESSURE"]},
+    {"linea": 6, "evento": "pedido", "etiquetas": ["REQUEST_TRANSFER", "PERSISTENCE_DISTRACTION"]}
+  ],
+  "que_prueba": "Paráfrasis anti-overfit del familiar en peligro: un amigo del hijo accidentado aísla, pide llevar efectivo y después transferir a un alias.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/vishing/familiar-peligro-parafrasis.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: Ministerio de Justicia, página actualizada en junio de 2026 (misma modalidad que familiar-peligro.txt), redacción propia del equipo; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Paráfrasis de LAB-familiar-peligro en el laboratorio; par null. Incendio esperado por el laboratorio: REQUEST_TRANSFER en t6 («transferime a este alias»); el comentario reconoce t4 («diez mil pesos») como hueco conocido de las reglas, y el goteo en t5. Difiere: t_r_linea = 4, porque «trae diez mil pesos a la plaza ahora» pide entregar efectivo, que el manual §5 incluye en REQUEST_TRANSFER; la línea 6 es un segundo pedido. Hablantes: las líneas 3 y 4 son de A seguidas. Sin cumplimiento: B dice que no llega y A cambia a transferencia. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

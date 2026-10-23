@@ -1,0 +1,27 @@
+A: Buenas, ¿quién habla?
+B: Buen día, del sector de actualización de beneficiarios. Busco a quien gestiona la pensión de su mamá.
+A: Soy la hija. Ella hizo el cambio de domicilio hace poco.
+B: Sí, por eso llamamos. El sistema dejó pendiente el domicilio y el representante.
+A: El representante no cambió, sigue siendo mi hermano.
+B: En la migración se mezclan esos campos, lo corregimos en la misma ficha.
+A: ¿Tiene el número de expediente? Lo tengo acá.
+B: Ahora no lo visualizo. Para buscarlo necesito identificar a la titular.
+A: ¿El cambio que hizo en la oficina no aparece?
+B: Aparece abierto, pero no se puede cerrar sin la ficha que le voy a enviar.
+A: ¿Me la manda al correo registrado?
+B: Le pido el DNI completo y la fecha de nacimiento de su mamá para cargarla, y una foto de frente y dorso en el formulario que le llega por mensaje.
+A: Anote 39.714.286, primero de enero de 1970. Me llegó un mensaje de Gestión Integral, ¿es ese?
+B: Ese mismo. Abra la ficha de actualización de domicilio.
+A: La abrí, arriba dice alta de representante para cobro. No dice domicilio.
+B: Es el título general. Lo que ponemos abajo es la dirección nueva.
+A: Pero el representante sigue siendo mi hermano.
+B: Eso se copia al final. Primero cargue las fotos del documento que tiene a mano.
+A: Estoy usando las fotos que ella me dejó para el trámite. Ya envié las dos.
+B: Perfecto, ahora continúe con aceptar el representante indicado.
+A: Me figura otro nombre, no es el de mi hermano.
+B: Es quien valida administrativamente, no quien va a cobrar.
+A: No voy a aceptar eso. Le voy a mostrar esta ficha a mi mamá.
+B: Si queda sin terminar, se vuelve a abrir el plazo del cambio.
+A: Los datos ya se los pasé, pero la autorización no la doy.
+B: La dejo pendiente, entonces.
+A: Sí, voy a consultar en la oficina donde inició todo.

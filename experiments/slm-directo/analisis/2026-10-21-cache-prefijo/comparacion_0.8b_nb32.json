@@ -1,0 +1,30 @@
+{
+  "base": "2026-10-17_150516_m1-gguf",
+  "nueva": "2026-10-21_182201_m1-0.8b-v1v2-nb32",
+  "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab",
+  "casos": 53,
+  "lineas": 464,
+  "crudo_identico": 453,
+  "misma_alerta": 461,
+  "mismo_riesgo": 461,
+  "mismo_aviso_por_caso": 52,
+  "casos_con_otro_aviso": [
+    {
+      "caso": "TR-01-pedido-indirecto-digitos",
+      "base": 9,
+      "nueva": null
+    }
+  ],
+  "ms": {
+    "base": {
+      "p50": 1282,
+      "p95": 3465,
+      "media": 1670
+    },
+    "nueva": {
+      "p50": 1017,
+      "p95": 2993,
+      "media": 1355
+    }
+  }
+}

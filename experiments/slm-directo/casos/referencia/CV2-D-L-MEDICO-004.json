@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-MEDICO-004",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-MEDICO-004",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La apertura «hola tengo una ecografía el viernes en la sede norte y se me complicó llegar hasta allá» (L1) da paso a una gestión cotidiana. Contexto: Una persona consulta si puede cambiar la sede de una ecografía por dificultad de traslado; aporta fecha de nacimiento y acuerda mantener el turno. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona consulta si puede cambiar la sede de una ecografía por dificultad de traslado; aporta fecha de nacimiento y acuerda mantener el turno.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "medico",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": true,
+  "escenario_base": null,
+  "situacion": "Una persona consulta si puede cambiar la sede de una ecografía por dificultad de traslado; aporta fecha de nacimiento y acuerda mantener el turno."
+}

@@ -1,0 +1,22 @@
+{
+  "case_id": "LG-FAMILIAR-LLAMADO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "LG-FAMILIAR-LLAMADO-01",
+  "par": "SC-FAMILIAR-DINERO-01-e01",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 2, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 4, "evento": "contexto", "etiquetas": []},
+    {"linea": 7, "evento": "mencion", "etiquetas": []},
+    {"linea": 8, "evento": "rechazo", "etiquetas": []},
+    {"linea": 9, "evento": "contexto", "etiquetas": []},
+    {"linea": 10, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Un familiar llama desde un número ajeno por una urgencia real (guardia, hospital). Quien atiende menciona transferir plata y propone cortar para verificar; el familiar rechaza la plata y acepta la verificación. Misma identidad declarada y mismo vocabulario que su par, sin pedido.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla LG-FAMILIAR-LLAMADO-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Usa la misma identidad declarada que el par (sobrino «Nico» que llama desde otro número) para que la diferencia esté en la conducta: acá se presenta por su nombre sin que se lo pregunten, no pide dinero ni secretos y acepta que A corte y llame a la madre. La línea 7 menciona una transferencia que ofrece A, no un pedido. La urgencia médica puede disparar reglas de urgencia, pero no hay presión del llamante. En el texto no hay evidencia para comprobar que la identidad sea auténtica (manual §2); se toma de la ficha."
+}

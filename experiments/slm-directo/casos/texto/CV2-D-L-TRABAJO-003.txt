@@ -1,0 +1,25 @@
+A: Hola, ¿tenés un minuto? Me quedó mal cargada la guardia del martes.
+B: Sí, decime. ¿Qué horario habías hecho?
+A: Entré a las seis y salí a las dos, pero en la planilla aparece hasta medianoche.
+B: ¿La compañera que te cubrió quedó registrada desde las doce?
+A: Sí, ella entró a las doce. Capaz pusimos las dos el mismo turno.
+B: ¿Tenés el parte de novedades de esa noche?
+A: Sí, está en la carpeta azul. Firmamos las dos al cambio.
+B: ¿Podés mirar si figura la hora de entrega de llaves?
+A: Dice 00:05 y al lado está mi firma. Después la firma de Lara es de las 00:10.
+B: Eso confirma el cambio de turno. Mandame una foto de esa página por el canal interno.
+A: ¿Puedo tapar los nombres de las personas que estaban esperando?
+B: Sí, no necesitamos esos datos para corregir el horario.
+A: Ya la saqué. Se ve bien la fecha y el registro.
+B: La recibí. Voy a corregir la salida a las doce, que es el horario que cerramos.
+A: No, yo salí a las dos. Lara llegó a medianoche y me cubrió hasta las dos porque se demoró el colectivo.
+B: Ah, tenés razón. Entonces ella también quedó dos horas más tarde.
+A: Sí, lo hablamos antes de que se fuera y lo anotamos en el cuaderno.
+B: Bien, necesito revisar el cuaderno para ajustar las dos filas.
+A: Está en el cajón de arriba, donde dejamos las planillas del mes.
+B: Lo busco después del almuerzo y te aviso antes de cerrar nómina.
+A: Gracias. No quiero que me descuenten esas dos horas por un error de carga.
+B: Claro, lo verificamos con los dos registros y queda asentado.
+A: ¿Hace falta que firme otra vez?
+B: Solo si el sistema pide validar el cambio. Te aviso por el correo interno.
+A: Listo, gracias por resolverlo.

@@ -1,0 +1,25 @@
+{
+  "case_id": "LG-BANK-VERIF-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "LG-BANK-VERIF-01",
+  "par": "SC-CLAVE-CAMBIO-01-e01",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 2, "evento": "contexto", "etiquetas": []},
+    {"linea": 3, "evento": "mencion", "etiquetas": []},
+    {"linea": 4, "evento": "mencion", "etiquetas": []},
+    {"linea": 5, "evento": "rechazo", "etiquetas": []},
+    {"linea": 6, "evento": "mencion", "etiquetas": []},
+    {"linea": 7, "evento": "rechazo", "etiquetas": []},
+    {"linea": 9, "evento": "mencion", "etiquetas": []},
+    {"linea": 11, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Quien atiende se presenta como el banco y se habla de cambiar la clave, de enlaces, de dispositivos y de datos de la tarjeta, pero solo se recomienda el canal oficial, se rechazan el enlace y los datos parciales y se deja cortar. Negación «no te voy a pedir la clave» que puede engañar a reglas de palabras clave.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla LG-BANK-VERIF-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Las líneas 3 y 9 indican cambiar la clave y quitar dispositivos desde la app oficial: según el manual §5, recomendar una acción de seguridad por el canal oficial no es REQUEST_SECURITY_ACTION, pero comparte vocabulario con el par. En la línea 6 es B quien ofrece datos parciales; A los rechaza (línea 7), como pide la ficha. El texto no permite comprobar que el número llamado sea el oficial; se toma de la ficha. AUTHORITY_CLAIM se anota en quien atiende (A), aunque el manual §5 la define para quien llama; revisar en D07."
+}

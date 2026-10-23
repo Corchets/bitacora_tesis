@@ -1,0 +1,25 @@
+A: Buenas, los mensajes me llegan todos juntos cuando abro la aplicación. Antes sonaban al momento.
+B: ¿Te pasa con todos los chats o con uno en particular?
+A: Con todos. En el grupo de la familia me dicen que contesto tarde.
+B: ¿Tenés activado el ahorro de batería?
+A: Sí, lo pongo siempre porque el teléfono ya tiene unos años.
+B: Puede estar pausando las notificaciones en segundo plano. ¿Qué versión del sistema tenés?
+A: Una vieja, creo que la nueve. El celular es un Rivo, modelo Loma.
+B: Revisá permisos de notificación y batería. Si la aplicación está restringida, no actualiza hasta que la abrís.
+A: Lo puedo hacer. El año pasado me apareció un código de registro cuando cambié el chip y pensé que era por eso.
+B: ¿Fue al reinstalar la aplicación?
+A: Sí, me acuerdo porque estaba en una terminal y no tenía señal buena.
+B: El código puede aparecer cuando se verifica la cuenta. No hace falta que me lo compartas para revisar notificaciones.
+A: No lo tengo, fue hace un montón. Tampoco lo anoté.
+B: Está bien, acá estamos viendo otra cosa. ¿Te aparece la optimización de batería activa para la aplicación?
+A: Sí, está en “restringido”. La voy a poner en automático.
+B: Probá primero en automático. Si sigue demorando, podés permitir actividad en segundo plano.
+A: Ya cambié eso. Me mandé un mensaje desde la tablet y llegó enseguida.
+B: Entonces parece que encontramos la causa.
+A: ¿Eso me va a gastar mucho más batería?
+B: Puede aumentar un poco el consumo, pero podés revisar durante el día y volver atrás si te complica.
+A: Lo dejo así esta semana. ¿Hay otra cosa que deba mirar?
+B: Que el modo no molestar no esté programado durante el horario en que esperás mensajes.
+A: Ah, también lo activo a la noche y se me olvidó. Gracias, ahora entiendo.
+B: De nada. ¿Necesitás algo más?
+A: No, con eso alcanza.

@@ -1,0 +1,5 @@
+A: soy del soporte de tu banco
+B: que paso
+A: bajate este programita y dejame mirar lo que ves en el celular
+B: no entiendo
+A: asi freno el debito que te estan haciendo

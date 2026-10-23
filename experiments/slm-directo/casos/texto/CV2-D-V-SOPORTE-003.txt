@@ -1,0 +1,21 @@
+A: Te habla Iván de la mesa técnica de Aulas Noroeste Sos docente del turno tarde
+B: Sí doy historia en segundo año
+A: Se está cerrando el ciclo de notas y quedaron algunas sesiones abiertas
+B: Ayer cargué las calificaciones puede ser eso
+A: Estamos revisando que cada docente pueda entrar al cierre final
+B: Yo entro pero me faltan dos cursos
+A: Entonces tu perfil puede estar tomando el usuario anterior
+B: Cómo lo corrijo
+A: Abrí la pantalla de acceso y elegí recuperar usuario
+B: Me pide usuario y contraseña
+A: Sí para sincronizarlo necesito que me confirmes ambos datos
+B: El usuario del ministerio
+A: El que usás en el portal con su clave actual
+B: La escribo acá No quiero decirla en voz alta
+A: ingresala en la ficha que te envié por mensaje así queda asociada al usuario
+B: Me preocupa que sea una llamada saliente
+A: Es una tarea puntual antes del cierre después vuelve al procedimiento normal
+B: ya ingresé el usuario y la contraseña en la ficha que me mandaste me apareció enviado
+A: Ya apareció el perfil ahora veo los cursos
+B: Me confirmás si están las dos notas
+A: Sí quedaron visibles

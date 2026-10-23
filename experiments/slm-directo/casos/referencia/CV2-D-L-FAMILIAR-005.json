@@ -1,0 +1,45 @@
+{
+  "case_id": "CV2-D-L-FAMILIAR-005",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-FAMILIAR-005",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 16,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una reparación de 38.000 se cubre con aportes desiguales de 15.000, 19.000 y 4.000. Se paga solo la parte acordada y quedan otros aportes pendientes; prueba seguir quién debe cuánto sin confundir saldo familiar con presión fraudulenta.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una familia se organiza para pagar una reparación ya realizada en la casa común; se aclara el comprobante y quién administra los gastos.; sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Los aportes suman el importe de la reparación; no se vuelve a pedir un saldo a quien completó su parte. Pedido y cumplimiento son evidencia de una gestión legítima, con marcas críticas nulas. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Tres familiares acuerdan cubrir una reparación de cocina mediante aportes diferentes a una cuenta común; uno transfiere y los otros dos quedan pendientes."
+}

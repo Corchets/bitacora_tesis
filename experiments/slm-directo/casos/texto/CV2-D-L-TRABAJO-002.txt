@@ -1,0 +1,25 @@
+A: el cliente de los estantes llamó la medida del módulo no coincide con el hueco
+B: cuál de los dos módulos el del pasillo o el que va al mostrador
+A: el del mostrador pidió 62 centímetros y nosotros cortamos 68
+B: la orden de trabajo también dice 68
+A: sí pero en el mensaje que mandó antes aparece 62 capaz copié mal el dato
+B: le confirmamos por teléfono o le pedimos que nos lo vuelva a escribir
+A: ya lo tengo en el chat del taller le puedo mandar una foto del dibujo
+B: mandale primero una nota diciendo que encontramos la diferencia y que hoy no se lo vamos a llevar así
+A: me preocupa que tenga la inauguración el sábado
+B: preguntale si le sirve retirar el viernes a última hora podemos rehacer el frente hoy
+A: dice que sí mientras mantengamos la profundidad como estaba
+B: cuánto material queda de la misma madera
+A: hay una tabla pero alcanza justo si no se rompe al cortar
+B: entonces guardemos el sobrante para una prueba y no usemos la pieza anterior como plantilla
+A: el dibujo muestra 62 de ancho por 34 de alto te cierra
+B: sí anotá que el cliente confirmó esas dos medidas a las ocho y veinte
+A: ya lo puse en la orden nueva también separé el módulo que quedó grande
+B: ese lo podemos adaptar para el depósito no lo tires
+A: le cobramos el cambio de material
+B: no el error fue nuestro lo anotamos como retrabajo
+A: bueno vos podés quedarte hasta que termine el corte
+B: sí pero llamá a tu casa para avisar que llegás más tarde
+A: ya avisé el cliente mandó un pulgar arriba queda confirmada la entrega el viernes
+B: perfecto después le mandamos una foto cuando esté armado
+A: listo me pongo con la madera

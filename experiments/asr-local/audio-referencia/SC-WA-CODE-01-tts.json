@@ -1,0 +1,51 @@
+{
+  "case_id": "SC-WA-CODE-01-tts",
+  "clase": "vishing",
+  "grupo": "piloto_escrito",
+  "t_r": 13.213,
+  "t_c": 18.03,
+  "duracion_s": 21.277,
+  "turnos": [
+    {
+      "linea": 1,
+      "hablante": "A",
+      "texto": "Te llamo de soporte por la activación de tu cuenta de WhatsApp.",
+      "inicio_s": 0.0,
+      "fin_s": 3.634,
+      "duracion_s": 3.634
+    },
+    {
+      "linea": 2,
+      "hablante": "B",
+      "texto": "Me acaba de llegar un SMS. No pedí activar nada.",
+      "inicio_s": 4.634,
+      "fin_s": 7.602,
+      "duracion_s": 2.968
+    },
+    {
+      "linea": 3,
+      "hablante": "A",
+      "texto": "Para cancelar esa activación tenemos que resolverlo ahora.",
+      "inicio_s": 8.602,
+      "fin_s": 12.213,
+      "duracion_s": 3.611
+    },
+    {
+      "linea": 4,
+      "hablante": "A",
+      "texto": "Decime el código de activación que recibiste por SMS.",
+      "inicio_s": 13.213,
+      "fin_s": 17.03,
+      "duracion_s": 3.817
+    },
+    {
+      "linea": 5,
+      "hablante": "B",
+      "texto": "Es cero, cero, cero, cero, cero, cero.",
+      "inicio_s": 18.03,
+      "fin_s": 21.277,
+      "duracion_s": 3.247
+    }
+  ],
+  "origen": "derivado de la construcción del audio TTS, no anotación humana"
+}
