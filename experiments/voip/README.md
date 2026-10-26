@@ -372,3 +372,76 @@ y vuelta a 0,8 s en modo llamada. Corré los comandos de §8.
 
 La [evidencia de #81](corridas/2026-10-26-asr-81.md) registra las dos sesiones reales
 con micrófono falso, la barra completa y las regresiones encontradas en revisión.
+
+## 11. Otra persona desde Meet o BlackHole (#80)
+
+Abrí el panel en Chrome en `http://localhost:8765/` o `http://127.0.0.1:8765/`.
+Usá auriculares, elegí un **micrófono físico** para Persona protegida y comprobá
+que la app de llamada también use ese micrófono como entrada.
+
+Para **Meet · pestaña de Chrome**, iniciá la llamada de Meet en otra pestaña.
+Tocá **Iniciar llamada** en el panel, elegí esa pestaña y activá **Compartir audio
+de la pestaña**. No elijas este panel, una ventana ni la pantalla completa.
+Si no hay track de audio, el panel libera la captura y no manda `iniciar`.
+El video es obligatorio para el selector de Chrome, pero no se transmite ni se guarda.
+
+Para **WhatsApp / escritorio · BlackHole**, armá primero la salida múltiple:
+
+1. Abrí **Configuración de Audio MIDI**, mostrá Dispositivos de audio y tocá
+   **+ → Crear dispositivo de salida múltiple**.
+2. Marcá **tus auriculares** y **BlackHole 2ch**. Usá los auriculares como reloj
+   principal y activá la corrección de deriva para BlackHole. Ajustá el volumen
+   de los auriculares antes de elegir la salida múltiple.
+3. Elegí esa salida en WhatsApp Desktop o en la app de Meet; si usa la salida
+   predeterminada, cambiala en los ajustes de sonido de macOS. Conservá el
+   micrófono físico como entrada. Así seguís escuchando por los auriculares y
+   BlackHole recibe la voz remota; evitá notificaciones y otros sonidos del sistema.
+4. Elegí **WhatsApp / escritorio · BlackHole** en el panel e iniciá. El permiso
+   del micrófono habilita los nombres de dispositivos; el panel busca BlackHole
+   y lo abre con su `deviceId` exacto. Nunca reemplaza una entrada faltante por
+   el micrófono predeterminado.
+
+**BlackHole 2ch puede estar instalado sin aparecer como dispositivo** hasta
+reiniciar `coreaudiod`. Si ocurre, hacelo vos desde Terminal con
+`sudo killall coreaudiod`, volvé a abrir Chrome y reintentá. Ese reinicio corta
+el audio de las apps: hacelo antes del ensayo. El panel solo muestra la indicación;
+no ejecuta comandos del sistema. Si BlackHole falta o no abre, libera el micrófono
+y no inicia la llamada. Una entrada presente pero silenciosa puede ser una salida
+mal configurada: confirmá que suba el medidor de Otra persona mientras habla.
+
+Ambas fuentes reutilizan `audio-navegador.mjs` mediante `fuentes.mjs`.
+Los dos streams se validan antes de mandar el control; el contrato es
+`fuentes: {protegida: {tipo: "navegador"}, otra: {tipo: "navegador"}}`.
+El panel pasa un `AbortSignal` a `prepararFuentes` para liberar las capturas
+incluso mientras queda un permiso pendiente. Cada emisor arranca con el mismo
+evento `inicio`; Terminar, pérdida de una entrada,
+fin de compartir o desconexión del panel liberan ambos canales.
+El manifiesto conserva `inicio_panel` y `canales.<rol>.desfase_llegada_s`.
+Ese campo mide la deriva de cada canal respecto de su propio inicio; compará
+además `canales.protegida.inicio_s` con `canales.otra.inicio_s` para ver la
+separación entre las primeras llegadas. Ninguno mide por sí solo la latencia acústica.
+
+Lista de comprobación **pendiente para el ensayo humano**, por cada fuente:
+
+- [ ] Dos personas con auriculares; la protegida habla sola, luego la otra sola,
+  luego se alternan. Solo sube el medidor y aparece texto del rol que habla;
+  escuchá el estéreo guardado para descartar cruces (izquierda protegida, derecha otra).
+- [ ] En Meet: seleccionar su pestaña con audio; repetir sin compartir audio y
+  comprobar mensaje, indicador apagado y ausencia de nueva carpeta de llamada.
+- [ ] En WhatsApp Desktop: confirmar que seguís escuchando con la salida múltiple;
+  probar BlackHole ausente y comprobar que no arranca ninguna llamada parcial.
+- [ ] Terminar y Nueva llamada permiten repetir; «Dejar de compartir» en Chrome
+  termina ambos canales y libera el indicador de captura.
+- [ ] En **las dos pruebas**, ambos roles tienen audio, la diferencia absoluta
+  entre sus `inicio_s` es **≤ 0,3 s** y el máximo absoluto de
+  `desfase_llegada_s` del manifiesto es **≤ 0,3 s**. Si lo supera, registrar el fallo
+  y no dar por cumplido el criterio.
+- [ ] Guardar en `corridas/` solo manifiesto, salidas sin datos personales e informe
+  con fecha, commit, hardware, versiones, dispositivos, configuración y resultado;
+  mantener WAV y voz identificable fuera de Git. Repetir en la notebook de la demo.
+
+Las pruebas automatizadas y sus límites se describen en
+[la verificación de #80](corridas/2026-10-26-fuentes-80.md). No hay corridas de
+Meet ni WhatsApp con personas registradas por este ticket.
+Fuentes para la configuración: [controles de captura de Chrome](https://developer.chrome.com/docs/web-platform/screen-sharing-controls)
+y [salida múltiple de BlackHole](https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device).

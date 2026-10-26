@@ -253,9 +253,10 @@ class Servidor:
             raise ValueError("Probar el ASR usa solamente el micrófono del navegador.")
         if not prueba and (tipos not in ({"otra": "cliente", "protegida": "cliente"},
                           {"otra": "cliente", "protegida": "navegador"},
+                          {"otra": "navegador", "protegida": "navegador"},
                           {"otra": "ejemplo", "protegida": "navegador"},
                           {"otra": "ejemplo", "protegida": "ejemplo"})):
-            raise ValueError("Elegí ejemplo o cliente.py; protegida también admite navegador (micrófono).")
+            raise ValueError("Elegí ejemplo, cliente.py o dos fuentes del navegador.")
         audio = None
         if tipos.get("otra") == "ejemplo":
             escenario = fuentes["otra"].get("escenario")
@@ -347,7 +348,7 @@ def servir_panel(connection, request):
     """GET / devuelve el panel; las rutas de WebSocket siguen de largo."""
     rutas = {"/": ("panel.html", "text/html; charset=utf-8"),
              **{f"/{nombre}": (nombre, "text/javascript; charset=utf-8") for nombre in
-                ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs")}}
+                ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs", "fuentes.mjs")}}
     archivo = rutas.get(urlparse(request.path).path)
     if archivo is None:
         return None

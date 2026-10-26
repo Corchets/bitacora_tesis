@@ -61,11 +61,18 @@
     <option value="SC-WA-CODE-01">Ejemplo · estafa SC-WA-CODE-01</option>
     <option value="LG-WA-CONSULTA-01">Ejemplo · legítima LG-WA-CONSULTA-01</option>
     <option value="cliente">Segunda notebook · cliente.py</option>
+    <option value="meet">Meet · pestaña de Chrome</option>
+    <option value="blackhole">WhatsApp / escritorio · BlackHole</option>
   </select>
   <button id="iniciar" disabled>Iniciar llamada</button>
   <button id="terminar" disabled>Terminar</button>
   <button id="nueva" disabled>Nueva llamada</button>
   <span id="error" role="alert"></span>
+  <details id="guia-fuentes"><summary>Cómo tomar la otra voz de Meet o WhatsApp</summary>
+    <p>Usá auriculares y un micrófono físico para Persona protegida. Para Meet, elegí su pestaña en Chrome y activá «Compartir audio de la pestaña». No compartas este panel, una ventana ni la pantalla completa.</p>
+    <p>Para WhatsApp Desktop: abrí Configuración de Audio MIDI → + → Crear dispositivo de salida múltiple; marcá tus auriculares y BlackHole 2ch. Usá los auriculares como reloj principal y activá la corrección de deriva para BlackHole. Elegilo como salida de la app de llamada (o del sistema si la app usa la predeterminada). Conservá el micrófono físico como entrada de la app. BlackHole recibe la otra voz y vos seguís escuchando por los auriculares; evitá otros sonidos del sistema.</p>
+    <p>BlackHole 2ch puede estar instalado y no aparecer como entrada hasta reiniciar coreaudiod. Hacelo vos desde Terminal (<code>sudo killall coreaudiod</code>), volvé a abrir Chrome y reintentá. La demo no reinicia servicios. Si la pestaña no trae audio o falta BlackHole, no se inicia la llamada.</p>
+  </details>
 </section>
 <main>
   <section id="niveles" aria-label="Volumen por persona">
@@ -90,6 +97,7 @@
 // @ts-check
 import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
+import {prepararFuentes} from './fuentes.mjs';
 /** @typedef {{segmento: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
 /** @typedef {{saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, t_a: number}} EventoDetector */
@@ -115,12 +123,25 @@ const buscarMicrofonos = /** @type {HTMLButtonElement} */ ($("buscar-microfonos"
 /** @type {ReturnType<typeof prepararAudio>|null} */
 let emisor = null;
 let intento = 0, inicioPropio = false;
+/** @type {AbortController|null} */
+let capturaPendiente = null;
 
 function liberarMicrofono() {
   intento++;
   inicioPropio = false;
+  capturaPendiente?.abort();
+  capturaPendiente = null;
   emisor?.detener();
   emisor = null;
+}
+
+/** @param {string} mensaje */
+function fallarCaptura(mensaje) {
+  const llamadaPendiente = enLlamada || inicioPropio;
+  liberarMicrofono();
+  if (llamadaPendiente && conexion?.readyState === WebSocket.OPEN) enviar({tipo: "terminar"});
+  else { pendiente = false; actualizarControles(); }
+  $("error").textContent = mensaje;
 }
 
 async function listarMicrofonos() {
@@ -164,6 +185,13 @@ buscarMicrofonos.onclick = async () => {
 window.addEventListener("pagehide", liberarMicrofono);
 
 const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
+fuente.onchange = () => {
+  if (fuente.value === "meet" || fuente.value === "blackhole") {
+    protegidaFuente.value = "microfono";
+    /** @type {HTMLDetailsElement} */ ($("guia-fuentes")).open = true;
+  }
+  actualizarControles();
+};
 const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
 const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
 const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
@@ -229,29 +257,31 @@ function enviar(mensaje) {
 
 async function iniciarSesion() {
   const token = ++intento;
-  if (pruebaASR.activa || protegidaFuente.value === "microfono") {
+  const fuenteRemota = !pruebaASR.activa && (fuente.value === "meet" || fuente.value === "blackhole");
+  if (pruebaASR.activa || protegidaFuente.value === "microfono" || fuenteRemota) {
     pendiente = true;
     $("error").textContent = "";
     actualizarControles();
     try {
       verificarCaptura();
-      const stream = await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
-      if (token !== intento) { stream.getTracks().forEach(t => t.stop()); return; }
-      try {
-        emisor = prepararAudio(stream, "protegida", mensaje => {
-          const llamadaPendiente = enLlamada || inicioPropio;
-          liberarMicrofono();
-          if (llamadaPendiente && conexion?.readyState === WebSocket.OPEN) enviar({tipo: "terminar"});
-          else { pendiente = false; actualizarControles(); }
-          $("error").textContent = mensaje;
-        });
-      } catch (error) { stream.getTracks().forEach(t => t.stop()); throw error; }
+      if (fuenteRemota) {
+        capturaPendiente = new AbortController();
+        const preparado = await prepararFuentes(/** @type {'meet'|'blackhole'} */ (fuente.value), restriccionesMicrofono(), fallarCaptura, capturaPendiente.signal);
+        if (token !== intento) { preparado.detener(); return; }
+        emisor = preparado;
+      } else {
+        const stream = await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+        if (token !== intento) { stream.getTracks().forEach(t => t.stop()); return; }
+        try {
+          emisor = prepararAudio(stream, "protegida", fallarCaptura);
+        } catch (error) { stream.getTracks().forEach(t => t.stop()); throw error; }
+      }
       await listarMicrofonos();
       if (token !== intento) return;
     } catch (error) {
       if (token !== intento) return;
       liberarMicrofono();
-      $("error").textContent = mensajeErrorMicrofono(error);
+      $("error").textContent = fuenteRemota && error instanceof Error ? error.message : mensajeErrorMicrofono(error);
       pendiente = false;
       actualizarControles();
       return;
@@ -264,6 +294,7 @@ async function iniciarSesion() {
     protegida: {tipo: "ejemplo", escenario: fuente.value, canal: "der"}
   } : {otra: {tipo: "cliente"}, protegida: {tipo: "cliente"}};
   if (emisor) fuentes.protegida = {tipo: "navegador"};
+  if (fuenteRemota) fuentes.otra = {tipo: "navegador"};
   inicioPropio = true;
   enviar(pruebaASR.activa
     ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config}
