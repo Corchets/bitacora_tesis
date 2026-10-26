@@ -306,6 +306,34 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 guardado, _ = sf.read(Path(fin["dir"]) / "estereo.wav")
                 np.testing.assert_allclose(guardado[:8000, 0], 0.25, atol=0.0001)
 
+    async def test_dos_fuentes_navegador_conservan_canales_y_desfase(self):
+        mensaje = json.loads(self.inicio())
+        mensaje["fuentes"] = {r: {"tipo": "navegador"} for r in ("protegida", "otra")}
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(mensaje))
+            respuesta = json.loads(await panel.recv())
+            self.assertEqual(respuesta["tipo"], "inicio", respuesta)
+            async with connect(self.url + "/audio?rol=protegida") as micro, \
+                    connect(self.url + "/audio?rol=otra") as otra:
+                self.reloj.t += 0.5
+                await micro.send(pcm(0.5, 0.25))
+                self.assertEqual((await self.evento(panel, "asr"))["rol"], "protegida")
+                self.reloj.t += 0.12
+                await otra.send(pcm(0.5, -0.5))
+                self.assertEqual((await self.evento(panel, "asr"))["rol"], "otra")
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                fin = await self.evento(panel, "fin")
+            m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+            self.assertEqual(m["inicio_panel"], mensaje)
+            for rol in ("protegida", "otra"):
+                self.assertEqual(m["canales"][rol]["duracion_s"], 0.5)
+                self.assertLessEqual(m["canales"][rol]["desfase_llegada_s"]["max"], 0.3)
+            self.assertEqual(m["canales"]["protegida"]["inicio_s"], 0.0)
+            self.assertEqual(m["canales"]["otra"]["inicio_s"], 0.12)
+            guardado, _ = sf.read(Path(fin["dir"]) / "estereo.wav")
+            np.testing.assert_allclose(guardado[:8000, 0], 0.25, atol=0.0001)
+            np.testing.assert_allclose(guardado[1920:9920, 1], -0.5, atol=0.0001)
+
     async def test_microfono_y_cliente_comparten_entrada_y_roles(self):
         mensaje = json.loads(self.inicio())
         mensaje["fuentes"]["protegida"] = {"tipo": "navegador"}
