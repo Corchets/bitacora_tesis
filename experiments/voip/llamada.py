@@ -107,7 +107,7 @@ class Llamada:
         self._detector = open(dir_salida / "detector.jsonl", "w", encoding="utf-8")
         self._escribir(self._jsonl, {"meta": {
             **self.meta_asr, "modo": "en_vivo", "sample_rate": SAMPLE_RATE,
-            "roles": "cada línea trae `rol`: protegida (micrófono de la persona a proteger) u otra",
+            "roles": "cada línea trae `canal`: protegida (micrófono de la persona a proteger) u otra",
         }})
 
     def reloj(self) -> float:
@@ -156,8 +156,7 @@ class Llamada:
             "fin_audio_s": round(evento.fin_audio_s, 3),
             "disponible_s": round(disponible, 3),
             "proceso_ms": evento.proceso_ms,
-            "canal": canal.letra,
-            "rol": canal.rol,
+            "canal": canal.rol,
         }
         if evento.tipo == "final":
             fin_voz = min(canal.ultima_voz_s or evento.fin_audio_s, evento.fin_audio_s)
@@ -167,9 +166,11 @@ class Llamada:
         else:
             canal.retrasos_parcial_s.append(disponible - evento.fin_audio_s)
         self._escribir(self._jsonl, act)
-        campos = {k: v for k, v in act.items() if k not in ("rol", "fin_voz_s")}
+        campos = {k: v for k, v in act.items() if k != "fin_voz_s"}
+        campos["canal"] = canal.letra
         self.foto = self.contexto.aplicar(Actualizacion(**campos), "ab")
-        return act
+        # El panel conserva el contrato de eventos previo; el JSONL identifica el rol.
+        return {**act, "canal": canal.letra, "rol": canal.rol}
 
     def marcar_disparo(self, act: dict) -> bool:
         """True si esta actualización pide evaluar (según --disparo y si ya hubo aviso)."""
