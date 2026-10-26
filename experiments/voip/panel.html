@@ -232,9 +232,10 @@ iniciar.onclick = async () => {
       if (token !== intento) { stream.getTracks().forEach(t => t.stop()); return; }
       try {
         emisor = prepararAudio(stream, "protegida", mensaje => {
-          // El cierre normal de /audio precede al «fin» del panel: no lo muestres como fallo.
-          if (!enLlamada) return;
-          if (conexion?.readyState === WebSocket.OPEN) enviar({tipo: "terminar"});
+          const llamadaPendiente = enLlamada || inicioPropio;
+          liberarMicrofono();
+          if (llamadaPendiente && conexion?.readyState === WebSocket.OPEN) enviar({tipo: "terminar"});
+          else { pendiente = false; actualizarControles(); }
           $("error").textContent = mensaje;
         });
       } catch (error) { stream.getTracks().forEach(t => t.stop()); throw error; }

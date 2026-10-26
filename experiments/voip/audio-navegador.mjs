@@ -1,4 +1,5 @@
 // @ts-check
+class ErrorCaptura extends Error {}
 
 /** @param {unknown} error @returns {string} */
 export function mensajeErrorMicrofono(error) {
@@ -10,15 +11,15 @@ export function mensajeErrorMicrofono(error) {
     return 'No encontramos ese micrófono. Conectalo o elegí otro dispositivo de entrada.';
   }
   if (nombre === 'NotReadableError') return 'No pudimos abrir el micrófono. Revisá si otra aplicación lo está usando.';
-  return error instanceof Error ? error.message : 'No pudimos capturar el audio.';
+  return error instanceof ErrorCaptura ? error.message : 'No pudimos capturar el audio.';
 }
 
 export function verificarCaptura() {
   if (!globalThis.isSecureContext) {
-    throw new Error('Para usar el micrófono, abrí este panel en http://localhost:8765 o http://127.0.0.1:8765 en la notebook del servidor.');
+    throw new ErrorCaptura('Para usar el micrófono, abrí este panel en http://localhost:8765 o http://127.0.0.1:8765 en la notebook del servidor.');
   }
   if (!navigator.mediaDevices?.getUserMedia || !globalThis.AudioWorkletNode) {
-    throw new Error('Este navegador no permite capturar el micrófono con AudioWorklet. Abrí el panel en Chrome actualizado.');
+    throw new ErrorCaptura('Este navegador no permite capturar el micrófono con AudioWorklet. Abrí el panel en Chrome actualizado.');
   }
 }
 
@@ -68,10 +69,10 @@ export function prepararAudio(stream, rol, alError) {
       const socket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/audio?rol=${rol}`);
       ws = socket;
       await new Promise((resolve, reject) => {
-        const tiempo = setTimeout(() => reject(new Error('No se pudo conectar el audio al servidor.')), 8000);
+        const tiempo = setTimeout(() => reject(new ErrorCaptura('No se pudo conectar el audio al servidor.')), 8000);
         socket.onopen = () => { clearTimeout(tiempo); resolve(undefined); };
-        socket.onerror = () => { clearTimeout(tiempo); reject(new Error('Falló la conexión de audio.')); };
-        socket.onclose = () => { clearTimeout(tiempo); reject(new Error('El servidor cerró la entrada de audio.')); };
+        socket.onerror = () => { clearTimeout(tiempo); reject(new ErrorCaptura('Falló la conexión de audio.')); };
+        socket.onclose = () => { clearTimeout(tiempo); reject(new ErrorCaptura('El servidor cerró la entrada de audio.')); };
       });
       if (detenido) return;
       socket.onclose = evento => {

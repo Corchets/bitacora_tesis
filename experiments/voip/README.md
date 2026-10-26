@@ -223,3 +223,66 @@ Whisper no sirve para esto: no es streaming y en la prueba de asr-local tardó m
 2. BlackHole en la M1 (D2) con WhatsApp Desktop o Meet.
 3. Conectar el SLM de un token cuando el frente 3 lo tenga medido.
 4. Modo guion (cada persona ve su próxima línea) para grabar los 24 casos de `GRABACIONES-ASR.md`.
+
+## 8. Micrófono desde el navegador (#78)
+
+En la notebook del servidor, abrí `http://localhost:8765/` (o `127.0.0.1`). Elegí
+**Persona protegida → Micrófono** y, como **Otra persona**, un ejemplo o `cliente.py`.
+**Buscar micrófonos** pide permiso para mostrar los nombres de los dispositivos y libera
+esa captura enseguida; después elegí la entrada e iniciá la llamada. Usá auriculares.
+Con un ejemplo, el servidor reproduce solamente el canal izquierdo del archivo: el derecho
+lo reemplaza tu voz. Al agotarse el ejemplo termina toda la llamada. Con `cliente.py`,
+la otra persona se conecta con `--rol otra`; ambos audios entran por `/audio`.
+La opción **Misma fuente que la otra persona** conserva el ejemplo estéreo y los dos clientes.
+
+Si falta permiso, no hay entrada o el contexto no es seguro, el panel explica cómo seguir.
+Desde `http://<ip-de-otra-notebook>` el navegador bloquea la captura: usá `cliente.py`
+en esa notebook. **Terminar**, el fin del ejemplo, la desconexión del panel o salir de la
+página liberan los tracks y cierran el AudioContext. Si falla el transporte o se desconecta
+la entrada, se corta la captura y se termina la llamada para guardar lo recibido.
+
+Contrato de control para micrófono + ejemplo:
+
+```json
+{"tipo":"iniciar","modo":"llamada","fuentes":{"protegida":{"tipo":"navegador"},"otra":{"tipo":"ejemplo","escenario":"SC-WA-CODE-01","canal":"izq"}}}
+```
+
+Para micrófono + cliente, reemplazá `otra` por `{"tipo":"cliente"}`.
+`audio-navegador.mjs` exporta `prepararAudio(stream, rol, alError)`: recibe un `MediaStream`
+y `protegida` u `otra`, toma posesión de sus tracks y devuelve `iniciar()` y `detener()`.
+Prepará después de conseguir el permiso; llamá a `iniciar()` al recibir `inicio` del servidor.
+`detener()` es idempotente y también cancela un arranque pendiente. Esta interfaz permite
+reutilizar la captura con Meet, BlackHole y «Probar el ASR» sin duplicar el transporte.
+El consumidor debe detener el emisor ante `fin`, errores de inicio o desconexión del panel.
+
+El AudioWorklet mezcla a mono y remuestrea desde la frecuencia real del AudioContext a
+16 kHz; empaqueta 640 muestras PCM16 little-endian por mensaje (40 ms / 1.280 bytes).
+La conversión pura conserva el área entre bloques incluso a 44,1 kHz, satura y usa la misma
+escala que `cliente.py`. Su filtro de caja alcanza para esta prueba de voz; no caracteriza
+rechazo de alias ni reemplaza una evaluación acústica. No se reproduce el micrófono localmente.
+Si se acumula más de un segundo de audio en el WebSocket, corta con un mensaje en pantalla.
+
+Verificación sin instalar dependencias, desde `experiments/voip/`:
+
+```bash
+node --test tests/audio-pcm.test.mjs
+../../.venv/bin/python -m unittest discover -s tests
+```
+
+La prueba de tono usa 1 kHz durante un segundo a 48, 44,1 y 16 kHz, en bloques de
+128 muestras: comprueba duración de salida, frecuencia por cruces y RMS; también verifica
+saturación PCM16. Las pruebas del servidor usan MotorFalso, reloj controlado y WebSockets reales.
+
+Para medir con voz real, hacé dos llamadas comparables en la misma máquina y configuración:
+una con micrófono del panel + `cliente.py --rol otra`, y otra con ambos canales de `cliente.py`.
+Hablá al menos diez frases con pausas y terminá desde el panel. En cada `manifiesto.json`,
+compará `canales.protegida.retraso_parcial_s.mediana` con el límite de **0,2 s**, junto con
+`n`, `p95` y `desfase_llegada_s`. También podés calcular la mediana de
+`disponible_s - fin_audio_s` de los parciales de `protegida` en `actualizaciones.jsonl`.
+Esa medida usa el reloj del servidor; no incluye renderizado ni una medición externa de
+voz a pantalla. Anotá hardware, versiones, commit, dispositivo, configuración y salidas
+fuera del repo. Confirmá visualmente que al terminar se apague el indicador de micrófono.
+Voz real, Meet, BlackHole y segunda notebook requieren ensayo humano.
+
+La [evidencia de #78](corridas/2026-10-26-microfono-78/README.md) conserva la prueba con
+micrófono falso, el contraste con `cliente.py`, los casos de error simulados y cómo repetirla.
