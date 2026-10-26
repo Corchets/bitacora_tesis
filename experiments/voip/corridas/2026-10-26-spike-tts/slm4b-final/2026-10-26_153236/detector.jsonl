@@ -1,0 +1,2 @@
+{"n": 4, "saltadas": 0, "inicio_eval_s": 4.285, "fin_eval_s": 10.583, "ms_detector": 6291.5, "valida": true, "error": "", "riesgo": 0.8, "alerta_sugerida": false, "motivo": "", "evidencia": "", "aviso": false, "t_a": null, "fin_voz_s": 7.905}
+{"n": 9, "saltadas": 0, "inicio_eval_s": 10.584, "fin_eval_s": 17.732, "ms_detector": 7133.2, "valida": true, "error": "", "riesgo": 0.85, "alerta_sugerida": true, "motivo": "Te están pidiendo un código o acción para cancelar algo que no solicitaste", "evidencia": "A: Para cancelar", "aviso": true, "t_a": 17.732, "fin_voz_s": 12.6}
