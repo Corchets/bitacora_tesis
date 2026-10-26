@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23",
+  "updatedAt": "2026-10-26",
   "currentLocation": {
-    "summary": "H2 sigue activo. En #50 el ensayo de SLM directo pasó a 150 casos de desarrollo (corpus v2) con Qwen3.5 0.8B a 9B y prompts v1 y v2; ninguna configuración llega todavía a la meta propuesta 95/5 y faltan el 4B y el 9B sobre corpus_v2. El test reservado (200 casos) queda fuera del repositorio público. El kit de #39 está listo, pero grabar depende de la validación del tutor (D06); #33 mantiene abierto el protocolo (D08).",
+    "summary": "H2 sigue activo. En #50 el ensayo de SLM directo pasó a 150 casos de desarrollo (corpus v2) con Qwen3.5 0.8B a 9B y prompts v1 y v2; el 2026-10-23 se midieron en Linux el 4B y el 9B sobre corpus_v2 y el 0.8B sobre los 150 (PR #66) y ninguna configuración llega a la meta propuesta 95/5. El test reservado (200 casos) queda fuera del repositorio público. El kit de #39 está listo, pero grabar depende de la validación del tutor (D06); #33 mantiene abierto el protocolo (D08).",
     "activeMilestone": "H2 — Piloto del corpus y primeras pruebas",
     "nextActions": [
       {
@@ -47,7 +47,7 @@
       "nextStep": "Gestionar la validación formal del tutor (D06) sobre protocolo y custodia de datos antes de grabar el primer par con el kit preparado (#39).",
       "evidence": {
         "label": "Kit del primer par #39",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/corpus/KIT-PRIMER-PAR.md",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-main/docs/corpus/KIT-PRIMER-PAR.md",
         "detail": "Fichas, planilla y condiciones previas a grabar; la grabación sigue sujeta a D06."
       },
       "issues": [
@@ -66,11 +66,11 @@
       "state": "activo",
       "stateLabel": "Activo",
       "purpose": "Implementar el pipeline mínimo ejecutable demostrable: detector SLM que puntúa cada turno cerrado sobre texto incremental, ASR local sobre audio propio e integración de streaming en replay. La cascada encoder→SLM queda como alternativa a medir con datos reales.",
-      "whatExists": "La bitácora atribuye a Evaristo Villalobo, con asistencia de Claude, el ensayo #50 integrado desde claude/relaxed-maxwell-6n88xe: 53 casos escritos (29 vishing, 24 legítimos), Qwen3.5 0.8B/2B/4B, reglas como comparador separado, corrida CPU a 2 hilos, visor y tablero. El último commit de esa rama (24d6674, 2026-10-15) corrigió la lectura de CPU: el 0.8B pudo avisar antes por un pedido de código inventado; p95 fue 7.3 s (0.8B) y 13.0 s (2B), sobre el gate de 1.5 s. El trabajo posterior en laboratorio-luciano agregó corridas M1, comparación M1 vs Windows, replay E2E ASR+SLM y pruebas de caché; en M1, num_batch 32 dejó el p95 del 0.8B en 2.993 s. Son resultados de desarrollo: los casos esperan revisión humana independiente y D09 sigue abierta.",
+      "whatExists": "Ensayo #50 con corpus v2 de desarrollo (150 casos: 53 históricos + 97 nuevos, PR #64): correr.py con partición desarrollo, prompts v1/v2 y reglas v2 como comparador separado. Corridas Linux del 2026-10-23 con GPU (PR #66): sobre corpus_v2 (46 estafas, 51 legítimas) el 9B v2 da 31/46 con 7/51 FA y el 4B v2 da 14/46 con 0/51; el 0.8B sobre los 150 tampoco llega a la meta propuesta 95/5. El panel trae resumen y recomendación con corpus_v2. Son resultados de desarrollo: falta la revisión independiente que pide #50 y D09 sigue abierta.",
       "nextStep": "Completar la revisión independiente que pide #50; después, contrastar candidatos y errores frente a los gates de prefactibilidad en #51. Evaluar con voz humana cuando #39 quede habilitado. No elegir el detector final hasta resolver D09 con evidencia y protocolo adecuados.",
       "evidence": {
         "label": "README del ensayo SLM directo #50",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/experiments/slm-directo/README.md",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-main/experiments/slm-directo/README.md",
         "detail": "Registro de casos, corridas, mediciones de CPU/M1, límites y pendientes de revisión."
       },
       "archLink": "/arquitectura/",
@@ -93,7 +93,7 @@
       "nextStep": "Acordar en equipo el protocolo experimental de #33 (D08) y usarlo como base para la selección final de ASR y detector en #51 (D09).",
       "evidence": {
         "label": "MAPA-DECISIONES.md (D08/D09)",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-main/docs/gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación",
         "detail": "D08 y D09 siguen abiertas; la selección de detector y ASR sale de las comparaciones de #51."
       },
       "archLink": "/arquitectura/riesgo.html",

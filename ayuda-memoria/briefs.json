@@ -33,35 +33,35 @@
     {
       "branch": "laboratorio-main",
       "issue": 50,
-      "goal": "Un comando procesa actualizaciones de texto y devuelve decisiones y avisos con motivo. Usa el prefijo disponible y el contexto de esa llamada; permite reiniciar para una sesión nueva. La guía de esta rama comienza por verificar diferencias de versión.",
-      "start": "Contrastá el código del spike con el contrato actual #50 y el par H1 de Main antes de reutilizarlo. Esta rama no contiene ese par actualizado; su arquitectura y métricas conservan propuestas anteriores. Prepará el contraste sobre prefijos, separación de sesiones y avisos; no presentes umbrales o histéresis del spike como elección final.",
-      "done": "Se reproducen los recorridos fraudulento y legítimo. Las pruebas verifican uso de prefijos, separación de sesiones y avisos según la política elegida. Quedan reglas, datos, versiones y errores identificados; en texto sin audio se informa posición, no segundos inventados.",
+      "goal": "El ensayo SLM directo corre sobre el corpus v2 de desarrollo (150 casos) con prompts v1/v2 y emite un único aviso por llamada; las reglas corren como comparador separado. Las corridas Linux (0.8B/4B/9B) y el panel registran puntajes, avisos, omisiones y falsas alarmas. Falta la revisión independiente que pide #50; no elige modelo ni cierra D08/D09.",
+      "start": "Levantá el panel (experiments/slm-directo/analisis/tablero/panel.html) y una corrida de experiments/slm-directo/corridas/ del 2026-10-23, y revisá contra el texto un aviso y un error: esa revisión independiente es lo que cierra #50.",
+      "done": "Otra persona ejecutó la prueba y revisó un aviso y un error contra el texto disponible. Quedan versiones, hardware, configuración y errores identificados; ninguna configuración llega a 95/5 y D08/D09 siguen abiertas.",
       "sources": [
         {
           "path": "docs/ingenieria/ARQUITECTURA.md",
-          "label": "Contrato y casos de H1",
-          "why": "Arquitectura anterior del spike: no contiene el par H1 vigente de Main. Revisá diferencias, no asumas cumplimiento del contrato."
+          "label": "Dirección del ensayo",
+          "why": "SLM local directo por turno con contexto de la llamada; reglas como comparador independiente, sin mezclar alertas."
         },
         {
-          "path": "docs/datos-etica/MANUAL-ANOTACION.md",
+          "path": "docs/corpus/METODO-CREACION-CORPUS.md",
+          "label": "Método y particiones",
+          "why": "150 casos de desarrollo frente a 200 reservados fuera del repo público; base de las corridas revisadas."
+        },
+        {
+          "path": "docs/corpus/MANUAL-ANOTACION.md",
           "label": "Qué significa la evidencia",
-          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+          "why": "Referencia humana para leer avisos y errores del ensayo contra el texto disponible."
         },
         {
           "path": "docs/evaluacion/METRICAS.md",
           "label": "Marcas y medición",
-          "why": "Métricas conservadas en esta rama; sus propuestas anteriores no congelan la política del issue actual."
-        },
-        {
-          "path": "docs/investigacion/GUIA-CORRIDA-LABORATORIO.md",
-          "label": "Guía del laboratorio",
-          "why": "Permite ubicar la UI y el código reutilizable. El spike no acredita el contrato #50 ni fija la política final."
+          "why": "Marcas T_A/T_R/T_C y lectura de falsas alarmas sobre corridas de desarrollo."
         }
       ],
       "review": {
-        "at": "2026-10-07T23:30:07.101Z",
-        "branchSha": "48882776ccd49560690057b991152862b648f5f4",
-        "fingerprint": "bee6c73de04cc5eb72415f8e637ee16b4cf87a0f012519660df8d80c3baca698"
+        "at": "2026-10-26T12:47:07.344Z",
+        "branchSha": "d53bbc1858b3fa8fafc7cc2006a0f7d1f3bfce9d",
+        "fingerprint": "a36798945490fcfb8edf15dd842bedd10a6103c659ee7196c6416996f2e582b3"
       }
     },
     {
