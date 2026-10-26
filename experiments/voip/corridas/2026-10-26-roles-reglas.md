@@ -2,7 +2,8 @@
 
 Verificación local del 2026-10-26 sobre `luciano/voip-76`, base
 `78b18693e8e194d94040cda6f8ea5497ed9860dc` más el cambio de #76 todavía sin
-commit durante la corrida (así consta en el manifiesto). No evalúa rendimiento
+commit durante la corrida (así consta en el manifiesto). Ese código quedó en
+`a4ef1c02ef3c69c7a77eaeacde918f13c0bc9246`. No evalúa rendimiento
 ni cambia D08/D09. Solo se usó `SC-WA-CODE-01-tts-estereo.wav`; sin reserva.
 
 ## Configuración y reproducción
@@ -15,7 +16,7 @@ con una llamada TTS, sin partición de entrenamiento/evaluación ni métricas de
 clasificación.
 
 Desde la raíz del repositorio, con los modelos locales disponibles en
-`experiments/asr-local/modelos/` (symlink ignorado en esta copia):
+`experiments/asr-local/modelos/` (symlink temporal retirado al cerrar):
 
 ```bash
 /Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python experiments/voip/servidor.py \
@@ -69,3 +70,21 @@ en `/tmp/voip-76-replay`. No se incorpora audio a Git. Servidor y clientes deten
 
 No se probaron voces reales, Meet, BlackHole ni otra notebook: son verificaciones
 humanas de la demo completa, no necesarias para el contrato de registro de #76.
+
+## Revisión de código
+
+### Standards
+
+Revisor Orca de solo lectura: sin incumplimientos de AGENTS.md ni smells que
+justifiquen cambios. Confirmó alcance, español y compatibilidad de eventos del panel.
+
+### Spec
+
+Revisor Orca de solo lectura: sin requisitos faltantes, errores ni ampliación de
+alcance respecto de #76/#75. Contrastó las 19 actualizaciones del registro nuevo,
+los artefactos de aviso y el JSONL anterior; repitió los 14 tests de replay. No
+repitió VoIP por dependencias ausentes en su intérprete; la ejecución de los cuatro
+tests con el entorno compartido está registrada arriba.
+
+Total: Standards 0 hallazgos; Spec 0 hallazgos. Revisión sobre `a4ef1c0`; la
+edición posterior solo precisa este informe. Ambos revisores fueron liberados.
