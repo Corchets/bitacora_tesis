@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Llamada en vivo · detector de vishing</title>
+<style>
+  :root { --fondo:#f6f5f2; --tinta:#1d1d1b; --mu:#6b6a66; --linea:#dddbd5; --vos:#e3eefc; --otra:#fff; --alerta:#b3261e; --ok:#2e7d32; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.45 system-ui, -apple-system, sans-serif; background:var(--fondo); color:var(--tinta); }
+  header { display:flex; gap:1rem; align-items:baseline; padding:.8rem 1.2rem; border-bottom:1px solid var(--linea); background:#fff; }
+  header h1 { font-size:1rem; margin:0; }
+  #estado { color:var(--mu); font-size:.9rem; }
+  main { display:grid; grid-template-columns: 1fr 340px; gap:1rem; padding:1rem 1.2rem; max-width:1200px; margin:auto; }
+  #charla { display:flex; flex-direction:column; gap:.5rem; }
+  .linea { max-width:78%; padding:.5rem .75rem; border-radius:10px; border:1px solid var(--linea); background:var(--otra); }
+  .linea.protegida { align-self:flex-end; background:var(--vos); }
+  .linea.parcial { color:var(--mu); font-style:italic; border-style:dashed; }
+  .linea .quien { font-size:.75rem; color:var(--mu); display:flex; justify-content:space-between; gap:1rem; }
+  aside { display:flex; flex-direction:column; gap:1rem; }
+  .caja { background:#fff; border:1px solid var(--linea); border-radius:10px; padding:.8rem 1rem; }
+  .caja h2 { font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--mu); margin:0 0 .5rem; }
+  #barra { height:10px; background:#eee; border-radius:5px; overflow:hidden; }
+  #barra div { height:100%; width:0; background:var(--ok); transition:width .3s, background .3s; }
+  #aviso { display:none; background:var(--alerta); color:#fff; border-color:var(--alerta); }
+  #aviso.visible { display:block; }
+  #aviso b { font-size:1.15rem; }
+  dl { display:grid; grid-template-columns:auto auto; gap:.2rem .8rem; margin:0; font-size:.9rem; }
+  dd { margin:0; text-align:right; font-variant-numeric:tabular-nums; }
+  /* Vista de la persona protegida: solo el estado, grande. */
+  body.protegida main { grid-template-columns:1fr; max-width:520px; }
+  body.protegida #charla, body.protegida #metricas, body.protegida #riesgo { display:none; }
+  body.protegida #tranquilo { display:block; }
+  #tranquilo { display:none; text-align:center; font-size:1.3rem; padding:2rem 1rem; color:var(--ok); }
+  body.protegida #aviso.visible { font-size:1.3rem; padding:2rem 1.5rem; }
+  body.protegida #aviso.visible ~ #tranquilo { display:none; }
+</style>
+</head>
+<body>
+<header><h1>Llamada en vivo</h1><span id="estado">conectando…</span></header>
+<main>
+  <section id="charla"></section>
+  <aside>
+    <div class="caja" id="aviso"><b>Posible estafa</b><p id="aviso-motivo"></p><p id="aviso-cita"></p><small id="aviso-tiempo"></small></div>
+    <div class="caja" id="tranquilo">Sin señales de estafa por ahora</div>
+    <div class="caja" id="riesgo"><h2>Riesgo (última evaluación)</h2><div id="barra"><div></div></div><p id="motivo" style="margin:.5rem 0 0;color:var(--mu)">—</p></div>
+    <div class="caja" id="metricas"><h2>Demoras</h2><dl>
+      <dt>Reloj de la llamada</dt><dd id="m-reloj">—</dd>
+      <dt>Frase cerrada tras callarse</dt><dd id="m-asr">—</dd>
+      <dt>Detector (última)</dt><dd id="m-det">—</dd>
+      <dt>Evaluaciones / salteadas</dt><dd id="m-eval">—</dd>
+      <dt>Aviso tras callarse</dt><dd id="m-aviso">—</dd>
+    </dl></div>
+  </aside>
+</main>
+<script>
+const vista = new URLSearchParams(location.search).get("vista");
+if (vista === "protegida") document.body.classList.add("protegida");
+const $ = (id) => document.getElementById(id);
+const NOMBRE = { protegida: "Vos", otra: "La otra persona" };
+let burbujas = {}, evaluaciones = 0, salteadas = 0;
+const seg = (x) => (x == null ? "—" : `${x.toFixed(2)} s`);
+
+function reiniciar(id) {
+  $("charla").innerHTML = ""; burbujas = {}; evaluaciones = 0; salteadas = 0;
+  $("aviso").classList.remove("visible"); $("motivo").textContent = "—";
+  $("barra").firstElementChild.style.width = "0";
+  for (const m of ["m-asr", "m-det", "m-eval", "m-aviso", "m-reloj"]) $(m).textContent = "—";
+  $("estado").textContent = `en llamada · ${id}`;
+}
+
+function asr(m) {
+  let b = burbujas[m.segmento];
+  if (!b) {
+    b = document.createElement("div");
+    b.innerHTML = `<div class="quien"><span>${NOMBRE[m.rol] || m.rol}</span><span class="t"></span></div><div class="texto"></div>`;
+    $("charla").appendChild(b); burbujas[m.segmento] = b;
+  }
+  b.className = `linea ${m.rol} ${m.tipo}`;
+  b.querySelector(".texto").textContent = m.texto;
+  const retraso = m.disponible_s - m.fin_audio_s;
+  b.querySelector(".t").textContent = `${m.fin_audio_s.toFixed(1)} s · +${(retraso * 1000).toFixed(0)} ms`;
+  $("m-reloj").textContent = seg(m.disponible_s);
+  if (m.tipo === "final") $("m-asr").textContent = `${((m.disponible_s - m.fin_voz_s) * 1000).toFixed(0)} ms`;
+  b.scrollIntoView({ block: "end", behavior: "smooth" });
+}
+
+function detector(m) {
+  evaluaciones += 1; salteadas += m.saltadas;
+  $("m-eval").textContent = `${evaluaciones} / ${salteadas}`;
+  $("m-det").textContent = m.ms_detector == null ? "—" : `${m.ms_detector.toFixed(0)} ms`;
+  if (!m.valida) { $("motivo").textContent = `fallo: ${m.error}`; return; }
+  const r = m.riesgo ?? (m.alerta_sugerida ? 1 : 0);
+  const barra = $("barra").firstElementChild;
+  barra.style.width = `${Math.round(r * 100)}%`;
+  barra.style.background = r >= 0.5 ? "var(--alerta)" : "var(--ok)";
+  $("motivo").textContent = m.motivo || (m.alerta_sugerida ? "alerta" : "sin señales");
+  if (m.aviso) {
+    $("aviso").classList.add("visible");
+    $("aviso-motivo").textContent = m.motivo;
+    $("aviso-cita").textContent = m.evidencia ? `«${m.evidencia}»` : "";
+    const tras = m.fin_voz_s == null ? null : m.t_a - m.fin_voz_s;
+    $("aviso-tiempo").textContent = `a los ${seg(m.t_a)} de la llamada`;
+    $("m-aviso").textContent = seg(tras);
+  }
+}
+
+function conectar() {
+  const ws = new WebSocket(`ws://${location.host}/panel`);
+  ws.onopen = () => ($("estado").textContent = "esperando audio…");
+  ws.onclose = () => { $("estado").textContent = "sin conexión, reintentando…"; setTimeout(conectar, 1000); };
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    if (m.tipo === "inicio") reiniciar(m.llamada_id);
+    else if (m.tipo === "asr") asr(m);
+    else if (m.tipo === "detector") detector(m);
+    else if (m.tipo === "fin") $("estado").textContent = `llamada terminada · guardada en ${m.dir}`;
+  };
+}
+conectar();
+</script>
+</body>
+</html>
