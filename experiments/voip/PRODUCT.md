@@ -29,13 +29,13 @@ Demo prevista para el 2026-10-28. Fuentes existentes: ejemplos SC-WA-CODE-01 y L
 - Detector fijo al arrancar el servidor: mostrar nombre y modelo, sin selector.
 - Conservar fuentes, iniciar, terminar, nueva llamada, validaciones y errores. «Probar el ASR» es un modo aparte, solo micrófono y sin detector.
 - Corte de silencio de 0,8 s fijo en llamada; elegible en prueba ASR.
-- Aviso en franja visible y breve, nunca modal; su implementación completa pertenece a #83.
+- Aviso en franja visible y breve, nunca modal, con motivo, cita, frase culpable resaltada, tono corto desactivable y botón para cerrarla.
 - Vista `?vista=protegida` simple y existente, sin rediseñar.
 - D05/D08/D09 permanecen abiertas; esta demo no congela captura, política ni modelos.
 
 ## Accessibility & Inclusion
 
-Pantalla proyectada en aula: conversación y tarjetas con tipografía grande y alto contraste. Los proyectores lavan colores: decisiones y estados deben tener texto y forma, además del color. Controles operables con teclado y foco visible.
+Pantalla proyectada en aula: conversación y tarjetas con tipografía grande y alto contraste. Los proyectores lavan colores: decisiones y estados deben tener texto y forma, además del color. Controles operables con teclado y foco visible; respeta `prefers-reduced-motion`.
 
 ## Brand Commitments
 
@@ -43,4 +43,4 @@ Español de Argentina, voseo. Etiquetas técnicas en inglés cuando corresponda.
 
 ## Evidence on Hand
 
-Requisitos: [#75](https://github.com/Corchets/bitacora_tesis/issues/75), [#82](https://github.com/Corchets/bitacora_tesis/issues/82) y confirmación del coordinador del 2026-10-26. Recorridos existentes y comandos en [README.md](README.md). Los ejemplos TTS son demostraciones, no evidencia de desempeño con voz humana.
+Requisitos: [#75](https://github.com/Corchets/bitacora_tesis/issues/75), [#82](https://github.com/Corchets/bitacora_tesis/issues/82), [#83](https://github.com/Corchets/bitacora_tesis/issues/83) y confirmación del coordinador del 2026-10-26. Recorridos existentes y comandos en [README.md](README.md). Los ejemplos TTS son demostraciones, no evidencia de desempeño con voz humana.

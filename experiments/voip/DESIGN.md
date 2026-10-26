@@ -17,6 +17,7 @@ colors:
   protegida-bg: "#eff6ff"
   protegida-border: "#93c5fd"
   alert-primary: "#b91c1c"
+  alert-text: "#7f1d1d"
   alert-bg: "#fef2f2"
   alert-light: "#fee2e2"
   alert-border: "#f87171"
@@ -145,6 +146,7 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
 
 ## Components
 
+- **Franja de aviso de posible estafa**: Franja horizontal compacta no modal sobre las tarjetas de voz con insignia de alto contraste («Posible estafa»), motivo, cita resaltada en la conversación, control de sonido WebAudio persistente y botón de cierre.
 - **Tarjetas de rol («Otra persona» y «Persona protegida»)**: Identifican al hablante, presentan el medidor de nivel RMS en vivo y muestran la transcripción parcial en curso.
 - **Burbuja de conversación**: Alineada a izquierda para «Otra persona» y derecha para «Persona protegida». Incorpora autor, tiempo relativo, texto final y la evaluación del detector asociada cuando corresponde.
 - **Píldora de evaluación del detector**: Caja adosada a la frase con riesgo porcentual, decisión sí/no, latencia de inferencia y advertencia de frases salteadas si el detector estuvo ocupado.

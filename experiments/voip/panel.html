@@ -21,6 +21,7 @@
     --otra-fondo: #f1f5f9;
     --otra-borde: #cbd5e1;
     --alerta: #b91c1c;
+    --alerta-tinta: #7f1d1d;
     --alerta-fondo: #fef2f2;
     --alerta-claro: #fee2e2;
     --alerta-borde: #f87171;
@@ -65,6 +66,11 @@
     display: flex;
     align-items: baseline;
     gap: 0.85rem;
+  }
+  .cabecera-der {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
   }
   header h1 {
     font-size: 1.5rem;
@@ -253,40 +259,64 @@
     color: var(--tinta-secundaria);
   }
 
-  /* Aviso en franja no modal (lugar reservado para #83) */
+  /* Aviso en franja no modal, visible desde el aula pero sin tapar ni saturar */
+  @keyframes entrada-aviso {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   #aviso {
     display: none;
     background: var(--alerta-fondo);
-    border: 2px solid var(--alerta);
+    border: 1px solid var(--alerta-borde);
     border-radius: var(--radio-md);
-    padding: 0.45rem 0.85rem;
-    margin-bottom: 0.6rem;
-    color: var(--alerta);
+    padding: 0.35rem 0.7rem;
+    margin-bottom: 0.45rem;
+    color: var(--tinta);
     flex-shrink: 0;
   }
   #aviso.visible {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.6rem;
+    animation: entrada-aviso 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .aviso-etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--alerta);
+    color: var(--superficie);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radio-sm);
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .aviso-etiqueta b {
+    font-weight: 700;
+    color: var(--superficie);
   }
   .aviso-icono {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
-    color: var(--alerta);
+    color: currentColor;
   }
   .aviso-cuerpo {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    gap: 0.35rem 0.75rem;
-  }
-  .aviso-cuerpo b {
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--alerta);
+    gap: 0.2rem 0.65rem;
   }
   .aviso-cuerpo p {
     margin: 0;
@@ -295,16 +325,55 @@
     color: var(--tinta);
   }
   #aviso-cita {
+    font-size: 0.875rem;
     font-style: italic;
-    font-weight: 500;
-    color: var(--tinta-secundaria);
+    font-weight: 600;
+    color: var(--alerta-tinta);
   }
   #aviso-tiempo {
-    margin-left: auto;
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--tinta-secundaria);
+    color: var(--alerta-tinta);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .aviso-acciones {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+  .aviso-btn {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radio-sm);
+    border: 1px solid var(--alerta-borde);
+    background: var(--superficie);
+    color: var(--alerta-tinta);
+    white-space: nowrap;
+  }
+  .aviso-btn:hover:not(:disabled) {
+    background: var(--alerta-claro);
+  }
+  .btn-sonido {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+  .btn-sonido.silenciado {
+    color: var(--tinta-secundaria);
+    background: var(--otra-fondo);
+  }
+  .icono-sonido {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+  .icono-sonido[hidden] {
+    display: none;
   }
 
   /* Layout principal */
@@ -352,8 +421,8 @@
     border-color: var(--ok);
   }
   .tarjeta-persona.otra.alerta-activa {
-    border-color: var(--alerta);
-    background: var(--alerta-fondo);
+    border-color: var(--alerta-borde);
+    background: var(--superficie);
   }
   .tarjeta-cabecera {
     display: flex;
@@ -508,8 +577,15 @@
     border-style: dashed;
   }
   .linea.disparo-aviso {
-    border: 2px solid var(--alerta);
+    border: 1.5px solid var(--alerta-borde);
     background: var(--alerta-fondo);
+  }
+  mark.cita-culpable {
+    background: var(--alerta-claro);
+    color: var(--tinta);
+    font-weight: 700;
+    padding: 0.05rem 0.25rem;
+    border-radius: var(--radio-sm);
   }
   .linea .quien {
     font-size: 0.8125rem;
@@ -690,6 +766,7 @@
     transform-origin: left;
     transform: scaleX(0);
     background: var(--ok);
+    transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms ease;
   }
   .riesgo-info {
     display: flex;
@@ -717,7 +794,7 @@
   }
   #riesgo-grafico {
     width: 100%;
-    height: 124px;
+    height: 136px;
     display: block;
     background: var(--superficie);
     border-radius: var(--radio-sm);
@@ -757,6 +834,7 @@
   body.protegida #niveles,
   body.protegida #charla,
   body.protegida aside,
+  body.protegida #sonido-aviso,
   body.protegida .modo-conmutador {
     display: none !important;
   }
@@ -789,13 +867,18 @@
   body.protegida #aviso.visible #aviso-tiempo {
     margin-left: 0;
   }
-  body.protegida #aviso.visible ~ #tranquilo {
+  body.protegida #aviso.visible .aviso-acciones {
+    display: none;
+  }
+  body.protegida #aviso.visible ~ #tranquilo,
+  body.protegida.alerta-emitida #tranquilo {
     display: none;
   }
 
   /* Modo Probar el ASR */
   body.asr #controles > :not(#error),
   body.asr #controles:not(:has(#error:not(:empty))),
+  body.asr #sonido-aviso,
   body.asr main {
     display: none !important;
   }
@@ -803,32 +886,59 @@
     display: none !important;
   }
 
+  /* Respeto de preferencia del sistema de reducir movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    #aviso.visible {
+      animation: none !important;
+    }
+    #barra div {
+      transition: none !important;
+    }
+  }
+
   /* Adaptabilidad responsiva: 1280px, 1440px, 1920px */
   @media (max-width: 1320px) {
     header {
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
     }
     #controles {
-      padding: 0.25rem 1rem;
+      padding: 0.25rem 0.9rem;
     }
     .barra-acciones {
-      gap: 0.35rem;
+      gap: 0.3rem 0.4rem;
     }
-    .barra-acciones select {
-      max-width: 210px;
+    .barra-acciones button,
+    .barra-acciones select,
+    .panel-ajustes summary {
+      font-size: 0.8125rem;
+      padding: 0.28rem 0.5rem;
+    }
+    .separador-barra {
+      display: none;
     }
     main {
-      grid-template-columns: minmax(0, 1fr) 300px;
+      grid-template-columns: minmax(0, 1fr) 305px;
       gap: 0.5rem;
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
+    }
+    #aviso {
+      padding: 0.28rem 0.6rem;
+      margin-bottom: 0.35rem;
+      gap: 0.45rem;
     }
     #niveles {
       gap: 0.5rem;
       margin-bottom: 0.35rem;
     }
     .tarjeta-persona {
-      padding: 0.4rem 0.65rem;
-      gap: 0.25rem;
+      padding: 0.35rem 0.65rem;
+      gap: 0.2rem;
     }
     .tarjeta-cabecera h2 {
       font-size: 1.125rem;
@@ -836,19 +946,19 @@
     .tarjeta-rol-tag {
       display: none;
     }
-    .tarjeta-diciendo {
-      min-height: 2.1rem;
-      padding: 0.3rem 0.55rem;
+    .habla-ahora-caja {
+      min-height: 1.95rem;
+      padding: 0.28rem 0.55rem;
     }
     #charla {
-      gap: 0.35rem;
-      padding: 0.45rem 0.65rem;
+      gap: 0.3rem;
+      padding: 0.4rem 0.6rem;
     }
     .linea {
       width: 78%;
       max-width: 82%;
-      padding: 0.35rem 0.6rem;
-      gap: 0.15rem;
+      padding: 0.32rem 0.6rem;
+      gap: 0.12rem;
     }
   }
   @media (min-width: 1700px) {
@@ -875,9 +985,23 @@
     <h1>Llamada en vivo</h1>
     <span id="estado">conectando…</span>
   </div>
-  <div class="modo-conmutador" role="tablist" aria-label="Modo de operación">
-    <button type="button" id="tab-modo-llamada" class="modo-tab activo" role="tab" aria-selected="true">Llamada en vivo</button>
-    <button type="button" id="tab-modo-asr" class="modo-tab" role="tab" aria-selected="false">Probar el ASR</button>
+  <div class="cabecera-der">
+    <button type="button" id="sonido-aviso" class="btn-sonido" aria-pressed="true" title="Activar o apagar el sonido del aviso">
+      <svg class="icono-sonido" id="icono-sonido-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+      <svg class="icono-sonido" id="icono-sonido-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+      <span id="sonido-aviso-texto">Sonido: sí</span>
+    </button>
+    <div class="modo-conmutador" role="tablist" aria-label="Modo de operación">
+      <button type="button" id="tab-modo-llamada" class="modo-tab activo" role="tab" aria-selected="true">Llamada en vivo</button>
+      <button type="button" id="tab-modo-asr" class="modo-tab" role="tab" aria-selected="false">Probar el ASR</button>
+    </div>
   </div>
 </header>
 
@@ -926,18 +1050,24 @@
 
 <main>
   <div class="columna-demo">
-    <!-- Franja de aviso (mínima acá; el aviso completo es #83) -->
-    <div class="caja" id="aviso" role="alert">
-      <svg class="aviso-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-        <line x1="12" y1="9" x2="12" y2="13"></line>
-        <line x1="12" y1="17" x2="12.01" y2="17"></line>
-      </svg>
-      <div class="aviso-cuerpo">
+    <!-- Franja de aviso dentro del panel (no modal), fija hasta cerrarla -->
+    <div id="aviso" role="alert">
+      <span class="aviso-etiqueta">
+        <svg class="aviso-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
         <b>Posible estafa</b>
+      </span>
+      <div class="aviso-cuerpo">
         <p id="aviso-motivo"></p>
         <p id="aviso-cita"></p>
         <small id="aviso-tiempo"></small>
+      </div>
+      <div class="aviso-acciones">
+        <button type="button" id="aviso-sonido" class="aviso-btn" aria-pressed="true" title="Activar o apagar el sonido del aviso">Sonido: sí</button>
+        <button type="button" id="aviso-cerrar" class="aviso-btn aviso-cerrar" aria-label="Cerrar aviso de posible estafa">Cerrar ×</button>
       </div>
     </div>
     <div class="caja" id="tranquilo">Sin señales de estafa por ahora</div>
@@ -1010,7 +1140,7 @@
       </div>
       <div class="grafico-caja">
         <h3>Línea de riesgo en el tiempo</h3>
-        <svg id="riesgo-grafico" viewBox="0 0 320 128" preserveAspectRatio="none" aria-label="Línea de riesgo en el tiempo">
+        <svg id="riesgo-grafico" viewBox="0 0 320 136" preserveAspectRatio="xMidYMid meet" aria-label="Línea de riesgo en el tiempo">
           <!-- Dibujado dinámicamente en JavaScript -->
         </svg>
       </div>
@@ -1075,6 +1205,9 @@ const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
 const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
 const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
 const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
+const botonSonido = /** @type {HTMLButtonElement} */ ($("sonido-aviso"));
+const botonAvisoSonido = /** @type {HTMLButtonElement} */ ($("aviso-sonido"));
+const botonAvisoCerrar = /** @type {HTMLButtonElement} */ ($("aviso-cerrar"));
 const barraRiesgo = /** @type {HTMLElement} */ ($("barra-progreso"));
 
 const tarjetaOtra = $("tarjeta-otra");
@@ -1098,6 +1231,107 @@ let puntosRiesgo = [];
 let relojLlamada = 0;
 /** @type {number|null} */
 let tiempoAviso = null;
+let avisoCerrado = false;
+
+const CLAVE_SONIDO = "voip_sonido_aviso";
+
+/** @returns {boolean} */
+function leerPreferenciaSonido() {
+  try {
+    const v = localStorage.getItem(CLAVE_SONIDO);
+    return v !== "0" && v !== "false";
+  } catch {
+    return true;
+  }
+}
+
+/** @param {boolean} activo */
+function guardarPreferenciaSonido(activo) {
+  try {
+    localStorage.setItem(CLAVE_SONIDO, activo ? "1" : "0");
+  } catch {
+    // localStorage no disponible
+  }
+}
+
+let sonidoActivo = leerPreferenciaSonido();
+/** @type {AudioContext|null} */
+let ctxTono = null;
+
+function detenerTonoAviso() {
+  if (ctxTono) {
+    void ctxTono.close().catch(() => {});
+    ctxTono = null;
+  }
+}
+
+/** @param {boolean} activo */
+function fijarSonido(activo) {
+  sonidoActivo = activo;
+  guardarPreferenciaSonido(activo);
+  const rotulo = activo ? "Sonido: sí" : "Sonido: no";
+  for (const btn of [botonSonido, botonAvisoSonido]) {
+    btn.setAttribute("aria-pressed", String(activo));
+    btn.classList.toggle("silenciado", !activo);
+  }
+  $("sonido-aviso-texto").textContent = rotulo;
+  $("icono-sonido-on").hidden = !activo;
+  $("icono-sonido-off").hidden = activo;
+  botonAvisoSonido.textContent = rotulo;
+  if (!activo) detenerTonoAviso();
+}
+
+function tocarTonoAviso() {
+  if (!sonidoActivo) return;
+  detenerTonoAviso();
+  const win = /** @type {Window & {webkitAudioContext?: typeof AudioContext}} */ (window);
+  const Ctx = window.AudioContext || win.webkitAudioContext;
+  if (!Ctx) return;
+  try {
+    const ctx = new Ctx();
+    ctxTono = ctx;
+    if (ctx.state === "suspended") void ctx.resume().catch(() => {});
+    const t0 = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(660, t0);
+    osc.frequency.setValueAtTime(880, t0 + 0.11);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.linearRampToValueAtTime(0.16, t0 + 0.015);
+    gain.gain.setValueAtTime(0.16, t0 + 0.095);
+    gain.gain.linearRampToValueAtTime(0.0001, t0 + 0.22);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(t0);
+    osc.stop(t0 + 0.23);
+    osc.onended = () => {
+      if (ctxTono === ctx) detenerTonoAviso();
+    };
+  } catch {
+    detenerTonoAviso();
+  }
+}
+
+for (const btn of [botonSonido, botonAvisoSonido]) {
+  btn.onclick = () => fijarSonido(!sonidoActivo);
+}
+botonAvisoCerrar.onclick = () => {
+  avisoCerrado = true;
+  detenerTonoAviso();
+  $("aviso").classList.remove("visible");
+};
+fijarSonido(sonidoActivo);
+
+/** @returns {boolean} */
+function prefiereMovimientoReducido() {
+  return Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
+}
+
+/** @param {HTMLElement} el */
+function desplazarVisible(el) {
+  el.scrollIntoView({ block: "end", behavior: prefiereMovimientoReducido() ? "instant" : "auto" });
+}
 
 /** @type {ReturnType<typeof prepararAudio>|null} */
 let emisor = null;
@@ -1376,8 +1610,49 @@ function escapar(texto) {
   return d.innerHTML;
 }
 
+/** @param {string} texto */
+function limpiarCita(texto) {
+  return texto.replace(/^[.\s,;:]+/, "").trim();
+}
+
+/**
+ * Resalta la frase citada dentro de la burbuja culpable de la conversación.
+ * @param {string} evidencia
+ * @param {HTMLDivElement|null} burbujaEvaluada
+ */
+function resaltarFraseCulpable(evidencia, burbujaEvaluada) {
+  const cita = limpiarCita(evidencia);
+  /** @type {HTMLDivElement|null} */
+  let objetivo = burbujaEvaluada;
+  if (cita) {
+    const candidata = [...burbujas.values()].reverse().find(b => {
+      const t = b.querySelector(".texto")?.textContent || "";
+      return t.toLowerCase().includes(cita.toLowerCase());
+    });
+    if (candidata) objetivo = candidata;
+  }
+  if (!objetivo) return;
+  objetivo.classList.add("disparo-aviso");
+  const textoEl = /** @type {HTMLElement|null} */ (objetivo.querySelector(".texto"));
+  if (!textoEl) return;
+  const original = textoEl.textContent || "";
+  if (!original) return;
+  if (cita) {
+    const idx = original.toLowerCase().indexOf(cita.toLowerCase());
+    if (idx >= 0) {
+      const antes = escapar(original.slice(0, idx));
+      const medio = escapar(original.slice(idx, idx + cita.length));
+      const despues = escapar(original.slice(idx + cita.length));
+      textoEl.innerHTML = `${antes}<mark class="cita-culpable">${medio}</mark>${despues}`;
+      return;
+    }
+  }
+  textoEl.innerHTML = `<mark class="cita-culpable">${escapar(original)}</mark>`;
+}
+
 /** @param {string} id */
 function reiniciar(id) {
+  detenerTonoAviso();
   limpiarNiveles();
   $("charla").innerHTML = "";
   burbujas.clear();
@@ -1389,6 +1664,8 @@ function reiniciar(id) {
   puntosRiesgo = [];
   relojLlamada = 0;
   tiempoAviso = null;
+  avisoCerrado = false;
+  document.body.classList.remove("alerta-emitida");
   $("aviso").classList.remove("visible");
   nombreOtra.textContent = "Otra persona";
   tarjetaOtra.classList.remove("alerta-activa");
@@ -1413,7 +1690,8 @@ function asr(m) {
     $("charla").appendChild(b);
     burbujas.set(m.segmento, b);
   }
-  b.className = `linea ${m.rol} ${m.entrega}`;
+  const eraDisparo = b.classList.contains("disparo-aviso");
+  b.className = `linea ${m.rol} ${m.entrega}${eraDisparo ? " disparo-aviso" : ""}`;
   const texto = /** @type {HTMLElement} */ (b.querySelector(".texto"));
   texto.textContent = m.texto;
   const retraso = m.disponible_s - m.fin_audio_s;
@@ -1452,7 +1730,7 @@ function asr(m) {
   segmentosInfo.set(m.segmento, info);
 
   $("m-reloj").textContent = seg(m.disponible_s);
-  b.scrollIntoView({ block: "end" });
+  desplazarVisible(b);
 }
 
 /** @param {EventoDetector} m */
@@ -1475,14 +1753,19 @@ function detector(m) {
 
   if (m.aviso) {
     tiempoAviso = m.t_a;
-    $("aviso").classList.add("visible");
+    document.body.classList.add("alerta-emitida");
+    if (!avisoCerrado) {
+      $("aviso").classList.add("visible");
+    }
     $("aviso-motivo").textContent = m.motivo;
-    $("aviso-cita").textContent = m.evidencia ? `«${m.evidencia}»` : "";
+    const citaLimpia = limpiarCita(m.evidencia || "");
+    $("aviso-cita").textContent = citaLimpia ? `«${citaLimpia}»` : "";
     const tras = m.fin_voz_s == null || m.t_a == null ? null : m.t_a - m.fin_voz_s;
     $("aviso-tiempo").textContent = `a los ${seg(m.t_a)} de la llamada`;
     $("m-aviso").textContent = seg(tras);
     nombreOtra.textContent = "Otra persona · posible estafa";
     tarjetaOtra.classList.add("alerta-activa");
+    tocarTonoAviso();
   }
 
   // Pegar evaluación a la frase que la disparó
@@ -1563,7 +1846,7 @@ function adjuntarEvaluacionAFrase(m, r, pct) {
           </div>
           <span class="eval-motivo-txt">${escapar(m.error || "error")}</span>
         `;
-        infEvaluada.el.scrollIntoView({ block: "end" });
+        desplazarVisible(infEvaluada.el);
         return;
       }
 
@@ -1587,17 +1870,17 @@ function adjuntarEvaluacionAFrase(m, r, pct) {
       `;
 
       if (esAviso) {
-        infEvaluada.el.classList.add("disparo-aviso");
+        resaltarFraseCulpable(m.evidencia || "", infEvaluada.el);
       }
-      infEvaluada.el.scrollIntoView({ block: "end" });
+      desplazarVisible(infEvaluada.el);
     }
   }
 }
 
 /** Dibuja la curva continua de riesgo temporal en el elemento SVG. */
 function dibujarGraficoRiesgo() {
-  const w = 320, h = 128;
-  const padL = 34, padR = 14, padT = 22, padB = 22;
+  const w = 320, h = 136;
+  const padL = 42, padR = 16, padT = 26, padB = 24;
   const pw = w - padL - padR;
   const ph = h - padT - padB;
 
@@ -1616,15 +1899,15 @@ function dibujarGraficoRiesgo() {
     <line x1="${padL}" y1="${y(0)}" x2="${padL + pw}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
     <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
 
-    <!-- Etiquetas eje Y -->
-    <text x="${padL - 4}" y="${y(1) + 3}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">100%</text>
-    <text x="${padL - 4}" y="${y(0.5) + 3}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">50%</text>
-    <text x="${padL - 4}" y="${y(0) + 3}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">0%</text>
+    <!-- Etiquetas eje Y (legibles en proyector) -->
+    <text x="${padL - 5}" y="${y(1) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">100%</text>
+    <text x="${padL - 5}" y="${y(0.5) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">50%</text>
+    <text x="${padL - 5}" y="${y(0) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">0%</text>
 
-    <!-- Etiquetas eje X -->
-    <text x="${padL}" y="${h - 6}" font-size="9" text-anchor="start" fill="#64748b" font-family="system-ui">0s</text>
-    <text x="${x(maxT / 2)}" y="${h - 6}" font-size="9" text-anchor="middle" fill="#64748b" font-family="system-ui">${(maxT / 2).toFixed(0)}s</text>
-    <text x="${padL + pw}" y="${h - 6}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">${maxT.toFixed(0)}s</text>
+    <!-- Etiquetas eje X (legibles en proyector) -->
+    <text x="${padL}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="start" fill="#334155" font-family="system-ui">0s</text>
+    <text x="${x(maxT / 2)}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="middle" fill="#334155" font-family="system-ui">${(maxT / 2).toFixed(0)}s</text>
+    <text x="${padL + pw}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">${maxT.toFixed(0)}s</text>
   `;
 
   if (puntosRiesgo.length > 0) {
@@ -1633,26 +1916,28 @@ function dibujarGraficoRiesgo() {
     const puntos = traza.map(p => `${x(p.t).toFixed(1)},${y(p.r).toFixed(1)}`).join(" ");
 
     // Línea continua de riesgo desde el inicio de la llamada
-    svg += `<polyline points="${puntos}" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />`;
+    svg += `<polyline points="${puntos}" fill="none" stroke="#1d4ed8" stroke-width="2.75" stroke-linejoin="round" stroke-linecap="round" />`;
 
     // Puntos de cada evaluación
     for (const p of ordenados) {
       const cx = x(p.t).toFixed(1);
       const cy = y(p.r).toFixed(1);
       const col = p.aviso ? "#b91c1c" : (p.r >= 0.5 ? "#f87171" : "#15803d");
-      const radio = p.aviso ? 4.5 : 3.5;
+      const radio = p.aviso ? 5 : 4;
       svg += `<circle cx="${cx}" cy="${cy}" r="${radio}" fill="${col}" stroke="#ffffff" stroke-width="1.5" />`;
     }
   }
 
-  // Marca vertical del momento del aviso en la banda superior (sin tapar el punto de 100%)
+  // Marca vertical del momento del aviso en la banda superior (legible en proyector)
   if (tiempoAviso != null) {
-    const axNum = Math.max(padL + 28, Math.min(padL + pw - 28, x(tiempoAviso)));
+    const anchoBadge = 88;
+    const mitadBadge = anchoBadge / 2;
+    const axNum = Math.max(padL + mitadBadge, Math.min(padL + pw - mitadBadge, x(tiempoAviso)));
     const ax = x(tiempoAviso).toFixed(1);
     svg += `
-      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#b91c1c" stroke-width="1.75" stroke-dasharray="2 2" />
-      <rect x="${(axNum - 28).toFixed(1)}" y="2" width="56" height="14" rx="3" fill="#b91c1c" />
-      <text x="${axNum.toFixed(1)}" y="12" font-size="8.5" font-weight="bold" text-anchor="middle" fill="#ffffff" font-family="system-ui">AVISO ${tiempoAviso.toFixed(1)}s</text>
+      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#b91c1c" stroke-width="2" stroke-dasharray="3 2" />
+      <rect x="${(axNum - mitadBadge).toFixed(1)}" y="2" width="${anchoBadge}" height="20" rx="4" fill="#b91c1c" />
+      <text x="${axNum.toFixed(1)}" y="16" font-size="12" font-weight="700" text-anchor="middle" fill="#ffffff" font-family="system-ui">AVISO ${tiempoAviso.toFixed(1)}s</text>
     `;
   }
 

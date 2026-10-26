@@ -480,3 +480,65 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 fin = await self.evento(panel, "fin")
             m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
             self.assertEqual(set(m["canales"]), {"otra", "protegida"})
+
+    async def test_aviso_unico_en_panel_con_motivo_evidencia_y_ta(self):
+        respuestas = [
+            RespuestaFalsa(riesgo=0.0, alerta_sugerida=False, motivo="Saludo inicial"),
+            RespuestaFalsa(
+                riesgo=1.0,
+                alerta_sugerida=True,
+                motivo="Pedido de código de activación",
+                evidencia=". decime el código de activación que recibiste por sms",
+            ),
+        ]
+        llamadas_detector = []
+
+        class DetectorGuionado:
+            def evaluar(self, foto):
+                llamadas_detector.append([(l.hablante, l.texto) for l in foto])
+                return respuestas[min(len(llamadas_detector) - 1, len(respuestas) - 1)]
+
+        eventos_otra = [
+            {"tiempo_audio_s": 0.4, "tipo": "final", "segmento": 1, "texto": "Te llamo de soporte."},
+            {"tiempo_audio_s": 0.8, "tipo": "final", "segmento": 2, "texto": ". decime el código de activación que recibiste por sms"},
+            {"tiempo_audio_s": 1.2, "tipo": "final", "segmento": 3, "texto": "Pasámelo rápido."},
+        ]
+        motores = [[], eventos_otra]
+        self.servidor.detector = DetectorGuionado()
+        with patch.object(self.servidor, "crear_motor", side_effect=lambda: MotorFalso(motores.pop(0) if motores else [])):
+            self.servidor.preparar()
+            await self.servidor.preparada
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(self.inicio())
+                await self.evento(panel, "inicio")
+
+                def avanzar_bloque_otra():
+                    for _ in range(4):
+                        self.reloj.t += 0.1
+                        self.servidor.recibir_audio("otra", pcm(0.1))
+
+                avanzar_bloque_otra()
+                ev1 = await self.evento(panel, "detector")
+                self.assertFalse(ev1["aviso"])
+                self.assertEqual(ev1["riesgo"], 0.0)
+
+                avanzar_bloque_otra()
+                ev2 = await self.evento(panel, "detector")
+                self.assertTrue(ev2["aviso"])
+                self.assertEqual(ev2["motivo"], "Pedido de código de activación")
+                self.assertIn("decime el código de activación", ev2["evidencia"])
+                self.assertIsNotNone(ev2["t_a"])
+                self.assertIsNotNone(ev2["fin_voz_s"])
+
+                # Frase posterior al aviso: se transcribe pero el detector no vuelve a evaluar ni avisar.
+                avanzar_bloque_otra()
+                asr_post = await self.evento(panel, "asr")
+                self.assertEqual(asr_post["entrega"], "final")
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                fin = await self.evento(panel, "fin")
+
+        self.assertEqual(len(llamadas_detector), 2)
+        det_eventos = [m for m in self.servidor.historial if m.get("tipo") == "detector"]
+        self.assertEqual([m["aviso"] for m in det_eventos], [False, True])
+        manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+        self.assertEqual(manifiesto["detector"]["aviso"]["t_a"], ev2["t_a"])
