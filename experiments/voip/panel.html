@@ -48,7 +48,15 @@
 <body>
 <header><h1>Llamada en vivo</h1><span id="estado">conectando…</span></header>
 <section id="controles" aria-label="Control de la llamada">
-  <label for="fuente">Fuente</label>
+  <label for="protegida-fuente">Persona protegida</label>
+  <select id="protegida-fuente">
+    <option value="acompanar">Misma fuente que la otra persona</option>
+    <option value="microfono">Micrófono</option>
+  </select>
+  <label for="microfono">Entrada</label>
+  <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
+  <button id="buscar-microfonos" disabled>Buscar micrófonos</button>
+  <label for="fuente">Otra persona</label>
   <select id="fuente">
     <option value="SC-WA-CODE-01">Ejemplo · estafa SC-WA-CODE-01</option>
     <option value="LG-WA-CONSULTA-01">Ejemplo · legítima LG-WA-CONSULTA-01</option>
@@ -78,8 +86,9 @@
     </dl></div>
   </aside>
 </main>
-<script>
+<script type="module">
 // @ts-check
+import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 /** @typedef {{segmento: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
 /** @typedef {{saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, t_a: number}} EventoDetector */
@@ -99,6 +108,60 @@ let evaluaciones = 0, salteadas = 0;
 /** @type {WebSocket|null} */
 let conexion = null;
 let enLlamada = false, terminada = false, pendiente = false;
+const protegidaFuente = /** @type {HTMLSelectElement} */ ($("protegida-fuente"));
+const microfono = /** @type {HTMLSelectElement} */ ($("microfono"));
+const buscarMicrofonos = /** @type {HTMLButtonElement} */ ($("buscar-microfonos"));
+/** @type {ReturnType<typeof prepararAudio>|null} */
+let emisor = null;
+let intento = 0, inicioPropio = false;
+
+function liberarMicrofono() {
+  intento++;
+  inicioPropio = false;
+  emisor?.detener();
+  emisor = null;
+}
+
+async function listarMicrofonos() {
+  const anterior = microfono.value;
+  const dispositivos = await navigator.mediaDevices.enumerateDevices();
+  microfono.replaceChildren(new Option("Micrófono predeterminado", ""));
+  for (const dispositivo of dispositivos.filter(d => d.kind === "audioinput")) {
+    microfono.add(new Option(dispositivo.label || `Entrada ${microfono.length}`, dispositivo.deviceId));
+  }
+  if ([...microfono.options].some(o => o.value === anterior)) microfono.value = anterior;
+}
+
+/** @returns {MediaTrackConstraints} */
+function restriccionesMicrofono() {
+  return {deviceId: microfono.value ? {exact: microfono.value} : undefined,
+    channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false};
+}
+
+protegidaFuente.onchange = async () => {
+  $("error").textContent = "";
+  actualizarControles();
+  if (protegidaFuente.value !== "microfono") return;
+  try { verificarCaptura(); await listarMicrofonos(); }
+  catch (error) { $("error").textContent = mensajeErrorMicrofono(error); }
+};
+buscarMicrofonos.onclick = async () => {
+  const token = ++intento;
+  pendiente = true;
+  actualizarControles();
+  try {
+    verificarCaptura();
+    const stream = await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+    stream.getTracks().forEach(track => track.stop());
+    if (token === intento) { await listarMicrofonos(); $("error").textContent = ""; }
+  } catch (error) {
+    if (token === intento) $("error").textContent = mensajeErrorMicrofono(error);
+  } finally {
+    if (token === intento) { pendiente = false; actualizarControles(); }
+  }
+};
+window.addEventListener("pagehide", liberarMicrofono);
+
 const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
 const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
 const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
@@ -143,6 +206,9 @@ function actualizarControles() {
   terminar.disabled = !conectada || !enLlamada || pendiente;
   nueva.disabled = !conectada || enLlamada || pendiente || !terminada;
   fuente.disabled = enLlamada || pendiente;
+  protegidaFuente.disabled = enLlamada || pendiente;
+  microfono.disabled = enLlamada || pendiente || protegidaFuente.value !== "microfono";
+  buscarMicrofonos.disabled = microfono.disabled;
 }
 
 /** @param {object} mensaje */
@@ -154,16 +220,50 @@ function enviar(mensaje) {
   conexion.send(JSON.stringify(mensaje));
 }
 
-iniciar.onclick = () => {
+iniciar.onclick = async () => {
+  const token = ++intento;
+  if (protegidaFuente.value === "microfono") {
+    pendiente = true;
+    $("error").textContent = "";
+    actualizarControles();
+    try {
+      verificarCaptura();
+      const stream = await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+      if (token !== intento) { stream.getTracks().forEach(t => t.stop()); return; }
+      try {
+        emisor = prepararAudio(stream, "protegida", mensaje => {
+          // El cierre normal de /audio precede al «fin» del panel: no lo muestres como fallo.
+          if (!enLlamada) return;
+          if (conexion?.readyState === WebSocket.OPEN) enviar({tipo: "terminar"});
+          $("error").textContent = mensaje;
+        });
+      } catch (error) { stream.getTracks().forEach(t => t.stop()); throw error; }
+      await listarMicrofonos();
+      if (token !== intento) return;
+    } catch (error) {
+      if (token !== intento) return;
+      liberarMicrofono();
+      $("error").textContent = mensajeErrorMicrofono(error);
+      pendiente = false;
+      actualizarControles();
+      return;
+    }
+  }
+  if (conexion?.readyState !== WebSocket.OPEN) { liberarMicrofono(); return; }
   const ejemplo = fuente.value !== "cliente";
   const fuentes = ejemplo ? {
     otra: {tipo: "ejemplo", escenario: fuente.value, canal: "izq"},
     protegida: {tipo: "ejemplo", escenario: fuente.value, canal: "der"}
   } : {otra: {tipo: "cliente"}, protegida: {tipo: "cliente"}};
+  if (emisor) fuentes.protegida = {tipo: "navegador"};
+  inicioPropio = true;
   enviar({tipo: "iniciar", modo: "llamada", fuentes,
     corte_silencio_s: null, umbral_rms_silencio: null});
 };
-terminar.onclick = () => enviar({tipo: "terminar"});
+terminar.onclick = () => {
+  liberarMicrofono();
+  enviar({tipo: "terminar"});
+};
 nueva.onclick = () => {
   reiniciar("");
   terminada = false;
@@ -234,6 +334,8 @@ function conectar() {
     actualizarControles();
   };
   ws.onclose = () => {
+    liberarMicrofono();
+    pendiente = false;
     limpiarNiveles();
     $("estado").textContent = "sin conexión, reintentando…";
     actualizarControles();
@@ -244,17 +346,20 @@ function conectar() {
     if (m.tipo === "inicio") {
       reiniciar(m.llamada_id);
       enLlamada = true; terminada = false; pendiente = false;
+      if (inicioPropio) { inicioPropio = false; void emisor?.iniciar(); }
       actualizarControles();
     }
     else if (m.tipo === "niveles") niveles(m);
     else if (m.tipo === "asr") asr(m);
     else if (m.tipo === "detector") detector(m);
     else if (m.tipo === "fin") {
+      liberarMicrofono();
       limpiarNiveles();
       $("estado").textContent = `llamada terminada · guardada en ${m.dir}`;
       enLlamada = false; terminada = true; pendiente = false;
       actualizarControles();
     } else if (m.tipo === "error") {
+      if (inicioPropio) liberarMicrofono();
       $("error").textContent = m.mensaje;
       pendiente = false;
       actualizarControles();

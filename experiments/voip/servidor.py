@@ -181,8 +181,8 @@ class Servidor:
         # La admisión también espera la precarga: no mezclar un cliente que llegó
         # mientras iniciar todavía esperaba los motores del ejemplo.
         async with self.control:
-            if self.tarea_ejemplo is not None:
-                await ws.close(1008, "hay una llamada de ejemplo en curso")
+            if self.llamada is not None and self.config_llamada.get("fuentes", {}).get(rol, {}).get("tipo") == "ejemplo":
+                await ws.close(1008, "el rol ya recibe audio de la llamada de ejemplo")
                 return
             self.clientes_audio.add(ws)
         print(f"[audio] conectado: {rol} ({ws.remote_address[0]})")
@@ -214,20 +214,25 @@ class Servidor:
             raise ValueError("Faltan las fuentes de protegida y otra.")
         if any(not isinstance(f.get("tipo"), str) for f in fuentes.values()):
             raise ValueError("El tipo de fuente debe ser ejemplo o cliente.")
-        tipos = {f.get("tipo") for f in fuentes.values()}
+        tipos = {r: f["tipo"] for r, f in fuentes.items()}
+        if (tipos not in ({"otra": "cliente", "protegida": "cliente"},
+                          {"otra": "cliente", "protegida": "navegador"},
+                          {"otra": "ejemplo", "protegida": "navegador"},
+                          {"otra": "ejemplo", "protegida": "ejemplo"})):
+            raise ValueError("Elegí ejemplo o cliente.py; protegida también admite navegador (micrófono).")
         audio = None
-        if tipos == {"ejemplo"}:
+        if tipos["otra"] == "ejemplo":
             escenario = fuentes["otra"].get("escenario")
-            if (not isinstance(escenario, str) or escenario not in EJEMPLOS or fuentes["protegida"].get("escenario") != escenario
-                    or fuentes["otra"].get("canal") != "izq" or fuentes["protegida"].get("canal") != "der"):
+            if (not isinstance(escenario, str) or escenario not in EJEMPLOS
+                    or fuentes["otra"].get("canal") != "izq"
+                    or (tipos["protegida"] == "ejemplo" and
+                        (fuentes["protegida"].get("escenario") != escenario or fuentes["protegida"].get("canal") != "der"))):
                 raise ValueError("Elegí un ejemplo: izquierdo otra persona, derecho protegida.")
             import soundfile as sf
             import numpy as np
             audio, hz = sf.read(EJEMPLOS[escenario], dtype="float32", always_2d=True)
             if hz != SAMPLE_RATE or audio.shape[1] != 2 or not len(audio) or not np.isfinite(audio).all():
                 raise ValueError("El ejemplo debe ser estéreo a 16 kHz y contener audio válido.")
-        elif tipos != {"cliente"}:
-            raise ValueError("Fuente no disponible: elegí ejemplo o cliente.py para ambos canales.")
         # Campos reservados para #81: no aplicar silenciosamente una configuración distinta.
         if any(mensaje.get(c) is not None for c in ("corte_silencio_s", "umbral_rms_silencio")):
             raise ValueError("El corte y el umbral se configuran todavía al iniciar el servidor.")
@@ -237,9 +242,9 @@ class Servidor:
             self.config_llamada = mensaje
             self.llamada = await self.abrir_llamada()
             if audio is not None:
-                self.tarea_ejemplo = asyncio.create_task(self.reproducir_ejemplo(audio))
+                self.tarea_ejemplo = asyncio.create_task(self.reproducir_ejemplo(audio, protegida=tipos["protegida"] == "ejemplo"))
 
-    async def reproducir_ejemplo(self, audio) -> None:
+    async def reproducir_ejemplo(self, audio, *, protegida: bool = True) -> None:
         """Entrega pares de bloques de 40 ms con una única marca de llegada."""
         from cliente import a_pcm16
         paso = SAMPLE_RATE * 40 // 1000
@@ -250,7 +255,8 @@ class Servidor:
                 await self.dormir(max(0.0, inicio + hasta / SAMPLE_RATE - self.ahora()))
                 llegada = self.ahora()
                 self.recibir_audio("otra", a_pcm16(audio[desde:hasta, 0]), llegada=llegada)
-                self.recibir_audio("protegida", a_pcm16(audio[desde:hasta, 1]), llegada=llegada)
+                if protegida:
+                    self.recibir_audio("protegida", a_pcm16(audio[desde:hasta, 1]), llegada=llegada)
         except asyncio.CancelledError:
             raise
         except Exception as exc:
@@ -294,10 +300,15 @@ class Servidor:
 
 def servir_panel(connection, request):
     """GET / devuelve el panel; las rutas de WebSocket siguen de largo."""
-    if urlparse(request.path).path != "/":
+    rutas = {"/": ("panel.html", "text/html; charset=utf-8"),
+             **{f"/{nombre}": (nombre, "text/javascript; charset=utf-8") for nombre in
+                ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs")}}
+    archivo = rutas.get(urlparse(request.path).path)
+    if archivo is None:
         return None
-    cuerpo = (DIR_VOIP / "panel.html").read_bytes()
-    encabezados = Headers([("Content-Type", "text/html; charset=utf-8"), ("Content-Length", str(len(cuerpo)))])
+    nombre, tipo = archivo
+    cuerpo = (DIR_VOIP / nombre).read_bytes()
+    encabezados = Headers([("Content-Type", tipo), ("Content-Length", str(len(cuerpo)))])
     return Response(HTTPStatus.OK, "OK", encabezados, cuerpo)
 
 

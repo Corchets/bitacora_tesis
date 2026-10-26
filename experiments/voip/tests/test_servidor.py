@@ -264,3 +264,61 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 await inicio
                 await asyncio.wait_for(audio.wait_closed(), 3)
                 self.assertEqual(audio.close_code, 1008)
+
+    async def test_microfono_y_ejemplo_un_canal_admite_solo_audio_del_otro_rol(self):
+        ruta = self.dir / "ejemplo.wav"
+        sf.write(ruta, np.column_stack([np.full(16000, 0.25), np.full(16000, -0.5)]), 16000)
+        esperando = asyncio.Event()
+        bloqueada = asyncio.Event()
+        bloques = 0
+
+        async def avanzar(segundos):
+            nonlocal bloques
+            bloques += 1
+            if bloques > 1:
+                esperando.set()
+                await bloqueada.wait()
+            self.reloj.t += segundos
+            await asyncio.sleep(0)
+
+        self.servidor.dormir = avanzar
+        mensaje = json.loads(self.inicio("SC-WA-CODE-01"))
+        mensaje["fuentes"]["protegida"] = {"tipo": "navegador"}
+        with patch.dict("servidor.EJEMPLOS", {"SC-WA-CODE-01": ruta}):
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(json.dumps(mensaje))
+                await self.evento(panel, "inicio")
+                await asyncio.wait_for(esperando.wait(), 3)
+                async with connect(self.url + "/audio?rol=otra") as ajeno:
+                    await asyncio.wait_for(ajeno.wait_closed(), 3)
+                    self.assertEqual(ajeno.close_code, 1008)
+                async with connect(self.url + "/audio?rol=protegida") as micro:
+                    await micro.send(np.full(8000, 8192, dtype="int16").tobytes())
+                    parcial = await self.evento(panel, "asr")
+                    self.assertEqual(parcial["rol"], "protegida")
+                    await panel.send(json.dumps({"tipo": "terminar"}))
+                    fin = await self.evento(panel, "fin")
+                    await asyncio.wait_for(micro.wait_closed(), 3)
+                m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+                self.assertEqual(m["inicio_panel"], mensaje)
+                self.assertEqual(m["canales"]["otra"]["duracion_s"], 0.04)
+                self.assertEqual(m["canales"]["protegida"]["duracion_s"], 0.5)
+                guardado, _ = sf.read(Path(fin["dir"]) / "estereo.wav")
+                np.testing.assert_allclose(guardado[:8000, 0], 0.25, atol=0.0001)
+
+    async def test_microfono_y_cliente_comparten_entrada_y_roles(self):
+        mensaje = json.loads(self.inicio())
+        mensaje["fuentes"]["protegida"] = {"tipo": "navegador"}
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(mensaje))
+            await self.evento(panel, "inicio")
+            async with connect(self.url + "/audio?rol=otra") as otra, \
+                    connect(self.url + "/audio?rol=protegida") as micro:
+                for rol, audio in (("otra", otra), ("protegida", micro)):
+                    await audio.send(pcm(0.5))
+                    parcial = await self.evento(panel, "asr")
+                    self.assertEqual(parcial["rol"], rol)
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                fin = await self.evento(panel, "fin")
+            m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+            self.assertEqual(set(m["canales"]), {"otra", "protegida"})
