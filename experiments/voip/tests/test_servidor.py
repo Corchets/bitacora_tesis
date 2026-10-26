@@ -12,7 +12,7 @@ import soundfile as sf
 from websockets.asyncio.client import connect
 from websockets.asyncio.server import serve
 
-from test_llamada import Reloj, RespuestaFalsa
+from test_llamada import Reloj, RespuestaFalsa, pcm
 from motores import MotorFalso
 from servidor import Servidor
 
@@ -62,6 +62,60 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                        for r, c in (("otra", "izq"), ("protegida", "der"))}
         return json.dumps({"tipo": "iniciar", "modo": "llamada", "fuentes": fuentes,
                            "corte_silencio_s": None, "umbral_rms_silencio": None})
+
+    async def test_asr_conserva_tipo_y_entrega_en_vivo_y_al_cerrar(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            # MotorFalso entrega un parcial a 0,5 s y vacía lo restante al cerrar.
+            self.reloj.t += 0.5
+            self.servidor.recibir_audio("protegida", pcm(0.5))
+            parcial = await self.evento(panel, "asr")
+            self.assertEqual((parcial["tipo"], parcial["entrega"], parcial["rol"]),
+                             ("asr", "parcial", "protegida"))
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            mensajes = []
+            while True:
+                m = json.loads(await panel.recv())
+                if m["tipo"] == "fin":
+                    break
+                if "texto" in m:
+                    mensajes.append(m)
+            self.assertEqual([m["tipo"] for m in mensajes], ["asr"] * 4)
+            self.assertEqual([m["entrega"] for m in mensajes],
+                             ["parcial", "final", "parcial", "final"])
+
+    async def test_niveles_agrupados_por_rol_efimeros_y_sin_audio_obsoleto(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            for otra, protegida in ((0.25, 0.0), (0.0, 0.5)):
+                self.reloj.t += 0.1
+                self.servidor.recibir_audio("otra", pcm(0.1, otra))
+                self.servidor.recibir_audio("protegida", pcm(0.1, protegida))
+                niveles = await self.evento(panel, "niveles")
+                self.assertEqual(set(niveles["canales"]), {"otra", "protegida"})
+                self.assertAlmostEqual(niveles["canales"]["otra"]["rms"], otra, places=4)
+                self.assertAlmostEqual(niveles["canales"]["protegida"]["rms"], protegida, places=4)
+                self.assertEqual(niveles["canales"]["otra"]["fin_audio_s"],
+                                 niveles["canales"]["protegida"]["fin_audio_s"])
+            # Un canal deja de mandar: no mostrar su último volumen indefinidamente.
+            self.reloj.t += 0.3
+            niveles = await self.evento(panel, "niveles")
+            self.assertTrue(all(c["rms"] == 0 for c in niveles["canales"].values()))
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            fin = await self.evento(panel, "fin")
+            for nombre in ("actualizaciones.jsonl", "manifiesto.json"):
+                contenido = (Path(fin["dir"]) / nombre).read_text()
+                self.assertNotIn('"niveles"', contenido)
+                self.assertNotIn('"rms"', contenido)
+        # Al reconectar se repone la charla, nunca una cola de volúmenes viejos.
+        async with connect(self.url + "/panel") as panel:
+            while True:
+                m = json.loads(await panel.recv())
+                self.assertNotEqual(m["tipo"], "niveles")
+                if m["tipo"] == "fin":
+                    break
 
     async def test_inicio_y_fin_explicitos_sin_audio_y_carpetas_propias(self):
         async with connect(self.url + "/panel") as panel:
