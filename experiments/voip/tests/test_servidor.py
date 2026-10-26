@@ -63,6 +63,93 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         return json.dumps({"tipo": "iniciar", "modo": "llamada", "fuentes": fuentes,
                            "corte_silencio_s": None, "umbral_rms_silencio": None})
 
+    async def test_prueba_asr_dos_cortes_umbral_manifiesto_y_sin_detector(self):
+        class MotorSilencio(MotorFalso):
+            def inicializar(motor):
+                motor.silencio_acum_s = 0.0
+                motor.hablo = False
+
+            def procesar_bloque(motor, muestras, inicio, fin):
+                from motores import EventoASR
+                if float(np.sqrt(np.mean(muestras ** 2))) >= motor.umbral_rms_silencio:
+                    motor.hablo = True
+                    motor.silencio_acum_s = 0.0
+                    return [EventoASR("parcial", 1, "hola", inicio, fin, 0)]
+                motor.silencio_acum_s += fin - inicio
+                if motor.hablo and motor.silencio_acum_s + 1e-8 >= motor.corte_silencio_s:
+                    motor.hablo = False
+                    return [EventoASR("final", 1, "Hola.", 0, fin, 0)]
+                return []
+
+            def vaciar_final(motor, fin):
+                return []
+
+        with patch.object(self.servidor, "crear_motor", side_effect=MotorSilencio):
+            async with connect(self.url + "/panel") as panel:
+                for corte, umbral in ((0.5, 0.02), (1.2, 0.04)):
+                    mensaje = {"tipo": "iniciar", "modo": "asr",
+                               "fuentes": {"protegida": {"tipo": "navegador"}},
+                               "corte_silencio_s": corte, "umbral_rms_silencio": umbral}
+                    await panel.send(json.dumps(mensaje))
+                    inicio = await self.evento(panel, "inicio")
+                    self.assertEqual(inicio["modo"], "asr")
+                    self.reloj.t += 0.1
+                    self.servidor.recibir_audio("protegida", pcm(0.1, 0.1))
+                    self.assertEqual((await self.evento(panel, "asr"))["entrega"], "parcial")
+                    # Ruido bajo el umbral elegido (pero mayor al predeterminado).
+                    for _ in range(round(corte / 0.1) - 1):
+                        self.reloj.t += 0.1
+                        self.servidor.recibir_audio("protegida", pcm(0.1, 0.01))
+                    nivel = (await self.evento(panel, "niveles"))["canales"]["protegida"]
+                    self.assertAlmostEqual(nivel["silencio_acum_s"], corte - 0.1)
+                    self.assertEqual(nivel["corte_silencio_s"], corte)
+                    self.assertEqual(nivel["umbral_rms_silencio"], umbral)
+                    self.assertFalse(any(m.get("entrega") == "final" for m in self.servidor.historial))
+                    self.reloj.t += 0.1
+                    self.servidor.recibir_audio("protegida", pcm(0.1, 0.01))
+                    final = await self.evento(panel, "asr")
+                    self.assertEqual(final["entrega"], "final")
+                    self.assertAlmostEqual(final["disponible_s"] - final["fin_voz_s"], corte)
+                    nivel = (await self.evento(panel, "niveles"))["canales"]["protegida"]
+                    self.assertAlmostEqual(nivel["silencio_acum_s"], corte)
+                    await panel.send(json.dumps({"tipo": "terminar"}))
+                    fin = await self.evento(panel, "fin")
+                    m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+                    self.assertEqual(m["config"]["corte_silencio_s"], corte)
+                    self.assertEqual(m["config"]["umbral_rms_silencio"], umbral)
+                    self.assertIsNone(m["config"]["detector"])
+                    self.assertEqual(m["detector"]["evaluaciones"], 0)
+                    self.assertEqual(m["inicio_panel"], mensaje)
+
+    async def test_llamada_restaura_corte_fijo_y_rechaza_ajustes_invalidos(self):
+        prueba = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
+                  "corte_silencio_s": 1.2, "umbral_rms_silencio": 0.03}
+        async with connect(self.url + "/panel") as panel:
+            for campo, valor in (("corte_silencio_s", 1), ("corte_silencio_s", []),
+                                 ("umbral_rms_silencio", 0), ("umbral_rms_silencio", True),
+                                 ("umbral_rms_silencio", float("nan")), ("umbral_rms_silencio", "0.01")):
+                await panel.send(json.dumps({**prueba, campo: valor}))
+                await self.evento(panel, "error")
+            self.assertEqual(list(self.dir.iterdir()), [])
+            await panel.send(json.dumps(prueba))
+            await self.evento(panel, "inicio")
+            async with connect(self.url + "/audio?rol=otra") as otra:
+                await asyncio.wait_for(otra.wait_closed(), 3)
+                self.assertEqual(otra.close_code, 1008)
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await self.evento(panel, "fin")
+            await panel.send(self.inicio())
+            inicio = await self.evento(panel, "inicio")
+            self.assertEqual(inicio["corte_silencio_s"], 0.8)
+            nivel = (await self.evento(panel, "niveles"))["canales"]
+            self.assertTrue(all(c["corte_silencio_s"] == 0.8 for c in nivel.values()))
+            self.assertTrue(all(c["umbral_rms_silencio"] == 0.005 for c in nivel.values()))
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            fin = await self.evento(panel, "fin")
+            m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+            self.assertEqual(m["config"]["corte_silencio_s"], 0.8)
+            self.assertTrue(m["config"]["endpoint_nativo"])
+
     async def test_asr_conserva_tipo_y_entrega_en_vivo_y_al_cerrar(self):
         async with connect(self.url + "/panel") as panel:
             await panel.send(self.inicio())

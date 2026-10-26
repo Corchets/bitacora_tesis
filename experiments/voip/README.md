@@ -107,8 +107,8 @@ El control viaja por `/panel`:
 {"tipo":"terminar"}
 ```
 
-Para clientes, ambas fuentes son `{"tipo":"cliente"}`. Corte y umbral quedan reservados
-para #81; por ahora deben omitirse o ser `null` y se conserva la configuración del servidor.
+Para clientes, ambas fuentes son `{"tipo":"cliente"}`. En modo `llamada`, corte y umbral
+se omiten o son `null`: el panel usa 0,8 s y RMS 0,005, también después de una prueba del ASR.
 Un control inválido devuelve `{"tipo":"error","mensaje":"…"}` al panel que lo mandó.
 La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
 
@@ -130,7 +130,10 @@ de audio de cada canal y es `null` hasta su primer bloque. `t_s` usa el reloj de
 Si un canal deja de mandar bloques por más de 250 ms, su nivel se muestra en cero.
 Para #81, el objeto de cada rol permite agregar `silencio_acum_s`, `corte_silencio_s`
 y `umbral_rms_silencio` sin cambiar el agrupamiento ni mezclar silencio con volumen.
-Esos campos todavía no se emiten: los debe informar el motor con la configuración aplicada.
+Esos campos se emiten con la configuración aplicada a ambos motores. El silencio se cuenta
+en el reloj de audio desde el último bloque con voz; no avanza si deja de llegar audio.
+Se conserva después del cierre hasta la siguiente voz, para que una foto de 10 Hz pueda
+mostrar la barra llena aunque el motor ya haya reseteado su contador.
 
 Los niveles son efímeros: no van al JSONL, manifiesto ni historial de reconexión. El panel
 conserva solo la última foto y actualiza ambos medidores en un `requestAnimationFrame`.
@@ -335,3 +338,34 @@ esa prueba ni las de voz real, Meet u otra notebook.
 Verificación del 2026-10-26 en M1 de 8 GB: el 0.8B dio mediana **1,312 s**, cuatro
 evaluaciones, cero salteadas y fallos, y aviso **+2,803 s** respecto del fin del pedido.
 Se conserva [esa corrida sin WAV](corridas/2026-10-26-medicion-84-m1-08b/README.md).
+
+## 10. Probar el ASR hablando (#81)
+
+Con el servidor local de §3 abierto, activá **Probar el ASR**. Elegí el corte
+(0,5 / 0,8 / 1,2 s) y el umbral RMS (mayor que cero, hasta 1; inicial 0,005).
+Tocá **▶ Hablar**, permití el micrófono y hablá con pausas. Usa la entrada de micrófono
+seleccionada en el panel (o la predeterminada). No conecta otra persona ni ejecuta el detector.
+Si cambia la configuración se recrean y precargan ambos motores antes de emitir `inicio`;
+recién entonces se conecta el audio, así la carga no entra en la demora de la frase.
+
+El provisorio gris se reescribe; al cerrar queda fijo y muestra `disponible_s - fin_voz_s`,
+en milisegundos desde el último bloque por encima del umbral. Es una estimación por energía,
+no una marca humana. La línea negra sobre el volumen señala el umbral en la misma escala
+RMS 0–1; la barra de silencio se llena hasta el corte y vuelve a cero cuando retomás la voz.
+En la prueba se desactiva el endpoint nativo del modelo: manda el silencio elegido,
+incluso con 1,2 s. La salida de texto puede tardar más por el lookahead o procesamiento del ASR.
+
+**Terminar prueba** guarda el registro y libera el micrófono. Podés cambiar el corte e iniciar
+otra enseguida; desactivá **Probar el ASR** para volver a la llamada con corte fijo en 0,8 s.
+El modo y las fuentes quedan en `inicio_panel`; `config` conserva corte, umbral,
+`endpoint_nativo` y `detector: null` en la prueba. Audio y registros de voz real quedan fuera de Git.
+
+```json
+{"tipo":"iniciar","modo":"asr","fuentes":{"protegida":{"tipo":"navegador"}},"corte_silencio_s":1.2,"umbral_rms_silencio":0.005}
+```
+
+Las pruebas con MotorFalso sensible a energía y reloj controlado recorren dos sesiones
+con cortes 0,5 y 1,2 s: no hay final antes del corte, el último bloque cierra la frase,
+la telemetría alcanza el corte, la demora coincide y el manifiesto conserva los ajustes
+sin evaluaciones del detector. También verifican validación, rechazo de audio de `otra`
+y vuelta a 0,8 s en modo llamada. Corré los comandos de §8.

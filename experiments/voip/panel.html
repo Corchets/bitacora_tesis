@@ -88,6 +88,7 @@
 </main>
 <script type="module">
 // @ts-check
+import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 /** @typedef {{segmento: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
@@ -168,6 +169,11 @@ const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
 const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
 const barraRiesgo = /** @type {HTMLElement} */ ($("barra").firstElementChild);
 
+const pruebaASR = montarPruebaASR({
+  iniciar: () => { terminada = false; void iniciarSesion(); },
+  terminar: () => terminar.click(), cambiar: actualizarControles
+});
+
 const roles = ["protegida", "otra"];
 const medidores = roles.map(rol => ({
   rol, barra: /** @type {HTMLMeterElement} */ ($(`nivel-${rol}`)), valor: $(`rms-${rol}`)
@@ -209,6 +215,7 @@ function actualizarControles() {
   protegidaFuente.disabled = enLlamada || pendiente;
   microfono.disabled = enLlamada || pendiente || protegidaFuente.value !== "microfono";
   buscarMicrofonos.disabled = microfono.disabled;
+  pruebaASR.controles(!!conectada, pendiente, enLlamada);
 }
 
 /** @param {object} mensaje */
@@ -220,9 +227,9 @@ function enviar(mensaje) {
   conexion.send(JSON.stringify(mensaje));
 }
 
-iniciar.onclick = async () => {
+async function iniciarSesion() {
   const token = ++intento;
-  if (protegidaFuente.value === "microfono") {
+  if (pruebaASR.activa || protegidaFuente.value === "microfono") {
     pendiente = true;
     $("error").textContent = "";
     actualizarControles();
@@ -258,9 +265,11 @@ iniciar.onclick = async () => {
   } : {otra: {tipo: "cliente"}, protegida: {tipo: "cliente"}};
   if (emisor) fuentes.protegida = {tipo: "navegador"};
   inicioPropio = true;
-  enviar({tipo: "iniciar", modo: "llamada", fuentes,
-    corte_silencio_s: null, umbral_rms_silencio: null});
-};
+  enviar(pruebaASR.activa
+    ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config}
+    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: null, umbral_rms_silencio: null});
+}
+iniciar.onclick = iniciarSesion;
 terminar.onclick = () => {
   liberarMicrofono();
   enviar({tipo: "terminar"});
@@ -336,6 +345,7 @@ function conectar() {
   };
   ws.onclose = () => {
     liberarMicrofono();
+    pruebaASR.evento({tipo: "desconexion"});
     pendiente = false;
     limpiarNiveles();
     $("estado").textContent = "sin conexión, reintentando…";
@@ -344,6 +354,7 @@ function conectar() {
   };
   ws.onmessage = (e) => {
     const m = JSON.parse(e.data);
+    pruebaASR.evento(m);
     if (m.tipo === "inicio") {
       reiniciar(m.llamada_id);
       enLlamada = true; terminada = false; pendiente = false;

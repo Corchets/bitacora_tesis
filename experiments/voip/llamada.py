@@ -127,6 +127,11 @@ class Llamada:
                     # Sin bloques durante 250 ms, el último nivel ya no describe el presente.
                     "rms": round(c.rms, 6) if c.ultima_llegada_s is not None and ahora - c.ultima_llegada_s <= 0.25 else 0.0,
                     "fin_audio_s": round(c.fin_s(), 3) if c.inicio_s is not None else None,
+                    # El motor resetea su contador al cerrar; conservar el silencio acústico
+                    # hasta la siguiente voz permite mostrar la barra completa entre fotos.
+                    "silencio_acum_s": round(max(0.0, c.fin_s() - c.ultima_voz_s), 3) if c.ultima_voz_s is not None else 0.0,
+                    "corte_silencio_s": getattr(c.motor, "corte_silencio_s", 0.8),
+                    "umbral_rms_silencio": getattr(c.motor, "umbral_rms_silencio", 0.005),
                 } for c in self.canales.values()
             },
         }

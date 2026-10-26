@@ -27,6 +27,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import math
 import signal
 import sys
 import time
@@ -57,6 +58,7 @@ class Servidor:
         self.dormir = dormir
         self.control = asyncio.Lock()
         self.config_llamada: dict = {}
+        self.config_asr = (args.corte_silencio, 0.005, True)
         self.args = args
         self.detector = detector
         self.llamada: Llamada | None = None
@@ -82,8 +84,18 @@ class Servidor:
         broadcast(self.paneles, json.dumps(mensaje, ensure_ascii=False))
 
     def preparar(self) -> None:
+        corte, umbral, endpoint = self.config_asr
+
+        def crear_configurado():
+            motor = self.crear_motor()
+            motor.corte_silencio_s = corte
+            motor.umbral_rms_silencio = umbral
+            # En la prueba manda el corte elegido, incluso si supera el endpoint nativo.
+            motor.enable_endpoint = endpoint
+            return motor
+
         self.preparada = asyncio.create_task(
-            asyncio.to_thread(Llamada, crear_motor=self.crear_motor, disparo=self.args.disparo, ahora=self.ahora)
+            asyncio.to_thread(Llamada, crear_motor=crear_configurado, disparo=self.args.disparo, ahora=self.ahora)
         )
 
     async def abrir_llamada(self) -> Llamada:
@@ -95,8 +107,11 @@ class Servidor:
         momento = datetime.now()
         llamada.abrir(f"VIVO-{momento:%Y%m%d-%H%M%S-%f}", Path(self.args.salida) / f"{momento:%Y-%m-%d_%H%M%S-%f}")
         self.historial = []
-        self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id})
-        self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))
+        self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id,
+                       "modo": self.config_llamada.get("modo", "llamada"),
+                       "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1]})
+        if self.config_llamada.get("modo") != "asr":
+            self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))
         self.tarea_niveles = asyncio.create_task(self.emitir_niveles(llamada))
         print(f"[llamada] {llamada.llamada_id} → {llamada.dir_salida}")
         return llamada
@@ -137,11 +152,12 @@ class Servidor:
         a = self.args
         carga = getattr(self.detector, "carga", None)
         return {
-            "config": {"detector": a.detector, "modelo": a.modelo if a.detector == "slm" else None,
+            "config": {"detector": None if self.config_llamada.get("modo") == "asr" else a.detector, "modelo": a.modelo if a.detector == "slm" else None,
                        "prompt": a.prompt if a.detector == "slm" else None, "hablantes": "ab",
                        "ollama_url": a.ollama_url if a.detector == "slm" else None,
                        "seed": a.seed if a.detector == "slm" else "no-aplica",
-                       "corte_silencio_s": a.corte_silencio, "hilos_asr": a.hilos, "carga_slm": carga},
+                       "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
+                       "endpoint_nativo": self.config_asr[2], "hilos_asr": a.hilos, "carga_slm": carga},
             "inicio_panel": self.config_llamada,
             "codigo": replay.info_codigo(),
             "maquina": replay.info_maquina(),
@@ -171,7 +187,7 @@ class Servidor:
         """Entrada común para cliente.py y el estéreo del ejemplo."""
         for act in self.llamada.recibir(rol, pcm, llegada=llegada):
             self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
-            if self.llamada.marcar_disparo(act):
+            if self.config_llamada.get("modo") != "asr" and self.llamada.marcar_disparo(act):
                 self.novedad.set()
 
     async def atender_audio(self, ws, rol: str) -> None:
@@ -181,6 +197,9 @@ class Servidor:
         # La admisión también espera la precarga: no mezclar un cliente que llegó
         # mientras iniciar todavía esperaba los motores del ejemplo.
         async with self.control:
+            if self.llamada is not None and self.config_llamada.get("modo") == "asr" and rol != "protegida":
+                await ws.close(1008, "Probar el ASR admite solamente el micrófono de protegida")
+                return
             if self.llamada is not None and self.config_llamada.get("fuentes", {}).get(rol, {}).get("tipo") == "ejemplo":
                 await ws.close(1008, "el rol ya recibe audio de la llamada de ejemplo")
                 return
@@ -195,6 +214,7 @@ class Servidor:
                         break
                     if self.llamada is None:
                         self.config_llamada = {}
+                        await self.configurar_asr((self.args.corte_silencio, 0.005, True))
                         self.llamada = await self.abrir_llamada()
                     self.recibir_audio(rol, mensaje)
         finally:
@@ -205,23 +225,35 @@ class Servidor:
             if pertenecia and not self.clientes_audio and self.tarea_ejemplo is None:
                 await self.cerrar_llamada(esperada=llamada)
 
+    async def configurar_asr(self, config: tuple) -> None:
+        if config == self.config_asr:
+            return
+        if self.preparada is not None:
+            await self.preparada
+        self.config_asr = config
+        self.preparar()
+
     async def iniciar(self, mensaje: dict) -> None:
         """Valida el contrato de control antes de abrir archivos o arrancar audio."""
         fuentes = mensaje.get("fuentes")
-        if mensaje.get("modo") != "llamada" or not isinstance(fuentes, dict):
+        prueba = mensaje.get("modo") == "asr"
+        if mensaje.get("modo") not in ("llamada", "asr") or not isinstance(fuentes, dict):
             raise ValueError("Elegí modo llamada y las fuentes de ambos canales.")
-        if set(fuentes) != set(ROLES) or any(not isinstance(f, dict) for f in fuentes.values()):
+        roles = {"protegida"} if prueba else set(ROLES)
+        if set(fuentes) != roles or any(not isinstance(f, dict) for f in fuentes.values()):
             raise ValueError("Faltan las fuentes de protegida y otra.")
         if any(not isinstance(f.get("tipo"), str) for f in fuentes.values()):
             raise ValueError("El tipo de fuente debe ser ejemplo o cliente.")
         tipos = {r: f["tipo"] for r, f in fuentes.items()}
-        if (tipos not in ({"otra": "cliente", "protegida": "cliente"},
+        if prueba and tipos != {"protegida": "navegador"}:
+            raise ValueError("Probar el ASR usa solamente el micrófono del navegador.")
+        if not prueba and (tipos not in ({"otra": "cliente", "protegida": "cliente"},
                           {"otra": "cliente", "protegida": "navegador"},
                           {"otra": "ejemplo", "protegida": "navegador"},
                           {"otra": "ejemplo", "protegida": "ejemplo"})):
             raise ValueError("Elegí ejemplo o cliente.py; protegida también admite navegador (micrófono).")
         audio = None
-        if tipos["otra"] == "ejemplo":
+        if tipos.get("otra") == "ejemplo":
             escenario = fuentes["otra"].get("escenario")
             if (not isinstance(escenario, str) or escenario not in EJEMPLOS
                     or fuentes["otra"].get("canal") != "izq"
@@ -233,12 +265,21 @@ class Servidor:
             audio, hz = sf.read(EJEMPLOS[escenario], dtype="float32", always_2d=True)
             if hz != SAMPLE_RATE or audio.shape[1] != 2 or not len(audio) or not np.isfinite(audio).all():
                 raise ValueError("El ejemplo debe ser estéreo a 16 kHz y contener audio válido.")
-        # Campos reservados para #81: no aplicar silenciosamente una configuración distinta.
-        if any(mensaje.get(c) is not None for c in ("corte_silencio_s", "umbral_rms_silencio")):
-            raise ValueError("El corte y el umbral se configuran todavía al iniciar el servidor.")
+        corte, umbral = mensaje.get("corte_silencio_s"), mensaje.get("umbral_rms_silencio")
+        if prueba:
+            if isinstance(corte, bool) or corte not in (0.5, 0.8, 1.2):
+                raise ValueError("Elegí un corte de silencio de 0,5, 0,8 o 1,2 s.")
+            if (isinstance(umbral, bool) or not isinstance(umbral, (int, float))
+                    or not math.isfinite(umbral) or not 0 < umbral <= 1):
+                raise ValueError("Elegí un umbral RMS mayor que 0 y hasta 1.")
+        else:
+            if corte is not None or umbral is not None:
+                raise ValueError("El corte de la llamada es fijo en 0,8 s; probá los ajustes en Probar el ASR.")
+            corte, umbral = 0.8, 0.005
         async with self.control:
             if self.llamada is not None or self.clientes_audio:
                 raise ValueError("Terminá la llamada actual antes de iniciar otra.")
+            await self.configurar_asr((corte, umbral, not prueba))
             self.config_llamada = mensaje
             self.llamada = await self.abrir_llamada()
             if audio is not None:
@@ -302,7 +343,7 @@ def servir_panel(connection, request):
     """GET / devuelve el panel; las rutas de WebSocket siguen de largo."""
     rutas = {"/": ("panel.html", "text/html; charset=utf-8"),
              **{f"/{nombre}": (nombre, "text/javascript; charset=utf-8") for nombre in
-                ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs")}}
+                ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs")}}
     archivo = rutas.get(urlparse(request.path).path)
     if archivo is None:
         return None
