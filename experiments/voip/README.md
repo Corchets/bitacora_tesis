@@ -109,16 +109,19 @@ para #81; por ahora deben omitirse o ser `null` y se conserva la configuración 
 Un control inválido devuelve `{"tipo":"error","mensaje":"…"}` al panel que lo mandó.
 La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
 
-Verificación real del 2026-10-26 con Zipformer local y `--detector reglas`, sin Ollama:
-la estafa avisó a **18,460 s** (referencia `reglas-final`: 18,457 s; diferencia +0,003 s).
+Verificación real del 2026-10-26, commit `3dc9269` con árbol limpio
+([manifiestos y salidas sin audio](corridas/2026-10-26-panel-77/README.md)),
+con Zipformer local y `--detector reglas`, sin Ollama:
+la estafa avisó a **18,455 s** (referencia `reglas-final`: 18,457 s; diferencia −0,002 s).
 Ambos canales comenzaron en 0,000 s y conservaron 22,217 s de audio.
 La legítima conserva 16,326 s, pero el detector actual de reglas produjo una **falsa alarma
-a 5,211 s** con «Me llegó por ese MS un código para activar WhatsApp y yo no lo pedí».
+a 5,214 s** con «Me llegó por ese MS un código para activar WhatsApp y yo no lo pedí».
 Es una limitación del detector, no se oculta por escenario: el criterio «legítima sin aviso»
 se verifica con el detector de la demo: Qwen3.5 0.8B local, no con el respaldo de reglas.
 Con `--detector slm --modelo qwen3.5:0.8b-q8_0 --ollama-url http://127.0.0.1:11434`,
 la legítima **no produjo aviso**: tres evaluaciones válidas, sin fallos. Se conservó la
-misma configuración de audio y corte de silencio (0,8 s).
+misma configuración de audio y corte de silencio (0,8 s). La primera comprobación,
+antes del commit, había dado 18,460 s para la estafa y 5,211 s para la falsa alarma de reglas.
 
 La llamada también empieza con el primer bloque de audio y termina cuando se desconectan todos los clientes
 (o con Ctrl+C en el servidor). Queda en `llamadas/<fecha>_<hora>_<microsegundos>/`, que Git ignora: son voces y
@@ -175,7 +178,7 @@ Whisper no sirve para esto: no es streaming y en la prueba de asr-local tardó m
 ## 6. Límites conocidos
 
 - Las cifras históricas de §4 usan una sola llamada sintética: voces TTS, pausas de 1 s entre turnos, sin ruido ni solapamiento.
-- El respaldo de reglas da una falsa alarma en `LG-WA-CONSULTA-01` a 5,211 s por
+- El respaldo de reglas da una falsa alarma en `LG-WA-CONSULTA-01` a 5,214 s por
   «Me llegó por ese MS un código para activar WhatsApp y yo no lo pedí»; no distingue
   mencionar un código de pedirlo. Con Qwen3.5 0.8B local la misma llamada no avisó.
 - La verificación de #77 ejercitó el servidor real por `/panel`; queda comprobar visualmente
