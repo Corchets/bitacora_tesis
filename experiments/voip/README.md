@@ -375,6 +375,10 @@ con micrófono falso, la barra completa y las regresiones encontradas en revisi�
 
 ## 11. Otra persona desde Meet o BlackHole (#80)
 
+Para ensayar solo, con el celular como Otra persona, seguí la
+[guía paso a paso](GUIA-MEET-WHATSAPP.md); el panel la sirve en `/guia` y la enlaza junto a la elección de fuente.
+Lo que sigue es el detalle técnico.
+
 Abrí el panel en Chrome en `http://localhost:8765/` o `http://127.0.0.1:8765/`.
 Usá auriculares, elegí un **micrófono físico** para Persona protegida y comprobá
 que la app de llamada también use ese micrófono como entrada.

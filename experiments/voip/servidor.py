@@ -347,7 +347,7 @@ class Servidor:
 
 
 def servir_panel(connection, request, args: argparse.Namespace | None = None):
-    """GET / devuelve el panel; /detector informa el detector activo; las rutas de WebSocket siguen de largo."""
+    """GET / devuelve el panel; /guia la guía de Meet y WhatsApp; /detector informa el detector activo; las rutas de WebSocket siguen de largo."""
     ruta = urlparse(request.path).path
     if ruta == "/detector" and args is not None:
         cuerpo = json.dumps({"tipo": args.detector,
@@ -357,6 +357,7 @@ def servir_panel(connection, request, args: argparse.Namespace | None = None):
                                ("Content-Length", str(len(cuerpo)))])
         return Response(HTTPStatus.OK, "OK", encabezados, cuerpo)
     rutas = {"/": ("panel.html", "text/html; charset=utf-8"),
+             "/guia": ("GUIA-MEET-WHATSAPP.md", "text/plain; charset=utf-8"),
              **{f"/{nombre}": (nombre, "text/javascript; charset=utf-8") for nombre in
                 ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs", "fuentes.mjs")}}
     archivo = rutas.get(ruta)

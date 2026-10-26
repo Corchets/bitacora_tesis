@@ -237,26 +237,15 @@
     border: 1px solid var(--linea);
     border-radius: var(--radio-sm);
   }
-  #guia-fuentes {
-    width: 100%;
-    margin-top: 0.2rem;
-    padding: 0.4rem 0.65rem;
-    background: var(--superficie);
-    border: 1px solid var(--linea);
-    border-radius: var(--radio-sm);
-  }
-  #guia-fuentes summary {
-    font-weight: 600;
-    color: var(--tinta-secundaria);
-    border: none;
-    padding: 0;
-    background: transparent;
-  }
-  #guia-fuentes p {
-    margin: 0.35rem 0;
+  .enlace-guia {
     font-size: 0.8125rem;
-    line-height: 1.4;
-    color: var(--tinta-secundaria);
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+  }
+  .enlace-guia:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
   }
 
   /* Aviso en franja no modal, visible desde el aula pero sin tapar ni saturar */
@@ -1020,6 +1009,7 @@
         <option value="meet">Meet · pestaña de Chrome</option>
         <option value="blackhole">WhatsApp / escritorio · BlackHole</option>
       </select>
+      <a class="enlace-guia" href="/guia" target="_blank" rel="noopener">Guía para probar solo</a>
     </div>
     <div class="ajuste-grupo">
       <label for="protegida-fuente">Persona protegida</label>
@@ -1029,19 +1019,13 @@
       </select>
     </div>
     <details id="ajustes-fuentes" class="panel-ajustes">
-      <summary>Micrófono y ayuda</summary>
+      <summary>Micrófono</summary>
       <div class="ajustes-cuerpo">
         <div class="ajuste-grupo">
           <label for="microfono">Entrada</label>
           <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
           <button id="buscar-microfonos" disabled type="button">Buscar micrófonos</button>
         </div>
-        <details id="guia-fuentes">
-          <summary>Cómo tomar la otra voz de Meet o WhatsApp</summary>
-          <p>Usá auriculares y un micrófono físico para Persona protegida. Para Meet, elegí su pestaña en Chrome y activá «Compartir audio de la pestaña». No compartas este panel, una ventana ni la pantalla completa.</p>
-          <p>Para WhatsApp Desktop: abrí Configuración de Audio MIDI → + → Crear dispositivo de salida múltiple; marcá tus auriculares y BlackHole 2ch. Usá los auriculares como reloj principal y activá la corrección de deriva para BlackHole. Elegilo como salida de la app de llamada (o del sistema si la app usa la predeterminada). Conservá el micrófono físico como entrada de la app. BlackHole recibe la otra voz y vos seguís escuchando por los auriculares; evitá otros sonidos del sistema.</p>
-          <p>BlackHole 2ch puede estar instalado y no aparecer como entrada hasta reiniciar coreaudiod. Hacelo vos desde Terminal (<code>sudo killall coreaudiod</code>), volvé a abrir Chrome y reintentá. La demo no reinicia servicios. Si la pestaña no trae audio o falta BlackHole, no se inicia la llamada.</p>
-        </details>
       </div>
     </details>
   </div>
@@ -1439,7 +1423,6 @@ window.addEventListener("pagehide", liberarMicrofono);
 fuente.onchange = () => {
   if (fuente.value === "meet" || fuente.value === "blackhole") {
     protegidaFuente.value = "microfono";
-    /** @type {HTMLDetailsElement} */ ($("guia-fuentes")).open = true;
     /** @type {HTMLDetailsElement} */ ($("ajustes-fuentes")).open = true;
   }
   actualizarControles();

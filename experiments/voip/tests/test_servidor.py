@@ -83,6 +83,15 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(inicio["detector"], {"tipo": "slm", "modelo": "modelo-local-de-prueba"})
             self.servidor.args.detector = "reglas"
 
+    async def test_guia_de_meet_y_whatsapp_se_sirve_desde_el_panel(self):
+        from servidor import servir_panel
+        resp = servir_panel(None, Namespace(path="/guia"), self.servidor.args)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("text/plain", resp.headers["Content-Type"])
+        texto = resp.body.decode("utf-8")
+        self.assertIn("Receta 1 · Meet", texto)
+        self.assertIn("Receta 2 · WhatsApp", texto)
+
     async def test_prueba_asr_dos_cortes_umbral_manifiesto_y_sin_detector(self):
         class MotorSilencio(MotorFalso):
             def inicializar(motor):
