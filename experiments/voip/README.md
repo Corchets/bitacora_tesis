@@ -286,3 +286,52 @@ Voz real, Meet, BlackHole y segunda notebook requieren ensayo humano.
 
 La [evidencia de #78](corridas/2026-10-26-microfono-78/README.md) conserva la prueba con
 micrófono falso, el contraste con `cliente.py`, los casos de error simulados y cómo repetirla.
+
+## 9. Medir la notebook sin panel (#84)
+
+Con el entorno Python de §3 activo, Zipformer ya descargado y el TTS original de
+`SC-WA-CODE-01` en `experiments/asr-local/audio/`, corré desde `experiments/voip/`:
+
+```bash
+python medir.py --detector slm --modelo qwen3.5:4b-q4_K_M
+# Comparación con el modelo chico o el respaldo:
+python medir.py --detector slm --modelo qwen3.5:0.8b-q8_0
+python medir.py --detector reglas
+```
+
+Para SLM, abrí Ollama local antes de correrlo y descargá el modelo una vez con
+`ollama pull qwen3.5:4b-q4_K_M` (o `ollama pull qwen3.5:0.8b-q8_0`). Si falta
+Ollama o el modelo, el comando indica cómo resolverlo antes de empezar la llamada.
+La medición usa solo archivos y modelos locales; no descarga audio ni ASR.
+Si están en otra carpeta, agregá `--audio /ruta/SC-WA-CODE-01-tts-estereo.wav`
+y `--modelo-asr /ruta/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`.
+`--audio` debe apuntar al mismo TTS original: otro audio invalida la referencia
+al fin del pedido (17,6 s, según §4).
+
+El comando precarga el SLM y los dos ASR, reproduce los ~22 s del ejemplo al ritmo
+real con la fuente de #77 y espera la evaluación pendiente al terminar. Conserva
+el disparo `final`, silencio de 0,8 s, prompt `tarea`, seed 42, hablantes A/B,
+foto más reciente sin cola y aviso único del servidor. No abre un puerto ni un panel.
+La carga inicial queda fuera de la mediana; la demora del ASR queda fuera del tiempo
+por evaluación, pero sí influye en el momento del aviso.
+
+Al terminar imprime **CUMPLE** o **NO CUMPLE** el criterio de **mediana < 2 s por
+evaluación**, seguido de la mediana, cantidad de evaluaciones, salteadas, fallos y
+el aviso respecto del fin del pedido. Con fallos o sin evaluaciones dice NO CUMPLE
+y devuelve código de salida 1; superar 2 s con respuestas válidas es una medición
+completa y devuelve 0. «Sin aviso» se informa explícitamente; un aviso anterior al
+pedido puede responder a otra frase, y no demuestra que detectó el pedido.
+
+Cada ejecución deja `actualizaciones.jsonl`, `detector.jsonl` y `manifiesto.json`
+en `corridas/<fecha>_<hora>_<microsegundos>/`, **sin WAV**. El manifiesto conserva
+configuración, máquina, commit, digest del modelo, hash del TTS y referencia de
+17,6 s. Para pruebas descartables usá `--salida /tmp/voip-medicion`; no versiones
+esas corridas. Estas cifras sirven para elegir la notebook de demo, no para medir
+rendimiento sobre corpus real ni para cerrar D08/D09.
+
+**Pendiente humano:** correr en la M4 con 0.8B y 4B; este ticket no da por hecha
+esa prueba ni las de voz real, Meet u otra notebook.
+
+Verificación del 2026-10-26 en M1 de 8 GB: el 0.8B dio mediana **1,312 s**, cuatro
+evaluaciones, cero salteadas y fallos, y aviso **+2,803 s** respecto del fin del pedido.
+Se conserva [esa corrida sin WAV](corridas/2026-10-26-medicion-84-m1-08b/README.md).
