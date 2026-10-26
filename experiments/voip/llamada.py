@@ -221,7 +221,7 @@ class Llamada:
             "fin_voz_s": None if ev.fin_voz_s is None else round(ev.fin_voz_s, 3),
         }
 
-    def cerrar(self, manifiesto_extra: dict | None = None) -> list[dict]:
+    def cerrar(self, manifiesto_extra: dict | None = None, *, guardar_audio: bool = True) -> list[dict]:
         """Vacía el ASR de cada canal, guarda el estéreo y el manifiesto. Devuelve las últimas actualizaciones."""
         ultimas = []
         for canal in self.canales.values():
@@ -232,14 +232,15 @@ class Llamada:
                     ultimas.append(self._registrar(canal, e))
         self._jsonl.close()
         self._detector.close()
-        self._guardar_estereo()
+        if guardar_audio:
+            self._guardar_estereo()
         manifiesto = {
             "llamada_id": self.llamada_id,
             "asr": self.meta_asr,
             "disparo": self.disparo,
             "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
             "canales": {c.rol: self._resumen_canal(c) for c in self.canales.values() if c.inicio_s is not None},
-            "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)",
+            "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)" if guardar_audio else None,
             "detector": self._resumen_detector(),
             **(manifiesto_extra or {}),
         }
