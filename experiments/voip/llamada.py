@@ -97,6 +97,7 @@ class Llamada:
         self.segmentos: dict[tuple[str, int], int] = {}  # (rol, segmento del motor) -> segmento de la llamada
         self.evaluaciones: list[Evaluacion] = []
         self.aviso: Evaluacion | None = None
+        self.audio_vaciado = False
 
     def abrir(self, llamada_id: str, dir_salida: Path) -> None:
         self.llamada_id = llamada_id
@@ -221,8 +222,10 @@ class Llamada:
             "fin_voz_s": None if ev.fin_voz_s is None else round(ev.fin_voz_s, 3),
         }
 
-    def cerrar(self, manifiesto_extra: dict | None = None, *, guardar_audio: bool = True) -> list[dict]:
-        """Vacía el ASR de cada canal, guarda el estéreo y el manifiesto. Devuelve las últimas actualizaciones."""
+    def vaciar_audio(self) -> list[dict]:
+        """Entrega los últimos textos una sola vez, antes de cerrar el registro del detector."""
+        if self.audio_vaciado:
+            return []
         ultimas = []
         for canal in self.canales.values():
             if canal.inicio_s is None:
@@ -230,6 +233,12 @@ class Llamada:
             for e in canal.motor.vaciar_final(canal.fin_s()):
                 if any(c.isalnum() for c in e.texto):
                     ultimas.append(self._registrar(canal, e))
+        self.audio_vaciado = True
+        return ultimas
+
+    def cerrar(self, manifiesto_extra: dict | None = None, *, guardar_audio: bool = True) -> list[dict]:
+        """Vacía el ASR, guarda opcionalmente el estéreo y escribe el manifiesto."""
+        ultimas = self.vaciar_audio()
         self._jsonl.close()
         self._detector.close()
         if guardar_audio:

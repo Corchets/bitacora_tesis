@@ -6,6 +6,7 @@ import argparse
 import asyncio
 import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -35,6 +36,20 @@ class Medicion(Servidor):
         if mensaje["tipo"] == "error":
             raise RuntimeError(mensaje["mensaje"])
 
+    def manifiesto_extra(self):
+        extra = super().manifiesto_extra()
+        # replay.info_codigo() solo mira su carpeta; acá también se ejecutan VoIP y ASR.
+        try:
+            estado = subprocess.run(
+                ["git", "status", "--porcelain", "--", ".", "../asr-local", "../replay",
+                 "../slm-directo", ":(exclude)corridas"],
+                cwd=DIR_VOIP, capture_output=True, text=True, timeout=10, check=True,
+            )
+            extra["codigo"]["cambios_sin_commit"] = bool(estado.stdout.strip())
+        except (OSError, subprocess.SubprocessError):
+            extra["codigo"]["cambios_sin_commit"] = None
+        return extra
+
     async def trabajar_detector(self, llamada):
         # Misma política del servidor: foto más reciente, sin cola y aviso único.
         while True:
@@ -52,6 +67,9 @@ class Medicion(Servidor):
         llamada = self.llamada
         if llamada is None:
             return
+        for act in llamada.vaciar_audio():
+            if llamada.marcar_disparo(act):
+                self.novedad.set()
         self.audio_terminado = True
         self.novedad.set()
         if self.tarea_detector:
@@ -110,7 +128,7 @@ def parse_args(argv=None):
 async def principal(args):
     if not args.audio.is_file():
         raise ValueError(f"Falta el ejemplo local: {args.audio}. Copiá el TTS de SC-WA-CODE-01 o indicá --audio.")
-    archivos = ("encoder.onnx", "decoder.onnx", "joiner.onnx", "tokens.txt")
+    archivos = MotorSherpaZipformer.ARCHIVOS_REQUERIDOS
     if not all((args.modelo_asr / nombre).is_file() for nombre in archivos):
         raise ValueError(f"Falta Zipformer local en {args.modelo_asr}. Indicá --modelo-asr con sus ONNX y tokens.txt.")
     EJEMPLOS[ESCENARIO] = args.audio

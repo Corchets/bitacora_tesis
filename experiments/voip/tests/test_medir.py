@@ -107,3 +107,28 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
             self.assertIn("Pasame el código", fotos[-1])
             self.assertIn("NO CUMPLE", resumir(m))
             self.assertIn("sin aviso", resumir(m))
+
+    async def test_pedido_entregado_al_vaciar_asr_tambien_se_evalua(self):
+        class MedicionAlCierre(Medicion):
+            def crear_motor(self):
+                return MotorFalso([{"tiempo_audio_s": 1, "tipo": "final", "segmento": 1,
+                                    "texto": "Pasame el código."}])
+
+        with tempfile.TemporaryDirectory() as tmp:
+            ruta = Path(tmp) / "entrada.wav"
+            sf.write(ruta, np.full((640, 2), 0.25), 16000)
+            args = parse_args(["--detector", "reglas", "--salida", str(Path(tmp) / "salida")])
+            reloj = Reloj()
+
+            async def avanzar(segundos):
+                reloj.t += segundos
+                await asyncio.sleep(0)
+
+            medicion = MedicionAlCierre(args, DetectorFalso(), ahora=reloj, dormir=avanzar)
+            with patch.dict("servidor.EJEMPLOS", {"SC-WA-CODE-01": ruta}):
+                carpeta = await medicion.correr()
+            m = json.loads((carpeta / "manifiesto.json").read_text())
+            self.assertEqual(m["detector"]["evaluaciones"], 1)
+            self.assertIsNotNone(m["detector"]["aviso"])
+            acts = (carpeta / "actualizaciones.jsonl").read_text().splitlines()
+            self.assertEqual(len(acts), 3)  # metadata y un final por canal, sin duplicados.
