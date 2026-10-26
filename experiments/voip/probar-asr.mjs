@@ -9,22 +9,24 @@ export function montarPruebaASR(acciones) {
   seccion.id = 'prueba-asr';
   seccion.innerHTML = `
     <style>
-      #prueba-asr { max-width:1000px; margin:1rem auto; padding:0 1.2rem; }
-      #prueba-asr h2 { font-size:1.1rem; }
+      #prueba-asr { display:none; max-width:1000px; width:calc(100% - 2rem); margin:1rem auto; padding:1rem 1.25rem; background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:12px; max-height:calc(100vh - 5.5rem); overflow-y:auto; }
+      body.asr #prueba-asr { display:block; }
+      #prueba-asr .asr-modo-toggle { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0, 0, 0, 0); white-space:nowrap; border:0; }
+      #prueba-asr h2 { font-size:1.25rem; margin:0 0 .75rem; color:var(--tinta, #0f172a); }
       #prueba-asr .ajustes { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
-      #prueba-asr input { font:inherit; width:7rem; }
-      #prueba-asr .medicion { margin:1rem 0; }
+      #prueba-asr input { font:inherit; width:7rem; padding:.4rem .6rem; border:1px solid var(--linea, #cbd5e1); border-radius:4px; }
+      #prueba-asr .medicion { margin:1rem 0; display:grid; gap:.45rem; }
       #prueba-asr progress { width:100%; height:1.2rem; }
-      #prueba-asr .pista { position:relative; height:1rem; background:#dddbd5; margin:.5rem 0; }
+      #prueba-asr .pista { position:relative; height:1rem; background:var(--superficie-alt, #e2e8f0); margin:.25rem 0 .5rem; border-radius:4px; }
       #asr-nivel { width:100%; height:100%; display:block; }
-      #asr-umbral-linea { position:absolute; top:-.2rem; height:1.4rem; border-left:3px solid #1d1d1b; }
-      #asr-textos p { padding:.6rem; background:white; border:1px solid #dddbd5; }
-      #asr-textos .parcial { color:#6b6a66; font-style:italic; }
-      #asr-textos small { display:block; color:#6b6a66; }
+      #asr-umbral-linea { position:absolute; top:-.2rem; width:2px; height:1.4rem; background:var(--tinta, #0f172a); }
+      #asr-textos p { padding:.6rem .8rem; background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:8px; margin:.4rem 0; }
+      #asr-textos .parcial { color:var(--mu, #64748b); font-style:italic; }
+      #asr-textos small { display:block; color:var(--mu, #64748b); margin-top:.2rem; font-variant-numeric:tabular-nums; }
       body.asr #controles > :not(#error), body.asr main { display:none; }
       body.protegida #prueba-asr { display:none; }
     </style>
-    <label><input id="asr-modo" type="checkbox"> Probar el ASR · solo micrófono, sin detector</label>
+    <label class="asr-modo-toggle"><input id="asr-modo" type="checkbox"> Probar el ASR · solo micrófono, sin detector</label>
     <div id="asr-contenido" hidden>
       <h2>Hablá y mirá cuándo se cierra cada frase</h2>
       <div class="ajustes">

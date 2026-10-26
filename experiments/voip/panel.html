@@ -5,126 +5,1142 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Llamada en vivo · detector de vishing</title>
 <style>
-  :root { --fondo:#f6f5f2; --tinta:#1d1d1b; --mu:#6b6a66; --linea:#dddbd5; --vos:#e3eefc; --otra:#fff; --alerta:#b3261e; --ok:#2e7d32; }
+  :root {
+    --fondo: #f8fafc;
+    --superficie: #ffffff;
+    --superficie-alt: #e2e8f0;
+    --linea: #cbd5e1;
+    --tinta: #0f172a;
+    --tinta-secundaria: #334155;
+    --mu: #64748b;
+    --primary: #1d4ed8;
+    --primary-dark: #1e40af;
+    --primary-bg: #eff6ff;
+    --vos-fondo: #eff6ff;
+    --vos-borde: #93c5fd;
+    --otra-fondo: #f1f5f9;
+    --otra-borde: #cbd5e1;
+    --alerta: #b91c1c;
+    --alerta-fondo: #fef2f2;
+    --alerta-claro: #fee2e2;
+    --alerta-borde: #f87171;
+    --ok: #15803d;
+    --ok-fondo: #f0fdf4;
+    --aviso-badge-fondo: #fef9c3;
+    --aviso-badge-tinta: #854d0e;
+    --radio-sm: 4px;
+    --radio-md: 8px;
+    --radio-lg: 12px;
+    accent-color: var(--primary);
+  }
   * { box-sizing: border-box; }
-  body { margin:0; font:15px/1.45 system-ui, -apple-system, sans-serif; background:var(--fondo); color:var(--tinta); }
-  header { display:flex; gap:1rem; align-items:baseline; padding:.8rem 1.2rem; border-bottom:1px solid var(--linea); background:#fff; }
-  header h1 { font-size:1rem; margin:0; }
-  #estado { color:var(--mu); font-size:.9rem; }
-  #controles { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; padding:.8rem 1.2rem; }
-  button, select { font:inherit; padding:.4rem .6rem; }
-  #error { color:var(--alerta); }
-  body.protegida #controles { display:none; }
-  main { display:grid; grid-template-columns: 1fr 340px; gap:1rem; padding:1rem 1.2rem; max-width:1200px; margin:auto; }
-  #niveles { grid-column:1 / -1; display:flex; flex-wrap:wrap; gap:1rem; }
-  .volumen { flex:1 1 220px; display:grid; grid-template-columns:1fr auto; gap:.3rem 1rem; }
-  .volumen .rms { color:var(--mu); font-variant-numeric:tabular-nums; }
-  .volumen meter { grid-column:1 / -1; width:100%; height:1.2rem; }
-  body.protegida #niveles { display:none; }
-  #charla { display:flex; flex-direction:column; gap:.5rem; }
-  .linea { max-width:78%; padding:.5rem .75rem; border-radius:10px; border:1px solid var(--linea); background:var(--otra); }
-  .linea.protegida { align-self:flex-end; background:var(--vos); }
-  .linea.parcial { color:var(--mu); font-style:italic; border-style:dashed; }
-  .linea .quien { font-size:.75rem; color:var(--mu); display:flex; justify-content:space-between; gap:1rem; }
-  aside { display:flex; flex-direction:column; gap:1rem; }
-  .caja { background:#fff; border:1px solid var(--linea); border-radius:10px; padding:.8rem 1rem; }
-  .caja h2 { font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--mu); margin:0 0 .5rem; }
-  #barra { height:10px; background:#eee; border-radius:5px; overflow:hidden; }
-  #barra div { height:100%; width:0; background:var(--ok); transition:width .3s, background .3s; }
-  #aviso { display:none; background:var(--alerta); color:#fff; border-color:var(--alerta); }
-  #aviso.visible { display:block; }
-  #aviso b { font-size:1.15rem; }
-  dl { display:grid; grid-template-columns:auto auto; gap:.2rem .8rem; margin:0; font-size:.9rem; }
-  dd { margin:0; text-align:right; font-variant-numeric:tabular-nums; }
-  /* Vista de la persona protegida: solo el estado, grande. */
-  body.protegida main { grid-template-columns:1fr; max-width:520px; }
-  body.protegida #charla, body.protegida #metricas, body.protegida #riesgo { display:none; }
-  body.protegida #tranquilo { display:block; }
-  #tranquilo { display:none; text-align:center; font-size:1.3rem; padding:2rem 1rem; color:var(--ok); }
-  body.protegida #aviso.visible { font-size:1.3rem; padding:2rem 1.5rem; }
-  body.protegida #aviso.visible ~ #tranquilo { display:none; }
+  ::selection {
+    background: var(--vos-borde);
+    color: var(--tinta);
+  }
+  body {
+    margin: 0;
+    font: 15px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--fondo);
+    color: var(--tinta);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Cabecera compacta con foco en el aula */
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.45rem 1.25rem;
+    background: var(--superficie);
+    border-bottom: 1px solid var(--linea);
+    flex-shrink: 0;
+  }
+  .cabecera-izq {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+  }
+  header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--tinta);
+  }
+  #estado {
+    color: var(--tinta-secundaria);
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Conmutador claro de modo */
+  .modo-conmutador {
+    display: inline-flex;
+    background: var(--otra-fondo);
+    padding: 3px;
+    border-radius: var(--radio-md);
+    border: 1px solid var(--linea);
+  }
+  .modo-tab {
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--tinta-secundaria);
+    border-radius: var(--radio-sm);
+    cursor: pointer;
+  }
+  .modo-tab.activo {
+    background: var(--superficie);
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+  .modo-tab:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+
+  /* Barra de control y fuentes */
+  #controles {
+    background: var(--superficie);
+    border-bottom: 1px solid var(--linea);
+    padding: 0.4rem 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+    flex-shrink: 0;
+  }
+  .barra-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  button, select {
+    font: inherit;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radio-sm);
+    border: 1px solid var(--linea);
+    background: var(--superficie);
+    color: var(--tinta);
+  }
+  button {
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) {
+    background: var(--otra-fondo);
+  }
+  button:focus-visible, select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+  button:disabled, select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  #iniciar {
+    background: var(--primary);
+    color: var(--superficie);
+    border-color: var(--primary);
+  }
+  #iniciar:hover:not(:disabled) {
+    background: var(--primary-dark);
+  }
+  #terminar {
+    background: var(--alerta-fondo);
+    color: var(--alerta);
+    border-color: var(--alerta-borde);
+  }
+  #terminar:hover:not(:disabled) {
+    background: var(--alerta-claro);
+  }
+  #nueva {
+    background: var(--superficie);
+    color: var(--tinta);
+  }
+  .separador-barra {
+    width: 1px;
+    height: 1.4rem;
+    background: var(--linea);
+    margin: 0 0.15rem;
+  }
+  .ajuste-grupo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .ajuste-grupo label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+  }
+  #error {
+    color: var(--alerta);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 0.25rem;
+  }
+
+  /* Ajustes de micrófono y guía plegables */
+  .panel-ajustes {
+    font-size: 0.8125rem;
+  }
+  .panel-ajustes summary {
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+    cursor: pointer;
+    user-select: none;
+    padding: 0.3rem 0.55rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-sm);
+    background: var(--fondo);
+    list-style: none;
+  }
+  .panel-ajustes summary::-webkit-details-marker {
+    display: none;
+  }
+  .panel-ajustes summary::before {
+    content: "▸ ";
+  }
+  .panel-ajustes[open] summary::before {
+    content: "▾ ";
+  }
+  .panel-ajustes summary:focus-visible {
+    outline: 2px solid var(--primary);
+  }
+  .ajustes-cuerpo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 0.4rem;
+    padding: 0.45rem 0.75rem;
+    background: var(--fondo);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-sm);
+  }
+  #guia-fuentes {
+    width: 100%;
+    margin-top: 0.2rem;
+    padding: 0.4rem 0.65rem;
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-sm);
+  }
+  #guia-fuentes summary {
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+    border: none;
+    padding: 0;
+    background: transparent;
+  }
+  #guia-fuentes p {
+    margin: 0.35rem 0;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+    color: var(--tinta-secundaria);
+  }
+
+  /* Aviso en franja no modal (lugar reservado para #83) */
+  #aviso {
+    display: none;
+    background: var(--alerta-fondo);
+    border: 2px solid var(--alerta);
+    border-radius: var(--radio-md);
+    padding: 0.45rem 0.85rem;
+    margin-bottom: 0.6rem;
+    color: var(--alerta);
+    flex-shrink: 0;
+  }
+  #aviso.visible {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .aviso-icono {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--alerta);
+  }
+  .aviso-cuerpo {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.75rem;
+  }
+  .aviso-cuerpo b {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--alerta);
+  }
+  .aviso-cuerpo p {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--tinta);
+  }
+  #aviso-cita {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--tinta-secundaria);
+  }
+  #aviso-tiempo {
+    margin-left: auto;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Layout principal */
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .columna-demo {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Tarjetas de personas arriba */
+  #niveles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-bottom: 0.65rem;
+    flex-shrink: 0;
+  }
+  .tarjeta-persona {
+    background: var(--superficie);
+    border: 2px solid var(--otra-borde);
+    border-radius: var(--radio-lg);
+    padding: 0.65rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .tarjeta-persona.protegida {
+    border-color: var(--vos-borde);
+    background: var(--vos-fondo);
+  }
+  .tarjeta-persona.hablando-activo {
+    border-color: var(--ok);
+  }
+  .tarjeta-persona.otra.alerta-activa {
+    border-color: var(--alerta);
+    background: var(--alerta-fondo);
+  }
+  .tarjeta-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tarjeta-cabecera h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--tinta);
+  }
+  .tarjeta-persona.otra.alerta-activa .tarjeta-cabecera h2 {
+    color: var(--alerta);
+  }
+  .tarjeta-badges {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .estado-habla-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radio-sm);
+    background: var(--superficie-alt);
+    color: var(--tinta-secundaria);
+    border: 1px solid var(--linea);
+    white-space: nowrap;
+  }
+  .estado-habla-pill.activo {
+    background: var(--ok);
+    color: var(--superficie);
+    border-color: var(--ok);
+  }
+  .tarjeta-rol-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radio-sm);
+    background: var(--superficie-alt);
+    color: var(--tinta-secundaria);
+    white-space: nowrap;
+  }
+  .volumen-fila {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .volumen-fila span.rotulo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--tinta-secundaria);
+  }
+  .volumen-fila meter {
+    width: 100%;
+    height: 1rem;
+  }
+  .volumen-fila .rms {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+    font-variant-numeric: tabular-nums;
+    min-width: 5.2rem;
+    text-align: right;
+  }
+  .habla-ahora-caja {
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-md);
+    padding: 0.4rem 0.65rem;
+    min-height: 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tarjeta-persona.hablando-activo .habla-ahora-caja {
+    border-color: var(--ok);
+    background: var(--ok-fondo);
+  }
+  .habla-indicador {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--linea);
+    flex-shrink: 0;
+  }
+  .habla-indicador.hablando {
+    background: var(--ok);
+  }
+  .habla-texto {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--tinta);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .habla-texto.en-silencio {
+    color: var(--mu);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Conversación abajo: dos lados (otra a la izquierda, protegida a la derecha) */
+  #charla {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-lg);
+    background: var(--superficie);
+    padding: 0.75rem 0.9rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--linea) transparent;
+  }
+  #charla:empty::before {
+    content: "Iniciá la llamada para ver la transcripción en vivo de cada persona y lo que decide el detector en cada frase.";
+    color: var(--mu);
+    font-size: 0.9375rem;
+    margin: auto;
+    text-align: center;
+    max-width: 48ch;
+  }
+  .linea {
+    width: 62%;
+    max-width: 68%;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radio-md);
+    border: 1px solid var(--otra-borde);
+    background: var(--otra-fondo);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-self: flex-start;
+  }
+  .linea.protegida {
+    align-self: flex-end;
+    background: var(--vos-fondo);
+    border-color: var(--vos-borde);
+  }
+  .linea.parcial {
+    color: var(--tinta-secundaria);
+    font-style: italic;
+    border-style: dashed;
+  }
+  .linea.disparo-aviso {
+    border: 2px solid var(--alerta);
+    background: var(--alerta-fondo);
+  }
+  .linea .quien {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--tinta-secundaria);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .linea .texto {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--tinta);
+    word-break: break-word;
+  }
+  .linea .t {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--mu);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Evaluación del detector pegada a la frase */
+  .eval-adjunta {
+    margin-top: 0.15rem;
+    padding: 0.3rem 0.55rem;
+    border-radius: var(--radio-sm);
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+  }
+  .eval-adjunta.riesgo-bajo {
+    border-color: var(--ok);
+    background: var(--ok-fondo);
+  }
+  .eval-adjunta.riesgo-alto {
+    border-color: var(--alerta-borde);
+    background: var(--aviso-badge-fondo);
+  }
+  .eval-adjunta.aviso-alerta {
+    border-color: var(--alerta);
+    background: var(--superficie);
+  }
+  .eval-pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .eval-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radio-sm);
+    font-variant-numeric: tabular-nums;
+  }
+  .eval-pill.eval-riesgo {
+    background: var(--tinta);
+    color: var(--superficie);
+  }
+  .eval-adjunta.aviso-alerta .eval-pill.eval-riesgo {
+    background: var(--alerta);
+  }
+  .eval-pill.eval-alerta.si {
+    background: var(--alerta);
+    color: var(--superficie);
+  }
+  .eval-pill.eval-alerta.no {
+    background: var(--ok);
+    color: var(--superficie);
+  }
+  .eval-pill.eval-tiempo {
+    background: var(--superficie-alt);
+    color: var(--tinta);
+  }
+  .eval-pill.eval-saltadas {
+    background: var(--aviso-badge-fondo);
+    color: var(--aviso-badge-tinta);
+    border: 1px solid var(--aviso-badge-tinta);
+  }
+  .eval-motivo-txt {
+    font-size: 0.8125rem;
+    color: var(--tinta);
+    font-weight: 600;
+  }
+  .eval-aviso-banner {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--superficie);
+    background: var(--alerta);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radio-sm);
+    margin-left: auto;
+  }
+  .badge-salteada {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--aviso-badge-tinta);
+    background: var(--aviso-badge-fondo);
+    border: 1px dashed var(--aviso-badge-tinta);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radio-sm);
+    margin-top: 0.15rem;
+    align-self: flex-start;
+  }
+  .badge-post-aviso {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--mu);
+    margin-top: 0.1rem;
+  }
+
+  /* Columna lateral técnica */
+  aside {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    overflow-y: auto;
+    min-height: 0;
+  }
+  .caja {
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-lg);
+    padding: 0.7rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .caja h2 {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--tinta-secundaria);
+    margin: 0;
+  }
+  .caja h3 {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+    margin: 0.25rem 0 0.1rem;
+  }
+
+  /* Detector en uso */
+  .detector-valor {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--tinta);
+  }
+  .detector-sub {
+    font-size: 0.8125rem;
+    color: var(--mu);
+  }
+
+  /* Riesgo instantáneo y curva */
+  .riesgo-resumen {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  #barra {
+    height: 10px;
+    background: var(--superficie-alt);
+    border-radius: var(--radio-md);
+    overflow: hidden;
+  }
+  #barra div {
+    height: 100%;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(0);
+    background: var(--ok);
+  }
+  .riesgo-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .riesgo-pct {
+    font-size: 1.125rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  #motivo {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--tinta-secundaria);
+    text-align: right;
+  }
+  .grafico-caja {
+    margin-top: 0.15rem;
+    border-top: 1px solid var(--linea);
+    padding-top: 0.35rem;
+  }
+  #riesgo-grafico {
+    width: 100%;
+    height: 124px;
+    display: block;
+    background: var(--superficie);
+    border-radius: var(--radio-sm);
+  }
+
+  /* Métricas y demoras */
+  dl {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3rem 0.75rem;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  dt {
+    color: var(--tinta-secundaria);
+  }
+  dd {
+    margin: 0;
+    text-align: right;
+    font-weight: 700;
+    color: var(--tinta);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Vista de la persona protegida: solo el estado, grande */
+  #tranquilo {
+    display: none;
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 2rem 1rem;
+    color: var(--ok);
+  }
+  body.protegida {
+    background: var(--superficie);
+  }
+  body.protegida #controles,
+  body.protegida #niveles,
+  body.protegida #charla,
+  body.protegida aside,
+  body.protegida .modo-conmutador {
+    display: none !important;
+  }
+  body.protegida main {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  body.protegida #tranquilo {
+    display: block;
+    border: 2px solid var(--ok);
+    border-radius: var(--radio-lg);
+    background: var(--ok-fondo);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  body.protegida #aviso.visible {
+    font-size: 1.25rem;
+    padding: 2rem 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  body.protegida #aviso.visible .aviso-cuerpo {
+    flex-direction: column;
+    align-items: center;
+  }
+  body.protegida #aviso.visible #aviso-tiempo {
+    margin-left: 0;
+  }
+  body.protegida #aviso.visible ~ #tranquilo {
+    display: none;
+  }
+
+  /* Modo Probar el ASR */
+  body.asr #controles > :not(#error),
+  body.asr #controles:not(:has(#error:not(:empty))),
+  body.asr main {
+    display: none !important;
+  }
+  body.protegida #prueba-asr {
+    display: none !important;
+  }
+
+  /* Adaptabilidad responsiva: 1280px, 1440px, 1920px */
+  @media (max-width: 1320px) {
+    header {
+      padding: 0.4rem 1rem;
+    }
+    #controles {
+      padding: 0.25rem 1rem;
+    }
+    .barra-acciones {
+      gap: 0.35rem;
+    }
+    .barra-acciones select {
+      max-width: 210px;
+    }
+    main {
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+    }
+    #niveles {
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .tarjeta-persona {
+      padding: 0.4rem 0.65rem;
+      gap: 0.25rem;
+    }
+    .tarjeta-cabecera h2 {
+      font-size: 1.125rem;
+    }
+    .tarjeta-rol-tag {
+      display: none;
+    }
+    .tarjeta-diciendo {
+      min-height: 2.1rem;
+      padding: 0.3rem 0.55rem;
+    }
+    #charla {
+      gap: 0.35rem;
+      padding: 0.45rem 0.65rem;
+    }
+    .linea {
+      width: 78%;
+      max-width: 82%;
+      padding: 0.35rem 0.6rem;
+      gap: 0.15rem;
+    }
+  }
+  @media (min-width: 1700px) {
+    main {
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 1.25rem;
+      padding: 1rem 1.75rem;
+    }
+    header h1 {
+      font-size: 1.75rem;
+    }
+    .tarjeta-cabecera h2 {
+      font-size: 1.5rem;
+    }
+    .linea .texto {
+      font-size: 1.125rem;
+    }
+  }
 </style>
 </head>
 <body>
-<header><h1>Llamada en vivo</h1><span id="estado">conectando…</span></header>
+<header>
+  <div class="cabecera-izq">
+    <h1>Llamada en vivo</h1>
+    <span id="estado">conectando…</span>
+  </div>
+  <div class="modo-conmutador" role="tablist" aria-label="Modo de operación">
+    <button type="button" id="tab-modo-llamada" class="modo-tab activo" role="tab" aria-selected="true">Llamada en vivo</button>
+    <button type="button" id="tab-modo-asr" class="modo-tab" role="tab" aria-selected="false">Probar el ASR</button>
+  </div>
+</header>
+
 <section id="controles" aria-label="Control de la llamada">
-  <label for="protegida-fuente">Persona protegida</label>
-  <select id="protegida-fuente">
-    <option value="acompanar">Misma fuente que la otra persona</option>
-    <option value="microfono">Micrófono</option>
-  </select>
-  <label for="microfono">Entrada</label>
-  <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
-  <button id="buscar-microfonos" disabled>Buscar micrófonos</button>
-  <label for="fuente">Otra persona</label>
-  <select id="fuente">
-    <option value="SC-WA-CODE-01">Ejemplo · estafa SC-WA-CODE-01</option>
-    <option value="LG-WA-CONSULTA-01">Ejemplo · legítima LG-WA-CONSULTA-01</option>
-    <option value="cliente">Segunda notebook · cliente.py</option>
-    <option value="meet">Meet · pestaña de Chrome</option>
-    <option value="blackhole">WhatsApp / escritorio · BlackHole</option>
-  </select>
-  <button id="iniciar" disabled>Iniciar llamada</button>
-  <button id="terminar" disabled>Terminar</button>
-  <button id="nueva" disabled>Nueva llamada</button>
+  <div class="barra-acciones">
+    <button id="iniciar" disabled>Iniciar llamada</button>
+    <button id="terminar" disabled>Terminar</button>
+    <button id="nueva" disabled>Nueva llamada</button>
+    <span class="separador-barra" aria-hidden="true"></span>
+    <div class="ajuste-grupo">
+      <label for="fuente">Otra persona</label>
+      <select id="fuente">
+        <option value="SC-WA-CODE-01">Ejemplo · estafa SC-WA-CODE-01</option>
+        <option value="LG-WA-CONSULTA-01">Ejemplo · legítima LG-WA-CONSULTA-01</option>
+        <option value="cliente">Segunda notebook · cliente.py</option>
+        <option value="meet">Meet · pestaña de Chrome</option>
+        <option value="blackhole">WhatsApp / escritorio · BlackHole</option>
+      </select>
+    </div>
+    <div class="ajuste-grupo">
+      <label for="protegida-fuente">Persona protegida</label>
+      <select id="protegida-fuente">
+        <option value="acompanar">Misma fuente que la otra persona</option>
+        <option value="microfono">Micrófono</option>
+      </select>
+    </div>
+    <details id="ajustes-fuentes" class="panel-ajustes">
+      <summary>Micrófono y ayuda</summary>
+      <div class="ajustes-cuerpo">
+        <div class="ajuste-grupo">
+          <label for="microfono">Entrada</label>
+          <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
+          <button id="buscar-microfonos" disabled type="button">Buscar micrófonos</button>
+        </div>
+        <details id="guia-fuentes">
+          <summary>Cómo tomar la otra voz de Meet o WhatsApp</summary>
+          <p>Usá auriculares y un micrófono físico para Persona protegida. Para Meet, elegí su pestaña en Chrome y activá «Compartir audio de la pestaña». No compartas este panel, una ventana ni la pantalla completa.</p>
+          <p>Para WhatsApp Desktop: abrí Configuración de Audio MIDI → + → Crear dispositivo de salida múltiple; marcá tus auriculares y BlackHole 2ch. Usá los auriculares como reloj principal y activá la corrección de deriva para BlackHole. Elegilo como salida de la app de llamada (o del sistema si la app usa la predeterminada). Conservá el micrófono físico como entrada de la app. BlackHole recibe la otra voz y vos seguís escuchando por los auriculares; evitá otros sonidos del sistema.</p>
+          <p>BlackHole 2ch puede estar instalado y no aparecer como entrada hasta reiniciar coreaudiod. Hacelo vos desde Terminal (<code>sudo killall coreaudiod</code>), volvé a abrir Chrome y reintentá. La demo no reinicia servicios. Si la pestaña no trae audio o falta BlackHole, no se inicia la llamada.</p>
+        </details>
+      </div>
+    </details>
+  </div>
   <span id="error" role="alert"></span>
-  <details id="guia-fuentes"><summary>Cómo tomar la otra voz de Meet o WhatsApp</summary>
-    <p>Usá auriculares y un micrófono físico para Persona protegida. Para Meet, elegí su pestaña en Chrome y activá «Compartir audio de la pestaña». No compartas este panel, una ventana ni la pantalla completa.</p>
-    <p>Para WhatsApp Desktop: abrí Configuración de Audio MIDI → + → Crear dispositivo de salida múltiple; marcá tus auriculares y BlackHole 2ch. Usá los auriculares como reloj principal y activá la corrección de deriva para BlackHole. Elegilo como salida de la app de llamada (o del sistema si la app usa la predeterminada). Conservá el micrófono físico como entrada de la app. BlackHole recibe la otra voz y vos seguís escuchando por los auriculares; evitá otros sonidos del sistema.</p>
-    <p>BlackHole 2ch puede estar instalado y no aparecer como entrada hasta reiniciar coreaudiod. Hacelo vos desde Terminal (<code>sudo killall coreaudiod</code>), volvé a abrir Chrome y reintentá. La demo no reinicia servicios. Si la pestaña no trae audio o falta BlackHole, no se inicia la llamada.</p>
-  </details>
 </section>
+
 <main>
-  <section id="niveles" aria-label="Volumen por persona">
-    <label class="volumen" for="nivel-protegida">Persona protegida <span class="rms" id="rms-protegida" aria-hidden="true">RMS 0.000</span><meter id="nivel-protegida" min="0" max="1" value="0"></meter></label>
-    <label class="volumen" for="nivel-otra">Otra persona <span class="rms" id="rms-otra" aria-hidden="true">RMS 0.000</span><meter id="nivel-otra" min="0" max="1" value="0"></meter></label>
-  </section>
-  <section id="charla"></section>
-  <aside>
-    <div class="caja" id="aviso"><b>Posible estafa</b><p id="aviso-motivo"></p><p id="aviso-cita"></p><small id="aviso-tiempo"></small></div>
+  <div class="columna-demo">
+    <!-- Franja de aviso (mínima acá; el aviso completo es #83) -->
+    <div class="caja" id="aviso" role="alert">
+      <svg class="aviso-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+      <div class="aviso-cuerpo">
+        <b>Posible estafa</b>
+        <p id="aviso-motivo"></p>
+        <p id="aviso-cita"></p>
+        <small id="aviso-tiempo"></small>
+      </div>
+    </div>
     <div class="caja" id="tranquilo">Sin señales de estafa por ahora</div>
-    <div class="caja" id="riesgo"><h2>Riesgo (última evaluación)</h2><div id="barra"><div></div></div><p id="motivo" style="margin:.5rem 0 0;color:var(--mu)">—</p></div>
-    <div class="caja" id="metricas"><h2>Demoras</h2><dl>
-      <dt>Reloj de la llamada</dt><dd id="m-reloj">—</dd>
-      <dt>Frase cerrada tras callarse</dt><dd id="m-asr">—</dd>
-      <dt>Detector (última)</dt><dd id="m-det">—</dd>
-      <dt>Evaluaciones / salteadas</dt><dd id="m-eval">—</dd>
-      <dt>Aviso tras callarse</dt><dd id="m-aviso">—</dd>
-    </dl></div>
+
+    <!-- Arriba: dos tarjetas por persona con volumen y lo que dice ahora -->
+    <section id="niveles" aria-label="Personas en la llamada">
+      <!-- Otra persona (izquierda) -->
+      <article class="tarjeta-persona otra" id="tarjeta-otra">
+        <div class="tarjeta-cabecera">
+          <h2 id="nombre-otra">Otra persona</h2>
+          <div class="tarjeta-badges">
+            <span class="estado-habla-pill" id="estado-habla-otra">En silencio</span>
+            <span class="tarjeta-rol-tag">Canal izq</span>
+          </div>
+        </div>
+        <div class="volumen-fila">
+          <span class="rotulo" aria-hidden="true">Vol</span>
+          <meter id="nivel-otra" min="0" max="1" value="0" aria-label="Volumen otra persona"></meter>
+          <span class="rms" id="rms-otra" aria-hidden="true">RMS 0.000</span>
+        </div>
+        <div class="habla-ahora-caja">
+          <div class="habla-indicador" id="indicador-otra" aria-hidden="true"></div>
+          <div class="habla-texto en-silencio" id="habla-otra" aria-live="polite">En silencio</div>
+        </div>
+      </article>
+
+      <!-- Persona protegida (derecha) -->
+      <article class="tarjeta-persona protegida" id="tarjeta-protegida">
+        <div class="tarjeta-cabecera">
+          <h2 id="nombre-protegida">Persona protegida</h2>
+          <div class="tarjeta-badges">
+            <span class="estado-habla-pill" id="estado-habla-protegida">En silencio</span>
+            <span class="tarjeta-rol-tag">Canal der</span>
+          </div>
+        </div>
+        <div class="volumen-fila">
+          <span class="rotulo" aria-hidden="true">Vol</span>
+          <meter id="nivel-protegida" min="0" max="1" value="0" aria-label="Volumen persona protegida"></meter>
+          <span class="rms" id="rms-protegida" aria-hidden="true">RMS 0.000</span>
+        </div>
+        <div class="habla-ahora-caja">
+          <div class="habla-indicador" id="indicador-protegida" aria-hidden="true"></div>
+          <div class="habla-texto en-silencio" id="habla-protegida" aria-live="polite">En silencio</div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Abajo: conversación en dos lados con evaluación pegada a la frase -->
+    <section id="charla" aria-label="Historial de la conversación"></section>
+  </div>
+
+  <!-- Costado: detector, curva de riesgo y demoras -->
+  <aside>
+    <!-- Detector fijo en uso -->
+    <div class="caja" id="caja-detector">
+      <h2>Detector en uso</h2>
+      <div class="detector-valor" id="detector-nombre">Reglas</div>
+      <div class="detector-sub" id="detector-sub">Fijo al arrancar el servidor</div>
+    </div>
+
+    <!-- Riesgo y curva de riesgo en el tiempo -->
+    <div class="caja" id="riesgo">
+      <h2>Riesgo de estafa</h2>
+      <div class="riesgo-resumen">
+        <div id="barra"><div id="barra-progreso"></div></div>
+        <div class="riesgo-info">
+          <span class="riesgo-pct" id="riesgo-pct">0%</span>
+          <p id="motivo">—</p>
+        </div>
+      </div>
+      <div class="grafico-caja">
+        <h3>Línea de riesgo en el tiempo</h3>
+        <svg id="riesgo-grafico" viewBox="0 0 320 128" preserveAspectRatio="none" aria-label="Línea de riesgo en el tiempo">
+          <!-- Dibujado dinámicamente en JavaScript -->
+        </svg>
+      </div>
+    </div>
+
+    <!-- Demoras y métricas -->
+    <div class="caja" id="metricas">
+      <h2>Demoras</h2>
+      <dl>
+        <dt>Reloj de la llamada</dt><dd id="m-reloj">—</dd>
+        <dt>Frase cerrada tras callarse</dt><dd id="m-asr">—</dd>
+        <dt>Detector (última)</dt><dd id="m-det">—</dd>
+        <dt>Evaluaciones / salteadas</dt><dd id="m-eval">—</dd>
+        <dt>Aviso tras callarse</dt><dd id="m-aviso">—</dd>
+      </dl>
+    </div>
   </aside>
 </main>
+
 <script type="module">
 // @ts-check
 import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 import {prepararFuentes} from './fuentes.mjs';
-/** @typedef {{segmento: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
+
+/** @typedef {{segmento: number, n: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
-/** @typedef {{saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, t_a: number}} EventoDetector */
+/** @typedef {{n: number, saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, fin_eval_s: number, t_a: number|null}} EventoDetector */
+/** @typedef {{tipo: string, modelo: string|null}} DetectorInfo */
+
 const vista = new URLSearchParams(location.search).get("vista");
 if (vista === "protegida") document.body.classList.add("protegida");
+
 /** @param {string} id @returns {HTMLElement} */
 const $ = (id) => {
   const el = document.getElementById(id);
   if (!el) throw new Error(`Falta el elemento ${id}`);
   return el;
 };
+
 /** @type {Record<string, string>} */
-const NOMBRE = { protegida: "Vos", otra: "La otra persona" };
-/** @type {Record<number, HTMLDivElement>} */
-let burbujas = {};
+const NOMBRE = { protegida: "Persona protegida", otra: "Otra persona" };
+
+/** @type {Map<number, HTMLDivElement>} */
+const burbujas = new Map();
+/** @type {Map<number, {el: HTMLDivElement, n: number, rol: string, final: boolean, evaluado: boolean}>} */
+const segmentosInfo = new Map();
+/** @type {number[]} */
+const ordenFinales = [];
+/** @type {number[]} */
+const ordenSegmentos = [];
+
 let evaluaciones = 0, salteadas = 0;
 /** @type {WebSocket|null} */
 let conexion = null;
 let enLlamada = false, terminada = false, pendiente = false;
+
 const protegidaFuente = /** @type {HTMLSelectElement} */ ($("protegida-fuente"));
 const microfono = /** @type {HTMLSelectElement} */ ($("microfono"));
 const buscarMicrofonos = /** @type {HTMLButtonElement} */ ($("buscar-microfonos"));
+const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
+const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
+const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
+const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
+const barraRiesgo = /** @type {HTMLElement} */ ($("barra-progreso"));
+
+const tarjetaOtra = $("tarjeta-otra");
+const tarjetaProtegida = $("tarjeta-protegida");
+const nombreOtra = $("nombre-otra");
+const hablaOtra = $("habla-otra");
+const hablaProtegida = $("habla-protegida");
+const indOtra = $("indicador-otra");
+const indProtegida = $("indicador-protegida");
+const estadoHablaOtra = $("estado-habla-otra");
+const estadoHablaProtegida = $("estado-habla-protegida");
+
+const svgGrafico = /** @type {unknown} */ ($("riesgo-grafico"));
+const svgEl = /** @type {SVGSVGElement} */ (svgGrafico);
+
+/** @type {Record<string, boolean>} */
+const enParcial = { otra: false, protegida: false };
+
+/** @type {Array<{t: number, r: number, aviso: boolean}>} */
+let puntosRiesgo = [];
+let relojLlamada = 0;
+/** @type {number|null} */
+let tiempoAviso = null;
+
 /** @type {ReturnType<typeof prepararAudio>|null} */
 let emisor = null;
 let intento = 0, inicioPropio = false;
 /** @type {AbortController|null} */
 let capturaPendiente = null;
+
+/**
+ * Actualiza visualmente la tarjeta superior de una persona.
+ * @param {"otra"|"protegida"} rol
+ * @param {"hablando"|"cerrada"|"silencio"} estado
+ * @param {string} [texto]
+ */
+function fijarEstadoHabla(rol, estado, texto = "") {
+  const esOtra = rol === "otra";
+  const tarjeta = esOtra ? tarjetaOtra : tarjetaProtegida;
+  const cajaTexto = esOtra ? hablaOtra : hablaProtegida;
+  const indicador = esOtra ? indOtra : indProtegida;
+  const pill = esOtra ? estadoHablaOtra : estadoHablaProtegida;
+
+  if (estado === "hablando") {
+    tarjeta.classList.add("hablando-activo");
+    indicador.classList.add("hablando");
+    pill.textContent = "Hablando ahora";
+    pill.classList.add("activo");
+    cajaTexto.textContent = texto ? `«${texto}…»` : "Hablando…";
+    cajaTexto.classList.remove("en-silencio");
+  } else if (estado === "cerrada") {
+    tarjeta.classList.remove("hablando-activo");
+    indicador.classList.remove("hablando");
+    pill.textContent = "En silencio";
+    pill.classList.remove("activo");
+    cajaTexto.textContent = texto ? `Recién dijo: «${texto}»` : "En silencio";
+    cajaTexto.classList.add("en-silencio");
+  } else {
+    tarjeta.classList.remove("hablando-activo");
+    indicador.classList.remove("hablando");
+    pill.textContent = "En silencio";
+    pill.classList.remove("activo");
+    cajaTexto.textContent = "En silencio";
+    cajaTexto.classList.add("en-silencio");
+  }
+}
 
 function liberarMicrofono() {
   intento++;
@@ -164,9 +1180,11 @@ protegidaFuente.onchange = async () => {
   $("error").textContent = "";
   actualizarControles();
   if (protegidaFuente.value !== "microfono") return;
+  /** @type {HTMLDetailsElement} */ ($("ajustes-fuentes")).open = true;
   try { verificarCaptura(); await listarMicrofonos(); }
   catch (error) { $("error").textContent = mensajeErrorMicrofono(error); }
 };
+
 buscarMicrofonos.onclick = async () => {
   const token = ++intento;
   pendiente = true;
@@ -184,25 +1202,48 @@ buscarMicrofonos.onclick = async () => {
 };
 window.addEventListener("pagehide", liberarMicrofono);
 
-const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
 fuente.onchange = () => {
   if (fuente.value === "meet" || fuente.value === "blackhole") {
     protegidaFuente.value = "microfono";
     /** @type {HTMLDetailsElement} */ ($("guia-fuentes")).open = true;
+    /** @type {HTMLDetailsElement} */ ($("ajustes-fuentes")).open = true;
   }
   actualizarControles();
 };
-const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
-const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
-const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
-const barraRiesgo = /** @type {HTMLElement} */ ($("barra").firstElementChild);
 
 const pruebaASR = montarPruebaASR({
   iniciar: () => { terminada = false; void iniciarSesion(); },
-  terminar: () => terminar.click(), cambiar: actualizarControles
+  terminar: () => terminar.click(),
+  cambiar: () => { sincronizarModoVisual(); actualizarControles(); }
 });
 
-const roles = ["protegida", "otra"];
+// Conmutador visual de pestañas Llamada / Probar el ASR
+const tabLlamada = /** @type {HTMLButtonElement} */ ($("tab-modo-llamada"));
+const tabASR = /** @type {HTMLButtonElement} */ ($("tab-modo-asr"));
+const asrModoCheck = /** @type {HTMLInputElement|null} */ (document.getElementById("asr-modo"));
+
+function sincronizarModoVisual() {
+  const activa = pruebaASR.activa;
+  tabLlamada.classList.toggle("activo", !activa);
+  tabLlamada.setAttribute("aria-selected", String(!activa));
+  tabASR.classList.toggle("activo", activa);
+  tabASR.setAttribute("aria-selected", String(activa));
+}
+
+tabLlamada.onclick = () => {
+  if (asrModoCheck && asrModoCheck.checked) {
+    asrModoCheck.checked = false;
+    asrModoCheck.dispatchEvent(new Event("change"));
+  }
+};
+tabASR.onclick = () => {
+  if (asrModoCheck && !asrModoCheck.checked) {
+    asrModoCheck.checked = true;
+    asrModoCheck.dispatchEvent(new Event("change"));
+  }
+};
+
+const roles = /** @type {const} */ (["protegida", "otra"]);
 const medidores = roles.map(rol => ({
   rol, barra: /** @type {HTMLMeterElement} */ ($(`nivel-${rol}`)), valor: $(`rms-${rol}`)
 }));
@@ -218,6 +1259,10 @@ function limpiarNiveles() {
     m.barra.value = 0;
     m.valor.textContent = "RMS 0.000";
   }
+  enParcial.otra = false;
+  enParcial.protegida = false;
+  fijarEstadoHabla("otra", "silencio");
+  fijarEstadoHabla("protegida", "silencio");
 }
 
 /** @param {EventoNiveles} mensaje */
@@ -230,6 +1275,11 @@ function niveles(mensaje) {
       const rms = ultimosNiveles?.canales[m.rol]?.rms ?? 0;
       m.barra.value = rms;
       m.valor.textContent = `RMS ${rms.toFixed(3)}`;
+      const otroRol = m.rol === "otra" ? "protegida" : "otra";
+      if (rms >= 0.01 && !enParcial[m.rol]) {
+        fijarEstadoHabla(m.rol, "hablando", "");
+        if (!enParcial[otroRol]) fijarEstadoHabla(otroRol, "silencio");
+      }
     }
   });
 }
@@ -243,7 +1293,10 @@ function actualizarControles() {
   protegidaFuente.disabled = enLlamada || pendiente;
   microfono.disabled = enLlamada || pendiente || protegidaFuente.value !== "microfono";
   buscarMicrofonos.disabled = microfono.disabled;
+  tabLlamada.disabled = enLlamada || pendiente;
+  tabASR.disabled = enLlamada || pendiente;
   pruebaASR.controles(!!conectada, pendiente, enLlamada);
+  sincronizarModoVisual();
 }
 
 /** @param {object} mensaje */
@@ -300,6 +1353,7 @@ async function iniciarSesion() {
     ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config}
     : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: null, umbral_rms_silencio: null});
 }
+
 iniciar.onclick = iniciarSesion;
 terminar.onclick = () => {
   liberarMicrofono();
@@ -311,28 +1365,53 @@ nueva.onclick = () => {
   $("estado").textContent = "lista para otra llamada";
   actualizarControles();
 };
+
 /** @param {number|null} x */
 const seg = (x) => (x == null ? "—" : `${x.toFixed(2)} s`);
+
+/** @param {string} texto */
+function escapar(texto) {
+  const d = document.createElement("div");
+  d.textContent = texto;
+  return d.innerHTML;
+}
 
 /** @param {string} id */
 function reiniciar(id) {
   limpiarNiveles();
-  $("charla").innerHTML = ""; burbujas = {}; evaluaciones = 0; salteadas = 0;
-  $("aviso").classList.remove("visible"); $("motivo").textContent = "—";
-  barraRiesgo.style.width = "0";
+  $("charla").innerHTML = "";
+  burbujas.clear();
+  segmentosInfo.clear();
+  ordenFinales.length = 0;
+  ordenSegmentos.length = 0;
+  evaluaciones = 0;
+  salteadas = 0;
+  puntosRiesgo = [];
+  relojLlamada = 0;
+  tiempoAviso = null;
+  $("aviso").classList.remove("visible");
+  nombreOtra.textContent = "Otra persona";
+  tarjetaOtra.classList.remove("alerta-activa");
+  $("motivo").textContent = "—";
+  $("riesgo-pct").textContent = "0%";
+  barraRiesgo.style.transform = "scaleX(0)";
   barraRiesgo.style.background = "var(--ok)";
-  for (const id of ["aviso-motivo", "aviso-cita", "aviso-tiempo", "error"]) $(id).textContent = "";
+  for (const cid of ["aviso-motivo", "aviso-cita", "aviso-tiempo", "error"]) $(cid).textContent = "";
   for (const m of ["m-asr", "m-det", "m-eval", "m-aviso", "m-reloj"]) $(m).textContent = "—";
-  $("estado").textContent = `en llamada · ${id}`;
+  dibujarGraficoRiesgo();
+  if (id) $("estado").textContent = `en llamada · ${id}`;
 }
 
 /** @param {EventoASR} m */
 function asr(m) {
-  let b = burbujas[m.segmento];
+  relojLlamada = Math.max(relojLlamada, m.disponible_s);
+  let b = burbujas.get(m.segmento);
   if (!b) {
     b = document.createElement("div");
-    b.innerHTML = `<div class="quien"><span>${NOMBRE[m.rol] || m.rol}</span><span class="t"></span></div><div class="texto"></div>`;
-    $("charla").appendChild(b); burbujas[m.segmento] = b;
+    b.id = `seg-${m.segmento}`;
+    b.innerHTML = `<div class="quien"><span class="nombre-quien">${NOMBRE[m.rol] || m.rol}</span><span class="t"></span></div><div class="texto"></div>`;
+    $("charla").appendChild(b);
+    burbujas.set(m.segmento, b);
   }
   b.className = `linea ${m.rol} ${m.entrega}`;
   const texto = /** @type {HTMLElement} */ (b.querySelector(".texto"));
@@ -340,30 +1419,254 @@ function asr(m) {
   const retraso = m.disponible_s - m.fin_audio_s;
   const tiempo = /** @type {HTMLElement} */ (b.querySelector(".t"));
   tiempo.textContent = `${m.fin_audio_s.toFixed(1)} s · +${(retraso * 1000).toFixed(0)} ms`;
+
+  // Actualizar tarjeta de persona correspondiente (lo que está diciendo ahora)
+  const rol = m.rol === "otra" ? "otra" : "protegida";
+  const otroRol = rol === "otra" ? "protegida" : "otra";
+  if (m.entrega === "parcial") {
+    enParcial[rol] = true;
+    fijarEstadoHabla(rol, "hablando", m.texto);
+    if (!enParcial[otroRol]) fijarEstadoHabla(otroRol, "silencio");
+  } else {
+    enParcial[rol] = false;
+    fijarEstadoHabla(rol, "cerrada", m.texto);
+  }
+
+  // Guardar metadata del segmento
+  const info = segmentosInfo.get(m.segmento) || {
+    el: b, n: m.n, rol: m.rol, final: false, evaluado: false
+  };
+  info.n = m.n;
+  if (!ordenSegmentos.includes(m.segmento)) ordenSegmentos.push(m.segmento);
+  if (m.entrega === "final") {
+    info.final = true;
+    if (!ordenFinales.includes(m.segmento)) ordenFinales.push(m.segmento);
+    $("m-asr").textContent = `${((m.disponible_s - m.fin_voz_s) * 1000).toFixed(0)} ms`;
+    if (tiempoAviso !== null && !info.evaluado && !b.querySelector(".badge-post-aviso")) {
+      const nota = document.createElement("div");
+      nota.className = "badge-post-aviso";
+      nota.textContent = "Posterior al aviso (detector detenido tras el primer aviso)";
+      b.appendChild(nota);
+    }
+  }
+  segmentosInfo.set(m.segmento, info);
+
   $("m-reloj").textContent = seg(m.disponible_s);
-  if (m.entrega === "final") $("m-asr").textContent = `${((m.disponible_s - m.fin_voz_s) * 1000).toFixed(0)} ms`;
-  b.scrollIntoView({ block: "end", behavior: "smooth" });
+  b.scrollIntoView({ block: "end" });
 }
 
 /** @param {EventoDetector} m */
 function detector(m) {
-  evaluaciones += 1; salteadas += m.saltadas;
+  evaluaciones += 1;
+  salteadas += m.saltadas;
   $("m-eval").textContent = `${evaluaciones} / ${salteadas}`;
   $("m-det").textContent = m.ms_detector == null ? "—" : `${m.ms_detector.toFixed(0)} ms`;
-  if (!m.valida) { $("motivo").textContent = `fallo: ${m.error}`; return; }
+  if (!m.valida) {
+    $("motivo").textContent = `fallo: ${m.error}`;
+    adjuntarEvaluacionAFrase(m, 0, 0);
+    return;
+  }
   const r = m.riesgo ?? (m.alerta_sugerida ? 1 : 0);
-  const barra = barraRiesgo;
-  barra.style.width = `${Math.round(r * 100)}%`;
-  barra.style.background = r >= 0.5 ? "var(--alerta)" : "var(--ok)";
+  const pct = Math.round(r * 100);
+  barraRiesgo.style.transform = `scaleX(${r})`;
+  barraRiesgo.style.background = r >= 0.5 ? "var(--alerta)" : "var(--ok)";
+  $("riesgo-pct").textContent = `${pct}%`;
   $("motivo").textContent = m.motivo || (m.alerta_sugerida ? "alerta" : "sin señales");
+
   if (m.aviso) {
+    tiempoAviso = m.t_a;
     $("aviso").classList.add("visible");
     $("aviso-motivo").textContent = m.motivo;
     $("aviso-cita").textContent = m.evidencia ? `«${m.evidencia}»` : "";
-    const tras = m.fin_voz_s == null ? null : m.t_a - m.fin_voz_s;
+    const tras = m.fin_voz_s == null || m.t_a == null ? null : m.t_a - m.fin_voz_s;
     $("aviso-tiempo").textContent = `a los ${seg(m.t_a)} de la llamada`;
     $("m-aviso").textContent = seg(tras);
+    nombreOtra.textContent = "Otra persona · posible estafa";
+    tarjetaOtra.classList.add("alerta-activa");
   }
+
+  // Pegar evaluación a la frase que la disparó
+  adjuntarEvaluacionAFrase(m, r, pct);
+
+  // Registrar y redibujar curva de riesgo en el tiempo
+  const tPunto = m.fin_eval_s || m.t_a || relojLlamada;
+  puntosRiesgo.push({ t: tPunto, r, aviso: m.aviso });
+  dibujarGraficoRiesgo();
+}
+
+/**
+ * Vincula la evaluación recibida con la frase que la causó e indica salteadas.
+ * @param {EventoDetector} m
+ * @param {number} r
+ * @param {number} pct
+ */
+function adjuntarEvaluacionAFrase(m, r, pct) {
+  const lista = ordenFinales.length > 0 ? ordenFinales : ordenSegmentos;
+  let segId = null;
+  for (const s of lista) {
+    const inf = segmentosInfo.get(s);
+    if (inf && inf.n <= m.n && !inf.evaluado) {
+      segId = s;
+    }
+  }
+  if (segId === null) {
+    for (const s of ordenSegmentos) {
+      const inf = segmentosInfo.get(s);
+      if (inf && inf.n <= m.n && !inf.evaluado) {
+        segId = s;
+      }
+    }
+  }
+  if (segId === null && lista.length > 0) {
+    segId = lista[lista.length - 1];
+  }
+
+  if (segId !== null) {
+    const idx = lista.indexOf(segId);
+    if (idx > 0 && m.saltadas > 0) {
+      let restan = m.saltadas;
+      for (let i = idx - 1; i >= 0 && restan > 0; i--) {
+        const prevId = lista[i];
+        const prevInf = segmentosInfo.get(prevId);
+        if (prevInf && !prevInf.evaluado) {
+          prevInf.evaluado = true;
+          if (!prevInf.el.querySelector(".badge-salteada")) {
+            const b = document.createElement("div");
+            b.className = "badge-salteada";
+            b.textContent = "Evaluación salteada (detector ocupado · incluida en la foto siguiente)";
+            prevInf.el.appendChild(b);
+          }
+          restan--;
+        }
+      }
+    }
+
+    const infEvaluada = segmentosInfo.get(segId);
+    if (infEvaluada) {
+      infEvaluada.evaluado = true;
+      infEvaluada.el.querySelector(".badge-post-aviso")?.remove();
+      let evalEl = infEvaluada.el.querySelector(".eval-adjunta");
+      if (!evalEl) {
+        evalEl = document.createElement("div");
+        infEvaluada.el.appendChild(evalEl);
+      }
+      const msTxt = m.ms_detector != null ? `${m.ms_detector.toFixed(0)} ms` : "—";
+      const salteadasTxt = m.saltadas > 0 ? `<span class="eval-pill eval-saltadas">${m.saltadas} salteada${m.saltadas > 1 ? "s" : ""}</span>` : "";
+
+      if (!m.valida) {
+        evalEl.className = "eval-adjunta riesgo-alto";
+        evalEl.innerHTML = `
+          <div class="eval-pills">
+            <span class="eval-pill eval-alerta si">Fallo del detector</span>
+            <span class="eval-pill eval-tiempo" title="Tiempo de cómputo del detector">${msTxt}</span>
+            ${salteadasTxt}
+          </div>
+          <span class="eval-motivo-txt">${escapar(m.error || "error")}</span>
+        `;
+        infEvaluada.el.scrollIntoView({ block: "end" });
+        return;
+      }
+
+      const esAviso = m.aviso;
+      const esAlerta = m.alerta_sugerida || esAviso;
+      const claseEstado = esAviso ? "aviso-alerta" : (r >= 0.5 ? "riesgo-alto" : "riesgo-bajo");
+      evalEl.className = `eval-adjunta ${claseEstado}`;
+
+      const motivoTxt = m.motivo ? `<span class="eval-motivo-txt">${escapar(m.motivo)}</span>` : "";
+      const avisoTxt = esAviso ? `<span class="eval-aviso-banner">Aviso emitido</span>` : "";
+
+      evalEl.innerHTML = `
+        <div class="eval-pills">
+          <span class="eval-pill eval-riesgo" title="Riesgo de fraude">Riesgo ${pct}%</span>
+          <span class="eval-pill eval-alerta ${esAlerta ? 'si' : 'no'}">${esAlerta ? 'Alerta: Sí' : 'Alerta: No'}</span>
+          <span class="eval-pill eval-tiempo" title="Tiempo de cómputo del detector">${msTxt}</span>
+          ${salteadasTxt}
+        </div>
+        ${motivoTxt}
+        ${avisoTxt}
+      `;
+
+      if (esAviso) {
+        infEvaluada.el.classList.add("disparo-aviso");
+      }
+      infEvaluada.el.scrollIntoView({ block: "end" });
+    }
+  }
+}
+
+/** Dibuja la curva continua de riesgo temporal en el elemento SVG. */
+function dibujarGraficoRiesgo() {
+  const w = 320, h = 128;
+  const padL = 34, padR = 14, padT = 22, padB = 22;
+  const pw = w - padL - padR;
+  const ph = h - padT - padB;
+
+  let maxT = Math.max(25, relojLlamada + 2);
+  for (const p of puntosRiesgo) if (p.t > maxT) maxT = p.t + 2;
+
+  /** @param {number} t @returns {number} */
+  const x = (t) => padL + (Math.max(0, Math.min(t, maxT)) / maxT) * pw;
+  /** @param {number} r @returns {number} */
+  const y = (r) => padT + ph - (Math.max(0, Math.min(r, 1)) * ph);
+
+  let svg = `
+    <!-- Cuadrícula y ejes -->
+    <line x1="${padL}" y1="${y(1)}" x2="${padL + pw}" y2="${y(1)}" stroke="#e2e8f0" stroke-width="1" />
+    <line x1="${padL}" y1="${y(0.5)}" x2="${padL + pw}" y2="${y(0.5)}" stroke="#cbd5e1" stroke-dasharray="3 3" stroke-width="1" />
+    <line x1="${padL}" y1="${y(0)}" x2="${padL + pw}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
+    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
+
+    <!-- Etiquetas eje Y -->
+    <text x="${padL - 4}" y="${y(1) + 3}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">100%</text>
+    <text x="${padL - 4}" y="${y(0.5) + 3}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">50%</text>
+    <text x="${padL - 4}" y="${y(0) + 3}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">0%</text>
+
+    <!-- Etiquetas eje X -->
+    <text x="${padL}" y="${h - 6}" font-size="9" text-anchor="start" fill="#64748b" font-family="system-ui">0s</text>
+    <text x="${x(maxT / 2)}" y="${h - 6}" font-size="9" text-anchor="middle" fill="#64748b" font-family="system-ui">${(maxT / 2).toFixed(0)}s</text>
+    <text x="${padL + pw}" y="${h - 6}" font-size="9" text-anchor="end" fill="#64748b" font-family="system-ui">${maxT.toFixed(0)}s</text>
+  `;
+
+  if (puntosRiesgo.length > 0) {
+    const ordenados = [...puntosRiesgo].sort((a, b) => a.t - b.t);
+    const traza = [{ t: 0, r: 0, aviso: false }, ...ordenados];
+    const puntos = traza.map(p => `${x(p.t).toFixed(1)},${y(p.r).toFixed(1)}`).join(" ");
+
+    // Línea continua de riesgo desde el inicio de la llamada
+    svg += `<polyline points="${puntos}" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />`;
+
+    // Puntos de cada evaluación
+    for (const p of ordenados) {
+      const cx = x(p.t).toFixed(1);
+      const cy = y(p.r).toFixed(1);
+      const col = p.aviso ? "#b91c1c" : (p.r >= 0.5 ? "#f87171" : "#15803d");
+      const radio = p.aviso ? 4.5 : 3.5;
+      svg += `<circle cx="${cx}" cy="${cy}" r="${radio}" fill="${col}" stroke="#ffffff" stroke-width="1.5" />`;
+    }
+  }
+
+  // Marca vertical del momento del aviso en la banda superior (sin tapar el punto de 100%)
+  if (tiempoAviso != null) {
+    const axNum = Math.max(padL + 28, Math.min(padL + pw - 28, x(tiempoAviso)));
+    const ax = x(tiempoAviso).toFixed(1);
+    svg += `
+      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#b91c1c" stroke-width="1.75" stroke-dasharray="2 2" />
+      <rect x="${(axNum - 28).toFixed(1)}" y="2" width="56" height="14" rx="3" fill="#b91c1c" />
+      <text x="${axNum.toFixed(1)}" y="12" font-size="8.5" font-weight="bold" text-anchor="middle" fill="#ffffff" font-family="system-ui">AVISO ${tiempoAviso.toFixed(1)}s</text>
+    `;
+  }
+
+  svgEl.innerHTML = svg;
+}
+
+/** @param {DetectorInfo|undefined} detector */
+function actualizarDetectorVisual(detector) {
+  if (!detector) return;
+  const esSlm = detector.tipo === "slm";
+  $("detector-nombre").textContent = esSlm ? `SLM (${detector.modelo || "local"})` : "Reglas";
+  $("detector-sub").textContent = esSlm
+    ? "Evaluación con modelo de lenguaje local"
+    : "Heurística de códigos de verificación y urgencia";
 }
 
 function conectar() {
@@ -388,6 +1691,7 @@ function conectar() {
     pruebaASR.evento(m);
     if (m.tipo === "inicio") {
       reiniciar(m.llamada_id);
+      if (m.detector) actualizarDetectorVisual(m.detector);
       enLlamada = true; terminada = false; pendiente = false;
       if (inicioPropio) { inicioPropio = false; void emisor?.iniciar(); }
       actualizarControles();
@@ -409,6 +1713,12 @@ function conectar() {
     }
   };
 }
+
+dibujarGraficoRiesgo();
+void fetch("/detector")
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => { if (d) actualizarDetectorVisual(d); })
+  .catch(() => {});
 conectar();
 </script>
 </body>

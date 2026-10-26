@@ -112,6 +112,8 @@ class Servidor:
         self.historial = []
         self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id,
                        "modo": self.config_llamada.get("modo", "llamada"),
+                       "detector": {"tipo": self.args.detector,
+                                    "modelo": self.args.modelo if self.args.detector == "slm" else None},
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1]})
         if self.config_llamada.get("modo") != "asr":
             self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))
@@ -344,12 +346,20 @@ class Servidor:
             await ws.close(1008, "ruta desconocida")
 
 
-def servir_panel(connection, request):
-    """GET / devuelve el panel; las rutas de WebSocket siguen de largo."""
+def servir_panel(connection, request, args: argparse.Namespace | None = None):
+    """GET / devuelve el panel; /detector informa el detector activo; las rutas de WebSocket siguen de largo."""
+    ruta = urlparse(request.path).path
+    if ruta == "/detector" and args is not None:
+        cuerpo = json.dumps({"tipo": args.detector,
+                             "modelo": getattr(args, "modelo", None) if args.detector == "slm" else None},
+                            ensure_ascii=False).encode("utf-8")
+        encabezados = Headers([("Content-Type", "application/json; charset=utf-8"),
+                               ("Content-Length", str(len(cuerpo)))])
+        return Response(HTTPStatus.OK, "OK", encabezados, cuerpo)
     rutas = {"/": ("panel.html", "text/html; charset=utf-8"),
              **{f"/{nombre}": (nombre, "text/javascript; charset=utf-8") for nombre in
                 ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs", "fuentes.mjs")}}
-    archivo = rutas.get(urlparse(request.path).path)
+    archivo = rutas.get(ruta)
     if archivo is None:
         return None
     nombre, tipo = archivo
@@ -384,7 +394,8 @@ async def principal() -> None:
     servidor = Servidor(args, detector)
     servidor.preparar()
     await servidor.preparada
-    async with serve(servidor.atender, args.host, args.puerto, process_request=servir_panel,
+    async with serve(servidor.atender, args.host, args.puerto,
+                     process_request=lambda conn, req: servir_panel(conn, req, args),
                      max_size=2**20, ping_interval=None):
         print(f"Panel: http://localhost:{args.puerto}/  ·  audio: ws://<esta-ip>:{args.puerto}/audio?rol=protegida|otra")
         # Ctrl+C o kill: se cierra la llamada en curso y se guarda lo grabado.
