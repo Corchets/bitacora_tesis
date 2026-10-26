@@ -112,6 +112,31 @@ para #81; por ahora deben omitirse o ser `null` y se conserva la configuración 
 Un control inválido devuelve `{"tipo":"error","mensaje":"…"}` al panel que lo mandó.
 La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
 
+### Eventos del panel: transcripción y volumen
+
+Los mensajes de transcripción llevan `tipo: "asr"` y `entrega: "parcial" | "final"`.
+`rol` identifica a la persona y `canal` conserva la letra A/B. El JSONL sigue usando
+su contrato previo: `tipo: "parcial" | "final"` y `canal` con el rol.
+
+Durante la llamada, el servidor manda una foto de ambos niveles cada 100 ms (aproximadamente
+10 Hz; puede demorar más si el procesamiento ocupa el servidor):
+
+```json
+{"tipo":"niveles","llamada_id":"VIVO-…","t_s":1.2,"canales":{"protegida":{"rms":0.0,"fin_audio_s":1.2},"otra":{"rms":0.125,"fin_audio_s":1.2}}}
+```
+
+`rms` es el RMS del último bloque PCM16, normalizado a 0–1; `fin_audio_s` usa el reloj
+de audio de cada canal y es `null` hasta su primer bloque. `t_s` usa el reloj de la llamada.
+Si un canal deja de mandar bloques por más de 250 ms, su nivel se muestra en cero.
+Para #81, el objeto de cada rol permite agregar `silencio_acum_s`, `corte_silencio_s`
+y `umbral_rms_silencio` sin cambiar el agrupamiento ni mezclar silencio con volumen.
+Esos campos todavía no se emiten: los debe informar el motor con la configuración aplicada.
+
+Los niveles son efímeros: no van al JSONL, manifiesto ni historial de reconexión. El panel
+conserva solo la última foto y actualiza ambos medidores en un `requestAnimationFrame`.
+Al terminar, iniciar otra llamada o perder la conexión, limpia los medidores.
+La verificación de #79 está en [la evidencia de niveles](corridas/2026-10-26-niveles-79.md).
+
 Verificación real del 2026-10-26, commit `3dc9269` con árbol limpio
 ([manifiestos y salidas sin audio](corridas/2026-10-26-panel-77/README.md)),
 con Zipformer local y `--detector reglas`, sin Ollama:

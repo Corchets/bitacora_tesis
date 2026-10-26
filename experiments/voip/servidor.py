@@ -69,6 +69,7 @@ class Servidor:
         self.historial: list[dict] = []  # para el panel que se conecta en medio de la llamada
         self.novedad = asyncio.Event()
         self.tarea_detector: asyncio.Task | None = None
+        self.tarea_niveles: asyncio.Task | None = None
 
     def crear_motor(self) -> MotorSherpaZipformer:
         modelo = str(DIR_MODELO) if DIR_MODELO.exists() else MotorSherpaZipformer.MODELO_POR_DEFECTO
@@ -96,6 +97,7 @@ class Servidor:
         self.historial = []
         self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id})
         self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))
+        self.tarea_niveles = asyncio.create_task(self.emitir_niveles(llamada))
         print(f"[llamada] {llamada.llamada_id} → {llamada.dir_salida}")
         return llamada
 
@@ -111,6 +113,11 @@ class Servidor:
                 ejemplo.cancel()
                 with suppress(asyncio.CancelledError):
                     await ejemplo
+            if self.tarea_niveles:
+                self.tarea_niveles.cancel()
+                with suppress(asyncio.CancelledError):
+                    await self.tarea_niveles
+                self.tarea_niveles = None
             if self.tarea_detector:
                 self.tarea_detector.cancel()
                 with suppress(asyncio.CancelledError):
@@ -121,7 +128,7 @@ class Servidor:
             for ws in clientes:
                 await ws.close(1000, "llamada terminada")
             for act in llamada.cerrar(self.manifiesto_extra()):
-                self.difundir({"tipo": "asr", **act})
+                self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
             self.difundir({"tipo": "fin", "llamada_id": llamada.llamada_id, "dir": str(llamada.dir_salida)})
             print(f"[llamada] cerrada: {llamada.dir_salida}")
             self.preparar()
@@ -140,6 +147,12 @@ class Servidor:
             "maquina": replay.info_maquina(),
         }
 
+    async def emitir_niveles(self, llamada: Llamada) -> None:
+        while True:
+            await asyncio.sleep(0.1)
+            # Telemetría efímera: no pasa por el historial, JSONL ni manifiesto.
+            broadcast(self.paneles, json.dumps({"tipo": "niveles", **llamada.niveles()}))
+
     async def trabajar_detector(self, llamada: Llamada) -> None:
         while True:
             await self.novedad.wait()
@@ -157,7 +170,7 @@ class Servidor:
     def recibir_audio(self, rol: str, pcm: bytes, *, llegada: float | None = None) -> None:
         """Entrada común para cliente.py y el estéreo del ejemplo."""
         for act in self.llamada.recibir(rol, pcm, llegada=llegada):
-            self.difundir({"tipo": "asr", **act})
+            self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
             if self.llamada.marcar_disparo(act):
                 self.novedad.set()
 

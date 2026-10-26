@@ -44,6 +44,8 @@ class Canal:
     inicio_s: float | None = None
     muestras: int = 0
     ultima_voz_s: float | None = None  # fin del último bloque con voz (RMS sobre el umbral)
+    rms: float = 0.0
+    ultima_llegada_s: float | None = None
     bloques: list[np.ndarray] = field(default_factory=list)
     # llegada - fin del bloque en el reloj de la llamada: si crece, el canal se atrasa.
     desfases_s: list[float] = field(default_factory=list)
@@ -114,6 +116,21 @@ class Llamada:
     def reloj(self) -> float:
         return 0.0 if self.t0 is None else self._ahora() - self.t0
 
+    def niveles(self) -> dict:
+        """Foto efímera para el panel, en RMS normalizado (0–1), por rol estable."""
+        ahora = self._ahora()
+        return {
+            "llamada_id": self.llamada_id,
+            "t_s": round(self.reloj(), 3),
+            "canales": {
+                c.rol: {
+                    # Sin bloques durante 250 ms, el último nivel ya no describe el presente.
+                    "rms": round(c.rms, 6) if c.ultima_llegada_s is not None and ahora - c.ultima_llegada_s <= 0.25 else 0.0,
+                    "fin_audio_s": round(c.fin_s(), 3) if c.inicio_s is not None else None,
+                } for c in self.canales.values()
+            },
+        }
+
     def recibir(self, rol: str, pcm: bytes, *, llegada: float | None = None) -> list[dict]:
         """Procesa un bloque PCM16 de un canal. Devuelve las actualizaciones nuevas (contrato ASR)."""
         if rol not in ROLES:
@@ -133,7 +150,9 @@ class Llamada:
         fin_bloque = canal.fin_s()
         canal.desfases_s.append(llegada - self.t0 - fin_bloque)
         flotante = muestras.astype(np.float32) / ESCALA_INT16
-        if len(flotante) and float(np.sqrt(np.mean(flotante**2))) >= self.umbral_voz:
+        canal.rms = float(np.sqrt(np.mean(flotante**2))) if len(flotante) else 0.0
+        canal.ultima_llegada_s = llegada
+        if canal.rms >= self.umbral_voz:
             canal.ultima_voz_s = fin_bloque
         eventos = canal.motor.procesar_bloque(flotante, inicio_bloque, fin_bloque)
         # Zipformer a veces cierra un segmento con solo un punto: no es una línea.
