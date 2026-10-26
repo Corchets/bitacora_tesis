@@ -58,7 +58,7 @@ class Servidor:
         self.dormir = dormir
         self.control = asyncio.Lock()
         self.config_llamada: dict = {}
-        self.config_asr = (args.corte_silencio, 0.005, True)
+        self.config_asr = (0.8, 0.005, True)
         self.args = args
         self.detector = detector
         self.llamada: Llamada | None = None
@@ -101,8 +101,11 @@ class Servidor:
     async def abrir_llamada(self) -> Llamada:
         if self.preparada is None:
             self.preparar()
-        llamada = await self.preparada
-        self.preparada = None
+        try:
+            llamada = await self.preparada
+        finally:
+            # Una carga fallida no debe envenenar todos los intentos siguientes.
+            self.preparada = None
         self.novedad.clear()
         momento = datetime.now()
         llamada.abrir(f"VIVO-{momento:%Y%m%d-%H%M%S-%f}", Path(self.args.salida) / f"{momento:%Y-%m-%d_%H%M%S-%f}")
@@ -214,7 +217,7 @@ class Servidor:
                         break
                     if self.llamada is None:
                         self.config_llamada = {}
-                        await self.configurar_asr((self.args.corte_silencio, 0.005, True))
+                        await self.configurar_asr((0.8, 0.005, True))
                         self.llamada = await self.abrir_llamada()
                     self.recibir_audio(rol, mensaje)
         finally:
@@ -229,7 +232,8 @@ class Servidor:
         if config == self.config_asr:
             return
         if self.preparada is not None:
-            await self.preparada
+            with suppress(ValueError, OSError, RuntimeError):
+                await self.preparada
         self.config_asr = config
         self.preparar()
 
@@ -365,8 +369,8 @@ def parse_args() -> argparse.Namespace:
                    help="Ollama de otra máquina (p. ej. la PC con GPU) para bajar la demora del SLM")
     p.add_argument("--disparo", choices=("final", "parcial"), default="final",
                    help="final: evalúa al cerrar cada frase; parcial: también con texto provisorio (menos demora, más falsas alarmas)")
-    p.add_argument("--corte-silencio", type=float, default=0.8,
-                   help="segundos de silencio que cierran una frase (menos = aviso antes, frases más cortadas)")
+    p.add_argument("--corte-silencio", type=float, default=0.8, choices=(0.8,),
+                   help="corte fijo de la llamada; para elegir otro usá Probar el ASR")
     p.add_argument("--hilos", type=int, default=2, help="hilos del ASR por canal")
     p.add_argument("--salida", default=str(DIR_VOIP / "llamadas"))
     return p.parse_args()

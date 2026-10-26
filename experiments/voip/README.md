@@ -369,3 +369,6 @@ con cortes 0,5 y 1,2 s: no hay final antes del corte, el último bloque cierra l
 la telemetría alcanza el corte, la demora coincide y el manifiesto conserva los ajustes
 sin evaluaciones del detector. También verifican validación, rechazo de audio de `otra`
 y vuelta a 0,8 s en modo llamada. Corré los comandos de §8.
+
+La [evidencia de #81](corridas/2026-10-26-asr-81.md) registra las dos sesiones reales
+con micrófono falso, la barra completa y las regresiones encontradas en revisión.

@@ -150,6 +150,29 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(m["config"]["corte_silencio_s"], 0.8)
             self.assertTrue(m["config"]["endpoint_nativo"])
 
+    async def test_reintentar_tras_fallo_transitorio_de_precarga_con_otro_corte(self):
+        mensaje = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
+                   "corte_silencio_s": 0.5, "umbral_rms_silencio": 0.02}
+        async with connect(self.url + "/panel") as panel:
+            with patch.object(self.servidor, "crear_motor", side_effect=RuntimeError("carga transitoria")):
+                await panel.send(json.dumps(mensaje))
+                self.assertIn("carga transitoria", (await self.evento(panel, "error"))["mensaje"])
+            await panel.send(json.dumps({**mensaje, "corte_silencio_s": 1.2}))
+            inicio = await self.evento(panel, "inicio")
+            self.assertEqual(inicio["corte_silencio_s"], 1.2)
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await self.evento(panel, "fin")
+
+    async def test_cliente_directo_tambien_usa_corte_fijo(self):
+        self.servidor.args.corte_silencio = 1.2
+        async with connect(self.url + "/panel") as panel:
+            async with connect(self.url + "/audio?rol=protegida") as audio:
+                await audio.send(pcm(0.1))
+                inicio = await self.evento(panel, "inicio")
+                self.assertEqual(inicio["modo"], "llamada")
+                self.assertEqual(inicio["corte_silencio_s"], 0.8)
+            await self.evento(panel, "fin")
+
     async def test_asr_conserva_tipo_y_entrega_en_vivo_y_al_cerrar(self):
         async with connect(self.url + "/panel") as panel:
             await panel.send(self.inicio())
