@@ -112,6 +112,8 @@ class Servidor:
         self.historial = []
         self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id,
                        "modo": self.config_llamada.get("modo", "llamada"),
+                       "detector": {"tipo": self.args.detector,
+                                    "modelo": self.args.modelo if self.args.detector == "slm" else None},
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1]})
         if self.config_llamada.get("modo") != "asr":
             self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))

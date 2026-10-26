@@ -63,6 +63,20 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         return json.dumps({"tipo": "iniciar", "modo": "llamada", "fuentes": fuentes,
                            "corte_silencio_s": None, "umbral_rms_silencio": None})
 
+    async def test_inicio_informa_detector_fijo_del_servidor(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            inicio = await self.evento(panel, "inicio")
+            self.assertEqual(inicio["detector"], {"tipo": "reglas", "modelo": None})
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await self.evento(panel, "fin")
+            self.servidor.args.detector = "slm"
+            self.servidor.args.modelo = "modelo-local-de-prueba"
+            await panel.send(self.inicio())
+            inicio = await self.evento(panel, "inicio")
+            self.assertEqual(inicio["detector"], {"tipo": "slm", "modelo": "modelo-local-de-prueba"})
+            self.servidor.args.detector = "reglas"
+
     async def test_prueba_asr_dos_cortes_umbral_manifiesto_y_sin_detector(self):
         class MotorSilencio(MotorFalso):
             def inicializar(motor):
