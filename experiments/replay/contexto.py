@@ -39,7 +39,7 @@ class Actualizacion:
     fin_audio_s: float | None = None
     disponible_s: float | None = None
     proceso_ms: float | None = None
-    canal: str | None = None  # "A", "B" o None
+    canal: str | None = None  # "protegida", "otra", "A", "B" o None
 
 
 @dataclass
@@ -53,6 +53,7 @@ class ContextoLlamada:
     """
 
     llamada_id: str
+    letras_por_rol: dict[str, str] = field(default_factory=dict)
     cerrados: list[Linea] = field(default_factory=list)
     parciales: dict[int, Linea] = field(default_factory=dict)
     aviso_emitido: bool = False
@@ -78,6 +79,10 @@ class ContextoLlamada:
         """
         if act.canal in ("A", "B"):
             hablante = act.canal
+        elif act.canal in ("protegida", "otra"):
+            if act.canal not in self.letras_por_rol and any(c.isalnum() for c in act.texto):
+                self.letras_por_rol[act.canal] = "AB"[len(self.letras_por_rol)]
+            hablante = self.letras_por_rol.get(act.canal, "")
         else:
             hablante = ""
 

@@ -26,7 +26,7 @@ if str(DIR_VOIP) not in sys.path:
 
 from llamada import SAMPLE_RATE, Llamada
 from motores import MotorFalso
-from replay import cargar_actualizaciones_jsonl
+from replay import cargar_actualizaciones_jsonl, correr_replay
 
 BLOQUE = SAMPLE_RATE // 10  # 100 ms
 
@@ -101,13 +101,62 @@ class TestLlamada(unittest.TestCase):
         self.assertEqual(meta["modo"], "en_vivo")
         finales = [a for a in acts if a.tipo == "final"]
         self.assertEqual([a.texto for a in finales], ["Hola, te llamo del banco.", "¿Qué código?", "Pasame el código."])
-        self.assertEqual([a.canal for a in finales], ["A", "B", "A"])
+        self.assertEqual([a.canal for a in finales], ["otra", "protegida", "otra"])
         self.assertEqual(len({a.segmento for a in finales}), 3)
         for a in acts:
             self.assertGreaterEqual(a.disponible_s, a.fin_audio_s)
-        roles = [json.loads(l).get("rol") for l in (self.dir / "actualizaciones.jsonl").read_text().splitlines()[1:]]
-        self.assertIn("protegida", roles)
+        registros = [json.loads(l) for l in (self.dir / "actualizaciones.jsonl").read_text().splitlines()[1:]]
+        self.assertTrue(all("rol" not in a for a in registros))
         self.assertEqual([l.hablante for l in llamada.foto], ["A", "B", "A"])
+
+    def test_detector_y_replay_conservan_letras_por_primer_texto(self):
+        for primera, segunda in (("protegida", "otra"), ("otra", "protegida")):
+            with self.subTest(primera=primera):
+                eventos = {
+                    primera: [
+                        {"tiempo_audio_s": 0.5, "tipo": "parcial", "segmento": 1, "texto": "Hola"},
+                        {"tiempo_audio_s": 1.5, "tipo": "final", "segmento": 1, "texto": "Hola, ¿quién habla?"},
+                    ],
+                    segunda: [
+                        {"tiempo_audio_s": 0.2, "tipo": "final", "segmento": 1, "texto": "."},
+                        {"tiempo_audio_s": 1.0, "tipo": "final", "segmento": 2, "texto": "Del banco."},
+                    ],
+                }
+                llamada = self.armar(eventos["protegida"], eventos["otra"])
+                fotos = []
+                mensajes = []
+                for _ in range(15):
+                    self.reloj.t += 0.1
+                    for rol in (primera, segunda):
+                        for act in llamada.recibir(rol, pcm(0.1)):
+                            mensajes.append((act["canal"], act["rol"]))
+                            if llamada.marcar_disparo(act):
+                                _, foto, _ = llamada.tomar_foto()
+                                fotos.append([(l.hablante, l.texto) for l in foto])
+                llamada.cerrar()
+                esperado = [
+                    [("B", "Del banco."), ("A", "Hola")],
+                    [("B", "Del banco."), ("A", "Hola, ¿quién habla?")],
+                ]
+                self.assertEqual(fotos, esperado)
+                self.assertEqual(mensajes, [("A", primera), ("B", segunda), ("A", primera)])
+
+                class DetectorFalso:
+                    hablantes = "ab"
+
+                    def __init__(self):
+                        self.fotos = []
+
+                    def evaluar(self, lineas):
+                        self.fotos.append([(l.hablante, l.texto) for l in lineas])
+                        return RespuestaFalsa()
+
+                _, acts = cargar_actualizaciones_jsonl(self.dir / "actualizaciones.jsonl")
+                detector = DetectorFalso()
+                filas, _ = correr_replay(acts, detector)
+                self.assertEqual(detector.fotos, esperado)
+                self.assertEqual(detector.hablantes, "ab")
+                self.assertIn("A: Hola", filas[-1]["texto_disponible_resumido"])
 
     def test_canal_tardio_alineado_en_estereo(self):
         import soundfile as sf

@@ -25,8 +25,11 @@ servidor.py ── Zipformer streaming por canal ── actualizaciones.jsonl (c
 ```
 
 - **Cada persona es un canal.** El rol (`protegida` u `otra`) lo dice el cliente al conectarse; cada
-  línea del JSONL trae `rol`. La letra A/B sigue siendo «quien habló primero», como en los casos de
-  texto, para no cambiar lo que ve el detector (roles «Vos» / «La otra persona» son del frente 3).
+  línea del JSONL trae `canal: "protegida" | "otra"`, sin un campo `rol` duplicado. El detector
+  sigue viendo A/B por orden del primer texto (incluidos parciales), como en los casos de texto.
+  Replay reconstruye esa asignación por llamada y sigue aceptando los registros anteriores con A/B.
+  Los eventos ASR del panel conservan `canal: "A" | "B"` y `rol` por compatibilidad con su interfaz
+  (roles «Vos» / «La otra persona» para el detector son del frente 3).
 - **Reloj de la llamada.** Empieza con el primer bloque que llega. Cada canal se ubica según cuándo llegó
   su primer bloque y desde ahí cuenta muestras: los dos quedan alineados aunque vengan de notebooks
   distintas, y el estéreo guardado tiene el mismo reloj que el JSONL.
