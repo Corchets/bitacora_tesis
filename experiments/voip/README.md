@@ -243,3 +243,7 @@ rendimiento sobre corpus real ni para cerrar D08/D09.
 
 **Pendiente humano:** correr en la M4 con 0.8B y 4B; este ticket no da por hecha
 esa prueba ni las de voz real, Meet u otra notebook.
+
+Verificación del 2026-10-26 en M1 de 8 GB: el 0.8B dio mediana **1,312 s**, cuatro
+evaluaciones, cero salteadas y fallos, y aviso **+2,803 s** respecto del fin del pedido.
+Se conserva [esa corrida sin WAV](corridas/2026-10-26-medicion-84-m1-08b/README.md).
