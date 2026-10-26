@@ -15,8 +15,9 @@ Uso:
     python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
     Panel: http://<ip>:8765/   ·   vista de la persona protegida: http://<ip>:8765/?vista=protegida
 
-Una llamada empieza con el primer bloque de audio y termina cuando se desconectan todos
-los clientes de audio (o con Ctrl+C). Cada llamada queda en llamadas/<fecha>_<hora>/.
+Una llamada empieza desde el panel o con el primer bloque de cliente.py. Termina con
+«Terminar», al finalizar el ejemplo, al desconectar todos los clientes o con Ctrl+C.
+Cada llamada queda en llamadas/<fecha>_<hora>_<microsegundos>/.
 
 > Estado: propuesta sin discutir. No cierra D08 ni D09.
 """
@@ -28,6 +29,8 @@ import asyncio
 import json
 import signal
 import sys
+import time
+from contextlib import suppress
 from datetime import datetime
 from http import HTTPStatus
 from pathlib import Path
@@ -37,23 +40,31 @@ from websockets.asyncio.server import broadcast, serve
 from websockets.datastructures import Headers
 from websockets.http11 import Response
 
-from llamada import DIR_VOIP, ROLES, Llamada
+from llamada import DIR_VOIP, ROLES, SAMPLE_RATE, Llamada
 
 import replay  # noqa: E402  (rutas de slm-directo y replay ya agregadas por llamada.py)
 from motores import MotorSherpaZipformer
 
 DIR_MODELO = DIR_VOIP.parent / "asr-local" / "modelos" / "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
 
+EJEMPLOS = {nombre: DIR_VOIP.parent / "asr-local" / "audio" / f"{nombre}-tts-estereo.wav"
+            for nombre in ("SC-WA-CODE-01", "LG-WA-CONSULTA-01")}
+
 
 class Servidor:
-    def __init__(self, args: argparse.Namespace, detector) -> None:
+    def __init__(self, args: argparse.Namespace, detector, *, ahora=time.monotonic, dormir=asyncio.sleep) -> None:
+        self.ahora = ahora
+        self.dormir = dormir
+        self.control = asyncio.Lock()
+        self.config_llamada: dict = {}
         self.args = args
         self.detector = detector
         self.llamada: Llamada | None = None
         # La próxima llamada se prepara de antemano: cargar los dos ASR tarda ~1 s y, si se
         # hiciera con el primer bloque, atrasaría ese canal respecto del otro.
         self.preparada: asyncio.Task | None = None
-        self.clientes_audio = 0
+        self.clientes_audio: set = set()
+        self.tarea_ejemplo: asyncio.Task | None = None
         self.paneles: set = set()
         self.historial: list[dict] = []  # para el panel que se conecta en medio de la llamada
         self.novedad = asyncio.Event()
@@ -71,30 +82,49 @@ class Servidor:
 
     def preparar(self) -> None:
         self.preparada = asyncio.create_task(
-            asyncio.to_thread(Llamada, crear_motor=self.crear_motor, disparo=self.args.disparo)
+            asyncio.to_thread(Llamada, crear_motor=self.crear_motor, disparo=self.args.disparo, ahora=self.ahora)
         )
 
     async def abrir_llamada(self) -> Llamada:
+        if self.preparada is None:
+            self.preparar()
         llamada = await self.preparada
+        self.preparada = None
+        self.novedad.clear()
         momento = datetime.now()
-        llamada.abrir(f"VIVO-{momento:%Y%m%d-%H%M%S}", Path(self.args.salida) / f"{momento:%Y-%m-%d_%H%M%S}")
+        llamada.abrir(f"VIVO-{momento:%Y%m%d-%H%M%S-%f}", Path(self.args.salida) / f"{momento:%Y-%m-%d_%H%M%S-%f}")
         self.historial = []
         self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id})
         self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))
         print(f"[llamada] {llamada.llamada_id} → {llamada.dir_salida}")
         return llamada
 
-    async def cerrar_llamada(self) -> None:
-        llamada, self.llamada = self.llamada, None
-        if llamada is None:
-            return
-        if self.tarea_detector:
-            self.tarea_detector.cancel()
-        for act in llamada.cerrar(self.manifiesto_extra()):
-            self.difundir({"tipo": "asr", **act})
-        self.difundir({"tipo": "fin", "llamada_id": llamada.llamada_id, "dir": str(llamada.dir_salida)})
-        print(f"[llamada] cerrada: {llamada.dir_salida}")
-        self.preparar()
+    async def cerrar_llamada(self, *, esperada: Llamada | None = None) -> None:
+        async with self.control:
+            if esperada is not None and self.llamada is not esperada:
+                return
+            llamada, self.llamada = self.llamada, None
+            if llamada is None:
+                return
+            ejemplo, self.tarea_ejemplo = self.tarea_ejemplo, None
+            if ejemplo and ejemplo is not asyncio.current_task():
+                ejemplo.cancel()
+                with suppress(asyncio.CancelledError):
+                    await ejemplo
+            if self.tarea_detector:
+                self.tarea_detector.cancel()
+                with suppress(asyncio.CancelledError):
+                    await self.tarea_detector
+                self.tarea_detector = None
+            clientes = tuple(self.clientes_audio)
+            self.clientes_audio.clear()
+            for ws in clientes:
+                await ws.close(1000, "llamada terminada")
+            for act in llamada.cerrar(self.manifiesto_extra()):
+                self.difundir({"tipo": "asr", **act})
+            self.difundir({"tipo": "fin", "llamada_id": llamada.llamada_id, "dir": str(llamada.dir_salida)})
+            print(f"[llamada] cerrada: {llamada.dir_salida}")
+            self.preparar()
 
     def manifiesto_extra(self) -> dict:
         a = self.args
@@ -105,6 +135,7 @@ class Servidor:
                        "ollama_url": a.ollama_url if a.detector == "slm" else None,
                        "seed": a.seed if a.detector == "slm" else "no-aplica",
                        "corte_silencio_s": a.corte_silencio, "hilos_asr": a.hilos, "carga_slm": carga},
+            "inicio_panel": self.config_llamada,
             "codigo": replay.info_codigo(),
             "maquina": replay.info_maquina(),
         }
@@ -123,34 +154,118 @@ class Servidor:
             if ev.aviso:
                 print(f"[AVISO] t={ev.fin_s:.2f}s · {respuesta.motivo}")
 
+    def recibir_audio(self, rol: str, pcm: bytes, *, llegada: float | None = None) -> None:
+        """Entrada común para cliente.py y el estéreo del ejemplo."""
+        for act in self.llamada.recibir(rol, pcm, llegada=llegada):
+            self.difundir({"tipo": "asr", **act})
+            if self.llamada.marcar_disparo(act):
+                self.novedad.set()
+
     async def atender_audio(self, ws, rol: str) -> None:
         if rol not in ROLES:
             await ws.close(1008, f"rol debe ser uno de {ROLES}")
             return
-        self.clientes_audio += 1
+        # La admisión también espera la precarga: no mezclar un cliente que llegó
+        # mientras iniciar todavía esperaba los motores del ejemplo.
+        async with self.control:
+            if self.tarea_ejemplo is not None:
+                await ws.close(1008, "hay una llamada de ejemplo en curso")
+                return
+            self.clientes_audio.add(ws)
         print(f"[audio] conectado: {rol} ({ws.remote_address[0]})")
         try:
             async for mensaje in ws:
                 if not isinstance(mensaje, bytes):
                     continue
-                if self.llamada is None:
-                    self.llamada = await self.abrir_llamada()
-                for act in self.llamada.recibir(rol, mensaje):
-                    self.difundir({"tipo": "asr", **act})
-                    if self.llamada.marcar_disparo(act):
-                        self.novedad.set()
+                async with self.control:
+                    if ws not in self.clientes_audio:
+                        break
+                    if self.llamada is None:
+                        self.config_llamada = {}
+                        self.llamada = await self.abrir_llamada()
+                    self.recibir_audio(rol, mensaje)
         finally:
-            self.clientes_audio -= 1
+            pertenecia = ws in self.clientes_audio
+            llamada = self.llamada
+            self.clientes_audio.discard(ws)
             print(f"[audio] desconectado: {rol}")
-            if self.clientes_audio == 0:
-                await self.cerrar_llamada()
+            if pertenecia and not self.clientes_audio and self.tarea_ejemplo is None:
+                await self.cerrar_llamada(esperada=llamada)
+
+    async def iniciar(self, mensaje: dict) -> None:
+        """Valida el contrato de control antes de abrir archivos o arrancar audio."""
+        fuentes = mensaje.get("fuentes")
+        if mensaje.get("modo") != "llamada" or not isinstance(fuentes, dict):
+            raise ValueError("Elegí modo llamada y las fuentes de ambos canales.")
+        if set(fuentes) != set(ROLES) or any(not isinstance(f, dict) for f in fuentes.values()):
+            raise ValueError("Faltan las fuentes de protegida y otra.")
+        if any(not isinstance(f.get("tipo"), str) for f in fuentes.values()):
+            raise ValueError("El tipo de fuente debe ser ejemplo o cliente.")
+        tipos = {f.get("tipo") for f in fuentes.values()}
+        audio = None
+        if tipos == {"ejemplo"}:
+            escenario = fuentes["otra"].get("escenario")
+            if (not isinstance(escenario, str) or escenario not in EJEMPLOS or fuentes["protegida"].get("escenario") != escenario
+                    or fuentes["otra"].get("canal") != "izq" or fuentes["protegida"].get("canal") != "der"):
+                raise ValueError("Elegí un ejemplo: izquierdo otra persona, derecho protegida.")
+            import soundfile as sf
+            import numpy as np
+            audio, hz = sf.read(EJEMPLOS[escenario], dtype="float32", always_2d=True)
+            if hz != SAMPLE_RATE or audio.shape[1] != 2 or not len(audio) or not np.isfinite(audio).all():
+                raise ValueError("El ejemplo debe ser estéreo a 16 kHz y contener audio válido.")
+        elif tipos != {"cliente"}:
+            raise ValueError("Fuente no disponible: elegí ejemplo o cliente.py para ambos canales.")
+        # Campos reservados para #81: no aplicar silenciosamente una configuración distinta.
+        if any(mensaje.get(c) is not None for c in ("corte_silencio_s", "umbral_rms_silencio")):
+            raise ValueError("El corte y el umbral se configuran todavía al iniciar el servidor.")
+        async with self.control:
+            if self.llamada is not None or self.clientes_audio:
+                raise ValueError("Terminá la llamada actual antes de iniciar otra.")
+            self.config_llamada = mensaje
+            self.llamada = await self.abrir_llamada()
+            if audio is not None:
+                self.tarea_ejemplo = asyncio.create_task(self.reproducir_ejemplo(audio))
+
+    async def reproducir_ejemplo(self, audio) -> None:
+        """Entrega pares de bloques de 40 ms con una única marca de llegada."""
+        from cliente import a_pcm16
+        paso = SAMPLE_RATE * 40 // 1000
+        inicio = self.ahora()
+        try:
+            for desde in range(0, len(audio), paso):
+                hasta = min(desde + paso, len(audio))
+                await self.dormir(max(0.0, inicio + hasta / SAMPLE_RATE - self.ahora()))
+                llegada = self.ahora()
+                self.recibir_audio("otra", a_pcm16(audio[desde:hasta, 0]), llegada=llegada)
+                self.recibir_audio("protegida", a_pcm16(audio[desde:hasta, 1]), llegada=llegada)
+        except asyncio.CancelledError:
+            raise
+        except Exception as exc:
+            self.difundir({"tipo": "error", "mensaje": f"No se pudo reproducir el ejemplo: {exc}"})
+        else:
+            await self.cerrar_llamada()
+            return
+        # Un fallo de lectura/procesamiento también debe conservar lo recibido.
+        await self.cerrar_llamada()
 
     async def atender_panel(self, ws) -> None:
         self.paneles.add(ws)
         try:
             for mensaje in self.historial:
                 await ws.send(json.dumps(mensaje, ensure_ascii=False))
-            await ws.wait_closed()
+            async for texto in ws:
+                try:
+                    mensaje = json.loads(texto)
+                    if not isinstance(mensaje, dict):
+                        raise ValueError("El mensaje debe ser un objeto JSON.")
+                    if mensaje.get("tipo") == "iniciar":
+                        await self.iniciar(mensaje)
+                    elif mensaje.get("tipo") == "terminar":
+                        await self.cerrar_llamada()
+                    else:
+                        raise ValueError("Control desconocido: usá iniciar o terminar.")
+                except (ValueError, OSError, RuntimeError) as exc:
+                    await ws.send(json.dumps({"tipo": "error", "mensaje": str(exc)}, ensure_ascii=False))
         finally:
             self.paneles.discard(ws)
 

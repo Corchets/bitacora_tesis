@@ -11,6 +11,10 @@
   header { display:flex; gap:1rem; align-items:baseline; padding:.8rem 1.2rem; border-bottom:1px solid var(--linea); background:#fff; }
   header h1 { font-size:1rem; margin:0; }
   #estado { color:var(--mu); font-size:.9rem; }
+  #controles { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; padding:.8rem 1.2rem; }
+  button, select { font:inherit; padding:.4rem .6rem; }
+  #error { color:var(--alerta); }
+  body.protegida #controles { display:none; }
   main { display:grid; grid-template-columns: 1fr 340px; gap:1rem; padding:1rem 1.2rem; max-width:1200px; margin:auto; }
   #charla { display:flex; flex-direction:column; gap:.5rem; }
   .linea { max-width:78%; padding:.5rem .75rem; border-radius:10px; border:1px solid var(--linea); background:var(--otra); }
@@ -38,6 +42,18 @@
 </head>
 <body>
 <header><h1>Llamada en vivo</h1><span id="estado">conectando…</span></header>
+<section id="controles" aria-label="Control de la llamada">
+  <label for="fuente">Fuente</label>
+  <select id="fuente">
+    <option value="SC-WA-CODE-01">Ejemplo · estafa SC-WA-CODE-01</option>
+    <option value="LG-WA-CONSULTA-01">Ejemplo · legítima LG-WA-CONSULTA-01</option>
+    <option value="cliente">Segunda notebook · cliente.py</option>
+  </select>
+  <button id="iniciar" disabled>Iniciar llamada</button>
+  <button id="terminar" disabled>Terminar</button>
+  <button id="nueva" disabled>Nueva llamada</button>
+  <span id="error" role="alert"></span>
+</section>
 <main>
   <section id="charla"></section>
   <aside>
@@ -54,21 +70,79 @@
   </aside>
 </main>
 <script>
+// @ts-check
+/** @typedef {{segmento: number, rol: string, tipo: string, texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
+/** @typedef {{saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, t_a: number}} EventoDetector */
 const vista = new URLSearchParams(location.search).get("vista");
 if (vista === "protegida") document.body.classList.add("protegida");
-const $ = (id) => document.getElementById(id);
+/** @param {string} id @returns {HTMLElement} */
+const $ = (id) => {
+  const el = document.getElementById(id);
+  if (!el) throw new Error(`Falta el elemento ${id}`);
+  return el;
+};
+/** @type {Record<string, string>} */
 const NOMBRE = { protegida: "Vos", otra: "La otra persona" };
-let burbujas = {}, evaluaciones = 0, salteadas = 0;
+/** @type {Record<number, HTMLDivElement>} */
+let burbujas = {};
+let evaluaciones = 0, salteadas = 0;
+/** @type {WebSocket|null} */
+let conexion = null;
+let enLlamada = false, terminada = false, pendiente = false;
+const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
+const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
+const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
+const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
+const barraRiesgo = /** @type {HTMLElement} */ ($("barra").firstElementChild);
+
+function actualizarControles() {
+  const conectada = conexion?.readyState === WebSocket.OPEN;
+  iniciar.disabled = !conectada || enLlamada || terminada || pendiente;
+  terminar.disabled = !conectada || !enLlamada || pendiente;
+  nueva.disabled = !conectada || enLlamada || pendiente || !terminada;
+  fuente.disabled = enLlamada || pendiente;
+}
+
+/** @param {object} mensaje */
+function enviar(mensaje) {
+  if (conexion?.readyState !== WebSocket.OPEN) return;
+  $("error").textContent = "";
+  pendiente = true;
+  actualizarControles();
+  conexion.send(JSON.stringify(mensaje));
+}
+
+iniciar.onclick = () => {
+  const ejemplo = fuente.value !== "cliente";
+  const fuentes = ejemplo ? {
+    otra: {tipo: "ejemplo", escenario: fuente.value, canal: "izq"},
+    protegida: {tipo: "ejemplo", escenario: fuente.value, canal: "der"}
+  } : {otra: {tipo: "cliente"}, protegida: {tipo: "cliente"}};
+  enviar({tipo: "iniciar", modo: "llamada", fuentes,
+    corte_silencio_s: null, umbral_rms_silencio: null});
+};
+terminar.onclick = () => enviar({tipo: "terminar"});
+nueva.onclick = () => {
+  reiniciar("");
+  terminada = false;
+  $("estado").textContent = "lista para otra llamada";
+  actualizarControles();
+};
+/** @param {number|null} x */
 const seg = (x) => (x == null ? "—" : `${x.toFixed(2)} s`);
 
+/** @param {string} id */
 function reiniciar(id) {
   $("charla").innerHTML = ""; burbujas = {}; evaluaciones = 0; salteadas = 0;
   $("aviso").classList.remove("visible"); $("motivo").textContent = "—";
-  $("barra").firstElementChild.style.width = "0";
+  barraRiesgo.style.width = "0";
+  barraRiesgo.style.background = "var(--ok)";
+  for (const id of ["aviso-motivo", "aviso-cita", "aviso-tiempo", "error"]) $(id).textContent = "";
   for (const m of ["m-asr", "m-det", "m-eval", "m-aviso", "m-reloj"]) $(m).textContent = "—";
   $("estado").textContent = `en llamada · ${id}`;
 }
 
+/** @param {EventoASR} m */
 function asr(m) {
   let b = burbujas[m.segmento];
   if (!b) {
@@ -77,21 +151,24 @@ function asr(m) {
     $("charla").appendChild(b); burbujas[m.segmento] = b;
   }
   b.className = `linea ${m.rol} ${m.tipo}`;
-  b.querySelector(".texto").textContent = m.texto;
+  const texto = /** @type {HTMLElement} */ (b.querySelector(".texto"));
+  texto.textContent = m.texto;
   const retraso = m.disponible_s - m.fin_audio_s;
-  b.querySelector(".t").textContent = `${m.fin_audio_s.toFixed(1)} s · +${(retraso * 1000).toFixed(0)} ms`;
+  const tiempo = /** @type {HTMLElement} */ (b.querySelector(".t"));
+  tiempo.textContent = `${m.fin_audio_s.toFixed(1)} s · +${(retraso * 1000).toFixed(0)} ms`;
   $("m-reloj").textContent = seg(m.disponible_s);
   if (m.tipo === "final") $("m-asr").textContent = `${((m.disponible_s - m.fin_voz_s) * 1000).toFixed(0)} ms`;
   b.scrollIntoView({ block: "end", behavior: "smooth" });
 }
 
+/** @param {EventoDetector} m */
 function detector(m) {
   evaluaciones += 1; salteadas += m.saltadas;
   $("m-eval").textContent = `${evaluaciones} / ${salteadas}`;
   $("m-det").textContent = m.ms_detector == null ? "—" : `${m.ms_detector.toFixed(0)} ms`;
   if (!m.valida) { $("motivo").textContent = `fallo: ${m.error}`; return; }
   const r = m.riesgo ?? (m.alerta_sugerida ? 1 : 0);
-  const barra = $("barra").firstElementChild;
+  const barra = barraRiesgo;
   barra.style.width = `${Math.round(r * 100)}%`;
   barra.style.background = r >= 0.5 ? "var(--alerta)" : "var(--ok)";
   $("motivo").textContent = m.motivo || (m.alerta_sugerida ? "alerta" : "sin señales");
@@ -106,15 +183,36 @@ function detector(m) {
 }
 
 function conectar() {
-  const ws = new WebSocket(`ws://${location.host}/panel`);
-  ws.onopen = () => ($("estado").textContent = "esperando audio…");
-  ws.onclose = () => { $("estado").textContent = "sin conexión, reintentando…"; setTimeout(conectar, 1000); };
+  const ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/panel`);
+  conexion = ws;
+  ws.onopen = () => {
+    $("estado").textContent = "esperando audio…";
+    pendiente = false;
+    actualizarControles();
+  };
+  ws.onclose = () => {
+    $("estado").textContent = "sin conexión, reintentando…";
+    actualizarControles();
+    setTimeout(conectar, 1000);
+  };
   ws.onmessage = (e) => {
     const m = JSON.parse(e.data);
-    if (m.tipo === "inicio") reiniciar(m.llamada_id);
+    if (m.tipo === "inicio") {
+      reiniciar(m.llamada_id);
+      enLlamada = true; terminada = false; pendiente = false;
+      actualizarControles();
+    }
     else if (m.tipo === "asr") asr(m);
     else if (m.tipo === "detector") detector(m);
-    else if (m.tipo === "fin") $("estado").textContent = `llamada terminada · guardada en ${m.dir}`;
+    else if (m.tipo === "fin") {
+      $("estado").textContent = `llamada terminada · guardada en ${m.dir}`;
+      enLlamada = false; terminada = true; pendiente = false;
+      actualizarControles();
+    } else if (m.tipo === "error") {
+      $("error").textContent = m.mensaje;
+      pendiente = false;
+      actualizarControles();
+    }
   };
 }
 conectar();

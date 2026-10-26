@@ -113,11 +113,11 @@ class Llamada:
     def reloj(self) -> float:
         return 0.0 if self.t0 is None else self._ahora() - self.t0
 
-    def recibir(self, rol: str, pcm: bytes) -> list[dict]:
+    def recibir(self, rol: str, pcm: bytes, *, llegada: float | None = None) -> list[dict]:
         """Procesa un bloque PCM16 de un canal. Devuelve las actualizaciones nuevas (contrato ASR)."""
         if rol not in ROLES:
             raise ValueError(f"rol desconocido {rol!r}; opciones: {ROLES}")
-        llegada = self._ahora()
+        llegada = self._ahora() if llegada is None else llegada
         muestras = np.frombuffer(pcm, dtype=np.int16)
         dur_s = len(muestras) / SAMPLE_RATE
         if self.t0 is None:

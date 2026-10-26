@@ -42,7 +42,7 @@ servidor.py ── Zipformer streaming por canal ── actualizaciones.jsonl (c
 |---|---|---|
 | **D1. Dos notebooks** (recomendada para la demo) | Cada persona habla por WhatsApp o Meet con auriculares y corre `cliente.py` con su micrófono. | Anda: probado con el micrófono de la M1. Falta la prueba con dos personas. |
 | **D2. Una notebook** | La persona protegida corre dos clientes: su micrófono (`--rol protegida`) y lo que sale de la app de llamada vía [BlackHole](https://github.com/ExistentialAudio/BlackHole) (`--rol otra --dispositivo BlackHole`). Es lo más parecido al teléfono: un solo dispositivo con los dos canales. | Mismo código; falta instalar BlackHole y probarlo. |
-| E. Replay estéreo en tiempo real (plan B) | `cliente.py --wav` manda cada canal al ritmo real. | Anda: es lo que generó las cifras de §4. |
+| E. Replay estéreo en tiempo real (plan B) | Elegí el ejemplo en el panel y tocá «Iniciar llamada»; el servidor manda ambos canales al ritmo real. También sigue disponible `cliente.py --wav`. | Anda: misma entrada de audio y detector que los clientes. |
 | A. WebRTC propia / B. LiveKit / C. Asterisk | Ver el panel. | No empezadas: solo si D no alcanza. |
 
 D1 y D2 no cambian el servidor: solo cambia de dónde sale el audio del canal `otra`.
@@ -74,8 +74,54 @@ python cliente.py --rol protegida --wav ../asr-local/audio/SC-WA-CODE-01-tts-est
 python -m unittest discover -s tests
 ```
 
-La llamada empieza con el primer bloque de audio y termina cuando se desconectan todos los clientes
-(o con Ctrl+C en el servidor). Queda en `llamadas/<fecha>_<hora>/`, que Git ignora: son voces y
+### Ejemplo desde el panel (sin terminales de clientes)
+
+Arrancá una vez el servidor desde `experiments/voip/`:
+
+```bash
+../../.venv/bin/python servidor.py --host 127.0.0.1 --detector reglas --salida /tmp/voip-demo-llamadas
+```
+
+Abrí `http://127.0.0.1:8765/`, elegí **Ejemplo · estafa SC-WA-CODE-01** o
+**Ejemplo · legítima LG-WA-CONSULTA-01** y tocá **Iniciar llamada**. No pide micrófono ni
+captura audio del navegador. Los WAV locales deben existir en `experiments/asr-local/audio/`:
+`SC-WA-CODE-01-tts-estereo.wav` y `LG-WA-CONSULTA-01-tts-estereo.wav` (estéreo PCM a 16 kHz).
+El servidor lee izquierdo = otra persona, derecho = protegida y entrega pares de bloques
+cada 40 ms por la misma entrada que usa `/audio`, después de precargar los dos ASR.
+El estéreo **guardado** conserva su formato anterior: izquierdo = protegida, derecho = otra.
+
+**Terminar** corta la reproducción, cierra los clientes conectados y guarda lo recibido.
+El ejemplo también termina automáticamente cuando se acaba el archivo. **Nueva llamada**
+limpia conversación, aviso, riesgo y demoras; después podés elegir otro ejemplo e iniciarlo.
+Cada llamada usa una carpeta distinta, incluso si abrís dos dentro del mismo segundo.
+Para usar `cliente.py`, elegí **Segunda notebook · cliente.py** y tocá **Iniciar llamada**;
+el arranque automático con el primer bloque del cliente sigue funcionando.
+
+El control viaja por `/panel`:
+
+```json
+{"tipo":"iniciar","modo":"llamada","fuentes":{"otra":{"tipo":"ejemplo","escenario":"SC-WA-CODE-01","canal":"izq"},"protegida":{"tipo":"ejemplo","escenario":"SC-WA-CODE-01","canal":"der"}},"corte_silencio_s":null,"umbral_rms_silencio":null}
+{"tipo":"terminar"}
+```
+
+Para clientes, ambas fuentes son `{"tipo":"cliente"}`. Corte y umbral quedan reservados
+para #81; por ahora deben omitirse o ser `null` y se conserva la configuración del servidor.
+Un control inválido devuelve `{"tipo":"error","mensaje":"…"}` al panel que lo mandó.
+La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
+
+Verificación real del 2026-10-26 con Zipformer local y `--detector reglas`, sin Ollama:
+la estafa avisó a **18,460 s** (referencia `reglas-final`: 18,457 s; diferencia +0,003 s).
+Ambos canales comenzaron en 0,000 s y conservaron 22,217 s de audio.
+La legítima conserva 16,326 s, pero el detector actual de reglas produjo una **falsa alarma
+a 5,211 s** con «Me llegó por ese MS un código para activar WhatsApp y yo no lo pedí».
+Es una limitación del detector, no se oculta por escenario: el criterio «legítima sin aviso»
+se verifica con el detector de la demo: Qwen3.5 0.8B local, no con el respaldo de reglas.
+Con `--detector slm --modelo qwen3.5:0.8b-q8_0 --ollama-url http://127.0.0.1:11434`,
+la legítima **no produjo aviso**: tres evaluaciones válidas, sin fallos. Se conservó la
+misma configuración de audio y corte de silencio (0,8 s).
+
+La llamada también empieza con el primer bloque de audio y termina cuando se desconectan todos los clientes
+(o con Ctrl+C en el servidor). Queda en `llamadas/<fecha>_<hora>_<microsegundos>/`, que Git ignora: son voces y
 transcripciones del equipo; si una sirve como evidencia, se copia a `corridas/` sin el WAV.
 
 El modelo de Zipformer se baja solo la primera vez (149 MB, a `experiments/asr-local/modelos/`).
@@ -128,7 +174,12 @@ Whisper no sirve para esto: no es streaming y en la prueba de asr-local tardó m
 
 ## 6. Límites conocidos
 
-- Una sola llamada sintética: voces TTS, pausas de 1 s entre turnos, sin ruido ni solapamiento.
+- Las cifras históricas de §4 usan una sola llamada sintética: voces TTS, pausas de 1 s entre turnos, sin ruido ni solapamiento.
+- El respaldo de reglas da una falsa alarma en `LG-WA-CONSULTA-01` a 5,211 s por
+  «Me llegó por ese MS un código para activar WhatsApp y yo no lo pedí»; no distingue
+  mencionar un código de pedirlo. Con Qwen3.5 0.8B local la misma llamada no avisó.
+- La verificación de #77 ejercitó el servidor real por `/panel`; queda comprobar visualmente
+  los controles en la notebook de demo y ensayar voz real, Meet y otra notebook.
 - Sin auriculares, cada micrófono capta también la otra voz (no hay cancelación de eco).
 - El fin de la voz se estima por energía (RMS ≥ 0,005, el umbral del motor). Con ruido de fondo real
   puede no haber «silencio» y la frase se cierra por el endpoint del modelo (1,0 s).
