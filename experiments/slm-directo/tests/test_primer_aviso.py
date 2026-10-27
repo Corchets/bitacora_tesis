@@ -28,8 +28,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import comparar  # noqa: E402
 import correr  # noqa: E402
 import resumen  # noqa: E402
+import tito_real  # noqa: E402
 from casos import Linea  # noqa: E402
-from detectores import Respuesta  # noqa: E402
+from cliente_ollama import ClienteOllama  # noqa: E402
+from detectores import DetectorSLM, Respuesta, cargar_prompt  # noqa: E402
 from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion  # noqa: E402
 from test_ensayo import OllamaFalso  # noqa: E402
 
@@ -426,6 +428,291 @@ class TestPuntaAPunta(unittest.TestCase):
                 servidor.shutdown()
                 servidor.server_close()
                 tmp.cleanup()
+
+
+class TitoDoblePreparacion(tito_real.TitoReal):
+    """TitoReal sin modelos: embeddings fijos y carga de encoder simulada."""
+
+    def __init__(self, artefacto=tito_real.ARTEFACTO_POR_DEFECTO, falla=False):
+        super().__init__(artefacto)
+        self.falla = falla
+        self.vec_cero = [0.0] * len(self.coef)
+        self.vec_alto = [c * 0.5 for c in self.coef]
+
+    def _asegurar_encoder(self):
+        if self.falla:
+            raise RuntimeError("encoder caído")
+        self.encoder = object()
+        return None, self.encoder, None, True
+
+    def _embed(self, textos):
+        if self.falla:
+            raise RuntimeError("encoder caído")
+        return [self.vec_alto if t == "sospechoso" else self.vec_cero for t in textos]
+
+
+class TestPreparacionTitoReal(unittest.TestCase):
+    def test_preparar_separa_costos_y_no_cambia_puntajes(self):
+        tito = TitoDoblePreparacion()
+        p_antes, _, _ = tito.puntuar(1, "sospechoso")
+        informe = tito.preparar()
+        self.assertEqual(informe["error"], "")
+        self.assertEqual(informe["unidad"], "ms")
+        self.assertGreaterEqual(informe["encoder_ms"], 0.0)
+        self.assertGreaterEqual(informe["calentamiento_ms"], 0.0)
+        self.assertIs(tito.preparacion, informe)
+        # El calentamiento no cambia el estado: mismo texto, mismo puntaje.
+        p_despues, _, ms = tito.puntuar(1, "sospechoso")
+        self.assertEqual(p_antes, p_despues)
+        self.assertGreaterEqual(p_despues, 0.5)
+        self.assertGreaterEqual(ms, 0.0)
+
+    def test_preparar_una_vez_por_proceso_y_diferencia_cache(self):
+        original = tito_real.TitoReal
+        tito_real.TitoReal = TitoDoblePreparacion
+        try:
+            _, primero = tito_real.preparar_tito_real()
+            _, segundo = tito_real.preparar_tito_real()
+        finally:
+            tito_real.TitoReal = original
+        for informe in (primero, segundo):
+            self.assertEqual(informe["error"], "")
+            for clave in ("artefacto_ms", "encoder_ms", "calentamiento_ms"):
+                self.assertGreaterEqual(informe[clave], 0.0)
+        # El artefacto ya estaba en caché del proceso: se informa, no se mide dos veces.
+        self.assertTrue(segundo["artefacto_desde_cache"])
+
+    def test_preparar_fallo_no_levanta_y_puntuar_es_fail_open(self):
+        tito = TitoDoblePreparacion(falla=True)
+        informe = tito.preparar()
+        self.assertTrue(informe["error"])
+        self.assertIsNone(informe["calentamiento_ms"])
+        puntaje, error, ms = tito.puntuar(1, "hola")
+        self.assertIsNone(puntaje)
+        self.assertTrue(error)
+        self.assertGreaterEqual(ms, 0.0)
+
+
+class ClienteFalsoDuraciones:
+    """Chat falso con duraciones del runtime configurables."""
+
+    def __init__(self, duraciones=None):
+        self.duraciones = dict(duraciones or {})
+
+    def chat(self, modelo, mensajes, formato, opciones, pensar=None):
+        if "ok" in (formato or {}).get("properties", {}):  # calentamiento de correr.py
+            contenido = json.dumps({"ok": True})
+        else:
+            contenido = json.dumps({"riesgo": 0.1, "alerta_sugerida": False,
+                                    "motivo": "", "evidencia": ""})
+        cuerpo = {"message": {"role": "assistant", "content": contenido},
+                  "prompt_eval_count": 100, "eval_count": 10}
+        cuerpo.update(self.duraciones)
+        return cuerpo
+
+    def memoria_cargada(self, modelo):
+        return None
+
+
+class TestRuntimeSLMSeparado(unittest.TestCase):
+    DURACIONES = {"total_duration": 123456789, "load_duration": 1000,
+                  "prompt_eval_duration": 2000, "eval_duration": 3000}
+
+    def test_evaluar_registra_cada_duracion_y_su_ausencia(self):
+        d = DetectorSLM(ClienteFalsoDuraciones(self.DURACIONES), "m", cargar_prompt("tarea"))
+        r = d.evaluar(DIALOGO[:1])
+        self.assertTrue(r.valida)
+        self.assertEqual((r.runtime_ns, r.runtime_unidad), (123456789, "ns"))
+        self.assertEqual(r.runtime_load_ns, 1000)
+        self.assertEqual(r.runtime_prompt_eval_ns, 2000)
+        self.assertEqual(r.runtime_eval_ns, 3000)
+
+    def test_sin_duraciones_todo_es_ausencia_explicita(self):
+        d = DetectorSLM(ClienteFalsoDuraciones(), "m", cargar_prompt("tarea"))
+        r = d.evaluar(DIALOGO[:1])
+        self.assertTrue(r.valida)
+        self.assertIsNone(r.runtime_ns)
+        self.assertEqual(r.runtime_unidad, "")
+        self.assertIsNone(r.runtime_load_ns)
+        self.assertIsNone(r.runtime_prompt_eval_ns)
+        self.assertIsNone(r.runtime_eval_ns)
+
+    def test_calentar_no_finge_separacion(self):
+        cal = correr.calentar(ClienteFalsoDuraciones(self.DURACIONES), "m", 4096)
+        self.assertEqual(cal["carga_ms"], cal["calentamiento_ms"], "alias histórico del mismo valor")
+        self.assertEqual(cal["runtime_load_ns"], 1000, "el runtime informa la carga, no la pared")
+        self.assertEqual(cal["runtime_total_ns"], 123456789)
+        ausente = correr.calentar(ClienteFalsoDuraciones(), "m", 4096)
+        self.assertIsNone(ausente["runtime_load_ns"])
+        self.assertIsNone(ausente["runtime_total_ns"])
+
+
+def _fila_modo(config, case_id, n, *, aviso=False, valida=True, consulta="slm_valida",
+               runtime="123", ms="3.0"):
+    return {"config": config, "case_id": case_id, "linea": str(n),
+            "valida": "true" if valida else "false", "error": "" if valida else "x",
+            "riesgo": "0.9" if aviso else "0.1",
+            "alerta_sugerida": "true" if aviso else "false",
+            "aviso": "true" if aviso else "false",
+            "motivo": "m" if aviso else "", "evidencia": "", "evidencia_en_texto": "",
+            "ms": ms if valida else "", "tokens_prompt": "10", "tokens_salida": "2",
+            "crudo": "{}", "consulta": consulta if valida else "slm_fallo",
+            "tito_puntaje": "", "tito_error": "", "indicio_linea": "",
+            "indicio_texto": "", "indicio_puntaje": "",
+            "tito_ms": "", "slm_ms": ms if valida else "",
+            "runtime_ns": runtime if valida and consulta != "omitida" else "",
+            "runtime_unidad": "ns" if valida and consulta != "omitida" else ""}
+
+
+def _manifiesto_modo(config, case_id, modo="operativo-hasta-aviso"):
+    manifiesto = {"comando": "test", "inicio": "2026-10-27T00:00:00", "fin": "2026-10-27T00:01:00",
+                  "interrumpida": False,
+                  "codigo": {"commit": "abc", "cambios_sin_commit_en_la_carpeta": False},
+                  "maquina": {"sistema": "x", "nucleos_logicos": 1, "ram_total_gb": 1.0},
+                  "politica": "aviso_unico_hasta_aviso", "particion": "desarrollo",
+                  "ollama": {"url": "u", "version": "0.0", "digests": {}},
+                  "parametros_slm": {}, "prompts": {},
+                  "configs": [{"config": config, "detector": "slm", "modelo": "m",
+                               "prompt": "tarea", "hablantes": "ab"}],
+                  "casos": {case_id: "x"}, "modelos": {}}
+    if modo is not None:
+        manifiesto["modo_termino"] = modo
+    return manifiesto
+
+
+class TestModoDeTermino(unittest.TestCase):
+    CONFIG = "slm|m|tarea|ab"
+    CASO = "SC-WA-CODE-01-e01"  # T_R L4
+
+    def _analizar(self, modo, lineas_hasta, aviso_en=4):
+        filas = [_fila_modo(self.CONFIG, self.CASO, n, aviso=(n == aviso_en))
+                 for n in range(1, lineas_hasta + 1)]
+        return resumen.analizar(_manifiesto_modo(self.CONFIG, self.CASO, modo), filas)
+
+    def test_operativo_permite_fin_por_aviso_temprano(self):
+        c = self._analizar("operativo-hasta-aviso", 4)[self.CONFIG][self.CASO]
+        self.assertTrue(c["completo"])
+        self.assertEqual(c["fin"], "aviso")
+        self.assertEqual(c["aviso"], 4)
+
+    def test_diagnostico_truncado_es_interrumpido_aunque_haya_aviso(self):
+        c = self._analizar("diagnostico-completo", 4)[self.CONFIG][self.CASO]
+        self.assertFalse(c["completo"])
+        self.assertEqual(c["categoria"], "incompleto")
+        self.assertEqual(c["fin"], "interrumpido")
+
+    def test_diagnostico_completo_con_aviso_no_es_interrumpido(self):
+        import casos
+        total = len(casos.cargar_texto(self.CASO))
+        c = self._analizar("diagnostico-completo", total)[self.CONFIG][self.CASO]
+        self.assertTrue(c["completo"])
+        self.assertEqual(c["fin"], "aviso")
+
+    def test_historico_truncado_es_interrumpido_aunque_haya_aviso(self):
+        c = self._analizar(None, 4)[self.CONFIG][self.CASO]
+        self.assertEqual(c["categoria"], "incompleto")
+        self.assertEqual(c["fin"], "interrumpido")
+
+    def test_textos_por_modo_no_prometen_fin_operativo(self):
+        filas_op = [_fila_modo(self.CONFIG, self.CASO, n, aviso=(n == 4)) for n in range(1, 5)]
+        a_op = resumen.analizar(_manifiesto_modo(self.CONFIG, self.CASO, "operativo-hasta-aviso"), filas_op)
+        a_diag = resumen.analizar(_manifiesto_modo(self.CONFIG, self.CASO, "diagnostico-completo"), filas_op)
+        t_op = "\n".join(resumen.seccion_costos_hasta_aviso(
+            _manifiesto_modo(self.CONFIG, self.CASO, "operativo-hasta-aviso"), a_op))
+        t_diag = "\n".join(resumen.seccion_costos_hasta_aviso(
+            _manifiesto_modo(self.CONFIG, self.CASO, "diagnostico-completo"), a_diag))
+        t_hist = "\n".join(resumen.seccion_costos_hasta_aviso(
+            _manifiesto_modo(self.CONFIG, self.CASO, None), a_diag))
+        self.assertIn("hasta el aviso incluido", t_op)
+        self.assertNotIn("termina en su primer aviso válido", t_diag)
+        self.assertIn("por separado, la conversación completa", t_diag)
+        self.assertIn("no son una nueva medición operativa", t_hist)
+        # La sección del filtro tampoco promete fin operativo en otros modos.
+        base = {"filtro_tito": {"tito": "guion-simulado", "umbral": 0.5}}
+        f_op = "\n".join(resumen.seccion_filtro({**base, "modo_termino": "operativo-hasta-aviso"}, {}, {}))
+        f_diag = "\n".join(resumen.seccion_filtro({**base, "modo_termino": "diagnostico-completo"}, {}, {}))
+        f_hist = "\n".join(resumen.seccion_filtro(dict(base), {}, {}))
+        self.assertIn("termina en su primer aviso válido", f_op)
+        self.assertNotIn("termina en su primer aviso válido", f_diag)
+        self.assertNotIn("termina en su primer aviso válido", f_hist)
+        self.assertIn("no son una nueva medición operativa", f_hist)
+
+
+class TestCostosMismoAlcance(unittest.TestCase):
+    CONFIG = "slm|m|tarea|ab"
+    CASO = "SC-WA-CODE-01-e01"
+
+    def test_actualizaciones_cuentan_fallos_del_mismo_alcance(self):
+        filas = [_fila_modo(self.CONFIG, self.CASO, 1),
+                 _fila_modo(self.CONFIG, self.CASO, 2, valida=False),
+                 _fila_modo(self.CONFIG, self.CASO, 3),
+                 _fila_modo(self.CONFIG, self.CASO, 4, aviso=True)]
+        manifiesto = _manifiesto_modo(self.CONFIG, self.CASO, "operativo-hasta-aviso")
+        c = resumen.analizar(manifiesto, filas)[self.CONFIG][self.CASO]
+        self.assertEqual(c["n_actualizaciones"], 4)
+        self.assertEqual(c["n_fallos_hasta_aviso"], 1)
+        texto = "\n".join(resumen.seccion_costos_hasta_aviso(manifiesto, {self.CONFIG: {self.CASO: c}}))
+        self.assertIn("(1 fallo)", texto)
+
+    def test_omitidas_no_cuentan_como_runtime_ausente(self):
+        filas = [_fila_modo(self.CONFIG, self.CASO, 1, consulta="omitida", runtime=""),
+                 _fila_modo(self.CONFIG, self.CASO, 2, consulta="omitida", runtime=""),
+                 _fila_modo(self.CONFIG, self.CASO, 3, aviso=True)]
+        manifiesto = _manifiesto_modo(self.CONFIG, self.CASO, "operativo-hasta-aviso")
+        c = resumen.analizar(manifiesto, filas)[self.CONFIG][self.CASO]
+        self.assertEqual(c["runtime_omitidas"], 2)
+        self.assertEqual(c["runtime_ausente"], 0)
+        self.assertEqual(c["runtime_con_dato"], 1)
+
+
+class TestArranqueGlobalYComparar(unittest.TestCase):
+    def _corrida_operativa(self):
+        servidor = HTTPServer(("127.0.0.1", 0), OllamaFalso)
+        threading.Thread(target=servidor.serve_forever, daemon=True).start()
+        tmp = tempfile.TemporaryDirectory()
+        try:
+            with redirect_stdout(io.StringIO()):
+                rc = correr.main([
+                    "--modelos", "modelo-falso:1b",
+                    "--casos", "SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01",
+                    "--filtro-tito", "--tito-puntajes", "4=0.9",
+                    "--url", f"http://127.0.0.1:{servidor.server_port}",
+                    "--salida", tmp.name,
+                ])
+                self.assertEqual(rc, 0)
+                (carpeta,) = Path(tmp.name).iterdir()
+                manifiesto = json.loads((carpeta / "manifiesto.json").read_text(encoding="utf-8"))
+                filas = resumen.leer_corrida(carpeta)[1]
+                analisis = resumen.analizar(manifiesto, filas)
+                with redirect_stdout(io.StringIO()):
+                    comparar.main([str(carpeta)])
+                texto = (carpeta / "comparacion.md").read_text(encoding="utf-8")
+            return manifiesto, filas, analisis, texto
+        finally:
+            servidor.shutdown()
+            servidor.server_close()
+            tmp.cleanup()
+
+    def test_arranque_global_no_se_duplica_por_modelo(self):
+        manifiesto, _, _, texto = self._corrida_operativa()
+        self.assertIsNotNone(manifiesto["ollama"].get("arranque_ms"))
+        for modelo, info in manifiesto["modelos"].items():
+            self.assertNotIn("arranque_ms", info,
+                             f"el arranque global no es arranque de {modelo}")
+        self.assertIn("alcance global", texto)
+
+    def test_comparar_usa_el_mismo_alcance_en_costos_y_conteos(self):
+        manifiesto, filas, analisis, texto = self._corrida_operativa()
+        detalle = resumen.analisis_filtro(manifiesto, filas, analisis)
+        directa = "slm|modelo-falso:1b|tarea|ab"
+        filtrada = "tito-slm|modelo-falso:1b|tarea|ab"
+        for cid in ("SC-WA-CODE-01-e01", "LG-WA-CONSULTA-01-e01"):
+            self.assertAlmostEqual(detalle[filtrada][cid]["ms_total"],
+                                   detalle[filtrada][cid]["ms_hasta_aviso"])
+            linea = next(l for l in texto.splitlines() if l.startswith(f"| `{cid}`"))
+            self.assertIn(f"{analisis[directa][cid]['ms_hasta_aviso']:.0f}/"
+                          f"{detalle[filtrada][cid]['ms_hasta_aviso']:.0f}", linea)
+        self.assertIn("mismo alcance", texto)
 
 
 if __name__ == "__main__":

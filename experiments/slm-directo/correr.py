@@ -41,7 +41,7 @@ import casos
 from cliente_ollama import URL_POR_DEFECTO, ClienteOllama, ErrorOllama
 from detectores import HABLANTES, PROMPTS, DetectorReglas, DetectorSLM, Respuesta, cargar_prompt, esquema_de, huella
 from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion
-from tito_real import ARTEFACTO_POR_DEFECTO, TitoReal, cargar_artefacto
+from tito_real import ARTEFACTO_POR_DEFECTO, cargar_artefacto, preparar_tito_real
 
 RAIZ = Path(__file__).resolve().parent
 POLITICA = "aviso_unico_hasta_aviso"
@@ -79,6 +79,9 @@ COLUMNAS = [
     "slm_ms",
     "runtime_ns",
     "runtime_unidad",
+    "runtime_load_ns",
+    "runtime_prompt_eval_ns",
+    "runtime_eval_ns",
 ]
 
 
@@ -228,6 +231,13 @@ def elegir_casos(args) -> list[str]:
 
 
 def preparar_ollama(cliente: ClienteOllama, modelos: list[str]) -> dict:
+    """Verifica que Ollama responda y que los modelos estén instalados.
+
+    `arranque_ms` mide solo este chequeo global del servidor (una vez por
+    corrida): no es el arranque de ningún modelo en particular ni se duplica
+    por configuración. La carga de cada modelo se mide en `calentar`, una vez
+    por modelo.
+    """
     inicio = time.perf_counter()
     try:
         version = cliente.version()
@@ -249,6 +259,14 @@ class FalloAlCalentar(Exception):
     """El modelo no quedó listo para medir: la corrida no debe seguir con él."""
 
 
+def _runtime_ns(respuesta: dict, clave: str) -> int | None:
+    """Duración del runtime en ns; None si el runtime no la informa (ausencia explícita)."""
+    valor = respuesta.get(clave)
+    if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+        return None
+    return int(valor)
+
+
 def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int, extra: dict | None = None) -> dict:
     """Carga el modelo antes de medir y comprueba que respete el formato JSON.
 
@@ -257,9 +275,13 @@ def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int, extra: dict | No
       necesitan para responder rápido. Si el modelo rechaza el campo, se reintenta sin él.
     - El pedido de prueba no menciona JSON: si la respuesta no es el objeto del esquema,
       esta versión de Ollama está ignorando `format` y las respuestas serían inválidas.
-    - `calentamiento_ms` incluye la carga diferida del modelo (Ollama carga con el
-      primer pedido); `carga_ms` se conserva como alias y `chequeo_contrato`
-      registra que el formato JSON fue verificado antes de medir.
+    - `calentamiento_ms` es el tiempo de pared del pedido de calentamiento (incluye
+      la carga diferida del modelo: Ollama carga con el primer pedido).
+      `carga_ms` se conserva como alias histórico del mismo valor.
+    - Las duraciones que informa el runtime (`total_duration`, `load_duration`,
+      `prompt_eval_duration`, `eval_duration`, en ns) se guardan por separado en
+      `runtime_*_ns`; cuando el runtime no informa una, queda `None` (ausencia
+      explícita, no se finge una separación).
     """
     mensajes = [{"role": "user", "content": "Saludá con una sola palabra."}]
     formato = {"type": "object", "properties": {"ok": {"type": "boolean"}}, "required": ["ok"]}
@@ -294,7 +316,11 @@ def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int, extra: dict | No
     except ErrorOllama:
         memoria = None
     return {"carga_ms": carga_ms, "calentamiento_ms": carga_ms, "unidad": "ms",
-            "chequeo_contrato": "ok", "error": "", "memoria": memoria, "pensar": pensar}
+            "chequeo_contrato": "ok", "error": "", "memoria": memoria, "pensar": pensar,
+            "runtime_total_ns": _runtime_ns(r, "total_duration"),
+            "runtime_load_ns": _runtime_ns(r, "load_duration"),
+            "runtime_prompt_eval_ns": _runtime_ns(r, "prompt_eval_duration"),
+            "runtime_eval_ns": _runtime_ns(r, "eval_duration")}
 
 
 def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, aviso: bool) -> dict:
@@ -332,6 +358,9 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "slm_ms": "" if r.slm_ms is None else round(r.slm_ms, 1),
         "runtime_ns": "" if r.runtime_ns is None else r.runtime_ns,
         "runtime_unidad": r.runtime_unidad,
+        "runtime_load_ns": "" if r.runtime_load_ns is None else r.runtime_load_ns,
+        "runtime_prompt_eval_ns": "" if r.runtime_prompt_eval_ns is None else r.runtime_prompt_eval_ns,
+        "runtime_eval_ns": "" if r.runtime_eval_ns is None else r.runtime_eval_ns,
     }
 
 
@@ -439,14 +468,16 @@ def main(argv: list[str] | None = None) -> int:
             d = DetectorReglas(v)
             detectores.append(({"config": d.nombre, "detector": "reglas", "modelo": "", "prompt": "", "hablantes": ""}, d))
     tito_compartido = None
-    tito_arranque_ms: float | None = None
+    tito_preparacion: dict | None = None
     if args.filtro_tito and args.tito_real:
-        # Un solo Tito real para toda la corrida: cargarlo no reentrena por
-        # conversación, instancia ni SLM (#70). El encoder carga vago en el
-        # primer puntaje; esa parte queda en el tito_ms de esa actualización.
-        inicio_tito = time.perf_counter()
-        tito_compartido = TitoReal(args.tito_modelo)
-        tito_arranque_ms = round((time.perf_counter() - inicio_tito) * 1000)
+        # Un solo Tito real para toda la corrida: la preparación (artefacto +
+        # encoder + calentamiento) corre una vez por proceso (#97) y no se
+        # cuenta en ninguna actualización; cargarlo no reentrena por
+        # conversación, instancia ni SLM (#70).
+        tito_compartido, tito_preparacion = preparar_tito_real(args.tito_modelo)
+        if tito_preparacion.get("error"):
+            print(f"Aviso: Tito real no quedó preparado ({tito_preparacion['error']}); "
+                  "cada actualización derivará por fail-open con su causa.")
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
@@ -478,10 +509,15 @@ def main(argv: list[str] | None = None) -> int:
                 "modelo": str(args.tito_modelo),
                 "artefacto_sha256": sha_archivo(args.tito_modelo),
                 "encoder": cargar_artefacto(args.tito_modelo)["encoder"],
-                "arranque_ms": tito_arranque_ms,
-                "calentamiento_ms": None,
+                "arranque_ms": (tito_preparacion or {}).get("artefacto_ms"),
+                "artefacto_desde_cache": (tito_preparacion or {}).get("artefacto_desde_cache"),
+                "encoder_ms": (tito_preparacion or {}).get("encoder_ms"),
+                "encoder_desde_cache": (tito_preparacion or {}).get("encoder_desde_cache"),
+                "calentamiento_ms": (tito_preparacion or {}).get("calentamiento_ms"),
+                "preparacion_error": (tito_preparacion or {}).get("error", ""),
                 "unidad": "ms",
-                "nota": "sin chequeo previo; el encoder carga vago en el primer puntaje",
+                "nota": ("preparación explícita una vez por proceso (artefacto + encoder + "
+                         "calentamiento), fuera de las actualizaciones y sin doble conteo"),
             }
             if args.tito_real
             else {

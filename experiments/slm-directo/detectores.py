@@ -73,6 +73,10 @@ class Respuesta:
     doble conteo). `runtime_ns` es la duración total que informa el runtime
     (Ollama `total_duration`, en nanosegundos); `runtime_unidad` es `"ns"`
     cuando hay dato y `""` cuando no (ausencia explícita).
+    `runtime_load_ns`, `runtime_prompt_eval_ns` y `runtime_eval_ns` son las
+    demás duraciones que expone el runtime (`load_duration`,
+    `prompt_eval_duration`, `eval_duration`, en nanosegundos); cada una es
+    `None` cuando el runtime no la informa (ausencia explícita, no cero).
     """
 
     valida: bool
@@ -96,6 +100,9 @@ class Respuesta:
     slm_ms: float | None = None
     runtime_ns: int | None = None
     runtime_unidad: str = ""
+    runtime_load_ns: int | None = None
+    runtime_prompt_eval_ns: int | None = None
+    runtime_eval_ns: int | None = None
 
 
 def cargar_prompt(variante: str) -> str:
@@ -234,13 +241,21 @@ class DetectorSLM:
         ms = (time.perf_counter() - inicio) * 1000
         crudo = r.get("message", {}).get("content", "")
         tokens_prompt, tokens_salida = r.get("prompt_eval_count"), r.get("eval_count")
-        total_ns = r.get("total_duration")
-        if isinstance(total_ns, bool) or not isinstance(total_ns, (int, float)):
-            total_ns, unidad = None, ""
-        else:
-            total_ns, unidad = int(total_ns), "ns"
+
+        def _duracion_ns(clave: str) -> int | None:
+            """Duración del runtime en ns; None si el runtime no la informa."""
+            valor = r.get(clave)
+            if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+                return None
+            return int(valor)
+
+        total_ns = _duracion_ns("total_duration")
+        unidad = "ns" if total_ns is not None else ""
         comun = dict(crudo=crudo, ms=ms, slm_ms=ms, tokens_prompt=tokens_prompt,
-                     tokens_salida=tokens_salida, runtime_ns=total_ns, runtime_unidad=unidad)
+                     tokens_salida=tokens_salida, runtime_ns=total_ns, runtime_unidad=unidad,
+                     runtime_load_ns=_duracion_ns("load_duration"),
+                     runtime_prompt_eval_ns=_duracion_ns("prompt_eval_duration"),
+                     runtime_eval_ns=_duracion_ns("eval_duration"))
         if r.get("done_reason") == "length":
             return Respuesta(valida=False, error="salida_cortada", **comun)
         salida, error = validar_salida(crudo)

@@ -253,7 +253,7 @@ class TestPuntaAPuntaConOllamaFalso(unittest.TestCase):
         self.assertEqual(manifiesto["filtro_tito"]["umbral"], 0.5)
         self.assertIn("## Filtro Tito→SLM", texto)
         self.assertIn("Nunca derivados", texto)
-        self.assertIn("Consultas al SLM: 0; evitadas por el filtro: 9", texto)
+        self.assertIn("Consultas al SLM hasta el aviso: 0; evitadas por el filtro: 9", texto)
 
     def test_fallo_tecnico_de_tito_deriva_y_se_informa(self):
         # Tito caído en L1/L2: deriva por fallo, sin puntaje ni sospecha, y el
@@ -264,7 +264,7 @@ class TestPuntaAPuntaConOllamaFalso(unittest.TestCase):
         self.assertIn("Fallos técnicos de Tito:", texto)
         # El SLM igual fue consultado (activación por fallo), no omitido. El
         # vishing avisa en L4 y termina ahí: 4 + 4 consultas, ninguna evitada.
-        self.assertIn("Consultas al SLM: 8; evitadas por el filtro: 0", texto)
+        self.assertIn("Consultas al SLM hasta el aviso: 8; evitadas por el filtro: 0", texto)
 
     def test_con_derivacion_hay_primera_derivacion_primer_aviso_y_costo(self):
         _, analisis, texto = self._correr("4=0.9")

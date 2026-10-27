@@ -63,42 +63,49 @@ def armar_comparacion(carpeta: Path) -> str:
                 por_caso.setdefault(r["case_id"], []).append(r)
         filas_cfg[cfg] = por_caso
 
-    def toks(fs):
-        return sum((int(r["tokens_prompt"]) if r["tokens_prompt"] else 0)
-                   + (int(r["tokens_salida"]) if r["tokens_salida"] else 0) for r in fs)
-
     L = [f"# Comparación {directo.split('|')[1]}: directo vs Tito→SLM", ""]
     L.append(f"Corrida `{carpeta.name}` · Tito {titoreal} (`{f.get('tito', '?')}`, umbral {f.get('umbral', '?')}).")
     L.append("Mismas predicciones en ambas lecturas de marcas; la referencia original no cambia.")
+    L.append("Todos los costos y conteos de esta tabla usan el mismo alcance: el prefijo "
+             "hasta el aviso incluido (o el caso completo si nunca avisó).")
     L.append("")
     L.append("## Por conversación")
     L.append("")
-    L.append("| Caso | Clase | Deriv. | Aviso directo | Aviso filtrado | Cons. D/F | Evit. | Tokens D/F | Costo ms D/F |")
+    L.append("| Caso | Clase | Deriv. | Aviso directo | Aviso filtrado | Cons. D/F | Evit. | Tokens D/F | Costo ms hasta aviso D/F |")
     L.append("|---|---|---|---|---|---|---|---|---|")
     for cid in sorted(refs):
         a_d, a_f = analisis[directo][cid], analisis[filtrado][cid]
         d = detalle[cid]
-        fd, ff = filas_cfg[directo][cid], filas_cfg[filtrado][cid]
-        ms_d = sum(float(r["ms"]) for r in fd if r["ms"])
         L.append(f"| `{cid}` | {refs[cid]['clase']} | {d['derivacion'] or 'nunca'} | "
                  f"{('L' + str(a_d['aviso'])) if a_d['aviso'] else '—'} | "
                  f"{('L' + str(a_f['aviso'])) if a_f['aviso'] else '—'} | "
-                 f"{len(fd)}/{d['consultas']} | {d['evitadas']} | {toks(fd)}/{toks(ff)} | "
-                 f"{ms_d:.0f}/{d['ms_total']:.0f} |")
+                 f"{a_d.get('n_actualizaciones', len(filas_cfg[directo][cid]))}/{d['consultas']} | "
+                 f"{d['evitadas']} | {a_d['tokens_hasta_aviso']:.0f}/{d['tokens_slm']:.0f} | "
+                 f"{a_d['ms_hasta_aviso']:.0f}/{d['ms_hasta_aviso']:.0f} |")
     L.append("")
-    tot_d = sum(toks(v) for v in filas_cfg[directo].values())
-    tot_f = sum(toks(v) for v in filas_cfg[filtrado].values())
-    L.append(f"Tokens totales (prompt+salida): directo {tot_d}, filtrado {tot_f}. "
+    tot_d = sum(analisis[directo][cid]["tokens_hasta_aviso"] for cid in sorted(refs))
+    tot_f = sum(detalle[cid]["tokens_slm"] for cid in sorted(refs))
+    L.append(f"Tokens hasta el aviso (prompt+salida): directo {tot_d:.0f}, filtrado {tot_f:.0f}. "
              "Carga, calentamiento y ajuste van por separado abajo.")
     L.append("")
     modo = manifiesto.get("modo_termino", "no informado (corrida histórica, conversación completa)")
+    historico = "modo_termino" not in manifiesto
     ms_d = sum(analisis[directo][cid]["ms_hasta_aviso"] for cid in sorted(refs))
     ms_f = sum(detalle[cid]["ms_hasta_aviso"] for cid in sorted(refs))
     tito_f = sum(detalle[cid]["tito_ms_total"] for cid in sorted(refs))
     slm_f = sum(detalle[cid]["slm_ms_total"] for cid in sorted(refs))
     hay_split = any((f.get("tito_ms") or "") != "" or (f.get("slm_ms") or "") != "" for f in filas)
-    L.append(f"Modo de término: `{modo}`: cada llamada termina en su primer aviso válido; "
-             "los costos de esta tabla son hasta el aviso (o la conversación completa si nunca avisó).")
+    if historico:
+        L.append(f"Modo de término: `{modo}`: corrida histórica de conversación completa; "
+                 "estos costos cubren todas las líneas y no son una nueva medición "
+                 "operativa hasta el aviso.")
+    elif modo == "diagnostico-completo":
+        L.append(f"Modo de término: `{modo}`: la llamada recorre la conversación completa "
+                 "tras el aviso; los costos de esta tabla son el prefijo hasta el aviso "
+                 "(o la conversación completa si nunca avisó), separados del costo completo.")
+    else:
+        L.append(f"Modo de término: `{modo}`: cada llamada termina en su primer aviso válido; "
+                 "los costos de esta tabla son hasta el aviso (o la conversación completa si nunca avisó).")
     if hay_split:
         L.append(f"Costo hasta el aviso: directo {ms_d:.0f} ms; filtrado {ms_f:.0f} ms "
                  f"(Tito {tito_f:.0f} + SLM {slm_f:.0f}, sin doble conteo).")
@@ -155,6 +162,10 @@ def armar_comparacion(carpeta: Path) -> str:
              f"(cambios sin commit en la carpeta: {manifiesto.get('codigo', {}).get('cambios_sin_commit_en_la_carpeta')})")
     ol = manifiesto.get("ollama", {})
     L.append(f"- Ollama {ol.get('version', '?')} en {ol.get('url', '?')}, digests: {ol.get('digests', {})}")
+    if ol.get("arranque_ms") is not None:
+        L.append(f"- Arranque del servidor Ollama: {ol['arranque_ms']} ms (alcance global: "
+                 "chequeo de versión e inventario, no es el arranque de ningún modelo "
+                 "ni se duplica por configuración).")
     L.append(f"- Chequeo previo de contrato JSON: `chequeo-contrato.json` en esta carpeta "
              "(digest verificado, `think: false`, esquema, `num_ctx` 4096 aceptados; "
              "una incompatibilidad o exceso de contexto deja error explícito, sin sustitución).")
@@ -177,11 +188,18 @@ def armar_comparacion(carpeta: Path) -> str:
         if info.get("error"):
             L.append(f"- `{modelo}`: ERROR al calentar: {info['error']}")
         else:
-            arranque = info.get("arranque_ms", "no informado")
             cal = info.get("calentamiento_ms", info.get("carga_ms"))
-            L.append(f"- `{modelo}`: arranque {arranque} ms, calentamiento {cal} ms "
-                     f"(carga {info.get('carga_ms')} ms), memoria {info.get('memoria')}, "
-                     f"think={info.get('pensar')}.")
+            partes = [f"calentamiento {cal} ms (pared; carga {info.get('carga_ms')} ms, mismo valor histórico)"]
+            runtime = {k: info.get(k) for k in
+                       ("runtime_total_ns", "runtime_load_ns", "runtime_prompt_eval_ns", "runtime_eval_ns")}
+            if any(v is not None for v in runtime.values()):
+                partes.append("runtime ns: " + ", ".join(
+                    f"{k.replace('runtime_', '').replace('_ns', '')}={v if v is not None else 'ausente'}"
+                    for k, v in runtime.items()))
+            else:
+                partes.append("runtime ns: ausente (el runtime no informó duraciones)")
+            partes.append(f"memoria {info.get('memoria')}, think={info.get('pensar')}")
+            L.append(f"- `{modelo}`: " + "; ".join(partes) + ".")
     ft = manifiesto.get("filtro_tito") or {}
     try:
         arte = json.loads(Path(ft["modelo"]).read_text(encoding="utf-8"))
@@ -192,9 +210,16 @@ def armar_comparacion(carpeta: Path) -> str:
     except (KeyError, OSError, ValueError, TypeError):
         L.append("- Tito: artefacto no disponible para informar el ajuste.")
     if "arranque_ms" in ft or "nota" in ft:
-        L.append(f"- Tito en esta corrida: arranque {ft.get('arranque_ms')} ms, "
-                 f"calentamiento {ft.get('calentamiento_ms')} ms "
-                 f"(unidad: {ft.get('unidad', 'ms')}; {ft.get('nota', '')}).")
+        linea_tito = (f"- Tito en esta corrida: artefacto {ft.get('arranque_ms')} ms")
+        if ft.get("encoder_ms") is not None:
+            linea_tito += f", encoder {ft.get('encoder_ms')} ms"
+            if ft.get("encoder_desde_cache") is not None:
+                linea_tito += f" ({'caché' if ft.get('encoder_desde_cache') else 'carga fresca'})"
+        linea_tito += (f", calentamiento {ft.get('calentamiento_ms')} ms "
+                       f"(unidad: {ft.get('unidad', 'ms')}; {ft.get('nota', '')})")
+        if ft.get("preparacion_error"):
+            linea_tito += f" [preparación con error: {ft.get('preparacion_error')}]"
+        L.append(linea_tito + ".")
     L.append("")
     L.append("## Límites de interpretación")
     L.append("")

@@ -294,6 +294,42 @@ git pull
 
 Lo guardado queda en `git stash list` por si hace falta recuperarlo.
 
+### Verificación sin modelos ni corridas históricas (#97)
+
+Todo lo de abajo corre con dobles deterministas (Tito guionado, SLM falso):
+no descarga modelos, no entrena y no toca `corridas/` ni crea carpetas en el
+repositorio (la salida va a un temporal fuera del repo).
+
+```bash
+cd experiments/slm-directo
+
+# 1. Sintaxis de runner, instrumentación y reportes
+python -m py_compile correr.py resumen.py comparar.py detectores.py filtro_tito.py tito_real.py
+
+# 2. Tests dirigidos (operativo, diagnóstico, histórico interrumpido y
+#    costos por componentes/fallos/ausencias)
+python -m unittest tests.test_primer_aviso tests.test_ensayo tests.test_filtro_tito -v
+
+# 3. Punta a punta operativo + diagnóstico, con salida a /tmp
+SALIDA=$(mktemp -d)
+python slm_falso.py --puerto 11439 &
+python correr.py --modelos falso-demo:1b --url http://127.0.0.1:11439 \
+  --casos SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01 \
+  --filtro-tito --tito-puntajes "4=0.9" --etiqueta demo --salida "$SALIDA" --detalle
+python correr.py --modelos falso-demo:1b --url http://127.0.0.1:11439 \
+  --casos SC-WA-CODE-01-e01 --filtro-tito --tito-puntajes "4=0.9" \
+  --seguir-tras-aviso --etiqueta demo-diag --salida "$SALIDA"
+python resumen.py "$SALIDA"/*_demo --trayectorias
+python comparar.py "$SALIDA"/*_demo
+rm -rf "$SALIDA"
+```
+
+El modo operativo (por defecto) termina cada llamada en su primer aviso
+válido; `--seguir-tras-aviso` conserva el diagnóstico de conversación
+completa, separado del costo operativo hasta el aviso. Las corridas
+históricas (conversación completa) no se reescriben ni se presentan como
+nuevas mediciones operativas.
+
 ## 6. Escalera de modelos y gamas de celular
 
 La **escalera** es probar el mismo detector, con el mismo prompt y los mismos casos,
