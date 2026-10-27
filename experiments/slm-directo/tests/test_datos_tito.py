@@ -176,18 +176,63 @@ class TestParticiones(unittest.TestCase):
         self.assertTrue(any("R1" in e and "ambigua" in e for e in informe.errores))
 
     def test_duplicado_incompatible_entre_particiones_se_rechaza(self):
-        ref_v = referencia_vishing()
+        ref_v = dt.Referencia(
+            clase="vishing", t_r_linea=1, t_c_linea=2,
+            pedido="REQUEST_AUTH_CODE",
+            evidencia=({"linea": 1, "evento": "pedido",
+                        "etiquetas": ["REQUEST_AUTH_CODE"]},
+                       {"linea": 2, "evento": "cumplimiento",
+                        "etiquetas": []}))
         ref_l = dt.Referencia(clase="legitima",
                               evidencia=({"linea": 1, "evento": "contexto",
                                           "etiquetas": []},))
-        a = conversacion("D1", "texto duplicado exacto", "cierre uno", ref=ref_v)
+        a = dt.Conversacion(case_id="D1",
+                            lineas=dialogo("texto duplicado exacto", "cierre común"),
+                            referencia=ref_v)
         b = dt.Conversacion(case_id="D2",
-                            lineas=dialogo("texto duplicado exacto", "cierre dos"),
+                            lineas=dialogo("texto duplicado exacto", "cierre común"),
                             referencia=ref_l)
         informe = dt.validar_particiones(
             [a, b], {"D1": "entrenamiento", "D2": "evaluacion_independiente"})
         self.assertFalse(informe.es_evaluable)
-        self.assertTrue(any("duplicado incompatible" in e for e in informe.errores))
+        self.assertTrue(any("conversación completa duplicada" in e
+                            for e in informe.errores))
+        self.assertTrue(any("conflicto de referencia" in e
+                            for e in informe.errores))
+
+    def test_duplicada_completa_con_misma_clase_tambien_se_rechaza(self):
+        a = conversacion("G1", "diálogo repetido entero", "segunda línea",
+                         "decime el código", "ahí va")
+        b = conversacion("G2", "diálogo repetido entero", "segunda línea",
+                         "decime el código", "ahí va")
+        informe = dt.validar_particiones(
+            [a, b], {"G1": "entrenamiento", "G2": "evaluacion_independiente"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("conversación completa duplicada" in e
+                            for e in informe.errores))
+
+    def test_saludo_repetido_en_llamadas_distintas_no_es_duplicado(self):
+        a = conversacion("S1", "hola", "llamo del banco alfa",
+                         "decime el código", "cierre alfa")
+        b = conversacion("S2", "hola", "consulta vecinal beta",
+                         "respuesta beta", "cierre beta",
+                         ref=dt.Referencia(
+                             clase="legitima",
+                             evidencia=({"linea": 1, "evento": "contexto",
+                                         "etiquetas": []},)))
+        informe = dt.validar_particiones(
+            [a, b], {"S1": "entrenamiento", "S2": "evaluacion_independiente"})
+        self.assertTrue(informe.es_evaluable, informe.errores)
+
+    def test_identificadores_duplicados_se_rechazan_antes_del_diccionario(self):
+        a = conversacion("X1", "diálogo único uno", "cierre uno",
+                         "decime el código uno", "listo uno")
+        b = conversacion("X1", "diálogo único dos", "cierre dos",
+                         "decime el código dos", "listo dos")
+        informe = dt.validar_particiones([a, b], {"X1": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("identificador duplicado" in e
+                            for e in informe.errores))
 
     def test_banco_del_artefacto_actual_no_se_recicla_como_evaluacion(self):
         a = conversacion("H1", "banco histórico alfa", "réplica alfa",
@@ -289,10 +334,12 @@ class TestManifiestoEHabilitacion(unittest.TestCase):
         self.assertFalse(ok)
         self.assertTrue(any("revisión humana" in m for m in motivos))
         self.assertTrue(any("acuerdo" in m for m in motivos))
-        ok, _ = dt.puede_habilitarse(
+        ok, motivos = dt.puede_habilitarse(salida, {}, {})
+        self.assertFalse(ok)
+        ok, motivos = dt.puede_habilitarse(
             salida, revision_efectiva={"revisores": ["equipo"]},
             acuerdo={"composicion": "acordada"})
-        self.assertTrue(ok)
+        self.assertFalse(ok)
 
     def test_particion_invalida_tampoco_se_habilita_con_acuerdo(self):
         convs, _ = self.armar_recorrido()
@@ -303,6 +350,432 @@ class TestManifiestoEHabilitacion(unittest.TestCase):
             acuerdo={"composicion": "acordada"})
         self.assertFalse(ok)
         self.assertTrue(any("inválidas" in m for m in motivos))
+
+
+def revision_trazable(total=2):
+    return {
+        "revisores": ["Lucía Ferraro", "Marco Benítez"],
+        "originales_conservados": True,
+        "originales_referencia": "docs/corpus/PLANILLA-REVISION-TOMAS.csv",
+        "desacuerdos": [{"caso": "M1", "punto": "alcance del pedido",
+                         "posturas": ["amplia", "restringida"]}],
+        "adjudicaciones": [{"caso": "M1", "decision": "restringida",
+                            "quien": "Lucía Ferraro"}],
+        "referencias_revisadas": {"revisadas": total, "total": total},
+    }
+
+
+def acuerdo_efectivo():
+    return {
+        "composicion": "entrenamiento cuatro, validación dos, resto a acordar",
+        "tamano": {"entrenamiento": 4, "validacion": 2},
+        "reglas_referencia": "MANUAL-ANOTACION.md versión de trabajo 2026-10-27",
+        "proporciones": {"vishing": "una mitad", "legitima": "otra mitad"},
+    }
+
+
+class TestVocabularioYRangos(unittest.TestCase):
+    def test_clase_inventada_rango_y_pedido_fuera_de_vocabulario(self):
+        ref = dt.Referencia(
+            clase="clase_inventada", t_r_linea=999, pedido="X",
+            evidencia=({"linea": 999, "evento": "pedido",
+                        "etiquetas": ["Y"]},))
+        conv = dt.Conversacion(case_id="BUG1", lineas=dialogo("hola"),
+                               referencia=ref)
+        informe = dt.validar_particiones([conv], {"BUG1": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+        texto = "\n".join(informe.errores)
+        self.assertIn("fuera del vocabulario", texto)
+        self.assertIn("fuera del diálogo", texto)
+        self.assertIn("REQUEST_*", texto)
+
+    def test_t_c_sin_pedido_orden_y_cumplimiento_se_rechazan(self):
+        base = ("primera línea", "segunda línea", "tercera línea")
+        sin_tr = dt.Referencia(
+            clase="vishing", t_c_linea=2, pedido="REQUEST_AUTH_CODE",
+            evidencia=({"linea": 2, "evento": "cumplimiento",
+                        "etiquetas": []},))
+        invertido = dt.Referencia(
+            clase="vishing", t_r_linea=3, t_c_linea=2,
+            pedido="REQUEST_AUTH_CODE",
+            evidencia=({"linea": 3, "evento": "pedido",
+                        "etiquetas": ["REQUEST_AUTH_CODE"]},
+                       {"linea": 2, "evento": "cumplimiento",
+                        "etiquetas": []}))
+        sin_cumplimiento = dt.Referencia(
+            clase="vishing", t_r_linea=2, t_c_linea=3,
+            pedido="REQUEST_AUTH_CODE",
+            evidencia=({"linea": 2, "evento": "pedido",
+                        "etiquetas": ["REQUEST_AUTH_CODE"]},))
+        for cid, ref in (("T1", sin_tr), ("T2", invertido), ("T3", sin_cumplimiento)):
+            with self.subTest(cid=cid):
+                conv = dt.Conversacion(case_id=cid, lineas=dialogo(*base),
+                                       referencia=ref)
+                informe = dt.validar_particiones([conv], {cid: "entrenamiento"})
+                self.assertFalse(informe.es_evaluable, informe.errores)
+
+    def test_tipos_hablante_y_evidencia_se_validan(self):
+        ref = dt.Referencia(
+            clase="vishing", t_r_linea=True, pedido="REQUEST_AUTH_CODE",
+            evidencia=[{"linea": 1, "evento": "invento",
+                        "etiquetas": ["REQUEST_AUTH_CODE"]}],
+            revision_humana="si")
+        conv = dt.Conversacion(
+            case_id="TT", lineas=(dt.Linea("Z", "  "),),
+            referencia=ref)
+        informe = dt.validar_particiones([conv], {"TT": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+        texto = "\n".join(informe.errores)
+        self.assertIn("hablante", texto)
+        self.assertIn("texto vacío", texto)
+        self.assertIn("no es un entero de línea", texto)
+        self.assertIn("no está en", texto)
+        self.assertIn("revision_humana", texto)
+
+
+def referencia_revisada(t_r=3, t_c=4):
+    return dt.Referencia(
+        clase="vishing", t_r_linea=t_r, t_c_linea=t_c,
+        pedido="REQUEST_AUTH_CODE",
+        evidencia=(
+            {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+            {"linea": t_r, "evento": "pedido", "etiquetas": ["REQUEST_AUTH_CODE"]},
+            {"linea": t_c, "evento": "cumplimiento", "etiquetas": []},
+        ),
+        revision_humana=True)
+
+
+class TestPuertaFailClosed(unittest.TestCase):
+    def armar_salida_valida(self):
+        convs = [
+            conversacion("M1", "banco m uno", "réplica m uno",
+                         "pedido m uno código", "cierre m uno",
+                         ref=referencia_revisada()),
+            conversacion("M2", "banco m dos", "réplica m dos",
+                         "pedido m dos código", "cierre m dos",
+                         ref=referencia_revisada()),
+        ]
+        asignacion = {"M1": "entrenamiento", "M2": "validacion"}
+        informe = dt.validar_particiones(convs, asignacion)
+        self.assertTrue(informe.es_evaluable, informe.errores)
+        man = dt.generar_manifiesto({"origen": "doble"}, {"ventana": 2},
+                                    asignacion, convs)
+        self.assertEqual(man["revision_humana"], {"revisadas": 2, "total": 2})
+        return dt.informe_validacion(man, informe, {})
+
+    def test_dicts_vacios_no_habilitan(self):
+        salida = self.armar_salida_valida()
+        for rev, acu in ((None, None), ({}, {}),
+                         ({"revisores": ["equipo"]},
+                          {"composicion": "acordada"})):
+            with self.subTest(rev=rev, acu=acu):
+                ok, _ = dt.puede_habilitarse(
+                    salida, revision_efectiva=rev, acuerdo=acu)
+                self.assertFalse(ok)
+
+    def test_revision_exige_trazabilidad_completa(self):
+        salida = self.armar_salida_valida()
+        base = revision_trazable()
+        casos = {
+            "sin_campos": {},
+            "revisores_vacios": {**base, "revisores": []},
+            "revisores_en_blanco": {**base, "revisores": ["   "]},
+            "sin_originales": {**base, "originales_conservados": False},
+            "originales_sin_referencia": {**base, "originales_referencia": "  "},
+            "desacuerdo_sin_adjudicar": {**base, "adjudicaciones": []},
+            "desacuerdo_sin_caso": {**base, "desacuerdos": [
+                {"punto": "alcance", "posturas": ["a", "b"]}]},
+            "adjudicacion_sin_caso": {**base, "adjudicaciones": [
+                {"decision": "restringida"}]},
+            "revisadas_parciales": {
+                **base,
+                "referencias_revisadas": {"revisadas": 1, "total": 2}},
+        }
+        for nombre, rev in casos.items():
+            with self.subTest(nombre=nombre):
+                ok, _ = dt.puede_habilitarse(
+                    salida, revision_efectiva=rev, acuerdo=acuerdo_efectivo())
+                self.assertFalse(ok)
+
+    def test_puerta_no_exige_cuotas(self):
+        salida = self.armar_salida_valida()
+        for revisores in (["Lucía Ferraro"], ["equipo"]):
+            with self.subTest(revisores=revisores):
+                rev = {**revision_trazable(), "revisores": revisores}
+                ok, motivos = dt.puede_habilitarse(
+                    salida, revision_efectiva=rev, acuerdo=acuerdo_efectivo())
+                self.assertTrue(ok, motivos)
+
+    def test_puerta_abre_solo_con_estructuras_trazables_sinteticas(self):
+        salida = self.armar_salida_valida()
+        ok, motivos = dt.puede_habilitarse(
+            salida, revision_efectiva=revision_trazable(),
+            acuerdo=acuerdo_efectivo())
+        self.assertTrue(ok, motivos)
+
+
+class TestRegresionOchoYDiagnostico(unittest.TestCase):
+    def test_ocho_historicas_solo_entran_como_regresion(self):
+        conv = conversacion(dt.REGRESION_OCHO[0], "histórica uno",
+                            "réplica uno", "decime el código uno",
+                            "cierre uno")
+        for particion in ("evaluacion_independiente", "entrenamiento",
+                          "validacion", "diagnostico"):
+            with self.subTest(particion=particion):
+                informe = dt.validar_particiones(
+                    [conv], {conv.case_id: particion})
+                self.assertFalse(informe.es_evaluable)
+                self.assertTrue(any("solo entra como regresión" in e
+                                    for e in informe.errores))
+        informe = dt.validar_particiones([conv], {conv.case_id: "regresion"})
+        self.assertTrue(informe.es_evaluable, informe.errores)
+
+    def test_diagnostico_es_particion_disjunta_en_el_recorrido(self):
+        d = conversacion("DG1", "diagnóstico alfa uno", "réplica alfa",
+                         "decime el código alfa", "cierre alfa")
+        e = conversacion("EV1", "evaluación beta uno", "réplica beta",
+                         "decime el código beta", "cierre beta")
+        informe = dt.validar_particiones(
+            [d, e], {"DG1": "diagnostico", "EV1": "evaluacion_independiente"})
+        self.assertTrue(informe.es_evaluable, informe.errores)
+        informe = dt.validar_particiones(
+            [d, e], {"DG1": "diagnostico", "EV1": "evaluacion_independiente"},
+            ids_ajuste={"EV1"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("ajuste" in err for err in informe.errores))
+
+    def test_grupos_semanticos_no_cruzan_particiones(self):
+        a = conversacion("F1", "fuente común alfa uno", "réplica alfa",
+                         "decime el código alfa", "cierre alfa")
+        b = conversacion("F2", "fuente común alfa dos", "réplica beta",
+                         "decime el código beta", "cierre beta")
+        informe = dt.validar_particiones(
+            [a, b], {"F1": "entrenamiento", "F2": "evaluacion_independiente"},
+            grupos_semanticos={"F1": "fuente_F01", "F2": "fuente_F01"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("grupo semántico" in e for e in informe.errores))
+
+
+class TestManifiestoYValidoSintetico(unittest.TestCase):
+    def test_fecha_inyectable_hace_reproducible_el_manifiesto(self):
+        convs = [conversacion("M1", "banco m uno", "réplica m uno",
+                              "pedido m uno código", "cierre m uno")]
+        asignacion = {"M1": "entrenamiento"}
+        man1 = dt.generar_manifiesto({"origen": "doble"}, {}, asignacion,
+                                     convs, fecha="2026-10-27")
+        man2 = dt.generar_manifiesto({"origen": "doble"}, {}, asignacion,
+                                     convs, fecha="2026-10-27")
+        self.assertEqual(man1, man2)
+        self.assertEqual(man1["fecha"], "2026-10-27")
+        man3 = dt.generar_manifiesto({"origen": "doble"}, {}, asignacion,
+                                     convs, fecha="2026-10-28")
+        self.assertNotEqual(man1["manifiesto_sha256"] if "manifiesto_sha256" in man1 else man1["fecha"],
+                            man3["fecha"])
+
+    def test_caso_valido_sintetico_evaluable_pero_no_habilitado(self):
+        convs = [
+            conversacion("V1", "llamo del banco sintético", "dígame",
+                         "decime el código", "ahí va",
+                         semilla=None, familia=None, modalidad="banco",
+                         dificultades=("pedido_indirecto",)),
+        ]
+        informe = dt.validar_particiones(convs, {"V1": "entrenamiento"})
+        self.assertTrue(informe.es_evaluable, informe.errores)
+        salida = dt.informe_validacion({}, informe, {})
+        self.assertFalse(salida["habilitado"])
+        ok, _ = dt.puede_habilitarse(salida)
+        self.assertFalse(ok)
+
+    def test_sufijo_futuro_no_altera_reglas_de_validacion(self):
+        base = conversacion("C1", "hola", "qué tal", "decime el código", "listo")
+        mutada = conversacion("C1", "hola", "qué tal", "decime el código",
+                              "te transferí todo y te doy mi clave")
+        for conv in (base, mutada):
+            informe = dt.validar_particiones([conv], {"C1": "entrenamiento"})
+            self.assertTrue(informe.es_evaluable, informe.errores)
+
+
+class TestLegitimaSinEvidenciaInventada(unittest.TestCase):
+    def test_legitima_con_evidencia_vacia_es_evaluable(self):
+        conv = dt.Conversacion(
+            case_id="L0", lineas=dialogo("hola vecina", "chau vecina"),
+            referencia=dt.Referencia(clase="legitima", evidencia=()))
+        informe = dt.validar_particiones([conv], {"L0": "entrenamiento"})
+        self.assertTrue(informe.es_evaluable, informe.errores)
+
+    def test_legitima_dificil_con_evidencia_vacia_es_evaluable(self):
+        conv = dt.Conversacion(
+            case_id="L1", lineas=dialogo("hola vecina", "chau vecina"),
+            referencia=dt.Referencia(clase="legitima_dificil", evidencia=[]))
+        informe = dt.validar_particiones([conv], {"L1": "validacion"})
+        self.assertTrue(informe.es_evaluable, informe.errores)
+
+    def test_legitima_con_evidencia_presente_se_valida_igual(self):
+        conv = dt.Conversacion(
+            case_id="L2", lineas=dialogo("hola vecina", "chau vecina"),
+            referencia=dt.Referencia(
+                clase="legitima",
+                evidencia=[{"linea": 1, "evento": "contexto",
+                            "etiquetas": ["XXX"]}],
+                revision_humana=True))
+        informe = dt.validar_particiones([conv], {"L2": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("etiquetas" in e for e in informe.errores))
+
+    def test_vishing_sin_evidencia_sigue_sin_ser_evaluable(self):
+        conv = dt.Conversacion(
+            case_id="V0", lineas=dialogo("llamo del banco", "dígame"),
+            referencia=dt.Referencia(
+                clase="vishing", t_r_linea=1, pedido="REQUEST_AUTH_CODE",
+                evidencia=()))
+        informe = dt.validar_particiones([conv], {"V0": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+
+
+class TestPedidoYCumplimientoEnLaMismaLinea(unittest.TestCase):
+    def test_igualdad_de_linea_se_rechaza(self):
+        conv = dt.Conversacion(
+            case_id="I1", lineas=dialogo("llamo del banco", "tomo nota",
+                                        "paso el código 123"),
+            referencia=dt.Referencia(
+                clase="vishing", t_r_linea=3, t_c_linea=3,
+                pedido="REQUEST_AUTH_CODE",
+                evidencia=(
+                    {"linea": 3, "evento": "pedido",
+                     "etiquetas": ["REQUEST_AUTH_CODE"]},
+                    {"linea": 3, "evento": "cumplimiento",
+                     "etiquetas": []}),
+                revision_humana=True))
+        informe = dt.validar_particiones([conv], {"I1": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("posterior a t_r_linea" in e
+                            for e in informe.errores))
+
+    def test_orden_invertido_sigue_sin_ser_evaluable(self):
+        conv = dt.Conversacion(
+            case_id="I2", lineas=dialogo("llamo del banco", "tomo nota",
+                                        "paso el código 123"),
+            referencia=dt.Referencia(
+                clase="vishing", t_r_linea=3, t_c_linea=2,
+                pedido="REQUEST_AUTH_CODE",
+                evidencia=(
+                    {"linea": 3, "evento": "pedido",
+                     "etiquetas": ["REQUEST_AUTH_CODE"]},
+                    {"linea": 2, "evento": "cumplimiento",
+                     "etiquetas": []})))
+        informe = dt.validar_particiones([conv], {"I2": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("posterior a t_r_linea" in e for e in informe.errores))
+
+
+class TestEntradasInvalidasSinCrash(unittest.TestCase):
+    def test_etiquetas_y_evento_invalidos_vuelven_informe_no_excepcion(self):
+        for cid, ev in (("E1", {"linea": 1, "evento": "contexto",
+                                "etiquetas": [{}]}),
+                        ("E2", {"linea": 1, "evento": [],
+                                "etiquetas": []}),
+                        ("E3", {"linea": 1, "evento": "contexto",
+                                "etiquetas": "REQUEST_AUTH_CODE"}),
+                        ("E4", "no-es-un-dict")):
+            with self.subTest(cid=cid):
+                conv = dt.Conversacion(
+                    case_id=cid, lineas=dialogo("hola", "chau"),
+                    referencia=dt.Referencia(
+                        clase="legitima", evidencia=[ev]))
+                informe = dt.validar_particiones([conv], {cid: "entrenamiento"})
+                self.assertFalse(informe.es_evaluable, cid)
+                self.assertTrue(informe.errores, cid)
+
+    def test_referencia_dict_valida_es_evaluable(self):
+        conv = dt.Conversacion(
+            case_id="D1", lineas=dialogo("llamo del banco", "dígame",
+                                        "decime el código", "ahí va"),
+            referencia={"clase": "vishing", "t_r_linea": 3, "t_c_linea": 4,
+                        "pedido": "REQUEST_AUTH_CODE",
+                        "evidencia": [
+                            {"linea": 1, "evento": "contexto", "etiquetas": []},
+                            {"linea": 3, "evento": "pedido",
+                             "etiquetas": ["REQUEST_AUTH_CODE"]},
+                            {"linea": 4, "evento": "cumplimiento",
+                             "etiquetas": []}],
+                        "revision_humana": False, "par": None})
+        informe = dt.validar_particiones([conv], {"D1": "entrenamiento"})
+        self.assertTrue(informe.es_evaluable, informe.errores)
+
+    def test_referencia_con_otra_estructura_vuelve_informe(self):
+        conv = dt.Conversacion(
+            case_id="D2", lineas=dialogo("hola", "chau"),
+            referencia="no-es-una-referencia")
+        informe = dt.validar_particiones([conv], {"D2": "entrenamiento"})
+        self.assertFalse(informe.es_evaluable)
+        self.assertTrue(any("estructura no soportada" in e
+                            for e in informe.errores))
+
+    def test_etiquetar_prefijo_tolera_evidencia_no_lista(self):
+        conv = dt.Conversacion(
+            case_id="P1", lineas=dialogo("hola", "chau"),
+            referencia=dt.Referencia(clase="legitima", evidencia="rota"))
+        etiqueta = dt.etiquetar_prefijo(conv, 1)
+        self.assertEqual(etiqueta["supervision"], "sin_evidencia_suficiente")
+
+
+class TestPuertaCruzaManifiesto(unittest.TestCase):
+    def armar(self, revisadas_dato=True):
+        ref = referencia_revisada()
+        if not revisadas_dato:
+            ref = dt.Referencia(
+                clase=ref.clase, t_r_linea=ref.t_r_linea,
+                t_c_linea=ref.t_c_linea, pedido=ref.pedido,
+                evidencia=ref.evidencia, revision_humana=False)
+        convs = [conversacion("M1", "banco m uno", "réplica m uno",
+                              "pedido m uno código", "cierre m uno", ref=ref),
+                 conversacion("M2", "banco m dos", "réplica m dos",
+                              "pedido m dos código", "cierre m dos", ref=ref)]
+        asignacion = {"M1": "entrenamiento", "M2": "validacion"}
+        informe = dt.validar_particiones(convs, asignacion)
+        self.assertTrue(informe.es_evaluable, informe.errores)
+        man = dt.generar_manifiesto({"origen": "doble"}, {}, asignacion, convs)
+        return dt.informe_validacion(man, informe, {})
+
+    def test_conteo_distinto_del_manifiesto_bloquea(self):
+        salida = self.armar()
+        ok, motivos = dt.puede_habilitarse(
+            salida, revision_efectiva=revision_trazable(total=5),
+            acuerdo=acuerdo_efectivo())
+        self.assertFalse(ok)
+        self.assertTrue(any("Discrepancia" in m for m in motivos))
+
+    def test_manifiesto_con_revision_incompleta_bloquea(self):
+        salida = self.armar(revisadas_dato=False)
+        ok, motivos = dt.puede_habilitarse(
+            salida, revision_efectiva=revision_trazable(total=2),
+            acuerdo=acuerdo_efectivo())
+        self.assertFalse(ok)
+        self.assertTrue(any("manifiesto" in m for m in motivos))
+
+    def test_informe_sin_manifiesto_bloquea_aunque_declare_todo_revisado(self):
+        convs = [conversacion("M1", "banco m uno", "réplica m uno",
+                              "pedido m uno código", "cierre m uno",
+                              ref=referencia_revisada()),
+                 conversacion("M2", "banco m dos", "réplica m dos",
+                              "pedido m dos código", "cierre m dos",
+                              ref=referencia_revisada())]
+        asignacion = {"M1": "entrenamiento", "M2": "validacion"}
+        informe = dt.validar_particiones(convs, asignacion)
+        self.assertTrue(informe.es_evaluable, informe.errores)
+        salida = dt.informe_validacion({}, informe, {})
+        ok, motivos = dt.puede_habilitarse(
+            salida, revision_efectiva=revision_trazable(total=2),
+            acuerdo=acuerdo_efectivo())
+        self.assertFalse(ok)
+        self.assertTrue(any("manifiesto" in m for m in motivos))
+
+    def test_informe_conserva_conteo_y_huellas_del_manifiesto(self):
+        salida = self.armar()
+        self.assertEqual(salida["revision_manifiesto"],
+                         {"revisadas": 2, "total": 2})
+        self.assertEqual(set(salida["huellas_conversaciones"]), {"M1", "M2"})
+        self.assertTrue(salida["manifiesto_sha256"])
 
 
 if __name__ == "__main__":

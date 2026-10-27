@@ -28,6 +28,8 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
+from casos import CLASES, ETIQUETAS, EVENTOS, PEDIDOS, Linea
+
 AQUI = Path(__file__).resolve().parent
 
 # Las ocho conversaciones ya analizadas (demo.sh, corrida 2026-10-14): se
@@ -46,9 +48,19 @@ REGRESION_OCHO = (
 PARTICIONES = (
     "entrenamiento",
     "validacion",
+    "diagnostico",
     "evaluacion_independiente",
     "regresion",
 )
+
+HABLANTES = ("A", "B")
+
+CAMPOS_ACUERDO = ("composicion", "tamano", "reglas_referencia", "proporciones")
+
+# La revisión conserva los originales: el indicador dice si se conservaron y
+# la referencia dice dónde (ruta o identificador trazable).
+CAMPOS_REVISION = ("revisores", "originales_conservados", "originales_referencia",
+                   "desacuerdos", "adjudicaciones", "referencias_revisadas")
 
 # Categorías que la muestra debe cubrir (#96). No se detectan por texto: cada
 # conversación trae sus marcas `dificultades`; lo no marcado se informa como
@@ -68,12 +80,6 @@ CATEGORIAS_COBERTURA = (
 SUPERVISION_SIN_EVIDENCIA = "sin_evidencia_suficiente"
 
 DECISIONES_PENDIENTES = ("D07", "D08")
-
-
-@dataclass(frozen=True)
-class Linea:
-    hablante: str
-    texto: str
 
 
 @dataclass(frozen=True)
@@ -136,6 +142,19 @@ def huella(texto: str) -> str:
 
 def _normalizar(texto: str) -> str:
     return " ".join(texto.split())
+
+
+def _campo_ref(ref, nombre: str, faltante=None):
+    """Lee un campo de una referencia `Referencia` o de un dict equivalente.
+
+    Las entradas con otra estructura se informan como errores de validación
+    en vez de romper el recorrido (`TypeError`/`AttributeError`).
+    """
+    if isinstance(ref, Referencia):
+        return getattr(ref, nombre)
+    if isinstance(ref, dict):
+        return ref.get(nombre, faltante)
+    return faltante
 
 
 # ---------------------------------------------------------------------------
@@ -266,17 +285,22 @@ def construir_prefijos(conversacion: Conversacion,
 def etiquetar_prefijo(conversacion: Conversacion, hasta_linea: int) -> dict:
     """Etiqueta de una actualización según solo lo visible hasta esa línea.
 
-    Devuelve tres referencias separadas: `clase_conversacion` (final, no se
-    copia a los fragmentos), `marcas` (t_r/t_c/pedido, nulos si aún no
-    visibles) y `supervision` (derivada solo de evidencia con linea <= n).
+    Devuelve tres referencias separadas: `clase_conversacion` (metadato
+    final de la conversación: se informa para distinguirla, nunca se usa
+    como etiqueta de supervisión del prefijo ni se copia a los fragmentos),
+    `marcas` (t_r/t_c/pedido, nulos si aún no visibles) y `supervision`
+    (derivada solo de evidencia con linea <= n).
     Sin referencia o sin revisión humana, la supervisión es provisional.
     """
     ref = conversacion.referencia
-    if ref is None:
+    if ref is None or not isinstance(ref, (Referencia, dict)):
         return {"clase_conversacion": None, "marcas": None,
                 "supervision": SUPERVISION_SIN_EVIDENCIA, "provisional": True,
                 "motivo": "sin referencia: no evaluable hasta resolver o excluir."}
-    visibles = [e for e in ref.evidencia
+    evidencia = _campo_ref(ref, "evidencia", ())
+    if not isinstance(evidencia, (list, tuple)):
+        evidencia = ()
+    visibles = [e for e in evidencia
                 if isinstance(e, dict) and e.get("linea", 0) <= hasta_linea]
     if any(e.get("evento") == "cumplimiento" for e in visibles):
         supervision = "cumplimiento_visible"
@@ -286,15 +310,18 @@ def etiquetar_prefijo(conversacion: Conversacion, hasta_linea: int) -> dict:
         supervision = "indicio_parcial"
     else:
         supervision = SUPERVISION_SIN_EVIDENCIA
+    t_r = _campo_ref(ref, "t_r_linea")
+    t_c = _campo_ref(ref, "t_c_linea")
     marcas = {
-        "t_r_linea": ref.t_r_linea if ref.t_r_linea is not None and ref.t_r_linea <= hasta_linea else None,
-        "t_c_linea": ref.t_c_linea if ref.t_c_linea is not None and ref.t_c_linea <= hasta_linea else None,
-        "pedido": ref.pedido if ref.t_r_linea is not None and ref.t_r_linea <= hasta_linea else None,
+        "t_r_linea": t_r if t_r is not None and t_r <= hasta_linea else None,
+        "t_c_linea": t_c if t_c is not None and t_c <= hasta_linea else None,
+        "pedido": _campo_ref(ref, "pedido") if t_r is not None and t_r <= hasta_linea else None,
     }
-    return {"clase_conversacion": ref.clase, "marcas": marcas,
+    revision_humana = _campo_ref(ref, "revision_humana", False)
+    return {"clase_conversacion": _campo_ref(ref, "clase"), "marcas": marcas,
             "supervision": supervision,
-            "provisional": not ref.revision_humana,
-            "motivo": ("" if ref.revision_humana
+            "provisional": not revision_humana,
+            "motivo": ("" if revision_humana
                        else "referencia sin revisión humana: provisional, no habilita uso.")}
 
 
@@ -302,33 +329,191 @@ def etiquetar_prefijo(conversacion: Conversacion, hasta_linea: int) -> dict:
 # Validación de particiones
 # ---------------------------------------------------------------------------
 
-def _ambiguedad(ref: Referencia, n_lineas: int) -> str | None:
-    if ref.clase in ("legitima", "legitima_dificil"):
-        if ref.t_r_linea is not None or ref.t_c_linea is not None:
-            return "legítima con marcas t_r/t_c: ambigua hasta resolución o exclusión."
-        return None
-    if ref.t_r_linea is not None and ref.pedido is None:
-        return "pedido y t_r_linea van juntos: falta uno."
-    if ref.t_c_linea is not None and ref.t_r_linea is None:
-        return "t_c_linea requiere t_r_linea: no hay cumplimiento sin pedido."
-    if (ref.t_r_linea is not None and
-            not any(isinstance(e, dict) and e.get("linea") == ref.t_r_linea
-                    and e.get("evento") == "pedido" for e in ref.evidencia)):
-        return f"falta evidencia 'pedido' en t_r_linea={ref.t_r_linea}."
-    return None
+def _es_entero_linea(valor) -> bool:
+    return isinstance(valor, int) and not isinstance(valor, bool)
+
+
+def _errores_referencia(case_id: str, ref, n_lineas: int) -> list[str]:
+    """Vocabulario, rangos, tipos y coherencia TR/TC/evidencia (#96).
+
+    Acepta `Referencia` o un dict con los mismos campos; otra estructura
+    se informa como error en vez de romper el recorrido. Las ambigüedades
+    detienen el uso del dato: cualquier motivo devuelve un error que
+    vuelve el informe no evaluable.
+    """
+    prefijo = f"{case_id}: referencia"
+    errores: list[str] = []
+    if not isinstance(ref, (Referencia, dict)):
+        return [f"{prefijo} con estructura no soportada "
+                f"({type(ref).__name__}): no es Referencia ni dict."]
+    clase = _campo_ref(ref, "clase")
+    t_r = _campo_ref(ref, "t_r_linea")
+    t_c = _campo_ref(ref, "t_c_linea")
+    pedido = _campo_ref(ref, "pedido")
+    if not isinstance(clase, str) or clase not in CLASES:
+        errores.append(
+            f"{prefijo}: clase {clase!r} fuera del vocabulario {sorted(CLASES)}.")
+    for campo, valor in (("t_r_linea", t_r), ("t_c_linea", t_c)):
+        if valor is not None and not _es_entero_linea(valor):
+            errores.append(f"{prefijo}: {campo} {valor!r} no es un entero de línea.")
+        elif _es_entero_linea(valor) and not 1 <= valor <= n_lineas:
+            errores.append(
+                f"{prefijo}: {campo} {valor!r} fuera del diálogo (1..{n_lineas}).")
+    if pedido is not None:
+        if not isinstance(pedido, str):
+            errores.append(f"{prefijo}: pedido {pedido!r} no es texto.")
+        elif pedido not in PEDIDOS:
+            errores.append(
+                f"{prefijo}: pedido {pedido!r} no es una etiqueta REQUEST_*.")
+    if not isinstance(_campo_ref(ref, "revision_humana"), bool):
+        errores.append(f"{prefijo}: revision_humana debe ser true o false.")
+    par = _campo_ref(ref, "par")
+    if par is not None and (not isinstance(par, str) or not par.strip()):
+        errores.append(f"{prefijo}: par {par!r} no es un identificador válido.")
+    if clase in ("legitima", "legitima_dificil"):
+        if t_r is not None or t_c is not None:
+            errores.append(
+                f"{prefijo} ambigua: legítima con marcas t_r/t_c: "
+                "ambigua hasta resolución o exclusión.")
+        if pedido is not None:
+            errores.append(
+                f"{prefijo} ambigua: legítima con pedido: "
+                "ambigua hasta resolución o exclusión.")
+    else:
+        if (t_r is None) != (pedido is None):
+            errores.append(
+                f"{prefijo} ambigua: pedido y t_r_linea van juntos: falta uno.")
+        if t_c is not None and t_r is None:
+            errores.append(
+                f"{prefijo} ambigua: t_c_linea requiere t_r_linea: "
+                "no hay cumplimiento sin pedido.")
+        # Contrato vigente de casos.py: t_c_linea debe ser posterior a
+        # t_r_linea en sentido estricto (rechaza t_c <= t_r). Este módulo
+        # lo reutiliza sin modificarlo.
+        if (_es_entero_linea(t_r) and _es_entero_linea(t_c)
+                and t_c <= t_r):
+            errores.append(
+                f"{prefijo} ambigua: t_c_linea debe ser posterior a t_r_linea.")
+    evidencia = _campo_ref(ref, "evidencia", ())
+    if clase in ("legitima", "legitima_dificil"):
+        # Una legítima sin pedido crítico no inventa evidencia: la lista
+        # puede estar vacía; lo presente se valida igual que en vishing.
+        if evidencia is None:
+            evidencia = ()
+        if not isinstance(evidencia, (list, tuple)):
+            errores.append(f"{prefijo}: evidencia debe ser una lista.")
+            return errores
+    else:
+        if not isinstance(evidencia, (list, tuple)) or not evidencia:
+            errores.append(f"{prefijo}: evidencia debe ser una lista con al menos un elemento.")
+            return errores
+    for i, ev in enumerate(evidencia):
+        donde = f"{prefijo} evidencia[{i}]"
+        if not isinstance(ev, dict) or set(ev) != {"linea", "evento", "etiquetas"}:
+            errores.append(f"{donde} debe tener exactamente linea, evento y etiquetas.")
+            continue
+        if not _es_entero_linea(ev["linea"]):
+            errores.append(f"{donde}.linea {ev['linea']!r} no es un entero de línea.")
+        elif not 1 <= ev["linea"] <= n_lineas:
+            errores.append(
+                f"{donde}.linea {ev['linea']!r} fuera del diálogo (1..{n_lineas}).")
+        if not isinstance(ev["evento"], str) or ev["evento"] not in EVENTOS:
+            errores.append(
+                f"{donde}.evento {ev['evento']!r} no está en {sorted(EVENTOS)}.")
+        etiquetas = ev["etiquetas"]
+        if (not isinstance(etiquetas, list)
+                or any(not isinstance(t, str) or t not in ETIQUETAS for t in etiquetas)):
+            errores.append(
+                f"{donde}.etiquetas tiene valores fuera del vocabulario del manual.")
+    if t_r is not None and not any(
+            isinstance(e, dict) and e.get("linea") == t_r
+            and e.get("evento") == "pedido" for e in evidencia):
+        errores.append(
+            f"{prefijo} ambigua: falta evidencia 'pedido' en t_r_linea={t_r}.")
+    if t_c is not None and not any(
+            isinstance(e, dict) and e.get("linea") == t_c
+            and e.get("evento") == "cumplimiento" for e in evidencia):
+        errores.append(
+            f"{prefijo} ambigua: falta evidencia 'cumplimiento' en "
+            f"t_c_linea={t_c}.")
+    return errores
+
+
+def _errores_conversacion(conv: Conversacion) -> list[str]:
+    """Estructura mínima de la conversación antes de validar su referencia."""
+    errores: list[str] = []
+    if not isinstance(conv.case_id, str) or not conv.case_id.strip():
+        errores.append(f"conversación sin case_id válido: {conv.case_id!r}.")
+    if not isinstance(conv.lineas, (list, tuple)) or not conv.lineas:
+        errores.append(f"{conv.case_id}: el diálogo necesita al menos 1 línea.")
+        return errores
+    for n, linea in enumerate(conv.lineas, start=1):
+        if not isinstance(linea, Linea):
+            errores.append(
+                f"{conv.case_id} línea {n}: no es casos.Linea "
+                f"({type(linea).__name__}).")
+            continue
+        if linea.hablante not in HABLANTES:
+            errores.append(
+                f"{conv.case_id} línea {n}: hablante {linea.hablante!r} "
+                f"fuera de {list(HABLANTES)}.")
+        if not isinstance(linea.texto, str) or not linea.texto.strip():
+            errores.append(f"{conv.case_id} línea {n}: texto vacío o no textual.")
+    return errores
+
+
+def _huella_conversacion(conv: Conversacion) -> str:
+    return huella("\n".join(f"{l.hablante}: {_normalizar(l.texto)}" for l in conv.lineas))
+
+
+def _huella_referencia(ref) -> str:
+    evidencia = _campo_ref(ref, "evidencia", ())
+    if not isinstance(evidencia, (list, tuple)):
+        evidencia = ()
+    partes = sorted(
+        (str(e.get("linea")), str(e.get("evento")),
+         ",".join(str(t) for t in e.get("etiquetas", [])
+                  if isinstance(e.get("etiquetas"), list)))
+        for e in evidencia if isinstance(e, dict))
+    return huella("|".join([str(_campo_ref(ref, "clase")),
+                            str(_campo_ref(ref, "t_r_linea")),
+                            str(_campo_ref(ref, "t_c_linea")),
+                            str(_campo_ref(ref, "pedido"))]
+                           + ["/".join(p) for p in partes]))
 
 
 def validar_particiones(conversaciones: list[Conversacion],
                         asignacion: dict[str, str],
-                        familias_artefacto: set[str] | None = None) -> InformeValidacion:
-    """Rechaza cruces, duplicados incompatibles y referencias inválidas.
+                        familias_artefacto: set[str] | None = None,
+                        ids_ajuste: set[str] | None = None,
+                        grupos_semanticos: dict[str, str] | None = None,
+                        ) -> InformeValidacion:
+    """Rechaza cruces, duplicados, referencias inválidas y usos indebidos.
 
     Un informe con errores no es evaluable: el recorrido nunca presenta un
     conjunto inválido como evaluación válida (`es_evaluable=False`).
+    El diagnóstico es una partición disjunta de la evaluación: la
+    separación se verifica dentro de este recorrido (no solo en el helper
+    `verificar_separacion_diagnostico`). Los grupos semánticos declarados
+    (`grupos_semanticos`: case_id -> grupo, p. ej. fuente o escenario
+    compartido del inventario) tampoco pueden cruzar particiones.
+    Las conversaciones completas duplicadas entre particiones se rechazan
+    incluso con la misma clase; una línea suelta repetida (un saludo común
+    en llamadas distintas) no es un duplicado.
     """
     errores: list[str] = []
     advertencias: list[str] = []
-    por_id = {c.case_id: c for c in conversaciones}
+    vistos_ids: set[str] = set()
+    duplicados: list[str] = []
+    for c in conversaciones:
+        if c.case_id in vistos_ids:
+            duplicados.append(c.case_id)
+        vistos_ids.add(c.case_id)
+    for c in sorted(set(duplicados)):
+        errores.append(f"{c}: identificador duplicado: cada conversación entra una sola vez.")
+    por_id: dict[str, Conversacion] = {}
+    for c in conversaciones:
+        por_id.setdefault(c.case_id, c)
     desconocidas = sorted(set(asignacion) - set(por_id))
     errores += [f"{c}: asignada pero sin conversación cargada." for c in desconocidas]
     sin_asignar = sorted(set(por_id) - set(asignacion))
@@ -338,13 +523,17 @@ def validar_particiones(conversaciones: list[Conversacion],
             errores.append(f"{c}: partición {p!r} fuera de {list(PARTICIONES)}.")
         if es_identificador_reserva(c) or p == "test_reservado":
             errores.append(f"{c}: la reserva no entra a esta exploración (no se lee ni usa).")
-    for c in por_id:
+        if c in REGRESION_OCHO and p != "regresion":
+            errores.append(
+                f"{c}: caso histórico de las ocho: solo entra como regresión, "
+                f"no como {p!r}.")
+    for c in sorted(por_id):
+        errores += _errores_conversacion(por_id[c])
         if por_id[c].referencia is None:
             errores.append(f"{c}: falta referencia: no evaluable hasta resolver o excluir.")
         else:
-            motivo = _ambiguedad(por_id[c].referencia, len(por_id[c].lineas))
-            if motivo:
-                errores.append(f"{c}: referencia ambigua: {motivo}")
+            errores += _errores_referencia(
+                c, por_id[c].referencia, len(por_id[c].lineas))
     for clave in ("semilla", "familia_variante"):
         grupos: dict[str, set[str]] = {}
         for c, conv in por_id.items():
@@ -359,8 +548,18 @@ def validar_particiones(conversaciones: list[Conversacion],
                 errores.append(
                     f"{clave} {valor!r} cruza particiones {sorted(partes)}: "
                     "prefijos, ventanas y variantes relacionadas van juntos.")
+    if grupos_semanticos:
+        sem: dict[str, set[str]] = {}
+        for c, grupo in grupos_semanticos.items():
+            if c in asignacion and grupo is not None:
+                sem.setdefault(str(grupo), set()).add(asignacion[c])
+        for grupo, partes in sorted(sem.items()):
+            if len(partes) > 1:
+                errores.append(
+                    f"grupo semántico {grupo!r} cruza particiones {sorted(partes)}: "
+                    "los escenarios relacionados van juntos.")
     for c, conv in por_id.items():
-        par = conv.referencia.par if conv.referencia else None
+        par = _campo_ref(conv.referencia, "par") if conv.referencia else None
         if par is None:
             continue
         if par not in por_id:
@@ -373,21 +572,35 @@ def validar_particiones(conversaciones: list[Conversacion],
                 f"par {par!r} cruza particiones "
                 f"({c}: {asignacion[c]}, {par}: {asignacion[par]}): "
                 "los casos contrastantes van juntos.")
-    vistos: dict[str, str] = {}
+    con_ref_invalida = {c for c in por_id
+                        if por_id[c].referencia is not None
+                        and _errores_referencia(c, por_id[c].referencia,
+                                               len(por_id[c].lineas)
+                                               if isinstance(por_id[c].lineas, (list, tuple)) else 0)}
+    por_huella: dict[str, list[str]] = {}
     for c in sorted(por_id):
-        if c not in asignacion:
+        if c not in asignacion or _errores_conversacion(por_id[c]):
             continue
-        for n, linea in enumerate(por_id[c].lineas, start=1):
-            texto = _normalizar(linea.texto)
-            anterior = vistos.setdefault(texto, f"{c}#{n}")
-            if anterior.split("#")[0] != c and por_id[anterior.split('#')[0]].referencia is not None \
-                    and por_id[c].referencia is not None:
-                ref_a = por_id[anterior.split("#")[0]].referencia
-                ref_b = por_id[c].referencia
-                if ref_a.clase != ref_b.clase and asignacion[anterior.split("#")[0]] != asignacion[c]:
-                    errores.append(
-                        f"duplicado incompatible entre particiones: {anterior} y {c}#{n} "
-                        "mismo texto, distinta clase.")
+        por_huella.setdefault(_huella_conversacion(por_id[c]), []).append(c)
+    for h, ids in sorted(por_huella.items()):
+        if len(ids) < 2:
+            continue
+        partes = sorted({asignacion[i] for i in ids if i in asignacion})
+        if len(partes) > 1:
+            errores.append(
+                f"conversación completa duplicada entre particiones {partes}: "
+                f"{', '.join(ids)} con el mismo diálogo.")
+        huellas_ref = {_huella_referencia(por_id[i].referencia)
+                       for i in ids if por_id[i].referencia is not None
+                       and i not in con_ref_invalida}
+        if len(huellas_ref) > 1:
+            errores.append(
+                f"conflicto de referencia para conversación duplicada: "
+                f"{', '.join(ids)} comparten el diálogo con referencias distintas.")
+    ids_evaluacion = {c for c, p in asignacion.items() if p == "evaluacion_independiente"}
+    ids_diagnostico = {c for c, p in asignacion.items() if p == "diagnostico"}
+    errores += verificar_separacion_diagnostico(
+        ids_diagnostico, ids_evaluacion, set(ids_ajuste or ()))
     if familias_artefacto:
         eval_familias = {por_id[c].familia_variante for c, p in asignacion.items()
                          if p == "evaluacion_independiente" and c in por_id
@@ -409,7 +622,12 @@ def validar_particiones(conversaciones: list[Conversacion],
 def verificar_separacion_diagnostico(ids_diagnostico: set[str],
                                      ids_evaluacion: set[str],
                                      ids_ajuste: set[str]) -> list[str]:
-    """La evaluación independiente no comparte casos con diagnóstico ni ajuste."""
+    """La evaluación independiente no comparte casos con diagnóstico ni ajuste.
+
+    Helper público reutilizable; `validar_particiones` ya lo invoca en su
+    recorrido con la partición `diagnostico` y `ids_ajuste`, así que la
+    separación diagnóstico/evaluación se ejecuta siempre, no queda
+    desconectada."""
     errores = []
     if ids_diagnostico & ids_evaluacion:
         errores.append(f"La evaluación pisa el diagnóstico: {sorted(ids_diagnostico & ids_evaluacion)}.")
@@ -451,14 +669,19 @@ def cobertura_muestra(conversaciones: list[Conversacion]) -> dict:
 def generar_manifiesto(procedencia: dict, configuracion: dict,
                        asignacion: dict[str, str],
                        conversaciones: list[Conversacion],
-                       semilla: int = 42) -> dict:
-    """Manifiesto determinista: otra persona comprueba procedencia y separación."""
+                       semilla: int = 42,
+                       fecha: str | None = None) -> dict:
+    """Manifiesto reproducible: otra persona comprueba procedencia y separación.
+
+    `fecha` es inyectable (`"2026-10-27"`): con fecha explícita, dos
+    corridas producen el mismo manifiesto; sin ella se usa el día actual
+    y el manifiesto solo es determinista dentro del mismo día."""
     huellas = {c.case_id: huella("\n".join(f"{l.hablante}: {l.texto}" for l in c.lineas))
                for c in sorted(conversaciones, key=lambda c: c.case_id)}
     revision = sum(1 for c in conversaciones
                    if c.referencia is not None and c.referencia.revision_humana)
     return {
-        "fecha": date.today().isoformat(),
+        "fecha": fecha if fecha is not None else date.today().isoformat(),
         "estado": "propuesta sin discutir",
         "decisiones_pendientes": list(DECISIONES_PENDIENTES),
         "semilla": semilla,
@@ -482,6 +705,16 @@ def informe_validacion(manifiesto: dict, informe: InformeValidacion,
         "errores": list(informe.errores),
         "advertencias": list(informe.advertencias),
         "cobertura": cobertura,
+        # Conteo y huellas del manifiesto: la puerta cruza lo declarado en
+        # la revisión con lo que el manifiesto informa de verdad.
+        "revision_manifiesto": (manifiesto.get("revision_humana")
+                                if isinstance(manifiesto, dict)
+                                and isinstance(manifiesto.get("revision_humana"), dict)
+                                else None),
+        "huellas_conversaciones": (dict(manifiesto["huellas_conversaciones"])
+                                    if isinstance(manifiesto, dict)
+                                    and isinstance(manifiesto.get("huellas_conversaciones"), dict)
+                                    else {}),
         "habilitado": False,
         "bloqueo": ("Sin revisión humana efectiva ni acuerdo de composición y "
                      "proporciones (D07/D08): propuesta preparada, uso no habilitado. "
@@ -489,22 +722,150 @@ def informe_validacion(manifiesto: dict, informe: InformeValidacion,
     }
 
 
+def _tiene_contenido(valor) -> bool:
+    """Un campo de acuerdo trae contenido si está presente y no vacío.
+
+    Solo estructura (nada, texto en blanco o colección vacía no cuentan).
+    Sin longitudes mínimas ni listas de marcadores: no hay decisión
+    aprobada que fije esa metodología.
+    """
+    if valor is None:
+        return False
+    if isinstance(valor, str):
+        return bool(valor.strip())
+    if isinstance(valor, (list, tuple, dict, set)):
+        return len(valor) > 0
+    return True
+
+
+def _es_entero_conteo(valor) -> bool:
+    return isinstance(valor, int) and not isinstance(valor, bool)
+
+
+def _relacionado_por_caso(item) -> bool:
+    """Un desacuerdo/adjudicación debe relacionarse por caso o id."""
+    if not isinstance(item, dict) or not item:
+        return False
+    for clave in ("caso", "id"):
+        valor = item.get(clave)
+        if isinstance(valor, str) and valor.strip():
+            return True
+        if _es_entero_conteo(valor):
+            return True
+    return False
+
+
+def _motivos_revision(revision_efectiva, informe) -> list[str]:
+    if not isinstance(revision_efectiva, dict):
+        return ["Falta revisión humana efectiva del equipo "
+                "(originales, desacuerdos y adjudicaciones conservados)."]
+    motivos = []
+    faltan = [k for k in CAMPOS_REVISION if k not in revision_efectiva]
+    if faltan:
+        motivos.append(
+            "Revisión incompleta: faltan campos trazables "
+            f"{faltan} (se exigen {list(CAMPOS_REVISION)}).")
+        return motivos
+    # Sin cuotas ni autenticación de personas: lista identificable no vacía.
+    revisores = revision_efectiva["revisores"]
+    if (not isinstance(revisores, list) or not revisores
+            or not all(isinstance(r, str) and r.strip() for r in revisores)):
+        motivos.append(
+            "Revisores no trazables: se exige una lista no vacía de "
+            "identificadores (el software no autentica personas).")
+    if revision_efectiva["originales_conservados"] is not True:
+        motivos.append(
+            "Sin originales conservados: la revisión debe conservar "
+            "las anotaciones originales.")
+    referencia_originales = revision_efectiva["originales_referencia"]
+    if not isinstance(referencia_originales, str) or not referencia_originales.strip():
+        motivos.append(
+            "Originales sin referencia trazable: indicar ruta o identificador "
+            "donde se conservan, además del indicador.")
+    desacuerdos = revision_efectiva["desacuerdos"]
+    adjudicaciones = revision_efectiva["adjudicaciones"]
+    if not isinstance(desacuerdos, list):
+        motivos.append("Desacuerdos no registrados: deben listarse (vacía si no hubo).")
+        desacuerdos = []
+    elif any(not _relacionado_por_caso(d) for d in desacuerdos):
+        motivos.append("Desacuerdos no trazables: cada uno indica su caso o id.")
+    if not isinstance(adjudicaciones, list):
+        motivos.append("Adjudicaciones no registradas: deben listarse.")
+    elif desacuerdos and not adjudicaciones:
+        motivos.append(
+            "Hay desacuerdos sin adjudicación: cada desacuerdo requiere "
+            "su adjudicación registrada.")
+    elif any(not _relacionado_por_caso(a) for a in adjudicaciones):
+        motivos.append("Adjudicaciones no trazables: cada una indica su caso o id.")
+    conteo = revision_efectiva["referencias_revisadas"]
+    if (not isinstance(conteo, dict)
+            or not _es_entero_conteo(conteo.get("revisadas"))
+            or not _es_entero_conteo(conteo.get("total"))
+            or conteo["total"] <= 0 or conteo["revisadas"] != conteo["total"]):
+        motivos.append(
+            "Referencias sin revisar en su totalidad: se exige "
+            "`referencias_revisadas: {revisadas, total}` con revisadas == total > 0.")
+    else:
+        revision_manifiesto = (informe.get("revision_manifiesto")
+                               if isinstance(informe, dict) else None)
+        if not isinstance(revision_manifiesto, dict):
+            motivos.append(
+                "Sin conteo de revisión del manifiesto: regenerar el informe "
+                "con el manifiesto para cruzar lo declarado con lo revisado.")
+        elif (not _es_entero_conteo(revision_manifiesto.get("revisadas"))
+                or not _es_entero_conteo(revision_manifiesto.get("total"))):
+            motivos.append(
+                "Manifiesto sin conteo de revisión utilizable: regenerar el "
+                "manifiesto con su conteo de revisión humana.")
+        elif conteo["total"] != revision_manifiesto["total"]:
+            motivos.append(
+                "Discrepancia con el manifiesto: lo declarado "
+                f"(total={conteo['total']}) no coincide con las "
+                f"conversaciones del manifiesto (total={revision_manifiesto['total']}).")
+        elif revision_manifiesto["revisadas"] != revision_manifiesto["total"]:
+            motivos.append(
+                "Revisión incompleta en el manifiesto: informa "
+                f"{revision_manifiesto['revisadas']}/{revision_manifiesto['total']} "
+                "referencias revisadas.")
+    return motivos
+
+
+def _motivos_acuerdo(acuerdo) -> list[str]:
+    if not isinstance(acuerdo, dict):
+        return ["Falta acuerdo registrado de composición, tamaño, reglas de "
+                "referencia y proporciones (coordina con #32/#55 antes de "
+                "producir o habilitar material dependiente)."]
+    motivos = []
+    faltan = [k for k in CAMPOS_ACUERDO if k not in acuerdo]
+    if faltan:
+        motivos.append(
+            f"Acuerdo incompleto: faltan campos efectivos {faltan} "
+            f"(se exigen {list(CAMPOS_ACUERDO)}).")
+    for campo in CAMPOS_ACUERDO:
+        if campo in acuerdo and not _tiene_contenido(acuerdo[campo]):
+            motivos.append(
+                f"Acuerdo sin contenido en {campo!r}: informar el valor "
+                "acordado en vez de dejarlo vacío.")
+    return motivos
+
+
 def puede_habilitarse(informe: dict, revision_efectiva: dict | None = None,
                       acuerdo: dict | None = None) -> tuple[bool, list[str]]:
-    """Puerta explícita: sin evidencia de revisión y acuerdo, bloquea.
+    """Puerta explícita fail-closed: sin revisión y acuerdo trazables, bloquea.
 
     `revision_efectiva` y `acuerdo` los aporta el equipo fuera de este módulo
-    (quién revisó, desacuerdos, adjudicación, composición acordada); este
-    módulo nunca los inventa: por defecto informa el bloqueo exacto.
+    (revisores identificados, originales con su referencia, desacuerdos y
+    adjudicaciones; composición, tamaño, reglas de referencia y proporciones).
+    Este módulo nunca los inventa y no autentica personas por software: solo
+    verifica estructura y contenido no vacío, y cruza lo declarado en la
+    revisión con el conteo real del manifiesto que conserva el informe. Un
+    dict vacío, una lista vacía o una discrepancia con el manifiesto no
+    habilitan. Por defecto (sin revisión ni acuerdo reales, estado al
+    2026-10-27) informa el bloqueo.
     """
     motivos = []
-    if not informe.get("es_evaluable", False):
+    if not isinstance(informe, dict) or not informe.get("es_evaluable", False):
         motivos.append("Particiones inválidas: resolver errores antes de habilitar.")
-    if revision_efectiva is None:
-        motivos.append("Falta revisión humana efectiva del equipo "
-                       "(originales, desacuerdos y adjudicaciones conservados).")
-    if acuerdo is None:
-        motivos.append("Falta acuerdo registrado de composición, tamaño, reglas de "
-                       "referencia y proporciones (coordina con #32/#55 antes de "
-                       "producir o habilitar material dependiente).")
+    motivos += _motivos_revision(revision_efectiva, informe)
+    motivos += _motivos_acuerdo(acuerdo)
     return (not motivos, motivos)
