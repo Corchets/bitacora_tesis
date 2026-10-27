@@ -105,6 +105,19 @@ def partir_por_frases(lineas_ref: list[str], hipotesis: str) -> list[str]:
     return [" ".join(p) for p in partes]
 
 
+def sustituciones(lineas_ref: list[str], hipotesis: str) -> list[tuple[str, str]]:
+    """Palabras de la referencia que la transcripción cambió por otra: (lo que salió, lo que se dijo).
+
+    Sirven para proponer pares del diccionario de corrección con la toma 1. Solo las sustituciones
+    palabra por palabra; lo que salió va sin tildes ni signos, lo que se dijo en minúsculas tal como
+    lo escribiste en la referencia.
+    """
+    ref = [(_clave(p), p.strip(".,;:¿?¡!\"'()").lower()) for l in lineas_ref for p in l.split() if _clave(p)]
+    hip = [_clave(p) for p in hipotesis.split() if _clave(p)]
+    return [(hip[j], ref[i][1]) for i, j in alinear([c for c, _ in ref], hip)
+            if i is not None and j is not None and ref[i][0] != hip[j]]
+
+
 # --- Términos: críticos, entidades y jerga ----------------------------------------------------------
 
 
@@ -244,7 +257,7 @@ def agregar(resultados: list[dict[str, Any]]) -> dict[str, Any]:
     """Junta los resultados de varias pruebas (un grupo de toma/condición, o toda una toma).
 
     Cada resultado trae `etiquetas` (de evaluar_frases), `error` (de error_de_texto), `demoras_s`,
-    `segmentos`, `proceso_s`, `audio_s` y `p95_bloque_ms` (None en motores que no van por bloques).
+    `segmentos`, `proceso_s`, `audio_s`, `p95_bloque_ms` y `max_bloque_ms` (None en motores que no van por bloques).
     WER y CER se calculan sobre las sumas (no es el promedio de los WER).
     """
     et = [r["etiquetas"] for r in resultados]
@@ -257,6 +270,7 @@ def agregar(resultados: list[dict[str, Any]]) -> dict[str, Any]:
     audio = sum(r["audio_s"] for r in resultados)
     proceso = sum(r["proceso_s"] for r in resultados)
     p95s = [r["p95_bloque_ms"] for r in resultados if r.get("p95_bloque_ms") is not None]
+    maximos = [r["max_bloque_ms"] for r in resultados if r.get("max_bloque_ms") is not None]
     n_frases = sum(e["n_frases"] for e in et)
     segmentos = sum(r["segmentos"] for r in resultados)
 
@@ -289,6 +303,7 @@ def agregar(resultados: list[dict[str, Any]]) -> dict[str, Any]:
         "proceso_s": round(proceso, 3),
         "rtf": round(proceso / audio, 4) if audio else None,
         "p95_bloque_ms": ({"mediana": round(statistics.median(p95s), 2), "max": round(max(p95s), 2)} if p95s else None),
+        "max_bloque_ms": round(max(maximos), 2) if maximos else None,
     }
 
 

@@ -201,6 +201,14 @@ class MotorSherpaZipformer(MotorASR):
         self.ultimo_texto_parcial = ""
         self.silencio_acum_s = 0.0
 
+    def nueva_sesion(self) -> None:
+        """Empieza un audio nuevo con un stream limpio, sin recargar el modelo (después de `vaciar_final`)."""
+        self.stream = self.recognizer.create_stream()
+        self.segmento_actual = 1
+        self.inicio_segmento_s = 0.0
+        self.ultimo_texto_parcial = ""
+        self.silencio_acum_s = 0.0
+
     def procesar_bloque(
         self,
         muestras: np.ndarray,
@@ -383,6 +391,11 @@ class MotorFasterWhisper(MotorASR):
             compute_type=self.compute_type,
             cpu_threads=self.hilos,
         )
+        self.buffer_muestras = []
+        self.duracion_buffer_s = 0.0
+
+    def nueva_sesion(self) -> None:
+        """Descarta el audio acumulado y empieza otro, sin recargar el modelo."""
         self.buffer_muestras = []
         self.duracion_buffer_s = 0.0
 

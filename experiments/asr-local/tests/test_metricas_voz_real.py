@@ -74,6 +74,21 @@ class TestPartirPorFrases(unittest.TestCase):
         self.assertEqual(" ".join(partes).split(), hip.split())
 
 
+class TestSustituciones(unittest.TestCase):
+    def test_devuelve_lo_que_salio_y_lo_que_se_dijo(self):
+        pares = M.sustituciones(["Pasame el código, dale."], "pasame el codego dale")
+        self.assertEqual(pares, [("codego", "código")])
+
+    def test_ignora_aciertos_borrados_e_inserciones(self):
+        self.assertEqual(M.sustituciones(["uno dos tres"], "uno dos tres"), [])
+        self.assertEqual(M.sustituciones(["uno dos tres"], "uno tres"), [])
+        self.assertEqual(M.sustituciones(["uno tres"], "uno dos tres"), [])
+
+    def test_varias_lineas(self):
+        pares = M.sustituciones(["pasame la clave", "decime el código"], "pasame la clabe decime el cosigo")
+        self.assertEqual(pares, [("clabe", "clave"), ("cosigo", "código")])
+
+
 class TestEtiquetasYTerminos(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
