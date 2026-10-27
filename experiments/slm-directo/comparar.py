@@ -96,9 +96,10 @@ def armar_comparacion(carpeta: Path) -> str:
     slm_f = sum(detalle[cid]["slm_ms_total"] for cid in sorted(refs))
     hay_split = any((f.get("tito_ms") or "") != "" or (f.get("slm_ms") or "") != "" for f in filas)
     if historico:
-        L.append(f"Modo de término: `{modo}`: corrida histórica de conversación completa; "
-                 "estos costos cubren todas las líneas y no son una nueva medición "
-                 "operativa hasta el aviso.")
+        L.append(f"Modo de término: `{modo}`: reconstrucción descriptiva del prefijo "
+                 "hasta el primer aviso a partir de una corrida histórica de conversación "
+                 "completa, sin recortar ni sobrescribir la traza histórica; no es una "
+                 "nueva medición operativa hasta el aviso ni el costo completo.")
     elif modo == "diagnostico-completo":
         L.append(f"Modo de término: `{modo}`: la llamada recorre la conversación completa "
                  "tras el aviso; los costos de esta tabla son el prefijo hasta el aviso "

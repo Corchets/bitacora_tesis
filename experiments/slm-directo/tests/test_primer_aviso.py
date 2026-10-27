@@ -269,6 +269,14 @@ class TestCompatibilidadHistorica(unittest.TestCase):
             self.assertIn("no informado (corrida histórica, conversación completa)", texto_res)
             self.assertIn("no están disponibles y se muestran como —", texto_res)
             self.assertIn("componentes Tito/SLM no informados en esta traza histórica", texto_comp)
+            for texto in (texto_res, texto_comp):
+                self.assertIn("reconstrucción descriptiva del prefijo", texto.lower())
+                self.assertIn("ni el costo completo", texto)
+                self.assertNotIn("cubren todas las líneas", texto)
+            detalle = resumen.analisis_filtro(manifiesto, filas, analisis)
+            for cs in detalle.values():
+                for c in cs.values():
+                    self.assertNotIn("consultas_completa", c)
 
 
 class OllamaConDuracion(OllamaFalso):
@@ -626,7 +634,11 @@ class TestModoDeTermino(unittest.TestCase):
         self.assertIn("hasta el aviso incluido", t_op)
         self.assertNotIn("termina en su primer aviso válido", t_diag)
         self.assertIn("por separado, la conversación completa", t_diag)
-        self.assertIn("no son una nueva medición operativa", t_hist)
+        for t in (t_hist,):
+            self.assertIn("reconstrucción descriptiva del prefijo", t.lower())
+            self.assertIn("no es una nueva medición operativa", t)
+            self.assertIn("ni el costo completo", t)
+            self.assertNotIn("cubren todas las líneas", t)
         # La sección del filtro tampoco promete fin operativo en otros modos.
         base = {"filtro_tito": {"tito": "guion-simulado", "umbral": 0.5}}
         f_op = "\n".join(resumen.seccion_filtro({**base, "modo_termino": "operativo-hasta-aviso"}, {}, {}))
@@ -635,7 +647,10 @@ class TestModoDeTermino(unittest.TestCase):
         self.assertIn("termina en su primer aviso válido", f_op)
         self.assertNotIn("termina en su primer aviso válido", f_diag)
         self.assertNotIn("termina en su primer aviso válido", f_hist)
-        self.assertIn("no son una nueva medición operativa", f_hist)
+        self.assertIn("reconstrucción descriptiva del prefijo", f_hist.lower())
+        self.assertIn("no es una nueva medición operativa", f_hist)
+        self.assertIn("ni el costo completo", f_hist)
+        self.assertNotIn("cubren todas las líneas", f_hist)
 
 
 class TestCostosMismoAlcance(unittest.TestCase):

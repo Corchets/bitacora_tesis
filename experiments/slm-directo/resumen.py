@@ -303,7 +303,6 @@ def analisis_filtro(manifiesto: dict, filas: list[dict], analisis: dict) -> dict
                 "derivacion": derivacion,
                 "consultas": len(consultadas),
                 "evitadas": len(evitadas),
-                "consultas_completa": len(consultadas_full),
                 "fallos_slm": sum(1 for f in consultadas if f.get("consulta") == "slm_fallo"),
                 "fallos_tito": sum(1 for f in prefijo if (f.get("tito_error") or "").strip()),
                 "ms_total": ms_total,
@@ -333,9 +332,10 @@ def seccion_filtro(manifiesto: dict, analisis: dict, detalle: dict) -> list[str]
     historico = "modo_termino" not in manifiesto
     if historico:
         salida.append(
-            f"Modo de término: `{modo}`: corrida histórica de conversación completa; "
-            "las llamadas no terminaban en el aviso y estos costos no son una "
-            "nueva medición operativa hasta el aviso."
+            f"Modo de término: `{modo}`: reconstrucción descriptiva del prefijo "
+            "hasta el primer aviso a partir de una corrida histórica de conversación "
+            "completa, sin recortar ni sobrescribir la traza histórica; no es una "
+            "nueva medición operativa hasta el aviso ni el costo completo."
         )
     elif modo == "diagnostico-completo":
         salida.append(
@@ -410,9 +410,10 @@ def seccion_costos_hasta_aviso(manifiesto: dict, analisis: dict) -> list[str]:
     En modo operativo cada caso ya termina en su aviso: estos costos son hasta
     el aviso (o el total del caso si nunca avisó). En modo diagnóstico la
     conversación sigue tras el aviso: se informan ambos alcances por separado,
-    el prefijo hasta el aviso y la conversación completa. Las corridas
-    históricas (conversación completa) no son mediciones operativas hasta el
-    aviso.
+    el prefijo hasta el aviso y la conversación completa (`ms_completa` aparte).
+    Las corridas históricas son una reconstrucción descriptiva del prefijo hasta
+    el primer aviso a partir de la traza completa: ni nueva medición operativa
+    ni costo completo.
     """
     modo = manifiesto.get("modo_termino", "no informado (corrida histórica, conversación completa)")
     historico = "modo_termino" not in manifiesto
@@ -427,9 +428,10 @@ def seccion_costos_hasta_aviso(manifiesto: dict, analisis: dict) -> list[str]:
         )
     elif historico:
         salida.append(
-            "Corrida histórica de conversación completa: estos costos cubren "
-            "todas las líneas y no son una nueva medición operativa hasta el "
-            "aviso."
+            "Reconstrucción descriptiva del prefijo hasta el primer aviso a partir "
+            "de una corrida histórica de conversación completa, sin recortar ni "
+            "sobrescribir la traza histórica; no es una nueva medición operativa "
+            "hasta el aviso ni el costo completo."
         )
     else:
         salida.append(
