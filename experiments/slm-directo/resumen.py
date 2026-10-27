@@ -92,8 +92,27 @@ def leer_corrida(carpeta: Path) -> tuple[dict, list[dict]]:
     return manifiesto, filas
 
 
+def _num(fila: dict, clave: str) -> float | None:
+    """Número de una columna de la traza; None si la columna falta o está vacía."""
+    valor = fila.get(clave)
+    if valor is None or valor == "":
+        return None
+    try:
+        return float(valor)
+    except (TypeError, ValueError):
+        return None
+
+
 def analizar(manifiesto: dict, filas: list[dict]) -> dict:
-    """Por configuración y caso: línea del aviso, categoría, fallos, riesgos y tiempos."""
+    """Por configuración y caso: línea del aviso, categoría, fallos, riesgos y tiempos.
+
+    Terminar en el aviso (#97) es un fin normal: un caso con aviso cuenta como
+    completo aunque no recorra todas las líneas. `fin` distingue ese cierre de
+    una interrupción (`interrumpido`), de un caso sin respuestas válidas
+    (`fallo`) y de una llamada completa sin aviso (`completo-sin-aviso`).
+    `ms_hasta_aviso` acumula el costo de las actualizaciones evaluadas hasta el
+    aviso incluido; sin aviso es el total del caso.
+    """
     configs = [c["config"] for c in manifiesto["configs"]]
     por = defaultdict(lambda: defaultdict(list))
     for fila in filas:
@@ -113,21 +132,45 @@ def analizar(manifiesto: dict, filas: list[dict]) -> dict:
             aviso_fila = next((f for f in actualizaciones if f["aviso"] == "true"), None)
             aviso = int(aviso_fila["linea"]) if aviso_fila else None
             fallos = [f for f in actualizaciones if f["valida"] != "true"]
-            completo = len(actualizaciones) == len(casos.cargar_texto(case_id))
+            total_lineas = len(casos.cargar_texto(case_id))
+            # El aviso termina la llamada en modo operativo: no es un corte.
+            completo = len(actualizaciones) == total_lineas or aviso is not None
             if not completo:
                 cat = "incompleto"
             elif len(fallos) == len(actualizaciones):
                 cat = "sin_respuesta_valida"
             else:
                 cat = categoria(ref, aviso)
+            if aviso is not None:
+                fin = "aviso"
+            elif cat == "incompleto":
+                fin = "interrumpido"
+            elif cat == "sin_respuesta_valida":
+                fin = "fallo"
+            else:
+                fin = "completo-sin-aviso"
+            evaluadas = actualizaciones if aviso is None else actualizaciones[:actualizaciones.index(aviso_fila) + 1]
+            tiene_split = any((f.get("tito_ms") or "") != "" or (f.get("slm_ms") or "") != ""
+                              for f in evaluadas)
             casos_cfg[case_id] = {
+                "tiene_costos_split": tiene_split,
                 "ref": ref,
                 "aviso": aviso,
                 "aviso_fila": aviso_fila,
                 "categoria": cat,
+                "fin": fin,
                 "fallos": fallos,
                 "riesgos": [f["riesgo"] for f in actualizaciones],
                 "ms": [float(f["ms"]) for f in actualizaciones if f["ms"] and f["valida"] == "true"],
+                "ms_hasta_aviso": sum(_num(f, "ms") or 0.0 for f in evaluadas),
+                "tito_ms_total": sum(_num(f, "tito_ms") or 0.0 for f in evaluadas),
+                "slm_ms_total": sum(_num(f, "slm_ms") or 0.0 for f in evaluadas),
+                "tokens_hasta_aviso": sum(
+                    (_num(f, "tokens_prompt") or 0.0) + (_num(f, "tokens_salida") or 0.0)
+                    for f in evaluadas
+                ),
+                "runtime_con_dato": sum(1 for f in evaluadas if (f.get("runtime_ns") or "") != ""),
+                "runtime_ausente": sum(1 for f in evaluadas if (f.get("runtime_ns") or "") == ""),
                 "completo": completo,
             }
         resultado[config] = casos_cfg
@@ -214,7 +257,10 @@ def analisis_filtro(manifiesto: dict, filas: list[dict], analisis: dict) -> dict
 
     Una fila omitida (`consulta == "omitida"`) es una actualización procesada
     sin consultar al SLM: no es fallo ni predicción de legitimidad. Su `ms`
-    es solo costo de Tito; en filas consultadas es Tito + SLM.
+    es solo costo de Tito; en filas consultadas es Tito + SLM. `tito_ms_total`
+    y `slm_ms_total` separan ambos componentes y su suma reconstruye
+    `ms_total` sin doble conteo. En modo operativo las filas ya terminan en
+    el aviso, así que estos totales son costos hasta el aviso.
     """
     resultado: dict[str, dict[str, dict]] = {}
     for config in configs_filtradas(manifiesto):
@@ -229,6 +275,8 @@ def analisis_filtro(manifiesto: dict, filas: list[dict], analisis: dict) -> dict
             evitadas = [f for f in fs if (f.get("consulta") or "") == "omitida"]
             derivacion = min((int(f["linea"]) for f in consultadas), default=None)
             ms_total = sum(float(f["ms"]) for f in fs if f.get("ms"))
+            tito_total = sum(_num(f, "tito_ms") or 0.0 for f in fs)
+            slm_total = sum(_num(f, "slm_ms") or 0.0 for f in fs)
             tokens = sum(
                 (int(f["tokens_prompt"]) if f.get("tokens_prompt") else 0)
                 + (int(f["tokens_salida"]) if f.get("tokens_salida") else 0)
@@ -242,9 +290,13 @@ def analisis_filtro(manifiesto: dict, filas: list[dict], analisis: dict) -> dict
                 "fallos_slm": sum(1 for f in consultadas if f.get("consulta") == "slm_fallo"),
                 "fallos_tito": sum(1 for f in fs if (f.get("tito_error") or "").strip()),
                 "ms_total": ms_total,
+                "tito_ms_total": tito_total,
+                "slm_ms_total": slm_total,
                 "tokens_slm": tokens,
                 "aviso": c["aviso"],
                 "categoria": c["categoria"],
+                "fin": c["fin"],
+                "ms_hasta_aviso": c["ms_hasta_aviso"],
             }
         resultado[config] = casos_cfg
     return resultado
@@ -254,11 +306,18 @@ def seccion_filtro(manifiesto: dict, analisis: dict, detalle: dict) -> list[str]
     salida = ["## Filtro Tito→SLM (derivación y ahorro)", ""]
     filtro = manifiesto.get("filtro_tito") or {}
     origen = "Tito real" if str(filtro.get("tito", "")).startswith("real-") else "Tito simulado"
+    modo = manifiesto.get("modo_termino", "no informado (corrida histórica, conversación completa)")
     salida.append(
         f"{origen} (`{filtro.get('tito', 'no informado')}`), umbral {filtro.get('umbral', '—')}: "
         "el primer puntaje ≥ umbral deriva al SLM en esa misma línea y lo mantiene activo; "
         "un fallo técnico de Tito también deriva, sin fabricar sospecha."
     )
+    salida.append(f"Modo de término: `{modo}`: cada llamada termina en su primer aviso válido.")
+    if filtro.get("arranque_ms") is not None or filtro.get("calentamiento_ms") is not None:
+        salida.append(
+            f"Arranque Tito: {_ms(filtro.get('arranque_ms'))} ms; calentamiento Tito: "
+            f"{_ms(filtro.get('calentamiento_ms'))} ms (unidad: {filtro.get('unidad', 'ms')})."
+        )
     salida.append(
         "Una conversación completa nunca derivada **conserva su denominador**: vishing sin aviso "
         "cuenta como falso negativo y legítima sin aviso como verdadero negativo."
@@ -302,6 +361,58 @@ def seccion_filtro(manifiesto: dict, analisis: dict, detalle: dict) -> list[str]
             for cid in resto:
                 salida.append(f"- `{cid}` · categoría `{cs[cid]['categoria']}`.")
         salida.append("")
+    return salida
+
+
+def seccion_costos_hasta_aviso(manifiesto: dict, analisis: dict) -> list[str]:
+    """Totales por configuración con componentes separados y sin doble conteo.
+
+    En modo operativo cada caso ya termina en su aviso: estos costos son hasta
+    el aviso (o el total del caso si nunca avisó). En modo diagnóstico la
+    conversación sigue tras el aviso y estos costos no son operativos.
+    """
+    modo = manifiesto.get("modo_termino", "no informado (corrida histórica, conversación completa)")
+    diagnostico = modo == "diagnostico-completo"
+    salida = ["## Costos por componente hasta el aviso", ""]
+    salida.append(f"Modo de término: `{modo}`.")
+    if diagnostico:
+        salida.append(
+            "Diagnóstico de conversación completa: estos costos cubren actualizaciones "
+            "posteriores al aviso y no se mezclan con el costo operativo hasta el aviso."
+        )
+    else:
+        salida.append(
+            "Cada caso aporta sus actualizaciones evaluadas hasta el aviso incluido; "
+            "una llamada sin aviso aporta la conversación completa. `ms` total = "
+            "Tito + SLM por actualización, sin doble conteo."
+        )
+    if not any(c.get("tiene_costos_split") for cs in analisis.values() for c in cs.values()):
+        salida.append(
+            "Traza histórica sin columnas `tito_ms`/`slm_ms`: los parciales por "
+            "componente no están disponibles y se muestran como — (no son cero)."
+        )
+    salida += ["", "| Configuración | ms hasta aviso | Tito ms | SLM ms | Tokens hasta aviso | Actualiz. | Runtime con dato/ausente |",
+               "|---|---|---|---|---|---|---|"]
+    for config, cs in analisis.items():
+        ms_total = sum(c["ms_hasta_aviso"] for c in cs.values())
+        tito = sum(c["tito_ms_total"] for c in cs.values())
+        slm = sum(c["slm_ms_total"] for c in cs.values())
+        toks = sum(c["tokens_hasta_aviso"] for c in cs.values())
+        n_act = sum(len(c["ms"]) for c in cs.values())
+        con_dato = sum(c["runtime_con_dato"] for c in cs.values())
+        ausente = sum(c["runtime_ausente"] for c in cs.values())
+        if any(c.get("tiene_costos_split") for c in cs.values()):
+            parciales = f"{_ms(round(tito, 1))} | {_ms(round(slm, 1))}"
+        else:
+            parciales = "— | —"
+        salida.append(
+            f"| {_celda(config)} | {_ms(round(ms_total, 1))} | {parciales} | "
+            f"{toks:g} | {n_act} | {con_dato}/{ausente} |"
+        )
+    salida += ["",
+               "Tito ms cuenta solo las líneas donde Tito puntuó (hasta la activación); "
+               "SLM ms, solo las consultas al SLM. `Runtime` es la duración que informa "
+               "el runtime (ns) por actualización válida del SLM: con dato o ausente explícito."]
     return salida
 
 
@@ -382,7 +493,7 @@ def armar_resumen(carpeta: Path, con_trayectorias: bool = False) -> str:
         + (" — **interrumpida**" if manifiesto["interrumpida"] else ""),
         f"- **Código:** `{commit_corto(codigo['commit'])}`" + (" con cambios sin commit en la carpeta" if codigo["cambios_sin_commit_en_la_carpeta"] else ""),
         f"- **Máquina:** {maquina['sistema']}, {maquina['nucleos_logicos']} núcleos lógicos, {maquina['ram_total_gb']} GB de RAM",
-        f"- **Ollama:** {ollama.get('version', 'no usado')} · **Política:** {manifiesto['politica']}",
+        f"- **Ollama:** {ollama.get('version', 'no usado')} · **Política:** {manifiesto['politica']} · **Modo:** `{manifiesto.get('modo_termino', 'no informado (corrida histórica, conversación completa)')}`",
         f"- **Casos:** {len(refs)} ({clases['vishing']} vishing, {sum(clases[c] for c in casos.LEGITIMAS)} legítimas); "
         f"{sin_revision} todavía sin revisión humana",
         "",
@@ -416,6 +527,7 @@ def armar_resumen(carpeta: Path, con_trayectorias: bool = False) -> str:
     detalle_filtro = analisis_filtro(manifiesto, filas, analisis)
     if detalle_filtro:
         lineas += ["", *seccion_filtro(manifiesto, analisis, detalle_filtro)]
+    lineas += ["", *seccion_costos_hasta_aviso(manifiesto, analisis)]
     if con_trayectorias:
         lineas += ["", *trayectorias(analisis)]
     return "\n".join(lineas) + "\n"

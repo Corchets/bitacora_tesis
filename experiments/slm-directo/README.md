@@ -270,6 +270,9 @@ python resumen.py corridas/*_tito-real-8casos --trayectorias
 Corrida de referencia (Tito real + SLM simulado, umbral 0,5, 8 casos, 105
 líneas, 316 filas = 105×3 + cabecera):
 [`corridas/2026-10-26_132027_tito-real-8casos`](corridas/2026-10-26_132027_tito-real-8casos/resumen.md).
+Tito puntuó solo hasta la activación de cada caso: 43 puntajes en la variante
+filtrada (no 105; corrección #97); las 70 filas restantes de esa variante son
+consultas SLM con Tito ya activado.
 El `manifiesto.json` de la corrida registra comando, código y diff, máquina,
 semilla, filtro (artefacto + sha + encoder) y casos; cada fila conserva
 `tito_puntaje`, `consulta`, `indicio_*` y costo Tito+SLM incluso si la llamada

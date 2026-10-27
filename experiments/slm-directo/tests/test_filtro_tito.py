@@ -82,9 +82,18 @@ class TestUmbralYOmitidas(unittest.TestCase):
         self.assertEqual([n for n, _ in f.tito.consultas], [1, 2, 3, 4, 5])
         self.assertEqual([aviso for *_, aviso in salidas], [False] * 5)
 
-    def test_igualdad_al_umbral_activa_en_esa_misma_linea(self):
+    def test_igualdad_al_umbral_activa_en_esa_misma_linea_y_ahi_termina(self):
         f = flujo(puntajes={2: 0.5}, alertas={2})
         salidas = list(correr.procesar_caso(f, DIALOGO))
+        self.assertEqual(
+            [r.consulta for _, _, r, _ in salidas],
+            ["omitida", "slm_valida"],
+        )
+        self.assertEqual([aviso for *_, aviso in salidas], [False, True])
+
+    def test_tras_activar_sigue_consultando_en_diagnostico(self):
+        f = flujo(puntajes={2: 0.5}, alertas={2})
+        salidas = list(correr.procesar_caso(f, DIALOGO, detener_en_aviso=False))
         self.assertEqual(
             [r.consulta for _, _, r, _ in salidas],
             ["omitida", "slm_valida", "slm_valida", "slm_valida", "slm_valida"],
@@ -92,11 +101,15 @@ class TestUmbralYOmitidas(unittest.TestCase):
         self.assertEqual([aviso for *_, aviso in salidas], [False, True, False, False, False])
 
     def test_la_activacion_persiste_aunque_el_puntaje_caiga(self):
+        # Recorrido completo en modo diagnóstico: la persistencia se observa
+        # tras el aviso; en operativo la llamada termina en L3.
         f = flujo(puntajes={1: 0.9}, alertas={3})
-        salidas = list(correr.procesar_caso(f, DIALOGO))
+        salidas = list(correr.procesar_caso(f, DIALOGO, detener_en_aviso=False))
         self.assertEqual(f.tito.consultas, [(1, DIALOGO[0].texto)], "Tito deja de decidir tras activar")
         self.assertEqual(len(f.slm.recibido), 5)
         self.assertEqual([aviso for *_, aviso in salidas], [False, False, True, False, False])
+        self.assertEqual([aviso for *_, aviso in correr.procesar_caso(flujo(puntajes={1: 0.9}, alertas={3}), DIALOGO)],
+                         [False, False, True])
 
     def test_omitir_no_simula_legitimidad_ni_fallo(self):
         f = flujo()
@@ -163,10 +176,11 @@ class TestFallos(unittest.TestCase):
 
 
 class TestAvisoUnicoYReinicio(unittest.TestCase):
-    def test_un_solo_aviso_en_el_primer_true_valido(self):
+    def test_un_solo_aviso_en_el_primer_true_valido_y_ahi_termina(self):
         f = flujo(puntajes={1: 0.7}, alertas={2, 4})
-        avisos = [aviso for *_, aviso in correr.procesar_caso(f, DIALOGO)]
-        self.assertEqual(avisos, [False, True, False, False, False])
+        salidas = list(correr.procesar_caso(f, DIALOGO))
+        self.assertEqual([aviso for *_, aviso in salidas], [False, True])
+        self.assertEqual(len(f.slm.recibido), 2, "la segunda alerta nunca se evalúa")
 
     def test_contexto_activacion_e_indicio_se_reinician_entre_llamadas(self):
         f = flujo(puntajes={1: 0.9}, alertas={1})
@@ -188,6 +202,11 @@ class TestCostoDeterminista(unittest.TestCase):
         total = sum(r.ms for _, _, r, _ in salidas)
         # L1 omitida: 5,0 solo Tito; L2: 5,0 + 7,0; L3–L5: 7,0 (Tito ya no decide).
         self.assertAlmostEqual(total, 5.0 + 12.0 + 7.0 * 3)
+        filas = [r for _, _, r, _ in salidas]
+        self.assertEqual([(r.tito_ms, r.slm_ms) for r in filas],
+                         [(5.0, None), (5.0, 7.0), (None, 7.0), (None, 7.0), (None, 7.0)])
+        for r in filas:
+            self.assertAlmostEqual(r.ms, (r.tito_ms or 0.0) + (r.slm_ms or 0.0))
         self.assertEqual(salidas[0][2].tokens_prompt, None)
         self.assertIsNone(salidas[0][2].tokens_salida)
 
@@ -243,16 +262,17 @@ class TestPuntaAPuntaConOllamaFalso(unittest.TestCase):
         filtrada = "tito-slm|modelo-falso:1b|tarea|ab"
         self.assertIn(filtrada, analisis)
         self.assertIn("Fallos técnicos de Tito:", texto)
-        # El SLM igual fue consultado (activación por fallo), no omitido.
-        self.assertIn("Consultas al SLM: 9; evitadas por el filtro: 0", texto)
+        # El SLM igual fue consultado (activación por fallo), no omitido. El
+        # vishing avisa en L4 y termina ahí: 4 + 4 consultas, ninguna evitada.
+        self.assertIn("Consultas al SLM: 8; evitadas por el filtro: 0", texto)
 
     def test_con_derivacion_hay_primera_derivacion_primer_aviso_y_costo(self):
         _, analisis, texto = self._correr("4=0.9")
         cs = analisis["tito-slm|modelo-falso:1b|tarea|ab"]
-        # Vishing: deriva en L4 (igualdad/inclusión) y avisa ahí mismo.
+        # Vishing: deriva en L4 (igualdad/inclusión), avisa ahí mismo y termina.
         self.assertEqual(cs["SC-WA-CODE-01-e01"]["aviso"], 4)
         self.assertIn("1.ª derivación", texto)
-        self.assertIn("`SC-WA-CODE-01-e01` | 4 | L4 | 2 | 3 | 0 |", texto)
+        self.assertIn("`SC-WA-CODE-01-e01` | 4 | L4 | 1 | 3 | 0 |", texto)
         # Legítima: deriva en L4 por el número de línea, pero el SLM no avisa.
         self.assertEqual(cs["LG-WA-CONSULTA-01-e01"]["categoria"], "sin_aviso_correcto")
 

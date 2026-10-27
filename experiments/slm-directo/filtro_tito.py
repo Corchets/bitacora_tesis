@@ -116,6 +116,7 @@ class FlujoTitoSLM:
             valida=True,
             alerta_sugerida=False,
             ms=tito_ms,
+            tito_ms=tito_ms,
             consulta="omitida",
             tito_puntaje=puntaje,
             indicio_linea=e.indicio_linea,
@@ -126,12 +127,13 @@ class FlujoTitoSLM:
         n = len(lineas)
         fragmento = lineas[-1].texto
         e = self.estado
-        tito_ms = 0.0
+        tito_ms: float | None = None
         tito_puntaje: float | None = None
         tito_error = ""
 
         if not e.activado:
-            tito_puntaje, tito_error, tito_ms = self.tito.puntuar(n, fragmento)
+            tito_puntaje, tito_error, costo_tito = self.tito.puntuar(n, fragmento)
+            tito_ms = costo_tito
             if tito_error:
                 e.activado = True
                 e.fallo_tito = tito_error
@@ -143,6 +145,7 @@ class FlujoTitoSLM:
 
         if not e.activado:
             assert tito_puntaje is not None  # sin fallo, puntuar siempre devuelve puntaje
+            assert tito_ms is not None
             return self._respuesta_omitida(tito_ms, tito_puntaje)
 
         if e.fallo_tito:
@@ -154,9 +157,12 @@ class FlujoTitoSLM:
         r = self.slm.evaluar_mensaje(armar_mensaje_filtrado(base, bloque), lineas)
         r.consulta = "slm_valida" if r.valida else "slm_fallo"
         r.tito_puntaje = tito_puntaje
+        r.tito_ms = tito_ms  # None tras activar: Tito no vuelve a correr (#97)
         r.tito_error = tito_error or e.fallo_tito
         r.indicio_linea = e.indicio_linea
         r.indicio_texto = e.indicio_texto
         r.indicio_puntaje = e.indicio_puntaje
-        r.ms = (r.ms or 0.0) + tito_ms
+        if r.slm_ms is None:
+            r.slm_ms = r.ms  # SLM que solo informa el total: todo es costo SLM
+        r.ms = (r.slm_ms or 0.0) + (tito_ms or 0.0)
         return r

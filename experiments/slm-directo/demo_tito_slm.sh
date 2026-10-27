@@ -7,6 +7,9 @@
 # Levanta el SLM falso, corre el par de WhatsApp en modo directo y filtrado
 # (Tito simulado deriva en la línea 4) y escribe el resumen. No descarga ni
 # entrena modelos; la corrida queda en corridas/*_demo-tito-slm-simulado/.
+# Modo operativo (#97): cada llamada termina en su primer aviso válido.
+# Con --seguir-tras-aviso en correr.py se recorre la conversación completa
+# (modo diagnóstico, separado del costo operativo).
 # Para regenerar el reporte de una corrida existente:
 #   python experiments/slm-directo/resumen.py experiments/slm-directo/corridas/<carpeta>
 

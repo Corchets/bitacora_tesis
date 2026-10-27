@@ -18,10 +18,12 @@ identidad byte a byte). Detalle por modelo y conversación en cada
 ## 1. Cobertura verificada
 
 - `consolidar.py` confirma 96/96: cada corrida canónica trae 8 casos con 105
-  filas por variante (directa: 105 consultas; filtrada: 70 consultas + 35
-  evitadas). Toda conversación filtrada derivó al menos una vez, así que
-  ninguna cayó en el caso «nunca derivada»; el evaluador igual conserva ese
-  estado con su denominador (`resumen.py:212`).
+  filas por variante (directa: 105 consultas SLM; filtrada: 70 consultas SLM
+  + 35 evitadas). Tito puntuó solo hasta la activación de cada caso: 43
+  puntajes por modelo (no 105; corrección #97), y las 35 evitadas son las
+  líneas previas a cada activación. Toda conversación filtrada derivó al
+  menos una vez, así que ninguna cayó en el caso «nunca derivada»; el
+  evaluador igual conserva ese estado con su denominador (`resumen.py:212`).
 - Los cinco digests Qwen coinciden con la tabla de #68; no se usaron los alias
   históricos sin sufijo (bare `2b`/`4b`) ni se repitió ningún artefacto.
   Los dos 0.8B tienen digests distintos y se mantuvieron separados.
@@ -39,9 +41,11 @@ identidad byte a byte). Detalle por modelo y conversación en cada
   predicciones de legitimidad.
 - **Corrida superada excluida:** `2026-10-26_132916_qwen4b-comparacion`
   (mismo comando que la canónica `…_133838`) falló con
-  `tito_error: ModuleNotFoundError` en las 105 líneas filtradas y derivó todo
-  por fail-open (0 evitadas). No integra la matriz; se conserva como evidencia
-  del camino de fallo técnico de Tito en código real.
+  `tito_error: ModuleNotFoundError` en el primer puntaje de cada caso
+  (8 intentos, 0 puntajes; corrección #97: no fueron 105 ejecuciones de Tito)
+  y derivó todo por fail-open (105 consultas SLM, 0 evitadas). No integra la
+  matriz; se conserva como evidencia del camino de fallo técnico de Tito en
+  código real.
 
 ## 2. Qué muestran las seis comparaciones
 
@@ -57,8 +61,9 @@ sin atribuir el efecto a uno de ellos por separado):
   LG-SUPPORT L12); 9B 3→2 (quita TR-11); Llama 0→3 (agrega LG-SUPPORT L9,
   TR-06 L5, TR-11 L9).
 - **Derivación idéntica en los seis modelos** (mismo Tito): L8, L9, L1, L5,
-  L3, L5, L3, L9 según el caso; 35 consultas evitadas por modelo. El costo en
-  ms del filtrado incluye Tito en todas las líneas más SLM válido y fallido:
+  L3, L5, L3, L9 según el caso; 35 consultas evitadas por modelo (las previas
+  a cada activación; Tito ejecutó 43 puntajes, corrección #97). El costo en
+  ms del filtrado incluye Tito hasta la activación más SLM válido y fallido:
   baja en 2B (55037→46954) y 9B (153222→141504), sube en 4b, 0.8B y Llama
   (p. ej. 4b 97969→113314). Los tokens del filtrado bajan en los seis
   (p. ej. 4b 78900→66127). No se afirma ahorro móvil ni generalización: son

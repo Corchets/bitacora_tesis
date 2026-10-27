@@ -26,7 +26,7 @@ Denominadores: 4 vishing y 4 legítimas difíciles por variante y modelo.
 | `qwen3.5:9b-q4_K_M` | 105 | 70 | 35 | 79032 | 64945 | 153222 | 141504 | 0/0 | 0 |
 | `llama3.2:1b-instruct-q4_K_M` | 105 | 70 | 35 | 87910 | 71909 | 39297 | 33464 | 5/0 | 0 |
 
-Costo ms F = Tito en todas las líneas + SLM válido y fallido; carga, calentamiento y ajuste van por separado en cada `comparacion.md`.
+Costo ms F = Tito hasta la activación de cada caso (43 puntajes por modelo, #97) + SLM válido y fallido; carga, calentamiento y ajuste van por separado en cada `comparacion.md`.
 
 ## Cambios de aviso (directo → filtrado)
 

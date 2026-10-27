@@ -49,9 +49,10 @@ ESPERADOS = {
         "llama3.2:1b-instruct-q4_K_M", "22bc6b92eb0160c4629782fca05a9032c59d306ab2058b7dacc8a4644fbafa02"),
 }
 
-# Corrida superada: Tito falló con ModuleNotFoundError en las 105 líneas
-# filtradas (fail-open: SLM consultado siempre, 0 evitadas). No integra
-# la matriz; se conserva como evidencia del camino fail-open.
+# Corrida superada: Tito falló con ModuleNotFoundError en el primer puntaje
+# de cada caso (8 intentos, 0 puntajes; fail-open: SLM consultado en las 105
+# líneas, 0 evitadas). No integra la matriz; se conserva como evidencia del
+# camino fail-open.
 SUPERADA = "2026-10-26_132916_qwen4b-comparacion"
 
 VISHING = [
@@ -205,8 +206,9 @@ def main() -> None:
         L.append(f"| `{modelo}` | {d['consultas_slm']} | {f['consultas_slm']} | {f['evitadas']} "
                  f"| {d['tokens']} | {f['tokens']} | {d['ms_total']:.0f} | {f['ms_total']:.0f} "
                  f"| {d['fallos_slm']}/{f['fallos_slm']} | {f['fallos_tito']} |")
-    L += ["", "Costo ms F = Tito en todas las líneas + SLM válido y fallido; "
-              "carga, calentamiento y ajuste van por separado en cada `comparacion.md`.",
+    L += ["", "Costo ms F = Tito hasta la activación de cada caso (43 puntajes por modelo, #97) "
+              "+ SLM válido y fallido; carga, calentamiento y ajuste van por separado "
+              "en cada `comparacion.md`.",
           "", "## Cambios de aviso (directo → filtrado)", ""]
     for modelo, m in modelos.items():
         cambios = []

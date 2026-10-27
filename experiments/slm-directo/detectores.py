@@ -68,6 +68,11 @@ class Respuesta:
 
     Los campos de filtro (`consulta`, `tito_*`, `indicio_*`) solo los usa el
     flujo Tito→SLM (#69): en el comparador directo quedan vacíos.
+    `tito_ms`/`slm_ms` separan el costo por componente (#97): `ms` es el
+    total de la actualización (suma de los componentes que corrieron, sin
+    doble conteo). `runtime_ns` es la duración total que informa el runtime
+    (Ollama `total_duration`, en nanosegundos); `runtime_unidad` es `"ns"`
+    cuando hay dato y `""` cuando no (ausencia explícita).
     """
 
     valida: bool
@@ -87,6 +92,10 @@ class Respuesta:
     indicio_linea: int | None = None
     indicio_texto: str = ""
     indicio_puntaje: float | None = None
+    tito_ms: float | None = None
+    slm_ms: float | None = None
+    runtime_ns: int | None = None
+    runtime_unidad: str = ""
 
 
 def cargar_prompt(variante: str) -> str:
@@ -220,11 +229,18 @@ class DetectorSLM:
         try:
             r = self.cliente.chat(self.modelo, mensajes, self.esquema or ESQUEMA_SALIDA, self.opciones(), self.pensar)
         except ErrorOllama as e:
-            return Respuesta(valida=False, error=str(e), ms=(time.perf_counter() - inicio) * 1000)
+            ms_fallo = (time.perf_counter() - inicio) * 1000
+            return Respuesta(valida=False, error=str(e), ms=ms_fallo, slm_ms=ms_fallo)
         ms = (time.perf_counter() - inicio) * 1000
         crudo = r.get("message", {}).get("content", "")
         tokens_prompt, tokens_salida = r.get("prompt_eval_count"), r.get("eval_count")
-        comun = dict(crudo=crudo, ms=ms, tokens_prompt=tokens_prompt, tokens_salida=tokens_salida)
+        total_ns = r.get("total_duration")
+        if isinstance(total_ns, bool) or not isinstance(total_ns, (int, float)):
+            total_ns, unidad = None, ""
+        else:
+            total_ns, unidad = int(total_ns), "ns"
+        comun = dict(crudo=crudo, ms=ms, slm_ms=ms, tokens_prompt=tokens_prompt,
+                     tokens_salida=tokens_salida, runtime_ns=total_ns, runtime_unidad=unidad)
         if r.get("done_reason") == "length":
             return Respuesta(valida=False, error="salida_cortada", **comun)
         salida, error = validar_salida(crudo)

@@ -91,6 +91,21 @@ def armar_comparacion(carpeta: Path) -> str:
     L.append(f"Tokens totales (prompt+salida): directo {tot_d}, filtrado {tot_f}. "
              "Carga, calentamiento y ajuste van por separado abajo.")
     L.append("")
+    modo = manifiesto.get("modo_termino", "no informado (corrida histórica, conversación completa)")
+    ms_d = sum(analisis[directo][cid]["ms_hasta_aviso"] for cid in sorted(refs))
+    ms_f = sum(detalle[cid]["ms_hasta_aviso"] for cid in sorted(refs))
+    tito_f = sum(detalle[cid]["tito_ms_total"] for cid in sorted(refs))
+    slm_f = sum(detalle[cid]["slm_ms_total"] for cid in sorted(refs))
+    hay_split = any((f.get("tito_ms") or "") != "" or (f.get("slm_ms") or "") != "" for f in filas)
+    L.append(f"Modo de término: `{modo}`: cada llamada termina en su primer aviso válido; "
+             "los costos de esta tabla son hasta el aviso (o la conversación completa si nunca avisó).")
+    if hay_split:
+        L.append(f"Costo hasta el aviso: directo {ms_d:.0f} ms; filtrado {ms_f:.0f} ms "
+                 f"(Tito {tito_f:.0f} + SLM {slm_f:.0f}, sin doble conteo).")
+    else:
+        L.append(f"Costo hasta el aviso: directo {ms_d:.0f} ms; filtrado {ms_f:.0f} ms "
+                 "(componentes Tito/SLM no informados en esta traza histórica, sin doble conteo).")
+    L.append("")
     L.append("## Cambios de aviso entre variantes")
     L.append("")
     for cid in sorted(refs):
@@ -162,16 +177,24 @@ def armar_comparacion(carpeta: Path) -> str:
         if info.get("error"):
             L.append(f"- `{modelo}`: ERROR al calentar: {info['error']}")
         else:
-            L.append(f"- `{modelo}`: carga {info.get('carga_ms')} ms, memoria {info.get('memoria')}, "
+            arranque = info.get("arranque_ms", "no informado")
+            cal = info.get("calentamiento_ms", info.get("carga_ms"))
+            L.append(f"- `{modelo}`: arranque {arranque} ms, calentamiento {cal} ms "
+                     f"(carga {info.get('carga_ms')} ms), memoria {info.get('memoria')}, "
                      f"think={info.get('pensar')}.")
+    ft = manifiesto.get("filtro_tito") or {}
     try:
-        arte = json.loads(Path(manifiesto["filtro_tito"]["modelo"]).read_text(encoding="utf-8"))
+        arte = json.loads(Path(ft["modelo"]).read_text(encoding="utf-8"))
         ent = arte.get("entrenamiento", {})
         L.append(f"- Tito (ajuste único, fuera de línea): incrustación {ent.get('ms_incrustacion')} ms, "
                  f"ajuste {ent.get('ms_ajuste')} ms, seed {arte['config_regresion']['semilla']}, "
-                 f"sha {manifiesto['filtro_tito'].get('artefacto_sha256', '')[:12]}…")
-    except (KeyError, OSError, ValueError):
+                 f"sha {ft.get('artefacto_sha256', '')[:12]}…")
+    except (KeyError, OSError, ValueError, TypeError):
         L.append("- Tito: artefacto no disponible para informar el ajuste.")
+    if "arranque_ms" in ft or "nota" in ft:
+        L.append(f"- Tito en esta corrida: arranque {ft.get('arranque_ms')} ms, "
+                 f"calentamiento {ft.get('calentamiento_ms')} ms "
+                 f"(unidad: {ft.get('unidad', 'ms')}; {ft.get('nota', '')}).")
     L.append("")
     L.append("## Límites de interpretación")
     L.append("")
