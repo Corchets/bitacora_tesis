@@ -144,4 +144,4 @@ texto `pago`) y «el link del cumple» (`link`). «Mercado Pago» también dispa
 misma razón; está en la frase `F11` a propósito.
 
 Cuando termines, completá [`pruebas.csv`](pruebas.csv) y corré la medición:
-ver «Cómo correrlo» en [`PLAN-VOZ-REAL.md`](../PLAN-VOZ-REAL.md#cómo-correrlo).
+ver «Cómo correrlo» en [`PLAN-VOZ-REAL.md`](../PLAN-VOZ-REAL.md#8-cómo-correrlo).

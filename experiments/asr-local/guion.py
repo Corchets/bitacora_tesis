@@ -212,7 +212,7 @@ def generar_hoja(guion: Guion) -> str:
         f"misma razón; está en la frase `{', '.join(f.id for f in guion.frases if 'Mercado Pago' in f.texto)}` a propósito.",
         "",
         "Cuando termines, completá [`pruebas.csv`](pruebas.csv) y corré la medición:",
-        "ver «Cómo correrlo» en [`PLAN-VOZ-REAL.md`](../PLAN-VOZ-REAL.md#cómo-correrlo).",
+        "ver «Cómo correrlo» en [`PLAN-VOZ-REAL.md`](../PLAN-VOZ-REAL.md#8-cómo-correrlo).",
         "",
     ]
     return "\n".join(salida)

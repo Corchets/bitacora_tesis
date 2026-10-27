@@ -164,3 +164,26 @@ python3 -m unittest discover -s experiments/asr-local/tests -v
 1. **Audio sintético vs. voz humana:** El audio producido por `sintetizar_par.sh` es voz sintetizada (TTS) sin ruido de canal telefónico, respiración ni solapamiento real. La tasa de error medida sobre este audio es únicamente una prueba de humo y **no** constituye evidencia de desempeño en condiciones reales.
 2. **Dialecto y modelo:** El modelo Zipformer Kroko está entrenado principalmente en español general; su comportamiento frente al voseo rioplatense y términos locales debe validarse con las grabaciones humanas del piloto.
 3. **Medición en PC:** Las mediciones de RTF y memoria en esta máquina (Apple M1, 8 GB RAM) son mediciones de laboratorio en PC de desarrollo y **no** equivalen al desempeño en dispositivos móviles Android (ver [PREFACTIBILIDAD-TECNICA.md](../../docs/investigacion/PREFACTIBILIDAD-TECNICA.md)).
+
+---
+
+## 9. Voz real (#94)
+
+Herramientas para medir y mejorar el ASR con voz humana (acento tucumano y jerga), sin sumar demora. El plan, la
+regla para quedarse con un paso y el paso a paso para correrlo están en [PLAN-VOZ-REAL.md](PLAN-VOZ-REAL.md#8-cómo-correrlo);
+acá solo qué es cada archivo.
+
+| Archivo | Qué hace |
+|---|---|
+| `medir_voz_real.py` | Re-corre offline las pruebas guardadas del panel con cada variante y escribe `resumen.md`, `manifiesto.json` y `frases.jsonl`. |
+| `variantes_voz_real.py` | Catálogo de variantes y pasos del plan (`greedy`, corte, `rule2`, umbral RMS, `norm`, `beam`, `beam+hotwords`, `+diccionario`, Whisper) y cómo se corre cada una. |
+| `metricas_voz_real.py` | Alineado por frase, etiquetas de `reglas.py`, recall, WER/CER, agregados y la regla de paso. |
+| `hotwords.py` | `bpe.vocab` sintético para los hotwords de sherpa y revisión de cómo se parte cada uno (`python hotwords.py`). |
+| `diccionario.py` | Diccionario de corrección de la frase final (`MotorConDiccionario`); nunca toca parciales. |
+| `guion.py` | Carga y verifica el guion contra `reglas.py` y genera la hoja de grabación (`--hoja`). |
+| `voz-real/` | Datos en Git: `guion.json`, `HOJA-DE-GRABACION.md`, `hotwords.txt`, `jerga.txt`, `diccionario.csv` y `pruebas.csv`. |
+
+`MotorSherpaZipformer` acepta `decoding_method`, `max_active_paths`, `hotwords_file` y `hotwords_score`; los valores por
+defecto son los del panel (greedy, sin hotwords) y `metadatos()["decodificacion"]` registra lo usado. `MotorFasterWhisper`
+acepta `hotwords` e `initial_prompt`. Al medir, cada variante corre en su propio subproceso para que la memoria pico sea la suya.
+

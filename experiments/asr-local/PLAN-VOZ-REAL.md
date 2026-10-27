@@ -38,7 +38,11 @@ era «guacho» o «guaso»: hipótesis sin referencia.
   ([#91](https://github.com/Corchets/bitacora_tesis/issues/91), hay que cerrarlo antes).
 - Guion de 30 frases: 10 con términos críticos, 5 con números y montos, 5 con bancos y apps,
   5 espontáneas con jerga y 5 negativas parecidas («estoy cómodo», «me duele el codo», «pagó la luz»,
-  «el número de la casa», «el link del cumple»).
+  «el número de la casa», «el link del cumple»). Está en [`voz-real/guion.json`](voz-real/guion.json) y la
+  hoja de grabación en [`voz-real/HOJA-DE-GRABACION.md`](voz-real/HOJA-DE-GRABACION.md). Dos de esos ejemplos
+  salieron: `reglas.py` busca `pago` y `link` como subcadena, así que «pagó la luz» y «el link del cumple»
+  disparan etiquetas y no sirven de negativas; las cinco que quedaron dan cero etiquetas (lo comprueba
+  `tests/test_guion.py`). Es un falso positivo de las reglas, no del ASR; sirve de antecedente cuando se discuta D07.
 - **Dos tomas:** con la toma 1 se ajustan los hotwords y el diccionario; con la toma 2 se mide.
 - **Condiciones:** Luciano por micrófono, Luciano por Meet y otra voz del equipo por Meet. Si no hay
   otra voz, alcanza con las dos de Luciano. La otra persona da su consentimiento (anotado en el issue)
@@ -63,7 +67,13 @@ Fuera de alcance: convertir la variante Kroko ES 128-L de Banafo.
 - El modelo no trae `bpe.vocab` y el repositorio de
   [Banafo/Kroko-ASR](https://huggingface.co/Banafo/Kroko-ASR) no publica `bpe.model` (solo `.data`).
 - **Verificado el 2026-10-26:** un `bpe.vocab` sintético armado desde `tokens.txt`
-  (`token<TAB>-id`) carga y decodifica. Hay que revisar a mano cómo se parte en tokens cada hotword.
+  (`token<TAB>-id`) carga y decodifica. Hay que revisar a mano cómo se parte en tokens cada hotword
+  (`python hotwords.py`).
+- **Desvío al implementar (2026-10-26):** con puntaje `-id` sherpa (ssentencepiece) elige el camino de menor
+  suma de ids y parte casi todo en letras sueltas («transferencia» → `t r a n s f e r e n ci a`), que no es lo que
+  el modelo emite. Contra lo que el modelo emite al reconocer 63 palabras sueltas (voz TTS de macOS), `-id` acierta
+  6 y `-(ln(id+2)+3)` acierta las 63 (y 10 de 10 en frase). Por eso el `bpe.vocab` usa ese puntaje; `beam+hotwords-id`
+  queda como variante para repetir lo del plan. Detalle en `hotwords.py`.
 - En los hotwords entran solo términos críticos, bancos y apps. La jerga queda afuera: subirle el
   puntaje a palabras comunes aumenta las inserciones. Se escriben con las mayúsculas del modelo,
   que distingue mayúsculas y pone puntuación.
@@ -101,3 +111,27 @@ dos corridas por variante:
 - **Whisper en vivo** (no forma parte de este plan): `faster-whisper` corre en CPU y competiría con
   sherpa y con Ollama en 8 GB que ya comparten el ASR (~470 MB) y el SLM. Su demora y memoria se
   miden en el paso 5 antes de proponer nada.
+
+## 8. Cómo correrlo
+
+1. **Grabar.** Seguí [`voz-real/HOJA-DE-GRABACION.md`](voz-real/HOJA-DE-GRABACION.md): 36 grabaciones (2 tomas × 3
+   condiciones × 6 bloques) desde «Probar el ASR», pegando cada bloque en «Lo que dije en realidad» y tocando
+   «Guardar prueba». El audio queda en `experiments/voip/llamadas/`, fuera de Git.
+2. **Completar** [`voz-real/pruebas.csv`](voz-real/pruebas.csv): id de la prueba, toma (1 o 2), voz y condición.
+3. **Con la toma 1**, antes de medir: `python hotwords.py` muestra cómo se parte cada hotword (editá
+   [`voz-real/hotwords.txt`](voz-real/hotwords.txt)), y una corrida con `--sin-whisper` lista en su resumen las
+   sustituciones frecuentes para armar [`voz-real/diccionario.csv`](voz-real/diccionario.csv). Revisá la jerga de
+   [`voz-real/jerga.txt`](voz-real/jerga.txt) y el puntaje de hotwords (`--hotwords-score`).
+4. **Un comando**, desde la raíz del repo (con el entorno que tiene `sherpa-onnx` y `faster-whisper`):
+
+```bash
+.venv/bin/python experiments/asr-local/medir_voz_real.py
+```
+
+Corre la línea base y cada paso del §4 sobre el audio guardado, aplica la regla del §2 en la toma 2 y escribe
+`corridas/<fecha>_voz-real_<n>pruebas/` con `resumen.md`, `manifiesto.json` y `frases.jsonl` (sin audio).
+Opciones útiles: `--sin-whisper` (Whisper es lento: `small` y `large-v3-turbo` bajan ~2 GB la primera vez y
+`large-v3-turbo` usa ~1,8 GB de RAM), `--variantes beam,beam+hotwords` (la línea base se corre siempre),
+`--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
+(por defecto 40 ms, como el panel). Detalle de los archivos en el [README](README.md#9-voz-real-94).
+
