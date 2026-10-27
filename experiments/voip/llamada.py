@@ -14,6 +14,7 @@ distintas, y el estéreo guardado tiene el mismo reloj que `actualizaciones.json
 from __future__ import annotations
 
 import json
+import shutil
 import sys
 import time
 from dataclasses import dataclass, field
@@ -89,6 +90,9 @@ class Llamada:
             self.canales[rol] = Canal(rol=rol, motor=motor)
         self.meta_asr = self.canales[ROLES[0]].motor.metadatos()
         self.umbral_voz = getattr(self.canales[ROLES[0]].motor, "umbral_rms_silencio", 0.005)
+        self._estado_inicial()
+
+    def _estado_inicial(self) -> None:
         self.llamada_id = ""
         self.dir_salida: Path | None = None
         self.t0: float | None = None
@@ -112,6 +116,21 @@ class Llamada:
             **self.meta_asr, "modo": "en_vivo", "sample_rate": SAMPLE_RATE,
             "roles": "cada línea trae `canal`: protegida (micrófono de la persona a proteger) u otra",
         }})
+
+    def descartar(self) -> None:
+        """Cierra los registros y borra la carpeta: la llamada no queda en disco."""
+        self._jsonl.close()
+        self._detector.close()
+        shutil.rmtree(self.dir_salida, ignore_errors=True)
+
+    def reiniciar(self, llamada_id: str, dir_salida: Path) -> None:
+        """Empieza otra llamada con los mismos motores ya cargados, sin esperar a recargarlos."""
+        for rol, canal in list(self.canales.items()):
+            # Un motor sin `reiniciar` (los de prueba) se vuelve a inicializar.
+            getattr(canal.motor, "reiniciar", canal.motor.inicializar)()
+            self.canales[rol] = Canal(rol=rol, motor=canal.motor)
+        self._estado_inicial()
+        self.abrir(llamada_id, dir_salida)
 
     def reloj(self) -> float:
         return 0.0 if self.t0 is None else self._ahora() - self.t0

@@ -4,7 +4,7 @@ import {crearSelectorCorte} from './corte-silencio.mjs';
 
 /**
  * UI de prueba; el panel conserva una única conexión y el ciclo de captura de #78.
- * @param {{iniciar: () => void, terminar: () => void, cambiar: () => void}} acciones
+ * @param {{iniciar: () => void, terminar: () => void, borrar: () => void, guardar: (referencia: string) => void, cambiar: () => void}} acciones
  */
 export function montarPruebaASR(acciones) {
   const seccion = document.createElement('section');
@@ -16,6 +16,11 @@ export function montarPruebaASR(acciones) {
       #prueba-asr .asr-modo-toggle { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0, 0, 0, 0); white-space:nowrap; border:0; }
       #prueba-asr h2 { font-size:1.25rem; margin:0 0 .75rem; color:var(--tinta, #0f172a); }
       #prueba-asr .ajustes { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
+      #prueba-asr textarea { font:inherit; width:100%; min-height:4.5rem; padding:.5rem .6rem; border:1px solid var(--linea, #cbd5e1); border-radius:4px; resize:vertical; box-sizing:border-box; }
+      #asr-guardado { margin:1rem 0; padding:.8rem 1rem; border:1px solid var(--linea, #cbd5e1); border-radius:8px; display:grid; gap:.5rem; }
+      #asr-guardado label { font-weight:600; }
+      #asr-guardado .fila { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
+      #asr-guardado-estado { font-weight:600; color:var(--tinta-secundaria, #334155); }
       #prueba-asr input { font:inherit; width:7rem; padding:.4rem .6rem; border:1px solid var(--linea, #cbd5e1); border-radius:4px; }
       #prueba-asr .medicion { margin:1rem 0; display:grid; gap:.45rem; }
       #prueba-asr progress { width:100%; height:1.2rem; }
@@ -34,7 +39,7 @@ export function montarPruebaASR(acciones) {
       <div class="ajustes">
         <span id="asr-corte-lugar"></span>
         <label>Umbral de volumen (RMS) <input id="asr-umbral" type="number" min="0.0001" max="1" step="0.0001" value="0.005"></label>
-        <button id="asr-iniciar" disabled>▶ Hablar</button><button id="asr-terminar" disabled>Terminar prueba</button>
+        <button id="asr-iniciar" disabled>▶ Hablar</button><button id="asr-borrar" disabled title="Borra lo hablado y empieza de nuevo sin cortar el micrófono">Borrar</button><button id="asr-terminar" disabled>Terminar prueba</button>
       </div>
       <p>Usá auriculares. El silencio es el audio por debajo del umbral; subilo si el ruido impide cerrar frases. La demora se estima desde el último bloque con voz.</p>
       <div class="medicion">
@@ -44,6 +49,14 @@ export function montarPruebaASR(acciones) {
         <progress id="asr-silencio" max="0.8" value="0"></progress>
       </div>
       <div id="asr-textos" aria-live="polite"></div>
+      <div id="asr-guardado" hidden>
+        <label for="asr-referencia">Lo que dije en realidad</label>
+        <textarea id="asr-referencia" maxlength="2000" placeholder="Escribí la frase tal como la dijiste; sirve para medir cuánto se equivocó el ASR"></textarea>
+        <div class="fila">
+          <button id="asr-guardar" type="button">Guardar prueba</button>
+          <span id="asr-guardado-estado" role="status">Si no la guardás, se descarta al empezar otra prueba.</span>
+        </div>
+      </div>
     </div>`;
   document.querySelector('main')?.before(seccion);
   /** @template {HTMLElement} T @param {string} id @returns {T} */
@@ -54,6 +67,18 @@ export function montarPruebaASR(acciones) {
   const umbral = /** @type {HTMLInputElement} */ (el('asr-umbral'));
   const iniciar = /** @type {HTMLButtonElement} */ (el('asr-iniciar'));
   const terminar = /** @type {HTMLButtonElement} */ (el('asr-terminar'));
+  const borrar = /** @type {HTMLButtonElement} */ (el('asr-borrar'));
+  const guardado = el('asr-guardado');
+  const referencia = /** @type {HTMLTextAreaElement} */ (el('asr-referencia'));
+  const guardar = /** @type {HTMLButtonElement} */ (el('asr-guardar'));
+  const estadoGuardado = el('asr-guardado-estado');
+  const AVISO_DESCARTE = 'Si no la guardás, se descarta al empezar otra prueba.';
+  let esPrueba = false, guardando = false, guardada = false;
+  function ocultarGuardado() {
+    guardado.hidden = true; guardando = guardada = false;
+    referencia.value = ''; referencia.disabled = guardar.disabled = false;
+    estadoGuardado.textContent = AVISO_DESCARTE;
+  }
   const volumen = /** @type {HTMLMeterElement} */ (el('asr-nivel'));
   const silencio = /** @type {HTMLProgressElement} */ (el('asr-silencio'));
   /** @type {Map<number, HTMLParagraphElement>} */
@@ -81,6 +106,12 @@ export function montarPruebaASR(acciones) {
   corte.alCambiar = limpiarNiveles;
   iniciar.onclick = () => { if (corte.validar() && umbral.reportValidity()) acciones.iniciar(); };
   terminar.onclick = acciones.terminar;
+  borrar.onclick = acciones.borrar;
+  guardar.onclick = () => {
+    guardando = true; guardar.disabled = true;
+    estadoGuardado.textContent = 'Guardando…';
+    acciones.guardar(referencia.value);
+  };
   dibujarUmbral();
   return {
     get activa() { return modo.checked; },
@@ -91,11 +122,14 @@ export function montarPruebaASR(acciones) {
       corte.deshabilitado = umbral.disabled = ocupada || enLlamada;
       iniciar.disabled = !conectada || ocupada || enLlamada;
       terminar.disabled = !conectada || ocupada || !enLlamada;
+      borrar.disabled = !conectada || ocupada || !enLlamada;
     },
     /** @param {any} m */
     evento(m) {
       if (m.tipo === 'inicio') {
-        modo.checked = m.modo === 'asr'; aplicarModo();
+        esPrueba = m.modo === 'asr';
+        ocultarGuardado();
+        modo.checked = esPrueba; aplicarModo();
         frases.clear(); el('asr-textos').replaceChildren(); limpiarNiveles();
         if (modo.checked) {
           corte.valor = m.corte_silencio_s; umbral.value = String(m.umbral_rms_silencio);
@@ -103,6 +137,16 @@ export function montarPruebaASR(acciones) {
         }
       }
       if (!modo.checked) return;
+      if (m.tipo === 'fin' && esPrueba) guardado.hidden = false;
+      if (m.tipo === 'prueba_guardada') {
+        guardando = false; guardada = true;
+        referencia.value = m.referencia; referencia.disabled = guardar.disabled = true;
+        estadoGuardado.textContent = 'Guardada ✓ Quedó con el audio, la transcripción y lo que dijiste en realidad.';
+      }
+      if (m.tipo === 'error' && guardando) {
+        guardando = false; guardar.disabled = false;
+        estadoGuardado.textContent = AVISO_DESCARTE;
+      }
       if (m.tipo === 'fin' || m.tipo === 'desconexion') limpiarNiveles();
       if (m.tipo === 'niveles') {
         ultimoNivel = m.canales.protegida;

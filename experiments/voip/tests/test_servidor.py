@@ -150,6 +150,141 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                     self.assertEqual(m["detector"]["evaluaciones"], 0)
                     self.assertEqual(m["inicio_panel"], mensaje)
 
+    def prueba(self, corte=0.8):
+        return {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
+                "corte_silencio_s": corte, "umbral_rms_silencio": 0.005}
+
+    async def terminar(self, panel):
+        await panel.send(json.dumps({"tipo": "terminar"}))
+        fin = await self.evento(panel, "fin")
+        return Path(fin["dir"])
+
+    def manifiesto(self, carpeta):
+        return json.loads((carpeta / "manifiesto.json").read_text())
+
+    async def test_prueba_cierra_sin_guardar_y_se_descarta_al_iniciar_otra(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            llamada = await self.terminar(panel)
+            self.assertNotIn("guardada", self.manifiesto(llamada))
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            primera = await self.terminar(panel)
+            self.assertIs(self.manifiesto(primera)["guardada"], False)
+            await panel.send(json.dumps(self.prueba(1.2)))
+            await self.evento(panel, "inicio")
+            self.assertFalse(primera.exists())
+            segunda = await self.terminar(panel)
+            self.assertTrue(segunda.exists())
+            # Las llamadas nunca se eliminan solas.
+            self.assertTrue(llamada.exists())
+
+    async def test_guardar_prueba_persiste_con_referencia_y_sobrevive_a_otra_prueba(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            carpeta = await self.terminar(panel)
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": "  hola, esto es una prueba  "}))
+            guardada = await self.evento(panel, "prueba_guardada")
+            self.assertEqual(guardada["dir"], str(carpeta))
+            m = self.manifiesto(carpeta)
+            self.assertIs(m["guardada"], True)
+            self.assertEqual(m["referencia"], "hola, esto es una prueba")
+            self.assertEqual(m["inicio_panel"]["modo"], "asr")
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            self.assertTrue(carpeta.exists())
+            await self.terminar(panel)
+
+    async def test_guardar_prueba_sin_referencia_la_deja_vacia(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            carpeta = await self.terminar(panel)
+            await panel.send(json.dumps({"tipo": "guardar_prueba"}))
+            await self.evento(panel, "prueba_guardada")
+            self.assertEqual(self.manifiesto(carpeta)["referencia"], "")
+
+    async def test_guardar_prueba_invalido(self):
+        async with connect(self.url + "/panel") as panel:
+            # Nada para guardar todavía.
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": ""}))
+            await self.evento(panel, "error")
+            # Una llamada no es una prueba.
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            await self.terminar(panel)
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": ""}))
+            await self.evento(panel, "error")
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            # Todavía en curso: hay que terminarla antes.
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": ""}))
+            await self.evento(panel, "error")
+            carpeta = await self.terminar(panel)
+            for referencia in (5, None, ["a"], "x" * 2001):
+                await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": referencia}))
+                await self.evento(panel, "error")
+            self.assertIs(self.manifiesto(carpeta)["guardada"], False)
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": "ok"}))
+            await self.evento(panel, "prueba_guardada")
+            # Ya guardada: no se vuelve a guardar desde acá.
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": "otra"}))
+            await self.evento(panel, "error")
+            self.assertEqual(self.manifiesto(carpeta)["referencia"], "ok")
+
+    async def test_borrar_durante_la_prueba_reinicia_sin_cortar_el_audio_ni_abrir_llamada_por_defecto(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(self.prueba(1.2)))
+            primera = await self.evento(panel, "inicio")
+            async with connect(self.url + "/audio?rol=protegida") as micro:
+                self.reloj.t += 0.5
+                await micro.send(pcm(0.5))
+                self.assertEqual((await self.evento(panel, "asr"))["entrega"], "parcial")
+                carpeta_vieja = next(self.dir.iterdir())
+                # El audio llega pegado al pedido de Borrar: tiene que caer en la prueba nueva.
+                await panel.send(json.dumps({"tipo": "reiniciar_prueba"}))
+                self.reloj.t += 0.5
+                await micro.send(pcm(0.5))
+                nueva = await self.evento(panel, "inicio")
+                self.assertNotEqual(nueva["llamada_id"], primera["llamada_id"])
+                self.assertEqual((nueva["modo"], nueva["corte_silencio_s"]), ("asr", 1.2))
+                self.assertEqual((await self.evento(panel, "asr"))["llamada_id"], nueva["llamada_id"])
+                self.assertFalse(carpeta_vieja.exists())
+                self.assertEqual(len(list(self.dir.iterdir())), 1)
+                self.assertFalse(micro.close_code)
+                carpeta = await self.terminar(panel)
+            m = self.manifiesto(carpeta)
+            self.assertEqual(m["llamada_id"], nueva["llamada_id"])
+            self.assertEqual(m["inicio_panel"]["modo"], "asr")
+            self.assertEqual(m["config"]["corte_silencio_s"], 1.2)
+            self.assertEqual(m["canales"]["protegida"]["duracion_s"], 0.5)
+            self.assertEqual(len(list(self.dir.iterdir())), 1)
+
+    async def test_borrar_solo_vale_durante_una_prueba(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps({"tipo": "reiniciar_prueba"}))
+            await self.evento(panel, "error")
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            await panel.send(json.dumps({"tipo": "reiniciar_prueba"}))
+            await self.evento(panel, "error")
+            await self.terminar(panel)
+            self.assertEqual(len(list(self.dir.iterdir())), 1)
+
+    async def test_borrar_repetido_deja_una_sola_carpeta_y_niveles_vigentes(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            for _ in range(3):
+                await panel.send(json.dumps({"tipo": "reiniciar_prueba"}))
+                await self.evento(panel, "inicio")
+            self.assertEqual(len(list(self.dir.iterdir())), 1)
+            nivel = (await self.evento(panel, "niveles"))["canales"]["protegida"]
+            self.assertEqual(nivel["fin_audio_s"], None)
+            await self.terminar(panel)
+
     async def test_corte_valido_en_llamada_y_prueba_y_manifiesto_conserva_lo_elegido(self):
         async with connect(self.url + "/panel") as panel:
             for modo, corte in (("llamada", "auto"), ("llamada", 0.1), ("llamada", 3.0), ("llamada", 1),

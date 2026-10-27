@@ -41,6 +41,7 @@ from websockets.asyncio.server import broadcast, serve
 from websockets.datastructures import Headers
 from websockets.http11 import Response
 
+import historial
 from llamada import DIR_VOIP, ROLES, SAMPLE_RATE, Llamada
 
 import replay  # noqa: E402  (rutas de slm-directo y replay ya agregadas por llamada.py)
@@ -56,6 +57,7 @@ CORTE_AUTO = "auto"
 CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el modelo no cierra la frase solo
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
 UMBRAL_LLAMADA = 0.005
+LARGO_MAXIMO_REFERENCIA = 2000
 
 
 def validar_corte(valor) -> str | float:
@@ -95,6 +97,8 @@ class Servidor:
         self.novedad = asyncio.Event()
         self.tarea_detector: asyncio.Task | None = None
         self.tarea_niveles: asyncio.Task | None = None
+        # Última prueba cerrada y todavía sin guardar: «Guardar» actúa sobre ella.
+        self.prueba_pendiente: Path | None = None
 
     def crear_motor(self) -> MotorSherpaZipformer:
         modelo = str(DIR_MODELO) if DIR_MODELO.exists() else MotorSherpaZipformer.MODELO_POR_DEFECTO
@@ -130,18 +134,24 @@ class Servidor:
             self.preparada = None
         self.novedad.clear()
         momento = datetime.now()
-        llamada.abrir(f"VIVO-{momento:%Y%m%d-%H%M%S-%f}", Path(self.args.salida) / f"{momento:%Y-%m-%d_%H%M%S-%f}")
+        llamada.abrir(*self.nombres_de_llamada(momento))
+        self.difundir_inicio(llamada)
+        if self.config_llamada.get("modo") != "asr":
+            self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))
+        self.tarea_niveles = asyncio.create_task(self.emitir_niveles(llamada))
+        print(f"[llamada] {llamada.llamada_id} → {llamada.dir_salida}")
+        return llamada
+
+    def nombres_de_llamada(self, momento: datetime) -> tuple[str, Path]:
+        return f"VIVO-{momento:%Y%m%d-%H%M%S-%f}", Path(self.args.salida) / f"{momento:%Y-%m-%d_%H%M%S-%f}"
+
+    def difundir_inicio(self, llamada: Llamada) -> None:
         self.historial = []
         self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id,
                        "modo": self.config_llamada.get("modo", "llamada"),
                        "detector": {"tipo": self.args.detector,
                                     "modelo": self.args.modelo if self.args.detector == "slm" else None},
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1]})
-        if self.config_llamada.get("modo") != "asr":
-            self.tarea_detector = asyncio.create_task(self.trabajar_detector(llamada))
-        self.tarea_niveles = asyncio.create_task(self.emitir_niveles(llamada))
-        print(f"[llamada] {llamada.llamada_id} → {llamada.dir_salida}")
-        return llamada
 
     async def cerrar_llamada(self, *, esperada: Llamada | None = None) -> None:
         async with self.control:
@@ -171,6 +181,7 @@ class Servidor:
                 await ws.close(1000, "llamada terminada")
             for act in llamada.cerrar(self.manifiesto_extra()):
                 self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
+            self.prueba_pendiente = llamada.dir_salida if self.config_llamada.get("modo") == "asr" else None
             self.difundir({"tipo": "fin", "llamada_id": llamada.llamada_id, "dir": str(llamada.dir_salida)})
             print(f"[llamada] cerrada: {llamada.dir_salida}")
             self.preparar()
@@ -186,6 +197,8 @@ class Servidor:
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
                        "endpoint_nativo": self.config_asr[0] == CORTE_AUTO, "hilos_asr": a.hilos, "carga_slm": carga},
             "inicio_panel": self.config_llamada,
+            # La prueba se guarda solo si el presentador toca «Guardar»; hasta entonces se descarta.
+            **({"guardada": False} if self.config_llamada.get("modo") == "asr" else {}),
             "codigo": replay.info_codigo(),
             "maquina": replay.info_maquina(),
         }
@@ -307,10 +320,50 @@ class Servidor:
             if self.llamada is not None or self.clientes_audio:
                 raise ValueError("Terminá la llamada actual antes de iniciar otra.")
             await self.configurar_asr((corte, umbral))
+            if prueba:
+                historial.descartar_pruebas_no_guardadas(self.args.salida)
+            self.prueba_pendiente = None
             self.config_llamada = mensaje
             self.llamada = await self.abrir_llamada()
             if audio is not None:
                 self.tarea_ejemplo = asyncio.create_task(self.reproducir_ejemplo(audio, protegida=tipos["protegida"] == "ejemplo"))
+
+    async def reiniciar_prueba(self) -> None:
+        """«Borrar»: descarta lo hablado y empieza otra prueba igual sin soltar el audio del navegador.
+
+        Todo ocurre con el candado de control tomado, así que el audio que llega mientras tanto
+        espera y cae en la prueba nueva; nunca abre una llamada con la configuración por defecto.
+        """
+        async with self.control:
+            llamada = self.llamada
+            if llamada is None or self.config_llamada.get("modo") != "asr":
+                raise ValueError("Borrar solo sirve durante una prueba del ASR.")
+            if self.tarea_niveles:
+                self.tarea_niveles.cancel()
+                with suppress(asyncio.CancelledError):
+                    await self.tarea_niveles
+            llamada.descartar()
+            llamada.reiniciar(*self.nombres_de_llamada(datetime.now()))
+            self.difundir_inicio(llamada)
+            self.tarea_niveles = asyncio.create_task(self.emitir_niveles(llamada))
+            print(f"[prueba] borrada; sigue {llamada.llamada_id} → {llamada.dir_salida}")
+
+    async def guardar_prueba(self, mensaje: dict) -> None:
+        """«Guardar»: marca la última prueba cerrada como guardada y anota lo que se dijo en realidad."""
+        referencia = mensaje.get("referencia", "")
+        if not isinstance(referencia, str) or len(referencia) > LARGO_MAXIMO_REFERENCIA:
+            raise ValueError(f"«Lo que dije en realidad» debe ser texto de hasta {LARGO_MAXIMO_REFERENCIA} caracteres.")
+        async with self.control:
+            carpeta = self.prueba_pendiente
+            manifiesto = None if carpeta is None else historial.leer_manifiesto(carpeta)
+            if self.llamada is not None or manifiesto is None:
+                raise ValueError("No hay una prueba terminada para guardar.")
+            manifiesto.update({"guardada": True, "referencia": referencia.strip()})
+            temporal = carpeta / "manifiesto.json.tmp"
+            temporal.write_text(json.dumps(manifiesto, ensure_ascii=False, indent=2), encoding="utf-8")
+            temporal.replace(carpeta / "manifiesto.json")
+            self.prueba_pendiente = None
+            self.difundir({"tipo": "prueba_guardada", "dir": str(carpeta), "referencia": manifiesto["referencia"]})
 
     async def reproducir_ejemplo(self, audio, *, protegida: bool = True) -> None:
         """Entrega pares de bloques de 40 ms con una única marca de llegada."""
@@ -349,8 +402,12 @@ class Servidor:
                         await self.iniciar(mensaje)
                     elif mensaje.get("tipo") == "terminar":
                         await self.cerrar_llamada()
+                    elif mensaje.get("tipo") == "reiniciar_prueba":
+                        await self.reiniciar_prueba()
+                    elif mensaje.get("tipo") == "guardar_prueba":
+                        await self.guardar_prueba(mensaje)
                     else:
-                        raise ValueError("Control desconocido: usá iniciar o terminar.")
+                        raise ValueError("Control desconocido: usá iniciar, terminar, reiniciar_prueba o guardar_prueba.")
                 except (ValueError, OSError, RuntimeError) as exc:
                     await ws.send(json.dumps({"tipo": "error", "mensaje": str(exc)}, ensure_ascii=False))
         finally:
@@ -414,6 +471,8 @@ async def principal() -> None:
     detector = replay.construir_detector(args.detector, modelo=args.modelo, prompt_nombre=args.prompt,
                                          hablantes="ab", seed=args.seed, ollama_url=args.ollama_url)
     servidor = Servidor(args, detector)
+    for id_carpeta in historial.descartar_pruebas_no_guardadas(args.salida):
+        print(f"[prueba] descartada por no guardada: {id_carpeta}")
     servidor.preparar()
     await servidor.preparada
     async with serve(servidor.atender, args.host, args.puerto,

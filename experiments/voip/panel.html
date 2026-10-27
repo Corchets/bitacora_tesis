@@ -1514,6 +1514,12 @@ fuente.onchange = () => {
 const pruebaASR = montarPruebaASR({
   iniciar: () => { terminada = false; void iniciarSesion(); },
   terminar: () => terminar.click(),
+  borrar: () => enviar({tipo: "reiniciar_prueba"}),
+  guardar: (referencia) => {
+    if (conexion?.readyState !== WebSocket.OPEN) return;
+    $("error").textContent = "";
+    conexion.send(JSON.stringify({tipo: "guardar_prueba", referencia}));
+  },
   cambiar: () => { sincronizarModoVisual(); actualizarControles(); }
 });
 
@@ -2050,13 +2056,16 @@ function conectar() {
       if (inicioPropio) { inicioPropio = false; void emisor?.iniciar(); }
       actualizarControles();
     }
+    else if (m.tipo === "prueba_guardada") $("estado").textContent = `prueba guardada en ${m.dir}`;
     else if (m.tipo === "niveles") niveles(m);
     else if (m.tipo === "asr") asr(m);
     else if (m.tipo === "detector") detector(m);
     else if (m.tipo === "fin") {
       liberarMicrofono();
       limpiarNiveles();
-      $("estado").textContent = `llamada terminada · guardada en ${m.dir}`;
+      $("estado").textContent = pruebaASR.activa
+        ? "prueba terminada · sin guardar (se descarta al empezar otra)"
+        : `llamada terminada · guardada en ${m.dir}`;
       enLlamada = false; terminada = true; pendiente = false;
       actualizarControles();
     } else if (m.tipo === "error") {

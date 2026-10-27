@@ -155,6 +155,14 @@ class MotorSherpaZipformer(MotorASR):
         self.ultimo_texto_parcial = ""
         self.silencio_acum_s = 0.0
 
+    def reiniciar(self) -> None:
+        """Vuelve al estado de recién inicializado sin recargar el modelo (descarta lo oído)."""
+        self.recognizer.reset(self.stream)
+        self.segmento_actual = 1
+        self.inicio_segmento_s = 0.0
+        self.ultimo_texto_parcial = ""
+        self.silencio_acum_s = 0.0
+
     def procesar_bloque(
         self,
         muestras: np.ndarray,

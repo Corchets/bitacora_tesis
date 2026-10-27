@@ -363,15 +363,29 @@ RMS 0–1; la barra de silencio se llena hasta el corte y vuelve a cero cuando r
 Con un número manda el silencio elegido, incluso con 3,0 s; con Automático la barra de silencio
 se dibuja contra los 0,8 s de respaldo y la frase puede cerrarse antes. La salida de texto puede tardar más por el lookahead o procesamiento del ASR.
 
-**Terminar prueba** guarda el registro y libera el micrófono. Podés cambiar el corte e iniciar
+**Borrar** (durante la prueba) descarta lo hablado y empieza otra prueba con la misma configuración
+sin cortar el micrófono: el servidor reutiliza los motores ya cargados y toma el candado de control,
+así el audio que llega mientras tanto cae en la prueba nueva y no abre una llamada con la configuración por defecto.
+**Terminar prueba** cierra el registro y libera el micrófono, pero la prueba **no se guarda sola**:
+tocá **Guardar prueba** y, si querés, anotá **Lo que dije en realidad** (hasta 2000 caracteres; es la
+referencia para medir el WER con las herramientas de `asr-local`). Una prueba sin guardar se elimina al iniciar
+otra prueba y al arrancar el servidor; las llamadas nunca se eliminan solas. Podés cambiar el corte e iniciar
 otra enseguida; desactivá **Probar el ASR** para volver a la llamada. El corte se elige también ahí.
 El modo y las fuentes quedan en `inicio_panel`; `config.corte_silencio_s` guarda lo elegido
 (`"auto"` o el número) junto con `endpoint_nativo` (verdadero solo con `"auto"`), el umbral
-y `detector: null` en la prueba. Audio y registros de voz real quedan fuera de Git.
+y `detector: null` en la prueba. Al cerrar, el manifiesto de una prueba trae `guardada: false`;
+«Guardar» lo cambia a `true` y agrega `referencia`. Las pruebas anteriores a esta marca no tienen
+`guardada` y no se tocan. Audio y registros de voz real quedan fuera de Git.
 
 ```json
 {"tipo":"iniciar","modo":"asr","fuentes":{"protegida":{"tipo":"navegador"}},"corte_silencio_s":1.2,"umbral_rms_silencio":0.005}
+{"tipo":"reiniciar_prueba"}
+{"tipo":"guardar_prueba","referencia":"lo que dije en realidad"}
 ```
+
+`reiniciar_prueba` responde con un `inicio` nuevo (otra carpeta y otro `llamada_id`); `guardar_prueba` responde
+`{"tipo":"prueba_guardada","dir":"…","referencia":"…"}` a todos los paneles. Ambos devuelven `error` si no hay una
+prueba en curso o terminada sin guardar.
 
 Las pruebas con MotorFalso sensible a energía y reloj controlado recorren dos sesiones
 con cortes 0,5 y 1,2 s, y comprueban los límites (`auto`, 0,1 y 3,0 aceptados; 0, 3,1, 0,15, booleanos y textos rechazados): no hay final antes del corte, el último bloque cierra la frase,
