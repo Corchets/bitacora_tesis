@@ -363,6 +363,69 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await otro.send(json.dumps({"tipo": "terminar"}))
             await self.evento(otro, "fin")
 
+    async def preparar_historial(self, panel):
+        """Una llamada y dos pruebas guardadas; devuelve sus carpetas."""
+        await panel.send(self.inicio())
+        await self.evento(panel, "inicio")
+        llamada = await self.terminar(panel)
+        pruebas = []
+        for referencia in ("uno", "dos"):
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            pruebas.append(await self.terminar(panel))
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": referencia}))
+            await self.evento(panel, "prueba_guardada")
+        return llamada, pruebas
+
+    async def test_borrar_uno_o_varios_elimina_las_carpetas_y_avisa_a_todos_los_paneles(self):
+        async with connect(self.url + "/panel") as panel, connect(self.url + "/panel") as espectador:
+            llamada, (p1, p2) = await self.preparar_historial(panel)
+            await panel.send(json.dumps({"tipo": "borrar", "ids": [p1.name]}))
+            for quien in (panel, espectador):
+                aviso = await self.evento(quien, "borrado")
+                self.assertEqual(aviso["ids"], [p1.name])
+            self.assertFalse(p1.exists())
+            await panel.send(json.dumps({"tipo": "borrar", "ids": [llamada.name, p2.name]}))
+            self.assertEqual((await self.evento(espectador, "borrado"))["ids"], [llamada.name, p2.name])
+            self.assertEqual(list(self.dir.iterdir()), [])
+
+    async def test_borrar_todas_las_pruebas_no_toca_las_llamadas(self):
+        async with connect(self.url + "/panel") as panel:
+            llamada, (p1, p2) = await self.preparar_historial(panel)
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            sin_guardar = await self.terminar(panel)
+            aviso = await self.responder(panel, {"tipo": "borrar_pruebas"}, "borrado")
+            self.assertEqual(sorted(aviso["ids"]), [p1.name, p2.name])
+            self.assertTrue(llamada.exists())
+            self.assertTrue(sin_guardar.exists())
+            self.assertFalse(p1.exists() or p2.exists())
+            # Sin pruebas guardadas no hay nada que borrar, y no es un error.
+            self.assertEqual((await self.responder(panel, {"tipo": "borrar_pruebas"}, "borrado"))["ids"], [])
+
+    async def test_borrar_rechaza_ids_invalidos_sin_borrar_nada(self):
+        async with connect(self.url + "/panel") as panel:
+            llamada, (p1, p2) = await self.preparar_historial(panel)
+            for malo in ({"tipo": "borrar"}, {"tipo": "borrar", "ids": []}, {"tipo": "borrar", "ids": "x"},
+                         {"tipo": "borrar", "ids": [p1.name, "../x"]}, {"tipo": "borrar", "ids": [p1.name, 5]},
+                         {"tipo": "borrar", "ids": [p1.name, "2026-10-26_000000-000000"]},
+                         {"tipo": "borrar", "ids": [".."]}):
+                await panel.send(json.dumps(malo))
+                await self.evento(panel, "error")
+            self.assertTrue(all(d.exists() for d in (llamada, p1, p2)))
+
+    async def test_no_se_borra_durante_una_llamada_ni_una_prueba(self):
+        async with connect(self.url + "/panel") as panel:
+            llamada, (p1, p2) = await self.preparar_historial(panel)
+            for mensaje in (self.inicio(), json.dumps(self.prueba())):
+                await panel.send(mensaje)
+                await self.evento(panel, "inicio")
+                for borrar in ({"tipo": "borrar", "ids": [llamada.name]}, {"tipo": "borrar_pruebas"}):
+                    await panel.send(json.dumps(borrar))
+                    self.assertIn("en curso", (await self.evento(panel, "error"))["mensaje"])
+                self.assertTrue(all(d.exists() for d in (llamada, p1, p2)))
+                await self.terminar(panel)
+
     async def test_corte_valido_en_llamada_y_prueba_y_manifiesto_conserva_lo_elegido(self):
         async with connect(self.url + "/panel") as panel:
             for modo, corte in (("llamada", "auto"), ("llamada", 0.1), ("llamada", 3.0), ("llamada", 1),

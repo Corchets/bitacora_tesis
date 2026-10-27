@@ -308,3 +308,52 @@ class TestReferencia(unittest.TestCase):
             with self.assertRaises(ValueError):
                 historial.editar_referencia(self.salida, guardada.name, malo)
         self.assertEqual(json.loads((guardada / "manifiesto.json").read_text())["referencia"], "hola mundo")
+
+
+class TestBorrar(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.salida = Path(self.tmp.name)
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_borra_la_carpeta_entera_con_su_audio(self):
+        a = llamada_completa(self.salida, "2026-10-26_100000-000001")
+        b = llamada_completa(self.salida, "2026-10-26_100001-000001")
+        self.assertEqual(historial.borrar(self.salida, [a.name]), [a.name])
+        self.assertFalse(a.exists())
+        self.assertTrue((b / "estereo.wav").exists())
+
+    def test_borra_varios_y_ignora_repetidos(self):
+        a = llamada_completa(self.salida, "2026-10-26_100000-000001")
+        b = prueba_guardada(self.salida, "2026-10-26_100001-000001")
+        c = llamada_completa(self.salida, "2026-10-26_100002-000001")
+        self.assertEqual(historial.borrar(self.salida, [a.name, b.name, a.name]), [a.name, b.name])
+        self.assertFalse(a.exists() or b.exists())
+        self.assertTrue(c.exists())
+
+    def test_un_id_invalido_no_borra_nada(self):
+        a = llamada_completa(self.salida)
+        for malo in ([a.name, "../x"], [a.name, "2026-10-26_000000-000000"], [a.name, 5], [], "2026-10-26_202337-443368", None):
+            with self.assertRaises(ValueError, msg=repr(malo)):
+                historial.borrar(self.salida, malo)
+            self.assertTrue(a.exists())
+
+    def test_no_borra_la_carpeta_en_curso(self):
+        a = llamada_completa(self.salida)
+        with self.assertRaises(ValueError):
+            historial.borrar(self.salida, [a.name], excluir=a)
+        self.assertTrue(a.exists())
+
+    def test_borrar_pruebas_toca_solo_las_guardadas(self):
+        guardada1 = prueba_guardada(self.salida, "2026-10-26_100000-000001")
+        guardada2 = prueba_guardada(self.salida, "2026-10-26_100001-000001")
+        llamada = llamada_completa(self.salida, "2026-10-26_100002-000001")
+        sin_guardar = carpeta(self.salida, "2026-10-26_100003-000001", {"inicio_panel": {"modo": "asr"}, "guardada": False})
+        antigua = carpeta(self.salida, "2026-10-26_100004-000001", {"inicio_panel": {"modo": "asr"}})
+        borradas = historial.borrar_pruebas_guardadas(self.salida)
+        self.assertEqual(sorted(borradas), [guardada1.name, guardada2.name])
+        self.assertFalse(guardada1.exists() or guardada2.exists())
+        for d in (llamada, sin_guardar, antigua):
+            self.assertTrue(d.exists())

@@ -507,3 +507,20 @@ La llamada en curso no se lista. El panel guarda desde esta versión `origen` (`
 la otra persona para distinguirlas en el Historial; las llamadas anteriores se muestran como «Navegador».
 Las llamadas anteriores a la opción «Automático» (corte 0,8 s con endpoint nativo) se muestran como Automático.
 Tests: `tests/test_historial.py` (carpetas armadas en un directorio temporal) y el contrato en `tests/test_servidor.py`.
+
+### Borrar desde el Historial (#93)
+
+Desde el Historial se borra una llamada o prueba (en su vista de detalle), las **marcadas** (casillas de la lista)
+o **todas las pruebas de ASR guardadas**. Cada borrado pide confirmación con un diálogo que dice la cantidad y el tipo,
+y lista qué se va a borrar; el foco empieza en **Cancelar**, Esc cancela y nada se borra hasta tocar **Borrar**.
+Se elimina la carpeta entera, audio incluido, y no se puede deshacer.
+
+```json
+{"tipo":"borrar","ids":["2026-10-26_202337-443368"]}   → a todos los paneles: {"tipo":"borrado","ids":[…]}
+{"tipo":"borrar_pruebas"}                               → a todos los paneles: {"tipo":"borrado","ids":[…]}
+```
+
+El servidor valida todos los ids antes de tocar nada (un id inválido cancela el pedido entero), rechaza el borrado mientras
+hay una llamada o prueba en curso y avisa del resultado a **todos** los paneles conectados, que actualizan su lista.
+`borrar_pruebas` solo borra pruebas con `guardada: true`: no toca llamadas ni pruebas sin guardar. El borrado no
+pasa por el historial de eventos de la llamada, así que un panel que se conecta después no lo recibe.

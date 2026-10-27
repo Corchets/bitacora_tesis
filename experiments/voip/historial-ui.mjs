@@ -33,6 +33,15 @@ const ESTILOS = `
   #historial .hist-insignia.aviso { background:var(--alerta); border-color:var(--alerta); color:var(--superficie); }
   #hist-cols { display:grid; grid-template-columns:repeat(var(--columnas, 1), minmax(0, 1fr)); gap:1rem; align-items:start; max-width:var(--ancho-detalle, 1000px); margin:0 auto; }
   #historial .hist-col { background:var(--superficie); border:1px solid var(--linea); border-radius:var(--radio-lg); padding:.75rem; min-width:0; }
+  #historial button.peligro { background:var(--alerta-fondo); color:var(--alerta); border-color:var(--alerta-borde); }
+  #historial button.peligro:hover:not(:disabled) { background:var(--alerta-claro); }
+  #hist-confirmar { max-width:34rem; width:calc(100% - 2rem); padding:1.25rem; border:1px solid var(--linea); border-radius:var(--radio-lg); color:var(--tinta); }
+  #hist-confirmar::backdrop { background:rgba(15, 23, 42, .45); }
+  #hist-confirmar h2 { font-size:1.25rem; margin:0 0 .5rem; }
+  #hist-confirmar p { margin:.4rem 0; font-size:.9375rem; }
+  #hist-confirmar ul { list-style:disc; padding-left:1.25rem; max-height:11rem; overflow-y:auto; font-size:.875rem; display:block; }
+  #hist-confirmar li { display:list-item; }
+  #hist-confirmar .acciones { display:flex; gap:.6rem; justify-content:flex-end; margin-top:1rem; }
   #historial .hist-datos { display:grid; grid-template-columns:auto 1fr; gap:.15rem .75rem; margin:.5rem 0 .75rem; font-size:.9375rem; }
   #historial .hist-datos dt { color:var(--tinta-secundaria); font-weight:600; }
   #historial .hist-datos dd { margin:0; font-weight:600; font-variant-numeric:tabular-nums; text-align:left; justify-self:start; }
@@ -78,6 +87,8 @@ export function montarHistorial(acciones) {
       <div class="hist-barra">
         <h2>Historial</h2><span id="hist-estado" role="status"></span><span class="hist-espacio"></span>
         <button id="hist-comparar" type="button" disabled>Comparar (marcá dos)</button>
+        <button id="hist-borrar-marcados" type="button" class="peligro" disabled>Borrar marcados</button>
+        <button id="hist-borrar-pruebas" type="button" class="peligro" disabled>Borrar todas las pruebas</button>
         <button id="hist-actualizar" type="button">Actualizar</button>
       </div>
       <div class="hist-columnas">
@@ -89,13 +100,29 @@ export function montarHistorial(acciones) {
       <div class="hist-barra">
         <button id="hist-volver" type="button">← Volver a la lista</button>
         <h2 id="hist-titulo" tabindex="-1"></h2><span id="hist-estado-detalle" role="status"></span>
+        <span class="hist-espacio"></span>
+        <button id="hist-borrar-esta" type="button" class="peligro">Borrar</button>
       </div>
       <div id="hist-cols"></div>
-    </div>`;
+    </div>
+    <dialog id="hist-confirmar" aria-labelledby="hist-conf-titulo" aria-describedby="hist-conf-texto">
+      <form method="dialog">
+        <h2 id="hist-conf-titulo"></h2>
+        <p id="hist-conf-texto"></p>
+        <ul id="hist-conf-lista"></ul>
+        <div class="acciones">
+          <button value="cancelar" id="hist-conf-cancelar" autofocus>Cancelar</button>
+          <button value="borrar" id="hist-conf-borrar" class="peligro">Borrar</button>
+        </div>
+      </form>
+    </dialog>`;
   document.querySelector('main')?.before(seccion);
   /** @template {HTMLElement} T @param {string} id @returns {T} */
   const el = id => /** @type {T} */ (seccion.querySelector(`#${id}`));
   const comparar = /** @type {HTMLButtonElement} */ (el('hist-comparar'));
+  const borrarMarcados = /** @type {HTMLButtonElement} */ (el('hist-borrar-marcados'));
+  const borrarPruebas = /** @type {HTMLButtonElement} */ (el('hist-borrar-pruebas'));
+  const dialogo = /** @type {HTMLDialogElement} */ (el('hist-confirmar'));
   const listaVista = el('hist-lista-vista'), detalleVista = el('hist-detalle-vista');
 
   let abierto = false;
@@ -119,15 +146,14 @@ export function montarHistorial(acciones) {
     actualizarMarcas();
   }
 
-  /** Solo cambia el estado de las casillas y del botón: no redibuja filas, así el foco no se pierde. */
+  /** Solo cambia el estado de los botones: no redibuja filas, así el foco no se pierde. */
   function actualizarMarcas() {
     const dos = marcados.length === 2;
     comparar.disabled = !dos;
     comparar.textContent = dos ? 'Comparar los 2 marcados' : `Comparar (marcá dos${marcados.length ? `; hay ${marcados.length}` : ''})`;
-    for (const caja of seccion.querySelectorAll('.hist-marca input')) {
-      const c = /** @type {HTMLInputElement} */ (caja);
-      c.disabled = dos && !c.checked;
-    }
+    borrarMarcados.disabled = marcados.length === 0;
+    borrarMarcados.textContent = marcados.length ? `Borrar marcados (${marcados.length})` : 'Borrar marcados';
+    borrarPruebas.disabled = !elementos.some(e => e.tipo === 'prueba');
   }
 
   /** @param {Elemento} e */
@@ -162,6 +188,40 @@ export function montarHistorial(acciones) {
     return li;
   }
 
+  /**
+   * Confirma antes de borrar: dice cuántos y de qué tipo, porque no se puede deshacer.
+   * @param {{titulo: string, texto: string, items: string[], mensaje: object}} pedido
+   */
+  function confirmar(pedido) {
+    el('hist-conf-titulo').textContent = pedido.titulo;
+    el('hist-conf-texto').textContent = `${pedido.texto} Se borran sus carpetas con el audio, la transcripción y el registro. No se puede deshacer.`;
+    el('hist-conf-lista').replaceChildren(...pedido.items.map(t => Object.assign(document.createElement('li'), {textContent: t})));
+    dialogo.returnValue = '';
+    const origen = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    dialogo.onclose = () => {
+      origen?.focus();
+      if (dialogo.returnValue !== 'borrar') return;
+      if (acciones.enviar(pedido.mensaje)) estado('Borrando…');
+      else estado('Sin conexión con el servidor.');
+    };
+    dialogo.showModal();
+  }
+
+  /** @param {Elemento[]} items */
+  const descripciones = items => items.map(e => `${e.tipo === 'prueba' ? 'Prueba' : 'Llamada'} · ${fecha(e.fecha)} · ${e.fuente}`);
+  /** @param {Elemento[]} items */
+  function cuantos(items) {
+    const ll = items.filter(e => e.tipo === 'llamada').length, pr = items.length - ll;
+    return [ll && `${ll} llamada${ll > 1 ? 's' : ''}`, pr && `${pr} prueba${pr > 1 ? 's' : ''} de ASR`].filter(Boolean).join(' y ');
+  }
+  /** @param {string[]} ids */
+  function pedirBorrado(ids) {
+    const items = elementos.filter(e => ids.includes(e.id));
+    if (!items.length) return;
+    confirmar({titulo: `¿Borrar ${cuantos(items)}?`, texto: items.length === 1 ? 'Vas a borrar este elemento del Historial.' : 'Vas a borrar estos elementos del Historial.',
+      items: descripciones(items), mensaje: {tipo: 'borrar', ids: items.map(e => e.id)}});
+  }
+
   /** @param {string[]} ids */
   function ver(ids) {
     pedidos = ids;
@@ -180,6 +240,9 @@ export function montarHistorial(acciones) {
     cols.style.setProperty('--columnas', String(pedidos.length));
     cols.style.setProperty('--ancho-detalle', pedidos.length === 2 ? 'none' : '1000px');
     cols.replaceChildren(...pedidos.map(id => columna(/** @type {Detalle} */ (detalles.get(id)))));
+    const abiertos = pedidos.map(id => /** @type {Detalle} */ (detalles.get(id)).item);
+    el('hist-borrar-esta').textContent = abiertos.length === 2 ? 'Borrar las 2'
+      : abiertos[0].tipo === 'prueba' ? 'Borrar esta prueba' : 'Borrar esta llamada';
     estado('');
     el('hist-titulo').focus();
   }
@@ -276,8 +339,17 @@ export function montarHistorial(acciones) {
 
   el('hist-actualizar').onclick = actualizar;
   el('hist-volver').onclick = volver;
+  borrarMarcados.onclick = () => pedirBorrado([...marcados]);
+  borrarPruebas.onclick = () => {
+    const pruebas = elementos.filter(e => e.tipo === 'prueba');
+    if (!pruebas.length) return;
+    confirmar({titulo: `¿Borrar todas las pruebas de ASR (${pruebas.length})?`,
+      texto: 'Vas a borrar todas las pruebas de ASR guardadas; las llamadas no se tocan.',
+      items: descripciones(pruebas), mensaje: {tipo: 'borrar_pruebas'}});
+  };
+  el('hist-borrar-esta').onclick = () => pedirBorrado([...pedidos]);
   comparar.onclick = () => ver([...marcados]);
-  seccion.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !detalleVista.hidden) volver(); });
+  seccion.addEventListener('keydown', ev => { if (ev.key === 'Escape' && !dialogo.open && !detalleVista.hidden) volver(); });
 
   return {
     get abierto() { return abierto; },
@@ -303,6 +375,15 @@ export function montarHistorial(acciones) {
         marcados = marcados.filter(id => elementos.some(e => e.id === id));
         estado('');
         dibujarLista();
+      } else if (m.tipo === 'borrado') {
+        const ids = new Set(m.ids);
+        elementos = elementos.filter(e => !ids.has(e.id));
+        marcados = marcados.filter(id => !ids.has(id));
+        for (const id of ids) detalles.delete(/** @type {string} */ (id));
+        const abierto = pedidos.some(id => ids.has(id));
+        dibujarLista();
+        if (abierto) volver();
+        estado(m.ids.length ? `Se borr${m.ids.length > 1 ? 'aron' : 'ó'} ${m.ids.length} elemento${m.ids.length > 1 ? 's' : ''}.` : 'No había nada para borrar.');
       } else if (m.tipo === 'detalle') {
         detalles.set(m.item.id, m);
         dibujarDetalle();

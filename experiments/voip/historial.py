@@ -232,3 +232,30 @@ def editar_referencia(salida: Path, id_carpeta, referencia) -> dict:
     manifiesto["referencia"] = texto
     escribir_manifiesto(carpeta, manifiesto)
     return _resumen(carpeta, manifiesto, [], _leer_jsonl(carpeta / "detector.jsonl"))
+
+
+def borrar(salida: Path, ids, excluir: Path | None = None) -> list[str]:
+    """Borra las carpetas enteras (audio incluido) de los ids; devuelve los borrados, sin repetir.
+
+    Valida todos antes de tocar nada: un id inválido, o la carpeta en curso, cancela todo el pedido.
+    """
+    if not isinstance(ids, list) or not ids:
+        raise ValueError("Elegí al menos una llamada o prueba para borrar.")
+    unicos = list(dict.fromkeys(ids))
+    carpetas = [carpeta_de(salida, id_carpeta) for id_carpeta in unicos]
+    if excluir is not None and Path(excluir) in carpetas:
+        raise ValueError("No se puede borrar una llamada en curso.")
+    for carpeta in carpetas:
+        shutil.rmtree(carpeta)
+    return unicos
+
+
+def borrar_pruebas_guardadas(salida: Path) -> list[str]:
+    """Borra todas las pruebas con `guardada: true`; las llamadas y las pruebas sin guardar no se tocan."""
+    ids = []
+    for carpeta in carpetas_de_salida(salida):
+        manifiesto = leer_manifiesto(carpeta)
+        if manifiesto is not None and es_prueba(manifiesto) and manifiesto.get("guardada") is True:
+            shutil.rmtree(carpeta)
+            ids.append(carpeta.name)
+    return ids

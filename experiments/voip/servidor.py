@@ -363,6 +363,21 @@ class Servidor:
     def carpeta_en_curso(self) -> Path | None:
         return None if self.llamada is None else self.llamada.dir_salida
 
+    async def borrar(self, mensaje: dict) -> None:
+        """Borrado desde el Historial: nunca durante una llamada o prueba, y se avisa a todos los paneles."""
+        async with self.control:
+            if self.llamada is not None or self.clientes_audio:
+                raise ValueError("No se puede borrar con una llamada o prueba en curso; terminala primero.")
+            salida = Path(self.args.salida)
+            if mensaje["tipo"] == "borrar_pruebas":
+                ids = await asyncio.to_thread(historial.borrar_pruebas_guardadas, salida)
+            else:
+                ids = await asyncio.to_thread(historial.borrar, salida, mensaje.get("ids"))
+            if self.prueba_pendiente is not None and self.prueba_pendiente.name in ids:
+                self.prueba_pendiente = None
+            # No pasa por el historial de eventos: un panel que se conecta después no necesita saberlo.
+            broadcast(self.paneles, json.dumps({"tipo": "borrado", "ids": ids}))
+
     async def responder_historial(self, ws, mensaje: dict) -> None:
         """Lectura del Historial: la respuesta va solo al panel que preguntó; el disco se lee fuera del bucle."""
         salida, tipo = Path(self.args.salida), mensaje["tipo"]
@@ -419,11 +434,13 @@ class Servidor:
                         await self.reiniciar_prueba()
                     elif mensaje.get("tipo") == "guardar_prueba":
                         await self.guardar_prueba(mensaje)
+                    elif mensaje.get("tipo") in ("borrar", "borrar_pruebas"):
+                        await self.borrar(mensaje)
                     elif mensaje.get("tipo") in ("historial", "ver", "referencia"):
                         await self.responder_historial(ws, mensaje)
                     else:
                         raise ValueError("Control desconocido: usá iniciar, terminar, reiniciar_prueba, "
-                                         "guardar_prueba, historial, ver o referencia.")
+                                         "guardar_prueba, historial, ver, referencia, borrar o borrar_pruebas.")
                 except (ValueError, OSError, RuntimeError) as exc:
                     await ws.send(json.dumps({"tipo": "error", "mensaje": str(exc)}, ensure_ascii=False))
         finally:
