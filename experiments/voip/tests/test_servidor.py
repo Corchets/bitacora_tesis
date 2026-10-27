@@ -285,6 +285,84 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(nivel["fin_audio_s"], None)
             await self.terminar(panel)
 
+    async def responder(self, panel, mensaje, tipo):
+        await panel.send(json.dumps(mensaje))
+        return await self.evento(panel, tipo)
+
+    async def test_historial_por_websocket_lista_detalle_y_edita_la_referencia(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            llamada = await self.terminar(panel)
+            await panel.send(json.dumps(self.prueba(1.2)))
+            await self.evento(panel, "inicio")
+            await self.terminar(panel)
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencia": "hola"}))
+            guardada = await self.evento(panel, "prueba_guardada")
+            prueba = Path(guardada["dir"])
+            # Una prueba sin guardar no aparece.
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            await self.terminar(panel)
+
+            lista = await self.responder(panel, {"tipo": "historial"}, "historial")
+            self.assertEqual([i["id"] for i in lista["llamadas"]], [llamada.name])
+            self.assertEqual([i["id"] for i in lista["pruebas"]], [prueba.name])
+            self.assertEqual(lista["llamadas"][0]["corte_silencio_s"], "auto")
+            self.assertEqual(lista["pruebas"][0]["referencia"], "hola")
+
+            det = await self.responder(panel, {"tipo": "ver", "id": llamada.name}, "detalle")
+            self.assertEqual(det["item"]["id"], llamada.name)
+            self.assertIn("conversacion", det)
+
+            nueva = await self.responder(panel, {"tipo": "referencia", "id": prueba.name, "referencia": "chau"},
+                                         "referencia_guardada")
+            self.assertEqual(nueva["item"]["referencia"], "chau")
+            self.assertEqual(self.manifiesto(prueba)["referencia"], "chau")
+
+            for malo in ({"tipo": "ver", "id": "../x"}, {"tipo": "ver", "id": 5}, {"tipo": "ver"},
+                         {"tipo": "ver", "id": "2026-10-26_000000-000000"},
+                         {"tipo": "referencia", "id": llamada.name, "referencia": "x"},
+                         {"tipo": "referencia", "id": prueba.name, "referencia": 5}):
+                await panel.send(json.dumps(malo))
+                await self.evento(panel, "error")
+
+    async def test_historial_no_lista_la_llamada_en_curso_y_sobrevive_al_reinicio(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            lista = await self.responder(panel, {"tipo": "historial"}, "historial")
+            self.assertEqual(lista, {"tipo": "historial", "llamadas": [], "pruebas": []})
+            await self.terminar(panel)
+        # Un servidor nuevo sobre la misma carpeta de salida ve lo anterior.
+        args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2, corte_silencio="auto")
+        otro = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
+        red = await serve(otro.atender, "127.0.0.1", 0)
+        try:
+            async with connect(f"ws://127.0.0.1:{red.sockets[0].getsockname()[1]}/panel") as panel:
+                lista = await self.responder(panel, {"tipo": "historial"}, "historial")
+                self.assertEqual(len(lista["llamadas"]), 1)
+        finally:
+            red.close()
+            await red.wait_closed()
+
+    async def test_historial_responde_solo_a_quien_pregunta(self):
+        async with connect(self.url + "/panel") as uno, connect(self.url + "/panel") as otro:
+            await uno.send(json.dumps({"tipo": "historial"}))
+            await self.evento(uno, "historial")
+            await otro.send(self.inicio())
+            await self.evento(otro, "inicio")
+            visto = []
+            try:
+                async with asyncio.timeout(0.3):
+                    while True:
+                        visto.append(json.loads(await uno.recv())["tipo"])
+            except TimeoutError:
+                pass
+            self.assertNotIn("historial", visto)
+            await otro.send(json.dumps({"tipo": "terminar"}))
+            await self.evento(otro, "fin")
+
     async def test_corte_valido_en_llamada_y_prueba_y_manifiesto_conserva_lo_elegido(self):
         async with connect(self.url + "/panel") as panel:
             for modo, corte in (("llamada", "auto"), ("llamada", 0.1), ("llamada", 3.0), ("llamada", 1),

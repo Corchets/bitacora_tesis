@@ -472,3 +472,38 @@ Las pruebas automatizadas y sus límites se describen en
 Meet ni WhatsApp con personas registradas por este ticket.
 Fuentes para la configuración: [controles de captura de Chrome](https://developer.chrome.com/docs/web-platform/screen-sharing-controls)
 y [salida múltiple de BlackHole](https://github.com/ExistentialAudio/BlackHole/wiki/Multi-Output-Device).
+
+## 12. Historial de llamadas y pruebas (#92)
+
+La pestaña **Historial** de la barra superior (deshabilitada mientras hay una llamada o prueba en curso)
+lista, de la más nueva a la más vieja, las **llamadas** y, aparte, las **pruebas de ASR guardadas**. Cada fila
+muestra fecha y hora, fuente (ejemplo y escenario, micrófono, Meet, WhatsApp / BlackHole, `cliente.py`), duración,
+detector y modelo, corte de silencio, riesgo máximo y si avisó (y en qué segundo). Tocá una fila para ver su
+conversación por rol, con el aviso marcado y su motivo y evidencia; marcá dos casillas y tocá **Comparar** para verlas
+en dos columnas con los datos clave arriba. En una prueba guardada se edita **Lo que dije en realidad**.
+Con Esc se vuelve a la lista. La lista incluye las llamadas hechas antes de esta función y sigue ahí
+después de reiniciar el servidor: se lee de la carpeta de salida, no de la memoria.
+
+El módulo `historial.py` no tiene estado: recibe la carpeta de salida y arma la lista y el detalle desde
+`manifiesto.json`, `actualizaciones.jsonl` y `detector.jsonl`. El detalle trae solo los finales del ASR
+(un segmento sin final, en una carpeta cortada, aparece con su último provisorio y `provisorio: true`) y deja el
+aviso en la última frase cerrada que el detector ya había visto. Las carpetas sin manifiesto se listan como
+**incompletas** si tienen algún texto legible y se omiten si no; una carpeta ilegible no rompe la lista. Una
+prueba sin `guardada: true` no se lista.
+
+El **id** de cada elemento es el nombre de su carpeta. Solo se aceptan nombres con el formato que usa el servidor
+(`AAAA-MM-DD_HHMMSS-micro`) que existan dentro de la carpeta de salida y no sean enlaces simbólicos; rutas y `..`
+se rechazan con un `error`.
+
+Contrato por el WebSocket del panel (el servidor HTTP solo atiende GET). La respuesta va solo al panel que preguntó:
+
+```json
+{"tipo":"historial"}                                   → {"tipo":"historial","llamadas":[…],"pruebas":[…]}
+{"tipo":"ver","id":"2026-10-26_202337-443368"}         → {"tipo":"detalle","item":{…},"conversacion":[…],"aviso":{…}|null}
+{"tipo":"referencia","id":"…","referencia":"texto"}    → {"tipo":"referencia_guardada","item":{…}}
+```
+
+La llamada en curso no se lista. El panel guarda desde esta versión `origen` (`meet` o `blackhole`) en la fuente de
+la otra persona para distinguirlas en el Historial; las llamadas anteriores se muestran como «Navegador».
+Las llamadas anteriores a la opción «Automático» (corte 0,8 s con endpoint nativo) se muestran como Automático.
+Tests: `tests/test_historial.py` (carpetas armadas en un directorio temporal) y el contrato en `tests/test_servidor.py`.

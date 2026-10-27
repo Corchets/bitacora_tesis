@@ -12,7 +12,11 @@ from __future__ import annotations
 import json
 import re
 import shutil
+from datetime import datetime
 from pathlib import Path
+
+LARGO_MAXIMO_REFERENCIA = 2000
+FORMATO_FECHA = "%Y-%m-%d_%H%M%S-%f"
 
 # El mismo formato con que servidor.py nombra cada carpeta: es lo único que se acepta como id.
 FORMATO_ID = re.compile(r"^\d{4}-\d{2}-\d{2}_\d{6}-\d{6}$")
@@ -55,3 +59,176 @@ def descartar_pruebas_no_guardadas(salida: Path, conservar: Path | None = None) 
             shutil.rmtree(carpeta, ignore_errors=True)
             borradas.append(carpeta.name)
     return borradas
+
+
+def escribir_manifiesto(carpeta: Path, manifiesto: dict) -> None:
+    """Reemplaza el manifiesto de una vez: nunca queda a medio escribir."""
+    temporal = carpeta / "manifiesto.json.tmp"
+    temporal.write_text(json.dumps(manifiesto, ensure_ascii=False, indent=2), encoding="utf-8")
+    temporal.replace(carpeta / "manifiesto.json")
+
+
+def validar_referencia(referencia) -> str:
+    if not isinstance(referencia, str) or len(referencia) > LARGO_MAXIMO_REFERENCIA:
+        raise ValueError(f"«Lo que dije en realidad» debe ser texto de hasta {LARGO_MAXIMO_REFERENCIA} caracteres.")
+    return referencia.strip()
+
+
+def carpeta_de(salida: Path, id_carpeta) -> Path:
+    """La carpeta de un id, o ValueError. Rutas, `..` y enlaces simbólicos no son ids."""
+    if not isinstance(id_carpeta, str) or not FORMATO_ID.fullmatch(id_carpeta):
+        raise ValueError("Elegí una llamada o prueba de la lista.")
+    carpeta = Path(salida) / id_carpeta
+    if carpeta.is_symlink() or not carpeta.is_dir():
+        raise ValueError("Esa llamada o prueba ya no existe.")
+    return carpeta
+
+
+def _leer_jsonl(ruta: Path) -> list[dict]:
+    """Las líneas legibles de un JSONL; las rotas se saltean."""
+    lineas = []
+    try:
+        with open(ruta, encoding="utf-8") as archivo:
+            for texto in archivo:
+                try:
+                    dato = json.loads(texto)
+                except ValueError:
+                    continue
+                if isinstance(dato, dict):
+                    lineas.append(dato)
+    except OSError:
+        pass
+    return lineas
+
+
+def _fuente(manifiesto: dict) -> str:
+    inicio = manifiesto.get("inicio_panel") if isinstance(manifiesto.get("inicio_panel"), dict) else {}
+    if inicio.get("modo") == "asr":
+        return "Micrófono"
+    fuentes = inicio.get("fuentes") if isinstance(inicio.get("fuentes"), dict) else {}
+    otra = fuentes.get("otra") if isinstance(fuentes.get("otra"), dict) else {}
+    if otra.get("tipo") == "ejemplo":
+        return f"Ejemplo {otra.get('escenario', '')}".strip()
+    if otra.get("tipo") == "navegador":
+        return {"meet": "Meet", "blackhole": "WhatsApp / BlackHole"}.get(otra.get("origen"), "Navegador")
+    return "Segunda notebook · cliente.py"
+
+
+def _riesgo(evaluacion: dict) -> float | None:
+    if not evaluacion.get("valida"):
+        return None
+    riesgo = evaluacion.get("riesgo")
+    return riesgo if isinstance(riesgo, (int, float)) else (1.0 if evaluacion.get("alerta_sugerida") else 0.0)
+
+
+def _resumen(carpeta: Path, manifiesto: dict | None, actualizaciones: list[dict], detector: list[dict]) -> dict:
+    fecha = None
+    try:
+        fecha = datetime.strptime(carpeta.name, FORMATO_FECHA).isoformat(timespec="seconds")
+    except ValueError:
+        pass
+    m = manifiesto or {}
+    config = m.get("config") if isinstance(m.get("config"), dict) else {}
+    canales = m.get("canales") if isinstance(m.get("canales"), dict) else {}
+    duraciones = [c["inicio_s"] + c["duracion_s"] for c in canales.values()
+                  if isinstance(c, dict) and isinstance(c.get("inicio_s"), (int, float))
+                  and isinstance(c.get("duracion_s"), (int, float))]
+    if not duraciones:
+        fines = [a["fin_audio_s"] for a in actualizaciones if isinstance(a.get("fin_audio_s"), (int, float))]
+        duraciones = fines[-1:] if fines else []
+    corte = config.get("corte_silencio_s")
+    if config.get("endpoint_nativo") is True:
+        corte = "auto"  # las llamadas anteriores a la opción «Automático» guardaban 0,8 con el endpoint activo
+    aviso = (m.get("detector") or {}).get("aviso") if isinstance(m.get("detector"), dict) else None
+    if aviso is None:
+        aviso = next((e for e in detector if e.get("aviso")), None)
+    riesgos = [r for r in map(_riesgo, detector) if r is not None]
+    prueba = manifiesto is not None and es_prueba(manifiesto)
+    resumen = {
+        "id": carpeta.name,
+        "fecha": fecha,
+        "tipo": "prueba" if prueba else "llamada",
+        "incompleta": manifiesto is None,
+        "fuente": _fuente(m) if manifiesto is not None else "Sin manifiesto",
+        "duracion_s": round(max(duraciones), 3) if duraciones else None,
+        "detector": config.get("detector"),
+        "modelo": config.get("modelo"),
+        "corte_silencio_s": corte,
+        "umbral_rms_silencio": config.get("umbral_rms_silencio"),
+        "riesgo_maximo": max(riesgos) if riesgos else None,
+        "aviso": aviso is not None,
+        "aviso_s": aviso.get("t_a") if aviso else None,
+    }
+    if prueba:
+        resumen["referencia"] = m.get("referencia", "")
+    return resumen
+
+
+def _leer_carpeta(carpeta: Path) -> tuple[dict | None, list[dict], list[dict]]:
+    return (leer_manifiesto(carpeta), _leer_jsonl(carpeta / "actualizaciones.jsonl"),
+            _leer_jsonl(carpeta / "detector.jsonl"))
+
+
+def listar(salida: Path, excluir: Path | None = None) -> dict:
+    """Llamadas y pruebas guardadas, de la más nueva a la más vieja.
+
+    Sin manifiesto (llamada cortada) se lista como incompleta con lo que se pueda leer,
+    o se omite si no hay nada legible. `excluir` es la carpeta de la llamada en curso.
+    """
+    llamadas, pruebas = [], []
+    for carpeta in reversed(carpetas_de_salida(salida)):
+        if excluir is not None and carpeta == Path(excluir):
+            continue
+        manifiesto, actualizaciones, detector = _leer_carpeta(carpeta)
+        if manifiesto is None:
+            if not any(a.get("texto") for a in actualizaciones):
+                continue
+        elif es_prueba(manifiesto) and manifiesto.get("guardada") is not True:
+            continue  # sin marca de guardado no se lista
+        resumen = _resumen(carpeta, manifiesto, actualizaciones, detector)
+        (pruebas if resumen["tipo"] == "prueba" else llamadas).append(resumen)
+    return {"llamadas": llamadas, "pruebas": pruebas}
+
+
+def detalle(salida: Path, id_carpeta) -> dict:
+    """Resumen, conversación por rol (finales del ASR) y aviso del detector de un elemento."""
+    carpeta = carpeta_de(salida, id_carpeta)
+    manifiesto, actualizaciones, detector = _leer_carpeta(carpeta)
+    resumen = _resumen(carpeta, manifiesto, actualizaciones, detector)
+    finales: dict[int, dict] = {}
+    provisorios: dict[int, dict] = {}
+    for a in actualizaciones:
+        if not isinstance(a.get("texto"), str) or not isinstance(a.get("segmento"), int):
+            continue
+        destino = finales if a.get("tipo") == "final" else provisorios
+        destino[a["segmento"]] = a
+    lineas = []
+    for segmento in sorted(set(finales) | set(provisorios), key=lambda s: (finales.get(s) or provisorios[s]).get("n", 0)):
+        act = finales.get(segmento) or provisorios[segmento]
+        lineas.append({
+            "segmento": segmento, "n": act.get("n"), "rol": act.get("canal"), "texto": act["texto"],
+            "fin_audio_s": act.get("fin_audio_s"), "disponible_s": act.get("disponible_s"),
+            "provisorio": segmento not in finales, "aviso": False,
+        })
+    aviso = next((e for e in detector if e.get("aviso")), None)
+    aviso_resumen = None
+    if aviso is not None:
+        aviso_resumen = {"t_a": aviso.get("t_a"), "motivo": aviso.get("motivo", ""),
+                         "evidencia": aviso.get("evidencia", ""), "riesgo": _riesgo(aviso)}
+        # El aviso queda en la última frase cerrada que el detector ya había visto.
+        vistas = [l for l in lineas if not l["provisorio"] and isinstance(l["n"], int) and l["n"] <= aviso.get("n", 0)]
+        if vistas:
+            vistas[-1]["aviso"] = True
+    return {"item": resumen, "conversacion": lineas, "aviso": aviso_resumen}
+
+
+def editar_referencia(salida: Path, id_carpeta, referencia) -> dict:
+    """Cambia «Lo que dije en realidad» de una prueba ya guardada y devuelve su resumen."""
+    texto = validar_referencia(referencia)
+    carpeta = carpeta_de(salida, id_carpeta)
+    manifiesto = leer_manifiesto(carpeta)
+    if manifiesto is None or not es_prueba(manifiesto) or manifiesto.get("guardada") is not True:
+        raise ValueError("Solo se edita la referencia de una prueba guardada.")
+    manifiesto["referencia"] = texto
+    escribir_manifiesto(carpeta, manifiesto)
+    return _resumen(carpeta, manifiesto, [], _leer_jsonl(carpeta / "detector.jsonl"))

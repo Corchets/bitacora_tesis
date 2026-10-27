@@ -1069,6 +1069,7 @@
     <div class="modo-conmutador" role="tablist" aria-label="Modo de operación">
       <button type="button" id="tab-modo-llamada" class="modo-tab activo" role="tab" aria-selected="true">Llamada en vivo</button>
       <button type="button" id="tab-modo-asr" class="modo-tab" role="tab" aria-selected="false">Probar el ASR</button>
+      <button type="button" id="tab-modo-historial" class="modo-tab" role="tab" aria-selected="false" title="Ver y comparar llamadas y pruebas guardadas">Historial</button>
     </div>
   </div>
 </header>
@@ -1230,6 +1231,8 @@ import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 import {prepararFuentes} from './fuentes.mjs';
 import {crearSelectorCorte} from './corte-silencio.mjs';
+import {plantillaLinea} from './conversacion.mjs';
+import {montarHistorial} from './historial-ui.mjs';
 
 /** @typedef {{segmento: number, n: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
@@ -1246,8 +1249,6 @@ const $ = (id) => {
   return el;
 };
 
-/** @type {Record<string, string>} */
-const NOMBRE = { protegida: "Persona protegida", otra: "Otra persona" };
 
 /** @type {Map<number, HTMLDivElement>} */
 const burbujas = new Map();
@@ -1523,26 +1524,58 @@ const pruebaASR = montarPruebaASR({
   cambiar: () => { sincronizarModoVisual(); actualizarControles(); }
 });
 
-// Conmutador visual de pestañas Llamada / Probar el ASR
+const historialUI = montarHistorial({
+  enviar: (mensaje) => {
+    if (conexion?.readyState !== WebSocket.OPEN) return false;
+    conexion.send(JSON.stringify(mensaje));
+    return true;
+  },
+  alCambiar: () => {
+    // El encabezado dice dónde estás y, al volver, recupera lo que decía.
+    if (historialUI.abierto) {
+      estadoPrevioAlHistorial = $("estado").textContent;
+      $("estado").textContent = "historial de llamadas y pruebas guardadas";
+    } else if (estadoPrevioAlHistorial !== null) {
+      $("estado").textContent = estadoPrevioAlHistorial;
+      estadoPrevioAlHistorial = null;
+    }
+    sincronizarModoVisual(); actualizarControles();
+  }
+});
+/** @type {string|null} */
+let estadoPrevioAlHistorial = null;
+
+// Conmutador visual de pestañas Llamada / Probar el ASR / Historial
 const tabLlamada = /** @type {HTMLButtonElement} */ ($("tab-modo-llamada"));
 const tabASR = /** @type {HTMLButtonElement} */ ($("tab-modo-asr"));
+const tabHistorial = /** @type {HTMLButtonElement} */ ($("tab-modo-historial"));
 const asrModoCheck = /** @type {HTMLInputElement|null} */ (document.getElementById("asr-modo"));
 
 function sincronizarModoVisual() {
-  const activa = pruebaASR.activa;
-  tabLlamada.classList.toggle("activo", !activa);
-  tabLlamada.setAttribute("aria-selected", String(!activa));
-  tabASR.classList.toggle("activo", activa);
-  tabASR.setAttribute("aria-selected", String(activa));
+  const activa = pruebaASR.activa, historial = historialUI.abierto;
+  for (const [tab, activo] of /** @type {const} */ ([[tabLlamada, !activa && !historial], [tabASR, activa], [tabHistorial, historial]])) {
+    tab.classList.toggle("activo", activo);
+    tab.setAttribute("aria-selected", String(activo));
+  }
 }
 
+tabHistorial.onclick = () => {
+  if (asrModoCheck && asrModoCheck.checked) {
+    asrModoCheck.checked = false;
+    asrModoCheck.dispatchEvent(new Event("change"));
+  }
+  historialUI.abrir();
+};
+
 tabLlamada.onclick = () => {
+  historialUI.cerrar();
   if (asrModoCheck && asrModoCheck.checked) {
     asrModoCheck.checked = false;
     asrModoCheck.dispatchEvent(new Event("change"));
   }
 };
 tabASR.onclick = () => {
+  historialUI.cerrar();
   if (asrModoCheck && !asrModoCheck.checked) {
     asrModoCheck.checked = true;
     asrModoCheck.dispatchEvent(new Event("change"));
@@ -1602,6 +1635,7 @@ function actualizarControles() {
   buscarMicrofonos.disabled = microfono.disabled;
   tabLlamada.disabled = enLlamada || pendiente;
   tabASR.disabled = enLlamada || pendiente;
+  tabHistorial.disabled = enLlamada || pendiente;
   pruebaASR.controles(!!conectada, pendiente, enLlamada);
   sincronizarModoVisual();
 }
@@ -1650,12 +1684,13 @@ async function iniciarSesion() {
   }
   if (conexion?.readyState !== WebSocket.OPEN) { liberarMicrofono(); return; }
   const ejemplo = fuente.value !== "cliente";
+  /** @type {Record<"otra"|"protegida", {tipo: string, [campo: string]: string}>} */
   const fuentes = ejemplo ? {
     otra: {tipo: "ejemplo", escenario: fuente.value, canal: "izq"},
     protegida: {tipo: "ejemplo", escenario: fuente.value, canal: "der"}
   } : {otra: {tipo: "cliente"}, protegida: {tipo: "cliente"}};
   if (emisor) fuentes.protegida = {tipo: "navegador"};
-  if (fuenteRemota) fuentes.otra = {tipo: "navegador"};
+  if (fuenteRemota) fuentes.otra = {tipo: "navegador", origen: fuente.value};
   inicioPropio = true;
   enviar(pruebaASR.activa
     ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config}
@@ -1760,7 +1795,7 @@ function asr(m) {
   if (!b) {
     b = document.createElement("div");
     b.id = `seg-${m.segmento}`;
-    b.innerHTML = `<div class="quien"><span class="nombre-quien">${NOMBRE[m.rol] || m.rol}</span><span class="t"></span></div><div class="texto"></div>`;
+    b.innerHTML = plantillaLinea(m.rol);
     $("charla").appendChild(b);
     burbujas.set(m.segmento, b);
   }
@@ -2048,7 +2083,9 @@ function conectar() {
   ws.onmessage = (e) => {
     const m = JSON.parse(e.data);
     pruebaASR.evento(m);
+    historialUI.evento(m);
     if (m.tipo === "inicio") {
+      historialUI.cerrar();
       reiniciar(m.llamada_id);
       if (m.detector) actualizarDetectorVisual(m.detector);
       if (m.modo === "llamada") corteLlamada.valor = m.corte_silencio_s;

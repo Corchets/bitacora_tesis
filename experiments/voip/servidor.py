@@ -57,7 +57,6 @@ CORTE_AUTO = "auto"
 CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el modelo no cierra la frase solo
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
 UMBRAL_LLAMADA = 0.005
-LARGO_MAXIMO_REFERENCIA = 2000
 
 
 def validar_corte(valor) -> str | float:
@@ -350,20 +349,34 @@ class Servidor:
 
     async def guardar_prueba(self, mensaje: dict) -> None:
         """«Guardar»: marca la última prueba cerrada como guardada y anota lo que se dijo en realidad."""
-        referencia = mensaje.get("referencia", "")
-        if not isinstance(referencia, str) or len(referencia) > LARGO_MAXIMO_REFERENCIA:
-            raise ValueError(f"«Lo que dije en realidad» debe ser texto de hasta {LARGO_MAXIMO_REFERENCIA} caracteres.")
+        referencia = historial.validar_referencia(mensaje.get("referencia", ""))
         async with self.control:
             carpeta = self.prueba_pendiente
             manifiesto = None if carpeta is None else historial.leer_manifiesto(carpeta)
             if self.llamada is not None or manifiesto is None:
                 raise ValueError("No hay una prueba terminada para guardar.")
-            manifiesto.update({"guardada": True, "referencia": referencia.strip()})
-            temporal = carpeta / "manifiesto.json.tmp"
-            temporal.write_text(json.dumps(manifiesto, ensure_ascii=False, indent=2), encoding="utf-8")
-            temporal.replace(carpeta / "manifiesto.json")
+            manifiesto.update({"guardada": True, "referencia": referencia})
+            historial.escribir_manifiesto(carpeta, manifiesto)
             self.prueba_pendiente = None
-            self.difundir({"tipo": "prueba_guardada", "dir": str(carpeta), "referencia": manifiesto["referencia"]})
+            self.difundir({"tipo": "prueba_guardada", "dir": str(carpeta), "referencia": referencia})
+
+    def carpeta_en_curso(self) -> Path | None:
+        return None if self.llamada is None else self.llamada.dir_salida
+
+    async def responder_historial(self, ws, mensaje: dict) -> None:
+        """Lectura del Historial: la respuesta va solo al panel que preguntó; el disco se lee fuera del bucle."""
+        salida, tipo = Path(self.args.salida), mensaje["tipo"]
+        if tipo == "historial":
+            respuesta = await asyncio.to_thread(historial.listar, salida, self.carpeta_en_curso())
+            respuesta = {"tipo": "historial", **respuesta}
+        elif tipo == "ver":
+            respuesta = {"tipo": "detalle", **await asyncio.to_thread(historial.detalle, salida, mensaje.get("id"))}
+        else:
+            async with self.control:
+                item = await asyncio.to_thread(historial.editar_referencia, salida, mensaje.get("id"),
+                                               mensaje.get("referencia"))
+            respuesta = {"tipo": "referencia_guardada", "item": item}
+        await ws.send(json.dumps(respuesta, ensure_ascii=False))
 
     async def reproducir_ejemplo(self, audio, *, protegida: bool = True) -> None:
         """Entrega pares de bloques de 40 ms con una única marca de llegada."""
@@ -406,8 +419,11 @@ class Servidor:
                         await self.reiniciar_prueba()
                     elif mensaje.get("tipo") == "guardar_prueba":
                         await self.guardar_prueba(mensaje)
+                    elif mensaje.get("tipo") in ("historial", "ver", "referencia"):
+                        await self.responder_historial(ws, mensaje)
                     else:
-                        raise ValueError("Control desconocido: usá iniciar, terminar, reiniciar_prueba o guardar_prueba.")
+                        raise ValueError("Control desconocido: usá iniciar, terminar, reiniciar_prueba, "
+                                         "guardar_prueba, historial, ver o referencia.")
                 except (ValueError, OSError, RuntimeError) as exc:
                     await ws.send(json.dumps({"tipo": "error", "mensaje": str(exc)}, ensure_ascii=False))
         finally:
@@ -436,7 +452,7 @@ def servir_panel(connection, request, args: argparse.Namespace | None = None):
     rutas = {"/": ("panel.html", "text/html; charset=utf-8"),
              "/guia": ("GUIA-MEET-WHATSAPP.md", "text/plain; charset=utf-8"),
              **{f"/{nombre}": (nombre, "text/javascript; charset=utf-8") for nombre in
-                ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs", "fuentes.mjs", "corte-silencio.mjs")}}
+                ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs", "fuentes.mjs", "corte-silencio.mjs", "conversacion.mjs", "historial-ui.mjs")}}
     archivo = rutas.get(ruta)
     if archivo is None:
         return None
