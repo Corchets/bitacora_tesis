@@ -1,0 +1,3392 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Tito + SLM · Informe visual del experimento</title>
+  <style>
+    :root {
+      --page: #f4f6f5;
+      --paper: #ffffff;
+      --ink: #17332f;
+      --muted: #637571;
+      --line: #e0e8e4;
+      --teal: #0b806b;
+      --teal-soft: #e8f5ef;
+      --blue: #546fd1;
+      --blue-soft: #edf0fc;
+      --amber: #b87619;
+      --amber-soft: #fff4df;
+      --red: #b74d4c;
+      --red-soft: #fcf0ed;
+      --shadow: 0 8px 32px rgb(23 51 47 / 4%);
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    button, select, input { font: inherit; }
+    button, select, summary { cursor: pointer; }
+    button { color: inherit; }
+    button:focus-visible, a:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #85bdb0; outline-offset: 4px; }
+    a { color: var(--teal); text-underline-offset: 3px; }
+    h1, h2, h3, h4, p { margin: 0; }
+    h1, h2, h3, h4 { line-height: 1.2; }
+    h1 { font-size: clamp(35px, 4.3vw, 56px); letter-spacing: -.055em; font-weight: 650; }
+    h2 { font-size: clamp(25px, 3vw, 31px); letter-spacing: -.035em; font-weight: 630; }
+    h3 { font-size: 19px; letter-spacing: -.025em; font-weight: 630; }
+    h4 { font-size: 15px; font-weight: 650; }
+    .muted, .caption { color: var(--muted); }
+    .caption { font-size: 13px; }
+    .mono { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; }
+    .eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-size: 11px; font-weight: 700; }
+    .wrap { max-width: 1180px; margin: auto; padding: 0 32px; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 27px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 11px; font-size: 14px; font-weight: 700; letter-spacing: -.02em; }
+    .brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px; color: white; background: var(--ink); font: italic 25px Georgia, serif; }
+    .masthead-note { display: flex; gap: 16px; align-items: center; color: var(--muted); font-size: 12px; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 650; line-height: 1.35; background: #edf1ef; color: #49615a; white-space: nowrap; }
+    .badge.fraud { background: var(--amber-soft); color: #8d5d10; }
+    .badge.legit { background: var(--teal-soft); color: #16715f; }
+    .badge.quant { background: #f1f3f5; color: #67737c; font-family: ui-monospace, monospace; font-weight: 500; }
+    .hero { display: grid; grid-template-columns: 1.35fr .8fr; gap: 64px; padding: 46px 0 34px; align-items: center; }
+    .hero .eyebrow { margin-bottom: 14px; color: var(--teal); }
+    .hero h1 em { color: var(--teal); font-style: normal; }
+    .hero p { margin-top: 20px; max-width: 510px; color: var(--muted); font-size: 16px; }
+    .pipeline { position: relative; padding: 26px; background: #173c34; color: #f5fff9; border-radius: 22px; }
+    .pipeline .eyebrow { color: #a6c7ba; margin: 0 0 20px; }
+    .pipeline-step { display: grid; grid-template-columns: 32px 1fr auto; align-items: center; gap: 9px; padding: 11px 0; position: relative; }
+    .step-num { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid #578173; border-radius: 9px; color: #b9d5c9; font: 11px ui-monospace, monospace; }
+    .pipeline-step strong { display: block; font-size: 14px; font-weight: 550; }
+    .pipeline-step span:last-child { color: #b7d1c6; font-size: 11px; }
+    .pipeline-note { color: #b7d1c6; border-top: 1px solid #395b50; margin-top: 12px; padding-top: 14px; font-size: 12px; line-height: 1.5; }
+    .scope { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-block: 1px solid var(--line); padding: 22px 0; margin-bottom: 28px; }
+    .scope-item { padding-left: 30px; border-left: 1px solid var(--line); }
+    .scope-item:first-child { padding-left: 0; border: 0; }
+    .scope-value { display: block; font-size: 29px; font-weight: 650; line-height: 1.25; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+    .scope-item span:last-child { font-size: 12px; color: var(--muted); }
+    .navigation { position: sticky; top: 0; z-index: 4; padding: 10px 0; background: rgb(244 246 245 / 96%); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .tabs { display: inline-flex; gap: 6px; padding: 5px; border: 1px solid var(--line); border-radius: 13px; background: #ebf0ed; max-width: 100%; }
+    .tab { border: 0; background: transparent; padding: 10px 19px; border-radius: 9px; font-weight: 550; font-size: 13px; color: var(--muted); white-space: nowrap; min-width: 0; }
+    .tab[aria-selected="true"] { background: white; color: var(--ink); box-shadow: 0 2px 5px rgb(23 51 47 / 7%); }
+    main { padding: 35px 0 48px; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 24px; }
+    .section-heading .eyebrow { margin-bottom: 9px; }
+    .section-heading p { max-width: 640px; color: var(--muted); margin-top: 11px; }
+    .legend { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .swatch { display: inline-block; width: 9px; height: 9px; border-radius: 3px; background: var(--blue); flex-shrink: 0; }
+    .swatch.filtered { background: var(--teal); }
+    .swatch.gate { background: var(--amber); }
+    .models-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .model-card { background: var(--paper); border: 1px solid var(--line); border-radius: 17px; padding: 22px; box-shadow: var(--shadow); }
+    .card-header { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 23px; }
+    .card-header h3 { font-size: 17px; }
+    .score + .score { margin-top: 18px; }
+    .score-title { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+    .score-title .direction { font-weight: 400; color: var(--muted); }
+    .score-line { display: grid; grid-template-columns: 46px 1fr 27px; align-items: center; gap: 8px; font-size: 10px; color: var(--muted); margin-top: 5px; }
+    .score-pips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .pip { height: 7px; background: #ecf0ee; border-radius: 2px; }
+    .pip.direct { background: var(--blue); }
+    .pip.filtered { background: var(--teal); }
+    .score-line b { font-weight: 600; font-size: 12px; color: var(--ink); text-align: right; }
+    .card-action { margin-top: 21px; padding-top: 15px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .text-button { background: none; padding: 0; border: 0; color: var(--teal); font-size: 12px; font-weight: 650; text-align: left; }
+    .text-button:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .delta { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .good { color: var(--teal); }
+    .bad { color: var(--red); }
+    .neutral { color: var(--muted); }
+    .resource-section { display: grid; grid-template-columns: .72fr 1.28fr; gap: 22px; margin-top: 28px; }
+    .panel { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 26px; }
+    .panel h3 { margin-bottom: 12px; }
+    .panel > p { color: var(--muted); font-size: 13px; }
+    .big-reduction { font-size: 59px; letter-spacing: -.065em; font-weight: 600; color: var(--teal); line-height: 1.15; margin: 23px 0 5px; }
+    .stacked-track { display: flex; height: 16px; overflow: hidden; border-radius: 5px; background: #edf1ef; margin: 21px 0 11px; }
+    .stacked-used { background: var(--teal); }
+    .stacked-avoided { background: #cfdfd6; }
+    .stacked-labels { display: flex; justify-content: space-between; font-size: 12px; gap: 20px; }
+    .footnote { font-size: 12px; color: var(--muted); margin-top: 24px; line-height: 1.65; }
+    .resource-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+    .resource-head h3 { margin: 0; }
+    select { border: 1px solid #cfdbd5; border-radius: 9px; background: #fff; padding: 9px 32px 9px 12px; color: var(--ink); max-width: 100%; font-size: 13px; }
+    .resource-row { display: grid; grid-template-columns: 123px 1fr 100px; gap: 14px; align-items: center; padding: 9px 0; }
+    .resource-label { font-size: 12px; line-height: 1.4; }
+    .resource-label small { color: var(--muted); display: block; font-size: 10px; }
+    .mini-track { height: 5px; background: #f0f3f1; border-radius: 2px; margin: 5px 0; }
+    .mini-bar { height: 100%; background: var(--blue); border-radius: inherit; }
+    .mini-bar.filtered { background: var(--teal); }
+    .resource-values { font-size: 11px; text-align: right; font-variant-numeric: tabular-nums; line-height: 1.5; }
+    .resource-values span { display: block; }
+    .resource-values span:first-child { color: var(--blue); }
+    .resource-values span:last-child { color: var(--teal); }
+    .selector-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: end; justify-content: space-between; margin-bottom: 25px; }
+    .field { display: grid; gap: 7px; min-width: 240px; max-width: 100%; }
+    .field label { font-size: 12px; font-weight: 600; }
+    .field select { width: 100%; font-size: 14px; padding-block: 12px; }
+    .tag-code { display: block; font-size: 11px; color: var(--muted); overflow-wrap: anywhere; margin-top: 7px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 27px; }
+    .metric { border: 1px solid var(--line); background: white; border-radius: 14px; padding: 20px; }
+    .metric-label { font-size: 11px; font-weight: 600; color: var(--muted); }
+    .metric-values { display: flex; align-items: baseline; gap: 8px; margin-top: 12px; font-size: 24px; font-weight: 620; letter-spacing: -.04em; line-height: 1.25; font-variant-numeric: tabular-nums; }
+    .metric-values .from { color: var(--blue); }
+    .metric-values .to { color: var(--teal); }
+    .metric-values .arrow { color: #9caba4; font-size: 15px; }
+    .metric-note { margin-top: 8px; font-size: 11px; color: var(--muted); }
+    .panel-title { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 20px; }
+    .panel-title h3 { margin: 0; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; white-space: nowrap; }
+    th { padding: 0 13px 13px; color: var(--muted); font-weight: 550; text-align: right; border-bottom: 1px solid var(--line); font-size: 11px; }
+    th:first-child { text-align: left; padding-left: 0; }
+    td { padding: 15px 13px; text-align: right; border-bottom: 1px solid #edf1ef; font-variant-numeric: tabular-nums; }
+    td:first-child { text-align: left; padding-left: 0; }
+    tr:last-child td { border-bottom: 0; }
+    .case-button { display: flex; align-items: center; gap: 9px; border: 0; padding: 0; background: none; text-align: left; }
+    .case-button .name { font-size: 12px; font-weight: 600; }
+    .case-button small { display: block; font-size: 10px; color: var(--muted); margin-top: 3px; }
+    .class-dot { width: 7px; height: 7px; background: var(--amber); border-radius: 50%; flex-shrink: 0; }
+    .class-dot.legit { background: var(--teal); }
+    .alert-pill { display: inline-block; font-size: 11px; min-width: 36px; padding: 4px 7px; border-radius: 5px; text-align: center; color: var(--muted); background: #f1f4f2; }
+    .alert-pill.detected { background: var(--teal-soft); color: var(--teal); }
+    .alert-pill.false-alarm, .alert-pill.missed { background: var(--red-soft); color: var(--red); }
+    .pair { display: inline-flex; gap: 5px; align-items: center; }
+    .pair .separator { color: #94a49c; font-size: 11px; }
+    .info-note { display: flex; gap: 12px; background: #edf3ef; border-radius: 12px; padding: 17px 20px; color: #526c5e; font-size: 12px; line-height: 1.65; margin-top: 20px; }
+    .case-intro { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .case-intro + h3 { margin-bottom: 14px; font-size: 24px; }
+    .timeline-panel { padding: 26px; background: white; border: 1px solid var(--line); border-radius: 18px; margin: 25px 0; }
+    .timeline-heading { display: flex; justify-content: space-between; align-items: end; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+    .timeline-heading p { color: var(--muted); font-size: 12px; margin-top: 6px; }
+    .timeline-row { display: grid; grid-template-columns: 156px 1fr 158px; gap: 24px; align-items: center; min-height: 85px; }
+    .timeline-row + .timeline-row { border-top: 1px solid #f0f3f1; }
+    .timeline-name { font-size: 13px; font-weight: 600; }
+    .timeline-name small { display: block; font-size: 10px; color: var(--muted); font-weight: 400; }
+    .timeline-track { position: relative; height: 68px; margin: 0 8px; }
+    .timeline-track::before { content: ""; position: absolute; height: 3px; background: #e5ece8; top: 32px; left: 0; right: 0; border-radius: 4px; }
+    .active-zone { position: absolute; height: 7px; top: 30px; background: #d9ece2; right: 0; border-radius: 4px; }
+    .reference-line { position: absolute; width: 1px; top: 8px; height: 51px; background: #b1beb5; }
+    .reference-label { position: absolute; top: -2px; transform: translateX(-50%); font-size: 9px; color: var(--muted); white-space: nowrap; }
+    .marker { position: absolute; display: grid; place-items: center; width: 18px; height: 18px; margin-left: -9px; font-size: 9px; color: white; font-weight: 600; }
+    .marker.direct { top: 16px; border-radius: 50%; background: var(--blue); }
+    .marker.filtered { top: 34px; border-radius: 5px; background: var(--teal); }
+    .marker.gate { top: 29px; width: 9px; height: 9px; margin-left: -4px; transform: rotate(45deg); background: var(--amber); }
+    .timeline-values { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; justify-content: end; font-size: 11px; }
+    .timeline-values .delta { width: 100%; text-align: right; font-size: 10px; }
+    .time-axis { display: grid; grid-template-columns: 156px 1fr 158px; gap: 24px; margin-top: 10px; }
+    .axis-labels { display: flex; justify-content: space-between; margin: 0 3px; color: var(--muted); font-size: 10px; }
+    .check { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+    .check input { accent-color: var(--teal); }
+    .case-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 23px; align-items: start; }
+    details { border-top: 1px solid var(--line); }
+    summary { padding: 15px 0; font-size: 13px; font-weight: 550; }
+    .evidence-content { padding-bottom: 18px; display: grid; gap: 15px; font-size: 12px; }
+    .evidence-label { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 5px; }
+    blockquote { margin: 9px 0 0; padding: 10px 13px; background: #f5f7f5; border-left: 2px solid #d9e4dc; color: #5d7064; overflow-wrap: anywhere; }
+    .transcript { max-height: 525px; overflow-y: auto; padding-right: 8px; }
+    .utterance { display: grid; grid-template-columns: 24px 21px 1fr; gap: 7px; padding: 10px 0; border-bottom: 1px solid #eef2ef; font-size: 12px; }
+    .utterance .line-number { color: #90a096; font: 10px/1.8 ui-monospace, monospace; }
+    .utterance .speaker { color: var(--teal); font-weight: 650; }
+    .utterance.reference { background: #fff8e9; margin-inline: -8px; padding-inline: 8px; border-radius: 5px; }
+    .utterance .ref-tag { display: inline-block; font-size: 9px; color: #9a6f26; font-weight: 650; margin-right: 5px; }
+    .ticket-layout { display: grid; grid-template-columns: 246px 1fr; gap: 24px; align-items: start; }
+    .ticket-menu { display: grid; gap: 9px; }
+    .ticket-button { border: 1px solid transparent; background: transparent; border-radius: 12px; padding: 15px; display: flex; gap: 12px; text-align: left; align-items: start; }
+    .ticket-button[aria-pressed="true"] { background: white; border-color: var(--line); box-shadow: var(--shadow); }
+    .ticket-num { font: 11px/1.8 ui-monospace, monospace; color: var(--teal); }
+    .ticket-button strong { display: block; font-size: 12px; font-weight: 600; line-height: 1.4; }
+    .ticket-button small { display: block; color: var(--muted); font-size: 10px; margin-top: 3px; }
+    .ticket-body { min-width: 0; }
+    .ticket-body > .panel { padding: 28px; }
+    .ticket-body h2 { font-size: 25px; margin: 14px 0; }
+    .ticket-body p { color: var(--muted); font-size: 13px; }
+    .ticket-links { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 19px; font-size: 12px; }
+    .ticket-model { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 17px 0; border-top: 1px solid var(--line); }
+    .ticket-model:first-child { margin-top: 24px; }
+    .ticket-model strong { font-size: 13px; }
+    .ticket-model small { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; }
+    .ticket-stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+    .ticket-stat { padding: 14px; background: #f4f7f4; border-radius: 10px; }
+    .ticket-stat strong { display: block; font-size: 23px; font-weight: 600; letter-spacing: -.03em; }
+    .ticket-stat span { font-size: 11px; color: var(--muted); }
+    .demo-line { display: flex; align-items: start; justify-content: space-between; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+    .demo-line strong { font-size: 13px; font-weight: 600; }
+    .demo-line small { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .demo-line .pair { margin-top: 4px; }
+    .method { margin-top: 28px; padding: 22px 0 0; border-top: 1px solid var(--line); }
+    .method summary { font-size: 12px; color: var(--muted); padding: 0 0 14px; }
+    .method-body { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; font-size: 12px; color: var(--muted); padding-bottom: 16px; }
+    .method-body p + p { margin-top: 12px; }
+    footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; border-top: 1px solid var(--line); padding: 23px 0 34px; color: var(--muted); font-size: 11px; }
+    .source-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+    @media (max-width: 1000px) {
+      .hero { gap: 32px; }
+      .model-card { padding: 18px; }
+      .models-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .resource-section { grid-template-columns: 1fr 1.4fr; }
+      .resource-row { grid-template-columns: 95px 1fr 86px; gap: 9px; }
+      .timeline-row, .time-axis { grid-template-columns: 130px 1fr 130px; gap: 15px; }
+      .ticket-layout { grid-template-columns: 210px 1fr; gap: 16px; }
+      .timeline-values .delta { font-size: 9px; }
+    }
+
+    @media (max-width: 740px) {
+      .wrap { padding-inline: 20px; }
+      .hero { grid-template-columns: 1fr; padding-top: 30px; }
+      .hero p { font-size: 15px; }
+      .pipeline { display: none; }
+      .scope-item { padding-left: 15px; }
+      .scope-value { font-size: 25px; }
+      .scope-item span:last-child { font-size: 10px; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .tabs { display: flex; gap: 3px; width: 100%; }
+      .tab { flex: 1; padding: 10px 7px; font-size: 11px; }
+      .resource-section, .case-bottom { grid-template-columns: 1fr; }
+      .resource-row { grid-template-columns: 135px 1fr 95px; }
+      .ticket-layout { grid-template-columns: 1fr; }
+      .ticket-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+      .ticket-button { padding: 10px; gap: 7px; }
+      .ticket-button strong { font-size: 10px; }
+      .ticket-button small { display: none; }
+      .timeline-panel { padding: 20px; }
+      .timeline-row { grid-template-columns: 1fr 1fr; gap: 0 12px; padding: 14px 0 3px; }
+      .timeline-name { grid-column: 1; }
+      .timeline-values { grid-column: 2; grid-row: 1; }
+      .timeline-track { grid-column: 1 / -1; grid-row: 2; margin: 7px 11px 0; }
+      .time-axis { display: block; margin-inline: 10px; }
+      .time-axis > :not(.axis-labels) { display: none; }
+      .timeline-values .delta { font-size: 10px; }
+      .method-body { grid-template-columns: 1fr; gap: 15px; }
+      .table-scroll table { white-space: normal; }
+      .table-scroll thead { display: none; }
+      .table-scroll tbody { display: block; }
+      .table-scroll tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 16px; border-bottom: 1px solid var(--line); padding: 14px 0; }
+      .table-scroll tr:last-child { border-bottom: 0; }
+      .table-scroll td { display: block; text-align: left; border: 0; padding: 7px 0; }
+      .table-scroll td:first-child { grid-column: 1 / -1; padding-bottom: 11px; }
+      .table-scroll td:not(:first-child)::before { content: attr(data-label); display: block; font-size: 10px; color: var(--muted); margin-bottom: 5px; }
+      .table-scroll .pair { flex-wrap: wrap; }
+      .table-scroll .case-button .name { font-size: 13px; }
+    }
+
+    @media (max-width: 460px) {
+      .masthead-note .badge { display: none; }
+      .masthead { padding-block: 19px; }
+      .masthead-note { font-size: 10px; }
+      .scope { grid-template-columns: 1fr 1fr; gap: 20px 0; }
+      .scope-item:nth-child(3) { border: 0; padding-left: 0; }
+      .models-grid { grid-template-columns: 1fr; }
+      .panel { padding: 20px; }
+      .resource-row { grid-template-columns: 96px 1fr 85px; gap: 8px; }
+      .metric { padding: 15px; }
+      .metric-values { font-size: 22px; gap: 5px; }
+      .metric:last-child { grid-column: 1 / -1; }
+      .ticket-button { flex-direction: column; gap: 2px; }
+      .ticket-stat-grid { gap: 6px; }
+      .ticket-stat { padding: 11px; }
+      .ticket-body > .panel { padding: 20px; }
+      .field { min-width: 0; width: 100%; }
+      .caption { font-size: 12px; }
+      .tab { font-size: 10px; white-space: normal; padding: 9px 3px; line-height: 1.4; }
+      .wrap { padding-inline: 16px; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .tab, .model-card, .text-button { transition: background .18s, box-shadow .18s; }
+      .model-card:hover { box-shadow: 0 8px 28px rgb(23 51 47 / 9%); }
+      .mini-bar { transition: width .25s; }
+    }
+    @media print {
+      .navigation { position: static; }
+      .hero { padding-block: 20px; }
+      .pipeline { display: none; }
+      .models-grid { grid-template-columns: repeat(2, 1fr); }
+      .panel, .model-card, .metric { break-inside: avoid; box-shadow: none; }
+      .transcript { max-height: none; overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">t.</span> Laboratorio de vishing</div>
+      <div class="masthead-note"><span class="badge">Informe experimental</span><time datetime="2026-10-26">2026-10-26</time></div>
+    </header>
+
+    <section class="hero" aria-labelledby="report-title">
+      <div>
+        <p class="eyebrow">Experimento 68 / Tito → SLM</p>
+        <h1 id="report-title">El filtro,<br><em>bajo la lupa.</em></h1>
+        <p>Un tercio menos de consultas al SLM. El efecto en las detecciones, las falsas alarmas y el costo cambia según el modelo.</p>
+      </div>
+      <div class="pipeline" aria-label="Recorrido del experimento">
+        <p class="eyebrow">Cómo funciona la comparación</p>
+        <div class="pipeline-step"><span class="step-num">01</span><strong>Transcripción incremental</strong><span>Línea a línea</span></div>
+        <div class="pipeline-step"><span class="step-num">02</span><strong>Tito activa la consulta</strong><span>Puntaje ≥ 0,5</span></div>
+        <div class="pipeline-step"><span class="step-num">03</span><strong>El SLM evalúa el contexto</strong><span>Con indicio falible</span></div>
+        <div class="pipeline-step"><span class="step-num">04</span><strong>Primer aviso válido</strong><span>Una vez por llamada</span></div>
+        <div class="pipeline-note">En la variante directa, el SLM se consulta en cada línea. En la filtrada, queda activo desde la primera derivación de Tito.</div>
+      </div>
+    </section>
+
+    <div class="scope" aria-label="Alcance de la comparación real">
+      <div class="scope-item"><span class="scope-value">6</span><span>artefactos de modelos</span></div>
+      <div class="scope-item"><span class="scope-value">8</span><span>conversaciones sintéticas</span></div>
+      <div class="scope-item"><span class="scope-value">96</span><span>evaluaciones de conversación</span></div>
+      <div class="scope-item"><span class="scope-value">33,3 %</span><span>menos consultas por modelo</span></div>
+    </div>
+
+    <div class="navigation">
+      <nav class="tabs" role="tablist" aria-label="Vistas del informe">
+        <button id="tab-overview" class="tab" role="tab" aria-controls="view-overview" aria-selected="true" tabindex="0" data-view="overview">Vista general</button>
+        <button id="tab-model" class="tab" role="tab" aria-controls="view-model" aria-selected="false" tabindex="-1" data-view="model">Por modelo</button>
+        <button id="tab-case" class="tab" role="tab" aria-controls="view-case" aria-selected="false" tabindex="-1" data-view="case">Por conversación</button>
+        <button id="tab-tickets" class="tab" role="tab" aria-controls="view-tickets" aria-selected="false" tabindex="-1" data-view="tickets">Tickets 69–74</button>
+      </nav>
+    </div>
+
+    <main>
+      <section id="view-overview" role="tabpanel" aria-labelledby="tab-overview">
+        <div class="section-heading">
+          <div><p class="eyebrow">01 / Resultados</p><h2>Una misma muestra. Seis modelos.</h2><p>Cada barra representa cuatro llamadas: cuatro vishing para detección y cuatro legítimas para falsas alarmas.</p></div>
+          <div class="legend"><span><i class="swatch"></i>Directo</span><span><i class="swatch filtered"></i>Tito + SLM</span></div>
+        </div>
+        <div id="overview-models" class="models-grid"></div>
+
+        <div class="resource-section">
+          <section class="panel" aria-labelledby="query-title">
+            <p class="eyebrow">Trabajo evitado</p><h3 id="query-title" style="margin-top:10px">35 consultas menos,<br>en cada modelo.</h3>
+            <div class="big-reduction">−33,3 %</div><p>De 105 a 70 consultas al SLM.</p>
+            <div class="stacked-track" role="img" aria-label="70 consultas realizadas y 35 evitadas de 105"><span class="stacked-used" style="width:66.667%"></span><span class="stacked-avoided" style="width:33.333%"></span></div>
+            <div class="stacked-labels"><span>70 realizadas</span><span>35 evitadas</span></div>
+            <p class="footnote">Tito procesa las 105 líneas. Su costo se suma al del SLM en la variante filtrada: consultar menos puede bajar o subir el tiempo acumulado.</p>
+          </section>
+          <section class="panel" aria-labelledby="resource-title">
+            <div class="resource-head"><h3 id="resource-title">El costo de las dos variantes</h3><label><span class="sr-only">Medida de costo</span><select id="resource-metric"><option value="ms_total">Tiempo acumulado · ms</option><option value="tokens">Tokens procesados</option></select></label></div>
+            <div id="resource-chart"></div>
+            <p id="resource-caption" class="footnote"></p>
+          </section>
+        </div>
+      </section>
+
+      <section id="view-model" role="tabpanel" aria-labelledby="tab-model" hidden>
+        <div class="section-heading"><div><p class="eyebrow">02 / Por modelo</p><h2>Qué cambia al agregar Tito</h2><p>Dos variantes del mismo artefacto sobre las mismas ocho conversaciones.</p></div></div>
+        <div class="selector-row"><div><h3 id="model-title"></h3><code id="model-tag" class="tag-code"></code></div><div class="field"><label for="model-select">Modelo</label><select id="model-select"></select></div></div>
+        <div class="legend" style="margin-bottom:14px"><span><i class="swatch"></i>Directo</span><span>→</span><span><i class="swatch filtered"></i>Tito + SLM</span></div>
+        <div id="model-metrics" class="metrics"></div>
+        <section class="panel">
+          <div class="panel-title"><h3>Las ocho conversaciones</h3><span class="caption">Directo → Tito + SLM</span></div>
+          <div class="table-scroll"><table><thead><tr><th>Conversación</th><th>Primer aviso</th><th>Consultas</th><th>Tokens</th><th>Tiempo · ms</th><th>Fallos</th></tr></thead><tbody id="model-cases"></tbody></table></div>
+          <p class="footnote">Elegí una conversación para comparar los seis modelos y leer las evidencias de sus avisos.</p>
+        </section>
+        <div id="model-note" class="info-note"></div>
+      </section>
+
+      <section id="view-case" role="tabpanel" aria-labelledby="tab-case" hidden>
+        <div class="section-heading"><div><p class="eyebrow">03 / Por conversación</p><h2>Una llamada. Seis lecturas.</h2><p>Ubicá la derivación de Tito y el primer aviso de cada variante dentro de la conversación.</p></div></div>
+        <div class="selector-row"><div id="case-heading"></div><div class="field"><label for="case-select">Conversación</label><select id="case-select"></select></div></div>
+        <div class="timeline-panel">
+          <div class="timeline-heading"><div><h3>Cuándo aparece el aviso</h3><p>La posición horizontal representa líneas de texto.</p></div><label id="alternative-control" class="check"><input type="checkbox" id="alternative-reference"> Mostrar referencia alternativa</label></div>
+          <div class="legend"><span><i class="swatch"></i>Aviso directo</span><span><i class="swatch filtered"></i>Aviso con Tito</span><span><i class="swatch gate"></i>Derivación de Tito</span></div>
+          <div id="case-timelines" style="margin-top:20px"></div>
+          <div class="time-axis"><span></span><div id="case-axis" class="axis-labels"></div><span></span></div>
+          <p id="case-timeline-note" class="footnote"></p>
+        </div>
+        <section class="panel"><div class="panel-title"><h3>Consultas, tokens y costo</h3><span class="caption">Directo → Tito + SLM</span></div><div class="table-scroll"><table><thead><tr><th>Modelo</th><th>Consultas</th><th>Evitadas</th><th>Tokens</th><th>Tiempo · ms</th><th>Fallos</th></tr></thead><tbody id="case-resources"></tbody></table></div></section>
+        <div class="case-bottom">
+          <section class="panel"><h3>Por qué avisó cada modelo</h3><p class="caption" style="margin:10px 0 18px">Motivo y cita guardados en el primer aviso. Abrí un modelo para leer ambas variantes.</p><div id="case-evidence"></div></section>
+          <section class="panel"><div class="panel-title"><h3>La conversación</h3><span class="caption">Datos ficticios</span></div><div id="case-transcript" class="transcript" tabindex="0" role="region" aria-label="Transcripción de la conversación seleccionada"></div></section>
+        </div>
+      </section>
+
+      <section id="view-tickets" role="tabpanel" aria-labelledby="tab-tickets" hidden>
+        <div class="section-heading"><div><p class="eyebrow">04 / Pruebas realizadas</p><h2>Del recorrido simulado a la matriz real.</h2><p>La evidencia de cada entrega, con acceso a sus resultados. Se excluyen los unit tests.</p></div></div>
+        <div class="ticket-layout"><nav id="ticket-menu" class="ticket-menu" aria-label="Tickets del experimento"></nav><div id="ticket-content" class="ticket-body" aria-live="polite"></div></div>
+      </section>
+
+      <details class="method">
+        <summary>Cómo leer estos resultados y qué límites tienen</summary>
+        <div class="method-body">
+          <div><p><strong>La muestra.</strong> Ocho conversaciones sintéticas de desarrollo: cuatro vishing y cuatro legítimas difíciles; 105 líneas por variante y modelo. La matriz real suma 6 × 8 × 2 = 96 evaluaciones. Las demostraciones de #69 y #70 se muestran por separado.</p><p><strong>Los avisos.</strong> “L5” significa primer aviso en la línea 5. Una alerta en una llamada legítima es una falsa alarma. “Sin aviso” en vishing indica una omisión; una respuesta fallida se cuenta además como fallo.</p></div>
+          <div><p><strong>El costo.</strong> El tiempo acumulado suma los ms de todas las actualizaciones, incluidos Tito y fallos; carga, calentamiento y ajuste quedan fuera. Los tokens suman prompt y salida. Son mediciones de laboratorio en Linux con RTX 3060.</p><p><strong>La interpretación.</strong> Referencias provisorias, sin revisión humana; umbral exploratorio 0,5. Activación e indicio se evaluaron juntos. Estos datos no eligen el detector final ni cierran D07/D08/D09. La revisión cruzada de #74 sigue registrada como pendiente.</p></div>
+        </div>
+      </details>
+    </main>
+
+    <footer><span>Proyecto Final · Detección incremental de vishing</span><div class="source-links"><a href="../CONSOLIDADO.md">Reporte técnico</a><a href="../TABLAS.md">Tablas originales</a><a href="../cobertura.json">Datos consolidados</a></div></footer>
+  </div>
+
+  <noscript><p style="padding:32px">Este informe necesita JavaScript para cambiar de vista. Las cifras también están disponibles en <a href="../TABLAS.md">TABLAS.md</a>.</p></noscript>
+  <script type="application/json" id="report-data">
+{
+  "date": "2026-10-26",
+  "evaluations": 96,
+  "models": [
+    {
+      "id": "qwen3.5:4b-q4_K_M",
+      "name": "Qwen 3.5 · 4B",
+      "quantization": "Q4_K_M",
+      "ticket": 71,
+      "run": "2026-10-26_133838_qwen4b-comparacion",
+      "cases": {
+        "TR-04-pedido-tras-charla-larga": {
+          "directo": {
+            "lines": 30,
+            "calls": 30,
+            "avoided": 0,
+            "tokens": 28404,
+            "ms": 26461.0,
+            "failures": [],
+            "gate": null,
+            "alert": 3,
+            "reason": "Te están simulando ser del banco para pedir datos de tu cuenta",
+            "evidence": "Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 30,
+            "calls": 26,
+            "avoided": 4,
+            "tokens": 29600,
+            "ms": 46805.0,
+            "failures": [],
+            "gate": 5,
+            "alert": 5,
+            "reason": "Te están simulando ser del banco para ofrecerte recambiar tu tarjeta de débito.",
+            "evidence": "Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",
+            "literal": true
+          }
+        },
+        "TR-06-banco-alerta-legitima": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8115,
+            "ms": 12063.2,
+            "failures": [],
+            "gate": null,
+            "alert": 3,
+            "reason": "Te están simulando ser del banco para pedirte datos de tu tarjeta por un consumo sospechoso",
+            "evidence": "Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 10,
+            "avoided": 2,
+            "tokens": 8145,
+            "ms": 13200.1,
+            "failures": [],
+            "gate": 3,
+            "alert": 3,
+            "reason": "Te están fingiendo ser del banco para pedirle información sensible sobre su tarjeta de crédito",
+            "evidence": "Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",
+            "literal": true
+          }
+        },
+        "TR-07-pedido-partido-en-dos-lineas": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6591,
+            "ms": 11157.9,
+            "failures": [],
+            "gate": null,
+            "alert": 3,
+            "reason": "Te están pidiendo información sobre un nuevo dispositivo vinculado a tu cuenta para verificar tu identidad.",
+            "evidence": "Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 6,
+            "avoided": 4,
+            "tokens": 4839,
+            "ms": 10082.0,
+            "failures": [],
+            "gate": 5,
+            "alert": 5,
+            "reason": "Te están pidiendo desvincular un dispositivo y mencionan que te enviaron un mensaje para ello.",
+            "evidence": "Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos? ... Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",
+            "literal": false
+          }
+        },
+        "TR-08-frase-cortada-candado": {
+          "directo": {
+            "lines": 7,
+            "calls": 7,
+            "avoided": 0,
+            "tokens": 4113,
+            "ms": 6032.6,
+            "failures": [],
+            "gate": null,
+            "alert": 3,
+            "reason": "Te están pidiendo un código de acceso a tu cuenta o servicio",
+            "evidence": "Pasame el código",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 7,
+            "calls": 5,
+            "avoided": 2,
+            "tokens": 3505,
+            "ms": 7541.0,
+            "failures": [],
+            "gate": 3,
+            "alert": 3,
+            "reason": "Te están pidiendo un código de acceso a tu cuenta o servicio",
+            "evidence": "Pasame el código",
+            "literal": true
+          }
+        },
+        "SC-SOPORTE-REMOTO-01-e01": {
+          "directo": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 8088,
+            "ms": 14703.7,
+            "failures": [],
+            "gate": null,
+            "alert": 1,
+            "reason": "Te están simulando ser del banco para pedir si sos titular de la cuenta",
+            "evidence": "Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 9220,
+            "ms": 20191.5,
+            "failures": [],
+            "gate": 1,
+            "alert": 1,
+            "reason": "Te están simulando ser del banco para verificar tu identidad y pedir datos sensibles.",
+            "evidence": "Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",
+            "literal": true
+          }
+        },
+        "LG-SUPPORT-INFO-01-e02": {
+          "directo": {
+            "lines": 13,
+            "calls": 13,
+            "avoided": 0,
+            "tokens": 9112,
+            "ms": 8020.0,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 13,
+            "calls": 6,
+            "avoided": 7,
+            "tokens": 5355,
+            "ms": 5800.2,
+            "failures": [],
+            "gate": 8,
+            "alert": 10,
+            "reason": "Te están pidiendo que abras la aplicación bancaria para ver qué te aparece en pantalla.",
+            "evidence": "Bien. Cuando termine, abrila y contame qué te aparece en la pantalla.",
+            "literal": true
+          }
+        },
+        "SC-FAMILIAR-DINERO-01-e01": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8117,
+            "ms": 10221.0,
+            "failures": [],
+            "gate": null,
+            "alert": 9,
+            "reason": "Te están pidiendo transferir dinero urgente bajo amenaza de denuncia",
+            "evidence": "Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 4,
+            "avoided": 8,
+            "tokens": 3784,
+            "ms": 6557.1,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están pidiendo transferir dinero inmediatamente por un problema inventado.",
+            "evidence": "Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+            "literal": true
+          }
+        },
+        "TR-11-familiar-real-pide-plata": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6360,
+            "ms": 9309.8,
+            "failures": [],
+            "gate": null,
+            "alert": 4,
+            "reason": "Te están pidiendo dinero bajo una excusa falsa sobre un recibo de luz.",
+            "evidence": "Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 2,
+            "avoided": 8,
+            "tokens": 1679,
+            "ms": 3136.7,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están pidiendo dinero bajo la excusa de una factura de luz y te instan a transferir ahora.",
+            "evidence": "\"Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?\"",
+            "literal": true
+          }
+        }
+      },
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 3,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 3,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 4
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 3,
+        "filas": 105,
+        "ms_total": 97969.2,
+        "tokens": 78900,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "LG-SUPPORT-INFO-01-e02": 10,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 4,
+        "filas": 105,
+        "ms_total": 113313.6,
+        "tokens": 66127,
+        "vishing_detectado": 4
+      }
+    },
+    {
+      "id": "qwen3.5:0.8b-q8_0",
+      "name": "Qwen 3.5 · 0.8B",
+      "quantization": "Q8_0",
+      "ticket": 72,
+      "run": "2026-10-26_135518_qwen08b-q8-comparacion",
+      "cases": {
+        "TR-04-pedido-tras-charla-larga": {
+          "directo": {
+            "lines": 30,
+            "calls": 30,
+            "avoided": 0,
+            "tokens": 28154,
+            "ms": 9296.1,
+            "failures": [],
+            "gate": null,
+            "alert": 20,
+            "reason": "Te están solicitando un código de verificación para acceder a tu tarjeta de débito y cobrar su jubilación.",
+            "evidence": "A: Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 30,
+            "calls": 26,
+            "avoided": 4,
+            "tokens": 29734,
+            "ms": 20751.0,
+            "failures": [],
+            "gate": 5,
+            "alert": 6,
+            "reason": "Te están solicitando un código de verificación o activación para acceder a tu cuenta bancaria. Esto es una estafa común que se utiliza para robar datos personales y fondos.",
+            "evidence": "A: Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",
+            "literal": true
+          }
+        },
+        "TR-06-banco-alerta-legitima": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 7784,
+            "ms": 2788.1,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 10,
+            "avoided": 2,
+            "tokens": 8373,
+            "ms": 6433.5,
+            "failures": [],
+            "gate": 3,
+            "alert": 3,
+            "reason": "El mensaje indica que Gastón es del área de seguridad de tarjetas y te llama por un consumo en tu tarjeta de crédito. Esto sugiere una posible estafa para robar datos personales o dinero.",
+            "evidence": "A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",
+            "literal": true
+          }
+        },
+        "TR-07-pedido-partido-en-dos-lineas": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6248,
+            "ms": 2619.0,
+            "failures": [],
+            "gate": null,
+            "alert": 9,
+            "reason": "Te están solicitando un código de verificación o desvinculación que podría permitirles robar tu cuenta bancaria.",
+            "evidence": "A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 6,
+            "avoided": 4,
+            "tokens": 4922,
+            "ms": 3778.5,
+            "failures": [],
+            "gate": 5,
+            "alert": 5,
+            "reason": "El mensaje indica que el sistema te ha enviado un mensaje para desvincularlo, lo cual es una acción directa de seguridad guiada (abrir un enlace o cambiar una clave) que podría permitir robar datos personales o acceso a cuentas.",
+            "evidence": "E: El sistema te acaba de mandar un mensaje para desvincularlo.",
+            "literal": false
+          }
+        },
+        "TR-08-frase-cortada-candado": {
+          "directo": {
+            "lines": 7,
+            "calls": 7,
+            "avoided": 0,
+            "tokens": 4116,
+            "ms": 2372.4,
+            "failures": [],
+            "gate": null,
+            "alert": 4,
+            "reason": "Te están solicitando un código de acceso a una valija que me prestaste en el hotel para cerrarla sin pensar; esto es una acción directa de robo.",
+            "evidence": "A: Pasame el código del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 7,
+            "calls": 5,
+            "avoided": 2,
+            "tokens": 3294,
+            "ms": 1379.3,
+            "failures": [],
+            "gate": 3,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-SOPORTE-REMOTO-01-e01": {
+          "directo": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 7804,
+            "ms": 4281.0,
+            "failures": [],
+            "gate": null,
+            "alert": 6,
+            "reason": "Te están pidiendo un código de verificación o activación para anular un préstamo y obtener dinero.",
+            "evidence": "A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas. B: ¿Qué? Yo no pedí ningún préstamo. ¿Cómo lo freno? A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",
+            "literal": false
+          },
+          "filtrado": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 9271,
+            "ms": 6977.6,
+            "failures": [],
+            "gate": 1,
+            "alert": 4,
+            "reason": "Te están solicitando un préstamo de dinero para pagar una transferencia que ya se ha realizado a otra cuenta bancaria.",
+            "evidence": "A: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?\\n2. B: Sí, soy yo. ¿Qué pasó?\\n3. A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.\\n4. A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.",
+            "literal": false
+          }
+        },
+        "LG-SUPPORT-INFO-01-e02": {
+          "directo": {
+            "lines": 13,
+            "calls": 13,
+            "avoided": 0,
+            "tokens": 9077,
+            "ms": 3090.3,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 13,
+            "calls": 6,
+            "avoided": 7,
+            "tokens": 5302,
+            "ms": 2043.1,
+            "failures": [],
+            "gate": 8,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-FAMILIAR-DINERO-01-e01": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8133,
+            "ms": 4202.8,
+            "failures": [],
+            "gate": null,
+            "alert": 8,
+            "reason": "Te están pidiendo un código de verificación o activación para acceder a tu cuenta bancaria.",
+            "evidence": "A: ¿Qué querés que haga yo? B: Choqué con el auto de papá y el señor del otro auto dice que si no le pago el arreglo ahora, hace la denuncia y me quedo sin registro. Estoy acá al lado de él.",
+            "literal": false
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 4,
+            "avoided": 8,
+            "tokens": 3942,
+            "ms": 3440.0,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están solicitando transferencias de dinero a una cuenta específica para un monto considerable (100 mil pesos), lo cual constituye un indicador claro de estafas telefónicas diseñadas para robar recursos.",
+            "evidence": "B: 'Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.' A: 'Pero ¿qué querés que haga yo?' B: 'Son ciento ochenta mil pesos...' A: '¿Qué querés que haga yo?' B: 'Te paso los datos por mensaje y el lunes te los devuelvo.' A: 'Pero ¿qué querés que haga yo?'",
+            "literal": false
+          }
+        },
+        "TR-11-familiar-real-pide-plata": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6196,
+            "ms": 2766.6,
+            "failures": [],
+            "gate": null,
+            "alert": 9,
+            "reason": "Te están solicitando un código de verificación o activación para acceder a tu cuenta bancaria (cuenta de siempre) y pedirte transferir dinero.",
+            "evidence": "B: ¿Me podrás transferir veinte mil pesos? A: Sí, mi amor. ¿A qué cuenta? B: A la mía de siempre, la que tenés agendada. No hay apuro, eh: hoy o mañana, cuando puedas. El viernes cobro y te los devuelvo.",
+            "literal": false
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 2,
+            "avoided": 8,
+            "tokens": 1728,
+            "ms": 1561.5,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están solicitando un código de verificación o activación que permitiría acceder a tu cuenta bancaria sin verificar la identidad del interlocutor.",
+            "evidence": "B: ¿A qué cuenta? A: A la mía de siempre, la que tenés agendada. No hay apuro, eh: hoy o mañana, cuando puedas. El viernes cobro y te los devuelvo.",
+            "literal": false
+          }
+        }
+      },
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 8,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 20,
+          "TR-07-pedido-partido-en-dos-lineas": 9,
+          "TR-08-frase-cortada-candado": 4,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 31416.3,
+        "tokens": 77512,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 4,
+          "TR-04-pedido-tras-charla-larga": 6,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 46364.5,
+        "tokens": 66566,
+        "vishing_detectado": 4
+      }
+    },
+    {
+      "id": "qwen3.5:0.8b",
+      "name": "Qwen 3.5 · 0.8B",
+      "quantization": "tag sin sufijo",
+      "ticket": 72,
+      "run": "2026-10-26_135640_qwen08b-comparacion",
+      "cases": {
+        "TR-04-pedido-tras-charla-larga": {
+          "directo": {
+            "lines": 30,
+            "calls": 30,
+            "avoided": 0,
+            "tokens": 28154,
+            "ms": 7210.9,
+            "failures": [],
+            "gate": null,
+            "alert": 20,
+            "reason": "Te están solicitando un código de verificación para acceder a tu tarjeta de débito y cobrar su jubilación.",
+            "evidence": "A: Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 30,
+            "calls": 26,
+            "avoided": 4,
+            "tokens": 29734,
+            "ms": 17011.7,
+            "failures": [],
+            "gate": 5,
+            "alert": 6,
+            "reason": "Te están solicitando un código de verificación o activación para acceder a tu cuenta bancaria. Esto es una estafa común que se utiliza para robar datos personales y fondos.",
+            "evidence": "A: Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",
+            "literal": true
+          }
+        },
+        "TR-06-banco-alerta-legitima": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 7784,
+            "ms": 2104.6,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 10,
+            "avoided": 2,
+            "tokens": 8406,
+            "ms": 5301.2,
+            "failures": [],
+            "gate": 3,
+            "alert": 3,
+            "reason": "El mensaje indica que Gastón es del área de seguridad de tarjetas y te llama por un consumo en tu tarjeta de crédito. Esto sugiere una posible estafa para robar datos personales o dinero.",
+            "evidence": "A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",
+            "literal": true
+          }
+        },
+        "TR-07-pedido-partido-en-dos-lineas": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6248,
+            "ms": 2005.8,
+            "failures": [],
+            "gate": null,
+            "alert": 9,
+            "reason": "Te están solicitando un código de verificación o desvinculación que podría permitirles robar tu cuenta bancaria.",
+            "evidence": "A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 6,
+            "avoided": 4,
+            "tokens": 4922,
+            "ms": 3341.1,
+            "failures": [],
+            "gate": 5,
+            "alert": 5,
+            "reason": "El mensaje indica que el sistema te ha enviado un mensaje para desvincularlo, lo cual es una acción directa de seguridad guiada (abrir un enlace o cambiar una clave) que podría permitir robar datos personales o acceso a cuentas.",
+            "evidence": "E: El sistema te acaba de mandar un mensaje para desvincularlo.",
+            "literal": false
+          }
+        },
+        "TR-08-frase-cortada-candado": {
+          "directo": {
+            "lines": 7,
+            "calls": 7,
+            "avoided": 0,
+            "tokens": 4116,
+            "ms": 1836.9,
+            "failures": [],
+            "gate": null,
+            "alert": 4,
+            "reason": "Te están solicitando un código de acceso a una valija que me prestaste en el hotel para cerrarla sin pensar; esto es una acción directa de robo.",
+            "evidence": "A: Pasame el código del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 7,
+            "calls": 5,
+            "avoided": 2,
+            "tokens": 3294,
+            "ms": 1091.8,
+            "failures": [],
+            "gate": 3,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-SOPORTE-REMOTO-01-e01": {
+          "directo": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 7804,
+            "ms": 3377.5,
+            "failures": [],
+            "gate": null,
+            "alert": 6,
+            "reason": "Te están pidiendo un código de verificación o activación para anular un préstamo y obtener dinero.",
+            "evidence": "A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas. B: ¿Qué? Yo no pedí ningún préstamo. ¿Cómo lo freno? A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",
+            "literal": false
+          },
+          "filtrado": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 9271,
+            "ms": 5698.1,
+            "failures": [],
+            "gate": 1,
+            "alert": 4,
+            "reason": "Te están solicitando un préstamo de dinero para pagar una transferencia que ya se ha realizado a otra cuenta bancaria.",
+            "evidence": "A: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?\\n2. B: Sí, soy yo. ¿Qué pasó?\\n3. A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.\\n4. A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.",
+            "literal": false
+          }
+        },
+        "LG-SUPPORT-INFO-01-e02": {
+          "directo": {
+            "lines": 13,
+            "calls": 13,
+            "avoided": 0,
+            "tokens": 9077,
+            "ms": 2338.3,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 13,
+            "calls": 6,
+            "avoided": 7,
+            "tokens": 5302,
+            "ms": 1725.7,
+            "failures": [],
+            "gate": 8,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-FAMILIAR-DINERO-01-e01": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8133,
+            "ms": 3221.1,
+            "failures": [],
+            "gate": null,
+            "alert": 8,
+            "reason": "Te están pidiendo un código de verificación o activación para acceder a tu cuenta bancaria.",
+            "evidence": "A: ¿Qué querés que haga yo? B: Choqué con el auto de papá y el señor del otro auto dice que si no le pago el arreglo ahora, hace la denuncia y me quedo sin registro. Estoy acá al lado de él.",
+            "literal": false
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 4,
+            "avoided": 8,
+            "tokens": 3942,
+            "ms": 2961.7,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están solicitando transferencias de dinero a una cuenta específica para un monto considerable (100 mil pesos), lo cual constituye un indicador claro de estafas telefónicas diseñadas para robar recursos.",
+            "evidence": "B: 'Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.' A: 'Pero ¿qué querés que haga yo?' B: 'Son ciento ochenta mil pesos...' A: '¿Qué querés que haga yo?' B: 'Te paso los datos por mensaje y el lunes te los devuelvo.' A: 'Pero ¿qué querés que haga yo?'",
+            "literal": false
+          }
+        },
+        "TR-11-familiar-real-pide-plata": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6196,
+            "ms": 2104.5,
+            "failures": [],
+            "gate": null,
+            "alert": 9,
+            "reason": "Te están solicitando un código de verificación o activación para acceder a tu cuenta bancaria (cuenta de siempre) y pedirte transferir dinero.",
+            "evidence": "B: ¿Me podrás transferir veinte mil pesos? A: Sí, mi amor. ¿A qué cuenta? B: A la mía de siempre, la que tenés agendada. No hay apuro, eh: hoy o mañana, cuando puedas. El viernes cobro y te los devuelvo.",
+            "literal": false
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 2,
+            "avoided": 8,
+            "tokens": 1728,
+            "ms": 1287.6,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están solicitando un código de verificación o activación que permitiría acceder a tu cuenta bancaria sin verificar la identidad del interlocutor.",
+            "evidence": "B: ¿A qué cuenta? A: A la mía de siempre, la que tenés agendada. No hay apuro, eh: hoy o mañana, cuando puedas. El viernes cobro y te los devuelvo.",
+            "literal": false
+          }
+        }
+      },
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 8,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 20,
+          "TR-07-pedido-partido-en-dos-lineas": 9,
+          "TR-08-frase-cortada-candado": 4,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 24199.6,
+        "tokens": 77512,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 4,
+          "TR-04-pedido-tras-charla-larga": 6,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 38418.9,
+        "tokens": 66599,
+        "vishing_detectado": 4
+      }
+    },
+    {
+      "id": "qwen3.5:2b-q8_0",
+      "name": "Qwen 3.5 · 2B",
+      "quantization": "Q8_0",
+      "ticket": 72,
+      "run": "2026-10-26_135746_qwen2b-q8-comparacion",
+      "cases": {
+        "TR-04-pedido-tras-charla-larga": {
+          "directo": {
+            "lines": 30,
+            "calls": 30,
+            "avoided": 0,
+            "tokens": 28114,
+            "ms": 15290.1,
+            "failures": [],
+            "gate": null,
+            "alert": 26,
+            "reason": "Te están pidiendo un código de verificación para activar una transferencia o pago inmediato",
+            "evidence": "\"Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\"",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 30,
+            "calls": 26,
+            "avoided": 4,
+            "tokens": 28296,
+            "ms": 19158.9,
+            "failures": [],
+            "gate": 5,
+            "alert": 26,
+            "reason": "Te están pidiendo un código de verificación para activar una transferencia o pago inmediato",
+            "evidence": "\"Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\"",
+            "literal": true
+          }
+        },
+        "TR-06-banco-alerta-legitima": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 7893,
+            "ms": 5637.8,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 10,
+            "avoided": 2,
+            "tokens": 7738,
+            "ms": 5087.8,
+            "failures": [],
+            "gate": 3,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "TR-07-pedido-partido-en-dos-lineas": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6387,
+            "ms": 5639.2,
+            "failures": [],
+            "gate": null,
+            "alert": 8,
+            "reason": "Te están pidiendo un código de verificación que da acceso a tu cuenta",
+            "evidence": "A: Solamente pasame lo que te llegó\n8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 6,
+            "avoided": 4,
+            "tokens": 4661,
+            "ms": 3928.5,
+            "failures": [],
+            "gate": 5,
+            "alert": 8,
+            "reason": "Te están pidiendo un código de verificación que da acceso a tu cuenta",
+            "evidence": "A: Solamente pasame lo que te llegó los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",
+            "literal": true
+          }
+        },
+        "TR-08-frase-cortada-candado": {
+          "directo": {
+            "lines": 7,
+            "calls": 7,
+            "avoided": 0,
+            "tokens": 4011,
+            "ms": 3093.9,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 7,
+            "calls": 5,
+            "avoided": 2,
+            "tokens": 3308,
+            "ms": 2354.4,
+            "failures": [],
+            "gate": 3,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-SOPORTE-REMOTO-01-e01": {
+          "directo": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 7867,
+            "ms": 7818.6,
+            "failures": [],
+            "gate": null,
+            "alert": 6,
+            "reason": "Te están pidiendo un código que da acceso a tu cuenta",
+            "evidence": "A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.\nB: ¿Qué? Yo no pedí ningún préstamo. ¿Cómo lo freno?\nA: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 8734,
+            "ms": 6922.5,
+            "failures": [],
+            "gate": 1,
+            "alert": 6,
+            "reason": "Te están pidiendo un código que da acceso a tu cuenta",
+            "evidence": "A: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",
+            "literal": true
+          }
+        },
+        "LG-SUPPORT-INFO-01-e02": {
+          "directo": {
+            "lines": 13,
+            "calls": 13,
+            "avoided": 0,
+            "tokens": 9241,
+            "ms": 6626.5,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 13,
+            "calls": 6,
+            "avoided": 7,
+            "tokens": 5427,
+            "ms": 4373.5,
+            "failures": [],
+            "gate": 8,
+            "alert": 12,
+            "reason": "Te están pidiendo que compartas la pantalla para ver una actualización del banco",
+            "evidence": "\"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.\"",
+            "literal": true
+          }
+        },
+        "SC-FAMILIAR-DINERO-01-e01": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8069,
+            "ms": 6527.8,
+            "failures": [],
+            "gate": null,
+            "alert": 9,
+            "reason": "Te están pidiendo transferir dinero de un monto alto (180k pesos) para pagar una reparación y te están ofreciendo datos personales para hacerlo.",
+            "evidence": "B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 4,
+            "avoided": 8,
+            "tokens": 3743,
+            "ms": 3947.7,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están pidiendo transferir dinero ahora para arreglar un problema con el auto y te dan datos de pago",
+            "evidence": "Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+            "literal": true
+          }
+        },
+        "TR-11-familiar-real-pide-plata": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6167,
+            "ms": 4403.5,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 2,
+            "avoided": 8,
+            "tokens": 1576,
+            "ms": 1180.4,
+            "failures": [],
+            "gate": 9,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        }
+      },
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 26,
+          "TR-07-pedido-partido-en-dos-lineas": 8
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 0,
+        "filas": 105,
+        "ms_total": 55037.4,
+        "tokens": 77749,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "LG-SUPPORT-INFO-01-e02": 12,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 26,
+          "TR-07-pedido-partido-en-dos-lineas": 8
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 1,
+        "filas": 105,
+        "ms_total": 46953.7,
+        "tokens": 63483,
+        "vishing_detectado": 4
+      }
+    },
+    {
+      "id": "qwen3.5:9b-q4_K_M",
+      "name": "Qwen 3.5 · 9B",
+      "quantization": "Q4_K_M",
+      "ticket": 72,
+      "run": "2026-10-26_135930_qwen9b-comparacion",
+      "cases": {
+        "TR-04-pedido-tras-charla-larga": {
+          "directo": {
+            "lines": 30,
+            "calls": 30,
+            "avoided": 0,
+            "tokens": 28365,
+            "ms": 39862.0,
+            "failures": [],
+            "gate": null,
+            "alert": 23,
+            "reason": "Te están pidiendo que leas o confirmes un código de verificación (mensajito) que te llega al celular para validar la operación.",
+            "evidence": "23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 30,
+            "calls": 26,
+            "avoided": 4,
+            "tokens": 28930,
+            "ms": 58786.5,
+            "failures": [],
+            "gate": 5,
+            "alert": 23,
+            "reason": "Te están pidiendo que le confirmes tu domicilio y te van a enviar un mensaje al celular para 'confirmar' el envío de la tarjeta; es una táctica clásica para validar tus datos personales y prepararte para pedirte códigos o instalar programas.",
+            "evidence": "21. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?",
+            "literal": true
+          }
+        },
+        "TR-06-banco-alerta-legitima": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8052,
+            "ms": 16488.4,
+            "failures": [],
+            "gate": null,
+            "alert": 10,
+            "reason": "El estafador intenta recuperar tu confianza tras advertirte para luego pedirte un código de verificación que él mismo dice haber recibido, lo cual es una táctica clásica para obtener tus datos.",
+            "evidence": "10. B: Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 10,
+            "avoided": 2,
+            "tokens": 7920,
+            "ms": 16112.1,
+            "failures": [],
+            "gate": 3,
+            "alert": 9,
+            "reason": "Te están indicando una acción específica (entrar a la app y tocar Pausar) para frenar el consumo sin verificar tu identidad primero, lo cual es una táctica común para presionarte a actuar bajo estrés antes de que te den más datos o intenten robarlos después.",
+            "evidence": "A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.\nB: Bueno. ¿Y entonces cómo la freno?\nA: Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.",
+            "literal": true
+          }
+        },
+        "TR-07-pedido-partido-en-dos-lineas": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6684,
+            "ms": 19088.1,
+            "failures": [],
+            "gate": null,
+            "alert": 4,
+            "reason": "Te están indicando que hay un dispositivo vinculado desde otra provincia para generar urgencia y posiblemente pedirte datos o códigos.",
+            "evidence": "A: Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 6,
+            "avoided": 4,
+            "tokens": 4845,
+            "ms": 13131.0,
+            "failures": [],
+            "gate": 5,
+            "alert": 5,
+            "reason": "Te están creando urgencia falsa para que actúes rápido y te van a pedir un código o enlace para 'desvincular' el dispositivo.",
+            "evidence": "Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",
+            "literal": true
+          }
+        },
+        "TR-08-frase-cortada-candado": {
+          "directo": {
+            "lines": 7,
+            "calls": 7,
+            "avoided": 0,
+            "tokens": 4030,
+            "ms": 7523.7,
+            "failures": [],
+            "gate": null,
+            "alert": 3,
+            "reason": "Te están pidiendo un código de verificación o acceso a tu cuenta sin haber establecido una identidad confiable.",
+            "evidence": "3. A: Pasame el código",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 7,
+            "calls": 5,
+            "avoided": 2,
+            "tokens": 3333,
+            "ms": 6173.3,
+            "failures": [],
+            "gate": 3,
+            "alert": 3,
+            "reason": "Te están pidiendo directamente un código de verificación o acceso a tu cuenta bancaria.",
+            "evidence": "3. A: Pasame el código",
+            "literal": true
+          }
+        },
+        "SC-SOPORTE-REMOTO-01-e01": {
+          "directo": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 8294,
+            "ms": 26557.0,
+            "failures": [],
+            "gate": null,
+            "alert": 3,
+            "reason": "Te están diciendo que ya te cargaron una transferencia sin pedirte códigos ni contraseñas, pero es una estafa clásica: no firmes nada ni des datos personales hasta verificar con tu banco real.",
+            "evidence": "A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 9258,
+            "ms": 27408.1,
+            "failures": [],
+            "gate": 1,
+            "alert": 3,
+            "reason": "Te están diciendo que ya te cargaron una transferencia y piden confirmación o datos para 'regularizar' la situación.",
+            "evidence": "Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.",
+            "literal": true
+          }
+        },
+        "LG-SUPPORT-INFO-01-e02": {
+          "directo": {
+            "lines": 13,
+            "calls": 13,
+            "avoided": 0,
+            "tokens": 9105,
+            "ms": 12744.3,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 13,
+            "calls": 6,
+            "avoided": 7,
+            "tokens": 5290,
+            "ms": 7715.6,
+            "failures": [],
+            "gate": 8,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-FAMILIAR-DINERO-01-e01": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8138,
+            "ms": 16469.7,
+            "failures": [],
+            "gate": null,
+            "alert": 9,
+            "reason": "Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña para pagar un arreglo de auto.",
+            "evidence": "Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 4,
+            "avoided": 8,
+            "tokens": 3795,
+            "ms": 9319.2,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "Te están pidiendo que transfieras dinero inmediatamente a una cuenta de terceros bajo amenaza y promesas falsas.",
+            "evidence": "Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.",
+            "literal": true
+          }
+        },
+        "TR-11-familiar-real-pide-plata": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6364,
+            "ms": 14489.3,
+            "failures": [],
+            "gate": null,
+            "alert": 4,
+            "reason": "Te están pidiendo que hagas una transferencia de dinero directamente por teléfono.",
+            "evidence": "B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 2,
+            "avoided": 8,
+            "tokens": 1574,
+            "ms": 2857.8,
+            "failures": [],
+            "gate": 9,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        }
+      },
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 3,
+          "TR-04-pedido-tras-charla-larga": 23,
+          "TR-06-banco-alerta-legitima": 10,
+          "TR-07-pedido-partido-en-dos-lineas": 4,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 4
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 3,
+        "filas": 105,
+        "ms_total": 153222.5,
+        "tokens": 79032,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 3,
+          "TR-04-pedido-tras-charla-larga": 23,
+          "TR-06-banco-alerta-legitima": 9,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 141503.6,
+        "tokens": 64945,
+        "vishing_detectado": 4
+      }
+    },
+    {
+      "id": "llama3.2:1b-instruct-q4_K_M",
+      "name": "Llama 3.2 · 1B",
+      "quantization": "Q4_K_M",
+      "ticket": 73,
+      "run": "2026-10-26_141023_llama1b-comparacion",
+      "cases": {
+        "TR-04-pedido-tras-charla-larga": {
+          "directo": {
+            "lines": 30,
+            "calls": 30,
+            "avoided": 0,
+            "tokens": 32480,
+            "ms": 15810.0,
+            "failures": [
+              10,
+              12,
+              14,
+              17
+            ],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 30,
+            "calls": 26,
+            "avoided": 4,
+            "tokens": 31945,
+            "ms": 14642.9,
+            "failures": [],
+            "gate": 5,
+            "alert": 10,
+            "reason": "La llamada parece ser una estafa, ya que no se menciona el nombre de la sucursal ni la fecha, y no hay ninguna razón para que Silvina se llame de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia.",
+            "evidence": "La línea 5 de la transcripción es una sospecha preliminar, ya que no se menciona el nombre de la sucursal ni la fecha, y no hay ninguna razón para que Silvina se llame de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia.",
+            "literal": false
+          }
+        },
+        "TR-06-banco-alerta-legitima": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 8763,
+            "ms": 3211.5,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 10,
+            "avoided": 2,
+            "tokens": 8927,
+            "ms": 4065.2,
+            "failures": [],
+            "gate": 3,
+            "alert": 5,
+            "reason": "Te están pidiendo un código que da acceso a tu cuenta",
+            "evidence": "¿Qué consumo? Una compra de sesenta y dos mil pesos en una tienda en línea, hoy a las once y cuarto.",
+            "literal": true
+          }
+        },
+        "TR-07-pedido-partido-en-dos-lineas": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 6946,
+            "ms": 2647.6,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 6,
+            "avoided": 4,
+            "tokens": 5245,
+            "ms": 2500.4,
+            "failures": [],
+            "gate": 5,
+            "alert": 5,
+            "reason": "Sospecha preliminar, puede ser incorrecta y no confirma una estafa.",
+            "evidence": "La línea 5: \"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.\"",
+            "literal": false
+          }
+        },
+        "TR-08-frase-cortada-candado": {
+          "directo": {
+            "lines": 7,
+            "calls": 7,
+            "avoided": 0,
+            "tokens": 4457,
+            "ms": 1742.3,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 7,
+            "calls": 5,
+            "avoided": 2,
+            "tokens": 3697,
+            "ms": 1511.7,
+            "failures": [],
+            "gate": 3,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-SOPORTE-REMOTO-01-e01": {
+          "directo": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 8560,
+            "ms": 3214.6,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 9893,
+            "ms": 4141.1,
+            "failures": [],
+            "gate": 1,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "LG-SUPPORT-INFO-01-e02": {
+          "directo": {
+            "lines": 13,
+            "calls": 13,
+            "avoided": 0,
+            "tokens": 10271,
+            "ms": 3977.4,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 13,
+            "calls": 6,
+            "avoided": 7,
+            "tokens": 6335,
+            "ms": 3689.7,
+            "failures": [],
+            "gate": 8,
+            "alert": 9,
+            "reason": "La llamada sigue después de la línea 8, donde se solicita la clave y se menciona la pantalla de la aplicación del banco. Podría ser una estafa para obtener la clave y acceder a la cuenta del destinatario.",
+            "evidence": "La línea 8 de la transcripción es la que menciona la clave y la pantalla de la aplicación del banco, lo que sugiere una estafa.",
+            "literal": false
+          }
+        },
+        "SC-FAMILIAR-DINERO-01-e01": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 9085,
+            "ms": 4223.3,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 4,
+            "avoided": 8,
+            "tokens": 4119,
+            "ms": 2128.2,
+            "failures": [],
+            "gate": 9,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "TR-11-familiar-real-pide-plata": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 7348,
+            "ms": 4470.4,
+            "failures": [
+              8
+            ],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 2,
+            "avoided": 8,
+            "tokens": 1748,
+            "ms": 784.8,
+            "failures": [],
+            "gate": 9,
+            "alert": 9,
+            "reason": "La sospecha preliminar no confirma una estafa.",
+            "evidence": "La línea 9: \"Dale, te corto y te llamo\"",
+            "literal": false
+          }
+        }
+      },
+      "directo": {
+        "avisos": {},
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 5,
+        "fallos_tito": 0,
+        "falsas_alarmas": 0,
+        "filas": 105,
+        "ms_total": 39297.1,
+        "tokens": 87910,
+        "vishing_detectado": 0
+      },
+      "filtrado": {
+        "avisos": {
+          "LG-SUPPORT-INFO-01-e02": 9,
+          "TR-04-pedido-tras-charla-larga": 10,
+          "TR-06-banco-alerta-legitima": 5,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 3,
+        "filas": 105,
+        "ms_total": 33464.0,
+        "tokens": 71909,
+        "vishing_detectado": 2
+      }
+    }
+  ],
+  "mainCases": [
+    "SC-SOPORTE-REMOTO-01-e01",
+    "SC-FAMILIAR-DINERO-01-e01",
+    "TR-04-pedido-tras-charla-larga",
+    "TR-07-pedido-partido-en-dos-lineas",
+    "LG-SUPPORT-INFO-01-e02",
+    "TR-06-banco-alerta-legitima",
+    "TR-08-frase-cortada-candado",
+    "TR-11-familiar-real-pide-plata"
+  ],
+  "cases": {
+    "LG-SUPPORT-INFO-01-e02": {
+      "id": "LG-SUPPORT-INFO-01-e02",
+      "label": "Asistencia legítima",
+      "short": "LG-SUPPORT",
+      "fraud": false,
+      "tr": null,
+      "tc": null,
+      "alternative": null,
+      "description": "Comparte con su par SC-SOPORTE-REMOTO-01-e01 la aplicación del banco, «compartir la pantalla» y la videollamada, y suma «instalar», la tienda de aplicaciones y el número de la tarjeta; pero quien orienta rechaza la conexión remota que propone la propia persona y la guía para que mire su pantalla y le cuente. Prueba la diferencia entre «contame qué te aparece en la pantalla» y pedir que la comparta.",
+      "lines": 13,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Hola, buenas tardes. Los llamo porque la aplicación del banco se me queda con la pantalla en blanco cuando quiero entrar."
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Buenas tardes, te atiende Carolina, de atención al cliente. Contame, ¿desde cuándo te pasa?"
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "Desde ayer. En el trabajo, cuando algo no anda, los de sistemas se conectan a mi computadora y lo arreglan. ¿Ustedes pueden hacer lo mismo con el celular?"
+        },
+        {
+          "line": 4,
+          "speaker": "B",
+          "text": "No, eso no. Nosotros no te vamos a pedir que compartas la pantalla ni que instales nada para que alguien entre a tu celular."
+        },
+        {
+          "line": 5,
+          "speaker": "A",
+          "text": "Ah, bueno. ¿Y entonces cómo hacemos?"
+        },
+        {
+          "line": 6,
+          "speaker": "B",
+          "text": "Lo revisás vos y me vas contando. Fijate en la tienda de aplicaciones si la del banco tiene una actualización pendiente."
+        },
+        {
+          "line": 7,
+          "speaker": "A",
+          "text": "Sí, me aparece el botón de actualizar. Ya está, se está bajando."
+        },
+        {
+          "line": 8,
+          "speaker": "B",
+          "text": "Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave."
+        },
+        {
+          "line": 9,
+          "speaker": "A",
+          "text": "Ahora sí carga. Me aparece el inicio de siempre, para poner el usuario."
+        },
+        {
+          "line": 10,
+          "speaker": "B",
+          "text": "Perfecto, era la versión vieja. Ingresá como siempre; yo no necesito ver nada."
+        },
+        {
+          "line": 11,
+          "speaker": "A",
+          "text": "Entré, ya veo mis movimientos. ¿No hace falta que te pase algún dato?"
+        },
+        {
+          "line": 12,
+          "speaker": "B",
+          "text": "No, ninguno. Y si algún día te llaman pidiendo que compartas la pantalla en una videollamada, cortá y llamá vos al número que está atrás de la tarjeta."
+        },
+        {
+          "line": 13,
+          "speaker": "A",
+          "text": "Buenísimo. Gracias, Carolina."
+        }
+      ]
+    },
+    "LG-WA-CONSULTA-01-e01": {
+      "id": "LG-WA-CONSULTA-01-e01",
+      "label": "Consulta legítima de WhatsApp",
+      "short": "LG-WA-CONSULTA",
+      "fraud": false,
+      "tr": null,
+      "tc": null,
+      "alternative": null,
+      "description": "Habla del mismo código de WhatsApp, pero para no compartirlo. La negación «no hace falta que me digas ningún código» no es un pedido.",
+      "lines": 4,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Me llegó por SMS un código para activar WhatsApp y yo no lo pedí."
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación."
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "¿Necesitás verlo para ayudarme?"
+        },
+        {
+          "line": 4,
+          "speaker": "B",
+          "text": "No. No hace falta que me digas ningún código."
+        }
+      ]
+    },
+    "SC-FAMILIAR-DINERO-01-e01": {
+      "id": "SC-FAMILIAR-DINERO-01-e01",
+      "label": "Familiar que pide dinero",
+      "short": "SC-FAMILIAR",
+      "fraud": true,
+      "tr": 9,
+      "tc": null,
+      "alternative": null,
+      "description": "Suplantación de un sobrino que llama desde otro número, con amenaza de denuncia, pedido de secreto y pedido de transferencia. La persona se resiste, propone verificar por otro canal y no cumple; quien llama insiste. Sin T_C.",
+      "lines": 12,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "¿Hola?"
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Hola, tía, ¿cómo andás? Soy yo... ¿no me reconocés?"
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "¿Quién habla? ¿Nicolás?"
+        },
+        {
+          "line": 4,
+          "speaker": "B",
+          "text": "Sí, tía, Nico. Te llamo de otro número porque se me rompió el celular. Estoy en un problema y no sabía a quién llamar."
+        },
+        {
+          "line": 5,
+          "speaker": "A",
+          "text": "¿Qué pasó? Te escucho raro."
+        },
+        {
+          "line": 6,
+          "speaker": "B",
+          "text": "Choqué con el auto de papá y el señor del otro auto dice que si no le pago el arreglo ahora, hace la denuncia y me quedo sin registro. Estoy acá al lado de él."
+        },
+        {
+          "line": 7,
+          "speaker": "B",
+          "text": "Por favor, no le digas nada a mamá, que se va a poner como loca. Lo quiero arreglar yo antes de que se entere."
+        },
+        {
+          "line": 8,
+          "speaker": "A",
+          "text": "Pero ¿qué querés que haga yo?"
+        },
+        {
+          "line": 9,
+          "speaker": "B",
+          "text": "Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo."
+        },
+        {
+          "line": 10,
+          "speaker": "A",
+          "text": "Mirá, Nico, así no. Cortame y te llamo yo a tu número de siempre, o llamo a tu mamá."
+        },
+        {
+          "line": 11,
+          "speaker": "B",
+          "text": "No, tía, no me cortes, que el celular quedó destrozado en el choque. Y si llamás a mamá se arma lío. El señor me está apurando, dame cinco minutos nada más."
+        },
+        {
+          "line": 12,
+          "speaker": "A",
+          "text": "Entonces que tu mamá se ocupe. Yo no transfiero nada sin hablar antes con ella. Te corto y la llamo."
+        }
+      ]
+    },
+    "SC-SOPORTE-REMOTO-01-e01": {
+      "id": "SC-SOPORTE-REMOTO-01-e01",
+      "label": "Soporte remoto",
+      "short": "SC-SOPORTE",
+      "fraud": true,
+      "tr": 6,
+      "tc": null,
+      "alternative": null,
+      "description": "Pedido de compartir pantalla por videollamada, precedido de una amenaza de pérdida de dinero (un préstamo a nombre de la persona que ya se está transfiriendo) y seguido de presión para no cortar ni verificar por otro canal. La persona se niega desde el primer pedido: el detector debería alertar por el pedido y la presión aunque no haya cumplimiento.",
+      "lines": 11,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?"
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Sí, soy yo. ¿Qué pasó?"
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco."
+        },
+        {
+          "line": 4,
+          "speaker": "A",
+          "text": "Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas."
+        },
+        {
+          "line": 5,
+          "speaker": "B",
+          "text": "¿Qué? Yo no pedí ningún préstamo. ¿Cómo lo freno?"
+        },
+        {
+          "line": 6,
+          "speaker": "A",
+          "text": "Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo."
+        },
+        {
+          "line": 7,
+          "speaker": "B",
+          "text": "¿Compartir la pantalla? No, eso no lo hago. Mañana voy a la sucursal y lo veo ahí."
+        },
+        {
+          "line": 8,
+          "speaker": "A",
+          "text": "Mañana la transferencia ya salió. Y te pido que no cortes ni llames a nadie, porque si se cierra esta gestión el bloqueo se cae."
+        },
+        {
+          "line": 9,
+          "speaker": "B",
+          "text": "Si sos del banco, no te va a molestar que corte y me fije yo en la aplicación si ese préstamo existe."
+        },
+        {
+          "line": 10,
+          "speaker": "A",
+          "text": "Si cortás, el sistema toma el préstamo como autorizado por vos y después no hay reclamo que valga."
+        },
+        {
+          "line": 11,
+          "speaker": "B",
+          "text": "Lo arreglo con el banco por mi cuenta. No voy a compartir nada. Hasta luego."
+        }
+      ]
+    },
+    "SC-WA-CODE-01-e01": {
+      "id": "SC-WA-CODE-01-e01",
+      "label": "Pedido de código de WhatsApp",
+      "short": "SC-WA-CODE",
+      "fraud": true,
+      "tr": 4,
+      "tc": 5,
+      "alternative": null,
+      "description": "Pedido directo del código de activación, con contexto previo de soporte y urgencia. Caso fácil de referencia.",
+      "lines": 5,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Te llamo de soporte por la activación de tu cuenta de WhatsApp."
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Me acaba de llegar un SMS. No pedí activar nada."
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "Para cancelar esa activación tenemos que resolverlo ahora."
+        },
+        {
+          "line": 4,
+          "speaker": "A",
+          "text": "Decime el código de activación que recibiste por SMS."
+        },
+        {
+          "line": 5,
+          "speaker": "B",
+          "text": "Es cero, cero, cero, cero, cero, cero."
+        }
+      ]
+    },
+    "TR-04-pedido-tras-charla-larga": {
+      "id": "TR-04-pedido-tras-charla-larga",
+      "label": "Pedido tras una charla larga",
+      "short": "TR-04",
+      "fraud": true,
+      "tr": 26,
+      "tc": 27,
+      "alternative": {
+        "tr": 21,
+        "tc": 22
+      },
+      "description": "Conversación larga (30 líneas) y amable: la presentación como sucursal del banco está en la línea 3 y el primer pedido de alto riesgo recién en la línea 26, separados por veintidós líneas: el trámite de la tarjeta y, en el medio, once líneas de charla cotidiana (líneas 8 a 18: el empleado anterior, la viudez de Rubén, las hijas, el clima, los malvones), sin urgencia ni amenaza. Prueba si el detector conserva el contexto de autoridad del comienzo y no se diluye con el texto intermedio, y si reacciona a un pedido directo que llega cuando la confianza ya está construida.",
+      "lines": 30,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Hola, buenas tardes. ¿Hablo con Rubén Aguirre?"
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Sí, soy yo. ¿Quién habla?"
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina."
+        },
+        {
+          "line": 4,
+          "speaker": "B",
+          "text": "Ah, sí, la conozco bien. Voy todos los meses."
+        },
+        {
+          "line": 5,
+          "speaker": "A",
+          "text": "Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año."
+        },
+        {
+          "line": 6,
+          "speaker": "B",
+          "text": "Mirá, yo la tarjeta la uso poco. Saco la plata por ventanilla."
+        },
+        {
+          "line": 7,
+          "speaker": "A",
+          "text": "Sí, me figura que venís por ventanilla, a principio de mes. Mucha gente prefiere así, y está bien."
+        },
+        {
+          "line": 8,
+          "speaker": "B",
+          "text": "Y sí, a mi edad uno ya no se lleva bien con los cajeros. ¿Vos sos nueva? Antes atendía un muchacho, Ramiro."
+        },
+        {
+          "line": 9,
+          "speaker": "A",
+          "text": "Ramiro pasó a otra sucursal, en el centro. Siempre se acuerda de la gente del barrio."
+        },
+        {
+          "line": 10,
+          "speaker": "B",
+          "text": "Qué bueno. Era muy amable. Me ayudó un montón con los papeles cuando mi señora estuvo enferma."
+        },
+        {
+          "line": 11,
+          "speaker": "A",
+          "text": "Lo lamento mucho, Rubén. Debe haber sido un momento difícil."
+        },
+        {
+          "line": 12,
+          "speaker": "B",
+          "text": "Sí, ya van tres años. Ahora estoy solo, pero mis hijas vienen seguido."
+        },
+        {
+          "line": 13,
+          "speaker": "A",
+          "text": "Qué bueno que te acompañen. ¿Viven cerca?"
+        },
+        {
+          "line": 14,
+          "speaker": "B",
+          "text": "Una sí, a cinco cuadras. La otra se fue a vivir al sur. Me dice que allá todavía nieva."
+        },
+        {
+          "line": 15,
+          "speaker": "A",
+          "text": "¡Ni me digas! Acá por suerte ya empezó el calorcito. Mi mamá ya anda con las plantas, dice que es época de trasplantar."
+        },
+        {
+          "line": 16,
+          "speaker": "B",
+          "text": "Yo tengo unos malvones en el balcón que eran de mi señora. Los cuido como oro."
+        },
+        {
+          "line": 17,
+          "speaker": "A",
+          "text": "Qué lindo. Mi mamá también tiene; dice que hay que regarlos poco, que si no se pudren."
+        },
+        {
+          "line": 18,
+          "speaker": "B",
+          "text": "Eso mismo decía mi señora. Sos una buena chica, Silvina."
+        },
+        {
+          "line": 19,
+          "speaker": "A",
+          "text": "Gracias, Rubén. Bueno, no te quiero robar mucho tiempo, que lo de la tarjeta es cortito."
+        },
+        {
+          "line": 20,
+          "speaker": "B",
+          "text": "Decime nomás, no tengo apuro. Estoy con la radio, escuchando el partido."
+        },
+        {
+          "line": 21,
+          "speaker": "A",
+          "text": "La tarjeta nueva te la mandamos a tu casa, así no tenés que hacer la fila. Me figura el domicilio de la calle Las Acacias, ¿seguís ahí?"
+        },
+        {
+          "line": 22,
+          "speaker": "B",
+          "text": "Sí, sigo ahí. Hace cuarenta años que vivo en esa casa."
+        },
+        {
+          "line": 23,
+          "speaker": "A",
+          "text": "Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?"
+        },
+        {
+          "line": 24,
+          "speaker": "B",
+          "text": "Sí, acá está. Esperá que busco los anteojos."
+        },
+        {
+          "line": 25,
+          "speaker": "B",
+          "text": "Ya está. Sí, sonó recién. Dice del banco."
+        },
+        {
+          "line": 26,
+          "speaker": "A",
+          "text": "Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo."
+        },
+        {
+          "line": 27,
+          "speaker": "B",
+          "text": "Es uno, dos, tres, cuatro, cinco, seis."
+        },
+        {
+          "line": 28,
+          "speaker": "A",
+          "text": "Perfecto, Rubén. Ya quedó cargado. Te llega en la semana."
+        },
+        {
+          "line": 29,
+          "speaker": "B",
+          "text": "Muchas gracias, Silvina. Y si lo ves a Ramiro, saludalo de mi parte."
+        },
+        {
+          "line": 30,
+          "speaker": "A",
+          "text": "Seguro. Y cuidá esos malvones, eh."
+        }
+      ]
+    },
+    "TR-06-banco-alerta-legitima": {
+      "id": "TR-06-banco-alerta-legitima",
+      "label": "Alerta bancaria legítima",
+      "short": "TR-06",
+      "fraud": false,
+      "tr": null,
+      "tc": null,
+      "alternative": null,
+      "description": "Mismo arranque que el fraude de compra sospechosa (SC-BANK-OTP-01): quien llama se presenta como el banco, describe una compra que la persona no hizo y pregunta si la reconoce. La diferencia está en que avisa que no va a pedir código, clave ni números, deriva a pausar la tarjeta desde la aplicación y a llamar al número del dorso, y rechaza el código cuando la propia persona ofrece dictarlo. Prueba que el detector no alerte por la identidad de banco más una compra sospechosa, y que una oferta espontánea del código no se tome como pedido.",
+      "lines": 12,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Hola, buenas tardes. ¿Hablo con Julieta Medina?"
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Sí, soy yo. ¿Quién es?"
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito."
+        },
+        {
+          "line": 4,
+          "speaker": "B",
+          "text": "¿Qué consumo?"
+        },
+        {
+          "line": 5,
+          "speaker": "A",
+          "text": "Una compra de sesenta y dos mil pesos en una tienda en línea, hoy a las once y cuarto. ¿La reconocés?"
+        },
+        {
+          "line": 6,
+          "speaker": "B",
+          "text": "No, no compré nada. ¿Me la anulan ustedes?"
+        },
+        {
+          "line": 7,
+          "speaker": "A",
+          "text": "Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá."
+        },
+        {
+          "line": 8,
+          "speaker": "B",
+          "text": "Bueno. ¿Y entonces cómo la freno?"
+        },
+        {
+          "line": 9,
+          "speaker": "A",
+          "text": "Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante."
+        },
+        {
+          "line": 10,
+          "speaker": "B",
+          "text": "Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?"
+        },
+        {
+          "line": 11,
+          "speaker": "A",
+          "text": "No, no me lo pases. Seguramente es del intento de compra, y ese código no se comparte con nadie, tampoco con el banco. Pausá la tarjeta desde la aplicación y, para desconocer la compra, llamá vos al número que está en el dorso."
+        },
+        {
+          "line": 12,
+          "speaker": "B",
+          "text": "Listo, ya la pausé. Ahora corto y llamo al del dorso."
+        }
+      ]
+    },
+    "TR-07-pedido-partido-en-dos-lineas": {
+      "id": "TR-07-pedido-partido-en-dos-lineas",
+      "label": "Pedido dividido en dos líneas",
+      "short": "TR-07",
+      "fraud": true,
+      "tr": 7,
+      "tc": 9,
+      "alternative": {
+        "tr": 8,
+        "tc": 9
+      },
+      "description": "El pedido del código llega partido en dos líneas del mismo hablante, como lo cortaría un ASR por una pausa: la línea 7 («pasame lo que te llegó», sin puntuación final) es un pedido indirecto incompleto y recién la línea 8 («los seis números del mensaje del banco») lo vuelve explícito. Como en TR-08-frase-cortada-candado, el corte no lleva puntos suspensivos ni otra marca que avise que la frase sigue. Prueba si el detector, que se actualiza línea por línea, reacciona ya con la primera mitad o necesita la segunda, y si une las dos mitades en vez de evaluarlas por separado.",
+      "lines": 10,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Buenas tardes, ¿Sergio Paz? Te hablo de atención al cliente del banco, me llamo Andrea."
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Sí, soy yo. ¿Qué pasó?"
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?"
+        },
+        {
+          "line": 4,
+          "speaker": "B",
+          "text": "No, yo tengo solo este celular. ¿Me entraron a la cuenta?"
+        },
+        {
+          "line": 5,
+          "speaker": "A",
+          "text": "Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo."
+        },
+        {
+          "line": 6,
+          "speaker": "B",
+          "text": "Sí, me entró uno recién. ¿Qué tengo que hacer?"
+        },
+        {
+          "line": 7,
+          "speaker": "A",
+          "text": "Solamente pasame lo que te llegó"
+        },
+        {
+          "line": 8,
+          "speaker": "A",
+          "text": "los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia."
+        },
+        {
+          "line": 9,
+          "speaker": "B",
+          "text": "A ver... cero, cero, cero, cero, cero, cero."
+        },
+        {
+          "line": 10,
+          "speaker": "A",
+          "text": "Perfecto, ya quedó desvinculado. Por las dudas no entres a la aplicación hasta mañana, que se está actualizando."
+        }
+      ]
+    },
+    "TR-08-frase-cortada-candado": {
+      "id": "TR-08-frase-cortada-candado",
+      "label": "Frase cortada: candado",
+      "short": "TR-08",
+      "fraud": false,
+      "tr": null,
+      "tc": null,
+      "alternative": null,
+      "description": "Fragmento parcial que, leído solo, parece un pedido de código de un solo uso («Pasame el código», línea 3) y que la línea siguiente del mismo hablante aclara como el código del candado de una valija prestada. Prueba si el detector avisa con información todavía incompleta y si retira o corrige el riesgo cuando llega la aclaración. Es el ejemplo «pasame el código… del candado» de ARQUITECTURA.md §2.",
+      "lines": 7,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "Hola, Lu, ¿estás muy ocupada?"
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "No, decime. Estoy saliendo del laburo."
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "Pasame el código"
+        },
+        {
+          "line": 4,
+          "speaker": "A",
+          "text": "del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir."
+        },
+        {
+          "line": 5,
+          "speaker": "B",
+          "text": "¡Ay, perdón! Te lo tenía que mandar antes de que salieras. Es uno, dos, tres."
+        },
+        {
+          "line": 6,
+          "speaker": "A",
+          "text": "Listo, ya abrió. Gracias, te la devuelvo el lunes."
+        },
+        {
+          "line": 7,
+          "speaker": "B",
+          "text": "Dale. Disfrutá, chau."
+        }
+      ]
+    },
+    "TR-11-familiar-real-pide-plata": {
+      "id": "TR-11-familiar-real-pide-plata",
+      "label": "Familiar real que pide plata",
+      "short": "TR-11",
+      "fraud": false,
+      "tr": null,
+      "tc": null,
+      "alternative": null,
+      "description": "Un familiar real pide una transferencia para un gasto cotidiano (la boleta de la luz), sin urgencia, sin secreto, a una cuenta que la persona ya tiene agendada, y, ante la duda de la madre, él mismo propone que corte y lo llame a su número de siempre. Caso límite: el pedido de dinero y la identidad de familiar declarada coinciden con SC-FAMILIAR-DINERO-01, y el diálogo solo no permite verificar la identidad; la clase legítima sale del diseño del caso, no de algo comprobable en el texto.",
+      "lines": 10,
+      "transcript": [
+        {
+          "line": 1,
+          "speaker": "A",
+          "text": "¿Hola?"
+        },
+        {
+          "line": 2,
+          "speaker": "B",
+          "text": "Hola, má. ¿Te agarro en mal momento?"
+        },
+        {
+          "line": 3,
+          "speaker": "A",
+          "text": "No, hijo, estoy acá tomando mate. ¿Qué pasó?"
+        },
+        {
+          "line": 4,
+          "speaker": "B",
+          "text": "Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?"
+        },
+        {
+          "line": 5,
+          "speaker": "A",
+          "text": "Sí, mi amor. ¿A qué cuenta?"
+        },
+        {
+          "line": 6,
+          "speaker": "B",
+          "text": "A la mía de siempre, la que tenés agendada. No hay apuro, eh: hoy o mañana, cuando puedas. El viernes cobro y te los devuelvo."
+        },
+        {
+          "line": 7,
+          "speaker": "A",
+          "text": "Ay, perdoná, pero con todo lo que se escucha me da no sé qué hacerlo así, por teléfono."
+        },
+        {
+          "line": 8,
+          "speaker": "B",
+          "text": "No, hacés bien. Cortá y llamame vos al celular, al número de siempre, y lo hablamos de nuevo."
+        },
+        {
+          "line": 9,
+          "speaker": "A",
+          "text": "Dale, te corto y te llamo."
+        },
+        {
+          "line": 10,
+          "speaker": "B",
+          "text": "Dale, má. Te espero."
+        }
+      ]
+    }
+  },
+  "demos": {
+    "69": {
+      "run": "2026-10-26_125526_demo-tito-slm-simulado",
+      "cases": {
+        "SC-WA-CODE-01-e01": {
+          "directo": {
+            "lines": 5,
+            "calls": 5,
+            "avoided": 0,
+            "tokens": 550,
+            "ms": 2.1,
+            "failures": [],
+            "gate": null,
+            "alert": 4,
+            "reason": "Te piden un código que da acceso a tu cuenta",
+            "evidence": "Decime el código de activación que recibiste por SMS.",
+            "literal": true
+          },
+          "filtrado": {
+            "lines": 5,
+            "calls": 2,
+            "avoided": 3,
+            "tokens": 220,
+            "ms": 20.6,
+            "failures": [],
+            "gate": 4,
+            "alert": 4,
+            "reason": "Te piden un código que da acceso a tu cuenta",
+            "evidence": "Decime el código de activación que recibiste por SMS.",
+            "literal": true
+          }
+        },
+        "LG-WA-CONSULTA-01-e01": {
+          "directo": {
+            "lines": 4,
+            "calls": 4,
+            "avoided": 0,
+            "tokens": 440,
+            "ms": 1.8,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 4,
+            "calls": 1,
+            "avoided": 3,
+            "tokens": 110,
+            "ms": 20.3,
+            "failures": [],
+            "gate": 4,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        }
+      }
+    },
+    "70": {
+      "run": "2026-10-26_132027_tito-real-8casos",
+      "cases": {
+        "TR-04-pedido-tras-charla-larga": {
+          "directo": {
+            "lines": 30,
+            "calls": 30,
+            "avoided": 0,
+            "tokens": 3300,
+            "ms": 9.8,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 30,
+            "calls": 26,
+            "avoided": 4,
+            "tokens": 2860,
+            "ms": 2790.8,
+            "failures": [],
+            "gate": 5,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "TR-06-banco-alerta-legitima": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 1320,
+            "ms": 3.9,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 10,
+            "avoided": 2,
+            "tokens": 1100,
+            "ms": 65.9,
+            "failures": [],
+            "gate": 3,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "TR-07-pedido-partido-en-dos-lineas": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 1100,
+            "ms": 3.0,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 6,
+            "avoided": 4,
+            "tokens": 660,
+            "ms": 96.4,
+            "failures": [],
+            "gate": 5,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "TR-08-frase-cortada-candado": {
+          "directo": {
+            "lines": 7,
+            "calls": 7,
+            "avoided": 0,
+            "tokens": 770,
+            "ms": 2.1,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 7,
+            "calls": 5,
+            "avoided": 2,
+            "tokens": 550,
+            "ms": 46.4,
+            "failures": [],
+            "gate": 3,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-SOPORTE-REMOTO-01-e01": {
+          "directo": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 1210,
+            "ms": 3.3,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 11,
+            "calls": 11,
+            "avoided": 0,
+            "tokens": 1210,
+            "ms": 21.9,
+            "failures": [],
+            "gate": 1,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "LG-SUPPORT-INFO-01-e02": {
+          "directo": {
+            "lines": 13,
+            "calls": 13,
+            "avoided": 0,
+            "tokens": 1430,
+            "ms": 3.9,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 13,
+            "calls": 6,
+            "avoided": 7,
+            "tokens": 660,
+            "ms": 182.0,
+            "failures": [],
+            "gate": 8,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "SC-FAMILIAR-DINERO-01-e01": {
+          "directo": {
+            "lines": 12,
+            "calls": 12,
+            "avoided": 0,
+            "tokens": 1320,
+            "ms": 3.2,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 12,
+            "calls": 4,
+            "avoided": 8,
+            "tokens": 440,
+            "ms": 175.0,
+            "failures": [],
+            "gate": 9,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        },
+        "TR-11-familiar-real-pide-plata": {
+          "directo": {
+            "lines": 10,
+            "calls": 10,
+            "avoided": 0,
+            "tokens": 1100,
+            "ms": 2.4,
+            "failures": [],
+            "gate": null,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          },
+          "filtrado": {
+            "lines": 10,
+            "calls": 2,
+            "avoided": 8,
+            "tokens": 220,
+            "ms": 166.4,
+            "failures": [],
+            "gate": 9,
+            "alert": null,
+            "reason": "",
+            "evidence": "",
+            "literal": null
+          }
+        }
+      }
+    }
+  },
+  "training": {
+    "banco_commit": "bb542e130e7a67a82e376a75a0438a15de32f4a6",
+    "ejemplos_sha256": "fc1fe13cfba121c356775434bd6139c6005df847ab9e5848ffe4e6e4c82c44b1",
+    "exclusiones_sha256": "2b7f88b39f10153762a192b6d50d62026655ba288253f27317fc967656a99b24",
+    "aceptadas": 5520,
+    "apartadas": 480,
+    "familias": 276,
+    "por_clase": {
+      "estafa": 2620,
+      "legitima": 2900
+    },
+    "por_lote": {
+      "banco": 2000,
+      "identidad": 1880,
+      "cotidiano": 1640
+    },
+    "uso": "entrenamiento_desarrollo",
+    "split": null,
+    "seed": 42
+  }
+}
+  </script>
+
+  <script>
+    "use strict";
+
+    const report = JSON.parse(document.getElementById("report-data").textContent);
+    const state = { view: "overview", model: report.models[0].id, case: report.mainCases[0], ticket: 69 };
+    const integer = new Intl.NumberFormat("es-AR", { maximumFractionDigits: 0 });
+    const decimal = new Intl.NumberFormat("es-AR", { maximumFractionDigits: 1 });
+    const $ = (id) => document.getElementById(id);
+    const escape = (text) => String(text).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
+    const fmt = (value) => integer.format(value);
+    const caseInfo = (id) => report.cases[id];
+    const selectedModel = () => report.models.find((model) => model.id === state.model);
+    const fullName = (model) => `${model.name} · ${model.quantization}`;
+    const pair = (a, b) => `<span class="pair"><span>${fmt(a)}</span><span class="separator">→</span><span>${fmt(b)}</span></span>`;
+
+    function alertPill(line, fraud) {
+      const status = line === null ? (fraud ? "missed" : "") : (fraud ? "detected" : "false-alarm");
+      const text = line === null ? "Sin aviso" : `L${line}`;
+      const meaning = line === null ? (fraud ? "vishing sin aviso" : "legítima sin aviso") : (fraud ? "vishing con aviso" : "falsa alarma");
+      return `<span class="alert-pill ${status}" title="${meaning}">${text}</span>`;
+    }
+
+    function alertPair(direct, filtered, fraud) {
+      return `<span class="pair">${alertPill(direct, fraud)}<span class="separator">→</span>${alertPill(filtered, fraud)}</span>`;
+    }
+
+    function score(title, direct, filtered, isDetection) {
+      function row(label, value, variant) {
+        const pips = Array.from({ length: 4 }, (_, i) => `<span class="pip ${i < value ? variant : ""}"></span>`).join("");
+        return `<div class="score-line"><span>${label}</span><span class="score-pips" role="img" aria-label="${label}: ${value} de 4">${pips}</span><b>${value}/4</b></div>`;
+      }
+      return `<div class="score"><div class="score-title"><span>${title}</span><span class="direction">${isDetection ? "Más es mejor" : "Menos es mejor"}</span></div>${row("Directo", direct, "direct")}${row("Con Tito", filtered, "filtered")}</div>`;
+    }
+
+    function renderOverview() {
+      $("overview-models").innerHTML = report.models.map((model) => {
+        const d = model.directo;
+        const f = model.filtrado;
+        return `<article class="model-card">
+          <div class="card-header"><h3>${escape(model.name)}</h3><span class="badge quant">${escape(model.quantization)}</span></div>
+          ${score("Vishing detectado", d.vishing_detectado, f.vishing_detectado, true)}
+          ${score("Falsas alarmas", d.falsas_alarmas, f.falsas_alarmas, false)}
+          <div class="card-action"><button class="text-button" data-model="${escape(model.id)}">Ver las 8 conversaciones ↗</button><span class="delta">#${model.ticket}</span></div>
+        </article>`;
+      }).join("");
+      renderResources();
+    }
+
+    function renderResources() {
+      const metric = $("resource-metric").value;
+      const maximum = Math.max(...report.models.flatMap((m) => [m.directo[metric], m.filtrado[metric]]));
+      $("resource-chart").innerHTML = report.models.map((model) => {
+        const d = model.directo[metric];
+        const f = model.filtrado[metric];
+        return `<div class="resource-row"><div class="resource-label">${escape(model.name.replace("3.5 · ", "").replace("3.2 · ", ""))}<small>${escape(model.quantization)}</small></div><div role="img" aria-label="${escape(fullName(model))}: directo ${fmt(d)}, con Tito ${fmt(f)}"><div class="mini-track"><div class="mini-bar" style="width:${d / maximum * 100}%"></div></div><div class="mini-track"><div class="mini-bar filtered" style="width:${f / maximum * 100}%"></div></div></div><div class="resource-values"><span>${fmt(d)}</span><span>${fmt(f)}</span></div></div>`;
+      }).join("");
+      $("resource-caption").textContent = metric === "ms_total"
+        ? "Tiempo acumulado en ms: Tito + SLM y fallos incluidos en la variante filtrada. Carga, calentamiento y ajuste se informan por separado."
+        : "Tokens totales de prompt + salida. En los seis artefactos, el filtrado consume menos tokens; esa reducción no implica la misma reducción de tiempo.";
+    }
+
+    function metric(label, direct, filtered, suffix, note) {
+      return `<div class="metric"><div class="metric-label">${label}</div><div class="metric-values"><span class="from">${fmt(direct)}${suffix}</span><span class="arrow">→</span><span class="to">${fmt(filtered)}${suffix}</span></div><div class="metric-note">${note}</div></div>`;
+    }
+
+    function renderModel() {
+      const model = selectedModel();
+      const d = model.directo;
+      const f = model.filtrado;
+      $("model-select").value = model.id;
+      $("model-title").textContent = fullName(model);
+      $("model-tag").textContent = model.id;
+      const costDelta = (f.ms_total / d.ms_total - 1) * 100;
+      $("model-metrics").innerHTML = [
+        metric("Vishing detectado", d.vishing_detectado, f.vishing_detectado, "/4", "Cuatro llamadas fraudulentas"),
+        metric("Falsas alarmas", d.falsas_alarmas, f.falsas_alarmas, "/4", "Cuatro llamadas legítimas"),
+        metric("Consultas al SLM", d.consultas_slm, f.consultas_slm, "", `${f.evitadas} consultas evitadas`),
+        metric("Tiempo acumulado · ms", d.ms_total, f.ms_total, "", `${costDelta >= 0 ? "+" : "−"}${decimal.format(Math.abs(costDelta))} % con Tito, incluido su costo`),
+      ].join("");
+      $("model-cases").innerHTML = report.mainCases.map((id) => {
+        const info = caseInfo(id);
+        const { directo: a, filtrado: b } = model.cases[id];
+        return `<tr><td><button class="case-button" data-case="${escape(id)}"><span class="class-dot ${info.fraud ? "" : "legit"}"></span><span><span class="name">${escape(info.label)}</span><small>${escape(info.short)} · ${info.fraud ? "Vishing" : "Legítima"}</small></span></button></td><td data-label="Primer aviso">${alertPair(a.alert, b.alert, info.fraud)}</td><td data-label="Consultas">${pair(a.calls, b.calls)}</td><td data-label="Tokens">${pair(a.tokens, b.tokens)}</td><td data-label="Tiempo · ms">${pair(a.ms, b.ms)}</td><td data-label="Fallos">${pair(a.failures.length, b.failures.length)}</td></tr>`;
+      }).join("");
+      const extra = model.id.startsWith("llama")
+        ? `Llama conserva ${d.fallos_slm} fallos de salida en directo y ${f.fallos_slm} con Tito. El digest histórico no estaba guardado; el reporte registra el recuperado.`
+        : `Las dos variantes usan el mismo artefacto y configuración. La activación selectiva y el indicio falible cambian juntos.`;
+      $("model-note").innerHTML = `<span>${extra} <a href="../../../corridas/${escape(model.run)}/comparacion.md">Ver reporte de la corrida ↗</a></span>`;
+    }
+
+    function alertChange(d, f, fraud) {
+      if (d === f) return "Sin cambio de aviso";
+      if (d === null) return fraud ? "Agrega una detección" : "Agrega una falsa alarma";
+      if (f === null) return fraud ? "Pierde una detección" : "Quita una falsa alarma";
+      const diff = f - d;
+      return `${diff > 0 ? "Retrasa" : "Adelanta"} ${Math.abs(diff)} línea${Math.abs(diff) === 1 ? "" : "s"}`;
+    }
+
+    function timeline(model, info, reference) {
+      const { directo: d, filtrado: f } = model.cases[info.id];
+      const position = (line) => (line - 1) / Math.max(1, info.lines - 1) * 100;
+      let track = f.gate === null ? "" : `<span class="active-zone" style="left:${position(f.gate)}%"></span>`;
+      for (const [key, title] of [["tr", "Pedido"], ["tc", "Cumpl."]]) {
+        const line = reference[key];
+        if (line !== null && line !== undefined) {
+          track += `<span class="reference-line" style="left:${position(line)}%" title="${title}: línea ${line}"></span><span class="reference-label" style="left:${position(line)}%">${key === "tr" ? "R" : "C"}</span>`;
+        }
+      }
+      if (f.gate !== null) track += `<span class="marker gate" style="left:${position(f.gate)}%" title="Tito deriva en L${f.gate}"></span>`;
+      if (d.alert !== null) track += `<span class="marker direct" style="left:${position(d.alert)}%" title="Aviso directo L${d.alert}">${d.alert}</span>`;
+      if (f.alert !== null) track += `<span class="marker filtered" style="left:${position(f.alert)}%" title="Aviso con Tito L${f.alert}">${f.alert}</span>`;
+      return `<div class="timeline-row"><div class="timeline-name">${escape(model.name)}<small>${escape(model.quantization)}</small></div><div class="timeline-track" role="img" aria-label="${escape(fullName(model))}: derivación Tito ${f.gate ?? "ninguna"}, aviso directo ${d.alert ?? "ninguno"}, aviso filtrado ${f.alert ?? "ninguno"}">${track}</div><div class="timeline-values">${alertPair(d.alert, f.alert, info.fraud)}<span class="delta">${alertChange(d.alert, f.alert, info.fraud)}</span></div></div>`;
+    }
+
+    function evidenceVariant(summary, label) {
+      let body;
+      if (summary.alert === null) {
+        body = `<p>Sin aviso.${summary.failures.length ? ` ${summary.failures.length} fallo(s) en ${summary.failures.map((n) => `L${n}`).join(", ")}.` : ""}</p>`;
+      } else {
+        body = `<p>${escape(summary.reason || "Motivo no informado")}</p>${summary.evidence ? `<blockquote>${escape(summary.evidence)}</blockquote><p class="caption" style="margin-top:5px">${summary.literal ? "Cita encontrada en el texto disponible" : "Cita no textual"}</p>` : ""}`;
+      }
+      return `<div><div class="evidence-label">${label}${summary.alert === null ? "" : ` · L${summary.alert}`}</div>${body}</div>`;
+    }
+
+    function renderCase() {
+      const info = caseInfo(state.case);
+      const alternative = Boolean(info.alternative && $("alternative-reference").checked);
+      const reference = alternative ? info.alternative : info;
+      $("case-select").value = info.id;
+      $("alternative-control").hidden = !info.alternative;
+      $("case-heading").innerHTML = `<div class="case-intro"><span class="badge ${info.fraud ? "fraud" : "legit"}">${info.fraud ? "Vishing" : "Legítima difícil"}</span><span class="caption mono">${escape(info.short)}</span><span class="caption">${info.lines} líneas</span></div><h3>${escape(info.label)}</h3>`;
+      $("case-timelines").innerHTML = report.models.map((m) => timeline(m, info, reference)).join("");
+      $("case-axis").innerHTML = `<span>Línea 1</span><span>${Math.ceil(info.lines / 2)}</span><span>Línea ${info.lines}</span>`;
+      $("case-timeline-note").textContent = info.fraud
+        ? `R = pedido${reference.tr ? ` (L${reference.tr})` : " sin marca"}; C = cumplimiento${reference.tc ? ` (L${reference.tc})` : " sin marca"}. ${alternative ? "Referencia alternativa: los avisos no cambian." : "Referencia original provisoria."} La franja verde comienza en la derivación de Tito.`
+        : "En esta llamada legítima, cualquier aviso es una falsa alarma. La franja verde comienza en la derivación de Tito; una derivación no es, por sí misma, un aviso.";
+      $("case-resources").innerHTML = report.models.map((model) => {
+        const { directo: d, filtrado: f } = model.cases[info.id];
+        return `<tr><td><button class="text-button" data-model="${escape(model.id)}">${escape(model.name)}</button><span class="tag-code">${escape(model.quantization)}</span></td><td data-label="Consultas">${pair(d.calls, f.calls)}</td><td data-label="Consultas evitadas">${f.avoided}</td><td data-label="Tokens">${pair(d.tokens, f.tokens)}</td><td data-label="Tiempo · ms">${pair(d.ms, f.ms)}</td><td data-label="Fallos">${pair(d.failures.length, f.failures.length)}</td></tr>`;
+      }).join("");
+      $("case-evidence").innerHTML = report.models.map((model) => {
+        const summaries = model.cases[info.id];
+        return `<details><summary>${escape(fullName(model))}</summary><div class="evidence-content">${evidenceVariant(summaries.directo, "Directo")}${evidenceVariant(summaries.filtrado, "Tito + SLM")}</div></details>`;
+      }).join("");
+      $("case-transcript").innerHTML = info.transcript.map((line) => {
+        const event = line.line === reference.tr ? "PEDIDO" : (line.line === reference.tc ? "CUMPLIMIENTO" : "");
+        return `<div class="utterance ${event ? "reference" : ""}"><span class="line-number">${line.line}</span><span class="speaker">${escape(line.speaker)}</span><span>${event ? `<span class="ref-tag">${event}</span>` : ""}${escape(line.text)}</span></div>`;
+      }).join("");
+    }
+
+    const tickets = [
+      { id: 69, title: "Recorrido simulado", short: "Tito y SLM simulados", detail: "Demostración del recorrido completo", description: "Dos conversaciones atraviesan el filtro. El puntaje guionado activa al SLM en la línea 4 y el aviso queda registrado en la misma traza.", kind: "demo" },
+      { id: 70, title: "Tito real", short: "Ajuste único + 8 llamadas", detail: "Un clasificador, ocho conversaciones", description: "RoBERTuito congelado y una regresión logística entrenada una sola vez. Esta pasada usa Tito real con SLM simulado; sus resultados prueban el recorrido y la derivación.", kind: "demo" },
+      { id: 71, title: "Qwen 4B", short: "16 evaluaciones reales", detail: "Primera comparación con un SLM real", description: "Ocho conversaciones, dos variantes del mismo Qwen 4B. Se comparan alertas, consultas, tokens y tiempo acumulado.", kind: "models" },
+      { id: 72, title: "Los otros Qwen", short: "64 evaluaciones reales", detail: "Cuatro artefactos adicionales", description: "Las dos versiones 0.8B se conservan separadas. Se suman 2B Q8 y 9B Q4, con el mismo Tito y las mismas conversaciones.", kind: "models" },
+      { id: 73, title: "Llama 1B", short: "16 evaluaciones reales", detail: "Llama bajo el mismo contrato", description: "El filtro pasa de 0 a 2 vishing con aviso y de 0 a 3 falsas alarmas. Las cinco salidas cortadas de la variante directa se conservan como fallos.", kind: "models" },
+      { id: 74, title: "Consolidación", short: "96 evaluaciones reunidas", detail: "La matriz completa, trazable", description: "Seis artefactos, ocho conversaciones y dos variantes por artefacto. Los resultados se reúnen desde las salidas guardadas.", kind: "summary" },
+    ];
+
+    function demoContent(ticket) {
+      const demo = report.demos[String(ticket.id)];
+      const ids = Object.keys(demo.cases);
+      const summaries = Object.values(demo.cases).map((c) => c.filtrado);
+      const calls = summaries.reduce((sum, c) => sum + c.calls, 0);
+      const avoided = summaries.reduce((sum, c) => sum + c.avoided, 0);
+      let content = `<div class="ticket-stat-grid"><div class="ticket-stat"><strong>${ids.length}</strong><span>conversaciones</span></div><div class="ticket-stat"><strong>${calls}</strong><span>consultas al SLM</span></div><div class="ticket-stat"><strong>${avoided}</strong><span>consultas evitadas</span></div></div>`;
+      if (ticket.id === 70) {
+        content += `<div class="info-note" style="margin-bottom:22px">${fmt(report.training.aceptadas)} textos aceptados · ${fmt(report.training.apartadas)} apartados excluidos · ${report.training.familias} familias · seed ${report.training.seed}. El SLM simulado no produjo avisos en esta pasada.</div>`;
+      }
+      content += ids.map((id) => {
+        const info = caseInfo(id);
+        const { directo: d, filtrado: f } = demo.cases[id];
+        return `<div class="demo-line"><div><strong>${escape(info.label)}</strong><small>${escape(info.short)} · ${info.fraud ? "Vishing" : "Legítima"} · derivación ${f.gate === null ? "ninguna" : `L${f.gate}`}</small></div><div>${alertPair(d.alert, f.alert, info.fraud)}<small>${d.calls} → ${f.calls} consultas</small></div></div>`;
+      }).join("");
+      return content + `<div class="ticket-links"><a href="../../../corridas/${escape(demo.run)}/resumen.md">Reporte de la demostración ↗</a></div>`;
+    }
+
+    function renderTickets() {
+      $("ticket-menu").innerHTML = tickets.map((t) => `<button class="ticket-button" data-ticket="${t.id}" aria-pressed="${t.id === state.ticket}"><span class="ticket-num">#${t.id}</span><span><strong>${t.title}</strong><small>${t.short}</small></span></button>`).join("");
+      const ticket = tickets.find((t) => t.id === state.ticket);
+      let content = "";
+      if (ticket.kind === "demo") content = demoContent(ticket);
+      if (ticket.kind === "models") {
+        content = report.models.filter((m) => m.ticket === ticket.id).map((model) => `<div class="ticket-model"><div><strong>${escape(fullName(model))}</strong><small>Vishing ${model.directo.vishing_detectado}/4 → ${model.filtrado.vishing_detectado}/4 · falsas alarmas ${model.directo.falsas_alarmas}/4 → ${model.filtrado.falsas_alarmas}/4</small></div><button class="text-button" data-model="${escape(model.id)}">Explorar ↗</button></div>`).join("");
+      }
+      if (ticket.kind === "summary") {
+        content = `<div class="ticket-stat-grid"><div class="ticket-stat"><strong>${report.models.length}</strong><span>artefactos distintos</span></div><div class="ticket-stat"><strong>${report.mainCases.length}</strong><span>conversaciones</span></div><div class="ticket-stat"><strong>${report.evaluations}</strong><span>evaluaciones</span></div></div><p>El consolidado excluye la corrida Qwen 4B con fallo técnico de Tito y conserva la corrida canónica. La revisión cruzada figura como pendiente en el reporte.</p><div class="ticket-links"><a href="../CONSOLIDADO.md">Consolidado técnico ↗</a><a href="../REVISION.md">Estado de revisión ↗</a><button class="text-button" data-go-view="overview">Comparar los seis modelos ↗</button></div>`;
+      }
+      $("ticket-content").innerHTML = `<article class="panel"><span class="badge">Entrega #${ticket.id}</span><h2>${ticket.detail}</h2><p>${ticket.description}</p>${content}<div class="ticket-links"><a href="https://github.com/Corchets/bitacora_tesis/issues/${ticket.id}" target="_blank" rel="noopener">Abrir ticket en GitHub ↗</a></div></article>`;
+    }
+
+    function showView(view, scroll = false) {
+      state.view = view;
+      document.querySelectorAll("[data-view]").forEach((tab) => {
+        const active = tab.dataset.view === view;
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+        $(`view-${tab.dataset.view}`).hidden = !active;
+      });
+      if (view === "model") renderModel();
+      if (view === "case") renderCase();
+      if (view === "tickets") renderTickets();
+      if (scroll) document.querySelector(".navigation").scrollIntoView({ block: "start" });
+    }
+
+    function initialize() {
+      $("model-select").innerHTML = report.models.map((model) => `<option value="${escape(model.id)}">${escape(fullName(model))}</option>`).join("");
+      $("case-select").innerHTML = report.mainCases.map((id) => `<option value="${escape(id)}">${escape(caseInfo(id).short)} · ${escape(caseInfo(id).label)}</option>`).join("");
+      renderOverview();
+      document.addEventListener("click", (event) => {
+        const button = event.target.closest("button");
+        if (!button) return;
+        if (button.dataset.view) showView(button.dataset.view);
+        if (button.dataset.model) { state.model = button.dataset.model; showView("model", true); }
+        if (button.dataset.case) { state.case = button.dataset.case; $("alternative-reference").checked = false; showView("case", true); }
+        if (button.dataset.ticket) { state.ticket = Number(button.dataset.ticket); renderTickets(); }
+        if (button.dataset.goView) showView(button.dataset.goView, true);
+      });
+      document.querySelector(".tabs").addEventListener("keydown", (event) => {
+        const tabs = Array.from(document.querySelectorAll("[data-view]"));
+        const index = tabs.indexOf(document.activeElement);
+        if (index < 0 || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+        showView(tabs[next].dataset.view);
+        tabs[next].focus();
+      });
+      $("resource-metric").addEventListener("change", renderResources);
+      $("model-select").addEventListener("change", (event) => { state.model = event.target.value; renderModel(); });
+      $("case-select").addEventListener("change", (event) => { state.case = event.target.value; $("alternative-reference").checked = false; renderCase(); });
+      $("alternative-reference").addEventListener("change", renderCase);
+    }
+
+    initialize();
+  </script>
+</body>
+</html>

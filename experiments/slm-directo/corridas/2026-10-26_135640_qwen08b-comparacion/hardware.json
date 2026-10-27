@@ -1,0 +1,11 @@
+{
+  "gpu": "NVIDIA GeForce RTX 3060 12288 MiB",
+  "servidor_ollama": "0.40.8 (/home/chato/.local/bin/ollama serve, OLLAMA_HOST=127.0.0.1:11435, OLLAMA_MODELS=/home/chato/.ollama/models)",
+  "interprete_corrida": "/home/chato/orca/workspaces/bitacora_tesis/searobin/.venv/bin/python",
+  "librerias_tito": {
+    "torch": "2.14.1+cpu",
+    "transformers": "5.20.2",
+    "scikit-learn": "1.9.1"
+  },
+  "limites": "sin segundos ni RTF: posiciones en líneas; ms por actualización medidos, no presupuesto móvil; 8 conversaciones de desarrollo, sin test reservado"
+}

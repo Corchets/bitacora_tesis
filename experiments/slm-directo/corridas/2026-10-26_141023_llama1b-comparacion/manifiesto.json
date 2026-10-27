@@ -1,0 +1,117 @@
+{
+  "inicio": "2026-10-26T14:10:23",
+  "comando": "python correr.py --modelos llama3.2:1b-instruct-q4_K_M --url http://127.0.0.1:11435 --casos TR-04-pedido-tras-charla-larga,TR-06-banco-alerta-legitima,TR-07-pedido-partido-en-dos-lineas,TR-08-frase-cortada-candado,SC-SOPORTE-REMOTO-01-e01,LG-SUPPORT-INFO-01-e02,SC-FAMILIAR-DINERO-01-e01,TR-11-familiar-real-pide-plata --filtro-tito --tito-real --sin-reglas --num-batch 32 --etiqueta llama1b-comparacion",
+  "codigo": {
+    "commit": "d53bbc1858b3fa8fafc7cc2006a0f7d1f3bfce9d",
+    "cambios_sin_commit_en_la_carpeta": true
+  },
+  "maquina": {
+    "sistema": "Linux-7.2.5-3-omarchy-x86_64-with-glibc2.44",
+    "arquitectura": "x86_64",
+    "procesador": "no informado",
+    "nucleos_logicos": 16,
+    "ram_total_gb": 30.5,
+    "python": "3.14.8"
+  },
+  "politica": "aviso_unico_primer_true_valido",
+  "filtro_tito": {
+    "tito": "real-robertuito-logreg",
+    "umbral": 0.5,
+    "modelo": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/tito_logreg.json",
+    "artefacto_sha256": "fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd",
+    "encoder": {
+      "id": "pysentimiento/robertuito-base-uncased",
+      "revision": "20cb399e4b93f270c0cd6b6f533bcb0ada3cb658",
+      "congelado": true,
+      "representacion": "promedio_enmascarado_ultima_capa",
+      "hidden": 768
+    }
+  },
+  "particion": "desarrollo",
+  "ollama": {
+    "url": "http://127.0.0.1:11435",
+    "version": "0.40.8",
+    "digests": {
+      "llama3.2:1b-instruct-q4_K_M": "22bc6b92eb0160c4629782fca05a9032c59d306ab2058b7dacc8a4644fbafa02"
+    }
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": {
+      "num_batch": 32
+    }
+  },
+  "prompts": {
+    "tarea": {
+      "huella": "bf4284996898c45d",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en lo dicho hasta ahora, alguien pide, induce o presiona a la otra persona para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- códigos de un solo uso (SMS, token, código de verificación o de activación);\n- claves, PIN, contraseñas o usuarios;\n- datos personales (DNI, CUIL, domicilio, foto de un documento);\n- transferencias, pagos o entregas de dinero o efectivo;\n- instalar programas de acceso remoto o compartir la pantalla;\n- acciones de seguridad guiadas (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nNo alcanza con mencionar esas cosas, aconsejar no compartirlas, negarse a hacerlas o hablar de ellas sin pedirlas.\n\nRespondé solo con un objeto JSON con estos campos:\n- \"riesgo\": número entre 0 y 1 que indica qué tan riesgosa te parece la llamada con lo disponible hasta ahora.\n- \"alerta_sugerida\": true o false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona, por ejemplo \"Te están pidiendo un código que da acceso a tu cuenta\"; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente el fragmento de la transcripción que lo justifica; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      }
+    }
+  },
+  "configs": [
+    {
+      "config": "slm|llama3.2:1b-instruct-q4_K_M|tarea|ab",
+      "detector": "slm",
+      "modelo": "llama3.2:1b-instruct-q4_K_M",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-slm|llama3.2:1b-instruct-q4_K_M|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "llama3.2:1b-instruct-q4_K_M",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "TR-04-pedido-tras-charla-larga": "7b73594c98f6bc57",
+    "TR-06-banco-alerta-legitima": "eff36493e443525d",
+    "TR-07-pedido-partido-en-dos-lineas": "ebe24b27f413c658",
+    "TR-08-frase-cortada-candado": "ad03a06952b2db74",
+    "SC-SOPORTE-REMOTO-01-e01": "f9986a5f33faf52d",
+    "LG-SUPPORT-INFO-01-e02": "bd004ebe89fed558",
+    "SC-FAMILIAR-DINERO-01-e01": "ca983cbec3940477",
+    "TR-11-familiar-real-pide-plata": "a6e867d07e90d9b2"
+  },
+  "modelos": {
+    "llama3.2:1b-instruct-q4_K_M": {
+      "carga_ms": 1235,
+      "error": "",
+      "memoria": {
+        "size_bytes": 938538434,
+        "size_vram_bytes": 938538434
+      },
+      "pensar": false
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-10-26T14:11:37"
+}

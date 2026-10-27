@@ -195,6 +195,16 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [contraste con el laboratorio](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
   Son antecedentes de candidatos y pruebas, no requisitos nuevos. La comparación
   debe declarar qué código y datos reutiliza y qué cambió.
+- **Plan exploratorio acordado con el usuario (2026-10-26):** Tito como filtro
+  que activa al SLM ante sospecha, con contexto completo e indicio falible; ocho
+  conversaciones de desarrollo, todos los SLM previamente ejecutados y umbral
+  inicial 0,5. [Plan y matriz exacta en ARQUITECTURA §7](../ingenieria/ARQUITECTURA.md#7-plan-de-experimento-tito-como-filtro-de-consulta-al-slm).
+  Especificación publicada en [#68](https://github.com/Corchets/bitacora_tesis/issues/68)
+  con `ready-for-agent`, asignada a Ignacio; punto principal de prueba confirmado
+  por el usuario. Descomposición aprobada y publicada en seis subissues de #68,
+  con bloqueos nativos; primera entrega [#69](https://github.com/Corchets/bitacora_tesis/issues/69).
+  Sin entrenamiento ni corridas nuevas; no cierra D09 ni reabre automáticamente
+  los issues históricos retirados.
 - **Antecedentes del laboratorio (spike #29, medidos con semillas provisorias con
   sesgo de dialecto — no cierran D09):** la cascada RoBERTuito+LR→SLM (zona gris
   0,35–0,75) no mejoró al encoder solo en la corrida del 2026-09-28 (goteo
@@ -221,6 +231,17 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   - ASR local repetible en [`experiments/asr-local/`](../../experiments/asr-local/) ([#19](https://github.com/Corchets/bitacora_tesis/issues/19)) con Zipformer Kroko (streaming, RTF 0.10–0.17, RSS ~357–423 MB, WER 4.35–5.00 % sobre audio TTS de humo) y Faster-Whisper base (lotes, RTF 0.27, WER 17.39 % con pérdida de dígitos "cero"); la corrida de entrega espera audio humano de #39.
   - Ensayo SLM local directo en [`experiments/slm-directo/`](../../experiments/slm-directo/) ([#50](https://github.com/Corchets/bitacora_tesis/issues/50)) sobre 53 casos de texto con Qwen3.5 (0.8B, 2B, 4B); en CPU con 2 hilos la latencia p50 sube a 3.9 s (0.8B) y 8.2 s (2B), superando el presupuesto de tiempo real. Corridas completas comparadas frente a reglas en [`experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md`](../../experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md).
   - Comparación de candidatos sobre desarrollo en [`docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md`](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md) ([#51](https://github.com/Corchets/bitacora_tesis/issues/51)); corridas en Apple M1 (`2026-10-17_150516_m1-gguf`) con Qwen3.5 0.8B y 2B completas y 4B interrumpida por swap/memoria ([`experiments/slm-directo/corridas/2026-10-17_150516_m1-gguf/resumen.md`](../../experiments/slm-directo/corridas/2026-10-17_150516_m1-gguf/resumen.md)), junto con el estudio de reproducibilidad M1 vs Windows 11 en [`experiments/slm-directo/analisis/2026-10-17-m1-vs-windows/`](../../experiments/slm-directo/analisis/2026-10-17-m1-vs-windows/).
+- Matriz Tito→SLM ejecutada el 2026-10-26 (material de desarrollo, no test): 6 artefactos × 8 conversaciones × 2 variantes = 96 evaluaciones con Tito real único y umbral 0,5; consolidado y regeneración en [`experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/`](../../experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/CONSOLIDADO.md) ([#74](https://github.com/Corchets/bitacora_tesis/issues/74), parte de #68). No cierra D07/D08/D09 ni #51; revisión cruzada pendiente.
+- **Continuación acordada con el usuario (2026-10-27):** [#95](https://github.com/Corchets/bitacora_tesis/issues/95)
+  prioriza evaluación independiente revisada y diagnóstico del Tito actual;
+  mantiene RoBERTuito para este trabajo y permite comparar encoder congelado y
+  fine-tuning condicionado a calidad insuficiente, además de frase aislada y
+  contexto reciente. Después se mide el flujo completo y una política de
+  reconsulta. [Acuerdo y alcance en ARQUITECTURA §7.5](../ingenieria/ARQUITECTURA.md#75-continuación-acordada-validar-tito-antes-de-optimizar-consultas).
+  La especificación tiene `ready-for-agent`, está asignada a Ignacio en H4 y
+  conserva pendientes explícitos de referencia, particiones, criterio de
+  insuficiencia y margen preventivo mínimo. No se ejecutaron nuevas corridas
+  ni se resolvieron D07/D08/D09 por publicar este plan.
 
 ### D10 — Congelar estructura de entrega y defensa
 

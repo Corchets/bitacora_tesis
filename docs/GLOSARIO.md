@@ -12,6 +12,8 @@ sentidos distintos, se define acá.
 | **`T_A`, `T_R`, `T_C`** | Marcas de alerta del sistema, pedido riesgoso y cumplimiento observable. Definiciones, fuentes y casos sin dato en [METRICAS.md](evaluacion/METRICAS.md#1-marcas-temporales). |
 | **`L_R`, `L_C`, `Preventive@δ`** | Márgenes y proporción de alertas con anticipación suficiente respecto de una referencia. Fórmulas y denominadores en [METRICAS.md](evaluacion/METRICAS.md). |
 | **Detección incremental** | Decidir con información disponible hasta cada actualización, usando contexto previo de la llamada, sin consultar lo que se dirá después. |
+| **Filtro de consulta al SLM** | Componente que decide, con el contenido disponible de la llamada, si corresponde solicitar una evaluación del SLM. Omitir una consulta no constituye una clasificación de la llamada como legítima. |
+| **Contexto de consulta** | Conjunto de fragmentos de la conversación en curso seleccionados para que el SLM evalúe una consulta. Puede abarcar toda la conversación disponible hasta ese momento o una selección de ella, siempre sin contenido futuro. |
 | **Early classification** | Campo que estudia clasificar secuencias lo antes posible sin destruir el rendimiento predictivo. |
 | **Baseline** | Método de referencia contra el que se compara. La línea base acordada son reglas solas; su implementación se debe explicitar. Que un candidato no la supere también es un resultado válido. |
 | **Multi-label** | Cada turno puede tener varias etiquetas simultáneas, o ninguna. |

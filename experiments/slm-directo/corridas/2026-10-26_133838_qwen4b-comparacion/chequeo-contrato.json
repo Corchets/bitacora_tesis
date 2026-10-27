@@ -1,0 +1,11 @@
+{
+  "ollama_version": "0.40.8",
+  "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+  "contrato": "ok",
+  "muestra": {
+    "riesgo": 0,
+    "alerta_sugerida": false,
+    "motivo": "Solicitud válida y segura.",
+    "evidencia": "El usuario solicitó una respuesta en formato JSON sin contenido malicioso ni intentos de inyección."
+  }
+}

@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import platform
@@ -34,6 +35,8 @@ from pathlib import Path
 import casos
 from cliente_ollama import URL_POR_DEFECTO, ClienteOllama, ErrorOllama
 from detectores import HABLANTES, PROMPTS, DetectorReglas, DetectorSLM, Respuesta, cargar_prompt, esquema_de, huella
+from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion
+from tito_real import ARTEFACTO_POR_DEFECTO, TitoReal, cargar_artefacto
 
 RAIZ = Path(__file__).resolve().parent
 POLITICA = "aviso_unico_primer_true_valido"
@@ -59,6 +62,12 @@ COLUMNAS = [
     "tokens_prompt",
     "tokens_salida",
     "crudo",
+    "consulta",
+    "tito_puntaje",
+    "tito_error",
+    "indicio_linea",
+    "indicio_texto",
+    "indicio_puntaje",
 ]
 
 
@@ -86,6 +95,9 @@ class Llamada:
 
 def procesar_caso(detector, lineas: list[casos.Linea]):
     """Entrega las líneas de a una y devuelve (n, línea, respuesta, aviso) por actualización."""
+    reiniciar = getattr(detector, "reiniciar", None)
+    if callable(reiniciar):
+        reiniciar()  # el filtro reinicia activación e indicio entre llamadas
     llamada = Llamada()
     for n, linea in enumerate(lineas, start=1):
         disponibles = llamada.agregar(linea)
@@ -150,6 +162,33 @@ def info_maquina() -> dict:
 def _lista(valor: str) -> list[str]:
     """Valores separados por coma, sin vacíos ni repetidos (un repetido duplicaría filas)."""
     return list(dict.fromkeys(v.strip() for v in valor.split(",") if v.strip()))
+
+
+def _puntajes_tito(espec: str) -> dict[int, float]:
+    """'4=0.9,5=0.8' → {4: 0.9, 5: 0.8}. Vacío → {} (todo puntúa 0,0)."""
+    puntajes: dict[int, float] = {}
+    for parte in _lista(espec):
+        try:
+            linea, puntaje = parte.split("=", 1)
+            puntajes[int(linea)] = float(puntaje)
+        except ValueError:
+            sys.exit(f"Puntaje de Tito inválido {parte!r}: usá 'linea=puntaje', p. ej. '4=0.9'.")
+    return puntajes
+
+
+def _lineas_tito(espec: str) -> set[int]:
+    """'2,5' → {2, 5}. Vacío → set()."""
+    lineas: set[int] = set()
+    for parte in _lista(espec):
+        try:
+            lineas.add(int(parte))
+        except ValueError:
+            sys.exit(f"Línea de fallo de Tito inválida {parte!r}: usá números, p. ej. '2'.")
+    return lineas
+
+
+def sha_archivo(ruta: Path) -> str:
+    return hashlib.sha256(Path(ruta).read_bytes()).hexdigest()
 
 
 def elegir_casos(args) -> list[str]:
@@ -256,6 +295,12 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "tokens_prompt": "" if r.tokens_prompt is None else r.tokens_prompt,
         "tokens_salida": "" if r.tokens_salida is None else r.tokens_salida,
         "crudo": r.crudo,
+        "consulta": r.consulta,
+        "tito_puntaje": "" if r.tito_puntaje is None else round(r.tito_puntaje, 3),
+        "tito_error": r.tito_error,
+        "indicio_linea": "" if r.indicio_linea is None else r.indicio_linea,
+        "indicio_texto": r.indicio_texto,
+        "indicio_puntaje": "" if r.indicio_puntaje is None else round(r.indicio_puntaje, 3),
     }
 
 
@@ -269,6 +314,8 @@ def _mostrar(carpeta: Path) -> str:
 def _marca(r: Respuesta, aviso: bool) -> str:
     if not r.valida:
         return "x"
+    if r.consulta == "omitida":
+        return "o"  # actualización procesada sin consultar al SLM (no es fallo)
     if aviso:
         return "A"
     return "a" if r.alerta_sugerida else "."
@@ -285,6 +332,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
     p.add_argument("--sin-reglas", action="store_true", help="no correr el comparador de reglas")
     p.add_argument("--reglas", default="v1", help="versiones del comparador de reglas separadas por coma: v1 (laboratorio) y/o v2 (reglas_v2.py)")
+    p.add_argument("--filtro-tito", action="store_true", help="agregar por cada SLM su variante filtrada Tito→SLM (Tito simulado, #69)")
+    p.add_argument("--tito-real", action="store_true", help="usar Tito real (RoBERTuito congelado + única logreg seed 42, #70) en vez del guion")
+    p.add_argument("--tito-modelo", type=Path, default=ARTEFACTO_POR_DEFECTO, help="artefacto del clasificador Tito")
+    p.add_argument("--tito-umbral", type=float, default=UMBRAL_TITO, help="umbral de derivación al SLM (convención exploratoria, igualdad activa)")
+    p.add_argument("--tito-puntajes", default="", help="puntajes simulados por línea, p. ej. '4=0.9,5=0.8' (lo no listado puntúa 0,0)")
+    p.add_argument("--tito-fallo-en", default="", help="líneas donde Tito falla técnicamente, p. ej. '2'")
     p.add_argument("--url", default=URL_POR_DEFECTO, help="dirección de Ollama")
     p.add_argument("--num-ctx", type=int, default=4096, help="contexto del modelo en tokens")
     p.add_argument("--seed", type=int, default=42)
@@ -315,6 +368,10 @@ def main(argv: list[str] | None = None) -> int:
     modelos = [] if args.solo_reglas else _lista(args.modelos)
     if not modelos and not args.solo_reglas:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b) o usá --solo-reglas.")
+    if args.tito_real and not args.filtro_tito:
+        sys.exit("El Tito real (--tito-real) solo actúa con --filtro-tito.")
+    if args.tito_real and not Path(args.tito_modelo).exists():
+        sys.exit(f"No existe el artefacto Tito {args.tito_modelo}: generálo con entrenar_tito.py.")
     prompts = _lista(args.prompts)
     hablantes = _lista(args.hablantes)
     for v in prompts:
@@ -349,12 +406,22 @@ def main(argv: list[str] | None = None) -> int:
         for v in versiones_reglas:
             d = DetectorReglas(v)
             detectores.append(({"config": d.nombre, "detector": "reglas", "modelo": "", "prompt": "", "hablantes": ""}, d))
+    tito_compartido = None
+    if args.filtro_tito and args.tito_real:
+        # Un solo Tito real para toda la corrida: cargarlo no reentrena por
+        # conversación, instancia ni SLM (#70).
+        tito_compartido = TitoReal(args.tito_modelo)
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
                 d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
                 etiqueta = {"config": f"slm|{modelo}|{variante}|{h}", "detector": "slm", "modelo": modelo, "prompt": variante, "hablantes": h}
                 detectores.append((etiqueta, d))
+                if args.filtro_tito:
+                    tito = tito_compartido if tito_compartido is not None else TitoGuion(_puntajes_tito(args.tito_puntajes), _lineas_tito(args.tito_fallo_en))
+                    f = FlujoTitoSLM(tito, d, args.tito_umbral)
+                    etiqueta_f = {"config": f"tito-slm|{modelo}|{variante}|{h}", "detector": "tito-slm", "modelo": modelo, "prompt": variante, "hablantes": h}
+                    detectores.append((etiqueta_f, f))
     if not detectores:
         sys.exit("No quedó ningún detector para correr.")
 
@@ -367,6 +434,22 @@ def main(argv: list[str] | None = None) -> int:
         "codigo": info_codigo(),
         "maquina": info_maquina(),
         "politica": POLITICA,
+        "filtro_tito": None if not args.filtro_tito else (
+            {
+                "tito": "real-robertuito-logreg",
+                "umbral": args.tito_umbral,
+                "modelo": str(args.tito_modelo),
+                "artefacto_sha256": sha_archivo(args.tito_modelo),
+                "encoder": cargar_artefacto(args.tito_modelo)["encoder"],
+            }
+            if args.tito_real
+            else {
+                "tito": "guion-simulado",
+                "umbral": args.tito_umbral,
+                "puntajes": _puntajes_tito(args.tito_puntajes),
+                "fallo_en": sorted(_lineas_tito(args.tito_fallo_en)),
+            }
+        ),
         "particion": args.particion,
         "ollama": None if ollama is None else {"url": args.url, **ollama},
         "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
@@ -383,7 +466,7 @@ def main(argv: list[str] | None = None) -> int:
 
     guardar_manifiesto()
     print(f"Corrida: {_mostrar(carpeta)}  ({len(ids)} casos, {len(detectores)} configuraciones)")
-    print("Marcas por línea: . sin alerta · A aviso emitido · a alerta posterior al aviso · x fallo\n")
+    print("Marcas por línea: . sin alerta · A aviso emitido · a alerta posterior al aviso · o SLM no consultado · x fallo\n")
 
     try:
         with (carpeta / "actualizaciones.csv").open("w", encoding="utf-8-sig", newline="") as f:

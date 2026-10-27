@@ -64,7 +64,11 @@ MAXIMO_TOKENS_RESPUESTA = 512
 
 @dataclass
 class Respuesta:
-    """Lo que un detector dice sobre una actualización. Inválida = fallo, no predicción."""
+    """Lo que un detector dice sobre una actualización. Inválida = fallo, no predicción.
+
+    Los campos de filtro (`consulta`, `tito_*`, `indicio_*`) solo los usa el
+    flujo Tito→SLM (#69): en el comparador directo quedan vacíos.
+    """
 
     valida: bool
     error: str = ""
@@ -77,6 +81,12 @@ class Respuesta:
     ms: float | None = None
     tokens_prompt: int | None = None
     tokens_salida: int | None = None
+    consulta: str = ""
+    tito_puntaje: float | None = None
+    tito_error: str = ""
+    indicio_linea: int | None = None
+    indicio_texto: str = ""
+    indicio_puntaje: float | None = None
 
 
 def cargar_prompt(variante: str) -> str:
@@ -193,7 +203,14 @@ class DetectorSLM:
         }
 
     def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
-        usuario = armar_mensaje_usuario(lineas, self.hablantes)
+        return self.evaluar_mensaje(armar_mensaje_usuario(lineas, self.hablantes), lineas)
+
+    def evaluar_mensaje(self, usuario: str, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
+        """Evalúa un mensaje ya armado (el filtro agrega el bloque de indicio).
+
+        `lineas` es el historial íntegro disponible, para validar la evidencia
+        citada sin texto futuro.
+        """
         estimado = math.ceil((len(self.prompt) + len(usuario)) / CARACTERES_POR_TOKEN)
         if estimado > self.num_ctx * FRACCION_MAXIMA_DEL_CONTEXTO:
             # No se recorta en silencio (#50): se informa como fallo.

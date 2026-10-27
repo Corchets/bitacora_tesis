@@ -208,3 +208,207 @@ que genera el build; el resto del contenido es editorial del PR. El simulador
 usa valores sintéticos e ilustrativos elegidos a mano: no son mediciones de
 rendimiento y no cierran D08. Esta adopción no resuelve D07, D08, D09 ni D11
 (abierta hasta que los cuatro ratifiquen «solo transcripción»).
+
+## 7. Plan de experimento: Tito como filtro de consulta al SLM
+
+**Fecha:** 2026-10-26. **Issue de implementación:** [#68](https://github.com/Corchets/bitacora_tesis/issues/68),
+relacionado con [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
+Plan elaborado mediante entrevista con el usuario. Sus acuerdos son para un
+experimento de desarrollo: no eligen la arquitectura final de
+[D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector), ni cierran
+[D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) o
+[D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+No se inició entrenamiento ni inferencia como parte de este plan.
+
+### 7.1 Pregunta y acuerdos de la entrevista
+
+¿Cuántas consultas y cuánto cómputo total se ahorran al activar el SLM ante una
+sospecha de Tito, y qué avisos se pierden, agregan o retrasan frente al SLM directo?
+La prioridad acordada es conservar detección, falsas alarmas y anticipación.
+
+- Ensayo sobre texto: ocho conversaciones de desarrollo y dos variantes por
+  cada SLM ya utilizado. El usuario amplió Q9 a todos los modelos previos; se
+  conservan un único prompt, seed y umbral, sin barrido adicional ni audio.
+- Tito será RoBERTuito congelado más regresión logística: se ajusta solamente la
+  regresión, conservando los parámetros de RoBERTuito.
+- Antes de activarse el SLM, Tito puntúa cada fragmento nuevo. La primera sospecha
+  activa el SLM; desde esa línea el SLM evalúa cada nueva línea durante el resto
+  de la conversación. Solo el SLM puede sugerir el aviso.
+- El [contexto de consulta](../GLOSARIO.md) incluye, para este experimento,
+  **todas las líneas disponibles desde el comienzo hasta la consulta actual**,
+  incluida la que activó a Tito. No se resume ni recorta el historial. Otra
+  selección de contexto corresponderá a otro experimento.
+- Separado del diálogo se entrega el fragmento completo que activó a Tito, su
+  número de línea y puntaje, declarado explícitamente como un indicio falible.
+  El encoder actual no identifica palabras causales ni genera explicaciones.
+- Ningún modelo recibe clase, etiquetas humanas ni marcas de referencia. Una
+  llamada que nunca se deriva al SLM sigue contando al evaluar.
+
+Ejemplo del bloque adicional para revisar al implementar el prompt:
+
+> El filtro previo señaló para revisión la línea {n}: «{fragmento}».
+> Su puntaje fue {puntaje}. Es una sospecha preliminar, puede ser incorrecta y no
+> confirma una estafa. Evaluá el contexto de consulta completo y decidí si el
+> indicio está justificado; podés descartarlo.
+
+La comparación incorpora activación selectiva e indicio adicional juntos. No
+aísla el aporte de cada cambio. El SLM directo es el comparador del experimento;
+las reglas conservan su condición de baseline del proyecto.
+
+### 7.2 Datos elegidos antes de ejecutar
+
+Banco histórico:
+[`bb542e1`, rama `nacho1706/feature-training-data`](https://github.com/Corchets/bitacora_tesis/tree/bb542e130e7a67a82e376a75a0438a15de32f4a6/experiments/laboratorio/entrenamiento_tito).
+Contiene 5.520 textos exportados de 276 familias; los 480 apartados no se usan
+para ajustar. Esa entrega produjo datos sintéticos, no un detector entrenado.
+Conservar metadatos de familia y revisar coincidencias con los casos elegidos:
+ausencia de duplicados literales no demuestra independencia semántica.
+
+El usuario aceptó estos ocho casos. Suman 105 líneas: cada pasada del SLM directo
+requiere 105 consultas de evaluación, además del calentamiento. Las marcas
+actuales son provisionales; ninguno tiene revisión humana confirmada.
+
+| Caso y texto completo | Clase | Líneas | `T_R` / `T_C` en líneas |
+|---|---|---:|---|
+| [TR-04: pedido tras charla larga](../../experiments/slm-directo/casos/texto/TR-04-pedido-tras-charla-larga.txt) | vishing | 30 | 26 / 27 |
+| [TR-06: alerta bancaria legítima](../../experiments/slm-directo/casos/texto/TR-06-banco-alerta-legitima.txt) | legítima difícil | 12 | ausentes |
+| [TR-07: pedido partido](../../experiments/slm-directo/casos/texto/TR-07-pedido-partido-en-dos-lineas.txt) | vishing | 10 | 7 / 9 |
+| [TR-08: código del candado](../../experiments/slm-directo/casos/texto/TR-08-frase-cortada-candado.txt) | legítima difícil | 7 | ausentes |
+| [Soporte remoto fraudulento](../../experiments/slm-directo/casos/texto/SC-SOPORTE-REMOTO-01-e01.txt) | vishing | 11 | 6 / ausente |
+| [Soporte legítimo](../../experiments/slm-directo/casos/texto/LG-SUPPORT-INFO-01-e02.txt) | legítima difícil | 13 | ausentes |
+| [Familiar fraudulento](../../experiments/slm-directo/casos/texto/SC-FAMILIAR-DINERO-01-e01.txt) | vishing | 12 | 9 / ausente |
+| [TR-11: familiar legítimo](../../experiments/slm-directo/casos/texto/TR-11-familiar-real-pide-plata.txt) | legítima difícil | 10 | ausentes |
+
+### 7.3 Orden de implementación y evidencia esperada
+
+1. **Preparar datos y configuración.** Recuperar únicamente el material necesario
+   del banco histórico, verificar exportaciones y hashes, revisar los ocho casos
+   y registrar ambigüedades sin cambiar silenciosamente las referencias. No usar
+   la reserva. Verificar los modelos y fijar prompt, umbral y política de fallos
+   antes de medir, según §7.4.
+2. **Ajustar y guardar una sola regresión.** Reutilizar la representación de
+   [DetectorEncoder](../../experiments/laboratorio/detector_encoder.py): encoder
+   sin ajuste de pesos, promedio con máscara y seed 42 para la regresión.
+   Verificar el límite de 128 tokens por fragmento y registrar truncamientos.
+   Persistir clasificador y metadatos para no reentrenar por llamada.
+3. **Agregar el filtro al ensayo textual.** Reutilizar la acumulación incremental
+   de [correr.py](../../experiments/slm-directo/correr.py) y el contrato de
+   [DetectorSLM](../../experiments/slm-directo/detectores.py). Distinguir
+   actualización procesada, SLM no consultado, consulta válida y fallo. Reiniciar
+   activación, contexto e indicio al cambiar de conversación.
+4. **Preparar el mensaje.** Enviar contexto completo e indicio separados; conservar
+   la línea y puntaje de la primera activación durante esa llamada. El puntaje
+   no estima probabilidad de fraude real. Ante exceso de contexto registrar fallo
+   explícito, sin recorte silencioso. Guardar prompt completo y hash.
+5. **Adaptar la evaluación.** El resumen actual exige una fila por línea y excluye
+   casos sin respuestas válidas. Las omisiones deliberadas necesitan un estado
+   propio: una llamada completa sin derivación cuenta como sin aviso. Sumar costo
+   de Tito y consultas fallidas, además del cómputo válido del SLM.
+6. **Verificar el recorrido y ejecutar dos pasadas por modelo.** Con dobles de prueba,
+   comprobar activación persistente, historial íntegro, aislamiento entre llamadas
+   y conteo de casos nunca derivados. Después comparar SLM directo y Tito→SLM
+   sobre los mismos ocho textos, con igual configuración para ambas variantes
+   de cada modelo. Ejecutar modelos secuencialmente y liberar el anterior antes
+   de cargar el siguiente. Separar carga y calentamiento del cómputo por
+   actualización; registrar también el total.
+7. **Comparar caso por caso.** Informar primera derivación, primer aviso, motivos,
+   consultas evitadas, tokens, costo total y fallos. Mantener visibles las estafas
+   sin aviso y legítimas con falsas alarmas. Usar [METRICAS.md](../evaluacion/METRICAS.md):
+   en texto los márgenes son posiciones, sin segundos ni RTF inventados. Revisar
+   los avisos previos al pedido contra su evidencia.
+
+El manifiesto registrará datos y hashes, partición, seed, código y diff local,
+librerías/runtime, revisión de encoder y tokenizador, clasificador ajustado,
+modelo SLM y digest, prompt, parámetros, hardware y comandos de reproducción.
+Dos pasadas por modelo sirven para identificar fallos y decidir si continuar;
+no prueban generalización, estabilidad ni ausencia de degradación.
+
+### 7.4 Configuración acordada y requisitos de ejecución
+
+Acuerdos Q9–Q11 del 2026-10-26: todos los modelos previamente usados, umbral
+exploratorio fijo y análisis de sensibilidad de las marcas. Son acuerdos locales
+del experimento, no una aprobación del equipo/tutor ni un cierre de D08/D09.
+
+El inventario de ejecuciones contiene seis artefactos SLM distintos. Los digests
+Qwen completos están en los manifiestos enlazados; la tabla muestra su prefijo.
+
+| Artefacto que se debe preparar | Digest histórico, prefijo | Evidencia de uso previo |
+|---|---|---|
+| `qwen3.5:0.8b` | `de63045f2975` | [manifiesto 2026-10-22](../../experiments/slm-directo/corridas/2026-10-22_111736_win-0.8b-v1v2-nb32/manifiesto.json) |
+| `qwen3.5:0.8b-q8_0` | `7c00f78aed0f` | [manifiesto 2026-10-23](../../experiments/slm-directo/corridas/2026-10-23_153722_linux-0.8b-v1v2-nb32/manifiesto.json) |
+| `qwen3.5:2b-q8_0` | `0689d44085e0` | [manifiesto 2026-10-21](../../experiments/slm-directo/corridas/2026-10-21_201039_m1-2b-v1v2-nb32/manifiesto.json) |
+| `qwen3.5:4b-q4_K_M` | `d8b0f5e9760c` | [manifiesto 2026-10-23](../../experiments/slm-directo/corridas/2026-10-23_144554_linux-4b-v1v2-cv2-nb32/manifiesto.json) |
+| `qwen3.5:9b-q4_K_M` | `56671c2ab938` | [manifiesto 2026-10-23](../../experiments/slm-directo/corridas/2026-10-23_115920_linux-9b-v1v2-cv2-nb32/manifiesto.json) |
+| `llama3.2:1b-instruct-q4_K_M` | no registrado | [CSV de la cascada de 2026-09-28](../../experiments/laboratorio/resultados/2026-09-28/resultados-2026-09-28-cascada-robertuito-llama3.2-1b-instruct-q4_K_M.csv) |
+
+Los tags históricos `qwen3.5:2b` y `qwen3.5:4b` comparten digest con sus variantes
+explícitas de la tabla: no se duplican. Los dos 0.8B tienen digests diferentes;
+no se presume la cuantización del tag sin sufijo. Llama se incluye por el pedido
+de todos los modelos, pero se ensaya ahora con el contrato textual actual: sus
+cifras históricas, obtenidas con otra política y otros datos, no son comparables.
+SmolLM2 aparece como candidato, sin evidencia de ejecución; no integra esta lista.
+
+La matriz es **6 artefactos × 8 conversaciones × 2 variantes = 96 evaluaciones
+de conversación**. Implica 630 consultas del SLM directo y hasta otras 630 del
+flujo filtrado, además del calentamiento. El mismo ajuste de Tito se reutiliza
+para los seis; no se ajusta una cabeza por SLM. El análisis alternativo de marcas
+no requiere repetir inferencia.
+
+- **Parámetros comunes:** prompt `tarea`, hablantes `ab`, seed 42, temperatura 0,
+  `num_ctx=4096` y `num_batch=32`; desactivar razonamiento cuando el runtime/modelo
+  admita `think=false`. Verificar JSON antes de medir; registrar cualquier
+  incompatibilidad sin sustituir silenciosamente un modelo. Ambas variantes de
+  un mismo artefacto deben usar idénticas opciones y timeout.
+- **Runtime y modelos:** fijar una versión de runtime para la comparación nueva
+  y comprobar los digests históricos de Qwen. Para Llama registrar el digest
+  recuperado y el límite de trazabilidad histórica. La consulta local del
+  2026-10-26 encontró otro runtime sin esos Qwen y el servicio histórico apagado:
+  preparar el entorno es requisito previo, todavía no completado. Las cifras
+  nuevas no se presentan como reproducción exacta de máquinas/versiones antiguas.
+- **Derivación y fallos:** ajustar una vez sobre los 5.520 textos y activar ante
+  `puntaje ≥ 0,5`, sin calibrarlo con los ocho casos ni reutilizar la zona gris
+  antigua. Es una convención exploratoria, no un umbral validado para conservar
+  sensibilidad ni una probabilidad real. Si Tito falla, activar el SLM y registrar
+  el fallo, sin tratarlo como evidencia de fraude.
+- **Referencias ambiguas:** informar marcas actuales y sensibilidad con las mismas
+  predicciones: TR-04 con 21/22 además de 26/27; TR-07 con 8/9 además de 7/9,
+  según sus notas. No adjudica cuál lectura es correcta ni cambia D07.
+
+**Salida esperada:** una tabla por modelo y conversación con ahorro, primera
+derivación, primera alerta, referencias, errores y costos; interpretación de cada
+degradación observada antes de decidir otra iteración. La especificación y los
+criterios de terminado se publicaron en #68 con `ready-for-agent` mediante
+`to-spec`; el usuario confirmó como punto principal de prueba el recorrido
+incremental completo hasta su traza y reporte, con Tito y SLM simulados. La
+publicación no implica ejecución ni declara completado o cerrado #51.
+El usuario aprobó la descomposición de #68 en seis subissues mediante `to-tickets`:
+la implementación se toma desde sus relaciones nativas en GitHub. La primera
+entrega es [#69](https://github.com/Corchets/bitacora_tesis/issues/69), recorrido
+completo con modelos simulados; este documento no mantiene otro backlog.
+
+### 7.5 Continuación acordada: validar Tito antes de optimizar consultas
+
+**Fecha:** 2026-10-27. La especificación y los criterios de terminado de esta
+continuación viven en [#95](https://github.com/Corchets/bitacora_tesis/issues/95),
+relacionado con #51 y los antecedentes #68–#74. El usuario confirmó el recorrido
+completo de preparación, ajuste, persistencia, carga, conversación y reporte
+como punto principal de prueba. La publicación no ejecuta ese experimento.
+
+El primer entregable es una evaluación independiente revisada por el equipo y
+un diagnóstico del Tito actual. Para este trabajo se mantiene RoBERTuito y se
+comparan frase aislada y contexto reciente; primero se evalúa el encoder
+congelado y, si la calidad es insuficiente, se permite fine-tuning del mismo
+RoBERTuito. Se separan entrenamiento, validación y evaluación independiente
+por conversación, semilla y variantes relacionadas. El banco completo ya fue
+visto por el artefacto actual y los ocho casos ya fueron analizados: dividirlos
+ahora no los convierte en una evaluación independiente de ese artefacto.
+
+Después se vuelve a medir directo y filtrado, deteniendo ambos al primer aviso
+emitido, y se compara una política que pueda volver a filtrar cuando el SLM
+descarta la alerta. Esa política es una candidata. Se prioriza aviso oportuno,
+sin perder detecciones ni aumentar falsas alarmas; un retraso puede considerarse
+si conserva margen preventivo suficiente. El valor mínimo de ese margen y las
+configuraciones restantes requieren acuerdo antes de su fase, como explicita
+#95 en relación con D07/D08/D09. No se congelan aquí la arquitectura final ni
+el protocolo del proyecto; el plan original de §7.1–§7.4 conserva su condición
+de antecedente de la primera comparación.

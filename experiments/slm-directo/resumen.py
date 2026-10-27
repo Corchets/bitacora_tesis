@@ -204,6 +204,107 @@ def tabla_por_caso(analisis: dict) -> list[str]:
     return filas
 
 
+def configs_filtradas(manifiesto: dict) -> list[str]:
+    """Configuraciones Tito→SLM de la corrida (vacío en corridas directas viejas)."""
+    return [c["config"] for c in manifiesto.get("configs", []) if c["config"].startswith("tito-slm|")]
+
+
+def analisis_filtro(manifiesto: dict, filas: list[dict], analisis: dict) -> dict:
+    """Derivación, ahorro y costo por configuración filtrada y caso.
+
+    Una fila omitida (`consulta == "omitida"`) es una actualización procesada
+    sin consultar al SLM: no es fallo ni predicción de legitimidad. Su `ms`
+    es solo costo de Tito; en filas consultadas es Tito + SLM.
+    """
+    resultado: dict[str, dict[str, dict]] = {}
+    for config in configs_filtradas(manifiesto):
+        filas_cfg = [f for f in filas if f["config"] == config]
+        por_caso: dict[str, list[dict]] = {}
+        for f in filas_cfg:
+            por_caso.setdefault(f["case_id"], []).append(f)
+        casos_cfg = {}
+        for case_id, fs in por_caso.items():
+            fs = sorted(fs, key=lambda f: int(f["linea"]))
+            consultadas = [f for f in fs if (f.get("consulta") or "") in ("slm_valida", "slm_fallo")]
+            evitadas = [f for f in fs if (f.get("consulta") or "") == "omitida"]
+            derivacion = min((int(f["linea"]) for f in consultadas), default=None)
+            ms_total = sum(float(f["ms"]) for f in fs if f.get("ms"))
+            tokens = sum(
+                (int(f["tokens_prompt"]) if f.get("tokens_prompt") else 0)
+                + (int(f["tokens_salida"]) if f.get("tokens_salida") else 0)
+                for f in consultadas
+            )
+            c = analisis[config][case_id]
+            casos_cfg[case_id] = {
+                "derivacion": derivacion,
+                "consultas": len(consultadas),
+                "evitadas": len(evitadas),
+                "fallos_slm": sum(1 for f in consultadas if f.get("consulta") == "slm_fallo"),
+                "fallos_tito": sum(1 for f in fs if (f.get("tito_error") or "").strip()),
+                "ms_total": ms_total,
+                "tokens_slm": tokens,
+                "aviso": c["aviso"],
+                "categoria": c["categoria"],
+            }
+        resultado[config] = casos_cfg
+    return resultado
+
+
+def seccion_filtro(manifiesto: dict, analisis: dict, detalle: dict) -> list[str]:
+    salida = ["## Filtro Tito→SLM (derivación y ahorro)", ""]
+    filtro = manifiesto.get("filtro_tito") or {}
+    origen = "Tito real" if str(filtro.get("tito", "")).startswith("real-") else "Tito simulado"
+    salida.append(
+        f"{origen} (`{filtro.get('tito', 'no informado')}`), umbral {filtro.get('umbral', '—')}: "
+        "el primer puntaje ≥ umbral deriva al SLM en esa misma línea y lo mantiene activo; "
+        "un fallo técnico de Tito también deriva, sin fabricar sospecha."
+    )
+    salida.append(
+        "Una conversación completa nunca derivada **conserva su denominador**: vishing sin aviso "
+        "cuenta como falso negativo y legítima sin aviso como verdadero negativo."
+    )
+    salida.append("")
+    for config, cs in detalle.items():
+        total_consultas = sum(c["consultas"] for c in cs.values())
+        total_evitadas = sum(c["evitadas"] for c in cs.values())
+        total_ms = sum(c["ms_total"] for c in cs.values())
+        total_fallos_tito = sum(c.get("fallos_tito", 0) for c in cs.values())
+        if total_fallos_tito:
+            salida.append(
+                f"**Fallos técnicos de Tito: {total_fallos_tito}** (esas actualizaciones "
+                "derivaron por fallo, sin puntaje ni sospecha; no son decisiones del filtro)."
+            )
+        salida += [
+            f"### `{config}`",
+            "",
+            f"Consultas al SLM: {total_consultas}; evitadas por el filtro: {total_evitadas}; "
+            f"costo Tito+SLM: {_ms(total_ms)} ms (omitidas: solo Tito; consultadas: Tito+SLM).",
+            "",
+            "| Caso | 1.ª derivación | Aviso | Consultas SLM | Evitadas | Fallos SLM | Costo ms |",
+            "|---|---|---|---|---|---|---|",
+        ]
+        for case_id, c in sorted(cs.items()):
+            salida.append(
+                f"| `{case_id}` | {c['derivacion'] or 'nunca'} | "
+                f"{('L' + str(c['aviso'])) if c['aviso'] else 'sin aviso'} | "
+                f"{c['consultas']} | {c['evitadas']} | {c['fallos_slm']} | {_ms(c['ms_total'])} |"
+            )
+        nunca = sorted(cid for cid, c in cs.items() if c["derivacion"] is None)
+        if nunca:
+            fn = [cid for cid in nunca if cs[cid]["categoria"] == "sin_aviso"]
+            tn = [cid for cid in nunca if cs[cid]["categoria"] == "sin_aviso_correcto"]
+            salida += ["", "Nunca derivados (permanecen en sus denominadores):"]
+            for cid in fn:
+                salida.append(f"- `{cid}` · vishing sin aviso (falso negativo visible).")
+            for cid in tn:
+                salida.append(f"- `{cid}` · legítima sin aviso (verdadero negativo).")
+            resto = [cid for cid in nunca if cid not in fn and cid not in tn]
+            for cid in resto:
+                salida.append(f"- `{cid}` · categoría `{cs[cid]['categoria']}`.")
+        salida.append("")
+    return salida
+
+
 def para_revisar(analisis: dict) -> list[str]:
     salida = ["### Falsas alarmas", ""]
     hubo = False
@@ -312,6 +413,9 @@ def armar_resumen(carpeta: Path, con_trayectorias: bool = False) -> str:
             mb = lambda b: "—" if not b else f"{b / 1024**2:,.0f}".replace(",", ".")
             lineas.append(f"| `{modelo}` | {_ms(m.get('carga_ms'))} | {mb(mem.get('size_bytes'))} | {mb(mem.get('size_vram_bytes'))} |")
         lineas += ["", "La memoria es la que informa Ollama (pesos + caché de contexto) en esta PC; no es una medición en Android."]
+    detalle_filtro = analisis_filtro(manifiesto, filas, analisis)
+    if detalle_filtro:
+        lineas += ["", *seccion_filtro(manifiesto, analisis, detalle_filtro)]
     if con_trayectorias:
         lineas += ["", *trayectorias(analisis)]
     return "\n".join(lineas) + "\n"
