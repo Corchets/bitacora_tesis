@@ -28,9 +28,7 @@ class Medicion(Servidor):
         self.carpeta: Path | None = None
 
     def crear_motor(self):
-        motor = MotorSherpaZipformer(str(self.args.modelo_asr), hilos=self.args.hilos)
-        motor.corte_silencio_s = self.args.corte_silencio
-        return motor
+        return MotorSherpaZipformer(str(self.args.modelo_asr), hilos=self.args.hilos)
 
     def difundir(self, mensaje):
         if mensaje["tipo"] == "error":
@@ -87,7 +85,7 @@ class Medicion(Servidor):
         fuentes = {r: {"tipo": "ejemplo", "escenario": ESCENARIO, "canal": c}
                    for r, c in (("otra", "izq"), ("protegida", "der"))}
         try:
-            await self.iniciar({"modo": "llamada", "fuentes": fuentes})
+            await self.iniciar({"modo": "llamada", "fuentes": fuentes, "corte_silencio_s": "auto"})
             await self.tarea_ejemplo
         finally:
             await self.cerrar_llamada()
@@ -121,7 +119,7 @@ def parse_args(argv=None):
     args = p.parse_args(argv)
     # Configuración de la demo (#75); no se negocia otro protocolo desde este comando.
     args.prompt, args.seed, args.ollama_url = "tarea", 42, replay.cliente_ollama.URL_POR_DEFECTO
-    args.disparo, args.corte_silencio, args.hilos = "final", 0.8, 2
+    args.disparo, args.corte_silencio, args.hilos = "final", "auto", 2
     return args
 
 

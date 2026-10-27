@@ -1,5 +1,7 @@
 // @ts-check
 
+import {crearSelectorCorte} from './corte-silencio.mjs';
+
 /**
  * UI de prueba; el panel conserva una única conexión y el ciclo de captura de #78.
  * @param {{iniciar: () => void, terminar: () => void, cambiar: () => void}} acciones
@@ -30,7 +32,7 @@ export function montarPruebaASR(acciones) {
     <div id="asr-contenido" hidden>
       <h2>Hablá y mirá cuándo se cierra cada frase</h2>
       <div class="ajustes">
-        <label>Corte de silencio <select id="asr-corte"><option value="0.5">0,5 s</option><option value="0.8" selected>0,8 s</option><option value="1.2">1,2 s</option></select></label>
+        <span id="asr-corte-lugar"></span>
         <label>Umbral de volumen (RMS) <input id="asr-umbral" type="number" min="0.0001" max="1" step="0.0001" value="0.005"></label>
         <button id="asr-iniciar" disabled>▶ Hablar</button><button id="asr-terminar" disabled>Terminar prueba</button>
       </div>
@@ -47,7 +49,8 @@ export function montarPruebaASR(acciones) {
   /** @template {HTMLElement} T @param {string} id @returns {T} */
   const el = id => /** @type {T} */ (seccion.querySelector(`#${id}`));
   const modo = /** @type {HTMLInputElement} */ (el('asr-modo'));
-  const corte = /** @type {HTMLSelectElement} */ (el('asr-corte'));
+  const corte = crearSelectorCorte('asr-corte');
+  el('asr-corte-lugar').replaceWith(corte.elemento);
   const umbral = /** @type {HTMLInputElement} */ (el('asr-umbral'));
   const iniciar = /** @type {HTMLButtonElement} */ (el('asr-iniciar'));
   const terminar = /** @type {HTMLButtonElement} */ (el('asr-terminar'));
@@ -65,7 +68,7 @@ export function montarPruebaASR(acciones) {
     volumen.value = 0;
     el('asr-rms').textContent = 'RMS 0.000';
     silencio.value = 0;
-    el('asr-espera').textContent = `0,00 / ${Number(corte.value).toFixed(2)} s`;
+    el('asr-espera').textContent = `0,00 / ${corte.segundos.toFixed(2)} s`;
   }
   function dibujarUmbral() { el('asr-umbral-linea').style.left = `${escala(Number(umbral.value))}%`; }
   function aplicarModo() {
@@ -75,17 +78,17 @@ export function montarPruebaASR(acciones) {
   }
   modo.onchange = aplicarModo;
   umbral.oninput = dibujarUmbral;
-  corte.onchange = limpiarNiveles;
-  iniciar.onclick = () => { if (umbral.reportValidity()) acciones.iniciar(); };
+  corte.alCambiar = limpiarNiveles;
+  iniciar.onclick = () => { if (corte.validar() && umbral.reportValidity()) acciones.iniciar(); };
   terminar.onclick = acciones.terminar;
   dibujarUmbral();
   return {
     get activa() { return modo.checked; },
-    get config() { return {corte_silencio_s: Number(corte.value), umbral_rms_silencio: Number(umbral.value)}; },
+    get config() { return {corte_silencio_s: corte.valor, umbral_rms_silencio: Number(umbral.value)}; },
     /** @param {boolean} conectada @param {boolean} ocupada @param {boolean} enLlamada */
     controles(conectada, ocupada, enLlamada) {
       modo.disabled = ocupada || enLlamada;
-      corte.disabled = umbral.disabled = ocupada || enLlamada;
+      corte.deshabilitado = umbral.disabled = ocupada || enLlamada;
       iniciar.disabled = !conectada || ocupada || enLlamada;
       terminar.disabled = !conectada || ocupada || !enLlamada;
     },
@@ -95,8 +98,8 @@ export function montarPruebaASR(acciones) {
         modo.checked = m.modo === 'asr'; aplicarModo();
         frases.clear(); el('asr-textos').replaceChildren(); limpiarNiveles();
         if (modo.checked) {
-          corte.value = String(m.corte_silencio_s); umbral.value = String(m.umbral_rms_silencio);
-          silencio.max = m.corte_silencio_s; dibujarUmbral();
+          corte.valor = m.corte_silencio_s; umbral.value = String(m.umbral_rms_silencio);
+          silencio.max = corte.segundos; dibujarUmbral();
         }
       }
       if (!modo.checked) return;

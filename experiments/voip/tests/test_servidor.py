@@ -33,7 +33,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.dir = Path(self.tmp.name)
         self.reloj = Reloj()
         args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2,
-                         corte_silencio=0.8)
+                         corte_silencio="auto")
         self.servidor = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
         self.servidor.preparar()
         await self.servidor.preparada
@@ -55,13 +55,13 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 if m["tipo"] == tipo:
                     return m
 
-    def inicio(self, escenario=None):
+    def inicio(self, escenario=None, corte="auto"):
         fuentes = {r: {"tipo": "cliente"} for r in ("otra", "protegida")}
         if escenario:
             fuentes = {r: {"tipo": "ejemplo", "escenario": escenario, "canal": c}
                        for r, c in (("otra", "izq"), ("protegida", "der"))}
         return json.dumps({"tipo": "iniciar", "modo": "llamada", "fuentes": fuentes,
-                           "corte_silencio_s": None, "umbral_rms_silencio": None})
+                           "corte_silencio_s": corte, "umbral_rms_silencio": None})
 
     async def test_inicio_informa_detector_fijo_del_servidor(self):
         from servidor import servir_panel
@@ -150,16 +150,57 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                     self.assertEqual(m["detector"]["evaluaciones"], 0)
                     self.assertEqual(m["inicio_panel"], mensaje)
 
-    async def test_llamada_restaura_corte_fijo_y_rechaza_ajustes_invalidos(self):
+    async def test_corte_valido_en_llamada_y_prueba_y_manifiesto_conserva_lo_elegido(self):
+        async with connect(self.url + "/panel") as panel:
+            for modo, corte in (("llamada", "auto"), ("llamada", 0.1), ("llamada", 3.0), ("llamada", 1),
+                                ("asr", "auto"), ("asr", 0.1), ("asr", 3.0), ("asr", 0.8)):
+                if modo == "llamada":
+                    mensaje = json.loads(self.inicio(corte=corte))
+                else:
+                    mensaje = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
+                               "corte_silencio_s": corte, "umbral_rms_silencio": 0.005}
+                await panel.send(json.dumps(mensaje))
+                inicio = await self.evento(panel, "inicio")
+                self.assertEqual(inicio["corte_silencio_s"], corte)
+                nivel = (await self.evento(panel, "niveles"))["canales"]
+                # El panel dibuja la barra de silencio contra el corte numérico del motor.
+                esperado = 0.8 if corte == "auto" else corte
+                self.assertTrue(all(c["corte_silencio_s"] == esperado for c in nivel.values()))
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                fin = await self.evento(panel, "fin")
+                m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+                self.assertEqual(m["config"]["corte_silencio_s"], corte)
+                self.assertEqual(m["config"]["endpoint_nativo"], corte == "auto")
+                self.assertEqual(m["inicio_panel"], mensaje)
+
+    async def test_corte_invalido_se_rechaza_sin_abrir_carpeta(self):
+        llamada = json.loads(self.inicio())
         prueba = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
                   "corte_silencio_s": 1.2, "umbral_rms_silencio": 0.03}
         async with connect(self.url + "/panel") as panel:
-            for campo, valor in (("corte_silencio_s", 1), ("corte_silencio_s", []),
-                                 ("umbral_rms_silencio", 0), ("umbral_rms_silencio", True),
+            for base in (llamada, prueba):
+                for corte in (0, 0.0, 0.05, 3.1, 0.15, 1.25, -1, True, False, "0.5", "Auto", "", None, [], {},
+                              float("nan"), float("inf")):
+                    await panel.send(json.dumps({**base, "corte_silencio_s": corte}))
+                    error = await self.evento(panel, "error")
+                    self.assertIn("corte", error["mensaje"].lower())
+                mensaje = dict(base)
+                del mensaje["corte_silencio_s"]
+                await panel.send(json.dumps(mensaje))
+                await self.evento(panel, "error")
+            for campo, valor in (("umbral_rms_silencio", 0), ("umbral_rms_silencio", True),
                                  ("umbral_rms_silencio", float("nan")), ("umbral_rms_silencio", "0.01")):
                 await panel.send(json.dumps({**prueba, campo: valor}))
                 await self.evento(panel, "error")
+            # En la llamada el umbral queda fijo.
+            await panel.send(json.dumps({**llamada, "umbral_rms_silencio": 0.01}))
+            await self.evento(panel, "error")
             self.assertEqual(list(self.dir.iterdir()), [])
+
+    async def test_llamada_vuelve_al_umbral_fijo_despues_de_una_prueba(self):
+        prueba = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
+                  "corte_silencio_s": 1.2, "umbral_rms_silencio": 0.03}
+        async with connect(self.url + "/panel") as panel:
             await panel.send(json.dumps(prueba))
             await self.evento(panel, "inicio")
             async with connect(self.url + "/audio?rol=otra") as otra:
@@ -169,14 +210,14 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await self.evento(panel, "fin")
             await panel.send(self.inicio())
             inicio = await self.evento(panel, "inicio")
-            self.assertEqual(inicio["corte_silencio_s"], 0.8)
+            self.assertEqual(inicio["corte_silencio_s"], "auto")
+            self.assertEqual(inicio["umbral_rms_silencio"], 0.005)
             nivel = (await self.evento(panel, "niveles"))["canales"]
-            self.assertTrue(all(c["corte_silencio_s"] == 0.8 for c in nivel.values()))
             self.assertTrue(all(c["umbral_rms_silencio"] == 0.005 for c in nivel.values()))
             await panel.send(json.dumps({"tipo": "terminar"}))
             fin = await self.evento(panel, "fin")
             m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
-            self.assertEqual(m["config"]["corte_silencio_s"], 0.8)
+            self.assertEqual(m["config"]["umbral_rms_silencio"], 0.005)
             self.assertTrue(m["config"]["endpoint_nativo"])
 
     async def test_reintentar_tras_fallo_transitorio_de_precarga_con_otro_corte(self):
@@ -192,15 +233,26 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await panel.send(json.dumps({"tipo": "terminar"}))
             await self.evento(panel, "fin")
 
-    async def test_cliente_directo_tambien_usa_corte_fijo(self):
-        self.servidor.args.corte_silencio = 1.2
+    async def test_cliente_directo_usa_el_corte_de_la_linea_de_comandos(self):
         async with connect(self.url + "/panel") as panel:
-            async with connect(self.url + "/audio?rol=protegida") as audio:
-                await audio.send(pcm(0.1))
-                inicio = await self.evento(panel, "inicio")
-                self.assertEqual(inicio["modo"], "llamada")
-                self.assertEqual(inicio["corte_silencio_s"], 0.8)
-            await self.evento(panel, "fin")
+            for opcion, esperado in (("auto", "auto"), (1.2, 1.2)):
+                self.servidor.args.corte_silencio = opcion
+                async with connect(self.url + "/audio?rol=protegida") as audio:
+                    await audio.send(pcm(0.1))
+                    inicio = await self.evento(panel, "inicio")
+                    self.assertEqual(inicio["modo"], "llamada")
+                    self.assertEqual(inicio["corte_silencio_s"], esperado)
+                await self.evento(panel, "fin")
+
+    def test_opcion_de_linea_de_comandos_acepta_auto_o_un_corte_valido(self):
+        from servidor import corte_de_linea_de_comandos
+        import argparse
+        self.assertEqual(corte_de_linea_de_comandos("auto"), "auto")
+        self.assertEqual(corte_de_linea_de_comandos("0.1"), 0.1)
+        self.assertEqual(corte_de_linea_de_comandos("3"), 3.0)
+        for malo in ("0", "3.1", "0.15", "rapido", "nan"):
+            with self.assertRaises(argparse.ArgumentTypeError):
+                corte_de_linea_de_comandos(malo)
 
     async def test_asr_conserva_tipo_y_entrega_en_vivo_y_al_cerrar(self):
         async with connect(self.url + "/panel") as panel:

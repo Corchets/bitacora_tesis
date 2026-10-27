@@ -237,6 +237,31 @@
     border: 1px solid var(--linea);
     border-radius: var(--radio-sm);
   }
+  .corte-silencio .corte-valor {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--tinta-secundaria);
+  }
+  .corte-silencio input[type="number"] {
+    font: inherit;
+    font-size: 0.875rem;
+    width: 4.5rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: var(--radio-sm);
+    border: 1px solid var(--linea);
+    background: var(--superficie);
+    color: var(--tinta);
+  }
+  .corte-silencio input[type="number"]:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+  .corte-silencio input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   .enlace-guia {
     font-size: 0.8125rem;
     font-weight: 600;
@@ -1018,6 +1043,7 @@
         <option value="microfono">Micrófono</option>
       </select>
     </div>
+    <span id="corte-lugar"></span>
     <details id="ajustes-fuentes" class="panel-ajustes">
       <summary>Micrófono</summary>
       <div class="ajustes-cuerpo">
@@ -1149,6 +1175,7 @@
 import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 import {prepararFuentes} from './fuentes.mjs';
+import {crearSelectorCorte} from './corte-silencio.mjs';
 
 /** @typedef {{segmento: number, n: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
@@ -1186,6 +1213,8 @@ const protegidaFuente = /** @type {HTMLSelectElement} */ ($("protegida-fuente"))
 const microfono = /** @type {HTMLSelectElement} */ ($("microfono"));
 const buscarMicrofonos = /** @type {HTMLButtonElement} */ ($("buscar-microfonos"));
 const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
+const corteLlamada = crearSelectorCorte("corte-llamada");
+$("corte-lugar").replaceWith(corteLlamada.elemento);
 const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
 const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
 const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
@@ -1507,6 +1536,7 @@ function actualizarControles() {
   terminar.disabled = !conectada || !enLlamada || pendiente;
   nueva.disabled = !conectada || enLlamada || pendiente || !terminada;
   fuente.disabled = enLlamada || pendiente;
+  corteLlamada.deshabilitado = enLlamada || pendiente;
   protegidaFuente.disabled = enLlamada || pendiente;
   microfono.disabled = enLlamada || pendiente || protegidaFuente.value !== "microfono";
   buscarMicrofonos.disabled = microfono.disabled;
@@ -1526,6 +1556,7 @@ function enviar(mensaje) {
 }
 
 async function iniciarSesion() {
+  if (!pruebaASR.activa && !corteLlamada.validar()) return;
   const token = ++intento;
   const fuenteRemota = !pruebaASR.activa && (fuente.value === "meet" || fuente.value === "blackhole");
   if (pruebaASR.activa || protegidaFuente.value === "microfono" || fuenteRemota) {
@@ -1568,7 +1599,7 @@ async function iniciarSesion() {
   inicioPropio = true;
   enviar(pruebaASR.activa
     ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config}
-    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: null, umbral_rms_silencio: null});
+    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: corteLlamada.valor, umbral_rms_silencio: null});
 }
 
 iniciar.onclick = iniciarSesion;
@@ -1960,6 +1991,7 @@ function conectar() {
     if (m.tipo === "inicio") {
       reiniciar(m.llamada_id);
       if (m.detector) actualizarDetectorVisual(m.detector);
+      if (m.modo === "llamada") corteLlamada.valor = m.corte_silencio_s;
       enLlamada = true; terminada = false; pendiente = false;
       if (inicioPropio) { inicioPropio = false; void emisor?.iniciar(); }
       actualizarControles();

@@ -61,6 +61,8 @@ cd experiments/voip
 python servidor.py --detector reglas
 python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
 python servidor.py --detector slm --modelo qwen3.5:4b-q4_K_M --ollama-url http://<pc-con-gpu>:11434
+# El corte de silencio se elige en el panel («Automático» o 0,1–3,0 s); --corte-silencio fija el de
+# las llamadas que abre cliente.py: python servidor.py --detector reglas --corte-silencio 0.5
 
 # Panel para el público:   http://<ip-del-servidor>:8765/
 # Pantalla de la protegida: http://<ip-del-servidor>:8765/?vista=protegida
@@ -103,12 +105,14 @@ el arranque automático con el primer bloque del cliente sigue funcionando.
 El control viaja por `/panel`:
 
 ```json
-{"tipo":"iniciar","modo":"llamada","fuentes":{"otra":{"tipo":"ejemplo","escenario":"SC-WA-CODE-01","canal":"izq"},"protegida":{"tipo":"ejemplo","escenario":"SC-WA-CODE-01","canal":"der"}},"corte_silencio_s":null,"umbral_rms_silencio":null}
+{"tipo":"iniciar","modo":"llamada","fuentes":{"otra":{"tipo":"ejemplo","escenario":"SC-WA-CODE-01","canal":"izq"},"protegida":{"tipo":"ejemplo","escenario":"SC-WA-CODE-01","canal":"der"}},"corte_silencio_s":"auto","umbral_rms_silencio":null}
 {"tipo":"terminar"}
 ```
 
-Para clientes, ambas fuentes son `{"tipo":"cliente"}`. En modo `llamada`, corte y umbral
-se omiten o son `null`: el panel usa 0,8 s y RMS 0,005, también después de una prueba del ASR.
+Para clientes, ambas fuentes son `{"tipo":"cliente"}`. `corte_silencio_s` es obligatorio y vale
+`"auto"` o un número de 0,1 a 3,0 con un decimal (ver §10); cualquier otro valor se rechaza antes de abrir la
+carpeta. En modo `llamada` el umbral RMS es fijo (0,005): `umbral_rms_silencio` va en `null`.
+Las llamadas que abre `cliente.py` sin pasar por el panel usan `--corte-silencio` (`auto` por defecto, o segundos).
 Un control inválido devuelve `{"tipo":"error","mensaje":"…"}` al panel que lo mandó.
 La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
 
@@ -341,8 +345,12 @@ Se conserva [esa corrida sin WAV](corridas/2026-10-26-medicion-84-m1-08b/README.
 
 ## 10. Probar el ASR hablando (#81)
 
-Con el servidor local de §3 abierto, activá **Probar el ASR**. Elegí el corte
-(0,5 / 0,8 / 1,2 s) y el umbral RMS (mayor que cero, hasta 1; inicial 0,005).
+Con el servidor local de §3 abierto, activá **Probar el ASR**. Elegí el corte de silencio
+(**Automático** o **Elegir** un número de 0,1 a 3,0 s, de a 0,1; es el mismo selector de la llamada)
+y el umbral RMS (mayor que cero, hasta 1; inicial 0,005).
+**Automático** es el valor inicial y se comporta como la llamada de siempre: cierra la frase
+el corte propio del modelo (endpoint nativo), con 0,8 s de respaldo. Con un número manda ese corte
+y el endpoint nativo se apaga, así el valor elegido significa lo que dice.
 Tocá **▶ Hablar**, permití el micrófono y hablá con pausas. Usa la entrada de micrófono
 seleccionada en el panel (o la predeterminada). No conecta otra persona ni ejecuta el detector.
 Si cambia la configuración se recrean y precargan ambos motores antes de emitir `inicio`;
@@ -352,23 +360,24 @@ El provisorio gris se reescribe; al cerrar queda fijo y muestra `disponible_s - 
 en milisegundos desde el último bloque por encima del umbral. Es una estimación por energía,
 no una marca humana. La línea negra sobre el volumen señala el umbral en la misma escala
 RMS 0–1; la barra de silencio se llena hasta el corte y vuelve a cero cuando retomás la voz.
-En la prueba se desactiva el endpoint nativo del modelo: manda el silencio elegido,
-incluso con 1,2 s. La salida de texto puede tardar más por el lookahead o procesamiento del ASR.
+Con un número manda el silencio elegido, incluso con 3,0 s; con Automático la barra de silencio
+se dibuja contra los 0,8 s de respaldo y la frase puede cerrarse antes. La salida de texto puede tardar más por el lookahead o procesamiento del ASR.
 
 **Terminar prueba** guarda el registro y libera el micrófono. Podés cambiar el corte e iniciar
-otra enseguida; desactivá **Probar el ASR** para volver a la llamada con corte fijo en 0,8 s.
-El modo y las fuentes quedan en `inicio_panel`; `config` conserva corte, umbral,
-`endpoint_nativo` y `detector: null` en la prueba. Audio y registros de voz real quedan fuera de Git.
+otra enseguida; desactivá **Probar el ASR** para volver a la llamada. El corte se elige también ahí.
+El modo y las fuentes quedan en `inicio_panel`; `config.corte_silencio_s` guarda lo elegido
+(`"auto"` o el número) junto con `endpoint_nativo` (verdadero solo con `"auto"`), el umbral
+y `detector: null` en la prueba. Audio y registros de voz real quedan fuera de Git.
 
 ```json
 {"tipo":"iniciar","modo":"asr","fuentes":{"protegida":{"tipo":"navegador"}},"corte_silencio_s":1.2,"umbral_rms_silencio":0.005}
 ```
 
 Las pruebas con MotorFalso sensible a energía y reloj controlado recorren dos sesiones
-con cortes 0,5 y 1,2 s: no hay final antes del corte, el último bloque cierra la frase,
+con cortes 0,5 y 1,2 s, y comprueban los límites (`auto`, 0,1 y 3,0 aceptados; 0, 3,1, 0,15, booleanos y textos rechazados): no hay final antes del corte, el último bloque cierra la frase,
 la telemetría alcanza el corte, la demora coincide y el manifiesto conserva los ajustes
 sin evaluaciones del detector. También verifican validación, rechazo de audio de `otra`
-y vuelta a 0,8 s en modo llamada. Corré los comandos de §8.
+y vuelta al umbral fijo en modo llamada. Corré los comandos de §8.
 
 La [evidencia de #81](corridas/2026-10-26-asr-81.md) registra las dos sesiones reales
 con micrófono falso, la barra completa y las regresiones encontradas en revisión.
