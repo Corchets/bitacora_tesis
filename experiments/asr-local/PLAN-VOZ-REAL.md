@@ -1,6 +1,6 @@
 # Plan: mejorar el ASR con voz real (acento tucumano, jerga)
 
-> **Estado: acordado con Luciano el 2026-10-26 (sesión de preguntas); issue pendiente**, sub-issue de
+> **Estado: acordado con Luciano el 2026-10-26 (sesión de preguntas).** Issue [#94](https://github.com/Corchets/bitacora_tesis/issues/94), sub-issue de
 > [#87](https://github.com/Corchets/bitacora_tesis/issues/87). No cierra
 > [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector): son una o dos voces, sin piloto.
 > No es requisito para la demo del 2026-10-28.
