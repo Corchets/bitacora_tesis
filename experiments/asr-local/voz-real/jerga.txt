@@ -1,0 +1,19 @@
+# Jerga y habla tucumana para la métrica informativa de recall y para el prompt de Whisper.
+# Lista candidata SIN VALIDAR: la revisa Luciano (PLAN-VOZ-REAL.md §6). Una entrada por línea;
+# se compara sin tildes ni mayúsculas. «luca» y «mango» son plata y están en la lista crítica
+# (hotwords.txt), no acá.
+chango
+changa
+changos
+ñaño
+ñaña
+guaso
+mishi
+al ñudo
+sonso
+yapa
+zafar
+zafo
+zafás
+al vicio
+vo

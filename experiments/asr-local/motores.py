@@ -71,6 +71,7 @@ class MotorSherpaZipformer(MotorASR):
 
     MODELO_POR_DEFECTO = "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
     ARCHIVOS_REQUERIDOS = ("encoder.onnx", "decoder.onnx", "joiner.onnx", "tokens.txt")
+    METODOS_DECODIFICACION = ("greedy_search", "modified_beam_search")
 
     def __init__(
         self,
@@ -81,7 +82,20 @@ class MotorSherpaZipformer(MotorASR):
         rule1_silence: float = 2.4,
         rule2_silence: float = 1.0,
         rule3_utterance: float = 20.0,
+        decoding_method: str = "greedy_search",
+        max_active_paths: int = 4,
+        hotwords_file: str | Path | None = None,
+        hotwords_score: float = 1.5,
+        bpe_puntaje: str = "log",
     ):
+        if decoding_method not in self.METODOS_DECODIFICACION:
+            raise ValueError(f"decoding_method debe ser uno de {self.METODOS_DECODIFICACION}: {decoding_method!r}")
+        if max_active_paths < 1:
+            raise ValueError("max_active_paths debe ser al menos 1.")
+        if hotwords_file is not None and decoding_method != "modified_beam_search":
+            raise ValueError("Los hotwords de sherpa-onnx requieren decoding_method='modified_beam_search'.")
+        if bpe_puntaje not in ("log", "id"):
+            raise ValueError(f"bpe_puntaje debe ser 'log' o 'id': {bpe_puntaje!r}")
         self.nombre = "sherpa-zipformer"
         self.modelo_id = modelo_dir_o_repo
         self.es_streaming = True
@@ -94,6 +108,13 @@ class MotorSherpaZipformer(MotorASR):
         self.rule3_utterance = rule3_utterance
         self.corte_silencio_s = 0.8
         self.umbral_rms_silencio = 0.005
+        # Decodificación: por defecto greedy y sin hotwords, que es lo que usa el panel.
+        self.decoding_method = decoding_method
+        self.max_active_paths = max_active_paths
+        self.hotwords_file = Path(hotwords_file) if hotwords_file is not None else None
+        self.hotwords_score = hotwords_score
+        self.bpe_puntaje = bpe_puntaje  # cómo puntúa el bpe.vocab sintético (ver hotwords.py)
+        self.hotwords_preparados: dict[str, Any] | None = None
 
         self.model_dir: Path | None = None
         self.recognizer: Any = None
@@ -134,6 +155,23 @@ class MotorSherpaZipformer(MotorASR):
         import sherpa_onnx
 
         self.model_dir = self._asegurar_modelo()
+        opciones_decodificacion: dict[str, Any] = {
+            "decoding_method": self.decoding_method,
+            "max_active_paths": self.max_active_paths,
+        }
+        if self.hotwords_file is not None:
+            # El modelo no trae bpe.vocab: se arma uno sintético desde tokens.txt (PLAN-VOZ-REAL.md §5).
+            from hotwords import preparar_hotwords
+
+            self.hotwords_preparados = preparar_hotwords(
+                self.model_dir, self.hotwords_file, puntaje=self.bpe_puntaje
+            )
+            opciones_decodificacion.update(
+                hotwords_file=str(self.hotwords_preparados["hotwords_file"]),
+                hotwords_score=self.hotwords_score,
+                modeling_unit="bpe",
+                bpe_vocab=str(self.hotwords_preparados["bpe_vocab"]),
+            )
         self.recognizer = sherpa_onnx.OnlineRecognizer.from_transducer(
             tokens=str(self.model_dir / "tokens.txt"),
             encoder=str(self.model_dir / "encoder.onnx"),
@@ -143,7 +181,7 @@ class MotorSherpaZipformer(MotorASR):
             provider="cpu",
             sample_rate=self.sample_rate,
             feature_dim=80,
-            decoding_method="greedy_search",
+            **opciones_decodificacion,
             enable_endpoint_detection=self.enable_endpoint,
             rule1_min_trailing_silence=self.rule1_silence,
             rule2_min_trailing_silence=self.rule2_silence,
@@ -287,6 +325,16 @@ class MotorSherpaZipformer(MotorASR):
                 "rule2_silence": self.rule2_silence,
                 "rule3_utterance": self.rule3_utterance,
             },
+            "decodificacion": {
+                "decoding_method": self.decoding_method,
+                "max_active_paths": self.max_active_paths,
+                "hotwords_file": str(self.hotwords_file) if self.hotwords_file else None,
+                "hotwords": self.hotwords_preparados["hotwords"] if self.hotwords_preparados else None,
+                "hotwords_score": self.hotwords_score if self.hotwords_file else None,
+                "modeling_unit": "bpe" if self.hotwords_file else None,
+                "bpe_puntaje": self.bpe_puntaje if self.hotwords_file else None,
+                "bpe_vocab": str(self.hotwords_preparados["bpe_vocab"]) if self.hotwords_preparados else None,
+            },
         }
 
 
@@ -305,6 +353,8 @@ class MotorFasterWhisper(MotorASR):
         device: str = "cpu",
         compute_type: str = "int8",
         idioma: str = "es",
+        hotwords: str | None = None,
+        initial_prompt: str | None = None,
     ):
         self.nombre = "whisper"
         self.modelo_id = f"faster-whisper-{modelo_tamanio}"
@@ -316,6 +366,9 @@ class MotorFasterWhisper(MotorASR):
         self.device = device
         self.compute_type = compute_type
         self.idioma = idioma
+        # Ayudas opcionales de faster-whisper; por defecto no se usa ninguna.
+        self.hotwords = hotwords
+        self.initial_prompt = initial_prompt
 
         self.model: Any = None
         self.buffer_muestras: list[np.ndarray] = []
@@ -359,6 +412,8 @@ class MotorFasterWhisper(MotorASR):
             beam_size=5,
             vad_filter=True,
             vad_parameters=dict(min_silence_duration_ms=500),
+            hotwords=self.hotwords,
+            initial_prompt=self.initial_prompt,
         )
 
         eventos: list[EventoASR] = []
@@ -401,6 +456,8 @@ class MotorFasterWhisper(MotorASR):
             "hilos": self.hilos,
             "sample_rate": self.sample_rate,
             "idioma": self.idioma,
+            "hotwords": self.hotwords,
+            "initial_prompt": self.initial_prompt,
             "segmentacion": {
                 "tipo": "vad_filter_whisper",
                 "declaracion": "NO streaming, procesamiento segmentado offline/lote",
