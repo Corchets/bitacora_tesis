@@ -144,6 +144,13 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
 - Esquinas suavemente redondeadas con radio de 8px (`md`) para contenedores principales, 12px (`lg`) para tarjetas grandes y 4px (`sm`) para botones y controles.
 - Insignias de métricas y píldoras de estado con radio completo (pills) para distinguirlas claramente de los bloques de contenido.
 
+## Motion
+
+- Solo se animan `opacity` y `transform`, con curva de salida (`cubic-bezier(0.22, 1, 0.36, 1)`), sin rebote ni parpadeo.
+- **Mensaje nuevo**: fundido y desplazamiento de 8px en 200ms; la animación vive en la clase base de la burbuja, así pasar de provisorio a final (mismo nodo) no la reinicia. El provisorio se distingue por borde punteado y tinta secundaria, sin cursiva, para que el renglón no salte al cerrarse. La conversación baja con scroll suave.
+- **Alerta**: la franja ocupa su lugar desde el principio (invisible) y entra con fundido y escala de 0,98 a 1 en 220ms; el tinte de fondo es una capa propia que sube de opacidad en 300ms. El tono se dispara en la misma tarea que muestra la franja.
+- Con `prefers-reduced-motion` todo es instantáneo y el scroll no es suave.
+
 ## Components
 
 - **Franja de aviso de posible estafa**: Franja horizontal compacta no modal sobre las tarjetas de voz con insignia de alto contraste («Posible estafa»), motivo, cita resaltada en la conversación, control de sonido WebAudio persistente y botón de cierre.

@@ -273,19 +273,33 @@
     outline-offset: 2px;
   }
 
-  /* Aviso en franja no modal, visible desde el aula pero sin tapar ni saturar */
-  @keyframes entrada-aviso {
-    from {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Movimiento: solo opacity y transform, curva de salida, sin rebote. */
+  :root {
+    --salida: cubic-bezier(0.22, 1, 0.36, 1);
   }
+
+  /* Tinte de fondo de la alerta: capa propia que sube de opacidad, sin repintar el layout */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--alerta-claro);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms var(--salida);
+  }
+  body.alerta-emitida::before {
+    opacity: 0.7;
+  }
+
+  /* Aviso en franja no modal, visible desde el aula pero sin tapar ni saturar.
+     Ocupa su lugar desde el principio (invisible) para que al aparecer no mueva nada. */
   #aviso {
-    display: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
     background: var(--alerta-fondo);
     border: 1px solid var(--alerta-borde);
     border-radius: var(--radio-md);
@@ -293,13 +307,18 @@
     margin-bottom: 0.45rem;
     color: var(--tinta);
     flex-shrink: 0;
+    min-height: 3.65rem; /* dos renglones: motivo y cita arriba, segundo del aviso abajo */
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.98);
+    transform-origin: top center;
+    transition: opacity 220ms var(--salida), transform 220ms var(--salida), visibility 0s linear 220ms;
   }
   #aviso.visible {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.6rem;
-    animation: entrada-aviso 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
   }
   .aviso-etiqueta {
     display: inline-flex;
@@ -568,7 +587,27 @@
     text-align: center;
     max-width: 48ch;
   }
+  @keyframes entrada-linea {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes entrada-evaluacion {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .linea {
+    /* La animación vive en la clase base: pasar de provisorio a final cambia otras clases y no la reinicia. */
+    animation: entrada-linea 200ms var(--salida);
     width: 62%;
     max-width: 68%;
     padding: 0.5rem 0.75rem;
@@ -585,11 +624,14 @@
     background: var(--vos-fondo);
     border-color: var(--vos-borde);
   }
+  /* Provisorio: borde punteado y tinta secundaria. Sin cursiva ni otro peso, así el renglón no salta al cerrarse. */
   .linea.parcial {
-    color: var(--tinta-secundaria);
-    font-style: italic;
     border-style: dashed;
   }
+  .linea.parcial .texto {
+    color: var(--tinta-secundaria);
+  }
+
   .linea.disparo-aviso {
     border: 1.5px solid var(--alerta-borde);
     background: var(--alerta-fondo);
@@ -626,6 +668,7 @@
 
   /* Evaluación del detector pegada a la frase */
   .eval-adjunta {
+    animation: entrada-evaluacion 200ms var(--salida);
     margin-top: 0.15rem;
     padding: 0.3rem 0.55rem;
     border-radius: var(--radio-sm);
@@ -867,6 +910,10 @@
     font-size: 1.5rem;
     font-weight: 600;
   }
+  /* En la vista grande el aviso reemplaza al «tranquilo»: sin reservar lugar mientras no aparece. */
+  body.protegida #aviso:not(.visible) {
+    position: absolute;
+  }
   body.protegida #aviso.visible {
     font-size: 1.25rem;
     padding: 2rem 1.5rem;
@@ -908,7 +955,14 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
-    #aviso.visible {
+    #aviso {
+      transform: none !important;
+      transition: none !important;
+    }
+    body::before {
+      transition: none !important;
+    }
+    .linea, .eval-adjunta {
       animation: none !important;
     }
     #barra div {
@@ -1343,7 +1397,7 @@ function prefiereMovimientoReducido() {
 
 /** @param {HTMLElement} el */
 function desplazarVisible(el) {
-  el.scrollIntoView({ block: "end", behavior: prefiereMovimientoReducido() ? "instant" : "auto" });
+  el.scrollIntoView({ block: "end", behavior: prefiereMovimientoReducido() ? "instant" : "smooth" });
 }
 
 /** @type {ReturnType<typeof prepararAudio>|null} */
