@@ -539,6 +539,22 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await self.evento(panel, "error")
             self.assertEqual(list(self.dir.iterdir()), [])
 
+    async def test_modelo_de_asr_elegido_en_el_panel(self):
+        async with connect(self.url + "/panel") as panel:
+            for asr in ("whisper-turbo", "", None, 3):
+                await panel.send(json.dumps({**json.loads(self.inicio()), "asr": asr}))
+                self.assertIn("modelo de asr", (await self.evento(panel, "error"))["mensaje"].lower())
+            self.assertEqual(list(self.dir.iterdir()), [])
+            await panel.send(json.dumps({**json.loads(self.inicio()), "asr": "parakeet"}))
+            self.assertEqual((await self.evento(panel, "inicio"))["asr"], "parakeet")
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            fin = await self.evento(panel, "fin")
+            m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+            self.assertEqual(m["config"]["asr"], "parakeet")
+            # Sin «asr» en el mensaje se mantiene el último elegido.
+            await panel.send(self.inicio())
+            self.assertEqual((await self.evento(panel, "inicio"))["asr"], "parakeet")
+
     async def test_llamada_vuelve_al_umbral_fijo_despues_de_una_prueba(self):
         prueba = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
                   "corte_silencio_s": 1.2, "umbral_rms_silencio": 0.03}

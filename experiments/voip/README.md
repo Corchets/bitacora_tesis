@@ -63,6 +63,8 @@ python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
 python servidor.py --detector slm --modelo qwen3.5:4b-q4_K_M --ollama-url http://<pc-con-gpu>:11434
 # El corte de silencio se elige en el panel (0,1–3,0 s, inicial 0,8); --corte-silencio fija el de
 # las llamadas que abre cliente.py («auto» por defecto): python servidor.py --detector reglas --corte-silencio 0.5
+# El modelo de ASR también se elige en el panel (Zipformer o Parakeet); --asr fija el de arranque y el de
+# cliente.py: python servidor.py --detector reglas --asr parakeet  (ver ../asr-local/PLAN-VOZ-REAL.md §9)
 
 # Panel para el público:   http://<ip-del-servidor>:8765/
 # Pantalla de la protegida: http://<ip-del-servidor>:8765/?vista=protegida

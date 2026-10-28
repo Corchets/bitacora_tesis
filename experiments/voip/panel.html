@@ -1032,7 +1032,7 @@
 
   /* Modo Probar el ASR */
   body.asr #controles > :not(#error):not(.campos),
-  body.asr #controles .campos > :not(#campo-microfono),
+  body.asr #controles .campos > :not(#campo-microfono):not(#campo-asr),
   body.asr #sonido-aviso,
   body.asr main {
     display: none !important;
@@ -1193,6 +1193,13 @@
         </label>
       </div>
     </div>
+    <div class="campo" id="campo-asr">
+      <label for="modelo-asr">Modelo de ASR</label>
+      <select id="modelo-asr" title="Con qué modelo se transcribe. Se aplica a la próxima llamada o prueba.">
+        <option value="zipformer">Zipformer Kroko · streaming</option>
+        <option value="parakeet">Parakeet TDT 0.6B v3 · por frases</option>
+      </select>
+    </div>
     <span id="corte-lugar"></span>
     <div class="enlaces">
       <details id="ayuda" class="ayuda">
@@ -1207,6 +1214,11 @@
             <h3><span class="rol-punto protegida" aria-hidden="true"></span>Persona protegida</h3>
             <p>La dueña del teléfono: a quien el sistema cuida y quien recibiría el aviso. Su voz entra por un canal aparte (a la derecha).</p>
             <p>Con «Micrófono de esta notebook» la persona protegida sos vos; con el ejemplo, se usa la voz grabada.</p>
+          </section>
+          <section>
+            <h3>Modelo de ASR</h3>
+            <p>Zipformer escribe palabra por palabra mientras hablás. Parakeet vuelve a escuchar la frase entera cada medio segundo y muestra un borrador; al cerrar la frase la escribe de nuevo completa, y suele entender mejor.</p>
+            <p>El modelo nuevo se carga al iniciar y tarda unos segundos la primera vez.</p>
           </section>
           <section>
             <h3>Corte de silencio</h3>
@@ -1385,6 +1397,7 @@ const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
 const corteLlamada = crearSelectorCorte("corte-llamada");
 $("corte-lugar").replaceWith(corteLlamada.elemento);
 const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
+const modeloASR = /** @type {HTMLSelectElement} */ ($("modelo-asr"));
 const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
 const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
 const botonSonido = /** @type {HTMLButtonElement} */ ($("sonido-aviso"));
@@ -1776,6 +1789,7 @@ function actualizarControles() {
   nueva.disabled = !conectada || enLlamada || pendiente || !terminada;
   fuente.disabled = enLlamada || pendiente;
   corteLlamada.deshabilitado = enLlamada || pendiente;
+  modeloASR.disabled = enLlamada || pendiente;
   protegidaFuente.disabled = enLlamada || pendiente;
   const usaMicrofono = pruebaASR.activa || protegidaFuente.value === "microfono";
   microfono.disabled = enLlamada || pendiente || !usaMicrofono;
@@ -1850,8 +1864,8 @@ async function iniciarSesion() {
   if (fuenteRemota) fuentes.otra = {tipo: "navegador", origen: fuente.value};
   inicioPropio = true;
   enviar(pruebaASR.activa
-    ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config}
-    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: corteLlamada.valor, umbral_rms_silencio: null});
+    ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config, asr: modeloASR.value}
+    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: corteLlamada.valor, umbral_rms_silencio: null, asr: modeloASR.value});
 }
 
 iniciar.onclick = iniciarSesion;
@@ -2257,6 +2271,7 @@ function conectar() {
       reiniciar(m.llamada_id);
       if (m.detector) actualizarDetectorVisual(m.detector);
       if (m.modo === "llamada") corteLlamada.valor = m.corte_silencio_s;
+      if (m.asr) modeloASR.value = m.asr;
       enLlamada = true; terminada = false; pendiente = false;
       if (inicioPropio) { inicioPropio = false; void emisor?.iniciar(); }
       actualizarControles();

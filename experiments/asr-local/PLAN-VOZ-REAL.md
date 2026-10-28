@@ -135,3 +135,49 @@ Opciones útiles: `--sin-whisper` (Whisper es lento: `small` y `large-v3-turbo` 
 `--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
 (por defecto 40 ms, como el panel). Detalle de los archivos en el [README](README.md#9-voz-real-94).
 
+
+## 9. Zipformer anda mal con voz real: probamos Parakeet (2026-10-28)
+
+> **Estado: propuesta sin discutir.** Es una prueba de otro modelo para la demo, no la elección de
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). Zipformer sigue siendo el
+> modelo por defecto del panel.
+
+**Qué pasa.** Con la voz de Luciano en el panel, Zipformer Kroko transcribe mal: parte palabras al
+medio («la concha de tu ma | dre», «Alambre el | código»), cambia palabras («la alergia» por «la
+alerta») y deja frases que son solo un punto. Con TTS daba 4–5 % de WER, así que ese número no
+anticipaba lo que pasa con voz real. La app de dictado Wispr Flow transcribe bien la misma
+voz, pero es un producto cerrado: no se puede correr como modelo local, que es lo que pide la
+[privacidad del sistema](../../docs/corpus/PRIVACIDAD-DEL-SISTEMA.md).
+
+**Qué probamos.** Dos modelos locales sobre 4 llamadas reales del panel del 2026-10-28 (micrófono y
+Meet/BlackHole, 2 canales cada una, fuera de Git en `experiments/voip/llamadas/`), con el mismo corte
+de silencio (0,8 s, umbral RMS 0,005) y bloques de 40 ms como los manda el panel. No hay
+transcripción de referencia: la comparación se hizo leyendo las salidas, no con WER.
+
+| Modelo | Tiempo real | Lo que se vio | Bloque más lento (M1, 2 hilos) | RSS (TTS, `asr_local.py`) |
+|---|---|---|---|---|
+| Zipformer Kroko (actual) | Sí, palabra por palabra | Corta palabras y cambia términos | ~80 ms | ~475 MB |
+| **Parakeet TDT 0.6B v3** int8 ([`csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8`](https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8)) | Borrador cada 0,5 s; frase completa al cerrar | Frases enteras y bien escritas («Podés hablar bien la concha de tu madre», «salta una vez la alerta»). Con ruido o respiración a veces inventa palabras en inglés o portugués («Thank you», «Olá») | ~450 ms | ~1,0–1,2 GB |
+| Whisper large-v3-turbo int8 (`faster-whisper`) | No: solo al cerrar la frase | Inventa «Gracias», «Suscríbete al canal» en los silencios | 4–10 s | — |
+
+Con TTS los tres empatan (Zipformer 0–2,2 % de WER, Parakeet 2,2–2,5 %): ese audio no sirve para
+elegir entre ellos.
+
+**Qué cambió en el código.**
+
+- [`motores.py`](motores.py): `MotorPorFrases` corta frases con el mismo umbral y corte de silencio
+  del panel, descarta frases con menos de 0,3 s de voz, corta a los 10 s y vuelve a transcribir la
+  frase abierta cada 0,5 s para el borrador. `MotorSherpaParakeet` (los dos canales comparten el
+  modelo) y `MotorWhisperPorFrases` (solo para comparar, no está en el panel).
+- Panel y servidor: selector «Modelo de ASR» en Llamada en vivo y en Probar el ASR; `servidor.py --asr`
+  fija el de arranque. El manifiesto de cada llamada guarda `config.asr` y los metadatos del motor.
+- [`asr_local.py`](asr_local.py): `--motor sherpa-parakeet` y `--motor whisper-frases`.
+
+**Límites.** Son 4 llamadas con una o dos voces y sin referencia escrita. Parakeet usa unos 600 MB
+más que Zipformer, lo que pesa en la pregunta de gama de D09. Escribe números como dígitos («0, 0,
+1, 2, 3», «958 679 123») y no se puede fijar el idioma, así que hay que revisar si las reglas
+siguen viendo los códigos. Mientras transcribe bloquea el bucle del servidor hasta ~0,45 s.
+
+**Siguiente paso.** Grabar el set de la sección 3 con «Probar el ASR» y medir los dos modelos con
+`medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Agregar Parakeet como variante en
+[`variantes_voz_real.py`](variantes_voz_real.py) queda pendiente.

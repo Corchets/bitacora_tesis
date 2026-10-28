@@ -40,6 +40,8 @@ El archivo `actualizaciones.jsonl` contiene:
 | Motor | Modelo | Modo | Tipo de entrega | Endpoint / Segmentación |
 |---|---|---|---|---|
 | `sherpa-zipformer` (principal) | [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | Streaming en tiempo real | Parciales y finales | Segmentación por silencio (`corte_silencio_s=0.8s`, `umbral_rms=0.005`) y endpoint nativo con purga de lookahead (0.3s) y cola de vaciado final (2.0s) |
+| `sherpa-parakeet` (en prueba) | [`csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8`](https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8) | Por frases, con borrador cada 0,5 s | Parciales y finales | Corte por silencio RMS (`corte_silencio_s=0.8s`), mínimo 0,3 s de voz, máximo 10 s por frase. Ver [PLAN-VOZ-REAL §9](PLAN-VOZ-REAL.md#9-zipformer-anda-mal-con-voz-real-probamos-parakeet-2026-10-28) |
+| `whisper-frases` (comparación) | `faster-whisper-large-v3-turbo` (int8 CPU) | Por frases, sin parciales | Finales por segmento | El mismo corte que `sherpa-parakeet`; no corre en tiempo real |
 | `whisper` (secundario) | `faster-whisper-base` (int8 CPU) | NO streaming (por lotes/segmentos) | Finales por segmento | Filtro VAD integrado de Whisper (`min_silence_duration_ms=500ms`) |
 
 ---

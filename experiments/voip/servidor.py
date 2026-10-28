@@ -2,7 +2,8 @@
 """Servidor de la llamada en vivo: ASR por canal, detector y panel (frente 1, spike).
 
 Cada persona corre `cliente.py`, que manda su micrófono (o un canal de un WAV) por
-WebSocket. El servidor transcribe cada canal con su propio Zipformer streaming, escribe
+WebSocket. El servidor transcribe cada canal con su propio ASR (Zipformer streaming por defecto; Parakeet por
+frases si se elige en el panel), escribe
 `actualizaciones.jsonl` con el contrato de experiments/asr-local (la llamada se puede
 volver a correr con replay.py), llama al detector y muestra todo en un panel web.
 
@@ -46,9 +47,19 @@ import historial
 from llamada import DIR_VOIP, ROLES, SAMPLE_RATE, Llamada
 
 import replay  # noqa: E402  (rutas de slm-directo y replay ya agregadas por llamada.py)
-from motores import MotorSherpaZipformer
+from motores import MotorASR, MotorSherpaParakeet, MotorSherpaZipformer
 
-DIR_MODELO = DIR_VOIP.parent / "asr-local" / "modelos" / "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
+DIR_MODELOS = DIR_VOIP.parent / "asr-local" / "modelos"
+DIR_MODELO = DIR_MODELOS / "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
+DIR_PARAKEET = DIR_MODELOS / "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
+
+# Modelos de ASR que se pueden elegir desde el panel. «zipformer» es el de siempre. Whisper no está:
+# solo transcribe al cerrar la frase y la demo tiene que ir escribiendo mientras se habla.
+ASR_POR_DEFECTO = "zipformer"
+MODELOS_ASR = {
+    "zipformer": "Zipformer Kroko · streaming",
+    "parakeet": "Parakeet TDT 0.6B v3 · por frases",
+}
 
 EJEMPLOS = {nombre: DIR_VOIP.parent / "asr-local" / "audio" / f"{nombre}-tts-estereo.wav"
             for nombre in ("SC-WA-CODE-01", "LG-WA-CONSULTA-01", "SC-SOPORTE-CLAVE-01", "LG-SUPPORT-INFO-01")}
@@ -70,6 +81,12 @@ def validar_corte(valor) -> str | float:
     return round(float(valor), 1)
 
 
+def validar_asr(valor) -> str:
+    if not isinstance(valor, str) or valor not in MODELOS_ASR:
+        raise ValueError(f"Modelo de ASR desconocido; opciones: {', '.join(MODELOS_ASR)}.")
+    return valor
+
+
 def corte_de_linea_de_comandos(texto: str) -> str | float:
     try:
         return validar_corte(CORTE_AUTO if texto == CORTE_AUTO else float(texto))
@@ -84,6 +101,7 @@ class Servidor:
         self.control = asyncio.Lock()
         self.config_llamada: dict = {}
         self.config_asr: tuple[str | float, float] = (CORTE_AUTO, UMBRAL_LLAMADA)  # (corte elegido, umbral RMS)
+        self.asr = validar_asr(getattr(args, "asr", ASR_POR_DEFECTO))
         self.args = args
         self.detector = detector
         self.llamada: Llamada | None = None
@@ -100,7 +118,10 @@ class Servidor:
         # Última prueba cerrada y todavía sin guardar: «Guardar» actúa sobre ella.
         self.prueba_pendiente: Path | None = None
 
-    def crear_motor(self) -> MotorSherpaZipformer:
+    def crear_motor(self) -> MotorASR:
+        if self.asr == "parakeet":
+            modelo = str(DIR_PARAKEET) if DIR_PARAKEET.exists() else MotorSherpaParakeet.MODELO_POR_DEFECTO
+            return MotorSherpaParakeet(modelo, hilos=self.args.hilos)
         modelo = str(DIR_MODELO) if DIR_MODELO.exists() else MotorSherpaZipformer.MODELO_POR_DEFECTO
         return MotorSherpaZipformer(modelo, hilos=self.args.hilos)
 
@@ -151,7 +172,8 @@ class Servidor:
                        "modo": self.config_llamada.get("modo", "llamada"),
                        "detector": {"tipo": self.args.detector,
                                     "modelo": self.args.modelo if self.args.detector == "slm" else None},
-                       "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1]})
+                       "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
+                       "asr": self.asr})
 
     async def cerrar_llamada(self, *, esperada: Llamada | None = None) -> None:
         async with self.control:
@@ -195,7 +217,7 @@ class Servidor:
                        "ollama_url": a.ollama_url if a.detector == "slm" else None,
                        "seed": a.seed if a.detector == "slm" else "no-aplica",
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
-                       "endpoint_nativo": self.config_asr[0] == CORTE_AUTO, "hilos_asr": a.hilos, "carga_slm": carga},
+                       "endpoint_nativo": self.config_asr[0] == CORTE_AUTO, "asr": self.asr, "hilos_asr": a.hilos, "carga_slm": carga},
             "inicio_panel": self.config_llamada,
             # La prueba se guarda solo si el presentador toca «Guardar»; hasta entonces se descarta.
             **({"guardada": False} if self.config_llamada.get("modo") == "asr" else {}),
@@ -269,13 +291,15 @@ class Servidor:
             if pertenecia and not self.clientes_audio and self.tarea_ejemplo is None:
                 await self.cerrar_llamada(esperada=llamada)
 
-    async def configurar_asr(self, config: tuple[str | float, float]) -> None:
-        if config == self.config_asr:
+    async def configurar_asr(self, config: tuple[str | float, float], asr: str | None = None) -> None:
+        asr = self.asr if asr is None else asr
+        if config == self.config_asr and asr == self.asr:
             return
         if self.preparada is not None:
             with suppress(ValueError, OSError, RuntimeError):
                 await self.preparada
         self.config_asr = config
+        self.asr = asr
         self.preparar()
 
     async def iniciar(self, mensaje: dict) -> None:
@@ -324,6 +348,7 @@ class Servidor:
             if hz != SAMPLE_RATE or audio.shape[1] != 2 or not len(audio) or not np.isfinite(audio).all():
                 raise ValueError("El ejemplo debe ser estéreo a 16 kHz y contener audio válido.")
         corte, umbral = validar_corte(mensaje.get("corte_silencio_s")), mensaje.get("umbral_rms_silencio")
+        asr = validar_asr(mensaje.get("asr", self.asr))
         if prueba:
             if (isinstance(umbral, bool) or not isinstance(umbral, (int, float))
                     or not math.isfinite(umbral) or not 0 < umbral <= 1):
@@ -335,7 +360,7 @@ class Servidor:
         async with self.control:
             if self.llamada is not None or self.clientes_audio:
                 raise ValueError("Terminá la llamada actual antes de iniciar otra.")
-            await self.configurar_asr((corte, umbral))
+            await self.configurar_asr((corte, umbral), asr)
             if prueba:
                 historial.descartar_pruebas_no_guardadas(self.args.salida)
             self.prueba_pendiente = None
@@ -515,6 +540,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--corte-silencio", type=corte_de_linea_de_comandos, default=CORTE_AUTO,
                    help="corte de silencio de las llamadas que abre cliente.py: «auto» (el del modelo, 0,8 s de respaldo) "
                         "o segundos de 0,1 a 3,0; desde el panel se elige en cada llamada")
+    p.add_argument("--asr", choices=tuple(MODELOS_ASR), default=ASR_POR_DEFECTO,
+                   help="modelo de ASR con el que arranca; desde el panel se elige en cada llamada")
     p.add_argument("--hilos", type=int, default=2, help="hilos del ASR por canal")
     p.add_argument("--salida", default=str(DIR_VOIP / "llamadas"))
     return p.parse_args()
