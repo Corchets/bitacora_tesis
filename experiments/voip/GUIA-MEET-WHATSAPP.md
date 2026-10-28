@@ -9,7 +9,7 @@ Antes de cualquiera de las dos: **ponete auriculares** y bajá a cero el volumen
 (o usá también auriculares en el celular). Si el micrófono de la notebook escucha al celular,
 las dos voces se mezclan y el ensayo no sirve.
 
-## Receta 1 · Meet (pestaña de Chrome, sin BlackHole)
+## Receta 1 · Meet o WhatsApp Web (pestaña de Chrome, sin BlackHole)
 
 1. En una terminal, dentro de `experiments/voip`, levantá el servidor:
    `python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0`
@@ -18,7 +18,7 @@ las dos voces se mezclan y el ensayo no sirve.
 3. En otra pestaña abrí `meet.google.com`, tocá «Nueva reunión» y entrá. Apagá el micrófono
    de la notebook en Meet (la protegida se toma desde el panel, no desde Meet).
 4. Con el celular, entrá a la misma reunión (app de Meet y el código o enlace de la reunión).
-5. En el panel: «Otra persona» → **Meet · pestaña de Chrome**; «Persona protegida» → **Micrófono**.
+5. En el panel: «Otra persona» → **Meet o WhatsApp Web · pestaña de Chrome**; «Persona protegida» → **Micrófono**.
    Tocá **Iniciar llamada**, elegí la pestaña de Meet (no el panel, ni una ventana, ni la pantalla)
    y activá **Compartir audio de la pestaña**.
 6. Hablá por el celular, por ejemplo: «Hola, te llamo del banco, necesito el código que te llegó por SMS».
@@ -52,7 +52,7 @@ otra cuenta que la de la notebook.
 4. En **Ajustes del Sistema → Sonido**, elegí esa salida múltiple como salida y tu micrófono físico
    como entrada. Cerrá notificaciones y otros sonidos del sistema.
 5. Llamá a la notebook por WhatsApp desde el celular y atendé en WhatsApp Desktop.
-6. En el panel: «Otra persona» → **WhatsApp / escritorio · BlackHole**; «Persona protegida» →
+6. En el panel: «Otra persona» → **App de escritorio · BlackHole**; «Persona protegida» →
    **Micrófono**. Tocá **Iniciar llamada** y hablá por el celular.
 
 **Comprobación:** igual que en Meet: sube el medidor de *Otra persona* y aparece su texto.

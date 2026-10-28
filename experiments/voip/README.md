@@ -459,13 +459,15 @@ Abrí el panel en Chrome en `http://localhost:8765/` o `http://127.0.0.1:8765/`.
 Usá auriculares, elegí un **micrófono físico** para Persona protegida y comprobá
 que la app de llamada también use ese micrófono como entrada.
 
-Para **Meet · pestaña de Chrome**, iniciá la llamada de Meet en otra pestaña.
+Para **Meet o WhatsApp Web · pestaña de Chrome**, iniciá la llamada de Meet o de WhatsApp Web en otra pestaña.
 Tocá **Iniciar llamada** en el panel, elegí esa pestaña y activá **Compartir audio
 de la pestaña**. No elijas este panel, una ventana ni la pantalla completa.
 Si no hay track de audio, el panel libera la captura y no manda `iniciar`.
 El video es obligatorio para el selector de Chrome, pero no se transmite ni se guarda.
 
-Para **WhatsApp / escritorio · BlackHole**, armá primero la salida múltiple:
+Para **App de escritorio · BlackHole**, armá primero la salida múltiple. WhatsApp Desktop no ofreció
+BlackHole como altavoz en la prueba del 2026-10-28; para WhatsApp usá WhatsApp Web en una pestaña.
+
 
 1. Abrí **Configuración de Audio MIDI**, mostrá Dispositivos de audio y tocá
    **+ → Crear dispositivo de salida múltiple**.
@@ -476,7 +478,7 @@ Para **WhatsApp / escritorio · BlackHole**, armá primero la salida múltiple:
    predeterminada, cambiala en los ajustes de sonido de macOS. Conservá el
    micrófono físico como entrada. Así seguís escuchando por los auriculares y
    BlackHole recibe la voz remota; evitá notificaciones y otros sonidos del sistema.
-4. Elegí **WhatsApp / escritorio · BlackHole** en el panel e iniciá. El permiso
+4. Elegí **App de escritorio · BlackHole** en el panel e iniciá. El permiso
    del micrófono habilita los nombres de dispositivos; el panel busca BlackHole
    y lo abre con su `deviceId` exacto. Nunca reemplaza una entrada faltante por
    el micrófono predeterminado.

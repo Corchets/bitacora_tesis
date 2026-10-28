@@ -39,18 +39,18 @@ export async function prepararFuentes(tipo, microfono, alError, signal) {
     /** @type {MediaStream|undefined} */
     let otra;
     if (tipo === 'meet') {
-      if (!navigator.mediaDevices.getDisplayMedia) throw new Error('Abrí este panel en Chrome para compartir la pestaña de Meet.');
+      if (!navigator.mediaDevices.getDisplayMedia) throw new Error('Abrí este panel en Chrome para compartir la pestaña de Meet o WhatsApp Web.');
       // Pedir primero conserva el gesto del clic; video es obligatorio para esta API.
       otra = await navigator.mediaDevices.getDisplayMedia({video: true, audio: true});
       registrar(otra);
       if (!otra.getAudioTracks().some(t => t.readyState === 'live')) {
-        throw new Error('La pestaña compartida no trae audio. Elegí la pestaña de Meet y activá «Compartir audio de la pestaña». No se inició la llamada.');
+        throw new Error('La pestaña compartida no trae audio. Elegí la pestaña de Meet o WhatsApp Web y activá «Compartir audio de la pestaña». No se inició la llamada.');
       }
       if (otra.getVideoTracks()[0]?.getSettings().displaySurface !== 'browser') {
         throw new Error('Elegí una pestaña de Chrome, no una ventana ni la pantalla completa, y compartí su audio. No se inició la llamada.');
       }
     }
-    otra?.getVideoTracks().forEach(t => t.addEventListener('ended', () => fallar('Dejaste de compartir Meet. Iniciá una nueva llamada.')));
+    otra?.getVideoTracks().forEach(t => t.addEventListener('ended', () => fallar('Dejaste de compartir la pestaña. Iniciá una nueva llamada.')));
     etapa = 'microfono';
     const protegida = await navigator.mediaDevices.getUserMedia({audio: microfono});
     registrar(protegida);
@@ -86,7 +86,7 @@ export async function prepararFuentes(tipo, microfono, alError, signal) {
   } catch (error) {
     detener();
     if (error instanceof Error && error.name === 'Error') throw error;
-    if (etapa === 'meet') throw new Error('No pudimos compartir Meet. Permití la captura en Chrome y en los ajustes de grabación de pantalla del sistema; elegí una pestaña con audio. No se inició la llamada.');
+    if (etapa === 'meet') throw new Error('No pudimos compartir la pestaña. Permití la captura en Chrome y en los ajustes de grabación de pantalla del sistema; elegí una pestaña con audio. No se inició la llamada.');
     if (etapa === 'blackhole') throw new Error('No pudimos abrir BlackHole. Revisá el permiso de micrófono de Chrome y que el dispositivo esté disponible. No se inició la llamada.');
     throw new Error(mensajeErrorMicrofono(error));
   }
