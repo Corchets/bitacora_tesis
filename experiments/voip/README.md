@@ -121,8 +121,9 @@ Después de ejecutar ambos ejemplos, abrí **Historial**, marcá esas dos llamad
 **Comparar los 2 marcados**: cada columna identifica el guion y su diferencia, junto al
 resultado real del detector. La llamada, el Historial y la prueba de ASR permiten desplazar
 la página completa; la conversación crece sin quedar encerrada en un panel con scroll propio.
-Para usar `cliente.py`, elegí **Segunda notebook · cliente.py** y tocá **Iniciar llamada**;
-el arranque automático con el primer bloque del cliente sigue funcionando.
+Desde el 2026-10-28 el panel no ofrece «Segunda notebook · cliente.py»: para la demo alcanza con
+Meet o WhatsApp Web, donde la otra persona llama desde su celular. `cliente.py` sigue abriendo la
+llamada solo con su primer bloque de audio, y el Historial muestra con ese nombre las llamadas viejas.
 
 El control viaja por `/panel`:
 

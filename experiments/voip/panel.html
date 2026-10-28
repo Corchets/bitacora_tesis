@@ -1172,7 +1172,6 @@
         <option value="SC-SOPORTE-CLAVE-01">Estafa · falso soporte pide la contraseña</option>
         <option value="LG-SUPPORT-INFO-01">Legítima · soporte ayuda sin pedir la clave</option>
         <option value="SC-WA-CODE-01">Ejemplo corto · robo de WhatsApp</option>
-        <option value="cliente">Segunda notebook · cliente.py</option>
         <option value="meet">Meet o WhatsApp Web · pestaña de Chrome</option>
         <option value="blackhole">App de escritorio · BlackHole</option>
       </select>
@@ -1781,7 +1780,7 @@ function actualizarControles() {
   // La opción que no es micrófono sigue a la fuente de la otra persona; Meet y BlackHole exigen micrófono.
   const acompanar = /** @type {HTMLOptionElement} */ (protegidaFuente.options[0]);
   const remota = fuente.value === "meet" || fuente.value === "blackhole";
-  acompanar.textContent = fuente.value === "cliente" ? "Otra notebook · cliente.py" : remota ? "—" : "Voz del ejemplo (canal derecho)";
+  acompanar.textContent = remota ? "—" : "Voz del ejemplo (canal derecho)";
   acompanar.disabled = remota;
   $("estado-pill").dataset.estado = !conectada ? "sin-conexion" : enLlamada ? "en-llamada" : "lista";
   tabLlamada.disabled = enLlamada || pendiente;
