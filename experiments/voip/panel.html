@@ -264,6 +264,20 @@
   }
   #error:empty { display: none; }
 
+  /* Cancelar eco: casilla bajo la entrada de micrófono */
+  .opcion-eco {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--tinta-secundaria);
+  }
+  .opcion-eco:has(input:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   /* Corte de silencio: número con unidad */
   .corte-silencio .corte-valor {
     display: inline-flex;
@@ -1176,6 +1190,9 @@
         <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
         <button id="buscar-microfonos" disabled type="button" title="Pide permiso para ver los nombres de los micrófonos">Buscar</button>
       </div>
+      <label class="opcion-eco" title="Chrome resta del micrófono lo que suena desde Chrome (WhatsApp Web, Meet). Desactivalo con auriculares para mandar el audio crudo.">
+        <input type="checkbox" id="cancelar-eco" checked> Cancelar eco (sin auriculares)
+      </label>
     </div>
     <span id="corte-lugar"></span>
     <div class="enlaces">
@@ -1364,6 +1381,7 @@ let enLlamada = false, terminada = false, pendiente = false;
 const protegidaFuente = /** @type {HTMLSelectElement} */ ($("protegida-fuente"));
 const microfono = /** @type {HTMLSelectElement} */ ($("microfono"));
 const buscarMicrofonos = /** @type {HTMLButtonElement} */ ($("buscar-microfonos"));
+const cancelarEco = /** @type {HTMLInputElement} */ ($("cancelar-eco"));
 const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
 const corteLlamada = crearSelectorCorte("corte-llamada");
 $("corte-lugar").replaceWith(corteLlamada.elemento);
@@ -1420,6 +1438,12 @@ function guardarPreferenciaSonido(activo) {
 }
 
 let sonidoActivo = leerPreferenciaSonido();
+
+const CLAVE_ECO = "voip_cancelar_eco";
+try { cancelarEco.checked = localStorage.getItem(CLAVE_ECO) !== "0"; } catch { /* localStorage no disponible */ }
+cancelarEco.onchange = () => {
+  try { localStorage.setItem(CLAVE_ECO, cancelarEco.checked ? "1" : "0"); } catch { /* localStorage no disponible */ }
+};
 /** @type {AudioContext|null} */
 let ctxTono = null;
 
@@ -1574,7 +1598,7 @@ async function listarMicrofonos() {
 /** @returns {MediaTrackConstraints} */
 function restriccionesMicrofono() {
   return {deviceId: microfono.value ? {exact: microfono.value} : undefined,
-    channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false};
+    channelCount: 1, echoCancellation: cancelarEco.checked, noiseSuppression: false, autoGainControl: false};
 }
 
 /**
@@ -1752,6 +1776,7 @@ function actualizarControles() {
   const usaMicrofono = pruebaASR.activa || protegidaFuente.value === "microfono";
   microfono.disabled = enLlamada || pendiente || !usaMicrofono;
   buscarMicrofonos.disabled = microfono.disabled;
+  cancelarEco.disabled = microfono.disabled;
   $("campo-microfono").hidden = !usaMicrofono;
   // La opción que no es micrófono sigue a la fuente de la otra persona; Meet y BlackHole exigen micrófono.
   const acompanar = /** @type {HTMLOptionElement} */ (protegidaFuente.options[0]);
@@ -1817,7 +1842,7 @@ async function iniciarSesion() {
     otra: {tipo: "ejemplo", escenario: fuente.value, canal: "izq"},
     protegida: {tipo: "ejemplo", escenario: fuente.value, canal: "der"}
   } : {otra: {tipo: "cliente"}, protegida: {tipo: "cliente"}};
-  if (emisor) fuentes.protegida = {tipo: "navegador"};
+  if (emisor) fuentes.protegida = {tipo: "navegador", cancelar_eco: cancelarEco.checked};
   if (fuenteRemota) fuentes.otra = {tipo: "navegador", origen: fuente.value};
   inicioPropio = true;
   enviar(pruebaASR.activa

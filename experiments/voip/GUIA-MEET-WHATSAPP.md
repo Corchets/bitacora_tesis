@@ -30,8 +30,10 @@ a la izquierda. Cuando hablás vos, sube el de *Persona protegida*, no el otro.
 Si falla:
 - **No inicia y dice que la pestaña no comparte audio.** Elegiste una ventana o la pantalla, o no
   activaste «Compartir audio de la pestaña». Tocá Iniciar de nuevo y elegí la pestaña de Meet.
-- **Se escucha eco, o suben los dos medidores a la vez.** El micrófono de la notebook oye al
-  celular: bajale el volumen o usá auriculares en los dos.
+- **Se escucha eco, o suben los dos medidores a la vez.** El micrófono de la notebook oye lo que
+  suena por los parlantes. Dejá tildada «Cancelar eco (sin auriculares)»: Chrome resta del micrófono
+  lo que reproduce la pestaña de Meet o WhatsApp Web. Si igual sube, bajá el volumen o usá auriculares
+  y destildala para mandar el audio crudo. Cada llamada guarda la elección en `inicio_panel`.
 - **No sube ningún medidor.** Revisá que el celular esté con el micrófono encendido en Meet y
   que la pestaña de Meet no esté silenciada.
 
@@ -66,3 +68,7 @@ Si falla:
 - **Sube el medidor pero no aparece texto, o no sube nada.** La salida del sistema no es la múltiple,
   así que BlackHole no recibe la voz. Revisá el paso 4.
 - **Se escucha eco.** El micrófono oye al celular; bajale el volumen.
+- **El selector de WhatsApp no ofrece BlackHole.** El 2026-10-28, WhatsApp Desktop listó en
+  «Altavoz» solo «Utiliza los ajustes del sistema (Bocinas…)» y «Bocinas de MacBook Pro», aunque
+  macOS tenía la salida múltiple elegida, y BlackHole midió silencio. En ese caso usá WhatsApp Web
+  en Chrome con la receta 1, compartiendo esa pestaña.
