@@ -6,6 +6,7 @@ test('la captura avisa si no sale PCM y libera el micrófono; recibir audio canc
   t.mock.timers.enable({apis: ['setTimeout']});
   const originales = Object.getOwnPropertyDescriptors(globalThis);
   let nodo, socket, cierres = 0, paradas = 0, activaciones = 0;
+  const cola = new ArrayBuffer(64);
   class Contexto {
     audioWorklet = {addModule: async () => {}};
     createMediaStreamSource() { return {connect() {}, disconnect() {}}; }
@@ -13,7 +14,12 @@ test('la captura avisa si no sale PCM y libera el micrófono; recibir audio canc
     async close() { cierres++; }
   }
   class Nodo {
-    port = {};
+    port = {postMessage: m => {
+      if (m.tipo === 'finalizar') {
+        this.port.onmessage({data: cola});
+        this.port.onmessage({data: {tipo: 'audio_finalizado'}});
+      }
+    }};
     constructor() { nodo = this; }
     connect() {}
     disconnect() {}
@@ -47,7 +53,21 @@ test('la captura avisa si no sale PCM y libera el micrófono; recibir audio canc
     assert.deepEqual(socket.enviados, [bloque]);
     t.mock.timers.tick(6000);
     assert.equal(errores.length, 1);
+    let confirmada = false;
+    const fin = otra.finalizar().then(() => { confirmada = true; });
+    await Promise.resolve();
+    assert.deepEqual(socket.enviados, [bloque, cola, 'fin_audio']);
+    assert.equal(confirmada, false, 'no se cierra la captura antes de la confirmación del servidor');
+    socket.onmessage({data: 'audio_recibido'});
+    await fin;
+    assert.equal(confirmada, true);
     otra.detener();
+    const sinConfirmacion = prepararAudio(stream, 'protegida', e => errores.push(e));
+    await sinConfirmacion.iniciar();
+    const rechazo = assert.rejects(sinConfirmacion.finalizar(), /confirmar la recepción del último audio/);
+    t.mock.timers.tick(8000);
+    await rechazo;
+    sinConfirmacion.detener();
   } finally {
     for (const key of ['AudioContext', 'AudioWorkletNode', 'WebSocket', 'location']) {
       if (originales[key]) Object.defineProperty(globalThis, key, originales[key]);

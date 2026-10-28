@@ -97,6 +97,29 @@ La prueba nueva usada para verificar los campos envió PCM sintético con
 `inicio_panel.fuentes.protegida.origen = verificacion_pcm_tts`; no se considera voz humana.
 Al terminar se retiró únicamente esa prueba sintética temporal del Historial.
 
+## Terminar prueba conserva el audio pendiente
+
+Otro pedido del usuario: al tocar «Terminar prueba», mostrar lo grabado hasta ese instante,
+aunque no se haya cumplido el corte de silencio. Se reprodujo un fallo en el AudioWorklet:
+384 muestras a 48 kHz producían un bloque parcial de 128 muestras a 16 kHz que no se enviaba
+al detener la captura. El test nuevo falló con el código anterior.
+
+Ahora el worklet entrega la cola incompleta y confirma que dejó de capturar. El navegador
+manda `fin_audio` por el mismo socket del PCM y espera `audio_recibido`, emitido después de
+procesar los bloques anteriores. Recién entonces libera la entrada y solicita terminar por
+el socket del panel. El ASR vacía su lookahead y emite los finales antes de `fin`. Los controles
+muestran «procesando el último audio» durante el cierre. La confirmación tiene un máximo de
+8 s y, si falla, se informa el error. Meet/BlackHole vacían ambos emisores antes de cerrar.
+
+Verificación: 72 tests Python de VoIP y 4 Node pasan. Se cubren la cola del worklet, el orden
+de envío, la espera de confirmación, su timeout, la conservación exacta del PCM y finales antes
+de `fin`. Con Zipformer real y el canal de otra persona del TTS `SC-WA-CODE-01`, se quitó todo
+el silencio posterior a la última voz: se enviaron y guardaron exactamente 281384 muestras,
+incluida una cola de 424 muestras. Al terminar apareció «Decime el código de activación que
+recibiste por sms» dentro del último final. Se usó corte de 3 s y umbral 0,005; la entrada se
+envió acelerada para verificar el cierre, sin estimar latencia ni calidad. Se preservó localmente
+la prueba humana aún sin guardar antes de reiniciar el servidor para cargar el cambio.
+
 ## Comentario listo para GitHub
 
 ```markdown
@@ -106,11 +129,14 @@ Refs #87, #94
 Probar el ASR permite guardar «Lo que dije en realidad» por frase final, y editar cada
 referencia desde el Historial. El servidor valida los segmentos y deriva el texto global
 para mantener compatibilidad. La medición omite pruebas con referencias incompletas.
-Se conservan Borrar sin cortar el micrófono, guardado explícito y compatibilidad con pruebas anteriores.
+Terminar vacía también el audio pendiente del navegador, espera su recepción y muestra la
+última frase sin esperar el corte por silencio. Se conservan Borrar sin cortar el micrófono,
+guardado explícito y compatibilidad con pruebas anteriores.
 
 Evidencia: experiments/voip/corridas/2026-10-28-correcciones-panel.md.
-Pasan 71 tests VoIP, 37 de medición y 3 Node. Guardado y lectura de tres referencias
-verificados desde Chrome hasta el manifiesto. El micrófono volvió tras reiniciar coreaudiod;
+Pasan 72 tests VoIP, 37 de medición y 4 Node. Guardado y lectura de tres referencias
+verificados desde Chrome hasta el manifiesto; cierre sin silencio final probado con Zipformer real.
+El micrófono volvió tras reiniciar coreaudiod;
 el servidor recibió tres frases reales con texto.
 
 D08 y D09 siguen abiertas. Próxima acción de #94: completar referencias humanas por frase

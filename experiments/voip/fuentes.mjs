@@ -80,7 +80,9 @@ export async function prepararFuentes(tipo, microfono, alError, signal) {
     // El video solo permite seleccionar y conservar el indicador de compartir; no se transmite.
     emisores.push(prepararAudio(protegida, 'protegida', fallar));
     emisores.push(prepararAudio(otra, 'otra', fallar));
-    return {detener, iniciar: async () => { await Promise.all(emisores.map(e => e.iniciar())); }};
+    return {detener,
+      iniciar: async () => { await Promise.all(emisores.map(e => e.iniciar())); },
+      finalizar: async () => { await Promise.all(emisores.map(e => e.finalizar())); }};
   } catch (error) {
     detener();
     if (error instanceof Error && error.name === 'Error') throw error;

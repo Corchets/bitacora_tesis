@@ -1826,9 +1826,16 @@ async function iniciarSesion() {
 }
 
 iniciar.onclick = iniciarSesion;
-terminar.onclick = () => {
-  liberarMicrofono();
-  enviar({tipo: "terminar"});
+terminar.onclick = async () => {
+  pendiente = true; actualizarControles();
+  $("estado").textContent = pruebaASR.activa ? "terminando prueba · procesando el último audio…" : "terminando llamada…";
+  try {
+    await emisor?.finalizar();
+    liberarMicrofono();
+    enviar({tipo: "terminar"});
+  } catch (error) {
+    fallarCaptura(mensajeErrorMicrofono(error));
+  }
 };
 nueva.onclick = () => {
   reiniciar("");

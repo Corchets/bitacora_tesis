@@ -47,6 +47,10 @@ export function prepararAudio(stream, rol, alError, opciones = {}) {
   let iniciado = false;
   /** @type {ReturnType<typeof setTimeout>|undefined} */
   let esperaAudio;
+  /** @type {Promise<void>|null} */
+  let finPendiente = null;
+  /** @type {((error?: Error) => void)|null} */
+  let resolverFin = null;
   /** @type {number[]} */
   let reaperturas = [];
 
@@ -54,6 +58,7 @@ export function prepararAudio(stream, rol, alError, opciones = {}) {
     if (detenido) return;
     detenido = true;
     clearTimeout(esperaAudio);
+    resolverFin?.(new ErrorCaptura('La captura se cerró antes de confirmar el último audio.'));
     stream.getTracks().forEach(track => track.stop());
     fuente.disconnect();
     if (nodo) { nodo.port.onmessage = null; nodo.disconnect(); }
@@ -120,9 +125,11 @@ export function prepararAudio(stream, rol, alError, opciones = {}) {
       };
       socket.onerror = () => fallar('Se perdió la conexión de audio. Iniciá una nueva llamada.');
       nodo.onprocessorerror = () => fallar('Falló la captura de audio. Iniciá una nueva llamada.');
+      socket.onmessage = ({data}) => { if (data === 'audio_recibido') resolverFin?.(); };
       nodo.port.onmessage = ({data}) => {
         if (detenido || socket.readyState !== WebSocket.OPEN) return;
         clearTimeout(esperaAudio);
+        if (data?.tipo === 'audio_finalizado') { socket.send('fin_audio'); return; }
         // Cortar evita acumular segundos de audio viejo si la red o el servidor se frenan.
         if (socket.bufferedAmount > 32000) { fallar('El envío de audio se atrasó. Revisá la conexión e iniciá otra llamada.'); return; }
         socket.send(data);
@@ -138,5 +145,22 @@ export function prepararAudio(stream, rol, alError, opciones = {}) {
       fallar(mensajeErrorMicrofono(error));
     }
   }
-  return {iniciar, detener};
+
+  function finalizar() {
+    if (detenido || !nodo || ws?.readyState !== WebSocket.OPEN) return Promise.resolve();
+    if (!finPendiente) {
+      finPendiente = new Promise((resolve, reject) => {
+        const tiempo = setTimeout(() => resolverFin?.(
+          new ErrorCaptura('No se pudo confirmar la recepción del último audio. Revisá la conexión.')
+        ), 8000);
+        resolverFin = error => {
+          clearTimeout(tiempo); resolverFin = null;
+          if (error) reject(error); else resolve();
+        };
+        nodo?.port.postMessage({tipo: 'finalizar'});
+      });
+    }
+    return finPendiente;
+  }
+  return {iniciar, detener, finalizar};
 }

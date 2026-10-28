@@ -175,6 +175,31 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
     def manifiesto(self, carpeta):
         return json.loads((carpeta / "manifiesto.json").read_text())
 
+    async def test_terminar_tras_confirmar_audio_conserva_la_cola_y_emite_finales_antes_de_fin(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            async with connect(self.url + "/audio?rol=protegida") as audio:
+                completo = np.full(640, 1000, dtype="<i2")
+                cola = np.full(123, 2000, dtype="<i2")
+                await audio.send(completo.tobytes())
+                await audio.send(cola.tobytes())
+                await audio.send("fin_audio")
+                self.assertEqual(await asyncio.wait_for(audio.recv(), 3), "audio_recibido")
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                mensajes = []
+                async with asyncio.timeout(3):
+                    while True:
+                        m = json.loads(await panel.recv())
+                        mensajes.append(m)
+                        if m["tipo"] == "fin":
+                            carpeta = Path(m["dir"])
+                            break
+            self.assertTrue(any(m["tipo"] == "asr" and m["entrega"] == "final" for m in mensajes[:-1]))
+            muestras, hz = sf.read(carpeta / "estereo.wav", dtype="int16", always_2d=True)
+            self.assertEqual(hz, 16000)
+            np.testing.assert_array_equal(muestras[:, 0], np.concatenate([completo, cola]))
+
     async def test_prueba_cierra_sin_guardar_y_se_descarta_al_iniciar_otra(self):
         async with connect(self.url + "/panel") as panel:
             await panel.send(self.inicio())

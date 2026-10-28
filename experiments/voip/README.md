@@ -418,6 +418,15 @@ segmentos finales del ASR. `referencia` se deriva uniendo esos textos en orden c
 línea para las herramientas existentes. Las pruebas anteriores a esta marca no tienen
 `guardada` y no se tocan. Audio y registros de voz real quedan fuera de Git.
 
+Al tocar **Terminar prueba** no hace falta esperar el corte de silencio: se envía también
+el último bloque incompleto del navegador, se espera la confirmación de recepción y el ASR
+vacía lo pendiente. La última frase y su campo de referencia aparecen antes de mostrar la
+prueba terminada. Mientras tanto se indica «procesando el último audio». Esto conserva el
+audio capturado hasta el cierre; no garantiza que el reconocedor transcriba correctamente
+cada palabra. Si falla la confirmación se muestra un error en lugar de esperar indefinidamente.
+La recepción se confirma con `fin_audio` / `audio_recibido` sobre el mismo WebSocket `/audio`
+que lleva el PCM, antes de mandar `terminar` por `/panel`.
+
 ```json
 {"tipo":"iniciar","modo":"asr","fuentes":{"protegida":{"tipo":"navegador"}},"corte_silencio_s":1.2,"umbral_rms_silencio":0.005}
 {"tipo":"reiniciar_prueba"}

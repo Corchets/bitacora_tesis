@@ -247,6 +247,10 @@ class Servidor:
         print(f"[audio] conectado: {rol} ({ws.remote_address[0]})")
         try:
             async for mensaje in ws:
+                if mensaje == "fin_audio":
+                    # Viaja por el mismo socket que el PCM: todo lo anterior ya fue procesado.
+                    await ws.send("audio_recibido")
+                    continue
                 if not isinstance(mensaje, bytes):
                     continue
                 async with self.control:
