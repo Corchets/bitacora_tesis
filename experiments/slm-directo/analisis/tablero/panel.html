@@ -54,7 +54,10 @@ label.ctl{display:flex;flex-direction:column;font-size:12px;color:var(--mu);gap:
 .lista{max-height:560px;overflow:auto;border:1px solid var(--bd);border-radius:8px;background:var(--panel)}
 .it{padding:6px 10px;border-bottom:1px solid var(--bd);cursor:pointer;font-size:12.5px;display:flex;justify-content:space-between;gap:6px}
 .it:hover,.it.sel{background:var(--pr2)}
-.lin{display:grid;grid-template-columns:30px 22px 1fr 150px;gap:6px;padding:4px 6px;border-radius:6px;font-size:13px;align-items:start}
+.lin{display:grid;grid-template-columns:30px minmax(0,1fr) 150px;gap:6px;padding:4px 6px;border-radius:6px;font-size:13px;align-items:start}
+.caso-hablante{display:block}
+#caso-protegida{width:100%;min-width:0}
+@media(max-width:600px){.lin{grid-template-columns:24px minmax(0,1fr)}.caso-evaluacion{grid-column:2}}
 .lin .n{color:var(--mu);font-variant-numeric:tabular-nums}
 .lin.tr{background:#fff4d6}.lin.tc{background:#fde2e2}.lin.av{outline:2px solid var(--c1);outline-offset:-2px}
 .riesgo{height:8px;border-radius:4px;background:#eceae4;position:relative;margin-top:6px}.riesgo i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
@@ -598,6 +601,21 @@ $('#af-reset').onclick = () => { $('#af-base').value = 'alerta'; $('#af-tau').va
 })();
 
 // ---------------- Casos ----------------
+function protegidaDelCaso(c, elegida) {
+  if (elegida === 'A' || elegida === 'B') return elegida;
+  const pedido = c.clase === 'vishing' && c.tr ? c.lineas[c.tr - 1]?.[0] : null;
+  return pedido === 'A' ? 'B' : pedido === 'B' ? 'A' : '';
+}
+function nombreEnCaso(c, hablante, protegida) {
+  if (!protegida) return hablante === 'A' ? 'Primera persona' : 'Segunda persona';
+  return hablante === protegida ? 'Persona protegida' : c.clase === 'vishing' ? 'Atacante' : 'Otra persona';
+}
+const rolesElegidos = (() => {
+  try {
+    const guardados = JSON.parse(localStorage.getItem('panel-personas-protegidas') || '{}');
+    return guardados && typeof guardados === 'object' && !Array.isArray(guardados) ? guardados : {};
+  } catch { return {}; }
+})();
 let filtroCasos = 'todos', casoSel = 'SC-WA-CODE-01-e01';
 function pintarCasos() {
   const n = g => D.casos.filter(c => c.grupo === g || c.clase === g).length;
@@ -611,19 +629,31 @@ function pintarCasos() {
 }
 function pintarCaso() {
   const c = CASOS[casoSel], ci = $('#casos-corrida').value, corr = ci === '' ? null : CORRIDAS[+ci];
+  const protegida = protegidaDelCaso(c, rolesElegidos[c.id]);
+  const opcionesPersonas = ['A', 'B'].map(h => {
+    const frase = c.lineas.find(([letra]) => letra === h)?.[1] || '';
+    return `<option value="${h}" ${h === protegida ? 'selected' : ''}>Quien dice: «${esc(frase.slice(0, 90))}»</option>`;
+  }).join('');
   const filas = corr ? (porCaso(corr)[c.id] || []) : [], fm = Object.fromEntries(filas.map(f => [f[1], f]));
   const av = corr ? avisoEn(filas, politica) : null;
   const win = Object.entries({reglas: 'Reglas', q08: '0.8B', q2: '2B', q4: '4B'}).map(([k, n]) => `<span class="tag tg">${n}: ${esc(c.win[k] ?? '—')}</span>`).join(' ');
   $('#casos-det').innerHTML = `<div class="card"><h3 style="margin:0">${c.id}</h3>
    <div class="mu chico">${c.grupo} · ${c.clase}${c.pedido ? ' · pedido ' + c.pedido : ''} · T_R línea ${c.tr ?? '—'} · T_C línea ${c.tc ?? '—'}</div>
+   <label class="ctl">Persona protegida<select id="caso-protegida"><option value="" disabled ${protegida ? '' : 'selected'}>Elegí su primera frase</option>${opcionesPersonas}</select></label>
+   <p class="chico mu">${!protegida ? 'Este caso no identifica a la persona protegida. Elegí su frase para mostrar los roles.' : rolesElegidos[c.id] ? 'Roles elegidos para leer este caso; se recuerdan en este navegador.' : 'Roles sugeridos: se toma como atacante a quien formula el pedido crítico marcado. Podés corregir la persona protegida arriba.'} Esta elección solo cambia la lectura, no la referencia ni lo que recibe el detector.</p>
    <div class="fila chico">Windows GPU: ${win}</div>
    <div class="chico mu">«&lt;R L3»: avisó en la línea 3, antes del pedido · «=R»: en el pedido · «&gt;R»: después · «FA L2»: falsa alarma en la línea 2 · «ok»: sin aviso en una legítima · «—»: no avisó.</div>
    <div style="margin-top:8px">${c.lineas.map(([h, t], i) => { const n = i + 1, f = fm[n];
      const r = f && f[3] != null ? `<div class="riesgo" title="riesgo ${num(f[3])}"><i style="width:${f[3] * 100}%;background:${f[3] >= .5 ? '#dc2626' : '#f59e0b'}"></i></div>` : '';
      const a = f ? (f[2] ? (f[4] ? '<span class="bad">alerta</span>' : '<span class="mu">—</span>') : '<span class="warn">fallo</span>') : '';
-     return `<div class="lin ${n === c.tr ? 'tr' : n === c.tc ? 'tc' : ''} ${av && av[1] === n ? 'av' : ''}"><span class="n">${n}</span><b>${h}</b><span>${esc(t)}${f && f[4] && f[6] ? `<div class="mot">↳ ${esc(f[6])}</div>` : ''}</span><span class="chico">${a}${f && f[3] != null ? ' · ' + num(f[3]) : ''}${r}</span></div>`; }).join('')}</div>
+     return `<div class="lin ${n === c.tr ? 'tr' : n === c.tc ? 'tc' : ''} ${av && av[1] === n ? 'av' : ''}"><span class="n">${n}</span><span><b class="caso-hablante">${nombreEnCaso(c, h, protegida)}</b>${esc(t)}${f && f[4] && f[6] ? `<div class="mot">↳ ${esc(f[6])}</div>` : ''}</span><span class="chico caso-evaluacion">${a}${f && f[3] != null ? ' · ' + num(f[3]) : ''}${r}</span></div>`; }).join('')}</div>
    <div class="ley"><span><i style="background:#fff4d6"></i>línea del pedido (T_R)</span><span><i style="background:#fde2e2"></i>línea del cumplimiento (T_C)</span><span><i style="border:2px solid var(--c1)"></i>aviso con la política actual</span></div></div>
    <div class="card"><b>Qué prueba</b><p class="chico">${esc(c.prueba)}</p>${c.notas ? `<b>Notas de la referencia</b><p class="chico">${esc(c.notas)}</p>` : ''}</div>`;
+  $('#caso-protegida').onchange = e => {
+    rolesElegidos[c.id] = e.target.value;
+    try { localStorage.setItem('panel-personas-protegidas', JSON.stringify(rolesElegidos)); } catch { /* la elección sigue vigente en esta pestaña */ }
+    pintarCaso();
+  };
 }
 $('#casos-filtros').onclick = e => { if (e.target.dataset.f) { filtroCasos = e.target.dataset.f; pintarCasos(); } };
 $('#casos-lista').onclick = e => { const it = e.target.closest('.it'); if (it) { casoSel = it.dataset.id; pintarCasos(); } };

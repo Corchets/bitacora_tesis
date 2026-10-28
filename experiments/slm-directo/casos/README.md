@@ -37,6 +37,14 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
   de la corrida (`--hablantes`). No confundir con el «rol A» y el «rol B» de las
   [fichas](../../../docs/corpus/METODO-CREACION-CORPUS.md#5-fichas-de-rol): en la
   legítima de WhatsApp, por ejemplo, habla primero quien recibió el código.
+- El visor **Casos** del tablero muestra los nombres completos de los roles. En
+  vishing sugiere como atacante a quien formula el pedido marcado en `T_R`; sin
+  ese dato, pide elegir la persona protegida por su primera frase. En legítimas
+  usa «Persona protegida» / «Otra persona». La elección se puede corregir y se
+  conserva solo en el navegador; no cambia el guion, la referencia ni la entrada
+  del detector. Es una ayuda de lectura, no una anotación humana aprobada en D07.
+  > **Estado: propuesta sin discutir.** La sugerencia de roles a partir del pedido
+  > es provisional; no resuelve [D07](../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).
 - **Una línea = un turno cerrado = una actualización del detector.** Si la misma
   persona dice dos cosas seguidas que conviene evaluar por separado, van en dos
   líneas con la misma letra.
