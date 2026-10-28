@@ -87,10 +87,28 @@ Arrancá una vez el servidor desde `experiments/voip/`:
 ../../.venv/bin/python servidor.py --host 127.0.0.1 --detector reglas --salida /tmp/voip-demo-llamadas
 ```
 
-Abrí `http://127.0.0.1:8765/`, elegí **Ejemplo · estafa SC-WA-CODE-01** o
-**Ejemplo · legítima LG-WA-CONSULTA-01** y tocá **Iniciar llamada**. No pide micrófono ni
-captura audio del navegador. Los WAV locales deben existir en `experiments/asr-local/audio/`:
-`SC-WA-CODE-01-tts-estereo.wav` y `LG-WA-CONSULTA-01-tts-estereo.wav` (estéreo PCM a 16 kHz).
+Abrí `http://127.0.0.1:8765/` y elegí **Estafa · falso soporte pide la contraseña** o
+**Legítima · soporte ayuda sin pedir la clave**. Tocá **Iniciar llamada**. El primer
+guion inventa una migración de cuenta y pide credenciales; el segundo menciona las mismas
+credenciales, rechaza recibirlas y guía la recuperación. Reutilizan los textos de desarrollo
+[`SC-SOPORTE-CLAVE-01-e01`](../slm-directo/casos/texto/SC-SOPORTE-CLAVE-01-e01.txt) y
+[`LG-SUPPORT-INFO-01-e01`](../slm-directo/casos/texto/LG-SUPPORT-INFO-01-e01.txt), de 14 y 13
+turnos. Los ejemplos cortos de WhatsApp siguen disponibles. Son demostraciones sintéticas,
+sin valor de evaluación con voz humana.
+
+Con **Persona protegida → Voz del ejemplo**, no se pide micrófono ni se captura audio del
+navegador. Los WAV locales deben existir en `experiments/asr-local/audio/`, como estéreo PCM
+a 16 kHz. **Git no los copia entre worktrees.** Para generar los cuatro ejemplos en macOS,
+con las voces Paulina y Mónica y `ffmpeg`, ejecutá desde la raíz del repositorio:
+
+```bash
+python experiments/asr-local/sintetizar_par.py
+```
+
+Si ya existen en otra copia, se puede enlazar su carpeta `audio` desde esta copia, igual
+que los modelos. La carpeta y su enlace permanecen fuera de Git. Si falta un WAV o no se
+puede leer, el panel explica cómo prepararlo antes de abrir la llamada.
+
 El servidor lee izquierdo = otra persona, derecho = protegida y entrega pares de bloques
 cada 40 ms por la misma entrada que usa `/audio`, después de precargar los dos ASR.
 El estéreo **guardado** conserva su formato anterior: izquierdo = protegida, derecho = otra.
@@ -99,6 +117,10 @@ El estéreo **guardado** conserva su formato anterior: izquierdo = protegida, de
 El ejemplo también termina automáticamente cuando se acaba el archivo. **Nueva llamada**
 limpia conversación, aviso, riesgo y demoras; después podés elegir otro ejemplo e iniciarlo.
 Cada llamada usa una carpeta distinta, incluso si abrís dos dentro del mismo segundo.
+Después de ejecutar ambos ejemplos, abrí **Historial**, marcá esas dos llamadas y tocá
+**Comparar los 2 marcados**: cada columna identifica el guion y su diferencia, junto al
+resultado real del detector. La llamada, el Historial y la prueba de ASR permiten desplazar
+la página completa; la conversación crece sin quedar encerrada en un panel con scroll propio.
 Para usar `cliente.py`, elegí **Segunda notebook · cliente.py** y tocá **Iniciar llamada**;
 el arranque automático con el primer bloque del cliente sigue funcionando.
 
@@ -355,8 +377,19 @@ manda ese corte y el endpoint nativo del modelo se apaga, así el valor elegido 
 El servidor sigue aceptando `"auto"` (lo usan `cliente.py` y las llamadas viejas del Historial).
 Tocá **▶ Hablar**, permití el micrófono y hablá con pausas. Usa la entrada de micrófono
 seleccionada en el panel (o la predeterminada). No conecta otra persona ni ejecuta el detector.
+El selector **Micrófono** y **Buscar micrófonos** quedan visibles también en esta pestaña;
+no hace falta volver a la llamada para elegir la entrada física.
 Si cambia la configuración se recrean y precargan ambos motores antes de emitir `inicio`;
 recién entonces se conecta el audio, así la carga no entra en la demora de la frase.
+El navegador pide activar el audio antes de esperar la respuesta del servidor. Si después
+de conectar pasan cinco segundos sin que el AudioWorklet envíe ningún bloque PCM, se cierra
+la captura y se muestra un error con la entrada y los permisos que hay que revisar. Esto
+distingue una captura detenida de un ASR que recibe sonido y transcribe mal: el volumen
+puede seguir en cero si la entrada está enviando silencio, aunque lleguen bloques.
+Si el micrófono físico sigue en cero y también falla una captura fuera de Chrome con
+`Audio Hardware Not Running`, reiniciá el servicio de audio con `sudo killall coreaudiod`
+desde Terminal y reabrí Chrome. Lo ejecuta la persona en su notebook con su contraseña de
+administrador; el panel no toca el servicio ni pide contraseñas.
 
 El provisorio gris se reescribe; al cerrar queda fijo y muestra `disponible_s - fin_voz_s`,
 en milisegundos desde el último bloque por encima del umbral. Es una estimación por energía,

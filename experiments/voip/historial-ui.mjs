@@ -12,7 +12,7 @@ import {crearLinea} from './conversacion.mjs';
  */
 
 const ESTILOS = `
-  #historial { display:none; max-width:1500px; width:calc(100% - 2rem); margin:1rem auto; padding:0 0 1rem; max-height:calc(100vh - 5.5rem); overflow-y:auto; }
+  #historial { display:none; max-width:1500px; width:calc(100% - 2rem); margin:1rem auto; padding:0 0 1rem; }
   body.historial #historial { display:block; }
   body.historial #controles, body.historial main, body.historial #prueba-asr, body.historial #sonido-aviso { display:none !important; }
   #historial h2 { font-size:1.25rem; margin:0; color:var(--tinta); }
@@ -62,6 +62,12 @@ const riesgo = r => r == null ? '—' : `${Math.round(r * 100)}%`;
 const detector = e => e.detector ? (e.modelo ? `${e.detector} · ${e.modelo}` : e.detector) : '—';
 /** @param {Elemento} e */
 const avisoTexto = e => e.aviso ? `Avisó a los ${num(e.aviso_s, ' s')}` : 'No avisó';
+/** @param {Elemento} e */
+const nombreFuente = e => e.fuente
+  .replace('SC-SOPORTE-CLAVE-01', 'falso soporte pide la contraseña')
+  .replace('LG-SUPPORT-INFO-01', 'soporte ayuda sin pedir la clave')
+  .replace('SC-WA-CODE-01', 'robo de WhatsApp (corto)')
+  .replace('LG-WA-CONSULTA-01', 'consulta por código de WhatsApp (corto)');
 /** @param {string|null} iso */
 function fecha(iso) {
   const d = iso ? new Date(iso) : null;
@@ -159,7 +165,7 @@ export function montarHistorial(acciones) {
   /** @param {Elemento} e */
   function fila(e) {
     const li = document.createElement('li');
-    const etiqueta = `${fecha(e.fecha)} · ${e.fuente}`;
+    const etiqueta = `${fecha(e.fecha)} · ${nombreFuente(e)}`;
     const marca = document.createElement('label');
     marca.className = 'hist-marca';
     const caja = document.createElement('input');
@@ -253,7 +259,7 @@ export function montarHistorial(acciones) {
     const col = document.createElement('article');
     col.className = 'hist-col';
     col.innerHTML = `<h3></h3><dl class="hist-datos"></dl>`;
-    /** @type {HTMLElement} */ (col.querySelector('h3')).textContent = `${e.tipo === 'prueba' ? 'Prueba' : 'Llamada'} · ${fecha(e.fecha)} · ${e.fuente}`;
+    /** @type {HTMLElement} */ (col.querySelector('h3')).textContent = `${e.tipo === 'prueba' ? 'Prueba' : 'Llamada'} · ${fecha(e.fecha)} · ${nombreFuente(e)}`;
     const datos = /** @type {HTMLElement} */ (col.querySelector('dl'));
     const pares = e.tipo === 'prueba'
       ? [['Duración', num(e.duracion_s, ' s')], ['Corte', corte(e.corte_silencio_s)], ['Umbral RMS', String(e.umbral_rms_silencio ?? '—')]]
@@ -263,6 +269,12 @@ export function montarHistorial(acciones) {
       datos.append(Object.assign(document.createElement('dt'), {textContent: k}), Object.assign(document.createElement('dd'), {textContent: v}));
     }
     if (e.tipo === 'prueba') col.append(editorReferencia(e));
+    const contexto = e.fuente.includes('SC-SOPORTE-CLAVE-01')
+      ? 'Guion de estafa: el falso soporte inventa una migración de cuenta, pide usuario y contraseña e insiste cuando la persona duda.'
+      : e.fuente.includes('LG-SUPPORT-INFO-01')
+        ? 'Guion legítimo: se habla de usuario y contraseña, pero el soporte rechaza recibirlos y guía a la persona para recuperar el acceso por su cuenta.'
+        : '';
+    if (contexto) col.append(Object.assign(document.createElement('p'), {textContent: `${contexto} Audio sintético de demostración.`}));
     const charla = document.createElement('div');
     charla.className = 'hist-charla';
     charla.setAttribute('role', 'list');

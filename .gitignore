@@ -29,6 +29,7 @@ models/checkpoints/
 artifacts/
 experiments/laboratorio/modelos/
 experiments/asr-local/modelos/
+experiments/asr-local/audio
 
 # Python
 .venv/

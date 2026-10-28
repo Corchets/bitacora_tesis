@@ -51,7 +51,7 @@ from motores import MotorSherpaZipformer
 DIR_MODELO = DIR_VOIP.parent / "asr-local" / "modelos" / "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
 
 EJEMPLOS = {nombre: DIR_VOIP.parent / "asr-local" / "audio" / f"{nombre}-tts-estereo.wav"
-            for nombre in ("SC-WA-CODE-01", "LG-WA-CONSULTA-01")}
+            for nombre in ("SC-WA-CODE-01", "LG-WA-CONSULTA-01", "SC-SOPORTE-CLAVE-01", "LG-SUPPORT-INFO-01")}
 
 
 CORTE_AUTO = "auto"
@@ -304,7 +304,19 @@ class Servidor:
                 raise ValueError("Elegí un ejemplo: izquierdo otra persona, derecho protegida.")
             import soundfile as sf
             import numpy as np
-            audio, hz = sf.read(EJEMPLOS[escenario], dtype="float32", always_2d=True)
+            ruta = EJEMPLOS[escenario]
+            if not ruta.is_file():
+                raise ValueError(
+                    f"Falta el audio de ejemplo {ruta.name} en {ruta.parent}. "
+                    "Prepará los ejemplos desde la raíz del repositorio con "
+                    "python experiments/asr-local/sintetizar_par.py, o enlazá la carpeta audio "
+                    "de la copia donde ya los generaste. Para hablar, elegí micrófono, Meet o cliente.py."
+                )
+            try:
+                audio, hz = sf.read(ruta, dtype="float32", always_2d=True)
+            except (OSError, sf.LibsndfileError) as exc:
+                raise ValueError(f"No se pudo leer el audio de ejemplo {ruta.name}. "
+                                 "Volvé a generarlo con python experiments/asr-local/sintetizar_par.py.") from exc
             if hz != SAMPLE_RATE or audio.shape[1] != 2 or not len(audio) or not np.isfinite(audio).all():
                 raise ValueError("El ejemplo debe ser estéreo a 16 kHz y contener audio válido.")
         corte, umbral = validar_corte(mensaje.get("corte_silencio_s")), mensaje.get("umbral_rms_silencio")

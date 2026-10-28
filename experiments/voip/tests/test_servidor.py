@@ -63,6 +63,16 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         return json.dumps({"tipo": "iniciar", "modo": "llamada", "fuentes": fuentes,
                            "corte_silencio_s": corte, "umbral_rms_silencio": None})
 
+    async def test_ejemplo_ausente_explicita_como_prepararlo_sin_abrir_llamada(self):
+        with patch("servidor.EJEMPLOS", {"LG-WA-CONSULTA-01": self.dir / "ausente.wav"}):
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(self.inicio("LG-WA-CONSULTA-01"))
+                error = await self.evento(panel, "error")
+        self.assertIn("Falta el audio de ejemplo", error["mensaje"])
+        self.assertIn("sintetizar_par.py", error["mensaje"])
+        self.assertIsNone(self.servidor.llamada)
+        self.assertEqual(list(self.dir.iterdir()), [])
+
     async def test_inicio_informa_detector_fijo_del_servidor(self):
         from servidor import servir_panel
         resp = servir_panel(None, Namespace(path="/detector"), self.servidor.args)

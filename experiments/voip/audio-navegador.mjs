@@ -36,6 +36,8 @@ export function verificarCaptura() {
  */
 export function prepararAudio(stream, rol, alError, opciones = {}) {
   const contexto = new AudioContext();
+  // Pedir la activación durante el clic, antes de esperar el inicio por WebSocket.
+  void contexto.resume().catch(() => {});
   let fuente = contexto.createMediaStreamSource(stream);
   /** @type {AudioWorkletNode|null} */
   let nodo = null;
@@ -43,12 +45,15 @@ export function prepararAudio(stream, rol, alError, opciones = {}) {
   let ws = null;
   let detenido = false;
   let iniciado = false;
+  /** @type {ReturnType<typeof setTimeout>|undefined} */
+  let esperaAudio;
   /** @type {number[]} */
   let reaperturas = [];
 
   function detener() {
     if (detenido) return;
     detenido = true;
+    clearTimeout(esperaAudio);
     stream.getTracks().forEach(track => track.stop());
     fuente.disconnect();
     if (nodo) { nodo.port.onmessage = null; nodo.disconnect(); }
@@ -117,6 +122,7 @@ export function prepararAudio(stream, rol, alError, opciones = {}) {
       nodo.onprocessorerror = () => fallar('Falló la captura de audio. Iniciá una nueva llamada.');
       nodo.port.onmessage = ({data}) => {
         if (detenido || socket.readyState !== WebSocket.OPEN) return;
+        clearTimeout(esperaAudio);
         // Cortar evita acumular segundos de audio viejo si la red o el servidor se frenan.
         if (socket.bufferedAmount > 32000) { fallar('El envío de audio se atrasó. Revisá la conexión e iniciá otra llamada.'); return; }
         socket.send(data);
@@ -124,6 +130,9 @@ export function prepararAudio(stream, rol, alError, opciones = {}) {
       fuente.connect(nodo);
       // La salida del worklet es silencio: mantiene el procesamiento sin reproducir el micrófono.
       nodo.connect(contexto.destination);
+      esperaAudio = setTimeout(() => fallar(
+        'El navegador abrió el micrófono pero no está enviando audio. Revisá la entrada de sonido y los permisos de Chrome; elegí un micrófono físico y volvé a iniciar.'
+      ), 5000);
       await contexto.resume();
     } catch (error) {
       fallar(mensajeErrorMicrofono(error));

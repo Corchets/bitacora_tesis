@@ -11,7 +11,7 @@ export function montarPruebaASR(acciones) {
   seccion.id = 'prueba-asr';
   seccion.innerHTML = `
     <style>
-      #prueba-asr { display:none; max-width:1000px; width:calc(100% - 2rem); margin:1rem auto; max-height:calc(100vh - 5.5rem); overflow-y:auto; scrollbar-width:thin; }
+      #prueba-asr { display:none; max-width:1000px; width:calc(100% - 2rem); margin:1rem auto; }
       body.asr #prueba-asr { display:block; }
       #prueba-asr .asr-modo-toggle { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0, 0, 0, 0); white-space:nowrap; border:0; }
       #prueba-asr .tarjeta { background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:.85rem; }
@@ -48,7 +48,7 @@ export function montarPruebaASR(acciones) {
       #asr-guardado label { font-weight:700; }
       #asr-guardado .fila { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
       #asr-guardado-estado { font-weight:600; color:var(--tinta-secundaria, #334155); }
-      body.asr #controles > :not(#error), body.asr main { display:none; }
+      body.asr #controles > :not(#error):not(.campos), body.asr #controles .campos > :not(#campo-microfono), body.asr main { display:none; }
       body.protegida #prueba-asr { display:none; }
       @media (max-width: 760px) { #prueba-asr .ajustes { grid-template-columns:1fr; } }
       @media (prefers-reduced-motion: reduce) { #prueba-asr .relleno { transition:none; } }
