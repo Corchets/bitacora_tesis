@@ -87,10 +87,13 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         from servidor import servir_panel
         resp = servir_panel(None, Namespace(path="/guia"), self.servidor.args)
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("text/plain", resp.headers["Content-Type"])
+        self.assertIn("text/html", resp.headers["Content-Type"])
         texto = resp.body.decode("utf-8")
-        self.assertIn("Receta 1 · Meet", texto)
-        self.assertIn("Receta 2 · WhatsApp", texto)
+        self.assertIn('<span class="num">Receta 1</span>Meet', texto)
+        self.assertIn('<span class="num">Receta 2</span>WhatsApp', texto)
+        self.assertIn('<ol class="pasos">', texto)
+        self.assertIn("<code>sudo killall coreaudiod</code>", texto)
+        self.assertNotIn("**", texto)
 
     async def test_prueba_asr_dos_cortes_umbral_manifiesto_y_sin_detector(self):
         class MotorSilencio(MotorFalso):

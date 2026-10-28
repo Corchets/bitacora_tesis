@@ -41,6 +41,7 @@ from websockets.asyncio.server import broadcast, serve
 from websockets.datastructures import Headers
 from websockets.http11 import Response
 
+import guia
 import historial
 from llamada import DIR_VOIP, ROLES, SAMPLE_RATE, Llamada
 
@@ -467,14 +468,17 @@ def servir_panel(connection, request, args: argparse.Namespace | None = None):
                                ("Content-Length", str(len(cuerpo)))])
         return Response(HTTPStatus.OK, "OK", encabezados, cuerpo)
     rutas = {"/": ("panel.html", "text/html; charset=utf-8"),
-             "/guia": ("GUIA-MEET-WHATSAPP.md", "text/plain; charset=utf-8"),
              **{f"/{nombre}": (nombre, "text/javascript; charset=utf-8") for nombre in
                 ("audio-navegador.mjs", "audio-worklet.mjs", "audio-pcm.mjs", "probar-asr.mjs", "fuentes.mjs", "corte-silencio.mjs", "conversacion.mjs", "historial-ui.mjs")}}
-    archivo = rutas.get(ruta)
-    if archivo is None:
+    if ruta == "/guia":
+        # La guía se escribe en Markdown y se sirve como página, para leerla cómoda desde el panel.
+        cuerpo = guia.a_html((DIR_VOIP / "GUIA-MEET-WHATSAPP.md").read_text(encoding="utf-8")).encode("utf-8")
+        tipo = "text/html; charset=utf-8"
+    elif (archivo := rutas.get(ruta)) is None:
         return None
-    nombre, tipo = archivo
-    cuerpo = (DIR_VOIP / nombre).read_bytes()
+    else:
+        nombre, tipo = archivo
+        cuerpo = (DIR_VOIP / nombre).read_bytes()
     encabezados = Headers([("Content-Type", tipo), ("Content-Length", str(len(cuerpo)))])
     return Response(HTTPStatus.OK, "OK", encabezados, cuerpo)
 

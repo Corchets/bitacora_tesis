@@ -26,19 +26,25 @@ export function verificarCaptura() {
 /**
  * Toma posesión del stream; detener() libera todos sus tracks incluso durante el arranque.
  * Prepará después del permiso e iniciá al recibir el «inicio» del servidor.
+ * Si la pista termina sola (macOS cambia la entrada, se reconectan los auriculares, el sistema
+ * la reinicia) y hay `reabrir`, se pide otra igual y se sigue por el mismo WebSocket, sin cortar
+ * la llamada; solo se falla si no se puede reabrir o si pasa muchas veces seguidas.
  * @param {MediaStream} stream
  * @param {'protegida'|'otra'} rol
  * @param {(mensaje: string) => void} alError
+ * @param {{reabrir?: () => Promise<MediaStream>, alReconectar?: (nombre: string) => void}} [opciones]
  */
-export function prepararAudio(stream, rol, alError) {
+export function prepararAudio(stream, rol, alError, opciones = {}) {
   const contexto = new AudioContext();
-  const fuente = contexto.createMediaStreamSource(stream);
+  let fuente = contexto.createMediaStreamSource(stream);
   /** @type {AudioWorkletNode|null} */
   let nodo = null;
   /** @type {WebSocket|null} */
   let ws = null;
   let detenido = false;
   let iniciado = false;
+  /** @type {number[]} */
+  let reaperturas = [];
 
   function detener() {
     if (detenido) return;
@@ -55,9 +61,37 @@ export function prepararAudio(stream, rol, alError) {
     detener();
     alError(mensaje);
   }
-  stream.getAudioTracks().forEach(track => track.addEventListener('ended', () => {
-    fallar('Se desconectó la entrada de audio. Conectala e iniciá una nueva llamada.');
-  }));
+  /** @param {MediaStream} s */
+  const nombre = s => s.getAudioTracks()[0]?.label || 'el micrófono';
+  /** @param {MediaStream} vigilado */
+  async function alTerminarPista(vigilado) {
+    if (detenido || vigilado !== stream) return;
+    const perdido = nombre(vigilado);
+    const ahora = performance.now();
+    reaperturas = reaperturas.filter(t => ahora - t < 10000);
+    if (!opciones.reabrir || reaperturas.length >= 3) {
+      fallar(`Se desconectó la entrada de audio (${perdido}). Conectala o elegí otra en «Micrófono» e iniciá de nuevo.`);
+      return;
+    }
+    reaperturas.push(ahora);
+    try {
+      const nuevo = await opciones.reabrir();
+      if (detenido) { nuevo.getTracks().forEach(t => t.stop()); return; }
+      fuente.disconnect();
+      stream = nuevo;
+      fuente = contexto.createMediaStreamSource(nuevo);
+      vigilar(nuevo);
+      if (nodo) fuente.connect(nodo);
+      opciones.alReconectar?.(nombre(nuevo));
+    } catch {
+      fallar(`Se desconectó la entrada de audio (${perdido}) y no se pudo volver a abrir. Conectala o elegí otra en «Micrófono» e iniciá de nuevo.`);
+    }
+  }
+  /** @param {MediaStream} s */
+  function vigilar(s) {
+    s.getAudioTracks().forEach(track => track.addEventListener('ended', () => { void alTerminarPista(s); }));
+  }
+  vigilar(stream);
 
   async function iniciar() {
     if (detenido || iniciado) return;

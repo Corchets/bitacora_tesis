@@ -11,45 +11,87 @@ export function montarPruebaASR(acciones) {
   seccion.id = 'prueba-asr';
   seccion.innerHTML = `
     <style>
-      #prueba-asr { display:none; max-width:1000px; width:calc(100% - 2rem); margin:1rem auto; padding:1rem 1.25rem; background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:12px; max-height:calc(100vh - 5.5rem); overflow-y:auto; }
+      #prueba-asr { display:none; max-width:1000px; width:calc(100% - 2rem); margin:1rem auto; max-height:calc(100vh - 5.5rem); overflow-y:auto; scrollbar-width:thin; }
       body.asr #prueba-asr { display:block; }
       #prueba-asr .asr-modo-toggle { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0, 0, 0, 0); white-space:nowrap; border:0; }
-      #prueba-asr h2 { font-size:1.25rem; margin:0 0 .75rem; color:var(--tinta, #0f172a); }
-      #prueba-asr .ajustes { display:flex; flex-wrap:wrap; gap:.8rem; align-items:center; }
-      #prueba-asr textarea { font:inherit; width:100%; min-height:4.5rem; padding:.5rem .6rem; border:1px solid var(--linea, #cbd5e1); border-radius:4px; resize:vertical; box-sizing:border-box; }
-      #asr-guardado { margin:1rem 0; padding:.8rem 1rem; border:1px solid var(--linea, #cbd5e1); border-radius:8px; display:grid; gap:.5rem; }
-      #asr-guardado label { font-weight:600; }
+      #prueba-asr .tarjeta { background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:12px; padding:1.1rem 1.25rem; margin-bottom:.85rem; }
+      #prueba-asr h2 { font-size:1.375rem; letter-spacing:-.01em; margin:0; color:var(--tinta, #0f172a); }
+      #prueba-asr .bajada { margin:.25rem 0 0; color:var(--tinta-secundaria, #334155); }
+      #prueba-asr .cabeza { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:1rem; }
+      #prueba-asr .botones { display:flex; gap:.45rem; }
+      #asr-iniciar { background:var(--primary, #1d4ed8); color:#fff; border-color:var(--primary, #1d4ed8); padding-inline:1.1rem; }
+      #asr-iniciar:hover:not(:disabled) { background:var(--primary-dark, #1e40af); }
+      #asr-terminar { color:var(--alerta, #b91c1c); border-color:var(--alerta-borde, #f87171); }
+      #prueba-asr .ajustes { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:1rem 1.5rem; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--linea, #cbd5e1); }
+      #prueba-asr .ajuste p { margin:.35rem 0 0; font-size:.8125rem; line-height:1.5; color:var(--tinta-secundaria, #334155); max-width:52ch; }
+      #prueba-asr .ajuste label { font-size:.75rem; font-weight:700; color:var(--tinta-secundaria, #334155); display:block; margin-bottom:.2rem; }
+      #prueba-asr #asr-umbral { font:inherit; font-size:.875rem; width:6.5rem; padding:.4rem .5rem; border:1px solid var(--linea, #cbd5e1); border-radius:6px; font-variant-numeric:tabular-nums; }
+      #prueba-asr textarea { font:inherit; width:100%; min-height:4.5rem; padding:.5rem .6rem; border:1px solid var(--linea, #cbd5e1); border-radius:6px; resize:vertical; box-sizing:border-box; }
+      #prueba-asr .medidor { display:grid; gap:.3rem; }
+      #prueba-asr .medidor + .medidor { margin-top:.9rem; }
+      #prueba-asr .medidor-cabeza { display:flex; justify-content:space-between; align-items:baseline; font-size:.8125rem; font-weight:700; color:var(--tinta-secundaria, #334155); }
+      #prueba-asr output { font-variant-numeric:tabular-nums; font-weight:600; }
+      #prueba-asr .pista { position:relative; height:14px; background:var(--superficie-alt, #e2e8f0); border-radius:7px; }
+      #prueba-asr .relleno { position:absolute; inset:0; border-radius:7px; transform-origin:left; transform:scaleX(0); transition:transform 90ms linear; }
+      #asr-nivel { background:var(--ok, #15803d); }
+      #asr-nivel.bajo { background:#94a3b8; }
+      #asr-silencio { background:var(--primary, #1d4ed8); }
+      #asr-umbral-linea { position:absolute; top:-5px; bottom:-5px; width:3px; margin-left:-1.5px; background:var(--tinta, #0f172a); border-radius:2px; }
+      #asr-umbral-linea::after { content:"umbral"; position:absolute; top:100%; left:50%; transform:translateX(-50%); margin-top:2px; font-size:.6875rem; font-weight:700; color:var(--tinta, #0f172a); }
+      #prueba-asr .escala { display:flex; justify-content:space-between; font-size:.6875rem; color:var(--mu, #64748b); margin-top:1rem; }
+      #asr-textos:empty::before { content:"Lo que digas aparece acá: gris mientras hablás, fijo cuando se cierra la frase."; color:var(--mu, #64748b); }
+      #asr-textos p { padding:.6rem .8rem; background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:8px; margin:.4rem 0; font-size:1.0625rem; }
+      #asr-textos .parcial { color:var(--tinta-secundaria, #334155); border-style:dashed; }
+      #asr-textos small { display:block; color:var(--mu, #64748b); margin-top:.2rem; font-size:.75rem; font-variant-numeric:tabular-nums; }
+      #asr-guardado { display:grid; gap:.5rem; }
+      #asr-guardado[hidden] { display:none; }
+      #asr-guardado label { font-weight:700; }
       #asr-guardado .fila { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
       #asr-guardado-estado { font-weight:600; color:var(--tinta-secundaria, #334155); }
-      #prueba-asr input { font:inherit; width:7rem; padding:.4rem .6rem; border:1px solid var(--linea, #cbd5e1); border-radius:4px; }
-      #prueba-asr .medicion { margin:1rem 0; display:grid; gap:.45rem; }
-      #prueba-asr progress { width:100%; height:1.2rem; }
-      #prueba-asr .pista { position:relative; height:1rem; background:var(--superficie-alt, #e2e8f0); margin:.25rem 0 .5rem; border-radius:4px; }
-      #asr-nivel { width:100%; height:100%; display:block; }
-      #asr-umbral-linea { position:absolute; top:-.2rem; width:2px; height:1.4rem; background:var(--tinta, #0f172a); }
-      #asr-textos p { padding:.6rem .8rem; background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:8px; margin:.4rem 0; }
-      #asr-textos .parcial { color:var(--mu, #64748b); font-style:italic; }
-      #asr-textos small { display:block; color:var(--mu, #64748b); margin-top:.2rem; font-variant-numeric:tabular-nums; }
       body.asr #controles > :not(#error), body.asr main { display:none; }
       body.protegida #prueba-asr { display:none; }
+      @media (max-width: 760px) { #prueba-asr .ajustes { grid-template-columns:1fr; } }
+      @media (prefers-reduced-motion: reduce) { #prueba-asr .relleno { transition:none; } }
     </style>
     <label class="asr-modo-toggle"><input id="asr-modo" type="checkbox"> Probar el ASR · solo micrófono, sin detector</label>
     <div id="asr-contenido" hidden>
-      <h2>Hablá y mirá cuándo se cierra cada frase</h2>
-      <div class="ajustes">
-        <span id="asr-corte-lugar"></span>
-        <label>Umbral de volumen (RMS) <input id="asr-umbral" type="number" min="0.0001" max="1" step="0.0001" value="0.005"></label>
-        <button id="asr-iniciar" disabled>▶ Hablar</button><button id="asr-borrar" disabled title="Borra lo hablado y empieza de nuevo sin cortar el micrófono">Borrar</button><button id="asr-terminar" disabled>Terminar prueba</button>
+      <div class="tarjeta">
+        <div class="cabeza">
+          <div>
+            <h2>Probar el ASR</h2>
+            <p class="bajada">Hablá con pausas y mirá cuándo se cierra cada frase. Solo tu micrófono, sin detector. Usá auriculares.</p>
+          </div>
+          <div class="botones">
+            <button id="asr-borrar" disabled title="Borra lo hablado y empieza de nuevo sin cortar el micrófono">Borrar</button>
+            <button id="asr-terminar" disabled>Terminar prueba</button>
+            <button id="asr-iniciar" disabled>▶ Hablar</button>
+          </div>
+        </div>
+        <div class="ajustes">
+          <div class="ajuste">
+            <span id="asr-corte-lugar"></span>
+            <p>Cuántos segundos callado tienen que pasar para dar la frase por terminada. Más corto, antes llega el texto final; demasiado corto parte las frases.</p>
+          </div>
+          <div class="ajuste">
+            <label for="asr-umbral">Umbral de silencio (volumen)</label>
+            <input id="asr-umbral" type="number" min="0.001" max="1" step="0.001" value="0.005" aria-describedby="asr-umbral-ayuda">
+            <p id="asr-umbral-ayuda">Por debajo de este volumen el sonido cuenta como silencio. Es la rayita negra del medidor de abajo: si con ruido de fondo la barra de silencio no se llena nunca, subilo (por ejemplo a 0,02); si corta mientras hablás bajito, bajalo.</p>
+          </div>
+        </div>
       </div>
-      <p>Usá auriculares. El silencio es el audio por debajo del umbral; subilo si el ruido impide cerrar frases. La demora se estima desde el último bloque con voz.</p>
-      <div class="medicion">
-        <label for="asr-nivel">Volumen <output id="asr-rms">RMS 0.000</output></label>
-        <div class="pista"><meter id="asr-nivel" min="0" max="1" value="0"></meter><span id="asr-umbral-linea" title="Umbral de silencio"></span></div>
-        <label for="asr-silencio">Silencio hasta cerrar la frase <output id="asr-espera">0,00 / 0,80 s</output></label>
-        <progress id="asr-silencio" max="0.8" value="0"></progress>
+      <div class="tarjeta">
+        <div class="medidor">
+          <div class="medidor-cabeza"><span>Volumen de tu voz</span><output id="asr-rms">RMS 0.000</output></div>
+          <div class="pista"><div id="asr-nivel" class="relleno bajo"></div><span id="asr-umbral-linea" title="Umbral de silencio"></span></div>
+          <div class="escala" aria-hidden="true"><span>silencio</span><span>voz normal</span><span>muy fuerte</span></div>
+        </div>
+        <div class="medidor">
+          <div class="medidor-cabeza"><span>Silencio hasta cerrar la frase</span><output id="asr-espera">0,00 / 0,80 s</output></div>
+          <div class="pista"><div id="asr-silencio" class="relleno"></div></div>
+        </div>
       </div>
-      <div id="asr-textos" aria-live="polite"></div>
-      <div id="asr-guardado" hidden>
+      <div class="tarjeta"><div id="asr-textos" aria-live="polite"></div></div>
+      <div id="asr-guardado" class="tarjeta" hidden>
         <label for="asr-referencia">Lo que dije en realidad</label>
         <textarea id="asr-referencia" maxlength="2000" placeholder="Escribí la frase tal como la dijiste; sirve para medir cuánto se equivocó el ASR"></textarea>
         <div class="fila">
@@ -79,23 +121,28 @@ export function montarPruebaASR(acciones) {
     referencia.value = ''; referencia.disabled = guardar.disabled = false;
     estadoGuardado.textContent = AVISO_DESCARTE;
   }
-  const volumen = /** @type {HTMLMeterElement} */ (el('asr-nivel'));
-  const silencio = /** @type {HTMLProgressElement} */ (el('asr-silencio'));
+  const volumen = el('asr-nivel');
+  const barraSilencio = el('asr-silencio');
+  // Barra de silencio: max y value como un <progress>, pero dibujada con transform.
+  const silencio = {max: 0.8, valor: 0,
+    get value() { return this.valor; },
+    set value(v) { this.valor = v; barraSilencio.style.transform = `scaleX(${this.max ? Math.min(1, v / this.max) : 0})`; }};
   /** @type {Map<number, HTMLParagraphElement>} */
   const frases = new Map();
   let cuadro = 0;
   /** @type {{rms: number, silencio_acum_s: number, corte_silencio_s: number, umbral_rms_silencio: number}|null} */
   let ultimoNivel = null;
-  /** @param {number} x */
-  const escala = x => Math.min(100, Math.max(0, x * 100));
+  /** Escala en decibeles (-60 a 0 dB): en lineal, el umbral de 0,005 quedaba pegado al cero.
+   * @param {number} rms @returns {number} fracción 0–1 */
+  const escala = rms => rms <= 0 ? 0 : Math.min(1, Math.max(0, (20 * Math.log10(rms) + 60) / 60));
   function limpiarNiveles() {
     cancelAnimationFrame(cuadro); cuadro = 0; ultimoNivel = null;
-    volumen.value = 0;
+    volumen.style.transform = 'scaleX(0)';
     el('asr-rms').textContent = 'RMS 0.000';
     silencio.value = 0;
     el('asr-espera').textContent = `0,00 / ${corte.segundos.toFixed(2)} s`;
   }
-  function dibujarUmbral() { el('asr-umbral-linea').style.left = `${escala(Number(umbral.value))}%`; }
+  function dibujarUmbral() { el('asr-umbral-linea').style.left = `${escala(Number(umbral.value)) * 100}%`; }
   function aplicarModo() {
     document.body.classList.toggle('asr', modo.checked);
     el('asr-contenido').hidden = !modo.checked;
@@ -153,7 +200,8 @@ export function montarPruebaASR(acciones) {
         if (!cuadro) cuadro = requestAnimationFrame(() => {
           cuadro = 0;
           if (!ultimoNivel) return;
-          volumen.value = ultimoNivel.rms;
+          volumen.style.transform = `scaleX(${escala(ultimoNivel.rms)})`;
+          volumen.classList.toggle('bajo', ultimoNivel.rms < ultimoNivel.umbral_rms_silencio);
           el('asr-rms').textContent = `RMS ${ultimoNivel.rms.toFixed(3)}`;
           silencio.max = ultimoNivel.corte_silencio_s;
           silencio.value = Math.min(silencio.max, ultimoNivel.silencio_acum_s);

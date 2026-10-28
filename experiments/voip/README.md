@@ -61,8 +61,8 @@ cd experiments/voip
 python servidor.py --detector reglas
 python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
 python servidor.py --detector slm --modelo qwen3.5:4b-q4_K_M --ollama-url http://<pc-con-gpu>:11434
-# El corte de silencio se elige en el panel («Automático» o 0,1–3,0 s); --corte-silencio fija el de
-# las llamadas que abre cliente.py: python servidor.py --detector reglas --corte-silencio 0.5
+# El corte de silencio se elige en el panel (0,1–3,0 s, inicial 0,8); --corte-silencio fija el de
+# las llamadas que abre cliente.py («auto» por defecto): python servidor.py --detector reglas --corte-silencio 0.5
 
 # Panel para el público:   http://<ip-del-servidor>:8765/
 # Pantalla de la protegida: http://<ip-del-servidor>:8765/?vista=protegida
@@ -245,8 +245,11 @@ La opción **Misma fuente que la otra persona** conserva el ejemplo estéreo y l
 Si falta permiso, no hay entrada o el contexto no es seguro, el panel explica cómo seguir.
 Desde `http://<ip-de-otra-notebook>` el navegador bloquea la captura: usá `cliente.py`
 en esa notebook. **Terminar**, el fin del ejemplo, la desconexión del panel o salir de la
-página liberan los tracks y cierran el AudioContext. Si falla el transporte o se desconecta
-la entrada, se corta la captura y se termina la llamada para guardar lo recibido.
+página liberan los tracks y cierran el AudioContext. Si la pista del micrófono termina sola (macOS cambia la entrada, se reconectan los auriculares),
+el panel pide otra igual y sigue por el mismo WebSocket sin cortar la llamada ni la prueba; si la entrada
+elegida ya no está, sigue con la predeterminada y lo dice en el estado. Solo corta si no puede reabrirla o si
+se repite tres veces en diez segundos. Si falla el transporte, se corta la captura y se termina la llamada
+para guardar lo recibido.
 
 Contrato de control para micrófono + ejemplo:
 
@@ -346,11 +349,10 @@ Se conserva [esa corrida sin WAV](corridas/2026-10-26-medicion-84-m1-08b/README.
 ## 10. Probar el ASR hablando (#81)
 
 Con el servidor local de §3 abierto, activá **Probar el ASR**. Elegí el corte de silencio
-(**Automático** o **Elegir** un número de 0,1 a 3,0 s, de a 0,1; es el mismo selector de la llamada)
-y el umbral RMS (mayor que cero, hasta 1; inicial 0,005).
-**Automático** es el valor inicial y se comporta como la llamada de siempre: cierra la frase
-el corte propio del modelo (endpoint nativo), con 0,8 s de respaldo. Con un número manda ese corte
-y el endpoint nativo se apaga, así el valor elegido significa lo que dice.
+(un número de 0,1 a 3,0 s, de a 0,1, inicial 0,8; es el mismo campo de la llamada) y el umbral de
+silencio (RMS mayor que cero, hasta 1; inicial 0,005). El panel ya no ofrece «Automático»: con un número
+manda ese corte y el endpoint nativo del modelo se apaga, así el valor elegido significa lo que dice.
+El servidor sigue aceptando `"auto"` (lo usan `cliente.py` y las llamadas viejas del Historial).
 Tocá **▶ Hablar**, permití el micrófono y hablá con pausas. Usa la entrada de micrófono
 seleccionada en el panel (o la predeterminada). No conecta otra persona ni ejecuta el detector.
 Si cambia la configuración se recrean y precargan ambos motores antes de emitir `inicio`;
@@ -358,10 +360,9 @@ recién entonces se conecta el audio, así la carga no entra en la demora de la 
 
 El provisorio gris se reescribe; al cerrar queda fijo y muestra `disponible_s - fin_voz_s`,
 en milisegundos desde el último bloque por encima del umbral. Es una estimación por energía,
-no una marca humana. La línea negra sobre el volumen señala el umbral en la misma escala
-RMS 0–1; la barra de silencio se llena hasta el corte y vuelve a cero cuando retomás la voz.
-Con un número manda el silencio elegido, incluso con 3,0 s; con Automático la barra de silencio
-se dibuja contra los 0,8 s de respaldo y la frase puede cerrarse antes. La salida de texto puede tardar más por el lookahead o procesamiento del ASR.
+no una marca humana. La raya negra «umbral» sobre el volumen señala el umbral; el medidor usa escala en decibeles
+(−60 a 0 dB), porque en escala lineal 0,005 quedaba pegado al cero. La barra se ve gris por debajo
+del umbral y verde por encima; la de silencio se llena hasta el corte y vuelve a cero cuando retomás la voz. La salida de texto puede tardar más por el lookahead o procesamiento del ASR.
 
 **Borrar** (durante la prueba) descarta lo hablado y empieza otra prueba con la misma configuración
 sin cortar el micrófono: el servidor reutiliza los motores ya cargados y toma el candado de control,
@@ -399,7 +400,9 @@ con micrófono falso, la barra completa y las regresiones encontradas en revisi�
 ## 11. Otra persona desde Meet o BlackHole (#80)
 
 Para ensayar solo, con el celular como Otra persona, seguí la
-[guía paso a paso](GUIA-MEET-WHATSAPP.md); el panel la sirve en `/guia` y la enlaza junto a la elección de fuente.
+[guía paso a paso](GUIA-MEET-WHATSAPP.md); el panel la sirve en `/guia` como página (`guia.py` la arma desde el Markdown, sin dependencias) y la
+enlaza junto a la elección de fuente, al lado de «¿Qué es cada cosa?», que explica Otra persona,
+Persona protegida y Corte de silencio.
 Lo que sigue es el detalle técnico.
 
 Abrí el panel en Chrome en `http://localhost:8765/` o `http://127.0.0.1:8765/`.

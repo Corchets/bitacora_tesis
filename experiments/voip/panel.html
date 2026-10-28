@@ -50,22 +50,23 @@
     overflow: hidden;
   }
 
-  /* Cabecera compacta con foco en el aula */
+  /* Cabecera: título, estado de la sesión y modo */
   header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.45rem 1.25rem;
+    gap: 0.75rem 1.25rem;
+    padding: 0.6rem 1.25rem;
     background: var(--superficie);
     border-bottom: 1px solid var(--linea);
     flex-shrink: 0;
   }
   .cabecera-izq {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.85rem;
+    min-width: 0;
   }
   .cabecera-der {
     display: flex;
@@ -73,73 +74,155 @@
     gap: 0.6rem;
   }
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     font-weight: 700;
     letter-spacing: -0.02em;
     margin: 0;
     color: var(--tinta);
+    white-space: nowrap;
   }
+  .estado-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    padding: 0.2rem 0.7rem 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--otra-fondo);
+    border: 1px solid var(--linea);
+  }
+  .estado-pill .punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mu);
+    flex-shrink: 0;
+  }
+  .estado-pill[data-estado="lista"] .punto { background: var(--primary); }
+  .estado-pill[data-estado="en-llamada"] {
+    background: var(--ok-fondo);
+    border-color: #86efac;
+  }
+  .estado-pill[data-estado="en-llamada"] .punto {
+    background: var(--ok);
+    box-shadow: 0 0 0 3px rgb(21 128 61 / 0.18);
+  }
+  .estado-pill[data-estado="sin-conexion"] {
+    background: var(--alerta-fondo);
+    border-color: var(--alerta-borde);
+  }
+  .estado-pill[data-estado="sin-conexion"] .punto { background: var(--alerta); }
   #estado {
     color: var(--tinta-secundaria);
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.8125rem;
+    font-weight: 600;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 52ch;
   }
 
-  /* Conmutador claro de modo */
+  /* Conmutador de modo */
   .modo-conmutador {
     display: inline-flex;
     background: var(--otra-fondo);
     padding: 3px;
     border-radius: var(--radio-md);
     border: 1px solid var(--linea);
+    gap: 2px;
   }
   .modo-tab {
     font: inherit;
     font-size: 0.875rem;
     font-weight: 600;
-    padding: 0.3rem 0.75rem;
-    border: 1px solid transparent;
+    padding: 0.32rem 0.85rem;
+    border: 0;
     background: transparent;
     color: var(--tinta-secundaria);
-    border-radius: var(--radio-sm);
+    border-radius: 6px;
     cursor: pointer;
+  }
+  .modo-tab:hover:not(:disabled):not(.activo) {
+    background: var(--superficie-alt);
   }
   .modo-tab.activo {
     background: var(--superficie);
     color: var(--primary);
-    border-color: var(--primary);
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.12), 0 0 0 1px rgb(29 78 216 / 0.25);
   }
   .modo-tab:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 1px;
   }
 
-  /* Barra de control y fuentes */
+  /* Barra de la llamada: fuentes y ajuste a la izquierda, acciones a la derecha */
   #controles {
-    background: var(--superficie);
+    position: relative;
+    background: var(--fondo);
     border-bottom: 1px solid var(--linea);
-    padding: 0.4rem 1.25rem;
+    padding: 0.6rem 1.25rem 0.65rem;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 0.35rem 0.5rem;
+    align-items: flex-end;
+    gap: 0.5rem 1.5rem;
     flex-shrink: 0;
   }
-  .barra-acciones {
+  .campos {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.5rem 1rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .campo, .ajuste-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .campo > label, .ajuste-grupo > label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tinta-secundaria);
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
+  }
+  .campo .rol-punto, .ayuda-cuerpo .rol-punto {
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    background: var(--otra-borde);
+    border: 1px solid #94a3b8;
+  }
+  .campo .rol-punto.protegida, .ayuda-cuerpo .rol-punto.protegida {
+    background: var(--vos-borde);
+    border-color: var(--primary);
+  }
+  .campo .fila {
+    display: flex;
+    gap: 0.35rem;
+  }
+  .campo[hidden] { display: none; }
+  .acciones {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: auto;
   }
   button, select {
     font: inherit;
     font-size: 0.875rem;
-    padding: 0.35rem 0.65rem;
-    border-radius: var(--radio-sm);
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
     border: 1px solid var(--linea);
     background: var(--superficie);
     color: var(--tinta);
+  }
+  select {
+    min-width: 11rem;
+    max-width: 19rem;
   }
   button {
     font-weight: 600;
@@ -160,99 +243,46 @@
     background: var(--primary);
     color: var(--superficie);
     border-color: var(--primary);
+    padding-inline: 1.1rem;
+    box-shadow: 0 1px 2px rgb(29 78 216 / 0.3);
   }
   #iniciar:hover:not(:disabled) {
     background: var(--primary-dark);
   }
   #terminar {
-    background: var(--alerta-fondo);
+    background: var(--superficie);
     color: var(--alerta);
     border-color: var(--alerta-borde);
   }
   #terminar:hover:not(:disabled) {
-    background: var(--alerta-claro);
-  }
-  #nueva {
-    background: var(--superficie);
-    color: var(--tinta);
-  }
-  .separador-barra {
-    width: 1px;
-    height: 1.4rem;
-    background: var(--linea);
-    margin: 0 0.15rem;
-  }
-  .ajuste-grupo {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-  .ajuste-grupo label {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--tinta-secundaria);
+    background: var(--alerta-fondo);
   }
   #error {
+    flex-basis: 100%;
     color: var(--alerta);
     font-size: 0.875rem;
     font-weight: 600;
-    margin-left: 0.25rem;
   }
+  #error:empty { display: none; }
 
-  /* Ajustes de micrófono y guía plegables */
-  .panel-ajustes {
-    font-size: 0.8125rem;
-  }
-  .panel-ajustes summary {
-    font-weight: 600;
-    color: var(--tinta-secundaria);
-    cursor: pointer;
-    user-select: none;
-    padding: 0.3rem 0.55rem;
-    border: 1px solid var(--linea);
-    border-radius: var(--radio-sm);
-    background: var(--fondo);
-    list-style: none;
-  }
-  .panel-ajustes summary::-webkit-details-marker {
-    display: none;
-  }
-  .panel-ajustes summary::before {
-    content: "▸ ";
-  }
-  .panel-ajustes[open] summary::before {
-    content: "▾ ";
-  }
-  .panel-ajustes summary:focus-visible {
-    outline: 2px solid var(--primary);
-  }
-  .ajustes-cuerpo {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    align-items: center;
-    margin-top: 0.4rem;
-    padding: 0.45rem 0.75rem;
-    background: var(--fondo);
-    border: 1px solid var(--linea);
-    border-radius: var(--radio-sm);
-  }
+  /* Corte de silencio: número con unidad */
   .corte-silencio .corte-valor {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    font-size: 0.8125rem;
+    gap: 0.3rem;
+    font-size: 0.875rem;
     color: var(--tinta-secundaria);
   }
   .corte-silencio input[type="number"] {
     font: inherit;
     font-size: 0.875rem;
-    width: 4.5rem;
-    padding: 0.35rem 0.5rem;
-    border-radius: var(--radio-sm);
+    width: 4.75rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
     border: 1px solid var(--linea);
     background: var(--superficie);
     color: var(--tinta);
+    font-variant-numeric: tabular-nums;
   }
   .corte-silencio input[type="number"]:focus-visible {
     outline: 2px solid var(--primary);
@@ -262,16 +292,69 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
-  .enlace-guia {
+  .ayuda-oculta {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Ayuda y guía: enlaces chicos que no compiten con las acciones */
+  .enlaces {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-bottom: 0.15rem;
+  }
+  .enlace-guia, .ayuda > summary {
     font-size: 0.8125rem;
     font-weight: 600;
     color: var(--primary);
     white-space: nowrap;
+    cursor: pointer;
+    text-underline-offset: 3px;
   }
-  .enlace-guia:focus-visible {
+  .enlace-guia:hover, .ayuda > summary:hover { text-decoration: underline; }
+  .ayuda > summary {
+    list-style: none;
+  }
+  .ayuda > summary::-webkit-details-marker { display: none; }
+  .enlace-guia:focus-visible, .ayuda > summary:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
+    border-radius: 2px;
   }
+  .ayuda-cuerpo {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    left: 1.25rem;
+    width: min(46rem, calc(100vw - 2.5rem));
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-lg);
+    padding: 1rem 1.15rem;
+    box-shadow: 0 12px 32px -12px rgb(15 23 42 / 0.35), 0 2px 6px rgb(15 23 42 / 0.08);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+  .ayuda-cuerpo h3 {
+    margin: 0 0 0.3rem;
+    font-size: 0.9375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .ayuda-cuerpo p {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--tinta-secundaria);
+  }
+  .ayuda-cuerpo p + p { margin-top: 0.35rem; }
 
   /* Movimiento: solo opacity y transform, curva de salida, sin rebote. */
   :root {
@@ -976,19 +1059,15 @@
       padding: 0.35rem 0.9rem;
     }
     #controles {
-      padding: 0.25rem 0.9rem;
+      padding: 0.4rem 0.9rem 0.45rem;
     }
-    .barra-acciones {
-      gap: 0.3rem 0.4rem;
-    }
-    .barra-acciones button,
-    .barra-acciones select,
-    .panel-ajustes summary {
+    #controles button,
+    #controles select {
       font-size: 0.8125rem;
-      padding: 0.28rem 0.5rem;
+      padding: 0.3rem 0.5rem;
     }
-    .separador-barra {
-      display: none;
+    .ayuda-cuerpo {
+      grid-template-columns: 1fr;
     }
     main {
       grid-template-columns: minmax(0, 1fr) 305px;
@@ -1051,7 +1130,7 @@
 <header>
   <div class="cabecera-izq">
     <h1>Llamada en vivo</h1>
-    <span id="estado">conectando…</span>
+    <span class="estado-pill" id="estado-pill" data-estado="sin-conexion"><span class="punto" aria-hidden="true"></span><span id="estado" role="status">conectando…</span></span>
   </div>
   <div class="cabecera-der">
     <button type="button" id="sonido-aviso" class="btn-sonido" aria-pressed="true" title="Activar o apagar el sonido del aviso">
@@ -1075,13 +1154,9 @@
 </header>
 
 <section id="controles" aria-label="Control de la llamada">
-  <div class="barra-acciones">
-    <button id="iniciar" disabled>Iniciar llamada</button>
-    <button id="terminar" disabled>Terminar</button>
-    <button id="nueva" disabled>Nueva llamada</button>
-    <span class="separador-barra" aria-hidden="true"></span>
-    <div class="ajuste-grupo">
-      <label for="fuente">Otra persona</label>
+  <div class="campos">
+    <div class="campo">
+      <label for="fuente"><span class="rol-punto" aria-hidden="true"></span>Otra persona</label>
       <select id="fuente">
         <option value="SC-WA-CODE-01">Ejemplo · estafa SC-WA-CODE-01</option>
         <option value="LG-WA-CONSULTA-01">Ejemplo · legítima LG-WA-CONSULTA-01</option>
@@ -1089,26 +1164,50 @@
         <option value="meet">Meet · pestaña de Chrome</option>
         <option value="blackhole">WhatsApp / escritorio · BlackHole</option>
       </select>
-      <a class="enlace-guia" href="/guia" target="_blank" rel="noopener">Guía para probar solo</a>
     </div>
-    <div class="ajuste-grupo">
-      <label for="protegida-fuente">Persona protegida</label>
+    <div class="campo">
+      <label for="protegida-fuente"><span class="rol-punto protegida" aria-hidden="true"></span>Persona protegida</label>
       <select id="protegida-fuente">
-        <option value="acompanar">Misma fuente que la otra persona</option>
-        <option value="microfono">Micrófono</option>
+        <option value="acompanar">Voz del ejemplo (canal derecho)</option>
+        <option value="microfono">Micrófono de esta notebook</option>
       </select>
     </div>
-    <span id="corte-lugar"></span>
-    <details id="ajustes-fuentes" class="panel-ajustes">
-      <summary>Micrófono</summary>
-      <div class="ajustes-cuerpo">
-        <div class="ajuste-grupo">
-          <label for="microfono">Entrada</label>
-          <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
-          <button id="buscar-microfonos" disabled type="button">Buscar micrófonos</button>
-        </div>
+    <div class="campo" id="campo-microfono" hidden>
+      <label for="microfono">Entrada de micrófono</label>
+      <div class="fila">
+        <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
+        <button id="buscar-microfonos" disabled type="button" title="Pide permiso para ver los nombres de los micrófonos">Buscar</button>
       </div>
-    </details>
+    </div>
+    <span id="corte-lugar"></span>
+    <div class="enlaces">
+      <details id="ayuda" class="ayuda">
+        <summary>¿Qué es cada cosa?</summary>
+        <div class="ayuda-cuerpo">
+          <section>
+            <h3><span class="rol-punto" aria-hidden="true"></span>Otra persona</h3>
+            <p>Quien está del otro lado de la línea: un ejemplo grabado, otra notebook con <code>cliente.py</code>, Meet o WhatsApp.</p>
+            <p>No se da por hecho que sea un estafador: eso lo decide el detector frase a frase.</p>
+          </section>
+          <section>
+            <h3><span class="rol-punto protegida" aria-hidden="true"></span>Persona protegida</h3>
+            <p>La dueña del teléfono: a quien el sistema cuida y quien recibiría el aviso. Su voz entra por un canal aparte (a la derecha).</p>
+            <p>Con «Micrófono de esta notebook» la persona protegida sos vos; con el ejemplo, se usa la voz grabada.</p>
+          </section>
+          <section>
+            <h3>Corte de silencio</h3>
+            <p>Cuántos segundos tiene que quedarse callado alguien para que el ASR cierre la frase y se la pase al detector.</p>
+            <p>Más corto avisa antes pero puede partir una frase en dos; más largo espera frases enteras. 0,8 s es lo que se usó en las pruebas.</p>
+          </section>
+        </div>
+      </details>
+      <a class="enlace-guia" href="/guia" target="_blank" rel="noopener">Guía para probar solo ↗</a>
+    </div>
+  </div>
+  <div class="acciones">
+    <button id="nueva" disabled>Nueva llamada</button>
+    <button id="terminar" disabled>Terminar</button>
+    <button id="iniciar" disabled>Iniciar llamada</button>
   </div>
   <span id="error" role="alert"></span>
 </section>
@@ -1478,11 +1577,25 @@ function restriccionesMicrofono() {
     channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false};
 }
 
+/**
+ * Vuelve a abrir el micrófono cuando macOS o Chrome cortan la pista a mitad de una prueba o llamada.
+ * Si la entrada elegida ya no está, sigue con la predeterminada antes que cortar.
+ * @returns {Promise<MediaStream>}
+ */
+async function reabrirMicrofono() {
+  try {
+    return await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+  } catch (error) {
+    if (!microfono.value) throw error;
+    microfono.value = "";
+    return navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+  }
+}
+
 protegidaFuente.onchange = async () => {
   $("error").textContent = "";
   actualizarControles();
   if (protegidaFuente.value !== "microfono") return;
-  /** @type {HTMLDetailsElement} */ ($("ajustes-fuentes")).open = true;
   try { verificarCaptura(); await listarMicrofonos(); }
   catch (error) { $("error").textContent = mensajeErrorMicrofono(error); }
 };
@@ -1504,10 +1617,15 @@ buscarMicrofonos.onclick = async () => {
 };
 window.addEventListener("pagehide", liberarMicrofono);
 
+// La ayuda flota sobre la llamada: se cierra con Esc o tocando afuera.
+const ayuda = /** @type {HTMLDetailsElement} */ ($("ayuda"));
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && ayuda.open) { ayuda.open = false; ayuda.querySelector("summary")?.focus(); } });
+document.addEventListener("click", (e) => { if (ayuda.open && !ayuda.contains(/** @type {Node} */ (e.target))) ayuda.open = false; });
+
 fuente.onchange = () => {
   if (fuente.value === "meet" || fuente.value === "blackhole") {
     protegidaFuente.value = "microfono";
-    /** @type {HTMLDetailsElement} */ ($("ajustes-fuentes")).open = true;
+    protegidaFuente.dispatchEvent(new Event("change"));
   }
   actualizarControles();
 };
@@ -1633,6 +1751,13 @@ function actualizarControles() {
   protegidaFuente.disabled = enLlamada || pendiente;
   microfono.disabled = enLlamada || pendiente || protegidaFuente.value !== "microfono";
   buscarMicrofonos.disabled = microfono.disabled;
+  $("campo-microfono").hidden = protegidaFuente.value !== "microfono";
+  // La opción que no es micrófono sigue a la fuente de la otra persona; Meet y BlackHole exigen micrófono.
+  const acompanar = /** @type {HTMLOptionElement} */ (protegidaFuente.options[0]);
+  const remota = fuente.value === "meet" || fuente.value === "blackhole";
+  acompanar.textContent = fuente.value === "cliente" ? "Otra notebook · cliente.py" : remota ? "—" : "Voz del ejemplo (canal derecho)";
+  acompanar.disabled = remota;
+  $("estado-pill").dataset.estado = !conectada ? "sin-conexion" : enLlamada ? "en-llamada" : "lista";
   tabLlamada.disabled = enLlamada || pendiente;
   tabASR.disabled = enLlamada || pendiente;
   tabHistorial.disabled = enLlamada || pendiente;
@@ -1668,7 +1793,9 @@ async function iniciarSesion() {
         const stream = await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
         if (token !== intento) { stream.getTracks().forEach(t => t.stop()); return; }
         try {
-          emisor = prepararAudio(stream, "protegida", fallarCaptura);
+          emisor = prepararAudio(stream, "protegida", fallarCaptura, {reabrir: reabrirMicrofono, alReconectar: (nombre) => {
+            $("estado").textContent = `seguimos con ${nombre} (la entrada anterior se cortó)`;
+          }});
         } catch (error) { stream.getTracks().forEach(t => t.stop()); throw error; }
       }
       await listarMicrofonos();
