@@ -603,6 +603,7 @@ $('#af-reset').onclick = () => { $('#af-base').value = 'alerta'; $('#af-tau').va
 // ---------------- Casos ----------------
 function protegidaDelCaso(c, elegida) {
   if (elegida === 'A' || elegida === 'B') return elegida;
+  if (c.clase !== 'vishing') return c.lineas[0]?.[0] || '';
   const pedido = c.clase === 'vishing' && c.tr ? c.lineas[c.tr - 1]?.[0] : null;
   return pedido === 'A' ? 'B' : pedido === 'B' ? 'A' : '';
 }
@@ -640,7 +641,7 @@ function pintarCaso() {
   $('#casos-det').innerHTML = `<div class="card"><h3 style="margin:0">${c.id}</h3>
    <div class="mu chico">${c.grupo} · ${c.clase}${c.pedido ? ' · pedido ' + c.pedido : ''} · T_R línea ${c.tr ?? '—'} · T_C línea ${c.tc ?? '—'}</div>
    <label class="ctl">Persona protegida<select id="caso-protegida"><option value="" disabled ${protegida ? '' : 'selected'}>Elegí su primera frase</option>${opcionesPersonas}</select></label>
-   <p class="chico mu">${!protegida ? 'Este caso no identifica a la persona protegida. Elegí su frase para mostrar los roles.' : rolesElegidos[c.id] ? 'Roles elegidos para leer este caso; se recuerdan en este navegador.' : 'Roles sugeridos: se toma como atacante a quien formula el pedido crítico marcado. Podés corregir la persona protegida arriba.'} Esta elección solo cambia la lectura, no la referencia ni lo que recibe el detector.</p>
+   <p class="chico mu">${!protegida ? 'Este caso no identifica a la persona protegida. Elegí su frase para mostrar los roles.' : rolesElegidos[c.id] ? 'Roles elegidos para leer este caso; se recuerdan en este navegador.' : c.clase !== 'vishing' ? 'Vista de lectura desde quien habla primero como persona protegida. Podés cambiar la perspectiva arriba.' : 'Roles sugeridos: se toma como atacante a quien formula el pedido crítico marcado. Podés corregir la persona protegida arriba.'} Esta elección solo cambia la lectura, no la referencia ni lo que recibe el detector.</p>
    <div class="fila chico">Windows GPU: ${win}</div>
    <div class="chico mu">«&lt;R L3»: avisó en la línea 3, antes del pedido · «=R»: en el pedido · «&gt;R»: después · «FA L2»: falsa alarma en la línea 2 · «ok»: sin aviso en una legítima · «—»: no avisó.</div>
    <div style="margin-top:8px">${c.lineas.map(([h, t], i) => { const n = i + 1, f = fm[n];

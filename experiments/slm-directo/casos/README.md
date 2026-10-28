@@ -40,7 +40,9 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
 - El visor **Casos** del tablero muestra los nombres completos de los roles. En
   vishing sugiere como atacante a quien formula el pedido marcado en `T_R`; sin
   ese dato, pide elegir la persona protegida por su primera frase. En legítimas
-  usa «Persona protegida» / «Otra persona». La elección se puede corregir y se
+  usa «Persona protegida» / «Otra persona» desde el inicio, con la perspectiva
+  de lectura puesta en quien habla primero si no hay una elección guardada.
+  Esa perspectiva no identifica un rol anotado en el corpus. Se puede cambiar y se
   conserva solo en el navegador; no cambia el guion, la referencia ni la entrada
   del detector. Es una ayuda de lectura, no una anotación humana aprobada en D07.
   > **Estado: propuesta sin discutir.** La sugerencia de roles a partir del pedido

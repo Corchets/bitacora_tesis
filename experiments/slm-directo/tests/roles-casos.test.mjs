@@ -18,14 +18,21 @@ test('el atacante puede hablar primero o segundo; la elección explícita permit
   }
 });
 
-test('sin pedido no inventa roles y una legítima nunca tiene atacante', () => {
-  for (const clase of ['vishing', 'legitima', 'legitima_dificil']) {
+test('las legítimas muestran los nombres completos desde el inicio y permiten cambiar la perspectiva', () => {
+  for (const clase of ['legitima', 'legitima_dificil']) {
     const caso = {clase, tr: null, lineas: [['A', 'Hola'], ['B', 'Buen día']]};
-    assert.equal(protegidaDelCaso(caso), '');
-    assert.equal(nombreEnCaso(caso, 'A', ''), 'Primera persona');
-    assert.equal(nombreEnCaso(caso, 'B', ''), 'Segunda persona');
+    const protegida = protegidaDelCaso(caso);
+    assert.equal(protegida, 'A');
+    assert.equal(nombreEnCaso(caso, 'A', protegida), 'Persona protegida');
+    assert.equal(nombreEnCaso(caso, 'B', protegida), 'Otra persona');
     assert.equal(protegidaDelCaso(caso, 'B'), 'B');
     assert.equal(nombreEnCaso(caso, 'B', 'B'), 'Persona protegida');
-    assert.equal(nombreEnCaso(caso, 'A', 'B'), clase === 'vishing' ? 'Atacante' : 'Otra persona');
+    assert.equal(nombreEnCaso(caso, 'A', 'B'), 'Otra persona');
   }
+});
+
+test('una estafa sin pedido sigue requiriendo identificar a la persona protegida', () => {
+  const caso = {clase: 'vishing', tr: null, lineas: [['A', 'Hola'], ['B', 'Buen día']]};
+  assert.equal(protegidaDelCaso(caso), '');
+  assert.equal(protegidaDelCaso(caso, 'B'), 'B');
 });
