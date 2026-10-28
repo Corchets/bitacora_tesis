@@ -269,7 +269,8 @@
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    margin-top: 0.4rem;
+    margin-left: 0.4rem;
+    white-space: nowrap;
     font-size: 0.875rem;
     color: var(--tinta-secundaria);
   }
@@ -1189,10 +1190,10 @@
       <div class="fila">
         <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
         <button id="buscar-microfonos" disabled type="button" title="Pide permiso para ver los nombres de los micrófonos">Buscar</button>
+        <label class="opcion-eco" title="Chrome resta del micrófono lo que suena desde Chrome (WhatsApp Web, Meet). Desactivalo con auriculares para mandar el audio crudo.">
+          <input type="checkbox" id="cancelar-eco" checked> Cancelar eco (sin auriculares)
+        </label>
       </div>
-      <label class="opcion-eco" title="Chrome resta del micrófono lo que suena desde Chrome (WhatsApp Web, Meet). Desactivalo con auriculares para mandar el audio crudo.">
-        <input type="checkbox" id="cancelar-eco" checked> Cancelar eco (sin auriculares)
-      </label>
     </div>
     <span id="corte-lugar"></span>
     <div class="enlaces">
@@ -2181,10 +2182,14 @@ function dibujarGraficoRiesgo() {
 
   if (puntosRiesgo.length > 0) {
     const ordenados = [...puntosRiesgo].sort((a, b) => a.t - b.t);
-    const traza = [{ t: 0, r: 0, aviso: false }, ...ordenados];
+    // Escalones: el riesgo vale lo que dijo la última evaluación hasta la siguiente; no se interpola.
+    const traza = [{ t: 0, r: 0 }];
+    for (const p of ordenados) traza.push({ t: p.t, r: traza[traza.length - 1].r }, { t: p.t, r: p.r });
+    const ultimo = traza[traza.length - 1];
+    if (relojLlamada > ultimo.t) traza.push({ t: relojLlamada, r: ultimo.r });
     const puntos = traza.map(p => `${x(p.t).toFixed(1)},${y(p.r).toFixed(1)}`).join(" ");
 
-    // Línea continua de riesgo desde el inicio de la llamada
+    // Línea de riesgo desde el inicio de la llamada
     svg += `<polyline points="${puntos}" fill="none" stroke="#1d4ed8" stroke-width="2.75" stroke-linejoin="round" stroke-linecap="round" />`;
 
     // Puntos de cada evaluación
