@@ -122,6 +122,9 @@ def cargar_pruebas(filas: list[dict[str, str]], carpeta: str | Path, guion: Guio
             omitidas.append({"id": fila["id"], "motivo": "no está guardada (guardada distinta de true)"})
         elif not referencia:
             omitidas.append({"id": fila["id"], "motivo": "«Lo que dije en realidad» está vacío"})
+        elif "referencias_por_segmento" in manifiesto and any(
+                not texto.strip() for texto in manifiesto["referencias_por_segmento"].values()):
+            omitidas.append({"id": fila["id"], "motivo": "Falta completar «Lo que dije en realidad» en alguna frase"})
         elif not (carpeta_prueba / "estereo.wav").is_file():
             omitidas.append({"id": fila["id"], "motivo": "no tiene estereo.wav"})
         else:

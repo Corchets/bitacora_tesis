@@ -4,7 +4,7 @@ import {crearSelectorCorte} from './corte-silencio.mjs';
 
 /**
  * UI de prueba; el panel conserva una única conexión y el ciclo de captura de #78.
- * @param {{iniciar: () => void, terminar: () => void, borrar: () => void, guardar: (referencia: string) => void, cambiar: () => void}} acciones
+ * @param {{iniciar: () => void, terminar: () => void, borrar: () => void, guardar: (referencias: Record<string, string>) => void, cambiar: () => void}} acciones
  */
 export function montarPruebaASR(acciones) {
   const seccion = document.createElement('section');
@@ -43,6 +43,8 @@ export function montarPruebaASR(acciones) {
       #asr-textos p { padding:.6rem .8rem; background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:8px; margin:.4rem 0; font-size:1.0625rem; }
       #asr-textos .parcial { color:var(--tinta-secundaria, #334155); border-style:dashed; }
       #asr-textos small { display:block; color:var(--mu, #64748b); margin-top:.2rem; font-size:.75rem; font-variant-numeric:tabular-nums; }
+      #asr-textos .asr-frase + .asr-frase { margin-top:1.25rem; }
+      #asr-textos label { display:block; font-weight:600; margin:.5rem 0 .25rem; }
       #asr-guardado { display:grid; gap:.5rem; }
       #asr-guardado[hidden] { display:none; }
       #asr-guardado label { font-weight:700; }
@@ -92,8 +94,6 @@ export function montarPruebaASR(acciones) {
       </div>
       <div class="tarjeta"><div id="asr-textos" aria-live="polite"></div></div>
       <div id="asr-guardado" class="tarjeta" hidden>
-        <label for="asr-referencia">Lo que dije en realidad</label>
-        <textarea id="asr-referencia" maxlength="2000" placeholder="Escribí la frase tal como la dijiste; sirve para medir cuánto se equivocó el ASR"></textarea>
         <div class="fila">
           <button id="asr-guardar" type="button">Guardar prueba</button>
           <span id="asr-guardado-estado" role="status">Si no la guardás, se descarta al empezar otra prueba.</span>
@@ -111,14 +111,13 @@ export function montarPruebaASR(acciones) {
   const terminar = /** @type {HTMLButtonElement} */ (el('asr-terminar'));
   const borrar = /** @type {HTMLButtonElement} */ (el('asr-borrar'));
   const guardado = el('asr-guardado');
-  const referencia = /** @type {HTMLTextAreaElement} */ (el('asr-referencia'));
   const guardar = /** @type {HTMLButtonElement} */ (el('asr-guardar'));
   const estadoGuardado = el('asr-guardado-estado');
   const AVISO_DESCARTE = 'Si no la guardás, se descarta al empezar otra prueba.';
   let esPrueba = false, guardando = false, guardada = false;
   function ocultarGuardado() {
     guardado.hidden = true; guardando = guardada = false;
-    referencia.value = ''; referencia.disabled = guardar.disabled = false;
+    guardar.disabled = false;
     estadoGuardado.textContent = AVISO_DESCARTE;
   }
   const volumen = el('asr-nivel');
@@ -127,7 +126,7 @@ export function montarPruebaASR(acciones) {
   const silencio = {max: 0.8, valor: 0,
     get value() { return this.valor; },
     set value(v) { this.valor = v; barraSilencio.style.transform = `scaleX(${this.max ? Math.min(1, v / this.max) : 0})`; }};
-  /** @type {Map<number, HTMLParagraphElement>} */
+  /** @type {Map<number, {elemento: HTMLDivElement, texto: HTMLParagraphElement, referencia?: HTMLTextAreaElement}>} */
   const frases = new Map();
   let cuadro = 0;
   /** @type {{rms: number, silencio_acum_s: number, corte_silencio_s: number, umbral_rms_silencio: number}|null} */
@@ -157,7 +156,8 @@ export function montarPruebaASR(acciones) {
   guardar.onclick = () => {
     guardando = true; guardar.disabled = true;
     estadoGuardado.textContent = 'Guardando…';
-    acciones.guardar(referencia.value);
+    acciones.guardar(Object.fromEntries([...frases].filter(([, f]) => f.referencia)
+      .map(([segmento, f]) => [String(segmento), f.referencia?.value || ''])));
   };
   dibujarUmbral();
   return {
@@ -187,7 +187,11 @@ export function montarPruebaASR(acciones) {
       if (m.tipo === 'fin' && esPrueba) guardado.hidden = false;
       if (m.tipo === 'prueba_guardada') {
         guardando = false; guardada = true;
-        referencia.value = m.referencia; referencia.disabled = guardar.disabled = true;
+        for (const [segmento, frase] of frases) if (frase.referencia) {
+          frase.referencia.value = m.referencias_por_segmento?.[segmento] ?? frase.referencia.value;
+          frase.referencia.disabled = true;
+        }
+        guardar.disabled = true;
         estadoGuardado.textContent = 'Guardada ✓ Quedó con el audio, la transcripción y lo que dijiste en realidad.';
       }
       if (m.tipo === 'error' && guardando) {
@@ -210,13 +214,25 @@ export function montarPruebaASR(acciones) {
       }
       if (m.tipo === 'asr' && m.rol === 'protegida') {
         let frase = frases.get(m.segmento);
-        if (!frase) { frase = document.createElement('p'); frases.set(m.segmento, frase); el('asr-textos').append(frase); }
-        frase.className = m.entrega;
-        frase.textContent = m.texto;
+        if (!frase) {
+          frase = {elemento: document.createElement('div'), texto: document.createElement('p')};
+          frase.elemento.className = 'asr-frase'; frase.elemento.append(frase.texto);
+          frases.set(m.segmento, frase); el('asr-textos').append(frase.elemento);
+        }
+        frase.texto.className = m.entrega;
+        frase.texto.textContent = m.texto;
         if (m.entrega === 'final') {
           const demora = document.createElement('small');
           demora.textContent = `Cerrada ${((m.disponible_s - m.fin_voz_s) * 1000).toFixed(0)} ms después de callarte`;
-          frase.append(demora);
+          frase.texto.append(demora);
+          if (!frase.referencia) {
+            const campo = document.createElement('textarea');
+            campo.id = `asr-ref-${m.segmento}`; campo.maxLength = 2000;
+            campo.placeholder = 'Escribí esta frase tal como la dijiste';
+            const label = document.createElement('label'); label.htmlFor = campo.id;
+            label.textContent = `Lo que dije en realidad · frase ${m.segmento}`;
+            frase.elemento.append(label, campo); frase.referencia = campo;
+          }
           silencio.value = silencio.max;
         }
       }

@@ -68,22 +68,51 @@ ambos intentos fallaron con `Audio Hardware Not Running` / `PaErrorCode -9986`. 
 de un fallo de apertura también fuera del navegador. `sudo -n killall coreaudiod` devolvió
 `sudo: a password is required`; se indicó al usuario reiniciarlo desde Terminal, con su
 contraseña, y reabrir Chrome. No se modificaron permisos ni configuración de privacidad.
-Falta confirmar la recuperación del audio tras ese reinicio y la lectura
-de conversaciones largas en la pantalla de la demo.
+En ese punto faltaba confirmar la recuperación del audio; el resultado posterior se registra
+a continuación. La lectura en la pantalla de la demo sigue pendiente.
+
+## Referencia por frase y recuperación del micrófono
+
+Después de reiniciar `coreaudiod`, Luciano confirmó que volvió el volumen. El servidor
+registró seis actualizaciones con texto y tres frases finales en su prueba posterior.
+Esto confirma la recuperación del recorrido, sin medir calidad de voz ni cerrar #94/D09.
+
+Por pedido del usuario, cada frase final de una prueba nueva tiene ahora su propio campo
+«Lo que dije en realidad». Se conserva en `referencias_por_segmento`, validado contra los
+segmentos finales del JSONL. La referencia global se deriva de esos textos para mantener
+compatibilidad con las herramientas existentes. El Historial permite editar cada campo;
+las pruebas anteriores conservan su referencia global. La medición offline omite referencias
+por frase incompletas, en lugar de medir audio completo contra una parte de lo dicho.
+
+Verificación posterior: 71 tests VoIP, 37 de la herramienta de medición y 3 Node pasan.
+El test del servidor cubre claves ajenas/incompletas, tipos y largos inválidos, orden de las
+frases, guardado, consulta y edición. Se verificó también en Chrome, por accesibilidad:
+tres campos debajo de sus transcripciones, ingreso de referencias TTS, «Guardar prueba»,
+respuesta de éxito, persistencia en disco y los tres campos editables en el Historial.
+El detector mecánico señaló seis observaciones de estilo preexistentes, sin nuevos errores.
+
+Antes de reiniciar el servidor para cargar el cambio, se preservó fuera de Git una copia
+local de la prueba de voz todavía sin guardar; no se publica audio ni texto de esa prueba.
+La prueba nueva usada para verificar los campos envió PCM sintético con
+`inicio_panel.fuentes.protegida.origen = verificacion_pcm_tts`; no se considera voz humana.
+Al terminar se retiró únicamente esa prueba sintética temporal del Historial.
 
 ## Comentario listo para GitHub
 
 ```markdown
+Closes #91
 Refs #87, #94
 
-Corregidos el scroll general, la carga de ejemplos ausentes y el selector de micrófono
-oculto en Probar el ASR. Se anticipa la activación del audio y se avisa si no sale PCM.
-Agregados dos ejemplos completos de soporte, ejecutados y disponibles en el Historial.
+Probar el ASR permite guardar «Lo que dije en realidad» por frase final, y editar cada
+referencia desde el Historial. El servidor valida los segmentos y deriva el texto global
+para mantener compatibilidad. La medición omite pruebas con referencias incompletas.
+Se conservan Borrar sin cortar el micrófono, guardado explícito y compatibilidad con pruebas anteriores.
 
 Evidencia: experiments/voip/corridas/2026-10-28-correcciones-panel.md.
-Pasan 253 tests Python y 3 Node; ASR real por WebSocket produce transcripciones.
-El 0.8B dio una falsa alarma en el guion legítimo; queda registrada, sin cambiar el detector.
+Pasan 71 tests VoIP, 37 de medición y 3 Node. Guardado y lectura de tres referencias
+verificados desde Chrome hasta el manifiesto. El micrófono volvió tras reiniciar coreaudiod;
+el servidor recibió tres frases reales con texto.
 
-No se cierra #87 ni #94: próxima acción, confirmar la entrada de micrófono real en Chrome
-y continuar la medición con voz humana. D08 y D09 siguen abiertas.
+D08 y D09 siguen abiertas. Próxima acción de #94: completar referencias humanas por frase
+y medir calidad con voz real. El 0.8B mantiene la falsa alarma documentada en soporte legítimo.
 ```

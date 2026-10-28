@@ -124,6 +124,21 @@ class TestCargarPruebas(unittest.TestCase):
         self.assertEqual(len(p["lineas"]), 5)
         self.assertEqual(p["grupo"], "luciano-microfono")
 
+    def test_omite_referencias_por_frase_incompletas(self):
+        carpeta = escribir_prueba(self.dir, "p", referencia_del_bloque(1))
+        archivo = carpeta / "manifiesto.json"
+        m = json.loads(archivo.read_text())
+        m["referencias_por_segmento"] = {"1": "una frase corregida", "2": ""}
+        archivo.write_text(json.dumps(m))
+        pruebas, omitidas = R.cargar_pruebas([self.fila("p")], self.dir, GUION)
+        self.assertEqual(pruebas, [])
+        self.assertIn("alguna frase", omitidas[0]["motivo"])
+        m["referencias_por_segmento"]["2"] = "otra frase corregida"
+        archivo.write_text(json.dumps(m))
+        pruebas, omitidas = R.cargar_pruebas([self.fila("p")], self.dir, GUION)
+        self.assertEqual(len(pruebas), 1)
+        self.assertEqual(omitidas, [])
+
     def test_el_canal_sale_del_manifiesto_o_del_csv(self):
         escribir_prueba(self.dir, "a", referencia_del_bloque(1), canales={"otra": {"inicio_s": 0.0, "duracion_s": 2.0}})
         escribir_prueba(self.dir, "b", referencia_del_bloque(1))

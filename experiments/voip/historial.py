@@ -74,6 +74,18 @@ def validar_referencia(referencia) -> str:
     return referencia.strip()
 
 
+def datos_referencia(carpeta: Path, referencia="", por_segmento=None) -> dict:
+    """Valida cada referencia contra los segmentos finales reales; el texto global es derivado."""
+    if por_segmento is None:
+        return {"referencia": validar_referencia(referencia)}
+    segmentos = list(dict.fromkeys(str(a["segmento"]) for a in _leer_jsonl(carpeta / "actualizaciones.jsonl")
+                                  if a.get("tipo") == "final" and isinstance(a.get("segmento"), int)))
+    if not isinstance(por_segmento, dict) or set(por_segmento) != set(segmentos):
+        raise ValueError("Agregá una referencia por frase final de esta prueba; puede quedar vacía.")
+    referencias = {s: validar_referencia(por_segmento[s]) for s in segmentos}
+    return {"referencia": "\n".join(referencias.values()), "referencias_por_segmento": referencias}
+
+
 def carpeta_de(salida: Path, id_carpeta) -> Path:
     """La carpeta de un id, o ValueError. Rutas, `..` y enlaces simbólicos no son ids."""
     if not isinstance(id_carpeta, str) or not FORMATO_ID.fullmatch(id_carpeta):
@@ -161,6 +173,8 @@ def _resumen(carpeta: Path, manifiesto: dict | None, actualizaciones: list[dict]
     }
     if prueba:
         resumen["referencia"] = m.get("referencia", "")
+        if "referencias_por_segmento" in m:
+            resumen["referencias_por_segmento"] = m["referencias_por_segmento"]
     return resumen
 
 
@@ -222,14 +236,15 @@ def detalle(salida: Path, id_carpeta) -> dict:
     return {"item": resumen, "conversacion": lineas, "aviso": aviso_resumen}
 
 
-def editar_referencia(salida: Path, id_carpeta, referencia) -> dict:
+def editar_referencia(salida: Path, id_carpeta, referencia="", por_segmento=None) -> dict:
     """Cambia «Lo que dije en realidad» de una prueba ya guardada y devuelve su resumen."""
-    texto = validar_referencia(referencia)
     carpeta = carpeta_de(salida, id_carpeta)
     manifiesto = leer_manifiesto(carpeta)
     if manifiesto is None or not es_prueba(manifiesto) or manifiesto.get("guardada") is not True:
         raise ValueError("Solo se edita la referencia de una prueba guardada.")
-    manifiesto["referencia"] = texto
+    datos = datos_referencia(carpeta, referencia, por_segmento)
+    manifiesto.pop("referencias_por_segmento", None)
+    manifiesto.update(datos)
     escribir_manifiesto(carpeta, manifiesto)
     return _resumen(carpeta, manifiesto, [], _leer_jsonl(carpeta / "detector.jsonl"))
 

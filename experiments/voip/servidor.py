@@ -362,16 +362,17 @@ class Servidor:
 
     async def guardar_prueba(self, mensaje: dict) -> None:
         """«Guardar»: marca la última prueba cerrada como guardada y anota lo que se dijo en realidad."""
-        referencia = historial.validar_referencia(mensaje.get("referencia", ""))
         async with self.control:
             carpeta = self.prueba_pendiente
             manifiesto = None if carpeta is None else historial.leer_manifiesto(carpeta)
             if self.llamada is not None or manifiesto is None:
                 raise ValueError("No hay una prueba terminada para guardar.")
-            manifiesto.update({"guardada": True, "referencia": referencia})
+            referencias = historial.datos_referencia(carpeta, mensaje.get("referencia", ""),
+                                                     mensaje.get("referencias_por_segmento"))
+            manifiesto.update({"guardada": True, **referencias})
             historial.escribir_manifiesto(carpeta, manifiesto)
             self.prueba_pendiente = None
-            self.difundir({"tipo": "prueba_guardada", "dir": str(carpeta), "referencia": referencia})
+            self.difundir({"tipo": "prueba_guardada", "dir": str(carpeta), **referencias})
 
     def carpeta_en_curso(self) -> Path | None:
         return None if self.llamada is None else self.llamada.dir_salida
@@ -402,7 +403,7 @@ class Servidor:
         else:
             async with self.control:
                 item = await asyncio.to_thread(historial.editar_referencia, salida, mensaje.get("id"),
-                                               mensaje.get("referencia"))
+                                               mensaje.get("referencia", ""), mensaje.get("referencias_por_segmento"))
             respuesta = {"tipo": "referencia_guardada", "item": item}
         await ws.send(json.dumps(respuesta, ensure_ascii=False))
 

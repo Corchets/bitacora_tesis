@@ -6,9 +6,9 @@ import {crearLinea} from './conversacion.mjs';
  * @typedef {{id: string, fecha: string|null, tipo: 'llamada'|'prueba', incompleta: boolean, fuente: string,
  *   duracion_s: number|null, detector: string|null, modelo: string|null, corte_silencio_s: 'auto'|number|null,
  *   umbral_rms_silencio: number|null, riesgo_maximo: number|null, aviso: boolean, aviso_s: number|null,
- *   referencia?: string}} Elemento
+ *   referencia?: string, referencias_por_segmento?: Record<string, string>}} Elemento
  * @typedef {{item: Elemento, aviso: {t_a: number|null, motivo: string, evidencia: string, riesgo: number|null}|null,
- *   conversacion: Array<{rol: string, texto: string, fin_audio_s: number|null, provisorio: boolean, aviso: boolean}>}} Detalle
+ *   conversacion: Array<{segmento: number, rol: string, texto: string, fin_audio_s: number|null, provisorio: boolean, aviso: boolean}>}} Detalle
  */
 
 const ESTILOS = `
@@ -268,7 +268,10 @@ export function montarHistorial(acciones) {
     for (const [k, v] of pares) {
       datos.append(Object.assign(document.createElement('dt'), {textContent: k}), Object.assign(document.createElement('dd'), {textContent: v}));
     }
-    if (e.tipo === 'prueba') col.append(editorReferencia(e));
+    if (e.tipo === 'prueba') {
+      col.append(editorReferencia(e, d.conversacion));
+      if (e.referencias_por_segmento !== undefined) return col;
+    }
     const contexto = e.fuente.includes('SC-SOPORTE-CLAVE-01')
       ? 'Guion de estafa: el falso soporte inventa una migración de cuenta, pide usuario y contraseña e insiste cuando la persona duda.'
       : e.fuente.includes('LG-SUPPORT-INFO-01')
@@ -315,20 +318,44 @@ export function montarHistorial(acciones) {
     linea.append(ev);
   }
 
-  /** @param {Elemento} e */
-  function editorReferencia(e) {
+  /** @param {Elemento} e @param {Detalle['conversacion']} lineas */
+  function editorReferencia(e, lineas) {
     const caja = document.createElement('div');
     caja.className = 'hist-ref';
     const idCampo = `hist-ref-${e.id}`;
-    caja.innerHTML = `<label for="${idCampo}">Lo que dije en realidad</label><textarea id="${idCampo}" maxlength="2000" placeholder="Escribí la frase tal como la dijiste"></textarea><div><button type="button">Guardar referencia</button> <span role="status"></span></div>`;
-    const campo = /** @type {HTMLTextAreaElement} */ (caja.querySelector('textarea'));
+    const porFrase = e.referencias_por_segmento !== undefined;
+    /** @type {Map<string, HTMLTextAreaElement>} */ const campos = new Map();
+    if (porFrase) {
+      for (const l of lineas) {
+        const linea = crearLinea(l.rol || 'protegida', l.provisorio ? 'parcial' : 'final', l.texto,
+          l.fin_audio_s == null ? '' : `${l.fin_audio_s.toFixed(1)} s`);
+        caja.append(linea);
+        if (l.provisorio) continue;
+        const campo = document.createElement('textarea');
+        campo.id = `${idCampo}-${l.segmento}`; campo.maxLength = 2000;
+        campo.placeholder = 'Escribí esta frase tal como la dijiste';
+        campo.value = e.referencias_por_segmento?.[l.segmento] || '';
+        const label = document.createElement('label'); label.htmlFor = campo.id;
+        label.textContent = `Lo que dije en realidad · frase ${l.segmento}`;
+        caja.append(label, campo); campos.set(String(l.segmento), campo);
+      }
+    } else {
+      caja.innerHTML = `<label for="${idCampo}">Lo que dije en realidad · referencia anterior de la prueba completa</label><textarea id="${idCampo}" maxlength="2000" placeholder="Escribí la referencia completa"></textarea>`;
+      const campo = /** @type {HTMLTextAreaElement} */ (caja.querySelector('textarea'));
+      campo.value = e.referencia || ''; campos.set('global', campo);
+    }
+    const accionesEditor = document.createElement('div');
+    accionesEditor.innerHTML = `<button type="button">Guardar referencias</button> <span role="status"></span>`;
+    caja.append(accionesEditor);
     const boton = /** @type {HTMLButtonElement} */ (caja.querySelector('button'));
     const aviso = /** @type {HTMLElement} */ (caja.querySelector('[role=status]'));
-    campo.value = e.referencia || '';
-    campo.oninput = () => { aviso.textContent = ''; };
+    for (const campo of campos.values()) campo.oninput = () => { aviso.textContent = ''; };
     boton.onclick = () => {
       boton.disabled = true; aviso.textContent = 'Guardando…';
-      if (!acciones.enviar({tipo: 'referencia', id: e.id, referencia: campo.value})) { boton.disabled = false; aviso.textContent = 'Sin conexión con el servidor.'; }
+      const datos = porFrase
+        ? {referencias_por_segmento: Object.fromEntries([...campos].map(([s, campo]) => [s, campo.value]))}
+        : {referencia: campos.get('global')?.value || ''};
+      if (!acciones.enviar({tipo: 'referencia', id: e.id, ...datos})) { boton.disabled = false; aviso.textContent = 'Sin conexión con el servidor.'; }
       else esperandoReferencia = {id: e.id, boton, aviso};
     };
     return caja;
@@ -404,9 +431,9 @@ export function montarHistorial(acciones) {
         espera.boton.disabled = false;
         espera.aviso.textContent = 'Guardada ✓';
         const e = elementos.find(x => x.id === m.item.id);
-        if (e) e.referencia = m.item.referencia;
+        if (e) Object.assign(e, m.item);
         const d = detalles.get(m.item.id);
-        if (d) d.item.referencia = m.item.referencia;
+        if (d) Object.assign(d.item, m.item);
         esperandoReferencia = null;
       } else if (m.tipo === 'error') {
         estado(m.mensaje);

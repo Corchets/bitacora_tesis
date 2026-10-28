@@ -401,24 +401,32 @@ del umbral y verde por encima; la de silencio se llena hasta el corte y vuelve a
 sin cortar el micrófono: el servidor reutiliza los motores ya cargados y toma el candado de control,
 así el audio que llega mientras tanto cae en la prueba nueva y no abre una llamada con la configuración por defecto.
 **Terminar prueba** cierra el registro y libera el micrófono, pero la prueba **no se guarda sola**:
-tocá **Guardar prueba** y, si querés, anotá **Lo que dije en realidad** (hasta 2000 caracteres; es la
-referencia para medir el WER con las herramientas de `asr-local`). Una prueba sin guardar se elimina al iniciar
+tocá **Guardar prueba**. Debajo de cada frase final aparece **Lo que dije en realidad · frase N**:
+podés escribir su referencia mientras seguís hablando o al terminar (hasta 2000 caracteres por
+frase). Guardar conserva cada corrección asociada al segmento original; también se edita por
+frase desde el Historial, incluso al comparar dos pruebas. Los campos pueden quedar vacíos,
+pero la medición offline omite la prueba hasta que estén todos completos. Las pruebas anteriores
+con una referencia global mantienen su editor anterior, sin repartir ese texto entre frases por
+suposición. Una prueba sin guardar se elimina al iniciar
 otra prueba y al arrancar el servidor; las llamadas nunca se eliminan solas. Podés cambiar el corte e iniciar
 otra enseguida; desactivá **Probar el ASR** para volver a la llamada. El corte se elige también ahí.
 El modo y las fuentes quedan en `inicio_panel`; `config.corte_silencio_s` guarda lo elegido
 (`"auto"` o el número) junto con `endpoint_nativo` (verdadero solo con `"auto"`), el umbral
 y `detector: null` en la prueba. Al cerrar, el manifiesto de una prueba trae `guardada: false`;
-«Guardar» lo cambia a `true` y agrega `referencia`. Las pruebas anteriores a esta marca no tienen
+«Guardar» lo cambia a `true` y agrega `referencias_por_segmento`, con claves iguales a los
+segmentos finales del ASR. `referencia` se deriva uniendo esos textos en orden con saltos de
+línea para las herramientas existentes. Las pruebas anteriores a esta marca no tienen
 `guardada` y no se tocan. Audio y registros de voz real quedan fuera de Git.
 
 ```json
 {"tipo":"iniciar","modo":"asr","fuentes":{"protegida":{"tipo":"navegador"}},"corte_silencio_s":1.2,"umbral_rms_silencio":0.005}
 {"tipo":"reiniciar_prueba"}
-{"tipo":"guardar_prueba","referencia":"lo que dije en realidad"}
+{"tipo":"guardar_prueba","referencias_por_segmento":{"1":"Primera frase.","2":"Segunda frase."}}
 ```
 
 `reiniciar_prueba` responde con un `inicio` nuevo (otra carpeta y otro `llamada_id`); `guardar_prueba` responde
-`{"tipo":"prueba_guardada","dir":"…","referencia":"…"}` a todos los paneles. Ambos devuelven `error` si no hay una
+`{"tipo":"prueba_guardada","dir":"…","referencia":"…","referencias_por_segmento":{"1":"…"}}` a todos los paneles.
+La API sigue aceptando `referencia` como texto para clientes anteriores. Ambos devuelven `error` si no hay una
 prueba en curso o terminada sin guardar.
 
 Las pruebas con MotorFalso sensible a energía y reloj controlado recorren dos sesiones

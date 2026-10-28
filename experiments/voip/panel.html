@@ -1634,10 +1634,10 @@ const pruebaASR = montarPruebaASR({
   iniciar: () => { terminada = false; void iniciarSesion(); },
   terminar: () => terminar.click(),
   borrar: () => enviar({tipo: "reiniciar_prueba"}),
-  guardar: (referencia) => {
+  guardar: (referencias_por_segmento) => {
     if (conexion?.readyState !== WebSocket.OPEN) return;
     $("error").textContent = "";
-    conexion.send(JSON.stringify({tipo: "guardar_prueba", referencia}));
+    conexion.send(JSON.stringify({tipo: "guardar_prueba", referencias_por_segmento}));
   },
   cambiar: () => { sincronizarModoVisual(); actualizarControles(); }
 });

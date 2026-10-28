@@ -210,6 +210,34 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             self.assertTrue(carpeta.exists())
             await self.terminar(panel)
 
+    async def test_referencias_por_frase_se_validan_guardan_consultan_y_editan(self):
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps(self.prueba()))
+            await self.evento(panel, "inicio")
+            self.reloj.t += 3
+            self.servidor.recibir_audio("protegida", pcm(3))
+            carpeta = await self.terminar(panel)
+            for referencias in ({"1": "falta otra"}, {"1": "a", "9": "ajena"},
+                                {"1": 8, "2": "b"}, {"1": "x" * 2001, "2": "b"}, []):
+                await panel.send(json.dumps({"tipo": "guardar_prueba", "referencias_por_segmento": referencias}))
+                await self.evento(panel, "error")
+                self.assertIs(self.manifiesto(carpeta)["guardada"], False)
+            referencias = {"2": " Segunda frase. ", "1": " Primera frase. "}
+            await panel.send(json.dumps({"tipo": "guardar_prueba", "referencias_por_segmento": referencias}))
+            guardada = await self.evento(panel, "prueba_guardada")
+            self.assertEqual(guardada["referencia"], "Primera frase.\nSegunda frase.")
+            self.assertEqual(self.manifiesto(carpeta)["referencias_por_segmento"],
+                             {"1": "Primera frase.", "2": "Segunda frase."})
+            await panel.send(json.dumps({"tipo": "ver", "id": carpeta.name}))
+            detalle = await self.evento(panel, "detalle")
+            self.assertEqual(detalle["item"]["referencias_por_segmento"], guardada["referencias_por_segmento"])
+            self.assertEqual([l["segmento"] for l in detalle["conversacion"]], [1, 2])
+            nuevas = {"1": "Primera corregida.", "2": ""}
+            await panel.send(json.dumps({"tipo": "referencia", "id": carpeta.name, "referencias_por_segmento": nuevas}))
+            editada = await self.evento(panel, "referencia_guardada")
+            self.assertEqual(editada["item"]["referencias_por_segmento"], nuevas)
+            self.assertEqual(self.manifiesto(carpeta)["referencia"], "Primera corregida.\n")
+
     async def test_guardar_prueba_sin_referencia_la_deja_vacia(self):
         async with connect(self.url + "/panel") as panel:
             await panel.send(json.dumps(self.prueba()))
