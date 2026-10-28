@@ -68,6 +68,9 @@ svg text{font-family:system-ui,sans-serif}
 .estado{font-size:12.5px;padding:3px 9px;border-radius:9px}.estado.si{background:#dcfce7;color:#166534}.estado.no{background:#fde2e2;color:#991b1b}
 textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospace}
 .log{max-height:420px;overflow:auto}
+#s-decisiones p{max-width:75ch}
+.preguntas-tutor{padding-left:24px;max-width:85ch}.preguntas-tutor>li{margin:18px 0}.preguntas-tutor p{margin:5px 0}
+#s-decisiones th[scope=row]{position:static;background:transparent;color:var(--fg);font-size:13px;width:25%}
 </style>
 </head>
 <body>
@@ -99,8 +102,51 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <div class="aviso"><b>¿Alcanza con mover el umbral o combinar?</b> Con lo que hay en los 150, no. La pasada 0 (<code>analisis/2026-10-21-pasada-0</code>) elige con una parte y mide en otra, y con reglas y 2B lo mejor con FA ≤ 20 % da 15/23 estafas y 5/25 FA. En los 53 suma el 4B y el 9B: «el 9B avisa y el 2B confirma» da lo mismo que el 2B solo (20/29), porque el que confirma es el que pierde estafas. Lo que mejor anda es el 9B o el 4B <b>con el v2 y un umbral de riesgo</b>. Falta confirmarlo en corpus_v2.</div>
 <div class="nota"><b>Recomendación (2026-10-23):</b> correr el 4B y el 9B con v1 y v2 sobre corpus_v2 (Ignacio, en Linux) y repetir la pasada 0 con los 150. Si el 9B v2 con umbral se acerca a 95/5 y el 4B no, la tesis lo dice así: el 9B es el techo y no entra en el teléfono. Mientras tanto, llevar la meta 95/5, cómo se cuentan las estafas sin pedido y la gama alta al tutor. Ver <a href="#plan">Plan de trabajo</a>.</div>
 
+<p><a href="#decisiones">Ver decisiones abiertas y preguntas para el tutor →</a></p>
 <h3>Tus preguntas</h3>
 <div class="faq" id="faq"></div>
+</section>
+
+<!-- ============================ DECISIONES ============================ -->
+<section id="s-decisiones" data-titulo="Decisiones y tutor">
+<h2>Qué queda abierto y qué falta preguntar</h2>
+<p class="mu">Corte documental: 2026-10-28. La agenda todavía no tiene respuestas registradas del tutor. Las alternativas que siguen son <b>propuestas sin discutir</b>.</p>
+<p>Fuentes: <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/MAPA-DECISIONES.md">Mapa de decisiones</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-10-28.md">Agenda del 2026-10-28</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-09-30.md">Consultas anteriores</a>.</p>
+<div class="aviso"><b>Grabaciones pendientes de validación (D06).</b> Antes de grabar voces humanas, registrar la respuesta del tutor y completar domicilio/contacto reales fuera de Git. Audio y consentimientos firmados se resguardan fuera del repositorio.</div>
+<h3>Preguntas para llevar al tutor</h3>
+<p class="chico mu">Todas pendientes. El encuadre de JEV y la captura Meet/WhatsApp se consultan en la agenda; todavía no modifican D03/D05/D09.</p>
+<ol class="preguntas-tutor">
+<li><b>JEV vía API y privacidad · D03/D09</b><p>¿Lo evaluamos solo como alternativa experimental sobre el corpus ficticio, conservando el detector local para privacidad estricta, o permitimos elegir un modo híbrido con consentimiento explícito?</p><p class="chico mu">Define si la API queda como comparación de laboratorio o entra en el prototipo. La mejora de JEV todavía debe medirse.</p></li>
+<li><b>Demo con Meet/WhatsApp · D05</b><p>¿Acepta la captura por canales —micrófono de la persona protegida y audio remoto de Meet o WhatsApp/BlackHole— como demostración objetivo para la defensa?</p><p class="chico mu">D05 conserva replay reproducible y VoIP propia como encuadre vigente; implementar el panel no equivale a aprobar el cambio.</p></li>
+<li><b>Meta 95/5 y estafas sin pedido · D08</b><p>¿Adoptamos la meta de avisar en ≥ 95 % de las estafas con ≤ 5 % de falsas alarmas? ¿El 95 % se calcula sobre todas las estafas o solo las que llegan a formular un pedido? ¿O reportamos ambas cuentas sin un umbral rígido de aprobación?</p><p class="chico mu">En desarrollo, 10 de las 75 estafas cortan antes del pedido y ningún detector las avisa: el máximo observado con todas en el denominador es 86,7 %.</p></li>
+<li><b>Hardware de referencia · D09</b><p>¿Pasamos a teléfonos de gama alta como referencia y presentamos el modelo 9B como techo experimental en PC si no entra en el presupuesto móvil?</p><p class="chico mu">Falta acordar y medir el dispositivo concreto. Las especificaciones se verifican por modelo; iOS sigue fuera de alcance como plataforma.</p></li>
+<li><b>Consentimiento y voces del equipo · D06</b><p>¿Aprueba participantes adultos, consentimiento previo de ambos interlocutores y resguardo local para grabar las 30 frases de ajuste ASR y los 24 diálogos previstos?</p><p class="chico mu">La selección inicial del corpus está acordada; la habilitación para grabar sigue pendiente.</p></li>
+<li><b>Continuidad de RoBERTuito · D09</b><p>¿Confirmamos que no se retoma y concentramos el esfuerzo hasta el 2026-12-01 en ASR con voz real, comparación con JEV y evaluación final?</p><p class="chico mu">#41/#42 están retirados como not_planned. Retomarlos requiere una replanificación acordada.</p></li>
+</ol>
+<h3>Decisiones que siguen abiertas o parciales</h3>
+<table>
+<thead><tr><th scope="col">Decisión</th><th scope="col">Qué falta para cerrarla</th></tr></thead>
+<tbody>
+<tr><th scope="row">D02 · Problema y usuario</th><td>Ratificación del tutor de la formulación acordada por el equipo. Pendiente desde la agenda del 2026-09-30.</td></tr>
+<tr><th scope="row">D07 · Anotación</th><td>Probar el manual entre los cuatro, conservar anotaciones originales, resolver ambigüedades y adjudicar desacuerdos.</td></tr>
+<tr><th scope="row">D08 · Protocolo experimental</th><td>Congelar composición y particiones del corpus, comparadores, ventana de contexto, persistencia, política de alerta, métricas y tratamiento de la incertidumbre antes del test final. Requiere D07 resuelta.</td></tr>
+<tr><th scope="row">D09 · ASR y detector</th><td>Elegir combinación y configuración final con audio humano y mediciones del flujo completo: calidad, falsas alarmas, latencia y memoria.</td></tr>
+<tr><th scope="row">D10 · Entrega y defensa</th><td>Acordar con el tutor índice, anexos, paquete reproducible, duración y demo; especificar el aviso y la evaluación de comprensión con usuarios.</td></tr>
+<tr><th scope="row">D11 · Solo transcripción</th><td>Ratificar entre los cuatro transcripción y contexto de la llamada actual como entradas del detector; dejar rasgos acústicos como trabajo futuro.</td></tr>
+<tr><th scope="row">D12 · Adultos mayores</th><td>Terminar de acordar foco y justificación, con participación en evaluación/usabilidad sin convertirlo en requisito del corpus ni promesa de generalización.</td></tr>
+<tr><th scope="row">D13 · Título definitivo</th><td>Definirlo cuando se conozca la cobertura real del corpus. No prometer «español argentino» sin un corpus que lo sostenga.</td></tr>
+</tbody>
+</table>
+<h3>Otros puntos por especificar</h3>
+<ul>
+<li>Fecha exacta de entrega y defensa: está registrado fines de diciembre de 2026; el 2026-12-01 es el cierre interno propuesto.</li>
+<li>Android concreto para la demo y mediciones de rendimiento, batería y temperatura.</li>
+<li>Posibilidad y licencia de publicar el corpus, o solo sus metadatos.</li>
+<li>Técnica estadística final según tamaño y distribución del corpus.</li>
+<li>Discutir entre los cuatro si se agrega «cuánto contexto mira el detector» como eje de PI1 (D04) y revisar los comparadores al cerrar D09.</li>
+</ul>
+<p class="nota"><b>Prioridad sugerida:</b> habilitación de grabaciones, encuadre de JEV y criterio de evaluación. Llevar también la validación de la demo. Es una orientación para conversar.</p>
+<p class="chico mu">Esta pestaña resume las fuentes enlazadas. Las resoluciones se registran en la minuta y en el mapa de decisiones; ninguna casilla del tablero cierra una decisión.</p>
 </section>
 
 <!-- ============================ PLAN ============================ -->
@@ -108,17 +154,7 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <h2>Plan de trabajo por etapas</h2>
 <p class="mu">Orden propuesto para ir por partes. Lo terminado aparece tachado, con su evidencia, y lo que está en marcha, con ⏳; esas marcas viven en el código del panel. Las demás casillas se guardan solo en este navegador (localStorage). Todo lo que fija un umbral, una gama o una referencia se marca <b>propuesta sin discutir</b> hasta que lo ratifique el equipo, según AGENTS.md.</p>
 <div class="aviso"><b>Meta de calidad propuesta:</b> ≥ 95 % de estafas con aviso y ≤ 5 % de legítimas con falsa alarma, por conversación, con aviso único, medido una sola vez sobre un test congelado. Hoy no hay gate de calidad aprobado: <code>PREFACTIBILIDAD-TECNICA.md</code> §2 lo deja para D09. <b>Propuesta sin discutir.</b></div>
-<h3>Decisiones que bloquean (para el equipo y el tutor)</h3>
-<div class="card"><table>
-<tr><th>Decisión</th><th>Propuesta</th><th>Estado</th></tr>
-<tr><td>Meta de calidad</td><td>≥ 95 % de estafas con aviso y ≤ 5 % de falsas alarmas</td><td>Propuesta de Luciano; falta el tutor (D08)</td></tr>
-<tr><td>¿Las estafas que cortan antes del pedido cuentan en el total?</td><td>Informar las dos cuentas; con todas, el máximo hoy es 87 %</td><td>Sin discutir (D07/D08)</td></tr>
-<tr><td>Gama objetivo</td><td>Alta: iPhone 16 o posterior, Samsung de gama alta y equivalentes; el 9B como techo si no entra</td><td>Propuesta de Luciano (D09)</td></tr>
-<tr><td>Llamada en vivo</td><td>Obligatoria para la demo; opción a elegir abajo</td><td>Propuesta; el Plan la tiene como extensión</td></tr>
-<tr><td>Quién es quién en la llamada</td><td>Por canal: local = persona protegida, remoto = la otra persona. La dirección de la llamada se registra como dato, no como regla</td><td>Acordado por Luciano el 2026-10-23; el Plan excluía la dirección como entrada del detector</td></tr>
-<tr><td>RoBERTuito</td><td>Filtro liviano después de congelar el SLM, con tope de 2 semanas</td><td>Reabrir con acuerdo (#41/#42 not_planned)</td></tr>
-<tr><td>Grabar voces del equipo</td><td>Consentimiento simple entre los integrantes; audio fuera de Git</td><td>D06</td></tr>
-</table></div>
+<p><a href="#decisiones">Ver decisiones que bloquean y preguntas para el tutor</a>. Las etapas y fechas de este plan son propuestas; la nueva agenda consulta también JEV y la continuidad de RoBERTuito.</p>
 
 <h3>Calendario hasta el cierre interno (1/12)</h3>
 <div class="card"><table>
@@ -362,7 +398,7 @@ const COLORES = ['var(--c0)','var(--c1)','var(--c2)','var(--c3)','var(--c4)','va
 
 // ---------------- Navegación ----------------
 const SECC = [...document.querySelectorAll('main>section')];
-const IDS = {resumen:'s-resumen',plan:'s-plan',arquitectura:'s-arq',resultados:'s-res',afinar:'s-afinar',tiempos:'s-tiempos',casos:'s-casos',probador:'s-probador',correr:'s-correr'};
+const IDS = {resumen:'s-resumen',decisiones:'s-decisiones',plan:'s-plan',arquitectura:'s-arq',resultados:'s-res',afinar:'s-afinar',tiempos:'s-tiempos',casos:'s-casos',probador:'s-probador',correr:'s-correr'};
 $('#nav').innerHTML = Object.entries(IDS).map(([h, id]) => `<button data-h="${h}">${$('#' + id).dataset.titulo}</button>`).join('');
 function ir() {
   const h = (location.hash || '#resumen').slice(1);
