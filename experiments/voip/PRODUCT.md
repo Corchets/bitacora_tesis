@@ -20,7 +20,7 @@ Hacer observable la detección incremental: quién habla, qué se transcribe aho
 
 ## Operating Context
 
-Demo prevista para el 2026-10-28. Fuentes existentes: ejemplos SC-WA-CODE-01 y LG-WA-CONSULTA-01, micrófono, Meet en Chrome, WhatsApp Desktop mediante BlackHole y segunda notebook con cliente.py. El servidor guarda las llamadas fuera de Git.
+Demo prevista para el 2026-10-28. Fuentes existentes: ejemplos SC-WA-CODE-01, SC-SOPORTE-CLAVE-01 y LG-SUPPORT-INFO-01 (LG-WA-CONSULTA-01 salió del panel el 2026-10-28), micrófono, Meet en Chrome, WhatsApp Desktop mediante BlackHole y segunda notebook con cliente.py. El servidor guarda las llamadas fuera de Git.
 
 ## Capabilities and Constraints
 
