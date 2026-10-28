@@ -1662,7 +1662,12 @@ const pruebaASR = montarPruebaASR({
     $("error").textContent = "";
     conexion.send(JSON.stringify({tipo: "guardar_prueba", referencias_por_segmento}));
   },
-  cambiar: () => { sincronizarModoVisual(); actualizarControles(); }
+  cambiar: () => { sincronizarModoVisual(); actualizarControles(); },
+  borrarGuardadas: () => {
+    if (conexion?.readyState !== WebSocket.OPEN) return false;
+    conexion.send(JSON.stringify({tipo: "borrar_pruebas"}));
+    return true;
+  }
 });
 
 const historialUI = montarHistorial({

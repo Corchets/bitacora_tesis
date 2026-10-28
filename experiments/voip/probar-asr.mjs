@@ -4,7 +4,7 @@ import {crearSelectorCorte} from './corte-silencio.mjs';
 
 /**
  * UI de prueba; el panel conserva una única conexión y el ciclo de captura de #78.
- * @param {{iniciar: () => void, terminar: () => void, borrar: () => void, guardar: (referencias: Record<string, string>) => void, cambiar: () => void}} acciones
+ * @param {{iniciar: () => void, terminar: () => void, borrar: () => void, guardar: (referencias: Record<string, string>) => void, cambiar: () => void, borrarGuardadas: () => boolean}} acciones
  */
 export function montarPruebaASR(acciones) {
   const seccion = document.createElement('section');
@@ -18,7 +18,8 @@ export function montarPruebaASR(acciones) {
       #prueba-asr h2 { font-size:1.375rem; letter-spacing:-.01em; margin:0; color:var(--tinta, #0f172a); }
       #prueba-asr .bajada { margin:.25rem 0 0; color:var(--tinta-secundaria, #334155); }
       #prueba-asr .cabeza { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end; gap:1rem; }
-      #prueba-asr .botones { display:flex; gap:.45rem; }
+      #prueba-asr .cabeza > :first-child { flex:1 1 0; min-width:16rem; }
+      #prueba-asr .botones { display:flex; align-items:center; gap:.45rem; }
       #asr-iniciar { background:var(--primary, #1d4ed8); color:#fff; border-color:var(--primary, #1d4ed8); padding-inline:1.1rem; }
       #asr-iniciar:hover:not(:disabled) { background:var(--primary-dark, #1e40af); }
       #asr-terminar { color:var(--alerta, #b91c1c); border-color:var(--alerta-borde, #f87171); }
@@ -50,6 +51,22 @@ export function montarPruebaASR(acciones) {
       #asr-guardado label { font-weight:700; }
       #asr-guardado .fila { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; }
       #asr-guardado-estado { font-weight:600; color:var(--tinta-secundaria, #334155); }
+      #prueba-asr .opciones { position:relative; }
+      #prueba-asr .opciones summary { list-style:none; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; width:2.25rem; height:100%; min-height:2.25rem; border:1px solid var(--linea, #cbd5e1); border-radius:6px; background:var(--superficie, #ffffff); color:var(--tinta-secundaria, #334155); font-size:1.1rem; }
+      #prueba-asr .opciones summary::-webkit-details-marker { display:none; }
+      #prueba-asr .opciones summary:focus-visible { outline:2px solid var(--primary, #1d4ed8); outline-offset:1px; }
+      #prueba-asr .opciones[aria-disabled="true"] summary { opacity:.5; cursor:not-allowed; }
+      #prueba-asr .menu { position:absolute; right:0; top:calc(100% + .35rem); z-index:5; min-width:16rem; padding:.35rem; background:var(--superficie, #ffffff); border:1px solid var(--linea, #cbd5e1); border-radius:8px; box-shadow:0 8px 24px rgba(15,23,42,.12); }
+      #prueba-asr .menu button { width:100%; text-align:left; border:0; background:none; color:var(--alerta, #b91c1c); padding:.5rem .6rem; border-radius:6px; }
+      #prueba-asr .menu button:hover { background:var(--alerta-fondo, #fef2f2); }
+      #asr-opciones-estado { font-size:.8125rem; font-weight:600; color:var(--tinta-secundaria, #334155); }
+      #asr-opciones-estado:empty { display:none; }
+      #asr-confirmar { max-width:28rem; border:1px solid var(--linea, #cbd5e1); border-radius:12px; padding:1.1rem 1.25rem; }
+      #asr-confirmar::backdrop { background:rgba(15,23,42,.35); }
+      #asr-confirmar h2 { font-size:1.125rem; }
+      #asr-confirmar p { margin:.5rem 0 1rem; color:var(--tinta-secundaria, #334155); line-height:1.5; }
+      #asr-confirmar .acciones { display:flex; justify-content:flex-end; gap:.45rem; }
+      #asr-conf-borrar { background:var(--alerta-fondo, #fef2f2); color:var(--alerta, #b91c1c); border-color:var(--alerta-borde, #f87171); }
       body.asr #controles > :not(#error):not(.campos), body.asr #controles .campos > :not(#campo-microfono), body.asr main { display:none; }
       body.protegida #prueba-asr { display:none; }
       @media (max-width: 760px) { #prueba-asr .ajustes { grid-template-columns:1fr; } }
@@ -64,9 +81,16 @@ export function montarPruebaASR(acciones) {
             <p class="bajada">Hablá con pausas y mirá cuándo se cierra cada frase. Solo tu micrófono, sin detector. Usá auriculares.</p>
           </div>
           <div class="botones">
-            <button id="asr-borrar" disabled title="Borra lo hablado y empieza de nuevo sin cortar el micrófono">Borrar</button>
+            <span id="asr-opciones-estado" role="status"></span>
+            <button id="asr-borrar" disabled title="Borra lo hablado de la pantalla; durante la prueba, empieza de nuevo sin cortar el micrófono">Borrar</button>
             <button id="asr-terminar" disabled>Terminar prueba</button>
             <button id="asr-iniciar" disabled>▶ Hablar</button>
+            <details class="opciones" id="asr-opciones">
+              <summary title="Opciones de las pruebas" aria-label="Opciones de las pruebas">⚙</summary>
+              <div class="menu">
+                <button id="asr-borrar-guardadas" type="button">Borrar todas las pruebas guardadas…</button>
+              </div>
+            </details>
           </div>
         </div>
         <div class="ajustes">
@@ -93,6 +117,16 @@ export function montarPruebaASR(acciones) {
         </div>
       </div>
       <div class="tarjeta"><div id="asr-textos" aria-live="polite"></div></div>
+      <dialog id="asr-confirmar" aria-labelledby="asr-conf-titulo">
+        <form method="dialog">
+          <h2 id="asr-conf-titulo">¿Borrar todas las pruebas de ASR guardadas?</h2>
+          <p>Se borran sus carpetas con el audio, la transcripción y lo que dijiste en realidad. Las llamadas no se tocan. No se puede deshacer.</p>
+          <div class="acciones">
+            <button value="cancelar" autofocus>Cancelar</button>
+            <button value="borrar" id="asr-conf-borrar">Borrar</button>
+          </div>
+        </form>
+      </dialog>
       <div id="asr-guardado" class="tarjeta" hidden>
         <div class="fila">
           <button id="asr-guardar" type="button">Guardar prueba</button>
@@ -114,6 +148,21 @@ export function montarPruebaASR(acciones) {
   const guardar = /** @type {HTMLButtonElement} */ (el('asr-guardar'));
   const estadoGuardado = el('asr-guardado-estado');
   const AVISO_DESCARTE = 'Si no la guardás, se descarta al empezar otra prueba.';
+  const opciones = /** @type {HTMLDetailsElement} */ (el('asr-opciones'));
+  const confirmarBorrado = /** @type {HTMLDialogElement} */ (el('asr-confirmar'));
+  const estadoOpciones = el('asr-opciones-estado');
+  let opcionesBloqueadas = true, esperandoBorrado = false, enCurso = false, puedeBorrar = false;
+  opciones.addEventListener('toggle', () => { if (opciones.open && opcionesBloqueadas) opciones.open = false; });
+  document.addEventListener('click', e => { if (opciones.open && !opciones.contains(/** @type {Node} */ (e.target))) opciones.open = false; });
+  el('asr-borrar-guardadas').onclick = () => {
+    opciones.open = false; confirmarBorrado.returnValue = '';
+    confirmarBorrado.showModal();
+  };
+  confirmarBorrado.onclose = () => {
+    if (confirmarBorrado.returnValue !== 'borrar') return;
+    esperandoBorrado = acciones.borrarGuardadas();
+    estadoOpciones.textContent = esperandoBorrado ? 'Borrando…' : 'Sin conexión con el servidor.';
+  };
   let esPrueba = false, guardando = false, guardada = false;
   function ocultarGuardado() {
     guardado.hidden = true; guardando = guardada = false;
@@ -152,7 +201,13 @@ export function montarPruebaASR(acciones) {
   corte.alCambiar = limpiarNiveles;
   iniciar.onclick = () => { if (corte.validar() && umbral.reportValidity()) acciones.iniciar(); };
   terminar.onclick = acciones.terminar;
-  borrar.onclick = acciones.borrar;
+  // Durante la prueba reinicia en el servidor; terminada, solo limpia la pantalla (lo guardado queda en Historial).
+  borrar.onclick = () => {
+    if (enCurso) { acciones.borrar(); return; }
+    frases.clear(); el('asr-textos').replaceChildren(); limpiarNiveles();
+    guardado.hidden = true; estadoOpciones.textContent = '';
+    borrar.disabled = true;
+  };
   guardar.onclick = () => {
     guardando = true; guardar.disabled = true;
     estadoGuardado.textContent = 'Guardando…';
@@ -169,11 +224,23 @@ export function montarPruebaASR(acciones) {
       corte.deshabilitado = umbral.disabled = ocupada || enLlamada;
       iniciar.disabled = !conectada || ocupada || enLlamada;
       terminar.disabled = !conectada || ocupada || !enLlamada;
-      borrar.disabled = !conectada || ocupada || !enLlamada;
+      enCurso = enLlamada; puedeBorrar = conectada && !ocupada;
+      borrar.disabled = !puedeBorrar || (!enLlamada && !frases.size && guardado.hidden);
+      // El servidor no borra con una prueba en curso.
+      opcionesBloqueadas = !conectada || ocupada || enLlamada;
+      opciones.setAttribute('aria-disabled', String(opcionesBloqueadas));
+      if (opcionesBloqueadas) opciones.open = false;
     },
     /** @param {any} m */
     evento(m) {
+      if (esperandoBorrado && (m.tipo === 'borrado' || m.tipo === 'error')) {
+        esperandoBorrado = false;
+        const n = m.tipo === 'borrado' ? m.ids.length : -1;
+        estadoOpciones.textContent = n < 0 ? 'No se pudo borrar.' : n === 0 ? 'No había pruebas guardadas.'
+          : n === 1 ? 'Se borró 1 prueba.' : `Se borraron ${n} pruebas.`;
+      }
       if (m.tipo === 'inicio') {
+        estadoOpciones.textContent = '';
         esPrueba = m.modo === 'asr';
         ocultarGuardado();
         modo.checked = esPrueba; aplicarModo();
@@ -185,6 +252,7 @@ export function montarPruebaASR(acciones) {
       }
       if (!modo.checked) return;
       if (m.tipo === 'fin' && esPrueba) guardado.hidden = false;
+      if (m.tipo === 'fin') borrar.disabled = !puedeBorrar;
       if (m.tipo === 'prueba_guardada') {
         guardando = false; guardada = true;
         for (const [segmento, frase] of frases) if (frase.referencia) {
