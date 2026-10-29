@@ -201,17 +201,28 @@ class TestCongelado(unittest.TestCase):
         return sel102.seleccionar(res)
 
     def _tito_info(self, **cambios):
-        info = {"artefacto_sha256": "abc123", "entrada": "historial_acumulado",
+        info = {"artefacto_sha256": "abc123",
+                "manifiesto100_sha256": "f" * 64,
+                "entrada": "historial_acumulado",
                 "umbral": 0.5, "encoder": {"id": "e", "revision": "r"},
                 "encoder_artefacto": {"id": "e", "revision": "r"},
                 "variante": "#99-congelada"}
         info.update(cambios)
         return info
 
+    def _man(self, **cambios):
+        ident = {"artefacto_sha256": "abc123",
+                 "manifiesto100_sha256": "f" * 64,
+                 "entrada": "historial_acumulado", "umbral": 0.5,
+                 "encoder": {"id": "e", "revision": "r"},
+                 "variante": "#99-congelada"}
+        ident.update(cambios)
+        return sel102.manifiesto_busqueda(["x"], {"identidad_tito": ident})
+
     def test_congela_con_identidad_del_candidato(self):
         s = self._seleccion()
         self.assertEqual(s["ganadora"], "reconsultas-p3")
-        man = sel102.manifiesto_busqueda(["x"], {})
+        man = self._man()
         fro = sel102.congelar_politica(man, s, "reconsultas-p3", self._tito_info())
         self.assertEqual(fro["politica_ganadora"]["periodo_revision"], 3)
         self.assertEqual(fro["tito_congelado"]["umbral"], 0.5)
@@ -219,12 +230,12 @@ class TestCongelado(unittest.TestCase):
         self.assertIn("congelado_en", fro)
 
     def test_rechaza_ganadora_fuera_de_la_busqueda(self):
-        man = sel102.manifiesto_busqueda(["x"], {})
+        man = self._man()
         with self.assertRaises(ValueError):
             sel102.congelar_politica(man, {"ganadora": "otra"}, "otra", self._tito_info())
 
     def test_rechaza_sin_identidad_del_tito(self):
-        man = sel102.manifiesto_busqueda(["x"], {})
+        man = self._man()
         s = self._seleccion()
         with self.assertRaises(ValueError):
             sel102.congelar_politica(man, s, "reconsultas-p3",
@@ -238,10 +249,9 @@ class TestCongelado(unittest.TestCase):
                                          encoder_artefacto={"id": "otro", "revision": "r"}))
 
     def test_congelado_expone_contrato_comun_con_100(self):
-        man = sel102.manifiesto_busqueda(["x"], {})
+        man = self._man()
         s = self._seleccion()
-        fro = sel102.congelar_politica(man, s, "reconsultas-p3",
-                                       self._tito_info(manifiesto100_sha256="f" * 64))
+        fro = sel102.congelar_politica(man, s, "reconsultas-p3", self._tito_info())
         self.assertTrue(fro["seleccion_solo_validacion"])
         self.assertEqual(fro["modo"], sel102.ESTADO_GANADORA)
         self.assertTrue(fro["apta_para_medir"])
@@ -258,21 +268,19 @@ class TestCongelado(unittest.TestCase):
         self.assertIsNotNone(momento.tzinfo)
 
     def test_congela_exploratoria_negativa_no_ganadora(self):
-        man = sel102.manifiesto_busqueda(["x"], {})
+        man = self._man()
         base = [fila_resultado("a", aviso=3)]
         peor = [fila_resultado("a", aviso=None, consultas=0)]
         s = sel102.seleccionar({sel102.BASELINE_102: base,
                                 "reconsultas-p1": peor,
                                 "reconsultas-p3": peor,
                                 "reconsultas-p5": peor})
-        fro = sel102.congelar_politica(man, s, "reconsultas-p1",
-                                       self._tito_info(manifiesto100_sha256="f" * 64))
+        fro = sel102.congelar_politica(man, s, "reconsultas-p1", self._tito_info())
         self.assertEqual(fro["modo"], sel102.ESTADO_NEGATIVO)
         self.assertFalse(fro["apta_para_medir"])
         self.assertTrue(fro["resultado_negativo"])
         with self.assertRaises(ValueError):
-            sel102.congelar_politica(man, s, "reconsultas-p3",
-                                     self._tito_info(manifiesto100_sha256="f" * 64))
+            sel102.congelar_politica(man, s, "reconsultas-p3", self._tito_info())
 
 
 class TestCoberturaMismaIDs(unittest.TestCase):
@@ -398,6 +406,205 @@ class TestTrazasYRegeneracion(unittest.TestCase):
             # Regenerar desde trazas sin nueva inferencia.
             rc = sel102.main(["regenerar", str(man_path)])
             self.assertEqual(rc, 0)
+
+
+class TestReanudadoIncremental(unittest.TestCase):
+    """Interrumpir a mitad, reanudar sin duplicados ni repetir lo completo."""
+
+    def _pre(self, **cambios):
+        pre = sel102.construir_preenferencia(
+            identidad_tito={"artefacto_sha256": "a" * 64,
+                            "manifiesto100_sha256": "f" * 64,
+                            "entrada": "historial_acumulado", "umbral": 0.5,
+                            "encoder": {"id": "e", "revision": "r"},
+                            "variante": "v"},
+            prompt="tarea", prompt_huella="h",
+            opciones={"hablantes": "ab", "seed": 42},
+            inventario_referencia={"tag": "qwen3.5:4b", "digest": "sha256:d"},
+            ollama_version="0.0-test")
+        pre.update(cambios)
+        return pre
+
+    def _fabricas_contadas(self, contador):
+        def envuelta(nombre, puntajes=None, alertas=frozenset()):
+            base = fabrica(nombre, puntajes, alertas)
+
+            def _fab():
+                contador[nombre] = contador.get(nombre, 0) + 1
+                return base()
+            return _fab
+        return envuelta
+
+    def test_interrumpir_despues_de_uno_y_a_mitad_reanuda_identico(self):
+        import csv
+        import tempfile
+        ids = sel102.validacion_102()[:2]
+        nombres = [sel102.BASELINE_102, "reconsultas-p1"]
+        # Corrida sin interrupción: referencia.
+        cont_full: dict = {}
+        env = self._fabricas_contadas(cont_full)
+        fabricas_full = {n: env(n, {1: 0.9}, frozenset({3})) for n in nombres}
+        with tempfile.TemporaryDirectory() as tmp:
+            csv_full = Path(tmp) / "full_actualizaciones.csv"
+            prog_full = Path(tmp) / "full_progreso.json"
+            res_full, _ = sel102.medir_con_fabrica_reanudable(
+                fabricas_full, ids, csv_ruta=csv_full,
+                progreso_ruta=prog_full, preinferencia=self._pre())
+            with csv_full.open(encoding="utf-8-sig", newline="") as f:
+                filas_full = list(csv.DictReader(f))
+            # Interrupción: 1 unidad completa durable + mitad cruda sin marcador.
+            cont_corte: dict = {}
+            env2 = self._fabricas_contadas(cont_corte)
+            fabricas_corte = {n: env2(n, {1: 0.9}, frozenset({3})) for n in nombres}
+            csv_c = Path(tmp) / "corte_actualizaciones.csv"
+            prog_c = Path(tmp) / "corte_progreso.json"
+            pre = self._pre()
+            cfg0 = sel102._config_traza(nombres[0], sel102.MODELO_REFERENCIA_102,
+                                       "tarea", "ab")
+            _, filas_u1 = sel102._medir_caso(fabricas_corte[nombres[0]], ids[0], cfg0)
+            sel102.guardar_unidad(csv_c, prog_c, sel102._unidad(nombres[0], ids[0]),
+                                  filas_u1, pre)
+            cfg1 = sel102._config_traza(nombres[1], sel102.MODELO_REFERENCIA_102,
+                                       "tarea", "ab")
+            _, filas_u2 = sel102._medir_caso(fabricas_corte[nombres[1]], ids[0], cfg1)
+            mitad = filas_u2[:max(1, len(filas_u2) // 2)]
+            self.assertLess(len(mitad), len(filas_u2))
+            import correr as _correr
+            with csv_c.open("a", encoding="utf-8-sig", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=_correr.COLUMNAS)
+                for fila in mitad:
+                    w.writerow({c: fila.get(c, "") for c in _correr.COLUMNAS})
+            llamadas_antes = dict(cont_corte)
+            # Reanudar la MISMA búsqueda: sin duplicados, sin repetir lo completo.
+            fabricas_res = {n: env2(n, {1: 0.9}, frozenset({3})) for n in nombres}
+            res_res, _ = sel102.medir_con_fabrica_reanudable(
+                fabricas_res, ids, csv_ruta=csv_c,
+                progreso_ruta=prog_c, preinferencia=self._pre())
+            self.assertEqual(res_res, res_full)
+            self.assertEqual(sel102.seleccionar(res_res)["ganadora"],
+                             sel102.seleccionar(res_full)["ganadora"])
+            with csv_c.open(encoding="utf-8-sig", newline="") as f:
+                filas_res = list(csv.DictReader(f))
+            self.assertEqual(len(filas_res), len(filas_full))
+            claves = lambda fs: sorted((f["config"], f["case_id"], f["linea"]) for f in fs)
+            self.assertEqual(claves(filas_res), claves(filas_full))
+            # La unidad completa no volvió a inferirse: misma cantidad de
+            # llamadas que antes de reanudar para esa fábrica ya usada.
+            self.assertEqual(cont_corte[nombres[0]],
+                             llamadas_antes[nombres[0]] + (len(ids) - 1))
+            prog = sel102.cargar_progreso(prog_c)
+            self.assertEqual(len(prog["completadas"]), len(set(prog["completadas"])))
+            self.assertEqual(len(prog["completadas"]), len(nombres) * len(ids))
+
+    def test_identidad_cambiada_bloquea_reuso(self):
+        import tempfile
+        ids = sel102.validacion_102()[:1]
+        with tempfile.TemporaryDirectory() as tmp:
+            csv_r = Path(tmp) / "r_actualizaciones.csv"
+            prog_r = Path(tmp) / "r_progreso.json"
+            fabricas = {sel102.BASELINE_102: fabrica(sel102.BASELINE_102, {1: 0.9})}
+            sel102.medir_con_fabrica_reanudable(fabricas, ids, csv_ruta=csv_r,
+                                               progreso_ruta=prog_r,
+                                               preinferencia=self._pre())
+            for distinta in ({"prompt_huella": "otra"},
+                             {"ollama_version": "9.9"},
+                             {"opciones": {"hablantes": "sin", "seed": 42}}):
+                pre2 = self._pre()
+                pre2.update(distinta)
+                with self.assertRaises(ValueError):
+                    sel102.medir_con_fabrica_reanudable(
+                        fabricas, ids, csv_ruta=csv_r,
+                        progreso_ruta=prog_r, preinferencia=pre2)
+            pre3 = self._pre()
+            pre3["identidad_tito"] = dict(pre3["identidad_tito"],
+                                          artefacto_sha256="b" * 64)
+            with self.assertRaises(ValueError):
+                sel102.medir_con_fabrica_reanudable(
+                    fabricas, ids, csv_ruta=csv_r,
+                    progreso_ruta=prog_r, preinferencia=pre3)
+
+    def test_candidatas_fuera_de_la_busqueda_acotada_no_miden(self):
+        import tempfile
+        ids = sel102.validacion_102()[:1]
+        with tempfile.TemporaryDirectory() as tmp:
+            pre = self._pre()
+            pre["candidatas"] = [dict(c, periodo_revision=7)
+                                 for c in sel102.CANDIDATAS_102]
+            with self.assertRaises(ValueError):
+                sel102.medir_con_fabrica_reanudable(
+                    {sel102.BASELINE_102: fabrica(sel102.BASELINE_102)},
+                    ids, csv_ruta=Path(tmp) / "x.csv",
+                    progreso_ruta=Path(tmp) / "x.json", preinferencia=pre)
+
+
+class TestCongeladoFailClosed(unittest.TestCase):
+    def _seleccion(self):
+        base = [fila_resultado("a", aviso=3, consultas=2)]
+        cand = [fila_resultado("a", aviso=2, consultas=1)]
+        res = {sel102.BASELINE_102: base, "reconsultas-p1": base,
+               "reconsultas-p3": cand, "reconsultas-p5": base}
+        return sel102.seleccionar(res)
+
+    def _tito_info(self):
+        return {"artefacto_sha256": "abc123",
+                "manifiesto100_sha256": "f" * 64,
+                "entrada": "historial_acumulado", "umbral": 0.5,
+                "encoder": {"id": "e", "revision": "r"},
+                "encoder_artefacto": {"id": "e", "revision": "r"},
+                "variante": "#99-congelada"}
+
+    def _ident(self, **cambios):
+        ident = {"artefacto_sha256": "abc123",
+                 "manifiesto100_sha256": "f" * 64,
+                 "entrada": "historial_acumulado", "umbral": 0.5,
+                 "encoder": {"id": "e", "revision": "r"},
+                 "variante": "#99-congelada"}
+        ident.update(cambios)
+        return ident
+
+    def test_busqueda_real_sin_identidad_no_congela(self):
+        man = sel102.manifiesto_busqueda(["x"], {})
+        with self.assertRaisesRegex(ValueError, "sin identidad preinferencia"):
+            sel102.congelar_politica(man, self._seleccion(),
+                                     "reconsultas-p3", self._tito_info())
+
+    def test_sin_manifiesto100_no_congela_ni_atribuye(self):
+        man = sel102.manifiesto_busqueda(["x"], {"identidad_tito": self._ident()})
+        sin_manifest = dict(self._tito_info(), manifiesto100_sha256="")
+        with self.assertRaises(ValueError):
+            sel102.congelar_politica(man, self._seleccion(),
+                                     "reconsultas-p3", sin_manifest)
+        man2 = sel102.manifiesto_busqueda(
+            ["x"], {"identidad_tito": dict(self._ident(), manifiesto100_sha256="")})
+        with self.assertRaises(ValueError):
+            sel102.congelar_politica(man2, self._seleccion(),
+                                     "reconsultas-p3", self._tito_info())
+
+    def test_bloques_congelados_alias_distinto_no_pasa(self):
+        canon = {"artefacto_sha256": "a" * 64, "manifiesto100_sha256": "f" * 64,
+                 "entrada": "historial_acumulado", "umbral": 0.5,
+                 "encoder": {"id": "e", "revision": "r"}}
+        base = dict(canon)
+        args = dict(sha_artefacto="a" * 64, sha_manifiesto="f" * 64, umbral=0.5,
+                    encoder_manifiesto={"id": "e", "revision": "r"},
+                    encoder_artefacto={"id": "e", "revision": "r"},
+                    entrada_manifiesto="historial_acumulado",
+                    entrada_artefacto="historial_acumulado")
+        sel102._verificar_bloques_congelados(dict(canon), dict(base), **args)
+        # Canónico alterado con alias distinto: cada campo rechaza.
+        for clave, malo in (("artefacto_sha256", "b" * 64),
+                            ("manifiesto100_sha256", "e" * 64),
+                            ("entrada", "frase"),
+                            ("umbral", 0.9),
+                            ("encoder", {"id": "otro", "revision": "r"})):
+            with self.assertRaises(ValueError, msg=clave):
+                sel102._verificar_bloques_congelados(dict(canon),
+                                                    dict(base, **{clave: malo}),
+                                                    **args)
+        with self.assertRaises(ValueError):
+            sel102._verificar_bloques_congelados(
+                dict(canon, encoder={"id": "otro", "revision": "r"}),
+                dict(base), **args)
 
 
 if __name__ == "__main__":

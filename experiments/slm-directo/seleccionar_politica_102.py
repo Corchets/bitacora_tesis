@@ -177,6 +177,45 @@ def _config_traza(nombre: str, modelo: str, prompt: str, hablantes: str) -> dict
             "prompt": prompt, "hablantes": hablantes}
 
 
+def _medir_caso(fabrica, cid: str, cfg: dict) -> tuple[dict, list[dict]]:
+    """Mide UNA unidad (condición × conversación): agregado + filas crudas.
+
+    Aritmética única compartida por la medición en memoria y la incremental:
+    cambiarla acá cambia ambas, nunca una sola en silencio.
+    """
+    detector = fabrica()
+    lineas = casos.cargar_texto(cid)
+    ref = casos.cargar_referencia(cid)
+    salidas = list(correr.procesar_caso(detector, lineas, detener_en_aviso=True))
+    filas = [correr._fila(cfg, cid, n, linea, r, aviso)
+             for n, linea, r, aviso in salidas]
+    aviso = next((n for n, _, _, a in salidas if a), None)
+    consultas = sum(1 for _, _, r, _ in salidas
+                    if (r.consulta or "") in ("slm_valida", "slm_fallo"))
+    evitadas = sum(1 for _, _, r, _ in salidas if (r.consulta or "") == "omitida")
+    tr, tc = ref.get("t_r_linea"), ref.get("t_c_linea")
+    resumen = {
+        "case_id": cid,
+        "clase": ref["clase"],
+        "t_r_linea": tr,
+        "t_c_linea": tc,
+        "aviso": aviso,
+        "deteccion": bool(aviso) and ref["clase"] == "vishing",
+        "falsa_alarma": bool(aviso) and ref["clase"] in casos.LEGITIMAS,
+        "oportuno": (aviso is not None and tr is not None and aviso <= tr)
+                    if ref["clase"] == "vishing" and tr is not None else None,
+        "margen_l_r": (tr - aviso) if (aviso is not None and tr is not None) else None,
+        "margen_l_c": (tc - aviso) if (aviso is not None and tc is not None) else None,
+        "consultas_slm": consultas,
+        "evitadas_slm": evitadas,
+        "fallos_tito": sum(1 for _, _, r, _ in salidas if (r.tito_error or "").strip()),
+        "fallos_slm": sum(1 for _, _, r, _ in salidas if r.consulta == "slm_fallo"),
+        "tito_ms": round(sum(r.tito_ms or 0.0 for _, _, r, _ in salidas), 1),
+        "slm_ms": round(sum(r.slm_ms or 0.0 for _, _, r, _ in salidas), 1),
+    }
+    return resumen, filas
+
+
 def medir_con_fabrica_y_trazas(fabricas: dict[str, object], ids: list[str],
                                *, modelo: str = MODELO_REFERENCIA_102,
                                prompt: str = "tarea",
@@ -199,36 +238,9 @@ def medir_con_fabrica_y_trazas(fabricas: dict[str, object], ids: list[str],
         filas: list[dict] = []
         cfg = _config_traza(nombre, modelo, prompt, hablantes)
         for cid in ids:
-            detector = fabrica()
-            lineas = casos.cargar_texto(cid)
-            ref = casos.cargar_referencia(cid)
-            salidas = list(correr.procesar_caso(detector, lineas, detener_en_aviso=True))
-            for n, linea, r, aviso in salidas:
-                filas.append(correr._fila(cfg, cid, n, linea, r, aviso))
-            aviso = next((n for n, _, _, a in salidas if a), None)
-            consultas = sum(1 for _, _, r, _ in salidas
-                            if (r.consulta or "") in ("slm_valida", "slm_fallo"))
-            evitadas = sum(1 for _, _, r, _ in salidas if (r.consulta or "") == "omitida")
-            tr, tc = ref.get("t_r_linea"), ref.get("t_c_linea")
-            por_caso.append({
-                "case_id": cid,
-                "clase": ref["clase"],
-                "t_r_linea": tr,
-                "t_c_linea": tc,
-                "aviso": aviso,
-                "deteccion": bool(aviso) and ref["clase"] == "vishing",
-                "falsa_alarma": bool(aviso) and ref["clase"] in casos.LEGITIMAS,
-                "oportuno": (aviso is not None and tr is not None and aviso <= tr)
-                            if ref["clase"] == "vishing" and tr is not None else None,
-                "margen_l_r": (tr - aviso) if (aviso is not None and tr is not None) else None,
-                "margen_l_c": (tc - aviso) if (aviso is not None and tc is not None) else None,
-                "consultas_slm": consultas,
-                "evitadas_slm": evitadas,
-                "fallos_tito": sum(1 for _, _, r, _ in salidas if (r.tito_error or "").strip()),
-                "fallos_slm": sum(1 for _, _, r, _ in salidas if r.consulta == "slm_fallo"),
-                "tito_ms": round(sum(r.tito_ms or 0.0 for _, _, r, _ in salidas), 1),
-                "slm_ms": round(sum(r.slm_ms or 0.0 for _, _, r, _ in salidas), 1),
-            })
+            resumen, filas_caso = _medir_caso(fabrica, cid, cfg)
+            por_caso.append(resumen)
+            filas.extend(filas_caso)
         resultados[nombre] = por_caso
         trazas[nombre] = filas
     return resultados, trazas
@@ -455,8 +467,12 @@ def manifiesto_busqueda(ids: list[str], funcionales: dict) -> dict:
 
 
 def _guardar_json(ruta: Path, contenido: dict) -> None:
+    """Escritura durable: tmp + fsync + replace (nunca medio manifiesto)."""
     tmp = ruta.with_name(ruta.name + ".tmp")
-    tmp.write_text(json.dumps(contenido, ensure_ascii=False, indent=2), encoding="utf-8")
+    with tmp.open("w", encoding="utf-8") as f:
+        f.write(json.dumps(contenido, ensure_ascii=False, indent=2))
+        f.flush()
+        os.fsync(f.fileno())
     os.replace(tmp, ruta)
 
 
@@ -497,17 +513,225 @@ def leer_trazas_csv(ruta: Path) -> dict[str, list[dict]]:
     return trazas
 
 
+def ruta_progreso(manifiesto_ruta: Path) -> Path:
+    """Marcador durable de unidades completadas, hermano del manifiesto."""
+    texto = str(manifiesto_ruta)
+    if texto.endswith("_manifiesto.json"):
+        texto = texto[: -len("_manifiesto.json")]
+    return Path(texto + "_progreso.json")
+
+
+def _unidad(nombre: str, cid: str) -> str:
+    return f"{nombre}|{cid}"
+
+
+def _nombre_de_config(cfg: str) -> str:
+    return cfg.split("|")[0] if cfg else ""
+
+
+def construir_preenferencia(*, identidad_tito: dict, prompt: str,
+                            prompt_huella: str, opciones: dict,
+                            inventario_referencia: dict,
+                            ollama_version: str) -> dict:
+    """Identidad completa ANTES de la primera inferencia (no se reescribe).
+
+    Cubre Tito, prompt, opciones, tag/digest del artefacto (inventario),
+    runtime Ollama, particiones, configuración y código: reutilizar una
+    fila exige que TODO coincida, no solo el sha del artefacto.
+    """
+    return {
+        "modelo_referencia": MODELO_REFERENCIA_102,
+        "semilla": SEMILLA_102,
+        "candidatas": [dict(c) for c in CANDIDATAS_102],
+        "baseline": BASELINE_102,
+        "identidad_tito": dict(identidad_tito),
+        "prompt": prompt,
+        "prompt_huella": prompt_huella,
+        "opciones": dict(opciones),
+        "inventario_referencia": dict(inventario_referencia),
+        "ollama_version": ollama_version,
+        "particiones_sha256": _sha_archivo(PARTICIONES),
+        "configuracion_sha256": _sha_archivo(CONFIG_102),
+        "codigo": correr.info_codigo(),
+    }
+
+
+def validar_preenferencia_para_reuso(pre_guardada: dict, pre_actual: dict) -> None:
+    """Rechaza reutilizar filas si la identidad completa cambió.
+
+    Compara Tito (sha, manifiesto100, entrada, umbral, encoder, variante),
+    prompt y huella, opciones, inventario (tag/digest/cuantización),
+    versión de Ollama, particiones, configuración, código, semilla,
+    candidatas y baseline. Cualquier diferencia levanta: no se mezclan
+    búsquedas ni se reescribe la predeclaración con otro runtime.
+    """
+    if not pre_guardada:
+        raise ValueError("la búsqueda no trae preinferencia guardada: "
+                         "no se reutiliza sin identidad predeclarada.")
+    for clave in ("modelo_referencia", "semilla", "baseline", "prompt",
+                  "prompt_huella", "opciones", "inventario_referencia",
+                  "ollama_version", "particiones_sha256",
+                  "configuracion_sha256", "codigo", "candidatas"):
+        if pre_guardada.get(clave) != pre_actual.get(clave):
+            raise ValueError(f"la identidad preinferencia cambió ({clave}): "
+                             "no se reutiliza esta búsqueda con otra configuración.")
+    ident_g, ident_a = pre_guardada.get("identidad_tito") or {}, pre_actual.get("identidad_tito") or {}
+    for clave in ("artefacto_sha256", "manifiesto100_sha256", "entrada",
+                  "umbral", "encoder", "variante"):
+        esperado, real = ident_g.get(clave), ident_a.get(clave)
+        if clave == "umbral":
+            try:
+                ok = abs(float(esperado) - float(real)) <= 1e-12
+            except (TypeError, ValueError):
+                ok = False
+            if not ok:
+                raise ValueError("la identidad preinferencia cambió (identidad_tito.umbral): "
+                                 "no se reutiliza esta búsqueda con otro candidato.")
+        elif esperado != real:
+            raise ValueError("la identidad preinferencia cambió "
+                             f"(identidad_tito.{clave}): "
+                             "no se reutiliza esta búsqueda con otro candidato.")
+
+
+def cargar_progreso(progreso_ruta: Path) -> dict:
+    """Progreso durable; ausente o ilegible → búsqueda sin completar nada."""
+    try:
+        datos = json.loads(progreso_ruta.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {"completadas": [], "preinferencia": {}}
+    if not isinstance(datos, dict):
+        return {"completadas": [], "preinferencia": {}}
+    comp = datos.get("completadas")
+    return {"completadas": list(comp) if isinstance(comp, list) else [],
+            "preinferencia": datos.get("preinferencia") or {}}
+
+
+def guardar_unidad(csv_ruta: Path, progreso_ruta: Path, unidad: str,
+                   filas_nuevas: list[dict], preinferencia: dict) -> int:
+    """Persiste UNA unidad completa: filas raw + marcador, ambos atómicos.
+
+    Reescribe el CSV completo (tmp + fsync + replace) con las filas
+    previas más las nuevas y luego el progreso con la unidad marcada.
+    Una unidad interrumpida a mitad no deja marcador: al reanudar se
+    repite completa y sus filas parciales huérfanas se descartan en la
+    reconciliación, nunca se cuentan ni se mezclan.
+    """
+    previas: list[dict] = []
+    if csv_ruta.exists():
+        with csv_ruta.open(encoding="utf-8-sig", newline="") as f:
+            lector = csv.DictReader(f)
+            if lector.fieldnames != list(correr.COLUMNAS):
+                raise ValueError(f"traza con columnas inesperadas: {csv_ruta}.")
+            previas = [dict(fila) for fila in lector]
+    tmp = csv_ruta.with_name(csv_ruta.name + ".tmp")
+    with tmp.open("w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=correr.COLUMNAS)
+        w.writeheader()
+        for fila in previas + list(filas_nuevas or []):
+            w.writerow({c: fila.get(c, "") for c in correr.COLUMNAS})
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, csv_ruta)
+    prog = cargar_progreso(progreso_ruta)
+    completadas = list(prog["completadas"])
+    if unidad not in completadas:
+        completadas.append(unidad)
+    _guardar_json(progreso_ruta, {"completadas": completadas,
+                                 "preinferencia": dict(preinferencia)})
+    return len(previas) + len(filas_nuevas or [])
+
+
+def reconciliar_traza_csv(csv_ruta: Path, completadas: list[str]) -> int:
+    """Descarta filas huérfanas de unidades sin marcador (crash a mitad).
+
+    Reescribe el CSV solo con filas de unidades completadas (tmp + fsync
+    + replace). Devuelve las filas conservadas. Sin completadas ni CSV,
+    devuelve 0 sin crear nada.
+    """
+    if not csv_ruta.exists():
+        return 0
+    validas = set(completadas)
+    with csv_ruta.open(encoding="utf-8-sig", newline="") as f:
+        lector = csv.DictReader(f)
+        if lector.fieldnames != list(correr.COLUMNAS):
+            raise ValueError(f"traza con columnas inesperadas: {csv_ruta}.")
+        filas = [dict(fila) for fila in lector
+                 if _unidad(_nombre_de_config(fila.get("config", "")),
+                            fila.get("case_id", "")) in validas]
+    tmp = csv_ruta.with_name(csv_ruta.name + ".tmp")
+    with tmp.open("w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=correr.COLUMNAS)
+        w.writeheader()
+        for fila in filas:
+            w.writerow({c: fila.get(c, "") for c in correr.COLUMNAS})
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, csv_ruta)
+    return len(filas)
+
+
+def medir_con_fabrica_reanudable(fabricas: dict[str, object], ids: list[str],
+                                 *, modelo: str = MODELO_REFERENCIA_102,
+                                 prompt: str = "tarea",
+                                 hablantes: str = "ab",
+                                 csv_ruta: Path,
+                                 progreso_ruta: Path,
+                                 preinferencia: dict) -> tuple[dict, dict]:
+    """Mide con persistencia incremental y reanuda la MISMA búsqueda.
+
+    Cada unidad (condición × conversación) completa guarda sus filas raw
+    (`correr._fila`: salidas, tokens y costos) y su marcador durable antes
+    de seguir. Al reanudar valida la identidad completa preinferencia y
+    omite las unidades completadas sin volver a inferirlas; una unidad
+    interrumpida se repite completa (sus filas parciales se descartan).
+    Devuelve `(agregados, trazas)` regenerados desde EXACTAMENTE la traza
+    consolidada, con los mismos IDs y la búsqueda acotada intacta.
+    """
+    verificar_origen_solo_validacion(ids)
+    if tuple(c.get("periodo_revision") for c in preinferencia.get("candidatas", [])) != \
+            tuple(c["periodo_revision"] for c in CANDIDATAS_102):
+        raise ValueError("candidatas fuera de la búsqueda acotada (1/3/5): no se mide.")
+    if any(c.get("delta_minimo", 0.0) != DELTA_102
+           for c in preinferencia.get("candidatas", [])):
+        raise ValueError("delta fuera de la búsqueda acotada (0): no se mide.")
+    prog = cargar_progreso(progreso_ruta)
+    if prog["completadas"] or prog["preinferencia"]:
+        validar_preenferencia_para_reuso(prog["preinferencia"], preinferencia)
+    else:
+        _guardar_json(progreso_ruta, {"completadas": [],
+                                     "preinferencia": dict(preinferencia)})
+    reconciliar_traza_csv(csv_ruta, cargar_progreso(progreso_ruta)["completadas"])
+    completadas = set(cargar_progreso(progreso_ruta)["completadas"])
+    for nombre, fabrica in fabricas.items():
+        cfg = _config_traza(nombre, modelo, prompt, hablantes)
+        for cid in ids:
+            if _unidad(nombre, cid) in completadas:
+                continue
+            _, filas_caso = _medir_caso(fabrica, cid, cfg)
+            guardar_unidad(csv_ruta, progreso_ruta, _unidad(nombre, cid),
+                           filas_caso, preinferencia)
+            completadas.add(_unidad(nombre, cid))
+    trazas = leer_trazas_csv(csv_ruta)
+    return agregados_desde_trazas(trazas, ids), trazas
+
+
 def _verificar_identidad_con_medicion(manifiesto: dict, tito_info: dict) -> None:
     """El freeze congela EXACTAMENTE lo medido, no otro candidato.
 
-    Si el manifiesto trae `identidad_tito` predeclarada (flujo CLI real),
-    cada campo debe coincidir: artefacto, manifiesto100, entrada, umbral,
-    encoder, prompt y opciones. Un candidato distinto con igual encoder y
-    umbral se rechaza acá, no se le atribuyen las mediciones.
+    Fail-closed: sin `identidad_tito` predeclarada (flujo CLI real) no hay
+    congelado, ni siquiera por compatibilidad legada: atribuir la medición
+    a otro Tito sería falso. Con predeclaración, cada campo debe coincidir:
+    artefacto, manifiesto100, entrada, umbral, encoder, variante, prompt y
+    opciones. Un candidato distinto con igual encoder y umbral se rechaza
+    acá, no se le atribuyen las mediciones.
     """
     ident = manifiesto.get("identidad_tito") or {}
-    if not ident:
-        return  # Manifiesto legado sin predeclaración: chequeo mínimo abajo.
+    if not ident or not ident.get("artefacto_sha256"):
+        raise ValueError("la búsqueda no trae identidad predeclarada del candidato: "
+                         "no se congela sin identidad preinferencia.")
+    if not ident.get("manifiesto100_sha256") or not tito_info.get("manifiesto100_sha256"):
+        raise ValueError("sin manifiesto100_sha256 predeclarado y medido no hay "
+                         "congelado: no se atribuye la medición a otro Tito.")
     for clave in ("artefacto_sha256", "manifiesto100_sha256", "entrada",
                   "umbral", "encoder"):
         esperado, real = ident.get(clave), tito_info.get(clave)
@@ -548,7 +772,8 @@ def congelar_politica(manifiesto: dict, seleccion: dict, nombre: str,
         raise ValueError(f"{nombre!r} no es la ganadora ni la exploratoria "
                          "del resultado negativo: no se congela otra candidata "
                          "ni se cambia el criterio.")
-    for clave in ("artefacto_sha256", "entrada", "umbral", "encoder", "variante"):
+    for clave in ("artefacto_sha256", "manifiesto100_sha256", "entrada",
+                  "umbral", "encoder", "variante"):
         if not tito_info.get(clave):
             raise ValueError(f"tito_info sin {clave!r}: no se congela sin identidad del candidato #100.")
     if tito_info.get("entrada") != matriz_101.ENTRADA_NUEVO_EXIGIDA:
@@ -599,6 +824,51 @@ def congelar_politica(manifiesto: dict, seleccion: dict, nombre: str,
     }
 
 
+def _verificar_bloques_congelados(tito_canonico: dict, alias: dict, *,
+                                    sha_artefacto: str, sha_manifiesto: str,
+                                    umbral: float, encoder_manifiesto: dict,
+                                    encoder_artefacto: dict,
+                                    entrada_manifiesto, entrada_artefacto) -> None:
+    """Canónico contra archivos reales y alias contra canónico, todo fail-closed.
+
+    Exige artefacto sha, manifiesto100 sha, entrada, umbral y encoder en el
+    bloque `tito`, y que el alias `tito_congelado` coincida campo por campo:
+    un canónico alterado con alias distinto (o viceversa) no pasa.
+    """
+    tito_c, fr = tito_canonico, alias
+    if tito_c.get("artefacto_sha256") != sha_artefacto:
+        raise ValueError("el bloque tito canónico difiere del artefacto #100 real.")
+    if tito_c.get("manifiesto100_sha256") != sha_manifiesto:
+        raise ValueError("el manifiesto100_sha256 no coincide con el manifiesto #100 a medir.")
+    if tito_c.get("entrada") != matriz_101.ENTRADA_NUEVO_EXIGIDA:
+        raise ValueError("el bloque tito canónico no usa historial_acumulado.")
+    if tito_c.get("entrada") != entrada_artefacto or \
+            tito_c.get("entrada") != entrada_manifiesto:
+        raise ValueError("la entrada canónica difiere del artefacto/manifiesto #100.")
+    try:
+        ok_umbral = abs(float(tito_c.get("umbral", "-1")) - float(umbral)) <= 1e-12
+    except (TypeError, ValueError):
+        ok_umbral = False
+    if not ok_umbral:
+        raise ValueError("el umbral canónico difiere del manifiesto #100 a medir.")
+    if tito_c.get("encoder") != encoder_manifiesto or \
+            tito_c.get("encoder") != encoder_artefacto:
+        raise ValueError("el encoder canónico difiere del artefacto/manifiesto #100.")
+    for clave in ("artefacto_sha256", "manifiesto100_sha256", "entrada",
+                  "umbral", "encoder"):
+        esperado, real = tito_c.get(clave), fr.get(clave)
+        if clave == "umbral":
+            try:
+                coinciden = abs(float(esperado) - float(real)) <= 1e-12
+            except (TypeError, ValueError):
+                coinciden = False
+        else:
+            coinciden = esperado == real
+        if not coinciden:
+            raise ValueError(f"el alias tito_congelado difiere del bloque tito "
+                             f"canónico ({clave}): no se mide con identidad alterada.")
+
+
 def verificar_congelado(congelado: dict, tito_artefacto: Path,
                         tito_manifest: Path) -> dict:
     """Verifica el congelado contra el artefacto #100 real antes de medir.
@@ -626,11 +896,19 @@ def verificar_congelado(congelado: dict, tito_artefacto: Path,
         raise ValueError("el artefacto #100 difiere del congelado.")
     if not fr.get("variante") or not congelado.get("congelado_en"):
         raise ValueError("el congelado no trae variante ni congelado_en ISO (interfaz estable #100).")
+    try:
+        sel_json = json.loads(Path(tito_manifest).read_text(encoding="utf-8"))
+        arte_json = json.loads(Path(tito_artefacto).read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        raise ValueError(f"artefacto o manifiesto ilegible para verificar: {e}.")
     tito_c = congelado.get("tito", {})
-    if tito_c.get("artefacto_sha256") != fr.get("artefacto_sha256"):
-        raise ValueError("el bloque tito canónico difiere del tito_congelado.")
-    if tito_c.get("manifiesto100_sha256") != _sha_archivo(tito_manifest):
-        raise ValueError("el manifiesto100_sha256 no coincide con el manifiesto #100 a medir.")
+    _verificar_bloques_congelados(
+        tito_c, fr, sha_artefacto=_sha_archivo(tito_artefacto),
+        sha_manifiesto=_sha_archivo(tito_manifest), umbral=umbral,
+        encoder_manifiesto=sel_json.get("encoder"),
+        encoder_artefacto=arte_json.get("encoder"),
+        entrada_manifiesto=sel_json.get("entrada"),
+        entrada_artefacto=arte_json.get("entrada"))
     pol = congelado.get("politica", {})
     for clave in ("periodo_actualizaciones", "regla_nueva_evidencia", "delta_score"):
         if clave not in pol:
@@ -761,22 +1039,40 @@ def _cmd_medir(args) -> int:
         version = cliente.version()
     except ErrorOllama as e:
         sys.exit(f"Sin runtime no hay medición ({e}).")
-    # Predeclaración persistida ANTES de la primera inferencia.
+    # Preinferencia completa ANTES de la primera inferencia. Si la búsqueda
+    # ya arrancó, se reanuda la MISMA: la predeclaración guardada manda y
+    # nunca se sobreescribe con otro runtime.
     esquema = esquema_de(args.prompt)
-    man["preinferencia"] = {
-        "inventario_referencia": inv,
-        "ollama_version": version,
-        "prompt": args.prompt,
-        "prompt_huella": huella_texto(prompt_txt),
-        "opciones": _opciones_cli(args),
-        "umbral": umbral,
-        "preparacion_tito": prep_nuevo,
-        "codigo": correr.info_codigo(),
-        "maquina": correr.info_maquina(),
-        "persistido_en": _utc_ahora_iso(),
-    }
-    _guardar_json(args.busqueda, man)
-    extra = man["preinferencia"]["opciones"]["hardware"]
+    pre_actual = construir_preenferencia(
+        identidad_tito=ident_actual, prompt=args.prompt,
+        prompt_huella=huella_texto(prompt_txt), opciones=_opciones_cli(args),
+        inventario_referencia=inv, ollama_version=version)
+    csv_ruta = ruta_trazas_csv(args.busqueda)
+    progreso_ruta = ruta_progreso(args.busqueda)
+    prog = cargar_progreso(progreso_ruta)
+    pre_en_man = man.get("preinferencia") or {}
+    pre_base = prog["preinferencia"] or \
+        (pre_en_man if "identidad_tito" in pre_en_man else None)
+    if pre_base is not None:
+        try:
+            validar_preenferencia_para_reuso(pre_base, pre_actual)
+            if prog["preinferencia"] and "identidad_tito" in pre_en_man:
+                validar_preenferencia_para_reuso(pre_en_man, pre_actual)
+        except ValueError as e:
+            sys.exit(f"{e} Reanudá la misma búsqueda con la misma identidad "
+                     "o prepará una búsqueda nueva.")
+        print(f"Reanudando la misma búsqueda ({len(prog['completadas'])} "
+              "unidades completadas ya medidas, sin repetirlas).")
+    else:
+        man["preinferencia"] = {**pre_actual,
+                                "preparacion_tito": prep_nuevo,
+                                "maquina": correr.info_maquina(),
+                                "persistido_en": _utc_ahora_iso()}
+        _guardar_json(args.busqueda, man)
+        _guardar_json(progreso_ruta, {"completadas": [],
+                                     "preinferencia": pre_actual})
+        reconciliar_traza_csv(csv_ruta, [])
+    extra = pre_actual["opciones"]["hardware"]
     tito_ref = [tito]
 
     def fabrica_permanente():
@@ -794,11 +1090,33 @@ def _cmd_medir(args) -> int:
             return construir_politica(tito_ref[0], slm, c, umbral)
         fabricas[cand["nombre"]] = _fab
     t0 = time.perf_counter()
-    resultados, trazas = medir_con_fabrica_y_trazas(
-        fabricas, ids, modelo=MODELO_REFERENCIA_102,
-        prompt=args.prompt, hablantes=args.hablantes)
-    csv_ruta = ruta_trazas_csv(args.busqueda)
-    n_filas = guardar_trazas_csv(csv_ruta, trazas)
+    try:
+        reconciliar_traza_csv(csv_ruta, cargar_progreso(progreso_ruta)["completadas"])
+        completadas = set(cargar_progreso(progreso_ruta)["completadas"])
+        for nombre, fabrica in fabricas.items():
+            cfg = _config_traza(nombre, MODELO_REFERENCIA_102,
+                                args.prompt, args.hablantes)
+            for cid in ids:
+                if _unidad(nombre, cid) in completadas:
+                    continue
+                _, filas_caso = _medir_caso(fabrica, cid, cfg)
+                guardar_unidad(csv_ruta, progreso_ruta, _unidad(nombre, cid),
+                               filas_caso, pre_actual)
+                completadas.add(_unidad(nombre, cid))
+    except KeyboardInterrupt:
+        man = json.loads(args.busqueda.read_text(encoding="utf-8"))
+        man["medicion_parcial"] = {
+            "completadas": sorted(cargar_progreso(progreso_ruta)["completadas"]),
+            "interrumpida_en": _utc_ahora_iso()}
+        _guardar_json(args.busqueda, man)
+        print("\nMedición interrumpida: lo completado quedó guardado, reanudá "
+              "con `medir` sobre la misma búsqueda.")
+        return 0
+    trazas = leer_trazas_csv(csv_ruta)
+    if set(trazas) != set(fabricas):
+        sys.exit("la traza no cubre las mismas condiciones medidas: no se selecciona.")
+    resultados = agregados_desde_trazas(trazas, ids)
+    n_filas = sum(len(v) for v in trazas.values())
     sel = seleccionar(resultados)
     man = json.loads(args.busqueda.read_text(encoding="utf-8"))
     man["medicion"] = {"duracion_s": round(time.perf_counter() - t0, 1),
