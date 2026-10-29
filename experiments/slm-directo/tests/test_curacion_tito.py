@@ -15,7 +15,8 @@ class CuracionTitoTest(unittest.TestCase):
         cls.revision = json.loads(curacion.REVISION.read_text(encoding='utf-8'))
 
     def test_cada_registro_tiene_destino_y_conserva_regresiones(self):
-        paquete = curacion.generar_seleccion(self.revision)
+        paquete = curacion.generar_seleccion(
+            self.revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
         _, originales, _, _ = curacion.leer_banco()
         por_id = {r['id']: r for r in paquete['banco']}
         self.assertEqual(set(por_id), {r['id'] for r in originales})
@@ -70,6 +71,35 @@ class CuracionTitoTest(unittest.TestCase):
         revision['habilitado'] = True
         with self.assertRaisesRegex(ValueError, 'no habilita'):
             curacion.generar_seleccion(revision)
+
+    def test_modo_estricto_rechaza_fuente_actual_cambiada(self):
+        with self.assertRaisesRegex(ValueError, 'Artefacto cambiado: filtro_tito.py'):
+            curacion.generar_seleccion(self.revision)
+
+    def test_historico_reporta_deriva_sin_reetiquetar(self):
+        paquete = curacion.generar_seleccion(
+            self.revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
+        bloque = paquete['codigo_historico']
+        self.assertEqual(bloque['commit'], curacion.REVISION_CODIGO_COMMIT)
+        deriva = bloque['deriva_codigo_actual']['filtro_tito.py']
+        auditado = next(a['sha256'] for a in self.revision['artefactos']
+                        if a['ruta'] == 'filtro_tito.py')
+        self.assertEqual(deriva['auditado'], auditado)
+        self.assertNotEqual(deriva['actual'], auditado)
+        self.assertIn('no el código actual', bloque['advertencia'])
+
+    def test_historico_rechaza_commit_no_autorizado(self):
+        with self.assertRaisesRegex(ValueError, 'no autorizado'):
+            curacion.generar_seleccion(self.revision, codigo_historico='HEAD')
+
+    def test_historico_no_oculta_pesos_modificados(self):
+        revision = copy.deepcopy(self.revision)
+        for arte in revision['artefactos']:
+            if arte['ruta'] == 'tito_logreg.json':
+                arte['sha256'] = 'alterado'
+        with self.assertRaises(ValueError):
+            curacion.generar_seleccion(
+                revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
 
     def test_reserva_se_rechaza_por_id_antes_de_abrir_contenido(self):
         banco_historico = curacion.leer_banco()

@@ -23,6 +23,21 @@ from entrenar_tito import (
 AQUI = Path(__file__).resolve().parent
 REVISION = AQUI / 'CURACION-TITO-2026-10-28.json'
 
+# Commit fijado cuyo código audita CURACION-TITO-2026-10-28.json.
+# La revisión semántica solo aprueba este antecedente; no reetiquetarla
+# como aprobación del código actual.
+REVISION_CODIGO_COMMIT = '0a95968b7de9ed1a689cecb4a88a3e8e9f373f8e'
+
+# Único subconjunto resoluble por commit comprobado: código versionado.
+# Pesos, textos, referencias y revisiones previas no rastreadas siempre
+# se verifican estrictamente en disco, también en modo histórico.
+CODIGO_HISTORICO_RUTAS = frozenset({
+    'datos_tito.py',
+    'entrenar_tito.py',
+    'tito_real.py',
+    'filtro_tito.py',
+})
+
 
 def sha(crudo: bytes) -> str:
     return hashlib.sha256(crudo).hexdigest()
@@ -35,6 +50,26 @@ def canonico(dato) -> bytes:
 def objeto_git(nombre: str) -> bytes:
     return subprocess.check_output(
         ['git', 'show', f'{BANCO_COMMIT}:{BANCO_BASE}/{nombre}'], cwd=AQUI)
+
+
+def codigo_git(commit: str, ruta: str) -> bytes:
+    """Contenido versionado de un archivo de código en un commit comprobado.
+
+    Falla cerrado si el origen no puede verificarse.
+    """
+    try:
+        subprocess.check_output(
+            ['git', 'cat-file', '-e', f'{commit}^{{commit}}'], cwd=AQUI,
+            stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        raise ValueError(f'Origen del código histórico no verificable: {commit}') from e
+    try:
+        return subprocess.check_output(
+            ['git', 'show', f'{commit}:./{ruta}'], cwd=AQUI,
+            stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        raise ValueError(
+            f'Origen del código histórico no verificable: {commit}:{ruta}') from e
 
 
 def indices_unicos(filas: list[dict], campo: str) -> dict:
@@ -124,8 +159,26 @@ def lectura_sin_perdida(f: dict) -> str:
     return '\n'.join(salida)
 
 
-def generar_seleccion(revision: dict | None = None) -> dict:
+def generar_seleccion(revision: dict | None = None,
+                      codigo_historico: str | None = None) -> dict:
+    """Reproduce la selección auditada.
+
+    Por defecto (codigo_historico=None) verifica cada artefacto
+    estrictamente en disco y rechaza cualquier deriva, incluido el
+    hook `_puntuar` de #101 en filtro_tito.py.
+
+    Con codigo_historico=REVISION_CODIGO_COMMIT resuelve solo el
+    código versionado por `git show` del commit fijado, con sha
+    verificado contra la revisión; pesos, textos, referencias y
+    archivos no rastreados siguen verificándose en disco y la
+    deriva del código actual se reporta sin presentarla como
+    aprobada. Cualquier otro commit se rechaza: sin fallback
+    silencioso ni hash ignorado.
+    """
     revision = json.loads(REVISION.read_text(encoding='utf-8')) if revision is None else revision
+    if codigo_historico is not None and codigo_historico != REVISION_CODIGO_COMMIT:
+        raise ValueError(
+            f'Commit de código histórico no autorizado: {codigo_historico}')
     if revision.get('habilitado') is not False or revision.get('banco_commit') != BANCO_COMMIT:
         raise ValueError('La curación IA no habilita uso ni cambia el banco histórico.')
     familias, filas, exclusiones, huellas = leer_banco()
@@ -181,12 +234,35 @@ def generar_seleccion(revision: dict | None = None) -> dict:
                       'uso': ('regresion_historica' if referencia['grupo'] != 'corpus_v2'
                               else 'desarrollo_sin_independencia_acreditada'),
                       'ajustes_referencia_ia': op.get('ajustes_referencia_ia', {})})
+    codigo_verificado: dict[str, str] = {}
+    deriva_actual: dict[str, dict[str, str | None]] = {}
     for arte in revision['artefactos']:
-        if sha((AQUI / arte['ruta']).read_bytes()) != arte['sha256']:
-            raise ValueError(f'Artefacto cambiado: {arte["ruta"]}')
+        ruta = arte['ruta']
+        if codigo_historico is not None and ruta in CODIGO_HISTORICO_RUTAS:
+            crudo = codigo_git(codigo_historico, ruta)
+            if sha(crudo) != arte['sha256']:
+                raise ValueError(
+                    f'Código histórico no coincide con la revisión: {ruta}')
+            codigo_verificado[ruta] = arte['sha256']
+            disco = AQUI / ruta
+            actual = sha(disco.read_bytes()) if disco.is_file() else None
+            if actual != arte['sha256']:
+                deriva_actual[ruta] = {'auditado': arte['sha256'], 'actual': actual}
+        elif sha((AQUI / ruta).read_bytes()) != arte['sha256']:
+            raise ValueError(f'Artefacto cambiado: {ruta}')
+    codigo_bloque = (None if codigo_historico is None else {
+        'commit': codigo_historico,
+        'alcance': ('solo código versionado por commit comprobado; '
+                    'pesos, textos, referencias y archivos no rastreados '
+                    'siempre verificados en disco'),
+        'advertencia': ('la revisión aprueba el código de este commit, '
+                        'no el código actual en disco'),
+        'artefactos_codigo_sha256': codigo_verificado,
+        'deriva_codigo_actual': deriva_actual})
     return {'fecha': revision['fecha'], 'habilitado': False,
             'tipo': 'seleccion IA de desarrollo, sin nuevos splits ni revisión humana',
             'banco_commit': BANCO_COMMIT, 'fuentes_historicas_sha256': huellas,
+            'codigo_historico': codigo_bloque,
             'curacion_sha256': sha(canonico(revision)), 'script_sha256': sha(Path(__file__).read_bytes()),
             'resumen': {'banco_total': len(filas),
                         'banco_seleccion': dict(Counter(f['seleccion'] for f in banco)),
@@ -204,9 +280,12 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--mostrar-banco', nargs=2, type=int, metavar=('DESDE', 'HASTA'))
     p.add_argument('--listar-casos', choices=('conservar', 'apartar'))
+    p.add_argument('--codigo-historico', metavar='COMMIT', default=None,
+                   help=('Reproduce la curación con el código del commit '
+                         'auditado; solo acepta el commit fijado.'))
     args = p.parse_args()
     if args.listar_casos:
-        seleccion = generar_seleccion()
+        seleccion = generar_seleccion(codigo_historico=args.codigo_historico)
         revision = json.loads(REVISION.read_text(encoding='utf-8'))
         motivos = {r['case_id']: r['motivo'] for r in revision['conversaciones']}
         for caso in seleccion['conversaciones']:
@@ -222,7 +301,8 @@ def main() -> None:
         for f in familias[desde:hasta]:
             print(lectura_sin_perdida(f), end='\n\n')
     else:
-        print(json.dumps(generar_seleccion(), ensure_ascii=False, indent=2, sort_keys=True))
+        print(json.dumps(generar_seleccion(codigo_historico=args.codigo_historico),
+                         ensure_ascii=False, indent=2, sort_keys=True))
 
 
 if __name__ == '__main__':
