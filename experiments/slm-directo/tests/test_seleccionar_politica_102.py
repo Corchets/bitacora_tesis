@@ -1,0 +1,229 @@
+"""Tests focales de la selección de política #102 (con dobles, sin modelos).
+
+Cubre: la selección usa SOLO validación (rechaza las veinte y la
+reserva); el criterio provisional (detecciones, falsas alarmas,
+oportunos) con desempate determinista; el congelado con identidad del
+candidato #100; y la medición con dobles sin futuro ni red. Ningún doble
+acá es una medición: los valores son mecanismo, no calidad real.
+"""
+
+from __future__ import annotations
+
+import sys
+import unittest
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+import correr  # noqa: E402
+import matriz_101  # noqa: E402
+import seleccionar_politica_102 as sel102  # noqa: E402
+from casos import Linea  # noqa: E402
+from detectores import Respuesta  # noqa: E402
+from filtro_tito import TitoGuion  # noqa: E402
+from politica_reconsultas import REGLA_NUEVO_CRUCE_TRAS_BAJAR  # noqa: E402
+
+DIALOGO = [
+    Linea("A", "Te llamo de soporte por la activación de tu cuenta."),
+    Linea("B", "Me acaba de llegar un SMS. No pedí activar nada."),
+    Linea("A", "Decime el código de activación que recibiste."),
+    Linea("B", "Es cero, cero, cero, cero."),
+]
+
+
+class SLMGuion:
+    def __init__(self, alertas=frozenset(), invalidas=frozenset(), ms_fijo=7.0):
+        self.alertas, self.invalidas = set(alertas), set(invalidas)
+        self.ms_fijo = ms_fijo
+        self.hablantes = "ab"
+
+    def evaluar_mensaje(self, usuario, lineas):
+        n = len(lineas)
+        if n in self.invalidas:
+            return Respuesta(valida=False, error="json_invalido", ms=self.ms_fijo)
+        alerta = n in self.alertas
+        return Respuesta(valida=True, riesgo=0.9 if alerta else 0.1,
+                         alerta_sugerida=alerta, ms=self.ms_fijo)
+
+
+class TitoHistGuion:
+    """Doble con la API real del Tito nuevo: historial acumulado, sin futuro."""
+
+    entrada = "historial_acumulado"
+
+    def __init__(self, puntajes=None, ms_fijo=5.0):
+        self.puntajes, self.ms_fijo = dict(puntajes or {}), ms_fijo
+
+    def puntuar_entrada(self, texto_entrada):
+        return 0.0, "", self.ms_fijo
+
+    def puntuar_prefijo(self, visibles, sintetico=False):
+        n = len(visibles)
+        return self.puntajes.get(n, 0.0), "", self.ms_fijo
+
+
+def fabrica(nombre, puntajes=None, alertas=frozenset(), invalidas=frozenset(),
+            umbral=0.5):
+    def _fab():
+        tito, slm = TitoHistGuion(puntajes), SLMGuion(alertas, invalidas)
+        if nombre == sel102.BASELINE_102:
+            return sel102.construir_permanente(tito, slm, umbral)
+        cand = next(c for c in sel102.CANDIDATAS_102 if c["nombre"] == nombre)
+        return sel102.construir_politica(tito, slm, cand, umbral)
+    return _fab
+
+
+def fila_resultado(cid, clase="vishing", tr=3, tc=None, aviso=None,
+                   consultas=1, falsas=False):
+    return {"case_id": cid, "clase": clase, "t_r_linea": tr, "t_c_linea": tc,
+            "aviso": aviso, "deteccion": bool(aviso) and clase == "vishing",
+            "falsa_alarma": falsas,
+            "oportuno": (aviso is not None and aviso <= tr)
+                        if clase == "vishing" and tr is not None else None,
+            "margen_l_r": (tr - aviso) if (aviso is not None and tr is not None) else None,
+            "margen_l_c": (tc - aviso) if (aviso is not None and tc is not None) else None,
+            "consultas_slm": consultas, "evitadas_slm": 0,
+            "fallos_tito": 0, "fallos_slm": 0, "tito_ms": 5.0, "slm_ms": 7.0}
+
+
+class TestOrigenSoloValidacion(unittest.TestCase):
+    def test_validacion_son_diez_fuera_de_las_veinte(self):
+        ids = sel102.validacion_102()
+        self.assertEqual(len(ids), 10)
+        self.assertTrue(set(ids).isdisjoint(matriz_101.IDS_101))
+
+    def test_rechaza_las_veinte_y_la_reserva(self):
+        with self.assertRaises(ValueError):
+            sel102.verificar_origen_solo_validacion([matriz_101.IDS_101[0]])
+        with self.assertRaises(ValueError):
+            sel102.verificar_origen_solo_validacion(["CV2-D-V-BANCO-001"])
+        # Un subconjunto de validación sí pasa (no consume test ni veinte).
+        ids = sel102.validacion_102()
+        sel102.verificar_origen_solo_validacion(ids[:2])
+
+    def test_medir_con_fabrica_rechaza_veinte_antes_de_medir(self):
+        with self.assertRaises(ValueError):
+            sel102.medir_con_fabrica({sel102.BASELINE_102: fabrica(sel102.BASELINE_102)},
+                                     [matriz_101.IDS_101[0]])
+
+
+class TestMedicionConDobles(unittest.TestCase):
+    def test_mide_sin_futuro_y_cuenta_tito_siempre(self):
+        ids = sel102.validacion_102()[:2]
+        fabricas = {sel102.BASELINE_102: fabrica(sel102.BASELINE_102, {1: 0.9}),
+                    "reconsultas-p3": fabrica("reconsultas-p3", {1: 0.9})}
+        resultados = sel102.medir_con_fabrica(fabricas, ids)
+        for nombre, filas in resultados.items():
+            self.assertEqual([f["case_id"] for f in filas], ids)
+            for f in filas:
+                self.assertGreaterEqual(f["tito_ms"], 0.0)
+                self.assertIn("margen_l_c", f)
+
+    def test_referencia_predeclarada_es_la_primera_de_la_lista(self):
+        self.assertEqual(sel102.MODELO_REFERENCIA_102, matriz_101.MODELOS_101[0])
+        self.assertEqual(sel102.MODELO_REFERENCIA_102, "qwen3.5:4b")
+
+    def test_busqueda_acotada_y_semilla(self):
+        self.assertEqual(tuple(c["periodo_revision"] for c in sel102.CANDIDATAS_102), (1, 3, 5))
+        self.assertTrue(all(c["delta_minimo"] == 0.0 for c in sel102.CANDIDATAS_102))
+        self.assertTrue(all(c["regla_nueva_evidencia"] == REGLA_NUEVO_CRUCE_TRAS_BAJAR
+                            for c in sel102.CANDIDATAS_102))
+        self.assertEqual(sel102.SEMILLA_102, 42)
+
+    def test_manifiesto_previo_sin_resultados(self):
+        man = sel102.manifiesto_busqueda(sel102.validacion_102(), {"modelo_referencia": "qwen3.5:4b"})
+        self.assertEqual(man["semilla"], 42)
+        self.assertEqual(len(man["candidatas"]), 3)
+        self.assertIn("qwen3.5:4b", man["modelo_referencia"])
+        self.assertNotIn("resultados_validacion", man)
+
+
+class TestCriterioProvisional(unittest.TestCase):
+    def _resultados(self, base, p1, p5):
+        return {sel102.BASELINE_102: base, "reconsultas-p1": p1, "reconsultas-p5": p5}
+
+    def test_mas_detecciones_con_mas_falsas_no_es_elegible(self):
+        base = [fila_resultado("a", aviso=3), fila_resultado("b", clase="legitima", tr=None)]
+        p1 = [fila_resultado("a", aviso=3), fila_resultado("b", clase="legitima", tr=None,
+                                                           aviso=1, falsas=True, consultas=2)]
+        p5 = [fila_resultado("a", aviso=3), fila_resultado("b", clase="legitima", tr=None)]
+        s = sel102.seleccionar(self._resultados(base, p1, p5))
+        self.assertEqual(s["ganadora"], "reconsultas-p5")
+
+    def test_desempata_por_menos_consultas_slm(self):
+        base = [fila_resultado("a", aviso=4, consultas=4)]
+        p1 = [fila_resultado("a", aviso=2, consultas=3)]
+        p5 = [fila_resultado("a", aviso=2, consultas=1)]
+        s = sel102.seleccionar(self._resultados(base, p1, p5))
+        self.assertEqual(s["ganadora"], "reconsultas-p5")
+
+    def test_sin_elegible_no_hay_ganadora_y_pide_propuesta(self):
+        base = [fila_resultado("a", aviso=3)]
+        peor = [fila_resultado("a", aviso=None, consultas=0)]
+        s = sel102.seleccionar(self._resultados(base, peor, peor))
+        self.assertIsNone(s["ganadora"])
+        self.assertIn("ANTES de medir", s["motivo"])
+
+    def test_informa_margenes_lc_y_referencias_ausentes(self):
+        base = [fila_resultado("a", aviso=2, tc=5),
+                fila_resultado("b", aviso=3, tc=None, consultas=1)]
+        s = sel102.seleccionar(self._resultados(base, base, base))
+        self.assertEqual(s["resumen_baseline"]["margenes_l_c"], [3])
+        self.assertEqual(s["resumen_baseline"]["sin_t_c"], 1)
+        self.assertIn("D08", s["advertencia_d08"])
+
+    def test_oportuno_tardio_no_desplaza_baseline(self):
+        base = [fila_resultado("a", aviso=2, consultas=2)]  # oportuno (2<=3)
+        tarde = [fila_resultado("a", aviso=4, consultas=1)]  # detecta pero tarde
+        s = sel102.seleccionar(self._resultados(base, tarde, tarde))
+        self.assertIsNone(s["ganadora"])
+
+
+class TestCongelado(unittest.TestCase):
+    def _seleccion(self, ganadora="reconsultas-p3"):
+        base = [fila_resultado("a", aviso=3, consultas=2)]
+        cand = [fila_resultado("a", aviso=2, consultas=1)]
+        res = {sel102.BASELINE_102: base, "reconsultas-p1": base,
+               "reconsultas-p3": cand, "reconsultas-p5": base}
+        return sel102.seleccionar(res)
+
+    def _tito_info(self, **cambios):
+        info = {"artefacto_sha256": "abc123", "entrada": "historial_acumulado",
+                "umbral": 0.5, "encoder": {"id": "e", "revision": "r"},
+                "encoder_artefacto": {"id": "e", "revision": "r"},
+                "variante": "#99-congelada"}
+        info.update(cambios)
+        return info
+
+    def test_congela_con_identidad_del_candidato(self):
+        s = self._seleccion()
+        self.assertEqual(s["ganadora"], "reconsultas-p3")
+        man = sel102.manifiesto_busqueda(["x"], {})
+        fro = sel102.congelar_politica(man, s, "reconsultas-p3", self._tito_info())
+        self.assertEqual(fro["politica_ganadora"]["periodo_revision"], 3)
+        self.assertEqual(fro["tito_congelado"]["umbral"], 0.5)
+        self.assertEqual(fro["tito_congelado"]["variante"], "#99-congelada")
+        self.assertIn("congelado_en", fro)
+
+    def test_rechaza_ganadora_fuera_de_la_busqueda(self):
+        man = sel102.manifiesto_busqueda(["x"], {})
+        with self.assertRaises(ValueError):
+            sel102.congelar_politica(man, {"ganadora": "otra"}, "otra", self._tito_info())
+
+    def test_rechaza_sin_identidad_del_tito(self):
+        man = sel102.manifiesto_busqueda(["x"], {})
+        s = self._seleccion()
+        with self.assertRaises(ValueError):
+            sel102.congelar_politica(man, s, "reconsultas-p3",
+                                     self._tito_info(artefacto_sha256="", encoder={}))
+        with self.assertRaises(ValueError):
+            sel102.congelar_politica(man, s, "reconsultas-p3",
+                                     self._tito_info(variante=""))
+        with self.assertRaises(ValueError):
+            sel102.congelar_politica(man, s, "reconsultas-p3",
+                                     self._tito_info(
+                                         encoder_artefacto={"id": "otro", "revision": "r"}))
+
+
+if __name__ == "__main__":
+    unittest.main()
