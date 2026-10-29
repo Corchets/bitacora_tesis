@@ -11,8 +11,9 @@ Condiciones por modelo (misma muestra, mismo runtime, mismo prompt):
              umbral 0,5) → SLM. Misma política permanente que el nuevo.
   tito-nuevo Candidato #99/#100 (`tito_99_historial_C*.json`, historial
              acumulado A/B hasta la línea actual) → SLM. Entrada y umbral
-             desde el manifiesto; las veinte nunca se usan para entrenar
-             ni seleccionar (el artefacto llega congelado de #99/#100).
+             desde el manifiesto congelado de selección; las veinte nunca
+             se usan para entrenar ni seleccionar (el artefacto llega
+             congelado de #99/#100).
 
 Las tres condiciones terminan al primer aviso válido (incluso en
 legítimas); sin aviso llegan hasta el final. Solo el SLM avisa; un error
@@ -23,13 +24,23 @@ Inventario antes de medir: tag exacto, digest (`/api/tags`), cuantización
 `latest`, sin alias, sin sustituciones, sin descargas: lo ausente se
 registra como bloqueo con cobertura pendiente explícita.
 
+Sin candidato nuevo congelado la condición tito-nuevo queda pendiente
+ANTES de medir (no se improvisa otro Tito ni se usa el umbral 0,5 por
+defecto). Un subconjunto (`--modelos`/`--casos`) nunca es la matriz
+completa: el manifiesto declara 600 esperados globales siempre.
+
+Archivos planos con prefijo de corrida dentro de `corridas/` (carpeta ya
+existente, nunca se crea nada): `<pref>_manifiesto.json`,
+`<pref>_actualizaciones.csv`. Reanudar por prefijo o por carpeta legada;
+la traza parcial se retira y se remide sin duplicar filas ni costos.
+
 Uso:
     python matriz_101.py --url http://127.0.0.1:11435 \\
-        --tito-nuevo-modelo tito_99_historial_C1.0.json
+        --tito-nuevo-modelo candidato.json --tito-nuevo-manifest sel.json
     python matriz_101.py --modelos qwen3.5:2b --casos CV2-D-V-BANCO-001
     python matriz_101.py --reanudar corridas/2026-10-29_HHMMSS_101
 
-Después: python informe_101.py <carpeta> regenera el reporte sin inferencia.
+Después: python informe_101.py <prefijo|carpeta> regenera el reporte sin inferencia.
 
 No declara éxito ni adopta metas (95/5 sigue abierta en D08): informa
 conteos, denominadores, costos y pendientes.
@@ -39,7 +50,10 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
+import math
+import os
 import sys
 import time
 from datetime import datetime
@@ -55,6 +69,7 @@ from tito_real import ARTEFACTO_POR_DEFECTO, preparar_tito_real
 AQUI = Path(__file__).resolve().parent
 PARTICIONES = AQUI / "PARTICIONES-TITO-2026-10-29.json"
 CONFIG_101 = AQUI / "CONFIGURACION-TITO-2026-10-29.json"
+DIR_CORRIDAS = AQUI / "corridas"
 URL_101 = "http://127.0.0.1:11435"
 
 # Acuerdo del usuario 2026-10-29 (#101): exactamente estos, en este orden.
@@ -71,15 +86,112 @@ MODELOS_101 = (
     "gemma4:e4b",
 )
 
+# Aprobación del usuario 2026-10-29 (#101): 10 vishing + 10 legítimas, en orden.
+IDS_101 = (
+    "CV2-D-V-BANCO-001",
+    "CV2-D-V-BANCO-002",
+    "CV2-D-V-BANCO-007",
+    "CV2-D-V-WHATSAPP-002",
+    "CV2-D-V-WHATSAPP-006",
+    "CV2-D-V-SOPORTE-003",
+    "CV2-D-V-SOPORTE-004",
+    "CV2-D-V-FAMILIAR-002",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-V-PREMIO-004",
+    "CV2-D-L-BANCO-001",
+    "CV2-D-L-BANCO-007",
+    "CV2-D-L-DELIVERY-001",
+    "CV2-D-L-ESCUELA-001",
+    "CV2-D-L-FAMILIAR-001",
+    "CV2-D-L-MEDICO-001",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-L-PREMIO-001",
+    "CV2-D-L-SOPORTE-002",
+    "CV2-D-L-WHATSAPP-001",
+)
+
 CONDICIONES = ("directo", "tito-viejo", "tito-nuevo")
+
+ESPERADOS_GLOBALES = len(MODELOS_101) * len(CONDICIONES) * len(IDS_101)
+assert ESPERADOS_GLOBALES == 600
+
+ENTRADA_NUEVO_EXIGIDA = "historial_acumulado"
+FORMATOS_NUEVO_CONOCIDOS = ("tito-99-logreg-v1",)
+
+
+def huellas_particiones_101() -> dict[str, dict]:
+    """Las veinte de `comparacion_20` según el manifiesto de particiones."""
+    datos = json.loads(PARTICIONES.read_text(encoding="utf-8"))
+    return {c["case_id"]: c for c in datos.get("conversaciones", [])
+            if c.get("particion_preparacion") == "comparacion_20"
+            and c.get("case_id") in IDS_101}
+
+
+def _sha_archivo(ruta: Path) -> str:
+    return hashlib.sha256(ruta.read_bytes()).hexdigest()
 
 
 def casos_101() -> list[str]:
-    """Las veinte conversaciones aprobadas (fuente: particiones, `evaluacion_ids`)."""
-    ids = json.loads(PARTICIONES.read_text(encoding="utf-8"))["evaluacion_ids"]
-    if len(ids) != 20:
-        raise ValueError(f"evaluacion_ids debe tener 20 casos, tiene {len(ids)}.")
-    return list(ids)
+    """Las veinte conversaciones aprobadas, verificadas contra particiones.
+
+    Exige IDs exactos en orden, sin duplicados, 10 vishing + 10 legítimas;
+    cada una con `particion_preparacion == comparacion_20`, fuera de la
+    reserva, con texto y referencia íntegros respecto de los hashes del
+    manifiesto de particiones. Solo valida estas veinte (no abre el resto).
+    """
+    datos = json.loads(PARTICIONES.read_text(encoding="utf-8"))
+    if list(datos.get("evaluacion_ids", [])) != list(IDS_101):
+        raise ValueError("evaluacion_ids de particiones no coincide con IDS_101 "
+                         "(orden exacto de las veinte aprobadas).")
+    respaldo = huellas_particiones_101()
+    if sorted(respaldo) != sorted(IDS_101):
+        faltan = sorted(set(IDS_101) - set(respaldo))
+        raise ValueError(f"particiones sin respaldo comparacion_20 para: {faltan}.")
+    todos = {p.stem for p in casos.DIR_TEXTO.glob("*.txt")}
+    try:
+        import csv as _csv
+        with (casos.CATALOGO).open(encoding="utf-8", newline="") as _f:
+            semillas = {f["scenario_id"] for f in _csv.DictReader(_f)
+                        if f["estado"] != "descartado"}
+    except FileNotFoundError:
+        semillas = set()
+    errores: list[str] = []
+    for cid in IDS_101:
+        errores.extend(casos.validar_caso(cid, todos, semillas))
+        ref = casos.cargar_referencia(cid)
+        if ref.get("particion") == "test_reservado":
+            errores.append(f"{cid}: pertenece a la reserva, no a la comparación.")
+        esp = respaldo[cid]
+        for clave, ruta in (("texto_sha256", casos.DIR_TEXTO / f"{cid}.txt"),
+                            ("referencia_sha256", casos.DIR_REFERENCIA / f"{cid}.json")):
+            if _sha_archivo(ruta) != esp.get(clave):
+                errores.append(f"{cid}: deriva de hash en {ruta.name} "
+                               f"(no coincide con particiones).")
+    if errores:
+        raise ValueError("casos_101 inválidos:\n- " + "\n- ".join(errores))
+    refs = [casos.cargar_referencia(c) for c in IDS_101]
+    if [r["clase"] for r in refs[:10]] != ["vishing"] * 10:
+        raise ValueError("las primeras diez deben ser vishing (orden del issue).")
+    if not all(r["clase"] in casos.LEGITIMAS for r in refs[10:]):
+        raise ValueError("las últimas diez deben ser legítimas (orden del issue).")
+    return list(IDS_101)
+
+
+def huellas_casos_101(ids: list[str]) -> dict[str, dict]:
+    """Snapshot de textos y referencias para la huella funcional."""
+    respaldo = huellas_particiones_101()
+    huellas = {}
+    for cid in ids:
+        ref = casos.cargar_referencia(cid)
+        huellas[cid] = {
+            "texto_sha256": _sha_archivo(casos.DIR_TEXTO / f"{cid}.txt"),
+            "referencia_sha256": _sha_archivo(casos.DIR_REFERENCIA / f"{cid}.json"),
+            "clase": ref["clase"],
+            "particion_preparacion": respaldo[cid]["particion_preparacion"],
+            "grupo_preparacion": respaldo[cid]["grupo_preparacion"],
+            "revision_humana": ref.get("revision_humana", False),
+        }
+    return huellas
 
 
 def inventario_modelo(cliente: ClienteOllama, modelo: str) -> dict:
@@ -119,21 +231,73 @@ def cargar_tito_viejo(ruta: Path):
     return preparar_tito_real(ruta)
 
 
-def cargar_tito_nuevo(ruta: Path | None):
-    """Candidato #99/#100 congelado, una vez por proceso.
+def resolver_tito_nuevo(artefacto: Path | None, manifest: Path | None,
+                        umbral_cli: float | None):
+    """Candidato #99/#100 congelado, validado ANTES de medir.
 
-    Importa `entrenar_tito_99` solo para recargar el artefacto (sin
-    reentrenar) y prepara el encoder fuera de las latencias. Si la ruta
-    falta, levanta `TitoNuevoNoDisponible`: la condición se registra
-    como pendiente, no se improvisa otro Tito.
+    Contrato provisional con el integrador #99 (ctx_21184cb827b1, sin pesos
+    nuevos ni #100 ejecutado): exige el manifiesto congelado de selección
+    con identidad (encoder id/revisión), hashes (artefacto + tokenizador),
+    entrada `historial_acumulado` y umbral seleccionado solo en validación.
+    Sin manifiesto la condición queda pendiente (no se improvisa otro Tito
+    ni se usa el umbral 0,5 por defecto). Un `umbral_cli` distinto del
+    manifiesto se rechaza en texto plano (sin override silencioso); un
+    artefacto de frase se rechaza aunque el manifiesto lo acompañe.
+    El loader es modular: la variante #99 congelada usa `Tito99`; un
+    formato `tito-100-*` futuro queda pendiente (no se asume Tito99).
     """
-    if ruta is None or not Path(ruta).exists():
-        raise TitoNuevoNoDisponible(f"sin artefacto del candidato nuevo: {ruta}.")
+    if artefacto is None or not Path(artefacto).exists():
+        raise TitoNuevoNoDisponible(f"sin artefacto del candidato nuevo: {artefacto}.")
+    if manifest is None or not Path(manifest).exists():
+        raise TitoNuevoNoDisponible(
+            f"sin manifiesto congelado #100 para {artefacto}: la condición "
+            "tito-nuevo queda pendiente (no se entrena ni se selecciona acá).")
+    try:
+        arte = json.loads(Path(artefacto).read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        raise ValueError(f"candidato nuevo ilegible ({artefacto}): {e}.")
+    formato = arte.get("formato", "")
+    if isinstance(formato, str) and formato.startswith("tito-100"):
+        raise TitoNuevoNoDisponible(
+            f"formato {formato} sin loader acordado con el integrador #99: "
+            "pendiente, no se carga como Tito99.")
+    if formato not in FORMATOS_NUEVO_CONOCIDOS:
+        raise ValueError(f"formato de candidato desconocido: {formato!r}; "
+                         "no se mide con un loader no acordado.")
+    try:
+        sel = json.loads(Path(manifest).read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        raise ValueError(f"manifiesto de selección ilegible ({manifest}): {e}.")
+    if _sha_archivo(Path(artefacto)) != sel.get("artefacto_sha256"):
+        raise ValueError("el artefacto no coincide con el artefacto_sha256 "
+                         "del manifiesto congelado.")
+    for fuente, entrada in (("artefacto", arte.get("entrada")),
+                            ("manifiesto", sel.get("entrada"))):
+        if entrada != ENTRADA_NUEVO_EXIGIDA:
+            raise ValueError(
+                f"entrada del candidato en {fuente}: {entrada!r}; se exige "
+                f"{ENTRADA_NUEVO_EXIGIDA!r} (un artefacto de frase no pasa).")
+    umbral = sel.get("umbral")
+    if not isinstance(umbral, (int, float)) or not 0 < float(umbral) <= 1:
+        raise ValueError("el manifiesto no trae un umbral seleccionado en (0, 1].")
+    if umbral_cli is not None and float(umbral_cli) != float(umbral):
+        raise ValueError(f"--tito-nuevo-umbral {umbral_cli} no coincide con el "
+                         f"umbral congelado {umbral}: sin override silencioso.")
+    enc_arte = arte.get("encoder", {})
+    enc_sel = sel.get("encoder", {})
+    if enc_arte != enc_sel or not enc_sel.get("id") or not enc_sel.get("revision"):
+        raise ValueError("identidad del encoder sin fijar entre artefacto y manifiesto.")
+    if not (arte.get("tokenizador", {}).get("tokenizer_sha256")
+            and arte.get("pesos", {}).get("coef")):
+        raise ValueError("candidato sin hashes de tokenizador o sin pesos.")
     import entrenar_tito_99
 
-    tito = entrenar_tito_99.Tito99(ruta)
+    if (enc_sel.get("id") != entrenar_tito_99.ENCODER_ID
+            or enc_sel.get("revision") != entrenar_tito_99.ENCODER_REVISION):
+        raise ValueError("el encoder del candidato no es el fijado en configuración.")
+    tito = entrenar_tito_99.Tito99(artefacto)
     informe = preparar_tito_99(tito)
-    return tito, informe
+    return tito, informe, float(umbral), sel.get("variante", "#99-congelada")
 
 
 def preparar_tito_99(tito) -> dict:
@@ -142,27 +306,40 @@ def preparar_tito_99(tito) -> dict:
     Carga el encoder y corre un calentamiento (una incrustación del texto
     de ejemplo). Devuelve costos separados sin doble conteo con `puntuar`.
     Un error no levanta: el flujo deriva por fail-open y cada `puntuar`
-    registrará su propia causa.
+    registrará su propia causa. El error devuelto por `puntuar_entrada`
+    (no solo la excepción) marca el warmup inválido: `encoder_listo` en
+    falso y nunca se declara el encoder listo con None/error/NaN.
     """
+    import math as _math
+
     inicio_enc = time.perf_counter()
     try:
         tito._asegurar_encoder()
     except Exception as e:  # noqa: BLE001 - se registra, no se interrumpe
         return {"encoder_ms": round((time.perf_counter() - inicio_enc) * 1000, 1),
-                "encoder_desde_cache": False, "calentamiento_ms": None,
+                "encoder_desde_cache": False, "encoder_listo": False,
+                "calentamiento_ms": None,
                 "error": f"tito99_preparar_error: {type(e).__name__}: {e}",
                 "unidad": "ms"}
     encoder_ms = round((time.perf_counter() - inicio_enc) * 1000, 1)
     inicio_cal = time.perf_counter()
     try:
-        tito.puntuar_entrada("hola mundo")
+        puntaje, error, _ms = tito.puntuar_entrada("hola mundo")
     except Exception as e:  # noqa: BLE001 - se registra, no se interrumpe
         return {"encoder_ms": encoder_ms, "encoder_desde_cache": False,
+                "encoder_listo": False,
                 "calentamiento_ms": round((time.perf_counter() - inicio_cal) * 1000, 1),
                 "error": f"tito99_calentar_error: {type(e).__name__}: {e}",
                 "unidad": "ms"}
+    calentamiento_ms = round((time.perf_counter() - inicio_cal) * 1000, 1)
+    if error or puntaje is None or not _math.isfinite(puntaje):
+        return {"encoder_ms": encoder_ms, "encoder_desde_cache": False,
+                "encoder_listo": False, "calentamiento_ms": calentamiento_ms,
+                "error": f"tito99_calentar_invalido: puntaje={puntaje!r} error={error!r}",
+                "unidad": "ms"}
     return {"encoder_ms": encoder_ms, "encoder_desde_cache": False,
-            "calentamiento_ms": round((time.perf_counter() - inicio_cal) * 1000, 1),
+            "encoder_listo": True,
+            "calentamiento_ms": calentamiento_ms,
             "error": "", "unidad": "ms"}
 
 
@@ -193,7 +370,7 @@ def construir_detectores(modelo: str, prompt_txt: str, variante: str, hablantes:
                          extra: dict | None, esquema: dict,
                          tito_viejo, umbral_viejo: float,
                          tito_nuevo, umbral_nuevo: float) -> list[tuple[dict, object]]:
-    """Las tres condiciones de un modelo sobre la misma base SLM."""
+    """Las condiciones de un modelo sobre la misma base SLM."""
     detectores = []
     slm = DetectorSLM(cliente, modelo, prompt_txt, hablantes, num_ctx, seed, extra=extra, esquema=esquema)
     detectores.append(
@@ -214,8 +391,6 @@ def construir_detectores(modelo: str, prompt_txt: str, variante: str, hablantes:
 
 def huella_funcional(parametros: dict) -> str:
     """Huella de lo que define una corrida comparable (para reanudar sin mezclar)."""
-    import hashlib
-
     return hashlib.sha256(
         json.dumps(parametros, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()[:16]
 
@@ -225,31 +400,215 @@ def plan_triples(modelos: list[str], condiciones: list[str], ids: list[str]) -> 
     return [(m, c, i) for m in modelos for c in condiciones for i in ids]
 
 
-def leer_completados(carpeta: Path) -> set[tuple[str, str, str]]:
-    """Triples ya guardados en la traza (config → modelo, condición, caso)."""
-    ruta = carpeta / "actualizaciones.csv"
-    if not ruta.exists():
-        return set()
+def _ruta_csv(base: Path) -> Path:
+    """Acepta la carpeta legada o la ruta directa del CSV."""
+    base = Path(base)
+    if base.is_dir():
+        return base / "actualizaciones.csv"
+    return base
+
+
+def _leer_filas_csv(ruta: Path) -> list[dict]:
+    """Lee la traza tolerando archivo ausente, vacío o sin header (bug previo)."""
+    if not ruta.exists() or ruta.stat().st_size == 0:
+        return []
     with ruta.open(encoding="utf-8-sig", newline="") as f:
-        filas = list(csv.DictReader(f))
-    # Un triple está completo si avisó (columna aviso) o recorrió el caso.
-    por_triple: dict[tuple[str, str, str], list] = {}
+        primera = f.readline()
+        if not primera.startswith("config,"):
+            # Headerless de una interrupción vieja: la primera fila es dato.
+            resto = f.read().splitlines()
+            lector = csv.DictReader([primera, *resto], fieldnames=correr.COLUMNAS)
+            return [r for r in lector if r.get("config")]
+        lector = csv.DictReader([primera, *f.read().splitlines()])
+        if lector.fieldnames != list(correr.COLUMNAS):
+            return []
+        return [r for r in lector if r.get("config")]
+
+
+def _triple_de_config(config: str, case_id: str) -> tuple[str, str, str] | None:
+    partes = config.split("|")
+    if len(partes) != 4:
+        return None
+    return (partes[1], partes[0], case_id)
+
+
+def estado_traza(filas: list[dict], totales: dict[str, int]) -> tuple[set, list[dict]]:
+    """Completa solo con secuencia única y contigua 1..k por triple.
+
+    Un triple está completo si sus líneas son únicas y contiguas desde 1 y
+    (a) llegan al total del caso, o (b) terminan en su único aviso (modo
+    operativo). Prefijos duplicados, huecos o filas tras el aviso quedan
+    parciales: se retiran para remedición, nunca cuentan como completos.
+    Devuelve (completados, filas_canónicas_de_completos).
+    """
+    por_triple: dict[tuple[str, str, str], list[dict]] = {}
     for fila in filas:
-        partes = fila["config"].split("|")
-        if len(partes) != 4:
+        clave = _triple_de_config(fila.get("config", ""), fila.get("case_id", ""))
+        if clave is None:
             continue
-        por_triple.setdefault((partes[1], partes[0], fila["case_id"]), []).append(fila)
+        por_triple.setdefault(clave, []).append(fila)
     completados: set[tuple[str, str, str]] = set()
-    for triple, fs in por_triple.items():
-        if any(f["aviso"] == "true" for f in fs):
-            completados.add(triple)
+    canonicas: list[dict] = []
+    for clave, fs in por_triple.items():
+        lineas: list[int] = []
+        avisos: list[int] = []
+        valido = True
+        for f in fs:
+            try:
+                n = int(f["linea"])
+            except (TypeError, ValueError):
+                valido = False
+                break
+            lineas.append(n)
+            if f.get("aviso") == "true":
+                avisos.append(n)
+        if not valido or not lineas:
             continue
-        try:
-            if len(fs) >= len(casos.cargar_texto(triple[2])):
-                completados.add(triple)
-        except ValueError:
+        if len(set(lineas)) != len(lineas):
+            continue  # filas repetidas: parcial
+        unicas = sorted(set(lineas))
+        if unicas != list(range(1, unicas[-1] + 1)):
+            continue  # hueco o no empieza en 1: parcial
+        total = totales.get(clave[2])
+        if total is None:
+            try:
+                total = len(casos.cargar_texto(clave[2]))
+            except ValueError:
+                continue
+        if len(avisos) > 1:
             continue
+        if avisos:
+            if avisos[0] == unicas[-1]:
+                completados.add(clave)
+                canonicas.extend(sorted(fs, key=lambda f: int(f["linea"])))
+            # Aviso con filas posteriores o anteriores faltantes: parcial.
+        elif unicas[-1] == total and len(unicas) == total:
+            completados.add(clave)
+            canonicas.extend(sorted(fs, key=lambda f: int(f["linea"])))
+    return completados, canonicas
+
+
+def leer_completados(base: Path) -> set[tuple[str, str, str]]:
+    """Triples completos guardados en la traza (secuencia única y contigua)."""
+    filas = _leer_filas_csv(_ruta_csv(Path(base)))
+    completados, _ = estado_traza(filas, {})
     return completados
+
+
+def normalizar_traza(base: Path, totales: dict[str, int] | None = None,
+                     orden: list[tuple[str, str, str]] | None = None) -> list[dict]:
+    """Cierre transaccional por triple: conserva solo triples completos.
+
+    Reescribe el CSV con header único y filas canónicas (sin duplicados ni
+    parciales, que se remiden desde cero). Escritura atómica (tmp + replace)
+    en la misma carpeta. Devuelve las filas canónicas.
+    """
+    ruta = _ruta_csv(Path(base))
+    filas = _leer_filas_csv(ruta)
+    _, canonicas = estado_traza(filas, totales or {})
+    if orden is not None:
+        posicion = {t: k for k, t in enumerate(orden)}
+        canonicas.sort(key=lambda f: (posicion.get(
+            _triple_de_config(f["config"], f["case_id"]), 10 ** 9), int(f["linea"])))
+    tmp = ruta.with_name(ruta.name + ".tmp")
+    with tmp.open("w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=correr.COLUMNAS)
+        w.writeheader()
+        for fila in canonicas:
+            w.writerow({c: fila.get(c, "") for c in correr.COLUMNAS})
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, ruta)
+    return canonicas
+
+
+def agregar_filas(base: Path, filas: list[dict]) -> None:
+    """Agrega filas a la traza con un solo header y descarga durable."""
+    ruta = _ruta_csv(Path(base))
+    necesita_header = (not ruta.exists() or ruta.stat().st_size == 0
+                       or not _leer_filas_csv(ruta))
+    if necesita_header and ruta.exists() and ruta.stat().st_size > 0:
+        # Headerless previo: normalizar antes de agregar.
+        normalizar_traza(ruta)
+        necesita_header = False
+    with ruta.open("a", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=correr.COLUMNAS)
+        if necesita_header:
+            w.writeheader()
+        for fila in filas:
+            w.writerow({c: fila.get(c, "") for c in correr.COLUMNAS})
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def cobertura(bloqueos_modelo: dict, bloqueo_nuevo: str,
+              triples_planificados: list[tuple[str, str, str]],
+              completados: set[tuple[str, str, str]]) -> dict:
+    """Cobertura contra el denominador global 10×3×20 = 600, con causas.
+
+    Los esperados nunca se achican al subconjunto medido: un smoke o un
+    bloqueo dejan faltantes explícitos. `matriz_completa` solo con 600.
+    """
+    planificados = set(triples_planificados)
+    globales = set(plan_triples(list(MODELOS_101), list(CONDICIONES), list(IDS_101)))
+    faltantes = []
+    for m, c, i in sorted(globales):
+        if (m, c, i) in completados:
+            continue
+        if m in bloqueos_modelo:
+            causa = "modelo_bloqueado"
+        elif c == "tito-nuevo" and bloqueo_nuevo:
+            causa = "tito-nuevo-pendiente"
+        elif (m, c, i) not in planificados:
+            causa = "no-planificado-subset"
+        else:
+            causa = "pendiente-medicion"
+        faltantes.append({"modelo": m, "condicion": c, "caso": i, "causa": causa})
+    return {"esperados_globales": ESPERADOS_GLOBALES,
+            "planificados": len(planificados),
+            "completados": len(completados),
+            "pendientes": ESPERADOS_GLOBALES - len(completados),
+            "matriz_completa": len(completados) == ESPERADOS_GLOBALES,
+            "faltantes": faltantes}
+
+
+def resolver_corrida(ruta: Path) -> dict:
+    """Resuelve una corrida legada (carpeta) o nueva (prefijo de archivos).
+
+    Nuevo: `<pref>_manifiesto.json` + `<pref>_actualizaciones.csv` en una
+    carpeta existente. Legado: carpeta con `manifiesto.json`.
+    """
+    ruta = Path(ruta)
+    if ruta.is_dir() and (ruta / "manifiesto.json").exists():
+        return {"modo": "legado", "base": ruta, "prefijo": None,
+                "manifiesto": ruta / "manifiesto.json",
+                "csv": ruta / "actualizaciones.csv"}
+    texto = str(ruta)
+    for sufijo in ("_manifiesto.json", "_actualizaciones.csv", "_informe_101.md",
+                   "_grafico_avisos.svg", "_grafico_costos.svg"):
+        if texto.endswith(sufijo):
+            texto = texto[: -len(sufijo)]
+            break
+    base = Path(texto)
+    manifiesto = base.parent / (base.name + "_manifiesto.json")
+    if not manifiesto.exists():
+        raise FileNotFoundError(f"sin manifiesto para la corrida: {manifiesto}.")
+    return {"modo": "prefijo", "base": base.parent, "prefijo": base.name,
+            "manifiesto": manifiesto,
+            "csv": base.parent / (base.name + "_actualizaciones.csv")}
+
+
+def _guardar_manifiesto(ruta: Path, manifiesto: dict) -> None:
+    tmp = ruta.with_name(ruta.name + ".tmp")
+    tmp.write_text(json.dumps(manifiesto, ensure_ascii=False, indent=2), encoding="utf-8")
+    os.replace(tmp, ruta)
+
+
+def _etiqueta_segura(texto: str) -> str:
+    import re
+
+    limpio = re.sub(r"[^A-Za-z0-9_-]", "_", texto).strip("_")
+    return limpio[:40]
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -270,12 +629,16 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--tito-viejo-modelo", type=Path, default=ARTEFACTO_POR_DEFECTO,
                    help="artefacto histórico inmutable (por defecto, tito_logreg.json)")
     p.add_argument("--tito-nuevo-modelo", type=Path, default=None,
-                   help="artefacto del candidato #99/#100; ausente → condición pendiente")
-    p.add_argument("--tito-nuevo-umbral", type=float, default=UMBRAL_TITO,
-                   help="umbral del candidato nuevo (convención exploratoria 0,5 si #99 no fijó otro)")
-    p.add_argument("--salida", type=Path, default=AQUI / "corridas")
-    p.add_argument("--etiqueta", default="", help="texto corto para el nombre de la carpeta")
-    p.add_argument("--reanudar", type=Path, default=None, help="carpeta de una corrida 101 para continuar")
+                   help="artefacto del candidato #99/#100; ausente o sin manifiesto → condición pendiente")
+    p.add_argument("--tito-nuevo-manifest", type=Path, default=None,
+                   help="manifiesto congelado de selección #100 (identidad, hashes, entrada, umbral)")
+    p.add_argument("--tito-nuevo-umbral", type=float, default=None,
+                   help="solo para coincidir con el umbral congelado; distinto → rechazo")
+    p.add_argument("--salida", type=Path, default=DIR_CORRIDAS,
+                   help="carpeta EXISTENTE para los archivos con prefijo (por defecto, corridas/)")
+    p.add_argument("--etiqueta", default="", help="texto corto para el prefijo de la corrida")
+    p.add_argument("--reanudar", type=Path, default=None,
+                   help="prefijo o carpeta legada de una corrida 101 para continuar")
     p.add_argument("--detalle", action="store_true")
     args = p.parse_args(argv)
     try:
@@ -283,23 +646,24 @@ def main(argv: list[str] | None = None) -> int:
     except (AttributeError, ValueError):
         pass
 
-    errores = casos.validar_todos()
-    if errores:
-        print("\n".join(errores))
-        sys.exit("Hay casos con errores de formato.")
-
-    modelos = [m.strip() for m in args.modelos.split(",") if m.strip()]
-    if [m for m in modelos if m not in MODELOS_101] or len(set(modelos)) != len(modelos):
-        sys.exit(f"--modelos debe ser un subconjunto ordenado de la matriz: {','.join(MODELOS_101)}.")
-    if modelos != [m for m in MODELOS_101 if m in modelos]:
-        sys.exit("Los modelos deben mantener el orden exacto de la matriz #101.")
-    ids = casos_101()
+    try:
+        ids = casos_101()
+    except ValueError as e:
+        sys.exit(f"{e}\nLas veinte no se miden.")
     if args.casos:
         pedidos = [c.strip() for c in args.casos.split(",") if c.strip()]
         faltan = [c for c in pedidos if c not in ids]
         if faltan:
             sys.exit(f"Casos fuera de las veinte aprobadas: {faltan}. No se sustituyen.")
         ids = pedidos
+
+    modelos = [m.strip() for m in args.modelos.split(",") if m.strip()]
+    if [m for m in modelos if m not in MODELOS_101] or len(set(modelos)) != len(modelos):
+        sys.exit(f"--modelos debe ser un subconjunto ordenado de la matriz: {','.join(MODELOS_101)}.")
+    if modelos != [m for m in MODELOS_101 if m in modelos]:
+        sys.exit("Los modelos deben mantener el orden exacto de la matriz #101.")
+    alcance = ("completa" if modelos == list(MODELOS_101) and ids == list(IDS_101)
+               else "parcial-subset")
 
     cliente = ClienteOllama(args.url, args.timeout)
     cliente_carga = ClienteOllama(args.url, max(args.timeout, 600.0))
@@ -329,11 +693,14 @@ def main(argv: list[str] | None = None) -> int:
     umbral_viejo = float(json.loads(Path(args.tito_viejo_modelo).read_text(encoding="utf-8"))
                          .get("umbral_derivacion", UMBRAL_TITO))
     try:
-        tito_nuevo, prep_nuevo = cargar_tito_nuevo(args.tito_nuevo_modelo)
-        umbral_nuevo = float(args.tito_nuevo_umbral)
+        tito_nuevo, prep_nuevo, umbral_nuevo, variante_nueva = resolver_tito_nuevo(
+            args.tito_nuevo_modelo, args.tito_nuevo_manifest, args.tito_nuevo_umbral)
         bloqueo_nuevo = ""
     except TitoNuevoNoDisponible as e:
-        tito_nuevo, prep_nuevo, umbral_nuevo, bloqueo_nuevo = None, None, float(args.tito_nuevo_umbral), str(e)
+        tito_nuevo, prep_nuevo, umbral_nuevo, variante_nueva = None, None, None, ""
+        bloqueo_nuevo = str(e)
+    except ValueError as e:
+        sys.exit(f"Candidato nuevo rechazado: {e}")
     condiciones = ["directo", "tito-viejo"] + ([] if tito_nuevo is None else ["tito-nuevo"])
 
     extra: dict = {}
@@ -349,33 +716,55 @@ def main(argv: list[str] | None = None) -> int:
     from detectores import huella as huella_texto
     funcionales = {
         "modelos": modelos, "casos": ids, "condiciones": condiciones,
+        "alcance": alcance,
         "prompt": args.prompt, "prompt_huella": huella_texto(prompt_txt),
         "hablantes": args.hablantes, "num_ctx": args.num_ctx, "seed": args.seed,
         "timeout": args.timeout, "hardware": extra, "url": args.url,
         "inventario": inventario,
+        "casos_huellas": huellas_casos_101(ids),
+        "particiones_sha256": _sha_archivo(PARTICIONES),
+        "configuracion_sha256": _sha_archivo(CONFIG_101),
         "tito_viejo": {"artefacto": str(args.tito_viejo_modelo),
                        "sha256": correr.sha_archivo(args.tito_viejo_modelo),
                        "entrada": "frase_actual", "umbral": umbral_viejo},
         "tito_nuevo": ({"artefacto": str(args.tito_nuevo_modelo),
+                        "manifest": str(args.tito_nuevo_manifest),
+                        "variante": variante_nueva,
                         "sha256": correr.sha_archivo(args.tito_nuevo_modelo),
-                        "entrada": "historial_acumulado", "umbral": umbral_nuevo}
+                        "entrada": ENTRADA_NUEVO_EXIGIDA, "umbral": umbral_nuevo}
                        if tito_nuevo is not None else {"bloqueo": bloqueo_nuevo}),
     }
     huella = huella_funcional(funcionales)
+    triples = plan_triples(modelos_ok, condiciones, ids)
 
     if args.reanudar is not None:
-        carpeta = args.reanudar.resolve()
-        manifiesto = json.loads((carpeta / "manifiesto.json").read_text(encoding="utf-8"))
+        try:
+            corrida = resolver_corrida(args.reanudar)
+        except FileNotFoundError as e:
+            sys.exit(str(e))
+        manifiesto = json.loads(corrida["manifiesto"].read_text(encoding="utf-8"))
         if manifiesto.get("matriz") != "matriz-101":
-            sys.exit("La carpeta a reanudar no es una corrida matriz-101.")
+            sys.exit("La corrida a reanudar no es una matriz-101.")
         if huella_funcional(manifiesto["funcionales"]) != huella:
             sys.exit("La configuración actual difiere de la corrida a reanudar: "
-                     "no se mezclan configuraciones (usá una carpeta nueva).")
-        completados = leer_completados(carpeta)
+                     "no se mezclan configuraciones (usá un prefijo nuevo).")
+        totales = {cid: len(casos.cargar_texto(cid)) for cid in ids}
+        normalizar_traza(corrida["csv"], totales, orden=triples)
+        completados = leer_completados(corrida["csv"])
+        manifiesto_path, csv_path = corrida["manifiesto"], corrida["csv"]
+        etiqueta_corrida = corrida["prefijo"] or corrida["base"].name
     else:
-        nombre = datetime.now().strftime("%Y-%m-%d_%H%M%S") + (f"_{args.etiqueta}" if args.etiqueta else "")
-        carpeta = args.salida.resolve() / f"{nombre}_101"
-        carpeta.mkdir(parents=True)
+        salida = args.salida
+        if not salida.is_dir():
+            sys.exit(f"--salida debe ser una carpeta existente (no se crean dirs): {salida}.")
+        nombre = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+        if args.etiqueta:
+            nombre += f"_{_etiqueta_segura(args.etiqueta)}"
+        prefijo = f"{nombre}_101"
+        manifiesto_path = salida / f"{prefijo}_manifiesto.json"
+        csv_path = salida / f"{prefijo}_actualizaciones.csv"
+        if manifiesto_path.exists() or csv_path.exists():
+            sys.exit(f"El prefijo ya existe, usá otra etiqueta: {prefijo}.")
         manifiesto = {
             "matriz": "matriz-101",
             "issue": 101,
@@ -386,8 +775,8 @@ def main(argv: list[str] | None = None) -> int:
             "politica": correr.POLITICA,
             "modo_termino": correr.MODO_OPERATIVO,
             "particion": "evaluacion_101",
-            "particiones_sha256": correr.sha_archivo(PARTICIONES),
-            "configuracion_sha256": correr.sha_archivo(CONFIG_101),
+            "particiones_sha256": _sha_archivo(PARTICIONES),
+            "configuracion_sha256": _sha_archivo(CONFIG_101),
             "ollama": {**arranque, "arranque_ms": None, "modelos": {}},
             "funcionales": funcionales,
             "huella_funcional": huella,
@@ -396,83 +785,75 @@ def main(argv: list[str] | None = None) -> int:
             "bloqueos_modelo": bloqueos_modelo,
             "bloqueo_nuevo": bloqueo_nuevo,
             "configs": [],
-            "casos": {},
+            "casos": huellas_casos_101(ids),
             "interrumpida": False,
             "fin": None,
         }
-        (carpeta / "actualizaciones.csv").write_text("", encoding="utf-8-sig")
+        csv_path.write_text("", encoding="utf-8-sig")
         completados = set()
+        etiqueta_corrida = prefijo
 
-    def guardar() -> None:
-        (carpeta / "manifiesto.json").write_text(
-            json.dumps(manifiesto, ensure_ascii=False, indent=2), encoding="utf-8")
-
-    triples = plan_triples(modelos_ok, condiciones, ids)
-    pendientes = [t for t in triples if t not in completados]
-    manifiesto["cobertura"] = {"esperados": len(triples), "completados": len(completados),
-                               "pendientes": len(pendientes)}
-    guardar()
-    print(f"Matriz #101: {_mostrar(carpeta)} ({len(triples)} recorridos, "
-          f"{len(completados)} hechos, {len(pendientes)} pendientes)")
+    manifiesto["cobertura"] = cobertura(bloqueos_modelo, bloqueo_nuevo, triples, completados)
+    _guardar_manifiesto(manifiesto_path, manifiesto)
+    cob = manifiesto["cobertura"]
+    print(f"Matriz #101: {etiqueta_corrida} ({cob['planificados']} recorridos planificados, "
+          f"{cob['completados']} hechos, {cob['pendientes']} pendientes de 600 globales)")
+    if alcance != "completa" or bloqueos_modelo or bloqueo_nuevo:
+        print("Alcance parcial: esto NO es la matriz completa "
+              f"(alcance={alcance}, bloqueos_modelo={sorted(bloqueos_modelo) or 'ninguno'}, "
+              f"tito-nuevo={'pendiente' if bloqueo_nuevo else 'incluido'}).")
 
     try:
-        with (carpeta / "actualizaciones.csv").open("a", encoding="utf-8-sig", newline="") as f:
-            escritor = csv.DictWriter(f, fieldnames=correr.COLUMNAS)
-            if not completados:
-                escritor.writeheader()
-            detectores_cache: dict[str, tuple[dict, object]] = {}
-            modelo_actual: str | None = None
-            for modelo, cond, case_id in triples:
-                if (modelo, cond, case_id) in completados:
-                    continue
-                if modelo != modelo_actual:
-                    modelo_actual = modelo
-                    print(f"Cargando {modelo}...", end=" ", flush=True)
-                    try:
-                        carga = correr.calentar(cliente_carga, modelo, args.num_ctx, extra)
-                    except correr.FalloAlCalentar as e:
-                        manifiesto["ollama"]["modelos"][modelo] = {"error": str(e)}
-                        guardar()
-                        print("no quedó listo.")
-                        sys.exit(f"\n{e}\nLo procesado hasta acá quedó en {_mostrar(carpeta)}.")
-                    manifiesto["ollama"]["modelos"][modelo] = {**inventario[modelo], **carga}
-                    guardar()
-                    print(f"listo ({carga['carga_ms'] / 1000:.1f} s).")
-                clave = (modelo, cond)
-                if clave not in detectores_cache:
-                    ds = construir_detectores(modelo, prompt_txt, args.prompt, args.hablantes,
-                                              cliente, args.num_ctx, args.seed, extra, esquema,
-                                              tito_viejo, umbral_viejo, tito_nuevo, umbral_nuevo)
-                    for cfg, det in ds:
-                        if isinstance(det, DetectorSLM):
-                            det.pensar = manifiesto["ollama"]["modelos"][modelo].get("pensar")
-                        elif isinstance(det, FlujoTitoSLM):
-                            det.slm.pensar = manifiesto["ollama"]["modelos"][modelo].get("pensar")
-                        detectores_cache[(modelo, cfg["config"].split("|")[0])] = (cfg, det)
-                        if cfg not in manifiesto["configs"]:
-                            manifiesto["configs"].append(cfg)
-                    guardar()
-                config, detector = detectores_cache[clave]
-                if case_id not in manifiesto["casos"]:
-                    manifiesto["casos"][case_id] = correr.sha_archivo(
-                        casos.DIR_TEXTO / f"{case_id}.txt")
-                lineas = casos.cargar_texto(case_id)
-                for n, linea, r, aviso in correr.procesar_caso(detector, lineas, detener_en_aviso=True):
-                    escritor.writerow(correr._fila(config, case_id, n, linea, r, aviso))
-                    f.flush()
-                completados.add((modelo, cond, case_id))
-                manifiesto["cobertura"] = {"esperados": len(triples), "completados": len(completados),
-                                           "pendientes": len(triples) - len(completados)}
-                guardar()
-                print(f"   {modelo:14} {cond:10} {case_id}")
+        detectores_cache: dict[tuple[str, str], tuple[dict, object]] = {}
+        modelo_actual: str | None = None
+        for modelo, cond, case_id in triples:
+            if (modelo, cond, case_id) in completados:
+                continue
+            if modelo != modelo_actual:
+                modelo_actual = modelo
+                print(f"Cargando {modelo}...", end=" ", flush=True)
+                try:
+                    carga = correr.calentar(cliente_carga, modelo, args.num_ctx, extra)
+                except correr.FalloAlCalentar as e:
+                    manifiesto["ollama"]["modelos"][modelo] = {"error": str(e)}
+                    _guardar_manifiesto(manifiesto_path, manifiesto)
+                    print("no quedó listo.")
+                    sys.exit(f"\n{e}\nLo procesado hasta acá quedó en {etiqueta_corrida}.")
+                manifiesto["ollama"]["modelos"][modelo] = {**inventario[modelo], **carga}
+                _guardar_manifiesto(manifiesto_path, manifiesto)
+                print(f"listo ({carga['carga_ms'] / 1000:.1f} s).")
+            clave = (modelo, cond)
+            if clave not in detectores_cache:
+                ds = construir_detectores(modelo, prompt_txt, args.prompt, args.hablantes,
+                                          cliente, args.num_ctx, args.seed, extra, esquema,
+                                          tito_viejo, umbral_viejo, tito_nuevo, umbral_nuevo or 0.0)
+                for cfg, det in ds:
+                    if isinstance(det, DetectorSLM):
+                        det.pensar = manifiesto["ollama"]["modelos"][modelo].get("pensar")
+                    elif isinstance(det, FlujoTitoSLM):
+                        det.slm.pensar = manifiesto["ollama"]["modelos"][modelo].get("pensar")
+                    detectores_cache[(modelo, cfg["config"].split("|")[0])] = (cfg, det)
+                    if cfg not in manifiesto["configs"]:
+                        manifiesto["configs"].append(cfg)
+                _guardar_manifiesto(manifiesto_path, manifiesto)
+            config, detector = detectores_cache[clave]
+            lineas = casos.cargar_texto(case_id)
+            filas_triple = []
+            for n, linea, r, aviso in correr.procesar_caso(detector, lineas, detener_en_aviso=True):
+                filas_triple.append(correr._fila(config, case_id, n, linea, r, aviso))
+            agregar_filas(csv_path, filas_triple)
+            completados.add((modelo, cond, case_id))
+            manifiesto["cobertura"] = cobertura(bloqueos_modelo, bloqueo_nuevo, triples, completados)
+            _guardar_manifiesto(manifiesto_path, manifiesto)
+            print(f"   {modelo:14} {cond:10} {case_id}")
     except KeyboardInterrupt:
         manifiesto["interrumpida"] = True
-        guardar()
+        _guardar_manifiesto(manifiesto_path, manifiesto)
         print("\nCorrida interrumpida: lo procesado hasta acá quedó guardado (reanudá con --reanudar).")
         return 0
     manifiesto["fin"] = datetime.now().isoformat(timespec="seconds")
-    guardar()
-    print(f"\nListo. Informe: python informe_101.py {_mostrar(carpeta)}")
+    _guardar_manifiesto(manifiesto_path, manifiesto)
+    print(f"\nListo. Informe: python informe_101.py {manifiesto_path}")
     return 0
 
 
