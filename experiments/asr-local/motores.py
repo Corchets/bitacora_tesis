@@ -12,6 +12,8 @@ Contiene:
 
 from __future__ import annotations
 
+import re
+import re
 import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
@@ -481,6 +483,40 @@ class MotorFasterWhisper(MotorASR):
         }
 
 
+# Parakeet detecta solo el idioma y, con poco audio, a veces escribe inglés o portugués («Yeah.», «Oh no.»).
+# No se filtran «ok»/«okay» (se usan en Argentina) ni anglicismos de uso corriente (link, token, mail, app...).
+PALABRAS_OTRO_IDIOMA = frozenset({
+    "the", "you", "your", "yeah", "yes", "what", "what's", "it's", "is", "it", "and", "so", "but", "thank",
+    "thanks", "hello", "hi", "oh", "uh", "um", "boy", "dang", "say", "up", "good", "thing", "one", "i", "i'm",
+    "that's", "don't", "of", "to", "olá", "obrigado", "obrigada", "tchau", "bye",
+})
+PALABRAS_ESPANOL = frozenset({
+    "el", "la", "los", "las", "que", "qué", "de", "del", "no", "sí", "si", "me", "te", "se", "y", "a", "en",
+    "un", "una", "por", "para", "con", "es", "lo", "le", "mi", "tu", "ya", "bueno", "dale", "hola", "cómo",
+    "como", "pero", "eso", "esto", "está", "estoy", "prueba", "gracias", "bien", "mal", "muy", "más", "al",
+    "yo", "vos", "soy", "son", "hay", "tengo", "quiero", "puedo", "puede", "cuál", "dónde", "cuándo",
+})
+# Frases que Parakeet inventa con ruido o respiración: si la frase entera es esto, no es una frase.
+MULETILLAS_FINALES = frozenset({"thank", "thanks", "you", "yeah", "yes", "olá", "obrigado", "obrigada", "tchau", "bye"})
+_TOKEN = re.compile(r"[^\W\d_]+(?:'[^\W\d_]+)*")
+
+
+def _tokens(texto: str) -> list[str]:
+    return _TOKEN.findall(texto.lower().replace("’", "'"))
+
+
+def parece_otro_idioma(texto: str) -> bool:
+    """True si el texto trae palabras de inglés/portugués comunes y ninguna palabra común de español."""
+    palabras = set(_tokens(texto))
+    return bool(palabras & PALABRAS_OTRO_IDIOMA) and not palabras & PALABRAS_ESPANOL
+
+
+def es_muletilla_final(texto: str) -> bool:
+    """True si todas las palabras de la frase son una muletilla inventada («Thank you.», «Yeah.»)."""
+    palabras = _tokens(texto)
+    return bool(palabras) and all(p in MULETILLAS_FINALES for p in palabras)
+
+
 class MotorPorFrases(MotorASR):
     """Base para modelos que no son streaming: corta frases por silencio y transcribe cada una.
 
@@ -492,12 +528,14 @@ class MotorPorFrases(MotorASR):
     PREVIO_S = 0.3  # audio previo a la voz que se agrega a la frase para no comerse la primera sílaba
     MAX_FRASE_S = 10.0  # una frase sin pausas se corta acá para que cada pasada no tarde cada vez más
     MIN_VOZ_S = 0.3  # con menos voz que esto es un ruido o una respiración: no se transcribe
+    MIN_VOZ_PARCIAL_S = 1.0  # el primer borrador espera esta voz: con menos, Parakeet suele adivinar inglés
 
     def __init__(self, sample_rate: int = 16000, parciales_cada_s: float | None = None):
         self.es_streaming = False
         self.tipo_entrega = "parciales_y_finales" if parciales_cada_s else "finales_por_segmento"
         self.sample_rate = sample_rate
         self.parciales_cada_s = parciales_cada_s
+        self.filtrar_idioma = True  # descarta parciales que no parecen español y finales que son muletillas
         self.corte_silencio_s = 0.8
         self.umbral_rms_silencio = 0.005
         # El servidor lo fija según el corte «auto»; estos modelos no tienen endpoint propio.
@@ -534,6 +572,8 @@ class MotorPorFrases(MotorASR):
     def _cerrar_frase(self, fin_s: float, t0: float) -> list[EventoASR]:
         # Parakeet, con un golpe o una respiración, inventa «Okay» o «Thank you».
         texto = self._transcribir(np.concatenate(self.frase)).strip() if self.voz_s >= self.MIN_VOZ_S else ""
+        if texto and self.filtrar_idioma and es_muletilla_final(texto):
+            texto = ""
         eventos = [self._evento("final", texto, fin_s, t0)] if texto else []
         segmento = self.segmento_actual + (1 if texto else 0)
         self._limpiar()
@@ -571,10 +611,12 @@ class MotorPorFrases(MotorASR):
         self.voz_s += dur_s if voz else 0.0
         if self.silencio_acum_s >= self.corte_silencio_s or fin_bloque_s - self.inicio_segmento_s >= self.MAX_FRASE_S:
             return self._cerrar_frase(fin_bloque_s, t0)
-        if (self.parciales_cada_s and voz and self.voz_s >= self.MIN_VOZ_S
+        if (self.parciales_cada_s and voz and self.voz_s >= self.MIN_VOZ_PARCIAL_S
                 and self.desde_parcial_s >= self.parciales_cada_s):
             self.desde_parcial_s = 0.0
             texto = self._transcribir(np.concatenate(self.frase)).strip()
+            if self.filtrar_idioma and parece_otro_idioma(texto):
+                return []  # se deja el borrador anterior en pantalla
             if texto and texto != self.ultimo_texto_parcial:
                 self.ultimo_texto_parcial = texto
                 return [self._evento("parcial", texto, fin_bloque_s, t0)]
@@ -589,7 +631,8 @@ class MotorPorFrases(MotorASR):
         return {"tipo": "corte_por_silencio_rms", "corte_silencio_s": self.corte_silencio_s,
                 "umbral_rms_silencio": self.umbral_rms_silencio, "previo_s": self.PREVIO_S,
                 "max_frase_s": self.MAX_FRASE_S, "min_voz_s": self.MIN_VOZ_S,
-                "parciales_cada_s": self.parciales_cada_s}
+                "min_voz_parcial_s": self.MIN_VOZ_PARCIAL_S, "parciales_cada_s": self.parciales_cada_s,
+                "filtro_idioma": "parciales_y_muletillas_finales" if self.filtrar_idioma else None}
 
 
 class MotorSherpaParakeet(MotorPorFrases):

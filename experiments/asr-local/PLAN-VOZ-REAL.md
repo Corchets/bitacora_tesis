@@ -195,21 +195,30 @@ escribe bien. El detector evalúa al cerrar la frase (`servidor.py --disparo fin
 defecto), así que esas palabras no disparan el aviso: el problema es lo que se ve en pantalla. El
 panel ya muestra el borrador con borde punteado y en gris.
 
-> **Estado: propuesta sin discutir.** Ninguna está implementada.
+> **Estado: opciones 1 y 2 implementadas (2026-10-29, #94); la 3 no se hizo.**
 
-1. **Esperar más audio para el primer borrador**, por ejemplo 1 s de voz en vez de 0,3 s, con una
-   constante aparte de `MIN_VOZ_S`. El texto aparece medio segundo más tarde, pero con más
-   audio el modelo se equivoca menos de idioma. Es un cambio de una línea en `MotorPorFrases`.
-2. **No mostrar un borrador que no parece español.** Si trae palabras comunes de inglés o
-   portugués («the», «you», «thank», «okay», «olá») y ninguna de español, se deja el borrador
-   anterior. Lo mismo para una frase final que sea solo eso («Thank you», «Okay»): hoy esa
-   frase se acepta si tiene más de 0,3 s de voz. Hay que probarlo con las llamadas reales
-   guardadas para no borrar frases buenas.
+1. **Esperar más audio para el primer borrador.** `MotorPorFrases.MIN_VOZ_PARCIAL_S = 1.0`
+   (aparte de `MIN_VOZ_S = 0.3`, que sigue valiendo para el final). El primer borrador aparece
+   más tarde, pero con más audio el modelo se equivoca menos de idioma.
+2. **No mostrar un borrador que no parece español.** `parece_otro_idioma()` en
+   [`motores.py`](motores.py): si el borrador trae palabras comunes de inglés o portugués («the»,
+   «you», «yeah», «thank», «olá»…) y ninguna de español, no se emite y queda el anterior. Una frase
+   final se descarta solo si todas sus palabras son una muletilla inventada («thank», «you»,
+   «yeah», «yes», «olá», «obrigado», «tchau», «bye»). **Decisión: «ok» y «okay» no se filtran
+   nunca** (se usan en Argentina), ni anglicismos corrientes como link, token, mail o app. El
+   manifiesto de cada llamada guarda `min_voz_parcial_s` y `filtro_idioma` en `segmentacion`.
 3. **Cambiar de modelo** a uno que acepte el idioma fijo o que sea solo de español. No está
    verificado qué opciones de ese tipo corren en `sherpa-onnx` ni cuánto pesan.
 
-Recomendación: 1 y 2 juntas, medidas sobre las 4 llamadas del 2026-10-28 antes de la próxima
-demo.
+**Medición (6 llamadas Parakeet del 2026-10-28, código `c0938f4` más estos cambios).** Se repasó
+el `estereo.wav` de cada una por el mismo motor, con la configuración vieja (0,3 s de voz, sin
+filtro) y la nueva. Parciales con inglés (regex independiente del filtro): 15 de 625 antes, 0 de
+523 ahora, ninguno con menos de 1,5 s de audio. Costo: el primer borrador de cada frase tarda
+más, mediana 0,80 s → 1,46 s y p90 1,20 s → 2,68 s desde el inicio de la frase, y 4 de 26 frases
+cortas ya no muestran ningún borrador. El único final que cambió fue un «Yeah.» (muletilla); no se
+perdió ninguna frase en español. Quedan finales en inglés que el filtro no toca por diseño («No
+one.», «You're»). Repetir: `python experiments/asr-local/comparar_filtro_idioma.py --prefijo
+2026-10-28` (las transcripciones van a `experiments/voip/llamadas/_filtro_idioma/`, fuera de Git).
 
 ### 9.2 Cómo se entrenó cada modelo y cuánto pesa (2026-10-29)
 
