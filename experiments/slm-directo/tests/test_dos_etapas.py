@@ -202,6 +202,37 @@ class TestCorridaRiesgo(ConServidor):
         self.assertNotIn("alerta del modelo", analisis, "con riesgo no hay alerta_sugerida del modelo")
 
 
+class TestLista(unittest.TestCase):
+    def elegir(self, contenido: str, **kw):
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "prueba.txt").write_text(contenido, encoding="utf-8")
+            anterior, correr.DIR_LISTAS = correr.DIR_LISTAS, Path(tmp)
+            try:
+                args = correr.argparse.Namespace(lista="prueba", casos=kw.get("casos", ""), grupo=None, particion="desarrollo")
+                return correr.elegir_casos(args)
+            finally:
+                correr.DIR_LISTAS = anterior
+
+    def test_lee_ids_e_ignora_comentarios(self):
+        ids = self.elegir("# comentario\nCV2-D-V-BANCO-001\n\nCV2-D-L-BANCO-001\n")
+        self.assertEqual(ids, ["CV2-D-V-BANCO-001", "CV2-D-L-BANCO-001"])
+
+    def test_id_inexistente_frena(self):
+        with self.assertRaises(SystemExit):
+            self.elegir("NO-EXISTE\n")
+
+    def test_no_se_combina_con_casos(self):
+        with self.assertRaises(SystemExit):
+            self.elegir("CV2-D-V-BANCO-001\n", casos="CV2-D-L-BANCO-001")
+
+    def test_la_lista_rapida_es_de_desarrollo_y_balanceada(self):
+        ids = correr.leer_lista("rapida-20")
+        self.assertEqual(len(ids), 20)
+        refs = [correr.casos.cargar_referencia(c) for c in ids]
+        self.assertTrue(all(r.get("particion", "desarrollo") == "desarrollo" for r in refs))
+        self.assertEqual(sum(r["clase"] == "vishing" for r in refs), 10)
+
+
 class TestPoliticasAcumuladas(unittest.TestCase):
     def aviso(self, nombre: str, riesgos: list[float]) -> int | None:
         (f,) = [f for n, f in acumular.politicas(un_paso=False) if n == nombre]

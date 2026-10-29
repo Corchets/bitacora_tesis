@@ -57,6 +57,15 @@ python analisis/2026-10-29-riesgo-primero/acumular.py corridas/<carpeta-riesgo> 
 
    La mejor política se elige en la mitad A y se informa en la B.
 
+**Set rápido (`--lista rapida-20`).** Son 20 conversaciones de corpus_v2 elegidas por
+Evaristo (10 estafas y 10 legítimas, ~524 líneas, [`casos/listas/rapida-20.txt`](../../casos/listas/rapida-20.txt)).
+Con `riesgo` tarda unos 20 min por modelo en CPU. Sirve para comparar modelos entre sí; no
+para medir la meta: cada caso mueve los porcentajes 10 puntos, y las mitades A/B tienen 10 casos.
+
+```
+python correr.py --modelos gemma3n:e2b --prompts riesgo,v2 --lista rapida-20 --solo-cpu --num-batch 32 --sin-reglas --etiqueta rapida-gemma3n-e2b
+```
+
 Otros modelos para después: `qwen3.5:4b`, `qwen3.5:2b`, `gemma2:2b`, `gemma3:270m`,
 `gemma3:1b`, `gemma3:4b`, `gemma3n:e4b`. Se usan los mismos comandos, siempre en la misma máquina.
 

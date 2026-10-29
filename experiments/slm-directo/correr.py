@@ -50,6 +50,7 @@ from detectores import (
 )
 
 RAIZ = Path(__file__).resolve().parent
+DIR_LISTAS = RAIZ / "casos" / "listas"
 POLITICA = "aviso_unico_primer_true_valido"
 COLUMNAS = [
     "config",
@@ -174,11 +175,24 @@ def _lista(valor: str) -> list[str]:
     return list(dict.fromkeys(v.strip() for v in valor.split(",") if v.strip()))
 
 
+def leer_lista(nombre: str) -> list[str]:
+    """case_id de casos/listas/<nombre>.txt, uno por línea; se ignoran vacías y comentarios (#)."""
+    ruta = DIR_LISTAS / f"{nombre}.txt"
+    if not ruta.exists():
+        disponibles = ", ".join(sorted(p.stem for p in DIR_LISTAS.glob("*.txt"))) or "ninguna"
+        sys.exit(f"No existe la lista {nombre!r} en {_mostrar(DIR_LISTAS)}. Disponibles: {disponibles}.")
+    lineas = (l.strip() for l in ruta.read_text(encoding="utf-8").splitlines())
+    return [l for l in lineas if l and not l.startswith("#")]
+
+
 def elegir_casos(args) -> list[str]:
     particion = getattr(args, "particion", "desarrollo")
     ids = casos.ids_de_casos(particion=particion)
-    if args.casos:
-        pedidos = _lista(args.casos)
+    lista = getattr(args, "lista", "")
+    if lista and (args.casos or args.grupo):
+        sys.exit("--lista no se combina con --casos ni con --grupo.")
+    if args.casos or lista:
+        pedidos = leer_lista(lista) if lista else _lista(args.casos)
         faltan = [c for c in pedidos if c not in ids]
         if faltan:
             sys.exit(f"Casos inexistentes o fuera de {particion}: {faltan}. El test requiere --particion test_reservado y protocolo D08 congelado.")
@@ -315,6 +329,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--prompts", default="tarea", help=f"variantes separadas por coma: {', '.join(PROMPTS)}")
     p.add_argument("--hablantes", default="ab", help="ab (con A/B), sin (sin hablantes) o ab,sin")
     p.add_argument("--casos", default="", help="case_id separados por coma (por defecto, toda la partición)")
+    p.add_argument("--lista", default="", help="nombre de una lista de casos/listas/ (p. ej. rapida-20)")
     p.add_argument("--particion", choices=sorted(casos.PARTICIONES), default="desarrollo", help="desarrollo por defecto; test_reservado solo para evaluación final tras D08")
     p.add_argument("--grupo", choices=sorted(casos.GRUPOS), help="solo un grupo de casos")
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
@@ -410,6 +425,7 @@ def main(argv: list[str] | None = None) -> int:
         "maquina": info_maquina(),
         "politica": POLITICA,
         "particion": args.particion,
+        **({"lista": args.lista} if args.lista else {}),
         "ollama": None if ollama is None else {"url": args.url, **ollama},
         "parametros_slm": {
             "num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra,
