@@ -14,16 +14,20 @@ AQUI = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(AQUI))
 
 from entrenar_tito_99 import (  # noqa: E402
+    ENCODER_REVISION,
     FORMATO_99,
     cargar_artefacto_99,
     construir_entrada,
     evaluar_configuracion,
     guardar_artefacto,
+    identidad_artefactos_99,
+    identidad_reporte_99,
     incrustar_bloques,
     metricas_prefijos_revisados,
     percentil_95,
     recorrer_conversacion,
     seleccionar_candidatos,
+    seleccionar_identidad_99,
     sha,
     sigmoide,
     validar_auditoria_semantica,
@@ -615,6 +619,162 @@ class TestPuertaFirmaRecibo(unittest.TestCase):
             resumen = validar_recibo_controles(r)
             self.assertEqual(resumen["conformidad"], 2)
             self.assertEqual(resumen["firma"], ps.firma_prompts())
+
+
+def _fixture_arte(nombre, entrada, c_val, coef=(0.1, -0.2), extra_datos=None):
+    datos = {"supervision_identidad": {"sha256": "b" * 64},
+             "auditoria_identidad": {"sha256": "c" * 64},
+             "particiones_sha256": "d" * 64,
+             "configuracion_sha256": "e" * 64}
+    if extra_datos:
+        datos.update(extra_datos)
+    return {"formato": FORMATO_99, "entrada": entrada,
+            "config_regresion": {"semilla": 42, "C": c_val,
+                                 "solver": "lbfgs", "max_iter": 1000,
+                                 "class_weight": None},
+            "pesos": {"coef": list(coef), "intercepto": 0.05,
+                      "n_iter": [5], "ms_ajuste": 1.0},
+            "encoder": {"id": "enc", "revision": ENCODER_REVISION,
+                        "congelado": True, "representacion": "r",
+                        "hidden": len(coef)},
+            "tokenizador": {"revision_declarada": ENCODER_REVISION,
+                            "tokenizer_sha256": "a" * 64,
+                            "tokens_por_bloque": 128, "truncamientos": 0},
+            "datos": datos, "codigo": {}, "maquina": {}, "librerias": {}}
+
+
+def _seis_fixtures(tmp):
+    from entrenar_tito_99 import _nombre_arte
+    rutas = []
+    for e in ("frase_actual_control", "historial_acumulado"):
+        for c in (0.1, 1.0, 10.0):
+            p = Path(tmp) / _nombre_arte(e, c)
+            p.write_text(json.dumps(
+                _fixture_arte(p.name, e, c), ensure_ascii=False),
+                encoding="utf-8")
+            rutas.append(p)
+    return rutas
+
+
+class TestIdentidadArtefactos(unittest.TestCase):
+    def test_seis_reales_con_bloques_exactos(self):
+        import tempfile
+        from entrenar_tito_99 import _nombre_arte
+        with tempfile.TemporaryDirectory() as tmp:
+            rutas = _seis_fixtures(tmp)
+            ident = identidad_artefactos_99(rutas)
+            self.assertEqual(len(ident), 6)
+            for p in rutas:
+                crudo = p.read_bytes()
+                arte = json.loads(crudo.decode("utf-8"))
+                entry = ident[p.name]
+                self.assertEqual(entry["sha256"], sha(crudo))
+                self.assertEqual(entry["entrada"], arte["entrada"])
+                self.assertEqual(entry["C"], float(
+                    arte["config_regresion"]["C"]))
+                # Copias exactas de los bloques, no resúmenes.
+                self.assertEqual(entry["encoder"], arte["encoder"])
+                self.assertEqual(entry["tokenizador"], arte["tokenizador"])
+                self.assertEqual(entry["datos"], arte["datos"])
+                for k in ("sha256", "entrada", "C", "encoder",
+                          "tokenizador", "datos"):
+                    self.assertIn(k, entry)
+            sel = seleccionar_identidad_99(
+                ident, _nombre_arte("historial_acumulado", 1.0))
+            self.assertEqual(sel, {
+                "nombre": _nombre_arte("historial_acumulado", 1.0),
+                "sha256": ident[_nombre_arte(
+                    "historial_acumulado", 1.0)]["sha256"]})
+
+    def test_peso_mutado_cambia_sha_medida(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            rutas = _seis_fixtures(tmp)
+            ident_antes = identidad_artefactos_99(rutas)
+            p = rutas[0]
+            arte = json.loads(p.read_text(encoding="utf-8"))
+            sha_antes = ident_antes[p.name]["sha256"]
+            arte["pesos"]["coef"] = [9.9, 9.9]
+            p.write_text(json.dumps(arte, ensure_ascii=False),
+                         encoding="utf-8")
+            ident_despues = identidad_artefactos_99(rutas)
+            # Mismo C y encoder, pero el hash medido ya no coincide:
+            # #100 bloquea (sha distinto del registrado).
+            self.assertNotEqual(ident_despues[p.name]["sha256"], sha_antes)
+            self.assertEqual(ident_despues[p.name]["C"],
+                             ident_antes[p.name]["C"])
+
+    def test_falla_cerrado_sin_archivo_ni_bloques(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            rutas = _seis_fixtures(tmp)
+            with self.assertRaises(ValueError):
+                identidad_artefactos_99([])
+            with self.assertRaises(ValueError):
+                identidad_artefactos_99([Path(tmp) / "no-existe.json"])
+            mala = Path(tmp) / "mala.json"
+            mala.write_text("{no json", encoding="utf-8")
+            with self.assertRaises(ValueError):
+                identidad_artefactos_99([mala])
+            otro = Path(tmp) / "otro.json"
+            arte = _fixture_arte("otro", "frase_actual_control", 0.1)
+            arte["formato"] = "otro-formato"
+            otro.write_text(json.dumps(arte), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                identidad_artefactos_99([otro])
+            sin_bloque = Path(tmp) / "sin_bloque.json"
+            arte2 = _fixture_arte("sin", "frase_actual_control", 0.1)
+            del arte2["datos"]
+            sin_bloque.write_text(json.dumps(arte2), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                identidad_artefactos_99([sin_bloque])
+            mala_c = Path(tmp) / "mala_c.json"
+            arte3 = _fixture_arte("mc", "frase_actual_control", 0.1)
+            arte3["config_regresion"]["C"] = "mucho"
+            mala_c.write_text(json.dumps(arte3), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                identidad_artefactos_99([mala_c])
+
+    def test_seleccionado_fuera_bloquea(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            rutas = _seis_fixtures(tmp)
+            ident = identidad_artefactos_99(rutas)
+            with self.assertRaises(ValueError):
+                seleccionar_identidad_99(ident, "tito_99_frase_C99.json")
+            with self.assertRaises(ValueError):
+                seleccionar_identidad_99({}, "x")
+            with self.assertRaises(ValueError):
+                seleccionar_identidad_99(None, "x")
+
+    def test_identidad_reporte_con_elegida(self):
+        import tempfile
+        from entrenar_tito_99 import _nombre_arte
+        with tempfile.TemporaryDirectory() as tmp:
+            rutas = _seis_fixtures(tmp)
+            ident, sel = identidad_reporte_99(
+                rutas, "historial_acumulado/C=1.0/u=0.5")
+            self.assertEqual(len(ident), 6)
+            self.assertEqual(sel["nombre"],
+                             _nombre_arte("historial_acumulado", 1.0))
+            self.assertEqual(sel["sha256"], ident[sel["nombre"]]["sha256"])
+            with self.assertRaises(ValueError):
+                identidad_reporte_99(rutas, "sin-formato")
+            with self.assertRaises(ValueError):
+                identidad_reporte_99(
+                    rutas, "historial_acumulado/C=99.0/u=0.5")
+
+    def test_compatible_con_guardar_real(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "tito_99_historial_C1.0.json"
+            guardar_artefacto(p, "historial_acumulado", 1.0,
+                              {"coef": [0.1, -0.2], "intercepto": 0.0,
+                               "n_iter": [5], "ms_ajuste": 1.0},
+                              "a" * 64, {"k": "v"}, {}, {}, {})
+            ident = identidad_artefactos_99([p])
+            self.assertIn(p.name, ident)
+            self.assertEqual(ident[p.name]["C"], 1.0)
 
 
 if __name__ == "__main__":

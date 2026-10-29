@@ -65,7 +65,28 @@ MODELO_POR_DEFECTO = "qwen3.5:4b"
 URL_POR_DEFECTO = "http://127.0.0.1:11435"
 SEMILLA = 42
 
-OPCIONES_MODELO = {"temperature": 0, "seed": SEMILLA, "num_predict": 200}
+OPCIONES_MODELO = {
+    "temperature": 1,
+    "seed": SEMILLA,
+    "num_predict": 4096,
+    "num_ctx": 8192,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 1.5,
+    "repeat_penalty": 1.0,
+}
+
+# Hipótesis think (#99): pensar=True con num_predict=4096, num_ctx=8192
+# explícito y muestreo de la ficha oficial Qwen sobre el MISMO prompt v4
+# del módulo del corrector. La variante intermedia (temp=0, 2048) quedó
+# registrada como FALLIDA por truncado de JSON, y la variante pensar=True
+# con num_predict=4096 sin num_ctx también: agotó el contexto total
+# (done_reason=length, prompt_eval + eval = 4096 exactos, contenido vacío;
+# ver recibo DIAG truncado del corrector). Nueva identidad: sus filas no se
+# mezclan con las de otra identidad (think/opciones exactas, con num_ctx).
+# El thinking se conserva separado por pasada y nunca alimenta a la otra.
+PENSAR = True
 
 FORMATO_RESPUESTA = {
     "type": "object",
@@ -107,22 +128,26 @@ ETIQUETAS_VALIDAS = (0, 1, None)
 # ---------------------------------------------------------------------------
 
 def info_modelo(cliente: ClienteOllama, modelo: str) -> dict:
-    """Identidad auditable del anotador: tag, digest, versión y parámetros."""
+    """Identidad auditable del anotador: tag, digest, versión, opciones y think."""
     return {
         "tag": modelo,
         "digest": cliente.modelos_instalados().get(modelo, "desconocido"),
         "ollama_version": cliente.version(),
         "opciones": dict(OPCIONES_MODELO),
+        "think": PENSAR,
         "formato": "json-schema etiqueta/fundamento/lineas_soporte",
     }
 
 
-def llamar_pasada(cliente: ClienteOllama, modelo: str, prompt: str) -> tuple[str, str]:
-    """Una llamada stateless: devuelve (respuesta_cruda, error).
+def llamar_pasada(cliente: ClienteOllama, modelo: str,
+                  prompt: str) -> tuple[str, str, dict, str]:
+    """Una llamada stateless: devuelve (respuesta_cruda, thinking, stats, error).
 
     Sin historial entre llamadas: cada pasada es un chat nuevo de un solo
     mensaje, así no se reutiliza estado ni respuestas entre pasadas ni
-    entre prefijos.
+    entre prefijos. El thinking se conserva separado y nunca se inyecta en
+    el prompt de la otra pasada. ``stats`` trae ``done_reason``,
+    ``eval_count`` y ``prompt_eval_count`` para diagnóstico.
     """
     try:
         r = cliente.chat(
@@ -130,11 +155,17 @@ def llamar_pasada(cliente: ClienteOllama, modelo: str, prompt: str) -> tuple[str
             [{"role": "user", "content": prompt}],
             formato=FORMATO_RESPUESTA,
             opciones=dict(OPCIONES_MODELO),
-            pensar=False,
+            pensar=PENSAR,
         )
-        return r["message"]["content"], ""
+        if not isinstance(r, dict):
+            return "", "", {}, "respuesta no es objeto Ollama"
+        mensaje = r.get("message", {}) or {}
+        stats = {k: r.get(k) for k in
+                 ("done_reason", "eval_count", "prompt_eval_count")}
+        return (mensaje.get("content", "") or "",
+                mensaje.get("thinking", "") or "", stats, "")
     except Exception as e:  # noqa: BLE001 - falla cerrada: todo error va a null
-        return "", f"error_modelo: {type(e).__name__}: {e}"
+        return "", "", {}, f"error_modelo: {type(e).__name__}: {e}"
 
 
 def validar_respuesta(objeto: object, n_lineas: int) -> tuple:
@@ -180,14 +211,14 @@ def revisar_prefijo(lineas_visibles: list[str], cliente: ClienteOllama,
     n = len(lineas_visibles)
     prompt1, prompt2 = (construir_prompt_pasada1(lineas_visibles),
                         construir_prompt_pasada2(lineas_visibles))
-    cruda1, err1 = llamar_pasada(cliente, modelo, prompt1)
+    cruda1, think1, stats1, err1 = llamar_pasada(cliente, modelo, prompt1)
     try:
         obj1 = json.loads(cruda1) if cruda1 else None
     except json.JSONDecodeError as e:
         obj1, err1 = None, f"json_invalido_pasada1: {e}"
     p1 = validar_respuesta(obj1, n) if err1 == "" else (None, "", [], err1)
-    # Segunda pasada: llamada nueva, sin ver la primera.
-    cruda2, err2 = llamar_pasada(cliente, modelo, prompt2)
+    # Segunda pasada: llamada nueva, sin ver la primera (ni su thinking).
+    cruda2, think2, stats2, err2 = llamar_pasada(cliente, modelo, prompt2)
     try:
         obj2 = json.loads(cruda2) if cruda2 else None
     except json.JSONDecodeError as e:
@@ -199,13 +230,23 @@ def revisar_prefijo(lineas_visibles: list[str], cliente: ClienteOllama,
         "fundamento": fundamento,
         "lineas_soporte": soporte,
         "motivo": motivo,
+        "think": PENSAR,
+        "opciones": dict(OPCIONES_MODELO),
         "revision": "IA-desarrollo contextual por prefijo. " + AUTORIZACION_DESARROLLO,
         "pasada1": {"etiqueta": p1[0], "fundamento": p1[1],
                     "lineas_soporte": p1[2], "error": p1[3],
-                    "prompt": prompt1, "respuesta_cruda": cruda1},
+                    "prompt": prompt1, "respuesta_cruda": cruda1,
+                    "thinking": think1,
+                    "done_reason": stats1.get("done_reason"),
+                    "eval_count": stats1.get("eval_count"),
+                    "prompt_eval_count": stats1.get("prompt_eval_count")},
         "pasada2": {"etiqueta": p2[0], "fundamento": p2[1],
                     "lineas_soporte": p2[2], "error": p2[3],
-                    "prompt": prompt2, "respuesta_cruda": cruda2},
+                    "prompt": prompt2, "respuesta_cruda": cruda2,
+                    "thinking": think2,
+                    "done_reason": stats2.get("done_reason"),
+                    "eval_count": stats2.get("eval_count"),
+                    "prompt_eval_count": stats2.get("prompt_eval_count")},
     }
 
 

@@ -198,5 +198,61 @@ class TestAuditoria(unittest.TestCase):
             self.assertTrue(ok)
 
 
+class TestThinkIdentidad(unittest.TestCase):
+    def test_llamar_pasada_envia_pensar_true_y_devuelve_thinking(self):
+        vistos = {}
+
+        class Cli:
+            def chat(self, modelo, mensajes, formato, opciones, pensar=None):
+                vistos["pensar"] = pensar
+                vistos["opciones"] = dict(opciones)
+                return {"message": {"content": resp(0), "thinking": "razón"}}
+
+        cruda, thinking, stats, err = st.llamar_pasada(Cli(), "m", "hola")
+        self.assertEqual(err, "")
+        self.assertEqual(thinking, "razón")
+        self.assertIs(st.PENSAR, True)
+        self.assertTrue(vistos["pensar"] is True)
+        self.assertEqual(vistos["opciones"]["num_predict"], 4096)
+        self.assertLessEqual(vistos["opciones"]["num_predict"], 4096)
+        self.assertEqual(vistos["opciones"]["num_ctx"], 8192)
+        self.assertEqual(vistos["opciones"]["temperature"], 1)
+        self.assertIn("done_reason", stats)
+        self.assertIn("eval_count", stats)
+
+    def test_revisar_prefijo_guarda_thinking_sin_cruzar_pasadas(self):
+        class Cli:
+            def __init__(self):
+                self.prompts = []
+
+            def chat(self, modelo, mensajes, formato, opciones, pensar=None):
+                self.prompts.append(mensajes[0]["content"])
+                return {"message": {"content": resp(0),
+                                    "thinking": f"t{len(self.prompts)}"}}
+
+        cli = Cli()
+        out = st.revisar_prefijo(["A: hola"], cli, "m")
+        self.assertEqual(out["etiqueta"], 0)
+        self.assertEqual(out["pasada1"]["thinking"], "t1")
+        self.assertEqual(out["pasada2"]["thinking"], "t2")
+        self.assertNotIn("t1", cli.prompts[1])
+        self.assertTrue(out["think"] is True)
+
+    def test_info_modelo_incluye_think_y_presupuesto(self):
+        class Cli:
+            def modelos_instalados(self):
+                return {"m": "d"}
+
+            def version(self):
+                return "0.40.8"
+
+        meta = st.info_modelo(Cli(), "m")
+        self.assertTrue(meta["think"] is True)
+        self.assertEqual(meta["opciones"], {
+            "temperature": 1, "seed": 42, "num_predict": 4096,
+            "num_ctx": 8192, "top_p": 0.95, "top_k": 20, "min_p": 0.0,
+            "presence_penalty": 1.5, "repeat_penalty": 1.0})
+
+
 if __name__ == "__main__":
     unittest.main()

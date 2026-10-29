@@ -165,13 +165,21 @@ class TestRevisionStateless(unittest.TestCase):
         self.assertEqual(out["motivo"], "respuesta_invalida")
 
 
+OPCIONES_VIGENTES = {
+    "temperature": 1, "seed": 42, "num_predict": 4096, "num_ctx": 8192,
+    "top_p": 0.95, "top_k": 20, "min_p": 0.0, "presence_penalty": 1.5,
+    "repeat_penalty": 1.0,
+}
+
+
 class TestIdentidadCache(unittest.TestCase):
     def _meta(self, tag="gemma4:e4b", digest="d1", version="0.40.8",
-              opciones=None):
+              opciones=None, think=True):
         return {
             "tag": tag, "digest": digest, "ollama_version": version,
-            "opciones": dict(opciones) if opciones is not None else {
-                "temperature": 0, "seed": 42, "num_predict": 300},
+            "opciones": dict(opciones) if opciones is not None else dict(
+                OPCIONES_VIGENTES),
+            "think": think,
             "formato": "json-schema etiqueta/fundamento/lineas_soporte",
         }
 
@@ -198,6 +206,34 @@ class TestIdentidadCache(unittest.TestCase):
         # Ni otra versión de Ollama con igual tag/digest/opciones.
         self.assertFalse(ps.es_registro_vigente_de(
             self._reg(self._meta(version="0.21.1")), "FIRMA", m))
+        # Ni think distinto (hipótesis think: pensar=True vs False no se mezcla).
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(think=False)), "FIRMA", m))
+        # Ni presupuesto/muestreo distinto (2048/temp0 fallida no se mezcla
+        # con la variante 4096/ficha-Qwen, ni 300 con ninguna).
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(opciones={"temperature": 0, "seed": 42,
+                                           "num_predict": 2048})),
+            "FIRMA", m))
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(opciones={"temperature": 0, "seed": 42,
+                                           "num_predict": 300})),
+            "FIRMA", m))
+        # Ni la variante 4k sin num_ctx (agotó el contexto total con
+        # done_reason=length): distinto contexto, distinta identidad.
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(opciones={
+                "temperature": 1, "seed": 42, "num_predict": 4096,
+                "top_p": 0.95, "top_k": 20, "min_p": 0.0,
+                "presence_penalty": 1.5, "repeat_penalty": 1.0})),
+            "FIRMA", m))
+        # Las filas anteriores a la identidad think (sin clave think) se rechazan.
+        sin_think = {"firma_prompts": "FIRMA", "modelo": {
+            "tag": m["tag"], "digest": m["digest"],
+            "ollama_version": m["ollama_version"],
+            "opciones": dict(m["opciones"]),
+            "formato": m["formato"]}}
+        self.assertFalse(ps.es_registro_vigente_de(sin_think, "FIRMA", m))
         # Ni la misma identidad con otra firma de prompts.
         self.assertFalse(
             ps.es_registro_vigente_de(self._reg(m), "OTRA_FIRMA", m))
@@ -206,6 +242,95 @@ class TestIdentidadCache(unittest.TestCase):
             {"firma_prompts": "FIRMA"}, "FIRMA", m))
         self.assertFalse(ps.es_registro_vigente_de(None, "FIRMA", m))
         self.assertFalse(ps.es_registro_vigente_de(self._reg(m), "FIRMA", None))
+
+
+class TestThinkPlumbing(unittest.TestCase):
+    def test_llamar_pasada_envia_pensar_true_y_presupuesto(self):
+        vistos = {}
+
+        class Cli:
+            def chat(self, modelo, mensajes, formato, opciones, pensar=None):
+                vistos["pensar"] = pensar
+                vistos["opciones"] = dict(opciones)
+                return {"message": {"content": resp(0), "thinking": "t-razón"}}
+
+        cruda, thinking, stats, err = ps.llamar_pasada(Cli(), "m", "hola")
+        self.assertEqual(err, "")
+        self.assertTrue(json.loads(cruda)["etiqueta"] == 0)
+        self.assertEqual(thinking, "t-razón")
+        self.assertIs(ps.PENSAR, True)
+        self.assertTrue(vistos["pensar"] is True)
+        self.assertEqual(vistos["opciones"]["num_predict"], 4096)
+        self.assertLessEqual(vistos["opciones"]["num_predict"], 4096)
+        self.assertEqual(vistos["opciones"]["num_ctx"], 8192)
+        self.assertEqual(vistos["opciones"]["temperature"], 1)
+        self.assertEqual(vistos["opciones"]["top_p"], 0.95)
+        self.assertEqual(vistos["opciones"]["top_k"], 20)
+        self.assertEqual(vistos["opciones"]["presence_penalty"], 1.5)
+        self.assertEqual(vistos["opciones"]["repeat_penalty"], 1.0)
+        self.assertIn("done_reason", stats)
+        self.assertIn("eval_count", stats)
+
+    def test_thinking_no_alimenta_a_la_otra_pasada(self):
+        class Cli:
+            def __init__(self):
+                self.prompts = []
+
+            def chat(self, modelo, mensajes, formato, opciones, pensar=None):
+                self.prompts.append(mensajes[0]["content"])
+                n = len(self.prompts)
+                return {"message": {
+                    "content": resp(0), "thinking": f"secreto-{n}"}}
+
+        cli = Cli()
+        out = ps.revisar_prefijo(["A: hola"], cli, "m")
+        self.assertEqual(out["etiqueta"], 0)
+        self.assertEqual(out["pasada1"]["thinking"], "secreto-1")
+        self.assertEqual(out["pasada2"]["thinking"], "secreto-2")
+        self.assertNotIn("secreto-1", cli.prompts[1])
+        self.assertNotIn("secreto-2", cli.prompts[0])
+        self.assertTrue(out["think"] is True)
+        self.assertEqual(out["opciones"]["num_predict"], 4096)
+        self.assertEqual(out["opciones"]["num_ctx"], 8192)
+        self.assertIn("done_reason", out["pasada1"])
+        self.assertIn("eval_count", out["pasada2"])
+
+    def test_info_modelo_incluye_think(self):
+        class Cli:
+            def modelos_instalados(self):
+                return {"m": "digest-x"}
+
+            def version(self):
+                return "0.40.8"
+
+        meta = ps.info_modelo(Cli(), "m")
+        self.assertEqual(meta["think"], True)
+        self.assertEqual(meta["opciones"]["num_predict"], 4096)
+        self.assertEqual(meta["opciones"]["temperature"], 1)
+        self.assertEqual(meta["digest"], "digest-x")
+
+
+class TestControlConforme(unittest.TestCase):
+    def _reg(self, etiqueta, err1="", err2=""):
+        return {
+            "etiqueta": etiqueta,
+            "pasada1": {"etiqueta": etiqueta, "error": err1},
+            "pasada2": {"etiqueta": etiqueta, "error": err2},
+        }
+
+    def test_acierto_binario(self):
+        self.assertTrue(ps.control_conforme(self._reg(1), 1))
+        self.assertTrue(ps.control_conforme(self._reg(0), 0))
+        self.assertFalse(ps.control_conforme(self._reg(1), 0))
+
+    def test_null_por_error_no_es_acierto(self):
+        # Ambas pasadas con error que caen a null: NO cuenta para null esperado.
+        self.assertFalse(ps.control_conforme(self._reg(None, "e1", "e2"), None))
+        self.assertFalse(ps.control_conforme(self._reg(None, "", "e2"), None))
+        self.assertFalse(ps.control_conforme(self._reg(None, "e1", ""), None))
+
+    def test_null_con_ambas_validas_si_es_acierto(self):
+        self.assertTrue(ps.control_conforme(self._reg(None), None))
 
 
 if __name__ == "__main__":

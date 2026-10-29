@@ -707,6 +707,111 @@ def cargar_artefacto_99(ruta: str | Path) -> dict:
     return arte
 
 
+def _es_hex64(valor: object) -> bool:
+    return (isinstance(valor, str) and len(valor) == 64
+            and all(c in "0123456789abcdef" for c in valor.lower()))
+
+
+def identidad_artefactos_99(rutas: list[str | Path]) -> dict:
+    """Identidad de artefactos #99 realmente guardados y recargados.
+
+    Contrato con #100 (`comprobar_tito_100._validar_identidad_99`): devuelve
+    `artefactos_identidad[filename]` con `{sha256, entrada, C, encoder,
+    tokenizador, datos}` donde `encoder`/`tokenizador`/`datos` son copias
+    exactas de esos bloques del archivo persistido y recargado, no
+    resúmenes. `sha256` es el hash del archivo tal cual está en disco.
+    Falla cerrado: archivo ilegible, JSON inválido, formato distinto de
+    `tito-99-logreg-v1`, bloques ausentes o C no numérico. No inventa pesos:
+    el hash se calcula sobre los bytes reales guardados.
+    """
+    if not rutas:
+        raise ValueError("identidad99 sin artefactos: lista vacía.")
+    ident: dict[str, dict] = {}
+    for ruta in rutas:
+        p = Path(ruta)
+        try:
+            crudo = p.read_bytes()
+        except OSError as e:
+            raise ValueError(
+                f"artefacto99 ilegible ({p.name}): {e}.") from e
+        try:
+            arte = json.loads(crudo.decode("utf-8"))
+        except ValueError as e:
+            raise ValueError(f"artefacto99 no JSON ({p.name}).") from e
+        # Valida formato/semilla/revisión/dimensión como la recarga real.
+        cargar_artefacto_99(p)
+        try:
+            entrada = arte["entrada"]
+            c_val = float(arte["config_regresion"]["C"])
+            encoder = arte["encoder"]
+            tokenizador = arte["tokenizador"]
+            datos = arte["datos"]
+        except (KeyError, TypeError, ValueError) as e:
+            raise ValueError(
+                f"artefactos_identidad[{p.name}] sin bloques reales.") from e
+        if not isinstance(entrada, str) or not entrada:
+            raise ValueError(
+                f"artefactos_identidad[{p.name}] sin entrada real.")
+        for bloque, nombre in ((encoder, "encoder"),
+                              (tokenizador, "tokenizador"),
+                              (datos, "datos")):
+            if not isinstance(bloque, dict):
+                raise ValueError(
+                    f"artefactos_identidad[{p.name}] sin bloque {nombre}.")
+        if p.name in ident:
+            raise ValueError(
+                f"artefactos_identidad[{p.name}] duplicado: rutas distintas "
+                "con el mismo nombre.")
+        ident[p.name] = {"sha256": sha(crudo), "entrada": entrada, "C": c_val,
+                         "encoder": encoder, "tokenizador": tokenizador,
+                         "datos": datos}
+    return ident
+
+
+def seleccionar_identidad_99(ident: dict, nombre: str) -> dict:
+    """`artefacto_seleccionado={nombre, sha256}` con el peso medido.
+
+    `nombre` debe estar en `artefactos_identidad` y su hash debe ser un
+    sha256 real: un peso mutado o sustituido cambia el hash del archivo y
+    deja de coincidir con lo medido (lo comprueba #100). Falla cerrado sin
+    identidad o sin seleccionado real.
+    """
+    if not isinstance(ident, dict) or not ident:
+        raise ValueError("sin artefactos_identidad: sin identidad no se congela.")
+    if not isinstance(nombre, str) or nombre not in ident:
+        raise ValueError(f"artefacto_seleccionado {nombre!r} fuera de "
+                         "artefactos_identidad: sin peso medido no se congela.")
+    sha_sel = ident[nombre].get("sha256")
+    if not _es_hex64(sha_sel):
+        raise ValueError("artefacto_seleccionado.sha256 no real.")
+    return {"nombre": nombre, "sha256": sha_sel}
+
+
+def identidad_reporte_99(rutas_artefactos: list[str | Path],
+                         elegida_config: str) -> tuple[dict, dict]:
+    """Identidad lista para el reporte #99 futuro (seis archivos + elegida).
+
+    `elegida_config` tiene formato `entrada/C=<c>/u=<u>` (el que produce la
+    selección y consume #100); el nombre del artefacto se deriva con
+    `_nombre_arte(entrada, C)`. Calcula sobre los archivos reales
+    guardados y recargados, sin inventar pesos. No genera el reporte: solo
+    la identidad que el reporte futuro incluirá como `artefactos_identidad`
+    y `artefacto_seleccionado`.
+    """
+    m = re.fullmatch(r"([^/]+)/C=([^/]+)/u=([^/]+)", str(elegida_config))
+    if not m:
+        raise ValueError(
+            f"elegida sin formato entrada/C/u: {elegida_config!r}.")
+    try:
+        c_eleg = float(m.group(2))
+    except ValueError as e:
+        raise ValueError(
+            f"elegida con C no numérico: {elegida_config!r}.") from e
+    ident = identidad_artefactos_99(rutas_artefactos)
+    nombre = _nombre_arte(m.group(1), c_eleg)
+    return ident, seleccionar_identidad_99(ident, nombre)
+
+
 class Tito99:
     """Filtro recargado desde un artefacto #99. Sin estado entre llamadas."""
 

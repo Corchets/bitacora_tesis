@@ -63,7 +63,39 @@ MODELO_POR_DEFECTO = "qwen3.5:4b"
 URL_POR_DEFECTO = "http://127.0.0.1:11435"
 SEMILLA = 42
 
-OPCIONES_MODELO = {"temperature": 0, "seed": SEMILLA, "num_predict": 300}
+OPCIONES_MODELO = {
+    "temperature": 1,
+    "seed": SEMILLA,
+    "num_predict": 4096,
+    "num_ctx": 8192,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 1.5,
+    "repeat_penalty": 1.0,
+}
+
+# Razonamiento previo del anotador auxiliar (hipótesis think, #99):
+# pensar=False con num_predict=300 dificultaba cumplir la regla triestado
+# (fundamentos inventados, ambiguos en 0). La variante intermedia
+# (pensar=True, temp=0, num_predict=2048) quedó registrada como FALLIDA:
+# el presupuesto truncaba los JSON (respuestas inválidas → null técnico).
+# La variante pensar=True con num_predict=4096 y el muestreo recomendado
+# de la ficha oficial Qwen (temperature=1, top_p=0.95, top_k=20, min_p=0,
+# presence_penalty=1.5, repeat_penalty=1.0, seed=42) también quedó
+# registrada como FALLIDA por agotamiento del CONTEXTO total, no del
+# presupuesto de generación: /api/ps con context_length=4096, una pasada
+# devolvió done_reason=length con prompt_eval=720 + eval=3376 = 4096
+# exactos y contenido vacío (ver
+# VALIDACION-PROMPTS-SUPERVISION-TITO-99-V4-THINK-9B-4K-TRUNCADO-2026-10-29.json).
+# Esta variante conserva pensar=True, num_predict=4096 y el mismo muestreo
+# sobre el MISMO prompt v4 y los MISMOS 8 controles, y agrega num_ctx=8192
+# explícito (autorización root msg_104fbe88139e): el thinking y el JSON
+# comparten la ventana de contexto. Nueva identidad/caché/recibo: sus filas
+# NO se mezclan con las de otra identidad (think/opciones exactas,
+# incluido num_ctx). El thinking se conserva separado por pasada y NUNCA
+# se usa como entrada de la otra pasada: ambas llamadas son stateless.
+PENSAR = True
 
 PROMPT_VERSION = "v4-contextual-2026-10-29"
 
@@ -183,9 +215,11 @@ def es_registro_vigente(registro: dict) -> bool:
 def identidad_compatible(registro: dict, meta_modelo: dict) -> bool:
     """True si el registro trae la misma identidad de anotador.
 
-    Compara tag, digest, versión de Ollama y opciones exactas. Cambiar de
-    modelo (p. ej. qwen→gemma) o de opciones invalida la fila: no se
-    reetiqueta ni se refirma, se reanota.
+    Compara tag, digest, versión de Ollama, opciones exactas y think.
+    Cambiar de modelo (p. ej. qwen→gemma), de opciones o de think invalida
+    la fila: no se reetiqueta ni se refirma, se reanota. Las filas
+    anteriores a la identidad think (sin clave ``think``) no son
+    compatibles con ``think=True``: se reanotan, no se heredan.
     """
     if not isinstance(registro, dict) or not isinstance(meta_modelo, dict):
         return False
@@ -195,6 +229,8 @@ def identidad_compatible(registro: dict, meta_modelo: dict) -> bool:
     for clave in ("tag", "digest", "ollama_version"):
         if meta.get(clave) != meta_modelo.get(clave):
             return False
+    if meta.get("think") != meta_modelo.get("think"):
+        return False
     return (meta.get("opciones") or {}) == (meta_modelo.get("opciones") or {})
 
 
@@ -217,21 +253,28 @@ def es_registro_vigente_de(registro: dict, firma_vigente: str,
 
 
 def info_modelo(cliente: ClienteOllama, modelo: str) -> dict:
-    """Identidad auditable del anotador: tag, digest, versión y parámetros."""
+    """Identidad auditable del anotador: tag, digest, versión, opciones y think."""
     return {
         "tag": modelo,
         "digest": cliente.modelos_instalados().get(modelo, "desconocido"),
         "ollama_version": cliente.version(),
         "opciones": dict(OPCIONES_MODELO),
+        "think": PENSAR,
         "formato": "json-schema etiqueta/fundamento/lineas_soporte",
     }
 
 
-def llamar_pasada(cliente: ClienteOllama, modelo: str, prompt: str) -> tuple[str, str]:
-    """Una llamada stateless: devuelve (respuesta_cruda, error).
+def llamar_pasada(cliente: ClienteOllama, modelo: str,
+                  prompt: str) -> tuple[str, str, dict, str]:
+    """Una llamada stateless: devuelve (respuesta_cruda, thinking, stats, error).
 
     Cada pasada es un chat nuevo de un solo mensaje: sin historial, sin
-    estado ni respuestas reutilizadas entre pasadas ni entre prefijos.
+    estado ni respuestas reutilizadas entre pasadas ni entre prefijos. El
+    ``thinking`` devuelto por el modelo se conserva separado para auditoría
+    y NUNCA se inyecta en el prompt de la otra pasada. ``stats`` trae el
+    diagnóstico de la llamada (``done_reason``, ``eval_count``,
+    ``prompt_eval_count``) para distinguir un JSON truncado por presupuesto
+    de un desacuerdo semántico real.
     """
     try:
         r = cliente.chat(
@@ -239,11 +282,17 @@ def llamar_pasada(cliente: ClienteOllama, modelo: str, prompt: str) -> tuple[str
             [{"role": "user", "content": prompt}],
             formato=FORMATO_RESPUESTA,
             opciones=dict(OPCIONES_MODELO),
-            pensar=False,
+            pensar=PENSAR,
         )
-        return r["message"]["content"], ""
+        if not isinstance(r, dict):
+            return "", "", {}, "respuesta no es objeto Ollama"
+        mensaje = r.get("message", {}) or {}
+        stats = {k: r.get(k) for k in
+                 ("done_reason", "eval_count", "prompt_eval_count")}
+        return (mensaje.get("content", "") or "",
+                mensaje.get("thinking", "") or "", stats, "")
     except Exception as e:  # noqa: BLE001 - falla cerrada: todo error va a null
-        return "", f"error_modelo: {type(e).__name__}: {e}"
+        return "", "", {}, f"error_modelo: {type(e).__name__}: {e}"
 
 
 def validar_respuesta(objeto: object, n_lineas: int) -> tuple:
@@ -292,14 +341,14 @@ def revisar_prefijo(
     n = len(lineas_visibles)
     prompt1 = construir_prompt_pasada1(lineas_visibles)
     prompt2 = construir_prompt_pasada2(lineas_visibles)
-    cruda1, err1 = llamar_pasada(cliente, modelo, prompt1)
+    cruda1, think1, stats1, err1 = llamar_pasada(cliente, modelo, prompt1)
     try:
         obj1 = json.loads(cruda1) if cruda1 else None
     except json.JSONDecodeError as e:
         obj1, err1 = None, f"json_invalido_pasada1: {e}"
     p1 = validar_respuesta(obj1, n) if err1 == "" else (None, "", [], err1)
-    # Segunda pasada: llamada nueva, sin ver la primera.
-    cruda2, err2 = llamar_pasada(cliente, modelo, prompt2)
+    # Segunda pasada: llamada nueva, sin ver la primera (ni su thinking).
+    cruda2, think2, stats2, err2 = llamar_pasada(cliente, modelo, prompt2)
     try:
         obj2 = json.loads(cruda2) if cruda2 else None
     except json.JSONDecodeError as e:
@@ -313,6 +362,8 @@ def revisar_prefijo(
         "motivo": motivo,
         "firma_prompts": firma_prompts(),
         "prompts_version": PROMPT_VERSION,
+        "think": PENSAR,
+        "opciones": dict(OPCIONES_MODELO),
         "revision": (
             "IA-desarrollo contextual por prefijo (corrección v4). "
             "autorizacion_desarrollo_99 contextual: revisión IA de desarrollo "
@@ -327,6 +378,10 @@ def revisar_prefijo(
             "error": p1[3],
             "prompt": prompt1,
             "respuesta_cruda": cruda1,
+            "thinking": think1,
+            "done_reason": stats1.get("done_reason"),
+            "eval_count": stats1.get("eval_count"),
+            "prompt_eval_count": stats1.get("prompt_eval_count"),
         },
         "pasada2": {
             "etiqueta": p2[0],
@@ -335,5 +390,30 @@ def revisar_prefijo(
             "error": p2[3],
             "prompt": prompt2,
             "respuesta_cruda": cruda2,
+            "thinking": think2,
+            "done_reason": stats2.get("done_reason"),
+            "eval_count": stats2.get("eval_count"),
+            "prompt_eval_count": stats2.get("prompt_eval_count"),
         },
     }
+
+
+def control_conforme(registro: dict, esperado) -> bool:
+    """True si el control es un acierto real (no técnico).
+
+    El observado debe igualar al esperado Y, cuando el esperado es null,
+    ambas pasadas deben traer respuesta válida (``error == ""``): un fallo
+    técnico o un JSON inválido que cae a null NO cuenta como acierto de un
+    control null. Para 0/1 el acuerdo ya implica ambas pasadas válidas.
+    No clasifica ni sintetiza etiquetas: solo valida conformidad.
+    """
+    if not isinstance(registro, dict):
+        return False
+    if registro.get("etiqueta") != esperado:
+        return False
+    if esperado is None:
+        for pasada in ("pasada1", "pasada2"):
+            p = registro.get(pasada)
+            if not isinstance(p, dict) or p.get("error"):
+                return False
+    return True
