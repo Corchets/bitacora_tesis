@@ -246,6 +246,103 @@ class TestGraficosInforme(unittest.TestCase):
         analisis = resumen.analizar(manifiesto, filas)
         return ids, manifiesto, filas, analisis
 
+    def _corrida_qa_diez_modelos(self):
+        """QA de layout: 10 tags exactos de MODELOS_101 × 10 casos IDS_101.
+
+        Sintético (sin inferencia): todo vishing avisa en L1 en las tres
+        condiciones (tasa 1.0 = 5/5, el caso que desbordaba el ylim) y las
+        legítimas avisan en L1 solo en directo (falsas 5/5 en directo).
+        """
+        import matriz_101 as _m101
+        modelos = list(_m101.MODELOS_101)
+        self.assertEqual(len(modelos), 10)
+        vishing = list(_m101.IDS_101[:5])
+        legitimas = list(_m101.IDS_101[10:15])
+        for c in vishing:
+            self.assertEqual(casos.cargar_referencia(c)["clase"], "vishing")
+        for c in legitimas:
+            self.assertIn(casos.cargar_referencia(c)["clase"], casos.LEGITIMAS)
+        ids = vishing + legitimas
+        configs = [f"{c}|{m}|tarea|ab" for m in modelos for c in
+                   ("directo", "tito-viejo", "tito-nuevo")]
+        manifiesto = _manifiesto(ids, configs)
+        manifiesto["funcionales"]["modelos"] = modelos
+        filas = []
+        for cfg in configs:
+            for cid in ids:
+                total = len(casos.cargar_texto(cid))
+                ref = casos.cargar_referencia(cid)
+                for n in range(1, total + 1):
+                    avisa = (ref["clase"] == "vishing" and n == 1) or (
+                        ref["clase"] in casos.LEGITIMAS
+                        and cfg.startswith("directo") and n == 1)
+                    fila = {c: "" for c in correr.COLUMNAS}
+                    fila.update({
+                        "config": cfg, "case_id": cid, "linea": n,
+                        "valida": "true", "aviso": "true" if avisa else "false",
+                        "consulta": "slm_valida",
+                        "ms": "7",
+                        "tito_ms": "" if cfg.startswith("directo") else "5",
+                        "slm_ms": "7", "tokens_prompt": "10",
+                        "tokens_salida": "2",
+                    })
+                    filas.append(fila)
+        analisis = resumen.analizar(manifiesto, filas)
+        return modelos, manifiesto, filas, analisis
+
+    def test_layout_diez_modelos_fracciones_dentro_del_eje(self):
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            modelos, manifiesto, filas, analisis = self._corrida_qa_diez_modelos()
+            base = Path(tmp) / "informe_101.md"
+            marca = ("QA SINTÉTICO — 10 modelos × 10 casos "
+                     "(fixture, no son resultados reales)")
+            with mock.patch.object(plt, "close"):
+                nombres = informe_101.generar_graficos(
+                    base, manifiesto, analisis, filas, marca_qa=marca)
+                figs = [plt.figure(n) for n in plt.get_fignums()]
+            try:
+                self.assertEqual(len(figs), 2)
+                fig_cal = figs[0]
+                fig_cal.canvas.draw()
+                renderer = fig_cal.canvas.get_renderer()
+                fracciones = [t for ax in fig_cal.axes for t in ax.texts
+                              if "/" in t.get_text()]
+                # 10 modelos × 3 condiciones × 2 paneles con denominador.
+                self.assertEqual(len(fracciones), 60)
+                # Tasas 1.0 presentes: el caso denso que desbordaba el ylim.
+                self.assertIn("5/5", {t.get_text() for t in fracciones})
+                for ax in fig_cal.axes:
+                    eje = ax.get_window_extent(renderer)
+                    titulo = ax.title.get_window_extent(renderer)
+                    for t in ax.texts:
+                        if "/" not in t.get_text():
+                            continue
+                        caja = t.get_window_extent(renderer)
+                        self.assertTrue(
+                            eje.contains(caja.x0, caja.y0)
+                            and eje.contains(caja.x1, caja.y1),
+                            f"fracción {t.get_text()!r} fuera del eje")
+                        self.assertFalse(
+                            caja.overlaps(titulo),
+                            f"fracción {t.get_text()!r} cruza el título")
+                # Marca sintética dentro de la figura y tabulares intactos.
+                svg = (Path(tmp) / nombres[0]).read_text(encoding="utf-8")
+                self.assertIn("SINT", svg)
+                self.assertIn("no son resultados reales", svg)
+                cfg0 = f"directo|{modelos[0]}|tarea|ab"
+                m = resumen.metricas(analisis[cfg0])
+                self.assertEqual(
+                    (m["vishing_con_aviso"], m["vishing"],
+                     m["falsas_alarmas"], m["legitimas"]),
+                    (5, 5, 5, 5))
+            finally:
+                for f in figs:
+                    plt.close(f)
+
     def test_fixture_qa_un_modelo_diez_tags_con_marca_sintetica(self):
         with tempfile.TemporaryDirectory() as tmp:
             ids, manifiesto, filas, analisis = self._corrida_qa()

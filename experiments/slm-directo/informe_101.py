@@ -187,7 +187,7 @@ def _figura_calidad(ruta_base: Path, modelos: list[str], analisis: dict,
         ax.set_title(subtitulo, fontsize=10, wrap=True)
         ax.set_xticks(list(range(n)))
         ax.set_xticklabels(modelos, rotation=30, ha="right", fontsize=9)
-        ax.set_ylim(0, 1.12)
+        ax.set_ylim(0, 1.35)
         ax.set_ylabel("proporción", fontsize=9)
         ax.grid(axis="y", linestyle=":", alpha=0.6)
     for gi, cond in enumerate(_CONDICIONES):
