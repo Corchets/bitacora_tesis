@@ -19,9 +19,11 @@ necesitan entender dónde están, qué consultar y cómo empezar con un issue.
 
 ## Product Purpose
 
-Mostrar el hito actual, los issues, el roadmap como grafo de dependencias interactivo y un glosario breve de forma visual.
-Cada brief explica resultado, contexto necesario, primer paso y evidencia de cierre.
-El roadmap dibuja los issues como nodos agrupados por frente y las dependencias reales de GitHub como flechas: qué está hecho (contexto concluido como #20), qué espera a qué (#19 espera a #39; #28 converge de #19 y #50), y qué puede empezar ya (#39, #50, #25). El laboratorio aparece como frente pausado separado, con sus condiciones de retomo y ramas preservadas, sin bloquear ni contarse como trabajo hecho. Al seleccionar un nodo, un panel lateral muestra qué existe, la siguiente acción, los bloqueos vigentes y la evidencia, sin perder el encuadre del mapa; una vista de lista accesible ofrece la misma información para teclado y móvil.
+Mostrar el hito actual, los issues, el roadmap por componentes del sistema y un
+glosario breve. Cada brief explica resultado, contexto necesario, primer paso y
+evidencia de cierre. El roadmap permite pasar de una parte de la arquitectura a
+sus avances, faltantes e issues abiertos. El laboratorio encoder/cascada se
+conserva en pausa con condiciones de retomo y fuentes enlazadas.
 
 ## Operating Context
 
@@ -32,12 +34,16 @@ GitHub conserva el backlog y los documentos de cada rama son fuentes primarias.
 ## Capabilities and Constraints
 
 - Mostrar todos los issues abiertos por hito; preparar briefs iniciales del hito activo.
-- Presentar el roadmap como un grafo interactivo de entregas (Cytoscape.js, bundle local en `dist/`): carriles por frente, aristas desde las dependencias nativas de GitHub, zoom, encuadre, paneo y nodos arrastrables.
-- Proveer tres opciones inmediatas claras desde el estado actual (primer par grabado #39, SLM directo con contexto #50, antecedentes #25).
-- Visibilizar el frente de laboratorio/cascada como opción suspendida para retomar con recaudos metodológicos (#51, D09) y ramas remotas preservadas.
-- Resaltar al seleccionar un nodo sus bloqueos entrantes y las entregas que desbloquea; un panel muestra qué existe, siguiente acción, bloqueos y evidencia enlazada.
-- Ofrecer la misma información en una lista DOM accesible por teclado (modo Lista), con filtros por frente y por disponibilidad, y cierre del panel con Escape.
-- Mantener la legibilidad en dispositivos móviles (390x844) con modo Lista por defecto, targets táctiles >= 44px y 0px de desborde horizontal.
+- Presentar el roadmap como un recorrido de componentes de audio a evaluación,
+  con corpus, protocolo e informe como soporte.
+- Mostrar avances parciales, pendientes e issues completados sin contar cierres
+  `not_planned` como implementación terminada.
+- Enlazar componente → issues abiertos → contrato, responsable y bloqueos reales
+  de GitHub, con acceso a fuentes y al componente del visor de arquitectura.
+- Mantener los próximos pasos editoriales y el laboratorio en pausa consultables.
+- Ofrecer Mapa/Lista, filtros y enlaces compartibles por componente e issue.
+- Apilar bloques y detalle en celular con botones accesibles por teclado y
+  targets táctiles de al menos 44 px.
 - Los briefs y el roadmap viven con la web; no son campos obligatorios de los issues.
 - Publicar al cambiar las dos ramas o los issues. Revisar las explicaciones mediante
   la skill explícita `actualizar-ayuda-memoria`, instalada a nivel proyecto.

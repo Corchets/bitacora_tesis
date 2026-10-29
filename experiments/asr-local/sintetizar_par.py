@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generador de audio sintético de humo para el par H1.
+"""Generador de audio sintético de humo para el par H1 y los ejemplos de soporte de la demo.
 
 Lee los diálogos de texto en experiments/slm-directo/casos/texto/
 y genera archivos WAV de 16 kHz mono (y opcionalmente estéreo A/B)
@@ -28,6 +28,14 @@ CASOS_DEFECTO = [
     {
         "id": "LG-WA-CONSULTA-01-tts",
         "texto_path": "experiments/slm-directo/casos/texto/LG-WA-CONSULTA-01-e01.txt",
+    },
+    {
+        "id": "SC-SOPORTE-CLAVE-01-tts",
+        "texto_path": "experiments/slm-directo/casos/texto/SC-SOPORTE-CLAVE-01-e01.txt",
+    },
+    {
+        "id": "LG-SUPPORT-INFO-01-tts",
+        "texto_path": "experiments/slm-directo/casos/texto/LG-SUPPORT-INFO-01-e01.txt",
     },
 ]
 

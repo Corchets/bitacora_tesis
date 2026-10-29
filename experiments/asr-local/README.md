@@ -40,6 +40,8 @@ El archivo `actualizaciones.jsonl` contiene:
 | Motor | Modelo | Modo | Tipo de entrega | Endpoint / Segmentación |
 |---|---|---|---|---|
 | `sherpa-zipformer` (principal) | [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | Streaming en tiempo real | Parciales y finales | Segmentación por silencio (`corte_silencio_s=0.8s`, `umbral_rms=0.005`) y endpoint nativo con purga de lookahead (0.3s) y cola de vaciado final (2.0s) |
+| `sherpa-parakeet` (en prueba) | [`csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8`](https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8) | Por frases, con borrador cada 0,5 s | Parciales y finales | Corte por silencio RMS (`corte_silencio_s=0.8s`), mínimo 0,3 s de voz, máximo 10 s por frase. Ver [PLAN-VOZ-REAL §9](PLAN-VOZ-REAL.md#9-zipformer-anda-mal-con-voz-real-probamos-parakeet-2026-10-28) |
+| `whisper-frases` (comparación) | `faster-whisper-large-v3-turbo` (int8 CPU) | Por frases, sin parciales | Finales por segmento | El mismo corte que `sherpa-parakeet`; no corre en tiempo real |
 | `whisper` (secundario) | `faster-whisper-base` (int8 CPU) | NO streaming (por lotes/segmentos) | Finales por segmento | Filtro VAD integrado de Whisper (`min_silence_duration_ms=500ms`) |
 
 ---
@@ -164,3 +166,26 @@ python3 -m unittest discover -s experiments/asr-local/tests -v
 1. **Audio sintético vs. voz humana:** El audio producido por `sintetizar_par.sh` es voz sintetizada (TTS) sin ruido de canal telefónico, respiración ni solapamiento real. La tasa de error medida sobre este audio es únicamente una prueba de humo y **no** constituye evidencia de desempeño en condiciones reales.
 2. **Dialecto y modelo:** El modelo Zipformer Kroko está entrenado principalmente en español general; su comportamiento frente al voseo rioplatense y términos locales debe validarse con las grabaciones humanas del piloto.
 3. **Medición en PC:** Las mediciones de RTF y memoria en esta máquina (Apple M1, 8 GB RAM) son mediciones de laboratorio en PC de desarrollo y **no** equivalen al desempeño en dispositivos móviles Android (ver [PREFACTIBILIDAD-TECNICA.md](../../docs/investigacion/PREFACTIBILIDAD-TECNICA.md)).
+
+---
+
+## 9. Voz real (#94)
+
+Herramientas para medir y mejorar el ASR con voz humana (acento tucumano y jerga), sin sumar demora. El plan, la
+regla para quedarse con un paso y el paso a paso para correrlo están en [PLAN-VOZ-REAL.md](PLAN-VOZ-REAL.md#8-cómo-correrlo);
+acá solo qué es cada archivo.
+
+| Archivo | Qué hace |
+|---|---|
+| `medir_voz_real.py` | Re-corre offline las pruebas guardadas del panel con cada variante y escribe `resumen.md`, `manifiesto.json` y `frases.jsonl`. |
+| `variantes_voz_real.py` | Catálogo de variantes y pasos del plan (`greedy`, corte, `rule2`, umbral RMS, `norm`, `beam`, `beam+hotwords`, `+diccionario`, Whisper) y cómo se corre cada una. |
+| `metricas_voz_real.py` | Alineado por frase, etiquetas de `reglas.py`, recall, WER/CER, agregados y la regla de paso. |
+| `hotwords.py` | `bpe.vocab` sintético para los hotwords de sherpa y revisión de cómo se parte cada uno (`python hotwords.py`). |
+| `diccionario.py` | Diccionario de corrección de la frase final (`MotorConDiccionario`); nunca toca parciales. |
+| `guion.py` | Carga y verifica el guion contra `reglas.py` y genera la hoja de grabación (`--hoja`). |
+| `voz-real/` | Datos en Git: `guion.json`, `HOJA-DE-GRABACION.md`, `hotwords.txt`, `jerga.txt`, `diccionario.csv` y `pruebas.csv`. |
+
+`MotorSherpaZipformer` acepta `decoding_method`, `max_active_paths`, `hotwords_file` y `hotwords_score`; los valores por
+defecto son los del panel (greedy, sin hotwords) y `metadatos()["decodificacion"]` registra lo usado. `MotorFasterWhisper`
+acepta `hotwords` e `initial_prompt`. Al medir, cada variante corre en su propio subproceso para que la memoria pico sea la suya.
+

@@ -23,10 +23,13 @@ consentimientos-firmados/
 *.pem
 
 # Artefactos grandes/regenerables
+__pycache__/
+*.py[cod]
 models/checkpoints/
 artifacts/
 experiments/laboratorio/modelos/
 experiments/asr-local/modelos/
+experiments/asr-local/audio
 
 # Python
 .venv/
@@ -53,3 +56,6 @@ ayuda-memoria/dist/
 ayuda-memoria/node_modules/
 ayuda-memoria/.vercel/
 .impeccable/
+
+# Llamadas en vivo: transcripciones de voces del equipo; se copian a corridas/ solo si se decide
+experiments/voip/llamadas/

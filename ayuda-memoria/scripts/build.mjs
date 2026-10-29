@@ -126,6 +126,9 @@ const roadmap = {
 const frontOfIssue = new Map();
 for (const front of roadmapRaw.parallelFronts) for (const num of front.issues) frontOfIssue.set(num, front.id);
 const graphed = new Set(frontOfIssue.keys());
+for (const component of roadmapRaw.systemMap?.components ?? []) {
+  for (const num of component.issues) graphed.add(num);
+}
 for (const num of [...graphed]) for (const dep of dependencies[num] ?? []) graphed.add(dep.number);
 const graphNodes = [...graphed].map(num => {
   const issue = issueByNumber[num];
@@ -184,12 +187,6 @@ const snapshot = { version: 1, repository: config.repository, generatedAt: new D
 await mkdir(path.join(root, 'dist'), { recursive: true });
 if (!process.argv.includes('--data-only')) {
   await cp(path.join(root, 'public'), path.join(root, 'dist'), { recursive: true });
-  try {
-    await cp(path.join(root, 'node_modules/cytoscape/dist/cytoscape.esm.min.mjs'), path.join(root, 'dist/cytoscape.esm.min.js'));
-    await cp(path.join(root, 'node_modules/cytoscape/LICENSE'), path.join(root, 'dist/cytoscape.LICENSE.txt'));
-  } catch {
-    throw new Error('Falta el bundle de cytoscape. Ejecutá `npm install` en ayuda-memoria antes de generar.');
-  }
   // Apartado estático: la visualización de arquitectura (PR #58) viaja con el sitio.
   // Si la carpeta no existe en la revisión, se avisa y no se corta el build.
   const arquitecturaSrc = path.join(root, '../docs/ingenieria/arquitectura-web');

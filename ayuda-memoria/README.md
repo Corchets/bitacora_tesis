@@ -17,10 +17,9 @@ npm run build
 npm run preview
 ```
 
-Abrir `http://127.0.0.1:4173`. La única dependencia de aplicación es
-[Cytoscape.js](https://js.cytoscape.org/) (grafo del roadmap): está fijada en
-`package.json`/`package-lock.json` y `npm run build` copia su bundle ESM y la
-licencia dentro de `dist/`, de modo que la web no usa CDN.
+Abrir `http://127.0.0.1:4173` o ir directamente al roadmap con
+`http://127.0.0.1:4173/?vista=roadmap`.
+La interfaz usa HTML, CSS y JavaScript sin dependencias de aplicación ni CDN.
 El generador acepta `GH_TOKEN`/`GITHUB_TOKEN`; localmente también puede usar la
 sesión existente de `gh`. El token se usa solamente para leer GitHub y no se
 escribe en los datos de la web. Sin token aplican los límites de la API pública.
@@ -37,11 +36,20 @@ dependencias nativas. Usa archivos de cada commit, con enlaces a esa revisión.
 - Términos: `docs/GLOSARIO.md` de cada rama.
 - Decisiones: `docs/gestion/MAPA-DECISIONES.md` de cada rama.
 - Estado, responsable y bloqueos: GitHub, sin inferirlos de un brief.
-- Grafo del roadmap: `data.roadmap.graph` se arma desde las dependencias nativas
-  (`blocked_by`) de los issues de los frentes y de los bloqueos que esos issues
-  referencian, incluidos cerrados con su `state_reason`. `roadmap.json` aporta la
-  orientación editorial (frentes, próximos pasos, `edgeNotes`, laboratorio en
-  suspenso); nunca define bloqueos en texto narrativo.
+- Roadmap por componentes: `roadmap.json > systemMap` es la correspondencia
+  editorial única entre los bloques del sistema, sus artefactos, pendientes e
+  issues. La vista sigue el recorrido de audio a evaluación, con corpus,
+  protocolo e informe como soporte. Los enlaces llevan al mismo componente de
+  arquitectura, sin modificar aquella visualización.
+- Estados y dependencias del roadmap: `data.roadmap.graph` conserva los issues
+  asociados y sus bloqueos nativos de GitHub, incluidos cerrados con
+  `state_reason`. El panel permite navegar esas relaciones. `completed` y
+  `not_planned` se distinguen; documentos y código experimental se muestran
+  como avances parciales cuando existen en el árbol de la rama seleccionada.
+  «Entregas cerradas» exige que todos los issues asociados estén completados;
+  no certifica la validación integral del componente. Un bloque sin issue
+  específico sigue visible. Los avances editoriales recientes conservan sus
+  fuentes enlazadas y pueden corresponder a otra rama.
 - Orientaciones editoriales: `briefs.json`. No son campos obligatorios del issue
   ni un segundo registro de su estado.
 
@@ -49,12 +57,45 @@ Si una consulta falla, el build falla: no publica un snapshot viejo como actual.
 La última publicación válida sigue disponible con su fecha; después de 24 horas
 muestra una advertencia para contrastar el estado en GitHub.
 
-## Revisar briefs con la skill
+## Cerrar trabajo con la skill
 
 Invocar [`$actualizar-ayuda-memoria`](../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
-Es una skill del proyecto, disponible por invocación explícita. `AGENTS.md` no
-necesita nuevas reglas. La primera versión prioriza los cinco issues de H2;
-el resto conserva el contrato original y muestra el brief pendiente.
+Es una skill compartida en el repositorio, disponible por invocación explícita
+desde el asistente. Después de actualizar su copia de la rama, cada integrante
+puede pedir, reemplazando el número por su issue:
+
+```text
+$actualizar-ayuda-memoria terminé el issue #50; prepará el PR hacia laboratorio-main.
+```
+
+Revisa la evidencia y los criterios del issue, actualiza únicamente las fuentes,
+componentes del roadmap y briefs afectados, completa el cierre documental,
+verifica los cambios y prepara el commit, push y PR. Si se invoca desde la ficha
+de la skill, el prompt sugerido usa el issue terminado en esa sesión. Si no puede
+identificarlo, pregunta el número. El PR queda listo para revisión del equipo.
+
+Para continuar también con la integración y comprobar el deploy:
+
+```text
+$actualizar-ayuda-memoria terminé el issue #50; integrá y publicá en laboratorio-main.
+```
+
+Respeta checks, revisiones, permisos y decisiones abiertas; comprueba Actions y
+la versión pública antes de informar que se publicó. El deploy de GitHub sigue
+siendo automático al integrar; esta skill hace la revisión editorial y acompaña
+el flujo. Los secrets ya están en GitHub y no se comparten entre compañeros.
+
+El uso anterior permanece disponible:
+
+```text
+$actualizar-ayuda-memoria solo briefs del issue #50 en laboratorio-main.
+```
+
+Ese modo revisa únicamente briefs y verifica localmente. `AGENTS.md` conserva sus
+reglas y GitHub continúa como único backlog. Las instrucciones completas y los
+límites de cada modo viven en el `SKILL.md` enlazado arriba.
+
+### Formato y revisión de briefs
 
 Cada entrada de `briefs.json` tiene:
 
@@ -82,6 +123,12 @@ espera revisión. Una fuente ausente se identifica como pendiente. Revisado
 significa que la orientación se contrastó; no significa que el issue terminó ni
 que el código citado cumple su contrato.
 
+El build consulta commits remotos de las ramas configuradas. Un cambio local o
+todavía en un PR no aparece como fuente de la rama destino: el brief puede
+redactarse, pero su revisión queda pendiente hasta poder contrastar la fuente
+integrada. La skill retoma esa revisión después del merge cuando se pidió el
+modo de integración y publicación.
+
 Los documentos de laboratorio conservan acuerdos anteriores a Main. Sus briefs
 señalan la diferencia y empiezan por verificar versiones; no trasladan el método
 de Main como si ya estuviera integrado allí.
@@ -102,24 +149,35 @@ El proyecto de producción asociado es `bitacora-tesis-ayuda-memoria` (equipo
 `nacho1706s-projects`), disponible públicamente por enlace en
 `https://bitacora-tesis-ayuda-memoria.vercel.app`.
 
-El [workflow](../.github/workflows/ayuda-memoria.yml) usa el código de la web en
-`main` y consulta las dos ramas. Corre `npm ci` antes de generar para tener el
-bundle fijado de Cytoscape. Publica después de pushes, cambios de issues,
-comentarios y milestones. La revisión horaria recupera también cambios de
-dependencias nativas; no se promete actualización instantánea de esas relaciones.
+El [workflow](../.github/workflows/ayuda-memoria.yml) publica al recibir pushes en
+`main` o `laboratorio-main`. Descarga el commit exacto que disparó la ejecución:
+un push a laboratorio publica su interfaz; un push a main publica la de main.
+En ejecución manual usa el commit de la rama elegida en **Run workflow**.
+La generación sigue consultando documentos e issues de ambas ramas.
+
+Las dos ramas publican al mismo proyecto y URL de producción. Las ejecuciones
+comparten una cola; el último deploy exitoso es el visible. No se crean sitios
+separados por rama. Corre `npm ci`, las pruebas y el build antes de publicar.
+
+Los cambios de issues, comentarios, milestones y la revisión horaria se ejecutan
+desde la rama predeterminada del repositorio (`main`). El workflow debe existir
+allí para recibir esos eventos, y esas ejecuciones publican la interfaz de main.
+La revisión horaria recupera también cambios de dependencias nativas; no se
+promete actualización instantánea de esas relaciones.
 La redacción de los briefs se revisa con la skill; el workflow no ejecuta IA.
 
 Para activarlo:
 
-1. Integrar estos archivos en `main`; el workflow también debe existir en
-   `laboratorio-main` para recibir sus pushes. No requiere trasladar ni reescribir
-   los documentos de laboratorio.
+1. Integrar la web y el workflow en cada rama que deba publicar por push
+   (`main` y `laboratorio-main`). Mantener el workflow en `main` también habilita
+   eventos del repositorio y ejecuciones programadas. No requiere trasladar ni
+   reescribir los documentos de laboratorio.
 2. Proyecto en Vercel creado y configurado (`bitacora-tesis-ayuda-memoria`):
    protección SSO desactivada y URL pública verificada de forma anónima sin inicio de sesión.
-3. Secrets en GitHub Actions: `VERCEL_ORG_ID` y `VERCEL_PROJECT_ID` ya están
-   configurados en el repositorio. Falta `VERCEL_TOKEN` (requiere crear un
-   personal access token clásico en `https://vercel.com/account/tokens`, ya que la
-   sesión OAuth de la CLI es de corta duración y no permite emitir tokens desatendidos).
+3. Secrets en GitHub Actions: `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` y
+   `VERCEL_TOKEN` están configurados en el repositorio (verificado el
+   2026-10-21). Mantener vigente el token de acceso de Vercel, creado en
+   `https://vercel.com/account/tokens`; sus valores permanecen fuera de Git.
 4. Ejecutar «Actualizar ayuda memoria» desde Actions → Run workflow una vez
    cargado `VERCEL_TOKEN` y realizada la integración.
 

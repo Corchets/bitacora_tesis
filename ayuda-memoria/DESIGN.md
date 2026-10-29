@@ -63,22 +63,38 @@ Los tokens están implementados en `ayuda-memoria/public/styles.css` sobre `:roo
 
 ## 2.4 Componentes del Mapa de Entregas (Roadmap)
 
-La vista de Roadmap (`roadmapView`) implementa un grafo de dependencias no lineal con [Cytoscape.js](https://js.cytoscape.org/), librería vanilla de grafos (zoom, paneo, arrastre y selección por canvas) que no exige framework: su bundle ESM minificado se fija en `package.json`/`package-lock.json` y `scripts/build.mjs` lo copia a `dist/` junto con su licencia, sin CDN. Las aristas provienen exclusivamente de las dependencias nativas de GitHub (`data.roadmap.graph`, construido desde la API `blocked_by`); `roadmap.json` aporta solo la orientación editorial (frentes, próximos pasos, notas de arista, laboratorio) y los issues cerrados necesarios entran al grafo con su `state_reason` para distinguir `completed` de `not_planned`.
+La vista de Roadmap (`roadmapView`) organiza componentes según el recorrido
+Audio → Transcripción → Contexto y detección → Alerta → Registro y evaluación.
+Corpus, protocolo e informe forman una banda de soporte. Son botones HTML con
+el mismo vocabulario y enlaces al visor de arquitectura, que conserva su diseño.
 
-1. **Carriles por frente (`node:parent.front-*`):**
-   - Cada frente editorial es un recuadro contenedor con fondo tenue (`FRONT_BG`) y filete del color del frente (`FRONT_COLORS`); las columnas se ordenan de izquierda a derecha según el flujo de dependencias (Concluido → Corpus → Detección → Metodología → Cierre) y cada issue ocupa una posición fija ordenada por profundidad — no hay simulación en movimiento.
-   - El laboratorio es un carril separado, debajo y con filete punteado terracota: nunca cuenta como bloqueo ni como trabajo completado. Su única arista (`#51 → laboratorio`) es `conditional` (punteada, con la nota editorial de retomo).
-2. **Nodos de entrega:**
-   - Círculos de 34px con etiqueta `#NN` y título abreviado (el título completo va al panel): disponibles (`is-free`, filete ink sobre blanco), en espera (`is-blocked`, fondo coral y filete terracota), completados (`is-done`, verde relleno), retirados (`is-notplanned`, punteado terracota), sin verificar (`is-unknown`, punteado gris) y pausados (`is-paused`, punteado terracota). Los próximos pasos sugeridos llevan halo lima (`is-next`, `underlay`).
-   - Flechas: bloqueo vigente en terracota, dependencia ya resuelta en verde y condición de retomo punteada con su nota editorial (`edgeNotes` de `roadmap.json`).
-3. **Barra de herramientas (`.rm-toolbar`):**
-   - Alternancia Mapa/Lista (`.rm-modes`), filtro por frente, «Solo disponibles», «Foco en próximos pasos» (atenua lo demás sin reencuadrar), zoom −/+, Encuadrar, Restablecer y una leyenda desplegable (`.rm-legend`) con frentes, estados y tipos de flecha.
-   - Filtros y foco solo ocultan o atenúan elementos (`f-hidden`, `focus-dim`): nunca regeneran el lienzo ni reinician el encuadre. La selección persiste en la URL (`?vista=roadmap&nodo=i50`, `modo=lista`) para compartir una vista.
-4. **Lista accesible (`.roadmap-list`):**
-   - Modo Lista con la misma información en botones DOM (`.rl-node`): número, título, hito y píldora de estado (`Disponible`, `Espera #NN`, `Completado`, `Pausado`). Es la vista por defecto en pantallas ≤ 700px y la alternativa completa para teclado y lectores de pantalla.
-5. **Panel de detalle (`.rm-panel`):**
-   - En modo Mapa el lienzo ocupa todo el ancho disponible y el panel aparece como capa superpuesta a la derecha (`.rm-panel.has-sel`, `position: absolute`) recién al seleccionar: no roba ancho inicial ni reinicia el zoom. En modo Lista queda debajo de la lista, en flujo normal. Muestra hito, frente, responsable, enlaces a GitHub y a la vista de trabajo, estado del brief, qué se logra, siguiente acción, bloqueos vigentes como lista navegable con notas de arista (`.rm-edge-note`), dependencias sin verificar, entregas que desbloquea y evidencia del frente.
-   - Al seleccionar un nodo, el grafo atenúa lo no relacionado (`.dimmed`) y colorea entrantes (terracota, `.dep-in`) y salientes (verde, `.dep-out`); Escape o tocar el fondo limpia la selección.
+1. **Bloques (`.system-node`):** nombre, función, pendiente visible y cantidad de
+   issues abiertos. El avance combina artefactos presentes en el árbol de la
+   rama seleccionada con el estado real de los issues. Los textos editoriales y
+   la correspondencia componente→issues viven en `roadmap.json > systemMap`.
+2. **Estados:** «Avance parcial» en ocre identifica documentos o código
+   experimental; «Pendiente» tiene borde terracota discontinuo; «Entregas
+   cerradas» en verde exige todos los issues asociados cerrados como
+   `completed`. No equivale a certificación del componente. `not_planned` nunca
+   cuenta como terminado. «Sin issue específico» hace visibles huecos de
+   seguimiento, como VoIP, sin crear tareas locales.
+3. **Controles:** Mapa del sistema/Lista, filtros de issues abiertos, sin
+   bloqueos, trabajo pendiente y componentes sin issue. Las flechas entre
+   columnas indican recorrido conceptual; las dependencias reales se consultan
+   en el detalle del issue. «Sin bloqueos» excluye condiciones documentales
+   registradas, además de dependencias abiertas.
+4. **Detalle (`.system-detail`):** debajo del recorrido; muestra qué existe y
+   qué falta, artefactos enlazados al commit de la rama, issues abiertos,
+   cerrados, decisiones y avances editoriales con su fuente. Al abrir un issue
+   aparecen su contrato y bloqueos nativos; se puede volver al componente.
+   La selección recibe foco y Escape retorna al bloque de origen.
+5. **Adaptación y enlaces:** cinco columnas en escritorio, con desplazamiento
+   horizontal en anchos intermedios y una columna en celular. Lista usa dos
+   columnas y una en celular. `componente`, `nodo`, `modo` y `filtro` en la URL
+   permiten compartir una selección. Los filtros conservan el detalle abierto.
+6. **Contexto adicional:** próximos pasos, avances recientes y laboratorio
+   encoder/cascada en pausa, más calendario y decisiones, quedan en secciones
+   desplegables. El backlog continúa en GitHub.
 
 ---
 
@@ -106,7 +122,7 @@ El layout se organiza en una grilla de dos columnas principales: barra lateral d
    - La barra lateral se convierte en cabecera estática superior con navegación en grilla de 2 columnas de botones táctiles (mínimo `44px` de altura).
    - Ocultamiento de metadatos no críticos en el riel de fases (conserva códigos táctiles `H0`–`H5`).
    - Filas de issues optimizadas en espaciado horizontal.
-   - El roadmap abre en modo Lista (`.roadmap-list`, alternable a Mapa) y el panel de detalle se apila debajo de la lista.
+   - El roadmap muestra los componentes apilados, con el detalle debajo del recorrido. El modo Lista sigue disponible.
 
 ---
 
@@ -125,4 +141,4 @@ El layout se organiza en una grilla de dos columnas principales: barra lateral d
   - Regla `@media(prefers-reduced-motion: reduce)` que neutraliza todas las transiciones y animaciones (`animation: none !important; transition: none !important; scroll-behavior: auto !important`).
   - Scroll automático instantáneo (`instant`) en lugar de animado (`smooth`) cuando dicha preferencia está activa.
 - **Auditoría axe:**
-  - Verificada en 16 combinaciones (escritorio y móvil, ambas ramas, 4 vistas) con cero (0) violaciones de accesibilidad.
+  - La versión previa registró cero violaciones en 16 combinaciones. Ese resultado no verifica el roadmap modificado el 2026-10-21; en esta sesión no hubo navegador disponible para repetir la revisión visual o axe.
