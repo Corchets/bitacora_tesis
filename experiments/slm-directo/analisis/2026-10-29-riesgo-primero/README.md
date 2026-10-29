@@ -71,7 +71,57 @@ Otros modelos para después: `qwen3.5:4b`, `qwen3.5:2b`, `gemma2:2b`, `gemma3:27
 
 ## Resultados
 
-Pendiente: corrida de `gemma3n:e2b` en la notebook de Evaristo.
+### 2026-10-29 · `gemma3n:e2b` · set rápido (20 casos) · notebook de Evaristo, solo CPU
+
+Corrida [`2026-10-29_182016_rapida-gemma3n-e2b`](../../corridas/2026-10-29_182016_rapida-gemma3n-e2b/resumen.md)
+(Windows 11, 8 núcleos, 15,7 GB, Ollama 0.40.13), tablas completas en [`acumular.md`](acumular.md).
+Son 20 casos: cada uno mueve los porcentajes 10 puntos.
+
+**Tiempo.**
+
+| | `v2` (JSON completo) | `riesgo` (dos etapas) | |
+|---|---|---|---|
+| ms por línea, p50 / p95 | 10 036 / 13 576 | 1 918 / 2 297 | **5,2× más rápido** |
+| Tokens de salida por línea, p50 | 92 | 11 | |
+| Primera línea de cada caso, p50 | 7 266 | 2 033 | |
+| ms por llamada, p50 | 259 056 | 53 088 | |
+| Demora del aviso, p50 (línea del aviso) | 9 790 | 8 466 (etapa 1 ~1,9 s + etapa 2 ~6,6 s) | casi igual |
+
+- El salto está en las líneas sin aviso, que son casi todas. Con `v2`, cada línea tarda ~10 s,
+  más de lo que dura una frase: el detector se atrasa respecto de la llamada. Con `riesgo`
+  queda en ~2 s y puede seguirla.
+- El aviso en sí tarda casi lo mismo, porque la etapa 2 (evidencia y motivo) escribe ~60
+  tokens. La alerta podría mostrarse apenas termina la etapa 1 (~2 s) y completar el motivo
+  después: esto no se probó todavía.
+
+**Calidad** (estafas con aviso / falsas alarmas sobre 10 y 10):
+
+| Política | `v2` | `riesgo` |
+|---|---|---|
+| Alerta del modelo / umbral > 0,6 (la de la corrida) | 10 / 9 | 10 / 6 |
+| Umbral > 0,7 | 10 / 9 | 10 / 3 |
+| 2 seguidas > 0,7 | 10 / 8 | 9 / 2 |
+| EMA 0,3 > 0,7 | 10 / 7 | 8 / 1 (única ✔ meta 80/15) |
+| 2 seguidas > 0,8 | 10 / 3 | 1 / 0 |
+
+- `riesgo` no perdió estafas frente a `v2` con umbral 0,6 o 0,7, y tuvo menos falsas alarmas.
+  Con el `v2` el 9 de cada 10 legítimas avisan: con este modelo es peor línea base.
+- Con `riesgo` el modelo usa pocos valores (0,75 aparece en 103 de 524 líneas) y casi nunca
+  pasa de 0,8: los umbrales ≥ 0,8 casi no avisan. En las estafas, una vez que aparece el
+  pedido el riesgo se queda en 0,75 hasta el final; en varias legítimas sube a 0,65–0,75 unas
+  pocas líneas y vuelve a bajar. Por eso acumular (k seguidas, EMA) baja las falsas alarmas.
+- La elección hecha en la mitad A (EMA 0,3 > 0,6) dio 5/5 estafas y 3/5 falsas alarmas en la B:
+  con 10 casos por mitad la elección no es estable. Hay que confirmarlo con los 150.
+- Falsas alarmas de `riesgo` (motivo de la etapa 2): firma al recibir un paquete, traer un
+  informe médico, número de trámite «sin datos de acceso», nombre del consultorio y letras del
+  correo, código impreso en un resumen de tarjeta. Son pedidos de datos comunes, no de claves
+  ni de dinero.
+
+**Para seguir.** (1) Correr los 150 casos con `riesgo` y la política ganadora acá (umbral > 0,7
+o EMA 0,3 > 0,7); (2) probar mostrar la alerta al final de la etapa 1; (3) probar otros
+modelos con `--lista rapida-20`. Ajustar el prompt mirando estas falsas alarmas sería
+afinar sobre desarrollo: si se hace, se registra en `prompts/README.md` y se mide en casos
+que no se usaron para ajustarlo.
 
 ## Límites
 
