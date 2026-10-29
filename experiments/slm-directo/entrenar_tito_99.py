@@ -369,21 +369,31 @@ def validar_recibo_controles(ruta: Path | None = None) -> dict:
     return {"firma": recibo["firma_prompts"],
             "modelo": modelo["tag"], "digest": modelo["digest"],
             "ollama_version": modelo["ollama_version"],
+            "opciones": modelo.get("opciones"),
+            "think": modelo.get("think"),
             "conformidad": recibo["conformidad"], "total": recibo["total"]}
 
 
 def validar_registros_supervision(registros: list[dict], textos: dict,
-                                  particion_de: dict[str, str]) -> dict:
+                                  particion_de: dict[str, str],
+                                  identidad_modelo: dict | None = None) -> dict:
     """Valida el artefacto contextual real prefijo por prefijo.
 
     Rechaza (fail-closed) firma ausente o distinta a la vigente, ademas de
     heuristico/manipulado/futuro: hash del prefijo visible, etiqueta fuera
     de 0/1/nulo, evidencia sin lineas de soporte en rango, motivo invalido
     o incoherente con la etiqueta, pasada sin prompt con las lineas
-    visibles o con sufijo futuro, modelo sin identidad (tag/digest/opciones
-    deterministas) y cobertura distinta de la esperada (todos los prefijos
-    de entrenamiento/validacion, exactamente una vez, con ambas clases en
+    visibles o con sufijo futuro, modelo sin identidad auditable y
+    cobertura distinta de la esperada (todos los prefijos de
+    entrenamiento/validacion, exactamente una vez, con ambas clases en
     entrenamiento).
+
+    Identidad del anotador: si se da `identidad_modelo` (la del recibo de
+    controles validado) cada fila debe ser `identidad_compatible` con ella
+    (tag, digest, version de Ollama, opciones exactas y think); si se
+    omite, cada fila debe igualar exactamente `OPCIONES_MODELO`/`PENSAR`
+    vigentes. Cambiar temperatura, contexto, think, tag o digest invalida
+    la fila: se reanota, no se hereda.
     """
     firma_vigente = _firma_prompts_vigente()
     esperados = {(cid, k) for cid, lineas in textos.items()
@@ -439,10 +449,21 @@ def validar_registros_supervision(registros: list[dict], textos: dict,
         if not isinstance(meta, dict) or not meta.get("tag") \
                 or not meta.get("digest") or meta.get("digest") == "desconocido":
             raise ValueError(f"{cid}#{k}: modelo sin identidad auditable.")
-        opciones = meta.get("opciones", {})
-        if opciones.get("temperature") != 0 or opciones.get("seed") != SEMILLA:
-            raise ValueError(f"{cid}#{k}: opciones del modelo no "
-                             "deterministas (temperature 0, seed 42).")
+        if identidad_modelo is not None:
+            from prompts_supervision_tito_99 import identidad_compatible
+            if not identidad_compatible(r, identidad_modelo):
+                raise ValueError(
+                    f"{cid}#{k}: identidad del anotador distinta a la del "
+                    "recibo validado (tag/digest/version/opciones/think); "
+                    "reanotar, no heredar.")
+        else:
+            from prompts_supervision_tito_99 import OPCIONES_MODELO, PENSAR
+            if dict(meta.get("opciones", {}) or {}) != dict(OPCIONES_MODELO) \
+                    or meta.get("think") != PENSAR:
+                raise ValueError(
+                    f"{cid}#{k}: opciones/think distintos de los vigentes "
+                    f"({OPCIONES_MODELO}, think={PENSAR}); reanotar con la "
+                    "variante vigente, no heredar.")
     faltantes = sorted(esperados - vistos)
     if faltantes:
         raise ValueError(f"supervision incompleta: {len(faltantes)} prefijos "
@@ -485,11 +506,13 @@ def construir_supervision(textos: dict, particion_de: dict[str, str]) -> tuple[l
 
     Este modulo no genera etiquetas: exige el recibo de controles sinteticos
     de los prompts vigentes y carga el artefacto contextual real del
-    supervisor y lo valida (firma vigente, modelo/revision/hash por prefijo,
-    evidencia y segunda pasada sin futuro, cobertura total, 0/1/nulo). Si el
-    recibo falta, no coincide o no esta conforme, o si el artefacto no
-    valida, falla cerrado (fail-closed): no inventa etiquetas ni marca
-    supervision como ejecutada.
+    supervisor y lo valida (firma vigente, identidad del anotador ligada
+    fila por fila a la del recibo validado, hash por prefijo, evidencia y
+    segunda pasada sin futuro, cobertura total, 0/1/nulo). Si el recibo
+    falta, no coincide o no esta conforme, o si alguna fila diverge de su
+    identidad (tag/digest/version/opciones/think) o el artefacto no valida,
+    falla cerrado (fail-closed): no inventa etiquetas ni marca supervision
+    como ejecutada.
     """
     try:
         import supervision_tito_99  # noqa: F401 (dueno: otro worker)
@@ -503,8 +526,14 @@ def construir_supervision(textos: dict, particion_de: dict[str, str]) -> tuple[l
     except ValueError as e:
         raise SystemExit(f"supervision fail-closed: {e}") from e
     registros = leer_supervision_real()
+    identidad_recibo = {"tag": recibo["modelo"], "digest": recibo["digest"],
+                        "ollama_version": recibo["ollama_version"],
+                        "opciones": recibo.get("opciones"),
+                        "think": recibo.get("think")}
     try:
-        cobertura = validar_registros_supervision(registros, textos, particion_de)
+        cobertura = validar_registros_supervision(registros, textos,
+                                                 particion_de,
+                                                 identidad_recibo)
     except ValueError as e:
         raise SystemExit(f"supervision fail-closed: {e}") from e
     cobertura["recibo_controles"] = recibo
@@ -1445,6 +1474,12 @@ def main(argv: list[str] | None = None) -> int:
         n_unos = f"ver artefacto {primero['datos'].get('frases_banco', '?')} banco + prefijos"
         _ = coef0
     _ruta_sup_rep, _ruta_aud_rep = _rutas_reales()
+    # Identidad de los seis artefactos reales guardados y recargados
+    # (hashes sobre bytes medidos, sin pesos inventados) + seleccionado.
+    # Exigido por #100: sin estos campos el reporte no se congela.
+    artefactos_identidad, artefacto_seleccionado = identidad_reporte_99(
+        [AQUI / _nombre_arte(e, C) for e in ENTRADAS for C in VALORES_C],
+        seleccion["elegida"])
     reporte = {"fecha": "2026-10-29", "issue": 99, "semilla": SEMILLA,
                "encoder": {"id": ENCODER_ID, "revision": ENCODER_REVISION,
                            "congelado": True, "tokenizer_sha256": tok_sha},
@@ -1468,6 +1503,8 @@ def main(argv: list[str] | None = None) -> int:
                "criterio_fine_tuning": fine_tuning,
                "codigo": codigo, "maquina": maquina, "librerias": librerias,
                "artefactos": [_nombre_arte(e, C) for e in ENTRADAS for C in VALORES_C],
+               "artefactos_identidad": artefactos_identidad,
+               "artefacto_seleccionado": artefacto_seleccionado,
                "tito_viejo_inalterado": {
                    "artefacto": "tito_logreg.json",
                    "sha256": sha((AQUI / "tito_logreg.json").read_bytes())},

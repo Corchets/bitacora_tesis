@@ -305,8 +305,10 @@ def _prompt(visibles):
 
 def _registro(cid, hasta, visibles_total, etiqueta, motivo="acuerdo",
               soporte=None, tag="qwen3.5:4b", digest="abc123",
-              opciones=None, con_futuro_en_prompt=False, firma=None):
-    from prompts_supervision_tito_99 import firma_prompts
+              opciones=None, think=None, con_futuro_en_prompt=False,
+              firma=None):
+    from prompts_supervision_tito_99 import (OPCIONES_MODELO, PENSAR,
+                                             firma_prompts)
     visibles = visibles_total[:hasta]
     prompt = _prompt(visibles)
     if con_futuro_en_prompt:
@@ -317,8 +319,9 @@ def _registro(cid, hasta, visibles_total, etiqueta, motivo="acuerdo",
         "firma_prompts": firma_prompts() if firma is None else firma,
         "texto_hash": sha("\n".join(visibles).encode("utf-8")),
         "modelo": {"tag": tag, "digest": digest, "ollama_version": "0.40.8",
-                   "opciones": {"temperature": 0, "seed": 42, "num_predict": 200}
+                   "opciones": dict(OPCIONES_MODELO)
                    if opciones is None else opciones,
+                   "think": PENSAR if think is None else think,
                    "formato": "json-schema etiqueta/fundamento/lineas_soporte"},
         "etiqueta": etiqueta, "fundamento": "cita textual vista",
         "lineas_soporte": [1] if soporte is None else list(soporte),
@@ -396,6 +399,56 @@ class TestSupervisionReal(unittest.TestCase):
                       _registro("C2", 1, TEXTOS_SUP["C2"], 0)]
         with self.assertRaises(ValueError):
             validar_registros_supervision(solo_ceros, TEXTOS_SUP, PART_SUP)
+
+    def test_variante_vigente_exacta_admitida(self):
+        import prompts_supervision_tito_99 as ps
+        regs = _sup_valida()
+        self.assertEqual(regs[0]["modelo"]["opciones"], ps.OPCIONES_MODELO)
+        self.assertEqual(regs[0]["modelo"]["think"], ps.PENSAR)
+        cob = validar_registros_supervision(regs, TEXTOS_SUP, PART_SUP)
+        self.assertEqual(cob["prefijos"], 3)
+
+    def test_divergencia_opciones_think_rechazada(self):
+        import prompts_supervision_tito_99 as ps
+        temp0 = dict(ps.OPCIONES_MODELO)
+        temp0["temperature"] = 0
+        sin_ctx = {k: v for k, v in ps.OPCIONES_MODELO.items()
+                   if k != "num_ctx"}
+        casos = [("temperature 0 (variante vieja)", temp0, ps.PENSAR),
+                 ("sin num_ctx", sin_ctx, ps.PENSAR),
+                 ("think apagado", dict(ps.OPCIONES_MODELO), False),
+                 ("think ausente", dict(ps.OPCIONES_MODELO), "ausente")]
+        for nombre, opciones, think in casos:
+            regs = _sup_valida()
+            regs[0]["modelo"]["opciones"] = opciones
+            if think == "ausente":
+                regs[0]["modelo"].pop("think", None)
+            else:
+                regs[0]["modelo"]["think"] = think
+            with self.assertRaises(ValueError, msg=nombre):
+                validar_registros_supervision(regs, TEXTOS_SUP, PART_SUP)
+
+    def test_filas_ligadas_a_identidad_del_recibo(self):
+        import prompts_supervision_tito_99 as ps
+        identidad = {"tag": "qwen3.5:4b", "digest": "abc123",
+                     "ollama_version": "0.40.8",
+                     "opciones": dict(ps.OPCIONES_MODELO),
+                     "think": ps.PENSAR}
+        cob = validar_registros_supervision(_sup_valida(), TEXTOS_SUP,
+                                           PART_SUP, identidad)
+        self.assertEqual(cob["prefijos"], 3)
+        for campo, valor in [("tag", "gemma4:e4b"), ("digest", "ffff"),
+                             ("ollama_version", "0.0.0")]:
+            regs = _sup_valida()
+            regs[1]["modelo"][campo] = valor
+            with self.assertRaises(ValueError, msg=campo):
+                validar_registros_supervision(regs, TEXTOS_SUP, PART_SUP,
+                                              identidad)
+        regs = _sup_valida()
+        regs[1]["modelo"]["think"] = False
+        with self.assertRaises(ValueError, msg="think distinto"):
+            validar_registros_supervision(regs, TEXTOS_SUP, PART_SUP,
+                                          identidad)
 
 
 def _aud_valida(n_banco=4811):
@@ -562,12 +615,16 @@ class TestMetricasRevisados(unittest.TestCase):
             metricas_prefijos_revisados({"V1": [0.9]}, {("V1", 1): 2}, 0.5)
 
 
-def _recibo(ruta, firma, conformidad, total, tag="qwen3.5:4b"):
+def _recibo(ruta, firma, conformidad, total, tag="qwen3.5:4b",
+            digest="d8b0f5e9760cd168", opciones=None, think=None):
+    import prompts_supervision_tito_99 as ps
     recibo = {"fecha": "2026-10-29", "prompts_version": "v2-test",
               "firma_prompts": firma,
-              "modelo": {"tag": tag, "digest": "d8b0f5e9760cd168",
+              "modelo": {"tag": tag, "digest": digest,
                          "ollama_version": "0.40.8",
-                         "opciones": {"temperature": 0, "seed": 42}},
+                         "opciones": dict(ps.OPCIONES_MODELO)
+                         if opciones is None else opciones,
+                         "think": ps.PENSAR if think is None else think},
               "controles": [{"control": f"c{i}", "esperado": 0, "observado": 0,
                              "conforme": True} for i in range(total)],
               "conformidad": conformidad, "total": total}
@@ -619,6 +676,30 @@ class TestPuertaFirmaRecibo(unittest.TestCase):
             resumen = validar_recibo_controles(r)
             self.assertEqual(resumen["conformidad"], 2)
             self.assertEqual(resumen["firma"], ps.firma_prompts())
+
+    def test_recibo_conserva_identidad_completa_y_liga_filas(self):
+        import tempfile
+        import prompts_supervision_tito_99 as ps
+        from entrenar_tito_99 import validar_recibo_controles
+        with tempfile.TemporaryDirectory() as tmp:
+            r = Path(tmp) / "recibo.json"
+            _recibo(r, ps.firma_prompts(), 2, 2, digest="abc123")
+            resumen = validar_recibo_controles(r)
+            self.assertEqual(resumen["opciones"], ps.OPCIONES_MODELO)
+            self.assertEqual(resumen["think"], ps.PENSAR)
+            identidad = {"tag": resumen["modelo"],
+                         "digest": resumen["digest"],
+                         "ollama_version": resumen["ollama_version"],
+                         "opciones": resumen["opciones"],
+                         "think": resumen["think"]}
+            cob = validar_registros_supervision(
+                _sup_valida(), TEXTOS_SUP, PART_SUP, identidad)
+            self.assertEqual(cob["prefijos"], 3)
+            otras = _sup_valida()
+            otras[0]["modelo"]["opciones"] = {"temperature": 0, "seed": 42}
+            with self.assertRaises(ValueError):
+                validar_registros_supervision(otras, TEXTOS_SUP, PART_SUP,
+                                              identidad)
 
 
 def _fixture_arte(nombre, entrada, c_val, coef=(0.1, -0.2), extra_datos=None):
