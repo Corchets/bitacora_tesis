@@ -1,0 +1,261 @@
+{
+ "fecha": "2026-10-29",
+ "semilla": 42,
+ "anotador": "auditoria por incrustaciones RoBERTuito congelado (solo textos; sin etiquetas del test ni reserva)",
+ "calibracion": {
+  "pares_declarados": 6,
+  "contrastes_azar": 50,
+  "sims_par": [
+   0.876,
+   0.8849,
+   0.9005,
+   0.9005,
+   0.9332,
+   0.9374
+  ],
+  "sims_azar": [
+   0.6308,
+   0.6541,
+   0.6624,
+   0.6994,
+   0.7122,
+   0.7391,
+   0.7397,
+   0.7421,
+   0.7447,
+   0.7643,
+   0.7757,
+   0.7877,
+   0.7903,
+   0.7911,
+   0.7924,
+   0.8027,
+   0.8045,
+   0.8082,
+   0.8368,
+   0.8558,
+   0.8678,
+   0.8727,
+   0.8763,
+   0.8813,
+   0.8829,
+   0.887,
+   0.888,
+   0.8891,
+   0.8892,
+   0.8916,
+   0.8932,
+   0.894,
+   0.8969,
+   0.8989,
+   0.9034,
+   0.9037,
+   0.908,
+   0.9122,
+   0.9128,
+   0.9196,
+   0.9197,
+   0.92,
+   0.921,
+   0.9241,
+   0.9294,
+   0.9305,
+   0.9311,
+   0.9363,
+   0.9461,
+   0.9547
+  ],
+  "umbral": 0.876,
+  "metodo": "conservador:min_par (solapa con azar; se excluye de más)"
+ },
+ "grupos": [
+  "entrenamiento",
+  "validacion",
+  "comparacion_20",
+  "diagnostico"
+ ],
+ "familias_excluidas_ajuste": [],
+ "detalle_excluidas": {},
+ "umbral_usado": 0.876,
+ "top_familias_vs_veinte": [
+  {
+   "familia": "banco_047",
+   "max": 0.8518,
+   "frases": 20
+  },
+  {
+   "familia": "banco_033",
+   "max": 0.851,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_039",
+   "max": 0.8449,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_041",
+   "max": 0.8448,
+   "frases": 20
+  },
+  {
+   "familia": "banco_046",
+   "max": 0.8427,
+   "frases": 20
+  },
+  {
+   "familia": "banco_007",
+   "max": 0.8424,
+   "frases": 10
+  },
+  {
+   "familia": "banco_016",
+   "max": 0.8422,
+   "frases": 20
+  },
+  {
+   "familia": "cotidiano_092",
+   "max": 0.8399,
+   "frases": 20
+  },
+  {
+   "familia": "banco_083",
+   "max": 0.8394,
+   "frases": 20
+  },
+  {
+   "familia": "banco_076",
+   "max": 0.8391,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_009",
+   "max": 0.8366,
+   "frases": 15
+  },
+  {
+   "familia": "banco_073",
+   "max": 0.8362,
+   "frases": 20
+  },
+  {
+   "familia": "banco_066",
+   "max": 0.8335,
+   "frases": 20
+  },
+  {
+   "familia": "banco_062",
+   "max": 0.832,
+   "frases": 20
+  },
+  {
+   "familia": "banco_024",
+   "max": 0.8297,
+   "frases": 15
+  },
+  {
+   "familia": "banco_032",
+   "max": 0.8265,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_042",
+   "max": 0.8249,
+   "frases": 20
+  },
+  {
+   "familia": "banco_085",
+   "max": 0.8241,
+   "frases": 20
+  },
+  {
+   "familia": "banco_052",
+   "max": 0.8233,
+   "frases": 20
+  },
+  {
+   "familia": "banco_022",
+   "max": 0.8215,
+   "frases": 20
+  }
+ ],
+ "top_familias_vs_diagnostico": [
+  {
+   "familia": "banco_034",
+   "max": 0.8173,
+   "frases": 20
+  },
+  {
+   "familia": "cotidiano_024",
+   "max": 0.8088,
+   "frases": 20
+  },
+  {
+   "familia": "banco_100",
+   "max": 0.8007,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_053",
+   "max": 0.8005,
+   "frases": 20
+  },
+  {
+   "familia": "banco_010",
+   "max": 0.7995,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_002",
+   "max": 0.7993,
+   "frases": 20
+  },
+  {
+   "familia": "cotidiano_080",
+   "max": 0.7981,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_092",
+   "max": 0.7967,
+   "frases": 20
+  },
+  {
+   "familia": "banco_054",
+   "max": 0.7958,
+   "frases": 20
+  },
+  {
+   "familia": "banco_090",
+   "max": 0.7951,
+   "frases": 20
+  }
+ ],
+ "histograma_max_vs_veinte": {
+  "0.70-0.75": 15,
+  "0.75-0.80": 168,
+  "0.80-0.85": 82,
+  "0.85-0.90": 2
+ },
+ "frases_auditadas": 4811,
+ "conteo_antes": {
+  "entrenamiento/estafa": 1548,
+  "validacion/estafa": 389,
+  "entrenamiento/legitima": 2295,
+  "validacion/legitima": 579
+ },
+ "conteo_despues": {
+  "entrenamiento/estafa": 1548,
+  "validacion/estafa": 389,
+  "entrenamiento/legitima": 2295,
+  "validacion/legitima": 579
+ },
+ "banco_restante": 4811,
+ "resolucion_exclusiones": "cero exclusiones: ninguna familia alcanza el umbral calibrado vs las veinte; ver top e histograma como evidencia. No acredita independencia causal.",
+ "nota": "Exclusión por familia completa vs las veinte. Diagnóstico se informa sin excluir (lo usa #98). Si falta una clase tras excluir, material sintético trazable sin reserva; no se sustituyen las veinte.",
+ "limites": [
+  "Cota por similitud de textos, no prueba de independencia causal.",
+  "Umbral calibrado en pares declarados, no en resultados comparativos.",
+  "La validación del banco no es independiente del Tito viejo (lo vio en ajuste)."
+ ]
+}
