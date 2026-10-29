@@ -569,13 +569,13 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await panel.send(self.inicio())
             inicio = await self.evento(panel, "inicio")
             self.assertEqual(inicio["corte_silencio_s"], "auto")
-            self.assertEqual(inicio["umbral_rms_silencio"], 0.005)
+            self.assertEqual(inicio["umbral_rms_silencio"], 0.003)
             nivel = (await self.evento(panel, "niveles"))["canales"]
-            self.assertTrue(all(c["umbral_rms_silencio"] == 0.005 for c in nivel.values()))
+            self.assertTrue(all(c["umbral_rms_silencio"] == 0.003 for c in nivel.values()))
             await panel.send(json.dumps({"tipo": "terminar"}))
             fin = await self.evento(panel, "fin")
             m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
-            self.assertEqual(m["config"]["umbral_rms_silencio"], 0.005)
+            self.assertEqual(m["config"]["umbral_rms_silencio"], 0.003)
             self.assertTrue(m["config"]["endpoint_nativo"])
 
     async def test_reintentar_tras_fallo_transitorio_de_precarga_con_otro_corte(self):

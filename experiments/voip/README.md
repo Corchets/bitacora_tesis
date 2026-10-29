@@ -136,7 +136,7 @@ El control viaja por `/panel`:
 
 Para clientes, ambas fuentes son `{"tipo":"cliente"}`. `corte_silencio_s` es obligatorio y vale
 `"auto"` o un número de 0,1 a 3,0 con un decimal (ver §10); cualquier otro valor se rechaza antes de abrir la
-carpeta. En modo `llamada` el umbral RMS es fijo (0,005): `umbral_rms_silencio` va en `null`.
+carpeta. En modo `llamada` el umbral RMS es fijo (0,003): `umbral_rms_silencio` va en `null`.
 Las llamadas que abre `cliente.py` sin pasar por el panel usan `--corte-silencio` (`auto` por defecto, o segundos).
 Un control inválido devuelve `{"tipo":"error","mensaje":"…"}` al panel que lo mandó.
 La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
@@ -374,8 +374,8 @@ Se conserva [esa corrida sin WAV](corridas/2026-10-26-medicion-84-m1-08b/README.
 ## 10. Probar el ASR hablando (#81)
 
 Con el servidor local de §3 abierto, activá **Probar el ASR**. Elegí el corte de silencio
-(un número de 0,1 a 3,0 s, de a 0,1, inicial 0,8; es el mismo campo de la llamada) y el umbral de
-silencio (RMS mayor que cero, hasta 1; inicial 0,005). El panel ya no ofrece «Automático»: con un número
+(un número de 0,1 a 3,0 s, de a 0,1, inicial 0,9; es el mismo campo de la llamada) y el umbral de
+silencio (RMS mayor que cero, hasta 1; inicial 0,003). El panel ya no ofrece «Automático»: con un número
 manda ese corte y el endpoint nativo del modelo se apaga, así el valor elegido significa lo que dice.
 El servidor sigue aceptando `"auto"` (lo usan `cliente.py` y las llamadas viejas del Historial).
 Tocá **▶ Hablar**, permití el micrófono y hablá con pausas. Usa la entrada de micrófono

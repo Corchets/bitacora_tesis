@@ -68,7 +68,7 @@ EJEMPLOS = {nombre: DIR_VOIP.parent / "asr-local" / "audio" / f"{nombre}-tts-est
 CORTE_AUTO = "auto"
 CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el modelo no cierra la frase solo
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
-UMBRAL_LLAMADA = 0.005
+UMBRAL_LLAMADA = 0.003
 
 
 def validar_corte(valor) -> str | float:

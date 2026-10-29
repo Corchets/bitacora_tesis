@@ -100,7 +100,7 @@ export function montarPruebaASR(acciones) {
           </div>
           <div class="ajuste">
             <label for="asr-umbral">Umbral de silencio (volumen)</label>
-            <input id="asr-umbral" type="number" min="0.001" max="1" step="0.001" value="0.005" aria-describedby="asr-umbral-ayuda">
+            <input id="asr-umbral" type="number" min="0.001" max="1" step="0.001" value="0.003" aria-describedby="asr-umbral-ayuda">
             <p id="asr-umbral-ayuda">Por debajo de este volumen el sonido cuenta como silencio. Es la rayita negra del medidor de abajo: si con ruido de fondo la barra de silencio no se llena nunca, subilo (por ejemplo a 0,02); si corta mientras hablás bajito, bajalo.</p>
           </div>
         </div>

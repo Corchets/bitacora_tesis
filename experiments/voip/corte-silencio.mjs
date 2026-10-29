@@ -1,11 +1,11 @@
 // @ts-check
 
-const CORTE_INICIAL_S = 0.8;
+const CORTE_INICIAL_S = 0.9;
 
 /**
  * Selector del corte de silencio: un número de 0,1 a 3,0 s (de a 0,1), sin opción automática.
  * Lo comparten la llamada y Probar el ASR. El servidor sigue aceptando `"auto"` (lo usan
- * cliente.py y las llamadas viejas); si llega, el selector muestra el respaldo de 0,8 s.
+ * cliente.py y las llamadas viejas); si llega, el selector muestra el valor inicial de 0,9 s.
  * @param {string} id prefijo de los ids, único por instancia
  */
 export function crearSelectorCorte(id) {
