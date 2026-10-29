@@ -134,6 +134,25 @@ class TestCoberturaYPuerta(unittest.TestCase):
 
 
 class TestAuditoria(unittest.TestCase):
+    def test_cruces_por_grupo_top_e_histograma_sin_excluir(self):
+        banco = [{"id": "b1", "familia": "f1", "texto": "t1"},
+                 {"id": "b2", "familia": "f2", "texto": "t2"}]
+        grupos = {"entrenamiento": {"c1": ["A: x", "B: y"]},
+                  "validacion": {"c2": ["A: z"]}}
+        vec_banco = [[1.0, 0.0], [0.0, 1.0]]
+        vec_lineas = {"c1#0": [1.0, 0.0], "c1#1": [1.0, 0.0],
+                      "c2#0": [0.0, 1.0]}
+        cruces = st.cruces_banco_grupos(banco, grupos, vec_banco,
+                                        vec_lineas, 0.99)
+        self.assertEqual(sorted(cruces), ["entrenamiento", "validacion"])
+        self.assertEqual(cruces["entrenamiento"]["top15"][0]["familia"], "f1")
+        self.assertEqual(cruces["validacion"]["top15"][0]["familia"], "f2")
+        self.assertTrue(cruces["entrenamiento"]["histograma"])
+        self.assertEqual(
+            cruces["entrenamiento"]["n_familias_ge_umbral_referencia"], 1)
+        self.assertEqual(
+            cruces["validacion"]["n_familias_ge_umbral_referencia"], 1)
+
     def test_excluye_familia_relacionada_con_veinte(self):
         banco = [{"id": "b1", "familia": "f1", "texto": "t1"},
                  {"id": "b2", "familia": "f2", "texto": "t2"}]

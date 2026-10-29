@@ -1,11 +1,22 @@
 """Supervisión contextual de prefijos para #99 (módulo del corrector).
 
-Reemplaza el etiquetado por reglas léxicas con revisión contextual REAL:
-cada prefijo de entrenamiento/validación se somete a DOS pasadas
-independientes de un modelo contextual vía API stateless (Ollama
-http://127.0.0.1:11435). Cada pasada ve SOLO las líneas visibles hasta ese
-punto, con hablantes A/B íntegros, sin case_id, sin clase final, sin T_R,
-sin sufijo futuro y sin reutilizar respuestas ni estado entre pasadas.
+Revisión contextual REAL: cada prefijo de entrenamiento/validación se
+somete a DOS pasadas independientes de un modelo contextual vía API
+stateless (Ollama http://127.0.0.1:11435) con el MISMO objetivo
+contextual (1 = pedido riesgoso o indicio concreto visible para consultar
+al SLM; 0 = sin motivo observable revisado, incluyendo solicitudes
+legítimas distinguibles por contexto; null = ambiguo/incompleto). Cada
+pasada ve SOLO las líneas visibles hasta ese punto, con hablantes A/B
+íntegros, sin case_id, sin clase final, sin T_R, sin sufijo futuro y sin
+reutilizar respuestas ni estado entre pasadas.
+
+Procedencia de los prompts: corrección v2 en
+`prompts_supervision_tito_99.py` (2026-10-29; reemplaza los prompts v1 que
+pedían "DIRECTAMENTE" y marcaban 1/1 el prefijo legítimo de la pizzería).
+Validación real previa con qwen3.5:4b en
+`VALIDACION-PROMPTS-SUPERVISION-TITO-99-2026-10-29.json` (7/7 controles).
+Registros versionados con `firma_prompts`; el borrador v1 sin firma queda
+descartado y se reanota.
 
 Acuerdo: 1+1 → 1, 0+0 → 0, cualquier otro caso (incluida respuesta
 inválida) → null, que queda fuera de pérdida/métricas pero presente en
@@ -17,6 +28,7 @@ Tampoco lee la reserva (rechazo por identificador/partición).
 Uso (desde experiments/slm-directo/, con .venv de la raíz):
     python supervision_tito_99.py --paso supervision
     python supervision_tito_99.py --paso auditoria
+    python supervision_tito_99.py --paso cruce
     python supervision_tito_99.py --paso todo
 """
 
@@ -35,6 +47,13 @@ sys.path.insert(0, str(AQUI))
 
 from cliente_ollama import ClienteOllama, ErrorOllama
 from datos_tito import rechazar_reserva
+from prompts_supervision_tito_99 import (
+    PROMPT_VERSION,
+    construir_prompt_pasada1,
+    construir_prompt_pasada2,
+    es_registro_vigente,
+    firma_prompts,
+)
 
 CONFIG_RUTA = AQUI / "CONFIGURACION-TITO-2026-10-29.json"
 PARTICIONES_RUTA = AQUI / "PARTICIONES-TITO-2026-10-29.json"
@@ -68,46 +87,18 @@ ETIQUETAS_VALIDAS = (0, 1, None)
 
 
 # ---------------------------------------------------------------------------
-# Prompts: solo prefijo visible, A/B íntegro, sin IDs reveladores
+# Prompts: reexportados del módulo del corrector (v2 contextual)
 # ---------------------------------------------------------------------------
-
-def _bloque_visible(lineas_visibles: list[str]) -> str:
-    """Numera las líneas visibles conservando el hablante A/B original."""
-    return "\n".join(f"L{i} {texto}" for i, texto in enumerate(lineas_visibles, 1))
-
-
-def construir_prompt_pasada1(lineas_visibles: list[str]) -> str:
-    """Propuesta: ¿hay pedido directo observable en lo visible?"""
-    return (
-        "Estás revisando una llamada en curso. Solo existe lo que sigue; "
-        "no hay más contexto, ni antes ni después.\n"
-        f"{_bloque_visible(lineas_visibles)}\n\n"
-        "¿Alguna línea le pide DIRECTAMENTE a la otra persona que entregue "
-        "un código o clave, transfiera dinero, instale una app o comparta "
-        "la pantalla? 1=sí, 0=no, null=solo se habla del tema (consejo, "
-        "relato, negación). Devolvé JSON con etiqueta, fundamento (frase "
-        "textual corta de lo visto) y lineas_soporte (números de línea)."
-    )
-
-
-def construir_prompt_pasada2(lineas_visibles: list[str]) -> str:
-    """Confirmación independiente: ¿corresponde pedir verificación?
-
-    Segunda pasada aislada: no recibe case_id, referencia, clase, T_R ni
-    sufijo futuro; tampoco recibe la respuesta de la primera pasada.
-    """
-    return (
-        "Sos un control de seguridad. Estas líneas son todo lo que se sabe "
-        "de una llamada hasta ahora:\n"
-        f"{_bloque_visible(lineas_visibles)}\n\n"
-        "Como control independiente: ¿corresponde pedir verificación "
-        "adicional en este punto? Marcá 1 si ves un pedido explícito de "
-        "datos sensibles, dinero o accesos, o un indicio concreto de "
-        "riesgo. Marcá 0 si no hay nada que verificar. Marcá null si es "
-        "ambiguo (menciones, consejos, negaciones, relatos). Devolvé JSON "
-        "con etiqueta, fundamento (cita corta) y lineas_soporte (números "
-        "de línea)."
-    )
+# Procedencia: `prompts_supervision_tito_99.py` (corrección v2, 2026-10-29,
+# prompts_version v2-contextual-2026-10-29) tras el handoff del supervisor.
+# Ambas pasadas comparten el MISMO objetivo contextual (1 = pedido riesgoso
+# o indicio concreto visible para consultar al SLM; 0 = sin motivo revisado
+# incluyendo legítimo distinguible; null = ambiguo/incompleto), solo llevan
+# el prefijo visible con A/B y no ven IDs, clase, T_R, futuro ni la otra
+# pasada. Los constructores se reexportan para compatibilidad con las
+# pruebas y la orquestación de este módulo; la firma versionada permite
+# rechazar filas del borrador viejo (sin firma) sin heredarlas como verdad.
+# (Los constructores importados arriba conservan estos mismos nombres.)
 
 
 # ---------------------------------------------------------------------------
@@ -269,8 +260,13 @@ def recorrer_y_guardar(textos: dict, particion_de: dict, cliente: ClienteOllama,
                        modelo: str, meta_modelo: dict,
                        ruta: Path = SUPERVISION_RUTA,
                        limite: int | None = None) -> dict:
-    """Revisa los prefijos faltantes y los agrega al JSONL (reanudable)."""
-    existentes = leer_registros_existentes(ruta)
+    """Revisa los prefijos faltantes y los agrega al JSONL (reanudable).
+
+    Solo las filas con la firma de prompts vigente cuentan como hechas:
+    el borrador viejo (sin firma u otra firma) se reanota, no se hereda.
+    """
+    existentes = {k: v for k, v in leer_registros_existentes(ruta).items()
+                  if es_registro_vigente(v)}
     faltantes = sorted(set(total_prefijos_esperados(textos)) - set(existentes))
     if limite is not None:
         faltantes = faltantes[:limite]
@@ -284,6 +280,8 @@ def recorrer_y_guardar(textos: dict, particion_de: dict, cliente: ClienteOllama,
                 "particion": particion_de[cid],
                 "texto_hash": sha_hex("\n".join(visibles).encode("utf-8")),
                 "modelo": meta_modelo,
+                "firma_prompts": firma_prompts(),
+                "prompts_version": PROMPT_VERSION,
                 **sup,
             }
             f.write(json.dumps(registro, ensure_ascii=False) + "\n")
@@ -519,6 +517,42 @@ def auditar_semantica(banco: list[dict], grupos: dict[str, dict[str, list[str]]]
             "histograma_max_vs_veinte": dict(sorted(hist.items()))}
 
 
+def cruces_banco_grupos(banco: list[dict], grupos: dict[str, dict[str, list[str]]],
+                        vec_banco: list[list[float]],
+                        vec_lineas: dict[str, list[float]],
+                        umbral_referencia: float) -> dict:
+    """Maximo coseno por familia del banco vs lineas de cada grupo.
+
+    Informativo: no excluye ni habilita entrenamiento. Reusa el umbral de
+    referencia calibrado vs las veinte (etapa `auditoria`); no recalibra.
+    No acredita independencia causal.
+    """
+    fam_de = [f["familia"] for f in banco]
+    cruces = {}
+    for nombre, textos in grupos.items():
+        planos = [vec_lineas[f"{cid}#{j}"] for cid, ls in textos.items()
+                  for j in range(len(ls))]
+        max_pf = [max((coseno(v, w) for w in planos), default=0.0)
+                  for v in vec_banco]
+        por_fam = {}
+        for fam in sorted(set(fam_de)):
+            idx = [i for i, f in enumerate(fam_de) if f == fam]
+            por_fam[fam] = {"max": round(max(max_pf[i] for i in idx), 4),
+                            "frases": len(idx)}
+        top = sorted(por_fam.items(), key=lambda kv: -kv[1]["max"])[:15]
+        hist = Counter()
+        for d in por_fam.values():
+            hist[f"{int(d['max'] * 20) / 20:.2f}-{int(d['max'] * 20) / 20 + 0.05:.2f}"] += 1
+        cruces[nombre] = {
+            "top15": [{"familia": f, **d} for f, d in top],
+            "histograma": dict(sorted(hist.items())),
+            "n_familias_ge_umbral_referencia": sum(
+                1 for d in por_fam.values() if d["max"] >= umbral_referencia),
+            "n_lineas_grupo": len(planos),
+        }
+    return cruces
+
+
 # ---------------------------------------------------------------------------
 # Orquestación CLI
 # ---------------------------------------------------------------------------
@@ -526,7 +560,8 @@ def auditar_semantica(banco: list[dict], grupos: dict[str, dict[str, list[str]]]
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--paso", choices=["supervision", "auditoria", "todo"],
+    p.add_argument("--paso", choices=["supervision", "auditoria", "cruce",
+                                      "todo"],
                    default="todo")
     p.add_argument("--modelo", default=MODELO_POR_DEFECTO)
     p.add_argument("--url", default=URL_POR_DEFECTO)
@@ -610,6 +645,45 @@ def main(argv: list[str] | None = None) -> int:
         print(f"auditoria: umbral={calib['umbral']} excluidas="
               f"{len(aud['familias_excluidas_ajuste'])} "
               f"restantes={len(banco_rest)}")
+
+    if args.paso in ("cruce", "todo"):
+        # Cruce banco <-> train/val (+ comparacion_20, diagnostico) sobre el
+        # artefacto primario unico: no recalibra, no excluye, no habilita.
+        import torch  # noqa: F401 (verifica entorno antes de incrustar)
+        if not AUDITORIA_RUTA.exists():
+            print("cruce fail-closed: falta el artefacto primario de "
+                  "auditoria; correr --paso auditoria primero.")
+            return 2
+        base = json.loads(AUDITORIA_RUTA.read_text(encoding="utf-8"))
+        banco = cargar_banco_textos(particiones)
+        grupos = {g: cargar_lineas_grupo(particiones, g) for g in
+                  ("entrenamiento", "validacion", "comparacion_20",
+                   "diagnostico")}
+        tokenizer, modelo_rt, torch_mod = _cargar_robertuito()
+        vec_banco = incrustar_lineas([f["texto"] for f in banco],
+                                     tokenizer, modelo_rt, torch_mod)
+        vec_lineas = {}
+        for textos in grupos.values():
+            for cid, ls in textos.items():
+                vs = incrustar_lineas(ls, tokenizer, modelo_rt, torch_mod)
+                for j, v in enumerate(vs):
+                    vec_lineas[f"{cid}#{j}"] = v
+        cruces = cruces_banco_grupos(banco, grupos, vec_banco, vec_lineas,
+                                     float(base["umbral_usado"]))
+        base["cruces_por_grupo"] = cruces
+        etapas = list(base.get("etapas_ejecutadas", ["auditoria_20"]))
+        if "cruce_train_val" not in etapas:
+            etapas.append("cruce_train_val")
+        base["etapas_ejecutadas"] = etapas
+        lim_cruce = ("Cruces banco<->train/val/comparacion/diagnostico "
+                     "informativos con el umbral de referencia; sin "
+                     "exclusiones ni prueba de independencia causal.")
+        if lim_cruce not in base.get("limites", []):
+            base["limites"] = list(base.get("limites", [])) + [lim_cruce]
+        AUDITORIA_RUTA.write_text(json.dumps(base, ensure_ascii=False,
+                                             indent=1), encoding="utf-8")
+        print(f"cruce: grupos={sorted(cruces)} "
+              f"sobre_umbral={[g for g, c in cruces.items() if c['n_familias_ge_umbral_referencia']]}")
     return 0
 
 

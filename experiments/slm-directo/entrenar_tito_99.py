@@ -15,16 +15,38 @@ candidato principal usa historial. Tito viejo queda inalterado.
 
 Supervision por prefijo (0/1/nulo) provista por `supervision_tito_99.py`
 (dueno: otro worker, issue #99). Este modulo NO genera etiquetas con
-heuristicas ni marca supervision como ejecutada: si el supervisor real
-no esta disponible, el paso de supervision y el entrenamiento fallan
-cerrado (fail-closed) sin inventar etiquetas. Los nulos quedan fuera de
-perdida y metricas binarias y se conservan en cobertura. No se toca
+heuristicas ni marca supervision como ejecutada: el paso de supervision
+verifica el artefacto contextual real
+(`SUPERVISION-CONTEXTUAL-TITO-99-2026-10-29.jsonl`) y el entrenamiento
+falla cerrado (fail-closed) sin inventar etiquetas si falta, esta
+incompleto o no pasa la validacion (modelo/revision/hash por prefijo,
+evidencia con lineas de soporte, segunda pasada sin futuro, cobertura
+total, etiquetas solo 0/1/nulo). Los nulos quedan fuera de perdida y
+metricas binarias y se conservan en cobertura. No se toca
 `revision_humana` ni la puerta formal de `datos_tito.py`; la autorizacion
 de desarrollo es explicita y esta separada de la puerta humana.
+
+Auditoria semantica del otro worker
+(`AUDITORIA-SEMANTICA-CONTEXTUAL-TITO-99-2026-10-29.json`, dueno: otro
+worker): el entrenamiento la exige validada y enlazada (hashes, grupos,
+banco, veinte) antes de entrenar. La auditoria lexica propia
+(igualdad/subcadena/Jaccard) se conserva solo como cota auxiliar, sin
+declararla semantica suficiente y sin sobrescribir el archivo semantico.
+
+Criterio operativo de desarrollo para `oportuna`: derivacion <= `T_R`
+(coherente con #98). Sin `T_R` el caso es no evaluable: se mantiene en
+caso/denominador/cobertura aparte y se informan ambos margenes `T_R`/`T_C`
+sin inventar cumplimiento. Criterio exploratorio vinculado a D08; no
+cierra arquitectura ni margen final. Mismo criterio para candidato nuevo
+y Tito viejo; no se decide con las veinte.
 
 No lee la reserva (rechazo por identificador/particion). No decide con
 las veinte de comparacion ni con el diagnostico: seleccion solo con
 entrenamiento/validacion.
+
+Sin autorizacion explicita del coordinador tras auditoria y etiquetas
+reales no hay inferencia ni entrenamiento: los pasos `entrenar`/`evaluar`
+fallan cerrado.
 
 Uso (desde este directorio, con .venv activado en la raiz):
     python entrenar_tito_99.py --paso auditoria
@@ -70,6 +92,34 @@ AUTORIZACION_DESARROLLO = (
     "separado de la puerta formal humana de datos_tito.py. NO es revision_humana; "
     "no habilita uso ni cierra D07/D08/D09."
 )
+
+SUPERVISION_REAL_NOMBRE = "SUPERVISION-CONTEXTUAL-TITO-99-2026-10-29.jsonl"
+AUDITORIA_SEMANTICA_REAL_NOMBRE = (
+    "AUDITORIA-SEMANTICA-CONTEXTUAL-TITO-99-2026-10-29.json")
+AUDITORIA_LEXICA_AUX_NOMBRE = "AUDITORIA-LEXICA-AUXILIAR-TITO-99-2026-10-29.json"
+VALIDACION_RECIBO_NOMBRE = "VALIDACION-PROMPTS-SUPERVISION-TITO-99-2026-10-29.json"
+MOTIVOS_SUPERVISION_VALIDOS = ("acuerdo", "desacuerdo", "respuesta_invalida")
+GRUPOS_AUDITORIA_EXIGIDOS = ("entrenamiento", "validacion", "comparacion_20")
+
+CRITERIO_OPORTUNA = (
+    "Criterio operativo de desarrollo (exploratorio, vinculado a D08): "
+    "derivacion <= T_R sobre referencias sin revision humana (#98). Sin T_R "
+    "el caso es no evaluable y se informa aparte con ambos margenes T_R/T_C. "
+    "No cierra arquitectura ni margen final.")
+
+
+def _rutas_reales() -> tuple[Path, Path]:
+    """Rutas del supervisor real sin editar su modulo.
+
+    Si `supervision_tito_99.py` esta disponible se usan sus constantes
+    (fuente del otro worker); si no, los nombres fijados arriba.
+    """
+    try:
+        from supervision_tito_99 import (AUDITORIA_RUTA, SUPERVISION_RUTA)
+        return Path(SUPERVISION_RUTA), Path(AUDITORIA_RUTA)
+    except ImportError:
+        return (AQUI / SUPERVISION_REAL_NOMBRE,
+                AQUI / AUDITORIA_SEMANTICA_REAL_NOMBRE)
 
 # ---------------------------------------------------------------------------
 # Utilidades
@@ -263,21 +313,259 @@ def auditar_relaciones(banco: list[dict], textos: dict,
 # Paso 2: supervision por prefijo (delegada al supervisor real, sin heuristicas)
 # ---------------------------------------------------------------------------
 
-def construir_supervision(textos: dict, particion_de: dict[str, str]) -> tuple[list[dict], dict]:
-    """Delega al supervisor real `supervision_tito_99.py` (dueno: otro worker).
+def _etiqueta_valida(etiqueta) -> bool:
+    """Solo 0/1 enteros o nulo. Rechaza booleanos, cadenas y otros tipos."""
+    if etiqueta is None:
+        return True
+    return isinstance(etiqueta, int) and not isinstance(etiqueta, bool) \
+        and etiqueta in (0, 1)
 
-    Este modulo no genera etiquetas heuristicas. Si el supervisor real no
-    esta disponible, falla cerrado (fail-closed): no inventa etiquetas ni
-    marca supervision como ejecutada.
+
+def _firma_prompts_vigente() -> str:
+    """Firma de prompts vigente (corrector, `prompts_supervision_tito_99`).
+
+    Los registros con firma ausente o distinta (borrador viejo o prompts no
+    validados) se rechazan: no se heredan como verdad ni habilitan ajuste.
+    """
+    from prompts_supervision_tito_99 import firma_prompts
+    return firma_prompts()
+
+
+def validar_recibo_controles(ruta: Path | None = None) -> dict:
+    """Valida el recibo de controles sintéticos de los prompts vigentes.
+
+    Rechaza (fail-closed) recibo ausente/ilegible, con firma distinta a la
+    vigente, sin identidad del modelo o con controles no conformes: sin
+    controles verdes no hay entrenamiento. Devuelve el resumen enlazado.
+    """
+    ruta = AQUI / VALIDACION_RECIBO_NOMBRE if ruta is None else Path(ruta)
+    try:
+        recibo = json.loads(ruta.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        raise ValueError(
+            f"recibo de controles ausente o ilegible ({ruta.name}): "
+            f"{type(e).__name__}; sin controles no hay entrenamiento.") from e
+    if not isinstance(recibo, dict):
+        raise ValueError("recibo de controles ilegible: no es objeto JSON.")
+    if recibo.get("firma_prompts") != _firma_prompts_vigente():
+        raise ValueError(
+            "recibo de controles con firma distinta a la vigente: los "
+            "controles validaron otros prompts; revalidar, no heredar.")
+    modelo = recibo.get("modelo")
+    if (not isinstance(modelo, dict) or not modelo.get("tag")
+            or not modelo.get("digest")
+            or modelo.get("digest") == "desconocido"
+            or not modelo.get("ollama_version")):
+        raise ValueError("recibo de controles sin identidad del modelo.")
+    controles = recibo.get("controles")
+    if not isinstance(controles, list) or not controles:
+        raise ValueError("recibo de controles sin controles registrados.")
+    no_conformes = [c.get("control", "?") for c in controles
+                    if not isinstance(c, dict) or not c.get("conforme")]
+    if no_conformes or recibo.get("conformidad") != recibo.get("total"):
+        raise ValueError(
+            "recibo de controles no conforme "
+            f"(desvios: {no_conformes[:5]}); gate cerrado, sin entrenamiento.")
+    return {"firma": recibo["firma_prompts"],
+            "modelo": modelo["tag"], "digest": modelo["digest"],
+            "ollama_version": modelo["ollama_version"],
+            "conformidad": recibo["conformidad"], "total": recibo["total"]}
+
+
+def validar_registros_supervision(registros: list[dict], textos: dict,
+                                  particion_de: dict[str, str]) -> dict:
+    """Valida el artefacto contextual real prefijo por prefijo.
+
+    Rechaza (fail-closed) firma ausente o distinta a la vigente, ademas de
+    heuristico/manipulado/futuro: hash del prefijo visible, etiqueta fuera
+    de 0/1/nulo, evidencia sin lineas de soporte en rango, motivo invalido
+    o incoherente con la etiqueta, pasada sin prompt con las lineas
+    visibles o con sufijo futuro, modelo sin identidad (tag/digest/opciones
+    deterministas) y cobertura distinta de la esperada (todos los prefijos
+    de entrenamiento/validacion, exactamente una vez, con ambas clases en
+    entrenamiento).
+    """
+    firma_vigente = _firma_prompts_vigente()
+    esperados = {(cid, k) for cid, lineas in textos.items()
+                 for k in range(1, len(lineas) + 1)}
+    vistos: set[tuple[str, int]] = set()
+    for r in registros:
+        cid, k = r.get("case_id"), r.get("hasta_linea")
+        if r.get("firma_prompts") != firma_vigente:
+            raise ValueError(
+                f"{cid}#{k}: firma_prompts ausente o distinta a la vigente "
+                "(borrador viejo o prompts no validados); reanotar con los "
+                "prompts vigentes, no heredar.")
+        if (cid, k) in vistos:
+            raise ValueError(f"supervision duplicada: {(cid, k)}.")
+        if cid not in textos or not isinstance(k, int) or (cid, k) not in esperados:
+            raise ValueError(f"supervision fuera de cobertura: {(cid, k)}.")
+        vistos.add((cid, k))
+        visibles = textos[cid][:k]
+        if r.get("particion") != particion_de[cid]:
+            raise ValueError(f"{cid}#{k}: particion inconsistente.")
+        if r.get("texto_hash") != sha("\n".join(visibles).encode("utf-8")):
+            raise ValueError(f"{cid}#{k}: texto_hash no coincide con el "
+                             "prefijo visible (posible futuro/manipulacion).")
+        if not _etiqueta_valida(r.get("etiqueta")):
+            raise ValueError(f"{cid}#{k}: etiqueta invalida "
+                             f"{r.get('etiqueta')!r}; solo 0/1/nulo.")
+        motivo = r.get("motivo")
+        if motivo not in MOTIVOS_SUPERVISION_VALIDOS:
+            raise ValueError(f"{cid}#{k}: motivo invalido {motivo!r}.")
+        if (motivo == "acuerdo") != (r.get("etiqueta") is not None):
+            raise ValueError(f"{cid}#{k}: motivo/etiqueta incoherentes "
+                             f"({motivo}, {r.get('etiqueta')!r}).")
+        soporte = r.get("lineas_soporte")
+        if not isinstance(soporte, list) or not all(
+                isinstance(n, int) and 1 <= n <= k for n in soporte):
+            raise ValueError(f"{cid}#{k}: lineas_soporte fuera de 1..{k}.")
+        if r.get("etiqueta") is not None and not soporte:
+            raise ValueError(f"{cid}#{k}: etiqueta decidida sin soporte.")
+        if not isinstance(r.get("fundamento"), str) or not r["fundamento"].strip():
+            raise ValueError(f"{cid}#{k}: sin fundamento textual.")
+        for pasada in ("pasada1", "pasada2"):
+            p = r.get(pasada)
+            if not isinstance(p, dict) or not isinstance(p.get("prompt"), str):
+                raise ValueError(f"{cid}#{k}: {pasada} sin prompt registrado.")
+            for linea in visibles:
+                if linea not in p["prompt"]:
+                    raise ValueError(f"{cid}#{k}: {pasada} no ve una linea "
+                                     "visible.")
+            for futura in textos[cid][k:]:
+                if len(futura.strip()) >= 8 and futura in p["prompt"]:
+                    raise ValueError(f"{cid}#{k}: {pasada} con sufijo futuro.")
+        meta = r.get("modelo")
+        if not isinstance(meta, dict) or not meta.get("tag") \
+                or not meta.get("digest") or meta.get("digest") == "desconocido":
+            raise ValueError(f"{cid}#{k}: modelo sin identidad auditable.")
+        opciones = meta.get("opciones", {})
+        if opciones.get("temperature") != 0 or opciones.get("seed") != SEMILLA:
+            raise ValueError(f"{cid}#{k}: opciones del modelo no "
+                             "deterministas (temperature 0, seed 42).")
+    faltantes = sorted(esperados - vistos)
+    if faltantes:
+        raise ValueError(f"supervision incompleta: {len(faltantes)} prefijos "
+                         f"sin revisar (p. ej. {faltantes[:3]}).")
+    clases_train = {r["etiqueta"] for r in registros
+                    if particion_de[r["case_id"]] == "entrenamiento"}
+    if 0 not in clases_train or 1 not in clases_train:
+        raise ValueError("supervision sin ambas clases (0/1) en entrenamiento.")
+    cobertura: dict[str, int] = {}
+    for r in registros:
+        et = "nulo" if r["etiqueta"] is None else r["etiqueta"]
+        cobertura[f"{r['particion']}/{et}"] = \
+            cobertura.get(f"{r['particion']}/{et}", 0) + 1
+    modelos = sorted({r["modelo"]["tag"] for r in registros})
+    return {"por_particion_etiqueta": cobertura,
+            "prefijos": len(registros),
+            "nulos": sum(1 for r in registros if r["etiqueta"] is None),
+            "modelos": modelos,
+            "digests": sorted({r["modelo"]["digest"] for r in registros})}
+
+
+def leer_supervision_real() -> list[dict]:
+    """Lee el JSONL del supervisor real. Falla cerrado si falta o es invalido."""
+    ruta, _ = _rutas_reales()
+    if not ruta.exists():
+        raise SystemExit(
+            f"supervision fail-closed: falta {ruta.name}; el supervisor real "
+            "(`supervision_tito_99.py`, otro worker) aun no lo materializo. "
+            "No se inventan etiquetas ni se marca ejecutado.")
+    try:
+        return [json.loads(l) for l in ruta.read_text(encoding="utf-8").splitlines()
+                if l.strip()]
+    except (OSError, ValueError) as e:
+        raise SystemExit(f"supervision fail-closed: {ruta.name} ilegible "
+                         f"({type(e).__name__}).") from e
+
+
+def construir_supervision(textos: dict, particion_de: dict[str, str]) -> tuple[list[dict], dict]:
+    """Contrato `construir_supervision(textos, particion_de)` (otro worker).
+
+    Este modulo no genera etiquetas: exige el recibo de controles sinteticos
+    de los prompts vigentes y carga el artefacto contextual real del
+    supervisor y lo valida (firma vigente, modelo/revision/hash por prefijo,
+    evidencia y segunda pasada sin futuro, cobertura total, 0/1/nulo). Si el
+    recibo falta, no coincide o no esta conforme, o si el artefacto no
+    valida, falla cerrado (fail-closed): no inventa etiquetas ni marca
+    supervision como ejecutada.
     """
     try:
-        from supervision_tito_99 import construir_supervision as _real
+        import supervision_tito_99  # noqa: F401 (dueno: otro worker)
     except ImportError as e:
         raise SystemExit(
             "supervision fail-closed: `supervision_tito_99.py` no disponible "
             f"({type(e).__name__}); el supervisor real es del otro worker. "
             "No se inventan etiquetas ni se marca ejecutado.") from e
-    return _real(textos, particion_de)
+    try:
+        recibo = validar_recibo_controles()
+    except ValueError as e:
+        raise SystemExit(f"supervision fail-closed: {e}") from e
+    registros = leer_supervision_real()
+    try:
+        cobertura = validar_registros_supervision(registros, textos, particion_de)
+    except ValueError as e:
+        raise SystemExit(f"supervision fail-closed: {e}") from e
+    cobertura["recibo_controles"] = recibo
+    return registros, cobertura
+
+
+def validar_auditoria_semantica(aud: dict, particiones: dict) -> dict:
+    """Valida la auditoria semantica del otro worker antes de entrenar.
+
+    Rechaza parcial/antigua/no enlazada: exige lista de exclusiones, umbral
+    calibrado con metodo, los grupos con las veinte, conteo del banco igual
+    al de particiones y semilla 42. Devuelve el resumen enlazado.
+    """
+    if not isinstance(aud, dict):
+        raise ValueError("auditoria semantica ilegible.")
+    excluidas = aud.get("familias_excluidas_ajuste")
+    if not isinstance(excluidas, list) or not all(isinstance(f, str) for f in excluidas):
+        raise ValueError("auditoria sin lista de exclusiones registrada.")
+    umbral = aud.get("umbral_usado")
+    if not isinstance(umbral, (int, float)) or not 0 < float(umbral) <= 1:
+        raise ValueError("auditoria sin umbral calibrado en (0, 1].")
+    grupos = aud.get("grupos", [])
+    if any(g not in grupos for g in GRUPOS_AUDITORIA_EXIGIDOS):
+        raise ValueError("auditoria parcial: grupos "
+                         f"{GRUPOS_AUDITORIA_EXIGIDOS} no cubiertos ({grupos}).")
+    if aud.get("frases_auditadas") != len(particiones.get("banco", [])):
+        raise ValueError("auditoria no enlazada al banco de particiones "
+                         f"({aud.get('frases_auditadas')} vs "
+                         f"{len(particiones.get('banco', []))}).")
+    calib = aud.get("calibracion", {})
+    if "umbral" not in calib or "metodo" not in calib:
+        raise ValueError("auditoria sin calibracion de umbral registrada.")
+    if aud.get("semilla") != SEMILLA:
+        raise ValueError("auditoria con semilla inesperada.")
+    advertencias = []
+    if calib.get("metodo", "").startswith("reserva:"):
+        advertencias.append("calibracion sin pares declarados; umbral de reserva.")
+    return {"excluidas": sorted(excluidas), "umbral": float(umbral),
+            "metodo_calibracion": calib.get("metodo"),
+            "pares_declarados": calib.get("pares_declarados"),
+            "grupos": list(grupos), "advertencias": advertencias}
+
+
+def leer_auditoria_semantica(particiones: dict) -> tuple[dict, dict]:
+    """Lee y valida la auditoria semantica real. Falla cerrado si no valida."""
+    _, ruta = _rutas_reales()
+    if not ruta.exists():
+        raise SystemExit(
+            f"auditoria fail-closed: falta {ruta.name}; la auditoria semantica "
+            "completa es del otro worker (`supervision_tito_99.py --paso "
+            "auditoria`). La cota lexica propia no la sustituye.")
+    try:
+        aud = json.loads(ruta.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        raise SystemExit(f"auditoria fail-closed: {ruta.name} ilegible "
+                         f"({type(e).__name__}).") from e
+    try:
+        resumen = validar_auditoria_semantica(aud, particiones)
+    except ValueError as e:
+        raise SystemExit(f"auditoria fail-closed: {e}") from e
+    return aud, resumen
 
 
 # ---------------------------------------------------------------------------
@@ -504,12 +792,20 @@ def evaluar_configuracion(registros_val: list[dict], textos_val: dict,
                           umbral: float) -> dict:
     """Metricas conversacionales sobre validacion. Sin F1 como criterio.
 
+    Criterio operativo de desarrollo (`oportuna`): derivacion <= `T_R`
+    (coherente con #98), fijado ANTES de medir. Sin `T_R` el caso es no
+    evaluable (`oportuna` None): se mantiene en caso/denominador/cobertura
+    aparte (`vishing_no_evaluable_sin_TR`) y se informan ambos margenes
+    `T_R`/`T_C` disponibles sin inventar cumplimiento. Criterio
+    exploratorio vinculado a D08; no cierra arquitectura ni margen final.
+    Mismo criterio para candidato nuevo y Tito viejo.
+
     Conserva posiciones: los puntajes `None` (fallos de inferencia) no se
     filtran antes de la primera derivacion; la derivacion es el primer `k`
     con puntaje no nulo >= umbral. Los fallos se cuentan y diagnostican
     (fail-open: no derivan por si mismos).
     """
-    por_caso, omisiones, legit_derivadas = [], 0, 0
+    por_caso, omisiones, legit_derivadas, no_evaluables = [], 0, 0, 0
     total_fallos = 0
     for cid in sorted(textos_val):
         lineas = textos_val[cid]
@@ -535,14 +831,23 @@ def evaluar_configuracion(registros_val: list[dict], textos_val: dict,
         clase = ref.get("clase")
         t_r, t_c = ref.get("t_r_linea"), ref.get("t_c_linea")
         n = len(lineas)
+        margen_tr = (der is not None and der <= t_r) \
+            if (der is not None and t_r is not None) else None
+        margen_tc = (der is not None and der <= t_c) \
+            if (der is not None and t_c is not None) else None
         if clase == "vishing":
-            a_tiempo = der is not None and (t_c is None or der <= t_c)
-            if not a_tiempo:
-                omisiones += 1
-            posicion = ("sin_derivacion" if der is None
-                        else "antes_de_T_R" if t_r is not None and der < t_r
-                        else "en_T_R" if t_r is not None and der == t_r
-                        else "tras_T_R")
+            if t_r is None:
+                a_tiempo = None
+                no_evaluables += 1
+                posicion = "sin_T_R_no_evaluable"
+            else:
+                a_tiempo = margen_tr
+                if not a_tiempo:
+                    omisiones += 1
+                posicion = ("sin_derivacion" if der is None
+                            else "antes_de_T_R" if der < t_r
+                            else "en_T_R" if der == t_r
+                            else "tras_T_R")
         else:
             a_tiempo = None
             posicion = "sin_derivacion" if der is None else "derivada"
@@ -550,7 +855,10 @@ def evaluar_configuracion(registros_val: list[dict], textos_val: dict,
                 legit_derivadas += 1
         por_caso.append({"case_id": cid, "clase": clase, "n_lineas": n,
                          "t_r": t_r, "t_c": t_c, "derivacion": der,
-                         "oportuna": a_tiempo, "posicion": posicion,
+                         "oportuna": a_tiempo, "margen_TR": margen_tr,
+                         "margen_TC": margen_tc,
+                         "evaluable_TR": (clase != "vishing" or t_r is not None),
+                         "posicion": posicion,
                          "consultas": der if der is not None else n,
                          "fallos": fallos, "errores": errores,
                          "puntajes": [(None if p is None else round(p, 4))
@@ -560,37 +868,127 @@ def evaluar_configuracion(registros_val: list[dict], textos_val: dict,
             "legitimas_derivadas": legit_derivadas,
             "denominador_vishing": sum(1 for c in por_caso if c["clase"] == "vishing"),
             "denominador_legitimas": sum(1 for c in por_caso if c["clase"] != "vishing"),
+            "vishing_no_evaluable_sin_TR": no_evaluables,
+            "criterio_oportuna": CRITERIO_OPORTUNA,
             "prefijos_con_fallo": total_fallos,
             "consultas_media": round(sum(consultas) / len(consultas), 2),
             "por_caso": por_caso}
 
 
-def seleccionar_candidatos(resultados: list[dict], costos_p95: dict) -> dict:
-    """Frontera de Pareto + desempates de la configuracion. Solo validacion."""
+def metricas_prefijos_revisados(puntajes_por_caso: dict[str, list[float | None]],
+                                etiqueta_de: dict, umbral: float) -> dict:
+    """Clasificacion por prefijo SOLO sobre prefijos revisados (0/1).
+
+    Los inciertos (nulo) y los sin registro quedan fuera de las metricas
+    binarias y se conservan en cobertura. No se informa F1 exhaustivo: si no
+    hay prefijos revisados, las metricas son None con motivo.
+    """
+    tp = fp = tn = fn = revisados = inciertos = sin_registro = fallos = 0
+    for cid, puntajes in puntajes_por_caso.items():
+        for k, p in enumerate(puntajes, start=1):
+            et = etiqueta_de.get((cid, k), "sin_registro")
+            if et == "sin_registro":
+                sin_registro += 1
+                continue
+            if et not in (0, 1, None) or isinstance(et, bool):
+                raise ValueError(f"{cid}#{k}: etiqueta invalida {et!r}.")
+            if et is None:
+                inciertos += 1
+                continue
+            if p is None:
+                fallos += 1
+                continue
+            revisados += 1
+            pred = 1 if p >= umbral else 0
+            if pred == 1 and et == 1:
+                tp += 1
+            elif pred == 1:
+                fp += 1
+            elif et == 1:
+                fn += 1
+            else:
+                tn += 1
+    if revisados == 0:
+        return {"umbral": umbral, "revisados": 0, "inciertos_null": inciertos,
+                "sin_registro": sin_registro, "prefijos_con_fallo": fallos,
+                "tp": 0, "fp": 0, "tn": 0, "fn": 0,
+                "exactitud": None, "precision": None, "recall": None,
+                "f1": None,
+                "motivo": "sin prefijos revisados; no se inventa F1."}
+    exactitud = (tp + tn) / revisados
+    precision = tp / (tp + fp) if (tp + fp) else None
+    recall = tp / (tp + fn) if (tp + fn) else None
+    f1 = (2 * precision * recall / (precision + recall)) \
+        if precision and recall and (precision + recall) else None
+    return {"umbral": umbral, "revisados": revisados,
+            "inciertos_null": inciertos, "sin_registro": sin_registro,
+            "prefijos_con_fallo": fallos,
+            "tp": tp, "fp": fp, "tn": tn, "fn": fn,
+            "exactitud": round(exactitud, 4),
+            "precision": None if precision is None else round(precision, 4),
+            "recall": None if recall is None else round(recall, 4),
+            "f1": None if f1 is None else round(f1, 4),
+            "nota": ("F1 solo sobre prefijos revisados (0/1); inciertos y sin "
+                     "registro en cobertura, fuera de metricas.")}
+
+
+def _frontera(configs: list[dict], costo_de) -> list[str]:
+    """Configs no dominadas en (omisiones, legitimas, costo)."""
     frente = []
-    for r in resultados:
+    for r in configs:
+        cr = costo_de(r)
         dominado = any(
             o["omisiones_oportunas"] <= r["omisiones_oportunas"]
             and o["legitimas_derivadas"] <= r["legitimas_derivadas"]
-            and o["consultas_media"] <= r["consultas_media"]
+            and costo_de(o) <= cr
             and (o["omisiones_oportunas"] < r["omisiones_oportunas"]
                  or o["legitimas_derivadas"] < r["legitimas_derivadas"]
-                 or o["consultas_media"] < r["consultas_media"])
-            for o in resultados)
+                 or costo_de(o) < cr)
+            for o in configs if o is not r)
         if not dominado:
             frente.append(r["config"])
-    cands = [r for r in resultados if r["config"] in frente]
+    return sorted(frente)
+
+
+def seleccionar_candidatos(resultados: list[dict], costos_p95: dict) -> dict:
+    """Frontera de Pareto sobre HISTORIAL + desempates de la configuracion.
+
+    La seleccion usa la frontera de `historial_acumulado` con costo p95
+    real; el principal DEBE usar historial (sin sustitucion por frase).
+    El control `frase_actual_control` y la frontera global (con
+    `consultas_media`, informativa) se conservan para interpretar, sin
+    permitir sustitucion. Desempates exactos de la configuracion: menor
+    suma de errores, menor costo p95, C cercano a 1, umbral cercano a 0.5.
+    Solo validacion.
+    """
+    for r in resultados:
+        if r["config"] not in costos_p95:
+            raise ValueError(f"sin costo p95 real para {r['config']}.")
+    hist = [r for r in resultados if r["entrada"] == "historial_acumulado"]
+    frase = [r for r in resultados if r["entrada"] == "frase_actual_control"]
+    if not hist:
+        raise ValueError("sin candidatos de historial; el principal debe "
+                         "usar historial.")
+    frente_hist = _frontera(hist, lambda r: costos_p95[r["config"]])
+    cands = [r for r in hist if r["config"] in frente_hist]
     cands.sort(key=lambda r: (r["omisiones_oportunas"] + r["legitimas_derivadas"],
-                              costos_p95.get(r["config"], float("inf")),
+                              costos_p95[r["config"]],
                               abs(r["C"] - 1.0), abs(r["umbral"] - 0.5)))
-    elegida = next((r for r in cands if r["entrada"] == "historial_acumulado"), cands[0])
-    return {"frontera_pareto": sorted(frente),
+    elegida = cands[0]
+    frente_global = _frontera(resultados, lambda r: r["consultas_media"])
+    return {"frontera_pareto": frente_hist,
+            "frontera_historial": frente_hist,
+            "frontera_global_informativa": frente_global,
+            "controles_frase": sorted(r["config"] for r in frase),
             "orden": [r["config"] for r in cands],
             "elegida": elegida["config"],
-            "criterio": ("Pareto en omisiones oportunas, legitimas derivadas y "
-                         "costo sobre validacion conversacional; desempate por "
-                         "menor suma, menor costo p95, C cercano a 1 y umbral "
-                         "cercano a 0.5. Principal con historial.")}
+            "criterio": ("Pareto sobre HISTORIAL en omisiones oportunas, "
+                         "legitimas derivadas y costo p95 real sobre "
+                         "validacion conversacional; desempate por menor suma, "
+                         "menor costo p95, C cercano a 1 y umbral cercano a "
+                         "0.5. Principal con historial, sin sustitucion por "
+                         "frase. Frontera global con consultas_media solo "
+                         "informativa.")}
 
 
 # ---------------------------------------------------------------------------
@@ -618,38 +1016,51 @@ def main(argv: list[str] | None = None) -> int:
     banco, banco_info = cargar_banco(particiones)
     codigo, maquina = info_codigo(), info_maquina()
 
+    # Paso 1: cota lexica propia (auxiliar) + auditoria semantica real.
+    # Este paso NUNCA sobrescribe el archivo semantico del otro worker.
+    lexica = None
     if args.paso in ("auditoria", "todo"):
-        auditoria = auditar_relaciones(banco, textos, particion_de)
-        (AQUI / "AUDITORIA-SEMANTICA-TITO-99-2026-10-29.json").write_text(
+        lexica = auditar_relaciones(banco, textos, particion_de)
+        (AQUI / AUDITORIA_LEXICA_AUX_NOMBRE).write_text(
             json.dumps({"fecha": "2026-10-29", "semilla": SEMILLA,
-                        "auditoria": auditoria, "codigo": codigo},
+                        "nota": ("Cota lexica auxiliar (igualdad/subcadena/"
+                                 "Jaccard); no es evidencia semantica "
+                                 "suficiente ni sustituye la auditoria del "
+                                 "otro worker."),
+                        "cota_lexica": lexica, "codigo": codigo},
                        ensure_ascii=False, indent=1), encoding="utf-8")
-        print(f"auditoria: {len(auditoria['familias_relacionadas_excluidas'])} "
-              f"familias relacionadas excluidas; "
-              f"conteo despues={auditoria['conteo_despues']}")
-        if auditoria["sintetico_necesario"]:
-            print("auditoria: FALTA UNA CLASE tras exclusiones; "
-                  "se requiere material sintetico antes de entrenar.")
-            return 2 if args.paso == "auditoria" else 2
-
-    auditoria = json.loads((AQUI / "AUDITORIA-SEMANTICA-TITO-99-2026-10-29.json").read_text(
-        encoding="utf-8"))["auditoria"]
-    excluidas = set(auditoria["familias_relacionadas_excluidas"])
+        print(f"cota lexica auxiliar: "
+              f"{len(lexica['familias_relacionadas_excluidas'])} familias con "
+              f"coincidencia literal; no sustituye la semantica.")
+    try:
+        auditoria_sem, resumen_aud = leer_auditoria_semantica(particiones)
+        _, ruta_aud = _rutas_reales()
+    except SystemExit as e:
+        print(e)
+        return 2
+    excluidas = set(resumen_aud["excluidas"])
     banco_ajuste = [f for f in banco if f["familia"] not in excluidas]
+    print(f"auditoria semantica: umbral={resumen_aud['umbral']} "
+          f"metodo={resumen_aud['metodo_calibracion']} "
+          f"excluidas={len(excluidas)}")
+    for adv in resumen_aud["advertencias"]:
+        print(f"auditoria semantica, advertencia: {adv}")
+    clases_ajuste = {f["clase_autoral"] for f in banco_ajuste}
+    if len(clases_ajuste) < 2:
+        print("auditoria: FALTA UNA CLASE tras exclusiones semanticas; "
+              "se requiere material sintetico trazable antes de entrenar "
+              "(sin reserva, sin sustituir las veinte).")
+        return 2
 
     if args.paso in ("supervision", "todo"):
-        registros, cobertura = construir_supervision(textos, particion_de)
-        with (AQUI / "SUPERVISION-TITO-99-2026-10-29.jsonl").open(
-                "w", encoding="utf-8") as f:
-            for r in registros:
-                f.write(json.dumps(r, ensure_ascii=False) + "\n")
-        print(f"supervision: {cobertura}")
-        nulos = sum(1 for r in registros if r["etiqueta"] is None)
-        unos = sum(1 for r in registros if r["etiqueta"] == 1)
-        if unos == 0 or sum(1 for r in registros if r["etiqueta"] == 0) == 0:
-            print("supervision: FALTA UNA CLASE en prefijos; "
-                  "preparar material sintetico trazable antes de entrenar.")
+        # Este paso NO genera etiquetas ni escribe artefactos: verifica el
+        # artefacto contextual real del supervisor (fail-closed).
+        try:
+            registros, cobertura = construir_supervision(textos, particion_de)
+        except SystemExit as e:
+            print(e)
             return 3
+        print(f"supervision validada: {cobertura}")
 
     if args.paso not in ("entrenar", "evaluar", "todo"):
         return 0
@@ -658,6 +1069,15 @@ def main(argv: list[str] | None = None) -> int:
     import torch
 
     if args.paso in ("entrenar", "todo"):
+        # Entrena SOLO con el artefacto contextual validado (fail-closed).
+        # La validacion ocurre ANTES de cargar el encoder: sin etiquetas
+        # reales no hay inferencia ni entrenamiento.
+        try:
+            sup, cobertura_sup = construir_supervision(textos, particion_de)
+        except SystemExit as e:
+            print(e)
+            return 3
+        ruta_sup, _ = _rutas_reales()
         librerias = {"torch": torch.__version__,
                      "transformers": transformers.__version__,
                      "scikit-learn": sklearn.__version__,
@@ -665,10 +1085,21 @@ def main(argv: list[str] | None = None) -> int:
                      "numpy": __import__("numpy").__version__}
         tokenizer, modelo, torch_mod, tok_sha = _cargar_tokenizer_modelo()
         dispositivo = "cpu"
-
-        sup = [json.loads(l) for l in (AQUI / "SUPERVISION-TITO-99-2026-10-29.jsonl")
-               .read_text(encoding="utf-8").splitlines()]
         etiqueta_de = {(r["case_id"], r["hasta_linea"]): r["etiqueta"] for r in sup}
+        identidad_supervision = {
+            "artefacto": ruta_sup.name,
+            "sha256": sha(ruta_sup.read_bytes()),
+            "cobertura": cobertura_sup,
+            "modelos": cobertura_sup["modelos"],
+            "digests": cobertura_sup["digests"],
+        }
+        identidad_auditoria = {
+            "artefacto": ruta_aud.name,
+            "sha256": sha(ruta_aud.read_bytes()),
+            "umbral": resumen_aud["umbral"],
+            "metodo_calibracion": resumen_aud["metodo_calibracion"],
+            "familias_excluidas": resumen_aud["excluidas"],
+        }
 
         # Conjuntos: prefijos etiquetados (train) + banco sintetico (train).
         # Misma construccion de entradas que en inferencia (sin futuro).
@@ -706,6 +1137,14 @@ def main(argv: list[str] | None = None) -> int:
                         [d for d in de_conversacion if d.startswith("banco:")]),
                     "familias_banco_excluidas": sorted(excluidas),
                     "split": "train=PARTICIONES-TITO-2026-10-29/entrenamiento",
+                    "supervision_identidad": identidad_supervision,
+                    "auditoria_identidad": identidad_auditoria,
+                    "particiones_sha256": sha((AQUI / CONFIG["particiones"])
+                                              .read_bytes()),
+                    "configuracion_sha256": sha((AQUI / "CONFIGURACION-TITO-2026-10-29.json")
+                                                .read_bytes()),
+                    "semilla": SEMILLA,
+                    "autorizacion": AUTORIZACION_DESARROLLO,
                     "incrustacion": info_emb}
                 guardar_artefacto(AQUI / _nombre_arte(e, C), e, C, pesos, tok_sha,
                                   datos_info, codigo, maquina, librerias)
@@ -763,16 +1202,28 @@ def main(argv: list[str] | None = None) -> int:
                     [len(textos_val[c]) for c in sorted(textos_val)], V)
         preparacion_ms[e] = info_prep["ms_incrustacion"]
     resultados, costos = [], {}
+    puntajes_guardados, vectores_guardados = {}, {}
     n_cfgs = 0
     for e in ENTRADAS:
         cids, Ns, V = X_val[e]
         for C in VALORES_C:
             coef, b = recargados[(e, C)]
             punt = puntajes_matriz(V, coef, b)
+            vectores_guardados[(e, C)] = V
+            # Verificacion de recarga realmente inferida: puntaje
+            # independiente (suma exacta) sobre los primeros prefijos, sin
+            # ajuste. Cualquier diferencia aborta la evaluacion.
+            for v, p in zip(V[:5], punt[:5]):
+                z_suma = sum(c * x for c, x in zip(coef, v)) + b
+                z_exacta = math.fsum(c * x for c, x in zip(coef, v)) + b
+                if abs(z_suma - z_exacta) > 1e-9 or abs(sigmoide(z_exacta) - p) > 1e-9:
+                    raise ValueError("verificacion de recarga: puntaje no "
+                                     "reproduce el artefacto recargado.")
             por_caso_punt, i = {}, 0
             for cid, n in zip(cids, Ns):
                 por_caso_punt[cid] = punt[i:i + n]
                 i += n
+            puntajes_guardados[(e, C)] = por_caso_punt
             # Costo de inferencia: p95 real de latencias por prefijo
             # (solo puntaje lineal+sigmoide sobre vectores ya preparados;
             # sin recargar encoder por candidato). La preparacion se informa
@@ -806,6 +1257,25 @@ def main(argv: list[str] | None = None) -> int:
         return viejo.puntuar(k, linea)
     base = evaluar_configuracion([], textos_val, referencias, puntaje_viejo, 0.5)
     eleg = next(r for r in resultados if r["config"] == seleccion["elegida"])
+    # Clasificacion por prefijo SOLO sobre prefijos revisados (0/1) con las
+    # etiquetas validadas; inciertos fuera de metricas y en cobertura.
+    try:
+        _sup_val, _ = construir_supervision(textos, particion_de)
+    except SystemExit as e:
+        print(e)
+        return 3
+    etiqueta_val = {(r["case_id"], r["hasta_linea"]): r["etiqueta"]
+                    for r in _sup_val if particion_de[r["case_id"]] == "validacion"}
+    _eleg_e, _eleg_C = eleg["entrada"], eleg["C"]
+    clasif_elegida = metricas_prefijos_revisados(
+        puntajes_guardados[(_eleg_e, _eleg_C)], etiqueta_val, eleg["umbral"])
+    verificacion_recarga = {
+        "metodo": ("artefactos recargados desde disco y puntaje lineal+sigmoide "
+                   "reverificado con suma independiente en los primeros 5 "
+                   "prefijos de cada configuracion; sin ajuste en evaluar"),
+        "configuraciones_reverificadas": n_cfgs,
+        "ajuste_en_evaluar": False,
+    }
     # Condicion exacta de la configuracion: NINGUN candidato congelado
     # conserva ambas fallas frente al viejo, y existe al menos un error
     # observable que justifique ajustar. Igualar ambos conteos no exige
@@ -869,10 +1339,21 @@ def main(argv: list[str] | None = None) -> int:
         coef0 = primero["pesos"]["coef"]
         n_unos = f"ver artefacto {primero['datos'].get('frases_banco', '?')} banco + prefijos"
         _ = coef0
+    _ruta_sup_rep, _ruta_aud_rep = _rutas_reales()
     reporte = {"fecha": "2026-10-29", "issue": 99, "semilla": SEMILLA,
                "encoder": {"id": ENCODER_ID, "revision": ENCODER_REVISION,
                            "congelado": True, "tokenizer_sha256": tok_sha},
-               "auditoria_semantica": auditoria,
+               "auditoria_semantica": auditoria_sem,
+               "auditoria_semantica_resumen": resumen_aud,
+               "cota_lexica_auxiliar": lexica,
+               "supervision_identidad": {
+                   "artefacto": _ruta_sup_rep.name,
+                   "sha256": sha(_ruta_sup_rep.read_bytes()),
+                   "modelos": sorted({r["modelo"]["tag"] for r in _sup_val}),
+                   "autorizacion": AUTORIZACION_DESARROLLO},
+               "criterio_oportuna": CRITERIO_OPORTUNA,
+               "clasificacion_prefijos_revisados_elegida": clasif_elegida,
+               "verificacion_recarga": verificacion_recarga,
                "entrenamiento": {"ejemplos": n_ej, "unos": n_unos,
                                  "clasificadores": len(ENTRADAS) * len(VALORES_C),
                                  "configuraciones": n_cfgs},
@@ -886,6 +1367,10 @@ def main(argv: list[str] | None = None) -> int:
                    "artefacto": "tito_logreg.json",
                    "sha256": sha((AQUI / "tito_logreg.json").read_bytes())},
                "limites": ["Seleccion solo con validacion de desarrollo.",
+                           "Criterio oportuna operativo exploratorio (D08); "
+                           "sin T_R no evaluable, con ambos margenes.",
+                           "F1 solo sobre prefijos revisados; inciertos en cobertura.",
+                           "Cota lexica auxiliar; no es evidencia semantica suficiente.",
                            "Nulos fuera de perdida y metricas, con cobertura.",
                            "Sin revision humana inventada; puerta formal intacta.",
                            "Reserva no leida; veinte de comparacion sin usar."]}
@@ -902,17 +1387,28 @@ def main(argv: list[str] | None = None) -> int:
 
 def armar_informe(r: dict) -> str:
     eleg = next(x for x in r["resultados_validacion"] if x["config"] == r["seleccion"]["elegida"])
+    resumen_aud = r.get("auditoria_semantica_resumen", {})
+    sup_id = r.get("supervision_identidad", {})
+    clasif = r.get("clasificacion_prefijos_revisados_elegida", {})
+    verif = r.get("verificacion_recarga", {})
     lineas = [f"# Reporte #99 — frase y contexto con RoBERTuito congelado",
               f"",
               f"Fecha: {r['fecha']}. Encoder `{r['encoder']['id']}` "
               f"revision `{r['encoder']['revision'][:12]}` congelado. "
               f"Seed {r['semilla']}.",
               f"",
-              f"## Auditoria semantica",
+              f"## Auditoria semantica (otro worker)",
               f"",
-              f"Familias del banco excluidas del ajuste: "
-              f"{len(r['auditoria_semantica']['familias_relacionadas_excluidas'])}.",
-              f"Conteo despues: {r['auditoria_semantica']['conteo_despues']}.",
+              f"Artefacto validado con umbral {resumen_aud.get('umbral')} "
+              f"({resumen_aud.get('metodo_calibracion')}). "
+              f"Familias excluidas del ajuste: {len(resumen_aud.get('excluidas', []))}.",
+              f"Supervision: `{sup_id.get('artefacto')}` modelos "
+              f"{sup_id.get('modelos')}.",
+              f"Cota lexica propia solo auxiliar, sin valor semantico.",
+              f"",
+              f"## Criterio operativo de oportunidad",
+              f"",
+              f"{r.get('criterio_oportuna', '')}",
               f"",
               f"## Entrenamiento",
               f"",
@@ -921,10 +1417,19 @@ def armar_informe(r: dict) -> str:
               f"{r['entrenamiento']['clasificadores']} clasificadores, "
               f"{r['entrenamiento']['configuraciones']} configuraciones.",
               f"",
+              f"## Clasificacion por prefijo (elegida, solo revisados)",
+              f"",
+              f"Revisados: {clasif.get('revisados')}, inciertos: "
+              f"{clasif.get('inciertos_null')}, sin registro: "
+              f"{clasif.get('sin_registro')}. F1 (solo revisados): "
+              f"{clasif.get('f1')}.",
+              f"Recarga verificada sin ajuste: {verif.get('metodo', '')}.",
+              f"",
               f"## Seleccion (solo validacion)",
               f"",
               f"Elegida: `{r['seleccion']['elegida']}`. "
-              f"Frontera: {r['seleccion']['frontera_pareto']}.",
+              f"Frontera historial: {r['seleccion']['frontera_pareto']}. "
+              f"Controles frase: {r['seleccion'].get('controles_frase')}.",
               f"",
               f"| config | omisiones | legit_deriv | consultas_media |",
               f"|---|---|---|---|"]
