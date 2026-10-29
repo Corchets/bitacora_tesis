@@ -105,7 +105,7 @@ Son 20 casos: cada uno mueve los porcentajes 10 puntos.
 | 2 seguidas > 0,8 | 10 / 3 | 1 / 0 |
 
 - `riesgo` no perdió estafas frente a `v2` con umbral 0,6 o 0,7, y tuvo menos falsas alarmas.
-  Con el `v2` el 9 de cada 10 legítimas avisan: con este modelo es peor línea base.
+  Con `v2`, 9 de cada 10 legítimas dieron falsa alarma: con este modelo es una línea base débil.
 - Con `riesgo` el modelo usa pocos valores (0,75 aparece en 103 de 524 líneas) y casi nunca
   pasa de 0,8: los umbrales ≥ 0,8 casi no avisan. En las estafas, una vez que aparece el
   pedido el riesgo se queda en 0,75 hasta el final; en varias legítimas sube a 0,65–0,75 unas
