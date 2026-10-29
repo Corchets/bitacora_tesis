@@ -93,20 +93,45 @@ def plan_pares(modelos: list[str], condiciones: list[str],
 
 
 def politica_congelada_valida(ruta: Path) -> dict:
-    """La ganadora congelada de la selección, con parámetros explícitos."""
+    """La congelada de la selección, con parámetros explícitos.
+
+    Acepta el bloque canónico `politica` (contrato común con #100) y el
+    alias histórico `politica_ganadora`; si traen ambos deben coincidir.
+    Exige `seleccion_solo_validacion=true` y `congelado_en` UTC con zona.
+    Una congelada `NO_MEJORA_VALIDACION` también es válida acá: mide las
+    400 como evidencia negativa (nunca como ganadora apta).
+    """
     try:
         fro = json.loads(Path(ruta).read_text(encoding="utf-8"))
     except (ValueError, OSError) as e:
         raise ValueError(f"política congelada ilegible ({ruta}): {e}.")
     if fro.get("etapa") != "seleccion-102-congelada":
         raise ValueError(f"{ruta} no es un congelado de selección-102.")
-    pol = fro.get("politica_ganadora", {})
-    if pol.get("regla_nueva_evidencia") not in ("nuevo_cruce_tras_bajar",):
-        raise ValueError(f"regla congelada desconocida: {pol.get('regla_nueva_evidencia')!r}.")
-    if pol.get("periodo_revision") not in (1, 3, 5):
-        raise ValueError(f"periodo congelado fuera de la búsqueda acotada: {pol.get('periodo_revision')!r}.")
-    if float(pol.get("delta_minimo", -1)) != 0.0:
-        raise ValueError(f"delta congelado distinto de 0: {pol.get('delta_minimo')!r}.")
+    if fro.get("seleccion_solo_validacion") is not True:
+        raise ValueError("política sin seleccion_solo_validacion=true: "
+                         "solo se mide lo elegido con validación.")
+    try:
+        momento = datetime.fromisoformat(str(fro.get("congelado_en", "")))
+    except (ValueError, TypeError):
+        raise ValueError("política sin congelado_en ISO válido.")
+    if momento.tzinfo is None:
+        raise ValueError("política sin congelado_en con zona UTC.")
+    canon = fro.get("politica", {})
+    legado = fro.get("politica_ganadora", {})
+    periodo = canon.get("periodo_actualizaciones", legado.get("periodo_revision"))
+    regla = canon.get("regla_nueva_evidencia", legado.get("regla_nueva_evidencia"))
+    delta = canon.get("delta_score", legado.get("delta_minimo", -1))
+    if regla not in ("nuevo_cruce_tras_bajar",):
+        raise ValueError(f"regla congelada desconocida: {regla!r}.")
+    if periodo not in (1, 3, 5):
+        raise ValueError(f"periodo congelado fuera de la búsqueda acotada: {periodo!r}.")
+    if float(delta) != 0.0:
+        raise ValueError(f"delta congelado distinto de 0: {delta!r}.")
+    if canon and legado and (
+            legado.get("periodo_revision") != canon.get("periodo_actualizaciones")
+            or legado.get("delta_minimo") != canon.get("delta_score")
+            or legado.get("regla_nueva_evidencia") != canon.get("regla_nueva_evidencia")):
+        raise ValueError("politica_ganadora difiere del bloque politica canónico.")
     return fro
 
 
@@ -167,8 +192,12 @@ def cobertura_102(bloqueos_modelo: dict, bloqueo_politica: str,
 
 
 CAMPOS_REUSO = ("modelos", "casos", "prompt", "prompt_huella", "hablantes",
-                "num_ctx", "seed", "url", "particiones_sha256",
+                "num_ctx", "seed", "url", "timeout", "hardware",
+                "ollama_version", "particiones_sha256",
                 "configuracion_sha256")
+
+CAMPOS_PROCEDIMIENTO = ("politica_aviso", "modo_termino",
+                        "columnas_traza_sha256")
 
 
 def verificar_reuso_101(manifiesto_101: dict, funcionales_102: dict) -> tuple[bool, list[str]]:
@@ -177,10 +206,12 @@ def verificar_reuso_101(manifiesto_101: dict, funcionales_102: dict) -> tuple[bo
     Exige igualdad en modelos (orden incluido), casos y sus huellas,
     prompt y su huella, hablantes, num_ctx, seed, URL y versión de Ollama,
     inventario por modelo (digest, cuantización) y bloque tito-nuevo
-    (artefacto sha, entrada historial, umbral, encoder). Los commits de
-    código de ambas corridas se registran como procedencia, no como
-    bloqueo (la ruta permanente es la misma clase y procedimiento).
-    Devuelve (ok, motivos); si algo difiere hay que medir ambas.
+    (artefacto sha, entrada historial, umbral). El procedimiento se
+    compara con las huellas explícitas de
+    `matriz_101.huellas_procedimiento` (la misma función en ambas
+    corridas): hardware (CPU/GPU), timeout, columnas de la traza y código
+    distintos bloquean el reuso. Devuelve (ok, motivos); si algo difiere
+    hay que medir ambas condiciones.
     """
     motivos: list[str] = []
     f101 = manifiesto_101.get("funcionales", {})
@@ -206,11 +237,65 @@ def verificar_reuso_101(manifiesto_101: dict, funcionales_102: dict) -> tuple[bo
         if a.get("version", manifiesto_101.get("ollama", {}).get("version")) != \
                 funcionales_102.get("ollama_version"):
             motivos.append(f"versión de Ollama para {modelo} difiere.")
+    p101 = f101.get("procedimiento", {})
+    p102 = funcionales_102.get("procedimiento", {})
+    if not p101 or not p102:
+        motivos.append("procedimiento sin huellas explícitas en una de las corridas.")
+    else:
+        for campo in CAMPOS_PROCEDIMIENTO:
+            if p101.get(campo) != p102.get(campo):
+                motivos.append(f"procedimiento.{campo} difiere "
+                               f"({p101.get(campo)!r} vs {p102.get(campo)!r}).")
+        if (p101.get("codigo") or {}).get("commit") != \
+                (p102.get("codigo") or {}).get("commit"):
+            motivos.append("procedimiento.codigo.commit difiere entre corridas.")
     if manifiesto_101.get("politica") != correr.POLITICA:
         motivos.append("la corrida 101 no usó aviso único hasta el aviso.")
     if manifiesto_101.get("modo_termino") != correr.MODO_OPERATIVO:
         motivos.append("la corrida 101 no terminó al primer aviso.")
     return (not motivos), motivos
+
+
+def resolver_reuso_101(ruta_manifiesto_101: Path, funcionales_102: dict,
+                       csv_102: Path, modelos_ok: list[str],
+                       ids: list[str]) -> tuple[set, dict]:
+    """Reuso 101 verificado o rechazo explícito para medir ambas.
+
+    Devuelve (importados, registro). Si las huellas no coinciden, no se
+    importa nada y el registro documenta los motivos: la matriz mide
+    ambas condiciones sin reducir el global 400 ni ocultar procedencia.
+    """
+    try:
+        man101 = json.loads(Path(ruta_manifiesto_101).read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        raise ValueError(f"Manifiesto 101 ilegible: {e}.")
+    ok, motivos = verificar_reuso_101(man101, funcionales_102)
+    if not ok:
+        return set(), {
+            "desde": str(ruta_manifiesto_101),
+            "reusado": False,
+            "triples_importados": 0,
+            "motivos": motivos,
+            "codigo_101": man101.get("codigo", {}),
+            "nota": ("procedencia incompatible: NO se reusa; se miden "
+                     "ambas condiciones sin reducir el global 400 ni "
+                     "ocultar la procedencia."),
+        }
+    base101 = Path(ruta_manifiesto_101)
+    for suf in ("_manifiesto.json",):
+        if base101.name.endswith(suf):
+            csv101 = base101.parent / (base101.name[: -len(suf)] + "_actualizaciones.csv")
+            break
+    else:
+        csv101 = base101.parent / "actualizaciones.csv"
+    importados = importar_permanente_desde_101(csv101, csv_102, modelos_ok, ids)
+    return importados, {
+        "desde": str(ruta_manifiesto_101),
+        "reusado": True,
+        "triples_importados": len(importados),
+        "codigo_101": man101.get("codigo", {}),
+        "nota": "celdas permanente reusadas de tito-nuevo #101 con huellas coincidentes",
+    }
 
 
 def importar_permanente_desde_101(csv_101: Path, csv_102: Path,
@@ -320,7 +405,13 @@ def main(argv: list[str] | None = None) -> int:
     bloqueo_politica = "" if fro else (
         "sin política congelada: la condición reconsultas queda pendiente "
         "(no se improvisa otra política ni se mide sin congelado)")
-    politica = fro["politica_ganadora"] if fro else None
+    politica = dict(fro["politica_ganadora"]) if fro else None
+    if politica is not None and fro is not None:
+        politica["modo_congelado"] = fro.get("modo", "?")
+        politica["resultado_negativo"] = bool(fro.get("resultado_negativo", False))
+    if fro is not None and fro.get("resultado_negativo"):
+        print("Congelado NO_MEJORA_VALIDACION/no_adoptar: se miden los 400 "
+              "como evidencia negativa (no es ganadora apta).")
 
     cliente = ClienteOllama(args.url, args.timeout)
     cliente_carga = ClienteOllama(args.url, max(args.timeout, 600.0))
@@ -377,6 +468,7 @@ def main(argv: list[str] | None = None) -> int:
         "hablantes": args.hablantes, "num_ctx": args.num_ctx, "seed": args.seed,
         "timeout": args.timeout, "hardware": extra, "url": args.url,
         "ollama_version": version,
+        "procedimiento": matriz_101.huellas_procedimiento(),
         "inventario": inventario,
         "casos_huellas": matriz_101.huellas_casos_101(ids),
         "particiones_sha256": matriz_101._sha_archivo(matriz_101.PARTICIONES),
@@ -453,27 +545,16 @@ def main(argv: list[str] | None = None) -> int:
         etiqueta_corrida = prefijo
         if args.reutilizar_101 is not None:
             try:
-                man101 = json.loads(Path(args.reutilizar_101).read_text(encoding="utf-8"))
-            except (ValueError, OSError) as e:
-                sys.exit(f"Manifiesto 101 ilegible: {e}.")
-            ok, motivos = verificar_reuso_101(man101, funcionales)
-            if not ok:
-                sys.exit("Reuso 101 rechazado (se miden ambas condiciones):\n- " + "\n- ".join(motivos))
-            base101 = Path(args.reutilizar_101)
-            for suf in ("_manifiesto.json",):
-                if base101.name.endswith(suf):
-                    csv101 = base101.parent / (base101.name[: -len(suf)] + "_actualizaciones.csv")
-                    break
-            else:
-                csv101 = base101.parent / "actualizaciones.csv"
-            importados = importar_permanente_desde_101(csv101, csv_path, modelos_ok, ids)
+                importados, registro = resolver_reuso_101(
+                    Path(args.reutilizar_101), funcionales, csv_path,
+                    modelos_ok, ids)
+            except ValueError as e:
+                sys.exit(str(e))
             completados |= importados
-            manifiesto["reutilizacion_101"] = {
-                "desde": str(args.reutilizar_101),
-                "triples_importados": len(importados),
-                "codigo_101": man101.get("codigo", {}),
-                "nota": "celdas permanente reusadas de tito-nuevo #101 con huellas coincidentes",
-            }
+            manifiesto["reutilizacion_101"] = registro
+            if not registro["reusado"]:
+                print("Reuso 101 rechazado: se miden ambas condiciones "
+                      "(global 400 intacto):\n- " + "\n- ".join(registro["motivos"]))
 
     manifiesto["cobertura"] = cobertura_102(bloqueos_modelo, bloqueo_politica, triples, completados)
     _guardar_manifiesto(manifiesto_path, manifiesto)

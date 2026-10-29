@@ -88,7 +88,20 @@ class TestPoliticaCongelada(unittest.TestCase):
     def _frozen(self, tmp, **cambios):
         pol = dict(POL_P3)
         pol.update(cambios)
-        fro = {"etapa": "seleccion-102-congelada", "politica_ganadora": pol}
+        canon = {"nombre": pol.get("nombre", "reconsultas-p3"),
+                 "periodo_actualizaciones": pol.get("periodo_revision", 3),
+                 "regla_nueva_evidencia": pol.get(
+                     "regla_nueva_evidencia", "nuevo_cruce_tras_bajar"),
+                 "delta_score": pol.get("delta_minimo", 0.0)}
+        fro = {"etapa": "seleccion-102-congelada",
+               "seleccion_solo_validacion": True,
+               "congelado_en": "2026-10-29T00:00:01+00:00",
+               "tito": {"artefacto_sha256": "t", "manifiesto100_sha256": "f",
+                        "entrada": "historial_acumulado", "umbral": 0.5,
+                        "encoder": {"id": "e", "revision": "r"}},
+               "politica": canon,
+               "modo": "ganadora_para_medir",
+               "politica_ganadora": pol}
         ruta = Path(tmp) / "frozen.json"
         ruta.write_text(json.dumps(fro), encoding="utf-8")
         return ruta
@@ -112,21 +125,59 @@ class TestPoliticaCongelada(unittest.TestCase):
                 matriz_102.politica_congelada_valida(
                     self._frozen(tmp, delta_minimo=0.5))
 
+    def test_rechaza_sin_contrato_comun(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            ruta = self._frozen(tmp)
+            fro = json.loads(Path(ruta).read_text(encoding="utf-8"))
+            fro.pop("seleccion_solo_validacion")
+            ruta.write_text(json.dumps(fro), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "seleccion_solo_validacion"):
+                matriz_102.politica_congelada_valida(ruta)
+            ruta = self._frozen(tmp)
+            fro = json.loads(Path(ruta).read_text(encoding="utf-8"))
+            fro["congelado_en"] = "2026-10-29T00:00:01"
+            ruta.write_text(json.dumps(fro), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "zona UTC"):
+                matriz_102.politica_congelada_valida(ruta)
+
+    def test_rechaza_alias_incompatible_con_canonico(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            ruta = self._frozen(tmp)
+            fro = json.loads(Path(ruta).read_text(encoding="utf-8"))
+            fro["politica_ganadora"]["periodo_revision"] = 5
+            ruta.write_text(json.dumps(fro), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                matriz_102.politica_congelada_valida(ruta)
+
 
 class TestReuso101(unittest.TestCase):
-    def _funcionales(self, digest="d1", umbral=0.5):
+    def _procedimiento(self, commit="x"):
+        proc = matriz_101.huellas_procedimiento()
+        proc["codigo"] = {"commit": commit,
+                          "cambios_sin_commit_en_la_carpeta": False}
+        return proc
+
+    def _funcionales(self, digest="d1", umbral=0.5, hardware=None,
+                     timeout=120.0, commit="x"):
         return {"modelos": ["qwen3.5:4b"], "casos": ["c1"],
                 "prompt": "tarea", "prompt_huella": "h", "hablantes": "ab",
                 "num_ctx": 4096, "seed": 42, "url": "http://127.0.0.1:11435",
-                "ollama_version": "v", "particiones_sha256": "p", "configuracion_sha256": "c",
+                "timeout": timeout, "hardware": hardware,
+                "ollama_version": "v", "particiones_sha256": "p",
+                "configuracion_sha256": "c",
+                "procedimiento": self._procedimiento(commit),
                 "inventario": {"qwen3.5:4b": {"digest": digest, "cuantizacion": "q",
                                              "tag": "qwen3.5:4b"}},
                 "tito_nuevo": {"sha256": "t", "entrada": "historial_acumulado",
                                "umbral": umbral}}
 
-    def _man101(self, digest="d1", umbral=0.5):
+    def _man101(self, digest="d1", umbral=0.5, hardware=None,
+                timeout=120.0, commit="x"):
         return {"politica": correr.POLITICA, "modo_termino": correr.MODO_OPERATIVO,
-                "funcionales": self._funcionales(digest, umbral),
+                "funcionales": self._funcionales(digest, umbral, hardware,
+                                                 timeout, commit),
                 "ollama": {"version": "v",
                            "modelos": {"qwen3.5:4b": {"digest": digest, "cuantizacion": "q",
                                                       "tag": "qwen3.5:4b"}}},
@@ -146,6 +197,44 @@ class TestReuso101(unittest.TestCase):
         ok, motivos = matriz_102.verificar_reuso_101(self._man101(umbral=0.7),
                                                      self._funcionales())
         self.assertFalse(ok)
+
+    def test_hardware_distinto_bloquea(self):
+        ok, motivos = matriz_102.verificar_reuso_101(
+            self._man101(hardware=None),
+            self._funcionales(hardware={"num_gpu": 0}))
+        self.assertFalse(ok)
+        self.assertTrue(any("hardware" in m for m in motivos))
+
+    def test_timeout_distinto_bloquea(self):
+        ok, motivos = matriz_102.verificar_reuso_101(
+            self._man101(timeout=120.0),
+            self._funcionales(timeout=60.0))
+        self.assertFalse(ok)
+        self.assertTrue(any("timeout" in m for m in motivos))
+
+    def test_codigo_distinto_bloquea(self):
+        ok, motivos = matriz_102.verificar_reuso_101(
+            self._man101(commit="x"),
+            self._funcionales(commit="y"))
+        self.assertFalse(ok)
+        self.assertTrue(any("commit" in m for m in motivos))
+
+    def test_procedimiento_incompatible_mide_ambas(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            man101 = self._man101(hardware=None)
+            ruta101 = Path(tmp) / "a_manifiesto.json"
+            ruta101.write_text(json.dumps(man101), encoding="utf-8")
+            csv102 = Path(tmp) / "b_actualizaciones.csv"
+            csv102.write_text("", encoding="utf-8-sig")
+            funcionales = self._funcionales(hardware={"num_gpu": 0})
+            importados, registro = matriz_102.resolver_reuso_101(
+                ruta101, funcionales, csv102, ["qwen3.5:4b"], ["c1"])
+            self.assertEqual(importados, set())
+            self.assertFalse(registro["reusado"])
+            self.assertEqual(registro["triples_importados"], 0)
+            self.assertTrue(any("hardware" in m for m in registro["motivos"]))
+            self.assertIn("ambas condiciones", registro["nota"])
 
     def test_importa_solo_triples_completos_y_renombra(self):
         import tempfile

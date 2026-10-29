@@ -177,6 +177,26 @@ def casos_101() -> list[str]:
     return list(IDS_101)
 
 
+def huellas_procedimiento() -> dict:
+    """Huellas explícitas de las fuentes comunes del procedimiento.
+
+    Lo que dos corridas deben compartir para que una celda medida en
+    una valga en la otra (#101 tito-nuevo -> #102 permanente): política
+    de aviso único, modo de término al primer aviso, columnas de la
+    traza cruda y código que las escribe. Sin cambiar el runner: solo
+    se lee y se declara en el manifiesto ANTES de medir.
+    """
+    columnas = list(correr.COLUMNAS)
+    return {
+        "politica_aviso": correr.POLITICA,
+        "modo_termino": correr.MODO_OPERATIVO,
+        "columnas_traza": columnas,
+        "columnas_traza_sha256": hashlib.sha256(
+            json.dumps(columnas).encode("utf-8")).hexdigest(),
+        "codigo": correr.info_codigo(),
+    }
+
+
 def huellas_casos_101(ids: list[str]) -> dict[str, dict]:
     """Snapshot de textos y referencias para la huella funcional."""
     respaldo = huellas_particiones_101()
@@ -720,6 +740,8 @@ def main(argv: list[str] | None = None) -> int:
         "prompt": args.prompt, "prompt_huella": huella_texto(prompt_txt),
         "hablantes": args.hablantes, "num_ctx": args.num_ctx, "seed": args.seed,
         "timeout": args.timeout, "hardware": extra, "url": args.url,
+        "ollama_version": version,
+        "procedimiento": huellas_procedimiento(),
         "inventario": inventario,
         "casos_huellas": huellas_casos_101(ids),
         "particiones_sha256": _sha_archivo(PARTICIONES),

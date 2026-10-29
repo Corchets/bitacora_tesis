@@ -284,9 +284,24 @@ def armar_informe(base: Path, comparar_101: Path | None = None) -> str:
         L.append(f"- Celdas permanente reusadas de #101: {reuso['triples_importados']} "
                  f"(desde `{reuso.get('desde', '?')}`, huellas coincidentes verificadas).")
     pol = (manifiesto.get("politica_congelada") or {})
-    L.append(f"- Política congelada: `{pol.get('ganadora', '?')}` "
-             f"(periodo {pol.get('periodo_revision', '?')}, "
-             f"regla {pol.get('regla_nueva_evidencia', '?')}, delta {pol.get('delta_minimo', '?')}).")
+    if pol.get("resultado_negativo"):
+        L.append(f"- Política congelada: `{pol.get('ganadora', '?')}` "
+                 f"(periodo {pol.get('periodo_revision', '?')}, "
+                 f"regla {pol.get('regla_nueva_evidencia', '?')}, delta {pol.get('delta_minimo', '?')}) "
+                 f"en modo {pol.get('modo_congelado', 'NO_MEJORA_VALIDACION')}/no_adoptar: "
+                 "exploratoria para evidencia negativa, nunca ganadora apta.")
+    else:
+        L.append(f"- Política congelada: `{pol.get('ganadora', '?')}` "
+                 f"(periodo {pol.get('periodo_revision', '?')}, "
+                 f"regla {pol.get('regla_nueva_evidencia', '?')}, delta {pol.get('delta_minimo', '?')}).")
+    L.append("- Cambiar el Tito (efecto #101: directo→tito-viejo→tito-nuevo) se informa "
+             "por separado de cambiar la política (efecto #102: permanente→reconsultas "
+             "con el Tito nuevo fijo).")
+    L.append("")
+    L.append("> **Estado: propuesta sin discutir.** La política operativa, la búsqueda "
+             "acotada y el criterio provisional de desarrollo son candidatos vinculados a "
+             "[D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental): "
+             "este informe no cierra D08 ni adopta 95/5 como meta.")
     L.append("Costos hasta el aviso incluido (o caso completo si nunca avisó); "
              "Tito corre en cada actualización y su costo queda visible sin doble conteo. "
              "Referencias de trabajo sin revisión humana (D07/D08 abiertas); "

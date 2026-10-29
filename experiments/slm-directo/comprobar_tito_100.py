@@ -1132,6 +1132,15 @@ def _cmd_evaluar(args) -> int:
         print(f"evaluar exige artefacto viejo existente ({artefacto_viejo}).",
               file=sys.stderr)
         return RC_USO
+    # Puerta de secuencia ANTES de abrir las veinte: una política
+    # inválida no debe provocar ninguna lectura de textos/referencias.
+    if args.politica_manifiesto is not None:
+        try:
+            _verificar_politica_102(args.politica_manifiesto, manifiesto,
+                                    Path(args.manifiesto))
+        except ValueError as e:
+            print(f"evaluar: puerta de política #102: {e}", file=sys.stderr)
+            return RC_USO
     try:
         particiones = cargar_particiones()
         ids = ids_comparacion_20(particiones)
