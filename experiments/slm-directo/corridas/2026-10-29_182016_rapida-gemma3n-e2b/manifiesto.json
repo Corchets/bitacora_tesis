@@ -1,0 +1,155 @@
+{
+  "inicio": "2026-10-29T18:20:16",
+  "comando": "python correr.py --modelos gemma3n:e2b --prompts riesgo,v2 --lista rapida-20 --solo-cpu --num-batch 32 --sin-reglas --etiqueta rapida-gemma3n-e2b",
+  "codigo": {
+    "commit": "8c8be37be1d48f4f4dacdb9537b4198d6f27d6fa",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Windows-11-10.0.26300-SP0",
+    "arquitectura": "AMD64",
+    "procesador": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 15.7,
+    "python": "3.13.7"
+  },
+  "politica": "aviso_unico_primer_true_valido",
+  "particion": "desarrollo",
+  "lista": "rapida-20",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.13",
+    "digests": {
+      "gemma3n:e2b": "dae166dc6a5e93061da12b75b887ce7c72cb91785d547b88c7503047f8411ffd"
+    }
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": {
+      "num_gpu": 0,
+      "num_batch": 32
+    },
+    "umbral_etapa2": 0.6
+  },
+  "prompts": {
+    "riesgo": {
+      "huella": "8ac35ae605230ff1",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nLo que importa es si, en lo dicho hasta ahora, alguien le pide, induce o presiona a la otra persona, en esta llamada, para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nEl pedido cuenta aunque no use esas palabras y aunque la razón que se da parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta). Mirá la conversación entera: varias frases juntas pueden armar un pedido aunque ninguna lo sea sola.\n\nNo es un pedido:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- negar que se las vayan a pedir, o negarse a hacerlas;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general;\n- una palabra suelta como «código», «clave» o «transferencia» en una charla que no tiene nada que ver con una estafa.\n\nRespondé solo con un objeto JSON con un único campo, \"riesgo\": un número entre 0 y 1 con dos decimales, según esta escala:\n- 0.00 a 0.30: charla normal, sin señales.\n- 0.31 a 0.60: hay señales (alguien dice ser de una entidad, apura, habla de un problema con una cuenta o un pago), pero todavía no hay un pedido como los de la lista.\n- 0.61 a 1.00: hay un pedido como los de la lista; cuanto más directo y urgente, más alto.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "riesgo"
+        ]
+      },
+      "etapa2": {
+        "huella": "c6ef89497993360b",
+        "texto": "El riesgo superó el umbral y se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.\n- \"motivo\": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "v2": {
+      "huella": "ce3db487d550210c",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en lo dicho hasta ahora, alguien le pide, induce o presiona a la otra persona, en esta llamada, para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nEl pedido cuenta aunque no use esas palabras y aunque la razón que se da parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta).\n\nNo es un pedido:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- negar que se las vayan a pedir, o negarse a hacerlas;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general.\nQue alguien diga ser de una entidad, apure o hable de un problema no alcanza para alertar: eso sube el riesgo, pero la alerta espera un pedido.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": si hay un pedido así, copiá textualmente la frase de la transcripción donde se pide; si no hay, \"\".\n- \"alerta_sugerida\": true si copiaste un pedido en \"evidencia\"; si no, false.\n- \"riesgo\": número entre 0 y 1 que indica qué tan riesgosa te parece la llamada con lo disponible hasta ahora; si alerta_sugerida es true, al menos 0.5.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que nombre lo que le están pidiendo; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "evidencia": {
+            "type": "string"
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "motivo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidencia",
+          "alerta_sugerida",
+          "riesgo",
+          "motivo"
+        ]
+      }
+    }
+  },
+  "configs": [
+    {
+      "config": "slm|gemma3n:e2b|riesgo|ab",
+      "detector": "slm",
+      "modelo": "gemma3n:e2b",
+      "prompt": "riesgo",
+      "hablantes": "ab"
+    },
+    {
+      "config": "slm|gemma3n:e2b|v2|ab",
+      "detector": "slm",
+      "modelo": "gemma3n:e2b",
+      "prompt": "v2",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "CV2-D-V-BANCO-001": "0affbb8ce80874ba",
+    "CV2-D-V-BANCO-002": "408fa71f0df52a5e",
+    "CV2-D-V-BANCO-007": "6aa5fdd522005cf0",
+    "CV2-D-V-WHATSAPP-002": "68caf4afa149904d",
+    "CV2-D-V-WHATSAPP-006": "d108b5f5b91893f6",
+    "CV2-D-V-SOPORTE-003": "c7c415cd71d46d70",
+    "CV2-D-V-SOPORTE-004": "8b9704896f784852",
+    "CV2-D-V-FAMILIAR-002": "f77138c8fd31590a",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001": "c3a8aab157a40397",
+    "CV2-D-V-PREMIO-004": "efd49ed9cc707e5d",
+    "CV2-D-L-BANCO-001": "10d9a2f2d202aa47",
+    "CV2-D-L-BANCO-007": "4f80a484014b9cc9",
+    "CV2-D-L-DELIVERY-001": "ee7932e8924132c1",
+    "CV2-D-L-ESCUELA-001": "243975f0e5bb4b70",
+    "CV2-D-L-FAMILIAR-001": "50a486aa265a3f25",
+    "CV2-D-L-MEDICO-001": "62b0315ecaae1230",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001": "ba6390bcc9ead422",
+    "CV2-D-L-PREMIO-001": "bbcd27e268ae2d67",
+    "CV2-D-L-SOPORTE-002": "71a1cebc18f6401b",
+    "CV2-D-L-WHATSAPP-001": "74b54e1f77b12210"
+  },
+  "modelos": {
+    "gemma3n:e2b": {
+      "carga_ms": 1645,
+      "error": "",
+      "memoria": {
+        "size_bytes": 6738453461,
+        "size_vram_bytes": 0
+      },
+      "pensar": false
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-10-29T20:03:16"
+}
