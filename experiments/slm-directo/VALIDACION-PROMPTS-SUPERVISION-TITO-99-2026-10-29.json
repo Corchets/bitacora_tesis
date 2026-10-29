@@ -385,7 +385,7 @@
    }
   }
  ],
- "historial_rondas": "v2 qwen3.5:4b (recibo canónico previo, 7/8): indicio_sin_pedido 0/1, fundamentos con secreto no citado, ambiguos con esperado 0. v3-pre-paso0 gemma4:e4b (6/8, solo log): ambos ambiguos 0/0. v3-paso0 gemma4:e4b (6/8, recibo V3 preservado): filtro citado pero 0/0 en ambos ambiguos. v3-pre-paso0 qwen3.5:4b diag (7/8, solo log): truncado null por desacuerdo, vago 0/0. v3-paso0 qwen3.5:4b diag (6/8, recibo DIAG-QWEN preservado): consejo 1/0, ambiguos fallan. v4 triestado root gemma4:e4b (5/8, este recibo): consejo 1/0, ambos ambiguos 0/0; pizza/turno/otp/repartido/indicio OK con citas literales. Transporte null verificado por root y propio (etiqueta null parseada y validada): el fallo es semántico, no de schema.",
+ "historial_rondas": "v2 qwen3.5:4b (recibo canónico previo, 7/8): indicio_sin_pedido 0/1, fundamentos con secreto no citado, ambiguos con esperado 0. v3-pre-paso0 gemma4:e4b (6/8, solo log): ambos ambiguos 0/0. v3-paso0 gemma4:e4b (6/8, recibo V3 preservado): filtro citado pero 0/0 en ambos ambiguos. v3-pre-paso0 qwen3.5:4b diag (7/8, solo log): truncado null por desacuerdo, vago 0/0. v3-paso0 qwen3.5:4b diag (6/8, recibo DIAG-QWEN preservado): consejo 1/0, ambiguos fallan. v4 triestado root gemma4:e4b (5/8, este recibo): consejo 1/0, ambos ambiguos 0/0; pizza/turno/otp/repartido/indicio OK con citas literales. Transporte null verificado por root y propio (etiqueta null parseada y validada): el fallo es semántico, no de schema. v4 triestado root qwen3.5:9b-q4_K_M auxiliar (5/8, recibo DIAG-9B preservado): consejo 1/1, ambos ambiguos 0/0; resto OK. Tercer anotador autorizado también falla: sin reanotación, gate cerrado.",
  "conformidad": 5,
  "total": 8,
  "segundos_total": 15.2,
