@@ -68,8 +68,8 @@ SEMILLA = 42
 OPCIONES_MODELO = {
     "temperature": 1,
     "seed": SEMILLA,
-    "num_predict": 4096,
-    "num_ctx": 8192,
+    "num_predict": 8192,
+    "num_ctx": 16384,
     "top_p": 0.95,
     "top_k": 20,
     "min_p": 0.0,
@@ -77,14 +77,13 @@ OPCIONES_MODELO = {
     "repeat_penalty": 1.0,
 }
 
-# Hipótesis think (#99): pensar=True con num_predict=4096, num_ctx=8192
+# Hipótesis think (#99): pensar=True con num_predict=8192, num_ctx=16384
 # explícito y muestreo de la ficha oficial Qwen sobre el MISMO prompt v4
-# del módulo del corrector. La variante intermedia (temp=0, 2048) quedó
-# registrada como FALLIDA por truncado de JSON, y la variante pensar=True
-# con num_predict=4096 sin num_ctx también: agotó el contexto total
-# (done_reason=length, prompt_eval + eval = 4096 exactos, contenido vacío;
-# ver recibo DIAG truncado del corrector). Nueva identidad: sus filas no se
-# mezclan con las de otra identidad (think/opciones exactas, con num_ctx).
+# del módulo del corrector. Anteriores FALLIDAS: temp0/2048 y think/4096
+# sin num_ctx (contexto total), think/4096 con ctx8192 en 9b (generación)
+# y think/4096 con ctx8192 en 4b (5/8: 3 desvíos por generación, ver
+# recibo 4B-8K). Nueva identidad: sus filas no se mezclan con las de otra
+# identidad (think/opciones exactas, con num_predict y num_ctx).
 # El thinking se conserva separado por pasada y nunca alimenta a la otra.
 PENSAR = True
 

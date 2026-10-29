@@ -66,8 +66,8 @@ SEMILLA = 42
 OPCIONES_MODELO = {
     "temperature": 1,
     "seed": SEMILLA,
-    "num_predict": 4096,
-    "num_ctx": 8192,
+    "num_predict": 8192,
+    "num_ctx": 16384,
     "top_p": 0.95,
     "top_k": 20,
     "min_p": 0.0,
@@ -88,13 +88,17 @@ OPCIONES_MODELO = {
 # devolvió done_reason=length con prompt_eval=720 + eval=3376 = 4096
 # exactos y contenido vacío (ver
 # VALIDACION-PROMPTS-SUPERVISION-TITO-99-V4-THINK-9B-4K-TRUNCADO-2026-10-29.json).
-# Esta variante conserva pensar=True, num_predict=4096 y el mismo muestreo
-# sobre el MISMO prompt v4 y los MISMOS 8 controles, y agrega num_ctx=8192
-# explícito (autorización root msg_104fbe88139e): el thinking y el JSON
-# comparten la ventana de contexto. Nueva identidad/caché/recibo: sus filas
-# NO se mezclan con las de otra identidad (think/opciones exactas,
-# incluido num_ctx). El thinking se conserva separado por pasada y NUNCA
-# se usa como entrada de la otra pasada: ambas llamadas son stateless.
+# La variante 4b-8k (num_predict=4096, num_ctx=8192) dio 5/8: los 3
+# desvíos fueron agotamiento de GENERACIÓN (done_reason=length,
+# eval=4096=num_predict, contenido vacío), no semántica — ver recibo
+# VALIDACION-PROMPTS-SUPERVISION-TITO-99-V4-THINK-4B-8K-2026-10-29.json.
+# Esta variante conserva pensar=True, el mismo muestreo y el MISMO prompt
+# v4 y los MISMOS 8 controles, y amplía a num_predict=8192 y num_ctx=16384
+# (autorización root msg_5a0da34dfd87; presupuesto máximo anotador).
+# Nueva identidad/caché/recibo: sus filas NO se mezclan con las de otra
+# identidad (think/opciones exactas, incluidos num_predict y num_ctx).
+# El thinking se conserva separado por pasada y NUNCA se usa como entrada
+# de la otra pasada: ambas llamadas son stateless.
 PENSAR = True
 
 PROMPT_VERSION = "v4-contextual-2026-10-29"
