@@ -127,7 +127,7 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
 
 ## Layout
 
-- **Estructura vertical contenida en pantalla**: La consola se ajusta a la ventana del navegador (`100vh`) sin desplazamiento global; el scroll queda contenido exclusivamente en el contenedor de la conversación.
+- **Estructura vertical contenida en pantalla**: La consola se ajusta a la ventana del navegador (`100vh`) sin desplazamiento global; el scroll queda contenido exclusivamente en el contenedor de la conversación. Desde 900px de ancho; debajo, la columna técnica pasa abajo y la página se desplaza. «Probar el ASR» e «Historial» conservan el desplazamiento de página.
 - **Barra superior compacta**: Encabezado con título, estado de conexión, conmutador de modos («Llamada en vivo» / «Probar el ASR»), botones de ciclo de vida (Iniciar, Terminar, Nueva) y panel plegable de configuración de fuentes de audio.
 - **Área principal de presentación (Grid de 2 tercios y 1 tercio lateral)**:
   - **Fila superior de tarjetas de voz**: Dos tarjetas simétricas («Otra persona» a la izquierda, «Persona protegida» a la derecha) con medidor RMS visible y caja de transcripción viva.
@@ -153,10 +153,10 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
 
 ## Components
 
-- **Franja de aviso de posible estafa**: Franja horizontal compacta no modal sobre las tarjetas de voz con insignia de alto contraste («Posible estafa»), motivo, cita resaltada en la conversación, control de sonido WebAudio persistente y botón de cierre.
+- **Franja de aviso de posible estafa**: Franja horizontal compacta no modal sobre las tarjetas de voz con insignia de alto contraste («Posible estafa»), motivo, cita resaltada en la conversación, control de sonido WebAudio persistente y botón de cierre. En reposo, su casillero muestra un borde punteado con «Sin aviso. Si el detector encuentra una posible estafa, aparece en esta franja.», que enseña dónde mirar sin anticipar que la llamada sea fraudulenta.
 - **Tarjetas de rol («Otra persona» y «Persona protegida»)**: Identifican al hablante, presentan el medidor de nivel RMS en vivo y muestran la transcripción parcial en curso.
 - **Burbuja de conversación**: Alineada a izquierda para «Otra persona» y derecha para «Persona protegida». Incorpora autor, tiempo relativo, texto final y la evaluación del detector asociada cuando corresponde.
-- **Píldora de evaluación del detector**: Caja adosada a la frase con riesgo porcentual, decisión sí/no, latencia de inferencia y advertencia de frases salteadas si el detector estuvo ocupado.
+- **Píldora de evaluación del detector**: Caja adosada a la frase con riesgo porcentual, decisión sí/no, latencia de inferencia y advertencia de frases salteadas si el detector estuvo ocupado. Sin riesgo, va en voz baja: renglón bajo un filete, sin caja, con «Alerta: No» en verde contorneado. Riesgo alto (amarillo), fallo y aviso (rojo) conservan caja y relleno para sobresalir.
 - **Gráfico de riesgo temporal (SVG)**: Visualización continua del riesgo a lo largo de los segundos de la llamada, con umbral de decisión y marca vertical explícita en el instante exacto del aviso de estafa.
 - **Panel de control plegable**: Acordeón que oculta la selección de micrófonos y dispositivos cuando no se está configurando la llamada.
 

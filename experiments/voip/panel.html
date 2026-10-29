@@ -248,6 +248,13 @@
   #iniciar:hover:not(:disabled) {
     background: var(--primary-dark);
   }
+  #iniciar:disabled {
+    opacity: 1;
+    background: var(--superficie-alt);
+    border-color: var(--linea);
+    color: var(--mu);
+    box-shadow: none;
+  }
   #terminar {
     background: var(--superficie);
     color: var(--alerta);
@@ -354,6 +361,9 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.1rem;
+    /* La consola no desplaza la página: la ayuda se desplaza sola si no entra. */
+    max-height: calc(100dvh - 9rem);
+    overflow-y: auto;
   }
   .ayuda-cuerpo h3 {
     margin: 0 0 0.3rem;
@@ -416,6 +426,39 @@
     opacity: 1;
     transform: none;
     transition-delay: 0s;
+  }
+  /* Mismo casillero que el aviso: en reposo indica dónde aparecerá, sin anticipar que haya estafa. */
+  .columna-demo > #aviso,
+  .franja-reposo {
+    grid-area: aviso;
+  }
+  .franja-reposo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px dashed var(--linea);
+    border-radius: var(--radio-md);
+    color: var(--mu);
+    font-size: 0.875rem;
+    pointer-events: none;
+    transition: opacity 220ms var(--salida);
+  }
+  .franja-reposo b {
+    color: var(--tinta-secundaria);
+    font-weight: 700;
+  }
+  .franja-reposo svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  #aviso.visible ~ .franja-reposo {
+    opacity: 0;
+  }
+  body.protegida .franja-reposo {
+    display: none;
   }
   .aviso-etiqueta {
     display: inline-flex;
@@ -516,12 +559,33 @@
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
-    min-height: 65vh;
+    min-height: 0;
   }
   .columna-demo {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    grid-template-areas: "aviso" "tranquilo" "niveles" "charla";
     min-width: 0;
+    min-height: 0;
+  }
+  #tranquilo { grid-area: tranquilo; }
+  #niveles { grid-area: niveles; }
+  #charla { grid-area: charla; }
+  /* En la consola de llamada la página no se desplaza: la cabecera y las tarjetas quedan siempre a la vista. */
+  @media (min-width: 900px) {
+    body:not(.asr):not(.historial):not(.protegida) {
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+    body:not(.asr):not(.historial):not(.protegida) #charla {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    body:not(.asr):not(.historial):not(.protegida) aside {
+      overflow-y: auto;
+    }
   }
 
   /* Tarjetas de personas arriba */
@@ -662,8 +726,7 @@
 
   /* Conversación abajo: dos lados (otra a la izquierda, protegida a la derecha) */
   #charla {
-    flex: 1;
-    min-height: 60vh;
+    min-height: 16rem;
     display: flex;
     flex-direction: column;
     gap: 0.55rem;
@@ -774,9 +837,29 @@
     align-items: center;
     gap: 0.35rem 0.5rem;
   }
+  /* Sin riesgo: renglón tenue bajo la frase, para que las evaluaciones con riesgo sobresalgan. */
   .eval-adjunta.riesgo-bajo {
-    border-color: var(--ok);
+    background: transparent;
+    border-color: transparent;
+    border-top-color: var(--linea);
+    border-radius: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+  .eval-adjunta.riesgo-bajo .eval-pill.eval-riesgo {
+    background: transparent;
+    color: var(--tinta-secundaria);
+    box-shadow: inset 0 0 0 1px var(--linea);
+  }
+  .eval-adjunta.riesgo-bajo .eval-pill.eval-alerta.no {
     background: var(--ok-fondo);
+    color: var(--ok);
+    box-shadow: inset 0 0 0 1px #86efac;
+  }
+  .eval-adjunta.riesgo-bajo .eval-pill.eval-tiempo {
+    background: transparent;
+    color: var(--mu);
+    padding-inline: 0.15rem;
   }
   .eval-adjunta.riesgo-alto {
     border-color: var(--alerta-borde);
@@ -1119,6 +1202,72 @@
       gap: 0.12rem;
     }
   }
+  @media (max-width: 899px) {
+    header, #controles {
+      padding-inline: 0.75rem;
+    }
+    .campos, .acciones {
+      width: 100%;
+    }
+    .campo, .ajuste-grupo {
+      flex: 1 1 12rem;
+    }
+    select {
+      max-width: none;
+      width: 100%;
+    }
+    .acciones {
+      margin-left: 0;
+    }
+    .acciones button {
+      flex: 1;
+    }
+    main {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 0.5rem 0.75rem;
+    }
+    #charla {
+      min-height: 50vh;
+    }
+    .linea {
+      width: auto;
+      max-width: 92%;
+    }
+  }
+  @media (max-width: 560px) {
+    #niveles {
+      grid-template-columns: 1fr;
+    }
+    .cabecera-der {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .modo-conmutador {
+      flex: 1 1 100%;
+      order: -1;
+    }
+    .modo-tab {
+      flex: 1;
+      padding-inline: 0.4rem;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+    select {
+      min-width: 0;
+    }
+    .campo .fila {
+      flex-wrap: wrap;
+    }
+    .opcion-eco {
+      margin-left: 0;
+    }
+    .ayuda-cuerpo {
+      left: 0.75rem;
+      width: calc(100vw - 1.5rem);
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+  }
   @media (min-width: 1700px) {
     main {
       grid-template-columns: minmax(0, 1fr) 390px;
@@ -1259,6 +1408,10 @@
         <button type="button" id="aviso-sonido" class="aviso-btn" aria-pressed="true" title="Activar o apagar el sonido del aviso">Sonido: sí</button>
         <button type="button" id="aviso-cerrar" class="aviso-btn aviso-cerrar" aria-label="Cerrar aviso de posible estafa">Cerrar ×</button>
       </div>
+    </div>
+    <div class="franja-reposo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+      <span><b>Sin aviso.</b> Si el detector encuentra una posible estafa, aparece en esta franja.</span>
     </div>
     <div class="caja" id="tranquilo">Sin señales de estafa por ahora</div>
 
@@ -1532,7 +1685,8 @@ function prefiereMovimientoReducido() {
 /** @param {HTMLElement} el */
 function desplazarVisible(el) {
   const arriba = el.getBoundingClientRect().top;
-  if (arriba < 0 || arriba > window.innerHeight + 120) return;
+  const caja = $("charla").getBoundingClientRect();
+  if (arriba < Math.max(caja.top, 0) || arriba > Math.min(caja.bottom, window.innerHeight) + 120) return;
   el.scrollIntoView({ block: "nearest", behavior: prefiereMovimientoReducido() ? "instant" : "smooth" });
 }
 
