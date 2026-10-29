@@ -55,6 +55,10 @@ validación, sin tocar la reserva ni las veinte de comparación).
 
 - `tests.test_diagnosticar_tito`: 14/14 OK.
 - Suite completa `experiments/slm-directo`: 418 OK, 1 skipped (reserva).
+  Ejecución puntual durante el cierre; otros workers siguen editando código,
+  así que la validación final de la suite se hará cuando terminen todos los
+  cambios. El cierre de #98 se sostiene en las 14 pruebas de diagnóstico,
+  los enlaces y los documentos verificados.
 - JSON verificado: `resumen` (2/2 vishing, 4/8 legítimas, tasa 0,5),
   `recarga_comparador` (246/246, tolerancia 5e-05), `exposicion_historica`
   (5520/6000/480), `artefacto_historico.sha256` = `fb601eaa…5098eccd`,
