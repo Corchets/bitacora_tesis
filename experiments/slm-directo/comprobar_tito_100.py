@@ -616,8 +616,8 @@ def evaluar_comprobacion(manifiesto_ruta: Path, artefacto_nuevo_ruta: Path,
     umbral_nuevo = manifiesto["umbral"]
     verificar_umbral_cli(umbral_nuevo, umbral_cli)
     if politica_manifiesto is not None:
-        _verificar_politica_102(politica_manifiesto,
-                                manifiesto.get("artefacto_sha256"))
+        _verificar_politica_102(politica_manifiesto, manifiesto,
+                                Path(manifiesto_ruta))
     vigente = particiones if particiones is not None else cargar_particiones()
     if particiones is None:
         sha_vigente = sha_archivo(AQUI / PARTICIONES_NOMBRE)
@@ -687,25 +687,64 @@ def evaluar_comprobacion(manifiesto_ruta: Path, artefacto_nuevo_ruta: Path,
     }
 
 
-def _verificar_politica_102(politica_ruta: Path,
-                            artefacto_sha256: str | None) -> dict:
-    """Puerta opcional de secuencia: política #102 ya congelada y ligada."""
+def _verificar_politica_102(politica_ruta: Path, manifiesto: dict,
+                            manifiesto_ruta: Path) -> dict:
+    """Puerta opcional de secuencia: política #102 ya congelada y ligada.
+
+    Contrato común #100-#102 (coordinación, sin dependencia circular): la
+    política expone `politica` (periodo_actualizaciones,
+    regla_nueva_evidencia, delta_score), `congelado_en` ISO con zona UTC,
+    `seleccion_solo_validacion=true` y `tito` con artefacto_sha256,
+    manifiesto100_sha256, entrada, umbral y encoder idénticos al
+    candidato congelado. Se verifica ANTES de abrir las veinte: la
+    política queda congelada previa a la comprobación.
+    """
     try:
         pol = json.loads(Path(politica_ruta).read_text(encoding="utf-8"))
     except (OSError, ValueError) as e:
         raise ValueError(f"manifiesto de política #102 ilegible "
                          f"({politica_ruta}): {type(e).__name__}: {e}.")
-    if pol.get("etapa") != "seleccion-102-congelada":
-        raise ValueError("política #102 sin congelar "
-                         "(etapa != seleccion-102-congelada): respetar la "
-                         "secuencia congelar100 -> seleccionar/congelar102 "
-                         "-> comprobar100.")
-    tito_fijado = pol.get("tito_congelado", {})
-    if tito_fijado.get("artefacto_sha256") != artefacto_sha256:
+    if pol.get("seleccion_solo_validacion") is not True:
+        raise ValueError("política #102 sin seleccion_solo_validacion=true: "
+                         "respetar la secuencia congelar100 -> "
+                         "seleccionar/congelar102 (solo validación) -> "
+                         "comprobar100.")
+    congelada = pol.get("congelado_en")
+    try:
+        momento = datetime.fromisoformat(str(congelada))
+    except (ValueError, TypeError):
+        raise ValueError("política #102 sin congelado_en ISO válido.")
+    if momento.tzinfo is None:
+        raise ValueError("política #102 sin congelado_en con zona UTC.")
+    if momento > datetime.now(timezone.utc):
+        raise ValueError("política #102 con congelado_en futuro: no es "
+                         "previa a la comprobación.")
+    sub = pol.get("politica")
+    if not isinstance(sub, dict) or any(
+            k not in sub for k in ("periodo_actualizaciones",
+                                   "regla_nueva_evidencia", "delta_score")):
+        raise ValueError("política #102 sin bloque politica "
+                         "(periodo_actualizaciones, regla_nueva_evidencia, "
+                         "delta_score).")
+    tito_fijado = pol.get("tito")
+    if not isinstance(tito_fijado, dict):
+        raise ValueError("política #102 sin bloque tito ligado al "
+                         "candidato congelado.")
+    if tito_fijado.get("artefacto_sha256") != manifiesto.get("artefacto_sha256"):
         raise ValueError("política #102 ligada a otro candidato: no mide "
                          "este congelado.")
-    if tito_fijado.get("entrada") != ENTRADA_NUEVA:
-        raise ValueError("política #102 sin historial_acumulado fijado.")
+    if tito_fijado.get("manifiesto100_sha256") != sha_archivo(manifiesto_ruta):
+        raise ValueError("política #102 sin manifiesto100_sha256 del "
+                         "congelado vigente: recongelar en secuencia.")
+    if tito_fijado.get("entrada") != ENTRADA_NUEVA \
+            or tito_fijado.get("entrada") != manifiesto.get("entrada"):
+        raise ValueError("política #102 sin historial_acumulado del "
+                         "congelado fijado.")
+    if tito_fijado.get("umbral") != manifiesto.get("umbral"):
+        raise ValueError("política #102 con umbral distinto del congelado: "
+                         "sin override.")
+    if tito_fijado.get("encoder") != manifiesto.get("encoder"):
+        raise ValueError("política #102 con encoder distinto del congelado.")
     return pol
 
 

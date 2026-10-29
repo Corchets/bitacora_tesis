@@ -644,12 +644,21 @@ class TestEvaluarGuards(unittest.TestCase):
             textos, referencias, part, lector = _casos_20_fixture()
             mp, ap = self._manifiesto_20(tmp, part)
             man = json.loads(mp.read_text(encoding="utf-8"))
+            import hashlib
             pol = tmp / "pol.json"
             pol.write_text(json.dumps({
-                "etapa": "seleccion-102-congelada",
-                "tito_congelado": {
+                "seleccion_solo_validacion": True,
+                "congelado_en": "2026-10-29T00:00:01+00:00",
+                "politica": {"periodo_actualizaciones": 1,
+                             "regla_nueva_evidencia": "nueva",
+                             "delta_score": 0.1},
+                "tito": {
                     "artefacto_sha256": man["artefacto_sha256"],
-                    "entrada": "historial_acumulado"}}),
+                    "manifiesto100_sha256": hashlib.sha256(
+                        mp.read_bytes()).hexdigest(),
+                    "entrada": "historial_acumulado",
+                    "umbral": man["umbral"],
+                    "encoder": man["encoder"]}}),
                 encoding="utf-8")
             dob = DobleTito("historial_acumulado", {})
             comp = evaluar_comprobacion(
@@ -660,9 +669,19 @@ class TestEvaluarGuards(unittest.TestCase):
             self.assertIn("posterior al congelamiento",
                           comp["orden_temporal"])
             pol_mala = tmp / "pol_mala.json"
-            pol_mala.write_text(json.dumps({"etapa": "busqueda"}),
-                                encoding="utf-8")
-            with self.assertRaisesRegex(ValueError, "sin congelar"):
+            pol_mala.write_text(json.dumps(
+                {"seleccion_solo_validacion": True,
+                 "congelado_en": "2026-10-29T00:00:01",  # sin zona UTC
+                 "politica": {"periodo_actualizaciones": 1,
+                              "regla_nueva_evidencia": "nueva",
+                              "delta_score": 0.1},
+                 "tito": {"artefacto_sha256": man["artefacto_sha256"],
+                          "manifiesto100_sha256": "0" * 64,
+                          "entrada": "historial_acumulado",
+                          "umbral": man["umbral"],
+                          "encoder": man["encoder"]}}),
+                encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "zona UTC"):
                 evaluar_comprobacion(
                     mp, ap, ap, textos, referencias, {},
                     tito_nuevo=dob, tito_viejo=dob,
