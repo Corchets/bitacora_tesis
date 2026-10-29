@@ -239,7 +239,9 @@ se mantiene en su fuente de verdad y se incorpora al informe cuando corresponde.
 
 > **Estado: propuesta sin discutir.** Calendario de referencia desde el lunes
 > 2026-10-05. Se revisa con el equipo según disponibilidad y evidencia; no supone
-> que el laboratorio existente ya cumple los hitos.
+> que el laboratorio existente ya cumple los hitos. Las fechas en negrita de
+> 2026-11-15, 2026-11-30 y la segunda semana de diciembre las fijó el tutor el
+> 2026-10-28 ([minuta](../gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)).
 
 El acuerdo mínimo de H1 debe permitir el arranque. No hace falta cerrar de antemano
 todas las decisiones de modelos y evaluación final.
@@ -250,18 +252,20 @@ todas las decisiones de modelos y evaluación final.
 | 2026-10-12 a 2026-10-18 | Completar y revisar el piloto de H2. H3: obtener el primer replay completo con reglas, aviso y tiempos verificables por otra persona. Acordar separación de datos antes de ampliar. |
 | 2026-10-19 a 2026-10-25 | H4: comparar reglas y pocos candidatos sobre desarrollo; probar contexto y revisar errores con texto manual y ASR. Decidir qué alternativas merecen continuar. |
 | 2026-10-26 a 2026-11-08 | Continuar H4: corregir y comparar candidatos; completar los datos necesarios según cobertura y costo del piloto. Elegir configuración y cerrar el protocolo para H5; reservar test y verificar reproducción antes de medirlo. |
+| **2026-11-15**          | **Hito del tutor: todo al 90 %.**                                                                                                                                              |
 | 2026-11-09 a 2026-11-22 | Ejecutar la evaluación final sobre el test reservado; generar tablas y figuras, analizar errores y responder PI1 y PI2 sin ajustar el detector mirando ese test.               |
 | 2026-11-23 a 2026-11-30 | Completar y revisar el informe, verificar reproducción de resultados, preparar presentación, demo y video de respaldo.                                                         |
-| **2026-12-01**          | **Objetivo de cierre interno: informe, código, resultados y presentación disponibles para revisión.**                                                                          |
-| Desde 2026-12-02        | Correcciones del tutor y ensayo de defensa; fecha exacta de entrega y defensa pendiente de confirmación.                                                                       |
+| **2026-11-30**          | **Hito del tutor: todo terminado (informe, código, resultados y presentación).**                                                                                               |
+| 2026-12-01 a 2026-12-06 | Correcciones del tutor y ensayo de la presentación.                                                                                                                            |
+| **2026-12-07 a 2026-12-11** | **Entrega de la documentación y presentación en vivo de 20 a 30 minutos como máximo; falta el día exacto.**                                                                |
 
 El informe se escribe junto a cada resultado desde 2026-10-05. Cada semana se revisa
 el avance mostrando una corrida, datos anotados o resultados verificables; se puede
 adelantar trabajo si sus dependencias están resueltas. Si hay atraso, se replanifica
 y se postergan primero las [extensiones](#extensiones-condicionadas-al-avance).
-Se reservan dos semanas para evaluación final. El **2026-12-01** es una referencia
-interna, y la defensa prevista para fines de diciembre surge de la
-[minuta del 2026-09-09](../gestion/seguimientos/2026-09-09.md).
+Se reservan dos semanas para evaluación final. La defensa a fines de diciembre de la
+[minuta del 2026-09-09](../gestion/seguimientos/2026-09-09.md) y el cierre interno del
+2026-12-01 quedan reemplazados por las fechas del tutor del 2026-10-28.
 
 ## 12. Organización del equipo
 
