@@ -9,8 +9,8 @@ aviso. Conserva fallos, inválidos, no avisos y denominadores.
 
 Antes de informar verifica el snapshot de la corrida (hashes de texto y
 referencia por caso): si los archivos actuales derivaron, rechaza en lugar
-de releer mutable en silencio. Agrega gráficos SVG estáticos regenerables
-(solo stdlib) desde las salidas guardadas.
+de releer mutable en silencio. Agrega dos figuras Matplotlib (SVG + PNG,
+backend Agg) regenerables desde las salidas guardadas.
 
 Uso: python informe_101.py corridas/<carpeta_101>|<prefijo>
 
@@ -144,94 +144,186 @@ def leer_corrida(base: Path) -> tuple[dict, list[dict], dict]:
     return manifiesto, filas, corrida
 
 
-def _svg_barras(titulo: str, grupos: list[str], series: dict[str, list[float]],
-                unidad: str) -> str:
-    """Gráfico de barras agrupadas en SVG puro (stdlib, regenerable)."""
-    colores = {"directo": "#4a7c59", "tito-viejo": "#b07d2b", "tito-nuevo": "#5b6abf"}
-    ancho, alto = 640, 300
-    margen_izq, margen_sup, margen_inf = 56, 44, 60
-    area_w = ancho - margen_izq - 20
-    area_h = alto - margen_sup - margen_inf
-    maximo = max((v for vals in series.values() for v in vals), default=1) or 1
-    n, k = len(grupos), len(series)
-    paso = area_w / max(n, 1)
-    barra_w = min(36, paso / max(k, 1) * 0.7)
-    partes = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{ancho}" height="{alto}" role="img">',
-              f"<title>{titulo}</title>",
-              f'<text x="{ancho // 2}" y="22" text-anchor="middle" font-size="15">{titulo}</text>']
-    for g in range(n + 1):
-        y = margen_sup + area_h * g / 4
-        val = maximo * (4 - g) / 4
-        partes.append(f'<line x1="{margen_izq}" y1="{y}" x2="{ancho - 20}" y2="{y}" stroke="#ddd"/>')
-        partes.append(f'<text x="{margen_izq - 6}" y="{y + 4}" text-anchor="end" font-size="10">'
-                      f"{val:,.0f}</text>".replace(",", "."))
-    for gi, grupo in enumerate(grupos):
-        for si, (nombre, vals) in enumerate(series.items()):
-            v = vals[gi] if gi < len(vals) else 0
-            h = area_h * v / maximo
-            x = margen_izq + paso * gi + (paso - barra_w * k) / 2 + barra_w * si
-            y = margen_sup + area_h - h
-            partes.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{barra_w:.1f}" height="{h:.1f}" '
-                          f'fill="{colores.get(nombre, "#888")}">'
-                          f"<title>{nombre} {grupo}: {v:,.0f} {unidad}</title></rect>".replace(",", "."))
-        partes.append(f'<text x="{margen_izq + paso * gi + paso / 2:.1f}" y="{alto - 38}" '
-                      f'text-anchor="middle" font-size="10">{grupo}</text>')
-    leyenda_x = margen_izq
-    for nombre in series:
-        partes.append(f'<rect x="{leyenda_x}" y="{alto - 22}" width="12" height="12" '
-                      f'fill="{colores.get(nombre, "#888")}"/>')
-        partes.append(f'<text x="{leyenda_x + 16}" y="{alto - 12}" font-size="11">{nombre}</text>')
-        leyenda_x += len(nombre) * 8 + 34
-    partes.append("</svg>")
-    return "\n".join(partes)
+_CONDICIONES = ("directo", "tito-viejo", "tito-nuevo")
+_COLORES = {"directo": "#4a7c59", "tito-viejo": "#b07d2b", "tito-nuevo": "#5b6abf"}
+
+
+def _cfg_de(modelo: str, cond: str, analisis: dict) -> str | None:
+    for cfg in analisis:
+        partes = cfg.split("|")
+        if partes[0] == cond and len(partes) > 1 and partes[1] == modelo:
+            return cfg
+    return None
+
+
+def _figura_calidad(ruta_base: Path, modelos: list[str], analisis: dict) -> None:
+    """Calidad por modelo y condición: vishing con aviso y falsas alarmas.
+
+    Denominadores = casos evaluados (excluyen `sin evaluar`). Una condición
+    sin traza se marca `sin datos`: nunca se dibuja como cero observado.
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    import textwrap
+    from matplotlib.patches import Patch
+
+    n = max(len(modelos), 1)
+    fig, ejes = plt.subplots(1, 2, figsize=(min(7 + 1.2 * n, 15), 6.2))
+    paneles = (
+        (ejes[0], "vishing con aviso", "n avisados /\nn vishing evaluados"),
+        (ejes[1], "falsas alarmas", "n falsas alarmas /\nn legítimas evaluadas"),
+    )
+    for ax, _, subtitulo in paneles:
+        ax.set_title(subtitulo, fontsize=10, wrap=True)
+        ax.set_xticks(list(range(n)))
+        ax.set_xticklabels(modelos, rotation=30, ha="right", fontsize=9)
+        ax.set_ylim(0, 1.12)
+        ax.set_ylabel("proporción", fontsize=9)
+        ax.grid(axis="y", linestyle=":", alpha=0.6)
+    for gi, cond in enumerate(_CONDICIONES):
+        for mi, modelo in enumerate(modelos):
+            cfg = _cfg_de(modelo, cond, analisis)
+            x = mi + (gi - 1) * 0.24
+            for ax, cual, _ in paneles:
+                if cfg is None:
+                    ax.bar(x, 0, width=0.22, color="#cccccc",
+                           edgecolor="#666666", hatch="///")
+                    ax.text(x, 0.03, "sin datos", ha="center", va="bottom",
+                            fontsize=7, rotation=90, color="#333333")
+                    continue
+                m = resumen.metricas(analisis[cfg])
+                if cual == "vishing con aviso":
+                    num, den = m["vishing_con_aviso"], m["vishing"]
+                else:
+                    num, den = m["falsas_alarmas"], m["legitimas"]
+                if den == 0:
+                    ax.bar(x, 0, width=0.22, color="#cccccc",
+                           edgecolor="#666666", hatch="///")
+                    ax.text(x, 0.03, "sin cobertura", ha="center", va="bottom",
+                            fontsize=7, rotation=90, color="#333333")
+                    continue
+                ax.bar(x, num / den, width=0.22, color=_COLORES[cond],
+                       edgecolor="black", linewidth=0.5)
+                ax.text(x, num / den + 0.02, f"{num}/{den}", ha="center",
+                        va="bottom", fontsize=8)
+    handles = [Patch(facecolor=_COLORES[cond], edgecolor="black", label=cond)
+                 for cond in _CONDICIONES]
+    ejes[1].legend(handles=handles, title="condición", fontsize=8, loc="upper right")
+    titulo = textwrap.fill("Calidad por modelo y condición (avisos sobre salidas guardadas)",
+                           width=60)
+    fig.suptitle(titulo, fontsize=11, wrap=True)
+    nota = ("Barras por condición: directo · tito-viejo · tito-nuevo. "
+            "Sin datos = condición sin traza (no es cero). Denominadores excluyen sin evaluar.")
+    fig.text(0.5, 0.02, textwrap.fill(nota, width=100),
+             ha="center", va="bottom", fontsize=8, style="italic", wrap=True)
+    fig.tight_layout(rect=(0, 0.16, 1, 0.88))
+    fig.savefig(str(ruta_base) + ".svg", format="svg", bbox_inches="tight", pad_inches=0.3)
+    fig.savefig(str(ruta_base) + ".png", format="png", dpi=110,
+                bbox_inches="tight", pad_inches=0.3)
+    plt.close(fig)
+
+
+def _figura_costos(ruta_base: Path, modelos: list[str], manifiesto: dict, analisis: dict) -> None:
+    """Costo hasta el aviso apilado Tito + SLM, por modelo y condición.
+
+    Suma `tito_ms_total`/`slm_ms_total` del análisis guardado (prefijo hasta
+    el aviso incluido, sin doble conteo). La preparación queda en nota aparte,
+    fuera del costo por línea. Sin traza: `sin datos`, no cero.
+    """
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    import textwrap
+    from matplotlib.patches import Patch
+
+    n = max(len(modelos), 1)
+    fig, ax = plt.subplots(figsize=(min(7 + 1.2 * n, 15), 6.4))
+    for gi, cond in enumerate(_CONDICIONES):
+        for mi, modelo in enumerate(modelos):
+            x = mi + (gi - 1) * 0.24
+            cfg = _cfg_de(modelo, cond, analisis)
+            if cfg is None or not analisis[cfg]:
+                ax.bar(x, 0, width=0.22, color="#cccccc",
+                       edgecolor="#666666", hatch="///")
+                ax.text(x, 0, "sin datos", ha="center", va="bottom",
+                        fontsize=7, rotation=90, color="#333333")
+                continue
+            tito = sum(c["tito_ms_total"] for c in analisis[cfg].values())
+            slm = sum(c["slm_ms_total"] for c in analisis[cfg].values())
+            total = tito + slm
+            ax.bar(x, tito, width=0.22, color=_COLORES[cond],
+                   edgecolor="black", linewidth=0.5)
+            ax.bar(x, slm, width=0.22, bottom=tito, color=_COLORES[cond],
+                   edgecolor="black", linewidth=0.5, alpha=0.45,
+                   hatch="//" if slm > 0 else None)
+            ax.text(x, total, f"{total:,.0f} ms".replace(",", "."),
+                    ha="center", va="bottom", fontsize=8)
+    ax.set_xticks(list(range(n)))
+    ax.set_xticklabels(modelos, rotation=30, ha="right", fontsize=9)
+    ax.set_ylabel("ms hasta el aviso (o caso completo si nunca avisó)", fontsize=9)
+    ax.set_xlabel("modelo", fontsize=9)
+    ax.set_title(textwrap.fill("Costo por componente hasta el aviso: Tito (sólido) + SLM (claro)",
+                               width=55),
+                 fontsize=11, wrap=True)
+    ax.grid(axis="y", linestyle=":", alpha=0.6)
+    notas = []
+    for nombre, clave in (("Tito viejo", "tito_viejo_preparacion"),
+                          ("Tito nuevo", "tito_nuevo_preparacion")):
+        prep = manifiesto.get(clave)
+        if prep is None:
+            notas.append(f"{nombre}: condición pendiente (sin preparación).")
+        else:
+            notas.append(f"{nombre}: artefacto {prep.get('artefacto_ms', '?')} ms, "
+                         f"encoder {prep.get('encoder_ms', '?')} ms, "
+                         f"calentamiento {prep.get('calentamiento_ms', '?')} ms "
+                         f"(error: {prep.get('error') or 'ninguno'}).")
+    nota_prep = "Preparación fuera del costo por línea — " + " ".join(notas)
+    fig.text(0.5, 0.02, textwrap.fill(nota_prep, width=95),
+             ha="center", va="bottom", fontsize=8, style="italic", wrap=True)
+    handles = [Patch(facecolor=_COLORES[cond], edgecolor="black", label=cond)
+               for cond in _CONDICIONES]
+    handles.append(Patch(facecolor="white", edgecolor="black", hatch="//",
+                         label="tramo SLM (claro con trama)"))
+    ax.legend(handles=handles, title="condición", fontsize=8, loc="upper right")
+    fig.tight_layout(rect=(0, 0.20, 1, 0.88))
+    fig.savefig(str(ruta_base) + ".svg", format="svg", bbox_inches="tight", pad_inches=0.3)
+    fig.savefig(str(ruta_base) + ".png", format="png", dpi=110,
+                bbox_inches="tight", pad_inches=0.3)
+    plt.close(fig)
 
 
 def generar_graficos(informe_md: Path, manifiesto: dict, analisis: dict, filas: list[dict]) -> list[str]:
-    """Dos SVG estáticos desde salidas guardadas: avisos y costos por condición."""
+    """Dos figuras Matplotlib (SVG + PNG) desde salidas guardadas.
+
+    Calidad por modelo/condición (vishing con aviso vs falsas alarmas, con
+    denominadores) y costo Tito+SLM hasta el aviso. Regenerable sin
+    inferencia: solo lee `manifiesto` + `analisis` ya calculados.
+    """
     modelos = manifiesto.get("funcionales", {}).get("modelos", [])
-    avisos: dict[str, list[float]] = {"directo": [], "tito-viejo": [], "tito-nuevo": []}
-    costo_tito: dict[str, list[float]] = {"directo": [], "tito-viejo": [], "tito-nuevo": []}
-    costo_slm: dict[str, list[float]] = {"directo": [], "tito-viejo": [], "tito-nuevo": []}
-    for modelo in modelos:
-        cfgs = {c.split("|")[0]: c for c in analisis if c.split("|")[1:2] == [modelo]}
-        for cond in avisos:
-            cfg = cfgs.get(cond)
-            if cfg is None:
-                avisos[cond].append(0)
-                costo_tito[cond].append(0)
-                costo_slm[cond].append(0)
-                continue
-            cs = analisis[cfg]
-            avisos[cond].append(sum(1 for c in cs.values() if c["aviso"] is not None))
-            if cond == "directo":
-                costo_tito[cond].append(0)
-                costo_slm[cond].append(sum(c["ms_hasta_aviso"] for c in cs.values()))
-            else:
-                det = detalle_condicion(filas, cs, cfg)
-                costo_tito[cond].append(sum(d["tito_ms_total"] for d in det.values()))
-                costo_slm[cond].append(sum(d["slm_ms_total"] for d in det.values()))
     prefijo = informe_md.stem
     if prefijo != "informe_101" and prefijo.endswith("_informe_101"):
         prefijo = prefijo[: -len("_informe_101")]
-    avisos_svg = informe_md.parent / (prefijo + "_grafico_avisos.svg")
-    costos_svg = informe_md.parent / (prefijo + "_grafico_costos.svg")
-    avisos_svg.write_text(_svg_barras("Avisos por modelo y condición (de 20 casos)",
-                                      modelos, avisos, "avisos"), encoding="utf-8")
-    costos_svg.write_text(_svg_barras("Costo hasta aviso por condición: Tito (claro) + SLM",
-                                      modelos, {**{c + "·tito": v for c, v in costo_tito.items()},
-                                                **{c + "·slm": v for c, v in costo_slm.items()}},
-                                      "ms"), encoding="utf-8")
-    return [avisos_svg.name, costos_svg.name]
+    base_avisos = informe_md.parent / (prefijo + "_grafico_avisos")
+    base_costos = informe_md.parent / (prefijo + "_grafico_costos")
+    _figura_calidad(base_avisos, modelos, analisis)
+    _figura_costos(base_costos, modelos, manifiesto, analisis)
+    return [base_avisos.name + ".svg", base_avisos.name + ".png",
+            base_costos.name + ".svg", base_costos.name + ".png"]
 
 
 def nombres_salida(corrida: dict) -> tuple[Path, list[str]]:
     """Rutas del informe y sus gráficos (legado o prefijo)."""
     if corrida["modo"] == "legado":
         return (corrida["base"] / "informe_101.md",
-                ["informe_101_grafico_avisos.svg", "informe_101_grafico_costos.svg"])
+                ["informe_101_grafico_avisos.svg", "informe_101_grafico_avisos.png",
+                 "informe_101_grafico_costos.svg", "informe_101_grafico_costos.png"])
     pref = corrida["prefijo"]
     return (corrida["base"] / (pref + "_informe_101.md"),
-            [pref + "_grafico_avisos.svg", pref + "_grafico_costos.svg"])
+            [pref + "_grafico_avisos.svg", pref + "_grafico_avisos.png",
+             pref + "_grafico_costos.svg", pref + "_grafico_costos.png"])
 
 
 def armar_informe(base: Path) -> str:
@@ -386,7 +478,7 @@ def armar_informe(base: Path) -> str:
                  f"ver desglose por modelo | "
                  f"{sum(1 for c in cfgs for v in analisis[c].values() if v['categoria'] in resumen.SIN_EVALUAR)} |")
     L.append("")
-    L.append("## Gráficos (SVG regenerables desde salidas guardadas)")
+    L.append("## Gráficos (Matplotlib SVG+PNG regenerables desde salidas guardadas)")
     L.append("")
     for nombre in svg_nombres:
         L.append(f"- `{nombre}`")
