@@ -263,7 +263,7 @@ def correr_replay(
         return [], []
 
     # Verificar si hay canales disponibles
-    tiene_canales = any(a.canal in ("A", "B") for a in actualizaciones)
+    tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
     if not tiene_canales and hablantes == "ab":
         print(
             "[replay] Aviso: las actualizaciones no contienen canal (canal=null); usando hablantes='sin'.",
@@ -616,7 +616,7 @@ def main() -> None:
         actualizaciones = cargar_caso_texto(ruta_entrada)
 
     hablantes = args.hablantes
-    tiene_canales = any(a.canal in ("A", "B") for a in actualizaciones)
+    tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
     if not tiene_canales and hablantes == "ab":
         print(
             "[replay] Aviso: las actualizaciones no contienen canales de hablante (canal=null); usando hablantes='sin'.",

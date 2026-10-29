@@ -1,0 +1,146 @@
+{
+  "llamada_id": "VIVO-20261026-171738-355908",
+  "asr": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    }
+  },
+  "disparo": "final",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": "B",
+      "inicio_s": 0.0,
+      "duracion_s": 16.326,
+      "desfase_llegada_s": {
+        "n": 409,
+        "min": -0.001,
+        "mediana": -0.0,
+        "p95": 0.014,
+        "max": 0.077
+      },
+      "retraso_parcial_s": {
+        "n": 4,
+        "min": 0.054,
+        "mediana": 0.08,
+        "p95": 0.095,
+        "max": 0.095
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 2,
+        "min": 0.264,
+        "mediana": 0.533,
+        "p95": 0.775,
+        "max": 0.802
+      }
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.0,
+      "duracion_s": 16.326,
+      "desfase_llegada_s": {
+        "n": 409,
+        "min": -0.001,
+        "mediana": -0.0,
+        "p95": 0.014,
+        "max": 0.077
+      },
+      "retraso_parcial_s": {
+        "n": 5,
+        "min": 0.061,
+        "mediana": 0.062,
+        "p95": 0.068,
+        "max": 0.069
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 2,
+        "min": 0.863,
+        "mediana": 0.873,
+        "p95": 0.883,
+        "max": 0.884
+      }
+    }
+  },
+  "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)",
+  "detector": {
+    "evaluaciones": 1,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 1,
+      "min": 0.009,
+      "mediana": 0.009,
+      "p95": 0.009,
+      "max": 0.009
+    },
+    "aviso": {
+      "n": 4,
+      "saltadas": 0,
+      "inicio_eval_s": 5.204,
+      "fin_eval_s": 5.214,
+      "ms_detector": 8.7,
+      "valida": true,
+      "error": "",
+      "riesgo": null,
+      "alerta_sugerida": true,
+      "motivo": "REQUEST_AUTH_CODE (patrón: codigo)",
+      "evidencia": "Me llegó por ese MS un código para activar WhatsApp y yo no lo pedí",
+      "aviso": true,
+      "t_a": 5.214,
+      "fin_voz_s": 4.32,
+      "demora_desde_fin_de_voz_s": 0.894
+    }
+  },
+  "config": {
+    "detector": "reglas",
+    "modelo": null,
+    "prompt": null,
+    "hablantes": "ab",
+    "ollama_url": null,
+    "seed": "no-aplica",
+    "corte_silencio_s": 0.8,
+    "hilos_asr": 2,
+    "carga_slm": null
+  },
+  "inicio_panel": {
+    "tipo": "iniciar",
+    "modo": "llamada",
+    "fuentes": {
+      "otra": {
+        "tipo": "ejemplo",
+        "escenario": "LG-WA-CONSULTA-01",
+        "canal": "izq"
+      },
+      "protegida": {
+        "tipo": "ejemplo",
+        "escenario": "LG-WA-CONSULTA-01",
+        "canal": "der"
+      }
+    },
+    "corte_silencio_s": null,
+    "umbral_rms_silencio": null
+  },
+  "codigo": {
+    "commit": "3dc92698ce945f3c33fbfd16aef24e03d8558823",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  }
+}

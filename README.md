@@ -87,3 +87,45 @@ bitacora_tesis/
 │   ├── replay/                    # Simulación de streaming, cola secuencial y política de aviso único (#28)
 │   └── slm-directo/               # Ensayo de SLM local directo y reglas sobre texto incremental (#50)
 ```
+
+## 4. Demo local de llamadas (Luciano)
+
+Al 2026-10-28, la copia para probar micrófono, Meet y WhatsApp/BlackHole es
+`/Users/lucianogrosso/bitacora_tesis-voip-asr`, rama `luciano/voip-asr-94`,
+revisión `a37b47e`. Incluye corte numérico, referencias de ASR por frase y cierre
+con el último audio pendiente. Ver [uso y configuración](https://github.com/Corchets/bitacora_tesis/blob/a37b47e/experiments/voip/README.md)
+y [evidencia y límites](https://github.com/Corchets/bitacora_tesis/blob/a37b47e/experiments/voip/corridas/2026-10-28-correcciones-panel.md).
+La corrección de la cita con roles de #104 está en `luciano/voip-spike` (`91bf6d5`)
+y todavía requiere integración en esta copia.
+
+Antes de abrir localhost, comprobá qué proceso ocupa el puerto y desde qué carpeta corre:
+
+```bash
+lsof -nP -iTCP:8765 -sTCP:LISTEN
+lsof -a -p <PID> -d cwd
+git -C /Users/lucianogrosso/bitacora_tesis-voip-asr status -sb
+git -C /Users/lucianogrosso/bitacora_tesis-voip-asr log -1 --oneline
+```
+
+Si el servidor corresponde a otra copia, terminalo con `kill -TERM <PID>` y esperá
+que libere el puerto: el cierre normal conserva la llamada en curso. Levantá la
+copia actual con el entorno Python compartido ya instalado en esta Mac:
+
+```bash
+cd /Users/lucianogrosso/bitacora_tesis-voip-asr/experiments/voip
+/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python servidor.py --host 127.0.0.1 --detector slm --modelo qwen3.5:0.8b-q8_0
+```
+
+El ejecutable Python vive en `bitacora_tesis-voip/.venv`; el código servido debe
+salir de `bitacora_tesis-voip-asr`. Ollama debe estar corriendo. En otra terminal,
+comprobá el panel antes de abrirlo:
+
+```bash
+curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/bitacora_tesis-voip-asr/experiments/voip/panel.html
+open http://localhost:8765/
+```
+
+`cmp` termina sin salida y con código 0 si coincide. El puerto **8765** queda para
+esta demo; el tablero de resultados se sirve aparte en **8766**. El arranque no
+inicia una grabación. La prueba humana con BlackHole sigue pendiente; servir la
+versión correcta no valida la captura ni cierra D05, D06, D08 o D09.

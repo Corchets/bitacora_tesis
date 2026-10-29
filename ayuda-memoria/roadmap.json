@@ -1,36 +1,36 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23",
+  "updatedAt": "2026-10-29",
   "currentLocation": {
-    "summary": "H2 sigue activo. En #50 el ensayo de SLM directo pasó a 150 casos de desarrollo (corpus v2) con Qwen3.5 0.8B a 9B y prompts v1 y v2; ninguna configuración llega todavía a la meta propuesta 95/5 y faltan el 4B y el 9B sobre corpus_v2. El test reservado (200 casos) queda fuera del repositorio público. El kit de #39 está listo, pero grabar depende de la validación del tutor (D06); #33 mantiene abierto el protocolo (D08).",
+    "summary": "H2 en desarrollo activo. El 2026-10-28 el tutor fijó la meta en 80–85 % de estafas avisadas con 10–15 % de falsas alarmas sobre todas las estafas, sin avisos por frases sueltas; descartó JEV; aprobó la demo con Meet/WhatsApp (D05) y la grabación de voces del equipo (D06); dejó RoBERTuito a criterio del equipo y pidió apuntar a la gama más alta de teléfonos. Fechas: 90 % el 2026-11-15, todo terminado el 2026-11-30 y presentación en vivo de 20–30 min en la segunda semana de diciembre (docs/gestion/seguimientos/2026-10-28.md). El panel de llamada en vivo (#75–#94, #104) y Parakeet TDT 0.6B v3 con filtro de borradores en inglés quedaron integrados en laboratorio-luciano el 2026-10-29; faltan los ensayos con dos personas y en sala.",
     "activeMilestone": "H2 — Piloto del corpus y primeras pruebas",
     "nextActions": [
       {
         "frontId": "deteccion",
-        "issue": 50,
-        "title": "Completar la revisión independiente del ensayo SLM",
-        "description": "El ensayo y sus corridas están registrados. Para completar #50, otra persona debe ejecutar la prueba y revisar al menos un aviso y un error contra el texto disponible. Esto no elige el modelo ni cierra D09.",
-        "urgency": "inmediato"
-      },
-      {
-        "frontId": "deteccion",
-        "issue": 51,
-        "title": "Revisar los resultados de desarrollo y avanzar en D09",
-        "description": "Contrastar en equipo la comparación de candidatos de #51 con los gates de prefactibilidad y usar para esa lectura los resultados revisados de #50. Las mediciones de M1 y CPU no cierran D09 ni prueban rendimiento en un teléfono.",
+        "issue": 86,
+        "title": "Ensayar el panel de llamada en vivo",
+        "description": "Ensayar la demo aprobada por el tutor (D05): panel local con Parakeet o Zipformer y Qwen3.5 0.8B, los dos canales con Meet o WhatsApp y dos personas (#80), y la llamada de ejemplo como plan B. Verificar antes qué copia sirve localhost:8765.",
         "urgency": "inmediato"
       },
       {
         "frontId": "corpus",
         "issue": 39,
-        "title": "Gestionar validación del tutor (D06) y grabar el primer par",
-        "description": "Con el kit operativo y la planilla listos, gestionar la validación formal de D06 con el Ing. Ernesto Rico antes de grabar el par SC-WA-CODE-01 / LG-WA-CONSULTA-01. Los audios y datos vinculables quedan fuera de Git; el par habilitará evaluar ASR y replay con voz humana.",
+        "title": "Completar consentimientos y grabar las voces del equipo (D06)",
+        "description": "El tutor aprobó grabar el 2026-10-28. Completar fuera de Git el domicilio y contacto de los consentimientos y grabar el par SC-WA-CODE-01 / LG-WA-CONSULTA-01 y el set de #94. Audio y consentimientos firmados quedan fuera de Git.",
+        "urgency": "inmediato"
+      },
+      {
+        "frontId": "deteccion",
+        "issue": 51,
+        "title": "Auditar falsas alarmas sin hablantes y avanzar en D09",
+        "description": "Auditar la confusión de roles observada en el replay mono de experiments/replay/ (falsas alarmas por mención de códigos sin etiquetas de hablante) y contrastar el efecto del contexto de hablantes y la segmentación, sin adoptar una solución para D11, en la comparación sistemática de candidatos de docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51). Meta del tutor (2026-10-28): 80–85 % de estafas con 10–15 % de falsas alarmas, sobre todas las estafas, y sin avisos por frases sueltas como «código» o «decime la contraseña».",
         "urgency": "inmediato"
       },
       {
         "frontId": "metodologia",
         "issue": 33,
-        "title": "Acordar el protocolo experimental (D08)",
-        "description": "Revisar y acordar en equipo la propuesta de protocolo experimental de #33, integrando las métricas de #52 y fijando particiones disjuntas antes de la evaluación final. El borrador no congela D08 por sí solo.",
+        "title": "Congelar el protocolo experimental en D08",
+        "description": "Revisar y acordar en equipo la propuesta metodológica de docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md (#33) integrando las métricas formales de experiments/metricas/ (#52) y definiendo las particiones disjuntas por llamante y semilla sin fuga.",
         "urgency": "disponible"
       }
     ]
@@ -43,20 +43,14 @@
       "state": "activo",
       "stateLabel": "Activo",
       "purpose": "Producción de llamadas simuladas de vishing y legítimas difíciles, grabación, transcripción y validación del criterio de anotación humana (D07).",
-      "whatExists": "Kit operativo del primer par en docs/corpus/KIT-PRIMER-PAR.md y planilla de control en docs/corpus/PLANILLA-REVISION-TOMAS.csv (#39); fichas de rol y par escrito de WhatsApp en docs/ingenieria/ARQUITECTURA.md §4; catálogo, método del corpus y manual de anotación con referencia acordada.",
-      "nextStep": "Gestionar la validación formal del tutor (D06) sobre protocolo y custodia de datos antes de grabar el primer par con el kit preparado (#39).",
+      "whatExists": "Kit operativo del primer par en docs/corpus/KIT-PRIMER-PAR.md y planilla de control en docs/corpus/PLANILLA-REVISION-TOMAS.csv (#39); fichas de rol y par escrito de WhatsApp en docs/ingenieria/ARQUITECTURA.md §4; catálogo de escenarios (CATALOGO-ESCENARIOS.csv); método del corpus y manual de anotación con referencia acordada.",
+      "nextStep": "Con D06 aprobada por el tutor el 2026-10-28, completar los consentimientos y grabar el audio humano del primer par con el kit preparado (#39), sin esperar las 14 tomas del piloto.",
       "evidence": {
-        "label": "Kit del primer par #39",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/corpus/KIT-PRIMER-PAR.md",
-        "detail": "Fichas, planilla y condiciones previas a grabar; la grabación sigue sujeta a D06."
+        "label": "ARQUITECTURA.md §4",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/ingenieria/ARQUITECTURA.md#4-primer-par-escrito-del-escenario-al-aviso",
+        "detail": "Fichas de rol y diálogos del par WhatsApp integrados vía PR #56"
       },
-      "issues": [
-        39,
-        32,
-        54,
-        55,
-        45
-      ],
+      "issues": [39, 32, 54, 55, 45],
       "activeIssue": 39
     },
     {
@@ -66,21 +60,16 @@
       "state": "activo",
       "stateLabel": "Activo",
       "purpose": "Implementar el pipeline mínimo ejecutable demostrable: detector SLM que puntúa cada turno cerrado sobre texto incremental, ASR local sobre audio propio e integración de streaming en replay. La cascada encoder→SLM queda como alternativa a medir con datos reales.",
-      "whatExists": "La bitácora atribuye a Evaristo Villalobo, con asistencia de Claude, el ensayo #50 integrado desde claude/relaxed-maxwell-6n88xe: 53 casos escritos (29 vishing, 24 legítimos), Qwen3.5 0.8B/2B/4B, reglas como comparador separado, corrida CPU a 2 hilos, visor y tablero. El último commit de esa rama (24d6674, 2026-10-15) corrigió la lectura de CPU: el 0.8B pudo avisar antes por un pedido de código inventado; p95 fue 7.3 s (0.8B) y 13.0 s (2B), sobre el gate de 1.5 s. El trabajo posterior en laboratorio-luciano agregó corridas M1, comparación M1 vs Windows, replay E2E ASR+SLM y pruebas de caché; en M1, num_batch 32 dejó el p95 del 0.8B en 2.993 s. Son resultados de desarrollo: los casos esperan revisión humana independiente y D09 sigue abierta.",
-      "nextStep": "Completar la revisión independiente que pide #50; después, contrastar candidatos y errores frente a los gates de prefactibilidad en #51. Evaluar con voz humana cuando #39 quede habilitado. No elegir el detector final hasta resolver D09 con evidencia y protocolo adecuados.",
+      "whatExists": "Ensayo SLM directo en experiments/slm-directo/ (#50) sobre 53 casos con Qwen3.5 (0.8B, 2B, 4B) en Windows y Apple M1 (tags GGUF bajo Metal, 4B interrumpido por memoria), visor HTML y comparación M1 vs Windows; procedimiento de ASR local streaming con Zipformer Kroko y Whisper en experiments/asr-local/ (#19) con mezcla de canales estéreo y referencia temporal TTS; motor replay incremental con cola secuencial y política de aviso único en experiments/replay/ (#28), con corridas e2e registradas para reglas y SLM (0.8B y 2B) en mono y estéreo (experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md). Panel de demo local actual de Luciano en la rama luciano/voip-asr-94 (a37b47e) (experiments/voip/): inicio y fin desde el navegador, micrófono/Meet/WhatsApp-BlackHole/ejemplo TTS, volumen por persona, transcripción y evaluación por frase, alerta con tono desactivable, corte de silencio numérico de 0,1–3,0 s, pruebas de ASR guardables con referencia por frase y cierre que conserva el último audio e Historial con comparación y borrado confirmado. En la rama separada luciano/voip-spike, 91bf6d5 (#104), pendiente de integrar en voip-asr-94, la cita del aviso muestra Persona protegida / Otra persona según el canal, sin suponer quién habló primero; conserva texto y T_A. Pruebas de JavaScript y Python y panel a 1280/1920 px verificados con datos sintéticos. El visor de casos del tablero personal muestra nombres completos (#106), con elección de la persona protegida recordada por caso en el navegador; las sugerencias de roles son provisionales y no modifican el corpus ni D07. Las legítimas muestran Persona protegida / Otra persona desde el inicio, con perspectiva de lectura inicial desde quien habla primero y selector para cambiarla; las 75 verificadas en Chrome.",
+      "nextStep": "Ensayar con dos personas Meet/WhatsApp y en la notebook de la demo (#80/#86); medir allí el detector (#84). Registrar voz real y estudiar errores en #94 (D06 aprobada el 2026-10-28). Tito→SLM sigue siendo una integración pendiente (#85). La captura no reemplaza por sí sola la VoIP propia de D05; no se cierran D08/D09.",
       "evidence": {
-        "label": "README del ensayo SLM directo #50",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/experiments/slm-directo/README.md",
-        "detail": "Registro de casos, corridas, mediciones de CPU/M1, límites y pendientes de revisión."
+        "label": "Panel actual · luciano/voip-asr-94 · a37b47e",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/a37b47e/experiments/voip/README.md",
+        "detail": "Correcciones y límites en experiments/voip/corridas/2026-10-28-correcciones-panel.md de esa revisión. #104 permanece en voip-spike, pendiente de integrar. No acredita ensayo humano completo ni integración en main/laboratorio-main."
       },
       "archLink": "/arquitectura/",
-      "issues": [
-        50,
-        19,
-        28,
-        51
-      ],
-      "activeIssue": 50
+      "issues": [50, 19, 28, 51, 75, 87, 80, 84, 85, 86, 89, 90, 91, 92, 93, 94, 104],
+      "activeIssue": 75
     },
     {
       "id": "metodologia",
@@ -89,19 +78,15 @@
       "state": "activo",
       "stateLabel": "Activo",
       "purpose": "Sintetizar la literatura relevante, congelar el protocolo experimental sin fugas temporales (D08) y seleccionar el detector y ASR final (D09).",
-      "whatExists": "Propuesta de protocolo experimental para congelar en docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md (#33); comparación de candidatos sobre desarrollo en docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51); síntesis del estado del arte ampliada en docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md; presupuestos de prefactibilidad (#24). D06, D07, D08, D09 y D11 siguen abiertas.",
-      "nextStep": "Acordar en equipo el protocolo experimental de #33 (D08) y usarlo como base para la selección final de ASR y detector en #51 (D09).",
+      "whatExists": "Propuesta de protocolo experimental para congelar en docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md (#33); comparación de candidatos sobre desarrollo en docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md (#51); síntesis del estado del arte ampliada en docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md (§2.4 y §7, #25) con 8 estudios; ventana de contexto y alerta con decaimiento; presupuestos de prefactibilidad técnica (#24); D06, D07, D08, D09 y D11 abiertas.",
+      "nextStep": "Acordar en equipo el congelamiento formal del protocolo experimental en #33 (D08) y utilizarlo como base para la selección definitiva de ASR y detector en #51 (D09).",
       "evidence": {
-        "label": "MAPA-DECISIONES.md (D08/D09)",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación",
-        "detail": "D08 y D09 siguen abiertas; la selección de detector y ASR sale de las comparaciones de #51."
+        "label": "PROTOCOLO-EXPERIMENTAL.md",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md",
+        "detail": "Borrador de protocolo experimental propuesto para congelar D08."
       },
       "archLink": "/arquitectura/riesgo.html",
-      "issues": [
-        25,
-        33,
-        51
-      ],
+      "issues": [25, 33, 51],
       "activeIssue": 33
     },
     {
@@ -111,18 +96,15 @@
       "state": "espera",
       "stateLabel": "Previsto (más adelante)",
       "purpose": "Ejecutar la evaluación final sobre test reservado para responder PI1, PI2 y E1; redactar el informe digital (~100 págs), demo y defensa ante UNSTA.",
-      "whatExists": "Borradores de los capítulos 5 a 8 en docs/tesis/ (#53) y módulo ejecutable de métricas en experiments/metricas/ (#52), evaluado sobre corridas de desarrollo; requisitos académicos y esqueleto del informe aprobados.",
-      "nextStep": "Esperar protocolo congelado (#33) y test reservado (#45) antes de ejecutar la evaluación final en #52; iterar los capítulos con el tutor.",
+      "whatExists": "Borradores preliminares de capítulos del informe en docs/tesis/ (#53: Capítulos 5, 6, 7 y 8); módulo ejecutable de cálculo y reporte de métricas en experiments/metricas/ (#52) conforme a docs/evaluacion/METRICAS.md (márgenes L_R/L_C, Preventive@δ, falsas alarmas con Wilson 95%, RTF y sensibilidad a prevalencia), evaluado sobre corridas de desarrollo; requisitos académicos y esqueleto aprobados.",
+      "nextStep": "Esperar protocolo congelado (#33) y test reservado (#45) con audio real para ejecutar la evaluación formal en #52 sin sesgo ni fuga; iterar redacción de capítulos de tesis en #53 con el tutor.",
       "evidence": {
-        "label": "METRICAS.md",
-        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/evaluacion/METRICAS.md",
-        "detail": "Métricas unificadas de evaluación incremental de vishing"
+        "label": "CAP-05 a CAP-08",
+        "url": "https://github.com/Corchets/bitacora_tesis/blob/main/docs/tesis/CAP-05-DISENO-Y-ARQUITECTURA.md",
+        "detail": "Borradores de capítulos de diseño, implementación, pruebas y resultados experimentales."
       },
-      "issues": [
-        52,
-        53
-      ],
-      "activeIssue": 52
+      "issues": [52, 53],
+      "activeIssue": 53
     }
   ],
   "concludedContext": {
@@ -172,10 +154,7 @@
     },
     "retiredRecommendations": {
       "text": "El análisis de laboratorio (CONTRASTE §9, consolidado en el PR #58) recomendaba retomar datos reales para el encoder (#41) y la cascada con audio (#42), además del banco y la UI (#46–#49). Todas están retiradas como not_planned en GitHub: volver a proponerlas exige una replanificación acordada por el equipo (D09 / #51), no se reabren solas.",
-      "issues": [
-        41,
-        42
-      ]
+      "issues": [41, 42]
     },
     "issues": [
       {
@@ -246,440 +225,27 @@
     "51>laboratorio": "Condición de retomo: solo si la comparación de D09 lo justifica."
   },
   "archComponents": {
-    "50": {
-      "decisions": [
-        "D09"
-      ]
-    },
-    "28": {
-      "decisions": [
-        "D08"
-      ]
-    },
-    "19": {
-      "decisions": [
-        "D09"
-      ]
-    },
-    "39": {
-      "decisions": [
-        "D06"
-      ]
-    },
-    "54": {
-      "decisions": [
-        "D06"
-      ]
-    },
-    "32": {
-      "decisions": [
-        "D07"
-      ],
-      "section": "seccion-taxonomia"
-    },
-    "33": {
-      "decisions": [
-        "D08"
-      ]
-    },
-    "51": {
-      "decisions": [
-        "D09",
-        "D11"
-      ]
-    },
-    "55": {
-      "decisions": [
-        "D08"
-      ]
-    },
-    "45": {
-      "decisions": []
-    },
-    "52": {
-      "decisions": [
-        "D04"
-      ]
-    },
-    "53": {
-      "decisions": [
-        "D10",
-        "D12"
-      ]
-    },
-    "25": {
-      "decisions": []
-    },
-    "20": {
-      "decisions": [
-        "D05"
-      ]
-    }
+    "50": { "components": ["detector", "contador", "alerta"], "decisions": ["D09"] },
+    "28": { "components": ["adaptador", "estado", "contador", "alerta", "salida"], "decisions": ["D08"] },
+    "19": { "components": ["vad", "asr"], "decisions": ["D09"] },
+    "39": { "components": ["fuente-replay", "adaptador"], "decisions": ["D06"] },
+    "54": { "components": ["fuente-replay", "adaptador"], "decisions": ["D06"] },
+    "32": { "components": [], "decisions": ["D07"], "section": "seccion-taxonomia" },
+    "33": { "components": ["contador", "alerta", "salida"], "decisions": ["D08"] },
+    "51": { "components": ["asr", "detector", "encoder", "cascada"], "decisions": ["D09", "D11"] },
+    "55": { "components": ["salida"], "decisions": ["D08"] },
+    "45": { "components": ["salida"], "decisions": [] },
+    "52": { "components": ["salida"], "decisions": ["D04"] },
+    "53": { "components": ["presentacion", "salida"], "decisions": ["D10", "D12"] },
+    "25": { "components": [], "decisions": [] },
+    "20": { "components": ["fuente-replay", "adaptador"], "decisions": ["D05"] }
   },
   "issueConditions": {
     "39": [
       {
         "label": "Condición documental previa (D06)",
-        "text": "D06 exige la validación del tutor de las condiciones de consentimiento y custodia antes de grabar (condiciones documentadas en el PR #35; consulta del 2026-09-30 pendiente de respuesta al 2026-10-08). Preparar el primer par puede avanzar; grabar queda condicionado a esa validación.",
+        "text": "El tutor aprobó grabar el 2026-10-28. Antes de grabar falta completar fuera de Git el domicilio y contacto reales de los consentimientos (PR #35).",
         "source": "docs/gestion/MAPA-DECISIONES.md"
-      }
-    ]
-  },
-  "systemMap": {
-    "groups": [
-      {
-        "id": "audio",
-        "name": "Audio",
-        "flow": "Llamadas y fragmentos",
-        "components": [
-          "fuente-replay",
-          "fuente-voip",
-          "adaptador"
-        ]
-      },
-      {
-        "id": "texto",
-        "name": "Transcripción",
-        "flow": "Voz → texto disponible",
-        "components": [
-          "vad",
-          "asr"
-        ]
-      },
-      {
-        "id": "deteccion",
-        "name": "Contexto y detección",
-        "flow": "Texto → decisión del detector",
-        "components": [
-          "estado",
-          "detector",
-          "reglas"
-        ]
-      },
-      {
-        "id": "aviso",
-        "name": "Alerta",
-        "flow": "Decisión → aviso al usuario",
-        "components": [
-          "contador",
-          "alerta",
-          "presentacion"
-        ]
-      },
-      {
-        "id": "medicion",
-        "name": "Registro y evaluación",
-        "flow": "Salidas → evidencia",
-        "components": [
-          "salida"
-        ]
-      },
-      {
-        "id": "soporte",
-        "name": "Trabajo que sostiene el sistema",
-        "flow": "Corpus, protocolo y entrega",
-        "support": true,
-        "components": [
-          "corpus",
-          "protocolo",
-          "informe"
-        ]
-      }
-    ],
-    "components": [
-      {
-        "id": "fuente-replay",
-        "name": "Replay de audio",
-        "role": "Reproduce audio en orden temporal para repetir una corrida.",
-        "issues": [
-          28
-        ],
-        "exists": "Hay un replay experimental en el laboratorio. Su existencia no acredita la integración de #28.",
-        "missing": "Reproducir el pipeline con voz humana revisada y tiempos de emisión observables.",
-        "artifacts": [
-          "experiments/laboratorio/pipeline.py"
-        ],
-        "decisions": [
-          "D05"
-        ],
-        "front": "deteccion",
-        "archComponent": "fuente-replay"
-      },
-      {
-        "id": "fuente-voip",
-        "name": "VoIP propia",
-        "role": "Fuente objetivo de llamadas controladas con canales separados.",
-        "issues": [],
-        "exists": "",
-        "missing": "Implementar y medir la entrada VoIP. Falta un issue específico para esta integración.",
-        "artifacts": [],
-        "decisions": [
-          "D05",
-          "D06"
-        ],
-        "archComponent": "fuente-voip"
-      },
-      {
-        "id": "adaptador",
-        "name": "Adaptador de audio",
-        "role": "Entrega fragmentos y tiempos relativos a la sesión.",
-        "issues": [
-          28
-        ],
-        "exists": "El pipeline de laboratorio contiene lectura y fragmentación de audio.",
-        "missing": "Verificar el contrato temporal y conectar la fuente de audio al recorrido integrado.",
-        "artifacts": [
-          "experiments/laboratorio/pipeline.py"
-        ],
-        "decisions": [
-          "D05"
-        ],
-        "front": "deteccion",
-        "archComponent": "adaptador"
-      },
-      {
-        "id": "vad",
-        "name": "VAD / segmentación",
-        "role": "Separa voz y unidades que puede consumir el ASR.",
-        "issues": [
-          19
-        ],
-        "exists": "Hay un cortador de turnos experimental; sus umbrales no están congelados.",
-        "missing": "Revisar cortes y pérdida de contexto con grabaciones propias.",
-        "artifacts": [
-          "experiments/laboratorio/turns.py"
-        ],
-        "decisions": [
-          "D08"
-        ],
-        "front": "deteccion",
-        "archComponent": "vad"
-      },
-      {
-        "id": "asr",
-        "name": "ASR local",
-        "role": "Transcribe audio con sus intervalos y revisiones.",
-        "issues": [
-          19,
-          51
-        ],
-        "exists": "Existe un adaptador ASR de laboratorio. La selección final sigue abierta en D09.",
-        "missing": "Probar con el primer par grabado, revisar errores relevantes y comparar candidatos.",
-        "artifacts": [
-          "experiments/laboratorio/asr.py"
-        ],
-        "decisions": [
-          "D09"
-        ],
-        "front": "deteccion",
-        "archComponent": "asr"
-      },
-      {
-        "id": "estado",
-        "name": "Estado conversacional",
-        "role": "Conserva el contexto disponible de la llamada actual.",
-        "issues": [
-          28,
-          50
-        ],
-        "exists": "El laboratorio mantiene un historial de turnos. Eso no valida la política temporal definitiva.",
-        "missing": "Verificar revisiones sin duplicar evidencia y reinicio entre llamadas en la integración.",
-        "artifacts": [
-          "experiments/laboratorio/pipeline.py",
-          "experiments/slm-directo/README.md"
-        ],
-        "decisions": [
-          "D08"
-        ],
-        "front": "deteccion",
-        "archComponent": "estado"
-      },
-      {
-        "id": "detector",
-        "name": "Detector SLM",
-        "role": "Analiza el texto con el contexto disponible en ese momento.",
-        "issues": [
-          50,
-          51
-        ],
-        "exists": "Ensayo SLM directo con Qwen3.5 0.8B, 2B, 4B y 9B y prompts v1 y v2 sobre 150 casos de desarrollo (53 históricos y 97 de corpus_v2), con corridas en Windows, Linux y M1 que se reproducen entre máquinas. Ninguna configuración llega a la meta propuesta 95/5; la combinación de detectores guardados está en la pasada 0.",
-        "missing": "Correr el 4B y el 9B sobre corpus_v2, repetir la pasada 0 con los 150 y completar la revisión independiente de #50. D09 sigue abierta.",
-        "artifacts": [
-          "experiments/slm-directo/README.md",
-          "experiments/slm-directo/analisis/2026-10-21-errores-y-prompt-v2/README.md",
-          "experiments/slm-directo/analisis/2026-10-21-pasada-0/README.md"
-        ],
-        "decisions": [
-          "D09",
-          "D11"
-        ],
-        "front": "deteccion",
-        "archComponent": "detector"
-      },
-      {
-        "id": "reglas",
-        "name": "Reglas · comparador",
-        "role": "Permite contrastar el SLM con reglas sobre los mismos casos.",
-        "issues": [
-          50
-        ],
-        "exists": "Reglas v1 y reglas v2 (pedido dirigido) sobre los 150 de desarrollo: las v2 bajan las falsas alarmas de 51/75 a 8/75, pero avisan 32/75 estafas.",
-        "missing": "Usarlas como segunda opinión, no como filtro solo; revisar avisos y errores sobre los mismos casos que el SLM.",
-        "artifacts": [
-          "experiments/slm-directo/reglas_v2.py",
-          "experiments/slm-directo/analisis/2026-10-21-reglas-v2/README.md"
-        ],
-        "decisions": [
-          "D07"
-        ],
-        "front": "deteccion",
-        "archComponent": "reglas"
-      },
-      {
-        "id": "contador",
-        "name": "Memoria y persistencia",
-        "role": "Relaciona evidencia sucesiva con la decisión de avisar.",
-        "issues": [
-          28,
-          33
-        ],
-        "exists": "Existe un contador experimental y una investigación de alternativas. D08 sigue abierta.",
-        "missing": "Acordar y evaluar la política temporal; el contador histórico no fija la política final.",
-        "artifacts": [
-          "experiments/laboratorio/pipeline.py",
-          "docs/investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md"
-        ],
-        "decisions": [
-          "D08"
-        ],
-        "front": "metodologia",
-        "archComponent": "contador"
-      },
-      {
-        "id": "alerta",
-        "name": "Política de alerta",
-        "role": "Define cuándo emitir el aviso y registra su emisión efectiva.",
-        "issues": [
-          28,
-          33,
-          50
-        ],
-        "exists": "El laboratorio contiene disparo de avisos y el ensayo #50 exige aviso único.",
-        "missing": "Integrar el aviso único, medir T_A y acordar el protocolo final de D08.",
-        "artifacts": [
-          "experiments/laboratorio/pipeline.py",
-          "experiments/slm-directo/README.md"
-        ],
-        "decisions": [
-          "D08"
-        ],
-        "front": "deteccion",
-        "archComponent": "alerta"
-      },
-      {
-        "id": "presentacion",
-        "name": "Presentación del aviso",
-        "role": "Muestra la advertencia que recibe la persona.",
-        "issues": [
-          53
-        ],
-        "exists": "La arquitectura incluye una presentación ilustrativa del aviso.",
-        "missing": "Implementar la presentación del prototipo y revisar su uso en la demo.",
-        "artifacts": [
-          "docs/ingenieria/arquitectura-web/index.html"
-        ],
-        "decisions": [
-          "D10"
-        ],
-        "front": "cierre",
-        "archComponent": "presentacion"
-      },
-      {
-        "id": "salida",
-        "name": "Salida y métricas",
-        "role": "Conserva resultados para reconstruir y evaluar cada corrida.",
-        "issues": [
-          28,
-          52
-        ],
-        "exists": "Las métricas están documentadas y hay salidas de laboratorio; no son una evaluación final.",
-        "missing": "Registrar tiempos y configuración del recorrido integrado; evaluar con test reservado.",
-        "artifacts": [
-          "docs/evaluacion/METRICAS.md",
-          "experiments/metricas/README.md"
-        ],
-        "decisions": [
-          "D04",
-          "D08"
-        ],
-        "front": "cierre",
-        "archComponent": "salida"
-      },
-      {
-        "id": "corpus",
-        "name": "Corpus y referencia humana",
-        "role": "Produce llamadas y una referencia independiente del detector.",
-        "issues": [
-          20,
-          26,
-          39,
-          54,
-          32,
-          55,
-          45
-        ],
-        "exists": "Corpus v2 escrito: 150 casos de desarrollo (75 estafas y 75 legítimas) en esta rama y 200 reservados para el test final, que no están en el repositorio público (solo sus huellas SHA-256). Auditoría de los 53 históricos. Par escrito, catálogo, método y manual de anotación.",
-        "missing": "Revisión humana de una muestra por dos personas; validar D06 antes de grabar; acordar particiones en D08.",
-        "artifacts": [
-          "experiments/slm-directo/casos/DISENO-CORPUS-V2.md",
-          "experiments/slm-directo/casos/RESERVA-FUERA-DEL-REPO.md",
-          "experiments/slm-directo/casos/AUDITORIA-53-HISTORICOS.md",
-          "docs/corpus/METODO-CREACION-CORPUS.md"
-        ],
-        "decisions": [
-          "D06",
-          "D07"
-        ],
-        "front": "corpus"
-      },
-      {
-        "id": "protocolo",
-        "name": "Protocolo y selección",
-        "role": "Fija cómo comparar, elegir y evaluar sin usar el test para ajustar.",
-        "issues": [
-          25,
-          33,
-          51
-        ],
-        "exists": "Antecedentes, métricas y propuestas metodológicas. Propuestas sin discutir del 2026-10-23: meta 95/5 y gama alta como objetivo (D08/D09). D08 y D09 siguen abiertas.",
-        "missing": "Aprobar la meta con el tutor y decidir si las estafas que cortan antes del pedido cuentan en el denominador; congelar la configuración antes del test.",
-        "artifacts": [
-          "docs/gestion/MAPA-DECISIONES.md",
-          "experiments/slm-directo/analisis/2026-10-21-pasada-0/README.md",
-          "docs/evaluacion/METRICAS.md"
-        ],
-        "decisions": [
-          "D08",
-          "D09"
-        ],
-        "front": "metodologia"
-      },
-      {
-        "id": "informe",
-        "name": "Informe, demo y defensa",
-        "role": "Convierte los resultados en una entrega defendible.",
-        "issues": [
-          53
-        ],
-        "exists": "Existe el esqueleto del informe; los avances de redacción están enlazados en el frente de cierre.",
-        "missing": "Completar capítulos con evidencia, demo reproducible y revisión del equipo y tutor.",
-        "artifacts": [
-          "docs/tesis/ESQUELETO-INFORME.md"
-        ],
-        "decisions": [
-          "D10"
-        ],
-        "front": "cierre"
       }
     ]
   }

@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "nota": "Guion de 30 frases del plan de voz real (#94). Las etiquetas son las que reglas.py da sobre el texto (tests/test_guion.py lo verifica). Los números van con palabras: así se leen y así se escriben en «Lo que dije en realidad».",
+  "bloques": [
+    {
+      "id": 1,
+      "frases": [
+        {
+          "id": "F01",
+          "tipo": "critica",
+          "texto": "Pasame el código que te llegó por mensaje, dale, que no tengo todo el día.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "F02",
+          "tipo": "numeros",
+          "texto": "Transferí cuarenta y cinco mil pesos al CBU que te paso, es urgente.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F03",
+          "tipo": "negativa",
+          "texto": "Estoy cómodo acá, no hace falta que me ayudes con nada más.",
+          "etiquetas": []
+        },
+        {
+          "id": "F04",
+          "tipo": "bancos",
+          "texto": "Hablás con el Banco Macro de Tucumán: confirmame tu clave para anular el débito.",
+          "etiquetas": [
+            "REQUEST_SECRET"
+          ]
+        },
+        {
+          "id": "F05",
+          "tipo": "critica",
+          "texto": "Necesito que me confirmes la clave del cajero ahora, ñaño.",
+          "etiquetas": [
+            "REQUEST_SECRET"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "frases": [
+        {
+          "id": "F06",
+          "tipo": "critica",
+          "texto": "Hacé la transferencia ya, al alias que te mandé, y no le avises a nadie.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F07",
+          "tipo": "jerga",
+          "texto": "Mirá, chango, no seas sonso, pasame la clave y zafás de la multa al toque.",
+          "etiquetas": [
+            "REQUEST_SECRET"
+          ]
+        },
+        {
+          "id": "F08",
+          "tipo": "negativa",
+          "texto": "Me duele el codo desde que jugué al fútbol con los changos.",
+          "etiquetas": []
+        },
+        {
+          "id": "F09",
+          "tipo": "numeros",
+          "texto": "Pasame la plata, son treinta lucas, y que sea en efectivo.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F10",
+          "tipo": "critica",
+          "texto": "Instalá AnyDesk y dame acceso remoto a tu compu, así lo arreglo yo.",
+          "etiquetas": [
+            "REQUEST_REMOTE_ACCESS"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "frases": [
+        {
+          "id": "F11",
+          "tipo": "bancos",
+          "texto": "Entrá a Mercado Pago, abrí el link que te mandé y autorizá la operación.",
+          "etiquetas": [
+            "REQUEST_SECURITY_ACTION",
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F12",
+          "tipo": "critica",
+          "texto": "Decime tu DNI completo y el domicilio donde vivís, es para verificar.",
+          "etiquetas": [
+            "REQUEST_PERSONAL_DATA"
+          ]
+        },
+        {
+          "id": "F13",
+          "tipo": "jerga",
+          "texto": "Ñaño, al ñudo te hacés drama, mandame la plata y listo, no seas guaso.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F14",
+          "tipo": "numeros",
+          "texto": "El código tiene seis números: tres, cuatro, uno, nueve, dos, siete.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "F15",
+          "tipo": "critica",
+          "texto": "Abrí el enlace que te mandé y autorizá el ingreso desde tu celular.",
+          "etiquetas": [
+            "REQUEST_SECURITY_ACTION"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "frases": [
+        {
+          "id": "F16",
+          "tipo": "negativa",
+          "texto": "El número de la casa es el doce, queda enfrente de la panadería.",
+          "etiquetas": []
+        },
+        {
+          "id": "F17",
+          "tipo": "critica",
+          "texto": "Tu tarjeta quedó bloqueada, pasame el PIN y el CVV para destrabarla.",
+          "etiquetas": [
+            "REQUEST_SECRET"
+          ]
+        },
+        {
+          "id": "F18",
+          "tipo": "bancos",
+          "texto": "Naranja X y Ualá te bloquearon la cuenta, tenés que mandarme el DNI.",
+          "etiquetas": [
+            "REQUEST_PERSONAL_DATA"
+          ]
+        },
+        {
+          "id": "F19",
+          "tipo": "numeros",
+          "texto": "Tenés que pagar mil doscientos pesos de multa antes de las cuatro.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F20",
+          "tipo": "critica",
+          "texto": "Te llegó un token por mensaje, leémelo despacito, que ya se vence.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "frases": [
+        {
+          "id": "F21",
+          "tipo": "jerga",
+          "texto": "Dejá al mishi en paz y decime el código, vo', que estoy al vicio con este trámite.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "F22",
+          "tipo": "bancos",
+          "texto": "Te escribo del Galicia: pasame el alias y el CBU que usás en Brubank.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F23",
+          "tipo": "negativa",
+          "texto": "Mi mamá abonó la luz y el gas ayer, así que está todo al día.",
+          "etiquetas": []
+        },
+        {
+          "id": "F24",
+          "tipo": "critica",
+          "texto": "Mandame el código de verificación de seis dígitos que te llegó por WhatsApp.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "F25",
+          "tipo": "jerga",
+          "texto": "Con cinco lucas no zafo, che, mandame el link y lo pago al toque.",
+          "etiquetas": [
+            "REQUEST_SECURITY_ACTION",
+            "REQUEST_TRANSFER"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "frases": [
+        {
+          "id": "F26",
+          "tipo": "numeros",
+          "texto": "Dame el OTP: ocho, cuatro, dos, uno, cero, cinco, que se vence en un minuto.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "F27",
+          "tipo": "bancos",
+          "texto": "Instalá la app del Banco Provincia con este enlace y pasame el PIN.",
+          "etiquetas": [
+            "REQUEST_REMOTE_ACCESS",
+            "REQUEST_SECRET"
+          ]
+        },
+        {
+          "id": "F28",
+          "tipo": "jerga",
+          "texto": "Esta changa me salió re cara, ñaño: pagame veinte mangos en efectivo y quedamos a mano.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "F29",
+          "tipo": "negativa",
+          "texto": "Te mando la foto del cumple de mi sobrino cuando llegue a casa.",
+          "etiquetas": []
+        },
+        {
+          "id": "F30",
+          "tipo": "critica",
+          "texto": "Compartí pantalla y entrá a la configuración de la cuenta, yo te guío.",
+          "etiquetas": [
+            "REQUEST_REMOTE_ACCESS",
+            "REQUEST_SECURITY_ACTION"
+          ]
+        }
+      ]
+    }
+  ]
+}
