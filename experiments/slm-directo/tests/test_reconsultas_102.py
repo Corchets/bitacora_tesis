@@ -9,7 +9,8 @@ marcha, no una selección.
 
 > **Estado: propuesta sin discutir.** Las reglas y frecuencias candidatas se
 > acuerdan y eligen con validación antes de medir; ver
-> [D08](../../docs/investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md).
+> [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+> Nada de lo que sigue cierra D08 ni adopta 95/5.
 """
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ from filtro_tito import UMBRAL_TITO, TitoGuion  # noqa: E402
 from politica_reconsultas import (  # noqa: E402
     REGLA_NUEVO_CRUCE_TRAS_BAJAR,
     PoliticaReconsultas,
+    visibles_para_tito,
 )
 
 DIALOGO = [
@@ -78,6 +80,48 @@ def politica(puntajes=None, fallos=None, alertas=frozenset(), invalidas=frozense
              regla=REGLA_NUEVO_CRUCE_TRAS_BAJAR, delta_minimo=0.0):
     return PoliticaReconsultas(
         TitoGuion(puntajes, fallos),
+        SLMGuion(alertas, invalidas, errores),
+        umbral,
+        periodo_revision=periodo_revision,
+        regla_nueva_evidencia=regla,
+        delta_minimo=delta_minimo,
+    )
+
+
+class Tito99Guion:
+    """Doble con la API real de `Tito99`: `puntuar_entrada/puntuar_prefijo`.
+
+    Sin `.puntuar`: obliga a la política a usar el historial acumulado con
+    hablantes A/B. Registra cada prefijo recibido para verificar que sea
+    completo, sin futuro y sin truncamiento.
+    """
+
+    nombre = "tito-99-guion"
+
+    def __init__(self, puntajes=None, fallos=None, ms_fijo=5.0):
+        self.puntajes = dict(puntajes or {})
+        self.fallos = set(fallos or ())
+        self.ms_fijo = ms_fijo
+        self.recibido: list[tuple[str, ...]] = []
+
+    def puntuar_entrada(self, texto_entrada):
+        if texto_entrada == "__fallo__":
+            return None, "tito_caido", self.ms_fijo
+        return 0.0, "", self.ms_fijo
+
+    def puntuar_prefijo(self, visibles, sintetico=False):
+        self.recibido.append(tuple(visibles))
+        n = len(visibles)
+        if n in self.fallos:
+            return None, "tito_caido", self.ms_fijo
+        return self.puntajes.get(n, 0.0), "", self.ms_fijo
+
+
+def politica99(puntajes=None, fallos=None, alertas=frozenset(), invalidas=frozenset(),
+               errores=frozenset(), umbral=UMBRAL_TITO, periodo_revision=None,
+               regla=REGLA_NUEVO_CRUCE_TRAS_BAJAR, delta_minimo=0.0):
+    return PoliticaReconsultas(
+        Tito99Guion(puntajes, fallos),
         SLMGuion(alertas, invalidas, errores),
         umbral,
         periodo_revision=periodo_revision,
@@ -174,6 +218,46 @@ class TestRevisionPeriodica(unittest.TestCase):
             ["omitida", "omitida", "slm_valida", "omitida", "slm_valida"],
         )
 
+    def test_invalido_en_revision_no_cierra_y_reintenta_en_bajo(self):
+        p = politica(puntajes={1: 0.9}, periodo_revision=2, invalidas={3})
+        salidas = list(correr.procesar_caso(p, DIALOGO))
+        self.assertEqual(
+            [r.consulta for _, _, r, _ in salidas],
+            ["slm_valida", "omitida", "slm_fallo", "slm_valida", "omitida"],
+        )
+        self.assertEqual(
+            [m["motivo"] for m in p.traza],
+            ["activacion_inicial", "cerrada_sin_novedad", "revision_periodica",
+             "abierta_sin_veredicto", "cerrada_sin_novedad"],
+        )
+        self.assertEqual(p.estado.ultima_consulta_linea, 4)
+
+    def test_fallo_inicial_recuperacion_baja_y_periodica_sin_indicio(self):
+        # Fallo -> SLM negativa válida cierra; recuperación baja; la
+        # revisión periódica consulta sin indicio ni error actual, sin
+        # assert y sin reutilizar la causa histórica como error actual.
+        p = politica(fallos={1}, periodo_revision=2)
+        salidas = list(correr.procesar_caso(p, DIALOGO))
+        self.assertEqual(
+            [r.consulta for _, _, r, _ in salidas],
+            ["slm_valida", "omitida", "slm_valida", "omitida", "slm_valida"],
+        )
+        primera, tercera = salidas[0][2], salidas[2][2]
+        self.assertEqual(primera.tito_error, "tito_caido")
+        self.assertIsNone(primera.tito_puntaje)
+        self.assertEqual(tercera.tito_error, "")
+        self.assertIsNone(tercera.indicio_linea)
+        self.assertEqual(p.estado.fallo_tito, "tito_caido",
+                         "la causa histórica se conserva para trazar el fail-open")
+        primera_peticion, tercera_peticion = p.slm.recibido[0][0], p.slm.recibido[1][0]
+        self.assertIn("falló técnicamente (tito_caido)", primera_peticion)
+        self.assertIn("sin indicio", tercera_peticion.lower())
+        self.assertNotIn("falló técnicamente", tercera_peticion)
+        # Tito corre en cada actualización y el costo no se duplica.
+        self.assertEqual([n for n, _ in p.tito.consultas], [1, 2, 3, 4, 5])
+        for _, _, r, _ in salidas:
+            self.assertAlmostEqual(r.ms, (r.tito_ms or 0.0) + (r.slm_ms or 0.0))
+
 
 class TestAvisoUnicoYFinOperativo(unittest.TestCase):
     def test_primera_alerta_tras_reapertura_termina_ahi(self):
@@ -236,14 +320,33 @@ class TestFallos(unittest.TestCase):
         self.assertEqual(salidas[1][2].consulta, "slm_valida")
         self.assertEqual([aviso for *_, aviso in salidas], [False] * 5)
 
-    def test_invalido_tras_cierre_no_abre_y_sigue_cerrado(self):
+    def test_invalido_en_reapertura_no_cierra_y_reintenta_en_bajo(self):
+        # L1 alto + SLM negativo válido cierra; L2 bajo arma evidencia;
+        # L3 nuevo cruce + SLM inválido NO cierra; L4 bajo consulta igual.
         p = politica(puntajes={1: 0.9, 3: 0.9}, invalidas={3})
         salidas = list(correr.procesar_caso(p, DIALOGO))
         self.assertEqual(
             [r.consulta for _, _, r, _ in salidas],
-            ["slm_valida", "omitida", "slm_fallo", "omitida", "omitida"],
+            ["slm_valida", "omitida", "slm_fallo", "slm_valida", "omitida"],
         )
-        self.assertEqual(p.traza[2]["motivo"], "reapertura_nueva_evidencia")
+        self.assertEqual(
+            [m["motivo"] for m in p.traza],
+            ["activacion_inicial", "cerrada_sin_novedad",
+             "reapertura_nueva_evidencia", "abierta_sin_veredicto",
+             "cerrada_sin_novedad"],
+        )
+        # El reloj no se resetea con la respuesta inválida: la válida de
+        # L4 es la que vuelve a cerrar.
+        self.assertEqual(p.estado.ultima_consulta_linea, 4)
+        self.assertTrue(p.estado.cerrada)
+        self.assertEqual(salidas[3][2].tito_error, "")
+
+    def test_fallo_con_slm_invalido_queda_abierto_y_reintenta(self):
+        p = politica(fallos={1}, invalidas={1})
+        salidas = list(correr.procesar_caso(p, DIALOGO))
+        self.assertEqual(salidas[0][2].consulta, "slm_fallo")
+        self.assertEqual(salidas[1][2].consulta, "slm_valida")
+        self.assertFalse(p.traza[0]["cerrada"])
 
 
 class TestAislamientoYTraza(unittest.TestCase):
@@ -296,9 +399,59 @@ class TestConteoDeTito(unittest.TestCase):
         with self.assertRaises(ValueError):
             politica(periodo_revision=0)
         with self.assertRaises(ValueError):
+            politica(periodo_revision=True)
+        with self.assertRaises(ValueError):
+            politica(periodo_revision=2.0)
+        with self.assertRaises(ValueError):
+            politica(periodo_revision="2")
+        with self.assertRaises(ValueError):
             politica(periodo_revision=2, regla="otra_regla")
         with self.assertRaises(ValueError):
             politica(periodo_revision=2, delta_minimo=-0.1)
+        with self.assertRaises(ValueError):
+            politica(periodo_revision=2, delta_minimo=True)
+        with self.assertRaises(ValueError):
+            politica(periodo_revision=2, delta_minimo=float("nan"))
+        with self.assertRaises(ValueError):
+            politica(periodo_revision=2, delta_minimo=float("inf"))
+        with self.assertRaises(ValueError):
+            politica(periodo_revision=2, delta_minimo="0.1")
+
+
+class TestTitoHistorial(unittest.TestCase):
+    def test_prefijo_completo_con_hablantes_y_sin_futuro(self):
+        p = politica99(puntajes={2: 0.9})
+        salidas = list(correr.procesar_caso(p, DIALOGO))
+        self.assertEqual(
+            [r.consulta for _, _, r, _ in salidas],
+            ["omitida", "slm_valida", "omitida", "omitida", "omitida"],
+        )
+        esperado_l1 = (f"A: {DIALOGO[0].texto}",)
+        esperado_l2 = (f"A: {DIALOGO[0].texto}", f"B: {DIALOGO[1].texto}")
+        self.assertEqual(p.tito.recibido[0], esperado_l1)
+        self.assertEqual(p.tito.recibido[1], esperado_l2)
+        self.assertNotIn(DIALOGO[2].texto, p.tito.recibido[1][0] + p.tito.recibido[1][1])
+        self.assertEqual([len(v) for v in p.tito.recibido], [1, 2, 3, 4, 5])
+        self.assertEqual(visibles_para_tito(DIALOGO[:2]), list(esperado_l2))
+
+    def test_historial_reinicia_entre_llamadas(self):
+        p = politica99(puntajes={1: 0.9}, alertas={1})
+        primera = list(correr.procesar_caso(p, DIALOGO))
+        base = len(p.tito.recibido)
+        segunda = list(correr.procesar_caso(p, LEGITIMA))
+        self.assertEqual([aviso for *_, aviso in primera].count(True), 1)
+        self.assertEqual([aviso for *_, aviso in segunda].count(True), 1)
+        self.assertEqual(len(p.tito.recibido), base + 1)
+        self.assertEqual(p.tito.recibido[base], (f"A: {LEGITIMA[0].texto}",))
+        self.assertNotIn(DIALOGO[0].texto, p.tito.recibido[base][0])
+
+    def test_mismo_cierre_con_historial_y_frase(self):
+        p99 = politica99(puntajes={1: 0.9})
+        pfr = politica(puntajes={1: 0.9})
+        s99 = list(correr.procesar_caso(p99, DIALOGO))
+        sfr = list(correr.procesar_caso(pfr, DIALOGO))
+        self.assertEqual([r.consulta for _, _, r, _ in s99],
+                         [r.consulta for _, _, r, _ in sfr])
 
 
 if __name__ == "__main__":
