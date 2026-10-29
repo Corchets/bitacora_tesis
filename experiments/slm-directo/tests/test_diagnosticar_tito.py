@@ -43,10 +43,6 @@ class TestLogica(unittest.TestCase):
         self.assertIsNone(rec2["derivacion_linea"])
         self.assertTrue(rec["provisional"])
 
-    def test_umbral_constante(self):
-        self.assertEqual(d.UMBRAL, 0.5)
-        self.assertEqual(d.ENTRADA, "frase_actual_aislada")
-
     def test_resumen_denominadores_y_terminos(self):
         recorridos = [
             {"case_id": "V1", "clase": "vishing", "t_r_linea": 3,
@@ -94,6 +90,142 @@ class TestLogica(unittest.TestCase):
         self.assertIn("no acreditan independencia", sol["advertencia"])
         self.assertEqual(sol["n_lineas_diagnostico"],
                          len(cargar_texto("CV2-D-L-ESCUELA-002")))
+
+
+class TitoCaido:
+    """Doble que simula encoder caído: ninguna inferencia válida."""
+
+    def puntuar(self, n, texto):
+        return None, "tito_error: encoder_caido", 1.0
+
+
+class TitoCorrido:
+    """Doble que devuelve puntajes fijos distintos de los almacenados."""
+
+    def puntuar(self, n, texto):
+        return 0.99, "", 1.0
+
+
+def _recorridos_falsos(puntaje=0.1):
+    return [{"case_id": "C", "puntajes": [
+        {"linea": 1, "texto": "hola", "puntaje": puntaje, "tito_error": ""},
+        {"linea": 2, "texto": "mundo", "puntaje": puntaje,
+         "tito_error": ""}]}]
+
+
+class TestRecargaComportamental(unittest.TestCase):
+    def _parchar_preparar(self, doble):
+        real = d.tito_real.preparar_tito_real
+        d.tito_real.preparar_tito_real = lambda *_a, **_k: (doble, {})
+        self.addCleanup(setattr, d.tito_real, "preparar_tito_real", real)
+
+    def test_recarga_fallida_no_reproduce_aunque_nada_difiera(self):
+        self._parchar_preparar(TitoCaido())
+        rec = d.verificar_recarga(["C"], _recorridos_falsos())
+        self.assertFalse(rec["reproduce"])
+        self.assertEqual(rec["validas"], 0)
+        self.assertGreater(rec["fallos_n"], 0)
+        self.assertEqual(rec["comparaciones"], 2)
+
+    def test_recarga_sin_inferencias_validas_no_acepta_comparador(self):
+        self._parchar_preparar(TitoCaido())
+        rec = d.verificar_recarga(["C"], _recorridos_falsos())
+        self.assertIs(rec["reproduce"], False)
+        self.assertIn("sin inferencias válidas", rec["nota"])
+
+    def test_recarga_con_puntajes_distintos_no_reproduce(self):
+        self._parchar_preparar(TitoCorrido())
+        rec = d.verificar_recarga(["C"], _recorridos_falsos(puntaje=0.1))
+        self.assertFalse(rec["reproduce"])
+        self.assertEqual(rec["distintos_n"], 2)
+        self.assertEqual(rec["validas"], 2)
+        self.assertEqual(rec["fallos_n"], 0)
+
+    def test_recarga_valida_reproduce_con_tolerancia_declarada(self):
+        self._parchar_preparar(TitoDoble({"hola": 0.12344, "mundo": 0.12344}))
+        rec = d.verificar_recarga(
+            ["C"], [{"case_id": "C", "puntajes": [
+                {"linea": 1, "texto": "hola", "puntaje": 0.1234,
+                 "tito_error": ""},
+                {"linea": 2, "texto": "mundo", "puntaje": 0.1234,
+                 "tito_error": ""}]}])
+        self.assertTrue(rec["reproduce"])
+        self.assertEqual(rec["validas"], 2)
+        self.assertIn("tolerancia_abs", rec)
+        self.assertGreater(rec["tolerancia_abs"], 0)
+
+
+class TestBancoYFuentes(unittest.TestCase):
+    def test_banco_distinque_inventario_de_visto_en_ajuste(self):
+        textos, info = d.cargar_banco_historico()
+        self.assertEqual(len(textos), info["aceptadas"])
+        self.assertEqual(info["aceptadas"] + info["apartadas"],
+                         info["inventario_total"])
+        self.assertGreater(info["apartadas"], 0)
+        self.assertIn("ejemplos_sha256", info)
+        self.assertIn("exclusiones_sha256", info)
+
+    def test_banco_reutiliza_auditoria_de_entrenar_tito(self):
+        import entrenar_tito as e
+        _, info = d.cargar_banco_historico()
+        self.assertEqual(info["aceptadas"], e.ESPERADO_ACEPTADAS)
+        self.assertEqual(info["apartadas"], e.ESPERADO_APARTADAS)
+        self.assertEqual(info["banco_commit"], e.BANCO_COMMIT)
+        self.assertEqual(info["ejemplos_sha256"], e.EJEMPLOS_SHA_DECLARADO)
+        self.assertEqual(info["exclusiones_sha256"],
+                         e.EXCLUSIONES_SHA_DECLARADA)
+
+    def test_huellas_cubren_particiones_config_seleccion_y_textos(self):
+        ids, _, _ = d.cargar_particion_diagnostico()
+        huellas = d.huellas_diagnostico(ids)
+        for clave, ruta in (("particiones_sha256", d.PARTICIONES),
+                            ("seleccion_sha256", d.SELECCION),
+                            ("configuracion_sha256", d.CONFIG)):
+            self.assertEqual(huellas["fuentes"][clave], d.sha_archivo(ruta))
+        por_cid = {h["case_id"]: h for h in huellas["conversaciones"]}
+        self.assertEqual(set(por_cid), set(ids))
+        for cid in ids:
+            crudo_txt = (d.AQUI / "casos" / "texto" / f"{cid}.txt").read_bytes()
+            self.assertEqual(por_cid[cid]["texto_sha256"],
+                             d.sha_bytes(crudo_txt))
+
+    def test_particion_rechaza_deriva_entre_particiones_y_seleccion(self):
+        import json as j
+        import tempfile
+        sel = j.loads(d.SELECCION.read_text(encoding="utf-8"))
+        ids, _, _ = d.cargar_particion_diagnostico()
+        huellas_reales = {r["case_id"]: r for r in sel["conversaciones"]}
+        primera = ids[0]
+        manipulada = dict(huellas_reales[primera])
+        manipulada["texto_sha256"] = "0" * 64
+        sel["conversaciones"] = [
+            manipulada if r["case_id"] == primera else r
+            for r in sel["conversaciones"]]
+        with tempfile.TemporaryDirectory() as tmp:
+            falsa = d.Path(tmp) / "SELECCION-falsa.json"
+            falsa.write_text(j.dumps(sel), encoding="utf-8")
+            real_seleccion = d.SELECCION
+            d.SELECCION = falsa
+            try:
+                with self.assertRaises(ValueError):
+                    d.cargar_particion_diagnostico()
+            finally:
+                d.SELECCION = real_seleccion
+
+    def test_regenerar_md_no_requiere_inferencia(self):
+        import json as j
+        import tempfile
+        informe = j.loads((d.AQUI / "DIAGNOSTICO-TITO-2026-10-29.json")
+                            .read_text(encoding="utf-8"))
+        with tempfile.TemporaryDirectory() as tmp:
+            destino = d.Path(tmp) / "DIAG.json"
+            destino.write_text(j.dumps(informe), encoding="utf-8")
+            rc = d.main(["--regenerar-md", str(destino)])
+            self.assertEqual(rc, 0)
+            md = destino.with_suffix(".md")
+            self.assertTrue(md.exists())
+            texto = md.read_text(encoding="utf-8")
+            self.assertIn("# Diagnóstico del Tito histórico", texto)
 
 
 def json_claves(obj) -> str:

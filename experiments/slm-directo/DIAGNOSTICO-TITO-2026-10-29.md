@@ -1,6 +1,6 @@
 # Diagnóstico del Tito histórico sobre la partición de diagnóstico (#98)
 
-Fecha: 2026-10-29. Semilla: 42. Código: `0a95968b7de9ed1a689cecb4a88a3e8e9f373f8e`.
+Fecha: 2026-10-29. Semilla: 42. Código: `84435777e2d78e7d9d096d5e7af96681268b09d1`.
 
 > Referencias sin revisión humana: marcas provisionales. Diagnóstico exploratorio de desarrollo; no evaluación independiente, no cierra D07/D08/D09.
 
@@ -16,7 +16,8 @@ Fecha: 2026-10-29. Semilla: 42. Código: `0a95968b7de9ed1a689cecb4a88a3e8e9f373f
 
 - Diagnóstico: 10 conversaciones (CV2-D-L-BANCO-008, CV2-D-L-DELIVERY-002, CV2-D-L-ESCUELA-002, CV2-D-L-ESCUELA-003, CV2-D-L-FAMILIAR-004, CV2-D-L-MEDICO-003, CV2-D-L-TRABAJO-002, CV2-D-L-TRABAJO-005, CV2-D-V-BANCO-003, CV2-D-V-BANCO-008).
 - Reserva final rechazada sin leer; veinte de comparación excluidas; grupos verificados sin partir.
-- Exposición histórica: ajuste con 6000 frases del banco commit `bb542e1`; ninguna conversación entera estuvo en el ajuste.
+- Exposición histórica: ajuste con 5520 frases aceptadas del banco (inventario 6000, excluidas 480) commit `bb542e1` (ejemplos `fc1fe13cfba1…`, exclusiones `2b7f88b39f10…`); ninguna conversación entera estuvo en el ajuste.
+- Fuentes: particiones `210b58e7ba0a…`, configuración `b7a87c927c9a…`, selección `012080dfdd8d…` (verificadas contra archivos y entre sí, sin deriva).
 - Solapamiento léxico banco↔diagnóstico: Jaccard máximo 0.318, mediano 0.15 sobre 246 líneas; 0 líneas ≥ 0,7.
 
 ## Recorrido por conversación
@@ -61,8 +62,8 @@ Dificultad: las 8 legítimas son comunes (ninguna `legitima_dificil`); los 2 vis
 
 ## Costos (ms, separados)
 
-- Arranque: artefacto 0.3 ms, encoder 2669.8 ms, calentamiento 16.8 ms.
-- Ejecución: 246 actualizaciones, p50 14.9 ms, p95 17.3 ms, máx 19.3 ms; fallos: 0; truncadas >128 tokens: 0.
+- Arranque: artefacto 0.2 ms, encoder 3830.0 ms, calentamiento 67.7 ms.
+- Ejecución: 246 actualizaciones, p50 14.9 ms, p95 19.0 ms, máx 23.1 ms; fallos: 0; truncadas >128 tokens: 0.
 - Sin latencia de audio ni RTF: no hubo audio en este diagnóstico.
 
 ## Interpretación
@@ -73,10 +74,11 @@ Dificultad: las 8 legítimas son comunes (ninguna `legitima_dificil`); los 2 vis
 
 ## Comparador recargable para #101
 
-- Recarga: `tito_real.cargar_artefacto` + `TitoReal` + `puntuar(n, frase)` con umbral 0.5; reproduce puntajes: True.
+- Recarga: `tito_real.cargar_artefacto` + `TitoReal` + `puntuar(n, frase)` con umbral 0.5; reproduce puntajes: True (246/246 válidas, fallos 0, distintos 0, tolerancia 5e-05).
 - Diagnóstico no sustituye la corrida Tito viejo→SLM con los diez modelos de #101.
 
 ## Reproducir
 
-- Comando: `../../.venv/bin/python diagnosticar_tito.py --salida DIAGNOSTICO-TITO-2026-10-29.json` desde `experiments/slm-directo/`.
-- Hardware/runtime en el JSON (`runtime`, `librerias`, `codigo`).
+- Corrida: `../../.venv/bin/python diagnosticar_tito.py --salida DIAGNOSTICO-TITO-2026-10-29.json` desde `experiments/slm-directo/`.
+- Solo MD (sin inferencia): `../../.venv/bin/python diagnosticar_tito.py --regenerar-md DIAGNOSTICO-TITO-2026-10-29.json`.
+- Hardware/runtime en el JSON (`runtime`, `librerias`, `codigo`): AMD Ryzen 7 7700X 8-Core Processor con 30.5 GB RAM.

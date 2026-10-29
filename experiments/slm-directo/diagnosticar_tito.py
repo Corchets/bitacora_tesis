@@ -2,9 +2,10 @@
 
 Recorre material de conversaciones no usado en el ajuste del artefacto con el
 Tito viejo inalterado (RoBERTuito congelado + única regresión logística seed
-42, entrada aislada de frase actual, umbral de derivación 0,5) y registra
-puntajes por línea, derivaciones, oportunidad respecto de las marcas
-disponibles y costo de arranque/ejecución por separado.
+42 sobre 5.520 frases aceptadas del banco histórico, entrada aislada de frase
+actual, umbral de derivación 0,5) y registra puntajes por línea, derivaciones,
+oportunidad respecto de las marcas disponibles y costo de arranque/ejecución
+por separado.
 
 No entrena, no ajusta pesos, no usa la reserva final (`CV2-T-*`), no usa las
 veinte de comparación y no ejecuta SLM: la derivación de Tito no es una alerta
@@ -20,7 +21,14 @@ Uso desde `experiments/slm-directo/`:
 Escribe el JSON (manifiesto + trazas + auditoría, comparador recargable) y un
 `.md` con el mismo basename (reporte por conversación y dificultad).
 La recarga del comparador para #101 se verifica reinstanciando el artefacto
-y re-puntuando: los puntajes deben coincidir exactamente.
+y re-puntuando los textos guardados en el propio JSON: los puntajes deben
+coincidir dentro de la tolerancia declarada (`TOLERANCIA_RECARGA`, mitad del
+último dígito exhibido), con al menos una inferencia válida y sin fallos; no
+se afirma exactitud bit a bit.
+
+Regenerar solo el `.md` desde un JSON ya corrido (sin inferencia, sin modelos):
+
+    .venv/bin/python diagnosticar_tito.py --regenerar-md DIAGNOSTICO-TITO-2026-10-29.json
 """
 
 from __future__ import annotations
@@ -51,6 +59,9 @@ UMBRAL = 0.5
 ENTRADA = "frase_actual_aislada"
 BANCO_COMMIT = "bb542e130e7a67a82e376a75a0438a15de32f4a6"
 SEMILLA = 42
+# Mitad del último dígito exhibido (puntajes a 4 decimales): la recarga del
+# comparador afirma acuerdo dentro de esta tolerancia, no exactitud bit a bit.
+TOLERANCIA_RECARGA = 5e-5
 
 
 def sha_bytes(raw: bytes) -> str:
@@ -71,14 +82,46 @@ def _tokens(texto: str) -> frozenset:
     return frozenset(t for t in _normalizar(texto).split() if len(t) > 2)
 
 
+def _modelo_cpu() -> str:
+    """Modelo real de CPU (no solo arquitectura): lscpu, /proc/cpuinfo o fallback."""
+    for ruta in ("/proc/cpuinfo",):
+        try:
+            for renglon in Path(ruta).read_text().splitlines():
+                if renglon.startswith("model name"):
+                    return renglon.split(":", 1)[1].strip()
+        except OSError:
+            pass
+    try:
+        proc = subprocess.run(["lscpu"], capture_output=True, text=True,
+                              timeout=10)
+        for renglon in (proc.stdout or "").splitlines():
+            if "Model name" in renglon:
+                return renglon.split(":", 1)[1].strip()
+    except Exception:  # noqa: BLE001 - solo informativo
+        pass
+    return platform.processor() or "no informado"
+
+
+def _ram_total_gb() -> float | None:
+    try:
+        for renglon in Path("/proc/meminfo").read_text().splitlines():
+            if renglon.startswith("MemTotal:"):
+                return round(int(renglon.split()[1]) / 1024 ** 2, 1)
+    except OSError:
+        pass
+    return None
+
+
 def info_runtime() -> dict:
     return {
         "python": platform.python_version(),
         "sistema": platform.system(),
         "release": platform.release(),
         "maquina_cpu": platform.machine(),
-        "procesador": platform.processor(),
+        "procesador": platform.processor() or "no informado",
+        "cpu_modelo": _modelo_cpu(),
         "nucleos": os.cpu_count(),
+        "ram_total_gb": _ram_total_gb(),
         "ejecutable_python": sys.executable,
     }
 
@@ -143,33 +186,85 @@ def cargar_particion_diagnostico() -> tuple[list[str], dict, dict]:
         if partes != {"diagnostico"}:
             raise ValueError(f"{cid}: grupo {grupo} partido en {sorted(partes)}.")
     seleccion = json.loads(SELECCION.read_text(encoding="utf-8"))
-    huellas = {r["case_id"]: r for r in seleccion["conversaciones"]}
+    huellas_sel = {r["case_id"]: r for r in seleccion["conversaciones"]}
+    huellas_part = {c["case_id"]: c for c in filas}
     for cid in diagnostico:
-        if cid not in huellas:
+        if cid not in huellas_sel:
             raise ValueError(f"{cid}: sin huella en la selección aprobada.")
+        if huellas_sel[cid]["texto_sha256"] != huellas_part[cid]["texto_sha256"]:
+            raise ValueError(f"{cid}: deriva entre particiones y selección "
+                             f"(texto_sha256).")
+        if (huellas_sel[cid]["referencia_sha256"]
+                != huellas_part[cid]["referencia_sha256"]):
+            raise ValueError(f"{cid}: deriva entre particiones y selección "
+                             f"(referencia_sha256).")
         for campo, subdir, ext in (("texto_sha256", "texto", "txt"),
                                    ("referencia_sha256", "referencia", "json")):
             crudo = (AQUI / "casos" / subdir / f"{cid}.{ext}").read_bytes()
-            if sha_bytes(crudo) != huellas[cid][campo]:
+            if sha_bytes(crudo) != huellas_sel[cid][campo]:
                 raise ValueError(f"{cid}: cambió {campo}; revisar antes de usar.")
+            if sha_bytes(crudo) != huellas_part[cid][campo]:
+                raise ValueError(f"{cid}: {campo} no coincide con particiones; "
+                                 f"revisar antes de usar.")
     return diagnostico, particiones, seleccion
 
 
+def huellas_diagnostico(ids: list[str]) -> dict:
+    """Huellas de las fuentes y de cada conversación del diagnóstico.
+
+    Manifiesto verificable: sha256 de particiones/configuración/selección más
+    texto/referencia por conversación. Permite detectar deriva entre archivos
+    sin releer el banco ni re-ejecutar el encoder.
+    """
+    detalle = []
+    for cid in ids:
+        texto = (AQUI / "casos" / "texto" / f"{cid}.txt").read_bytes()
+        ref = (AQUI / "casos" / "referencia" / f"{cid}.json").read_bytes()
+        detalle.append({"case_id": cid,
+                        "texto_sha256": sha_bytes(texto),
+                        "referencia_sha256": sha_bytes(ref)})
+    return {
+        "fuentes": {
+            "particiones": str(PARTICIONES),
+            "particiones_sha256": sha_archivo(PARTICIONES),
+            "configuracion": str(CONFIG),
+            "configuracion_sha256": sha_archivo(CONFIG),
+            "seleccion": str(SELECCION),
+            "seleccion_sha256": sha_archivo(SELECCION),
+        },
+        "conversaciones": detalle,
+    }
+
+
 def cargar_banco_historico() -> tuple[list[str], dict]:
-    """Frases del banco que ajustó al Tito viejo, desde el commit fijado."""
-    proc = subprocess.run(
-        ["git", "show", f"{BANCO_COMMIT}:experiments/laboratorio/entrenamiento_tito/ejemplos.jsonl"],
-        capture_output=True, timeout=120, cwd=AQUI)
-    if proc.returncode != 0:
-        raise ValueError(f"banco histórico ilegible en {BANCO_COMMIT[:7]}: "
-                         f"{proc.stderr.decode()[:200]}")
-    textos = []
-    for linea in proc.stdout.decode("utf-8").splitlines():
-        linea = linea.strip()
-        if linea:
-            textos.append(json.loads(linea).get("texto", ""))
-    return textos, {"banco_commit": BANCO_COMMIT,
-                    "n_registros": len(textos)}
+    """Frases que vio el Tito viejo, con la auditoría de `entrenar_tito`.
+
+    Reutiliza `entrenar_tito.cargar_banco` (verifica hashes de
+    `ejemplos.jsonl`/`exclusiones.json` y conteos 5.520 aceptadas / 480
+    apartadas / 276 familias): lo que el ajuste vio son las aceptadas, no el
+    inventario total. Distingue inventario (`inventario_total`, todo lo
+    listado en el commit) de realmente visto en ajuste (`aceptadas`).
+    """
+    import entrenar_tito as e
+    if e.BANCO_COMMIT != BANCO_COMMIT:
+        raise ValueError("commit del banco distinto entre diagnosticar y "
+                         "entrenar_tito; revisar antes de usar.")
+    try:
+        aceptadas, _exclusiones, datos = e.cargar_banco()
+    except SystemExit as exc:
+        raise ValueError(f"auditoría del banco rechazada: {exc}") from exc
+    textos = [f["texto"] for f in aceptadas]
+    return textos, {"banco_commit": datos["banco_commit"],
+                    "ejemplos_sha256": datos["ejemplos_sha256"],
+                    "exclusiones_sha256": datos["exclusiones_sha256"],
+                    "inventario_total": datos["aceptadas"] + datos["apartadas"],
+                    "aceptadas": datos["aceptadas"],
+                    "apartadas": datos["apartadas"],
+                    "familias": datos["familias"],
+                    "por_clase": datos["por_clase"],
+                    "nota": ("el ajuste vio solo las aceptadas (excluidas 480 "
+                             "por familias apartadas); el inventario total no "
+                             "equivale a material de ajuste.")}
 
 
 def auditar_solapamiento_semantico(ids: list[str],
@@ -322,19 +417,52 @@ def costos_actualizaciones(recorridos: list[dict], truncamientos=None) -> dict:
 
 
 def verificar_recarga(ids: list[str], recorridos: list[dict]) -> dict:
-    """El comparador recargable reproduce los puntajes exactos."""
-    esperado = {(r["case_id"], f["linea"]): f["puntaje"] for r in recorridos
-                for f in r["puntajes"]}
+    """El comparador recargable reproduce los puntajes dentro de tolerancia.
+
+    Reinstancia el artefacto y re-puntúa los textos guardados en el propio
+    informe (no relee archivos). Cuenta comparaciones, inferencias válidas,
+    fallos (puntaje `None` en la corrida o en la recarga: un `None == None`
+    nunca cuenta como reproducción) y distintos fuera de `TOLERANCIA_RECARGA`.
+    `reproduce` exige al menos una inferencia válida, cero fallos y cero
+    distintos: sin inferencias válidas el comparador no se acepta.
+    """
+    por_cid = {r["case_id"]: r for r in recorridos}
     tito2, _ = tito_real.preparar_tito_real(ARTEFACTO)
-    distintos = 0
+    total = 0
+    validas = 0
+    fallos: list[dict] = []
+    distintos: list[dict] = []
     for cid in ids:
-        for n, linea in enumerate(casos.cargar_texto(cid), start=1):
-            puntaje, _, _ = tito2.puntuar(n, linea.texto)
-            redondeado = None if puntaje is None else round(puntaje, 4)
-            if redondeado != esperado[(cid, n)]:
-                distintos += 1
-    return {"reinstancias": 2, "comparaciones": len(esperado),
-            "distintos": distintos, "reproduce": distintos == 0}
+        for f in por_cid[cid]["puntajes"]:
+            total += 1
+            puntaje, error, _ = tito2.puntuar(f["linea"], f["texto"])
+            esperado = f["puntaje"]
+            if puntaje is None or esperado is None:
+                fallos.append({"case_id": cid, "linea": f["linea"],
+                               "recarga_error": error,
+                               "corrida_error": f.get("tito_error", "")})
+                continue
+            validas += 1
+            if abs(puntaje - esperado) > TOLERANCIA_RECARGA:
+                distintos.append({"case_id": cid, "linea": f["linea"],
+                                  "corrida": esperado, "recarga": puntaje})
+    reproduce = validas > 0 and not fallos and not distintos
+    if validas == 0:
+        nota = ("sin inferencias válidas: comparador no aceptado "
+                "(None == None no es reproducción).")
+    elif fallos:
+        nota = (f"{len(fallos)} fallos técnicos: comparador no aceptado.")
+    elif distintos:
+        nota = (f"{len(distintos)} puntajes fuera de tolerancia "
+                f"{TOLERANCIA_RECARGA}: comparador no aceptado.")
+    else:
+        nota = (f"acuerdo dentro de tolerancia_abs {TOLERANCIA_RECARGA} "
+                f"(mitad del último dígito exhibido); no exactitud bit a bit.")
+    return {"reinstancias": 2, "comparaciones": total,
+            "validas": validas, "fallos_n": len(fallos), "fallos": fallos,
+            "distintos_n": len(distintos), "distintos": distintos,
+            "tolerancia_abs": TOLERANCIA_RECARGA,
+            "reproduce": reproduce, "nota": nota}
 
 
 def diagnosticar(tito=None) -> dict:
@@ -360,14 +488,15 @@ def diagnosticar(tito=None) -> dict:
                       "fuente": str(PARTICIONES),
                       "configuracion": str(CONFIG),
                       "comparacion_20_excluida": True,
-                      "reserva_rechazada": True},
+                      "reserva_rechazada": True,
+                      "verificacion_fuentes": huellas_diagnostico(ids)},
         "exposicion_historica": {
             **info_banco,
             "conversaciones_diagnostico_en_ajuste": False,
             "banco_visto_por_tito_viejo_en_validacion_nueva": True,
-            "nota": ("el ajuste usó solo frases del banco; ninguna conversación "
-                     "entera estuvo en el ajuste. La validación del banco no es "
-                     "independiente del Tito viejo."),
+            "nota": ("el ajuste usó solo las aceptadas del banco; ninguna "
+                     "conversación entera estuvo en el ajuste. La validación "
+                     "del banco no es independiente del Tito viejo."),
         },
         "auditoria_semantica": solapamiento,
         "puerta_formal_datos_tito": {
@@ -392,8 +521,13 @@ def diagnosticar(tito=None) -> dict:
                                       ("diagnosticar_tito.py", "tito_real.py",
                                        "filtro_tito.py", "casos.py",
                                        "datos_tito.py", "entrenar_tito.py")}},
-        "reproducir": ("../../.venv/bin/python diagnosticar_tito.py --salida "
-                       "DIAGNOSTICO-TITO-2026-10-29.json"),
+        "reproducir": {
+            "corrida": ("../../.venv/bin/python diagnosticar_tito.py --salida "
+                        "DIAGNOSTICO-TITO-2026-10-29.json"),
+            "regenerar_md": ("../../.venv/bin/python diagnosticar_tito.py "
+                             "--regenerar-md DIAGNOSTICO-TITO-2026-10-29.json"),
+            "nota": "regenerar_md reescribe el .md desde el JSON sin inferencia.",
+        },
         "limites": [
             "La auditoría semántica completa banco↔conversaciones es ownership "
             "de #99 (worker paralelo); acá solo cota inferior léxica (Jaccard), "
@@ -406,6 +540,46 @@ def diagnosticar(tito=None) -> dict:
         ],
     }
     return informe
+
+
+def _linea_exposicion(informe: dict) -> str:
+    exp = informe["exposicion_historica"]
+    if "aceptadas" in exp:
+        return (
+            f"- Exposición histórica: ajuste con {exp['aceptadas']} frases "
+            f"aceptadas del banco (inventario {exp['inventario_total']}, "
+            f"excluidas {exp['apartadas']}) commit "
+            f"`{exp['banco_commit'][:7]}` "
+            f"(ejemplos `{exp['ejemplos_sha256'][:12]}…`, "
+            f"exclusiones `{exp['exclusiones_sha256'][:12]}…`); "
+            "ninguna conversación entera estuvo en el ajuste.")
+    return (
+        f"- Exposición histórica: ajuste con {exp.get('n_registros')} frases "
+        f"del banco commit `{exp.get('banco_commit', '')[:7]}` (inventario sin "
+        "distinguir aceptadas; regenerar con la versión que reutiliza la "
+        "auditoría de `entrenar_tito`); ninguna conversación entera estuvo "
+        "en el ajuste.")
+
+
+def _linea_fuentes(informe: dict) -> str:
+    verif = informe["particion"].get("verificacion_fuentes")
+    if not verif:
+        return ("- Fuentes: sin huellas de particiones/configuración/selección "
+                "(JSON de corrida anterior; regenerar).")
+    f = verif["fuentes"]
+    return (
+        f"- Fuentes: particiones `{f['particiones_sha256'][:12]}…`, "
+        f"configuración `{f['configuracion_sha256'][:12]}…`, "
+        f"selección `{f['seleccion_sha256'][:12]}…` "
+        "(verificadas contra archivos y entre sí, sin deriva).")
+
+
+def _linea_reproducir(informe: dict) -> str:
+    rep = informe["reproducir"]
+    if isinstance(rep, dict):
+        return (f"- Corrida: `{rep['corrida']}` desde `experiments/slm-directo/`.\n"
+                f"- Solo MD (sin inferencia): `{rep['regenerar_md']}`.")
+    return f"- Comando: `{rep}` desde `experiments/slm-directo/`."
 
 
 def a_markdown(informe: dict) -> str:
@@ -442,9 +616,8 @@ def a_markdown(informe: dict) -> str:
         f"({', '.join(informe['particion']['ids'])}).",
         "- Reserva final rechazada sin leer; veinte de comparación excluidas; "
         "grupos verificados sin partir.",
-        f"- Exposición histórica: ajuste con {informe['exposicion_historica']['n_registros']} "
-        f"frases del banco commit `{informe['exposicion_historica']['banco_commit'][:7]}`; "
-        "ninguna conversación entera estuvo en el ajuste.",
+        _linea_exposicion(informe),
+        _linea_fuentes(informe),
         f"- Solapamiento léxico banco↔diagnóstico: Jaccard máximo {sol['jaccard_maximo']}, "
         f"mediano {sol['jaccard_mediano']} sobre {sol['n_lineas_diagnostico']} líneas; "
         f"{len(sol['lineas_con_jaccard_alto_ge_07'])} líneas ≥ 0,7.",
@@ -519,23 +692,47 @@ def a_markdown(informe: dict) -> str:
         "",
         f"- Recarga: `tito_real.cargar_artefacto` + `TitoReal` + `puntuar(n, frase)` "
         f"con umbral {informe['artefacto_historico']['umbral_derivacion']}; "
-        f"reproduce puntajes: {informe['recarga_comparador'].get('reproduce')}.",
+        f"reproduce puntajes: {informe['recarga_comparador'].get('reproduce')} "
+        f"({informe['recarga_comparador'].get('validas')}/"
+        f"{informe['recarga_comparador'].get('comparaciones')} válidas, "
+        f"fallos {informe['recarga_comparador'].get('fallos_n')}, "
+        f"distintos {informe['recarga_comparador'].get('distintos_n')}, "
+        f"tolerancia {informe['recarga_comparador'].get('tolerancia_abs')}).",
         "- Diagnóstico no sustituye la corrida Tito viejo→SLM con los diez "
         "modelos de #101.",
         "",
         "## Reproducir",
         "",
-        f"- Comando: `{informe['reproducir']}` desde `experiments/slm-directo/`.",
-        f"- Hardware/runtime en el JSON (`runtime`, `librerias`, `codigo`).",
+        _linea_reproducir(informe),
+        f"- Hardware/runtime en el JSON (`runtime`, `librerias`, `codigo`): "
+        f"{informe['runtime'].get('cpu_modelo', 'no informado')} con "
+        f"{informe['runtime'].get('ram_total_gb')} GB RAM.",
     ]
     return "\n".join(lineas) + "\n"
 
 
+def escribir_md_desde_json(ruta_json: Path) -> Path:
+    """Reescribe el `.md` desde un JSON ya corrido, sin inferencia ni modelos."""
+    informe = json.loads(ruta_json.read_text(encoding="utf-8"))
+    destino = ruta_json.with_suffix(".md")
+    destino.write_text(a_markdown(informe), encoding="utf-8")
+    return destino
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--salida", type=Path, required=True,
+    parser.add_argument("--salida", type=Path, default=None,
                         help="ruta del JSON (el .md se escribe al lado)")
+    parser.add_argument("--regenerar-md", type=Path, default=None,
+                        help="ruta de un JSON ya corrido: reescribe solo el "
+                             ".md sin inferencia ni modelos")
     args = parser.parse_args(argv)
+    if args.regenerar_md is not None:
+        destino = escribir_md_desde_json(args.regenerar_md)
+        print(f"md_regenerado={destino}")
+        return 0
+    if args.salida is None:
+        parser.error("--salida es obligatorio sin --regenerar-md.")
     informe = diagnosticar()
     args.salida.write_text(json.dumps(informe, ensure_ascii=False, indent=2,
                                       sort_keys=True) + "\n", encoding="utf-8")
