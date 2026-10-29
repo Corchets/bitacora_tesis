@@ -1,0 +1,1254 @@
+{
+  "fecha": "2026-10-28",
+  "issue": 96,
+  "codigo_commit": "0a95968b7de9ed1a689cecb4a88a3e8e9f373f8e",
+  "tipo_revision": "IA, con criterio de revisión técnica solicitado por el usuario; no revisión humana",
+  "revisor": "Codex (IA)",
+  "revision_ciega": false,
+  "exposicion": "Textos, referencias, notas y auditorías previamente visibles. No es anotación independiente ni acuerdo entre revisores.",
+  "estado": "propuesta sin discutir",
+  "decisiones": [
+    "D07",
+    "D08"
+  ],
+  "habilitado": false,
+  "alcance": "12 casos candidatos y 2 contrastes; no revisión semántica de los 150.",
+  "casos": [
+    {
+      "case_id": "SC-WA-CODE-01-e01",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "f13b4b33a64d33d8baa44fe0e7cc57f217f99d14b2cd685ee6244c4681bc4d7a",
+      "referencia_original_sha256": "433ab214be80eb83e446ab5edb44ac477c8a772a47d97af0e962e24a8c67ad8a",
+      "dictamen_ia": "compatible",
+      "fundamento": "L1 declara soporte; L2 informa activación no solicitada; L4 pide el código de activación y L5 lo dicta. Clase vishing defendible y marcas 4/5 observables. L3 aporta presión, no es el primer pedido.",
+      "soporte": [
+        {
+          "linea": 1,
+          "texto": "A: Te llamo de soporte por la activación de tu cuenta de WhatsApp."
+        },
+        {
+          "linea": 2,
+          "texto": "B: Me acaba de llegar un SMS. No pedí activar nada."
+        },
+        {
+          "linea": 3,
+          "texto": "A: Para cancelar esa activación tenemos que resolverlo ahora."
+        },
+        {
+          "linea": 4,
+          "texto": "A: Decime el código de activación que recibiste por SMS."
+        },
+        {
+          "linea": 5,
+          "texto": "B: Es cero, cero, cero, cero, cero, cero."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "vishing",
+        "t_r_linea": 4,
+        "t_c_linea": 5,
+        "pedido": "REQUEST_AUTH_CODE",
+        "evidencia": [
+          {
+            "linea": 1,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM"
+            ]
+          },
+          {
+            "linea": 2,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 3,
+            "evento": "contexto",
+            "etiquetas": [
+              "URGENCY_PRESSURE"
+            ]
+          },
+          {
+            "linea": 4,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE"
+            ]
+          },
+          {
+            "linea": 5,
+            "evento": "cumplimiento",
+            "etiquetas": []
+          }
+        ],
+        "par": "LG-WA-CONSULTA-01-e01",
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "evidencia_repartida"
+      ]
+    },
+    {
+      "case_id": "LG-WA-CONSULTA-01-e01",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "e587a7e119ea41d4447e72f870392bad2845a47e6428c39fcfc84ba18cc6b0d2",
+      "referencia_original_sha256": "80181c691758384d93989a272fa5691edea7349d0de3f3776d63f39616aeaa12",
+      "dictamen_ia": "compatible",
+      "fundamento": "L2 prohíbe compartir y L4 rechaza recibir el código. L3 es una pregunta del receptor del SMS, no una solicitud del orientador. Mantener clase legítima y marcas nulas; la oferta de mostrarlo no prueba entrega.",
+      "soporte": [
+        {
+          "linea": 1,
+          "texto": "A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí."
+        },
+        {
+          "linea": 2,
+          "texto": "B: No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación."
+        },
+        {
+          "linea": 3,
+          "texto": "A: ¿Necesitás verlo para ayudarme?"
+        },
+        {
+          "linea": 4,
+          "texto": "B: No. No hace falta que me digas ningún código."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima_dificil",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 1,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 2,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 4,
+            "evento": "rechazo",
+            "etiquetas": []
+          }
+        ],
+        "par": "SC-WA-CODE-01-e01",
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "negacion",
+        "advertencia"
+      ]
+    },
+    {
+      "case_id": "TR-02-codigo-del-candado",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "66fff3c538daa3cba002c402963833a6d753e521adc4419e3112d225e6fd0e64",
+      "referencia_original_sha256": "225a69c45e25ecd23d8cf262ae0e075aa41b2dbf1ab84f28f130c8c8cf98ac7d",
+      "dictamen_ia": "requiere_criterio",
+      "fundamento": "L1–2 dan contexto compartido y L7 confirma préstamo de sillas. L3 pide una combinación física y L4 la entrega. Legitimidad plausible, no identidad autenticada. No es OTP: no usar REQUEST_AUTH_CODE. La frase autoral «código no sensible» no se sostiene solo por ser un candado; el alcance de REQUEST_SECRET físico sigue abierto.",
+      "soporte": [
+        {
+          "linea": 1,
+          "texto": "A: Che, Caro, ya estoy en tu edificio. Vengo a buscar las sillas plegables como quedamos."
+        },
+        {
+          "linea": 2,
+          "texto": "B: Genial. Están en la baulera del subsuelo, la última del pasillo. Llevate las blancas, que las de madera están rotas."
+        },
+        {
+          "linea": 3,
+          "texto": "A: Dale. ¿Cuál era el código del candado? Me lo dijiste el otro día y no me acuerdo."
+        },
+        {
+          "linea": 4,
+          "texto": "B: Cero, cero, cero, cero. Nunca lo cambié, ya sé que es un desastre."
+        },
+        {
+          "linea": 7,
+          "texto": "A: Listo, ya las tengo. El domingo, después del cumple, te las devuelvo."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima_dificil",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 1,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 3,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 4,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 5,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 6,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 8,
+            "evento": "mencion",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [
+        {
+          "campo": "etiqueta_evidencia_L3",
+          "opciones": [
+            "sin etiqueta REQUEST_*",
+            "REQUEST_SECRET si el equipo incluye credenciales físicas"
+          ],
+          "efecto": "No cambiar marcas críticas nulas de esta legítima ni inferir fraude por la etiqueta."
+        }
+      ],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "solicitud_sensible_legitima"
+      ]
+    },
+    {
+      "case_id": "TR-03-negacion-y-consejo",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "035be565ed66795b0f4476f3e5779e85f0cbef1b8230513d41f7d3a55942882d",
+      "referencia_original_sha256": "7d6d4fc25eaaaa12113932da91b48784843d5357d821b1e5685b2c83328a016b",
+      "dictamen_ia": "compatible",
+      "fundamento": "L2/4/6/8 aconsejan no compartir ni ejecutar acciones; L5/7 citan pedidos hipotéticos de terceros. Mantener legítima, sin pedido crítico ni cumplimiento. Una instrucción segura no es un pedido fraudulento. Las afirmaciones del personaje sobre bancos no son fuentes externas verificadas.",
+      "soporte": [
+        {
+          "linea": 2,
+          "texto": "B: Bien que me llames, ma. Escuchame una cosa: nunca le pases la clave del banco a nadie, ni a mí."
+        },
+        {
+          "linea": 4,
+          "texto": "B: Menos. El banco no te va a pedir el código que te llega por mensaje, ni el PIN, ni que instales nada en el celular."
+        },
+        {
+          "linea": 5,
+          "texto": "A: ¿Y si me dicen que tengo que transferir para que no me bloqueen la cuenta?"
+        },
+        {
+          "linea": 6,
+          "texto": "B: No transfieras nada. Cortás, y si querés llamás vos al número que está atrás de la tarjeta."
+        },
+        {
+          "linea": 7,
+          "texto": "A: ¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?"
+        },
+        {
+          "linea": 8,
+          "texto": "B: Tampoco. Nadie de afuera tiene que ver tu pantalla. Si no entendés algo, me esperás y lo vemos juntos el domingo."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima_dificil",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 2,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 4,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 5,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 6,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 7,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 8,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 10,
+            "evento": "mencion",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "negacion",
+        "cita",
+        "advertencia"
+      ]
+    },
+    {
+      "case_id": "TR-05-asado-con-transferencia",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "a47dbee0f5a8c5c59ecfba926cfa76585ca7a08d77baf74021a78e31dc7d89dd",
+      "referencia_original_sha256": "6110fbec4f630af61c1b7658e1bd90c29abe8fd3e9879274c41fbc75ad4429ae",
+      "dictamen_ia": "compatible",
+      "fundamento": "L7–11 explican reparto: 136000/8=17000 más 5000 de bebida, total 22000. L13 pide transferencia y L18 afirma haberla hecho; contexto compartido L15–17 sostiene legitimidad autoral sin autenticar identidad. Mantener marcas críticas nulas y REQUEST_TRANSFER como descripción del pedido legítimo. No usar el plazo antes del viernes como presión suficiente.",
+      "soporte": [
+        {
+          "linea": 7,
+          "texto": "A: Fui a la carnicería con Lucho: vacío, chorizo, morcilla y unas mollejas. Salió todo ciento treinta y seis mil."
+        },
+        {
+          "linea": 9,
+          "texto": "A: Ocho, contando a la novia de Gonza. Son diecisiete lucas por cabeza, más la bebida."
+        },
+        {
+          "linea": 11,
+          "texto": "A: La trae Pato, que tiene la distribuidora del cuñado. Calculá cinco más, veintidós en total."
+        },
+        {
+          "linea": 13,
+          "texto": "A: Si podés, pasámelos por transferencia antes del viernes, así le devuelvo a Lucho, que pagó todo él con la tarjeta."
+        },
+        {
+          "linea": 15,
+          "texto": "A: Te lo mando por el grupo. Es el mismo de la vaquita del cumple de Lucho."
+        },
+        {
+          "linea": 17,
+          "texto": "A: Fijate que te aparezca mi nombre, Nicolás Peralta, antes de confirmar, no sea cosa que se lo mandes a otro."
+        },
+        {
+          "linea": 18,
+          "texto": "B: Sí, sí. Ahí está, te lo mandé. Veintidós mil."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima_dificil",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 1,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 5,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 13,
+            "evento": "contexto",
+            "etiquetas": [
+              "REQUEST_TRANSFER"
+            ]
+          },
+          {
+            "linea": 14,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 17,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 18,
+            "evento": "contexto",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "solicitud_sensible_legitima",
+        "contexto_prolongado"
+      ]
+    },
+    {
+      "case_id": "TR-07-pedido-partido-en-dos-lineas",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "ebe24b27f413c6583b86ba258eb157f1f9c92e567ee6b6764b42f97b845c555d",
+      "referencia_original_sha256": "3c5bd0132b6ad314194de264132e9b1c5b0871a3545cf65f6ed52ae5d834dc42",
+      "dictamen_ia": "requiere_criterio",
+      "fundamento": "Recomiendo T_R=7 para el inicio textual: L5/6 ya identifican el mensaje y L7 solicita su contenido. La identificación explícita de seis números del banco queda disponible en L8. T_C=9 es observable. Registrar por separado inicio y desambiguación; no retrotraer a L7 la literalidad aportada en L8.",
+      "soporte": [
+        {
+          "linea": 1,
+          "texto": "A: Buenas tardes, ¿Sergio Paz? Te hablo de atención al cliente del banco, me llamo Andrea."
+        },
+        {
+          "linea": 5,
+          "texto": "A: Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo."
+        },
+        {
+          "linea": 6,
+          "texto": "B: Sí, me entró uno recién. ¿Qué tengo que hacer?"
+        },
+        {
+          "linea": 7,
+          "texto": "A: Solamente pasame lo que te llegó"
+        },
+        {
+          "linea": 8,
+          "texto": "A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia."
+        },
+        {
+          "linea": 9,
+          "texto": "B: A ver... cero, cero, cero, cero, cero, cero."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "vishing",
+        "t_r_linea": 7,
+        "t_c_linea": 9,
+        "pedido": "REQUEST_AUTH_CODE",
+        "evidencia": [
+          {
+            "linea": 1,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM"
+            ]
+          },
+          {
+            "linea": 5,
+            "evento": "contexto",
+            "etiquetas": [
+              "URGENCY_PRESSURE"
+            ]
+          },
+          {
+            "linea": 6,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 7,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE"
+            ]
+          },
+          {
+            "linea": 8,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE",
+              "THREAT_FEAR",
+              "URGENCY_PRESSURE"
+            ]
+          },
+          {
+            "linea": 9,
+            "evento": "cumplimiento",
+            "etiquetas": []
+          },
+          {
+            "linea": 10,
+            "evento": "contexto",
+            "etiquetas": [
+              "ISOLATION_SECRECY"
+            ]
+          }
+        ],
+        "par": "TR-08-frase-cortada-candado",
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [
+        {
+          "campo": "t_r_linea",
+          "opciones": [
+            7,
+            8
+          ],
+          "recomendacion": 7,
+          "efecto": "El margen respecto del pedido varía una línea. No adjudicado."
+        }
+      ],
+      "dificultades_candidatas": [
+        "pedido_indirecto",
+        "evidencia_repartida"
+      ]
+    },
+    {
+      "case_id": "TR-09-victima-se-niega",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "3768ac43c750dd33823922739885aa8dec6a47aa0a44014f0900bee593a6bf21",
+      "referencia_original_sha256": "6d1f5b798028b5460c56aac5054c253fba6775ba316a3fe877ecb03a1f0ee825",
+      "dictamen_ia": "compatible",
+      "fundamento": "L3 se presenta como banco; L5 pide el SMS para anular compra, L9 insiste y desalienta cortar. L6 es duda, no cumplimiento. L10/12 niegan la entrega. Mantener vishing, T_R=5 y T_C=null: no hay prevención lograda deducible de esa ausencia.",
+      "soporte": [
+        {
+          "linea": 3,
+          "texto": "A: Te llamo del área de prevención del banco, me llamo Diego. Tenemos retenida una compra de doscientos treinta mil pesos con tu tarjeta de débito, en una página de venta de pasajes. ¿La hiciste vos?"
+        },
+        {
+          "linea": 5,
+          "texto": "A: Bien, entonces la damos de baja. Te acaba de llegar un SMS con un código de seis números; leémelo así anulo la compra."
+        },
+        {
+          "linea": 6,
+          "texto": "B: Ay, no sé... ¿Y para qué me lo pedís a mí? Si el mensaje lo mandaron ustedes, ya lo tienen."
+        },
+        {
+          "linea": 8,
+          "texto": "B: Prefiero cortar y llamar yo al número que figura atrás de la tarjeta."
+        },
+        {
+          "linea": 9,
+          "texto": "A: Si cortás, el reclamo se cae y la compra ya no se puede revertir. Es un segundo: decime los seis números y queda resuelto."
+        },
+        {
+          "linea": 10,
+          "texto": "B: No, no te voy a pasar ningún código."
+        },
+        {
+          "linea": 12,
+          "texto": "B: Te dije que no. Llamo yo al banco. Chau."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "vishing",
+        "t_r_linea": 5,
+        "t_c_linea": null,
+        "pedido": "REQUEST_AUTH_CODE",
+        "evidencia": [
+          {
+            "linea": 3,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM"
+            ]
+          },
+          {
+            "linea": 5,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE"
+            ]
+          },
+          {
+            "linea": 6,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 7,
+            "evento": "contexto",
+            "etiquetas": [
+              "PERSISTENCE_DISTRACTION",
+              "TRUST_BUILDING",
+              "URGENCY_PRESSURE"
+            ]
+          },
+          {
+            "linea": 8,
+            "evento": "rechazo",
+            "etiquetas": []
+          },
+          {
+            "linea": 9,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE",
+              "PERSISTENCE_DISTRACTION",
+              "URGENCY_PRESSURE",
+              "THREAT_FEAR",
+              "ISOLATION_SECRECY"
+            ]
+          },
+          {
+            "linea": 10,
+            "evento": "rechazo",
+            "etiquetas": []
+          },
+          {
+            "linea": 11,
+            "evento": "contexto",
+            "etiquetas": [
+              "PERSISTENCE_DISTRACTION",
+              "URGENCY_PRESSURE"
+            ]
+          },
+          {
+            "linea": 12,
+            "evento": "rechazo",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "negacion",
+        "evidencia_repartida"
+      ]
+    },
+    {
+      "case_id": "TR-10-ofrecimiento-inducido",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "381b278ac0e7128446d921499c4a059182093e8a8ca261ccbc5b9201e9bc8387",
+      "referencia_original_sha256": "3aeb211e43254cdd22c0fb66e6a7ac781f240f8b554d884525f9da824260a06a",
+      "dictamen_ia": "requiere_criterio",
+      "fundamento": "Recomiendo T_R=8: L6/7 identifican el SMS con números y L8 pide confirmar su contenido al interlocutor. L9 muestra ambigüedad pragmática; L10 aclara que lo carga de su lado. L11 es ofrecimiento de quien recibió, no pedido del llamante; L12 lo acepta y L13 entrega cifras. Mantener T_C=13.",
+      "soporte": [
+        {
+          "linea": 4,
+          "texto": "B: Te hablo del área de verificación de cuentas de WhatsApp. Estamos viendo que alguien intenta abrir tu cuenta en otro teléfono y lo tenemos retenido."
+        },
+        {
+          "linea": 6,
+          "texto": "B: Por eso te llamo. Fijate que te tuvo que haber llegado un SMS hace un ratito."
+        },
+        {
+          "linea": 7,
+          "texto": "A: Sí, acá está. Un mensaje con unos números."
+        },
+        {
+          "linea": 8,
+          "texto": "B: Bien. Para frenarlo necesito que me confirmes lo que te mandamos; la retención dura unos minutos nada más."
+        },
+        {
+          "linea": 9,
+          "texto": "A: ¿Confirmar cómo? ¿Le respondo el mensaje?"
+        },
+        {
+          "linea": 10,
+          "texto": "B: No, no respondas nada ni lo reenvíes, que eso lo traba. Con lo que te llegó ahí, yo de este lado lo cargo y queda frenado."
+        },
+        {
+          "linea": 11,
+          "texto": "A: Ah... ¿Te leo el código, entonces?"
+        },
+        {
+          "linea": 12,
+          "texto": "B: Dale, cuando quieras."
+        },
+        {
+          "linea": 13,
+          "texto": "A: Es uno, dos, tres, cuatro, cinco, seis."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "vishing",
+        "t_r_linea": 8,
+        "t_c_linea": 13,
+        "pedido": "REQUEST_AUTH_CODE",
+        "evidencia": [
+          {
+            "linea": 4,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM",
+              "THREAT_FEAR"
+            ]
+          },
+          {
+            "linea": 6,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 7,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 8,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE",
+              "URGENCY_PRESSURE"
+            ]
+          },
+          {
+            "linea": 10,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE",
+              "PERSISTENCE_DISTRACTION",
+              "TRUST_BUILDING"
+            ]
+          },
+          {
+            "linea": 11,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 12,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE"
+            ]
+          },
+          {
+            "linea": 13,
+            "evento": "cumplimiento",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [
+        {
+          "campo": "t_r_linea",
+          "opciones": [
+            8,
+            10,
+            12
+          ],
+          "recomendacion": 8,
+          "efecto": "Distinguir inicio indirecto, desambiguación y aceptación; L12 no es primer pedido si se admite el indirecto. No adjudicado."
+        }
+      ],
+      "dificultades_candidatas": [
+        "pedido_indirecto",
+        "evidencia_repartida"
+      ]
+    },
+    {
+      "case_id": "TR-13-turno-medico-pide-dni",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "5f87eeccc837367ce270401acee1c76da081cf7e3b767839dde9d4583f998909",
+      "referencia_original_sha256": "147a55720ce0f33fa516a30314809fbcc0961560e672452711427f9dd8d0305d",
+      "dictamen_ia": "compatible",
+      "fundamento": "L1/2 encuadran consulta de turno, L5 pide DNI/fecha y L6 los dicta. Es solicitud de datos personales dentro de situación legítima autoral; no convertir automáticamente en fraude. Mantener T_R/T_C/pedido críticos nulos. El contexto no autentica el centro; su origen saliente inferido no debe agregarse como entrada externa al detector.",
+      "soporte": [
+        {
+          "linea": 1,
+          "texto": "A: Centro de salud, buen día, te atiende Carla."
+        },
+        {
+          "linea": 2,
+          "texto": "B: Hola, buen día. Quería sacar un turno con clínica médica, para un control."
+        },
+        {
+          "linea": 5,
+          "texto": "A: Bien. Decime tu número de documento y la fecha de nacimiento, así te busco en el sistema."
+        },
+        {
+          "linea": 6,
+          "texto": "B: Doce millones trescientos cuarenta y cinco mil seiscientos setenta y ocho. Nací el tres de marzo del cincuenta y ocho."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima_dificil",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 1,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM"
+            ]
+          },
+          {
+            "linea": 2,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 5,
+            "evento": "contexto",
+            "etiquetas": [
+              "REQUEST_PERSONAL_DATA"
+            ]
+          },
+          {
+            "linea": 6,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 11,
+            "evento": "mencion",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "solicitud_sensible_legitima"
+      ]
+    },
+    {
+      "case_id": "CV2-D-V-BANCO-001",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "0affbb8ce80874baa7a5d2b24537d33ca3f38a43d4a35c717d1587987a4a937d",
+      "referencia_original_sha256": "5a4a52d22240341b736277de5ac313945788e07791ea822aa48fedbbc33db64e",
+      "dictamen_ia": "compatible",
+      "fundamento": "L2 declara banco, L29 refiere aviso de acceso a cuenta y L31 cuestiona el vínculo con el reclamo. L32 pide seis cifras para asociarlas al reclamo; L33/35/37 rechazan. Mantener vishing, T_R=32, T_C=null. Agregar L29/31/33 a evidencia propuesta: explican el riesgo y el desenlace mejor que la autoridad por sí sola.",
+      "soporte": [
+        {
+          "linea": 2,
+          "texto": "B: Soy del sector de medios de pago del banco, por el reclamo de un cargo."
+        },
+        {
+          "linea": 29,
+          "texto": "A: Acaba de entrar un mensaje. Dice que alguien quiere acceder a mi cuenta."
+        },
+        {
+          "linea": 30,
+          "texto": "B: Es el aviso automático que genera la vinculación. Tiene una vigencia corta."
+        },
+        {
+          "linea": 31,
+          "texto": "A: No entiendo qué tiene que ver entrar a mi cuenta con un recibo de la cochera."
+        },
+        {
+          "linea": 32,
+          "texto": "B: Ahora sí, decime el código de seis cifras del mensaje y lo asocio al reclamo."
+        },
+        {
+          "linea": 33,
+          "texto": "A: No. Una cosa es discutir el cobro y otra darte lo que permite entrar."
+        },
+        {
+          "linea": 35,
+          "texto": "A: Que vuelva a la cola. Prefiero llevar el recibo a la sucursal."
+        },
+        {
+          "linea": 37,
+          "texto": "A: Dejá constancia también de que voy a consultar yo. Corto acá."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "vishing",
+        "t_r_linea": 32,
+        "t_c_linea": null,
+        "pedido": "REQUEST_AUTH_CODE",
+        "evidencia": [
+          {
+            "linea": 2,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM"
+            ]
+          },
+          {
+            "linea": 29,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 30,
+            "evento": "contexto",
+            "etiquetas": [
+              "TRUST_BUILDING"
+            ]
+          },
+          {
+            "linea": 31,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 32,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE"
+            ]
+          },
+          {
+            "linea": 33,
+            "evento": "rechazo",
+            "etiquetas": []
+          },
+          {
+            "linea": 34,
+            "evento": "contexto",
+            "etiquetas": [
+              "URGENCY_PRESSURE"
+            ]
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "contexto_prolongado",
+        "evidencia_repartida",
+        "negacion"
+      ]
+    },
+    {
+      "case_id": "CV2-D-V-WHATSAPP-006",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "d108b5f5b91893f6ebd6e3dc2eee30474215d28e4443095b2c25547ab5abdfb2",
+      "referencia_original_sha256": "47394c145233912ca5596a0690e250e00c0687d9b40c3ac2898f6a26407a07e8",
+      "dictamen_ia": "requiere_criterio",
+      "fundamento": "L22/24 identifican mensaje no solicitado para registrar la cuenta en otro equipo. L25 queda truncada en «pasame»; L26 recién vincula el objeto «eso que apareció recién». Recomiendo T_R=25 como comienzo retrospectivo y desambiguación=26, sin convertir la primera en certeza online. L31 dicta las seis cifras: T_C=31. Agregar L22/24/26 a evidencia propuesta.",
+      "soporte": [
+        {
+          "linea": 3,
+          "texto": "A: Te llamo por la lista del taller. Soy quien está organizando el grupo de WhatsApp."
+        },
+        {
+          "linea": 22,
+          "texto": "B: Me acaba de aparecer un mensaje que yo no pedí."
+        },
+        {
+          "linea": 24,
+          "texto": "B: Veo seis cifras y abajo dice que es para registrar la cuenta en otro equipo."
+        },
+        {
+          "linea": 25,
+          "texto": "A: Para dejarte en la lista, pasame"
+        },
+        {
+          "linea": 26,
+          "texto": "A: eso que apareció recién, de a uno, como lo ves."
+        },
+        {
+          "linea": 27,
+          "texto": "B: ¿Las cifras del mensaje? Pensé que solo necesitabas mi nombre para el taller."
+        },
+        {
+          "linea": 30,
+          "texto": "A: Primero cierro el tuyo, porque si se vence tengo que empezar la inscripción otra vez."
+        },
+        {
+          "linea": 31,
+          "texto": "B: Bueno, dice cuatro, ocho, cero, dos, nueve, tres."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "vishing",
+        "t_r_linea": 25,
+        "t_c_linea": 31,
+        "pedido": "REQUEST_AUTH_CODE",
+        "evidencia": [
+          {
+            "linea": 3,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM"
+            ]
+          },
+          {
+            "linea": 21,
+            "evento": "contexto",
+            "etiquetas": [
+              "TRUST_BUILDING"
+            ]
+          },
+          {
+            "linea": 22,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 24,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 25,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_AUTH_CODE"
+            ]
+          },
+          {
+            "linea": 26,
+            "evento": "pedido",
+            "etiquetas": []
+          },
+          {
+            "linea": 30,
+            "evento": "contexto",
+            "etiquetas": [
+              "URGENCY_PRESSURE"
+            ]
+          },
+          {
+            "linea": 31,
+            "evento": "cumplimiento",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [
+        {
+          "campo": "t_r_linea",
+          "opciones": [
+            25,
+            26
+          ],
+          "recomendacion": 25,
+          "efecto": "Inicio de frase versus objeto especificado. Una línea de diferencia; no adjudicado."
+        }
+      ],
+      "dificultades_candidatas": [
+        "contexto_prolongado",
+        "pedido_indirecto",
+        "evidencia_repartida"
+      ]
+    },
+    {
+      "case_id": "CV2-D-L-SOPORTE-001",
+      "alcance": "muestra_candidata",
+      "texto_sha256": "e2a262eb132ba4fc25583f1d8bde5b6c47751f012e1673738aa1000d3d028106",
+      "referencia_original_sha256": "c9e8df5b86dbf144de6678d202db46addbe11c7f0a2c68927070ab5e8c288a14",
+      "dictamen_ia": "compatible",
+      "fundamento": "L1 dice que la persona inicia consulta por cortes; L6 pide domicilio de instalación y L18 contacto para visita. L12 evita manipular equipo, L17 ofrece DNI y L18 lo descarta. Mantener legítima y marcas críticas nulas. El evento pedido de L6 es literal, no una orden fraudulenta; no convertir pedido_visible en positivo de derivación por defecto.",
+      "soporte": [
+        {
+          "linea": 1,
+          "texto": "A: Buenas, llamo yo porque desde ayer se corta internet cada veinte minutos."
+        },
+        {
+          "linea": 6,
+          "texto": "B: Voy a revisar la línea. ¿Me confirmás la calle y la altura donde está instalado?"
+        },
+        {
+          "linea": 7,
+          "texto": "A: Pasaje Molino 184, departamento tres. Es la casa del fondo."
+        },
+        {
+          "linea": 12,
+          "texto": "B: No hace falta abrir el módem ni tocar la instalación. Puedo pedir una revisión a domicilio."
+        },
+        {
+          "linea": 17,
+          "texto": "A: Sí, viernes. ¿Necesitás el documento de Nadia?"
+        },
+        {
+          "linea": 18,
+          "texto": "B: No para agendar la visita. Confirmame un teléfono de contacto, pero podés dar el que ya figura terminado en 31."
+        },
+        {
+          "linea": 20,
+          "texto": "B: Bien, quedó para el viernes. La persona técnica va a llamar antes de salir."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 6,
+            "evento": "pedido",
+            "etiquetas": [
+              "REQUEST_PERSONAL_DATA"
+            ]
+          },
+          {
+            "linea": 18,
+            "evento": "pedido",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "solicitud_sensible_legitima"
+      ]
+    },
+    {
+      "case_id": "TR-08-frase-cortada-candado",
+      "alcance": "contraste_adicional",
+      "texto_sha256": "ad03a06952b2db74912b3b9451b4a536a8307c21118bbef1bf433ef24631a7ab",
+      "referencia_original_sha256": "8b418d9387e541d9d21f80ae5a0e199da8744a69ad2bd4594e37a6daae52c285",
+      "dictamen_ia": "contraste_prefijo",
+      "fundamento": "Contraste adicional fuera de los 12: L3 solo dice «Pasame el código»; L4 identifica candado de valija, y L5 entrega combinación. Mantener legítima final con marcas críticas nulas. El sentido físico de L4 no estaba disponible al cierre de L3: el contexto del futuro no puede usarse para exigir certeza de legitimidad en ese prefijo.",
+      "soporte": [
+        {
+          "linea": 1,
+          "texto": "A: Hola, Lu, ¿estás muy ocupada?"
+        },
+        {
+          "linea": 2,
+          "texto": "B: No, decime. Estoy saliendo del laburo."
+        },
+        {
+          "linea": 3,
+          "texto": "A: Pasame el código"
+        },
+        {
+          "linea": 4,
+          "texto": "A: del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir."
+        },
+        {
+          "linea": 5,
+          "texto": "B: ¡Ay, perdón! Te lo tenía que mandar antes de que salieras. Es uno, dos, tres."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima_dificil",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 3,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 4,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 5,
+            "evento": "contexto",
+            "etiquetas": []
+          }
+        ],
+        "par": "TR-07-pedido-partido-en-dos-lineas",
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "evidencia_repartida"
+      ]
+    },
+    {
+      "case_id": "TR-06-banco-alerta-legitima",
+      "alcance": "contraste_adicional",
+      "texto_sha256": "eff36493e443525dd1fe87a7e15ed8ce3a5379c1670b77fa03683e0281e836b8",
+      "referencia_original_sha256": "e6890b7e4b6048b39c11de099be811d3f1eb3020183245ce1a9b5bf602d51b30",
+      "dictamen_ia": "contraste_prefijo",
+      "fundamento": "Contraste adicional: L3/5 plantean alerta bancaria sin autenticar identidad. L7 niega pedir secretos; L9 dirige a pausar desde la app propia. L10 ofrece compartir código y L11 lo rechaza; L12 pausa tarjeta. Mantener legítima y marcas críticas nulas: la acción de seguridad segura no es cumplimiento de un fraude.",
+      "soporte": [
+        {
+          "linea": 3,
+          "texto": "A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito."
+        },
+        {
+          "linea": 5,
+          "texto": "A: Una compra de sesenta y dos mil pesos en una tienda en línea, hoy a las once y cuarto. ¿La reconocés?"
+        },
+        {
+          "linea": 7,
+          "texto": "A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá."
+        },
+        {
+          "linea": 9,
+          "texto": "A: Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante."
+        },
+        {
+          "linea": 10,
+          "texto": "B: Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?"
+        },
+        {
+          "linea": 11,
+          "texto": "A: No, no me lo pases. Seguramente es del intento de compra, y ese código no se comparte con nadie, tampoco con el banco. Pausá la tarjeta desde la aplicación y, para desconocer la compra, llamá vos al número que está en el dorso."
+        },
+        {
+          "linea": 12,
+          "texto": "B: Listo, ya la pausé. Ahora corto y llamo al del dorso."
+        }
+      ],
+      "referencia_propuesta_ia": {
+        "clase": "legitima_dificil",
+        "t_r_linea": null,
+        "t_c_linea": null,
+        "pedido": null,
+        "evidencia": [
+          {
+            "linea": 3,
+            "evento": "contexto",
+            "etiquetas": [
+              "AUTHORITY_CLAIM"
+            ]
+          },
+          {
+            "linea": 5,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 7,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 9,
+            "evento": "contexto",
+            "etiquetas": []
+          },
+          {
+            "linea": 10,
+            "evento": "mencion",
+            "etiquetas": []
+          },
+          {
+            "linea": 11,
+            "evento": "rechazo",
+            "etiquetas": []
+          },
+          {
+            "linea": 12,
+            "evento": "contexto",
+            "etiquetas": []
+          }
+        ],
+        "par": null,
+        "revision_humana": false
+      },
+      "alternativas_no_adjudicadas": [],
+      "dificultades_candidatas": [
+        "legitima_dificil",
+        "advertencia",
+        "negacion"
+      ]
+    }
+  ]
+}
