@@ -1508,10 +1508,10 @@ import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 import {prepararFuentes} from './fuentes.mjs';
 import {crearSelectorCorte} from './corte-silencio.mjs';
-import {plantillaLinea} from './conversacion.mjs';
+import {plantillaLinea, citaConRoles} from './conversacion.mjs';
 import {montarHistorial} from './historial-ui.mjs';
 
-/** @typedef {{segmento: number, n: number, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
+/** @typedef {{segmento: number, n: number, canal: string, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
 /** @typedef {{n: number, saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, fin_eval_s: number, t_a: number|null}} EventoDetector */
 /** @typedef {{tipo: string, modelo: string|null}} DetectorInfo */
@@ -1529,6 +1529,8 @@ const $ = (id) => {
 
 /** @type {Map<number, HTMLDivElement>} */
 const burbujas = new Map();
+/** @type {Map<string, string>} */
+const rolesPorLetra = new Map();
 /** @type {Map<number, {el: HTMLDivElement, n: number, rol: string, final: boolean, evaluado: boolean}>} */
 const segmentosInfo = new Map();
 /** @type {number[]} */
@@ -2095,6 +2097,7 @@ function reiniciar(id) {
   limpiarNiveles();
   $("charla").innerHTML = "";
   burbujas.clear();
+  rolesPorLetra.clear();
   segmentosInfo.clear();
   ordenFinales.length = 0;
   ordenSegmentos.length = 0;
@@ -2120,6 +2123,7 @@ function reiniciar(id) {
 
 /** @param {EventoASR} m */
 function asr(m) {
+  rolesPorLetra.set(m.canal, m.rol);
   relojLlamada = Math.max(relojLlamada, m.disponible_s);
   let b = burbujas.get(m.segmento);
   if (!b) {
@@ -2203,7 +2207,7 @@ function detector(m) {
       $("aviso").classList.add("visible");
     }
     $("aviso-motivo").textContent = m.motivo;
-    const citaLimpia = limpiarCita(m.evidencia || "");
+    const citaLimpia = citaConRoles(limpiarCita(m.evidencia || ""), rolesPorLetra);
     $("aviso-cita").textContent = citaLimpia ? `«${citaLimpia}»` : "";
     const tras = m.fin_voz_s == null || m.t_a == null ? null : m.t_a - m.fin_voz_s;
     $("aviso-tiempo").textContent = `a los ${seg(m.t_a)} de la llamada`;

@@ -4,6 +4,15 @@
 /** @type {Record<string, string>} */
 export const NOMBRE = {protegida: 'Persona protegida', otra: 'Otra persona'};
 
+/** @param {string} texto @param {Map<string, string>} rolesPorLetra */
+export function citaConRoles(texto, rolesPorLetra) {
+  return texto.replace(/\\n/g, '\n').replace(/(^|\n)(\s*)([AB]):/g,
+    (prefijo, salto, espacios, letra) => {
+      const nombre = NOMBRE[rolesPorLetra.get(letra) || ''];
+      return nombre ? `${salto}${espacios}${nombre}:` : prefijo;
+    });
+}
+
 /** @param {string} rol */
 export function plantillaLinea(rol) {
   return `<div class="quien"><span class="nombre-quien">${NOMBRE[rol] || rol}</span><span class="t"></span></div><div class="texto"></div>`;
