@@ -608,19 +608,23 @@ def main(argv: list[str] | None = None) -> int:
                    default="todo")
     p.add_argument("--modelo", default=MODELO_POR_DEFECTO)
     p.add_argument("--url", default=URL_POR_DEFECTO)
+    p.add_argument("--timeout", type=float, default=600.0,
+                   help="Segundos máximos por llamada al modelo (default: 600.0).")
     p.add_argument("--limite", type=int, default=None,
                    help="Solo para pruebas: revisa como máximo N prefijos.")
     args = p.parse_args(argv)
+    if args.timeout <= 0:
+        p.error("--timeout debe ser positivo (segundos).")
 
     particiones = cargar_particiones()
     rechazar_reserva([c["case_id"] for c in particiones["conversaciones"]])
 
     if args.paso in ("supervision", "todo"):
         textos, particion_de = cargar_textos_ajuste(particiones)
-        cliente = ClienteOllama(url=args.url)
+        cliente = ClienteOllama(url=args.url, timeout_s=args.timeout)
         meta = info_modelo(cliente, args.modelo)
         print(f"anotador: {meta['tag']} digest={meta['digest'][:12] if len(meta['digest']) > 12 else meta['digest']} "
-              f"ollama={meta['ollama_version']} url={args.url}")
+              f"ollama={meta['ollama_version']} url={args.url} timeout_s={args.timeout}")
         res = recorrer_y_guardar(textos, particion_de, cliente, args.modelo,
                                  meta, limite=args.limite)
         etiqueta_de, cobertura, modelos = cargar_supervision()

@@ -254,5 +254,53 @@ class TestThinkIdentidad(unittest.TestCase):
             "presence_penalty": 1.5, "repeat_penalty": 1.0})
 
 
+class TestTimeoutCLI(unittest.TestCase):
+    def _correr_main(self, argv):
+        vistos = {}
+
+        class DobleCliente:
+            def __init__(self, url=None, timeout_s=None):
+                vistos["url"] = url
+                vistos["timeout_s"] = timeout_s
+
+            def modelos_instalados(self):
+                return {"m": "d"}
+
+            def version(self):
+                return "v"
+
+        orig = (st.ClienteOllama, st.cargar_particiones,
+                st.cargar_textos_ajuste, st.recorrer_y_guardar,
+                st.cargar_supervision, st.puede_entrenar)
+        st.ClienteOllama = DobleCliente
+        st.cargar_particiones = lambda: {"conversaciones": []}
+        st.cargar_textos_ajuste = lambda p: ({"c1": ["A: a"]}, {"c1": "entrenamiento"})
+        st.recorrer_y_guardar = lambda *a, **k: {"nuevos": 0}
+        st.cargar_supervision = lambda: ({}, {}, {})
+        st.puede_entrenar = lambda *a, **k: (True, ["ok"])
+        try:
+            rc = st.main(argv)
+        finally:
+            (st.ClienteOllama, st.cargar_particiones,
+             st.cargar_textos_ajuste, st.recorrer_y_guardar,
+             st.cargar_supervision, st.puede_entrenar) = orig
+        return rc, vistos
+
+    def test_timeout_por_defecto_600(self):
+        rc, vistos = self._correr_main(["--paso", "supervision"])
+        self.assertEqual(rc, 0)
+        self.assertEqual(vistos["timeout_s"], 600.0)
+
+    def test_timeout_expreso_se_propaga(self):
+        rc, vistos = self._correr_main(
+            ["--paso", "supervision", "--timeout", "30"])
+        self.assertEqual(rc, 0)
+        self.assertEqual(vistos["timeout_s"], 30.0)
+
+    def test_timeout_no_positivo_falla(self):
+        with self.assertRaises(SystemExit):
+            self._correr_main(["--paso", "supervision", "--timeout", "0"])
+
+
 if __name__ == "__main__":
     unittest.main()
