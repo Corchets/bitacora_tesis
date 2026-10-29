@@ -28,7 +28,10 @@ PROMPTS = {
     "tarea": ("tarea.txt",),
     "tarea+base": ("tarea.txt", "base_institucional.txt"),
     "v2": ("tarea_v2.txt",),
+    "riesgo": ("riesgo.txt",),  # dos etapas: ver DetectorSLMDosEtapas
 }
+# Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
+PROMPT_MOTIVO = "riesgo_motivo.txt"
 HABLANTES = ("ab", "sin")
 
 # Forma obligatoria de cada respuesta del SLM. Ollama la usa para forzar la salida;
@@ -49,7 +52,19 @@ ESQUEMA_SALIDA_V2 = {
     "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "alerta_sugerida", "riesgo", "motivo")},
     "required": ["evidencia", "alerta_sugerida", "riesgo", "motivo"],
 }
-ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2}
+# «Riesgo primero»: la etapa 1 escribe solo el número (~8 tokens en vez de ~40); la etapa 2
+# pide la evidencia y el motivo únicamente cuando el riesgo supera el umbral.
+ESQUEMA_RIESGO = {
+    "type": "object",
+    "properties": {"riesgo": ESQUEMA_SALIDA["properties"]["riesgo"]},
+    "required": ["riesgo"],
+}
+ESQUEMA_MOTIVO = {
+    "type": "object",
+    "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "motivo")},
+    "required": ["evidencia", "motivo"],
+}
+ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "riesgo": ESQUEMA_RIESGO}
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -60,6 +75,9 @@ FRACCION_MAXIMA_DEL_CONTEXTO = 0.9
 # Tope de tokens por respuesta: el JSON esperado usa menos de 200. Evita que un modelo
 # que entra en bucle tarde minutos en llegar al timeout.
 MAXIMO_TOKENS_RESPUESTA = 512
+# `{"riesgo": 0.35}` son ~8 tokens; el margen cubre espacios o más decimales.
+MAXIMO_TOKENS_RIESGO = 24
+UMBRAL_POR_DEFECTO = 0.6
 
 
 @dataclass
@@ -77,6 +95,12 @@ class Respuesta:
     ms: float | None = None
     tokens_prompt: int | None = None
     tokens_salida: int | None = None
+    # Solo con DetectorSLMDosEtapas; `ms` es la suma de las dos etapas.
+    ms_etapa1: float | None = None
+    ms_etapa2: float | None = None
+    tokens_prompt_etapa2: int | None = None
+    tokens_salida_etapa2: int | None = None
+    crudo_etapa2: str = ""
 
 
 def cargar_prompt(variante: str) -> str:
@@ -90,6 +114,10 @@ def esquema_de(variante: str) -> dict:
     if variante not in ESQUEMAS:
         raise ValueError(f"prompt desconocido {variante!r}; opciones: {sorted(ESQUEMAS)}")
     return ESQUEMAS[variante]
+
+
+def cargar_prompt_motivo() -> str:
+    return (DIR_PROMPTS / PROMPT_MOTIVO).read_text(encoding="utf-8").strip()
 
 
 def huella(texto: str) -> str:
@@ -192,13 +220,19 @@ class DetectorSLM:
             **(self.extra or {}),
         }
 
-    def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
+    def mensajes(self, lineas: list[Linea] | tuple[Linea, ...]) -> tuple[list[dict] | None, str]:
+        """(mensajes, "") o (None, error) si la transcripción no entra en el contexto."""
         usuario = armar_mensaje_usuario(lineas, self.hablantes)
         estimado = math.ceil((len(self.prompt) + len(usuario)) / CARACTERES_POR_TOKEN)
         if estimado > self.num_ctx * FRACCION_MAXIMA_DEL_CONTEXTO:
             # No se recorta en silencio (#50): se informa como fallo.
-            return Respuesta(valida=False, error=f"contexto_excedido: ~{estimado} tokens > {self.num_ctx}")
-        mensajes = [{"role": "system", "content": self.prompt}, {"role": "user", "content": usuario}]
+            return None, f"contexto_excedido: ~{estimado} tokens > {self.num_ctx}"
+        return [{"role": "system", "content": self.prompt}, {"role": "user", "content": usuario}], ""
+
+    def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
+        mensajes, error = self.mensajes(lineas)
+        if mensajes is None:
+            return Respuesta(valida=False, error=error)
         inicio = time.perf_counter()
         try:
             r = self.cliente.chat(self.modelo, mensajes, self.esquema or ESQUEMA_SALIDA, self.opciones(), self.pensar)
@@ -221,6 +255,112 @@ class DetectorSLM:
             motivo=salida["motivo"].strip(),
             evidencia=salida["evidencia"].strip(),
             evidencia_en_texto=evidencia_en_texto(salida["evidencia"], lineas) if alerta else None,
+            **comun,
+        )
+
+
+def validar_riesgo(crudo: str) -> tuple[float | None, str]:
+    """Etapa 1 de `riesgo`: (riesgo, "") o (None, motivo del fallo)."""
+    try:
+        salida = json.loads(crudo)
+    except json.JSONDecodeError:
+        return None, "json_invalido"
+    if not isinstance(salida, dict):
+        return None, "json_no_es_objeto"
+    if "riesgo" not in salida:
+        return None, "faltan_campos: riesgo"
+    riesgo = salida["riesgo"]
+    if isinstance(riesgo, bool) or not isinstance(riesgo, (int, float)) or not math.isfinite(riesgo):
+        return None, "riesgo_no_numerico"
+    if not 0 <= riesgo <= 1:
+        return None, "riesgo_fuera_de_rango"
+    return float(riesgo), ""
+
+
+def validar_motivo(crudo: str) -> tuple[dict | None, str]:
+    """Etapa 2 de `riesgo`: ({evidencia, motivo}, "") o (None, motivo del fallo)."""
+    try:
+        salida = json.loads(crudo)
+    except json.JSONDecodeError:
+        return None, "json_invalido"
+    if not isinstance(salida, dict):
+        return None, "json_no_es_objeto"
+    faltan = [c for c in ESQUEMA_MOTIVO["required"] if c not in salida]
+    if faltan:
+        return None, f"faltan_campos: {','.join(faltan)}"
+    if not isinstance(salida["motivo"], str) or not isinstance(salida["evidencia"], str):
+        return None, "motivo_o_evidencia_no_texto"
+    if not salida["motivo"].strip():
+        return None, "alerta_sin_motivo"
+    return salida, ""
+
+
+@dataclass
+class DetectorSLMDosEtapas(DetectorSLM):
+    """«Riesgo primero»: la etapa 1 escribe solo `{"riesgo": x}` y, si x ≤ umbral, la línea
+    termina ahí. Si x > umbral, la alerta queda decidida y la etapa 2 pide evidencia y
+    motivo para armar el aviso.
+
+    La etapa 2 repite los mensajes de la 1, agrega su respuesta como `assistant` y el pedido
+    corto: el comienzo es idéntico y Ollama puede reutilizar la transcripción ya procesada.
+    Si la etapa 2 falla, la alerta se mantiene (el riesgo ya la decidió) y el error queda
+    en `error` con el prefijo `etapa2_`, sin motivo ni evidencia.
+    """
+
+    umbral: float = UMBRAL_POR_DEFECTO
+    pedido_motivo: str = ""
+    nombre = "slm"
+
+    def __post_init__(self) -> None:
+        self.pedido_motivo = self.pedido_motivo or cargar_prompt_motivo()
+
+    def _opciones(self, num_predict: int) -> dict:
+        return {**self.opciones(), "num_predict": num_predict}
+
+    def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
+        mensajes, error = self.mensajes(lineas)
+        if mensajes is None:
+            return Respuesta(valida=False, error=error)
+        inicio = time.perf_counter()
+        try:
+            r1 = self.cliente.chat(self.modelo, mensajes, ESQUEMA_RIESGO, self._opciones(MAXIMO_TOKENS_RIESGO), self.pensar)
+        except ErrorOllama as e:
+            return Respuesta(valida=False, error=str(e), ms=(time.perf_counter() - inicio) * 1000)
+        ms1 = (time.perf_counter() - inicio) * 1000
+        crudo1 = r1.get("message", {}).get("content", "")
+        comun = dict(crudo=crudo1, ms=ms1, ms_etapa1=ms1, tokens_prompt=r1.get("prompt_eval_count"), tokens_salida=r1.get("eval_count"))
+        if r1.get("done_reason") == "length":
+            return Respuesta(valida=False, error="salida_cortada", **comun)
+        riesgo, error = validar_riesgo(crudo1)
+        if riesgo is None:
+            return Respuesta(valida=False, error=error, **comun)
+        if riesgo <= self.umbral:
+            return Respuesta(valida=True, riesgo=riesgo, alerta_sugerida=False, **comun)
+
+        mensajes2 = mensajes + [{"role": "assistant", "content": crudo1}, {"role": "user", "content": self.pedido_motivo}]
+        inicio2 = time.perf_counter()
+        try:
+            r2 = self.cliente.chat(self.modelo, mensajes2, ESQUEMA_MOTIVO, self._opciones(MAXIMO_TOKENS_RESPUESTA), self.pensar)
+        except ErrorOllama as e:
+            ms2 = (time.perf_counter() - inicio2) * 1000
+            comun.update(ms=ms1 + ms2, ms_etapa2=ms2)
+            return Respuesta(valida=True, riesgo=riesgo, alerta_sugerida=True, error=f"etapa2_{e}", **comun)
+        ms2 = (time.perf_counter() - inicio2) * 1000
+        crudo2 = r2.get("message", {}).get("content", "")
+        comun.update(
+            ms=ms1 + ms2, ms_etapa2=ms2, crudo_etapa2=crudo2,
+            tokens_prompt_etapa2=r2.get("prompt_eval_count"), tokens_salida_etapa2=r2.get("eval_count"),
+        )
+        salida, error = validar_motivo(crudo2) if r2.get("done_reason") != "length" else (None, "salida_cortada")
+        if salida is None:
+            return Respuesta(valida=True, riesgo=riesgo, alerta_sugerida=True, error=f"etapa2_{error}", **comun)
+        return Respuesta(
+            valida=True,
+            riesgo=riesgo,
+            alerta_sugerida=True,
+            motivo=salida["motivo"].strip(),
+            evidencia=salida["evidencia"].strip(),
+            evidencia_en_texto=evidencia_en_texto(salida["evidencia"], lineas),
             **comun,
         )
 

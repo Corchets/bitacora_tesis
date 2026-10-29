@@ -6,6 +6,7 @@ Ejemplos:
     python correr.py --modelos qwen3.5:2b
     python correr.py --modelos qwen3.5:0.8b,qwen3.5:2b,qwen3.5:4b --prompts tarea,tarea+base --hablantes ab,sin
     python correr.py --modelos qwen3.5:2b --casos SC-WA-CODE-01-e01 --detalle
+    python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32
 
 Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     manifiesto.json      qué se corrió: modelos, prompts, casos, código, máquina
@@ -33,7 +34,20 @@ from pathlib import Path
 
 import casos
 from cliente_ollama import URL_POR_DEFECTO, ClienteOllama, ErrorOllama
-from detectores import HABLANTES, PROMPTS, DetectorReglas, DetectorSLM, Respuesta, cargar_prompt, esquema_de, huella
+from detectores import (
+    ESQUEMA_MOTIVO,
+    HABLANTES,
+    PROMPTS,
+    UMBRAL_POR_DEFECTO,
+    DetectorReglas,
+    DetectorSLM,
+    DetectorSLMDosEtapas,
+    Respuesta,
+    cargar_prompt,
+    cargar_prompt_motivo,
+    esquema_de,
+    huella,
+)
 
 RAIZ = Path(__file__).resolve().parent
 POLITICA = "aviso_unico_primer_true_valido"
@@ -59,6 +73,12 @@ COLUMNAS = [
     "tokens_prompt",
     "tokens_salida",
     "crudo",
+    # Solo con --prompts riesgo (dos etapas); al final para no mover las columnas de antes.
+    "ms_etapa1",
+    "ms_etapa2",
+    "tokens_prompt_etapa2",
+    "tokens_salida_etapa2",
+    "crudo_etapa2",
 ]
 
 
@@ -256,7 +276,20 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "tokens_prompt": "" if r.tokens_prompt is None else r.tokens_prompt,
         "tokens_salida": "" if r.tokens_salida is None else r.tokens_salida,
         "crudo": r.crudo,
+        "ms_etapa1": num(r.ms_etapa1, 1),
+        "ms_etapa2": num(r.ms_etapa2, 1),
+        "tokens_prompt_etapa2": "" if r.tokens_prompt_etapa2 is None else r.tokens_prompt_etapa2,
+        "tokens_salida_etapa2": "" if r.tokens_salida_etapa2 is None else r.tokens_salida_etapa2,
+        "crudo_etapa2": r.crudo_etapa2,
     }
+
+
+def _prompt_manifiesto(variante: str) -> dict:
+    datos = {"huella": huella(cargar_prompt(variante)), "texto": cargar_prompt(variante), "esquema": esquema_de(variante)}
+    if variante == "riesgo":
+        motivo = cargar_prompt_motivo()
+        datos["etapa2"] = {"huella": huella(motivo), "texto": motivo, "esquema": ESQUEMA_MOTIVO}
+    return datos
 
 
 def _mostrar(carpeta: Path) -> str:
@@ -294,6 +327,10 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument(
         "--num-batch", type=int,
         help="tokens por lote al procesar el prompt; 32 deja reutilizar la caché en qwen3.5 (ver analisis/2026-10-21-cache-prefijo)",
+    )
+    p.add_argument(
+        "--umbral", type=float, default=UMBRAL_POR_DEFECTO,
+        help="con --prompts riesgo: la etapa 2 (evidencia y motivo) y la alerta salen solo si riesgo > umbral",
     )
     p.add_argument("--etiqueta", default="", help="texto corto para el nombre de la carpeta")
     p.add_argument("--salida", type=Path, default=RAIZ / "corridas", help="dónde crear la carpeta de la corrida")
@@ -352,7 +389,10 @@ def main(argv: list[str] | None = None) -> int:
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
+                if variante == "riesgo":
+                    d = DetectorSLMDosEtapas(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, umbral=args.umbral)
+                else:
+                    d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
                 etiqueta = {"config": f"slm|{modelo}|{variante}|{h}", "detector": "slm", "modelo": modelo, "prompt": variante, "hablantes": h}
                 detectores.append((etiqueta, d))
     if not detectores:
@@ -369,8 +409,11 @@ def main(argv: list[str] | None = None) -> int:
         "politica": POLITICA,
         "particion": args.particion,
         "ollama": None if ollama is None else {"url": args.url, **ollama},
-        "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
-        "prompts": {v: {"huella": huella(cargar_prompt(v)), "texto": cargar_prompt(v), "esquema": esquema_de(v)} for v in prompts} if modelos else {},
+        "parametros_slm": {
+            "num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra,
+            **({"umbral_etapa2": args.umbral} if "riesgo" in prompts else {}),
+        },
+        "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},
         "configs": [c for c, _ in detectores],
         "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
         "modelos": {},
@@ -418,6 +461,8 @@ def main(argv: list[str] | None = None) -> int:
                                 f"riesgo={r.riesgo if r.riesgo is not None else '-'} alerta={'sí' if r.alerta_sugerida else 'no'}"
                             )
                             print(f"   [{n:>2}] {linea.hablante}: {linea.texto}")
+                            if r.ms is not None:
+                                estado += f"  {r.ms:.0f} ms" + (f" (etapa 2: {r.ms_etapa2:.0f} ms)" if r.ms_etapa2 is not None else "")
                             print(f"        {estado}" + (f"  >>> AVISO: {r.motivo}" if aviso else ""))
                     print(f"   {case_id:42} {' '.join(marcas)}")
     except KeyboardInterrupt:
