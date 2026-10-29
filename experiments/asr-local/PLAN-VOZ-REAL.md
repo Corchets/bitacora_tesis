@@ -138,9 +138,15 @@ Opciones útiles: `--sin-whisper` (Whisper es lento: `small` y `large-v3-turbo` 
 
 ## 9. Zipformer anda mal con voz real: probamos Parakeet (2026-10-28)
 
+> **Actualización del 2026-10-29, Luciano Grosso:** Zipformer Kroko queda como antecedente
+> histórico, retirado de la selección activa por los errores observados con su voz. Se conservan
+> código y corridas para reproducir el laboratorio. Esto no selecciona un reemplazo ni cierra
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+
 > **Estado: propuesta sin discutir.** Es una prueba de otro modelo para la demo, no la elección de
-> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). Zipformer sigue siendo el
-> modelo por defecto del panel.
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). El código conserva Zipformer
+> como valor por defecto; para ensayar Parakeet hay que elegirlo en el panel o iniciar con
+> `--asr parakeet`. Retirar el candidato no equivale a modificar el arranque de la demo.
 
 **Qué pasa.** Con la voz de Luciano en el panel, Zipformer Kroko transcribe mal: parte palabras al
 medio («la concha de tu ma | dre», «Alambre el | código»), cambia palabras («la alergia» por «la
@@ -178,9 +184,10 @@ más que Zipformer, lo que pesa en la pregunta de gama de D09. Escribe números 
 1, 2, 3», «958 679 123») y no se puede fijar el idioma, así que hay que revisar si las reglas
 siguen viendo los códigos. Mientras transcribe bloquea el bucle del servidor hasta ~0,45 s.
 
-**Siguiente paso.** Grabar el set de la sección 3 con «Probar el ASR» y medir los dos modelos con
+**Siguiente paso (actualizado el 2026-10-29).** Grabar el set de la sección 3 con «Probar el ASR» y medir Parakeet con
 `medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Agregar Parakeet como variante en
-[`variantes_voz_real.py`](variantes_voz_real.py) queda pendiente.
+[`variantes_voz_real.py`](variantes_voz_real.py) queda pendiente. Las variantes de Zipformer se
+conservan como reproducción histórica; no son trabajo activo de mejora.
 
 ### 9.1 El borrador sale en inglés y después se corrige (2026-10-29)
 
@@ -250,9 +257,103 @@ ni Neural Engine. No usa toda la potencia de la computadora ni imita un teléfon
 configuración fija y no se midió en ningún teléfono. Como cada borrador repite la frase desde el
 principio, el costo sube a medida que la frase se alarga, hasta el corte de 10 s.
 
-**En un teléfono de gama alta.** `sherpa-onnx` tiene soporte para Android e iOS. En memoria
-entra: ~1,2 GB de ASR más el detector, en teléfonos de 12–16 GB. Lo que no sabemos es cuánto
-tarda cada borrador, cuánta batería consume y cuánto calienta en el teléfono. Con la
+**En un teléfono de gama alta.** `sherpa-onnx` tiene soporte para Android e iOS. El RSS de la
+Mac no demuestra que el conjunto ASR + detector entre en la memoria disponible para una app
+del teléfono. No sabemos cuánto tarda cada borrador, cuánta batería consume ni cuánto calienta
+en ese dispositivo. Con la
 [gama acordada el 2026-10-28](https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)
 (la más alta a la fecha, optimizar después), esto queda como límite declarado, no como
 bloqueo.
+
+## 10. Auditoría de VAD, preaudio y comparación de modelos (2026-10-29)
+
+Consulta de Luciano, vinculada a [#94](https://github.com/Corchets/bitacora_tesis/issues/94)
+y a la comparación de [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
+Inspección de [`motores.py`](motores.py) sobre el código base `2a61d8d`; no es una nueva
+corrida de reconocimiento ni una medición de batería.
+
+### 10.1 Qué tenemos implementado
+
+| Parte | Implementación comprobada | Alcance |
+|---|---|---|
+| Inicio/fin de habla en Parakeet | `MotorPorFrases` compara RMS con `0.005`; cierra tras `0.8 s` de silencio por defecto. El panel admite «Automático» o `0.1–3.0 s`. | Es un detector por energía. No distingue voz y ruido con un modelo como Silero. Un segmento acústico no garantiza un turno conversacional. |
+| Preaudio de Parakeet y Whisper por frases | `PREVIO_S = 0.3`; `previo` retiene bloques anteriores al inicio detectado y los antepone a la frase. | Sí cumple la función del búfer rotatorio de 200–400 ms. Es una lista acotada, no un anillo literal; con bloques de 40 ms retiene hasta 280 ms por descarte de bloques enteros. |
+| Trabajo durante silencios | Sin frase abierta, se actualiza el preaudio y se retorna sin llamar al reconocedor. Se exige `MIN_VOZ_S = 0.3` para transcribir el final. | Evita inferencia sobre silencio inicial; ruido por encima del umbral puede activar el ASR y voz débil puede quedar debajo. |
+| Frases largas y parciales | Máximo de 10 s; Parakeet vuelve a reconocer toda la frase cada 0.5 s, desde 1 s de voz acumulada, y al cerrar. | Es entrega incremental construida sobre un reconocedor offline. Repite cómputo; el consumo sostenido en el teléfono está sin medir. |
+| Zipformer histórico | Recibe todos los bloques, incluidos los silencios; cierra por endpoint nativo o RMS. | No había una compuerta VAD previa que evitara enviar silencio. No necesitaba recuperar un inicio descartado por esa compuerta. |
+| Whisper base del procedimiento original | `MotorFasterWhisper` acumula el audio completo y transcribe en `vaciar_final()`, con `vad_filter=True` y silencio mínimo de 500 ms. | Tiene filtrado VAD de faster-whisper al procesar el lote; no es el VAD continuo de la llamada. |
+
+La cola de silencio artificial de Zipformer (purga/lookahead) y los búferes de transporte
+no son el preaudio: cumplen otras funciones. Tampoco el cortador RMS de 400 ms del spike
+[`turns.py`](../laboratorio/turns.py) demuestra que se hubiera integrado Silero.
+
+**Verificación del 2026-10-29:** pasan las 11 pruebas de `tests/test_motor_por_frases.py`.
+Una comprobación adicional con bloques sintéticos de 40 ms confirmó 4480 muestras de
+preaudio (280 ms a 16 kHz), conservación del audio anterior al inicio y cero llamadas al
+transcriptor durante el silencio inicial. No verifica reconocimiento ni ahorro de energía.
+
+### 10.2 Comparación con la recomendación recibida
+
+Las observaciones propias conservan las condiciones de §9 y de las
+[corridas TTS](../../docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md#asr-sobre-audio-tts).
+No son comparaciones pareadas de calidad con referencia humana.
+
+| Opción | Relación con nuestro trabajo | Evidencia y límite |
+|---|---|---|
+| Whisper base/small cuantizado con whisper.cpp | La recomendación propone otra implementación y cuantización. Probamos **base multilingüe int8 con faster-whisper en CPU**, no whisper.cpp Q4. | En un audio TTS: RTF 0.2745, RSS 276.91 MB, WER 17.39 % y omisión de «cero». No permite descartar ni recomendar base/small Q4 en un teléfono. |
+| **Parakeet TDT 0.6B v3 int8 con sherpa-onnx** | Candidato que se ensaya ahora, con segmentación y borradores de §10.1. Incluye español. | En la inspección de 4 llamadas reales se vio mejor que Zipformer; sin referencia ni WER humano. En M1: RSS ~1.0–1.2 GB y bloque más lento ~450 ms. El filtro de §9.1 reduce inglés visible, sin garantizar transcripciones correctas. |
+| Whisper large-v3-turbo int8 con faster-whisper | Comparador por frases, sin borradores. | En esa prueba de CPU: 4–10 s por frase e inserciones en silencio. Inadecuado para esa demo/configuración; no es un resultado universal sobre Whisper ni sobre whisper.cpp. |
+| Zipformer Kroko | **Antecedente retirado de la selección activa por Luciano el 2026-10-29.** | Era streaming nativo y más liviano (~156 MB en disco, ~475 MB RSS en §9), pero cortó/cambió palabras con voz real. El buen WER TTS no justificaba mantenerlo. Se preservan sus resultados, sin afirmar que toda la familia Zipformer falle. |
+| MMS / Squeezeformer con sherpa-onnx | No se probaron en este laboratorio. Sherpa es un runtime; no define una única arquitectura ni un costo de memoria. | No hay comparación propia para llamarlos más rápidos, más livianos o mejores en acento argentino. |
+| API en la nube | No integra la ruta de inferencia del proyecto. | El procesamiento local es una restricción del [diseño de privacidad](../../docs/corpus/PRIVACIDAD-DEL-SISTEMA.md). |
+
+En el detector de texto, la recomendación propone un encoder pequeño entrenado. Nosotros
+conservamos reglas como línea base, antecedentes de RoBERTuito/Tito y ensayos de SLM directo
+con Qwen y Llama. La cascada no está adoptada. Como referencia del costo, el Qwen3.5 0.8B
+de la [demo M1](../voip/corridas/2026-10-26-medicion-84-m1-08b/README.md) tardó 1.312 s de
+mediana por evaluación y avisó 2.803 s después del fin del pedido (una estafa TTS, 4 evaluaciones).
+No demuestra rendimiento móvil, ni permite afirmar que cualquier SLM sea inviable. Un encoder
+semántico tampoco garantiza reconstruir una negación, un dígito o un pedido perdido por el ASR.
+
+### 10.3 Correcciones a la recomendación y fuentes primarias
+
+Consulta del 2026-10-29 a documentación oficial de los proyectos, contrastada con el código
+local. Se incluyeron fichas, APIs y ejemplos que permiten verificar arquitectura e integración;
+se excluyeron promesas de rendimiento sin medición del teléfono y las equivalencias entre
+tamaño de pesos, RSS y RAM disponible. No se analizaron nuevos datos del corpus ni del test.
+
+- **VAD no es universalmente obligatorio para cualquier ASR.** whisper.cpp lo ofrece como
+  [opción para filtrar segmentos](https://github.com/ggml-org/whisper.cpp#voice-activity-detection-vad).
+  En nuestra integración por frases es razonable comparar un VAD con el RMS; no hay evidencia
+  para afirmar que sin Silero la batería se agotaría «en minutos».
+- **Whisper español usa el modelo multilingüe `base`, no `base.en`.** `.en` es inglés y
+  `base.es` no es una variante oficial. La [tabla de OpenAI](https://github.com/openai/whisper#available-models-and-languages)
+  identifica 74 M de parámetros para base; el tamaño de pesos cuantizados no equivale al RSS.
+- **El VAD de nuestro Whisper base proviene de faster-whisper.** La librería integra
+  [Silero VAD](https://github.com/SYSTRAN/faster-whisper#vad-filter); no significa que el panel
+  Parakeet use ese filtro. [Silero](https://github.com/snakers4/silero-vad) ofrece ONNX y audio
+  a 8/16 kHz, sin garantizar el costo de nuestra integración en un teléfono concreto.
+- **sherpa-onnx ya es nuestro runtime de Parakeet.** Lo cataloga como
+  [transducer offline, con ejemplos de streaming simulado](https://k2-fsa.github.io/sherpa/onnx/pretrained_models/offline-transducer/nemo-transducer-models.html#sherpa-onnx-nemo-parakeet-tdt-0-6b-v3-int8-25-european-languages).
+  Cambiar a sherpa no es una alternativa a Parakeet: ya usamos ambos juntos.
+- **MMS y Squeezeformer no son el mismo modelo.** [MMS-1B-all de Meta](https://huggingface.co/facebook/mms-1b-all)
+  es Wav2Vec2-CTC de ~1 B de parámetros; [Squeezeformer](https://arxiv.org/abs/2206.00888)
+  es otra arquitectura. Hace falta identificar checkpoint, idioma y conversión antes de
+  compararlos. No se verificó aquí una integración MMS español lista para sherpa.
+- **CTC/Transducer no justifica prometer cero inserciones o alucinaciones.** Nuestro Parakeet
+  TDT ya produjo texto ajeno al habla (§9.1). Tampoco los embeddings garantizan recuperar
+  información perdida: la tolerancia del detector debe medirse con el mismo audio y referencia.
+- **Un LLM móvil no es imposible por definición.** Meta publica
+  [Llama 3.2 1B/3B y variantes cuantizadas para uso on-device](https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/MODEL_CARD.md).
+  Eso no demuestra que ASR + SLM de nuestro proyecto cumplan los presupuestos del teléfono.
+
+### 10.4 Qué falta comprobar
+
+> **Estado: propuesta sin discutir.** En [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector),
+> comparar el RMS actual contra un VAD de voz (por ejemplo Silero), manteniendo ASR, audio y
+> preaudio constantes. No se adopta una librería ni un umbral nuevo con esta auditoría.
+
+Medir voz tenue, ruido, inicios de palabra, pausas y números con referencia humana. Para el
+teléfono de gama alta acordado con el tutor faltan latencia y cola sostenidas, memoria conjunta,
+batería y temperatura durante la llamada. El costo de los borradores de Parakeet debe separarse
+del costo del resultado final y del detector. D08 y D09 permanecen abiertas.

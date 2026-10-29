@@ -5,7 +5,13 @@ y por segmentos, orientado a la evaluación de detección incremental de vishing
 
 > **ADVERTENCIA: audio sintético TTS, no es evidencia de rendimiento sobre voz humana ni cierra D09; la corrida de entrega espera las grabaciones de #39.**
 
-> **Estado: propuesta sin discutir.** La selección de Zipformer Kroko ONNX (`sherpa-onnx`) como motor principal de streaming y `faster-whisper` como comparador secundario segmentado es una propuesta técnica de laboratorio para hacer repetible el procedimiento; no cierra [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). La corrida definitiva de entrega requiere el primer par grabado con voz humana ([#39](https://github.com/Corchets/bitacora_tesis/issues/39)).
+> **Actualización del 2026-10-29, Luciano Grosso:** Zipformer Kroko queda como antecedente
+> histórico, retirado de la selección activa por sus errores con voz real. Se conservan el motor,
+> los comandos y las corridas para reproducción. Parakeet sigue en prueba; no se cierra
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). El código aún arranca con
+> Zipformer por defecto: para ensayar Parakeet hay que seleccionarlo o usar `--asr parakeet`
+> en el servidor. Ver [auditoría de VAD, preaudio y comparación](PLAN-VOZ-REAL.md#10-auditoría-de-vad-preaudio-y-comparación-de-modelos-2026-10-29).
+> La corrida definitiva de entrega requiere el primer par grabado con voz humana ([#39](https://github.com/Corchets/bitacora_tesis/issues/39)).
 
 ---
 
@@ -39,7 +45,7 @@ El archivo `actualizaciones.jsonl` contiene:
 
 | Motor | Modelo | Modo | Tipo de entrega | Endpoint / Segmentación |
 |---|---|---|---|---|
-| `sherpa-zipformer` (principal) | [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | Streaming en tiempo real | Parciales y finales | Segmentación por silencio (`corte_silencio_s=0.8s`, `umbral_rms=0.005`) y endpoint nativo con purga de lookahead (0.3s) y cola de vaciado final (2.0s) |
+| `sherpa-zipformer` (histórico) | [`csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06`](https://huggingface.co/csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06) | Streaming en tiempo real | Parciales y finales | Segmentación por silencio (`corte_silencio_s=0.8s`, `umbral_rms=0.005`) y endpoint nativo con purga de lookahead (0.3s) y cola de vaciado final (2.0s) |
 | `sherpa-parakeet` (en prueba) | [`csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8`](https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8) | Por frases, con borrador cada 0,5 s | Parciales y finales | Corte por silencio RMS (`corte_silencio_s=0.8s`), mínimo 0,3 s de voz, máximo 10 s por frase. Ver [PLAN-VOZ-REAL §9](PLAN-VOZ-REAL.md#9-zipformer-anda-mal-con-voz-real-probamos-parakeet-2026-10-28) |
 | `whisper-frases` (comparación) | `faster-whisper-large-v3-turbo` (int8 CPU) | Por frases, sin parciales | Finales por segmento | El mismo corte que `sherpa-parakeet`; no corre en tiempo real |
 | `whisper` (secundario) | `faster-whisper-base` (int8 CPU) | NO streaming (por lotes/segmentos) | Finales por segmento | Filtro VAD integrado de Whisper (`min_silence_duration_ms=500ms`) |
