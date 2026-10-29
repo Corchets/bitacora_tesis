@@ -181,3 +181,69 @@ siguen viendo los códigos. Mientras transcribe bloquea el bucle del servidor ha
 **Siguiente paso.** Grabar el set de la sección 3 con «Probar el ASR» y medir los dos modelos con
 `medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Agregar Parakeet como variante en
 [`variantes_voz_real.py`](variantes_voz_real.py) queda pendiente.
+
+### 9.1 El borrador sale en inglés y después se corrige (2026-10-29)
+
+Pasó en la reunión con el tutor del 2026-10-28: Parakeet escribe unas palabras en inglés y al
+cerrar la frase las cambia por el texto en español.
+
+**Por qué pasa.** Parakeet v3 detecta el idioma solo, a partir del audio; no hay forma de
+pedirle español ([tarjeta del modelo](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3)). El
+primer borrador sale con apenas 0,3 s de voz más 0,5 s de espera. Con tan poco audio el modelo
+adivina el idioma y a veces arranca en inglés; al cerrar la frase tiene todo el audio y la
+escribe bien. El detector evalúa al cerrar la frase (`servidor.py --disparo final`, el valor por
+defecto), así que esas palabras no disparan el aviso: el problema es lo que se ve en pantalla. El
+panel ya muestra el borrador con borde punteado y en gris.
+
+> **Estado: propuesta sin discutir.** Ninguna está implementada.
+
+1. **Esperar más audio para el primer borrador**, por ejemplo 1 s de voz en vez de 0,3 s, con una
+   constante aparte de `MIN_VOZ_S`. El texto aparece medio segundo más tarde, pero con más
+   audio el modelo se equivoca menos de idioma. Es un cambio de una línea en `MotorPorFrases`.
+2. **No mostrar un borrador que no parece español.** Si trae palabras comunes de inglés o
+   portugués («the», «you», «thank», «okay», «olá») y ninguna de español, se deja el borrador
+   anterior. Lo mismo para una frase final que sea solo eso («Thank you», «Okay»): hoy esa
+   frase se acepta si tiene más de 0,3 s de voz. Hay que probarlo con las llamadas reales
+   guardadas para no borrar frases buenas.
+3. **Cambiar de modelo** a uno que acepte el idioma fijo o que sea solo de español. No está
+   verificado qué opciones de ese tipo corren en `sherpa-onnx` ni cuánto pesan.
+
+Recomendación: 1 y 2 juntas, medidas sobre las 4 llamadas del 2026-10-28 antes de la próxima
+demo.
+
+### 9.2 Cómo se entrenó cada modelo y cuánto pesa (2026-10-29)
+
+**No entrenamos ningún ASR.** Los dos vienen entrenados. Bajamos la conversión a ONNX que publica
+`sherpa-onnx` y solo los usamos para transcribir. Lo que se ajusta en #94 (corte de silencio,
+umbral, borrador, *hotwords*) es configuración, no los pesos del modelo.
+
+- **Parakeet TDT 0.6B v3:** lo entrenó NVIDIA. Codificador FastConformer con decodificador TDT,
+  unos 600 millones de parámetros, 25 idiomas europeos. Datos: unas 10 000 h transcriptas por
+  personas y unas 660 000 h del conjunto Granary transcriptas automáticamente, en 128 GPU A100.
+  Licencia CC BY 4.0 ([tarjeta del modelo](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3)).
+  Se puede reentrenar con NeMo sobre audio propio transcripto, pero hacen falta GPU y muchas más
+  horas que las 30 frases de la sección 3. No está planificado.
+- **Zipformer Kroko:** modelo streaming de español de Kroko, también entrenado por terceros.
+
+| | Zipformer Kroko | Parakeet TDT 0.6B v3 int8 | Relación |
+|---|---|---|---|
+| Archivos del modelo en disco | ~156 MB (`float32`) | ~670 MB (`int8`) | ~4× |
+| Parámetros | ~39 M (estimado: 156 MB / 4 bytes) | ~600 M | ~15× |
+| Memoria del proceso (RSS) | ~475 MB | ~1,0–1,2 GB | ~2–2,5× |
+| Bloque más lento (M1, 2 hilos) | ~80 ms | ~450 ms | ~5–6× |
+| Cómo transcribe | Palabra por palabra mientras se habla | Vuelve a transcribir la frase entera cada 0,5 s | |
+
+Los tamaños en disco salen de los archivos descargados; la memoria y los tiempos, de la tabla
+de la sección 9.
+
+**Cómo corre hoy.** En la CPU de la Mac M1 con 2 hilos (`hilos=2` en `MotorSherpaParakeet`), sin GPU
+ni Neural Engine. No usa toda la potencia de la computadora ni imita un teléfono: es una
+configuración fija y no se midió en ningún teléfono. Como cada borrador repite la frase desde el
+principio, el costo sube a medida que la frase se alarga, hasta el corte de 10 s.
+
+**En un teléfono de gama alta.** `sherpa-onnx` tiene soporte para Android e iOS. En memoria
+entra: ~1,2 GB de ASR más el detector, en teléfonos de 12–16 GB. Lo que no sabemos es cuánto
+tarda cada borrador, cuánta batería consume y cuánto calienta en el teléfono. Con la
+[gama acordada el 2026-10-28](https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)
+(la más alta a la fecha, optimizar después), esto queda como límite declarado, no como
+bloqueo.
