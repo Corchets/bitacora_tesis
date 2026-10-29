@@ -938,6 +938,79 @@ def _validar_informe99(informe: dict) -> tuple[list[dict], dict, dict, dict]:
     return resultados, costos, seleccion, baseline
 
 
+def _validar_identidad_99(informe: dict) -> tuple[dict, dict, dict]:
+    """Identidad de pesos realmente medidos en #99 (contrato con ctx_2fe9dde581dc).
+
+    Exige `artefactos_identidad[filename]` con `{sha256, entrada, C,
+    encoder, tokenizador, datos}` (copias exactas de los bloques del
+    archivo persistido y recargado, no resúmenes) y
+    `artefacto_seleccionado={nombre, sha256}` con el nombre/hash
+    realmente medido. Sin estos metadatos no se congela nada: un
+    informe viejo sin identidad se rechaza, no se compatibiliza.
+    """
+    ident = informe.get("artefactos_identidad")
+    if not isinstance(ident, dict) or not ident:
+        raise ValueError("informe99 sin artefactos_identidad: sin identidad "
+                         "de pesos no se congela (reentrenar/informar en #99).")
+    sel = informe.get("artefacto_seleccionado")
+    if not isinstance(sel, dict):
+        raise ValueError("informe99 sin artefacto_seleccionado "
+                         "{nombre, sha256}: sin peso medido no se congela.")
+    nombre = sel.get("nombre")
+    sha_sel = sel.get("sha256")
+    if not isinstance(nombre, str) or not nombre:
+        raise ValueError("informe99 sin artefacto_seleccionado.nombre real.")
+    if not _es_hex64(sha_sel):
+        raise ValueError("informe99 sin artefacto_seleccionado.sha256 real.")
+    if nombre not in ident:
+        raise ValueError(f"artefacto_seleccionado {nombre!r} fuera de "
+                         "artefactos_identidad: sin peso medido no se congela.")
+    for fname, entry in ident.items():
+        if not isinstance(entry, dict):
+            raise ValueError(f"artefactos_identidad[{fname!r}] sin objeto.")
+        for k in ("sha256", "entrada", "C", "encoder", "tokenizador", "datos"):
+            if k not in entry:
+                raise ValueError(f"artefactos_identidad[{fname!r}] sin {k!r}: "
+                                 "metadatos incompletos, no se congela.")
+        if not _es_hex64(entry.get("sha256")):
+            raise ValueError(f"artefactos_identidad[{fname!r}] sin sha256 real.")
+        if not isinstance(entry.get("encoder"), dict) \
+                or not isinstance(entry.get("tokenizador"), dict) \
+                or not isinstance(entry.get("datos"), dict):
+            raise ValueError(f"artefactos_identidad[{fname!r}] sin bloques "
+                             "encoder/tokenizador/datos reales.")
+        try:
+            float(entry.get("C"))
+        except (TypeError, ValueError):
+            raise ValueError(f"artefactos_identidad[{fname!r}] sin C numérico.")
+    entry_sel = ident[nombre]
+    if entry_sel.get("sha256") != sha_sel:
+        raise ValueError("artefacto_seleccionado.sha256 no coincide con "
+                         f"artefactos_identidad[{nombre!r}].sha256.")
+    return ident, sel, entry_sel
+
+
+def _verificar_datos_contra_fuentes(datos: dict, sha_sup: str, sha_aud: str,
+                                    sha_part: str, sha_cfg: str) -> None:
+    """Los cuatro hashes de datos deben coincidir con las fuentes actuales."""
+    sup = (datos.get("supervision_identidad") or {}).get("sha256") \
+        if isinstance(datos.get("supervision_identidad"), dict) else None
+    aud = (datos.get("auditoria_identidad") or {}).get("sha256") \
+        if isinstance(datos.get("auditoria_identidad"), dict) else None
+    if sup != sha_sup:
+        raise ValueError("datos.supervision_identidad.sha256 no coincide con "
+                         "la supervisión actual: sin reescribir historia.")
+    if aud != sha_aud:
+        raise ValueError("datos.auditoria_identidad.sha256 no coincide con "
+                         "la auditoría actual: sin reescribir historia.")
+    if datos.get("particiones_sha256") != sha_part:
+        raise ValueError("datos.particiones_sha256 no coincide con "
+                         "PARTICIONES vigente: recongelar tras regenerar.")
+    if datos.get("configuracion_sha256") != sha_cfg:
+        raise ValueError("datos.configuracion_sha256 no coincide con "
+                         "CONFIG vigente: recongelar tras regenerar.")
+
+
 def _errores_observables_99(resultados: list[dict], baseline: dict) -> list[str]:
     """Conteos > 0 visibles en validación que justificarían ajustar."""
     errores = []
@@ -988,6 +1061,7 @@ def congelar_desde_informe99(resultados99_ruta: Path, artefacto_ruta: Path,
         raise ValueError(f"artefacto candidato ausente: {artefacto_ruta}.")
     informe = _cargar_json(resultados99_ruta, "informe99")
     resultados, _costos, seleccion, baseline = _validar_informe99(informe)
+    _ident, seleccionado, entrada_sel = _validar_identidad_99(informe)
     artefacto = _cargar_json(artefacto_ruta, "artefacto candidato")
     elegida = seleccion["elegida"]
     _entrada_eleg, c_eleg, u_eleg = _parse_config_nombre(elegida)
@@ -1002,6 +1076,36 @@ def congelar_desde_informe99(resultados99_ruta: Path, artefacto_ruta: Path,
     if c_arte != c_eleg:
         raise ValueError(f"artefacto C={c_arte} no corresponde a la elegida "
                          f"{elegida} (C={c_eleg}): sin sustitución.")
+    # La identidad #99 debe apuntar a la elegida (entrada/C del peso medido).
+    if entrada_sel.get("entrada") != ENTRADA_NUEVA:
+        raise ValueError("artefactos_identidad de la seleccionada sin "
+                         "historial_acumulado: no es el candidato principal.")
+    try:
+        c_ident = float(entrada_sel.get("C"))
+    except (TypeError, ValueError):
+        raise ValueError("artefactos_identidad de la seleccionada sin C numérico.")
+    if c_ident != c_eleg:
+        raise ValueError(f"identidad C={c_ident} no corresponde a la elegida "
+                         f"{elegida} (C={c_eleg}): sin sustitución.")
+    # El hash en disco debe ser el realmente medido: un peso mutado con
+    # mismo C/encoder se rechaza aunque el resto coincida.
+    sha_real = sha_archivo(artefacto_ruta)
+    if sha_real != seleccionado.get("sha256") \
+            or sha_real != entrada_sel.get("sha256"):
+        raise ValueError("el artefacto en disco no coincide con el hash "
+                         "realmente medido en #99 (artefacto_seleccionado / "
+                         "artefactos_identidad): peso mutado o sustituido, "
+                         "aunque C/encoder coincidan.")
+    # Bloques exactos del archivo contra la identidad informada.
+    if entrada_sel.get("encoder") != artefacto.get("encoder"):
+        raise ValueError("encoder del artefacto divergente de la identidad "
+                         "medida en #99: sin sustitución.")
+    if entrada_sel.get("tokenizador") != artefacto.get("tokenizador"):
+        raise ValueError("tokenizador del artefacto divergente de la identidad "
+                         "medida en #99: sin sustitución.")
+    if entrada_sel.get("datos") != artefacto.get("datos"):
+        raise ValueError("datos del artefacto divergentes de la identidad "
+                         "medida en #99: sin reescribir historia.")
     candidatos = [{"config": r["config"],
                    "omisiones_oportunas": r["omisiones_oportunas"],
                    "legitimas_derivadas": r["legitimas_derivadas"]}
@@ -1028,6 +1132,11 @@ def congelar_desde_informe99(resultados99_ruta: Path, artefacto_ruta: Path,
         if not ruta.exists():
             raise ValueError(f"artefacto de {nombre} ausente: {ruta} "
                              "(fail-closed: sin procedencia no se congela).")
+    # Los hashes de datos informados deben ser los vigentes: si la fuente
+    # cambió tras la medición, no se atribuyen sus métricas a otro insumo.
+    _verificar_datos_contra_fuentes(
+        entrada_sel.get("datos", {}), sha_archivo(ruta_sup),
+        sha_archivo(ruta_aud), sha_particiones, sha_config)
     _rechazar_sobreescritura_congelada(salida)
     fuentes = {
         "informe99": {"ruta": Path(resultados99_ruta).name,

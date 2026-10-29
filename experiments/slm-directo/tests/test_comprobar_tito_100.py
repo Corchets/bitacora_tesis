@@ -32,6 +32,7 @@ from comprobar_tito_100 import (  # noqa: E402
     verificar_comparacion_20,
     verificar_puerta_revision,
     verificar_umbral_cli,
+    _validar_identidad_99,
 )
 
 ENCODER = {"id": "pysentimiento/robertuito-base-uncased",
@@ -44,12 +45,52 @@ IDS_20 = [f"FIX-{'V' if i < 10 else 'L'}-{i:03d}" for i in range(20)]
 IDS_VAL = ["FIX-VAL-001", "FIX-VAL-002"]
 
 
-def _artefacto(entrada="historial_acumulado", c=1.0):
-    return {"formato": "tito-99-logreg-v1", "entrada": entrada,
+def _artefacto(entrada="historial_acumulado", c=1.0, datos=None):
+    arte = {"formato": "tito-99-logreg-v1", "entrada": entrada,
             "config_regresion": {"semilla": 42, "C": c},
             "encoder": dict(ENCODER),
             "tokenizador": {"tokenizer_sha256": "tok" * 21 + "t"},
             "pesos": {"coef": [0.5, -0.25], "intercepto": 0.0}}
+    if datos is not None:
+        arte["datos"] = dict(datos)
+    return arte
+
+
+def _datos_identidad(sup_sha, aud_sha, part_sha, cfg_sha):
+    return {"supervision_identidad": {"sha256": sup_sha},
+            "auditoria_identidad": {"sha256": aud_sha},
+            "particiones_sha256": part_sha,
+            "configuracion_sha256": cfg_sha,
+            "split": "train=PARTICIONES-TITO-2026-10-29/entrenamiento",
+            "semilla": 42}
+
+
+def _shas_fuentes_actuales(sup, aud):
+    import hashlib as _hl
+    part_ruta = AQUI / "PARTICIONES-TITO-2026-10-29.json"
+    cfg_ruta = AQUI / "CONFIGURACION-TITO-2026-10-29.json"
+    return (_hl.sha256(sup.read_bytes()).hexdigest(),
+            _hl.sha256(aud.read_bytes()).hexdigest(),
+            _hl.sha256(part_ruta.read_bytes()).hexdigest(),
+            _hl.sha256(cfg_ruta.read_bytes()).hexdigest())
+
+
+def _escribir_candidato(tmp, nombre="cand.json", c=1.0, sup=None, aud=None):
+    import hashlib as _hl
+    datos = _datos_identidad(*_shas_fuentes_actuales(sup, aud))
+    arte = _artefacto(c=c, datos=datos)
+    ruta = tmp / nombre
+    ruta.write_text(json.dumps(arte), encoding="utf-8")
+    sha = _hl.sha256(ruta.read_bytes()).hexdigest()
+    return ruta, arte, sha
+
+
+def _identidad_para(arte, sha):
+    return {"sha256": sha, "entrada": arte["entrada"],
+            "C": arte["config_regresion"]["C"],
+            "encoder": dict(arte["encoder"]),
+            "tokenizador": dict(arte["tokenizador"]),
+            "datos": dict(arte["datos"])}
 
 
 def _particiones_fixture():
@@ -688,8 +729,100 @@ class TestEvaluarGuards(unittest.TestCase):
                     politica_manifiesto=pol_mala,
                     particiones=part, lector_20=lector)
 
+    def test_politica_invalida_no_abre_lecturas_20(self):
+        # Secuencia f0a2106: política inválida ANTES de cualquier lectura
+        # de textos/referencias de las veinte; el lector no se llama.
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d)
+            textos, referencias, part, _lector = _casos_20_fixture()
+            mp, ap = self._manifiesto_20(tmp, part)
+            man = json.loads(mp.read_text(encoding="utf-8"))
+            llamadas = []
+            import hashlib as _hl
 
-def _informe99_fixture(tmp, modo="conserva"):
+            def lector_contador(cid):
+                llamadas.append(cid)
+                return _lector(cid)
+
+            pol_mala = tmp / "pol_mala.json"
+            pol_mala.write_text(json.dumps(
+                {"seleccion_solo_validacion": True,
+                 "congelado_en": "2026-10-29T00:00:01",  # sin zona UTC
+                 "politica": {"periodo_actualizaciones": 1,
+                              "regla_nueva_evidencia": "nueva",
+                              "delta_score": 0.1},
+                 "tito": {"artefacto_sha256": man["artefacto_sha256"],
+                          "manifiesto100_sha256": _hl.sha256(
+                              mp.read_bytes()).hexdigest(),
+                          "entrada": "historial_acumulado",
+                          "umbral": man["umbral"],
+                          "encoder": man["encoder"]}}),
+                encoding="utf-8")
+            dob = DobleTito("historial_acumulado", {})
+            with self.assertRaisesRegex(ValueError, "zona UTC"):
+                evaluar_comprobacion(
+                    mp, ap, ap, textos, referencias, {},
+                    tito_nuevo=dob, tito_viejo=dob,
+                    politica_manifiesto=pol_mala,
+                    particiones=part, lector_20=lector_contador)
+            self.assertEqual(llamadas, [])
+
+    def test_cmd_evaluar_politica_invalida_no_lee_las_veinte(self):
+        # _cmd_evaluar valida la puerta ANTES de abrir las veinte en disco.
+        import tempfile
+        import comprobar_tito_100 as _c100
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d)
+            textos, referencias, part, lector = _casos_20_fixture()
+            mp, ap = self._manifiesto_20(tmp, part)
+            man = json.loads(mp.read_text(encoding="utf-8"))
+            import hashlib as _hl
+            pol_mala = tmp / "pol_mala.json"
+            pol_mala.write_text(json.dumps(
+                {"seleccion_solo_validacion": True,
+                 "congelado_en": "2026-10-29T00:00:01",
+                 "politica": {"periodo_actualizaciones": 1,
+                              "regla_nueva_evidencia": "nueva",
+                              "delta_score": 0.1},
+                 "tito": {"artefacto_sha256": man["artefacto_sha256"],
+                          "manifiesto100_sha256": _hl.sha256(
+                              mp.read_bytes()).hexdigest(),
+                          "entrada": "historial_acumulado",
+                          "umbral": man["umbral"],
+                          "encoder": man["encoder"]}}),
+                encoding="utf-8")
+            tocado = []
+            real_cargar = _c100._cargar_textos_20
+            real_evaluar = _c100.evaluar_comprobacion
+
+            def espiar(ids, lector=None):
+                tocado.append(tuple(ids))
+                return real_cargar(ids, lector)
+
+            def prohibir(*a, **k):
+                raise AssertionError("evaluar no debe correrse")
+
+            _c100._cargar_textos_20 = espiar
+            _c100.evaluar_comprobacion = prohibir
+            try:
+                args = type("A", (), {})()
+                args.manifiesto = mp
+                args.artefacto_nuevo = str(ap)
+                args.artefacto_viejo = str(ap)
+                args.politica_manifiesto = pol_mala
+                args.etiquetas = None
+                args.umbral = None
+                args.salida = tmp / "comp.json"
+                rc = _c100._cmd_evaluar(args)
+            finally:
+                _c100._cargar_textos_20 = real_cargar
+                _c100.evaluar_comprobacion = real_evaluar
+            self.assertEqual(rc, 2)
+            self.assertEqual(tocado, [])
+
+
+def _base_informe_dict(modo="conserva"):
     if modo == "conserva":
         base = {"omisiones_oportunas": 1, "legitimas_derivadas": 1,
                 "denominador_vishing": 4, "denominador_legitimas": 6}
@@ -716,7 +849,7 @@ def _informe99_fixture(tmp, modo="conserva"):
              "omisiones_oportunas": 2, "legitimas_derivadas": 1,
              "denominador_vishing": 4, "denominador_legitimas": 6},
         ]
-    informe = {
+    return {
         "resultados_validacion": res,
         "costos_p95_ms": {r["config"]: 1.0 for r in res},
         "seleccion": {"elegida": "historial_acumulado/C=1.0/u=0.5",
@@ -724,9 +857,36 @@ def _informe99_fixture(tmp, modo="conserva"):
                       "frontera_pareto": ["historial_acumulado/C=1.0/u=0.5"]},
         "criterio_fine_tuning": {"baseline_viejo": base},
     }
+
+
+def _informe99_fixture(tmp, modo="conserva"):
+    # Contrato nuevo: informe válido SIEMPRE trae identidad del peso medido.
+    # Sin artefacto no hay hash real: este fixture queda como informe
+    # viejo/rotó (se rechaza); los caminos válidos usan
+    # _informe99_con_identidad con el candidato ya escrito en disco.
+    informe = _base_informe_dict(modo)
     ruta = tmp / "informe99.json"
     ruta.write_text(json.dumps(informe), encoding="utf-8")
     return ruta
+
+
+def _informe99_con_identidad(tmp, arte, arte_sha, nombre_arte="cand.json",
+                             modo="conserva", nombre_informe="informe99.json"):
+    informe = _base_informe_dict(modo)
+    informe["artefactos_identidad"] = {
+        nombre_arte: _identidad_para(arte, arte_sha)}
+    informe["artefacto_seleccionado"] = {"nombre": nombre_arte,
+                                         "sha256": arte_sha}
+    ruta = tmp / nombre_informe
+    ruta.write_text(json.dumps(informe), encoding="utf-8")
+    return ruta
+
+
+def _informe99_con_identidad_desde(tmp, sup, aud, ap, arte, sha,
+                                  modo="conserva",
+                                  nombre_informe="informe99.json"):
+    return _informe99_con_identidad(tmp, arte, sha, ap.name, modo,
+                                    nombre_informe)
 
 
 class TestCongelarInforme99(unittest.TestCase):
@@ -737,17 +897,20 @@ class TestCongelarInforme99(unittest.TestCase):
         aud.write_text("{}", encoding="utf-8")
         return sup, aud
 
+    def _valido(self, tmp, modo="conserva", nombre="cand.json"):
+        sup, aud = self._sup_aud(tmp)
+        ap, arte, sha = _escribir_candidato(tmp, nombre, 1.0, sup, aud)
+        informe = _informe99_con_identidad(tmp, arte, sha, ap.name, modo)
+        return informe, ap, arte, (sup, aud)
+
     def test_congelar_valido_guarda_manifiesto_consumible(self):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
-            informe = _informe99_fixture(tmp)
-            arte = _artefacto(c=1.0)
-            ap = tmp / "cand.json"
-            ap.write_text(json.dumps(arte), encoding="utf-8")
+            informe, ap, arte, (sup, aud) = self._valido(tmp)
             salida = tmp / "man.json"
             man = congelar_desde_informe99(
-                informe, ap, salida, rutas_sup_aud=self._sup_aud(tmp))
+                informe, ap, salida, rutas_sup_aud=(sup, aud))
             self.assertEqual(man["estado"], ESTADO_CONGELADO)
             self.assertFalse(
                 man["decision_fine_tuning"]["corresponde"])
@@ -784,77 +947,151 @@ class TestCongelarInforme99(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
-            informe = _informe99_fixture(tmp)
-            arte = _artefacto(c=1.0)
-            ap = tmp / "cand.json"
-            ap.write_text(json.dumps(arte), encoding="utf-8")
+            informe, ap, _arte, (sup, aud) = self._valido(tmp)
             salida = tmp / "man.json"
             congelar_desde_informe99(
-                informe, ap, salida, rutas_sup_aud=self._sup_aud(tmp))
+                informe, ap, salida, rutas_sup_aud=(sup, aud))
             with self.assertRaisesRegex(ValueError, "ya congelada"):
                 congelar_desde_informe99(
-                    informe, ap, salida, rutas_sup_aud=self._sup_aud(tmp))
+                    informe, ap, salida, rutas_sup_aud=(sup, aud))
 
     def test_congelar_ft_correspondiente_guarda_bloqueo(self):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
-            informe = _informe99_fixture(tmp, modo="bloqueo")
-            arte = _artefacto(c=1.0)
-            ap = tmp / "cand.json"
-            ap.write_text(json.dumps(arte), encoding="utf-8")
+            informe, ap, _arte, (sup, aud) = self._valido(tmp, modo="bloqueo")
             salida = tmp / "man.json"
             with self.assertRaises(BloqueoFineTuning):
                 congelar_desde_informe99(
-                    informe, ap, salida, rutas_sup_aud=self._sup_aud(tmp))
+                    informe, ap, salida, rutas_sup_aud=(sup, aud))
             bloqueado = json.loads(salida.read_text(encoding="utf-8"))
             self.assertEqual(bloqueado["estado"], ESTADO_BLOQUEADO_FT)
             self.assertTrue(bloqueado["trabajo_faltante"])
+
+    def test_congelar_sin_identidad_se_rechaza(self):
+        # Informe viejo sin artefactos_identidad/artefacto_seleccionado:
+        # no se compatibiliza, se rechaza.
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d)
+            sup, aud = self._sup_aud(tmp)
+            _ap, _arte, _sha = _escribir_candidato(tmp, "cand.json", 1.0,
+                                                  sup, aud)
+            informe = _informe99_fixture(tmp)
+            with self.assertRaisesRegex(ValueError, "artefactos_identidad"):
+                congelar_desde_informe99(
+                    informe, _ap, tmp / "man.json",
+                    rutas_sup_aud=(sup, aud))
+
+    def test_congelar_peso_mutado_mismo_c_encoder_se_rechaza(self):
+        # Mismo C/encoder pero pesos distintos: el hash en disco ya no es
+        # el realmente medido.
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d)
+            informe, ap, arte, (sup, aud) = self._valido(tmp)
+            mutado = dict(arte)
+            mutado["pesos"] = {"coef": [0.9, -0.1], "intercepto": 0.0}
+            ap.write_text(json.dumps(mutado), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "realmente medido"):
+                congelar_desde_informe99(
+                    informe, ap, tmp / "man.json",
+                    rutas_sup_aud=(sup, aud))
+
+    def test_congelar_encoder_y_tokenizador_divergentes_se_rechazan(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d)
+            sup, aud = self._sup_aud(tmp)
+            ap, arte, _sha_viejo = _escribir_candidato(tmp, "cand.json", 1.0,
+                                                      sup, aud)
+            # Informe que dice medir un encoder/tokenizador distintos pero
+            # declara el sha del archivo actual: el bloque debe rechazarse
+            # aunque el hash coincida.
+            import hashlib as _hl
+            sha = _hl.sha256(ap.read_bytes()).hexdigest()
+            otro_enc = dict(arte)
+            otro_enc["encoder"] = dict(arte["encoder"], revision="otra")
+            informe = _informe99_con_identidad(tmp, otro_enc, sha, ap.name)
+            with self.assertRaisesRegex(ValueError, "encoder"):
+                congelar_desde_informe99(
+                    informe, ap, tmp / "man.json",
+                    rutas_sup_aud=(sup, aud))
+            otro_tok = dict(arte)
+            otro_tok["tokenizador"] = {"tokenizer_sha256": "f" * 64}
+            informe2 = _informe99_con_identidad(tmp, otro_tok, sha, ap.name,
+                                                nombre_informe="inf2.json")
+            with self.assertRaisesRegex(ValueError, "tokenizador"):
+                congelar_desde_informe99(
+                    informe2, ap, tmp / "man2.json",
+                    rutas_sup_aud=(sup, aud))
+
+    def test_congelar_fuente_cambiada_se_rechaza(self):
+        # La supervisión cambió tras la medición: sus hashes ya no coinciden
+        # con la identidad informada ni con el artefacto.
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            tmp = Path(d)
+            informe, ap, _arte, (sup, aud) = self._valido(tmp)
+            sup.write_text("{}\n{}\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "supervision"):
+                congelar_desde_informe99(
+                    informe, ap, tmp / "man.json",
+                    rutas_sup_aud=(sup, aud))
 
     def test_congelar_informe_invalido_falla_cerrado(self):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
-            arte = _artefacto(c=1.0)
-            ap = tmp / "cand.json"
-            ap.write_text(json.dumps(arte), encoding="utf-8")
+            sup, aud = self._sup_aud(tmp)
+            ap, arte, _sha = _escribir_candidato(tmp, "cand.json", 1.0,
+                                                sup, aud)
             # Elegida con frase: no es el candidato principal.
-            informe = _informe99_fixture(tmp)
+            informe = _informe99_con_identidad(tmp, arte, _sha, ap.name)
             datos = json.loads(informe.read_text(encoding="utf-8"))
             datos["seleccion"]["elegida"] = "frase_actual_control/C=1.0/u=0.5"
             informe.write_text(json.dumps(datos), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "historial"):
                 congelar_desde_informe99(
                     informe, ap, tmp / "man.json",
-                    rutas_sup_aud=self._sup_aud(tmp))
-            # Artefacto que no corresponde a la elegida (C distinto).
-            informe2 = tmp / "informe99_b.json"
-            informe2.write_text(
-                json.dumps({
-                    "resultados_validacion": [
-                        {"config": "historial_acumulado/C=1.0/u=0.5",
-                         "entrada": "historial_acumulado", "C": 1.0,
-                         "umbral": 0.5, "omisiones_oportunas": 0,
-                         "legitimas_derivadas": 0,
-                         "denominador_vishing": 4,
-                         "denominador_legitimas": 6}],
-                    "costos_p95_ms": {
-                        "historial_acumulado/C=1.0/u=0.5": 1.0},
-                    "seleccion": {
-                        "elegida": "historial_acumulado/C=1.0/u=0.5",
-                        "criterio": "pareto",
-                        "frontera_pareto":
-                            ["historial_acumulado/C=1.0/u=0.5"]},
-                    "criterio_fine_tuning": {
-                        "baseline_viejo": {"omisiones_oportunas": 1,
-                                           "legitimas_derivadas": 1}}}),
-                encoding="utf-8")
-            otro = tmp / "otro.json"
-            otro.write_text(json.dumps(_artefacto(c=10.0)), encoding="utf-8")
+                    rutas_sup_aud=(sup, aud))
+            # Artefacto que no corresponde a la elegida (C distinto): la
+            # identidad informa C=1.0 pero el archivo trae C=10.0.
+            sup2 = tmp / "sup2.jsonl"
+            sup2.write_text("{}\n", encoding="utf-8")
+            aud2 = tmp / "aud2.json"
+            aud2.write_text("{}", encoding="utf-8")
+            ap2, arte2, sha2 = _escribir_candidato(tmp, "otro.json", 10.0,
+                                                   sup2, aud2)
+            informe2 = _informe99_con_identidad(
+                tmp, arte2, sha2, ap2.name,
+                nombre_informe="informe99_b.json")
+            # Reescribo la elegida/identidad a C=1.0 para forzar el desvío.
+            d2 = json.loads(informe2.read_text(encoding="utf-8"))
+            d2["artefactos_identidad"][ap2.name]["C"] = 1.0
+            informe2.write_text(json.dumps(d2), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "no corresponde"):
                 congelar_desde_informe99(
-                    informe2, otro, tmp / "man2.json",
-                    rutas_sup_aud=self._sup_aud(tmp))
+                    informe2, ap2, tmp / "man2.json",
+                    rutas_sup_aud=(sup2, aud2))
+
+
+def _rutas_reales_sup_aud():
+    try:
+        import supervision_tito_99 as _sup
+        return Path(_sup.SUPERVISION_RUTA), Path(_sup.AUDITORIA_RUTA)
+    except ImportError:
+        return (AQUI / "SUPERVISION-CONTEXTUAL-TITO-99-2026-10-29.jsonl",
+                AQUI / "AUDITORIA-SEMANTICA-CONTEXTUAL-TITO-99-2026-10-29.json")
+
+
+def _candidato_cli(tmp, c=1.0, modo="conserva", nombre="cand.json",
+                   nombre_informe="informe99.json"):
+    sup, aud = _rutas_reales_sup_aud()
+    ap, arte, sha = _escribir_candidato(tmp, nombre, c, sup, aud)
+    informe = _informe99_con_identidad(tmp, arte, sha, ap.name, modo,
+                                       nombre_informe)
+    return informe, ap
 
 
 class TestCLI(unittest.TestCase):
@@ -869,10 +1106,7 @@ class TestCLI(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
-            informe = _informe99_fixture(tmp)
-            arte = _artefacto(c=1.0)
-            ap = tmp / "cand.json"
-            ap.write_text(json.dumps(arte), encoding="utf-8")
+            informe, ap = _candidato_cli(tmp)
             salida = tmp / "man.json"
             rc = main(["--paso", "congelar", "--resultados99", str(informe),
                        "--artefacto", str(ap), "--salida", str(salida)])
@@ -892,10 +1126,8 @@ class TestCLI(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
-            informe = _informe99_fixture(tmp, modo="bloqueo")
-            arte = _artefacto(c=1.0)
-            ap = tmp / "cand.json"
-            ap.write_text(json.dumps(arte), encoding="utf-8")
+            informe, ap = _candidato_cli(tmp, modo="bloqueo",
+                                         nombre_informe="inf_bloq.json")
             salida = tmp / "man.json"
             rc = main(["--paso", "congelar", "--resultados99", str(informe),
                        "--artefacto", str(ap), "--salida", str(salida)])
@@ -909,10 +1141,7 @@ class TestCLI(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as d:
             tmp = Path(d)
-            informe = _informe99_fixture(tmp)
-            arte = _artefacto(c=1.0)
-            ap = tmp / "cand.json"
-            ap.write_text(json.dumps(arte), encoding="utf-8")
+            informe, ap = _candidato_cli(tmp, nombre_informe="inf_u.json")
             rc = main(["--paso", "congelar", "--resultados99", str(informe),
                        "--artefacto", str(ap),
                        "--salida", str(tmp / "man.json"), "--umbral", "0.7"])
