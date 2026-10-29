@@ -157,6 +157,44 @@ class TestGraficosInforme(unittest.TestCase):
             self.assertIn("artefacto", svg_costos)
             self.assertIn("pendiente", svg_costos)
 
+    def test_etiquetas_por_condicion_sin_solape_y_leyenda_fuera(self):
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            manifiesto, filas, analisis = self._corrida(tmp, con_tito_nuevo=True)
+            base = Path(tmp) / "informe_101.md"
+            with mock.patch.object(plt, "close"):
+                informe_101.generar_graficos(base, manifiesto, analisis, filas)
+                figs = [plt.figure(n) for n in plt.get_fignums()]
+            try:
+                self.assertEqual(len(figs), 2)
+                fig_cal, fig_cos = figs
+                # Etiquetas de fracción rotadas y escalonadas por condición.
+                fracciones = [t for t in fig_cal.axes[0].texts
+                              if "/" in t.get_text()]
+                self.assertGreaterEqual(len(fracciones), 3)
+                rotaciones = {t.get_rotation() for t in fracciones}
+                self.assertTrue(rotaciones - {0.0, 0},
+                                f"etiquetas sin rotación: {rotaciones}")
+                alturas = sorted(t.get_position()[1] for t in fracciones[:3])
+                self.assertGreater(alturas[-1] - alturas[0], 0.03,
+                                   "etiquetas de tres condiciones a la misma altura")
+                # Leyenda de calidad fuera del área de datos (nivel figura).
+                self.assertTrue(fig_cal.legends,
+                                "leyenda de calidad dentro de los ejes")
+                # Leyenda de costos fuera del área de datos (a la derecha).
+                leyenda = fig_cos.axes[0].get_legend()
+                self.assertIsNotNone(leyenda)
+                ancla = leyenda.get_bbox_to_anchor().bounds
+                eje = fig_cos.axes[0].get_position().bounds
+                self.assertGreaterEqual(ancla[0], eje[0] + eje[2] - 0.02,
+                                        f"leyenda tapa barras: {ancla} vs eje {eje}")
+            finally:
+                for f in figs:
+                    plt.close(f)
+
     def test_costos_expresa_unidades_y_preparacion_separada(self):
         with tempfile.TemporaryDirectory() as tmp:
             manifiesto, filas, analisis = self._corrida(tmp)
@@ -171,6 +209,67 @@ class TestGraficosInforme(unittest.TestCase):
             self.assertIn("artefacto", svg)
             self.assertIn("Tito nuevo", svg)
             self.assertIn("pendiente", svg)
+
+    def _corrida_qa(self):
+        """Fixture QA: 1 modelo × 10 tags exactos de lista101 (5V + 5L).
+
+        Sintético (sin inferencia): avisa en L1 solo en vishing/directo.
+        """
+        todos = matriz_101.casos_101()
+        vishing = [c for c in todos
+                   if casos.cargar_referencia(c)["clase"] == "vishing"][:5]
+        legitimas = [c for c in todos
+                     if casos.cargar_referencia(c)["clase"] in casos.LEGITIMAS][:5]
+        ids = vishing + legitimas
+        self.assertEqual(len(ids), 10)
+        configs = ["directo|m1|tarea|ab", "tito-viejo|m1|tarea|ab",
+                   "tito-nuevo|m1|tarea|ab"]
+        manifiesto = _manifiesto(ids, configs)
+        filas = []
+        for cfg in configs:
+            for cid in ids:
+                total = len(casos.cargar_texto(cid))
+                for n in range(1, total + 1):
+                    avisa = (cid in vishing and cfg.startswith("directo")
+                             and n == 1)
+                    fila = {c: "" for c in correr.COLUMNAS}
+                    fila.update({
+                        "config": cfg, "case_id": cid, "linea": n,
+                        "valida": "true", "aviso": "true" if avisa else "false",
+                        "consulta": "slm_valida",
+                        "ms": "7",
+                        "tito_ms": "" if cfg.startswith("directo") else "5",
+                        "slm_ms": "7", "tokens_prompt": "10",
+                        "tokens_salida": "2",
+                    })
+                    filas.append(fila)
+        analisis = resumen.analizar(manifiesto, filas)
+        return ids, manifiesto, filas, analisis
+
+    def test_fixture_qa_un_modelo_diez_tags_con_marca_sintetica(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ids, manifiesto, filas, analisis = self._corrida_qa()
+            base = Path(tmp) / "informe_101.md"
+            marca = ("QA SINTÉTICO — 1 modelo × 10 casos "
+                     "(fixture, no son resultados reales)")
+            nombres = informe_101.generar_graficos(
+                base, manifiesto, analisis, filas, marca_qa=marca)
+            svg_calidad = (Path(tmp) / nombres[0]).read_text(encoding="utf-8")
+            svg_costos = (Path(tmp) / nombres[2]).read_text(encoding="utf-8")
+            # Los 10 tags exactos de lista101 aparecen en el análisis.
+            self.assertEqual(
+                sorted({f["case_id"] for f in filas}), sorted(ids))
+            # Marca sintética dentro de ambas figuras.
+            for svg in (svg_calidad, svg_costos):
+                self.assertIn("SINT", svg)
+                self.assertIn("no son resultados reales", svg)
+            # Denominadores del fixture: 5 vishing y 5 legítimas.
+            self.assertIn("5/5", svg_calidad)
+            # Sin marca => corridas reales sin rótulo sintético.
+            nombres2 = informe_101.generar_graficos(
+                base, manifiesto, analisis, filas)
+            svg_real = (Path(tmp) / nombres2[0]).read_text(encoding="utf-8")
+            self.assertNotIn("SINT", svg_real)
 
 
 if __name__ == "__main__":

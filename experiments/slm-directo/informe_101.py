@@ -156,11 +156,19 @@ def _cfg_de(modelo: str, cond: str, analisis: dict) -> str | None:
     return None
 
 
-def _figura_calidad(ruta_base: Path, modelos: list[str], analisis: dict) -> None:
+_DESP_ETIQUETA = (0.02, 0.055, 0.09)
+
+
+def _figura_calidad(ruta_base: Path, modelos: list[str], analisis: dict,
+                    marca_qa: str | None = None) -> None:
     """Calidad por modelo y condición: vishing con aviso y falsas alarmas.
 
     Denominadores = casos evaluados (excluyen `sin evaluar`). Una condición
     sin traza se marca `sin datos`: nunca se dibuja como cero observado.
+    Etiquetas de fracción rotadas 90° y escalonadas por condición para que
+    las tres no se pisen; leyenda a nivel figura, fuera del área de datos.
+    `marca_qa` solo identifica el fixture QA sintético dentro de la figura;
+    las corridas reales no llevan rótulo.
     """
     import matplotlib
     matplotlib.use("Agg")
@@ -206,31 +214,38 @@ def _figura_calidad(ruta_base: Path, modelos: list[str], analisis: dict) -> None
                     continue
                 ax.bar(x, num / den, width=0.22, color=_COLORES[cond],
                        edgecolor="black", linewidth=0.5)
-                ax.text(x, num / den + 0.02, f"{num}/{den}", ha="center",
-                        va="bottom", fontsize=8)
+                ax.text(x, num / den + _DESP_ETIQUETA[gi], f"{num}/{den}",
+                        ha="center", va="bottom", fontsize=7, rotation=90)
     handles = [Patch(facecolor=_COLORES[cond], edgecolor="black", label=cond)
                  for cond in _CONDICIONES]
-    ejes[1].legend(handles=handles, title="condición", fontsize=8, loc="upper right")
+    fig.legend(handles=handles, title="condición", fontsize=8, loc="lower center",
+               bbox_to_anchor=(0.5, 0.09), ncol=len(_CONDICIONES))
     titulo = textwrap.fill("Calidad por modelo y condición (avisos sobre salidas guardadas)",
                            width=60)
+    if marca_qa is not None:
+        titulo = marca_qa + "\n" + titulo
     fig.suptitle(titulo, fontsize=11, wrap=True)
     nota = ("Barras por condición: directo · tito-viejo · tito-nuevo. "
             "Sin datos = condición sin traza (no es cero). Denominadores excluyen sin evaluar.")
-    fig.text(0.5, 0.02, textwrap.fill(nota, width=100),
+    fig.text(0.5, 0.01, textwrap.fill(nota, width=100),
              ha="center", va="bottom", fontsize=8, style="italic", wrap=True)
-    fig.tight_layout(rect=(0, 0.16, 1, 0.88))
+    fig.tight_layout(rect=(0, 0.22, 1, 0.88))
     fig.savefig(str(ruta_base) + ".svg", format="svg", bbox_inches="tight", pad_inches=0.3)
     fig.savefig(str(ruta_base) + ".png", format="png", dpi=110,
                 bbox_inches="tight", pad_inches=0.3)
     plt.close(fig)
 
 
-def _figura_costos(ruta_base: Path, modelos: list[str], manifiesto: dict, analisis: dict) -> None:
+def _figura_costos(ruta_base: Path, modelos: list[str], manifiesto: dict, analisis: dict,
+                   marca_qa: str | None = None) -> None:
     """Costo hasta el aviso apilado Tito + SLM, por modelo y condición.
 
     Suma `tito_ms_total`/`slm_ms_total` del análisis guardado (prefijo hasta
     el aviso incluido, sin doble conteo). La preparación queda en nota aparte,
     fuera del costo por línea. Sin traza: `sin datos`, no cero.
+    Etiquetas de costo rotadas 90° y escalonadas por condición; leyenda
+    fuera del área de datos (a la derecha de los ejes). `marca_qa` solo
+    identifica el fixture QA sintético dentro de la figura.
     """
     import matplotlib
     matplotlib.use("Agg")
@@ -241,6 +256,16 @@ def _figura_costos(ruta_base: Path, modelos: list[str], manifiesto: dict, analis
 
     n = max(len(modelos), 1)
     fig, ax = plt.subplots(figsize=(min(7 + 1.2 * n, 15), 6.4))
+    totales: dict[tuple[int, int], float] = {}
+    for gi, cond in enumerate(_CONDICIONES):
+        for mi, modelo in enumerate(modelos):
+            cfg = _cfg_de(modelo, cond, analisis)
+            if cfg is None or not analisis[cfg]:
+                continue
+            tito = sum(c["tito_ms_total"] for c in analisis[cfg].values())
+            slm = sum(c["slm_ms_total"] for c in analisis[cfg].values())
+            totales[(gi, mi)] = tito + slm
+    techo = max([1.0] + list(totales.values()))
     for gi, cond in enumerate(_CONDICIONES):
         for mi, modelo in enumerate(modelos):
             x = mi + (gi - 1) * 0.24
@@ -259,15 +284,19 @@ def _figura_costos(ruta_base: Path, modelos: list[str], manifiesto: dict, analis
             ax.bar(x, slm, width=0.22, bottom=tito, color=_COLORES[cond],
                    edgecolor="black", linewidth=0.5, alpha=0.45,
                    hatch="//" if slm > 0 else None)
-            ax.text(x, total, f"{total:,.0f} ms".replace(",", "."),
-                    ha="center", va="bottom", fontsize=8)
+            ax.text(x, total + techo * (0.015 + 0.03 * gi),
+                    f"{total:,.0f} ms".replace(",", "."),
+                    ha="center", va="bottom", fontsize=7, rotation=90)
+    ax.set_ylim(0, techo * 1.35)
     ax.set_xticks(list(range(n)))
     ax.set_xticklabels(modelos, rotation=30, ha="right", fontsize=9)
     ax.set_ylabel("ms hasta el aviso (o caso completo si nunca avisó)", fontsize=9)
     ax.set_xlabel("modelo", fontsize=9)
-    ax.set_title(textwrap.fill("Costo por componente hasta el aviso: Tito (sólido) + SLM (claro)",
-                               width=55),
-                 fontsize=11, wrap=True)
+    titulo_costos = textwrap.fill(
+        "Costo por componente hasta el aviso: Tito (sólido) + SLM (claro)", width=55)
+    if marca_qa is not None:
+        titulo_costos = marca_qa + "\n" + titulo_costos
+    ax.set_title(titulo_costos, fontsize=11, wrap=True)
     ax.grid(axis="y", linestyle=":", alpha=0.6)
     notas = []
     for nombre, clave in (("Tito viejo", "tito_viejo_preparacion"),
@@ -287,7 +316,8 @@ def _figura_costos(ruta_base: Path, modelos: list[str], manifiesto: dict, analis
                for cond in _CONDICIONES]
     handles.append(Patch(facecolor="white", edgecolor="black", hatch="//",
                          label="tramo SLM (claro con trama)"))
-    ax.legend(handles=handles, title="condición", fontsize=8, loc="upper right")
+    ax.legend(handles=handles, title="condición", fontsize=8, loc="upper left",
+              bbox_to_anchor=(1.02, 1.0))
     fig.tight_layout(rect=(0, 0.20, 1, 0.88))
     fig.savefig(str(ruta_base) + ".svg", format="svg", bbox_inches="tight", pad_inches=0.3)
     fig.savefig(str(ruta_base) + ".png", format="png", dpi=110,
@@ -295,12 +325,15 @@ def _figura_costos(ruta_base: Path, modelos: list[str], manifiesto: dict, analis
     plt.close(fig)
 
 
-def generar_graficos(informe_md: Path, manifiesto: dict, analisis: dict, filas: list[dict]) -> list[str]:
+def generar_graficos(informe_md: Path, manifiesto: dict, analisis: dict, filas: list[dict],
+                     marca_qa: str | None = None) -> list[str]:
     """Dos figuras Matplotlib (SVG + PNG) desde salidas guardadas.
 
     Calidad por modelo/condición (vishing con aviso vs falsas alarmas, con
     denominadores) y costo Tito+SLM hasta el aviso. Regenerable sin
     inferencia: solo lee `manifiesto` + `analisis` ya calculados.
+    `marca_qa` identifica el fixture QA sintético dentro de la figura;
+    omitirla en corridas reales (sin rótulo sintético).
     """
     modelos = manifiesto.get("funcionales", {}).get("modelos", [])
     prefijo = informe_md.stem
@@ -308,8 +341,8 @@ def generar_graficos(informe_md: Path, manifiesto: dict, analisis: dict, filas: 
         prefijo = prefijo[: -len("_informe_101")]
     base_avisos = informe_md.parent / (prefijo + "_grafico_avisos")
     base_costos = informe_md.parent / (prefijo + "_grafico_costos")
-    _figura_calidad(base_avisos, modelos, analisis)
-    _figura_costos(base_costos, modelos, manifiesto, analisis)
+    _figura_calidad(base_avisos, modelos, analisis, marca_qa=marca_qa)
+    _figura_costos(base_costos, modelos, manifiesto, analisis, marca_qa=marca_qa)
     return [base_avisos.name + ".svg", base_avisos.name + ".png",
             base_costos.name + ".svg", base_costos.name + ".png"]
 
