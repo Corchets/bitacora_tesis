@@ -1,4 +1,4 @@
-"""Pruebas propias de prompts_supervision_tito_99 (corrección v2, #99).
+"""Pruebas propias de prompts_supervision_tito_99 (corrección v4, #99).
 
 Con dobles deterministas, sin red ni modelos ni reserva: verifican que
 ambas pasadas comparten el mismo objetivo contextual y solo llevan el
@@ -64,9 +64,22 @@ class TestPromptsContextuales(unittest.TestCase):
         self.assertIn("repartido en varias líneas", ps.REGLA_DECISION)
         self.assertIn("NO alcanza por sí solo", ps.REGLA_DECISION)
         self.assertNotIn("DIRECTAMENTE", p1 + p2)
-        # El indicio concreto deriva aunque todavía no exista pedido
-        # (revisión coord. msg_df46be7c144e; objetivo CONFIG).
-        self.assertIn("aunque todavía no haya ningún pedido", ps.REGLA_DECISION)
+        # Regla triestado breve (root): pregunta explícita de asignar UNA
+        # etiqueta, no binaria; orden 1-evidencia / null-incomprensible /
+        # 0-legítimo; el indicio vale aunque nadie haya pedido nada.
+        self.assertIn("asigná UNA etiqueta", ps.REGLA_DECISION)
+        self.assertIn("(1, 0 o null)", ps.REGLA_DECISION)
+        self.assertIn("No es una pregunta de sí/no", ps.REGLA_DECISION)
+        self.assertIn("aunque nadie haya pedido nada todavía", ps.REGLA_DECISION)
+        # Anti-alucinación: cada afirmación del fundamento exige cita
+        # literal; lo implícito no cuenta.
+        self.assertIn("PROHIBIDO inventar", ps.REGLA_DECISION)
+        self.assertIn("entrecomillad", ps.REGLA_DECISION)
+        self.assertIn("implícito", ps.REGLA_DECISION)
+        # Incomprensible o cortado va a null, no a 0.
+        self.assertIn("Lo incompleto o no identificado no es 0", ps.REGLA_DECISION)
+        self.assertIn("cortado a mitad", ps.REGLA_DECISION)
+        self.assertIn("'eso'", ps.REGLA_DECISION)
 
     def test_sin_respuesta_de_pasada1_en_pasada2(self):
         vis = ["A: hola", "B: pasame el codigo ya"]
@@ -79,7 +92,7 @@ class TestFirma(unittest.TestCase):
     def test_firma_estable_y_versionada(self):
         self.assertEqual(ps.firma_prompts(), ps.firma_prompts())
         self.assertEqual(len(ps.firma_prompts()), 64)
-        self.assertTrue(ps.PROMPT_VERSION.startswith("v2-"))
+        self.assertTrue(ps.PROMPT_VERSION.startswith("v4-"))
 
     def test_registro_viejo_sin_firma_se_rechaza(self):
         viejo = {"case_id": "X", "hasta_linea": 1, "etiqueta": 0}
@@ -150,6 +163,49 @@ class TestRevisionStateless(unittest.TestCase):
         out = ps.revisar_prefijo(["A: hola"], Roto(), "m")
         self.assertIsNone(out["etiqueta"])
         self.assertEqual(out["motivo"], "respuesta_invalida")
+
+
+class TestIdentidadCache(unittest.TestCase):
+    def _meta(self, tag="gemma4:e4b", digest="d1", version="0.40.8",
+              opciones=None):
+        return {
+            "tag": tag, "digest": digest, "ollama_version": version,
+            "opciones": dict(opciones) if opciones is not None else {
+                "temperature": 0, "seed": 42, "num_predict": 300},
+            "formato": "json-schema etiqueta/fundamento/lineas_soporte",
+        }
+
+    def _reg(self, meta, firma="FIRMA"):
+        return {"firma_prompts": firma, "modelo": meta}
+
+    def test_vigente_de_exige_firma_y_misma_identidad(self):
+        m = self._meta()
+        self.assertTrue(ps.es_registro_vigente_de(self._reg(m), "FIRMA", m))
+
+    def test_rechaza_mezcla_otro_modelo_digest_opciones_version(self):
+        m = self._meta()
+        # Otro tag (qwen) con la misma plantilla no se hereda.
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(tag="qwen3.5:4b", digest="d2")), "FIRMA", m))
+        # Mismo tag pero otro digest tampoco.
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(digest="otro")), "FIRMA", m))
+        # Ni otras opciones (aunque sean deterministas entre sí).
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(opciones={"temperature": 0.5, "seed": 42,
+                                           "num_predict": 300})),
+            "FIRMA", m))
+        # Ni otra versión de Ollama con igual tag/digest/opciones.
+        self.assertFalse(ps.es_registro_vigente_de(
+            self._reg(self._meta(version="0.21.1")), "FIRMA", m))
+        # Ni la misma identidad con otra firma de prompts.
+        self.assertFalse(
+            ps.es_registro_vigente_de(self._reg(m), "OTRA_FIRMA", m))
+        # Sin identidad del anotador no hay vigencia total.
+        self.assertFalse(ps.es_registro_vigente_de(
+            {"firma_prompts": "FIRMA"}, "FIRMA", m))
+        self.assertFalse(ps.es_registro_vigente_de(None, "FIRMA", m))
+        self.assertFalse(ps.es_registro_vigente_de(self._reg(m), "FIRMA", None))
 
 
 if __name__ == "__main__":

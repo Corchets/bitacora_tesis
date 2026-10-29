@@ -52,6 +52,7 @@ from prompts_supervision_tito_99 import (
     construir_prompt_pasada1,
     construir_prompt_pasada2,
     es_registro_vigente,
+    es_registro_vigente_de,
     firma_prompts,
 )
 
@@ -262,11 +263,13 @@ def recorrer_y_guardar(textos: dict, particion_de: dict, cliente: ClienteOllama,
                        limite: int | None = None) -> dict:
     """Revisa los prefijos faltantes y los agrega al JSONL (reanudable).
 
-    Solo las filas con la firma de prompts vigente cuentan como hechas:
-    el borrador viejo (sin firma u otra firma) se reanota, no se hereda.
+    Solo las filas con firma de prompts vigente E identidad del anotador
+    del recorrido (tag/digest/versión/opciones) cuentan como hechas: el
+    borrador viejo, otra firma, otro modelo u otras opciones se reanotan,
+    no se heredan ni se mezclan (corrección v4, orden del coordinador).
     """
     existentes = {k: v for k, v in leer_registros_existentes(ruta).items()
-                  if es_registro_vigente(v)}
+                  if es_registro_vigente_de(v, firma_prompts(), meta_modelo)}
     faltantes = sorted(set(total_prefijos_esperados(textos)) - set(existentes))
     if limite is not None:
         faltantes = faltantes[:limite]

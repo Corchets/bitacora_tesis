@@ -3,7 +3,19 @@
 Corrige el sesgo de los prompts originales de ``supervision_tito_99.py``
 (pasada 1 pedía ``DIRECTAMENTE`` dinero/código: el prefijo legítimo de la
 pizzería recibía 1/1 aunque el contexto visible mostraba un pago legítimo
-en un local ya conocido). Este módulo NO se integra solo: tras el handoff
+en un local ya conocido). La v2 contextual corrigió ese caso pero dejó
+tres limitaciones reales medidas con el modelo en
+``VALIDACION-PROMPTS-SUPERVISION-TITO-99-2026-10-29.json`` (7/8):
+el indicio sin pedido dividió a las pasadas (0/1 → null), los
+fundamentos afirmaron secreto/urgencia no presentes en el texto y los
+controles ambiguos se declararon 0 en vez del null que pide el contrato.
+La v3 ordenó el indicio como chequeo previo pero el enunciado seguía
+planteando una pregunta binaria de motivo y gemma4:e4b devolvió 0/0 en
+ambos ambiguos (6/8) aunque el transporte emite null (diagnóstico
+verificado por root). Esta v4 aplica la regla triestado breve de root:
+pregunta explícita de asignar UNA etiqueta (1, 0 o null), orden
+1-evidencia / null-incomprensible / 0-legítimo, con cita literal y
+segunda pasada aislada. Este módulo NO se integra solo: tras el handoff
 con el dueño del supervisor (ctx_98285f28e9d3) sus constructores reemplazan
 a ``construir_prompt_pasada1/_pasada2`` del supervisor, que conserva la
 orquestación, la auditoría y la puerta de entrenamiento.
@@ -31,8 +43,8 @@ formato de la respuesta y acuerda las pasadas (1+1→1, 0+0→0, resto→null).
 
 Versionado: cada registro lleva ``firma_prompts`` (sha256 de la versión y
 de ambas plantillas). El reanudado y el entrenamiento RECHAZAN filas con
-firma distinta o ausente (borrador viejo descartado): no se heredan como
-verdad. Ver ``es_registro_vigente()``.
+firma distinta o ausente (borrador viejo y v1/v2/v3 descartados): no se
+heredan como verdad. Ver ``es_registro_vigente()``.
 """
 
 from __future__ import annotations
@@ -53,7 +65,7 @@ SEMILLA = 42
 
 OPCIONES_MODELO = {"temperature": 0, "seed": SEMILLA, "num_predict": 300}
 
-PROMPT_VERSION = "v2-contextual-2026-10-29"
+PROMPT_VERSION = "v4-contextual-2026-10-29"
 
 FORMATO_RESPUESTA = {
     "type": "object",
@@ -72,48 +84,46 @@ ETIQUETAS_VALIDAS = (0, 1, None)
 # ---------------------------------------------------------------------------
 
 REGLA_DECISION = (
-    "Regla para etiquetar (aplica igual a todo lo visible; seguí estos "
-    "pasos en orden):\n"
-    "1. Identificá si ALGUIEN LE PIDE ALGO A SU INTERLOCUTOR EN ESTA "
-    "LLAMADA: un pedido, instrucción o indicación dirigido a la otra "
-    "persona de la llamada para que entregue o dicte un código o clave, "
-    "transfiera o pague dinero o datos de pago (alias, CBU), instale una "
-    "aplicación, comparta la pantalla o entregue datos sensibles (DNI, "
-    "contraseñas, tokens). El pedido puede estar repartido en varias "
-    "líneas; no hace falta que esté todo en una sola.\n"
-    "2. Buscá PRIMERO un indicio concreto y específico de riesgo, aunque "
-    "todavía no haya ningún pedido. Es indicio concreto: que alguien que "
-    "dice ser del banco, la policía o una empresa avise de un problema "
-    "(movimientos raros, cargo desconocido, cuenta bloqueada) y además pida "
-    "secreto ('no le cuentes a nadie'), meta urgencia ('ahora mismo', "
-    "'ya', 'urgente') o pida que dicte un código; o que dé instrucciones "
-    "de aislarse o no cortar la llamada. La combinación de aviso de "
-    "problema con pedido de secreto o urgencia ES indicio concreto por "
-    "definición: no la rebajes a aviso genérico. Si hay un indicio así, "
-    "marcá 1 sin esperar el pedido: el indicio visible ya justifica "
-    "consultar al SLM. Un relato o aviso SIN estos elementos (un consejo "
-    "genérico como "
-    "'nunca pases tu clave', una anécdota pasada, negar un pedido) no es "
-    "indicio: seguí al paso 3.\n"
-    "3. Si no hay indicio concreto, mirá si hay un pedido dirigido al "
-    "interlocutor y su contexto visible: es 0 si nadie le pide nada a su "
-    "interlocutor, o si el pedido es la parte normal del trámite que la "
-    "propia persona solicitó al llamar (pagar el precio al comercio al que "
-    "llamó, confirmar el alias de la factura del local ya conocido, dar "
-    "el DNI para el turno que pidió) y no hay a la vista ninguna señal de "
-    "riesgo. Es 1 si el pedido es riesgoso por el contexto visible "
-    "(beneficiario inesperado, presión para hacerlo ya, pedido de secreto, "
-    "cambio de las instrucciones respecto de lo ya acordado a la vista).\n"
-    "4. Si el fragmento es tan corto o ambiguo que no podés decidir si hay "
-    "un pedido ni de qué, marcá null. 1 exige evidencia concreta citada "
-    "de lo visto; ante la duda entre 0 y 1 con evidencia pobre, preferí "
-    "null. Hablar del tema sin pedir nada concreto a la otra persona es 0, "
-    "no null.\n"
-    "Que aparezcan las palabras dinero, alias, DNI, código o clave NO "
+    "Regla para etiquetar: leé TODO lo visible y asigná UNA etiqueta "
+    "(1, 0 o null). No es una pregunta de sí/no: las tres salidas son "
+    "posibles y debés elegir una.\n"
+    "1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay "
+    "evidencia si alguien que dice ser del banco, la policía, una "
+    "empresa o un organismo avisa de un problema de la cuenta o del "
+    "servicio (movimientos raros, cargo desconocido, cuenta bloqueada o "
+    "equivalente que cites del texto) Y ADEMÁS pide secreto ('no le "
+    "cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o "
+    "equivalente literal), pide que le dicten un código o clave, o da "
+    "instrucciones de aislarse o de no cortar; la evidencia vale aunque "
+    "nadie haya pedido nada todavía. También es 1 si hay un pedido "
+    "dirigido a la otra persona de ESTA llamada que es riesgoso por el "
+    "contexto visible (beneficiario inesperado, presión para hacerlo ya, "
+    "pedido de secreto, cambio de lo ya acordado a la vista). El pedido "
+    "puede estar repartido en varias líneas; no hace falta que esté todo "
+    "en una sola. Citá las líneas.\n"
+    "2. Sin esa evidencia, marcá null si el objeto o el trámite no se "
+    "entiende o está cortado: fragmento cortado a mitad de palabra o "
+    "frase sin saberse qué se pidió, o pedido de algo sin identificar "
+    "qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente "
+    "visible) sin poderse saber si es sensible. Lo incompleto o no "
+    "identificado no es 0.\n"
+    "3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le "
+    "pide nada sensible a su interlocutor (incluye consejos preventivos "
+    "y relatos sin pedido), o el pedido es la parte normal del trámite "
+    "que la propia persona solicitó al llamar (pagar el precio al "
+    "comercio al que llamó, confirmar el alias de la factura del local "
+    "ya conocido, dar el DNI para el turno que pidió) sin señal de "
+    "riesgo a la vista.\n"
+    "PROHIBIDO inventar: cada afirmación del fundamento sobre secreto, "
+    "urgencia, presión, amenaza o quién llamó a quién debe apoyarse en "
+    "palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o "
+    "'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que "
+    "aparezcan las palabras dinero, alias, DNI, código o clave NO "
     "alcanza por sí solo para marcar 1: lo legítimo por el contexto "
     "visible es 0.\n"
-    "Devolvé JSON con etiqueta, fundamento (cita textual corta de lo visto) "
-    "y lineas_soporte (números de las líneas citadas)."
+    "Devolvé JSON con etiqueta, fundamento (con citas textuales cortas "
+    "entrecomilladas de lo visto) y lineas_soporte (números de las líneas "
+    "citadas)."
 )
 
 
@@ -128,8 +138,7 @@ def construir_prompt_pasada1(lineas_visibles: list[str]) -> str:
         "Estás revisando una llamada en curso. Solo existe lo que sigue; "
         "no hay más contexto, ni antes ni después.\n"
         f"{_bloque_visible(lineas_visibles)}\n\n"
-        "¿Hay en estas líneas un motivo concreto y visible para consultar "
-        "al sistema de verificación?\n"
+        "Asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\n"
         f"{REGLA_DECISION}"
     )
 
@@ -145,8 +154,8 @@ def construir_prompt_pasada2(lineas_visibles: list[str]) -> str:
         "Estas líneas son todo lo que se sabe hasta ahora; no hay nada "
         "más, ni antes ni después.\n"
         f"{_bloque_visible(lineas_visibles)}\n\n"
-        "Como revisor independiente: ¿corresponde pedir una verificación "
-        "adicional en este punto, a la luz de lo que se ve?\n"
+        "Como revisor independiente, asigná UNA etiqueta (1, 0 o null) a "
+        "estas líneas según la regla.\n"
         f"{REGLA_DECISION}"
     )
 
@@ -165,9 +174,41 @@ def es_registro_vigente(registro: dict) -> bool:
     """True solo si el registro usa la firma de prompts vigente.
 
     El borrador viejo (sin ``firma_prompts`` o con otra firma) se rechaza:
-    no se hereda como verdad y debe reanotarse.
+    no se hereda como verdad y debe reanotarse. Solo compara plantillas;
+    para reanudar sin mezclar anotadores usá ``es_registro_vigente_de``.
     """
     return isinstance(registro, dict) and registro.get("firma_prompts") == firma_prompts()
+
+
+def identidad_compatible(registro: dict, meta_modelo: dict) -> bool:
+    """True si el registro trae la misma identidad de anotador.
+
+    Compara tag, digest, versión de Ollama y opciones exactas. Cambiar de
+    modelo (p. ej. qwen→gemma) o de opciones invalida la fila: no se
+    reetiqueta ni se refirma, se reanota.
+    """
+    if not isinstance(registro, dict) or not isinstance(meta_modelo, dict):
+        return False
+    meta = registro.get("modelo")
+    if not isinstance(meta, dict):
+        return False
+    for clave in ("tag", "digest", "ollama_version"):
+        if meta.get(clave) != meta_modelo.get(clave):
+            return False
+    return (meta.get("opciones") or {}) == (meta_modelo.get("opciones") or {})
+
+
+def es_registro_vigente_de(registro: dict, firma_vigente: str,
+                           meta_modelo: dict) -> bool:
+    """Vigencia total: firma de prompts vigente E identidad del anotador.
+
+    El reanudado del supervisor usa esta función con su ``meta_modelo``
+    del recorrido: filas de otro modelo u otras opciones cuentan como
+    faltantes y se reanotan, nunca se heredan como verdad ni se mezclan.
+    """
+    return (isinstance(registro, dict)
+            and registro.get("firma_prompts") == firma_vigente
+            and identidad_compatible(registro, meta_modelo))
 
 
 # ---------------------------------------------------------------------------
@@ -273,7 +314,7 @@ def revisar_prefijo(
         "firma_prompts": firma_prompts(),
         "prompts_version": PROMPT_VERSION,
         "revision": (
-            "IA-desarrollo contextual por prefijo (corrección v2). "
+            "IA-desarrollo contextual por prefijo (corrección v4). "
             "autorizacion_desarrollo_99 contextual: revisión IA de desarrollo "
             "por prefijo con modelo contextual vía API stateless, separada "
             "de la puerta formal humana de datos_tito.py. NO es "
