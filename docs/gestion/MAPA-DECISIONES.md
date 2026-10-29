@@ -57,6 +57,11 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Estado:** resuelto (2026-09-09). Replay como base experimental reproducible obligatoria; llamada VoIP propia como integración objetivo del prototipo; altavoz externo despriorizado (no separa canales); PSTN universal fuera de alcance.
 - **Cómo seguir (consolidación PR #58):** construir el entorno de pruebas VoIP con
   conversaciones simuladas por canal — paso 0 de VENTANA §10.
+- **Demo aprobada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  el panel captura en la notebook de la persona protegida su micrófono y el canal remoto desde
+  Google Meet o WhatsApp Desktop, por canal y en local. Esa es la demo de la defensa, con la
+  llamada de ejemplo en tiempo real como plan B. Faltan los ensayos con dos personas (#80) y en
+  sala (#86).
 
 Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md):
 
@@ -75,12 +80,16 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
 - **Condiciones operativas (acordadas el 2026-09-24, [PR #35](https://github.com/Corchets/bitacora_tesis/pull/35)):**
   participantes adultos con datos ficticios, consentimiento previo de ambos
   interlocutores, resguardo local a cargo de Mateo, sin permiso de publicar voces.
-  El PR #35 documenta la decisión operativa pero no habilita a grabar: falta la
-  validación del tutor anotada en el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
-  y completar domicilio/contacto reales fuera de Git.
+  La validación del tutor que pedía el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
+  llegó el 2026-10-28 (ver abajo). Antes de grabar falta completar fuera de Git el
+  domicilio y contacto reales de los consentimientos.
 - **Desbloquea:** piloto del corpus.
-- **Cómo seguir:** llevar composición, participantes y protocolo al tutor; sin su
-  validación no se graba (consolidación PR #58).
+- **Grabación aprobada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  se pueden grabar las voces del equipo con el esquema de consentimiento entre adultos y
+  resguardo local fuera de Git: las 30 frases de #94 y los 24 diálogos de
+  [`GRABACIONES-ASR.md`](../../experiments/slm-directo/casos/GRABACIONES-ASR.md). Los
+  consentimientos firmados y el audio siguen fuera de Git.
+- **Cómo seguir:** completar y firmar los consentimientos y grabar.
 - **Pendiente en D08:** tamaño y composición final, particiones y criterio de parada.
   El resguardo de los materiales se consulta en el método; no exige otro documento.
 
@@ -189,8 +198,8 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   avisar en el **80–85 %** de las estafas con **10–15 %** de falsas alarmas en legítimas.
   Condición aparte: el aviso no puede salir solo porque aparezca «código», «transferime plata»,
   «pasame el código» o «decime la contraseña» en una conversación que no es estafa. Ignacio y
-  Evaristo trabajan en esas falsas alarmas. El denominador (todas las estafas o solo las que llegan
-  a pedir) no se trató y sigue abierto.
+  Evaristo trabajan en esas falsas alarmas. **Denominador: todas las estafas**, incluidas las que
+  cortan antes del pedido (10 de las 75 de desarrollo).
 
 ### D09 — Elegir ASR y detector
 
@@ -230,6 +239,9 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   > **Estado: propuesta sin discutir.** La RAM y los límites de memoria por app de cada
   > modelo de teléfono deben citarse de fuente del fabricante antes de usarse en la tesis.
 
+- **RoBERTuito (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  el tutor no se mete en la arquitectura; retomarlo o no lo decide el equipo según lo que
+  convenga. Sigue el antecedente del spike #29 (no mejoró al encoder solo).
 - **Gama acordada con el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
   la gama más alta de teléfonos disponible a la fecha, sin escatimar recursos; la optimización
   para gamas menores queda para después. Confirma la propuesta anterior; sigue pendiente citar la
