@@ -361,9 +361,6 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.1rem;
-    /* La consola no desplaza la página: la ayuda se desplaza sola si no entra. */
-    max-height: calc(100dvh - 9rem);
-    overflow-y: auto;
   }
   .ayuda-cuerpo h3 {
     margin: 0 0 0.3rem;
@@ -559,12 +556,12 @@
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
-    min-height: 0;
+    min-height: 65vh;
   }
   .columna-demo {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto auto minmax(0, 1fr);
+    grid-template-rows: auto auto auto 1fr;
     grid-template-areas: "aviso" "tranquilo" "niveles" "charla";
     min-width: 0;
     min-height: 0;
@@ -572,21 +569,6 @@
   #tranquilo { grid-area: tranquilo; }
   #niveles { grid-area: niveles; }
   #charla { grid-area: charla; }
-  /* En la consola de llamada la página no se desplaza: la cabecera y las tarjetas quedan siempre a la vista. */
-  @media (min-width: 900px) {
-    body:not(.asr):not(.historial):not(.protegida) {
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
-    }
-    body:not(.asr):not(.historial):not(.protegida) #charla {
-      overflow-y: auto;
-      overscroll-behavior: contain;
-    }
-    body:not(.asr):not(.historial):not(.protegida) aside {
-      overflow-y: auto;
-    }
-  }
 
   /* Tarjetas de personas arriba */
   #niveles {
@@ -726,7 +708,7 @@
 
   /* Conversación abajo: dos lados (otra a la izquierda, protegida a la derecha) */
   #charla {
-    min-height: 16rem;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     gap: 0.55rem;
@@ -921,6 +903,23 @@
     padding: 0.1rem 0.45rem;
     border-radius: var(--radio-sm);
     margin-left: auto;
+  }
+  /* Lugar reservado para la evaluación: la frase no crece cuando llega la decisión. */
+  .eval-adjunta.pendiente {
+    animation: none;
+    background: transparent;
+    border-color: transparent;
+    border-top-color: var(--linea);
+    border-radius: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+  .eval-pendiente-txt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.45;
+    padding-block: 0.1rem;
+    color: var(--mu);
   }
   .badge-salteada {
     font-size: 0.75rem;
@@ -1685,8 +1684,7 @@ function prefiereMovimientoReducido() {
 /** @param {HTMLElement} el */
 function desplazarVisible(el) {
   const arriba = el.getBoundingClientRect().top;
-  const caja = $("charla").getBoundingClientRect();
-  if (arriba < Math.max(caja.top, 0) || arriba > Math.min(caja.bottom, window.innerHeight) + 120) return;
+  if (arriba < 0 || arriba > window.innerHeight + 120) return;
   el.scrollIntoView({ block: "nearest", behavior: prefiereMovimientoReducido() ? "instant" : "smooth" });
 }
 
@@ -2128,9 +2126,10 @@ function asr(m) {
     b = document.createElement("div");
     b.id = `seg-${m.segmento}`;
     b.innerHTML = plantillaLinea(m.rol);
-    $("charla").appendChild(b);
     burbujas.set(m.segmento, b);
   }
+  // El borrador se lee en la tarjeta de arriba; a la conversación entra solo la frase cerrada.
+  if (m.entrega === "final" && !b.isConnected) $("charla").appendChild(b);
   const eraDisparo = b.classList.contains("disparo-aviso");
   b.className = `linea ${m.rol} ${m.entrega}${eraDisparo ? " disparo-aviso" : ""}`;
   const texto = /** @type {HTMLElement} */ (b.querySelector(".texto"));
@@ -2166,6 +2165,11 @@ function asr(m) {
       nota.className = "badge-post-aviso";
       nota.textContent = "Posterior al aviso (detector detenido tras el primer aviso)";
       b.appendChild(nota);
+    } else if (!info.evaluado && !b.querySelector(".eval-adjunta")) {
+      const espera = document.createElement("div");
+      espera.className = "eval-adjunta pendiente";
+      espera.innerHTML = `<span class="eval-pendiente-txt">Evaluando…</span>`;
+      b.appendChild(espera);
     }
   }
   segmentosInfo.set(m.segmento, info);
@@ -2211,11 +2215,25 @@ function detector(m) {
 
   // Pegar evaluación a la frase que la disparó
   adjuntarEvaluacionAFrase(m, r, pct);
+  if (m.aviso) cerrarEsperas("Posterior al aviso (detector detenido tras el primer aviso)");
 
   // Registrar y redibujar curva de riesgo en el tiempo
   const tPunto = m.fin_eval_s || m.t_a || relojLlamada;
   puntosRiesgo.push({ t: tPunto, r, aviso: m.aviso });
   dibujarGraficoRiesgo();
+}
+
+/**
+ * Reemplaza las evaluaciones que ya no van a llegar por una nota.
+ * @param {string} texto
+ */
+function cerrarEsperas(texto) {
+  for (const espera of $("charla").querySelectorAll(".eval-adjunta.pendiente")) {
+    const nota = document.createElement("div");
+    nota.className = "badge-post-aviso";
+    nota.textContent = texto;
+    espera.replaceWith(nota);
+  }
 }
 
 /**
@@ -2254,6 +2272,7 @@ function adjuntarEvaluacionAFrase(m, r, pct) {
         const prevInf = segmentosInfo.get(prevId);
         if (prevInf && !prevInf.evaluado) {
           prevInf.evaluado = true;
+          prevInf.el.querySelector(".eval-adjunta.pendiente")?.remove();
           if (!prevInf.el.querySelector(".badge-salteada")) {
             const b = document.createElement("div");
             b.className = "badge-salteada";
@@ -2269,6 +2288,7 @@ function adjuntarEvaluacionAFrase(m, r, pct) {
     if (infEvaluada) {
       infEvaluada.evaluado = true;
       infEvaluada.el.querySelector(".badge-post-aviso")?.remove();
+      if (!infEvaluada.el.isConnected) $("charla").appendChild(infEvaluada.el);
       let evalEl = infEvaluada.el.querySelector(".eval-adjunta");
       if (!evalEl) {
         evalEl = document.createElement("div");
@@ -2435,6 +2455,7 @@ function conectar() {
     else if (m.tipo === "asr") asr(m);
     else if (m.tipo === "detector") detector(m);
     else if (m.tipo === "fin") {
+      cerrarEsperas("Sin evaluación: la llamada terminó antes");
       liberarMicrofono();
       limpiarNiveles();
       $("estado").textContent = pruebaASR.activa
