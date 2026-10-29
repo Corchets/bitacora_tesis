@@ -127,7 +127,7 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
 
 ## Layout
 
-- **Estructura vertical contenida en pantalla**: La consola se ajusta a la ventana del navegador (`100vh`) sin desplazamiento global; el scroll queda contenido exclusivamente en el contenedor de la conversación. Desde 900px de ancho; debajo, la columna técnica pasa abajo y la página se desplaza. «Probar el ASR» e «Historial» conservan el desplazamiento de página.
+- **Estructura vertical con desplazamiento de página**: La conversación crece hacia abajo y la página entera se desplaza. Por debajo de 900px la columna técnica pasa abajo. Al borrador se lo lee en la tarjeta de cada persona; a la conversación entra solo la frase cerrada, con su renglón de evaluación ya reservado.
 - **Barra superior compacta**: Encabezado con título, estado de conexión, conmutador de modos («Llamada en vivo» / «Probar el ASR»), botones de ciclo de vida (Iniciar, Terminar, Nueva) y panel plegable de configuración de fuentes de audio.
 - **Área principal de presentación (Grid de 2 tercios y 1 tercio lateral)**:
   - **Fila superior de tarjetas de voz**: Dos tarjetas simétricas («Otra persona» a la izquierda, «Persona protegida» a la derecha) con medidor RMS visible y caja de transcripción viva.
