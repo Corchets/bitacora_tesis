@@ -303,6 +303,9 @@ class DetectorSLMDosEtapas(DetectorSLM):
 
     La etapa 2 repite los mensajes de la 1, agrega su respuesta como `assistant` y el pedido
     corto: el comienzo es idéntico y Ollama puede reutilizar la transcripción ya procesada.
+    Como el aviso es único por llamada, la etapa 2 corre solo la primera vez que se supera el
+    umbral; después se registran el riesgo y la alerta sin motivo. `reiniciar()` (lo llama
+    `correr.procesar_caso` al empezar cada caso) vuelve a habilitarla.
     Si la etapa 2 falla, la alerta se mantiene (el riesgo ya la decidió) y el error queda
     en `error` con el prefijo `etapa2_`, sin motivo ni evidencia.
     """
@@ -313,6 +316,11 @@ class DetectorSLMDosEtapas(DetectorSLM):
 
     def __post_init__(self) -> None:
         self.pedido_motivo = self.pedido_motivo or cargar_prompt_motivo()
+        self.reiniciar()
+
+    def reiniciar(self) -> None:
+        """Nueva llamada: la próxima línea sobre el umbral vuelve a pedir evidencia y motivo."""
+        self._alerto = False
 
     def _opciones(self, num_predict: int) -> dict:
         return {**self.opciones(), "num_predict": num_predict}
@@ -336,6 +344,9 @@ class DetectorSLMDosEtapas(DetectorSLM):
             return Respuesta(valida=False, error=error, **comun)
         if riesgo <= self.umbral:
             return Respuesta(valida=True, riesgo=riesgo, alerta_sugerida=False, **comun)
+        if self._alerto:
+            return Respuesta(valida=True, riesgo=riesgo, alerta_sugerida=True, **comun)
+        self._alerto = True
 
         mensajes2 = mensajes + [{"role": "assistant", "content": crudo1}, {"role": "user", "content": self.pedido_motivo}]
         inicio2 = time.perf_counter()

@@ -107,6 +107,8 @@ class Llamada:
 def procesar_caso(detector, lineas: list[casos.Linea]):
     """Entrega las líneas de a una y devuelve (n, línea, respuesta, aviso) por actualización."""
     llamada = Llamada()
+    if hasattr(detector, "reiniciar"):
+        detector.reiniciar()
     for n, linea in enumerate(lineas, start=1):
         disponibles = llamada.agregar(linea)
         respuesta = detector.evaluar(disponibles)

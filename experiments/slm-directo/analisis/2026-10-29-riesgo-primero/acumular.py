@@ -124,6 +124,17 @@ def medir(avisos: dict[str, int | None], ids: list[str], refs: dict) -> dict:
             "meta": rec >= META_ESTAFAS and fa <= META_FA}
 
 
+def demora_del_aviso(fila: dict, ms2_estimado: float | None) -> float:
+    """Desde que llega la línea hasta que el aviso está listo para mostrarse.
+
+    Con `riesgo` es la etapa 1 más la etapa 2. La etapa 2 corre una sola vez por llamada, así
+    que si la política avisa en otra línea se usa la mediana de la etapa 2 de la config.
+    """
+    ms1 = _float(fila.get("ms_etapa1", "")) or _float(fila["ms"]) or 0.0
+    ms2 = _float(fila.get("ms_etapa2", ""))
+    return ms1 + (ms2 if ms2 is not None else (ms2_estimado or 0.0))
+
+
 def latencias(por_caso: dict[str, list[dict]], ids: list[str]) -> dict:
     filas = [f for c in ids for f in por_caso[c]]
 
@@ -191,15 +202,20 @@ def analizar(carpetas: list[Path]) -> str:
         resultados = []
         for nombre, f in politicas(un_paso):
             avisos = {c: f(*series[c]) for c in ids}
-            resultados.append((nombre, medir(avisos, ids, refs), medir(avisos, a, refs), medir(avisos, b, refs)))
+            demoras = [demora_del_aviso(por_caso[c][n - 1], lat["ms2_p50"])
+                       for c, n in avisos.items() if n is not None and refs[c]["clase"] not in casos.LEGITIMAS]
+            m = medir(avisos, ids, refs)
+            m["demora_p50"] = statistics.median(demoras) if demoras else None
+            resultados.append((nombre, m, medir(avisos, a, refs), medir(avisos, b, refs)))
         detalle += [
             "", f"### {_md(cfg)}", "",
-            "| Política | Estafas con aviso | Falsas alarmas | Antes / en el pedido | Meta |",
-            "|---|---|---|---|---|",
+            "| Política | Estafas con aviso | Falsas alarmas | Antes / en el pedido | Demora del aviso p50 (ms) | Meta |",
+            "|---|---|---|---|---|---|",
         ]
         for nombre, m, _, _ in resultados:
             temprano = m["lugares"]["antes_del_pedido"] + m["lugares"]["en_el_pedido"]
-            detalle.append(f"| {nombre} | {_pct(m['tp'], m['nv'])} | {_pct(m['fp'], m['nl'])} | {temprano} | {'✔' if m['meta'] else ''} |")
+            detalle.append(f"| {nombre} | {_pct(m['tp'], m['nv'])} | {_pct(m['fp'], m['nl'])} | {temprano} | "
+                           f"{_ms(m['demora_p50'])} | {'✔' if m['meta'] else ''} |")
         # Elegida en A: la que cumple la meta con más estafas; si ninguna, la de más estafas con FA ≤ meta.
         candidatas = [x for x in resultados if x[2]["fa"] <= META_FA] or resultados
         nombre, _, sel, ver = max(candidatas, key=lambda x: (x[2]["rec"], -x[2]["fa"]))
@@ -212,9 +228,10 @@ def analizar(carpetas: list[Path]) -> str:
     salida += ["", "## Políticas por config (todos los casos completos)"] + detalle
     salida += [
         "",
-        "`ms/línea` es la suma de las dos etapas donde corrió la 2. Con `riesgo`, la etapa 2 solo",
-        "corre en las líneas con riesgo > umbral de la corrida; en un sistema real alcanza con correrla",
-        "una vez, en la línea del aviso.",
+        "`ms/línea` es la suma de las dos etapas donde corrió la 2. Con `riesgo`, la etapa 2 corre una",
+        "sola vez por llamada, en la primera línea con riesgo > umbral de la corrida (el aviso).",
+        "`Demora del aviso` va desde que llega la línea del aviso hasta que el aviso está listo, en las",
+        "estafas avisadas. Si una política avisa en otra línea, la etapa 2 se estima con su mediana.",
         "",
     ]
     return "\n".join(salida)

@@ -39,14 +39,15 @@ Desde `experiments/slm-directo`:
 ```
 ollama pull gemma3n:e2b
 python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32 --sin-reglas --casos SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01 --detalle
-python correr.py --modelos gemma3n:e2b --prompts v2,riesgo --solo-cpu --num-batch 32 --sin-reglas --etiqueta win-gemma3n-e2b-riesgo-cpu
-python analisis/2026-10-29-riesgo-primero/acumular.py corridas/<carpeta-que-imprime>
+python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32 --sin-reglas --etiqueta win-gemma3n-e2b-riesgo-cpu
+python correr.py --modelos gemma3n:e2b --prompts v2 --solo-cpu --num-batch 32 --sin-reglas --etiqueta win-gemma3n-e2b-v2-cpu
+python analisis/2026-10-29-riesgo-primero/acumular.py corridas/<carpeta-riesgo> corridas/<carpeta-v2>
 ```
 
 1. **Prueba rápida** (2 casos, `--detalle`): la etapa 1 tiene que tardar poco, y la etapa 2
    tiene que aparecer solo en la línea donde piden el código.
-2. **Corrida completa:** 150 casos de desarrollo, línea base `v2` y `riesgo`, en la misma
-   máquina. En CPU puede tardar varias horas; si se corta con Ctrl+C, lo procesado queda
+2. **Corridas completas:** 150 casos de desarrollo, primero `riesgo` y después la línea base
+   `v2`, en la misma máquina. En CPU puede tardar varias horas; si se corta con Ctrl+C, lo procesado queda
    guardado y `acumular.py` usa los casos completos.
 3. **`acumular.py`** escribe `acumular.md` con dos cosas:
    - **latencia por config:** ms por línea p50/p95, etapa 1, etapa 2, tokens y ms por llamada;
@@ -68,5 +69,5 @@ Pendiente: corrida de `gemma3n:e2b` en la notebook de Evaristo.
 - `riesgo` no está calibrado: es el número que escribe el modelo, no una probabilidad.
 - Todo es desarrollo: elegir la política mirando estos 150 casos es optimista. La
   evaluación final va sobre el test reservado, después de D08.
-- Las políticas acumuladas se calculan sobre el riesgo de la etapa 1. Con τ < 0,6 la etapa 2
-  no corrió en la corrida, así que su tiempo no está medido para esas líneas.
+- La etapa 2 corre una sola vez por llamada, en la primera línea con riesgo > 0,6. Si una política
+  avisa en otra línea (o con τ < 0,6), la demora del aviso usa la mediana de la etapa 2.

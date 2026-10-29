@@ -132,6 +132,19 @@ class TestDetectorDosEtapas(ConServidor):
         self.assertEqual(r.tokens_salida_etapa2, 30)
         self.assertAlmostEqual(r.ms, r.ms_etapa1 + r.ms_etapa2)
 
+    def test_la_etapa2_corre_una_vez_por_llamada(self):
+        d = self.detector()
+        r1 = d.evaluar(DIALOGO)
+        r2 = d.evaluar(DIALOGO + [Linea("B", "Es cero, cero, cero.")])
+        self.assertEqual(len(OllamaDosEtapas.pedidos), 3, "etapa 1 + etapa 2, y después solo etapa 1")
+        self.assertIsNotNone(r1.ms_etapa2)
+        self.assertTrue(r2.alerta_sugerida)
+        self.assertIsNone(r2.ms_etapa2)
+        self.assertEqual(r2.motivo, "")
+        d.reiniciar()
+        d.evaluar(DIALOGO)
+        self.assertEqual(len(OllamaDosEtapas.pedidos), 5, "una llamada nueva vuelve a pedir el motivo")
+
     def test_el_umbral_es_estricto(self):
         r = self.detector(umbral=0.6).evaluar((Linea("A", "EMPATE"),))
         self.assertFalse(r.alerta_sugerida, "0.6 no supera 0.6")
@@ -179,12 +192,13 @@ class TestCorridaRiesgo(ConServidor):
         self.assertEqual(manifiesto["parametros_slm"]["umbral_etapa2"], 0.6)
         self.assertIn("motivo", manifiesto["prompts"]["riesgo"]["etapa2"]["esquema"]["properties"])
         con_etapa2 = [f for f in filas if f["ms_etapa2"]]
-        self.assertTrue(con_etapa2, "la estafa pide el código: alguna línea pasa a la etapa 2")
+        self.assertEqual([(f["case_id"], f["linea"]) for f in con_etapa2], [("SC-WA-CODE-01-e01", "4")],
+                         "la etapa 2 corre solo en la línea del aviso")
         self.assertTrue(all(f["alerta_sugerida"] == "true" for f in con_etapa2))
         self.assertTrue(all(f["ms_etapa2"] == "" for f in filas if f["case_id"].startswith("LG-")))
         self.assertIn("slm\\|modelo-falso:1b\\|riesgo\\|ab", texto)
         # La estafa pide el código (riesgo 0.9) y la legítima queda en 0.1: umbral > 0.6 da 1/1 y 0/1.
-        self.assertIn("| umbral > 0.6 | 1/1 (100 %) | 0/1 (0 %) | 1 | ✔ |", analisis)
+        self.assertRegex(analisis, r"\| umbral > 0\.6 \| 1/1 \(100 %\) \| 0/1 \(0 %\) \| 1 \| \d+ \| ✔ \|")
         self.assertNotIn("alerta del modelo", analisis, "con riesgo no hay alerta_sugerida del modelo")
 
 
