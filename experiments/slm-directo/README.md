@@ -330,6 +330,37 @@ completa, separado del costo operativo hasta el aviso. Las corridas
 históricas (conversación completa) no se reescriben ni se presentan como
 nuevas mediciones operativas.
 
+### Diagnóstico del Tito histórico (#98)
+
+Recorrido real del artefacto histórico sin modificar sobre la partición de
+diagnóstico: 10 conversaciones no usadas en el ajuste (2 vishing / 8 legítimas
+comunes), 246 líneas/prefijos puntuados con entrada aislada y umbral 0,5.
+Evidencia en [DIAGNOSTICO-TITO-2026-10-29.md](DIAGNOSTICO-TITO-2026-10-29.md),
+generada desde [DIAGNOSTICO-TITO-2026-10-29.json](DIAGNOSTICO-TITO-2026-10-29.json)
+con `diagnosticar_tito.py` (14 pruebas en `tests/test_diagnosticar_tito.py`).
+
+- Artefacto intacto: `tito_logreg.json`, sha256
+  `fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd`
+  (idéntico antes/después); encoder RoBERTuito congelado, clasificador
+  regresión logística C=1,0, semilla 42.
+- Derivación: 2/2 vishing derivan en o antes de `T_R` (L5 con `T_R`=19, L16 con
+  `T_R`=16); 4/8 legítimas derivadas (tasa 0,5), sin marcas `T_R` que las
+  respalden. Derivación ≠ alerta: Tito solo deriva al SLM.
+- Comparador recargable para #101: `tito_real.cargar_artefacto` + `puntuar`
+  reproduce 246/246 puntajes (fallos 0, distintos 0, tolerancia absoluta 5e-05).
+- Exposición histórica: el ajuste vio 5520 frases aceptadas del banco
+  (inventario 6000, 480 excluidas); ninguna conversación entera estuvo en el
+  ajuste. Solapamiento léxico banco↔diagnóstico: Jaccard máximo 0,318 (cota
+  inferior, no prueba de independencia; la auditoría semántica completa es
+  ownership de #99).
+- Marcas provisionales sin revisión humana: describe el desarrollo, no
+  generaliza a producción; no cierra D07/D08/D09 ni #51.
+
+```bash
+cd experiments/slm-directo
+../../.venv/bin/python -m unittest tests.test_diagnosticar_tito -v
+```
+
 ## 6. Escalera de modelos y gamas de celular
 
 La **escalera** es probar el mismo detector, con el mismo prompt y los mismos casos,
