@@ -1,10 +1,29 @@
 # Qué es cada prueba guardada del panel. Una fila por prueba; completala después de grabar.
 #   id         carpeta de la prueba (la ves en el Historial; ej. 2026-10-27_101500-123456)
-#   toma       1 (ajustar hotwords y diccionario) o 2 (medir y decidir)
+#   toma       1 (ajustar) o 2 (medir y decidir)
 #   voz        luciano | otra
-#   condicion  microfono | meet
+#   condicion  microfono | meet | voz-baja | ruido-tv | pausas (las tres últimas, extras por micrófono)
+#   bloque     opcional: bloque del guion (1 a 6) que se leyó. Si «Lo que dije en realidad» está vacío, la referencia es ese bloque
 #   canal      opcional: protegida | otra. Por defecto, el canal con audio según el manifiesto
 #   nota       opcional: dispositivo, ruido, lo que quieras recordar (sin comas)
-# Las líneas que empiezan con # se ignoran. Solo se miden las pruebas guardadas con referencia.
-id,toma,voz,condicion,canal,nota
-# 2026-10-27_101500-123456,1,luciano,microfono,,
+# Las líneas que empiezan con # se ignoran. Solo se miden las pruebas guardadas con referencia (o con bloque).
+# Las del 2026-10-29 están en la copia bitacora_tesis-voip-asr: --pruebas ../bitacora_tesis-voip-asr/experiments/voip/llamadas
+id,toma,voz,condicion,bloque,canal,nota
+2026-10-29_194923-902062,1,luciano,microfono,1,,G01 tele apagada
+2026-10-29_195020-082746,1,luciano,microfono,2,,G02 tele apagada
+2026-10-29_195202-772508,1,luciano,microfono,3,,G03 tele apagada
+2026-10-29_195256-042759,1,luciano,microfono,4,,G04 tele apagada
+2026-10-29_195409-306210,1,luciano,microfono,5,,G05 tele apagada
+2026-10-29_195512-184220,1,luciano,microfono,6,,G06 tele apagada
+2026-10-29_200653-308143,1,luciano,voz-baja,1,,G07
+2026-10-29_200832-553834,1,luciano,ruido-tv,2,,G08 serie de fondo
+2026-10-29_200926-056710,1,luciano,pausas,3,,G09 pausa de ~1 s dentro de cada frase
+2026-10-29_201653-688897,2,luciano,microfono,1,,G11 tele apagada
+2026-10-29_201733-924805,2,luciano,microfono,2,,G12 tele apagada
+2026-10-29_201814-367007,2,luciano,microfono,3,,G13 tele apagada
+2026-10-29_202351-657853,2,luciano,microfono,4,,G14 tele apagada (grabada al final)
+2026-10-29_201921-145948,2,luciano,microfono,5,,G15 tele apagada
+2026-10-29_201959-768452,2,luciano,microfono,6,,G16 tele apagada
+# Sin texto (no se miden con WER; se miran aparte para inserciones):
+# 2026-10-29_201018-775836,1,luciano,microfono,,,G10 30 s sin hablar con tele apagada
+# 2026-10-29_193603-180243,1,luciano,microfono,,,serie de fondo sin hablar

@@ -184,7 +184,7 @@ acá solo qué es cada archivo.
 | Archivo | Qué hace |
 |---|---|
 | `medir_voz_real.py` | Re-corre offline las pruebas guardadas del panel con cada variante y escribe `resumen.md`, `manifiesto.json` y `frases.jsonl`. |
-| `variantes_voz_real.py` | Catálogo de variantes y pasos del plan (`greedy`, corte, `rule2`, umbral RMS, `norm`, `beam`, `beam+hotwords`, `+diccionario`, Whisper) y cómo se corre cada una. |
+| `variantes_voz_real.py` | Catálogo de variantes y pasos del plan (`greedy`, corte, `rule2`, umbral RMS, `norm`, `beam`, `beam+hotwords`, `+diccionario`, Whisper), Parakeet con cada corte y umbral, y cómo se corre cada una. |
 | `metricas_voz_real.py` | Alineado por frase, etiquetas de `reglas.py`, recall, WER/CER, agregados y la regla de paso. |
 | `hotwords.py` | `bpe.vocab` sintético para los hotwords de sherpa y revisión de cómo se parte cada uno (`python hotwords.py`). |
 | `diccionario.py` | Diccionario de corrección de la frase final (`MotorConDiccionario`); nunca toca parciales. |

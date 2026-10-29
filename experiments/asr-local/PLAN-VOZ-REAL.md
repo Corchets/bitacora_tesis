@@ -118,6 +118,8 @@ dos corridas por variante:
    condiciones × 6 bloques) desde «Probar el ASR», pegando cada bloque en «Lo que dije en realidad» y tocando
    «Guardar prueba». El audio queda en `experiments/voip/llamadas/`, fuera de Git.
 2. **Completar** [`voz-real/pruebas.csv`](voz-real/pruebas.csv): id de la prueba, toma (1 o 2), voz y condición.
+   Si se guardó sin escribir «Lo que dije en realidad», la columna `bloque` (1 a 6) toma como referencia el texto
+   de ese bloque del guion; lo escrito en el panel manda sobre el bloque.
 3. **Con la toma 1**, antes de medir: `python hotwords.py` muestra cómo se parte cada hotword (editá
    [`voz-real/hotwords.txt`](voz-real/hotwords.txt)), y una corrida con `--sin-whisper` lista en su resumen las
    sustituciones frecuentes para armar [`voz-real/diccionario.csv`](voz-real/diccionario.csv). Revisá la jerga de
@@ -132,7 +134,8 @@ Corre la línea base y cada paso del §4 sobre el audio guardado, aplica la regl
 `corridas/<fecha>_voz-real_<n>pruebas/` con `resumen.md`, `manifiesto.json` y `frases.jsonl` (sin audio).
 Opciones útiles: `--sin-whisper` (Whisper es lento: `small` y `large-v3-turbo` bajan ~2 GB la primera vez y
 `large-v3-turbo` usa ~1,8 GB de RAM), `--variantes beam,beam+hotwords` (la línea base se corre siempre),
-`--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
+`--solo-parakeet` (solo Parakeet con cada corte y umbral de `VARIANTES_PARAKEET`, cada uno contra el del panel,
+sin la cadena de Zipformer), `--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
 (por defecto 40 ms, como el panel). Detalle de los archivos en el [README](README.md#9-voz-real-94).
 
 
@@ -185,8 +188,8 @@ más que Zipformer, lo que pesa en la pregunta de gama de D09. Escribe números 
 siguen viendo los códigos. Mientras transcribe bloquea el bucle del servidor hasta ~0,45 s.
 
 **Siguiente paso (actualizado el 2026-10-29).** Grabar el set de la sección 3 con «Probar el ASR» y medir Parakeet con
-`medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Agregar Parakeet como variante en
-[`variantes_voz_real.py`](variantes_voz_real.py) queda pendiente. Las variantes de Zipformer se
+`medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Parakeet ya está como variante en
+[`variantes_voz_real.py`](variantes_voz_real.py) (`--solo-parakeet`, 2026-10-29). Las variantes de Zipformer se
 conservan como reproducción histórica; no son trabajo activo de mejora.
 
 ### 9.1 El borrador sale en inglés y después se corrige (2026-10-29)
