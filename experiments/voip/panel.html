@@ -1,0 +1,2487 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Llamada en vivo · detector de vishing</title>
+<style>
+  :root {
+    --fondo: #f8fafc;
+    --superficie: #ffffff;
+    --superficie-alt: #e2e8f0;
+    --linea: #cbd5e1;
+    --tinta: #0f172a;
+    --tinta-secundaria: #334155;
+    --mu: #64748b;
+    --primary: #1d4ed8;
+    --primary-dark: #1e40af;
+    --primary-bg: #eff6ff;
+    --vos-fondo: #eff6ff;
+    --vos-borde: #93c5fd;
+    --otra-fondo: #f1f5f9;
+    --otra-borde: #cbd5e1;
+    --alerta: #b91c1c;
+    --alerta-tinta: #7f1d1d;
+    --alerta-fondo: #fef2f2;
+    --alerta-claro: #fee2e2;
+    --alerta-borde: #f87171;
+    --ok: #15803d;
+    --ok-fondo: #f0fdf4;
+    --aviso-badge-fondo: #fef9c3;
+    --aviso-badge-tinta: #854d0e;
+    --radio-sm: 4px;
+    --radio-md: 8px;
+    --radio-lg: 12px;
+    accent-color: var(--primary);
+  }
+  * { box-sizing: border-box; }
+  ::selection {
+    background: var(--vos-borde);
+    color: var(--tinta);
+  }
+  body {
+    margin: 0;
+    font: 15px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--fondo);
+    color: var(--tinta);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Cabecera: título, estado de la sesión y modo */
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--superficie);
+    border-bottom: 1px solid var(--linea);
+    flex-shrink: 0;
+  }
+  .cabecera-izq {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+  }
+  .cabecera-der {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  header h1 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--tinta);
+    white-space: nowrap;
+  }
+  .estado-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    padding: 0.2rem 0.7rem 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: var(--otra-fondo);
+    border: 1px solid var(--linea);
+  }
+  .estado-pill .punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mu);
+    flex-shrink: 0;
+  }
+  .estado-pill[data-estado="lista"] .punto { background: var(--primary); }
+  .estado-pill[data-estado="en-llamada"] {
+    background: var(--ok-fondo);
+    border-color: #86efac;
+  }
+  .estado-pill[data-estado="en-llamada"] .punto {
+    background: var(--ok);
+    box-shadow: 0 0 0 3px rgb(21 128 61 / 0.18);
+  }
+  .estado-pill[data-estado="sin-conexion"] {
+    background: var(--alerta-fondo);
+    border-color: var(--alerta-borde);
+  }
+  .estado-pill[data-estado="sin-conexion"] .punto { background: var(--alerta); }
+  #estado {
+    color: var(--tinta-secundaria);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 52ch;
+  }
+
+  /* Conmutador de modo */
+  .modo-conmutador {
+    display: inline-flex;
+    background: var(--otra-fondo);
+    padding: 3px;
+    border-radius: var(--radio-md);
+    border: 1px solid var(--linea);
+    gap: 2px;
+  }
+  .modo-tab {
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.32rem 0.85rem;
+    border: 0;
+    background: transparent;
+    color: var(--tinta-secundaria);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .modo-tab:hover:not(:disabled):not(.activo) {
+    background: var(--superficie-alt);
+  }
+  .modo-tab.activo {
+    background: var(--superficie);
+    color: var(--primary);
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.12), 0 0 0 1px rgb(29 78 216 / 0.25);
+  }
+  .modo-tab:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+
+  /* Barra de la llamada: fuentes y ajuste a la izquierda, acciones a la derecha */
+  #controles {
+    position: relative;
+    background: var(--fondo);
+    border-bottom: 1px solid var(--linea);
+    padding: 0.6rem 1.25rem 0.65rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.5rem 1.5rem;
+    flex-shrink: 0;
+  }
+  .campos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 0.5rem 1rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .campo, .ajuste-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .campo > label, .ajuste-grupo > label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tinta-secundaria);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .campo .rol-punto, .ayuda-cuerpo .rol-punto {
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    background: var(--otra-borde);
+    border: 1px solid #94a3b8;
+  }
+  .campo .rol-punto.protegida, .ayuda-cuerpo .rol-punto.protegida {
+    background: var(--vos-borde);
+    border-color: var(--primary);
+  }
+  .campo .fila {
+    display: flex;
+    gap: 0.35rem;
+  }
+  .campo[hidden] { display: none; }
+  .acciones {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-left: auto;
+  }
+  button, select {
+    font: inherit;
+    font-size: 0.875rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    border: 1px solid var(--linea);
+    background: var(--superficie);
+    color: var(--tinta);
+  }
+  select {
+    min-width: 11rem;
+    max-width: 19rem;
+  }
+  button {
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) {
+    background: var(--otra-fondo);
+  }
+  button:focus-visible, select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+  button:disabled, select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  #iniciar {
+    background: var(--primary);
+    color: var(--superficie);
+    border-color: var(--primary);
+    padding-inline: 1.1rem;
+    box-shadow: 0 1px 2px rgb(29 78 216 / 0.3);
+  }
+  #iniciar:hover:not(:disabled) {
+    background: var(--primary-dark);
+  }
+  #iniciar:disabled {
+    opacity: 1;
+    background: var(--superficie-alt);
+    border-color: var(--linea);
+    color: var(--mu);
+    box-shadow: none;
+  }
+  #terminar {
+    background: var(--superficie);
+    color: var(--alerta);
+    border-color: var(--alerta-borde);
+  }
+  #terminar:hover:not(:disabled) {
+    background: var(--alerta-fondo);
+  }
+  #error {
+    flex-basis: 100%;
+    color: var(--alerta);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+  #error:empty { display: none; }
+
+  /* Cancelar eco: casilla bajo la entrada de micrófono */
+  .opcion-eco {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: 0.4rem;
+    white-space: nowrap;
+    font-size: 0.875rem;
+    color: var(--tinta-secundaria);
+  }
+  .opcion-eco:has(input:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Corte de silencio: número con unidad */
+  .corte-silencio .corte-valor {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.875rem;
+    color: var(--tinta-secundaria);
+  }
+  .corte-silencio input[type="number"] {
+    font: inherit;
+    font-size: 0.875rem;
+    width: 4.75rem;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--linea);
+    background: var(--superficie);
+    color: var(--tinta);
+    font-variant-numeric: tabular-nums;
+  }
+  .corte-silencio input[type="number"]:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+  }
+  .corte-silencio input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .ayuda-oculta {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* Ayuda y guía: enlaces chicos que no compiten con las acciones */
+  .enlaces {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-bottom: 0.15rem;
+  }
+  .enlace-guia, .ayuda > summary {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+    cursor: pointer;
+    text-underline-offset: 3px;
+  }
+  .enlace-guia:hover, .ayuda > summary:hover { text-decoration: underline; }
+  .ayuda > summary {
+    list-style: none;
+  }
+  .ayuda > summary::-webkit-details-marker { display: none; }
+  .enlace-guia:focus-visible, .ayuda > summary:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .ayuda-cuerpo {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 6px);
+    left: 1.25rem;
+    width: min(46rem, calc(100vw - 2.5rem));
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-lg);
+    padding: 1rem 1.15rem;
+    box-shadow: 0 12px 32px -12px rgb(15 23 42 / 0.35), 0 2px 6px rgb(15 23 42 / 0.08);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+  .ayuda-cuerpo h3 {
+    margin: 0 0 0.3rem;
+    font-size: 0.9375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .ayuda-cuerpo p {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--tinta-secundaria);
+  }
+  .ayuda-cuerpo p + p { margin-top: 0.35rem; }
+
+  /* Movimiento: solo opacity y transform, curva de salida, sin rebote. */
+  :root {
+    --salida: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Tinte de fondo de la alerta: capa propia que sube de opacidad, sin repintar el layout */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--alerta-claro);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 300ms var(--salida);
+  }
+  body.alerta-emitida::before {
+    opacity: 0.7;
+  }
+
+  /* Aviso en franja no modal, visible desde el aula pero sin tapar ni saturar.
+     Ocupa su lugar desde el principio (invisible) para que al aparecer no mueva nada. */
+  #aviso {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--alerta-fondo);
+    border: 1px solid var(--alerta-borde);
+    border-radius: var(--radio-md);
+    padding: 0.35rem 0.7rem;
+    margin-bottom: 0.45rem;
+    color: var(--tinta);
+    flex-shrink: 0;
+    min-height: 3.65rem; /* dos renglones: motivo y cita arriba, segundo del aviso abajo */
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.98);
+    transform-origin: top center;
+    transition: opacity 220ms var(--salida), transform 220ms var(--salida), visibility 0s linear 220ms;
+  }
+  #aviso.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+  /* Mismo casillero que el aviso: en reposo indica dónde aparecerá, sin anticipar que haya estafa. */
+  .columna-demo > #aviso,
+  .franja-reposo {
+    grid-area: aviso;
+  }
+  .franja-reposo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px dashed var(--linea);
+    border-radius: var(--radio-md);
+    color: var(--mu);
+    font-size: 0.875rem;
+    pointer-events: none;
+    transition: opacity 220ms var(--salida);
+  }
+  .franja-reposo b {
+    color: var(--tinta-secundaria);
+    font-weight: 700;
+  }
+  .franja-reposo svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  #aviso.visible ~ .franja-reposo {
+    opacity: 0;
+  }
+  body.protegida .franja-reposo {
+    display: none;
+  }
+  .aviso-etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--alerta);
+    color: var(--superficie);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radio-sm);
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .aviso-etiqueta b {
+    font-weight: 700;
+    color: var(--superficie);
+  }
+  .aviso-icono {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: currentColor;
+  }
+  .aviso-cuerpo {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 0.65rem;
+  }
+  .aviso-cuerpo p {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--tinta);
+  }
+  #aviso-cita {
+    font-size: 0.875rem;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--alerta-tinta);
+  }
+  #aviso-tiempo {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--alerta-tinta);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .aviso-acciones {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+  .aviso-btn {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radio-sm);
+    border: 1px solid var(--alerta-borde);
+    background: var(--superficie);
+    color: var(--alerta-tinta);
+    white-space: nowrap;
+  }
+  .aviso-btn:hover:not(:disabled) {
+    background: var(--alerta-claro);
+  }
+  .btn-sonido {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+  .btn-sonido.silenciado {
+    color: var(--tinta-secundaria);
+    background: var(--otra-fondo);
+  }
+  .icono-sonido {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+  .icono-sonido[hidden] {
+    display: none;
+  }
+
+  /* Layout principal */
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 65vh;
+  }
+  .columna-demo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto 1fr;
+    grid-template-areas: "aviso" "tranquilo" "niveles" "charla";
+    min-width: 0;
+    min-height: 0;
+  }
+  #tranquilo { grid-area: tranquilo; }
+  #niveles { grid-area: niveles; }
+  #charla { grid-area: charla; }
+
+  /* Tarjetas de personas arriba */
+  #niveles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    margin-bottom: 0.65rem;
+    flex-shrink: 0;
+  }
+  .tarjeta-persona {
+    background: var(--superficie);
+    border: 2px solid var(--otra-borde);
+    border-radius: var(--radio-lg);
+    padding: 0.65rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .tarjeta-persona.protegida {
+    border-color: var(--vos-borde);
+    background: var(--vos-fondo);
+  }
+  .tarjeta-persona.hablando-activo {
+    border-color: var(--ok);
+  }
+  .tarjeta-persona.otra.alerta-activa {
+    border-color: var(--alerta-borde);
+    background: var(--superficie);
+  }
+  .tarjeta-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tarjeta-cabecera h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--tinta);
+  }
+  .tarjeta-persona.otra.alerta-activa .tarjeta-cabecera h2 {
+    color: var(--alerta);
+  }
+  .tarjeta-badges {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .estado-habla-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radio-sm);
+    background: var(--superficie-alt);
+    color: var(--tinta-secundaria);
+    border: 1px solid var(--linea);
+    white-space: nowrap;
+  }
+  .estado-habla-pill.activo {
+    background: var(--ok);
+    color: var(--superficie);
+    border-color: var(--ok);
+  }
+  .tarjeta-rol-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radio-sm);
+    background: var(--superficie-alt);
+    color: var(--tinta-secundaria);
+    white-space: nowrap;
+  }
+  .volumen-fila {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .volumen-fila span.rotulo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--tinta-secundaria);
+  }
+  .volumen-fila meter {
+    width: 100%;
+    height: 1rem;
+  }
+  .volumen-fila .rms {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+    font-variant-numeric: tabular-nums;
+    min-width: 5.2rem;
+    text-align: right;
+  }
+  .habla-ahora-caja {
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-md);
+    padding: 0.4rem 0.65rem;
+    min-height: 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tarjeta-persona.hablando-activo .habla-ahora-caja {
+    border-color: var(--ok);
+    background: var(--ok-fondo);
+  }
+  .habla-indicador {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--linea);
+    flex-shrink: 0;
+  }
+  .habla-indicador.hablando {
+    background: var(--ok);
+  }
+  .habla-texto {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--tinta);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .habla-texto.en-silencio {
+    color: var(--mu);
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Conversación abajo: dos lados (otra a la izquierda, protegida a la derecha) */
+  #charla {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-lg);
+    background: var(--superficie);
+    padding: 0.75rem 0.9rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--linea) transparent;
+  }
+  #charla:empty::before {
+    content: "Iniciá la llamada para ver la transcripción en vivo de cada persona y lo que decide el detector en cada frase.";
+    color: var(--mu);
+    font-size: 0.9375rem;
+    margin: auto;
+    text-align: center;
+    max-width: 48ch;
+  }
+  @keyframes entrada-linea {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes entrada-evaluacion {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .linea {
+    /* La animación vive en la clase base: pasar de provisorio a final cambia otras clases y no la reinicia. */
+    animation: entrada-linea 200ms var(--salida);
+    width: 62%;
+    max-width: 68%;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radio-md);
+    border: 1px solid var(--otra-borde);
+    background: var(--otra-fondo);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-self: flex-start;
+  }
+  .linea.protegida {
+    align-self: flex-end;
+    background: var(--vos-fondo);
+    border-color: var(--vos-borde);
+  }
+  /* Provisorio: borde punteado y tinta secundaria. Sin cursiva ni otro peso, así el renglón no salta al cerrarse. */
+  .linea.parcial {
+    border-style: dashed;
+  }
+  .linea.parcial .texto {
+    color: var(--tinta-secundaria);
+  }
+
+  .linea.disparo-aviso {
+    border: 1.5px solid var(--alerta-borde);
+    background: var(--alerta-fondo);
+  }
+  mark.cita-culpable {
+    background: var(--alerta-claro);
+    color: var(--tinta);
+    font-weight: 700;
+    padding: 0.05rem 0.25rem;
+    border-radius: var(--radio-sm);
+  }
+  .linea .quien {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--tinta-secundaria);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+  .linea .texto {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--tinta);
+    word-break: break-word;
+  }
+  .linea .t {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--mu);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Evaluación del detector pegada a la frase */
+  .eval-adjunta {
+    animation: entrada-evaluacion 200ms var(--salida);
+    margin-top: 0.15rem;
+    padding: 0.3rem 0.55rem;
+    border-radius: var(--radio-sm);
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+  }
+  /* Sin riesgo: renglón tenue bajo la frase, para que las evaluaciones con riesgo sobresalgan. */
+  .eval-adjunta.riesgo-bajo {
+    background: transparent;
+    border-color: transparent;
+    border-top-color: var(--linea);
+    border-radius: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+  .eval-adjunta.riesgo-bajo .eval-pill.eval-riesgo {
+    background: transparent;
+    color: var(--tinta-secundaria);
+    box-shadow: inset 0 0 0 1px var(--linea);
+  }
+  .eval-adjunta.riesgo-bajo .eval-pill.eval-alerta.no {
+    background: var(--ok-fondo);
+    color: var(--ok);
+    box-shadow: inset 0 0 0 1px #86efac;
+  }
+  .eval-adjunta.riesgo-bajo .eval-pill.eval-tiempo {
+    background: transparent;
+    color: var(--mu);
+    padding-inline: 0.15rem;
+  }
+  .eval-adjunta.riesgo-alto {
+    border-color: var(--alerta-borde);
+    background: var(--aviso-badge-fondo);
+  }
+  .eval-adjunta.aviso-alerta {
+    border-color: var(--alerta);
+    background: var(--superficie);
+  }
+  .eval-pills {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .eval-pill {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radio-sm);
+    font-variant-numeric: tabular-nums;
+  }
+  .eval-pill.eval-riesgo {
+    background: var(--tinta);
+    color: var(--superficie);
+  }
+  .eval-adjunta.aviso-alerta .eval-pill.eval-riesgo {
+    background: var(--alerta);
+  }
+  .eval-pill.eval-alerta.si {
+    background: var(--alerta);
+    color: var(--superficie);
+  }
+  .eval-pill.eval-alerta.no {
+    background: var(--ok);
+    color: var(--superficie);
+  }
+  .eval-pill.eval-tiempo {
+    background: var(--superficie-alt);
+    color: var(--tinta);
+  }
+  .eval-pill.eval-saltadas {
+    background: var(--aviso-badge-fondo);
+    color: var(--aviso-badge-tinta);
+    border: 1px solid var(--aviso-badge-tinta);
+  }
+  .eval-motivo-txt {
+    font-size: 0.8125rem;
+    color: var(--tinta);
+    font-weight: 600;
+  }
+  .eval-aviso-banner {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--superficie);
+    background: var(--alerta);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radio-sm);
+    margin-left: auto;
+  }
+  /* Lugar reservado para la evaluación: la frase no crece cuando llega la decisión. */
+  .eval-adjunta.pendiente {
+    animation: none;
+    background: transparent;
+    border-color: transparent;
+    border-top-color: var(--linea);
+    border-radius: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+  }
+  .eval-pendiente-txt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.45;
+    padding-block: 0.1rem;
+    color: var(--mu);
+  }
+  .badge-salteada {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--aviso-badge-tinta);
+    background: var(--aviso-badge-fondo);
+    border: 1px dashed var(--aviso-badge-tinta);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radio-sm);
+    margin-top: 0.15rem;
+    align-self: flex-start;
+  }
+  .badge-post-aviso {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--mu);
+    margin-top: 0.1rem;
+  }
+
+  /* Columna lateral técnica */
+  aside {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    min-height: 0;
+  }
+  .caja {
+    background: var(--superficie);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-lg);
+    padding: 0.7rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .caja h2 {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--tinta-secundaria);
+    margin: 0;
+  }
+  .caja h3 {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tinta-secundaria);
+    margin: 0.25rem 0 0.1rem;
+  }
+
+  /* Detector en uso */
+  .detector-valor {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--tinta);
+  }
+  .detector-sub {
+    font-size: 0.8125rem;
+    color: var(--mu);
+  }
+
+  /* Riesgo instantáneo y curva */
+  .riesgo-resumen {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  #barra {
+    height: 10px;
+    background: var(--superficie-alt);
+    border-radius: var(--radio-md);
+    overflow: hidden;
+  }
+  #barra div {
+    height: 100%;
+    width: 100%;
+    transform-origin: left;
+    transform: scaleX(0);
+    background: var(--ok);
+    transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), background-color 180ms ease;
+  }
+  .riesgo-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .riesgo-pct {
+    font-size: 1.125rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  #motivo {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--tinta-secundaria);
+    text-align: right;
+  }
+  .grafico-caja {
+    margin-top: 0.15rem;
+    border-top: 1px solid var(--linea);
+    padding-top: 0.35rem;
+  }
+  #riesgo-grafico {
+    width: 100%;
+    height: 136px;
+    display: block;
+    background: var(--superficie);
+    border-radius: var(--radio-sm);
+  }
+
+  /* Métricas y demoras */
+  dl {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3rem 0.75rem;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  dt {
+    color: var(--tinta-secundaria);
+  }
+  dd {
+    margin: 0;
+    text-align: right;
+    font-weight: 700;
+    color: var(--tinta);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Vista de la persona protegida: solo el estado, grande */
+  #tranquilo {
+    display: none;
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 2rem 1rem;
+    color: var(--ok);
+  }
+  body.protegida {
+    background: var(--superficie);
+  }
+  body.protegida #controles,
+  body.protegida #niveles,
+  body.protegida #charla,
+  body.protegida aside,
+  body.protegida #sonido-aviso,
+  body.protegida .modo-conmutador {
+    display: none !important;
+  }
+  body.protegida main {
+    grid-template-columns: 1fr;
+    max-width: 580px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  body.protegida #tranquilo {
+    display: block;
+    border: 2px solid var(--ok);
+    border-radius: var(--radio-lg);
+    background: var(--ok-fondo);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  /* En la vista grande el aviso reemplaza al «tranquilo»: sin reservar lugar mientras no aparece. */
+  body.protegida #aviso:not(.visible) {
+    position: absolute;
+  }
+  body.protegida #aviso.visible {
+    font-size: 1.25rem;
+    padding: 2rem 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  body.protegida #aviso.visible .aviso-cuerpo {
+    flex-direction: column;
+    align-items: center;
+  }
+  body.protegida #aviso.visible #aviso-tiempo {
+    margin-left: 0;
+  }
+  body.protegida #aviso.visible .aviso-acciones {
+    display: none;
+  }
+  body.protegida #aviso.visible ~ #tranquilo,
+  body.protegida.alerta-emitida #tranquilo {
+    display: none;
+  }
+
+  /* Modo Probar el ASR */
+  body.asr #controles > :not(#error):not(.campos),
+  body.asr #controles .campos > :not(#campo-microfono):not(#campo-asr),
+  body.asr #sonido-aviso,
+  body.asr main {
+    display: none !important;
+  }
+  body.protegida #prueba-asr {
+    display: none !important;
+  }
+
+  /* Respeto de preferencia del sistema de reducir movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    #aviso {
+      transform: none !important;
+      transition: none !important;
+    }
+    body::before {
+      transition: none !important;
+    }
+    .linea, .eval-adjunta {
+      animation: none !important;
+    }
+    #barra div {
+      transition: none !important;
+    }
+  }
+
+  /* Adaptabilidad responsiva: 1280px, 1440px, 1920px */
+  @media (max-width: 1320px) {
+    header {
+      padding: 0.35rem 0.9rem;
+    }
+    #controles {
+      padding: 0.4rem 0.9rem 0.45rem;
+    }
+    #controles button,
+    #controles select {
+      font-size: 0.8125rem;
+      padding: 0.3rem 0.5rem;
+    }
+    .ayuda-cuerpo {
+      grid-template-columns: 1fr;
+    }
+    main {
+      grid-template-columns: minmax(0, 1fr) 305px;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+    }
+    #aviso {
+      padding: 0.28rem 0.6rem;
+      margin-bottom: 0.35rem;
+      gap: 0.45rem;
+    }
+    #niveles {
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .tarjeta-persona {
+      padding: 0.35rem 0.65rem;
+      gap: 0.2rem;
+    }
+    .tarjeta-cabecera h2 {
+      font-size: 1.125rem;
+    }
+    .tarjeta-rol-tag {
+      display: none;
+    }
+    .habla-ahora-caja {
+      min-height: 1.95rem;
+      padding: 0.28rem 0.55rem;
+    }
+    #charla {
+      gap: 0.3rem;
+      padding: 0.4rem 0.6rem;
+    }
+    .linea {
+      width: 78%;
+      max-width: 82%;
+      padding: 0.32rem 0.6rem;
+      gap: 0.12rem;
+    }
+  }
+  @media (max-width: 899px) {
+    header, #controles {
+      padding-inline: 0.75rem;
+    }
+    .campos, .acciones {
+      width: 100%;
+    }
+    .campo, .ajuste-grupo {
+      flex: 1 1 12rem;
+    }
+    select {
+      max-width: none;
+      width: 100%;
+    }
+    .acciones {
+      margin-left: 0;
+    }
+    .acciones button {
+      flex: 1;
+    }
+    main {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 0.5rem 0.75rem;
+    }
+    #charla {
+      min-height: 50vh;
+    }
+    .linea {
+      width: auto;
+      max-width: 92%;
+    }
+  }
+  @media (max-width: 560px) {
+    #niveles {
+      grid-template-columns: 1fr;
+    }
+    .cabecera-der {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .modo-conmutador {
+      flex: 1 1 100%;
+      order: -1;
+    }
+    .modo-tab {
+      flex: 1;
+      padding-inline: 0.4rem;
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+    select {
+      min-width: 0;
+    }
+    .campo .fila {
+      flex-wrap: wrap;
+    }
+    .opcion-eco {
+      margin-left: 0;
+    }
+    .ayuda-cuerpo {
+      left: 0.75rem;
+      width: calc(100vw - 1.5rem);
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+  }
+  @media (min-width: 1700px) {
+    main {
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 1.25rem;
+      padding: 1rem 1.75rem;
+    }
+    header h1 {
+      font-size: 1.75rem;
+    }
+    .tarjeta-cabecera h2 {
+      font-size: 1.5rem;
+    }
+    .linea .texto {
+      font-size: 1.125rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="cabecera-izq">
+    <h1>Llamada en vivo</h1>
+    <span class="estado-pill" id="estado-pill" data-estado="sin-conexion"><span class="punto" aria-hidden="true"></span><span id="estado" role="status">conectando…</span></span>
+  </div>
+  <div class="cabecera-der">
+    <button type="button" id="sonido-aviso" class="btn-sonido" aria-pressed="true" title="Activar o apagar el sonido del aviso">
+      <svg class="icono-sonido" id="icono-sonido-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+      <svg class="icono-sonido" id="icono-sonido-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden>
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <line x1="23" y1="9" x2="17" y2="15"></line>
+        <line x1="17" y1="9" x2="23" y2="15"></line>
+      </svg>
+      <span id="sonido-aviso-texto">Sonido: sí</span>
+    </button>
+    <div class="modo-conmutador" role="tablist" aria-label="Modo de operación">
+      <button type="button" id="tab-modo-llamada" class="modo-tab activo" role="tab" aria-selected="true">Llamada en vivo</button>
+      <button type="button" id="tab-modo-asr" class="modo-tab" role="tab" aria-selected="false">Probar el ASR</button>
+      <button type="button" id="tab-modo-historial" class="modo-tab" role="tab" aria-selected="false" title="Ver y comparar llamadas y pruebas guardadas">Historial</button>
+    </div>
+  </div>
+</header>
+
+<section id="controles" aria-label="Control de la llamada">
+  <div class="campos">
+    <div class="campo">
+      <label for="fuente"><span class="rol-punto" aria-hidden="true"></span>Otra persona</label>
+      <select id="fuente">
+        <option value="SC-SOPORTE-CLAVE-01">Estafa · falso soporte pide la contraseña</option>
+        <option value="LG-SUPPORT-INFO-01">Legítima · soporte ayuda sin pedir la clave</option>
+        <option value="SC-WA-CODE-01">Ejemplo corto · robo de WhatsApp</option>
+        <option value="meet">Meet o WhatsApp Web · pestaña de Chrome</option>
+        <option value="blackhole">App de escritorio · BlackHole</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label for="protegida-fuente"><span class="rol-punto protegida" aria-hidden="true"></span>Persona protegida</label>
+      <select id="protegida-fuente">
+        <option value="acompanar">Voz del ejemplo (canal derecho)</option>
+        <option value="microfono">Micrófono de esta notebook</option>
+      </select>
+    </div>
+    <div class="campo" id="campo-microfono" hidden>
+      <label for="microfono">Entrada de micrófono</label>
+      <div class="fila">
+        <select id="microfono" disabled><option value="">Micrófono predeterminado</option></select>
+        <button id="buscar-microfonos" disabled type="button" title="Pide permiso para ver los nombres de los micrófonos">Buscar</button>
+        <label class="opcion-eco" title="Chrome resta del micrófono lo que suena desde Chrome (WhatsApp Web, Meet). Desactivalo con auriculares para mandar el audio crudo.">
+          <input type="checkbox" id="cancelar-eco" checked> Cancelar eco (sin auriculares)
+        </label>
+      </div>
+    </div>
+    <div class="campo" id="campo-asr">
+      <label for="modelo-asr">Modelo de ASR</label>
+      <select id="modelo-asr" title="Con qué modelo se transcribe. Se aplica a la próxima llamada o prueba.">
+        <option value="zipformer">Zipformer Kroko · streaming</option>
+        <option value="parakeet">Parakeet TDT 0.6B v3 · por frases</option>
+      </select>
+    </div>
+    <span id="corte-lugar"></span>
+    <div class="enlaces">
+      <details id="ayuda" class="ayuda">
+        <summary>¿Qué es cada cosa?</summary>
+        <div class="ayuda-cuerpo">
+          <section>
+            <h3><span class="rol-punto" aria-hidden="true"></span>Otra persona</h3>
+            <p>Quien está del otro lado de la línea: un ejemplo grabado, otra notebook con <code>cliente.py</code>, una pestaña de Meet o WhatsApp Web, o una app de escritorio vía BlackHole.</p>
+            <p>No se da por hecho que sea un estafador: eso lo decide el detector frase a frase.</p>
+          </section>
+          <section>
+            <h3><span class="rol-punto protegida" aria-hidden="true"></span>Persona protegida</h3>
+            <p>La dueña del teléfono: a quien el sistema cuida y quien recibiría el aviso. Su voz entra por un canal aparte (a la derecha).</p>
+            <p>Con «Micrófono de esta notebook» la persona protegida sos vos; con el ejemplo, se usa la voz grabada.</p>
+          </section>
+          <section>
+            <h3>Modelo de ASR</h3>
+            <p>Zipformer escribe palabra por palabra mientras hablás. Parakeet vuelve a escuchar la frase entera cada medio segundo y muestra un borrador; al cerrar la frase la escribe de nuevo completa, y suele entender mejor.</p>
+            <p>El modelo nuevo se carga al iniciar y tarda unos segundos la primera vez.</p>
+          </section>
+          <section>
+            <h3>Corte de silencio</h3>
+            <p>Cuántos segundos tiene que quedarse callado alguien para que el ASR cierre la frase y se la pase al detector.</p>
+            <p>Más corto avisa antes pero puede partir una frase en dos; más largo espera frases enteras. Arranca en 0,9 s; en las pruebas medidas se usó 0,8 s.</p>
+          </section>
+        </div>
+      </details>
+      <a class="enlace-guia" href="/guia" target="_blank" rel="noopener">Guía para probar solo ↗</a>
+    </div>
+  </div>
+  <div class="acciones">
+    <button id="nueva" disabled>Nueva llamada</button>
+    <button id="terminar" disabled>Terminar</button>
+    <button id="iniciar" disabled>Iniciar llamada</button>
+  </div>
+  <span id="error" role="alert"></span>
+</section>
+
+<main>
+  <div class="columna-demo">
+    <!-- Franja de aviso dentro del panel (no modal), fija hasta cerrarla -->
+    <div id="aviso" role="alert">
+      <span class="aviso-etiqueta">
+        <svg class="aviso-icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <b>Posible estafa</b>
+      </span>
+      <div class="aviso-cuerpo">
+        <p id="aviso-motivo"></p>
+        <p id="aviso-cita"></p>
+        <small id="aviso-tiempo"></small>
+      </div>
+      <div class="aviso-acciones">
+        <button type="button" id="aviso-sonido" class="aviso-btn" aria-pressed="true" title="Activar o apagar el sonido del aviso">Sonido: sí</button>
+        <button type="button" id="aviso-cerrar" class="aviso-btn aviso-cerrar" aria-label="Cerrar aviso de posible estafa">Cerrar ×</button>
+      </div>
+    </div>
+    <div class="franja-reposo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10z"></path><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>
+      <span><b>Sin aviso.</b> Si el detector encuentra una posible estafa, aparece en esta franja.</span>
+    </div>
+    <div class="caja" id="tranquilo">Sin señales de estafa por ahora</div>
+
+    <!-- Arriba: dos tarjetas por persona con volumen y lo que dice ahora -->
+    <section id="niveles" aria-label="Personas en la llamada">
+      <!-- Otra persona (izquierda) -->
+      <article class="tarjeta-persona otra" id="tarjeta-otra">
+        <div class="tarjeta-cabecera">
+          <h2 id="nombre-otra">Otra persona</h2>
+          <div class="tarjeta-badges">
+            <span class="estado-habla-pill" id="estado-habla-otra">En silencio</span>
+            <span class="tarjeta-rol-tag">Canal izq</span>
+          </div>
+        </div>
+        <div class="volumen-fila">
+          <span class="rotulo" aria-hidden="true">Vol</span>
+          <meter id="nivel-otra" min="0" max="1" value="0" aria-label="Volumen otra persona"></meter>
+          <span class="rms" id="rms-otra" aria-hidden="true">RMS 0.000</span>
+        </div>
+        <div class="habla-ahora-caja">
+          <div class="habla-indicador" id="indicador-otra" aria-hidden="true"></div>
+          <div class="habla-texto en-silencio" id="habla-otra" aria-live="polite">En silencio</div>
+        </div>
+      </article>
+
+      <!-- Persona protegida (derecha) -->
+      <article class="tarjeta-persona protegida" id="tarjeta-protegida">
+        <div class="tarjeta-cabecera">
+          <h2 id="nombre-protegida">Persona protegida</h2>
+          <div class="tarjeta-badges">
+            <span class="estado-habla-pill" id="estado-habla-protegida">En silencio</span>
+            <span class="tarjeta-rol-tag">Canal der</span>
+          </div>
+        </div>
+        <div class="volumen-fila">
+          <span class="rotulo" aria-hidden="true">Vol</span>
+          <meter id="nivel-protegida" min="0" max="1" value="0" aria-label="Volumen persona protegida"></meter>
+          <span class="rms" id="rms-protegida" aria-hidden="true">RMS 0.000</span>
+        </div>
+        <div class="habla-ahora-caja">
+          <div class="habla-indicador" id="indicador-protegida" aria-hidden="true"></div>
+          <div class="habla-texto en-silencio" id="habla-protegida" aria-live="polite">En silencio</div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Abajo: conversación en dos lados con evaluación pegada a la frase -->
+    <section id="charla" aria-label="Historial de la conversación"></section>
+  </div>
+
+  <!-- Costado: detector, curva de riesgo y demoras -->
+  <aside>
+    <!-- Detector fijo en uso -->
+    <div class="caja" id="caja-detector">
+      <h2>Detector en uso</h2>
+      <div class="detector-valor" id="detector-nombre">Reglas</div>
+      <div class="detector-sub" id="detector-sub">Fijo al arrancar el servidor</div>
+    </div>
+
+    <!-- Riesgo y curva de riesgo en el tiempo -->
+    <div class="caja" id="riesgo">
+      <h2>Riesgo de estafa</h2>
+      <div class="riesgo-resumen">
+        <div id="barra"><div id="barra-progreso"></div></div>
+        <div class="riesgo-info">
+          <span class="riesgo-pct" id="riesgo-pct">0%</span>
+          <p id="motivo">—</p>
+        </div>
+      </div>
+      <div class="grafico-caja">
+        <h3>Línea de riesgo en el tiempo</h3>
+        <svg id="riesgo-grafico" viewBox="0 0 320 136" preserveAspectRatio="xMidYMid meet" aria-label="Línea de riesgo en el tiempo">
+          <!-- Dibujado dinámicamente en JavaScript -->
+        </svg>
+      </div>
+    </div>
+
+    <!-- Demoras y métricas -->
+    <div class="caja" id="metricas">
+      <h2>Demoras</h2>
+      <dl>
+        <dt>Reloj de la llamada</dt><dd id="m-reloj">—</dd>
+        <dt>Frase cerrada tras callarse</dt><dd id="m-asr">—</dd>
+        <dt>Detector (última)</dt><dd id="m-det">—</dd>
+        <dt>Evaluaciones / salteadas</dt><dd id="m-eval">—</dd>
+        <dt>Aviso tras callarse</dt><dd id="m-aviso">—</dd>
+      </dl>
+    </div>
+  </aside>
+</main>
+
+<script type="module">
+// @ts-check
+import {montarPruebaASR} from './probar-asr.mjs';
+import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
+import {prepararFuentes} from './fuentes.mjs';
+import {crearSelectorCorte} from './corte-silencio.mjs';
+import {plantillaLinea, citaConRoles} from './conversacion.mjs';
+import {montarHistorial} from './historial-ui.mjs';
+
+/** @typedef {{segmento: number, n: number, canal: string, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
+/** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
+/** @typedef {{n: number, saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, fin_eval_s: number, t_a: number|null}} EventoDetector */
+/** @typedef {{tipo: string, modelo: string|null}} DetectorInfo */
+
+const vista = new URLSearchParams(location.search).get("vista");
+if (vista === "protegida") document.body.classList.add("protegida");
+
+/** @param {string} id @returns {HTMLElement} */
+const $ = (id) => {
+  const el = document.getElementById(id);
+  if (!el) throw new Error(`Falta el elemento ${id}`);
+  return el;
+};
+
+
+/** @type {Map<number, HTMLDivElement>} */
+const burbujas = new Map();
+/** @type {Map<string, string>} */
+const rolesPorLetra = new Map();
+/** @type {Map<number, {el: HTMLDivElement, n: number, rol: string, final: boolean, evaluado: boolean}>} */
+const segmentosInfo = new Map();
+/** @type {number[]} */
+const ordenFinales = [];
+/** @type {number[]} */
+const ordenSegmentos = [];
+
+let evaluaciones = 0, salteadas = 0;
+/** @type {WebSocket|null} */
+let conexion = null;
+let enLlamada = false, terminada = false, pendiente = false;
+
+const protegidaFuente = /** @type {HTMLSelectElement} */ ($("protegida-fuente"));
+const microfono = /** @type {HTMLSelectElement} */ ($("microfono"));
+const buscarMicrofonos = /** @type {HTMLButtonElement} */ ($("buscar-microfonos"));
+const cancelarEco = /** @type {HTMLInputElement} */ ($("cancelar-eco"));
+const fuente = /** @type {HTMLSelectElement} */ ($("fuente"));
+const corteLlamada = crearSelectorCorte("corte-llamada");
+$("corte-lugar").replaceWith(corteLlamada.elemento);
+const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
+const modeloASR = /** @type {HTMLSelectElement} */ ($("modelo-asr"));
+const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
+const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
+const botonSonido = /** @type {HTMLButtonElement} */ ($("sonido-aviso"));
+const botonAvisoSonido = /** @type {HTMLButtonElement} */ ($("aviso-sonido"));
+const botonAvisoCerrar = /** @type {HTMLButtonElement} */ ($("aviso-cerrar"));
+const barraRiesgo = /** @type {HTMLElement} */ ($("barra-progreso"));
+
+const tarjetaOtra = $("tarjeta-otra");
+const tarjetaProtegida = $("tarjeta-protegida");
+const nombreOtra = $("nombre-otra");
+const hablaOtra = $("habla-otra");
+const hablaProtegida = $("habla-protegida");
+const indOtra = $("indicador-otra");
+const indProtegida = $("indicador-protegida");
+const estadoHablaOtra = $("estado-habla-otra");
+const estadoHablaProtegida = $("estado-habla-protegida");
+
+const svgGrafico = /** @type {unknown} */ ($("riesgo-grafico"));
+const svgEl = /** @type {SVGSVGElement} */ (svgGrafico);
+
+/** @type {Record<string, boolean>} */
+const enParcial = { otra: false, protegida: false };
+
+/** @type {Array<{t: number, r: number, aviso: boolean}>} */
+let puntosRiesgo = [];
+let relojLlamada = 0;
+/** @type {number|null} */
+let tiempoAviso = null;
+let avisoCerrado = false;
+
+const CLAVE_SONIDO = "voip_sonido_aviso";
+
+/** @returns {boolean} */
+function leerPreferenciaSonido() {
+  try {
+    const v = localStorage.getItem(CLAVE_SONIDO);
+    return v !== "0" && v !== "false";
+  } catch {
+    return true;
+  }
+}
+
+/** @param {boolean} activo */
+function guardarPreferenciaSonido(activo) {
+  try {
+    localStorage.setItem(CLAVE_SONIDO, activo ? "1" : "0");
+  } catch {
+    // localStorage no disponible
+  }
+}
+
+let sonidoActivo = leerPreferenciaSonido();
+
+const CLAVE_ECO = "voip_cancelar_eco";
+try { cancelarEco.checked = localStorage.getItem(CLAVE_ECO) !== "0"; } catch { /* localStorage no disponible */ }
+cancelarEco.onchange = () => {
+  try { localStorage.setItem(CLAVE_ECO, cancelarEco.checked ? "1" : "0"); } catch { /* localStorage no disponible */ }
+};
+/** @type {AudioContext|null} */
+let ctxTono = null;
+
+function detenerTonoAviso() {
+  if (ctxTono) {
+    void ctxTono.close().catch(() => {});
+    ctxTono = null;
+  }
+}
+
+/** @param {boolean} activo */
+function fijarSonido(activo) {
+  sonidoActivo = activo;
+  guardarPreferenciaSonido(activo);
+  const rotulo = activo ? "Sonido: sí" : "Sonido: no";
+  for (const btn of [botonSonido, botonAvisoSonido]) {
+    btn.setAttribute("aria-pressed", String(activo));
+    btn.classList.toggle("silenciado", !activo);
+  }
+  $("sonido-aviso-texto").textContent = rotulo;
+  $("icono-sonido-on").hidden = !activo;
+  $("icono-sonido-off").hidden = activo;
+  botonAvisoSonido.textContent = rotulo;
+  if (!activo) detenerTonoAviso();
+}
+
+function tocarTonoAviso() {
+  if (!sonidoActivo) return;
+  detenerTonoAviso();
+  const win = /** @type {Window & {webkitAudioContext?: typeof AudioContext}} */ (window);
+  const Ctx = window.AudioContext || win.webkitAudioContext;
+  if (!Ctx) return;
+  try {
+    const ctx = new Ctx();
+    ctxTono = ctx;
+    if (ctx.state === "suspended") void ctx.resume().catch(() => {});
+    const t0 = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(660, t0);
+    osc.frequency.setValueAtTime(880, t0 + 0.11);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.linearRampToValueAtTime(0.16, t0 + 0.015);
+    gain.gain.setValueAtTime(0.16, t0 + 0.095);
+    gain.gain.linearRampToValueAtTime(0.0001, t0 + 0.22);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(t0);
+    osc.stop(t0 + 0.23);
+    osc.onended = () => {
+      if (ctxTono === ctx) detenerTonoAviso();
+    };
+  } catch {
+    detenerTonoAviso();
+  }
+}
+
+for (const btn of [botonSonido, botonAvisoSonido]) {
+  btn.onclick = () => fijarSonido(!sonidoActivo);
+}
+botonAvisoCerrar.onclick = () => {
+  avisoCerrado = true;
+  detenerTonoAviso();
+  $("aviso").classList.remove("visible");
+};
+fijarSonido(sonidoActivo);
+
+/** @returns {boolean} */
+function prefiereMovimientoReducido() {
+  return Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches);
+}
+
+/** @param {HTMLElement} el */
+function desplazarVisible(el) {
+  const arriba = el.getBoundingClientRect().top;
+  if (arriba < 0 || arriba > window.innerHeight + 120) return;
+  el.scrollIntoView({ block: "nearest", behavior: prefiereMovimientoReducido() ? "instant" : "smooth" });
+}
+
+/** @type {ReturnType<typeof prepararAudio>|null} */
+let emisor = null;
+let intento = 0, inicioPropio = false;
+/** @type {AbortController|null} */
+let capturaPendiente = null;
+
+/**
+ * Actualiza visualmente la tarjeta superior de una persona.
+ * @param {"otra"|"protegida"} rol
+ * @param {"hablando"|"cerrada"|"silencio"} estado
+ * @param {string} [texto]
+ */
+function fijarEstadoHabla(rol, estado, texto = "") {
+  const esOtra = rol === "otra";
+  const tarjeta = esOtra ? tarjetaOtra : tarjetaProtegida;
+  const cajaTexto = esOtra ? hablaOtra : hablaProtegida;
+  const indicador = esOtra ? indOtra : indProtegida;
+  const pill = esOtra ? estadoHablaOtra : estadoHablaProtegida;
+
+  if (estado === "hablando") {
+    tarjeta.classList.add("hablando-activo");
+    indicador.classList.add("hablando");
+    pill.textContent = "Hablando ahora";
+    pill.classList.add("activo");
+    cajaTexto.textContent = texto ? `«${texto}…»` : "Hablando…";
+    cajaTexto.classList.remove("en-silencio");
+  } else if (estado === "cerrada") {
+    tarjeta.classList.remove("hablando-activo");
+    indicador.classList.remove("hablando");
+    pill.textContent = "En silencio";
+    pill.classList.remove("activo");
+    cajaTexto.textContent = texto ? `Recién dijo: «${texto}»` : "En silencio";
+    cajaTexto.classList.add("en-silencio");
+  } else {
+    tarjeta.classList.remove("hablando-activo");
+    indicador.classList.remove("hablando");
+    pill.textContent = "En silencio";
+    pill.classList.remove("activo");
+    cajaTexto.textContent = "En silencio";
+    cajaTexto.classList.add("en-silencio");
+  }
+}
+
+function liberarMicrofono() {
+  intento++;
+  inicioPropio = false;
+  capturaPendiente?.abort();
+  capturaPendiente = null;
+  emisor?.detener();
+  emisor = null;
+}
+
+/** @param {string} mensaje */
+function fallarCaptura(mensaje) {
+  const llamadaPendiente = enLlamada || inicioPropio;
+  liberarMicrofono();
+  if (llamadaPendiente && conexion?.readyState === WebSocket.OPEN) enviar({tipo: "terminar"});
+  else { pendiente = false; actualizarControles(); }
+  $("error").textContent = mensaje;
+}
+
+async function listarMicrofonos() {
+  const anterior = microfono.value;
+  const dispositivos = await navigator.mediaDevices.enumerateDevices();
+  microfono.replaceChildren(new Option("Micrófono predeterminado", ""));
+  for (const dispositivo of dispositivos.filter(d => d.kind === "audioinput")) {
+    microfono.add(new Option(dispositivo.label || `Entrada ${microfono.length}`, dispositivo.deviceId));
+  }
+  if ([...microfono.options].some(o => o.value === anterior)) microfono.value = anterior;
+}
+
+/** @returns {MediaTrackConstraints} */
+function restriccionesMicrofono() {
+  return {deviceId: microfono.value ? {exact: microfono.value} : undefined,
+    channelCount: 1, echoCancellation: cancelarEco.checked, noiseSuppression: false, autoGainControl: false};
+}
+
+/**
+ * Vuelve a abrir el micrófono cuando macOS o Chrome cortan la pista a mitad de una prueba o llamada.
+ * Si la entrada elegida ya no está, sigue con la predeterminada antes que cortar.
+ * @returns {Promise<MediaStream>}
+ */
+async function reabrirMicrofono() {
+  try {
+    return await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+  } catch (error) {
+    if (!microfono.value) throw error;
+    microfono.value = "";
+    return navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+  }
+}
+
+protegidaFuente.onchange = async () => {
+  $("error").textContent = "";
+  actualizarControles();
+  if (protegidaFuente.value !== "microfono") return;
+  try { verificarCaptura(); await listarMicrofonos(); }
+  catch (error) { $("error").textContent = mensajeErrorMicrofono(error); }
+};
+
+buscarMicrofonos.onclick = async () => {
+  const token = ++intento;
+  pendiente = true;
+  actualizarControles();
+  try {
+    verificarCaptura();
+    const stream = await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+    stream.getTracks().forEach(track => track.stop());
+    if (token === intento) { await listarMicrofonos(); $("error").textContent = ""; }
+  } catch (error) {
+    if (token === intento) $("error").textContent = mensajeErrorMicrofono(error);
+  } finally {
+    if (token === intento) { pendiente = false; actualizarControles(); }
+  }
+};
+window.addEventListener("pagehide", liberarMicrofono);
+
+// La ayuda flota sobre la llamada: se cierra con Esc o tocando afuera.
+const ayuda = /** @type {HTMLDetailsElement} */ ($("ayuda"));
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && ayuda.open) { ayuda.open = false; ayuda.querySelector("summary")?.focus(); } });
+document.addEventListener("click", (e) => { if (ayuda.open && !ayuda.contains(/** @type {Node} */ (e.target))) ayuda.open = false; });
+
+fuente.onchange = () => {
+  if (fuente.value === "meet" || fuente.value === "blackhole") {
+    protegidaFuente.value = "microfono";
+    protegidaFuente.dispatchEvent(new Event("change"));
+  }
+  actualizarControles();
+};
+
+const pruebaASR = montarPruebaASR({
+  iniciar: () => { terminada = false; void iniciarSesion(); },
+  terminar: () => terminar.click(),
+  borrar: () => enviar({tipo: "reiniciar_prueba"}),
+  guardar: (referencias_por_segmento) => {
+    if (conexion?.readyState !== WebSocket.OPEN) return;
+    $("error").textContent = "";
+    conexion.send(JSON.stringify({tipo: "guardar_prueba", referencias_por_segmento}));
+  },
+  cambiar: () => { sincronizarModoVisual(); actualizarControles(); },
+  borrarGuardadas: () => {
+    if (conexion?.readyState !== WebSocket.OPEN) return false;
+    conexion.send(JSON.stringify({tipo: "borrar_pruebas"}));
+    return true;
+  }
+});
+
+const historialUI = montarHistorial({
+  enviar: (mensaje) => {
+    if (conexion?.readyState !== WebSocket.OPEN) return false;
+    conexion.send(JSON.stringify(mensaje));
+    return true;
+  },
+  alCambiar: () => {
+    // El encabezado dice dónde estás y, al volver, recupera lo que decía.
+    if (historialUI.abierto) {
+      estadoPrevioAlHistorial = $("estado").textContent;
+      $("estado").textContent = "historial de llamadas y pruebas guardadas";
+    } else if (estadoPrevioAlHistorial !== null) {
+      $("estado").textContent = estadoPrevioAlHistorial;
+      estadoPrevioAlHistorial = null;
+    }
+    sincronizarModoVisual(); actualizarControles();
+  }
+});
+/** @type {string|null} */
+let estadoPrevioAlHistorial = null;
+
+// Conmutador visual de pestañas Llamada / Probar el ASR / Historial
+const tabLlamada = /** @type {HTMLButtonElement} */ ($("tab-modo-llamada"));
+const tabASR = /** @type {HTMLButtonElement} */ ($("tab-modo-asr"));
+const tabHistorial = /** @type {HTMLButtonElement} */ ($("tab-modo-historial"));
+const asrModoCheck = /** @type {HTMLInputElement|null} */ (document.getElementById("asr-modo"));
+
+function sincronizarModoVisual() {
+  const activa = pruebaASR.activa, historial = historialUI.abierto;
+  for (const [tab, activo] of /** @type {const} */ ([[tabLlamada, !activa && !historial], [tabASR, activa], [tabHistorial, historial]])) {
+    tab.classList.toggle("activo", activo);
+    tab.setAttribute("aria-selected", String(activo));
+  }
+}
+
+tabHistorial.onclick = () => {
+  if (asrModoCheck && asrModoCheck.checked) {
+    asrModoCheck.checked = false;
+    asrModoCheck.dispatchEvent(new Event("change"));
+  }
+  historialUI.abrir();
+};
+
+tabLlamada.onclick = () => {
+  historialUI.cerrar();
+  if (asrModoCheck && asrModoCheck.checked) {
+    asrModoCheck.checked = false;
+    asrModoCheck.dispatchEvent(new Event("change"));
+  }
+};
+tabASR.onclick = () => {
+  historialUI.cerrar();
+  if (asrModoCheck && !asrModoCheck.checked) {
+    asrModoCheck.checked = true;
+    asrModoCheck.dispatchEvent(new Event("change"));
+  }
+};
+
+const roles = /** @type {const} */ (["protegida", "otra"]);
+const medidores = roles.map(rol => ({
+  rol, barra: /** @type {HTMLMeterElement} */ ($(`nivel-${rol}`)), valor: $(`rms-${rol}`)
+}));
+/** @type {EventoNiveles|null} */
+let ultimosNiveles = null;
+let cuadroNiveles = 0;
+
+function limpiarNiveles() {
+  cancelAnimationFrame(cuadroNiveles);
+  cuadroNiveles = 0;
+  ultimosNiveles = null;
+  for (const m of medidores) {
+    m.barra.value = 0;
+    m.valor.textContent = "RMS 0.000";
+  }
+  enParcial.otra = false;
+  enParcial.protegida = false;
+  fijarEstadoHabla("otra", "silencio");
+  fijarEstadoHabla("protegida", "silencio");
+}
+
+/** @param {EventoNiveles} mensaje */
+function niveles(mensaje) {
+  ultimosNiveles = mensaje;
+  if (cuadroNiveles) return;
+  cuadroNiveles = requestAnimationFrame(() => {
+    cuadroNiveles = 0;
+    for (const m of medidores) {
+      const rms = ultimosNiveles?.canales[m.rol]?.rms ?? 0;
+      m.barra.value = rms;
+      m.valor.textContent = `RMS ${rms.toFixed(3)}`;
+      const otroRol = m.rol === "otra" ? "protegida" : "otra";
+      if (rms >= 0.01 && !enParcial[m.rol]) {
+        fijarEstadoHabla(m.rol, "hablando", "");
+        if (!enParcial[otroRol]) fijarEstadoHabla(otroRol, "silencio");
+      }
+    }
+  });
+}
+
+function actualizarControles() {
+  const conectada = conexion?.readyState === WebSocket.OPEN;
+  iniciar.disabled = !conectada || enLlamada || terminada || pendiente;
+  terminar.disabled = !conectada || !enLlamada || pendiente;
+  nueva.disabled = !conectada || enLlamada || pendiente || !terminada;
+  fuente.disabled = enLlamada || pendiente;
+  corteLlamada.deshabilitado = enLlamada || pendiente;
+  modeloASR.disabled = enLlamada || pendiente;
+  protegidaFuente.disabled = enLlamada || pendiente;
+  const usaMicrofono = pruebaASR.activa || protegidaFuente.value === "microfono";
+  microfono.disabled = enLlamada || pendiente || !usaMicrofono;
+  buscarMicrofonos.disabled = microfono.disabled;
+  cancelarEco.disabled = microfono.disabled;
+  $("campo-microfono").hidden = !usaMicrofono;
+  // La opción que no es micrófono sigue a la fuente de la otra persona; Meet y BlackHole exigen micrófono.
+  const acompanar = /** @type {HTMLOptionElement} */ (protegidaFuente.options[0]);
+  const remota = fuente.value === "meet" || fuente.value === "blackhole";
+  acompanar.textContent = remota ? "—" : "Voz del ejemplo (canal derecho)";
+  acompanar.disabled = remota;
+  $("estado-pill").dataset.estado = !conectada ? "sin-conexion" : enLlamada ? "en-llamada" : "lista";
+  tabLlamada.disabled = enLlamada || pendiente;
+  tabASR.disabled = enLlamada || pendiente;
+  tabHistorial.disabled = enLlamada || pendiente;
+  pruebaASR.controles(!!conectada, pendiente, enLlamada);
+  sincronizarModoVisual();
+}
+
+/** @param {object} mensaje */
+function enviar(mensaje) {
+  if (conexion?.readyState !== WebSocket.OPEN) return;
+  $("error").textContent = "";
+  pendiente = true;
+  actualizarControles();
+  conexion.send(JSON.stringify(mensaje));
+}
+
+async function iniciarSesion() {
+  if (!pruebaASR.activa && !corteLlamada.validar()) return;
+  const token = ++intento;
+  const fuenteRemota = !pruebaASR.activa && (fuente.value === "meet" || fuente.value === "blackhole");
+  if (pruebaASR.activa || protegidaFuente.value === "microfono" || fuenteRemota) {
+    pendiente = true;
+    $("error").textContent = "";
+    actualizarControles();
+    try {
+      verificarCaptura();
+      if (fuenteRemota) {
+        capturaPendiente = new AbortController();
+        const preparado = await prepararFuentes(/** @type {'meet'|'blackhole'} */ (fuente.value), restriccionesMicrofono(), fallarCaptura, capturaPendiente.signal);
+        if (token !== intento) { preparado.detener(); return; }
+        emisor = preparado;
+      } else {
+        const stream = await navigator.mediaDevices.getUserMedia({audio: restriccionesMicrofono()});
+        if (token !== intento) { stream.getTracks().forEach(t => t.stop()); return; }
+        try {
+          emisor = prepararAudio(stream, "protegida", fallarCaptura, {reabrir: reabrirMicrofono, alReconectar: (nombre) => {
+            $("estado").textContent = `seguimos con ${nombre} (la entrada anterior se cortó)`;
+          }});
+        } catch (error) { stream.getTracks().forEach(t => t.stop()); throw error; }
+      }
+      await listarMicrofonos();
+      if (token !== intento) return;
+    } catch (error) {
+      if (token !== intento) return;
+      liberarMicrofono();
+      $("error").textContent = fuenteRemota && error instanceof Error ? error.message : mensajeErrorMicrofono(error);
+      pendiente = false;
+      actualizarControles();
+      return;
+    }
+  }
+  if (conexion?.readyState !== WebSocket.OPEN) { liberarMicrofono(); return; }
+  const ejemplo = fuente.value !== "cliente";
+  /** @type {Record<"otra"|"protegida", {tipo: string, [campo: string]: string}>} */
+  const fuentes = ejemplo ? {
+    otra: {tipo: "ejemplo", escenario: fuente.value, canal: "izq"},
+    protegida: {tipo: "ejemplo", escenario: fuente.value, canal: "der"}
+  } : {otra: {tipo: "cliente"}, protegida: {tipo: "cliente"}};
+  if (emisor) fuentes.protegida = {tipo: "navegador", cancelar_eco: cancelarEco.checked};
+  if (fuenteRemota) fuentes.otra = {tipo: "navegador", origen: fuente.value};
+  inicioPropio = true;
+  enviar(pruebaASR.activa
+    ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config, asr: modeloASR.value}
+    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: corteLlamada.valor, umbral_rms_silencio: null, asr: modeloASR.value});
+}
+
+iniciar.onclick = iniciarSesion;
+terminar.onclick = async () => {
+  pendiente = true; actualizarControles();
+  $("estado").textContent = pruebaASR.activa ? "terminando prueba · procesando el último audio…" : "terminando llamada…";
+  try {
+    await emisor?.finalizar();
+    liberarMicrofono();
+    enviar({tipo: "terminar"});
+  } catch (error) {
+    fallarCaptura(mensajeErrorMicrofono(error));
+  }
+};
+nueva.onclick = () => {
+  reiniciar("");
+  terminada = false;
+  $("estado").textContent = "lista para otra llamada";
+  actualizarControles();
+};
+
+/** @param {number|null} x */
+const seg = (x) => (x == null ? "—" : `${x.toFixed(2)} s`);
+
+/** @param {string} texto */
+function escapar(texto) {
+  const d = document.createElement("div");
+  d.textContent = texto;
+  return d.innerHTML;
+}
+
+/** @param {string} texto */
+function limpiarCita(texto) {
+  return texto.replace(/^[.\s,;:]+/, "").trim();
+}
+
+/**
+ * Resalta la frase citada dentro de la burbuja culpable de la conversación.
+ * @param {string} evidencia
+ * @param {HTMLDivElement|null} burbujaEvaluada
+ */
+function resaltarFraseCulpable(evidencia, burbujaEvaluada) {
+  const cita = limpiarCita(evidencia);
+  /** @type {HTMLDivElement|null} */
+  let objetivo = burbujaEvaluada;
+  if (cita) {
+    const candidata = [...burbujas.values()].reverse().find(b => {
+      const t = b.querySelector(".texto")?.textContent || "";
+      return t.toLowerCase().includes(cita.toLowerCase());
+    });
+    if (candidata) objetivo = candidata;
+  }
+  if (!objetivo) return;
+  objetivo.classList.add("disparo-aviso");
+  const textoEl = /** @type {HTMLElement|null} */ (objetivo.querySelector(".texto"));
+  if (!textoEl) return;
+  const original = textoEl.textContent || "";
+  if (!original) return;
+  if (cita) {
+    const idx = original.toLowerCase().indexOf(cita.toLowerCase());
+    if (idx >= 0) {
+      const antes = escapar(original.slice(0, idx));
+      const medio = escapar(original.slice(idx, idx + cita.length));
+      const despues = escapar(original.slice(idx + cita.length));
+      textoEl.innerHTML = `${antes}<mark class="cita-culpable">${medio}</mark>${despues}`;
+      return;
+    }
+  }
+  textoEl.innerHTML = `<mark class="cita-culpable">${escapar(original)}</mark>`;
+}
+
+/** @param {string} id */
+function reiniciar(id) {
+  detenerTonoAviso();
+  limpiarNiveles();
+  $("charla").innerHTML = "";
+  burbujas.clear();
+  rolesPorLetra.clear();
+  segmentosInfo.clear();
+  ordenFinales.length = 0;
+  ordenSegmentos.length = 0;
+  evaluaciones = 0;
+  salteadas = 0;
+  puntosRiesgo = [];
+  relojLlamada = 0;
+  tiempoAviso = null;
+  avisoCerrado = false;
+  document.body.classList.remove("alerta-emitida");
+  $("aviso").classList.remove("visible");
+  nombreOtra.textContent = "Otra persona";
+  tarjetaOtra.classList.remove("alerta-activa");
+  $("motivo").textContent = "—";
+  $("riesgo-pct").textContent = "0%";
+  barraRiesgo.style.transform = "scaleX(0)";
+  barraRiesgo.style.background = "var(--ok)";
+  for (const cid of ["aviso-motivo", "aviso-cita", "aviso-tiempo", "error"]) $(cid).textContent = "";
+  for (const m of ["m-asr", "m-det", "m-eval", "m-aviso", "m-reloj"]) $(m).textContent = "—";
+  dibujarGraficoRiesgo();
+  if (id) $("estado").textContent = `en llamada · ${id}`;
+}
+
+/** @param {EventoASR} m */
+function asr(m) {
+  rolesPorLetra.set(m.canal, m.rol);
+  relojLlamada = Math.max(relojLlamada, m.disponible_s);
+  let b = burbujas.get(m.segmento);
+  if (!b) {
+    b = document.createElement("div");
+    b.id = `seg-${m.segmento}`;
+    b.innerHTML = plantillaLinea(m.rol);
+    burbujas.set(m.segmento, b);
+  }
+  // El borrador se lee en la tarjeta de arriba; a la conversación entra solo la frase cerrada.
+  if (m.entrega === "final" && !b.isConnected) $("charla").appendChild(b);
+  const eraDisparo = b.classList.contains("disparo-aviso");
+  b.className = `linea ${m.rol} ${m.entrega}${eraDisparo ? " disparo-aviso" : ""}`;
+  const texto = /** @type {HTMLElement} */ (b.querySelector(".texto"));
+  texto.textContent = m.texto;
+  const retraso = m.disponible_s - m.fin_audio_s;
+  const tiempo = /** @type {HTMLElement} */ (b.querySelector(".t"));
+  tiempo.textContent = `${m.fin_audio_s.toFixed(1)} s · +${(retraso * 1000).toFixed(0)} ms`;
+
+  // Actualizar tarjeta de persona correspondiente (lo que está diciendo ahora)
+  const rol = m.rol === "otra" ? "otra" : "protegida";
+  const otroRol = rol === "otra" ? "protegida" : "otra";
+  if (m.entrega === "parcial") {
+    enParcial[rol] = true;
+    fijarEstadoHabla(rol, "hablando", m.texto);
+    if (!enParcial[otroRol]) fijarEstadoHabla(otroRol, "silencio");
+  } else {
+    enParcial[rol] = false;
+    fijarEstadoHabla(rol, "cerrada", m.texto);
+  }
+
+  // Guardar metadata del segmento
+  const info = segmentosInfo.get(m.segmento) || {
+    el: b, n: m.n, rol: m.rol, final: false, evaluado: false
+  };
+  info.n = m.n;
+  if (!ordenSegmentos.includes(m.segmento)) ordenSegmentos.push(m.segmento);
+  if (m.entrega === "final") {
+    info.final = true;
+    if (!ordenFinales.includes(m.segmento)) ordenFinales.push(m.segmento);
+    $("m-asr").textContent = `${((m.disponible_s - m.fin_voz_s) * 1000).toFixed(0)} ms`;
+    if (tiempoAviso !== null && !info.evaluado && !b.querySelector(".badge-post-aviso")) {
+      const nota = document.createElement("div");
+      nota.className = "badge-post-aviso";
+      nota.textContent = "Posterior al aviso (detector detenido tras el primer aviso)";
+      b.appendChild(nota);
+    } else if (!info.evaluado && !b.querySelector(".eval-adjunta")) {
+      const espera = document.createElement("div");
+      espera.className = "eval-adjunta pendiente";
+      espera.innerHTML = `<span class="eval-pendiente-txt">Evaluando…</span>`;
+      b.appendChild(espera);
+    }
+  }
+  segmentosInfo.set(m.segmento, info);
+
+  $("m-reloj").textContent = seg(m.disponible_s);
+  desplazarVisible(b);
+}
+
+/** @param {EventoDetector} m */
+function detector(m) {
+  evaluaciones += 1;
+  salteadas += m.saltadas;
+  $("m-eval").textContent = `${evaluaciones} / ${salteadas}`;
+  $("m-det").textContent = m.ms_detector == null ? "—" : `${m.ms_detector.toFixed(0)} ms`;
+  if (!m.valida) {
+    $("motivo").textContent = `fallo: ${m.error}`;
+    adjuntarEvaluacionAFrase(m, 0, 0);
+    return;
+  }
+  const r = m.riesgo ?? (m.alerta_sugerida ? 1 : 0);
+  const pct = Math.round(r * 100);
+  barraRiesgo.style.transform = `scaleX(${r})`;
+  barraRiesgo.style.background = r >= 0.5 ? "var(--alerta)" : "var(--ok)";
+  $("riesgo-pct").textContent = `${pct}%`;
+  $("motivo").textContent = m.motivo || (m.alerta_sugerida ? "alerta" : "sin señales");
+
+  if (m.aviso) {
+    tiempoAviso = m.t_a;
+    document.body.classList.add("alerta-emitida");
+    if (!avisoCerrado) {
+      $("aviso").classList.add("visible");
+    }
+    $("aviso-motivo").textContent = m.motivo;
+    const citaLimpia = citaConRoles(limpiarCita(m.evidencia || ""), rolesPorLetra);
+    $("aviso-cita").textContent = citaLimpia ? `«${citaLimpia}»` : "";
+    const tras = m.fin_voz_s == null || m.t_a == null ? null : m.t_a - m.fin_voz_s;
+    $("aviso-tiempo").textContent = `a los ${seg(m.t_a)} de la llamada`;
+    $("m-aviso").textContent = seg(tras);
+    nombreOtra.textContent = "Otra persona · posible estafa";
+    tarjetaOtra.classList.add("alerta-activa");
+    tocarTonoAviso();
+  }
+
+  // Pegar evaluación a la frase que la disparó
+  adjuntarEvaluacionAFrase(m, r, pct);
+  if (m.aviso) cerrarEsperas("Posterior al aviso (detector detenido tras el primer aviso)");
+
+  // Registrar y redibujar curva de riesgo en el tiempo
+  const tPunto = m.fin_eval_s || m.t_a || relojLlamada;
+  puntosRiesgo.push({ t: tPunto, r, aviso: m.aviso });
+  dibujarGraficoRiesgo();
+}
+
+/**
+ * Reemplaza las evaluaciones que ya no van a llegar por una nota.
+ * @param {string} texto
+ */
+function cerrarEsperas(texto) {
+  for (const espera of $("charla").querySelectorAll(".eval-adjunta.pendiente")) {
+    const nota = document.createElement("div");
+    nota.className = "badge-post-aviso";
+    nota.textContent = texto;
+    espera.replaceWith(nota);
+  }
+}
+
+/**
+ * Vincula la evaluación recibida con la frase que la causó e indica salteadas.
+ * @param {EventoDetector} m
+ * @param {number} r
+ * @param {number} pct
+ */
+function adjuntarEvaluacionAFrase(m, r, pct) {
+  const lista = ordenFinales.length > 0 ? ordenFinales : ordenSegmentos;
+  let segId = null;
+  for (const s of lista) {
+    const inf = segmentosInfo.get(s);
+    if (inf && inf.n <= m.n && !inf.evaluado) {
+      segId = s;
+    }
+  }
+  if (segId === null) {
+    for (const s of ordenSegmentos) {
+      const inf = segmentosInfo.get(s);
+      if (inf && inf.n <= m.n && !inf.evaluado) {
+        segId = s;
+      }
+    }
+  }
+  if (segId === null && lista.length > 0) {
+    segId = lista[lista.length - 1];
+  }
+
+  if (segId !== null) {
+    const idx = lista.indexOf(segId);
+    if (idx > 0 && m.saltadas > 0) {
+      let restan = m.saltadas;
+      for (let i = idx - 1; i >= 0 && restan > 0; i--) {
+        const prevId = lista[i];
+        const prevInf = segmentosInfo.get(prevId);
+        if (prevInf && !prevInf.evaluado) {
+          prevInf.evaluado = true;
+          prevInf.el.querySelector(".eval-adjunta.pendiente")?.remove();
+          if (!prevInf.el.querySelector(".badge-salteada")) {
+            const b = document.createElement("div");
+            b.className = "badge-salteada";
+            b.textContent = "Evaluación salteada (detector ocupado · incluida en la foto siguiente)";
+            prevInf.el.appendChild(b);
+          }
+          restan--;
+        }
+      }
+    }
+
+    const infEvaluada = segmentosInfo.get(segId);
+    if (infEvaluada) {
+      infEvaluada.evaluado = true;
+      infEvaluada.el.querySelector(".badge-post-aviso")?.remove();
+      if (!infEvaluada.el.isConnected) $("charla").appendChild(infEvaluada.el);
+      let evalEl = infEvaluada.el.querySelector(".eval-adjunta");
+      if (!evalEl) {
+        evalEl = document.createElement("div");
+        infEvaluada.el.appendChild(evalEl);
+      }
+      const msTxt = m.ms_detector != null ? `${m.ms_detector.toFixed(0)} ms` : "—";
+      const salteadasTxt = m.saltadas > 0 ? `<span class="eval-pill eval-saltadas">${m.saltadas} salteada${m.saltadas > 1 ? "s" : ""}</span>` : "";
+
+      if (!m.valida) {
+        evalEl.className = "eval-adjunta riesgo-alto";
+        evalEl.innerHTML = `
+          <div class="eval-pills">
+            <span class="eval-pill eval-alerta si">Fallo del detector</span>
+            <span class="eval-pill eval-tiempo" title="Tiempo de cómputo del detector">${msTxt}</span>
+            ${salteadasTxt}
+          </div>
+          <span class="eval-motivo-txt">${escapar(m.error || "error")}</span>
+        `;
+        desplazarVisible(infEvaluada.el);
+        return;
+      }
+
+      const esAviso = m.aviso;
+      const esAlerta = m.alerta_sugerida || esAviso;
+      const claseEstado = esAviso ? "aviso-alerta" : (r >= 0.5 ? "riesgo-alto" : "riesgo-bajo");
+      evalEl.className = `eval-adjunta ${claseEstado}`;
+
+      const motivoTxt = m.motivo ? `<span class="eval-motivo-txt">${escapar(m.motivo)}</span>` : "";
+      const avisoTxt = esAviso ? `<span class="eval-aviso-banner">Aviso emitido</span>` : "";
+
+      evalEl.innerHTML = `
+        <div class="eval-pills">
+          <span class="eval-pill eval-riesgo" title="Riesgo de fraude">Riesgo ${pct}%</span>
+          <span class="eval-pill eval-alerta ${esAlerta ? 'si' : 'no'}">${esAlerta ? 'Alerta: Sí' : 'Alerta: No'}</span>
+          <span class="eval-pill eval-tiempo" title="Tiempo de cómputo del detector">${msTxt}</span>
+          ${salteadasTxt}
+        </div>
+        ${motivoTxt}
+        ${avisoTxt}
+      `;
+
+      if (esAviso) {
+        resaltarFraseCulpable(m.evidencia || "", infEvaluada.el);
+      }
+      desplazarVisible(infEvaluada.el);
+    }
+  }
+}
+
+/** Dibuja la curva continua de riesgo temporal en el elemento SVG. */
+function dibujarGraficoRiesgo() {
+  const w = 320, h = 136;
+  const padL = 42, padR = 16, padT = 26, padB = 24;
+  const pw = w - padL - padR;
+  const ph = h - padT - padB;
+
+  let maxT = Math.max(25, relojLlamada + 2);
+  for (const p of puntosRiesgo) if (p.t > maxT) maxT = p.t + 2;
+
+  /** @param {number} t @returns {number} */
+  const x = (t) => padL + (Math.max(0, Math.min(t, maxT)) / maxT) * pw;
+  /** @param {number} r @returns {number} */
+  const y = (r) => padT + ph - (Math.max(0, Math.min(r, 1)) * ph);
+
+  let svg = `
+    <!-- Cuadrícula y ejes -->
+    <line x1="${padL}" y1="${y(1)}" x2="${padL + pw}" y2="${y(1)}" stroke="#e2e8f0" stroke-width="1" />
+    <line x1="${padL}" y1="${y(0.5)}" x2="${padL + pw}" y2="${y(0.5)}" stroke="#cbd5e1" stroke-dasharray="3 3" stroke-width="1" />
+    <line x1="${padL}" y1="${y(0)}" x2="${padL + pw}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
+    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
+
+    <!-- Etiquetas eje Y (legibles en proyector) -->
+    <text x="${padL - 5}" y="${y(1) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">100%</text>
+    <text x="${padL - 5}" y="${y(0.5) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">50%</text>
+    <text x="${padL - 5}" y="${y(0) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">0%</text>
+
+    <!-- Etiquetas eje X (legibles en proyector) -->
+    <text x="${padL}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="start" fill="#334155" font-family="system-ui">0s</text>
+    <text x="${x(maxT / 2)}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="middle" fill="#334155" font-family="system-ui">${(maxT / 2).toFixed(0)}s</text>
+    <text x="${padL + pw}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">${maxT.toFixed(0)}s</text>
+  `;
+
+  if (puntosRiesgo.length > 0) {
+    const ordenados = [...puntosRiesgo].sort((a, b) => a.t - b.t);
+    // Escalones: el riesgo vale lo que dijo la última evaluación hasta la siguiente; no se interpola.
+    const traza = [{ t: 0, r: 0 }];
+    for (const p of ordenados) traza.push({ t: p.t, r: traza[traza.length - 1].r }, { t: p.t, r: p.r });
+    const ultimo = traza[traza.length - 1];
+    if (relojLlamada > ultimo.t) traza.push({ t: relojLlamada, r: ultimo.r });
+    const puntos = traza.map(p => `${x(p.t).toFixed(1)},${y(p.r).toFixed(1)}`).join(" ");
+
+    // Línea de riesgo desde el inicio de la llamada
+    svg += `<polyline points="${puntos}" fill="none" stroke="#1d4ed8" stroke-width="2.75" stroke-linejoin="round" stroke-linecap="round" />`;
+
+    // Puntos de cada evaluación
+    for (const p of ordenados) {
+      const cx = x(p.t).toFixed(1);
+      const cy = y(p.r).toFixed(1);
+      const col = p.aviso ? "#b91c1c" : (p.r >= 0.5 ? "#f87171" : "#15803d");
+      const radio = p.aviso ? 5 : 4;
+      svg += `<circle cx="${cx}" cy="${cy}" r="${radio}" fill="${col}" stroke="#ffffff" stroke-width="1.5" />`;
+    }
+  }
+
+  // Marca vertical del momento del aviso en la banda superior (legible en proyector)
+  if (tiempoAviso != null) {
+    const anchoBadge = 88;
+    const mitadBadge = anchoBadge / 2;
+    const axNum = Math.max(padL + mitadBadge, Math.min(padL + pw - mitadBadge, x(tiempoAviso)));
+    const ax = x(tiempoAviso).toFixed(1);
+    svg += `
+      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#b91c1c" stroke-width="2" stroke-dasharray="3 2" />
+      <rect x="${(axNum - mitadBadge).toFixed(1)}" y="2" width="${anchoBadge}" height="20" rx="4" fill="#b91c1c" />
+      <text x="${axNum.toFixed(1)}" y="16" font-size="12" font-weight="700" text-anchor="middle" fill="#ffffff" font-family="system-ui">AVISO ${tiempoAviso.toFixed(1)}s</text>
+    `;
+  }
+
+  svgEl.innerHTML = svg;
+}
+
+/** @param {DetectorInfo|undefined} detector */
+function actualizarDetectorVisual(detector) {
+  if (!detector) return;
+  const esSlm = detector.tipo === "slm";
+  $("detector-nombre").textContent = esSlm ? `SLM (${detector.modelo || "local"})` : "Reglas";
+  $("detector-sub").textContent = esSlm
+    ? "Evaluación con modelo de lenguaje local"
+    : "Heurística de códigos de verificación y urgencia";
+}
+
+function conectar() {
+  const ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/panel`);
+  conexion = ws;
+  ws.onopen = () => {
+    $("estado").textContent = "esperando audio…";
+    pendiente = false;
+    actualizarControles();
+  };
+  ws.onclose = () => {
+    liberarMicrofono();
+    pruebaASR.evento({tipo: "desconexion"});
+    pendiente = false;
+    limpiarNiveles();
+    $("estado").textContent = "sin conexión, reintentando…";
+    actualizarControles();
+    setTimeout(conectar, 1000);
+  };
+  ws.onmessage = (e) => {
+    const m = JSON.parse(e.data);
+    pruebaASR.evento(m);
+    historialUI.evento(m);
+    if (m.tipo === "inicio") {
+      historialUI.cerrar();
+      reiniciar(m.llamada_id);
+      if (m.detector) actualizarDetectorVisual(m.detector);
+      if (m.modo === "llamada") corteLlamada.valor = m.corte_silencio_s;
+      if (m.asr) modeloASR.value = m.asr;
+      enLlamada = true; terminada = false; pendiente = false;
+      if (inicioPropio) { inicioPropio = false; void emisor?.iniciar(); }
+      actualizarControles();
+    }
+    else if (m.tipo === "prueba_guardada") $("estado").textContent = `prueba guardada en ${m.dir}`;
+    else if (m.tipo === "niveles") niveles(m);
+    else if (m.tipo === "asr") asr(m);
+    else if (m.tipo === "detector") detector(m);
+    else if (m.tipo === "fin") {
+      cerrarEsperas("Sin evaluación: la llamada terminó antes");
+      liberarMicrofono();
+      limpiarNiveles();
+      $("estado").textContent = pruebaASR.activa
+        ? "prueba terminada · sin guardar (se descarta al empezar otra)"
+        : `llamada terminada · guardada en ${m.dir}`;
+      enLlamada = false; terminada = true; pendiente = false;
+      actualizarControles();
+    } else if (m.tipo === "error") {
+      if (inicioPropio) liberarMicrofono();
+      $("error").textContent = m.mensaje;
+      pendiente = false;
+      actualizarControles();
+    }
+  };
+}
+
+dibujarGraficoRiesgo();
+void fetch("/detector")
+  .then(r => (r.ok ? r.json() : null))
+  .then(d => { if (d) actualizarDetectorVisual(d); })
+  .catch(() => {});
+conectar();
+</script>
+</body>
+</html>

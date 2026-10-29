@@ -1,0 +1,90 @@
+# Hotwords para sherpa-onnx (modified_beam_search + bpe.vocab sintético). Una por línea.
+# Solo términos críticos, bancos y apps: la jerga queda afuera a propósito (jerga.txt), porque
+# subirle el puntaje a palabras comunes aumenta las inserciones (PLAN-VOZ-REAL.md §5).
+# Las mayúsculas son las que produce el modelo Kroko (pone mayúscula a nombres propios y al
+# empezar la frase). Tiene mayúsculas solo en las palabras que suelen abrir una frase: el resto
+# va en minúscula. Para ver cómo se parte cada una: python hotwords.py
+# Las secciones («# [nombre]») sirven a medir_voz_real.py para el recall por grupo.
+# «número(s)» queda afuera aunque esté en PATRONES: es demasiado común y su boost metería inserciones.
+
+# [criticos]
+código
+Código
+clave
+Clave
+token
+OTP
+PIN
+CVV
+contraseña
+Contraseña
+verificación
+seis dígitos
+transferencia
+Transferencia
+transferí
+Transferí
+efectivo
+cripto
+alias
+CBU
+plata
+Plata
+luca
+lucas
+mango
+mangos
+DNI
+domicilio
+identidad
+CUIL
+acceso remoto
+TeamViewer
+AnyDesk
+compartí pantalla
+Compartí pantalla
+instalá
+Instalá
+abrí el enlace
+Abrí el enlace
+link
+autorizá
+Autorizá
+configuración
+pasame
+Pasame
+decime
+Decime
+dame
+Dame
+mandame
+Mandame
+confirmame
+Confirmame
+necesito que
+Necesito que
+tenés que
+Tenés que
+
+# [bancos_y_apps]
+Mercado Pago
+Naranja X
+Ualá
+Brubank
+Banco Macro
+Macro
+Galicia
+Banco Galicia
+Santander
+BBVA
+Banco Nación
+Banco Provincia
+Credicoop
+Supervielle
+Lemon
+Belo
+Personal Pay
+MODO
+Cuenta DNI
+WhatsApp
+Telegram

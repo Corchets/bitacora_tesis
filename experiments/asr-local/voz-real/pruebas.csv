@@ -1,0 +1,10 @@
+# Qué es cada prueba guardada del panel. Una fila por prueba; completala después de grabar.
+#   id         carpeta de la prueba (la ves en el Historial; ej. 2026-10-27_101500-123456)
+#   toma       1 (ajustar hotwords y diccionario) o 2 (medir y decidir)
+#   voz        luciano | otra
+#   condicion  microfono | meet
+#   canal      opcional: protegida | otra. Por defecto, el canal con audio según el manifiesto
+#   nota       opcional: dispositivo, ruido, lo que quieras recordar (sin comas)
+# Las líneas que empiezan con # se ignoran. Solo se miden las pruebas guardadas con referencia.
+id,toma,voz,condicion,canal,nota
+# 2026-10-27_101500-123456,1,luciano,microfono,,

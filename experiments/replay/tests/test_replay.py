@@ -75,6 +75,23 @@ class FakeDetector:
 
 class TestReplay(unittest.TestCase):
 
+    def test_roles_reinician_letras_y_canales_ab_conservan_identidad(self):
+        actualizaciones = [
+            Actualizacion("nueva_1", 1, "parcial", 1, "Hola", canal="protegida"),
+            Actualizacion("nueva_1", 2, "final", 2, "Del banco", canal="otra"),
+            Actualizacion("nueva_2", 1, "final", 1, "Buen día", canal="otra"),
+            Actualizacion("nueva_2", 2, "final", 2, "Hola", canal="protegida"),
+            Actualizacion("anterior", 1, "final", 1, "Buen día", canal="B"),
+            Actualizacion("anterior", 2, "final", 2, "Hola", canal="A"),
+        ]
+        detector = FakeDetector()
+        filas, _ = correr_replay(actualizaciones, detector, disparo="parcial")
+        self.assertEqual(
+            [[l.hablante for l in consulta] for consulta in detector.consultas],
+            [["A"], ["B", "A"], ["A"], ["A", "B"], ["B"], ["B", "A"]],
+        )
+        self.assertIn("A: Hola", filas[1]["texto_disponible_resumido"])
+
     def test_calentamiento_configura_pensar_false_en_consulta_slm(self):
         """El calentamiento compartido desactiva el razonamiento para la consulta real."""
         class ClienteOllamaFalso:
@@ -392,6 +409,26 @@ class TestReplay(unittest.TestCase):
             self.assertIn("Modo texto (sin audio)", contenido_resumen)
             self.assertIn("No aplica (modo texto sin audio", contenido_resumen)
             self.assertIn("Espera de cola máxima:** No aplica", contenido_resumen)
+
+    def test_cli_roles_conserva_modo_ab(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            entrada = Path(tmpdir) / "actualizaciones.jsonl"
+            salida = Path(tmpdir) / "salida"
+            entrada.write_text(json.dumps({
+                "llamada_id": "VIVO-ROLES", "n": 1, "tipo": "final", "segmento": 1,
+                "texto": "Hola", "canal": "protegida", "disponible_s": 1.0,
+            }), encoding="utf-8")
+            res = subprocess.run([
+                sys.executable, str(DIR_REPLAY / "replay.py"),
+                "--actualizaciones", str(entrada), "--detector", "reglas", "--salida", str(salida),
+            ], capture_output=True, text=True)
+            self.assertEqual(res.returncode, 0, res.stderr)
+            manifiesto = json.loads((salida / "manifiesto.json").read_text())
+            self.assertEqual(manifiesto["config"]["hablantes"], "ab")
+            with (salida / "eventos.csv").open() as archivo:
+                fila = next(csv.DictReader(archivo))
+            self.assertEqual(fila["canal"], "protegida")
+            self.assertEqual(fila["texto_disponible_resumido"], "A: Hola")
 
     def test_integracion_jsonl_ejemplo_con_reglas(self):
         """Prueba end-to-end con el JSONL de ejemplo (FICTICIO-01) y DetectorReglas."""
