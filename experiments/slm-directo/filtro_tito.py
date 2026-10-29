@@ -110,6 +110,16 @@ class FlujoTitoSLM:
     def reiniciar(self) -> None:
         self.estado = EstadoFiltro()
 
+    def _puntuar(self, lineas) -> tuple[float | None, str, float]:
+        """(puntaje o None, error o "", ms) para la actualización actual.
+
+        Por defecto puntúa solo el fragmento nuevo (entrada frase aislada).
+        Las subclases pueden puntuar el historial acumulado sin cambiar la
+        política de activación, indicio y aviso de `evaluar`.
+        """
+        n = len(lineas)
+        return self.tito.puntuar(n, lineas[-1].texto)
+
     def _respuesta_omitida(self, tito_ms: float, puntaje: float) -> Respuesta:
         e = self.estado
         return Respuesta(
@@ -132,7 +142,7 @@ class FlujoTitoSLM:
         tito_error = ""
 
         if not e.activado:
-            tito_puntaje, tito_error, costo_tito = self.tito.puntuar(n, fragmento)
+            tito_puntaje, tito_error, costo_tito = self._puntuar(lineas)
             tito_ms = costo_tito
             if tito_error:
                 e.activado = True
