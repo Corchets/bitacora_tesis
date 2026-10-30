@@ -16,6 +16,7 @@ Uso típico (ver «Cómo correrlo» en PLAN-VOZ-REAL.md):
     python medir_voz_real.py --sin-whisper
     python medir_voz_real.py --variantes beam,beam+hotwords,whisper-small
     python medir_voz_real.py --solo-parakeet
+    python medir_voz_real.py --solo-parakeet --contra-parakeet parakeet-0.8-rms-0.008
 """
 
 from __future__ import annotations
@@ -324,15 +325,18 @@ class Medicion:
             self.techo.append({"nombre": nombre, "config": config.como_dict(), "comparaciones": comparaciones})
 
     def correr_parakeet(self, seleccion: set[str] | None) -> None:
-        """Parakeet con cada corte y umbral; cada una contra la del panel con la regla §2, sin elegir ninguna."""
+        """Parakeet con cada corte y umbral; cada una contra la de referencia con la regla §2, sin elegir ninguna."""
+        contra = self.args.contra_parakeet
+        configs = dict(V.VARIANTES_PARAKEET)
+        self.correr(contra, "parakeet", configs[contra].como_dict())  # la referencia se corre siempre, primero
         for nombre, config in V.VARIANTES_PARAKEET:
-            if nombre == V.PARAKEET_PANEL or self.elegida(seleccion, nombre):
+            if nombre != contra and self.elegida(seleccion, nombre):
                 self.correr(nombre, "parakeet", config.como_dict())
-        base = self.agregado_de_decision(self.variantes[V.PARAKEET_PANEL])
-        for nombre, config in V.VARIANTES_PARAKEET[1:]:
-            if nombre in self.variantes:
+        base = self.agregado_de_decision(self.variantes[contra])
+        for nombre, config in V.VARIANTES_PARAKEET:
+            if nombre in self.variantes and nombre != contra:
                 agregado = self.agregado_de_decision(self.variantes[nombre])
-                self.parakeet.append({"nombre": nombre, "config": config.como_dict(), "contra": V.PARAKEET_PANEL,
+                self.parakeet.append({"nombre": nombre, "config": config.como_dict(), "contra": contra,
                                       "regla": M.regla_de_paso(agregado, base) if agregado and base else None})
 
 
@@ -395,7 +399,9 @@ def tabla_principal(med: Medicion, toma: int) -> list[str]:
 
 def lineas_de_parakeet(med: Medicion) -> list[str]:
     toma = med.args.toma_decision
-    salida = [f"Cada corte y umbral contra `{V.PARAKEET_PANEL}` (el del panel), en la toma {toma}, con las cuatro condiciones de la regla. "
+    contra = med.args.contra_parakeet
+    de_quien = "el del panel" if contra == V.PARAKEET_PANEL else "la referencia de esta corrida"
+    salida = [f"Cada corte y umbral contra `{contra}` ({de_quien}), en la toma {toma}, con las cuatro condiciones de la regla. "
               "No se elige sola: «pasa» quiere decir que cumple las cuatro.", "",
               "| Variante | Frases más | Etiquetas nuevas en negativas | Demora extra (s) | WER extra (puntos) | ¿Pasa? |",
               "|---|---|---|---|---|---|"]
@@ -595,6 +601,7 @@ def escribir_salida(carpeta: Path, med: Medicion, args: argparse.Namespace, omit
             "bloque_ms": args.bloque_ms, "hilos_kroko": args.hilos, "hilos_whisper": args.hilos_whisper,
             "toma_de_decision": args.toma_decision, "hotwords_score": args.hotwords_score, "max_caminos": args.max_caminos,
             "modelo": str(V.DIR_MODELO.name), "motores_por_subproceso": not args.en_proceso,
+            "contra_parakeet": args.contra_parakeet,
             "archivos": {n: {"ruta": str(r), "sha256_16": _huella(Path(r))} for n, r in
                          (("guion", args.guion), ("hotwords", args.hotwords), ("jerga", args.jerga),
                           ("diccionario", args.diccionario), ("pruebas_csv", args.csv))},
@@ -635,7 +642,10 @@ def parsear(argv: list[str] | None) -> argparse.Namespace:
                    f"Válidas: {', '.join(V.nombres_de_variantes())}")
     p.add_argument("--sin-whisper", action="store_true", help="no corre las variantes de Whisper (son lentas)")
     p.add_argument("--solo-parakeet", action="store_true",
-                   help=f"solo Parakeet con cada corte y umbral, sin la cadena de Zipformer ni Whisper ({V.PARAKEET_PANEL} se corre siempre)")
+                   help="solo Parakeet con cada corte y umbral, sin la cadena de Zipformer ni Whisper (la de --contra-parakeet se corre siempre)")
+    p.add_argument("--contra-parakeet", default=V.PARAKEET_PANEL, choices=[n for n, _ in V.VARIANTES_PARAKEET],
+                   help=f"variante de Parakeet contra la que se comparan las demás (defecto: {V.PARAKEET_PANEL}, la del panel; "
+                        f"{V.PARAKEET_LABORATORIO} es la de «Probar el ASR»)")
     p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=(1, 2, 3), help="toma donde se aplica la regla (defecto: 2; 3 = confirmación de lo elegido con la 2)")
     p.add_argument("--bloque-ms", type=int, default=V.BLOQUE_MS_POR_DEFECTO, help="tamaño de bloque (defecto: 40, como el panel)")
     p.add_argument("--hilos", type=int, default=V.HILOS_POR_DEFECTO, help="hilos del ASR sherpa (defecto: 2, como el servidor)")
@@ -679,7 +689,7 @@ def medir(args: argparse.Namespace, ejecutor: Callable | None = None) -> Path:
                    ejecutor or (ejecutor_en_proceso() if args.en_proceso else ejecutar_en_subproceso),
                    diccionario_vacio=len(Diccionario.desde_archivo(args.diccionario)) == 0)
     if args.solo_parakeet:
-        med.base = med.final = V.PARAKEET_PANEL
+        med.base = med.final = args.contra_parakeet
         med.correr_parakeet(seleccion)
     else:
         med.correr_cadena(seleccion)

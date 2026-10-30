@@ -4,6 +4,7 @@ Contiene:
 - MotorASR: interfaz común.
 - MotorSherpaZipformer: Zipformer streaming español via sherpa-onnx (motor principal).
 - MotorFasterWhisper: faster-whisper en modo por segmentos (segundo motor, NO streaming).
+- DetectorSilero: Silero VAD de sherpa-onnx para decidir voz o silencio por bloque (opcional en MotorPorFrases).
 - MotorPorFrases: base para modelos no streaming que se transcriben frase por frase (corte por silencio).
 - MotorSherpaParakeet: Parakeet TDT 0.6B v3 vía sherpa-onnx, por frases con parciales.
 - MotorWhisperPorFrases: faster-whisper large-v3-turbo por frases, sin parciales.
@@ -516,11 +517,82 @@ def es_muletilla_final(texto: str) -> bool:
     return bool(palabras) and all(p in MULETILLAS_FINALES for p in palabras)
 
 
+class DetectorSilero:
+    """Decide si un bloque es voz con Silero VAD de sherpa-onnx (`VadModel.is_speech`), en lugar del RMS.
+
+    Silero mira ventanas de 512 muestras (32 ms a 16 kHz) y los bloques del panel son de 640: lo que sobra
+    de un bloque se guarda para la ventana siguiente. Un bloque es voz si alguna ventana que terminó en él
+    es voz; si no terminó ninguna, vale lo del bloque anterior. `min_silence_duration` y
+    `min_speech_duration` van en 0 para que el corte, el preaudio y `MIN_VOZ_S` sigan siendo los de
+    `MotorPorFrases`. Queda la histéresis propia de sherpa: ya en voz, sigue siendo voz mientras la
+    probabilidad no baje de `umbral - 0.15`, y la primera ventana sobre el umbral todavía cuenta como silencio.
+    """
+
+    VENTANA = 512
+
+    def __init__(self, modelo: str | Path, umbral: float = 0.5, sample_rate: int = 16000, hilos: int = 1,
+                 vad: Any = None):
+        self.ruta_modelo = Path(modelo)
+        self.umbral = umbral
+        self.sample_rate = sample_rate
+        self.hilos = hilos
+        self.vad = vad  # se carga al primer bloque; las pruebas pasan uno falso con is_speech() y reset()
+        self.tiempos_ms: list[float] = []  # costo de decidir cada bloque
+        self.reiniciar()
+
+    def _cargar(self) -> None:
+        import sherpa_onnx
+
+        if not self.ruta_modelo.is_file():
+            raise RuntimeError(f"No está el modelo de Silero: {self.ruta_modelo}")
+        silero = sherpa_onnx.SileroVadModelConfig(model=str(self.ruta_modelo), threshold=self.umbral,
+                                                  min_silence_duration=0.0, min_speech_duration=0.0,
+                                                  window_size=self.VENTANA)
+        self.vad = sherpa_onnx.VadModel.create(sherpa_onnx.VadModelConfig(
+            silero_vad=silero, sample_rate=self.sample_rate, num_threads=self.hilos))
+
+    def reiniciar(self) -> None:
+        """Estado de una llamada nueva: el LSTM de Silero arranca de cero."""
+        if self.vad is not None:
+            self.vad.reset()
+        self.pendiente = np.zeros(0, dtype=np.float32)
+        self.ultima = False
+
+    def es_voz(self, muestras: np.ndarray) -> bool:
+        t0 = time.perf_counter()
+        if self.vad is None:
+            self._cargar()
+        datos = np.concatenate([self.pendiente, muestras]) if len(self.pendiente) else muestras
+        completas = len(datos) // self.VENTANA * self.VENTANA
+        if completas:
+            # Todas las ventanas pasan por el modelo, aunque una ya haya dado voz: el estado tiene que avanzar.
+            decisiones = [self.vad.is_speech(datos[i:i + self.VENTANA]) for i in range(0, completas, self.VENTANA)]
+            self.ultima = any(decisiones)
+        self.pendiente = np.array(datos[completas:], dtype=np.float32)
+        self.tiempos_ms.append((time.perf_counter() - t0) * 1000.0)
+        return self.ultima
+
+    def metadatos(self) -> dict[str, Any]:
+        t = self.tiempos_ms
+        costo = ({"bloques": len(t), "mediana_ms": round(float(np.median(t)), 4),
+                  "p95_ms": round(float(np.percentile(t, 95)), 4), "max_ms": round(max(t), 4),
+                  "total_s": round(sum(t) / 1000.0, 4)} if t else None)
+        sha = None
+        if self.ruta_modelo.is_file():
+            import hashlib
+
+            sha = hashlib.sha256(self.ruta_modelo.read_bytes()).hexdigest()[:16]
+        return {"tipo": "silero_vad_sherpa_onnx", "modelo": self.ruta_modelo.name, "sha256_16": sha,
+                "umbral": self.umbral, "umbral_para_seguir": round(self.umbral - 0.15, 3), "ventana": self.VENTANA,
+                "min_silence_duration": 0.0, "min_speech_duration": 0.0, "hilos": self.hilos, "costo_por_bloque": costo}
+
+
 class MotorPorFrases(MotorASR):
     """Base para modelos que no son streaming: corta frases por silencio y transcribe cada una.
 
     Usa el mismo corte por silencio que la demo (`corte_silencio_s`, `umbral_rms_silencio`)
-    para cerrar la frase. Mientras la frase sigue abierta, si `parciales_cada_s` no es None,
+    para cerrar la frase. Con `detector_voz` (un `DetectorSilero`), Silero decide qué bloque es voz en
+    lugar del RMS; el corte, el preaudio, el tope y `MIN_VOZ_S` no cambian. Mientras la frase sigue abierta, si `parciales_cada_s` no es None,
     la vuelve a transcribir entera cada ese tiempo para mostrar texto provisorio.
     """
 
@@ -537,6 +609,8 @@ class MotorPorFrases(MotorASR):
         self.filtrar_idioma = True  # descarta parciales que no parecen español y finales que son muletillas
         self.corte_silencio_s = 0.8
         self.umbral_rms_silencio = 0.005
+        # Si no es None, decide voz o silencio en lugar del RMS; todo lo demás (corte, preaudio, tope) queda igual.
+        self.detector_voz: DetectorSilero | None = None
         # El servidor lo fija según el corte «auto»; estos modelos no tienen endpoint propio.
         self.enable_endpoint = False
         self._limpiar()
@@ -559,9 +633,17 @@ class MotorPorFrases(MotorASR):
     def reiniciar(self) -> None:
         """Descarta lo oído sin recargar el modelo."""
         self._limpiar()
+        if self.detector_voz is not None:
+            self.detector_voz.reiniciar()
 
     def nueva_sesion(self) -> None:
-        self._limpiar()
+        self.reiniciar()
+
+    def _es_voz(self, muestras: np.ndarray) -> bool:
+        if self.detector_voz is not None:
+            return self.detector_voz.es_voz(muestras)
+        rms = float(np.sqrt(np.mean(muestras**2))) if len(muestras) else 0.0
+        return rms >= self.umbral_rms_silencio
 
     def _evento(self, tipo: str, texto: str, fin_s: float, t0: float) -> EventoASR:
         return EventoASR(tipo=tipo, segmento=self.segmento_actual, texto=texto,
@@ -584,8 +666,7 @@ class MotorPorFrases(MotorASR):
         if muestras.dtype != np.float32:
             muestras = muestras.astype(np.float32)
         dur_s = fin_bloque_s - inicio_bloque_s
-        rms = float(np.sqrt(np.mean(muestras**2))) if len(muestras) else 0.0
-        voz = rms >= self.umbral_rms_silencio
+        voz = self._es_voz(muestras)
 
         if not self.frase:
             if not voz:
@@ -627,11 +708,14 @@ class MotorPorFrases(MotorASR):
         return self._cerrar_frase(fin_audio_s, time.perf_counter())
 
     def _segmentacion(self) -> dict[str, Any]:
-        return {"tipo": "corte_por_silencio_rms", "corte_silencio_s": self.corte_silencio_s,
-                "umbral_rms_silencio": self.umbral_rms_silencio, "previo_s": self.PREVIO_S,
+        silero = self.detector_voz is not None
+        return {"tipo": "corte_por_silencio_silero" if silero else "corte_por_silencio_rms",
+                "corte_silencio_s": self.corte_silencio_s,
+                "umbral_rms_silencio": None if silero else self.umbral_rms_silencio, "previo_s": self.PREVIO_S,
                 "max_frase_s": self.MAX_FRASE_S, "min_voz_s": self.MIN_VOZ_S,
                 "min_voz_parcial_s": self.MIN_VOZ_PARCIAL_S, "parciales_cada_s": self.parciales_cada_s,
-                "filtro_idioma": "parciales_y_muletillas_finales" if self.filtrar_idioma else None}
+                "filtro_idioma": "parciales_y_muletillas_finales" if self.filtrar_idioma else None,
+                **({"vad": self.detector_voz.metadatos()} if silero else {})}
 
 
 class MotorSherpaParakeet(MotorPorFrases):

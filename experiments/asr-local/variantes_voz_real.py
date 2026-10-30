@@ -11,8 +11,9 @@ sobre la configuración que se quedó en los pasos anteriores:
    de la cadena: no pasa al panel.
 
 Aparte de la cadena (que es de Zipformer, retirado el 2026-10-29), Parakeet por frases con distintos
-cortes de silencio y umbrales RMS (PLAN-VOZ-REAL.md §9 y §10). Cada una se compara con la del panel;
-no se elige sola.
+cortes de silencio y umbrales RMS (PLAN-VOZ-REAL.md §9 y §10), y con Silero VAD en lugar del RMS para
+decidir qué bloque es voz (§12). Cada una se compara con una de referencia (la del panel, salvo que se
+pida otra); no se elige sola.
 
 La ganancia y el umbral RMS de *captura* ya quedaron grabados en el audio y no se pueden rehacer:
 lo único que se rehace offline es el umbral RMS que usa el motor para cortar y una normalización de
@@ -31,11 +32,13 @@ from typing import Any, Callable
 
 import numpy as np
 
-from motores import MotorASR, MotorFasterWhisper, MotorSherpaParakeet, MotorSherpaZipformer
+from motores import DetectorSilero, MotorASR, MotorFasterWhisper, MotorSherpaParakeet, MotorSherpaZipformer
 
 DIR_ASR = Path(__file__).resolve().parent
 DIR_MODELO = DIR_ASR / "modelos" / "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
 DIR_MODELO_PARAKEET = DIR_ASR / "modelos" / "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
+# https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx (fuera de Git, como los otros)
+MODELO_SILERO = DIR_ASR / "modelos" / "silero-vad" / "silero_vad.onnx"
 CORTE_AUTO = "auto"
 CORTE_RESPALDO_S = 0.8  # lo mismo que servidor.py: corte del motor cuando el modelo no cierra la frase solo
 SAMPLE_RATE = 16000
@@ -75,7 +78,10 @@ class ConfigWhisper:
 @dataclass(frozen=True)
 class ConfigParakeet:
     corte: float = 0.9  # corte de silencio en s; el panel no tiene «auto» para Parakeet
+    # Con «rms» decide qué bloque es voz; con «silero» solo marca el fin de la voz para medir la demora.
     umbral_rms: float = 0.003
+    vad: str = "rms"  # «rms» (el del panel) o «silero»
+    umbral_silero: float = 0.5
 
     def como_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -129,12 +135,19 @@ def _parakeet(corte: float, umbral: float) -> tuple[str, ConfigParakeet]:
     return f"parakeet-{corte}-rms-{umbral}", ConfigParakeet(corte, umbral)
 
 
-# La primera es la del panel desde c21001c (0,9 s y 0,003): las demás se comparan con ella.
+def _parakeet_silero(corte: float, umbral: float = 0.5) -> tuple[str, ConfigParakeet]:
+    # El RMS 0,008 ya no decide: deja el fin de la voz igual que en la referencia del laboratorio para comparar demoras.
+    return f"parakeet-{corte}-silero-{umbral}", ConfigParakeet(corte, 0.008, vad="silero", umbral_silero=umbral)
+
+
+# La primera es la del panel desde c21001c (0,9 s y 0,003): por defecto las demás se comparan con ella.
 VARIANTES_PARAKEET: tuple[tuple[str, ConfigParakeet], ...] = (
     _parakeet(0.9, 0.003), _parakeet(0.8, 0.003), _parakeet(0.5, 0.003),
     _parakeet(0.3, 0.008), _parakeet(0.5, 0.008), _parakeet(0.6, 0.008), _parakeet(0.8, 0.008),
+    _parakeet_silero(0.8), _parakeet_silero(0.5), _parakeet_silero(0.3),
 )
 PARAKEET_PANEL = VARIANTES_PARAKEET[0][0]
+PARAKEET_LABORATORIO = "parakeet-0.8-rms-0.008"  # lo que arranca «Probar el ASR» desde el 2026-10-29 (§11)
 
 
 def nombres_de_variantes() -> list[str]:
@@ -199,6 +212,10 @@ def crear_motor_parakeet(config: ConfigParakeet, spec: dict[str, Any]) -> MotorA
     motor = MotorSherpaParakeet(str(spec.get("modelo_dir") or DIR_MODELO_PARAKEET), hilos=spec.get("hilos", HILOS_POR_DEFECTO))
     motor.corte_silencio_s = config.corte
     motor.umbral_rms_silencio = config.umbral_rms
+    if config.vad == "silero":
+        motor.detector_voz = DetectorSilero(spec.get("modelo_silero") or MODELO_SILERO, config.umbral_silero)
+    elif config.vad != "rms":
+        raise ValueError(f"vad desconocido: {config.vad}")
     return motor
 
 

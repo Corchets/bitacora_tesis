@@ -195,6 +195,15 @@ class TestSeleccionDeVariantes(unittest.TestCase):
         self.assertEqual(V.PARAKEET_PANEL, "parakeet-0.9-rms-0.003")
         self.assertIn("parakeet-0.5-rms-0.008", V.nombres_de_variantes())
 
+    def test_silero_con_los_cortes_del_issue_y_el_fin_de_voz_de_la_referencia(self):
+        configs = dict(V.VARIANTES_PARAKEET)
+        self.assertIn(V.PARAKEET_LABORATORIO, configs)
+        for corte in (0.8, 0.5, 0.3):
+            c = configs[f"parakeet-{corte}-silero-0.5"]
+            self.assertEqual((c.corte, c.vad, c.umbral_silero), (corte, "silero", 0.5))
+            self.assertEqual(c.umbral_rms, configs[V.PARAKEET_LABORATORIO].umbral_rms)
+        self.assertEqual(configs[V.PARAKEET_PANEL].vad, "rms")
+
 
 class TestVariantes(unittest.TestCase):
     def test_los_candidatos_se_arman_sobre_lo_que_se_quedo(self):
@@ -220,6 +229,15 @@ class TestVariantes(unittest.TestCase):
         self.assertEqual((motor.nombre, motor.corte_silencio_s, motor.umbral_rms_silencio, motor.hilos, motor.parciales_cada_s),
                          ("sherpa-parakeet", 0.5, 0.008, 2, 0.5))
         self.assertEqual(Path(motor.modelo_id), V.DIR_MODELO_PARAKEET)
+        self.assertIsNone(motor.detector_voz)
+
+    def test_parakeet_con_silero_cambia_solo_quien_decide_la_voz(self):
+        motor = V.crear_motor({"motor": "parakeet", "config": {"corte": 0.5, "umbral_rms": 0.008, "vad": "silero",
+                                                                "umbral_silero": 0.4}})
+        self.assertEqual((motor.corte_silencio_s, motor.parciales_cada_s, motor.filtrar_idioma), (0.5, 0.5, True))
+        self.assertEqual((motor.detector_voz.ruta_modelo, motor.detector_voz.umbral), (V.MODELO_SILERO, 0.4))
+        with self.assertRaises(ValueError):
+            V.crear_motor({"motor": "parakeet", "config": {"vad": "webrtc"}})
 
     def test_corte_fijo_apaga_el_endpoint_nativo(self):
         motor = V.crear_motor_kroko(V.ConfigKroko(corte=1.2, umbral_rms=0.01, rule2=0.5), {})
@@ -489,6 +507,21 @@ class TestMedicionDeExtremoAExtremo(unittest.TestCase):
         self.assertTrue(any(c["regla"]["pasa"] for c in m["decision"]["parakeet"]))
         resumen = (self.dir / "salida" / "resumen.md").read_text(encoding="utf-8")
         self.assertIn(f"contra `{V.PARAKEET_PANEL}`", resumen)
+
+    def test_solo_parakeet_contra_otra_referencia(self):
+        errores = {V.PARAKEET_LABORATORIO: {"código": "codego", "la clave": "la clabe", "DNI": "de ni"}}
+        ejecutor = EjecutorFalso(errores)
+        self.medir(ejecutor, "--solo-parakeet", "--contra-parakeet", V.PARAKEET_LABORATORIO,
+                   "--variantes", "parakeet-0.8-silero-0.5,parakeet-0.5-silero-0.5")
+        self.assertEqual([s["nombre"] for s in ejecutor.specs],
+                         [V.PARAKEET_LABORATORIO, "parakeet-0.8-silero-0.5", "parakeet-0.5-silero-0.5"])
+        m = self.manifiesto()
+        self.assertEqual(m["decision"]["configuracion_final"], V.PARAKEET_LABORATORIO)
+        self.assertEqual(m["configuracion"]["contra_parakeet"], V.PARAKEET_LABORATORIO)
+        self.assertEqual({c["contra"] for c in m["decision"]["parakeet"]}, {V.PARAKEET_LABORATORIO})
+        self.assertEqual(len(m["decision"]["parakeet"]), 2)
+        resumen = (self.dir / "salida" / "resumen.md").read_text(encoding="utf-8")
+        self.assertIn(f"contra `{V.PARAKEET_LABORATORIO}` (la referencia de esta corrida)", resumen)
 
     def test_sin_pruebas_medibles_avisa(self):
         for carpeta in self.llamadas.iterdir():

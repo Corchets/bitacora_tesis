@@ -10,7 +10,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from motores import MotorPorFrases, es_muletilla_final, parece_otro_idioma  # noqa: E402
+from motores import DetectorSilero, MotorPorFrases, es_muletilla_final, parece_otro_idioma  # noqa: E402
 
 HZ = 16000
 BLOQUE = 640  # 40 ms, como el panel
@@ -51,11 +51,32 @@ class MotorGuion(MotorPorFrases):
         return {}
 
 
-def alimentar(motor, segundos_por_tramo):
+class VadFalso:
+    """Hace de `VadModel` de sherpa: dice voz si la ventana tiene amplitud por encima de `nivel`."""
+
+    def __init__(self, nivel=0.05):
+        self.nivel = nivel
+        self.ventanas = []  # tamaño de cada ventana recibida
+        self.reinicios = 0
+
+    def is_speech(self, ventana):
+        self.ventanas.append(len(ventana))
+        return bool(np.max(np.abs(ventana)) > self.nivel)
+
+    def reset(self):
+        self.reinicios += 1
+
+
+def con_silero(motor, nivel=0.05):
+    motor.detector_voz = DetectorSilero("no-hace-falta.onnx", vad=VadFalso(nivel))
+    return motor
+
+
+def alimentar(motor, segundos_por_tramo, valor_voz=0.1, valor_silencio=0.0):
     """Tramos alternados de voz y silencio; devuelve los eventos y el fin del audio."""
     eventos, t = [], 0.0
     for i, dur in enumerate(segundos_por_tramo):
-        valor = 0.1 if i % 2 == 0 else 0.0
+        valor = valor_voz if i % 2 == 0 else valor_silencio
         for _ in range(round(dur / 0.04)):
             eventos += motor.procesar_bloque(np.full(BLOQUE, valor, dtype=np.float32), t, t + 0.04)
             t = round(t + 0.04, 3)
@@ -144,6 +165,83 @@ class TestMotorPorFrases(unittest.TestCase):
         motor = MotorEco()
         eventos, _ = alimentar(motor, [MotorPorFrases.MAX_FRASE_S + 2.0])
         self.assertEqual(len([e for e in eventos if e.tipo == "final"]), 2)
+
+
+
+class TestDetectorSilero(unittest.TestCase):
+    def test_por_defecto_decide_el_rms(self):
+        motor = MotorEco()
+        self.assertIsNone(motor.detector_voz)
+        seg = motor._segmentacion()
+        self.assertEqual(seg["tipo"], "corte_por_silencio_rms")
+        self.assertNotIn("vad", seg)
+
+    def test_mismo_corte_preaudio_y_tope_que_con_rms(self):
+        # Si Silero ve voz donde el RMS ve voz, las frases son las mismas: solo cambia quién decide. Los tiempos
+        # pueden correrse un bloque: la ventana de 512 que cruza al primer bloque de silencio todavía tiene voz,
+        # así que el cierre llega 40 ms después y el preaudio de la frase siguiente puede empezar 40 ms más tarde.
+        for tramos in ([1.0, 1.5, 0.8, 1.0], [0.12, 1.0, 1.0], [MotorPorFrases.MAX_FRASE_S + 2.0]):
+            rms, _ = alimentar(MotorEco(parciales_cada_s=0.5), tramos)
+            silero, _ = alimentar(con_silero(MotorEco(parciales_cada_s=0.5)), tramos)
+            self.assertEqual([(e.tipo, e.texto, e.segmento) for e in silero], [(e.tipo, e.texto, e.segmento) for e in rms])
+            for e_s, e_r in zip(silero, rms):
+                self.assertIn(round(e_s.fin_audio_s - e_r.fin_audio_s, 3), (0.0, 0.04))
+                self.assertIn(round(e_s.inicio_audio_s - e_r.inicio_audio_s, 3), (0.0, 0.04))
+
+    def test_ruido_fuerte_que_no_es_voz_no_llama_al_asr(self):
+        # 0,03 de amplitud pasa el RMS de 0,005, pero el VAD (falso) lo toma como silencio.
+        rms = MotorEco()
+        alimentar(rms, [1.0, 1.0], valor_voz=0.03)
+        self.assertEqual(rms.llamadas, 1)
+        silero = con_silero(MotorEco())
+        eventos, _ = alimentar(silero, [1.0, 1.0], valor_voz=0.03)
+        self.assertEqual((eventos, silero.llamadas), ([], 0))
+
+    def test_voz_debil_bajo_el_umbral_rms_la_decide_el_vad(self):
+        motor = con_silero(MotorEco(), nivel=0.001)
+        motor.umbral_rms_silencio = 0.5  # con RMS no habría ninguna frase
+        eventos, _ = alimentar(motor, [1.0, 1.0], valor_voz=0.002)
+        self.assertEqual(len([e for e in eventos if e.tipo == "final"]), 1)
+
+    def test_ventanas_de_512_con_el_resto_para_el_bloque_siguiente(self):
+        vad = VadFalso()
+        detector = DetectorSilero("x.onnx", vad=vad)
+        decisiones = [detector.es_voz(np.full(BLOQUE, 0.1 if i < 5 else 0.0, dtype=np.float32)) for i in range(10)]
+        self.assertEqual(vad.ventanas, [512] * 12)  # 6400 muestras: 12 ventanas y sobran 256
+        self.assertEqual(len(detector.pendiente), 256)
+        # El bloque 6 (índice 5) todavía cierra una ventana con 384 muestras de voz del bloque 5.
+        self.assertEqual(decisiones, [True] * 6 + [False] * 4)
+
+    def test_bloque_que_no_cierra_ventana_repite_la_decision_anterior(self):
+        detector = DetectorSilero("x.onnx", vad=VadFalso())
+        self.assertTrue(detector.es_voz(np.full(600, 0.1, dtype=np.float32)))
+        self.assertTrue(detector.es_voz(np.zeros(100, dtype=np.float32)))  # 188 pendientes: ninguna ventana nueva
+        self.assertEqual(len(detector.vad.ventanas), 1)
+
+    def test_nueva_sesion_reinicia_el_vad(self):
+        motor = con_silero(MotorEco())
+        motor.procesar_bloque(np.full(300, 0.1, dtype=np.float32), 0.0, 0.02)
+        motor.nueva_sesion()
+        self.assertEqual(motor.detector_voz.vad.reinicios, 2)  # al crearlo y al cambiar de prueba
+        self.assertEqual(len(motor.detector_voz.pendiente), 0)
+        self.assertFalse(motor.detector_voz.ultima)
+
+    def test_segmentacion_y_costo_del_vad(self):
+        motor = con_silero(MotorEco())
+        alimentar(motor, [0.4])
+        seg = motor._segmentacion()
+        self.assertEqual(seg["tipo"], "corte_por_silencio_silero")
+        self.assertIsNone(seg["umbral_rms_silencio"])
+        self.assertEqual((seg["corte_silencio_s"], seg["previo_s"], seg["max_frase_s"], seg["min_voz_s"]),
+                         (0.8, MotorPorFrases.PREVIO_S, MotorPorFrases.MAX_FRASE_S, MotorPorFrases.MIN_VOZ_S))
+        vad = seg["vad"]
+        self.assertEqual((vad["umbral"], vad["umbral_para_seguir"], vad["ventana"]), (0.5, 0.35, 512))
+        self.assertEqual(vad["costo_por_bloque"]["bloques"], 10)
+
+    def test_sin_modelo_avisa(self):
+        detector = DetectorSilero("/no/existe/silero_vad.onnx")
+        with self.assertRaises(RuntimeError):
+            detector.es_voz(np.zeros(BLOQUE, dtype=np.float32))
 
 
 if __name__ == "__main__":
