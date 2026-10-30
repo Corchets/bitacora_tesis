@@ -10,21 +10,21 @@ colors:
   tinta: "#f5f5f7"
   tinta-secundaria: "#c7c7cc"
   mu: "#a1a1aa"
-  primary: "#0a84ff"
-  primary-dark: "#0070e0"
-  primary-claro: "#8ab4ff"
-  vos-fondo: "#0d2448"
-  vos-borde: "rgb(10 132 255 / 0.45)"
+  primary: "#4f74a8"
+  primary-dark: "#3f6290"
+  primary-claro: "#9db7da"
+  vos-fondo: "#1c2940"
+  vos-borde: "rgb(79 116 168 / 0.45)"
   otra-fondo: "#1c1c1e"
   otra-borde: "rgb(255 255 255 / 0.08)"
-  alerta: "#ff453a"
-  alerta-fuerte: "#dc2626"
-  alerta-tinta: "#fca5a5"
-  ok: "#30d158"
-  ok-tinta: "#86efac"
-  aviso-badge-tinta: "#fde68a"
-  resaltador: "#facc15"
-  foco: "#60a5fa"
+  alerta: "#c8584f"
+  alerta-fuerte: "#a93a36"
+  alerta-tinta: "#e3a8a3"
+  ok: "#5a9e78"
+  ok-tinta: "#9fc9b0"
+  aviso-badge-tinta: "#e0d2a0"
+  resaltador: "#c9a84c"
+  foco: "#9db7da"
 typography:
   display:
     fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
@@ -104,12 +104,12 @@ Consola de demostración de aula (modo Operate) diseñada para proyectarse en pa
 Todo el panel usa la escena oscura de la llamada: consola en vivo, Probar el ASR, Historial, vista protegida y Presentación leen los mismos tokens del `:root` de `panel.html`. Los `--p-*` de la Presentación son alias de esos tokens.
 
 - **Fondo (`fondo`: `#000000`)**: negro completo, igual que la proyección. Las cajas son paneles translúcidos (blanco al 2-4,5 %) con borde blanco al 10 %.
-- **Tinta (`tinta`: `#f5f5f7`, `tinta-secundaria`: `#c7c7cc`, `mu`: `#a1a1aa`)**: grises claros de iOS, todos por encima de 4.5:1 sobre negro y sobre `#1c1c1e`.
-- **Persona protegida (`primary`: `#0a84ff`, burbuja `#0f2a55` → `#0b2046`, rótulos `primary-claro`)**: azul de iOS, el mismo del teléfono derecho.
+- **Tinta (`tinta`: `#f5f5f7`, `tinta-secundaria`: `#c7c7cc`, `mu`: `#a1a1aa`)**: grises neutros, todos por encima de 4.5:1 sobre negro y sobre `#1c1c1e`.
+- **Persona protegida (`primary`: `#4f74a8`, burbuja `#1f2c42` → `#1b273b`, rótulos `primary-claro`)**: azul acerado y apagado, el mismo del teléfono derecho.
 - **Otra persona (`otra-fondo`: `#1c1c1e`)**: gris de burbuja de mensajería, sin juicio inicial.
-- **Alerta (`alerta`: `#ff453a` para bordes y halos, `alerta-fuerte`: `#dc2626` para insignias rellenas con texto blanco, `alerta-tinta`: `#fca5a5` para texto)**: reservada al aviso y a fallos.
-- **Estado seguro y voz activa (`ok`: `#30d158`, `ok-tinta`: `#86efac`)**: verde de llamada en curso.
-- **Riesgo alto sin aviso**: ámbar (`#facc15` al 8-14 % de relleno, tinta `#fde68a`); el mismo amarillo resalta la cita culpable.
+- **Alerta (`alerta`: `#c8584f` para bordes y halos, `alerta-fuerte`: `#a93a36` para insignias rellenas con texto blanco, `alerta-tinta`: `#e3a8a3` para texto)**: reservada al aviso y a fallos.
+- **Estado seguro y voz activa (`ok`: `#5a9e78`, `ok-tinta`: `#9fc9b0`)**: verde salvia, apagado.
+- **Riesgo alto sin aviso**: ámbar (`#c9a84c` al 8-14 % de relleno, tinta `#e0d2a0`); el mismo amarillo resalta la cita culpable.
 
 **La regla de doble codificación.** Como los proyectores de aula suelen desteñir o lavar colores, ningún estado ni decisión crítica depende exclusivamente del color: siempre se acompaña de texto unívoco («Alerta: Sí», «Alerta: No», «Posible estafa»), etiquetas y formas.
 
@@ -140,13 +140,13 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
   - Barra superior liviana sin caja: rótulo «Vista de presentación», estado de la llamada, identificador y botones en píldora. Los errores flotan debajo de la barra sin empujar la escena.
   - Dos iPhone grandes cuyo tamaño sale del alto de la ventana (`--tel-ancho = min(alto disponible × 0.485, 27vw, 540px)`, proporción 485:1000): unos 485px de ancho en 1920 × 1080 y 330px en 1366 × 768. Todo lo de adentro escala con unidades de contenedor (`cqw`), así que no hacen falta reglas por alto de pantalla.
   - Cada pantalla imita una llamada de iOS: barra de estado con isla dinámica (que se enciende en verde al hablar), nombre del rol, estado de voz en píldora, avatar grande con anillos que laten al hablar, medidor RMS por canal y botonera decorativa (altavoz, silencio, colgar). El teléfono protegido tiene tinte azul; con el aviso activo pasa a rojo y el avatar se achica para dejarle lugar a la tarjeta.
-  - Halo de color detrás de cada marco: blanco tenue en reposo, azul en el protegido, verde mientras habla, rojo con el aviso. El tinte de alerta del panel pasa a ser un halo rojo del lado del teléfono protegido.
+  - Sin halo detrás de los marcos: el estado se ve en el velo de la pantalla (azul apagado el protegido, rojo apagado con el aviso) y en el anillo del avatar al hablar.
   - Columna central (`minmax(0, 1fr)`) en un panel translúcido: burbujas oscuras estilo mensajería (gris para «Otra persona», azul para «Persona protegida»), scroll interno, seguimiento automático, botón «Volver al vivo» y cajas de evaluación con detalles desplegables. La frase que disparó el aviso lleva borde y resplandor rojos y la cita en resaltador amarillo.
-  - Accesibilidad de foco: contorno visible de 2px en azul claro (`#60a5fa`) con offset de 2px sobre el fondo oscuro.
+  - Accesibilidad de foco: contorno visible de 2px en azul claro (`#9db7da`) con offset de 2px sobre el fondo oscuro.
 
 ## Elevation & Depth
 
-- **Halos en lugar de sombras**: cada tarjeta de persona tiene un halo de color detrás (azul la protegida, verde mientras habla, rojo con el aviso), como los marcos de los iPhone. El tinte de alerta es un resplandor rojo desde el borde superior, no un fondo pleno.
+- **Sin resplandores**: ni las tarjetas ni los marcos de los iPhone llevan halos de color. El estado se lee en el borde (tenue azul la protegida, verde mientras habla, rojo con el aviso) y en un velo de color muy leve desde el borde superior; el aviso no brilla, solo cambia de borde.
 - Menús, ayuda y diálogos usan superficie sólida `#1c1c1e`, borde blanco al 18 % y sombra negra profunda; el fondo del diálogo modal se oscurece al 65 %.
 
 ## Shapes

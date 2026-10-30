@@ -33,58 +33,27 @@ export function crearLinea(rol, entrega, texto, tiempo) {
 
 const AVATAR_OTRA_SVG = `
 <svg viewBox="0 0 120 120" width="108" height="108" aria-hidden="true" focusable="false">
-  <defs>
-    <radialGradient id="avatar-otra-bg" cx="35%" cy="28%" r="72%">
-      <stop offset="0%" stop-color="#334155"/>
-      <stop offset="100%" stop-color="#0f172a"/>
-    </radialGradient>
-    <radialGradient id="avatar-otra-cara" cx="38%" cy="32%" r="65%">
-      <stop offset="0%" stop-color="#fde047"/>
-      <stop offset="68%" stop-color="#facc15"/>
-      <stop offset="100%" stop-color="#eab308"/>
-    </radialGradient>
-  </defs>
-  <circle cx="60" cy="60" r="56" fill="url(#avatar-otra-bg)"/>
-  <path d="M24 106 C28 84 42 78 60 78 C78 78 92 84 96 106 Z" fill="#475569"/>
-  <path d="M46 78 L60 95 L74 78 Z" fill="#e2e8f0"/>
-  <circle cx="60" cy="52" r="27" fill="url(#avatar-otra-cara)"/>
-  <path d="M35 45 C36 27 47 21 60 21 C73 21 84 27 85 45 C80 35 71 31 60 31 C49 31 40 35 35 45 Z" fill="#334155"/>
-  <rect x="40" y="45" width="16" height="12" rx="5" fill="none" stroke="#0f172a" stroke-width="2.6"/>
-  <rect x="64" y="45" width="16" height="12" rx="5" fill="none" stroke="#0f172a" stroke-width="2.6"/>
-  <line x1="56" y1="50" x2="64" y2="50" stroke="#0f172a" stroke-width="2.6" stroke-linecap="round"/>
-  <circle cx="48" cy="51" r="2.8" fill="#0f172a"/>
-  <circle cx="72" cy="51" r="2.8" fill="#0f172a"/>
-  <path d="M43 41 Q48 39 53 41" fill="none" stroke="#334155" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M67 41 Q72 39 77 41" fill="none" stroke="#334155" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M51 64 Q60 68 69 64" fill="none" stroke="#0f172a" stroke-width="2.8" stroke-linecap="round"/>
+  <rect width="120" height="120" fill="#2c3036"/>
+  <path d="M14 120 C16 95 36 86 60 86 C84 86 104 95 106 120 Z" fill="#3b4048"/>
+  <rect x="51" y="68" width="18" height="24" rx="6" fill="#a97a5d"/>
+  <path d="M47 87 L60 106 L73 87 Z" fill="#d9d6cf"/>
+  <path d="M51 80 C56 86 64 86 69 80 L69 86 C64 90 56 90 51 86 Z" fill="#8f654b"/>
+  <ellipse cx="39" cy="54" rx="3.6" ry="6" fill="#b98768"/>
+  <ellipse cx="81" cy="54" rx="3.6" ry="6" fill="#b98768"/>
+  <ellipse cx="60" cy="52" rx="21" ry="26" fill="#c99674"/>
+  <path d="M38 50 C35 31 46 23 60 23 C74 23 85 31 82 50 C80 41 74 36 60 36 C46 36 40 41 38 50 Z" fill="#2a2522"/>
 </svg>`;
 
 const AVATAR_PROTEGIDA_SVG = `
 <svg viewBox="0 0 120 120" width="108" height="108" aria-hidden="true" focusable="false">
-  <defs>
-    <radialGradient id="avatar-prot-bg" cx="35%" cy="28%" r="72%">
-      <stop offset="0%" stop-color="#1d4ed8"/>
-      <stop offset="100%" stop-color="#0f172a"/>
-    </radialGradient>
-    <radialGradient id="avatar-prot-cara" cx="38%" cy="32%" r="65%">
-      <stop offset="0%" stop-color="#fde047"/>
-      <stop offset="68%" stop-color="#facc15"/>
-      <stop offset="100%" stop-color="#eab308"/>
-    </radialGradient>
-  </defs>
-  <circle cx="60" cy="60" r="56" fill="url(#avatar-prot-bg)"/>
-  <path d="M31 54 C31 30 43 20 60 20 C77 20 89 30 89 54 C89 67 84 74 79 77 L41 77 C36 74 31 67 31 54 Z" fill="#0f172a"/>
-  <path d="M24 106 C28 84 42 78 60 78 C78 78 92 84 96 106 Z" fill="#1d4ed8"/>
-  <path d="M47 78 C51 86 69 86 73 78" fill="none" stroke="#eff6ff" stroke-width="3" stroke-linecap="round"/>
-  <circle cx="60" cy="53" r="26" fill="url(#avatar-prot-cara)"/>
-  <path d="M34 48 C37 29 48 23 61 23 C73 23 83 30 86 47 C78 36 69 33 58 34 C47 35 39 40 34 48 Z" fill="#0f172a"/>
-  <circle cx="49" cy="52" r="3.1" fill="#0f172a"/>
-  <circle cx="71" cy="52" r="3.1" fill="#0f172a"/>
-  <circle cx="43" cy="58" r="4" fill="#f87171" opacity="0.35"/>
-  <circle cx="77" cy="58" r="4" fill="#f87171" opacity="0.35"/>
-  <path d="M44 43 Q49 40 54 42" fill="none" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M66 42 Q71 40 76 43" fill="none" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
-  <path d="M49 63 Q60 71 71 63" fill="none" stroke="#0f172a" stroke-width="2.8" stroke-linecap="round"/>
+  <rect width="120" height="120" fill="#2a323d"/>
+  <path d="M34 56 C30 30 44 19 60 19 C76 19 90 30 86 56 C86 70 85 78 81 84 L39 84 C35 78 34 70 34 56 Z" fill="#a9a6a0"/>
+  <path d="M14 120 C16 95 36 86 60 86 C84 86 104 95 106 120 Z" fill="#587091"/>
+  <rect x="51" y="68" width="18" height="24" rx="6" fill="#cf9f83"/>
+  <path d="M46 87 C50 98 70 98 74 87 L74 92 C70 103 50 103 46 92 Z" fill="#e2ded6"/>
+  <path d="M51 80 C56 86 64 86 69 80 L69 86 C64 90 56 90 51 86 Z" fill="#b98768"/>
+  <ellipse cx="60" cy="52" rx="20" ry="25" fill="#e0b79b"/>
+  <path d="M39 49 C38 33 48 26 60 26 C73 26 83 34 81 49 C76 40 68 35 58 35 C48 35 42 40 39 49 Z" fill="#c4c1bb"/>
 </svg>`;
 
 const ESTILOS_PRESENTACION = `
@@ -125,7 +94,7 @@ const ESTILOS_PRESENTACION = `
   }
   /* El tinte de alerta del panel pasa a ser un halo rojo detrás del teléfono protegido. */
   body.presentacion::before {
-    background: radial-gradient(ellipse 45% 70% at 88% 50%, rgb(220 38 38 / 0.28), transparent 70%);
+    background: radial-gradient(ellipse 45% 70% at 88% 50%, rgb(168 58 54 / 0.12), transparent 70%);
   }
   body.presentacion.alerta-emitida::before {
     opacity: 1;
@@ -206,29 +175,29 @@ const ESTILOS_PRESENTACION = `
     background: var(--p-tinta-3);
   }
   #presentacion .pres-estado-pill[data-estado="en-llamada"] {
-    border-color: rgb(48 209 88 / 0.45);
-    color: #86efac;
+    border-color: rgb(90 158 120 / 0.45);
+    color: #9fc9b0;
   }
   #presentacion .pres-estado-pill[data-estado="en-llamada"] .punto {
     background: var(--p-verde);
-    box-shadow: 0 0 0 0 rgb(48 209 88 / 0.6);
+    box-shadow: 0 0 0 0 rgb(90 158 120 / 0.6);
     animation: pres-latido 1.8s ease-out infinite;
   }
   @keyframes pres-latido {
-    0% { box-shadow: 0 0 0 0 rgb(48 209 88 / 0.55); }
-    70% { box-shadow: 0 0 0 7px rgb(48 209 88 / 0); }
-    100% { box-shadow: 0 0 0 0 rgb(48 209 88 / 0); }
+    0% { box-shadow: 0 0 0 0 rgb(90 158 120 / 0.55); }
+    70% { box-shadow: 0 0 0 7px rgb(90 158 120 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(90 158 120 / 0); }
   }
   #presentacion .pres-estado-pill[data-estado="finalizado"] {
-    border-color: rgb(10 132 255 / 0.5);
+    border-color: rgb(79 116 168 / 0.5);
     color: var(--p-azul-claro);
   }
   #presentacion .pres-estado-pill[data-estado="finalizado"] .punto {
     background: var(--p-azul);
   }
   #presentacion .pres-estado-pill[data-estado="sin-conexion"] {
-    border-color: rgb(255 69 58 / 0.5);
-    color: #fca5a5;
+    border-color: rgb(200 88 79 / 0.5);
+    color: #e3a8a3;
   }
   #presentacion .pres-estado-pill[data-estado="sin-conexion"] .punto {
     background: var(--p-rojo);
@@ -270,15 +239,15 @@ const ESTILOS_PRESENTACION = `
     border: 1px solid var(--p-azul);
   }
   #presentacion .pres-btn-primario:hover:not(:disabled) {
-    background: #0070e0;
+    background: #3f6290;
   }
   #presentacion .pres-btn-terminar {
-    background: rgb(255 69 58 / 0.12);
-    color: #fca5a5;
-    border: 1px solid rgb(255 69 58 / 0.45);
+    background: rgb(200 88 79 / 0.12);
+    color: #e3a8a3;
+    border: 1px solid rgb(200 88 79 / 0.45);
   }
   #presentacion .pres-btn-terminar:hover:not(:disabled) {
-    background: rgb(255 69 58 / 0.22);
+    background: rgb(200 88 79 / 0.22);
   }
   #presentacion .pres-btn-secundario:disabled,
   #presentacion .pres-btn-primario:disabled,
@@ -297,9 +266,9 @@ const ESTILOS_PRESENTACION = `
     max-width: min(90%, 52rem);
     padding: 0.5rem 1rem;
     border-radius: 12px;
-    background: rgb(69 10 10 / 0.92);
-    border: 1px solid rgb(255 69 58 / 0.6);
-    color: #fecaca;
+    background: rgb(52 20 20 / 0.92);
+    border: 1px solid rgb(200 88 79 / 0.6);
+    color: #e8c4c1;
     font-size: 0.875rem;
     font-weight: 600;
     box-shadow: 0 10px 30px rgb(0 0 0 / 0.6);
@@ -334,17 +303,17 @@ const ESTILOS_PRESENTACION = `
       inset 0 0 0 calc(var(--tel-ancho) * 0.018) #050506,
       0 0 0 1px #000000,
       0 40px 80px -30px rgb(0 0 0 / 0.9),
-      0 0 120px -30px var(--tel-halo, rgb(255 255 255 / 0.08));
+      0 0 0 0 transparent;
     transition: box-shadow 400ms var(--salida);
   }
   #presentacion .pres-telefono.protegida {
-    --tel-halo: rgb(10 132 255 / 0.35);
+    --tel-halo: rgb(79 116 168 / 0.35);
   }
   #presentacion .pres-telefono.hablando-activo {
-    --tel-halo: rgb(48 209 88 / 0.45);
+    --tel-halo: rgb(90 158 120 / 0.45);
   }
   #presentacion .pres-telefono.protegida:has(.pres-aviso-tarjeta:not([hidden])) {
-    --tel-halo: rgb(255 69 58 / 0.6);
+    --tel-halo: rgb(200 88 79 / 0.6);
   }
   /* Botones laterales del marco */
   #presentacion .pres-iphone-marco::before,
@@ -374,7 +343,7 @@ const ESTILOS_PRESENTACION = `
     border-radius: calc(var(--tel-ancho) * 0.14);
     background-color: #0b0b0f;
     background-image:
-      radial-gradient(120% 60% at 50% 0%, rgb(255 255 255 / 0.10), transparent 60%),
+      radial-gradient(120% 60% at 50% 0%, rgb(255 255 255 / 0.05), transparent 60%),
       linear-gradient(180deg, #24252c 0%, #121318 45%, #07070a 100%);
     color: #ffffff;
     padding: 2.5cqw 6cqw 4cqw;
@@ -387,13 +356,13 @@ const ESTILOS_PRESENTACION = `
   }
   #presentacion .pres-telefono.protegida .pres-iphone-pantalla {
     background-image:
-      radial-gradient(120% 60% at 50% 0%, rgb(10 132 255 / 0.32), transparent 62%),
-      linear-gradient(180deg, #0f1f3d 0%, #0a1222 45%, #05070d 100%);
+      radial-gradient(120% 60% at 50% 0%, rgb(79 116 168 / 0.12), transparent 62%),
+      linear-gradient(180deg, #1a2230 0%, #12151b 45%, #08090b 100%);
   }
   #presentacion .pres-telefono.protegida:has(.pres-aviso-tarjeta:not([hidden])) .pres-iphone-pantalla {
     background-image:
-      radial-gradient(120% 60% at 50% 0%, rgb(255 69 58 / 0.30), transparent 62%),
-      linear-gradient(180deg, #2a0f12 0%, #150a0c 45%, #07050a 100%);
+      radial-gradient(120% 60% at 50% 0%, rgb(200 88 79 / 0.12), transparent 62%),
+      linear-gradient(180deg, #261617 0%, #120b0c 45%, #09070a 100%);
   }
 
   /* Barra de estado del teléfono con la isla dinámica */
@@ -437,7 +406,7 @@ const ESTILOS_PRESENTACION = `
     width: 2.6cqw;
     height: 2.6cqw;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #2b3a55, #0a0d14 70%);
+    background: radial-gradient(circle at 35% 35%, #2a2d33, #0a0b0d 70%);
   }
   #presentacion .pres-isla-onda {
     width: 2.2cqw;
@@ -448,7 +417,6 @@ const ESTILOS_PRESENTACION = `
   }
   #presentacion .pres-telefono.hablando-activo .pres-isla-onda {
     background: var(--p-verde);
-    box-shadow: 0 0 2cqw var(--p-verde);
     transform: scale(1.2);
   }
 
@@ -488,12 +456,12 @@ const ESTILOS_PRESENTACION = `
     transition: background-color 200ms var(--salida), border-color 200ms var(--salida);
   }
   #presentacion .pres-estado-voz[data-voz="hablando"] {
-    background: rgb(48 209 88 / 0.22);
-    border-color: rgb(48 209 88 / 0.6);
+    background: rgb(90 158 120 / 0.22);
+    border-color: rgb(90 158 120 / 0.6);
   }
   #presentacion .pres-estado-voz[data-voz="finalizado"] {
-    background: rgb(10 132 255 / 0.22);
-    border-color: rgb(10 132 255 / 0.6);
+    background: rgb(79 116 168 / 0.22);
+    border-color: rgb(79 116 168 / 0.6);
   }
   #presentacion .pres-voz-punto {
     width: 2cqw;
@@ -527,12 +495,12 @@ const ESTILOS_PRESENTACION = `
     transition: transform 200ms var(--salida), box-shadow 200ms var(--salida);
   }
   #presentacion .pres-telefono.protegida .pres-avatar-anillo {
-    background: rgb(10 132 255 / 0.10);
-    box-shadow: 0 0 0 1px rgb(10 132 255 / 0.35);
+    background: rgb(79 116 168 / 0.10);
+    box-shadow: 0 0 0 1px rgb(79 116 168 / 0.35);
   }
   #presentacion .pres-telefono.hablando-activo .pres-avatar-anillo {
     transform: scale(1.04);
-    box-shadow: 0 0 0 1.2cqw rgb(48 209 88 / 0.18), 0 0 0 2.6cqw rgb(48 209 88 / 0.08), 0 0 8cqw rgb(48 209 88 / 0.35);
+    box-shadow: 0 0 0 1.2cqw rgb(90 158 120 / 0.14);
   }
   #presentacion .pres-avatar-circulo {
     width: 44cqw;
@@ -745,8 +713,8 @@ const ESTILOS_PRESENTACION = `
   }
   #presentacion .pres-charla .linea.protegida {
     border-radius: 20px 20px 6px 20px;
-    background: linear-gradient(180deg, #0f2a55, #0b2046);
-    border-color: rgb(10 132 255 / 0.45);
+    background: linear-gradient(180deg, #1f2c42, #1b273b);
+    border-color: rgb(79 116 168 / 0.45);
   }
   #presentacion .pres-charla .linea.parcial {
     border-style: dashed;
@@ -843,14 +811,14 @@ const ESTILOS_PRESENTACION = `
     width: 100%;
     box-sizing: border-box;
     background: rgb(40 8 10 / 0.88);
-    border: 1px solid rgb(255 69 58 / 0.65);
+    border: 1px solid rgb(200 88 79 / 0.65);
     border-radius: 5.5cqw;
     padding: 3.2cqw 3.8cqw;
     display: flex;
     flex-direction: column;
     gap: 1.6cqw;
     text-align: left;
-    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.4), 0 2cqw 8cqw rgb(255 69 58 / 0.25);
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.4), 0 2cqw 6cqw rgb(0 0 0 / 0.5);
     animation: pres-aviso-entra 260ms var(--salida);
   }
   @keyframes pres-aviso-entra {
@@ -880,7 +848,7 @@ const ESTILOS_PRESENTACION = `
   #presentacion .pres-aviso-tiempo {
     font-size: max(10px, 3.1cqw);
     font-weight: 600;
-    color: #fca5a5;
+    color: #e3a8a3;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
@@ -895,7 +863,7 @@ const ESTILOS_PRESENTACION = `
     margin: 0;
     padding: 0.6cqw 0 0.6cqw 2.6cqw;
     border-left: 2px solid var(--p-rojo);
-    color: #fecaca;
+    color: #e8c4c1;
     font-size: max(12px, 3.7cqw);
     font-style: italic;
     line-height: 1.35;
@@ -950,13 +918,13 @@ const ESTILOS_PRESENTACION = `
     border-color: rgb(255 255 255 / 0.2);
   }
   #presentacion .pres-eval-caja.estado-sin-aviso {
-    border-color: rgb(48 209 88 / 0.3);
-    background: rgb(48 209 88 / 0.07);
+    border-color: rgb(90 158 120 / 0.3);
+    background: rgb(90 158 120 / 0.07);
   }
   #presentacion .pres-eval-caja.estado-posible-estafa,
   #presentacion .pres-eval-caja.estado-error {
-    border-color: rgb(255 69 58 / 0.5);
-    background: rgb(255 69 58 / 0.1);
+    border-color: rgb(200 88 79 / 0.5);
+    background: rgb(200 88 79 / 0.1);
   }
   #presentacion .pres-eval-fila {
     display: flex;
@@ -987,9 +955,9 @@ const ESTILOS_PRESENTACION = `
     background: var(--p-tinta-2);
   }
   #presentacion .pres-eval-badge.sin-aviso {
-    background: rgb(48 209 88 / 0.14);
-    border: 1px solid rgb(48 209 88 / 0.55);
-    color: #86efac;
+    background: rgb(90 158 120 / 0.14);
+    border: 1px solid rgb(90 158 120 / 0.55);
+    color: #9fc9b0;
   }
   #presentacion .pres-eval-badge.posible-estafa,
   #presentacion .pres-eval-badge.error {
@@ -1010,7 +978,7 @@ const ESTILOS_PRESENTACION = `
   }
   #presentacion .pres-eval-caja.estado-posible-estafa .pres-eval-motivo,
   #presentacion .pres-eval-caja.estado-error .pres-eval-motivo {
-    color: #fecaca;
+    color: #e8c4c1;
     font-weight: 700;
   }
 
@@ -1061,15 +1029,15 @@ const ESTILOS_PRESENTACION = `
 
   /* Cita culpable y disparo de aviso */
   #presentacion .pres-cita-culpable {
-    background: #facc15;
+    background: #c9a84c;
     color: #1a1204;
     padding: 0 4px;
     border-radius: 4px;
     font-weight: 700;
   }
   #presentacion .linea.pres-disparo-aviso {
-    border-color: rgb(255 69 58 / 0.75) !important;
-    box-shadow: 0 0 0 1px rgb(255 69 58 / 0.35), 0 0 32px -6px rgb(255 69 58 / 0.45);
+    border-color: rgb(200 88 79 / 0.75) !important;
+    box-shadow: 0 0 0 1px rgb(200 88 79 / 0.25);
   }
   @media (prefers-reduced-motion: reduce) {
     #presentacion .pres-avatar-anillo,
@@ -1148,7 +1116,7 @@ function plantillaTelefono(rol) {
 ${avisoHtml}
           <div class="pres-perfil-area">
             <div class="pres-avatar-anillo" id="pres-anillo-${rol}">
-              <div class="pres-avatar-circulo" role="img" aria-label="Avatar ilustrado estilo emoji de ${nombre}">
+              <div class="pres-avatar-circulo" role="img" aria-label="Retrato ilustrado de ${nombre}">
                 ${avatar}
               </div>
             </div>

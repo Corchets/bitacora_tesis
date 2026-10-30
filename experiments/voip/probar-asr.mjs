@@ -22,8 +22,8 @@ export function montarPruebaASR(acciones) {
       #prueba-asr .botones { display:flex; align-items:center; gap:.45rem; }
       #asr-iniciar { background:var(--primary); color:#ffffff; border-color:var(--primary); padding-inline:1.2rem; }
       #asr-iniciar:hover:not(:disabled) { background:var(--primary-dark); }
-      #asr-terminar { background:rgb(255 69 58 / .12); color:var(--alerta-tinta); border-color:rgb(255 69 58 / .45); }
-      #asr-terminar:hover:not(:disabled) { background:rgb(255 69 58 / .22); }
+      #asr-terminar { background:rgb(200 88 79 / .12); color:var(--alerta-tinta); border-color:rgb(200 88 79 / .45); }
+      #asr-terminar:hover:not(:disabled) { background:rgb(200 88 79 / .22); }
       #prueba-asr .ajustes { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:1rem 1.5rem; margin-top:1rem; padding-top:1rem; border-top:1px solid rgb(255 255 255 / .07); }
       #prueba-asr .ajuste p { margin:.35rem 0 0; font-size:.8125rem; line-height:1.5; color:var(--tinta-secundaria); max-width:52ch; }
       #prueba-asr .ajuste label { font-size:.75rem; font-weight:600; color:var(--mu); display:block; margin-bottom:.2rem; }
@@ -42,7 +42,7 @@ export function montarPruebaASR(acciones) {
       #asr-umbral-linea::after { content:"umbral"; position:absolute; top:100%; left:50%; transform:translateX(-50%); margin-top:2px; font-size:.6875rem; font-weight:700; color:var(--tinta); }
       #prueba-asr .escala { display:flex; justify-content:space-between; font-size:.6875rem; color:var(--mu); margin-top:1rem; }
       #asr-textos:empty::before { content:"Lo que digas aparece acá: gris mientras hablás, fijo cuando se cierra la frase."; color:var(--mu); }
-      #asr-textos p { padding:.65rem .95rem; background:linear-gradient(180deg, #0f2a55, #0b2046); border:1px solid var(--vos-borde); border-radius:20px 20px 6px 20px; margin:.4rem 0; font-size:1.0625rem; }
+      #asr-textos p { padding:.65rem .95rem; background:linear-gradient(180deg, #1f2c42, #1b273b); border:1px solid var(--vos-borde); border-radius:20px 20px 6px 20px; margin:.4rem 0; font-size:1.0625rem; }
       #asr-textos .parcial { color:var(--tinta-secundaria); border-style:dashed; border-color:rgb(255 255 255 / .25); }
       #asr-textos small { display:block; color:var(--mu); margin-top:.2rem; font-size:.75rem; font-variant-numeric:tabular-nums; }
       #asr-textos .asr-frase + .asr-frase { margin-top:1.25rem; }

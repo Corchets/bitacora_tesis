@@ -18,28 +18,28 @@
     --tinta: #f5f5f7;
     --tinta-secundaria: #c7c7cc;
     --mu: #a1a1aa;
-    --primary: #0a84ff;
-    --primary-dark: #0070e0;
-    --primary-claro: #8ab4ff;
-    --primary-bg: rgb(10 132 255 / 0.12);
-    --vos-fondo: #0d2448;
-    --vos-borde: rgb(10 132 255 / 0.45);
+    --primary: #4f74a8;
+    --primary-dark: #3f6290;
+    --primary-claro: #9db7da;
+    --primary-bg: rgb(79 116 168 / 0.12);
+    --vos-fondo: #1c2940;
+    --vos-borde: rgb(79 116 168 / 0.45);
     --otra-fondo: #1c1c1e;
     --otra-borde: rgb(255 255 255 / 0.08);
-    --alerta: #ff453a;
-    --alerta-fuerte: #dc2626;
-    --alerta-tinta: #fca5a5;
-    --alerta-fondo: rgb(255 69 58 / 0.1);
-    --alerta-claro: rgb(255 69 58 / 0.2);
-    --alerta-borde: rgb(255 69 58 / 0.5);
-    --ok: #30d158;
-    --ok-tinta: #86efac;
-    --ok-fondo: rgb(48 209 88 / 0.1);
-    --ok-borde: rgb(48 209 88 / 0.5);
-    --aviso-badge-fondo: rgb(250 204 21 / 0.14);
-    --aviso-badge-tinta: #fde68a;
-    --resaltador: #facc15;
-    --foco: #60a5fa;
+    --alerta: #c8584f;
+    --alerta-fuerte: #a93a36;
+    --alerta-tinta: #e3a8a3;
+    --alerta-fondo: rgb(200 88 79 / 0.1);
+    --alerta-claro: rgb(200 88 79 / 0.2);
+    --alerta-borde: rgb(200 88 79 / 0.5);
+    --ok: #5a9e78;
+    --ok-tinta: #9fc9b0;
+    --ok-fondo: rgb(90 158 120 / 0.1);
+    --ok-borde: rgb(90 158 120 / 0.5);
+    --aviso-badge-fondo: rgb(201 168 76 / 0.14);
+    --aviso-badge-tinta: #e0d2a0;
+    --resaltador: #c9a84c;
+    --foco: #9db7da;
     --radio-sm: 8px;
     --radio-md: 12px;
     --radio-lg: 20px;
@@ -49,7 +49,7 @@
   }
   * { box-sizing: border-box; }
   ::selection {
-    background: rgb(10 132 255 / 0.45);
+    background: rgb(79 116 168 / 0.45);
     color: var(--tinta);
   }
   body {
@@ -119,11 +119,11 @@
     flex-shrink: 0;
   }
   .estado-pill[data-estado="lista"] {
-    border-color: rgb(10 132 255 / 0.5);
+    border-color: rgb(79 116 168 / 0.5);
   }
   .estado-pill[data-estado="lista"] .punto { background: var(--primary); }
   .estado-pill[data-estado="en-llamada"] {
-    border-color: rgb(48 209 88 / 0.45);
+    border-color: rgb(90 158 120 / 0.45);
   }
   .estado-pill[data-estado="en-llamada"] #estado { color: var(--ok-tinta); }
   .estado-pill[data-estado="en-llamada"] .punto {
@@ -131,9 +131,9 @@
     animation: latido 1.8s ease-out infinite;
   }
   @keyframes latido {
-    0% { box-shadow: 0 0 0 0 rgb(48 209 88 / 0.55); }
-    70% { box-shadow: 0 0 0 7px rgb(48 209 88 / 0); }
-    100% { box-shadow: 0 0 0 0 rgb(48 209 88 / 0); }
+    0% { box-shadow: 0 0 0 0 rgb(90 158 120 / 0.55); }
+    70% { box-shadow: 0 0 0 7px rgb(90 158 120 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(90 158 120 / 0); }
   }
   .estado-pill[data-estado="sin-conexion"] {
     border-color: var(--alerta-borde);
@@ -291,20 +291,20 @@
     color: var(--tinta);
   }
   #terminar {
-    background: rgb(255 69 58 / 0.12);
+    background: rgb(200 88 79 / 0.12);
     color: var(--alerta-tinta);
-    border-color: rgb(255 69 58 / 0.45);
+    border-color: rgb(200 88 79 / 0.45);
   }
   #terminar:hover:not(:disabled) {
-    background: rgb(255 69 58 / 0.22);
+    background: rgb(200 88 79 / 0.22);
   }
   #ver-presentacion {
     background: var(--primary-bg);
     color: var(--primary-claro);
-    border-color: rgb(10 132 255 / 0.5);
+    border-color: rgb(79 116 168 / 0.5);
   }
   #ver-presentacion:hover:not(:disabled) {
-    background: rgb(10 132 255 / 0.22);
+    background: rgb(79 116 168 / 0.22);
   }
   #error {
     flex-basis: 100%;
@@ -431,7 +431,7 @@
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(ellipse 70% 55% at 50% 0%, rgb(220 38 38 / 0.26), transparent 70%);
+    background: radial-gradient(ellipse 70% 55% at 50% 0%, rgb(168 58 54 / 0.12), transparent 70%);
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms var(--salida);
@@ -448,12 +448,12 @@
     align-items: center;
     gap: 0.75rem;
     background: rgb(40 8 10 / 0.88);
-    border: 1px solid rgb(255 69 58 / 0.65);
+    border: 1px solid rgb(200 88 79 / 0.65);
     border-radius: var(--radio-lg);
     padding: 0.45rem 0.85rem;
     margin-bottom: 0.6rem;
     color: var(--tinta);
-    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.4), 0 8px 40px -8px rgb(255 69 58 / 0.35);
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
     flex-shrink: 0;
     min-height: 3.65rem; /* dos renglones: motivo y cita arriba, segundo del aviso abajo */
     visibility: hidden;
@@ -544,7 +544,7 @@
     font-size: 0.875rem;
     font-style: italic;
     font-weight: 600;
-    color: #fecaca;
+    color: #e8c4c1;
   }
   #aviso-tiempo {
     font-size: 0.8125rem;
@@ -634,7 +634,7 @@
   .tarjeta-persona {
     background-color: #0b0b0f;
     background-image:
-      radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.08), transparent 60%),
+      radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.04), transparent 60%),
       linear-gradient(180deg, #1c1d23 0%, #0e0f13 100%);
     border: 1px solid var(--linea);
     border-radius: var(--radio-lg);
@@ -642,26 +642,26 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    box-shadow: 0 0 60px -24px var(--tarjeta-halo, rgb(255 255 255 / 0.06));
+    box-shadow: none;
     transition: box-shadow 400ms var(--salida), border-color 200ms var(--salida);
   }
   .tarjeta-persona.protegida {
-    --tarjeta-halo: rgb(10 132 255 / 0.4);
-    border-color: rgb(10 132 255 / 0.35);
+    --tarjeta-halo: rgb(79 116 168 / 0.4);
+    border-color: rgb(79 116 168 / 0.35);
     background-image:
-      radial-gradient(120% 90% at 50% 0%, rgb(10 132 255 / 0.28), transparent 62%),
-      linear-gradient(180deg, #0f1f3d 0%, #070b14 100%);
+      radial-gradient(120% 90% at 50% 0%, rgb(79 116 168 / 0.10), transparent 62%),
+      linear-gradient(180deg, #1a2230 0%, #0a0c10 100%);
   }
   .tarjeta-persona.hablando-activo {
-    --tarjeta-halo: rgb(48 209 88 / 0.5);
+    --tarjeta-halo: rgb(90 158 120 / 0.5);
     border-color: var(--ok-borde);
   }
   .tarjeta-persona.otra.alerta-activa {
-    --tarjeta-halo: rgb(255 69 58 / 0.55);
-    border-color: rgb(255 69 58 / 0.65);
+    --tarjeta-halo: rgb(200 88 79 / 0.55);
+    border-color: rgb(200 88 79 / 0.65);
     background-image:
-      radial-gradient(120% 90% at 50% 0%, rgb(255 69 58 / 0.24), transparent 62%),
-      linear-gradient(180deg, #2a0f12 0%, #0c0607 100%);
+      radial-gradient(120% 90% at 50% 0%, rgb(200 88 79 / 0.10), transparent 62%),
+      linear-gradient(180deg, #261617 0%, #0c0809 100%);
   }
   .tarjeta-cabecera {
     display: flex;
@@ -678,7 +678,7 @@
     color: #ffffff;
   }
   .tarjeta-persona.otra.alerta-activa .tarjeta-cabecera h2 {
-    color: #fecaca;
+    color: #e8c4c1;
   }
   .tarjeta-badges {
     display: inline-flex;
@@ -707,8 +707,8 @@
     background: var(--mu);
   }
   .estado-habla-pill.activo {
-    background: rgb(48 209 88 / 0.22);
-    border-color: rgb(48 209 88 / 0.6);
+    background: rgb(90 158 120 / 0.22);
+    border-color: rgb(90 158 120 / 0.6);
   }
   .estado-habla-pill.activo::before {
     background: var(--ok);
@@ -779,8 +779,8 @@
     gap: 0.55rem;
   }
   .tarjeta-persona.hablando-activo .habla-ahora-caja {
-    border-color: rgb(48 209 88 / 0.35);
-    background: rgb(48 209 88 / 0.08);
+    border-color: rgb(90 158 120 / 0.35);
+    background: rgb(90 158 120 / 0.08);
   }
   .habla-indicador {
     width: 9px;
@@ -791,7 +791,6 @@
   }
   .habla-indicador.hablando {
     background: var(--ok);
-    box-shadow: 0 0 8px var(--ok);
   }
   .habla-texto {
     font-size: 0.9375rem;
@@ -864,7 +863,7 @@
   .linea.protegida {
     align-self: flex-end;
     border-radius: 20px 20px 6px 20px;
-    background: linear-gradient(180deg, #0f2a55, #0b2046);
+    background: linear-gradient(180deg, #1f2c42, #1b273b);
     border-color: var(--vos-borde);
   }
   /* Provisorio: borde punteado y tinta secundaria. Sin cursiva ni otro peso, así el renglón no salta al cerrarse. */
@@ -877,8 +876,8 @@
   }
 
   .linea.disparo-aviso {
-    border: 1px solid rgb(255 69 58 / 0.75);
-    box-shadow: 0 0 0 1px rgb(255 69 58 / 0.35), 0 0 32px -6px rgb(255 69 58 / 0.45);
+    border: 1px solid rgb(200 88 79 / 0.75);
+    box-shadow: 0 0 0 1px rgb(200 88 79 / 0.25);
   }
   mark.cita-culpable {
     background: var(--resaltador);
@@ -941,9 +940,9 @@
     box-shadow: inset 0 0 0 1px var(--linea-fuerte);
   }
   .eval-adjunta.riesgo-bajo .eval-pill.eval-alerta.no {
-    background: rgb(48 209 88 / 0.14);
+    background: rgb(90 158 120 / 0.14);
     color: var(--ok-tinta);
-    box-shadow: inset 0 0 0 1px rgb(48 209 88 / 0.55);
+    box-shadow: inset 0 0 0 1px rgb(90 158 120 / 0.55);
   }
   .eval-adjunta.riesgo-bajo .eval-pill.eval-tiempo {
     background: transparent;
@@ -951,12 +950,12 @@
     padding-inline: 0.15rem;
   }
   .eval-adjunta.riesgo-alto {
-    border-color: rgb(250 204 21 / 0.45);
-    background: rgb(250 204 21 / 0.08);
+    border-color: rgb(201 168 76 / 0.45);
+    background: rgb(201 168 76 / 0.08);
   }
   .eval-adjunta.aviso-alerta {
-    border-color: rgb(255 69 58 / 0.5);
-    background: rgb(255 69 58 / 0.1);
+    border-color: rgb(200 88 79 / 0.5);
+    background: rgb(200 88 79 / 0.1);
   }
   .eval-pills {
     display: inline-flex;
@@ -984,9 +983,9 @@
     color: #ffffff;
   }
   .eval-pill.eval-alerta.no {
-    background: rgb(48 209 88 / 0.14);
+    background: rgb(90 158 120 / 0.14);
     color: var(--ok-tinta);
-    box-shadow: inset 0 0 0 1px rgb(48 209 88 / 0.55);
+    box-shadow: inset 0 0 0 1px rgb(90 158 120 / 0.55);
   }
   .eval-pill.eval-tiempo {
     background: rgb(255 255 255 / 0.1);
@@ -995,7 +994,7 @@
   .eval-pill.eval-saltadas {
     background: var(--aviso-badge-fondo);
     color: var(--aviso-badge-tinta);
-    border: 1px solid rgb(250 204 21 / 0.5);
+    border: 1px solid rgb(201 168 76 / 0.5);
   }
   .eval-motivo-txt {
     font-size: 0.8125rem;
@@ -1003,7 +1002,7 @@
     font-weight: 600;
   }
   .eval-adjunta.aviso-alerta .eval-motivo-txt {
-    color: #fecaca;
+    color: #e8c4c1;
     font-weight: 700;
   }
   .eval-aviso-banner {
@@ -1039,7 +1038,7 @@
     font-weight: 700;
     color: var(--aviso-badge-tinta);
     background: var(--aviso-badge-fondo);
-    border: 1px dashed rgb(250 204 21 / 0.5);
+    border: 1px dashed rgb(201 168 76 / 0.5);
     padding: 0.2rem 0.6rem;
     border-radius: var(--pildora);
     margin-top: 0.15rem;
@@ -1195,8 +1194,7 @@
     display: block;
     border: 1px solid var(--ok-borde);
     border-radius: var(--radio-xl);
-    background: rgb(48 209 88 / 0.08);
-    box-shadow: 0 0 80px -30px rgb(48 209 88 / 0.5);
+    background: rgb(90 158 120 / 0.08);
     font-size: 1.5rem;
     font-weight: 600;
   }
@@ -2561,13 +2559,13 @@ function dibujarGraficoRiesgo() {
     const puntos = traza.map(p => `${x(p.t).toFixed(1)},${y(p.r).toFixed(1)}`).join(" ");
 
     // Línea de riesgo desde el inicio de la llamada
-    svg += `<polyline points="${puntos}" fill="none" stroke="#0a84ff" stroke-width="2.75" stroke-linejoin="round" stroke-linecap="round" />`;
+    svg += `<polyline points="${puntos}" fill="none" stroke="#4f74a8" stroke-width="2.75" stroke-linejoin="round" stroke-linecap="round" />`;
 
     // Puntos de cada evaluación
     for (const p of ordenados) {
       const cx = x(p.t).toFixed(1);
       const cy = y(p.r).toFixed(1);
-      const col = p.aviso ? "#ff453a" : (p.r >= 0.5 ? "#facc15" : "#30d158");
+      const col = p.aviso ? "#c8584f" : (p.r >= 0.5 ? "#c9a84c" : "#5a9e78");
       const radio = p.aviso ? 5 : 4;
       svg += `<circle cx="${cx}" cy="${cy}" r="${radio}" fill="${col}" stroke="#000000" stroke-width="1.5" />`;
     }
@@ -2580,8 +2578,8 @@ function dibujarGraficoRiesgo() {
     const axNum = Math.max(padL + mitadBadge, Math.min(padL + pw - mitadBadge, x(tiempoAviso)));
     const ax = x(tiempoAviso).toFixed(1);
     svg += `
-      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#ff453a" stroke-width="2" stroke-dasharray="3 2" />
-      <rect x="${(axNum - mitadBadge).toFixed(1)}" y="2" width="${anchoBadge}" height="20" rx="10" fill="#dc2626" />
+      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#c8584f" stroke-width="2" stroke-dasharray="3 2" />
+      <rect x="${(axNum - mitadBadge).toFixed(1)}" y="2" width="${anchoBadge}" height="20" rx="10" fill="#a93a36" />
       <text x="${axNum.toFixed(1)}" y="16" font-size="12" font-weight="700" text-anchor="middle" fill="#ffffff" font-family="system-ui">AVISO ${tiempoAviso.toFixed(1)}s</text>
     `;
   }

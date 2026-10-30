@@ -34,8 +34,8 @@ const ESTILOS = `
   #historial .hist-insignia.aviso { background:var(--alerta-fuerte); border-color:var(--alerta-fuerte); color:#ffffff; }
   #hist-cols { display:grid; grid-template-columns:repeat(var(--columnas, 1), minmax(0, 1fr)); gap:1rem; align-items:start; max-width:var(--ancho-detalle, 1000px); margin:0 auto; }
   #historial .hist-col { background:linear-gradient(180deg, rgb(255 255 255 / .045), rgb(255 255 255 / .02)); border:1px solid var(--linea); border-radius:var(--radio-xl); padding:1rem 1.15rem; min-width:0; }
-  #historial button.peligro { background:rgb(255 69 58 / .12); color:var(--alerta-tinta); border-color:rgb(255 69 58 / .45); }
-  #historial button.peligro:hover:not(:disabled) { background:rgb(255 69 58 / .22); }
+  #historial button.peligro { background:rgb(200 88 79 / .12); color:var(--alerta-tinta); border-color:rgb(200 88 79 / .45); }
+  #historial button.peligro:hover:not(:disabled) { background:rgb(200 88 79 / .22); }
   #hist-confirmar { max-width:34rem; width:calc(100% - 2rem); padding:1.25rem 1.4rem; border:1px solid var(--linea-fuerte); border-radius:var(--radio-lg); }
   #hist-confirmar::backdrop { background:rgb(0 0 0 / .65); }
   #hist-confirmar h2 { font-size:1.25rem; margin:0 0 .5rem; }
