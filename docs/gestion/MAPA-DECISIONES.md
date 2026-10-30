@@ -217,6 +217,24 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [contraste con el laboratorio](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
   Son antecedentes de candidatos y pruebas, no requisitos nuevos. La comparación
   debe declarar qué código y datos reutiliza y qué cambió.
+- **Preparación delegada por el usuario (2026-10-29):** el usuario aprobó las veinte
+  conversaciones de #101 y delegó resolver los parámetros técnicos sin nuevas
+  aprobaciones genéricas. [Preparación operativa](../../experiments/slm-directo/DATOS-TITO.md#preparación-técnica-delegada--2026-10-29):
+  particiones por ID/hash, historial acumulado como entrada principal del Tito nuevo,
+  búsqueda acotada y supervisión IA explícita para desarrollo. #98–#102 actualizados
+  en GitHub. La auditoría semántica entre fuentes y las etiquetas de prefijos siguen
+  siendo trabajo técnico antes de entrenar; no se fabrican revisiones humanas ni se
+  habilita el protocolo final por esta delegación. D07/D08/D09 siguen abiertas.
+- **Plan exploratorio acordado con el usuario (2026-10-26):** Tito como filtro
+  que activa al SLM ante sospecha, con contexto completo e indicio falible; ocho
+  conversaciones de desarrollo, todos los SLM previamente ejecutados y umbral
+  inicial 0,5. [Plan y matriz exacta en ARQUITECTURA §7](../ingenieria/ARQUITECTURA.md#7-plan-de-experimento-tito-como-filtro-de-consulta-al-slm).
+  Especificación publicada en [#68](https://github.com/Corchets/bitacora_tesis/issues/68)
+  con `ready-for-agent`, asignada a Ignacio; punto principal de prueba confirmado
+  por el usuario. Descomposición aprobada y publicada en seis subissues de #68,
+  con bloqueos nativos; primera entrega [#69](https://github.com/Corchets/bitacora_tesis/issues/69).
+  Sin entrenamiento ni corridas nuevas; no cierra D09 ni reabre automáticamente
+  los issues históricos retirados.
 - **Antecedentes del laboratorio (spike #29, medidos con semillas provisorias con
   sesgo de dialecto — no cierran D09):** la cascada RoBERTuito+LR→SLM (zona gris
   0,35–0,75) no mejoró al encoder solo en la corrida del 2026-09-28 (goteo
@@ -255,6 +273,30 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   - **2026-10-28 (voz real, sin referencia):** Zipformer Kroko transcribe mal la voz de Luciano en el panel. Parakeet TDT 0.6B v3 int8 (`sherpa-onnx`, por frases con borrador cada 0,5 s) se ve mejor en 4 llamadas reales, con ~1,0–1,2 GB de RSS y palabras inventadas en inglés ante ruido; Whisper large-v3-turbo no sirve para vivo. Ambos ASR se eligen en el panel. El 2026-10-29 se agregó un filtro para los borradores en inglés ([§9.1](../../experiments/asr-local/PLAN-VOZ-REAL.md#91-el-borrador-sale-en-inglés-y-después-se-corrige-2026-10-29)). **Estado: propuesta sin discutir**; no cambia el candidato de D09 ([detalle](../../experiments/asr-local/PLAN-VOZ-REAL.md#9-zipformer-anda-mal-con-voz-real-probamos-parakeet-2026-10-28)).
   - **2026-10-29 (Luciano Grosso):** Zipformer Kroko queda como antecedente histórico, retirado de la selección activa por los errores observados con su voz; se conservan código y corridas para reproducción. Parakeet sigue en prueba, sin seleccionar reemplazo ni cerrar D09. La [auditoría de VAD y preaudio](../../experiments/asr-local/PLAN-VOZ-REAL.md#10-auditoría-de-vad-preaudio-y-comparación-de-modelos-2026-10-29) confirma RMS y preaudio de hasta 300 ms en el motor por frases; no hay Silero en esa ruta ni medición móvil de batería. El valor por defecto del panel sigue siendo Zipformer: la retirada documental no modifica el arranque del software.
   - Comparación de candidatos sobre desarrollo en [`docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md`](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md) ([#51](https://github.com/Corchets/bitacora_tesis/issues/51)); corridas en Apple M1 (`2026-10-17_150516_m1-gguf`) con Qwen3.5 0.8B y 2B completas y 4B interrumpida por swap/memoria ([`experiments/slm-directo/corridas/2026-10-17_150516_m1-gguf/resumen.md`](../../experiments/slm-directo/corridas/2026-10-17_150516_m1-gguf/resumen.md)), junto con el estudio de reproducibilidad M1 vs Windows 11 en [`experiments/slm-directo/analisis/2026-10-17-m1-vs-windows/`](../../experiments/slm-directo/analisis/2026-10-17-m1-vs-windows/).
+- Matriz Tito→SLM ejecutada el 2026-10-26 (material de desarrollo, no test): 6 artefactos × 8 conversaciones × 2 variantes = 96 evaluaciones con Tito real único y umbral 0,5; consolidado y regeneración en [`experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/`](../../experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/CONSOLIDADO.md) ([#74](https://github.com/Corchets/bitacora_tesis/issues/74), parte de #68). No cierra D07/D08/D09 ni #51; revisión cruzada pendiente.
+- **Continuación acordada con el usuario (2026-10-27):** [#95](https://github.com/Corchets/bitacora_tesis/issues/95)
+  prioriza evaluación independiente revisada y diagnóstico del Tito actual;
+  mantiene RoBERTuito para este trabajo y permite comparar encoder congelado y
+  fine-tuning condicionado a calidad insuficiente, además de frase aislada y
+  contexto reciente. Después se mide el flujo completo y una política de
+  reconsulta. [Acuerdo y alcance en ARQUITECTURA §7.5](../ingenieria/ARQUITECTURA.md#75-continuación-acordada-validar-tito-antes-de-optimizar-consultas).
+  La especificación tiene `ready-for-agent`, está asignada a Ignacio en H4 y
+  conserva pendientes explícitos de referencia, particiones, criterio de
+  insuficiencia y margen preventivo mínimo. No se ejecutaron nuevas corridas
+  ni se resolvieron D07/D08/D09 por publicar este plan.
+  Descomposición aprobada el 2026-10-27 y publicada en siete subissues (#96–#102)
+  de #95, con seis bloqueos nativos; las primeras entregas disponibles son
+  [#96](https://github.com/Corchets/bitacora_tesis/issues/96) y
+  [#97](https://github.com/Corchets/bitacora_tesis/issues/97), en paralelo.
+
+- **Aceptación de la curación de Tito (2026-10-28):** el usuario revisó los
+  informes y aprobó #96 expresamente; el issue queda cerrado para continuar
+  la secuencia de #95. [Registro de aprobación](../../experiments/slm-directo/CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
+  Codex creó #103 por interpretar incorrectamente que se aprobaban solo informes;
+  se retiró como no planificado y se eliminó su bloqueo de #98. No constituye una
+  nueva condición ni exige otra aprobación de #96. Se conserva la distinción entre
+  revisión IA y aprobación humana, sin atribuir anotaciones inexistentes a otras
+  personas. No resuelve D07/D08/D09 ni implica entrenamiento o inferencia.
 
 ### D10 — Congelar estructura de entrega y defensa
 

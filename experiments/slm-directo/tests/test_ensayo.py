@@ -82,23 +82,25 @@ class TestPrefijosYEstado(unittest.TestCase):
         d = DetectorGuion(alertas={2})
         primera = list(correr.procesar_caso(d, DIALOGO))
         segunda = list(correr.procesar_caso(d, DIALOGO[:3]))
-        self.assertEqual(len(d.recibido[len(DIALOGO)]), 1, "la segunda llamada arrancó con texto de la primera")
+        self.assertEqual(len(d.recibido[len(primera)]), 1, "la segunda llamada arrancó con texto de la primera")
         self.assertEqual([aviso for *_, aviso in primera].count(True), 1)
         self.assertEqual([aviso for *_, aviso in segunda].count(True), 1, "el aviso de una llamada bloqueó el de la otra")
 
 
 class TestPoliticaAvisoUnico(unittest.TestCase):
-    def test_un_solo_aviso_en_el_primer_true(self):
-        avisos = [aviso for *_, aviso in correr.procesar_caso(DetectorGuion(alertas={2, 4}), DIALOGO)]
-        self.assertEqual(avisos, [False, True, False, False, False])
+    def test_un_solo_aviso_en_el_primer_true_y_ahi_termina(self):
+        salidas = list(correr.procesar_caso(DetectorGuion(alertas={2, 4}), DIALOGO))
+        self.assertEqual([aviso for *_, aviso in salidas], [False, True])
+        self.assertEqual([n for n, _, _, _ in salidas], [1, 2], "tras el aviso no se evalúa más")
 
-    def test_las_alertas_posteriores_se_conservan(self):
-        respuestas = [r for _, _, r, _ in correr.procesar_caso(DetectorGuion(alertas={2, 4}), DIALOGO)]
-        self.assertTrue(respuestas[3].alerta_sugerida)
+    def test_las_alertas_posteriores_se_conservan_en_modo_diagnostico(self):
+        salidas = list(correr.procesar_caso(DetectorGuion(alertas={2, 4}), DIALOGO, detener_en_aviso=False))
+        self.assertEqual([aviso for *_, aviso in salidas], [False, True, False, False, False])
+        self.assertTrue(salidas[3][2].alerta_sugerida)
 
     def test_una_respuesta_invalida_no_avisa(self):
         avisos = [aviso for *_, aviso in correr.procesar_caso(DetectorGuion(alertas={4}, invalidas={2, 3}), DIALOGO)]
-        self.assertEqual(avisos, [False, False, False, True, False])
+        self.assertEqual(avisos, [False, False, False, True])
 
 
 class TestValidacionDeSalida(unittest.TestCase):
@@ -270,15 +272,15 @@ class TestClienteYDetectorContraOllamaFalso(unittest.TestCase):
         self.detector(esquema=esquema_de("v2")).evaluar(DIALOGO[:1])
         self.assertEqual(list(OllamaFalso.pedidos[0]["format"]["properties"])[0], "evidencia")
 
-    def test_recorrido_completo_con_aviso_unico(self):
+    def test_recorrido_termina_en_el_aviso_unico(self):
         resultados = list(correr.procesar_caso(self.detector(), DIALOGO))
         avisos = [n for n, _, _, aviso in resultados if aviso]
         self.assertEqual(avisos, [4])
+        self.assertEqual(len(resultados), 4, "tras el aviso no se evalúa la línea 5")
         r4 = resultados[3][2]
         self.assertTrue(r4.valida)
         self.assertTrue(r4.evidencia_en_texto)
         self.assertEqual((r4.tokens_prompt, r4.tokens_salida), (300, 30))
-        self.assertTrue(resultados[4][2].alerta_sugerida, "la línea 5 conserva la alerta aunque no vuelve a avisar")
 
     def test_respuesta_rota_queda_como_fallo(self):
         r = self.detector().evaluar((Linea("A", "ROMPER"),))

@@ -1,0 +1,95 @@
+{
+  "fecha": "2026-10-29",
+  "autorizacion": "Delegación explícita del usuario para resolver la preparación técnica sin nuevas aprobaciones genéricas. No acredita revisión humana de etiquetas ni entrenamiento ejecutado.",
+  "issues": [
+    98,
+    99,
+    100,
+    101,
+    102
+  ],
+  "particiones": "PARTICIONES-TITO-2026-10-29.json",
+  "semilla": 42,
+  "entrada_principal_nuevo": "historial_acumulado_A_B_hasta_linea_actual",
+  "controles": [
+    "frase_actual_mismo_entrenamiento_nuevo",
+    "Tito_historico_inmutable_configuracion_original"
+  ],
+  "encoder": "pysentimiento/robertuito-base-uncased",
+  "revision": "20cb399e4b93f270c0cd6b6f533bcb0ada3cb658",
+  "congelado_99": true,
+  "historial": {
+    "reinicio_por_conversacion": true,
+    "lineas_futuras": false,
+    "truncamiento_silencioso": false,
+    "tokens_por_bloque": 128,
+    "overflow": "Tokenizar el historial completo sin truncar; dividir en bloques consecutivos sin solapamiento con espacio para tokens especiales. Encoder congelado por bloque y promedio de estados de tokens de contenido ponderado por cantidad de tokens; excluir padding y tokens especiales. No perder tokens ni líneas. Misma construcción en entrenamiento e inferencia. Registrar bloques y tokens. Esto conserva contenido, pero no atención conjunta entre bloques."
+  },
+  "busqueda_99": {
+    "entradas": [
+      "frase_actual_control",
+      "historial_acumulado"
+    ],
+    "C": [
+      0.1,
+      1.0,
+      10.0
+    ],
+    "umbrales": [
+      0.3,
+      0.5,
+      0.7
+    ],
+    "solver": "lbfgs",
+    "max_iter": 1000,
+    "class_weight": null,
+    "clasificadores_maximos": 6,
+    "configuraciones_evaluadas_maximas": 18,
+    "seleccion_solo_validacion": true,
+    "candidato_principal_debe_usar_historial": true
+  },
+  "supervision_prefijos": {
+    "objetivo": "Derivar al SLM ante pedido riesgoso o indicio contextual observable; no clasificar cada prefijo por la clase final de la llamada.",
+    "valores": [
+      0,
+      1,
+      null
+    ],
+    "reglas": {
+      "1": "Evidencia visible suficiente para consultar al SLM; citar líneas ya disponibles y justificar el riesgo contextual. No basta una palabra o el desenlace futuro.",
+      "0": "Revisión del texto visible determina que no hay motivo observable de consulta en ese punto. Incluye solicitudes legítimas cuando el contexto visible permite distinguirlas.",
+      "null": "Ambiguo, incompleto o no revisado: excluir de la pérdida y métricas binarias, conservar en cobertura y en replay."
+    },
+    "revision": "IA identificada, por prefijo, con fundamento y líneas de soporte <= línea actual; segunda pasada sin sufijo futuro. No cambiar revision_humana ni inventar anotadores. La automatización y su desacuerdo se informan como tales.",
+    "derivacion_automatica_prohibida": [
+      "clase final copiada a todos los prefijos",
+      "ausencia de evidencia anotada igual a negativo",
+      "T_R como frontera automática de 0/1",
+      "etiquetas basadas en sufijo futuro"
+    ],
+    "banco": "Usar las etiquetas de las 4.811 frases conservadas como supervisión sintética declarada, separada de las etiquetas de prefijos. Un ejemplo del banco no se presenta como conversación real."
+  },
+  "seleccion": "Sobre validación conversacional comparar errores de derivación, legítimas derivadas y oportunidad por caso. Elegir historial en la frontera de Pareto de omisiones oportunas, legítimas derivadas y costo. Entre candidatos no dominados: menor suma de omisiones oportunas y legítimas derivadas; empate por menor costo p95 y luego C más cercano a 1, umbral más cercano a 0.5. Informar todos los conteos y denominadores; no usar las veinte para elegir.",
+  "fine_tuning_100": {
+    "activar_si": "Ningún candidato con encoder congelado logra, sobre validación, omisiones oportunas y legítimas derivadas no mayores que el Tito viejo, y existe al menos un error visible que justifique ajustar. Si se igualan ambos conteos, no exigir fine-tuning por ausencia de mejora estricta.",
+    "encoder": "mismo RoBERTuito; ajustar solo últimas dos capas y cabeza binaria",
+    "learning_rates": [
+      1e-05,
+      2e-05
+    ],
+    "epochs_max": 3,
+    "batch_size": 4,
+    "gradient_accumulation": 4,
+    "max_ajustes": 2,
+    "semilla": 42,
+    "presupuesto_horas_max": 2,
+    "regla": "Elegir checkpoint/configuración solo con validación. Mantener entrada acumulada y bloques; no cambiar arquitectura o pooling sin registro. Si el presupuesto o implementación no alcanza, conservar resultado negativo/parcial, no ampliar búsqueda silenciosamente."
+  },
+  "comparacion": "20 IDs aprobados, diez SLM exactos, tres condiciones; sin reajuste por SLM o por resultados de comparación. Diagnóstico y evaluación de esta etapa son desarrollo sintético; independencia del banco histórico y relaciones semánticas se auditan, no se presuponen.",
+  "condiciones_tecnicas_antes_entrenar": [
+    "Auditar relaciones semánticas banco/conversaciones y excluir del ajuste los grupos relacionados con las veinte; registrar exclusiones y conteos actualizados, sin sustituir las veinte.",
+    "Materializar supervisión IA por prefijo de entrenamiento/validación con hashes, fundamentos y cobertura; ningún prefijo sin revisar se convierte en negativo.",
+    "Verificar no cruces, no futuros, persistencia y recarga, e identidad del encoder; adaptar puerta de autorización de desarrollo explícita sin falsificar revisión humana ni marcar habilitada la revisión formal.",
+    "Si la auditoría elimina una clase, producir ejemplos sintéticos adicionales en entrenamiento/desarrollo con grupos y referencias explícitos; documentar la ampliación en #99, sin usar reserva ni pedir al usuario elegir parámetros."
+  ]
+}

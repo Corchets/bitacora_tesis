@@ -79,6 +79,15 @@ class ClienteOllama:
     def version(self) -> str:
         return self._pedir("/api/version").get("version", "desconocida")
 
+    def mostrar(self, modelo: str) -> dict:
+        """Ficha del artefacto realmente instalado (`/api/show`).
+
+        Incluye `details` (cuantización, familia, tamaño de parámetros) y
+        `modified_at`. Se usa para registrar tag, digest y cuantización del
+        artefacto medido sin copiar valores a mano.
+        """
+        return self._pedir("/api/show", {"model": modelo})
+
     def modelos_instalados(self) -> dict[str, str]:
         """Nombre del modelo → digest, según `ollama list`."""
         return {m["name"]: m.get("digest", "") for m in self._pedir("/api/tags").get("models", [])}

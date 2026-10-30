@@ -12,14 +12,20 @@ Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     actualizaciones.csv  una fila por detector, caso y línea
 Después: python resumen.py corridas/<carpeta>
 
-Política del ensayo (#50): un único aviso por llamada, en la primera respuesta válida
-con alerta_sugerida=true. Las respuestas posteriores se registran sin volver a avisar.
+Política del ensayo (#50) en modo operativo (#97): un único aviso por llamada,
+en la primera respuesta válida con alerta_sugerida=true (incluida una falsa
+alarma), y la llamada termina ahí: no se evalúan actualizaciones posteriores.
+Solo la salida del SLM puede emitir el aviso; la referencia humana no decide
+cuándo termina. Con --seguir-tras-aviso se conserva el modo diagnóstico de
+conversación completa, identificado en el manifiesto y separado del costo
+operativo hasta el aviso.
 """
 
 from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import os
 import platform
@@ -34,9 +40,13 @@ from pathlib import Path
 import casos
 from cliente_ollama import URL_POR_DEFECTO, ClienteOllama, ErrorOllama
 from detectores import HABLANTES, PROMPTS, DetectorReglas, DetectorSLM, Respuesta, cargar_prompt, esquema_de, huella
+from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion
+from tito_real import ARTEFACTO_POR_DEFECTO, cargar_artefacto, preparar_tito_real
 
 RAIZ = Path(__file__).resolve().parent
-POLITICA = "aviso_unico_primer_true_valido"
+POLITICA = "aviso_unico_hasta_aviso"
+MODO_OPERATIVO = "operativo-hasta-aviso"
+MODO_DIAGNOSTICO = "diagnostico-completo"
 COLUMNAS = [
     "config",
     "detector",
@@ -59,6 +69,19 @@ COLUMNAS = [
     "tokens_prompt",
     "tokens_salida",
     "crudo",
+    "consulta",
+    "tito_puntaje",
+    "tito_error",
+    "indicio_linea",
+    "indicio_texto",
+    "indicio_puntaje",
+    "tito_ms",
+    "slm_ms",
+    "runtime_ns",
+    "runtime_unidad",
+    "runtime_load_ns",
+    "runtime_prompt_eval_ns",
+    "runtime_eval_ns",
 ]
 
 
@@ -84,13 +107,25 @@ class Llamada:
         return False
 
 
-def procesar_caso(detector, lineas: list[casos.Linea]):
-    """Entrega las líneas de a una y devuelve (n, línea, respuesta, aviso) por actualización."""
+def procesar_caso(detector, lineas: list[casos.Linea], *, detener_en_aviso: bool = True):
+    """Entrega las líneas de a una y devuelve (n, línea, respuesta, aviso) por actualización.
+
+    En modo operativo (#97) termina al primer aviso válido, incluida una falsa
+    alarma: no se evalúan actualizaciones posteriores. Con
+    `detener_en_aviso=False` (modo diagnóstico) recorre la conversación
+    completa y conserva las alertas posteriores sin volver a avisar.
+    """
+    reiniciar = getattr(detector, "reiniciar", None)
+    if callable(reiniciar):
+        reiniciar()  # el filtro reinicia activación e indicio entre llamadas
     llamada = Llamada()
     for n, linea in enumerate(lineas, start=1):
         disponibles = llamada.agregar(linea)
         respuesta = detector.evaluar(disponibles)
-        yield n, linea, respuesta, llamada.registrar(n, respuesta)
+        aviso = llamada.registrar(n, respuesta)
+        yield n, linea, respuesta, aviso
+        if aviso and detener_en_aviso:
+            break
 
 
 def _git(*args: str) -> str:
@@ -152,6 +187,33 @@ def _lista(valor: str) -> list[str]:
     return list(dict.fromkeys(v.strip() for v in valor.split(",") if v.strip()))
 
 
+def _puntajes_tito(espec: str) -> dict[int, float]:
+    """'4=0.9,5=0.8' → {4: 0.9, 5: 0.8}. Vacío → {} (todo puntúa 0,0)."""
+    puntajes: dict[int, float] = {}
+    for parte in _lista(espec):
+        try:
+            linea, puntaje = parte.split("=", 1)
+            puntajes[int(linea)] = float(puntaje)
+        except ValueError:
+            sys.exit(f"Puntaje de Tito inválido {parte!r}: usá 'linea=puntaje', p. ej. '4=0.9'.")
+    return puntajes
+
+
+def _lineas_tito(espec: str) -> set[int]:
+    """'2,5' → {2, 5}. Vacío → set()."""
+    lineas: set[int] = set()
+    for parte in _lista(espec):
+        try:
+            lineas.add(int(parte))
+        except ValueError:
+            sys.exit(f"Línea de fallo de Tito inválida {parte!r}: usá números, p. ej. '2'.")
+    return lineas
+
+
+def sha_archivo(ruta: Path) -> str:
+    return hashlib.sha256(Path(ruta).read_bytes()).hexdigest()
+
+
 def elegir_casos(args) -> list[str]:
     particion = getattr(args, "particion", "desarrollo")
     ids = casos.ids_de_casos(particion=particion)
@@ -169,6 +231,14 @@ def elegir_casos(args) -> list[str]:
 
 
 def preparar_ollama(cliente: ClienteOllama, modelos: list[str]) -> dict:
+    """Verifica que Ollama responda y que los modelos estén instalados.
+
+    `arranque_ms` mide solo este chequeo global del servidor (una vez por
+    corrida): no es el arranque de ningún modelo en particular ni se duplica
+    por configuración. La carga de cada modelo se mide en `calentar`, una vez
+    por modelo.
+    """
+    inicio = time.perf_counter()
     try:
         version = cliente.version()
         instalados = cliente.modelos_instalados()
@@ -177,24 +247,41 @@ def preparar_ollama(cliente: ClienteOllama, modelos: list[str]) -> dict:
             f"No pude hablar con Ollama en {cliente.url} ({e}).\n"
             "¿Está abierto? Instalalo desde https://ollama.com y ejecutá `ollama serve`."
         )
+    arranque_ms = round((time.perf_counter() - inicio) * 1000)
     faltan = [m for m in modelos if m not in instalados and f"{m}:latest" not in instalados]
     if faltan:
         sys.exit("Faltan modelos en Ollama. Descargalos con:\n" + "\n".join(f"  ollama pull {m}" for m in faltan))
-    return {"version": version, "digests": {m: instalados.get(m) or instalados.get(f"{m}:latest") for m in modelos}}
+    return {"version": version, "digests": {m: instalados.get(m) or instalados.get(f"{m}:latest") for m in modelos},
+            "arranque_ms": arranque_ms, "unidad": "ms"}
 
 
 class FalloAlCalentar(Exception):
     """El modelo no quedó listo para medir: la corrida no debe seguir con él."""
 
 
+def _runtime_ns(respuesta: dict, clave: str) -> int | None:
+    """Duración del runtime en ns; None si el runtime no la informa (ausencia explícita)."""
+    valor = respuesta.get(clave)
+    if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+        return None
+    return int(valor)
+
+
 def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int, extra: dict | None = None) -> dict:
     """Carga el modelo antes de medir y comprueba que respete el formato JSON.
 
-    - La carga no se cuenta en la primera actualización.
+    - La carga y el chequeo no se cuentan en la primera actualización.
     - Se envía `think: false`, que los modelos que razonan por defecto (p. ej. qwen3.5)
       necesitan para responder rápido. Si el modelo rechaza el campo, se reintenta sin él.
     - El pedido de prueba no menciona JSON: si la respuesta no es el objeto del esquema,
       esta versión de Ollama está ignorando `format` y las respuestas serían inválidas.
+    - `calentamiento_ms` es el tiempo de pared del pedido de calentamiento (incluye
+      la carga diferida del modelo: Ollama carga con el primer pedido).
+      `carga_ms` se conserva como alias histórico del mismo valor.
+    - Las duraciones que informa el runtime (`total_duration`, `load_duration`,
+      `prompt_eval_duration`, `eval_duration`, en ns) se guardan por separado en
+      `runtime_*_ns`; cuando el runtime no informa una, queda `None` (ausencia
+      explícita, no se finge una separación).
     """
     mensajes = [{"role": "user", "content": "Saludá con una sola palabra."}]
     formato = {"type": "object", "properties": {"ok": {"type": "boolean"}}, "required": ["ok"]}
@@ -228,7 +315,12 @@ def calentar(cliente: ClienteOllama, modelo: str, num_ctx: int, extra: dict | No
         memoria = cliente.memoria_cargada(modelo)
     except ErrorOllama:
         memoria = None
-    return {"carga_ms": carga_ms, "error": "", "memoria": memoria, "pensar": pensar}
+    return {"carga_ms": carga_ms, "calentamiento_ms": carga_ms, "unidad": "ms",
+            "chequeo_contrato": "ok", "error": "", "memoria": memoria, "pensar": pensar,
+            "runtime_total_ns": _runtime_ns(r, "total_duration"),
+            "runtime_load_ns": _runtime_ns(r, "load_duration"),
+            "runtime_prompt_eval_ns": _runtime_ns(r, "prompt_eval_duration"),
+            "runtime_eval_ns": _runtime_ns(r, "eval_duration")}
 
 
 def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, aviso: bool) -> dict:
@@ -256,6 +348,19 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "tokens_prompt": "" if r.tokens_prompt is None else r.tokens_prompt,
         "tokens_salida": "" if r.tokens_salida is None else r.tokens_salida,
         "crudo": r.crudo,
+        "consulta": r.consulta,
+        "tito_puntaje": "" if r.tito_puntaje is None else round(r.tito_puntaje, 3),
+        "tito_error": r.tito_error,
+        "indicio_linea": "" if r.indicio_linea is None else r.indicio_linea,
+        "indicio_texto": r.indicio_texto,
+        "indicio_puntaje": "" if r.indicio_puntaje is None else round(r.indicio_puntaje, 3),
+        "tito_ms": "" if r.tito_ms is None else round(r.tito_ms, 1),
+        "slm_ms": "" if r.slm_ms is None else round(r.slm_ms, 1),
+        "runtime_ns": "" if r.runtime_ns is None else r.runtime_ns,
+        "runtime_unidad": r.runtime_unidad,
+        "runtime_load_ns": "" if r.runtime_load_ns is None else r.runtime_load_ns,
+        "runtime_prompt_eval_ns": "" if r.runtime_prompt_eval_ns is None else r.runtime_prompt_eval_ns,
+        "runtime_eval_ns": "" if r.runtime_eval_ns is None else r.runtime_eval_ns,
     }
 
 
@@ -269,6 +374,8 @@ def _mostrar(carpeta: Path) -> str:
 def _marca(r: Respuesta, aviso: bool) -> str:
     if not r.valida:
         return "x"
+    if r.consulta == "omitida":
+        return "o"  # actualización procesada sin consultar al SLM (no es fallo)
     if aviso:
         return "A"
     return "a" if r.alerta_sugerida else "."
@@ -285,6 +392,13 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
     p.add_argument("--sin-reglas", action="store_true", help="no correr el comparador de reglas")
     p.add_argument("--reglas", default="v1", help="versiones del comparador de reglas separadas por coma: v1 (laboratorio) y/o v2 (reglas_v2.py)")
+    p.add_argument("--filtro-tito", action="store_true", help="agregar por cada SLM su variante filtrada Tito→SLM (Tito simulado, #69)")
+    p.add_argument("--tito-real", action="store_true", help="usar Tito real (RoBERTuito congelado + única logreg seed 42, #70) en vez del guion")
+    p.add_argument("--tito-modelo", type=Path, default=ARTEFACTO_POR_DEFECTO, help="artefacto del clasificador Tito")
+    p.add_argument("--seguir-tras-aviso", action="store_true", help="modo diagnóstico: recorrer la conversación completa tras el aviso, identificado en el manifiesto y separado del costo operativo")
+    p.add_argument("--tito-umbral", type=float, default=UMBRAL_TITO, help="umbral de derivación al SLM (convención exploratoria, igualdad activa)")
+    p.add_argument("--tito-puntajes", default="", help="puntajes simulados por línea, p. ej. '4=0.9,5=0.8' (lo no listado puntúa 0,0)")
+    p.add_argument("--tito-fallo-en", default="", help="líneas donde Tito falla técnicamente, p. ej. '2'")
     p.add_argument("--url", default=URL_POR_DEFECTO, help="dirección de Ollama")
     p.add_argument("--num-ctx", type=int, default=4096, help="contexto del modelo en tokens")
     p.add_argument("--seed", type=int, default=42)
@@ -315,6 +429,10 @@ def main(argv: list[str] | None = None) -> int:
     modelos = [] if args.solo_reglas else _lista(args.modelos)
     if not modelos and not args.solo_reglas:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b) o usá --solo-reglas.")
+    if args.tito_real and not args.filtro_tito:
+        sys.exit("El Tito real (--tito-real) solo actúa con --filtro-tito.")
+    if args.tito_real and not Path(args.tito_modelo).exists():
+        sys.exit(f"No existe el artefacto Tito {args.tito_modelo}: generálo con entrenar_tito.py.")
     prompts = _lista(args.prompts)
     hablantes = _lista(args.hablantes)
     for v in prompts:
@@ -349,12 +467,28 @@ def main(argv: list[str] | None = None) -> int:
         for v in versiones_reglas:
             d = DetectorReglas(v)
             detectores.append(({"config": d.nombre, "detector": "reglas", "modelo": "", "prompt": "", "hablantes": ""}, d))
+    tito_compartido = None
+    tito_preparacion: dict | None = None
+    if args.filtro_tito and args.tito_real:
+        # Un solo Tito real para toda la corrida: la preparación (artefacto +
+        # encoder + calentamiento) corre una vez por proceso (#97) y no se
+        # cuenta en ninguna actualización; cargarlo no reentrena por
+        # conversación, instancia ni SLM (#70).
+        tito_compartido, tito_preparacion = preparar_tito_real(args.tito_modelo)
+        if tito_preparacion.get("error"):
+            print(f"Aviso: Tito real no quedó preparado ({tito_preparacion['error']}); "
+                  "cada actualización derivará por fail-open con su causa.")
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
                 d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
                 etiqueta = {"config": f"slm|{modelo}|{variante}|{h}", "detector": "slm", "modelo": modelo, "prompt": variante, "hablantes": h}
                 detectores.append((etiqueta, d))
+                if args.filtro_tito:
+                    tito = tito_compartido if tito_compartido is not None else TitoGuion(_puntajes_tito(args.tito_puntajes), _lineas_tito(args.tito_fallo_en))
+                    f = FlujoTitoSLM(tito, d, args.tito_umbral)
+                    etiqueta_f = {"config": f"tito-slm|{modelo}|{variante}|{h}", "detector": "tito-slm", "modelo": modelo, "prompt": variante, "hablantes": h}
+                    detectores.append((etiqueta_f, f))
     if not detectores:
         sys.exit("No quedó ningún detector para correr.")
 
@@ -367,6 +501,36 @@ def main(argv: list[str] | None = None) -> int:
         "codigo": info_codigo(),
         "maquina": info_maquina(),
         "politica": POLITICA,
+        "modo_termino": MODO_DIAGNOSTICO if args.seguir_tras_aviso else MODO_OPERATIVO,
+        "filtro_tito": None if not args.filtro_tito else (
+            {
+                "tito": "real-robertuito-logreg",
+                "umbral": args.tito_umbral,
+                "modelo": str(args.tito_modelo),
+                "artefacto_sha256": sha_archivo(args.tito_modelo),
+                "encoder": cargar_artefacto(args.tito_modelo)["encoder"],
+                "arranque_ms": (tito_preparacion or {}).get("artefacto_ms"),
+                "artefacto_desde_cache": (tito_preparacion or {}).get("artefacto_desde_cache"),
+                "encoder_ms": (tito_preparacion or {}).get("encoder_ms"),
+                "encoder_desde_cache": (tito_preparacion or {}).get("encoder_desde_cache"),
+                "calentamiento_ms": (tito_preparacion or {}).get("calentamiento_ms"),
+                "preparacion_error": (tito_preparacion or {}).get("error", ""),
+                "unidad": "ms",
+                "nota": ("preparación explícita una vez por proceso (artefacto + encoder + "
+                         "calentamiento), fuera de las actualizaciones y sin doble conteo"),
+            }
+            if args.tito_real
+            else {
+                "tito": "guion-simulado",
+                "umbral": args.tito_umbral,
+                "puntajes": _puntajes_tito(args.tito_puntajes),
+                "fallo_en": sorted(_lineas_tito(args.tito_fallo_en)),
+                "arranque_ms": None,
+                "calentamiento_ms": None,
+                "unidad": "ms",
+                "nota": "simulado sin artefacto: sin arranque medible",
+            }
+        ),
         "particion": args.particion,
         "ollama": None if ollama is None else {"url": args.url, **ollama},
         "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
@@ -383,7 +547,10 @@ def main(argv: list[str] | None = None) -> int:
 
     guardar_manifiesto()
     print(f"Corrida: {_mostrar(carpeta)}  ({len(ids)} casos, {len(detectores)} configuraciones)")
-    print("Marcas por línea: . sin alerta · A aviso emitido · a alerta posterior al aviso · x fallo\n")
+    if args.seguir_tras_aviso:
+        print("Marcas por línea: . sin alerta · A aviso emitido · a alerta posterior al aviso (diagnóstico) · o SLM no consultado · x fallo\n")
+    else:
+        print("Marcas por línea: . sin alerta · A aviso emitido (la llamada termina acá) · o SLM no consultado · x fallo\n")
 
     try:
         with (carpeta / "actualizaciones.csv").open("w", encoding="utf-8-sig", newline="") as f:
@@ -409,7 +576,7 @@ def main(argv: list[str] | None = None) -> int:
                 for case_id in ids:
                     lineas = casos.cargar_texto(case_id)
                     marcas = []
-                    for n, linea, r, aviso in procesar_caso(detector, lineas):
+                    for n, linea, r, aviso in procesar_caso(detector, lineas, detener_en_aviso=not args.seguir_tras_aviso):
                         escritor.writerow(_fila(config, case_id, n, linea, r, aviso))
                         f.flush()
                         marcas.append(_marca(r, aviso))

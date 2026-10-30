@@ -1,0 +1,615 @@
+{
+ "fecha": "2026-10-29",
+ "semilla": 42,
+ "anotador": "auditoria por incrustaciones RoBERTuito congelado (solo textos; sin etiquetas del test ni reserva)",
+ "calibracion": {
+  "pares_declarados": 6,
+  "contrastes_azar": 50,
+  "sims_par": [
+   0.876,
+   0.8849,
+   0.9005,
+   0.9005,
+   0.9332,
+   0.9374
+  ],
+  "sims_azar": [
+   0.6308,
+   0.6541,
+   0.6624,
+   0.6994,
+   0.7122,
+   0.7391,
+   0.7397,
+   0.7421,
+   0.7447,
+   0.7643,
+   0.7757,
+   0.7877,
+   0.7903,
+   0.7911,
+   0.7924,
+   0.8027,
+   0.8045,
+   0.8082,
+   0.8368,
+   0.8558,
+   0.8678,
+   0.8727,
+   0.8763,
+   0.8813,
+   0.8829,
+   0.887,
+   0.888,
+   0.8891,
+   0.8892,
+   0.8916,
+   0.8932,
+   0.894,
+   0.8969,
+   0.8989,
+   0.9034,
+   0.9037,
+   0.908,
+   0.9122,
+   0.9128,
+   0.9196,
+   0.9197,
+   0.92,
+   0.921,
+   0.9241,
+   0.9294,
+   0.9305,
+   0.9311,
+   0.9363,
+   0.9461,
+   0.9547
+  ],
+  "umbral": 0.876,
+  "metodo": "conservador:min_par (solapa con azar; se excluye de más)"
+ },
+ "grupos": [
+  "entrenamiento",
+  "validacion",
+  "comparacion_20",
+  "diagnostico"
+ ],
+ "familias_excluidas_ajuste": [],
+ "detalle_excluidas": {},
+ "umbral_usado": 0.876,
+ "top_familias_vs_veinte": [
+  {
+   "familia": "banco_047",
+   "max": 0.8518,
+   "frases": 20
+  },
+  {
+   "familia": "banco_033",
+   "max": 0.851,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_039",
+   "max": 0.8449,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_041",
+   "max": 0.8448,
+   "frases": 20
+  },
+  {
+   "familia": "banco_046",
+   "max": 0.8427,
+   "frases": 20
+  },
+  {
+   "familia": "banco_007",
+   "max": 0.8424,
+   "frases": 10
+  },
+  {
+   "familia": "banco_016",
+   "max": 0.8422,
+   "frases": 20
+  },
+  {
+   "familia": "cotidiano_092",
+   "max": 0.8399,
+   "frases": 20
+  },
+  {
+   "familia": "banco_083",
+   "max": 0.8394,
+   "frases": 20
+  },
+  {
+   "familia": "banco_076",
+   "max": 0.8391,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_009",
+   "max": 0.8366,
+   "frases": 15
+  },
+  {
+   "familia": "banco_073",
+   "max": 0.8362,
+   "frases": 20
+  },
+  {
+   "familia": "banco_066",
+   "max": 0.8335,
+   "frases": 20
+  },
+  {
+   "familia": "banco_062",
+   "max": 0.832,
+   "frases": 20
+  },
+  {
+   "familia": "banco_024",
+   "max": 0.8297,
+   "frases": 15
+  },
+  {
+   "familia": "banco_032",
+   "max": 0.8265,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_042",
+   "max": 0.8249,
+   "frases": 20
+  },
+  {
+   "familia": "banco_085",
+   "max": 0.8241,
+   "frases": 20
+  },
+  {
+   "familia": "banco_052",
+   "max": 0.8233,
+   "frases": 20
+  },
+  {
+   "familia": "banco_022",
+   "max": 0.8215,
+   "frases": 20
+  }
+ ],
+ "top_familias_vs_diagnostico": [
+  {
+   "familia": "banco_034",
+   "max": 0.8173,
+   "frases": 20
+  },
+  {
+   "familia": "cotidiano_024",
+   "max": 0.8088,
+   "frases": 20
+  },
+  {
+   "familia": "banco_100",
+   "max": 0.8007,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_053",
+   "max": 0.8005,
+   "frases": 20
+  },
+  {
+   "familia": "banco_010",
+   "max": 0.7995,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_002",
+   "max": 0.7993,
+   "frases": 20
+  },
+  {
+   "familia": "cotidiano_080",
+   "max": 0.7981,
+   "frases": 20
+  },
+  {
+   "familia": "identidad_092",
+   "max": 0.7967,
+   "frases": 20
+  },
+  {
+   "familia": "banco_054",
+   "max": 0.7958,
+   "frases": 20
+  },
+  {
+   "familia": "banco_090",
+   "max": 0.7951,
+   "frases": 20
+  }
+ ],
+ "histograma_max_vs_veinte": {
+  "0.70-0.75": 15,
+  "0.75-0.80": 168,
+  "0.80-0.85": 82,
+  "0.85-0.90": 2
+ },
+ "frases_auditadas": 4811,
+ "conteo_antes": {
+  "entrenamiento/estafa": 1548,
+  "validacion/estafa": 389,
+  "entrenamiento/legitima": 2295,
+  "validacion/legitima": 579
+ },
+ "conteo_despues": {
+  "entrenamiento/estafa": 1548,
+  "validacion/estafa": 389,
+  "entrenamiento/legitima": 2295,
+  "validacion/legitima": 579
+ },
+ "banco_restante": 4811,
+ "resolucion_exclusiones": "cero exclusiones: ninguna familia alcanza el umbral calibrado vs las veinte; ver top e histograma como evidencia. No acredita independencia causal.",
+ "nota": "Exclusión por familia completa vs las veinte. Diagnóstico se informa sin excluir (lo usa #98). Si falta una clase tras excluir, material sintético trazable sin reserva; no se sustituyen las veinte.",
+ "limites": [
+  "Cota por similitud de textos, no prueba de independencia causal.",
+  "Umbral calibrado en pares declarados, no en resultados comparativos.",
+  "La validación del banco no es independiente del Tito viejo (lo vio en ajuste).",
+  "Cruces banco<->train/val/comparacion/diagnostico informativos con el umbral de referencia; sin exclusiones ni prueba de independencia causal."
+ ],
+ "cruces_por_grupo": {
+  "entrenamiento": {
+   "top15": [
+    {
+     "familia": "banco_074",
+     "max": 0.8537,
+     "frases": 20
+    },
+    {
+     "familia": "banco_059",
+     "max": 0.8536,
+     "frases": 20
+    },
+    {
+     "familia": "banco_083",
+     "max": 0.8473,
+     "frases": 20
+    },
+    {
+     "familia": "banco_021",
+     "max": 0.8415,
+     "frases": 20
+    },
+    {
+     "familia": "banco_003",
+     "max": 0.8414,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_014",
+     "max": 0.8374,
+     "frases": 20
+    },
+    {
+     "familia": "banco_023",
+     "max": 0.8359,
+     "frases": 15
+    },
+    {
+     "familia": "banco_093",
+     "max": 0.8334,
+     "frases": 20
+    },
+    {
+     "familia": "banco_002",
+     "max": 0.8333,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_002",
+     "max": 0.8318,
+     "frases": 20
+    },
+    {
+     "familia": "cotidiano_049",
+     "max": 0.8304,
+     "frases": 10
+    },
+    {
+     "familia": "banco_006",
+     "max": 0.8302,
+     "frases": 20
+    },
+    {
+     "familia": "banco_017",
+     "max": 0.8301,
+     "frases": 20
+    },
+    {
+     "familia": "banco_073",
+     "max": 0.829,
+     "frases": 20
+    },
+    {
+     "familia": "banco_058",
+     "max": 0.8274,
+     "frases": 10
+    }
+   ],
+   "histograma": {
+    "0.70-0.75": 24,
+    "0.75-0.80": 148,
+    "0.80-0.85": 93,
+    "0.85-0.90": 2
+   },
+   "n_familias_ge_umbral_referencia": 0,
+   "n_lineas_grupo": 421
+  },
+  "validacion": {
+   "top15": [
+    {
+     "familia": "banco_089",
+     "max": 0.8098,
+     "frases": 20
+    },
+    {
+     "familia": "banco_047",
+     "max": 0.8065,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_046",
+     "max": 0.8033,
+     "frases": 20
+    },
+    {
+     "familia": "banco_037",
+     "max": 0.803,
+     "frases": 18
+    },
+    {
+     "familia": "identidad_004",
+     "max": 0.802,
+     "frases": 20
+    },
+    {
+     "familia": "banco_002",
+     "max": 0.7978,
+     "frases": 20
+    },
+    {
+     "familia": "banco_040",
+     "max": 0.7903,
+     "frases": 20
+    },
+    {
+     "familia": "banco_100",
+     "max": 0.7895,
+     "frases": 20
+    },
+    {
+     "familia": "banco_087",
+     "max": 0.789,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_028",
+     "max": 0.7884,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_008",
+     "max": 0.7832,
+     "frases": 15
+    },
+    {
+     "familia": "identidad_002",
+     "max": 0.7815,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_099",
+     "max": 0.7789,
+     "frases": 20
+    },
+    {
+     "familia": "banco_092",
+     "max": 0.777,
+     "frases": 20
+    },
+    {
+     "familia": "banco_022",
+     "max": 0.7741,
+     "frases": 20
+    }
+   ],
+   "histograma": {
+    "0.65-0.70": 4,
+    "0.70-0.75": 166,
+    "0.75-0.80": 92,
+    "0.80-0.85": 5
+   },
+   "n_familias_ge_umbral_referencia": 0,
+   "n_lineas_grupo": 122
+  },
+  "comparacion_20": {
+   "top15": [
+    {
+     "familia": "banco_047",
+     "max": 0.8518,
+     "frases": 20
+    },
+    {
+     "familia": "banco_033",
+     "max": 0.851,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_039",
+     "max": 0.8449,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_041",
+     "max": 0.8448,
+     "frases": 20
+    },
+    {
+     "familia": "banco_046",
+     "max": 0.8427,
+     "frases": 20
+    },
+    {
+     "familia": "banco_007",
+     "max": 0.8424,
+     "frases": 10
+    },
+    {
+     "familia": "banco_016",
+     "max": 0.8422,
+     "frases": 20
+    },
+    {
+     "familia": "cotidiano_092",
+     "max": 0.8399,
+     "frases": 20
+    },
+    {
+     "familia": "banco_083",
+     "max": 0.8394,
+     "frases": 20
+    },
+    {
+     "familia": "banco_076",
+     "max": 0.8391,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_009",
+     "max": 0.8366,
+     "frases": 15
+    },
+    {
+     "familia": "banco_073",
+     "max": 0.8362,
+     "frases": 20
+    },
+    {
+     "familia": "banco_066",
+     "max": 0.8335,
+     "frases": 20
+    },
+    {
+     "familia": "banco_062",
+     "max": 0.832,
+     "frases": 20
+    },
+    {
+     "familia": "banco_024",
+     "max": 0.8297,
+     "frases": 15
+    }
+   ],
+   "histograma": {
+    "0.70-0.75": 15,
+    "0.75-0.80": 168,
+    "0.80-0.85": 82,
+    "0.85-0.90": 2
+   },
+   "n_familias_ge_umbral_referencia": 0,
+   "n_lineas_grupo": 524
+  },
+  "diagnostico": {
+   "top15": [
+    {
+     "familia": "banco_034",
+     "max": 0.8173,
+     "frases": 20
+    },
+    {
+     "familia": "cotidiano_024",
+     "max": 0.8088,
+     "frases": 20
+    },
+    {
+     "familia": "banco_100",
+     "max": 0.8007,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_053",
+     "max": 0.8005,
+     "frases": 20
+    },
+    {
+     "familia": "banco_010",
+     "max": 0.7995,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_002",
+     "max": 0.7993,
+     "frases": 20
+    },
+    {
+     "familia": "cotidiano_080",
+     "max": 0.7981,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_092",
+     "max": 0.7967,
+     "frases": 20
+    },
+    {
+     "familia": "banco_054",
+     "max": 0.7958,
+     "frases": 20
+    },
+    {
+     "familia": "banco_090",
+     "max": 0.7951,
+     "frases": 20
+    },
+    {
+     "familia": "banco_022",
+     "max": 0.7939,
+     "frases": 20
+    },
+    {
+     "familia": "identidad_003",
+     "max": 0.7936,
+     "frases": 15
+    },
+    {
+     "familia": "banco_093",
+     "max": 0.793,
+     "frases": 20
+    },
+    {
+     "familia": "banco_060",
+     "max": 0.7929,
+     "frases": 5
+    },
+    {
+     "familia": "identidad_010",
+     "max": 0.7926,
+     "frases": 10
+    }
+   ],
+   "histograma": {
+    "0.70-0.75": 79,
+    "0.75-0.80": 184,
+    "0.80-0.85": 4
+   },
+   "n_familias_ge_umbral_referencia": 0,
+   "n_lineas_grupo": 246
+  }
+ },
+ "etapas_ejecutadas": [
+  "auditoria_20",
+  "cruce_train_val"
+ ]
+}

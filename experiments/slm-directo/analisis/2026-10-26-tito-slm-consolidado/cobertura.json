@@ -1,0 +1,348 @@
+{
+  "artefactos": 6,
+  "corrida_superada_excluida": "2026-10-26_132916_qwen4b-comparacion",
+  "corridas_canonicas": [
+    "2026-10-26_133838_qwen4b-comparacion",
+    "2026-10-26_135518_qwen08b-q8-comparacion",
+    "2026-10-26_135640_qwen08b-comparacion",
+    "2026-10-26_135746_qwen2b-q8-comparacion",
+    "2026-10-26_135930_qwen9b-comparacion",
+    "2026-10-26_141023_llama1b-comparacion"
+  ],
+  "errores": [],
+  "evaluaciones_conversacion": 96,
+  "generado_por": "consolidar.py (solo lee salidas crudas, sin inferencia)",
+  "matriz_esperada": "6 x 8 x 2 = 96",
+  "matriz_ok": true,
+  "modelos": {
+    "llama3.2:1b-instruct-q4_K_M": {
+      "corrida": "2026-10-26_141023_llama1b-comparacion",
+      "digest_ok": true,
+      "directo": {
+        "avisos": {},
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 5,
+        "fallos_tito": 0,
+        "falsas_alarmas": 0,
+        "filas": 105,
+        "ms_total": 39297.1,
+        "tokens": 87910,
+        "vishing_detectado": 0
+      },
+      "filtrado": {
+        "avisos": {
+          "LG-SUPPORT-INFO-01-e02": 9,
+          "TR-04-pedido-tras-charla-larga": 10,
+          "TR-06-banco-alerta-legitima": 5,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 3,
+        "filas": 105,
+        "ms_total": 33464.0,
+        "tokens": 71909,
+        "vishing_detectado": 2
+      },
+      "sha_actualizaciones_csv": "78e9171365090fb118812e2cca136dc177553c71adc152b94118841b31b95cd0",
+      "sha_comparacion_md": "879f42a7d2e66156ead1dfac220946e44124a4880e8f8e8a2c763b144c316c62",
+      "sha_manifiesto_json": "c5c915ae022fd8ad4299f7c813302fc8bb6c9464720e3c3c90326766ee1e49bd"
+    },
+    "qwen3.5:0.8b": {
+      "corrida": "2026-10-26_135640_qwen08b-comparacion",
+      "digest_ok": true,
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 8,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 20,
+          "TR-07-pedido-partido-en-dos-lineas": 9,
+          "TR-08-frase-cortada-candado": 4,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 24199.6,
+        "tokens": 77512,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 4,
+          "TR-04-pedido-tras-charla-larga": 6,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 38418.9,
+        "tokens": 66599,
+        "vishing_detectado": 4
+      },
+      "sha_actualizaciones_csv": "052d6326ca9eae9772334b818ba793d4b60ac3e3935575fbc8c47e24293c3269",
+      "sha_comparacion_md": "a7f0d6c1a23909cad9cf6940626c9d5664265254e471c92164fdd8a458ec7de0",
+      "sha_manifiesto_json": "baf44791d55d0b3ee85128872613ebff2fd6e2a9029d1464be4b04b7224db55e"
+    },
+    "qwen3.5:0.8b-q8_0": {
+      "corrida": "2026-10-26_135518_qwen08b-q8-comparacion",
+      "digest_ok": true,
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 8,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 20,
+          "TR-07-pedido-partido-en-dos-lineas": 9,
+          "TR-08-frase-cortada-candado": 4,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 31416.3,
+        "tokens": 77512,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 4,
+          "TR-04-pedido-tras-charla-larga": 6,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 46364.5,
+        "tokens": 66566,
+        "vishing_detectado": 4
+      },
+      "sha_actualizaciones_csv": "b170ad239eca043bfc28f36225fad6e11403ae09e7b78a0c33b4c8137a05d509",
+      "sha_comparacion_md": "4b829fae22ca0af53017d369414e6e04ee60e74dea13b520f98483f0a42d4221",
+      "sha_manifiesto_json": "f680a227c3b4495d300daf8eb6ed1375dc9c4a7fa8d66c2f058a025fc3169942"
+    },
+    "qwen3.5:2b-q8_0": {
+      "corrida": "2026-10-26_135746_qwen2b-q8-comparacion",
+      "digest_ok": true,
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 26,
+          "TR-07-pedido-partido-en-dos-lineas": 8
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 0,
+        "filas": 105,
+        "ms_total": 55037.4,
+        "tokens": 77749,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "LG-SUPPORT-INFO-01-e02": 12,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 6,
+          "TR-04-pedido-tras-charla-larga": 26,
+          "TR-07-pedido-partido-en-dos-lineas": 8
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 1,
+        "filas": 105,
+        "ms_total": 46953.7,
+        "tokens": 63483,
+        "vishing_detectado": 4
+      },
+      "sha_actualizaciones_csv": "ceecb00f625eb80261194d124e996e60ed28ee5dace820ddad8b63ca6c164583",
+      "sha_comparacion_md": "f20a9268e14e2e7785151fe4671a370a5571db38dbbc80d41275c8fc9d52889d",
+      "sha_manifiesto_json": "df9df1eedf731709a403ea0a2c061ad3b0e5c0bb5e34e7a2d310bd7bc6a09e94"
+    },
+    "qwen3.5:4b-q4_K_M": {
+      "corrida": "2026-10-26_133838_qwen4b-comparacion",
+      "digest_ok": true,
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 3,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 3,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 4
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 3,
+        "filas": 105,
+        "ms_total": 97969.2,
+        "tokens": 78900,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "LG-SUPPORT-INFO-01-e02": 10,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 4,
+        "filas": 105,
+        "ms_total": 113313.6,
+        "tokens": 66127,
+        "vishing_detectado": 4
+      },
+      "sha_actualizaciones_csv": "5bc829927087b7b120cade94463b21bf2e8a4c2ef39dbf25aa82c12953a6754f",
+      "sha_comparacion_md": "ae3d0dd443f535195ebd1b200300a03ca7b19925ae4aa2da844826fea0c6009e",
+      "sha_manifiesto_json": "db4c2f3d297969fb60cf45862351da6d6ff17ed91301cca8e4151826bc0adbe0"
+    },
+    "qwen3.5:9b-q4_K_M": {
+      "corrida": "2026-10-26_135930_qwen9b-comparacion",
+      "digest_ok": true,
+      "directo": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 3,
+          "TR-04-pedido-tras-charla-larga": 23,
+          "TR-06-banco-alerta-legitima": 10,
+          "TR-07-pedido-partido-en-dos-lineas": 4,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 4
+        },
+        "consultas_slm": 105,
+        "derivacion": {},
+        "evitadas": 0,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 3,
+        "filas": 105,
+        "ms_total": 153222.5,
+        "tokens": 79032,
+        "vishing_detectado": 4
+      },
+      "filtrado": {
+        "avisos": {
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 3,
+          "TR-04-pedido-tras-charla-larga": 23,
+          "TR-06-banco-alerta-legitima": 9,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3
+        },
+        "consultas_slm": 70,
+        "derivacion": {
+          "LG-SUPPORT-INFO-01-e02": 8,
+          "SC-FAMILIAR-DINERO-01-e01": 9,
+          "SC-SOPORTE-REMOTO-01-e01": 1,
+          "TR-04-pedido-tras-charla-larga": 5,
+          "TR-06-banco-alerta-legitima": 3,
+          "TR-07-pedido-partido-en-dos-lineas": 5,
+          "TR-08-frase-cortada-candado": 3,
+          "TR-11-familiar-real-pide-plata": 9
+        },
+        "evitadas": 35,
+        "fallos_slm": 0,
+        "fallos_tito": 0,
+        "falsas_alarmas": 2,
+        "filas": 105,
+        "ms_total": 141503.6,
+        "tokens": 64945,
+        "vishing_detectado": 4
+      },
+      "sha_actualizaciones_csv": "3467c26e6e539bd00319cce86ea4e4e3480d5b865bca22d03f7be4ab7b148421",
+      "sha_comparacion_md": "398b09131d9c9b5f3f815e9928b097113a95b5a47240760409dbcc247e182cf1",
+      "sha_manifiesto_json": "f3882d705cf9e93d40542a5b8d596a9909ef7cac3685bb32b89e358980e6c80a"
+    }
+  }
+}

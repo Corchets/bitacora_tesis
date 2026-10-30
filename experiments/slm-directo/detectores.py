@@ -64,7 +64,20 @@ MAXIMO_TOKENS_RESPUESTA = 512
 
 @dataclass
 class Respuesta:
-    """Lo que un detector dice sobre una actualización. Inválida = fallo, no predicción."""
+    """Lo que un detector dice sobre una actualización. Inválida = fallo, no predicción.
+
+    Los campos de filtro (`consulta`, `tito_*`, `indicio_*`) solo los usa el
+    flujo Tito→SLM (#69): en el comparador directo quedan vacíos.
+    `tito_ms`/`slm_ms` separan el costo por componente (#97): `ms` es el
+    total de la actualización (suma de los componentes que corrieron, sin
+    doble conteo). `runtime_ns` es la duración total que informa el runtime
+    (Ollama `total_duration`, en nanosegundos); `runtime_unidad` es `"ns"`
+    cuando hay dato y `""` cuando no (ausencia explícita).
+    `runtime_load_ns`, `runtime_prompt_eval_ns` y `runtime_eval_ns` son las
+    demás duraciones que expone el runtime (`load_duration`,
+    `prompt_eval_duration`, `eval_duration`, en nanosegundos); cada una es
+    `None` cuando el runtime no la informa (ausencia explícita, no cero).
+    """
 
     valida: bool
     error: str = ""
@@ -77,6 +90,19 @@ class Respuesta:
     ms: float | None = None
     tokens_prompt: int | None = None
     tokens_salida: int | None = None
+    consulta: str = ""
+    tito_puntaje: float | None = None
+    tito_error: str = ""
+    indicio_linea: int | None = None
+    indicio_texto: str = ""
+    indicio_puntaje: float | None = None
+    tito_ms: float | None = None
+    slm_ms: float | None = None
+    runtime_ns: int | None = None
+    runtime_unidad: str = ""
+    runtime_load_ns: int | None = None
+    runtime_prompt_eval_ns: int | None = None
+    runtime_eval_ns: int | None = None
 
 
 def cargar_prompt(variante: str) -> str:
@@ -193,7 +219,14 @@ class DetectorSLM:
         }
 
     def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
-        usuario = armar_mensaje_usuario(lineas, self.hablantes)
+        return self.evaluar_mensaje(armar_mensaje_usuario(lineas, self.hablantes), lineas)
+
+    def evaluar_mensaje(self, usuario: str, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
+        """Evalúa un mensaje ya armado (el filtro agrega el bloque de indicio).
+
+        `lineas` es el historial íntegro disponible, para validar la evidencia
+        citada sin texto futuro.
+        """
         estimado = math.ceil((len(self.prompt) + len(usuario)) / CARACTERES_POR_TOKEN)
         if estimado > self.num_ctx * FRACCION_MAXIMA_DEL_CONTEXTO:
             # No se recorta en silencio (#50): se informa como fallo.
@@ -203,11 +236,26 @@ class DetectorSLM:
         try:
             r = self.cliente.chat(self.modelo, mensajes, self.esquema or ESQUEMA_SALIDA, self.opciones(), self.pensar)
         except ErrorOllama as e:
-            return Respuesta(valida=False, error=str(e), ms=(time.perf_counter() - inicio) * 1000)
+            ms_fallo = (time.perf_counter() - inicio) * 1000
+            return Respuesta(valida=False, error=str(e), ms=ms_fallo, slm_ms=ms_fallo)
         ms = (time.perf_counter() - inicio) * 1000
         crudo = r.get("message", {}).get("content", "")
         tokens_prompt, tokens_salida = r.get("prompt_eval_count"), r.get("eval_count")
-        comun = dict(crudo=crudo, ms=ms, tokens_prompt=tokens_prompt, tokens_salida=tokens_salida)
+
+        def _duracion_ns(clave: str) -> int | None:
+            """Duración del runtime en ns; None si el runtime no la informa."""
+            valor = r.get(clave)
+            if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+                return None
+            return int(valor)
+
+        total_ns = _duracion_ns("total_duration")
+        unidad = "ns" if total_ns is not None else ""
+        comun = dict(crudo=crudo, ms=ms, slm_ms=ms, tokens_prompt=tokens_prompt,
+                     tokens_salida=tokens_salida, runtime_ns=total_ns, runtime_unidad=unidad,
+                     runtime_load_ns=_duracion_ns("load_duration"),
+                     runtime_prompt_eval_ns=_duracion_ns("prompt_eval_duration"),
+                     runtime_eval_ns=_duracion_ns("eval_duration"))
         if r.get("done_reason") == "length":
             return Respuesta(valida=False, error="salida_cortada", **comun)
         salida, error = validar_salida(crudo)

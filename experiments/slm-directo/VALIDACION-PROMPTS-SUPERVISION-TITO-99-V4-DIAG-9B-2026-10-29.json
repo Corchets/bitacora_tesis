@@ -1,0 +1,399 @@
+{
+ "fecha": "2026-10-29",
+ "prompts_version": "v4-contextual-2026-10-29",
+ "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+ "modelo": {
+  "tag": "qwen3.5:9b-q4_K_M",
+  "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "ollama_version": "0.40.8",
+  "opciones": {
+   "temperature": 0,
+   "seed": 42,
+   "num_predict": 300
+  },
+  "formato": "json-schema etiqueta/fundamento/lineas_soporte"
+ },
+ "url": "http://127.0.0.1:11435",
+ "controles": [
+  {
+   "control": "pizza_legitima",
+   "lineas": [
+    "A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.",
+    "B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.",
+    "A: Perfecto, confirmo que es el alias de la factura del local."
+   ],
+   "esperado": 0,
+   "observado": 0,
+   "conforme": true,
+   "segundos": 23.5,
+   "registro": {
+    "etiqueta": 0,
+    "fundamento": "El contenido se entiende y no hay motivo de riesgo: el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido). Nadie pide nada sensible a su interlocutor ni hay señales de secreto, urgencia o presión. Las palabras 'alias', 'transferí' y 'factura' aparecen en un contexto legítimo de pago a un comercio físico. | El contenido se entiende y no hay motivo de riesgo: el pedido es la parte normal del trámite que la propia persona solicitó al llamar. Las citas textuales 'pagar por transferencia al local', 'Tu pedido cuesta diez mil pesos', 'Transferí al alias del local que ya conocés' y 'confirmo que es el alias de la factura del local' describen una interacción legítima con un comercio (pizzería) donde se confirma información previamente conocida ('ya conocés', 'factura del local') sin señales de secreto, urgencia, presión ni solicitud de datos sensibles.",
+    "lineas_soporte": [
+     1,
+     2,
+     3
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 0,
+     "fundamento": "El contenido se entiende y no hay motivo de riesgo: el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido). Nadie pide nada sensible a su interlocutor ni hay señales de secreto, urgencia o presión. Las palabras 'alias', 'transferí' y 'factura' aparecen en un contexto legítimo de pago a un comercio físico.",
+     "lineas_soporte": [
+      1,
+      2,
+      3
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\nL2 B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\nL3 A: Perfecto, confirmo que es el alias de la factura del local.\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El contenido se entiende y no hay motivo de riesgo: el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido). Nadie pide nada sensible a su interlocutor ni hay señales de secreto, urgencia o presión. Las palabras 'alias', 'transferí' y 'factura' aparecen en un contexto legítimo de pago a un comercio físico.\",\n  \"lineas_soporte\": [1, 2, 3]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 0,
+     "fundamento": "El contenido se entiende y no hay motivo de riesgo: el pedido es la parte normal del trámite que la propia persona solicitó al llamar. Las citas textuales 'pagar por transferencia al local', 'Tu pedido cuesta diez mil pesos', 'Transferí al alias del local que ya conocés' y 'confirmo que es el alias de la factura del local' describen una interacción legítima con un comercio (pizzería) donde se confirma información previamente conocida ('ya conocés', 'factura del local') sin señales de secreto, urgencia, presión ni solicitud de datos sensibles.",
+     "lineas_soporte": [
+      1,
+      2,
+      3
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\nL2 B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\nL3 A: Perfecto, confirmo que es el alias de la factura del local.\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El contenido se entiende y no hay motivo de riesgo: el pedido es la parte normal del trámite que la propia persona solicitó al llamar. Las citas textuales 'pagar por transferencia al local', 'Tu pedido cuesta diez mil pesos', 'Transferí al alias del local que ya conocés' y 'confirmo que es el alias de la factura del local' describen una interacción legítima con un comercio (pizzería) donde se confirma información previamente conocida ('ya conocés', 'factura del local') sin señales de secreto, urgencia, presión ni solicitud de datos sensibles.\",\n  \"lineas_soporte\": [1, 2, 3]\n}"
+    }
+   }
+  },
+  {
+   "control": "turno_medico_dni_legitimo",
+   "lineas": [
+    "A: Llamo para pedir un turno con el doctor Pérez, por favor.",
+    "B: Perfecto, ¿me confirma su DNI para registrar el turno?",
+    "A: Sí, es 12.345.678."
+   ],
+   "esperado": 0,
+   "observado": 0,
+   "conforme": true,
+   "segundos": 5.3,
+   "registro": {
+    "etiqueta": 0,
+    "fundamento": "El contenido se entiende y no hay motivo de riesgo: el usuario solicita un turno con el doctor Pérez y proporciona su DNI (12.345.678) como parte normal del trámite que él mismo inició al llamar ('Llamo para pedir un turno', '¿me confirma su DNI para registrar el turno?'). No hay señales de secreto, urgencia, presión ni solicitud de códigos sensibles. | El contenido se entiende y no hay motivo de riesgo: el usuario solicita un turno con el doctor Pérez y proporciona su DNI (12.345.678) para registrar dicho trámite, lo cual es una parte normal del proceso administrativo solicitado por el propio usuario al llamar.",
+    "lineas_soporte": [
+     1,
+     2,
+     3
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 0,
+     "fundamento": "El contenido se entiende y no hay motivo de riesgo: el usuario solicita un turno con el doctor Pérez y proporciona su DNI (12.345.678) como parte normal del trámite que él mismo inició al llamar ('Llamo para pedir un turno', '¿me confirma su DNI para registrar el turno?'). No hay señales de secreto, urgencia, presión ni solicitud de códigos sensibles.",
+     "lineas_soporte": [
+      1,
+      2,
+      3
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Llamo para pedir un turno con el doctor Pérez, por favor.\nL2 B: Perfecto, ¿me confirma su DNI para registrar el turno?\nL3 A: Sí, es 12.345.678.\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El contenido se entiende y no hay motivo de riesgo: el usuario solicita un turno con el doctor Pérez y proporciona su DNI (12.345.678) como parte normal del trámite que él mismo inició al llamar ('Llamo para pedir un turno', '¿me confirma su DNI para registrar el turno?'). No hay señales de secreto, urgencia, presión ni solicitud de códigos sensibles.\",\n  \"lineas_soporte\": [1, 2, 3]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 0,
+     "fundamento": "El contenido se entiende y no hay motivo de riesgo: el usuario solicita un turno con el doctor Pérez y proporciona su DNI (12.345.678) para registrar dicho trámite, lo cual es una parte normal del proceso administrativo solicitado por el propio usuario al llamar.",
+     "lineas_soporte": [
+      1,
+      2,
+      3
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Llamo para pedir un turno con el doctor Pérez, por favor.\nL2 B: Perfecto, ¿me confirma su DNI para registrar el turno?\nL3 A: Sí, es 12.345.678.\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El contenido se entiende y no hay motivo de riesgo: el usuario solicita un turno con el doctor Pérez y proporciona su DNI (12.345.678) para registrar dicho trámite, lo cual es una parte normal del proceso administrativo solicitado por el propio usuario al llamar.\",\n  \"lineas_soporte\": [1, 2, 3]\n}"
+    }
+   }
+  },
+  {
+   "control": "otp_fraude",
+   "lineas": [
+    "A: Hola.",
+    "B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.",
+    "A: ¿Qué tengo que hacer?",
+    "B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta."
+   ],
+   "esperado": 1,
+   "observado": 1,
+   "conforme": true,
+   "segundos": 4.7,
+   "registro": {
+    "etiqueta": 1,
+    "fundamento": "El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita urgentemente ('ahora mismo') que el usuario dicte un código recibido por SMS ('decímelo ahora mismo para bloquear la cuenta'). | Evidencia de riesgo: el interlocutor B afirma ser del banco y menciona 'movimientos raros' (L2), pide que se dicte un código inmediatamente ('decímelo ahora mismo') para bloquear la cuenta (L4) e implica secreto al pedirlo en tiempo real sin verificar identidad por otros medios.",
+    "lineas_soporte": [
+     2,
+     4
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 1,
+     "fundamento": "El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita urgentemente ('ahora mismo') que el usuario dicte un código recibido por SMS ('decímelo ahora mismo para bloquear la cuenta').",
+     "lineas_soporte": [
+      2,
+      4
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta.\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita urgentemente ('ahora mismo') que el usuario dicte un código recibido por SMS ('decímelo ahora mismo para bloquear la cuenta').\",\n  \"lineas_soporte\": [2, 4]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 1,
+     "fundamento": "Evidencia de riesgo: el interlocutor B afirma ser del banco y menciona 'movimientos raros' (L2), pide que se dicte un código inmediatamente ('decímelo ahora mismo') para bloquear la cuenta (L4) e implica secreto al pedirlo en tiempo real sin verificar identidad por otros medios.",
+     "lineas_soporte": [
+      2,
+      4
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta.\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Evidencia de riesgo: el interlocutor B afirma ser del banco y menciona 'movimientos raros' (L2), pide que se dicte un código inmediatamente ('decímelo ahora mismo') para bloquear la cuenta (L4) e implica secreto al pedirlo en tiempo real sin verificar identidad por otros medios.\",\n  \"lineas_soporte\": [2, 4]\n}"
+    }
+   }
+  },
+  {
+   "control": "pedido_repartido",
+   "lineas": [
+    "A: Hola.",
+    "B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.",
+    "A: ¿Qué tengo que hacer?",
+    "B: Te va a llegar un mensaje con un código.",
+    "A: Me llegó.",
+    "B: Perfecto, decímelo para cancelar el cargo."
+   ],
+   "esperado": 1,
+   "observado": 1,
+   "conforme": true,
+   "segundos": 5.6,
+   "registro": {
+    "etiqueta": 1,
+    "fundamento": "El interlocutor B afirma ser del banco ('te llamo del banco') y reporta un problema en la cuenta ('cargo raro'). Además, solicita explícitamente que se dicte un código de seguridad para proceder con la cancelación ('decímelo para cancelar el cargo'), lo cual constituye una solicitud de información sensible bajo presión de urgencia implícita por la naturaleza del incidente. | El interlocutor B afirma ser del banco y menciona un 'cargo raro' (L2), luego instruye al usuario para que dicte un código recibido ('decímelo') con el fin de cancelar el cargo (L4-L6). Esto cumple los criterios de riesgo: entidad que se identifica como bancaria, aviso de anomalía en la cuenta y solicitud explícita de revelar un código/clave.",
+    "lineas_soporte": [
+     2,
+     4,
+     5,
+     6
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 1,
+     "fundamento": "El interlocutor B afirma ser del banco ('te llamo del banco') y reporta un problema en la cuenta ('cargo raro'). Además, solicita explícitamente que se dicte un código de seguridad para proceder con la cancelación ('decímelo para cancelar el cargo'), lo cual constituye una solicitud de información sensible bajo presión de urgencia implícita por la naturaleza del incidente.",
+     "lineas_soporte": [
+      2,
+      4,
+      6
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un mensaje con un código.\nL5 A: Me llegó.\nL6 B: Perfecto, decímelo para cancelar el cargo.\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"El interlocutor B afirma ser del banco ('te llamo del banco') y reporta un problema en la cuenta ('cargo raro'). Además, solicita explícitamente que se dicte un código de seguridad para proceder con la cancelación ('decímelo para cancelar el cargo'), lo cual constituye una solicitud de información sensible bajo presión de urgencia implícita por la naturaleza del incidente.\",\n  \"lineas_soporte\": [2, 4, 6]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 1,
+     "fundamento": "El interlocutor B afirma ser del banco y menciona un 'cargo raro' (L2), luego instruye al usuario para que dicte un código recibido ('decímelo') con el fin de cancelar el cargo (L4-L6). Esto cumple los criterios de riesgo: entidad que se identifica como bancaria, aviso de anomalía en la cuenta y solicitud explícita de revelar un código/clave.",
+     "lineas_soporte": [
+      2,
+      4,
+      5,
+      6
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un mensaje con un código.\nL5 A: Me llegó.\nL6 B: Perfecto, decímelo para cancelar el cargo.\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"El interlocutor B afirma ser del banco y menciona un 'cargo raro' (L2), luego instruye al usuario para que dicte un código recibido ('decímelo') con el fin de cancelar el cargo (L4-L6). Esto cumple los criterios de riesgo: entidad que se identifica como bancaria, aviso de anomalía en la cuenta y solicitud explícita de revelar un código/clave.\",\n  \"lineas_soporte\": [2, 4, 5, 6]\n}"
+    }
+   }
+  },
+  {
+   "control": "consejo_negacion",
+   "lineas": [
+    "A: Me llamaron diciendo que era del banco.",
+    "B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial."
+   ],
+   "esperado": 0,
+   "observado": 1,
+   "conforme": false,
+   "segundos": 4.9,
+   "registro": {
+    "etiqueta": 1,
+    "fundamento": "Evidencia de riesgo: el interlocutor A afirma que la llamada es del banco ('Me llamaron diciendo que era del banco'), y el interlocutor B advierte explícitamente sobre la entrega de claves por teléfono ('Nunca le pases tu clave a nadie por teléfono') e instruye para cortar la comunicación y llamar al número oficial, lo cual indica una situación de suplantación o intento de estafa en curso. | Hay evidencia concreta de riesgo: alguien que dice ser del banco avisa de un problema ('Me llamaron diciendo que era del banco') Y ADEMÁS pide secreto ('Nunca le pases tu clave a nadie por teléfono').",
+    "lineas_soporte": [
+     1,
+     2
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 1,
+     "fundamento": "Evidencia de riesgo: el interlocutor A afirma que la llamada es del banco ('Me llamaron diciendo que era del banco'), y el interlocutor B advierte explícitamente sobre la entrega de claves por teléfono ('Nunca le pases tu clave a nadie por teléfono') e instruye para cortar la comunicación y llamar al número oficial, lo cual indica una situación de suplantación o intento de estafa en curso.",
+     "lineas_soporte": [
+      1,
+      2
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Me llamaron diciendo que era del banco.\nL2 B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Evidencia de riesgo: el interlocutor A afirma que la llamada es del banco ('Me llamaron diciendo que era del banco'), y el interlocutor B advierte explícitamente sobre la entrega de claves por teléfono ('Nunca le pases tu clave a nadie por teléfono') e instruye para cortar la comunicación y llamar al número oficial, lo cual indica una situación de suplantación o intento de estafa en curso.\",\n  \"lineas_soporte\": [1, 2]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 1,
+     "fundamento": "Hay evidencia concreta de riesgo: alguien que dice ser del banco avisa de un problema ('Me llamaron diciendo que era del banco') Y ADEMÁS pide secreto ('Nunca le pases tu clave a nadie por teléfono').",
+     "lineas_soporte": [
+      1,
+      2
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Me llamaron diciendo que era del banco.\nL2 B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Hay evidencia concreta de riesgo: alguien que dice ser del banco avisa de un problema ('Me llamaron diciendo que era del banco') Y ADEMÁS pide secreto ('Nunca le pases tu clave a nadie por teléfono').\",\n  \"lineas_soporte\": [1, 2]\n}"
+    }
+   }
+  },
+  {
+   "control": "ambiguo_truncado",
+   "lineas": [
+    "A: Te llegó el mensaje, ¿no?",
+    "B: Sí, me llegó.",
+    "A: Bueno, pasámelo ent—"
+   ],
+   "esperado": null,
+   "observado": 0,
+   "conforme": false,
+   "segundos": 7.2,
+   "registro": {
+    "etiqueta": 0,
+    "fundamento": "El fragmento muestra una conversación normal donde el interlocutor A confirma la recepción de un mensaje ('Te llegó el mensaje, ¿no?') y B responde afirmativamente ('Sí, me llegó'). No hay evidencia textual de riesgo: no se menciona bloqueo de cuenta, movimientos raros, ni se pide secreto, urgencia, códigos o claves. La frase cortada en L3 ('pasámelo ent—') es un fragmento incompleto pero el contexto previo no indica que lo que se va a pasar sea sensible; por tanto, bajo la regla 2 (fragmento sin poder saber si es sensible) y dado que el contenido entendible hasta ese punto no tiene motivo de riesgo, se clasifica como 0. | El contenido se entiende y no hay motivo de riesgo: el diálogo consiste en una confirmación rutinaria de recepción de un mensaje ('Te llegó el mensaje', 'Sí, me llegó') y una transición normal para pasar algo ('pasámelo ent—'). No hay evidencia literal de que alguien se presente como entidad oficial, ni peticiones de códigos, amenazas de bloqueo, instrucciones de secreto o urgencia. La frase cortada en L3 no indica un pedido sensible específico.",
+    "lineas_soporte": [
+     1,
+     2,
+     3
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 0,
+     "fundamento": "El fragmento muestra una conversación normal donde el interlocutor A confirma la recepción de un mensaje ('Te llegó el mensaje, ¿no?') y B responde afirmativamente ('Sí, me llegó'). No hay evidencia textual de riesgo: no se menciona bloqueo de cuenta, movimientos raros, ni se pide secreto, urgencia, códigos o claves. La frase cortada en L3 ('pasámelo ent—') es un fragmento incompleto pero el contexto previo no indica que lo que se va a pasar sea sensible; por tanto, bajo la regla 2 (fragmento sin poder saber si es sensible) y dado que el contenido entendible hasta ese punto no tiene motivo de riesgo, se clasifica como 0.",
+     "lineas_soporte": [
+      1,
+      2
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Te llegó el mensaje, ¿no?\nL2 B: Sí, me llegó.\nL3 A: Bueno, pasámelo ent—\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El fragmento muestra una conversación normal donde el interlocutor A confirma la recepción de un mensaje ('Te llegó el mensaje, ¿no?') y B responde afirmativamente ('Sí, me llegó'). No hay evidencia textual de riesgo: no se menciona bloqueo de cuenta, movimientos raros, ni se pide secreto, urgencia, códigos o claves. La frase cortada en L3 ('pasámelo ent—') es un fragmento incompleto pero el contexto previo no indica que lo que se va a pasar sea sensible; por tanto, bajo la regla 2 (fragmento sin poder saber si es sensible) y dado que el contenido entendible hasta ese punto no tiene motivo de riesgo, se clasifica como 0.\",\n  \"lineas_soporte\": [1, 2]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 0,
+     "fundamento": "El contenido se entiende y no hay motivo de riesgo: el diálogo consiste en una confirmación rutinaria de recepción de un mensaje ('Te llegó el mensaje', 'Sí, me llegó') y una transición normal para pasar algo ('pasámelo ent—'). No hay evidencia literal de que alguien se presente como entidad oficial, ni peticiones de códigos, amenazas de bloqueo, instrucciones de secreto o urgencia. La frase cortada en L3 no indica un pedido sensible específico.",
+     "lineas_soporte": [
+      1,
+      2,
+      3
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Te llegó el mensaje, ¿no?\nL2 B: Sí, me llegó.\nL3 A: Bueno, pasámelo ent—\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El contenido se entiende y no hay motivo de riesgo: el diálogo consiste en una confirmación rutinaria de recepción de un mensaje ('Te llegó el mensaje', 'Sí, me llegó') y una transición normal para pasar algo ('pasámelo ent—'). No hay evidencia literal de que alguien se presente como entidad oficial, ni peticiones de códigos, amenazas de bloqueo, instrucciones de secreto o urgencia. La frase cortada en L3 no indica un pedido sensible específico.\",\n  \"lineas_soporte\": [1, 2, 3]\n}"
+    }
+   }
+  },
+  {
+   "control": "ambiguo_objeto_vago",
+   "lineas": [
+    "A: Hola, ¿me pasás eso cuando puedas?"
+   ],
+   "esperado": null,
+   "observado": 0,
+   "conforme": false,
+   "segundos": 5.0,
+   "registro": {
+    "etiqueta": 0,
+    "fundamento": "El contenido se entiende y no hay motivo de riesgo: la frase '¿me pasás eso?' es un pedido normal dentro de una conversación telefónica sin señales de secreto, urgencia, amenaza o solicitud de datos sensibles. No hay evidencia literal de que quien habla sea del banco/policía ni de que exista un problema de cuenta. | El contenido se entiende y no hay motivo de riesgo: la línea es una solicitud normal de información ('¿me pasás eso?') sin señales de secreto, urgencia, presión, amenazas ni pedidos de códigos/clave. No hay evidencia literal de que el interlocutor sea del banco/policía avisando un problema, ni instrucciones de aislarse o no cortar.",
+    "lineas_soporte": [
+     1
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 0,
+     "fundamento": "El contenido se entiende y no hay motivo de riesgo: la frase '¿me pasás eso?' es un pedido normal dentro de una conversación telefónica sin señales de secreto, urgencia, amenaza o solicitud de datos sensibles. No hay evidencia literal de que quien habla sea del banco/policía ni de que exista un problema de cuenta.",
+     "lineas_soporte": [
+      1
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Hola, ¿me pasás eso cuando puedas?\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El contenido se entiende y no hay motivo de riesgo: la frase '¿me pasás eso?' es un pedido normal dentro de una conversación telefónica sin señales de secreto, urgencia, amenaza o solicitud de datos sensibles. No hay evidencia literal de que quien habla sea del banco/policía ni de que exista un problema de cuenta.\",\n  \"lineas_soporte\": [1]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 0,
+     "fundamento": "El contenido se entiende y no hay motivo de riesgo: la línea es una solicitud normal de información ('¿me pasás eso?') sin señales de secreto, urgencia, presión, amenazas ni pedidos de códigos/clave. No hay evidencia literal de que el interlocutor sea del banco/policía avisando un problema, ni instrucciones de aislarse o no cortar.",
+     "lineas_soporte": [
+      1
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Hola, ¿me pasás eso cuando puedas?\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El contenido se entiende y no hay motivo de riesgo: la línea es una solicitud normal de información ('¿me pasás eso?') sin señales de secreto, urgencia, presión, amenazas ni pedidos de códigos/clave. No hay evidencia literal de que el interlocutor sea del banco/policía avisando un problema, ni instrucciones de aislarse o no cortar.\",\n  \"lineas_soporte\": [1]\n}"
+    }
+   }
+  },
+  {
+   "control": "indicio_sin_pedido",
+   "lineas": [
+    "A: Hola.",
+    "B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada."
+   ],
+   "esperado": 1,
+   "observado": 1,
+   "conforme": true,
+   "segundos": 3.8,
+   "registro": {
+    "etiqueta": 1,
+    "fundamento": "El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita explícitamente secreto ('no le cuentes a nadie'). | El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita explícitamente secreto ('no le cuentes a nadie').",
+    "lineas_soporte": [
+     2
+    ],
+    "motivo": "acuerdo",
+    "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+    "prompts_version": "v4-contextual-2026-10-29",
+    "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+    "pasada1": {
+     "etiqueta": 1,
+     "fundamento": "El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita explícitamente secreto ('no le cuentes a nadie').",
+     "lineas_soporte": [
+      2
+     ],
+     "error": "",
+     "prompt": "Estás revisando una llamada en curso. Solo existe lo que sigue; no hay más contexto, ni antes ni después.\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\n\nAsigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita explícitamente secreto ('no le cuentes a nadie').\",\n  \"lineas_soporte\": [2]\n}"
+    },
+    "pasada2": {
+     "etiqueta": 1,
+     "fundamento": "El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita explícitamente secreto ('no le cuentes a nadie').",
+     "lineas_soporte": [
+      2
+     ],
+     "error": "",
+     "prompt": "Sos un segundo revisor independiente de una llamada en curso. Estas líneas son todo lo que se sabe hasta ahora; no hay nada más, ni antes ni después.\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\n\nComo revisor independiente, asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\nRegla para etiquetar: leé TODO lo visible y asigná UNA etiqueta (1, 0 o null). No es una pregunta de sí/no: las tres salidas son posibles y debés elegir una.\n1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay evidencia si alguien que dice ser del banco, la policía, una empresa o un organismo avisa de un problema de la cuenta o del servicio (movimientos raros, cargo desconocido, cuenta bloqueada o equivalente que cites del texto) Y ADEMÁS pide secreto ('no le cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o equivalente literal), pide que le dicten un código o clave, o da instrucciones de aislarse o de no cortar; la evidencia vale aunque nadie haya pedido nada todavía. También es 1 si hay un pedido dirigido a la otra persona de ESTA llamada que es riesgoso por el contexto visible (beneficiario inesperado, presión para hacerlo ya, pedido de secreto, cambio de lo ya acordado a la vista). El pedido puede estar repartido en varias líneas; no hace falta que esté todo en una sola. Citá las líneas.\n2. Sin esa evidencia, marcá null si el objeto o el trámite no se entiende o está cortado: fragmento cortado a mitad de palabra o frase sin saberse qué se pidió, o pedido de algo sin identificar qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente visible) sin poderse saber si es sensible. Lo incompleto o no identificado no es 0.\n3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le pide nada sensible a su interlocutor (incluye consejos preventivos y relatos sin pedido), o el pedido es la parte normal del trámite que la propia persona solicitó al llamar (pagar el precio al comercio al que llamó, confirmar el alias de la factura del local ya conocido, dar el DNI para el turno que pidió) sin señal de riesgo a la vista.\nPROHIBIDO inventar: cada afirmación del fundamento sobre secreto, urgencia, presión, amenaza o quién llamó a quién debe apoyarse en palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o 'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que aparezcan las palabras dinero, alias, DNI, código o clave NO alcanza por sí solo para marcar 1: lo legítimo por el contexto visible es 0.\nDevolvé JSON con etiqueta, fundamento (con citas textuales cortas entrecomilladas de lo visto) y lineas_soporte (números de las líneas citadas).",
+     "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"El interlocutor B afirma ser del banco ('te llamo del banco'), reporta un problema de cuenta ('movimientos raros') y solicita explícitamente secreto ('no le cuentes a nadie').\",\n  \"lineas_soporte\": [2]\n}"
+    }
+   }
+  }
+ ],
+ "historial_rondas": "v4 triestado root, MISMO prompt sin ajustes: qwen3.5:9b-q4_K_M 5/8; consejo 1/1 (confunde relato pasado con evidencia), ambos ambiguos 0/0; pizza/turno/otp/repartido/indicio OK con citas literales.",
+ "conformidad": 5,
+ "total": 8,
+ "segundos_total": 60.1,
+ "anotador_rol": "auxiliar de referencias IA, fuera de matrices 101/102: no agrega ni sustituye modelos; los diez tags exactos de 101/102 permanecen fijos. Modelo ya instalado, sin descargas ni cambios de inventario."
+}

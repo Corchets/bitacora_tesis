@@ -1,0 +1,1030 @@
+{
+  "matriz": "matriz-101",
+  "issue": 101,
+  "inicio": "2026-10-30T11:29:56",
+  "comando": "python matriz_101.py --url http://127.0.0.1:11435 --modelos qwen3.5:4b,qwen3.5:2b,gemma:2b,gemma3:270m,gemma3:1b,gemma3:4b,gemma3n:e2b,gemma3n:e4b,gemma4:e2b,gemma4:e4b --tito-nuevo-modelo /home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/tito_99_historial_C1.0.json --tito-nuevo-manifest /home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/CANDIDATO-TITO-100-EXPERIMENTAL-2026-10-30.json",
+  "codigo": {
+    "commit": "9fe43b531c950ea2c8565b989acacd6d16c0c17a",
+    "cambios_sin_commit_en_la_carpeta": true
+  },
+  "maquina": {
+    "sistema": "Linux-7.2.5-3-omarchy-x86_64-with-glibc2.44",
+    "arquitectura": "x86_64",
+    "procesador": "no informado",
+    "nucleos_logicos": 16,
+    "ram_total_gb": 30.5,
+    "python": "3.14.8"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "operativo-hasta-aviso",
+  "particion": "evaluacion_101",
+  "particiones_sha256": "210b58e7ba0aa620a6e3346715a6dbc014efacf08be9c1a13610f08c3f541f46",
+  "configuracion_sha256": "b7a87c927c9aa311f6daf1dc11cf126302634e67408543528cac6eb8731c26df",
+  "ollama": {
+    "url": "http://127.0.0.1:11435",
+    "version": "0.40.8",
+    "arranque_ms": null,
+    "modelos": {
+      "qwen3.5:4b": {
+        "tag": "qwen3.5:4b",
+        "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+        "cuantizacion": "Q4_K_M",
+        "familia": "qwen35",
+        "tamano_parametros": "4.2B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:14:58.584867729-03:00",
+        "carga_ms": 2750,
+        "calentamiento_ms": 2750,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 3140495604,
+          "size_vram_bytes": 3140495604
+        },
+        "pensar": false,
+        "runtime_total_ns": 2749686591,
+        "runtime_load_ns": 2568226010,
+        "runtime_prompt_eval_ns": 57239000,
+        "runtime_eval_ns": 123114000
+      },
+      "qwen3.5:2b": {
+        "tag": "qwen3.5:2b",
+        "digest": "0689d44085e06d165161a8a9a1731344278cfb5aade63a3c3dbdb48ab54b130a",
+        "cuantizacion": "Q8_0",
+        "familia": "qwen35",
+        "tamano_parametros": "1.9B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:14:59.652895551-03:00",
+        "carga_ms": 6988,
+        "calentamiento_ms": 6988,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 2364475963,
+          "size_vram_bytes": 2364475963
+        },
+        "pensar": false,
+        "runtime_total_ns": 6987245723,
+        "runtime_load_ns": 6735607163,
+        "runtime_prompt_eval_ns": 41744000,
+        "runtime_eval_ns": 208911000
+      },
+      "gemma:2b": {
+        "tag": "gemma:2b",
+        "digest": "b50d6c999e592ae4f79acae23b4feaefbdfceaa7cd366df2610e3072c052a160",
+        "cuantizacion": "Q4_0",
+        "familia": "gemma",
+        "tamano_parametros": "3B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:15:21.676470113-03:00",
+        "carga_ms": 5169,
+        "calentamiento_ms": 5169,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 2217696296,
+          "size_vram_bytes": 2217696296
+        },
+        "pensar": false,
+        "runtime_total_ns": 5168033806,
+        "runtime_load_ns": 5034963498,
+        "runtime_prompt_eval_ns": 69304000,
+        "runtime_eval_ns": 62689000
+      },
+      "gemma3:270m": {
+        "tag": "gemma3:270m",
+        "digest": "e7d36fb2c3b3293cfe56d55889867a064b3a2b22e98335f2e6e8a387e081d6be",
+        "cuantizacion": "Q8_0",
+        "familia": "gemma3",
+        "tamano_parametros": "268.10M",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:15:29.29666929-03:00",
+        "carga_ms": 2111,
+        "calentamiento_ms": 2111,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 426676059,
+          "size_vram_bytes": 426676059
+        },
+        "pensar": false,
+        "runtime_total_ns": 2110398438,
+        "runtime_load_ns": 1972300014,
+        "runtime_prompt_eval_ns": 31545000,
+        "runtime_eval_ns": 105064000
+      },
+      "gemma3:1b": {
+        "tag": "gemma3:1b",
+        "digest": "97558784bdc9175075a72655bf360b15da17df6b3b9e5182af9f8c0c8e58ba7c",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3",
+        "tamano_parametros": "999.89M",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:15:57.054396394-03:00",
+        "carga_ms": 3375,
+        "calentamiento_ms": 3375,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 1053388963,
+          "size_vram_bytes": 1053388963
+        },
+        "pensar": false,
+        "runtime_total_ns": 3374750974,
+        "runtime_load_ns": 2964199320,
+        "runtime_prompt_eval_ns": 58167000,
+        "runtime_eval_ns": 351180000
+      },
+      "gemma3:4b": {
+        "tag": "gemma3:4b",
+        "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3",
+        "tamano_parametros": "3.9B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:16:34.809389159-03:00",
+        "carga_ms": 8208,
+        "calentamiento_ms": 8208,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 3763842579,
+          "size_vram_bytes": 3763842579
+        },
+        "pensar": false,
+        "runtime_total_ns": 8207235870,
+        "runtime_load_ns": 8020089923,
+        "runtime_prompt_eval_ns": 58477000,
+        "runtime_eval_ns": 127556000
+      },
+      "gemma3n:e2b": {
+        "tag": "gemma3n:e2b",
+        "digest": "dae166dc6a5e93061da12b75b887ce7c72cb91785d547b88c7503047f8411ffd",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3n",
+        "tamano_parametros": "4.5B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:23:06.374879576-03:00",
+        "carga_ms": 15767,
+        "calentamiento_ms": 15767,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 2476463881,
+          "size_vram_bytes": 2476463881
+        },
+        "pensar": false,
+        "runtime_total_ns": 15749047967,
+        "runtime_load_ns": 15327157194,
+        "runtime_prompt_eval_ns": 178318000,
+        "runtime_eval_ns": 241868000
+      },
+      "gemma3n:e4b": {
+        "tag": "gemma3n:e4b",
+        "digest": "0a377808afeaafcbf5dcc2b1844594a1b60a50cd18e7e3e469cfd64e7bb7faa5",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3n",
+        "tamano_parametros": "6.9B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:28:47.062185903-03:00",
+        "carga_ms": 19095,
+        "calentamiento_ms": 19095,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 8581638770,
+          "size_vram_bytes": 3690022829
+        },
+        "pensar": false,
+        "runtime_total_ns": 19094913960,
+        "runtime_load_ns": 18607782329,
+        "runtime_prompt_eval_ns": 200369000,
+        "runtime_eval_ns": 284889000
+      },
+      "gemma4:e2b": {
+        "tag": "gemma4:e2b",
+        "digest": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma4",
+        "tamano_parametros": "4.6B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:31:15.254262617-03:00",
+        "carga_ms": 11912,
+        "calentamiento_ms": 11912,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 524801801,
+          "size_vram_bytes": 524801801
+        },
+        "pensar": false,
+        "runtime_total_ns": 11911859905,
+        "runtime_load_ns": 11638903464,
+        "runtime_prompt_eval_ns": 113660000,
+        "runtime_eval_ns": 158302000
+      },
+      "gemma4:e4b": {
+        "tag": "gemma4:e4b",
+        "digest": "dc35e8d9c6061baa6f0fa870975ab6932e2542b579b13ea0f199fa4bb7300c9c",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma4",
+        "tamano_parametros": "7.5B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:35:41.601616244-03:00",
+        "carga_ms": 16702,
+        "calentamiento_ms": 16702,
+        "unidad": "ms",
+        "chequeo_contrato": "ok",
+        "error": "",
+        "memoria": {
+          "size_bytes": 495200500,
+          "size_vram_bytes": 495200500
+        },
+        "pensar": false,
+        "runtime_total_ns": 16701218159,
+        "runtime_load_ns": 16404838569,
+        "runtime_prompt_eval_ns": 105345000,
+        "runtime_eval_ns": 186065000
+      }
+    }
+  },
+  "funcionales": {
+    "modelos": [
+      "qwen3.5:4b",
+      "qwen3.5:2b",
+      "gemma:2b",
+      "gemma3:270m",
+      "gemma3:1b",
+      "gemma3:4b",
+      "gemma3n:e2b",
+      "gemma3n:e4b",
+      "gemma4:e2b",
+      "gemma4:e4b"
+    ],
+    "casos": [
+      "CV2-D-V-BANCO-001",
+      "CV2-D-V-BANCO-002",
+      "CV2-D-V-BANCO-007",
+      "CV2-D-V-WHATSAPP-002",
+      "CV2-D-V-WHATSAPP-006",
+      "CV2-D-V-SOPORTE-003",
+      "CV2-D-V-SOPORTE-004",
+      "CV2-D-V-FAMILIAR-002",
+      "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+      "CV2-D-V-PREMIO-004",
+      "CV2-D-L-BANCO-001",
+      "CV2-D-L-BANCO-007",
+      "CV2-D-L-DELIVERY-001",
+      "CV2-D-L-ESCUELA-001",
+      "CV2-D-L-FAMILIAR-001",
+      "CV2-D-L-MEDICO-001",
+      "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+      "CV2-D-L-PREMIO-001",
+      "CV2-D-L-SOPORTE-002",
+      "CV2-D-L-WHATSAPP-001"
+    ],
+    "condiciones": [
+      "directo",
+      "tito-viejo",
+      "tito-nuevo"
+    ],
+    "alcance": "completa",
+    "prompt": "tarea",
+    "prompt_huella": "bf4284996898c45d",
+    "hablantes": "ab",
+    "num_ctx": 4096,
+    "seed": 42,
+    "timeout": 120.0,
+    "hardware": null,
+    "url": "http://127.0.0.1:11435",
+    "ollama_version": "0.40.8",
+    "procedimiento": {
+      "politica_aviso": "aviso_unico_hasta_aviso",
+      "modo_termino": "operativo-hasta-aviso",
+      "columnas_traza": [
+        "config",
+        "detector",
+        "modelo",
+        "prompt",
+        "hablantes",
+        "case_id",
+        "linea",
+        "hablante",
+        "texto",
+        "valida",
+        "error",
+        "riesgo",
+        "alerta_sugerida",
+        "aviso",
+        "motivo",
+        "evidencia",
+        "evidencia_en_texto",
+        "ms",
+        "tokens_prompt",
+        "tokens_salida",
+        "crudo",
+        "consulta",
+        "tito_puntaje",
+        "tito_error",
+        "indicio_linea",
+        "indicio_texto",
+        "indicio_puntaje",
+        "tito_ms",
+        "slm_ms",
+        "runtime_ns",
+        "runtime_unidad",
+        "runtime_load_ns",
+        "runtime_prompt_eval_ns",
+        "runtime_eval_ns"
+      ],
+      "columnas_traza_sha256": "764f3c14b19918c56de8e874eed4b4b8d239512aba2bdb811876e03b2d735c09",
+      "codigo": {
+        "commit": "9fe43b531c950ea2c8565b989acacd6d16c0c17a",
+        "cambios_sin_commit_en_la_carpeta": true
+      }
+    },
+    "inventario": {
+      "qwen3.5:4b": {
+        "tag": "qwen3.5:4b",
+        "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+        "cuantizacion": "Q4_K_M",
+        "familia": "qwen35",
+        "tamano_parametros": "4.2B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:14:58.584867729-03:00"
+      },
+      "qwen3.5:2b": {
+        "tag": "qwen3.5:2b",
+        "digest": "0689d44085e06d165161a8a9a1731344278cfb5aade63a3c3dbdb48ab54b130a",
+        "cuantizacion": "Q8_0",
+        "familia": "qwen35",
+        "tamano_parametros": "1.9B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:14:59.652895551-03:00"
+      },
+      "gemma:2b": {
+        "tag": "gemma:2b",
+        "digest": "b50d6c999e592ae4f79acae23b4feaefbdfceaa7cd366df2610e3072c052a160",
+        "cuantizacion": "Q4_0",
+        "familia": "gemma",
+        "tamano_parametros": "3B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:15:21.676470113-03:00"
+      },
+      "gemma3:270m": {
+        "tag": "gemma3:270m",
+        "digest": "e7d36fb2c3b3293cfe56d55889867a064b3a2b22e98335f2e6e8a387e081d6be",
+        "cuantizacion": "Q8_0",
+        "familia": "gemma3",
+        "tamano_parametros": "268.10M",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:15:29.29666929-03:00"
+      },
+      "gemma3:1b": {
+        "tag": "gemma3:1b",
+        "digest": "97558784bdc9175075a72655bf360b15da17df6b3b9e5182af9f8c0c8e58ba7c",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3",
+        "tamano_parametros": "999.89M",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:15:57.054396394-03:00"
+      },
+      "gemma3:4b": {
+        "tag": "gemma3:4b",
+        "digest": "68ceab7e468a31c988b44d5a4984a0e21f58c4f7158c6ce29c1804babac38df7",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3",
+        "tamano_parametros": "3.9B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:16:34.809389159-03:00"
+      },
+      "gemma3n:e2b": {
+        "tag": "gemma3n:e2b",
+        "digest": "dae166dc6a5e93061da12b75b887ce7c72cb91785d547b88c7503047f8411ffd",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3n",
+        "tamano_parametros": "4.5B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:23:06.374879576-03:00"
+      },
+      "gemma3n:e4b": {
+        "tag": "gemma3n:e4b",
+        "digest": "0a377808afeaafcbf5dcc2b1844594a1b60a50cd18e7e3e469cfd64e7bb7faa5",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma3n",
+        "tamano_parametros": "6.9B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:28:47.062185903-03:00"
+      },
+      "gemma4:e2b": {
+        "tag": "gemma4:e2b",
+        "digest": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma4",
+        "tamano_parametros": "4.6B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:31:15.254262617-03:00"
+      },
+      "gemma4:e4b": {
+        "tag": "gemma4:e4b",
+        "digest": "dc35e8d9c6061baa6f0fa870975ab6932e2542b579b13ea0f199fa4bb7300c9c",
+        "cuantizacion": "Q4_K_M",
+        "familia": "gemma4",
+        "tamano_parametros": "7.5B",
+        "formato": "gguf",
+        "show_modified_at": "2026-10-29T10:35:41.601616244-03:00"
+      }
+    },
+    "casos_huellas": {
+      "CV2-D-V-BANCO-001": {
+        "texto_sha256": "0affbb8ce80874baa7a5d2b24537d33ca3f38a43d4a35c717d1587987a4a937d",
+        "referencia_sha256": "5a4a52d22240341b736277de5ac313945788e07791ea822aa48fedbbc33db64e",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-BANCO-005",
+        "revision_humana": false
+      },
+      "CV2-D-V-BANCO-002": {
+        "texto_sha256": "408fa71f0df52a5e67cb1d0c7810778242b8323a1b7107984be36e9ad33882c9",
+        "referencia_sha256": "9ed20a3bdebfef35e13dd7b9604280784d0ab2393bff9c3e7499bad892443ed8",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-BANCO-001",
+        "revision_humana": false
+      },
+      "CV2-D-V-BANCO-007": {
+        "texto_sha256": "6aa5fdd522005cf06d0439d17ce2eb8c6d02ff5d22c7d4efe2c970665a5a68f7",
+        "referencia_sha256": "f8b1991f2ba11ae63f593c230cbb8d44684547b866ccd81aa3be784e3486cbe0",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-BANCO-001",
+        "revision_humana": false
+      },
+      "CV2-D-V-WHATSAPP-002": {
+        "texto_sha256": "68caf4afa149904d9680c21c0b66fa0a90de13c1d2d3a69cbb150051e957c88d",
+        "referencia_sha256": "8d45e02fbcab84e168f19fd449a42630fbf78a3cef08186d2f11ff0a51df0f01",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-WHATSAPP-001",
+        "revision_humana": false
+      },
+      "CV2-D-V-WHATSAPP-006": {
+        "texto_sha256": "d108b5f5b91893f6ebd6e3dc2eee30474215d28e4443095b2c25547ab5abdfb2",
+        "referencia_sha256": "47394c145233912ca5596a0690e250e00c0687d9b40c3ac2898f6a26407a07e8",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-WHATSAPP-001",
+        "revision_humana": false
+      },
+      "CV2-D-V-SOPORTE-003": {
+        "texto_sha256": "c7c415cd71d46d70691436f0279bd04c8d9f62a8d1939a2565428cf5ee82b0d1",
+        "referencia_sha256": "3842b7bb4c28361ab3b667623de292c6f38b062ddcd8eb6f8b9717fb9c3fa4b9",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-SOPORTE-001",
+        "revision_humana": false
+      },
+      "CV2-D-V-SOPORTE-004": {
+        "texto_sha256": "8b9704896f78485257858dc1e99c885e9ebdef6f65ea665e3b3afc7f4e90d550",
+        "referencia_sha256": "34cef6db63b4cd378d2ee84ff1511727585dbc55a5a3ee3a37a5e12fa705de8d",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-SOPORTE-001",
+        "revision_humana": false
+      },
+      "CV2-D-V-FAMILIAR-002": {
+        "texto_sha256": "f77138c8fd31590adfe22c908754bf4a4d5df3702a310113d183c6703d839e61",
+        "referencia_sha256": "56390b368eec09eb7f64d11635f181b13b3fc44c0e1ffde0dac66cd6d56547b1",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-V-FAMILIAR-002",
+        "revision_humana": false
+      },
+      "CV2-D-V-ORGANISMO_PREVISIONAL-001": {
+        "texto_sha256": "c3a8aab157a40397a16126ee7548910db3a01c52ef1bd37c9f78a049c9619a61",
+        "referencia_sha256": "18d4d4c53c82c7634bf1c7378d06094b3a5b5daf100faf6974a7f8d8c3160553",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+        "revision_humana": false
+      },
+      "CV2-D-V-PREMIO-004": {
+        "texto_sha256": "efd49ed9cc707e5db35845d58b594e253cc9e7b5f203851bb309a1ad83871c68",
+        "referencia_sha256": "712abd2b0beed5b4caae040e3c654d734f8055a09e76819e0a296a67b0cce1c5",
+        "clase": "vishing",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-PREMIO-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-BANCO-001": {
+        "texto_sha256": "10d9a2f2d202aa47412b83c7f8fabf358a8b1965ba2d1c22fa7b2f68976d7b4c",
+        "referencia_sha256": "b58cc11934d5fc06401c5a2f4d74420bb42950660e9048a4bdca847992cc911f",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-BANCO-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-BANCO-007": {
+        "texto_sha256": "4f80a484014b9cc9e27269e77c783e9eef505d4dfdcf3e2184333b57a79cb00d",
+        "referencia_sha256": "846a8015d373304eedb72dd22c690dd3c890251585d982a0e926061bd83ca834",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-BANCO-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-DELIVERY-001": {
+        "texto_sha256": "ee7932e8924132c176a362941de7fef5a36767660a67746f8f37a372a67c9eb3",
+        "referencia_sha256": "7eceff7c03eca80ece3e7b8965994469f8ace418a261cafc698fa1c872c91f6c",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-DELIVERY-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-ESCUELA-001": {
+        "texto_sha256": "243975f0e5bb4b703e2776e2c88745df81f042aedb998fdfefb3654cc78f82cc",
+        "referencia_sha256": "a55af0c222307b708674878dca059d6797937b51eae0e6d54c7f6643a16e72c5",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-ESCUELA-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-FAMILIAR-001": {
+        "texto_sha256": "50a486aa265a3f255d5cf64958cba36a43047b8df1e18f642058ddc57b96d367",
+        "referencia_sha256": "005de7ad0fa60d9b6fb5db73cee38b5137108563771596f1dafabe23ddb66614",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-FAMILIAR-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-MEDICO-001": {
+        "texto_sha256": "62b0315ecaae12308959baf89e6b65d1ddeb8e4af7f29220d82179bff8f5b273",
+        "referencia_sha256": "5adb023050a051347a882e4f343bedffbdb0890ab49aca7333e7ff6615b7cba5",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-MEDICO-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-ORGANISMO_PREVISIONAL-001": {
+        "texto_sha256": "ba6390bcc9ead422a5b9760693c4a835e445694c78ede434504e02973ffab10b",
+        "referencia_sha256": "6e4f9fba950f590df0fede9b9a0858f7d78724f7ff97dedac4397e40c9cfe64c",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-PREMIO-001": {
+        "texto_sha256": "bbcd27e268ae2d67f2ea76fcb4624684d764d8a513a7509cefd8d9171390c874",
+        "referencia_sha256": "131842e9cb691cc8d8f6fa849e8ede67dfb8f493d224994e00cec3da23da2a24",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-PREMIO-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-SOPORTE-002": {
+        "texto_sha256": "71a1cebc18f6401b28c71a78e21b3a662b4a5da5aefa2f104cbf012c6e6fb3bd",
+        "referencia_sha256": "ce8b82279c96ce75a03343e1c0020bf87a6b6de9fe1b324f1b2ee8140fd15b55",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-SOPORTE-001",
+        "revision_humana": false
+      },
+      "CV2-D-L-WHATSAPP-001": {
+        "texto_sha256": "74b54e1f77b122109e735565b186ebbabe378d0d3a08011b81c433c2a6891291",
+        "referencia_sha256": "cfb8b9232758974ee0b4d1e04c988430ea8effe68a31df348677ffe8611e1e7c",
+        "clase": "legitima",
+        "particion_preparacion": "comparacion_20",
+        "grupo_preparacion": "CV2-D-L-WHATSAPP-001",
+        "revision_humana": false
+      }
+    },
+    "particiones_sha256": "210b58e7ba0aa620a6e3346715a6dbc014efacf08be9c1a13610f08c3f541f46",
+    "configuracion_sha256": "b7a87c927c9aa311f6daf1dc11cf126302634e67408543528cac6eb8731c26df",
+    "tito_viejo": {
+      "artefacto": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/tito_logreg.json",
+      "sha256": "fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd",
+      "entrada": "frase_actual",
+      "umbral": 0.5
+    },
+    "tito_nuevo": {
+      "artefacto": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/tito_99_historial_C1.0.json",
+      "manifest": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/CANDIDATO-TITO-100-EXPERIMENTAL-2026-10-30.json",
+      "variante": "#99-congelada",
+      "sha256": "1eaa06ea847c5e4ed59ec5d72169a5dcf4911a4d72f96b88c18f669b802264af",
+      "entrada": "historial_acumulado",
+      "umbral": 0.5
+    }
+  },
+  "huella_funcional": "5bc49fb860506980",
+  "tito_viejo_preparacion": {
+    "artefacto_ms": 0.2,
+    "artefacto_desde_cache": false,
+    "encoder_ms": 2456.3,
+    "encoder_desde_cache": false,
+    "calentamiento_ms": 17.4,
+    "error": "",
+    "unidad": "ms"
+  },
+  "tito_nuevo_preparacion": {
+    "encoder_ms": 94.4,
+    "encoder_desde_cache": false,
+    "encoder_listo": true,
+    "calentamiento_ms": 13.5,
+    "error": "",
+    "unidad": "ms"
+  },
+  "bloqueos_modelo": {},
+  "bloqueo_nuevo": "",
+  "configs": [
+    {
+      "config": "directo|qwen3.5:4b|tarea|ab",
+      "detector": "slm",
+      "modelo": "qwen3.5:4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|qwen3.5:4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "qwen3.5:4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|qwen3.5:4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "qwen3.5:4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|qwen3.5:2b|tarea|ab",
+      "detector": "slm",
+      "modelo": "qwen3.5:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|qwen3.5:2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "qwen3.5:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|qwen3.5:2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "qwen3.5:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma:2b|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma:2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma:2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma3:270m|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma3:270m",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma3:270m|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3:270m",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma3:270m|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3:270m",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma3:1b|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma3:1b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma3:1b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3:1b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma3:1b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3:1b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma3:4b|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma3:4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma3:4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3:4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma3:4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3:4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma3n:e2b|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma3n:e2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma3n:e2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3n:e2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma3n:e2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3n:e2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma3n:e4b|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma3n:e4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma3n:e4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3n:e4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma3n:e4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma3n:e4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma4:e2b|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma4:e2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma4:e2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma4:e2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma4:e2b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma4:e2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "directo|gemma4:e4b|tarea|ab",
+      "detector": "slm",
+      "modelo": "gemma4:e4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-viejo|gemma4:e4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma4:e4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "tito-nuevo|gemma4:e4b|tarea|ab",
+      "detector": "tito-slm",
+      "modelo": "gemma4:e4b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "CV2-D-V-BANCO-001": {
+      "texto_sha256": "0affbb8ce80874baa7a5d2b24537d33ca3f38a43d4a35c717d1587987a4a937d",
+      "referencia_sha256": "5a4a52d22240341b736277de5ac313945788e07791ea822aa48fedbbc33db64e",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-BANCO-005",
+      "revision_humana": false
+    },
+    "CV2-D-V-BANCO-002": {
+      "texto_sha256": "408fa71f0df52a5e67cb1d0c7810778242b8323a1b7107984be36e9ad33882c9",
+      "referencia_sha256": "9ed20a3bdebfef35e13dd7b9604280784d0ab2393bff9c3e7499bad892443ed8",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-BANCO-001",
+      "revision_humana": false
+    },
+    "CV2-D-V-BANCO-007": {
+      "texto_sha256": "6aa5fdd522005cf06d0439d17ce2eb8c6d02ff5d22c7d4efe2c970665a5a68f7",
+      "referencia_sha256": "f8b1991f2ba11ae63f593c230cbb8d44684547b866ccd81aa3be784e3486cbe0",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-BANCO-001",
+      "revision_humana": false
+    },
+    "CV2-D-V-WHATSAPP-002": {
+      "texto_sha256": "68caf4afa149904d9680c21c0b66fa0a90de13c1d2d3a69cbb150051e957c88d",
+      "referencia_sha256": "8d45e02fbcab84e168f19fd449a42630fbf78a3cef08186d2f11ff0a51df0f01",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-WHATSAPP-001",
+      "revision_humana": false
+    },
+    "CV2-D-V-WHATSAPP-006": {
+      "texto_sha256": "d108b5f5b91893f6ebd6e3dc2eee30474215d28e4443095b2c25547ab5abdfb2",
+      "referencia_sha256": "47394c145233912ca5596a0690e250e00c0687d9b40c3ac2898f6a26407a07e8",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-WHATSAPP-001",
+      "revision_humana": false
+    },
+    "CV2-D-V-SOPORTE-003": {
+      "texto_sha256": "c7c415cd71d46d70691436f0279bd04c8d9f62a8d1939a2565428cf5ee82b0d1",
+      "referencia_sha256": "3842b7bb4c28361ab3b667623de292c6f38b062ddcd8eb6f8b9717fb9c3fa4b9",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-SOPORTE-001",
+      "revision_humana": false
+    },
+    "CV2-D-V-SOPORTE-004": {
+      "texto_sha256": "8b9704896f78485257858dc1e99c885e9ebdef6f65ea665e3b3afc7f4e90d550",
+      "referencia_sha256": "34cef6db63b4cd378d2ee84ff1511727585dbc55a5a3ee3a37a5e12fa705de8d",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-SOPORTE-001",
+      "revision_humana": false
+    },
+    "CV2-D-V-FAMILIAR-002": {
+      "texto_sha256": "f77138c8fd31590adfe22c908754bf4a4d5df3702a310113d183c6703d839e61",
+      "referencia_sha256": "56390b368eec09eb7f64d11635f181b13b3fc44c0e1ffde0dac66cd6d56547b1",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-V-FAMILIAR-002",
+      "revision_humana": false
+    },
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001": {
+      "texto_sha256": "c3a8aab157a40397a16126ee7548910db3a01c52ef1bd37c9f78a049c9619a61",
+      "referencia_sha256": "18d4d4c53c82c7634bf1c7378d06094b3a5b5daf100faf6974a7f8d8c3160553",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+      "revision_humana": false
+    },
+    "CV2-D-V-PREMIO-004": {
+      "texto_sha256": "efd49ed9cc707e5db35845d58b594e253cc9e7b5f203851bb309a1ad83871c68",
+      "referencia_sha256": "712abd2b0beed5b4caae040e3c654d734f8055a09e76819e0a296a67b0cce1c5",
+      "clase": "vishing",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-PREMIO-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-BANCO-001": {
+      "texto_sha256": "10d9a2f2d202aa47412b83c7f8fabf358a8b1965ba2d1c22fa7b2f68976d7b4c",
+      "referencia_sha256": "b58cc11934d5fc06401c5a2f4d74420bb42950660e9048a4bdca847992cc911f",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-BANCO-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-BANCO-007": {
+      "texto_sha256": "4f80a484014b9cc9e27269e77c783e9eef505d4dfdcf3e2184333b57a79cb00d",
+      "referencia_sha256": "846a8015d373304eedb72dd22c690dd3c890251585d982a0e926061bd83ca834",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-BANCO-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-DELIVERY-001": {
+      "texto_sha256": "ee7932e8924132c176a362941de7fef5a36767660a67746f8f37a372a67c9eb3",
+      "referencia_sha256": "7eceff7c03eca80ece3e7b8965994469f8ace418a261cafc698fa1c872c91f6c",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-DELIVERY-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-ESCUELA-001": {
+      "texto_sha256": "243975f0e5bb4b703e2776e2c88745df81f042aedb998fdfefb3654cc78f82cc",
+      "referencia_sha256": "a55af0c222307b708674878dca059d6797937b51eae0e6d54c7f6643a16e72c5",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-ESCUELA-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-FAMILIAR-001": {
+      "texto_sha256": "50a486aa265a3f255d5cf64958cba36a43047b8df1e18f642058ddc57b96d367",
+      "referencia_sha256": "005de7ad0fa60d9b6fb5db73cee38b5137108563771596f1dafabe23ddb66614",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-FAMILIAR-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-MEDICO-001": {
+      "texto_sha256": "62b0315ecaae12308959baf89e6b65d1ddeb8e4af7f29220d82179bff8f5b273",
+      "referencia_sha256": "5adb023050a051347a882e4f343bedffbdb0890ab49aca7333e7ff6615b7cba5",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-MEDICO-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001": {
+      "texto_sha256": "ba6390bcc9ead422a5b9760693c4a835e445694c78ede434504e02973ffab10b",
+      "referencia_sha256": "6e4f9fba950f590df0fede9b9a0858f7d78724f7ff97dedac4397e40c9cfe64c",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-PREMIO-001": {
+      "texto_sha256": "bbcd27e268ae2d67f2ea76fcb4624684d764d8a513a7509cefd8d9171390c874",
+      "referencia_sha256": "131842e9cb691cc8d8f6fa849e8ede67dfb8f493d224994e00cec3da23da2a24",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-PREMIO-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-SOPORTE-002": {
+      "texto_sha256": "71a1cebc18f6401b28c71a78e21b3a662b4a5da5aefa2f104cbf012c6e6fb3bd",
+      "referencia_sha256": "ce8b82279c96ce75a03343e1c0020bf87a6b6de9fe1b324f1b2ee8140fd15b55",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-SOPORTE-001",
+      "revision_humana": false
+    },
+    "CV2-D-L-WHATSAPP-001": {
+      "texto_sha256": "74b54e1f77b122109e735565b186ebbabe378d0d3a08011b81c433c2a6891291",
+      "referencia_sha256": "cfb8b9232758974ee0b4d1e04c988430ea8effe68a31df348677ffe8611e1e7c",
+      "clase": "legitima",
+      "particion_preparacion": "comparacion_20",
+      "grupo_preparacion": "CV2-D-L-WHATSAPP-001",
+      "revision_humana": false
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-10-30T12:08:08",
+  "cobertura": {
+    "esperados_globales": 600,
+    "planificados": 600,
+    "completados": 600,
+    "pendientes": 0,
+    "matriz_completa": true,
+    "faltantes": []
+  }
+}

@@ -193,6 +193,94 @@ respuesta cruda). `resumen.py` agrega `resumen.md` en la misma carpeta. Con
 `--etiqueta` se le pone un nombre a la carpeta. Si se corta con Ctrl+C, lo
 procesado queda guardado.
 
+### Filtro Tito→SLM con modelos simulados (#69)
+
+Primera entrega funcional del experimento
+[#68](https://github.com/Corchets/bitacora_tesis/issues/68): demuestra una
+conversación completa que pasa por el filtro de consulta al SLM, con Tito y
+SLM simulados. Reutiliza el recorrido incremental existente con la adaptación
+mínima: el comparador directo (`slm|…`) sigue corriendo igual y por cada SLM
+se agrega su variante filtrada (`tito-slm|…`).
+
+```bash
+cd experiments/slm-directo
+bash demo_tito_slm.sh   # levanta slm_falso.py, corre el par de WhatsApp y resume
+```
+
+Equivale a correr a mano (Tito simulado deriva en la línea 4 de cada caso):
+
+```bash
+python slm_falso.py --puerto 11439 &
+python correr.py --modelos falso-demo:1b --url http://127.0.0.1:11439 \
+  --casos SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01 \
+  --filtro-tito --tito-puntajes "4=0.9" --etiqueta demo-tito-slm-simulado --detalle
+python resumen.py corridas/*_demo-tito-slm-simulado --trayectorias
+```
+
+Reglas del flujo filtrado: Tito puntúa cada fragmento nuevo; el primer puntaje
+≥ 0,5 (igualdad incluida) deriva al SLM en esa misma línea y lo mantiene activo
+después, aunque el puntaje caiga. Si Tito falla técnicamente (`--tito-fallo-en`),
+también deriva, sin inventar puntaje ni sospecha. El SLM recibe todo el historial
+disponible más el indicio de la primera activación (línea, texto y puntaje),
+declarado como sospecha falible que puede descartarse. El aviso sigue siendo
+único ante el primer resultado verdadero válido. Cada actualización deja su fila:
+`consulta` distingue `omitida` (sin costo SLM) de `slm_valida` y `slm_fallo`; una
+conversación completa nunca derivada conserva su denominador (vishing sin aviso,
+legítima sin aviso correcto). El reporte agrega la sección «Filtro Tito→SLM
+(derivación y ahorro)» con primera derivación, consultas evitadas y costo
+Tito+SLM. Corrida de referencia:
+[`corridas/2026-10-26_125526_demo-tito-slm-simulado`](corridas/2026-10-26_125526_demo-tito-slm-simulado/resumen.md).
+Límites: Tito y SLM son simulados con tiempos deterministas de juguete; el umbral
+0,5 es convención exploratoria, no probabilidad ni umbral validado; el Tito real
+(RoBERTuito + regresión) llega con #70. No cierra D07, D08 ni D09.
+
+### Tito real entrenado una vez y reutilizado (#70)
+
+`entrenar_tito.py` ajusta UNA regresión logística (seed 42, `C=1,0`, `lbfgs`)
+sobre los 5.520 textos aceptados de 276 familias del banco histórico
+(`nacho1706/feature-training-data`, commit
+`bb542e130e7a67a82e376a75a0438a15de32f4a6`; 480 apartados excluidos, sin
+solapes literales con los 8 casos, test reservado intacto). RoBERTuito
+(revisión `20cb399e…`, tokenizador verificado por hash) queda congelado con
+promedio enmascarado y límite 128 tokens (0 truncamientos). Sin fine-tuning,
+sin búsqueda y sin calibración sobre las 8 conversaciones. El artefacto
+[`tito_logreg.json`](tito_logreg.json) guarda pesos, configuración, clases,
+versiones, hashes, datos/split, librerías, hardware, revisiones y tiempos;
+`sha256sum tito_logreg.json` da
+`fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd`.
+
+`tito_real.py` (`TitoReal`) carga ese artefacto una vez por proceso y lo
+reutiliza para todas las conversaciones y SLM sin reentrenar; `puntuar` es sin
+estado y un fallo técnico deriva al SLM sin fabricar puntaje.
+
+Repetir el entrenamiento y las trazas (desde la raíz, con `.venv`):
+
+```bash
+source .venv/bin/activate
+python experiments/slm-directo/entrenar_tito.py  # verifica hashes, incrusta, ajusta, persiste
+cd experiments/slm-directo
+python tests/test_tito_real.py   # 9 tests: carga, reutilización, anti-contaminación (sin descargas)
+python slm_falso.py --puerto 11439 &
+python correr.py --modelos falso-demo:1b --url http://127.0.0.1:11439 \
+  --casos TR-04-pedido-tras-charla-larga,TR-06-banco-alerta-legitima,TR-07-pedido-partido-en-dos-lineas,TR-08-frase-cortada-candado,SC-SOPORTE-REMOTO-01-e01,LG-SUPPORT-INFO-01-e02,SC-FAMILIAR-DINERO-01-e01,TR-11-familiar-real-pide-plata \
+  --filtro-tito --tito-real --etiqueta tito-real-8casos --detalle
+python resumen.py corridas/*_tito-real-8casos --trayectorias
+```
+
+Corrida de referencia (Tito real + SLM simulado, umbral 0,5, 8 casos, 105
+líneas, 316 filas = 105×3 + cabecera):
+[`corridas/2026-10-26_132027_tito-real-8casos`](corridas/2026-10-26_132027_tito-real-8casos/resumen.md).
+Tito puntuó solo hasta la activación de cada caso: 43 puntajes en la variante
+filtrada (no 105; corrección #97). Hubo 35 actualizaciones con consulta omitida
+y 70 consultas al SLM; ocho de esas consultas ocurrieron en la misma
+actualización que activó Tito, por lo que ambos componentes trabajaron allí.
+El `manifiesto.json` de la corrida registra comando, código y diff, máquina,
+semilla, filtro (artefacto + sha + encoder) y casos; cada fila conserva
+`tito_puntaje`, `consulta`, `indicio_*` y costo Tito+SLM incluso si la llamada
+nunca deriva. Límites: el SLM sigue simulado (el falso solo avisa ante pedido
+explícito de código) y la muestra sigue siendo de desarrollo; no elige detector
+ni cierra D07, D08 ni D09.
+
 ### Actualizar el código
 
 Cuando una corrida tuya ya se subió al repositorio, `git pull` se frena con
@@ -206,6 +294,92 @@ git pull
 ```
 
 Lo guardado queda en `git stash list` por si hace falta recuperarlo.
+
+### Verificación sin modelos ni corridas históricas (#97)
+
+**Verificación del 2026-10-28:** 89 pruebas dirigidas aprobadas con
+`python -m unittest tests.test_primer_aviso tests.test_ensayo tests.test_filtro_tito tests.test_comparar tests.test_tito_real -v`
+(7,979 s), más compilación de los seis módulos indicados abajo. Incluyen
+recorridos de punta a punta que generan resumen y comparación, corte por aviso
+válido y falsa alarma, llamadas sin aviso o sin derivación, reinicio de estado,
+fallos y salida inválida, preparación separada, costos sin doble conteo,
+duraciones ausentes con unidad explícita cuando existen y diagnóstico separado.
+Sin descargas, entrenamiento ni inferencia de modelos reales. Verificación
+sobre el commit `0a95968b7de9ed1a689cecb4a88a3e8e9f373f8e`, con los cambios
+locales de curación y documentación de #96 presentes.
+
+El [informe de #97 del 2026-10-27](CIERRE-97.md) conserva el estado histórico
+de #96. El usuario aprobó y cerró #96 el 2026-10-28, según el
+[registro vigente](CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
+La verificación técnica de #97 es conforme; el usuario indicó cerrarlo el
+2026-10-28. [Registro del cierre](https://github.com/Corchets/bitacora_tesis/issues/97).
+No requiere reentrenamiento para verificarse.
+El diagnóstico de calidad del Tito actual corresponde a #98.
+
+Todo lo de abajo corre con dobles deterministas (Tito guionado, SLM falso):
+no descarga modelos, no entrena y no toca `corridas/` ni crea carpetas en el
+repositorio (la salida va a un temporal fuera del repo).
+
+```bash
+cd experiments/slm-directo
+
+# 1. Sintaxis de runner, instrumentación y reportes
+python -m py_compile correr.py resumen.py comparar.py detectores.py filtro_tito.py tito_real.py
+
+# 2. Tests dirigidos (operativo, diagnóstico, histórico interrumpido y
+#    costos por componentes/fallos/ausencias)
+python -m unittest tests.test_primer_aviso tests.test_ensayo tests.test_filtro_tito -v
+
+# 3. Punta a punta operativo + diagnóstico, con salida a /tmp
+SALIDA=$(mktemp -d)
+python slm_falso.py --puerto 11439 &
+python correr.py --modelos falso-demo:1b --url http://127.0.0.1:11439 \
+  --casos SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01 \
+  --filtro-tito --tito-puntajes "4=0.9" --etiqueta demo --salida "$SALIDA" --detalle
+python correr.py --modelos falso-demo:1b --url http://127.0.0.1:11439 \
+  --casos SC-WA-CODE-01-e01 --filtro-tito --tito-puntajes "4=0.9" \
+  --seguir-tras-aviso --etiqueta demo-diag --salida "$SALIDA"
+python resumen.py "$SALIDA"/*_demo --trayectorias
+python comparar.py "$SALIDA"/*_demo
+rm -rf "$SALIDA"
+```
+
+El modo operativo (por defecto) termina cada llamada en su primer aviso
+válido; `--seguir-tras-aviso` conserva el diagnóstico de conversación
+completa, separado del costo operativo hasta el aviso. Las corridas
+históricas (conversación completa) no se reescriben ni se presentan como
+nuevas mediciones operativas.
+
+### Diagnóstico del Tito histórico (#98)
+
+Recorrido real del artefacto histórico sin modificar sobre la partición de
+diagnóstico: 10 conversaciones no usadas en el ajuste (2 vishing / 8 legítimas
+comunes), 246 líneas/prefijos puntuados con entrada aislada y umbral 0,5.
+Evidencia en [DIAGNOSTICO-TITO-2026-10-29.md](DIAGNOSTICO-TITO-2026-10-29.md),
+generada desde [DIAGNOSTICO-TITO-2026-10-29.json](DIAGNOSTICO-TITO-2026-10-29.json)
+con `diagnosticar_tito.py` (14 pruebas en `tests/test_diagnosticar_tito.py`).
+
+- Artefacto intacto: `tito_logreg.json`, sha256
+  `fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd`
+  (idéntico antes/después); encoder RoBERTuito congelado, clasificador
+  regresión logística C=1,0, semilla 42.
+- Derivación: 2/2 vishing derivan en o antes de `T_R` (L5 con `T_R`=19, L16 con
+  `T_R`=16); 4/8 legítimas derivadas (tasa 0,5), sin marcas `T_R` que las
+  respalden. Derivación ≠ alerta: Tito solo deriva al SLM.
+- Comparador recargable para #101: `tito_real.cargar_artefacto` + `puntuar`
+  reproduce 246/246 puntajes (fallos 0, distintos 0, tolerancia absoluta 5e-05).
+- Exposición histórica: el ajuste vio 5520 frases aceptadas del banco
+  (inventario 6000, 480 excluidas); ninguna conversación entera estuvo en el
+  ajuste. Solapamiento léxico banco↔diagnóstico: Jaccard máximo 0,318 (cota
+  inferior, no prueba de independencia; la auditoría semántica completa es
+  ownership de #99).
+- Marcas provisionales sin revisión humana: describe el desarrollo, no
+  generaliza a producción; no cierra D07/D08/D09 ni #51.
+
+```bash
+cd experiments/slm-directo
+../../.venv/bin/python -m unittest tests.test_diagnosticar_tito -v
+```
 
 ## 6. Escalera de modelos y gamas de celular
 
@@ -282,6 +456,13 @@ afirmar rendimiento móvil.
   Incluye procesar la parte de la transcripción que Ollama no reutilice de la caché.
 - **Sin evaluar:** conversaciones que la corrida no terminó (se cortó con Ctrl+C) o en
   las que fallaron todas las respuestas. No cuentan como aciertos ni como errores.
+  Una conversación filtrada completa nunca derivada **sí** se evalúa: vishing sin
+  aviso o legítima sin aviso correcto, con sus denominadores intactos.
+- **Filtro (`tito-slm|…`):** la marca `o` es actualización procesada sin consultar
+  al SLM (no es fallo). Las columnas `consulta`, `tito_puntaje`, `tito_error` e
+  `indicio_*` reconstruyen qué decidió Tito y qué indicio falible recibió el SLM.
+  La sección «Filtro Tito→SLM (derivación y ahorro)» informa primera derivación,
+  consultas evitadas y costo Tito+SLM por conversación.
 - **Evidencia textual:** avisos cuya cita aparece en lo que realmente se dijo.
 - **Para revisar:** cada falsa alarma con su motivo y cada vishing sin aviso. Es lo
   que conviene mirar en equipo: #50 pide revisar al menos un aviso y un error.
@@ -302,6 +483,7 @@ afirmar rendimiento móvil.
 | 2026-10-17 | Comparación de reproducibilidad M1 vs Windows 11 sobre casos válidos comunes en ambas plataformas: [`analisis/2026-10-17-m1-vs-windows/`](analisis/2026-10-17-m1-vs-windows/README.md) (`comparar_m1_windows.py`). | Acuerdo en decisión de aviso de 51/53 (96.2%) en 0.8B, 52/53 (98.1%) en 2B y 40/42 (95.2%) en 4B evaluados. Acuerdo en línea exacta de 90.6% (0.8B), 96.2% (2B) y 88.1% (4B). Latencias en M1 fueron ~4.6x mayores en 0.8B y ~5.0x en 2B respecto de Windows con GPU. |
 | 2026-10-21 | **Caché del prefijo** en M1 con `qwen3.5:0.8b-q8_0` y `TR-04`: [`analisis/2026-10-21-cache-prefijo/`](analisis/2026-10-21-cache-prefijo/README.md). | Qwen 3.5 es híbrido y Ollama 0.40.5 solo retoma desde puntos guardados: cada línea vuelve a procesar ~530–630 tokens (480–1150 ms), no solo la línea nueva. Con `--num-batch 32`, 51–153 tokens (100–175 ms). Sobre los 53 casos, 453 de 464 respuestas idénticas y el mismo aviso en 52 de 53; p50 de 1282 a 1017 ms y p95 de 3465 a 2993 ms. |
 | 2026-10-21 | Análisis de errores del prompt v1 y **prompt v2** (`--prompts v2`): [`analisis/2026-10-21-errores-y-prompt-v2/`](analisis/2026-10-21-errores-y-prompt-v2/README.md). Corrida [`2026-10-21_182201_m1-0.8b-v1v2-nb32`](corridas/2026-10-21_182201_m1-0.8b-v1v2-nb32/resumen.md). | El 2B pierde siempre las mismas estafas: pedidos de dinero con razón creíble o sin palabra clave y pedidos indirectos de código; deja 49 líneas con riesgo ≥ 0,6 sin alerta. Exigir que la cita esté en el texto no ayuda. El v2 con el 0.8B quedó en los 24 casos del laboratorio, cortado por memoria con Docker abierto (el swap llegó a 9,4 GB porque el primer vigilante no podía cortar; corregido): 11/14 estafas y 2/10 falsas alarmas contra 13/14 y 4/10 del v1, sin motivos de «código» inventados. No alcanza para comparar. |
+| 2026-10-26 | Recorrido Tito→SLM con modelos simulados ([#69](https://github.com/Corchets/bitacora_tesis/issues/69)): `filtro_tito.py`, flags `--filtro-tito/--tito-puntajes/--tito-fallo-en/--tito-umbral`, `slm_falso.py`, `demo_tito_slm.sh`, `tests/test_filtro_tito.py` y corrida [`2026-10-26_125526_demo-tito-slm-simulado`](corridas/2026-10-26_125526_demo-tito-slm-simulado/resumen.md). | El par de WhatsApp pasa de punta a punta: Tito simulado deriva en L4, el SLM avisa en L4 del vishing (`=R`) y no avisa en la legítima; 3 consultas y 6 evitadas por configuración. 14 tests nuevos (umbral con igualdad, persistencia, historial íntegro, indicio falible, fallos, aviso único, reinicio, costo y denominadores) y 54 previos en verde. Sin modelos reales: no elige detector ni cierra D07/D08/D09. |
 
 Cada corrida real se anota acá: fecha, quién, máquina, comando, carpeta y una línea
 con lo observado. Las conclusiones van en `resumen.md` de esa corrida y, cuando
@@ -346,6 +528,11 @@ correspondan, en los documentos de decisión.
 - Los casos del laboratorio conservan el texto original: minúsculas, sin acentos y,
   en algunos, nombres de entidades reales.
 - PC con Ollama ≠ Android. La memoria es la que informa Ollama, no un RSS medido.
+- **Filtro simulado (#69).** El `TitoGuion` puntúa por número de línea: la misma
+  especificación se aplica a todos los casos de la corrida, así que solo sirve
+  para demostraciones chicas y controladas. Los tiempos del SLM falso son de
+  juguete (100/10 tokens fijos, ms de red local): el costo real se mide con
+  modelos de verdad en #68 completo.
 
 ## 11. Estado frente a lo que pide #50
 

@@ -730,9 +730,13 @@ def main():
     st.title("Laboratorio de vishing")
     st.caption("Detector incremental · texto primero · evidencia del spike · D07/D08/D09 abiertas")
     st.sidebar.header("Laboratorio local")
-    pagina = st.sidebar.radio("Recorrido", ["Resultados", "Probar texto", "Entrenar", "Ayuda"])
+    pagina = st.sidebar.radio("Recorrido", ["Resultados", "Matriz #101", "Probar texto", "Entrenar", "Ayuda"])
     st.sidebar.caption("Los resultados de texto usan turnos. No hay tiempos de audio ni métricas preventivas en segundos.")
-    {"Resultados": explorar, "Probar texto": probar, "Entrenar": entrenar, "Ayuda": ayuda}[pagina]()
+    if pagina == "Matriz #101":
+        from ui_matriz_101 import mostrar
+        mostrar()
+    else:
+        {"Resultados": explorar, "Probar texto": probar, "Entrenar": entrenar, "Ayuda": ayuda}[pagina]()
 
 
 if __name__ == "__main__":
