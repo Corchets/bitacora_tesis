@@ -37,13 +37,13 @@ Demo prevista para el 2026-10-28. Fuentes existentes: ejemplos SC-WA-CODE-01, SC
 
 Pantalla proyectada en aula: conversación y tarjetas con tipografía grande y alto contraste. Los proyectores lavan colores: decisiones y estados deben tener texto y forma, además del color. Controles operables con teclado y foco visible; respeta `prefers-reduced-motion`.
 
-## Vista de presentación — requisitos acordados (2026-10-29)
+## Vista de presentación — implementada y verificada (2026-10-30)
 
-Brief confirmado por Luciano el 2026-10-29 tras `/grill-with-docs`, convertido a especificación mediante `/to-spec`. **La fuente de verdad de los requisitos, historias de uso, decisiones de implementación, pruebas y criterios de aceptación es [#110](https://github.com/Corchets/bitacora_tesis/issues/110).** La implementación continúa pendiente.
+Especificación completa y criterios de aceptación en [#110](https://github.com/Corchets/bitacora_tesis/issues/110), implementada e integrada en [#111]–[#115].
 
-La vista presenta la misma llamada mediante dos siluetas de iPhone con avatares ilustrados estilo emoji y diálogo central. Se suma a la consola existente y utiliza la captura y los eventos actuales. La referencia visual es una pantalla de llamada de WhatsApp con perfil circular grande sobre fondo oscuro.
+La vista presenta la misma llamada mediante dos siluetas de iPhone con retratos ilustrados planos («Otra persona» y «Persona protegida»), medidores de nivel RMS, formas de onda dinámicas y diálogo central con borradores, revisiones, evaluaciones y franja de aviso de posible estafa en el teléfono protegido. Verificada en resolución notebook (1366 × 768) y proyección (1920 × 1080) con foco de teclado, movimiento reducido y recursos locales.
 
-El video hardcodeado sigue pendiente para el final en [#53](https://github.com/Corchets/bitacora_tesis/issues/53). Esta vista no congela modelos ni protocolo; el aviso del sistema final sigue pendiente en [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
+El video hardcodeado sigue pendiente para el final en [#53](https://github.com/Corchets/bitacora_tesis/issues/53). Los ensayos con personas o en sala física mantienen sus propios alcances; esta vista no altera modelos, prompts ni el aviso final de [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
 
 ## Brand Commitments
 

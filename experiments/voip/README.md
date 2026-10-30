@@ -585,3 +585,21 @@ El servidor valida todos los ids antes de tocar nada (un id inválido cancela el
 hay una llamada o prueba en curso y avisa del resultado a **todos** los paneles conectados, que actualizan su lista.
 `borrar_pruebas` solo borra pruebas con `guardada: true`: no toca llamadas ni pruebas sin guardar. El borrado no
 pasa por el historial de eventos de la llamada, así que un panel que se conecta después no lo recibe.
+
+## 13. Vista de presentación de la llamada (#110–#115)
+
+Al iniciar una llamada, el botón **Vista de presentación** abre una interfaz alternativa para proyecciones y demostraciones.
+Presenta la llamada mediante dos siluetas de iPhone con retratos ilustrados planos («Otra persona» a la izquierda y
+«Persona protegida» a la derecha), medidores de nivel RMS y barras de onda reactivas por canal, y una columna central de diálogo
+desplazable que muestra las frases finales intercaladas con sus evaluaciones del detector asociadas.
+
+Si se detecta posible fraude, el iPhone protegido despliega la franja de aviso con motivo, evidencia resaltada en el diálogo y
+control para activar o silenciar el tono acústico. La vista respeta navegación por teclado (foco visible con contorno azul),
+`prefers-reduced-motion` y recursos puramente locales. La escena se conserva íntegra al finalizar la llamada («Análisis finalizado»),
+permitiendo iniciar una nueva llamada sin recargar.
+
+Comandos de verificación:
+- Driver portable de interfaz: `python experiments/voip/tests/presentacion_ui.py --outdir /tmp/tesis-presentacion-115 --report /tmp/tesis-presentacion-115-report.md`
+- Pruebas unitarias y de integración: `node --test experiments/voip/tests/*.test.mjs` y `python -m unittest discover -s experiments/voip/tests -p 'test_*.py' -q`.
+
+Límites: la verificación en resolución de proyector (1920 × 1080) evalúa legibilidad y composición visual en pantalla; no constituye un ensayo acústico o humano en sala física. El video hardcodeado de respaldo continúa planificado para #53.
