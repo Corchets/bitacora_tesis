@@ -66,10 +66,10 @@ def instrumentar(motor) -> dict[str, Any]:
 
     def _es_voz(muestras):
         t0 = time.perf_counter()
-        voz = es_voz(muestras)
+        corta, cuenta = es_voz(muestras)
         registro["decision_ms"].append((time.perf_counter() - t0) * 1000.0)
-        registro["decisiones"].append(bool(voz))
-        return voz
+        registro["decisiones"].append(bool(corta))  # la que abre y cierra la frase
+        return corta, cuenta
 
     def _transcribir(audio):
         t0 = time.perf_counter()

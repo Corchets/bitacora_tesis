@@ -12,7 +12,7 @@ sobre la configuración que se quedó en los pasos anteriores:
 
 Aparte de la cadena (que es de Zipformer, retirado el 2026-10-29), Parakeet por frases con distintos
 cortes de silencio y umbrales RMS (PLAN-VOZ-REAL.md §9 y §10), y con Silero VAD en lugar del RMS para
-decidir qué bloque es voz (§12). Cada una se compara con una de referencia (la del panel, salvo que se
+decidir qué bloque es voz o mezclado con el RMS (§12). Cada una se compara con una de referencia (la del panel, salvo que se
 pida otra); no se elige sola.
 
 La ganancia y el umbral RMS de *captura* ya quedaron grabados en el audio y no se pueden rehacer:
@@ -78,9 +78,9 @@ class ConfigWhisper:
 @dataclass(frozen=True)
 class ConfigParakeet:
     corte: float = 0.9  # corte de silencio en s; el panel no tiene «auto» para Parakeet
-    # Con «rms» decide qué bloque es voz; con «silero» solo marca el fin de la voz para medir la demora.
+    # Con «rms», «filtro» e «y» corta las frases; con «silero» solo marca el fin de la voz para medir la demora.
     umbral_rms: float = 0.003
-    vad: str = "rms"  # «rms» (el del panel) o «silero»
+    vad: str = "rms"  # «rms» (el del panel) o un modo de MotorPorFrases.MODOS_VAD: «silero», «filtro» o «y»
     umbral_silero: float = 0.5
 
     def como_dict(self) -> dict[str, Any]:
@@ -140,6 +140,13 @@ def _parakeet_silero(corte: float, umbral: float = 0.5) -> tuple[str, ConfigPara
     return f"parakeet-{corte}-silero-{umbral}", ConfigParakeet(corte, 0.008, vad="silero", umbral_silero=umbral)
 
 
+def _parakeet_mezcla(modo: str, corte: float = 0.8, umbral: float = 0.008, umbral_silero: float = 0.5
+                     ) -> tuple[str, ConfigParakeet]:
+    # El RMS corta como en «Probar el ASR»; Silero filtra lo que cuenta como voz («filtro») o también corta («y»).
+    return (f"parakeet-{corte}-rms-{umbral}-{modo}-silero-{umbral_silero}",
+            ConfigParakeet(corte, umbral, vad=modo, umbral_silero=umbral_silero))
+
+
 # La primera es la del panel desde c21001c (0,9 s y 0,003): por defecto las demás se comparan con ella.
 VARIANTES_PARAKEET: tuple[tuple[str, ConfigParakeet], ...] = (
     _parakeet(0.9, 0.003), _parakeet(0.8, 0.003), _parakeet(0.5, 0.003),
@@ -147,6 +154,8 @@ VARIANTES_PARAKEET: tuple[tuple[str, ConfigParakeet], ...] = (
     _parakeet_silero(0.8), _parakeet_silero(0.5), _parakeet_silero(0.3),
     # Con 0,5 Silero sigue en voz en las pausas (no baja de 0,35); 0,9 salió de simular el corte sin ASR (§12).
     _parakeet_silero(0.5, 0.9), _parakeet_silero(0.3, 0.9),
+    # Mezclas con el RMS de «Probar el ASR» (§12.7). Con 0,7 o 0,9 el filtro descarta una frase real al simular.
+    _parakeet_mezcla("filtro"), _parakeet_mezcla("y"),
 )
 PARAKEET_PANEL = VARIANTES_PARAKEET[0][0]
 PARAKEET_LABORATORIO = "parakeet-0.8-rms-0.008"  # lo que arranca «Probar el ASR» desde el 2026-10-29 (§11)
@@ -214,8 +223,9 @@ def crear_motor_parakeet(config: ConfigParakeet, spec: dict[str, Any]) -> MotorA
     motor = MotorSherpaParakeet(str(spec.get("modelo_dir") or DIR_MODELO_PARAKEET), hilos=spec.get("hilos", HILOS_POR_DEFECTO))
     motor.corte_silencio_s = config.corte
     motor.umbral_rms_silencio = config.umbral_rms
-    if config.vad == "silero":
+    if config.vad in MotorSherpaParakeet.MODOS_VAD:
         motor.detector_voz = DetectorSilero(spec.get("modelo_silero") or MODELO_SILERO, config.umbral_silero)
+        motor.modo_vad = config.vad
     elif config.vad != "rms":
         raise ValueError(f"vad desconocido: {config.vad}")
     return motor

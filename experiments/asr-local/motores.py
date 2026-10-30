@@ -4,7 +4,8 @@ Contiene:
 - MotorASR: interfaz común.
 - MotorSherpaZipformer: Zipformer streaming español via sherpa-onnx (motor principal).
 - MotorFasterWhisper: faster-whisper en modo por segmentos (segundo motor, NO streaming).
-- DetectorSilero: Silero VAD de sherpa-onnx para decidir voz o silencio por bloque (opcional en MotorPorFrases).
+- DetectorSilero: Silero VAD de sherpa-onnx para decidir voz o silencio por bloque (opcional en MotorPorFrases,
+  solo, como filtro del RMS o junto con el RMS).
 - MotorPorFrases: base para modelos no streaming que se transcriben frase por frase (corte por silencio).
 - MotorSherpaParakeet: Parakeet TDT 0.6B v3 vía sherpa-onnx, por frases con parciales.
 - MotorWhisperPorFrases: faster-whisper large-v3-turbo por frases, sin parciales.
@@ -591,8 +592,8 @@ class MotorPorFrases(MotorASR):
     """Base para modelos que no son streaming: corta frases por silencio y transcribe cada una.
 
     Usa el mismo corte por silencio que la demo (`corte_silencio_s`, `umbral_rms_silencio`)
-    para cerrar la frase. Con `detector_voz` (un `DetectorSilero`), Silero decide qué bloque es voz en
-    lugar del RMS; el corte, el preaudio, el tope y `MIN_VOZ_S` no cambian. Mientras la frase sigue abierta, si `parciales_cada_s` no es None,
+    para cerrar la frase. Con `detector_voz` (un `DetectorSilero`), `modo_vad` dice cómo se usa Silero (ver
+    `MODOS_VAD`); el corte, el preaudio, el tope y `MIN_VOZ_S` no cambian. Mientras la frase sigue abierta, si `parciales_cada_s` no es None,
     la vuelve a transcribir entera cada ese tiempo para mostrar texto provisorio.
     """
 
@@ -600,6 +601,12 @@ class MotorPorFrases(MotorASR):
     MAX_FRASE_S = 10.0  # una frase sin pausas se corta acá para que cada pasada no tarde cada vez más
     MIN_VOZ_S = 0.3  # con menos voz que esto es un ruido o una respiración: no se transcribe
     MIN_VOZ_PARCIAL_S = 1.0  # el primer borrador espera esta voz: con menos, Parakeet suele adivinar inglés
+    # Con `detector_voz`, cómo se combina Silero con el RMS (PLAN-VOZ-REAL.md §12):
+    MODOS_VAD = {
+        "silero": "Silero decide solo qué bloque es voz; el RMS no se usa",
+        "filtro": "el RMS corta las frases; solo cuenta como voz (MIN_VOZ_S y borradores) lo que Silero también oye",
+        "y": "un bloque es voz si lo dicen el RMS y Silero; si uno dice silencio, cuenta para el corte",
+    }
 
     def __init__(self, sample_rate: int = 16000, parciales_cada_s: float | None = None):
         self.es_streaming = False
@@ -609,8 +616,9 @@ class MotorPorFrases(MotorASR):
         self.filtrar_idioma = True  # descarta parciales que no parecen español y finales que son muletillas
         self.corte_silencio_s = 0.8
         self.umbral_rms_silencio = 0.005
-        # Si no es None, decide voz o silencio en lugar del RMS; todo lo demás (corte, preaudio, tope) queda igual.
+        # Si no es None, Silero entra según `modo_vad`; todo lo demás (corte, preaudio, tope) queda igual.
         self.detector_voz: DetectorSilero | None = None
+        self.modo_vad = "silero"
         # El servidor lo fija según el corte «auto»; estos modelos no tienen endpoint propio.
         self.enable_endpoint = False
         self._limpiar()
@@ -639,11 +647,21 @@ class MotorPorFrases(MotorASR):
     def nueva_sesion(self) -> None:
         self.reiniciar()
 
-    def _es_voz(self, muestras: np.ndarray) -> bool:
-        if self.detector_voz is not None:
-            return self.detector_voz.es_voz(muestras)
+    def _es_voz(self, muestras: np.ndarray) -> tuple[bool, bool]:
+        """(corta, cuenta): `corta` abre y cierra la frase; `cuenta` suma voz para `MIN_VOZ_S` y los borradores."""
+        if self.detector_voz is not None and self.modo_vad not in self.MODOS_VAD:
+            raise ValueError(f"modo_vad desconocido: {self.modo_vad}; opciones: {', '.join(self.MODOS_VAD)}")
+        # Silero mira todos los bloques, aunque no decida, para que su estado siga al audio.
+        silero = self.detector_voz.es_voz(muestras) if self.detector_voz is not None else None
+        if silero is not None and self.modo_vad == "silero":
+            return silero, silero
         rms = float(np.sqrt(np.mean(muestras**2))) if len(muestras) else 0.0
-        return rms >= self.umbral_rms_silencio
+        voz = rms >= self.umbral_rms_silencio
+        if silero is None:
+            return voz, voz
+        if self.modo_vad == "filtro":
+            return voz, voz and silero
+        return voz and silero, voz and silero
 
     def _evento(self, tipo: str, texto: str, fin_s: float, t0: float) -> EventoASR:
         return EventoASR(tipo=tipo, segmento=self.segmento_actual, texto=texto,
@@ -666,7 +684,7 @@ class MotorPorFrases(MotorASR):
         if muestras.dtype != np.float32:
             muestras = muestras.astype(np.float32)
         dur_s = fin_bloque_s - inicio_bloque_s
-        voz = self._es_voz(muestras)
+        voz, cuenta = self._es_voz(muestras)
 
         if not self.frase:
             if not voz:
@@ -682,16 +700,16 @@ class MotorPorFrases(MotorASR):
             self.previo = []
             self.silencio_acum_s = 0.0
             self.desde_parcial_s = dur_s
-            self.voz_s = dur_s
+            self.voz_s = dur_s if cuenta else 0.0
             return []
 
         self.frase.append(muestras)
         self.silencio_acum_s = 0.0 if voz else self.silencio_acum_s + dur_s
         self.desde_parcial_s += dur_s
-        self.voz_s += dur_s if voz else 0.0
+        self.voz_s += dur_s if cuenta else 0.0
         if self.silencio_acum_s >= self.corte_silencio_s or fin_bloque_s - self.inicio_segmento_s >= self.MAX_FRASE_S:
             return self._cerrar_frase(fin_bloque_s, t0)
-        if (self.parciales_cada_s and voz and self.voz_s >= self.MIN_VOZ_PARCIAL_S
+        if (self.parciales_cada_s and cuenta and self.voz_s >= self.MIN_VOZ_PARCIAL_S
                 and self.desde_parcial_s >= self.parciales_cada_s):
             self.desde_parcial_s = 0.0
             texto = self._transcribir(np.concatenate(self.frase)).strip()
@@ -709,13 +727,15 @@ class MotorPorFrases(MotorASR):
 
     def _segmentacion(self) -> dict[str, Any]:
         silero = self.detector_voz is not None
-        return {"tipo": "corte_por_silencio_silero" if silero else "corte_por_silencio_rms",
-                "corte_silencio_s": self.corte_silencio_s,
-                "umbral_rms_silencio": None if silero else self.umbral_rms_silencio, "previo_s": self.PREVIO_S,
+        tipo = {"silero": "corte_por_silencio_silero", "filtro": "corte_por_silencio_rms_filtro_silero",
+                "y": "corte_por_silencio_rms_y_silero"}[self.modo_vad] if silero else "corte_por_silencio_rms"
+        solo_silero = silero and self.modo_vad == "silero"
+        return {"tipo": tipo, "corte_silencio_s": self.corte_silencio_s,
+                "umbral_rms_silencio": None if solo_silero else self.umbral_rms_silencio, "previo_s": self.PREVIO_S,
                 "max_frase_s": self.MAX_FRASE_S, "min_voz_s": self.MIN_VOZ_S,
                 "min_voz_parcial_s": self.MIN_VOZ_PARCIAL_S, "parciales_cada_s": self.parciales_cada_s,
                 "filtro_idioma": "parciales_y_muletillas_finales" if self.filtrar_idioma else None,
-                **({"vad": self.detector_voz.metadatos()} if silero else {})}
+                **({"vad": {**self.detector_voz.metadatos(), "modo": self.modo_vad}} if silero else {})}
 
 
 class MotorSherpaParakeet(MotorPorFrases):

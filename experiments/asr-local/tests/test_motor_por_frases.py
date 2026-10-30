@@ -238,6 +238,54 @@ class TestDetectorSilero(unittest.TestCase):
         self.assertEqual((vad["umbral"], vad["umbral_para_seguir"], vad["ventana"]), (0.5, 0.35, 512))
         self.assertEqual(vad["costo_por_bloque"]["bloques"], 10)
 
+    def test_filtro_corta_igual_que_el_rms(self):
+        # Con voz que los dos oyen, el filtro da las mismas frases y en los mismos tiempos que el RMS solo.
+        for tramos in ([1.0, 1.5, 0.8, 1.0], [0.12, 1.0, 1.0], [MotorPorFrases.MAX_FRASE_S + 2.0]):
+            rms, _ = alimentar(MotorEco(parciales_cada_s=0.5), tramos)
+            filtro = con_silero(MotorEco(parciales_cada_s=0.5))
+            filtro.modo_vad = "filtro"
+            eventos, _ = alimentar(filtro, tramos)
+            self.assertEqual([(e.tipo, e.texto, e.segmento, e.inicio_audio_s, e.fin_audio_s) for e in eventos],
+                             [(e.tipo, e.texto, e.segmento, e.inicio_audio_s, e.fin_audio_s) for e in rms])
+
+    def test_filtro_no_transcribe_ruido_que_silero_no_oye(self):
+        # 0,03 pasa el RMS de 0,005 y abre la frase, pero el VAD (falso) no lo oye: no hay borradores ni final.
+        motor = con_silero(MotorEco(parciales_cada_s=0.5))
+        motor.modo_vad = "filtro"
+        eventos, _ = alimentar(motor, [2.0, 1.0], valor_voz=0.03)
+        self.assertEqual((eventos, motor.llamadas), ([], 0))
+
+    def test_y_corta_en_la_pausa_con_ruido_de_fondo(self):
+        # El ruido de 0,03 en la pausa pasa el RMS: el RMS solo junta las dos frases; con «y» Silero corta.
+        rms, _ = alimentar(MotorEco(), [1.0, 1.0, 1.0], valor_silencio=0.03)
+        self.assertEqual(len([e for e in rms if e.tipo == "final"]), 1)
+        motor = con_silero(MotorEco())
+        motor.modo_vad = "y"
+        eventos, _ = alimentar(motor, [1.0, 1.0, 1.0], valor_silencio=0.03)
+        self.assertEqual(len([e for e in eventos if e.tipo == "final"]), 2)
+
+    def test_y_tampoco_abre_con_voz_debil_bajo_el_umbral_rms(self):
+        motor = con_silero(MotorEco(), nivel=0.001)
+        motor.modo_vad = "y"
+        motor.umbral_rms_silencio = 0.5
+        eventos, _ = alimentar(motor, [1.0, 1.0], valor_voz=0.002)
+        self.assertEqual(eventos, [])
+
+    def test_segmentacion_de_las_mezclas(self):
+        for modo, tipo in (("filtro", "corte_por_silencio_rms_filtro_silero"), ("y", "corte_por_silencio_rms_y_silero")):
+            motor = con_silero(MotorEco())
+            motor.modo_vad = modo
+            motor.umbral_rms_silencio = 0.008
+            alimentar(motor, [0.4])
+            seg = motor._segmentacion()
+            self.assertEqual((seg["tipo"], seg["umbral_rms_silencio"], seg["vad"]["modo"]), (tipo, 0.008, modo))
+
+    def test_modo_desconocido_avisa(self):
+        motor = con_silero(MotorEco())
+        motor.modo_vad = "o"
+        with self.assertRaises(ValueError):
+            motor.procesar_bloque(np.zeros(BLOQUE, dtype=np.float32), 0.0, 0.04)
+
     def test_sin_modelo_avisa(self):
         detector = DetectorSilero("/no/existe/silero_vad.onnx")
         with self.assertRaises(RuntimeError):
