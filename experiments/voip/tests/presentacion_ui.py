@@ -1382,6 +1382,23 @@ class UIDriver:
             # 27. Reconexión tras aviso y cierre visual: reconstruye escena sin duplicar líneas,
             # sin emitir iniciar adicional y sin volver a hacer sonar el aviso.
             cmds_antes_reconex = len(self.received_messages)
+            # Con el sonido activo, contar los tonos que se generen durante la reconexión.
+            await self.cdp.eval("""
+                (() => {
+                    const btn = document.getElementById('pres-aviso-btn-sonido');
+                    if (btn && btn.getAttribute('aria-pressed') !== 'true') btn.click();
+                    window.__tonosReconexion = 0;
+                    const Ctx = window.AudioContext || window.webkitAudioContext;
+                    if (Ctx && !Ctx.prototype.__contado) {
+                        const original = Ctx.prototype.createOscillator;
+                        Ctx.prototype.createOscillator = function (...args) {
+                            window.__tonosReconexion += 1;
+                            return original.apply(this, args);
+                        };
+                        Ctx.prototype.__contado = true;
+                    }
+                })()
+            """)
             self.panel_connected_event.clear()
             await self.panel_ws.close()
             await asyncio.sleep(0.1)
@@ -1538,6 +1555,10 @@ class UIDriver:
                     "disponible_s": 14.7
                 }
             ]
+            # Como en el servidor real, cada evento ASR lleva su número de orden.
+            for msg in historial_reconex:
+                if msg["tipo"] == "asr":
+                    msg.setdefault("n", msg["segmento"])
             for msg in historial_reconex:
                 await self.panel_ws.send(json.dumps(msg))
             await asyncio.sleep(0.3)
@@ -1550,23 +1571,40 @@ class UIDriver:
                     const avisoOculto = !avisoProt || avisoProt.offsetHeight === 0;
                     const nombreOtra = document.getElementById('pres-nombre-otra')?.textContent.trim();
                     const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    const conEstafa = [...document.querySelectorAll('#pres-charla .linea')]
+                        .filter(l => /posible estafa/i.test(l.querySelector('.pres-eval-badge')?.textContent || ''))
+                        .map(l => l.querySelector('.texto')?.textContent || '');
+                    const avisoEnSuFrase = conEstafa.length === 1 && conEstafa[0].includes('código de seguridad de seis dígitos');
                     return {
+                        avisoEnSuFrase,
+                        conEstafa,
                         lineasPres,
                         lineasConsola,
                         avisoOculto,
                         nombreOtra,
                         estado,
-                        ok: lineasPres === 7 && lineasConsola === 7 && avisoOculto &&
+                        ok: avisoEnSuFrase && lineasPres === 7 && lineasConsola === 7 && avisoOculto &&
                             nombreOtra === 'Otra persona' && estado === 'En llamada'
                     };
                 })()
             """)
             cmds_despues_reconex = len(self.received_messages)
             sin_comandos_extras = (cmds_despues_reconex == cmds_antes_reconex)
+            tono_obs = await self.cdp.eval("""
+                (() => ({
+                    tonos: window.__tonosReconexion,
+                    sonido: document.getElementById('pres-aviso-btn-sonido')?.getAttribute('aria-pressed')
+                }))()
+            """) or {}
+            self.record_check(
+                "Reconexión no repite el tono del aviso ya recibido",
+                tono_obs.get("tonos") == 0 and tono_obs.get("sonido") == "true",
+                f"Tonos generados al reconstruir con sonido activo: {tono_obs.get('tonos')}"
+            )
             self.record_check(
                 "Reconexión tras aviso y cierre visual conserva estado sin duplicar",
                 bool(reconexion_obs.get("ok") and sin_comandos_extras),
-                f"Líneas presentación: {reconexion_obs.get('lineasPres')} (sin duplicar), aviso oculto: {reconexion_obs.get('avisoOculto')}, comandos emitidos: {cmds_despues_reconex - cmds_antes_reconex}, estado: '{reconexion_obs.get('estado')}'"
+                f"Líneas presentación: {reconexion_obs.get('lineasPres')} (sin duplicar), aviso oculto: {reconexion_obs.get('avisoOculto')}, comandos emitidos: {cmds_despues_reconex - cmds_antes_reconex}, estado: '{reconexion_obs.get('estado')}', «Posible estafa» en: {reconexion_obs.get('conEstafa')}"
             )
 
             # 28. Fin con texto pendiente: incorpora últimos finales, marca no evaluados y conserva escena
