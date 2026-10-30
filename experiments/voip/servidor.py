@@ -47,11 +47,13 @@ import historial
 from llamada import DIR_VOIP, ROLES, SAMPLE_RATE, Llamada
 
 import replay  # noqa: E402  (rutas de slm-directo y replay ya agregadas por llamada.py)
-from motores import MotorASR, MotorSherpaParakeet, MotorSherpaZipformer
+from motores import DetectorSilero, MotorASR, MotorSherpaParakeet, MotorSherpaZipformer
 
 DIR_MODELOS = DIR_VOIP.parent / "asr-local" / "modelos"
 DIR_MODELO = DIR_MODELOS / "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
 DIR_PARAKEET = DIR_MODELOS / "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
+MODELO_SILERO = DIR_MODELOS / "silero-vad" / "silero_vad.onnx"
+URL_SILERO = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx"
 
 # Modelos de ASR que se pueden elegir desde el panel. «zipformer» es el de siempre. Whisper no está:
 # solo transcribe al cerrar la frase y la demo tiene que ir escribiendo mientras se habla.
@@ -59,7 +61,13 @@ ASR_POR_DEFECTO = "zipformer"
 MODELOS_ASR = {
     "zipformer": "Zipformer Kroko · streaming",
     "parakeet": "Parakeet TDT 0.6B v3 · por frases",
+    "parakeet-filtro": "Parakeet · RMS con filtro Silero",
+    "parakeet-y": "Parakeet · RMS y Silero",
+    "parakeet-silero": "Parakeet · solo Silero",
 }
+# Parakeet con Silero VAD, a prueba en el laboratorio (asr-local/PLAN-VOZ-REAL.md §12): modo de
+# MotorPorFrases.MODOS_VAD y umbral de Silero. El umbral RMS y el corte siguen siendo los elegidos en el panel.
+SILERO_ASR = {"parakeet-filtro": ("filtro", 0.5), "parakeet-y": ("y", 0.5), "parakeet-silero": ("silero", 0.9)}
 
 EJEMPLOS = {nombre: DIR_VOIP.parent / "asr-local" / "audio" / f"{nombre}-tts-estereo.wav"
             for nombre in ("SC-WA-CODE-01", "LG-WA-CONSULTA-01", "SC-SOPORTE-CLAVE-01", "LG-SUPPORT-INFO-01")}
@@ -84,6 +92,8 @@ def validar_corte(valor) -> str | float:
 def validar_asr(valor) -> str:
     if not isinstance(valor, str) or valor not in MODELOS_ASR:
         raise ValueError(f"Modelo de ASR desconocido; opciones: {', '.join(MODELOS_ASR)}.")
+    if valor in SILERO_ASR and not MODELO_SILERO.is_file():
+        raise ValueError(f"Falta el modelo de Silero: bajá {URL_SILERO} a {MODELO_SILERO}.")
     return valor
 
 
@@ -119,9 +129,14 @@ class Servidor:
         self.prueba_pendiente: Path | None = None
 
     def crear_motor(self) -> MotorASR:
-        if self.asr == "parakeet":
+        if self.asr == "parakeet" or self.asr in SILERO_ASR:
             modelo = str(DIR_PARAKEET) if DIR_PARAKEET.exists() else MotorSherpaParakeet.MODELO_POR_DEFECTO
-            return MotorSherpaParakeet(modelo, hilos=self.args.hilos)
+            motor = MotorSherpaParakeet(modelo, hilos=self.args.hilos)
+            if self.asr in SILERO_ASR:
+                # Uno por canal: Silero guarda el estado de la voz que viene escuchando.
+                motor.modo_vad, umbral = SILERO_ASR[self.asr]
+                motor.detector_voz = DetectorSilero(MODELO_SILERO, umbral)
+            return motor
         modelo = str(DIR_MODELO) if DIR_MODELO.exists() else MotorSherpaZipformer.MODELO_POR_DEFECTO
         return MotorSherpaZipformer(modelo, hilos=self.args.hilos)
 
