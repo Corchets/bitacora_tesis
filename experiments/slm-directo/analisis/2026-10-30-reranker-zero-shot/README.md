@@ -149,4 +149,31 @@ Si falla alguna, el entrenamiento queda descartado con H7 como fundamento.
 
 ## Resultados
 
-Pendientes: correr R1–R4 y pegar acá lo principal de `analisis.md`.
+### 2026-10-30 · Humo y diagnóstico del NLI (notebook de Evaristo, Windows, CPU, 4 hilos)
+
+Con `torch 2.9.1+cpu`, `transformers 4.51.3` y `MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7`.
+
+- **Humo** sobre `SC-WA-CODE-01-e01` y `LG-WA-CONSULTA-01-e01`, que están en
+  `excluido_relacion_comparacion`: solo sirvieron para ver que corre, no para ajustar.
+  - Con la primera versión el riesgo daba ~0,99 en todas las líneas: el puntaje comparaba
+    entailment solo contra contradicción. Corregido (P(entailment) sobre las tres clases).
+  - Con el arreglo siguió alto: entre 0,74 y 0,99 en todas las líneas, también en la legítima.
+  - Cada línea (12 pares) tardó entre 0,9 y 2,1 s. H8 esperaba < 0,5 s para mDeBERTa.
+- **Instalación** ([`diagnostico_nli.py`](diagnostico_nli.py)): sana. Los tokenizadores rápido y
+  lento dan lo mismo. En frases cortas en castellano acierta:
+  - «Decime el código…» frente a «Alguien pide un código»: entailment 1,00.
+  - Una frase sobre la lluvia: neutral 0,99.
+  - «No hace falta que me digas ningún código»: contradicción 0,95.
+- **Formato** (`--formato`): 6 frases **inventadas**, 2 con pedido y 4 sin pedido, contra
+  hipótesis corta, media y larga (la v1), con y sin «A:». **Ninguna combinación pasa de 4/6.**
+  - Confunde mención con pedido: «Me mandaron un código… no se lo voy a dar a nadie» da 0,99
+    con la hipótesis corta. Es la falla de R07.
+  - Con hipótesis largas da entailment a charla cualquiera: «¿Ya cenaste?…» da 0,95–0,98, y
+    una presentación de banco, 0,97.
+  - Con la hipótesis larga pierde pedidos claros: «Leeme el código de seis dígitos» da 0,04–0,06.
+- **Conclusión:** H2 se refuta en controles. El NLI zero-shot queda **descartado** como
+  detector solo y como verificador anti-R07, por la regla escrita antes de correr: si ninguna
+  combinación supera 4/6, se descarta. R1 sigue con `bge-reranker-v2-m3` y
+  `Qwen3-Reranker-0.6B`, después de pasar el mismo diagnóstico de formato.
+
+Pendiente: correr R1–R4 y pegar acá lo principal de `analisis.md`.

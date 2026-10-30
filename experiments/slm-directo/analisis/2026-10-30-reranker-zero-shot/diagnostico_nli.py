@@ -1,4 +1,4 @@
-"""Diagnóstico del NLI: ¿el modelo está roto en esta instalación o es así para este uso?
+"""Diagnóstico del NLI (y, con --formato, de cualquier reranker): ¿roto o así es para este uso?
 
 Imprime versiones, etiquetas, tokens y las tres probabilidades para pares de control
 (el ejemplo de la ficha del modelo y frases cortas en castellano) con el tokenizador rápido
@@ -7,6 +7,7 @@ descripciones largas), no la instalación.
 
     python analisis/2026-10-30-reranker-zero-shot/diagnostico_nli.py
     python analisis/2026-10-30-reranker-zero-shot/diagnostico_nli.py --formato
+    python analisis/2026-10-30-reranker-zero-shot/diagnostico_nli.py BAAI/bge-reranker-v2-m3 --formato
 
 `--formato` compara hipótesis cortas y largas, con y sin «A:», sobre frases INVENTADAS:
 los casos de humo están relacionados con comparacion_20 y no se usan para ajustar.
@@ -15,6 +16,7 @@ los casos de humo están relacionados con comparacion_20 y no se usan para ajust
 from __future__ import annotations
 
 import sys
+from pathlib import Path
 
 import torch
 import transformers
@@ -67,24 +69,33 @@ HIPOTESIS = {
 
 
 def formato() -> None:
-    tok = AutoTokenizer.from_pretrained(MODELO)
-    red = AutoModelForSequenceClassification.from_pretrained(MODELO).eval()
-    entail = next(i for i, n in red.config.id2label.items() if str(n).lower().startswith("entail"))
-    print("\nP(entailment) · columnas: hipótesis × con/sin «A:» · ✔ = acierta con umbral 0,5")
+    """Sirve para cualquier backend de reranker.py (nli, cross-encoder, qwen3-reranker)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+    from reranker import backend_de, cargar_hipotesis, crear_puntuador
+
+    backend = backend_de(MODELO)
+    instruccion = cargar_hipotesis()[1].get("instruccion_qwen3", "")
+    pu = crear_puntuador(MODELO, backend, hilos=4, instruccion=instruccion)
+    pu.preparar()
+    print(f"\nBackend {backend} · puntaje del par · columnas: hipótesis × con/sin «A:» · ✔ = acierta con umbral 0,5")
     cols = [(h, pref) for h in HIPOTESIS for pref in ("A: ", "")]
     print("frase".ljust(52) + " | ".join(f"{h[:6]}{'+A' if pref else '  '}" for h, pref in cols))
     aciertos = {c: 0 for c in cols}
-    with torch.inference_mode():
-        for texto, pide in FRASES:
-            celdas = []
-            for h, pref in cols:
-                enc = tok(pref + texto, HIPOTESIS[h], return_tensors="pt", truncation=True)
-                p = torch.softmax(red(**enc).logits[0].float(), dim=-1)[entail].item()
-                ok = (p > 0.5) == pide
-                aciertos[(h, pref)] += ok
-                celdas.append(f"{p:.2f}{'✔' if ok else '✘'}  ")
-            print(f"{('[pide] ' if pide else '[no]   ') + texto[:44]:52}" + " | ".join(celdas))
+    for texto, pide in FRASES:
+        celdas = []
+        for h, pref in cols:
+            (puntaje,) = pu.puntuar([(HIPOTESIS[h], pref + texto)])
+            ok = (puntaje > 0.5) == pide
+            aciertos[(h, pref)] += ok
+            celdas.append(f"{puntaje:.2f}{'✔' if ok else '✘'}  ")
+        print(f"{('[pide] ' if pide else '[no]   ') + texto[:44]:52}" + " | ".join(celdas))
     print("aciertos".ljust(52) + " | ".join(f"{aciertos[c]}/{len(FRASES)}    " for c in cols))
+    # El umbral 0,5 no está calibrado para rerankers: también importa si los pedidos quedan arriba de todo.
+    for c in cols:
+        pide = [pu.puntuar([(HIPOTESIS[c[0]], c[1] + t)])[0] for t, x in FRASES if x]
+        no = [pu.puntuar([(HIPOTESIS[c[0]], c[1] + t)])[0] for t, x in FRASES if not x]
+        print(f"{c[0]}{' +A' if c[1] else ''}: pedido más bajo {min(pide):.2f} · no pedido más alto {max(no):.2f}"
+              f"{'  → separa' if min(pide) > max(no) else ''}")
 
 
 if __name__ == "__main__":
