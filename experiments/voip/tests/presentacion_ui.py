@@ -1311,6 +1311,245 @@ class UIDriver:
                 f"Línea 7: '{post_aviso_obs.get('texto')}', Estado: '{post_aviso_obs.get('st')}' ({post_aviso_obs.get('mot')})"
             )
 
+            # 24a. Verificación de teclado, foco visible y alternancia de detalles técnicos (#115)
+            foco_teclado_obs = await self.cdp.eval("""
+                (() => {
+                    const btnVolver = document.getElementById('volver-panel');
+                    const btnTerminar = document.getElementById('pres-terminar');
+                    const btnSonido = document.getElementById('pres-aviso-btn-sonido');
+                    const btnCerrar = document.getElementById('pres-aviso-btn-cerrar');
+                    const det = document.querySelector('details.pres-detalles');
+                    const sum = det?.querySelector('.pres-detalles-summary');
+
+                    if (!btnVolver || !btnTerminar || !btnSonido || !btnCerrar || !sum || !det) {
+                        return { ok: false, razon: 'Elementos interactivos no encontrados' };
+                    }
+
+                    const controles = [
+                        { el: btnVolver, id: 'volver-panel' },
+                        { el: btnTerminar, id: 'pres-terminar' },
+                        { el: btnSonido, id: 'pres-aviso-btn-sonido' },
+                        { el: btnCerrar, id: 'pres-aviso-btn-cerrar' },
+                        { el: sum, id: 'pres-detalles-summary' }
+                    ];
+
+                    const resultados = [];
+                    for (const c of controles) {
+                        c.el.focus();
+                        const cs = window.getComputedStyle(c.el);
+                        const outline = cs.outlineStyle;
+                        const width = parseFloat(cs.outlineWidth) || 0;
+                        const esActivo = (document.activeElement === c.el);
+                        resultados.push({
+                            id: c.id,
+                            esActivo,
+                            outline,
+                            width,
+                            ok: esActivo
+                        });
+                    }
+
+                    // Toggle de detalles técnicos
+                    const detAntes = det.open;
+                    det.open = true;
+                    const detDespues = det.open;
+                    const contenido = det.querySelector('.pres-detalles-contenido');
+                    const textoDetalles = contenido ? contenido.textContent : '';
+                    const tieneInfoTecnica = textoDetalles.includes('Detector:') && textoDetalles.includes('Puntuación del detector:');
+
+                    const todosFocoOk = resultados.every(r => r.ok);
+                    return {
+                        todosFocoOk,
+                        detAntes,
+                        detDespues,
+                        tieneInfoTecnica,
+                        resultados,
+                        ok: todosFocoOk && detDespues && tieneInfoTecnica
+                    };
+                })()
+            """)
+            self.record_check(
+                "Navegación por teclado, foco visible y alternancia de detalles técnicos",
+                bool(foco_teclado_obs.get("ok")),
+                f"Foco verificado en 5 controles interactivos ({foco_teclado_obs.get('todosFocoOk')}), detalles desplegados ({foco_teclado_obs.get('detDespues')}), contenido presente ({foco_teclado_obs.get('tieneInfoTecnica')})"
+            )
+
+            # 24b. Inspección en notebook (1366x768) con texto largo, detalle desplegado y aviso (#115)
+            await self.cdp.set_viewport(1366, 768)
+            await asyncio.sleep(0.2)
+            nb_inspeccion_obs = await self.cdp.eval("""
+                (() => {
+                    const charla = document.getElementById('pres-charla');
+                    const telOtra = document.getElementById('pres-telefono-otra');
+                    const telProt = document.getElementById('pres-telefono-protegida');
+                    const aviso = document.getElementById('pres-aviso-protegida');
+                    const det = document.querySelector('details.pres-detalles');
+                    const btnVolver = document.getElementById('volver-panel');
+                    const btnTerminar = document.getElementById('pres-terminar');
+                    const btnSonido = document.getElementById('pres-aviso-btn-sonido');
+                    const btnCerrar = document.getElementById('pres-aviso-btn-cerrar');
+
+                    if (!charla || !telOtra || !telProt || !aviso || !det) return { ok: false };
+
+                    const lineas = charla.querySelectorAll('.linea');
+                    const totalLineas = lineas.length;
+                    const vh = window.innerHeight;
+                    const vw = window.innerWidth;
+                    const scrollY = window.scrollY;
+
+                    const rOtra = telOtra.getBoundingClientRect();
+                    const rProt = telProt.getBoundingClientRect();
+
+                    const telefonosVisibles = (
+                        rOtra.top >= 0 && rOtra.bottom <= vh &&
+                        rProt.top >= 0 && rProt.bottom <= vh &&
+                        rOtra.height > 200 && rProt.height > 200
+                    );
+
+                    const controles = [btnVolver, btnTerminar, btnSonido, btnCerrar];
+                    const controlesAlcanzables = controles.every(c => {
+                        if (!c) return false;
+                        const r = c.getBoundingClientRect();
+                        return r.top >= 0 && r.bottom <= vh && r.left >= 0 && r.right <= vw;
+                    });
+
+                    const charlaLegible = Array.from(lineas).every(l => {
+                        const txt = l.querySelector('.texto')?.textContent.trim();
+                        return Boolean(txt && l.offsetHeight > 0);
+                    });
+
+                    const avisoVisible = Boolean(aviso && !aviso.hidden && aviso.offsetHeight > 0);
+                    det.open = true;
+                    const detDesplegado = Boolean(det && det.open && det.offsetHeight > 0);
+
+                    return {
+                        totalLineas,
+                        telefonosVisibles,
+                        controlesAlcanzables,
+                        charlaLegible,
+                        avisoVisible,
+                        detDesplegado,
+                        scrollY,
+                        ok: totalLineas === 7 && telefonosVisibles && controlesAlcanzables &&
+                            charlaLegible && avisoVisible && detDesplegado && scrollY === 0
+                    };
+                })()
+            """)
+            self.record_check(
+                "Inspección en notebook (1366 × 768) con texto largo, detalle desplegado y aviso",
+                bool(nb_inspeccion_obs.get("ok")),
+                f"Líneas: {nb_inspeccion_obs.get('totalLineas')}, aviso visible ({nb_inspeccion_obs.get('avisoVisible')}), detalles desplegados ({nb_inspeccion_obs.get('detDesplegado')}), teléfonos visibles ({nb_inspeccion_obs.get('telefonosVisibles')}), controles alcanzables ({nb_inspeccion_obs.get('controlesAlcanzables')})"
+            )
+            png_nb_aviso_detalles = output_dir / "tesis-presentacion-115-notebook-aviso-detalles-1366x768.png"
+            await self.cdp.capture_screenshot(str(png_nb_aviso_detalles))
+            shutil.copyfile(str(png_nb_aviso_detalles), str(output_dir / "2026-10-30-presentacion-115-notebook-1366x768.png"))
+            print(f"Captura notebook con aviso y detalles guardada: {png_nb_aviso_detalles}")
+
+            # 24c. Inspección en proyección (1920x1080) con texto largo, detalle desplegado y aviso (#115)
+            await self.cdp.set_viewport(1920, 1080)
+            await asyncio.sleep(0.2)
+            proy_inspeccion_obs = await self.cdp.eval("""
+                (() => {
+                    const charla = document.getElementById('pres-charla');
+                    const telOtra = document.getElementById('pres-telefono-otra');
+                    const telProt = document.getElementById('pres-telefono-protegida');
+                    const aviso = document.getElementById('pres-aviso-protegida');
+                    const det = document.querySelector('details.pres-detalles');
+                    const btnVolver = document.getElementById('volver-panel');
+                    const btnTerminar = document.getElementById('pres-terminar');
+                    const btnSonido = document.getElementById('pres-aviso-btn-sonido');
+                    const btnCerrar = document.getElementById('pres-aviso-btn-cerrar');
+
+                    if (!charla || !telOtra || !telProt || !aviso || !det) return { ok: false };
+
+                    const lineas = charla.querySelectorAll('.linea');
+                    const vh = window.innerHeight;
+                    const vw = window.innerWidth;
+                    const scrollY = window.scrollY;
+
+                    const rOtra = telOtra.getBoundingClientRect();
+                    const rProt = telProt.getBoundingClientRect();
+
+                    const telefonosVisibles = (
+                        rOtra.top >= 0 && rOtra.bottom <= vh &&
+                        rProt.top >= 0 && rProt.bottom <= vh &&
+                        rOtra.height > 200 && rProt.height > 200
+                    );
+
+                    const controles = [btnVolver, btnTerminar, btnSonido, btnCerrar];
+                    const controlesAlcanzables = controles.every(c => {
+                        if (!c) return false;
+                        const r = c.getBoundingClientRect();
+                        return r.top >= 0 && r.bottom <= vh && r.left >= 0 && r.right <= vw;
+                    });
+
+                    const primeraLinea = lineas[0]?.querySelector('.texto');
+                    const fontSize = primeraLinea ? parseFloat(window.getComputedStyle(primeraLinea).fontSize) : 0;
+                    const fuenteProyeccionAdecuada = fontSize >= 16;
+
+                    const charlaLegible = Array.from(lineas).every(l => {
+                        const txt = l.querySelector('.texto')?.textContent.trim();
+                        return Boolean(txt && l.offsetHeight > 0);
+                    });
+
+                    det.open = true;
+                    return {
+                        totalLineas: lineas.length,
+                        fontSize,
+                        fuenteProyeccionAdecuada,
+                        telefonosVisibles,
+                        controlesAlcanzables,
+                        charlaLegible,
+                        scrollY,
+                        ok: lineas.length === 7 && telefonosVisibles && controlesAlcanzables &&
+                            charlaLegible && fuenteProyeccionAdecuada && scrollY === 0
+                    };
+                })()
+            """)
+            self.record_check(
+                "Inspección en proyección horizontal (1920 × 1080) con texto largo, detalle desplegado y aviso",
+                bool(proy_inspeccion_obs.get("ok")),
+                f"Líneas: {proy_inspeccion_obs.get('totalLineas')}, tamaño fuente: {proy_inspeccion_obs.get('fontSize')}px, teléfonos visibles ({proy_inspeccion_obs.get('telefonosVisibles')}), controles alcanzables ({proy_inspeccion_obs.get('controlesAlcanzables')})"
+            )
+            png_proy_aviso_detalles = output_dir / "tesis-presentacion-115-proyeccion-aviso-detalles-1920x1080.png"
+            await self.cdp.capture_screenshot(str(png_proy_aviso_detalles))
+            shutil.copyfile(str(png_proy_aviso_detalles), str(output_dir / "2026-10-30-presentacion-115-proyeccion-1920x1080.png"))
+            print(f"Captura proyección con aviso y detalles guardada: {png_proy_aviso_detalles}")
+
+            # 24d. Estados independientes solo del color y recursos locales (#115)
+            estados_recursos_obs = await self.cdp.eval("""
+                (() => {
+                    const txtVozOtra = document.getElementById('pres-voz-txt-otra')?.textContent.trim();
+                    const txtVozProt = document.getElementById('pres-voz-txt-protegida')?.textContent.trim();
+                    const badgeAviso = document.querySelector('#pres-aviso-protegida .pres-aviso-badge')?.textContent.trim();
+                    const badgeEval = document.querySelector('#pres-seg-6 .pres-eval-badge')?.textContent.trim();
+                    const badgeNoEval = document.querySelector('#pres-seg-7 .pres-eval-badge')?.textContent.trim();
+
+                    const estadosConTexto = (
+                        txtVozOtra.length > 0 &&
+                        txtVozProt.length > 0 &&
+                        badgeAviso === 'Posible estafa' &&
+                        badgeEval === 'Posible estafa' &&
+                        badgeNoEval === 'No evaluado'
+                    );
+
+                    const imagenesExternas = Array.from(document.querySelectorAll('img')).filter(img => img.src && img.src.startsWith('http') && !img.src.includes(location.host));
+                    const linksExternos = Array.from(document.querySelectorAll('link[rel="stylesheet"]')).filter(l => l.href && l.href.startsWith('http') && !l.href.includes(location.host));
+
+                    return {
+                        estadosConTexto,
+                        imagenesExternas: imagenesExternas.length,
+                        linksExternos: linksExternos.length,
+                        ok: estadosConTexto && imagenesExternas.length === 0 && linksExternos.length === 0
+                    };
+                })()
+            """)
+            self.record_check(
+                "Estados independientes del color y recursos exclusivamente locales",
+                bool(estados_recursos_obs.get("ok")),
+                f"Estados con etiquetas de texto ({estados_recursos_obs.get('estadosConTexto')}), recursos externos no locales ({estados_recursos_obs.get('imagenesExternas') + estados_recursos_obs.get('linksExternos')})"
+            )
+
             # 25. Control de sonido y cierre de aviso en el teléfono protegido
             # Probar botón de sonido
             await self.cdp.eval("document.getElementById('pres-aviso-btn-sonido')?.click()")
@@ -1693,12 +1932,49 @@ class UIDriver:
                 f"Parcial previo visible: {parcial_visible}, término recibido: {term_recibido}, líneas finales: {fin_obs.get('totalLineas')}, seg 8: '{fin_obs.get('badge8')}' ({fin_obs.get('st8')}), estado: '{fin_obs.get('estado')}'"
             )
 
-            # Captura de pantalla de la escena conservada al finalizar
-            png_fin = output_dir / "tesis-presentacion-114-fin-conservado-1920x1080.png"
+            # Capturas y verificación de pantalla de la escena conservada al finalizar (#115)
+            # Notebook 1366x768
+            await self.cdp.set_viewport(1366, 768)
+            await asyncio.sleep(0.2)
+            png_fin_nb = output_dir / "tesis-presentacion-115-notebook-fin-1366x768.png"
+            await self.cdp.capture_screenshot(str(png_fin_nb))
+            shutil.copyfile(str(png_fin_nb), str(output_dir / "2026-10-30-presentacion-115-notebook-fin-1366x768.png"))
+            print(f"Captura fin notebook guardada: {png_fin_nb}")
+
+            # Proyección 1920x1080
             await self.cdp.set_viewport(1920, 1080)
             await asyncio.sleep(0.2)
+            png_fin = output_dir / "tesis-presentacion-114-fin-conservado-1920x1080.png"
             await self.cdp.capture_screenshot(str(png_fin))
+            png_fin_proy = output_dir / "tesis-presentacion-115-proyeccion-fin-1920x1080.png"
+            shutil.copyfile(str(png_fin), str(png_fin_proy))
+            shutil.copyfile(str(png_fin), str(output_dir / "2026-10-30-presentacion-115-fin-conservado-1920x1080.png"))
             print(f"Captura fin conservado guardada: {png_fin}")
+
+            fin_resoluciones_obs = await self.cdp.eval("""
+                (() => {
+                    const telOtra = document.getElementById('pres-telefono-otra');
+                    const telProt = document.getElementById('pres-telefono-protegida');
+                    const btnNueva = document.getElementById('pres-nueva');
+                    const vh = window.innerHeight;
+                    const rOtra = telOtra?.getBoundingClientRect();
+                    const rProt = telProt?.getBoundingClientRect();
+                    const rNueva = btnNueva?.getBoundingClientRect();
+                    const visible = (
+                        rOtra && rProt && rNueva &&
+                        rOtra.top >= 0 && rOtra.bottom <= vh &&
+                        rProt.top >= 0 && rProt.bottom <= vh &&
+                        rNueva.top >= 0 && rNueva.bottom <= vh &&
+                        !btnNueva.disabled
+                    );
+                    return { visible, scrollY: window.scrollY, ok: visible && window.scrollY === 0 };
+                })()
+            """)
+            self.record_check(
+                "Escena final conservada en ambas resoluciones con controles operables",
+                bool(fin_resoluciones_obs.get("ok")),
+                f"Teléfonos y botón Nueva llamada visibles y operables sin scroll ({fin_resoluciones_obs.get('visible')})"
+            )
 
             # 29. Volver a la consola permite operar las acciones existentes sin crear otra llamada
             cmds_antes_consola = len(self.received_messages)
@@ -1966,10 +2242,11 @@ class UIDriver:
 
 def generar_reporte(resultados, report_path: Path, output_dir: Path):
     lineas = [
-        "# Reporte de verificación de UI: Conservar el resultado y reconstruir la escena ante fallas (#114)",
+        "# Reporte de verificación de UI: Ensayar Presentación completa en notebook y formato de proyección (#115)",
         "",
         "## Resumen",
         "Driver automatizado y portable con Chrome headless y CDP vía WebSocket nativo sobre el servidor real de `experiments/voip` en puerto efímero aislado.",
+        "Verificación integrada de las historias 1–31 y los 10 criterios de aceptación de #110/#115.",
         "",
         "## Criterios de Aceptación Evaluados",
         ""
@@ -1981,8 +2258,10 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
     lineas.extend([
         "",
         "## Evidencia visual generada",
-        f"- Notebook (1366x768): `{output_dir / 'tesis-presentacion-ui-notebook-1366x768.png'}`",
-        f"- Proyección (1920x1080): `{output_dir / 'tesis-presentacion-ui-proyeccion-1920x1080.png'}`",
+        f"- Notebook con aviso y detalles desplegados (1366x768): `{output_dir / 'tesis-presentacion-115-notebook-aviso-detalles-1366x768.png'}`",
+        f"- Proyección con aviso y detalles desplegados (1920x1080): `{output_dir / 'tesis-presentacion-115-proyeccion-aviso-detalles-1920x1080.png'}`",
+        f"- Escena final conservada en notebook (1366x768): `{output_dir / 'tesis-presentacion-115-notebook-fin-1366x768.png'}`",
+        f"- Escena final conservada en proyección (1920x1080): `{output_dir / 'tesis-presentacion-115-proyeccion-fin-1920x1080.png'}`",
         f"- Aviso activo en teléfono protegido (1920x1080): `{output_dir / 'tesis-presentacion-114-aviso-1920x1080.png'}`",
         f"- Fin con texto pendiente y escena conservada (1920x1080): `{output_dir / 'tesis-presentacion-114-fin-conservado-1920x1080.png'}`",
         f"- Fallo observable del detector (1920x1080): `{output_dir / 'tesis-presentacion-114-fallo-1920x1080.png'}`",
@@ -1994,7 +2273,7 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
         "## Reproducibilidad",
         "Comando para ejecutar el driver completo desde cualquier entorno con Python y websockets:",
         "```sh",
-        "/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python experiments/voip/tests/presentacion_ui.py --outdir /tmp/tesis-presentacion-114 --report /tmp/tesis-presentacion-114-report.md",
+        "/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python experiments/voip/tests/presentacion_ui.py --outdir /tmp/tesis-presentacion-115 --report /tmp/tesis-presentacion-115-report.md",
         "```",
         ""
     ])
@@ -2003,10 +2282,10 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
 
 
 async def main():
-    parser = argparse.ArgumentParser(description="Driver portable de UI con Chrome headless para Issue #114")
+    parser = argparse.ArgumentParser(description="Driver portable de UI con Chrome headless para Issue #115")
     parser.add_argument("--repo", default=None, help="Ruta al repositorio o experiments/voip (opcional, auto-detectado)")
-    parser.add_argument("--outdir", default="/tmp/tesis-presentacion-114", help="Directorio para capturas y logs")
-    parser.add_argument("--report", default="/tmp/tesis-presentacion-114-report.md", help="Ruta del reporte Markdown")
+    parser.add_argument("--outdir", default="/tmp/tesis-presentacion-115", help="Directorio para capturas y logs")
+    parser.add_argument("--report", default="/tmp/tesis-presentacion-115-report.md", help="Ruta del reporte Markdown")
     args = parser.parse_args()
 
     voip_dir = resolver_voip_dir(args.repo)

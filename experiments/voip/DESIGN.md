@@ -129,10 +129,16 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
 
 - **Estructura vertical con desplazamiento de página**: La conversación crece hacia abajo y la página entera se desplaza. Por debajo de 900px la columna técnica pasa abajo. Al borrador se lo lee en la tarjeta de cada persona; a la conversación entra solo la frase cerrada, con su renglón de evaluación ya reservado.
 - **Barra superior compacta**: Encabezado con título, estado de conexión, conmutador de modos («Llamada en vivo» / «Probar el ASR»), botones de ciclo de vida (Iniciar, Terminar, Nueva) y panel plegable de configuración de fuentes de audio.
-- **Área principal de presentación (Grid de 2 tercios y 1 tercio lateral)**:
+- **Área principal de presentación (Grid de 2 tercios y 1 tercio lateral en consola)**:
   - **Fila superior de tarjetas de voz**: Dos tarjetas simétricas («Otra persona» a la izquierda, «Persona protegida» a la derecha) con medidor RMS visible y caja de transcripción viva.
   - **Columna de conversación (izquierda / centro, 65-70% ancho)**: Diálogo en dos bandas alineadas con las tarjetas superiores, con las evaluaciones del detector incrustadas bajo la frase que las disparó.
   - **Columna técnica (derecha, 30-35% ancho)**: Panel lateral que contiene el detector fijo en uso, la línea gráfica de riesgo en el tiempo (SVG) y la tabla de métricas y latencias.
+- **Vista de presentación (Grid de dos teléfonos iPhone y diálogo central)**:
+  - Siluetas laterales de iPhone (276px de ancho, 310px en proyección ≥ 1700px, 232px en pantallas estrechas) con avatares ilustrados estilo emoji, medidores RMS por canal y ondas reactivas.
+  - Columna central (`minmax(0, 1fr)`) con scroll interno, seguimiento automático en vivo, botón «Volver al vivo» al pausar la revisión y cajas de evaluación con detalles desplegables.
+  - Tarjeta de aviso de posible estafa en el iPhone protegido con motivo, evidencia resaltada en el diálogo y control de sonido.
+  - Ajuste responsivo vertical (`@media (max-height: 820px)`): marco, avatar y separaciones compactadas para garantizar que los teléfonos permanezcan visibles dentro del viewport en notebooks (1366 × 768) sin scroll de ventana.
+  - Accesibilidad de foco: contorno visible de 2px en azul primario (`--primary`, `#1d4ed8`) con offset de 2px para todos los controles interactivos.
 
 ## Elevation & Depth
 

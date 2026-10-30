@@ -640,6 +640,47 @@ const ESTILOS_PRESENTACION = `
       max-width: 92%;
     }
   }
+  @media (max-height: 820px) {
+    #presentacion .pres-iphone-marco {
+      padding: 6px;
+      border-radius: 26px;
+    }
+    #presentacion .pres-iphone-pantalla {
+      min-height: 0;
+      padding: 0.45rem 0.65rem 0.45rem;
+      gap: 0.35rem;
+      border-radius: 20px;
+    }
+    #presentacion .pres-avatar-circulo {
+      width: 76px;
+      height: 76px;
+    }
+    #presentacion .pres-perfil-area {
+      padding: 0.15rem 0;
+    }
+    #presentacion .pres-avatar-anillo {
+      padding: 4px;
+    }
+    #presentacion .pres-actividad-caja {
+      padding: 0.35rem 0.5rem;
+      gap: 0.25rem;
+    }
+    #presentacion .pres-ondas {
+      height: 18px;
+    }
+    #presentacion .pres-onda-barra {
+      height: 16px;
+    }
+    #presentacion .pres-controles-decorativos {
+      padding-top: 0;
+      gap: 0.35rem;
+    }
+    #presentacion .pres-aviso-tarjeta {
+      padding: 0.35rem 0.55rem;
+      gap: 0.25rem;
+      margin: 0.1rem 0;
+    }
+  }
   @media (max-width: 820px) {
     #presentacion .pres-escena {
       grid-template-columns: 1fr 1fr;
