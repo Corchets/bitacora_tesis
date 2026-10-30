@@ -1,0 +1,11 @@
+# Reranker zero-shot (reranker.py) en CPU. Aparte de requirements de Tito y del informe #101.
+# En Windows, `pip install -r requirements-reranker.txt` trae la versión CPU de torch.
+# En Linux, para no bajar CUDA: pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1
+# Qwen3-Reranker necesita transformers >= 4.51.0.
+transformers==4.51.3
+# Tokenizadores de mDeBERTa (SentencePiece) y bge-reranker-v2-m3 (XLM-R).
+sentencepiece==0.2.0
+protobuf==5.29.3
+# Memoria del proceso (RSS y pico) también en Windows.
+psutil==6.1.1

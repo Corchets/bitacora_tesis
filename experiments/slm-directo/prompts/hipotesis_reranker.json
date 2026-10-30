@@ -1,0 +1,62 @@
+{
+  "estado": "propuesta sin discutir: depende de la taxonomía candidata 6+6 (D07, docs/corpus/MANUAL-ANOTACION.md §5). Versión 1, 2026-10-30, escrita antes de correr ningún modelo.",
+  "criterios": [
+    "Cada etiqueta sale de la columna «Qué la dispara» del manual; no se copian frases de los casos de prueba.",
+    "No se asumen roles: las letras A/B no indican quién llamó, así que se habla de «una de las personas» y «la otra».",
+    "Dos paráfrasis por etiqueta; el puntaje de la etiqueta es su promedio. La alerta usa solo los pedidos.",
+    "Las maniobras solo se usan con --reranker-etiquetas todas (rol filtro); nunca disparan la alerta."
+  ],
+  "instruccion_qwen3": "Given a short window of a phone call transcript in Argentine Spanish, judge whether, in this call, one person is doing to the other what the Query describes. Mentioning, explaining, warning against, refusing or retelling it does not count.",
+  "pedidos": {
+    "REQUEST_AUTH_CODE": [
+      "Una de las personas le pide a la otra que le diga, le lea o le reenvíe un código que le llegó por mensaje, por WhatsApp o en un token.",
+      "Alguien le solicita a la otra persona el código de verificación de un solo uso que recibió."
+    ],
+    "REQUEST_SECRET": [
+      "Una de las personas le pide a la otra que le diga su clave, su PIN, su contraseña o su usuario.",
+      "Alguien le solicita a la otra persona una credencial secreta, como la clave del banco o el código de seguridad de la tarjeta."
+    ],
+    "REQUEST_PERSONAL_DATA": [
+      "Una de las personas le pide a la otra sus datos personales, como el DNI, el CUIL, la fecha de nacimiento o el domicilio.",
+      "Alguien le solicita a la otra persona una foto de su documento o datos que la identifican."
+    ],
+    "REQUEST_TRANSFER": [
+      "Una de las personas le pide a la otra que transfiera, deposite, pague o entregue dinero.",
+      "Alguien le indica a la otra persona que haga un movimiento de dinero, como una transferencia, un pago o una operación en el cajero."
+    ],
+    "REQUEST_REMOTE_ACCESS": [
+      "Una de las personas le pide a la otra que instale un programa de acceso remoto o que comparta la pantalla.",
+      "Alguien le indica a la otra persona que deje que otro vea o maneje su celular o su computadora."
+    ],
+    "REQUEST_SECURITY_ACTION": [
+      "Una de las personas le indica a la otra que abra un enlace, cambie una clave o autorice un dispositivo siguiendo sus instrucciones.",
+      "Alguien le hace ejecutar a la otra persona una acción de seguridad en el celular, en la aplicación del banco o en el cajero."
+    ]
+  },
+  "maniobras": {
+    "AUTHORITY_CLAIM": [
+      "Una de las personas dice hablar en nombre de un banco, un organismo, un soporte técnico o un familiar.",
+      "Alguien se presenta como representante de una entidad o como una persona de confianza."
+    ],
+    "URGENCY_PRESSURE": [
+      "Una de las personas apura a la otra y le dice que tiene que actuar ya o en pocos minutos.",
+      "Alguien presiona a la otra persona con poco tiempo o con consecuencias por demorarse."
+    ],
+    "THREAT_FEAR": [
+      "Una de las personas le advierte a la otra que va a sufrir una pérdida, un bloqueo, una deuda o un problema legal.",
+      "Alguien le plantea a la otra persona un peligro o un perjuicio dirigido a ella."
+    ],
+    "ISOLATION_SECRECY": [
+      "Una de las personas le pide a la otra que no corte, que no consulte a nadie o que no verifique por otro canal.",
+      "Alguien le pide a la otra persona que mantenga la llamada en secreto o que no hable con terceros."
+    ],
+    "TRUST_BUILDING": [
+      "Una de las personas menciona datos de la otra o pasos de verificación para que le crea.",
+      "Alguien usa datos conocidos o un trámite para sostener que es quien dice ser."
+    ],
+    "PERSISTENCE_DISTRACTION": [
+      "Una de las personas insiste después de que la otra duda o se niega.",
+      "Alguien redirige las dudas de la otra persona y la mantiene ocupada para que no lo piense."
+    ]
+  }
+}

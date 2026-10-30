@@ -1,0 +1,62 @@
+# Casos para ELEGIR políticas y umbrales (rama reranker-prueba, 2026-10-30).
+# Son las particiones entrenamiento + validacion + diagnostico + regresion de
+# PARTICIONES-TITO-2026-10-29.json (sha256 210b58e7ba0aa620…): 57 casos, 19 vishing y 38 legítimas.
+# Nunca incluye comparacion_20 (= rapida-20, set de informe) ni excluido_relacion_comparacion.
+# Uso: python correr.py --lista seleccion-57 ...
+CV2-D-L-BANCO-008
+CV2-D-L-DELIVERY-002
+CV2-D-L-DELIVERY-003
+CV2-D-L-DELIVERY-004
+CV2-D-L-DELIVERY-005
+CV2-D-L-ESCUELA-002
+CV2-D-L-ESCUELA-003
+CV2-D-L-ESCUELA-004
+CV2-D-L-ESCUELA-005
+CV2-D-L-FAMILIAR-002
+CV2-D-L-FAMILIAR-003
+CV2-D-L-FAMILIAR-004
+CV2-D-L-FAMILIAR-005
+CV2-D-L-MEDICO-002
+CV2-D-L-MEDICO-003
+CV2-D-L-MEDICO-004
+CV2-D-L-MEDICO-005
+CV2-D-L-TRABAJO-001
+CV2-D-L-TRABAJO-002
+CV2-D-L-TRABAJO-004
+CV2-D-L-TRABAJO-005
+CV2-D-V-BANCO-003
+CV2-D-V-BANCO-008
+LAB-acceso-remoto
+LAB-acceso-remoto-parafrasis
+LAB-anses-beneficio
+LAB-anses-beneficio-parafrasis
+LAB-anses-canal-oficial
+LAB-arca-canal-oficial
+LAB-arca-deuda
+LAB-arca-deuda-parafrasis
+LAB-banco-app-parafrasis
+LAB-banco-codigo
+LAB-banco-codigo-parafrasis
+LAB-banco-gasto-sin-pedido
+LAB-banco-niega-el-codigo
+LAB-banco-numeros-sin-clave
+LAB-banco-revisa-app
+LAB-digitos-sin-palabra
+LAB-familiar-llama-vos
+LAB-familiar-peligro
+LAB-familiar-peligro-parafrasis
+LAB-mensajeria-no-pases-nada
+LAB-no-bajes-nada
+LAB-pantalla-sin-programa
+LAB-portero-codigo-puerta
+LAB-whatsapp-codigo
+LAB-whatsapp-codigo-parafrasis
+TR-02-codigo-del-candado
+TR-03-negacion-y-consejo
+TR-04-pedido-tras-charla-larga
+TR-05-asado-con-transferencia
+TR-06-banco-alerta-legitima
+TR-07-pedido-partido-en-dos-lineas
+TR-08-frase-cortada-candado
+TR-11-familiar-real-pide-plata
+TR-13-turno-medico-pide-dni

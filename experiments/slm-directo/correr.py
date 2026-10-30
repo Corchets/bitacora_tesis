@@ -7,6 +7,7 @@ Ejemplos:
     python correr.py --modelos qwen3.5:0.8b,qwen3.5:2b,qwen3.5:4b --prompts tarea,tarea+base --hablantes ab,sin
     python correr.py --modelos qwen3.5:2b --casos SC-WA-CODE-01-e01 --detalle
     python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32
+    python correr.py --solo-reranker --reranker MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7 --hilos 4 --seguir-tras-aviso
 
 Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     manifiesto.json      qué se corrió: modelos, prompts, casos, código, máquina
@@ -55,6 +56,15 @@ from detectores import (
     huella,
 )
 from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion
+from reranker import (
+    MODOS_ETIQUETAS,
+    DetectorReranker,
+    backend_de,
+    cargar_hipotesis,
+    crear_puntuador,
+    huella_hipotesis,
+    memoria_mb,
+)
 from tito_real import ARTEFACTO_POR_DEFECTO, cargar_artefacto, preparar_tito_real
 
 RAIZ = Path(__file__).resolve().parent
@@ -254,7 +264,7 @@ def elegir_casos(args) -> list[str]:
     if lista and (args.casos or args.grupo):
         sys.exit("--lista no se combina con --casos ni con --grupo.")
     if args.casos or lista:
-        pedidos = leer_lista(lista) if lista else _lista(args.casos)
+        pedidos = list(dict.fromkeys(c for nombre in _lista(lista) for c in leer_lista(nombre))) if lista else _lista(args.casos)
         faltan = [c for c in pedidos if c not in ids]
         if faltan:
             sys.exit(f"Casos inexistentes o fuera de {particion}: {faltan}. El test requiere --particion test_reservado y protocolo D08 congelado.")
@@ -436,7 +446,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--prompts", default="tarea", help=f"variantes separadas por coma: {', '.join(PROMPTS)}")
     p.add_argument("--hablantes", default="ab", help="ab (con A/B), sin (sin hablantes) o ab,sin")
     p.add_argument("--casos", default="", help="case_id separados por coma (por defecto, toda la partición)")
-    p.add_argument("--lista", default="", help="nombre de una lista de casos/listas/ (p. ej. rapida-20)")
+    p.add_argument("--lista", default="", help="listas de casos/listas/ separadas por coma (p. ej. seleccion-57,rapida-20)")
     p.add_argument("--particion", choices=sorted(casos.PARTICIONES), default="desarrollo", help="desarrollo por defecto; test_reservado solo para evaluación final tras D08")
     p.add_argument("--grupo", choices=sorted(casos.GRUPOS), help="solo un grupo de casos")
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
@@ -463,6 +473,15 @@ def main(argv: list[str] | None = None) -> int:
         "--umbral", type=float, default=UMBRAL_POR_DEFECTO,
         help="con --prompts riesgo: la etapa 2 (evidencia y motivo) y la alerta salen solo si riesgo > umbral",
     )
+    p.add_argument("--reranker", default="", help="modelos cross-encoder/NLI de Hugging Face separados por coma (o 'falso' para humo)")
+    p.add_argument("--reranker-backend", default="auto", help="auto (según el nombre), nli, cross-encoder, qwen3-reranker o falso")
+    p.add_argument("--reranker-revision", default="", help="revisión fija del modelo en Hugging Face (por defecto, la actual; queda registrada)")
+    p.add_argument("--reranker-etiquetas", choices=MODOS_ETIQUETAS, default="pedidos", help="pedidos (alerta) o todas (también maniobras, para el rol filtro)")
+    p.add_argument("--reranker-ventana", type=int, default=4, help="cuántas líneas recientes entran en la ventana")
+    p.add_argument("--reranker-max-tokens", type=int, default=384, help="tope de la ventana en tokens; se recorta por la izquierda")
+    p.add_argument("--reranker-umbral", type=float, default=0.5, help="solo para la alerta registrada; la política se elige después con el análisis")
+    p.add_argument("--reranker-lote", type=int, default=16, help="pares por pasada del modelo")
+    p.add_argument("--solo-reranker", action="store_true", help="correr solo el reranker (sin reglas ni Ollama)")
     p.add_argument("--etiqueta", default="", help="texto corto para el nombre de la carpeta")
     p.add_argument("--salida", type=Path, default=RAIZ / "corridas", help="dónde crear la carpeta de la corrida")
     p.add_argument("--detalle", action="store_true", help="mostrar cada línea y la respuesta (modo demo)")
@@ -480,9 +499,14 @@ def main(argv: list[str] | None = None) -> int:
         print("\n".join(errores))
         sys.exit("Hay casos con errores de formato: corregilos con `python casos.py` antes de correr.")
 
-    modelos = [] if args.solo_reglas else _lista(args.modelos)
-    if not modelos and not args.solo_reglas:
-        sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b) o usá --solo-reglas.")
+    rerankers = _lista(args.reranker)
+    if args.solo_reranker:
+        if not rerankers:
+            sys.exit("--solo-reranker necesita --reranker (p. ej. --reranker falso).")
+        args.sin_reglas = True
+    modelos = [] if (args.solo_reglas or args.solo_reranker) else _lista(args.modelos)
+    if not modelos and not args.solo_reglas and not args.solo_reranker:
+        sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b), --solo-reglas o --solo-reranker.")
     if args.filtro_tito and "riesgo" in _lista(args.prompts):
         sys.exit("--filtro-tito no admite --prompts riesgo: el flujo Tito→SLM usa el prompt de un paso.")
     if args.tito_real and not args.filtro_tito:
@@ -548,6 +572,20 @@ def main(argv: list[str] | None = None) -> int:
                     f = FlujoTitoSLM(tito, d, args.tito_umbral)
                     etiqueta_f = {"config": f"tito-slm|{modelo}|{variante}|{h}", "detector": "tito-slm", "modelo": modelo, "prompt": variante, "hablantes": h}
                     detectores.append((etiqueta_f, f))
+    hipotesis, datos_hipotesis = cargar_hipotesis(args.reranker_etiquetas) if rerankers else ({}, {})
+    for modelo_rr in rerankers:
+        try:
+            backend = backend_de(modelo_rr, args.reranker_backend)
+        except ValueError as e:
+            sys.exit(str(e))
+        puntuador = crear_puntuador(
+            modelo_rr, backend, revision=args.reranker_revision or None, hilos=args.hilos, lote=args.reranker_lote,
+            max_longitud=args.reranker_max_tokens + 128, instruccion=datos_hipotesis.get("instruccion_qwen3", ""),
+        )
+        d = DetectorReranker(puntuador, hipotesis, args.reranker_ventana, args.reranker_max_tokens, args.reranker_umbral)
+        etiqueta = {"config": f"reranker|{modelo_rr}|{args.reranker_etiquetas}|v{args.reranker_ventana}",
+                    "detector": "reranker", "modelo": modelo_rr, "prompt": args.reranker_etiquetas, "hablantes": "ab"}
+        detectores.append((etiqueta, d))
     if not detectores:
         sys.exit("No quedó ningún detector para correr.")
 
@@ -598,6 +636,17 @@ def main(argv: list[str] | None = None) -> int:
             **({"umbral_etapa2": args.umbral} if "riesgo" in prompts else {}),
         },
         "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},
+        "reranker": None if not rerankers else {
+            "ventana_lineas": args.reranker_ventana,
+            "max_tokens": args.reranker_max_tokens,
+            "etiquetas": args.reranker_etiquetas,
+            "umbral_registro": args.reranker_umbral,
+            "lote": args.reranker_lote,
+            "hilos": args.hilos,
+            "hipotesis": {"huella": huella_hipotesis(hipotesis), "texto": hipotesis,
+                          "instruccion_qwen3": datos_hipotesis.get("instruccion_qwen3", "")},
+            "modelos": {},
+        },
         "configs": [c for c, _ in detectores],
         "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
         "modelos": {},
@@ -621,7 +670,13 @@ def main(argv: list[str] | None = None) -> int:
             escritor.writeheader()
             modelo_actual = None
             for config, detector in detectores:
-                if config["modelo"] and config["modelo"] != modelo_actual:
+                if config["detector"] == "reranker":
+                    print(f"Cargando {config['modelo']}...", end=" ", flush=True)
+                    preparado = detector.preparar()
+                    manifiesto["reranker"]["modelos"][config["modelo"]] = {**preparado, "memoria_tras_cargar": memoria_mb()}
+                    guardar_manifiesto()
+                    print(f"listo ({preparado['carga_ms'] / 1000:.1f} s).")
+                elif config["modelo"] and config["modelo"] != modelo_actual:
                     modelo_actual = config["modelo"]
                     print(f"Cargando {modelo_actual}...", end=" ", flush=True)
                     try:
@@ -652,6 +707,10 @@ def main(argv: list[str] | None = None) -> int:
                                 estado += f"  {r.ms:.0f} ms" + (f" (etapa 2: {r.ms_etapa2:.0f} ms)" if r.ms_etapa2 is not None else "")
                             print(f"        {estado}" + (f"  >>> AVISO: {r.motivo}" if aviso else ""))
                     print(f"   {case_id:42} {' '.join(marcas)}")
+                if config["detector"] == "reranker":
+                    manifiesto["reranker"]["modelos"][config["modelo"]]["memoria_al_terminar"] = memoria_mb()
+                    guardar_manifiesto()
+                    detector.liberar()
     except KeyboardInterrupt:
         manifiesto["interrumpida"] = True
         print("\nCorrida interrumpida: lo procesado hasta acá quedó guardado.")

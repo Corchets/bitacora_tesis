@@ -5,6 +5,15 @@
 > ([D09](../../../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)) ni cierra la
 > política de alerta ([D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)).
 
+> **Aviso (2026-10-30, rama `reranker-prueba`).** `rapida-20` son exactamente las 20
+> conversaciones de `comparacion_20` de Ignacio (#101, `PARTICIONES-TITO-2026-10-29.json`), que
+> no se usan para elegir. Las políticas de abajo se eligieron mirando esas 20: valen como
+> **resultado sobre el set de informe**, no como selección. Para elegir, correr riesgo primero
+> con `--lista seleccion-57 --seguir-tras-aviso` y usar
+> [`../2026-10-30-reranker-zero-shot/analizar.py`](../2026-10-30-reranker-zero-shot/README.md).
+> Desde el merge con `laboratorio-main`, `correr.py` corta en el primer aviso salvo con
+> `--seguir-tras-aviso`, y `acumular.py` rechaza corridas cortadas.
+
 ## Pregunta
 
 Con los prompts `tarea` y `v2`, el SLM escribe en cada línea un JSON de ~40 tokens
@@ -39,8 +48,8 @@ Desde `experiments/slm-directo`:
 ```
 ollama pull gemma3n:e2b
 python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32 --sin-reglas --casos SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01 --detalle
-python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32 --sin-reglas --etiqueta win-gemma3n-e2b-riesgo-cpu
-python correr.py --modelos gemma3n:e2b --prompts v2 --solo-cpu --num-batch 32 --sin-reglas --etiqueta win-gemma3n-e2b-v2-cpu
+python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32 --sin-reglas --etiqueta win-gemma3n-e2b-riesgo-cpu --seguir-tras-aviso
+python correr.py --modelos gemma3n:e2b --prompts v2 --solo-cpu --num-batch 32 --sin-reglas --etiqueta win-gemma3n-e2b-v2-cpu --seguir-tras-aviso
 python analisis/2026-10-29-riesgo-primero/acumular.py corridas/<carpeta-riesgo> corridas/<carpeta-v2>
 ```
 
