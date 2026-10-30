@@ -263,6 +263,14 @@
   #terminar:hover:not(:disabled) {
     background: var(--alerta-fondo);
   }
+  #ver-presentacion {
+    background: var(--vos-fondo);
+    color: var(--primary);
+    border-color: var(--vos-borde);
+  }
+  #ver-presentacion:hover:not(:disabled) {
+    background: var(--superficie-alt);
+  }
   #error {
     flex-basis: 100%;
     color: var(--alerta);
@@ -1346,6 +1354,9 @@
       <select id="modelo-asr" title="Con qué modelo se transcribe. Se aplica a la próxima llamada o prueba.">
         <option value="zipformer">Zipformer Kroko · streaming</option>
         <option value="parakeet">Parakeet TDT 0.6B v3 · por frases</option>
+        <option value="parakeet-filtro">Parakeet · RMS con filtro Silero</option>
+        <option value="parakeet-y">Parakeet · RMS y Silero</option>
+        <option value="parakeet-silero">Parakeet · solo Silero</option>
       </select>
     </div>
     <span id="corte-lugar"></span>
@@ -1366,6 +1377,7 @@
           <section>
             <h3>Modelo de ASR</h3>
             <p>Zipformer escribe palabra por palabra mientras hablás. Parakeet vuelve a escuchar la frase entera cada medio segundo y muestra un borrador; al cerrar la frase la escribe de nuevo completa, y suele entender mejor.</p>
+            <p>Las tres de Parakeet con Silero están a prueba: cambian solo cómo se decide si hay voz. <em>Con filtro Silero</em>: el volumen (RMS) corta las frases como siempre, pero no transcribe lo que Silero no reconoce como voz (ruidos, respiración). <em>RMS y Silero</em>: hay voz solo si lo dicen los dos, así que corta también en tus pausas con una tele de fondo. <em>Solo Silero</em>: decide Silero con umbral 0,9 y el umbral RMS no se usa; medido con corte de 0,3 s.</p>
             <p>El modelo nuevo se carga al iniciar y tarda unos segundos la primera vez.</p>
           </section>
           <section>
@@ -1379,6 +1391,7 @@
     </div>
   </div>
   <div class="acciones">
+    <button id="ver-presentacion" type="button" hidden>Vista de presentación</button>
     <button id="nueva" disabled>Nueva llamada</button>
     <button id="terminar" disabled>Terminar</button>
     <button id="iniciar" disabled>Iniciar llamada</button>
@@ -1508,7 +1521,7 @@ import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 import {prepararFuentes} from './fuentes.mjs';
 import {crearSelectorCorte} from './corte-silencio.mjs';
-import {plantillaLinea, citaConRoles} from './conversacion.mjs';
+import {plantillaLinea, citaConRoles, montarPresentacion} from './conversacion.mjs';
 import {montarHistorial} from './historial-ui.mjs';
 
 /** @typedef {{segmento: number, n: number, canal: string, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
@@ -1542,6 +1555,8 @@ let evaluaciones = 0, salteadas = 0;
 /** @type {WebSocket|null} */
 let conexion = null;
 let enLlamada = false, terminada = false, pendiente = false;
+/** @type {any} */
+let presentacion = null;
 
 const protegidaFuente = /** @type {HTMLSelectElement} */ ($("protegida-fuente"));
 const microfono = /** @type {HTMLSelectElement} */ ($("microfono"));
@@ -1554,6 +1569,7 @@ const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
 const modeloASR = /** @type {HTMLSelectElement} */ ($("modelo-asr"));
 const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
 const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
+const verPresentacion = /** @type {HTMLButtonElement} */ ($("ver-presentacion"));
 const botonSonido = /** @type {HTMLButtonElement} */ ($("sonido-aviso"));
 const botonAvisoSonido = /** @type {HTMLButtonElement} */ ($("aviso-sonido"));
 const botonAvisoCerrar = /** @type {HTMLButtonElement} */ ($("aviso-cerrar"));
@@ -1634,6 +1650,7 @@ function fijarSonido(activo) {
   $("icono-sonido-off").hidden = activo;
   botonAvisoSonido.textContent = rotulo;
   if (!activo) detenerTonoAviso();
+  presentacion?.actualizarSonido?.(activo);
 }
 
 function tocarTonoAviso() {
@@ -1675,6 +1692,7 @@ botonAvisoCerrar.onclick = () => {
   avisoCerrado = true;
   detenerTonoAviso();
   $("aviso").classList.remove("visible");
+  presentacion?.cerrarAviso?.();
 };
 fijarSonido(sonidoActivo);
 
@@ -1685,6 +1703,7 @@ function prefiereMovimientoReducido() {
 
 /** @param {HTMLElement} el */
 function desplazarVisible(el) {
+  if (presentacion.abierta) return;
   const arriba = el.getBoundingClientRect().top;
   if (arriba < 0 || arriba > window.innerHeight + 120) return;
   el.scrollIntoView({ block: "nearest", behavior: prefiereMovimientoReducido() ? "instant" : "smooth" });
@@ -1749,6 +1768,7 @@ function fallarCaptura(mensaje) {
   if (llamadaPendiente && conexion?.readyState === WebSocket.OPEN) enviar({tipo: "terminar"});
   else { pendiente = false; actualizarControles(); }
   $("error").textContent = mensaje;
+  presentacion.error(mensaje);
 }
 
 async function listarMicrofonos() {
@@ -1858,6 +1878,19 @@ const historialUI = montarHistorial({
 /** @type {string|null} */
 let estadoPrevioAlHistorial = null;
 
+presentacion = montarPresentacion({
+  terminar: () => terminar.click(),
+  nueva: () => nueva.click(),
+  cambiar: () => actualizarControles(),
+  alVolverAlPanel: () => verPresentacion.focus(),
+  detenerTono: () => detenerTonoAviso(),
+  fijarSonido: (activo) => fijarSonido(activo),
+  cerrarAviso: () => botonAvisoCerrar.click(),
+  obtenerSonido: () => sonidoActivo,
+  obtenerAvisoCerrado: () => avisoCerrado
+});
+verPresentacion.onclick = () => presentacion.abrir();
+
 // Conmutador visual de pestañas Llamada / Probar el ASR / Historial
 const tabLlamada = /** @type {HTMLButtonElement} */ ($("tab-modo-llamada"));
 const tabASR = /** @type {HTMLButtonElement} */ ($("tab-modo-asr"));
@@ -1866,6 +1899,7 @@ const asrModoCheck = /** @type {HTMLInputElement|null} */ (document.getElementBy
 
 function sincronizarModoVisual() {
   const activa = pruebaASR.activa, historial = historialUI.abierto;
+  if ((activa || historial) && presentacion.abierta) presentacion.cerrar();
   for (const [tab, activo] of /** @type {const} */ ([[tabLlamada, !activa && !historial], [tabASR, activa], [tabHistorial, historial]])) {
     tab.classList.toggle("activo", activo);
     tab.setAttribute("aria-selected", String(activo));
@@ -1941,6 +1975,8 @@ function actualizarControles() {
   iniciar.disabled = !conectada || enLlamada || terminada || pendiente;
   terminar.disabled = !conectada || !enLlamada || pendiente;
   nueva.disabled = !conectada || enLlamada || pendiente || !terminada;
+  verPresentacion.hidden = pruebaASR.activa || !presentacion.tieneLlamada;
+  verPresentacion.disabled = !presentacion.tieneLlamada;
   fuente.disabled = enLlamada || pendiente;
   corteLlamada.deshabilitado = enLlamada || pendiente;
   modeloASR.disabled = enLlamada || pendiente;
@@ -1960,6 +1996,7 @@ function actualizarControles() {
   tabASR.disabled = enLlamada || pendiente;
   tabHistorial.disabled = enLlamada || pendiente;
   pruebaASR.controles(!!conectada, pendiente, enLlamada);
+  presentacion.controles(!!conectada, pendiente, enLlamada, terminada);
   sincronizarModoVisual();
 }
 
@@ -1967,6 +2004,7 @@ function actualizarControles() {
 function enviar(mensaje) {
   if (conexion?.readyState !== WebSocket.OPEN) return;
   $("error").textContent = "";
+  presentacion.error("");
   pendiente = true;
   actualizarControles();
   conexion.send(JSON.stringify(mensaje));
@@ -2001,7 +2039,9 @@ async function iniciarSesion() {
     } catch (error) {
       if (token !== intento) return;
       liberarMicrofono();
-      $("error").textContent = fuenteRemota && error instanceof Error ? error.message : mensajeErrorMicrofono(error);
+      const msg = fuenteRemota && error instanceof Error ? error.message : mensajeErrorMicrofono(error);
+      $("error").textContent = msg;
+      presentacion?.error?.(msg);
       pendiente = false;
       actualizarControles();
       return;
@@ -2091,10 +2131,25 @@ function resaltarFraseCulpable(evidencia, burbujaEvaluada) {
   textoEl.innerHTML = `<mark class="cita-culpable">${escapar(original)}</mark>`;
 }
 
+let llamadaIdActual = "";
+let tonoReproducidoParaLlamada = false;
+
 /** @param {string} id */
 function reiniciar(id) {
   detenerTonoAviso();
   limpiarNiveles();
+  const esMismaLlamada = Boolean(id && id === llamadaIdActual);
+  if (!id) {
+    llamadaIdActual = "";
+    tonoReproducidoParaLlamada = false;
+    avisoCerrado = false;
+    presentacion.reiniciar("");
+  } else if (!esMismaLlamada) {
+    llamadaIdActual = id;
+    tonoReproducidoParaLlamada = false;
+    avisoCerrado = false;
+  }
+  // Si es la misma llamada (reconexión), conservamos avisoCerrado y tonoReproducidoParaLlamada
   $("charla").innerHTML = "";
   burbujas.clear();
   rolesPorLetra.clear();
@@ -2106,7 +2161,6 @@ function reiniciar(id) {
   puntosRiesgo = [];
   relojLlamada = 0;
   tiempoAviso = null;
-  avisoCerrado = false;
   document.body.classList.remove("alerta-emitida");
   $("aviso").classList.remove("visible");
   nombreOtra.textContent = "Otra persona";
@@ -2138,9 +2192,11 @@ function asr(m) {
   b.className = `linea ${m.rol} ${m.entrega}${eraDisparo ? " disparo-aviso" : ""}`;
   const texto = /** @type {HTMLElement} */ (b.querySelector(".texto"));
   texto.textContent = m.texto;
-  const retraso = m.disponible_s - m.fin_audio_s;
+  const finAudio = typeof m.fin_audio_s === "number" ? m.fin_audio_s : null;
+  const disponible = typeof m.disponible_s === "number" ? m.disponible_s : finAudio;
+  const retraso = (disponible != null && finAudio != null) ? disponible - finAudio : 0;
   const tiempo = /** @type {HTMLElement} */ (b.querySelector(".t"));
-  tiempo.textContent = `${m.fin_audio_s.toFixed(1)} s · +${(retraso * 1000).toFixed(0)} ms`;
+  tiempo.textContent = finAudio != null ? `${finAudio.toFixed(1)} s · +${(retraso * 1000).toFixed(0)} ms` : "";
 
   // Actualizar tarjeta de persona correspondiente (lo que está diciendo ahora)
   const rol = m.rol === "otra" ? "otra" : "protegida";
@@ -2214,7 +2270,10 @@ function detector(m) {
     $("m-aviso").textContent = seg(tras);
     nombreOtra.textContent = "Otra persona · posible estafa";
     tarjetaOtra.classList.add("alerta-activa");
-    tocarTonoAviso();
+    if (!tonoReproducidoParaLlamada) {
+      tonoReproducidoParaLlamada = true;
+      tocarTonoAviso();
+    }
   }
 
   // Pegar evaluación a la frase que la disparó
@@ -2421,6 +2480,7 @@ function actualizarDetectorVisual(detector) {
   $("detector-sub").textContent = esSlm
     ? "Evaluación con modelo de lenguaje local"
     : "Heurística de códigos de verificación y urgencia";
+  presentacion?.fijarDetector?.(detector);
 }
 
 function conectar() {
@@ -2434,6 +2494,7 @@ function conectar() {
   ws.onclose = () => {
     liberarMicrofono();
     pruebaASR.evento({tipo: "desconexion"});
+    presentacion.evento({tipo: "desconexion"});
     pendiente = false;
     limpiarNiveles();
     $("estado").textContent = "sin conexión, reintentando…";
@@ -2452,12 +2513,13 @@ function conectar() {
       if (m.asr) modeloASR.value = m.asr;
       enLlamada = true; terminada = false; pendiente = false;
       if (inicioPropio) { inicioPropio = false; void emisor?.iniciar(); }
+      presentacion.evento(m);
       actualizarControles();
     }
     else if (m.tipo === "prueba_guardada") $("estado").textContent = `prueba guardada en ${m.dir}`;
-    else if (m.tipo === "niveles") niveles(m);
-    else if (m.tipo === "asr") asr(m);
-    else if (m.tipo === "detector") detector(m);
+    else if (m.tipo === "niveles") { niveles(m); presentacion.evento(m); }
+    else if (m.tipo === "asr") { asr(m); presentacion.evento(m); }
+    else if (m.tipo === "detector") { detector(m); presentacion.evento(m); }
     else if (m.tipo === "fin") {
       cerrarEsperas("Sin evaluación: la llamada terminó antes");
       liberarMicrofono();
@@ -2466,11 +2528,13 @@ function conectar() {
         ? "prueba terminada · sin guardar (se descarta al empezar otra)"
         : `llamada terminada · guardada en ${m.dir}`;
       enLlamada = false; terminada = true; pendiente = false;
+      presentacion.evento(m);
       actualizarControles();
     } else if (m.tipo === "error") {
       if (inicioPropio) liberarMicrofono();
       $("error").textContent = m.mensaje;
       pendiente = false;
+      presentacion.evento(m);
       actualizarControles();
     }
   };
