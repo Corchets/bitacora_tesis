@@ -1,0 +1,3 @@
+# Llamada en vivo (frente 1). Además de experiments/asr-local/requirements.txt (sherpa-onnx, soundfile, numpy).
+websockets>=15.0
+sounddevice>=0.5.0

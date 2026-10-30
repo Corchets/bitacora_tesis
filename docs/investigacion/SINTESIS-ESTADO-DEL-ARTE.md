@@ -382,6 +382,14 @@ Dos formulaciones que hay que cuidar en el informe:
    en la literatura revisada"*, nunca *"no existe"*. El campo se mueve rápido y una afirmación
    absoluta es indefendible frente al tribunal.
 
+### Auditoría técnica de ASR local (2026-10-29, #94)
+
+La [comparación con el código del laboratorio](../../experiments/asr-local/PLAN-VOZ-REAL.md#10-auditoría-de-vad-preaudio-y-comparación-de-modelos-2026-10-29)
+registra fuentes primarias, criterios de consulta y límites de Whisper, Parakeet, Silero y
+sherpa-onnx. Distingue VAD, corte RMS, preaudio y streaming simulado; no aporta una nueva
+medición de voz ni acredita rendimiento móvil. La selección final sigue en
+[D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+
 ## 7. Qué cambia para la evaluación
 
 A partir de la literatura analizada en [§2.4](#24-literatura-para-interpretar-la-evaluación-incremental-25), se formulan las siguientes cuatro propuestas metodológicas para interpretar y congelar el protocolo experimental en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental), sin modificar las definiciones vigentes en [`docs/evaluacion/METRICAS.md`](../evaluacion/METRICAS.md):
@@ -401,4 +409,3 @@ A partir de la literatura analizada en [§2.4](#24-literatura-para-interpretar-l
 4. **Análisis obligatorio de sensibilidad a la prevalencia y contraste con "negativos difíciles":**
    - Siguiendo a Williams ([S009, §2.4.4](#244-prevalencia-falsas-alarmas-y-precisión-en-detección-de-anomalías)) y Axelsson ([S010, §2.4.4](#244-prevalencia-falsas-alarmas-y-precisión-en-detección-de-anomalías)), un clasificador evaluado en un conjunto balanceado produce una ilusión de precisión que colapsa ante la baja prevalencia real del vishing. Asimismo, Sim & Kim ([S005, §2.4.2](#242-detección-de-vishing-y-fraude-telefónico-sobre-transcripciones-o-en-streaming)) demostraron que los clasificadores colapsan (caída de 42 pp en exactitud) ante llamadas legítimas que mencionan trámites de seguridad o bancos.
    > **Estado: propuesta sin discutir.** En [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental), prohibir la presentación del $F_1$ o precisión sobre el corpus experimental como estimación de rendimiento en producción. Reportar obligatoriamente: (a) curvas de sensibilidad de la precisión analítica $\text{precision}(p)$ para $p \in [0{,}001;\, 0{,}05]$ según la formulación de Williams, y (b) la tasa de falsas alarmas desglosada entre llamadas legítimas cotidianas neutras y negativos difíciles con vocabulario bancario/seguridad.
-

@@ -1,0 +1,80 @@
+{
+  "estado": "llamada terminada · guardada en /tmp/voip78-llamadas/2026-10-26_174027-270936",
+  "error": "",
+  "charla": "La otra persona\n4.3 s · +2 ms\nTe llamo de soporte por la activación de tu cuenta de WhatsApp\nVos\n8.7 s · +0 ms\nMe acaba de llegar un SMS, no pedí activar nada.\nLa otra persona\n13.4 s · +4 ms\nPara cancelar esa activación tenemos que resolverlo ahora\nLa otra persona\n18.4 s · +3 ms\n. decime el código de activación que recibiste por sms\nVos\n22.2 s · +169 ms\nEs cero, cero, cero, cero, cero, cero",
+  "dispositivos": [
+    {
+      "id": "",
+      "nombre": "Micrófono predeterminado"
+    },
+    {
+      "id": "default",
+      "nombre": "Fake Default Audio Input"
+    },
+    {
+      "id": "13b065856a62fcb41a5b0b67a05e1efb7f1f936cdf7ce7fcc1361bc351d66b20",
+      "nombre": "Fake Audio Input 1"
+    },
+    {
+      "id": "182949d429c0a9cf02b20d39ab5d74c6f34a48d8254580287334f8baa0f0389a",
+      "nombre": "Fake Audio Input 2"
+    }
+  ],
+  "tracks": [
+    {
+      "estado": "ended",
+      "dispositivo": "default"
+    }
+  ],
+  "errores": [],
+  "transporte": {
+    "mensajes": 554,
+    "bytes_por_mensaje": [
+      1280
+    ],
+    "intervalo_mediana_ms": 38.1
+  },
+  "casos": {
+    "NotAllowedError": {
+      "error": "No tenemos permiso para usar el micrófono. Permitilo en el navegador y en los ajustes del sistema.",
+      "habilitado": true
+    },
+    "NotFoundError": {
+      "error": "No encontramos ese micrófono. Conectalo o elegí otro dispositivo de entrada.",
+      "habilitado": true
+    },
+    "OverconstrainedError": {
+      "error": "No encontramos ese micrófono. Conectalo o elegí otro dispositivo de entrada.",
+      "habilitado": true
+    },
+    "NotReadableError": {
+      "error": "No pudimos abrir el micrófono. Revisá si otra aplicación lo está usando.",
+      "habilitado": true
+    },
+    "AbortError": {
+      "error": "No pudimos capturar el audio.",
+      "habilitado": true
+    },
+    "inseguro": "Para usar el micrófono, abrí este panel en http://localhost:8765 o http://127.0.0.1:8765 en la notebook del servidor.",
+    "desconexion_arranque": {
+      "error": "Se desconectó la entrada de audio. Conectala e iniciá una nueva llamada.",
+      "estado": "lista para otra llamada",
+      "habilitado": true,
+      "tracks": [
+        "ended"
+      ]
+    },
+    "seleccionado": {
+      "esperado": "182949d429c0a9cf02b20d39ab5d74c6f34a48d8254580287334f8baa0f0389a",
+      "real": "182949d429c0a9cf02b20d39ab5d74c6f34a48d8254580287334f8baa0f0389a",
+      "estado": "en llamada · VIVO-20261026-174058-059907"
+    },
+    "terminar": {
+      "error": "",
+      "tracks": [
+        "ended"
+      ],
+      "estado": "llamada terminada · guardada en /tmp/voip78-llamadas/2026-10-26_174058-059907"
+    }
+  }
+}

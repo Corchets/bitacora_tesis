@@ -1,0 +1,128 @@
+{
+  "llamada_id": "VIVO-20261026-153047",
+  "asr": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    }
+  },
+  "disparo": "parcial",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": "B",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.002,
+        "mediana": -0.001,
+        "p95": 0.019,
+        "max": 0.083
+      },
+      "retraso_parcial_s": {
+        "n": 5,
+        "min": 0.035,
+        "mediana": 0.058,
+        "p95": 0.067,
+        "max": 0.069
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 2,
+        "min": 0.383,
+        "mediana": 0.592,
+        "p95": 0.779,
+        "max": 0.8
+      }
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.001,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.003,
+        "mediana": -0.002,
+        "p95": 0.019,
+        "max": 0.081
+      },
+      "retraso_parcial_s": {
+        "n": 9,
+        "min": 0.04,
+        "mediana": 0.059,
+        "p95": 0.11,
+        "max": 0.121
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 3,
+        "min": 0.801,
+        "mediana": 0.801,
+        "p95": 0.838,
+        "max": 0.842
+      }
+    }
+  },
+  "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)",
+  "detector": {
+    "evaluaciones": 13,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 13,
+      "min": 0.001,
+      "mediana": 0.003,
+      "p95": 0.015,
+      "max": 0.015
+    },
+    "aviso": {
+      "n": 13,
+      "saltadas": 0,
+      "inicio_eval_s": 15.405,
+      "fin_eval_s": 15.406,
+      "ms_detector": 0.9,
+      "valida": true,
+      "error": "",
+      "riesgo": null,
+      "alerta_sugerida": true,
+      "motivo": "REQUEST_AUTH_CODE (patrón: codigo)",
+      "evidencia": ". decime el código",
+      "aviso": true,
+      "t_a": 15.406,
+      "fin_voz_s": 12.601,
+      "demora_desde_fin_de_voz_s": 2.805
+    }
+  },
+  "config": {
+    "detector": "reglas",
+    "modelo": null,
+    "prompt": null,
+    "hablantes": "ab",
+    "ollama_url": null,
+    "seed": "no-aplica",
+    "corte_silencio_s": 0.8,
+    "hilos_asr": 2,
+    "carga_slm": null
+  },
+  "codigo": {
+    "commit": "b33b1d7a5a6a8f938450f4bf92081e0b997059bc",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  }
+}
