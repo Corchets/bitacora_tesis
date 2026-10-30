@@ -1472,6 +1472,8 @@ export function montarPresentacion(acciones) {
           reiniciar('');
           return;
         }
+        const esMismaLlamada = Boolean(m.llamada_id && m.llamada_id === llamadaActual);
+        const estabaAbierta = abierta;
         reiniciar(m.llamada_id || '');
         if (m.detector) detectorActual = m.detector;
         enCurso = true;
@@ -1479,7 +1481,11 @@ export function montarPresentacion(acciones) {
         estadoPill.dataset.estado = 'en-llamada';
         estadoTxt.textContent = 'En llamada';
         dialogoSub.textContent = 'Frases finales por canal';
-        abrir();
+        if (!esMismaLlamada) {
+          abrir();
+        } else if (estabaAbierta) {
+          abrir();
+        }
         return;
       }
       if (m.tipo === 'error') {
@@ -1713,6 +1719,13 @@ export function montarPresentacion(acciones) {
         estadoPill.dataset.estado = 'finalizado';
         estadoTxt.textContent = 'Análisis finalizado';
         dialogoSub.textContent = 'Análisis finalizado · escena conservada';
+        // Si quedó algún borrador o parcial sin confirmación final al cerrar la llamada, se limpia de la charla
+        for (const [segId, linea] of frases.entries()) {
+          if (linea.dataset.entrega === 'parcial') {
+            linea.remove();
+            frases.delete(segId);
+          }
+        }
         for (const s of ordenSegmentos) {
           const inf = segmentosInfo.get(s);
           if (inf && !inf.evaluado) {
@@ -1729,7 +1742,7 @@ export function montarPresentacion(acciones) {
       }
       if (m.tipo === 'desconexion') {
         limpiarNiveles();
-        if (enCurso) {
+        if (enCurso || (!enCurso && !finalizada)) {
           estadoPill.dataset.estado = 'sin-conexion';
           estadoTxt.textContent = 'Sin conexión, reintentando…';
         }
