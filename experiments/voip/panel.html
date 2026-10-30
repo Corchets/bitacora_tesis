@@ -2035,7 +2035,9 @@ async function iniciarSesion() {
     } catch (error) {
       if (token !== intento) return;
       liberarMicrofono();
-      $("error").textContent = fuenteRemota && error instanceof Error ? error.message : mensajeErrorMicrofono(error);
+      const msg = fuenteRemota && error instanceof Error ? error.message : mensajeErrorMicrofono(error);
+      $("error").textContent = msg;
+      presentacion?.error?.(msg);
       pendiente = false;
       actualizarControles();
       return;
@@ -2125,11 +2127,25 @@ function resaltarFraseCulpable(evidencia, burbujaEvaluada) {
   textoEl.innerHTML = `<mark class="cita-culpable">${escapar(original)}</mark>`;
 }
 
+let llamadaIdActual = "";
+let tonoReproducidoParaLlamada = false;
+
 /** @param {string} id */
 function reiniciar(id) {
   detenerTonoAviso();
   limpiarNiveles();
-  if (!id) presentacion.reiniciar("");
+  const esMismaLlamada = Boolean(id && id === llamadaIdActual);
+  if (!id) {
+    llamadaIdActual = "";
+    tonoReproducidoParaLlamada = false;
+    avisoCerrado = false;
+    presentacion.reiniciar("");
+  } else if (!esMismaLlamada) {
+    llamadaIdActual = id;
+    tonoReproducidoParaLlamada = false;
+    avisoCerrado = false;
+  }
+  // Si es la misma llamada (reconexión), conservamos avisoCerrado y tonoReproducidoParaLlamada
   $("charla").innerHTML = "";
   burbujas.clear();
   rolesPorLetra.clear();
@@ -2141,7 +2157,6 @@ function reiniciar(id) {
   puntosRiesgo = [];
   relojLlamada = 0;
   tiempoAviso = null;
-  avisoCerrado = false;
   document.body.classList.remove("alerta-emitida");
   $("aviso").classList.remove("visible");
   nombreOtra.textContent = "Otra persona";
@@ -2251,7 +2266,10 @@ function detector(m) {
     $("m-aviso").textContent = seg(tras);
     nombreOtra.textContent = "Otra persona · posible estafa";
     tarjetaOtra.classList.add("alerta-activa");
-    tocarTonoAviso();
+    if (!tonoReproducidoParaLlamada) {
+      tonoReproducidoParaLlamada = true;
+      tocarTonoAviso();
+    }
   }
 
   // Pegar evaluación a la frase que la disparó

@@ -1250,10 +1250,12 @@ class UIDriver:
             )
 
             # Captura de pantalla de la escena con el aviso activo en alta resolución
-            png_aviso = output_dir / "tesis-presentacion-113-aviso-1920x1080.png"
+            png_aviso = output_dir / "tesis-presentacion-114-aviso-1920x1080.png"
             await self.cdp.set_viewport(1920, 1080)
             await asyncio.sleep(0.2)
             await self.cdp.capture_screenshot(str(png_aviso))
+            # Copia de compatibilidad
+            shutil.copyfile(str(png_aviso), str(output_dir / "tesis-presentacion-113-aviso-1920x1080.png"))
             print(f"Captura aviso en teléfono protegido guardada: {png_aviso}")
 
             # 23. Evidencia ausente o no ubicable conserva el motivo sin inventar cita
@@ -1372,7 +1374,541 @@ class UIDriver:
                 f"Aviso permanece cerrado, nombre: '{persistencia_obs.get('nombreOtra')}', marca conservada: '{persistencia_obs.get('mark')}'"
             )
 
-            # 27. Logs de errores de consola
+            # =========================================================================
+            # PRUEBAS ESPECÍFICAS DE ACEPTACIÓN ISSUE #114:
+            # CONSERVAR EL RESULTADO Y RECONSTRUIR LA ESCENA ANTE FALLAS
+            # =========================================================================
+
+            # 27. Reconexión tras aviso y cierre visual: reconstruye escena sin duplicar líneas,
+            # sin emitir iniciar adicional y sin volver a hacer sonar el aviso.
+            cmds_antes_reconex = len(self.received_messages)
+            self.panel_connected_event.clear()
+            await self.panel_ws.close()
+            await asyncio.sleep(0.1)
+
+            desconexion_obs = await self.cdp.eval("""
+                (() => {
+                    const st = document.getElementById('pres-estado')?.textContent.trim();
+                    return Boolean(st && (st.includes('Sin conexión') || st.includes('reintentando')));
+                })()
+            """)
+
+            # Esperar a que panel.html reconecte automáticamente vía WebSocket
+            await asyncio.wait_for(self.panel_connected_event.wait(), timeout=6.0)
+
+            # Reenviar los eventos acumulados de la llamada en curso (historial de llamada-segunda-limpia)
+            historial_reconex = [
+                {
+                    "tipo": "inicio",
+                    "llamada_id": "llamada-segunda-limpia",
+                    "modo": "llamada",
+                    "corte_silencio_s": 0.9,
+                    "asr": "zipformer"
+                },
+                {
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": 1,
+                    "rol": "otra",
+                    "texto": "Hola, ¿me escucha bien?",
+                    "fin_audio_s": 1.5,
+                    "disponible_s": 1.7
+                },
+                {
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": 2,
+                    "rol": "protegida",
+                    "texto": "Sí, lo escucho perfectamente.",
+                    "fin_audio_s": 3.0,
+                    "disponible_s": 3.2
+                },
+                {
+                    "tipo": "detector",
+                    "n": 1,
+                    "saltadas": 0,
+                    "inicio_eval_s": 1.7,
+                    "fin_eval_s": 1.95,
+                    "ms_detector": 245.0,
+                    "valida": True,
+                    "error": None,
+                    "riesgo": 0.12,
+                    "alerta_sugerida": False,
+                    "motivo": "Saludo inicial cotidiano",
+                    "aviso": False,
+                    "evidencia": "",
+                    "fin_voz_s": 1.5,
+                    "t_a": None
+                },
+                {
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": 3,
+                    "rol": "otra",
+                    "texto": "Le informo que registramos un movimiento sospechoso en su cuenta.",
+                    "fin_audio_s": 6.0,
+                    "disponible_s": 6.2
+                },
+                {
+                    "tipo": "detector",
+                    "n": 2,
+                    "saltadas": 0,
+                    "inicio_eval_s": 3.2,
+                    "fin_eval_s": 3.5,
+                    "ms_detector": 290.0,
+                    "valida": True,
+                    "error": None,
+                    "riesgo": 0.08,
+                    "alerta_sugerida": False,
+                    "motivo": "Respuesta neutra sin señales de riesgo",
+                    "aviso": False,
+                    "evidencia": "",
+                    "fin_voz_s": 3.0,
+                    "t_a": None
+                },
+                {
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": 4,
+                    "rol": "protegida",
+                    "texto": "No he realizado ningún movimiento hoy.",
+                    "fin_audio_s": 8.5,
+                    "disponible_s": 8.7
+                },
+                {
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": 5,
+                    "rol": "otra",
+                    "texto": "Por seguridad necesitamos confirmar sus datos de acceso inmediatamente.",
+                    "fin_audio_s": 11.0,
+                    "disponible_s": 11.2
+                },
+                {
+                    "tipo": "detector",
+                    "n": 5,
+                    "saltadas": 1,
+                    "inicio_eval_s": 11.2,
+                    "fin_eval_s": 11.5,
+                    "ms_detector": 310.0,
+                    "valida": False,
+                    "error": "JSON del SLM truncado",
+                    "riesgo": None,
+                    "alerta_sugerida": False,
+                    "motivo": "",
+                    "aviso": False,
+                    "evidencia": "",
+                    "fin_voz_s": 11.0,
+                    "t_a": None
+                },
+                {
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": 6,
+                    "rol": "otra",
+                    "texto": "Indíqueme el código de seguridad de seis dígitos que le llegó por SMS.",
+                    "fin_audio_s": 13.0,
+                    "disponible_s": 13.3
+                },
+                {
+                    "tipo": "detector",
+                    "n": 6,
+                    "saltadas": 0,
+                    "inicio_eval_s": 13.3,
+                    "fin_eval_s": 13.62,
+                    "ms_detector": 320.0,
+                    "valida": True,
+                    "error": None,
+                    "riesgo": 0.94,
+                    "alerta_sugerida": True,
+                    "motivo": "Solicitud urgente de código de verificación por SMS",
+                    "aviso": True,
+                    "evidencia": "código de seguridad de seis dígitos",
+                    "fin_voz_s": 13.0,
+                    "t_a": 12.3
+                },
+                {
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": 7,
+                    "n": 7,
+                    "rol": "protegida",
+                    "texto": "No pienso darle ningún código, voy a cortar ahora mismo.",
+                    "fin_audio_s": 14.5,
+                    "disponible_s": 14.7
+                }
+            ]
+            for msg in historial_reconex:
+                await self.panel_ws.send(json.dumps(msg))
+            await asyncio.sleep(0.3)
+
+            reconexion_obs = await self.cdp.eval("""
+                (() => {
+                    const lineasPres = document.querySelectorAll('#pres-charla .linea').length;
+                    const lineasConsola = document.querySelectorAll('#charla .linea.final').length;
+                    const avisoProt = document.getElementById('pres-aviso-protegida');
+                    const avisoOculto = !avisoProt || avisoProt.offsetHeight === 0;
+                    const nombreOtra = document.getElementById('pres-nombre-otra')?.textContent.trim();
+                    const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    return {
+                        lineasPres,
+                        lineasConsola,
+                        avisoOculto,
+                        nombreOtra,
+                        estado,
+                        ok: lineasPres === 7 && lineasConsola === 7 && avisoOculto &&
+                            nombreOtra === 'Otra persona' && estado === 'En llamada'
+                    };
+                })()
+            """)
+            cmds_despues_reconex = len(self.received_messages)
+            sin_comandos_extras = (cmds_despues_reconex == cmds_antes_reconex)
+            self.record_check(
+                "Reconexión tras aviso y cierre visual conserva estado sin duplicar",
+                bool(reconexion_obs.get("ok") and sin_comandos_extras),
+                f"Líneas presentación: {reconexion_obs.get('lineasPres')} (sin duplicar), aviso oculto: {reconexion_obs.get('avisoOculto')}, comandos emitidos: {cmds_despues_reconex - cmds_antes_reconex}, estado: '{reconexion_obs.get('estado')}'"
+            )
+
+            # 28. Fin con texto pendiente: incorpora últimos finales, marca no evaluados y conserva escena
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "parcial",
+                "segmento": 8,
+                "n": 8,
+                "rol": "otra",
+                "texto": "Por favor aguarde un momento en línea..."
+            }))
+            await asyncio.sleep(0.12)
+            parcial_visible = await self.cdp.eval("""
+                (() => {
+                    const l8 = document.getElementById('pres-seg-8');
+                    const provisorio = l8?.querySelector('.pres-provisorio-tag')?.textContent.trim();
+                    return Boolean(l8 && provisorio === 'Texto provisorio');
+                })()
+            """)
+
+            cmds_antes_terminar = len(self.received_messages)
+            await self.cdp.eval("document.getElementById('pres-terminar').click()")
+            await asyncio.sleep(0.15)
+            term_recibido = any(m.get("tipo") == "terminar" for m in self.received_messages[cmds_antes_terminar:])
+
+            # El servidor entrega el final pendiente antes de enviar fin
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 8,
+                "n": 8,
+                "rol": "otra",
+                "texto": "Por favor aguarde un momento en línea, no corte.",
+                "fin_audio_s": 16.5,
+                "disponible_s": 16.8
+            }))
+            await asyncio.sleep(0.15)
+
+            # Envío de fin de llamada
+            await self.panel_ws.send(json.dumps({
+                "tipo": "fin",
+                "llamada_id": "llamada-segunda-limpia",
+                "dir": "corridas/20261030-prueba-114"
+            }))
+            await asyncio.sleep(0.25)
+
+            fin_obs = await self.cdp.eval("""
+                (() => {
+                    const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    const sub = document.getElementById('pres-dialogo-sub')?.textContent.trim();
+                    const l8 = document.getElementById('pres-seg-8');
+                    const eval8 = l8?.querySelector('.pres-eval-caja');
+                    const st8 = eval8?.dataset.estado;
+                    const badge8 = eval8?.querySelector('.pres-eval-badge')?.textContent.trim();
+                    const mot8 = eval8?.querySelector('.pres-eval-motivo')?.textContent.trim() || '';
+                    const totalLineas = document.querySelectorAll('#pres-charla .linea').length;
+                    const otraVoz = document.getElementById('pres-voz-otra')?.getAttribute('data-voz');
+                    const protVoz = document.getElementById('pres-voz-protegida')?.getAttribute('data-voz');
+                    const btnNueva = document.getElementById('pres-nueva');
+                    const btnNuevaVisible = Boolean(btnNueva && !btnNueva.hidden && btnNueva.offsetHeight > 0 && !btnNueva.disabled);
+                    const btnTerminarDeshabilitado = Boolean(document.getElementById('pres-terminar')?.disabled);
+
+                    return {
+                        estado,
+                        sub,
+                        st8,
+                        badge8,
+                        mot8,
+                        totalLineas,
+                        otraVoz,
+                        protVoz,
+                        btnNuevaVisible,
+                        btnTerminarDeshabilitado,
+                        ok: estado === 'Análisis finalizado' &&
+                            sub.includes('conservada') &&
+                            totalLineas === 8 &&
+                            st8 === 'no-evaluado' && badge8 === 'No evaluado' &&
+                            otraVoz === 'finalizado' && protVoz === 'finalizado' &&
+                            btnNuevaVisible && btnTerminarDeshabilitado
+                    };
+                })()
+            """)
+            self.record_check(
+                "Fin con texto pendiente incorpora últimos finales y marca no evaluados",
+                bool(parcial_visible and term_recibido and fin_obs.get("ok")),
+                f"Parcial previo visible: {parcial_visible}, término recibido: {term_recibido}, líneas finales: {fin_obs.get('totalLineas')}, seg 8: '{fin_obs.get('badge8')}' ({fin_obs.get('st8')}), estado: '{fin_obs.get('estado')}'"
+            )
+
+            # Captura de pantalla de la escena conservada al finalizar
+            png_fin = output_dir / "tesis-presentacion-114-fin-conservado-1920x1080.png"
+            await self.cdp.set_viewport(1920, 1080)
+            await asyncio.sleep(0.2)
+            await self.cdp.capture_screenshot(str(png_fin))
+            print(f"Captura fin conservado guardada: {png_fin}")
+
+            # 29. Volver a la consola permite operar las acciones existentes sin crear otra llamada
+            cmds_antes_consola = len(self.received_messages)
+            await self.cdp.eval("document.getElementById('volver-panel').click()")
+            await asyncio.sleep(0.15)
+
+            consola_acciones_obs = await self.cdp.eval("""
+                (() => {
+                    const sec = document.getElementById('presentacion');
+                    const secOculta = !sec || sec.hidden || sec.offsetHeight === 0;
+                    const lineas = document.querySelectorAll('#charla .linea.final').length;
+                    const btnNueva = document.getElementById('nueva');
+                    const btnVerPres = document.getElementById('ver-presentacion');
+                    const nuevaOperable = Boolean(btnNueva && !btnNueva.disabled);
+                    const verPresOperable = Boolean(btnVerPres && !btnVerPres.hidden && btnVerPres.offsetHeight > 0);
+                    return {
+                        secOculta,
+                        lineas,
+                        nuevaOperable,
+                        verPresOperable,
+                        ok: secOculta && lineas === 8 && nuevaOperable && verPresOperable
+                    };
+                })()
+            """)
+
+            # Volver a presentación y verificar escena intacta, luego volver a consola
+            await self.cdp.eval("document.getElementById('ver-presentacion').click()")
+            await asyncio.sleep(0.12)
+            pres_reabierta_ok = await self.cdp.eval("""
+                (() => {
+                    const sec = document.getElementById('presentacion');
+                    const lineas = document.querySelectorAll('#pres-charla .linea').length;
+                    const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    return Boolean(sec && !sec.hidden && sec.offsetHeight > 0) && lineas === 8 && estado === 'Análisis finalizado';
+                })()
+            """)
+            await self.cdp.eval("document.getElementById('volver-panel').click()")
+            await asyncio.sleep(0.12)
+
+            cmds_despues_consola = len(self.received_messages)
+            sin_comandos_en_transicion = (cmds_despues_consola == cmds_antes_consola)
+            self.record_check(
+                "Volver a la consola permite operar acciones existentes sin crear otra llamada",
+                bool(consola_acciones_obs.get("ok") and pres_reabierta_ok and sin_comandos_en_transicion),
+                f"Consola visible con {consola_acciones_obs.get('lineas')} frases, acciones operables: {consola_acciones_obs.get('nuevaOperable')}, comandos emitidos: {cmds_despues_consola - cmds_antes_consola}"
+            )
+
+            # 30. Nueva llamada no arrastra texto, aviso, puntuación ni borrador de la anterior
+            cmds_antes_nueva = len(self.received_messages)
+            await self.cdp.eval("document.getElementById('nueva').click()")
+            await asyncio.sleep(0.15)
+
+            nueva_limpia_obs = await self.cdp.eval("""
+                (() => {
+                    const lineasConsola = document.querySelectorAll('#charla .linea').length;
+                    const motivo = document.getElementById('motivo')?.textContent.trim();
+                    const riesgo = document.getElementById('riesgo-pct')?.textContent.trim();
+                    const hablaOtra = document.getElementById('habla-otra')?.textContent.trim();
+                    const hablaProt = document.getElementById('habla-protegida')?.textContent.trim();
+                    const avisoConsola = document.getElementById('aviso');
+                    const avisoConsolaOculto = !avisoConsola || !avisoConsola.classList.contains('visible');
+                    const estado = document.getElementById('estado')?.textContent.trim();
+
+                    // Comprobar también el estado interno de presentación
+                    const lineasPres = document.querySelectorAll('#pres-charla .linea').length;
+                    const presId = document.getElementById('pres-llamada-id')?.textContent.trim();
+                    const presEstado = document.getElementById('pres-estado')?.textContent.trim();
+
+                    return {
+                        lineasConsola,
+                        motivo,
+                        riesgo,
+                        hablaOtra,
+                        hablaProt,
+                        avisoConsolaOculto,
+                        estado,
+                        lineasPres,
+                        presId,
+                        presEstado,
+                        ok: lineasConsola === 0 &&
+                            motivo === '—' &&
+                            riesgo === '0%' &&
+                            hablaOtra.includes('En silencio') &&
+                            hablaProt.includes('En silencio') &&
+                            avisoConsolaOculto &&
+                            lineasPres === 0 &&
+                            presId === '' &&
+                            presEstado === 'Esperando inicio'
+                    };
+                })()
+            """)
+            cmds_despues_nueva = len(self.received_messages)
+            sin_inicio_automatico = (cmds_despues_nueva == cmds_antes_nueva)
+            self.record_check(
+                "Nueva llamada no arrastra texto, aviso, puntuación ni borrador anteriores",
+                bool(nueva_limpia_obs.get("ok") and sin_inicio_automatico),
+                f"Consola limpia (0 líneas, riesgo {nueva_limpia_obs.get('riesgo')}), presentación limpia (0 líneas, id '{nueva_limpia_obs.get('presId')}'), sin inicio automático: {sin_inicio_automatico}"
+            )
+
+            # 31. Fallas de preparación o permisos comunicadas visiblemente sin anunciar llamada segura
+            await self.panel_ws.send(json.dumps({
+                "tipo": "error",
+                "mensaje": "No se pudo acceder al micrófono: permiso denegado en el sistema"
+            }))
+            await asyncio.sleep(0.15)
+
+            fallo_permisos_obs = await self.cdp.eval("""
+                (() => {
+                    const errEl = document.getElementById('error');
+                    const errConsola = errEl?.textContent.trim();
+                    const visible = Boolean(errEl && !errEl.hidden && errEl.offsetHeight > 0);
+                    const estado = document.getElementById('estado')?.textContent.trim();
+                    const noEsSegura = !estado.toLowerCase().includes('segura') &&
+                                       !estado.toLowerCase().includes('sin aviso');
+                    const errPresTxt = document.getElementById('pres-error')?.textContent.trim();
+
+                    return {
+                        errConsola,
+                        visible,
+                        errPresTxt,
+                        noEsSegura,
+                        ok: Boolean(errConsola && errConsola.includes('permiso denegado')) &&
+                            visible &&
+                            errPresTxt.includes('permiso denegado') &&
+                            noEsSegura
+                    };
+                })()
+            """)
+            self.record_check(
+                "Fallas de preparación o permisos comunicadas de forma visible",
+                bool(fallo_permisos_obs.get("ok")),
+                f"Error en controles accesibles: '{fallo_permisos_obs.get('errConsola')}' (visible: {fallo_permisos_obs.get('visible')}), registrado en presentación: '{fallo_permisos_obs.get('errPresTxt')}', sin falsa seguridad: {fallo_permisos_obs.get('noEsSegura')}"
+            )
+
+            # 32. Error del detector y fallas de captura visibles con diagnóstico en la escena
+            await self.panel_ws.send(json.dumps({
+                "tipo": "inicio",
+                "llamada_id": "llamada-fallo-detector",
+                "modo": "llamada",
+                "corte_silencio_s": 0.8,
+                "asr": "zipformer"
+            }))
+            await asyncio.sleep(0.2)
+
+            # Emitir fallo de captura durante la llamada activa en Presentación
+            await self.panel_ws.send(json.dumps({
+                "tipo": "error",
+                "mensaje": "Se interrumpió la fuente de audio en vivo"
+            }))
+            await asyncio.sleep(0.15)
+
+            error_escena_obs = await self.cdp.eval("""
+                (() => {
+                    const presErr = document.getElementById('pres-error');
+                    const visible = Boolean(presErr && !presErr.hidden && presErr.offsetHeight > 0);
+                    const txt = presErr?.textContent.trim();
+                    return { visible, txt, ok: visible && txt.includes('Se interrumpió la fuente de audio') };
+                })()
+            """)
+
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 1,
+                "n": 1,
+                "rol": "otra",
+                "texto": "Hola, necesito verificar sus claves de acceso urgente.",
+                "fin_audio_s": 2.5,
+                "disponible_s": 2.7
+            }))
+            await asyncio.sleep(0.15)
+
+            # Enviar error del detector
+            await self.panel_ws.send(json.dumps({
+                "tipo": "detector",
+                "n": 1,
+                "saltadas": 0,
+                "inicio_eval_s": 2.7,
+                "fin_eval_s": 7.7,
+                "ms_detector": 5000.0,
+                "valida": False,
+                "error": "Timeout del detector de fraude: servicio no disponible",
+                "riesgo": None,
+                "alerta_sugerida": False,
+                "motivo": "",
+                "aviso": False,
+                "evidencia": "",
+                "fin_voz_s": 2.5,
+                "t_a": None
+            }))
+            await asyncio.sleep(0.2)
+
+            detector_error_obs = await self.cdp.eval("""
+                (() => {
+                    const l1 = document.getElementById('pres-seg-1');
+                    const caja = l1?.querySelector('.pres-eval-caja');
+                    const st = caja?.dataset.estado;
+                    const badge = caja?.querySelector('.pres-eval-badge')?.textContent.trim();
+                    const mot = caja?.querySelector('.pres-eval-motivo')?.textContent.trim();
+                    const detalles = caja?.querySelector('details.pres-detalles');
+                    const detTxt = detalles?.textContent || '';
+                    const noEsSinAviso = st !== 'sin-aviso' && badge !== 'Sin aviso';
+
+                    return {
+                        st,
+                        badge,
+                        mot,
+                        detTxt,
+                        noEsSinAviso,
+                        ok: st === 'error' &&
+                            badge === 'Error' &&
+                            mot.includes('Timeout del detector') &&
+                            noEsSinAviso
+                    };
+                })()
+            """)
+
+            # Cerrar llamada con fallo y verificar conservación del diagnóstico
+            await self.panel_ws.send(json.dumps({
+                "tipo": "fin",
+                "llamada_id": "llamada-fallo-detector",
+                "dir": "corridas/20261030-fallo"
+            }))
+            await asyncio.sleep(0.2)
+
+            png_fallo = output_dir / "tesis-presentacion-114-fallo-1920x1080.png"
+            await self.cdp.set_viewport(1920, 1080)
+            await asyncio.sleep(0.2)
+            await self.cdp.capture_screenshot(str(png_fallo))
+            print(f"Captura fallo guardada: {png_fallo}")
+
+            diag_conservado = await self.cdp.eval("""
+                (() => {
+                    const l1 = document.getElementById('pres-seg-1');
+                    const caja = l1?.querySelector('.pres-eval-caja');
+                    const st = caja?.dataset.estado;
+                    const badge = caja?.querySelector('.pres-eval-badge')?.textContent.trim();
+                    const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    return st === 'error' && badge === 'Error' && estado === 'Análisis finalizado';
+                })()
+            """)
+            self.record_check(
+                "Error del detector y fallas de captura visibles con diagnóstico sin anunciar llamada segura",
+                bool(error_escena_obs.get("ok") and detector_error_obs.get("ok") and diag_conservado),
+                f"Fallo captura escena: {error_escena_obs.get('visible')} ('{error_escena_obs.get('txt')}'), detector: '{detector_error_obs.get('badge')}' ({detector_error_obs.get('mot')}), diagnóstico conservado tras fin: {diag_conservado}"
+            )
+
+            # 33. Logs de errores de consola
             errores_consola = [log for log in self.cdp.console_logs if log.get("type") in ("error", "internal_error")]
             log_path = output_dir / "tesis-presentacion-ui-consola.log"
             with open(log_path, "w", encoding="utf-8") as f:
@@ -1392,7 +1928,7 @@ class UIDriver:
 
 def generar_reporte(resultados, report_path: Path, output_dir: Path):
     lineas = [
-        "# Reporte de verificación de UI: Mostrar detecciones y aviso en el teléfono protegido (#113)",
+        "# Reporte de verificación de UI: Conservar el resultado y reconstruir la escena ante fallas (#114)",
         "",
         "## Resumen",
         "Driver automatizado y portable con Chrome headless y CDP vía WebSocket nativo sobre el servidor real de `experiments/voip` en puerto efímero aislado.",
@@ -1409,7 +1945,9 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
         "## Evidencia visual generada",
         f"- Notebook (1366x768): `{output_dir / 'tesis-presentacion-ui-notebook-1366x768.png'}`",
         f"- Proyección (1920x1080): `{output_dir / 'tesis-presentacion-ui-proyeccion-1920x1080.png'}`",
-        f"- Aviso activo en teléfono protegido (1920x1080): `{output_dir / 'tesis-presentacion-113-aviso-1920x1080.png'}`",
+        f"- Aviso activo en teléfono protegido (1920x1080): `{output_dir / 'tesis-presentacion-114-aviso-1920x1080.png'}`",
+        f"- Fin con texto pendiente y escena conservada (1920x1080): `{output_dir / 'tesis-presentacion-114-fin-conservado-1920x1080.png'}`",
+        f"- Fallo observable del detector (1920x1080): `{output_dir / 'tesis-presentacion-114-fallo-1920x1080.png'}`",
         f"- Movimiento reducido (1920x1080): `{output_dir / 'tesis-presentacion-ui-reducido-1920x1080.png'}`",
         f"- Logs de consola runtime: `{output_dir / 'tesis-presentacion-ui-consola.log'}`",
         "",
@@ -1418,7 +1956,7 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
         "## Reproducibilidad",
         "Comando para ejecutar el driver completo desde cualquier entorno con Python y websockets:",
         "```sh",
-        "python3 experiments/voip/tests/presentacion_ui.py --outdir /tmp/tesis-presentacion-113 --report /tmp/tesis-presentacion-113-report.md",
+        "/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python experiments/voip/tests/presentacion_ui.py --outdir /tmp/tesis-presentacion-114 --report /tmp/tesis-presentacion-114-report.md",
         "```",
         ""
     ])
@@ -1427,10 +1965,10 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
 
 
 async def main():
-    parser = argparse.ArgumentParser(description="Driver portable de UI con Chrome headless para Issue #112")
+    parser = argparse.ArgumentParser(description="Driver portable de UI con Chrome headless para Issue #114")
     parser.add_argument("--repo", default=None, help="Ruta al repositorio o experiments/voip (opcional, auto-detectado)")
-    parser.add_argument("--outdir", default="/tmp/tesis-presentacion-ui-portable", help="Directorio para capturas y logs")
-    parser.add_argument("--report", default="/tmp/tesis-presentacion-ui-portable-report.md", help="Ruta del reporte Markdown")
+    parser.add_argument("--outdir", default="/tmp/tesis-presentacion-114", help="Directorio para capturas y logs")
+    parser.add_argument("--report", default="/tmp/tesis-presentacion-114-report.md", help="Ruta del reporte Markdown")
     args = parser.parse_args()
 
     voip_dir = resolver_voip_dir(args.repo)
