@@ -135,7 +135,7 @@ Corre la línea base y cada paso del §4 sobre el audio guardado, aplica la regl
 Opciones útiles: `--sin-whisper` (Whisper es lento: `small` y `large-v3-turbo` bajan ~2 GB la primera vez y
 `large-v3-turbo` usa ~1,8 GB de RAM), `--variantes beam,beam+hotwords` (la línea base se corre siempre),
 `--solo-parakeet` (solo Parakeet con cada corte y umbral de `VARIANTES_PARAKEET`, cada uno contra el del panel,
-sin la cadena de Zipformer), `--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
+sin la cadena de Zipformer; `--contra-parakeet` elige otra referencia), `--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
 (por defecto 40 ms, como el panel). Detalle de los archivos en el [README](README.md#9-voz-real-94).
 
 
@@ -355,6 +355,7 @@ tamaño de pesos, RSS y RAM disponible. No se analizaron nuevos datos del corpus
 > **Estado: propuesta sin discutir.** En [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector),
 > comparar el RMS actual contra un VAD de voz (por ejemplo Silero), manteniendo ASR, audio y
 > preaudio constantes. No se adopta una librería ni un umbral nuevo con esta auditoría.
+> **Medido el 2026-10-29 en el [§12](#12-silero-vad-contra-el-corte-rms-en-parakeet-2026-10-29).**
 
 Medir voz tenue, ruido, inicios de palabra, pausas y números con referencia humana. Para el
 teléfono de gama alta acordado con el tutor faltan latencia y cola sostenidas, memoria conjunta,
@@ -455,6 +456,9 @@ que siga el ruido de fondo, sin probar).
 Se repiten con cualquier corte y umbral; son del modelo con esta voz.
 
 - **«Compartí pantalla» pierde la primera palabra en las tres tomas** y queda sin `REQUEST_REMOTE_ACCESS`.
+  *Corrección del 2026-10-29 ([§12.3](#123-lo-que-el-wer-no-muestra)):* no la pierde. Parakeet escribe «Compartir la
+  pantalla»; el reparto por frases de la medición deja «Compartir» en la frase anterior, y `reglas.py` no reconoce
+  «compartir la pantalla». Se midieron las tomas 2 y 3; la de la toma 1 (G06) se borró antes de medir.
 - Términos críticos cambiados: «token» → «toque», «OTP» → «lo Tp», «CVV» → «código de seguridad» o «CBB»,
   «CBU» → «servicio» o «CvU». Bancos y apps: «Ualá» → «igual», «AnyDesk» → «ni desk» / «Anidesk»,
   «Brubank» → «Bluebank».
@@ -467,7 +471,170 @@ Se repiten con cualquier corte y umbral; son del modelo con esta voz.
 ### 11.6 Qué sigue
 
 1. Comparar Silero contra RMS con este mismo audio, modelo y preaudio (§10.4), mirando G08, G10, palabras
-   cortadas al inicio y demora.
+   cortadas al inicio y demora. **Hecho en el [§12](#12-silero-vad-contra-el-corte-rms-en-parakeet-2026-10-29)**:
+   no le gana al RMS en texto; sí evita transcribir el silencio con ruidos.
 2. Si el corte RMS sigue sin margen con esta voz, probar un umbral que siga el ruido de fondo o un corte
    apoyado en el texto (frase terminada), antes de tocar la llamada en vivo.
 3. Grabar la condición Meet y otra voz (sección 3) y medir en el teléfono al final.
+
+## 12. Silero VAD contra el corte RMS en Parakeet (2026-10-29)
+
+> Paso 1 del §11.6 y comparación pendiente del §10.4. Se cambia **solo** quién decide si un bloque de 40 ms es voz:
+> el RMS contra 0,008 o Silero VAD. El panel y la llamada no cambian: por defecto sigue decidiendo el RMS. No cierra
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+
+Corridas: [`parakeet-silero-vs-rms`](corridas/2026-10-29_voz-real_parakeet-silero-vs-rms/resumen.md) (WER, CER y etiquetas,
+regla del §2) y [`vad-extras`](corridas/2026-10-29_voz-real_vad-extras/resumen.md) (lo que el WER no muestra y simulación
+del umbral).
+
+### 12.1 Condiciones
+
+- **Qué es Silero acá.** [`DetectorSilero`](motores.py) usa `VadModel.is_speech()` de `sherpa-onnx` 1.13.8 con el
+  `silero_vad.onnx` del [release de sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx)
+  (644 KB, sha256 `9e2449e1…`, fuera de Git en `modelos/silero-vad/`), con 1 hilo. Silero mira ventanas de 512 muestras
+  (32 ms) y el panel manda bloques de 640. Lo que sobra de un bloque pasa a la ventana siguiente, y un bloque es voz si
+  alguna ventana que terminó en él es voz. `min_silence_duration` y `min_speech_duration` van en 0, para que el corte
+  siga siendo el de `MotorPorFrases`.
+- **Lo que trae sherpa y no se tocó.** Una vez en voz, sigue en voz mientras la probabilidad no baje de *umbral − 0,15*.
+  Además, la primera ventana sobre el umbral todavía cuenta como silencio.
+- **Lo que queda igual.**
+  - El mismo audio: las 20 grabaciones de [`pruebas.csv`](voz-real/pruebas.csv) más G10 y la serie sin hablar.
+  - Parakeet TDT 0.6B v3 int8 con 2 hilos y bloques de 40 ms.
+  - Preaudio de 0,3 s, `MIN_VOZ_S` 0,3, primer borrador con 1 s de voz, borradores cada 0,5 s, filtro de idioma y tope de 10 s.
+  - En las variantes Silero, el RMS 0,008 ya no decide: solo marca el fin de la voz para medir la demora, igual que en la referencia.
+- **Referencia:** `parakeet-0.8-rms-0.008`, el valor de «Probar el ASR» (§11), con `--contra-parakeet`. La del panel
+  anterior (0,9 / 0,003) va como contexto.
+- **Umbrales probados.** 0,5 (el de fábrica) con cortes de 0,8, 0,5 y 0,3 s, y 0,9 con cortes de 0,5 y 0,3 s. El 0,9
+  salió de simular el corte sin ASR sobre estas mismas grabaciones (§12.4), después de ver que con 0,5 las frases se juntaban.
+
+### 12.2 Resultados con referencia
+
+| Detector, corte | Toma 2: frases OK | WER | CER | Segmentos | Demora final mediana | Toma 3: frases OK | WER | Segmentos |
+|---|---|---|---|---|---|---|---|---|
+| **RMS 0,008, 0,8 s (referencia)** | **28/30** | **13,3 %** | **5,5 %** | 30 | 1,10 s | **28/30** | **13,0 %** | 28 |
+| RMS 0,003, 0,9 s (panel anterior) | 27/30 | 20,8 % | 13,6 % | 24 | 1,16 s | 28/30 | 18,3 % | 21 |
+| Silero 0,5, 0,8 s | 27/30 | 20,3 % | 13,3 % | 21 | 1,64 s | 29/30 | 20,1 % | 19 |
+| Silero 0,5, 0,5 s | 27/30 | 19,8 % | 11,7 % | 23 | 1,39 s | 29/30 | 19,6 % | 19 |
+| Silero 0,5, 0,3 s | 28/30 | 16,0 % | 7,2 % | 26 | 1,17 s | 29/30 | 19,3 % | 20 |
+| Silero 0,9, 0,5 s | 28/30 | 16,5 % | 8,6 % | 31 | 1,01 s | 27/30 | 17,0 % | 27 |
+| Silero 0,9, 0,3 s | 28/30 | 16,3 % | 7,4 % | 38 | 0,74 s | 28/30 | 14,0 % | 36 |
+
+- **Con el umbral de fábrica (0,5), Silero junta frases.** Una vez en voz, sigue en voz hasta que la probabilidad baja de
+  0,35, y después de hablar esa probabilidad tarda de 0,3 a 1 s en bajar. Muchas de las pausas de 0,5–1,4 s entre frases
+  (§11.2) no llegan a verse. Con corte de 0,8 s hay 33 cierres por el tope de 10 s, contra 6 del RMS, y el WER sube 7
+  puntos. En la toma 2 se pierde entera F17 («pasame el PIN y el CVV»), la misma que perdía 0,9 / 0,003.
+- **Con umbral 0,9 separa casi como el RMS, pero no le gana.** Con corte de 0,3 s llega a 28/30 en las dos tomas, con un
+  WER de 3,0 puntos más en la toma 2 y 1,0 en la 3, y la frase final sale 0,36 s antes. A cambio parte de más: 38
+  segmentos para 30 frases, y cada segmento es una evaluación más del detector de texto (§7). En la toma 1 con micrófono
+  da 20/25 frases, contra 23/25 del RMS.
+- **Lo que gana o pierde en la toma 3 no es del detector.** «Dame el OTP» sale bien con Silero y «token» sale «toque»
+  con 0,9. Son cambios del texto de Parakeet cuando recibe otro recorte de audio.
+- **Regla del §2 contra 0,8 / 0,008: no pasa ninguna.** Ninguna suma frases (+0 o −1) y todas suben el WER más de
+  2 puntos en la toma 2 (de +2,8 a +7,0). Ninguna frase negativa disparó etiquetas en ninguna variante.
+
+### 12.3 Lo que el WER no muestra
+
+**Grabaciones sin texto:** todo lo que sale es inventado.
+
+| Grabación | Detector, corte | Segmentos abiertos | Llamadas al ASR | Audio al ASR | Palabras inventadas (finales / borradores) |
+|---|---|---|---|---|---|
+| G10, 30 s sin hablar | RMS 0,008, 0,8 s | 10 | 28 | 79 s | 4 / 4 («Shh. Uh-uh.», «He») |
+| | Silero 0,5, 0,8 s | 2 | 1 | 1,7 s | 2 / 0 («Uh uh.») |
+| | Silero 0,9, 0,3 s | 0 | 0 | 0 | 0 / 0 |
+| Serie sin hablar, 44 s | RMS 0,008, 0,8 s | 24 | 40 | 165 s | 17 / 14 |
+| | Silero 0,5, 0,8 s | 19 | 36 | 88 s | 19 / 33 |
+| | Silero 0,9, 0,3 s | 11 | 17 | 28 s | 16 / 1 |
+
+Con ruidos de la pieza, Silero no manda nada al ASR. Con la serie llama menos al ASR, pero las palabras inventadas en
+las frases finales siguen siendo las mismas (16–19 contra 17), porque la tele también es voz humana.
+
+**G08, Luciano leyendo con la serie de fondo.**
+
+| Detector, corte | Segmentos | Cierres por silencio / tope / fin del audio | Duración de los segmentos (s) |
+|---|---|---|---|
+| RMS 0,008, 0,8 s | 3 | 0 / 2 / 1 | 10,0 · 10,0 · 7,7 |
+| Silero 0,5, 0,8 s | 4 | 2 / 1 / 1 | 5,6 · 5,5 · 10,0 · 5,2 |
+| Silero 0,9, 0,3 s | 6 | 6 / 0 / 0 | 5,0 · 2,1 · 2,8 · 3,3 · 5,2 · 5,3 |
+
+Con el RMS, G08 se cierra siempre por el tope (§11.4). Silero corta en las pausas de Luciano aunque la tele siga
+sonando, y con 0,9 / 0,3 ya no llega nunca al tope. Las etiquetas de G08 salieron 5/5 con todas las variantes.
+
+**Cómputo en las 20 grabaciones con texto (587 s de audio).**
+
+| Detector, corte | Segmentos abiertos | Cierres por tope | Llamadas al ASR | Audio al ASR | Tiempo de ASR |
+|---|---|---|---|---|---|
+| RMS 0,008, 0,8 s | 103 | 6 | 734 | 2583 s | 124 s |
+| Silero 0,5, 0,8 s | 75 | 33 | 941 | 4655 s | 219 s |
+| Silero 0,5, 0,3 s | 86 | 26 | 929 | 4275 s | 203 s |
+| Silero 0,9, 0,5 s | 107 | 5 | 787 | 2715 s | 132 s |
+| Silero 0,9, 0,3 s | 125 | 1 | 770 | 2275 s | 114 s |
+
+Con frases largas, cada borrador vuelve a transcribir hasta 10 s de audio. Por eso Silero 0,5 casi duplica el trabajo del
+ASR, y Silero 0,9 / 0,3 queda un 8 % por debajo del RMS.
+
+**Demora y costo del detector.**
+
+- *Inicio de la voz:* Silero llega una ventana después que el RMS (mediana +0,04 s; p90 +0,08 s). El preaudio de 0,3 s lo
+  cubre.
+- *Fin de la voz:* con 0,9, Silero llega 0,12 s después del RMS (mediana; p90 +0,40 s). Con 0,5, solo la mitad de sus
+  finales tiene un final del RMS a menos de 0,6 s: es la cola que junta frases.
+- *Costo:* decidir un bloque con Silero cuesta 0,11 ms de mediana (0,23–0,27 ms de p95), un 0,3 % de los 40 ms; con el RMS,
+  0,004 ms. Hubo picos aislados de 6–32 ms. Es costo de CPU en la M1, no de batería.
+
+**Inicios de palabra.** Ningún detector se come inicios de forma sistemática. Sin contar el voseo que el modelo pasa a
+infinitivo («Hacé» → «Hacer»), la primera palabra falta en 10/100 frases con el RMS y en 9 a 15 con Silero; casi siempre son
+errores del modelo («Ñaño, al ñudo» → «Al pedo», «Te llegó» → «Que llevo»).
+
+- **«Compartí pantalla» no se pierde por el corte.** Parakeet escribe «Compartir la pantalla…» al principio de su propio
+  segmento, con los dos detectores. Volver a transcribir ese segmento con 0,3 o 0,6 s más de audio previo da lo mismo.
+- **La etiqueta se pierde por dos cosas que no son del VAD:**
+  1. El reparto por frases de `medir_voz_real.py` deja «Compartir» en la frase anterior, porque no coincide con «Compartí».
+  2. Aunque quedara en su frase, `reglas.py` busca «comparti pantalla», y «compartir la pantalla» no dispara
+     `REQUEST_REMOTE_ACCESS`.
+
+  Esto corrige lo que dice el §11.5. Las reglas no se tocaron: [D07](../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico)
+  sigue abierta.
+
+### 12.4 Simulación del umbral sin ASR
+
+Solo el corte de `MotorPorFrases`, sin Parakeet, sobre las 20 grabaciones con texto (100 frases). Sirvió para elegir
+el 0,9 que después se midió con ASR.
+
+| Detector | Corte 0,3 s: segmentos / topes | Corte 0,5 s | Corte 0,8 s | Bloques marcados como voz |
+|---|---|---|---|---|
+| RMS 0,008 | 138 / 2 | 117 / 2 | 103 / 6 | 63,7 % |
+| Silero 0,5 | 86 / 26 | 79 / 29 | 75 / 33 | 84,8 % |
+| Silero 0,7 | 99 / 18 | 85 / 23 | 81 / 31 | 80,0 % |
+| Silero 0,85 | 119 / 4 | 100 / 15 | 87 / 23 | 74,3 % |
+| Silero 0,9 | 125 / 1 | 107 / 5 | 87 / 19 | 71,9 % |
+
+### 12.5 Límites
+
+- **Una sola persona y un solo lugar.** Una voz (Luciano), el micrófono de la Mac, una pieza y una serie de fondo.
+  Son 20 grabaciones con referencia: 30 frases por toma en la 2 y la 3, así que una frase equivale a 3,3 puntos.
+  Falta la condición Meet y falta otra voz (§3).
+- **El umbral 0,9 se eligió mirando este mismo audio.** No hay una toma nueva que lo confirme, como la toma 3 hizo con
+  0,8 / 0,008.
+- **Demora y costo son offline en la M1.** Se midieron con el reloj simulado del §8, con el ASR en 2 hilos y Silero en
+  1, sin teléfono, batería ni temperatura. La memoria pico varió entre 870 y 1140 MB sin relación con el detector:
+  el modelo de Silero pesa 0,6 MB.
+- **Solo se probó una versión de Silero y una forma de usarlo.** Fue el `silero_vad.onnx` del release de sherpa
+  (entradas `x`, `h`, `c`) con la histéresis de sherpa. No se probaron otros modelos (v5/v6) ni una histéresis propia,
+  ni combinar los dos detectores.
+- **El código quedó en `38bb680` con un solo cambio sin commit.** Era el README de la carpeta; los manifiestos dicen
+  `dirty: true` por eso.
+
+### 12.6 Qué sugiere
+
+> **Estado: propuesta sin discutir.** Decide Luciano en [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+> No se tocaron el valor inicial del panel (0,8 s / 0,008 en «Probar el ASR») ni la llamada (0,9 s / 0,003).
+
+- **Con esta voz no hay motivo para cambiar el RMS por Silero.** Con el umbral de fábrica, Silero empeora el texto y
+  duplica el trabajo del ASR. Con 0,9 / 0,3 queda cerca, pero no suma ninguna frase, sube el WER y parte más.
+- **Silero sí sirve para no transcribir el silencio con ruidos** (G10: de 28 llamadas al ASR a 0–1) **y para cortar
+  con una tele de fondo** (G08: deja de cerrar por el tope). No sirve para frenar la voz ajena de la serie.
+- **Opciones para seguir, sin probar todavía:**
+  - Usar Silero 0,9 solo para *abrir* la frase y dejar que el RMS la cierre.
+  - El umbral que siga el ruido de fondo del §11.6, paso 2.
+
+  Cualquiera de las dos se confirma con una toma nueva y otra voz antes de tocar la llamada.
