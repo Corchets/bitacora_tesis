@@ -1,0 +1,37 @@
+{
+ "fecha": "2026-10-29",
+ "semilla": 42,
+ "auditoria": {
+  "criterios": [
+   "igualdad_exacta",
+   "subcadena>=20",
+   "jaccard>=0.80"
+  ],
+  "frases_auditadas": 4811,
+  "familias_relacionadas_excluidas": [],
+  "detalle_por_familia": {},
+  "conteo_antes": {
+   "entrenamiento/estafa": 1548,
+   "validacion/estafa": 389,
+   "entrenamiento/legitima": 2295,
+   "validacion/legitima": 579
+  },
+  "conteo_despues": {
+   "entrenamiento/estafa": 1548,
+   "validacion/estafa": 389,
+   "entrenamiento/legitima": 2295,
+   "validacion/legitima": 579
+  },
+  "clases_restantes": [
+   "estafa",
+   "legitima"
+  ],
+  "sintetico_necesario": false,
+  "nota": "Exclusion por familia completa. Si falta una clase se prepara material sintetico de desarrollo trazable sin reserva; no se sustituyen las veinte ni se pide al usuario."
+ },
+ "codigo": {
+  "commit": "b7b9d221486cebb8697130ddfbb5be8226ada50c",
+  "estado": "M docs/gestion/MAPA-DECISIONES.md\n M docs/gestion/REGISTRO-RIESGOS.md\n M docs/gestion/bitacora/2026-10-semana-04.md\n M docs/ingenieria/ARQUITECTURA.md\n M experiments/slm-directo/DATOS-TITO.md\n M experiments/slm-directo/README.md\n?? experiments/slm-directo/CONFIGURACION-TITO-2026-10-29.json\n?? experiments/slm-directo/CONTROL-REVISION-IA-TITO-2026-10-28.json\n?? experiments/slm-directo/CURACION-TITO-2026-10-28.json\n?? experiments/slm-directo/CURACION-TITO-2026-10-28.md\n?? experiments/slm-directo/PARTICIONES-TITO-2026-10-29.json\n?? experiments/slm-directo/PROPUESTA-20-CONVERSACIONES-TITO-2026-10-29.md\n?? experiments/slm-directo/REVISION-IA-TITO-2026-10-28.json\n?? experiments/slm-directo/REVISION-IA-TITO-2026-10-28.md\n?? experiments/slm-directo/SELECCION-TITO-2026-10-28.json\n?? experiments/slm-directo/auditar_revision_tito.py\n?? experiments/slm-directo/curar_datos_tito.py\n?? experiments/slm-directo/entrenar_tito_99.py\n?? experiments/slm-directo/preparar_particiones_tito.py\n?? experiments/slm-directo/tests/test_curacion_tito.py",
+  "script_sha256": "21111a40b213ef90c63b8ebb033bad17c586291039b803be0ef3c09760d4d883"
+ }
+}

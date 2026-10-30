@@ -213,10 +213,10 @@ class TestThinkIdentidad(unittest.TestCase):
         self.assertEqual(thinking, "razón")
         self.assertIs(st.PENSAR, True)
         self.assertTrue(vistos["pensar"] is True)
-        self.assertEqual(vistos["opciones"]["num_predict"], 8192)
-        self.assertLessEqual(vistos["opciones"]["num_predict"], 8192)
-        self.assertEqual(vistos["opciones"]["num_ctx"], 16384)
-        self.assertEqual(vistos["opciones"]["temperature"], 1)
+        self.assertEqual(vistos["opciones"]["num_predict"], 2048)
+        self.assertLessEqual(vistos["opciones"]["num_predict"], 2048)
+        self.assertEqual(vistos["opciones"]["num_ctx"], 8192)
+        self.assertEqual(vistos["opciones"]["temperature"], 0)
         self.assertIn("done_reason", stats)
         self.assertIn("eval_count", stats)
 
@@ -249,9 +249,8 @@ class TestThinkIdentidad(unittest.TestCase):
         meta = st.info_modelo(Cli(), "m")
         self.assertTrue(meta["think"] is True)
         self.assertEqual(meta["opciones"], {
-            "temperature": 1, "seed": 42, "num_predict": 8192,
-            "num_ctx": 16384, "top_p": 0.95, "top_k": 20, "min_p": 0.0,
-            "presence_penalty": 1.5, "repeat_penalty": 1.0})
+            "temperature": 0, "seed": 42, "num_predict": 2048,
+            "num_ctx": 8192})
 
 
 class TestTimeoutCLI(unittest.TestCase):

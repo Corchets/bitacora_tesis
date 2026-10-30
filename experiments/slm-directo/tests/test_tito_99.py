@@ -411,10 +411,10 @@ class TestSupervisionReal(unittest.TestCase):
     def test_divergencia_opciones_think_rechazada(self):
         import prompts_supervision_tito_99 as ps
         temp0 = dict(ps.OPCIONES_MODELO)
-        temp0["temperature"] = 0
+        temp0["temperature"] = ps.OPCIONES_MODELO["temperature"] + 1
         sin_ctx = {k: v for k, v in ps.OPCIONES_MODELO.items()
                    if k != "num_ctx"}
-        casos = [("temperature 0 (variante vieja)", temp0, ps.PENSAR),
+        casos = [("temperature distinta", temp0, ps.PENSAR),
                  ("sin num_ctx", sin_ctx, ps.PENSAR),
                  ("think apagado", dict(ps.OPCIONES_MODELO), False),
                  ("think ausente", dict(ps.OPCIONES_MODELO), "ausente")]

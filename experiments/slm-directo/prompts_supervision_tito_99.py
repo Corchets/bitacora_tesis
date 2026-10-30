@@ -1,50 +1,16 @@
-"""Prompts de supervisión contextual por prefijo para #99 (módulo del corrector).
+"""Anotador contextual de desarrollo de #99, versión v7.
 
-Corrige el sesgo de los prompts originales de ``supervision_tito_99.py``
-(pasada 1 pedía ``DIRECTAMENTE`` dinero/código: el prefijo legítimo de la
-pizzería recibía 1/1 aunque el contexto visible mostraba un pago legítimo
-en un local ya conocido). La v2 contextual corrigió ese caso pero dejó
-tres limitaciones reales medidas con el modelo en
-``VALIDACION-PROMPTS-SUPERVISION-TITO-99-2026-10-29.json`` (7/8):
-el indicio sin pedido dividió a las pasadas (0/1 → null), los
-fundamentos afirmaron secreto/urgencia no presentes en el texto y los
-controles ambiguos se declararon 0 en vez del null que pide el contrato.
-La v3 ordenó el indicio como chequeo previo pero el enunciado seguía
-planteando una pregunta binaria de motivo y gemma4:e4b devolvió 0/0 en
-ambos ambiguos (6/8) aunque el transporte emite null (diagnóstico
-verificado por root). Esta v4 aplica la regla triestado breve de root:
-pregunta explícita de asignar UNA etiqueta (1, 0 o null), orden
-1-evidencia / null-incomprensible / 0-legítimo, con cita literal y
-segunda pasada aislada. Este módulo NO se integra solo: tras el handoff
-con el dueño del supervisor (ctx_98285f28e9d3) sus constructores reemplazan
-a ``construir_prompt_pasada1/_pasada2`` del supervisor, que conserva la
-orquestación, la auditoría y la puerta de entrenamiento.
+Dos chats independientes ven solo el prefijo A/B. El modelo decide CONSULTAR,
+NO_CONSULTAR o INCIERTO; la conversión a 1/0/null no interpreta el texto.
+El diálogo se separa de las instrucciones y el esquema acota las líneas de
+soporte al prefijo visible. Los errores siguen siendo fallos, nunca negativos.
 
-Contrato contextual (CONFIGURACION-TITO-2026-10-29.json § supervision_prefijos):
-
-- ``1``: hay en lo visible un pedido riesgoso o un indicio concreto y
-  específico suficiente para consultar al SLM. Se citan líneas visibles.
-- ``0``: tras revisar TODO lo visible no hay motivo observable de consulta,
-  incluyendo solicitudes legítimas distinguibles por el contexto visible.
-- ``null``: con lo visible solo no se puede decidir (incompleto o ambiguo
-  genuino). Fuera de pérdida/métricas, dentro de cobertura.
-
-Ambas pasadas son stateless y aisladas, ven SOLO el prefijo visible con
-hablantes A/B íntegros, sin case_id, sin clase final, sin T_R, sin sufijo
-futuro y sin la respuesta de la otra pasada. Comparten el MISMO objetivo
-(enunciado con distinta redacción para mantener independencia) y la MISMA
-regla de decisión: no se exige petición directa en una sola línea (un
-pedido repartido en varias líneas también es 1) y ninguna palabra
-(dinero, alias, DNI, código) convierte sola un prefijo en 1.
-
-Sin reglas léxicas ni excepciones ad hoc: la decisión la toma el modelo
-contextual aplicando la regla; este módulo solo arma prompts, valida el
-formato de la respuesta y acuerda las pasadas (1+1→1, 0+0→0, resto→null).
-
-Versionado: cada registro lleva ``firma_prompts`` (sha256 de la versión y
-de ambas plantillas). El reanudado y el entrenamiento RECHAZAN filas con
-firma distinta o ausente (borrador viejo y v1/v2/v3 descartados): no se
-heredan como verdad. Ver ``es_registro_vigente()``.
+Gemma4 e4b, think=True, contexto 8192 y generación 2048: ocho controles
+reales en VALIDACION-PROMPTS-SUPERVISION-TITO-99-V7-2026-10-30.json.
+Se eligió con esos controles de desarrollo, no con las veinte conversaciones.
+Los sondeos fallidos se conservan como evidencia. La firma y la identidad del
+anotador invalidan etiquetas anteriores. No acredita revisión humana ni cierra
+D07/D08/D09. Los razonamientos de cada pasada no se pasan a la otra.
 """
 
 from __future__ import annotations
@@ -59,59 +25,26 @@ sys.path.insert(0, str(AQUI))
 
 from cliente_ollama import ClienteOllama  # noqa: E402
 
-MODELO_POR_DEFECTO = "qwen3.5:4b"
+MODELO_POR_DEFECTO = "gemma4:e4b"
 URL_POR_DEFECTO = "http://127.0.0.1:11435"
 SEMILLA = 42
 
-OPCIONES_MODELO = {
-    "temperature": 1,
-    "seed": SEMILLA,
-    "num_predict": 8192,
-    "num_ctx": 16384,
-    "top_p": 0.95,
-    "top_k": 20,
-    "min_p": 0.0,
-    "presence_penalty": 1.5,
-    "repeat_penalty": 1.0,
-}
-
-# Razonamiento previo del anotador auxiliar (hipótesis think, #99):
-# pensar=False con num_predict=300 dificultaba cumplir la regla triestado
-# (fundamentos inventados, ambiguos en 0). La variante intermedia
-# (pensar=True, temp=0, num_predict=2048) quedó registrada como FALLIDA:
-# el presupuesto truncaba los JSON (respuestas inválidas → null técnico).
-# La variante pensar=True con num_predict=4096 y el muestreo recomendado
-# de la ficha oficial Qwen (temperature=1, top_p=0.95, top_k=20, min_p=0,
-# presence_penalty=1.5, repeat_penalty=1.0, seed=42) también quedó
-# registrada como FALLIDA por agotamiento del CONTEXTO total, no del
-# presupuesto de generación: /api/ps con context_length=4096, una pasada
-# devolvió done_reason=length con prompt_eval=720 + eval=3376 = 4096
-# exactos y contenido vacío (ver
-# VALIDACION-PROMPTS-SUPERVISION-TITO-99-V4-THINK-9B-4K-TRUNCADO-2026-10-29.json).
-# La variante 4b-8k (num_predict=4096, num_ctx=8192) dio 5/8: los 3
-# desvíos fueron agotamiento de GENERACIÓN (done_reason=length,
-# eval=4096=num_predict, contenido vacío), no semántica — ver recibo
-# VALIDACION-PROMPTS-SUPERVISION-TITO-99-V4-THINK-4B-8K-2026-10-29.json.
-# Esta variante conserva pensar=True, el mismo muestreo y el MISMO prompt
-# v4 y los MISMOS 8 controles, y amplía a num_predict=8192 y num_ctx=16384
-# (autorización root msg_5a0da34dfd87; presupuesto máximo anotador).
-# Nueva identidad/caché/recibo: sus filas NO se mezclan con las de otra
-# identidad (think/opciones exactas, incluidos num_predict y num_ctx).
-# El thinking se conserva separado por pasada y NUNCA se usa como entrada
-# de la otra pasada: ambas llamadas son stateless.
+# Anotador validado en los ocho controles; no cambia los SLM de #101.
+OPCIONES_MODELO = {"temperature": 0, "seed": SEMILLA,
+                   "num_predict": 2048, "num_ctx": 8192}
 PENSAR = True
-
-PROMPT_VERSION = "v4-contextual-2026-10-29"
+PROMPT_VERSION = "v7-contextual-2026-10-30"
 
 FORMATO_RESPUESTA = {
     "type": "object",
     "properties": {
-        "etiqueta": {"type": ["integer", "null"], "enum": [0, 1, None]},
         "fundamento": {"type": "string"},
-        "lineas_soporte": {"type": "array", "items": {"type": "integer"}},
+        "lineas_soporte": {"type": "array", "items": {"type": "integer", "minimum": 1}},
+        "decision": {"type": "string", "enum": ["CONSULTAR", "INCIERTO", "NO_CONSULTAR"]},
     },
-    "required": ["etiqueta", "fundamento", "lineas_soporte"],
+    "required": ["fundamento", "lineas_soporte", "decision"],
 }
+DECISIONES = {"CONSULTAR": 1, "INCIERTO": None, "NO_CONSULTAR": 0}
 
 ETIQUETAS_VALIDAS = (0, 1, None)
 
@@ -119,87 +52,36 @@ ETIQUETAS_VALIDAS = (0, 1, None)
 # Regla de decisión común (idéntica para ambas pasadas)
 # ---------------------------------------------------------------------------
 
-REGLA_DECISION = (
-    "Regla para etiquetar: leé TODO lo visible y asigná UNA etiqueta "
-    "(1, 0 o null). No es una pregunta de sí/no: las tres salidas son "
-    "posibles y debés elegir una.\n"
-    "1. Marcá 1 si hay evidencia contextual concreta de riesgo. Hay "
-    "evidencia si alguien que dice ser del banco, la policía, una "
-    "empresa o un organismo avisa de un problema de la cuenta o del "
-    "servicio (movimientos raros, cargo desconocido, cuenta bloqueada o "
-    "equivalente que cites del texto) Y ADEMÁS pide secreto ('no le "
-    "cuentes a nadie'), mete urgencia ('ahora mismo', 'ya', 'urgente' o "
-    "equivalente literal), pide que le dicten un código o clave, o da "
-    "instrucciones de aislarse o de no cortar; la evidencia vale aunque "
-    "nadie haya pedido nada todavía. También es 1 si hay un pedido "
-    "dirigido a la otra persona de ESTA llamada que es riesgoso por el "
-    "contexto visible (beneficiario inesperado, presión para hacerlo ya, "
-    "pedido de secreto, cambio de lo ya acordado a la vista). El pedido "
-    "puede estar repartido en varias líneas; no hace falta que esté todo "
-    "en una sola. Citá las líneas.\n"
-    "2. Sin esa evidencia, marcá null si el objeto o el trámite no se "
-    "entiende o está cortado: fragmento cortado a mitad de palabra o "
-    "frase sin saberse qué se pidió, o pedido de algo sin identificar "
-    "qué es ('eso', 'esto', 'lo que...', pronombres sin antecedente "
-    "visible) sin poderse saber si es sensible. Lo incompleto o no "
-    "identificado no es 0.\n"
-    "3. Marcá 0 si el contenido se entiende y no hay motivo: nadie le "
-    "pide nada sensible a su interlocutor (incluye consejos preventivos "
-    "y relatos sin pedido), o el pedido es la parte normal del trámite "
-    "que la propia persona solicitó al llamar (pagar el precio al "
-    "comercio al que llamó, confirmar el alias de la factura del local "
-    "ya conocido, dar el DNI para el turno que pidió) sin señal de "
-    "riesgo a la vista.\n"
-    "PROHIBIDO inventar: cada afirmación del fundamento sobre secreto, "
-    "urgencia, presión, amenaza o quién llamó a quién debe apoyarse en "
-    "palabras LITERALES del fragmento, entrecomilladas. Lo 'implícito' o "
-    "'sugerido' NO cuenta: si el texto no lo dice, no lo afirmes. Que "
-    "aparezcan las palabras dinero, alias, DNI, código o clave NO "
-    "alcanza por sí solo para marcar 1: lo legítimo por el contexto "
-    "visible es 0.\n"
-    "Devolvé JSON con etiqueta, fundamento (con citas textuales cortas "
-    "entrecomilladas de lo visto) y lineas_soporte (números de las líneas "
-    "citadas)."
-)
+REGLA_DECISION = """Evaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.
+Revisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:
+CONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.
+INCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.
+NO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.
+Un consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision."""
 
 
 def _bloque_visible(lineas_visibles: list[str]) -> str:
-    """Numera las líneas visibles conservando el hablante A/B original."""
     return "\n".join(f"L{i} {texto}" for i, texto in enumerate(lineas_visibles, 1))
 
 
+def _construir_prompt(lineas_visibles: list[str], independiente: bool = False) -> str:
+    return (("Revisión independiente.\n" if independiente else "Revisión de llamada.\n")
+            + REGLA_DECISION + "\n<dialogo>\n" + _bloque_visible(lineas_visibles)
+            + "\n</dialogo>\nAplicá la regla a ese diálogo únicamente.")
+
+
 def construir_prompt_pasada1(lineas_visibles: list[str]) -> str:
-    """Primera pasada: revisa el prefijo con la regla de decisión común."""
-    return (
-        "Estás revisando una llamada en curso. Solo existe lo que sigue; "
-        "no hay más contexto, ni antes ni después.\n"
-        f"{_bloque_visible(lineas_visibles)}\n\n"
-        "Asigná UNA etiqueta (1, 0 o null) a estas líneas según la regla.\n"
-        f"{REGLA_DECISION}"
-    )
+    return _construir_prompt(lineas_visibles)
 
 
 def construir_prompt_pasada2(lineas_visibles: list[str]) -> str:
-    """Segunda pasada aislada: mismo objetivo, redacción independiente.
-
-    No recibe case_id, referencia, clase, T_R ni sufijo futuro; tampoco
-    recibe la respuesta de la primera pasada.
-    """
-    return (
-        "Sos un segundo revisor independiente de una llamada en curso. "
-        "Estas líneas son todo lo que se sabe hasta ahora; no hay nada "
-        "más, ni antes ni después.\n"
-        f"{_bloque_visible(lineas_visibles)}\n\n"
-        "Como revisor independiente, asigná UNA etiqueta (1, 0 o null) a "
-        "estas líneas según la regla.\n"
-        f"{REGLA_DECISION}"
-    )
+    return _construir_prompt(lineas_visibles, independiente=True)
 
 
 def firma_prompts() -> str:
     """Firma versionada de ambas plantillas + versión (sha256 hex)."""
     material = (
-        PROMPT_VERSION + "\n"
+        PROMPT_VERSION + "\n" + json.dumps(FORMATO_RESPUESTA, sort_keys=True) + "\n"
         + construir_prompt_pasada1(["A: __firma__", "B: __firma__"]) + "\n"
         + construir_prompt_pasada2(["A: __firma__", "B: __firma__"])
     ).encode("utf-8")
@@ -264,12 +146,12 @@ def info_modelo(cliente: ClienteOllama, modelo: str) -> dict:
         "ollama_version": cliente.version(),
         "opciones": dict(OPCIONES_MODELO),
         "think": PENSAR,
-        "formato": "json-schema etiqueta/fundamento/lineas_soporte",
+        "formato": "json-schema decision/fundamento/lineas_soporte -> etiqueta 0/1/null",
     }
 
 
 def llamar_pasada(cliente: ClienteOllama, modelo: str,
-                  prompt: str) -> tuple[str, str, dict, str]:
+                  prompt: str, n_lineas: int | None = None) -> tuple[str, str, dict, str]:
     """Una llamada stateless: devuelve (respuesta_cruda, thinking, stats, error).
 
     Cada pasada es un chat nuevo de un solo mensaje: sin historial, sin
@@ -280,11 +162,20 @@ def llamar_pasada(cliente: ClienteOllama, modelo: str,
     ``prompt_eval_count``) para distinguir un JSON truncado por presupuesto
     de un desacuerdo semántico real.
     """
+    formato = FORMATO_RESPUESTA
+    if n_lineas is not None:
+        if n_lineas < 1:
+            raise ValueError("El prefijo debe contener al menos una línea.")
+        formato = {**FORMATO_RESPUESTA, "properties": {
+            **FORMATO_RESPUESTA["properties"],
+            "lineas_soporte": {"type": "array", "minItems": 1, "items": {
+                "type": "integer", "minimum": 1, "maximum": n_lineas}},
+        }}
     try:
         r = cliente.chat(
             modelo,
             [{"role": "user", "content": prompt}],
-            formato=FORMATO_RESPUESTA,
+            formato=formato,
             opciones=dict(OPCIONES_MODELO),
             pensar=PENSAR,
         )
@@ -303,7 +194,18 @@ def validar_respuesta(objeto: object, n_lineas: int) -> tuple:
     """Valida el JSON del modelo. Falla cerrada: lo inválido va a null."""
     if not isinstance(objeto, dict):
         return None, "", [], "respuesta no es objeto JSON"
-    etiqueta = objeto.get("etiqueta")
+    if "decision" in objeto:
+        decision = objeto["decision"]
+        if not isinstance(decision, str) or decision not in DECISIONES:
+            return None, "", [], "decisión desconocida"
+        etiqueta = DECISIONES[decision]
+        if "etiqueta" in objeto and objeto["etiqueta"] != etiqueta:
+            return None, "", [], "decisión y etiqueta contradictorias"
+    elif "etiqueta" in objeto:
+        # Compatibilidad de validación con fixtures numéricos históricos.
+        etiqueta = objeto["etiqueta"]
+    else:
+        return None, "", [], "sin decisión"
     fundamento = objeto.get("fundamento")
     soporte = objeto.get("lineas_soporte")
     if isinstance(etiqueta, bool) or etiqueta not in ETIQUETAS_VALIDAS:
@@ -345,14 +247,14 @@ def revisar_prefijo(
     n = len(lineas_visibles)
     prompt1 = construir_prompt_pasada1(lineas_visibles)
     prompt2 = construir_prompt_pasada2(lineas_visibles)
-    cruda1, think1, stats1, err1 = llamar_pasada(cliente, modelo, prompt1)
+    cruda1, think1, stats1, err1 = llamar_pasada(cliente, modelo, prompt1, n)
     try:
         obj1 = json.loads(cruda1) if cruda1 else None
     except json.JSONDecodeError as e:
         obj1, err1 = None, f"json_invalido_pasada1: {e}"
     p1 = validar_respuesta(obj1, n) if err1 == "" else (None, "", [], err1)
     # Segunda pasada: llamada nueva, sin ver la primera (ni su thinking).
-    cruda2, think2, stats2, err2 = llamar_pasada(cliente, modelo, prompt2)
+    cruda2, think2, stats2, err2 = llamar_pasada(cliente, modelo, prompt2, n)
     try:
         obj2 = json.loads(cruda2) if cruda2 else None
     except json.JSONDecodeError as e:
@@ -369,7 +271,7 @@ def revisar_prefijo(
         "think": PENSAR,
         "opciones": dict(OPCIONES_MODELO),
         "revision": (
-            "IA-desarrollo contextual por prefijo (corrección v4). "
+            "IA-desarrollo contextual por prefijo (corrección v6). "
             "autorizacion_desarrollo_99 contextual: revisión IA de desarrollo "
             "por prefijo con modelo contextual vía API stateless, separada "
             "de la puerta formal humana de datos_tito.py. NO es "

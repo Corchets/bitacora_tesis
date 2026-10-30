@@ -70,6 +70,7 @@ import sys
 import time
 import unicodedata
 from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
@@ -97,7 +98,7 @@ SUPERVISION_REAL_NOMBRE = "SUPERVISION-CONTEXTUAL-TITO-99-2026-10-29.jsonl"
 AUDITORIA_SEMANTICA_REAL_NOMBRE = (
     "AUDITORIA-SEMANTICA-CONTEXTUAL-TITO-99-2026-10-29.json")
 AUDITORIA_LEXICA_AUX_NOMBRE = "AUDITORIA-LEXICA-AUXILIAR-TITO-99-2026-10-29.json"
-VALIDACION_RECIBO_NOMBRE = "VALIDACION-PROMPTS-SUPERVISION-TITO-99-2026-10-29.json"
+VALIDACION_RECIBO_NOMBRE = "VALIDACION-PROMPTS-SUPERVISION-TITO-99-V7-2026-10-30.json"
 MOTIVOS_SUPERVISION_VALIDOS = ("acuerdo", "desacuerdo", "respuesta_invalida")
 GRUPOS_AUDITORIA_EXIGIDOS = ("entrenamiento", "validacion", "comparacion_20")
 
@@ -1156,7 +1157,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.paso in ("auditoria", "todo"):
         lexica = auditar_relaciones(banco, textos, particion_de)
         (AQUI / AUDITORIA_LEXICA_AUX_NOMBRE).write_text(
-            json.dumps({"fecha": "2026-10-29", "semilla": SEMILLA,
+            json.dumps({"fecha": datetime.now(timezone.utc).date().isoformat(), "semilla": SEMILLA,
                         "nota": ("Cota lexica auxiliar (igualdad/subcadena/"
                                  "Jaccard); no es evidencia semantica "
                                  "suficiente ni sustituye la auditoria del "
@@ -1480,7 +1481,7 @@ def main(argv: list[str] | None = None) -> int:
     artefactos_identidad, artefacto_seleccionado = identidad_reporte_99(
         [AQUI / _nombre_arte(e, C) for e in ENTRADAS for C in VALORES_C],
         seleccion["elegida"])
-    reporte = {"fecha": "2026-10-29", "issue": 99, "semilla": SEMILLA,
+    reporte = {"fecha": datetime.now(timezone.utc).date().isoformat(), "issue": 99, "semilla": SEMILLA,
                "encoder": {"id": ENCODER_ID, "revision": ENCODER_REVISION,
                            "congelado": True, "tokenizer_sha256": tok_sha},
                "auditoria_semantica": auditoria_sem,

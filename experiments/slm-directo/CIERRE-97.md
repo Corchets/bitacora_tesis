@@ -5,7 +5,7 @@ No cierra decisiones (D07/D08/D09 abiertas), no crea ADR, no toca
 [MAPA-DECISIONES.md](../../docs/gestion/MAPA-DECISIONES.md) ni
 [ARQUITECTURA.md](../../docs/ingenieria/ARQUITECTURA.md) ni código en este documento.
 Bitácora: [2026-10-semana-04.md](../../docs/gestion/bitacora/2026-10-semana-04.md).
-Riesgos: [REGISTRO-RIESGOS.md](../../docs/gestion/REGISTRO-RIESGOS.md) (R05, R23).
+Riesgos: [REGISTRO-RIESGOS.md](../../docs/gestion/REGISTRO-RIESGOS.md) (R05, R25).
 
 > **Nota de alcance confirmada por el usuario el 2026-10-27:** #96 queda PARCIAL
 > (validación de datos implementada; habilitación bloqueada sin revisión humana

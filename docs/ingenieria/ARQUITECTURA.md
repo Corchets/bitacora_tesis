@@ -412,3 +412,12 @@ configuraciones restantes requieren acuerdo antes de su fase, como explicita
 #95 en relación con D07/D08/D09. No se congelan aquí la arquitectura final ni
 el protocolo del proyecto; el plan original de §7.1–§7.4 conserva su condición
 de antecedente de la primera comparación.
+
+El 2026-10-27 el usuario aprobó dividir #95 en siete subissues, publicados como
+#96–#102 con `ready-for-agent` y seis bloqueos nativos. La entrada disponible es
+[#96](https://github.com/Corchets/bitacora_tesis/issues/96), datos revisados y
+particiones verificables, en paralelo con
+[#97](https://github.com/Corchets/bitacora_tesis/issues/97), recorrido hasta el
+primer aviso y costos separados. Los criterios y dependencias se consultan en
+GitHub, sin otro backlog local. El título, cuerpo, estado y metadatos de #95 se
+conservaron; publicar los subissues no ejecuta el experimento.

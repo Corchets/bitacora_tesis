@@ -271,8 +271,9 @@ Corrida de referencia (Tito real + SLM simulado, umbral 0,5, 8 casos, 105
 líneas, 316 filas = 105×3 + cabecera):
 [`corridas/2026-10-26_132027_tito-real-8casos`](corridas/2026-10-26_132027_tito-real-8casos/resumen.md).
 Tito puntuó solo hasta la activación de cada caso: 43 puntajes en la variante
-filtrada (no 105; corrección #97); las 70 filas restantes de esa variante son
-consultas SLM con Tito ya activado.
+filtrada (no 105; corrección #97). Hubo 35 actualizaciones con consulta omitida
+y 70 consultas al SLM; ocho de esas consultas ocurrieron en la misma
+actualización que activó Tito, por lo que ambos componentes trabajaron allí.
 El `manifiesto.json` de la corrida registra comando, código y diff, máquina,
 semilla, filtro (artefacto + sha + encoder) y casos; cada fila conserva
 `tito_puntaje`, `consulta`, `indicio_*` y costo Tito+SLM incluso si la llamada
@@ -295,6 +296,25 @@ git pull
 Lo guardado queda en `git stash list` por si hace falta recuperarlo.
 
 ### Verificación sin modelos ni corridas históricas (#97)
+
+**Verificación del 2026-10-28:** 89 pruebas dirigidas aprobadas con
+`python -m unittest tests.test_primer_aviso tests.test_ensayo tests.test_filtro_tito tests.test_comparar tests.test_tito_real -v`
+(7,979 s), más compilación de los seis módulos indicados abajo. Incluyen
+recorridos de punta a punta que generan resumen y comparación, corte por aviso
+válido y falsa alarma, llamadas sin aviso o sin derivación, reinicio de estado,
+fallos y salida inválida, preparación separada, costos sin doble conteo,
+duraciones ausentes con unidad explícita cuando existen y diagnóstico separado.
+Sin descargas, entrenamiento ni inferencia de modelos reales. Verificación
+sobre el commit `0a95968b7de9ed1a689cecb4a88a3e8e9f373f8e`, con los cambios
+locales de curación y documentación de #96 presentes.
+
+El [informe de #97 del 2026-10-27](CIERRE-97.md) conserva el estado histórico
+de #96. El usuario aprobó y cerró #96 el 2026-10-28, según el
+[registro vigente](CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
+La verificación técnica de #97 es conforme; el usuario indicó cerrarlo el
+2026-10-28. [Registro del cierre](https://github.com/Corchets/bitacora_tesis/issues/97).
+No requiere reentrenamiento para verificarse.
+El diagnóstico de calidad del Tito actual corresponde a #98.
 
 Todo lo de abajo corre con dobles deterministas (Tito guionado, SLM falso):
 no descarga modelos, no entrena y no toca `corridas/` ni crea carpetas en el

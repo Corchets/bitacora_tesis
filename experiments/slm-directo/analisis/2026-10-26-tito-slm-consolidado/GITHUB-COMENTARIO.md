@@ -11,7 +11,7 @@ Consolidado Tito→SLM verificado: 6 artefactos × 8 conversaciones × 2 variant
 - Límites: 8 sintéticas de desarrollo, referencias provisorias, umbral 0,5 exploratorio, runtimes históricos, sin segundos/RTF/móvil. Sin afirmaciones de rendimiento móvil, generalización ni ahorro por contar consultas.
 - Auditoría: 79 regresiones OK (1 salteada); manifiestos, `tito_logreg.json` (sha `fb601eaa…`, seed 42, 5520 textos, RoBERTuito congelado), hashes, hardware, versiones y trazas por línea conservados.
 - Revisión por otra persona: **pendiente** (`REVISION.md` con lista de verificación). No se declara reproducción de inferencia ajena.
-- Barrido: bitácora semanal, D09 (evidencia nueva, sin cerrar D07/D08/D09 ni #51) y R23 (mitigado en desarrollo, con residual) actualizados. No se cierra #68.
+- Barrido: bitácora semanal, D09 (evidencia nueva, sin cerrar D07/D08/D09 ni #51) y R25 (mitigado en desarrollo, con residual) actualizados. No se cierra #68.
 
 Evidencia: `experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/` (CONSOLIDADO, TABLAS, cobertura.json, consolidar.py, regenerar.sh, REVISION.md).
 Próxima acción: revisión cruzada y, con su resultado, decidir en #68 si conviene otra iteración.

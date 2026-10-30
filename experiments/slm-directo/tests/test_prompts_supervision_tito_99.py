@@ -58,28 +58,13 @@ class TestPromptsContextuales(unittest.TestCase):
         # Misma regla de decisión en ambas: el núcleo normativo es idéntico.
         self.assertIn(ps.REGLA_DECISION, p1)
         self.assertIn(ps.REGLA_DECISION, p2)
-        # La regla contextual distingue legítimo de riesgoso y no exige
-        # petición directa en una sola línea.
-        self.assertIn("legítimo", ps.REGLA_DECISION)
-        self.assertIn("repartido en varias líneas", ps.REGLA_DECISION)
-        self.assertIn("NO alcanza por sí solo", ps.REGLA_DECISION)
-        self.assertNotIn("DIRECTAMENTE", p1 + p2)
-        # Regla triestado breve (root): pregunta explícita de asignar UNA
-        # etiqueta, no binaria; orden 1-evidencia / null-incomprensible /
-        # 0-legítimo; el indicio vale aunque nadie haya pedido nada.
-        self.assertIn("asigná UNA etiqueta", ps.REGLA_DECISION)
-        self.assertIn("(1, 0 o null)", ps.REGLA_DECISION)
-        self.assertIn("No es una pregunta de sí/no", ps.REGLA_DECISION)
-        self.assertIn("aunque nadie haya pedido nada todavía", ps.REGLA_DECISION)
-        # Anti-alucinación: cada afirmación del fundamento exige cita
-        # literal; lo implícito no cuenta.
-        self.assertIn("PROHIBIDO inventar", ps.REGLA_DECISION)
-        self.assertIn("entrecomillad", ps.REGLA_DECISION)
-        self.assertIn("implícito", ps.REGLA_DECISION)
-        # Incomprensible o cortado va a null, no a 0.
-        self.assertIn("Lo incompleto o no identificado no es 0", ps.REGLA_DECISION)
-        self.assertIn("cortado a mitad", ps.REGLA_DECISION)
-        self.assertIn("'eso'", ps.REGLA_DECISION)
+        self.assertIn("CONSULTAR", ps.REGLA_DECISION)
+        self.assertIn("INCIERTO", ps.REGLA_DECISION)
+        self.assertIn("NO_CONSULTAR", ps.REGLA_DECISION)
+        for prompt in (p1, p2):
+            dialogo = prompt.split("<dialogo>\n", 1)[1].split("\n</dialogo>", 1)[0]
+            self.assertEqual(dialogo, "L1 A: hola")
+            self.assertNotIn(ps.REGLA_DECISION, dialogo)
 
     def test_sin_respuesta_de_pasada1_en_pasada2(self):
         vis = ["A: hola", "B: pasame el codigo ya"]
@@ -92,7 +77,7 @@ class TestFirma(unittest.TestCase):
     def test_firma_estable_y_versionada(self):
         self.assertEqual(ps.firma_prompts(), ps.firma_prompts())
         self.assertEqual(len(ps.firma_prompts()), 64)
-        self.assertTrue(ps.PROMPT_VERSION.startswith("v4-"))
+        self.assertRegex(ps.PROMPT_VERSION, r"^v\d+-contextual-\d{4}-\d{2}-\d{2}$")
 
     def test_registro_viejo_sin_firma_se_rechaza(self):
         viejo = {"case_id": "X", "hasta_linea": 1, "etiqueta": 0}
@@ -166,9 +151,7 @@ class TestRevisionStateless(unittest.TestCase):
 
 
 OPCIONES_VIGENTES = {
-    "temperature": 1, "seed": 42, "num_predict": 8192, "num_ctx": 16384,
-    "top_p": 0.95, "top_k": 20, "min_p": 0.0, "presence_penalty": 1.5,
-    "repeat_penalty": 1.0,
+    "temperature": 0, "seed": 42, "num_predict": 2048, "num_ctx": 8192,
 }
 
 
@@ -269,14 +252,10 @@ class TestThinkPlumbing(unittest.TestCase):
         self.assertEqual(thinking, "t-razón")
         self.assertIs(ps.PENSAR, True)
         self.assertTrue(vistos["pensar"] is True)
-        self.assertEqual(vistos["opciones"]["num_predict"], 8192)
-        self.assertLessEqual(vistos["opciones"]["num_predict"], 8192)
-        self.assertEqual(vistos["opciones"]["num_ctx"], 16384)
-        self.assertEqual(vistos["opciones"]["temperature"], 1)
-        self.assertEqual(vistos["opciones"]["top_p"], 0.95)
-        self.assertEqual(vistos["opciones"]["top_k"], 20)
-        self.assertEqual(vistos["opciones"]["presence_penalty"], 1.5)
-        self.assertEqual(vistos["opciones"]["repeat_penalty"], 1.0)
+        self.assertEqual(vistos["opciones"]["num_predict"], 2048)
+        self.assertLessEqual(vistos["opciones"]["num_predict"], 2048)
+        self.assertEqual(vistos["opciones"]["num_ctx"], 8192)
+        self.assertEqual(vistos["opciones"]["temperature"], 0)
         self.assertIn("done_reason", stats)
         self.assertIn("eval_count", stats)
 
@@ -299,8 +278,8 @@ class TestThinkPlumbing(unittest.TestCase):
         self.assertNotIn("secreto-1", cli.prompts[1])
         self.assertNotIn("secreto-2", cli.prompts[0])
         self.assertTrue(out["think"] is True)
-        self.assertEqual(out["opciones"]["num_predict"], 8192)
-        self.assertEqual(out["opciones"]["num_ctx"], 16384)
+        self.assertEqual(out["opciones"]["num_predict"], 2048)
+        self.assertEqual(out["opciones"]["num_ctx"], 8192)
         self.assertIn("done_reason", out["pasada1"])
         self.assertIn("eval_count", out["pasada2"])
 
@@ -314,9 +293,9 @@ class TestThinkPlumbing(unittest.TestCase):
 
         meta = ps.info_modelo(Cli(), "m")
         self.assertEqual(meta["think"], True)
-        self.assertEqual(meta["opciones"]["num_predict"], 8192)
-        self.assertEqual(meta["opciones"]["num_ctx"], 16384)
-        self.assertEqual(meta["opciones"]["temperature"], 1)
+        self.assertEqual(meta["opciones"]["num_predict"], 2048)
+        self.assertEqual(meta["opciones"]["num_ctx"], 8192)
+        self.assertEqual(meta["opciones"]["temperature"], 0)
         self.assertEqual(meta["digest"], "digest-x")
 
 

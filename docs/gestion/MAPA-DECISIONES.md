@@ -195,6 +195,14 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [contraste con el laboratorio](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
   Son antecedentes de candidatos y pruebas, no requisitos nuevos. La comparación
   debe declarar qué código y datos reutiliza y qué cambió.
+- **Preparación delegada por el usuario (2026-10-29):** el usuario aprobó las veinte
+  conversaciones de #101 y delegó resolver los parámetros técnicos sin nuevas
+  aprobaciones genéricas. [Preparación operativa](../../experiments/slm-directo/DATOS-TITO.md#preparación-técnica-delegada--2026-10-29):
+  particiones por ID/hash, historial acumulado como entrada principal del Tito nuevo,
+  búsqueda acotada y supervisión IA explícita para desarrollo. #98–#102 actualizados
+  en GitHub. La auditoría semántica entre fuentes y las etiquetas de prefijos siguen
+  siendo trabajo técnico antes de entrenar; no se fabrican revisiones humanas ni se
+  habilita el protocolo final por esta delegación. D07/D08/D09 siguen abiertas.
 - **Plan exploratorio acordado con el usuario (2026-10-26):** Tito como filtro
   que activa al SLM ante sospecha, con contexto completo e indicio falible; ocho
   conversaciones de desarrollo, todos los SLM previamente ejecutados y umbral
@@ -242,6 +250,19 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   conserva pendientes explícitos de referencia, particiones, criterio de
   insuficiencia y margen preventivo mínimo. No se ejecutaron nuevas corridas
   ni se resolvieron D07/D08/D09 por publicar este plan.
+  Descomposición aprobada el 2026-10-27 y publicada en siete subissues (#96–#102)
+  de #95, con seis bloqueos nativos; las primeras entregas disponibles son
+  [#96](https://github.com/Corchets/bitacora_tesis/issues/96) y
+  [#97](https://github.com/Corchets/bitacora_tesis/issues/97), en paralelo.
+
+- **Aceptación de la curación de Tito (2026-10-28):** el usuario revisó los
+  informes y aprobó #96 expresamente; el issue queda cerrado para continuar
+  la secuencia de #95. [Registro de aprobación](../../experiments/slm-directo/CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
+  Codex creó #103 por interpretar incorrectamente que se aprobaban solo informes;
+  se retiró como no planificado y se eliminó su bloqueo de #98. No constituye una
+  nueva condición ni exige otra aprobación de #96. Se conserva la distinción entre
+  revisión IA y aprobación humana, sin atribuir anotaciones inexistentes a otras
+  personas. No resuelve D07/D08/D09 ni implica entrenamiento o inferencia.
 
 ### D10 — Congelar estructura de entrega y defensa
 

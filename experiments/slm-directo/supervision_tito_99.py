@@ -1,35 +1,20 @@
-"""Supervisión contextual de prefijos para #99 (módulo del corrector).
+"""Supervisión contextual de desarrollo para generar Tito (#99).
 
-Revisión contextual REAL: cada prefijo de entrenamiento/validación se
-somete a DOS pasadas independientes de un modelo contextual vía API
-stateless (Ollama http://127.0.0.1:11435) con el MISMO objetivo
-contextual (1 = pedido riesgoso o indicio concreto visible para consultar
-al SLM; 0 = sin motivo observable revisado, incluyendo solicitudes
-legítimas distinguibles por contexto; null = ambiguo/incompleto). Cada
-pasada ve SOLO las líneas visibles hasta ese punto, con hablantes A/B
-íntegros, sin case_id, sin clase final, sin T_R, sin sufijo futuro y sin
-reutilizar respuestas ni estado entre pasadas.
+Revisa los prefijos de entrenamiento/validación con dos chats stateless por
+prefijo. El anotador ve solo líneas A/B disponibles; no recibe ID, clase,
+marcas humanas, sufijo futuro ni respuestas de otra pasada. El contrato,
+esquema y configuración viven en prompts_supervision_tito_99.py.
 
-Procedencia de los prompts: corrección v2 en
-`prompts_supervision_tito_99.py` (2026-10-29; reemplaza los prompts v1 que
-pedían "DIRECTAMENTE" y marcaban 1/1 el prefijo legítimo de la pizzería).
-Validación real previa con qwen3.5:4b en
-`VALIDACION-PROMPTS-SUPERVISION-TITO-99-2026-10-29.json` (7/7 controles).
-Registros versionados con `firma_prompts`; el borrador v1 sin firma queda
-descartado y se reanota.
+La versión v7 se validó con Gemma4 e4b, think=True, 2048 tokens de generación
+y contexto 8192, en ocho controles secuenciales y ocho concurrentes frescos.
+El resultado no acredita calidad humana ni cambia los diez SLM de #101.
+El recibo de controles y la identidad exacta del anotador son obligatorios
+para entrenar. Los errores y desacuerdos son null, nunca negativos.
 
-Acuerdo: 1+1 → 1, 0+0 → 0, cualquier otro caso (incluida respuesta
-inválida) → null, que queda fuera de pérdida/métricas pero presente en
-cobertura. Nunca se toca `revision_humana` ni la puerta formal de
-`datos_tito.py`; la autorización es de desarrollo y está declarada.
-
-Tampoco lee la reserva (rechazo por identificador/partición).
-
-Uso (desde experiments/slm-directo/, con .venv de la raíz):
-    python supervision_tito_99.py --paso supervision
-    python supervision_tito_99.py --paso auditoria
-    python supervision_tito_99.py --paso cruce
-    python supervision_tito_99.py --paso todo
+Los registros se guardan por ID/línea, con prompts y hashes, y se reanudan
+sin heredar filas de otra firma o identidad. --trabajadores permite 1–4
+chats concurrentes independientes; un único hilo escribe el JSONL en orden.
+La reserva y las veinte de comparación quedan fuera del ajuste.
 """
 
 from __future__ import annotations
@@ -40,6 +25,7 @@ import json
 import sys
 import time
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
@@ -48,6 +34,8 @@ sys.path.insert(0, str(AQUI))
 from cliente_ollama import ClienteOllama, ErrorOllama
 from datos_tito import rechazar_reserva
 from prompts_supervision_tito_99 import (
+    OPCIONES_MODELO,
+    PENSAR,
     PROMPT_VERSION,
     construir_prompt_pasada1,
     construir_prompt_pasada2,
@@ -61,31 +49,12 @@ PARTICIONES_RUTA = AQUI / "PARTICIONES-TITO-2026-10-29.json"
 SUPERVISION_RUTA = AQUI / "SUPERVISION-CONTEXTUAL-TITO-99-2026-10-29.jsonl"
 AUDITORIA_RUTA = AQUI / "AUDITORIA-SEMANTICA-CONTEXTUAL-TITO-99-2026-10-29.json"
 
-MODELO_POR_DEFECTO = "qwen3.5:4b"
+MODELO_POR_DEFECTO = "gemma4:e4b"
 URL_POR_DEFECTO = "http://127.0.0.1:11435"
 SEMILLA = 42
 
-OPCIONES_MODELO = {
-    "temperature": 1,
-    "seed": SEMILLA,
-    "num_predict": 8192,
-    "num_ctx": 16384,
-    "top_p": 0.95,
-    "top_k": 20,
-    "min_p": 0.0,
-    "presence_penalty": 1.5,
-    "repeat_penalty": 1.0,
-}
-
-# Hipótesis think (#99): pensar=True con num_predict=8192, num_ctx=16384
-# explícito y muestreo de la ficha oficial Qwen sobre el MISMO prompt v4
-# del módulo del corrector. Anteriores FALLIDAS: temp0/2048 y think/4096
-# sin num_ctx (contexto total), think/4096 con ctx8192 en 9b (generación)
-# y think/4096 con ctx8192 en 4b (5/8: 3 desvíos por generación, ver
-# recibo 4B-8K). Nueva identidad: sus filas no se mezclan con las de otra
-# identidad (think/opciones exactas, con num_predict y num_ctx).
-# El thinking se conserva separado por pasada y nunca alimenta a la otra.
-PENSAR = True
+# La validación y el recorrido usan la misma configuración del anotador.
+# Cambiarla invalida la identidad de caché y exige revalidar los controles.
 
 FORMATO_RESPUESTA = {
     "type": "object",
@@ -126,127 +95,10 @@ ETIQUETAS_VALIDAS = (0, 1, None)
 # Llamada stateless al modelo y validación de su respuesta
 # ---------------------------------------------------------------------------
 
-def info_modelo(cliente: ClienteOllama, modelo: str) -> dict:
-    """Identidad auditable del anotador: tag, digest, versión, opciones y think."""
-    return {
-        "tag": modelo,
-        "digest": cliente.modelos_instalados().get(modelo, "desconocido"),
-        "ollama_version": cliente.version(),
-        "opciones": dict(OPCIONES_MODELO),
-        "think": PENSAR,
-        "formato": "json-schema etiqueta/fundamento/lineas_soporte",
-    }
-
-
-def llamar_pasada(cliente: ClienteOllama, modelo: str,
-                  prompt: str) -> tuple[str, str, dict, str]:
-    """Una llamada stateless: devuelve (respuesta_cruda, thinking, stats, error).
-
-    Sin historial entre llamadas: cada pasada es un chat nuevo de un solo
-    mensaje, así no se reutiliza estado ni respuestas entre pasadas ni
-    entre prefijos. El thinking se conserva separado y nunca se inyecta en
-    el prompt de la otra pasada. ``stats`` trae ``done_reason``,
-    ``eval_count`` y ``prompt_eval_count`` para diagnóstico.
-    """
-    try:
-        r = cliente.chat(
-            modelo,
-            [{"role": "user", "content": prompt}],
-            formato=FORMATO_RESPUESTA,
-            opciones=dict(OPCIONES_MODELO),
-            pensar=PENSAR,
-        )
-        if not isinstance(r, dict):
-            return "", "", {}, "respuesta no es objeto Ollama"
-        mensaje = r.get("message", {}) or {}
-        stats = {k: r.get(k) for k in
-                 ("done_reason", "eval_count", "prompt_eval_count")}
-        return (mensaje.get("content", "") or "",
-                mensaje.get("thinking", "") or "", stats, "")
-    except Exception as e:  # noqa: BLE001 - falla cerrada: todo error va a null
-        return "", "", {}, f"error_modelo: {type(e).__name__}: {e}"
-
-
-def validar_respuesta(objeto: object, n_lineas: int) -> tuple:
-    """Valida el JSON del modelo. Falla cerrada: lo inválido va a null."""
-    if not isinstance(objeto, dict):
-        return None, "", [], "respuesta no es objeto JSON"
-    etiqueta = objeto.get("etiqueta")
-    fundamento = objeto.get("fundamento")
-    soporte = objeto.get("lineas_soporte")
-    if etiqueta not in ETIQUETAS_VALIDAS:
-        return None, "", [], f"etiqueta inválida: {etiqueta!r}"
-    if not isinstance(fundamento, str) or not fundamento.strip():
-        return None, "", [], "fundamento vacío"
-    if not isinstance(soporte, list) or not all(
-            isinstance(n, int) and 1 <= n <= n_lineas for n in soporte):
-        return None, "", [], f"lineas_soporte fuera de 1..{n_lineas}: {soporte!r}"
-    if etiqueta is not None and not soporte:
-        return None, "", [], "etiqueta decidida sin líneas de soporte"
-    return etiqueta, fundamento.strip(), sorted(set(soporte)), ""
-
-
-def acordar(p1: tuple, p2: tuple) -> tuple:
-    """Acuerdo entre pasadas: 1+1→1, 0+0→0, resto→null con motivo."""
-    e1, f1, s1, err1 = p1
-    e2, f2, s2, err2 = p2
-    if err1 or err2:
-        motivo = "; ".join(e for e in (err1, err2) if e)
-        return None, f"respuesta inválida ({motivo}); incierto.", [], "respuesta_invalida"
-    if e1 == e2 and e1 is not None:
-        return e1, f"{f1} | {f2}", sorted(set(s1) | set(s2)), "acuerdo"
-    return (
-        None,
-        f"desacuerdo entre pasadas (propuesta={e1}, confirmacion={e2}): "
-        f"incierto, fuera de pérdida con cobertura. {f1}",
-        sorted(set(s1) | set(s2)),
-        "desacuerdo",
-    )
-
-
-def revisar_prefijo(lineas_visibles: list[str], cliente: ClienteOllama,
-                    modelo: str) -> dict:
-    """Revisión contextual real de un prefijo: dos pasadas aisladas."""
-    n = len(lineas_visibles)
-    prompt1, prompt2 = (construir_prompt_pasada1(lineas_visibles),
-                        construir_prompt_pasada2(lineas_visibles))
-    cruda1, think1, stats1, err1 = llamar_pasada(cliente, modelo, prompt1)
-    try:
-        obj1 = json.loads(cruda1) if cruda1 else None
-    except json.JSONDecodeError as e:
-        obj1, err1 = None, f"json_invalido_pasada1: {e}"
-    p1 = validar_respuesta(obj1, n) if err1 == "" else (None, "", [], err1)
-    # Segunda pasada: llamada nueva, sin ver la primera (ni su thinking).
-    cruda2, think2, stats2, err2 = llamar_pasada(cliente, modelo, prompt2)
-    try:
-        obj2 = json.loads(cruda2) if cruda2 else None
-    except json.JSONDecodeError as e:
-        obj2, err2 = None, f"json_invalido_pasada2: {e}"
-    p2 = validar_respuesta(obj2, n) if err2 == "" else (None, "", [], err2)
-    etiqueta, fundamento, soporte, motivo = acordar(p1, p2)
-    return {
-        "etiqueta": etiqueta,
-        "fundamento": fundamento,
-        "lineas_soporte": soporte,
-        "motivo": motivo,
-        "think": PENSAR,
-        "opciones": dict(OPCIONES_MODELO),
-        "revision": "IA-desarrollo contextual por prefijo. " + AUTORIZACION_DESARROLLO,
-        "pasada1": {"etiqueta": p1[0], "fundamento": p1[1],
-                    "lineas_soporte": p1[2], "error": p1[3],
-                    "prompt": prompt1, "respuesta_cruda": cruda1,
-                    "thinking": think1,
-                    "done_reason": stats1.get("done_reason"),
-                    "eval_count": stats1.get("eval_count"),
-                    "prompt_eval_count": stats1.get("prompt_eval_count")},
-        "pasada2": {"etiqueta": p2[0], "fundamento": p2[1],
-                    "lineas_soporte": p2[2], "error": p2[3],
-                    "prompt": prompt2, "respuesta_cruda": cruda2,
-                    "thinking": think2,
-                    "done_reason": stats2.get("done_reason"),
-                    "eval_count": stats2.get("eval_count"),
-                    "prompt_eval_count": stats2.get("prompt_eval_count")},
-    }
+# Fuente única del contrato del anotador: validación y recorrido coinciden.
+from prompts_supervision_tito_99 import (
+    info_modelo, llamar_pasada, validar_respuesta, acordar, revisar_prefijo,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -300,36 +152,48 @@ def leer_registros_existentes(ruta: Path) -> dict[tuple[str, int], dict]:
 def recorrer_y_guardar(textos: dict, particion_de: dict, cliente: ClienteOllama,
                        modelo: str, meta_modelo: dict,
                        ruta: Path = SUPERVISION_RUTA,
-                       limite: int | None = None) -> dict:
+                       limite: int | None = None,
+                       trabajadores: int = 1) -> dict:
     """Revisa los prefijos faltantes y los agrega al JSONL (reanudable).
 
     Solo las filas con firma de prompts vigente E identidad del anotador
     del recorrido (tag/digest/versión/opciones) cuentan como hechas: el
     borrador viejo, otra firma, otro modelo u otras opciones se reanotan,
-    no se heredan ni se mezclan (corrección v4, orden del coordinador).
+    no se heredan ni se mezclan.
     """
+    if not 1 <= trabajadores <= 4:
+        raise ValueError("trabajadores debe estar entre 1 y 4.")
     existentes = {k: v for k, v in leer_registros_existentes(ruta).items()
                   if es_registro_vigente_de(v, firma_prompts(), meta_modelo)}
     faltantes = sorted(set(total_prefijos_esperados(textos)) - set(existentes))
     if limite is not None:
         faltantes = faltantes[:limite]
     nuevos = 0
-    with ruta.open("a", encoding="utf-8") as f:
-        for cid, k in faltantes:
-            visibles = textos[cid][:k]
-            sup = revisar_prefijo(visibles, cliente, modelo)
-            registro = {
-                "case_id": cid, "hasta_linea": k,
-                "particion": particion_de[cid],
-                "texto_hash": sha_hex("\n".join(visibles).encode("utf-8")),
-                "modelo": meta_modelo,
-                "firma_prompts": firma_prompts(),
-                "prompts_version": PROMPT_VERSION,
-                **sup,
-            }
+    def revisar(clave):
+        cid, k = clave
+        visibles = textos[cid][:k]
+        sup = revisar_prefijo(visibles, cliente, modelo)
+        return {
+            "case_id": cid, "hasta_linea": k,
+            "particion": particion_de[cid],
+            "texto_hash": sha_hex("\n".join(visibles).encode("utf-8")),
+            "modelo": meta_modelo,
+            "firma_prompts": firma_prompts(),
+            "prompts_version": PROMPT_VERSION,
+            "trabajadores_anotacion": trabajadores,
+            **sup,
+        }
+
+    # Cada chat es stateless; los hilos no comparten respuestas ni futuros.
+    # map conserva el orden por ID/línea; solo este hilo escribe el JSONL.
+    with ThreadPoolExecutor(max_workers=trabajadores) as ejecutor, ruta.open("a", encoding="utf-8") as f:
+        for registro in ejecutor.map(revisar, faltantes):
             f.write(json.dumps(registro, ensure_ascii=False) + "\n")
             f.flush()
             nuevos += 1
+            if nuevos % 10 == 0 or nuevos == len(faltantes):
+                print(f"prefijos revisados: {len(existentes) + nuevos}/"
+                      f"{len(total_prefijos_esperados(textos))}", flush=True)
     return {"nuevos": nuevos, "faltantes_antes": len(faltantes)}
 
 
@@ -612,6 +476,8 @@ def main(argv: list[str] | None = None) -> int:
                    help="Segundos máximos por llamada al modelo (default: 600.0).")
     p.add_argument("--limite", type=int, default=None,
                    help="Solo para pruebas: revisa como máximo N prefijos.")
+    p.add_argument("--trabajadores", type=int, choices=range(1, 5), default=1,
+                   help="Chats stateless concurrentes de anotación (1–4); no cambia el detector.")
     args = p.parse_args(argv)
     if args.timeout <= 0:
         p.error("--timeout debe ser positivo (segundos).")
@@ -625,8 +491,10 @@ def main(argv: list[str] | None = None) -> int:
         meta = info_modelo(cliente, args.modelo)
         print(f"anotador: {meta['tag']} digest={meta['digest'][:12] if len(meta['digest']) > 12 else meta['digest']} "
               f"ollama={meta['ollama_version']} url={args.url} timeout_s={args.timeout}")
+        opciones_recorrido = ({"trabajadores": args.trabajadores}
+                              if args.trabajadores != 1 else {})
         res = recorrer_y_guardar(textos, particion_de, cliente, args.modelo,
-                                 meta, limite=args.limite)
+                                 meta, limite=args.limite, **opciones_recorrido)
         etiqueta_de, cobertura, modelos = cargar_supervision()
         print(f"supervision: nuevos={res['nuevos']} cobertura={cobertura}")
         ok, motivos = puede_entrenar(textos, particion_de)

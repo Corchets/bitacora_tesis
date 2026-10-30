@@ -1,0 +1,109 @@
+{
+  "fecha_utc": "2026-10-30T12:48:01.833200+00:00",
+  "issue": 101,
+  "etapa": "preflight",
+  "estado": "bloqueada_antes_de_medicion",
+  "esperados": 600,
+  "completados": 0,
+  "condiciones": [
+    "directo",
+    "tito-viejo",
+    "tito-nuevo"
+  ],
+  "casos_verificados": [
+    "CV2-D-V-BANCO-001",
+    "CV2-D-V-BANCO-002",
+    "CV2-D-V-BANCO-007",
+    "CV2-D-V-WHATSAPP-002",
+    "CV2-D-V-WHATSAPP-006",
+    "CV2-D-V-SOPORTE-003",
+    "CV2-D-V-SOPORTE-004",
+    "CV2-D-V-FAMILIAR-002",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-V-PREMIO-004",
+    "CV2-D-L-BANCO-001",
+    "CV2-D-L-BANCO-007",
+    "CV2-D-L-DELIVERY-001",
+    "CV2-D-L-ESCUELA-001",
+    "CV2-D-L-FAMILIAR-001",
+    "CV2-D-L-MEDICO-001",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-L-PREMIO-001",
+    "CV2-D-L-SOPORTE-002",
+    "CV2-D-L-WHATSAPP-001"
+  ],
+  "modelos_exigidos": [
+    "qwen3.5:4b",
+    "qwen3.5:2b",
+    "gemma:2b",
+    "gemma3:270m",
+    "gemma3:1b",
+    "gemma3:4b",
+    "gemma3n:e2b",
+    "gemma3n:e4b",
+    "gemma4:e2b",
+    "gemma4:e4b"
+  ],
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": {
+      "version": "0.21.1"
+    },
+    "artefactos_exigidos_instalados": [
+      {
+        "name": "gemma:2b",
+        "model": "gemma:2b",
+        "modified_at": "2026-10-29T10:09:15.966199919-03:00",
+        "size": 1678456656,
+        "digest": "b50d6c999e592ae4f79acae23b4feaefbdfceaa7cd366df2610e3072c052a160",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma",
+          "families": [
+            "gemma"
+          ],
+          "parameter_size": "3B",
+          "quantization_level": "Q4_0"
+        }
+      },
+      {
+        "name": "gemma3:270m",
+        "model": "gemma3:270m",
+        "modified_at": "2026-10-29T10:09:33.217621214-03:00",
+        "size": 291554930,
+        "digest": "e7d36fb2c3b3293cfe56d55889867a064b3a2b22e98335f2e6e8a387e081d6be",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma3",
+          "families": [
+            "gemma3"
+          ],
+          "parameter_size": "268.10M",
+          "quantization_level": "Q8_0"
+        }
+      }
+    ]
+  },
+  "modelos_faltantes": [
+    "qwen3.5:4b",
+    "qwen3.5:2b",
+    "gemma3:1b",
+    "gemma3:4b",
+    "gemma3n:e2b",
+    "gemma3n:e4b",
+    "gemma4:e2b",
+    "gemma4:e4b"
+  ],
+  "candidatos_historial_encontrados": [],
+  "validacion_supervision": {
+    "comando": "python experiments/slm-directo/entrenar_tito_99.py --paso supervision",
+    "exit_code": 3,
+    "stdout": "auditoria semantica: umbral=0.876 metodo=conservador:min_par (solapa con azar; se excluye de más) excluidas=0\nsupervision fail-closed: recibo de controles no conforme (desvios: ['consejo_negacion', 'ambiguo_truncado', 'ambiguo_objeto_vago']); gate cerrado, sin entrenamiento.\n",
+    "stderr": ""
+  },
+  "codigo_commit": "9fe43b531c950ea2c8565b989acacd6d16c0c17a",
+  "codigo_diff_sha256": "d87dfe029381bcf8ea953c4fa5020ca09a9e40b3ae2a71fac95b1074bed6e098",
+  "nota": "No se ejecutaron inferencias de la matriz ni se sustituyeron modelos. Validación de preparación fallida; no existe candidato nuevo congelado localizado. No es un resultado experimental ni completa #101."
+}
