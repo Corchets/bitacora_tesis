@@ -638,4 +638,46 @@ el 0,9 que después se midió con ASR.
   - Usar Silero 0,9 solo para *abrir* la frase y dejar que el RMS la cierre.
   - El umbral que siga el ruido de fondo del §11.6, paso 2.
 
-  Cualquiera de las dos se confirma con una toma nueva y otra voz antes de tocar la llamada.
+  Cualquiera de las dos se confirma con una toma nueva y otra voz antes de tocar la llamada. El 2026-10-30 se
+  midieron otras dos mezclas, «filtro» e «y» (§12.7).
+
+### 12.7 Mezclar el RMS con Silero (2026-10-30)
+
+> **Estado: propuesta sin discutir.** Decide Luciano en [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+> Las mezclas quedan para probar en el panel; el valor por defecto no cambia.
+
+Luciano preguntó si se puede quedar con el texto del RMS y con lo que Silero hace bien en el silencio con ruido.
+`MotorPorFrases.modo_vad` agrega dos mezclas con el RMS 0,008 y corte de 0,8 s de «Probar el ASR» y Silero 0,5:
+
+- **filtro:** el RMS abre y cierra las frases igual que hoy; solo cuenta como voz (para `MIN_VOZ_S` y los borradores)
+  lo que también oye Silero. Lo que Silero no oye abre un segmento, pero no se transcribe.
+- **y:** un bloque es voz si lo dicen los dos; si uno dice silencio, cuenta para el corte.
+
+Con 0,7 o 0,9 el filtro descartaba una frase real al simular el corte sin ASR, por eso queda en 0,5. Corridas:
+[`parakeet-mezclas-silero`](corridas/2026-10-30_voz-real_parakeet-mezclas-silero/resumen.md) y
+[`vad-extras-mezclas`](corridas/2026-10-30_voz-real_vad-extras-mezclas/resumen.md), código `9c4deb6` sin cambios
+pendientes. Mismo audio y condiciones que el §12.1.
+
+| Detector | Toma 2: frases OK / WER | Toma 3: frases OK / WER | G10: llamadas al ASR | Serie sin hablar: llamadas / audio al ASR | G08: cierres por silencio / tope | G08: WER |
+|---|---|---|---|---|---|---|
+| RMS 0,008 (referencia) | 28/30 · 13,3 % | 28/30 · 13,0 % | 28 | 40 / 165 s | 0 / 2 | 22,7 % |
+| **RMS con filtro Silero** | 28/30 · 13,3 % | 28/30 · 13,0 % | **1** | **10 / 34 s** | 0 / 2 | 22,7 % |
+| RMS y Silero | 28/30 · 14,3 % | 28/30 · 14,8 % | 1 | 10 / 20 s | 2 / 1 | 19,7 % |
+
+- **El filtro da el mismo texto que el RMS en todas las grabaciones con referencia**: las mismas frases, el mismo
+  WER y CER por toma y condición, y la misma demora final (1,06 s de mediana en la toma 2). Sobre ruido no
+  llama al ASR: en G10 pasa de 28 llamadas a 1 y en la serie de 40 a 10. En las 20 grabaciones con texto ahorra
+  pocos borradores (734 → 718 llamadas).
+- **El filtro no frena las palabras inventadas cuando hay voz ajena**: en la serie salen 14 contra 17, porque la tele
+  es voz humana. Y no cambia G08: el RMS nunca baja de 0,008 con la tele y la frase se cierra por el tope.
+- **La «y» corta en las pausas con la tele de fondo** (G08: 2 cierres por silencio, WER de 22,7 % a 19,7 %) pero
+  empeora un poco el texto sin ruido (+1,0 punto en la toma 2, +1,8 en la 3, una frase menos en la toma 1).
+- **Ninguna pasa la regla del §2** (+0 frases). Ninguna negativa disparó etiquetas.
+- **Costo:** decidir un bloque con Silero cuesta 0,12 ms de mediana (0,3 % de los 40 ms), con picos de 35 ms. La
+  memoria pico de la variante (887–1052 MB) varía entre corridas sin relación con el detector, como en el §12.5.
+- **En el panel:** el selector «Modelo de ASR» ofrece «Parakeet · RMS con filtro Silero», «Parakeet · RMS y Silero» y
+  «Parakeet · solo Silero» (umbral 0,9, sin RMS). Usan el corte y el umbral RMS elegidos: en la llamada en vivo
+  el umbral sigue fijo en 0,003, así que ahí el filtro trabaja sobre 0,003.
+
+Límites: los del §12.5. El filtro con umbral 0,5 no se eligió mirando el WER (sale igual por construcción), pero sí se
+descartaron 0,7 y 0,9 mirando este mismo audio. Falta probarlo con otra voz, con Meet y en el teléfono.

@@ -196,5 +196,6 @@ acá solo qué es cada archivo.
 defecto son los del panel (greedy, sin hotwords) y `metadatos()["decodificacion"]` registra lo usado. `MotorFasterWhisper`
 acepta `hotwords` e `initial_prompt`. `MotorPorFrases.detector_voz` (un `DetectorSilero` con
 `modelos/silero-vad/silero_vad.onnx`, [release de sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx),
-fuera de Git) decide voz o silencio por bloque en lugar del RMS; por defecto es `None` y decide el RMS, como en el panel. Al medir, cada variante corre en su propio subproceso para que la memoria pico sea la suya.
+fuera de Git) entra según `MotorPorFrases.modo_vad`: «silero» decide solo, «filtro» deja cortar al RMS y solo transcribe
+lo que Silero oye, «y» pide voz a los dos ([§12.7](PLAN-VOZ-REAL.md#127-mezclar-el-rms-con-silero-2026-10-30)); por defecto es `None` y decide el RMS, como en el panel. Al medir, cada variante corre en su propio subproceso para que la memoria pico sea la suya.
 
