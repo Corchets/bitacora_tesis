@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Medición del ASR con voz real (#94): re-corre offline las pruebas guardadas del panel con cada variante.
 
-Entrada: las pruebas guardadas por «Probar el ASR» (`guardada: true` y «Lo que dije en realidad» no
-vacío) y un CSV que dice de cada una a qué toma, voz y condición pertenece (`voz-real/pruebas.csv`).
+Entrada: las pruebas guardadas por «Probar el ASR» (`guardada: true`) y un CSV que dice de cada una a
+qué toma, voz y condición pertenece (`voz-real/pruebas.csv`). La referencia es «Lo que dije en realidad»;
+si está vacío y el CSV dice qué `bloque` del guion se leyó, es el texto de ese bloque.
 Por cada variante (PLAN-VOZ-REAL.md §4) se pasa el audio guardado por el motor y se compara lo que
 sale contra la referencia, frase por frase, con las etiquetas de `slm-directo/reglas.py` como medida
 principal. La regla del plan §2 se aplica en la toma 2, cada paso contra el anterior.
@@ -14,6 +15,7 @@ Uso típico (ver «Cómo correrlo» en PLAN-VOZ-REAL.md):
     python medir_voz_real.py
     python medir_voz_real.py --sin-whisper
     python medir_voz_real.py --variantes beam,beam+hotwords,whisper-small
+    python medir_voz_real.py --solo-parakeet
 """
 
 from __future__ import annotations
@@ -46,7 +48,7 @@ DICCIONARIO_POR_DEFECTO = DIR_VOZ_REAL / "diccionario.csv"
 JERGA_POR_DEFECTO = M.JERGA_POR_DEFECTO
 CORRIDAS = DIR_ASR / "corridas"
 VOCES = ("luciano", "otra")
-CONDICIONES = ("microfono", "meet")
+CONDICIONES = ("microfono", "meet", "voz-baja", "ruido-tv", "pausas")  # las tres últimas: extras por micrófono
 CANALES = {"protegida": 0, "otra": 1}  # columna del estereo.wav del panel
 TOMA_DE_DECISION = 2
 
@@ -78,12 +80,14 @@ def leer_csv(ruta: str | Path) -> list[dict[str, str]]:
         problemas = []
         if not fila["id"]:
             problemas.append("falta el id")
-        if fila["toma"] not in ("1", "2"):
-            problemas.append(f"toma debe ser 1 o 2: {fila['toma']!r}")
+        if fila["toma"] not in ("1", "2", "3"):
+            problemas.append(f"toma debe ser 1, 2 o 3: {fila['toma']!r}")
         if fila["voz"] not in VOCES:
             problemas.append(f"voz debe ser una de {VOCES}: {fila['voz']!r}")
         if fila["condicion"] not in CONDICIONES:
             problemas.append(f"condicion debe ser una de {CONDICIONES}: {fila['condicion']!r}")
+        if fila.get("bloque") and fila["bloque"] not in {"1", "2", "3", "4", "5", "6"}:
+            problemas.append(f"bloque debe ser vacío o de 1 a 6: {fila['bloque']!r}")
         if fila.get("canal") and fila["canal"] not in CANALES:
             problemas.append(f"canal debe ser vacío o uno de {tuple(CANALES)}: {fila['canal']!r}")
         if fila["id"] in vistos:
@@ -108,7 +112,10 @@ def elegir_canal(manifiesto: dict[str, Any], canal_csv: str = "") -> tuple[str, 
 
 def cargar_pruebas(filas: list[dict[str, str]], carpeta: str | Path, guion: Guion
                    ) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
-    """(pruebas medibles, omitidas con el motivo). Se miden solo las guardadas con referencia."""
+    """(pruebas medibles, omitidas con el motivo). Se miden solo las guardadas con referencia.
+
+    Si «Lo que dije en realidad» está vacío y la fila trae `bloque`, la referencia es ese bloque del guion.
+    """
     pruebas, omitidas = [], []
     for fila in filas:
         carpeta_prueba = Path(carpeta) / fila["id"]
@@ -118,11 +125,15 @@ def cargar_pruebas(filas: list[dict[str, str]], carpeta: str | Path, guion: Guio
             omitidas.append({"id": fila["id"], "motivo": "no existe la carpeta o no tiene manifiesto legible"})
             continue
         referencia = str(manifiesto.get("referencia") or "").strip()
+        origen = "manifiesto"
+        if not referencia and fila.get("bloque"):
+            referencia = "\n".join(f.texto for f in guion.bloques()[int(fila["bloque"])])
+            origen = "guion"
         if manifiesto.get("guardada") is not True:
             omitidas.append({"id": fila["id"], "motivo": "no está guardada (guardada distinta de true)"})
         elif not referencia:
             omitidas.append({"id": fila["id"], "motivo": "«Lo que dije en realidad» está vacío"})
-        elif "referencias_por_segmento" in manifiesto and any(
+        elif origen == "manifiesto" and "referencias_por_segmento" in manifiesto and any(
                 not texto.strip() for texto in manifiesto["referencias_por_segmento"].values()):
             omitidas.append({"id": fila["id"], "motivo": "Falta completar «Lo que dije en realidad» en alguna frase"})
         elif not (carpeta_prueba / "estereo.wav").is_file():
@@ -136,7 +147,7 @@ def cargar_pruebas(filas: list[dict[str, str]], carpeta: str | Path, guion: Guio
                 "wav": str(carpeta_prueba / "estereo.wav"), "referencia": referencia,
                 "lineas": lineas_de_referencia(referencia), "tipos": [l["tipo"] for l in ident["lineas"]],
                 "bloque": {k: ident[k] for k in ("bloque", "exacto", "mezcla", "reconocidas")},
-                "nota": fila.get("nota", ""),
+                "referencia_de": origen, "nota": fila.get("nota", ""),
             })
     return pruebas, omitidas
 
@@ -233,13 +244,16 @@ class Medicion:
         self.variantes: dict[str, dict[str, Any]] = {}
         self.pasos: list[dict[str, Any]] = []
         self.techo: list[dict[str, Any]] = []
+        self.parakeet: list[dict[str, Any]] = []
+        self.base = self.final = "greedy"  # con --solo-parakeet, la de Parakeet del panel
 
     def spec(self, nombre: str, motor: str, config: dict[str, Any]) -> dict[str, Any]:
         return {"nombre": nombre, "motor": motor, "config": config,
                 "pruebas": [{"id": p["id"], "wav": p["wav"], "canal": p["columna"]} for p in self.pruebas],
-                "bloque_ms": self.args.bloque_ms, "hilos": self.args.hilos if motor == "kroko" else self.args.hilos_whisper,
+                "bloque_ms": self.args.bloque_ms, "hilos": self.args.hilos_whisper if motor == "whisper" else self.args.hilos,
                 "hotwords_file": str(self.args.hotwords), "jerga_file": str(self.args.jerga),
-                "diccionario_file": str(self.args.diccionario), "modelo_dir": str(V.DIR_MODELO)}
+                "diccionario_file": str(self.args.diccionario),
+                "modelo_dir": str(V.DIR_MODELO_PARAKEET if motor == "parakeet" else V.DIR_MODELO)}
 
     def correr(self, nombre: str, motor: str, config: dict[str, Any]) -> dict[str, Any]:
         print(f"[{len(self.variantes) + 1}] {nombre} ...", flush=True)
@@ -309,6 +323,18 @@ class Medicion:
                 comparaciones[contra] = M.regla_de_paso(agregado, anterior) if agregado and anterior else None
             self.techo.append({"nombre": nombre, "config": config.como_dict(), "comparaciones": comparaciones})
 
+    def correr_parakeet(self, seleccion: set[str] | None) -> None:
+        """Parakeet con cada corte y umbral; cada una contra la del panel con la regla §2, sin elegir ninguna."""
+        for nombre, config in V.VARIANTES_PARAKEET:
+            if nombre == V.PARAKEET_PANEL or self.elegida(seleccion, nombre):
+                self.correr(nombre, "parakeet", config.como_dict())
+        base = self.agregado_de_decision(self.variantes[V.PARAKEET_PANEL])
+        for nombre, config in V.VARIANTES_PARAKEET[1:]:
+            if nombre in self.variantes:
+                agregado = self.agregado_de_decision(self.variantes[nombre])
+                self.parakeet.append({"nombre": nombre, "config": config.como_dict(), "contra": V.PARAKEET_PANEL,
+                                      "regla": M.regla_de_paso(agregado, base) if agregado and base else None})
+
 
 def seleccion_de_variantes(texto: str | None, sin_whisper: bool) -> set[str] | None:
     """Los nombres pedidos con --variantes (validados), o None para todas; --sin-whisper saca las de Whisper."""
@@ -367,11 +393,34 @@ def tabla_principal(med: Medicion, toma: int) -> list[str]:
     return filas
 
 
+def lineas_de_parakeet(med: Medicion) -> list[str]:
+    toma = med.args.toma_decision
+    salida = [f"Cada corte y umbral contra `{V.PARAKEET_PANEL}` (el del panel), en la toma {toma}, con las cuatro condiciones de la regla. "
+              "No se elige sola: «pasa» quiere decir que cumple las cuatro.", "",
+              "| Variante | Frases más | Etiquetas nuevas en negativas | Demora extra (s) | WER extra (puntos) | ¿Pasa? |",
+              "|---|---|---|---|---|---|"]
+    for c in med.parakeet:
+        r = c["regla"]
+        if r is None:
+            salida.append(f"| `{c['nombre']}` | — | — | — | — | sin datos de la toma {toma} |")
+            continue
+        k = r["criterios"]
+        marca = lambda ok: "" if ok else " ✗"
+        salida.append(
+            f"| `{c['nombre']}` | {k['etiquetas']['frases_mas']:+d}{marca(k['etiquetas']['cumple'])} | "
+            f"{k['negativas']['etiquetas_nuevas']:+d}{marca(k['negativas']['cumple'])} | "
+            f"{numero(k['demora']['extra_s'], 2) if k['demora']['extra_s'] is not None else '—'}{marca(k['demora']['cumple'])} | "
+            f"{(k['wer']['extra'] * 100):+.1f}{marca(k['wer']['cumple'])} | {'**sí**' if r['pasa'] else 'no'} |")
+    return salida
+
+
 def lineas_de_decision(med: Medicion) -> list[str]:
     toma = med.args.toma_decision
     if not any(p["toma"] == toma for p in med.pruebas):
         return [f"No hay pruebas de la toma {toma}: **no se aplicó la regla** y no se decidió ningún paso. "
                 f"La tabla de la sección 2 sirve para mirar; la decisión espera la toma {toma}."]
+    if not med.pasos:  # --solo-parakeet: no corrió la cadena de Zipformer
+        return lineas_de_parakeet(med)
     salida = [f"Cada candidato se compara con el paso que se quedó antes, en la toma {toma} (todas las condiciones juntas). "
               "Se queda solo si cumple las cuatro: **≥ 2 frases más con etiquetas correctas**, **sin etiquetas nuevas en negativas** "
               "(no más que el paso anterior), **demora final mediana ≤ +0,3 s** y **WER ≤ +2 puntos**.", "",
@@ -410,6 +459,8 @@ def lineas_de_decision(med: Medicion) -> list[str]:
                 k = r["criterios"]
                 salida.append(f"| `{t['nombre']}` | {contra} | {k['etiquetas']['frases_mas']:+d} | "
                               f"{k['negativas']['etiquetas_nuevas']:+d} | {(k['wer']['extra'] * 100):+.1f} |")
+    if med.parakeet:
+        salida += ["", "Parakeet (aparte de la cadena):", ""] + lineas_de_parakeet(med)
     return salida
 
 
@@ -430,8 +481,8 @@ def tablas_por_grupo(med: Medicion) -> list[str]:
 
 
 def tabla_recall_por_termino(med: Medicion, toma: int) -> list[str]:
-    columnas = ["greedy"] + ([med.final] if getattr(med, "final", "greedy") != "greedy" else [])
-    a0 = med.variantes["greedy"]["por_toma"].get(str(toma))
+    columnas = [med.base] + ([med.final] if med.final != med.base else [])
+    a0 = med.variantes[med.base]["por_toma"].get(str(toma))
     if not a0 or not a0["recall_criticos"]["por_termino"]:
         return ["_Sin términos críticos en la referencia._"]
     salida = ["| Término | En la referencia | " + " | ".join(f"`{c}`" for c in columnas) + " |",
@@ -449,7 +500,7 @@ def sustituciones_toma1(med: Medicion, tope: int = 30) -> list[tuple[str, str, i
     from collections import Counter
 
     cuenta: Counter = Counter()
-    base = med.variantes["greedy"]["por_prueba"]
+    base = med.variantes[med.base]["por_prueba"]
     for p in med.pruebas:
         if p["toma"] == 1:
             cuenta.update(M.sustituciones(p["lineas"], base[p["id"]]["hipotesis"]))
@@ -498,7 +549,7 @@ def escribir_resumen(ruta: Path, med: Medicion, manifiesto: dict[str, Any]) -> N
     sust = sustituciones_toma1(med)
     l += ["## 5b. Sustituciones frecuentes de la toma 1 (candidatas al diccionario)", ""]
     if sust:
-        l += ["Lo que salió con la línea base → lo que se dijo. Revisá cada una antes de pasarla a `voz-real/diccionario.csv`.", "",
+        l += [f"Lo que salió con `{med.base}` → lo que se dijo. Revisá cada una antes de pasarla a `voz-real/diccionario.csv`.", "",
               "| Salió | Se dijo | Veces |", "|---|---|---|"] + [f"| `{e}` | `{d}` | {n} |" for e, d, n in sust]
     else:
         l.append("_Sin pruebas de la toma 1 o sin sustituciones._")
@@ -534,7 +585,8 @@ def escribir_salida(carpeta: Path, med: Medicion, args: argparse.Namespace, omit
         "carpeta_pruebas": str(args.pruebas), "csv": str(args.csv),
         "pruebas": [{"id": p["id"], "toma": p["toma"], "voz": p["voz"], "condicion": p["condicion"], "canal": p["canal"],
                      "bloque": p["bloque"], "lineas_referencia": len(p["lineas"]),
-                     "duracion_s": med.variantes["greedy"]["por_prueba"][p["id"]]["audio_s"]} for p in med.pruebas],
+                     "referencia_de": p["referencia_de"],
+                     "duracion_s": med.variantes[med.base]["por_prueba"][p["id"]]["audio_s"]} for p in med.pruebas],
         "omitidas": omitidas,
     }
     manifiesto = {
@@ -551,7 +603,8 @@ def escribir_salida(carpeta: Path, med: Medicion, args: argparse.Namespace, omit
         "codigo": info_git(), "versiones": obtener_versiones_paquetes(),
         "hardware": {**obtener_info_hardware(), "python": platform.python_version()},
         "nota": args.nota or None,
-        "decision": {"toma": args.toma_decision, "pasos": med.pasos, "configuracion_final": med.final, "techo": med.techo},
+        "decision": {"toma": args.toma_decision, "pasos": med.pasos, "configuracion_final": med.final, "techo": med.techo,
+                     "parakeet": med.parakeet},
         "variantes": {n: {k: v[k] for k in ("motor", "config", "carga_s", "metadatos_motor", "memoria_pico_mb", "alcance_memoria",
                                             "por_grupo", "por_toma")}
                       | {"por_prueba": {i: {k: r[k] for k in ("error", "demoras_s", "segmentos", "proceso_s", "audio_s", "p95_bloque_ms", "max_bloque_ms")}
@@ -577,11 +630,13 @@ def parsear(argv: list[str] | None) -> argparse.Namespace:
     p = argparse.ArgumentParser(
         description="Mide el ASR con las pruebas guardadas del panel: cada variante, re-corrida offline sobre el audio guardado.")
     p.add_argument("--pruebas", default=None, help="carpeta con las pruebas del panel (defecto: experiments/voip/llamadas)")
-    p.add_argument("--csv", default=str(CSV_POR_DEFECTO), help="qué es cada prueba: id,toma,voz,condicion[,canal,nota]")
+    p.add_argument("--csv", default=str(CSV_POR_DEFECTO), help="qué es cada prueba: id,toma,voz,condicion[,bloque,canal,nota]")
     p.add_argument("--variantes", default=None, help="solo estas variantes, separadas por coma (greedy se corre siempre). "
                    f"Válidas: {', '.join(V.nombres_de_variantes())}")
     p.add_argument("--sin-whisper", action="store_true", help="no corre las variantes de Whisper (son lentas)")
-    p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=(1, 2), help="toma donde se aplica la regla (defecto: 2)")
+    p.add_argument("--solo-parakeet", action="store_true",
+                   help=f"solo Parakeet con cada corte y umbral, sin la cadena de Zipformer ni Whisper ({V.PARAKEET_PANEL} se corre siempre)")
+    p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=(1, 2, 3), help="toma donde se aplica la regla (defecto: 2; 3 = confirmación de lo elegido con la 2)")
     p.add_argument("--bloque-ms", type=int, default=V.BLOQUE_MS_POR_DEFECTO, help="tamaño de bloque (defecto: 40, como el panel)")
     p.add_argument("--hilos", type=int, default=V.HILOS_POR_DEFECTO, help="hilos del ASR sherpa (defecto: 2, como el servidor)")
     p.add_argument("--hilos-whisper", type=int, default=4)
@@ -623,9 +678,15 @@ def medir(args: argparse.Namespace, ejecutor: Callable | None = None) -> Path:
     med = Medicion(pruebas, args, M.cargar_terminos(args.hotwords, args.jerga),
                    ejecutor or (ejecutor_en_proceso() if args.en_proceso else ejecutar_en_subproceso),
                    diccionario_vacio=len(Diccionario.desde_archivo(args.diccionario)) == 0)
-    med.correr_cadena(seleccion)
-    if seleccion is None or any(n.startswith("whisper") for n in seleccion):
-        med.correr_techo(seleccion)
+    if args.solo_parakeet:
+        med.base = med.final = V.PARAKEET_PANEL
+        med.correr_parakeet(seleccion)
+    else:
+        med.correr_cadena(seleccion)
+        if seleccion is None or any(n.startswith("whisper") for n in seleccion):
+            med.correr_techo(seleccion)
+        if seleccion is None or any(n.startswith("parakeet") for n in seleccion):
+            med.correr_parakeet(seleccion)
     carpeta = carpeta_de_salida(args, len(pruebas))
     comando = "python experiments/asr-local/medir_voz_real.py " + shlex.join(sys.argv[1:])
     escribir_salida(carpeta, med, args, omitidas, comando.strip())

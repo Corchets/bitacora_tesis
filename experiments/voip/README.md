@@ -374,8 +374,9 @@ Se conserva [esa corrida sin WAV](corridas/2026-10-26-medicion-84-m1-08b/README.
 ## 10. Probar el ASR hablando (#81)
 
 Con el servidor local de §3 abierto, activá **Probar el ASR**. Elegí el corte de silencio
-(un número de 0,1 a 3,0 s, de a 0,1, inicial 0,9; es el mismo campo de la llamada) y el umbral de
-silencio (RMS mayor que cero, hasta 1; inicial 0,003). El panel ya no ofrece «Automático»: con un número
+(un número de 0,1 a 3,0 s, de a 0,1, inicial 0,8; en la llamada el mismo campo arranca en 0,9) y el umbral de
+silencio (RMS mayor que cero, hasta 1; inicial 0,008). Esos dos valores iniciales salen de la medición con voz
+real y Parakeet del 2026-10-29 ([`PLAN-VOZ-REAL.md` §11](../asr-local/PLAN-VOZ-REAL.md#11-voz-real-con-parakeet-corte-y-umbral-2026-10-29)). El panel ya no ofrece «Automático»: con un número
 manda ese corte y el endpoint nativo del modelo se apaga, así el valor elegido significa lo que dice.
 El servidor sigue aceptando `"auto"` (lo usan `cliente.py` y las llamadas viejas del Historial).
 Tocá **▶ Hablar**, permití el micrófono y hablá con pausas. Usa la entrada de micrófono

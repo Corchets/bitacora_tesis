@@ -10,6 +10,10 @@ sobre la configuración que se quedó en los pasos anteriores:
 5. Techo offline con faster-whisper (`small` y `large-v3-turbo`, int8), con y sin ayudas. No es un paso
    de la cadena: no pasa al panel.
 
+Aparte de la cadena (que es de Zipformer, retirado el 2026-10-29), Parakeet por frases con distintos
+cortes de silencio y umbrales RMS (PLAN-VOZ-REAL.md §9 y §10). Cada una se compara con la del panel;
+no se elige sola.
+
 La ganancia y el umbral RMS de *captura* ya quedaron grabados en el audio y no se pueden rehacer:
 lo único que se rehace offline es el umbral RMS que usa el motor para cortar y una normalización de
 nivel del audio guardado, que aproxima subir la ganancia (sube también el ruido).
@@ -27,10 +31,11 @@ from typing import Any, Callable
 
 import numpy as np
 
-from motores import MotorASR, MotorFasterWhisper, MotorSherpaZipformer
+from motores import MotorASR, MotorFasterWhisper, MotorSherpaParakeet, MotorSherpaZipformer
 
 DIR_ASR = Path(__file__).resolve().parent
 DIR_MODELO = DIR_ASR / "modelos" / "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
+DIR_MODELO_PARAKEET = DIR_ASR / "modelos" / "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
 CORTE_AUTO = "auto"
 CORTE_RESPALDO_S = 0.8  # lo mismo que servidor.py: corte del motor cuando el modelo no cierra la frase solo
 SAMPLE_RATE = 16000
@@ -62,6 +67,15 @@ class ConfigWhisper:
     tamanio: str
     ayudas: bool = False  # hotwords (críticos y bancos) e initial_prompt (jerga)
     compute_type: str = "int8"
+
+    def como_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
+class ConfigParakeet:
+    corte: float = 0.9  # corte de silencio en s; el panel no tiene «auto» para Parakeet
+    umbral_rms: float = 0.003
 
     def como_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -111,8 +125,21 @@ VARIANTES_WHISPER: tuple[tuple[str, ConfigWhisper], ...] = (
 )
 
 
+def _parakeet(corte: float, umbral: float) -> tuple[str, ConfigParakeet]:
+    return f"parakeet-{corte}-rms-{umbral}", ConfigParakeet(corte, umbral)
+
+
+# La primera es la del panel desde c21001c (0,9 s y 0,003): las demás se comparan con ella.
+VARIANTES_PARAKEET: tuple[tuple[str, ConfigParakeet], ...] = (
+    _parakeet(0.9, 0.003), _parakeet(0.8, 0.003), _parakeet(0.5, 0.003),
+    _parakeet(0.3, 0.008), _parakeet(0.5, 0.008), _parakeet(0.6, 0.008), _parakeet(0.8, 0.008),
+)
+PARAKEET_PANEL = VARIANTES_PARAKEET[0][0]
+
+
 def nombres_de_variantes() -> list[str]:
-    return [c.nombre for p in PASOS for c in p.candidatos] + [n for n, _ in VARIANTES_WHISPER]
+    return ([c.nombre for p in PASOS for c in p.candidatos] + [n for n, _ in VARIANTES_WHISPER]
+            + [n for n, _ in VARIANTES_PARAKEET])
 
 
 def aplicar(config: ConfigKroko, candidato: Candidato) -> ConfigKroko | None:
@@ -167,9 +194,19 @@ def crear_motor_whisper(config: ConfigWhisper, spec: dict[str, Any]) -> MotorASR
                               hotwords=ayudas.get("hotwords"), initial_prompt=ayudas.get("initial_prompt"))
 
 
+def crear_motor_parakeet(config: ConfigParakeet, spec: dict[str, Any]) -> MotorASR:
+    """Parakeet como en el panel (borradores cada 0,5 s y filtro de idioma), con el corte de la variante."""
+    motor = MotorSherpaParakeet(str(spec.get("modelo_dir") or DIR_MODELO_PARAKEET), hilos=spec.get("hilos", HILOS_POR_DEFECTO))
+    motor.corte_silencio_s = config.corte
+    motor.umbral_rms_silencio = config.umbral_rms
+    return motor
+
+
 def crear_motor(spec: dict[str, Any]) -> MotorASR:
     if spec["motor"] == "kroko":
         return crear_motor_kroko(ConfigKroko(**spec["config"]), spec)
+    if spec["motor"] == "parakeet":
+        return crear_motor_parakeet(ConfigParakeet(**spec["config"]), spec)
     return crear_motor_whisper(ConfigWhisper(**spec["config"]), spec)
 
 
@@ -264,14 +301,14 @@ def correr_por_lote(motor: MotorASR, muestras: np.ndarray) -> dict[str, Any]:
 def ejecutar_variante(spec: dict[str, Any], crear: Callable[[dict[str, Any]], MotorASR] = crear_motor) -> dict[str, Any]:
     """Corre una variante sobre todas las pruebas del `spec` y devuelve los finales con sus tiempos.
 
-    `spec`: `motor` («kroko» o «whisper»), `config`, `pruebas` (lista de `{id, wav, canal}` con `canal`
+    `spec`: `motor` («kroko», «parakeet» o «whisper»), `config`, `pruebas` (lista de `{id, wav, canal}` con `canal`
     0 o 1), `bloque_ms`, `hilos` y las rutas de hotwords, jerga y diccionario. El modelo se carga una vez.
     """
     t0 = time.perf_counter()
     motor = crear(spec)
     motor.inicializar()
     carga_s = round(time.perf_counter() - t0, 3)
-    es_kroko = spec["motor"] == "kroko"
+    por_bloques = spec["motor"] in ("kroko", "parakeet")
     normalizar = bool(spec["config"].get("normalizar"))
     umbral = float(spec["config"].get("umbral_rms", 0.005))
     resultados = []
@@ -282,7 +319,7 @@ def ejecutar_variante(spec: dict[str, Any], crear: Callable[[dict[str, Any]], Mo
         if normalizar:
             muestras = normalizar_nivel(muestras)
         corrida = (correr_por_bloques(motor, muestras, spec.get("bloque_ms", BLOQUE_MS_POR_DEFECTO), umbral)
-                   if es_kroko else correr_por_lote(motor, muestras))
+                   if por_bloques else correr_por_lote(motor, muestras))
         bloques = corrida.pop("bloques_ms")
         resultados.append({"id": prueba["id"], "audio_s": round(len(muestras) / SAMPLE_RATE, 3), **corrida,
                            "bloques": _resumen_bloques(bloques)})

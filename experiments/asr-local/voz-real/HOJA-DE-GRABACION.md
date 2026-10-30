@@ -14,22 +14,24 @@ Son **2 tomas × 3 condiciones × 6 bloques = 36 grabaciones**, cada una de un b
 | `luciano-meet` | Luciano | Luciano habla por Meet y el panel toma el audio de Meet (ver abajo) |
 | `otra-meet` | otra voz del equipo | igual que la anterior, con otra persona. Si no hay otra voz, alcanza con las dos de Luciano |
 
-La **toma 1** sirve para ajustar los hotwords y el diccionario; la **toma 2** es la que mide y decide
-(PLAN-VOZ-REAL.md §2). No ajustes nada mirando la toma 2. En las dos tomas usá el mismo cuarto, la misma
-máquina y el mismo micrófono, y no toques la ganancia entre una y otra.
+La **toma 1** sirve para ajustar (corte, umbral, hotwords, diccionario); la **toma 2** es la que mide y decide
+(PLAN-VOZ-REAL.md §2). No ajustes nada mirando la toma 2; si igual se eligió algo con ella, una **toma 3** con
+audio nuevo lo confirma. En todas usá el mismo cuarto, la misma máquina y el mismo micrófono, y no toques la
+ganancia entre una y otra. La condición `luciano-microfono` ya se grabó el 2026-10-29 (PLAN-VOZ-REAL.md §11).
 
 ## Cómo grabar un bloque
 
-1. Abrí el panel y activá **Probar el ASR** (README de `experiments/voip`, §10). Dejá el corte en
-   **Automático** y el umbral en `0,005`: los otros valores se prueban después, offline, sobre lo guardado.
-2. Tocá **▶ Hablar** y leé las 5 frases del bloque con tu voz de siempre (con tu acento, sin actuar).
-   Una pausa corta, de un segundo y medio más o menos, entre frase y frase. Si te trabás, seguí; si el bloque
-   salió mal, **Borrar** y empezá el bloque de nuevo.
-3. **Terminar prueba**. En **Lo que dije en realidad** pegá el bloque de abajo, una frase por línea.
-   Si dijiste algo distinto, corregí esa línea para que diga lo que dijiste: la medida compara contra
-   eso, no contra el guion. Escribí los números con palabras, como están acá.
-4. **Guardar prueba**. Anotá el id de la prueba (lo ves en el Historial) en
-   [`pruebas.csv`](pruebas.csv) con la toma, la voz y la condición.
+1. Abrí el panel y activá **Probar el ASR** (README de `experiments/voip`, §10), con el modelo **Parakeet**.
+   Dejá el corte y el umbral como arrancan (0,8 s y 0,008) y no los cambies entre grabaciones: los otros
+   valores se prueban después, offline, sobre lo guardado.
+2. Tocá **▶ Hablar**, esperá dos segundos callado y leé las 5 frases del bloque con tu voz de siempre (con tu
+   acento, sin actuar), con una pausa entre frase y frase. Si te trabás, seguí; si el bloque salió mal,
+   **Borrar** y empezá el bloque de nuevo. No borres pruebas guardadas desde el Historial.
+3. **Terminar prueba** y **Guardar prueba**. «Lo que dije en realidad» puede quedar vacío: la columna
+   `bloque` de [`pruebas.csv`](pruebas.csv) toma el texto del guion. Si dijiste algo distinto, anotalo y
+   corregí esa frase en el panel (o en el Historial): lo escrito manda sobre el bloque.
+4. Anotá el id de la prueba (lo ves en el Historial) en [`pruebas.csv`](pruebas.csv) con la toma, la voz,
+   la condición y el bloque.
 
 ### Condición Meet
 
@@ -41,7 +43,7 @@ máquina y el mismo micrófono, y no toques la ganancia entre una y otra.
 
 ## Bloques para copiar y pegar
 
-Cada bloque va tal cual en **Lo que dije en realidad**.
+Si preferís escribir la referencia en el panel, cada bloque va tal cual en **Lo que dije en realidad**.
 
 ### Bloque 1
 
