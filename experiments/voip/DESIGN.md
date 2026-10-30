@@ -107,7 +107,7 @@ Todo el panel usa la escena oscura de la llamada: consola en vivo, Probar el ASR
 - **Tinta (`tinta`: `#f5f5f7`, `tinta-secundaria`: `#c7c7cc`, `mu`: `#a1a1aa`)**: grises neutros, todos por encima de 4.5:1 sobre negro y sobre `#1c1c1e`.
 - **Persona protegida (`primary`: `#4f74a8`, burbuja `#1f2c42` → `#1b273b`, rótulos `primary-claro`)**: azul acerado y apagado, el mismo del teléfono derecho.
 - **Otra persona (`otra-fondo`: `#1c1c1e`)**: gris de burbuja de mensajería, sin juicio inicial.
-- **Alerta (`alerta`: `#c8584f` para bordes y halos, `alerta-fuerte`: `#a93a36` para insignias rellenas con texto blanco, `alerta-tinta`: `#e3a8a3` para texto)**: reservada al aviso y a fallos.
+- **Alerta (`alerta`: `#c8584f` para bordes, `alerta-fuerte`: `#a93a36` para insignias rellenas con texto blanco, `alerta-tinta`: `#e3a8a3` para texto)**: reservada al aviso y a fallos.
 - **Estado seguro y voz activa (`ok`: `#5a9e78`, `ok-tinta`: `#9fc9b0`)**: verde salvia, apagado.
 - **Riesgo alto sin aviso**: ámbar (`#c9a84c` al 8-14 % de relleno, tinta `#e0d2a0`); el mismo amarillo resalta la cita culpable.
 
@@ -139,7 +139,7 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
 - **Vista de presentación (escena oscura con dos iPhone y diálogo central)**: comparte la paleta del resto del panel, pero oculta su cabecera, para que en la proyección solo se vean los teléfonos y la conversación.
   - Barra superior liviana sin caja: rótulo «Vista de presentación», estado de la llamada, identificador y botones en píldora. Los errores flotan debajo de la barra sin empujar la escena.
   - Dos iPhone grandes cuyo tamaño sale del alto de la ventana (`--tel-ancho = min(alto disponible × 0.485, 27vw, 540px)`, proporción 485:1000): unos 485px de ancho en 1920 × 1080 y 330px en 1366 × 768. Todo lo de adentro escala con unidades de contenedor (`cqw`), así que no hacen falta reglas por alto de pantalla.
-  - Cada pantalla imita una llamada de iOS: barra de estado con isla dinámica (que se enciende en verde al hablar), nombre del rol, estado de voz en píldora, avatar grande con anillos que laten al hablar, medidor RMS por canal y botonera decorativa (altavoz, silencio, colgar). El teléfono protegido tiene tinte azul; con el aviso activo pasa a rojo y el avatar se achica para dejarle lugar a la tarjeta.
+  - Cada pantalla imita una llamada de iOS: barra de estado con isla dinámica (que se enciende en verde al hablar), nombre del rol, estado de voz en píldora, retrato plano (hombre de pelo oscuro, mujer mayor de pelo canoso) con anillo que late al hablar, medidor RMS por canal y botonera decorativa (altavoz, silencio, colgar). El teléfono protegido tiene tinte azul; con el aviso activo pasa a rojo y el avatar se achica para dejarle lugar a la tarjeta.
   - Sin halo detrás de los marcos: el estado se ve en el velo de la pantalla (azul apagado el protegido, rojo apagado con el aviso) y en el anillo del avatar al hablar.
   - Columna central (`minmax(0, 1fr)`) en un panel translúcido: burbujas oscuras estilo mensajería (gris para «Otra persona», azul para «Persona protegida»), scroll interno, seguimiento automático, botón «Volver al vivo» y cajas de evaluación con detalles desplegables. La frase que disparó el aviso lleva borde y resplandor rojos y la cita en resaltador amarillo.
   - Accesibilidad de foco: contorno visible de 2px en azul claro (`#9db7da`) con offset de 2px sobre el fondo oscuro.
