@@ -1551,6 +1551,8 @@ let evaluaciones = 0, salteadas = 0;
 /** @type {WebSocket|null} */
 let conexion = null;
 let enLlamada = false, terminada = false, pendiente = false;
+/** @type {any} */
+let presentacion = null;
 
 const protegidaFuente = /** @type {HTMLSelectElement} */ ($("protegida-fuente"));
 const microfono = /** @type {HTMLSelectElement} */ ($("microfono"));
@@ -1644,6 +1646,7 @@ function fijarSonido(activo) {
   $("icono-sonido-off").hidden = activo;
   botonAvisoSonido.textContent = rotulo;
   if (!activo) detenerTonoAviso();
+  presentacion?.actualizarSonido?.(activo);
 }
 
 function tocarTonoAviso() {
@@ -1685,6 +1688,7 @@ botonAvisoCerrar.onclick = () => {
   avisoCerrado = true;
   detenerTonoAviso();
   $("aviso").classList.remove("visible");
+  presentacion?.cerrarAviso?.();
 };
 fijarSonido(sonidoActivo);
 
@@ -1870,11 +1874,16 @@ const historialUI = montarHistorial({
 /** @type {string|null} */
 let estadoPrevioAlHistorial = null;
 
-const presentacion = montarPresentacion({
+presentacion = montarPresentacion({
   terminar: () => terminar.click(),
   nueva: () => nueva.click(),
   cambiar: () => actualizarControles(),
-  alVolverAlPanel: () => verPresentacion.focus()
+  alVolverAlPanel: () => verPresentacion.focus(),
+  detenerTono: () => detenerTonoAviso(),
+  fijarSonido: (activo) => fijarSonido(activo),
+  cerrarAviso: () => botonAvisoCerrar.click(),
+  obtenerSonido: () => sonidoActivo,
+  obtenerAvisoCerrado: () => avisoCerrado
 });
 verPresentacion.onclick = () => presentacion.abrir();
 
@@ -2449,6 +2458,7 @@ function actualizarDetectorVisual(detector) {
   $("detector-sub").textContent = esSlm
     ? "Evaluación con modelo de lenguaje local"
     : "Heurística de códigos de verificación y urgencia";
+  presentacion?.fijarDetector?.(detector);
 }
 
 function conectar() {
