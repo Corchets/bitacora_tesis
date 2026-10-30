@@ -39,26 +39,11 @@ Pantalla proyectada en aula: conversación y tarjetas con tipografía grande y a
 
 ## Vista de presentación — requisitos acordados (2026-10-29)
 
-Brief reunido mediante `/grill-with-docs` para [#110](https://github.com/Corchets/bitacora_tesis/issues/110); todavía sin implementar. Los requisitos siguientes fueron acordados con Luciano; falta su confirmación del conjunto antes de implementar:
+Brief confirmado por Luciano el 2026-10-29 tras `/grill-with-docs`, convertido a especificación mediante `/to-spec`. **La fuente de verdad de los requisitos, historias de uso, decisiones de implementación, pruebas y criterios de aceptación es [#110](https://github.com/Corchets/bitacora_tesis/issues/110).** La implementación continúa pendiente.
 
-- Sumar una vista con dos siluetas de iPhone y conservar el panel actual, la prueba de ASR, el Historial y la vista de la persona protegida.
-- Cada teléfono representa a una de las personas, con su rol visible y un avatar ilustrado estilo emoji en un círculo grande.
-- Al iniciar el análisis desde los controles actuales, entrar automáticamente a Presentación. Permitir volver al panel durante la misma llamada sin reiniciar captura, transcripción ni detector.
-- El diálogo grande ocupa el centro; los teléfonos indican quién habla. El resultado de cada análisis acompaña a la frase correspondiente y las métricas detalladas quedan en un panel desplegable.
-- Cada teléfono muestra una pantalla de llamada y actividad de voz. El aviso «Posible estafa» aparece en el teléfono de la persona protegida, con motivo y frase resaltada en el diálogo central; el otro teléfono conserva el nombre «Otra persona».
-- Los teléfonos permanecen visibles mientras el diálogo se desplaza en el centro siguiendo lo último. Si quien presenta sube para revisar una frase anterior, el seguimiento se pausa hasta tocar «Volver al vivo».
-- El centro muestra el borrador del ASR en vivo, identificado como provisorio. Sus correcciones actualizan el mismo lugar hasta cerrar la frase y la evaluación se adjunta cuando llega realmente.
-- La vista comunica «Analizando», «Sin aviso», «Posible estafa», «No evaluado» y «Error» según los eventos reales. La puntuación del detector y las demoras quedan en los detalles; la puntuación no se presenta como probabilidad calibrada de estafa.
-- Los teléfonos representan la conversación y la actividad de la captura actual. La llamada se abre en Meet o WhatsApp; iniciar o terminar el análisis no marca, atiende ni cuelga la llamada externa.
-- Usar los eventos reales disponibles, incluidos estados como «Esperando audio» y «Analizando». Esta vista no elige modelos ni agrega telefonía propia.
-- Al terminar, conservar los teléfonos en estado «Análisis finalizado», el diálogo y las detecciones para explicar el resultado hasta iniciar una nueva llamada. Los controles corresponden a acciones reales, como «Terminar análisis» y «Volver al panel».
-- El video de respaldo con ejemplo hardcodeado y voces sincronizadas se prepara al final, después de la integración; continúa pendiente en [#53](https://github.com/Corchets/bitacora_tesis/issues/53).
+La vista presenta la misma llamada mediante dos siluetas de iPhone con avatares ilustrados estilo emoji y diálogo central. Se suma a la consola existente y utiliza la captura y los eventos actuales. La referencia visual es una pantalla de llamada de WhatsApp con perfil circular grande sobre fondo oscuro.
 
-Referencia visual aportada por Luciano el 2026-10-29: pantalla de llamada de WhatsApp, con perfil circular grande, nombre y estado sobre un fondo oscuro. Usar esa composición para las pantallas de los teléfonos con los avatares ilustrados acordados; la captura sirve de referencia visual y no se incorpora al repositorio.
-
-Se conservan las validaciones y los errores de la captura actual, visibles también al presentar. Tipografía grande y alto contraste para proyección; foco de teclado visible, estados comunicados con texto además de color y movimiento reducido según la preferencia del sistema.
-
-El diseño de esta vista de demostración no congela el aviso del sistema final pendiente en [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
+El video hardcodeado sigue pendiente para el final en [#53](https://github.com/Corchets/bitacora_tesis/issues/53). Esta vista no congela modelos ni protocolo; el aviso del sistema final sigue pendiente en [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
 
 ## Brand Commitments
 
