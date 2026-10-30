@@ -555,6 +555,34 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await panel.send(self.inicio())
             self.assertEqual((await self.evento(panel, "inicio"))["asr"], "parakeet")
 
+    async def test_parakeet_con_silero_se_elige_en_el_panel(self):
+        with tempfile.NamedTemporaryFile(suffix=".onnx") as modelo, patch("servidor.MODELO_SILERO", Path(modelo.name)):
+            async with connect(self.url + "/panel") as panel:
+                for asr in ("parakeet-filtro", "parakeet-y", "parakeet-silero"):
+                    await panel.send(json.dumps({**json.loads(self.inicio()), "asr": asr}))
+                    self.assertEqual((await self.evento(panel, "inicio"))["asr"], asr)
+                    await panel.send(json.dumps({"tipo": "terminar"}))
+                    await self.evento(panel, "fin")
+
+    async def test_sin_modelo_de_silero_avisa_al_elegirlo(self):
+        with patch("servidor.MODELO_SILERO", self.dir / "no-esta.onnx"):
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(json.dumps({**json.loads(self.inicio()), "asr": "parakeet-filtro"}))
+                self.assertIn("silero", (await self.evento(panel, "error"))["mensaje"].lower())
+        self.assertEqual(list(self.dir.iterdir()), [])
+
+    def test_crear_motor_de_parakeet_con_silero(self):
+        # Sin cargar modelos: solo cómo queda armado el motor de cada canal.
+        for asr, modo, umbral in (("parakeet-filtro", "filtro", 0.5), ("parakeet-y", "y", 0.5),
+                                  ("parakeet-silero", "silero", 0.9)):
+            servidor = Servidor.__new__(Servidor)
+            servidor.asr, servidor.args = asr, Namespace(hilos=2)
+            motor, otro = servidor.crear_motor(), servidor.crear_motor()
+            self.assertEqual((motor.modo_vad, motor.detector_voz.umbral), (modo, umbral))
+            self.assertIsNot(motor.detector_voz, otro.detector_voz)
+        servidor.asr = "parakeet"
+        self.assertIsNone(servidor.crear_motor().detector_voz)
+
     async def test_llamada_vuelve_al_umbral_fijo_despues_de_una_prueba(self):
         prueba = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
                   "corte_silencio_s": 1.2, "umbral_rms_silencio": 0.03}

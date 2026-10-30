@@ -65,6 +65,8 @@ python servidor.py --detector slm --modelo qwen3.5:4b-q4_K_M --ollama-url http:/
 # las llamadas que abre cliente.py («auto» por defecto): python servidor.py --detector reglas --corte-silencio 0.5
 # El modelo de ASR también se elige en el panel (Zipformer o Parakeet); --asr fija el de arranque y el de
 # cliente.py: python servidor.py --detector reglas --asr parakeet  (ver ../asr-local/PLAN-VOZ-REAL.md §9)
+# Parakeet con Silero VAD, a prueba: --asr parakeet-filtro | parakeet-y | parakeet-silero (§12.7); necesitan
+# ../asr-local/modelos/silero-vad/silero_vad.onnx (release asr-models de sherpa-onnx).
 
 # Panel para el público:   http://<ip-del-servidor>:8765/
 # Pantalla de la protegida: http://<ip-del-servidor>:8765/?vista=protegida

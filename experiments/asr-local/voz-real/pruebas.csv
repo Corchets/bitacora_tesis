@@ -1,6 +1,6 @@
 # Qué es cada prueba guardada del panel. Una fila por prueba; completala después de grabar.
 #   id         carpeta de la prueba (la ves en el Historial; ej. 2026-10-27_101500-123456)
-#   toma       1 (ajustar), 2 (medir y decidir) o 3 (confirmar con audio nuevo lo elegido con la 2)
+#   toma       1 (ajustar), 2 (medir y decidir) 3 (confirmar con audio nuevo lo elegido con la 2) o 4 (mezclas del RMS con Silero)
 #   voz        luciano | otra
 #   condicion  microfono | meet | voz-baja | ruido-tv | pausas (las tres últimas, extras por micrófono)
 #   bloque     opcional: bloque del guion (1 a 6) que se leyó. Si «Lo que dije en realidad» está vacío, la referencia es ese bloque
@@ -8,6 +8,7 @@
 #   nota       opcional: dispositivo, ruido, lo que quieras recordar (sin comas)
 # Las líneas que empiezan con # se ignoran. Solo se miden las pruebas guardadas con referencia (o con bloque).
 # Las del 2026-10-29 están en la copia bitacora_tesis-voip-asr: --pruebas ../bitacora_tesis-voip-asr/experiments/voip/llamadas
+# Las del 2026-10-30 (toma 4), en la copia silero-vs-rms-94: se miden aparte con --pruebas de esa copia y --toma-decision 4
 id,toma,voz,condicion,bloque,canal,nota
 2026-10-29_194923-902062,1,luciano,microfono,1,,G01 tele apagada
 2026-10-29_195020-082746,1,luciano,microfono,2,,G02 tele apagada
@@ -34,3 +35,25 @@ id,toma,voz,condicion,bloque,canal,nota
 # Sin texto (no se miden con WER; se miran aparte para inserciones):
 # 2026-10-29_201018-775836,1,luciano,microfono,,,G10 30 s sin hablar con tele apagada
 # 2026-10-29_193603-180243,1,luciano,microfono,,,serie de fondo sin hablar
+# Toma 4: grabada el 2026-10-30; en el panel se veía la opción de la nota (el audio guardado es el mismo con cualquiera):
+2026-10-30_152838-034658,4,luciano,microfono,1,,G01 panel parakeet-filtro 0.8/0.008
+2026-10-30_152914-598219,4,luciano,microfono,2,,G02 panel parakeet-filtro 0.8/0.008
+2026-10-30_152947-712308,4,luciano,microfono,3,,G03 panel parakeet-filtro 0.8/0.008
+2026-10-30_153026-522559,4,luciano,microfono,4,,G04 panel parakeet-filtro 0.8/0.008
+2026-10-30_153102-946340,4,luciano,microfono,5,,G05 panel parakeet-filtro 0.8/0.008
+2026-10-30_153138-212776,4,luciano,microfono,6,,G06 panel parakeet-filtro 0.8/0.008
+2026-10-30_153304-448017,4,luciano,microfono,1,,G01 panel parakeet-y 0.8/0.008
+2026-10-30_153335-495862,4,luciano,microfono,2,,G02 panel parakeet-y 0.8/0.008
+2026-10-30_153409-995865,4,luciano,microfono,3,,G03 panel parakeet-y 0.8/0.008
+2026-10-30_153442-452741,4,luciano,microfono,4,,G04 panel parakeet-y 0.8/0.008
+2026-10-30_153528-099127,4,luciano,microfono,5,,G05 panel parakeet-y 0.8/0.008
+2026-10-30_153603-648473,4,luciano,microfono,6,,G06 panel parakeet-y 0.8/0.008
+2026-10-30_153725-703882,4,luciano,microfono,1,,G01 panel parakeet-silero 0.3
+2026-10-30_153759-275232,4,luciano,microfono,2,,G02 panel parakeet-silero 0.3
+2026-10-30_153829-326020,4,luciano,microfono,3,,G03 panel parakeet-silero 0.3
+2026-10-30_153908-775592,4,luciano,microfono,4,,G04 panel parakeet-silero 0.3
+2026-10-30_153944-081407,4,luciano,microfono,5,,G05 panel parakeet-silero 0.3
+2026-10-30_154018-708912,4,luciano,microfono,6,,G06 panel parakeet-silero 0.3
+2026-10-30_154331-950817,4,luciano,ruido-tv,2,,G08b serie de fondo panel parakeet 0.8/0.008
+# 2026-10-30_154422-984207,4,luciano,microfono,,,G10b 30 s sin hablar con ruidos de la pieza
+# 2026-10-30_154522-194321,4,luciano,microfono,,,G10c 30 s sin hablar con la tele

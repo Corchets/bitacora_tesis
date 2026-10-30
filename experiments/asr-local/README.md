@@ -184,7 +184,8 @@ acá solo qué es cada archivo.
 | Archivo | Qué hace |
 |---|---|
 | `medir_voz_real.py` | Re-corre offline las pruebas guardadas del panel con cada variante y escribe `resumen.md`, `manifiesto.json` y `frases.jsonl`. |
-| `variantes_voz_real.py` | Catálogo de variantes y pasos del plan (`greedy`, corte, `rule2`, umbral RMS, `norm`, `beam`, `beam+hotwords`, `+diccionario`, Whisper), Parakeet con cada corte y umbral, y cómo se corre cada una. |
+| `variantes_voz_real.py` | Catálogo de variantes y pasos del plan (`greedy`, corte, `rule2`, umbral RMS, `norm`, `beam`, `beam+hotwords`, `+diccionario`, Whisper), Parakeet con cada corte y umbral (RMS o Silero), y cómo se corre cada una. |
+| `comparar_vad.py` | Silero contra RMS en lo que el WER no muestra: segmentos y llamadas al ASR, palabras inventadas sin habla, cierres por tope, desfase y costo del detector por bloque, y simulación del umbral sin ASR ([§12](PLAN-VOZ-REAL.md#12-silero-vad-contra-el-corte-rms-en-parakeet-2026-10-29)). |
 | `metricas_voz_real.py` | Alineado por frase, etiquetas de `reglas.py`, recall, WER/CER, agregados y la regla de paso. |
 | `hotwords.py` | `bpe.vocab` sintético para los hotwords de sherpa y revisión de cómo se parte cada uno (`python hotwords.py`). |
 | `diccionario.py` | Diccionario de corrección de la frase final (`MotorConDiccionario`); nunca toca parciales. |
@@ -193,5 +194,8 @@ acá solo qué es cada archivo.
 
 `MotorSherpaZipformer` acepta `decoding_method`, `max_active_paths`, `hotwords_file` y `hotwords_score`; los valores por
 defecto son los del panel (greedy, sin hotwords) y `metadatos()["decodificacion"]` registra lo usado. `MotorFasterWhisper`
-acepta `hotwords` e `initial_prompt`. Al medir, cada variante corre en su propio subproceso para que la memoria pico sea la suya.
+acepta `hotwords` e `initial_prompt`. `MotorPorFrases.detector_voz` (un `DetectorSilero` con
+`modelos/silero-vad/silero_vad.onnx`, [release de sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx),
+fuera de Git) entra según `MotorPorFrases.modo_vad`: «silero» decide solo, «filtro» deja cortar al RMS y solo transcribe
+lo que Silero oye, «y» pide voz a los dos ([§12.7](PLAN-VOZ-REAL.md#127-mezclar-el-rms-con-silero-2026-10-30)); por defecto es `None` y decide el RMS, como en el panel. Al medir, cada variante corre en su propio subproceso para que la memoria pico sea la suya.
 
