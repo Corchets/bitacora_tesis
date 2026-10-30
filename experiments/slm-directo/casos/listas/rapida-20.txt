@@ -1,0 +1,24 @@
+# Set rápido para iterar con «riesgo primero» (analisis/2026-10-29-riesgo-primero).
+# Armado por Evaristo el 2026-10-29: 10 estafas y 10 legítimas de corpus_v2, partición
+# desarrollo (~524 líneas). Sirve para comparar modelos entre sí, no para medir la meta.
+# Uso: python correr.py --lista rapida-20 ...
+CV2-D-V-BANCO-001
+CV2-D-V-BANCO-002
+CV2-D-V-BANCO-007
+CV2-D-V-WHATSAPP-002
+CV2-D-V-WHATSAPP-006
+CV2-D-V-SOPORTE-003
+CV2-D-V-SOPORTE-004
+CV2-D-V-FAMILIAR-002
+CV2-D-V-ORGANISMO_PREVISIONAL-001
+CV2-D-V-PREMIO-004
+CV2-D-L-BANCO-001
+CV2-D-L-BANCO-007
+CV2-D-L-DELIVERY-001
+CV2-D-L-ESCUELA-001
+CV2-D-L-FAMILIAR-001
+CV2-D-L-MEDICO-001
+CV2-D-L-ORGANISMO_PREVISIONAL-001
+CV2-D-L-PREMIO-001
+CV2-D-L-SOPORTE-002
+CV2-D-L-WHATSAPP-001

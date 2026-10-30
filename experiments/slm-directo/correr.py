@@ -6,6 +6,7 @@ Ejemplos:
     python correr.py --modelos qwen3.5:2b
     python correr.py --modelos qwen3.5:0.8b,qwen3.5:2b,qwen3.5:4b --prompts tarea,tarea+base --hablantes ab,sin
     python correr.py --modelos qwen3.5:2b --casos SC-WA-CODE-01-e01 --detalle
+    python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32
 
 Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     manifiesto.json      qué se corrió: modelos, prompts, casos, código, máquina
@@ -39,11 +40,25 @@ from pathlib import Path
 
 import casos
 from cliente_ollama import URL_POR_DEFECTO, ClienteOllama, ErrorOllama
-from detectores import HABLANTES, PROMPTS, DetectorReglas, DetectorSLM, Respuesta, cargar_prompt, esquema_de, huella
+from detectores import (
+    ESQUEMA_MOTIVO,
+    HABLANTES,
+    PROMPTS,
+    UMBRAL_POR_DEFECTO,
+    DetectorReglas,
+    DetectorSLM,
+    DetectorSLMDosEtapas,
+    Respuesta,
+    cargar_prompt,
+    cargar_prompt_motivo,
+    esquema_de,
+    huella,
+)
 from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion
 from tito_real import ARTEFACTO_POR_DEFECTO, cargar_artefacto, preparar_tito_real
 
 RAIZ = Path(__file__).resolve().parent
+DIR_LISTAS = RAIZ / "casos" / "listas"
 POLITICA = "aviso_unico_hasta_aviso"
 MODO_OPERATIVO = "operativo-hasta-aviso"
 MODO_DIAGNOSTICO = "diagnostico-completo"
@@ -82,6 +97,12 @@ COLUMNAS = [
     "runtime_load_ns",
     "runtime_prompt_eval_ns",
     "runtime_eval_ns",
+    # Solo con --prompts riesgo (dos etapas); al final para no mover las columnas de antes.
+    "ms_etapa1",
+    "ms_etapa2",
+    "tokens_prompt_etapa2",
+    "tokens_salida_etapa2",
+    "crudo_etapa2",
 ]
 
 
@@ -119,6 +140,8 @@ def procesar_caso(detector, lineas: list[casos.Linea], *, detener_en_aviso: bool
     if callable(reiniciar):
         reiniciar()  # el filtro reinicia activación e indicio entre llamadas
     llamada = Llamada()
+    if hasattr(detector, "reiniciar"):
+        detector.reiniciar()
     for n, linea in enumerate(lineas, start=1):
         disponibles = llamada.agregar(linea)
         respuesta = detector.evaluar(disponibles)
@@ -214,11 +237,24 @@ def sha_archivo(ruta: Path) -> str:
     return hashlib.sha256(Path(ruta).read_bytes()).hexdigest()
 
 
+def leer_lista(nombre: str) -> list[str]:
+    """case_id de casos/listas/<nombre>.txt, uno por línea; se ignoran vacías y comentarios (#)."""
+    ruta = DIR_LISTAS / f"{nombre}.txt"
+    if not ruta.exists():
+        disponibles = ", ".join(sorted(p.stem for p in DIR_LISTAS.glob("*.txt"))) or "ninguna"
+        sys.exit(f"No existe la lista {nombre!r} en {_mostrar(DIR_LISTAS)}. Disponibles: {disponibles}.")
+    lineas = (l.strip() for l in ruta.read_text(encoding="utf-8").splitlines())
+    return [l for l in lineas if l and not l.startswith("#")]
+
+
 def elegir_casos(args) -> list[str]:
     particion = getattr(args, "particion", "desarrollo")
     ids = casos.ids_de_casos(particion=particion)
-    if args.casos:
-        pedidos = _lista(args.casos)
+    lista = getattr(args, "lista", "")
+    if lista and (args.casos or args.grupo):
+        sys.exit("--lista no se combina con --casos ni con --grupo.")
+    if args.casos or lista:
+        pedidos = leer_lista(lista) if lista else _lista(args.casos)
         faltan = [c for c in pedidos if c not in ids]
         if faltan:
             sys.exit(f"Casos inexistentes o fuera de {particion}: {faltan}. El test requiere --particion test_reservado y protocolo D08 congelado.")
@@ -361,7 +397,20 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "runtime_load_ns": "" if r.runtime_load_ns is None else r.runtime_load_ns,
         "runtime_prompt_eval_ns": "" if r.runtime_prompt_eval_ns is None else r.runtime_prompt_eval_ns,
         "runtime_eval_ns": "" if r.runtime_eval_ns is None else r.runtime_eval_ns,
+        "ms_etapa1": num(r.ms_etapa1, 1),
+        "ms_etapa2": num(r.ms_etapa2, 1),
+        "tokens_prompt_etapa2": "" if r.tokens_prompt_etapa2 is None else r.tokens_prompt_etapa2,
+        "tokens_salida_etapa2": "" if r.tokens_salida_etapa2 is None else r.tokens_salida_etapa2,
+        "crudo_etapa2": r.crudo_etapa2,
     }
+
+
+def _prompt_manifiesto(variante: str) -> dict:
+    datos = {"huella": huella(cargar_prompt(variante)), "texto": cargar_prompt(variante), "esquema": esquema_de(variante)}
+    if variante == "riesgo":
+        motivo = cargar_prompt_motivo()
+        datos["etapa2"] = {"huella": huella(motivo), "texto": motivo, "esquema": ESQUEMA_MOTIVO}
+    return datos
 
 
 def _mostrar(carpeta: Path) -> str:
@@ -387,6 +436,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--prompts", default="tarea", help=f"variantes separadas por coma: {', '.join(PROMPTS)}")
     p.add_argument("--hablantes", default="ab", help="ab (con A/B), sin (sin hablantes) o ab,sin")
     p.add_argument("--casos", default="", help="case_id separados por coma (por defecto, toda la partición)")
+    p.add_argument("--lista", default="", help="nombre de una lista de casos/listas/ (p. ej. rapida-20)")
     p.add_argument("--particion", choices=sorted(casos.PARTICIONES), default="desarrollo", help="desarrollo por defecto; test_reservado solo para evaluación final tras D08")
     p.add_argument("--grupo", choices=sorted(casos.GRUPOS), help="solo un grupo de casos")
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
@@ -409,6 +459,10 @@ def main(argv: list[str] | None = None) -> int:
         "--num-batch", type=int,
         help="tokens por lote al procesar el prompt; 32 deja reutilizar la caché en qwen3.5 (ver analisis/2026-10-21-cache-prefijo)",
     )
+    p.add_argument(
+        "--umbral", type=float, default=UMBRAL_POR_DEFECTO,
+        help="con --prompts riesgo: la etapa 2 (evidencia y motivo) y la alerta salen solo si riesgo > umbral",
+    )
     p.add_argument("--etiqueta", default="", help="texto corto para el nombre de la carpeta")
     p.add_argument("--salida", type=Path, default=RAIZ / "corridas", help="dónde crear la carpeta de la corrida")
     p.add_argument("--detalle", action="store_true", help="mostrar cada línea y la respuesta (modo demo)")
@@ -429,6 +483,8 @@ def main(argv: list[str] | None = None) -> int:
     modelos = [] if args.solo_reglas else _lista(args.modelos)
     if not modelos and not args.solo_reglas:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b) o usá --solo-reglas.")
+    if args.filtro_tito and "riesgo" in _lista(args.prompts):
+        sys.exit("--filtro-tito no admite --prompts riesgo: el flujo Tito→SLM usa el prompt de un paso.")
     if args.tito_real and not args.filtro_tito:
         sys.exit("El Tito real (--tito-real) solo actúa con --filtro-tito.")
     if args.tito_real and not Path(args.tito_modelo).exists():
@@ -481,7 +537,10 @@ def main(argv: list[str] | None = None) -> int:
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
+                if variante == "riesgo":
+                    d = DetectorSLMDosEtapas(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, umbral=args.umbral)
+                else:
+                    d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
                 etiqueta = {"config": f"slm|{modelo}|{variante}|{h}", "detector": "slm", "modelo": modelo, "prompt": variante, "hablantes": h}
                 detectores.append((etiqueta, d))
                 if args.filtro_tito:
@@ -532,9 +591,13 @@ def main(argv: list[str] | None = None) -> int:
             }
         ),
         "particion": args.particion,
+        **({"lista": args.lista} if args.lista else {}),
         "ollama": None if ollama is None else {"url": args.url, **ollama},
-        "parametros_slm": {"num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra},
-        "prompts": {v: {"huella": huella(cargar_prompt(v)), "texto": cargar_prompt(v), "esquema": esquema_de(v)} for v in prompts} if modelos else {},
+        "parametros_slm": {
+            "num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra,
+            **({"umbral_etapa2": args.umbral} if "riesgo" in prompts else {}),
+        },
+        "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},
         "configs": [c for c, _ in detectores],
         "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
         "modelos": {},
@@ -585,6 +648,8 @@ def main(argv: list[str] | None = None) -> int:
                                 f"riesgo={r.riesgo if r.riesgo is not None else '-'} alerta={'sí' if r.alerta_sugerida else 'no'}"
                             )
                             print(f"   [{n:>2}] {linea.hablante}: {linea.texto}")
+                            if r.ms is not None:
+                                estado += f"  {r.ms:.0f} ms" + (f" (etapa 2: {r.ms_etapa2:.0f} ms)" if r.ms_etapa2 is not None else "")
                             print(f"        {estado}" + (f"  >>> AVISO: {r.motivo}" if aviso else ""))
                     print(f"   {case_id:42} {' '.join(marcas)}")
     except KeyboardInterrupt:
