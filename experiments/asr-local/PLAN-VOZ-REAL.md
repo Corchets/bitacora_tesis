@@ -730,3 +730,42 @@ Límites: los del §12.5. Además, las tres pasadas se grabaron en el mismo orde
 mezcla con el cansancio o la costumbre de leer el mismo texto; la opción que se veía en el panel no cambia el audio, pero
 pudo cambiar cómo leía Luciano. Una conversación telefónica tiene pausas más cortas que una lectura pausada, pero eso
 no se midió: falta una toma con diálogo, con otra voz y por Meet.
+
+### 12.9 Dos candidatos para comparar en diálogos reales (2026-10-30)
+
+**Decisión de Luciano (2026-10-30):** el corte se define comparando dos opciones en diálogos reales. Hasta
+entonces no cambian los valores por defecto: «Probar el ASR» sigue con el RMS 0,8 s / 0,008 y la llamada con
+0,9 s / 0,003. D09 sigue abierta.
+
+| | **A · Silero solo** | **B · RMS con filtro Silero** |
+|---|---|---|
+| En el panel | `parakeet-silero` | `parakeet-filtro` |
+| Variante offline | `parakeet-0.3-silero-0.9` | `parakeet-0.8-rms-0.008-filtro-silero-0.5` |
+| Quién corta la frase | Silero 0,9, con 0,3 s de silencio | El RMS 0,008, con 0,8 s de silencio; Silero decide qué se transcribe |
+| Dónde ganó | Lectura rápida (toma 4: WER 13,4 % contra 17,0 %), demora 0,55 s, corta con la serie de fondo | Lectura pausada (tomas 2 y 3: WER 13,2 % contra 15,2 %), frases enteras |
+| Su riesgo | Parte de más (110 segmentos para 95 frases) y sube 3 puntos el WER con la serie de fondo | Junta frases si las pausas son cortas y con la serie de fondo cierra por el tope |
+
+**Quedan afuera.** El RMS sin filtro, porque el filtro da el mismo texto y además no transcribe ruido (§12.7, §12.8).
+La «y», porque queda en el medio y da el peor WER con la serie de fondo.
+
+**Cómo grabar.**
+
+- Cada diálogo se graba una vez. El audio guardado no depende de la opción del panel, así que A y B se corren
+  offline sobre las mismas grabaciones y no hay efecto de orden como en la toma 4.
+- En el panel se deja fija una de las dos opciones durante toda la sesión, para que lo que se ve en vivo no cambie
+  el ritmo.
+- Cada diálogo se guarda con «Lo que dije en realidad» completo: sin guion, no hay bloque del que sacar la referencia.
+- Condiciones que tiene que haber: ritmo natural con interrupciones y respuestas cortas («sí», «dale»), otra voz del
+  equipo con consentimiento anotado (§3), Meet (#80) y un diálogo con la tele de fondo.
+
+**Cómo se decide**, en este orden:
+
+1. Frases con las etiquetas correctas y etiquetas nuevas en las negativas.
+2. Demora de la frase final.
+3. WER y CER.
+4. Frases partidas o juntadas.
+
+Con las etiquetas empatadas, como en la toma 4, desempatan la demora y el comportamiento con ruido.
+
+**Falta en las herramientas.** `pruebas.csv` acepta un canal por prueba: si un diálogo trae voz en los dos canales,
+hoy se mide uno por corrida. Tampoco hay una `condicion` de diálogo. Se ajustan cuando esté definida la forma de grabar.
