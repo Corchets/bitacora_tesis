@@ -133,12 +133,13 @@ Tipografía nativa del sistema (`system-ui, -apple-system, sans-serif`) para gar
   - **Fila superior de tarjetas de voz**: Dos tarjetas simétricas («Otra persona» a la izquierda, «Persona protegida» a la derecha) con medidor RMS visible y caja de transcripción viva.
   - **Columna de conversación (izquierda / centro, 65-70% ancho)**: Diálogo en dos bandas alineadas con las tarjetas superiores, con las evaluaciones del detector incrustadas bajo la frase que las disparó.
   - **Columna técnica (derecha, 30-35% ancho)**: Panel lateral que contiene el detector fijo en uso, la línea gráfica de riesgo en el tiempo (SVG) y la tabla de métricas y latencias.
-- **Vista de presentación (Grid de dos teléfonos iPhone y diálogo central)**:
-  - Siluetas laterales de iPhone (276px de ancho, 310px en proyección ≥ 1700px, 232px en pantallas estrechas) con avatares ilustrados estilo emoji, medidores RMS por canal y ondas reactivas.
-  - Columna central (`minmax(0, 1fr)`) con scroll interno, seguimiento automático en vivo, botón «Volver al vivo» al pausar la revisión y cajas de evaluación con detalles desplegables.
-  - Tarjeta de aviso de posible estafa en el iPhone protegido con motivo, evidencia resaltada en el diálogo y control de sonido.
-  - Ajuste responsivo vertical (`@media (max-height: 820px)`): marco, avatar y separaciones compactadas para garantizar que los teléfonos permanezcan visibles dentro del viewport en notebooks (1366 × 768) sin scroll de ventana.
-  - Accesibilidad de foco: contorno visible de 2px en azul primario (`--primary`, `#1d4ed8`) con offset de 2px para todos los controles interactivos.
+- **Vista de presentación (escena oscura con dos iPhone y diálogo central)**: única pantalla con tema oscuro; fondo negro completo y sin la cabecera del panel, para que en la proyección solo se vean los teléfonos y la conversación.
+  - Barra superior liviana sin caja: rótulo «Vista de presentación», estado de la llamada, identificador y botones en píldora. Los errores flotan debajo de la barra sin empujar la escena.
+  - Dos iPhone grandes cuyo tamaño sale del alto de la ventana (`--tel-ancho = min(alto disponible × 0.485, 27vw, 540px)`, proporción 485:1000): unos 485px de ancho en 1920 × 1080 y 330px en 1366 × 768. Todo lo de adentro escala con unidades de contenedor (`cqw`), así que no hacen falta reglas por alto de pantalla.
+  - Cada pantalla imita una llamada de iOS: barra de estado con isla dinámica (que se enciende en verde al hablar), nombre del rol, estado de voz en píldora, avatar grande con anillos que laten al hablar, medidor RMS por canal y botonera decorativa (altavoz, silencio, colgar). El teléfono protegido tiene tinte azul; con el aviso activo pasa a rojo y el avatar se achica para dejarle lugar a la tarjeta.
+  - Halo de color detrás de cada marco: blanco tenue en reposo, azul en el protegido, verde mientras habla, rojo con el aviso. El tinte de alerta del panel pasa a ser un halo rojo del lado del teléfono protegido.
+  - Columna central (`minmax(0, 1fr)`) en un panel translúcido: burbujas oscuras estilo mensajería (gris para «Otra persona», azul para «Persona protegida»), scroll interno, seguimiento automático, botón «Volver al vivo» y cajas de evaluación con detalles desplegables. La frase que disparó el aviso lleva borde y resplandor rojos y la cita en resaltador amarillo.
+  - Accesibilidad de foco: contorno visible de 2px en azul claro (`#60a5fa`) con offset de 2px sobre el fondo oscuro.
 
 ## Elevation & Depth
 
