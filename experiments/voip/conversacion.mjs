@@ -95,11 +95,21 @@ const ESTILOS_PRESENTACION = `
     width: 100%;
     margin: 0 auto;
     padding: 0.75rem 1.25rem 1rem;
+    box-sizing: border-box;
+  }
+  body.presentacion {
+    height: 100vh;
+    overflow: hidden;
   }
   body.presentacion #presentacion {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    flex: 1;
+    min-height: 0;
+    height: calc(100vh - 65px);
+    max-height: calc(100vh - 65px);
+    overflow: hidden;
   }
   body.presentacion #controles,
   body.presentacion main,
@@ -252,17 +262,16 @@ const ESTILOS_PRESENTACION = `
     display: grid;
     grid-template-columns: 276px minmax(0, 1fr) 276px;
     gap: 1.15rem;
-    align-items: start;
+    align-items: stretch;
     flex: 1;
-    min-height: 68vh;
+    min-height: 0;
   }
   /* Silueta de iPhone con pantalla oscura estilo llamada de WhatsApp */
   #presentacion .pres-telefono {
-    position: sticky;
-    top: 0.75rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-self: start;
   }
   #presentacion .pres-iphone-marco {
     position: relative;
@@ -493,8 +502,11 @@ const ESTILOS_PRESENTACION = `
     border-radius: var(--radio-lg, 12px);
     display: flex;
     flex-direction: column;
-    min-height: 496px;
-    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+    position: relative;
+    overflow: hidden;
   }
   #presentacion .pres-centro-cabecera {
     display: flex;
@@ -504,6 +516,7 @@ const ESTILOS_PRESENTACION = `
     gap: 0.5rem;
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--linea, #cbd5e1);
+    flex-shrink: 0;
   }
   #presentacion .pres-centro-titulo {
     margin: 0;
@@ -518,10 +531,26 @@ const ESTILOS_PRESENTACION = `
   }
   #presentacion .pres-charla {
     flex: 1;
+    min-height: 0;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 0.65rem;
-    padding: 1rem;
+    padding: 1rem 1rem 3rem;
+    scroll-behavior: smooth;
+  }
+  #presentacion .pres-charla::-webkit-scrollbar {
+    width: 8px;
+  }
+  #presentacion .pres-charla::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  #presentacion .pres-charla::-webkit-scrollbar-thumb {
+    background: var(--linea, #cbd5e1);
+    border-radius: var(--radio-sm, 4px);
+  }
+  #presentacion .pres-charla::-webkit-scrollbar-thumb:hover {
+    background: var(--tinta-secundaria, #334155);
   }
   #presentacion .pres-charla:empty::before {
     content: "Esperando las primeras frases confirmadas de la llamada…";
@@ -536,6 +565,27 @@ const ESTILOS_PRESENTACION = `
     width: 76%;
     max-width: 82%;
     padding: 0.65rem 0.9rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  #presentacion .pres-charla .linea.parcial {
+    border-style: dashed;
+    border-color: var(--linea, #cbd5e1);
+  }
+  #presentacion .pres-charla .linea.parcial .texto {
+    color: var(--tinta-secundaria, #334155);
+  }
+  #presentacion .pres-charla .pres-provisorio-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--tinta-secundaria, #334155);
+    background: var(--otra-fondo, #f1f5f9);
+    border: 1px dashed var(--linea, #cbd5e1);
+    border-radius: var(--radio-sm, 4px);
+    padding: 0.1rem 0.45rem;
   }
   #presentacion .pres-charla .linea .quien {
     font-size: 0.875rem;
@@ -543,6 +593,34 @@ const ESTILOS_PRESENTACION = `
   #presentacion .pres-charla .linea .texto {
     font-size: 1.125rem;
     line-height: 1.45;
+  }
+  #presentacion .pres-btn-volver-vivo {
+    position: absolute;
+    bottom: 0.85rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1.05rem;
+    border-radius: 999px;
+    background: var(--tinta, #0f172a);
+    color: var(--superficie, #ffffff);
+    border: 1px solid var(--tinta-secundaria, #334155);
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgb(15 23 42 / 0.28);
+    transition: background-color 150ms var(--salida), transform 150ms var(--salida);
+  }
+  #presentacion .pres-btn-volver-vivo:hover {
+    background: var(--primary, #1d4ed8);
+    border-color: var(--vos-borde, #93c5fd);
+  }
+  #presentacion .pres-btn-volver-vivo:focus-visible {
+    outline: 2px solid var(--primary, #1d4ed8);
+    outline-offset: 2px;
   }
   @media (max-width: 1120px) {
     #presentacion .pres-escena {
@@ -585,6 +663,15 @@ const ESTILOS_PRESENTACION = `
     #presentacion .pres-isla-onda {
       transition: none !important;
       transform: none !important;
+    }
+    #presentacion .pres-charla {
+      scroll-behavior: auto !important;
+    }
+    #presentacion .pres-charla .linea {
+      animation: none !important;
+    }
+    #presentacion .pres-btn-volver-vivo {
+      transition: none !important;
     }
   }
 `;
@@ -685,6 +772,7 @@ export function montarPresentacion(acciones) {
           <span class="pres-centro-sub" id="pres-dialogo-sub">Frases finales por canal</span>
         </div>
         <div id="pres-charla" class="pres-charla" role="log" aria-live="polite" aria-label="Frases finales de ambos roles"></div>
+        <button type="button" id="pres-volver-vivo" class="pres-btn-volver-vivo" hidden aria-label="Volver al vivo">↓ Volver al vivo</button>
       </section>
       ${plantillaTelefono('protegida')}
     </div>`;
@@ -701,6 +789,7 @@ export function montarPresentacion(acciones) {
   const btnVolver = /** @type {HTMLButtonElement} */ (el('volver-panel'));
   const btnTerminar = /** @type {HTMLButtonElement} */ (el('pres-terminar'));
   const btnNueva = /** @type {HTMLButtonElement} */ (el('pres-nueva'));
+  const btnVolverVivo = /** @type {HTMLButtonElement} */ (el('pres-volver-vivo'));
 
   const ROLES = /** @type {const} */ (['otra', 'protegida']);
   const UMBRAL_VOZ = 0.003;
@@ -727,10 +816,75 @@ export function montarPresentacion(acciones) {
   let enCurso = false;
   let finalizada = false;
   let llamadaActual = '';
+  let siguiendoVivo = true;
+  let desplazandoAutomatico = false;
+
+  let ultimoScrollTop = 0;
 
   /** @returns {boolean} */
   function movimientoReducido() {
     return Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
+  }
+
+  function irAlFinal(suave = true) {
+    if (!abierta) return;
+    desplazandoAutomatico = true;
+    const reducido = movimientoReducido();
+    const behavior = (!suave || reducido) ? 'instant' : 'smooth';
+    charla.scrollTo({top: charla.scrollHeight, behavior});
+    setTimeout(() => {
+      desplazandoAutomatico = false;
+      ultimoScrollTop = charla.scrollTop;
+    }, 320);
+  }
+
+  function pausarSeguimiento() {
+    if (!siguiendoVivo) return;
+    siguiendoVivo = false;
+    btnVolverVivo.hidden = false;
+  }
+
+  function reanudarSeguimiento() {
+    siguiendoVivo = true;
+    btnVolverVivo.hidden = true;
+    irAlFinal(true);
+  }
+
+  btnVolverVivo.onclick = () => {
+    reanudarSeguimiento();
+  };
+
+  charla.addEventListener('scroll', () => {
+    const st = charla.scrollTop;
+    const distAlFondo = charla.scrollHeight - st - charla.clientHeight;
+    if (distAlFondo <= 15) {
+      if (!siguiendoVivo) {
+        siguiendoVivo = true;
+        btnVolverVivo.hidden = true;
+      }
+    } else if (!desplazandoAutomatico && st < ultimoScrollTop - 5 && distAlFondo > 35) {
+      if (siguiendoVivo) {
+        pausarSeguimiento();
+      }
+    }
+    ultimoScrollTop = st;
+  }, {passive: true});
+
+  /**
+   * Inserta la línea en el diálogo conservando el orden cronológico por número de segmento.
+   * @param {HTMLElement} linea
+   * @param {number} segmento
+   */
+  function insertarEnOrden(linea, segmento) {
+    const hijos = /** @type {HTMLElement[]} */ ([...charla.children]);
+    for (const hijo of hijos) {
+      const seg = Number(hijo.dataset.segmento);
+      if (Number.isFinite(seg) && seg > segmento) {
+        hijo.before(linea);
+        return;
+      }
+    }
+    charla.appendChild(linea);
   }
 
   /**
@@ -776,6 +930,7 @@ export function montarPresentacion(acciones) {
     seccion.hidden = false;
     document.body.classList.add('presentacion');
     acciones.cambiar();
+    if (siguiendoVivo) irAlFinal(false);
     if (focoEnControles) btnVolver.focus();
   }
 
@@ -791,6 +946,11 @@ export function montarPresentacion(acciones) {
   function reiniciar(id = '') {
     frases.clear();
     charla.replaceChildren();
+    siguiendoVivo = true;
+    desplazandoAutomatico = false;
+    ultimoScrollTop = 0;
+    btnVolverVivo.hidden = true;
+    charla.scrollTop = 0;
     llamadaActual = id;
     llamadaIdEl.textContent = id;
     errorEl.textContent = '';
@@ -878,36 +1038,67 @@ export function montarPresentacion(acciones) {
       }
       if (m.tipo === 'asr') {
         const rol = m.rol === 'otra' ? 'otra' : 'protegida';
+        const tiempo = typeof m.fin_audio_s === 'number' ? `${m.fin_audio_s.toFixed(1)} s` : '';
+
         if (m.entrega === 'parcial') {
           enParcial[rol] = true;
           fijarTelefono(rol, telefonos[rol].meter.value, 'hablando');
+
+          let linea = frases.get(m.segmento);
+          if (!linea) {
+            linea = crearLinea(rol, 'parcial', m.texto, 'Texto provisorio');
+            linea.id = `pres-seg-${m.segmento}`;
+            linea.dataset.rol = rol;
+            linea.dataset.segmento = String(m.segmento);
+            linea.dataset.entrega = 'parcial';
+            const t = linea.querySelector('.t');
+            if (t) t.innerHTML = '<span class="pres-provisorio-tag">Texto provisorio</span>';
+            insertarEnOrden(linea, m.segmento);
+            frases.set(m.segmento, linea);
+          } else {
+            linea.className = `linea ${rol} parcial`;
+            linea.dataset.rol = rol;
+            linea.dataset.entrega = 'parcial';
+            const quien = /** @type {HTMLElement|null} */ (linea.querySelector('.nombre-quien'));
+            if (quien) quien.textContent = NOMBRE[rol];
+            const txt = /** @type {HTMLElement|null} */ (linea.querySelector('.texto'));
+            if (txt) txt.textContent = m.texto;
+            const t = /** @type {HTMLElement|null} */ (linea.querySelector('.t'));
+            if (t) t.innerHTML = '<span class="pres-provisorio-tag">Texto provisorio</span>';
+            if (!linea.isConnected) insertarEnOrden(linea, m.segmento);
+          }
+          if (siguiendoVivo) irAlFinal();
           return;
         }
+
         if (m.entrega === 'final') {
           enParcial[rol] = false;
           if (telefonos[rol].meter.value < UMBRAL_VOZ) {
             fijarTelefono(rol, telefonos[rol].meter.value, finalizada ? 'finalizado' : 'silencio');
           }
-          const tiempo = typeof m.fin_audio_s === 'number' ? `${m.fin_audio_s.toFixed(1)} s` : '';
           let linea = frases.get(m.segmento);
           if (!linea) {
             linea = crearLinea(rol, 'final', m.texto, tiempo);
             linea.id = `pres-seg-${m.segmento}`;
             linea.dataset.rol = rol;
             linea.dataset.segmento = String(m.segmento);
+            linea.dataset.entrega = 'final';
+            insertarEnOrden(linea, m.segmento);
             frases.set(m.segmento, linea);
-            charla.append(linea);
           } else {
             linea.className = `linea ${rol} final`;
             linea.dataset.rol = rol;
-            /** @type {HTMLElement} */ (linea.querySelector('.nombre-quien')).textContent = NOMBRE[rol];
-            /** @type {HTMLElement} */ (linea.querySelector('.texto')).textContent = m.texto;
-            /** @type {HTMLElement} */ (linea.querySelector('.t')).textContent = tiempo;
-            if (!linea.isConnected) charla.append(linea);
+            linea.dataset.entrega = 'final';
+            const quien = /** @type {HTMLElement|null} */ (linea.querySelector('.nombre-quien'));
+            if (quien) quien.textContent = NOMBRE[rol];
+            const txt = /** @type {HTMLElement|null} */ (linea.querySelector('.texto'));
+            if (txt) txt.textContent = m.texto;
+            const t = /** @type {HTMLElement|null} */ (linea.querySelector('.t'));
+            if (t) t.textContent = tiempo;
+            if (!linea.isConnected) insertarEnOrden(linea, m.segmento);
           }
-          if (abierta && typeof linea.scrollIntoView === 'function') {
-            linea.scrollIntoView({block: 'nearest', behavior: movimientoReducido() ? 'instant' : 'smooth'});
-          }
+          if (siguiendoVivo) irAlFinal();
+          return;
         }
         return;
       }

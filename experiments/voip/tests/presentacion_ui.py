@@ -245,7 +245,7 @@ class UIDriver:
         ]
         self.chrome_proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         page_ws_url = None
-        for _ in range(40):
+        for _ in range(60):
             await asyncio.sleep(0.1)
             try:
                 pages = await asyncio.to_thread(fetch_json, f"http://127.0.0.1:{self.chrome_port}/json/list", 2.0)
@@ -282,15 +282,15 @@ class UIDriver:
 
     async def run_scenario(self, output_dir: Path):
         output_dir.mkdir(parents=True, exist_ok=True)
-        print(f"Iniciando servidor de pruebas en puerto efímero {self.server_port}...")
-        await self.start_server()
-        print(f"Iniciando Chrome headless ({self.chrome_bin}) en puerto {self.chrome_port}...")
-        await self.start_chrome()
-
         try:
+            print(f"Iniciando servidor de pruebas en puerto efímero {self.server_port}...")
+            await self.start_server()
+            print(f"Iniciando Chrome headless ({self.chrome_bin}) en puerto {self.chrome_port}...")
+            await self.start_chrome()
             # 1. Navegación a panel.html y conexión WebSocket
             panel_url = f"http://127.0.0.1:{self.server_port}/"
             await self.cdp.send("Page.navigate", {"url": panel_url})
+            await self.cdp.set_viewport(1366, 768)
             await asyncio.wait_for(self.panel_connected_event.wait(), timeout=5.0)
 
             # Esperar a que la UI esté interactiva
@@ -542,38 +542,270 @@ class UIDriver:
                 "Texto observable ('Hablando ahora' / 'En silencio') y medidores de nivel activos alternados por RMS sin clases internas"
             )
 
-            # 8. Transcripción final de ambos roles en diálogo central
+            # 8. Parciales visibles como texto provisorio en el centro
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "parcial",
+                "segmento": 1,
+                "rol": "otra",
+                "texto": "Hola, nos comunicamos del departamento",
+                "fin_audio_s": 1.2,
+                "disponible_s": 1.4
+            }))
+            await asyncio.sleep(0.12)
+            parcial_obs = await self.cdp.eval("""
+                (() => {
+                    const lineas = document.querySelectorAll('#pres-charla .linea');
+                    if (lineas.length !== 1) return { count: lineas.length, ok: false };
+                    const l = lineas[0];
+                    const texto = l.querySelector('.texto')?.textContent.trim();
+                    const tiempo = l.querySelector('.t')?.textContent.trim();
+                    const esParcial = l.classList.contains('parcial') || l.dataset.entrega === 'parcial';
+                    const diceProvisorio = (tiempo && tiempo.toLowerCase().includes('provisorio')) ||
+                                           Boolean(l.querySelector('.pres-provisorio-tag'));
+                    return {
+                        count: lineas.length,
+                        texto,
+                        tiempo,
+                        esParcial,
+                        diceProvisorio,
+                        ok: esParcial && diceProvisorio && texto === 'Hola, nos comunicamos del departamento'
+                    };
+                })()
+            """)
+            self.record_check(
+                "Parciales visibles como texto provisorio",
+                bool(parcial_obs.get("ok")),
+                f"Líneas: {parcial_obs.get('count')}, texto: '{parcial_obs.get('texto')}', etiqueta: '{parcial_obs.get('tiempo')}'"
+            )
+
+            # 9. Revisiones reemplazan la intervención existente sin duplicar
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "parcial",
+                "segmento": 1,
+                "rol": "otra",
+                "texto": "Hola, nos comunicamos del departamento de soporte de la entidad bancaria.",
+                "fin_audio_s": 2.2,
+                "disponible_s": 2.4
+            }))
+            await asyncio.sleep(0.12)
+            revision_obs = await self.cdp.eval("""
+                (() => {
+                    const lineas = document.querySelectorAll('#pres-charla .linea');
+                    if (lineas.length !== 1) return { count: lineas.length, ok: false };
+                    const l = lineas[0];
+                    const texto = l.querySelector('.texto')?.textContent.trim();
+                    const esParcial = l.classList.contains('parcial') || l.dataset.entrega === 'parcial';
+                    return {
+                        count: lineas.length,
+                        texto,
+                        esParcial,
+                        ok: lineas.length === 1 && esParcial && texto.includes('soporte de la entidad')
+                    };
+                })()
+            """)
+            self.record_check(
+                "Revisiones reemplazan la intervención sin duplicar",
+                bool(revision_obs.get("ok")),
+                f"Líneas en diálogo: {revision_obs.get('count')} (sin duplicación), texto corregido: '{revision_obs.get('texto')}'"
+            )
+
+            # 10. Roles intercalados y confirmación final de intervenciones
+            # Entra borrador de Persona protegida (segmento 2) mientras se confirma segmento 1
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "parcial",
+                "segmento": 2,
+                "rol": "protegida",
+                "texto": "¿Qué problema",
+                "fin_audio_s": 3.2,
+                "disponible_s": 3.4
+            }))
+            await asyncio.sleep(0.1)
+            # Confirmación final de segmento 1 (otra)
             await self.panel_ws.send(json.dumps({
                 "tipo": "asr",
                 "entrega": "final",
                 "segmento": 1,
                 "rol": "otra",
-                "texto": "Hola, nos comunicamos del departamento de soporte de la entidad.",
-                "fin_audio_s": 2.8
+                "texto": "Hola, nos comunicamos del departamento de soporte de la entidad bancaria.",
+                "fin_audio_s": 2.8,
+                "disponible_s": 3.0
             }))
+            await asyncio.sleep(0.1)
+            # Confirmación final de segmento 2 (protegida)
             await self.panel_ws.send(json.dumps({
                 "tipo": "asr",
                 "entrega": "final",
                 "segmento": 2,
                 "rol": "protegida",
                 "texto": "¿Qué problema ocurrió con la cuenta?",
-                "fin_audio_s": 4.5
+                "fin_audio_s": 4.5,
+                "disponible_s": 4.7
             }))
-            await asyncio.sleep(0.18)
-            dialogo_ok = await self.cdp.eval("""
+            await asyncio.sleep(0.15)
+            intercalado_obs = await self.cdp.eval("""
                 (() => {
                     const lineas = [...document.querySelectorAll('#pres-charla .linea')];
-                    if (lineas.length !== 2) return false;
+                    if (lineas.length !== 2) return { count: lineas.length, ok: false };
                     const l1 = lineas[0];
                     const l2 = lineas[1];
-                    const r1 = l1.dataset.rol === 'otra' && l1.textContent.includes('soporte');
-                    const r2 = l2.dataset.rol === 'protegida' && l2.textContent.includes('cuenta');
-                    return r1 && r2;
+                    const r1 = l1.dataset.rol || (l1.classList.contains('otra') ? 'otra' : '');
+                    const r2 = l2.dataset.rol || (l2.classList.contains('protegida') ? 'protegida' : '');
+                    const f1 = l1.classList.contains('final') && !l1.classList.contains('parcial');
+                    const f2 = l2.classList.contains('final') && !l2.classList.contains('parcial');
+                    const t1 = l1.querySelector('.t')?.textContent.trim();
+                    const t2 = l2.querySelector('.t')?.textContent.trim();
+                    return {
+                        count: lineas.length,
+                        r1, r2, f1, f2, t1, t2,
+                        ok: r1 === 'otra' && r2 === 'protegida' && f1 && f2 && t1 === '2.8 s' && t2 === '4.5 s'
+                    };
                 })()
             """)
-            self.record_check("Texto final y roles en diálogo central", bool(dialogo_ok), "2 intervenciones mostradas con roles y textos correctos en #pres-charla")
+            self.record_check(
+                "Roles intercalados y confirmaciones finales",
+                bool(intercalado_obs.get("ok")),
+                f"2 frases finales intercaladas: seg 1 ({intercalado_obs.get('r1')}: {intercalado_obs.get('t1')}), seg 2 ({intercalado_obs.get('r2')}: {intercalado_obs.get('t2')})"
+            )
 
-            # 9. Ida y vuelta a consola sin comandos duplicados
+            # 11. Conversación larga, seguimiento automático y permanencia de teléfonos
+            mensajes_largos = [
+                (3, "otra", "Detectamos un acceso sospechoso desde una dirección no habitual en su banca en línea y necesitamos constatar la titularidad para evitar bloqueos preventivos.", 7.2),
+                (4, "protegida", "No ingresé a ningún sitio sospechoso hoy, me parece muy extraño.", 10.1),
+                (5, "otra", "Le va a llegar un código numérico a su teléfono por mensaje; no lo comparta con nadie excepto conmigo para cancelar el bloqueo.", 13.4),
+                (6, "protegida", "¿Por qué me piden el código si dijeron que no lo comparta con nadie?", 16.0),
+                (7, "otra", "Es para el sistema automatizado de anulación de movimientos fraudulentos.", 18.5),
+                (8, "protegida", "Prefiero cortar y llamar directamente al número que figura al dorso de mi tarjeta de débito.", 21.3),
+                (9, "otra", "Si corta la llamada ahora sus cuentas quedarán inmovilizadas por 72 horas hábiles por protocolo de seguridad.", 24.8),
+                (10, "protegida", "Voy a verificarlo personalmente en la sucursal bancaria.", 27.0),
+            ]
+            for seg_id, rol, txt, t_fin in mensajes_largos:
+                await self.panel_ws.send(json.dumps({
+                    "tipo": "asr",
+                    "entrega": "final",
+                    "segmento": seg_id,
+                    "rol": rol,
+                    "texto": txt,
+                    "fin_audio_s": t_fin,
+                    "disponible_s": t_fin + 0.1
+                }))
+                await asyncio.sleep(0.04)
+
+            await asyncio.sleep(0.25)
+            larga_obs = await self.cdp.eval("""
+                (() => {
+                    const charla = document.getElementById('pres-charla');
+                    const telOtra = document.getElementById('pres-telefono-otra');
+                    const telProt = document.getElementById('pres-telefono-protegida');
+                    if (!charla || !telOtra || !telProt) return { ok: false };
+
+                    const tieneScroll = charla.scrollHeight > charla.clientHeight;
+                    const distAlFondo = charla.scrollHeight - charla.scrollTop - charla.clientHeight;
+                    const sigueAlFondo = distAlFondo <= 25;
+
+                    const rOtra = telOtra.getBoundingClientRect();
+                    const rProt = telProt.getBoundingClientRect();
+                    const vh = window.innerHeight;
+                    const telefonosVisibles = rOtra.top >= 0 && rOtra.bottom <= vh &&
+                                             rProt.top >= 0 && rProt.bottom <= vh &&
+                                             rOtra.height > 200 && rProt.height > 200;
+                    const ventanaNoDesplazada = window.scrollY === 0;
+
+                    return {
+                        totalLineas: charla.querySelectorAll('.linea').length,
+                        tieneScroll,
+                        distAlFondo: Math.round(distAlFondo),
+                        sigueAlFondo,
+                        telefonosVisibles,
+                        ventanaNoDesplazada,
+                        ok: tieneScroll && sigueAlFondo && telefonosVisibles && ventanaNoDesplazada
+                    };
+                })()
+            """)
+            self.record_check(
+                "Conversación larga, scroll central y teléfonos visibles",
+                bool(larga_obs.get("ok")),
+                f"Líneas: {larga_obs.get('totalLineas')}, scroll central activo (dist al fondo: {larga_obs.get('distAlFondo')}px), teléfonos visibles sin scroll de ventana ({larga_obs.get('telefonosVisibles')})"
+            )
+
+            # 12. Revisión del diálogo pausa seguimiento y muestra Volver al vivo
+            # El presentador sube a revisar el inicio del diálogo
+            await self.cdp.eval("""
+                (() => {
+                    const charla = document.getElementById('pres-charla');
+                    charla.scrollTop = 0;
+                    charla.dispatchEvent(new Event('scroll'));
+                })()
+            """)
+            await asyncio.sleep(0.15)
+            # Entra un nuevo mensaje mientras está revisando
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 11,
+                "rol": "otra",
+                "texto": "Por favor espere en línea, no cuelgue.",
+                "fin_audio_s": 29.5,
+                "disponible_s": 29.7
+            }))
+            await asyncio.sleep(0.15)
+            pausa_obs = await self.cdp.eval("""
+                (() => {
+                    const charla = document.getElementById('pres-charla');
+                    const btn = document.getElementById('pres-volver-vivo');
+                    const linea11 = document.getElementById('pres-seg-11');
+                    const btnVisible = Boolean(btn && !btn.hidden && btn.offsetHeight > 0);
+                    const noForzadoAlFinal = charla.scrollTop < 120;
+                    return {
+                        btnVisible,
+                        noForzadoAlFinal,
+                        scrollTop: Math.round(charla.scrollTop),
+                        linea11Presente: Boolean(linea11),
+                        ok: btnVisible && noForzadoAlFinal && Boolean(linea11)
+                    };
+                })()
+            """)
+            self.record_check(
+                "Revisión pausa seguimiento y muestra Volver al vivo",
+                bool(pausa_obs.get("ok")),
+                f"Botón Volver al vivo visible ({pausa_obs.get('btnVisible')}), posición respetada sin forzar al final (scrollTop: {pausa_obs.get('scrollTop')}px)"
+            )
+
+            # 13. Volver al vivo restablece seguimiento al final sin alterar la llamada
+            await self.cdp.eval("document.getElementById('pres-volver-vivo').click()")
+            for _ in range(15):
+                await asyncio.sleep(0.05)
+                dist = await self.cdp.eval("document.getElementById('pres-charla').scrollHeight - document.getElementById('pres-charla').scrollTop - document.getElementById('pres-charla').clientHeight")
+                if dist is not None and dist <= 25:
+                    break
+
+            restablece_obs = await self.cdp.eval("""
+                (() => {
+                    const charla = document.getElementById('pres-charla');
+                    const btn = document.getElementById('pres-volver-vivo');
+                    const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    const btnOculto = !btn || btn.hidden || btn.offsetHeight === 0;
+                    const distAlFondo = charla.scrollHeight - charla.scrollTop - charla.clientHeight;
+                    const enElFondo = distAlFondo <= 25;
+                    const llamadaSigue = estado === 'En llamada';
+                    return {
+                        btnOculto,
+                        distAlFondo: Math.round(distAlFondo),
+                        enElFondo,
+                        llamadaSigue,
+                        ok: btnOculto && enElFondo && llamadaSigue
+                    };
+                })()
+            """)
+            self.record_check(
+                "Volver al vivo restablece seguimiento sin alterar llamada",
+                bool(restablece_obs.get("ok")),
+                f"Botón ocultado ({restablece_obs.get('btnOculto')}), scroll llevado al final (dist: {restablece_obs.get('distAlFondo')}px), llamada en curso ({restablece_obs.get('llamadaSigue')})"
+            )
+
+            # 14. Ida y vuelta a consola sin comandos duplicados ni pérdida de diálogo
             cmds_antes = len(self.received_messages)
             await self.cdp.eval("document.getElementById('volver-panel').click()")
             await asyncio.sleep(0.12)
@@ -592,7 +824,8 @@ class UIDriver:
             de_nuevo_pres = await self.cdp.eval("""
                 (() => {
                     const sec = document.getElementById('presentacion');
-                    return Boolean(sec && !sec.hidden && sec.offsetHeight > 0);
+                    const lineas = document.querySelectorAll('#pres-charla .linea').length;
+                    return Boolean(sec && !sec.hidden && sec.offsetHeight > 0) && lineas === 11;
                 })()
             """)
             cmds_despues = len(self.received_messages)
@@ -601,16 +834,15 @@ class UIDriver:
             self.record_check(
                 "Ida y vuelta a consola sin comandos duplicados",
                 alternancia_ok,
-                f"Consola reabierta, presentación recuperada, comandos emitidos en transición: {cmds_despues - cmds_antes}"
+                f"Consola reabierta, presentación recuperada con 11 líneas intactas, comandos emitidos en transición: {cmds_despues - cmds_antes}"
             )
 
-            # 10. Captura de Terminar análisis desde Presentación
+            # 15. Captura de Terminar análisis y fin conserva la escena
             await self.cdp.eval("document.getElementById('pres-terminar').click()")
             await asyncio.sleep(0.2)
             term_cmd = next((m for m in self.received_messages[cmds_antes:] if m.get("tipo") == "terminar"), None)
             self.record_check("Captura terminar", term_cmd is not None, f"Comando recibido: {term_cmd}")
 
-            # 11. Servidor confirma fin y escena conservada
             await self.panel_ws.send(json.dumps({
                 "tipo": "fin",
                 "llamada_id": "llamada-demo-111",
@@ -624,12 +856,12 @@ class UIDriver:
                     const estado = document.getElementById('pres-estado')?.textContent.trim();
                     const sub = document.getElementById('pres-dialogo-sub')?.textContent.trim();
                     const lineas = document.querySelectorAll('#pres-charla .linea').length;
-                    return esVisible && estado === 'Análisis finalizado' && sub.includes('conservada') && lineas === 2;
+                    return esVisible && estado === 'Análisis finalizado' && sub.includes('conservada') && lineas === 11;
                 })()
             """)
-            self.record_check("Fin conserva la escena", bool(escena_conservada), "Estado 'Análisis finalizado', subtítulo conservado y 2 líneas de diálogo intactas")
+            self.record_check("Fin conserva la escena", bool(escena_conservada), "Estado 'Análisis finalizado', subtítulo conservado y 11 líneas de diálogo intactas")
 
-            # 12. Capturas de pantalla
+            # Capturas de pantalla con movimiento normal
             # Notebook 1366x768
             await self.cdp.set_viewport(1366, 768)
             await asyncio.sleep(0.2)
@@ -644,7 +876,94 @@ class UIDriver:
             await self.cdp.capture_screenshot(str(png_proy))
             print(f"Captura proyección guardada: {png_proy}")
 
-            # 13. Logs de errores de consola
+            # 16. Nueva llamada elimina los borradores y contenido anterior
+            await self.panel_ws.send(json.dumps({
+                "tipo": "inicio",
+                "llamada_id": "llamada-segunda-limpia",
+                "modo": "llamada",
+                "corte_silencio_s": 0.9,
+                "asr": "zipformer"
+            }))
+            await asyncio.sleep(0.2)
+            nueva_obs = await self.cdp.eval("""
+                (() => {
+                    const charla = document.getElementById('pres-charla');
+                    const lineas = charla ? charla.querySelectorAll('.linea').length : -1;
+                    const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    const llamadaId = document.getElementById('pres-llamada-id')?.textContent.trim();
+                    const btnVolverVivo = document.getElementById('pres-volver-vivo');
+                    return {
+                        lineas,
+                        estado,
+                        llamadaId,
+                        btnVolverVivoOculto: !btnVolverVivo || btnVolverVivo.hidden,
+                        ok: lineas === 0 && estado === 'En llamada' && llamadaId === 'llamada-segunda-limpia'
+                    };
+                })()
+            """)
+            self.record_check(
+                "Nueva llamada elimina borradores y contenido anterior",
+                bool(nueva_obs.get("ok")),
+                f"Líneas en diálogo: {nueva_obs.get('lineas')} (limpio), estado: '{nueva_obs.get('estado')}', llamadaId: '{nueva_obs.get('llamadaId')}'"
+            )
+
+            # 17. Verificación de movimiento reducido
+            # Emitir 2 frases para la nueva llamada
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 1,
+                "rol": "otra",
+                "texto": "Hola, ¿me escucha bien?",
+                "fin_audio_s": 1.5,
+                "disponible_s": 1.7
+            }))
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 2,
+                "rol": "protegida",
+                "texto": "Sí, lo escucho perfectamente.",
+                "fin_audio_s": 3.0,
+                "disponible_s": 3.2
+            }))
+            await asyncio.sleep(0.15)
+
+            # Emular preferencia de movimiento reducido
+            await self.cdp.send("Emulation.setEmulatedMedia", {
+                "media": "page",
+                "features": [{"name": "prefers-reduced-motion", "value": "reduce"}]
+            })
+            await asyncio.sleep(0.1)
+            reducido_obs = await self.cdp.eval("""
+                (() => {
+                    const matches = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                    const charla = document.getElementById('pres-charla');
+                    const scrollBehavior = window.getComputedStyle(charla).scrollBehavior;
+                    return {
+                        matches,
+                        scrollBehavior,
+                        ok: matches && scrollBehavior !== 'smooth'
+                    };
+                })()
+            """)
+            self.record_check(
+                "Respeto por movimiento reducido",
+                bool(reducido_obs.get("ok")),
+                f"prefers-reduced-motion: {reducido_obs.get('matches')}, scroll-behavior: '{reducido_obs.get('scrollBehavior')}'"
+            )
+
+            # Captura proyección con movimiento reducido
+            png_reducido = output_dir / "tesis-presentacion-ui-reducido-1920x1080.png"
+            await self.cdp.set_viewport(1920, 1080)
+            await asyncio.sleep(0.2)
+            await self.cdp.capture_screenshot(str(png_reducido))
+            print(f"Captura movimiento reducido guardada: {png_reducido}")
+
+            # Restaurar emulación
+            await self.cdp.send("Emulation.setEmulatedMedia", {"media": "page", "features": []})
+
+            # 18. Logs de errores de consola
             errores_consola = [log for log in self.cdp.console_logs if log.get("type") in ("error", "internal_error")]
             log_path = output_dir / "tesis-presentacion-ui-consola.log"
             with open(log_path, "w", encoding="utf-8") as f:
@@ -664,7 +983,7 @@ class UIDriver:
 
 def generar_reporte(resultados, report_path: Path, output_dir: Path):
     lineas = [
-        "# Reporte de verificación de UI: Vista de presentación (#111)",
+        "# Reporte de verificación de UI: Transcripción en vivo y revisión del diálogo (#112)",
         "",
         "## Resumen",
         "Driver automatizado y portable con Chrome headless y CDP vía WebSocket nativo sobre el servidor real de `experiments/voip` en puerto efímero aislado.",
@@ -678,9 +997,10 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
 
     lineas.extend([
         "",
-        "## Capturas de pantalla generadas",
+        "## Evidencia visual generada",
         f"- Notebook (1366x768): `{output_dir / 'tesis-presentacion-ui-notebook-1366x768.png'}`",
         f"- Proyección (1920x1080): `{output_dir / 'tesis-presentacion-ui-proyeccion-1920x1080.png'}`",
+        f"- Movimiento reducido (1920x1080): `{output_dir / 'tesis-presentacion-ui-reducido-1920x1080.png'}`",
         f"- Logs de consola: `{output_dir / 'tesis-presentacion-ui-consola.log'}`",
         "",
         "## Reproducibilidad",
@@ -695,7 +1015,7 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
 
 
 async def main():
-    parser = argparse.ArgumentParser(description="Driver portable de UI con Chrome headless para Issue #111")
+    parser = argparse.ArgumentParser(description="Driver portable de UI con Chrome headless para Issue #112")
     parser.add_argument("--repo", default=None, help="Ruta al repositorio o experiments/voip (opcional, auto-detectado)")
     parser.add_argument("--outdir", default="/tmp/tesis-presentacion-ui-portable", help="Directorio para capturas y logs")
     parser.add_argument("--report", default="/tmp/tesis-presentacion-ui-portable-report.md", help="Ruta del reporte Markdown")
