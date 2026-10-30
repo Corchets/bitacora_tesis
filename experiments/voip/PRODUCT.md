@@ -44,11 +44,16 @@ En definición mediante `/grill-with-docs` para [#110](https://github.com/Corche
 - Sumar una vista con dos siluetas de iPhone y conservar el panel actual, la prueba de ASR, el Historial y la vista de la persona protegida.
 - Al iniciar el análisis desde los controles actuales, entrar automáticamente a Presentación. Permitir volver al panel durante la misma llamada sin reiniciar captura, transcripción ni detector.
 - El diálogo grande ocupa el centro; los teléfonos indican quién habla. El resultado de cada análisis acompaña a la frase correspondiente y las métricas detalladas quedan en un panel desplegable.
+- Cada teléfono muestra una pantalla de llamada y actividad de voz. El aviso «Posible estafa» aparece en el teléfono de la persona protegida, con motivo y frase resaltada en el diálogo central; el otro teléfono conserva el nombre «Otra persona».
+- Los teléfonos permanecen visibles mientras el diálogo se desplaza en el centro siguiendo lo último. Si quien presenta sube para revisar una frase anterior, el seguimiento se pausa hasta tocar «Volver al vivo».
+- La vista comunica «Analizando», «Sin aviso», «Posible estafa», «No evaluado» y «Error» según los eventos reales. La puntuación del detector y las demoras quedan en los detalles; la puntuación no se presenta como probabilidad calibrada de estafa.
 - Los teléfonos representan la conversación y la actividad de la captura actual. La llamada se abre en Meet o WhatsApp; iniciar o terminar el análisis no marca, atiende ni cuelga la llamada externa.
 - Usar los eventos reales disponibles, incluidos estados como «Esperando audio» y «Analizando». Esta vista no elige modelos ni agrega telefonía propia.
 - El video de respaldo con ejemplo hardcodeado y voces sincronizadas se prepara al final, después de la integración; continúa pendiente en [#53](https://github.com/Corchets/bitacora_tesis/issues/53).
 
-Pendientes del grill: contenido de las pantallas de los teléfonos y ubicación del aviso; seguimiento del diálogo y correcciones del ASR; cierre de la escena, errores y dirección visual. El diseño exacto del aviso del sistema final sigue pendiente en [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
+Referencia visual aportada por Luciano el 2026-10-29: pantalla de llamada de WhatsApp, con foto de perfil circular grande, nombre y estado sobre un fondo oscuro. Adoptar esa composición para las pantallas de los teléfonos; la captura sirve de referencia visual y no se incorpora al repositorio.
+
+Pendientes del grill: correspondencia entre la foto y la persona representada por cada teléfono; transcripción provisoria y correcciones del ASR; cierre de la escena, errores y acciones disponibles. El diseño exacto del aviso del sistema final sigue pendiente en [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
 
 ## Brand Commitments
 
