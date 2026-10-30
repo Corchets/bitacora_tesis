@@ -22,6 +22,7 @@ from reranker import (  # noqa: E402
     armar_ventana,
     backend_de,
     cargar_hipotesis,
+    p_entailment,
 )
 
 HIPOTESIS = {
@@ -120,6 +121,11 @@ class TestDetector(unittest.TestCase):
 
 
 class TestHipotesisYBackends(unittest.TestCase):
+    def test_nli_usa_las_tres_clases(self):
+        neutral, entail = p_entailment([[1.0, 5.0, 0.0], [6.0, 1.0, 0.0]], 0)
+        self.assertLess(neutral, 0.05, "si domina «neutral», no hay pedido")
+        self.assertGreater(entail, 0.9)
+
     def test_archivo_tiene_seis_pedidos_y_seis_maniobras(self):
         pedidos, _ = cargar_hipotesis("pedidos")
         todas, _ = cargar_hipotesis("todas")

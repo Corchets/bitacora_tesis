@@ -8,7 +8,8 @@ sus paráfrasis. Nunca recibe la referencia humana ni líneas futuras.
 Tres familias, un mismo contrato (`evaluar(lineas) -> Respuesta`, como `DetectorReglas`):
 
 - `nli`: modelo NLI (p. ej. mDeBERTa-xnli). Premisa = ventana, hipótesis = descripción;
-  puntaje = P(entailment) frente a contradicción, como el zero-shot multi-label de HF.
+  puntaje = P(entailment) sobre las tres clases. No se compara solo contra contradicción
+  (zero-shot multi-label de HF): si el modelo dice «neutral», esa cuenta da ~1 igual.
 - `cross-encoder`: reranker de búsqueda (p. ej. bge-reranker-v2-m3). Consulta =
   descripción, pasaje = ventana; puntaje = sigmoide del logit.
 - `qwen3-reranker`: reranker con instrucción (Qwen3-Reranker). Puntaje = P("yes") frente a
@@ -179,7 +180,6 @@ class PuntuadorHF:
             if self.backend == "nli":
                 etiquetas = {i: str(n).lower() for i, n in self._red.config.id2label.items()}
                 self._entail = next((i for i, n in etiquetas.items() if n.startswith("entail")), None)
-                self._contra = next((i for i, n in etiquetas.items() if n.startswith("contradict")), None)
                 if self._entail is None:
                     raise ValueError(f"{self.modelo} no tiene clase entailment: {etiquetas}")
         self._torch = torch
@@ -218,11 +218,7 @@ class PuntuadorHF:
             # Premisa = ventana, hipótesis = descripción del pedido.
             enc = self._tok([v for _, v in pares], [h for h, _ in pares], padding=True,
                             truncation="only_first", max_length=self.max_longitud, return_tensors="pt")
-            logits = self._red(**enc).logits
-            if self._contra is not None:
-                logits = logits[:, [self._entail, self._contra]]
-                return torch.softmax(logits, dim=-1)[:, 0].tolist()
-            return torch.softmax(logits, dim=-1)[:, self._entail].tolist()
+            return p_entailment(self._red(**enc).logits.float().tolist(), self._entail)
         if self.backend == "cross-encoder":
             # Consulta = descripción, pasaje = ventana.
             enc = self._tok([h for h, _ in pares], [v for _, v in pares], padding=True,
@@ -242,6 +238,16 @@ class PuntuadorHF:
     def liberar(self) -> None:
         self._red = self._tok = None
         gc.collect()
+
+
+def p_entailment(logits: list[list[float]], i_entail: int) -> list[float]:
+    """P(entailment) con softmax sobre todas las clases (entailment, neutral, contradicción)."""
+    salida = []
+    for fila in logits:
+        tope = max(fila)
+        exp = [math.exp(x - tope) for x in fila]
+        salida.append(exp[i_entail] / sum(exp))
+    return salida
 
 
 def crear_puntuador(modelo: str, backend: str, *, revision: str | None = None, hilos: int | None = None,

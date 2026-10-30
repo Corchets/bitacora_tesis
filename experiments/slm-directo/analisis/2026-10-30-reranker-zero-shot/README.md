@@ -62,7 +62,7 @@ generar texto. Las preguntas:
 
 | Backend | Modelo | Cómo puntúa |
 |---|---|---|
-| `nli` | `MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7` | P(entailment) frente a contradicción; premisa = ventana |
+| `nli` | `MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7` | P(entailment) sobre las 3 clases; premisa = ventana |
 | `cross-encoder` | `BAAI/bge-reranker-v2-m3` | sigmoide del logit; consulta = descripción, pasaje = ventana |
 | `qwen3-reranker` | `Qwen/Qwen3-Reranker-0.6B` | P("yes") con la instrucción de [`hipotesis_reranker.json`](../../prompts/hipotesis_reranker.json) |
 
