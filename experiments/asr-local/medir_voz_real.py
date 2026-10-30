@@ -52,6 +52,7 @@ VOCES = ("luciano", "otra")
 CONDICIONES = ("microfono", "meet", "voz-baja", "ruido-tv", "pausas")  # las tres últimas: extras por micrófono
 CANALES = {"protegida": 0, "otra": 1}  # columna del estereo.wav del panel
 TOMA_DE_DECISION = 2
+TOMAS = ("1", "2", "3", "4")  # 4: mezclas del RMS con Silero (§12.8)
 
 
 # --- Entrada: CSV y pruebas guardadas ------------------------------------------------------------------
@@ -81,8 +82,8 @@ def leer_csv(ruta: str | Path) -> list[dict[str, str]]:
         problemas = []
         if not fila["id"]:
             problemas.append("falta el id")
-        if fila["toma"] not in ("1", "2", "3"):
-            problemas.append(f"toma debe ser 1, 2 o 3: {fila['toma']!r}")
+        if fila["toma"] not in TOMAS:
+            problemas.append(f"toma debe ser una de {', '.join(TOMAS)}: {fila['toma']!r}")
         if fila["voz"] not in VOCES:
             problemas.append(f"voz debe ser una de {VOCES}: {fila['voz']!r}")
         if fila["condicion"] not in CONDICIONES:
@@ -646,7 +647,8 @@ def parsear(argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--contra-parakeet", default=V.PARAKEET_PANEL, choices=[n for n, _ in V.VARIANTES_PARAKEET],
                    help=f"variante de Parakeet contra la que se comparan las demás (defecto: {V.PARAKEET_PANEL}, la del panel; "
                         f"{V.PARAKEET_LABORATORIO} es la de «Probar el ASR»)")
-    p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=(1, 2, 3), help="toma donde se aplica la regla (defecto: 2; 3 = confirmación de lo elegido con la 2)")
+    p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=tuple(map(int, TOMAS)),
+                   help="toma donde se aplica la regla (defecto: 2; 3 = confirmación de lo elegido con la 2; 4 = mezclas con Silero)")
     p.add_argument("--bloque-ms", type=int, default=V.BLOQUE_MS_POR_DEFECTO, help="tamaño de bloque (defecto: 40, como el panel)")
     p.add_argument("--hilos", type=int, default=V.HILOS_POR_DEFECTO, help="hilos del ASR sherpa (defecto: 2, como el servidor)")
     p.add_argument("--hilos-whisper", type=int, default=4)

@@ -44,8 +44,11 @@ from motores import DetectorSilero, MotorPorFrases
 
 DIR_ASR = Path(__file__).resolve().parent
 # Comentadas en voz-real/pruebas.csv: sin referencia, no entran en el WER.
+# Se usan las que estén en la carpeta de --pruebas.
 SIN_TEXTO = {"2026-10-29_201018-775836": "G10 30 s sin hablar, tele apagada",
-             "2026-10-29_193603-180243": "serie de fondo sin hablar"}
+             "2026-10-29_193603-180243": "serie de fondo sin hablar",
+             "2026-10-30_154422-984207": "G10b 30 s sin hablar, ruidos de la pieza",
+             "2026-10-30_154522-194321": "G10c 30 s sin hablar, con la tele"}
 VARIANTES_POR_DEFECTO = (V.PARAKEET_LABORATORIO, "parakeet-0.8-silero-0.5", "parakeet-0.5-silero-0.5",
                          "parakeet-0.3-silero-0.5", "parakeet-0.5-silero-0.9", "parakeet-0.3-silero-0.9")
 UMBRAL_FIN_DE_VOZ = 0.008  # el RMS contra el que se mide el desfase (el de la referencia del laboratorio)
@@ -295,16 +298,21 @@ def escribir_resumen(ruta: Path, datos: dict[str, Any]) -> None:
                          f"{p['llamadas_asr']} | {p['audio_al_asr_s']} | {p['segmentos_con_texto']} | "
                          f"{p['palabras_finales']} / {p['palabras_borradores']} | {textos} |")
 
-    l += ["", "## 2. G08, serie de fondo mientras habla: ¿se sigue cerrando por el tope?", "",
-          "| Variante | Voz según el detector | Segmentos | Cierres por silencio / tope / fin | Duración de los segmentos (s) |", "|---|---|---|---|---|"]
-    for n in nombres:
-        p = vs[n]["pruebas"].get(datos["g08"])
-        if p:
-            c = p["cierres"]
-            durs = ", ".join(f"{s['fin_s'] - s['inicio_s']:.1f}" for s in p["segmentos"])
-            l.append(f"| `{n}` | {p['voz_pct']} % | {p['segmentos_abiertos']} | {c['silencio']} / {c['tope']} / {c['fin_del_audio']} | {durs} |")
+    l += ["", "## 2. Serie de fondo mientras habla (G08): ¿se sigue cerrando por el tope?", "",
+          "| Grabación | Variante | Voz según el detector | Segmentos | Cierres por silencio / tope / fin | Duración de los segmentos (s) |",
+          "|---|---|---|---|---|---|"]
+    g08s = datos["g08"] if isinstance(datos["g08"], list) else [datos["g08"]]
+    for id_ in g08s:
+        for n in nombres:
+            p = vs[n]["pruebas"].get(id_)
+            if p:
+                c = p["cierres"]
+                durs = ", ".join(f"{s['fin_s'] - s['inicio_s']:.1f}" for s in p["segmentos"])
+                l.append(f"| {etiqueta[id_]} | `{n}` | {p['voz_pct']} % | {p['segmentos_abiertos']} | "
+                         f"{c['silencio']} / {c['tope']} / {c['fin_del_audio']} | {durs} |")
 
-    l += ["", "## 3. Todas las grabaciones con texto (20)", "",
+    n_con_texto = datos.get("con_texto", 20)
+    l += ["", f"## 3. Todas las grabaciones con texto ({n_con_texto})", "",
           "| Variante | Segmentos abiertos | Descartados sin ASR (< 0,3 s de voz) | Cierres por tope | Llamadas al ASR (borradores + finales) | Audio al ASR (s) | Tiempo de ASR (s) |",
           "|---|---|---|---|---|---|---|"]
     for n in nombres:
@@ -313,7 +321,7 @@ def escribir_resumen(ruta: Path, datos: dict[str, Any]) -> None:
                  f"{a['llamadas_asr']} | {a['audio_al_asr_s']:.0f} | {a['asr_s']:.1f} |")
 
     l += ["", "## 4. Demora del detector contra el RMS 0,008 y costo por bloque", "",
-          "Desfase = flanco del detector − flanco RMS más cercano (± 0,6 s), en las 20 grabaciones con texto; "
+          f"Desfase = flanco del detector − flanco RMS más cercano (± 0,6 s), en las {n_con_texto} grabaciones con texto; "
           "positivo es que el detector llega después. El costo es solo la decisión voz/silencio de cada bloque de 40 ms, sin el ASR.", "",
           "| Variante | Desfase al empezar la voz: mediana (p10–p90) s | Desfase al terminar: mediana (p10–p90) s | Decisión por bloque: mediana / p95 / máx. (ms) | % de los 40 ms (mediana) |",
           "|---|---|---|---|---|"]
@@ -325,7 +333,7 @@ def escribir_resumen(ruta: Path, datos: dict[str, Any]) -> None:
 
     if datos["inicios"]:
         l += ["", "## 5. Inicios de palabra", "",
-              "Frases (de las 100 con texto) cuya primera palabra no aparece entre las dos primeras de la transcripción, "
+              "Frases con texto cuya primera palabra no aparece entre las dos primeras de la transcripción, "
               "según el reparto por frases de `medir_voz_real.py`. Incluye errores del modelo, no solo cortes.", "",
               "| Variante | Frases con la primera palabra perdida | «Compartí pantalla» (toma: lo que salió) |", "|---|---|---|"]
         for n in nombres:
@@ -388,9 +396,11 @@ def main(argv: list[str] | None = None) -> None:
         print(f"Omitidas: {omitidas}", file=sys.stderr)
     grabaciones = [(p["id"], p["wav"], p["columna"], f"{p['nota'] or p['id']} (toma {p['toma']})") for p in pruebas]
     for id_, nota in SIN_TEXTO.items():
+        if not (carpeta / id_ / "manifiesto.json").is_file():
+            continue
         manifiesto = json.loads((carpeta / id_ / "manifiesto.json").read_text(encoding="utf-8"))
         grabaciones.append((id_, str(carpeta / id_ / "estereo.wav"), MV.elegir_canal(manifiesto)[1], nota))
-    g08 = next(p["id"] for p in pruebas if p["condicion"] == "ruido-tv")
+    g08 = [p["id"] for p in pruebas if p["condicion"] == "ruido-tv"]
     con_texto = {p["id"] for p in pruebas}
     bloque_s = args.bloque_ms / 1000.0
 
@@ -437,7 +447,7 @@ def main(argv: list[str] | None = None) -> None:
              "codigo": MV.info_git(), "versiones": obtener_versiones_paquetes(), "hardware": obtener_info_hardware(),
              "carpeta_pruebas": str(carpeta), "bloque_ms": args.bloque_ms, "hilos": args.hilos,
              "umbral_fin_de_voz": UMBRAL_FIN_DE_VOZ, "corrida": str(args.corrida) if args.corrida else None,
-             "g08": g08, "sin_texto": SIN_TEXTO, "variantes": salida, "inicios": inicios, "pantalla": pantalla}
+             "g08": g08, "con_texto": len(con_texto), "sin_texto": SIN_TEXTO, "variantes": salida, "inicios": inicios, "pantalla": pantalla}
     (destino / "extras.json").write_text(json.dumps(datos, indent=1, ensure_ascii=False), encoding="utf-8")
     escribir_resumen(destino / "resumen.md", datos)
     print(f"Listo: {destino}/resumen.md")

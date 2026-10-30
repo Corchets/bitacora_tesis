@@ -73,7 +73,7 @@ class TestCSV(unittest.TestCase):
 
     def test_errores_dicen_la_fila(self):
         for contenido, texto in [
-            ("id,toma,voz,condicion\nA,4,luciano,meet\n", "toma debe ser 1, 2 o 3"),
+            ("id,toma,voz,condicion\nA,5,luciano,meet\n", "toma debe ser una de 1, 2, 3, 4"),
             ("id,toma,voz,condicion\nA,1,pepe,meet\n", "voz debe ser"),
             ("id,toma,voz,condicion\nA,1,luciano,zoom\n", "condicion debe ser"),
             ("id,toma,voz,condicion,canal\nA,1,luciano,meet,C\n", "canal debe ser"),
