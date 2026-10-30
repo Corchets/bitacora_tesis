@@ -485,7 +485,8 @@ Se repiten con cualquier corte y umbral; son del modelo con esta voz.
 
 Corridas: [`parakeet-silero-vs-rms`](corridas/2026-10-29_voz-real_parakeet-silero-vs-rms/resumen.md) (WER, CER y etiquetas,
 regla del §2) y [`vad-extras`](corridas/2026-10-29_voz-real_vad-extras/resumen.md) (lo que el WER no muestra y simulación
-del umbral).
+del umbral). Informe en PDF con gráficos: [`INFORME-SILERO-VS-RMS.pdf`](corridas/2026-10-29_voz-real_vad-extras/INFORME-SILERO-VS-RMS.pdf),
+generado con [`informe_silero_vs_rms.py`](informe_silero_vs_rms.py).
 
 ### 12.1 Condiciones
 
@@ -538,10 +539,10 @@ del umbral).
 
 | Grabación | Detector, corte | Segmentos abiertos | Llamadas al ASR | Audio al ASR | Palabras inventadas (finales / borradores) |
 |---|---|---|---|---|---|
-| G10, 30 s sin hablar | RMS 0,008, 0,8 s | 10 | 28 | 79 s | 4 / 4 («Shh. Uh-uh.», «He») |
+| G10, 44 s sin hablar | RMS 0,008, 0,8 s | 10 | 28 | 79 s | 4 / 4 («Shh. Uh-uh.», «He») |
 | | Silero 0,5, 0,8 s | 2 | 1 | 1,7 s | 2 / 0 («Uh uh.») |
 | | Silero 0,9, 0,3 s | 0 | 0 | 0 | 0 / 0 |
-| Serie sin hablar, 44 s | RMS 0,008, 0,8 s | 24 | 40 | 165 s | 17 / 14 |
+| Serie sin hablar, 175 s | RMS 0,008, 0,8 s | 24 | 40 | 165 s | 17 / 14 |
 | | Silero 0,5, 0,8 s | 19 | 36 | 88 s | 19 / 33 |
 | | Silero 0,9, 0,3 s | 11 | 17 | 28 s | 16 / 1 |
 
