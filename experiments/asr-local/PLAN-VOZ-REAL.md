@@ -681,3 +681,52 @@ pendientes. Mismo audio y condiciones que el §12.1.
 
 Límites: los del §12.5. El filtro con umbral 0,5 no se eligió mirando el WER (sale igual por construcción), pero sí se
 descartaron 0,7 y 0,9 mirando este mismo audio. Falta probarlo con otra voz, con Meet y en el teléfono.
+
+### 12.8 Toma 4: audio nuevo para las mezclas y Silero solo (2026-10-30)
+
+> **Estado: propuesta sin discutir.** Decide Luciano en [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+> No se tocaron el valor inicial de «Probar el ASR» (0,8 s / 0,008) ni la llamada (0,9 s / 0,003).
+
+**Qué se grabó.** Luciano leyó los bloques 1–6 tres veces seguidas desde el panel de la rama, con
+`parakeet-filtro`, `parakeet-y` y `parakeet-silero` a la vista. Además grabó G08b (bloque 2 con la serie de fondo),
+G10b (26 s sin hablar, con ruidos de la pieza) y G10c (43 s sin hablar, con la tele). Son 19 grabaciones con
+referencia (95 frases) y 2 sin texto, cargadas en [`pruebas.csv`](voz-real/pruebas.csv) como toma 4. El audio guardado
+no depende de la opción del panel: las cuatro variantes se corrieron offline sobre las 21. Corridas:
+[`toma4-mezclas-silero`](corridas/2026-10-30_voz-real_toma4-mezclas-silero/resumen.md) y
+[`vad-extras-toma4`](corridas/2026-10-30_voz-real_vad-extras-toma4/resumen.md), código `734988d` sin cambios pendientes.
+
+| Detector | Frases OK | WER | CER | Segmentos | Demora final mediana | Tiempo de ASR | G10b / G10c: llamadas al ASR | G08b: cierres por silencio / tope · WER |
+|---|---|---|---|---|---|---|---|---|
+| RMS 0,008, 0,8 s (referencia) | 93/95 | 17,0 % | 11,2 % | 78 | 1,04 s | 127 s | 24 / 82 | 0 / 2 · 15,2 % |
+| RMS con filtro Silero | 93/95 | 17,0 % | 11,2 % | 78 | 1,05 s | 124 s | **0 / 2** | 0 / 2 · 15,2 % |
+| RMS y Silero | 93/95 | 14,6 % | 8,8 % | 82 | 1,04 s | 118 s | 0 / 2 | 0 / 2 · 19,7 % |
+| **Silero 0,9, 0,3 s** | 93/95 | **13,4 %** | **6,8 %** | 110 | **0,55 s** | **90 s** | **0 / 0** | **4 / 0** · 18,2 % |
+
+**Lo que cambió fue el ritmo de lectura, no el ruido.** El piso de ruido fue el mismo en las tres pasadas (RMS p10 de
+0,0016 a 0,0023), pero cada pasada salió más rápida: en G01, 26,8 s → 24,8 s → 22,7 s. Las pausas de 0,8 s o más
+bajaron de 4–6 por bloque en la primera pasada (como en las tomas 2 y 3 del 2026-10-29) a 1–3 en la tercera. Con
+pausas más cortas, el corte de 0,8 s junta frases; Silero con 0,3 s, no.
+
+| Pasada (bloques 1–6) | RMS 0,8 s: segmentos · WER | Filtro | «Y» | Silero 0,9 / 0,3 s: segmentos · WER |
+|---|---|---|---|---|
+| 1.ª (pausas largas) | 29 · 12,3 % | 29 · 12,3 % | 30 · 11,8 % | 35 · 13,0 % |
+| 2.ª | 26 · 19,5 % | 26 · 19,5 % | 28 · 14,8 % | 36 · 14,0 % |
+| 3.ª (pausas cortas) | 20 · 19,5 % | 20 · 19,5 % | 21 · 16,5 % | 35 · 12,3 % |
+
+- **Silero 0,9 / 0,3 s sostiene el texto con cualquier ritmo** (WER de 12,3 % a 14,0 %), la frase final sale medio
+  segundo antes, no llega nunca al tope y hace 29 % menos trabajo de ASR. Sumando las tomas 2 y 3 del 2026-10-29 y las
+  tres pasadas de hoy (1995 palabras), el WER queda en 13,9 % contra 15,5 % del RMS. A cambio parte más
+  (110 segmentos para 95 frases) y en G08b el WER sube 3 puntos, aunque las etiquetas salen 5/5.
+- **El filtro vuelve a dar el mismo texto que el RMS** y deja de transcribir el ruido: G10b pasa de 24 llamadas al ASR a 0,
+  y G10c (tele) de 82 llamadas y 444 s de audio a 2 llamadas y 11 s. No arregla G08b ni las pausas cortas.
+- **La «y» queda en el medio:** mejora con pausas cortas, pero en las tomas 2 y 3 del 2026-10-29 empeoraba (14,5 % contra
+  13,2 %; juntando todo, 14,4 %) y en G08b da el peor WER.
+- **Ninguna pasa la regla del §2, y con este guion no puede.** Las cuatro dan 93/95: las dos frases que fallan son
+  del modelo y fallan igual con cualquier corte («token» → «toque»; «Compartir la pantalla» o «la ubicación» por
+  «la configuración»). Ninguna negativa disparó etiquetas.
+- **Costo:** Silero decide un bloque en 0,12 ms de mediana (0,3 % de los 40 ms), con un máximo de 8,7 ms.
+
+Límites: los del §12.5. Además, las tres pasadas se grabaron en el mismo orden (filtro, «y», Silero), así que el ritmo se
+mezcla con el cansancio o la costumbre de leer el mismo texto; la opción que se veía en el panel no cambia el audio, pero
+pudo cambiar cómo leía Luciano. Una conversación telefónica tiene pausas más cortas que una lectura pausada, pero eso
+no se midió: falta una toma con diálogo, con otra voz y por Meet.
