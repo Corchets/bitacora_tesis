@@ -2163,6 +2163,7 @@ function asr(m) {
   const eraDisparo = b.classList.contains("disparo-aviso");
   b.className = `linea ${m.rol} ${m.entrega}${eraDisparo ? " disparo-aviso" : ""}`;
   const texto = /** @type {HTMLElement} */ (b.querySelector(".texto"));
+  texto.textContent = m.texto;
   const finAudio = typeof m.fin_audio_s === "number" ? m.fin_audio_s : null;
   const disponible = typeof m.disponible_s === "number" ? m.disponible_s : finAudio;
   const retraso = (disponible != null && finAudio != null) ? disponible - finAudio : 0;

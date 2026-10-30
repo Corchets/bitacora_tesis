@@ -818,6 +818,20 @@ class UIDriver:
                     return secOculta && verPresVisible;
                 })()
             """)
+            # La consola sigue mostrando el texto de cada frase cerrada.
+            consola_obs = await self.cdp.eval("""
+                (() => {
+                    const lineas = [...document.querySelectorAll('#charla .linea.final')];
+                    const vacias = lineas.filter(l => !(l.querySelector('.texto')?.textContent || '').trim()).length;
+                    return {total: lineas.length, vacias};
+                })()
+            """) or {}
+            consola_ok = consola_obs.get("total", 0) > 0 and consola_obs.get("vacias") == 0
+            self.record_check(
+                "Consola conserva el texto de las frases finales",
+                bool(consola_ok),
+                f"Frases finales en consola: {consola_obs.get('total')}, sin texto: {consola_obs.get('vacias')}"
+            )
 
             await self.cdp.eval("document.getElementById('ver-presentacion').click()")
             await asyncio.sleep(0.12)
