@@ -187,7 +187,7 @@ más que Zipformer, lo que pesa en la pregunta de gama de D09. Escribe números 
 1, 2, 3», «958 679 123») y no se puede fijar el idioma, así que hay que revisar si las reglas
 siguen viendo los códigos. Mientras transcribe bloquea el bucle del servidor hasta ~0,45 s.
 
-**Siguiente paso (actualizado el 2026-10-29).** Grabar el set de la sección 3 con «Probar el ASR» y medir Parakeet con
+**Siguiente paso (actualizado el 2026-10-29; hecho con micrófono, ver §11).** Grabar el set de la sección 3 con «Probar el ASR» y medir Parakeet con
 `medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Parakeet ya está como variante en
 [`variantes_voz_real.py`](variantes_voz_real.py) (`--solo-parakeet`, 2026-10-29). Las variantes de Zipformer se
 conservan como reproducción histórica; no son trabajo activo de mejora.
@@ -360,3 +360,114 @@ Medir voz tenue, ruido, inicios de palabra, pausas y números con referencia hum
 teléfono de gama alta acordado con el tutor faltan latencia y cola sostenidas, memoria conjunta,
 batería y temperatura durante la llamada. El costo de los borradores de Parakeet debe separarse
 del costo del resultado final y del detector. D08 y D09 permanecen abiertas.
+
+## 11. Voz real con Parakeet: corte y umbral (2026-10-29)
+
+> **Decisión de Luciano (2026-10-29):** «Probar el ASR» arranca en **0,8 s / 0,008** (antes 0,9 s / 0,003).
+> La llamada en vivo no cambia (0,9 s / 0,003). No pasa la regla del §2 (+0 frases con etiquetas correctas):
+> se adopta por WER y CER. Es un valor del laboratorio con una sola voz; no cierra
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+
+Primera medición con referencia escrita sobre la voz de Luciano: el set de la sección 3, condición
+`luciano-microfono`, más cuatro grabaciones extra para la comparación de corte y de VAD pendiente del §10.4.
+
+### 11.1 Qué se grabó
+
+Todo con «Probar el ASR», Parakeet, micrófono de la Mac en la pieza de Luciano y bloques del guion leídos de
+una hoja en el celular. El panel guardó el audio entero; los cortes y umbrales distintos de los del panel se
+rehicieron offline sobre ese mismo audio. Audio fuera de Git (copia `bitacora_tesis-voip-asr`,
+`experiments/voip/llamadas/`); ids en [`voz-real/pruebas.csv`](voz-real/pruebas.csv). Las referencias son el texto
+del guion por bloque (columna `bloque`): Luciano no informó desvíos.
+
+| Grabaciones | Toma | Panel | Qué |
+|---|---|---|---|
+| G01–G05 | 1 | 0,9 / 0,003 | bloques 1 a 5, tele apagada. G06 (bloque 6) se borró del Historial antes de medir ([R24](../../docs/gestion/REGISTRO-RIESGOS.md)) |
+| G07 | 1 | 0,9 / 0,003 | bloque 1 con voz baja (salió casi al mismo volumen) |
+| G08 | 1 | 0,9 / 0,003 | bloque 2 con una serie de fondo |
+| G09 | 1 | 0,9 / 0,003 | bloque 3 con una pausa de ~1 s dentro de cada frase |
+| G10 y otra | — | 0,9 / 0,003 | 30–44 s sin hablar: con la tele apagada y con la serie. Sin referencia: no entran en el WER |
+| G11–G16 | 2 | 0,9 / 0,003 | bloques 1 a 6 otra vez (G14 se grabó al final) |
+| G11–G16 | 3 | **0,8 / 0,008** | bloques 1 a 6, para confirmar con audio nuevo lo elegido mirando la toma 2 |
+
+### 11.2 Qué pasaba con 0,9 s / 0,003
+
+Una simulación del corte RMS (bloques de 40 ms, mismas reglas que `MotorPorFrases`) reproduce exactamente los
+segmentos del panel, y sirvió para probar combinaciones antes de correr el ASR.
+
+- **Las pausas reales entre frases fueron de 0,5 a 1,4 s**, aunque la consigna era «dos segundos». Las de dentro
+  de una frase (comas, respiración) llegan a 0,76 s. Las dos zonas se tocan cerca de 0,8 s.
+- **Con 0,9 s casi ninguna pausa alcanzaba el corte**: 5 de 25 segmentos de G01–G06 y 4 de 22 de la toma 2 sin G14
+  se cerraron por el tope de 10 s (`MAX_FRASE_S`), juntando dos o tres frases y cortando palabras en el borde
+  («…con este | enlace y pásame el pin»). En G14 la frase F17 («pasame el PIN y el CVV») se perdió entera.
+- **0,003 queda pegado al ruido de la pieza** (RMS p10 ≈ 0,001, p25 ≈ 0,002): el final de la respiración cuenta
+  como voz y las pausas parecen más cortas.
+
+### 11.3 Resultados
+
+`medir_voz_real.py --solo-parakeet`: cada corte y umbral sobre el mismo audio, contra el del panel.
+
+**Toma 2** (G11–G16, 30 frases; [corrida](corridas/2026-10-29_voz-real_parakeet-cortes/resumen.md)):
+
+| Corte / umbral | Frases OK | WER | CER | Demora final mediana | Segmentos |
+|---|---|---|---|---|---|
+| 0,9 / 0,003 (panel) | 27/30 | 20,8 % | 13,6 % | 1,16 s | 24 |
+| 0,8 / 0,003 | 27/30 | 21,1 % | 12,8 % | 1,03 s | 27 |
+| 0,5 / 0,003 | 28/30 | 13,0 % | 4,9 % | 0,74 s | 34 |
+| 0,3 / 0,008 | 27/30 | 16,3 % | 6,9 % | 0,47 s | 46 |
+| 0,5 / 0,008 | 28/30 | 13,8 % | 5,5 % | 0,74 s | 36 |
+| 0,6 / 0,008 | 28/30 | 13,8 % | 5,5 % | 0,84 s | 35 |
+| **0,8 / 0,008** | **28/30** | **13,3 %** | **5,5 %** | **1,06 s** | **30** |
+
+**Toma 3** (grabada en vivo con 0,8 / 0,008; [corrida](corridas/2026-10-29_voz-real_parakeet-confirmacion/resumen.md)):
+
+| Corte / umbral | Frases OK | WER | CER | Demora final mediana | Segmentos |
+|---|---|---|---|---|---|
+| 0,9 / 0,003 (panel anterior) | 28/30 | 18,3 % | 10,6 % | 0,95 s | 21 |
+| 0,5 / 0,008 | 27/30 | 16,8 % | 7,5 % | 0,73 s | 34 |
+| **0,8 / 0,008** | **28/30** | **13,0 %** | **5,2 %** | **1,03 s** | **28** |
+
+- **La toma 3 confirma lo que predijo la toma 2 para 0,8 / 0,008** (28/30, WER ~13 %). 0,5 / 0,008, que se veía
+  bien en la toma 1, no se sostuvo: parte frases y empeora.
+- **Lo que mejora es dejar de cerrar por el tope de 10 s**: el WER baja 5–8 puntos y el CER a la mitad.
+- **Ninguna negativa disparó etiquetas** en ninguna variante ni toma.
+- **Regla del §2: no pasa ninguna.** Pide +2 frases y la base ya acierta 27–28 de 30; la mejora es de +1 (toma 2)
+  y +0 (toma 3). La regla se pensó para Zipformer, que partía de mucho más abajo.
+- En vivo la toma 3 dio 28 segmentos para 30 frases (tres pares juntos y una frase partida): con esta voz
+  ningún corte RMS separa siempre bien, porque hay pausas entre frases de 0,80 s justos.
+- Demora y proceso son offline en la M1 (reloj simulado del §8), algunas corridas mientras se grababa.
+
+### 11.4 Extras (toma 1, con 0,9 / 0,003 en el panel)
+
+| Grabación | Etiquetas | Qué mostró |
+|---|---|---|
+| G07 voz baja | 5/5 | con 0,8 / 0,008 salen las 5 frases separadas. No prueba voz baja: el volumen fue casi el normal |
+| G08 serie de fondo | 5/5 en todas las variantes | el ruido de la tele nunca baja de 0,008 (p10 ≈ 0,008): con cualquier corte y umbral fijo las frases se cierran cada 10 s justos y se cortan en medio de una palabra |
+| G09 pausas | 5/5 | cada pausa de ~1 s parte la frase con cualquier corte menor a 1 s; se perdió entero «es para verificar» y «siete» salió «seis» |
+| G10 sin hablar | — | 8 ruidos (respiración, movimiento) pasaron el umbral y fueron al ASR; salió una frase inventada: «Shh. Uh-uh.» |
+| Serie sin hablar | — | transcribió habla real de la serie («una más») y palabras inventadas en inglés y portugués |
+
+G08 y G10 son el caso para comparar RMS contra un VAD de voz (§10.4): un VAD debería ahorrar el ASR sobre ruidos
+(G10), pero la tele también es voz humana, así que no resolvería G08; para eso haría falta otra cosa (un umbral
+que siga el ruido de fondo, sin probar).
+
+### 11.5 Errores que no dependen del corte
+
+Se repiten con cualquier corte y umbral; son del modelo con esta voz.
+
+- **«Compartí pantalla» pierde la primera palabra en las tres tomas** y queda sin `REQUEST_REMOTE_ACCESS`.
+- Términos críticos cambiados: «token» → «toque», «OTP» → «lo Tp», «CVV» → «código de seguridad» o «CBB»,
+  «CBU» → «servicio» o «CvU». Bancos y apps: «Ualá» → «igual», «AnyDesk» → «ni desk» / «Anidesk»,
+  «Brubank» → «Bluebank».
+- Números: Parakeet los escribe en dígitos («842105», «30 lucas»); las reglas siguen viendo el código salvo cuando
+  se pierde la palabra que lo pide. Hubo un monto invertido («mil doscientos» → «doscientos mil») y un dígito
+  cambiado («siete» → «seis»).
+- Una negación inventada: «que sea en efectivo» → «que no sean en efectivo».
+- Jerga: «ñaño» desaparece casi siempre; «guaso» → «juazo» / «aguaso»; «al ñudo» → «al pedo».
+
+### 11.6 Qué sigue
+
+1. Comparar Silero contra RMS con este mismo audio, modelo y preaudio (§10.4), mirando G08, G10, palabras
+   cortadas al inicio y demora.
+2. Si el corte RMS sigue sin margen con esta voz, probar un umbral que siga el ruido de fondo o un corte
+   apoyado en el texto (frase terminada), antes de tocar la llamada en vivo.
+3. Grabar la condición Meet y otra voz (sección 3) y medir en el teléfono al final.

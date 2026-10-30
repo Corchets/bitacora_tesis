@@ -28,7 +28,7 @@ Demo prevista para el 2026-10-28. Fuentes existentes: ejemplos SC-WA-CODE-01, SC
 - Conversación: otra persona a la izquierda, protegida a la derecha. Evaluación junto a la frase que la disparó, con riesgo, sí/no, demora y salteadas. Línea de riesgo en el tiempo y momento del aviso.
 - Detector fijo al arrancar el servidor: mostrar nombre y modelo, sin selector.
 - Conservar fuentes, iniciar, terminar, nueva llamada, validaciones y errores. «Probar el ASR» es un modo aparte, solo micrófono y sin detector.
-- Corte de silencio elegible en llamada y en prueba ASR, inicial 0,9 s. Umbral RMS de silencio fijo en 0,003 en llamada; elegible en prueba ASR, inicial 0,003.
+- Corte de silencio elegible en llamada (inicial 0,9 s) y en prueba ASR (inicial 0,8 s). Umbral RMS de silencio fijo en 0,003 en llamada; elegible en prueba ASR, inicial 0,008 (medido con voz real, `asr-local/PLAN-VOZ-REAL.md` §11).
 - Aviso en franja visible y breve, nunca modal, con motivo, cita, frase culpable resaltada, tono corto desactivable y botón para cerrarla.
 - Vista `?vista=protegida` simple y existente, sin rediseñar.
 - D05/D08/D09 permanecen abiertas; esta demo no congela captura, política ni modelos.
