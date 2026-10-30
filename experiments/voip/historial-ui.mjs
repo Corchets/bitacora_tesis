@@ -15,8 +15,8 @@ const ESTILOS = `
   #historial { display:none; max-width:1500px; width:calc(100% - 2rem); margin:1rem auto; padding:0 0 1rem; }
   body.historial #historial { display:block; }
   body.historial #controles, body.historial main, body.historial #prueba-asr, body.historial #sonido-aviso { display:none !important; }
-  #historial h2 { font-size:1.25rem; margin:0; color:var(--tinta); }
-  #historial h3 { font-size:.9375rem; margin:0 0 .5rem; color:var(--tinta-secundaria); }
+  #historial h2 { font-size:1.25rem; font-weight:600; letter-spacing:-.01em; margin:0; color:var(--tinta); }
+  #historial h3 { font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; margin:0 0 .6rem; color:var(--mu); }
   #historial .hist-barra { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin-bottom:.8rem; }
   #historial .hist-barra .hist-espacio { flex:1; }
   #hist-estado { color:var(--tinta-secundaria); font-size:.875rem; font-weight:600; }
@@ -25,18 +25,19 @@ const ESTILOS = `
   #historial li { display:flex; gap:.5rem; align-items:stretch; }
   #historial .hist-marca { display:flex; align-items:center; padding:0 .35rem; }
   #historial .hist-marca input { width:1.25rem; height:1.25rem; }
-  #historial .hist-fila { flex:1; text-align:left; display:grid; gap:.15rem; padding:.55rem .75rem; font-weight:500; }
+  #historial .hist-fila { flex:1; text-align:left; display:grid; gap:.15rem; padding:.65rem .95rem; font-weight:500; border-radius:var(--radio-lg); border-color:var(--linea); background:linear-gradient(180deg, rgb(255 255 255 / .045), rgb(255 255 255 / .02)); }
+  #historial .hist-fila:hover:not(:disabled) { background:rgb(255 255 255 / .08); border-color:var(--linea-fuerte); }
   #historial .hist-fila b { font-size:1.0625rem; color:var(--tinta); }
   #historial .hist-fila span { font-size:.875rem; color:var(--tinta-secundaria); font-variant-numeric:tabular-nums; }
   #historial .hist-vacio { color:var(--mu); font-size:.9375rem; padding:.5rem 0; }
-  #historial .hist-insignia { display:inline-block; font-size:.75rem; font-weight:700; padding:.05rem .45rem; border-radius:var(--radio-sm); border:1px solid var(--linea); background:var(--superficie-alt); color:var(--tinta); margin-left:.4rem; }
-  #historial .hist-insignia.aviso { background:var(--alerta); border-color:var(--alerta); color:var(--superficie); }
+  #historial .hist-insignia { display:inline-block; font-size:.6875rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.1rem .55rem; border-radius:var(--pildora); border:1px solid var(--linea-fuerte); background:rgb(255 255 255 / .08); color:var(--tinta-secundaria); margin-left:.4rem; vertical-align:middle; }
+  #historial .hist-insignia.aviso { background:var(--alerta-fuerte); border-color:var(--alerta-fuerte); color:#ffffff; }
   #hist-cols { display:grid; grid-template-columns:repeat(var(--columnas, 1), minmax(0, 1fr)); gap:1rem; align-items:start; max-width:var(--ancho-detalle, 1000px); margin:0 auto; }
-  #historial .hist-col { background:var(--superficie); border:1px solid var(--linea); border-radius:var(--radio-lg); padding:.75rem; min-width:0; }
-  #historial button.peligro { background:var(--alerta-fondo); color:var(--alerta); border-color:var(--alerta-borde); }
-  #historial button.peligro:hover:not(:disabled) { background:var(--alerta-claro); }
-  #hist-confirmar { max-width:34rem; width:calc(100% - 2rem); padding:1.25rem; border:1px solid var(--linea); border-radius:var(--radio-lg); color:var(--tinta); }
-  #hist-confirmar::backdrop { background:rgba(15, 23, 42, .45); }
+  #historial .hist-col { background:linear-gradient(180deg, rgb(255 255 255 / .045), rgb(255 255 255 / .02)); border:1px solid var(--linea); border-radius:var(--radio-xl); padding:1rem 1.15rem; min-width:0; }
+  #historial button.peligro { background:rgb(200 88 79 / .12); color:var(--alerta-tinta); border-color:rgb(200 88 79 / .45); }
+  #historial button.peligro:hover:not(:disabled) { background:rgb(200 88 79 / .22); }
+  #hist-confirmar { max-width:34rem; width:calc(100% - 2rem); padding:1.25rem 1.4rem; border:1px solid var(--linea-fuerte); border-radius:var(--radio-lg); }
+  #hist-confirmar::backdrop { background:rgb(0 0 0 / .65); }
   #hist-confirmar h2 { font-size:1.25rem; margin:0 0 .5rem; }
   #hist-confirmar p { margin:.4rem 0; font-size:.9375rem; }
   #hist-confirmar ul { list-style:disc; padding-left:1.25rem; max-height:11rem; overflow-y:auto; font-size:.875rem; display:block; }
@@ -47,8 +48,8 @@ const ESTILOS = `
   #historial .hist-datos dd { margin:0; font-weight:600; font-variant-numeric:tabular-nums; text-align:left; justify-self:start; }
   #historial .hist-ref { display:grid; gap:.4rem; margin-bottom:.75rem; }
   #historial .hist-ref label { font-weight:600; }
-  #historial textarea { font:inherit; width:100%; min-height:3.5rem; padding:.45rem .6rem; border:1px solid var(--linea); border-radius:var(--radio-sm); resize:vertical; box-sizing:border-box; }
-  #historial .hist-charla { display:flex; flex-direction:column; gap:.55rem; }
+  #historial textarea { font:inherit; width:100%; min-height:3.5rem; padding:.55rem .75rem; border:1px solid var(--linea-fuerte); border-radius:var(--radio-md); resize:vertical; box-sizing:border-box; }
+  #historial .hist-charla { display:flex; flex-direction:column; gap:.7rem; }
   #historial .hist-charla .linea { width:90%; max-width:90%; animation:none; }
 `;
 

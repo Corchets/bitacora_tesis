@@ -5,38 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Llamada en vivo · detector de vishing</title>
 <style>
+  /* Paleta única del panel y de la vista de presentación: escena oscura de la llamada.
+     Probar el ASR, Historial y Presentación leen estos mismos tokens. */
   :root {
-    --fondo: #f8fafc;
-    --superficie: #ffffff;
-    --superficie-alt: #e2e8f0;
-    --linea: #cbd5e1;
-    --tinta: #0f172a;
-    --tinta-secundaria: #334155;
-    --mu: #64748b;
-    --primary: #1d4ed8;
-    --primary-dark: #1e40af;
-    --primary-bg: #eff6ff;
-    --vos-fondo: #eff6ff;
-    --vos-borde: #93c5fd;
-    --otra-fondo: #f1f5f9;
-    --otra-borde: #cbd5e1;
-    --alerta: #b91c1c;
-    --alerta-tinta: #7f1d1d;
-    --alerta-fondo: #fef2f2;
-    --alerta-claro: #fee2e2;
-    --alerta-borde: #f87171;
-    --ok: #15803d;
-    --ok-fondo: #f0fdf4;
-    --aviso-badge-fondo: #fef9c3;
-    --aviso-badge-tinta: #854d0e;
-    --radio-sm: 4px;
-    --radio-md: 8px;
-    --radio-lg: 12px;
+    color-scheme: dark;
+    --fondo: #000000;
+    --superficie: #0e0e10;
+    --superficie-alt: #1c1c1e;
+    --superficie-elevada: #1c1c1e;
+    --linea: rgb(255 255 255 / 0.1);
+    --linea-fuerte: rgb(255 255 255 / 0.18);
+    --tinta: #f5f5f7;
+    --tinta-secundaria: #c7c7cc;
+    --mu: #a1a1aa;
+    --primary: #4f74a8;
+    --primary-dark: #3f6290;
+    --primary-claro: #9db7da;
+    --primary-bg: rgb(79 116 168 / 0.12);
+    --vos-fondo: #1c2940;
+    --vos-borde: rgb(79 116 168 / 0.45);
+    --otra-fondo: #1c1c1e;
+    --otra-borde: rgb(255 255 255 / 0.08);
+    --alerta: #c8584f;
+    --alerta-fuerte: #a93a36;
+    --alerta-tinta: #e3a8a3;
+    --alerta-fondo: rgb(200 88 79 / 0.1);
+    --alerta-claro: rgb(200 88 79 / 0.2);
+    --alerta-borde: rgb(200 88 79 / 0.5);
+    --ok: #5a9e78;
+    --ok-tinta: #9fc9b0;
+    --ok-fondo: rgb(90 158 120 / 0.1);
+    --ok-borde: rgb(90 158 120 / 0.5);
+    --aviso-badge-fondo: rgb(201 168 76 / 0.14);
+    --aviso-badge-tinta: #e0d2a0;
+    --resaltador: #c9a84c;
+    --foco: #9db7da;
+    --radio-sm: 8px;
+    --radio-md: 12px;
+    --radio-lg: 20px;
+    --radio-xl: 28px;
+    --pildora: 999px;
     accent-color: var(--primary);
   }
   * { box-sizing: border-box; }
   ::selection {
-    background: var(--vos-borde);
+    background: rgb(79 116 168 / 0.45);
     color: var(--tinta);
   }
   body {
@@ -48,17 +61,24 @@
     display: flex;
     flex-direction: column;
   }
+  code {
+    font: 0.92em ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--tinta);
+    background: rgb(255 255 255 / 0.08);
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+  }
 
-  /* Cabecera: título, estado de la sesión y modo */
+  /* Cabecera: liviana y sin caja, como la barra de la presentación */
   header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 0.75rem 1.25rem;
-    padding: 0.6rem 1.25rem;
-    background: var(--superficie);
-    border-bottom: 1px solid var(--linea);
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border-bottom: 1px solid rgb(255 255 255 / 0.07);
     flex-shrink: 0;
   }
   .cabecera-izq {
@@ -73,11 +93,12 @@
     gap: 0.6rem;
   }
   header h1 {
-    font-size: 1.375rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     margin: 0;
-    color: var(--tinta);
+    color: var(--mu);
     white-space: nowrap;
   }
   .estado-pill {
@@ -85,34 +106,42 @@
     align-items: center;
     gap: 0.45rem;
     min-width: 0;
-    padding: 0.2rem 0.7rem 0.2rem 0.55rem;
-    border-radius: 999px;
-    background: var(--otra-fondo);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--pildora);
+    background: rgb(255 255 255 / 0.06);
     border: 1px solid var(--linea);
   }
   .estado-pill .punto {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--mu);
     flex-shrink: 0;
   }
+  .estado-pill[data-estado="lista"] {
+    border-color: rgb(79 116 168 / 0.5);
+  }
   .estado-pill[data-estado="lista"] .punto { background: var(--primary); }
   .estado-pill[data-estado="en-llamada"] {
-    background: var(--ok-fondo);
-    border-color: #86efac;
+    border-color: rgb(90 158 120 / 0.45);
   }
+  .estado-pill[data-estado="en-llamada"] #estado { color: var(--ok-tinta); }
   .estado-pill[data-estado="en-llamada"] .punto {
     background: var(--ok);
-    box-shadow: 0 0 0 3px rgb(21 128 61 / 0.18);
+    animation: latido 1.8s ease-out infinite;
+  }
+  @keyframes latido {
+    0% { box-shadow: 0 0 0 0 rgb(90 158 120 / 0.55); }
+    70% { box-shadow: 0 0 0 7px rgb(90 158 120 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(90 158 120 / 0); }
   }
   .estado-pill[data-estado="sin-conexion"] {
-    background: var(--alerta-fondo);
     border-color: var(--alerta-borde);
   }
+  .estado-pill[data-estado="sin-conexion"] #estado { color: var(--alerta-tinta); }
   .estado-pill[data-estado="sin-conexion"] .punto { background: var(--alerta); }
   #estado {
-    color: var(--tinta-secundaria);
+    color: var(--tinta);
     font-size: 0.8125rem;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -122,12 +151,12 @@
     max-width: 52ch;
   }
 
-  /* Conmutador de modo */
+  /* Conmutador de modo: control segmentado en píldora */
   .modo-conmutador {
     display: inline-flex;
-    background: var(--otra-fondo);
+    background: rgb(255 255 255 / 0.06);
     padding: 3px;
-    border-radius: var(--radio-md);
+    border-radius: var(--pildora);
     border: 1px solid var(--linea);
     gap: 2px;
   }
@@ -135,32 +164,33 @@
     font: inherit;
     font-size: 0.875rem;
     font-weight: 600;
-    padding: 0.32rem 0.85rem;
+    padding: 0.32rem 0.95rem;
     border: 0;
     background: transparent;
     color: var(--tinta-secundaria);
-    border-radius: 6px;
+    border-radius: var(--pildora);
     cursor: pointer;
   }
   .modo-tab:hover:not(:disabled):not(.activo) {
-    background: var(--superficie-alt);
+    background: rgb(255 255 255 / 0.08);
+    color: var(--tinta);
   }
   .modo-tab.activo {
-    background: var(--superficie);
-    color: var(--primary);
-    box-shadow: 0 1px 2px rgb(15 23 42 / 0.12), 0 0 0 1px rgb(29 78 216 / 0.25);
+    background: rgb(255 255 255 / 0.14);
+    color: var(--tinta);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
   }
   .modo-tab:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 1px;
+    outline: 2px solid var(--foco);
+    outline-offset: 2px;
   }
 
   /* Barra de la llamada: fuentes y ajuste a la izquierda, acciones a la derecha */
   #controles {
     position: relative;
-    background: var(--fondo);
-    border-bottom: 1px solid var(--linea);
-    padding: 0.6rem 1.25rem 0.65rem;
+    background: transparent;
+    border-bottom: 1px solid rgb(255 255 255 / 0.07);
+    padding: 0.65rem 1.5rem 0.75rem;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
@@ -178,12 +208,12 @@
   .campo, .ajuste-grupo {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.25rem;
   }
   .campo > label, .ajuste-grupo > label {
     font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--tinta-secundaria);
+    font-weight: 600;
+    color: var(--mu);
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -191,13 +221,13 @@
   .campo .rol-punto, .ayuda-cuerpo .rol-punto {
     width: 9px;
     height: 9px;
-    border-radius: 3px;
-    background: var(--otra-borde);
-    border: 1px solid #94a3b8;
+    border-radius: 50%;
+    background: #3a3a3c;
+    border: 1px solid rgb(255 255 255 / 0.35);
   }
   .campo .rol-punto.protegida, .ayuda-cuerpo .rol-punto.protegida {
-    background: var(--vos-borde);
-    border-color: var(--primary);
+    background: var(--primary);
+    border-color: var(--primary-claro);
   }
   .campo .fila {
     display: flex;
@@ -207,73 +237,78 @@
   .acciones {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
     margin-left: auto;
   }
+  /* Botones en píldora, como los de la presentación */
   button, select {
     font: inherit;
     font-size: 0.875rem;
-    padding: 0.4rem 0.7rem;
-    border-radius: 6px;
-    border: 1px solid var(--linea);
-    background: var(--superficie);
+    padding: 0.42rem 0.95rem;
+    border-radius: var(--pildora);
+    border: 1px solid var(--linea-fuerte);
+    background: rgb(255 255 255 / 0.06);
     color: var(--tinta);
+    transition: background-color 150ms var(--salida), border-color 150ms var(--salida);
   }
   select {
     min-width: 11rem;
     max-width: 19rem;
+    background-color: var(--superficie-alt);
+    border-radius: var(--radio-md);
+    padding-inline: 0.75rem;
   }
   button {
     font-weight: 600;
     cursor: pointer;
   }
   button:hover:not(:disabled) {
-    background: var(--otra-fondo);
+    background: rgb(255 255 255 / 0.12);
+  }
+  select:hover:not(:disabled) {
+    border-color: rgb(255 255 255 / 0.3);
   }
   button:focus-visible, select:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 1px;
+    outline: 2px solid var(--foco);
+    outline-offset: 2px;
   }
   button:disabled, select:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
   }
   #iniciar {
     background: var(--primary);
-    color: var(--superficie);
+    color: #ffffff;
     border-color: var(--primary);
-    padding-inline: 1.1rem;
-    box-shadow: 0 1px 2px rgb(29 78 216 / 0.3);
+    padding-inline: 1.2rem;
   }
   #iniciar:hover:not(:disabled) {
     background: var(--primary-dark);
   }
   #iniciar:disabled {
-    opacity: 1;
-    background: var(--superficie-alt);
-    border-color: var(--linea);
-    color: var(--mu);
-    box-shadow: none;
+    background: rgb(255 255 255 / 0.06);
+    border-color: var(--linea-fuerte);
+    color: var(--tinta);
   }
   #terminar {
-    background: var(--superficie);
-    color: var(--alerta);
-    border-color: var(--alerta-borde);
+    background: rgb(200 88 79 / 0.12);
+    color: var(--alerta-tinta);
+    border-color: rgb(200 88 79 / 0.45);
   }
   #terminar:hover:not(:disabled) {
-    background: var(--alerta-fondo);
+    background: rgb(200 88 79 / 0.22);
   }
   #ver-presentacion {
-    background: var(--vos-fondo);
-    color: var(--primary);
-    border-color: var(--vos-borde);
+    background: var(--primary-bg);
+    color: var(--primary-claro);
+    border-color: rgb(79 116 168 / 0.5);
   }
   #ver-presentacion:hover:not(:disabled) {
-    background: var(--superficie-alt);
+    background: rgb(79 116 168 / 0.22);
   }
   #error {
     flex-basis: 100%;
-    color: var(--alerta);
+    color: var(--alerta-tinta);
     font-size: 0.875rem;
     font-weight: 600;
   }
@@ -306,19 +341,19 @@
     font: inherit;
     font-size: 0.875rem;
     width: 4.75rem;
-    padding: 0.4rem 0.5rem;
-    border-radius: 6px;
-    border: 1px solid var(--linea);
-    background: var(--superficie);
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radio-md);
+    border: 1px solid var(--linea-fuerte);
+    background: var(--superficie-alt);
     color: var(--tinta);
     font-variant-numeric: tabular-nums;
   }
   .corte-silencio input[type="number"]:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 1px;
+    outline: 2px solid var(--foco);
+    outline-offset: 2px;
   }
   .corte-silencio input:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
   }
   .ayuda-oculta {
@@ -340,7 +375,7 @@
   .enlace-guia, .ayuda > summary {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--primary-claro);
     white-space: nowrap;
     cursor: pointer;
     text-underline-offset: 3px;
@@ -351,7 +386,7 @@
   }
   .ayuda > summary::-webkit-details-marker { display: none; }
   .enlace-guia:focus-visible, .ayuda > summary:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--foco);
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -359,13 +394,13 @@
     position: absolute;
     z-index: 20;
     top: calc(100% + 6px);
-    left: 1.25rem;
-    width: min(46rem, calc(100vw - 2.5rem));
-    background: var(--superficie);
-    border: 1px solid var(--linea);
+    left: 1.5rem;
+    width: min(46rem, calc(100vw - 3rem));
+    background: var(--superficie-elevada);
+    border: 1px solid var(--linea-fuerte);
     border-radius: var(--radio-lg);
-    padding: 1rem 1.15rem;
-    box-shadow: 0 12px 32px -12px rgb(15 23 42 / 0.35), 0 2px 6px rgb(15 23 42 / 0.08);
+    padding: 1.1rem 1.25rem;
+    box-shadow: 0 20px 50px rgb(0 0 0 / 0.7);
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.1rem;
@@ -390,19 +425,19 @@
     --salida: cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  /* Tinte de fondo de la alerta: capa propia que sube de opacidad, sin repintar el layout */
+  /* Tinte de la alerta: halo rojo desde el borde, capa propia que sube de opacidad */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: var(--alerta-claro);
+    background: radial-gradient(ellipse 70% 55% at 50% 0%, rgb(168 58 54 / 0.12), transparent 70%);
     opacity: 0;
     pointer-events: none;
     transition: opacity 300ms var(--salida);
   }
   body.alerta-emitida::before {
-    opacity: 0.7;
+    opacity: 1;
   }
 
   /* Aviso en franja no modal, visible desde el aula pero sin tapar ni saturar.
@@ -411,13 +446,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.6rem;
-    background: var(--alerta-fondo);
-    border: 1px solid var(--alerta-borde);
-    border-radius: var(--radio-md);
-    padding: 0.35rem 0.7rem;
-    margin-bottom: 0.45rem;
+    gap: 0.75rem;
+    background: rgb(40 8 10 / 0.88);
+    border: 1px solid rgb(200 88 79 / 0.65);
+    border-radius: var(--radio-lg);
+    padding: 0.45rem 0.85rem;
+    margin-bottom: 0.6rem;
     color: var(--tinta);
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
     flex-shrink: 0;
     min-height: 3.65rem; /* dos renglones: motivo y cita arriba, segundo del aviso abajo */
     visibility: hidden;
@@ -441,10 +477,10 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    margin-bottom: 0.45rem;
-    padding: 0.35rem 0.7rem;
-    border: 1px dashed var(--linea);
-    border-radius: var(--radio-md);
+    margin-bottom: 0.6rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px dashed var(--linea-fuerte);
+    border-radius: var(--radio-lg);
     color: var(--mu);
     font-size: 0.875rem;
     pointer-events: none;
@@ -468,23 +504,25 @@
   .aviso-etiqueta {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
-    background: var(--alerta);
-    color: var(--superficie);
-    padding: 0.2rem 0.55rem;
-    border-radius: var(--radio-sm);
-    font-size: 0.875rem;
-    font-weight: 700;
+    gap: 0.4rem;
+    background: var(--alerta-fuerte);
+    color: #ffffff;
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--pildora);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     white-space: nowrap;
     flex-shrink: 0;
   }
   .aviso-etiqueta b {
-    font-weight: 700;
-    color: var(--superficie);
+    font-weight: 800;
+    color: #ffffff;
   }
   .aviso-icono {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     flex-shrink: 0;
     color: currentColor;
   }
@@ -499,14 +537,14 @@
   .aviso-cuerpo p {
     margin: 0;
     font-size: 0.9375rem;
-    font-weight: 600;
-    color: var(--tinta);
+    font-weight: 700;
+    color: #ffffff;
   }
   #aviso-cita {
     font-size: 0.875rem;
     font-style: italic;
     font-weight: 600;
-    color: var(--alerta-tinta);
+    color: #e8c4c1;
   }
   #aviso-tiempo {
     font-size: 0.8125rem;
@@ -518,22 +556,29 @@
   .aviso-acciones {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
     flex-shrink: 0;
     margin-left: auto;
   }
   .aviso-btn {
     font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--radio-sm);
-    border: 1px solid var(--alerta-borde);
-    background: var(--superficie);
-    color: var(--alerta-tinta);
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--pildora);
+    border: 1px solid rgb(255 255 255 / 0.2);
+    background: rgb(255 255 255 / 0.1);
+    color: #ffffff;
     white-space: nowrap;
   }
   .aviso-btn:hover:not(:disabled) {
-    background: var(--alerta-claro);
+    background: rgb(255 255 255 / 0.18);
+  }
+  .aviso-btn.aviso-cerrar {
+    background: var(--alerta-fuerte);
+    border-color: var(--alerta-fuerte);
+  }
+  .aviso-btn.aviso-cerrar:hover:not(:disabled) {
+    background: #b91c1c;
   }
   .btn-sonido {
     display: inline-flex;
@@ -542,8 +587,8 @@
     white-space: nowrap;
   }
   .btn-sonido.silenciado {
-    color: var(--tinta-secundaria);
-    background: var(--otra-fondo);
+    color: var(--mu);
+    background: transparent;
   }
   .icono-sonido {
     width: 15px;
@@ -560,7 +605,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 1rem;
-    padding: 0.75rem 1.25rem;
+    padding: 0.85rem 1.5rem 1rem;
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
@@ -578,33 +623,45 @@
   #niveles { grid-area: niveles; }
   #charla { grid-area: charla; }
 
-  /* Tarjetas de personas arriba */
+  /* Tarjetas de personas arriba: pantallas de llamada con halo por estado */
   #niveles {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.85rem;
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.75rem;
     flex-shrink: 0;
   }
   .tarjeta-persona {
-    background: var(--superficie);
-    border: 2px solid var(--otra-borde);
+    background-color: #0b0b0f;
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, rgb(255 255 255 / 0.04), transparent 60%),
+      linear-gradient(180deg, #1c1d23 0%, #0e0f13 100%);
+    border: 1px solid var(--linea);
     border-radius: var(--radio-lg);
-    padding: 0.65rem 0.9rem;
+    padding: 0.75rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
+    box-shadow: none;
+    transition: box-shadow 400ms var(--salida), border-color 200ms var(--salida);
   }
   .tarjeta-persona.protegida {
-    border-color: var(--vos-borde);
-    background: var(--vos-fondo);
+    --tarjeta-halo: rgb(79 116 168 / 0.4);
+    border-color: rgb(79 116 168 / 0.35);
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, rgb(79 116 168 / 0.10), transparent 62%),
+      linear-gradient(180deg, #1a2230 0%, #0a0c10 100%);
   }
   .tarjeta-persona.hablando-activo {
-    border-color: var(--ok);
+    --tarjeta-halo: rgb(90 158 120 / 0.5);
+    border-color: var(--ok-borde);
   }
   .tarjeta-persona.otra.alerta-activa {
-    border-color: var(--alerta-borde);
-    background: var(--superficie);
+    --tarjeta-halo: rgb(200 88 79 / 0.55);
+    border-color: rgb(200 88 79 / 0.65);
+    background-image:
+      radial-gradient(120% 90% at 50% 0%, rgb(200 88 79 / 0.10), transparent 62%),
+      linear-gradient(180deg, #261617 0%, #0c0809 100%);
   }
   .tarjeta-cabecera {
     display: flex;
@@ -614,12 +671,14 @@
   }
   .tarjeta-cabecera h2 {
     margin: 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--tinta);
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #ffffff;
   }
   .tarjeta-persona.otra.alerta-activa .tarjeta-cabecera h2 {
-    color: var(--alerta);
+    color: #e8c4c1;
   }
   .tarjeta-badges {
     display: inline-flex;
@@ -627,28 +686,42 @@
     gap: 0.35rem;
   }
   .estado-habla-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--radio-sm);
-    background: var(--superficie-alt);
-    color: var(--tinta-secundaria);
-    border: 1px solid var(--linea);
+    font-weight: 600;
+    padding: 0.18rem 0.65rem;
+    border-radius: var(--pildora);
+    background: rgb(255 255 255 / 0.1);
+    color: #ffffff;
+    border: 1px solid rgb(255 255 255 / 0.12);
     white-space: nowrap;
+    transition: background-color 200ms var(--salida), border-color 200ms var(--salida);
+  }
+  .estado-habla-pill::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mu);
   }
   .estado-habla-pill.activo {
+    background: rgb(90 158 120 / 0.22);
+    border-color: rgb(90 158 120 / 0.6);
+  }
+  .estado-habla-pill.activo::before {
     background: var(--ok);
-    color: var(--superficie);
-    border-color: var(--ok);
   }
   .tarjeta-rol-tag {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.6875rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    padding: 0.15rem 0.45rem;
-    border-radius: var(--radio-sm);
-    background: var(--superficie-alt);
+    padding: 0.18rem 0.55rem;
+    border-radius: var(--pildora);
+    background: transparent;
+    border: 1px solid var(--linea);
     color: var(--tinta-secundaria);
     white-space: nowrap;
   }
@@ -656,45 +729,64 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
   }
   .volumen-fila span.rotulo {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--tinta-secundaria);
   }
   .volumen-fila meter {
     width: 100%;
-    height: 1rem;
+    height: 6px;
+    appearance: none;
+    border: 0;
+    border-radius: var(--pildora);
+    background: rgb(255 255 255 / 0.12);
+  }
+  .volumen-fila meter::-webkit-meter-bar {
+    background: rgb(255 255 255 / 0.12);
+    border: 0;
+    border-radius: var(--pildora);
+    height: 100%;
+  }
+  .volumen-fila meter::-webkit-meter-optimum-value,
+  .volumen-fila meter::-webkit-meter-suboptimum-value,
+  .volumen-fila meter::-webkit-meter-even-less-good-value {
+    background: var(--ok);
+    border-radius: var(--pildora);
   }
   .volumen-fila .rms {
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     color: var(--tinta-secundaria);
     font-variant-numeric: tabular-nums;
     min-width: 5.2rem;
     text-align: right;
   }
   .habla-ahora-caja {
-    background: var(--superficie);
-    border: 1px solid var(--linea);
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.08);
     border-radius: var(--radio-md);
-    padding: 0.4rem 0.65rem;
+    padding: 0.4rem 0.75rem;
     min-height: 2.2rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.55rem;
   }
   .tarjeta-persona.hablando-activo .habla-ahora-caja {
-    border-color: var(--ok);
-    background: var(--ok-fondo);
+    border-color: rgb(90 158 120 / 0.35);
+    background: rgb(90 158 120 / 0.08);
   }
   .habla-indicador {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background: var(--linea);
+    background: rgb(255 255 255 / 0.25);
     flex-shrink: 0;
   }
   .habla-indicador.hablando {
@@ -714,23 +806,24 @@
     font-style: italic;
   }
 
-  /* Conversación abajo: dos lados (otra a la izquierda, protegida a la derecha) */
+  /* Conversación abajo: panel translúcido con burbujas (otra a la izquierda, protegida a la derecha) */
   #charla {
     min-height: 60vh;
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
+    gap: 0.7rem;
     border: 1px solid var(--linea);
-    border-radius: var(--radio-lg);
-    background: var(--superficie);
-    padding: 0.75rem 0.9rem;
+    border-radius: var(--radio-xl);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.02));
+    padding: 1rem 1.25rem;
     scrollbar-width: thin;
-    scrollbar-color: var(--linea) transparent;
+    scrollbar-color: rgb(255 255 255 / 0.18) transparent;
   }
   #charla:empty::before {
     content: "Iniciá la llamada para ver la transcripción en vivo de cada persona y lo que decide el detector en cada frase.";
     color: var(--mu);
-    font-size: 0.9375rem;
+    font-size: 1rem;
+    font-weight: 500;
     margin: auto;
     text-align: center;
     max-width: 48ch;
@@ -758,8 +851,8 @@
     animation: entrada-linea 200ms var(--salida);
     width: 62%;
     max-width: 68%;
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--radio-md);
+    padding: 0.6rem 0.9rem 0.65rem;
+    border-radius: 20px 20px 20px 6px;
     border: 1px solid var(--otra-borde);
     background: var(--otra-fondo);
     display: flex;
@@ -769,41 +862,46 @@
   }
   .linea.protegida {
     align-self: flex-end;
-    background: var(--vos-fondo);
+    border-radius: 20px 20px 6px 20px;
+    background: linear-gradient(180deg, #1f2c42, #1b273b);
     border-color: var(--vos-borde);
   }
   /* Provisorio: borde punteado y tinta secundaria. Sin cursiva ni otro peso, así el renglón no salta al cerrarse. */
   .linea.parcial {
     border-style: dashed;
+    border-color: rgb(255 255 255 / 0.25);
   }
   .linea.parcial .texto {
     color: var(--tinta-secundaria);
   }
 
   .linea.disparo-aviso {
-    border: 1.5px solid var(--alerta-borde);
-    background: var(--alerta-fondo);
+    border: 1px solid rgb(200 88 79 / 0.75);
+    box-shadow: 0 0 0 1px rgb(200 88 79 / 0.25);
   }
   mark.cita-culpable {
-    background: var(--alerta-claro);
-    color: var(--tinta);
+    background: var(--resaltador);
+    color: #1a1204;
     font-weight: 700;
-    padding: 0.05rem 0.25rem;
-    border-radius: var(--radio-sm);
+    padding: 0 0.25rem;
+    border-radius: 4px;
   }
   .linea .quien {
     font-size: 0.8125rem;
-    font-weight: 700;
-    color: var(--tinta-secundaria);
+    font-weight: 600;
+    color: var(--mu);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 0.75rem;
   }
+  .linea.protegida .quien {
+    color: var(--primary-claro);
+  }
   .linea .texto {
     font-size: 1.0625rem;
     font-weight: 500;
-    line-height: 1.35;
+    line-height: 1.4;
     color: var(--tinta);
     word-break: break-word;
   }
@@ -817,10 +915,10 @@
   /* Evaluación del detector pegada a la frase */
   .eval-adjunta {
     animation: entrada-evaluacion 200ms var(--salida);
-    margin-top: 0.15rem;
-    padding: 0.3rem 0.55rem;
-    border-radius: var(--radio-sm);
-    background: var(--superficie);
+    margin-top: 0.2rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radio-md);
+    background: rgb(0 0 0 / 0.25);
     border: 1px solid var(--linea);
     display: flex;
     flex-wrap: wrap;
@@ -831,7 +929,7 @@
   .eval-adjunta.riesgo-bajo {
     background: transparent;
     border-color: transparent;
-    border-top-color: var(--linea);
+    border-top-color: rgb(255 255 255 / 0.08);
     border-radius: 0;
     padding-inline: 0;
     padding-bottom: 0;
@@ -839,12 +937,12 @@
   .eval-adjunta.riesgo-bajo .eval-pill.eval-riesgo {
     background: transparent;
     color: var(--tinta-secundaria);
-    box-shadow: inset 0 0 0 1px var(--linea);
+    box-shadow: inset 0 0 0 1px var(--linea-fuerte);
   }
   .eval-adjunta.riesgo-bajo .eval-pill.eval-alerta.no {
-    background: var(--ok-fondo);
-    color: var(--ok);
-    box-shadow: inset 0 0 0 1px #86efac;
+    background: rgb(90 158 120 / 0.14);
+    color: var(--ok-tinta);
+    box-shadow: inset 0 0 0 1px rgb(90 158 120 / 0.55);
   }
   .eval-adjunta.riesgo-bajo .eval-pill.eval-tiempo {
     background: transparent;
@@ -852,12 +950,12 @@
     padding-inline: 0.15rem;
   }
   .eval-adjunta.riesgo-alto {
-    border-color: var(--alerta-borde);
-    background: var(--aviso-badge-fondo);
+    border-color: rgb(201 168 76 / 0.45);
+    background: rgb(201 168 76 / 0.08);
   }
   .eval-adjunta.aviso-alerta {
-    border-color: var(--alerta);
-    background: var(--superficie);
+    border-color: rgb(200 88 79 / 0.5);
+    background: rgb(200 88 79 / 0.1);
   }
   .eval-pills {
     display: inline-flex;
@@ -868,48 +966,54 @@
   .eval-pill {
     font-size: 0.75rem;
     font-weight: 700;
-    padding: 0.1rem 0.45rem;
-    border-radius: var(--radio-sm);
+    padding: 0.12rem 0.55rem;
+    border-radius: var(--pildora);
     font-variant-numeric: tabular-nums;
   }
   .eval-pill.eval-riesgo {
-    background: var(--tinta);
-    color: var(--superficie);
+    background: rgb(255 255 255 / 0.9);
+    color: #0b0b0f;
   }
   .eval-adjunta.aviso-alerta .eval-pill.eval-riesgo {
-    background: var(--alerta);
+    background: var(--alerta-fuerte);
+    color: #ffffff;
   }
   .eval-pill.eval-alerta.si {
-    background: var(--alerta);
-    color: var(--superficie);
+    background: var(--alerta-fuerte);
+    color: #ffffff;
   }
   .eval-pill.eval-alerta.no {
-    background: var(--ok);
-    color: var(--superficie);
+    background: rgb(90 158 120 / 0.14);
+    color: var(--ok-tinta);
+    box-shadow: inset 0 0 0 1px rgb(90 158 120 / 0.55);
   }
   .eval-pill.eval-tiempo {
-    background: var(--superficie-alt);
+    background: rgb(255 255 255 / 0.1);
     color: var(--tinta);
   }
   .eval-pill.eval-saltadas {
     background: var(--aviso-badge-fondo);
     color: var(--aviso-badge-tinta);
-    border: 1px solid var(--aviso-badge-tinta);
+    border: 1px solid rgb(201 168 76 / 0.5);
   }
   .eval-motivo-txt {
     font-size: 0.8125rem;
     color: var(--tinta);
     font-weight: 600;
   }
-  .eval-aviso-banner {
-    font-size: 0.75rem;
+  .eval-adjunta.aviso-alerta .eval-motivo-txt {
+    color: #e8c4c1;
     font-weight: 700;
+  }
+  .eval-aviso-banner {
+    font-size: 0.6875rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--superficie);
-    background: var(--alerta);
-    padding: 0.1rem 0.45rem;
-    border-radius: var(--radio-sm);
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    background: var(--alerta-fuerte);
+    padding: 0.15rem 0.55rem;
+    border-radius: var(--pildora);
     margin-left: auto;
   }
   /* Lugar reservado para la evaluación: la frase no crece cuando llega la decisión. */
@@ -917,7 +1021,7 @@
     animation: none;
     background: transparent;
     border-color: transparent;
-    border-top-color: var(--linea);
+    border-top-color: rgb(255 255 255 / 0.08);
     border-radius: 0;
     padding-inline: 0;
     padding-bottom: 0;
@@ -934,9 +1038,9 @@
     font-weight: 700;
     color: var(--aviso-badge-tinta);
     background: var(--aviso-badge-fondo);
-    border: 1px dashed var(--aviso-badge-tinta);
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--radio-sm);
+    border: 1px dashed rgb(201 168 76 / 0.5);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--pildora);
     margin-top: 0.15rem;
     align-self: flex-start;
   }
@@ -951,24 +1055,24 @@
   aside {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    gap: 0.75rem;
     min-height: 0;
   }
   .caja {
-    background: var(--superficie);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.02));
     border: 1px solid var(--linea);
     border-radius: var(--radio-lg);
-    padding: 0.7rem 0.9rem;
+    padding: 0.8rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.4rem;
   }
   .caja h2 {
-    font-size: 0.8125rem;
-    font-weight: 700;
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--tinta-secundaria);
+    letter-spacing: 0.12em;
+    color: var(--mu);
     margin: 0;
   }
   .caja h3 {
@@ -981,7 +1085,7 @@
   /* Detector en uso */
   .detector-valor {
     font-size: 1.125rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--tinta);
   }
   .detector-sub {
@@ -993,12 +1097,12 @@
   .riesgo-resumen {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.35rem;
   }
   #barra {
-    height: 10px;
-    background: var(--superficie-alt);
-    border-radius: var(--radio-md);
+    height: 8px;
+    background: rgb(255 255 255 / 0.12);
+    border-radius: var(--pildora);
     overflow: hidden;
   }
   #barra div {
@@ -1017,7 +1121,7 @@
     font-size: 0.875rem;
   }
   .riesgo-pct {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
   }
@@ -1030,14 +1134,14 @@
   }
   .grafico-caja {
     margin-top: 0.15rem;
-    border-top: 1px solid var(--linea);
-    padding-top: 0.35rem;
+    border-top: 1px solid rgb(255 255 255 / 0.07);
+    padding-top: 0.45rem;
   }
   #riesgo-grafico {
     width: 100%;
     height: 136px;
     display: block;
-    background: var(--superficie);
+    background: transparent;
     border-radius: var(--radio-sm);
   }
 
@@ -1066,10 +1170,10 @@
     text-align: center;
     font-size: 1.25rem;
     padding: 2rem 1rem;
-    color: var(--ok);
+    color: var(--ok-tinta);
   }
   body.protegida {
-    background: var(--superficie);
+    background: var(--fondo);
   }
   body.protegida #controles,
   body.protegida #niveles,
@@ -1088,9 +1192,9 @@
   }
   body.protegida #tranquilo {
     display: block;
-    border: 2px solid var(--ok);
-    border-radius: var(--radio-lg);
-    background: var(--ok-fondo);
+    border: 1px solid var(--ok-borde);
+    border-radius: var(--radio-xl);
+    background: rgb(90 158 120 / 0.08);
     font-size: 1.5rem;
     font-weight: 600;
   }
@@ -1101,6 +1205,7 @@
   body.protegida #aviso.visible {
     font-size: 1.25rem;
     padding: 2rem 1.5rem;
+    border-radius: var(--radio-xl);
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -1131,6 +1236,19 @@
     display: none !important;
   }
 
+  /* Diálogos y menús de Probar el ASR e Historial */
+  dialog {
+    background: var(--superficie-elevada);
+    color: var(--tinta);
+  }
+  dialog::backdrop {
+    background: rgb(0 0 0 / 0.65);
+  }
+  textarea, input[type="number"], input[type="text"] {
+    background: var(--superficie-alt);
+    color: var(--tinta);
+  }
+
   /* Respeto de preferencia del sistema de reducir movimiento */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -1157,36 +1275,39 @@
   /* Adaptabilidad responsiva: 1280px, 1440px, 1920px */
   @media (max-width: 1320px) {
     header {
-      padding: 0.35rem 0.9rem;
+      padding: 0.45rem 0.9rem;
     }
     #controles {
-      padding: 0.4rem 0.9rem 0.45rem;
+      padding: 0.45rem 0.9rem 0.5rem;
     }
     #controles button,
     #controles select {
       font-size: 0.8125rem;
-      padding: 0.3rem 0.5rem;
+      padding: 0.3rem 0.7rem;
     }
     .ayuda-cuerpo {
       grid-template-columns: 1fr;
     }
     main {
       grid-template-columns: minmax(0, 1fr) 305px;
-      gap: 0.5rem;
-      padding: 0.35rem 0.9rem;
+      gap: 0.6rem;
+      padding: 0.45rem 0.9rem;
     }
     #aviso {
-      padding: 0.28rem 0.6rem;
-      margin-bottom: 0.35rem;
-      gap: 0.45rem;
+      padding: 0.3rem 0.65rem;
+      margin-bottom: 0.4rem;
+      gap: 0.5rem;
+    }
+    .franja-reposo {
+      margin-bottom: 0.4rem;
     }
     #niveles {
-      gap: 0.5rem;
-      margin-bottom: 0.35rem;
+      gap: 0.55rem;
+      margin-bottom: 0.4rem;
     }
     .tarjeta-persona {
-      padding: 0.35rem 0.65rem;
-      gap: 0.2rem;
+      padding: 0.4rem 0.75rem;
+      gap: 0.25rem;
     }
     .tarjeta-cabecera h2 {
       font-size: 1.125rem;
@@ -1196,16 +1317,17 @@
     }
     .habla-ahora-caja {
       min-height: 1.95rem;
-      padding: 0.28rem 0.55rem;
+      padding: 0.28rem 0.6rem;
     }
     #charla {
-      gap: 0.3rem;
-      padding: 0.4rem 0.6rem;
+      gap: 0.4rem;
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radio-lg);
     }
     .linea {
       width: 78%;
       max-width: 82%;
-      padding: 0.32rem 0.6rem;
+      padding: 0.38rem 0.7rem;
       gap: 0.12rem;
     }
   }
@@ -1281,11 +1403,8 @@
       gap: 1.25rem;
       padding: 1rem 1.75rem;
     }
-    header h1 {
-      font-size: 1.75rem;
-    }
     .tarjeta-cabecera h2 {
-      font-size: 1.5rem;
+      font-size: 1.625rem;
     }
     .linea .texto {
       font-size: 1.125rem;
@@ -2418,20 +2537,20 @@ function dibujarGraficoRiesgo() {
 
   let svg = `
     <!-- Cuadrícula y ejes -->
-    <line x1="${padL}" y1="${y(1)}" x2="${padL + pw}" y2="${y(1)}" stroke="#e2e8f0" stroke-width="1" />
-    <line x1="${padL}" y1="${y(0.5)}" x2="${padL + pw}" y2="${y(0.5)}" stroke="#cbd5e1" stroke-dasharray="3 3" stroke-width="1" />
-    <line x1="${padL}" y1="${y(0)}" x2="${padL + pw}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
-    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${y(0)}" stroke="#64748b" stroke-width="1.5" />
+    <line x1="${padL}" y1="${y(1)}" x2="${padL + pw}" y2="${y(1)}" stroke="rgb(255 255 255 / 0.08)" stroke-width="1" />
+    <line x1="${padL}" y1="${y(0.5)}" x2="${padL + pw}" y2="${y(0.5)}" stroke="rgb(255 255 255 / 0.22)" stroke-dasharray="3 3" stroke-width="1" />
+    <line x1="${padL}" y1="${y(0)}" x2="${padL + pw}" y2="${y(0)}" stroke="rgb(255 255 255 / 0.35)" stroke-width="1.5" />
+    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${y(0)}" stroke="rgb(255 255 255 / 0.35)" stroke-width="1.5" />
 
     <!-- Etiquetas eje Y (legibles en proyector) -->
-    <text x="${padL - 5}" y="${y(1) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">100%</text>
-    <text x="${padL - 5}" y="${y(0.5) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">50%</text>
-    <text x="${padL - 5}" y="${y(0) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">0%</text>
+    <text x="${padL - 5}" y="${y(1) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#c7c7cc" font-family="system-ui">100%</text>
+    <text x="${padL - 5}" y="${y(0.5) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#c7c7cc" font-family="system-ui">50%</text>
+    <text x="${padL - 5}" y="${y(0) + 4}" font-size="12.5" font-weight="600" text-anchor="end" fill="#c7c7cc" font-family="system-ui">0%</text>
 
     <!-- Etiquetas eje X (legibles en proyector) -->
-    <text x="${padL}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="start" fill="#334155" font-family="system-ui">0s</text>
-    <text x="${x(maxT / 2)}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="middle" fill="#334155" font-family="system-ui">${(maxT / 2).toFixed(0)}s</text>
-    <text x="${padL + pw}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="end" fill="#334155" font-family="system-ui">${maxT.toFixed(0)}s</text>
+    <text x="${padL}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="start" fill="#c7c7cc" font-family="system-ui">0s</text>
+    <text x="${x(maxT / 2)}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="middle" fill="#c7c7cc" font-family="system-ui">${(maxT / 2).toFixed(0)}s</text>
+    <text x="${padL + pw}" y="${h - 5}" font-size="12.5" font-weight="600" text-anchor="end" fill="#c7c7cc" font-family="system-ui">${maxT.toFixed(0)}s</text>
   `;
 
   if (puntosRiesgo.length > 0) {
@@ -2444,15 +2563,15 @@ function dibujarGraficoRiesgo() {
     const puntos = traza.map(p => `${x(p.t).toFixed(1)},${y(p.r).toFixed(1)}`).join(" ");
 
     // Línea de riesgo desde el inicio de la llamada
-    svg += `<polyline points="${puntos}" fill="none" stroke="#1d4ed8" stroke-width="2.75" stroke-linejoin="round" stroke-linecap="round" />`;
+    svg += `<polyline points="${puntos}" fill="none" stroke="#4f74a8" stroke-width="2.75" stroke-linejoin="round" stroke-linecap="round" />`;
 
     // Puntos de cada evaluación
     for (const p of ordenados) {
       const cx = x(p.t).toFixed(1);
       const cy = y(p.r).toFixed(1);
-      const col = p.aviso ? "#b91c1c" : (p.r >= 0.5 ? "#f87171" : "#15803d");
+      const col = p.aviso ? "#c8584f" : (p.r >= 0.5 ? "#c9a84c" : "#5a9e78");
       const radio = p.aviso ? 5 : 4;
-      svg += `<circle cx="${cx}" cy="${cy}" r="${radio}" fill="${col}" stroke="#ffffff" stroke-width="1.5" />`;
+      svg += `<circle cx="${cx}" cy="${cy}" r="${radio}" fill="${col}" stroke="#000000" stroke-width="1.5" />`;
     }
   }
 
@@ -2463,8 +2582,8 @@ function dibujarGraficoRiesgo() {
     const axNum = Math.max(padL + mitadBadge, Math.min(padL + pw - mitadBadge, x(tiempoAviso)));
     const ax = x(tiempoAviso).toFixed(1);
     svg += `
-      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#b91c1c" stroke-width="2" stroke-dasharray="3 2" />
-      <rect x="${(axNum - mitadBadge).toFixed(1)}" y="2" width="${anchoBadge}" height="20" rx="4" fill="#b91c1c" />
+      <line x1="${ax}" y1="${padT - 4}" x2="${ax}" y2="${y(0)}" stroke="#c8584f" stroke-width="2" stroke-dasharray="3 2" />
+      <rect x="${(axNum - mitadBadge).toFixed(1)}" y="2" width="${anchoBadge}" height="20" rx="10" fill="#a93a36" />
       <text x="${axNum.toFixed(1)}" y="16" font-size="12" font-weight="700" text-anchor="middle" fill="#ffffff" font-family="system-ui">AVISO ${tiempoAviso.toFixed(1)}s</text>
     `;
   }

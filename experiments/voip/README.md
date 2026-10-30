@@ -589,7 +589,7 @@ pasa por el historial de eventos de la llamada, así que un panel que se conecta
 ## 13. Vista de presentación de la llamada (#110–#115)
 
 Al iniciar una llamada, el botón **Vista de presentación** abre una interfaz alternativa para proyecciones y demostraciones.
-Presenta la llamada mediante dos siluetas de iPhone con avatares ilustrados estilo emoji («Otra persona» a la izquierda y
+Presenta la llamada mediante dos siluetas de iPhone con retratos ilustrados planos («Otra persona» a la izquierda y
 «Persona protegida» a la derecha), medidores de nivel RMS y barras de onda reactivas por canal, y una columna central de diálogo
 desplazable que muestra las frases finales intercaladas con sus evaluaciones del detector asociadas.
 
