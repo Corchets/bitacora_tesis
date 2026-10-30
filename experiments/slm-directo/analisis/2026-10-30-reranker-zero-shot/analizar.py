@@ -47,6 +47,8 @@ PARTICIONES = SLM / "PARTICIONES-TITO-2026-10-29.json"
 GRUPOS_SELECCION = ("entrenamiento", "validacion", "diagnostico", "regresion")
 TAUS = (0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95)
 TAUS_SLM = (0.5, 0.6, 0.7, 0.8, 0.9)
+# bge-reranker puntúa en escala baja (pedidos claros entre 0,01 y 0,6 en el diagnóstico de formato).
+TAUS_RERANKER = (0.01, 0.02, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9)
 META_ESTAFAS, META_FA = 0.80, 0.15
 TIPOS_R07 = {"mencion_sin_pedido", "pedido_razonable"}
 
@@ -111,9 +113,10 @@ def estados(nombre: str, r: list[float], a: list[bool]) -> list[bool]:
     raise ValueError(f"política desconocida {nombre!r}")
 
 
-def politicas(cfg: str, taus: tuple[float, ...] = TAUS) -> list[str]:
+def politicas(cfg: str, taus: tuple[float, ...] | None = None) -> list[str]:
     if _tipo(cfg) in ("reglas", "reglas_v2"):
         return ["alerta del modelo"]
+    taus = taus or (TAUS_RERANKER if _tipo(cfg) == "reranker" else TAUS)
     nombres = ["alerta del modelo"] if un_paso(cfg) else []
     for t in taus:
         nombres += [f"umbral > {t}", f"2 seguidas > {t}", f"media 3 > {t}", f"ema 0.3 > {t}", f"ema 0.5 > {t}"]
@@ -207,7 +210,7 @@ def rol_verificador(datos, seleccion, informe, refs):
             ser_r = {c: riesgos(datos[r][c]) for c in ids_s + ids_i}
             for ps in politicas_slm_verificador(s):
                 arriba_s = {c: estados(ps, *ser_s[c]) for c in ser_s}
-                for t in TAUS:
+                for t in TAUS_RERANKER:
                     avisos = {c: primero([x and y > t for x, y in zip(arriba_s[c], ser_r[c])]) for c in ser_s}
                     nombre = f"{ps} ∧ {r.split('|')[1]} > {t}"
                     cand.append((nombre, medir(avisos, ids_s, refs), medir(avisos, ids_i, refs) if ids_i else None, avisos))
@@ -232,7 +235,7 @@ def rol_filtro(datos, seleccion, informe, refs):
             ser_r = {c: riesgos(datos[r][c], todas=todas) for c in ids_s + ids_i}
             for ps in politicas_slm_verificador(s):
                 arriba_s = {c: estados(ps, *ser_s[c]) for c in ser_s}
-                for t in TAUS:
+                for t in TAUS_RERANKER:
                     deriva = {c: primero([y > t for y in ser_r[c]]) for c in ser_s}
                     avisos = {c: (None if deriva[c] is None else
                                   primero([x and i >= deriva[c] for i, x in enumerate(arriba_s[c], 1)])) for c in ser_s}

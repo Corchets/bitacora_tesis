@@ -51,7 +51,8 @@ generar texto. Las preguntas:
   toca el informe o sus casos relacionados (`excluido_relacion_comparacion`).
 - **Roles:** A = cada detector solo; C/H5 = SLM ∧ reranker en la misma línea; B = el reranker
   deriva y después decide el SLM (sin el bloque de indicio de #68: es una aproximación).
-- **Políticas:** umbral, 2 seguidas, media 3, EMA 0,3 y EMA 0,5, con τ de 0,3 a 0,95. La
+- **Políticas:** umbral, 2 seguidas, media 3, EMA 0,3 y EMA 0,5. Para SLM, τ de 0,3 a 0,95; para el reranker,
+  τ de 0,01 a 0,9, porque bge puntúa en escala baja. La
   grilla es corta a propósito: con 19 estafas para elegir, una grilla grande sobreajusta.
 - **Elección:** mayor recall con FA ≤ 15 % en selección; empate: menos FA y aviso más temprano.
 - **Se informa:** estafas y FA con IC de Wilson, FA en legítimas R07 (difíciles, mención sin
@@ -92,10 +93,17 @@ python correr.py --solo-reranker --reranker MoritzLaurer/mDeBERTa-v3-base-xnli-m
 
 Mirar los ms por línea: con eso se estima cuánto tarda el resto.
 
-**R1. Los tres rerankers, pedidos** (77 casos, ~1.860 líneas; se puede dejar de noche):
+**R1. bge-reranker, pedidos** (77 casos, ~1.860 líneas; de noche). El NLI quedó descartado en
+el diagnóstico y Qwen3-Reranker se suma después si termina de bajar:
 
 ```
-python correr.py --solo-reranker --reranker MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7,BAAI/bge-reranker-v2-m3,Qwen/Qwen3-Reranker-0.6B --lista seleccion-57,rapida-20 --seguir-tras-aviso --hilos 4 --etiqueta r1-rerankers
+python correr.py --solo-reranker --reranker BAAI/bge-reranker-v2-m3 --lista seleccion-57,rapida-20 --seguir-tras-aviso --hilos 4 --etiqueta r1-bge
+```
+
+Qwen3-Reranker (opcional; `pip install hf_xet` acelera la descarga, que retoma donde se cortó):
+
+```
+python correr.py --solo-reranker --reranker Qwen/Qwen3-Reranker-0.6B --lista seleccion-57,rapida-20 --seguir-tras-aviso --hilos 4 --etiqueta r1-qwen
 ```
 
 **R2. El mejor de R1 con pedidos y maniobras** (para el rol filtro):
@@ -175,5 +183,28 @@ Con `torch 2.9.1+cpu`, `transformers 4.51.3` y `MoritzLaurer/mDeBERTa-v3-base-xn
   detector solo y como verificador anti-R07, por la regla escrita antes de correr: si ninguna
   combinación supera 4/6, se descarta. R1 sigue con `bge-reranker-v2-m3` y
   `Qwen3-Reranker-0.6B`, después de pasar el mismo diagnóstico de formato.
+
+### 2026-10-30 · Diagnóstico de formato de bge-reranker y Qwen3-Reranker
+
+Mismas 6 frases inventadas (2 con pedido, 4 sin pedido), hipótesis corta, media y larga, con y sin «A:».
+
+- **`BAAI/bge-reranker-v2-m3`: separa en las 6 combinaciones.** En todas, el pedido con menor
+  puntaje queda por encima de la frase sin pedido con mayor puntaje:
+
+  | Hipótesis | Pedido más bajo | Sin pedido más alto |
+  |---|---|---|
+  | corta (con / sin «A:») | 0,01 / 0,01 | 0,00 / 0,00 |
+  | media (con / sin «A:») | 0,05 / 0,08 | 0,00 / 0,00 |
+  | larga v1 (con / sin «A:») | **0,12** / 0,30 | **0,01** / 0,00 |
+
+  - La mención R07 («Me mandaron un código… no se lo voy a dar a nadie») da 0,00–0,01, y la
+    advertencia «Nunca le des a nadie el código» da 0,00. **H1 queda refutada en controles:**
+    bge no confunde mención con pedido.
+  - La escala es baja: con umbral 0,5 acierta 4/6–5/6 solo porque los pedidos quedan debajo de 0,5.
+    Por eso el análisis usa τ desde 0,01.
+  - Se mantiene el formato pre-registrado (larga v1 con «A:»): también separa, y no se ajusta
+    nada sobre 6 frases.
+- **`Qwen/Qwen3-Reranker-0.6B`: no evaluado todavía.** La descarga se cortó al 13 % (265 kB/s) y
+  transformers no encontró el `.safetensors`. No es un error del código.
 
 Pendiente: correr R1–R4 y pegar acá lo principal de `analisis.md`.

@@ -195,6 +195,10 @@ class TestAnalisis(unittest.TestCase):
             with self.assertRaises(ValueError):
                 analizar.splits(ruta)
 
+    def test_reranker_usa_umbrales_bajos(self):
+        self.assertIn("umbral > 0.01", analizar.politicas("reranker|x|pedidos|v4"))
+        self.assertNotIn("umbral > 0.01", analizar.politicas("slm|m|riesgo|ab"))
+
     def test_politicas_acumuladas(self):
         r = [0.9, 0.1, 0.9, 0.9]
         self.assertEqual(analizar.primero(analizar.estados("umbral > 0.5", r, [])), 1)
