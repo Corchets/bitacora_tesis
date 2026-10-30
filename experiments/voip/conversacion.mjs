@@ -101,18 +101,19 @@ const ESTILOS_PRESENTACION = `
     color: #f5f5f7;
     --tel-alto: calc(100vh - 5.75rem);
     --tel-ancho: min(calc(var(--tel-alto) * 0.485), 27vw, 540px);
-    --p-fondo: #000000;
+    /* Alias de la paleta única del panel (:root de panel.html). */
+    --p-fondo: var(--fondo);
     --p-superficie: rgb(255 255 255 / 0.04);
-    --p-borde: rgb(255 255 255 / 0.1);
-    --p-tinta: #f5f5f7;
-    --p-tinta-2: #c7c7cc;
-    --p-tinta-3: #a1a1aa;
-    --p-azul: #0a84ff;
-    --p-azul-claro: #8ab4ff;
-    --p-verde: #30d158;
-    --p-rojo: #ff453a;
-    --p-rojo-fuerte: #dc2626;
-    --p-foco: #60a5fa;
+    --p-borde: var(--linea);
+    --p-tinta: var(--tinta);
+    --p-tinta-2: var(--tinta-secundaria);
+    --p-tinta-3: var(--mu);
+    --p-azul: var(--primary);
+    --p-azul-claro: var(--primary-claro);
+    --p-verde: var(--ok);
+    --p-rojo: var(--alerta);
+    --p-rojo-fuerte: var(--alerta-fuerte);
+    --p-foco: var(--foco);
   }
   body.presentacion {
     height: 100vh;
