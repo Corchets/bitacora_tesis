@@ -51,6 +51,21 @@ class TestCompararVad(unittest.TestCase):
         self.assertTrue(C.primera_palabra_perdida("Compartí pantalla y entrá", "la pantalla y entra"))
         self.assertFalse(C.primera_palabra_perdida("Compartí pantalla", "Comparti la pantalla"))
         self.assertFalse(C.primera_palabra_perdida("Hola, che", "Y hola che"))
+        # Voseo pasado a infinitivo y primera palabra que el reparto dejó en la frase anterior: no es un corte.
+        self.assertFalse(C.primera_palabra_perdida("Hacé la transferencia", "Hacer la transferencia"))
+        self.assertFalse(C.primera_palabra_perdida("Compartí pantalla", "la pantalla", anterior="llega a casa. Compartir"))
+        self.assertTrue(C.primera_palabra_perdida("Ñaño, al ñudo", "Al pedo te"))
+
+    def test_simulacion_cuenta_cierres_sin_asr(self):
+        import tempfile
+
+        import soundfile as sf
+
+        with tempfile.TemporaryDirectory() as tmp:
+            wav = Path(tmp) / "a.wav"
+            sf.write(wav, np.stack([audio([1.0, 1.0, 11.0]), np.zeros(round(13 * 16000), dtype=np.float32)], axis=1), 16000)
+            filas = C.simular_cortes([("a", str(wav), 0, "")], [], [0.5], 40)
+        self.assertEqual([(f["vad"], f["segmentos"], f["silencio"], f["tope"]) for f in filas], [("rms", 3, 1, 1)])
 
     def test_retranscribe_con_mas_audio_previo(self):
         motor = MotorEco()

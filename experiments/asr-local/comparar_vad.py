@@ -40,6 +40,7 @@ import medir_voz_real as MV
 import variantes_voz_real as V
 from guion import cargar_guion
 from metricas_voz_real import _clave
+from motores import DetectorSilero, MotorPorFrases
 
 DIR_ASR = Path(__file__).resolve().parent
 # Comentadas en voz-real/pruebas.csv: sin referencia, no entran en el WER.
@@ -167,22 +168,36 @@ def resumen_prueba(registro: dict[str, Any], eventos: list, rms: list[bool], blo
 # --- Inicios de palabra (sobre la corrida de medir_voz_real.py) ---------------------------------------------
 
 
-def primera_palabra_perdida(referencia: str, hipotesis: str) -> bool:
-    """True si la primera palabra de la referencia no está entre las dos primeras de la transcripción."""
+def _misma_raiz(a: str, b: str) -> bool:
+    """«hace» y «hacer», «transferi» y «transferir», «abri» y «abre»: el voseo que el modelo pasa a infinitivo no es un corte."""
+    n = min(len(a), len(b), 4)
+    return n >= 2 and a[:n] == b[:n] if min(len(a), len(b)) >= 3 else a == b
+
+
+def primera_palabra_perdida(referencia: str, hipotesis: str, anterior: str = "") -> bool:
+    """True si la primera palabra de la referencia no aparece (ni con la misma raíz) al principio de la transcripción.
+
+    También se busca en la última palabra de la frase anterior (`anterior`): el reparto por frases de
+    `medir_voz_real.py` deja ahí una primera palabra que no coincide exacta («Compartí» → «Compartir»).
+    """
     ref = [_clave(p) for p in referencia.split() if _clave(p)]
     hip = [_clave(p) for p in hipotesis.split() if _clave(p)]
-    return bool(ref) and ref[0] not in hip[:2]
+    previa = [_clave(p) for p in anterior.split() if _clave(p)][-1:]
+    return bool(ref) and not any(_misma_raiz(ref[0], h) for h in previa + hip[:2])
 
 
 def inicios_desde_corrida(corrida: Path, variantes: list[str]) -> dict[str, Any]:
     por_variante: dict[str, dict[str, Any]] = {}
+    anterior: dict[tuple[str, str], str] = {}
     for linea in (corrida / "frases.jsonl").read_text(encoding="utf-8").splitlines():
         f = json.loads(linea)
         if f["variante"] not in variantes:
             continue
         v = por_variante.setdefault(f["variante"], {"frases": 0, "perdidas": [], "pantalla": []})
         v["frases"] += 1
-        if primera_palabra_perdida(f["referencia"], f["hipotesis"]):
+        previa = anterior.get((f["variante"], f["prueba"]), "") if f["n"] > 1 else ""
+        anterior[(f["variante"], f["prueba"])] = f["hipotesis"]
+        if primera_palabra_perdida(f["referencia"], f["hipotesis"], previa):
             v["perdidas"].append({"prueba": f["prueba"], "toma": f["toma"], "n": f["n"],
                                   "referencia": f["referencia"], "hipotesis": f["hipotesis"]})
         if "pantalla" in f["referencia"].lower():
@@ -203,6 +218,48 @@ def retranscribir_pantalla(motor, muestras: np.ndarray, finales: list[dict[str, 
             salida.append({"inicio_s": round(desde / V.SAMPLE_RATE, 3), "previo_extra_s": extra,
                            "texto": type(motor)._transcribir(motor, muestras[desde:hasta]).strip()})
     return salida
+
+
+# --- Simulación del corte sin ASR (umbral de Silero) --------------------------------------------------------
+
+
+class _SinASR(MotorPorFrases):
+    """El corte de MotorPorFrases sin reconocedor: solo interesa cómo se cierran los segmentos."""
+
+    def _transcribir(self, audio):
+        return "x"
+
+    def inicializar(self):
+        pass
+
+    def metadatos(self):
+        return {}
+
+
+def simular_cortes(grabaciones: list[tuple[str, str, int, str]], umbrales: list[float], cortes: list[float],
+                   bloque_ms: int) -> list[dict[str, Any]]:
+    """Segmentos y cierres por tope con cada umbral de Silero y cada corte, más el RMS 0,008 como referencia."""
+    detectores = [("rms", UMBRAL_FIN_DE_VOZ)] + [("silero", u) for u in umbrales]
+    filas = []
+    audios = [(id_, V.leer_canal(wav, col)) for id_, wav, col, _ in grabaciones]
+    for vad, umbral in detectores:
+        for corte in cortes:
+            motor = _SinASR(sample_rate=V.SAMPLE_RATE)
+            motor.corte_silencio_s = corte
+            motor.umbral_rms_silencio = umbral if vad == "rms" else UMBRAL_FIN_DE_VOZ
+            if vad == "silero":
+                motor.detector_voz = DetectorSilero(V.MODELO_SILERO, umbral)
+            fila = {"vad": vad, "umbral": umbral, "corte": corte, "segmentos": 0, "tope": 0, "silencio": 0, "voz_pct": 0.0}
+            voz = bloques = 0
+            for _, muestras in audios:
+                registro, _ = correr(motor, muestras, bloque_ms)
+                fila["segmentos"] += len(registro["segmentos"])
+                fila["tope"] += sum(s["motivo"] == "tope" for s in registro["segmentos"])
+                fila["silencio"] += sum(s["motivo"] == "silencio" for s in registro["segmentos"])
+                voz, bloques = voz + sum(registro["decisiones"]), bloques + len(registro["decisiones"])
+            fila["voz_pct"] = round(100.0 * voz / max(1, bloques), 1)
+            filas.append(fila)
+    return filas
 
 
 # --- Salida -------------------------------------------------------------------------------------------------
@@ -290,7 +347,14 @@ def escribir_resumen(ruta: Path, datos: dict[str, Any]) -> None:
                 l.append(f"- `{n}`: " + "; ".join(f"t{p['toma']} «{p['referencia'].split()[0]}» → «{' '.join(p['hipotesis'].split()[:3])}…»"
                                                     for p in v["perdidas"]))
 
-    l += ["", "## 6. Reproducir", "", "```bash", datos["comando"], "```", "",
+    if datos.get("simulacion"):
+        l += ["", "## 6. Simulación del corte sin ASR: ¿es el umbral de Silero?", "",
+              "Solo el corte de `MotorPorFrases` (sin Parakeet) sobre las 20 grabaciones con texto, que tienen 100 frases. "
+              "Con Silero, ya en voz sigue en voz mientras la probabilidad no baje de umbral − 0,15. No mide WER ni etiquetas.", "",
+              "| Detector | Umbral | Corte (s) | Voz según el detector | Segmentos | Cierres por silencio | Cierres por tope |", "|---|---|---|---|---|---|---|"]
+        for f in datos["simulacion"]:
+            l.append(f"| {f['vad']} | {f['umbral']} | {f['corte']} | {f['voz_pct']} % | {f['segmentos']} | {f['silencio']} | {f['tope']} |")
+    l += ["", "## 7. Reproducir", "", "```bash", datos["comando"], *(datos.get("comandos_extra") or []), "```", "",
           f"Código: `{datos['codigo']['hash']}` ({datos['codigo']['rama']}, {'con cambios sin commit' if datos['codigo']['dirty'] else 'limpio'}). "
           "Detalle por segmento en `extras.json`."]
     ruta.write_text("\n".join(l) + "\n", encoding="utf-8")
@@ -305,8 +369,18 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--bloque-ms", type=int, default=V.BLOQUE_MS_POR_DEFECTO)
     ap.add_argument("--hilos", type=int, default=V.HILOS_POR_DEFECTO)
     ap.add_argument("--salida", type=Path, default=None)
+    ap.add_argument("--simular-umbrales", default=None,
+                    help="umbrales de Silero (p. ej. 0.5,0.7,0.85) para simular solo el corte, sin ASR, y agregarlo a extras.json")
+    ap.add_argument("--simular-cortes", default="0.3,0.5,0.8")
+    ap.add_argument("--rehacer-resumen", action="store_true",
+                    help="no corre Parakeet: lee extras.json de --salida, recalcula los inicios con --corrida y reescribe resumen.md")
     args = ap.parse_args(argv)
+    comando = "python experiments/asr-local/comparar_vad.py " + shlex.join(sys.argv[1:] if argv is None else argv)
     carpeta = args.pruebas or MV.carpeta_de_pruebas_por_defecto()
+    destino = args.salida or (DIR_ASR / "corridas" / f"{datetime.now():%Y-%m-%d}_voz-real_vad-extras")
+    if args.rehacer_resumen:
+        rehacer(destino, args, carpeta, comando)
+        return
     configs = dict(V.VARIANTES_PARAKEET)
     nombres = [n.strip() for n in args.variantes.split(",") if n.strip()]
     pruebas, omitidas = MV.cargar_pruebas(MV.leer_csv(args.csv), carpeta, cargar_guion(MV.GUION_POR_DEFECTO))
@@ -355,16 +429,33 @@ def main(argv: list[str] | None = None) -> None:
         }
 
     inicios = inicios_desde_corrida(args.corrida, nombres) if args.corrida else {}
-    destino = args.salida or (DIR_ASR / "corridas" / f"{datetime.now():%Y-%m-%d}_voz-real_vad-extras")
     destino.mkdir(parents=True, exist_ok=True)
     from asr_local import obtener_info_hardware, obtener_versiones_paquetes
 
     datos = {"fecha": datetime.now().isoformat(timespec="seconds"),
-             "comando": "python experiments/asr-local/comparar_vad.py " + shlex.join(sys.argv[1:] if argv is None else argv),
+             "comando": comando,
              "codigo": MV.info_git(), "versiones": obtener_versiones_paquetes(), "hardware": obtener_info_hardware(),
              "carpeta_pruebas": str(carpeta), "bloque_ms": args.bloque_ms, "hilos": args.hilos,
              "umbral_fin_de_voz": UMBRAL_FIN_DE_VOZ, "corrida": str(args.corrida) if args.corrida else None,
              "g08": g08, "sin_texto": SIN_TEXTO, "variantes": salida, "inicios": inicios, "pantalla": pantalla}
+    (destino / "extras.json").write_text(json.dumps(datos, indent=1, ensure_ascii=False), encoding="utf-8")
+    escribir_resumen(destino / "resumen.md", datos)
+    print(f"Listo: {destino}/resumen.md")
+
+
+def rehacer(destino: Path, args: argparse.Namespace, carpeta: Path, comando: str) -> None:
+    """Sobre una salida ya hecha: inicios recalculados y, si se pide, la simulación del umbral. Parakeet no corre."""
+    datos = json.loads((destino / "extras.json").read_text(encoding="utf-8"))
+    if args.corrida:
+        datos["inicios"] = inicios_desde_corrida(args.corrida, list(datos["variantes"]))
+        datos["corrida"] = str(args.corrida)
+    if args.simular_umbrales:
+        pruebas, _ = MV.cargar_pruebas(MV.leer_csv(args.csv), carpeta, cargar_guion(MV.GUION_POR_DEFECTO))
+        grabaciones = [(p["id"], p["wav"], p["columna"], "") for p in pruebas]
+        datos["simulacion"] = simular_cortes(grabaciones, [float(u) for u in args.simular_umbrales.split(",")],
+                                             [float(c) for c in args.simular_cortes.split(",")], datos["bloque_ms"])
+    datos["comandos_extra"] = [c for c in datos.get("comandos_extra", []) if c != comando] + [comando]
+    datos["codigo_resumen"] = MV.info_git()
     (destino / "extras.json").write_text(json.dumps(datos, indent=1, ensure_ascii=False), encoding="utf-8")
     escribir_resumen(destino / "resumen.md", datos)
     print(f"Listo: {destino}/resumen.md")
