@@ -41,7 +41,7 @@ Pantalla proyectada en aula: conversación y tarjetas con tipografía grande y a
 
 Especificación completa y criterios de aceptación en [#110](https://github.com/Corchets/bitacora_tesis/issues/110), implementada e integrada en [#111]–[#115].
 
-La vista presenta la misma llamada mediante dos siluetas de iPhone con avatares ilustrados estilo emoji («Otra persona» y «Persona protegida»), medidores de nivel RMS, formas de onda dinámicas y diálogo central con borradores, revisiones, evaluaciones y franja de aviso de posible estafa en el teléfono protegido. Verificada en resolución notebook (1366 × 768) y proyección (1920 × 1080) con foco de teclado, movimiento reducido y recursos locales.
+La vista presenta la misma llamada mediante dos siluetas de iPhone con retratos ilustrados planos («Otra persona» y «Persona protegida»), medidores de nivel RMS, formas de onda dinámicas y diálogo central con borradores, revisiones, evaluaciones y franja de aviso de posible estafa en el teléfono protegido. Verificada en resolución notebook (1366 × 768) y proyección (1920 × 1080) con foco de teclado, movimiento reducido y recursos locales.
 
 El video hardcodeado sigue pendiente para el final en [#53](https://github.com/Corchets/bitacora_tesis/issues/53). Los ensayos con personas o en sala física mantienen sus propios alcances; esta vista no altera modelos, prompts ni el aviso final de [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
 
