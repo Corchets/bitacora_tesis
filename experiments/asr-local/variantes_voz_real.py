@@ -145,6 +145,8 @@ VARIANTES_PARAKEET: tuple[tuple[str, ConfigParakeet], ...] = (
     _parakeet(0.9, 0.003), _parakeet(0.8, 0.003), _parakeet(0.5, 0.003),
     _parakeet(0.3, 0.008), _parakeet(0.5, 0.008), _parakeet(0.6, 0.008), _parakeet(0.8, 0.008),
     _parakeet_silero(0.8), _parakeet_silero(0.5), _parakeet_silero(0.3),
+    # Con 0,5 Silero sigue en voz en las pausas (no baja de 0,35); 0,9 salió de simular el corte sin ASR (§12).
+    _parakeet_silero(0.5, 0.9), _parakeet_silero(0.3, 0.9),
 )
 PARAKEET_PANEL = VARIANTES_PARAKEET[0][0]
 PARAKEET_LABORATORIO = "parakeet-0.8-rms-0.008"  # lo que arranca «Probar el ASR» desde el 2026-10-29 (§11)

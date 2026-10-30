@@ -47,7 +47,7 @@ DIR_ASR = Path(__file__).resolve().parent
 SIN_TEXTO = {"2026-10-29_201018-775836": "G10 30 s sin hablar, tele apagada",
              "2026-10-29_193603-180243": "serie de fondo sin hablar"}
 VARIANTES_POR_DEFECTO = (V.PARAKEET_LABORATORIO, "parakeet-0.8-silero-0.5", "parakeet-0.5-silero-0.5",
-                         "parakeet-0.3-silero-0.5")
+                         "parakeet-0.3-silero-0.5", "parakeet-0.5-silero-0.9", "parakeet-0.3-silero-0.9")
 UMBRAL_FIN_DE_VOZ = 0.008  # el RMS contra el que se mide el desfase (el de la referencia del laboratorio)
 MAX_DESFASE_S = 0.6  # un flanco del detector se empareja con el flanco RMS más cercano a menos de esto
 PREVIO_EXTRA_S = (0.3, 0.6)  # cuánto audio más se antepone al segmento de «pantalla» para volver a transcribirlo
