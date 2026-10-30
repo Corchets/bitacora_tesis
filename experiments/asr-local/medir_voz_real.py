@@ -80,8 +80,8 @@ def leer_csv(ruta: str | Path) -> list[dict[str, str]]:
         problemas = []
         if not fila["id"]:
             problemas.append("falta el id")
-        if fila["toma"] not in ("1", "2"):
-            problemas.append(f"toma debe ser 1 o 2: {fila['toma']!r}")
+        if fila["toma"] not in ("1", "2", "3"):
+            problemas.append(f"toma debe ser 1, 2 o 3: {fila['toma']!r}")
         if fila["voz"] not in VOCES:
             problemas.append(f"voz debe ser una de {VOCES}: {fila['voz']!r}")
         if fila["condicion"] not in CONDICIONES:
@@ -636,7 +636,7 @@ def parsear(argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--sin-whisper", action="store_true", help="no corre las variantes de Whisper (son lentas)")
     p.add_argument("--solo-parakeet", action="store_true",
                    help=f"solo Parakeet con cada corte y umbral, sin la cadena de Zipformer ni Whisper ({V.PARAKEET_PANEL} se corre siempre)")
-    p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=(1, 2), help="toma donde se aplica la regla (defecto: 2)")
+    p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=(1, 2, 3), help="toma donde se aplica la regla (defecto: 2; 3 = confirmación de lo elegido con la 2)")
     p.add_argument("--bloque-ms", type=int, default=V.BLOQUE_MS_POR_DEFECTO, help="tamaño de bloque (defecto: 40, como el panel)")
     p.add_argument("--hilos", type=int, default=V.HILOS_POR_DEFECTO, help="hilos del ASR sherpa (defecto: 2, como el servidor)")
     p.add_argument("--hilos-whisper", type=int, default=4)
