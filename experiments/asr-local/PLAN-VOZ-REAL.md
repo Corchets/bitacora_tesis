@@ -118,6 +118,8 @@ dos corridas por variante:
    condiciones × 6 bloques) desde «Probar el ASR», pegando cada bloque en «Lo que dije en realidad» y tocando
    «Guardar prueba». El audio queda en `experiments/voip/llamadas/`, fuera de Git.
 2. **Completar** [`voz-real/pruebas.csv`](voz-real/pruebas.csv): id de la prueba, toma (1 o 2), voz y condición.
+   Si se guardó sin escribir «Lo que dije en realidad», la columna `bloque` (1 a 6) toma como referencia el texto
+   de ese bloque del guion; lo escrito en el panel manda sobre el bloque.
 3. **Con la toma 1**, antes de medir: `python hotwords.py` muestra cómo se parte cada hotword (editá
    [`voz-real/hotwords.txt`](voz-real/hotwords.txt)), y una corrida con `--sin-whisper` lista en su resumen las
    sustituciones frecuentes para armar [`voz-real/diccionario.csv`](voz-real/diccionario.csv). Revisá la jerga de
@@ -132,15 +134,22 @@ Corre la línea base y cada paso del §4 sobre el audio guardado, aplica la regl
 `corridas/<fecha>_voz-real_<n>pruebas/` con `resumen.md`, `manifiesto.json` y `frases.jsonl` (sin audio).
 Opciones útiles: `--sin-whisper` (Whisper es lento: `small` y `large-v3-turbo` bajan ~2 GB la primera vez y
 `large-v3-turbo` usa ~1,8 GB de RAM), `--variantes beam,beam+hotwords` (la línea base se corre siempre),
-`--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
+`--solo-parakeet` (solo Parakeet con cada corte y umbral de `VARIANTES_PARAKEET`, cada uno contra el del panel,
+sin la cadena de Zipformer), `--pruebas <carpeta>` si las pruebas están en otra copia del repo, `--bloque-ms 100` para comparar con la tabla del §7
 (por defecto 40 ms, como el panel). Detalle de los archivos en el [README](README.md#9-voz-real-94).
 
 
 ## 9. Zipformer anda mal con voz real: probamos Parakeet (2026-10-28)
 
+> **Actualización del 2026-10-29, Luciano Grosso:** Zipformer Kroko queda como antecedente
+> histórico, retirado de la selección activa por los errores observados con su voz. Se conservan
+> código y corridas para reproducir el laboratorio. Esto no selecciona un reemplazo ni cierra
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+
 > **Estado: propuesta sin discutir.** Es una prueba de otro modelo para la demo, no la elección de
-> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). Zipformer sigue siendo el
-> modelo por defecto del panel.
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). El código conserva Zipformer
+> como valor por defecto; para ensayar Parakeet hay que elegirlo en el panel o iniciar con
+> `--asr parakeet`. Retirar el candidato no equivale a modificar el arranque de la demo.
 
 **Qué pasa.** Con la voz de Luciano en el panel, Zipformer Kroko transcribe mal: parte palabras al
 medio («la concha de tu ma | dre», «Alambre el | código»), cambia palabras («la alergia» por «la
@@ -178,9 +187,10 @@ más que Zipformer, lo que pesa en la pregunta de gama de D09. Escribe números 
 1, 2, 3», «958 679 123») y no se puede fijar el idioma, así que hay que revisar si las reglas
 siguen viendo los códigos. Mientras transcribe bloquea el bucle del servidor hasta ~0,45 s.
 
-**Siguiente paso.** Grabar el set de la sección 3 con «Probar el ASR» y medir los dos modelos con
-`medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Agregar Parakeet como variante en
-[`variantes_voz_real.py`](variantes_voz_real.py) queda pendiente.
+**Siguiente paso (actualizado el 2026-10-29; hecho con micrófono, ver §11).** Grabar el set de la sección 3 con «Probar el ASR» y medir Parakeet con
+`medir_voz_real.py` (etiquetas de reglas por frase, WER y CER). Parakeet ya está como variante en
+[`variantes_voz_real.py`](variantes_voz_real.py) (`--solo-parakeet`, 2026-10-29). Las variantes de Zipformer se
+conservan como reproducción histórica; no son trabajo activo de mejora.
 
 ### 9.1 El borrador sale en inglés y después se corrige (2026-10-29)
 
@@ -250,9 +260,214 @@ ni Neural Engine. No usa toda la potencia de la computadora ni imita un teléfon
 configuración fija y no se midió en ningún teléfono. Como cada borrador repite la frase desde el
 principio, el costo sube a medida que la frase se alarga, hasta el corte de 10 s.
 
-**En un teléfono de gama alta.** `sherpa-onnx` tiene soporte para Android e iOS. En memoria
-entra: ~1,2 GB de ASR más el detector, en teléfonos de 12–16 GB. Lo que no sabemos es cuánto
-tarda cada borrador, cuánta batería consume y cuánto calienta en el teléfono. Con la
+**En un teléfono de gama alta.** `sherpa-onnx` tiene soporte para Android e iOS. El RSS de la
+Mac no demuestra que el conjunto ASR + detector entre en la memoria disponible para una app
+del teléfono. No sabemos cuánto tarda cada borrador, cuánta batería consume ni cuánto calienta
+en ese dispositivo. Con la
 [gama acordada el 2026-10-28](https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)
 (la más alta a la fecha, optimizar después), esto queda como límite declarado, no como
 bloqueo.
+
+## 10. Auditoría de VAD, preaudio y comparación de modelos (2026-10-29)
+
+Consulta de Luciano, vinculada a [#94](https://github.com/Corchets/bitacora_tesis/issues/94)
+y a la comparación de [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
+Inspección de [`motores.py`](motores.py) sobre el código base `2a61d8d`; no es una nueva
+corrida de reconocimiento ni una medición de batería.
+
+### 10.1 Qué tenemos implementado
+
+| Parte | Implementación comprobada | Alcance |
+|---|---|---|
+| Inicio/fin de habla en Parakeet | `MotorPorFrases` compara RMS con `0.005`; cierra tras `0.8 s` de silencio por defecto. El panel admite «Automático» o `0.1–3.0 s`. | Es un detector por energía. No distingue voz y ruido con un modelo como Silero. Un segmento acústico no garantiza un turno conversacional. |
+| Preaudio de Parakeet y Whisper por frases | `PREVIO_S = 0.3`; `previo` retiene bloques anteriores al inicio detectado y los antepone a la frase. | Sí cumple la función del búfer rotatorio de 200–400 ms. Es una lista acotada, no un anillo literal; con bloques de 40 ms retiene hasta 280 ms por descarte de bloques enteros. |
+| Trabajo durante silencios | Sin frase abierta, se actualiza el preaudio y se retorna sin llamar al reconocedor. Se exige `MIN_VOZ_S = 0.3` para transcribir el final. | Evita inferencia sobre silencio inicial; ruido por encima del umbral puede activar el ASR y voz débil puede quedar debajo. |
+| Frases largas y parciales | Máximo de 10 s; Parakeet vuelve a reconocer toda la frase cada 0.5 s, desde 1 s de voz acumulada, y al cerrar. | Es entrega incremental construida sobre un reconocedor offline. Repite cómputo; el consumo sostenido en el teléfono está sin medir. |
+| Zipformer histórico | Recibe todos los bloques, incluidos los silencios; cierra por endpoint nativo o RMS. | No había una compuerta VAD previa que evitara enviar silencio. No necesitaba recuperar un inicio descartado por esa compuerta. |
+| Whisper base del procedimiento original | `MotorFasterWhisper` acumula el audio completo y transcribe en `vaciar_final()`, con `vad_filter=True` y silencio mínimo de 500 ms. | Tiene filtrado VAD de faster-whisper al procesar el lote; no es el VAD continuo de la llamada. |
+
+La cola de silencio artificial de Zipformer (purga/lookahead) y los búferes de transporte
+no son el preaudio: cumplen otras funciones. Tampoco el cortador RMS de 400 ms del spike
+[`turns.py`](../laboratorio/turns.py) demuestra que se hubiera integrado Silero.
+
+**Verificación del 2026-10-29:** pasan las 11 pruebas de `tests/test_motor_por_frases.py`.
+Una comprobación adicional con bloques sintéticos de 40 ms confirmó 4480 muestras de
+preaudio (280 ms a 16 kHz), conservación del audio anterior al inicio y cero llamadas al
+transcriptor durante el silencio inicial. No verifica reconocimiento ni ahorro de energía.
+
+### 10.2 Comparación con la recomendación recibida
+
+Las observaciones propias conservan las condiciones de §9 y de las
+[corridas TTS](../../docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md#asr-sobre-audio-tts).
+No son comparaciones pareadas de calidad con referencia humana.
+
+| Opción | Relación con nuestro trabajo | Evidencia y límite |
+|---|---|---|
+| Whisper base/small cuantizado con whisper.cpp | La recomendación propone otra implementación y cuantización. Probamos **base multilingüe int8 con faster-whisper en CPU**, no whisper.cpp Q4. | En un audio TTS: RTF 0.2745, RSS 276.91 MB, WER 17.39 % y omisión de «cero». No permite descartar ni recomendar base/small Q4 en un teléfono. |
+| **Parakeet TDT 0.6B v3 int8 con sherpa-onnx** | Candidato que se ensaya ahora, con segmentación y borradores de §10.1. Incluye español. | En la inspección de 4 llamadas reales se vio mejor que Zipformer; sin referencia ni WER humano. En M1: RSS ~1.0–1.2 GB y bloque más lento ~450 ms. El filtro de §9.1 reduce inglés visible, sin garantizar transcripciones correctas. |
+| Whisper large-v3-turbo int8 con faster-whisper | Comparador por frases, sin borradores. | En esa prueba de CPU: 4–10 s por frase e inserciones en silencio. Inadecuado para esa demo/configuración; no es un resultado universal sobre Whisper ni sobre whisper.cpp. |
+| Zipformer Kroko | **Antecedente retirado de la selección activa por Luciano el 2026-10-29.** | Era streaming nativo y más liviano (~156 MB en disco, ~475 MB RSS en §9), pero cortó/cambió palabras con voz real. El buen WER TTS no justificaba mantenerlo. Se preservan sus resultados, sin afirmar que toda la familia Zipformer falle. |
+| MMS / Squeezeformer con sherpa-onnx | No se probaron en este laboratorio. Sherpa es un runtime; no define una única arquitectura ni un costo de memoria. | No hay comparación propia para llamarlos más rápidos, más livianos o mejores en acento argentino. |
+| API en la nube | No integra la ruta de inferencia del proyecto. | El procesamiento local es una restricción del [diseño de privacidad](../../docs/corpus/PRIVACIDAD-DEL-SISTEMA.md). |
+
+En el detector de texto, la recomendación propone un encoder pequeño entrenado. Nosotros
+conservamos reglas como línea base, antecedentes de RoBERTuito/Tito y ensayos de SLM directo
+con Qwen y Llama. La cascada no está adoptada. Como referencia del costo, el Qwen3.5 0.8B
+de la [demo M1](../voip/corridas/2026-10-26-medicion-84-m1-08b/README.md) tardó 1.312 s de
+mediana por evaluación y avisó 2.803 s después del fin del pedido (una estafa TTS, 4 evaluaciones).
+No demuestra rendimiento móvil, ni permite afirmar que cualquier SLM sea inviable. Un encoder
+semántico tampoco garantiza reconstruir una negación, un dígito o un pedido perdido por el ASR.
+
+### 10.3 Correcciones a la recomendación y fuentes primarias
+
+Consulta del 2026-10-29 a documentación oficial de los proyectos, contrastada con el código
+local. Se incluyeron fichas, APIs y ejemplos que permiten verificar arquitectura e integración;
+se excluyeron promesas de rendimiento sin medición del teléfono y las equivalencias entre
+tamaño de pesos, RSS y RAM disponible. No se analizaron nuevos datos del corpus ni del test.
+
+- **VAD no es universalmente obligatorio para cualquier ASR.** whisper.cpp lo ofrece como
+  [opción para filtrar segmentos](https://github.com/ggml-org/whisper.cpp#voice-activity-detection-vad).
+  En nuestra integración por frases es razonable comparar un VAD con el RMS; no hay evidencia
+  para afirmar que sin Silero la batería se agotaría «en minutos».
+- **Whisper español usa el modelo multilingüe `base`, no `base.en`.** `.en` es inglés y
+  `base.es` no es una variante oficial. La [tabla de OpenAI](https://github.com/openai/whisper#available-models-and-languages)
+  identifica 74 M de parámetros para base; el tamaño de pesos cuantizados no equivale al RSS.
+- **El VAD de nuestro Whisper base proviene de faster-whisper.** La librería integra
+  [Silero VAD](https://github.com/SYSTRAN/faster-whisper#vad-filter); no significa que el panel
+  Parakeet use ese filtro. [Silero](https://github.com/snakers4/silero-vad) ofrece ONNX y audio
+  a 8/16 kHz, sin garantizar el costo de nuestra integración en un teléfono concreto.
+- **sherpa-onnx ya es nuestro runtime de Parakeet.** Lo cataloga como
+  [transducer offline, con ejemplos de streaming simulado](https://k2-fsa.github.io/sherpa/onnx/pretrained_models/offline-transducer/nemo-transducer-models.html#sherpa-onnx-nemo-parakeet-tdt-0-6b-v3-int8-25-european-languages).
+  Cambiar a sherpa no es una alternativa a Parakeet: ya usamos ambos juntos.
+- **MMS y Squeezeformer no son el mismo modelo.** [MMS-1B-all de Meta](https://huggingface.co/facebook/mms-1b-all)
+  es Wav2Vec2-CTC de ~1 B de parámetros; [Squeezeformer](https://arxiv.org/abs/2206.00888)
+  es otra arquitectura. Hace falta identificar checkpoint, idioma y conversión antes de
+  compararlos. No se verificó aquí una integración MMS español lista para sherpa.
+- **CTC/Transducer no justifica prometer cero inserciones o alucinaciones.** Nuestro Parakeet
+  TDT ya produjo texto ajeno al habla (§9.1). Tampoco los embeddings garantizan recuperar
+  información perdida: la tolerancia del detector debe medirse con el mismo audio y referencia.
+- **Un LLM móvil no es imposible por definición.** Meta publica
+  [Llama 3.2 1B/3B y variantes cuantizadas para uso on-device](https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/MODEL_CARD.md).
+  Eso no demuestra que ASR + SLM de nuestro proyecto cumplan los presupuestos del teléfono.
+
+### 10.4 Qué falta comprobar
+
+> **Estado: propuesta sin discutir.** En [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector),
+> comparar el RMS actual contra un VAD de voz (por ejemplo Silero), manteniendo ASR, audio y
+> preaudio constantes. No se adopta una librería ni un umbral nuevo con esta auditoría.
+
+Medir voz tenue, ruido, inicios de palabra, pausas y números con referencia humana. Para el
+teléfono de gama alta acordado con el tutor faltan latencia y cola sostenidas, memoria conjunta,
+batería y temperatura durante la llamada. El costo de los borradores de Parakeet debe separarse
+del costo del resultado final y del detector. D08 y D09 permanecen abiertas.
+
+## 11. Voz real con Parakeet: corte y umbral (2026-10-29)
+
+> **Decisión de Luciano (2026-10-29):** «Probar el ASR» arranca en **0,8 s / 0,008** (antes 0,9 s / 0,003).
+> La llamada en vivo no cambia (0,9 s / 0,003). No pasa la regla del §2 (+0 frases con etiquetas correctas):
+> se adopta por WER y CER. Es un valor del laboratorio con una sola voz; no cierra
+> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+
+Primera medición con referencia escrita sobre la voz de Luciano: el set de la sección 3, condición
+`luciano-microfono`, más cuatro grabaciones extra para la comparación de corte y de VAD pendiente del §10.4.
+
+### 11.1 Qué se grabó
+
+Todo con «Probar el ASR», Parakeet, micrófono de la Mac en la pieza de Luciano y bloques del guion leídos de
+una hoja en el celular. El panel guardó el audio entero; los cortes y umbrales distintos de los del panel se
+rehicieron offline sobre ese mismo audio. Audio fuera de Git (copia `bitacora_tesis-voip-asr`,
+`experiments/voip/llamadas/`); ids en [`voz-real/pruebas.csv`](voz-real/pruebas.csv). Las referencias son el texto
+del guion por bloque (columna `bloque`): Luciano no informó desvíos.
+
+| Grabaciones | Toma | Panel | Qué |
+|---|---|---|---|
+| G01–G05 | 1 | 0,9 / 0,003 | bloques 1 a 5, tele apagada. G06 (bloque 6) se borró del Historial antes de medir ([R24](../../docs/gestion/REGISTRO-RIESGOS.md)) |
+| G07 | 1 | 0,9 / 0,003 | bloque 1 con voz baja (salió casi al mismo volumen) |
+| G08 | 1 | 0,9 / 0,003 | bloque 2 con una serie de fondo |
+| G09 | 1 | 0,9 / 0,003 | bloque 3 con una pausa de ~1 s dentro de cada frase |
+| G10 y otra | — | 0,9 / 0,003 | 30–44 s sin hablar: con la tele apagada y con la serie. Sin referencia: no entran en el WER |
+| G11–G16 | 2 | 0,9 / 0,003 | bloques 1 a 6 otra vez (G14 se grabó al final) |
+| G11–G16 | 3 | **0,8 / 0,008** | bloques 1 a 6, para confirmar con audio nuevo lo elegido mirando la toma 2 |
+
+### 11.2 Qué pasaba con 0,9 s / 0,003
+
+Una simulación del corte RMS (bloques de 40 ms, mismas reglas que `MotorPorFrases`) reproduce exactamente los
+segmentos del panel, y sirvió para probar combinaciones antes de correr el ASR.
+
+- **Las pausas reales entre frases fueron de 0,5 a 1,4 s**, aunque la consigna era «dos segundos». Las de dentro
+  de una frase (comas, respiración) llegan a 0,76 s. Las dos zonas se tocan cerca de 0,8 s.
+- **Con 0,9 s casi ninguna pausa alcanzaba el corte**: 5 de 25 segmentos de G01–G06 y 4 de 22 de la toma 2 sin G14
+  se cerraron por el tope de 10 s (`MAX_FRASE_S`), juntando dos o tres frases y cortando palabras en el borde
+  («…con este | enlace y pásame el pin»). En G14 la frase F17 («pasame el PIN y el CVV») se perdió entera.
+- **0,003 queda pegado al ruido de la pieza** (RMS p10 ≈ 0,001, p25 ≈ 0,002): el final de la respiración cuenta
+  como voz y las pausas parecen más cortas.
+
+### 11.3 Resultados
+
+`medir_voz_real.py --solo-parakeet`: cada corte y umbral sobre el mismo audio, contra el del panel.
+
+**Toma 2** (G11–G16, 30 frases; [corrida](corridas/2026-10-29_voz-real_parakeet-cortes/resumen.md)):
+
+| Corte / umbral | Frases OK | WER | CER | Demora final mediana | Segmentos |
+|---|---|---|---|---|---|
+| 0,9 / 0,003 (panel) | 27/30 | 20,8 % | 13,6 % | 1,16 s | 24 |
+| 0,8 / 0,003 | 27/30 | 21,1 % | 12,8 % | 1,03 s | 27 |
+| 0,5 / 0,003 | 28/30 | 13,0 % | 4,9 % | 0,74 s | 34 |
+| 0,3 / 0,008 | 27/30 | 16,3 % | 6,9 % | 0,47 s | 46 |
+| 0,5 / 0,008 | 28/30 | 13,8 % | 5,5 % | 0,74 s | 36 |
+| 0,6 / 0,008 | 28/30 | 13,8 % | 5,5 % | 0,84 s | 35 |
+| **0,8 / 0,008** | **28/30** | **13,3 %** | **5,5 %** | **1,06 s** | **30** |
+
+**Toma 3** (grabada en vivo con 0,8 / 0,008; [corrida](corridas/2026-10-29_voz-real_parakeet-confirmacion/resumen.md)):
+
+| Corte / umbral | Frases OK | WER | CER | Demora final mediana | Segmentos |
+|---|---|---|---|---|---|
+| 0,9 / 0,003 (panel anterior) | 28/30 | 18,3 % | 10,6 % | 0,95 s | 21 |
+| 0,5 / 0,008 | 27/30 | 16,8 % | 7,5 % | 0,73 s | 34 |
+| **0,8 / 0,008** | **28/30** | **13,0 %** | **5,2 %** | **1,03 s** | **28** |
+
+- **La toma 3 confirma lo que predijo la toma 2 para 0,8 / 0,008** (28/30, WER ~13 %). 0,5 / 0,008, que se veía
+  bien en la toma 1, no se sostuvo: parte frases y empeora.
+- **Lo que mejora es dejar de cerrar por el tope de 10 s**: el WER baja 5–8 puntos y el CER a la mitad.
+- **Ninguna negativa disparó etiquetas** en ninguna variante ni toma.
+- **Regla del §2: no pasa ninguna.** Pide +2 frases y la base ya acierta 27–28 de 30; la mejora es de +1 (toma 2)
+  y +0 (toma 3). La regla se pensó para Zipformer, que partía de mucho más abajo.
+- En vivo la toma 3 dio 28 segmentos para 30 frases (tres pares juntos y una frase partida): con esta voz
+  ningún corte RMS separa siempre bien, porque hay pausas entre frases de 0,80 s justos.
+- Demora y proceso son offline en la M1 (reloj simulado del §8), algunas corridas mientras se grababa.
+
+### 11.4 Extras (toma 1, con 0,9 / 0,003 en el panel)
+
+| Grabación | Etiquetas | Qué mostró |
+|---|---|---|
+| G07 voz baja | 5/5 | con 0,8 / 0,008 salen las 5 frases separadas. No prueba voz baja: el volumen fue casi el normal |
+| G08 serie de fondo | 5/5 en todas las variantes | el ruido de la tele nunca baja de 0,008 (p10 ≈ 0,008): con cualquier corte y umbral fijo las frases se cierran cada 10 s justos y se cortan en medio de una palabra |
+| G09 pausas | 5/5 | cada pausa de ~1 s parte la frase con cualquier corte menor a 1 s; se perdió entero «es para verificar» y «siete» salió «seis» |
+| G10 sin hablar | — | 8 ruidos (respiración, movimiento) pasaron el umbral y fueron al ASR; salió una frase inventada: «Shh. Uh-uh.» |
+| Serie sin hablar | — | transcribió habla real de la serie («una más») y palabras inventadas en inglés y portugués |
+
+G08 y G10 son el caso para comparar RMS contra un VAD de voz (§10.4): un VAD debería ahorrar el ASR sobre ruidos
+(G10), pero la tele también es voz humana, así que no resolvería G08; para eso haría falta otra cosa (un umbral
+que siga el ruido de fondo, sin probar).
+
+### 11.5 Errores que no dependen del corte
+
+Se repiten con cualquier corte y umbral; son del modelo con esta voz.
+
+- **«Compartí pantalla» pierde la primera palabra en las tres tomas** y queda sin `REQUEST_REMOTE_ACCESS`.
+- Términos críticos cambiados: «token» → «toque», «OTP» → «lo Tp», «CVV» → «código de seguridad» o «CBB»,
+  «CBU» → «servicio» o «CvU». Bancos y apps: «Ualá» → «igual», «AnyDesk» → «ni desk» / «Anidesk»,
+  «Brubank» → «Bluebank».
+- Números: Parakeet los escribe en dígitos («842105», «30 lucas»); las reglas siguen viendo el código salvo cuando
+  se pierde la palabra que lo pide. Hubo un monto invertido («mil doscientos» → «doscientos mil») y un dígito
+  cambiado («siete» → «seis»).
+- Una negación inventada: «que sea en efectivo» → «que no sean en efectivo».
+- Jerga: «ñaño» desaparece casi siempre; «guaso» → «juazo» / «aguaso»; «al ñudo» → «al pedo».
+
+### 11.6 Qué sigue
+
+1. Comparar Silero contra RMS con este mismo audio, modelo y preaudio (§10.4), mirando G08, G10, palabras
+   cortadas al inicio y demora.
+2. Si el corte RMS sigue sin margen con esta voz, probar un umbral que siga el ruido de fondo o un corte
+   apoyado en el texto (frase terminada), antes de tocar la llamada en vivo.
+3. Grabar la condición Meet y otra voz (sección 3) y medir en el teléfono al final.

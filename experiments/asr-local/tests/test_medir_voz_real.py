@@ -61,12 +61,19 @@ class TestCSV(unittest.TestCase):
         self.assertEqual([f["id"] for f in filas], ["A", "B"])
         self.assertEqual(filas[1]["canal"], "otra")
 
-    def test_la_plantilla_del_repo_es_valida_y_vacia(self):
-        self.assertEqual(R.leer_csv(R.CSV_POR_DEFECTO), [])
+    def test_el_csv_del_repo_es_valido(self):
+        self.assertIsInstance(R.leer_csv(R.CSV_POR_DEFECTO), list)
+
+    def test_bloque_opcional_de_1_a_6(self):
+        filas = self.leer("id,toma,voz,condicion,bloque\nA,1,luciano,voz-baja,3\nB,1,luciano,microfono,\n")
+        self.assertEqual([f["bloque"] for f in filas], ["3", ""])
+        with self.assertRaises(ValueError) as ctx:
+            self.leer("id,toma,voz,condicion,bloque\nA,1,luciano,microfono,7\n")
+        self.assertIn("bloque", str(ctx.exception))
 
     def test_errores_dicen_la_fila(self):
         for contenido, texto in [
-            ("id,toma,voz,condicion\nA,3,luciano,meet\n", "toma debe ser 1 o 2"),
+            ("id,toma,voz,condicion\nA,4,luciano,meet\n", "toma debe ser 1, 2 o 3"),
             ("id,toma,voz,condicion\nA,1,pepe,meet\n", "voz debe ser"),
             ("id,toma,voz,condicion\nA,1,luciano,zoom\n", "condicion debe ser"),
             ("id,toma,voz,condicion,canal\nA,1,luciano,meet,C\n", "canal debe ser"),
@@ -100,8 +107,24 @@ class TestCargarPruebas(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.dir = Path(self.tmp.name)
 
-    def fila(self, id_, toma="2", voz="luciano", condicion="microfono", canal=""):
-        return {"id": id_, "toma": toma, "voz": voz, "condicion": condicion, "canal": canal, "nota": ""}
+    def fila(self, id_, toma="2", voz="luciano", condicion="microfono", canal="", bloque=""):
+        return {"id": id_, "toma": toma, "voz": voz, "condicion": condicion, "canal": canal, "nota": "", "bloque": bloque}
+
+    def test_sin_referencia_usa_el_bloque_del_csv(self):
+        carpeta = escribir_prueba(self.dir, "p", "")
+        archivo = carpeta / "manifiesto.json"
+        m = json.loads(archivo.read_text())
+        m["referencias_por_segmento"] = {"1": "", "2": ""}  # guardada sin tocar «Lo que dije en realidad»
+        archivo.write_text(json.dumps(m))
+        pruebas, omitidas = R.cargar_pruebas([self.fila("p", bloque="4")], self.dir, GUION)
+        self.assertEqual(omitidas, [])
+        self.assertEqual(pruebas[0]["referencia"], referencia_del_bloque(4))
+        self.assertEqual((pruebas[0]["referencia_de"], pruebas[0]["bloque"]["bloque"]), ("guion", 4))
+
+    def test_la_referencia_escrita_manda_sobre_el_bloque(self):
+        escribir_prueba(self.dir, "p", referencia_del_bloque(1))
+        pruebas, _ = R.cargar_pruebas([self.fila("p", bloque="4")], self.dir, GUION)
+        self.assertEqual((pruebas[0]["referencia_de"], pruebas[0]["bloque"]["bloque"]), ("manifiesto", 1))
 
     def test_toma_solo_las_guardadas_con_referencia(self):
         escribir_prueba(self.dir, "ok", referencia_del_bloque(1))
@@ -168,6 +191,10 @@ class TestSeleccionDeVariantes(unittest.TestCase):
             self.assertIn(esperado, nombres)
         self.assertEqual(len(nombres), len(set(nombres)))
 
+    def test_parakeet_arranca_por_la_del_panel(self):
+        self.assertEqual(V.PARAKEET_PANEL, "parakeet-0.9-rms-0.003")
+        self.assertIn("parakeet-0.5-rms-0.008", V.nombres_de_variantes())
+
 
 class TestVariantes(unittest.TestCase):
     def test_los_candidatos_se_arman_sobre_lo_que_se_quedo(self):
@@ -187,6 +214,12 @@ class TestVariantes(unittest.TestCase):
         motor = V.crear_motor_kroko(V.ConfigKroko(), {})
         self.assertEqual((motor.decoding_method, motor.enable_endpoint, motor.corte_silencio_s, motor.umbral_rms_silencio, motor.hilos),
                          ("greedy_search", True, 0.8, 0.005, 2))
+
+    def test_parakeet_con_el_corte_y_el_umbral_de_la_variante(self):
+        motor = V.crear_motor({"motor": "parakeet", "config": {"corte": 0.5, "umbral_rms": 0.008}})
+        self.assertEqual((motor.nombre, motor.corte_silencio_s, motor.umbral_rms_silencio, motor.hilos, motor.parciales_cada_s),
+                         ("sherpa-parakeet", 0.5, 0.008, 2, 0.5))
+        self.assertEqual(Path(motor.modelo_id), V.DIR_MODELO_PARAKEET)
 
     def test_corte_fijo_apaga_el_endpoint_nativo(self):
         motor = V.crear_motor_kroko(V.ConfigKroko(corte=1.2, umbral_rms=0.01, rule2=0.5), {})
@@ -442,6 +475,20 @@ class TestMedicionDeExtremoAExtremo(unittest.TestCase):
             self.assertIn(texto, resumen)
         for enlace in re.findall(r"\]\(([^)]+)\)", resumen):
             self.assertTrue((salida / enlace.split("#")[0]).exists(), enlace)
+
+    def test_solo_parakeet_no_corre_zipformer_y_compara_con_el_panel(self):
+        errores = {V.PARAKEET_PANEL: {"código": "codego", "la clave": "la clabe", "DNI": "de ni"}}
+        ejecutor = EjecutorFalso(errores)
+        self.medir(ejecutor, "--solo-parakeet")
+        self.assertEqual({s["motor"] for s in ejecutor.specs}, {"parakeet"})
+        self.assertEqual(ejecutor.specs[0]["nombre"], V.PARAKEET_PANEL)
+        self.assertEqual(len(ejecutor.specs), len(V.VARIANTES_PARAKEET))
+        m = self.manifiesto()
+        self.assertEqual(m["decision"]["configuracion_final"], V.PARAKEET_PANEL)
+        self.assertTrue(all(c["contra"] == V.PARAKEET_PANEL for c in m["decision"]["parakeet"]))
+        self.assertTrue(any(c["regla"]["pasa"] for c in m["decision"]["parakeet"]))
+        resumen = (self.dir / "salida" / "resumen.md").read_text(encoding="utf-8")
+        self.assertIn(f"contra `{V.PARAKEET_PANEL}`", resumen)
 
     def test_sin_pruebas_medibles_avisa(self):
         for carpeta in self.llamadas.iterdir():

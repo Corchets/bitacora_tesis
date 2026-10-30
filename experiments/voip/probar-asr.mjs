@@ -100,7 +100,7 @@ export function montarPruebaASR(acciones) {
           </div>
           <div class="ajuste">
             <label for="asr-umbral">Umbral de silencio (volumen)</label>
-            <input id="asr-umbral" type="number" min="0.001" max="1" step="0.001" value="0.003" aria-describedby="asr-umbral-ayuda">
+            <input id="asr-umbral" type="number" min="0.001" max="1" step="0.001" value="0.008" aria-describedby="asr-umbral-ayuda">
             <p id="asr-umbral-ayuda">Por debajo de este volumen el sonido cuenta como silencio. Es la rayita negra del medidor de abajo: si con ruido de fondo la barra de silencio no se llena nunca, subilo (por ejemplo a 0,02); si corta mientras hablás bajito, bajalo.</p>
           </div>
         </div>
@@ -138,7 +138,8 @@ export function montarPruebaASR(acciones) {
   /** @template {HTMLElement} T @param {string} id @returns {T} */
   const el = id => /** @type {T} */ (seccion.querySelector(`#${id}`));
   const modo = /** @type {HTMLInputElement} */ (el('asr-modo'));
-  const corte = crearSelectorCorte('asr-corte');
+  // 0,8 s y 0,008: lo que mejor anduvo con voz real y Parakeet (asr-local/PLAN-VOZ-REAL.md §11).
+  const corte = crearSelectorCorte('asr-corte', 0.8);
   el('asr-corte-lugar').replaceWith(corte.elemento);
   const umbral = /** @type {HTMLInputElement} */ (el('asr-umbral'));
   const iniciar = /** @type {HTMLButtonElement} */ (el('asr-iniciar'));
