@@ -657,6 +657,254 @@ const ESTILOS_PRESENTACION = `
       font-size: 1.25rem;
     }
   }
+  /* Alerta en el teléfono protegido */
+  #presentacion .pres-aviso-tarjeta {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--alerta-fondo, #fef2f2);
+    border: 2px solid var(--alerta-borde, #f87171);
+    border-radius: var(--radio-md, 8px);
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-align: left;
+    margin: 0.2rem 0;
+    box-shadow: 0 4px 12px rgb(185 28 28 / 0.18);
+    animation: pres-aviso-entra 220ms var(--salida);
+  }
+  @keyframes pres-aviso-entra {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  #presentacion .pres-aviso-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  #presentacion .pres-aviso-badge {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radio-sm, 4px);
+    background: var(--alerta, #b91c1c);
+    color: var(--superficie, #ffffff);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  #presentacion .pres-aviso-tiempo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--alerta-tinta, #7f1d1d);
+    font-variant-numeric: tabular-nums;
+  }
+  #presentacion .pres-aviso-motivo {
+    margin: 0.15rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--alerta-tinta, #7f1d1d);
+    line-height: 1.35;
+  }
+  #presentacion .pres-aviso-cita {
+    margin: 0.2rem 0 0;
+    padding: 0.25rem 0.5rem;
+    border-left: 3px solid var(--alerta, #b91c1c);
+    background: rgb(254 226 226 / 0.6);
+    color: var(--alerta-tinta, #7f1d1d);
+    font-size: 0.8125rem;
+    font-style: italic;
+    word-break: break-word;
+    border-radius: 0 var(--radio-sm, 4px) var(--radio-sm, 4px) 0;
+  }
+  #presentacion .pres-aviso-botones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+  }
+  #presentacion .pres-aviso-btn-sonido {
+    background: var(--superficie, #ffffff);
+    color: var(--alerta-tinta, #7f1d1d);
+    border: 1px solid var(--alerta-borde, #f87171);
+    border-radius: var(--radio-sm, 4px);
+    padding: 0.25rem 0.55rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #presentacion .pres-aviso-btn-sonido:hover {
+    background: var(--alerta-claro, #fee2e2);
+  }
+  #presentacion .pres-aviso-btn-cerrar {
+    background: var(--alerta, #b91c1c);
+    color: var(--superficie, #ffffff);
+    border: 1px solid var(--alerta, #b91c1c);
+    border-radius: var(--radio-sm, 4px);
+    padding: 0.25rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #presentacion .pres-aviso-btn-cerrar:hover {
+    background: #991b1b;
+  }
+
+  /* Cajas de evaluación adjuntas a cada frase */
+  #presentacion .pres-eval-caja {
+    margin-top: 0.45rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid var(--linea, #cbd5e1);
+    background: var(--otra-fondo, #f1f5f9);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    box-sizing: border-box;
+    font-size: 0.875rem;
+  }
+  #presentacion .pres-eval-caja.estado-analizando {
+    border-style: dashed;
+    border-color: var(--linea, #cbd5e1);
+    background: var(--otra-fondo, #f1f5f9);
+  }
+  #presentacion .pres-eval-caja.estado-sin-aviso {
+    border-color: var(--ok-borde, #86efac);
+    background: var(--ok-fondo, #f0fdf4);
+  }
+  #presentacion .pres-eval-caja.estado-posible-estafa {
+    border-color: var(--alerta-borde, #f87171);
+    background: var(--alerta-fondo, #fef2f2);
+  }
+  #presentacion .pres-eval-caja.estado-no-evaluado {
+    border-color: var(--linea, #cbd5e1);
+    background: var(--otra-fondo, #f1f5f9);
+  }
+  #presentacion .pres-eval-caja.estado-error {
+    border-color: var(--alerta-borde, #f87171);
+    background: var(--alerta-fondo, #fef2f2);
+  }
+  #presentacion .pres-eval-fila {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.65rem;
+  }
+  #presentacion .pres-eval-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radio-sm, 4px);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  #presentacion .pres-eval-badge.analizando {
+    background: var(--otra-fondo, #f1f5f9);
+    border: 1px solid var(--linea, #cbd5e1);
+    color: var(--tinta-secundaria, #334155);
+  }
+  #presentacion .pres-eval-punto {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--tinta-secundaria, #334155);
+  }
+  #presentacion .pres-eval-badge.sin-aviso {
+    background: var(--ok-fondo, #f0fdf4);
+    border: 1px solid var(--ok, #15803d);
+    color: var(--ok, #15803d);
+  }
+  #presentacion .pres-eval-badge.posible-estafa {
+    background: var(--alerta, #b91c1c);
+    border: 1px solid var(--alerta, #b91c1c);
+    color: var(--superficie, #ffffff);
+  }
+  #presentacion .pres-eval-badge.no-evaluado {
+    background: var(--tinta-secundaria, #334155);
+    border: 1px solid var(--tinta-secundaria, #334155);
+    color: var(--superficie, #ffffff);
+  }
+  #presentacion .pres-eval-badge.error {
+    background: var(--alerta, #b91c1c);
+    border: 1px solid var(--alerta, #b91c1c);
+    color: var(--superficie, #ffffff);
+  }
+  #presentacion .pres-eval-motivo {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--tinta, #0f172a);
+    word-break: break-word;
+  }
+  #presentacion .pres-eval-caja.estado-posible-estafa .pres-eval-motivo {
+    color: var(--alerta-tinta, #7f1d1d);
+    font-weight: 700;
+  }
+  #presentacion .pres-eval-caja.estado-error .pres-eval-motivo {
+    color: var(--alerta-tinta, #7f1d1d);
+  }
+
+  /* Panel desplegable de detalles técnicos */
+  #presentacion .pres-detalles {
+    margin-top: 0.25rem;
+  }
+  #presentacion .pres-detalles-summary {
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--tinta-secundaria, #334155);
+    user-select: none;
+    outline: none;
+  }
+  #presentacion .pres-detalles-summary:hover {
+    color: var(--primary, #1d4ed8);
+  }
+  #presentacion .pres-detalles-summary:focus-visible {
+    outline: 2px solid var(--primary, #1d4ed8);
+    outline-offset: 2px;
+  }
+  #presentacion .pres-detalles-contenido {
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px dashed var(--linea, #cbd5e1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+  }
+  #presentacion .pres-det-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  #presentacion .pres-det-etiqueta {
+    font-weight: 600;
+    color: var(--tinta-secundaria, #334155);
+  }
+  #presentacion .pres-det-valor {
+    font-weight: 700;
+    color: var(--tinta, #0f172a);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+
+  /* Cita culpable y disparo de aviso */
+  #presentacion .pres-cita-culpable {
+    background: #fef08a;
+    color: #713f12;
+    padding: 0 3px;
+    border-radius: 2px;
+    font-weight: 700;
+    border-bottom: 2px solid var(--alerta, #b91c1c);
+  }
+  #presentacion .linea.pres-disparo-aviso {
+    border-color: var(--alerta-borde, #f87171) !important;
+  }
   @media (prefers-reduced-motion: reduce) {
     #presentacion .pres-avatar-anillo,
     #presentacion .pres-onda-barra,
@@ -673,6 +921,9 @@ const ESTILOS_PRESENTACION = `
     #presentacion .pres-btn-volver-vivo {
       transition: none !important;
     }
+    #presentacion .pres-aviso-tarjeta {
+      animation: none !important;
+    }
   }
 `;
 
@@ -685,6 +936,19 @@ function plantillaTelefono(rol) {
   const nombre = NOMBRE[rol];
   const canalTxt = esOtra ? 'Canal izq' : 'Canal der';
   const avatar = esOtra ? AVATAR_OTRA_SVG : AVATAR_PROTEGIDA_SVG;
+  const avisoHtml = esOtra ? '' : `
+          <div id="pres-aviso-protegida" class="pres-aviso-tarjeta" role="alert" hidden>
+            <div class="pres-aviso-cabecera">
+              <span class="pres-aviso-badge">Posible estafa</span>
+              <span class="pres-aviso-tiempo" id="pres-aviso-tiempo"></span>
+            </div>
+            <p class="pres-aviso-motivo" id="pres-aviso-motivo"></p>
+            <blockquote class="pres-aviso-cita" id="pres-aviso-cita" hidden></blockquote>
+            <div class="pres-aviso-botones">
+              <button type="button" class="pres-aviso-btn-sonido" id="pres-aviso-btn-sonido" aria-pressed="true">Sonido: sí</button>
+              <button type="button" class="pres-aviso-btn-cerrar" id="pres-aviso-btn-cerrar">Cerrar aviso</button>
+            </div>
+          </div>`;
   return `
     <article class="pres-telefono ${rol}" id="pres-telefono-${rol}" data-rol="${rol}" data-actividad="silencio" aria-label="Teléfono de ${nombre}">
       <div class="pres-iphone-marco">
@@ -700,6 +964,7 @@ function plantillaTelefono(rol) {
               <span id="pres-voz-txt-${rol}">En silencio</span>
             </span>
           </div>
+${avisoHtml}
           <div class="pres-perfil-area">
             <div class="pres-avatar-anillo" id="pres-anillo-${rol}">
               <div class="pres-avatar-circulo" role="img" aria-label="Avatar ilustrado estilo emoji de ${nombre}">
@@ -795,6 +1060,178 @@ export function montarPresentacion(acciones) {
   const UMBRAL_VOZ = 0.003;
   const FACTORES_ONDA = [0.55, 0.85, 1.0, 0.8, 0.6];
 
+  const avisoProtegida = /** @type {HTMLElement|null} */ (seccion.querySelector('#pres-aviso-protegida'));
+  const avisoTiempo = /** @type {HTMLElement|null} */ (seccion.querySelector('#pres-aviso-tiempo'));
+  const avisoMotivo = /** @type {HTMLElement|null} */ (seccion.querySelector('#pres-aviso-motivo'));
+  const avisoCita = /** @type {HTMLElement|null} */ (seccion.querySelector('#pres-aviso-cita'));
+  const avisoBtnSonido = /** @type {HTMLButtonElement|null} */ (seccion.querySelector('#pres-aviso-btn-sonido'));
+  const avisoBtnCerrar = /** @type {HTMLButtonElement|null} */ (seccion.querySelector('#pres-aviso-btn-cerrar'));
+
+  let detectorActual = null;
+  let tiempoAviso = null;
+  let avisoCerrado = false;
+  let sonidoActivo = acciones.obtenerSonido?.() ?? true;
+
+  /** @type {Map<number, {linea: HTMLElement, n: number, rol: 'otra'|'protegida', evaluado: boolean, texto: string}>} */
+  const segmentosInfo = new Map();
+  /** @type {number[]} */
+  const ordenSegmentos = [];
+
+  function actualizarBotonSonido() {
+    if (!avisoBtnSonido) return;
+    const txt = sonidoActivo ? 'Sonido: sí' : 'Sonido: no';
+    avisoBtnSonido.textContent = txt;
+    avisoBtnSonido.setAttribute('aria-pressed', String(sonidoActivo));
+    avisoBtnSonido.classList.toggle('silenciado', !sonidoActivo);
+  }
+  actualizarBotonSonido();
+
+  if (avisoBtnSonido) {
+    avisoBtnSonido.onclick = () => {
+      sonidoActivo = !sonidoActivo;
+      actualizarBotonSonido();
+      acciones.fijarSonido?.(sonidoActivo);
+    };
+  }
+
+  if (avisoBtnCerrar) {
+    avisoBtnCerrar.onclick = () => {
+      avisoCerrado = true;
+      if (avisoProtegida) avisoProtegida.hidden = true;
+      acciones.detenerTono?.();
+      acciones.cerrarAviso?.();
+    };
+  }
+
+  /** @param {string} texto @returns {string} */
+  function escapar(texto) {
+    return String(texto ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  /** @param {number|null|undefined} riesgo @returns {string} */
+  function obtenerTextoPuntuacion(riesgo) {
+    if (riesgo == null || !Number.isFinite(riesgo)) {
+      return 'No entregada por el detector';
+    }
+    const pct = Math.round(riesgo * 100);
+    return `${pct}% (salida directa del detector · puntuación no calibrada)`;
+  }
+
+  /** @param {any} det @returns {string} */
+  function obtenerNombreDetector(det) {
+    if (!det) return 'Detector local';
+    if (det.tipo === 'slm') {
+      return `SLM (${det.modelo || 'local'})`;
+    }
+    if (det.tipo === 'reglas') {
+      return 'Reglas';
+    }
+    return det.tipo || 'Detector local';
+  }
+
+  /**
+   * Resalta la evidencia culpable en la frase evaluada si existe y se localiza en su texto.
+   * Si falta la evidencia o no se encuentra en el texto de la frase, no inventa ni atribuye nada.
+   * @param {HTMLElement} linea
+   * @param {string} evidencia
+   * @param {string} textoOriginal
+   * @returns {boolean} True si la cita se localizó y resaltó en la frase.
+   */
+  function resaltarEvidenciaEnFrase(linea, evidencia, textoOriginal) {
+    const citaLimpia = (evidencia || '').replace(/^[.\s,;:]+/, '').trim();
+    if (!citaLimpia) return false;
+    const textoEl = /** @type {HTMLElement|null} */ (linea.querySelector('.texto'));
+    if (!textoEl) return false;
+    const texto = textoOriginal || textoEl.textContent || '';
+    const idx = texto.toLowerCase().indexOf(citaLimpia.toLowerCase());
+    if (idx < 0) return false;
+    const antes = texto.slice(0, idx);
+    const medio = texto.slice(idx, idx + citaLimpia.length);
+    const despues = texto.slice(idx + citaLimpia.length);
+    textoEl.innerHTML = `${escapar(antes)}<mark class="pres-cita-culpable">${escapar(medio)}</mark>${escapar(despues)}`;
+    linea.classList.add('pres-disparo-aviso');
+    return true;
+  }
+
+  /**
+   * @param {HTMLElement} linea
+   * @param {{estado: 'analizando'|'sin-aviso'|'posible-estafa'|'no-evaluado'|'error', badge: string, motivo?: string, m?: any, detector?: any}} config
+   */
+  function actualizarEvalCaja(linea, { estado, badge, motivo = '', m = null, detector = null }) {
+    let caja = /** @type {HTMLElement|null} */ (linea.querySelector('.pres-eval-caja'));
+    if (!caja) {
+      caja = document.createElement('div');
+      linea.appendChild(caja);
+    }
+    caja.className = `pres-eval-caja estado-${estado}`;
+    caja.dataset.estado = estado;
+
+    const detInfo = detector || detectorActual;
+    const detectorNombre = obtenerNombreDetector(detInfo);
+    const demoraTxt = (m && m.ms_detector != null) ? `${m.ms_detector.toFixed(0)} ms` : '—';
+    const puntuacionTxt = obtenerTextoPuntuacion(m?.riesgo);
+
+    const motivoHtml = motivo ? `<span class="pres-eval-motivo">${escapar(motivo)}</span>` : '';
+    let badgeHtml = '';
+    if (estado === 'analizando') {
+      badgeHtml = `<span class="pres-eval-badge analizando"><span class="pres-eval-punto" aria-hidden="true"></span>${escapar(badge)}</span>`;
+    } else if (estado === 'sin-aviso') {
+      badgeHtml = `<span class="pres-eval-badge sin-aviso">${escapar(badge)}</span>`;
+    } else if (estado === 'posible-estafa') {
+      badgeHtml = `<span class="pres-eval-badge posible-estafa">${escapar(badge)}</span>`;
+    } else if (estado === 'no-evaluado') {
+      badgeHtml = `<span class="pres-eval-badge no-evaluado">${escapar(badge)}</span>`;
+    } else if (estado === 'error') {
+      badgeHtml = `<span class="pres-eval-badge error">${escapar(badge)}</span>`;
+    }
+
+    let detallesHtml = '';
+    if (estado === 'sin-aviso' || estado === 'posible-estafa' || estado === 'error') {
+      detallesHtml = `
+        <details class="pres-detalles">
+          <summary class="pres-detalles-summary">Detalles técnicos</summary>
+          <div class="pres-detalles-contenido">
+            <div class="pres-det-fila">
+              <span class="pres-det-etiqueta">Detector:</span>
+              <span class="pres-det-valor">${escapar(detectorNombre)}</span>
+            </div>
+            <div class="pres-det-fila">
+              <span class="pres-det-etiqueta">Demora de cómputo:</span>
+              <span class="pres-det-valor">${escapar(demoraTxt)}</span>
+            </div>
+            <div class="pres-det-fila">
+              <span class="pres-det-etiqueta">Puntuación del detector:</span>
+              <span class="pres-det-valor">${escapar(puntuacionTxt)}</span>
+            </div>
+            ${m?.error ? `
+            <div class="pres-det-fila">
+              <span class="pres-det-etiqueta">Diagnóstico:</span>
+              <span class="pres-det-valor">${escapar(m.error)}</span>
+            </div>` : ''}
+            ${m?.saltadas ? `
+            <div class="pres-det-fila">
+              <span class="pres-det-etiqueta">Frases salteadas:</span>
+              <span class="pres-det-valor">${m.saltadas}</span>
+            </div>` : ''}
+          </div>
+        </details>
+      `;
+    }
+
+    caja.innerHTML = `
+      <div class="pres-eval-fila">
+        ${badgeHtml}
+        ${motivoHtml}
+      </div>
+      ${detallesHtml}
+    `;
+  }
+
   const telefonos = Object.fromEntries(ROLES.map(rol => {
     const ondas = /** @type {HTMLElement[]} */ ([...el(`pres-ondas-${rol}`).querySelectorAll('.pres-onda-barra')]);
     return [rol, {
@@ -826,16 +1263,19 @@ export function montarPresentacion(acciones) {
     return Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches);
   }
 
+  let timerDesplazamiento = null;
+
   function irAlFinal(suave = true) {
     if (!abierta) return;
     desplazandoAutomatico = true;
+    if (timerDesplazamiento) clearTimeout(timerDesplazamiento);
     const reducido = movimientoReducido();
     const behavior = (!suave || reducido) ? 'instant' : 'smooth';
     charla.scrollTo({top: charla.scrollHeight, behavior});
-    setTimeout(() => {
+    timerDesplazamiento = setTimeout(() => {
       desplazandoAutomatico = false;
       ultimoScrollTop = charla.scrollTop;
-    }, 320);
+    }, 150);
   }
 
   function pausarSeguimiento() {
@@ -862,7 +1302,9 @@ export function montarPresentacion(acciones) {
         siguiendoVivo = true;
         btnVolverVivo.hidden = true;
       }
-    } else if (!desplazandoAutomatico && st < ultimoScrollTop - 5 && distAlFondo > 35) {
+    } else if (distAlFondo > 35 && st < ultimoScrollTop - 2) {
+      desplazandoAutomatico = false;
+      if (timerDesplazamiento) clearTimeout(timerDesplazamiento);
       if (siguiendoVivo) {
         pausarSeguimiento();
       }
@@ -945,6 +1387,10 @@ export function montarPresentacion(acciones) {
   /** @param {string} [id] */
   function reiniciar(id = '') {
     frases.clear();
+    segmentosInfo.clear();
+    ordenSegmentos.length = 0;
+    tiempoAviso = null;
+    avisoCerrado = Boolean(acciones.obtenerAvisoCerrado?.());
     charla.replaceChildren();
     siguiendoVivo = true;
     desplazandoAutomatico = false;
@@ -955,6 +1401,16 @@ export function montarPresentacion(acciones) {
     llamadaIdEl.textContent = id;
     errorEl.textContent = '';
     errorEl.hidden = true;
+    if (avisoProtegida) {
+      avisoProtegida.hidden = true;
+      if (avisoMotivo) avisoMotivo.textContent = '';
+      if (avisoCita) {
+        avisoCita.textContent = '';
+        avisoCita.hidden = true;
+      }
+      if (avisoTiempo) avisoTiempo.textContent = '';
+    }
+    actualizarBotonSonido();
     if (!id) {
       enCurso = false;
       finalizada = false;
@@ -1013,6 +1469,7 @@ export function montarPresentacion(acciones) {
           return;
         }
         reiniciar(m.llamada_id || '');
+        if (m.detector) detectorActual = m.detector;
         enCurso = true;
         finalizada = false;
         estadoPill.dataset.estado = 'en-llamada';
@@ -1097,9 +1554,152 @@ export function montarPresentacion(acciones) {
             if (t) t.textContent = tiempo;
             if (!linea.isConnected) insertarEnOrden(linea, m.segmento);
           }
+
+          const info = segmentosInfo.get(m.segmento) || {
+            linea,
+            n: m.n,
+            rol,
+            evaluado: false,
+            texto: m.texto
+          };
+          info.linea = linea;
+          info.n = m.n;
+          info.rol = rol;
+          info.texto = m.texto;
+          segmentosInfo.set(m.segmento, info);
+          if (!ordenSegmentos.includes(m.segmento)) {
+            ordenSegmentos.push(m.segmento);
+          }
+
+          if (tiempoAviso !== null) {
+            info.evaluado = true;
+            actualizarEvalCaja(linea, {
+              estado: 'no-evaluado',
+              badge: 'No evaluado',
+              motivo: 'Detector detenido tras el primer aviso',
+              m: null
+            });
+          } else if (!info.evaluado) {
+            actualizarEvalCaja(linea, {
+              estado: 'analizando',
+              badge: 'Analizando',
+              motivo: '',
+              m: null
+            });
+          }
+
           if (siguiendoVivo) irAlFinal();
           return;
         }
+        return;
+      }
+      if (m.tipo === 'detector') {
+        let segId = null;
+        for (const s of ordenSegmentos) {
+          const inf = segmentosInfo.get(s);
+          if (inf && inf.n <= m.n && !inf.evaluado) {
+            segId = s;
+          }
+        }
+        if (segId === null) {
+          for (const s of ordenSegmentos) {
+            const inf = segmentosInfo.get(s);
+            if (inf && !inf.evaluado) {
+              segId = s;
+              break;
+            }
+          }
+        }
+
+        if (segId !== null && m.saltadas > 0) {
+          const idx = ordenSegmentos.indexOf(segId);
+          let restan = m.saltadas;
+          for (let i = idx - 1; i >= 0 && restan > 0; i--) {
+            const prevId = ordenSegmentos[i];
+            const prevInf = segmentosInfo.get(prevId);
+            if (prevInf && !prevInf.evaluado) {
+              prevInf.evaluado = true;
+              actualizarEvalCaja(prevInf.linea, {
+                estado: 'no-evaluado',
+                badge: 'No evaluado',
+                motivo: 'Salteada por demora del detector',
+                m: null
+              });
+              restan--;
+            }
+          }
+        }
+
+        const inf = segId !== null ? segmentosInfo.get(segId) : null;
+        if (inf) {
+          inf.evaluado = true;
+          if (!m.valida) {
+            actualizarEvalCaja(inf.linea, {
+              estado: 'error',
+              badge: 'Error',
+              motivo: m.error || 'Fallo del detector',
+              m
+            });
+          } else if (m.aviso || m.alerta_sugerida) {
+            actualizarEvalCaja(inf.linea, {
+              estado: 'posible-estafa',
+              badge: 'Posible estafa',
+              motivo: m.motivo || 'Alerta de estafa',
+              m
+            });
+          } else {
+            actualizarEvalCaja(inf.linea, {
+              estado: 'sin-aviso',
+              badge: 'Sin aviso',
+              motivo: m.motivo || 'Sin señales de riesgo',
+              m
+            });
+          }
+        }
+
+        if (m.aviso) {
+          tiempoAviso = m.t_a;
+          if (avisoProtegida) {
+            if (!avisoCerrado) {
+              avisoProtegida.hidden = false;
+            }
+            if (avisoMotivo) {
+              avisoMotivo.textContent = m.motivo || 'Posible estafa detectada';
+            }
+            if (avisoTiempo) {
+              avisoTiempo.textContent = typeof m.t_a === 'number' ? `a los ${m.t_a.toFixed(1)} s` : '';
+            }
+            const citaLimpia = (m.evidencia || '').replace(/^[.\s,;:]+/, '').trim();
+            let resaltada = false;
+            if (citaLimpia && inf) {
+              resaltada = resaltarEvidenciaEnFrase(inf.linea, citaLimpia, inf.texto);
+            }
+            if (avisoCita) {
+              if (resaltada && citaLimpia) {
+                avisoCita.hidden = false;
+                avisoCita.textContent = `«${citaLimpia}»`;
+              } else {
+                avisoCita.hidden = true;
+                avisoCita.textContent = '';
+              }
+            }
+          }
+
+          for (const s of ordenSegmentos) {
+            const otroInf = segmentosInfo.get(s);
+            if (otroInf && !otroInf.evaluado) {
+              otroInf.evaluado = true;
+              actualizarEvalCaja(otroInf.linea, {
+                estado: 'no-evaluado',
+                badge: 'No evaluado',
+                motivo: 'Detector detenido tras el primer aviso',
+                m: null
+              });
+            }
+          }
+        }
+
+        if (siguiendoVivo) irAlFinal();
         return;
       }
       if (m.tipo === 'fin') {
@@ -1109,6 +1709,18 @@ export function montarPresentacion(acciones) {
         estadoPill.dataset.estado = 'finalizado';
         estadoTxt.textContent = 'Análisis finalizado';
         dialogoSub.textContent = 'Análisis finalizado · escena conservada';
+        for (const s of ordenSegmentos) {
+          const inf = segmentosInfo.get(s);
+          if (inf && !inf.evaluado) {
+            inf.evaluado = true;
+            actualizarEvalCaja(inf.linea, {
+              estado: 'no-evaluado',
+              badge: 'No evaluado',
+              motivo: 'Llamada finalizada antes de la evaluación',
+              m: null
+            });
+          }
+        }
         return;
       }
       if (m.tipo === 'desconexion') {
@@ -1118,6 +1730,17 @@ export function montarPresentacion(acciones) {
           estadoTxt.textContent = 'Sin conexión, reintentando…';
         }
       }
+    },
+    cerrarAviso() {
+      avisoCerrado = true;
+      if (avisoProtegida) avisoProtegida.hidden = true;
+    },
+    actualizarSonido(activo) {
+      sonidoActivo = activo;
+      actualizarBotonSonido();
+    },
+    fijarDetector(info) {
+      detectorActual = info;
     }
   };
 }

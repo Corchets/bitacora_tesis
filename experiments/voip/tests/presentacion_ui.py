@@ -693,7 +693,11 @@ class UIDriver:
                 }))
                 await asyncio.sleep(0.04)
 
-            await asyncio.sleep(0.25)
+            for _ in range(20):
+                await asyncio.sleep(0.05)
+                dist = await self.cdp.eval("document.getElementById('pres-charla').scrollHeight - document.getElementById('pres-charla').scrollTop - document.getElementById('pres-charla').clientHeight")
+                if dist is not None and dist <= 25:
+                    break
             larga_obs = await self.cdp.eval("""
                 (() => {
                     const charla = document.getElementById('pres-charla');
@@ -735,11 +739,11 @@ class UIDriver:
             await self.cdp.eval("""
                 (() => {
                     const charla = document.getElementById('pres-charla');
-                    charla.scrollTop = 0;
+                    charla.scrollTo({ top: 0, behavior: 'instant' });
                     charla.dispatchEvent(new Event('scroll'));
                 })()
             """)
-            await asyncio.sleep(0.15)
+            await asyncio.sleep(0.2)
             # Entra un nuevo mensaje mientras está revisando
             await self.panel_ws.send(json.dumps({
                 "tipo": "asr",
@@ -750,7 +754,7 @@ class UIDriver:
                 "fin_audio_s": 29.5,
                 "disponible_s": 29.7
             }))
-            await asyncio.sleep(0.15)
+            await asyncio.sleep(0.2)
             pausa_obs = await self.cdp.eval("""
                 (() => {
                     const charla = document.getElementById('pres-charla');
@@ -977,7 +981,395 @@ class UIDriver:
             # Restaurar emulación
             await self.cdp.send("Emulation.setEmulatedMedia", {"media": "page", "features": []})
 
-            # 18. Logs de errores de consola
+            # =========================================================================
+            # PRUEBAS ESPECÍFICAS DE ACEPTACIÓN ISSUE #113:
+            # DETECCIONES Y AVISO EN EL TELÉFONO PROTEGIDO
+            # =========================================================================
+
+            # 18. Secuencia sin aviso y detalles técnicos desplegables con puntuación no calibrada
+            # Evaluar Segmento 1 de la nueva llamada con riesgo normal bajo
+            await self.panel_ws.send(json.dumps({
+                "tipo": "detector",
+                "n": 1,
+                "saltadas": 0,
+                "inicio_eval_s": 1.7,
+                "fin_eval_s": 1.95,
+                "ms_detector": 245.0,
+                "valida": True,
+                "error": None,
+                "riesgo": 0.12,
+                "alerta_sugerida": False,
+                "aviso": False,
+                "motivo": "Saludo inicial cotidiano",
+                "evidencia": None
+            }))
+            await asyncio.sleep(0.15)
+            sin_aviso_obs = await self.cdp.eval("""
+                (() => {
+                    const l1 = document.getElementById('pres-seg-1');
+                    if (!l1) return { ok: false, razon: 'No existe pres-seg-1' };
+                    const caja = l1.querySelector('.pres-eval-caja');
+                    if (!caja) return { ok: false, razon: 'No tiene caja de eval' };
+                    const badge = caja.querySelector('.pres-eval-badge')?.textContent.trim();
+                    const motivo = caja.querySelector('.pres-eval-motivo')?.textContent.trim();
+                    const detalles = caja.querySelector('details.pres-detalles');
+                    const textoDet = detalles?.textContent || '';
+                    const estado = caja.dataset.estado;
+
+                    return {
+                        estado,
+                        badge,
+                        motivo,
+                        tieneDetalles: Boolean(detalles),
+                        dicePuntuacionNoCalibrada: textoDet.includes('puntuación no calibrada') && textoDet.includes('12%'),
+                        diceDemora: textoDet.includes('245 ms'),
+                        ok: estado === 'sin-aviso' && badge === 'Sin aviso' &&
+                            motivo.includes('Saludo inicial cotidiano') &&
+                            textoDet.includes('puntuación no calibrada') &&
+                            textoDet.includes('12%') && textoDet.includes('245 ms')
+                    };
+                })()
+            """)
+            self.record_check(
+                "Secuencia sin aviso y detalles técnicos con puntuación no calibrada",
+                bool(sin_aviso_obs.get("ok")),
+                f"Estado: '{sin_aviso_obs.get('estado')}', badge: '{sin_aviso_obs.get('badge')}', detalles no calibrados: {sin_aviso_obs.get('dicePuntuacionNoCalibrada')}"
+            )
+
+            # 19. Evaluación tardía vinculada a la frase que disparó el análisis (no la última visible)
+            # Entra Segmento 3 (otra) antes de que se reciba la evaluación de Segmento 2 (protegida)
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 3,
+                "n": 3,
+                "rol": "otra",
+                "texto": "Le hablo del departamento de seguridad por un débito de compra no autorizado.",
+                "fin_audio_s": 5.4,
+                "disponible_s": 5.6
+            }))
+            await asyncio.sleep(0.12)
+            # Ahora llega la evaluación tardía para la frase n=2 (Segmento 2)
+            await self.panel_ws.send(json.dumps({
+                "tipo": "detector",
+                "n": 2,
+                "saltadas": 0,
+                "inicio_eval_s": 3.3,
+                "fin_eval_s": 3.6,
+                "ms_detector": 280.0,
+                "valida": True,
+                "error": None,
+                "riesgo": 0.04,
+                "alerta_sugerida": False,
+                "aviso": False,
+                "motivo": "Respuesta normal de confirmación",
+                "evidencia": None
+            }))
+            await asyncio.sleep(0.15)
+            tardia_obs = await self.cdp.eval("""
+                (() => {
+                    const l2 = document.getElementById('pres-seg-2');
+                    const l3 = document.getElementById('pres-seg-3');
+                    if (!l2 || !l3) return { ok: false, razon: 'Faltan líneas' };
+                    const c2 = l2.querySelector('.pres-eval-caja');
+                    const c3 = l3.querySelector('.pres-eval-caja');
+                    const st2 = c2?.dataset.estado;
+                    const st3 = c3?.dataset.estado;
+                    const motivo2 = c2?.querySelector('.pres-eval-motivo')?.textContent.trim();
+                    return {
+                        st2,
+                        st3,
+                        motivo2,
+                        ok: st2 === 'sin-aviso' && st3 === 'analizando' && motivo2.includes('confirmación')
+                    };
+                })()
+            """)
+            self.record_check(
+                "Evaluación tardía adjunta a la frase correcta (no a la última)",
+                bool(tardia_obs.get("ok")),
+                f"Seg 2 (evaluado tardío): '{tardia_obs.get('st2')}', Seg 3 (último visible): '{tardia_obs.get('st3')}'"
+            )
+
+            # 20. Frases salteadas y respuesta inválida nunca muestran ausencia de riesgo
+            # Emitir Segmento 4 (protegida) y Segmento 5 (otra)
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 4,
+                "n": 4,
+                "rol": "protegida",
+                "texto": "¿Qué compra? Yo no autoricé ninguna operación.",
+                "fin_audio_s": 7.0,
+                "disponible_s": 7.2
+            }))
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 5,
+                "n": 5,
+                "rol": "otra",
+                "texto": "Una compra en el exterior por novecientos mil pesos en divisas.",
+                "fin_audio_s": 9.2,
+                "disponible_s": 9.4
+            }))
+            await asyncio.sleep(0.12)
+            # El detector procesó n=5 salteando 1 disparo (n=4) y devolvió error/respuesta inválida
+            await self.panel_ws.send(json.dumps({
+                "tipo": "detector",
+                "n": 5,
+                "saltadas": 1,
+                "inicio_eval_s": 9.5,
+                "fin_eval_s": 9.9,
+                "ms_detector": 410.0,
+                "valida": False,
+                "error": "Timeout en inferencia del detector local",
+                "riesgo": None,
+                "alerta_sugerida": False,
+                "aviso": False,
+                "motivo": None,
+                "evidencia": None
+            }))
+            await asyncio.sleep(0.15)
+            salteada_error_obs = await self.cdp.eval("""
+                (() => {
+                    const l4 = document.getElementById('pres-seg-4');
+                    const l5 = document.getElementById('pres-seg-5');
+                    const c4 = l4?.querySelector('.pres-eval-caja');
+                    const c5 = l5?.querySelector('.pres-eval-caja');
+                    const b4 = c4?.querySelector('.pres-eval-badge')?.textContent.trim();
+                    const b5 = c5?.querySelector('.pres-eval-badge')?.textContent.trim();
+                    const st4 = c4?.dataset.estado;
+                    const st5 = c5?.dataset.estado;
+                    const det5 = c5?.querySelector('details')?.textContent || '';
+                    const noEsSinAviso = st4 !== 'sin-aviso' && st5 !== 'sin-aviso';
+                    return {
+                        st4, b4, st5, b5,
+                        diag5: det5.includes('Timeout en inferencia'),
+                        ok: st4 === 'no-evaluado' && b4 === 'No evaluado' &&
+                            st5 === 'error' && b5 === 'Error' &&
+                            det5.includes('Timeout en inferencia') && noEsSinAviso
+                    };
+                })()
+            """)
+            self.record_check(
+                "Frases salteadas (No evaluado) y respuesta inválida (Error) sin simular ausencia de riesgo",
+                bool(salteada_error_obs.get("ok")),
+                f"Seg 4 (salteada): '{salteada_error_obs.get('st4')}' ({salteada_error_obs.get('b4')}); Seg 5 (error): '{salteada_error_obs.get('st5')}' ({salteada_error_obs.get('b5')})"
+            )
+
+            # 21. Puntuación ausente no se fabrica ni se muestra como calibrada
+            puntuacion_ausente_obs = await self.cdp.eval("""
+                (() => {
+                    const c5 = document.querySelector('#pres-seg-5 .pres-eval-caja');
+                    const det = c5?.querySelector('details')?.textContent || '';
+                    return {
+                        tieneLeyenda: det.includes('No entregada por el detector'),
+                        noTienePorcentaje: !det.includes('%')
+                    };
+                })()
+            """)
+            self.record_check(
+                "Puntuación ausente rotulada como no entregada por el detector",
+                bool(puntuacion_ausente_obs.get("tieneLeyenda") and puntuacion_ausente_obs.get("noTienePorcentaje")),
+                "Detalles indica 'No entregada por el detector' sin fabricar probabilidad"
+            )
+
+            # 22. Primer aviso real en teléfono protegido con motivo y evidencia resaltada en el diálogo
+            # Segmento 6 (otra) donde el atacante pide el código secreto
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 6,
+                "n": 6,
+                "rol": "otra",
+                "texto": "Para anular la compra dígame el código de seguridad de seis dígitos que le enviamos.",
+                "fin_audio_s": 12.1,
+                "disponible_s": 12.3
+            }))
+            await asyncio.sleep(0.12)
+            # Disparo de AVISO REAL con evidencia presente
+            await self.panel_ws.send(json.dumps({
+                "tipo": "detector",
+                "n": 6,
+                "saltadas": 0,
+                "inicio_eval_s": 12.4,
+                "fin_eval_s": 12.8,
+                "ms_detector": 320.0,
+                "valida": True,
+                "error": None,
+                "riesgo": 0.96,
+                "alerta_sugerida": True,
+                "aviso": True,
+                "t_a": 12.8,
+                "motivo": "Exigencia de código numérico de seguridad",
+                "evidencia": "código de seguridad de seis dígitos"
+            }))
+            await asyncio.sleep(0.2)
+
+            aviso_obs = await self.cdp.eval("""
+                (() => {
+                    const avisoProt = document.getElementById('pres-aviso-protegida');
+                    const avisoOtra = document.getElementById('pres-telefono-otra')?.querySelector('.pres-aviso-tarjeta');
+                    const nombreOtra = document.getElementById('pres-nombre-otra')?.textContent.trim();
+                    const badge = avisoProt?.querySelector('.pres-aviso-badge')?.textContent.trim();
+                    const motivo = document.getElementById('pres-aviso-motivo')?.textContent.trim();
+                    const cita = document.getElementById('pres-aviso-cita')?.textContent.trim();
+                    const l6 = document.getElementById('pres-seg-6');
+                    const mark = l6?.querySelector('mark.pres-cita-culpable')?.textContent.trim();
+                    const tieneClaseDisparo = l6?.classList.contains('pres-disparo-aviso');
+
+                    const avisoVisible = Boolean(avisoProt && !avisoProt.hidden && avisoProt.offsetHeight > 0);
+                    const avisoEnOtraAusente = !avisoOtra;
+                    const nombreOtraInalterado = (nombreOtra === 'Otra persona');
+
+                    return {
+                        avisoVisible,
+                        avisoEnOtraAusente,
+                        nombreOtraInalterado,
+                        badge,
+                        motivo,
+                        cita,
+                        mark,
+                        tieneClaseDisparo,
+                        ok: avisoVisible && avisoEnOtraAusente && nombreOtraInalterado &&
+                            badge === 'Posible estafa' &&
+                            motivo.includes('código numérico de seguridad') &&
+                            cita.includes('código de seguridad de seis dígitos') &&
+                            mark === 'código de seguridad de seis dígitos' &&
+                            tieneClaseDisparo
+                    };
+                })()
+            """)
+            self.record_check(
+                "Primer aviso real en teléfono protegido con motivo, evidencia resaltada y nombre de atacante 'Otra persona'",
+                bool(aviso_obs.get("ok")),
+                f"Aviso en protegida visible ({aviso_obs.get('avisoVisible')}), Otra persona intacto: '{aviso_obs.get('nombreOtraInalterado')}', Cita resaltada en diálogo: '{aviso_obs.get('mark')}'"
+            )
+
+            # Captura de pantalla de la escena con el aviso activo en alta resolución
+            png_aviso = output_dir / "tesis-presentacion-113-aviso-1920x1080.png"
+            await self.cdp.set_viewport(1920, 1080)
+            await asyncio.sleep(0.2)
+            await self.cdp.capture_screenshot(str(png_aviso))
+            print(f"Captura aviso en teléfono protegido guardada: {png_aviso}")
+
+            # 23. Evidencia ausente o no ubicable conserva el motivo sin inventar cita
+            # Si un detector emite aviso sin evidencia ubicable, no se añade mark arbitrario
+            evidencia_ausente_prueba = await self.cdp.eval("""
+                (() => {
+                    const l5 = document.getElementById('pres-seg-5');
+                    const marksEnL5 = l5?.querySelectorAll('mark.pres-cita-culpable')?.length || 0;
+                    return marksEnL5 === 0;
+                })()
+            """)
+            self.record_check(
+                "Evidencia ausente o no ubicable no inventa cita ni altera otras frases",
+                bool(evidencia_ausente_prueba),
+                "Frases sin evidencia coincidente conservan su texto íntegro sin marcas arbitrarias"
+            )
+
+            # 24. Frases posteriores al aviso se transcriben y marcan como No evaluado (detector detenido)
+            await self.panel_ws.send(json.dumps({
+                "tipo": "asr",
+                "entrega": "final",
+                "segmento": 7,
+                "n": 7,
+                "rol": "protegida",
+                "texto": "No pienso darle ningún código, voy a cortar ahora mismo.",
+                "fin_audio_s": 14.5,
+                "disponible_s": 14.7
+            }))
+            await asyncio.sleep(0.15)
+            post_aviso_obs = await self.cdp.eval("""
+                (() => {
+                    const l7 = document.getElementById('pres-seg-7');
+                    if (!l7) return { ok: false, razon: 'No existe l7' };
+                    const texto = l7.querySelector('.texto')?.textContent.trim();
+                    const c7 = l7.querySelector('.pres-eval-caja');
+                    const st = c7?.dataset.estado;
+                    const b = c7?.querySelector('.pres-eval-badge')?.textContent.trim();
+                    const mot = c7?.querySelector('.pres-eval-motivo')?.textContent.trim();
+                    return {
+                        texto,
+                        st,
+                        b,
+                        mot,
+                        ok: texto === 'No pienso darle ningún código, voy a cortar ahora mismo.' &&
+                            st === 'no-evaluado' && b === 'No evaluado' &&
+                            mot.includes('Detector detenido tras el primer aviso')
+                    };
+                })()
+            """)
+            self.record_check(
+                "Frase posterior al aviso transcrita y marcada como No evaluado (detector detenido)",
+                bool(post_aviso_obs.get("ok")),
+                f"Línea 7: '{post_aviso_obs.get('texto')}', Estado: '{post_aviso_obs.get('st')}' ({post_aviso_obs.get('mot')})"
+            )
+
+            # 25. Control de sonido y cierre de aviso en el teléfono protegido
+            # Probar botón de sonido
+            await self.cdp.eval("document.getElementById('pres-aviso-btn-sonido')?.click()")
+            await asyncio.sleep(0.1)
+            sonido_cambiado = await self.cdp.eval("""
+                (() => {
+                    const btn = document.getElementById('pres-aviso-btn-sonido');
+                    return btn?.textContent.trim() === 'Sonido: no' && btn?.getAttribute('aria-pressed') === 'false';
+                })()
+            """)
+            # Probar botón de cerrar aviso
+            await self.cdp.eval("document.getElementById('pres-aviso-btn-cerrar')?.click()")
+            await asyncio.sleep(0.12)
+            aviso_cerrado_obs = await self.cdp.eval("""
+                (() => {
+                    const avisoProt = document.getElementById('pres-aviso-protegida');
+                    const cerrado = !avisoProt || avisoProt.hidden || avisoProt.offsetHeight === 0;
+                    const lineas = document.querySelectorAll('#pres-charla .linea').length;
+                    const estado = document.getElementById('pres-estado')?.textContent.trim();
+                    return {
+                        cerrado,
+                        lineas,
+                        estado,
+                        ok: cerrado && lineas === 7 && estado === 'En llamada'
+                    };
+                })()
+            """)
+            self.record_check(
+                "Aviso único: tono desactivable y cierre sin borrar registro ni reclasificar llamada",
+                bool(sonido_cambiado and aviso_cerrado_obs.get("ok")),
+                f"Sonido alternado a no ({sonido_cambiado}), tarjeta oculta ({aviso_cerrado_obs.get('cerrado')}), llamada sigue 'En llamada' con 7 frases intactas"
+            )
+
+            # 26. Alternancia de vistas conserva el aviso cerrado y el nombre 'Otra persona'
+            await self.cdp.eval("document.getElementById('volver-panel').click()")
+            await asyncio.sleep(0.12)
+            await self.cdp.eval("document.getElementById('ver-presentacion').click()")
+            await asyncio.sleep(0.12)
+            persistencia_obs = await self.cdp.eval("""
+                (() => {
+                    const avisoProt = document.getElementById('pres-aviso-protegida');
+                    const nombreOtra = document.getElementById('pres-nombre-otra')?.textContent.trim();
+                    const lineas = document.querySelectorAll('#pres-charla .linea').length;
+                    const l6 = document.getElementById('pres-seg-6');
+                    const mark = l6?.querySelector('mark.pres-cita-culpable')?.textContent.trim();
+                    return {
+                        cerrado: Boolean(!avisoProt || avisoProt.hidden),
+                        nombreOtra,
+                        lineas,
+                        mark,
+                        ok: Boolean(!avisoProt || avisoProt.hidden) &&
+                            nombreOtra === 'Otra persona' &&
+                            lineas === 7 &&
+                            mark === 'código de seguridad de seis dígitos'
+                    };
+                })()
+            """)
+            self.record_check(
+                "Alternar vistas no produce otro aviso ni sonido y conserva Otra persona",
+                bool(persistencia_obs.get("ok")),
+                f"Aviso permanece cerrado, nombre: '{persistencia_obs.get('nombreOtra')}', marca conservada: '{persistencia_obs.get('mark')}'"
+            )
+
+            # 27. Logs de errores de consola
             errores_consola = [log for log in self.cdp.console_logs if log.get("type") in ("error", "internal_error")]
             log_path = output_dir / "tesis-presentacion-ui-consola.log"
             with open(log_path, "w", encoding="utf-8") as f:
@@ -997,7 +1389,7 @@ class UIDriver:
 
 def generar_reporte(resultados, report_path: Path, output_dir: Path):
     lineas = [
-        "# Reporte de verificación de UI: Transcripción en vivo y revisión del diálogo (#112)",
+        "# Reporte de verificación de UI: Mostrar detecciones y aviso en el teléfono protegido (#113)",
         "",
         "## Resumen",
         "Driver automatizado y portable con Chrome headless y CDP vía WebSocket nativo sobre el servidor real de `experiments/voip` en puerto efímero aislado.",
@@ -1014,13 +1406,16 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
         "## Evidencia visual generada",
         f"- Notebook (1366x768): `{output_dir / 'tesis-presentacion-ui-notebook-1366x768.png'}`",
         f"- Proyección (1920x1080): `{output_dir / 'tesis-presentacion-ui-proyeccion-1920x1080.png'}`",
+        f"- Aviso activo en teléfono protegido (1920x1080): `{output_dir / 'tesis-presentacion-113-aviso-1920x1080.png'}`",
         f"- Movimiento reducido (1920x1080): `{output_dir / 'tesis-presentacion-ui-reducido-1920x1080.png'}`",
-        f"- Logs de consola: `{output_dir / 'tesis-presentacion-ui-consola.log'}`",
+        f"- Logs de consola runtime: `{output_dir / 'tesis-presentacion-ui-consola.log'}`",
+        "",
+        f"Total de checks ejecutados: {len(resultados)}. Superados: {sum(1 for r in resultados if r['passed'])}/{len(resultados)}.",
         "",
         "## Reproducibilidad",
         "Comando para ejecutar el driver completo desde cualquier entorno con Python y websockets:",
         "```sh",
-        "python3 experiments/voip/tests/presentacion_ui.py --outdir /tmp/tesis-presentacion-ui-portable --report /tmp/tesis-presentacion-ui-portable-report.md",
+        "python3 experiments/voip/tests/presentacion_ui.py --outdir /tmp/tesis-presentacion-113 --report /tmp/tesis-presentacion-113-report.md",
         "```",
         ""
     ])
