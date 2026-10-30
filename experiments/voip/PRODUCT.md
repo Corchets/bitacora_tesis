@@ -37,6 +37,19 @@ Demo prevista para el 2026-10-28. Fuentes existentes: ejemplos SC-WA-CODE-01, SC
 
 Pantalla proyectada en aula: conversación y tarjetas con tipografía grande y alto contraste. Los proyectores lavan colores: decisiones y estados deben tener texto y forma, además del color. Controles operables con teclado y foco visible; respeta `prefers-reduced-motion`.
 
+## Vista de presentación — requisitos acordados (2026-10-29)
+
+En definición mediante `/grill-with-docs` para [#110](https://github.com/Corchets/bitacora_tesis/issues/110); todavía sin implementar. Acuerdos confirmados por Luciano:
+
+- Sumar una vista con dos siluetas de iPhone y conservar el panel actual, la prueba de ASR, el Historial y la vista de la persona protegida.
+- Al iniciar el análisis desde los controles actuales, entrar automáticamente a Presentación. Permitir volver al panel durante la misma llamada sin reiniciar captura, transcripción ni detector.
+- El diálogo grande ocupa el centro; los teléfonos indican quién habla. El resultado de cada análisis acompaña a la frase correspondiente y las métricas detalladas quedan en un panel desplegable.
+- Los teléfonos representan la conversación y la actividad de la captura actual. La llamada se abre en Meet o WhatsApp; iniciar o terminar el análisis no marca, atiende ni cuelga la llamada externa.
+- Usar los eventos reales disponibles, incluidos estados como «Esperando audio» y «Analizando». Esta vista no elige modelos ni agrega telefonía propia.
+- El video de respaldo con ejemplo hardcodeado y voces sincronizadas se prepara al final, después de la integración; continúa pendiente en [#53](https://github.com/Corchets/bitacora_tesis/issues/53).
+
+Pendientes del grill: contenido de las pantallas de los teléfonos y ubicación del aviso; seguimiento del diálogo y correcciones del ASR; cierre de la escena, errores y dirección visual. El diseño exacto del aviso del sistema final sigue pendiente en [D10](../../docs/gestion/MAPA-DECISIONES.md#d10--congelar-estructura-de-entrega-y-defensa).
+
 ## Brand Commitments
 
 Español de Argentina, voseo. Etiquetas técnicas en inglés cuando corresponda.
