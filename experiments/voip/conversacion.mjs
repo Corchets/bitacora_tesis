@@ -101,6 +101,10 @@ const ESTILOS_PRESENTACION = `
     height: 100vh;
     overflow: hidden;
   }
+  /* Las reglas con display propio no deben pisar el atributo hidden. */
+  #presentacion [hidden] {
+    display: none !important;
+  }
   body.presentacion #presentacion {
     display: flex;
     flex-direction: column;

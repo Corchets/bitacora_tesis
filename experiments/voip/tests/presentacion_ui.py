@@ -790,7 +790,7 @@ class UIDriver:
                     const charla = document.getElementById('pres-charla');
                     const btn = document.getElementById('pres-volver-vivo');
                     const estado = document.getElementById('pres-estado')?.textContent.trim();
-                    const btnOculto = !btn || btn.hidden || btn.offsetHeight === 0;
+                    const btnOculto = !btn || btn.offsetHeight === 0;
                     const distAlFondo = charla.scrollHeight - charla.scrollTop - charla.clientHeight;
                     const enElFondo = distAlFondo <= 25;
                     const llamadaSigue = estado === 'En llamada';
@@ -914,7 +914,7 @@ class UIDriver:
                         lineas,
                         estado,
                         llamadaId,
-                        btnVolverVivoOculto: !btnVolverVivo || btnVolverVivo.hidden,
+                        btnVolverVivoOculto: !btnVolverVivo || btnVolverVivo.offsetHeight === 0,
                         ok: lineas === 0 && estado === 'En llamada' && llamadaId === 'llamada-segunda-limpia'
                     };
                 })()
@@ -1015,15 +1015,18 @@ class UIDriver:
                     const detalles = caja.querySelector('details.pres-detalles');
                     const textoDet = detalles?.textContent || '';
                     const estado = caja.dataset.estado;
+                    const tarjeta = document.getElementById('pres-aviso-protegida');
+                    const avisoNoVisible = !tarjeta || tarjeta.offsetHeight === 0;
 
                     return {
+                        avisoNoVisible,
                         estado,
                         badge,
                         motivo,
                         tieneDetalles: Boolean(detalles),
                         dicePuntuacionNoCalibrada: textoDet.includes('puntuación no calibrada') && textoDet.includes('12%'),
                         diceDemora: textoDet.includes('245 ms'),
-                        ok: estado === 'sin-aviso' && badge === 'Sin aviso' &&
+                        ok: avisoNoVisible && estado === 'sin-aviso' && badge === 'Sin aviso' &&
                             motivo.includes('Saludo inicial cotidiano') &&
                             textoDet.includes('puntuación no calibrada') &&
                             textoDet.includes('12%') && textoDet.includes('245 ms')
@@ -1033,7 +1036,7 @@ class UIDriver:
             self.record_check(
                 "Secuencia sin aviso y detalles técnicos con puntuación no calibrada",
                 bool(sin_aviso_obs.get("ok")),
-                f"Estado: '{sin_aviso_obs.get('estado')}', badge: '{sin_aviso_obs.get('badge')}', detalles no calibrados: {sin_aviso_obs.get('dicePuntuacionNoCalibrada')}"
+                f"Estado: '{sin_aviso_obs.get('estado')}', badge: '{sin_aviso_obs.get('badge')}', detalles no calibrados: {sin_aviso_obs.get('dicePuntuacionNoCalibrada')}, tarjeta de aviso no visible: {sin_aviso_obs.get('avisoNoVisible')}"
             )
 
             # 19. Evaluación tardía vinculada a la frase que disparó el análisis (no la última visible)
@@ -1322,7 +1325,7 @@ class UIDriver:
             aviso_cerrado_obs = await self.cdp.eval("""
                 (() => {
                     const avisoProt = document.getElementById('pres-aviso-protegida');
-                    const cerrado = !avisoProt || avisoProt.hidden || avisoProt.offsetHeight === 0;
+                    const cerrado = !avisoProt || avisoProt.offsetHeight === 0;
                     const lineas = document.querySelectorAll('#pres-charla .linea').length;
                     const estado = document.getElementById('pres-estado')?.textContent.trim();
                     return {
@@ -1352,11 +1355,11 @@ class UIDriver:
                     const l6 = document.getElementById('pres-seg-6');
                     const mark = l6?.querySelector('mark.pres-cita-culpable')?.textContent.trim();
                     return {
-                        cerrado: Boolean(!avisoProt || avisoProt.hidden),
+                        cerrado: !avisoProt || avisoProt.offsetHeight === 0,
                         nombreOtra,
                         lineas,
                         mark,
-                        ok: Boolean(!avisoProt || avisoProt.hidden) &&
+                        ok: (!avisoProt || avisoProt.offsetHeight === 0) &&
                             nombreOtra === 'Otra persona' &&
                             lineas === 7 &&
                             mark === 'código de seguridad de seis dígitos'
