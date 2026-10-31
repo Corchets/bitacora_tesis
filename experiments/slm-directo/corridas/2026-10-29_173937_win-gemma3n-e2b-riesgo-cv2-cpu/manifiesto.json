@@ -1,0 +1,195 @@
+{
+  "inicio": "2026-10-29T17:39:37",
+  "comando": "python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32 --sin-reglas --grupo corpus_v2 --etiqueta win-gemma3n-e2b-riesgo-cv2-cpu",
+  "codigo": {
+    "commit": "241a8077f8c4fbe50487932f06947209be90d71b",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Windows-11-10.0.26300-SP0",
+    "arquitectura": "AMD64",
+    "procesador": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 15.7,
+    "python": "3.13.7"
+  },
+  "politica": "aviso_unico_primer_true_valido",
+  "particion": "desarrollo",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.13",
+    "digests": {
+      "gemma3n:e2b": "dae166dc6a5e93061da12b75b887ce7c72cb91785d547b88c7503047f8411ffd"
+    }
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": {
+      "num_gpu": 0,
+      "num_batch": 32
+    },
+    "umbral_etapa2": 0.6
+  },
+  "prompts": {
+    "riesgo": {
+      "huella": "8ac35ae605230ff1",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nLo que importa es si, en lo dicho hasta ahora, alguien le pide, induce o presiona a la otra persona, en esta llamada, para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nEl pedido cuenta aunque no use esas palabras y aunque la razón que se da parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta). Mirá la conversación entera: varias frases juntas pueden armar un pedido aunque ninguna lo sea sola.\n\nNo es un pedido:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- negar que se las vayan a pedir, o negarse a hacerlas;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general;\n- una palabra suelta como «código», «clave» o «transferencia» en una charla que no tiene nada que ver con una estafa.\n\nRespondé solo con un objeto JSON con un único campo, \"riesgo\": un número entre 0 y 1 con dos decimales, según esta escala:\n- 0.00 a 0.30: charla normal, sin señales.\n- 0.31 a 0.60: hay señales (alguien dice ser de una entidad, apura, habla de un problema con una cuenta o un pago), pero todavía no hay un pedido como los de la lista.\n- 0.61 a 1.00: hay un pedido como los de la lista; cuanto más directo y urgente, más alto.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "riesgo"
+        ]
+      },
+      "etapa2": {
+        "huella": "c6ef89497993360b",
+        "texto": "El riesgo superó el umbral y se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.\n- \"motivo\": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    }
+  },
+  "configs": [
+    {
+      "config": "slm|gemma3n:e2b|riesgo|ab",
+      "detector": "slm",
+      "modelo": "gemma3n:e2b",
+      "prompt": "riesgo",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "CV2-D-L-BANCO-001": "10d9a2f2d202aa47",
+    "CV2-D-L-BANCO-002": "cbf7f731ce8eadbe",
+    "CV2-D-L-BANCO-003": "bb34b2861e1e2b5c",
+    "CV2-D-L-BANCO-004": "b446ab9d0f38d786",
+    "CV2-D-L-BANCO-005": "d141616f2611e708",
+    "CV2-D-L-BANCO-006": "d8ef699ad730f847",
+    "CV2-D-L-BANCO-007": "4f80a484014b9cc9",
+    "CV2-D-L-BANCO-008": "508e71b0026f25bd",
+    "CV2-D-L-BANCO-009": "6d31a56229115099",
+    "CV2-D-L-BANCO-010": "5813083216e0af45",
+    "CV2-D-L-DELIVERY-001": "ee7932e8924132c1",
+    "CV2-D-L-DELIVERY-002": "43df2527ce801bae",
+    "CV2-D-L-DELIVERY-003": "b9bb7755bb97f535",
+    "CV2-D-L-DELIVERY-004": "5c27934d0e3285cc",
+    "CV2-D-L-DELIVERY-005": "1cfa5c7a51545877",
+    "CV2-D-L-ESCUELA-001": "243975f0e5bb4b70",
+    "CV2-D-L-ESCUELA-002": "414451cc7aae4ac6",
+    "CV2-D-L-ESCUELA-003": "705f70f45ff82d3a",
+    "CV2-D-L-ESCUELA-004": "c204363ba63fa120",
+    "CV2-D-L-ESCUELA-005": "e134b147d33dc9bf",
+    "CV2-D-L-FAMILIAR-001": "50a486aa265a3f25",
+    "CV2-D-L-FAMILIAR-002": "41c3bfd2524a7aaa",
+    "CV2-D-L-FAMILIAR-003": "3325c6aeb68b3df0",
+    "CV2-D-L-FAMILIAR-004": "3d2271dc73cb4e1f",
+    "CV2-D-L-FAMILIAR-005": "ec291e098f4c69ed",
+    "CV2-D-L-MEDICO-001": "62b0315ecaae1230",
+    "CV2-D-L-MEDICO-002": "d4771b07cd286c02",
+    "CV2-D-L-MEDICO-003": "0617bc3fbedfb999",
+    "CV2-D-L-MEDICO-004": "e3fb3d8f5abafa71",
+    "CV2-D-L-MEDICO-005": "83839f23d0a976f3",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001": "ba6390bcc9ead422",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-002": "14f3077fc974c80d",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-003": "20f242ca8fc7585f",
+    "CV2-D-L-PREMIO-001": "bbcd27e268ae2d67",
+    "CV2-D-L-PREMIO-002": "25205aaa8ad29b50",
+    "CV2-D-L-PREMIO-003": "3b2542cdfe10691c",
+    "CV2-D-L-SOPORTE-001": "e2a262eb132ba4fc",
+    "CV2-D-L-SOPORTE-002": "71a1cebc18f6401b",
+    "CV2-D-L-SOPORTE-003": "fa5be71994d9dc0f",
+    "CV2-D-L-SOPORTE-004": "72ee0911073e1a32",
+    "CV2-D-L-SOPORTE-005": "4b0b4fa268bd5c21",
+    "CV2-D-L-TRABAJO-001": "fd87646b62bcc89c",
+    "CV2-D-L-TRABAJO-002": "4a1926d2015dc537",
+    "CV2-D-L-TRABAJO-003": "2075eb3051c3f923",
+    "CV2-D-L-TRABAJO-004": "593c4a420c7f3a1f",
+    "CV2-D-L-TRABAJO-005": "d0012c9a2da781c5",
+    "CV2-D-L-WHATSAPP-001": "74b54e1f77b12210",
+    "CV2-D-L-WHATSAPP-002": "91392fc1478d397f",
+    "CV2-D-L-WHATSAPP-003": "2b75f2e0b2f28bc1",
+    "CV2-D-L-WHATSAPP-004": "011b0a62eeb83f32",
+    "CV2-D-L-WHATSAPP-005": "137f4127192c21c9",
+    "CV2-D-V-BANCO-001": "0affbb8ce80874ba",
+    "CV2-D-V-BANCO-002": "408fa71f0df52a5e",
+    "CV2-D-V-BANCO-003": "efc9897cb609ce1e",
+    "CV2-D-V-BANCO-004": "45c6a92386bf8bee",
+    "CV2-D-V-BANCO-005": "ae1b7410257af507",
+    "CV2-D-V-BANCO-006": "18831328dda6ea0c",
+    "CV2-D-V-BANCO-007": "6aa5fdd522005cf0",
+    "CV2-D-V-BANCO-008": "e6c068d275f987b4",
+    "CV2-D-V-BANCO-009": "3a0af933bc2fe01c",
+    "CV2-D-V-BANCO-010": "5af8b1d901066fbc",
+    "CV2-D-V-BANCO-011": "2e1f43d5829645e5",
+    "CV2-D-V-BANCO-012": "8276300a5773280e",
+    "CV2-D-V-FAMILIAR-001": "5c8809013a80e6a0",
+    "CV2-D-V-FAMILIAR-002": "f77138c8fd31590a",
+    "CV2-D-V-FAMILIAR-003": "b9019aa90aea099a",
+    "CV2-D-V-FAMILIAR-004": "32cec8673724c98c",
+    "CV2-D-V-FAMILIAR-005": "9c0a1b2e5fa4b0ac",
+    "CV2-D-V-FAMILIAR-006": "48d8241dba895f20",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001": "c3a8aab157a40397",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-002": "1d5e8849c7256fbd",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-003": "df7cdeed732f44e8",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": "7872ce24b1edf4fe",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-005": "9a5b67084dd19dc9",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-006": "33fc58457273932a",
+    "CV2-D-V-PREMIO-001": "1c361029eae7092b",
+    "CV2-D-V-PREMIO-002": "7a5f5f017a3fff25",
+    "CV2-D-V-PREMIO-003": "981c6c200b193589",
+    "CV2-D-V-PREMIO-004": "efd49ed9cc707e5d",
+    "CV2-D-V-PREMIO-005": "7a0bb0f8c694b0d2",
+    "CV2-D-V-PREMIO-006": "4fdb909d566f2c06",
+    "CV2-D-V-SOPORTE-001": "2615b852062e8ece",
+    "CV2-D-V-SOPORTE-002": "aff317d0f7c4c8e3",
+    "CV2-D-V-SOPORTE-003": "c7c415cd71d46d70",
+    "CV2-D-V-SOPORTE-004": "8b9704896f784852",
+    "CV2-D-V-SOPORTE-005": "3e8ba6494816b8d1",
+    "CV2-D-V-SOPORTE-006": "0b466b6d69a203f6",
+    "CV2-D-V-SOPORTE-007": "ed1fa97cc65853b8",
+    "CV2-D-V-SOPORTE-008": "74ffd452a121b332",
+    "CV2-D-V-WHATSAPP-001": "c252a11566d56851",
+    "CV2-D-V-WHATSAPP-002": "68caf4afa149904d",
+    "CV2-D-V-WHATSAPP-003": "20133a1b5d0f13c0",
+    "CV2-D-V-WHATSAPP-004": "65ab833af1c63bef",
+    "CV2-D-V-WHATSAPP-005": "db93ee2fc909f09a",
+    "CV2-D-V-WHATSAPP-006": "d108b5f5b91893f6",
+    "CV2-D-V-WHATSAPP-007": "468b3fde01b8d84f",
+    "CV2-D-V-WHATSAPP-008": "1731498528fd5715"
+  },
+  "modelos": {
+    "gemma3n:e2b": {
+      "carga_ms": 1679,
+      "error": "",
+      "memoria": {
+        "size_bytes": 6738453461,
+        "size_vram_bytes": 0
+      },
+      "pensar": false
+    }
+  },
+  "interrumpida": true,
+  "fin": "2026-10-29T18:18:31"
+}
