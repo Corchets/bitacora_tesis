@@ -3,7 +3,8 @@
 
 Entrada: las pruebas guardadas por «Probar el ASR» (`guardada: true`) y un CSV que dice de cada una a
 qué toma, voz y condición pertenece (`voz-real/pruebas.csv`). La referencia es «Lo que dije en realidad»;
-si está vacío y el CSV dice qué `bloque` del guion se leyó, es el texto de ese bloque.
+si está vacío y el CSV dice qué `bloque` del guion se leyó, es el texto de ese bloque. Una llamada con un
+diálogo de `voz-real/dialogos.json` lleva una fila por canal y su referencia son las líneas de ese canal.
 Por cada variante (PLAN-VOZ-REAL.md §4) se pasa el audio guardado por el motor y se compara lo que
 sale contra la referencia, frase por frase, con las etiquetas de `slm-directo/reglas.py` como medida
 principal. La regla del plan §2 se aplica en la toma 2, cada paso contra el anterior.
@@ -38,6 +39,7 @@ from typing import Any, Callable
 
 import metricas_voz_real as M
 import variantes_voz_real as V
+from dialogos import DIALOGOS_POR_DEFECTO, Dialogo, cargar_dialogos, referencia_del_canal
 from guion import GUION_POR_DEFECTO, Guion, cargar_guion, identificar_bloque, lineas_de_referencia
 from hotwords import HOTWORDS_POR_DEFECTO
 
@@ -49,10 +51,12 @@ DICCIONARIO_POR_DEFECTO = DIR_VOZ_REAL / "diccionario.csv"
 JERGA_POR_DEFECTO = M.JERGA_POR_DEFECTO
 CORRIDAS = DIR_ASR / "corridas"
 VOCES = ("luciano", "otra")
-CONDICIONES = ("microfono", "meet", "voz-baja", "ruido-tv", "pausas")  # las tres últimas: extras por micrófono
+CONDICIONES = ("microfono", "meet", "voz-baja", "ruido-tv", "pausas",  # las tres últimas: extras por micrófono
+               "dialogo", "dialogo-tv")  # llamadas por Meet con un diálogo de dialogos.json (§12.9)
+CONDICIONES_DIALOGO = ("dialogo", "dialogo-tv")
 CANALES = {"protegida": 0, "otra": 1}  # columna del estereo.wav del panel
 TOMA_DE_DECISION = 2
-TOMAS = ("1", "2", "3", "4")  # 4: mezclas del RMS con Silero (§12.8)
+TOMAS = ("1", "2", "3", "4", "5")  # 4: mezclas del RMS con Silero (§12.8); 5: diálogos (§12.9)
 
 
 # --- Entrada: CSV y pruebas guardadas ------------------------------------------------------------------
@@ -67,8 +71,15 @@ def carpeta_de_pruebas_por_defecto() -> Path:
     return vecina if vecina.is_dir() else aca
 
 
+def es_dialogo(fila: dict[str, str]) -> bool:
+    return fila["condicion"] in CONDICIONES_DIALOGO
+
+
 def leer_csv(ruta: str | Path) -> list[dict[str, str]]:
-    """Filas de `pruebas.csv` validadas. Ignora comentarios («#») y líneas vacías."""
+    """Filas de `pruebas.csv` validadas. Ignora comentarios («#») y líneas vacías.
+
+    Una llamada de diálogo va en dos filas con el mismo id, una por canal: el par (id, canal) no se repite.
+    """
     texto = Path(ruta).read_text(encoding="utf-8")
     lineas = [l for l in texto.splitlines() if l.strip() and not l.lstrip().startswith("#")]
     lector = csv.DictReader(lineas)
@@ -88,13 +99,19 @@ def leer_csv(ruta: str | Path) -> list[dict[str, str]]:
             problemas.append(f"voz debe ser una de {VOCES}: {fila['voz']!r}")
         if fila["condicion"] not in CONDICIONES:
             problemas.append(f"condicion debe ser una de {CONDICIONES}: {fila['condicion']!r}")
-        if fila.get("bloque") and fila["bloque"] not in {"1", "2", "3", "4", "5", "6"}:
-            problemas.append(f"bloque debe ser vacío o de 1 a 6: {fila['bloque']!r}")
         if fila.get("canal") and fila["canal"] not in CANALES:
             problemas.append(f"canal debe ser vacío o uno de {tuple(CANALES)}: {fila['canal']!r}")
-        if fila["id"] in vistos:
-            problemas.append(f"el id {fila['id']!r} está repetido")
-        vistos.add(fila["id"])
+        if fila["condicion"] in CONDICIONES_DIALOGO:
+            if not fila.get("bloque"):
+                problemas.append("un diálogo necesita en bloque el id del diálogo (D1, D2, ...)")
+            if not fila.get("canal"):
+                problemas.append("un diálogo necesita el canal: protegida u otra")
+        elif fila.get("bloque") and fila["bloque"] not in {"1", "2", "3", "4", "5", "6"}:
+            problemas.append(f"bloque debe ser vacío o de 1 a 6: {fila['bloque']!r}")
+        clave = (fila["id"], fila.get("canal", "") if fila["condicion"] in CONDICIONES_DIALOGO else "")
+        if clave in vistos:
+            problemas.append(f"el id {fila['id']!r} está repetido" + (f" en el canal {clave[1]}" if clave[1] else ""))
+        vistos.add(clave)
         if problemas:
             raise ValueError(f"{ruta}: fila {n}: " + "; ".join(problemas))
     return filas
@@ -112,14 +129,48 @@ def elegir_canal(manifiesto: dict[str, Any], canal_csv: str = "") -> tuple[str, 
     return "protegida", 0
 
 
-def cargar_pruebas(filas: list[dict[str, str]], carpeta: str | Path, guion: Guion
-                   ) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
+def cargar_dialogo(fila: dict[str, str], carpeta: str | Path, dialogos: dict[str, Dialogo]
+                   ) -> tuple[dict[str, Any] | None, str]:
+    """(prueba, "") de un canal de una llamada de diálogo, o (None, motivo) si no se puede medir.
+
+    Las llamadas no se «guardan» como las pruebas: alcanza con que exista su estereo.wav. El id interno
+    lleva el canal (`<carpeta>:<canal>`) porque cada canal es una medición aparte.
+    """
+    carpeta_prueba = Path(carpeta) / fila["id"]
+    dialogo = dialogos.get(fila["bloque"])
+    if dialogo is None:
+        return None, f"no hay un diálogo {fila['bloque']!r} en dialogos.json"
+    if not (carpeta_prueba / "manifiesto.json").is_file():
+        return None, "no existe la carpeta o no tiene manifiesto legible"
+    if not (carpeta_prueba / "estereo.wav").is_file():
+        return None, "no tiene estereo.wav"
+    lineas, tipos = referencia_del_canal(dialogo, fila["canal"])
+    return {
+        "id": f"{fila['id']}:{fila['canal']}", "toma": int(fila["toma"]), "voz": fila["voz"],
+        "condicion": fila["condicion"], "grupo": f"{fila['voz']}-{fila['condicion']}", "canal": fila["canal"],
+        "columna": CANALES[fila["canal"]], "wav": str(carpeta_prueba / "estereo.wav"), "referencia": "\n".join(lineas),
+        "lineas": lineas, "tipos": tipos, "bloque": {"bloque": dialogo.id, "exacto": True, "mezcla": False,
+                                                    "reconocidas": len(lineas)},
+        "referencia_de": "dialogo", "nota": fila.get("nota", ""),
+    }, ""
+
+
+def cargar_pruebas(filas: list[dict[str, str]], carpeta: str | Path, guion: Guion,
+                   dialogos: dict[str, Dialogo] | None = None) -> tuple[list[dict[str, Any]], list[dict[str, str]]]:
     """(pruebas medibles, omitidas con el motivo). Se miden solo las guardadas con referencia.
 
     Si «Lo que dije en realidad» está vacío y la fila trae `bloque`, la referencia es ese bloque del guion.
+    Las filas de diálogo se cargan con `cargar_dialogo`.
     """
     pruebas, omitidas = [], []
     for fila in filas:
+        if es_dialogo(fila):
+            prueba, motivo = cargar_dialogo(fila, carpeta, dialogos if dialogos is not None else cargar_dialogos())
+            if prueba is None:
+                omitidas.append({"id": f"{fila['id']}:{fila['canal']}", "motivo": motivo})
+            else:
+                pruebas.append(prueba)
+            continue
         carpeta_prueba = Path(carpeta) / fila["id"]
         try:
             manifiesto = json.loads((carpeta_prueba / "manifiesto.json").read_text(encoding="utf-8"))
@@ -648,7 +699,7 @@ def parsear(argv: list[str] | None) -> argparse.Namespace:
                    help=f"variante de Parakeet contra la que se comparan las demás (defecto: {V.PARAKEET_PANEL}, la del panel; "
                         f"{V.PARAKEET_LABORATORIO} es la de «Probar el ASR»)")
     p.add_argument("--toma-decision", type=int, default=TOMA_DE_DECISION, choices=tuple(map(int, TOMAS)),
-                   help="toma donde se aplica la regla (defecto: 2; 3 = confirmación de lo elegido con la 2; 4 = mezclas con Silero)")
+                   help="toma donde se aplica la regla (defecto: 2; 3 = confirmación de lo elegido con la 2; 4 = mezclas con Silero; 5 = diálogos)")
     p.add_argument("--bloque-ms", type=int, default=V.BLOQUE_MS_POR_DEFECTO, help="tamaño de bloque (defecto: 40, como el panel)")
     p.add_argument("--hilos", type=int, default=V.HILOS_POR_DEFECTO, help="hilos del ASR sherpa (defecto: 2, como el servidor)")
     p.add_argument("--hilos-whisper", type=int, default=4)
@@ -658,6 +709,7 @@ def parsear(argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--jerga", default=str(JERGA_POR_DEFECTO))
     p.add_argument("--diccionario", default=str(DICCIONARIO_POR_DEFECTO))
     p.add_argument("--guion", default=str(GUION_POR_DEFECTO))
+    p.add_argument("--dialogos", default=str(DIALOGOS_POR_DEFECTO), help="diálogos de las llamadas de la toma 5")
     p.add_argument("--salida", default=None, help="carpeta de salida (defecto: corridas/<fecha>_voz-real_<etiqueta>)")
     p.add_argument("--etiqueta", default=None, help="sufijo del nombre de la carpeta de salida")
     p.add_argument("--nota", default=None, help="texto libre para la cabecera del resumen (por ejemplo, si es una corrida de humo)")
@@ -681,7 +733,7 @@ def medir(args: argparse.Namespace, ejecutor: Callable | None = None) -> Path:
     args.pruebas = Path(args.pruebas) if args.pruebas else carpeta_de_pruebas_por_defecto()
     seleccion = seleccion_de_variantes(args.variantes, args.sin_whisper)
     guion = cargar_guion(args.guion)
-    pruebas, omitidas = cargar_pruebas(leer_csv(args.csv), args.pruebas, guion)
+    pruebas, omitidas = cargar_pruebas(leer_csv(args.csv), args.pruebas, guion, cargar_dialogos(args.dialogos))
     for o in omitidas:
         print(f"Se omite {o['id']}: {o['motivo']}", file=sys.stderr)
     if not pruebas:

@@ -27,5 +27,7 @@ Se leyeron solo los `manifiesto.json`: `inicio_panel.fuentes` dice la fuente de 
 - **El desfase entre canales queda en ≤ 0,03 s en las 12**, contra el límite de 0,3 s de #80.
 - En `154150`, `155059` y `160149` los dos canales llegan con ~0,4–0,8 s de atraso de mediana respecto del
   reloj, pero el atraso es igual en los dos, así que no desalinea a las personas entre sí.
-- El manifiesto dice «BlackHole», no qué aplicación sonaba detrás (WhatsApp Desktop o Meet de escritorio);
-  eso sale del informe de Luciano.
+- El manifiesto dice «BlackHole», no qué aplicación sonaba detrás. **Corrección del 2026-10-31:** Luciano informó
+  que BlackHole no funcionó con WhatsApp Desktop; esas 9 llamadas no acreditan WhatsApp. Por decisión de Luciano,
+  WhatsApp Desktop queda fuera por ahora y la demo sigue con Meet por pestaña
+  ([D05](../../../docs/gestion/MAPA-DECISIONES.md#d05--elegir-la-fuente-de-audio-demostrable)).

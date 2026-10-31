@@ -60,8 +60,10 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Demo aprobada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
   el panel captura en la notebook de la persona protegida su micrófono y el canal remoto desde
   Google Meet o WhatsApp Desktop, por canal y en local. Esa es la demo de la defensa, con la
-  llamada de ejemplo en tiempo real como plan B. Faltan los ensayos con dos personas (#80) y en
-  sala (#86).
+  llamada de ejemplo en tiempo real como plan B. El ensayo con dos personas por Meet quedó hecho
+  (#80); falta el de sala (#86).
+- **WhatsApp Desktop fuera por ahora (Luciano, 2026-10-31):** BlackHole no funcionó con WhatsApp
+  Desktop y no hace falta para la demo, que queda con Google Meet por pestaña de Chrome.
 
 Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md):
 
