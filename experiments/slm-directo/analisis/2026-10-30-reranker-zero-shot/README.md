@@ -207,4 +207,21 @@ Mismas 6 frases inventadas (2 con pedido, 4 sin pedido), hipótesis corta, media
 - **`Qwen/Qwen3-Reranker-0.6B`: no evaluado todavía.** La descarga se cortó al 13 % (265 kB/s) y
   transformers no encontró el `.safetensors`. No es un error del código.
 
-Pendiente: correr R1–R4 y pegar acá lo principal de `analisis.md`.
+### 2026-10-31 · R1 parcial con bge-reranker (20 de 77 casos)
+
+Corrida [`2026-10-30_200421_r1-bge`](../../corridas/2026-10-30_200421_r1-bge/manifiesto.json). Revisión
+`953dc6f6`, 568M parámetros, CPU con 4 hilos. Se cortó por un reinicio de la PC (`"fin": null`).
+Quedaron completos 20 casos, **todos legítimos de selección** (19 cotidianas y 1 mención sin
+pedido), con 510 líneas y 0 fallos.
+
+- **Falsas alarmas:** el puntaje máximo de bge en una línea fue 0,025 (`CV2-D-L-TRABAJO-001`), y
+  en 17 de los 20 casos no pasó de 0,01. Con τ ≥ 0,03 no hay ninguna falsa alarma en estos 20;
+  con τ = 0,01, 3/20. No se elige nada todavía: faltan las 29 estafas para saber qué umbral
+  mantiene el recall.
+- **Costo (H8):** p50 de 4,3 s y p95 de 6,2 s por línea con 12 pares. Los picos de 90 a 590 s son
+  la PC suspendida, no del modelo. RSS de 1,7 GB tras cargar. **H8 no se cumple:** como
+  detector de cada línea no sigue el ritmo de una llamada en esta notebook y es más lento que la
+  etapa 1 de riesgo primero (1,9 s). Como verificador que corre solo cuando el SLM sospecha, en
+  1 a 3 líneas por llamada, sigue siendo más rápido que la etapa 2 (6,6 s).
+
+Pendiente: completar los 57 casos que faltan, correr R3 y después correr `analizar.py`.
