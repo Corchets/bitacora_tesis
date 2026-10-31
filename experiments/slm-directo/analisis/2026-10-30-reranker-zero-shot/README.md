@@ -267,6 +267,31 @@ Tablas completas en [`analisis.md`](analisis.md).
 - **H8 refutada:** 4,6 s por línea de mediana en CPU.
 
 **Decisión (regla 4 pre-registrada):** se **descarta la familia cross-encoder / NLI zero-shot**
-como detector, filtro y verificador. Qwen3-Reranker queda sin evaluar por la descarga.
+como detector, filtro y verificador. Qwen3-Reranker queda descartado en el diagnóstico de formato (sección siguiente).
 La arquitectura sigue en el SLM local. Falta elegir sin contaminación la política acumulada de
 riesgo primero, con R3 sobre `seleccion-57`.
+
+### 2026-10-31 · Diagnóstico de formato de Qwen3-Reranker-0.6B · descartado
+
+Mismas 6 frases inventadas. La descarga en Windows necesitó el Modo de desarrollador: sin él, los
+enlaces simbólicos de la caché de Hugging Face fallan con `WinError 1314`.
+
+| Hipótesis | Pedido más bajo | Sin pedido más alto | ¿Separa? |
+|---|---|---|---|
+| corta (con / sin «A:») | 0,01 / 0,02 | 0,55 / 0,14 | no / no |
+| media (con / sin «A:») | 0,05 / 0,03 | 0,65 / 0,20 | no / no |
+| larga v1 (con / sin «A:») | **0,26** / 0,06 | **0,51** / 0,10 | no / no |
+
+- El formato del prompt funciona: el pedido directo («Leeme el código…») da 0,84 y la charla
+  común, 0,00.
+- **Repite la falla de R07:** «Nunca le des a nadie el código que te llega» da 0,51–0,65 con «A:».
+- **No ve el pedido indirecto:** «Pasame ya el número que te mandaron por mensaje» da 0,01–0,26.
+- Se descarta por el criterio acordado antes de correr: si en el diagnóstico los pedidos no
+  quedan por encima de las frases sin pedido, no se corre R1. Con bge, pasar el diagnóstico
+  tampoco alcanzó en diálogo real.
+
+**Cierre de la familia:** los tres cross-encoder / NLI zero-shot (mDeBERTa-xnli, bge-reranker-v2-m3 y
+Qwen3-Reranker-0.6B) quedan descartados con evidencia. Confunden advertencias con pedidos, o no
+reconocen pedidos indirectos, o las dos cosas. La arquitectura sigue en el SLM local, y R3 elige
+la política acumulada de riesgo primero.
+
