@@ -224,4 +224,49 @@ pedido), con 510 líneas y 0 fallos.
   etapa 1 de riesgo primero (1,9 s). Como verificador que corre solo cuando el SLM sospecha, en
   1 a 3 líneas por llamada, sigue siendo más rápido que la etapa 2 (6,6 s).
 
-Pendiente: completar los 57 casos que faltan, correr R3 y después correr `analizar.py`.
+### 2026-10-31 · R1 completa con bge-reranker (77 casos) · decisión
+
+Corridas `2026-10-30_200421_r1-bge` y `2026-10-31_021253_r1-bge-resto`: 77 casos, 0 fallos.
+Tablas completas en [`analisis.md`](analisis.md).
+
+| Rol | Selección (19 estafas / 38 legítimas) | Informe (10 / 10) |
+|---|---|---|
+| bge solo, elegida EMA 0,5 > 0,02 | 6/19 estafas (32 %) · 4/38 FA | 4/10 · 1/10 |
+| Qwen 2B `tarea` solo (alerta del modelo) | 13/19 (68 %) · 4/38 FA | 8/10 · 1/10 |
+| Qwen 2B `tarea` ∧ bge > 0,02 (verificador) | 5/19 (26 %) · 0/38 FA | 2/10 · 0/10 |
+| bge > 0,02 → Qwen 2B `tarea` (filtro) | — | 2/10 · 0/10 |
+| Qwen 9B `tarea`, 2 seguidas > 0,3 (comparador) | 2/2 (cubre 23 de 57) | **10/10 · 1/10** |
+| Qwen 2B `v2`, media 3 > 0,5 (comparador) | 11/19 · 5/38 FA | **9/10 · 1/10** |
+
+**Por qué falla bge en diálogo real** (máximo por llamada y puntaje en la línea del pedido):
+
+| | Cuartil 1 | Mediana | Cuartil 3 |
+|---|---|---|---|
+| Estafas, máximo de la llamada | 0,005 | 0,009 | 0,041 |
+| Estafas, en la línea `T_R` | 0,002 | 0,003 | 0,014 |
+| Legítimas, máximo de la llamada | 0,002 | 0,005 | 0,012 |
+
+- En la línea del pedido, la mediana es 0,003: no reconoce los pedidos dentro de la ventana de diálogo.
+- Las legítimas con puntaje más alto son justo las difíciles de R07: `TR-06-banco-alerta-legitima`
+  (0,25), `CV2-D-L-WHATSAPP-001` (0,18), `LAB-no-bajes-nada` (0,11) y `TR-03-negacion-y-consejo`
+  (0,11). En diálogo real confunde la advertencia con el pedido, aunque en las frases inventadas
+  sueltas no lo hacía.
+- AUROC por conversación: 0,64 en selección y 0,80 en informe.
+- Cuando hay pedido, identifica **qué tipo** es (18/19 en `T_R` en selección), pero no **si** se pide.
+
+**Hipótesis:**
+
+- **H1 confirmada en datos reales:** mide tema, no intención; sube con las advertencias legítimas.
+- **H2 refutada:** el NLI confundía mención con pedido ya en controles.
+- **H3 sin efecto útil:** acumular no compensa un puntaje que no separa.
+- **H4 refutada:** el veto saca 4 FA y pierde 8 estafas, contra el máximo de 1.
+- **H5 no aplicable**, por la misma razón que H4. R3 no la puede rescatar.
+- **H6 refutada:** el filtro deja pasar muy pocas estafas.
+- **H7 confirmada:** la compuerta de entrenamiento queda cerrada. El AUROC es 0,64 < 0,80, hay a
+  lo sumo 12 pedidos para entrenar y no hay GPU.
+- **H8 refutada:** 4,6 s por línea de mediana en CPU.
+
+**Decisión (regla 4 pre-registrada):** se **descarta la familia cross-encoder / NLI zero-shot**
+como detector, filtro y verificador. Qwen3-Reranker queda sin evaluar por la descarga.
+La arquitectura sigue en el SLM local. Falta elegir sin contaminación la política acumulada de
+riesgo primero, con R3 sobre `seleccion-57`.
