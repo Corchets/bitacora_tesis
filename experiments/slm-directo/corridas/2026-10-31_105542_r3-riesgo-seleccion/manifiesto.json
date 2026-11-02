@@ -1,0 +1,168 @@
+{
+  "inicio": "2026-10-31T10:55:42",
+  "comando": "python correr.py --modelos gemma3n:e2b --prompts riesgo --lista seleccion-57 --solo-cpu --num-batch 32 --sin-reglas --seguir-tras-aviso --etiqueta r3-riesgo-seleccion",
+  "codigo": {
+    "commit": "57e7ca378588e8a30ca88c91834f0e11c7cc187d",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Windows-11-10.0.26300-SP0",
+    "arquitectura": "AMD64",
+    "procesador": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 15.7,
+    "python": "3.13.7"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "filtro_tito": null,
+  "particion": "desarrollo",
+  "lista": "seleccion-57",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.13",
+    "digests": {
+      "gemma3n:e2b": "dae166dc6a5e93061da12b75b887ce7c72cb91785d547b88c7503047f8411ffd"
+    },
+    "arranque_ms": 158,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": {
+      "num_gpu": 0,
+      "num_batch": 32
+    },
+    "umbral_etapa2": 0.6
+  },
+  "prompts": {
+    "riesgo": {
+      "huella": "8ac35ae605230ff1",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nLo que importa es si, en lo dicho hasta ahora, alguien le pide, induce o presiona a la otra persona, en esta llamada, para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nEl pedido cuenta aunque no use esas palabras y aunque la razón que se da parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta). Mirá la conversación entera: varias frases juntas pueden armar un pedido aunque ninguna lo sea sola.\n\nNo es un pedido:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- negar que se las vayan a pedir, o negarse a hacerlas;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general;\n- una palabra suelta como «código», «clave» o «transferencia» en una charla que no tiene nada que ver con una estafa.\n\nRespondé solo con un objeto JSON con un único campo, \"riesgo\": un número entre 0 y 1 con dos decimales, según esta escala:\n- 0.00 a 0.30: charla normal, sin señales.\n- 0.31 a 0.60: hay señales (alguien dice ser de una entidad, apura, habla de un problema con una cuenta o un pago), pero todavía no hay un pedido como los de la lista.\n- 0.61 a 1.00: hay un pedido como los de la lista; cuanto más directo y urgente, más alto.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "riesgo"
+        ]
+      },
+      "etapa2": {
+        "huella": "c6ef89497993360b",
+        "texto": "El riesgo superó el umbral y se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.\n- \"motivo\": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma3n:e2b|riesgo|ab",
+      "detector": "slm",
+      "modelo": "gemma3n:e2b",
+      "prompt": "riesgo",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "CV2-D-L-BANCO-008": "508e71b0026f25bd",
+    "CV2-D-L-DELIVERY-002": "43df2527ce801bae",
+    "CV2-D-L-DELIVERY-003": "b9bb7755bb97f535",
+    "CV2-D-L-DELIVERY-004": "5c27934d0e3285cc",
+    "CV2-D-L-DELIVERY-005": "1cfa5c7a51545877",
+    "CV2-D-L-ESCUELA-002": "414451cc7aae4ac6",
+    "CV2-D-L-ESCUELA-003": "705f70f45ff82d3a",
+    "CV2-D-L-ESCUELA-004": "c204363ba63fa120",
+    "CV2-D-L-ESCUELA-005": "e134b147d33dc9bf",
+    "CV2-D-L-FAMILIAR-002": "41c3bfd2524a7aaa",
+    "CV2-D-L-FAMILIAR-003": "3325c6aeb68b3df0",
+    "CV2-D-L-FAMILIAR-004": "3d2271dc73cb4e1f",
+    "CV2-D-L-FAMILIAR-005": "ec291e098f4c69ed",
+    "CV2-D-L-MEDICO-002": "d4771b07cd286c02",
+    "CV2-D-L-MEDICO-003": "0617bc3fbedfb999",
+    "CV2-D-L-MEDICO-004": "e3fb3d8f5abafa71",
+    "CV2-D-L-MEDICO-005": "83839f23d0a976f3",
+    "CV2-D-L-TRABAJO-001": "fd87646b62bcc89c",
+    "CV2-D-L-TRABAJO-002": "4a1926d2015dc537",
+    "CV2-D-L-TRABAJO-004": "593c4a420c7f3a1f",
+    "CV2-D-L-TRABAJO-005": "d0012c9a2da781c5",
+    "CV2-D-V-BANCO-003": "efc9897cb609ce1e",
+    "CV2-D-V-BANCO-008": "e6c068d275f987b4",
+    "LAB-acceso-remoto": "abbdb60023a5c6e4",
+    "LAB-acceso-remoto-parafrasis": "3c11fa1e1f388c95",
+    "LAB-anses-beneficio": "1dbe40e4c2e4dd59",
+    "LAB-anses-beneficio-parafrasis": "59df1a67abcc885e",
+    "LAB-anses-canal-oficial": "b17f2a7515ced508",
+    "LAB-arca-canal-oficial": "fa29e387532b00e3",
+    "LAB-arca-deuda": "56bf96377060bb30",
+    "LAB-arca-deuda-parafrasis": "f77bf6a51727318e",
+    "LAB-banco-app-parafrasis": "915ce0b33ce32692",
+    "LAB-banco-codigo": "bfaf844390c391ab",
+    "LAB-banco-codigo-parafrasis": "a23180a44841e940",
+    "LAB-banco-gasto-sin-pedido": "710720c289b5b209",
+    "LAB-banco-niega-el-codigo": "5234e0f0954246df",
+    "LAB-banco-numeros-sin-clave": "336741e4a9b81531",
+    "LAB-banco-revisa-app": "a5575307e6144a19",
+    "LAB-digitos-sin-palabra": "eac0d9632aeb9752",
+    "LAB-familiar-llama-vos": "a408533b543156f3",
+    "LAB-familiar-peligro": "feab2aa7b4ec9b95",
+    "LAB-familiar-peligro-parafrasis": "1f68006dfc825131",
+    "LAB-mensajeria-no-pases-nada": "21cbcde552616245",
+    "LAB-no-bajes-nada": "786d070838093669",
+    "LAB-pantalla-sin-programa": "8e2f69c90446ade9",
+    "LAB-portero-codigo-puerta": "1d1a5dc0d307d974",
+    "LAB-whatsapp-codigo": "9c3504a055060d62",
+    "LAB-whatsapp-codigo-parafrasis": "ab663e341dbf9344",
+    "TR-02-codigo-del-candado": "66fff3c538daa3cb",
+    "TR-03-negacion-y-consejo": "035be565ed66795b",
+    "TR-04-pedido-tras-charla-larga": "7b73594c98f6bc57",
+    "TR-05-asado-con-transferencia": "a47dbee0f5a8c5c5",
+    "TR-06-banco-alerta-legitima": "eff36493e443525d",
+    "TR-07-pedido-partido-en-dos-lineas": "ebe24b27f413c658",
+    "TR-08-frase-cortada-candado": "ad03a06952b2db74",
+    "TR-11-familiar-real-pide-plata": "a6e867d07e90d9b2",
+    "TR-13-turno-medico-pide-dni": "5f87eeccc837367c"
+  },
+  "modelos": {
+    "gemma3n:e2b": {
+      "carga_ms": 14408,
+      "calentamiento_ms": 14408,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 6738453461,
+        "size_vram_bytes": 0
+      },
+      "pensar": false,
+      "runtime_total_ns": 14403068900,
+      "runtime_load_ns": 12602520900,
+      "runtime_prompt_eval_ns": 432705000,
+      "runtime_eval_ns": 1345443000
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-10-31T11:32:36"
+}
