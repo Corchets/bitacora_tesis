@@ -48,6 +48,7 @@ import tito_real
 from contexto import Actualizacion, ContextoLlamada
 
 POLITICA = "aviso_unico_primer_true_valido"
+DETECTORES_CON_MODELO = ("slm", "tito-slm")
 
 COLUMNAS_EVENTOS = [
     "llamada_id",
@@ -447,17 +448,17 @@ def guardar_manifiesto(
         },
         "config": {
             "detector": detector_nombre,
-            "modelo": modelo if detector_nombre == "slm" else None,
-            "prompt": prompt if detector_nombre == "slm" else None,
+            "modelo": modelo if detector_nombre in DETECTORES_CON_MODELO else None,
+            "prompt": prompt if detector_nombre in DETECTORES_CON_MODELO else None,
             "hablantes": hablantes,
             "disparo": disparo,
             "politica": POLITICA,
-            "seed": seed if detector_nombre == "slm" else "no-aplica",
+            "seed": seed if detector_nombre in DETECTORES_CON_MODELO else "no-aplica",
         },
         "codigo": info_codigo(),
         "hardware": info_maquina(),
     }
-    if detector_nombre == "slm":
+    if detector_nombre in DETECTORES_CON_MODELO:
         manifiesto["carga"] = carga
     if asr_meta:
         manifiesto["asr_meta"] = asr_meta
@@ -492,8 +493,8 @@ def guardar_resumen(
     tiempo_total_ms = sum(ms_valores) if ms_valores else 0.0
     tiempo_promedio_ms = (tiempo_total_ms / len(ms_valores)) if ms_valores else 0.0
 
-    modelo_str = modelo if detector_nombre == "slm" else "no-aplica"
-    prompt_str = prompt if detector_nombre == "slm" else "no-aplica"
+    modelo_str = modelo if detector_nombre in DETECTORES_CON_MODELO else "no-aplica"
+    prompt_str = prompt if detector_nombre in DETECTORES_CON_MODELO else "no-aplica"
 
     lineas_md = [
         "# Resumen de corrida replay",

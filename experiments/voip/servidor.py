@@ -102,7 +102,7 @@ def validar_corte(valor) -> str | float:
 # Tags completos: «gemma4:e2b» a secas baja otro artefacto según la plataforma (MLX en Mac), no el medido.
 DETECTOR_POR_DEFECTO = "gemma4:e2b-it-q4_K_M"
 DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "gemma4:e4b-it-q4_K_M", "reglas")
-DETECTORES_CON_MODELO = ("slm", "tito-slm")
+DETECTORES_CON_MODELO = replay.DETECTORES_CON_MODELO
 
 
 def validar_detector(valor) -> str:
