@@ -1,3 +1,8 @@
 # Llamada en vivo (frente 1). Además de experiments/asr-local/requirements.txt (sherpa-onnx, soundfile, numpy).
 websockets>=15.0
 sounddevice>=0.5.0
+# Tito viejo (--detector tito-slm): RoBERTuito congelado. Mismas versiones que la matriz #101.
+torch==2.14.1
+transformers==5.20.2
+tokenizers==0.23.3
+huggingface_hub==2.3.0

@@ -51,3 +51,11 @@ independencia). La auditoría semántica completa es ownership de #99.
 - La ausencia de novedad no elimina el riesgo; solo evidencia nueva permite bajar
   probabilidad o impacto.
 - Toda ampliación de alcance agrega o actualiza al menos un riesgo.
+
+## Actualización técnica — 2026-11-02
+
+R23: el detector de la demo pasa a Gemma 4 con Tito viejo y deja menos margen en la notebook de 8 GB.
+Con ASR y detector cargados quedan unos 0,5 GB libres, y el tag corto `gemma4:e2b` baja en Mac un
+artefacto que no carga ([evidencia](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md)).
+Mitigación: tags completos, reglas como respaldo elegible desde el panel y `--ollama-url` para usar
+la PC con GPU. Falta ensayarlo en la sala (#86) con Chrome y Meet abiertos.

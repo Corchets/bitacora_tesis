@@ -54,6 +54,8 @@ class Medicion(Servidor):
             await self.novedad.wait()
             self.novedad.clear()
             n, foto, disparos = llamada.tomar_foto()
+            if getattr(self.detector, "solo_cerradas", False):
+                foto = tuple(llamada.contexto.cerrados)
             if llamada.aviso is None and foto and disparos:
                 inicio = llamada.reloj()
                 respuesta = await asyncio.to_thread(self.detector.evaluar, foto)
@@ -111,7 +113,7 @@ def resumir(manifiesto: dict) -> str:
 
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description="Medí SC-WA-CODE-01 en tiempo real, sin panel ni WAV de salida.")
-    p.add_argument("--detector", choices=("reglas", "slm"), required=True)
+    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), required=True)
     p.add_argument("--modelo", default="qwen3.5:0.8b-q8_0")
     p.add_argument("--audio", type=Path, default=EJEMPLOS[ESCENARIO], help="WAV TTS original estéreo a 16 kHz")
     p.add_argument("--modelo-asr", type=Path, default=DIR_MODELO, help="directorio local de Zipformer")
@@ -131,7 +133,7 @@ async def principal(args):
         raise ValueError(f"Falta Zipformer local en {args.modelo_asr}. Indicá --modelo-asr con sus ONNX y tokens.txt.")
     EJEMPLOS[ESCENARIO] = args.audio
     meta_ollama = None
-    if args.detector == "slm":
+    if args.detector in ("slm", "tito-slm"):
         print(f"Preparando Ollama local y {args.modelo}…", flush=True)
         meta_ollama = replay.correr.preparar_ollama(replay.cliente_ollama.ClienteOllama(), [args.modelo])
     detector = replay.construir_detector(args.detector, modelo=args.modelo, prompt_nombre=args.prompt,

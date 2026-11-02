@@ -113,7 +113,7 @@ copia actual con el entorno Python compartido ya instalado en esta Mac:
 
 ```bash
 cd /Users/lucianogrosso/bitacora_tesis-voip-asr/experiments/voip
-/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python servidor.py --host 127.0.0.1 --detector slm --modelo qwen3.5:0.8b-q8_0
+/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M
 ```
 
 El ejecutable Python vive en `bitacora_tesis-voip/.venv`; el código servido debe

@@ -1280,6 +1280,9 @@ export function montarPresentacion(acciones) {
     if (det.tipo === 'slm') {
       return `SLM (${det.modelo || 'local'})`;
     }
+    if (det.tipo === 'tito-slm') {
+      return `Tito viejo → ${det.modelo}`;
+    }
     if (det.tipo === 'reglas') {
       return 'Reglas';
     }
@@ -1796,6 +1799,13 @@ export function montarPresentacion(acciones) {
               estado: 'error',
               badge: 'Error',
               motivo: m.error || 'Fallo del detector',
+              m
+            });
+          } else if (m.consulta === 'omitida') {
+            actualizarEvalCaja(inf.linea, {
+              estado: 'sin-aviso',
+              badge: 'Sin consulta',
+              motivo: `Tito no derivó esta frase al modelo (${Math.round((m.tito_puntaje ?? 0) * 100)}%)`,
               m
             });
           } else if (m.aviso || m.alerta_sugerida) {

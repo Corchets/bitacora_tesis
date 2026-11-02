@@ -949,6 +949,30 @@
     color: var(--mu);
     padding-inline: 0.15rem;
   }
+  .eval-adjunta.sin-consulta {
+    background: transparent;
+    border-color: transparent;
+    border-top-color: rgb(255 255 255 / 0.05);
+    border-radius: 0;
+    padding-inline: 0;
+    padding-bottom: 0;
+    opacity: 0.75;
+  }
+  .eval-pill.eval-sin-consulta {
+    background: transparent;
+    color: var(--mu);
+    box-shadow: inset 0 0 0 1px var(--linea-fuerte);
+  }
+  .eval-adjunta.sin-consulta .eval-pill.eval-tiempo {
+    background: transparent;
+    color: var(--mu);
+    padding-inline: 0.15rem;
+  }
+  .eval-pill.eval-activacion {
+    background: rgb(255 255 255 / 0.08);
+    color: var(--tinta-secundaria);
+    box-shadow: inset 0 0 0 1px var(--linea-fuerte);
+  }
   .eval-adjunta.riesgo-alto {
     border-color: rgb(201 168 76 / 0.45);
     background: rgb(201 168 76 / 0.08);
@@ -1478,6 +1502,14 @@
         <option value="parakeet-silero">Parakeet · solo Silero</option>
       </select>
     </div>
+    <div class="campo" id="campo-detector">
+      <label for="detector-elegido">Detector</label>
+      <select id="detector-elegido" title="Quién decide el aviso. Se aplica a la próxima llamada; cambiarlo tarda porque carga el modelo.">
+        <option value="gemma4:e2b-it-q4_K_M">Gemma 4 E2B con Tito viejo</option>
+        <option value="gemma4:e4b-it-q4_K_M">Gemma 4 E4B con Tito viejo · lento con 8 GB</option>
+        <option value="reglas">Reglas · respaldo sin modelo</option>
+      </select>
+    </div>
     <span id="corte-lugar"></span>
     <div class="enlaces">
       <details id="ayuda" class="ayuda">
@@ -1599,7 +1631,7 @@
     <div class="caja" id="caja-detector">
       <h2>Detector en uso</h2>
       <div class="detector-valor" id="detector-nombre">Reglas</div>
-      <div class="detector-sub" id="detector-sub">Fijo al arrancar el servidor</div>
+      <div class="detector-sub" id="detector-sub">Se elige antes de cada llamada</div>
     </div>
 
     <!-- Riesgo y curva de riesgo en el tiempo -->
@@ -1686,6 +1718,7 @@ const corteLlamada = crearSelectorCorte("corte-llamada");
 $("corte-lugar").replaceWith(corteLlamada.elemento);
 const iniciar = /** @type {HTMLButtonElement} */ ($("iniciar"));
 const modeloASR = /** @type {HTMLSelectElement} */ ($("modelo-asr"));
+const detectorElegido = /** @type {HTMLSelectElement} */ ($("detector-elegido"));
 const terminar = /** @type {HTMLButtonElement} */ ($("terminar"));
 const nueva = /** @type {HTMLButtonElement} */ ($("nueva"));
 const verPresentacion = /** @type {HTMLButtonElement} */ ($("ver-presentacion"));
@@ -2099,6 +2132,7 @@ function actualizarControles() {
   fuente.disabled = enLlamada || pendiente;
   corteLlamada.deshabilitado = enLlamada || pendiente;
   modeloASR.disabled = enLlamada || pendiente;
+  detectorElegido.disabled = enLlamada || pendiente;
   protegidaFuente.disabled = enLlamada || pendiente;
   const usaMicrofono = pruebaASR.activa || protegidaFuente.value === "microfono";
   microfono.disabled = enLlamada || pendiente || !usaMicrofono;
@@ -2178,7 +2212,9 @@ async function iniciarSesion() {
   inicioPropio = true;
   enviar(pruebaASR.activa
     ? {tipo: "iniciar", modo: "asr", fuentes: {protegida: {tipo: "navegador"}}, ...pruebaASR.config, asr: modeloASR.value}
-    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: corteLlamada.valor, umbral_rms_silencio: null, asr: modeloASR.value});
+    : {tipo: "iniciar", modo: "llamada", fuentes, corte_silencio_s: corteLlamada.valor, umbral_rms_silencio: null, asr: modeloASR.value,
+       // Vacío si el servidor arrancó con otro detector (--detector slm): sigue ese.
+       ...(detectorElegido.value ? {detector: detectorElegido.value} : {})});
 }
 
 iniciar.onclick = iniciarSesion;
@@ -2251,6 +2287,7 @@ function resaltarFraseCulpable(evidencia, burbujaEvaluada) {
 }
 
 let llamadaIdActual = "";
+let titoActivoEn = "";
 let tonoReproducidoParaLlamada = false;
 
 /** @param {string} id */
@@ -2363,6 +2400,12 @@ function detector(m) {
   salteadas += m.saltadas;
   $("m-eval").textContent = `${evaluaciones} / ${salteadas}`;
   $("m-det").textContent = m.ms_detector == null ? "—" : `${m.ms_detector.toFixed(0)} ms`;
+  if (m.consulta === "omitida") {
+    // Tito no derivó: el SLM no opinó, así que no es un riesgo de 0 % ni mueve la curva.
+    $("motivo").textContent = "Tito no derivó: sin consulta al modelo";
+    adjuntarEvaluacionAFrase(m, 0, 0);
+    return;
+  }
   if (!m.valida) {
     $("motivo").textContent = `fallo: ${m.error}`;
     adjuntarEvaluacionAFrase(m, 0, 0);
@@ -2416,6 +2459,18 @@ function cerrarEsperas(texto) {
     nota.textContent = texto;
     espera.replaceWith(nota);
   }
+}
+
+/**
+ * Marca una sola vez la frase con la que Tito empezó a consultar al modelo.
+ * @param {EventoDetector} m
+ * @returns {string}
+ */
+function activacionTito(m) {
+  if (titoActivoEn === llamadaIdActual || !m.consulta || m.consulta === "omitida") return "";
+  titoActivoEn = llamadaIdActual;
+  const texto = m.tito_error ? "Tito falló: se consulta igual" : `Tito activó al modelo · ${Math.round((m.indicio_puntaje ?? 0) * 100)}%`;
+  return `<span class="eval-pill eval-activacion" title="Desde acá se consulta al modelo en cada frase">${texto}</span>`;
 }
 
 /**
@@ -2493,6 +2548,19 @@ function adjuntarEvaluacionAFrase(m, r, pct) {
         return;
       }
 
+      if (m.consulta === "omitida") {
+        evalEl.className = "eval-adjunta sin-consulta";
+        evalEl.innerHTML = `
+          <div class="eval-pills">
+            <span class="eval-pill eval-sin-consulta" title="Tito no derivó esta frase al modelo">Sin consulta · Tito ${Math.round((m.tito_puntaje ?? 0) * 100)}%</span>
+            <span class="eval-pill eval-tiempo" title="Tiempo de cómputo del detector">${msTxt}</span>
+            ${salteadasTxt}
+          </div>
+        `;
+        desplazarVisible(infEvaluada.el);
+        return;
+      }
+
       const esAviso = m.aviso;
       const esAlerta = m.alerta_sugerida || esAviso;
       const claseEstado = esAviso ? "aviso-alerta" : (r >= 0.5 ? "riesgo-alto" : "riesgo-bajo");
@@ -2507,6 +2575,7 @@ function adjuntarEvaluacionAFrase(m, r, pct) {
           <span class="eval-pill eval-alerta ${esAlerta ? 'si' : 'no'}">${esAlerta ? 'Alerta: Sí' : 'Alerta: No'}</span>
           <span class="eval-pill eval-tiempo" title="Tiempo de cómputo del detector">${msTxt}</span>
           ${salteadasTxt}
+          ${activacionTito(m)}
         </div>
         ${motivoTxt}
         ${avisoTxt}
@@ -2594,11 +2663,16 @@ function dibujarGraficoRiesgo() {
 /** @param {DetectorInfo|undefined} detector */
 function actualizarDetectorVisual(detector) {
   if (!detector) return;
+  const esTito = detector.tipo === "tito-slm";
   const esSlm = detector.tipo === "slm";
-  $("detector-nombre").textContent = esSlm ? `SLM (${detector.modelo || "local"})` : "Reglas";
-  $("detector-sub").textContent = esSlm
-    ? "Evaluación con modelo de lenguaje local"
+  $("detector-nombre").textContent = esTito ? `Tito viejo → ${detector.modelo}`
+    : esSlm ? `SLM (${detector.modelo || "local"})` : "Reglas";
+  $("detector-sub").textContent = esTito
+    ? "Tito deriva las frases; el modelo local decide el aviso"
+    : esSlm ? "Evaluación con modelo de lenguaje local"
     : "Heurística de códigos de verificación y urgencia";
+  // Un detector que no está en la lista (--detector slm) deja el selector vacío.
+  detectorElegido.value = esTito ? detector.modelo : esSlm ? "" : "reglas";
   presentacion?.fijarDetector?.(detector);
 }
 

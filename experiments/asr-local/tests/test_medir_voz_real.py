@@ -19,12 +19,14 @@ CARPETA_ASR = Path(__file__).resolve().parent.parent
 if str(CARPETA_ASR) not in sys.path:
     sys.path.insert(0, str(CARPETA_ASR))
 
+import dialogos as DLG
 import guion as G
 import medir_voz_real as R
 import variantes_voz_real as V
 from motores import MotorFalso
 
 GUION = G.cargar_guion()
+DIALOGOS = DLG.cargar_dialogos()
 
 
 def referencia_del_bloque(n: int) -> str:
@@ -73,7 +75,7 @@ class TestCSV(unittest.TestCase):
 
     def test_errores_dicen_la_fila(self):
         for contenido, texto in [
-            ("id,toma,voz,condicion\nA,5,luciano,meet\n", "toma debe ser una de 1, 2, 3, 4"),
+            ("id,toma,voz,condicion\nA,6,luciano,meet\n", "toma debe ser una de 1, 2, 3, 4, 5"),
             ("id,toma,voz,condicion\nA,1,pepe,meet\n", "voz debe ser"),
             ("id,toma,voz,condicion\nA,1,luciano,zoom\n", "condicion debe ser"),
             ("id,toma,voz,condicion,canal\nA,1,luciano,meet,C\n", "canal debe ser"),
@@ -167,6 +169,77 @@ class TestCargarPruebas(unittest.TestCase):
         escribir_prueba(self.dir, "b", referencia_del_bloque(1))
         pruebas, _ = R.cargar_pruebas([self.fila("a"), self.fila("b", canal="otra")], self.dir, GUION)
         self.assertEqual([(p["canal"], p["columna"]) for p in pruebas], [("otra", 1), ("otra", 1)])
+
+
+class TestDialogos(unittest.TestCase):
+    """Llamadas de diálogo: una fila por canal y la referencia sale de dialogos.json."""
+
+    ID = "2026-11-02_101500-123456"
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        self.dir = Path(self.tmp.name)
+
+    def leer(self, contenido: str):
+        ruta = self.dir / "pruebas.csv"
+        ruta.write_text(contenido, encoding="utf-8")
+        return R.leer_csv(ruta)
+
+    def test_el_mismo_id_en_los_dos_canales(self):
+        filas = self.leer(f"id,toma,voz,condicion,bloque,canal,nota\n{self.ID},5,luciano,dialogo,D1,protegida,\n"
+                          f"{self.ID},5,otra,dialogo,D1,otra,\n")
+        self.assertEqual([f["canal"] for f in filas], ["protegida", "otra"])
+
+    def test_el_mismo_canal_dos_veces_es_un_error(self):
+        with self.assertRaisesRegex(ValueError, "repetido en el canal otra"):
+            self.leer(f"id,toma,voz,condicion,bloque,canal,nota\n{self.ID},5,luciano,dialogo,D1,otra,\n"
+                      f"{self.ID},5,otra,dialogo,D1,otra,\n")
+
+    def test_un_dialogo_pide_canal_y_dialogo(self):
+        with self.assertRaisesRegex(ValueError, "necesita el canal"):
+            self.leer(f"id,toma,voz,condicion,bloque,canal,nota\n{self.ID},5,luciano,dialogo,D1,,\n")
+        with self.assertRaisesRegex(ValueError, "id del diálogo"):
+            self.leer(f"id,toma,voz,condicion,bloque,canal,nota\n{self.ID},5,luciano,dialogo-tv,,otra,\n")
+
+    def test_una_llamada_da_una_prueba_por_canal_con_las_lineas_de_cada_uno(self):
+        escribir_prueba(self.dir, self.ID, None, guardada=None,
+                        canales={"protegida": {"inicio_s": 0.0}, "otra": {"inicio_s": 0.01}})
+        filas = [{"id": self.ID, "toma": "5", "voz": "luciano", "condicion": "dialogo", "bloque": "D1", "canal": "protegida", "nota": ""},
+                 {"id": self.ID, "toma": "5", "voz": "otra", "condicion": "dialogo", "bloque": "D1", "canal": "otra", "nota": ""},
+                 {"id": self.ID, "toma": "5", "voz": "otra", "condicion": "dialogo", "bloque": "D9", "canal": "otra", "nota": ""}]
+        pruebas, omitidas = R.cargar_pruebas(filas, self.dir, GUION)
+        d1 = DIALOGOS["D1"]
+        self.assertEqual([p["id"] for p in pruebas], [f"{self.ID}:protegida", f"{self.ID}:otra"])
+        self.assertEqual([p["columna"] for p in pruebas], [0, 1])
+        self.assertEqual(pruebas[0]["lineas"], [l.texto for l in d1.del_rol("protegida")])
+        self.assertEqual(pruebas[1]["lineas"], [l.texto for l in d1.del_rol("otra")])
+        self.assertEqual(pruebas[1]["grupo"], "otra-dialogo")
+        self.assertEqual(omitidas, [{"id": f"{self.ID}:otra", "motivo": "no hay un diálogo 'D9' en dialogos.json"}])
+
+    def test_medir_a_contra_b_sobre_los_dos_canales(self):
+        a, b = "parakeet-0.3-silero-0.9", "parakeet-0.8-rms-0.008-filtro-silero-0.5"
+        llamadas = self.dir / "llamadas"
+        llamadas.mkdir()
+        escribir_prueba(llamadas, self.ID, None, guardada=None, canales={"protegida": {}, "otra": {}})
+        csv = self.dir / "pruebas.csv"
+        csv.write_text(f"id,toma,voz,condicion,bloque,canal,nota\n{self.ID},5,luciano,dialogo,D4,protegida,\n"
+                       f"{self.ID},5,otra,dialogo,D4,otra,\n", encoding="utf-8")
+        diccionario = self.dir / "diccionario.csv"
+        diccionario.write_text("error,correccion\n", encoding="utf-8")
+        d4 = DIALOGOS["D4"]
+        ejecutor = EjecutorFalso({b: {"Compartí pantalla": "pantalla"}})
+        ejecutor.referencias = {f"{self.ID}:{rol}": "\n".join(l.texto for l in d4.del_rol(rol)) for rol in ("protegida", "otra")}
+        R.medir(R.parsear(["--pruebas", str(llamadas), "--csv", str(csv), "--diccionario", str(diccionario),
+                           "--salida", str(self.dir / "salida"), "--solo-parakeet", "--contra-parakeet", b,
+                           "--variantes", a, "--toma-decision", "5"]), ejecutor=ejecutor)
+        self.assertEqual([s["nombre"] for s in ejecutor.specs], [b, a])
+        self.assertEqual([p["canal"] for p in ejecutor.specs[0]["pruebas"]], [0, 1])
+        m = json.loads((self.dir / "salida" / "manifiesto.json").read_text(encoding="utf-8"))
+        grupos = m["variantes"][a]["por_grupo"]
+        self.assertEqual(set(grupos), {"toma5/luciano-dialogo", "toma5/otra-dialogo"})
+        self.assertGreater(m["variantes"][a]["por_toma"]["5"]["frases_correctas"],
+                           m["variantes"][b]["por_toma"]["5"]["frases_correctas"])
 
 
 class TestSeleccionDeVariantes(unittest.TestCase):

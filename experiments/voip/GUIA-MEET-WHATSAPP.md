@@ -12,8 +12,8 @@ las dos voces se mezclan y el ensayo no sirve.
 ## Receta 1 · Meet o WhatsApp Web (pestaña de Chrome, sin BlackHole)
 
 1. En una terminal, dentro de `experiments/voip`, levantá el servidor:
-   `python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0`
-   (para probar sin modelo: `--detector reglas`).
+   `python servidor.py --detector tito-slm --modelo gemma4:e2b-it-q4_K_M`
+   (para probar sin modelo: `--detector reglas`). El detector también se elige en el panel.
 2. Abrí Chrome en `http://localhost:8765/`. Dejá esa pestaña para el final.
 3. En otra pestaña abrí `meet.google.com`, tocá «Nueva reunión» y entrá. Apagá el micrófono
    de la notebook en Meet (la protegida se toma desde el panel, no desde Meet).

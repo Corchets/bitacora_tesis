@@ -1,10 +1,12 @@
 # Qué es cada prueba guardada del panel. Una fila por prueba; completala después de grabar.
 #   id         carpeta de la prueba (la ves en el Historial; ej. 2026-10-27_101500-123456)
-#   toma       1 (ajustar), 2 (medir y decidir) 3 (confirmar con audio nuevo lo elegido con la 2) o 4 (mezclas del RMS con Silero)
+#   toma       1 (ajustar), 2 (medir y decidir) 3 (confirmar con audio nuevo lo elegido con la 2), 4 (mezclas del RMS con Silero) o 5 (diálogos)
 #   voz        luciano | otra
-#   condicion  microfono | meet | voz-baja | ruido-tv | pausas (las tres últimas, extras por micrófono)
-#   bloque     opcional: bloque del guion (1 a 6) que se leyó. Si «Lo que dije en realidad» está vacío, la referencia es ese bloque
-#   canal      opcional: protegida | otra. Por defecto, el canal con audio según el manifiesto
+#   condicion  microfono | meet | voz-baja | ruido-tv | pausas (las tres últimas, extras por micrófono) | dialogo | dialogo-tv
+#   bloque     opcional: bloque del guion (1 a 6) que se leyó. Si «Lo que dije en realidad» está vacío, la referencia es ese bloque.
+#              En un diálogo, obligatorio: el id de dialogos.json (D1 a D4)
+#   canal      opcional: protegida | otra. Por defecto, el canal con audio según el manifiesto. En un diálogo, obligatorio:
+#              cada llamada va en dos filas con el mismo id, una por canal, y voz es quién estaba en ese canal
 #   nota       opcional: dispositivo, ruido, lo que quieras recordar (sin comas)
 # Las líneas que empiezan con # se ignoran. Solo se miden las pruebas guardadas con referencia (o con bloque).
 # Las del 2026-10-29 están en la copia bitacora_tesis-voip-asr: --pruebas ../bitacora_tesis-voip-asr/experiments/voip/llamadas

@@ -248,6 +248,11 @@ class Llamada:
 
     def evento_detector(self, ev: Evaluacion) -> dict:
         r = ev.respuesta
+        tito = {} if not getattr(r, "consulta", "") else {
+            "consulta": r.consulta, "tito_puntaje": r.tito_puntaje, "tito_ms": r.tito_ms,
+            "tito_error": getattr(r, "tito_error", ""), "indicio_linea": getattr(r, "indicio_linea", None),
+            "indicio_puntaje": getattr(r, "indicio_puntaje", None),
+        }
         return {
             "n": ev.n,
             "saltadas": ev.saltadas,
@@ -263,6 +268,7 @@ class Llamada:
             "aviso": ev.aviso,
             "t_a": round(ev.fin_s, 3) if ev.aviso else None,
             "fin_voz_s": None if ev.fin_voz_s is None else round(ev.fin_voz_s, 3),
+            **tito,
         }
 
     def vaciar_audio(self) -> list[dict]:
