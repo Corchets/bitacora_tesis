@@ -213,6 +213,9 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base vigente:** reglas solas. Ningún encoder, modelo generativo, cascada,
   entrenamiento ni conjunto de gamas está impuesto como arquitectura final.
+- **Detector de la demo (Luciano, 2026-11-02):** el panel ofrece Gemma 4 E2B o E4B con Tito viejo,
+  por la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md).
+  Resuelve qué se muestra en la demo, no esta decisión: la matriz es exploratoria y sin audio.
 - **Material para consultar cuando corresponda:**
   [recorte inicial de modelos](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md),
   [estrategia NLP](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md) y
