@@ -2222,7 +2222,90 @@ class UIDriver:
                 f"Fallo captura escena: {error_escena_obs.get('visible')} ('{error_escena_obs.get('txt')}'), detector: '{detector_error_obs.get('badge')}' ({detector_error_obs.get('mot')}), diagnóstico conservado tras fin: {diag_conservado}"
             )
 
-            # 33. Logs de errores de consola
+            # 33. Marca de activación de Tito en la conversación (#85)
+            async def enviar_llamada_tito(llamada_id, eventos):
+                await self.panel_ws.send(json.dumps({
+                    "tipo": "inicio", "llamada_id": llamada_id, "modo": "llamada",
+                    "corte_silencio_s": 0.8, "asr": "zipformer",
+                    "detector": {"tipo": "tito-slm", "modelo": "gemma4:e2b-it-q4_K_M"},
+                }))
+                for evento in eventos:
+                    await self.panel_ws.send(json.dumps(evento))
+                await asyncio.sleep(0.2)
+
+            def frase_tito(n, rol, texto):
+                return {"tipo": "asr", "entrega": "final", "segmento": n, "n": n, "rol": rol, "texto": texto,
+                        "fin_audio_s": float(n), "disponible_s": float(n)}
+
+            def evaluacion_tito(n, consulta, **campos):
+                return {"tipo": "detector", "n": n, "saltadas": 0, "inicio_eval_s": float(n),
+                        "fin_eval_s": n + 0.5, "ms_detector": 1450.0, "valida": True, "error": None,
+                        "riesgo": 0.2, "alerta_sugerida": False, "aviso": False, "motivo": "Consulta del modelo",
+                        "evidencia": "", "t_a": None, "consulta": consulta, "tito_puntaje": None, "tito_ms": 30.0,
+                        "tito_error": "", "indicio_linea": None, "indicio_puntaje": None, **campos}
+
+            # Tito activó en la frase 2 mientras el detector estaba ocupado: el modelo evalúa desde la 3.
+            eventos_tito = [
+                frase_tito(1, "otra", "Buenas tardes, le hablo del banco."),
+                evaluacion_tito(1, "omitida", tito_puntaje=0.12),
+                frase_tito(2, "otra", "Necesito que me pase el código que le llegó."),
+                frase_tito(3, "protegida", "¿Qué código?"),
+                {**evaluacion_tito(3, "slm_valida", indicio_linea=2, indicio_puntaje=0.5712), "saltadas": 1},
+                frase_tito(4, "otra", "El del mensaje, dale."),
+                evaluacion_tito(4, "slm_valida", indicio_linea=2, indicio_puntaje=0.5712),
+            ]
+            observar_marcas = """
+                (() => [...document.querySelectorAll('#presentacion .pres-activacion-tito')].map(el => ({
+                    frase: el.closest('.linea')?.id,
+                    texto: el.textContent.trim(),
+                    visible: el.offsetHeight > 0,
+                })))()
+            """
+            await enviar_llamada_tito("llamada-tito", eventos_tito)
+            marcas = await self.cdp.eval(observar_marcas)
+            sin_consulta_conservada = await self.cdp.eval("""
+                document.querySelector('#pres-seg-1 .pres-eval-badge')?.textContent.trim() === 'Sin consulta'
+            """)
+            esperadas = [{"frase": "pres-seg-2", "texto": "Tito activó al modelo · 57%", "visible": True}]
+            self.record_check(
+                "La activación de Tito se marca una vez, en la frase que la causó",
+                marcas == esperadas and bool(sin_consulta_conservada),
+                f"Marcas: {marcas}, «Sin consulta» conservada en la frase 1: {sin_consulta_conservada}"
+            )
+            png_tito = output_dir / "tesis-presentacion-85-activacion-tito-1366x768.png"
+            await self.cdp.capture_screenshot(str(png_tito))
+
+            await enviar_llamada_tito("llamada-tito", eventos_tito)
+            marcas_reconexion = await self.cdp.eval(observar_marcas)
+            await self.panel_ws.send(json.dumps({"tipo": "fin"}))
+            await asyncio.sleep(0.15)
+            marcas_fin = await self.cdp.eval(observar_marcas)
+            self.record_check(
+                "La marca de Tito no se duplica al reconectar y sigue al terminar",
+                marcas_reconexion == esperadas and marcas_fin == esperadas,
+                f"Tras reconectar: {marcas_reconexion}; tras el fin: {marcas_fin}"
+            )
+
+            # Sin indicio (Tito falló) la marca va en la frase evaluada, también si el modelo falló.
+            await enviar_llamada_tito("llamada-tito-falla", [
+                frase_tito(1, "otra", "Buenas tardes."),
+                {**evaluacion_tito(1, "slm_fallo", tito_error="tito_caido"), "valida": False, "error": "Ollama no responde"},
+            ])
+            marcas_falla = await self.cdp.eval(observar_marcas)
+            await enviar_llamada_tito("llamada-sin-tito", [
+                frase_tito(1, "otra", "Buenas tardes."),
+                {k: v for k, v in evaluacion_tito(1, "").items()
+                 if k not in ("consulta", "tito_puntaje", "tito_ms", "tito_error", "indicio_linea", "indicio_puntaje")},
+            ])
+            marcas_sin_tito = await self.cdp.eval(observar_marcas)
+            self.record_check(
+                "Tito caído se marca en la frase evaluada y otro detector no lleva marca",
+                marcas_falla == [{"frase": "pres-seg-1", "texto": "Tito falló: se consulta igual", "visible": True}]
+                and marcas_sin_tito == [],
+                f"Tito caído: {marcas_falla}; sin Tito: {marcas_sin_tito}"
+            )
+
+            # 34. Logs de errores de consola
             errores_consola = [log for log in self.cdp.console_logs if log.get("type") in ("error", "internal_error")]
             log_path = output_dir / "tesis-presentacion-ui-consola.log"
             with open(log_path, "w", encoding="utf-8") as f:
@@ -2266,6 +2349,7 @@ def generar_reporte(resultados, report_path: Path, output_dir: Path):
         f"- Fin con texto pendiente y escena conservada (1920x1080): `{output_dir / 'tesis-presentacion-114-fin-conservado-1920x1080.png'}`",
         f"- Fallo observable del detector (1920x1080): `{output_dir / 'tesis-presentacion-114-fallo-1920x1080.png'}`",
         f"- Movimiento reducido (1920x1080): `{output_dir / 'tesis-presentacion-ui-reducido-1920x1080.png'}`",
+        f"- Activación de Tito marcada en la conversación (1366x768): `{output_dir / 'tesis-presentacion-85-activacion-tito-1366x768.png'}`",
         f"- Logs de consola runtime: `{output_dir / 'tesis-presentacion-ui-consola.log'}`",
         "",
         f"Total de checks ejecutados: {len(resultados)}. Superados: {sum(1 for r in resultados if r['passed'])}/{len(resultados)}.",

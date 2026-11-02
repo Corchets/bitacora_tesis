@@ -1672,7 +1672,7 @@ import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 import {prepararFuentes} from './fuentes.mjs';
 import {crearSelectorCorte} from './corte-silencio.mjs';
-import {plantillaLinea, citaConRoles, montarPresentacion} from './conversacion.mjs';
+import {plantillaLinea, citaConRoles, montarPresentacion, textoActivacionTito} from './conversacion.mjs';
 import {montarHistorial} from './historial-ui.mjs';
 
 /** @typedef {{segmento: number, n: number, canal: string, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
@@ -2467,9 +2467,9 @@ function cerrarEsperas(texto) {
  * @returns {string}
  */
 function activacionTito(m) {
-  if (titoActivoEn === llamadaIdActual || !m.consulta || m.consulta === "omitida") return "";
+  const texto = textoActivacionTito(m);
+  if (titoActivoEn === llamadaIdActual || !texto) return "";
   titoActivoEn = llamadaIdActual;
-  const texto = m.tito_error ? "Tito falló: se consulta igual" : `Tito activó al modelo · ${Math.round((m.indicio_puntaje ?? 0) * 100)}%`;
   return `<span class="eval-pill eval-activacion" title="Desde acá se consulta al modelo en cada frase">${texto}</span>`;
 }
 
