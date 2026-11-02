@@ -6,9 +6,9 @@
 
 ## Qué grabar
 
-Cinco llamadas por Meet: los cuatro diálogos y **D1 otra vez con la tele prendida** de fondo, del lado
-de la notebook. Si pueden, después cambian de lugar y repiten los cuatro: así cada voz pasa por los dos
-canales. Cada llamada se graba una sola vez; las dos opciones de corte se comparan después sobre el mismo audio.
+Nueve llamadas por Meet: los cuatro diálogos y **D1 otra vez con la tele prendida** de fondo, del lado
+de la notebook, con la opción B; después los cuatro con la opción A, cambiando de lugar si pueden: así cada voz
+pasa por los dos canales. Cada llamada se graba una sola vez; las dos opciones se comparan después sobre el mismo audio.
 
 ## Antes de empezar
 
@@ -16,8 +16,8 @@ canales. Cada llamada se graba una sola vez; las dos opciones de corte se compar
    lo vuelve a tomar y las voces se mezclan.
 2. En el panel: modo llamada, **Persona protegida = micrófono** (con cancelación de eco) y
    **Otra persona = pestaña de Meet** con «Compartir audio».
-3. Modelo de ASR **Parakeet**, con `parakeet-filtro` o `parakeet-silero`, y la misma toda la sesión: lo que
-   se ve en pantalla puede cambiar cómo hablan. El audio guardado no depende de esa opción.
+3. Modelo de ASR y corte según la ronda, y sin cambiarlos dentro de ella: lo que se ve en pantalla puede
+   cambiar cómo hablan. Ver [Qué se prueba](../../voip/PRUEBA-VOZ-REAL-MEET.md#qué-se-prueba).
 
 ## Cómo hacer cada llamada
 
@@ -26,8 +26,8 @@ canales. Cada llamada se graba una sola vez; las dos opciones de corte se compar
    Con tu acento y tu forma de hablar, sin actuar. Si se pisan un poco no pasa nada: cada voz va por su canal.
 3. Si te trabás, seguí. Si cambiaste una palabra, anotala en la `nota` de la fila. Si la llamada salió
    muy mal, terminala y hacela de nuevo.
-4. Terminá la llamada. Copiá el id del Historial y agregá **dos filas** a [`pruebas.csv`](pruebas.csv),
-   una por canal:
+4. Terminá la llamada. `voip/resumen_llamada.py` reconoce el diálogo e imprime las **dos filas** de
+   [`pruebas.csv`](pruebas.csv), una por canal:
 
 ```text
 2026-11-02_101500-123456,5,luciano,dialogo,D1,protegida,

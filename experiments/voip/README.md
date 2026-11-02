@@ -70,7 +70,9 @@ python servidor.py --detector tito-slm --modelo gemma4:e4b-it-q4_K_M --ollama-ur
 # El modelo de ASR también se elige en el panel (Zipformer o Parakeet); --asr fija el de arranque y el de
 # cliente.py: python servidor.py --detector reglas --asr parakeet  (ver ../asr-local/PLAN-VOZ-REAL.md §9)
 # Parakeet con Silero VAD, a prueba: --asr parakeet-filtro | parakeet-y | parakeet-silero (§12.7); necesitan
-# ../asr-local/modelos/silero-vad/silero_vad.onnx (release asr-models de sherpa-onnx).
+# ../asr-local/modelos/silero-vad/silero_vad.onnx (release asr-models de sherpa-onnx). En la llamada, el umbral RMS es
+# 0,003, salvo parakeet-filtro: 0,008 (../asr-local/PLAN-VOZ-REAL.md §12.9).
+# Ficha de las llamadas, desde sus registros: python resumen_llamada.py --desde <id>
 
 # Panel para el público:   http://<ip-del-servidor>:8765/
 # Pantalla de la protegida: http://<ip-del-servidor>:8765/?vista=protegida
