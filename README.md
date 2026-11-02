@@ -90,42 +90,39 @@ bitacora_tesis/
 
 ## 4. Demo local de llamadas (Luciano)
 
-Al 2026-10-28, la copia para probar micrófono, Meet y WhatsApp/BlackHole es
-`/Users/lucianogrosso/bitacora_tesis-voip-asr`, rama `luciano/voip-asr-94`,
-revisión `a37b47e`. Incluye corte numérico, referencias de ASR por frase y cierre
-con el último audio pendiente. Ver [uso y configuración](https://github.com/Corchets/bitacora_tesis/blob/a37b47e/experiments/voip/README.md)
-y [evidencia y límites](https://github.com/Corchets/bitacora_tesis/blob/a37b47e/experiments/voip/corridas/2026-10-28-correcciones-panel.md).
-La corrección de la cita con roles de #104 está en `luciano/voip-spike` (`91bf6d5`)
-y todavía requiere integración en esta copia.
+Al 2026-11-02, la copia para probar Meet con Gemma 4 es
+`/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes`, rama
+`LucianoGrosso13/tito-gemma-pendientes`. Las variables y el orden de la corrida están en
+[`PRUEBA-VOZ-REAL-MEET.md`](experiments/voip/PRUEBA-VOZ-REAL-MEET.md). Las llamadas quedan en
+`experiments/voip/llamadas/` de esa copia, fuera de Git: no la borres sin resguardarlas.
 
 Antes de abrir localhost, comprobá qué proceso ocupa el puerto y desde qué carpeta corre:
 
 ```bash
 lsof -nP -iTCP:8765 -sTCP:LISTEN
 lsof -a -p <PID> -d cwd
-git -C /Users/lucianogrosso/bitacora_tesis-voip-asr status -sb
-git -C /Users/lucianogrosso/bitacora_tesis-voip-asr log -1 --oneline
+git -C /Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes status -sb
 ```
 
 Si el servidor corresponde a otra copia, terminalo con `kill -TERM <PID>` y esperá
 que libere el puerto: el cierre normal conserva la llamada en curso. Levantá la
-copia actual con el entorno Python compartido ya instalado en esta Mac:
+copia actual con el entorno de esta Mac que tiene `torch` y `transformers`, los que Tito necesita:
 
 ```bash
-cd /Users/lucianogrosso/bitacora_tesis-voip-asr/experiments/voip
-/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M
+ollama serve   # en otra terminal; solo reglas y Probar el ASR andan sin Ollama
+cd /Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/voip
+/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M --asr parakeet-filtro
 ```
 
-El ejecutable Python vive en `bitacora_tesis-voip/.venv`; el código servido debe
-salir de `bitacora_tesis-voip-asr`. Ollama debe estar corriendo. En otra terminal,
-comprobá el panel antes de abrirlo:
+`bitacora_tesis-voip/.venv` no tiene `torch`: con ese entorno, elegir Gemma en el panel falla. Los
+modelos y audios de `experiments/asr-local/` son enlaces a `bitacora_tesis-voip`, fuera de Git. En
+otra terminal, comprobá el panel antes de abrirlo:
 
 ```bash
-curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/bitacora_tesis-voip-asr/experiments/voip/panel.html
+curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/voip/panel.html
 open http://localhost:8765/
 ```
 
 `cmp` termina sin salida y con código 0 si coincide. El puerto **8765** queda para
 esta demo; el tablero de resultados se sirve aparte en **8766**. El arranque no
-inicia una grabación. La prueba humana con BlackHole sigue pendiente; servir la
-versión correcta no valida la captura ni cierra D05, D06, D08 o D09.
+inicia una grabación. Servir la versión correcta no valida la captura ni cierra D05, D06, D08 o D09.

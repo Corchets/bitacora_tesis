@@ -788,3 +788,9 @@ python medir_voz_real.py --solo-parakeet --toma-decision 5 \
 El resumen sale por persona y condición (`toma5/luciano-dialogo`, `toma5/otra-dialogo`). Se probó con una corrida de
 humo sobre los dos canales de una llamada por Meet del 2026-10-28, con Parakeet y Silero reales; esa llamada no sigue
 ningún diálogo, así que sus números no valen.
+
+
+**Corrida del 2026-11-02 (decisión de Luciano).** Cambia dos cosas de lo anterior para probar las dos opciones también en
+vivo con Gemma 4 E2B: una ronda con B y otra con A, cada una fija, y `parakeet-filtro` corta con RMS 0,008 también en la llamada, porque
+con el 0,003 fijo la opción en vivo no era la B medida. Las demás siguen en 0,003 y Silero solo no usa el RMS. Sigue sin cambiar qué opción se usa por defecto. El detalle está en
+[`PRUEBA-VOZ-REAL-MEET.md`](../voip/PRUEBA-VOZ-REAL-MEET.md#qué-se-prueba).
