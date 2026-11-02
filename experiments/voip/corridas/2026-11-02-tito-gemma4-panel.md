@@ -34,3 +34,5 @@ puntaje de 0,5712 del [diagnóstico #98](../../slm-directo/DIAGNOSTICO-TITO-2026
   Con `SC-WA-CODE-01` dio 46,3 s y 15,8 s por evaluación, 3 frases salteadas y el aviso a +49,0 s del
   pedido. No sirve en vivo con 8 GB; para usarlo hay que pasar `--ollama-url` con la PC con GPU.
 - **Una sola llamada por ejemplo:** no alcanza para comparar con otros detectores.
+- **Las medianas mezclan frases sin consulta (unos 30 ms) con consultas al modelo:** no muestran cuánto tarda E2B
+  ni si cumple el criterio de #84. Ver la [propuesta para medirlo](2026-11-02-pendientes-tito-gemma.md#propuesta-medir-la-demora-de-e2b).

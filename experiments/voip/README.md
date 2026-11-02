@@ -463,6 +463,7 @@ Para ensayar solo, con el celular como Otra persona, seguí la
 [guía paso a paso](GUIA-MEET-WHATSAPP.md); el panel la sirve en `/guia` como página (`guia.py` la arma desde el Markdown, sin dependencias) y la
 enlaza junto a la elección de fuente, al lado de «¿Qué es cada cosa?», que explica Otra persona,
 Persona protegida y Corte de silencio.
+Para la prueba con otra persona, seguí la [checklist de voz real](PRUEBA-VOZ-REAL-MEET.md).
 Lo que sigue es el detalle técnico.
 
 Abrí el panel en Chrome en `http://localhost:8765/` o `http://127.0.0.1:8765/`.
