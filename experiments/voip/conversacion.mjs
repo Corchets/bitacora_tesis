@@ -13,6 +13,15 @@ export function citaConRoles(texto, rolesPorLetra) {
     });
 }
 
+/**
+ * Texto de la marca de activación de Tito; vacío si esta evaluación no consultó al modelo.
+ * @param {{consulta?: string, tito_error?: string, indicio_puntaje?: number|null}} m
+ */
+export function textoActivacionTito(m) {
+  if (!m.consulta || m.consulta === 'omitida') return '';
+  return m.tito_error ? 'Tito falló: se consulta igual' : `Tito activó al modelo · ${Math.round((m.indicio_puntaje ?? 0) * 100)}%`;
+}
+
 /** @param {string} rol */
 export function plantillaLinea(rol) {
   return `<div class="quien"><span class="nombre-quien">${NOMBRE[rol] || rol}</span><span class="t"></span></div><div class="texto"></div>`;
@@ -913,6 +922,17 @@ const ESTILOS_PRESENTACION = `
     box-sizing: border-box;
     font-size: 0.875rem;
   }
+  #presentacion .pres-activacion-tito {
+    width: fit-content;
+    margin-top: 0.45rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.28);
+    background: rgb(255 255 255 / 0.08);
+    color: var(--p-tinta);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
   #presentacion .pres-eval-caja.estado-analizando {
     border-style: dashed;
     border-color: rgb(255 255 255 / 0.2);
@@ -1280,6 +1300,9 @@ export function montarPresentacion(acciones) {
     if (det.tipo === 'slm') {
       return `SLM (${det.modelo || 'local'})`;
     }
+    if (det.tipo === 'tito-slm') {
+      return `Tito viejo → ${det.modelo}`;
+    }
     if (det.tipo === 'reglas') {
       return 'Reglas';
     }
@@ -1382,6 +1405,24 @@ export function montarPresentacion(acciones) {
       </div>
       ${detallesHtml}
     `;
+  }
+
+  /**
+   * Marca una sola vez la frase con la que Tito activó al modelo. Puede ser anterior a la evaluada
+   * si el detector estaba ocupado; si Tito falló no hay indicio y se marca la evaluada.
+   * @param {any} m @param {number|null} segEvaluado
+   */
+  function marcarActivacionTito(m, segEvaluado) {
+    const texto = textoActivacionTito(m);
+    if (!texto || charla.querySelector('.pres-activacion-tito')) return;
+    const seg = ordenSegmentos[(m.indicio_linea ?? 0) - 1] ?? segEvaluado;
+    const textoEl = seg === null ? null : segmentosInfo.get(seg)?.linea.querySelector('.texto');
+    if (!textoEl) return;
+    const marca = document.createElement('div');
+    marca.className = 'pres-activacion-tito';
+    marca.title = 'Desde acá se consulta al modelo en cada frase';
+    marca.textContent = texto;
+    textoEl.after(marca);
   }
 
   const telefonos = Object.fromEntries(ROLES.map(rol => {
@@ -1788,6 +1829,8 @@ export function montarPresentacion(acciones) {
           }
         }
 
+        marcarActivacionTito(m, segId);
+
         const inf = segId !== null ? segmentosInfo.get(segId) : null;
         if (inf) {
           inf.evaluado = true;
@@ -1796,6 +1839,13 @@ export function montarPresentacion(acciones) {
               estado: 'error',
               badge: 'Error',
               motivo: m.error || 'Fallo del detector',
+              m
+            });
+          } else if (m.consulta === 'omitida') {
+            actualizarEvalCaja(inf.linea, {
+              estado: 'sin-aviso',
+              badge: 'Sin consulta',
+              motivo: `Tito no derivó esta frase al modelo (${Math.round((m.tito_puntaje ?? 0) * 100)}%)`,
               m
             });
           } else if (m.aviso || m.alerta_sugerida) {

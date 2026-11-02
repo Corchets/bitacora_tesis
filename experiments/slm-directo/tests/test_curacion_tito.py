@@ -9,11 +9,18 @@ from unittest.mock import patch
 import curar_datos_tito as curacion
 
 
+# laboratorio-luciano lleva la reserva y generar_seleccion se niega a correr si la ve:
+# la curación se regenera en laboratorio-main, que no la tiene.
+con_reserva_no_regenera = unittest.skipIf(
+    any((curacion.AQUI / 'casos/texto').glob('CV2-T-*')), 'la reserva está en esta rama')
+
+
 class CuracionTitoTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.revision = json.loads(curacion.REVISION.read_text(encoding='utf-8'))
 
+    @con_reserva_no_regenera
     def test_cada_registro_tiene_destino_y_conserva_regresiones(self):
         paquete = curacion.generar_seleccion(
             self.revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
@@ -72,10 +79,12 @@ class CuracionTitoTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'no habilita'):
             curacion.generar_seleccion(revision)
 
+    @con_reserva_no_regenera
     def test_modo_estricto_rechaza_fuente_actual_cambiada(self):
         with self.assertRaisesRegex(ValueError, 'Artefacto cambiado: filtro_tito.py'):
             curacion.generar_seleccion(self.revision)
 
+    @con_reserva_no_regenera
     def test_historico_reporta_deriva_sin_reetiquetar(self):
         paquete = curacion.generar_seleccion(
             self.revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)

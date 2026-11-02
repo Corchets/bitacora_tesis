@@ -767,5 +767,24 @@ La «y», porque queda en el medio y da el peor WER con la serie de fondo.
 
 Con las etiquetas empatadas, como en la toma 4, desempatan la demora y el comportamiento con ruido.
 
-**Falta en las herramientas.** `pruebas.csv` acepta un canal por prueba: si un diálogo trae voz en los dos canales,
-hoy se mide uno por corrida. Tampoco hay una `condicion` de diálogo. Se ajustan cuando esté definida la forma de grabar.
+**Diálogos con guion (2026-10-31).** Para no escribir a mano qué dijo cada uno, Luciano pidió diálogos escritos:
+la referencia de cada canal son las líneas de ese rol. Son cuatro llamadas en [`voz-real/dialogos.json`](voz-real/dialogos.json)
+(tres estafas: banco con código y clave, falso sobrino, soporte con AnyDesk; y una charla legítima con palabras
+parecidas), 57 líneas con respuestas cortas («Sí, obvio», «Ya abrió») y las palabras que fallaban en la lectura
+(«token», «Compartí pantalla», CVV, CBU, Ualá, Brubank). La hoja para las llamadas es
+[`voz-real/HOJA-DIALOGOS.md`](voz-real/HOJA-DIALOGOS.md) y sale de `python dialogos.py --hoja`. Se graba cada
+diálogo por Meet, más D1 con la tele de fondo. WhatsApp Desktop quedó fuera por ahora
+([D05](../../docs/gestion/MAPA-DECISIONES.md#d05--elegir-la-fuente-de-audio-demostrable)).
+
+Cada llamada va en dos filas de `pruebas.csv`, una por canal, con toma 5, condición `dialogo` o `dialogo-tv` y el
+diálogo en `bloque`. Para medir A contra B, desde la copia donde corrió el servidor:
+
+```bash
+python medir_voz_real.py --solo-parakeet --toma-decision 5 \
+  --contra-parakeet parakeet-0.8-rms-0.008-filtro-silero-0.5 --variantes parakeet-0.3-silero-0.9 \
+  --etiqueta dialogos-a-contra-b
+```
+
+El resumen sale por persona y condición (`toma5/luciano-dialogo`, `toma5/otra-dialogo`). Se probó con una corrida de
+humo sobre los dos canales de una llamada por Meet del 2026-10-28, con Parakeet y Silero reales; esa llamada no sigue
+ningún diálogo, así que sus números no valen.

@@ -15,6 +15,8 @@ from websockets.asyncio.server import serve
 from test_llamada import Reloj, RespuestaFalsa, pcm
 from motores import MotorFalso
 from servidor import Servidor
+import replay as replay_mod
+from casos import Linea
 
 
 class DetectorFalso:
@@ -104,6 +106,73 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.assertIn('<ol class="pasos">', texto)
         self.assertIn("<code>sudo killall coreaudiod</code>", texto)
         self.assertNotIn("**", texto)
+
+    def args_de_modelo(self):
+        a = self.servidor.args
+        a.prompt, a.seed, a.ollama_url, a.modelo = "tarea", 42, "http://127.0.0.1:1", "gemma4:e2b-it-q4_K_M"
+
+    async def test_panel_elige_detector_para_la_proxima_llamada(self):
+        cargado = DetectorFalso()
+        self.args_de_modelo()
+        with patch("servidor.replay.construir_detector", return_value=cargado) as construir:
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e4b-it-q4_K_M"}))
+                inicio = await self.evento(panel, "inicio")
+                self.assertEqual(inicio["detector"], {"tipo": "tito-slm", "modelo": "gemma4:e4b-it-q4_K_M"})
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                await self.evento(panel, "fin")
+                await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e4b-it-q4_K_M"}))
+                await self.evento(panel, "inicio")
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                await self.evento(panel, "fin")
+        self.assertIs(self.servidor.detector, cargado)
+        self.assertEqual(construir.call_count, 1, "elegir el mismo no vuelve a cargarlo")
+        self.assertEqual(construir.call_args.args[0], "tito-slm")
+        self.assertEqual(construir.call_args.kwargs["modelo"], "gemma4:e4b-it-q4_K_M")
+
+    async def test_detector_desconocido_o_que_no_carga_avisa_y_no_cambia_el_actual(self):
+        anterior = self.servidor.detector
+        self.args_de_modelo()
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "qwen3.5:0.8b-q8_0"}))
+            self.assertIn("Detector desconocido", (await self.evento(panel, "error"))["mensaje"])
+            with patch("servidor.replay.construir_detector", side_effect=replay_mod.correr.FalloAlCalentar("no responde")):
+                await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e2b-it-q4_K_M"}))
+                self.assertIn("ollama pull gemma4:e2b-it-q4_K_M", (await self.evento(panel, "error"))["mensaje"])
+        self.assertIs(self.servidor.detector, anterior)
+        self.assertEqual(self.servidor.args.detector, "reglas")
+
+    async def test_tito_recibe_solo_frases_cerradas_y_se_reinicia_en_cada_llamada(self):
+        vistas, reinicios = [], []
+
+        class DetectorTito:
+            solo_cerradas = True
+
+            def reiniciar(self):
+                reinicios.append(True)
+
+            def evaluar(self, foto):
+                vistas.append(tuple(l.texto for l in foto))
+                r = RespuestaFalsa()
+                r.consulta, r.tito_puntaje, r.tito_ms = "omitida", 0.12, 15.0
+                return r
+
+        self.servidor.detector = DetectorTito()
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            llamada = self.servidor.llamada
+            llamada.contexto.parciales[9] = Linea(hablante="B", texto="borrador")
+            llamada.contexto.cerrados.append(Linea(hablante="A", texto="cerrada"))
+            llamada.foto = tuple(llamada.contexto.cerrados) + tuple(llamada.contexto.parciales.values())
+            llamada.disparos = 1
+            self.servidor.novedad.set()
+            ev = await self.evento(panel, "detector")
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await self.evento(panel, "fin")
+        self.assertEqual(vistas, [("cerrada",)])
+        self.assertEqual(reinicios, [True])
+        self.assertEqual((ev["consulta"], ev["tito_puntaje"], ev["tito_ms"]), ("omitida", 0.12, 15.0))
 
     async def test_prueba_asr_dos_cortes_umbral_manifiesto_y_sin_detector(self):
         class MotorSilencio(MotorFalso):
