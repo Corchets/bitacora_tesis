@@ -1,0 +1,517 @@
+{
+  "fecha": "2026-10-30T13:16:03.907543+00:00",
+  "modelo": {
+    "tag": "gemma4:e4b",
+    "digest": "dc35e8d9c6061baa6f0fa870975ab6932e2542b579b13ea0f199fa4bb7300c9c",
+    "ollama_version": "0.40.8",
+    "opciones": {
+      "temperature": 0,
+      "seed": 42,
+      "num_predict": 2048,
+      "num_ctx": 8192
+    },
+    "think": true,
+    "formato": "json-schema decision/fundamento/lineas_soporte -> etiqueta 0/1/null"
+  },
+  "url": "http://127.0.0.1:11435",
+  "timeout_s": 600,
+  "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+  "prompts_version": "v7-contextual-2026-10-30",
+  "codigo_commit": "9fe43b531c950ea2c8565b989acacd6d16c0c17a",
+  "codigo_diff_sha256": "022e854cbc12224c5bf59109087f4fbfc7b86ce063a5091f64b751db7182b335",
+  "script_sha256": "fdc02985407f5e8ae39735092a446d9b0b8d1a95e37af79162c333e5893d7678",
+  "hardware": "Linux-7.2.5-3-omarchy-x86_64-with-glibc2.44",
+  "semilla": 42,
+  "fuente_controles": "VALIDACION-PROMPTS-SUPERVISION-TITO-99-V4-THINK-4B-16K-2026-10-29.json",
+  "fuente_controles_sha256": "a775ef9d5d4911f4a533cdfb58e519fa496b2c3db13ccc1f88c04a603a3cc680",
+  "revision_humana": false,
+  "total": 8,
+  "nota": "Validación técnica del anotador de desarrollo; no ejecuta supervisión, entrenamiento ni habilita D07/D08/D09.",
+  "controles": [
+    {
+      "control": "pizza_legitima",
+      "lineas": [
+        "A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.",
+        "B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.",
+        "A: Perfecto, confirmo que es el alias de la factura del local."
+      ],
+      "esperado": 0,
+      "observado": 0,
+      "conforme": true,
+      "segundos": 19.864,
+      "registro": {
+        "etiqueta": 0,
+        "fundamento": "El diálogo describe una transacción comercial normal (pedido y pago a un comercio conocido), donde el método de pago (transferencia al alias del local) es confirmado por el cliente. | Se trata de una transacción comercial normal (pedido y pago) en la que el interlocutor es instruido a realizar un pago a una cuenta conocida del comercio.",
+        "lineas_soporte": [
+          1,
+          2,
+          3
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 0,
+          "fundamento": "El diálogo describe una transacción comercial normal (pedido y pago a un comercio conocido), donde el método de pago (transferencia al alias del local) es confirmado por el cliente.",
+          "lineas_soporte": [
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\nL2 B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\nL3 A: Perfecto, confirmo que es el alias de la factura del local.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El diálogo describe una transacción comercial normal (pedido y pago a un comercio conocido), donde el método de pago (transferencia al alias del local) es confirmado por el cliente.\",\n  \"lineas_soporte\": [\n    1,\n    2,\n    3\n  ],\n  \"decision\": \"NO_CONSULTAR\"\n}",
+          "thinking": "Here's a thinking process to arrive at the desired JSON output:\n\n1.  **Analyze the Request and Rules:**\n    *   **Goal:** Evaluate a call transcript (<dialogo>) to determine if a risky request is being made (CONSULTAR), if the request is unclear (INCIERTO), or if there is no reason to consult (NO_CONSULTAR).\n    *   **Key Constraint:** Focus *only* on what the speakers are asking for *now*. Past narratives don't count as current requests.\n    *   **CONSULTAR Criteria:** Risky request (credentials, remote access, unexpected transfer) OR a supposed entity warns of a problem/service issue AND adds secrecy, pressure, or isolation.\n    *   **INCIERTO Criteria:** Request is unclear, cut off, or the object is unidentified.\n    *   **NO_CONSULTAR Criteria:** Understandable and no reason to consult. Includes greetings, narratives, warnings/advice *not* to give data, or normal requests (e.g., identifying for an appointment, paying a known merchant).\n    *   **Evidence:** Must provide a brief justification with a literal quote and line numbers.\n\n2.  **Analyze the Dialogue:**\n    *   L1 A: \"Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\" (A calls the pizzeria to order two pizzas and pay by transfer to the local.) -> *Normal transaction setup.*\n    *   L2 B: \"Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\" (The order costs ten thousand pesos. Transfer to the local's alias that you already know and pick up at the counter.) -> *Standard payment instruction for a known merchant.*\n    *   L3 A: \"Perfecto, confirmo que es el alias de la factura del local.\" (Perfect, I confirm it is the local's invoice alias.) -> *Confirmation of the known payment method.*\n\n3.  **Apply the Rules to the Dialogue:**\n    *   Is there a risky request (credentials, remote access, unexpected transfer)? No. The transfer is explicitly to the \"local\" (the pizzeria) and the alias is confirmed as the \"local's invoice alias.\"\n    *   Is there a warning/secrecy/pressure? No.\n    *   Is the request unclear? No. The request is clearly about ordering and paying for pizza.\n    *   *Conclusion:* This is a normal, legitimate transaction between a customer and a known merchant.\n\n4.  **Determine the Decision and Justification:**\n    *   **Decision:** NO_CONSULTAR.\n    *   **Justification:** The dialogue describes a standard commercial transaction (ordering and paying for pizza) where the payment method (transfer to the local's alias) is explicitly confirmed by the customer.\n\n5.  **Format the Output (JSON):** (Ensure the quote and line numbers are accurate.)",
+          "done_reason": "stop",
+          "eval_count": 724,
+          "prompt_eval_count": 511
+        },
+        "pasada2": {
+          "etiqueta": 0,
+          "fundamento": "Se trata de una transacción comercial normal (pedido y pago) en la que el interlocutor es instruido a realizar un pago a una cuenta conocida del comercio.",
+          "lineas_soporte": [
+            1,
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\nL2 B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\nL3 A: Perfecto, confirmo que es el alias de la factura del local.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"Se trata de una transacción comercial normal (pedido y pago) en la que el interlocutor es instruido a realizar un pago a una cuenta conocida del comercio.\",\n  \"lineas_soporte\": [\n    1,\n    2\n  ],\n  \"decision\": \"NO_CONSULTAR\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to determine if the dialogue contains a risky request directed at the interlocutor, or if it's a normal, non-risky interaction, based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: \"Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\" (A calls the pizzeria to order two pizzas and pay by transfer to the local.) -> *Normal transaction setup.*\n    *   L2 B: \"Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\" (B states the cost. Instructs A to transfer to the local's alias, which A supposedly already knows, and pick up at the counter.) -> *Normal payment instruction for a local business.*\n    *   L3 A: \"Perfecto, confirmo que es el alias de la factura del local.\" (A confirms that it is the local's invoice alias.) -> *Confirmation of the payment method/details.*\n3.  **Apply the Rules:**\n    *   *Risky Request (CONSULTAR)?* Is there a request for credentials, remote access, or a threat/pressure/secrecy related to a problem? No. The request is simply to perform a standard payment (transfer money to a known local account).\n    *   *Unclear/Incomplete (INCIERTO)?* Is the request unclear or cut off? No. The transaction is clear.\n    *   *Normal/Safe (NO_CONSULTAR)?* Does it fit the criteria for a normal transaction? Yes. It is a standard interaction with a commercial entity (pizzeria) regarding an order and payment.\n4.  **Determine the Decision:** NO_CONSULTAR.\n5.  **Formulate the Output:** Provide the JSON structure with the decision and the supporting quote/lines. (The quote should reflect the normal transaction nature).",
+          "done_reason": "stop",
+          "eval_count": 521,
+          "prompt_eval_count": 510
+        }
+      }
+    },
+    {
+      "control": "turno_medico_dni_legitimo",
+      "lineas": [
+        "A: Llamo para pedir un turno con el doctor Pérez, por favor.",
+        "B: Perfecto, ¿me confirma su DNI para registrar el turno?",
+        "A: Sí, es 12.345.678."
+      ],
+      "esperado": 0,
+      "observado": 0,
+      "conforme": true,
+      "segundos": 16.174,
+      "registro": {
+        "etiqueta": 0,
+        "fundamento": "El pedido de DNI es un paso normal y legítimo para registrar un turno médico. | El pedido de DNI es un trámite legítimo y normal para registrar un turno.",
+        "lineas_soporte": [
+          2,
+          3
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 0,
+          "fundamento": "El pedido de DNI es un paso normal y legítimo para registrar un turno médico.",
+          "lineas_soporte": [
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Llamo para pedir un turno con el doctor Pérez, por favor.\nL2 B: Perfecto, ¿me confirma su DNI para registrar el turno?\nL3 A: Sí, es 12.345.678.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El pedido de DNI es un paso normal y legítimo para registrar un turno médico.\",\n  \"lineas_soporte\": [\n    2\n  ],\n  \"decision\": \"NO_CONSULTAR\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to evaluate a short dialogue based on specific criteria to determine if a \"consultation\" (CONSULTAR) is necessary, if the situation is \"uncertain\" (INCIERTO), or if it can be safely ignored (NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: Llamo para pedir un turno con el doctor Pérez, por favor. (A calls to request an appointment.)\n    *   L2 B: Perfecto, ¿me confirma su DNI para registrar el turno? (B asks for DNI to register the appointment.)\n    *   L3 A: Sí, es 12.345.678. (A provides the DNI.)\n3.  **Apply the Rules (Focus on Risk/Threat):**\n    *   *CONSULTAR:* Is there a risky request (e.g., credentials, remote access, unexpected transfer)? Or is there a supposed entity warning of a problem and adding secrecy/pressure/isolation?\n    *   *Evaluation:* The request is for a standard medical appointment. The request for DNI (L2) is a normal, expected step in a legitimate administrative process (registering an appointment). There is no pressure, secrecy, or indication of a scam.\n    *   *NO_CONSULTAR:* Includes \"pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado.\"\n4.  **Determine the Decision:** The request is legitimate and standard for booking an appointment. Therefore, NO_CONSULTAR is the correct decision.\n5.  **Formulate the Justification:** The request for DNI is part of a legitimate process (booking an appointment).\n6.  **Construct the Output:** (JSON format required).",
+          "done_reason": "stop",
+          "eval_count": 451,
+          "prompt_eval_count": 494
+        },
+        "pasada2": {
+          "etiqueta": 0,
+          "fundamento": "El pedido de DNI es un trámite legítimo y normal para registrar un turno.",
+          "lineas_soporte": [
+            2,
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Llamo para pedir un turno con el doctor Pérez, por favor.\nL2 B: Perfecto, ¿me confirma su DNI para registrar el turno?\nL3 A: Sí, es 12.345.678.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El pedido de DNI es un trámite legítimo y normal para registrar un turno.\",\n  \"lineas_soporte\": [\n    2,\n    3\n  ],\n  \"decision\": \"NO_CONSULTAR\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to perform an independent review of a short dialogue to determine if a risky request is being made, based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: Llamo para pedir un turno con el doctor Pérez, por favor. (A calls to request an appointment.)\n    *   L2 B: Perfecto, ¿me confirma su DNI para registrar el turno? (B asks for DNI to register the appointment.)\n    *   L3 A: Sí, es 12.345.678. (A provides the DNI.)\n3.  **Apply the Rules:**\n    *   *Risky Request (CONSULTAR)?* Is there a request for credentials, remote access, or an unexpected transfer, OR is there a warning/threat combined with secrecy/pressure/isolation?\n        *   The request is for a DNI (identification). This is a standard, legitimate part of scheduling an appointment (L2).\n        *   There is no secrecy, pressure, or threat.\n    *   *Unclear/Incomplete (INCIERTO)?* Is the request unclear or incomplete?\n        *   No. The request (DNI for appointment) is clear.\n    *   *No Reason to Consult (NO_CONSULTAR)?* Does the visible content indicate a normal, legitimate transaction, including standard requests for identification?\n        *   Yes. Providing DNI to register an appointment is a normal, legitimate procedure. The rule explicitly states: \"Pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado...\"\n4.  **Determine the Decision:** NO_CONSULTAR.\n5.  **Formulate the Justification:** The request is for standard identification (DNI) to complete a legitimate service (scheduling an appointment).\n6.  **Construct the JSON Output.** (Ensure the citation is literal and includes line numbers.)",
+          "done_reason": "stop",
+          "eval_count": 503,
+          "prompt_eval_count": 493
+        }
+      }
+    },
+    {
+      "control": "otp_fraude",
+      "lineas": [
+        "A: Hola.",
+        "B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.",
+        "A: ¿Qué tengo que hacer?",
+        "B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta."
+      ],
+      "esperado": 1,
+      "observado": 1,
+      "conforme": true,
+      "segundos": 19.062,
+      "registro": {
+        "etiqueta": 1,
+        "fundamento": "El interlocutor B, haciéndose pasar por un banco, advierte sobre movimientos raros en la cuenta y, bajo la excusa de bloquearla, solicita el código SMS inmediatamente. | El interlocutor solicita un código de seguridad enviado por SMS bajo la premisa de un problema urgente en la cuenta.",
+        "lineas_soporte": [
+          2,
+          3,
+          4
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 1,
+          "fundamento": "El interlocutor B, haciéndose pasar por un banco, advierte sobre movimientos raros en la cuenta y, bajo la excusa de bloquearla, solicita el código SMS inmediatamente.",
+          "lineas_soporte": [
+            2,
+            4
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El interlocutor B, haciéndose pasar por un banco, advierte sobre movimientos raros en la cuenta y, bajo la excusa de bloquearla, solicita el código SMS inmediatamente.\",\n  \"lineas_soporte\": [\n    2,\n    4\n  ],\n  \"decision\": \"CONSULTAR\"\n}",
+          "thinking": "Here's a thinking process to arrive at the desired JSON output:\n\n1.  **Analyze the Request and Rules:**\n    *   **Goal:** Evaluate a call transcript (<dialogo>) to determine if a risky request is being made (CONSULTAR), if the request is unclear (INCIERTO), or if there is no reason to consult (NO_CONSULTAR).\n    *   **Key Rule (CONSULTAR):** A risky request is present (e.g., giving credentials, installing software, unexpected transfer), OR a supposed entity warns of a problem and adds secrecy, pressure, or isolation.\n    *   **Key Rule (NO_CONSULTAR):** Includes greetings, past narratives, warnings/advice *not* to give data, or normal, legitimate requests (e.g., identifying for an appointment).\n    *   **Constraint:** Only use the visible dialogue. Do not invent or complete missing parts.\n    *   **Output Format:** JSON with `fundamento`, `lineas_soporte`, and `decision`.\n\n2.  **Analyze the Dialogue (<dialogo>):**\n    *   L1 A: Hola. (Greeting)\n    *   L2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta. (Claim of being the bank, warning of suspicious activity/problem).\n    *   L3 A: ¿Qué tengo que hacer? (Inquiry)\n    *   L4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta. (Instruction/Request: Provide the SMS code immediately to \"block the account\").\n\n3.  **Apply the Rules to the Dialogue:**\n    *   *Is there a risky request?* Yes. B is claiming to be the bank (a financial institution). B is warning of a problem (suspicious movements). B is then demanding the SMS code (\"decímelo ahora mismo\") under the guise of solving the problem (\"para bloquear la cuenta\").\n    *   *Does this meet the CONSULTAR criteria?* Yes. The supposed entity (the bank) warns of a problem (L2) and adds pressure/urgency (\"decímelo ahora mismo\") while requesting sensitive information (the SMS code, which often functions as a temporary password/credential).\n    *   *Is it INCIERTO?* No, the request is perfectly clear.\n    *   *Is it NO_CONSULTAR?* No, because the request is highly suspicious and involves providing a security code.\n\n4.  **Formulate the Conclusion and Justification:**\n    *   **Decision:** CONSULTAR.\n    *   **Fundamento:** The caller (B) claims to be from the bank and, under the pretext of detecting suspicious movements, demands the SMS code immediately to \"block the account.\"\n    *   **Lineas de Soporte:** L2, L4.\n\n5.  **Construct the JSON Output.** (Self-Correction: Ensure the language is precise and directly addresses the prompt's requirements.)",
+          "done_reason": "stop",
+          "eval_count": 727,
+          "prompt_eval_count": 501
+        },
+        "pasada2": {
+          "etiqueta": 1,
+          "fundamento": "El interlocutor solicita un código de seguridad enviado por SMS bajo la premisa de un problema urgente en la cuenta.",
+          "lineas_soporte": [
+            3,
+            4
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El interlocutor solicita un código de seguridad enviado por SMS bajo la premisa de un problema urgente en la cuenta.\",\n  \"lineas_soporte\": [\n    3,\n    4\n  ],\n  \"decision\": \"CONSULTAR\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to perform an independent review of a short dialogue to determine if a risky request is being made, based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: Hola. (Greeting)\n    *   L2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta. (Claim of being from the bank, stating a problem/alert).\n    *   L3 A: ¿Qué tengo que hacer? (Inquiry about action).\n    *   L4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta. (Instruction to provide a code received via SMS immediately to \"block the account\").\n3.  **Apply the Criteria (Focus on L4):**\n    *   *Risky Request?* Yes. Asking for a code sent via SMS (often a verification code, OTP, or security code) is a classic phishing/social engineering tactic. Providing this code allows the attacker to gain access or perform unauthorized actions.\n    *   *Pressure/Secrecy/Isolation?* Yes. The urgency (\"decímelo ahora mismo\") and the premise of a critical account problem (\"detectamos movimientos raros\") create pressure.\n    *   *Reconstruction of Requests:* The request is clear: provide the SMS code.\n4.  **Determine the Decision:** Since there is a clear, risky request (providing a security code) and the entity is using urgency/fear (account problem), the decision must be CONSULTAR.\n5.  **Identify the Foundation (Quote and Lines):** The risky request is in L4.\n6.  **Construct the JSON Output.**",
+          "done_reason": "stop",
+          "eval_count": 452,
+          "prompt_eval_count": 500
+        }
+      }
+    },
+    {
+      "control": "pedido_repartido",
+      "lineas": [
+        "A: Hola.",
+        "B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.",
+        "A: ¿Qué tengo que hacer?",
+        "B: Te va a llegar un mensaje con un código.",
+        "A: Me llegó.",
+        "B: Perfecto, decímelo para cancelar el cargo."
+      ],
+      "esperado": 1,
+      "observado": 1,
+      "conforme": true,
+      "segundos": 23.237,
+      "registro": {
+        "etiqueta": 1,
+        "fundamento": "La supuesta entidad bancaria advierte un problema de cuenta (\"hay un cargo raro en tu tarjeta\") y solicita al interlocutor que revele un código recibido por mensaje (\"decímelo para cancelar el cargo\"), lo cual constituye un pedido riesgoso. | El interlocutor solicita el código de seguridad recibido por mensaje, lo cual constituye un pedido riesgoso de credenciales.",
+        "lineas_soporte": [
+          2,
+          4,
+          6
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 1,
+          "fundamento": "La supuesta entidad bancaria advierte un problema de cuenta (\"hay un cargo raro en tu tarjeta\") y solicita al interlocutor que revele un código recibido por mensaje (\"decímelo para cancelar el cargo\"), lo cual constituye un pedido riesgoso.",
+          "lineas_soporte": [
+            2,
+            6
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un mensaje con un código.\nL5 A: Me llegó.\nL6 B: Perfecto, decímelo para cancelar el cargo.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"La supuesta entidad bancaria advierte un problema de cuenta (\\\"hay un cargo raro en tu tarjeta\\\") y solicita al interlocutor que revele un código recibido por mensaje (\\\"decímelo para cancelar el cargo\\\"), lo cual constituye un pedido riesgoso.\",\n  \"lineas_soporte\": [\n    2,\n    6\n  ],\n  \"decision\": \"CONSULTAR\"\n}",
+          "thinking": "Here's a thinking process to arrive at the desired JSON output:\n\n1.  **Analyze the Request and Rules:**\n    *   **Goal:** Evaluate a call transcript (<dialogo>) to determine if a risky request is being made (CONSULTAR, INCIERTO, NO_CONSULTAR).\n    *   **Key Rule (CONSULTAR):** A risky request is present (e.g., giving credentials, installing software, unexpected transfer), OR a supposed entity warns of a problem (account/service issue) AND adds secrecy, pressure, or isolation.\n    *   **Key Rule (NO_CONSULTAR):** No risky request; includes greetings, reports, warnings/advice *not* to give data, or normal legitimate requests (e.g., identifying for an appointment).\n    *   **Constraint:** Only use the visible dialogue. Do not invent or complete missing parts.\n    *   **Output Format:** JSON with `fundamento`, `lineas_soporte`, and `decision`.\n\n2.  **Analyze the Dialogue (<dialogo>):**\n    *   L1 A: Hola. (Greeting)\n    *   L2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta. (Claim of being the bank, notification of a problem/issue).\n    *   L3 A: ¿Qué tengo que hacer? (Inquiry).\n    *   L4 B: Te va a llegar un mensaje con un código. (Instruction/setup).\n    *   L5 A: Me llegó. (Confirmation).\n    *   L6 B: Perfecto, decímelo para cancelar el cargo. (The request: \"decímelo\" - tell me it).\n\n3.  **Apply the Rules to the Dialogue:**\n    *   *Is there a supposed entity warning of a problem?* Yes (L2: \"hay un cargo raro en tu tarjeta\").\n    *   *Is there a risky request?* Yes. The request is to provide a code received via SMS (L6: \"decímelo para cancelar el cargo\"). This code is typically a verification code (OTP/2FA), and providing it to an unsolicited caller is a high-risk action (phishing/account takeover).\n    *   *Does the entity add secrecy, pressure, or isolation?* While the pressure isn't extreme, the combination of the \"problem\" (L2) and the request for the sensitive code (L6) constitutes a high-risk scenario typical of social engineering.\n    *   *Conclusion:* The request to provide the code (L6) is a clear, risky request directed at the interlocutor.\n\n4.  **Determine the Decision:**\n    *   The decision must be **CONSULTAR**.\n\n5.  **Formulate the Justification (Fundamento and Lineas_Soporte):**\n    *   The core risk is the request for the code.\n    *   *Fundamento:* The caller, claiming to be from the bank, asks the recipient to provide a code received via message to \"cancel the charge.\"\n    *   *Lineas_Soporte:* L2 (Claim of being the bank/problem) and L6 (The request for the code).\n\n6.  **Construct the Final JSON:** (Self-Correction/Review: Ensure the language is precise and adheres strictly to the prompt's requirements.)",
+          "done_reason": "stop",
+          "eval_count": 819,
+          "prompt_eval_count": 514
+        },
+        "pasada2": {
+          "etiqueta": 1,
+          "fundamento": "El interlocutor solicita el código de seguridad recibido por mensaje, lo cual constituye un pedido riesgoso de credenciales.",
+          "lineas_soporte": [
+            2,
+            4,
+            6
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un mensaje con un código.\nL5 A: Me llegó.\nL6 B: Perfecto, decímelo para cancelar el cargo.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El interlocutor solicita el código de seguridad recibido por mensaje, lo cual constituye un pedido riesgoso de credenciales.\",\n  \"lineas_soporte\": [\n    2,\n    4,\n    6\n  ],\n  \"decision\": \"CONSULTAR\"\n}",
+          "thinking": "Here's a thinking process to arrive at the desired JSON output:\n\n1.  **Analyze the Request and Rules:**\n    *   **Goal:** Determine if the dialogue constitutes a risky request requiring consultation (CONSULTAR), is unclear (INCIERTO), or is safe/normal (NO_CONSULTAR).\n    *   **Key Rule (CONSULTAR):** A risky request is present (e.g., giving credentials, installing software, unexpected transfer), OR a supposed entity warns of a problem *and* adds secrecy, pressure, or isolation.\n    *   **Key Rule (NO_CONSULTAR):** Includes greetings, reports, warnings/advice *not* to give data, or normal requests (e.g., identifying for an appointment, paying a merchant).\n    *   **Crucial Constraint:** A warning/advice to protect data is *not* a request to deliver data.\n    *   **Evidence:** Only the provided dialogue block is valid.\n\n2.  **Analyze the Dialogue:**\n    *   L1 A: Hola. (Greeting)\n    *   L2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta. (Claim of problem/urgency)\n    *   L3 A: ¿Qué tengo que hacer? (Inquiry)\n    *   L4 B: Te va a llegar un mensaje con un código. (Instruction/Setup)\n    *   L5 A: Me llegó. (Confirmation)\n    *   L6 B: Perfecto, decímelo para cancelar el cargo. (The request: \"decímelo\" - tell me it).\n\n3.  **Evaluate the Request against the Rules:**\n    *   The caller (B) claims to be from the bank and mentions a \"cargo raro\" (L2). This establishes a scenario of potential fraud/problem.\n    *   The caller instructs the recipient (A) to provide a code received via message (L4, L6).\n    *   *Is this a risky request?* Yes. Asking for a one-time password (OTP) or verification code, especially when framed as \"canceling a charge,\" is a classic social engineering tactic (phishing/vishing). The code is a credential/security measure.\n    *   *Does it meet the CONSULTAR criteria?* Yes. There is a risky request directed at the interlocutor (L6: \"decímelo para cancelar el cargo\").\n\n4.  **Formulate the Conclusion:**\n    *   Decision: CONSULTAR.\n    *   Foundation: The request to provide the code is the risky element.\n    *   Supporting Lines: L4 and L6 clearly show the instruction and the demand for the code.\n\n5.  **Construct the JSON Output.** (Self-Correction: Ensure the foundation is brief and uses literal quotes and line numbers.)",
+          "done_reason": "stop",
+          "eval_count": 680,
+          "prompt_eval_count": 513
+        }
+      }
+    },
+    {
+      "control": "consejo_negacion",
+      "lineas": [
+        "A: Me llamaron diciendo que era del banco.",
+        "B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial."
+      ],
+      "esperado": 0,
+      "observado": 0,
+      "conforme": true,
+      "segundos": 15.104,
+      "registro": {
+        "etiqueta": 0,
+        "fundamento": "El hablante B solo aconseja proteger los datos y recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual. | El hablante B solo ofrece un consejo protector sobre cómo manejar llamadas fraudulentas, sin solicitar datos ni imponer presión en la llamada actual.",
+        "lineas_soporte": [
+          2
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 0,
+          "fundamento": "El hablante B solo aconseja proteger los datos y recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual.",
+          "lineas_soporte": [
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Me llamaron diciendo que era del banco.\nL2 B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El hablante B solo aconseja proteger los datos y recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual.\",\n  \"lineas_soporte\": [\n    2\n  ],\n  \"decision\": \"NO_CONSULTAR\"\n}",
+          "thinking": "Here's a thinking process to arrive at the desired JSON output:\n\n1.  **Analyze the Request and Rules:**\n    *   **Goal:** Evaluate a call transcript snippet to determine if a risky request is being made (CONSULTAR), if the request is unclear (INCIERTO), or if there is no reason to consult (NO_CONSULTAR).\n    *   **Key Constraint (The \"Protection Advice\" Rule):** If the speaker only advises protecting data or using an official channel, *without* soliciting data or imposing secrecy/isolation in the *current* call, choose NO_CONSULTAR. The advice itself is not a current threat/request.\n    *   **Definition of CONSULTAR:** A risky request is directed (e.g., giving credentials, installing software, unexpected transfer), OR a supposed entity warns of a problem and adds secrecy, pressure, or isolation.\n    *   **Definition of NO_CONSULTAR:** Includes greetings, reports/stories, warnings/advice *not* to give data, and normal requests (e.g., identifying for an appointment, paying a merchant).\n    *   **Evidence:** Only the `<dialogo>` block is valid evidence.\n\n2.  **Analyze the Dialogue:**\n    *   L1 A: \"Me llamaron diciendo que era del banco.\" (A reports receiving a call claiming to be from the bank.)\n    *   L2 B: \"Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\" (B gives advice: never give your password over the phone; hang up and call the official number.)\n\n3.  **Apply the Rules to the Dialogue:**\n    *   Is there a risky request directed at the interlocutor (A) in this *current* call? No. B is giving advice to A.\n    *   Is there a supposed entity warning of a problem *and* adding secrecy/pressure? No. B is giving general security advice.\n    *   Does the dialogue fit the \"Protection Advice\" rule? Yes. B is advising A to protect their data and use an official channel.\n    *   Does it fit NO_CONSULTAR? Yes. It includes a report (L1) and a warning/advice (L2) for *not* giving data.\n\n4.  **Determine the Decision and Justification:**\n    *   **Decision:** NO_CONSULTAR.\n    *   **Justification (Quote & Lines):** The advice is purely protective and does not constitute a current risky request. L2 advises: \"Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\"\n\n5.  **Format the Output (JSON):** (Ensure all required fields are present.)",
+          "done_reason": "stop",
+          "eval_count": 661,
+          "prompt_eval_count": 477
+        },
+        "pasada2": {
+          "etiqueta": 0,
+          "fundamento": "El hablante B solo ofrece un consejo protector sobre cómo manejar llamadas fraudulentas, sin solicitar datos ni imponer presión en la llamada actual.",
+          "lineas_soporte": [
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Me llamaron diciendo que era del banco.\nL2 B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El hablante B solo ofrece un consejo protector sobre cómo manejar llamadas fraudulentas, sin solicitar datos ni imponer presión en la llamada actual.\",\n  \"lineas_soporte\": [\n    2\n  ],\n  \"decision\": \"NO_CONSULTAR\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to perform an independent review of a short dialogue based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR). The focus is on whether the speakers are making a *risky request* in the *current* call, or if the conversation is merely advisory/informational.\n\n2.  **Analyze the Dialogue:**\n    *   L1 A: Me llamaron diciendo que era del banco. (A reports a previous call/event.)\n    *   L2 B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial. (B gives advice/a warning.)\n\n3.  **Apply the Rules:**\n    *   *Risky Request?* No. Neither A nor B is asking for credentials, installing software, or transferring funds in the current call.\n    *   *Suspicious Entity/Pressure?* No. B is giving a general safety warning, not acting as a suspicious entity pressuring A.\n    *   *Advisory/Informational?* Yes. L2 B is explicitly advising A on how to handle potential scams (\"Nunca le pases tu clave a nadie por teléfono...\").\n    *   *Rule Check (NO_CONSULTAR):* \"Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible...\" This dialogue falls under \"advertencias o consejos para NO entregar datos.\"\n    *   *Rule Check (CONSULTAR):* Does it meet the criteria for CONSULTAR? No. There is no risky request or observable pressure/secrecy related to a current transaction.\n\n4.  **Determine the Decision:** NO_CONSULTAR.\n\n5.  **Formulate the Justification:** The dialogue is a report of a past event (L1) followed by a protective warning/advice (L2).\n\n6.  **Construct the JSON Output.**",
+          "done_reason": "stop",
+          "eval_count": 490,
+          "prompt_eval_count": 476
+        }
+      }
+    },
+    {
+      "control": "ambiguo_truncado",
+      "lineas": [
+        "A: Te llegó el mensaje, ¿no?",
+        "B: Sí, me llegó.",
+        "A: Bueno, pasámelo ent—"
+      ],
+      "esperado": null,
+      "observado": null,
+      "conforme": true,
+      "segundos": 15.369,
+      "registro": {
+        "etiqueta": null,
+        "fundamento": "desacuerdo entre pasadas (pasada1=None, pasada2=None): incierto, fuera de pérdida con cobertura. El pedido es pasar 'el mensaje', pero la naturaleza de dicho mensaje (si contiene datos sensibles, códigos, etc.) no está visible en el diálogo. | El pedido está incompleto y el objeto que se pide ('pasámelo') no está identificado en el diálogo.",
+        "lineas_soporte": [
+          3
+        ],
+        "motivo": "desacuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": null,
+          "fundamento": "El pedido es pasar 'el mensaje', pero la naturaleza de dicho mensaje (si contiene datos sensibles, códigos, etc.) no está visible en el diálogo.",
+          "lineas_soporte": [
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Te llegó el mensaje, ¿no?\nL2 B: Sí, me llegó.\nL3 A: Bueno, pasámelo ent—\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El pedido es pasar 'el mensaje', pero la naturaleza de dicho mensaje (si contiene datos sensibles, códigos, etc.) no está visible en el diálogo.\",\n  \"lineas_soporte\": [\n    3\n  ],\n  \"decision\": \"INCIERTO\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to evaluate a short dialogue snippet from a call to determine if a risky request is being made, based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: Te llegó el mensaje, ¿no? (You got the message, right?)\n    *   L2 B: Sí, me llegó. (Yes, I got it.)\n    *   L3 A: Bueno, pasámelo ent— (Well, pass it to me ent—)\n3.  **Apply the Rules (Focus on the *current* request):**\n    *   *Risky Request Check (CONSULTAR):* Is A asking B to deliver credentials, install software, transfer funds, or is there a threat/pressure/secrecy related to an account issue?\n    *   L3 A says \"pasámelo\" (pass it to me). What is \"it\"? L1 mentions \"el mensaje\" (the message).\n    *   The request is to receive the content of the message.\n    *   If the message contains sensitive information (like a code, link, or credential), then asking for it is a risky request.\n    *   The dialogue is incomplete (L3 is cut off).\n    *   The object (\"el mensaje\") is identified, but its nature (is it a code? a link? a password?) is unknown.\n4.  **Determine the Decision:**\n    *   *Is it clearly NO_CONSULTAR?* No, because \"pasámelo\" could be asking for something sensitive.\n    *   *Is it clearly CONSULTAR?* No, because we don't know what the message contains.\n    *   *Is it INCIERTO?* Yes. The request is to pass along \"el mensaje,\" but the content or nature of that message is not visible, making the risk level ambiguous.\n5.  **Formulate the Output:** Structure the response in the required JSON format, providing the decision and a brief justification based on the visible evidence. (No specific quote is needed for INCIERTO, but the reasoning must be clear).",
+          "done_reason": "stop",
+          "eval_count": 552,
+          "prompt_eval_count": 472
+        },
+        "pasada2": {
+          "etiqueta": null,
+          "fundamento": "El pedido está incompleto y el objeto que se pide ('pasámelo') no está identificado en el diálogo.",
+          "lineas_soporte": [
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Te llegó el mensaje, ¿no?\nL2 B: Sí, me llegó.\nL3 A: Bueno, pasámelo ent—\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El pedido está incompleto y el objeto que se pide ('pasámelo') no está identificado en el diálogo.\",\n  \"lineas_soporte\": [\n    3\n  ],\n  \"decision\": \"INCIERTO\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to independently evaluate a short dialogue snippet to determine if a risky request is being made, based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: Te llegó el mensaje, ¿no? (You got the message, right?)\n    *   L2 B: Sí, me llegó. (Yes, I got it.)\n    *   L3 A: Bueno, pasámelo ent— (Well, pass it to me ent—)\n3.  **Apply Evaluation Criteria:**\n    *   *Is there a risky request?* A risky request involves delivering credentials, access codes, installing software, or transferring to an unexpected destination.\n    *   *What is A asking for?* A is asking B to \"pass it\" (pasámelo) after B confirms receiving \"the message\" (el mensaje).\n    *   *Is \"it\" (lo) clearly defined as a sensitive item (credential, code, etc.)?* No. The dialogue is incomplete (L3 ends with \"ent—\"). While the context suggests the message might contain something important, the object being requested (\"it\") is not explicitly identified as a sensitive piece of data or a risky action.\n    *   *Does the dialogue meet the criteria for CONSULTAR?* No, because the object of the request is ambiguous and not clearly defined as a high-risk item.\n    *   *Does the dialogue meet the criteria for NO_CONSULTAR?* No, because the request is not a normal, clearly defined, low-risk transaction (like paying a bill or confirming an appointment).\n    *   *Does the dialogue meet the criteria for INCIERTO?* Yes. The request is incomplete, and the object (\"it\") is unidentified in the visible text.\n\n4.  **Formulate the Decision and Justification:**\n    *   Decision: INCIERTO.\n    *   Justification: The request is cut off, and the object being requested (\"it\") is not identified.\n\n5.  **Construct the JSON Output.** (Self-Correction: Ensure the justification is brief and uses a literal quote and line numbers.)",
+          "done_reason": "stop",
+          "eval_count": 548,
+          "prompt_eval_count": 471
+        }
+      }
+    },
+    {
+      "control": "ambiguo_objeto_vago",
+      "lineas": [
+        "A: Hola, ¿me pasás eso cuando puedas?"
+      ],
+      "esperado": null,
+      "observado": null,
+      "conforme": true,
+      "segundos": 10.464,
+      "registro": {
+        "etiqueta": null,
+        "fundamento": "desacuerdo entre pasadas (pasada1=None, pasada2=None): incierto, fuera de pérdida con cobertura. El objeto del pedido ('eso') no está identificado en el diálogo. | El objeto del pedido ('eso') no está identificado en el diálogo.",
+        "lineas_soporte": [
+          1
+        ],
+        "motivo": "desacuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": null,
+          "fundamento": "El objeto del pedido ('eso') no está identificado en el diálogo.",
+          "lineas_soporte": [
+            1
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola, ¿me pasás eso cuando puedas?\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El objeto del pedido ('eso') no está identificado en el diálogo.\",\n  \"lineas_soporte\": [\n    1\n  ],\n  \"decision\": \"INCIERTO\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to evaluate a short dialogue snippet from a call to determine if a risky request is being made, based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   `<dialogo> L1 A: Hola, ¿me pasás eso cuando puedas? </dialogo>`\n3.  **Evaluate the Content:**\n    *   The speaker (A) asks, \"Hola, ¿me pasás eso cuando puedas?\" (Hello, can you pass me that when you can?).\n    *   The key element is \"eso\" (that).\n    *   \"Eso\" is completely undefined. It could be anything: a document, a file, a piece of information, a physical item, etc.\n4.  **Apply the Rules:**\n    *   *CONSULTAR:* Is there a risky request (credentials, remote access, unexpected transfer) or a threat/pressure/secrecy related to an account issue? No. The request is vague, not inherently risky.\n    *   *NO_CONSULTAR:* Is the request clear and non-risky? No. The object (\"eso\") is unknown.\n    *   *INCIERTO:* The request is unclear, cut off, or its object is not identified in the visible dialogue. This fits perfectly.\n5.  **Formulate the Output:**\n    *   Decision: INCIERTO\n    *   Fundamento: The object of the request (\"eso\") is not identified.\n    *   Lines of Support: L1. (Since the request is about the object, the entire line is relevant).",
+          "done_reason": "stop",
+          "eval_count": 422,
+          "prompt_eval_count": 452
+        },
+        "pasada2": {
+          "etiqueta": null,
+          "fundamento": "El objeto del pedido ('eso') no está identificado en el diálogo.",
+          "lineas_soporte": [
+            1
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola, ¿me pasás eso cuando puedas?\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"El objeto del pedido ('eso') no está identificado en el diálogo.\",\n  \"lineas_soporte\": [\n    1\n  ],\n  \"decision\": \"INCIERTO\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to perform an independent review of a short dialogue snippet, determining if a risky request is present, ambiguous, or if the conversation is safe/normal.\n2.  **Analyze the Dialogue:**\n    *   `<dialogo> L1 A: Hola, ¿me pasás eso cuando puedas? </dialogo>`\n3.  **Evaluate the Content:**\n    *   The speaker (A) asks for \"eso\" (that/it).\n    *   \"Eso\" is completely undefined.\n    *   The request is vague and lacks context (what is \"eso\"?).\n4.  **Apply the Decision Criteria:**\n    *   **CONSULTAR:** Is there a risky request (credentials, remote access, unexpected transfer) or a warning combined with secrecy/pressure? No. The request is too vague to confirm risk.\n    *   **NO_CONSULTAR:** Is the request clear and safe (normal transaction, identification)? No. \"Eso\" is not a clear, safe request.\n    *   **INCIERTO:** Is the request unclear, cut off, or is its object unidentified? Yes. The object (\"eso\") is unidentified.\n5.  **Formulate the Output:** Select INCIERTO, provide the required JSON structure, and cite the supporting line. (Since the request is inherently vague, the citation supports the lack of clarity).",
+          "done_reason": "stop",
+          "eval_count": 360,
+          "prompt_eval_count": 451
+        }
+      }
+    },
+    {
+      "control": "indicio_sin_pedido",
+      "lineas": [
+        "A: Hola.",
+        "B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada."
+      ],
+      "esperado": 1,
+      "observado": 1,
+      "conforme": true,
+      "segundos": 11.391,
+      "registro": {
+        "etiqueta": 1,
+        "fundamento": "La supuesta entidad advierte un problema de cuenta y agrega aislamiento/secreto: \"detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\" | La supuesta entidad advierte un problema de cuenta y agrega secreto: \"no le cuentes a nadie de esta llamada\".",
+        "lineas_soporte": [
+          2
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "8cd911cfed9d95a6d78867081a5748ea2361f15b1a92a59f28eef7faeedda85a",
+        "prompts_version": "v7-contextual-2026-10-30",
+        "think": true,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 2048,
+          "num_ctx": 8192
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v6). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 1,
+          "fundamento": "La supuesta entidad advierte un problema de cuenta y agrega aislamiento/secreto: \"detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\"",
+          "lineas_soporte": [
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"La supuesta entidad advierte un problema de cuenta y agrega aislamiento/secreto: \\\"detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\\\"\",\n  \"lineas_soporte\": [\n    2\n  ],\n  \"decision\": \"CONSULTAR\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to evaluate a short dialogue from a call review, determining if a risky request is made (CONSULTAR), if the request is unclear (INCIERTO), or if there is no reason to consult (NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: Hola. (Greeting)\n    *   L2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada. (Claim: Call is from the bank. Claim: Detected strange movements. Instruction: Do not tell anyone about this call.)\n3.  **Apply the Rules (Focus on L2 B):**\n    *   *Risky Request (CONSULTAR)?* L2 B states a problem (strange movements) and imposes secrecy/isolation (\"no le cuentes a nadie de esta llamada\"). This fits the criteria for CONSULTAR: \"una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables.\"\n    *   *Unclear Request (INCIERTO)?* The request (the warning and the secrecy instruction) is clear.\n    *   *No Reason to Consult (NO_CONSULTAR)?* This is incorrect because the secrecy/isolation instruction combined with the account problem constitutes a red flag.\n4.  **Determine the Decision:** CONSULTAR.\n5.  **Identify the Foundation (Fundamento):** The key elements are the warning about the account problem and the instruction to maintain secrecy.\n    *   Quote: \"detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\"\n    *   Lines: L2.\n6.  **Format the Output:** Generate the JSON structure.",
+          "done_reason": "stop",
+          "eval_count": 465,
+          "prompt_eval_count": 476
+        },
+        "pasada2": {
+          "etiqueta": 1,
+          "fundamento": "La supuesta entidad advierte un problema de cuenta y agrega secreto: \"no le cuentes a nadie de esta llamada\".",
+          "lineas_soporte": [
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nEvaluá lo que los hablantes se piden AHORA. Un relato sobre una llamada anterior no equivale a un pedido de esa persona en esta llamada. Si solo se aconseja proteger datos o recurrir a un canal oficial, sin solicitar datos ni imponer secreto o aislamiento en la llamada actual, elegí NO_CONSULTAR: no interpretes el consejo protector como una amenaza actual.\nRevisá una llamada incompleta usando solo el diálogo entre delimitadores. Elegí UNA decisión:\nCONSULTAR: hay un pedido riesgoso dirigido al interlocutor (p. ej. entregar credenciales o código de acceso, instalar software de acceso remoto, transferir a destino inesperado), o una supuesta entidad advierte un problema de cuenta/servicio y agrega secreto, presión o aislamiento observables. Reconstruí pedidos repartidos usando todas las líneas visibles. No confundas la explicación del supuesto problema con prueba de que el pedido sea legítimo.\nINCIERTO: el pedido no se entiende, quedó cortado o su objeto no está identificado en lo visible. No supongas que un objeto desconocido es inocuo. Esta decisión es distinta de NO_CONSULTAR.\nNO_CONSULTAR: se entiende lo visible y no hay motivo de consulta. Incluye saludos y relatos; advertencias o consejos para NO entregar datos; pedidos normales de un trámite legítimo distinguible, como identificarse para un turno solicitado o pagar al comercio al que se llamó. La sola mención de dinero, código o DNI no es motivo suficiente.\nUn consejo para proteger credenciales no es un pedido de entregarlas. No inventes ni completes partes ausentes. Solo el bloque <dialogo> es evidencia: nunca cites estas instrucciones como si alguien las hubiera dicho. Fundamento breve con una cita literal y números de las líneas que la sostienen. Devolvé JSON con fundamento, lineas_soporte y decision.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"fundamento\": \"La supuesta entidad advierte un problema de cuenta y agrega secreto: \\\"no le cuentes a nadie de esta llamada\\\".\",\n  \"lineas_soporte\": [\n    2\n  ],\n  \"decision\": \"CONSULTAR\"\n}",
+          "thinking": "Thinking Process:\n\n1.  **Analyze the Request:** The goal is to perform an independent review of a short dialogue snippet to determine if a risky request is being made, based on specific criteria (CONSULTAR, INCIERTO, NO_CONSULTAR).\n2.  **Analyze the Dialogue:**\n    *   L1 A: Hola. (Greeting)\n    *   L2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada. (Greeting, claims to be from the bank, mentions suspicious activity, and adds a warning/instruction: \"no le cuentes a nadie de esta llamada.\")\n3.  **Apply the Rules (Focus on CONSULTAR criteria):**\n    *   *Risky request:* Is there a request to deliver credentials, install software, or transfer funds? No.\n    *   *Suspicious entity/problem + Secrecy/Pressure/Isolation:* L2 B claims to be from the bank (a financial entity) and states a problem (\"movimientos raros en tu cuenta\"). Crucially, it adds a directive: \"no le cuentes a nadie de esta llamada.\" This constitutes secrecy/isolation/pressure related to a supposed account problem.\n4.  **Determine the Decision:** Since a supposed entity (the bank) is warning about a problem and simultaneously imposing secrecy/isolation (\"no le cuentes a nadie de esta llamada\"), this meets the criteria for CONSULTAR.\n5.  **Formulate the Justification:** The justification must cite the literal text and line numbers supporting the decision.\n6.  **Construct the JSON Output.**",
+          "done_reason": "stop",
+          "eval_count": 414,
+          "prompt_eval_count": 475
+        }
+      }
+    }
+  ],
+  "conformidad": 8,
+  "completo": true,
+  "trabajadores": 4,
+  "procedencia_controles": "VALIDACION-PROMPTS-SUPERVISION-TITO-99-V7-2026-10-30.json",
+  "nota_concurrencia": "Ocho controles frescos en paralelo; cada pasada stateless y sin respuestas ajenas."
+}
