@@ -6,7 +6,7 @@ según el [checklist](../PRUEBA-VOZ-REAL-MEET.md).
 
 > Son nueve llamadas guionadas con dos voces en una notebook: muestran si el recorrido anda con voz real.
 > **No son rendimiento del detector ni resuelven [D09](../../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).**
-> La elección entre las opciones A y B es de Luciano. Nada de esto se publicó.
+> **Decisión de Luciano (2026-11-02):** opción B. Nada de esto se publicó.
 
 ## Condiciones
 
@@ -18,7 +18,7 @@ según el [checklist](../PRUEBA-VOZ-REAL-MEET.md).
 - **Código:** llamadas `8f613be`; la otra opción y la medición del ASR `abe825e`; #84 y comprobación del cierre `5980acf`; replay `f3a047c`.
 - **Salidas:** [`llamadas/`](2026-11-02-voz-real-meet/llamadas), [`otra-opcion-a/`](2026-11-02-voz-real-meet/otra-opcion-a), [`otra-opcion-b/`](2026-11-02-voz-real-meet/otra-opcion-b), [`plan-b/`](2026-11-02-voz-real-meet/plan-b), [`cierre/`](2026-11-02-voz-real-meet/cierre) y [`replay-llamada-1/`](2026-11-02-voz-real-meet/replay-llamada-1), sin WAV. El audio queda fuera de Git.
 
-**Desvíos del plan.** La tele estuvo muy fuerte en las llamadas 5 y 6, no solo en la 5: A no tiene un D1 en vivo sin tele. Quedaron fuera de resultados el ensayo `190242-539305` (en frío), el plan B fallido `185218-730116` y tres tomas que por duración (31 a 35 s) y texto parecen interrumpidas: `191250-736197`, `191338-353002` y `192339-246848`. **Eso último es una inferencia: falta que lo confirme Luciano.**
+**Desvíos del plan.** La tele estuvo muy fuerte en las llamadas 5 y 6, no solo en la 5: A no tiene un D1 en vivo sin tele. Quedaron fuera de resultados el ensayo `190242-539305` (en frío), el plan B fallido `185218-730116` y tres tomas cortadas: `191250-736197`, `191338-353002` y `192339-246848`. Luciano confirmó que se salieron del guion y las reiniciaron.
 
 ## Resultados en vivo y con la otra opción
 
@@ -63,6 +63,8 @@ Cada audio pasó por la opción que la llamada no usó, a ritmo real y con el mi
 
 **Otro idioma, sobre el mismo audio:** 4 de 129 frases de referencia con palabras en inglés o portugués con B, contra 25 con A («For this loss amount», «Sorry in town», «Caminha número»). Conteo con una expresión regular y revisión a mano, con 2 dudosas en A; no es una métrica del plan. En vivo fueron 1 de 71 frases finales enteras en otro idioma con B y 17 de 94 con A, 15 de ellas en el canal de Meet.
 
+**Decisión de Luciano (2026-11-02): opción B** para la demo. No cierra D09 y, por ahora, no cambia los valores por defecto del panel.
+
 **Lectura.**
 
 - **Coincide con lo que Luciano vio en la llamada:** A mete inglés y portugués y parte las frases.
@@ -86,7 +88,7 @@ Cada audio pasó por la opción que la llamada no usó, a ritmo real y con el mi
 
 Ninguna consulta bajó de 2 s, aunque el aviso llega a tiempo. `medir.py` usa Zipformer, no Parakeet, y sin Chrome ni Meet. Memoria libre entre 28 % y 30 %; swap entre 4,5 y 4,7 GB. **Desvío del protocolo:** el paso «una llamada por el panel, con Chrome» se hizo mandando al servidor el mismo inicio que manda el panel, sin Chrome, para que Luciano no tuviera que usarlo: consultas de 3,76, 2,42 y 4,11 s, aviso a los 18,0 s (`cierre/…202214-721227`).
 
-El criterio de #84 todavía nombra a Qwen en la M4; cambiarlo es decisión de Luciano. El valor por defecto de `medir.py` también es un Qwen ya borrado de Ollama, así que hay que pasar `--modelo`.
+El criterio de #84 todavía nombra a Qwen en la M4; cambiarlo es decisión de Luciano. La M4 no se midió, así que no se sabe cuánto más rápida sería. El valor por defecto de `medir.py` también es un Qwen ya borrado de Ollama, así que hay que pasar `--modelo`.
 
 ## Replay de la llamada 1 (#85)
 
@@ -142,16 +144,16 @@ Para publicar solo con el ok de Luciano. Hay que resolver lo que está entre cor
 
 ### #84
 
-No lleva `Closes`: su criterio todavía pide Qwen en la M4.
+> **Estado: propuesta sin discutir.** Cambiar el criterio a E2B en la notebook de la demo y cerrar con el resultado registrado. Borrar el issue perdería el rastro, como pasó con #102.
 
 ```markdown
 **Resumen:** `medir.py` corre sin panel, deja la corrida en `corridas/` e informa en una línea si cumple. Con Gemma 4 E2B y Tito viejo en el M1 de 8 GB, **NO CUMPLE** el criterio de < 2 s.
 
 **Evidencia observable:** 5 corridas válidas de `SC-WA-CODE-01` tras una de calentamiento, 15 consultas: mediana 3,74 s, mínimo 2,04 s, máximo 4,53 s, 0 salteadas, 0 fallos. Aviso entre −0,45 y +0,40 s del fin del pedido, en las 5. [enlace a la corrida]
 
-**Pendiente:** el criterio nombra Qwen en la M4, y los Qwen se borraron de Ollama. [Luciano decide: actualizarlo a E2B y cerrar con NO CUMPLE registrado, o dejarlo abierto.]
+**Cambio de criterio:** pedía Qwen en la M4; los Qwen se borraron de Ollama y la demo usa Gemma 4 E2B en el M1. El criterio pasa a ser correrlo con E2B en la notebook de la demo. Si se llega a usar la M4, se repite la medición: tarda unos 3 minutos.
 
-**Decisiones:** ninguna. D09 sigue abierta.
+**Decisiones:** ninguna sobre el detector. D09 sigue abierta.
 ```
 
 ### #85
@@ -199,13 +201,13 @@ Closes #86
 ### #94
 
 ```markdown
-[Closes #94, si Luciano elige opción.]
+Closes #94
 
 **Resumen:** A y B comparadas en 9 llamadas guionadas por Meet con dos voces, sobre el mismo audio y con Gemma 4 E2B. Consentimiento de la otra persona firmado el 2026-11-02; audio fuera de Git.
 
 **Evidencia observable** (B / A): etiquetas correctas 121 / 120 de 129; etiquetas nuevas en negativas 0 / 0; demora de la frase final 1,01 / 0,26 s; WER 25,6 / 32,8 %; CER 15,5 / 20,0 %; segmentos 127 / 205. Con tele, canal de la otra persona: WER 12,0 / 31,0 %. Frases con palabras en otro idioma: 4 / 25. Aviso en todas las estafas y ninguno en D3, con las dos. [enlace a la corrida]
 
-**Decisiones:** [opción que elija Luciano.] D09 sigue abierta: son dos voces guionadas.
+**Decisiones:** Luciano elige la opción B (Parakeet, corte 0,8 s, RMS 0,008, Silero 0,5 como filtro) para la demo. D09 sigue abierta: son dos voces guionadas.
 
-**Próxima acción:** cambiar el valor por defecto solo si Luciano lo decide.
+**Próxima acción:** [valores por defecto del panel, según lo que decida Luciano.]
 ```
