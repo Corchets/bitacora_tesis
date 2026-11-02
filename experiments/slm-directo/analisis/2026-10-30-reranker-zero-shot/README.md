@@ -295,3 +295,55 @@ Qwen3-Reranker-0.6B) quedan descartados con evidencia. Confunden advertencias co
 reconocen pedidos indirectos, o las dos cosas. La arquitectura sigue en el SLM local, y R3 elige
 la política acumulada de riesgo primero.
 
+### 2026-11-02 · R3: riesgo primero elegido sin contaminar (selección 57 → informe 20)
+
+Corrida [`2026-10-31_105542_r3-riesgo-seleccion`](../../corridas/2026-10-31_105542_r3-riesgo-seleccion/manifiesto.json):
+gemma3n:e2b, prompt `riesgo`, 57 casos, modo diagnóstico. Costo: p50 de 1,86 s y p95 de 3,4 s por
+línea; la etapa 2 tarda 6,3 s. El informe es la corrida `2026-10-29_182016_rapida-gemma3n-e2b`
+(mismo Ollama 0.40.13 y mismo modelo).
+
+| Política | Selección (19 / 38) | Selección, solo CV2 (2 / 21) | Informe (10 / 10) |
+|---|---|---|---|
+| **umbral > 0,8** (elegida por la regla) | 15/19 · **0/38 FA** | 0/2 · 0/21 | **2/10** · 0/10 |
+| umbral > 0,7 | 19/19 · 8/38 | 2/2 · 3/21 | 10/10 · 3/10 |
+| umbral > 0,6 (ancla del propio prompt) | 19/19 · 14/38 | 2/2 · 7/21 | 10/10 · 6/10 |
+| 2 seguidas > 0,6 | 19/19 · 9/38 | 2/2 · 4/21 | 10/10 · 4/10 |
+| EMA 0,3 > 0,6 | 17/19 · 8/38 | 2/2 · 4/21 | 10/10 · 3/10 |
+| EMA 0,3 > 0,7 (la de corcho4) | 8/19 · 3/38 | 2/2 · 2/21 | 8/10 · 1/10, **ningún aviso antes del pedido** |
+
+**Lo elegido en selección no se transfiere al informe** (de 79 % a 20 % de estafas avisadas). Hay
+dos motivos, y los dos van a la tesis:
+
+1. **La selección no se parece al informe.** De las 19 estafas de selección, 15 son guiones `LAB`
+   cortos y explícitos, y solo 2 son `CV2`. Ahí gemma3n les da 0,85–0,95. En las estafas `CV2`
+   (las del informe), el máximo es 0,75 en 8 de 10, que es **el mismo valor que alcanzan 7 de 21
+   legítimas `CV2` de selección**. Las otras 21 estafas `CV2` de desarrollo están en
+   `excluido_relacion_comparacion` y no se pueden usar para elegir sin contaminar.
+2. **El riesgo de riesgo primero no separa estafa de legítima en conversaciones realistas.** Con el
+   ancla del propio prompt (> 0,6) avisa todas las estafas, pero con 30–60 % de FA. Las políticas
+   que bajan las FA (EMA 0,3 > 0,7) avisan tarde, siempre después del pedido. **Ninguna política
+   cumple la meta 80/15 en selección y en informe a la vez.**
+
+**Qué queda de riesgo primero:** el truco de costo es válido: 1,9 s por línea contra 10 s del `v2`,
+o sea 5× más rápido. Su riesgo, en cambio, no alcanza como señal de alerta con gemma3n:e2b. La
+acumulación de Mateo ayuda (EMA 0,3 > 0,6 baja de 6/10 a 3/10 FA en el informe, con las mismas
+10/10 estafas), pero no lo suficiente.
+
+
+### Arquitectura candidata para D09 (propuesta sin discutir)
+
+| Candidato | Informe `comparacion_20` | Cómo se fijó | Costo por línea | Estado |
+|---|---|---|---|---|
+| **Tito viejo → gemma4:e2b** (#101) | **10/10 · 0/10 FA** | umbral 0,5 fijado antes y alerta del propio modelo, sin ajustar sobre el informe | Tito ~0,3 s + SLM solo al derivar | Lo integró Luciano en el panel (#85) |
+| gemma4:e2b directo (#101) | 10/10 · 1/10 | alerta del modelo | SLM en cada línea | comparador |
+| Qwen 9B `v2`, umbral > 0,7 | 10/10 · 1/10 | elegido con 23 casos de selección (2 estafas) | 0,9 s en GPU Linux; 6,6 GB | techo, no entra en el teléfono |
+| Riesgo primero gemma3n:e2b | 10/10 · 3–6/10, o 2/10 · 0/10 | ver arriba | 1,9 s | **no cumple** sin contaminar |
+| Cross-encoder (NLI, bge, Qwen3-Reranker) | — | — | 1–5 s | **descartados** |
+
+Recomendación: **Tito viejo → gemma4:e2b como arquitectura de la tesis**. Es la única que llega a la
+meta sin que ningún umbral se haya ajustado mirando el set de informe, y coincide con lo integrado
+en el panel. Riesgo primero queda como optimización de latencia a probar *dentro* de esa
+arquitectura (gemma4:e2b con el prompt `riesgo` detrás de Tito), si el tiempo alcanza antes del
+2026-11-15. Falta lo mismo que en todo el proyecto: revisión humana de referencias, D08 congelada y
+el test reservado.
+

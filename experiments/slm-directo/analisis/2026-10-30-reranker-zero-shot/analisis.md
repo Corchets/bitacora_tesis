@@ -3,7 +3,7 @@
 > **Estado: propuesta sin discutir.** Desarrollo sin revisión humana. No elige detector (D09)
 > ni política (D08). Las posiciones son líneas, no segundos.
 
-Corridas: `2026-10-30_200421_r1-bge`, `2026-10-31_021253_r1-bge-resto`, `2026-10-29_182016_rapida-gemma3n-e2b`, `2026-10-21_201914_m1-reglas-v2-150`, `2026-10-21_201039_m1-2b-v1v2-nb32`, `2026-10-23_144554_linux-4b-v1v2-cv2-nb32`, `2026-10-23_115920_linux-9b-v1v2-cv2-nb32`
+Corridas: `2026-10-31_105542_r3-riesgo-seleccion`, `2026-10-29_182016_rapida-gemma3n-e2b`, `2026-10-30_200421_r1-bge`, `2026-10-31_021253_r1-bge-resto`, `2026-10-21_201914_m1-reglas-v2-150`, `2026-10-21_201039_m1-2b-v1v2-nb32`, `2026-10-23_144554_linux-4b-v1v2-cv2-nb32`, `2026-10-23_115920_linux-9b-v1v2-cv2-nb32`
 
 - **Selección** (se elige acá): 57 casos, 19 estafas y 38 legítimas.
 - **Informe** (`comparacion_20`, no se elige acá): 20 casos, 10 estafas y 10 legítimas.
@@ -18,7 +18,7 @@ Corridas: `2026-10-30_200421_r1-bge`, `2026-10-31_021253_r1-bge-resto`, `2026-10
 |---|---|---|---|---|---|
 | `reglas_v2` | 1338 | 0 | 1 | — | — |
 | `reranker\|BAAI/bge-reranker-v2-m3\|pedidos\|v4` | 1338 | 4642 | 9003 | — | — |
-| `slm\|gemma3n:e2b\|riesgo\|ab` | 524 | 1918 | 2297 | 1913 | 6598 |
+| `slm\|gemma3n:e2b\|riesgo\|ab` | 1338 | 1855 | 3403 | 1847 | 6308 |
 | `slm\|gemma3n:e2b\|v2\|ab` | 524 | 10036 | 13576 | — | — |
 | `slm\|qwen3.5:2b-q8_0\|tarea\|ab` | 1338 | 1892 | 4673 | — | — |
 | `slm\|qwen3.5:2b-q8_0\|v2\|ab` | 1338 | 1787 | 4426 | — | — |
@@ -61,7 +61,16 @@ En el informe: estafas 4/10 (40 %) (IC 95 % 17–69 %), FA 1/10 (10 %) (IC 95 % 
 
 ### `slm\|gemma3n:e2b\|riesgo\|ab`
 
-Sin casos de selección en estas corridas: no se elige nada. Para elegir, correr `--lista seleccion-57 --seguir-tras-aviso` con esta configuración.
+Elegida en selección: **umbral > 0.8**.
+En el informe: estafas 2/10 (20 %) (IC 95 % 6–51 %), FA 0/10 (0 %) (IC 95 % 0–28 %).
+
+| Configuración | Sel.: estafas | Sel.: FA | Sel.: FA R07 | Sel.: momento | Inf.: estafas | Inf.: FA | Inf.: FA R07 | Inf.: momento |
+|---|---|---|---|---|---|---|---|---|
+| umbral > 0.8 | 15/19 (79 %) | 0/38 (0 %) | 0/18 (0 %) | 9 antes/en · 1 ≥C | 2/10 (20 %) | 0/10 (0 %) | 0/6 (0 %) | 2 antes/en · 0 ≥C |
+| 2 seguidas > 0.8 | 10/19 (53 %) | 0/38 (0 %) | 0/18 (0 %) | 0 antes/en · 6 ≥C | 1/10 (10 %) | 0/10 (0 %) | 0/6 (0 %) | 0 antes/en · 0 ≥C |
+| media 3 > 0.8 | 10/19 (53 %) | 0/38 (0 %) | 0/18 (0 %) | 0 antes/en · 6 ≥C | 1/10 (10 %) | 0/10 (0 %) | 0/6 (0 %) | 0 antes/en · 0 ≥C |
+| ema 0.5 > 0.8 | 9/19 (47 %) | 0/38 (0 %) | 0/18 (0 %) | 0 antes/en · 5 ≥C | 1/10 (10 %) | 0/10 (0 %) | 0/6 (0 %) | 0 antes/en · 0 ≥C |
+| ema 0.3 > 0.7 | 8/19 (42 %) | 3/38 (8 %) | 1/18 (6 %) | 1 antes/en · 4 ≥C | 8/10 (80 %) | 1/10 (10 %) | 1/6 (17 %) | 0 antes/en · 0 ≥C |
 
 ### `slm\|gemma3n:e2b\|v2\|ab`
 
@@ -149,6 +158,19 @@ En el informe: estafas 10/10 (100 %) (IC 95 % 72–100 %), FA 1/10 (10 %) (IC 95
 
 El SLM decide con su política y el reranker tiene que superar τ en esa línea. Con `riesgo` (riesgo primero) es la H5: el reranker reemplaza la etapa 2.
 
+### `slm\|gemma3n:e2b\|riesgo\|ab`
+
+Elegida en selección: **umbral > 0.6 ∧ BAAI/bge-reranker-v2-m3 > 0.02**.
+En el informe: estafas 4/10 (40 %) (IC 95 % 17–69 %), FA 0/10 (0 %) (IC 95 % 0–28 %).
+
+| Configuración | Sel.: estafas | Sel.: FA | Sel.: FA R07 | Sel.: momento | Inf.: estafas | Inf.: FA | Inf.: FA R07 | Inf.: momento |
+|---|---|---|---|---|---|---|---|---|
+| umbral > 0.6 ∧ BAAI/bge-reranker-v2-m3 > 0.02 | 7/19 (37 %) | 0/38 (0 %) | 0/18 (0 %) | 6 antes/en · 0 ≥C | 4/10 (40 %) | 0/10 (0 %) | 0/6 (0 %) | 2 antes/en · 0 ≥C |
+| umbral > 0.6 ∧ BAAI/bge-reranker-v2-m3 > 0.01 | 7/19 (37 %) | 4/38 (11 %) | 3/18 (17 %) | 7 antes/en · 0 ≥C | 6/10 (60 %) | 0/10 (0 %) | 0/6 (0 %) | 4 antes/en · 0 ≥C |
+| umbral > 0.5 ∧ BAAI/bge-reranker-v2-m3 > 0.02 | 7/19 (37 %) | 4/38 (11 %) | 4/18 (22 %) | 6 antes/en · 0 ≥C | 4/10 (40 %) | 1/10 (10 %) | 1/6 (17 %) | 2 antes/en · 0 ≥C |
+| ema 0.3 > 0.5 ∧ BAAI/bge-reranker-v2-m3 > 0.01 | 7/19 (37 %) | 4/38 (11 %) | 3/18 (17 %) | 3 antes/en · 2 ≥C | 6/10 (60 %) | 1/10 (10 %) | 1/6 (17 %) | 4 antes/en · 0 ≥C |
+| umbral > 0.7 ∧ BAAI/bge-reranker-v2-m3 > 0.02 | 6/19 (32 %) | 0/38 (0 %) | 0/18 (0 %) | 5 antes/en · 0 ≥C | 3/10 (30 %) | 0/10 (0 %) | 0/6 (0 %) | 1 antes/en · 0 ≥C |
+
 ### `slm\|qwen3.5:2b-q8_0\|tarea\|ab`
 
 Elegida en selección: **alerta del modelo ∧ BAAI/bge-reranker-v2-m3 > 0.02**.
@@ -230,6 +252,19 @@ En el informe: estafas 4/10 (40 %) (IC 95 % 17–69 %), FA 0/10 (0 %) (IC 95 % 0
 ## Rol B — filtro: reranker deriva, después decide el SLM
 
 Aproximación por compuerta sobre corridas completas del SLM: no incluye el bloque de indicio de #68, que cambiaría las respuestas del SLM.
+
+### `slm\|gemma3n:e2b\|riesgo\|ab`
+
+Elegida en selección: **BAAI/bge-reranker-v2-m3 (pedidos) > 0.02 → umbral > 0.7**.
+En el informe: estafas 4/10 (40 %) (IC 95 % 17–69 %), FA 0/10 (0 %) (IC 95 % 0–28 %).
+
+| Configuración | Sel.: estafas | Sel.: FA | Sel.: FA R07 | Sel.: momento | Inf.: estafas | Inf.: FA | Inf.: FA R07 | Inf.: momento |
+|---|---|---|---|---|---|---|---|---|
+| BAAI/bge-reranker-v2-m3 (pedidos) > 0.02 → umbral > 0.7 (evita 92 % de consultas) | 7/19 (37 %) | 1/38 (3 %) | 1/18 (6 %) | 6 antes/en · 0 ≥C | 4/10 (40 %) | 0/10 (0 %) | 0/6 (0 %) | 1 antes/en · 0 ≥C |
+| BAAI/bge-reranker-v2-m3 (pedidos) > 0.02 → umbral > 0.6 (evita 92 % de consultas) | 7/19 (37 %) | 2/38 (5 %) | 2/18 (11 %) | 6 antes/en · 0 ≥C | 4/10 (40 %) | 1/10 (10 %) | 1/6 (17 %) | 2 antes/en · 0 ≥C |
+| BAAI/bge-reranker-v2-m3 (pedidos) > 0.02 → ema 0.3 > 0.5 (evita 92 % de consultas) | 7/19 (37 %) | 2/38 (5 %) | 2/18 (11 %) | 3 antes/en · 2 ≥C | 4/10 (40 %) | 1/10 (10 %) | 1/6 (17 %) | 2 antes/en · 0 ≥C |
+| BAAI/bge-reranker-v2-m3 (pedidos) > 0.01 → umbral > 0.7 (evita 84 % de consultas) | 7/19 (37 %) | 4/38 (11 %) | 4/18 (22 %) | 7 antes/en · 0 ≥C | 6/10 (60 %) | 0/10 (0 %) | 0/6 (0 %) | 3 antes/en · 0 ≥C |
+| BAAI/bge-reranker-v2-m3 (pedidos) > 0.02 → umbral > 0.5 (evita 92 % de consultas) | 7/19 (37 %) | 4/38 (11 %) | 4/18 (22 %) | 6 antes/en · 0 ≥C | 4/10 (40 %) | 1/10 (10 %) | 1/6 (17 %) | 2 antes/en · 0 ≥C |
 
 ### `slm\|qwen3.5:2b-q8_0\|tarea\|ab`
 
