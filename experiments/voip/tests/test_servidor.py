@@ -2,6 +2,7 @@
 import asyncio
 import json
 import tempfile
+import threading
 import unittest
 from argparse import Namespace
 from pathlib import Path
@@ -173,6 +174,90 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(vistas, [("cerrada",)])
         self.assertEqual(reinicios, [True])
         self.assertEqual((ev["consulta"], ev["tito_puntaje"], ev["tito_ms"]), ("omitida", 0.12, 15.0))
+
+    def frase_cerrada(self, llamada, texto):
+        llamada.contexto.cerrados.append(Linea(hablante="A", texto=texto))
+        llamada.foto = tuple(llamada.contexto.cerrados)
+        llamada.disparos += 1
+
+    async def test_al_cerrar_termina_la_consulta_en_curso_y_evalua_la_frase_pendiente(self):
+        empezo, seguir, vistas = threading.Event(), threading.Event(), []
+
+        class DetectorLento:
+            def evaluar(self, foto):
+                vistas.append(tuple(l.texto for l in foto))
+                if len(vistas) == 1:
+                    empezo.set()
+                    seguir.wait(3)
+                    return RespuestaFalsa()
+                return RespuestaFalsa(alerta_sugerida=True, motivo="pidió el código")
+
+        self.servidor.detector = DetectorLento()
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            llamada = self.servidor.llamada
+            self.frase_cerrada(llamada, "te llamo de soporte")
+            self.servidor.novedad.set()
+            self.assertTrue(await asyncio.to_thread(empezo.wait, 3))
+            self.frase_cerrada(llamada, "decime el código")
+            self.servidor.novedad.set()
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await asyncio.sleep(0.05)
+            seguir.set()
+            fin = await self.evento(panel, "fin")
+        self.assertEqual(vistas, [("te llamo de soporte",), ("te llamo de soporte", "decime el código")])
+        manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifiesto["detector"]["evaluaciones"], 2)
+        self.assertEqual(manifiesto["detector"]["aviso"]["motivo"], "pidió el código")
+
+    async def test_al_cerrar_evalua_la_frase_que_el_corte_deja_abierta(self):
+        vistas = []
+
+        class Detector:
+            def evaluar(self, foto):
+                vistas.append(tuple(l.texto for l in foto))
+                return RespuestaFalsa()
+
+        self.servidor.detector = Detector()
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            llamada = self.servidor.llamada
+
+            def vaciar():
+                llamada.vaciar_audio = lambda: []
+                self.frase_cerrada(llamada, "decime el código")
+                return [{"tipo": "final", "texto": "decime el código"}]
+
+            llamada.vaciar_audio = vaciar
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await self.evento(panel, "fin")
+        self.assertEqual(vistas, [("decime el código",)])
+
+    async def test_al_cerrar_no_espera_mas_que_el_tope(self):
+        empezo, seguir = threading.Event(), threading.Event()
+
+        class DetectorColgado:
+            def evaluar(self, foto):
+                empezo.set()
+                seguir.wait(3)
+                return RespuestaFalsa()
+
+        self.servidor.detector = DetectorColgado()
+        self.addCleanup(seguir.set)
+        with patch("servidor.ESPERA_DETECTOR_AL_CERRAR_S", 0.01):
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(self.inicio())
+                await self.evento(panel, "inicio")
+                self.frase_cerrada(self.servidor.llamada, "te llamo de soporte")
+                self.servidor.novedad.set()
+                self.assertTrue(await asyncio.to_thread(empezo.wait, 3))
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                fin = await self.evento(panel, "fin")
+        seguir.set()
+        manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifiesto["detector"]["evaluaciones"], 0)
 
     async def test_prueba_asr_dos_cortes_umbral_manifiesto_y_sin_detector(self):
         class MotorSilencio(MotorFalso):
