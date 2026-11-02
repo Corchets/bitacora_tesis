@@ -675,6 +675,19 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(m["config"]["umbral_rms_silencio"], 0.003)
             self.assertTrue(m["config"]["endpoint_nativo"])
 
+    async def test_rms_con_filtro_silero_corta_a_0008_en_la_llamada(self):
+        """Opción B de PLAN-VOZ-REAL.md §12.9; las demás siguen en 0,003 y Silero solo no usa el RMS."""
+        with tempfile.NamedTemporaryFile(suffix=".onnx") as modelo, patch("servidor.MODELO_SILERO", Path(modelo.name)):
+            async with connect(self.url + "/panel") as panel:
+                for asr, corte, umbral in (("parakeet-filtro", 0.8, 0.008), ("parakeet-silero", 0.3, 0.003), ("parakeet", 0.8, 0.003)):
+                    await panel.send(json.dumps({**json.loads(self.inicio()), "asr": asr, "corte_silencio_s": corte}))
+                    inicio = await self.evento(panel, "inicio")
+                    self.assertEqual((inicio["asr"], inicio["corte_silencio_s"], inicio["umbral_rms_silencio"]), (asr, corte, umbral))
+                    await panel.send(json.dumps({"tipo": "terminar"}))
+                    fin = await self.evento(panel, "fin")
+                    m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+                    self.assertEqual(m["config"]["umbral_rms_silencio"], umbral)
+
     async def test_reintentar_tras_fallo_transitorio_de_precarga_con_otro_corte(self):
         mensaje = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
                    "corte_silencio_s": 0.5, "umbral_rms_silencio": 0.02}

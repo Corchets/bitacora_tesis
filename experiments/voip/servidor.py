@@ -77,6 +77,12 @@ CORTE_AUTO = "auto"
 CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el modelo no cierra la frase solo
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
 UMBRAL_LLAMADA = 0.003
+# Opción B de asr-local/PLAN-VOZ-REAL.md §12.9: con filtro Silero, el RMS corta a 0,008 también en la llamada.
+UMBRAL_RMS_POR_ASR = {"parakeet-filtro": 0.008}
+
+
+def umbral_de_llamada(asr: str) -> float:
+    return UMBRAL_RMS_POR_ASR.get(asr, UMBRAL_LLAMADA)
 
 
 def validar_corte(valor) -> str | float:
@@ -124,8 +130,8 @@ class Servidor:
         self.dormir = dormir
         self.control = asyncio.Lock()
         self.config_llamada: dict = {}
-        self.config_asr: tuple[str | float, float] = (CORTE_AUTO, UMBRAL_LLAMADA)  # (corte elegido, umbral RMS)
         self.asr = validar_asr(getattr(args, "asr", ASR_POR_DEFECTO))
+        self.config_asr: tuple[str | float, float] = (CORTE_AUTO, umbral_de_llamada(self.asr))  # (corte elegido, umbral RMS)
         self.args = args
         self.detector = detector
         self.llamada: Llamada | None = None
@@ -313,7 +319,7 @@ class Servidor:
                         break
                     if self.llamada is None:
                         self.config_llamada = {}
-                        await self.configurar_asr((validar_corte(self.args.corte_silencio), UMBRAL_LLAMADA))
+                        await self.configurar_asr((validar_corte(self.args.corte_silencio), umbral_de_llamada(self.asr)))
                         self.llamada = await self.abrir_llamada()
                     self.recibir_audio(rol, mensaje)
         finally:
@@ -406,7 +412,7 @@ class Servidor:
         else:
             if umbral is not None:
                 raise ValueError("El umbral de volumen de la llamada es fijo; probalo en Probar el ASR.")
-            umbral = UMBRAL_LLAMADA
+            umbral = umbral_de_llamada(asr)
         async with self.control:
             if self.llamada is not None or self.clientes_audio:
                 raise ValueError("Terminá la llamada actual antes de iniciar otra.")
