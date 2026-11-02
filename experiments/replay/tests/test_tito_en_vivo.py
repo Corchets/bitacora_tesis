@@ -1,5 +1,7 @@
 """Tito→SLM en vivo: frases cerradas, sin saltear ninguna y sin modelos reales."""
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -102,6 +104,18 @@ class TestConstruirDetector(unittest.TestCase):
         self.assertEqual(d.carga["pensar"], False)
         self.assertEqual(d.carga["tito"]["artefacto"], "tito_logreg.json")
         self.assertTrue(d.carga["tito"]["sha256"].startswith("fb601eaa"))
+
+    def test_el_manifiesto_de_tito_slm_registra_modelo_prompt_seed_y_huella(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            entrada, salida = Path(tmp) / "entrada.jsonl", Path(tmp) / "manifiesto.json"
+            entrada.write_text("", encoding="utf-8")
+            replay.guardar_manifiesto(salida, entrada, "audio", "tito-slm", "gemma4:e2b-it-q4_K_M", "tarea", "ab",
+                                      "final", 42, carga={"tito": {"sha256": "fb601eaa"}})
+            manifiesto = json.loads(salida.read_text(encoding="utf-8"))
+        self.assertEqual(manifiesto["config"]["modelo"], "gemma4:e2b-it-q4_K_M")
+        self.assertEqual(manifiesto["config"]["prompt"], "tarea")
+        self.assertEqual(manifiesto["config"]["seed"], 42)
+        self.assertEqual(manifiesto["carga"]["tito"]["sha256"], "fb601eaa")
 
     def test_sin_torch_falla_al_arrancar_y_no_a_mitad_de_la_llamada(self):
         with patch.object(replay, "construir_slm", return_value=SlmFalso()), \
