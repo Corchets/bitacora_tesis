@@ -59,3 +59,28 @@ id,toma,voz,condicion,bloque,canal,nota
 2026-10-30_154331-950817,4,luciano,ruido-tv,2,,G08b serie de fondo panel parakeet 0.8/0.008
 # 2026-10-30_154422-984207,4,luciano,microfono,,,G10b 30 s sin hablar con ruidos de la pieza
 # 2026-10-30_154522-194321,4,luciano,microfono,,,G10c 30 s sin hablar con la tele
+# Toma 5: diálogos por Meet del 2026-11-02 con Gemma 4 E2B en el panel; la nota dice la opción de esa llamada (el audio guardado es el mismo con cualquiera):
+2026-11-02_191055-519549,5,luciano,dialogo,D1,protegida,llamada 1 panel parakeet-filtro 0.8/0.008
+2026-11-02_191055-519549,5,otra,dialogo,D1,otra,llamada 1 panel parakeet-filtro 0.8/0.008
+2026-11-02_191514-060570,5,luciano,dialogo,D2,protegida,llamada 2 panel parakeet-filtro 0.8/0.008
+2026-11-02_191514-060570,5,otra,dialogo,D2,otra,llamada 2 panel parakeet-filtro 0.8/0.008
+2026-11-02_191647-577476,5,luciano,dialogo,D3,protegida,llamada 3 panel parakeet-filtro 0.8/0.008
+2026-11-02_191647-577476,5,otra,dialogo,D3,otra,llamada 3 panel parakeet-filtro 0.8/0.008
+2026-11-02_191850-452328,5,luciano,dialogo,D4,protegida,llamada 4 panel parakeet-filtro 0.8/0.008
+2026-11-02_191850-452328,5,otra,dialogo,D4,otra,llamada 4 panel parakeet-filtro 0.8/0.008
+2026-11-02_192133-308960,5,luciano,dialogo-tv,D1,protegida,llamada 5 panel parakeet-filtro 0.8/0.008 tele muy fuerte
+2026-11-02_192133-308960,5,otra,dialogo-tv,D1,otra,llamada 5 panel parakeet-filtro 0.8/0.008 tele muy fuerte
+2026-11-02_192425-071975,5,luciano,dialogo-tv,D1,protegida,llamada 6 panel parakeet-silero 0.3 tele muy fuerte
+2026-11-02_192425-071975,5,otra,dialogo-tv,D1,otra,llamada 6 panel parakeet-silero 0.3 tele muy fuerte
+2026-11-02_192651-299571,5,luciano,dialogo,D2,protegida,llamada 7 panel parakeet-silero 0.3
+2026-11-02_192651-299571,5,otra,dialogo,D2,otra,llamada 7 panel parakeet-silero 0.3
+2026-11-02_192931-493331,5,luciano,dialogo,D3,protegida,llamada 8 panel parakeet-silero 0.3
+2026-11-02_192931-493331,5,otra,dialogo,D3,otra,llamada 8 panel parakeet-silero 0.3
+2026-11-02_193107-631798,5,luciano,dialogo,D4,protegida,llamada 9 panel parakeet-silero 0.3
+2026-11-02_193107-631798,5,otra,dialogo,D4,otra,llamada 9 panel parakeet-silero 0.3
+# Fuera de resultados (las tres tomas interrumpidas, inferido por duración y texto; falta que lo confirme Luciano):
+# 2026-11-02_185218-730116,5,,,,,plan B fallido: ejemplo TTS con el modelo frío
+# 2026-11-02_190242-539305,5,,,D3,,ensayo con el modelo frío
+# 2026-11-02_191250-736197,5,,,D2,,toma interrumpida a los 31 s
+# 2026-11-02_191338-353002,5,,,D2,,toma interrumpida a los 35 s
+# 2026-11-02_192339-246848,5,,,D1,,toma interrumpida a los 32 s
