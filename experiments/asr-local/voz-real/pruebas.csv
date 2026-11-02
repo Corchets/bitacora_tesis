@@ -78,9 +78,9 @@ id,toma,voz,condicion,bloque,canal,nota
 2026-11-02_192931-493331,5,otra,dialogo,D3,otra,llamada 8 panel parakeet-silero 0.3
 2026-11-02_193107-631798,5,luciano,dialogo,D4,protegida,llamada 9 panel parakeet-silero 0.3
 2026-11-02_193107-631798,5,otra,dialogo,D4,otra,llamada 9 panel parakeet-silero 0.3
-# Fuera de resultados (las tres tomas interrumpidas, inferido por duración y texto; falta que lo confirme Luciano):
+# Fuera de resultados (en las tres tomas cortadas se salieron del guion y reiniciaron, confirmado por Luciano):
 # 2026-11-02_185218-730116,5,,,,,plan B fallido: ejemplo TTS con el modelo frío
 # 2026-11-02_190242-539305,5,,,D3,,ensayo con el modelo frío
-# 2026-11-02_191250-736197,5,,,D2,,toma interrumpida a los 31 s
-# 2026-11-02_191338-353002,5,,,D2,,toma interrumpida a los 35 s
-# 2026-11-02_192339-246848,5,,,D1,,toma interrumpida a los 32 s
+# 2026-11-02_191250-736197,5,,,D2,,toma cortada a los 31 s
+# 2026-11-02_191338-353002,5,,,D2,,toma cortada a los 35 s
+# 2026-11-02_192339-246848,5,,,D1,,toma cortada a los 32 s
