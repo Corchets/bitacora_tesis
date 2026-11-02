@@ -30,7 +30,7 @@ audio compartido; **Persona protegida** = micrófono; «Cancelar eco» igual tod
 
 | Paso | Diálogo | Condición | Opción | Sirve para |
 |---|---|---|---|---|
-| Antes, sin red | Ejemplo `SC-WA-CODE-01` | Sin Wi-Fi | B | #86 (plan B), #84 |
+| Antes, sin red | Ejemplo `SC-SOPORTE-CLAVE-01` (decisión de Luciano, 2026-11-02; antes `SC-WA-CODE-01`) | Sin Wi-Fi | B | #86 (plan B) |
 | Ensayo, no se anota | D3 | `dialogo` | B | Ver swap y salteadas |
 | 1 a 4 | D1, D2, D3, D4 | `dialogo` | B | #85, #86, #94 |
 | 5 | D1 con la tele | `dialogo-tv` | B | #94 |
@@ -68,7 +68,7 @@ python cliente.py --servidor ws://localhost:8771 --rol otra --wav <llamada>/este
 
 Una sola toma por llamada. D1, D2 y D4 son estafa; D3 es legítima.
 
-- [ ] **Plan B de #86:** la llamada de ejemplo, en la misma notebook y sin red.
+- [ ] **Plan B de #86:** el ejemplo del soporte, en la misma notebook y sin red. Resultado en la [corrida](corridas/2026-11-02-voz-real-meet.md#plan-b-sin-red-86).
 - [ ] **Opción B:** D1 · D2 · D3 · D4 · D1 con la tele de fondo (`dialogo-tv`)
 - [ ] **Opción A:** D1 · D2 · D3 · D4. Si se puede, cambiando de lugar (cambia la columna `voz`).
 

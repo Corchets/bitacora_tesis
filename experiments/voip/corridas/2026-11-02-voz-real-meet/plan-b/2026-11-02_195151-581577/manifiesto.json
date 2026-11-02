@@ -1,0 +1,171 @@
+{
+  "llamada_id": "VIVO-20261102-195151-581577",
+  "asr": {
+    "motor": "sherpa-parakeet",
+    "modelo_id": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+    "ruta_modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+    "es_streaming": false,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "corte_por_silencio_rms_filtro_silero",
+      "corte_silencio_s": 0.8,
+      "umbral_rms_silencio": 0.008,
+      "previo_s": 0.3,
+      "max_frase_s": 10.0,
+      "min_voz_s": 0.3,
+      "min_voz_parcial_s": 1.0,
+      "parciales_cada_s": 0.5,
+      "filtro_idioma": "parciales_y_muletillas_finales",
+      "vad": {
+        "tipo": "silero_vad_sherpa_onnx",
+        "modelo": "silero_vad.onnx",
+        "sha256_16": "9e2449e1087496d8",
+        "umbral": 0.5,
+        "umbral_para_seguir": 0.35,
+        "ventana": 512,
+        "min_silence_duration": 0.0,
+        "min_speech_duration": 0.0,
+        "hilos": 1,
+        "costo_por_bloque": null,
+        "modo": "filtro"
+      }
+    },
+    "decodificacion": {
+      "decoding_method": "greedy_search",
+      "model_type": "nemo_transducer"
+    }
+  },
+  "disparo": "final",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": null,
+      "inicio_s": 0.194,
+      "duracion_s": 20.053,
+      "desfase_llegada_s": {
+        "n": 502,
+        "min": -0.003,
+        "mediana": -0.002,
+        "p95": 1.942,
+        "max": 2.94
+      },
+      "retraso_parcial_s": null,
+      "retraso_final_desde_voz_s": null
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.0,
+      "duracion_s": 20.24,
+      "desfase_llegada_s": {
+        "n": 506,
+        "min": -0.001,
+        "mediana": -0.0,
+        "p95": 2.196,
+        "max": 2.927
+      },
+      "retraso_parcial_s": {
+        "n": 15,
+        "min": 0.156,
+        "mediana": 0.206,
+        "p95": 2.75,
+        "max": 2.967
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 3,
+        "min": 1.103,
+        "mediana": 1.109,
+        "p95": 1.732,
+        "max": 1.801
+      }
+    }
+  },
+  "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)",
+  "detector": {
+    "evaluaciones": 2,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 2,
+      "min": 2.312,
+      "mediana": 4.022,
+      "p95": 5.561,
+      "max": 5.732
+    },
+    "aviso": null
+  },
+  "config": {
+    "detector": "tito-slm",
+    "modelo": "gemma4:e2b-it-q4_K_M",
+    "prompt": "tarea",
+    "hablantes": "ab",
+    "ollama_url": "http://127.0.0.1:11434",
+    "seed": 42,
+    "corte_silencio_s": 0.8,
+    "umbral_rms_silencio": 0.008,
+    "endpoint_nativo": false,
+    "asr": "parakeet-filtro",
+    "hilos_asr": 2,
+    "carga_slm": {
+      "carga_ms": 9489,
+      "calentamiento_ms": 9489,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 230382632,
+        "size_vram_bytes": 230382632
+      },
+      "pensar": false,
+      "runtime_total_ns": 9476379500,
+      "runtime_load_ns": 8701068333,
+      "runtime_prompt_eval_ns": 222311000,
+      "runtime_eval_ns": 523979000,
+      "tito": {
+        "artefacto": "tito_logreg.json",
+        "sha256": "fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd",
+        "umbral": 0.5,
+        "artefacto_ms": 0.8,
+        "artefacto_desde_cache": false,
+        "encoder_ms": 7558.2,
+        "encoder_desde_cache": false,
+        "calentamiento_ms": 1742.6,
+        "error": "",
+        "unidad": "ms"
+      }
+    }
+  },
+  "inicio_panel": {
+    "tipo": "iniciar",
+    "modo": "llamada",
+    "fuentes": {
+      "otra": {
+        "tipo": "ejemplo",
+        "escenario": "SC-WA-CODE-01",
+        "canal": "izq"
+      },
+      "protegida": {
+        "tipo": "navegador",
+        "cancelar_eco": true
+      }
+    },
+    "corte_silencio_s": 0.8,
+    "umbral_rms_silencio": null,
+    "asr": "parakeet-filtro",
+    "detector": "gemma4:e2b-it-q4_K_M"
+  },
+  "codigo": {
+    "commit": "abe825ecd802e0b49db47f486bafb019989bde3a",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  }
+}

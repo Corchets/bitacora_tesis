@@ -1,0 +1,205 @@
+{
+  "llamada_id": "VIVO-20261102-202002-585566",
+  "asr": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    },
+    "decodificacion": {
+      "decoding_method": "greedy_search",
+      "max_active_paths": 4,
+      "hotwords_file": null,
+      "hotwords": null,
+      "hotwords_score": null,
+      "modeling_unit": null,
+      "bpe_puntaje": null,
+      "bpe_vocab": null
+    }
+  },
+  "disparo": "final",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": "B",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.001,
+        "mediana": -0.0,
+        "p95": 0.022,
+        "max": 0.132
+      },
+      "retraso_parcial_s": {
+        "n": 5,
+        "min": 0.06,
+        "mediana": 0.062,
+        "p95": 0.122,
+        "max": 0.127
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 2,
+        "min": 0.204,
+        "mediana": 0.522,
+        "p95": 0.809,
+        "max": 0.84
+      }
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.001,
+        "mediana": -0.0,
+        "p95": 0.022,
+        "max": 0.132
+      },
+      "retraso_parcial_s": {
+        "n": 9,
+        "min": 0.037,
+        "mediana": 0.069,
+        "p95": 0.08,
+        "max": 0.083
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 3,
+        "min": 0.801,
+        "mediana": 0.802,
+        "p95": 0.839,
+        "max": 0.843
+      }
+    }
+  },
+  "estereo": null,
+  "detector": {
+    "evaluaciones": 3,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 3,
+      "min": 2.097,
+      "mediana": 3.923,
+      "p95": 4.107,
+      "max": 4.127
+    },
+    "aviso": {
+      "n": 12,
+      "saltadas": 0,
+      "inicio_eval_s": 13.402,
+      "fin_eval_s": 17.33,
+      "ms_detector": 3923.3,
+      "valida": true,
+      "error": "",
+      "riesgo": 0.6,
+      "alerta_sugerida": true,
+      "motivo": "Te están presionando para resolver algo relacionado con la activación de tu cuenta de WhatsApp.",
+      "evidencia": "A: Te llamo de soporte por la activación de tu cuenta de WhatsApp\nB: Me acaba de llegar un SMS, no pedí activar nada.\nA: Para cancelar esa activación tenemos que resolverlo ahora",
+      "aviso": true,
+      "t_a": 17.33,
+      "fin_voz_s": 12.6,
+      "consulta": "slm_valida",
+      "tito_puntaje": null,
+      "tito_ms": null,
+      "tito_error": "",
+      "indicio_linea": 1,
+      "indicio_puntaje": 0.9998970970870533,
+      "demora_desde_fin_de_voz_s": 4.73
+    }
+  },
+  "config": {
+    "detector": "tito-slm",
+    "modelo": "gemma4:e2b-it-q4_K_M",
+    "prompt": "tarea",
+    "hablantes": "ab",
+    "ollama_url": "http://127.0.0.1:11434",
+    "seed": 42,
+    "corte_silencio_s": "auto",
+    "umbral_rms_silencio": 0.003,
+    "endpoint_nativo": true,
+    "asr": "zipformer",
+    "hilos_asr": 2,
+    "carga_slm": {
+      "carga_ms": 712,
+      "calentamiento_ms": 712,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 312433704,
+        "size_vram_bytes": 312433704
+      },
+      "pensar": false,
+      "runtime_total_ns": 711043583,
+      "runtime_load_ns": 9274833,
+      "runtime_prompt_eval_ns": 140567000,
+      "runtime_eval_ns": 521198000,
+      "tito": {
+        "artefacto": "tito_logreg.json",
+        "sha256": "fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd",
+        "umbral": 0.5,
+        "artefacto_ms": 0.9,
+        "artefacto_desde_cache": false,
+        "encoder_ms": 3998.9,
+        "encoder_desde_cache": false,
+        "calentamiento_ms": 1619.8,
+        "error": "",
+        "unidad": "ms"
+      }
+    }
+  },
+  "inicio_panel": {
+    "modo": "llamada",
+    "fuentes": {
+      "otra": {
+        "tipo": "ejemplo",
+        "escenario": "SC-WA-CODE-01",
+        "canal": "izq"
+      },
+      "protegida": {
+        "tipo": "ejemplo",
+        "escenario": "SC-WA-CODE-01",
+        "canal": "der"
+      }
+    },
+    "corte_silencio_s": "auto"
+  },
+  "codigo": {
+    "commit": "5980acf70d9e797cff95cb8cbe39608945fe18d1",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  },
+  "medicion": {
+    "escenario": "SC-WA-CODE-01",
+    "split": "ejemplo TTS; fuera de corpus_v2",
+    "fin_pedido_s": 17.6,
+    "criterio_mediana_s": 2.0,
+    "audio_sha256": "4e6be5e30a962cd9ed15790759342ababf39b79811635ac8e5ae24b6a9868344",
+    "ollama": {
+      "version": "0.40.5",
+      "digests": {
+        "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+      },
+      "arranque_ms": 11,
+      "unidad": "ms"
+    }
+  }
+}
