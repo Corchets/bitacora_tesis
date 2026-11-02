@@ -59,8 +59,12 @@ cd experiments/voip
 
 # En la máquina que analiza (la del ASR y el detector):
 python servidor.py --detector reglas
-python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
-python servidor.py --detector slm --modelo qwen3.5:4b-q4_K_M --ollama-url http://<pc-con-gpu>:11434
+python servidor.py --detector tito-slm --modelo gemma4:e2b-it-q4_K_M
+python servidor.py --detector tito-slm --modelo gemma4:e4b-it-q4_K_M --ollama-url http://<pc-con-gpu>:11434
+# Sin Tito, para comparar: python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
+# El detector también se elige en el panel, antes de cada llamada: Gemma 4 E2B o E4B con Tito viejo, o reglas.
+# Bajar el modelo una vez, con el tag completo: ollama pull gemma4:e2b-it-q4_K_M
+# E4B en 8 GB avisa casi un minuto tarde: usalo con --ollama-url (ver corridas/2026-11-02-tito-gemma4-panel.md).
 # El corte de silencio se elige en el panel (0,1–3,0 s, inicial 0,8); --corte-silencio fija el de
 # las llamadas que abre cliente.py («auto» por defecto): python servidor.py --detector reglas --corte-silencio 0.5
 # El modelo de ASR también se elige en el panel (Zipformer o Parakeet); --asr fija el de arranque y el de

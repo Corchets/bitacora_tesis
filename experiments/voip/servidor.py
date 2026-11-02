@@ -13,7 +13,7 @@ demora no crece con la cola, a diferencia del replay, que evalúa todas en orden
 
 Uso:
     python servidor.py --detector reglas
-    python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
+    python servidor.py --detector tito-slm --modelo gemma4:e2b-it-q4_K_M
     Panel: http://<ip>:8765/   ·   vista de la persona protegida: http://<ip>:8765/?vista=protegida
 
 Una llamada empieza desde el panel o con el primer bloque de cliente.py. Termina con
@@ -87,6 +87,20 @@ def validar_corte(valor) -> str | float:
             or not CORTE_MIN_S <= valor <= CORTE_MAX_S or abs(valor * 10 - round(valor * 10)) > 1e-9):
         raise ValueError("El corte de silencio debe ser «auto» o un número de 0,1 a 3,0 s con un decimal.")
     return round(float(valor), 1)
+
+
+# Detectores que se pueden elegir desde el panel: los dos mejores de la matriz #101 con Tito viejo,
+# más las reglas como respaldo sin modelo. Es la opción de la demo; no resuelve D09.
+# Tags completos: «gemma4:e2b» a secas baja otro artefacto según la plataforma (MLX en Mac), no el medido.
+DETECTOR_POR_DEFECTO = "gemma4:e2b-it-q4_K_M"
+DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "gemma4:e4b-it-q4_K_M", "reglas")
+DETECTORES_CON_MODELO = ("slm", "tito-slm")
+
+
+def validar_detector(valor) -> str:
+    if valor not in DETECTORES_PANEL:
+        raise ValueError(f"Detector desconocido; opciones: {', '.join(DETECTORES_PANEL)}.")
+    return valor
 
 
 def validar_asr(valor) -> str:
@@ -169,6 +183,8 @@ class Servidor:
             # Una carga fallida no debe envenenar todos los intentos siguientes.
             self.preparada = None
         self.novedad.clear()
+        # El filtro guarda si ya derivó: cada llamada empieza de cero, también tras cambiar de vista.
+        getattr(self.detector, "reiniciar", lambda: None)()
         momento = datetime.now()
         llamada.abrir(*self.nombres_de_llamada(momento))
         self.difundir_inicio(llamada)
@@ -186,7 +202,7 @@ class Servidor:
         self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id,
                        "modo": self.config_llamada.get("modo", "llamada"),
                        "detector": {"tipo": self.args.detector,
-                                    "modelo": self.args.modelo if self.args.detector == "slm" else None},
+                                    "modelo": self.args.modelo if self.args.detector in DETECTORES_CON_MODELO else None},
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
                        "asr": self.asr})
 
@@ -227,10 +243,10 @@ class Servidor:
         a = self.args
         carga = getattr(self.detector, "carga", None)
         return {
-            "config": {"detector": None if self.config_llamada.get("modo") == "asr" else a.detector, "modelo": a.modelo if a.detector == "slm" else None,
-                       "prompt": a.prompt if a.detector == "slm" else None, "hablantes": "ab",
-                       "ollama_url": a.ollama_url if a.detector == "slm" else None,
-                       "seed": a.seed if a.detector == "slm" else "no-aplica",
+            "config": {"detector": None if self.config_llamada.get("modo") == "asr" else a.detector, "modelo": a.modelo if a.detector in DETECTORES_CON_MODELO else None,
+                       "prompt": a.prompt if a.detector in DETECTORES_CON_MODELO else None, "hablantes": "ab",
+                       "ollama_url": a.ollama_url if a.detector in DETECTORES_CON_MODELO else None,
+                       "seed": a.seed if a.detector in DETECTORES_CON_MODELO else "no-aplica",
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
                        "endpoint_nativo": self.config_asr[0] == CORTE_AUTO, "asr": self.asr, "hilos_asr": a.hilos, "carga_slm": carga},
             "inicio_panel": self.config_llamada,
@@ -251,6 +267,8 @@ class Servidor:
             await self.novedad.wait()
             self.novedad.clear()
             n, foto, disparos = llamada.tomar_foto()
+            if getattr(self.detector, "solo_cerradas", False):
+                foto = tuple(llamada.contexto.cerrados)
             if llamada.aviso is not None or not foto:
                 continue
             inicio = llamada.reloj()
@@ -317,6 +335,22 @@ class Servidor:
         self.asr = asr
         self.preparar()
 
+    async def configurar_detector(self, elegido: str) -> None:
+        """Carga el detector que eligió el panel; si falla, sigue el que estaba."""
+        tipo, modelo = ("reglas", None) if elegido == "reglas" else ("tito-slm", elegido)
+        a = self.args
+        if tipo == a.detector and (modelo is None or modelo == a.modelo):
+            return
+        try:
+            self.detector = await asyncio.to_thread(
+                replay.construir_detector, tipo, modelo=modelo, prompt_nombre=a.prompt, hablantes="ab",
+                seed=a.seed, ollama_url=a.ollama_url)
+        except (replay.correr.FalloAlCalentar, replay.cliente_ollama.ErrorOllama) as exc:
+            raise RuntimeError(f"No se pudo cargar {modelo}: {exc} ¿Está Ollama abierto? Si falta el modelo: ollama pull {modelo}") from exc
+        a.detector = tipo
+        if modelo is not None:
+            a.modelo = modelo
+
     async def iniciar(self, mensaje: dict) -> None:
         """Valida el contrato de control antes de abrir archivos o arrancar audio."""
         fuentes = mensaje.get("fuentes")
@@ -364,6 +398,7 @@ class Servidor:
                 raise ValueError("El ejemplo debe ser estéreo a 16 kHz y contener audio válido.")
         corte, umbral = validar_corte(mensaje.get("corte_silencio_s")), mensaje.get("umbral_rms_silencio")
         asr = validar_asr(mensaje.get("asr", self.asr))
+        detector_elegido = None if prueba or "detector" not in mensaje else validar_detector(mensaje["detector"])
         if prueba:
             if (isinstance(umbral, bool) or not isinstance(umbral, (int, float))
                     or not math.isfinite(umbral) or not 0 < umbral <= 1):
@@ -376,6 +411,8 @@ class Servidor:
             if self.llamada is not None or self.clientes_audio:
                 raise ValueError("Terminá la llamada actual antes de iniciar otra.")
             await self.configurar_asr((corte, umbral), asr)
+            if detector_elegido is not None:
+                await self.configurar_detector(detector_elegido)
             if prueba:
                 historial.descartar_pruebas_no_guardadas(self.args.salida)
             self.prueba_pendiente = None
@@ -519,7 +556,7 @@ def servir_panel(connection, request, args: argparse.Namespace | None = None):
     ruta = urlparse(request.path).path
     if ruta == "/detector" and args is not None:
         cuerpo = json.dumps({"tipo": args.detector,
-                             "modelo": getattr(args, "modelo", None) if args.detector == "slm" else None},
+                             "modelo": getattr(args, "modelo", None) if args.detector in DETECTORES_CON_MODELO else None},
                             ensure_ascii=False).encode("utf-8")
         encabezados = Headers([("Content-Type", "application/json; charset=utf-8"),
                                ("Content-Length", str(len(cuerpo)))])
@@ -544,8 +581,8 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Servidor de llamada en vivo con ASR por canal y detector.")
     p.add_argument("--host", default="0.0.0.0", help="0.0.0.0 para recibir de otras notebooks de la red")
     p.add_argument("--puerto", type=int, default=8765)
-    p.add_argument("--detector", choices=("reglas", "slm"), required=True)
-    p.add_argument("--modelo", default="qwen3.5:0.8b-q8_0")
+    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), required=True)
+    p.add_argument("--modelo", default=DETECTOR_POR_DEFECTO)
     p.add_argument("--prompt", default="tarea")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--ollama-url", default=replay.cliente_ollama.URL_POR_DEFECTO,
