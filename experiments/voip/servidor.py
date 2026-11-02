@@ -74,6 +74,8 @@ EJEMPLOS = {nombre: DIR_VOIP.parent / "asr-local" / "audio" / f"{nombre}-tts-est
 
 
 CORTE_AUTO = "auto"
+# Al cortar, cuánto se espera al detector: una consulta en frío tardó 16 s y puede quedar otra pendiente.
+ESPERA_DETECTOR_AL_CERRAR_S = 30.0
 CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el modelo no cierra la frase solo
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
 UMBRAL_LLAMADA = 0.003
@@ -144,6 +146,7 @@ class Servidor:
         self.historial: list[dict] = []  # para el panel que se conecta en medio de la llamada
         self.novedad = asyncio.Event()
         self.tarea_detector: asyncio.Task | None = None
+        self.audio_terminado = False
         self.tarea_niveles: asyncio.Task | None = None
         # Última prueba cerrada y todavía sin guardar: «Guardar» actúa sobre ella.
         self.prueba_pendiente: Path | None = None
@@ -189,6 +192,7 @@ class Servidor:
             # Una carga fallida no debe envenenar todos los intentos siguientes.
             self.preparada = None
         self.novedad.clear()
+        self.audio_terminado = False
         # El filtro guarda si ya derivó: cada llamada empieza de cero, también tras cambiar de vista.
         getattr(self.detector, "reiniciar", lambda: None)()
         momento = datetime.now()
@@ -229,21 +233,31 @@ class Servidor:
                 with suppress(asyncio.CancelledError):
                     await self.tarea_niveles
                 self.tarea_niveles = None
-            if self.tarea_detector:
-                self.tarea_detector.cancel()
-                with suppress(asyncio.CancelledError):
-                    await self.tarea_detector
-                self.tarea_detector = None
             clientes = tuple(self.clientes_audio)
             self.clientes_audio.clear()
             for ws in clientes:
                 await ws.close(1000, "llamada terminada")
+            if self.tarea_detector:
+                await self.esperar_detector(llamada)
+                self.tarea_detector = None
             for act in llamada.cerrar(self.manifiesto_extra()):
                 self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
             self.prueba_pendiente = llamada.dir_salida if self.config_llamada.get("modo") == "asr" else None
             self.difundir({"tipo": "fin", "llamada_id": llamada.llamada_id, "dir": str(llamada.dir_salida)})
             print(f"[llamada] cerrada: {llamada.dir_salida}")
             self.preparar()
+
+    async def esperar_detector(self, llamada: Llamada) -> None:
+        """Evalúa lo que ya se dijo antes de cerrar: si no, se pierde el pedido que llega justo antes del corte."""
+        for act in llamada.vaciar_audio():
+            self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
+            llamada.marcar_disparo(act)
+        self.audio_terminado = True
+        self.novedad.set()
+        try:
+            await asyncio.wait_for(self.tarea_detector, ESPERA_DETECTOR_AL_CERRAR_S)
+        except TimeoutError:
+            print(f"[llamada] el detector no terminó en {ESPERA_DETECTOR_AL_CERRAR_S} s: se descarta lo pendiente")
 
     def manifiesto_extra(self) -> dict:
         a = self.args
@@ -275,14 +289,15 @@ class Servidor:
             n, foto, disparos = llamada.tomar_foto()
             if getattr(self.detector, "solo_cerradas", False):
                 foto = tuple(llamada.contexto.cerrados)
-            if llamada.aviso is not None or not foto:
-                continue
-            inicio = llamada.reloj()
-            respuesta = await asyncio.to_thread(self.detector.evaluar, foto)
-            ev = llamada.registrar_evaluacion(n, disparos, respuesta, inicio, llamada.reloj())
-            self.difundir({"tipo": "detector", **llamada.evento_detector(ev)})
-            if ev.aviso:
-                print(f"[AVISO] t={ev.fin_s:.2f}s · {respuesta.motivo}")
+            if llamada.aviso is None and foto and disparos:
+                inicio = llamada.reloj()
+                respuesta = await asyncio.to_thread(self.detector.evaluar, foto)
+                ev = llamada.registrar_evaluacion(n, disparos, respuesta, inicio, llamada.reloj())
+                self.difundir({"tipo": "detector", **llamada.evento_detector(ev)})
+                if ev.aviso:
+                    print(f"[AVISO] t={ev.fin_s:.2f}s · {respuesta.motivo}")
+            if self.audio_terminado and not self.novedad.is_set():
+                return
 
     def recibir_audio(self, rol: str, pcm: bytes, *, llegada: float | None = None) -> None:
         """Entrada común para cliente.py y el estéreo del ejemplo."""

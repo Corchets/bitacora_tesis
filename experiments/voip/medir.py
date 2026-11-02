@@ -24,7 +24,6 @@ class Medicion(Servidor):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.audio_terminado = False
         self.carpeta: Path | None = None
 
     def crear_motor(self):
@@ -47,21 +46,6 @@ class Medicion(Servidor):
         except (OSError, subprocess.SubprocessError):
             extra["codigo"]["cambios_sin_commit"] = None
         return extra
-
-    async def trabajar_detector(self, llamada):
-        # Misma política del servidor: foto más reciente, sin cola y aviso único.
-        while True:
-            await self.novedad.wait()
-            self.novedad.clear()
-            n, foto, disparos = llamada.tomar_foto()
-            if getattr(self.detector, "solo_cerradas", False):
-                foto = tuple(llamada.contexto.cerrados)
-            if llamada.aviso is None and foto and disparos:
-                inicio = llamada.reloj()
-                respuesta = await asyncio.to_thread(self.detector.evaluar, foto)
-                llamada.registrar_evaluacion(n, disparos, respuesta, inicio, llamada.reloj())
-            if self.audio_terminado and not self.novedad.is_set():
-                return
 
     async def cerrar_llamada(self, *, esperada=None):
         llamada = self.llamada
