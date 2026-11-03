@@ -10,7 +10,7 @@ El trabajo se organizó por hitos de resultado, sin fijar de antemano una arquit
 |---|---|---|
 | H1 · Acuerdo mínimo | Alcance, preguntas y ejemplo trabajado | Cerrado |
 | H2 · Piloto y primeras pruebas | Piloto con audio y referencia humana | **Atrasado:** faltan #54, #32 y #39 |
-| H3 · Primera integración | Replay de punta a punta | Hecho; falta la reproducción por otra persona (#28) |
+| H3 · Primera integración | Replay de punta a punta | Hecho (#28, cerrado el 2026-11-03); sin reproducción registrada por otra persona |
 | H4 · Desarrollo y selección | Comparación y elección | Elección tomada; faltan #33, #55 y #45 |
 | H5 · Evaluación final | Test reservado | Sin correr (#52) |
 | H6 · Entrega y defensa | Informe, demo y video | En curso (#53) |

@@ -164,7 +164,7 @@ Sobre la configuración final hubo tres comprobaciones, todas en la M1 de 8 GB:
 - **[Corrida por Meet](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md):** nueve llamadas guionadas con dos voces, sin fallos del detector y con una sola frase salteada en 18 pasadas.
 - **[Replay de la llamada 1](../../experiments/voip/corridas/2026-11-02-voz-real-meet/replay-llamada-1/resumen.md):** misma activación de Tito y misma frase citada que en vivo. La diferencia de 1,9 s en `T_A` es la demora de la consulta.
 
-Según informó Luciano Grosso, participó otro integrante del equipo. Falta dejar registrado que otra persona reproduzca una estafa y una legítima por replay y revise un error (#28).
+Según informó Luciano Grosso, participó otro integrante del equipo. La integración (#28) se cerró el 2026-11-03 por decisión de Luciano Grosso con esa corrida como evidencia. **No quedó registrado** que otra persona reproduzca una estafa y una legítima por replay, revise un error y contraste el aviso con una referencia: solo se hizo replay de una estafa y todavía no hay marcas humanas.
 
 **Sin automatizar:** la captura real por Meet, el ensayo en la sala de la defensa y cualquier medición en teléfono.
 

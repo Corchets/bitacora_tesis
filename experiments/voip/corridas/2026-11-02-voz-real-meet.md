@@ -153,6 +153,8 @@ El 2026-11-02, con los resultados ya publicados, se borró la copia `tito-gemma-
 
 No son los archivos originales: no quedó con qué compararlos byte a byte. Según los manifiestos, el canal de la protegida dura entre 0,06 y 0,15 s más y el inicio de cada canal cambia hasta 0,15 s. Una medición nueva sobre ellas debe aclararlo y no reemplaza a las de este informe. Esa carpeta también guarda el audio de las comprobaciones del cierre, y no tiene copia de los 2 plan B.
 
+**Copia del 2026-11-03.** Por pedido de Luciano, esa carpeta y `experiments/voip/llamadas/` de `laboratorio-luciano` se copiaron a `~/respaldos/tesis-audio-voz-real-2026-11-02/`: 75 archivos, 17 WAV, 45 MB, comparados con `diff -r` y con `SHA256SUMS.txt`. No sincroniza con iCloud y los originales siguen en su lugar. **Sigue siendo la misma Mac:** protege de borrar una copia de trabajo, no de perder el disco. El resguardo a cargo de Mateo sigue pendiente.
+
 ## Lo que queda a la vista
 
 - **Riesgo nuevo:** el caso `202618` muestra que con swap la Mac puede atrasar el audio unos 10 s justo después de arrancar el servidor. Es un solo caso, sin causa comprobada. Conviene hacer una llamada de calentamiento antes de la demo.
