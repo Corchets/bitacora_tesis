@@ -1497,7 +1497,7 @@
       <select id="modelo-asr" title="Con qué modelo se transcribe. Se aplica a la próxima llamada o prueba.">
         <option value="zipformer">Zipformer Kroko · streaming</option>
         <option value="parakeet">Parakeet TDT 0.6B v3 · por frases</option>
-        <option value="parakeet-filtro">Parakeet · RMS con filtro Silero</option>
+        <option value="parakeet-filtro" selected>Parakeet · RMS con filtro Silero</option>
         <option value="parakeet-y">Parakeet · RMS y Silero</option>
         <option value="parakeet-silero">Parakeet · solo Silero</option>
       </select>
@@ -1528,13 +1528,13 @@
           <section>
             <h3>Modelo de ASR</h3>
             <p>Zipformer escribe palabra por palabra mientras hablás. Parakeet vuelve a escuchar la frase entera cada medio segundo y muestra un borrador; al cerrar la frase la escribe de nuevo completa, y suele entender mejor.</p>
-            <p>Las tres de Parakeet con Silero están a prueba: cambian solo cómo se decide si hay voz. <em>Con filtro Silero</em>: el volumen (RMS) corta las frases como siempre, pero no transcribe lo que Silero no reconoce como voz (ruidos, respiración). <em>RMS y Silero</em>: hay voz solo si lo dicen los dos, así que corta también en tus pausas con una tele de fondo. <em>Solo Silero</em>: decide Silero con umbral 0,9 y el umbral RMS no se usa; medido con corte de 0,3 s.</p>
+            <p>Las tres de Parakeet con Silero están a prueba: cambian solo cómo se decide si hay voz. <em>Con filtro Silero</em>: el volumen (RMS, umbral 0,008) corta las frases, pero no transcribe lo que Silero no reconoce como voz (ruidos, respiración). <em>RMS y Silero</em>: hay voz solo si lo dicen los dos, así que corta también en tus pausas con una tele de fondo. <em>Solo Silero</em>: decide Silero con umbral 0,9 y el umbral RMS no se usa; medido con corte de 0,3 s.</p>
             <p>El modelo nuevo se carga al iniciar y tarda unos segundos la primera vez.</p>
           </section>
           <section>
             <h3>Corte de silencio</h3>
             <p>Cuántos segundos tiene que quedarse callado alguien para que el ASR cierre la frase y se la pase al detector.</p>
-            <p>Más corto avisa antes pero puede partir una frase en dos; más largo espera frases enteras. En la llamada arranca en 0,9 s; en Probar el ASR, en 0,8 s, que fue lo que mejor anduvo con voz real.</p>
+            <p>Más corto avisa antes pero puede partir una frase en dos; más largo espera frases enteras. Arranca en 0,8 s, que fue lo que mejor anduvo con voz real.</p>
           </section>
         </div>
       </details>

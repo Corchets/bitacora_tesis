@@ -1,0 +1,165 @@
+{
+  "llamada_id": "VIVO-20261102-201328-661177",
+  "asr": {
+    "motor": "sherpa-parakeet",
+    "modelo_id": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+    "ruta_modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+    "es_streaming": false,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "corte_por_silencio_rms_filtro_silero",
+      "corte_silencio_s": 0.8,
+      "umbral_rms_silencio": 0.008,
+      "previo_s": 0.3,
+      "max_frase_s": 10.0,
+      "min_voz_s": 0.3,
+      "min_voz_parcial_s": 1.0,
+      "parciales_cada_s": 0.5,
+      "filtro_idioma": "parciales_y_muletillas_finales",
+      "vad": {
+        "tipo": "silero_vad_sherpa_onnx",
+        "modelo": "silero_vad.onnx",
+        "sha256_16": "9e2449e1087496d8",
+        "umbral": 0.5,
+        "umbral_para_seguir": 0.35,
+        "ventana": 512,
+        "min_silence_duration": 0.0,
+        "min_speech_duration": 0.0,
+        "hilos": 1,
+        "costo_por_bloque": null,
+        "modo": "filtro"
+      }
+    },
+    "decodificacion": {
+      "decoding_method": "greedy_search",
+      "model_type": "nemo_transducer"
+    }
+  },
+  "disparo": "final",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": "B",
+      "inicio_s": 0.035,
+      "duracion_s": 71.859,
+      "desfase_llegada_s": {
+        "n": 1797,
+        "min": -0.039,
+        "mediana": -0.036,
+        "p95": 0.135,
+        "max": 0.684
+      },
+      "retraso_parcial_s": {
+        "n": 15,
+        "min": 0.061,
+        "mediana": 0.14,
+        "p95": 0.177,
+        "max": 0.183
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 6,
+        "min": 0.942,
+        "mediana": 1.008,
+        "p95": 1.416,
+        "max": 1.536
+      }
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.0,
+      "duracion_s": 71.859,
+      "desfase_llegada_s": {
+        "n": 1797,
+        "min": -0.004,
+        "mediana": -0.002,
+        "p95": 0.151,
+        "max": 0.743
+      },
+      "retraso_parcial_s": {
+        "n": 23,
+        "min": 0.129,
+        "mediana": 0.209,
+        "p95": 0.373,
+        "max": 0.431
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 8,
+        "min": 1.012,
+        "mediana": 1.07,
+        "p95": 1.287,
+        "max": 1.372
+      }
+    }
+  },
+  "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)",
+  "detector": {
+    "evaluaciones": 14,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 14,
+      "min": 0.047,
+      "mediana": 1.279,
+      "p95": 2.059,
+      "max": 2.782
+    },
+    "aviso": null
+  },
+  "config": {
+    "detector": "tito-slm",
+    "modelo": "gemma4:e2b-it-q4_K_M",
+    "prompt": "tarea",
+    "hablantes": "ab",
+    "ollama_url": "http://127.0.0.1:11434",
+    "seed": 42,
+    "corte_silencio_s": 0.8,
+    "umbral_rms_silencio": 0.008,
+    "endpoint_nativo": false,
+    "asr": "parakeet-filtro",
+    "hilos_asr": 2,
+    "carga_slm": {
+      "carga_ms": 611,
+      "calentamiento_ms": 611,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 312433704,
+        "size_vram_bytes": 312433704
+      },
+      "pensar": false,
+      "runtime_total_ns": 607781084,
+      "runtime_load_ns": 1117959,
+      "runtime_prompt_eval_ns": 114014000,
+      "runtime_eval_ns": 477876000,
+      "tito": {
+        "artefacto": "tito_logreg.json",
+        "sha256": "fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd",
+        "umbral": 0.5,
+        "artefacto_ms": 0.7,
+        "artefacto_desde_cache": false,
+        "encoder_ms": 4306.5,
+        "encoder_desde_cache": false,
+        "calentamiento_ms": 1409.6,
+        "error": "",
+        "unidad": "ms"
+      }
+    }
+  },
+  "inicio_panel": {},
+  "codigo": {
+    "commit": "abe825ecd802e0b49db47f486bafb019989bde3a",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  }
+}

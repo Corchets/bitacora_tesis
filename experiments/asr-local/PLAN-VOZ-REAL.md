@@ -80,9 +80,11 @@ Fuera de alcance: convertir la variante Kroko ES 128-L de Banafo.
 - `faster-whisper` tiene `hotwords` (no hace nada si se usa `prefix`) e `initial_prompt` (solo la
   primera ventana) ([`transcribe.py`](https://github.com/SYSTRAN/faster-whisper/blob/master/faster_whisper/transcribe.py)).
 
-## 6. Habla tucumana (a revisar por Luciano)
+## 6. Habla tucumana (revisada por Luciano el 2026-11-02)
 
-Lista candidata, sin validar: chango/changa, ñaño/ñaña, guaso, mishi, al ñudo, sonso, yapa, zafar,
+**Revisión de Luciano (2026-11-02):** ñaño/ñaña salen de [`jerga.txt`](voz-real/jerga.txt) y el resto queda. Las corridas anteriores conservan los números con la lista vieja. Quedan en el guion y en los diálogos porque así se grabaron.
+
+Lista de partida: chango/changa, ñaño/ñaña, guaso, mishi, al ñudo, sonso, yapa, zafar,
 al vicio, «vo'» por «vos». En la pronunciación, la hipótesis es que pesan la /s/ final aspirada o
 perdida («lo' código'») y la erre arrastrada. Si el modelo pierde el plural, a las reglas no les
 afecta («codigo» igual dispara); que se pierda «vos» o un imperativo sí. Se confirma o descarta con
@@ -788,3 +790,11 @@ python medir_voz_real.py --solo-parakeet --toma-decision 5 \
 El resumen sale por persona y condición (`toma5/luciano-dialogo`, `toma5/otra-dialogo`). Se probó con una corrida de
 humo sobre los dos canales de una llamada por Meet del 2026-10-28, con Parakeet y Silero reales; esa llamada no sigue
 ningún diálogo, así que sus números no valen.
+
+
+**Corrida del 2026-11-02 (decisión de Luciano).** Cambia dos cosas de lo anterior para probar las dos opciones también en
+vivo con Gemma 4 E2B: una ronda con B y otra con A, cada una fija, y `parakeet-filtro` corta con RMS 0,008 también en la llamada, porque
+con el 0,003 fijo la opción en vivo no era la B medida. Las demás siguen en 0,003 y Silero solo no usa el RMS. Sigue sin cambiar qué opción se usa por defecto. El detalle está en
+[`PRUEBA-VOZ-REAL-MEET.md`](../voip/PRUEBA-VOZ-REAL-MEET.md#qué-se-prueba).
+
+**Resultado de la corrida (2026-11-02).** Sobre el mismo audio de 9 llamadas y 18 canales: etiquetas correctas 121 de 129 con B y 120 con A, sin etiquetas nuevas en negativas; demora de la frase final 1,01 s con B y 0,26 s con A; WER 25,6 % y 32,8 %; 127 y 205 segmentos para 129 frases. Con tele, en el canal de la otra persona, WER 12,0 % y 31,0 %. Las frases con palabras en inglés o portugués fueron 4 con B y 25 con A. **Decisión de Luciano (2026-11-02): opción B para la demo y como valor por defecto del panel y de `servidor.py`** (corte 0,8 s, RMS 0,008, Silero 0,5 como filtro). D09 sigue abierta: son dos voces guionadas. `medir.py` sigue con Zipformer. [Detalle](../voip/corridas/2026-11-02-voz-real-meet.md#a-contra-b-en-el-asr-94) y [medición](corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md).

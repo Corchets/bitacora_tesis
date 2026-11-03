@@ -104,7 +104,7 @@ class TestEtiquetasYTerminos(unittest.TestCase):
         self.assertIn("pasame", t.imperativos)
         self.assertEqual(sorted(t.plata), ["luca", "mango"])
         self.assertIn("mercado pago", t.entidades)
-        self.assertIn("ñaño", t.jerga)
+        self.assertIn("chango", t.jerga)
 
     def test_terminos_en_busca_con_la_tolerancia_de_reglas(self):
         grupos = M.terminos_en("Pasame el códgo y treinta lucas", self.terminos)
@@ -118,9 +118,8 @@ class TestEtiquetasYTerminos(unittest.TestCase):
         self.assertEqual(grupos["jerga"], {"chango", "sonso"})  # «vos» no es «vo»
 
     def test_la_n_con_tilde_no_es_una_n(self):
-        self.assertIn("ñaño", M.terminos_en("Ñaño, mirá", self.terminos)["jerga"])
-        self.assertEqual(M.terminos_en("el nano, mirá", self.terminos)["jerga"], set())
         self.assertIn("al ñudo", M.terminos_en("lo hizo al ñudo", self.terminos)["jerga"])
+        self.assertEqual(M.terminos_en("lo hizo al nudo", self.terminos)["jerga"], set())
 
     def test_jerga_vo_solo_si_esta_sola(self):
         self.assertIn("vo", M.terminos_en("Vo' sabés", self.terminos)["jerga"])
