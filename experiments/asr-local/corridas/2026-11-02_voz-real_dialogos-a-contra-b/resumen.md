@@ -4,6 +4,8 @@
 
 > **Estado: propuesta sin discutir.** Las listas de términos y jerga se usan como instrumento; D07 sigue abierta.
 
+> **Audio original perdido el 2026-11-02.** La carpeta de pruebas citada abajo ya no existe y esta medición no se puede repetir con esos archivos; los resultados quedan como se midieron ([detalle y regrabaciones](../../../voip/corridas/2026-11-02-voz-real-meet.md#audio-original-perdido)).
+
 ## 1. Datos
 
 - Toma 5, `luciano-dialogo`: 7 pruebas (7 con el bloque tal cual el guion). Bloques: D1, D2, D3, D4, D2, D3, D4.

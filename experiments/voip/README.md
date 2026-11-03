@@ -195,6 +195,8 @@ La llamada también empieza con el primer bloque de audio y termina cuando se de
 (o con Ctrl+C en el servidor). Queda en `llamadas/<fecha>_<hora>_<microsegundos>/`, que Git ignora: son voces y
 transcripciones del equipo; si una sirve como evidencia, se copia a `corridas/` sin el WAV.
 
+> Git no guarda esa carpeta: `estereo.wav` existe solo en la copia de trabajo y se borra con ella ([caso del 2026-11-02](corridas/2026-11-02-voz-real-meet.md#audio-original-perdido)).
+
 El modelo de Zipformer se baja solo la primera vez (149 MB, a `experiments/asr-local/modelos/`).
 
 ## 4. Dónde está la demora (TTS, una llamada, M1 8 GB)
