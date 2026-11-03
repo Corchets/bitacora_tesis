@@ -16,7 +16,7 @@ según el [checklist](../PRUEBA-VOZ-REAL-MEET.md).
 - **Opción B:** `parakeet-filtro`, corte 0,8 s, RMS 0,008, Silero 0,5 solo filtra.
 - **Opción A:** `parakeet-silero`, corte 0,3 s, Silero 0,9; el RMS no se usa.
 - **Código:** llamadas `8f613be`; la otra opción y la medición del ASR `abe825e`; #84 y comprobación del cierre `5980acf`; replay `f3a047c`.
-- **Salidas:** [`llamadas/`](2026-11-02-voz-real-meet/llamadas), [`otra-opcion-a/`](2026-11-02-voz-real-meet/otra-opcion-a), [`otra-opcion-b/`](2026-11-02-voz-real-meet/otra-opcion-b), [`plan-b/`](2026-11-02-voz-real-meet/plan-b), [`cierre/`](2026-11-02-voz-real-meet/cierre) y [`replay-llamada-1/`](2026-11-02-voz-real-meet/replay-llamada-1), sin WAV. El audio queda fuera de Git.
+- **Salidas:** [`llamadas/`](2026-11-02-voz-real-meet/llamadas), [`otra-opcion-a/`](2026-11-02-voz-real-meet/otra-opcion-a), [`otra-opcion-b/`](2026-11-02-voz-real-meet/otra-opcion-b), [`plan-b/`](2026-11-02-voz-real-meet/plan-b), [`cierre/`](2026-11-02-voz-real-meet/cierre) y [`replay-llamada-1/`](2026-11-02-voz-real-meet/replay-llamada-1), sin WAV. El audio original [se perdió](#audio-original-perdido).
 
 **Desvíos del plan.** La tele estuvo muy fuerte en las llamadas 5 y 6, no solo en la 5: A no tiene un D1 en vivo sin tele. Quedaron fuera de resultados el ensayo `190242-539305` (en frío), el plan B fallido `185218-730116` y tres tomas cortadas: `191250-736197`, `191338-353002` y `192339-246848`. Luciano confirmó que se salieron del guion y las reiniciaron.
 
@@ -127,6 +127,30 @@ La captura muestra el aviso. La marca de Tito (frase 3) y las dos frases «Sin c
 | `202618-152063` | Primera llamada tras arrancar el servidor | **No sirve para comprobar:** con la Mac trabada, a los 20 s solo se habían procesado 10,8 s de audio y el corte llegó antes del pedido |
 
 El cierre no cambió ningún resultado de las 18 pasadas: las estafas ya habían avisado y en D3 se evaluaron todas las frases.
+
+## Audio original perdido
+
+El 2026-11-02, con los resultados ya publicados, se borró la copia `tito-gemma-pendientes` al limpiar las ramas mergeadas. Los WAV estaban en su `experiments/voip/llamadas/`, que Git ignora. La borró Claude Opus 5.5 por pedido de Luciano: comprobó `git status` y los commits sin subir, que no muestran esa carpeta, y no leyó el aviso del README. Luciano decidió seguir: si hace falta, se vuelve a grabar más adelante con otros ejemplos.
+
+- **Perdido:** los WAV de las 9 llamadas, de los 2 plan B (`195151-581577`, `195254-920374`) y de las tomas fuera de resultados de los [desvíos](#condiciones). También cualquier otro archivo ignorado de esa copia: ya no se puede saber cuáles había.
+- **Sigue en Git:** registros, transcripciones, detecciones y manifiestos de estas [salidas](2026-11-02-voz-real-meet), además de la [medición de A contra B](../../asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md). Los resultados de este informe no cambian, pero esa medición no se puede repetir con los archivos originales.
+- **Recuperación intentada el 2026-11-02, sin resultado:** búsqueda por id en la carpeta de usuario y los temporales, papelera, archivos todavía abiertos, snapshots del volumen de datos (no hay) y Time Machine (sin configurar). El disco es un SSD con APFS y FileVault, así que no se intentó recuperar bloques borrados. Falta preguntar si alguien más recibió una copia: la [checklist](../PRUEBA-VOZ-REAL-MEET.md#antes-de-citar-a-la-otra-persona) prevé que el audio quede bajo resguardo de Mateo y no hay registro de que se le haya entregado.
+
+**Lo que queda del audio.** Al pasar cada llamada por la otra opción, el servidor volvió a guardar lo que recibió. Esas regrabaciones están en `~/bitacora_tesis-voz-real-otra-opcion/`, fuera de Git y solo en esta Mac:
+
+| Llamada | Original perdido | Pasó por | Regrabación |
+|---|---|---|---|
+| 1 | `191055-519549` | A | `a/2026-11-02_200500-683632/estereo.wav` |
+| 2 | `191514-060570` | A | `a/2026-11-02_200618-789946/estereo.wav` |
+| 3 | `191647-577476` | A | `a/2026-11-02_200725-613521/estereo.wav` |
+| 4 | `191850-452328` | A | `a/2026-11-02_200836-810022/estereo.wav` |
+| 5 | `192133-308960` | A | `a/2026-11-02_200941-795085/estereo.wav` |
+| 6 | `192425-071975` | B | `b/2026-11-02_201105-251036/estereo.wav` |
+| 7 | `192651-299571` | B | `b/2026-11-02_201211-709879/estereo.wav` |
+| 8 | `192931-493331` | B | `b/2026-11-02_201328-661177/estereo.wav` |
+| 9 | `193107-631798` | B | `b/2026-11-02_201445-964262/estereo.wav` |
+
+No son los archivos originales: no quedó con qué compararlos byte a byte. Según los manifiestos, el canal de la protegida dura entre 0,06 y 0,15 s más y el inicio de cada canal cambia hasta 0,15 s. Una medición nueva sobre ellas debe aclararlo y no reemplaza a las de este informe. Esa carpeta también guarda el audio de las comprobaciones del cierre, y no tiene copia de los 2 plan B.
 
 ## Lo que queda a la vista
 
