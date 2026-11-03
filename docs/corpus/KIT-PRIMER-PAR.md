@@ -353,3 +353,43 @@ Durante la preparación de este kit se detectaron las siguientes discrepancias y
 4. **Prefijos de hablante e intervenciones consecutivas:**
    - *Ubicación:* [`docs/ingenieria/ARQUITECTURA.md`](../ingenieria/ARQUITECTURA.md), líneas 105–118 vs [`experiments/slm-directo/casos/texto/SC-WA-CODE-01-e01.txt`](../../experiments/slm-directo/casos/texto/SC-WA-CODE-01-e01.txt), líneas 3–4.
    - *Detalle:* En `ARQUITECTURA.md` los enunciados se enumeran como F1–F5. En el archivo de texto figuran con prefijos `A:` y `B:`. En la llamada fraudulenta, el atacante (A) habla en la línea 3 («Para cancelar esa activación...») y en la línea 4 («Decime el código...») consecutivamente. En una llamada de audio real, ambas frases pueden emitirse en una sola intervención continua o separadas por una pausa/asentimiento.
+
+---
+
+## 8. Prueba del procedimiento con D1 y D3 (2026-11-03)
+
+Luciano eligió probar el marcado y la revisión con [D1 y D3](../../experiments/asr-local/voz-real/HOJA-DIALOGOS.md), que ya están grabados, en lugar del par de este kit. **Todavía no hay marcas:** `T_R` y `T_C` los pone una persona escuchando el audio. Las filas `D1-t05` y `D3-t05` de la [planilla](PLANILLA-REVISION-TOMAS.csv) esperan esos datos.
+
+### 8.1. Qué escuchar
+
+Audio fuera de Git, en `~/respaldos/tesis-audio-voz-real-2026-11-02/voz-real-otra-opcion/`. Son [regrabaciones](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#audio-original-perdido), porque el original se perdió. Canal izquierdo: quien atiende (`protegida`). Canal derecho: quien llama (`otra`).
+
+| Fila | Llamada | Archivo | Duración | Clase según el guion |
+|---|---|---|---|---|
+| `D1-t05` | 1 | `a/2026-11-02_200500-683632/estereo.wav` | 72,75 s | estafa |
+| `D3-t05` | 3 | `a/2026-11-02_200725-613521/estereo.wav` | 65,88 s | legítima |
+
+### 8.2. Dónde buscar en D1
+
+Las ventanas salen de las frases finales del ASR sobre ese archivo ([registro](../../experiments/voip/corridas/2026-11-02-voz-real-meet/otra-opcion-a/2026-11-02_200500-683632/actualizaciones.jsonl)). **Sirven para encontrar el lugar, no son marcas:** el ASR corta y cambia palabras.
+
+| Marca | Línea del guion | Canal | Ventana del ASR | Qué transcribió |
+|---|---|---|---|---|
+| `T_R` | D1-06: «Por eso lo llamo. Le va a llegar un código por mensaje, pasámelo cuando te llegue.» | derecho | 28,69 a 32,85 s | «Te va a llevar un código por mensaje. No tiene que pasar cuando le llegue.» |
+| `T_C` | D1-10: «Cuatro, ocho, dos, cero, siete, uno.» | izquierdo | 45,76 a 49,24 s | «cuatro, ocho, dos, cero, siete, uno» |
+
+> **Estado: propuesta sin discutir.** ([D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico)) `T_R` va al empezar el pedido de pasar el código, no en «Por eso lo llamo» ni en «Le va a llegar un código», porque avisar que llegará un código todavía no es pedirlo. `T_C` va en el primer dígito. D3 queda sin marcas si al escucharla no aparece un pedido.
+
+### 8.3. Qué mostró la prueba antes de escuchar
+
+1. **La línea no alcanza para ubicar `T_R`.** D1-06 tiene tres partes y lo hablado no sigue el guion: el ASR sugiere «lo tiene que pasar» donde el guion dice «pasámelo». El [§5.2](#52-cómo-ubicar-y-medir-t_r-y-t_c-en-segundos-sobre-el-audio) y el [manual](MANUAL-ANOTACION.md#2-cómo-ubicar-las-marcas-y-resolver-dudas) piden la palabra donde empieza el pedido: hay que decidirlo escuchando.
+2. **Los canales están al revés que en el §4.1.** El kit pone a quien llama a la izquierda y el servidor de la llamada lo guarda a la derecha. Las filas nuevas usan lo que hay en el archivo. Falta decidir si se corrige el kit.
+3. **`T_A` no comparte el reloj de la llamada en vivo.** Según los manifiestos, el inicio de cada canal cambia hasta 0,15 s respecto del original perdido. Además, estas regrabaciones pasaron por la opción A, no por la configuración final. Para calcular `L_R` y `L_C` con estas marcas hay que correr la configuración final sobre el mismo archivo y aclararlo.
+4. **Quién revisa.** Luciano actuó en las dos llamadas, igual que la otra persona del equipo. El [§5.1](#51-asignación-de-roles-de-revisión) pide alguien que no haya actuado: tiene que ser otro integrante.
+5. **El texto hay que revisarlo escuchando.** La referencia es el guion, y hubo palabras cambiadas al hablar. Conviene mirar sobre todo D1-13 y, en D3, las líneas D3-01, D3-07, D3-10 y D3-13: ahí el ASR se aleja del guion o no dejó frase final, y no se sabe si es error suyo o de la toma.
+
+### 8.4. Qué le falta a #39 aunque esta prueba salga bien
+
+- **Fichas:** D1 y D3 se leyeron de un guion y no son semillas del catálogo. La prueba no ejercita las fichas ni el principio de que quien atiende no conoce la clase de la llamada.
+- **Resguardo:** el audio no quedó a cargo de Mateo, como pide D06. La copia de `~/respaldos/` está en la misma Mac.
+- **Esfuerzo:** no se registró cuánto llevó producir estas tomas. Se puede registrar el tiempo de marcar y revisar.
