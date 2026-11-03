@@ -55,9 +55,9 @@ DIR_PARAKEET = DIR_MODELOS / "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
 MODELO_SILERO = DIR_MODELOS / "silero-vad" / "silero_vad.onnx"
 URL_SILERO = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx"
 
-# Modelos de ASR que se pueden elegir desde el panel. «zipformer» es el de siempre. Whisper no está:
+# Modelos de ASR que se pueden elegir desde el panel. Por defecto, la opción B que eligió Luciano (asr-local/PLAN-VOZ-REAL.md §12.9). Whisper no está:
 # solo transcribe al cerrar la frase y la demo tiene que ir escribiendo mientras se habla.
-ASR_POR_DEFECTO = "zipformer"
+ASR_POR_DEFECTO = "parakeet-filtro"
 MODELOS_ASR = {
     "zipformer": "Zipformer Kroko · streaming",
     "parakeet": "Parakeet TDT 0.6B v3 · por frases",

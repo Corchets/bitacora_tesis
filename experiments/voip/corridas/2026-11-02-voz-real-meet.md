@@ -6,7 +6,7 @@ según el [checklist](../PRUEBA-VOZ-REAL-MEET.md).
 
 > Son nueve llamadas guionadas con dos voces en una notebook: muestran si el recorrido anda con voz real.
 > **No son rendimiento del detector ni resuelven [D09](../../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).**
-> **Decisión de Luciano (2026-11-02):** opción B. Nada de esto se publicó.
+> **Decisión de Luciano (2026-11-02):** opción B. Los cierres se publicaron con su ok ese mismo día.
 
 ## Condiciones
 
@@ -63,7 +63,7 @@ Cada audio pasó por la opción que la llamada no usó, a ritmo real y con el mi
 
 **Otro idioma, sobre el mismo audio:** 4 de 129 frases de referencia con palabras en inglés o portugués con B, contra 25 con A («For this loss amount», «Sorry in town», «Caminha número»). Conteo con una expresión regular y revisión a mano, con 2 dudosas en A; no es una métrica del plan. En vivo fueron 1 de 71 frases finales enteras en otro idioma con B y 17 de 94 con A, 15 de ellas en el canal de Meet.
 
-**Decisión de Luciano (2026-11-02): opción B** para la demo. No cierra D09 y, por ahora, no cambia los valores por defecto del panel.
+**Decisión de Luciano (2026-11-02): opción B** para la demo y como valor por defecto del panel y de `servidor.py`. No cierra D09.
 
 **Lectura.**
 
@@ -140,11 +140,11 @@ El cierre no cambió ningún resultado de las 18 pasadas: las estafas ya habían
 
 ## Borradores de cierre
 
-Para publicar solo con el ok de Luciano. Hay que resolver lo que está entre corchetes.
+Publicados con el ok de Luciano el 2026-11-02; acá queda el texto de partida.
 
 ### #84
 
-> **Estado: propuesta sin discutir.** Cambiar el criterio a E2B en la notebook de la demo y cerrar con el resultado registrado. Borrar el issue perdería el rastro, como pasó con #102.
+**Decisión de Luciano (2026-11-02):** cambiar el criterio a E2B en la notebook de la demo y cerrar con el resultado registrado.
 
 ```markdown
 **Resumen:** `medir.py` corre sin panel, deja la corrida en `corridas/` e informa en una línea si cumple. Con Gemma 4 E2B y Tito viejo en el M1 de 8 GB, **NO CUMPLE** el criterio de < 2 s.
@@ -209,5 +209,5 @@ Closes #94
 
 **Decisiones:** Luciano elige la opción B (Parakeet, corte 0,8 s, RMS 0,008, Silero 0,5 como filtro) para la demo. D09 sigue abierta: son dos voces guionadas.
 
-**Próxima acción:** [valores por defecto del panel, según lo que decida Luciano.]
+**Próxima acción:** ninguna en este issue. La opción B ya es el valor por defecto del panel. Lista de jerga revisada por Luciano: salen ñaño y ñaña.
 ```
