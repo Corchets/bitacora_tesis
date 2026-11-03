@@ -101,7 +101,7 @@ def main() -> None:
         "sin ver respuestas ajenas, y acá las marcas ya están a la vista.",
         "- **`revision_humana` sigue en `false`** hasta pasar lo revisado a cada referencia.",
         "- **Quien vaya a atender una llamada grabada no debería leer ese caso antes:** el "
-        "[método](METODO-CREACION-CORPUS.md) pide que no conozca la clase.", "",
+        "[kit del primer par](KIT-PRIMER-PAR.md) parte de que no conozca la clase.", "",
         "## Qué significan las marcas", "",
         "- `T_R`: línea donde empieza el pedido crítico. `T_C`: línea donde la persona cumple. Ver el "
         "[manual](MANUAL-ANOTACION.md).",

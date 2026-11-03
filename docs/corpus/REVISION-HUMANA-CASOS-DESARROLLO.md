@@ -8,7 +8,7 @@ Generado con `experiments/slm-directo/hoja_revision_casos.py`: los diálogos y l
 
 - **Esto no cierra [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico).** Sirve para corregir casos. D07 pide además que los cuatro integrantes anoten por separado una muestra común, sin ver respuestas ajenas, y acá las marcas ya están a la vista.
 - **`revision_humana` sigue en `false`** hasta pasar lo revisado a cada referencia.
-- **Quien vaya a atender una llamada grabada no debería leer ese caso antes:** el [método](METODO-CREACION-CORPUS.md) pide que no conozca la clase.
+- **Quien vaya a atender una llamada grabada no debería leer ese caso antes:** el [kit del primer par](KIT-PRIMER-PAR.md) parte de que no conozca la clase.
 
 ## Qué significan las marcas
 
