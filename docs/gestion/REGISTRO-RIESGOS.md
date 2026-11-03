@@ -59,3 +59,14 @@ Con ASR y detector cargados quedan unos 0,5 GB libres, y el tag corto `gemma4:e2
 artefacto que no carga ([evidencia](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md)).
 Mitigación: tags completos, reglas como respaldo elegible desde el panel y `--ollama-url` para usar
 la PC con GPU. Falta ensayarlo en la sala (#86) con Chrome y Meet abiertos.
+
+R23: la corrida por Meet con voz real anduvo en la notebook de 8 GB con Chrome y Meet abiertos y 4 a 5 GB de swap,
+con una sola frase salteada ([evidencia](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md)). Se corrigió que cortar
+la llamada descartara la última consulta, lo que dejaba sin aviso al ejemplo corto. Siguen dos riesgos: Ollama descarga el
+modelo a los 10 min sin consultas y la primera tarda entre 12 y 16 s; y una vez, recién arrancado el servidor, la Mac atrasó
+unos 10 s el audio. Mitigación: una llamada de calentamiento antes de la demo. El plan B es el ejemplo del soporte y Luciano
+indicó que la demo igual va a ser un video.
+
+R06: con Parakeet, el corte de 0,3 s con Silero mete inglés y portugués en 25 de 129 frases, contra 4 con el corte de 0,8 s, y
+pierde términos con tele de fondo. Parakeet no permite fijar el idioma. En las dos opciones se pierden términos críticos («token»,
+CVV, CBU), más en el canal de Meet. No cambió ningún aviso en estas 9 llamadas guionadas.

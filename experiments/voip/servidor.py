@@ -55,9 +55,9 @@ DIR_PARAKEET = DIR_MODELOS / "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
 MODELO_SILERO = DIR_MODELOS / "silero-vad" / "silero_vad.onnx"
 URL_SILERO = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx"
 
-# Modelos de ASR que se pueden elegir desde el panel. «zipformer» es el de siempre. Whisper no está:
+# Modelos de ASR que se pueden elegir desde el panel. Por defecto, la opción B que eligió Luciano (asr-local/PLAN-VOZ-REAL.md §12.9). Whisper no está:
 # solo transcribe al cerrar la frase y la demo tiene que ir escribiendo mientras se habla.
-ASR_POR_DEFECTO = "zipformer"
+ASR_POR_DEFECTO = "parakeet-filtro"
 MODELOS_ASR = {
     "zipformer": "Zipformer Kroko · streaming",
     "parakeet": "Parakeet TDT 0.6B v3 · por frases",
@@ -74,9 +74,17 @@ EJEMPLOS = {nombre: DIR_VOIP.parent / "asr-local" / "audio" / f"{nombre}-tts-est
 
 
 CORTE_AUTO = "auto"
+# Al cortar, cuánto se espera al detector: una consulta en frío tardó 16 s y puede quedar otra pendiente.
+ESPERA_DETECTOR_AL_CERRAR_S = 30.0
 CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el modelo no cierra la frase solo
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
 UMBRAL_LLAMADA = 0.003
+# Opción B de asr-local/PLAN-VOZ-REAL.md §12.9: con filtro Silero, el RMS corta a 0,008 también en la llamada.
+UMBRAL_RMS_POR_ASR = {"parakeet-filtro": 0.008}
+
+
+def umbral_de_llamada(asr: str) -> float:
+    return UMBRAL_RMS_POR_ASR.get(asr, UMBRAL_LLAMADA)
 
 
 def validar_corte(valor) -> str | float:
@@ -94,7 +102,7 @@ def validar_corte(valor) -> str | float:
 # Tags completos: «gemma4:e2b» a secas baja otro artefacto según la plataforma (MLX en Mac), no el medido.
 DETECTOR_POR_DEFECTO = "gemma4:e2b-it-q4_K_M"
 DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "gemma4:e4b-it-q4_K_M", "reglas")
-DETECTORES_CON_MODELO = ("slm", "tito-slm")
+DETECTORES_CON_MODELO = replay.DETECTORES_CON_MODELO
 
 
 def validar_detector(valor) -> str:
@@ -124,8 +132,8 @@ class Servidor:
         self.dormir = dormir
         self.control = asyncio.Lock()
         self.config_llamada: dict = {}
-        self.config_asr: tuple[str | float, float] = (CORTE_AUTO, UMBRAL_LLAMADA)  # (corte elegido, umbral RMS)
         self.asr = validar_asr(getattr(args, "asr", ASR_POR_DEFECTO))
+        self.config_asr: tuple[str | float, float] = (CORTE_AUTO, umbral_de_llamada(self.asr))  # (corte elegido, umbral RMS)
         self.args = args
         self.detector = detector
         self.llamada: Llamada | None = None
@@ -138,6 +146,7 @@ class Servidor:
         self.historial: list[dict] = []  # para el panel que se conecta en medio de la llamada
         self.novedad = asyncio.Event()
         self.tarea_detector: asyncio.Task | None = None
+        self.audio_terminado = False
         self.tarea_niveles: asyncio.Task | None = None
         # Última prueba cerrada y todavía sin guardar: «Guardar» actúa sobre ella.
         self.prueba_pendiente: Path | None = None
@@ -183,6 +192,7 @@ class Servidor:
             # Una carga fallida no debe envenenar todos los intentos siguientes.
             self.preparada = None
         self.novedad.clear()
+        self.audio_terminado = False
         # El filtro guarda si ya derivó: cada llamada empieza de cero, también tras cambiar de vista.
         getattr(self.detector, "reiniciar", lambda: None)()
         momento = datetime.now()
@@ -223,21 +233,31 @@ class Servidor:
                 with suppress(asyncio.CancelledError):
                     await self.tarea_niveles
                 self.tarea_niveles = None
-            if self.tarea_detector:
-                self.tarea_detector.cancel()
-                with suppress(asyncio.CancelledError):
-                    await self.tarea_detector
-                self.tarea_detector = None
             clientes = tuple(self.clientes_audio)
             self.clientes_audio.clear()
             for ws in clientes:
                 await ws.close(1000, "llamada terminada")
+            if self.tarea_detector:
+                await self.esperar_detector(llamada)
+                self.tarea_detector = None
             for act in llamada.cerrar(self.manifiesto_extra()):
                 self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
             self.prueba_pendiente = llamada.dir_salida if self.config_llamada.get("modo") == "asr" else None
             self.difundir({"tipo": "fin", "llamada_id": llamada.llamada_id, "dir": str(llamada.dir_salida)})
             print(f"[llamada] cerrada: {llamada.dir_salida}")
             self.preparar()
+
+    async def esperar_detector(self, llamada: Llamada) -> None:
+        """Evalúa lo que ya se dijo antes de cerrar: si no, se pierde el pedido que llega justo antes del corte."""
+        for act in llamada.vaciar_audio():
+            self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
+            llamada.marcar_disparo(act)
+        self.audio_terminado = True
+        self.novedad.set()
+        try:
+            await asyncio.wait_for(self.tarea_detector, ESPERA_DETECTOR_AL_CERRAR_S)
+        except TimeoutError:
+            print(f"[llamada] el detector no terminó en {ESPERA_DETECTOR_AL_CERRAR_S} s: se descarta lo pendiente")
 
     def manifiesto_extra(self) -> dict:
         a = self.args
@@ -269,14 +289,15 @@ class Servidor:
             n, foto, disparos = llamada.tomar_foto()
             if getattr(self.detector, "solo_cerradas", False):
                 foto = tuple(llamada.contexto.cerrados)
-            if llamada.aviso is not None or not foto:
-                continue
-            inicio = llamada.reloj()
-            respuesta = await asyncio.to_thread(self.detector.evaluar, foto)
-            ev = llamada.registrar_evaluacion(n, disparos, respuesta, inicio, llamada.reloj())
-            self.difundir({"tipo": "detector", **llamada.evento_detector(ev)})
-            if ev.aviso:
-                print(f"[AVISO] t={ev.fin_s:.2f}s · {respuesta.motivo}")
+            if llamada.aviso is None and foto and disparos:
+                inicio = llamada.reloj()
+                respuesta = await asyncio.to_thread(self.detector.evaluar, foto)
+                ev = llamada.registrar_evaluacion(n, disparos, respuesta, inicio, llamada.reloj())
+                self.difundir({"tipo": "detector", **llamada.evento_detector(ev)})
+                if ev.aviso:
+                    print(f"[AVISO] t={ev.fin_s:.2f}s · {respuesta.motivo}")
+            if self.audio_terminado and not self.novedad.is_set():
+                return
 
     def recibir_audio(self, rol: str, pcm: bytes, *, llegada: float | None = None) -> None:
         """Entrada común para cliente.py y el estéreo del ejemplo."""
@@ -313,7 +334,7 @@ class Servidor:
                         break
                     if self.llamada is None:
                         self.config_llamada = {}
-                        await self.configurar_asr((validar_corte(self.args.corte_silencio), UMBRAL_LLAMADA))
+                        await self.configurar_asr((validar_corte(self.args.corte_silencio), umbral_de_llamada(self.asr)))
                         self.llamada = await self.abrir_llamada()
                     self.recibir_audio(rol, mensaje)
         finally:
@@ -406,7 +427,7 @@ class Servidor:
         else:
             if umbral is not None:
                 raise ValueError("El umbral de volumen de la llamada es fijo; probalo en Probar el ASR.")
-            umbral = UMBRAL_LLAMADA
+            umbral = umbral_de_llamada(asr)
         async with self.control:
             if self.llamada is not None or self.clientes_audio:
                 raise ValueError("Terminá la llamada actual antes de iniciar otra.")

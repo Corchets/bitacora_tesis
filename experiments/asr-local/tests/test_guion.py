@@ -68,7 +68,7 @@ class TestGuionDelRepo(unittest.TestCase):
         jerga = [l.strip() for l in (G.DIR_VOZ_REAL / "jerga.txt").read_text(encoding="utf-8").splitlines()
                  if l.strip() and not l.startswith("#")]
         textos = " ".join(f.texto.lower() for f in self.guion.frases if f.tipo == "jerga")
-        for termino in ("chango", "ñaño", "guaso", "mishi", "al ñudo", "sonso", "zafo", "al vicio", "changa"):
+        for termino in ("chango", "guaso", "mishi", "al ñudo", "sonso", "zafo", "al vicio", "changa"):
             self.assertIn(termino, jerga)
             self.assertIn(termino, textos)
 

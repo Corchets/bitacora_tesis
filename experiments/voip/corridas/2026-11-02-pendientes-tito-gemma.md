@@ -42,6 +42,8 @@ no lo propongo.
 > [#84](https://github.com/Corchets/bitacora_tesis/issues/84) ni cierra
 > [D09](../../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
 
+**Resultado (2026-11-02):** NO CUMPLE, mediana de 3,74 s en 15 consultas. Ver la [corrida](2026-11-02-voz-real-meet.md#demora-de-e2b-84).
+
 ### Por qué 4,02 s y 1,45 a 1,80 s no se pueden comparar
 
 **Las medianas mezclan dos cosas.** `segundos_detector` junta en la misma lista las frases
@@ -108,26 +110,7 @@ PY
 
 ## Borrador: comentario de cierre de #85
 
-Para publicar **después** de la prueba por Meet. Completar lo que está entre corchetes; si la prueba
-no da, no se cierra.
-
-```markdown
-Closes #85
-
-**Resumen:** `--detector tito-slm` funciona en la llamada en vivo con `gemma4:e2b-it-q4_K_M`. El panel y Presentación distinguen las frases sin consulta y marcan dónde Tito activó al modelo.
-
-**Criterios**
-- [x] El servidor arranca con `--detector tito-slm` y el panel muestra nombre y configuración.
-- [x] Las frases sin consulta se ven distintas de las evaluadas y la activación se marca en la conversación (consola y Presentación).
-- [ ] Llamada en vivo registrada y repetida con `replay.py`: [id de la llamada] → [resultado del replay].
-- [x] Pruebas con Tito y SLM simulados: `test_servidor.py`, `conversacion.test.mjs`, `presentacion_ui.py` ([N]/[N]).
-
-**Evidencia observable:** [enlace a la corrida de voz real], [captura de Presentación con la marca]. [N] llamadas por Meet: [resultado por diálogo, sin voces ni datos personales].
-
-**Decisiones:** ninguna nueva. La elección de E2B es para la demo; D09 sigue abierta. Estas llamadas no son rendimiento del detector.
-
-**Próxima acción:** [lo que quede de #84, #86 y #94].
-```
+Actualizado después de la prueba: está en la [corrida con voz real](2026-11-02-voz-real-meet.md#borradores-de-cierre).
 
 ## Borrador: mensaje a Ignacio sobre #102
 

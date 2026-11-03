@@ -2,6 +2,7 @@
 import asyncio
 import json
 import tempfile
+import threading
 import unittest
 from argparse import Namespace
 from pathlib import Path
@@ -14,7 +15,7 @@ from websockets.asyncio.server import serve
 
 from test_llamada import Reloj, RespuestaFalsa, pcm
 from motores import MotorFalso
-from servidor import Servidor
+from servidor import ASR_POR_DEFECTO, DIR_VOIP, Servidor, umbral_de_llamada
 import replay as replay_mod
 from casos import Linea
 
@@ -34,8 +35,9 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = Path(self.tmp.name)
         self.reloj = Reloj()
+        # MotorFalso reemplaza al ASR: con «zipformer» estas pruebas no necesitan el modelo de Silero.
         args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2,
-                         corte_silencio="auto")
+                         corte_silencio="auto", asr="zipformer")
         self.servidor = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
         self.servidor.preparar()
         await self.servidor.preparada
@@ -173,6 +175,97 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(vistas, [("cerrada",)])
         self.assertEqual(reinicios, [True])
         self.assertEqual((ev["consulta"], ev["tito_puntaje"], ev["tito_ms"]), ("omitida", 0.12, 15.0))
+
+    def frase_cerrada(self, llamada, texto):
+        llamada.contexto.cerrados.append(Linea(hablante="A", texto=texto))
+        llamada.foto = tuple(llamada.contexto.cerrados)
+        llamada.disparos += 1
+
+    def test_arranca_con_la_opcion_b(self):
+        self.assertEqual(ASR_POR_DEFECTO, "parakeet-filtro")
+        self.assertEqual(umbral_de_llamada(ASR_POR_DEFECTO), 0.008)
+        panel = (DIR_VOIP / "panel.html").read_text(encoding="utf-8")
+        self.assertIn('<option value="parakeet-filtro" selected>', panel)
+        self.assertIn("CORTE_INICIAL_S = 0.8;", (DIR_VOIP / "corte-silencio.mjs").read_text(encoding="utf-8"))
+
+    async def test_al_cerrar_termina_la_consulta_en_curso_y_evalua_la_frase_pendiente(self):
+        empezo, seguir, vistas = threading.Event(), threading.Event(), []
+
+        class DetectorLento:
+            def evaluar(self, foto):
+                vistas.append(tuple(l.texto for l in foto))
+                if len(vistas) == 1:
+                    empezo.set()
+                    seguir.wait(3)
+                    return RespuestaFalsa()
+                return RespuestaFalsa(alerta_sugerida=True, motivo="pidió el código")
+
+        self.servidor.detector = DetectorLento()
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            llamada = self.servidor.llamada
+            self.frase_cerrada(llamada, "te llamo de soporte")
+            self.servidor.novedad.set()
+            self.assertTrue(await asyncio.to_thread(empezo.wait, 3))
+            self.frase_cerrada(llamada, "decime el código")
+            self.servidor.novedad.set()
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await asyncio.sleep(0.05)
+            seguir.set()
+            fin = await self.evento(panel, "fin")
+        self.assertEqual(vistas, [("te llamo de soporte",), ("te llamo de soporte", "decime el código")])
+        manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifiesto["detector"]["evaluaciones"], 2)
+        self.assertEqual(manifiesto["detector"]["aviso"]["motivo"], "pidió el código")
+
+    async def test_al_cerrar_evalua_la_frase_que_el_corte_deja_abierta(self):
+        vistas = []
+
+        class Detector:
+            def evaluar(self, foto):
+                vistas.append(tuple(l.texto for l in foto))
+                return RespuestaFalsa()
+
+        self.servidor.detector = Detector()
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            llamada = self.servidor.llamada
+
+            def vaciar():
+                llamada.vaciar_audio = lambda: []
+                self.frase_cerrada(llamada, "decime el código")
+                return [{"tipo": "final", "texto": "decime el código"}]
+
+            llamada.vaciar_audio = vaciar
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            await self.evento(panel, "fin")
+        self.assertEqual(vistas, [("decime el código",)])
+
+    async def test_al_cerrar_no_espera_mas_que_el_tope(self):
+        empezo, seguir = threading.Event(), threading.Event()
+
+        class DetectorColgado:
+            def evaluar(self, foto):
+                empezo.set()
+                seguir.wait(3)
+                return RespuestaFalsa()
+
+        self.servidor.detector = DetectorColgado()
+        self.addCleanup(seguir.set)
+        with patch("servidor.ESPERA_DETECTOR_AL_CERRAR_S", 0.01):
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(self.inicio())
+                await self.evento(panel, "inicio")
+                self.frase_cerrada(self.servidor.llamada, "te llamo de soporte")
+                self.servidor.novedad.set()
+                self.assertTrue(await asyncio.to_thread(empezo.wait, 3))
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                fin = await self.evento(panel, "fin")
+        seguir.set()
+        manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifiesto["detector"]["evaluaciones"], 0)
 
     async def test_prueba_asr_dos_cortes_umbral_manifiesto_y_sin_detector(self):
         class MotorSilencio(MotorFalso):
@@ -470,7 +563,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(lista, {"tipo": "historial", "llamadas": [], "pruebas": []})
             await self.terminar(panel)
         # Un servidor nuevo sobre la misma carpeta de salida ve lo anterior.
-        args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2, corte_silencio="auto")
+        args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2, corte_silencio="auto", asr="zipformer")
         otro = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
         red = await serve(otro.atender, "127.0.0.1", 0)
         try:
@@ -674,6 +767,19 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
             self.assertEqual(m["config"]["umbral_rms_silencio"], 0.003)
             self.assertTrue(m["config"]["endpoint_nativo"])
+
+    async def test_rms_con_filtro_silero_corta_a_0008_en_la_llamada(self):
+        """Opción B de PLAN-VOZ-REAL.md §12.9; las demás siguen en 0,003 y Silero solo no usa el RMS."""
+        with tempfile.NamedTemporaryFile(suffix=".onnx") as modelo, patch("servidor.MODELO_SILERO", Path(modelo.name)):
+            async with connect(self.url + "/panel") as panel:
+                for asr, corte, umbral in (("parakeet-filtro", 0.8, 0.008), ("parakeet-silero", 0.3, 0.003), ("parakeet", 0.8, 0.003)):
+                    await panel.send(json.dumps({**json.loads(self.inicio()), "asr": asr, "corte_silencio_s": corte}))
+                    inicio = await self.evento(panel, "inicio")
+                    self.assertEqual((inicio["asr"], inicio["corte_silencio_s"], inicio["umbral_rms_silencio"]), (asr, corte, umbral))
+                    await panel.send(json.dumps({"tipo": "terminar"}))
+                    fin = await self.evento(panel, "fin")
+                    m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
+                    self.assertEqual(m["config"]["umbral_rms_silencio"], umbral)
 
     async def test_reintentar_tras_fallo_transitorio_de_precarga_con_otro_corte(self):
         mensaje = {"tipo": "iniciar", "modo": "asr", "fuentes": {"protegida": {"tipo": "navegador"}},
