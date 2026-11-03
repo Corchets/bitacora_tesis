@@ -207,19 +207,18 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
 - **Ejecución:** [issue #51](https://github.com/Corchets/bitacora_tesis/issues/51).
-- **Estado:** abierta. La elección final necesita audio y referencia del piloto,
-  comparaciones sobre desarrollo y mediciones del flujo completo.
+- **Estado:** resuelta (Luciano por el equipo, 2026-11-03). ASR: Parakeet con corte RMS 0,8 s / 0,008
+  y filtro Silero. Detector: Tito viejo como compuerta de Gemma 4 E2B. Motivo, alternativas y límites
+  en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Se resolvió sin
+  el piloto revisado que pedía la versión anterior de esta ficha; el rendimiento se mide en el test
+  reservado, con [D07](#d07--aprobar-taxonomía-y-evento-crítico) y
+  [D08](#d08--congelar-protocolo-experimental) todavía abiertas.
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
-- **Línea base vigente:** reglas solas. Ningún encoder, modelo generativo, cascada,
-  entrenamiento ni conjunto de gamas está impuesto como arquitectura final.
+- **Línea base:** reglas solas, también como respaldo sin modelo de la demo.
 - **Detector de la demo (Luciano, 2026-11-02):** el panel ofrece Gemma 4 E2B o E4B con Tito viejo,
   por la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md).
-  Resuelve qué se muestra en la demo, no esta decisión: la matriz es exploratoria y sin audio.
-- **Acotada por el equipo (Luciano, 2026-11-03):** el ASR final es la opción B (Parakeet con corte
-  RMS 0,8 s / 0,008 y filtro Silero) y el detector final es Gemma 4 E2B o E4B. Falta elegir entre
-  los dos, confirmar si sigue Tito viejo y registrar el motivo en
-  [#51](https://github.com/Corchets/bitacora_tesis/issues/51). D09 sigue abierta hasta entonces.
+  La matriz es exploratoria y sin audio. Antecedente de la resolución del 2026-11-03.
 - **Material para consultar cuando corresponda:**
   [recorte inicial de modelos](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md),
   [estrategia NLP](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md) y

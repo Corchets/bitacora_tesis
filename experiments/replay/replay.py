@@ -282,7 +282,7 @@ def construir_slm(
 
 def construir_detector(
     nombre: str,
-    modelo: str = "qwen3.5:2b",
+    modelo: str = "gemma4:e2b-it-q4_K_M",
     prompt_nombre: str = "tarea",
     hablantes: str = "ab",
     seed: int = 42,
@@ -621,8 +621,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--modelo",
         type=str,
-        default="qwen3.5:2b",
-        help="Modelo SLM a utilizar en Ollama (por defecto: qwen3.5:2b).",
+        default="gemma4:e2b-it-q4_K_M",
+        help="Modelo SLM a utilizar en Ollama (por defecto: Gemma 4 E2B, ADR 0001).",
     )
     parser.add_argument(
         "--prompt",

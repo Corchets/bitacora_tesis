@@ -160,8 +160,9 @@ y en la [minuta del 2026-09-09](../gestion/seguimientos/2026-09-09.md).
 ## 8. Recorrido del desarrollo
 
 > **Estado: propuesta sin discutir.** Orden de hitos para revisar con el equipo.
-> Las reglas de anotación, el protocolo y los modelos siguen abiertos en
-> [D07, D08 y D09](../gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación).
+> Las reglas de anotación y el protocolo siguen abiertos en
+> [D07 y D08](../gestion/MAPA-DECISIONES.md#decisiones-precisas-de-alcance-y-experimentación). Los modelos
+> se eligieron el 2026-11-03 ([ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)).
 
 | Hito | Resultado que habilita el siguiente paso | Dependencia |
 |---|---|---|

@@ -7,6 +7,7 @@ según el [checklist](../PRUEBA-VOZ-REAL-MEET.md).
 > Son nueve llamadas guionadas con dos voces en una notebook: muestran si el recorrido anda con voz real.
 > **No son rendimiento del detector ni resuelven [D09](../../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).**
 > **Decisión de Luciano (2026-11-02):** opción B. Los cierres se publicaron con su ok ese mismo día.
+> **Actualización (2026-11-03):** D09 se resolvió con la opción B y E2B en [ADR 0001](../../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Estas llamadas muestran que el recorrido anda; siguen sin medir rendimiento.
 
 ## Condiciones
 

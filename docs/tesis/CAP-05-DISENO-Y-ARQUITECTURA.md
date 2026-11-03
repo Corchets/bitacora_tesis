@@ -1,4 +1,4 @@
-> **Estado: borrador.** Redactado el 2026-10-17 sobre la rama laboratorio-luciano; requiere revisión del equipo.
+> **Estado: borrador del 2026-11-03**, actualizado con la configuración final de [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Requiere revisión del equipo.
 
 # Capítulo 5: Diseño y arquitectura del sistema
 
@@ -12,20 +12,20 @@ El sistema se estructura en seis componentes funcionales con responsabilidades d
 
 ```mermaid
 flowchart LR
-    A["1. Ingesta de audio<br/>(Replay / VoIP)"] -->|"Bloques PCM 16 kHz"| B["2. ASR local<br/>(Streaming / Segmentado)"]
+    A["1. Ingesta de audio<br/>(Replay / Meet por canal)"] -->|"Bloques PCM 16 kHz"| B["2. ASR local<br/>(Parakeet con filtro Silero)"]
     B -->|"Actualizaciones<br/>(JSONL)"| C["3. Contexto incremental<br/>(Memoria volátil)"]
-    C -->|"Líneas disponibles<br/>(Prefijo temporal)"| D["4. Cola y detector<br/>(Reglas / SLM directo)"]
+    C -->|"Líneas disponibles<br/>(Prefijo temporal)"| D["4. Detector<br/>(Tito viejo → Gemma 4 E2B)"]
     D -->|"Respuesta tipada<br/>(Riesgo, alerta, motivo)"| E["5. Política de alerta<br/>(Aviso único)"]
     E -->|"Advertencia validada"| F["6. Interfaz de usuario<br/>(Aviso preventivo)"]
 ```
 
 La responsabilidad de cada uno de los componentes se define con precisión:
 
-1. **Ingesta de audio:** Suministra el flujo de audio en bloques temporales uniformes sin entregar información del futuro de la llamada. En la base experimental obligatoria del proyecto, este componente consiste en un motor de reproducción (*replay*) de archivos de audio que simula la llegada secuencial de fragmentos PCM; en la integración objetivo de demostración, se prevé una llamada VoIP bajo control del prototipo (ver [Alternativas para obtener el audio](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)).
-2. **Reconocimiento automático del habla (ASR local):** Transforma el flujo continuo de audio en actualizaciones de texto estructuradas. Debe operar de forma local y emitir segmentos con sus marcas temporales exactas de inicio, fin y momento de disponibilidad en el reloj de la llamada.
+1. **Ingesta de audio:** Suministra el flujo de audio en bloques temporales uniformes sin entregar información del futuro de la llamada. En la base experimental obligatoria del proyecto, este componente consiste en un motor de reproducción (*replay*) de archivos de audio que simula la llegada secuencial de fragmentos PCM; en la demostración, un panel web captura en la notebook de la persona protegida su micrófono y el canal remoto desde una pestaña de Google Meet, con la llamada de ejemplo como plan B (ver [Alternativas para obtener el audio](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)).
+2. **Reconocimiento automático del habla (ASR local):** Transforma el flujo continuo de audio en actualizaciones de texto estructuradas. Opera de forma local con Parakeet TDT 0.6B v3 y emite segmentos con sus marcas temporales de inicio, fin y momento de disponibilidad en el reloj de la llamada. Cada persona es un canal.
 3. **Gestor de contexto incremental:** Mantiene en memoria de acceso aleatorio el estado conversacional de la llamada en curso. Su función es incorporar el texto emitido por el ASR, reemplazar los borradores preliminares cuando se recibe una transcripción más precisa y consolidar los segmentos cerrados, asegurando que el detector reciba en todo instante únicamente el prefijo de diálogo disponible hasta ese momento.
-4. **Cola secuencial y detector:** Modela el acceso al detector lingüístico como un recurso secuencial y ejecuta el análisis de riesgo. El detector recibe exclusivamente el diálogo transcripto acumulado (sin etiquetas externas ni acceso a señales futuras) y produce una inferencia tipada compuesta por un puntaje numérico, una bandera de recomendación de alerta, un motivo explicativo y la evidencia textual que sustenta el juicio.
-5. **Política de emisión de alerta:** Evalúa la secuencia de respuestas producidas por el detector a lo largo del tiempo y decide el instante exacto en que se debe emitir una advertencia a la persona usuaria, aplicando criterios de estabilidad e inhibición de falsas alarmas reiteradas.
+4. **Detector:** Tiene dos etapas. Tito viejo puntúa cada frase cerrada y, cuando llega al umbral, activa a Gemma 4 E2B, que analiza el diálogo acumulado (sin etiquetas externas ni acceso a señales futuras) y produce una inferencia tipada compuesta por un puntaje numérico, una bandera de recomendación de alerta, un motivo explicativo y la evidencia textual que sustenta el juicio. El acceso al modelo es un recurso secuencial.
+5. **Política de emisión de alerta:** Evalúa la secuencia de respuestas producidas por el detector a lo largo del tiempo y decide el instante en que se emite la advertencia. Emite un único aviso por llamada.
 6. **Módulo de aviso al usuario:** Transforma la decisión de alerta en una comunicación no obstructiva, clara y orientada a la acción inmediata (interrumpir la entrega de información o verificar por un canal alternativo), sin emitir afirmaciones categóricas ni revelar credenciales sensibles.
 
 ---
@@ -46,10 +46,10 @@ En la siguiente tabla se resumen las entradas, salidas y restricciones críticas
 | Etapa | Entrada | Salida | Invariante crítica |
 |---|---|---|---|
 | **Audio** | Flujo acústico bruto (WAV/FLAC mono o estéreo, 16 kHz). | Bloques de PCM con marcas de tiempo. | Prohibido entregar muestras acústicas con timestamp posterior al reloj actual. |
-| **ASR local** | Bloques de PCM de 100 ms. | Eventos de transcripción (`parcial` o `final`). | $t_{\text{disp}} \ge \tau_{\text{fin}}$. La latencia de cómputo se suma hacia adelante; no se reasignan marcas al pasado. |
+| **ASR local** | Bloques de PCM de 40 ms en vivo, 100 ms en las corridas offline. | Eventos de transcripción (`parcial` o `final`). | $t_{\text{disp}} \ge \tau_{\text{fin}}$. La latencia de cómputo se suma hacia adelante; no se reasignan marcas al pasado. |
 | **Contexto** | Actualización de ASR (`tipo`, `segmento`, `texto`). | Tupla inmutable de líneas de diálogo cerradas y abiertas. | Aislamiento estricto entre llamadas: al cambiar de sesión el estado se vacía totalmente. |
-| **Cola de evaluación** | Líneas de diálogo en $t_{\text{disp}}$ y estado del detector. | Turno de cómputo secuencial con inicio y fin de evaluación. | Recurso secuencial (una inferencia a la vez): la evaluación $n$ no puede iniciar antes de que termine la $n-1$. |
-| **Detector** | Prefijo conversacional acumulado hasta la línea actual. | Objeto de respuesta tipado (`riesgo`, `alerta_sugerida`, `motivo`, `evidencia`). | Ceguera hacia el futuro y ausencia de datos de referencia humana (clase, rol, marcas $T_R$/$T_C$). |
+| **Cola de evaluación** | Líneas de diálogo en $t_{\text{disp}}$ y estado del detector. | Turno de cómputo secuencial con inicio y fin de evaluación. | Recurso secuencial (una inferencia a la vez): en replay se evalúan todas en orden; en vivo se toma lo último disponible (§5.4.2). |
+| **Detector** | Frase cerrada para Tito; prefijo conversacional acumulado hasta la línea actual para el SLM. | Objeto de respuesta tipado (`riesgo`, `alerta_sugerida`, `motivo`, `evidencia`). | Ceguera hacia el futuro y ausencia de datos de referencia humana (clase, rol, marcas $T_R$/$T_C$). |
 | **Política de alerta** | Respuesta del detector y estado de avisos previos. | Disparo del aviso definitivo y marca $T_A$. | Principio de aviso único: a lo sumo un aviso principal por sesión para prevenir fatiga. |
 
 ---
@@ -63,7 +63,7 @@ La robustez de la integración y la reproducibilidad experimental dependen de la
 El componente de reconocimiento de voz emite un flujo en formato JSON Lines (JSONL). La primera línea contiene un objeto de metadatos globales (`meta`), y cada línea subsiguiente representa un evento de transcripción emitido en orden cronológico no decreciente de `disponible_s`.
 
 ```json
-{"meta": {"motor": "sherpa-zipformer", "modelo": "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06", "tipo_entrega": "parciales_y_finales", "es_streaming": true, "sample_rate": 16000, "bloque_ms": 100, "hardware": {"sistema": "Darwin", "arquitectura": "arm64", "ram_total_gb": 8.0}}}
+{"meta": {"motor": "sherpa-parakeet", "modelo": "csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8", "tipo_entrega": "parciales_y_finales", "es_streaming": false, "sample_rate": 16000, "hardware": {"sistema": "Darwin", "arquitectura": "arm64", "ram_total_gb": 8.0}}}
 {"llamada_id": "SC-WA-CODE-01-tts", "n": 7, "tipo": "parcial", "segmento": 2, "texto": "pasame el código", "inicio_audio_s": 8.40, "fin_audio_s": 10.12, "disponible_s": 10.31, "proceso_ms": 190.0, "canal": null}
 {"llamada_id": "SC-WA-CODE-01-tts", "n": 8, "tipo": "final", "segmento": 2, "texto": "Pasame el código de activación.", "inicio_audio_s": 8.40, "fin_audio_s": 11.20, "disponible_s": 11.45, "proceso_ms": 250.0, "canal": null}
 ```
@@ -80,7 +80,7 @@ La semántica de los campos de cada actualización se especifica a continuación
 - `inicio_audio_s` y `fin_audio_s` (flotantes): Estampas temporales en segundos del reloj de audio que delimitan el tramo acústico de origen.
 - `disponible_s` (flotante): Instante en el reloj de audio en el que la transcripción estuvo efectivamente lista para consumo del pipeline. Incorpora la latencia acumulada de decodificación y garantiza $disponible\_s \ge fin\_audio\_s$.
 - `proceso_ms` (flotante): Tiempo de CPU/GPU en milisegundos que consumió el motor para decodificar ese bloque específico.
-- `canal` (cadena opcional, enumeración `{"A", "B", null}`): Identificador del canal físico en grabaciones estéreo de dos vías (por ejemplo, llamadas VoIP donde el interlocutor local y el remoto ocupan canales separados). En audio monoaural o mezclas de altavoz, toma el valor `null`.
+- `canal` (cadena opcional): Identificador del canal. En la llamada en vivo vale `"protegida"` u `"otra"`; en grabaciones estéreo de dos vías, `"A"` o `"B"`; en audio monoaural o mezclas de altavoz, `null`. El detector ve las letras A y B por orden de aparición, sin que indiquen quién llamó ni quién es sospechoso.
 
 ### 5.3.2. Traza unificada de ejecución del Replay (`eventos.csv`)
 
@@ -122,7 +122,7 @@ Este mecanismo garantiza dos propiedades estructurales:
 
 ### 5.4.2. Modelado de la cola secuencial del detector
 
-Un dispositivo móvil de gama media cuenta con recursos computacionales acotados. Por ende, el detector lingüístico no puede concebirse como un servicio paralelizable sin límites: constituye un **recurso secuencial (una inferencia a la vez)**. Si el reconocedor ASR emite actualizaciones a un ritmo superior a la velocidad de inferencia del detector, las solicitudes de análisis deben encolarse.
+Un dispositivo móvil cuenta con recursos computacionales acotados. Por ende, el detector lingüístico no puede concebirse como un servicio paralelizable sin límites: constituye un **recurso secuencial (una inferencia a la vez)**. Si el reconocedor ASR emite actualizaciones a un ritmo superior a la velocidad de inferencia del detector, las solicitudes de análisis deben encolarse.
 
 El simulador implementa el cálculo exacto de la cola secuencial en el reloj continuo del audio:
 
@@ -136,6 +136,8 @@ Donde $t_{\text{disp}, n}$ es el instante de disponibilidad de la actualización
 
 Si el detector procesa con holgura ($\text{ms} < \Delta t_{\text{audio}}$), la espera en cola se mantiene en cero y la evaluación inicia inmediatamente en $t_{\text{disp}, n}$. Si el detector se degrada o experimenta picos de latencia, $\text{inicio\_eval}_n$ queda dominado por $\text{fin\_eval}_{n-1}$, acumulando un atraso temporal medible en `espera_cola_ms`.
 
+**En vivo, el detector no hace cola.** Si llega texto mientras evalúa, la siguiente evaluación toma lo último disponible y las intermedias se saltean, registradas como `saltadas`; en una llamada larga, evaluarlas todas haría crecer la demora. Tito puntúa igual cada frase salteada, de modo que una frase sospechosa no se pierde por llegar mientras el modelo está ocupado. Al cortar la llamada, lo pendiente se evalúa con un tope de 30 s (corrección `7e6b971`). Toda llamada en vivo se puede volver a medir después con `replay.py`.
+
 ### 5.4.3. Política de aviso único
 
 La política de alerta adoptada en el núcleo del sistema es la de **aviso único ante la primera respuesta válida positiva** (`aviso_unico_primer_true_valido`). 
@@ -148,6 +150,7 @@ Esta formulación garantiza que $T_A$ refleje la totalidad del tiempo transcurri
 
 El tratamiento de excepciones e inconsistencias sigue reglas rigurosas:
 - **Invalidez no es predicción:** Si el modelo genera un JSON malformado, omite campos obligatorios, produce un valor numérico de riesgo fuera del rango $[0, 1]$, supera el límite de contexto o agota el tiempo de espera (*timeout*), el evento se califica como **fallo técnico** (`valida == False`). Un fallo **jamás** se computa como voto negativo ni bloquea la emisión de alertas en turnos subsiguientes.
+- **Fallo de Tito:** Si Tito falla técnicamente, se activa el modelo y se registra el fallo: un error del filtro no suprime la revisión de la llamada.
 - **Inhibición de fatiga:** Una vez que la llamada emite su primer aviso ($T_A$), las actualizaciones posteriores continúan registrándose con sus respectivos niveles de riesgo y motivos a efectos de análisis retrospectivo, pero su bandera `aviso` se fuerza a `False`. El sistema no repite alertas para un mismo nivel de riesgo, protegiendo a la persona usuaria de la saturación cognitiva durante una llamada bajo estrés.
 
 ### 5.4.4. Problemática del contexto en llamadas extensas (D08 abierta)
@@ -169,73 +172,60 @@ Para mitigar estas patologías, se investigaron dos familias de alternativas arq
 
 ## 5.5. Decisiones arquitectónicas y análisis de alternativas
 
-El diseño del sistema sintetiza una serie de elecciones de ingeniería donde se priorizó la defensa metodológica, la factibilidad técnica y la reproducibilidad sobre soluciones de mayor complejidad cosmética.
+El diseño sintetiza elecciones donde se priorizó la defensa metodológica, la factibilidad técnica y la reproducibilidad. La elección de ASR y detector está registrada en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
 
 ```mermaid
-classDiagram
-    class MotorIngesta {
-        <<interface>>
-        +reproducir_bloque()
-    }
-    class ReplayStreaming {
-        +archivo_wav
-        +simular_reloj_audio()
-    }
-    class VoIPControlada {
-        +canales_separados_AB
-        +stream_red()
-    }
-    MotorIngesta <|-- ReplayStreaming : Base obligatoria
-    MotorIngesta <|-- VoIPControlada : Integración objetivo
-
-    class DetectorVishing {
-        <<interface>>
-        +evaluar(lineas) Respuesta
-    }
-    class DetectorReglas {
-        +coincidencias_lexicas()
-        +patrones_peligrosos()
-    }
-    class DetectorSLMDirecto {
-        +cliente_ollama
-        +esquema_json_forzado()
-        +verificar_evidencia()
-    }
-    class CascadaEncoderSLM {
-        +encoder_robertuito()
-        +zona_gris_disparo()
-    }
-    DetectorVishing <|-- DetectorReglas : Línea base / Comparador
-    DetectorVishing <|-- DetectorSLMDirecto : Ensayo principal #50
-    DetectorVishing <|-- CascadaEncoderSLM : Alternativa descartada spike #29
+flowchart LR
+    F["Frase cerrada"] --> T["Tito viejo<br/>RoBERTuito congelado + regresión logística"]
+    T -->|"puntaje < 0,5"| S["Sin consulta"]
+    T -->|"puntaje ≥ 0,5 o fallo"| A["Compuerta abierta<br/>hasta el fin de la llamada"]
+    A --> G["Gemma 4 E2B<br/>toda la conversación + indicio falible"]
+    G -->|"alerta_sugerida = true, válida"| V["Aviso único<br/>motivo y cita"]
+    G -->|"false"| E["Sigue escuchando"]
 ```
 
-### 5.5.1. Paradigmas de detección: SLM directo, Reglas de incendio y Cascada
+### 5.5.1. Detector
 
-Para la capa de detección lingüística se analizaron tres paradigmas:
+**Tito como compuerta, el modelo como decisor.** Tito viejo es un RoBERTuito congelado con una regresión logística, ajustada con 5.520 textos sintéticos de 276 familias de variantes. Puntúa la frase aislada con umbral 0,5. No emite avisos: cuando se activa, el modelo evalúa desde esa misma frase y sigue en cada línea hasta el final de la llamada. Recibe la conversación disponible y, por separado, el fragmento que activó a Tito con su puntaje, con la indicación explícita de que esa sospecha es preliminar y puede descartarse. El puntaje de Tito nunca se presenta como confirmación de fraude.
 
-1. **Reglas léxicas de incendio (*Fire Rules*):** Consiste en un comparador determinista basado en expresiones regulares y distancia de edición Damerau-Levenshtein ($\le 1$) sobre patrones tipificados (`REQUEST_AUTH_CODE`, `REQUEST_SECRET`, `REQUEST_TRANSFER`, etc.), con filtro de negaciones explícitas ("no te pido").
-   - *Ventajas:* Inferencia instantánea ($\approx 7\ \text{ms}$ en CPU), huella de memoria nula, total explicabilidad.
-   - *Desventajas:* Incapacidad estructural para comprender el contexto conversacional; produce una tasa intolerable de falsas alarmas ante negativos difíciles (alcanzó un $58.3\ \%$ de falsas alarmas en el set de desarrollo de 24 casos legítimos de `experiments/metricas/`) y no detecta pedidos indirectos que omiten las palabras clave.
-   - *Rol en el sistema:* Se mantiene como **línea base obligatoria y comparador independiente**, permitiendo cuantificar con rigor qué valor añade la incorporación de modelos neuronales.
-2. **Cascada discriminativa-generativa (Encoder $\to$ SLM):** Planteada originalmente como un mecanismo de dos etapas: un codificador liviano (RoBERTuito con regresión logística) puntúa cada turno; si el riesgo cae en una "zona gris" ($0.35 \le s \le 0.75$), se convoca a un modelo generativo más pesado para desambiguar.
-   - *Evaluación de laboratorio:* Los ensayos empíricos del laboratorio (spike #29, evaluado el 2026-09-28) demostraron que la cascada no mejoró el rendimiento del encoder solo (redujo el acierto de $12/16$ a $7/16$, degradó el AUROC de $0.666$ a $0.537$ y mantuvo idénticas $5/10$ falsas alarmas). Asimismo, la coexistencia de ambos modelos en memoria demandaba $\approx 1.7\ \text{GB}$ de RAM sin considerar el ASR, quebrantando el presupuesto de gama alta de $1024\ \text{MB}$. Su reactivación quedó descartada en el issue #41/#42.
-3. **SLM local directo:** Un modelo de lenguaje pequeño (*Small Language Model*) de entre 0.8B y 4B parámetros recibe la transcripción acumulada y emite directamente una decisión estructurada bajo esquema JSON forzado.
-   - *Rol en el sistema:* Adoptado como el eje de experimentación del ensayo #50 (`experiments/slm-directo/`).
+Las llamadas que Tito nunca deriva quedan en los denominadores: una estafa no derivada cuenta como estafa sin aviso.
 
-> **Estado: decisión abierta.** La elección final entre modelos y configuraciones operativas permanece abierta en [D09 — Elegir ASR y detector](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+**Por qué esta combinación.** En la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md), Tito viejo con E2B fue la única combinación con 10/10 estafas y 0/10 falsas alarmas, sin umbrales ajustados mirando esos casos. Es el resultado de comparar 10 modelos en esos mismos 20 casos, sin revisión humana, por lo que no estima el rendimiento final.
 
-### 5.5.2. Captura de audio: Replay reproducible frente a VoIP y PSTN
+| Alternativa | Resultado | Por qué no |
+|---|---|---|
+| **Reglas léxicas** | 58,3 % de falsas alarmas en 24 negativos difíciles | No distinguen mencionar de pedir. Quedan como línea base y respaldo sin modelo. |
+| **Cascada con zona gris (spike #29)** | Bajó de 12/16 a 7/16 aciertos | Consultaba al modelo solo en una zona gris. Es distinta de la compuerta actual, que queda abierta una vez activada. |
+| **Gemma 4 E2B directo** | 10/10 · 1/10 | Consulta en todas las líneas. Queda como comparador. |
+| **Gemma 4 E4B con Tito viejo** | 10/10 · 1/10 | En la M1 de 8 GB avisó a +49 s. Queda como comparador con GPU. |
+| **Tito nuevo con E2B** | 2/10 · 0/10 | Pierde casi todas las estafas. Se probó sin ajuste fino del encoder. |
+| **Qwen3.5 9B con `v2`** | 10/10 · 1/10 | 6,6 GB: techo experimental, no entra en el teléfono. |
+| **Riesgo primero (`gemma3n:e2b`)** | 10/10 · 3–6/10, o 2/10 · 0/10 | Lo elegido en selección no se transfiere al informe. |
+| **Cross-encoder y NLI** | bge: 4/10 · 1/10 | Miden tema, no intención ([#123](https://github.com/Corchets/bitacora_tesis/issues/123)). |
+| **Modelo por API** | Sin medir | Lo descartó el tutor, por la restricción de privacidad. |
 
-La obtención del flujo acústico representa uno de los dilemas de ingeniería más relevantes del proyecto, resuelto mediante la separación tajante entre experimentación científica e integración de demostración:
+### 5.5.2. Captura de audio
 
-1. **Replay de grabaciones en streaming (Nivel 1, obligatorio):** La simulación basada en reproducir archivos de audio WAV/FLAC en bloques secuenciales de tiempo real constituye la única alternativa que permite garantizar repetibilidad estadística idéntica, control temporal al milisegundo y medición desacoplada de la latencia.
-2. **Llamada VoIP controlada (Nivel 2, integración objetivo):** En una aplicación VoIP propia (basada en protocolos abiertos o bibliotecas WebRTC/SIP), la aplicación actúa como extremo legítimo de la comunicación. Esto ofrece una ventaja decisiva: **captura multicanal con interlocutores físicamente aislados** (canal A = usuario local, canal B = interlocutor remoto). Esto suprime la necesidad de incorporar algoritmos de diarización acústica en tiempo real, cuyo costo computacional en CPU móvil es prohibitivo.
-3. **Captura telefónica universal en redes celulares (PSTN):**
-   - *Restricción de plataforma:* El sistema operativo Android prohíbe taxativamente que aplicaciones estándar de terceros accedan a los flujos de audio entrante y saliente de las llamadas de telefonía convencional (`VOICE_UPLINK` y `VOICE_DOWNLINK`). Dichos permisos están reservados a aplicaciones preinstaladas del sistema con la firma del fabricante que gocen del privilegio `CAPTURE_AUDIO_OUTPUT`.
-   - *Decisión técnica:* Se declaró explícitamente **fuera del alcance** del Proyecto Final ([D05 — Elegir la fuente de audio demostrable](../gestion/MAPA-DECISIONES.md#d05--elegir-la-fuente-de-audio-demostrable)). En lugar de recurrir a vulnerabilidades (*exploits*), técnicas de *rooting* o mecanismos de captura espía que comprometerían la estabilidad y legalidad del desarrollo, el proyecto asume esta frontera como una restricción de ingeniería de la plataforma.
+La obtención del audio separa la experimentación de la demostración:
 
-### 5.5.3. Enfoque lingüístico frente a acústico (D11 abierta)
+1. **Replay (obligatorio para medir):** reproducir archivos en bloques secuenciales es la única alternativa que permite repetir una corrida con control temporal.
+2. **Captura por canal en la notebook (demo):** el panel toma el micrófono de la persona protegida y el audio remoto desde una pestaña de Google Meet. El tutor la aprobó el 2026-10-28 como demo de la defensa. Cada persona ocupa un canal, sin diarización. WhatsApp Desktop quedó afuera porque no funcionó con BlackHole.
+3. **VoIP propia:** era la integración objetivo original. Queda sin construir porque la captura por canal da la misma separación con menos riesgo.
+4. **PSTN universal:** Android reserva `VOICE_UPLINK` y `VOICE_DOWNLINK` a apps del sistema con el privilegio `CAPTURE_AUDIO_OUTPUT`. Se declaró **fuera del alcance** ([D05](../gestion/MAPA-DECISIONES.md#d05--elegir-la-fuente-de-audio-demostrable)); no se recurre a *rooting* ni a captura encubierta.
+
+### 5.5.3. Reconocimiento de voz
+
+Se usa **Parakeet TDT 0.6B v3 int8** por frases, con la opción B: la energía RMS corta la frase tras 0,8 s por debajo de 0,008, y Silero con umbral 0,5 decide qué cuenta como voz. Así, el ruido no se transcribe y no se pierde el corte estable.
+
+| Alternativa | Resultado | Por qué no |
+|---|---|---|
+| **Silero solo (opción A)** | WER 32,8 %; 205 segmentos para 129 frases; inglés o portugués en 25 frases | Parte las frases. Es 0,75 s más rápida y recupera más términos críticos, pero empata en etiquetas. |
+| **Zipformer Kroko** | WER de 4–5 % con TTS, malo con voz real | El resultado con TTS no se sostuvo. Retirado el 2026-10-29. |
+| **Whisper base** | RTF 0,27 con TTS | No es streaming y solo transcribe al cerrar la frase. |
+
+**Riesgo aceptado.** Parakeet es multilingüe y no permite fijar el idioma. Además, confunde «token» con «toque» y «CVV» con «CBB» o «CBU», en ambas opciones.
+
+### 5.5.4. Enfoque lingüístico frente a acústico (D11 abierta)
 
 El pipeline centra su análisis en el contenido semántico y pragmático de la transcripción textual, descartando deliberadamente la prosodia, el tono de voz o biomarcadores acústicos para clasificar el vishing. Esta decisión obedece a tres fundamentos:
 - La variabilidad acústica introducida por los códecs de compresión telefónica (como AMR-NB a 8 kHz o G.711) destruye micro-rasgos prosódicos.
@@ -253,8 +243,9 @@ La operación de un detector de vishing plantea interrogantes éticos y legales 
 ### 5.6.1. Inferencia local estricta y descarte en memoria volátil
 
 El sistema no se conecta a ningún servidor central, API comercial ni servicio en la nube durante el curso de la llamada:
-- **Ejecución on-device:** Tanto el transcriptor ASR como el modelo de lenguaje residen y se ejecutan en el hardware del teléfono. Ni un solo byte de audio digitalizado ni una sola palabra transcripta abandonan el dispositivo.
-- **Ciclo de vida en memoria volátil:** Los buffers PCM de audio y las estructuras de diálogo del contexto (`cerrados` y `parciales`) residen exclusivamente en memoria RAM. Al cortarse o finalizar la comunicación, la memoria se libera de manera inmediata mediante la destrucción de los objetos en memoria. El sistema no persiste en disco grabaciones de voz ni transcripciones textuales.
+- **Ejecución on-device:** El transcriptor ASR y los modelos se ejecutan en el equipo; en el prototipo, la notebook. Ni el audio ni el texto salen de él. El tutor descartó por completo el uso de un modelo por API. La ejecución en un teléfono no se midió.
+- **Ciclo de vida en memoria volátil (diseño del producto):** Los buffers PCM de audio y las estructuras de diálogo del contexto (`cerrados` y `parciales`) residen exclusivamente en memoria RAM. Al cortarse o finalizar la comunicación, la memoria se libera, sin persistir grabaciones ni transcripciones.
+- **Diferencia del prototipo de laboratorio:** Para poder medir, el panel sí guarda `estereo.wav` y los registros de cada llamada en una carpeta fuera de Git, con consentimiento de quienes participan y datos ficticios. Es una decisión del experimento, no del producto.
 
 ### 5.6.2. Encuadre normativo argentino (Ley 25.326)
 
@@ -269,6 +260,6 @@ El diseño arquitectónico satisface las exigencias de la [Ley 25.326 de Protecc
 El marco penal argentino sanciona penalmente en los artículos 153 y 153 bis del Código Penal la interceptación indebida de comunicaciones privadas y el acceso no autorizado a sistemas informáticos. Asimismo, el artículo 197 tipifica el entorpecimiento de las telecomunicaciones.
 
 La arquitectura diseñada se alinea con la doctrina jurídica aplicable:
-1. **Inexistencia de captación por terceros:** En el prototipo de laboratorio y en la llamada VoIP consentida, la aplicación forma parte del canal extremo receptor. No actúa como un agente encubierto interceptor de telecomunicaciones ajenas.
+1. **Inexistencia de captación por terceros:** En el prototipo de laboratorio y en la llamada consentida, la aplicación forma parte del canal extremo receptor. No actúa como un agente encubierto interceptor de telecomunicaciones ajenas.
 2. **No interferencia en el servicio:** El detector opera en modo de escucha pasiva en el extremo terminal. No altera la señal de red, no desvía paquetes ni interrumpe la conexión telefónica (cumpliendo con la exigencia de no entorpecer el servicio según el art. 197).
 3. **Naturaleza del aviso:** La advertencia emitida es un mensaje visual o sensorial local dirigido exclusivamente a la persona usuaria para alertarla cognitivamente. El sistema no inyecta audio sintetizado en el canal de la contraparte ni ejecuta acciones invasivas sin supervisión humana.

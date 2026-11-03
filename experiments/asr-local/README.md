@@ -3,15 +3,13 @@
 Procedimiento estandarizado y repetible para la transcripción local de audio en streaming
 y por segmentos, orientado a la evaluación de detección incremental de vishing.
 
-> **ADVERTENCIA: audio sintético TTS, no es evidencia de rendimiento sobre voz humana ni cierra D09; la corrida de entrega espera las grabaciones de #39.**
+> **ASR final (2026-11-03, [ADR 0001](../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)):** Parakeet TDT 0.6B v3 con corte RMS 0,8 s / 0,008 y filtro Silero (`parakeet-filtro`). Medición con voz real en [`corridas/2026-11-02_voz-real_dialogos-a-contra-b/`](corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md).
+
+> **ADVERTENCIA: las corridas `humo` de abajo usan audio sintético TTS: no son evidencia sobre voz humana.**
 
 > **Actualización del 2026-10-29, Luciano Grosso:** Zipformer Kroko queda como antecedente
 > histórico, retirado de la selección activa por sus errores con voz real. Se conservan el motor,
-> los comandos y las corridas para reproducción. Parakeet sigue en prueba; no se cierra
-> [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). El código aún arranca con
-> Zipformer por defecto: para ensayar Parakeet hay que seleccionarlo o usar `--asr parakeet`
-> en el servidor. Ver [auditoría de VAD, preaudio y comparación](PLAN-VOZ-REAL.md#10-auditoría-de-vad-preaudio-y-comparación-de-modelos-2026-10-29).
-> La corrida definitiva de entrega requiere el primer par grabado con voz humana ([#39](https://github.com/Corchets/bitacora_tesis/issues/39)).
+> los comandos y las corridas para reproducción. Ver [auditoría de VAD, preaudio y comparación](PLAN-VOZ-REAL.md#10-auditoría-de-vad-preaudio-y-comparación-de-modelos-2026-10-29).
 
 ---
 

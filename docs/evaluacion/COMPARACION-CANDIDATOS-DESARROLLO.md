@@ -1,6 +1,45 @@
 # Comparación de candidatos para desarrollo
 
-> **Estado: propuesta sin discutir.** Comparación sobre material de desarrollo (casos escritos sin revisión humana y audio TTS); no elige candidato ([D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)) ni política ([D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)).
+> **Elección registrada el 2026-11-03 en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md):** Parakeet con filtro Silero y Tito viejo con Gemma 4 E2B. Esta comparación es sobre material de desarrollo, sin revisión humana: no estima el rendimiento final. Las secciones con Qwen y Zipformer son el antecedente de octubre; la comparación que sostiene la elección es la [primera sección](#comparación-que-sostiene-la-elección-2026-10-30-a-2026-11-02).
+
+## Comparación que sostiene la elección (2026-10-30 a 2026-11-02)
+
+### Detectores en 20 conversaciones sintéticas (#101)
+
+[Informe de la matriz](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md): 10 estafas y 10 legítimas de desarrollo, sin revisión humana, en un Ryzen 7 7700X con GPU. Código `9fe43b5` con cambios sin commit en la carpeta.
+
+| Modelo | Directo (estafas · falsas alarmas) | Con Tito viejo | Con Tito nuevo |
+|---|---:|---:|---:|
+| **`gemma4:e2b`** | 10/10 · 1/10 | **10/10 · 0/10** | 2/10 · 0/10 |
+| `gemma4:e4b` | 10/10 · 1/10 | 10/10 · 1/10 | 3/10 · 0/10 |
+| Los 10 modelos juntos | 90/100 · 48/100 | 82/100 · 27/100 | 23/100 · 0/100 |
+
+Los 20 casos sirvieron para elegir entre 10 modelos, así que el 10/10 es optimista. Entre E2B y E4B hay una falsa alarma de diferencia, que no alcanza para separarlos en calidad.
+
+### E2B y E4B en la notebook de demo
+
+| Con Tito viejo, Apple M1 de 8 GB | Resultado | Fuente |
+|---|---|---|
+| E2B, `SC-WA-CODE-01`, 5 corridas | Mediana de 3,74 s por consulta (p95 4,53 s); aviso entre −0,45 y +0,40 s del fin del pedido; 0 fallos | [Corrida por Meet](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84) |
+| E2B, 9 llamadas guionadas con voz real | Aviso en las 7 estafas y en ninguna de las 2 legítimas | [Corrida por Meet](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#resultados-en-vivo-y-con-la-otra-opción) |
+| E4B, `SC-WA-CODE-01`, 1 corrida | 46,3 s y 15,8 s por evaluación; aviso a +49,0 s del pedido; entra en swap | [Comprobación en el panel](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md) |
+
+### ASR con voz real
+
+[Medición offline](../../experiments/asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md) sobre 18 canales y 129 frases de referencia, con dos voces.
+
+| Criterio | B · RMS con filtro Silero | A · Silero solo |
+|---|---:|---:|
+| Frases con las etiquetas correctas | 121/129 | 120/129 |
+| Etiquetas nuevas en negativas | 0 | 0 |
+| WER / CER | 25,6 % / 15,5 % | 32,8 % / 20,0 % |
+| Recall de términos críticos | 70,9 % | 76,4 % |
+| Demora de la frase final, mediana | 1,01 s | 0,26 s |
+| Frases con palabras en otro idioma | 4 | 25 |
+| Segmentos finales | 127 | 205 |
+| RTF / memoria pico | 0,088 / 1.036 MB | 0,043 / 998 MB |
+
+El WER se mide contra el guion y hubo palabras cambiadas al hablar: sirve para comparar A con B, no como valor absoluto. **Falta la comparación de la misma detección con texto manual y con ASR (E1)**, que se hace en la evaluación final.
 
 ## Alcance y lectura
 
