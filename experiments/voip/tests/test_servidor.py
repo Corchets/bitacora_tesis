@@ -15,7 +15,7 @@ from websockets.asyncio.server import serve
 
 from test_llamada import Reloj, RespuestaFalsa, pcm
 from motores import MotorFalso
-from servidor import ASR_POR_DEFECTO, DIR_VOIP, Servidor
+from servidor import ASR_POR_DEFECTO, DIR_VOIP, Servidor, umbral_de_llamada
 import replay as replay_mod
 from casos import Linea
 
@@ -35,8 +35,9 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = Path(self.tmp.name)
         self.reloj = Reloj()
+        # MotorFalso reemplaza al ASR: con «zipformer» estas pruebas no necesitan el modelo de Silero.
         args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2,
-                         corte_silencio="auto")
+                         corte_silencio="auto", asr="zipformer")
         self.servidor = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
         self.servidor.preparar()
         await self.servidor.preparada
@@ -182,7 +183,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
 
     def test_arranca_con_la_opcion_b(self):
         self.assertEqual(ASR_POR_DEFECTO, "parakeet-filtro")
-        self.assertEqual(self.servidor.config_asr[1], 0.008)
+        self.assertEqual(umbral_de_llamada(ASR_POR_DEFECTO), 0.008)
         panel = (DIR_VOIP / "panel.html").read_text(encoding="utf-8")
         self.assertIn('<option value="parakeet-filtro" selected>', panel)
         self.assertIn("CORTE_INICIAL_S = 0.8;", (DIR_VOIP / "corte-silencio.mjs").read_text(encoding="utf-8"))
@@ -562,7 +563,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(lista, {"tipo": "historial", "llamadas": [], "pruebas": []})
             await self.terminar(panel)
         # Un servidor nuevo sobre la misma carpeta de salida ve lo anterior.
-        args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2, corte_silencio="auto")
+        args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2, corte_silencio="auto", asr="zipformer")
         otro = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
         red = await serve(otro.atender, "127.0.0.1", 0)
         try:
@@ -758,13 +759,13 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await panel.send(self.inicio())
             inicio = await self.evento(panel, "inicio")
             self.assertEqual(inicio["corte_silencio_s"], "auto")
-            self.assertEqual(inicio["umbral_rms_silencio"], 0.008)
+            self.assertEqual(inicio["umbral_rms_silencio"], 0.003)
             nivel = (await self.evento(panel, "niveles"))["canales"]
-            self.assertTrue(all(c["umbral_rms_silencio"] == 0.008 for c in nivel.values()))
+            self.assertTrue(all(c["umbral_rms_silencio"] == 0.003 for c in nivel.values()))
             await panel.send(json.dumps({"tipo": "terminar"}))
             fin = await self.evento(panel, "fin")
             m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
-            self.assertEqual(m["config"]["umbral_rms_silencio"], 0.008)
+            self.assertEqual(m["config"]["umbral_rms_silencio"], 0.003)
             self.assertTrue(m["config"]["endpoint_nativo"])
 
     async def test_rms_con_filtro_silero_corta_a_0008_en_la_llamada(self):
