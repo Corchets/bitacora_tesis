@@ -44,7 +44,7 @@ Una conversación conserva juntos sus turnos y fragmentos. Traister et al. (2026
 
 Las [particiones de Tito](../../experiments/slm-directo/PARTICIONES-TITO-2026-10-29.json) son disjuntas por grupo, con 34 conversaciones de entrenamiento, 10 de validación, 10 de diagnóstico, 3 de regresión, 20 de comparación y 45 excluidas por su relación con la comparación. La reserva final queda fuera de ellas: el código la rechaza por identificador.
 
-**Fuga conocida.** Los 200 casos reservados son visibles en la rama `laboratorio-luciano`, aunque se mantienen fuera de `laboratorio-main`. No aparecen en ninguna corrida versionada. La custodia se define en D08.
+**Fuga conocida.** Los 200 casos reservados son públicos en GitHub desde el 2026-10-23, en la rama `laboratorio-luciano`, por decisión de Luciano ([copia pública](../../experiments/slm-directo/casos/README.md#copia-pública-laboratorio-main)). Se mantienen fuera de `laboratorio-main` y no aparecen en ninguna corrida versionada. Por eso solo valen como test limpio para modelos publicados antes de esa fecha: **falta verificar la fecha de publicación de Gemma 4 E2B y, si es posterior, declarar la posible contaminación** (R05). Tito viejo se ajustó con un banco anterior, del commit `bb542e1`.
 
 ## 4.5. Línea base, modelos y protocolo
 

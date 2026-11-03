@@ -38,7 +38,7 @@ Errores conocidos, a completar con el test:
 - La configuración se eligió con los mismos 20 casos que la evalúan en #101.
 - La inferencia en GPU no es exactamente repetible.
 - #101 corrió con cambios sin commit en la carpeta.
-- Los 200 casos reservados son visibles en una rama de trabajo, aunque no se usaron en ninguna corrida versionada.
+- Los 200 casos reservados son públicos en GitHub desde el 2026-10-23, aunque no se usaron en ninguna corrida versionada. Un modelo publicado después pudo haberse entrenado con ellos: falta verificar la fecha de Gemma 4 E2B.
 
 **De constructo.**
 - `T_R` y `T_C` son marcas provisionales, sin revisión humana (D07 abierta).

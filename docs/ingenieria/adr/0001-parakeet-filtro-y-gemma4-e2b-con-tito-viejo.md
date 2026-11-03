@@ -41,6 +41,7 @@ Esta es la configuración que entra a la evaluación final. No se ajusta mirando
 - **E2B no cumple el criterio de 2 s de #84** en la M1 de 8 GB: mediana de 3,74 s por consulta, aunque el aviso llegó entre −0,45 y +0,40 s del fin del pedido.
 - **Sin medición en teléfono.** No se midió latencia, memoria, batería ni temperatura en Android. El archivo de E2B pesa 4,59 GB, Tito ocupa unos 0,48 GB y el ASR llega a 1 GB, muy por encima del techo de 512 MB de la prefactibilidad.
 - **La evidencia que respalda la elección es de desarrollo:** 20 conversaciones sintéticas sin revisión humana, de las que salió la elección entre 10 modelos, y 9 llamadas guionadas con 4 guiones y 2 voces. Esos números son optimistas y no estiman el rendimiento final.
+- **La reserva es pública desde el 2026-10-23.** Si Gemma 4 E2B se publicó después, hay que declarar la posible contaminación del test (R05). Falta verificar su fecha.
 - El ASR sigue confundiendo «token» y «CVV» con ambas opciones, y Parakeet no permite fijar el idioma.
 
 **Para reconsiderarla:** que el test reservado quede lejos de la meta del tutor, que E2B no pueda correr en el teléfono de referencia, o que los términos críticos perdidos cambien avisos en voz real.
