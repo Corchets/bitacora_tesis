@@ -216,6 +216,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Detector de la demo (Luciano, 2026-11-02):** el panel ofrece Gemma 4 E2B o E4B con Tito viejo,
   por la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md).
   Resuelve qué se muestra en la demo, no esta decisión: la matriz es exploratoria y sin audio.
+- **Acotada por el equipo (Luciano, 2026-11-03):** el ASR final es la opción B (Parakeet con corte
+  RMS 0,8 s / 0,008 y filtro Silero) y el detector final es Gemma 4 E2B o E4B. Falta elegir entre
+  los dos, confirmar si sigue Tito viejo y registrar el motivo en
+  [#51](https://github.com/Corchets/bitacora_tesis/issues/51). D09 sigue abierta hasta entonces.
 - **Material para consultar cuando corresponda:**
   [recorte inicial de modelos](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md),
   [estrategia NLP](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md) y
