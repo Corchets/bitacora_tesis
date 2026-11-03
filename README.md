@@ -91,17 +91,23 @@ bitacora_tesis/
 ## 4. Demo local de llamadas (Luciano)
 
 Al 2026-11-02, la copia para probar Meet con Gemma 4 es
-`/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes`, rama
-`LucianoGrosso13/tito-gemma-pendientes`. Las variables y el orden de la corrida están en
-[`PRUEBA-VOZ-REAL-MEET.md`](experiments/voip/PRUEBA-VOZ-REAL-MEET.md). Las llamadas quedan en
-`experiments/voip/llamadas/` de esa copia, fuera de Git: no la borres sin resguardarlas.
+`/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano`, rama
+`laboratorio-luciano`. Las variables y el orden de la corrida están en
+[`PRUEBA-VOZ-REAL-MEET.md`](experiments/voip/PRUEBA-VOZ-REAL-MEET.md).
+
+**Qué se guarda.** Cada llamada deja en `experiments/voip/llamadas/` de la copia donde corre el servidor
+las voces (`estereo.wav`) y sus registros (`actualizaciones.jsonl`, `detector.jsonl`, `manifiesto.json`).
+Esa carpeta está fuera de Git: **borrar la copia borra las voces**, y así se perdió el
+[audio de la corrida por Meet](experiments/voip/corridas/2026-11-02-voz-real-meet.md#audio-original-perdido).
+`git status` no la muestra. Antes de borrar una copia, mirá lo ignorado con `git status --short --ignored`
+y resguardá las llamadas. Además, al arrancar, el servidor borra las pruebas que no se guardaron.
 
 Antes de abrir localhost, comprobá qué proceso ocupa el puerto y desde qué carpeta corre:
 
 ```bash
 lsof -nP -iTCP:8765 -sTCP:LISTEN
 lsof -a -p <PID> -d cwd
-git -C /Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes status -sb
+git -C /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano status -sb
 ```
 
 Si el servidor corresponde a otra copia, terminalo con `kill -TERM <PID>` y esperá
@@ -110,7 +116,7 @@ copia actual con el entorno de esta Mac que tiene `torch` y `transformers`, los 
 
 ```bash
 ollama serve   # en otra terminal; solo reglas y Probar el ASR andan sin Ollama
-cd /Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/voip
+cd /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip
 /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M --asr parakeet-filtro
 ```
 
@@ -119,7 +125,7 @@ modelos y audios de `experiments/asr-local/` son enlaces a `bitacora_tesis-voip`
 otra terminal, comprobá el panel antes de abrirlo:
 
 ```bash
-curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/voip/panel.html
+curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip/panel.html
 open http://localhost:8765/
 ```
 
