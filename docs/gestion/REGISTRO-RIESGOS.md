@@ -72,3 +72,13 @@ pierde términos con tele de fondo. Parakeet no permite fijar el idioma. En las 
 CVV, CBU), más en el canal de Meet. No cambió ningún aviso en estas 9 llamadas guionadas.
 
 R24: al borrar la copia `tito-gemma-pendientes` se perdió el audio original de la corrida por Meet, sin copia y sin forma de recuperarlo en esta Mac ([detalle](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#audio-original-perdido)). Los resultados siguen en Git y quedan regrabaciones de las 9 llamadas, también fuera de Git y solo en esta Mac. El riesgo sigue abierto: nada automático copia el audio a otro lado. Mitigación: [paso de resguardo](../../experiments/voip/PRUEBA-VOZ-REAL-MEET.md#al-terminar-la-corrida) en la checklist y aviso en el [README](../../README.md#4-demo-local-de-llamadas-luciano). Ese mismo día, al levantar el servidor, se borró sola la prueba sin guardar `173602-620115`: es el comportamiento previsto y no era de la corrida.
+
+## Actualización técnica — 2026-11-03
+
+R08: con la configuración final de [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) sigue sin haber ninguna medición en teléfono, y la demo corre en notebook. El archivo de E2B pesa 4,59 GB y E2B no cumple los 2 s de #84 en la M1 (3,74 s de mediana). Mitigación: informar las mediciones como hechas en computadora y dejar la medición en teléfono como límite declarado.
+
+R27: la configuración final se eligió con 20 conversaciones sintéticas sin revisión humana, usadas para elegir entre 10 modelos, y con 4 guiones por voz real. Puede rendir bastante peor en el test reservado. La señal es la caída frente al 10/10 · 0/10 de #101. Mitigación: congelar la configuración antes del test, no ajustarla con sus resultados e informar el resultado aunque sea desfavorable. Contingencia: reportarlo como límite; no se elige otra configuración mirando el test.
+
+R28: el test reservado corre sin referencia humana: ninguno de los 350 casos tiene `revision_humana` en verdadero y D07 sigue abierta. Sin esa referencia, los números finales descansan en marcas de redacción asistida. Mitigación: las llamadas con referencia humana que el equipo va a hacer y una muestra común de anotación (#54, #32).
+
+R24: Mateo no tiene copia del audio original (Luciano, 2026-11-03). Las regrabaciones siguen solo en esta Mac.

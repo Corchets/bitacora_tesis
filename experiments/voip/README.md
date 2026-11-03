@@ -1,10 +1,10 @@
 # Llamada en vivo: ASR por canal, detector y panel (frente 1, spike)
 
-> **Estado: propuesta sin discutir.** Spike de la llamada en vivo del panel («Llamada en vivo:
-> opciones»). No cierra [D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)
-> ni [D09](../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector). Implementa la opción D
-> (cualquier app de llamada + captura por persona) y deja andando la E (replay estéreo en tiempo real)
-> con el mismo código. La elección de la opción sigue siendo del equipo.
+> **Configuración final (2026-11-03, [ADR 0001](../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)):**
+> ASR `parakeet-filtro` y detector Tito viejo con Gemma 4 E2B. El servidor arranca así si no se le
+> pasa nada. Implementa la opción D (cualquier app de llamada + captura por persona) y deja andando
+> la E (replay estéreo en tiempo real) con el mismo código. No cierra
+> [D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
 > **ADVERTENCIA: las cifras de abajo salen de UNA llamada TTS (`SC-WA-CODE-01`, 22 s) en la M1 de 8 GB.
 > Sirven para ubicar dónde está la demora, no como rendimiento del detector.**
@@ -58,9 +58,9 @@ pip install -r experiments/asr-local/requirements.txt -r experiments/voip/requir
 cd experiments/voip
 
 # En la máquina que analiza (la del ASR y el detector):
+python servidor.py   # configuración final: Tito viejo con Gemma 4 E2B y parakeet-filtro
 python servidor.py --detector reglas
-python servidor.py --detector tito-slm --modelo gemma4:e2b-it-q4_K_M
-python servidor.py --detector tito-slm --modelo gemma4:e4b-it-q4_K_M --ollama-url http://<pc-con-gpu>:11434
+# Para comparar: python servidor.py --modelo gemma4:e4b-it-q4_K_M --ollama-url http://<pc-con-gpu>:11434
 # Sin Tito, para comparar: python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
 # El detector también se elige en el panel, antes de cada llamada: Gemma 4 E2B o E4B con Tito viejo, o reglas.
 # Bajar el modelo una vez, con el tag completo: ollama pull gemma4:e2b-it-q4_K_M
@@ -338,14 +338,13 @@ Con el entorno Python de §3 activo, Zipformer ya descargado y el TTS original d
 `SC-WA-CODE-01` en `experiments/asr-local/audio/`, corré desde `experiments/voip/`:
 
 ```bash
-python medir.py --detector slm --modelo qwen3.5:4b-q4_K_M
-# Comparación con el modelo chico o el respaldo:
-python medir.py --detector slm --modelo qwen3.5:0.8b-q8_0
+python medir.py   # Tito viejo con Gemma 4 E2B
+# Comparación con el respaldo:
 python medir.py --detector reglas
 ```
 
 Para SLM, abrí Ollama local antes de correrlo y descargá el modelo una vez con
-`ollama pull qwen3.5:4b-q4_K_M` (o `ollama pull qwen3.5:0.8b-q8_0`). Si falta
+`ollama pull gemma4:e2b-it-q4_K_M`. Si falta
 Ollama o el modelo, el comando indica cómo resolverlo antes de empezar la llamada.
 La medición usa solo archivos y modelos locales; no descarga audio ni ASR.
 Si están en otra carpeta, agregá `--audio /ruta/SC-WA-CODE-01-tts-estereo.wav`
@@ -374,8 +373,8 @@ configuración, máquina, commit, digest del modelo, hash del TTS y referencia d
 esas corridas. Estas cifras sirven para elegir la notebook de demo, no para medir
 rendimiento sobre corpus real ni para cerrar D08/D09.
 
-**Pendiente humano:** correr en la M4 con 0.8B y 4B; este ticket no da por hecha
-esa prueba ni las de voz real, Meet u otra notebook.
+La [corrida del 2026-11-02](corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84) midió E2B con este
+comando en la M1: mediana de 3,74 s, no cumple los 2 s, aunque el aviso llega a tiempo. La M4 no se midió.
 
 Verificación del 2026-10-26 en M1 de 8 GB: el 0.8B dio mediana **1,312 s**, cuatro
 evaluaciones, cero salteadas y fallos, y aviso **+2,803 s** respecto del fin del pedido.

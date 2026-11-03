@@ -23,8 +23,8 @@ Mateo aceptó usar un ejemplo bancario con fines didácticos el 2026-10-07. La s
 presenta una adaptación al par de WhatsApp seleccionado para el piloto.
 
 > **Estado: propuesta sin discutir.** El flujo define responsabilidades conceptuales;
-> la ventana y política siguen abiertas en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)
-> y los modelos en [D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).
+> la ventana y política siguen abiertas en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+> Los modelos se eligieron el 2026-11-03 en [ADR 0001](adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
 
 ```mermaid
 flowchart LR

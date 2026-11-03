@@ -98,8 +98,8 @@ def resumir(manifiesto: dict) -> str:
 
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description="Medí SC-WA-CODE-01 en tiempo real, sin panel ni WAV de salida.")
-    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), required=True)
-    p.add_argument("--modelo", default="qwen3.5:0.8b-q8_0")
+    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="tito-slm")
+    p.add_argument("--modelo", default="gemma4:e2b-it-q4_K_M")
     p.add_argument("--audio", type=Path, default=EJEMPLOS[ESCENARIO], help="WAV TTS original estéreo a 16 kHz")
     p.add_argument("--modelo-asr", type=Path, default=DIR_MODELO, help="directorio local de Zipformer")
     p.add_argument("--salida", type=Path, default=DIR_VOIP / "corridas")
