@@ -4,11 +4,17 @@ Contiene:
 - MotorASR: interfaz común.
 - MotorSherpaZipformer: Zipformer streaming español via sherpa-onnx (motor principal).
 - MotorFasterWhisper: faster-whisper en modo por segmentos (segundo motor, NO streaming).
+- DetectorSilero: Silero VAD de sherpa-onnx para decidir voz o silencio por bloque (opcional en MotorPorFrases,
+  solo, como filtro del RMS o junto con el RMS).
+- MotorPorFrases: base para modelos no streaming que se transcriben frase por frase (corte por silencio).
+- MotorSherpaParakeet: Parakeet TDT 0.6B v3 vía sherpa-onnx, por frases con parciales.
+- MotorWhisperPorFrases: faster-whisper large-v3-turbo por frases, sin parciales.
 - MotorFalso: motor simulado determinístico para pruebas unitarias sin dependencias externas.
 """
 
 from __future__ import annotations
 
+import re
 import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
@@ -71,6 +77,7 @@ class MotorSherpaZipformer(MotorASR):
 
     MODELO_POR_DEFECTO = "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06"
     ARCHIVOS_REQUERIDOS = ("encoder.onnx", "decoder.onnx", "joiner.onnx", "tokens.txt")
+    METODOS_DECODIFICACION = ("greedy_search", "modified_beam_search")
 
     def __init__(
         self,
@@ -81,7 +88,20 @@ class MotorSherpaZipformer(MotorASR):
         rule1_silence: float = 2.4,
         rule2_silence: float = 1.0,
         rule3_utterance: float = 20.0,
+        decoding_method: str = "greedy_search",
+        max_active_paths: int = 4,
+        hotwords_file: str | Path | None = None,
+        hotwords_score: float = 1.5,
+        bpe_puntaje: str = "log",
     ):
+        if decoding_method not in self.METODOS_DECODIFICACION:
+            raise ValueError(f"decoding_method debe ser uno de {self.METODOS_DECODIFICACION}: {decoding_method!r}")
+        if max_active_paths < 1:
+            raise ValueError("max_active_paths debe ser al menos 1.")
+        if hotwords_file is not None and decoding_method != "modified_beam_search":
+            raise ValueError("Los hotwords de sherpa-onnx requieren decoding_method='modified_beam_search'.")
+        if bpe_puntaje not in ("log", "id"):
+            raise ValueError(f"bpe_puntaje debe ser 'log' o 'id': {bpe_puntaje!r}")
         self.nombre = "sherpa-zipformer"
         self.modelo_id = modelo_dir_o_repo
         self.es_streaming = True
@@ -94,6 +114,13 @@ class MotorSherpaZipformer(MotorASR):
         self.rule3_utterance = rule3_utterance
         self.corte_silencio_s = 0.8
         self.umbral_rms_silencio = 0.005
+        # Decodificación: por defecto greedy y sin hotwords, que es lo que usa el panel.
+        self.decoding_method = decoding_method
+        self.max_active_paths = max_active_paths
+        self.hotwords_file = Path(hotwords_file) if hotwords_file is not None else None
+        self.hotwords_score = hotwords_score
+        self.bpe_puntaje = bpe_puntaje  # cómo puntúa el bpe.vocab sintético (ver hotwords.py)
+        self.hotwords_preparados: dict[str, Any] | None = None
 
         self.model_dir: Path | None = None
         self.recognizer: Any = None
@@ -134,6 +161,23 @@ class MotorSherpaZipformer(MotorASR):
         import sherpa_onnx
 
         self.model_dir = self._asegurar_modelo()
+        opciones_decodificacion: dict[str, Any] = {
+            "decoding_method": self.decoding_method,
+            "max_active_paths": self.max_active_paths,
+        }
+        if self.hotwords_file is not None:
+            # El modelo no trae bpe.vocab: se arma uno sintético desde tokens.txt (PLAN-VOZ-REAL.md §5).
+            from hotwords import preparar_hotwords
+
+            self.hotwords_preparados = preparar_hotwords(
+                self.model_dir, self.hotwords_file, puntaje=self.bpe_puntaje
+            )
+            opciones_decodificacion.update(
+                hotwords_file=str(self.hotwords_preparados["hotwords_file"]),
+                hotwords_score=self.hotwords_score,
+                modeling_unit="bpe",
+                bpe_vocab=str(self.hotwords_preparados["bpe_vocab"]),
+            )
         self.recognizer = sherpa_onnx.OnlineRecognizer.from_transducer(
             tokens=str(self.model_dir / "tokens.txt"),
             encoder=str(self.model_dir / "encoder.onnx"),
@@ -143,12 +187,28 @@ class MotorSherpaZipformer(MotorASR):
             provider="cpu",
             sample_rate=self.sample_rate,
             feature_dim=80,
-            decoding_method="greedy_search",
+            **opciones_decodificacion,
             enable_endpoint_detection=self.enable_endpoint,
             rule1_min_trailing_silence=self.rule1_silence,
             rule2_min_trailing_silence=self.rule2_silence,
             rule3_min_utterance_length=self.rule3_utterance,
         )
+        self.stream = self.recognizer.create_stream()
+        self.segmento_actual = 1
+        self.inicio_segmento_s = 0.0
+        self.ultimo_texto_parcial = ""
+        self.silencio_acum_s = 0.0
+
+    def reiniciar(self) -> None:
+        """Vuelve al estado de recién inicializado sin recargar el modelo (descarta lo oído)."""
+        self.recognizer.reset(self.stream)
+        self.segmento_actual = 1
+        self.inicio_segmento_s = 0.0
+        self.ultimo_texto_parcial = ""
+        self.silencio_acum_s = 0.0
+
+    def nueva_sesion(self) -> None:
+        """Empieza un audio nuevo con un stream limpio, sin recargar el modelo (después de `vaciar_final`)."""
         self.stream = self.recognizer.create_stream()
         self.segmento_actual = 1
         self.inicio_segmento_s = 0.0
@@ -279,6 +339,16 @@ class MotorSherpaZipformer(MotorASR):
                 "rule2_silence": self.rule2_silence,
                 "rule3_utterance": self.rule3_utterance,
             },
+            "decodificacion": {
+                "decoding_method": self.decoding_method,
+                "max_active_paths": self.max_active_paths,
+                "hotwords_file": str(self.hotwords_file) if self.hotwords_file else None,
+                "hotwords": self.hotwords_preparados["hotwords"] if self.hotwords_preparados else None,
+                "hotwords_score": self.hotwords_score if self.hotwords_file else None,
+                "modeling_unit": "bpe" if self.hotwords_file else None,
+                "bpe_puntaje": self.bpe_puntaje if self.hotwords_file else None,
+                "bpe_vocab": str(self.hotwords_preparados["bpe_vocab"]) if self.hotwords_preparados else None,
+            },
         }
 
 
@@ -297,6 +367,8 @@ class MotorFasterWhisper(MotorASR):
         device: str = "cpu",
         compute_type: str = "int8",
         idioma: str = "es",
+        hotwords: str | None = None,
+        initial_prompt: str | None = None,
     ):
         self.nombre = "whisper"
         self.modelo_id = f"faster-whisper-{modelo_tamanio}"
@@ -308,6 +380,9 @@ class MotorFasterWhisper(MotorASR):
         self.device = device
         self.compute_type = compute_type
         self.idioma = idioma
+        # Ayudas opcionales de faster-whisper; por defecto no se usa ninguna.
+        self.hotwords = hotwords
+        self.initial_prompt = initial_prompt
 
         self.model: Any = None
         self.buffer_muestras: list[np.ndarray] = []
@@ -322,6 +397,11 @@ class MotorFasterWhisper(MotorASR):
             compute_type=self.compute_type,
             cpu_threads=self.hilos,
         )
+        self.buffer_muestras = []
+        self.duracion_buffer_s = 0.0
+
+    def nueva_sesion(self) -> None:
+        """Descarta el audio acumulado y empieza otro, sin recargar el modelo."""
         self.buffer_muestras = []
         self.duracion_buffer_s = 0.0
 
@@ -351,6 +431,8 @@ class MotorFasterWhisper(MotorASR):
             beam_size=5,
             vad_filter=True,
             vad_parameters=dict(min_silence_duration_ms=500),
+            hotwords=self.hotwords,
+            initial_prompt=self.initial_prompt,
         )
 
         eventos: list[EventoASR] = []
@@ -393,10 +475,384 @@ class MotorFasterWhisper(MotorASR):
             "hilos": self.hilos,
             "sample_rate": self.sample_rate,
             "idioma": self.idioma,
+            "hotwords": self.hotwords,
+            "initial_prompt": self.initial_prompt,
             "segmentacion": {
                 "tipo": "vad_filter_whisper",
                 "declaracion": "NO streaming, procesamiento segmentado offline/lote",
             },
+        }
+
+
+# Parakeet detecta solo el idioma y, con poco audio, a veces escribe inglés o portugués («Yeah.», «Oh no.»).
+# No se filtran «ok»/«okay» (se usan en Argentina) ni anglicismos de uso corriente (link, token, mail, app...).
+PALABRAS_OTRO_IDIOMA = frozenset({
+    "the", "you", "your", "yeah", "yes", "what", "what's", "it's", "is", "it", "and", "so", "but", "thank",
+    "thanks", "hello", "hi", "oh", "uh", "um", "boy", "dang", "say", "up", "good", "thing", "one", "i", "i'm",
+    "that's", "don't", "of", "to", "olá", "obrigado", "obrigada", "tchau", "bye",
+})
+PALABRAS_ESPANOL = frozenset({
+    "el", "la", "los", "las", "que", "qué", "de", "del", "no", "sí", "si", "me", "te", "se", "y", "a", "en",
+    "un", "una", "por", "para", "con", "es", "lo", "le", "mi", "tu", "ya", "bueno", "dale", "hola", "cómo",
+    "como", "pero", "eso", "esto", "está", "estoy", "prueba", "gracias", "bien", "mal", "muy", "más", "al",
+    "yo", "vos", "soy", "son", "hay", "tengo", "quiero", "puedo", "puede", "cuál", "dónde", "cuándo",
+})
+# Frases que Parakeet inventa con ruido o respiración: si la frase entera es esto, no es una frase.
+MULETILLAS_FINALES = frozenset({"thank", "thanks", "you", "yeah", "yes", "olá", "obrigado", "obrigada", "tchau", "bye"})
+_TOKEN = re.compile(r"[^\W\d_]+(?:'[^\W\d_]+)*")
+
+
+def _tokens(texto: str) -> list[str]:
+    return _TOKEN.findall(texto.lower().replace("’", "'"))
+
+
+def parece_otro_idioma(texto: str) -> bool:
+    """True si el texto trae palabras de inglés/portugués comunes y ninguna palabra común de español."""
+    palabras = set(_tokens(texto))
+    return bool(palabras & PALABRAS_OTRO_IDIOMA) and not palabras & PALABRAS_ESPANOL
+
+
+def es_muletilla_final(texto: str) -> bool:
+    """True si todas las palabras de la frase son una muletilla inventada («Thank you.», «Yeah.»)."""
+    palabras = _tokens(texto)
+    return bool(palabras) and all(p in MULETILLAS_FINALES for p in palabras)
+
+
+class DetectorSilero:
+    """Decide si un bloque es voz con Silero VAD de sherpa-onnx (`VadModel.is_speech`), en lugar del RMS.
+
+    Silero mira ventanas de 512 muestras (32 ms a 16 kHz) y los bloques del panel son de 640: lo que sobra
+    de un bloque se guarda para la ventana siguiente. Un bloque es voz si alguna ventana que terminó en él
+    es voz; si no terminó ninguna, vale lo del bloque anterior. `min_silence_duration` y
+    `min_speech_duration` van en 0 para que el corte, el preaudio y `MIN_VOZ_S` sigan siendo los de
+    `MotorPorFrases`. Queda la histéresis propia de sherpa: ya en voz, sigue siendo voz mientras la
+    probabilidad no baje de `umbral - 0.15`, y la primera ventana sobre el umbral todavía cuenta como silencio.
+    """
+
+    VENTANA = 512
+
+    def __init__(self, modelo: str | Path, umbral: float = 0.5, sample_rate: int = 16000, hilos: int = 1,
+                 vad: Any = None):
+        self.ruta_modelo = Path(modelo)
+        self.umbral = umbral
+        self.sample_rate = sample_rate
+        self.hilos = hilos
+        self.vad = vad  # se carga al primer bloque; las pruebas pasan uno falso con is_speech() y reset()
+        self.tiempos_ms: list[float] = []  # costo de decidir cada bloque
+        self.reiniciar()
+
+    def _cargar(self) -> None:
+        import sherpa_onnx
+
+        if not self.ruta_modelo.is_file():
+            raise RuntimeError(f"No está el modelo de Silero: {self.ruta_modelo}")
+        silero = sherpa_onnx.SileroVadModelConfig(model=str(self.ruta_modelo), threshold=self.umbral,
+                                                  min_silence_duration=0.0, min_speech_duration=0.0,
+                                                  window_size=self.VENTANA)
+        self.vad = sherpa_onnx.VadModel.create(sherpa_onnx.VadModelConfig(
+            silero_vad=silero, sample_rate=self.sample_rate, num_threads=self.hilos))
+
+    def reiniciar(self) -> None:
+        """Estado de una llamada nueva: el LSTM de Silero arranca de cero."""
+        if self.vad is not None:
+            self.vad.reset()
+        self.pendiente = np.zeros(0, dtype=np.float32)
+        self.ultima = False
+
+    def es_voz(self, muestras: np.ndarray) -> bool:
+        t0 = time.perf_counter()
+        if self.vad is None:
+            self._cargar()
+        datos = np.concatenate([self.pendiente, muestras]) if len(self.pendiente) else muestras
+        completas = len(datos) // self.VENTANA * self.VENTANA
+        if completas:
+            # Todas las ventanas pasan por el modelo, aunque una ya haya dado voz: el estado tiene que avanzar.
+            decisiones = [self.vad.is_speech(datos[i:i + self.VENTANA]) for i in range(0, completas, self.VENTANA)]
+            self.ultima = any(decisiones)
+        self.pendiente = np.array(datos[completas:], dtype=np.float32)
+        self.tiempos_ms.append((time.perf_counter() - t0) * 1000.0)
+        return self.ultima
+
+    def metadatos(self) -> dict[str, Any]:
+        t = self.tiempos_ms
+        costo = ({"bloques": len(t), "mediana_ms": round(float(np.median(t)), 4),
+                  "p95_ms": round(float(np.percentile(t, 95)), 4), "max_ms": round(max(t), 4),
+                  "total_s": round(sum(t) / 1000.0, 4)} if t else None)
+        sha = None
+        if self.ruta_modelo.is_file():
+            import hashlib
+
+            sha = hashlib.sha256(self.ruta_modelo.read_bytes()).hexdigest()[:16]
+        return {"tipo": "silero_vad_sherpa_onnx", "modelo": self.ruta_modelo.name, "sha256_16": sha,
+                "umbral": self.umbral, "umbral_para_seguir": round(self.umbral - 0.15, 3), "ventana": self.VENTANA,
+                "min_silence_duration": 0.0, "min_speech_duration": 0.0, "hilos": self.hilos, "costo_por_bloque": costo}
+
+
+class MotorPorFrases(MotorASR):
+    """Base para modelos que no son streaming: corta frases por silencio y transcribe cada una.
+
+    Usa el mismo corte por silencio que la demo (`corte_silencio_s`, `umbral_rms_silencio`)
+    para cerrar la frase. Con `detector_voz` (un `DetectorSilero`), `modo_vad` dice cómo se usa Silero (ver
+    `MODOS_VAD`); el corte, el preaudio, el tope y `MIN_VOZ_S` no cambian. Mientras la frase sigue abierta, si `parciales_cada_s` no es None,
+    la vuelve a transcribir entera cada ese tiempo para mostrar texto provisorio.
+    """
+
+    PREVIO_S = 0.3  # audio previo a la voz que se agrega a la frase para no comerse la primera sílaba
+    MAX_FRASE_S = 10.0  # una frase sin pausas se corta acá para que cada pasada no tarde cada vez más
+    MIN_VOZ_S = 0.3  # con menos voz que esto es un ruido o una respiración: no se transcribe
+    MIN_VOZ_PARCIAL_S = 1.0  # el primer borrador espera esta voz: con menos, Parakeet suele adivinar inglés
+    # Con `detector_voz`, cómo se combina Silero con el RMS (PLAN-VOZ-REAL.md §12):
+    MODOS_VAD = {
+        "silero": "Silero decide solo qué bloque es voz; el RMS no se usa",
+        "filtro": "el RMS corta las frases; solo cuenta como voz (MIN_VOZ_S y borradores) lo que Silero también oye",
+        "y": "un bloque es voz si lo dicen el RMS y Silero; si uno dice silencio, cuenta para el corte",
+    }
+
+    def __init__(self, sample_rate: int = 16000, parciales_cada_s: float | None = None):
+        self.es_streaming = False
+        self.tipo_entrega = "parciales_y_finales" if parciales_cada_s else "finales_por_segmento"
+        self.sample_rate = sample_rate
+        self.parciales_cada_s = parciales_cada_s
+        self.filtrar_idioma = True  # descarta parciales que no parecen español y finales que son muletillas
+        self.corte_silencio_s = 0.8
+        self.umbral_rms_silencio = 0.005
+        # Si no es None, Silero entra según `modo_vad`; todo lo demás (corte, preaudio, tope) queda igual.
+        self.detector_voz: DetectorSilero | None = None
+        self.modo_vad = "silero"
+        # El servidor lo fija según el corte «auto»; estos modelos no tienen endpoint propio.
+        self.enable_endpoint = False
+        self._limpiar()
+
+    def _limpiar(self) -> None:
+        self.segmento_actual = 1
+        self.frase: list[np.ndarray] = []
+        self.previo: list[np.ndarray] = []
+        self.inicio_segmento_s = 0.0
+        self.inicio_previo_s = 0.0
+        self.silencio_acum_s = 0.0
+        self.desde_parcial_s = 0.0
+        self.voz_s = 0.0
+        self.ultimo_texto_parcial = ""
+
+    @abstractmethod
+    def _transcribir(self, audio: np.ndarray) -> str:
+        """Texto de una frase completa (float32, mono, `sample_rate`)."""
+
+    def reiniciar(self) -> None:
+        """Descarta lo oído sin recargar el modelo."""
+        self._limpiar()
+        if self.detector_voz is not None:
+            self.detector_voz.reiniciar()
+
+    def nueva_sesion(self) -> None:
+        self.reiniciar()
+
+    def _es_voz(self, muestras: np.ndarray) -> tuple[bool, bool]:
+        """(corta, cuenta): `corta` abre y cierra la frase; `cuenta` suma voz para `MIN_VOZ_S` y los borradores."""
+        if self.detector_voz is not None and self.modo_vad not in self.MODOS_VAD:
+            raise ValueError(f"modo_vad desconocido: {self.modo_vad}; opciones: {', '.join(self.MODOS_VAD)}")
+        # Silero mira todos los bloques, aunque no decida, para que su estado siga al audio.
+        silero = self.detector_voz.es_voz(muestras) if self.detector_voz is not None else None
+        if silero is not None and self.modo_vad == "silero":
+            return silero, silero
+        rms = float(np.sqrt(np.mean(muestras**2))) if len(muestras) else 0.0
+        voz = rms >= self.umbral_rms_silencio
+        if silero is None:
+            return voz, voz
+        if self.modo_vad == "filtro":
+            return voz, voz and silero
+        return voz and silero, voz and silero
+
+    def _evento(self, tipo: str, texto: str, fin_s: float, t0: float) -> EventoASR:
+        return EventoASR(tipo=tipo, segmento=self.segmento_actual, texto=texto,
+                         inicio_audio_s=round(self.inicio_segmento_s, 3), fin_audio_s=round(fin_s, 3),
+                         proceso_ms=round((time.perf_counter() - t0) * 1000.0, 2))
+
+    def _cerrar_frase(self, fin_s: float, t0: float) -> list[EventoASR]:
+        # Parakeet, con un golpe o una respiración, inventa «Okay» o «Thank you».
+        texto = self._transcribir(np.concatenate(self.frase)).strip() if self.voz_s >= self.MIN_VOZ_S else ""
+        if texto and self.filtrar_idioma and es_muletilla_final(texto):
+            texto = ""
+        eventos = [self._evento("final", texto, fin_s, t0)] if texto else []
+        segmento = self.segmento_actual + (1 if texto else 0)
+        self._limpiar()
+        self.segmento_actual = segmento
+        return eventos
+
+    def procesar_bloque(self, muestras: np.ndarray, inicio_bloque_s: float, fin_bloque_s: float) -> list[EventoASR]:
+        t0 = time.perf_counter()
+        if muestras.dtype != np.float32:
+            muestras = muestras.astype(np.float32)
+        dur_s = fin_bloque_s - inicio_bloque_s
+        voz, cuenta = self._es_voz(muestras)
+
+        if not self.frase:
+            if not voz:
+                # Silencio antes de hablar: guardar solo los últimos PREVIO_S.
+                self.previo.append(muestras)
+                while sum(len(b) for b in self.previo) > self.PREVIO_S * self.sample_rate:
+                    self.inicio_previo_s += len(self.previo.pop(0)) / self.sample_rate
+                if len(self.previo) == 1:
+                    self.inicio_previo_s = inicio_bloque_s
+                return []
+            self.frase = [*self.previo, muestras]
+            self.inicio_segmento_s = self.inicio_previo_s if self.previo else inicio_bloque_s
+            self.previo = []
+            self.silencio_acum_s = 0.0
+            self.desde_parcial_s = dur_s
+            self.voz_s = dur_s if cuenta else 0.0
+            return []
+
+        self.frase.append(muestras)
+        self.silencio_acum_s = 0.0 if voz else self.silencio_acum_s + dur_s
+        self.desde_parcial_s += dur_s
+        self.voz_s += dur_s if cuenta else 0.0
+        if self.silencio_acum_s >= self.corte_silencio_s or fin_bloque_s - self.inicio_segmento_s >= self.MAX_FRASE_S:
+            return self._cerrar_frase(fin_bloque_s, t0)
+        if (self.parciales_cada_s and cuenta and self.voz_s >= self.MIN_VOZ_PARCIAL_S
+                and self.desde_parcial_s >= self.parciales_cada_s):
+            self.desde_parcial_s = 0.0
+            texto = self._transcribir(np.concatenate(self.frase)).strip()
+            if self.filtrar_idioma and parece_otro_idioma(texto):
+                return []  # se deja el borrador anterior en pantalla
+            if texto and texto != self.ultimo_texto_parcial:
+                self.ultimo_texto_parcial = texto
+                return [self._evento("parcial", texto, fin_bloque_s, t0)]
+        return []
+
+    def vaciar_final(self, fin_audio_s: float) -> list[EventoASR]:
+        if not self.frase:
+            return []
+        return self._cerrar_frase(fin_audio_s, time.perf_counter())
+
+    def _segmentacion(self) -> dict[str, Any]:
+        silero = self.detector_voz is not None
+        tipo = {"silero": "corte_por_silencio_silero", "filtro": "corte_por_silencio_rms_filtro_silero",
+                "y": "corte_por_silencio_rms_y_silero"}[self.modo_vad] if silero else "corte_por_silencio_rms"
+        solo_silero = silero and self.modo_vad == "silero"
+        return {"tipo": tipo, "corte_silencio_s": self.corte_silencio_s,
+                "umbral_rms_silencio": None if solo_silero else self.umbral_rms_silencio, "previo_s": self.PREVIO_S,
+                "max_frase_s": self.MAX_FRASE_S, "min_voz_s": self.MIN_VOZ_S,
+                "min_voz_parcial_s": self.MIN_VOZ_PARCIAL_S, "parciales_cada_s": self.parciales_cada_s,
+                "filtro_idioma": "parciales_y_muletillas_finales" if self.filtrar_idioma else None,
+                **({"vad": {**self.detector_voz.metadatos(), "modo": self.modo_vad}} if silero else {})}
+
+
+class MotorSherpaParakeet(MotorPorFrases):
+    """NVIDIA Parakeet TDT 0.6B v3 (multilingüe, incluye español) vía sherpa-onnx, por frases.
+
+    Los dos canales de una llamada comparten el reconocedor: el modelo se carga una sola vez.
+    """
+
+    MODELO_POR_DEFECTO = "csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
+    ARCHIVOS_REQUERIDOS = ("encoder.int8.onnx", "decoder.int8.onnx", "joiner.int8.onnx", "tokens.txt")
+    _reconocedores: dict[tuple[str, int], Any] = {}
+
+    def __init__(self, modelo_dir_o_repo: str = MODELO_POR_DEFECTO, hilos: int = 2,
+                 sample_rate: int = 16000, parciales_cada_s: float | None = 0.5):
+        super().__init__(sample_rate=sample_rate, parciales_cada_s=parciales_cada_s)
+        self.nombre = "sherpa-parakeet"
+        self.modelo_id = modelo_dir_o_repo
+        self.hilos = hilos
+        self.model_dir: Path | None = None
+        self.recognizer: Any = None
+
+    _asegurar_modelo = MotorSherpaZipformer._asegurar_modelo
+
+    def inicializar(self) -> None:
+        import sherpa_onnx
+
+        self.model_dir = self._asegurar_modelo()
+        clave = (str(self.model_dir.resolve()), self.hilos)
+        if clave not in self._reconocedores:
+            self._reconocedores[clave] = sherpa_onnx.OfflineRecognizer.from_transducer(
+                encoder=str(self.model_dir / "encoder.int8.onnx"),
+                decoder=str(self.model_dir / "decoder.int8.onnx"),
+                joiner=str(self.model_dir / "joiner.int8.onnx"),
+                tokens=str(self.model_dir / "tokens.txt"),
+                num_threads=self.hilos,
+                sample_rate=self.sample_rate,
+                feature_dim=80,
+                decoding_method="greedy_search",
+                model_type="nemo_transducer",
+            )
+        self.recognizer = self._reconocedores[clave]
+        self._limpiar()
+
+    def _transcribir(self, audio: np.ndarray) -> str:
+        stream = self.recognizer.create_stream()
+        stream.accept_waveform(self.sample_rate, audio)
+        self.recognizer.decode_stream(stream)
+        return stream.result.text
+
+    def metadatos(self) -> dict[str, Any]:
+        import sherpa_onnx
+
+        return {
+            "motor": self.nombre,
+            "modelo_id": self.modelo_id,
+            "ruta_modelo": str(self.model_dir) if self.model_dir else None,
+            "es_streaming": self.es_streaming,
+            "tipo_entrega": self.tipo_entrega,
+            "version_sherpa": getattr(sherpa_onnx, "__version__", "unknown"),
+            "hilos": self.hilos,
+            "sample_rate": self.sample_rate,
+            "segmentacion": self._segmentacion(),
+            "decodificacion": {"decoding_method": "greedy_search", "model_type": "nemo_transducer"},
+        }
+
+
+class MotorWhisperPorFrases(MotorPorFrases):
+    """faster-whisper (por defecto large-v3-turbo) transcribiendo cada frase al cerrarla, sin parciales.
+
+    En CPU es lento: sirve de techo de calidad para comparar, no como motor de la demo.
+    """
+
+    _modelos: dict[tuple[str, str, int], Any] = {}
+
+    def __init__(self, modelo_tamanio: str = "large-v3-turbo", hilos: int = 4, sample_rate: int = 16000,
+                 compute_type: str = "int8", idioma: str = "es", beam_size: int = 5):
+        super().__init__(sample_rate=sample_rate, parciales_cada_s=None)
+        self.nombre = "whisper-frases"
+        self.modelo_id = f"faster-whisper-{modelo_tamanio}"
+        self.modelo_tamanio = modelo_tamanio
+        self.hilos = hilos
+        self.compute_type = compute_type
+        self.idioma = idioma
+        self.beam_size = beam_size
+        self.model: Any = None
+
+    def inicializar(self) -> None:
+        from faster_whisper import WhisperModel
+
+        clave = (self.modelo_tamanio, self.compute_type, self.hilos)
+        if clave not in self._modelos:
+            self._modelos[clave] = WhisperModel(self.modelo_tamanio, device="cpu",
+                                                compute_type=self.compute_type, cpu_threads=self.hilos)
+        self.model = self._modelos[clave]
+        self._limpiar()
+
+    def _transcribir(self, audio: np.ndarray) -> str:
+        segmentos, _ = self.model.transcribe(audio, language=self.idioma, beam_size=self.beam_size,
+                                             condition_on_previous_text=False)
+        return " ".join(s.text.strip() for s in segmentos)
+
+    def metadatos(self) -> dict[str, Any]:
+        import faster_whisper
+
+        return {
+            "motor": self.nombre,
+            "modelo_id": self.modelo_id,
+            "es_streaming": self.es_streaming,
+            "tipo_entrega": self.tipo_entrega,
+            "version_faster_whisper": getattr(faster_whisper, "__version__", "unknown"),
+            "device": "cpu",
+            "compute_type": self.compute_type,
+            "hilos": self.hilos,
+            "sample_rate": self.sample_rate,
+            "idioma": self.idioma,
+            "beam_size": self.beam_size,
+            "segmentacion": self._segmentacion(),
         }
 
 

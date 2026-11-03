@@ -1,0 +1,164 @@
+{
+  "llamada_id": "VIVO-20261026-173220-376117",
+  "asr": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    }
+  },
+  "disparo": "final",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": "B",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.002,
+        "mediana": -0.0,
+        "p95": 0.012,
+        "max": 0.091
+      },
+      "retraso_parcial_s": {
+        "n": 5,
+        "min": 0.036,
+        "mediana": 0.06,
+        "p95": 0.123,
+        "max": 0.131
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 2,
+        "min": 0.208,
+        "mediana": 0.504,
+        "p95": 0.77,
+        "max": 0.8
+      }
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.002,
+        "mediana": -0.0,
+        "p95": 0.012,
+        "max": 0.091
+      },
+      "retraso_parcial_s": {
+        "n": 9,
+        "min": 0.03,
+        "mediana": 0.055,
+        "p95": 0.081,
+        "max": 0.086
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 3,
+        "min": 0.801,
+        "mediana": 0.803,
+        "p95": 0.838,
+        "max": 0.842
+      }
+    }
+  },
+  "estereo": null,
+  "detector": {
+    "evaluaciones": 4,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 4,
+      "min": 1.286,
+      "mediana": 1.312,
+      "p95": 1.861,
+      "max": 1.956
+    },
+    "aviso": {
+      "n": 16,
+      "saltadas": 0,
+      "inicio_eval_s": 18.443,
+      "fin_eval_s": 20.403,
+      "ms_detector": 1956.1,
+      "valida": true,
+      "error": "",
+      "riesgo": 1.0,
+      "alerta_sugerida": true,
+      "motivo": "Te están solicitando un código de activación que requiere acción inmediata para acceder a tu cuenta de WhatsApp.",
+      "evidencia": ". decime el código de activación que recibiste por sms",
+      "aviso": true,
+      "t_a": 20.403,
+      "fin_voz_s": 17.6,
+      "demora_desde_fin_de_voz_s": 2.803
+    }
+  },
+  "config": {
+    "detector": "slm",
+    "modelo": "qwen3.5:0.8b-q8_0",
+    "prompt": "tarea",
+    "hablantes": "ab",
+    "ollama_url": "http://127.0.0.1:11434",
+    "seed": 42,
+    "corte_silencio_s": 0.8,
+    "hilos_asr": 2,
+    "carga_slm": {
+      "carga_ms": 483,
+      "error": "",
+      "memoria": {
+        "size_bytes": 1067869797,
+        "size_vram_bytes": 1067869797
+      },
+      "pensar": false
+    }
+  },
+  "inicio_panel": {
+    "modo": "llamada",
+    "fuentes": {
+      "otra": {
+        "tipo": "ejemplo",
+        "escenario": "SC-WA-CODE-01",
+        "canal": "izq"
+      },
+      "protegida": {
+        "tipo": "ejemplo",
+        "escenario": "SC-WA-CODE-01",
+        "canal": "der"
+      }
+    }
+  },
+  "codigo": {
+    "commit": "6669b104f9c18fd170f9d57c78a13c4c98f9f8d7",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  },
+  "medicion": {
+    "escenario": "SC-WA-CODE-01",
+    "split": "ejemplo TTS; fuera de corpus_v2",
+    "fin_pedido_s": 17.6,
+    "criterio_mediana_s": 2.0,
+    "audio_sha256": "4e6be5e30a962cd9ed15790759342ababf39b79811635ac8e5ae24b6a9868344",
+    "ollama": {
+      "version": "0.40.5",
+      "digests": {
+        "qwen3.5:0.8b-q8_0": "7c00f78aed0fd757e9ba2f2720896768fd22da24b7fb6fe17096bb1e85bb2d25"
+      }
+    }
+  }
+}

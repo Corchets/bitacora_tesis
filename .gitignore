@@ -29,6 +29,7 @@ models/checkpoints/
 artifacts/
 experiments/laboratorio/modelos/
 experiments/asr-local/modelos/
+experiments/asr-local/audio
 
 # Python
 .venv/
@@ -59,3 +60,6 @@ ayuda-memoria/.vercel/
 # Reserva del corpus v2: no se publica (ver experiments/slm-directo/casos/RESERVA-FUERA-DEL-REPO.md)
 experiments/slm-directo/casos/texto/CV2-T-*
 experiments/slm-directo/casos/referencia/CV2-T-*
+
+# Llamadas en vivo: transcripciones de voces del equipo; se copian a corridas/ solo si se decide
+experiments/voip/llamadas/

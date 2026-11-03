@@ -73,7 +73,7 @@ python replay.py \
 | `--detector` | `reglas`, `slm` | Obligatorio | Detector a evaluar. |
 | `--modelo` | texto | `qwen3.5:2b` | Modelo SLM para Ollama. |
 | `--prompt` | `tarea`, `tarea+base` | `tarea` | Variante del prompt del sistema. |
-| `--hablantes` | `ab`, `sin` | `ab` | Con etiquetas de canal (A/B) o texto ciego. Si el audio no tiene canal, conmuta automáticamente a `sin`. |
+| `--hablantes` | `ab`, `sin` | `ab` | Con etiquetas A/B o texto ciego. Acepta canales A/B anteriores o roles `protegida`/`otra` del registro en vivo: A es el primer rol con texto, incluidos parciales, y la asignación se reinicia por llamada. Si el audio no tiene canal, conmuta automáticamente a `sin`. |
 | `--disparo` | `final`, `parcial` | `final` | Invoca el detector solo en segmentos cerrados (`final`) o en cada actualización (`parcial`). |
 | `--salida` | ruta directorio | Obligatorio | Carpeta donde se guardan los artefactos. |
 | `--seed` | entero | `42` | Semilla para SLM (`no-aplica` para reglas). |

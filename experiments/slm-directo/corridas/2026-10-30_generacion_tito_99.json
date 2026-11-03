@@ -1,0 +1,64 @@
+{
+  "issue": 99,
+  "inicio_utc": "2026-10-30T13:22:44.769795+00:00",
+  "estado": "fallo",
+  "etapas": [
+    {
+      "etapa": "validar_supervision",
+      "comando": [
+        "/home/chato/orca/workspaces/bitacora_tesis/searobin/.venv/bin/python",
+        "-u",
+        "entrenar_tito_99.py",
+        "--paso",
+        "supervision"
+      ],
+      "exit_code": 0,
+      "segundos": 1.151
+    },
+    {
+      "etapa": "entrenar",
+      "comando": [
+        "/home/chato/orca/workspaces/bitacora_tesis/searobin/.venv/bin/python",
+        "-u",
+        "entrenar_tito_99.py",
+        "--paso",
+        "entrenar"
+      ],
+      "exit_code": 0,
+      "segundos": 407.449
+    },
+    {
+      "etapa": "seleccionar_validacion",
+      "comando": [
+        "/home/chato/orca/workspaces/bitacora_tesis/searobin/.venv/bin/python",
+        "-u",
+        "entrenar_tito_99.py",
+        "--paso",
+        "evaluar"
+      ],
+      "exit_code": 0,
+      "segundos": 25.439
+    },
+    {
+      "etapa": "congelar",
+      "comando": [
+        "/home/chato/orca/workspaces/bitacora_tesis/searobin/.venv/bin/python",
+        "-u",
+        "comprobar_tito_100.py",
+        "--paso",
+        "congelar",
+        "--resultados99",
+        "REPORTE-TITO-99-2026-10-29.json",
+        "--salida",
+        "CANDIDATO-TITO-100-2026-10-30.json"
+      ],
+      "exit_code": 2,
+      "segundos": 0.048
+    }
+  ],
+  "matriz_slm_ejecutada": false,
+  "autorizacion": "Generar Tito según #99/#100; el usuario reserva la matriz SLM para ejecución propia.",
+  "supervision_pid": 1359871,
+  "driver_sha256": "71d46e19e073f4f8208eff844c4f36d0baa470e6d519d9dfe7358fc5a02910aa",
+  "etapa_fallida": "congelar"
+}

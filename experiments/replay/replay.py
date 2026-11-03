@@ -43,9 +43,12 @@ if str(DIR_REPLAY) not in sys.path:
 import cliente_ollama
 import correr
 import detectores
+import filtro_tito
+import tito_real
 from contexto import Actualizacion, ContextoLlamada
 
 POLITICA = "aviso_unico_primer_true_valido"
+DETECTORES_CON_MODELO = ("slm", "tito-slm")
 
 COLUMNAS_EVENTOS = [
     "llamada_id",
@@ -212,6 +215,71 @@ def formatear_texto_resumido(lineas: tuple[Any, ...], hablantes_modo: str) -> st
     return " // ".join(partes)
 
 
+class FlujoTitoEnVivo(filtro_tito.FlujoTitoSLM):
+    """Tito→SLM sobre frases cerradas, con la política de la matriz #101.
+
+    En la matriz llega una línea por vez. En vivo el detector puede juntar varias frases
+    mientras está ocupado y la foto trae borradores de otro canal: por eso recibe solo las
+    cerradas (`solo_cerradas`) y Tito puntúa cada una, sin saltear las que quedaron en el medio.
+    """
+
+    solo_cerradas = True
+
+    def __init__(self, tito: Any, slm: Any, umbral: float = filtro_tito.UMBRAL_TITO) -> None:
+        super().__init__(tito, slm, umbral)
+        self.puntuadas = 0
+
+    def reiniciar(self) -> None:
+        super().reiniciar()
+        self.puntuadas = 0
+
+    def evaluar(self, lineas: Any) -> Any:
+        e = self.estado
+        previo_ms = 0.0
+        for i in range(self.puntuadas, len(lineas) - 1):
+            if e.activado:
+                break
+            puntaje, error, ms = self.tito.puntuar(i + 1, lineas[i].texto)
+            previo_ms += ms
+            if error:
+                e.activado, e.fallo_tito = True, error
+            elif puntaje is not None and puntaje >= self.umbral:
+                e.activado = True
+                e.indicio_linea, e.indicio_texto, e.indicio_puntaje = i + 1, lineas[i].texto, puntaje
+        self.puntuadas = len(lineas)
+        respuesta = super().evaluar(lineas)
+        if previo_ms:
+            respuesta.ms = (respuesta.ms or 0.0) + previo_ms
+            respuesta.tito_ms = (respuesta.tito_ms or 0.0) + previo_ms
+        return respuesta
+
+
+def construir_slm(
+    modelo: str,
+    prompt_nombre: str = "tarea",
+    hablantes: str = "ab",
+    seed: int = 42,
+    num_ctx: int = 4096,
+    ollama_url: str = cliente_ollama.URL_POR_DEFECTO,
+) -> Any:
+    """DetectorSLM calentado, con la negociación de `think` compartida con slm-directo."""
+    prompt_str = detectores.cargar_prompt(prompt_nombre)
+    cliente = cliente_ollama.ClienteOllama(ollama_url)
+    detector = detectores.DetectorSLM(
+        cliente=cliente,
+        modelo=modelo,
+        prompt=prompt_str,
+        hablantes=hablantes,
+        num_ctx=num_ctx,
+        seed=seed,
+        esquema=detectores.esquema_de(prompt_nombre),
+    )
+    # Qwen3.5 necesita pensar=False para responder dentro del formato y presupuesto.
+    detector.carga = correr.calentar(cliente, modelo, num_ctx)
+    detector.pensar = detector.carga["pensar"]
+    return detector
+
+
 def construir_detector(
     nombre: str,
     modelo: str = "qwen3.5:2b",
@@ -224,25 +292,23 @@ def construir_detector(
     """Instancia el detector correspondiente de slm-directo."""
     if nombre == "reglas":
         return detectores.DetectorReglas()
-    elif nombre == "slm":
-        prompt_str = detectores.cargar_prompt(prompt_nombre)
-        cliente = cliente_ollama.ClienteOllama(ollama_url)
-        detector = detectores.DetectorSLM(
-            cliente=cliente,
-            modelo=modelo,
-            prompt=prompt_str,
-            hablantes=hablantes,
-            num_ctx=num_ctx,
-            seed=seed,
-            esquema=detectores.esquema_de(prompt_nombre),
-        )
-        # Compartir el calentamiento y la negociación de `think` con slm-directo.
-        # Qwen3.5 necesita pensar=False para responder dentro del formato y presupuesto.
-        detector.carga = correr.calentar(cliente, modelo, num_ctx)
-        detector.pensar = detector.carga["pensar"]
+    elif nombre in ("slm", "tito-slm"):
+        slm = construir_slm(modelo=modelo, prompt_nombre=prompt_nombre, hablantes=hablantes,
+                            seed=seed, num_ctx=num_ctx, ollama_url=ollama_url)
+        if nombre == "slm":
+            return slm
+        # Tito viejo, el de la matriz #101: frase aislada con umbral 0,5.
+        tito, informe = tito_real.preparar_tito_real()
+        if informe["error"]:
+            raise RuntimeError(f"No se pudo preparar Tito: {informe['error']}")
+        artefacto = tito_real.ARTEFACTO_POR_DEFECTO
+        detector = FlujoTitoEnVivo(tito, slm)
+        detector.carga = {**getattr(slm, "carga", {}), "tito": {
+            "artefacto": artefacto.name, "sha256": hashlib.sha256(artefacto.read_bytes()).hexdigest(),
+            "umbral": detector.umbral, **informe}}
         return detector
     else:
-        raise ValueError(f"Detector desconocido {nombre!r}; opciones: 'reglas', 'slm'")
+        raise ValueError(f"Detector desconocido {nombre!r}; opciones: 'reglas', 'slm', 'tito-slm'")
 
 
 def correr_replay(
@@ -263,7 +329,7 @@ def correr_replay(
         return [], []
 
     # Verificar si hay canales disponibles
-    tiene_canales = any(a.canal in ("A", "B") for a in actualizaciones)
+    tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
     if not tiene_canales and hablantes == "ab":
         print(
             "[replay] Aviso: las actualizaciones no contienen canal (canal=null); usando hablantes='sin'.",
@@ -272,8 +338,10 @@ def correr_replay(
         hablantes = "sin"
 
     # Si el detector es SLM y cambió hablantes, actualizar su propiedad
-    if hasattr(detector, "hablantes"):
-        detector.hablantes = hablantes
+    slm = getattr(detector, "slm", detector)
+    if hasattr(slm, "hablantes"):
+        slm.hablantes = hablantes
+    solo_cerradas = getattr(detector, "solo_cerradas", False)
 
     filas_eventos: list[dict] = []
     contextos: list[ContextoLlamada] = []
@@ -284,16 +352,19 @@ def correr_replay(
             # Reinicio de contexto y cola secuencial entre llamadas distintas
             ctx_actual = ContextoLlamada(llamada_id=act.llamada_id)
             contextos.append(ctx_actual)
+            if solo_cerradas:
+                detector.reiniciar()
 
         # 1. Aplicar al contexto incremental
         lineas_disponibles = ctx_actual.aplicar(act, hablantes)
 
         # 2. Determinar si se dispara el detector
         debe_evaluar = (disparo == "parcial") or (act.tipo == "final")
+        foto = tuple(ctx_actual.cerrados) if solo_cerradas else lineas_disponibles
 
-        if debe_evaluar:
+        if debe_evaluar and foto:
             # Pasar únicamente lo disponible hasta el instante actual
-            respuesta = detector.evaluar(lineas_disponibles)
+            respuesta = detector.evaluar(foto)
             inicio_eval_s, fin_eval_s, espera_cola_ms, es_aviso, t_a = ctx_actual.registrar_evaluacion(
                 act, respuesta, lineas_disponibles
             )
@@ -377,17 +448,17 @@ def guardar_manifiesto(
         },
         "config": {
             "detector": detector_nombre,
-            "modelo": modelo if detector_nombre == "slm" else None,
-            "prompt": prompt if detector_nombre == "slm" else None,
+            "modelo": modelo if detector_nombre in DETECTORES_CON_MODELO else None,
+            "prompt": prompt if detector_nombre in DETECTORES_CON_MODELO else None,
             "hablantes": hablantes,
             "disparo": disparo,
             "politica": POLITICA,
-            "seed": seed if detector_nombre == "slm" else "no-aplica",
+            "seed": seed if detector_nombre in DETECTORES_CON_MODELO else "no-aplica",
         },
         "codigo": info_codigo(),
         "hardware": info_maquina(),
     }
-    if detector_nombre == "slm":
+    if detector_nombre in DETECTORES_CON_MODELO:
         manifiesto["carga"] = carga
     if asr_meta:
         manifiesto["asr_meta"] = asr_meta
@@ -422,8 +493,8 @@ def guardar_resumen(
     tiempo_total_ms = sum(ms_valores) if ms_valores else 0.0
     tiempo_promedio_ms = (tiempo_total_ms / len(ms_valores)) if ms_valores else 0.0
 
-    modelo_str = modelo if detector_nombre == "slm" else "no-aplica"
-    prompt_str = prompt if detector_nombre == "slm" else "no-aplica"
+    modelo_str = modelo if detector_nombre in DETECTORES_CON_MODELO else "no-aplica"
+    prompt_str = prompt if detector_nombre in DETECTORES_CON_MODELO else "no-aplica"
 
     lineas_md = [
         "# Resumen de corrida replay",
@@ -543,9 +614,9 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument(
         "--detector",
-        choices=["reglas", "slm"],
+        choices=["reglas", "slm", "tito-slm"],
         required=True,
-        help="Detector a utilizar: 'reglas' (comparador) o 'slm' (modelo local).",
+        help="Detector a utilizar: 'reglas' (comparador), 'slm' (modelo local) o 'tito-slm' (Tito viejo deriva al modelo local).",
     )
     parser.add_argument(
         "--modelo",
@@ -616,7 +687,7 @@ def main() -> None:
         actualizaciones = cargar_caso_texto(ruta_entrada)
 
     hablantes = args.hablantes
-    tiene_canales = any(a.canal in ("A", "B") for a in actualizaciones)
+    tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
     if not tiene_canales and hablantes == "ab":
         print(
             "[replay] Aviso: las actualizaciones no contienen canales de hablante (canal=null); usando hablantes='sin'.",

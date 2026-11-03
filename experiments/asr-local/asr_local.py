@@ -6,7 +6,7 @@ Transcribe audio por bloques emitiendo el contrato compartido en JSONL
 manifiesto.json y generando un resumen en resumen.md.
 
 Uso:
-    python asr_local.py <audio.wav> --salida <dir> [--motor sherpa-zipformer|whisper]
+    python asr_local.py <audio.wav> --salida <dir> [--motor sherpa-zipformer|sherpa-parakeet|whisper-frases|whisper]
                         [--hilos N] [--bloque-ms 100] [--simular-tiempo-real | --rapido]
                         [--referencia <texto.txt>] [--canal A|B]
 """
@@ -26,7 +26,7 @@ from typing import Any
 
 import numpy as np
 
-from motores import MotorASR, MotorFasterWhisper, MotorSherpaZipformer
+from motores import MotorASR, MotorFasterWhisper, MotorSherpaParakeet, MotorSherpaZipformer, MotorWhisperPorFrases
 from wer import (
     analizar_errores_clave,
     calcular_cer,
@@ -435,6 +435,10 @@ def crear_motor(
             modelo_dir_o_repo=modelo,
             hilos=hilos,
         )
+    elif motor_nombre == "sherpa-parakeet":
+        return MotorSherpaParakeet(modelo_custom or MotorSherpaParakeet.MODELO_POR_DEFECTO, hilos=hilos)
+    elif motor_nombre == "whisper-frases":
+        return MotorWhisperPorFrases(modelo_custom or "large-v3-turbo", hilos=hilos)
     elif motor_nombre == "whisper":
         tamanio = modelo_custom or "base"
         return MotorFasterWhisper(
@@ -453,7 +457,7 @@ def main() -> None:
     parser.add_argument("--salida", required=True, help="Directorio para guardar salidas.")
     parser.add_argument(
         "--motor",
-        choices=["sherpa-zipformer", "whisper"],
+        choices=["sherpa-zipformer", "sherpa-parakeet", "whisper-frases", "whisper"],
         default="sherpa-zipformer",
         help="Motor de ASR a utilizar (defecto: sherpa-zipformer).",
     )

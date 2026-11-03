@@ -92,6 +92,8 @@ Cada información tiene **una sola fuente de verdad**. Usar esta tabla para sabe
 
 ## Convenciones
 
+- **Abrir o levantar la demo local:** leer primero [README.md §4](README.md#4-demo-local-de-llamadas-luciano), verificar la copia de trabajo del proceso que ocupa el puerto y contrastar el HTML servido con el de la copia indicada antes de entregar el enlace.
+
 - **Archivos:** los documentos de proceso en `MAYUSCULAS-CON-GUION.md`; bitácoras
   `AAAA-MM-semana-NN.md`; seguimientos `AAAA-MM-DD.md`; ADRs `NNNN-titulo.md` con cuatro dígitos.
 - **Fechas:** siempre absolutas (`2026-09-02`), nunca "la semana pasada".
