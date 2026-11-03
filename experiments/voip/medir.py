@@ -22,8 +22,9 @@ FIN_PEDIDO_S = 17.6
 class Medicion(Servidor):
     """Usa la fuente y entrada de #77; al terminar espera la evaluación en curso."""
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, args, *resto, **kwargs):
+        args.asr = "zipformer"  # el motor de crear_motor: que el manifiesto y el umbral digan el que se usa
+        super().__init__(args, *resto, **kwargs)
         self.carpeta: Path | None = None
 
     def crear_motor(self):

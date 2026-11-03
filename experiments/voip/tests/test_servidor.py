@@ -15,7 +15,7 @@ from websockets.asyncio.server import serve
 
 from test_llamada import Reloj, RespuestaFalsa, pcm
 from motores import MotorFalso
-from servidor import Servidor
+from servidor import ASR_POR_DEFECTO, DIR_VOIP, Servidor
 import replay as replay_mod
 from casos import Linea
 
@@ -179,6 +179,13 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         llamada.contexto.cerrados.append(Linea(hablante="A", texto=texto))
         llamada.foto = tuple(llamada.contexto.cerrados)
         llamada.disparos += 1
+
+    def test_arranca_con_la_opcion_b(self):
+        self.assertEqual(ASR_POR_DEFECTO, "parakeet-filtro")
+        self.assertEqual(self.servidor.config_asr[1], 0.008)
+        panel = (DIR_VOIP / "panel.html").read_text(encoding="utf-8")
+        self.assertIn('<option value="parakeet-filtro" selected>', panel)
+        self.assertIn("CORTE_INICIAL_S = 0.8;", (DIR_VOIP / "corte-silencio.mjs").read_text(encoding="utf-8"))
 
     async def test_al_cerrar_termina_la_consulta_en_curso_y_evalua_la_frase_pendiente(self):
         empezo, seguir, vistas = threading.Event(), threading.Event(), []
@@ -751,13 +758,13 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             await panel.send(self.inicio())
             inicio = await self.evento(panel, "inicio")
             self.assertEqual(inicio["corte_silencio_s"], "auto")
-            self.assertEqual(inicio["umbral_rms_silencio"], 0.003)
+            self.assertEqual(inicio["umbral_rms_silencio"], 0.008)
             nivel = (await self.evento(panel, "niveles"))["canales"]
-            self.assertTrue(all(c["umbral_rms_silencio"] == 0.003 for c in nivel.values()))
+            self.assertTrue(all(c["umbral_rms_silencio"] == 0.008 for c in nivel.values()))
             await panel.send(json.dumps({"tipo": "terminar"}))
             fin = await self.evento(panel, "fin")
             m = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
-            self.assertEqual(m["config"]["umbral_rms_silencio"], 0.003)
+            self.assertEqual(m["config"]["umbral_rms_silencio"], 0.008)
             self.assertTrue(m["config"]["endpoint_nativo"])
 
     async def test_rms_con_filtro_silero_corta_a_0008_en_la_llamada(self):

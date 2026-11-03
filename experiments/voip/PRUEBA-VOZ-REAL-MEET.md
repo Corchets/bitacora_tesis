@@ -60,7 +60,7 @@ python cliente.py --servidor ws://localhost:8771 --rol otra --wav <llamada>/este
 - [ ] El servidor anda: `curl http://localhost:8765/detector` dice `tito-slm` y `gemma4:e2b-it-q4_K_M`. **Con el tag completo:** `gemma4:e2b` a secas es otro artefacto.
 - [ ] `ollama list` muestra para ese tag el digest `b37049369adf…`, el de la matriz #101.
 - [ ] La copia del servidor tiene la marca de Tito en Presentación (commit `feat(voip): marcar en Presentación…`) y recargaste la página.
-- [ ] Panel: lo de [Qué se prueba](#qué-se-prueba), con la opción de esa ronda. El corte arranca en 0,9 s: **hay que escribirlo a mano** al empezar cada ronda.
+- [ ] Panel: lo de [Qué se prueba](#qué-se-prueba), con la opción de esa ronda. El corte arranca en 0,8 s, el de la opción B: para la A **hay que escribirlo a mano** al empezar la ronda.
 - [ ] **Una llamada de ensayo con D3, antes de grabar en serio.** Parakeet con E2B anduvo con un ejemplo TTS el 2026-11-02, pero con voz por Meet no se midió. Si la Mac entra en swap o crecen las salteadas, pará y anotalo: no cambies de opción dentro de una ronda.
 - [ ] **Si pasaron más de 10 minutos sin consultas, correr antes el ejemplo `SC-WA-CODE-01`:** Ollama descarga el modelo a los 10 min y el panel no lo recalienta al iniciar. Sin esto, la primera consulta sale en frío, justo cuando Tito activa.
 

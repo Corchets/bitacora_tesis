@@ -46,6 +46,7 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(m["detector"]["segundos_detector"]["mediana"], 1.25)
             self.assertIsNone(m["estereo"])
             self.assertEqual(m["medicion"]["escenario"], "SC-WA-CODE-01")
+            self.assertEqual((m["config"]["asr"], m["config"]["umbral_rms_silencio"]), ("zipformer", 0.003))
             texto = resumir(m)
             self.assertIn("CUMPLE", texto)
             self.assertIn("1,250 s", texto)
