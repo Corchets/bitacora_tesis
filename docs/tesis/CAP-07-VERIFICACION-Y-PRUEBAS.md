@@ -1,4 +1,4 @@
-> **Estado: borrador.** Redactado el 2026-10-17 sobre la rama laboratorio-luciano; requiere revisión del equipo.
+> **Estado: borrador del 2026-11-03.** El inventario se actualizó ese día. El detalle por prueba de §7.2.1 y las corridas de §7.4 corresponden a la primera integración, del 2026-10-17, con Zipformer y TTS; §7.4.3 agrega la configuración final. Requiere revisión del equipo.
 
 # Capítulo 7: Verificación y pruebas de software
 
@@ -45,17 +45,19 @@ flowchart TD
 
 ## 7.2. Inventario de pruebas automatizadas por módulo
 
-La suite de pruebas del proyecto comprende **74 casos de prueba automatizados**, todos ejecutables de manera reproducible mediante `python -m unittest` sin requerir bibliotecas externas ni servicios de red activos.
+La suite comprende **810 casos en Python** y **13 en Node**, ejecutables sin red ni modelos reales. El 2026-11-03 pasaron todos, con 3 omitidos en `slm-directo`, que dependen de si la copia tiene la reserva.
 
-En la siguiente tabla se detalla el conteo real y la distribución de las pruebas por carpeta:
+| Módulo | Directorio | Tests | Resultado |
+|---|---|:---:|---|
+| **Slm-directo y Tito** | `experiments/slm-directo/tests/` | **448** | OK, 3 omitidos |
+| **ASR local** | `experiments/asr-local/tests/` | **223** | OK |
+| **Llamada en vivo** | `experiments/voip/tests/` | **88** (Python) y **7** (Node) | OK |
+| **Métricas** | `experiments/metricas/tests/` | **28** | OK |
+| **Replay y contexto** | `experiments/replay/tests/` | **23** | OK |
+| **Roles del visor** | `experiments/slm-directo/tests/roles-casos.test.mjs` | **3** (Node) | OK |
+| **Ayuda memoria** | `ayuda-memoria/scripts/` | **3** (Node) | OK |
 
-| Módulo | Directorio de tests | Archivo principal | Cantidad de tests | Comando de ejecución |
-|---|---|---|:---:|---|
-| **Replay & Contexto** | `experiments/replay/tests/` | `test_replay.py` | **11** | `python3 -m unittest discover -s experiments/replay/tests -v` |
-| **SLM Directo** | `experiments/slm-directo/tests/` | `test_ensayo.py` | **30** | `python3 -m unittest discover -s experiments/slm-directo/tests -v` |
-| **Métricas** | `experiments/metricas/tests/` | `test_metricas.py` | **25** | `python3 -m unittest discover -s experiments/metricas/tests -v` |
-| **ASR Local** | `experiments/asr-local/tests/` | `test_asr_local.py` | **8** | `.venv/bin/python -m unittest discover -s experiments/asr-local/tests -v` |
-| **Total del sistema** | — | — | **74** | **100 % pruebas pasando (OK)** |
+Las pruebas no se ejecutan contra Android: comprueban la lógica, no el rendimiento.
 
 ### 7.2.1. Detalle de suites de prueba
 
@@ -154,6 +156,18 @@ Se ejecutó la integración de punta a punta sobre la simulación de streaming e
 
 ---
 
+### 7.4.3. Configuración final con voz real
+
+Sobre la configuración final hubo tres comprobaciones, todas en la M1 de 8 GB:
+
+- **[Tito viejo con Gemma 4 en el panel](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md):** con ejemplos TTS, dos estafas con aviso y una legítima sin aviso.
+- **[Corrida por Meet](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md):** nueve llamadas guionadas con dos voces, sin fallos del detector y con una sola frase salteada en 18 pasadas.
+- **[Replay de la llamada 1](../../experiments/voip/corridas/2026-11-02-voz-real-meet/replay-llamada-1/resumen.md):** misma activación de Tito y misma frase citada que en vivo. La diferencia de 1,9 s en `T_A` es la demora de la consulta.
+
+Según informó Luciano Grosso, participó otro integrante del equipo. La integración (#28) se cerró el 2026-11-03 por decisión de Luciano Grosso con esa corrida como evidencia. **No quedó registrado** que otra persona reproduzca una estafa y una legítima por replay, revise un error y contraste el aviso con una referencia: solo se hizo replay de una estafa y todavía no hay marcas humanas.
+
+**Sin automatizar:** la captura real por Meet, el ensayo en la sala de la defensa y cualquier medición en teléfono.
+
 ## 7.5. Requisitos no funcionales medidos y su procedencia
 
 Los requisitos no funcionales del sistema fueron contrastados contra los gates de aceptación definidos en [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md). Los datos reportados provienen de manifiestos reales generados por el código:
@@ -165,6 +179,9 @@ Los requisitos no funcionales del sistema fueron contrastados contra los gates d
 | **Memoria residente ($RSS$) en SLM** | Pico conjunto $\le 1024\ \text{MB}$ en perfil alto | **$545\ \text{MB}$** (0.8B) / **$2.2\ \text{GB}$** (2B) / **$2.9\ \text{GB}$** (4B) | Ollama en PC x86_64 GPU/CPU (`experiments/slm-directo/corridas/`) | **0.8B cumple; 2B/4B no cumplen** |
 | **Latencia por turno (SLM en CPU)** | $p95 \le 1.5\ \text{s}$ (objetivo); $> 2.0\ \text{s}$ inaceptable | Mediana **$3.9\ \text{s}$**, $p95 = \mathbf{7.3\ \text{s}}$ (0.8B); Mediana **$8.2\ \text{s}$**, $p95 = \mathbf{13.0\ \text{s}}$ (2B) | PC x86_64 CPU 2 hilos (`experiments/slm-directo/corridas/2026-10-14_191429_cpu-2hilos/`) | **No cumple** (degradado, excede techo) |
 | **Latencia por turno (Reglas)** | $p95 \le 1.5\ \text{s}$ | Mediana **$7\ \text{ms}$**, $p95 = \mathbf{18\ \text{ms}}$ | PC Windows x86_64 (`2026-10-13_224418_linea-base-reglas`) | **Cumple con holgura** |
+| **Configuración final: ritmo del ASR** | $RTF < 1.00$ | **$0.088$** (Parakeet, opción B) | Offline en Apple M1, 8 GB ([medición](../../experiments/asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md)) | **Cumple** |
+| **Configuración final: memoria** | $\le 512\ \text{MB}$ a $1024\ \text{MB}$ | ASR **$1036\ \text{MB}$**; Tito **$0.48\ \text{GB}$**; archivo de E2B **$4.59\ \text{GB}$**; swap de 4,5–4,7 GB | Apple M1, 8 GB | **No cumple**; el tutor reorientó la referencia a la gama más alta |
+| **Configuración final: latencia por consulta** | $p95 \le 1.5\ \text{s}$; $> 2.0\ \text{s}$ inaceptable | Mediana **$3.74\ \text{s}$**, $p95 = \mathbf{4.53\ \text{s}}$ (E2B); unos 30 ms sin consulta (Tito) | Apple M1, 8 GB, 5 corridas ([#84](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84)) | **No cumple**; el aviso llegó a tiempo en esas corridas |
 | **Dependencias y conectividad** | Sin conexiones salientes en la llamada | Inferencia local verificada | Inferencia ASR local en disco y detector conectado a Ollama en `127.0.0.1` (`cliente_ollama.py`); no se midió el tráfico de red | **No evaluado con captura de paquetes** |
 
 > **Declaración metodológica de procedencia:** Las mediciones de $RTF$, latencia y memoria física fueron obtenidas en estaciones de trabajo de laboratorio (Apple M1 de 8 GB y PC x86_64). En estricto cumplimiento de la regla de conclusión de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), **estos resultados demuestran prefactibilidad en laboratorio, pero no equivalen a mediciones en procesadores móviles ARM Android**. La evaluación de consumo de batería, degradación por calentamiento térmico (`PowerManager`) y rendimiento en dispositivos móviles reales queda supeditada a la ejecución de la demo Android.
@@ -186,8 +203,10 @@ La siguiente matriz consolida la correspondencia bidireccional entre los requisi
 | **RF-07** | Respuestas inválidas de modelos tratadas como fallo y no como voto negativo. | Funcional | `test_fallo_no_cuenta_como_prediccion` y `test_salidas_invalidas_son_fallos` | Cumple: JSON roto o timeout registra fallo y no bloquea alertas posteriores. |
 | **RF-08** | Verificación adversarial de citas de evidencia para evitar alucinaciones. | Funcional | `test_evidencia_inventada_o_futura_no_es_textual` | Cumple: marca `evidencia_en_texto = False` si el modelo cita frases no pronunciadas. |
 | **RF-09** | Salida forzada bajo esquema estructurado JSON. | Funcional | `test_el_pedido_lleva_esquema_temperatura_y_contexto` | Cumple: valida tipos y presencia de `riesgo`, `alerta_sugerida`, `motivo`, `evidencia`. |
-| **RNF-01** | Ritmo de procesamiento sostenido ($RTF < 1.00$). | No funcional | Corrida de humo Zipformer (`experiments/asr-local/corridas/`) | Cumple: $RTF = 0.103$ a $0.171$ en Apple M1. |
-| **RNF-02** | Huella de memoria en gama media ($\le 512\ \text{MB}$). | No funcional | Medición RSS con `resource.getrusage` en ASR | Cumple en ASR ($357\ \text{MB}$); 0.8B SLM cumple en PC ($545\ \text{MB}$); 2B excede ($2.2\ \text{GB}$). |
-| **RNF-03** | Latencia por turno en tiempo real ($p95 \le 1.5\ \text{s}$). | No funcional | Corrida en CPU 2 hilos (`experiments/slm-directo/corridas/`) | No cumple en SLM CPU ($p95 = 7.3\ \text{s}$ a $13.0\ \text{s}$); cumple en reglas ($18\ \text{ms}$). |
+| **RF-10** | Separación por canal, sin suponer quién habla primero. | Funcional | `test_servidor.py`, `test_llamada.py` | Cumple en pruebas; en la corrida por Meet los canales se usaron por rol. |
+| **RF-11** | Aviso con motivo, cita y rol de cada persona. | Funcional | `conversacion.test.mjs`, `presentacion_ui.py` | Cumple (#104, #110–#115). |
+| **RNF-01** | Ritmo de procesamiento sostenido ($RTF < 1.00$). | No funcional | [Medición con voz real](../../experiments/asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md) | Cumple en ASR: $RTF = 0.088$ en Apple M1. Falta el $RTF$ conjunto. |
+| **RNF-02** | Huella de memoria acotada (original: $\le 512\ \text{MB}$). Con la configuración final, **no cumple**: ver §7.5. | No funcional | Medición RSS con `resource.getrusage` en ASR. Medición histórica con Zipformer: | Cumple en ASR ($357\ \text{MB}$); 0.8B SLM cumple en PC ($545\ \text{MB}$); 2B excede ($2.2\ \text{GB}$). |
+| **RNF-03** | Latencia por turno en tiempo real ($p95 \le 1.5\ \text{s}$). Con E2B, **no cumple**: $p95 = 4.53\ \text{s}$ (§7.5). | No funcional | Medición histórica en CPU 2 hilos (`experiments/slm-directo/corridas/`) | No cumple en SLM CPU ($p95 = 7.3\ \text{s}$ a $13.0\ \text{s}$); cumple en reglas ($18\ \text{ms}$). |
 | **RNF-04** | Privacidad on-device y descarte en memoria volátil. | No funcional | Inferencia local verificada en código (`cliente_ollama.py` en `127.0.0.1`) y ciclo de vida en memoria | Cumple en arquitectura; no se midió el tráfico de red en ejecución. |
 | **RNF-05** | Reproducibilidad criptográfica de experimentos. | No funcional | Manifiestos con SHA-256 de audios, prompts y git commit | Cumple: todas las corridas almacenan hash de entradas y entorno en `manifiesto.json`. |

@@ -7,6 +7,7 @@ según el [checklist](../PRUEBA-VOZ-REAL-MEET.md).
 > Son nueve llamadas guionadas con dos voces en una notebook: muestran si el recorrido anda con voz real.
 > **No son rendimiento del detector ni resuelven [D09](../../../docs/gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector).**
 > **Decisión de Luciano (2026-11-02):** opción B. Los cierres se publicaron con su ok ese mismo día.
+> **Actualización (2026-11-03):** D09 se resolvió con la opción B y E2B en [ADR 0001](../../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Estas llamadas muestran que el recorrido anda; siguen sin medir rendimiento.
 
 ## Condiciones
 
@@ -134,7 +135,7 @@ El 2026-11-02, con los resultados ya publicados, se borró la copia `tito-gemma-
 
 - **Perdido:** los WAV de las 9 llamadas, de los 2 plan B (`195151-581577`, `195254-920374`) y de las tomas fuera de resultados de los [desvíos](#condiciones). También cualquier otro archivo ignorado de esa copia: ya no se puede saber cuáles había.
 - **Sigue en Git:** registros, transcripciones, detecciones y manifiestos de estas [salidas](2026-11-02-voz-real-meet), además de la [medición de A contra B](../../asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md). Los resultados de este informe no cambian, pero esa medición no se puede repetir con los archivos originales.
-- **Recuperación intentada el 2026-11-02, sin resultado:** búsqueda por id en la carpeta de usuario y los temporales, papelera, archivos todavía abiertos, snapshots del volumen de datos (no hay) y Time Machine (sin configurar). El disco es un SSD con APFS y FileVault, así que no se intentó recuperar bloques borrados. Falta preguntar si alguien más recibió una copia: la [checklist](../PRUEBA-VOZ-REAL-MEET.md#antes-de-citar-a-la-otra-persona) prevé que el audio quede bajo resguardo de Mateo y no hay registro de que se le haya entregado.
+- **Recuperación intentada el 2026-11-02, sin resultado:** búsqueda por id en la carpeta de usuario y los temporales, papelera, archivos todavía abiertos, snapshots del volumen de datos (no hay) y Time Machine (sin configurar). El disco es un SSD con APFS y FileVault, así que no se intentó recuperar bloques borrados. Mateo no tiene copia (informado por Luciano, 2026-11-03): la [checklist](../PRUEBA-VOZ-REAL-MEET.md#antes-de-citar-a-la-otra-persona) prevé que el audio quede bajo resguardo de Mateo y no hay registro de que se le haya entregado.
 
 **Lo que queda del audio.** Al pasar cada llamada por la otra opción, el servidor volvió a guardar lo que recibió. Esas regrabaciones están en `~/bitacora_tesis-voz-real-otra-opcion/`, fuera de Git y solo en esta Mac:
 
@@ -151,6 +152,8 @@ El 2026-11-02, con los resultados ya publicados, se borró la copia `tito-gemma-
 | 9 | `193107-631798` | B | `b/2026-11-02_201445-964262/estereo.wav` |
 
 No son los archivos originales: no quedó con qué compararlos byte a byte. Según los manifiestos, el canal de la protegida dura entre 0,06 y 0,15 s más y el inicio de cada canal cambia hasta 0,15 s. Una medición nueva sobre ellas debe aclararlo y no reemplaza a las de este informe. Esa carpeta también guarda el audio de las comprobaciones del cierre, y no tiene copia de los 2 plan B.
+
+**Copia del 2026-11-03.** Por pedido de Luciano, esa carpeta y `experiments/voip/llamadas/` de `laboratorio-luciano` se copiaron a `~/respaldos/tesis-audio-voz-real-2026-11-02/`: 75 archivos, 17 WAV, 45 MB, comparados con `diff -r` y con `SHA256SUMS.txt`. No sincroniza con iCloud y los originales siguen en su lugar. **Sigue siendo la misma Mac:** protege de borrar una copia de trabajo, no de perder el disco. El resguardo a cargo de Mateo sigue pendiente.
 
 ## Lo que queda a la vista
 

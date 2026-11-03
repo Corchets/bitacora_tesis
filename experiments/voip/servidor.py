@@ -55,13 +55,13 @@ DIR_PARAKEET = DIR_MODELOS / "sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8"
 MODELO_SILERO = DIR_MODELOS / "silero-vad" / "silero_vad.onnx"
 URL_SILERO = "https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/silero_vad.onnx"
 
-# Modelos de ASR que se pueden elegir desde el panel. Por defecto, la opción B que eligió Luciano (asr-local/PLAN-VOZ-REAL.md §12.9). Whisper no está:
+# Modelos de ASR que se pueden elegir desde el panel. Por defecto, la opción B, final desde ADR 0001 (asr-local/PLAN-VOZ-REAL.md §12.9). Whisper no está:
 # solo transcribe al cerrar la frase y la demo tiene que ir escribiendo mientras se habla.
 ASR_POR_DEFECTO = "parakeet-filtro"
 MODELOS_ASR = {
-    "zipformer": "Zipformer Kroko · streaming",
+    "zipformer": "Zipformer Kroko · antecedente",
     "parakeet": "Parakeet TDT 0.6B v3 · por frases",
-    "parakeet-filtro": "Parakeet · RMS con filtro Silero",
+    "parakeet-filtro": "Parakeet · RMS con filtro Silero · final",
     "parakeet-y": "Parakeet · RMS y Silero",
     "parakeet-silero": "Parakeet · solo Silero",
 }
@@ -98,7 +98,7 @@ def validar_corte(valor) -> str | float:
 
 
 # Detectores que se pueden elegir desde el panel: los dos mejores de la matriz #101 con Tito viejo,
-# más las reglas como respaldo sin modelo. Es la opción de la demo; no resuelve D09.
+# más las reglas como respaldo sin modelo. E2B es la configuración final (ADR 0001); E4B queda para comparar.
 # Tags completos: «gemma4:e2b» a secas baja otro artefacto según la plataforma (MLX en Mac), no el medido.
 DETECTOR_POR_DEFECTO = "gemma4:e2b-it-q4_K_M"
 DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "gemma4:e4b-it-q4_K_M", "reglas")
@@ -602,7 +602,8 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Servidor de llamada en vivo con ASR por canal y detector.")
     p.add_argument("--host", default="0.0.0.0", help="0.0.0.0 para recibir de otras notebooks de la red")
     p.add_argument("--puerto", type=int, default=8765)
-    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), required=True)
+    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="tito-slm",
+                   help="por defecto, la configuración final: Tito viejo deriva a Gemma 4 E2B (ADR 0001)")
     p.add_argument("--modelo", default=DETECTOR_POR_DEFECTO)
     p.add_argument("--prompt", default="tarea")
     p.add_argument("--seed", type=int, default=42)

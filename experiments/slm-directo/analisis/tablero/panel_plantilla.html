@@ -76,7 +76,7 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <body>
 <header>
   <div class="top"><h1>Detección incremental de vishing · panel del proyecto</h1>
-  <span class="mu">rama <code>laboratorio-luciano</code> · material de desarrollo (casos escritos sin revisión humana y audio TTS), no test · D07, D08, D09 y D11 abiertas</span></div>
+  <span class="mu">rama <code>laboratorio-luciano</code> · material de desarrollo (casos escritos sin revisión humana y audio TTS), no test · D07, D08 y D11 abiertas · D09 resuelta el 2026-11-03</span></div>
   <nav id="nav"></nav>
 </header>
 <main>
@@ -84,12 +84,22 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <!-- ============================ RESUMEN ============================ -->
 <section id="s-resumen" data-titulo="Resumen y opinión">
 <h2>Cómo va el proyecto</h2>
-<p class="mu">Avances de la demo actualizados al 2026-10-28. La síntesis del detector que sigue conserva su corte del 2026-10-23; las cifras se consultan en Resultados y en sus corridas. La demo local actual vive en <code>luciano/voip-asr-94</code> (<code>a37b47e</code>); este tablero, en <code>laboratorio-luciano</code>.</p>
+<p class="mu">Actualizado al 2026-11-03. La síntesis del detector de abajo conserva su corte del 2026-10-23: es el antecedente de la elección. Este tablero y la demo viven en <code>laboratorio-luciano</code>.</p>
+<div class="card"><b class="ok">Configuración final elegida · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md">ADR 0001</a></b>
+<p><b>ASR:</b> Parakeet TDT 0.6B v3 con corte RMS 0,8 s / 0,008 y filtro Silero (opción B). <b>Detector:</b> Tito viejo como compuerta de Gemma 4 E2B, con aviso único. Es lo que arranca por defecto en el servidor y en el panel.</p>
+<p><b>Lo que la sostiene:</b> 10/10 estafas y 0/10 falsas alarmas en la matriz #101, la única combinación con ese resultado, y 7/7 estafas y 0/2 legítimas en 9 llamadas guionadas por Meet. Son datos de desarrollo: 20 casos sintéticos que sirvieron para elegir entre 10 modelos, y 4 guiones con 2 voces. <b>No estiman el rendimiento final.</b></p>
+<p><b>Lo que no cumple:</b> E2B tarda 3,74 s de mediana por consulta en la M1 (criterio: menos de 2 s), y no hay ninguna medición en teléfono.</p>
+</div>
+<div class="grid3">
+  <div class="card"><b class="ok">✔ Hecho</b><p class="chico">Recorrido de punta a punta con voz real por Meet (#84, #85, #86, #94, cerrados). Veredicto de la familia cross-encoder (#123). Borrador del informe completo, capítulos 0 a 11: ver la pestaña Informe.</p></div>
+  <div class="card"><b class="bad">✘ Falta lo central</b><p class="chico">Test reservado sin correr (#52). Ninguno de los 350 casos tiene revisión humana. Piloto con voz y anotación independiente pendientes (#54, #32). D07 y D08 abiertas (#33).</p></div>
+  <div class="card"><b class="warn">⚠ Fechas</b><p class="chico">Todo al 90 % el 2026-11-15, terminado el 2026-11-30, entrega y presentación del 7 al 11 de diciembre. El audio de la corrida por Meet se perdió; quedan regrabaciones solo en esta Mac y Mateo no tiene copia.</p></div>
+</div>
 <div class="card"><b>Demo de llamada en vivo · avance de Luciano al 2026-10-28</b>
 <p>Implementados: iniciar y terminar desde el navegador; audio por persona desde micrófono, Meet, WhatsApp/BlackHole o ejemplo TTS; ASR incremental, volumen por canal, evaluación del detector por frase y aviso con tono desactivable. El corte de silencio visible es numérico, de 0,1–3,0 s. «Probar el ASR» permite borrar sin cortar el micrófono y guardar «Lo que dije en realidad» por frase; Terminar conserva el último audio pendiente; el Historial compara dos registros y permite borrarlos con confirmación (#75, #87, #89–#93).</p>
-<p><b>Alerta con roles (#104), en la rama <code>luciano/voip-spike</code>:</b> la cita muestra «Persona protegida» / «Otra persona», según el canal, sin asumir quién habló primero. Conserva el texto y el tiempo del aviso. Verificado con pruebas de JavaScript y Python y con datos sintéticos a 1280 y 1920 px. Pendiente de integrar en <code>luciano/voip-asr-94</code>.</p>
-<p><b>Pendiente:</b> ensayo con dos personas en Meet/WhatsApp (#80), medición en la notebook de demo (#84), ensayo en sala (#86), estudio del ASR con voz real (#94) e integración Tito→SLM (#85). La captura de Meet/WhatsApp no cierra D05; tampoco se cierran D06, D08 ni D09.</p>
-<p><a href="http://localhost:8765/">Abrir la demo local</a> · <a href="http://127.0.0.1:4173/?vista=roadmap">Ayuda memoria local</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/a37b47e/experiments/voip/README.md">Código y uso de la demo</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/a37b47e/experiments/voip/corridas/2026-10-28-correcciones-panel.md">Bitácora y evidencia</a></p>
+<p><b>Alerta con roles (#104):</b> la cita muestra «Persona protegida» / «Otra persona», según el canal, sin asumir quién habló primero. Conserva el texto y el tiempo del aviso. Verificado con pruebas de JavaScript y Python y con datos sintéticos a 1280 y 1920 px. Integrada en <code>laboratorio-luciano</code> y <code>laboratorio-main</code>.</p>
+<p><b>Al 2026-11-02:</b> se integró Tito→SLM y se hizo la corrida por Meet con dos personas. WhatsApp Desktop quedó afuera y la demo va por pestaña de Chrome. <b>Pendiente:</b> confirmar el ensayo en sala y grabar el video de respaldo.</p>
+<p><a href="http://localhost:8765/">Abrir la demo local</a> · <a href="http://127.0.0.1:4173/?vista=roadmap">Ayuda memoria local</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/experiments/voip/README.md">Código y uso de la demo</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/experiments/voip/corridas/2026-11-02-voz-real-meet.md">Corrida por Meet</a></p>
 </div>
 <div class="grid3">
   <div class="card"><b class="ok">✔ La base técnica está bien hecha</b><p class="chico">Pipeline incremental (ASR → contexto → cola → detector → aviso único), replay que mide la demora real, métricas con intervalos de confianza, manifiestos reproducibles y 86 tests. Eso es defendible y se reutiliza para todo lo que sigue.</p></div>
@@ -117,12 +127,14 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <h3>Lo que respondió el tutor (2026-10-28)</h3>
 <ol class="preguntas-tutor">
 <li><b>JEV vía API · D03</b><p>Descartado por completo: no entra ni como techo experimental ni como modo híbrido. La inferencia sigue siendo 100 % local.</p></li>
-<li><b>Demo con Meet/WhatsApp · D05</b><p>Aprobada como demo de la defensa, con la llamada de ejemplo como plan B.</p><p class="chico mu">Faltan los ensayos con dos personas (#80) y en sala (#86).</p></li>
-<li><b>Meta de calidad · D08</b><p>80–85 % de estafas avisadas con 10–15 % de falsas alarmas, medido sobre <b>todas</b> las estafas. El aviso no puede saltar por frases sueltas («código», «transferime plata», «decime la contraseña») en conversaciones que no son estafa.</p><p class="chico mu">Ignacio y Evaristo trabajan en esas falsas alarmas.</p></li>
+<li><b>Demo con Meet/WhatsApp · D05</b><p>Aprobada como demo de la defensa, con la llamada de ejemplo como plan B.</p><p class="chico mu">El ensayo con dos personas por Meet se hizo. WhatsApp Desktop quedó afuera. Falta confirmar el ensayo en sala.</p></li>
+<li><b>Meta de calidad · D08</b><p>80–85 % de estafas avisadas con 10–15 % de falsas alarmas, medido sobre <b>todas</b> las estafas. El aviso no puede saltar por frases sueltas («código», «transferime plata», «decime la contraseña») en conversaciones que no son estafa.</p><p class="chico mu">La configuración final tuvo 0/10 falsas alarmas en desarrollo; se mide en el test reservado.</p></li>
 <li><b>Hardware · D09</b><p>La gama más alta de teléfonos disponible a la fecha, sin escatimar recursos; optimizar para gamas menores después.</p><p class="chico mu">Falta citar la RAM de los modelos de referencia desde el fabricante.</p></li>
 <li><b>Voces del equipo · D06</b><p>Se pueden grabar con el esquema de consentimiento entre adultos y resguardo local.</p><p class="chico mu">Antes, completar fuera de Git el domicilio y contacto de los consentimientos.</p></li>
 <li><b>RoBERTuito · D09</b><p>El tutor no se mete en la arquitectura: retomarlo o no lo decide el equipo.</p></li>
 </ol>
+<h3>Decisión resuelta el 2026-11-03</h3>
+<p><b>D09 · ASR y detector:</b> Parakeet con filtro Silero y Tito viejo con Gemma 4 E2B (<a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md">ADR 0001</a>).</p>
 <h3>Decisiones que siguen abiertas o parciales</h3>
 <table>
 <thead><tr><th scope="col">Decisión</th><th scope="col">Qué falta para cerrarla</th></tr></thead>
@@ -130,7 +142,6 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <tr><th scope="row">D02 · Problema y usuario</th><td>Ratificación del tutor de la formulación acordada por el equipo. Pendiente desde la agenda del 2026-09-30.</td></tr>
 <tr><th scope="row">D07 · Anotación</th><td>Probar el manual entre los cuatro, conservar anotaciones originales, resolver ambigüedades y adjudicar desacuerdos.</td></tr>
 <tr><th scope="row">D08 · Protocolo experimental</th><td>Congelar composición y particiones del corpus, comparadores, ventana de contexto, persistencia, política de alerta, métricas y tratamiento de la incertidumbre antes del test final. Requiere D07 resuelta.</td></tr>
-<tr><th scope="row">D09 · ASR y detector</th><td>Elegir combinación y configuración final con audio humano y mediciones del flujo completo: calidad, falsas alarmas, latencia y memoria.</td></tr>
 <tr><th scope="row">D10 · Entrega y defensa</th><td>Acordar con el tutor índice, anexos, paquete reproducible, duración y demo; especificar el aviso y la evaluación de comprensión con usuarios.</td></tr>
 <tr><th scope="row">D11 · Solo transcripción</th><td>Ratificar entre los cuatro transcripción y contexto de la llamada actual como entradas del detector; dejar rasgos acústicos como trabajo futuro.</td></tr>
 <tr><th scope="row">D12 · Adultos mayores</th><td>Terminar de acordar foco y justificación, con participación en evaluación/usabilidad sin convertirlo en requisito del corpus ni promesa de generalización.</td></tr>
@@ -143,9 +154,9 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <li>Android concreto para la demo y mediciones de rendimiento, batería y temperatura.</li>
 <li>Posibilidad y licencia de publicar el corpus, o solo sus metadatos.</li>
 <li>Técnica estadística final según tamaño y distribución del corpus.</li>
-<li>Discutir entre los cuatro si se agrega «cuánto contexto mira el detector» como eje de PI1 (D04) y revisar los comparadores al cerrar D09.</li>
+<li>Discutir entre los cuatro si se agrega «cuánto contexto mira el detector» como eje de PI1 (D04).</li>
 </ul>
-<p class="nota"><b>Prioridad sugerida:</b> grabar las voces (#94) con los consentimientos completos, bajar las falsas alarmas por frases sueltas y ensayar la demo con dos personas. Es una orientación para conversar.</p>
+<p class="nota"><b>Prioridad sugerida:</b> hacer las llamadas con referencia humana (#54, #32), congelar el protocolo (#33) y correr el test reservado (#52). Es una orientación para conversar.</p>
 <p class="chico mu">Esta pestaña resume las fuentes enlazadas. Las resoluciones se registran en la minuta y en el mapa de decisiones; ninguna casilla del tablero cierra una decisión.</p>
 </section>
 
@@ -178,14 +189,36 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <tr><td>E. Sin llamada: replay estéreo en tiempo real</td><td>Se reproduce una llamada grabada al ritmo real con el mismo panel.</td><td>Sí</td><td>Implementado en el panel (#77)</td><td>No es una llamada en vivo: sirve como plan B.</td></tr>
 </table><p class="chico mu">Ninguna opción usa servicios pagos ni manda el audio a terceros para analizarlo (en D el audio de la llamada pasa por la app elegida, pero el análisis corre en la PC). Los costos son estimaciones sin medir. Lo que se arme para la demo graba cada llamada con el formato del replay, así toda llamada en vivo también se puede medir.</p></div>
 
+<p class="aviso"><b>Al 2026-11-03:</b> el detector y el ASR ya se eligieron (ADR 0001), #50 y #19 están cerrados, y Tito sí entró a la configuración final. Lo que sigue en este plan es el armado original: sus etapas de techo de calidad, afinar y RoBERTuito quedan como antecedente. Lo vigente es corpus y referencia humana, evaluación final e informe.</p>
 <div id="plan"></div>
+</section>
+
+<!-- ============================ INFORME ============================ -->
+<section id="s-informe" data-titulo="Informe">
+<h2>Informe final: borrador al 2026-11-03</h2>
+<p class="mu">Los enlaces abren GitHub, en la rama <code>laboratorio-luciano</code>. Lo pendiente está marcado en el texto entre corchetes. <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/README.md">Índice y estado</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md">ADR 0001</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md">Comparación de candidatos</a></p>
+<div class="card"><table><thead><tr><th>Capítulo</th><th>Estado</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-00-PRELIMINARES.md">Preliminares</a></td><td>Borrador; falta el resultado final</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-01-INTRODUCCION.md">1. Introducción</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-02-MARCO-CONCEPTUAL-Y-ANTECEDENTES.md">2. Marco conceptual y antecedentes</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-03-REQUISITOS-Y-ANALISIS.md">3. Requisitos y análisis</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-04-METODOLOGIA.md">4. Metodología</a></td><td>Con propuestas: D07 y D08 abiertas</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-05-DISENO-Y-ARQUITECTURA.md">5. Diseño y arquitectura</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-06-IMPLEMENTACION.md">6. Implementación</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-07-VERIFICACION-Y-PRUEBAS.md">7. Verificación y pruebas</a></td><td>Borrador actualizado</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md">8. Resultados</a></td><td>Solo desarrollo: falta el test (#52)</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-09-DISCUSION.md">9. Discusión</a></td><td>Parcial: falta el test</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-10-GESTION-DEL-PROYECTO.md">10. Gestión del proyecto</a></td><td>Faltan las contribuciones</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-11-CONCLUSIONES.md">11. Conclusiones</a></td><td>Parcial: falta el test</td></tr>
+</tbody></table></div>
+<p class="nota"><b>Sin escribir:</b> anexos, agradecimientos, índices, referencias unificadas y formato final en A4.</p>
 </section>
 
 <!-- ============================ ARQUITECTURA ============================ -->
 <section id="s-arq" data-titulo="Arquitectura">
 <h2>Arquitectura y archivos</h2>
 <div class="card" id="arq-svg"></div>
-<p class="chico mu">L_R &gt; 0: avisó antes del pedido peligroso. L_C &gt; 0: avisó antes de que la persona cumpliera. Las reglas corren como comparador; el detector propuesto es el SLM directo (#50). La cascada encoder→SLM del spike #29 quedó como alternativa a medir.</p>
+<p class="chico mu">L_R &gt; 0: avisó antes del pedido peligroso. L_C &gt; 0: avisó antes de que la persona cumpliera. Las reglas corren como comparador; el detector final es Tito viejo con Gemma 4 E2B (ADR 0001). El esquema muestra el recorrido. La cascada encoder→SLM del spike #29 quedó como alternativa a medir.</p>
 <h3>Cómo se llegó hasta acá</h3>
 <div class="card"><table id="historia"></table></div>
 <h3>Mapa de archivos</h3>
@@ -195,6 +228,24 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <!-- ============================ RESULTADOS ============================ -->
 <section id="s-res" data-titulo="Resultados">
 <h2>Resultados sobre los casos de desarrollo</h2>
+<div class="card"><b>Matriz #101 · 20 conversaciones sintéticas, sin revisión humana</b>
+<table><thead><tr><th>Modelo</th><th>Directo</th><th>Con Tito viejo</th><th>Con Tito nuevo</th></tr></thead><tbody>
+<tr><td><b>gemma4:e2b (final)</b></td><td>10/10 · 1/10</td><td><b>10/10 · 0/10</b></td><td>2/10 · 0/10</td></tr>
+<tr><td>gemma4:e4b</td><td>10/10 · 1/10</td><td>10/10 · 1/10</td><td>3/10 · 0/10</td></tr>
+<tr><td>qwen3.5:4b</td><td>10/10 · 2/10</td><td>10/10 · 2/10</td><td>3/10 · 0/10</td></tr>
+<tr><td>gemma3n:e2b</td><td>10/10 · 7/10</td><td>10/10 · 4/10</td><td>3/10 · 0/10</td></tr>
+<tr><td>Los 10 modelos juntos</td><td>90/100 · 48/100</td><td>82/100 · 27/100</td><td>23/100 · 0/100</td></tr>
+</tbody></table>
+<p class="chico mu">Estafas con aviso · falsas alarmas. Con esos casos se eligió entre 10 modelos: el 10/10 es optimista.</p></div>
+<div class="card"><b>Voz real · opción B contra A, 129 frases y 2 voces</b>
+<table><thead><tr><th>Criterio</th><th>B (final)</th><th>A</th></tr></thead><tbody>
+<tr><td>Frases con las etiquetas correctas</td><td>121/129</td><td>120/129</td></tr>
+<tr><td>WER</td><td>25,6 %</td><td>32,8 %</td></tr>
+<tr><td>Términos críticos</td><td>70,9 %</td><td>76,4 %</td></tr>
+<tr><td>Demora de la frase final, mediana</td><td>1,01 s</td><td>0,26 s</td></tr>
+<tr><td>Frases con palabras en otro idioma</td><td>4</td><td>25</td></tr>
+</tbody></table></div>
+<h3>Corridas guardadas</h3>
 <div class="fila"><label class="ctl">Casos<select class="sel-grupo"><option value="todos">todo desarrollo (150)</option><option value="historicos">53 históricos</option><option value="corpus_v2">corpus v2 de desarrollo (97)</option></select></label></div>
 <p class="mu"><span id="res-n"></span> Cada corrida se cuenta sobre sus casos completos de ese conjunto: las anteriores al 2026-10-21 solo tienen los 53 históricos, así que para compararlas con las nuevas elegí «53 históricos». Puntos: lo observado. Barras: intervalo de Wilson del 95 %. La zona verde es la meta propuesta (≥ 95 % / ≤ 5 %). Se calcula con la política de la pestaña <a href="#afinar">Afinar</a> (por defecto: primer <code>alerta_sugerida=true</code> válido, igual que las corridas registradas).</p>
 <div class="card"><div id="dispersion"></div><div class="ley" id="ley-disp"></div></div>
@@ -302,14 +353,13 @@ textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospac
 <!-- ============================ CÓMO CORRER ============================ -->
 <section id="s-correr" data-titulo="Cómo probar todo">
 <h2>Cómo probar todo</h2>
-<div class="card"><b>Demo de llamada en vivo (rama <code>luciano/voip-asr-94</code>, <code>a37b47e</code>)</b>
-<p>Desde la copia <code>bitacora_tesis-voip-asr</code>, con el entorno compartido y los modelos locales ya instalados. Antes de reutilizar el puerto, verificá el PID y su carpeta con <code>lsof -nP -iTCP:8765 -sTCP:LISTEN</code> y <code>lsof -a -p &lt;PID&gt; -d cwd</code>.</p>
-<pre>cd /Users/lucianogrosso/bitacora_tesis-voip-asr/experiments/voip
-/Users/lucianogrosso/bitacora_tesis-voip/.venv/bin/python servidor.py --host 127.0.0.1 --detector slm --modelo qwen3.5:0.8b-q8_0
-# En otra terminal, comprobar la versión antes de abrir:
-curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/bitacora_tesis-voip-asr/experiments/voip/panel.html
+<div class="card"><b>Demo de llamada en vivo, con la configuración final</b>
+<p>Desde esta copia, con Ollama abierto y el modelo bajado con su tag completo. Antes de reutilizar el puerto, verificá el PID y su carpeta con <code>lsof -nP -iTCP:8765 -sTCP:LISTEN</code> y <code>lsof -a -p &lt;PID&gt; -d cwd</code>.</p>
+<pre>ollama pull gemma4:e2b-it-q4_K_M
+cd /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip
+../../.venv/bin/python servidor.py --host 127.0.0.1
 open http://localhost:8765/</pre>
-<p class="chico">Ollama debe estar corriendo. Elegí la fuente y tocá «Iniciar llamada»; para probar sin micrófono, elegí un ejemplo TTS. El puerto 8765 queda para esta demo: para servir este tablero de experimentos al mismo tiempo, usá <code>--puerto 8766</code> con <code>armar_panel.py --servir</code>.</p>
+<p class="chico mu">Antes de la demo, hacé una llamada de calentamiento: el modelo frío tarda entre 12 y 16 s. Al terminar una corrida, copiá las voces afuera: Git no las guarda.</p>
 </div>
 <div class="nota"><b>La reserva no se corre ni se mira.</b> Los 200 casos <code>CV2-T-*</code> son el test final: se corren una sola vez, con la configuración congelada y después de acordar D08. Desde el 2026-10-23 están en GitHub (rama <code>laboratorio-luciano</code>), pero ni <code>laboratorio-main</code> ni este panel los traen y <code>correr.py</code> usa solo desarrollo. No uses <code>--particion test_reservado</code> ni abras <code>casos/texto/CV2-T-*</code> (<a href="../../../../docs/gestion/REGISTRO-RIESGOS.md">R05</a>).</div>
 <div class="grid2">
@@ -400,7 +450,7 @@ const COLORES = ['var(--c0)','var(--c1)','var(--c2)','var(--c3)','var(--c4)','va
 
 // ---------------- Navegación ----------------
 const SECC = [...document.querySelectorAll('main>section')];
-const IDS = {resumen:'s-resumen',decisiones:'s-decisiones',plan:'s-plan',arquitectura:'s-arq',resultados:'s-res',afinar:'s-afinar',tiempos:'s-tiempos',casos:'s-casos',probador:'s-probador',correr:'s-correr'};
+const IDS = {resumen:'s-resumen',decisiones:'s-decisiones',plan:'s-plan',informe:'s-informe',arquitectura:'s-arq',resultados:'s-res',afinar:'s-afinar',tiempos:'s-tiempos',casos:'s-casos',probador:'s-probador',correr:'s-correr'};
 $('#nav').innerHTML = Object.entries(IDS).map(([h, id]) => `<button data-h="${h}">${$('#' + id).dataset.titulo}</button>`).join('');
 function ir() {
   const h = (location.hash || '#resumen').slice(1);
@@ -903,7 +953,7 @@ const PLAN = [
  {"t": "Gama alta y tamaño", "cuando": "en paralelo, hasta el 8/11", "quien": "propuesta: Mateo o Evaristo", "issues": "#51", "obj": "Decir con datos qué modelo entra en un teléfono de gama alta y cuál no.", "tareas": ["Medir memoria (RSS) y latencia por modelo en la M1 y en la PC, con el ASR al lado", "RAM de iPhone 16 o posterior, Samsung de gama alta y equivalentes, con fuente del fabricante, y cuánta memoria deja usar cada sistema a una app", "Cuantizaciones q8 y q4 y su efecto en la calidad", "Si solo el 9B llega a la meta, documentarlo como techo que no entra y elegir el mejor que sí entra", "Actualizar PREFACTIBILIDAD-TECNICA con el acuerdo del equipo (hoy dice gama media)", "Extensión: medir en un teléfono real (llama.cpp, MLC o LiteRT)"], "sale": "Tabla modelo → memoria → latencia → ¿entra en la gama?, con fuentes.", "decide": "Equipo: gama objetivo (cambia un gate de #24)."},
  {"t": "ASR sobre los casos nuevos", "cuando": "26/10 al 8/11", "quien": "propuesta: Luciano (M1) con Evaristo", "issues": "#19, #51", "obj": "Saber cuánto empeora la detección cuando el texto sale del reconocimiento de voz y no de un guion.", "tareas": [{"t": "Zipformer (streaming) y Whisper, con prueba de humo TTS mono y estéreo", "hecho": "2026-10-17: <code>experiments/asr-local/</code>, WER 4–5 % en un par TTS."}, "TTS de los 24 casos de <code>GRABACIONES-ASR.md</code>: dos voces, un canal por persona y calidad telefónica (8 kHz o con el códec de la llamada)", "WER por canal y si se pierden palabras críticas («cero», «código», cifras)", "Mismos casos en texto y con ASR: cuántos avisos se pierden o se suman", "Grabar los 24 con voces del equipo, con la misma herramienta de la llamada en vivo (modo guion)", "Elegir ASR (D09)"], "sale": "WER, palabras críticas y efecto en la detección, primero con TTS y después con voces del equipo.", "decide": "D09 (ASR)."},
  {"t": "Replay, roles por canal y tiempos", "cuando": "2/11 al 15/11", "quien": "propuesta: Luciano y Mateo (métricas)", "issues": "#28, #52, #33", "obj": "Responder la pregunta central: cuántas estafas se avisan antes de que la persona cumpla, y con cuántos segundos de margen.", "tareas": [{"t": "Replay de punta a punta con cola, mono y estéreo", "hecho": "2026-10-17: un par TTS; el 2B quedó hasta 17 s atrasado respecto del audio."}, {"t": "Preventive@δ por líneas en texto", "hecho": "2026-10-21: en <code>errores.py</code>."}, "Replay con roles: canal local = persona protegida, canal remoto = la otra persona", "Evaluar solo cuando la otra persona termina de hablar (fin de segmento del ASR), para bajar la latencia", "L_R, L_C y Preventive@δ en segundos, con intervalos", "Registrar la dirección de la llamada como dato y analizar después si ayuda (no es regla del detector)", "Acordar δ y la política de aviso (D08)"], "sale": "Tabla de L_R, L_C y Preventive@δ en texto y audio para la configuración congelada.", "decide": "Equipo: δ y política (D08)."},
- {"t": "Llamada en vivo entre dos personas (demo)", "cuando": "Implementado al 2026-10-28; ensayo pendiente", "quien": "Luciano (implementación); equipo (ensayo)", "issues": "#75, #80, #84, #85, #86, #87, #94, #104", "obj": "Mostrar el detector funcionando durante una llamada real: dos personas hablan, la persona protegida ve el aviso y el público ve la transcripción y el riesgo en vivo.", "tareas": [{"t": "Captura por canal y control de la llamada desde el navegador", "hecho": "#75–#80: micrófono, Meet/WhatsApp-BlackHole, cliente.py y ejemplo TTS; copia local actual en luciano/voip-asr-94 (a37b47e). Falta validación de la captura como demostración de D05."}, {"t": "ASR por canal y conversación con roles visibles", "hecho": "Persona protegida / Otra persona; el detector conserva A/B por orden de habla."}, {"t": "Detector en vivo, curva de riesgo, aviso y demoras", "hecho": "#82/#83; cita con roles #104 en voip-spike (91bf6d5), verificada con datos sintéticos y pendiente de integrar en voip-asr-94."}, {"t": "Registro de cada llamada en estéreo y JSONL compatible con replay", "hecho": "#76; audio fuera de Git. No acredita todavía una evaluación con voz humana."}, {"t": "Corte elegible, transiciones, prueba de ASR guardable e Historial", "hecho": "#89–#93; corte numérico, referencias por frase, cierre que conserva el audio pendiente, comparación de dos registros y borrado con confirmación (a37b47e)."}, {"t": "Plan B: ejemplo estéreo reproducido en tiempo real por el panel", "hecho": "#77: SC-WA-CODE-01 y LG-WA-CONSULTA-01; no sustituye el ensayo con personas."}, "Ensayar Meet/WhatsApp con dos integrantes y auriculares (#80/#86)", "Medir el detector en la notebook de demo (#84) y evaluar voz real respetando D06 (#94)", "Enchufar Tito→SLM cuando esté validado (#85)", "Modo guion para producir las tomas: pendiente", "Preparar video de respaldo y acordar con el tutor la demostración de D05"], "sale": "Una llamada en vivo que dispara el aviso, grabada y medible con el replay.", "decide": "Equipo: opción de llamada y si pasa a ser obligatoria en el Plan."},
+ {"t": "Llamada en vivo entre dos personas (demo)", "cuando": "Implementado al 2026-10-28; corrida por Meet el 2026-11-02", "quien": "Luciano (implementación); equipo (ensayo)", "issues": "#75, #80, #84, #85, #86, #87, #94, #104", "obj": "Mostrar el detector funcionando durante una llamada real: dos personas hablan, la persona protegida ve el aviso y el público ve la transcripción y el riesgo en vivo.", "tareas": [{"t": "Captura por canal y control de la llamada desde el navegador", "hecho": "#75–#80: micrófono, Meet/WhatsApp-BlackHole, cliente.py y ejemplo TTS; WhatsApp Desktop quedó afuera (2026-10-31) y el tutor aprobó la captura por Meet como demo de D05."}, {"t": "ASR por canal y conversación con roles visibles", "hecho": "Persona protegida / Otra persona; el detector conserva A/B por orden de habla."}, {"t": "Detector en vivo, curva de riesgo, aviso y demoras", "hecho": "#82/#83; cita con roles #104 (91bf6d5), verificada con datos sintéticos e integrada en laboratorio-luciano y laboratorio-main."}, {"t": "Registro de cada llamada en estéreo y JSONL compatible con replay", "hecho": "#76; audio fuera de Git. No acredita todavía una evaluación con voz humana."}, {"t": "Corte elegible, transiciones, prueba de ASR guardable e Historial", "hecho": "#89–#93; corte numérico, referencias por frase, cierre que conserva el audio pendiente, comparación de dos registros y borrado con confirmación (a37b47e)."}, {"t": "Plan B: ejemplo estéreo reproducido en tiempo real por el panel", "hecho": "#77: SC-WA-CODE-01 y LG-WA-CONSULTA-01; no sustituye el ensayo con personas."}, "Ensayar Meet/WhatsApp con dos integrantes y auriculares (#80/#86)", "Medir el detector en la notebook de demo (#84) y evaluar voz real respetando D06 (#94)", "Enchufar Tito→SLM cuando esté validado (#85)", "Modo guion para producir las tomas: pendiente", "Preparar video de respaldo y acordar con el tutor la demostración de D05"], "sale": "Una llamada en vivo que dispara el aviso, grabada y medible con el replay.", "decide": "Equipo: opción de llamada y si pasa a ser obligatoria en el Plan."},
  {"t": "RoBERTuito: filtro liviano antes del SLM", "cuando": "con el detector congelado: 2/11 al 22/11 (tope 2 semanas)", "quien": "propuesta: Ignacio (su rama <code>nacho1706/feature-training-data</code>)", "issues": "#41, #42, #47, #49 (not_planned: reabrir con acuerdo)", "obj": "Que un clasificador chico corra en cada fragmento y despierte al SLM solo cuando hace falta, para bajar latencia y batería.", "tareas": ["Acordar retomarlo (el spike #29 no mejoró y quedó not_planned) y revisar lo que hay en la rama", "Datos: el SLM congelado etiqueta líneas de desarrollo y sintéticas; nunca del test", "Entrenar la cabeza y medirla sola contra el SLM sobre los mismos 150", "Cascada: el filtro deja pasar y el SLM confirma; medir cuántas llamadas al SLM ahorra, la latencia y la calidad", "Integrarlo en el replay y en la llamada en vivo", "Si no mejora en el tope, documentarlo como probado y cerrarlo"], "sale": "Comparación SLM solo contra filtro + SLM: calidad, llamadas evitadas, latencia y memoria.", "decide": "Equipo: si entra en el alcance."},
  {"t": "Evaluación final sobre el test reservado", "cuando": "9/11 al 22/11", "quien": "propuesta: Mateo y Luciano", "issues": "#33, #52", "obj": "Medir una sola vez, sin ajustar nada mirando el test.", "tareas": ["Congelar D07 y D08 (#33) y la configuración antes de abrir el test", "Correr una vez en texto sobre los 200 reservados (<code>--particion test_reservado</code>)", "Recién ahí, TTS en estéreo de los reservados y replay con la misma configuración", "Tablas y figuras con intervalos; responder PI1 y PI2 (#52)", "Análisis de errores del test, sin reajustar"], "sale": "Resultados finales con intervalos, en texto y audio.", "decide": "Equipo y tutor."},
  {"t": "Informe, demo y defensa", "cuando": "se escribe desde ya; 90 % el 15/11, terminado el 30/11, presentación la segunda semana de diciembre", "quien": "los cuatro", "issues": "#53", "obj": "Entregar la tesis con resultados, decisiones cerradas y una demo que se pueda repetir.", "tareas": ["Capítulos 5–8 con los números reales (detector, ASR, tiempos, gama), escritos a medida que salen", "Arquitectura actualizada: roles por canal, llamada en vivo y cascada si entra", "Cerrar D09 (ASR y detector) y D08 (protocolo), con un ADR del pipeline", "Paquete reproducible: comandos, manifiestos y cómo pedir la reserva (no está en el repo público)", "Presentación, video de la demo y ensayo de defensa; correcciones del tutor desde el 2/12"], "sale": "Informe, código, resultados y presentación listos para revisión el 1/12.", "decide": "Equipo y tutor (D10)."},
