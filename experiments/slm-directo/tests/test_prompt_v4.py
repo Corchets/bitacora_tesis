@@ -48,6 +48,14 @@ class Prompts(unittest.TestCase):
             self.assertIn(frase, texto)
         self.assertNotIn("peligro concreto", texto)
 
+    def test_v4_cita_libre_solo_cambia_la_instruccion_de_la_cita(self):
+        v4, libre = cargar_prompt("v4").splitlines(), cargar_prompt("v4-cita-libre").splitlines()
+        self.assertEqual(v4[:-1], libre[:-1])
+        self.assertIn("donde OTRA lo pide", v4[-1])
+        self.assertIn("de la transcripción que lo justifica", libre[-1])
+        self.assertEqual(esquema_de("v4-cita-libre"), esquema_de("v4"))
+        self.assertEqual(huella(cargar_prompt("v4")), "92df75a22c2746fb")
+
 
 class Roles(unittest.TestCase):
     def test_cubre_los_150_de_desarrollo_y_ningun_reservado(self):
@@ -142,6 +150,25 @@ class CorridaConRoles(unittest.TestCase):
         self.assertEqual(manifiesto["roles_protegida"], huella(casos.ROLES.read_text(encoding="utf-8")))
         self.assertEqual({f["hablante"] for f in filas}, {"PROTEGIDA", "OTRA"})
         self.assertIn("tito-slm-sin-indicio\\|modelo-falso:1b\\|v4\\|rol", texto)
+
+    def test_v4_sigue_tras_el_aviso_con_tito_y_roles(self):
+        servidor = HTTPServer(("127.0.0.1", 0), OllamaFalso)
+        threading.Thread(target=servidor.serve_forever, daemon=True).start()
+        try:
+            with tempfile.TemporaryDirectory() as tmp, redirect_stdout(io.StringIO()):
+                correr.main([
+                    "--modelos", "modelo-falso:1b", "--prompts", "v4-cita-libre", "--hablantes", "rol", "--sin-reglas",
+                    "--casos", "SC-WA-CODE-01-e01", "--filtro-tito", "--tito-puntajes", "1=0.9", "--sin-indicio",
+                    "--seguir-tras-aviso", "--url", f"http://127.0.0.1:{servidor.server_port}", "--salida", tmp,
+                ])
+                (carpeta,) = Path(tmp).iterdir()
+                manifiesto = json.loads((carpeta / "manifiesto.json").read_text(encoding="utf-8"))
+                texto = resumen.armar_resumen(carpeta)
+        finally:
+            servidor.shutdown()
+            servidor.server_close()
+        self.assertEqual(manifiesto["modo_termino"], correr.MODO_DIAGNOSTICO)
+        self.assertIn("v4-cita-libre\\|rol", texto)
 
 
 if __name__ == "__main__":
