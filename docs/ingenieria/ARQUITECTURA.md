@@ -421,3 +421,103 @@ particiones verificables, en paralelo con
 primer aviso y costos separados. Los criterios y dependencias se consultan en
 GitHub, sin otro backlog local. El título, cuerpo, estado y metadatos de #95 se
 conservaron; publicar los subissues no ejecuta el experimento.
+
+## 8. Cómo funciona el detector durante una llamada
+
+Describe el código de la configuración aceptada en el
+[ADR 0001](adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md), al 2026-11-04.
+La política de alerta sigue abierta en
+[D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
+**En corto:** Tito decide cuándo despertar al SLM y el SLM decide si se avisa. Tito
+nunca avisa. Una vez despierto, el SLM queda prendido hasta que avisa o termina la
+llamada, y Tito no vuelve a correr.
+
+| Momento | Tito | SLM |
+|---|---|---|
+| Antes de activar | Puntúa cada frase nueva, sola y sin contexto | Apagado |
+| Primer puntaje ≥ 0,5 | Activa y se apaga | Primera consulta, en esa misma línea |
+| Líneas siguientes | Apagado | Una consulta por línea, con la conversación entera hasta ese punto |
+| Aviso | Apagado | Se deja de evaluar: el aviso es único |
+| Fin de la llamada | Se reinicia para la próxima | Se reinicia para la próxima |
+
+### 8.1 Preguntas frecuentes
+
+- **¿El SLM se consulta una sola vez por llamada?** No, una vez por línea desde que
+  Tito activa.
+- **¿Tito le sigue pasando frases al SLM?** No. En cada línea, el sistema le manda al
+  SLM toda la conversación disponible. Lo único de Tito que recibe es el indicio de la
+  activación (línea, texto y puntaje), siempre el mismo y declarado como una sospecha
+  que puede descartar.
+- **Si no pasa nada, ¿el SLM se vuelve a apagar?** No. Sigue hasta el final de la
+  llamada, aunque el riesgo baje.
+- **¿Y después del aviso?** Se deja de evaluar. Si el aviso fue una falsa alarma, una
+  estafa que empiece después ya no genera otro. Las corridas con `--seguir-tras-aviso`
+  siguen hasta el final, pero son para diagnóstico.
+- **¿Qué dispara el aviso?** La primera respuesta válida del SLM con
+  `alerta_sugerida: true`. El `riesgo` es otro dato de esa respuesta y no dispara nada
+  por sí solo.
+- **¿Y si Tito nunca activa?** El SLM no lee esa llamada. Si era una estafa, cuenta como
+  estafa sin aviso.
+- **¿Y si Tito falla?** También se activa el SLM, que recibe el aviso del fallo en lugar
+  del indicio. No se inventa un puntaje.
+- **¿Qué son `T_R` y `T_C`?** El inicio del primer pedido de alto riesgo y el del primer
+  cumplimiento de la víctima. Son marcas de anotación para medir si el aviso llegó a
+  tiempo, y el detector no las ve ([definición](../evaluacion/METRICAS.md#1-marcas-temporales)).
+- **¿En una llamada en vivo es igual?** Sí, con una diferencia: una «línea» es lo que
+  entrega el ASR, y si llega texto mientras el detector evalúa, la evaluación siguiente
+  toma lo último disponible y saltea las intermedias
+  ([detalle](../../experiments/voip/README.md)). En las corridas sobre casos escritos se
+  evalúan todas.
+
+### 8.2 Ejemplo: `CV2-D-V-BANCO-003`
+
+Una estafa de 26 líneas de la
+[corrida de 150 casos](https://github.com/Corchets/bitacora_tesis/blob/corrida-e2b-tito-viejo-150/experiments/slm-directo/corridas/2026-11-04_003715_e2b-tito-viejo-150/resumen.md):
+
+| Línea | Qué pasa | Tito | SLM |
+|---|---|---|---|
+| L1–L4 | Saludo y contexto | Puntúa; el máximo es 0,481 | Apagado |
+| L5 | «Es un recambio preventivo» | 0,981: activa | Consulta 1: riesgo 0,3, sin alerta |
+| L6–L18 | Sigue la conversación | Apagado | Una consulta por línea, sin alerta |
+| L19 (`T_R`) | «Prepará el sobre y entregáselo al operador» | Apagado | Riesgo 0,3, sin alerta |
+| L26 (`T_C`) | «Le entregué el sobre y me dejó un recibo» | Apagado | Consulta 22: riesgo 0,5, sin alerta |
+
+Tito activó 14 líneas antes del pedido, pero el SLM nunca sugirió alerta y la estafa
+pasó sin aviso. El error estuvo en el SLM, no en Tito.
+
+### 8.3 Qué pasó en los 150 casos
+
+| | Estafas (75) | Legítimas (75) |
+|---|---|---|
+| Tito nunca activó | 1 | 21 |
+| Tito activó y el SLM no avisó | 23 | 41 |
+| Tito activó y el SLM avisó | 51 | 13 (falsas alarmas) |
+
+- **Dónde se pierden las estafas:** 23 de las 24 perdidas pasaron por el SLM.
+- **Tito y el aviso no son lo mismo:** de los 128 casos donde Tito activó, solo en 22 el
+  SLM avisó en esa misma línea.
+- **Cuánto ahorra Tito:** de 2.318 líneas procesadas hasta el aviso, 1.139 (49 %) no
+  consultaron al SLM.
+
+Son datos de desarrollo, sin revisión humana (`revision_humana: false` en casos, `T_R` y
+`T_C`), y no se pueden citar como rendimiento final.
+
+### 8.4 Por qué el SLM queda prendido
+
+La [elección de la compuerta](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md#551-detector) está
+registrada, pero no el motivo de que quede abierta. Este razonamiento es una lectura, sin
+medición propia:
+
+- **Una sola consulta llegaría temprano.** En el ejemplo sería en L5, y el pedido recién
+  aparece en L19.
+- **Tito no sigue dónde está el peligro.** Puntúa frases sueltas. En
+  `TR-11-familiar-real-pide-plata`, la línea del pedido de transferencia (L4) sacó 0,004
+  y «Dale, te corto y te llamo» (L9) sacó 0,987.
+- **Una estafa se arma entre varias líneas,** y solo el SLM lee la conversación entera.
+
+Hay un antecedente parcial: consultar al modelo solo en una zona gris (spike #29) bajó de
+12/16 a 7/16 aciertos, aunque no es la misma política. La opción de volver a filtrar cuando
+el SLM descarta la alerta quedó como candidata en
+[§7.5](#75-continuación-acordada-validar-tito-antes-de-optimizar-consultas), y la
+configuración actual no la usa.

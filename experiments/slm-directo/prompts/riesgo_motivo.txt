@@ -1,0 +1,3 @@
+El riesgo superó el umbral y se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:
+- "evidencia": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.
+- "motivo": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.

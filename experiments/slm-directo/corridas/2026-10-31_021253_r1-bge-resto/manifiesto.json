@@ -1,0 +1,163 @@
+{
+  "inicio": "2026-10-31T02:12:53",
+  "comando": "python correr.py --solo-reranker --reranker BAAI/bge-reranker-v2-m3 --casos CV2-D-L-TRABAJO-005,CV2-D-V-BANCO-003,CV2-D-V-BANCO-008,LAB-acceso-remoto,LAB-acceso-remoto-parafrasis,LAB-anses-beneficio,LAB-anses-beneficio-parafrasis,LAB-anses-canal-oficial,LAB-arca-canal-oficial,LAB-arca-deuda,LAB-arca-deuda-parafrasis,LAB-banco-app-parafrasis,LAB-banco-codigo,LAB-banco-codigo-parafrasis,LAB-banco-gasto-sin-pedido,LAB-banco-niega-el-codigo,LAB-banco-numeros-sin-clave,LAB-banco-revisa-app,LAB-digitos-sin-palabra,LAB-familiar-llama-vos,LAB-familiar-peligro,LAB-familiar-peligro-parafrasis,LAB-mensajeria-no-pases-nada,LAB-no-bajes-nada,LAB-pantalla-sin-programa,LAB-portero-codigo-puerta,LAB-whatsapp-codigo,LAB-whatsapp-codigo-parafrasis,TR-02-codigo-del-candado,TR-03-negacion-y-consejo,TR-04-pedido-tras-charla-larga,TR-05-asado-con-transferencia,TR-06-banco-alerta-legitima,TR-07-pedido-partido-en-dos-lineas,TR-08-frase-cortada-candado,TR-11-familiar-real-pide-plata,TR-13-turno-medico-pide-dni,CV2-D-V-BANCO-001,CV2-D-V-BANCO-002,CV2-D-V-BANCO-007,CV2-D-V-WHATSAPP-002,CV2-D-V-WHATSAPP-006,CV2-D-V-SOPORTE-003,CV2-D-V-SOPORTE-004,CV2-D-V-FAMILIAR-002,CV2-D-V-ORGANISMO_PREVISIONAL-001,CV2-D-V-PREMIO-004,CV2-D-L-BANCO-001,CV2-D-L-BANCO-007,CV2-D-L-DELIVERY-001,CV2-D-L-ESCUELA-001,CV2-D-L-FAMILIAR-001,CV2-D-L-MEDICO-001,CV2-D-L-ORGANISMO_PREVISIONAL-001,CV2-D-L-PREMIO-001,CV2-D-L-SOPORTE-002,CV2-D-L-WHATSAPP-001 --seguir-tras-aviso --hilos 4 --etiqueta r1-bge-resto",
+  "codigo": {
+    "commit": "ce9413f83ff552b225a5a2b095c0ca6ed2fa5154",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Windows-11-10.0.26300-SP0",
+    "arquitectura": "AMD64",
+    "procesador": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 15.7,
+    "python": "3.13.7"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "filtro_tito": null,
+  "particion": "desarrollo",
+  "ollama": null,
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": {
+      "num_thread": 4
+    }
+  },
+  "prompts": {},
+  "reranker": {
+    "ventana_lineas": 4,
+    "max_tokens": 384,
+    "etiquetas": "pedidos",
+    "umbral_registro": 0.5,
+    "lote": 16,
+    "hilos": 4,
+    "hipotesis": {
+      "huella": "3eaf5572f808579a",
+      "texto": {
+        "REQUEST_AUTH_CODE": [
+          "Una de las personas le pide a la otra que le diga, le lea o le reenvíe un código que le llegó por mensaje, por WhatsApp o en un token.",
+          "Alguien le solicita a la otra persona el código de verificación de un solo uso que recibió."
+        ],
+        "REQUEST_SECRET": [
+          "Una de las personas le pide a la otra que le diga su clave, su PIN, su contraseña o su usuario.",
+          "Alguien le solicita a la otra persona una credencial secreta, como la clave del banco o el código de seguridad de la tarjeta."
+        ],
+        "REQUEST_PERSONAL_DATA": [
+          "Una de las personas le pide a la otra sus datos personales, como el DNI, el CUIL, la fecha de nacimiento o el domicilio.",
+          "Alguien le solicita a la otra persona una foto de su documento o datos que la identifican."
+        ],
+        "REQUEST_TRANSFER": [
+          "Una de las personas le pide a la otra que transfiera, deposite, pague o entregue dinero.",
+          "Alguien le indica a la otra persona que haga un movimiento de dinero, como una transferencia, un pago o una operación en el cajero."
+        ],
+        "REQUEST_REMOTE_ACCESS": [
+          "Una de las personas le pide a la otra que instale un programa de acceso remoto o que comparta la pantalla.",
+          "Alguien le indica a la otra persona que deje que otro vea o maneje su celular o su computadora."
+        ],
+        "REQUEST_SECURITY_ACTION": [
+          "Una de las personas le indica a la otra que abra un enlace, cambie una clave o autorice un dispositivo siguiendo sus instrucciones.",
+          "Alguien le hace ejecutar a la otra persona una acción de seguridad en el celular, en la aplicación del banco o en el cajero."
+        ]
+      },
+      "instruccion_qwen3": "Given a short window of a phone call transcript in Argentine Spanish, judge whether, in this call, one person is doing to the other what the Query describes. Mentioning, explaining, warning against, refusing or retelling it does not count."
+    },
+    "modelos": {
+      "BAAI/bge-reranker-v2-m3": {
+        "backend": "cross-encoder",
+        "modelo": "BAAI/bge-reranker-v2-m3",
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+        "parametros": 567755777,
+        "carga_ms": 5166.8,
+        "calentamiento_ms": 1493.4,
+        "hilos": 4,
+        "torch": "2.9.1+cpu",
+        "transformers": "4.51.3",
+        "lote": 16,
+        "max_longitud": 512,
+        "memoria_tras_cargar": {
+          "rss_mb": 1701.7,
+          "pico_mb": 1701.7
+        },
+        "memoria_al_terminar": {
+          "rss_mb": 1908.4,
+          "pico_mb": 1929.7
+        }
+      }
+    }
+  },
+  "configs": [
+    {
+      "config": "reranker|BAAI/bge-reranker-v2-m3|pedidos|v4",
+      "detector": "reranker",
+      "modelo": "BAAI/bge-reranker-v2-m3",
+      "prompt": "pedidos",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "CV2-D-L-TRABAJO-005": "d0012c9a2da781c5",
+    "CV2-D-V-BANCO-003": "efc9897cb609ce1e",
+    "CV2-D-V-BANCO-008": "e6c068d275f987b4",
+    "LAB-acceso-remoto": "abbdb60023a5c6e4",
+    "LAB-acceso-remoto-parafrasis": "3c11fa1e1f388c95",
+    "LAB-anses-beneficio": "1dbe40e4c2e4dd59",
+    "LAB-anses-beneficio-parafrasis": "59df1a67abcc885e",
+    "LAB-anses-canal-oficial": "b17f2a7515ced508",
+    "LAB-arca-canal-oficial": "fa29e387532b00e3",
+    "LAB-arca-deuda": "56bf96377060bb30",
+    "LAB-arca-deuda-parafrasis": "f77bf6a51727318e",
+    "LAB-banco-app-parafrasis": "915ce0b33ce32692",
+    "LAB-banco-codigo": "bfaf844390c391ab",
+    "LAB-banco-codigo-parafrasis": "a23180a44841e940",
+    "LAB-banco-gasto-sin-pedido": "710720c289b5b209",
+    "LAB-banco-niega-el-codigo": "5234e0f0954246df",
+    "LAB-banco-numeros-sin-clave": "336741e4a9b81531",
+    "LAB-banco-revisa-app": "a5575307e6144a19",
+    "LAB-digitos-sin-palabra": "eac0d9632aeb9752",
+    "LAB-familiar-llama-vos": "a408533b543156f3",
+    "LAB-familiar-peligro": "feab2aa7b4ec9b95",
+    "LAB-familiar-peligro-parafrasis": "1f68006dfc825131",
+    "LAB-mensajeria-no-pases-nada": "21cbcde552616245",
+    "LAB-no-bajes-nada": "786d070838093669",
+    "LAB-pantalla-sin-programa": "8e2f69c90446ade9",
+    "LAB-portero-codigo-puerta": "1d1a5dc0d307d974",
+    "LAB-whatsapp-codigo": "9c3504a055060d62",
+    "LAB-whatsapp-codigo-parafrasis": "ab663e341dbf9344",
+    "TR-02-codigo-del-candado": "66fff3c538daa3cb",
+    "TR-03-negacion-y-consejo": "035be565ed66795b",
+    "TR-04-pedido-tras-charla-larga": "7b73594c98f6bc57",
+    "TR-05-asado-con-transferencia": "a47dbee0f5a8c5c5",
+    "TR-06-banco-alerta-legitima": "eff36493e443525d",
+    "TR-07-pedido-partido-en-dos-lineas": "ebe24b27f413c658",
+    "TR-08-frase-cortada-candado": "ad03a06952b2db74",
+    "TR-11-familiar-real-pide-plata": "a6e867d07e90d9b2",
+    "TR-13-turno-medico-pide-dni": "5f87eeccc837367c",
+    "CV2-D-V-BANCO-001": "0affbb8ce80874ba",
+    "CV2-D-V-BANCO-002": "408fa71f0df52a5e",
+    "CV2-D-V-BANCO-007": "6aa5fdd522005cf0",
+    "CV2-D-V-WHATSAPP-002": "68caf4afa149904d",
+    "CV2-D-V-WHATSAPP-006": "d108b5f5b91893f6",
+    "CV2-D-V-SOPORTE-003": "c7c415cd71d46d70",
+    "CV2-D-V-SOPORTE-004": "8b9704896f784852",
+    "CV2-D-V-FAMILIAR-002": "f77138c8fd31590a",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001": "c3a8aab157a40397",
+    "CV2-D-V-PREMIO-004": "efd49ed9cc707e5d",
+    "CV2-D-L-BANCO-001": "10d9a2f2d202aa47",
+    "CV2-D-L-BANCO-007": "4f80a484014b9cc9",
+    "CV2-D-L-DELIVERY-001": "ee7932e8924132c1",
+    "CV2-D-L-ESCUELA-001": "243975f0e5bb4b70",
+    "CV2-D-L-FAMILIAR-001": "50a486aa265a3f25",
+    "CV2-D-L-MEDICO-001": "62b0315ecaae1230",
+    "CV2-D-L-ORGANISMO_PREVISIONAL-001": "ba6390bcc9ead422",
+    "CV2-D-L-PREMIO-001": "bbcd27e268ae2d67",
+    "CV2-D-L-SOPORTE-002": "71a1cebc18f6401b",
+    "CV2-D-L-WHATSAPP-001": "74b54e1f77b12210"
+  },
+  "modelos": {},
+  "interrumpida": false,
+  "fin": "2026-10-31T03:26:49"
+}

@@ -1,0 +1,56 @@
+{
+  "estado": "propuesta de desarrollo solicitada por el usuario; no cierra D07, D08 ni D09",
+  "instruccion": "Given the available portion of a phone conversation in Argentine Spanish, judge whether the conversation supports the situation described by the query. Do not infer facts that are not present. A warning or refusal is not the same as an actual request. A sensitive request or a claim of identity alone does not prove fraud.",
+  "categorias": [
+    {
+      "id": "REQUEST_AUTH_CODE",
+      "grupo": "situacion",
+      "texto": "Una persona le pide a la otra que le diga, lea o reenvíe un código de verificación que recibió."
+    },
+    {
+      "id": "REQUEST_SECRET",
+      "grupo": "situacion",
+      "texto": "Una persona le pide a la otra que le revele una contraseña, un PIN u otra credencial secreta."
+    },
+    {
+      "id": "REQUEST_PERSONAL_DATA",
+      "grupo": "situacion",
+      "texto": "Una persona le pide a la otra datos que la identifican o una imagen de su documento."
+    },
+    {
+      "id": "REQUEST_TRANSFER",
+      "grupo": "situacion",
+      "texto": "Una persona le pide a la otra que transfiera, pague, deposite o entregue dinero."
+    },
+    {
+      "id": "REQUEST_ACCESS_ACTION",
+      "grupo": "situacion",
+      "texto": "Una persona le pide a la otra compartir pantalla, instalar acceso remoto, abrir un enlace o autorizar un dispositivo."
+    },
+    {
+      "id": "WARNING_REFUSAL",
+      "grupo": "situacion",
+      "texto": "Una persona advierte que no se debe compartir información o realizar una acción, o se niega a hacerlo."
+    },
+    {
+      "id": "APPARENTLY_LEGITIMATE",
+      "grupo": "situacion",
+      "texto": "Las personas conversan o hacen un pedido en un contexto que presenta señales de confianza o verificación independiente, sin presión evidente."
+    },
+    {
+      "id": "INSUFFICIENT_INFORMATION",
+      "grupo": "situacion",
+      "texto": "Lo conversado hasta el momento no alcanza para identificar un pedido sensible ni una situación sospechosa concreta."
+    },
+    {
+      "id": "AUTHORITY_CLAIM",
+      "grupo": "indicio",
+      "texto": "Una persona afirma representar a un banco, organismo o soporte, o dice ser una persona conocida."
+    },
+    {
+      "id": "PRESSURE_ISOLATION",
+      "grupo": "indicio",
+      "texto": "Una persona exige actuar con urgencia, amenaza con una consecuencia o desalienta verificar por otro medio."
+    }
+  ]
+}
