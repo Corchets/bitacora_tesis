@@ -28,6 +28,7 @@ PROMPTS = {
     "tarea": ("tarea.txt",),
     "tarea+base": ("tarea.txt", "base_institucional.txt"),
     "v2": ("tarea_v2.txt",),
+    "v3": ("tarea_v3.txt",),
     "riesgo": ("riesgo.txt",),  # dos etapas: ver DetectorSLMDosEtapas
 }
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
@@ -64,7 +65,7 @@ ESQUEMA_MOTIVO = {
     "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "motivo")},
     "required": ["evidencia", "motivo"],
 }
-ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "riesgo": ESQUEMA_RIESGO}
+ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "riesgo": ESQUEMA_RIESGO}
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
