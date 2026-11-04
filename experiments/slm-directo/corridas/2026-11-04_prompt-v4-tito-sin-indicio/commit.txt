@@ -1,0 +1,3 @@
+prompt-v4-colab 55fe97754597d8e46031336c104d2bb210c0c4b3
+prompts v4, v3 con roles, v3 orden v1 y v1
+IDS=(los 150)

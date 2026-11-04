@@ -10,11 +10,15 @@
 | `tarea` | [`tarea.txt`](tarea.txt) |
 | `tarea+base` | [`tarea.txt`](tarea.txt) + una línea en blanco + [`base_institucional.txt`](base_institucional.txt) |
 | `v2` | [`tarea_v2.txt`](tarea_v2.txt), con los campos en otro orden (`ESQUEMA_SALIDA_V2` en `detectores.py`) |
+| `v3` | [`tarea_v3.txt`](tarea_v3.txt), con el orden de campos de v2 |
+| `v3-orden-v1` | [`tarea_v3_orden_v1.txt`](tarea_v3_orden_v1.txt): v3 con los campos en el orden de v1 |
+| `v4` | [`tarea_v4.txt`](tarea_v4.txt), pensada para `--hablantes rol` |
 | `riesgo` | [`riesgo.txt`](riesgo.txt) en la etapa 1 (solo `{"riesgo": x}`); si x > umbral, [`riesgo_motivo.txt`](riesgo_motivo.txt) como pedido de la etapa 2 (`DetectorSLMDosEtapas`) |
 
 El mensaje del usuario lo arma `detectores.py` en cada actualización: la
 transcripción disponible numerada por línea y una aclaración sobre hablantes
-según `--hablantes` (`ab`: cada línea con A o B; `sin`: sin indicar quién habla).
+según `--hablantes` (`ab`: cada línea con A o B; `rol`: con PROTEGIDA u OTRA, según
+[`roles-protegida.json`](../casos/roles-protegida.json); `sin`: sin indicar quién habla).
 
 ## Versiones del system prompt
 
@@ -27,6 +31,7 @@ comparación concreta**, no el orden histórico.
 | **Versión 1 — original** | 2026-10-13 | [`tarea.txt`](tarea.txt) | Criterio de alerta, seis acciones, exclusión breve de menciones y JSON con riesgo primero. Es `tarea` en el ejecutor y **P0 de las dos corridas de 150**. Commit `d9173b6`. |
 | **Versión 2 — modificación previa** | 2026-10-21 | [`tarea_v2.txt`](tarea_v2.txt) | Reformula las acciones, explicita relatos/hipótesis y razones creíbles, quita el ejemplo de código, pone la evidencia primero y exige riesgo ≥ 0,5 con alerta. Es `v2` en el ejecutor; no fue el prompt de esas corridas de 150. Commit `886cff0`. |
 | **Versión 3 — probada, no adoptada** | 2026-11-04 | [`tarea_v3.txt`](tarea_v3.txt) | Parte de v2: quita el mínimo de riesgo 0,5, conserva el orden de campos de v2 y agrega reglas de contexto. [Resultados en Colab](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): más estafas con aviso y muchas más falsas alarmas. No se usa en la demo. |
+| **Versión 4 — probada, no adoptada** | 2026-11-04 | [`tarea_v4.txt`](tarea_v4.txt) | Parte de v3: vuelve al orden de campos de v1, nombra a PROTEGIDA y OTRA, y agrega las reglas de canal propio y de datos comunes. [Resultados](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): 55/75 estafas y 13/75 falsas alarmas con Tito sin indicio. No se usa en la demo. |
 
 ## Versión 3 — 2026-11-04
 
@@ -89,3 +94,4 @@ Los cambios se prueban juntos: no se midió el aporte de cada uno por separado.
 | 2026-10-29 | `riesgo` (`riesgo.txt` + `riesgo_motivo.txt`), en dos etapas; v1 y v2 quedan igual | Bajar la latencia por línea: escribir el JSON completo domina el tiempo ([caché de prefijo](../analisis/2026-10-21-cache-prefijo/README.md)). Escala del riesgo anclada y «una palabra suelta no es pedido» por la minuta del 2026-10-28 (R07). Ver [análisis](../analisis/2026-10-29-riesgo-primero/README.md). |
 | 2026-11-04 | v3, borrador P1 (`tarea_v3.txt`), sin integrar al ejecutor; v1/P0 y v2 intactas | Una hipótesis: atribuir el pedido dentro de la llamada frente a relato, hipótesis, ofrecimiento y consejo. [Ficha y controles](V3-ATRIBUCION.md); sin inferencia nueva. |
 | 2026-11-04 | v3 reemplazada por un texto basado en v2; v1 y v2 intactas | Decisiones del grill con Luciano. [Probada en Colab sobre los 150 de desarrollo](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): no se adopta. |
+| 2026-11-04 | v4 (`tarea_v4.txt`) y `v3-orden-v1`; v1, v2 y v3 intactas | Bajar las falsas alarmas de v3 y darle al SLM el rol que en la llamada da el canal. [Probadas en Colab](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): v4 no se adopta. |
