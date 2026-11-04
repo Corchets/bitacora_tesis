@@ -85,15 +85,5 @@ class UltimasCorridasTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "ajeno"):
                 panel.cargar_datos(root)
 
-    def test_actualizacion_idempotente_y_datos_no_ejecutables(self):
-        base = "<main>\n<section>Anterior</section></main><script>const IDS = {resumen:'s-resumen'}; const h=location.hash || '#resumen';</script>"
-        datos = {"texto": "</script><script>no ejecutar</script>"}
-        primera = panel.incorporar(base, datos)
-        self.assertEqual(primera, panel.incorporar(primera, datos))
-        self.assertEqual(primera.count('id="s-ultimas"'), 1)
-        self.assertEqual(primera.count("ultimas:'s-ultimas'"), 1)
-        self.assertNotIn("</script><script>no ejecutar", primera)
-
-
 if __name__ == "__main__":
     unittest.main()

@@ -149,6 +149,11 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   reportando ambos márgenes; `T_A` se define con histéresis (primer cruce que se
   sostiene dos actualizaciones). Queda abierta hasta probarla con el piloto y
   adjudicar ambigüedades.
+- **Prioridad de revisión planteada por Luciano (2026-11-04):** comprobar si los casos
+  son ambiguos o están mal construidos antes de atribuir los errores al prompt o a
+  RoBERTuito. El [panel de lectura](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+  expone diálogos, fichas y dudas originales. Es una hipótesis a contrastar caso por
+  caso; no adjudica referencias, no da por probada la causa ni cambia D09.
 - **Para cerrar:** manual probado en una muestra común por los cuatro integrantes,
   anotaciones originales conservadas y desacuerdos adjudicados.
 - **Fuente:** [MANUAL-ANOTACION.md](../corpus/MANUAL-ANOTACION.md). Sus dos capas de

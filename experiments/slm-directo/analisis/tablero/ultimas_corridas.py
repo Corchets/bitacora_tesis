@@ -1,7 +1,7 @@
-"""Actualiza el panel con corridas terminadas, sin inferencia ni acceso a la reserva.
+"""Datos para el panel de lectura: corridas terminadas, sin inferencia ni reserva.
 
-Desde la raíz: python3 -I experiments/slm-directo/analisis/tablero/ultimas_corridas.py
 Los IDs y las huellas se toman de los manifiestos; no se enumera el corpus.
+El comando de actualización vive en actualizar_panel_lectura.py.
 """
 import collections
 import csv
@@ -13,8 +13,6 @@ import re
 AQUI = Path(__file__).resolve().parent
 SLM = AQUI.parents[1]
 DESDE = "2026-11-04"
-BEGIN = "<!-- ULTIMAS_CORRIDAS_BEGIN -->"
-END = "<!-- ULTIMAS_CORRIDAS_END -->"
 
 
 def manifiesto_completo(m):
@@ -65,6 +63,8 @@ def cargar_datos(raiz=SLM):
                 if ref.get("particion", "desarrollo") != "desarrollo" or ref["case_id"] != cid:
                     raise ValueError("Referencia ajena al desarrollo")
                 casos[cid] = {"id": cid, "clase": ref["clase"], "grupo": ref["grupo"],
+                              "familia": ref.get("familia"), "pedido": ref.get("pedido"),
+                              "prueba": ref.get("que_prueba", ""), "notas": ref.get("notas", ""),
                               "tr": ref.get("t_r_linea"), "tc": ref.get("t_c_linea"),
                               "revision_humana": ref.get("revision_humana", False), "texto": texto.splitlines()}
         elif m["casos"] != huellas:
@@ -99,21 +99,3 @@ def cargar_datos(raiz=SLM):
         raise ValueError("No hay corridas completas para mostrar")
     return {"casos": casos, "corridas": corridas, "pendientes": pendientes,
             "hasta": max(r["fin"] for r in corridas)}
-
-
-def incorporar(base, datos):
-    base = re.sub(re.escape(BEGIN) + ".*?" + re.escape(END) + "\n?", "", base, flags=re.S)
-    seccion = (AQUI / "ultimas_corridas_plantilla.html").read_text(encoding="utf-8")
-    js = json.dumps(datos, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
-    seccion = seccion.replace("__ULTIMAS_DATOS__", js)
-    base = base.replace("<main>\n", "<main>\n" + BEGIN + seccion + END + "\n", 1)
-    if "ultimas:'s-ultimas'" not in base:
-        base = base.replace("const IDS = {", "const IDS = {ultimas:'s-ultimas',", 1)
-    return base.replace("location.hash || '#resumen'", "location.hash || '#ultimas'")
-
-
-if __name__ == "__main__":
-    datos = cargar_datos()
-    panel = AQUI / "panel.html"
-    panel.write_text(incorporar(panel.read_text(encoding="utf-8"), datos), encoding="utf-8")
-    print(f"Panel actualizado: {len(datos['corridas'])} condiciones; hasta {datos['hasta']}")

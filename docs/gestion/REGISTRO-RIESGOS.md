@@ -86,11 +86,19 @@ R24: Mateo no tiene copia del audio original (Luciano, 2026-11-03). Las regrabac
 
 ## Actualización técnica — 2026-11-04
 
-R05/R07/R27: el [panel actualizado](../../experiments/slm-directo/analisis/tablero/panel.html#ultimas)
+R04/R28: Luciano plantea revisar primero la calidad y ambigüedad de los casos. El
+[panel de lectura](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+muestra la ficha y sus dudas junto al diálogo, separando intención de redacción,
+referencia y respuesta del detector. TR-11 ya documenta que la identidad del familiar
+no se verifica por texto. Es motivo para adjudicar casos en D07, no evidencia de que
+todos los errores provengan del corpus. Sin revisión humana nueva, cambios de clase
+ni reducción de probabilidad o impacto.
+
+R05/R07/R27: el [panel de lectura actualizado](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
 permite revisar pérdidas y falsas alarmas de las 15 condiciones completas disponibles.
 Su [actualizador](../../experiments/slm-directo/analisis/tablero/ultimas_corridas.py) toma
 IDs y huellas de manifiestos de desarrollo, sin enumerar el corpus ni abrir la reserva;
-rechaza CSV ajenos y textos cambiados. Seis pruebas con fixtures sintéticos verifican
+rechaza CSV ajenos y textos cambiados. Pruebas con fixtures sintéticos verifican
 esas guardas, los cortes y los errores técnicos. Los fallos y prefijos incompletos no
 se cuentan como negativos. Esta vista no mide una mejora, no cambia el ADR ni reduce
 probabilidad o impacto; las referencias siguen sin revisión humana.

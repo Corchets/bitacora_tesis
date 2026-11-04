@@ -136,25 +136,39 @@ mandar al equipo. Para armarlo con cualquier conjunto de corridas:
 python visor.py corridas/<una> corridas/<otra> --abrir
 ```
 
-### El panel
+### El panel de lectura de casos
 
-`analisis/tablero/panel.html` abre en **Últimas pruebas y errores**: las 15 condiciones
-completas del 2026-11-04 sobre los 150 casos de desarrollo, incluidos v1, v3, v4,
-roles, indicio y controles de reglas. Permite elegir dos corridas, filtrar estafas no
-detectadas o falsas alarmas y leer conversación, riesgos, primer aviso, motivo y cita.
-Cada condición enlaza su CSV y manifiesto. Una evaluación incompleta se distingue de
-un caso sin aviso; las corridas en curso o interrumpidas quedan fuera.
+[`analisis/tablero/revision-casos.html`](analisis/tablero/revision-casos.html) es el panel de
+diferencias y lectura suministrado por Luciano, actualizado conservando su estética,
+sus 88 fichas históricas y sus pestañas originales. En «Últimas pruebas · leer casos»
+permite elegir entre las 15 condiciones completas del 2026-11-04, comparar dos corridas
+y recorrer pérdidas, falsas alarmas, detecciones y legítimas sin aviso. Cada ficha
+abre el diálogo completo con riesgos y avisos, las notas originales de la referencia
+y, cuando existe, la lectura previa de v1 en Windows.
 
-Para incorporar resultados ya guardados sin inferencia ni recorrer el corpus o la
-reserva, desde la raíz del repositorio:
+«Dudas en la ficha» busca menciones explícitas de ambigüedad o revisión pendiente,
+sin adjudicar la clase. La descripción de quien redactó el caso se distingue de la
+evidencia observable en el diálogo. Las etiquetas, T_R y T_C siguen sin revisión
+humana; el panel no las modifica ni cambia el detector.
+
+Para incorporar resultados ya guardados, sin inferencia ni recorrer el corpus o la
+reserva, desde la raíz:
 
 ```bash
-python3 -I experiments/slm-directo/analisis/tablero/ultimas_corridas.py
+python3 -I experiments/slm-directo/analisis/tablero/actualizar_panel_lectura.py \
+  --base experiments/slm-directo/analisis/tablero/revision-casos.html \
+  --salida experiments/slm-directo/analisis/tablero/revision-casos.html
 ```
 
-El actualizador toma únicamente IDs y huellas de manifiestos completos de desarrollo
-desde el 2026-11-04 y exige las mismas conversaciones en todas las condiciones.
-No modifica la configuración de la demo. El resto del panel junta el estado del proyecto, el plan de
+El actualizador toma IDs y huellas de manifiestos completos de desarrollo desde el
+2026-11-04 y exige las mismas conversaciones en todas las condiciones. Excluye las
+corridas en curso o interrumpidas; los fallos y prefijos incompletos no cuentan como
+negativos. El HTML es autónomo, funciona como archivo local y conserva los datos
+históricos sin pérdida mediante compresión.
+
+### El panel general del proyecto
+
+`analisis/tablero/panel.html` junta en una página el estado del proyecto, el plan de
 trabajo, las corridas históricas sobre los 53 antecedentes, los 150 casos de desarrollo
 y un probador en vivo contra Ollama. En
 «Afinar» recalcula estafas con aviso y falsas alarmas al mover el umbral de `riesgo` y
