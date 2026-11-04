@@ -52,8 +52,8 @@ manifiesto registra `filtro_tito.indicio: false`. Ver
 
 Al terminar, el script corre [`comparar_sin_indicio.py`](../comparar_sin_indicio.py)
 y deja `comparacion.md` en el ZIP. El repositorio se descarga desde GitHub, rama
-`slm-sin-indicio`, fijado en el commit que figura en `COMMIT` de
-[`probar_sin_indicio.py`](probar_sin_indicio.py).
+`slm-sin-indicio`, fijado en el commit `4916eada648c2f7c394ae82ed43c90df47ab6573` (constante `COMMIT` de
+[`probar_sin_indicio.py`](probar_sin_indicio.py)), que contiene todo el código de esta prueba.
 
 ## Criterio de lectura
 
