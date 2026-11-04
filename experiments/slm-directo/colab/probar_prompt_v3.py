@@ -12,7 +12,7 @@
 import os, sys, subprocess, pathlib, json, hashlib, time, shutil, datetime, urllib.request
 REPO = pathlib.Path('/content/bitacora_tesis')
 RAMA = 'prompt-v3-colab'
-COMMIT = 'COMMIT_PENDIENTE'
+COMMIT = 'a42e1b5504f0015669997898441dbfb552198b4a'
 if not REPO.exists():
     subprocess.run(['git', 'clone', 'https://github.com/Corchets/bitacora_tesis.git', str(REPO)], check=True)
 subprocess.run(['git', '-C', str(REPO), 'fetch', 'origin', RAMA], check=True)
