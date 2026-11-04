@@ -444,7 +444,7 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--modelos", default="", help="modelos de Ollama separados por coma, p. ej. qwen3.5:2b")
     p.add_argument("--prompts", default="tarea", help=f"variantes separadas por coma: {', '.join(PROMPTS)}")
-    p.add_argument("--hablantes", default="ab", help="ab (con A/B), sin (sin hablantes) o ab,sin")
+    p.add_argument("--hablantes", default="ab", help="ab (con A/B), rol (PROTEGIDA/OTRA), sin (sin hablantes) o ab,sin")
     p.add_argument("--casos", default="", help="case_id separados por coma (por defecto, toda la partición)")
     p.add_argument("--lista", default="", help="listas de casos/listas/ separadas por coma (p. ej. seleccion-57,rapida-20)")
     p.add_argument("--particion", choices=sorted(casos.PARTICIONES), default="desarrollo", help="desarrollo por defecto; test_reservado solo para evaluación final tras D08")
@@ -655,6 +655,7 @@ def main(argv: list[str] | None = None) -> int:
         },
         "configs": [c for c, _ in detectores],
         "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
+        "roles_protegida": huella(casos.ROLES.read_text(encoding="utf-8")) if "rol" in hablantes else None,
         "modelos": {},
         "interrumpida": False,
         "fin": None,
@@ -699,6 +700,8 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"== {config['config']}")
                 for case_id in ids:
                     lineas = casos.cargar_texto(case_id)
+                    if config["hablantes"] == "rol":
+                        lineas = casos.con_roles(case_id, lineas)
                     marcas = []
                     for n, linea, r, aviso in procesar_caso(detector, lineas, detener_en_aviso=not args.seguir_tras_aviso):
                         escritor.writerow(_fila(config, case_id, n, linea, r, aviso))
