@@ -82,3 +82,25 @@ R27: la configuración final se eligió con 20 conversaciones sintéticas sin re
 R28: el test reservado corre sin referencia humana: ninguno de los 350 casos tiene `revision_humana` en verdadero y D07 sigue abierta. Sin esa referencia, los números finales descansan en marcas de redacción asistida. Mitigación: las llamadas con referencia humana que el equipo va a hacer y una muestra común de anotación (#54, #32).
 
 R24: Mateo no tiene copia del audio original (Luciano, 2026-11-03). Las regrabaciones siguen solo en esta Mac.
+
+
+## Actualización técnica — 2026-11-04
+
+R05: el comparador de E2B directo contra Tito llamaba `ids_de_casos("desarrollo")`,
+que enumera textos y abre referencias de ambas particiones antes de filtrarlas.
+Se detectó al leer el código y no se ejecutó esa versión. Mitigación acotada:
+el [comparador](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparar_directo_vs_tito.py)
+ahora toma solo IDs de los manifiestos de desarrollo y rechaza IDs de reserva,
+CSV ajenos y cambios de huella antes de analizar casos; seis pruebas con fixtures
+sintéticos. No abre el catálogo. Esto no certifica al ejecutor general ni a toda la
+suite: no se ejecutaron en esta copia con reserva. El incidente previo mencionado
+en el handoff sigue pendiente de decisión de Luciano; no se adjudica aquí.
+
+R07/R27: la [comparación y revisión por caso](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md)
+confirma en desarrollo 51/75 estafas con 13/75 falsas alarmas con Tito, frente a
+55/75 y 18/75 del directo. Las pérdidas y falsas alarmas muestran distinciones de
+contexto inconsistentes: datos administrativos, credenciales escritas, consejos,
+relatos y ofrecimientos. Ambas corridas cortan al primer aviso y no separan
+compuerta, indicio y variación. Mitigación propuesta, no ejecutada: adjudicación
+D07, comparación controlada y desarrollo nuevo con separación previa para elegir
+y comprobar mejoras. Ninguna baja de probabilidad o impacto ni cambio al ADR 0001.
