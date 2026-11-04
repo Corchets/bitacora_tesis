@@ -28,11 +28,15 @@ PROMPTS = {
     "tarea": ("tarea.txt",),
     "tarea+base": ("tarea.txt", "base_institucional.txt"),
     "v2": ("tarea_v2.txt",),
+    "v3": ("tarea_v3.txt",),
+    "v3-orden-v1": ("tarea_v3_orden_v1.txt",),
+    "v4": ("tarea_v4.txt",),
     "riesgo": ("riesgo.txt",),  # dos etapas: ver DetectorSLMDosEtapas
 }
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
 PROMPT_MOTIVO = "riesgo_motivo.txt"
-HABLANTES = ("ab", "sin")
+HABLANTES = ("ab", "rol", "sin")
+ROLES_HABLANTE = ("PROTEGIDA", "OTRA")
 
 # Forma obligatoria de cada respuesta del SLM. Ollama la usa para forzar la salida;
 # igual se valida acá, porque un modelo chico puede devolver algo que no cumple.
@@ -64,7 +68,7 @@ ESQUEMA_MOTIVO = {
     "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "motivo")},
     "required": ["evidencia", "motivo"],
 }
-ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "riesgo": ESQUEMA_RIESGO}
+ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO}
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -151,7 +155,10 @@ def huella(texto: str) -> str:
 
 
 def armar_mensaje_usuario(lineas: list[Linea] | tuple[Linea, ...], hablantes: str) -> str:
-    """Transcripción disponible, numerada. Con `sin`, las letras A/B no llegan al modelo."""
+    """Transcripción disponible, numerada. Con `sin`, las letras A/B no llegan al modelo.
+
+    Con `rol`, cada línea trae PROTEGIDA u OTRA en vez de la letra (ver `casos.con_roles`).
+    """
     if hablantes not in HABLANTES:
         raise ValueError(f"hablantes desconocido {hablantes!r}; opciones: {HABLANTES}")
     n = len(lineas)
@@ -160,6 +167,11 @@ def armar_mensaje_usuario(lineas: list[Linea] | tuple[Linea, ...], hablantes: st
             "Cada línea indica quién habla con A o B. A es quien habló primero; "
             "las letras no indican quién llamó ni quién es sospechoso."
         )
+        cuerpo = "\n".join(f"{i}. {l.hablante}: {l.texto}" for i, l in enumerate(lineas, start=1))
+    elif hablantes == "rol":
+        if any(l.hablante not in ROLES_HABLANTE for l in lineas):
+            raise ValueError("hablantes 'rol' requiere líneas con PROTEGIDA u OTRA (ver casos.con_roles)")
+        aclaracion = "Cada línea indica quién habla: PROTEGIDA es la persona que protegés y OTRA es con quien habla."
         cuerpo = "\n".join(f"{i}. {l.hablante}: {l.texto}" for i, l in enumerate(lineas, start=1))
     else:
         aclaracion = "Las líneas no indican quién habla."
@@ -192,7 +204,7 @@ def evidencia_en_texto(evidencia: str, lineas: list[Linea] | tuple[Linea, ...]) 
     for renglon in evidencia.splitlines():
         cita = _normalizar(renglon)
         cita = re.sub(r"^\d+\s+", "", cita)
-        cita = re.sub(r"^[ab]\s+", "", cita)
+        cita = re.sub(r"^(?:[ab]|protegida|otra)\s+", "", cita)
         if cita:
             partes.append(cita)
     return bool(partes) and all(cita in disponible for cita in partes)

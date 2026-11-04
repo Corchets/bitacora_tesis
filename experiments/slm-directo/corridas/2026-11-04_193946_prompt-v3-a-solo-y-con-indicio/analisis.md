@@ -168,8 +168,7 @@ El detalle línea por línea está en los CSV y en la
 | Duración | SLM solo y Tito con indicio, 31,8 min; Tito sin indicio, 11,3 min, sin instalación |
 | Salidas | Esta carpeta y [`2026-11-04_201116_prompt-v3-b-tito-sin-indicio`](../2026-11-04_201116_prompt-v3-b-tito-sin-indicio/) |
 
-`--prompts v3` solo existe en `prompt-v3-colab`. En `laboratorio-luciano` el ejecutor no la tiene
-registrada y la demo sigue igual.
+`--prompts v3` llegó a `laboratorio-luciano` con la rama `prompt-v4-colab`. La demo sigue igual.
 
 Las cifras de v1 y v3 se recalculan, desde esta carpeta, con
 `python -I comparar_con_v1.py`, sin correr modelos.
@@ -182,4 +181,4 @@ Las cifras de v1 y v3 se recalculan, desde esta carpeta, con
    que incluye v3 con los campos en el orden de v1 y a v1 como control en la misma sesión. Contradice la
    decisión del 2026-11-04 de conservar el orden de v2, así que requiere acuerdo.
 2. **Efecto de quitar el indicio con v1:** ya comparado; la corrida usa `slm-sin-indicio`, commit `4916ead`.
-3. **Integrar `prompt-v3-colab`:** decidir si se integra a `laboratorio-main` o queda solo como registro.
+3. **Integrar a `laboratorio-main`:** `prompt-v3-colab` y `prompt-v4-colab` ya están en `laboratorio-luciano`; decidir qué pasa de ahí.
