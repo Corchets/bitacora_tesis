@@ -11,6 +11,11 @@ por separado, el indicio de la primera activación declarado explícitamente com
 sospecha falible que puede descartarse. Solo el SLM puede sugerir el aviso; el
 puntaje de Tito nunca avisa.
 
+Con `indicio=False` (opción `--sin-indicio` de `correr.py`), Tito solo decide
+*cuándo* consultar: el SLM recibe exactamente el mismo mensaje que `DetectorSLM`
+solo (sin bloque de indicio ni de fallo técnico). La activación permanente y lo
+que se registra en las filas (línea, texto y puntaje que activaron) no cambian.
+
 Estado por conversación: contexto, activación e indicio se reinician con
 `reiniciar()` (lo llama `correr.procesar_caso` al empezar cada caso).
 
@@ -101,10 +106,11 @@ class FlujoTitoSLM:
     de contexto excedido y su política de aviso único queda en `Llamada`.
     """
 
-    def __init__(self, tito: TitoGuion, slm, umbral: float = UMBRAL_TITO) -> None:
+    def __init__(self, tito: TitoGuion, slm, umbral: float = UMBRAL_TITO, indicio: bool = True) -> None:
         self.tito = tito
         self.slm = slm
         self.umbral = umbral
+        self.indicio = indicio  # False: Tito decide cuándo, el SLM recibe el mensaje base
         self.estado = EstadoFiltro()
 
     def reiniciar(self) -> None:
@@ -158,13 +164,17 @@ class FlujoTitoSLM:
             assert tito_ms is not None
             return self._respuesta_omitida(tito_ms, tito_puntaje)
 
-        if e.fallo_tito:
-            bloque = armar_bloque_fallo_tecnico(e.fallo_tito)
-        else:
-            assert e.indicio_linea is not None and e.indicio_puntaje is not None
-            bloque = armar_bloque_indicio(e.indicio_linea, e.indicio_texto, e.indicio_puntaje)
         base = armar_mensaje_usuario(lineas, self.slm.hablantes)
-        r = self.slm.evaluar_mensaje(armar_mensaje_filtrado(base, bloque), lineas)
+        if not self.indicio:
+            mensaje = base  # idéntico al de DetectorSLM.evaluar
+        else:
+            if e.fallo_tito:
+                bloque = armar_bloque_fallo_tecnico(e.fallo_tito)
+            else:
+                assert e.indicio_linea is not None and e.indicio_puntaje is not None
+                bloque = armar_bloque_indicio(e.indicio_linea, e.indicio_texto, e.indicio_puntaje)
+            mensaje = armar_mensaje_filtrado(base, bloque)
+        r = self.slm.evaluar_mensaje(mensaje, lineas)
         r.consulta = "slm_valida" if r.valida else "slm_fallo"
         r.tito_puntaje = tito_puntaje
         r.tito_ms = tito_ms  # None tras activar: Tito no vuelve a correr (#97)

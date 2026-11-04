@@ -261,7 +261,8 @@ def tabla_por_caso(analisis: dict) -> list[str]:
 
 def configs_filtradas(manifiesto: dict) -> list[str]:
     """Configuraciones Tito→SLM de la corrida (vacío en corridas directas viejas)."""
-    return [c["config"] for c in manifiesto.get("configs", []) if c["config"].startswith("tito-slm|")]
+    return [c["config"] for c in manifiesto.get("configs", [])
+            if c["config"].startswith(("tito-slm|", "tito-slm-sin-indicio|"))]
 
 
 def analisis_filtro(manifiesto: dict, filas: list[dict], analisis: dict) -> dict:
@@ -329,6 +330,11 @@ def seccion_filtro(manifiesto: dict, analisis: dict, detalle: dict) -> list[str]
         "el primer puntaje ≥ umbral deriva al SLM en esa misma línea y lo mantiene activo; "
         "un fallo técnico de Tito también deriva, sin fabricar sospecha."
     )
+    if filtro.get("indicio") is False:
+        salida.append(
+            "Sin indicio (`--sin-indicio`): Tito solo decide cuándo consultar; el SLM recibe "
+            "el mismo mensaje que el SLM solo, sin bloque de indicio ni de fallo técnico."
+        )
     historico = "modo_termino" not in manifiesto
     if historico:
         salida.append(
