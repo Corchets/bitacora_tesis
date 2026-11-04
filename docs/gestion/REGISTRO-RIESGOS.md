@@ -112,3 +112,14 @@ Mitigación propuesta por la [matriz de seis condiciones](../../experiments/slm-
 contrastes con un factor fijo, casos ganados/perdidos, repeticiones completas y
 guardado por conversación fuera de la VM de Colab. Todavía no se implementó ni
 se ejecutó esa matriz; no baja el riesgo ni cambia el ADR.
+
+R05/R07/R27, preparación de prompt del 2026-11-04: [P1 de atribución del pedido](../../experiments/slm-directo/prompts/V3-ATRIBUCION.md)
+conserva P0 y el contrato, y explicita el riesgo de descartar ofrecimientos
+inducidos o solicitudes presentadas como trámites. El contraste de lectura de IA
+usa 17 IDs explícitos del manifiesto de desarrollo, con hashes comprobados y sin
+acceso a reserva; no acredita una mejora ni referencia humana. La lectura de
+`correr.py` confirma dos accesos pendientes de corregir antes de usarlo en esta
+copia: validación global antes de seleccionar IDs y lectura de referencias antes
+de filtrar partición. No se ejecutó el runner ni la suite completa. Candidato
+separado, sin inferencia, sin modificar demo, Tito, indicio o política; probabilidad
+e impacto sin cambios y ADR 0001 vigente.

@@ -16,6 +16,36 @@ El mensaje del usuario lo arma `detectores.py` en cada actualización: la
 transcripción disponible numerada por línea y una aclaración sobre hablantes
 según `--hablantes` (`ab`: cada línea con A o B; `sin`: sin indicar quién habla).
 
+## Versiones del system prompt
+
+Los textos completos se conservan en archivos separados. El número de versión
+identifica el historial; **P0/P1 identifica el control y el candidato de una
+comparación concreta**, no el orden histórico.
+
+| Versión | Fecha | Texto completo | Cambio y estado |
+|---|---|---|---|
+| **Versión 1 — original** | 2026-10-13 | [`tarea.txt`](tarea.txt) | Criterio de alerta, seis acciones, exclusión breve de menciones y JSON con riesgo primero. Es `tarea` en el ejecutor y **P0 de las dos corridas de 150**. Commit `d9173b6`. |
+| **Versión 2 — modificación previa** | 2026-10-21 | [`tarea_v2.txt`](tarea_v2.txt) | Reformula las acciones, explicita relatos/hipótesis y razones creíbles, quita el ejemplo de código, pone la evidencia primero y exige riesgo ≥ 0,5 con alerta. Es `v2` en el ejecutor; no fue el prompt de esas corridas de 150. Commit `886cff0`. |
+| **Versión 3 — borrador actual** | 2026-11-04 | [`tarea_v3.txt`](tarea_v3.txt) | Una hipótesis: atribuir quién pide qué a quién frente a relato, hipótesis, ofrecimiento y consejo. **P1 propuesta frente a P0/v1**, con su contrato intacto; sin registrar en el ejecutor ni medir. [Ficha de cambio y controles](V3-ATRIBUCION.md). |
+
+La v3 deriva de la **v1 realmente medida** para aislar este bloque. No es la v2
+con una corrección encima: incorporar también sus cambios de acciones, esquema
+y riesgo mezclaría factores. La v2 permanece disponible como antecedente; el
+refinamiento se registra sin sobrescribir los textos anteriores.
+
+## Versión 3: candidata P1 para Gemma 4 E2B — 2026-11-04
+
+> **Estado: propuesta sin discutir.** [P1: atribución del pedido](V3-ATRIBUCION.md),
+> avance de #51 vinculado a
+> [D07](../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y
+> [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
+P0/v1 sigue siendo `tarea.txt`, sin cambios. El borrador v3/P1
+[`tarea_v3.txt`](tarea_v3.txt) reemplaza únicamente el párrafo
+que distingue mención de pedido. No está registrado en `PROMPTS` ni `ESQUEMAS`:
+no hay una opción nueva de `--prompts` ni cambia la demo. La ficha contiene la
+hipótesis, el contraste de casos y los controles pendientes; no hay medición de P1.
+
 ## Criterios de la v1
 
 - **`tarea`** define qué es una alerta con las seis acciones solicitadas del
@@ -64,3 +94,4 @@ Los cambios se prueban juntos: no se midió el aporte de cada uno por separado.
 | 2026-10-13 | v1 | Primera versión para el ensayo #50. |
 | 2026-10-21 | v2 (`tarea_v2.txt`, variante `v2`); la v1 queda igual | Errores de la v1 en las corridas del 2026-10-14 y 2026-10-17 (ver «Criterios de la v2»). |
 | 2026-10-29 | `riesgo` (`riesgo.txt` + `riesgo_motivo.txt`), en dos etapas; v1 y v2 quedan igual | Bajar la latencia por línea: escribir el JSON completo domina el tiempo ([caché de prefijo](../analisis/2026-10-21-cache-prefijo/README.md)). Escala del riesgo anclada y «una palabra suelta no es pedido» por la minuta del 2026-10-28 (R07). Ver [análisis](../analisis/2026-10-29-riesgo-primero/README.md). |
+| 2026-11-04 | v3, borrador P1 (`tarea_v3.txt`), sin integrar al ejecutor; v1/P0 y v2 intactas | Una hipótesis: atribuir el pedido dentro de la llamada frente a relato, hipótesis, ofrecimiento y consejo. [Ficha y controles](V3-ATRIBUCION.md); sin inferencia nueva. |
