@@ -118,25 +118,27 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.args_de_modelo()
         with patch("servidor.replay.construir_detector", return_value=cargado) as construir:
             async with connect(self.url + "/panel") as panel:
-                await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e4b-it-q4_K_M"}))
+                await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e2b-it-q4_K_M"}))
                 inicio = await self.evento(panel, "inicio")
-                self.assertEqual(inicio["detector"], {"tipo": "tito-slm", "modelo": "gemma4:e4b-it-q4_K_M"})
+                self.assertEqual(inicio["detector"], {"tipo": "tito-slm", "modelo": "gemma4:e2b-it-q4_K_M"})
                 await panel.send(json.dumps({"tipo": "terminar"}))
                 await self.evento(panel, "fin")
-                await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e4b-it-q4_K_M"}))
+                await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e2b-it-q4_K_M"}))
                 await self.evento(panel, "inicio")
                 await panel.send(json.dumps({"tipo": "terminar"}))
                 await self.evento(panel, "fin")
         self.assertIs(self.servidor.detector, cargado)
         self.assertEqual(construir.call_count, 1, "elegir el mismo no vuelve a cargarlo")
         self.assertEqual(construir.call_args.args[0], "tito-slm")
-        self.assertEqual(construir.call_args.kwargs["modelo"], "gemma4:e4b-it-q4_K_M")
+        self.assertEqual(construir.call_args.kwargs["modelo"], "gemma4:e2b-it-q4_K_M")
 
     async def test_detector_desconocido_o_que_no_carga_avisa_y_no_cambia_el_actual(self):
         anterior = self.servidor.detector
         self.args_de_modelo()
         async with connect(self.url + "/panel") as panel:
             await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "qwen3.5:0.8b-q8_0"}))
+            self.assertIn("Detector desconocido", (await self.evento(panel, "error"))["mensaje"])
+            await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e4b-it-q4_K_M"}))
             self.assertIn("Detector desconocido", (await self.evento(panel, "error"))["mensaje"])
             with patch("servidor.replay.construir_detector", side_effect=replay_mod.correr.FalloAlCalentar("no responde")):
                 await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e2b-it-q4_K_M"}))

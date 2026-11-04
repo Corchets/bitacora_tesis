@@ -197,7 +197,7 @@ Las llamadas que Tito nunca deriva quedan en los denominadores: una estafa no de
 | **Reglas léxicas** | 58,3 % de falsas alarmas en 24 negativos difíciles | No distinguen mencionar de pedir. Quedan como línea base y respaldo sin modelo. |
 | **Cascada con zona gris (spike #29)** | Bajó de 12/16 a 7/16 aciertos | Consultaba al modelo solo en una zona gris. Es distinta de la compuerta actual, que queda abierta una vez activada. |
 | **Gemma 4 E2B directo** | 10/10 · 1/10 | Consulta en todas las líneas. Queda como comparador. |
-| **Gemma 4 E4B con Tito viejo** | 10/10 · 1/10 | En la M1 de 8 GB avisó a +49 s. Queda como comparador con GPU. |
+| **Gemma 4 E4B con Tito viejo** | 10/10 · 1/10 | En la M1 de 8 GB avisó a +49 s. Salió del panel el 2026-11-03; queda solo como antecedente de la matriz. |
 | **Tito nuevo con E2B** | 2/10 · 0/10 | Pierde casi todas las estafas. Se probó sin ajuste fino del encoder. |
 | **Qwen3.5 9B con `v2`** | 10/10 · 1/10 | 6,6 GB: techo experimental, no entra en el teléfono. |
 | **Riesgo primero (`gemma3n:e2b`)** | 10/10 · 3–6/10, o 2/10 · 0/10 | Lo elegido en selección no se transfiere al informe. |

@@ -23,7 +23,7 @@ Esta es la configuración que entra a la evaluación final. No se ajusta mirando
 
 | Alternativa | A favor | En contra | Por qué se descartó |
 |---|---|---|---|
-| Tito viejo → Gemma 4 E4B | 10/10 estafas en #101 | 1/10 falsas alarmas; en la M1 de 8 GB entra en swap y avisó a +49 s | Misma detección, más costo y sin evidencia en vivo. Queda como comparador con GPU |
+| Tito viejo → Gemma 4 E4B | 10/10 estafas en #101 | 1/10 falsas alarmas; en la M1 de 8 GB entra en swap y avisó a +49 s | Misma detección, más costo y sin evidencia en vivo. Salió del panel el 2026-11-03; queda solo como antecedente de la matriz |
 | Gemma 4 E2B directo | 10/10 estafas; no depende de Tito | 1/10 falsas alarmas y consulta en todas las líneas | Tito evita consultas sin perder estafas en estos 20 casos |
 | Tito nuevo → E2B | 0/10 falsas alarmas | 2/10 estafas | Pierde casi todas las estafas |
 | Qwen3.5 9B con prompt `v2` | 10/10 · 1/10 en GPU | 6,6 GB, no entra en el teléfono | Se conserva como techo, no como candidato |
@@ -41,7 +41,7 @@ Esta es la configuración que entra a la evaluación final. No se ajusta mirando
 - **E2B no cumple el criterio de 2 s de #84** en la M1 de 8 GB: mediana de 3,74 s por consulta, aunque el aviso llegó entre −0,45 y +0,40 s del fin del pedido.
 - **Sin medición en teléfono.** No se midió latencia, memoria, batería ni temperatura en Android. El archivo de E2B pesa 4,59 GB, Tito ocupa unos 0,48 GB y el ASR llega a 1 GB, muy por encima del techo de 512 MB de la prefactibilidad.
 - **La evidencia que respalda la elección es de desarrollo:** 20 conversaciones sintéticas sin revisión humana, de las que salió la elección entre 10 modelos, y 9 llamadas guionadas con 4 guiones y 2 voces. Esos números son optimistas y no estiman el rendimiento final.
-- **La reserva es pública desde el 2026-10-23.** Si Gemma 4 E2B se publicó después, hay que declarar la posible contaminación del test (R05). Falta verificar su fecha.
+- **La reserva es pública desde el 2026-10-23.** Gemma 4 E2B se publicó antes: el 2026-03-31 según el [registro de versiones de Google](https://ai.google.dev/gemma/docs/releases?hl=en), así que no pudo entrenarse con ella (R05).
 - El ASR sigue confundiendo «token» y «CVV» con ambas opciones, y Parakeet no permite fijar el idioma.
 
 **Para reconsiderarla:** que el test reservado quede lejos de la meta del tutor, que E2B no pueda correr en el teléfono de referencia, o que los términos críticos perdidos cambien avisos en voz real.
