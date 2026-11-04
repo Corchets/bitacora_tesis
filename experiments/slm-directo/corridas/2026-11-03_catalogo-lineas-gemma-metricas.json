@@ -1,0 +1,91 @@
+{
+  "estado": "integración secundaria, desarrollo",
+  "corrida_sha256": "f8f4ee40b27a5eac46f4f3e92034a23c8922afe6ae567b929272ec4c3c3a1c6c",
+  "analizador_sha256": "5419bdf3a23edcf25aa1bf4aa0a39d7f8e9b55b3ffdd3208081919bf1538c0a3",
+  "consultas": 42,
+  "consultas_invalidas": 0,
+  "slm_ms_p50": 397.3670734994812,
+  "slm_ms_p95": 638.0089060003229,
+  "resumen": [
+    {
+      "ventana": "linea",
+      "con_tito": false,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 6,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 3,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "linea",
+      "con_tito": false,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 1,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 1,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "linea",
+      "con_tito": true,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 2,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 1,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "linea",
+      "con_tito": true,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 2,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "par",
+      "con_tito": false,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 5,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 1,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "par",
+      "con_tito": false,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 3,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 1,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "par",
+      "con_tito": true,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 3,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "par",
+      "con_tito": true,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 0,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "sin_alerta_con_fallo": 0
+    }
+  ]
+}
