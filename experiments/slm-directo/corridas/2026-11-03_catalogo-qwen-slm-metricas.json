@@ -1,0 +1,99 @@
+{
+  "estado": "integración secundaria, desarrollo; no evaluación final",
+  "corrida_sha256": "e97cfec1074992f8a0188bef2f5c3a15e12cf123b1b1a6fbf633158da8c38f08",
+  "analizador_sha256": "0719cc27136fda4bc54643fb30d8e3c301762054d152802bf00fbe7ffd1a01c0",
+  "consultas": 134,
+  "consultas_invalidas": 0,
+  "slm_ms_p50": 759.6743659996719,
+  "slm_ms_p95": 1181.808422999893,
+  "resumen": [
+    {
+      "ventana": "cuatro",
+      "con_tito": false,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 1,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "cuatro",
+      "con_tito": false,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 1,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "cuatro",
+      "con_tito": true,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 0,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "cuatro",
+      "con_tito": true,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 0,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "acumulada",
+      "con_tito": false,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 2,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "acumulada",
+      "con_tito": false,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 2,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "acumulada",
+      "con_tito": true,
+      "politica": "mayor_puntaje",
+      "estafas_con_alerta_slm": 1,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    },
+    {
+      "ventana": "acumulada",
+      "con_tito": true,
+      "politica": "mayor_y_umbral",
+      "estafas_con_alerta_slm": 1,
+      "estafas": 10,
+      "legitimas_con_alerta_slm": 0,
+      "legitimas": 10,
+      "estafas_sin_alerta_con_fallo": 0,
+      "legitimas_sin_alerta_con_fallo": 0
+    }
+  ]
+}
