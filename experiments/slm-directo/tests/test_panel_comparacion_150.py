@@ -84,6 +84,19 @@ class PanelComparacionTest(unittest.TestCase):
         self.assertEqual(datos["errores"], {"3": "timeout"})
         self.assertEqual(len(datos["filas"]), 4)  # no inventa negativos tras el corte
 
+    def test_diferencias_solo_compara_respuestas_observadas(self):
+        solo = {"aviso": 3, "motivo": "Pedido", "evidencia": "Dame",
+                "filas": [[0.2, 1], [0.3, 1], [0.5, 1]]}
+        tito = {"aviso": 4, "motivo": "Otro pedido", "evidencia": "Pasame",
+                "filas": [[None, 0], [0.4, 1], [0.5, 1], [0.8, 1]]}
+        self.assertEqual(panel.diferencias(solo, tito),
+                         {"riesgo": [2], "alerta": [3], "fundamento": True})
+        # Un error y una respuesta ausente no son una diferencia de riesgo.
+        tito["filas"] = [[None, 2]]
+        tito["aviso"] = None
+        self.assertEqual(panel.diferencias(solo, tito),
+                         {"riesgo": [], "alerta": [], "fundamento": False})
+
 
 if __name__ == "__main__":
     unittest.main()

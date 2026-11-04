@@ -1,6 +1,6 @@
 # Gemma 4 E2B solo contra Tito viejo → E2B: comparación y fallos
 
-**Revisión:** 2026-11-04, rama `laboratorio-luciano`. Evidencia de desarrollo para
+**Revisión ampliada:** 2026-11-04, rama `laboratorio-luciano`. Evidencia de desarrollo para
 [#51](https://github.com/Corchets/bitacora_tesis/issues/51) y
 [#68](https://github.com/Corchets/bitacora_tesis/issues/68); ambos siguen abiertos.
 Se cruzan las dos corridas, las estafas perdidas, las falsas alarmas y los aportes de
@@ -119,12 +119,17 @@ python3 -I experiments/slm-directo/tests/test_panel_comparacion_150.py
 La base se copia a una carpeta temporal aislada antes de leerla y el proceso no
 importa módulos de esa carpeta. El generador reutiliza el comparador con lista
 permitida de manifiestos; no enumera casos ni abre el catálogo. El HTML es
-completo, funciona como archivo local y ocupa menos de 512 KB. Las cuatro pruebas
+completo, funciona como archivo local y ocupa menos de 512 KB. Las cinco pruebas
 del panel verifican regeneración sin duplicados, rechazo de casos ajenos,
-escapado del JSON y distinción entre omisión, respuesta, error y corte. Pasaron
-también las seis guardas del comparador. En Chrome se comprobaron filtros,
+escapado del JSON y distinción entre omisión, respuesta, error y corte, y comparación solo de respuestas
+observadas. Pasaron
+también las seis guardas del comparador. En la versión anterior, en Chrome se comprobaron filtros,
 búsqueda sin coincidencias, SOPORTE-001 con filas sin evaluar después de L10 y
-navegación a los pasos.
+navegación a los pasos. La ampliación de diferencias se verificó con cinco pruebas
+del panel, seis guardas del comparador y ejecución del JavaScript en un DOM
+simulado: 15 filtros, 150 detalles y búsqueda vacía. La comprobación visual de
+esta ampliación en Chrome quedó incompleta: la herramienta devolvió el contenido
+local en blanco, sin árbol del documento; no se certifica su presentación móvil.
 
 ## Primero, los tres casos pedidos
 
@@ -313,6 +318,109 @@ En los otros siete sí hubo consulta. En 1.083 líneas consultadas por ambos,
 legítimas, tres y tres. Esto motiva medir indicio y repetibilidad, no demuestra
 que el indicio sea la causa. Avisar antes tampoco garantiza un motivo correcto.
 
+## Inventario completo de diferencias observadas (2026-11-04)
+
+El saldo de cuatro estafas y cinco falsas alarmas netas no es la cantidad de casos
+que cambiaron. Al quitar Tito se recuperan **cinco estafas y se pierde una**;
+aparecen **ocho falsas alarmas y desaparecen tres**. Cambia el resultado en 17/150
+conversaciones. Las tablas de pérdidas y falsas alarmas de este documento explican
+esos casos; el panel permite filtrarlos y ver sus respuestas completas.
+
+Otras **17 conversaciones** conservan el aviso pero cambian de línea. De las 14
+estafas, diez avisan antes sin Tito y cuatro antes con Tito. Las otras tres son
+legítimas: retrasar su falsa alarma no la elimina. Este es el inventario completo
+(IDs íntegros; no se convierten líneas a segundos):
+
+| Caso | SLM solo | Con Tito | Lectura del cambio |
+|---|---:|---:|---|
+| `CV2-D-V-BANCO-002` | L11 | L18 | Directo: mirar una solicitud. Con Tito: autorizar un equipo nuevo; el aviso temprano no prueba mejor reconocimiento. |
+| `CV2-D-V-BANCO-004` | L8 | L10 | Directo: verificar teléfono. Con Tito: envío de código; en L8 la compuerta todavía estaba cerrada. |
+| `CV2-D-V-BANCO-006` | L10 | L14 | Directo: confirmar teléfono. Con Tito: entregar seis números; cambian momento y fundamento. |
+| `CV2-D-V-BANCO-007` | L6 | L17 | Directo: noticia del cambio de teléfono. Con Tito: confirmar receptor de verificaciones; en L6 no había derivación. |
+| `CV2-D-V-BANCO-008` | L10 | L16 | Directo: ofrecimiento de visita. Con Tito: sobre con efectivo; la compuerta no había abierto en L10. |
+| `CV2-D-V-BANCO-010` | L3 | L1 | Con Tito basta la presentación del banco; el directo espera la validación pendiente. Revisar fundamento del adelanto. |
+| `CV2-D-V-PREMIO-004` | L15 | L14 | Tito avisa al pedido de tres números de seguridad; directo espera que la persona los nombre como código de seguridad. |
+| `CV2-D-V-SOPORTE-003` | L10 | L14 | Directo: pantalla que pide credenciales. Con Tito: después de confirmarse el pedido; llega después de T_R. |
+| `CV2-D-V-SOPORTE-004` | L13 | L17 | Directo: noticia de control remoto. Con Tito: permiso para mover cursor y escribir; llega después de T_R. |
+| `CV2-D-V-WHATSAPP-003` | L12 | L8 | Con Tito avisa por anuncio de código; directo espera el pedido de leerlo. Revisar el sustento del aviso previo. |
+| `CV2-D-V-WHATSAPP-006` | L26 | L25 | Con Tito completa «pasame» usando el contexto; directo espera «eso que apareció». Diferencia de una actualización. |
+| `LAB-banco-numeros-sin-clave` | L3 | L4 | Misma presión y misma cita; con Tito avisa una línea después. No demuestra una causa distinta. |
+| `LAB-no-bajes-nada` | L1 | L4 | Ambos convierten un relato en pedido actual. Con Tito el consejo contrario ya estaba disponible y sigue fallando. |
+| `LG-BANK-VERIF-01-e01` | L2 | L6 | Directo: deseo de cambiar clave atribuido al banco. Con Tito: ofrecimiento de números tratado como pedido. |
+| `TR-07-pedido-partido-en-dos-lineas` | L6 | L7 | Directo: pregunta de qué hacer. Con Tito: «pasame lo que te llegó». El pedido explícito llega después. |
+| `TR-10-ofrecimiento-inducido` | L4 | L6 | Directo: presión y cuenta retenida. Con Tito: anuncio de SMS. Ninguno de esos motivos prueba por sí solo el pedido. |
+| `TR-11-familiar-real-pide-plata` | L4 | L9 | Ambos alarman por ayuda familiar; con Tito ya acordaban cortar y devolver la llamada. Sigue siendo falsa alarma. |
+
+En **34 casos adicionales** la línea del aviso coincide, pero cambia literalmente
+el motivo, la evidencia citada o ambos. Se distingue cambio textual de cambio
+semántico: agregar «por teléfono», formular un consejo o abreviar una cita no
+prueba una mejora. El panel muestra el par completo en el filtro «Misma línea,
+cambia motivo o cita». Los 34 son:
+
+- `CV2-D-L-BANCO-002`: L7.
+- `CV2-D-L-BANCO-010`: L10.
+- `CV2-D-V-BANCO-001`: L29.
+- `CV2-D-V-BANCO-005`: L5.
+- `CV2-D-V-FAMILIAR-002`: L16.
+- `CV2-D-V-FAMILIAR-003`: L17.
+- `CV2-D-V-ORGANISMO_PREVISIONAL-001`: L12.
+- `CV2-D-V-ORGANISMO_PREVISIONAL-002`: L9.
+- `CV2-D-V-SOPORTE-002`: L7.
+- `CV2-D-V-SOPORTE-006`: L14.
+- `CV2-D-V-WHATSAPP-001`: L9.
+- `CV2-D-V-WHATSAPP-002`: L10.
+- `CV2-D-V-WHATSAPP-005`: L13.
+- `LAB-acceso-remoto`: L3.
+- `LAB-acceso-remoto-parafrasis`: L3.
+- `LAB-anses-beneficio`: L3.
+- `LAB-anses-beneficio-parafrasis`: L3.
+- `LAB-arca-canal-oficial`: L3.
+- `LAB-arca-deuda`: L3.
+- `LAB-banco-codigo`: L3.
+- `LAB-banco-codigo-parafrasis`: L3.
+- `LAB-banco-revisa-app`: L3.
+- `LAB-digitos-sin-palabra`: L3.
+- `LAB-familiar-peligro`: L4.
+- `LAB-familiar-peligro-parafrasis`: L4.
+- `LAB-pantalla-sin-programa`: L3.
+- `LAB-whatsapp-codigo`: L3.
+- `SC-CLAVE-CAMBIO-01-e01`: L2.
+- `SC-FAMILIAR-DINERO-01-e01`: L9.
+- `SC-ORG-BENEFICIO-01-e01`: L7.
+- `SC-SOPORTE-CLAVE-01-e01`: L6.
+- `TR-08-frase-cortada-candado`: L3.
+- `TR-09-victima-se-niega`: L3.
+- `TR-13-turno-medico-pide-dni`: L5.
+
+Los cambios de fundamento que merecen atención incluyen FAMILIAR-003: el directo
+atribuye un pedido de alias a quien lo ofrece; con Tito se suma una solicitud
+anterior de comprobante, pero sigue invirtiéndose el ofrecimiento. En WHATSAPP-002
+Tito explicita que el código podría permitir acceso, mientras el directo solo
+nombra el cierre del diagnóstico. En LAB-whatsapp-codigo ocurre lo inverso: el
+directo nombra verificación y el texto con Tito queda en «seis dígitos». En
+LAB-banco-revisa-app ambos sostienen una interpretación errónea del consejo de
+cortar y consultar el canal propio. Son observaciones de estas respuestas, no
+atribuciones causales al indicio.
+
+Estas categorías son excluyentes: **17 de resultado + 17 de momento + 34 solo de
+texto = 68** conversaciones con algún cambio en el primer aviso. Las otras 82
+mantienen aviso, línea y fundamento: 73 sin aviso y nueve con el mismo aviso y texto.
+Esto no significa igualdad de todas sus respuestas numéricas.
+
+En las **1.083 líneas consultadas por ambos** hay **540 diferencias de riesgo en
+112 conversaciones** y **21 cambios del booleano en 21 conversaciones**. Se
+superponen con las categorías anteriores; no se suman como casos nuevos. El panel
+marca cada línea y permite saltar a ella. Un 0,2 contra 0,3 con ambos sin aviso es
+una diferencia numérica, no un acierto nuevo. Las omisiones de compuerta y las
+líneas sin evaluar tras el primer aviso se muestran como estados propios y no
+entran como respuestas negativas en este cruce.
+
+En costo: 1.139 líneas omitidas dentro del recorrido con Tito; 1.039 consultas
+menos al contrastar los dos recorridos, que cortan en distintos puntos. La mediana
+por consulta es 309,4 ms con Tito frente a 290,8 ms solo; no mide el costo total ni
+prueba que Tito acelere cada consulta. Persistencia, repetibilidad y costo sobre
+trayectorias completas todavía no están medidos.
+
 ## Qué aportan Ignacio y Evaristo a esta comparación
 
 | Ensayo | Resultado que aporta | Límite para mejorar estos fallos |
@@ -334,13 +442,113 @@ advierte contra elegir un umbral que luce bien en un grupo de guiones.
 > y de reconsiderar el [ADR 0001](../../../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)
 > para implementar variantes. No se modificaron prompt, modelo, umbral ni política.
 
-| Orden | Prueba o revisión propuesta | Qué permite decidir | Riesgo que se debe medir junto con la mejora |
+**Dirección solicitada por Luciano (2026-11-04):** usar las discrepancias para
+mejorar SLM y Tito, conservando SLM solo como control; no cambiar prompt,
+entrenamiento y política juntos. No se cambia ahora la configuración de la demo.
+La matriz y los detalles operativos que siguen son propuestas de desarrollo.
+
+### Matriz para separar prompt y Tito
+
+P0 es el prompt actual; P1, una modificación concreta. T0 es Tito viejo; T1, un
+único candidato mejorado, persistido y congelado antes de comparar. Gemma 4 E2B
+conserva sus pesos, cuantización y parámetros. Mejorar el prompt del SLM no
+significa entrenar sus pesos.
+
+| Prompt | SLM solo | Con Tito viejo T0 | Con Tito mejorado T1 |
 |---|---|---|---|
-| 1 | Adjudicar clase y T_R/T_C en PREMIO-003, SOPORTE-005, FAMILIAR-004/005/006, TR-01 y las once sin pedido; revisar TR-06 y TR-08 con prefijos disponibles. Conservar originales. | Separar fallo del detector de ambigüedad de referencia. | Cambiar etiquetas después de mirar errores puede fabricar una mejora; reportar ambas lecturas y quién adjudicó. |
-| 2 | En la misma PC, comparar SLM directo, compuerta con indicio y compuerta sin indicio. Misma configuración fijada, hasta fin de llamada y repetición de cada condición. | Distinguir omisión de compuerta, aporte del indicio y variación entre ejecuciones. | Quitar el indicio puede recuperar estafas y sumar falsas alarmas; más consultas pueden elevar tiempo y memoria. Registrar primero aviso y persistencia aparte. |
-| 3 | Probar una instrucción que distinga quién pide a quién, relato/hipótesis/ofrecimiento/consejo, y solicitud sensible dentro del contexto. Cubrir efectivo, credencial escrita, datos parciales y objetos elípticos. | Atacar las pérdidas con pedido y los errores de atribución con una sola hipótesis evaluable. | Eximir cualquier trámite puede perder PREMIO/SOPORTE; ampliar datos sensibles puede empeorar banco y TR-13; condicionales pueden empeorar familia legítima. No se redactó ni aplicó un prompt candidato. |
-| 4 | Comparar aviso inmediato con confirmación en una actualización posterior; no usar líneas futuras para decidir retrospectivamente el primer aviso. | Comprobar si TR-08 y picos aislados se evitan con más contexto. | Puede llegar tarde o no avisar cuando se corta la llamada. TR-04 ya está en T_C: medir demora y avisos previos al cumplimiento, no solo menos FA. La persistencia no garantiza corregir una interpretación errónea sostenida. |
-| 5 | Solo si sigue siendo necesario, contrastar otro candidato con el mismo prompt y los mismos datos de desarrollo autorizados. | Saber qué parte cambia con la capacidad del modelo. | Otro modelo cambia costo, memoria y potencial contaminación; no elegirlo por rescatar solo estos casos. Respetar R05 y su fecha límite antes de cualquier evaluación. |
+| Actual P0 | A: control directo | B: sistema actual | E: cambia solo Tito |
+| Nuevo P1 | C: cambia solo prompt | D: prompt con Tito viejo | F: ambos cambios |
+
+- **C−A y D−B:** efecto del prompt sin y con Tito viejo.
+- **E−B y F−D:** efecto de Tito bajo prompt viejo y nuevo.
+- **F−E:** efecto del prompt con Tito mejorado.
+- **(F−E)−(D−B):** si el efecto del prompt cambia al cambiar Tito, calculado
+  por métrica; no implica un tamaño de muestra suficiente para una conclusión estadística.
+
+Comparar solo F contra B confunde los factores. Puede ocurrir que el prompt
+recupere casos y Tito pierda otros, dejando casi igual el saldo. Cada contraste
+debe listar recuperaciones, pérdidas, falsas alarmas nuevas/eliminadas, momento y
+fundamento, además del porcentaje. No se agregan todos los errores como una
+única «mejora» ni se fija ahora una ponderación entre ellos.
+
+### Orden de trabajo propuesto
+
+1. Usar el inventario y el panel anotado para revisar las ambigüedades de D07.
+   Los originales quedan conservados; el análisis de IA no es revisión humana.
+2. Asegurar acceso exclusivo a desarrollo antes de ejecutar: adaptar el ejecutor
+   o usar la copia sin reserva, verificando que tampoco requiera sus referencias
+   al inicializar. La guarda del comparador no certifica `correr.py`.
+3. Repetir SLM solo, Tito con indicio y Tito sin indicio con P0 y T0 fijados.
+   Este diagnóstico separa omisiones, efecto del indicio y variación; no se
+   multiplica automáticamente por cada prompt posterior.
+4. Separar desarrollo nuevo por semillas/variantes antes de observar respuestas
+   (#55, D07/D08): ajuste y comprobación. Los 150 vistos sirven como diagnóstico
+   y regresión declarada, no como muestra independiente recién creada.
+5. Probar una hipótesis de prompt por vez en A/B/C/D: quién pide a quién;
+   relato/hipótesis; ofrecimiento/consejo; trámites, elipsis y pedidos condicionales.
+   Una P1 no reúne todos esos cambios. Conservar P0 para todos los contrastes.
+6. Evaluar una mejora concreta de Tito como T1, completar E/F y registrar qué
+   cambia: datos, entrenamiento, umbral, unidad de entrada o indicio. Esos cambios
+   no se mezclan entre sí sin controles adicionales. El aporte sugerido por el
+   amigo todavía no está especificado ni se identifica con una variante inventada.
+7. Solo después probar espera de una actualización, contra la misma combinación
+   fijada de prompt/Tito, con política inmediata como control. Medir falsas
+   alarmas evitadas, retraso en líneas y avisos que se pierden por fin de llamada;
+   TR-04 ya avisa en T_C. No usar futuro para justificar un aviso anterior.
+8. Elegir con desarrollo de ajuste, comprobar una vez en la parte separada y
+   congelar configuración/protocolo antes de la evaluación final. Volver a ajustar
+   mirando la comprobación consume su independencia y debe declararse. Resolver
+   D07/D08 y reconsiderar ADR 0001 si se adopta una variante distinta.
+
+### Tests unitarios y pruebas experimentales
+
+Los tests deterministas comprueban **que se ejecuta el experimento correcto**:
+selección y hash de P0/P1 y T0/T1; SLM solo sin compuerta ni indicio; compuerta con
+umbral y reinicio por conversación; ausencia de futuro y referencias humanas en
+la entrada; continuación tras el aviso sin duplicar el primer aviso; omisión,
+fallo técnico y silencio válidos separados; guardado y reanudación sin mezclar
+configuraciones ni duplicar resultados. Probar con dobles y casos sintéticos,
+sin descargar modelos ni recorrer la reserva.
+
+Las corridas con modelos comprueban **si mejora el comportamiento**. Los casos
+BANCO-003, PREMIO-003, SOPORTE-005 y sus legítimas comparables son regresiones de
+desarrollo; pasarlos no demuestra generalización. Un test de cadena o una frase
+aislada no valida la comprensión incremental del diálogo.
+
+### Repeticiones y preparación de Colab
+
+Se proponen inicialmente **dos ejecuciones completas por condición** para detectar
+variación, manteniendo seed 42 y alternando el orden de condiciones. No es un
+cálculo de potencia ni aumenta el número de conversaciones independientes. El
+mínimo principal son 6 condiciones × 2 repeticiones = **12 corridas**; los tres
+controles previos requieren seis corridas. Si fueran los mismos 150 casos, serían
+1.800 y 900 recorridos de conversación respectivamente, más calentamiento. No
+son tiempos estimados ni una orden de ejecutar ahora.
+
+En la matriz principal, el indicio conserva el modo actual en T0 y T1; modificar
+su contenido o quitarlo constituye otro contraste. Cada condición debe usar los
+mismos textos, prefijos y referencias congeladas,
+continuar hasta fin de conversación y registrar primer aviso por separado de
+respuestas posteriores. No se combinan las corridas actuales, que cortan al
+aviso, con las nuevas para presentar persistencia o ahorro como si el recorrido
+fuera idéntico. Una seed fija no sustituye comprobar variación observada.
+
+El [Colab actual](../../colab/README.md) ejecuta Tito viejo y reglas y todavía no
+implementa esta matriz. Antes de dejarla corriendo necesita selector explícito de
+condición/repetición, comprobación de modelo/digest, hashes de prompt/Tito/datos,
+versiones fijadas, prueba de uso real de GPU y persistencia por conversación fuera
+de la máquina temporal. Reanudar solo unidades completas, coincidentes en todos
+los hashes; conservar los fallos y reintentos sin convertirlos en negativos ni
+elegir la respuesta que más convenga. Entrenar T1 una vez sobre ajuste autorizado,
+guardar el artefacto, y reutilizarlo en todos sus controles; no reentrenarlo con
+casos de comprobación o evaluación.
+
+Google declara que los recursos y tiempos de sesión varían y que las máquinas
+virtuales tienen vida máxima; por eso el ZIP al final no alcanza como único
+resguardo ([FAQ oficial de Colab](https://research.google.com/colaboratory/faq.html),
+consultada el 2026-11-04). No se abrió una sesión ni se lanzó una corrida nueva.
+Para calidad, comparar condiciones dentro del mismo entorno; para latencia,
+registrar hardware, calentamiento y uso de GPU y no mezclar los tiempos con Windows.
 
 En cada prueba se registran primer aviso, fundamento y cita, T_R/T_C, avisos sin
 pedido, falsas alarmas comunes/difíciles, consultas, errores, latencia y configuración.
@@ -371,11 +579,15 @@ se ubicaron los aportes ya integrados de Ignacio y Evaristo.
 
 Evidencia: experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md.
 Comparador sin acceso al catálogo ni enumeración de casos; seis pruebas de guardas
-con fixtures sintéticos, cuatro pruebas del panel y reproducción del recuento
+con fixtures sintéticos, cinco pruebas del panel y reproducción del recuento
 sobre IDs de manifiestos. Panel ampliado con comparación por caso y pasos propuestos.
 
-Ninguna decisión nueva. D07/D08 siguen abiertas y ADR 0001 vigente. No se ejecutaron
+Ampliación: inventario de 17 cambios de resultado, 17 de momento y 34 solo de
+texto del aviso; 540 cambios de riesgo en 112 casos sobre líneas comparables.
+Matriz propuesta de seis condiciones para separar prompt y Tito, tests y preparación
+de Colab. Luciano pidió aislar cambios; no se fijaron candidatos ni particiones.
+D07/D08 siguen abiertas y ADR 0001 vigente. No se ejecutaron
 variantes ni se modificó el detector. Próximo paso propuesto: acordar adjudicación,
-comparación sin indicio y desarrollo nuevo para elegir/comprobar mejoras.
+comparación sin indicio, matriz prompt × Tito y desarrollo separado para elegir/comprobar mejoras.
 #51 y #68 siguen abiertos; no corresponde Closes en este avance.
 ```

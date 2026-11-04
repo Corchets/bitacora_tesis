@@ -104,3 +104,11 @@ relatos y ofrecimientos. Ambas corridas cortan al primer aviso y no separan
 compuerta, indicio y variación. Mitigación propuesta, no ejecutada: adjudicación
 D07, comparación controlada y desarrollo nuevo con separación previa para elegir
 y comprobar mejoras. Ninguna baja de probabilidad o impacto ni cambio al ADR 0001.
+
+R07/R27, ampliación del 2026-11-04: el saldo neto oculta regresiones: 17 casos
+cambian de resultado, 17 de momento y 34 solo de motivo/cita. Cambiar prompt y Tito
+juntos impediría atribuir el efecto y podría compensar pérdidas con recuperaciones.
+Mitigación propuesta por la [matriz de seis condiciones](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md#matriz-para-separar-prompt-y-tito):
+contrastes con un factor fijo, casos ganados/perdidos, repeticiones completas y
+guardado por conversación fuera de la VM de Colab. Todavía no se implementó ni
+se ejecutó esa matriz; no baja el riesgo ni cambia el ADR.

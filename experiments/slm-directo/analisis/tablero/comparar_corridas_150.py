@@ -37,6 +37,18 @@ def resultado(filas):
     }
 
 
+def diferencias(solo, tito):
+    """Compara únicamente respuestas válidas observadas en la misma línea."""
+    comunes = [(n, a, b) for n, (a, b) in enumerate(zip(solo["filas"], tito["filas"]), 1)
+               if a[1] == b[1] == 1]
+    return {
+        "riesgo": [n for n, a, b in comunes if a[0] != b[0]],
+        "alerta": [n for n, _, _ in comunes if (solo["aviso"] == n) != (tito["aviso"] == n)],
+        "fundamento": solo["aviso"] is not None and tito["aviso"] is not None and
+                      (solo["motivo"], solo["evidencia"]) != (tito["motivo"], tito["evidencia"]),
+    }
+
+
 def cargar_datos():
     directo, tito, refs = comparador.datos(DIRECTO, TITO)
     manifiestos = [json.loads((p / "manifiesto.json").read_text()) for p in (DIRECTO, TITO)]
@@ -61,6 +73,7 @@ def cargar_datos():
             "activacion": next((int(r["linea"]) for r in tito[cid] if r["consulta"] != "omitida"), None),
             "indicio": next((r["indicio_texto"] for r in tito[cid] if r["indicio_texto"]), ""),
         })
+        casos[-1]["diferencias"] = diferencias(casos[-1]["solo"], casos[-1]["tito"])
     estadisticas = {}
     for modo, registros in (("solo", directo), ("tito", tito)):
         v = [c for c in casos if c["clase"] == "vishing"]

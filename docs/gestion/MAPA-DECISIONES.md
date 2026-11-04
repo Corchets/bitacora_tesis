@@ -214,6 +214,13 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   y comprobar mejoras. No se aprueba ninguna variante, no se reabre D09 ni se
   cambia el denominador pendiente de falsas alarmas; D07/D08 siguen abiertas.
 
+- **Dirección solicitada por Luciano (2026-11-04):** mejorar SLM y Tito aislando
+  cada cambio; conservar SLM solo como control experimental. La [matriz propuesta
+  prompt × Tito](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md#matriz-para-separar-prompt-y-tito)
+  combina prompt actual/nuevo con SLM solo/Tito viejo/Tito mejorado. Los candidatos,
+  repeticiones, particiones y política siguen como propuesta; no se cierra D08 ni
+  se cambia la configuración vigente de D09.
+
 ### D09 — Elegir ASR y detector
 
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
