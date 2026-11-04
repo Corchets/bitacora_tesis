@@ -9,7 +9,30 @@
 > y el protocolo de comparación en
 > [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-## Cambio e hipótesis
+## Estado actual
+
+**Desde esta sección hacia abajo, el documento describe el borrador anterior**, derivado de v1, y queda como
+antecedente. Ese texto está en `git show 8a718fe:experiments/slm-directo/prompts/tarea_v3.txt`. Sus
+afirmaciones de que v3 parte de v1, no está medida o conserva el contrato de v1 ya no valen para el texto vigente.
+
+**Texto vigente:** [`tarea_v3.txt`](tarea_v3.txt), acordado el 2026-11-04. Parte de v2, quita el mínimo de
+riesgo 0,5 y conserva el orden de campos de v2 (`evidencia`, `alerta_sugerida`, `riesgo`, `motivo`). Sus reglas:
+
+1. Un pedido de dato personal o pago no basta: el contexto debe sustentar el peligro.
+2. La negativa de la persona no borra un pedido anterior.
+3. Se distingue el ofrecimiento espontáneo del que responde a una inducción previa.
+4. Se evalúa la coherencia entre motivo, acción y daño, sin eximir por palabras como banco u oficial.
+5. Si no se sabe qué es lo que piden, no se inventa qué permitiría hacer.
+6. Sin base para alertar, evidencia y motivo van vacíos.
+
+| Huella | Texto vigente |
+|---|---|
+| SHA-256 del archivo | `c11ecc1f8c6fd644c7d8b806369e73e952c3716c353fd805a0a71cbf634504e6` |
+| Huella en los manifiestos (`.strip()`, 16 caracteres) | `a944aadc550480b3` |
+
+**Resultado:** [probado en Colab sobre los 150 de desarrollo](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md). No se adopta como está.
+
+## Antecedente: cambio e hipótesis del borrador anterior
 
 El [historial de versiones](README.md#versiones-del-system-prompt) conserva la
 v1 original (2026-10-13), la v2 previa (2026-10-21) y esta v3 en preparación.
@@ -59,7 +82,7 @@ y texto cargado difieren por el salto de línea final. P0 queda además identifi
 en el commit de partida `0561dbe` por el blob Git
 `5bb6ce415ca4b1db4d7d962c7f02e0cff14de30e`.
 
-## Contraste de desarrollo para revisar H1
+## Antecedente: contraste de desarrollo para revisar H1
 
 Lectura de IA de 17 IDs explícitos, comprobados contra los IDs y hashes del
 [manifiesto directo](../corridas/2026-11-04_132229_e2b-directo-150/manifiesto.json)
@@ -86,7 +109,7 @@ compuerta e indicio juntos y cortan al primer aviso. Los 150 ya vistos, incluido
 estos 17, sirven para diagnóstico y regresión declarada. No son comprobación
 independiente ni se vuelve independiente una subdivisión hecha después de verlos.
 
-## Controles antes de una prueba del modelo
+## Antecedente: controles antes de una prueba del modelo
 
 **Verificación determinista de este borrador:** igualdad de P0 con ambos
 manifiestos y con Git; un único bloque sustituido en P1; resto del prompt y
@@ -130,7 +153,7 @@ la matriz. Adoptar un candidato requerirá evidencia y reconsiderar el
 [ADR 0001](../../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
 D09 sigue resuelta; este borrador no decide D07/D08 ni modifica referencias.
 
-## Comentario de avance para GitHub, sin publicar
+## Antecedente: comentario del borrador anterior, reemplazado y sin publicar
 
 ```markdown
 Avance de #51 — versión 3, candidato P1 de prompt (2026-11-04).

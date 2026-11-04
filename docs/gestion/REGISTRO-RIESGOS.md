@@ -113,6 +113,11 @@ contrastes con un factor fijo, casos ganados/perdidos, repeticiones completas y
 guardado por conversación fuera de la VM de Colab. Todavía no se implementó ni
 se ejecutó esa matriz; no baja el riesgo ni cambia el ADR.
 
+R05/R07/R27, prueba del prompt v3 del 2026-11-04: [resultados en Colab](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md).
+El riesgo observado fue el contrario del previsto: más falsas alarmas (30/75 a 47/75, contra 13/75 y 18/75 con
+v1) y avisos con pedidos inventados. Se diseñó mirando los 150 de desarrollo, sin control en la misma máquina.
+No baja el riesgo ni cambia el ADR.
+
 R05/R07/R27, preparación de prompt del 2026-11-04: [P1 de atribución del pedido](../../experiments/slm-directo/prompts/V3-ATRIBUCION.md)
 conserva P0 y el contrato, y explicita el riesgo de descartar ofrecimientos
 inducidos o solicitudes presentadas como trámites. El contraste de lectura de IA

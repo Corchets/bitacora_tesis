@@ -26,25 +26,18 @@ comparación concreta**, no el orden histórico.
 |---|---|---|---|
 | **Versión 1 — original** | 2026-10-13 | [`tarea.txt`](tarea.txt) | Criterio de alerta, seis acciones, exclusión breve de menciones y JSON con riesgo primero. Es `tarea` en el ejecutor y **P0 de las dos corridas de 150**. Commit `d9173b6`. |
 | **Versión 2 — modificación previa** | 2026-10-21 | [`tarea_v2.txt`](tarea_v2.txt) | Reformula las acciones, explicita relatos/hipótesis y razones creíbles, quita el ejemplo de código, pone la evidencia primero y exige riesgo ≥ 0,5 con alerta. Es `v2` en el ejecutor; no fue el prompt de esas corridas de 150. Commit `886cff0`. |
-| **Versión 3 — borrador actual** | 2026-11-04 | [`tarea_v3.txt`](tarea_v3.txt) | Una hipótesis: atribuir quién pide qué a quién frente a relato, hipótesis, ofrecimiento y consejo. **P1 propuesta frente a P0/v1**, con su contrato intacto; sin registrar en el ejecutor ni medir. [Ficha de cambio y controles](V3-ATRIBUCION.md). |
+| **Versión 3 — probada, no adoptada** | 2026-11-04 | [`tarea_v3.txt`](tarea_v3.txt) | Parte de v2: quita el mínimo de riesgo 0,5, conserva el orden de campos de v2 y agrega reglas de contexto. [Resultados en Colab](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): más estafas con aviso y muchas más falsas alarmas. No se usa en la demo. |
 
-La v3 deriva de la **v1 realmente medida** para aislar este bloque. No es la v2
-con una corrección encima: incorporar también sus cambios de acciones, esquema
-y riesgo mezclaría factores. La v2 permanece disponible como antecedente; el
-refinamiento se registra sin sobrescribir los textos anteriores.
+## Versión 3 — 2026-11-04
 
-## Versión 3: candidata P1 para Gemma 4 E2B — 2026-11-04
-
-> **Estado: propuesta sin discutir.** [P1: atribución del pedido](V3-ATRIBUCION.md),
-> avance de #51 vinculado a
-> [D07](../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y
+> **Estado: propuesta sin discutir.** [Resultados](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md) y [ficha](V3-ATRIBUCION.md), avance de #51
+> vinculado a [D07](../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y
 > [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-P0/v1 sigue siendo `tarea.txt`, sin cambios. El borrador v3/P1
-[`tarea_v3.txt`](tarea_v3.txt) reemplaza únicamente el párrafo
-que distingue mención de pedido. No está registrado en `PROMPTS` ni `ESQUEMAS`:
-no hay una opción nueva de `--prompts` ni cambia la demo. La ficha contiene la
-hipótesis, el contraste de casos y los controles pendientes; no hay medición de P1.
+La v3 parte de la v2 y reúne varios cambios, así que un efecto no se atribuye a una frase. Usa
+`ESQUEMA_SALIDA_V2`. La opción `--prompts v3` existe solo en la rama `prompt-v3-colab`: aquí no está
+registrada en `PROMPTS` ni `ESQUEMAS` y la demo sigue con `tarea`. El borrador anterior, derivado de v1,
+se conserva en el commit `8a718fe`.
 
 ## Criterios de la v1
 
@@ -95,3 +88,4 @@ Los cambios se prueban juntos: no se midió el aporte de cada uno por separado.
 | 2026-10-21 | v2 (`tarea_v2.txt`, variante `v2`); la v1 queda igual | Errores de la v1 en las corridas del 2026-10-14 y 2026-10-17 (ver «Criterios de la v2»). |
 | 2026-10-29 | `riesgo` (`riesgo.txt` + `riesgo_motivo.txt`), en dos etapas; v1 y v2 quedan igual | Bajar la latencia por línea: escribir el JSON completo domina el tiempo ([caché de prefijo](../analisis/2026-10-21-cache-prefijo/README.md)). Escala del riesgo anclada y «una palabra suelta no es pedido» por la minuta del 2026-10-28 (R07). Ver [análisis](../analisis/2026-10-29-riesgo-primero/README.md). |
 | 2026-11-04 | v3, borrador P1 (`tarea_v3.txt`), sin integrar al ejecutor; v1/P0 y v2 intactas | Una hipótesis: atribuir el pedido dentro de la llamada frente a relato, hipótesis, ofrecimiento y consejo. [Ficha y controles](V3-ATRIBUCION.md); sin inferencia nueva. |
+| 2026-11-04 | v3 reemplazada por un texto basado en v2; v1 y v2 intactas | Decisiones del grill con Luciano. [Probada en Colab sobre los 150 de desarrollo](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): no se adopta. |
