@@ -1,7 +1,7 @@
 // @ts-check
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {citaConRoles, textoActivacionTito} from '../conversacion.mjs';
+import {citaConRoles, textoActivacionTito, limpiarCita, formatearMotivo} from '../conversacion.mjs';
 
 test('la cita identifica roles con cualquiera de las dos personas hablando primero', () => {
   const cita = 'A: Hágame el código\\nB: Ágame el\nCódigo\nB: Pasame el código';
@@ -17,6 +17,42 @@ test('conserva citas sin etiquetas, letras dentro del texto y hablantes desconoc
   for (const cita of ['', 'Pasame el código', 'la opción A: ingresar', 'B: ¿Qué código?']) {
     assert.equal(citaConRoles(cita, roles), cita);
   }
+});
+
+test('citaConRoles reconoce hablantes directos PROTEGIDA, OTRA y prefijos de número', () => {
+  assert.equal(citaConRoles('PROTEGIDA: Decime.'), 'Persona protegida: Decime.');
+  assert.equal(citaConRoles('OTRA: Pasame el código.'), 'Otra persona: Pasame el código.');
+  assert.equal(citaConRoles('3. OTRA: Pasame el código.'), 'Otra persona: Pasame el código.');
+
+  const roles = new Map([['B', 'otra'], ['A', 'protegida']]);
+  assert.equal(citaConRoles('12. B: Pasame el código.', roles), 'Otra persona: Pasame el código.');
+  assert.equal(citaConRoles('1. A: Hola\n12. B: Chau', roles), 'Persona protegida: Hola\nOtra persona: Chau');
+
+  const rolesSinB = new Map([['A', 'protegida']]);
+  assert.equal(citaConRoles('12. B: Pasame el código.', rolesSinB), '12. B: Pasame el código.');
+});
+
+test('limpiarCita remueve puntuación inicial, espacios finales y prefijos de número y hablante', () => {
+  assert.equal(limpiarCita('3. OTRA: Pasame el código.'), 'Pasame el código.');
+  assert.equal(limpiarCita('12. B: Pasame el código.'), 'Pasame el código.');
+  assert.equal(limpiarCita('PROTEGIDA: Decime.'), 'Decime.');
+  assert.equal(limpiarCita('la opción A: ingresar'), 'la opción A: ingresar');
+  assert.equal(limpiarCita('OTRA: Pasame el código.'), 'Pasame el código.');
+  assert.equal(limpiarCita('Persona protegida: Hola.'), 'Hola.');
+  assert.equal(limpiarCita('Otra persona: Chau.'), 'Chau.');
+  assert.equal(limpiarCita('3. Pasame el código'), 'Pasame el código');
+  assert.equal(limpiarCita('  : 3. OTRA: Pasame el código.  '), 'Pasame el código.');
+  assert.equal(limpiarCita(''), '');
+});
+
+test('formatearMotivo reemplaza OTRA y PROTEGIDA respetando mayúsculas según posición', () => {
+  assert.equal(formatearMotivo('OTRA te está pidiendo un código.'), 'La otra persona te está pidiendo un código.');
+  assert.equal(formatearMotivo('No le pases el código a OTRA.'), 'No le pases el código a la otra persona.');
+  assert.equal(formatearMotivo('OTRA pide a PROTEGIDA que transfiera.'), 'La otra persona pide a la persona protegida que transfiera.');
+  assert.equal(formatearMotivo('Alerta: OTRA te pide clave. PROTEGIDA no debe transferir.'), 'Alerta: La otra persona te pide clave. La persona protegida no debe transferir.');
+  assert.equal(formatearMotivo('¡OTRA está solicitando datos!'), '¡La otra persona está solicitando datos!');
+  assert.equal(formatearMotivo('¿OTRA te pidió la clave?'), '¿La otra persona te pidió la clave?');
+  assert.equal(formatearMotivo(''), '');
 });
 
 test('la marca de Tito solo aparece cuando la evaluación consultó al modelo', () => {

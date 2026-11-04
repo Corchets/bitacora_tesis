@@ -1,17 +1,24 @@
 """Medición sin panel: fuente de #77, MotorFalso y reloj controlado."""
 import asyncio
 import json
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+
+DIR_TESTS = Path(__file__).resolve().parent
+DIR_VOIP = DIR_TESTS.parent
+for _p in (DIR_TESTS, DIR_VOIP):
+    if str(_p) not in sys.path:
+        sys.path.insert(0, str(_p))
 
 import numpy as np
 import soundfile as sf
 
 from test_llamada import Reloj, RespuestaFalsa
 from motores import MotorFalso
-from medir import Medicion, parse_args, resumir
+from medir import Medicion, parse_args, principal, resumir
 
 
 class DetectorFalso:
@@ -133,3 +140,64 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
             self.assertIsNotNone(m["detector"]["aviso"])
             acts = (carpeta / "actualizaciones.jsonl").read_text().splitlines()
             self.assertEqual(len(acts), 3)  # metadata y un final por canal, sin duplicados.
+
+    def test_parse_args_hablantes_y_sin_indicio(self):
+        args = parse_args([])
+        self.assertEqual(args.hablantes, "ab")
+        self.assertFalse(args.sin_indicio)
+
+        args = parse_args(["--hablantes", "rol", "--sin-indicio"])
+        self.assertEqual(args.hablantes, "rol")
+        self.assertTrue(args.sin_indicio)
+
+    async def test_principal_pasa_hablantes_e_indicio_a_construir_detector(self):
+        class PararPrueba(Exception):
+            pass
+
+        args = parse_args(["--detector", "tito-slm", "--hablantes", "rol", "--sin-indicio"])
+        with patch.object(Path, "is_file", return_value=True), \
+                patch("medir.replay.construir_detector") as mock_construir, \
+                patch("medir.replay.correr.preparar_ollama", return_value=None), \
+                patch("medir.Medicion", side_effect=PararPrueba):
+            with self.assertRaises(PararPrueba):
+                await principal(args)
+            mock_construir.assert_called_once_with(
+                "tito-slm",
+                modelo=args.modelo,
+                prompt_nombre="tarea",
+                hablantes="rol",
+                seed=42,
+                ollama_url=args.ollama_url,
+                indicio=False,
+            )
+
+    async def test_configurar_detector_en_medicion(self):
+        args = parse_args(["--detector", "reglas", "--hablantes", "rol", "--sin-indicio"])
+        medicion = Medicion(args, DetectorFalso())
+        cargado = DetectorFalso()
+        with patch("servidor.replay.construir_detector", return_value=cargado) as mock_construir:
+            await medicion.configurar_detector("gemma4:e2b-it-q4_K_M")
+        self.assertEqual(mock_construir.call_count, 1)
+        self.assertEqual(mock_construir.call_args.kwargs["hablantes"], "rol")
+        self.assertIs(mock_construir.call_args.kwargs["indicio"], False)
+
+    async def test_manifiesto_guarda_modo_hablantes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ruta = Path(tmp) / "entrada.wav"
+            sf.write(ruta, np.full((1600, 2), 0.25), 16000)
+            args = parse_args([
+                "--detector", "reglas",
+                "--hablantes", "rol",
+                "--salida", str(Path(tmp) / "salida"),
+            ])
+            reloj = Reloj()
+
+            async def avanzar(segundos):
+                reloj.t += segundos
+                await asyncio.sleep(0)
+
+            medicion = MedicionFalsa(args, DetectorFalso(), ahora=reloj, dormir=avanzar)
+            with patch.dict("servidor.EJEMPLOS", {"SC-WA-CODE-01": ruta}):
+                carpeta = await medicion.correr()
+            m = json.loads((carpeta / "manifiesto.json").read_text())
+            self.assertEqual(m["config"]["hablantes"], "rol")

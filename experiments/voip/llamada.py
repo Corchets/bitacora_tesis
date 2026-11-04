@@ -77,11 +77,15 @@ class Llamada:
         self,
         crear_motor: Callable[[], MotorASR],
         disparo: str = "final",
+        hablantes: str = "ab",
         ahora: Callable[[], float] = time.monotonic,
     ) -> None:
         if disparo not in ("final", "parcial"):
             raise ValueError(f"disparo desconocido {disparo!r}; opciones: final, parcial")
+        if hablantes not in ("ab", "rol"):
+            raise ValueError(f"hablantes desconocido {hablantes!r}; opciones: ab, rol")
         self.disparo = disparo
+        self.hablantes = hablantes
         self._ahora = ahora
         self.canales: dict[str, Canal] = {}
         for rol in ROLES:
@@ -211,8 +215,12 @@ class Llamada:
             canal.retrasos_parcial_s.append(disponible - evento.fin_audio_s)
         self._escribir(self._jsonl, act)
         campos = {k: v for k, v in act.items() if k != "fin_voz_s"}
-        campos["canal"] = canal.letra
-        self.foto = self.contexto.aplicar(Actualizacion(**campos), "ab")
+        if self.hablantes == "rol":
+            campos["canal"] = canal.rol
+            self.foto = self.contexto.aplicar(Actualizacion(**campos), "rol")
+        else:
+            campos["canal"] = canal.letra
+            self.foto = self.contexto.aplicar(Actualizacion(**campos), "ab")
         # El panel conserva el contrato de eventos previo; el JSONL identifica el rol.
         return {**act, "canal": canal.letra, "rol": canal.rol}
 

@@ -4,13 +4,49 @@
 /** @type {Record<string, string>} */
 export const NOMBRE = {protegida: 'Persona protegida', otra: 'Otra persona'};
 
-/** @param {string} texto @param {Map<string, string>} rolesPorLetra */
+/** @param {string} texto @param {Map<string, string>} [rolesPorLetra] */
 export function citaConRoles(texto, rolesPorLetra) {
-  return texto.replace(/\\n/g, '\n').replace(/(^|\n)(\s*)([AB]):/g,
-    (prefijo, salto, espacios, letra) => {
-      const nombre = NOMBRE[rolesPorLetra.get(letra) || ''];
+  return (texto || '').replace(/\\n/g, '\n').replace(
+    /(^|\n)(\s*)(?:\d+\.\s*)?(PROTEGIDA|OTRA|[AB]):/g,
+    (prefijo, salto, espacios, hablante) => {
+      if (hablante === 'PROTEGIDA') return `${salto}${espacios}${NOMBRE.protegida}:`;
+      if (hablante === 'OTRA') return `${salto}${espacios}${NOMBRE.otra}:`;
+      const nombre = NOMBRE[rolesPorLetra?.get(hablante) || ''];
       return nombre ? `${salto}${espacios}${nombre}:` : prefijo;
-    });
+    }
+  );
+}
+
+/**
+ * Limpia puntuación inicial, espacios finales y prefijos opcionales de número y hablante por renglón.
+ * @param {string} texto
+ * @returns {string}
+ */
+export function limpiarCita(texto) {
+  if (!texto) return '';
+  return texto
+    .replace(/\\n/g, '\n')
+    .replace(/^[.\s,;:]+/, '')
+    .replace(/(^|\n)\s*(?:(?:\d+\.\s*)?(?:[AB]|PROTEGIDA|OTRA|Persona protegida|Otra persona):\s*|\d+\.\s+)/g, '$1')
+    .replace(/^[.\s,;:]+/, '')
+    .trim();
+}
+
+/**
+ * Reemplaza las etiquetas OTRA y PROTEGIDA en mayúsculas por expresiones descriptivas y naturales.
+ * @param {string} motivo
+ * @returns {string}
+ */
+export function formatearMotivo(motivo) {
+  if (!motivo) return '';
+  return motivo.replace(/\b(OTRA|PROTEGIDA)\b/g, (_match, palabra, offset, textoCompleto) => {
+    const antes = textoCompleto.slice(0, offset);
+    const esInicio = /^[\s"'«“]*$/.test(antes) || /(?:[.!?:]\s+|[¡¿]\s*|\n\s*)["'«“]*$/.test(antes);
+    if (palabra === 'OTRA') {
+      return esInicio ? 'La otra persona' : 'la otra persona';
+    }
+    return esInicio ? 'La persona protegida' : 'la persona protegida';
+  });
 }
 
 /**
@@ -1318,7 +1354,7 @@ export function montarPresentacion(acciones) {
    * @returns {boolean} True si la cita se localizó y resaltó en la frase.
    */
   function resaltarEvidenciaEnFrase(linea, evidencia, textoOriginal) {
-    const citaLimpia = (evidencia || '').replace(/^[.\s,;:]+/, '').trim();
+    const citaLimpia = limpiarCita(evidencia);
     if (!citaLimpia) return false;
     const textoEl = /** @type {HTMLElement|null} */ (linea.querySelector('.texto'));
     if (!textoEl) return false;
@@ -1852,14 +1888,14 @@ export function montarPresentacion(acciones) {
             actualizarEvalCaja(inf.linea, {
               estado: 'posible-estafa',
               badge: 'Posible estafa',
-              motivo: m.motivo || 'Alerta de estafa',
+              motivo: formatearMotivo(m.motivo) || 'Alerta de estafa',
               m
             });
           } else {
             actualizarEvalCaja(inf.linea, {
               estado: 'sin-aviso',
               badge: 'Sin aviso',
-              motivo: m.motivo || 'Sin señales de riesgo',
+              motivo: formatearMotivo(m.motivo) || 'Sin señales de riesgo',
               m
             });
           }
@@ -1872,12 +1908,12 @@ export function montarPresentacion(acciones) {
               avisoProtegida.hidden = false;
             }
             if (avisoMotivo) {
-              avisoMotivo.textContent = m.motivo || 'Posible estafa detectada';
+              avisoMotivo.textContent = formatearMotivo(m.motivo) || 'Posible estafa detectada';
             }
             if (avisoTiempo) {
               avisoTiempo.textContent = typeof m.t_a === 'number' ? `a los ${m.t_a.toFixed(1)} s` : '';
             }
-            const citaLimpia = (m.evidencia || '').replace(/^[.\s,;:]+/, '').trim();
+            const citaLimpia = limpiarCita(m.evidencia || '');
             let resaltada = false;
             if (citaLimpia && inf) {
               resaltada = resaltarEvidenciaEnFrase(inf.linea, citaLimpia, inf.texto);

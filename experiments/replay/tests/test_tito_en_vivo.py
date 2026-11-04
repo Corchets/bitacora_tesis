@@ -74,6 +74,19 @@ class TestFlujoEnVivo(unittest.TestCase):
         self.assertEqual(r.consulta, "omitida")
         self.assertEqual(flujo.tito.consultas[-1], (1, "otra"))
 
+    def test_flujo_sin_indicio_pasa_mensaje_base_al_slm(self):
+        self.tito, self.slm = TitoGuion(puntajes={1: 0.9}), SlmFalso()
+        flujo = replay.FlujoTitoEnVivo(self.tito, self.slm, indicio=False)
+        r = flujo.evaluar(lineas("pasame el token"))
+        self.assertEqual(r.consulta, "slm_valida")
+        self.assertEqual(len(self.slm.mensajes), 1)
+        mensaje_enviado = self.slm.mensajes[0][0]
+        # El SLM recibe solo el mensaje base, sin mención a indicio, sospecha ni puntaje
+        self.assertNotIn("filtro previo", mensaje_enviado)
+        self.assertNotIn("sospecha preliminar", mensaje_enviado)
+        self.assertNotIn("«pasame el token»", mensaje_enviado)
+        self.assertIn("1. A: pasame el token", mensaje_enviado)
+
 
 class TestCorrerReplay(unittest.TestCase):
     def act(self, n, tipo, segmento, texto, canal="otra", llamada="L1"):
@@ -87,6 +100,21 @@ class TestCorrerReplay(unittest.TestCase):
         filas, _ = replay.correr_replay(acts, replay.FlujoTitoEnVivo(tito, slm), hablantes="ab")
         self.assertEqual(tito.consultas, [(1, "cerrada"), (1, "otra llamada")])
         self.assertEqual(len(filas), 3)
+
+    def test_correr_replay_rol_con_tito_slm_tito_ve_solo_texto_y_slm_ve_roles(self):
+        tito, slm = TitoGuion(puntajes={1: 0.9}), SlmFalso()
+        acts = [
+            self.act(1, "final", 1, "Hola del banco", canal="otra"),
+            self.act(2, "final", 2, "Buenos días", canal="protegida"),
+        ]
+        detector = replay.FlujoTitoEnVivo(tito, slm)
+        filas, contextos = replay.correr_replay(acts, detector, hablantes="rol")
+        # Tito recibe únicamente el texto de la línea, sin prefijo OTRA/PROTEGIDA
+        self.assertEqual(tito.consultas, [(1, "Hola del banco")])
+        # SLM recibe mensaje con roles
+        self.assertEqual(len(slm.mensajes), 2)
+        self.assertIn("1. OTRA: Hola del banco", slm.mensajes[0][0])
+        self.assertIn("1. OTRA: Hola del banco\n2. PROTEGIDA: Buenos días", slm.mensajes[1][0])
 
 
 class TestConstruirDetector(unittest.TestCase):
@@ -104,6 +132,22 @@ class TestConstruirDetector(unittest.TestCase):
         self.assertEqual(d.carga["pensar"], False)
         self.assertEqual(d.carga["tito"]["artefacto"], "tito_logreg.json")
         self.assertTrue(d.carga["tito"]["sha256"].startswith("fb601eaa"))
+        self.assertTrue(d.carga["tito"]["indicio"])
+
+    def test_construir_detector_con_indicio_true_y_false(self):
+        slm = SlmFalso()
+        slm.carga = {"pensar": False}
+        tito = TitoGuion()
+        informe = {"encoder_ms": 1.0, "error": ""}
+        with patch.object(replay, "construir_slm", return_value=slm), \
+                patch.object(replay.tito_real, "preparar_tito_real", return_value=(tito, informe)):
+            d_con = replay.construir_detector("tito-slm", indicio=True)
+            self.assertTrue(d_con.indicio)
+            self.assertTrue(d_con.carga["tito"]["indicio"])
+
+            d_sin = replay.construir_detector("tito-slm", indicio=False)
+            self.assertFalse(d_sin.indicio)
+            self.assertFalse(d_sin.carga["tito"]["indicio"])
 
     def test_el_manifiesto_de_tito_slm_registra_modelo_prompt_seed_y_huella(self):
         with tempfile.TemporaryDirectory() as tmp:

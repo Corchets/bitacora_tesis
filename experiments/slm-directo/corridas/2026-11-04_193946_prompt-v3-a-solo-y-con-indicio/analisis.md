@@ -83,23 +83,20 @@ Ninguno de los 6 roles dudosos aparece entre las falsas alarmas de v4.
 - **SLM:** recibe A y B por orden de habla, y el mensaje aclara que «las letras no indican quién llamó ni quién es sospechoso»
   ([`detectores.py`](../../detectores.py)).
 - **Tito:** recibe solo el texto de cada frase, sin dato de hablante.
-- **Llamada:** el sistema sí lo sabe, porque cada persona es un canal. Pero [`llamada.py`](../../../voip/llamada.py), en
-  `_registrar`, cambia `protegida` y `otra` por A y B antes de llegar al detector, y el rol queda solo en el registro.
+- **Llamada:** el sistema sí lo sabe, porque cada persona es un canal. Por defecto (`--hablantes ab`), [`llamada.py`](../../../voip/llamada.py) convierte `protegida` y `otra` en A y B según quién habló primero; con `--hablantes rol`, pasa `PROTEGIDA` y `OTRA` al contexto del SLM desde la primera frase.
 
 **Opinión de Luciano:** el SLM y Tito deberían saber quién habla a partir de los canales del ASR, porque esa información
 existe en la llamada real y ayuda a decidir mejor. En una llamada nadie la anota: sale del canal.
 
 Para probarlo se agregó `--hablantes rol`, que manda `PROTEGIDA:` y `OTRA:` en cada línea. En los casos de texto el rol sale de
-[`casos/roles-protegida.json`](../../casos/roles-protegida.json), porque el corpus no lo tenía; en la llamada saldría del canal,
-y ese cambio en la demo todavía no está hecho. Tito siguió sin cambios en estas pruebas.
+[`casos/roles-protegida.json`](../../casos/roles-protegida.json), porque el corpus no lo tenía; en la llamada en vivo y en replay sale directamente del canal (`servidor.py`, `medir.py` y `replay.py` aceptan `--hablantes rol` y `--sin-indicio`, manteniendo `ab` con indicio por defecto). Tito siguió sin cambios: recibe solo el texto de cada frase.
 
 **Cómo se anotó:** 64 estafas salen de `T_R`, revisando que esa línea la diga el atacante. 80 casos salen de la lectura: la
 persona protegida es quien recibe el pedido o el consejo, o si no hay ninguno, quien recibe la llamada. 6 quedaron marcados
 como dudosos, por ser charlas parejas (FAMILIAR-001 a 004, TRABAJO-002 y TRABAJO-004). Se anotó después de ver qué casos
 daban alarma y sin revisión humana.
 
-**Efecto en pantalla:** en v4, 12 de los 68 motivos dicen literalmente «OTRA» o «PROTEGIDA». Antes de llevarlo a la demo hay
-que reemplazarlo al mostrarlo o ajustar el prompt.
+**Efecto en pantalla:** en v4, 12 de los 68 motivos dicen literalmente «OTRA» o «PROTEGIDA». El panel (`conversacion.mjs`, `panel.html` e `historial-ui.mjs`) los reemplaza al mostrarlos por «La otra persona» / «la otra persona» y «La persona protegida» / «la persona protegida», y limpia el número y el hablante de la cita antes de buscarla en la burbuja.
 
 ## v1 de Evaristo y control de la máquina
 
