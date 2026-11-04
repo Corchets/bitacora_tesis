@@ -92,6 +92,40 @@ completa no se ejecutaron: siguen requiriendo una revisión de acceso antes de
 usarlos en la copia que contiene la reserva. Las referencias actuales no tienen
 huella registrada en los manifiestos de estas corridas; su revisión sigue pendiente.
 
+
+## Panel para comparar las corridas
+
+El 2026-11-04 se amplió el tablero HTML recibido de Luciano con una pestaña
+«Comparar corridas»: los 150 casos, resultados y motivos lado a lado, riesgos por
+línea, activación de Tito y marcas T_R/T_C. Distingue omisiones, errores y filas no
+evaluadas tras el primer aviso. Incluye filtros para las 24 pérdidas con Tito,
+las 19 compartidas, las nueve compartidas con pedido, las 21 falsas alarmas y los
+17 cambios de resultado. Las pestañas históricas conservan su lectura con Tito;
+las conversaciones se consultan en una única vista comparativa.
+
+Fuentes de la vista: [generador](../../analisis/tablero/comparar_corridas_150.py) y
+[plantilla](../../analisis/tablero/comparacion_150_plantilla.html). No hay un tercer
+experimento ni nuevas respuestas del modelo. La pestaña «Pasos recomendados»
+explica el orden de prueba propuesto, incluido preparar acceso seguro antes de
+volver a ejecutar inferencia en una copia que contiene la reserva.
+
+Desde la raíz, usando el HTML original o una salida anterior como base:
+
+```sh
+python3 -I experiments/slm-directo/analisis/tablero/comparar_corridas_150.py --base /ruta/tablero.html --salida /ruta/tablero-comparado.html
+python3 -I experiments/slm-directo/tests/test_panel_comparacion_150.py
+```
+
+La base se copia a una carpeta temporal aislada antes de leerla y el proceso no
+importa módulos de esa carpeta. El generador reutiliza el comparador con lista
+permitida de manifiestos; no enumera casos ni abre el catálogo. El HTML es
+completo, funciona como archivo local y ocupa menos de 512 KB. Las cuatro pruebas
+del panel verifican regeneración sin duplicados, rechazo de casos ajenos,
+escapado del JSON y distinción entre omisión, respuesta, error y corte. Pasaron
+también las seis guardas del comparador. En Chrome se comprobaron filtros,
+búsqueda sin coincidencias, SOPORTE-001 con filas sin evaluar después de L10 y
+navegación a los pasos.
+
 ## Primero, los tres casos pedidos
 
 ### BANCO-003: entrega física de efectivo
@@ -337,7 +371,8 @@ se ubicaron los aportes ya integrados de Ignacio y Evaristo.
 
 Evidencia: experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md.
 Comparador sin acceso al catálogo ni enumeración de casos; seis pruebas de guardas
-con fixtures sintéticos y reproducción del recuento sobre IDs de manifiestos.
+con fixtures sintéticos, cuatro pruebas del panel y reproducción del recuento
+sobre IDs de manifiestos. Panel ampliado con comparación por caso y pasos propuestos.
 
 Ninguna decisión nueva. D07/D08 siguen abiertas y ADR 0001 vigente. No se ejecutaron
 variantes ni se modificó el detector. Próximo paso propuesto: acordar adjudicación,
