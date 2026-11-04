@@ -86,6 +86,15 @@ R24: Mateo no tiene copia del audio original (Luciano, 2026-11-03). Las regrabac
 
 ## Actualización técnica — 2026-11-04
 
+R05/R07/R27: el [panel actualizado](../../experiments/slm-directo/analisis/tablero/panel.html#ultimas)
+permite revisar pérdidas y falsas alarmas de las 15 condiciones completas disponibles.
+Su [actualizador](../../experiments/slm-directo/analisis/tablero/ultimas_corridas.py) toma
+IDs y huellas de manifiestos de desarrollo, sin enumerar el corpus ni abrir la reserva;
+rechaza CSV ajenos y textos cambiados. Seis pruebas con fixtures sintéticos verifican
+esas guardas, los cortes y los errores técnicos. Los fallos y prefijos incompletos no
+se cuentan como negativos. Esta vista no mide una mejora, no cambia el ADR ni reduce
+probabilidad o impacto; las referencias siguen sin revisión humana.
+
 R07: en [la prueba con Tito sin indicio](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md), v4 con roles da 13/75 falsas alarmas y 55/75 estafas, y v1 control 14/75 y 53/75. El orden de los campos explica gran parte del salto de v3. La clase mayor que queda es el dato de identificación en llamadas que inició la persona (7 de 13). No cumple la meta y no se adopta.
 
 R05: el comparador de E2B directo contra Tito llamaba `ids_de_casos("desarrollo")`,

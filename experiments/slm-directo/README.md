@@ -138,7 +138,23 @@ python visor.py corridas/<una> corridas/<otra> --abrir
 
 ### El panel
 
-`analisis/tablero/panel.html` junta en una página el estado del proyecto, el plan de
+`analisis/tablero/panel.html` abre en **Últimas pruebas y errores**: las 15 condiciones
+completas del 2026-11-04 sobre los 150 casos de desarrollo, incluidos v1, v3, v4,
+roles, indicio y controles de reglas. Permite elegir dos corridas, filtrar estafas no
+detectadas o falsas alarmas y leer conversación, riesgos, primer aviso, motivo y cita.
+Cada condición enlaza su CSV y manifiesto. Una evaluación incompleta se distingue de
+un caso sin aviso; las corridas en curso o interrumpidas quedan fuera.
+
+Para incorporar resultados ya guardados sin inferencia ni recorrer el corpus o la
+reserva, desde la raíz del repositorio:
+
+```bash
+python3 -I experiments/slm-directo/analisis/tablero/ultimas_corridas.py
+```
+
+El actualizador toma únicamente IDs y huellas de manifiestos completos de desarrollo
+desde el 2026-11-04 y exige las mismas conversaciones en todas las condiciones.
+No modifica la configuración de la demo. El resto del panel junta el estado del proyecto, el plan de
 trabajo, las corridas históricas sobre los 53 antecedentes, los 150 casos de desarrollo
 y un probador en vivo contra Ollama. En
 «Afinar» recalcula estafas con aviso y falsas alarmas al mover el umbral de `riesgo` y

@@ -31,6 +31,7 @@ sys.path.insert(0, str(SLM))
 
 import casos as mod_casos  # noqa: E402
 import detectores  # noqa: E402
+from ultimas_corridas import cargar_datos, incorporar  # noqa: E402
 
 # Corridas sobre los 53 casos históricos, más el 4B de M1 interrumpido (se marca parcial).
 # Las de cola_m1.sh posteriores se agregan solas (_corridas_de_la_cola).
@@ -171,7 +172,7 @@ def armar() -> Path:
     plantilla = (AQUI / "panel_plantilla.html").read_text(encoding="utf-8")
     js = json.dumps(datos, ensure_ascii=False).replace("</", "<\\/")
     salida = AQUI / "panel.html"
-    salida.write_text(plantilla.replace("/*__DATOS__*/null", js), encoding="utf-8")
+    salida.write_text(incorporar(plantilla.replace("/*__DATOS__*/null", js), cargar_datos()), encoding="utf-8")
     return salida
 
 
