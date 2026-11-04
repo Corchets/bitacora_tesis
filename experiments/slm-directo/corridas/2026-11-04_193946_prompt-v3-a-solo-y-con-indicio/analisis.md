@@ -110,16 +110,16 @@ no permiten atribuir el efecto a ninguno.
 | Tito con indicio → Tito sin indicio | +1 | +5 | −76 |
 
 Tito con indicio es la mejor de las tres condiciones v3 por falsas alarmas. Sus 30 aparecen también en las
-otras dos. Esto vale para v3: el efecto de sacar el indicio con v1 se sabrá con la corrida que hace otra
-persona del equipo.
+otras dos. Con v1, sacar el indicio da 54/75 estafas y 14/75 falsas alarmas: ver la
+[comparación con v1 en Colab](comparacion-con-v1-colab.md).
 
 ## Límites
 
-- **Máquinas distintas:** v1 corrió en Windows y v3 en Colab, sin control v1 en la misma sesión. La
-  diferencia es grande, pero esta prueba no separa el efecto del prompt del de la máquina. Por eso
-  tampoco se comparan tiempos.
-- **Sin repetición:** no se midió el ruido entre corridas iguales, así que las diferencias de 1 a 3 casos
-  entre condiciones v3 no se leen como efecto.
+- **Máquinas distintas:** las cifras de v1 de este documento son de Windows; v3 corrió en Colab. Después
+  apareció una [corrida de v1 en Colab](comparacion-con-v1-colab.md) con la misma configuración, en otra
+  sesión: da casi lo mismo que en Windows, así que la máquina no explica la diferencia. Los tiempos no se comparan.
+- **Sin repetición:** v3 no se repitió. Repetir v1 en Colab movió 1 estafa y 1 falsa alarma, así que las
+  diferencias de 1 a 3 casos entre condiciones v3 no se leen como efecto.
 - **Datos ya vistos:** el prompt se diseñó mirando estos 150 casos. Las referencias, incluidas las líneas
   `T_R`, no tienen revisión humana.
 - **Solo primer aviso:** no se sabe si la alerta se sostendría después.
@@ -178,9 +178,8 @@ Las cifras de v1 y v3 se recalculan, desde esta carpeta, con
 
 > **Estado: propuesta sin discutir.** Depende de lo que decida el equipo.
 
-1. **Próxima prueba:** usar el texto de v3 con los campos en el orden de v1, con v1 como control en la
-   misma sesión de Colab. Cambia un solo factor y pone a prueba la hipótesis de la evidencia primero.
-   Contradice la decisión del 2026-11-04 de conservar el orden de v2, así que requiere acuerdo.
-2. **Efecto de quitar el indicio con v1:** comparar con la corrida de la otra persona, tras confirmar que
-   usa la misma modificación (`slm-sin-indicio`, commit `4916ead`).
+1. **Próxima prueba:** ver la [propuesta a partir de v1](comparacion-con-v1-colab.md#próxima-prueba-propuesta),
+   que incluye v3 con los campos en el orden de v1 y a v1 como control en la misma sesión. Contradice la
+   decisión del 2026-11-04 de conservar el orden de v2, así que requiere acuerdo.
+2. **Efecto de quitar el indicio con v1:** ya comparado; la corrida usa `slm-sin-indicio`, commit `4916ead`.
 3. **Integrar `prompt-v3-colab`:** decidir si se integra a `laboratorio-main` o queda solo como registro.
