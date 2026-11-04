@@ -29,12 +29,13 @@ registra otro SHA-256 solo por los saltos de línea CRLF del archivo.
 
 1. Abrir [`COLAB-PROMPT-V3.ipynb`](COLAB-PROMPT-V3.ipynb) en Colab desde GitHub:
    `https://colab.research.google.com/github/Corchets/bitacora_tesis/blob/prompt-v3-colab/experiments/slm-directo/colab/COLAB-PROMPT-V3.ipynb`.
-2. Verificar GPU T4 y ejecutar la celda. Autorizar Google Drive cuando se solicite.
-3. Cada corrida terminada se copia a `MyDrive/bitacora_tesis/prompt-v3-en-curso-<commit>-150/`;
-   el ZIP final queda en `MyDrive/bitacora_tesis/resultados-prompt-v3-<fecha>.zip` y se descarga.
+2. Verificar GPU T4, ejecutar la celda y dejar la pestaña abierta.
+3. Cada corrida terminada se descarga como `parcial-prompt-v3-<a|b>.zip`; el ZIP final,
+   `resultados-prompt-v3.zip`, incluye todo y `comparacion.md`.
 
-**Si Colab se corta:** volver a ejecutar la celda con GPU T4. Lo terminado se recupera y
-la corrida a medio hacer se repite entera.
+**Sin Drive por defecto:** montarlo daría al notebook escritura sobre todo Google Drive. Si
+Colab se corta, lo no descargado se pierde y hay que volver a correrlo. Para reanudar desde
+Drive, usar `COLAB_GUARDAR_EN_DRIVE = '1'` y autorizarlo desde la cuenta.
 
 Con la referencia de ≈ 15 minutos para 1.179 consultas, **a** tarda ≈ 45 min y **b** ≈ 15 min,
 más ≈ 10 min de instalación. El prompt es más largo y puede tardar más. No es una medición

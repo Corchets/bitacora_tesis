@@ -6,8 +6,8 @@
 # Corre en la misma máquina, las tres con el prompt v3:
 #   a) SLM solo + Tito viejo → SLM con indicio (correr.py --filtro-tito --tito-real)
 #   b) Tito viejo → SLM sin indicio (--sin-indicio, con el wrapper que omite DetectorSLM)
-# Cada corrida terminada se copia a Google Drive; si Colab se corta, al volver a
-# ejecutar se recuperan desde Drive y no se repiten.
+# Cada corrida terminada baja como ZIP a la máquina local. Drive es opcional
+# (COLAB_GUARDAR_EN_DRIVE=1): da acceso de escritura a todo Drive, así que no es el predeterminado.
 
 import os, sys, subprocess, pathlib, json, hashlib, time, shutil, datetime, urllib.request
 REPO = pathlib.Path('/content/bitacora_tesis')
@@ -23,7 +23,7 @@ if head != COMMIT:
     raise RuntimeError(f'El checkout quedó en {head}, no en {COMMIT}; detener y revisar.')
 subprocess.run(['nvidia-smi'], check=True)
 
-GUARDAR_EN_DRIVE = os.environ.get('COLAB_GUARDAR_EN_DRIVE', '1') == '1'
+GUARDAR_EN_DRIVE = os.environ.get('COLAB_GUARDAR_EN_DRIVE', '0') == '1'
 
 # Drive primero: si falta la autorización, que se note antes de instalar nada.
 SALIDA = pathlib.Path('/content/resultados-prompt-v3')
@@ -123,6 +123,12 @@ for clave, descripcion, programa, propios, con_wrapper in CONDICIONES:
         shutil.rmtree(en_drive, ignore_errors=True)
         shutil.copytree(destino, en_drive)
         print(f'[{clave}] guardada en Drive: {en_drive}', flush=True)
+    else:
+        # Sin Drive: cada corrida terminada baja a la máquina local por si Colab se corta.
+        from google.colab import files
+        parcial = shutil.make_archive(f'/content/parcial-prompt-v3-{clave}', 'zip', destino)
+        print(f'[{clave}] terminada; descargando {parcial}', flush=True)
+        files.download(parcial)
 
 
 # Comparación caso por caso, inventario de dependencias y empaquetado.
