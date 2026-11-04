@@ -193,7 +193,7 @@ llamadas que inició la persona; hay que anotar ese dato en el corpus y revisar 
 Una búsqueda rápida encontró solo `SC-PREMIO-01-e01`, sin revisar a fondo.
 
 **Hasta dónde alcanza:** es un cálculo con los casos apuntados, no una medición. Si la 3 recupera sus dos estafas y la 2 saca sus
-7 alarmas sin cambiar nada más, v4 llegaría a 57/6. Sobrarían alarmas por debajo de la meta, pero seguirían faltando 3 estafas
+7 alarmas sin cambiar nada más, v4 llegaría a 57/6. Las alarmas quedarían por debajo de la meta, pero seguirían faltando 3 estafas
 para llegar a 60. Lo que más falta hoy es detección.
 
 ## Límites
