@@ -1224,6 +1224,14 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 indicio=False,
             )
 
+    async def test_preparar_pasa_hablantes_a_la_llamada(self):
+        args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2,
+                         corte_silencio="auto", asr="zipformer", hablantes="rol")
+        servidor = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
+        servidor.preparar()
+        llamada = await servidor.preparada
+        self.assertEqual(llamada.hablantes, "rol")
+
     async def test_manifiesto_guarda_modo_hablantes(self):
         async with connect(self.url + "/panel") as panel:
             for modo in ("ab", "rol"):

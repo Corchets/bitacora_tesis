@@ -28,7 +28,7 @@ servidor.py ── Zipformer streaming por canal ── actualizaciones.jsonl (c
   línea del JSONL trae `canal: "protegida" | "otra"`, sin un campo `rol` duplicado. Por defecto el detector
   usa `--hablantes ab` y sigue viendo A/B por orden del primer texto (incluidos parciales), como en los casos
   de texto; con `--hablantes rol`, el detector recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR
-  (además, `--sin-indicio` permite evaluar directo sin el filtro de indicio de Tito).
+  (además, con `--sin-indicio` Tito sigue decidiendo cuándo consultar, pero el SLM no recibe su indicio).
   Replay reconstruye esa asignación por llamada y sigue aceptando los registros anteriores con A/B.
   Los eventos ASR del panel conservan `canal: "A" | "B"` y `rol` por compatibilidad con su interfaz
   (roles «Vos» / «La otra persona» para el detector son del frente 3).
@@ -154,7 +154,8 @@ La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
 Los mensajes de transcripción llevan `tipo: "asr"` y `entrega: "parcial" | "final"`.
 `rol` identifica a la persona y `canal` conserva la letra A/B. En el detector, por defecto
 se usa `--hablantes ab` (A/B por orden de habla); con `--hablantes rol`, el detector recibe `PROTEGIDA`
-u `OTRA` según el canal lógico del ASR (y `--sin-indicio` evalúa sin filtro de Tito). El JSONL sigue usando
+u `OTRA` según el canal lógico del ASR (y con `--sin-indicio` el SLM no recibe el indicio de Tito, que sigue
+decidiendo cuándo consultar). El JSONL sigue usando
 su contrato previo: `tipo: "parcial" | "final"` y `canal` con el rol.
 
 Durante la llamada, el servidor manda una foto de ambos niveles cada 100 ms (aproximadamente

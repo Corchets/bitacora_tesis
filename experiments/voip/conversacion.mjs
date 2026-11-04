@@ -14,7 +14,7 @@ export function citaConRoles(texto, rolesPorLetra) {
       const nombre = NOMBRE[rolesPorLetra?.get(hablante) || ''];
       return nombre ? `${salto}${espacios}${nombre}:` : prefijo;
     }
-  );
+  ).replace(/(^|\n)(\s*)\d{1,3}\.\s+(?!(?:PROTEGIDA|OTRA|[AB]):)/g, '$1$2');
 }
 
 /**
@@ -39,7 +39,7 @@ export function limpiarCita(texto) {
  */
 export function formatearMotivo(motivo) {
   if (!motivo) return '';
-  return motivo.replace(/\b(OTRA|PROTEGIDA)\b/g, (_match, palabra, offset, textoCompleto) => {
+  return motivo.replace(/\b(?:[Ll]a\s+)?(OTRA|PROTEGIDA)\b/g, (_match, palabra, offset, textoCompleto) => {
     const antes = textoCompleto.slice(0, offset);
     const esInicio = /^[\s"'«“]*$/.test(antes) || /(?:[.!?:]\s+|[¡¿]\s*|\n\s*)["'«“]*$/.test(antes);
     if (palabra === 'OTRA') {

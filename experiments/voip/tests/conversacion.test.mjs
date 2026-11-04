@@ -32,6 +32,12 @@ test('citaConRoles reconoce hablantes directos PROTEGIDA, OTRA y prefijos de nú
   assert.equal(citaConRoles('12. B: Pasame el código.', rolesSinB), '12. B: Pasame el código.');
 });
 
+test('citaConRoles saca el número de línea que el modelo copia sin hablante', () => {
+  assert.equal(citaConRoles('7. Para ver el error necesito una sesión remota.'), 'Para ver el error necesito una sesión remota.');
+  assert.equal(citaConRoles('Sí\n8. Dale'), 'Sí\nDale');
+  assert.equal(citaConRoles('4512. Listo'), '4512. Listo');
+});
+
 test('limpiarCita remueve puntuación inicial, espacios finales y prefijos de número y hablante', () => {
   assert.equal(limpiarCita('3. OTRA: Pasame el código.'), 'Pasame el código.');
   assert.equal(limpiarCita('12. B: Pasame el código.'), 'Pasame el código.');
@@ -52,6 +58,8 @@ test('formatearMotivo reemplaza OTRA y PROTEGIDA respetando mayúsculas según p
   assert.equal(formatearMotivo('Alerta: OTRA te pide clave. PROTEGIDA no debe transferir.'), 'Alerta: La otra persona te pide clave. La persona protegida no debe transferir.');
   assert.equal(formatearMotivo('¡OTRA está solicitando datos!'), '¡La otra persona está solicitando datos!');
   assert.equal(formatearMotivo('¿OTRA te pidió la clave?'), '¿La otra persona te pidió la clave?');
+  assert.equal(formatearMotivo('Le pide a la PROTEGIDA que transfiera.'), 'Le pide a la persona protegida que transfiera.');
+  assert.equal(formatearMotivo('La OTRA pide un código.'), 'La otra persona pide un código.');
   assert.equal(formatearMotivo(''), '');
 });
 

@@ -78,9 +78,9 @@ Ninguno de los 6 roles dudosos aparece entre las falsas alarmas de v4.
 
 ## Quién sabe quién habla
 
-**Hoy ni el SLM ni Tito saben quién habla, tampoco en la llamada con ASR.**
+**Por defecto, ni el SLM ni Tito saben quién habla, tampoco en la llamada con ASR. Con `--hablantes rol`, el SLM sí lo sabe; Tito, no.**
 
-- **SLM:** recibe A y B por orden de habla, y el mensaje aclara que «las letras no indican quién llamó ni quién es sospechoso»
+- **SLM:** por defecto recibe A y B por orden de habla, y el mensaje aclara que «las letras no indican quién llamó ni quién es sospechoso»
   ([`detectores.py`](../../detectores.py)).
 - **Tito:** recibe solo el texto de cada frase, sin dato de hablante.
 - **Llamada:** el sistema sí lo sabe, porque cada persona es un canal. Por defecto (`--hablantes ab`), [`llamada.py`](../../../voip/llamada.py) convierte `protegida` y `otra` en A y B según quién habló primero; con `--hablantes rol`, pasa `PROTEGIDA` y `OTRA` al contexto del SLM desde la primera frase.
@@ -97,6 +97,41 @@ como dudosos, por ser charlas parejas (FAMILIAR-001 a 004, TRABAJO-002 y TRABAJO
 daban alarma y sin revisión humana.
 
 **Efecto en pantalla:** en v4, 12 de los 68 motivos dicen literalmente «OTRA» o «PROTEGIDA». El panel (`conversacion.mjs`, `panel.html` e `historial-ui.mjs`) los reemplaza al mostrarlos por «La otra persona» / «la otra persona» y «La persona protegida» / «la persona protegida», y limpia el número y el hablante de la cita antes de buscarla en la burbuja.
+
+## Revisión del cambio en la demo
+
+**Commit revisado:** `010efb9`, hecho con Gemini en Antigravity. **Revisión:** Claude Opus 5.5, 2026-11-04.
+
+**El cambio está bien hecho y los valores por defecto no cambian** (`ab`, `tarea`, con indicio). Se corrigieron tres detalles.
+**Todavía no se probó en una llamada real:** ni con Ollama ni con ASR, porque en esta Mac no se corren modelos.
+
+| Qué se comprobó | Cómo | Resultado |
+|---|---|---|
+| Pruebas del commit | En una copia sin reserva, con modelos falsos | Pasan las 31 de `replay`, las 99 de `voip` en Python y las 10 de Node |
+| Camino del rol hasta el detector | Lectura de `llamada.py`, `servidor.py`, `medir.py` y `replay.py` | `PROTEGIDA` y `OTRA` llegan al SLM desde la primera frase y Tito recibe solo el texto. `--sin-indicio` saca el bloque de indicio y Tito sigue decidiendo cuándo consultar |
+| Limpieza del panel con respuestas reales | Las 1.892 respuestas del SLM de v4 con roles y v3 con roles, por las funciones del panel | Los 12 motivos con etiqueta quedan bien. Citas con hablante, sin el prefijo: 23 de 68 avisos en v4 y 77 de 101 en v3 con roles |
+
+**Corregido en la revisión:**
+
+1. **Número en la tarjeta de aviso:** una cita con número y sin hablante se mostraba como «7. Para ver el error…». Pasa en 1 de 68
+   avisos de v4 y en 1 de 101 de v3 con roles.
+2. **Motivo con artículo:** «la PROTEGIDA» salía «la la persona protegida». No aparece en estas respuestas; se corrigió porque
+   es una sola línea y se vería en pantalla.
+3. **README de `voip`:** decía que `--sin-indicio` evalúa sin el filtro de Tito. Es falso: Tito sigue filtrando y lo único que
+   desaparece es el indicio.
+
+Se agregaron pruebas de los dos primeros y una que comprueba que el servidor le pasa el modo a la llamada: la anterior
+miraba solo el manifiesto. Con eso, `voip` queda en 100 pruebas de Python y 11 de Node, todas en verde.
+
+**Lo que sigue abierto:**
+
+- **`--hablantes rol` solo, con la demo actual, es una combinación sin medir:** v1 con roles no se corrió. Lo medido con roles y Tito
+  sin indicio es v4 (55/13) y v3 (67/34).
+- **Tito sigue sin saber quién habla.** Puntúa también las frases de la persona protegida. La opinión de Luciano incluye a Tito, y este
+  cambio solo cubre al SLM.
+- **Citas de varias líneas:** 1 de 68 en v4 y 3 de 101 en v3 con roles. No coinciden con una sola burbuja, así que el panel marca
+  entera la burbuja evaluada. Ya pasaba antes de este commit.
+- **Falta una llamada de prueba** con `--hablantes rol` en la notebook de la demo, mirando el panel.
 
 ## v1 de Evaristo y control de la máquina
 
@@ -142,17 +177,24 @@ Los vetos están censurados: las corridas cortan en el primer aviso y no se sabe
 
 ## Próxima prueba propuesta
 
-> **Estado: propuesta sin discutir.** Todo en Colab, con Tito sin indicio. Cada condición tarda unos 11 minutos.
+> **Estado: propuesta sin discutir.** Todo en Colab, con Tito sin indicio. Cada condición tarda unos 11 minutos; la 4 puede
+> tardar más, porque sigue después del aviso. No se lanza sin el acuerdo de Luciano.
 
-| # | Condición | Qué responde |
-|---|---|---|
-| 1 | v3 con el orden de v1 y roles | El efecto de los roles sin la cita primero, que todavía no se midió |
-| 2 | v4 con el dato de quién inició la llamada | Si bajan las 7 alarmas por dato de identificación |
-| 3 | v4 sin exigir que la cita sea de OTRA | Si recupera SOPORTE-003 y SOPORTE-006 sin perder calidad |
-| 4 | v4 con `--seguir-tras-aviso` | Si las alarmas se sostienen. Permite simular persistencia, sin decidir D08 |
+| # | Condición | Qué responde | Qué requiere |
+|---|---|---|---|
+| 1 | v3 con el orden de v1 y roles | El efecto de los roles sin la cita primero, que todavía no se midió | Nada: ya existe |
+| 2 | v4 con el dato de quién inició la llamada | Si bajan las 7 alarmas por dato de identificación | Anotar el dato en los 150 y pasarlo al mensaje |
+| 3 | v4 sin exigir que la cita sea de OTRA | Si recupera SOPORTE-003 y SOPORTE-006 sin perder calidad | Un prompt nuevo |
+| 4 | v4 con `--seguir-tras-aviso` | Si las alarmas se sostienen. Permite simular persistencia, sin decidir D08 | Pasar la opción desde el script de Colab |
+| 5 | v1 con roles | Si la demo actual gana o pierde al usar el canal. Es lo que se activaría con `--hablantes rol` | Nada: ya existe |
 
 La condición 2 supone que el sistema sabe quién inició la llamada, igual que conoce el canal. Las 7 alarmas por dato ocurren en
 llamadas que inició la persona; hay que anotar ese dato en el corpus y revisar las estafas donde llama la víctima antes de usarlo.
+Una búsqueda rápida encontró solo `SC-PREMIO-01-e01`, sin revisar a fondo.
+
+**Hasta dónde alcanza:** es un cálculo con los casos apuntados, no una medición. Si la 3 recupera sus dos estafas y la 2 saca sus
+7 alarmas sin cambiar nada más, v4 llegaría a 57/6. Sobrarían alarmas por debajo de la meta, pero seguirían faltando 3 estafas
+para llegar a 60. Lo que más falta hoy es detección.
 
 ## Límites
 
@@ -316,5 +358,5 @@ Todas las cifras de este documento salen de los CSV, desde esta carpeta y sin co
 
 1. **Próxima prueba:** aprobar la [propuesta](#próxima-prueba-propuesta) o elegir parte de ella.
 2. **Adoptar o no v4:** por ahora no. ADR 0001 y la demo siguen con v1 y con indicio.
-3. **Roles en la demo:** pasar el canal al SLM. Está preparado como opción, sin cambiar el valor por defecto.
+3. **Roles en la demo:** pasar el canal al SLM. Está preparado como opción, sin cambiar el valor por defecto. Antes conviene medir v1 con roles y probar una llamada: ver [la revisión](#revisión-del-cambio-en-la-demo).
 4. **Integrar a `laboratorio-main`:** `prompt-v3-colab` y `prompt-v4-colab` ya están en `laboratorio-luciano`; decidir qué pasa de ahí.
