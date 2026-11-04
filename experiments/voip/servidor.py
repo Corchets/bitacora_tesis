@@ -97,11 +97,11 @@ def validar_corte(valor) -> str | float:
     return round(float(valor), 1)
 
 
-# Detectores que se pueden elegir desde el panel: los dos mejores de la matriz #101 con Tito viejo,
-# más las reglas como respaldo sin modelo. E2B es la configuración final (ADR 0001); E4B queda para comparar.
+# Detectores que se pueden elegir desde el panel: la configuración final (ADR 0001), Gemma 4 E2B con
+# Tito viejo, más las reglas como respaldo sin modelo.
 # Tags completos: «gemma4:e2b» a secas baja otro artefacto según la plataforma (MLX en Mac), no el medido.
 DETECTOR_POR_DEFECTO = "gemma4:e2b-it-q4_K_M"
-DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "gemma4:e4b-it-q4_K_M", "reglas")
+DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "reglas")
 DETECTORES_CON_MODELO = replay.DETECTORES_CON_MODELO
 
 
