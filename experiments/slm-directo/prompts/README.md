@@ -13,6 +13,7 @@
 | `v3` | [`tarea_v3.txt`](tarea_v3.txt), con el orden de campos de v2 |
 | `v3-orden-v1` | [`tarea_v3_orden_v1.txt`](tarea_v3_orden_v1.txt): v3 con los campos en el orden de v1 |
 | `v4` | [`tarea_v4.txt`](tarea_v4.txt), pensada para `--hablantes rol` |
+| `v4-cita-libre` | [`tarea_v4_cita_libre.txt`](tarea_v4_cita_libre.txt): v4 con la instrucción de evidencia de v1, sin exigir citar a OTRA. Probada, no adoptada: 55/75 y 12/75 en el [análisis](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md) |
 | `riesgo` | [`riesgo.txt`](riesgo.txt) en la etapa 1 (solo `{"riesgo": x}`); si x > umbral, [`riesgo_motivo.txt`](riesgo_motivo.txt) como pedido de la etapa 2 (`DetectorSLMDosEtapas`) |
 
 El mensaje del usuario lo arma `detectores.py` en cada actualización: la

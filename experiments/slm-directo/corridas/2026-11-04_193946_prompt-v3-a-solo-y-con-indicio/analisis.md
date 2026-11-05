@@ -1,6 +1,6 @@
 # Prompts v3 y v4 con Gemma 4 E2B y Tito
 
-**Fecha:** 2026-11-04. **Issue:** [#51](https://github.com/Corchets/bitacora_tesis/issues/51), sigue abierto.
+**Fecha:** 2026-11-04; tanda de roles agregada el 2026-11-05. **Issue:** [#51](https://github.com/Corchets/bitacora_tesis/issues/51), sigue abierto.
 
 > **Estado: propuesta sin discutir.** Diagnóstico sobre los 150 casos de desarrollo, ya vistos, con referencias y
 > roles sin revisión humana. No es una evaluación final. No toca la reserva, no decide
@@ -10,19 +10,24 @@
 
 ## Conclusión
 
-**Ninguna condición cumple la meta del tutor** (60–64 estafas con 8–11 falsas alarmas). La más cercana es
-[v4](../../prompts/tarea_v4.txt) con Tito sin indicio: **55/75 estafas y 13/75 falsas alarmas**. En cantidad empata con v1
-dentro del ruido, pero avisa mejor: cita el pedido real en 34 casos contra 27 y cita solo a la víctima en 1 contra 7.
-La configuración vigente sigue siendo Tito viejo con indicio y v1 (`tarea`).
+**Ninguna condición cumple la meta del tutor** (60–64 estafas con 8–11 falsas alarmas). Las más cercanas son
+[v4 con cita libre](../../prompts/tarea_v4_cita_libre.txt) (**55/75 estafas y 12/75 falsas alarmas**) y
+[v4](../../prompts/tarea_v4.txt) (**55/75 y 13/75**), que no se distinguen dentro del ruido. Contra v1, avisan mejor: v4 cita el
+pedido real en 34 casos contra 27 y cita solo a la víctima en 1 contra 7. La configuración vigente sigue siendo Tito viejo con
+indicio y v1 (`tarea`).
 
-Tres resultados guían el próximo paso:
+Cinco resultados guían el próximo paso:
 
 1. **La causa principal del salto de v3 era el orden de los campos.** Con solo pasar la cita al final, v3 baja de 35 a
    18 falsas alarmas, a cambio de 7 estafas.
-2. **Saber a quién protege no alcanzó por sí solo:** en v3, los roles cambian las falsas alarmas de 35 a 34. Esa prueba
-   conserva la cita primero, así que todavía no se midió el efecto de los roles sin ese problema.
+2. **Saber a quién protege no mejora la detección.** Ya medido sin el problema de la cita primero: v3 con el orden de v1 pasa de
+   57/18 a 55/19 con roles, y v1 de 53/14 a 53/12. Son cambios de 1 o 2 casos, dentro de lo que mueve el ruido.
 3. **La mayor falsa alarma que queda es el dato de identificación:** 7 de las 13 de v4, todas en llamadas que inició la
    persona. La regla que debía evitarlo no funcionó.
+4. **Seguir cambiando el prompt ya casi no mueve nada.** Entre las 10 condiciones con Tito sin indicio, 49 estafas avisan siempre
+   y 8 nunca; el caso explica el 80 % de la variación y la condición, el 3 %. Ver [la tanda de roles](#tanda-de-roles-qué-dejó).
+5. **El 73 % es mejor que lo que hay que esperar en la reserva.** Los casos viejos avisan 28/29 y el corpus v2, 27/46 (59 %). La
+   reserva es toda corpus v2: con estas tasas daría cerca de 60/100. Ver [la mezcla](#el-número-depende-de-la-mezcla-y-la-reserva-no-tiene-casos-viejos).
 
 ## Todas las condiciones con Tito sin indicio
 
@@ -36,6 +41,10 @@ Todas: Colab con GPU T4, Tito con umbral 0,5, corte al primer aviso y 150 casos.
 | v3 con el orden de v1 | 57 (76 %) | 56 | 18 (24 %) | 7 | 11 | 23 / 28 / 5 | 31 | 5 | 1.093 |
 | v3 con roles | 67 (89 %) | 63 | 34 (45 %) | 20 | 14 | 41 / 20 / 2 | 22 | 7 | 760 |
 | **v4 con roles** | **55 (73 %)** | 54 | **13 (17 %)** | 6 | 7 | 19 / 33 / 2 | **34** | **1** | 1.132 |
+| v1 con roles | 53 (71 %) | 52 | 12 (16 %) | 3 | 9 | 21 / 29 / 2 | 30 | 5 | 1.181 |
+| **v4 con cita libre** | **55 (73 %)** | 54 | **12 (16 %)** | 5 | 7 | 18 / 35 / 1 | 36 | 4 | 1.151 |
+| v3 con el orden de v1 y roles | 55 (73 %) | 54 | 19 (25 %) | 8 | 11 | 27 / 23 / 4 | 26 | 4 | 1.064 |
+| v4 con roles, repetida y sin cortar | 55 (73 %) | 54 | 13 (17 %) | 6 | 7 | 18 / 34 / 2 | 36 | 2 | 1.634 |
 
 «Cita el pedido»: la cita del primer aviso incluye la línea `T_R` u otra marcada como pedido, entre las estafas con
 pedido que tuvieron aviso. No cuenta pasos previos reales, así que es un piso. Ninguna corrida tuvo fallos técnicos.
@@ -49,10 +58,16 @@ pedido que tuvieron aviso. No cuenta pasos previos reales, así que es un piso. 
 | v3 → v3 con roles | +3 | −1 | Las 3 estafas son sin pedido y por motivos flojos («lo cual podría…»): no es una mejora real |
 | v3 → v4 con roles | −9 | −22 | No gana ni agrega nada |
 | v1 control → v4 con roles | +2 (gana 4, pierde 2) | −1 (saca 4, agrega 3) | Dentro del ruido en cantidad, distinto en calidad |
+| v4 con roles → v4 repetida | 0 | 0 | Avisa exactamente en los mismos 68 casos. Es el ruido de v4 |
+| v1 control → v1 con roles | 0 (gana 2, pierde 2) | −2 | Gana BANCO-003 y `TR-04`; pierde SOPORTE-003 y SOPORTE-006; saca FAMILIAR-005 legítima y `LG-BANK-VERIF-01-e01` |
+| v4 con roles → v4 con cita libre | 0 (gana 1, pierde 1) | −1 | Gana SOPORTE-006, pierde ORGANISMO_PREVISIONAL-003 y saca BANCO-006 |
+| v3 con el orden de v1 → con roles | −2 (gana 1, pierde 3) | +1 | Los roles no ayudan ni sin la cita primero |
 
 **Lo que gana v4 contra v1:** BANCO-003, ORGANISMO_PREVISIONAL-003, SOPORTE-001 y `TR-04`, con citas sobre el pedido o sobre
 un paso real. **Lo que pierde:** SOPORTE-003 y SOPORTE-006, dos pedidos directos de credenciales. v1 los detectaba citando a
-la víctima («Me pide usuario y contraseña»). v4 pide citar a OTRA y no alerta ni siquiera en `T_R`; esa regla puede ser la causa, sin probar.
+la víctima («Me pide usuario y contraseña»). **La regla de citar a OTRA no es la causa principal:** sin ella solo vuelve SOPORTE-006,
+y v1 con roles pierde las dos con su propio prompt. Esos avisos de v1 eran anteriores a `T_R` (líneas 10 y 14). Cuando llega el pedido, en
+v1 con roles y en las variantes de v4 el riesgo queda en 0,2–0,3: ninguna de esas corridas avisa en la línea del pedido.
 
 ## De qué están hechas las falsas alarmas
 
@@ -125,8 +140,8 @@ miraba solo el manifiesto. Con eso, `voip` queda en 100 pruebas de Python y 11 d
 
 **Lo que sigue abierto:**
 
-- **`--hablantes rol` solo, con la demo actual, es una combinación sin medir:** v1 con roles no se corrió. Lo medido con roles y Tito
-  sin indicio es v4 (55/13) y v3 (67/34).
+- **`--hablantes rol` solo, con la demo actual, ya se midió sin indicio:** v1 con roles da 53/12 contra 53/14. Con indicio, que es lo que usa la
+  demo hoy, sigue sin medir.
 - **Tito sigue sin saber quién habla.** Puntúa también las frases de la persona protegida. La opinión de Luciano incluye a Tito, y este
   cambio solo cubre al SLM.
 - **Citas de varias líneas:** 1 de 68 en v4 y 3 de 101 en v3 con roles. No coinciden con una sola burbuja, así que el panel marca
@@ -175,26 +190,104 @@ todas las 64 que lo tienen.
 
 Los vetos están censurados: las corridas cortan en el primer aviso y no se sabe qué pasaría después. Son cotas.
 
-## Próxima prueba propuesta
+## Tanda de roles: qué dejó
 
-> **Estado: propuesta sin discutir.** Todo en Colab, con Tito sin indicio. Cada condición tarda unos 11 minutos; la 4 puede
-> tardar más, porque sigue después del aviso. No se lanza sin el acuerdo de Luciano.
+Cuatro condiciones más en Colab, con el mismo modelo y los mismos 150 casos. Las preguntas eran las de la propuesta anterior:
 
-| # | Condición | Qué responde | Qué requiere |
-|---|---|---|---|
-| 1 | v3 con el orden de v1 y roles | El efecto de los roles sin la cita primero, que todavía no se midió | Nada: ya existe |
-| 2 | v4 con el dato de quién inició la llamada | Si bajan las 7 alarmas por dato de identificación | Anotar el dato en los 150 y pasarlo al mensaje |
-| 3 | v4 sin exigir que la cita sea de OTRA | Si recupera SOPORTE-003 y SOPORTE-006 sin perder calidad | Un prompt nuevo |
-| 4 | v4 con `--seguir-tras-aviso` | Si las alarmas se sostienen. Permite simular persistencia, sin decidir D08 | Pasar la opción desde el script de Colab |
-| 5 | v1 con roles | Si la demo actual gana o pierde al usar el canal. Es lo que se activaría con `--hablantes rol` | Nada: ya existe |
+| Pregunta | Resultado |
+|---|---|
+| ¿Los roles ayudan sin la cita primero? | No: v3 con el orden de v1 pasa de 57/18 a 55/19 |
+| ¿v1 con roles, lo que activaría `--hablantes rol` en la demo, gana o pierde? | Empata: 53/12 contra 53/14, y pierde dos pedidos directos de credenciales |
+| ¿Sin exigir citar a OTRA vuelven SOPORTE-003 y SOPORTE-006? | Solo SOPORTE-006, citando a la víctima antes del pedido. Queda 55/12 contra 55/13, sin diferencia real |
+| ¿Las alarmas se sostienen después del primer aviso? | La mayoría de las falsas, no: [ver abajo](#las-falsas-alarmas-se-apagan-solas-pero-exigir-persistencia-pierde-estafas) |
 
-La condición 2 supone que el sistema sabe quién inició la llamada, igual que conoce el canal. Las 7 alarmas por dato ocurren en
-llamadas que inició la persona; hay que anotar ese dato en el corpus y revisar las estafas donde llama la víctima antes de usarlo.
-Una búsqueda rápida encontró solo `SC-PREMIO-01-e01`, sin revisar a fondo.
+### Lo que decide el resultado es el caso
 
-**Hasta dónde alcanza:** es un cálculo con los casos apuntados, no una medición. Si la 3 recupera sus dos estafas y la 2 saca sus
-7 alarmas sin cambiar nada más, v4 llegaría a 57/6. Las alarmas quedarían por debajo de la meta, pero seguirían faltando 3 estafas
-para llegar a 60. Lo que más falta hoy es detección.
+Entre las 10 condiciones con Tito sin indicio:
+
+| | Avisan siempre | Nunca | Depende de la condición |
+|---|---:|---:|---:|
+| Estafas (75) | 49 | 8 | 18 |
+| Legítimas (75) | 9 | 39 | 27 |
+
+De toda la variación entre avisar y no avisar, **el caso explica el 80 %, la condición el 3 %** y el resto (17 %) es la combinación
+entre ambos. Es una descripción, no una prueba: estas condiciones son variantes cercanas de pocos prompts. Dice que no queda mucho por
+ganar con cambios de este tipo. **No dice que el corpus esté mal:** un caso difícil y un caso mal escrito se ven igual en esta cuenta.
+
+Tampoco es que el modelo no pueda ver esas estafas. v3 con roles avisa 18/18 indirectas, pero con 20/51 falsas alarmas en el corpus v2
+y 41 de sus avisos antes del pedido. Los puntos que se midieron son 55/12, 57/18 y 67/34: al subir la detección suben las falsas alarmas,
+y ninguna condición pasa cerca de 60/11.
+
+### El número depende de la mezcla, y la reserva no tiene casos viejos
+
+| Grupo, con v4 | Estafas | Falsas alarmas |
+|---|---:|---:|
+| Casos viejos (`LAB`, `SC`, `LG`, `TR`) | 28/29 (97 %) | 7/24 (29 %) |
+| Corpus v2 (`CV2`) | **27/46 (59 %)** | **6/51 (12 %)** |
+| — directas | 16/18 | — |
+| — indirectas | 10/18 | — |
+| — sin pedido | 1/10 | — |
+| — cotidianas, menciones y pedidos razonables | — | 0/25, 2/10 y 4/16 |
+
+Mirado así, el problema se ve distinto. **En el corpus v2, las falsas alarmas ya están en la franja de la meta y lo que falta es detección.**
+El 84 % «con pedido» (54/64) también baja: en el corpus v2 es 26/36 (72 %), y los casos viejos ponen 28/28.
+
+> **Estado: propuesta sin discutir.** Cuenta con las tasas de desarrollo; no es una medición y no se corrió ni se leyó la reserva.
+
+La [reserva declarada](../../casos/DISENO-CORPUS-V2.md) son 100 estafas (40 directas, 40 indirectas, 20 sin pedido) y 100 legítimas (40
+cotidianas, 35 pedidos razonables, 25 menciones), todas de corpus v2. Con las tasas de v4 daría unas **60 estafas y 14 falsas alarmas de
+cada 100**: 40·16/18 + 40·10/18 + 20·1/10 y 40·0/25 + 35·4/16 + 25·2/10. Un detector que avisa solo por pedidos no puede pasar de 80/100,
+ni acertando todos. Por eso la consulta sobre las estafas sin pedido cambia el resultado final y no es un detalle de la métrica.
+
+Con 75 casos, además, 55/75 es 73 % con intervalo de Wilson del 62–82 %, y 12/75 es 16 % con 9–26 %. El ancho de la meta (4 casos) es menor
+que esa incertidumbre, así que un caso de más o de menos no prueba haberla alcanzado.
+
+### Las falsas alarmas se apagan solas, pero exigir persistencia pierde estafas
+
+v4 repetida sigue consultando después del aviso, sin saber que ya avisó. Sobre esas respuestas se simula, sin correr nada más, qué pasaría
+con [la alternativa pendiente en D08](../../../../docs/evaluacion/METRICAS.md) de exigir más de una actualización:
+
+> **Estado: propuesta sin discutir.** Simulación sobre casos ya vistos. La política de alerta es de
+> [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
+| Política | Estafas (de 75) | Falsas alarmas (de 75) |
+|---|---:|---:|
+| Primer aviso | 55 | 13 |
+| Alerta en 2 líneas de la llamada | 51 | **11** |
+| Alerta en 2 líneas seguidas | 49 | **8** |
+| Alerta en 3 líneas de la llamada | 48 | 6 |
+| Alerta en 3 líneas seguidas | 47 | 4 |
+
+Exigir 2 líneas de la llamada saca `LG-BANK-VERIF-01-e01` y `TR-06` y pierde ORGANISMO_PREVISIONAL-003, PREMIO-002, WHATSAPP-002 y WHATSAPP-005.
+Al final de la llamada, la alerta sigue encendida en **39 estafas y solo en 3 legítimas** (`LAB-banco-revisa-app`, `TR-08` y `TR-11`). Eso no sirve
+como regla, porque en vivo no se sabe cuándo termina la llamada, pero muestra que las falsas alarmas suelen ser un momento y no un estado. La
+persistencia baja las alarmas a la franja de la meta, pero aleja la detección: ninguna política llega a 60/11.
+
+**`TR-08` no es solo un problema del corte.** Al leer «del candado de la valija que me prestaste» y en todas las líneas que siguen, el modelo
+continúa alertando. Aunque se mida la corrección, no corrige.
+
+## Estado de la propuesta anterior
+
+> **Estado: propuesta sin discutir.** La tanda respondió cuatro de las cinco condiciones. No se propone otra tanda de prompts hasta
+> resolver las consultas de D07 y D08.
+
+| # | Condición | Estado |
+|---|---|---|
+| 1 | v3 con el orden de v1 y roles | Corrida: 55/19 |
+| 2 | v4 con el dato de quién inició la llamada | **No corrida, y choca con D03** |
+| 3 | v4 sin exigir que la cita sea de OTRA | Corrida: 55/12 |
+| 4 | v4 con `--seguir-tras-aviso` | Corrida: 55/13, [persistencia simulada](#las-falsas-alarmas-se-apagan-solas-pero-exigir-persistencia-pierde-estafas) |
+| 5 | v1 con roles | Corrida: 53/12 |
+
+**Condición 2:** la propuesta anterior suponía que el sistema podía recibir quién inició la llamada. Pero
+[D03](../../../../docs/gestion/MAPA-DECISIONES.md#d03--congelar-alcance-y-contribución), el
+[Plan de Trabajo](../../../../docs/propuesta/PLAN-DE-TRABAJO.md) y la [arquitectura](../../../../docs/ingenieria/ARQUITECTURA.md) dejan la dirección
+entrante o saliente fuera de las entradas del detector. Pasársela al SLM requiere reabrir esa decisión; anotarla en el corpus solo para separar
+resultados, no.
+
+**Cuánto falta:** la cuenta anterior esperaba 57/6 si las condiciones 2 y 3 acertaban. La 3 no recuperó ninguna estafa neta y la 2 no se puede
+correr sin reabrir D03. Lo único a la vista que mueve 5 estafas o más es la definición de las [estafas sin
+pedido](../../casos/FALLAS-Y-CORPUS-2026-11-05.md#problema-2-las-estafas-sin-pedido-no-se-pueden-aprobar-con-la-definición-actual).
 
 ## Límites
 
@@ -202,12 +295,13 @@ para llegar a 60. Lo que más falta hoy es detección.
   validarla fuera del desarrollo cuando D08 lo defina. Las reglas evitan frases de los casos por eso mismo.
 - `T_R` y las referencias no tienen revisión humana. Algunas legítimas, como `TR-11`, no se distinguen de una estafa con el
   texto solo: conviene decidir en D07 si deben contar igual.
-- Las cuatro condiciones de la prueba v4 corrieron en la misma sesión. La v1 de Evaristo y la v3 sin roles, en otras, con la misma
+- Las cuatro condiciones de la prueba v4 corrieron en la misma sesión, y las cuatro de la tanda de roles, en otra. La v1 de Evaristo y la v3 sin roles, en otras, con la misma
   configuración. Las cifras de v1 en Windows no separan máquina y prompt, y los tiempos no se comparan.
 - v4 reúne varios cambios: orden, roles, regla de canal propio, excepción de datos comunes y cita de OTRA. Solo el orden y los
   roles se midieron por separado, y sobre v3.
-- Se repitió v1, no v3 ni v4, así que las diferencias de 1 o 2 casos no se leen como efecto.
-- **Solo primer aviso:** no se sabe si la alerta se sostendría después.
+- Se repitieron v1 (mueve 1 estafa) y v4 (no mueve ningún caso), no v3, así que las diferencias de 1 o 2 casos no se leen como efecto.
+- **Solo primer aviso, salvo v4 repetida:** la persistencia se simuló sobre una sola condición y sin avisarle al modelo que ya había avisado.
+- El peso de caso y condición describe estas 10 condiciones, que son variantes cercanas; no acota lo que podría lograr otro enfoque.
 - Los ejemplos ilustran fallos y no reemplazan una revisión de todos los avisos.
 
 ## Detalle de la prueba v3
@@ -341,13 +435,13 @@ El detalle línea por línea está en los CSV y en la
 | Entorno | Google Colab con GPU T4, Ollama 0.40.14 |
 | Modelo | `gemma4:e2b-it-q4_K_M`, digest `b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2` |
 | Parámetros | `num_ctx` 4096, seed 42, temperatura 0, corte al primer aviso, sin reglas |
-| Prompts | v1 `bf4284996898c45d`, v3 `a944aadc550480b3`, v3 con el orden de v1 `e1030f8859125834`, v4 `92df75a22c2746fb` |
+| Prompts | v1 `bf4284996898c45d`, v3 `a944aadc550480b3`, v3 con el orden de v1 `e1030f8859125834`, v4 `92df75a22c2746fb`, v4 con cita libre `5b216792ce0bb9c6` |
 | Roles | [`casos/roles-protegida.json`](../../casos/roles-protegida.json), huella `8c5fcb8135d24de5` |
 | Tito | RoBERTuito con regresión logística, umbral 0,5. El SHA-256 del artefacto es `fb601eaa…` en Colab y `2fcf65d7…` en Windows: difieren solo por los saltos de línea |
 | Datos | Los 150 de desarrollo. Las ramas usadas no contienen la reserva |
-| Código | v3: rama [`prompt-v3-colab`](https://github.com/Corchets/bitacora_tesis/tree/prompt-v3-colab), commit `a42e1b5`. v4: rama [`prompt-v4-colab`](https://github.com/Corchets/bitacora_tesis/tree/prompt-v4-colab), commit `55fe977`, [procedimiento](../../colab/README-PROMPT-V4.md). Las dos ya están en `laboratorio-luciano` |
-| Duración | v4 14,5 min; v3 con roles 10,5; v3 con el orden de v1 10,9; v1 control 11,0. v3 anterior: SLM solo y Tito con indicio 31,8; Tito sin indicio 11,3 |
-| Salidas | Esta carpeta, [`2026-11-04_201116_prompt-v3-b-tito-sin-indicio`](../2026-11-04_201116_prompt-v3-b-tito-sin-indicio/), [`2026-11-04_prompt-v4-tito-sin-indicio`](../2026-11-04_prompt-v4-tito-sin-indicio/) y [`2026-11-04_sin-indicio-150`](../2026-11-04_sin-indicio-150/) |
+| Código | v3: rama [`prompt-v3-colab`](https://github.com/Corchets/bitacora_tesis/tree/prompt-v3-colab), commit `a42e1b5`. v4: rama [`prompt-v4-colab`](https://github.com/Corchets/bitacora_tesis/tree/prompt-v4-colab), commit `55fe977`, [procedimiento](../../colab/README-PROMPT-V4.md). Tanda de roles: rama [`tanda-roles-colab`](https://github.com/Corchets/bitacora_tesis/tree/tanda-roles-colab), commit `7db9cc3`, script fijado en `fac73fd` (SHA-256 `331b34be…`), [procedimiento](../../colab/README-TANDA-ROLES.md). Las tres ya están en `laboratorio-luciano` |
+| Duración | v4 14,5 min; v3 con roles 10,5; v3 con el orden de v1 10,9; v1 control 11,0. v3 anterior: SLM solo y Tito con indicio 31,8; Tito sin indicio 11,3. Tanda de roles: v1 con roles 14,7; v4 con cita libre 11,8; v3 con el orden de v1 y roles 10,9; v4 sin cortar 17,5 |
+| Salidas | Esta carpeta, [`2026-11-04_201116_prompt-v3-b-tito-sin-indicio`](../2026-11-04_201116_prompt-v3-b-tito-sin-indicio/), [`2026-11-04_prompt-v4-tito-sin-indicio`](../2026-11-04_prompt-v4-tito-sin-indicio/), [`2026-11-04_tanda-roles-tito-sin-indicio`](../2026-11-04_tanda-roles-tito-sin-indicio/) y [`2026-11-04_sin-indicio-150`](../2026-11-04_sin-indicio-150/) |
 
 Todas las cifras de este documento salen de los CSV, desde esta carpeta y sin correr modelos, con
 `python -I comparar_con_v1_colab.py` y `python -I comparar_con_v1.py`.
@@ -356,7 +450,9 @@ Todas las cifras de este documento salen de los CSV, desde esta carpeta y sin co
 
 > **Estado: propuesta sin discutir.** Depende de lo que decida el equipo.
 
-1. **Próxima prueba:** aprobar la [propuesta](#próxima-prueba-propuesta) o elegir parte de ella.
-2. **Adoptar o no v4:** por ahora no. ADR 0001 y la demo siguen con v1 y con indicio.
-3. **Roles en la demo:** pasar el canal al SLM. Está preparado como opción, sin cambiar el valor por defecto. Antes conviene medir v1 con roles y probar una llamada: ver [la revisión](#revisión-del-cambio-en-la-demo).
-4. **Integrar a `laboratorio-main`:** `prompt-v3-colab` y `prompt-v4-colab` ya están en `laboratorio-luciano`; decidir qué pasa de ahí.
+1. **Consulta al tutor:** cómo cuentan las estafas sin pedido y si se amplía la definición de alerta a maniobras de aislamiento (D07 y D08).
+2. **Política de alerta:** primer aviso o persistencia; los números de arriba son para discutirla (D08).
+3. **Quién inició la llamada:** dejarlo fuera, como dice D03, o reabrir D03.
+4. **Adoptar o no v4 o v4 con cita libre:** por ahora no. ADR 0001 y la demo siguen con v1 y con indicio.
+5. **Roles en la demo:** pasar el canal al SLM no cambia el resultado sobre texto (53/12 contra 53/14, con Tito sin indicio). Falta probar una llamada: ver [la revisión](#revisión-del-cambio-en-la-demo).
+6. **Integrar a `laboratorio-main`:** `prompt-v3-colab`, `prompt-v4-colab` y `tanda-roles-colab` ya están en `laboratorio-luciano`; decidir qué pasa de ahí.

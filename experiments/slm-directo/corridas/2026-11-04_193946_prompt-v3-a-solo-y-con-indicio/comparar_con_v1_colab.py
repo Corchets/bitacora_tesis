@@ -1,4 +1,4 @@
-# v1, v3 y v4 en Colab, sobre los 150 de desarrollo. Uso: python -I comparar_con_v1_colab.py
+# v1, v3, v4 y la tanda de roles en Colab, sobre los 150 de desarrollo. Uso: python -I comparar_con_v1_colab.py
 # Lee los CSV y las referencias de los IDs de esas corridas; rechaza la reserva. No corre modelos.
 # Las corridas cortan en el primer aviso: un filtro que veta un aviso no sabe qué pasaría después.
 import collections,csv,difflib,json,re,unicodedata
@@ -8,7 +8,9 @@ W=Path(__file__).resolve().parents[2]; C=W/'corridas'; E=C/'2026-11-04_sin-indic
 EA=E/'a/2026-11-04_194015_sin-indicio-a-solo-y-con-indicio'; EB=E/'b/2026-11-04_201218_sin-indicio-b-tito-sin-indicio'; EC=E/'c/2026-11-04_202259_sin-indicio-c-solo-repeticion'
 LA=C/'2026-11-04_193946_prompt-v3-a-solo-y-con-indicio'; LB=C/'2026-11-04_201116_prompt-v3-b-tito-sin-indicio'
 V=C/'2026-11-04_prompt-v4-tito-sin-indicio'; VA=V/'a/2026-11-04_215231_prompt-v4-a-v4-rol'; VB=V/'b/2026-11-04_220639_prompt-v4-b-v3-rol'; VC=V/'c/2026-11-04_221708_prompt-v4-c-v3-orden-v1-ab'; VD=V/'d/2026-11-04_222802_prompt-v4-d-tarea-ab'
+T=C/'2026-11-04_tanda-roles-tito-sin-indicio'; TA=T/'a/2026-11-04_233513_tanda-roles-a-tarea-rol'; TB=T/'b/2026-11-04_234950_tanda-roles-b-v4-cita-libre-rol'; TC=T/'c/2026-11-05_000133_tanda-roles-c-v3-orden-v1-rol'; TD=T/'d/2026-11-05_001227_tanda-roles-d-v4-rol'
 CORRIDAS={'v1 solo':(EA,'slm'),'v1 solo rep':(EC,'slm'),'v1 Tito ind':(EA,'tito-slm'),'v1 Tito sin':(EB,'tito-slm-sin-indicio'),'v3 solo':(LA,'slm'),'v3 Tito ind':(LA,'tito-slm'),'v3 Tito sin':(LB,'tito-slm-sin-indicio'),'v1 control':(VD,'tito-slm-sin-indicio'),'v3 orden v1':(VC,'tito-slm-sin-indicio'),'v3 roles':(VB,'tito-slm-sin-indicio'),'v4 roles':(VA,'tito-slm-sin-indicio'),
+ 'v1 roles':(TA,'tito-slm-sin-indicio'),'v4 cita libre':(TB,'tito-slm-sin-indicio'),'v3 orden v1 roles':(TC,'tito-slm-sin-indicio'),'v4 siguiendo':(TD,'tito-slm-sin-indicio'),
  'v1 solo Win':(C/'2026-11-04_132229_e2b-directo-150','slm'),'v1 Tito ind Win':(C/'2026-11-04_003715_e2b-tito-viejo-150','tito-slm')}
 def carga(carpeta,det):
     d=collections.defaultdict(list)
@@ -19,12 +21,12 @@ def carga(carpeta,det):
 R={n:carga(*v) for n,v in CORRIDAS.items()}
 ids=sorted(R['v3 Tito sin']); assert len(ids)==150 and not [i for i in ids if 'CV2-T' in i]
 assert all(sorted(c)==ids for c in R.values())
-for carpeta,huella in ((EA,'bf4284996898c45d'),(EB,'bf4284996898c45d'),(EC,'bf4284996898c45d'),(LA,'a944aadc550480b3'),(LB,'a944aadc550480b3'),(VD,'bf4284996898c45d'),(VC,'e1030f8859125834'),(VB,'a944aadc550480b3'),(VA,'92df75a22c2746fb')):
+for carpeta,huella in ((EA,'bf4284996898c45d'),(EB,'bf4284996898c45d'),(EC,'bf4284996898c45d'),(LA,'a944aadc550480b3'),(LB,'a944aadc550480b3'),(VD,'bf4284996898c45d'),(VC,'e1030f8859125834'),(VB,'a944aadc550480b3'),(VA,'92df75a22c2746fb'),(TA,'bf4284996898c45d'),(TB,'5b216792ce0bb9c6'),(TC,'e1030f8859125834'),(TD,'92df75a22c2746fb')):
     m=json.load(open(carpeta/'manifiesto.json',encoding='utf-8'))
     assert huella in json.dumps(m['prompts']) and m['ollama']['version']=='0.40.14' and m['particion']=='desarrollo'
     assert m['ollama']['digests']['gemma4:e2b-it-q4_K_M'].startswith('b37049369adf')
     if m['filtro_tito']: assert m['filtro_tito']['artefacto_sha256'].startswith('fb601eaa') and m['filtro_tito']['umbral']==0.5
-assert all(json.load(open(x/'manifiesto.json',encoding='utf-8'))['filtro_tito']['indicio'] is False for x in (EB,LB,VA,VB,VC,VD))
+assert all(json.load(open(x/'manifiesto.json',encoding='utf-8'))['filtro_tito']['indicio'] is False for x in (EB,LB,VA,VB,VC,VD,TA,TB,TC,TD))
 ref={i:json.load(open(W/f'casos/referencia/{i}.json',encoding='utf-8')) for i in ids}
 vis=[i for i in ids if ref[i]['clase']=='vishing']; leg=[i for i in ids if ref[i]['clase']!='vishing']
 com=[i for i in leg if ref[i]['clase']=='legitima']; dif=[i for i in leg if ref[i]['clase']=='legitima_dificil']
@@ -90,4 +92,38 @@ COL=('v1 control','v3 Tito sin','v3 orden v1','v3 roles','v4 roles')
 print('\n## Clases de falsa alarma',COL)
 for k,v in CLASES.items(): print(k,[len(v&S[n]) for n in COL])
 print('fuera de las clases',{n:sorted((S[n]&set(leg))-set().union(*CLASES.values())) for n in COL})
+
+# Tanda de roles: efecto de cada factor, caso contra condición, grupos del corpus y persistencia.
+print('\n## Tanda de roles')
+for x,y in (('v4 roles','v4 siguiendo'),('v1 control','v1 roles'),('v4 roles','v4 cita libre'),('v3 orden v1','v3 orden v1 roles')):
+    print(f"{x} -> {y}: estafas pierde {sorted(S[x]-S[y]&set(vis))} gana {sorted(S[y]-S[x]&set(vis))}; FA quita {sorted(S[x]-S[y]&set(leg))} agrega {sorted(S[y]-S[x]&set(leg))}")
+SIN=('v1 Tito sin','v1 control','v3 Tito sin','v3 orden v1','v3 roles','v4 roles','v1 roles','v4 cita libre','v3 orden v1 roles','v4 siguiendo')
+print('\n## Caso contra condición, las',len(SIN),'con Tito sin indicio')
+for nom,g in (('estafas',vis),('legitimas',leg)):
+    n=collections.Counter(sum(i in S[x] for x in SIN) for i in g); print(nom,'siempre',n[len(SIN)],'nunca',n[0],'varía',len(g)-n[len(SIN)]-n[0])
+M=[[int(i in S[x]) for x in SIN] for i in ids]; gm=sum(map(sum,M))/(150*len(SIN)); st=sum((v-gm)**2 for f in M for v in f)
+sc=len(SIN)*sum((sum(f)/len(SIN)-gm)**2 for f in M); sn=150*sum((sum(f[j] for f in M)/150-gm)**2 for j in range(len(SIN)))
+print(f'parte de la varianza: caso {sc/st:.1%}, condición {sn/st:.1%}, resto {1-(sc+sn)/st:.1%}')
+def wilson(k,n,z=1.96):
+    q=k/n; d=1+z*z/n; c=(q+z*z/(2*n))/d; h=z*(q*(1-q)/n+z*z/(4*n*n))**.5/d; return f'{k}/{n} [{100*(c-h):.0f}-{100*(c+h):.0f} %]'
+print('\n## Wilson 95 %:',wilson(55,75),wilson(13,75),wilson(12,75),wilson(27,46),wilson(6,51))
+print('\n## Por grupo del corpus (estafas: directo, indirecto, sin pedido, viejos; FA: CV2, viejos)')
+def grupo_e(i): return ref[i].get('dificultad') if i.startswith('CV2') else 'viejos'
+for x in ('v1 control','v3 roles','v4 roles','v1 roles','v4 cita libre'):
+    print(x,[(g,sum(i in S[x] for i in vis if grupo_e(i)==g),sum(1 for i in vis if grupo_e(i)==g)) for g in ('directo','indirecto','sin_pedido','viejos')],'FA CV2',sum(i in S[x] for i in leg if i.startswith('CV2')),'de',sum(i.startswith('CV2') for i in leg),'viejos',sum(i in S[x] for i in leg if not i.startswith('CV2')),'de',sum(not i.startswith('CV2') for i in leg))
+print('\n## Persistencia simulada sobre v4 siguiendo (alerta_sugerida por línea, sin cambiar D08)')
+D=R['v4 siguiendo']
+def sigue(i,k,seguidas):
+    al=[r['alerta_sugerida']=='true' for r in D[i]]
+    if not seguidas: return sum(al)>=k
+    n=0
+    for a in al:
+        n=n+1 if a else 0
+        if n>=k: return True
+    return False
+for nom,k,seg in (('primer aviso',1,True),('2 seguidas',2,True),('3 seguidas',3,True),('2 en la llamada',2,False),('3 en la llamada',3,False)):
+    e=[i for i in vis if sigue(i,k,seg)]; f=[i for i in leg if sigue(i,k,seg)]
+    print(nom,len(e),len(f),'pierde',sorted(set(vis)&S['v4 siguiendo']-set(e)) if k==2 else '','saca',sorted(set(leg)&S['v4 siguiendo']-set(f)) if k==2 else '')
+print('alerta activa en la última línea: estafas',sum(D[i][-1]['alerta_sugerida']=='true' for i in vis),'legítimas',[i for i in leg if D[i][-1]['alerta_sugerida']=='true'])
+print('TR-08',[(r['linea'],r['alerta_sugerida'],r['riesgo']) for r in D['TR-08-frase-cortada-candado'] if r['consulta']!='omitida'])
 print('\n## Estafas con pedido sin aviso en v4',[i for i in vis if tr(i) and i not in S['v4 roles']])

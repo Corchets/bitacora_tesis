@@ -226,6 +226,12 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   repeticiones, particiones y política siguen como propuesta; no se cierra D08 ni
   se cambia la configuración vigente de D09.
 
+- **Evidencia para la política de alerta y el denominador (2026-11-05, [análisis](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó)):**
+  v4 da 55/13 con el primer aviso; simulando persistencia, 51/11 con dos alertas en la llamada y 49/8 con dos seguidas.
+  El corpus v2, que es toda la reserva, da 27/46 en estafas y 6/51 en falsas alarmas. Hay 20 estafas sin pedido
+  entre las 100 reservadas, así que un detector que avisa solo por pedidos no puede pasar de 80/100. Son casos ya vistos sin
+  revisión humana. No se elige política ni se cambia el denominador: es material para la consulta al tutor.
+
 ### D09 — Elegir ASR y detector
 
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?

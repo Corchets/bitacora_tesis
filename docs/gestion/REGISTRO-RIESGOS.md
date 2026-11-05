@@ -154,3 +154,9 @@ el porcentaje general depende de la mezcla. Faltan legítimas con maniobras de a
 llama y el campo de quién inició la llamada; sin eso, las reglas que bajan R07 no se pueden validar. Las 11 estafas sin pedido
 chocan con la definición de alerta: es una consulta para D07 y D08. Lectura propia sin revisión humana: probabilidad e impacto
 sin cambios.
+
+R04/R07, tanda de roles del 2026-11-05: [análisis](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó).
+**Riesgo observado para la evaluación final:** el 73 % de desarrollo se apoya en los casos viejos (28/29); el corpus v2, que es toda la reserva, da 27/46. Con esas
+tasas, la reserva daría cerca de 60/100 estafas y 14/100 falsas alarmas, y un detector que avisa solo por pedidos no puede pasar de 80/100. Es una cuenta sobre la
+composición declarada: la reserva no se corrió ni se leyó. **Corrección:** anotar quién inició la llamada no alcanza para validar reglas en el detector, porque
+[D03](MAPA-DECISIONES.md#d03--congelar-alcance-y-contribución) deja la dirección fuera de sus entradas. Probabilidad e impacto sin cambios hasta la consulta al tutor.
