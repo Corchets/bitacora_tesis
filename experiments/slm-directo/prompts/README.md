@@ -43,7 +43,7 @@ comparación concreta**, no el orden histórico.
 
 La v3 parte de la v2 y reúne varios cambios, así que un efecto no se atribuye a una frase. Usa
 `ESQUEMA_SALIDA_V2`. La opción `--prompts v3` existe solo en la rama `prompt-v3-colab`: aquí no está
-registrada en `PROMPTS` ni `ESQUEMAS` y la demo sigue con `tarea`. El borrador anterior, derivado de v1,
+registrada en `PROMPTS` ni `ESQUEMAS`. El borrador anterior, derivado de v1,
 se conserva en el commit `8a718fe`.
 
 ## Criterios de la v1
