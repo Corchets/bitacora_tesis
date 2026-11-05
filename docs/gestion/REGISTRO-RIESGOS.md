@@ -161,6 +161,8 @@ tasas, la reserva daría cerca de 60/100 estafas y 14/100 falsas alarmas, y un d
 composición declarada: la reserva no se corrió ni se leyó. **Corrección:** anotar quién inició la llamada no alcanza para validar reglas en el detector, porque
 [D03](MAPA-DECISIONES.md#d03--congelar-alcance-y-contribución) deja la dirección fuera de sus entradas. Probabilidad e impacto sin cambios hasta medir el prompt v5.
 
-R07/R05, prompt v5 del 2026-11-05: [Colab](../../experiments/slm-directo/colab/README-PROMPT-V5.md). Avisar maniobras sin pedido puede sumar falsas alarmas que
-los 150 no muestran, porque ninguna legítima tiene un «no cortes» genuino. **Mitigación parcial:** 18 controles aparte, escritos por quien escribió la regla, así que no
-la validan por sí solos. Elegir prompt, persistencia y controles sobre desarrollo no estima el rendimiento: eso sale de la reserva.
+R07/R05, prompt v5 del 2026-11-05: [resultados](../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md). La regla de maniobras no avisa las estafas sin pedido del corpus y suma falsas alarmas por consejos, así que R07 no mejora. Elegir
+prompt y política sobre desarrollo no estima el rendimiento: eso sale de la reserva.
+
+R05, corrección de la reserva pedida por Luciano el 2026-11-05 (rama `reserva-sin-cortes`, en curso): se completan sus llamadas cortadas después de ver resultados de desarrollo. Sube el máximo alcanzable
+y puede dejar los casos sin ceguera para quien los lea. **Mitigación:** otra sesión que no lee prompts ni resultados, registro `r03` con huellas y motivos, y declararlo en el informe. Los casos cortados de desarrollo siguen igual.

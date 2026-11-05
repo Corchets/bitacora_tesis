@@ -269,8 +269,9 @@ continúa alertando. Aunque se mida la corrección, no corrige.
 ## Estado de la propuesta anterior
 
 > **Estado: propuesta sin discutir.** La tanda respondió cuatro de las cinco condiciones. La próxima prueba, por indicación de Luciano del
-> 2026-11-05, es el [prompt v5](../../colab/README-PROMPT-V5.md): sin esperar una definición del tutor, modifica el detector para avisar las
-> estafas sin pedido, con controles aparte de los 150.
+> 2026-11-05, fue el [prompt v5](../../colab/README-PROMPT-V5.md): sin esperar una definición del tutor, modifica el detector para avisar las
+> estafas sin pedido, con controles aparte de los 150. [Resultado](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md): ninguna variante le gana a v4 con una diferencia defendible, y la regla
+> de maniobras no avisa esas estafas.
 
 | # | Condición | Estado |
 |---|---|---|
@@ -451,9 +452,9 @@ Todas las cifras de este documento salen de los CSV, desde esta carpeta y sin co
 
 > **Estado: propuesta sin discutir.** Depende de lo que decida el equipo.
 
-1. **Estafas sin pedido:** Luciano indicó avisar las maniobras de aislamiento e informar el corpus v2 por separado. Falta el resultado de v5 y el acuerdo del equipo (D07 y D08).
-2. **Política de alerta:** primer aviso o persistencia. Se decide con los números de v5, que permiten simular ambas (D08).
+1. **Estafas sin pedido:** con el [resultado de v5](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md), la regla de maniobras no las avisa. Luciano planteó que, hasta donde cortan, no hay evidencia suficiente para avisar, e indicó informar el corpus v2 por separado. Falta el acuerdo del equipo (D07 y D08).
+2. **Política de alerta:** primer aviso o persistencia, con [los números de v5](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) (D08).
 3. **Quién inició la llamada:** dejarlo fuera, como dice D03, o reabrir D03.
-4. **Adoptar o no v4 o v4 con cita libre:** por ahora no. ADR 0001 y la demo siguen con v1 y con indicio.
+4. **Adoptar o no v4:** es la [candidata propuesta](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso). Por ahora ADR 0001 y la demo siguen con v1 y con indicio.
 5. **Roles en la demo:** pasar el canal al SLM no cambia el resultado sobre texto (53/12 contra 53/14, con Tito sin indicio). Falta probar una llamada: ver [la revisión](#revisión-del-cambio-en-la-demo).
 6. **Integrar a `laboratorio-main`:** `prompt-v3-colab`, `prompt-v4-colab` y `tanda-roles-colab` ya están en `laboratorio-luciano`; decidir qué pasa de ahí.

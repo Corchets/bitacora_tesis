@@ -232,9 +232,11 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   entre las 100 reservadas, así que un detector que avisa solo por pedidos no puede pasar de 80/100. Son casos ya vistos sin
   revisión humana. No se elige política ni se cambia el denominador.
 
-- **Dirección de Luciano (2026-11-05):** no esperar una definición del tutor sobre las estafas sin pedido; modificar el detector para
-  empezar a avisarlas ([prompt v5](../../experiments/slm-directo/colab/README-PROMPT-V5.md), sin resultados todavía); informar el
-  corpus v2 por separado; seguir probando con pruebas unitarias y recién después congelar la configuración. No cierra D07 ni D08: falta
+- **Dirección de Luciano (2026-11-05):** no esperar una definición del tutor sobre las estafas sin pedido; informar el corpus v2 por
+  separado; seguir probando con pruebas unitarias y recién después congelar la configuración. Primero pidió modificar el detector para
+  avisar esas estafas. Al leer los controles planteó que, hasta donde cortan, no hay evidencia suficiente para avisar, y pidió completar
+  esas llamadas en la reserva (rama `reserva-sin-cortes`, en curso). El [prompt v5](../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) no las avisa ni le gana a v4 con una
+  diferencia defendible; la candidata propuesta es v4 con roles, sin indicio y primer aviso. No cierra D07 ni D08: falta
   el acuerdo del equipo, y adoptar otro prompt implica reabrir el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
   La reunión con el tutor es el 2026-11-11.
 

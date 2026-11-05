@@ -8,6 +8,8 @@
 > [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 > La rama no contiene el test reservado.
 
+**Resultados:** [análisis del 2026-11-05](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md).
+
 ## Qué se corre
 
 Cuatro condiciones en la misma sesión, todas con Tito viejo → SLM sin indicio, `gemma4:e2b-it-q4_K_M`, `num_ctx` 4096, seed 42,
