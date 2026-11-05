@@ -21,7 +21,7 @@ Las dos corridas dieron lo que se había escrito antes de correr, en el [README 
    pasado lo mismo (54/14 con Tito, 55/19 sin Tito).
 
 Lo que queda como candidata es **v4 con roles, Tito viejo sin indicio y primer aviso (55/13)**. Tito viejo 2.0 da lo mismo con una pieza
-más, así que no hay motivo para preferirlo. Adoptarla implica reabrir el ADR 0001.
+más, así que no hay motivo para preferirlo. Adoptarla va en un ADR 0002, como pide [#51](https://github.com/Corchets/bitacora_tesis/issues/51); la [propuesta para el equipo](../../../../docs/evaluacion/PROPUESTA-CONFIGURACION-DETECTOR.md) reúne todas las comparaciones.
 
 ## Resultados
 
