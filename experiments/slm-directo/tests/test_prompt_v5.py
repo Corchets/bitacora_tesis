@@ -194,6 +194,7 @@ class Colab(unittest.TestCase):
         self.assertIn("probar_prompt_v5.py", fuente)
         self.assertIn("COLAB_GUARDAR_EN_DRIVE'] = '0'", fuente)
 
+    @unittest.skipUnless((RAIZ / "casos" / "RESERVA-FUERA-DEL-REPO.md").exists(), "la reserva está en esta rama")
     def test_el_colab_corre_sin_la_reserva(self):
         self.assertFalse([c for c in casos.ids_de_casos() if "CV2-T" in c])
 
