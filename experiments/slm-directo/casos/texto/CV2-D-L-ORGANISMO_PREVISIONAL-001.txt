@@ -1,0 +1,24 @@
+A: Buen día. Hace dos semanas llevé los papeles para actualizar el cobro de mi mamá y todavía no hay novedades.
+B: Hola. ¿Tenés el comprobante de la atención o la fecha aproximada?
+A: Fue el martes 6, en la oficina del centro. Nos dieron un papel con un número de trámite.
+B: ¿Me decís ese número, sin datos de acceso? Con eso busco el estado.
+A: Es 481-730. Lo tengo acá en la carpeta.
+B: Gracias. Figura en revisión porque falta una copia del certificado de supervivencia.
+A: Pero lo entregamos junto con el formulario. Mi hermana sacó dos copias.
+B: En el registro aparece una sola hoja y no se ve el sello en la segunda página.
+A: ¿La puedo llevar cualquier día o tengo que sacar turno de nuevo?
+B: Para agregar documentación conviene reservar una consulta breve. ¿En qué localidad estás?
+A: En San Miguel. Nos queda más cómodo ir a la oficina de la avenida.
+B: Hay un espacio el miércoles a las diez y media. ¿Te sirve?
+A: Sí, pero mi mamá usa bastón. ¿Hay acceso por rampa?
+B: Sí, la entrada lateral tiene rampa y ascensor.
+A: Entonces lo tomo. ¿Qué tengo que llevar además de la copia?
+B: El comprobante del trámite y el documento de ella para presentarlo en la oficina.
+A: ¿Te dicto el número de documento ahora?
+B: No, no hace falta para reservar. Lleven el documento el día del turno.
+A: Gracias. ¿Ese turno queda a nombre de ella o mío?
+B: A nombre de Marta Soria, según el trámite que consultaste.
+A: Correcto. Yo soy la hija y la acompaño.
+B: Quedó para el miércoles a las diez y media. Te doy la referencia 2058.
+A: La anoto en el papel del trámite. Gracias por explicarme lo que faltaba.
+B: De nada, ojalá lo puedan completar sin otra vuelta.

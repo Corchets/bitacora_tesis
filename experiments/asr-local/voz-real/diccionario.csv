@@ -1,0 +1,8 @@
+# Diccionario de corrección (error -> corrección) sobre la frase FINAL; nunca sobre parciales.
+# Se arma mirando la toma 1 (medir_voz_real.py imprime las sustituciones frecuentes de la toma 1)
+# y se mide en la toma 2. Un error de una palabra de 6 letras o más también corrige un typo.
+# Revisá cada par: un reemplazo aproximado puede inventar una palabra crítica en una frase negativa.
+# Formato: error,correccion (comillas si lleva coma). Ejemplos, descomentalos al armar el tuyo:
+# cos digo,código
+# trasferencia,transferencia
+error,correccion

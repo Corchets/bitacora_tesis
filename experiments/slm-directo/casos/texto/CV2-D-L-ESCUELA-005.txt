@@ -1,0 +1,26 @@
+A: buenas vi la nota de la feria de ciencias la reunión es para todos los cursos
+B: hola es para las familias de cuarto grado que van a presentar experimentos
+A: mi hijo está en cuarto a puede ir él también o es solo para adultos
+B: puede acompañarte pero la explicación principal es para las personas responsables
+A: qué día la hacen
+B: el martes a las cinco y media en el laboratorio
+A: yo salgo del trabajo a las cinco llego con el colectivo en media hora
+B: si llegás unos minutos después no hay problema la charla dura cerca de cuarenta minutos
+A: hay que llevar algo para anotarse
+B: solo completar la lista de asistencia que está en la entrada
+A: y los materiales del proyecto los compramos antes de la reunión
+B: no todavía primero vamos a explicar qué aporta la escuela y qué conviene traer de casa
+A: mi hijo quiere hacer un filtro de agua con arena ese tema está permitido
+B: sí mientras lo pruebe con agua limpia y no lo tome la docente les va a dar pautas de cuidado
+A: la escuela tiene botellas transparentes o tenemos que llevar
+B: hay algunas pero pueden traer una reutilizada para el grupo
+A: le digo que lleve una el lunes quien va a estar en la reunión
+B: la maestra y la profesora de ciencias
+A: puedo ir yo sola o hace falta que vaya también su papá
+B: puede asistir una sola persona responsable
+A: bueno entonces voy yo la entrada es por el portón principal
+B: sí avisen en recepción que vienen a la reunión de cuarto a
+A: queda anotado martes cinco y media
+B: te esperamos mandamos una nota de recordatorio el lunes
+A: gracias por aclararme lo de los materiales
+B: de nada hasta luego

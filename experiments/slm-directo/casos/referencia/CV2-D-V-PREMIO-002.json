@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-PREMIO-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-PREMIO-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 13,
+  "t_c_linea": 16,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La llamada por un premio radial pide una transferencia de activación antes de entregar el artículo. La persona realiza el pago ficticio y el supuesto productor confirma el envío. Prueba cumplimiento de movimiento de dinero tras un premio.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 13, solicitud de transferencia. T_C línea 16, confirmación explícita de haber transferido. Montos y cuenta son inventados y no se incluye CBU/alias real. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "premio",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Un supuesto premio radial requiere pagar una activación a una cuenta presentada como de producción; la persona confirma la transferencia."
+}

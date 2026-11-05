@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-ORGANISMO_PREVISIONAL-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "L4 aporta una comprobación acotada («¿Me decís ese número, sin datos de acceso? Con eso busco el estado.»). Contexto: Una persona llama por el estado de un trámite de pensión iniciado presencialmente; se comprueba el turno y se aclara qué documento falta. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una persona llama por el estado de un trámite de pensión iniciado presencialmente; se comprueba el turno y se aclara qué documento falta.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "organismo_previsional",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-ORG-TURNO-01",
+  "situacion": "Una persona llama por el estado de un trámite de pensión iniciado presencialmente; se comprueba el turno y se aclara qué documento falta."
+}

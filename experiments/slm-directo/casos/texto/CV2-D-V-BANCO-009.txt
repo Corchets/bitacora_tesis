@@ -1,0 +1,20 @@
+A: Hola te llamo de prevención del banco Sos quien hizo el pago de la cuota del club
+B: Sí anoche pagué desde el celular
+A: El pago salió pero el perfil de seguridad quedó en modo lectura por un cambio de versión
+B: Eso afecta la cuenta
+A: No el saldo Sí puede demorar las próximas operaciones hasta actualizar el acceso
+B: Hay que ir a un cajero
+A: No se resuelve desde la app en un minuto
+B: Estoy entrando
+A: Andá a configuración seguridad y recuperación de usuario
+B: Me pide validar el correo
+A: Elegí continuar con teléfono es más rápido
+B: Ahora me aparece una pantalla con seis casilleros
+A: Es para regenerar tu acceso Completalos con los números de tu clave de cajero en el orden en que los usás
+B: Los números del PIN
+A: Sí el sistema los compara con el registro y después te deja crear uno nuevo
+B: No voy a ingresar mi PIN siguiendo una llamada
+A: No te estoy pidiendo que me lo digas solo que lo cargues en la pantalla
+B: Igual podrías estar viendo lo que hago
+A: No tengo acceso a tu celular solo te acompaño
+B: Voy a cortar y revisar con el banco

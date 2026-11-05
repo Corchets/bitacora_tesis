@@ -1,0 +1,44 @@
+{
+  "case_id": "CV2-D-V-WHATSAPP-007",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-WHATSAPP-007",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 8,
+      "evento": "contexto",
+      "etiquetas": [
+        "ISOLATION_SECRECY"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "contexto",
+      "etiquetas": [
+        "ISOLATION_SECRECY"
+      ]
+    }
+  ],
+  "que_prueba": "Una alerta sobre registro desde otro teléfono se acompaña de no mirar avisos ni consultar al grupo. No se pide el OTP: prueba separar una preparación sospechosa de una solicitud efectiva de autenticación.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Un supuesto soporte anuncia un registro ajeno y desalienta abrir avisos o consultar a terceros; no solicita el OTP antes del corte."
+}

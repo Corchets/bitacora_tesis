@@ -1,0 +1,373 @@
+{
+  "estado": "desarrollo, sin revisión humana y sin independencia del informe previo",
+  "experimento": "catalogo-diez-gemma-siempre-v1",
+  "resultados": [
+    {
+      "ventana": "linea",
+      "con_tito": false,
+      "estafas_con_alerta": 10,
+      "estafas": 10,
+      "legitimas_con_alerta": 7,
+      "legitimas": 10,
+      "deteccion_wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "falsa_alarma_wilson_95": [
+        0.39677814746114537,
+        0.8922087325936989
+      ],
+      "avisos_antes_o_en_linea_pedido": 10,
+      "avisos_en_linea_anterior_al_cumplimiento": 6,
+      "estafas_con_referencia_pedido": 10,
+      "estafas_con_referencia_cumplimiento": 6,
+      "casos_sin_alerta_con_error": [],
+      "consultas_invalidas": 0,
+      "opciones_principales": {
+        "APPARENTLY_LEGITIMATE": 266,
+        "AUTHORITY_CLAIM": 29,
+        "INSUFFICIENT_INFORMATION": 68,
+        "REQUEST_TRANSFER": 31,
+        "REQUEST_PERSONAL_DATA": 26,
+        "PRESSURE_ISOLATION": 21,
+        "REQUEST_SECRET": 19,
+        "REQUEST_AUTH_CODE": 26,
+        "WARNING_REFUSAL": 8,
+        "REQUEST_ACCESS_ACTION": 30
+      },
+      "avisos_por_caso": {
+        "CV2-D-V-BANCO-001": 26,
+        "CV2-D-V-BANCO-002": 10,
+        "CV2-D-V-BANCO-007": 6,
+        "CV2-D-V-WHATSAPP-002": 10,
+        "CV2-D-V-WHATSAPP-006": 24,
+        "CV2-D-V-SOPORTE-003": 10,
+        "CV2-D-V-SOPORTE-004": 13,
+        "CV2-D-V-FAMILIAR-002": 12,
+        "CV2-D-V-ORGANISMO_PREVISIONAL-001": 11,
+        "CV2-D-V-PREMIO-004": 10,
+        "CV2-D-L-BANCO-001": 12,
+        "CV2-D-L-BANCO-007": null,
+        "CV2-D-L-DELIVERY-001": 9,
+        "CV2-D-L-ESCUELA-001": null,
+        "CV2-D-L-FAMILIAR-001": null,
+        "CV2-D-L-MEDICO-001": 16,
+        "CV2-D-L-ORGANISMO_PREVISIONAL-001": 4,
+        "CV2-D-L-PREMIO-001": 5,
+        "CV2-D-L-SOPORTE-002": 8,
+        "CV2-D-L-WHATSAPP-001": 3
+      }
+    },
+    {
+      "ventana": "linea",
+      "con_tito": true,
+      "estafas_con_alerta": 10,
+      "estafas": 10,
+      "legitimas_con_alerta": 3,
+      "legitimas": 10,
+      "deteccion_wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "falsa_alarma_wilson_95": [
+        0.10779126740630099,
+        0.6032218525388546
+      ],
+      "avisos_antes_o_en_linea_pedido": 8,
+      "avisos_en_linea_anterior_al_cumplimiento": 6,
+      "estafas_con_referencia_pedido": 10,
+      "estafas_con_referencia_cumplimiento": 6,
+      "casos_sin_alerta_con_error": [],
+      "consultas_invalidas": 0,
+      "opciones_principales": {
+        "INSUFFICIENT_INFORMATION": 9,
+        "REQUEST_SECRET": 7,
+        "APPARENTLY_LEGITIMATE": 16,
+        "AUTHORITY_CLAIM": 3,
+        "REQUEST_ACCESS_ACTION": 6,
+        "REQUEST_PERSONAL_DATA": 2,
+        "REQUEST_AUTH_CODE": 3,
+        "PRESSURE_ISOLATION": 3,
+        "REQUEST_TRANSFER": 3
+      },
+      "avisos_por_caso": {
+        "CV2-D-V-BANCO-001": 29,
+        "CV2-D-V-BANCO-002": 15,
+        "CV2-D-V-BANCO-007": 17,
+        "CV2-D-V-WHATSAPP-002": 10,
+        "CV2-D-V-WHATSAPP-006": 26,
+        "CV2-D-V-SOPORTE-003": 11,
+        "CV2-D-V-SOPORTE-004": 13,
+        "CV2-D-V-FAMILIAR-002": 16,
+        "CV2-D-V-ORGANISMO_PREVISIONAL-001": 14,
+        "CV2-D-V-PREMIO-004": 12,
+        "CV2-D-L-BANCO-001": 14,
+        "CV2-D-L-BANCO-007": null,
+        "CV2-D-L-DELIVERY-001": 21,
+        "CV2-D-L-ESCUELA-001": null,
+        "CV2-D-L-FAMILIAR-001": null,
+        "CV2-D-L-MEDICO-001": null,
+        "CV2-D-L-ORGANISMO_PREVISIONAL-001": null,
+        "CV2-D-L-PREMIO-001": null,
+        "CV2-D-L-SOPORTE-002": null,
+        "CV2-D-L-WHATSAPP-001": 16
+      }
+    },
+    {
+      "ventana": "par",
+      "con_tito": false,
+      "estafas_con_alerta": 10,
+      "estafas": 10,
+      "legitimas_con_alerta": 7,
+      "legitimas": 10,
+      "deteccion_wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "falsa_alarma_wilson_95": [
+        0.39677814746114537,
+        0.8922087325936989
+      ],
+      "avisos_antes_o_en_linea_pedido": 10,
+      "avisos_en_linea_anterior_al_cumplimiento": 6,
+      "estafas_con_referencia_pedido": 10,
+      "estafas_con_referencia_cumplimiento": 6,
+      "casos_sin_alerta_con_error": [],
+      "consultas_invalidas": 0,
+      "opciones_principales": {
+        "AUTHORITY_CLAIM": 13,
+        "APPARENTLY_LEGITIMATE": 166,
+        "PRESSURE_ISOLATION": 5,
+        "REQUEST_TRANSFER": 13,
+        "REQUEST_AUTH_CODE": 15,
+        "REQUEST_SECRET": 9,
+        "REQUEST_ACCESS_ACTION": 12,
+        "REQUEST_PERSONAL_DATA": 14,
+        "WARNING_REFUSAL": 3,
+        "INSUFFICIENT_INFORMATION": 8
+      },
+      "avisos_por_caso": {
+        "CV2-D-V-BANCO-001": 30,
+        "CV2-D-V-BANCO-002": 10,
+        "CV2-D-V-BANCO-007": 6,
+        "CV2-D-V-WHATSAPP-002": 10,
+        "CV2-D-V-WHATSAPP-006": 24,
+        "CV2-D-V-SOPORTE-003": 10,
+        "CV2-D-V-SOPORTE-004": 14,
+        "CV2-D-V-FAMILIAR-002": 16,
+        "CV2-D-V-ORGANISMO_PREVISIONAL-001": 8,
+        "CV2-D-V-PREMIO-004": 10,
+        "CV2-D-L-BANCO-001": 8,
+        "CV2-D-L-BANCO-007": null,
+        "CV2-D-L-DELIVERY-001": 6,
+        "CV2-D-L-ESCUELA-001": null,
+        "CV2-D-L-FAMILIAR-001": null,
+        "CV2-D-L-MEDICO-001": 16,
+        "CV2-D-L-ORGANISMO_PREVISIONAL-001": 4,
+        "CV2-D-L-PREMIO-001": 4,
+        "CV2-D-L-SOPORTE-002": 6,
+        "CV2-D-L-WHATSAPP-001": 4
+      }
+    },
+    {
+      "ventana": "par",
+      "con_tito": true,
+      "estafas_con_alerta": 10,
+      "estafas": 10,
+      "legitimas_con_alerta": 3,
+      "legitimas": 10,
+      "deteccion_wilson_95": [
+        0.7224672001371107,
+        0.9999999999999999
+      ],
+      "falsa_alarma_wilson_95": [
+        0.10779126740630099,
+        0.6032218525388546
+      ],
+      "avisos_antes_o_en_linea_pedido": 6,
+      "avisos_en_linea_anterior_al_cumplimiento": 6,
+      "estafas_con_referencia_pedido": 10,
+      "estafas_con_referencia_cumplimiento": 6,
+      "casos_sin_alerta_con_error": [],
+      "consultas_invalidas": 0,
+      "opciones_principales": {
+        "REQUEST_SECRET": 2,
+        "APPARENTLY_LEGITIMATE": 15,
+        "REQUEST_ACCESS_ACTION": 2,
+        "REQUEST_AUTH_CODE": 1,
+        "PRESSURE_ISOLATION": 1,
+        "INSUFFICIENT_INFORMATION": 3,
+        "REQUEST_TRANSFER": 3,
+        "REQUEST_PERSONAL_DATA": 3,
+        "AUTHORITY_CLAIM": 2
+      },
+      "avisos_por_caso": {
+        "CV2-D-V-BANCO-001": 32,
+        "CV2-D-V-BANCO-002": 18,
+        "CV2-D-V-BANCO-007": 24,
+        "CV2-D-V-WHATSAPP-002": 10,
+        "CV2-D-V-WHATSAPP-006": 26,
+        "CV2-D-V-SOPORTE-003": 16,
+        "CV2-D-V-SOPORTE-004": 14,
+        "CV2-D-V-FAMILIAR-002": 16,
+        "CV2-D-V-ORGANISMO_PREVISIONAL-001": 14,
+        "CV2-D-V-PREMIO-004": 12,
+        "CV2-D-L-BANCO-001": 14,
+        "CV2-D-L-BANCO-007": null,
+        "CV2-D-L-DELIVERY-001": 6,
+        "CV2-D-L-ESCUELA-001": null,
+        "CV2-D-L-FAMILIAR-001": null,
+        "CV2-D-L-MEDICO-001": null,
+        "CV2-D-L-ORGANISMO_PREVISIONAL-001": null,
+        "CV2-D-L-PREMIO-001": null,
+        "CV2-D-L-SOPORTE-002": null,
+        "CV2-D-L-WHATSAPP-001": 16
+      }
+    }
+  ],
+  "costos": {
+    "linea": {
+      "consultas_directas": 524,
+      "consultas_con_tito_simuladas": 52,
+      "reranker_ms_p50": 164.5,
+      "reranker_ms_p95": 168.0,
+      "gemma_ms_p50": 297.47662999943714,
+      "gemma_ms_p95": 612.0233420006116,
+      "qwen_suma_ms": 86078.1,
+      "gemma_suma_ms": 211568.50998804657
+    },
+    "par": {
+      "consultas_directas": 258,
+      "consultas_con_tito_simuladas": 32,
+      "reranker_ms_p50": 180.3,
+      "reranker_ms_p95": 196.0,
+      "gemma_ms_p50": 284.95248349827307,
+      "gemma_ms_p95": 598.7215650020516,
+      "qwen_suma_ms": 46310.0,
+      "gemma_suma_ms": 96008.32221699602
+    }
+  },
+  "version_anterior": {
+    "sha256": "4afa613fe1ea27b0f8cc0ba0ad52da160b92ee75f982d7167225a7d7c5f054d5",
+    "resultado": [
+      {
+        "ventana": "linea",
+        "con_tito": false,
+        "politica": "mayor_puntaje",
+        "estafas_con_alerta_slm": 6,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 3,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      },
+      {
+        "ventana": "linea",
+        "con_tito": false,
+        "politica": "mayor_y_umbral",
+        "estafas_con_alerta_slm": 1,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 1,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      },
+      {
+        "ventana": "linea",
+        "con_tito": true,
+        "politica": "mayor_puntaje",
+        "estafas_con_alerta_slm": 2,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 1,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      },
+      {
+        "ventana": "linea",
+        "con_tito": true,
+        "politica": "mayor_y_umbral",
+        "estafas_con_alerta_slm": 2,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 0,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      },
+      {
+        "ventana": "par",
+        "con_tito": false,
+        "politica": "mayor_puntaje",
+        "estafas_con_alerta_slm": 5,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 1,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      },
+      {
+        "ventana": "par",
+        "con_tito": false,
+        "politica": "mayor_y_umbral",
+        "estafas_con_alerta_slm": 3,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 1,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      },
+      {
+        "ventana": "par",
+        "con_tito": true,
+        "politica": "mayor_puntaje",
+        "estafas_con_alerta_slm": 3,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 0,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      },
+      {
+        "ventana": "par",
+        "con_tito": true,
+        "politica": "mayor_y_umbral",
+        "estafas_con_alerta_slm": 0,
+        "estafas": 10,
+        "legitimas_con_alerta_slm": 0,
+        "legitimas": 10,
+        "sin_alerta_con_fallo": 0
+      }
+    ],
+    "nota": "Mismos casos y modelos, pero la regla de derivación y el catálogo cambiaron."
+  },
+  "pares_incompletos": [
+    "CV2-D-V-BANCO-002",
+    "CV2-D-V-SOPORTE-003",
+    "CV2-D-V-FAMILIAR-002",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-V-PREMIO-004",
+    "CV2-D-L-BANCO-007",
+    "CV2-D-L-MEDICO-001",
+    "CV2-D-L-WHATSAPP-001"
+  ],
+  "procedencia": {
+    "analizador_sha256": "f3650ab8623d3174fc54bc4799d8ef1fb0469c9669f0431fe02de6e8ce7f07d4",
+    "reranker_sha256": "d6613f7b6f11be1e8b8b8fd43148fb122f8d07c36c35cbc6ddf0aa6fc0190468",
+    "gemma_sha256": "8b36021d45bfb4b27284a1018f4855d2fbb21f1263d9991b572b9699bf79e467",
+    "referencias_sha256": {
+      "CV2-D-V-BANCO-001": "5a4a52d22240341b736277de5ac313945788e07791ea822aa48fedbbc33db64e",
+      "CV2-D-V-BANCO-002": "9ed20a3bdebfef35e13dd7b9604280784d0ab2393bff9c3e7499bad892443ed8",
+      "CV2-D-V-BANCO-007": "f8b1991f2ba11ae63f593c230cbb8d44684547b866ccd81aa3be784e3486cbe0",
+      "CV2-D-V-WHATSAPP-002": "8d45e02fbcab84e168f19fd449a42630fbf78a3cef08186d2f11ff0a51df0f01",
+      "CV2-D-V-WHATSAPP-006": "47394c145233912ca5596a0690e250e00c0687d9b40c3ac2898f6a26407a07e8",
+      "CV2-D-V-SOPORTE-003": "3842b7bb4c28361ab3b667623de292c6f38b062ddcd8eb6f8b9717fb9c3fa4b9",
+      "CV2-D-V-SOPORTE-004": "34cef6db63b4cd378d2ee84ff1511727585dbc55a5a3ee3a37a5e12fa705de8d",
+      "CV2-D-V-FAMILIAR-002": "56390b368eec09eb7f64d11635f181b13b3fc44c0e1ffde0dac66cd6d56547b1",
+      "CV2-D-V-ORGANISMO_PREVISIONAL-001": "18d4d4c53c82c7634bf1c7378d06094b3a5b5daf100faf6974a7f8d8c3160553",
+      "CV2-D-V-PREMIO-004": "712abd2b0beed5b4caae040e3c654d734f8055a09e76819e0a296a67b0cce1c5",
+      "CV2-D-L-BANCO-001": "b58cc11934d5fc06401c5a2f4d74420bb42950660e9048a4bdca847992cc911f",
+      "CV2-D-L-BANCO-007": "846a8015d373304eedb72dd22c690dd3c890251585d982a0e926061bd83ca834",
+      "CV2-D-L-DELIVERY-001": "7eceff7c03eca80ece3e7b8965994469f8ace418a261cafc698fa1c872c91f6c",
+      "CV2-D-L-ESCUELA-001": "a55af0c222307b708674878dca059d6797937b51eae0e6d54c7f6643a16e72c5",
+      "CV2-D-L-FAMILIAR-001": "005de7ad0fa60d9b6fb5db73cee38b5137108563771596f1dafabe23ddb66614",
+      "CV2-D-L-MEDICO-001": "5adb023050a051347a882e4f343bedffbdb0890ab49aca7333e7ff6615b7cba5",
+      "CV2-D-L-ORGANISMO_PREVISIONAL-001": "6e4f9fba950f590df0fede9b9a0858f7d78724f7ff97dedac4397e40c9cfe64c",
+      "CV2-D-L-PREMIO-001": "131842e9cb691cc8d8f6fa849e8ede67dfb8f493d224994e00cec3da23da2a24",
+      "CV2-D-L-SOPORTE-002": "ce8b82279c96ce75a03343e1c0020bf87a6b6de9fe1b324f1b2ee8140fd15b55",
+      "CV2-D-L-WHATSAPP-001": "cfb8b9232758974ee0b4d1e04c988430ea8effe68a31df348677ffe8611e1e7c"
+    }
+  }
+}

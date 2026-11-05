@@ -1,0 +1,75 @@
+{
+ "fecha": "2026-10-29",
+ "tipo": "DIAG-4K-TRUNCADO: variante think=True sin num_ctx, FALLIDA por agotamiento de contexto, preservada sin reanotacion",
+ "prompts_version": "v4-contextual-2026-10-29",
+ "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+ "modelo": {
+  "tag": "qwen3.5:9b-q4_K_M",
+  "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "ollama_version": "0.40.8",
+  "opciones": {
+   "temperature": 1,
+   "seed": 42,
+   "num_predict": 4096,
+   "top_p": 0.95,
+   "top_k": 20,
+   "min_p": 0.0,
+   "presence_penalty": 1.5,
+   "repeat_penalty": 1.0
+  },
+  "think": true,
+  "formato": "json-schema etiqueta/fundamento/lineas_soporte"
+ },
+ "url": "http://127.0.0.1:11435",
+ "runtime_observado": "/api/ps con context_length=4096 (Ollama 0.40.8); GPU compartida con procesos preexistentes no detenidos.",
+ "causa_tecnica": "pasada2 done_reason=length con prompt_eval=720 + eval=3376 = 4096 exactos y contenido vacio; pasada1 stop con eval=2588 y JSON valido. El thinking y el JSON comparten la ventana de contexto: num_predict=4096 limita la generacion pero el tope alcanzado es el contexto total de 4096. Truncamiento observado, no fallo semantico ni bug de transporte inferido.",
+ "controles": [
+  {
+   "control": "pizza_legitima",
+   "lineas": [
+    "A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.",
+    "B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.",
+    "A: Perfecto, confirmo que es el alias de la factura del local."
+   ],
+   "esperado": 0,
+   "observado": null,
+   "conforme": false,
+   "registro": {
+    "etiqueta": null,
+    "motivo": "respuesta_invalida",
+    "pasada1": {
+     "etiqueta": 0,
+     "fundamento": "Contenido entendido sin señales de riesgo: el trámite corresponde al pago normal de un pedido ('pedir dos pizzas', 'Transferí al alias del local que ya conocés'). No hay solicitudes de secreto, urgencia ni códigos. La confirmación de 'factura del local' refuerza la legitimidad visible.",
+     "lineas_soporte": [
+      1,
+      2,
+      3
+     ],
+     "error": "",
+     "done_reason": "stop",
+     "eval_count": 2588,
+     "prompt_eval_count": 708,
+     "respuesta_cruda_longitud": 356,
+     "thinking_longitud": 10064,
+     "thinking_sha256": "ea37ddb4ee2c02b1bc86e08e8e8f96c843ff0d89d8210da11c9b2f42bd7017d2"
+    },
+    "pasada2": {
+     "etiqueta": null,
+     "fundamento": "",
+     "lineas_soporte": [],
+     "error": "respuesta no es objeto JSON",
+     "done_reason": "length",
+     "eval_count": 3376,
+     "prompt_eval_count": 720,
+     "respuesta_cruda_longitud": 0,
+     "thinking_longitud": 13210,
+     "thinking_sha256": "ded47dd90a2f00ece00949fa9193daf62199edf94b4cd13529c418bcf3307377"
+    }
+   }
+  }
+ ],
+ "conformidad": 0,
+ "total": 1,
+ "nota": "Evidencia minima de la variante 4k (1 control smoke x2 pasadas). No se repiten mas llamadas con este tope. La variante autorizada siguiente usa num_ctx=8192 explicito con nueva identidad/cache/recibo.",
+ "revision_humana": false
+}

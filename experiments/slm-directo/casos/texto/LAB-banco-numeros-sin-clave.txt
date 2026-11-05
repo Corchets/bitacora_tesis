@@ -1,0 +1,7 @@
+A: che te hablo del banco hay un consumo raro en la tarjeta
+B: en serio cual
+A: tenes que hacerlo ya sino se bloquea todo
+B: decime que hago
+A: pasame los seis numeros que te llegaron al celular
+B: ahi te los dicto cinco cero tres uno ocho nueve
+A: perfecto ya esta

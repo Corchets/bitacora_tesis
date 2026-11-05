@@ -1,0 +1,109 @@
+{
+  "fecha_hora": "2026-10-17T17:42:29",
+  "comando": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/replay.py --actualizaciones /Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/asr-local/corridas/2026-10-17_estereo_SC-WA-CODE-01_zipformer_mezcla/actualizaciones.jsonl --detector slm --modelo qwen3.5:0.8b-q8_0 --hablantes ab --salida /Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/replay/corridas/2026-10-17_e2e-zipformer-0.8b-q8_0-estereo-sc_wa_code_01",
+  "entradas": {
+    "ruta": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-corridas-m1/experiments/asr-local/corridas/2026-10-17_estereo_SC-WA-CODE-01_zipformer_mezcla/actualizaciones.jsonl",
+    "sha256": "74c0439af89bd7f32756a25feac5ccdc0445ed042e118b3a3cd74981cb9de616",
+    "tamano_bytes": 6584,
+    "tipo": "actualizaciones_jsonl"
+  },
+  "config": {
+    "detector": "slm",
+    "modelo": "qwen3.5:0.8b-q8_0",
+    "prompt": "tarea",
+    "hablantes": "ab",
+    "disparo": "final",
+    "politica": "aviso_unico_primer_true_valido",
+    "seed": 42
+  },
+  "codigo": {
+    "commit": "b082b6df2ad0c93f687d3dc098a1f9603b8051e1",
+    "cambios_sin_commit": false
+  },
+  "hardware": {
+    "sistema": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.15.0"
+  },
+  "carga": {
+    "carga_ms": 3078,
+    "error": "",
+    "memoria": {
+      "size_bytes": 1067869797,
+      "size_vram_bytes": 1067869797
+    },
+    "pensar": false
+  },
+  "asr_meta": {
+    "tipo": "mezcla_canales_estereo",
+    "canales": [
+      "A",
+      "B"
+    ],
+    "origen_a": {
+      "motor": "sherpa-zipformer",
+      "modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-asr/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+      "tipo_entrega": "parciales_y_finales",
+      "es_streaming": true,
+      "sample_rate": 16000,
+      "bloque_ms": 100,
+      "hardware": {
+        "sistema": "Darwin",
+        "release": "25.6.0",
+        "arquitectura": "arm64",
+        "procesador": "arm",
+        "nucleos_cpu": 8,
+        "ram_total_gb": 8.0
+      },
+      "git": {
+        "hash": "266df63cde3eb7e8a784a5f174de6f1e2fa58104",
+        "dirty": false
+      },
+      "versiones": {
+        "python": "3.14.3",
+        "sherpa_onnx": "1.13.8",
+        "onnxruntime": "1.31.0",
+        "faster_whisper": "1.2.1",
+        "soundfile": "0.14.0",
+        "numpy": "2.5.4"
+      }
+    },
+    "origen_b": {
+      "motor": "sherpa-zipformer",
+      "modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/lab-luciano-asr/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+      "tipo_entrega": "parciales_y_finales",
+      "es_streaming": true,
+      "sample_rate": 16000,
+      "bloque_ms": 100,
+      "hardware": {
+        "sistema": "Darwin",
+        "release": "25.6.0",
+        "arquitectura": "arm64",
+        "procesador": "arm",
+        "nucleos_cpu": 8,
+        "ram_total_gb": 8.0
+      },
+      "git": {
+        "hash": "266df63cde3eb7e8a784a5f174de6f1e2fa58104",
+        "dirty": false
+      },
+      "versiones": {
+        "python": "3.14.3",
+        "sherpa_onnx": "1.13.8",
+        "onnxruntime": "1.31.0",
+        "faster_whisper": "1.2.1",
+        "soundfile": "0.14.0",
+        "numpy": "2.5.4"
+      }
+    },
+    "motor": "sherpa-zipformer"
+  },
+  "recursos_antes": {
+    "df_h": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   228Gi   184Gi    17Gi    92%    1.9M  176M    1%   /System/Volumes/Data",
+    "swapusage": "vm.swapusage: total = 6144.00M  used = 5174.00M  free = 970.00M  (encrypted)",
+    "disponible_bytes": 18049748992
+  }
+}

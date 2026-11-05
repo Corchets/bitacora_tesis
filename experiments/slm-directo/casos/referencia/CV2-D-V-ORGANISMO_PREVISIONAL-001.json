@@ -1,0 +1,47 @@
+{
+  "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-ORGANISMO_PREVISIONAL-001",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 12,
+  "t_c_linea": 19,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 12,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 19,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 24,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Una gestión de domicilio deriva en capturar identificación y fotos mediante una ficha de apoderado ajeno. Hay entrega de los datos solicitados y luego rechazo de otra autorización: ese rechazo posterior no borra el primer cumplimiento. Pedir DNI por teléfono no se usa como criterio suficiente de fraude.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la solicitud conjunta de identificación y fotos. T_C se ubica al confirmar el envío de ambas fotos, completando lo solicitado; el DNI y fecha se dictan antes. La autorización posterior se rechaza y no se anota como cumplida. D07 debe revisar el pedido compuesto y si corresponde distinguir cumplimiento parcial previo. No describe un trámite previsional real. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "organismo_previsional",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Un falso actualizador aprovecha un cambio de domicilio para obtener documento y fotos y luego intenta que se acepte un representante de cobro desconocido."
+}

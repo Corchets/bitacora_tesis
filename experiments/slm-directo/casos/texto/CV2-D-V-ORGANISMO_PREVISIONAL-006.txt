@@ -1,0 +1,22 @@
+A: Te llamo de la mesa de regularización por un cambio en el calendario de pagos previsionales.
+B: ¿Cambió la fecha de cobro?
+A: Para algunos legajos aparece una marca que puede demorar la próxima liquidación.
+B: ¿A cuál se refiere?
+A: La ficha está en revisión y no muestra todos los datos desde esta línea.
+B: ¿Cómo sé que corresponde a mi trámite?
+A: Se identifica por el apellido, pero no conviene decirlo hasta que el sistema termine de abrir.
+B: ¿Podés decirme qué oficina está llamando?
+A: La revisión se hace desde una mesa central.
+B: ¿Hay algún aviso en mi portal?
+A: Todavía no, primero se confirma por teléfono para no duplicar reclamos.
+B: Eso no me deja tranquilo.
+A: Si abrís una consulta nueva, se puede pisar la revisión que ya está en curso.
+B: ¿Entonces no debería llamar al organismo?
+A: Esperá a que te explique el procedimiento completo.
+B: No me dijiste cuál es el número de expediente.
+A: Estoy intentando recuperar la ficha.
+B: Voy a cortar y entrar al portal desde la computadora.
+A: No cierres esta llamada, la marca se puede vencer.
+B: No, voy a verificarlo por mi cuenta.
+A: Dame un minuto más.
+B: Hasta luego.

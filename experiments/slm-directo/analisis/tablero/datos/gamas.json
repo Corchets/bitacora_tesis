@@ -1,0 +1,26 @@
+[
+ {
+  "gama": "Baja",
+  "techo_mb": 256,
+  "hilos_detector": 1,
+  "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md"
+ },
+ {
+  "gama": "Media",
+  "techo_mb": 512,
+  "hilos_detector": 1,
+  "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md"
+ },
+ {
+  "gama": "Alta",
+  "techo_mb": 1024,
+  "hilos_detector": 2,
+  "fuente": "docs/investigacion/PREFACTIBILIDAD-TECNICA.md"
+ },
+ {
+  "gama": "ASR del laboratorio (aprox.)",
+  "techo_mb": 420,
+  "hilos_detector": null,
+  "fuente": "docs/investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md, corrida de audio del 2026-09-25 (ASR con detector TF-IDF)"
+ }
+]

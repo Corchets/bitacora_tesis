@@ -1,0 +1,20 @@
+A: Hola, tía, soy Lucho. ¿Te acordás del cumpleaños de la abuela?
+B: Sí, el domingo en el club.
+A: Seña del salón quedó corta y hoy vence el saldo.
+B: Yo había entendido que estaba todo pago.
+A: La prima que lo reservó hizo la transferencia inicial, pero el dueño pidió completar el resto.
+B: ¿Cuánto falta?
+A: Setenta y cinco mil. Si no entra hoy nos cambia el horario y perdemos el patio.
+B: ¿Quién tiene el contacto del salón?
+A: Lo tiene mi hermana, pero está en una reunión y no atiende.
+B: ¿Por qué no espera a que salga?
+A: El dueño dijo que tiene otra familia preguntando por la fecha.
+B: ¿Vos hablaste con él?
+A: Sí, me pasó los datos para pagar.
+B: Mandame el comprobante de la seña.
+A: No tengo el comprobante acá, pero si podés cubrir el saldo ahora te lo reenvío cuando llegue mi hermana.
+B: ¿A qué cuenta va el saldo?
+A: Te paso un alias personal del dueño, así lo ve rápido.
+B: No voy a transferir sin confirmar la reserva con el salón.
+A: Si esperamos, capaz nos quedamos sin lugar.
+B: Mejor verifico antes de mandar plata.

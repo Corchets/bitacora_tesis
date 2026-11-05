@@ -1,0 +1,25 @@
+A: hola me dejaron una bolsa del restaurante que no es para mí
+B: buenas tiene una etiqueta con el nombre del pedido
+A: dice nora y yo soy damián vivo en el 4 c
+B: la bolsa está cerrada
+A: sí no la abrí el repartidor ya se fue cuando vi el nombre
+B: me decís la dirección del edificio para ubicar el recorrido
+A: es lapacho 220 torre dos la entrada está por la calle angosta
+B: gracias el pedido de nora era para el 3 c en la torre uno
+A: claro las dos torres tienen el mismo número la persona de abajo me tocó el timbre y me la dejó
+B: podés dejar la bolsa en la heladera mientras mandamos a alguien
+A: sí pero no quiero que se enfríe la bebida está en una bolsa aparte
+B: la comida es fría así que no hay problema la bebida va en otra entrega
+A: la retiro yo en el local o pasan por acá
+B: mandamos al repartidor de vuelta hay alguien en tu departamento durante la próxima media hora
+A: yo estoy hasta las cinco después se queda mi compañero
+B: querés que lo llamemos antes de subir
+A: sí mejor él trabaja desde casa y puede abrir
+B: me confirmás su nombre para dejarlo en la nota
+A: se llama iván pero el apellido no hace falta que toque el 4 c
+B: anotado el repartidor va a retirar la bolsa y subir al 3 c
+A: le digo algo a nora si la cruzo
+B: solo que ya coordinamos el cambio no hace falta que abra el paquete
+A: dale sigue en la heladera intacta
+B: gracias por avisarnos rápido te mandamos una notificación cuando quede resuelto
+A: perfecto espero el timbre

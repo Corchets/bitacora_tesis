@@ -1,0 +1,9 @@
+{
+  "ollama_version": "0.40.8",
+  "digest": "de63045f29755d4721c09d54c9b45c2dadb644f4fd7d604d4cac90d96049971c",
+  "contrato": "ok",
+  "evidencia": "calentar() de correr.py: carga + respuesta JSON al esquema con think:false y num_ctx 4096 aceptados durante la corrida",
+  "carga_ms": 2471,
+  "think": false,
+  "num_ctx": 4096
+}

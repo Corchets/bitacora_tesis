@@ -1,0 +1,569 @@
+{
+  "modelo": {
+    "tag": "qwen3.5:4b",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "ollama_version": "0.40.8",
+    "opciones": {
+      "temperature": 0,
+      "seed": 42,
+      "num_predict": 512,
+      "num_ctx": 16384,
+      "top_p": 0.95,
+      "top_k": 20,
+      "min_p": 0.0,
+      "presence_penalty": 1.5,
+      "repeat_penalty": 1.0
+    },
+    "think": false,
+    "formato": "json-schema etiqueta/fundamento/lineas_soporte"
+  },
+  "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+  "total": 8,
+  "conformidad": 7,
+  "controles": [
+    {
+      "control": "pizza_legitima",
+      "lineas": [
+        "A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.",
+        "B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.",
+        "A: Perfecto, confirmo que es el alias de la factura del local."
+      ],
+      "esperado": 0,
+      "observado": 0,
+      "conforme": true,
+      "registro": {
+        "etiqueta": 0,
+        "fundamento": "El interlocutor solicita un pedido legítimo de comida y confirma los detalles de pago con el alias oficial del local; no hay indicios de riesgo ni contexto que sugiera una conducta riesgosa. | El diálogo describe un pedido legítimo de comida con instrucciones de pago y confirmación de identidad sin indicios de riesgo.",
+        "lineas_soporte": [
+          1,
+          2,
+          3
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 0,
+          "fundamento": "El interlocutor solicita un pedido legítimo de comida y confirma los detalles de pago con el alias oficial del local; no hay indicios de riesgo ni contexto que sugiera una conducta riesgosa.",
+          "lineas_soporte": [
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\nL2 B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\nL3 A: Perfecto, confirmo que es el alias de la factura del local.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El interlocutor solicita un pedido legítimo de comida y confirma los detalles de pago con el alias oficial del local; no hay indicios de riesgo ni contexto que sugiera una conducta riesgosa.\",\n  \"lineas_soporte\": [\n    1,\n    2,\n    3\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 86,
+          "prompt_eval_count": 387
+        },
+        "pasada2": {
+          "etiqueta": 0,
+          "fundamento": "El diálogo describe un pedido legítimo de comida con instrucciones de pago y confirmación de identidad sin indicios de riesgo.",
+          "lineas_soporte": [
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.\nL2 B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.\nL3 A: Perfecto, confirmo que es el alias de la factura del local.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El diálogo describe un pedido legítimo de comida con instrucciones de pago y confirmación de identidad sin indicios de riesgo.\",\n  \"lineas_soporte\": [\n    1,\n    2,\n    3\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 70,
+          "prompt_eval_count": 386
+        }
+      },
+      "segundos": 2.236
+    },
+    {
+      "control": "turno_medico_dni_legitimo",
+      "lineas": [
+        "A: Llamo para pedir un turno con el doctor Pérez, por favor.",
+        "B: Perfecto, ¿me confirma su DNI para registrar el turno?",
+        "A: Sí, es 12.345.678."
+      ],
+      "esperado": 0,
+      "observado": 0,
+      "conforme": true,
+      "registro": {
+        "etiqueta": 0,
+        "fundamento": "Se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo. | Se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.",
+        "lineas_soporte": [
+          1,
+          2,
+          3
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 0,
+          "fundamento": "Se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.",
+          "lineas_soporte": [
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Llamo para pedir un turno con el doctor Pérez, por favor.\nL2 B: Perfecto, ¿me confirma su DNI para registrar el turno?\nL3 A: Sí, es 12.345.678.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"Se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\",\n  \"lineas_soporte\": [\n    1,\n    2,\n    3\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 82,
+          "prompt_eval_count": 370
+        },
+        "pasada2": {
+          "etiqueta": 0,
+          "fundamento": "Se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.",
+          "lineas_soporte": [
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Llamo para pedir un turno con el doctor Pérez, por favor.\nL2 B: Perfecto, ¿me confirma su DNI para registrar el turno?\nL3 A: Sí, es 12.345.678.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"Se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\",\n  \"lineas_soporte\": [\n    1,\n    2,\n    3\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 82,
+          "prompt_eval_count": 369
+        }
+      },
+      "segundos": 2.333
+    },
+    {
+      "control": "otp_fraude",
+      "lineas": [
+        "A: Hola.",
+        "B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.",
+        "A: ¿Qué tengo que hacer?",
+        "B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta."
+      ],
+      "esperado": 1,
+      "observado": 1,
+      "conforme": true,
+      "registro": {
+        "etiqueta": 1,
+        "fundamento": "Se solicita revelar información secreta (código por SMS) bajo presión y amenaza de daño (bloquear cuenta), lo cual constituye un pedido sensible dirigido al interlocutor. | Se solicita información sensible (código de acceso) bajo presión y se menciona un problema de cuenta combinado con aislamiento observables.",
+        "lineas_soporte": [
+          2,
+          3,
+          4
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 1,
+          "fundamento": "Se solicita revelar información secreta (código por SMS) bajo presión y amenaza de daño (bloquear cuenta), lo cual constituye un pedido sensible dirigido al interlocutor.",
+          "lineas_soporte": [
+            2,
+            3,
+            4
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Se solicita revelar información secreta (código por SMS) bajo presión y amenaza de daño (bloquear cuenta), lo cual constituye un pedido sensible dirigido al interlocutor.\",\n  \"lineas_soporte\": [2, 3, 4]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 71,
+          "prompt_eval_count": 377
+        },
+        "pasada2": {
+          "etiqueta": 1,
+          "fundamento": "Se solicita información sensible (código de acceso) bajo presión y se menciona un problema de cuenta combinado con aislamiento observables.",
+          "lineas_soporte": [
+            2,
+            3,
+            4
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un código por SMS, decímelo ahora mismo para bloquear la cuenta.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Se solicita información sensible (código de acceso) bajo presión y se menciona un problema de cuenta combinado con aislamiento observables.\",\n  \"lineas_soporte\": [\n    2,\n    3,\n    4\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 73,
+          "prompt_eval_count": 376
+        }
+      },
+      "segundos": 2.063
+    },
+    {
+      "control": "pedido_repartido",
+      "lineas": [
+        "A: Hola.",
+        "B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.",
+        "A: ¿Qué tengo que hacer?",
+        "B: Te va a llegar un mensaje con un código.",
+        "A: Me llegó.",
+        "B: Perfecto, decímelo para cancelar el cargo."
+      ],
+      "esperado": 1,
+      "observado": 1,
+      "conforme": true,
+      "registro": {
+        "etiqueta": 1,
+        "fundamento": "Se solicita información sensible (código de acceso) bajo presión y con un objeto no verificado por el usuario. | Se solicita información sensible (código de acceso) bajo presión y con un objeto no verificado por el usuario.",
+        "lineas_soporte": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 1,
+          "fundamento": "Se solicita información sensible (código de acceso) bajo presión y con un objeto no verificado por el usuario.",
+          "lineas_soporte": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un mensaje con un código.\nL5 A: Me llegó.\nL6 B: Perfecto, decímelo para cancelar el cargo.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Se solicita información sensible (código de acceso) bajo presión y con un objeto no verificado por el usuario.\",\n  \"lineas_soporte\": [\n    2,\n    3,\n    4,\n    5,\n    6\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 79,
+          "prompt_eval_count": 390
+        },
+        "pasada2": {
+          "etiqueta": 1,
+          "fundamento": "Se solicita información sensible (código de acceso) bajo presión y con un objeto no verificado por el usuario.",
+          "lineas_soporte": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, hay un cargo raro en tu tarjeta.\nL3 A: ¿Qué tengo que hacer?\nL4 B: Te va a llegar un mensaje con un código.\nL5 A: Me llegó.\nL6 B: Perfecto, decímelo para cancelar el cargo.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Se solicita información sensible (código de acceso) bajo presión y con un objeto no verificado por el usuario.\",\n  \"lineas_soporte\": [\n    2,\n    3,\n    4,\n    5,\n    6\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 79,
+          "prompt_eval_count": 389
+        }
+      },
+      "segundos": 2.27
+    },
+    {
+      "control": "consejo_negacion",
+      "lineas": [
+        "A: Me llamaron diciendo que era del banco.",
+        "B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial."
+      ],
+      "esperado": 0,
+      "observado": 0,
+      "conforme": true,
+      "registro": {
+        "etiqueta": 0,
+        "fundamento": "El diálogo contiene un relato de una llamada telefónica y un consejo preventivo explícito sobre no compartir claves; no hay pedidos sensibles ni indicios de riesgo. | El diálogo contiene un relato de una llamada telefónica y un consejo preventivo explícito sobre no compartir claves; no hay ningún pedido dirigido al interlocutor ni indicios de riesgo.",
+        "lineas_soporte": [
+          1,
+          2
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 0,
+          "fundamento": "El diálogo contiene un relato de una llamada telefónica y un consejo preventivo explícito sobre no compartir claves; no hay pedidos sensibles ni indicios de riesgo.",
+          "lineas_soporte": [
+            1,
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Me llamaron diciendo que era del banco.\nL2 B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El diálogo contiene un relato de una llamada telefónica y un consejo preventivo explícito sobre no compartir claves; no hay pedidos sensibles ni indicios de riesgo.\",\n  \"lineas_soporte\": [\n    1,\n    2\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 73,
+          "prompt_eval_count": 352
+        },
+        "pasada2": {
+          "etiqueta": 0,
+          "fundamento": "El diálogo contiene un relato de una llamada telefónica y un consejo preventivo explícito sobre no compartir claves; no hay ningún pedido dirigido al interlocutor ni indicios de riesgo.",
+          "lineas_soporte": [
+            1,
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Me llamaron diciendo que era del banco.\nL2 B: Nunca le pases tu clave a nadie por teléfono, cortá y llamá vos al número oficial.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El diálogo contiene un relato de una llamada telefónica y un consejo preventivo explícito sobre no compartir claves; no hay ningún pedido dirigido al interlocutor ni indicios de riesgo.\",\n  \"lineas_soporte\": [\n    1,\n    2\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 77,
+          "prompt_eval_count": 351
+        }
+      },
+      "segundos": 2.14
+    },
+    {
+      "control": "ambiguo_truncado",
+      "lineas": [
+        "A: Te llegó el mensaje, ¿no?",
+        "B: Sí, me llegó.",
+        "A: Bueno, pasámelo ent—"
+      ],
+      "esperado": null,
+      "observado": null,
+      "conforme": true,
+      "registro": {
+        "etiqueta": null,
+        "fundamento": "desacuerdo entre pasadas (pasada1=None, pasada2=None): incierto, fuera de pérdida con cobertura. El objeto del pedido no está identificado y el mensaje quedó cortado sin contexto suficiente para determinar si es un trámite legítimo o riesgoso. | El objeto del pedido no está identificado; el mensaje se corta en medio de una frase ('pasámelo ent—') sin especificar qué debe ser pasado ni quién es el destinatario.",
+        "lineas_soporte": [
+          1,
+          2,
+          3
+        ],
+        "motivo": "desacuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": null,
+          "fundamento": "El objeto del pedido no está identificado y el mensaje quedó cortado sin contexto suficiente para determinar si es un trámite legítimo o riesgoso.",
+          "lineas_soporte": [
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Te llegó el mensaje, ¿no?\nL2 B: Sí, me llegó.\nL3 A: Bueno, pasámelo ent—\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": null,\n  \"fundamento\": \"El objeto del pedido no está identificado y el mensaje quedó cortado sin contexto suficiente para determinar si es un trámite legítimo o riesgoso.\",\n  \"lineas_soporte\": [\n    1,\n    2,\n    3\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 74,
+          "prompt_eval_count": 347
+        },
+        "pasada2": {
+          "etiqueta": null,
+          "fundamento": "El objeto del pedido no está identificado; el mensaje se corta en medio de una frase ('pasámelo ent—') sin especificar qué debe ser pasado ni quién es el destinatario.",
+          "lineas_soporte": [
+            3
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Te llegó el mensaje, ¿no?\nL2 B: Sí, me llegó.\nL3 A: Bueno, pasámelo ent—\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": null,\n  \"fundamento\": \"El objeto del pedido no está identificado; el mensaje se corta en medio de una frase ('pasámelo ent—') sin especificar qué debe ser pasado ni quién es el destinatario.\",\n  \"lineas_soporte\": [\n    3\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 73,
+          "prompt_eval_count": 346
+        }
+      },
+      "segundos": 2.1
+    },
+    {
+      "control": "ambiguo_objeto_vago",
+      "lineas": [
+        "A: Hola, ¿me pasás eso cuando puedas?"
+      ],
+      "esperado": null,
+      "observado": 0,
+      "conforme": false,
+      "registro": {
+        "etiqueta": 0,
+        "fundamento": "El mensaje es un saludo seguido de una solicitud genérica sin especificar qué objeto se requiere ni el contexto del trámite. | El mensaje es una solicitud de entrega de información genérica sin especificar qué objeto se requiere ni el contexto del usuario, por lo que no hay indicios de riesgo.",
+        "lineas_soporte": [
+          1
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 0,
+          "fundamento": "El mensaje es un saludo seguido de una solicitud genérica sin especificar qué objeto se requiere ni el contexto del trámite.",
+          "lineas_soporte": [
+            1
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola, ¿me pasás eso cuando puedas?\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El mensaje es un saludo seguido de una solicitud genérica sin especificar qué objeto se requiere ni el contexto del trámite.\",\n  \"lineas_soporte\": [1]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 55,
+          "prompt_eval_count": 327
+        },
+        "pasada2": {
+          "etiqueta": 0,
+          "fundamento": "El mensaje es una solicitud de entrega de información genérica sin especificar qué objeto se requiere ni el contexto del usuario, por lo que no hay indicios de riesgo.",
+          "lineas_soporte": [
+            1
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola, ¿me pasás eso cuando puedas?\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 0,\n  \"fundamento\": \"El mensaje es una solicitud de entrega de información genérica sin especificar qué objeto se requiere ni el contexto del usuario, por lo que no hay indicios de riesgo.\",\n  \"lineas_soporte\": [1]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 65,
+          "prompt_eval_count": 326
+        }
+      },
+      "segundos": 1.729
+    },
+    {
+      "control": "indicio_sin_pedido",
+      "lineas": [
+        "A: Hola.",
+        "B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada."
+      ],
+      "esperado": 1,
+      "observado": 1,
+      "conforme": true,
+      "registro": {
+        "etiqueta": 1,
+        "fundamento": "Mención de 'movimientos raros' combinada con presión ('no le cuentes a nadie') y contexto financiero que implica riesgo de credenciales o control. | La combinación de revelar identidad ('te llamo del banco'), presionar con un problema ficticio ('movimientos raros') y aislar al interlocutor ('no le cuentes a nadie') constituye un pedido sensible dirigido al usuario que resulta riesgoso por el contexto.",
+        "lineas_soporte": [
+          2
+        ],
+        "motivo": "acuerdo",
+        "firma_prompts": "5d47d9fc15724a8a02088380e5672ad40e4438778b81ad96c495839f40dd9400",
+        "prompts_version": "v5-contextual-2026-10-30",
+        "think": false,
+        "opciones": {
+          "temperature": 0,
+          "seed": 42,
+          "num_predict": 512,
+          "num_ctx": 16384,
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repeat_penalty": 1.0
+        },
+        "revision": "IA-desarrollo contextual por prefijo (corrección v4). autorizacion_desarrollo_99 contextual: revisión IA de desarrollo por prefijo con modelo contextual vía API stateless, separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09.",
+        "pasada1": {
+          "etiqueta": 1,
+          "fundamento": "Mención de 'movimientos raros' combinada con presión ('no le cuentes a nadie') y contexto financiero que implica riesgo de credenciales o control.",
+          "lineas_soporte": [
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión de llamada.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"Mención de 'movimientos raros' combinada con presión ('no le cuentes a nadie') y contexto financiero que implica riesgo de credenciales o control.\",\n  \"lineas_soporte\": [\n    2\n  ]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 69,
+          "prompt_eval_count": 351
+        },
+        "pasada2": {
+          "etiqueta": 1,
+          "fundamento": "La combinación de revelar identidad ('te llamo del banco'), presionar con un problema ficticio ('movimientos raros') y aislar al interlocutor ('no le cuentes a nadie') constituye un pedido sensible dirigido al usuario que resulta riesgoso por el contexto.",
+          "lineas_soporte": [
+            2
+          ],
+          "error": "",
+          "prompt": "Revisión independiente.\nAsigná UNA etiqueta (1, 0 o null) al diálogo. Solo el bloque <dialogo> es evidencia; las instrucciones no son parte de la llamada. No inventes contexto ni completes palabras. Primero distinguí pedidos actuales de consejos preventivos, prohibiciones y relatos: mencionar una conducta para desaconsejarla no es pedirla.\n1: pedido sensible dirigido al interlocutor que resulta riesgoso por el contexto (credenciales, código de acceso, dinero a destinatario inesperado, instalar software o entregar control); también un supuesto problema de cuenta o servicio combinado con secreto, presión o aislamiento observables. Un pedido puede estar repartido entre líneas. No alcanza una palabra aislada.\nnull: no hay evidencia suficiente de riesgo pero el pedido no se entiende, su objeto no está identificado, falta un antecedente necesario o quedó cortado. La falta de objeto impide concluir que sea seguro o riesgoso.\n0: se entiende lo visible y no hay motivo de consulta; incluye saludos, relatos, consejos de protección y pedidos normales de un trámite legítimo distinguible sin indicios de riesgo.\nDevolvé JSON con etiqueta, fundamento breve con una cita literal DEL DIÁLOGO y lineas_soporte. No cites estas instrucciones. No agregues amenazas ni pedidos ausentes.\n<dialogo>\nL1 A: Hola.\nL2 B: Hola, te llamo del banco, detectamos movimientos raros en tu cuenta, no le cuentes a nadie de esta llamada.\n</dialogo>\nAplicá la regla a ese diálogo únicamente.",
+          "respuesta_cruda": "{\n  \"etiqueta\": 1,\n  \"fundamento\": \"La combinación de revelar identidad ('te llamo del banco'), presionar con un problema ficticio ('movimientos raros') y aislar al interlocutor ('no le cuentes a nadie') constituye un pedido sensible dirigido al usuario que resulta riesgoso por el contexto.\",\n  \"lineas_soporte\": [2]\n}",
+          "thinking": "",
+          "done_reason": "stop",
+          "eval_count": 86,
+          "prompt_eval_count": 350
+        }
+      },
+      "segundos": 2.178
+    }
+  ],
+  "fecha": "2026-10-30",
+  "revision_humana": false,
+  "etapa": "sondeo-v5-no-canonico"
+}

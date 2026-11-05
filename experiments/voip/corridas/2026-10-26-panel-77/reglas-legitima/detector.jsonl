@@ -1,0 +1,1 @@
+{"n": 4, "saltadas": 0, "inicio_eval_s": 5.204, "fin_eval_s": 5.214, "ms_detector": 8.7, "valida": true, "error": "", "riesgo": null, "alerta_sugerida": true, "motivo": "REQUEST_AUTH_CODE (patrón: codigo)", "evidencia": "Me llegó por ese MS un código para activar WhatsApp y yo no lo pedí", "aviso": true, "t_a": 5.214, "fin_voz_s": 4.32}

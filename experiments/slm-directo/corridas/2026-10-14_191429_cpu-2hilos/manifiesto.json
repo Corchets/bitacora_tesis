@@ -1,0 +1,102 @@
+{
+  "inicio": "2026-10-14T19:14:29",
+  "comando": "python correr.py --modelos qwen3.5:0.8b,qwen3.5:2b --grupo piloto_escrito --solo-cpu --hilos 2 --etiqueta cpu-2hilos",
+  "codigo": {
+    "commit": "63e916a56b18e876916637b56cfbf9999554fa80",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Windows-11-10.0.26300-SP0",
+    "arquitectura": "AMD64",
+    "procesador": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "nucleos_logicos": 12,
+    "ram_total_gb": 31.9,
+    "python": "3.12.10"
+  },
+  "politica": "aviso_unico_primer_true_valido",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.4",
+    "digests": {
+      "qwen3.5:0.8b": "de63045f29755d4721c09d54c9b45c2dadb644f4fd7d604d4cac90d96049971c",
+      "qwen3.5:2b": "0689d44085e06d165161a8a9a1731344278cfb5aade63a3c3dbdb48ab54b130a"
+    }
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": {
+      "num_gpu": 0,
+      "num_thread": 2
+    }
+  },
+  "prompts": {
+    "tarea": {
+      "huella": "bf4284996898c45d",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en lo dicho hasta ahora, alguien pide, induce o presiona a la otra persona para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- códigos de un solo uso (SMS, token, código de verificación o de activación);\n- claves, PIN, contraseñas o usuarios;\n- datos personales (DNI, CUIL, domicilio, foto de un documento);\n- transferencias, pagos o entregas de dinero o efectivo;\n- instalar programas de acceso remoto o compartir la pantalla;\n- acciones de seguridad guiadas (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nNo alcanza con mencionar esas cosas, aconsejar no compartirlas, negarse a hacerlas o hablar de ellas sin pedirlas.\n\nRespondé solo con un objeto JSON con estos campos:\n- \"riesgo\": número entre 0 y 1 que indica qué tan riesgosa te parece la llamada con lo disponible hasta ahora.\n- \"alerta_sugerida\": true o false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona, por ejemplo \"Te están pidiendo un código que da acceso a tu cuenta\"; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente el fragmento de la transcripción que lo justifica; si es false, \"\"."
+    }
+  },
+  "configs": [
+    {
+      "config": "reglas",
+      "detector": "reglas",
+      "modelo": "",
+      "prompt": "",
+      "hablantes": ""
+    },
+    {
+      "config": "slm|qwen3.5:0.8b|tarea|ab",
+      "detector": "slm",
+      "modelo": "qwen3.5:0.8b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    },
+    {
+      "config": "slm|qwen3.5:2b|tarea|ab",
+      "detector": "slm",
+      "modelo": "qwen3.5:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "LG-BANK-VERIF-01-e01": "0ff25c270609ce38",
+    "LG-FAMILIAR-LLAMADO-01-e01": "9bfe1a2fb98c0760",
+    "LG-ORG-TURNO-01-e01": "75d820b85eec9b45",
+    "LG-PREMIO-CONSULTA-01-e01": "6890873d49f48827",
+    "LG-SUPPORT-INFO-01-e01": "7a871ce393b68837",
+    "LG-SUPPORT-INFO-01-e02": "bd004ebe89fed558",
+    "LG-WA-CONSULTA-01-e01": "e587a7e119ea41d4",
+    "SC-CLAVE-CAMBIO-01-e01": "fc2ba2e80855b40a",
+    "SC-FAMILIAR-DINERO-01-e01": "ca983cbec3940477",
+    "SC-ORG-BENEFICIO-01-e01": "c1aa9aa10c9d977c",
+    "SC-PREMIO-01-e01": "c395af5186c2e49b",
+    "SC-SOPORTE-CLAVE-01-e01": "a9fbc8f4029b1aa3",
+    "SC-SOPORTE-REMOTO-01-e01": "f9986a5f33faf52d",
+    "SC-WA-CODE-01-e01": "f13b4b33a64d33d8"
+  },
+  "modelos": {
+    "qwen3.5:0.8b": {
+      "carga_ms": 7625,
+      "error": "",
+      "memoria": {
+        "size_bytes": 574074386,
+        "size_vram_bytes": 0
+      },
+      "pensar": false
+    },
+    "qwen3.5:2b": {
+      "carga_ms": 10055,
+      "error": "",
+      "memoria": {
+        "size_bytes": 2369666414,
+        "size_vram_bytes": 0
+      },
+      "pensar": false
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-10-14T19:48:42"
+}

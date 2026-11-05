@@ -1,0 +1,45 @@
+{
+  "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-006",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-ORGANISMO_PREVISIONAL-006",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "contexto",
+      "etiquetas": [
+        "THREAT_FEAR"
+      ]
+    },
+    {
+      "linea": 18,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE",
+        "ISOLATION_SECRECY"
+      ]
+    }
+  ],
+  "que_prueba": "Una supuesta revisión del calendario desalienta abrir un reclamo independiente, pero no llega a solicitar datos ni autorización. Prueba el límite de inferencia en una conversación interrumpida antes de la maniobra crítica.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "organismo_previsional",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Una mesa que alega regularizar el calendario previsional desalienta otros reclamos y termina sin solicitar datos ni autorización."
+}

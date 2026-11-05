@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-L-BANCO-004",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-004",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "L8 aporta una comprobación acotada («Para buscar ingresos pendientes, decime los últimos cuatro de la cuenta donde esperás recibirla.»). Contexto: Una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-VERIF-01",
+  "situacion": "Una titular llama porque el depósito de un trabajo freelance no aparece; verifica identidad limitada y compara datos del envío."
+}

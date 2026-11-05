@@ -1,0 +1,43 @@
+{
+  "case_id": "LG-WA-CONSULTA-01-tts",
+  "clase": "legitima_dificil",
+  "grupo": "piloto_escrito",
+  "t_r": null,
+  "t_c": null,
+  "duracion_s": 15.572,
+  "turnos": [
+    {
+      "linea": 1,
+      "hablante": "A",
+      "texto": "Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.",
+      "inicio_s": 0.0,
+      "fin_s": 4.268,
+      "duracion_s": 4.268
+    },
+    {
+      "linea": 2,
+      "hablante": "B",
+      "texto": "No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación.",
+      "inicio_s": 5.268,
+      "fin_s": 9.154,
+      "duracion_s": 3.886
+    },
+    {
+      "linea": 3,
+      "hablante": "A",
+      "texto": "¿Necesitás verlo para ayudarme?",
+      "inicio_s": 10.154,
+      "fin_s": 12.194,
+      "duracion_s": 2.04
+    },
+    {
+      "linea": 4,
+      "hablante": "B",
+      "texto": "No. No hace falta que me digas ningún código.",
+      "inicio_s": 13.194,
+      "fin_s": 15.572,
+      "duracion_s": 2.378
+    }
+  ],
+  "origen": "derivado de la construcción del audio TTS, no anotación humana"
+}

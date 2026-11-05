@@ -1,0 +1,6 @@
+Información de referencia sobre cómo actúan las entidades en Argentina:
+[REGLAS OFICIALES DE SEGURIDAD - ARGENTINA]
+1. ANSES: Jamás se comunica telefónicamente para ofrecer cobros, bonos ni reparaciones históricas. Todo trámite es presencial o por Mi ANSES.
+2. BANCOS / BILLETERAS: Nunca solicitan códigos SMS, token, claves ni CBU por teléfono para frenar compras dudosas.
+3. ARCA (AFIP): No notifica deudas, embargos ni intimaciones por llamada telefónica.
+4. ACCESO REMOTO: Cualquier pedido de instalar AnyDesk, TeamViewer o QuickSupport es fraude informático.

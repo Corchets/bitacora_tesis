@@ -1,0 +1,152 @@
+[
+ {
+  "clave": "q08|pedido_presente_bien_descrito",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "categoria": "pedido_presente_bien_descrito",
+  "etiqueta": "Pedido real, bien descrito",
+  "avisos": 12,
+  "en_estafas": 11,
+  "en_legitimas": 1
+ },
+ {
+  "clave": "q08|pedido_presente_mal_descrito",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "categoria": "pedido_presente_mal_descrito",
+  "etiqueta": "Pedido real, mal descrito",
+  "avisos": 9,
+  "en_estafas": 7,
+  "en_legitimas": 2
+ },
+ {
+  "clave": "q08|pedido_relatado_o_negado",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "categoria": "pedido_relatado_o_negado",
+  "etiqueta": "Pedido relatado o negado",
+  "avisos": 1,
+  "en_estafas": 0,
+  "en_legitimas": 1
+ },
+ {
+  "clave": "q08|sospecha_sin_pedido",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "categoria": "sospecha_sin_pedido",
+  "etiqueta": "Sospecha sin pedido",
+  "avisos": 0,
+  "en_estafas": 0,
+  "en_legitimas": 0
+ },
+ {
+  "clave": "q08|pedido_inventado",
+  "detector": "q08",
+  "nombre": "qwen3.5 0.8B",
+  "categoria": "pedido_inventado",
+  "etiqueta": "Pedido inventado",
+  "avisos": 12,
+  "en_estafas": 8,
+  "en_legitimas": 4
+ },
+ {
+  "clave": "q2|pedido_presente_bien_descrito",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "categoria": "pedido_presente_bien_descrito",
+  "etiqueta": "Pedido real, bien descrito",
+  "avisos": 13,
+  "en_estafas": 13,
+  "en_legitimas": 0
+ },
+ {
+  "clave": "q2|pedido_presente_mal_descrito",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "categoria": "pedido_presente_mal_descrito",
+  "etiqueta": "Pedido real, mal descrito",
+  "avisos": 6,
+  "en_estafas": 5,
+  "en_legitimas": 1
+ },
+ {
+  "clave": "q2|pedido_relatado_o_negado",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "categoria": "pedido_relatado_o_negado",
+  "etiqueta": "Pedido relatado o negado",
+  "avisos": 1,
+  "en_estafas": 0,
+  "en_legitimas": 1
+ },
+ {
+  "clave": "q2|sospecha_sin_pedido",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "categoria": "sospecha_sin_pedido",
+  "etiqueta": "Sospecha sin pedido",
+  "avisos": 0,
+  "en_estafas": 0,
+  "en_legitimas": 0
+ },
+ {
+  "clave": "q2|pedido_inventado",
+  "detector": "q2",
+  "nombre": "qwen3.5 2B",
+  "categoria": "pedido_inventado",
+  "etiqueta": "Pedido inventado",
+  "avisos": 2,
+  "en_estafas": 2,
+  "en_legitimas": 0
+ },
+ {
+  "clave": "q4|pedido_presente_bien_descrito",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "categoria": "pedido_presente_bien_descrito",
+  "etiqueta": "Pedido real, bien descrito",
+  "avisos": 15,
+  "en_estafas": 11,
+  "en_legitimas": 4
+ },
+ {
+  "clave": "q4|pedido_presente_mal_descrito",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "categoria": "pedido_presente_mal_descrito",
+  "etiqueta": "Pedido real, mal descrito",
+  "avisos": 0,
+  "en_estafas": 0,
+  "en_legitimas": 0
+ },
+ {
+  "clave": "q4|pedido_relatado_o_negado",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "categoria": "pedido_relatado_o_negado",
+  "etiqueta": "Pedido relatado o negado",
+  "avisos": 7,
+  "en_estafas": 0,
+  "en_legitimas": 7
+ },
+ {
+  "clave": "q4|sospecha_sin_pedido",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "categoria": "sospecha_sin_pedido",
+  "etiqueta": "Sospecha sin pedido",
+  "avisos": 21,
+  "en_estafas": 17,
+  "en_legitimas": 4
+ },
+ {
+  "clave": "q4|pedido_inventado",
+  "detector": "q4",
+  "nombre": "qwen3.5 4B",
+  "categoria": "pedido_inventado",
+  "etiqueta": "Pedido inventado",
+  "avisos": 1,
+  "en_estafas": 1,
+  "en_legitimas": 0
+ }
+]

@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "nota": "Diálogos de voz real para elegir el corte de Parakeet (#94, PLAN-VOZ-REAL.md §12.9). «otra» habla por Meet, «protegida» por el micrófono de la notebook. Las etiquetas son las que reglas.py da sobre el texto (tests/test_dialogos.py lo verifica). Los números van con palabras.",
+  "dialogos": [
+    {
+      "id": "D1",
+      "clase": "estafa",
+      "titulo": "Falso empleado del banco: código y clave",
+      "lineas": [
+        {
+          "id": "D1-01",
+          "rol": "otra",
+          "tipo": "charla",
+          "texto": "Hola, buenas tardes, ¿hablo con el titular de la cuenta?",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-02",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Sí, soy yo. ¿Quién habla?",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-03",
+          "rol": "otra",
+          "tipo": "bancos",
+          "texto": "Le hablo del Banco Macro de Tucumán, del área de seguridad.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-04",
+          "rol": "otra",
+          "tipo": "numeros",
+          "texto": "Detectamos un débito de ochenta y cinco mil pesos que usted no reconoce.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-05",
+          "rol": "protegida",
+          "tipo": "numeros",
+          "texto": "¿Ochenta y cinco mil? No, yo no hice ninguna compra.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-06",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "Por eso lo llamo. Le va a llegar un código por mensaje, pasámelo cuando te llegue.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "D1-07",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Ajá. Esperá que me fijo.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-08",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "Sí, me llegó uno, pero dice que no se lo muestre a nadie.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-09",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "Tranquilo, es automático. Leeme los seis números despacito.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "D1-10",
+          "rol": "protegida",
+          "tipo": "numeros",
+          "texto": "Cuatro, ocho, dos, cero, siete, uno.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-11",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "Perfecto. Ahora confirmame la clave del cajero para terminar la anulación.",
+          "etiquetas": [
+            "REQUEST_SECRET"
+          ]
+        },
+        {
+          "id": "D1-12",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "¿Eso también? Me parece raro, che.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-13",
+          "rol": "otra",
+          "tipo": "numeros",
+          "texto": "Es el último paso, dale, que si no el débito se confirma a las cuatro.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-14",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Bueno, pará, mejor voy yo al banco.",
+          "etiquetas": []
+        },
+        {
+          "id": "D1-15",
+          "rol": "otra",
+          "tipo": "charla",
+          "texto": "No corte, que se pierde todo el trámite.",
+          "etiquetas": []
+        }
+      ]
+    },
+    {
+      "id": "D2",
+      "clase": "estafa",
+      "titulo": "Falso sobrino con número nuevo: plata urgente",
+      "lineas": [
+        {
+          "id": "D2-01",
+          "rol": "otra",
+          "tipo": "charla",
+          "texto": "Hola, ¿qué hacés? Soy yo, el Nico, cambié de número.",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-02",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "¿Nico? ¿Qué Nico?",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-03",
+          "rol": "otra",
+          "tipo": "jerga",
+          "texto": "Tu sobrino, chango, ¿no me reconocés la voz? Se me rompió el celu.",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-04",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Ah, ¿y qué pasó?",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-05",
+          "rol": "otra",
+          "tipo": "jerga",
+          "texto": "Estoy en un lío, ñaño. Tengo una deuda que vence hoy y no me anda la cuenta.",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-06",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "¿Y cuánto necesitás?",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-07",
+          "rol": "otra",
+          "tipo": "numeros",
+          "texto": "Treinta lucas nomás. Transferime al alias que te paso y mañana te lo devuelvo.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "D2-08",
+          "rol": "protegida",
+          "tipo": "bancos",
+          "texto": "Mirá que yo uso Ualá, no sé si me deja mandar tanto.",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-09",
+          "rol": "otra",
+          "tipo": "bancos",
+          "texto": "Sí, te deja. Si no, mandalo por Mercado Pago, al toque.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "D2-10",
+          "rol": "protegida",
+          "tipo": "jerga",
+          "texto": "No seas guaso, ¿por qué no le pedís a tu mamá?",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-11",
+          "rol": "otra",
+          "tipo": "jerga",
+          "texto": "No le avisés a nadie, porfa, que se hace drama al ñudo.",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-12",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "Dale, pero primero te llamo al número viejo.",
+          "etiquetas": []
+        },
+        {
+          "id": "D2-13",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "No, ese no anda. Hacé la transferencia ya, que cierra el banco.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "D2-14",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Bueno, ahora veo.",
+          "etiquetas": []
+        }
+      ]
+    },
+    {
+      "id": "D3",
+      "clase": "legitima",
+      "titulo": "Amigos arreglando un cumple: palabras parecidas",
+      "lineas": [
+        {
+          "id": "D3-01",
+          "rol": "otra",
+          "tipo": "jerga",
+          "texto": "¿Qué hacés, chango? ¿Venís el sábado al cumple de la Sofi?",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-02",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Sí, obvio. ¿A qué hora es?",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-03",
+          "rol": "otra",
+          "tipo": "negativa",
+          "texto": "A las nueve, en lo de la abuela. El número de la casa es el doce.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-04",
+          "rol": "protegida",
+          "tipo": "negativa",
+          "texto": "Dale. Me duele el codo todavía, así que no juego a la pelota antes.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-05",
+          "rol": "otra",
+          "tipo": "negativa",
+          "texto": "Tranqui. Mi mamá abonó la luz ayer, así que esta vez hay luz en el patio.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-06",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Jaja, re bien. ¿Llevo algo?",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-07",
+          "rol": "otra",
+          "tipo": "charla",
+          "texto": "Traé gaseosa y hielo, nada más. Yo me encargo del asado.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-08",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "¿Y cuánto ponemos cada uno para la carne?",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-09",
+          "rol": "otra",
+          "tipo": "numeros",
+          "texto": "Dos mil quinientos cada uno, me los das el sábado en mano.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-10",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "¿Cuál era la dirección exacta?",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-11",
+          "rol": "otra",
+          "tipo": "negativa",
+          "texto": "Calle Mendoza mil cuatrocientos. Estoy cómodo acá, igual te paso a buscar si querés.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-12",
+          "rol": "protegida",
+          "tipo": "negativa",
+          "texto": "No hace falta, voy en la moto de mi hermano.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-13",
+          "rol": "otra",
+          "tipo": "corta",
+          "texto": "Listo, nos vemos el sábado.",
+          "etiquetas": []
+        },
+        {
+          "id": "D3-14",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Abrazo, chau.",
+          "etiquetas": []
+        }
+      ]
+    },
+    {
+      "id": "D4",
+      "clase": "estafa",
+      "titulo": "Falso soporte técnico: acceso remoto, token y CVV",
+      "lineas": [
+        {
+          "id": "D4-01",
+          "rol": "otra",
+          "tipo": "bancos",
+          "texto": "Buen día, le hablamos del soporte de Brubank. ¿Pudo entrar hoy a la app?",
+          "etiquetas": []
+        },
+        {
+          "id": "D4-02",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "No, me da error desde la mañana.",
+          "etiquetas": []
+        },
+        {
+          "id": "D4-03",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "Es por una actualización. Instalá AnyDesk y dame acceso remoto, así lo arreglo yo.",
+          "etiquetas": [
+            "REQUEST_REMOTE_ACCESS"
+          ]
+        },
+        {
+          "id": "D4-04",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "¿Qué es eso? ¿Es seguro?",
+          "etiquetas": []
+        },
+        {
+          "id": "D4-05",
+          "rol": "otra",
+          "tipo": "charla",
+          "texto": "Sí, es la herramienta que usa el banco. Avisame cuando abra.",
+          "etiquetas": []
+        },
+        {
+          "id": "D4-06",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Ya abrió.",
+          "etiquetas": []
+        },
+        {
+          "id": "D4-07",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "Compartí pantalla y entrá a la configuración de la cuenta, yo te guío.",
+          "etiquetas": [
+            "REQUEST_REMOTE_ACCESS",
+            "REQUEST_SECURITY_ACTION"
+          ]
+        },
+        {
+          "id": "D4-08",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "Ya está, me aparece un número largo.",
+          "etiquetas": []
+        },
+        {
+          "id": "D4-09",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "Pasame ese número y el token que te llegó por mensaje.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "D4-10",
+          "rol": "protegida",
+          "tipo": "numeros",
+          "texto": "El token es ocho, cuatro, dos, uno, cero, cinco.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE"
+          ]
+        },
+        {
+          "id": "D4-11",
+          "rol": "otra",
+          "tipo": "critica",
+          "texto": "Bárbaro. Para validar la tarjeta necesito el CVV, los tres números de atrás.",
+          "etiquetas": [
+            "REQUEST_AUTH_CODE",
+            "REQUEST_SECRET"
+          ]
+        },
+        {
+          "id": "D4-12",
+          "rol": "protegida",
+          "tipo": "corta",
+          "texto": "Mmm, no, eso no te lo voy a dar.",
+          "etiquetas": []
+        },
+        {
+          "id": "D4-13",
+          "rol": "otra",
+          "tipo": "bancos",
+          "texto": "Si no lo valida, le bloqueamos la cuenta y el CBU en una hora.",
+          "etiquetas": [
+            "REQUEST_TRANSFER"
+          ]
+        },
+        {
+          "id": "D4-14",
+          "rol": "protegida",
+          "tipo": "charla",
+          "texto": "Bloqueala nomás, mañana voy a la sucursal.",
+          "etiquetas": []
+        }
+      ]
+    }
+  ]
+}

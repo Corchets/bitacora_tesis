@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-SOPORTE-006",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-SOPORTE-006",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 15,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "La conversación usa un problema de préstamo digital para inducir la contraseña bajo el eufemismo “palabra de seguridad”. La persona pregunta si se trata de su clave y el llamante confirma. Prueba el reconocimiento de una petición encubierta como dato de recuperación.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Propuesta provisional D07: la conversación menciona “palabra de seguridad” en línea 11 y la equipara con la contraseña en línea 13; la primera instrucción de ingresarla aparece en línea 15. Se ubica T_R en línea 15, donde la petición se vuelve operativa. No hay cumplimiento.",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-SOPORTE-CLAVE-01",
+  "situacion": "La conversación usa un problema de préstamo digital para inducir la contraseña bajo el eufemismo “palabra de seguridad”. La persona pregunta si se trata de su clave y el llamante confirma. Prueba el reconocimiento de una petición encubierta como dato de recuperación."
+}

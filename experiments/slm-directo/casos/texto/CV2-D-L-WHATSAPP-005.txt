@@ -1,0 +1,24 @@
+A: hola intento hacer una copia de los chats y siempre termina con el mismo error
+B: te muestra una palabra o algún número
+A: dice código 17 pero no sé si eso sirve no es un mensaje de texto aparece en la pantalla
+B: sí esa referencia nos ayuda a buscar el tipo de problema qué teléfono usás
+A: un Bruma tiene tres años y todavía anda bien
+B: la copia queda en la nube o en el almacenamiento del teléfono
+A: en la nube ayer borré un montón de fotos para hacer lugar
+B: cuánto espacio libre te quedó
+A: dos gigas la copia anterior ocupa más o menos eso
+B: puede estar fallando porque necesita espacio adicional mientras se prepara
+A: tengo que borrar la copia vieja
+B: no todavía primero fijate cuánto ocupa el chat con videos podés excluir videos de la copia nueva
+A: hay videos de las vacaciones pero ya están en la computadora de mi hermana
+B: entonces podés desactivar incluir videos y probar otra vez
+A: y el código 17 desaparece
+B: no sé si ese mensaje es por el espacio o por la conexión anotá si vuelve a salir y a qué hora
+A: lo tengo anotado en un papel también me pasa cuando estoy con datos móviles
+B: probá conectado al wifi de tu casa si se corta durante la copia puede quedar incompleta
+A: ahora está en 62 por ciento no se trabó todavía
+B: dejala terminar y después mirá la fecha de la copia desde ajustes
+A: listo dice hoy a las 18:24 y ya no veo el error
+B: perfecto querés que repasemos cómo restaurarla cuando cambies el equipo
+A: sí pero eso lo hago otro día cuando tenga el teléfono nuevo
+B: dale cuando llames vemos ese paso

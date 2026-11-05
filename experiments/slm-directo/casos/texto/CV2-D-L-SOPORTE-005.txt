@@ -1,0 +1,24 @@
+A: Buenas, la impresora dejó de conectarse y muestra el código E-14.
+B: Hola. ¿La impresora está conectada por cable o por wifi?
+A: Por wifi. La computadora sí navega y el teléfono también.
+B: ¿Cambiaste el nombre de la red o el equipo hace poco?
+A: Cambié el módem el sábado. La contraseña del wifi quedó distinta.
+B: Eso explica por qué la impresora no logra entrar a la red anterior.
+A: El manual dice que aparece un código de configuración, pero no sé cuál tengo que usar.
+B: El código que genera la impresora se muestra en la pantalla para vincularla. No es la contraseña de tu red.
+A: Ah, yo pensé que eran lo mismo. No anoté la clave nueva porque la eligió mi pareja.
+B: Pedile esa clave y cargala directamente en la impresora.
+A: ¿Dónde encuentro el menú de red?
+B: Tocá ajustes, conectividad y después “buscar redes”. Elegí el nombre de tu casa.
+A: Hay dos nombres parecidos. Uno termina en invitados.
+B: Elegí la red principal, no la de invitados, porque esa puede bloquear la comunicación con la computadora.
+A: Ya la elegí. Ahora me pide la contraseña del wifi en la pantalla chiquita.
+B: Ingresala ahí usando las flechas. Si te equivocás, podés borrar y empezar de nuevo.
+A: Tardé un poco, pero ahora dice conectada.
+B: Imprimí una página de prueba para confirmar que quedó vinculada.
+A: Salió bien. El error E-14 desapareció.
+B: Perfecto. ¿Querés revisar también el escáner?
+A: No, eso funciona. Lo que me confundía era el código y la contraseña.
+B: Son cosas distintas. La contraseña queda en tu equipo y el código solo inicia el emparejamiento.
+A: Entendido, muchas gracias.
+B: A vos. Buen día.

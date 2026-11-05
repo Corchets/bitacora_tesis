@@ -1,0 +1,25 @@
+A: Hola, compré una entrada para el sorteo de la feria de cerámica y puse mal una letra en el correo.
+B: Buen día. ¿Tenés el número de entrada?
+A: 72-18. La compré en el puesto de informes el sábado a la tarde.
+B: ¿A nombre de quién quedó registrada?
+A: Camila Neri. El correo tendría que ser cami punto neri arroba correo ejemplo.
+B: ¿Qué letra pusiste mal?
+A: Puse una i de más en el apellido. La dirección correcta termina en neri, con una sola i seguida de e.
+B: Entiendo. ¿Querés que la notificación llegue a esa dirección corregida?
+A: Sí, solo para el resultado del sorteo. No quiero cambiar otros datos.
+B: Puedo modificar el correo vinculado a esta entrada. ¿El evento es la feria del domingo en el galpón municipal?
+A: Exacto, la que tiene puestos de vajilla y plantas.
+B: Listo. Te leo cómo quedó: cami punto neri arroba correo ejemplo.
+A: Sí, ahora está bien.
+B: La entrada figura abonada, con el número 72-18.
+A: ¿Puedo transferirla a mi hermana si al final no voy?
+B: Las bases permiten cederla hasta el sábado a las seis. Tendría que avisarnos el nuevo nombre.
+A: No hace falta por ahora. Ella me acompaña y tiene su propia entrada.
+B: Bien. ¿Querés que te mande un comprobante de la corrección?
+A: Si puede ser, pero alcanza con el correo de confirmación.
+B: Te llega dentro de unos minutos a la dirección nueva.
+A: Me fijo cuando corte. No te dicto ningún número de tarjeta ni nada, ¿no?
+B: No, la compra ya está confirmada. Solo actualizamos el correo para el aviso.
+A: Perfecto, gracias. Me daba cosa que no me llegara el resultado.
+B: Ahora debería llegarte. ¿Algo más?
+A: No, muchas gracias.

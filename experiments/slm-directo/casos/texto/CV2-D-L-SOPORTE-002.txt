@@ -1,0 +1,26 @@
+A: Hola, no puedo entrar al sistema de turnos del consultorio y hoy tengo que cerrar la agenda.
+B: Buen día. ¿Te aparece un error o simplemente no reconoce el usuario?
+A: Dice que el correo no existe, pero ayer entré con el mismo.
+B: ¿Estás usando el sistema desde la computadora del consultorio?
+A: Sí, desde la recepción. No cambié nada que yo sepa.
+B: Para revisar la cuenta, ¿me confirmás el nombre del consultorio y las primeras letras del correo registrado?
+A: Consultorio del Parque. El correo empieza con recepcion y termina en arroba elparque punto ejemplo.
+B: Gracias. Encontré el usuario. ¿Ayer te pidieron cambiar la contraseña al vencer?
+A: Sí, la cambié después del almuerzo. La guardé en el administrador del navegador.
+B: Puede que el navegador esté completando la anterior. Probá borrar solo el campo y escribirla manualmente.
+A: No quiero cerrar todo porque tengo varias pestañas abiertas.
+B: No hace falta cerrar las pestañas. Abrí una ventana privada y entrá desde el acceso habitual.
+A: ¿Eso no borra la información del consultorio?
+B: No, es una ventana temporal. No descargues archivos ni guardes datos ahí.
+A: Entré. Me aparece la agenda del día, pero los turnos de mañana no.
+B: ¿Qué fecha tenés seleccionada arriba?
+A: Hoy. Ahora veo la flechita para cambiar al martes.
+B: Ahí deberían aparecer. ¿Te muestra el nombre de tu usuario en la esquina?
+A: Sí, recepción. Entonces el acceso está funcionando.
+B: Exacto. Al terminar, cerrá la ventana privada. Después podés corregir el dato guardado en el navegador normal.
+A: Voy a llamar a la coordinadora para que me ayude con eso. No quiero pisar la clave nueva.
+B: Está bien. La clave no necesito que me la digas.
+A: Gracias, ya puedo cerrar la agenda.
+B: ¿Querés que deje una nota del error para el equipo técnico?
+A: Sí, por si vuelve a pasar después del cambio de turno.
+B: Listo, quedó registrada la consulta 9340.

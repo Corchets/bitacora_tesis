@@ -1,0 +1,2625 @@
+{
+  "artefacto_historico": {
+    "clasificador": {
+      "C": 1.0,
+      "max_iter": 1000,
+      "semilla": 42,
+      "solver": "lbfgs",
+      "tipo": "regresion_logistica"
+    },
+    "encoder": {
+      "congelado": true,
+      "hidden": 768,
+      "id": "pysentimiento/robertuito-base-uncased",
+      "representacion": "promedio_enmascarado_ultima_capa",
+      "revision": "20cb399e4b93f270c0cd6b6f533bcb0ada3cb658"
+    },
+    "entrada": "frase_actual_aislada",
+    "formato": "tito-logreg-v1",
+    "nota": "cargar_artefacto solo lee y valida; puntuar no ajusta. sha idéntico antes y después del recorrido.",
+    "pesos_modificados": false,
+    "ruta": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/tito_logreg.json",
+    "sha256": "fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd",
+    "tokenizador": {
+      "limite_tokens": 128,
+      "revision_declarada": "20cb399e4b93f270c0cd6b6f533bcb0ada3cb658",
+      "tokenizer_sha256": "9465c3d57686e6b117d7c8f0e65b2b7d3a6bfb1d3c5154b52b175b3e37f2047c",
+      "truncados_en_128": 0
+    },
+    "umbral_derivacion": 0.5
+  },
+  "auditoria_semantica": {
+    "advertencia": "valores altos = exposición temática probable; valores bajos no acreditan independencia semántica.",
+    "jaccard_maximo": 0.318,
+    "jaccard_mediano": 0.15,
+    "lineas_con_jaccard_alto_ge_07": [],
+    "metodo": "jaccard_tokens_minusculas_sin_puntuacion_palabras_mayores_2",
+    "n_frases_banco": 5520,
+    "n_lineas_diagnostico": 246
+  },
+  "codigo": {
+    "git_head": "84435777e2d78e7d9d096d5e7af96681268b09d1",
+    "scripts_sha256": {
+      "casos.py": "3f31f3dbd07cdbb491b219bc1296b4e27a4204b0bdcc57d2d6deb6385a4fc864",
+      "datos_tito.py": "e7882d9a6b29b21864448ccb50a062059b57f199f93948554bba297934fa89b8",
+      "diagnosticar_tito.py": "501889972c9a2d769bfd6fe38b2e39b8cf2ed6ccecf11577a29721636dc3df2c",
+      "entrenar_tito.py": "8fba912d33d5e22c549687366cfffa630ff543bc8011a48e4a58f1198b945119",
+      "filtro_tito.py": "580712fbbcdeee095abe01695200b2e957fe54ccf45527fd7a986b02fe876171",
+      "tito_real.py": "1378bc0083eadc2fa16943d98e83d607da86922baf1bc3fe19f1286177319919"
+    }
+  },
+  "costos_actualizaciones": {
+    "fallos_tecnicos": [],
+    "ms_max": 23.1,
+    "ms_min": 11.5,
+    "ms_p50": 14.9,
+    "ms_p95": 19.0,
+    "n_actualizaciones": 246,
+    "nota": "cómputo en ms por actualización de frase aislada; sin latencia de audio ni RTF: no hubo audio en este diagnóstico.",
+    "truncamientos_mayores_128": 0,
+    "unidad": "ms"
+  },
+  "exposicion_historica": {
+    "aceptadas": 5520,
+    "apartadas": 480,
+    "banco_commit": "bb542e130e7a67a82e376a75a0438a15de32f4a6",
+    "banco_visto_por_tito_viejo_en_validacion_nueva": true,
+    "conversaciones_diagnostico_en_ajuste": false,
+    "ejemplos_sha256": "fc1fe13cfba121c356775434bd6139c6005df847ab9e5848ffe4e6e4c82c44b1",
+    "exclusiones_sha256": "2b7f88b39f10153762a192b6d50d62026655ba288253f27317fc967656a99b24",
+    "familias": 276,
+    "inventario_total": 6000,
+    "nota": "el ajuste usó solo las aceptadas del banco; ninguna conversación entera estuvo en el ajuste. La validación del banco no es independiente del Tito viejo.",
+    "por_clase": {
+      "estafa": 2620,
+      "legitima": 2900
+    }
+  },
+  "fecha": "2026-10-29",
+  "issue": 98,
+  "librerias": {
+    "huggingface_hub": "2.3.0",
+    "ollama_cli": "ollama version is 0.21.1\nWarning: client version is 0.40.8",
+    "tokenizers": "0.23.3",
+    "torch": "2.14.1+cpu",
+    "transformers": "5.20.2"
+  },
+  "limites": [
+    "La auditoría semántica completa banco↔conversaciones es ownership de #99 (worker paralelo); acá solo cota inferior léxica (Jaccard), documentada honestamente sin presumir independencia.",
+    "Sin revisión humana: marcas T_R/T_C provisionales; no cierra D07.",
+    "Sin SLM en este diagnóstico: la derivación no es alerta; no cierra D08.",
+    "Sin selección de modelos ni fine-tuning: no cierra D09.",
+    "Diagnóstico con n=10 (2 vishing del mismo grupo): describe, no generaliza.",
+    "La auditoría Jaccard es cota inferior de solapamiento, no prueba de independencia."
+  ],
+  "particion": {
+    "comparacion_20_excluida": true,
+    "configuracion": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/CONFIGURACION-TITO-2026-10-29.json",
+    "fuente": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/PARTICIONES-TITO-2026-10-29.json",
+    "ids": [
+      "CV2-D-L-BANCO-008",
+      "CV2-D-L-DELIVERY-002",
+      "CV2-D-L-ESCUELA-002",
+      "CV2-D-L-ESCUELA-003",
+      "CV2-D-L-FAMILIAR-004",
+      "CV2-D-L-MEDICO-003",
+      "CV2-D-L-TRABAJO-002",
+      "CV2-D-L-TRABAJO-005",
+      "CV2-D-V-BANCO-003",
+      "CV2-D-V-BANCO-008"
+    ],
+    "nombre": "diagnostico",
+    "reserva_rechazada": true,
+    "verificacion_fuentes": {
+      "conversaciones": [
+        {
+          "case_id": "CV2-D-L-BANCO-008",
+          "referencia_sha256": "9230f5c008ed934e02f810db1358c9325438a44c951791309e9d61b1f9dadf54",
+          "texto_sha256": "508e71b0026f25bd42559d0ab59e476b8ac54aecfb3325a27222721505d78df7"
+        },
+        {
+          "case_id": "CV2-D-L-DELIVERY-002",
+          "referencia_sha256": "9d2cf8feabb1c141eac085cbe888e97572777a2b131babd3b1af59701474d083",
+          "texto_sha256": "43df2527ce801baee168427b8fffa843ebdc37eb884ac27d7c7f82f13f14e405"
+        },
+        {
+          "case_id": "CV2-D-L-ESCUELA-002",
+          "referencia_sha256": "864b85dc5f406e224adcbe06bcad71462416c84b419374ccb8f57007cee85104",
+          "texto_sha256": "414451cc7aae4ac665001d82d7d7c2d10fb414a5036e0ac4f3721663c3141f0b"
+        },
+        {
+          "case_id": "CV2-D-L-ESCUELA-003",
+          "referencia_sha256": "78cc3f190773c32fb4e030d3214e874180fa63be6c559e04e8e8f505e2115e8f",
+          "texto_sha256": "705f70f45ff82d3acf6147bde189bc26eac6937c30db868992212a9e7dbb0885"
+        },
+        {
+          "case_id": "CV2-D-L-FAMILIAR-004",
+          "referencia_sha256": "0105373c1965388575bbf9ee5ccae26b075d16298894b00fcb8813cf9ee858a0",
+          "texto_sha256": "3d2271dc73cb4e1f5f6f4d4ecd506c2ce5fbaeb56b57a6561fc3e35391a42c35"
+        },
+        {
+          "case_id": "CV2-D-L-MEDICO-003",
+          "referencia_sha256": "abcd626a1f8fcc151b72f6a99808d40a99504928f4768404627bfbe721c21ece",
+          "texto_sha256": "0617bc3fbedfb999127187ff0ebd88b314ae72951f491a749142eff09555a5a6"
+        },
+        {
+          "case_id": "CV2-D-L-TRABAJO-002",
+          "referencia_sha256": "a998d347a4d47020e7178cb4e2965d240b0c523e8b208f352701b21a8e7a845c",
+          "texto_sha256": "4a1926d2015dc537468d3f8a15656864bfd8cf70fb3881264377addbeae44a4a"
+        },
+        {
+          "case_id": "CV2-D-L-TRABAJO-005",
+          "referencia_sha256": "a2048ae59029c4b1036c53befc1430f34ee008d828ab0dd381a9f418b3d2d430",
+          "texto_sha256": "d0012c9a2da781c596732750a7dc7752cfffef0e52990946eee880825af531cd"
+        },
+        {
+          "case_id": "CV2-D-V-BANCO-003",
+          "referencia_sha256": "9776b7e981911c3cbdfd2e44ebcd8fd4ba43f41d3b83282e453ee7cc76f0842f",
+          "texto_sha256": "efc9897cb609ce1e801b5278dfb73601a0f813d0fe3156072c778458716129f3"
+        },
+        {
+          "case_id": "CV2-D-V-BANCO-008",
+          "referencia_sha256": "9d63f1fd1bd86174feac28e9af67a45433932ff1af2de08555d00031ecf73014",
+          "texto_sha256": "e6c068d275f987b4764bcf79efb0630d6211347d45891b5328ebab94e9bd8dc0"
+        }
+      ],
+      "fuentes": {
+        "configuracion": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/CONFIGURACION-TITO-2026-10-29.json",
+        "configuracion_sha256": "b7a87c927c9aa311f6daf1dc11cf126302634e67408543528cac6eb8731c26df",
+        "particiones": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/PARTICIONES-TITO-2026-10-29.json",
+        "particiones_sha256": "210b58e7ba0aa620a6e3346715a6dbc014efacf08be9c1a13610f08c3f541f46",
+        "seleccion": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/SELECCION-TITO-2026-10-28.json",
+        "seleccion_sha256": "012080dfdd8d6bdcba4f99cf664d86d77112421b5b0bd8b0e804d6e2aafe7443"
+      }
+    }
+  },
+  "preparacion_costos": {
+    "artefacto_desde_cache": false,
+    "artefacto_ms": 0.2,
+    "calentamiento_ms": 67.7,
+    "encoder_desde_cache": false,
+    "encoder_ms": 3830.0,
+    "error": "",
+    "unidad": "ms"
+  },
+  "puerta_formal_datos_tito": {
+    "habilitada": false,
+    "motivo": "referencias sin revisión humana (revision_humana: false en las 10): diagnóstico exploratorio de desarrollo, no evaluación independiente."
+  },
+  "recarga_comparador": {
+    "comparaciones": 246,
+    "distintos": [],
+    "distintos_n": 0,
+    "fallos": [],
+    "fallos_n": 0,
+    "nota": "acuerdo dentro de tolerancia_abs 5e-05 (mitad del último dígito exhibido); no exactitud bit a bit.",
+    "reinstancias": 2,
+    "reproduce": true,
+    "tolerancia_abs": 5e-05,
+    "validas": 246
+  },
+  "recorridos": [
+    {
+      "case_id": "CV2-D-L-BANCO-008",
+      "clase": "legitima",
+      "derivacion_linea": null,
+      "legitima_derivada": false,
+      "n_evidencia": 2,
+      "n_lineas": 21,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_derivacion",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0,
+          "texto": "Hola. Quería saber si puedo depositar billetes de otra serie en el cajero.",
+          "tito_error": "",
+          "tito_ms": 20.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0,
+          "texto": "Buenas. ¿El cajero los rechazó o todavía no probaste?",
+          "tito_error": "",
+          "tito_ms": 19.2
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0,
+          "texto": "Rechazó dos. En casa me dijeron que capaz tenían una clave marcada, pero no sé qué significa eso.",
+          "tito_error": "",
+          "tito_ms": 20.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0025,
+          "texto": "La máquina suele rechazarlos si están rotos, pegados o demasiado gastados. ¿El cajero mostró alguna explicación en pantalla?",
+          "tito_error": "",
+          "tito_ms": 23.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0017,
+          "texto": "Están enteros, aunque uno tiene una mancha de tinta en una punta.",
+          "tito_error": "",
+          "tito_ms": 18.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0022,
+          "texto": "Puede ser eso. ¿El depósito era para una cuenta propia?",
+          "tito_error": "",
+          "tito_ms": 19.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0,
+          "texto": "Sí, la mía. Llevé varios porque me pagaron en efectivo.",
+          "tito_error": "",
+          "tito_ms": 18.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0007,
+          "texto": "Si tenés sucursal cerca, podés consultar si reciben esos billetes por caja. No hace falta llevarlos todos juntos.",
+          "tito_error": "",
+          "tito_ms": 21.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.1962,
+          "texto": "Me queda lejos. ¿Hay algún cajero que acepte más billetes por vez?",
+          "tito_error": "",
+          "tito_ms": 18.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0018,
+          "texto": "En la aplicación podés ver qué equipos tienen depósito, pero no muestra el estado de cada lector.",
+          "tito_error": "",
+          "tito_ms": 20.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0,
+          "texto": "¿Y si pruebo en otro cajero del mismo banco?",
+          "tito_error": "",
+          "tito_ms": 19.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0,
+          "texto": "Podés, aunque si tienen la misma condición de lectura quizás vuelva a rechazarlos.",
+          "tito_error": "",
+          "tito_ms": 20.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0007,
+          "texto": "Bueno. No quería que se me quedaran dentro de la máquina.",
+          "tito_error": "",
+          "tito_ms": 18.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0015,
+          "texto": "Cuando el cajero rechaza uno, lo devuelve en la bandeja. ¿Te devolvió los dos?",
+          "tito_error": "",
+          "tito_ms": 20.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.0005,
+          "texto": "Sí, los agarré antes de que cerrara la compuerta.",
+          "tito_error": "",
+          "tito_ms": 18.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0,
+          "texto": "Perfecto. ¿Tenés el comprobante del intento?",
+          "tito_error": "",
+          "tito_ms": 18.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0,
+          "texto": "No, porque no llegó a iniciar el depósito.",
+          "tito_error": "",
+          "tito_ms": 18.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.093,
+          "texto": "Entonces no hay un movimiento que reclamar. Probá con los billetes en mejor estado o consultá en caja.",
+          "tito_error": "",
+          "tito_ms": 22.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0,
+          "texto": "Voy a ver si puedo pasar el jueves. No es urgente.",
+          "tito_error": "",
+          "tito_ms": 13.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0173,
+          "texto": "Dale. Si cambia algo, llamanos con el horario aproximado.",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0003,
+          "texto": "Gracias por la orientación.",
+          "tito_error": "",
+          "tito_ms": 13.3
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-L-DELIVERY-002",
+      "clase": "legitima",
+      "derivacion_linea": null,
+      "legitima_derivada": false,
+      "n_evidencia": 1,
+      "n_lineas": 25,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_derivacion",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0,
+          "texto": "Buenas, quería consultar si el cajón de verduras sale hoy o mañana.",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0,
+          "texto": "Hola. ¿El pedido está a nombre de quién?",
+          "tito_error": "",
+          "tito_ms": 17.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0,
+          "texto": "De Pilar Sosa. Lo hice anoche desde la página del mercado.",
+          "tito_error": "",
+          "tito_ms": 17.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0,
+          "texto": "Veo que está preparado para el turno de la tarde.",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0,
+          "texto": "¿Más o menos a qué hora? Tengo que salir a buscar a los chicos.",
+          "tito_error": "",
+          "tito_ms": 14.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0,
+          "texto": "El recorrido va de cuatro a siete, no tenemos una hora exacta.",
+          "tito_error": "",
+          "tito_ms": 13.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0,
+          "texto": "¿Se puede dejar con el kiosquero de la esquina si no estoy?",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0132,
+          "texto": "Podemos anotarlo, pero necesitamos que vos confirmes que lo acepta.",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0,
+          "texto": "Ya le pregunté. Me dijo que sí, mientras el cajón esté cerrado.",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0012,
+          "texto": "¿Querés que se lo entreguen a nombre del kiosco o que te llamen primero?",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0002,
+          "texto": "Mejor que me llamen. Si estoy a diez minutos vuelvo y lo recibo.",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0,
+          "texto": "Para contactar al repartidor, ¿el número termina en 51?",
+          "tito_error": "",
+          "tito_ms": 13.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0,
+          "texto": "Sí, es el mío.",
+          "tito_error": "",
+          "tito_ms": 13.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.001,
+          "texto": "También veo que pediste tomates maduros. Si no hay, ¿preferís que los cambien por perita o que los saquen?",
+          "tito_error": "",
+          "tito_ms": 17.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.0071,
+          "texto": "Perita está bien, pero que no reemplacen la rúcula. Esa sí la necesito para la cena.",
+          "tito_error": "",
+          "tito_ms": 16.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.1396,
+          "texto": "Dejo anotado: reemplazo solo de tomate, no de rúcula.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0,
+          "texto": "¿La bolsa de papas viene separada? Voy a llevar el pedido en colectivo.",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0016,
+          "texto": "Sí, viene en una bolsa aparte para que sea más fácil.",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0,
+          "texto": "Perfecto. ¿Puedo pagar la diferencia del reemplazo cuando llegue?",
+          "tito_error": "",
+          "tito_ms": 14.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0,
+          "texto": "Si cambia el precio, te avisamos antes de cerrar el pedido. No hace falta que adelantes nada.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0,
+          "texto": "Ya pagué con la tarjeta, pero no vi si quedó confirmado.",
+          "tito_error": "",
+          "tito_ms": 13.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0091,
+          "texto": "Figura aprobado. El detalle aparece en tu cuenta del mercado.",
+          "tito_error": "",
+          "tito_ms": 13.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0,
+          "texto": "Listo, entonces espero el llamado.",
+          "tito_error": "",
+          "tito_ms": 12.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0,
+          "texto": "Gracias por confirmar lo del kiosco.",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 25,
+          "puntaje": 0.0,
+          "texto": "Gracias a vos. Hasta luego.",
+          "tito_error": "",
+          "tito_ms": 13.5
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-L-ESCUELA-002",
+      "clase": "legitima",
+      "derivacion_linea": 3,
+      "legitima_derivada": true,
+      "n_evidencia": 1,
+      "n_lineas": 26,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_marca_T_R",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0,
+          "texto": "hola mi hija dejó el violín en casa y tiene ensayo después del almuerzo",
+          "tito_error": "",
+          "tito_ms": 14.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0056,
+          "texto": "buen día en qué grado está",
+          "tito_error": "",
+          "tito_ms": 12.9
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.5919,
+          "texto": "segundo año se llama milena paz ensaya con el grupo de la tarde",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0,
+          "texto": "puedo avisar en portería alguien puede acercarlo antes de la una",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0,
+          "texto": "sí voy yo en un rato lo dejo en recepción o se lo llevo al aula",
+          "tito_error": "",
+          "tito_ms": 15.7
+        },
+        {
+          "deriva": true,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.9854,
+          "texto": "dejalo en recepción con una etiqueta con su nombre y curso",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0012,
+          "texto": "el estuche es negro bastante grande lo van a guardar en algún armario",
+          "tito_error": "",
+          "tito_ms": 16.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0,
+          "texto": "sí lo dejamos detrás del mostrador para que no quede en el pasillo",
+          "tito_error": "",
+          "tito_ms": 16.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0,
+          "texto": "tengo que mostrar mi documento cuando lo entregue",
+          "tito_error": "",
+          "tito_ms": 19.2
+        },
+        {
+          "deriva": true,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.9794,
+          "texto": "no hace falta para dejar un objeto solo decí tu nombre y a quién va dirigido",
+          "tito_error": "",
+          "tito_ms": 19.0
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0,
+          "texto": "soy carla paz la mamá",
+          "tito_error": "",
+          "tito_ms": 18.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0014,
+          "texto": "le mandamos un mensaje interno el ensayo empieza a las dos",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0,
+          "texto": "llego antes de la una así que hay tiempo",
+          "tito_error": "",
+          "tito_ms": 16.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0005,
+          "texto": "milena tiene el instrumento asignado por la escuela o es de ella",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.0,
+          "texto": "es de ella lo compramos el año pasado en una tienda del centro",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0,
+          "texto": "entonces lo registramos como objeto personal y se lo entregamos al grupo",
+          "tito_error": "",
+          "tito_ms": 14.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0,
+          "texto": "puede retirarlo ella en el recreo",
+          "tito_error": "",
+          "tito_ms": 15.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0,
+          "texto": "sí después de que recepción confirme que llegó",
+          "tito_error": "",
+          "tito_ms": 13.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0,
+          "texto": "si no le avisan que pregunte en portería",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0106,
+          "texto": "lo anoto en la cartelera de avisos para el turno tarde",
+          "tito_error": "",
+          "tito_ms": 14.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.001,
+          "texto": "hay que firmar algo al dejarlo",
+          "tito_error": "",
+          "tito_ms": 13.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0,
+          "texto": "no pero te damos un papelito con la hora por si lo necesitás",
+          "tito_error": "",
+          "tito_ms": 16.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0,
+          "texto": "está bien ya salgo para allá",
+          "tito_error": "",
+          "tito_ms": 13.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0,
+          "texto": "la entrada de familias es por la puerta de calle belgrano",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 25,
+          "puntaje": 0.0,
+          "texto": "sí conozco gracias por ayudarme",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": true,
+          "hablante": "B",
+          "linea": 26,
+          "puntaje": 0.9567,
+          "texto": "te esperamos",
+          "tito_error": "",
+          "tito_ms": 11.5
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-L-ESCUELA-003",
+      "clase": "legitima",
+      "derivacion_linea": null,
+      "legitima_derivada": false,
+      "n_evidencia": 1,
+      "n_lineas": 24,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_derivacion",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0,
+          "texto": "Buenas, quería preguntar cómo justifico que Tomás falte el viernes y el lunes.",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0,
+          "texto": "Hola. ¿Es por una consulta médica o por un viaje?",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0,
+          "texto": "Vamos a visitar a mi mamá, que vive lejos. Salimos el jueves a la noche.",
+          "tito_error": "",
+          "tito_ms": 14.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0,
+          "texto": "En ese caso alcanza con una nota firmada por una persona responsable.",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0,
+          "texto": "¿La mando por el cuaderno o por correo?",
+          "tito_error": "",
+          "tito_ms": 16.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0005,
+          "texto": "Puede ser por el cuaderno. Si querés dejar constancia antes, mandala al correo de preceptoría.",
+          "tito_error": "",
+          "tito_ms": 17.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0,
+          "texto": "¿Pongo los motivos del viaje o solo las fechas?",
+          "tito_error": "",
+          "tito_ms": 15.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0032,
+          "texto": "Con las fechas y tu firma alcanza. No hace falta explicar detalles familiares.",
+          "tito_error": "",
+          "tito_ms": 16.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0011,
+          "texto": "Bien. ¿A quién va dirigida?",
+          "tito_error": "",
+          "tito_ms": 13.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0028,
+          "texto": "A la preceptora de segundo B, que es el curso de Tomás.",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0,
+          "texto": "¿Tiene que recuperar una evaluación el viernes?",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0,
+          "texto": "Sí, tiene una evaluación de ciencias. La docente coordinará la recuperación cuando vuelva.",
+          "tito_error": "",
+          "tito_ms": 15.2
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0,
+          "texto": "¿Le aviso directamente a la docente también?",
+          "tito_error": "",
+          "tito_ms": 15.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0,
+          "texto": "Podés escribirle por el cuaderno para que prepare otra fecha.",
+          "tito_error": "",
+          "tito_ms": 15.2
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.0012,
+          "texto": "No quiero que pierda el tema. ¿Hay una guía para llevar?",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0,
+          "texto": "Hay una actividad en el aula virtual, pero se puede entregar la semana siguiente.",
+          "tito_error": "",
+          "tito_ms": 16.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0,
+          "texto": "¿Necesita una autorización especial para entrar el martes?",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0,
+          "texto": "No, vuelve a su horario habitual. Solo presentá la nota.",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0008,
+          "texto": "Perfecto. ¿Me confirmás que figura en el curso correcto?",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0046,
+          "texto": "Sí, Tomás Varela, segundo B.",
+          "tito_error": "",
+          "tito_ms": 16.2
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0073,
+          "texto": "Es él. Gracias por orientarme.",
+          "tito_error": "",
+          "tito_ms": 15.6
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0,
+          "texto": "De nada. Que tengan buen viaje.",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0,
+          "texto": "Le aviso que lleve el cuaderno así no se atrasa.",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0,
+          "texto": "Muy bien, hasta luego.",
+          "tito_error": "",
+          "tito_ms": 14.4
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-L-FAMILIAR-004",
+      "clase": "legitima",
+      "derivacion_linea": 17,
+      "legitima_derivada": true,
+      "n_evidencia": 1,
+      "n_lineas": 24,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_marca_T_R",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0042,
+          "texto": "Pa, te aviso que hoy no llego a cocinarte. Se alargó la reunión en el instituto.",
+          "tito_error": "",
+          "tito_ms": 17.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0,
+          "texto": "No te preocupes, comí al mediodía. ¿Qué necesitabas dejar listo?",
+          "tito_error": "",
+          "tito_ms": 15.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0001,
+          "texto": "La tarta para mañana y unas porciones para el freezer.",
+          "tito_error": "",
+          "tito_ms": 15.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0,
+          "texto": "Puedo poner la tarta en el horno cuando vuelva de caminar.",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0001,
+          "texto": "Está en la heladera, en la fuente redonda. No la metas con el plástico.",
+          "tito_error": "",
+          "tito_ms": 15.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0,
+          "texto": "Me acuerdo. ¿Le pongo el horno bajo o medio?",
+          "tito_error": "",
+          "tito_ms": 12.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0062,
+          "texto": "Bajo, unos veinte minutos. Mirala a los quince por las dudas.",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0,
+          "texto": "¿Y las porciones del freezer?",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0,
+          "texto": "Esas las hago mañana a la tarde. Dejé las verduras lavadas en un recipiente.",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0,
+          "texto": "¿Tengo que comprar algo cuando pase por el almacén?",
+          "tito_error": "",
+          "tito_ms": 13.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0001,
+          "texto": "Sí, pan y un paquete de arroz. No hace falta que compres la leche, ya llevé ayer.",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0,
+          "texto": "La que queda está casi vacía. ¿Querés que compre una igual?",
+          "tito_error": "",
+          "tito_ms": 13.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0,
+          "texto": "Si encontrás sin lactosa, sí. Si no, dejalo para el sábado.",
+          "tito_error": "",
+          "tito_ms": 14.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0,
+          "texto": "En el negocio de la esquina suelen tener. ¿Te mando una foto antes?",
+          "tito_error": "",
+          "tito_ms": 13.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.0004,
+          "texto": "No hace falta, ya sabés cuál es la caja azul.",
+          "tito_error": "",
+          "tito_ms": 13.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0,
+          "texto": "También puedo pasar por la verdulería. Se terminaron las manzanas.",
+          "tito_error": "",
+          "tito_ms": 13.8
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.5712,
+          "texto": "Comprá cuatro nada más, que las otras siguen en la canasta.",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0,
+          "texto": "¿Te llevo algo a vos cuando vuelva?",
+          "tito_error": "",
+          "tito_ms": 13.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0,
+          "texto": "No, salgo tarde y ceno en casa de una compañera.",
+          "tito_error": "",
+          "tito_ms": 13.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0,
+          "texto": "Bueno. ¿Mañana venís a almorzar?",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0,
+          "texto": "Sí, después de llevar a los chicos a la escuela.",
+          "tito_error": "",
+          "tito_ms": 13.6
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0169,
+          "texto": "Entonces guardo una porción para vos.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0011,
+          "texto": "Dale, te llamo cuando salga. Gracias por resolver lo de la cena.",
+          "tito_error": "",
+          "tito_ms": 17.6
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0005,
+          "texto": "De nada, cuidate en la vuelta.",
+          "tito_error": "",
+          "tito_ms": 15.4
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-L-MEDICO-003",
+      "clase": "legitima",
+      "derivacion_linea": null,
+      "legitima_derivada": false,
+      "n_evidencia": 1,
+      "n_lineas": 25,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_derivacion",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.002,
+          "texto": "Buenas, vi una llamada perdida del consultorio. ¿Era por el turno de mi hijo?",
+          "tito_error": "",
+          "tito_ms": 17.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0,
+          "texto": "Sí, te llamamos porque la pediatra no va a atender el miércoles.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0271,
+          "texto": "Ah, justo ese día le toca el control de crecimiento.",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0,
+          "texto": "Podemos ofrecerte jueves a las tres o viernes a las diez.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0,
+          "texto": "El jueves tiene escuela hasta las cuatro. ¿Hay algo después?",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0,
+          "texto": "El viernes a las diez es el único horario de esta semana.",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0,
+          "texto": "¿Puedo llevarlo yo aunque el turno esté a nombre de su papá?",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0003,
+          "texto": "Sí, si sos la madre registrada. ¿El apellido es Lorea?",
+          "tito_error": "",
+          "tito_ms": 14.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0,
+          "texto": "Sí, Lorea. Yo soy Paula.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0,
+          "texto": "Perfecto. ¿Querés que te reserve el viernes?",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0,
+          "texto": "Sí, pero tiene natación a las once y media. La consulta alcanza en una hora, ¿no?",
+          "tito_error": "",
+          "tito_ms": 15.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0,
+          "texto": "Normalmente dura veinte o treinta minutos, aunque puede haber espera.",
+          "tito_error": "",
+          "tito_ms": 13.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0,
+          "texto": "Entonces llegamos bien. ¿Tengo que llevar la libreta de vacunas?",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0,
+          "texto": "Sí, si la tenés. La pediatra va a revisar el calendario.",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.0,
+          "texto": "Está en la mochila, la llevo siempre.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0046,
+          "texto": "¿Querés conservar el turno original si aparece otro profesional el miércoles?",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0004,
+          "texto": "Prefiero la misma pediatra. Esperamos al viernes.",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0,
+          "texto": "Listo, lo cambio para el viernes 13 a las diez.",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0,
+          "texto": "Gracias por avisarme con tiempo. ¿Le mandan mensaje también al papá?",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0,
+          "texto": "El recordatorio sale al teléfono principal que figura en la ficha.",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0003,
+          "texto": "Ese es el mío. Después le cuento a él.",
+          "tito_error": "",
+          "tito_ms": 15.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0,
+          "texto": "De acuerdo. Si aparece una cancelación antes, te podemos llamar.",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0006,
+          "texto": "Sí, avisame solo si es después de las cuatro el jueves.",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0,
+          "texto": "Lo anoto como preferencia, no como turno confirmado.",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 25,
+          "puntaje": 0.0,
+          "texto": "Perfecto, gracias.",
+          "tito_error": "",
+          "tito_ms": 12.0
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-L-TRABAJO-002",
+      "clase": "legitima",
+      "derivacion_linea": 5,
+      "legitima_derivada": true,
+      "n_evidencia": 1,
+      "n_lineas": 25,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_marca_T_R",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0001,
+          "texto": "el cliente de los estantes llamó la medida del módulo no coincide con el hueco",
+          "tito_error": "",
+          "tito_ms": 15.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0001,
+          "texto": "cuál de los dos módulos el del pasillo o el que va al mostrador",
+          "tito_error": "",
+          "tito_ms": 16.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0001,
+          "texto": "el del mostrador pidió 62 centímetros y nosotros cortamos 68",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0004,
+          "texto": "la orden de trabajo también dice 68",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.6636,
+          "texto": "sí pero en el mensaje que mandó antes aparece 62 capaz copié mal el dato",
+          "tito_error": "",
+          "tito_ms": 16.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0,
+          "texto": "le confirmamos por teléfono o le pedimos que nos lo vuelva a escribir",
+          "tito_error": "",
+          "tito_ms": 15.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0001,
+          "texto": "ya lo tengo en el chat del taller le puedo mandar una foto del dibujo",
+          "tito_error": "",
+          "tito_ms": 16.7
+        },
+        {
+          "deriva": true,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.9713,
+          "texto": "mandale primero una nota diciendo que encontramos la diferencia y que hoy no se lo vamos a llevar así",
+          "tito_error": "",
+          "tito_ms": 16.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0,
+          "texto": "me preocupa que tenga la inauguración el sábado",
+          "tito_error": "",
+          "tito_ms": 16.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0026,
+          "texto": "preguntale si le sirve retirar el viernes a última hora podemos rehacer el frente hoy",
+          "tito_error": "",
+          "tito_ms": 16.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0022,
+          "texto": "dice que sí mientras mantengamos la profundidad como estaba",
+          "tito_error": "",
+          "tito_ms": 14.6
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.1168,
+          "texto": "cuánto material queda de la misma madera",
+          "tito_error": "",
+          "tito_ms": 15.2
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.5151,
+          "texto": "hay una tabla pero alcanza justo si no se rompe al cortar",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0005,
+          "texto": "entonces guardemos el sobrante para una prueba y no usemos la pieza anterior como plantilla",
+          "tito_error": "",
+          "tito_ms": 15.6
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.9989,
+          "texto": "el dibujo muestra 62 de ancho por 34 de alto te cierra",
+          "tito_error": "",
+          "tito_ms": 14.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0001,
+          "texto": "sí anotá que el cliente confirmó esas dos medidas a las ocho y veinte",
+          "tito_error": "",
+          "tito_ms": 15.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0639,
+          "texto": "ya lo puse en la orden nueva también separé el módulo que quedó grande",
+          "tito_error": "",
+          "tito_ms": 15.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0731,
+          "texto": "ese lo podemos adaptar para el depósito no lo tires",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0033,
+          "texto": "le cobramos el cambio de material",
+          "tito_error": "",
+          "tito_ms": 13.9
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.001,
+          "texto": "no el error fue nuestro lo anotamos como retrabajo",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0142,
+          "texto": "bueno vos podés quedarte hasta que termine el corte",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0001,
+          "texto": "sí pero llamá a tu casa para avisar que llegás más tarde",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0002,
+          "texto": "ya avisé el cliente mandó un pulgar arriba queda confirmada la entrega el viernes",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0,
+          "texto": "perfecto después le mandamos una foto cuando esté armado",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 25,
+          "puntaje": 0.0025,
+          "texto": "listo me pongo con la madera",
+          "tito_error": "",
+          "tito_ms": 12.8
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-L-TRABAJO-005",
+      "clase": "legitima",
+      "derivacion_linea": 1,
+      "legitima_derivada": true,
+      "n_evidencia": 1,
+      "n_lineas": 27,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "sin_marca_T_R",
+      "pedido": null,
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.6088,
+          "texto": "¿Tenés la notebook gris? La necesita el equipo de sonido para la prueba.",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0,
+          "texto": "Sí, la tengo en el armario. ¿La pasan a buscar hoy?",
+          "tito_error": "",
+          "tito_ms": 14.5
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0,
+          "texto": "A las cuatro. Me preguntaron si tiene instalado el programa de edición.",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0,
+          "texto": "Tiene la versión vieja, la que usamos para el evento de mayo.",
+          "tito_error": "",
+          "tito_ms": 14.0
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0,
+          "texto": "¿Conviene actualizarla antes de prestarla?",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0193,
+          "texto": "Mejor consultemos a sistemas. Si cambian la versión, capaz deja de abrir el proyecto anterior.",
+          "tito_error": "",
+          "tito_ms": 15.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0009,
+          "texto": "En la carpeta compartida está la exportación final, pero no el archivo editable.",
+          "tito_error": "",
+          "tito_ms": 15.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0,
+          "texto": "El editable está en el disco externo negro. Lo guardé después de la última reunión.",
+          "tito_error": "",
+          "tito_ms": 15.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0,
+          "texto": "¿Ese disco se queda con nosotros o va con la notebook?",
+          "tito_error": "",
+          "tito_ms": 15.6
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0245,
+          "texto": "Se queda acá. Hay material de otros eventos que no corresponde entregar.",
+          "tito_error": "",
+          "tito_ms": 17.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0022,
+          "texto": "¿Podemos copiar solo el proyecto de sonido a un pendrive vacío?",
+          "tito_error": "",
+          "tito_ms": 17.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0502,
+          "texto": "Sí, pero primero confirmá que no tenga nombres de asistentes ni listas de contacto.",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0009,
+          "texto": "Lo revisé ayer. Solo hay pistas y nombres de canales.",
+          "tito_error": "",
+          "tito_ms": 14.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0099,
+          "texto": "Entonces copiá esa carpeta y probá abrirla en la otra computadora.",
+          "tito_error": "",
+          "tito_ms": 15.3
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.8641,
+          "texto": "Ya estoy en eso. Carga, pero me muestra que falta una fuente de audio.",
+          "tito_error": "",
+          "tito_ms": 15.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0,
+          "texto": "¿Es la pista ambiente de la sala?",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0,
+          "texto": "Sí. Está en el escritorio de la notebook, no en la carpeta del proyecto.",
+          "tito_error": "",
+          "tito_ms": 17.0
+        },
+        {
+          "deriva": true,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.9979,
+          "texto": "Copiala también y anotá el nombre en el inventario de préstamo.",
+          "tito_error": "",
+          "tito_ms": 16.6
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0,
+          "texto": "Hecho. ¿Qué ponemos como fecha de devolución?",
+          "tito_error": "",
+          "tito_ms": 16.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0002,
+          "texto": "El lunes a la mañana. El miércoles la usa administración para la capacitación.",
+          "tito_error": "",
+          "tito_ms": 13.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0,
+          "texto": "Aviso al grupo que la notebook sale a las cuatro y vuelve el lunes.",
+          "tito_error": "",
+          "tito_ms": 15.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0927,
+          "texto": "Agregá que entregamos cargador y funda, pero no el disco externo.",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0,
+          "texto": "Listo, ya respondieron que pasan a horario.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0,
+          "texto": "Cuando se la lleven, anotá quién la retiró.",
+          "tito_error": "",
+          "tito_ms": 15.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 25,
+          "puntaje": 0.0005,
+          "texto": "Sí, queda asentado en el cuaderno de equipos.",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 26,
+          "puntaje": 0.0,
+          "texto": "Gracias. ¿Te fijás también que vuelva con la funda?",
+          "tito_error": "",
+          "tito_ms": 13.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 27,
+          "puntaje": 0.0001,
+          "texto": "Obvio, la marco en la lista.",
+          "tito_error": "",
+          "tito_ms": 13.0
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": null
+    },
+    {
+      "case_id": "CV2-D-V-BANCO-003",
+      "clase": "vishing",
+      "derivacion_linea": 5,
+      "legitima_derivada": false,
+      "n_evidencia": 3,
+      "n_lineas": 26,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "antes_del_pedido",
+      "pedido": "REQUEST_TRANSFER",
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0107,
+          "texto": "Buenas tardes soy Esteban de la mesa de efectivo del banco",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.0,
+          "texto": "Hola qué pasó",
+          "tito_error": "",
+          "tito_ms": 13.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.4807,
+          "texto": "Estamos ordenando los billetes de la serie anterior y vimos que tenés una extracción reciente",
+          "tito_error": "",
+          "tito_ms": 15.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.0011,
+          "texto": "Saqué para pagar una reparación no sabía que hubiera un problema",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.9806,
+          "texto": "No es una denuncia Es un recambio preventivo para que no te queden unidades fuera de circulación",
+          "tito_error": "",
+          "tito_ms": 15.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.001,
+          "texto": "Y eso se hace en caja",
+          "tito_error": "",
+          "tito_ms": 12.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0,
+          "texto": "En general sí pero hoy tenemos un equipo móvil pasando por la zona",
+          "tito_error": "",
+          "tito_ms": 15.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0,
+          "texto": "No pedí que viniera nadie",
+          "tito_error": "",
+          "tito_ms": 13.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0073,
+          "texto": "La visita es opcional si preferís podés resolverlo por teléfono",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0,
+          "texto": "Qué tendría que hacer",
+          "tito_error": "",
+          "tito_ms": 12.9
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 1.0,
+          "texto": "Separá los billetes y anotá los números de serie que empiezan con 74",
+          "tito_error": "",
+          "tito_ms": 15.5
+        },
+        {
+          "deriva": true,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.581,
+          "texto": "Y después",
+          "tito_error": "",
+          "tito_ms": 11.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.2512,
+          "texto": "El mensajero lleva un sobre del banco y te entrega el comprovante del recambio",
+          "tito_error": "",
+          "tito_ms": 15.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0156,
+          "texto": "Me estás diciendo que le dé efectivo a alguien que no conozco",
+          "tito_error": "",
+          "tito_ms": 13.8
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.6679,
+          "texto": "Te muestra una credencial cuando llega Por eso llamo antes para reservar el paso",
+          "tito_error": "",
+          "tito_ms": 15.1
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.0,
+          "texto": "Yo podría ir mañana a la sucursal",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0001,
+          "texto": "Mañana ya no puedo garantizar que acepten esa serie en caja",
+          "tito_error": "",
+          "tito_ms": 14.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0,
+          "texto": "Cuánto efectivo tendría que preparar",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.9191,
+          "texto": "Todo lo que tengas de esa numeración prepará el sobre y entregáselo al operador",
+          "tito_error": "",
+          "tito_ms": 17.3
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0117,
+          "texto": "No se deja constancia en una caja",
+          "tito_error": "",
+          "tito_ms": 16.2
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0003,
+          "texto": "El mensajero te firma el recibo cuando recibe el dinero",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0,
+          "texto": "El recibo lleva mi nombre",
+          "tito_error": "",
+          "tito_ms": 14.0
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.9602,
+          "texto": "Sí y detalla el monto que se lleva a reemplazo",
+          "tito_error": "",
+          "tito_ms": 14.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 24,
+          "puntaje": 0.0001,
+          "texto": "Y el dinero vuelve hoy",
+          "tito_error": "",
+          "tito_ms": 14.2
+        },
+        {
+          "deriva": true,
+          "hablante": "A",
+          "linea": 25,
+          "puntaje": 0.9078,
+          "texto": "Te dejan el comprobante y se acredita el cambio en la cuenta durante el día",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 26,
+          "puntaje": 0.031,
+          "texto": "El operador ya está abajo le entregué el sobre y me dejó un recibo",
+          "tito_error": "",
+          "tito_ms": 13.9
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": 26,
+      "t_r_linea": 19
+    },
+    {
+      "case_id": "CV2-D-V-BANCO-008",
+      "clase": "vishing",
+      "derivacion_linea": 16,
+      "legitima_derivada": false,
+      "n_evidencia": 2,
+      "n_lineas": 23,
+      "omision_oportuna": false,
+      "oportunidad_vs_T_R": "en_el_pedido",
+      "pedido": "REQUEST_TRANSFER",
+      "provisional": true,
+      "puntajes": [
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 1,
+          "puntaje": 0.0,
+          "texto": "Hola, buen día.",
+          "tito_error": "",
+          "tito_ms": 12.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 2,
+          "puntaje": 0.1853,
+          "texto": "Buenas noches, llamo del banco por una inconsistencia en la caja de seguridad.",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 3,
+          "puntaje": 0.0001,
+          "texto": "No tengo caja de seguridad con ustedes.",
+          "tito_error": "",
+          "tito_ms": 14.8
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 4,
+          "puntaje": 0.1305,
+          "texto": "Disculpá, entonces es la cuenta sueldo. Veo que hiciste una extracción grande el lunes.",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 5,
+          "puntaje": 0.0,
+          "texto": "Saqué para pagar el arreglo del techo.",
+          "tito_error": "",
+          "tito_ms": 14.9
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 6,
+          "puntaje": 0.0687,
+          "texto": "La sucursal detectó que una parte corresponde a billetes de una serie que van a retirar.",
+          "tito_error": "",
+          "tito_ms": 15.8
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 7,
+          "puntaje": 0.0,
+          "texto": "¿Ahora también retiran billetes?",
+          "tito_error": "",
+          "tito_ms": 12.5
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 8,
+          "puntaje": 0.0133,
+          "texto": "Se reemplazan de forma gradual. No hay que alarmarse.",
+          "tito_error": "",
+          "tito_ms": 14.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 9,
+          "puntaje": 0.0,
+          "texto": "¿Tengo que ir a cambiarlos?",
+          "tito_error": "",
+          "tito_ms": 13.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 10,
+          "puntaje": 0.0001,
+          "texto": "Podemos coordinar que un operador pase a verificar el lote y te deje el recibo.",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 11,
+          "puntaje": 0.0,
+          "texto": "¿En mi casa?",
+          "tito_error": "",
+          "tito_ms": 12.4
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 12,
+          "puntaje": 0.0058,
+          "texto": "Sí, es un procedimiento de resguardo. El operador trae una credencial numerada.",
+          "tito_error": "",
+          "tito_ms": 15.4
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 13,
+          "puntaje": 0.0001,
+          "texto": "¿Y cómo sé que es del banco?",
+          "tito_error": "",
+          "tito_ms": 15.0
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 14,
+          "puntaje": 0.0001,
+          "texto": "Te puedo dar el código de visita cuando quede asignado.",
+          "tito_error": "",
+          "tito_ms": 14.0
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 15,
+          "puntaje": 0.0,
+          "texto": "Bueno, ¿qué tendría que tener listo?",
+          "tito_error": "",
+          "tito_ms": 15.8
+        },
+        {
+          "deriva": true,
+          "hablante": "B",
+          "linea": 16,
+          "puntaje": 0.7464,
+          "texto": "Poné en un sobre todo el efectivo que retiraste, así lo cuenta el operador sin mezclarlo.",
+          "tito_error": "",
+          "tito_ms": 15.9
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 17,
+          "puntaje": 0.0003,
+          "texto": "¿Todo lo que saqué?",
+          "tito_error": "",
+          "tito_ms": 12.7
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 18,
+          "puntaje": 0.0,
+          "texto": "La cantidad completa, unos doscientos mil según el registro.",
+          "tito_error": "",
+          "tito_ms": 14.1
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 19,
+          "puntaje": 0.0006,
+          "texto": "Eso es bastante plata para dejar en un sobre.",
+          "tito_error": "",
+          "tito_ms": 13.9
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 20,
+          "puntaje": 0.0002,
+          "texto": "Si no hacemos el control hoy, después la sucursal no puede certificar la serie.",
+          "tito_error": "",
+          "tito_ms": 18.0
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 21,
+          "puntaje": 0.0,
+          "texto": "No voy a preparar efectivo para alguien que todavía no conozco.",
+          "tito_error": "",
+          "tito_ms": 17.2
+        },
+        {
+          "deriva": false,
+          "hablante": "B",
+          "linea": 22,
+          "puntaje": 0.0051,
+          "texto": "Te explico que el operador se identifica al llegar.",
+          "tito_error": "",
+          "tito_ms": 17.7
+        },
+        {
+          "deriva": false,
+          "hablante": "A",
+          "linea": 23,
+          "puntaje": 0.0004,
+          "texto": "Prefiero terminar la llamada y consultar en la sucursal.",
+          "tito_error": "",
+          "tito_ms": 15.1
+        }
+      ],
+      "revision_humana": false,
+      "t_c_linea": null,
+      "t_r_linea": 16
+    }
+  ],
+  "reproducir": {
+    "corrida": "../../.venv/bin/python diagnosticar_tito.py --salida DIAGNOSTICO-TITO-2026-10-29.json",
+    "nota": "regenerar_md reescribe el .md desde el JSON sin inferencia.",
+    "regenerar_md": "../../.venv/bin/python diagnosticar_tito.py --regenerar-md DIAGNOSTICO-TITO-2026-10-29.json"
+  },
+  "resumen": {
+    "denominadores": {
+      "legitimas_total": 8,
+      "vishing_con_T_C": 1,
+      "vishing_con_T_R": 2,
+      "vishing_total": 2
+    },
+    "legitimas_derivadas": [
+      "CV2-D-L-ESCUELA-002",
+      "CV2-D-L-FAMILIAR-004",
+      "CV2-D-L-TRABAJO-002",
+      "CV2-D-L-TRABAJO-005"
+    ],
+    "n_conversaciones": 10,
+    "n_legitimas": 8,
+    "n_vishing": 2,
+    "omisiones_oportunas_vs_T_R": [],
+    "tasa_derivacion_legitimas": 0.5,
+    "vishing_con_derivacion": 2,
+    "vishing_sin_derivacion": []
+  },
+  "runtime": {
+    "cpu_modelo": "AMD Ryzen 7 7700X 8-Core Processor",
+    "ejecutable_python": "/home/chato/orca/workspaces/bitacora_tesis/searobin/experiments/slm-directo/../../.venv/bin/python",
+    "maquina_cpu": "x86_64",
+    "nucleos": 16,
+    "procesador": "no informado",
+    "python": "3.14.8",
+    "ram_total_gb": 30.5,
+    "release": "7.2.5-3-omarchy",
+    "sistema": "Linux"
+  },
+  "semilla": 42
+}

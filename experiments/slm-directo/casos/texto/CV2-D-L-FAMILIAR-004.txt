@@ -1,0 +1,24 @@
+A: Pa, te aviso que hoy no llego a cocinarte. Se alargó la reunión en el instituto.
+B: No te preocupes, comí al mediodía. ¿Qué necesitabas dejar listo?
+A: La tarta para mañana y unas porciones para el freezer.
+B: Puedo poner la tarta en el horno cuando vuelva de caminar.
+A: Está en la heladera, en la fuente redonda. No la metas con el plástico.
+B: Me acuerdo. ¿Le pongo el horno bajo o medio?
+A: Bajo, unos veinte minutos. Mirala a los quince por las dudas.
+B: ¿Y las porciones del freezer?
+A: Esas las hago mañana a la tarde. Dejé las verduras lavadas en un recipiente.
+B: ¿Tengo que comprar algo cuando pase por el almacén?
+A: Sí, pan y un paquete de arroz. No hace falta que compres la leche, ya llevé ayer.
+B: La que queda está casi vacía. ¿Querés que compre una igual?
+A: Si encontrás sin lactosa, sí. Si no, dejalo para el sábado.
+B: En el negocio de la esquina suelen tener. ¿Te mando una foto antes?
+A: No hace falta, ya sabés cuál es la caja azul.
+B: También puedo pasar por la verdulería. Se terminaron las manzanas.
+A: Comprá cuatro nada más, que las otras siguen en la canasta.
+B: ¿Te llevo algo a vos cuando vuelva?
+A: No, salgo tarde y ceno en casa de una compañera.
+B: Bueno. ¿Mañana venís a almorzar?
+A: Sí, después de llevar a los chicos a la escuela.
+B: Entonces guardo una porción para vos.
+A: Dale, te llamo cuando salga. Gracias por resolver lo de la cena.
+B: De nada, cuidate en la vuelta.

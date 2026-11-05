@@ -1,0 +1,141 @@
+{
+ "issue": 100,
+ "fecha": "2026-10-30",
+ "congelado_en": "2026-10-30T14:11:10+00:00",
+ "estado": "congelado_antes_de_comprobar",
+ "orden_temporal": "selección y congelamiento SOLO con validación, ANTES de abrir la evaluación independiente; la comprobación registra su marca temporal posterior.",
+ "artefacto": "experiments/slm-directo/tito_99_historial_C1.0.json",
+ "artefacto_sha256": "1eaa06ea847c5e4ed59ec5d72169a5dcf4911a4d72f96b88c18f669b802264af",
+ "formato": "tito-99-logreg-v1",
+ "variante": "#99-congelada",
+ "entrada": "historial_acumulado",
+ "umbral": 0.5,
+ "umbral_viejo": 0.5,
+ "entrada_vieja": "frase_actual_aislada",
+ "encoder": {
+  "id": "pysentimiento/robertuito-base-uncased",
+  "revision": "20cb399e4b93f270c0cd6b6f533bcb0ada3cb658",
+  "congelado": true,
+  "representacion": "promedio_ponderado_bloques_128_ultima_capa",
+  "hidden": 768
+ },
+ "tokenizer_sha256": "9465c3d57686e6b117d7c8f0e65b2b7d3a6bfb1d3c5154b52b175b3e37f2047c",
+ "seleccion_validacion": {
+  "elegida": "historial_acumulado/C=1.0/u=0.5",
+  "criterio": "Pareto sobre HISTORIAL en omisiones oportunas, legitimas derivadas y costo p95 real sobre validacion conversacional; desempate por menor suma, menor costo p95, C cercano a 1 y umbral cercano a 0.5. Principal con historial, sin sustitucion por frase. Frontera global con consultas_media solo informativa.",
+  "frontera": [
+   "historial_acumulado/C=0.1/u=0.3",
+   "historial_acumulado/C=0.1/u=0.5",
+   "historial_acumulado/C=0.1/u=0.7",
+   "historial_acumulado/C=1.0/u=0.3",
+   "historial_acumulado/C=1.0/u=0.5",
+   "historial_acumulado/C=1.0/u=0.7",
+   "historial_acumulado/C=10.0/u=0.5",
+   "historial_acumulado/C=10.0/u=0.7"
+  ]
+ },
+ "decision_fine_tuning": {
+  "corresponde": true,
+  "realizado": false,
+  "motivo": "Excepción explícita del usuario: congelar el candidato #99 para pruebas sin esperar fine-tuning del encoder.",
+  "baseline_viejo": {
+   "omisiones_oportunas": 0,
+   "legitimas_derivadas": 3,
+   "denominador_vishing": 4,
+   "denominador_legitimas": 6,
+   "prefijos_con_fallo": 0
+  },
+  "errores_observables": [
+   "viejo: omisiones_oportunas=0 legitimas_derivadas=3",
+   "frase_actual_control/C=0.1/u=0.3: omisiones_oportunas=1 legitimas_derivadas=3",
+   "frase_actual_control/C=0.1/u=0.5: omisiones_oportunas=1 legitimas_derivadas=2",
+   "frase_actual_control/C=0.1/u=0.7: omisiones_oportunas=1 legitimas_derivadas=1",
+   "frase_actual_control/C=1.0/u=0.3: omisiones_oportunas=1 legitimas_derivadas=3",
+   "frase_actual_control/C=1.0/u=0.5: omisiones_oportunas=1 legitimas_derivadas=3",
+   "frase_actual_control/C=1.0/u=0.7: omisiones_oportunas=1 legitimas_derivadas=1",
+   "frase_actual_control/C=10.0/u=0.3: omisiones_oportunas=1 legitimas_derivadas=2",
+   "frase_actual_control/C=10.0/u=0.5: omisiones_oportunas=1 legitimas_derivadas=2",
+   "frase_actual_control/C=10.0/u=0.7: omisiones_oportunas=1 legitimas_derivadas=2",
+   "historial_acumulado/C=0.1/u=0.3: omisiones_oportunas=1 legitimas_derivadas=2",
+   "historial_acumulado/C=0.1/u=0.5: omisiones_oportunas=1 legitimas_derivadas=2",
+   "historial_acumulado/C=0.1/u=0.7: omisiones_oportunas=2 legitimas_derivadas=1",
+   "historial_acumulado/C=1.0/u=0.3: omisiones_oportunas=1 legitimas_derivadas=2",
+   "historial_acumulado/C=1.0/u=0.5: omisiones_oportunas=1 legitimas_derivadas=2",
+   "historial_acumulado/C=1.0/u=0.7: omisiones_oportunas=1 legitimas_derivadas=2",
+   "historial_acumulado/C=10.0/u=0.3: omisiones_oportunas=1 legitimas_derivadas=3",
+   "historial_acumulado/C=10.0/u=0.5: omisiones_oportunas=1 legitimas_derivadas=2",
+   "historial_acumulado/C=10.0/u=0.7: omisiones_oportunas=1 legitimas_derivadas=2"
+  ],
+  "excepcion_usuario": true
+ },
+ "particiones": {
+  "particiones_sha256": "210b58e7ba0aa620a6e3346715a6dbc014efacf08be9c1a13610f08c3f541f46",
+  "ids_validacion": [
+   "CV2-D-L-DELIVERY-004",
+   "CV2-D-L-DELIVERY-005",
+   "CV2-D-L-ESCUELA-005",
+   "LAB-arca-deuda",
+   "LAB-arca-deuda-parafrasis",
+   "LAB-banco-app-parafrasis",
+   "LAB-familiar-peligro",
+   "LAB-familiar-peligro-parafrasis",
+   "TR-03-negacion-y-consejo",
+   "TR-11-familiar-real-pide-plata"
+  ],
+  "ids_comparacion_20": [
+   "CV2-D-V-BANCO-001",
+   "CV2-D-V-BANCO-002",
+   "CV2-D-V-BANCO-007",
+   "CV2-D-V-WHATSAPP-002",
+   "CV2-D-V-WHATSAPP-006",
+   "CV2-D-V-SOPORTE-003",
+   "CV2-D-V-SOPORTE-004",
+   "CV2-D-V-FAMILIAR-002",
+   "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+   "CV2-D-V-PREMIO-004",
+   "CV2-D-L-BANCO-001",
+   "CV2-D-L-BANCO-007",
+   "CV2-D-L-DELIVERY-001",
+   "CV2-D-L-ESCUELA-001",
+   "CV2-D-L-FAMILIAR-001",
+   "CV2-D-L-MEDICO-001",
+   "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+   "CV2-D-L-PREMIO-001",
+   "CV2-D-L-SOPORTE-002",
+   "CV2-D-L-WHATSAPP-001"
+  ]
+ },
+ "fuentes": {
+  "informe99": {
+   "ruta": "REPORTE-TITO-99-2026-10-29.json",
+   "sha256": "1767309fbcd601ec94cc10b537cf750b94f5292675df8c9bda6b20a249b5a03d"
+  },
+  "supervision": {
+   "ruta": "SUPERVISION-CONTEXTUAL-TITO-99-2026-10-29.jsonl",
+   "sha256": "0c67cd1f8efad93d666e7c980c479dd2b02ead7a6e00104ae72b2adee62f678d"
+  },
+  "auditoria": {
+   "ruta": "AUDITORIA-SEMANTICA-CONTEXTUAL-TITO-99-2026-10-29.json",
+   "sha256": "ada4a9b7e55a9dc7344fc453049cd1553e8931ffccf2140ddfbafa64a829f7ce"
+  },
+  "particiones": {
+   "ruta": "PARTICIONES-TITO-2026-10-29.json",
+   "sha256": "210b58e7ba0aa620a6e3346715a6dbc014efacf08be9c1a13610f08c3f541f46"
+  },
+  "config": {
+   "ruta": "CONFIGURACION-TITO-2026-10-29.json",
+   "sha256": "b7a87c927c9aa311f6daf1dc11cf126302634e67408543528cac6eb8731c26df"
+  }
+ },
+ "codigo": {
+  "commit": "9fe43b531c950ea2c8565b989acacd6d16c0c17a",
+  "script_sha256": "ce6f267f47d96688560c87a6078b5c2c0bbb57671498e45afe87d04c042a2067"
+ },
+ "runtime": {
+  "python": "3.14.8",
+  "plataforma": "Linux-7.2.5-3-omarchy-x86_64-with-glibc2.44",
+  "semilla": 42
+ },
+ "semilla": 42,
+ "autorizacion": "autorizacion_desarrollo_100: comprobacion de desarrollo sobre referencias sin revision humana (revision_humana=false), separada de la puerta formal humana de datos_tito.py. NO es revision_humana; no habilita uso ni cierra D07/D08/D09."
+}

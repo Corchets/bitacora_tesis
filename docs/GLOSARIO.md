@@ -12,6 +12,8 @@ sentidos distintos, se define acá.
 | **`T_A`, `T_R`, `T_C`** | Marcas de alerta del sistema, pedido riesgoso y cumplimiento observable. Definiciones, fuentes y casos sin dato en [METRICAS.md](evaluacion/METRICAS.md#1-marcas-temporales). |
 | **`L_R`, `L_C`, `Preventive@δ`** | Márgenes y proporción de alertas con anticipación suficiente respecto de una referencia. Fórmulas y denominadores en [METRICAS.md](evaluacion/METRICAS.md). |
 | **Detección incremental** | Decidir con información disponible hasta cada actualización, usando contexto previo de la llamada, sin consultar lo que se dirá después. |
+| **Filtro de consulta al SLM** | Componente que decide, con el contenido disponible de la llamada, si corresponde solicitar una evaluación del SLM. Omitir una consulta no constituye una clasificación de la llamada como legítima. |
+| **Contexto de consulta** | Conjunto de fragmentos de la conversación en curso seleccionados para que el SLM evalúe una consulta. Puede abarcar toda la conversación disponible hasta ese momento o una selección de ella, siempre sin contenido futuro. |
 | **Early classification** | Campo que estudia clasificar secuencias lo antes posible sin destruir el rendimiento predictivo. |
 | **Baseline** | Método de referencia contra el que se compara. La línea base acordada son reglas solas; su implementación se debe explicitar. Que un candidato no la supere también es un resultado válido. |
 | **Multi-label** | Cada turno puede tener varias etiquetas simultáneas, o ninguna. |
@@ -25,6 +27,7 @@ sentidos distintos, se define acá.
 | **Real-time factor (RTF)** | Tiempo de procesamiento dividido por la duración del audio. RTF < 1 = procesa más rápido de lo que escucha. |
 | **Corrida** | Ejecución única del prototipo de laboratorio: entra, procesa un audio autorizado, escribe evidencia y termina. No es un servicio levantado ni la demo Android. |
 | **Replay en streaming** | Alimentar un WAV autorizado al ASR en pedazos ordenados, como si la llamada estuviera llegando. No es transcribir el archivo de un saque ni una llamada en vivo. |
+| **Vista de presentación** | Representación visual de una llamada destinada al público de la demostración, que permite seguir a los interlocutores, la conversación y las detecciones. |
 | **`CAPTURE_AUDIO_OUTPUT`** | Permiso de Android reservado a componentes privilegiados del sistema, necesario para capturar `VOICE_CALL` / `VOICE_UPLINK` / `VOICE_DOWNLINK`. Es la restricción que define el alcance del proyecto. |
 | **ADR** | *Architecture Decision Record*. Registro fechado de una decisión y sus alternativas descartadas. |
 | **UFECI** | Unidad Fiscal Especializada en Ciberdelincuencia (Argentina). |

@@ -1,0 +1,25 @@
+A: Hola, llamo porque voy a cambiar el celular y quiero guardar el chat del taller.
+B: Buen día. ¿Querés conservar mensajes, archivos o las dos cosas?
+A: Sobre todo los mensajes con horarios. Los archivos ya están en la computadora del negocio.
+B: ¿La cuenta está abierta en el teléfono que vas a cambiar?
+A: Sí, todavía lo uso. El nuevo llega mañana.
+B: Podés hacer una copia desde ajustes, en la sección de chats. ¿Tenés espacio en la nube?
+A: Eso no sé. El teléfono me vive diciendo que está lleno.
+B: Primero revisá cuánto ocupa WhatsApp. También podés exportar una conversación puntual, aunque no queda integrada para seguir respondiendo.
+A: Me sirve que sea solo el grupo del taller, no quiero mezclar las cosas de casa.
+B: ¿Cómo se llama el grupo en tu lista?
+A: Taller Naranjo. Somos cuatro, nos organizamos con los turnos.
+B: Abrí el grupo, tocá más opciones y buscá “exportar chat”.
+A: Me pregunta si incluye archivos. ¿Qué conviene?
+B: Si ya tenés los archivos afuera, elegí sin archivos. Va a quedar un documento de texto con los mensajes.
+A: ¿Ese documento se manda automáticamente a todos?
+B: No. Te deja elegir una aplicación o guardarlo como archivo. Revisá el destino antes de confirmar.
+A: ¿Puedo guardarlo en la computadora después?
+B: Sí, si lo mandás a tu propio correo o conectás el teléfono por cable. Evitá usar una cuenta compartida si el chat tiene datos del trabajo.
+A: Tiene horarios y nombres de clientes, así que mejor lo guardo en la computadora del local.
+B: Me parece razonable. Si el almacenamiento está lleno, también podés liberar videos viejos antes de hacer la copia.
+A: Ya encontré la opción. Me muestra un archivo de 240 kilobytes.
+B: Eso parece solo texto. Abrilo cuando termine para comprobar que quedó legible.
+A: Lo hago ahora. ¿El nuevo celular puede usar el mismo grupo después?
+B: Sí, al registrar tu cuenta en el nuevo, el grupo debería aparecer si la transferencia de chats se completa.
+A: Perfecto, gracias por la guía.

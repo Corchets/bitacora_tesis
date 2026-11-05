@@ -1,0 +1,128 @@
+{
+  "llamada_id": "VIVO-20261026-153017",
+  "asr": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    }
+  },
+  "disparo": "final",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": "B",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.002,
+        "mediana": -0.0,
+        "p95": 0.023,
+        "max": 0.087
+      },
+      "retraso_parcial_s": {
+        "n": 4,
+        "min": 0.056,
+        "mediana": 0.084,
+        "p95": 0.101,
+        "max": 0.101
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 2,
+        "min": 0.452,
+        "mediana": 0.512,
+        "p95": 0.565,
+        "max": 0.571
+      }
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.002,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.004,
+        "mediana": -0.002,
+        "p95": 0.023,
+        "max": 0.087
+      },
+      "retraso_parcial_s": {
+        "n": 8,
+        "min": 0.052,
+        "mediana": 0.077,
+        "p95": 0.115,
+        "max": 0.125
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 3,
+        "min": 0.52,
+        "mediana": 0.534,
+        "p95": 0.569,
+        "max": 0.573
+      }
+    }
+  },
+  "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)",
+  "detector": {
+    "evaluaciones": 4,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 4,
+      "min": 0.004,
+      "mediana": 0.007,
+      "p95": 0.011,
+      "max": 0.012
+    },
+    "aviso": {
+      "n": 14,
+      "saltadas": 0,
+      "inicio_eval_s": 18.121,
+      "fin_eval_s": 18.133,
+      "ms_detector": 11.8,
+      "valida": true,
+      "error": "",
+      "riesgo": null,
+      "alerta_sugerida": true,
+      "motivo": "REQUEST_AUTH_CODE (patrón: codigo)",
+      "evidencia": ". decime el código de activación que recibiste por sms",
+      "aviso": true,
+      "t_a": 18.133,
+      "fin_voz_s": 17.602,
+      "demora_desde_fin_de_voz_s": 0.532
+    }
+  },
+  "config": {
+    "detector": "reglas",
+    "modelo": null,
+    "prompt": null,
+    "hablantes": "ab",
+    "ollama_url": null,
+    "seed": "no-aplica",
+    "corte_silencio_s": 0.5,
+    "hilos_asr": 2,
+    "carga_slm": null
+  },
+  "codigo": {
+    "commit": "b33b1d7a5a6a8f938450f4bf92081e0b997059bc",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  }
+}

@@ -1,0 +1,24 @@
+A: Hola, reinstalé el programa de dibujo y me pide una clave que no encuentro.
+B: Buenas. ¿Es una clave de producto o te está pidiendo iniciar sesión?
+A: Dice “clave de licencia”. Es una compra vieja, la hice hace varios años.
+B: ¿Tenés el correo de confirmación de esa compra?
+A: Puede estar en una cuenta que casi no uso. No me acuerdo la contraseña de ese correo tampoco.
+B: Podemos buscar la compra con el nombre del programa y el año aproximado.
+A: Se llamaba Trazo, la compré cuando empecé a hacer carteles para el club.
+B: ¿Más o menos en qué año?
+A: En 2021, antes de que pintáramos el salón nuevo.
+B: Encontré una licencia vinculada a tu correo terminado en taller punto ejemplo.
+A: Ese debe ser. ¿Me vas a pedir que te pase la clave del programa?
+B: No, solo estamos verificando la licencia. Podés abrir la sección de compras desde tu cuenta.
+A: Me muestra una clave con guiones. ¿Tengo que leerla?
+B: No hace falta que me la dictes. Pegala vos en el cuadro del programa y comprobá que aparezca como activado.
+A: Ya la pegué. Dice licencia válida, pero no me trae los diseños anteriores.
+B: Los diseños suelen guardarse en una carpeta local distinta. ¿Conservás la computadora anterior?
+A: Sí, está guardada en el armario. La prendo el fin de semana.
+B: Buscá la carpeta “mis proyectos” y copiá los archivos a un disco externo.
+A: No quiero sincronizar nada en la nube porque son diseños del club.
+B: Podés hacer una copia local. La licencia no incluye almacenamiento automático.
+A: Entiendo. Ya quedó activado el programa, por lo menos.
+B: Perfecto. ¿Te queda alguna duda sobre la licencia?
+A: No, era eso. Gracias por separar las dos claves.
+B: De nada.

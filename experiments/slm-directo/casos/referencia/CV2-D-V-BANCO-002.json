@@ -1,0 +1,59 @@
+{
+  "case_id": "CV2-D-V-BANCO-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 18,
+  "t_c_linea": 27,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 17,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 18,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 27,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "El supuesto soporte convierte una migración de teléfono en la autorización de un equipo ajeno con permisos de operación. Prueba que el riesgo no sea simplemente cambiar el propio teléfono: el diálogo identifica un tercero beneficiado y una explicación que contradice la pantalla.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la primera instrucción de autorizar el equipo desconocido, no al abrir la propia aplicación para mirar una solicitud. T_C registra la confirmación de que ese equipo quedó habilitado para operar. La interfaz y el trámite son ficticios; no describen un procedimiento bancario real. D07 debe revisar las marcas. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Un falso sector de acceso bancario usa una migración de teléfono como pretexto para conseguir que se autorice un equipo de escritorio desconocido."
+}

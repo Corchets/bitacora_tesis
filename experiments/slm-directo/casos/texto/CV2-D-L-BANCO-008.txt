@@ -1,0 +1,21 @@
+A: Hola. Quería saber si puedo depositar billetes de otra serie en el cajero.
+B: Buenas. ¿El cajero los rechazó o todavía no probaste?
+A: Rechazó dos. En casa me dijeron que capaz tenían una clave marcada, pero no sé qué significa eso.
+B: La máquina suele rechazarlos si están rotos, pegados o demasiado gastados. ¿El cajero mostró alguna explicación en pantalla?
+A: Están enteros, aunque uno tiene una mancha de tinta en una punta.
+B: Puede ser eso. ¿El depósito era para una cuenta propia?
+A: Sí, la mía. Llevé varios porque me pagaron en efectivo.
+B: Si tenés sucursal cerca, podés consultar si reciben esos billetes por caja. No hace falta llevarlos todos juntos.
+A: Me queda lejos. ¿Hay algún cajero que acepte más billetes por vez?
+B: En la aplicación podés ver qué equipos tienen depósito, pero no muestra el estado de cada lector.
+A: ¿Y si pruebo en otro cajero del mismo banco?
+B: Podés, aunque si tienen la misma condición de lectura quizás vuelva a rechazarlos.
+A: Bueno. No quería que se me quedaran dentro de la máquina.
+B: Cuando el cajero rechaza uno, lo devuelve en la bandeja. ¿Te devolvió los dos?
+A: Sí, los agarré antes de que cerrara la compuerta.
+B: Perfecto. ¿Tenés el comprobante del intento?
+A: No, porque no llegó a iniciar el depósito.
+B: Entonces no hay un movimiento que reclamar. Probá con los billetes en mejor estado o consultá en caja.
+A: Voy a ver si puedo pasar el jueves. No es urgente.
+B: Dale. Si cambia algo, llamanos con el horario aproximado.
+A: Gracias por la orientación.

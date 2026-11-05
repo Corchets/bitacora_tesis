@@ -1,0 +1,25 @@
+A: Hola, soy yo. Me llegó un aviso de que no encontraron la entrada para el pedido.
+B: Sí, el repartidor está en la cuadra pero la dirección tiene dos accesos.
+A: Tiene que entrar por el portón de la calle Mitre, no por el estacionamiento.
+B: ¿Es el edificio de ladrillo claro, frente a la cancha?
+A: Exacto. La puerta chica da al pasillo de las casas.
+B: ¿Podés bajar a recibirlo o dejamos las cajas en la puerta?
+A: Bajo en cinco minutos. Son seis cajas de bebidas y no quiero que queden afuera.
+B: El pedido incluye soda y agua saborizada. ¿Te mantenemos todo igual?
+A: Si no hay la de pomelo, puede ser limón. La de naranja sí la necesito.
+B: Anoto el reemplazo. ¿El importe cambia si falta un sabor?
+A: No sé, yo pagué un total cerrado en la página.
+B: Si el precio cambia, el comercio te consulta antes de completar la entrega.
+A: Bueno. ¿El repartidor puede esperar cinco minutos?
+B: Le aviso ahora. ¿La dirección del pedido termina en 180?
+A: Sí, 180, casa dos. El portón tiene un timbre que no anda.
+B: Entonces va a golpear la puerta de madera.
+A: Ya bajé. Estoy en la vereda, vestido con campera verde.
+B: Lo veo, el repartidor se acerca por la esquina.
+A: Sí, ahí lo encontré. Me confirma que tiene las seis cajas.
+B: ¿Está todo bien con los sabores?
+A: Trajo pomelo al final. Mejor, porque era el que querían para la reunión.
+B: Perfecto. ¿Te llegó el comprobante?
+A: Sí, me aparece en el correo.
+B: Gracias por resolverlo con nosotros.
+A: A ustedes, ya está todo recibido.

@@ -1,0 +1,23 @@
+{
+  "case_id": "SC-PREMIO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "SC-PREMIO-01",
+  "par": "LG-PREMIO-CONSULTA-01-e01",
+  "clase": "vishing",
+  "t_r_linea": 8,
+  "t_c_linea": 13,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 5, "evento": "contexto", "etiquetas": ["TRUST_BUILDING"]},
+    {"linea": 7, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE"]},
+    {"linea": 8, "evento": "pedido", "etiquetas": ["REQUEST_PERSONAL_DATA"]},
+    {"linea": 9, "evento": "contexto", "etiquetas": []},
+    {"linea": 10, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION"]},
+    {"linea": 13, "evento": "cumplimiento", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido de datos personales (foto del documento) tras un pretexto de premio con respaldo (club de descuentos, escribano, acta), un plazo y una insistencia ante la duda. Persona confiada que cumple; el cumplimiento se declara en voz pero ocurre por otro canal.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-PREMIO-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "El cumplimiento (mandar las fotos por WhatsApp) ocurre fuera de la llamada; en el texto solo se observa porque B lo anuncia en la línea 13. Discutir en D07 si un cumplimiento por otro canal, declarado en voz, cuenta como T_C observable. La línea 9 es una duda breve, no un rechazo. La ficha no fija qué dato se pide: se eligió la foto del documento para no escribir números de DNI ni domicilios. A habla primero y es quien llama."
+}

@@ -1,0 +1,14 @@
+A: Hola, buenas tardes. ¿Hablo con Laura Domínguez?
+B: Sí, soy yo. ¿Quién habla?
+A: Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino.
+B: Ah, ¿por eso el otro día no me dejaba entrar desde la computadora?
+A: Exacto, es por eso. Ya te abrí un número de gestión, el cero, cero, uno, dos, tres, así queda todo registrado a tu nombre.
+A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.
+B: ¿La contraseña? En la aplicación dice que no se la pase a nadie.
+A: Está muy bien que lo tengas presente; eso es para que no se la des a desconocidos. Yo estoy del lado del sistema, y en cuanto termina el pase la podés cambiar.
+B: No sé... ¿No lo puedo hacer yo desde la aplicación?
+A: Desde la aplicación no te va a dejar, porque tu cuenta sigue en la plataforma vieja. Por eso te llamamos nosotros; es un minuto.
+B: Bueno, dale. El usuario es laura punto prueba, todo en minúscula.
+A: Perfecto. ¿Y la contraseña?
+B: Prueba uno, dos, tres, cuatro, con la pe mayúscula.
+A: Listo, Laura, ya quedó pasada a la plataforma nueva. Cualquier novedad te llamamos nosotros.

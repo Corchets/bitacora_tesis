@@ -1,0 +1,113 @@
+{
+  "inicio": "2026-10-14T17:29:30",
+  "comando": "python correr.py --modelos qwen3.5:2b --sin-reglas --detalle --etiqueta demo-qwen3.5-2b",
+  "codigo": {
+    "commit": "76fafa2ea66c9f0c379704f9433bc629c51a732a",
+    "cambios_sin_commit_en_la_carpeta": true
+  },
+  "maquina": {
+    "sistema": "Windows-11-10.0.26300-SP0",
+    "arquitectura": "AMD64",
+    "procesador": "AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD",
+    "nucleos_logicos": 12,
+    "ram_total_gb": 31.9,
+    "python": "3.12.10"
+  },
+  "politica": "aviso_unico_primer_true_valido",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.4",
+    "digests": {
+      "qwen3.5:2b": "0689d44085e06d165161a8a9a1731344278cfb5aade63a3c3dbdb48ab54b130a"
+    }
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0
+  },
+  "prompts": {
+    "tarea": {
+      "huella": "bf4284996898c45d",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en lo dicho hasta ahora, alguien pide, induce o presiona a la otra persona para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- códigos de un solo uso (SMS, token, código de verificación o de activación);\n- claves, PIN, contraseñas o usuarios;\n- datos personales (DNI, CUIL, domicilio, foto de un documento);\n- transferencias, pagos o entregas de dinero o efectivo;\n- instalar programas de acceso remoto o compartir la pantalla;\n- acciones de seguridad guiadas (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nNo alcanza con mencionar esas cosas, aconsejar no compartirlas, negarse a hacerlas o hablar de ellas sin pedirlas.\n\nRespondé solo con un objeto JSON con estos campos:\n- \"riesgo\": número entre 0 y 1 que indica qué tan riesgosa te parece la llamada con lo disponible hasta ahora.\n- \"alerta_sugerida\": true o false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona, por ejemplo \"Te están pidiendo un código que da acceso a tu cuenta\"; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente el fragmento de la transcripción que lo justifica; si es false, \"\"."
+    }
+  },
+  "configs": [
+    {
+      "config": "slm|qwen3.5:2b|tarea|ab",
+      "detector": "slm",
+      "modelo": "qwen3.5:2b",
+      "prompt": "tarea",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "LAB-acceso-remoto": "abbdb60023a5c6e4",
+    "LAB-acceso-remoto-parafrasis": "3c11fa1e1f388c95",
+    "LAB-anses-beneficio": "1dbe40e4c2e4dd59",
+    "LAB-anses-beneficio-parafrasis": "59df1a67abcc885e",
+    "LAB-anses-canal-oficial": "b17f2a7515ced508",
+    "LAB-arca-canal-oficial": "fa29e387532b00e3",
+    "LAB-arca-deuda": "56bf96377060bb30",
+    "LAB-arca-deuda-parafrasis": "f77bf6a51727318e",
+    "LAB-banco-app-parafrasis": "915ce0b33ce32692",
+    "LAB-banco-codigo": "bfaf844390c391ab",
+    "LAB-banco-codigo-parafrasis": "a23180a44841e940",
+    "LAB-banco-gasto-sin-pedido": "710720c289b5b209",
+    "LAB-banco-niega-el-codigo": "5234e0f0954246df",
+    "LAB-banco-numeros-sin-clave": "336741e4a9b81531",
+    "LAB-banco-revisa-app": "a5575307e6144a19",
+    "LAB-digitos-sin-palabra": "eac0d9632aeb9752",
+    "LAB-familiar-llama-vos": "a408533b543156f3",
+    "LAB-familiar-peligro": "feab2aa7b4ec9b95",
+    "LAB-familiar-peligro-parafrasis": "1f68006dfc825131",
+    "LAB-giro-sin-plata": "5e124d7fbb6de631",
+    "LAB-mensajeria-no-pases-nada": "21cbcde552616245",
+    "LAB-no-bajes-nada": "786d070838093669",
+    "LAB-pantalla-sin-programa": "8e2f69c90446ade9",
+    "LAB-portero-codigo-puerta": "1d1a5dc0d307d974",
+    "LAB-whatsapp-codigo": "9c3504a055060d62",
+    "LAB-whatsapp-codigo-parafrasis": "ab663e341dbf9344",
+    "LG-BANK-VERIF-01-e01": "0ff25c270609ce38",
+    "LG-FAMILIAR-LLAMADO-01-e01": "9bfe1a2fb98c0760",
+    "LG-ORG-TURNO-01-e01": "75d820b85eec9b45",
+    "LG-PREMIO-CONSULTA-01-e01": "6890873d49f48827",
+    "LG-SUPPORT-INFO-01-e01": "7a871ce393b68837",
+    "LG-SUPPORT-INFO-01-e02": "bd004ebe89fed558",
+    "LG-WA-CONSULTA-01-e01": "e587a7e119ea41d4",
+    "SC-CLAVE-CAMBIO-01-e01": "fc2ba2e80855b40a",
+    "SC-FAMILIAR-DINERO-01-e01": "ca983cbec3940477",
+    "SC-ORG-BENEFICIO-01-e01": "c1aa9aa10c9d977c",
+    "SC-PREMIO-01-e01": "c395af5186c2e49b",
+    "SC-SOPORTE-CLAVE-01-e01": "a9fbc8f4029b1aa3",
+    "SC-SOPORTE-REMOTO-01-e01": "f9986a5f33faf52d",
+    "SC-WA-CODE-01-e01": "f13b4b33a64d33d8",
+    "TR-01-pedido-indirecto-digitos": "676b7839fa6bc4eb",
+    "TR-02-codigo-del-candado": "66fff3c538daa3cb",
+    "TR-03-negacion-y-consejo": "035be565ed66795b",
+    "TR-04-pedido-tras-charla-larga": "7b73594c98f6bc57",
+    "TR-05-asado-con-transferencia": "a47dbee0f5a8c5c5",
+    "TR-06-banco-alerta-legitima": "eff36493e443525d",
+    "TR-07-pedido-partido-en-dos-lineas": "ebe24b27f413c658",
+    "TR-08-frase-cortada-candado": "ad03a06952b2db74",
+    "TR-09-victima-se-niega": "3768ac43c750dd33",
+    "TR-10-ofrecimiento-inducido": "381b278ac0e71284",
+    "TR-11-familiar-real-pide-plata": "a6e867d07e90d9b2",
+    "TR-12-corta-antes-del-pedido": "4dd762fc0531a067",
+    "TR-13-turno-medico-pide-dni": "5f87eeccc837367c"
+  },
+  "modelos": {
+    "qwen3.5:2b": {
+      "carga_ms": 553,
+      "error": "",
+      "memoria": {
+        "size_bytes": 2364475963,
+        "size_vram_bytes": 2364475963
+      },
+      "pensar": false
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-10-14T17:34:23"
+}

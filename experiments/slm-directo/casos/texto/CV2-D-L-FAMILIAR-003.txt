@@ -1,0 +1,24 @@
+A: ¿Tenés todavía la camioneta el sábado o la usa tu hermano?
+B: La tengo hasta el mediodía. ¿Querés llevar la bici de Mora?
+A: Sí, me dijo que la necesita para la carrera del domingo. En el auto no entra.
+B: La puedo pasar a buscar por tu casa, pero antes tengo que dejar unas cajas.
+A: ¿A qué hora terminás con eso?
+B: Cerca de las diez. Si no se estira, llego a las diez y media.
+A: Mora tiene entrenamiento hasta las once. Capaz conviene llevarla al club directamente.
+B: ¿El club de la calle Roca o el predio nuevo?
+A: El predio nuevo. Ella me mandó la ubicación por el chat, te la reenvío.
+B: Bueno. ¿La bicicleta está ajustada o necesita inflar las ruedas?
+A: La trasera pierde aire. El abuelo dijo que tenía una cámara de repuesto.
+B: No compremos una todavía. Primero miro la cámara que hay en el galpón.
+A: Si está pinchada, la llevo al taller el viernes. No quiero que se quede sin entrenar.
+B: Preguntale a Mora si la bici entra en la camioneta con el asiento de atrás puesto.
+A: Ya le escribí. Dice que se puede sacar la rueda delantera.
+B: Perfecto, así no hay que desarmar nada más.
+A: ¿Querés que te dé para la nafta?
+B: No, voy para ese lado igual. Después vemos si hace falta hacer otra vuelta.
+A: Está bien. El sábado te espero en la puerta del predio.
+B: Mejor decime cuando salgas, porque el GPS me manda por el camino de tierra.
+A: Te paso una referencia: entrada por el portón verde, al lado del vivero.
+B: Ahora sí, me ubico.
+A: Gracias por hacer el traslado. La carrera le importa un montón.
+B: No hay drama. Ojalá no llueva.

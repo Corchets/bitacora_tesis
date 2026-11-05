@@ -1,0 +1,5 @@
+A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.
+B: Me acaba de llegar un SMS. No pedí activar nada.
+A: Para cancelar esa activación tenemos que resolverlo ahora.
+A: Decime el código de activación que recibiste por SMS.
+B: Es cero, cero, cero, cero, cero, cero.

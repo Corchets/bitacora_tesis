@@ -1,0 +1,36 @@
+A: Hola, ¿hablo con la persona que consultó por el taller de cerámica de los sábados?
+B: Sí, pregunté en la feria. ¿Ya tienen el horario?
+A: Te llamo por la lista del taller. Soy quien está organizando el grupo de WhatsApp.
+B: Me había anotado con mi prima, pero ella recién puede desde el mes que viene.
+A: Podemos dejarla para el segundo encuentro; la primera clase es de prueba.
+B: ¿Y hace falta llevar herramientas? Tengo una esteca, nada más.
+A: Las primeras herramientas se prestan. Cada persona trae un trapo y un recipiente.
+B: Ah, pensé que había que comprar todo antes de empezar.
+A: No, primero van viendo si les gusta trabajar con ese material.
+B: ¿Trabajan con torno o es a mano?
+A: El primer tramo es a mano. El torno se organiza aparte porque hay pocos lugares.
+B: Mejor, yo nunca hice nada. ¿Hay lugar para dos personas todavía?
+A: En el grupo de la tarde quedaron dos vacantes.
+B: ¿Se paga todo el mes de una vez?
+A: Eso lo conversan al terminar la clase de prueba, no estoy cobrando en esta llamada.
+B: Bueno. ¿La dirección es la del salón donde estaba la feria?
+A: Es la entrada del costado, junto al patio. El salón grande lo usa otro grupo.
+B: Ya sé cuál. ¿Por qué no me agregaron directamente al grupo?
+A: La lista nueva está vinculada con la confirmación de cada teléfono.
+B: Yo tengo WhatsApp con este número hace años.
+A: Sí, pero al cargar participantes se genera una comprobación por separado.
+B: Me acaba de aparecer un mensaje que yo no pedí.
+A: Tiene que coincidir con este alta; por eso estoy hablando con cada persona.
+B: Veo seis cifras y abajo dice que es para registrar la cuenta en otro equipo.
+A: Para dejarte en la lista, pasame
+A: eso que apareció recién, de a uno, como lo ves.
+B: ¿Las cifras del mensaje? Pensé que solo necesitabas mi nombre para el taller.
+A: El nombre ya está. Con esa serie lo termino de cargar de este lado.
+B: ¿Y mi prima tiene que hacer lo mismo?
+A: Primero cierro el tuyo, porque si se vence tengo que empezar la inscripción otra vez.
+B: Bueno, dice cuatro, ocho, cero, dos, nueve, tres.
+A: Ya quedó anotado. Esperá un momento que termina de procesar.
+B: ¿Después me mandás el horario por el grupo?
+A: Sí, cuando esté completa la lista.
+B: Dale, le aviso a mi prima que quedan dos lugares.
+A: Perfecto, gracias.

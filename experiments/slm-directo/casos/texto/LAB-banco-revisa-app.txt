@@ -1,0 +1,5 @@
+A: te aviso que hubo un consumo en la tarjeta
+B: ok donde lo miro
+A: corta esta comunicacion y entra vos a la aplicacion oficial
+B: no me vas a pedir nada no
+A: exacto yo no te pido datos corta y revisa ahi

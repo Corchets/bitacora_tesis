@@ -1,0 +1,26 @@
+A: hola me hice un análisis el viernes y todavía no veo el resultado en el portal
+B: buenas fue en la sede de la avenida o en la del parque
+A: en la de la avenida temprano me dijeron que estaba para el lunes
+B: tenés el número de orden que te dieron
+A: sí 519-20 lo anoté atrás del recibo
+B: gracias a nombre de quién está la orden
+A: de marcos nieva soy yo
+B: acá figura que la muestra se recibió pero el resultado sigue en proceso
+A: puede haber salido mal la muestra me hicieron volver porque el primer tubo estaba bajo
+B: no tengo el detalle técnico desde este teléfono puedo comunicarte con el laboratorio para que revisen la demora
+A: sí por favor lo necesito para el turno del miércoles
+B: ese turno es con la doctora que pidió el análisis
+A: sí a las diez si no llega capaz me lo reprograma
+B: el laboratorio atiende hasta las seis te paso interno 24 para consultar directamente
+A: tengo que volver a dar mi documento cuando me atiendan
+B: te pueden pedir confirmar nombre y fecha de nacimiento para abrir el registro
+A: la fecha es el 4 de abril de 1989
+B: gracias con eso aparece la orden no hace falta que me leas el documento completo
+A: bueno el resultado me lo mandan por correo o tengo que buscarlo
+B: si autorizaste el portal suele aparecer ahí el laboratorio te confirma el estado
+A: me aparece una notificación pero cuando entro no carga
+B: probá desde un navegador actualizado si sigue igual anotá el error que te muestra
+A: dice carga interrumpida lo voy a probar en la computadora de casa
+B: perfecto te transfiero ahora
+A: si gracias
+B: te paso al interno 24

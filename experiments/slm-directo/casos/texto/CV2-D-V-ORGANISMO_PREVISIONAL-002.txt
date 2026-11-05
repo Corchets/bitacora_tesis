@@ -1,0 +1,21 @@
+A: Hola soy del equipo de liquidaciones previsionales Te llamo por el recibo de septiembre
+B: Qué tiene el recibo
+A: Aparece un ajuste por movilidad que no se aplicó a todos los casos
+B: Me corresponde un ajuste
+A: El sistema marca que podría haber una diferencia a favor pero primero hay que identificar el legajo
+B: No está asociado a mi número de benefisio
+A: Sí pero necesito cruzarlo con la identidad de quien cobra
+B: Qué información te falta
+A: El número completo de CUIL y tu fecha exacta de nacimiento
+B: Lo tengo anotado 00-20573300-0 fecha 01/01/1970
+A: Ya quedó abierto el registro provisorio
+B: Cuál sería la diferencia
+A: Todavía no la puedo ver hasta que se actualice el recibo
+B: Cuándo aparece
+A: En el próximo cierre mensual
+B: Me mandan una constancia
+A: Te debería aparecer dentro del portal
+B: Bueno reviso ahí más tarde
+A: De acuerdo
+B: Chau
+A: Hasta luego
