@@ -5,7 +5,7 @@
 - **Participantes de la discusión:** equipo; la registra Luciano Grosso. El tutor dejó la arquitectura en manos del equipo ([minuta del 2026-10-28](../../gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)).
 - **Ámbito:** arquitectura
 
-> **Nota del 2026-11-05:** a pedido de Luciano, la demo con ASR arranca con el prompt `v4`, roles y Tito sin indicio ([resultados](../../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso)). Este ADR todavía no se reabrió: sigue registrando `tarea` con indicio.
+> **Nota del 2026-11-05:** a pedido de Luciano, la demo con ASR arranca con el prompt `v4`, roles y Tito sin indicio ([resultados](../../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso)). La [última prueba](../../../experiments/slm-directo/corridas/2026-11-05_tito-2-v4/analisis.md) deja como candidata `v4` con roles, Tito viejo sin indicio y primer aviso (55/75 estafas y 13/75 falsas alarmas); Tito viejo 2.0 da lo mismo. Este ADR todavía no se reabrió: sigue registrando `tarea` con indicio.
 
 ## Contexto
 
