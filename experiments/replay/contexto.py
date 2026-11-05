@@ -77,14 +77,31 @@ class ContextoLlamada:
         - Un parcial reemplaza el borrador del segmento abierto sin duplicar.
         - Un final cierra el segmento y lo acumula como línea fija.
         """
-        if act.canal in ("A", "B"):
-            hablante = act.canal
-        elif act.canal in ("protegida", "otra"):
-            if act.canal not in self.letras_por_rol and any(c.isalnum() for c in act.texto):
-                self.letras_por_rol[act.canal] = "AB"[len(self.letras_por_rol)]
-            hablante = self.letras_por_rol.get(act.canal, "")
-        else:
+        if hablantes_modo not in ("ab", "rol", "sin"):
+            raise ValueError(
+                f"hablantes_modo desconocido {hablantes_modo!r}; opciones: ('ab', 'rol', 'sin')"
+            )
+
+        if hablantes_modo == "rol":
+            if act.canal == "protegida":
+                hablante = "PROTEGIDA"
+            elif act.canal == "otra":
+                hablante = "OTRA"
+            else:
+                raise ValueError(
+                    f"Modo hablantes='rol' requiere canal 'protegida' u 'otra', recibido {act.canal!r}"
+                )
+        elif hablantes_modo == "sin":
             hablante = ""
+        else:  # "ab"
+            if act.canal in ("A", "B"):
+                hablante = act.canal
+            elif act.canal in ("protegida", "otra"):
+                if act.canal not in self.letras_por_rol and any(c.isalnum() for c in act.texto):
+                    self.letras_por_rol[act.canal] = "AB"[len(self.letras_por_rol)]
+                hablante = self.letras_por_rol.get(act.canal, "")
+            else:
+                hablante = ""
 
         linea = Linea(hablante=hablante, texto=act.texto)
 

@@ -1,0 +1,602 @@
+{
+"CV2-D-L-BANCO-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-002": {
+"protegida": "B",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-004": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-006": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-007": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-008": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-009": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-BANCO-010": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-DELIVERY-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-DELIVERY-002": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-DELIVERY-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-DELIVERY-004": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-DELIVERY-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ESCUELA-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ESCUELA-002": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ESCUELA-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ESCUELA-004": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ESCUELA-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-FAMILIAR-001": {
+"protegida": "B",
+"origen": "duda"
+},
+"CV2-D-L-FAMILIAR-002": {
+"protegida": "B",
+"origen": "duda"
+},
+"CV2-D-L-FAMILIAR-003": {
+"protegida": "B",
+"origen": "duda"
+},
+"CV2-D-L-FAMILIAR-004": {
+"protegida": "B",
+"origen": "duda"
+},
+"CV2-D-L-FAMILIAR-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-MEDICO-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-MEDICO-002": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-MEDICO-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-MEDICO-004": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-MEDICO-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ORGANISMO_PREVISIONAL-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ORGANISMO_PREVISIONAL-002": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-ORGANISMO_PREVISIONAL-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-PREMIO-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-PREMIO-002": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-PREMIO-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-SOPORTE-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-SOPORTE-002": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-SOPORTE-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-SOPORTE-004": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-SOPORTE-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-TRABAJO-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-TRABAJO-002": {
+"protegida": "B",
+"origen": "duda"
+},
+"CV2-D-L-TRABAJO-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-TRABAJO-004": {
+"protegida": "B",
+"origen": "duda"
+},
+"CV2-D-L-TRABAJO-005": {
+"protegida": "B",
+"origen": "lectura"
+},
+"CV2-D-L-WHATSAPP-001": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-WHATSAPP-002": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-WHATSAPP-003": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-WHATSAPP-004": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-L-WHATSAPP-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-V-BANCO-001": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-002": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-003": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-004": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-005": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-006": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-007": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-008": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-009": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-010": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-BANCO-011": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-V-BANCO-012": {
+"protegida": "B",
+"origen": "lectura"
+},
+"CV2-D-V-FAMILIAR-001": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-FAMILIAR-002": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-FAMILIAR-003": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-FAMILIAR-004": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-FAMILIAR-005": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-FAMILIAR-006": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-ORGANISMO_PREVISIONAL-001": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-ORGANISMO_PREVISIONAL-002": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-ORGANISMO_PREVISIONAL-003": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-ORGANISMO_PREVISIONAL-004": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-ORGANISMO_PREVISIONAL-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-V-ORGANISMO_PREVISIONAL-006": {
+"protegida": "B",
+"origen": "lectura"
+},
+"CV2-D-V-PREMIO-001": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-PREMIO-002": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-PREMIO-003": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-PREMIO-004": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-PREMIO-005": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-V-PREMIO-006": {
+"protegida": "B",
+"origen": "lectura"
+},
+"CV2-D-V-SOPORTE-001": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-SOPORTE-002": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-SOPORTE-003": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-SOPORTE-004": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-SOPORTE-005": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-SOPORTE-006": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-SOPORTE-007": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-V-SOPORTE-008": {
+"protegida": "B",
+"origen": "lectura"
+},
+"CV2-D-V-WHATSAPP-001": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-WHATSAPP-002": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-WHATSAPP-003": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-WHATSAPP-004": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-WHATSAPP-005": {
+"protegida": "A",
+"origen": "t_r"
+},
+"CV2-D-V-WHATSAPP-006": {
+"protegida": "B",
+"origen": "t_r"
+},
+"CV2-D-V-WHATSAPP-007": {
+"protegida": "A",
+"origen": "lectura"
+},
+"CV2-D-V-WHATSAPP-008": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LAB-acceso-remoto": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-acceso-remoto-parafrasis": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-anses-beneficio": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-anses-beneficio-parafrasis": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-anses-canal-oficial": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LAB-arca-canal-oficial": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LAB-arca-deuda": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-arca-deuda-parafrasis": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-banco-app-parafrasis": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LAB-banco-codigo": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-banco-codigo-parafrasis": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-banco-gasto-sin-pedido": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LAB-banco-niega-el-codigo": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LAB-banco-numeros-sin-clave": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-banco-revisa-app": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LAB-digitos-sin-palabra": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-familiar-llama-vos": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LAB-familiar-peligro": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-familiar-peligro-parafrasis": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-giro-sin-plata": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-mensajeria-no-pases-nada": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LAB-no-bajes-nada": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LAB-pantalla-sin-programa": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-portero-codigo-puerta": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LAB-whatsapp-codigo": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LAB-whatsapp-codigo-parafrasis": {
+"protegida": "B",
+"origen": "t_r"
+},
+"LG-BANK-VERIF-01-e01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LG-FAMILIAR-LLAMADO-01-e01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LG-ORG-TURNO-01-e01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LG-PREMIO-CONSULTA-01-e01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LG-SUPPORT-INFO-01-e01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LG-SUPPORT-INFO-01-e02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LG-WA-CONSULTA-01-e01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"SC-CLAVE-CAMBIO-01-e01": {
+"protegida": "A",
+"origen": "t_r"
+},
+"SC-FAMILIAR-DINERO-01-e01": {
+"protegida": "A",
+"origen": "t_r"
+},
+"SC-ORG-BENEFICIO-01-e01": {
+"protegida": "B",
+"origen": "t_r"
+},
+"SC-PREMIO-01-e01": {
+"protegida": "B",
+"origen": "t_r"
+},
+"SC-SOPORTE-CLAVE-01-e01": {
+"protegida": "B",
+"origen": "t_r"
+},
+"SC-SOPORTE-REMOTO-01-e01": {
+"protegida": "B",
+"origen": "t_r"
+},
+"SC-WA-CODE-01-e01": {
+"protegida": "B",
+"origen": "t_r"
+},
+"TR-01-pedido-indirecto-digitos": {
+"protegida": "B",
+"origen": "t_r"
+},
+"TR-02-codigo-del-candado": {
+"protegida": "B",
+"origen": "lectura"
+},
+"TR-03-negacion-y-consejo": {
+"protegida": "A",
+"origen": "lectura"
+},
+"TR-04-pedido-tras-charla-larga": {
+"protegida": "B",
+"origen": "t_r"
+},
+"TR-05-asado-con-transferencia": {
+"protegida": "B",
+"origen": "lectura"
+},
+"TR-06-banco-alerta-legitima": {
+"protegida": "B",
+"origen": "lectura"
+},
+"TR-07-pedido-partido-en-dos-lineas": {
+"protegida": "B",
+"origen": "t_r"
+},
+"TR-08-frase-cortada-candado": {
+"protegida": "B",
+"origen": "lectura"
+},
+"TR-09-victima-se-niega": {
+"protegida": "B",
+"origen": "t_r"
+},
+"TR-10-ofrecimiento-inducido": {
+"protegida": "A",
+"origen": "t_r"
+},
+"TR-11-familiar-real-pide-plata": {
+"protegida": "A",
+"origen": "lectura"
+},
+"TR-12-corta-antes-del-pedido": {
+"protegida": "A",
+"origen": "lectura"
+},
+"TR-13-turno-medico-pide-dni": {
+"protegida": "B",
+"origen": "lectura"
+}
+}

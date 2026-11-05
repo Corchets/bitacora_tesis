@@ -8,18 +8,19 @@ Solo lee los CSV y las referencias; no corre modelos.
 """
 import collections
 import csv
+import hashlib
+import json
+import re
 import statistics
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-import casos  # noqa: E402
-
-
-def cargar(carpeta, detector):
+def cargar(carpeta, detector, permitidos):
     filas = collections.defaultdict(list)
     with open(Path(carpeta) / "actualizaciones.csv", encoding="utf-8-sig") as f:
         for r in csv.DictReader(f):
+            if r["case_id"] not in permitidos:
+                raise ValueError("CSV con un ID ajeno al manifiesto de desarrollo")
             if r["detector"] == detector:
                 filas[r["case_id"]].append(r)
     for v in filas.values():
@@ -27,15 +28,46 @@ def cargar(carpeta, detector):
     return filas
 
 
+def datos(dir_directo, dir_tito, raiz=None):
+    """Lista permitida desde manifiestos; nunca enumera casos ni abre el catálogo."""
+    raiz = Path(raiz) if raiz is not None else Path(__file__).resolve().parents[2]
+    manifiestos = [json.loads((Path(d) / "manifiesto.json").read_text(encoding="utf-8"))
+                   for d in (dir_directo, dir_tito)]
+    for m in manifiestos:
+        if m.get("particion") != "desarrollo" or m.get("interrumpida") is not False:
+            raise ValueError("Se requieren corridas completas de desarrollo")
+        if not m["casos"] or any(
+            cid.startswith("CV2-T") or not re.fullmatch(r"[A-Za-z0-9_-]+", cid)
+            for cid in m["casos"]
+        ):
+            raise ValueError("Manifiesto con reserva o ID inseguro; no se abre ningún caso")
+    if manifiestos[0]["casos"] != manifiestos[1]["casos"]:
+        raise ValueError("Las corridas no tienen los mismos IDs y huellas")
+    ids = manifiestos[0]["casos"]
+    d = cargar(dir_directo, "slm", ids)
+    t = cargar(dir_tito, "tito-slm", ids)
+    if set(d) != set(ids) or set(t) != set(ids):
+        raise ValueError("Faltan casos de una condición en el CSV")
+    referencias = {}
+    for cid, huella in ids.items():
+        texto = (raiz / "casos" / "texto" / f"{cid}.txt").read_text(encoding="utf-8")
+        if hashlib.sha256(texto.encode("utf-8")).hexdigest()[:16] != huella:
+            raise ValueError(f"Texto distinto al ejecutado: {cid}")
+        ref = json.loads((raiz / "casos" / "referencia" / f"{cid}.json").read_text(encoding="utf-8"))
+        if ref.get("particion", "desarrollo") != "desarrollo" or ref["case_id"] != cid:
+            raise ValueError("Referencia ajena al desarrollo identificado")
+        referencias[cid] = ref
+    return d, t, referencias
+
+
 def aviso(filas):
     return next((int(r["linea"]) for r in filas if r["aviso"] == "true"), None)
 
 
 def main(dir_directo, dir_tito):
-    d, t = cargar(dir_directo, "slm"), cargar(dir_tito, "tito-slm")
+    d, t, referencias = datos(dir_directo, dir_tito)
     casos_ = []
-    for cid in casos.ids_de_casos("desarrollo"):
-        ref = casos.cargar_referencia(cid)
+    for cid, ref in sorted(referencias.items()):
         act = next((int(r["linea"]) for r in t[cid] if r["consulta"] != "omitida"), None)
         casos_.append(dict(cid=cid, clase=ref["clase"], grupo=ref["grupo"], tr=ref["t_r_linea"],
                            ad=aviso(d[cid]), at=aviso(t[cid]), act=act))
@@ -45,6 +77,14 @@ def main(dir_directo, dir_tito):
     for cl in ("legitima", "legitima_dificil"):
         g = [c for c in L if c["clase"] == cl]
         print(f"Falsas alarmas {cl}: solo", sum(bool(c["ad"]) for c in g), "· Tito", sum(bool(c["at"]) for c in g), "de", len(g))
+    for nombre, filas in (("solo", d), ("Tito", t)):
+        todas = [r for grupo in filas.values() for r in grupo]
+        consultas = [r for r in todas if r["consulta"] != "omitida"]
+        print(nombre, "líneas", len(todas), "consultas", len(consultas),
+              "p50 SLM ms", statistics.median(float(r["slm_ms"]) for r in consultas))
+    perdidas_ambas = [c for c in V if not c["ad"] and not c["at"]]
+    print("Perdidas por ambos: con T_R", sum(c["tr"] is not None for c in perdidas_ambas),
+          "· sin T_R", sum(c["tr"] is None for c in perdidas_ambas))
     ambos = [c for c in V if c["ad"] and c["at"]]
     print("Ambos avisan:", len(ambos), collections.Counter(
         "solo antes" if c["ad"] < c["at"] else "igual" if c["ad"] == c["at"] else "Tito antes" for c in ambos))
@@ -67,7 +107,7 @@ def main(dir_directo, dir_tito):
         for r in v:
             k = (r["case_id"], r["linea"])
             if r["consulta"] == "slm_valida" and k in dl:
-                cls = "vishing" if casos.cargar_referencia(k[0])["clase"] == "vishing" else "legítima"
+                cls = "vishing" if referencias[k[0]]["clase"] == "vishing" else "legítima"
                 cambio[(cls, dl[k]["alerta_sugerida"], r["alerta_sugerida"])] += 1
     print("\nLíneas consultadas en ambas (clase, alerta solo, alerta Tito):")
     for k, n in sorted(cambio.items()):

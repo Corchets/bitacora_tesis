@@ -1,0 +1,326 @@
+{
+ "CTRL-L-BANCO-PASE-A-FRAUDES": {
+  "clase": "legitima_dificil",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "La persona llamó por un débito y el operador la pasa de área sin pedirle nada.",
+  "lineas": [
+   "A: Hola, los llamo porque tengo un débito que no reconozco en la tarjeta.",
+   "B: Sí, señora, ya lo veo marcado como reclamo abierto del martes.",
+   "A: ¿Y qué tengo que hacer? Me preocupa que se repita.",
+   "B: Eso lo resuelve el área de contracargos, que tiene otra línea.",
+   "A: ¿Tengo que llamar a otro número?",
+   "B: No hace falta. No me cortes que te transfiero yo, tarda un minuto.",
+   "A: Bueno, espero.",
+   "B: Si se llega a cortar, volvé a llamar al número de atrás de la tarjeta y decí que tenés reclamo abierto.",
+   "A: Perfecto, muchas gracias.",
+   "B: A vos. Ya te atienden."
+  ]
+ },
+ "CTRL-L-SOPORTE-SESION-ABIERTA": {
+  "clase": "legitima_dificil",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "Soporte interno al que llamó la persona pide no cerrar la sesión durante una actualización, sin pedir clave.",
+  "lineas": [
+   "A: Hola, soy de contaduría. Llamé porque el sistema de sueldos me anda lentísimo.",
+   "B: Sí, tenés ticket abierto. Estoy aplicando la actualización desde acá.",
+   "A: ¿Tengo que hacer algo yo?",
+   "B: Nada. Solo no cierres la sesión hasta que termine, porque si no arranca de cero.",
+   "A: ¿Cuánto tarda más o menos?",
+   "B: Unos diez minutos. Te va a parpadear la pantalla un par de veces.",
+   "A: Bueno. ¿Necesitás mi clave?",
+   "B: No, jamás me la pases. Yo trabajo con mi usuario de administrador.",
+   "A: Dale, te aviso si se traba.",
+   "B: Listo, cuando termine te cierro el ticket y te llega un correo."
+  ]
+ },
+ "CTRL-L-FAMILIA-SORPRESA": {
+  "clase": "legitima_dificil",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Pedido de reserva sobre una sorpresa familiar, sin plata ni datos.",
+  "lineas": [
+   "A: Hola, tía, ¿tenés un minuto?",
+   "B: Sí, nena, decime.",
+   "A: Estamos armando algo para el cumple de mamá, el sábado a la noche.",
+   "B: ¡Qué lindo! ¿Dónde lo hacen?",
+   "A: En casa de Sole. Pero no le cuentes nada a mamá, que es sorpresa.",
+   "B: Quedate tranquila, no digo una palabra.",
+   "A: Y tampoco le comentes al tío, que se le escapa todo.",
+   "B: Jaja, tenés razón. ¿Llevo algo?",
+   "A: Si querés, la torta de ricota que te sale tan rica.",
+   "B: Hecho, el sábado la llevo."
+  ]
+ },
+ "CTRL-L-TRABAJO-ANUNCIO": {
+  "clase": "legitima_dificil",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Una jefa pide reserva sobre un anuncio interno.",
+  "lineas": [
+   "A: Hola, Martín, ¿estás en la oficina?",
+   "B: Sí, recién llego. ¿Qué pasó?",
+   "A: El lunes se anuncia que Laura pasa a coordinar el área nueva.",
+   "B: Mirá vos, me alegro por ella.",
+   "A: Te lo adelanto porque vas a trabajar con ella desde el primer día.",
+   "B: Buenísimo, gracias por avisar.",
+   "A: Eso sí, no lo comentes con el equipo hasta el lunes, que todavía falta hablar con recursos humanos.",
+   "B: Sí, obvio, queda entre nosotros.",
+   "A: El martes armamos una reunión y vemos los proyectos.",
+   "B: Dale, me lo agendo."
+  ]
+ },
+ "CTRL-L-MEDICO-BUSCA-TURNO": {
+  "clase": "legitima_dificil",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "La recepcionista pide no cortar mientras busca un turno que pidió la persona.",
+  "lineas": [
+   "A: Buen día, quería un turno con la doctora Paz para mi control.",
+   "B: Buen día. ¿Para qué mes lo está buscando?",
+   "A: Si puede ser, para este mes.",
+   "B: Está complicado. No corte que me fijo si hay alguna cancelación.",
+   "A: Sí, espero.",
+   "B: Tengo el jueves 19 a las diez y cuarto.",
+   "A: Me viene bárbaro.",
+   "B: ¿A nombre de quién lo anoto?",
+   "A: Graciela Núñez.",
+   "B: Listo, Graciela. Traiga los estudios anteriores si los tiene."
+  ]
+ },
+ "CTRL-L-DELIVERY-SEGUIMIENTO": {
+  "clase": "legitima_dificil",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Un repartidor pide no cerrar la aplicación para que se actualice la entrega.",
+  "lineas": [
+   "A: Hola, soy el repartidor del pedido de la farmacia.",
+   "B: Hola, sí, lo estoy esperando.",
+   "A: Estoy en la esquina pero no encuentro el número.",
+   "B: Es la casa de rejas verdes, al lado del kiosco.",
+   "A: Ah, ya la veo. Dejá la app abierta, no la cierres, que si no el pedido no me figura como entregado.",
+   "B: Bueno, la dejo abierta.",
+   "A: Salí que te lo alcanzo.",
+   "B: Ya voy. ¿Está pago, no?",
+   "A: Sí, ya está pago, no tenés que darme nada.",
+   "B: Genial, gracias."
+  ]
+ },
+ "CTRL-L-ESCUELA-REGALO": {
+  "clase": "legitima_dificil",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Una madre del grado organiza un regalo y pide no avisarle a la maestra.",
+  "lineas": [
+   "A: Hola, Vero, soy Caro, la mamá de Benja.",
+   "B: Hola, Caro, ¿cómo andás?",
+   "A: Bien. Te llamo por lo del regalo de fin de año para la seño.",
+   "B: Ah, sí, vi algo en el grupo.",
+   "A: Pensamos en un libro y una planta. Lo vemos en la reunión del viernes.",
+   "B: Me parece bien.",
+   "A: Solo te pido que no se lo digas a la seño, ni que los chicos se enteren, porque se les escapa.",
+   "B: Quedate tranquila, en casa no lo hablo.",
+   "A: Cuando sepamos cuánto sale, cada una lo paga en la reunión.",
+   "B: Perfecto, nos vemos el viernes."
+  ]
+ },
+ "CTRL-L-BANCO-AVISO-CORREO": {
+  "clase": "legitima_dificil",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "Llamada a la que la persona consulta por un correo sospechoso; el banco aconseja no abrirlo ni responderlo.",
+  "lineas": [
+   "A: Hola, llamo porque me llegó un correo con el logo de ustedes y me hace ruido.",
+   "B: Hizo bien en consultar. ¿Qué le pide el correo?",
+   "A: Que entre a un enlace para mantener el homebanking activo.",
+   "B: Nosotros no mandamos eso. No lo abra ni lo responda, y bórrelo.",
+   "A: ¿Tengo que cambiar algo?",
+   "B: Si no tocó el enlace, no hace falta. Si quiere, entre desde la aplicación y revise sus movimientos.",
+   "A: No, no lo toqué.",
+   "B: Entonces está todo bien. Puede reenviarlo a la casilla de fraudes que figura en la web.",
+   "A: Bueno, muchas gracias.",
+   "B: A usted, que tenga buen día."
+  ]
+ },
+ "CTRL-L-AMIGA-CHISME": {
+  "clase": "legitima_dificil",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Una amiga pide no cortar y guardar un secreto personal.",
+  "lineas": [
+   "A: Che, ¿estás ocupada?",
+   "B: Estoy cocinando, pero contame.",
+   "A: No me cortes, que te tengo que contar lo de Pablo.",
+   "B: ¿Qué hizo ahora?",
+   "A: Le ofrecieron irse a trabajar a Córdoba y me lo dijo recién ayer.",
+   "B: ¿Y vos qué le dijiste?",
+   "A: Nada todavía. No se lo digas a nadie, ni a las chicas, hasta que decidamos.",
+   "B: Tranquila, de mí no sale.",
+   "A: Gracias, necesitaba contárselo a alguien.",
+   "B: Vení a casa el domingo y lo charlamos bien."
+  ]
+ },
+ "CTRL-L-TECNICO-LUZ": {
+  "clase": "legitima_dificil",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "Un electricista conocido pide no tocar nada y esperar en la casa.",
+  "lineas": [
+   "A: Hola, Hugo, te llamé porque saltó la térmica de nuevo.",
+   "B: Sí, vi tu mensaje. ¿Hay olor a quemado?",
+   "A: No, nada de eso, pero no vuelve a subir.",
+   "B: Bueno, no toques el tablero hasta que yo llegue.",
+   "A: Dale. ¿A qué hora venís?",
+   "B: A las cuatro. No te vayas de casa hasta esa hora, porque vengo desde lejos.",
+   "A: Sí, me quedo.",
+   "B: Si ves humo, cortá la general y llamá a los bomberos, no me esperes.",
+   "A: Perfecto. Después arreglamos lo del trabajo.",
+   "B: Sí, te paso el presupuesto cuando vea qué es."
+  ]
+ },
+ "CTRL-L-SEGURO-CHOQUE": {
+  "clase": "legitima_dificil",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "La aseguradora a la que llamó la persona le aconseja no arreglar con el tercero hasta la pericia.",
+  "lineas": [
+   "A: Buenas tardes, llamo para denunciar un choque de esta mañana.",
+   "B: Buenas tardes. ¿Hubo heridos?",
+   "A: No, solo el paragolpes. El otro conductor me quiere arreglar en efectivo.",
+   "B: Le recomiendo que no firme nada ni arregle con él hasta que pase el perito.",
+   "A: Me insiste bastante.",
+   "B: No hable con él sobre montos. Pásele el número de siniestro y que su seguro nos contacte.",
+   "A: ¿Cuándo viene el perito?",
+   "B: Entre mañana y el jueves, el taller le avisa.",
+   "A: Bueno, entonces espero.",
+   "B: Sí, y guarde las fotos del choque por si las piden."
+  ]
+ },
+ "CTRL-L-ABOGADA-DESPIDO": {
+  "clase": "legitima_dificil",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Una abogada contratada aconseja reserva y no firmar, sin urgencia ni amenaza.",
+  "lineas": [
+   "A: Hola, Daniel, ya leí el telegrama que me mandaste.",
+   "B: ¿Y? ¿Tengo que contestar algo?",
+   "A: Todavía no. No hables con la empresa ni firmes nada hasta que nos veamos.",
+   "B: Me llamó uno de recursos humanos para que pase el viernes.",
+   "A: Decile que tu abogada se va a comunicar. No le cuentes lo que hablamos.",
+   "B: Bueno. ¿Cuándo nos vemos?",
+   "A: El jueves a las once en el estudio. Traé los últimos recibos.",
+   "B: Dale. ¿Te tengo que pagar algo ahora?",
+   "A: No, eso lo vemos cuando termine el caso.",
+   "B: Perfecto, gracias."
+  ]
+ },
+ "CTRL-V-BANCO-QUEDATE-EN-LINEA": {
+  "clase": "vishing",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Falso banco que retiene e impide comprobar. Corta antes de cualquier pedido.",
+  "lineas": [
+   "A: Buenas tardes, le hablo de seguridad bancaria. Detectamos un movimiento irregular en su caja de ahorro.",
+   "B: ¿Cómo? Yo no hice nada hoy.",
+   "A: Por eso la llamo. El proceso de bloqueo ya empezó y tiene un tiempo limitado.",
+   "B: Voy a llamar a la sucursal a preguntar.",
+   "A: Si habla con la sucursal, el reclamo se traba y perdemos el bloqueo. Quédese en línea conmigo.",
+   "B: Pero no sé quién es usted.",
+   "A: Tampoco entre a la aplicación por ahora, porque eso reinicia la verificación.",
+   "B: ¿Y mi hijo? Él me maneja esas cosas.",
+   "A: Mejor no lo moleste con esto hasta que terminemos, es un trámite reservado.",
+   "B: Me está poniendo nerviosa, voy a cortar."
+  ]
+ },
+ "CTRL-V-NIETO-EN-APUROS": {
+  "clase": "vishing",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Falso nieto en apuros que aísla a la persona antes de pedir plata.",
+  "lineas": [
+   "A: Abuela, soy yo, tuve un problema muy grande.",
+   "B: ¿Quién habla? ¿Sos Nacho?",
+   "A: Sí, abu, estoy con la voz rara porque me golpeé. Choqué con el auto.",
+   "B: ¡Ay, por Dios! ¿Dónde estás?",
+   "A: En la comisaría, pero no le digas a papá, porque me mata.",
+   "B: Lo voy a llamar ya mismo para que vaya.",
+   "A: No, abu, no lo llames, y no me dejes solo en el teléfono ahora.",
+   "B: Pero alguien tiene que ir para allá.",
+   "A: Ya te explico cómo lo arreglamos, solo no hables con nadie de la familia.",
+   "B: No entiendo nada, esperá que busco los anteojos."
+  ]
+ },
+ "CTRL-V-JUBILACION-NO-VAYAS": {
+  "clase": "vishing",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "Falso organismo que disuade de consultar en la oficina o con la familia.",
+  "lineas": [
+   "A: ¿Hola? ¿Quién habla?",
+   "B: La llamo del área de haberes por una actualización de su jubilación.",
+   "A: ¿Qué actualización? No me llegó ninguna carta.",
+   "B: Es un aumento retroactivo que vence este viernes, y usted está en la lista.",
+   "A: Mañana voy a la oficina y pregunto.",
+   "B: Si va a la oficina, le dan de baja el trámite, porque se cuenta como reclamo nuevo.",
+   "A: Le pregunto entonces a mi hija, que entiende de estas cosas.",
+   "B: Esto mejor no lo charle con su hija, porque es personal y se puede complicar el cobro.",
+   "A: Qué raro lo que me dice.",
+   "B: Quédese tranquila y siga conmigo, que enseguida lo terminamos."
+  ]
+ },
+ "CTRL-V-CAUSA-JUDICIAL": {
+  "clase": "vishing",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Falso funcionario que invoca una causa secreta para aislar.",
+  "lineas": [
+   "A: Le hablo de la fiscalía. Su número aparece vinculado con una causa por lavado de dinero.",
+   "B: ¿Mi número? Debe ser un error.",
+   "A: Puede ser, y para eso lo llamamos, para sacarlo de la investigación hoy mismo.",
+   "B: Déjeme llamar a mi abogado.",
+   "A: La causa está bajo secreto de sumario. No puede hablarlo con nadie, ni con un abogado.",
+   "B: Pero estoy muy asustado.",
+   "A: Lo entiendo. Siga en línea, porque si corta queda registrado como que se negó a colaborar.",
+   "B: ¿Y qué pasa si me niego?",
+   "A: Puede salir una orden de detención esta misma tarde.",
+   "B: No sé qué hacer, déjeme pensar."
+  ]
+ },
+ "CTRL-V-TECNICO-COMPU": {
+  "clase": "vishing",
+  "protegida": "A",
+  "revision_humana": false,
+  "que_prueba": "Falso soporte que impide apagar el equipo o consultar a otro técnico.",
+  "lineas": [
+   "A: Hola, ¿quién es?",
+   "B: Le hablo del centro de seguridad de su proveedor de internet. Su computadora está mandando virus a la red.",
+   "A: Pero si anda normal.",
+   "B: Eso es lo peligroso, el daño no se ve. Si no lo frenamos hoy, le cortan el servicio.",
+   "A: La voy a apagar y le pregunto a mi técnico de siempre.",
+   "B: No la apague, porque se borra el rastro y queda usted como responsable.",
+   "A: Bueno, igual lo llamo a él.",
+   "B: Si llama a otro técnico, se anula la garantía de esta intervención. Sigamos nosotros.",
+   "A: No me termina de cerrar esto.",
+   "B: Es normal que desconfíe, por eso no me corte y lo vemos juntos."
+  ]
+ },
+ "CTRL-V-SORTEO-RESERVA": {
+  "clase": "vishing",
+  "protegida": "B",
+  "revision_humana": false,
+  "que_prueba": "Falso sorteo que pide reserva con amenaza de perder el premio.",
+  "lineas": [
+   "A: ¡Felicitaciones! Salió ganadora del sorteo de aniversario del supermercado.",
+   "B: ¿En serio? Yo no recuerdo haber participado.",
+   "A: Entró automáticamente por sus compras. Es una heladera y un bono.",
+   "B: Voy a pasar por el súper y pregunto.",
+   "A: En la sucursal no saben nada todavía, y si va se cae su premio.",
+   "B: ¿Cómo se va a caer?",
+   "A: Hasta el cierre de hoy no se lo puede contar a nadie, ni publicarlo, o pasa al siguiente de la lista.",
+   "B: Le quiero avisar a mi marido, por lo menos.",
+   "A: Después, cuando esté confirmado. Ahora no corte, que estoy cargando su número de ganadora.",
+   "B: Espere, me suena raro."
+  ]
+ }
+}

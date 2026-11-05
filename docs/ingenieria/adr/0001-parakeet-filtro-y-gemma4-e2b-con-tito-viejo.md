@@ -5,6 +5,8 @@
 - **Participantes de la discusión:** equipo; la registra Luciano Grosso. El tutor dejó la arquitectura en manos del equipo ([minuta del 2026-10-28](../../gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)).
 - **Ámbito:** arquitectura
 
+> **Nota del 2026-11-05:** a pedido de Luciano, la demo con ASR arranca con el prompt `v4`, roles y Tito sin indicio ([resultados](../../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso)). Este ADR todavía no se reabrió: sigue registrando `tarea` con indicio.
+
 ## Contexto
 
 [D09](../../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) pedía elegir ASR y detector por calidad, falsas alarmas, tiempos y memoria. El cierre del tutor es el 2026-11-30, y la meta que fijó es avisar en 80–85 % de las estafas con 10–15 % de falsas alarmas, sin saltar por frases sueltas como «decime la contraseña». El hardware de referencia es la gama más alta de teléfonos disponible.

@@ -82,3 +82,87 @@ R27: la configuración final se eligió con 20 conversaciones sintéticas sin re
 R28: el test reservado corre sin referencia humana: ninguno de los 350 casos tiene `revision_humana` en verdadero y D07 sigue abierta. Sin esa referencia, los números finales descansan en marcas de redacción asistida. Mitigación: las llamadas con referencia humana que el equipo va a hacer y una muestra común de anotación (#54, #32).
 
 R24: Mateo no tiene copia del audio original (Luciano, 2026-11-03). Las regrabaciones siguen solo en esta Mac.
+
+
+## Actualización técnica — 2026-11-04
+
+R04/R28: Luciano plantea revisar primero la calidad y ambigüedad de los casos. El
+[panel de lectura](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+muestra la ficha y sus dudas junto al diálogo, separando intención de redacción,
+referencia y respuesta del detector. TR-11 ya documenta que la identidad del familiar
+no se verifica por texto. Es motivo para adjudicar casos en D07, no evidencia de que
+todos los errores provengan del corpus. Sin revisión humana nueva, cambios de clase
+ni reducción de probabilidad o impacto.
+
+R05/R07/R27: el [panel de lectura actualizado](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+permite revisar pérdidas y falsas alarmas de las 15 condiciones completas disponibles.
+Su [actualizador](../../experiments/slm-directo/analisis/tablero/ultimas_corridas.py) toma
+IDs y huellas de manifiestos de desarrollo, sin enumerar el corpus ni abrir la reserva;
+rechaza CSV ajenos y textos cambiados. Pruebas con fixtures sintéticos verifican
+esas guardas, los cortes y los errores técnicos. Los fallos y prefijos incompletos no
+se cuentan como negativos. Esta vista no mide una mejora, no cambia el ADR ni reduce
+probabilidad o impacto; las referencias siguen sin revisión humana.
+
+R07: en [la prueba con Tito sin indicio](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md), v4 con roles da 13/75 falsas alarmas y 55/75 estafas, y v1 control 14/75 y 53/75. El orden de los campos explica gran parte del salto de v3. La clase mayor que queda es el dato de identificación en llamadas que inició la persona (7 de 13). No cumple la meta y no se adopta.
+
+R05: el comparador de E2B directo contra Tito llamaba `ids_de_casos("desarrollo")`,
+que enumera textos y abre referencias de ambas particiones antes de filtrarlas.
+Se detectó al leer el código y no se ejecutó esa versión. Mitigación acotada:
+el [comparador](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparar_directo_vs_tito.py)
+ahora toma solo IDs de los manifiestos de desarrollo y rechaza IDs de reserva,
+CSV ajenos y cambios de huella antes de analizar casos; seis pruebas con fixtures
+sintéticos. No abre el catálogo. Esto no certifica al ejecutor general ni a toda la
+suite: no se ejecutaron en esta copia con reserva. El incidente previo mencionado
+en el handoff sigue pendiente de decisión de Luciano; no se adjudica aquí.
+
+R07/R27: la [comparación y revisión por caso](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md)
+confirma en desarrollo 51/75 estafas con 13/75 falsas alarmas con Tito, frente a
+55/75 y 18/75 del directo. Las pérdidas y falsas alarmas muestran distinciones de
+contexto inconsistentes: datos administrativos, credenciales escritas, consejos,
+relatos y ofrecimientos. Ambas corridas cortan al primer aviso y no separan
+compuerta, indicio y variación. Mitigación propuesta, no ejecutada: adjudicación
+D07, comparación controlada y desarrollo nuevo con separación previa para elegir
+y comprobar mejoras. Ninguna baja de probabilidad o impacto ni cambio al ADR 0001.
+
+R07/R27, ampliación del 2026-11-04: el saldo neto oculta regresiones: 17 casos
+cambian de resultado, 17 de momento y 34 solo de motivo/cita. Cambiar prompt y Tito
+juntos impediría atribuir el efecto y podría compensar pérdidas con recuperaciones.
+Mitigación propuesta por la [matriz de seis condiciones](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md#matriz-para-separar-prompt-y-tito):
+contrastes con un factor fijo, casos ganados/perdidos, repeticiones completas y
+guardado por conversación fuera de la VM de Colab. Todavía no se implementó ni
+se ejecutó esa matriz; no baja el riesgo ni cambia el ADR.
+
+R05/R07/R27, prueba del prompt v3 del 2026-11-04: [resultados en Colab](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md).
+El riesgo observado fue el contrario del previsto: más falsas alarmas (30/75 a 47/75, contra 13/75 y 18/75 con
+v1) y avisos con pedidos inventados. Se diseñó mirando los 150 de desarrollo, sin control en la misma máquina.
+No baja el riesgo ni cambia el ADR.
+
+R05/R07/R27, preparación de prompt del 2026-11-04: [P1 de atribución del pedido](../../experiments/slm-directo/prompts/V3-ATRIBUCION.md)
+conserva P0 y el contrato, y explicita el riesgo de descartar ofrecimientos
+inducidos o solicitudes presentadas como trámites. El contraste de lectura de IA
+usa 17 IDs explícitos del manifiesto de desarrollo, con hashes comprobados y sin
+acceso a reserva; no acredita una mejora ni referencia humana. La lectura de
+`correr.py` confirma dos accesos pendientes de corregir antes de usarlo en esta
+copia: validación global antes de seleccionar IDs y lectura de referencias antes
+de filtrar partición. No se ejecutó el runner ni la suite completa. Candidato
+separado, sin inferencia, sin modificar demo, Tito, indicio o política; probabilidad
+e impacto sin cambios y ADR 0001 vigente.
+
+R04/R07, análisis de fallas del 2026-11-05: [casos que fallan en v4 y v1](../../experiments/slm-directo/casos/FALLAS-Y-CORPUS-2026-11-05.md).
+R04 se observa en el corpus de desarrollo: los casos `LAB`, `SC` y `TR` avisan 28 de 29 estafas y el corpus v2, 27 de 46, así que
+el porcentaje general depende de la mezcla. Faltan legítimas con maniobras de aislamiento genuinas, estafas donde la víctima
+llama y el campo de quién inició la llamada; sin eso, las reglas que bajan R07 no se pueden validar. Las 11 estafas sin pedido
+chocan con la definición de alerta: es una consulta para D07 y D08. Lectura propia sin revisión humana: probabilidad e impacto
+sin cambios.
+
+R04/R07, tanda de roles del 2026-11-05: [análisis](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó).
+**Riesgo observado para la evaluación final:** el 73 % de desarrollo se apoya en los casos viejos (28/29); el corpus v2, que es toda la reserva, da 27/46. Con esas
+tasas, la reserva daría cerca de 60/100 estafas y 14/100 falsas alarmas, y un detector que avisa solo por pedidos no puede pasar de 80/100. Es una cuenta sobre la
+composición declarada: la reserva no se corrió ni se leyó. **Corrección:** anotar quién inició la llamada no alcanza para validar reglas en el detector, porque
+[D03](MAPA-DECISIONES.md#d03--congelar-alcance-y-contribución) deja la dirección fuera de sus entradas. Probabilidad e impacto sin cambios hasta medir el prompt v5.
+
+R07/R05, prompt v5 del 2026-11-05: [resultados](../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md). La regla de maniobras no avisa las estafas sin pedido del corpus y suma falsas alarmas por consejos, así que R07 no mejora. Elegir
+prompt y política sobre desarrollo no estima el rendimiento: eso sale de la reserva.
+
+R05, corrección de la reserva pedida por Luciano el 2026-11-05 (rama `reserva-sin-cortes`, en curso): se completan sus llamadas cortadas después de ver resultados de desarrollo. Sube el máximo alcanzable
+y puede dejar los casos sin ceguera para quien los lea. **Mitigación:** otra sesión que no lee prompts ni resultados, registro `r03` con huellas y motivos, y declararlo en el informe. Los casos cortados de desarrollo siguen igual.

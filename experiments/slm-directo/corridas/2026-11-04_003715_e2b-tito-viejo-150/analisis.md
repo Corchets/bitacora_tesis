@@ -56,7 +56,7 @@ Mecánica: Tito puntúa cada línea hasta superar 0,5. Desde ahí el SLM queda a
   - `CV2-D-V-PREMIO-001`: Tito nunca activó (máximo 0,23 en L6; el pedido de L10, «El DNI completo y una foto del frente…», puntuó 0,024). Es la **única estafa perdida por la compuerta**.
   - `CV2-D-V-ORGANISMO_PREVISIONAL-003`: Tito activó en L13, dos líneas después del pedido (L11, puntaje 0,128), y E2B tampoco avisó después.
   - Las otras 22 estafas perdidas **sí pasaron la compuerta**: el que no avisó fue el SLM.
-- Como filtro de costo, la compuerta ahorra poco en este corpus: activa en el 44 % de las conversaciones legítimas y en el 88 % de las legítimas difíciles, en general temprano.
+- Como filtro de costo, activa en 33/51 (64,7 %) de las conversaciones legítimas y en 21/24 (87,5 %) de las legítimas difíciles, en general temprano. Las omisiones y el corte al primer aviso deben separarse al comparar consultas entre condiciones.
 
 ## Latencia
 
@@ -80,7 +80,7 @@ Como referencia, el ADR registra una mediana de 3,74 s por consulta de E2B en la
 | piloto_escrito (14) | 7/7 (100 %) | 1/7 (14,3 %) | 6/7 (85,7 %) | 7/7 (100 %) |
 | trampa (13) | 4/6 (66,7 %) | 4/7 (57,1 %) | 4/6 (66,7 %) | 6/7 (85,7 %) |
 
-Lo más importante de la corrida: **en los grupos viejos (laboratorio y piloto), E2B detecta 23/23 estafas, pero en `corpus_v2` cae a 24/46.** Las 20 conversaciones con las que se eligió la configuración (#101, 10/10 estafas y 1/10 falsas alarmas) se parecen a los grupos viejos. `corpus_v2` es más largo (20–38 líneas), con pedidos indirectos o condicionales y 10 estafas sin pedido. Es la señal de que la evidencia del ADR era optimista, como el propio ADR advierte.
+Lo más importante de la corrida: **en los grupos viejos (laboratorio y piloto), E2B detecta 23/23 estafas, pero en `corpus_v2` cae a 24/46.** Las 20 conversaciones con las que se eligió la configuración (#101, 10/10 estafas y **0/10 falsas alarmas** con Tito viejo → E2B) son también de `corpus_v2`: no representan los grupos viejos ni todo el corpus ampliado. `corpus_v2` tiene pedidos directos, indirectos y condicionales y diez estafas sin pedido; la undécima sin pedido del total es `TR-12`. La diferencia observada exige revisar la cobertura de aquella muestra antes de generalizarla.
 
 ## Desglose por escenario (familias de `corpus_v2`)
 
@@ -121,7 +121,7 @@ Ninguna de las 24 tuvo `alerta_sugerida` en alguna consulta, así que el modelo 
 | `CV2-D-V-WHATSAPP-004` | L13 | «No, pasámelo por acá y lo pongo en la planilla de altas.» | activó L5 | 0,5 |
 | `TR-01-pedido-indirecto-digitos` | L8 | «Abrilo y leeme lo que dice, de a uno, despacito…» | activó L3 | 0,5 |
 
-Patrón: son pedidos **indirectos o condicionales** («si alguien pudiera…», «leeme lo que dice», «pasámelo por acá»), pedidos de datos de identidad o pagos presentados como trámite. El riesgo de E2B se queda en 0,1–0,5 sin sugerir alerta. Todos los avisos de la corrida tuvieron riesgo ≥ 0,5 salvo dos (0,3 y 0,4), y en las consultas sin alerta hubo 146 respuestas con riesgo 0,5.
+Las trece pérdidas con pedido mezclan pedidos explícitos, indirectos y condicionales, datos de identidad y pagos presentados como trámite. Cuatro referencias dicen `directo`; BANCO-003 contiene un imperativo explícito de entregar efectivo. No se las puede explicar a todas como pedidos indirectos. El riesgo de E2B se queda en 0,1–0,5 sin sugerir alerta cuando se consulta. Todos los avisos de la corrida tuvieron riesgo ≥ 0,5 salvo dos (0,3 y 0,4), y en las consultas sin alerta hubo 146 respuestas con riesgo 0,5. El [cruce con E2B directo y la revisión por caso](../2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md) separan observaciones de hipótesis.
 
 **Sin pedido (11):** `CV2-D-V-BANCO-011`, `-BANCO-012`, `-ORGANISMO_PREVISIONAL-005`, `-ORGANISMO_PREVISIONAL-006`, `-PREMIO-005`, `-PREMIO-006`, `-SOPORTE-007`, `-SOPORTE-008`, `-WHATSAPP-007`, `-WHATSAPP-008` y `TR-12-corta-antes-del-pedido`. Tienen presión, aislamiento o suplantación, pero la llamada termina antes de cualquier pedido crítico. E2B dio riesgo máximo de 0,3 a 0,6 y no avisó. Que esto cuente como pérdida depende de la política de alerta de D08.
 
@@ -155,7 +155,7 @@ Hay una tensión directa con las pérdidas: E2B avisa por «últimos cuatro díg
 
 | Fuente | Estafas | Falsas alarmas |
 |---|---|---|
-| #101, 20 conversaciones (ADR 0001) | 10/10 | 1/10 |
+| #101, 20 conversaciones (ADR 0001), Tito viejo → E2B | 10/10 | 0/10 |
 | Esta corrida, 150 conversaciones | 51/75 (68,0 %); 51/64 con pedido (79,7 %) | 13/75 (17,3 %) |
 | Meta del tutor | 80–85 % | 10–15 % |
 
@@ -163,7 +163,7 @@ La configuración elegida **no alcanza la meta en el conjunto de desarrollo ampl
 
 ## Qué no dice este análisis
 
-- No es el test reservado y no congela política (D08) ni detector (D09).
+- No es el test reservado y no congela política (D08). D09 ya está resuelta por el equipo; este diagnóstico no modifica esa elección ni el ADR 0001.
 - No hay revisión humana de casos ni de `T_R`/`T_C`. Una pérdida puede deberse a una referencia discutible: por ejemplo, en `FAMILIAR-004/005/006` los «pedidos» son condicionales.
 - No mide la condición SLM directo: se salteó a propósito, por costo, con el wrapper descripto arriba.
 - Las latencias son de una PC de escritorio con GPU probable, no del teléfono ni de la M1.

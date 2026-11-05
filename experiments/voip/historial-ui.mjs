@@ -1,6 +1,6 @@
 // @ts-check
 
-import {crearLinea} from './conversacion.mjs';
+import {crearLinea, limpiarCita, formatearMotivo} from './conversacion.mjs';
 
 /**
  * @typedef {{id: string, fecha: string|null, tipo: 'llamada'|'prueba', incompleta: boolean, fuente: string,
@@ -76,8 +76,6 @@ function fecha(iso) {
     ? d.toLocaleString('es-AR', {day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false})
     : 'Fecha desconocida';
 }
-/** @param {string} texto */
-const sinPuntuacionInicial = texto => texto.replace(/^[.\s,;:]+/, '').trim();
 
 /**
  * Pestaña Historial: lista llamadas y pruebas guardadas, muestra una conversación o compara dos.
@@ -298,7 +296,7 @@ export function montarHistorial(acciones) {
   function marcarAviso(linea, aviso) {
     linea.classList.add('disparo-aviso');
     const texto = /** @type {HTMLElement} */ (linea.querySelector('.texto'));
-    const cita = sinPuntuacionInicial(aviso.evidencia || '');
+    const cita = limpiarCita(aviso.evidencia || '');
     const original = texto.textContent || '';
     const idx = cita ? original.toLowerCase().indexOf(cita.toLowerCase()) : -1;
     const marca = document.createElement('mark');
@@ -314,7 +312,7 @@ export function montarHistorial(acciones) {
     ev.className = 'eval-adjunta aviso-alerta';
     ev.innerHTML = `<div class="eval-pills"><span class="eval-pill eval-riesgo"></span><span class="eval-pill eval-alerta si">Alerta: Sí</span></div><span class="eval-motivo-txt"></span><span class="eval-aviso-banner"></span>`;
     /** @type {HTMLElement} */ (ev.querySelector('.eval-riesgo')).textContent = `Riesgo ${riesgo(aviso.riesgo)}`;
-    /** @type {HTMLElement} */ (ev.querySelector('.eval-motivo-txt')).textContent = aviso.motivo;
+    /** @type {HTMLElement} */ (ev.querySelector('.eval-motivo-txt')).textContent = formatearMotivo(aviso.motivo);
     /** @type {HTMLElement} */ (ev.querySelector('.eval-aviso-banner')).textContent = `Aviso emitido a los ${num(aviso.t_a, ' s')}`;
     linea.append(ev);
   }

@@ -208,7 +208,7 @@ def cargar_caso_texto(ruta: Path) -> list[Actualizacion]:
 
 def formatear_texto_resumido(lineas: tuple[Any, ...], hablantes_modo: str) -> str:
     """Genera la representación en una sola línea del texto acumulado disponible."""
-    if hablantes_modo == "ab":
+    if hablantes_modo in ("ab", "rol"):
         partes = [f"{l.hablante}: {l.texto}" if l.hablante else l.texto for l in lineas]
     else:
         partes = [l.texto for l in lineas]
@@ -225,8 +225,14 @@ class FlujoTitoEnVivo(filtro_tito.FlujoTitoSLM):
 
     solo_cerradas = True
 
-    def __init__(self, tito: Any, slm: Any, umbral: float = filtro_tito.UMBRAL_TITO) -> None:
-        super().__init__(tito, slm, umbral)
+    def __init__(
+        self,
+        tito: Any,
+        slm: Any,
+        umbral: float = filtro_tito.UMBRAL_TITO,
+        indicio: bool = True,
+    ) -> None:
+        super().__init__(tito, slm, umbral, indicio=indicio)
         self.puntuadas = 0
 
     def reiniciar(self) -> None:
@@ -288,6 +294,7 @@ def construir_detector(
     seed: int = 42,
     num_ctx: int = 4096,
     ollama_url: str = cliente_ollama.URL_POR_DEFECTO,
+    indicio: bool = True,
 ) -> Any:
     """Instancia el detector correspondiente de slm-directo."""
     if nombre == "reglas":
@@ -302,10 +309,10 @@ def construir_detector(
         if informe["error"]:
             raise RuntimeError(f"No se pudo preparar Tito: {informe['error']}")
         artefacto = tito_real.ARTEFACTO_POR_DEFECTO
-        detector = FlujoTitoEnVivo(tito, slm)
+        detector = FlujoTitoEnVivo(tito, slm, indicio=indicio)
         detector.carga = {**getattr(slm, "carga", {}), "tito": {
             "artefacto": artefacto.name, "sha256": hashlib.sha256(artefacto.read_bytes()).hexdigest(),
-            "umbral": detector.umbral, **informe}}
+            "umbral": detector.umbral, "indicio": detector.indicio, **informe}}
         return detector
     else:
         raise ValueError(f"Detector desconocido {nombre!r}; opciones: 'reglas', 'slm', 'tito-slm'")
@@ -325,17 +332,26 @@ def correr_replay(
     la previa (inicio_eval = max(disponible_s, fin_eval_{prev})).
     Devuelve (filas_eventos, lista_contextos_llamadas).
     """
-    if not actualizaciones:
+    if hablantes == "rol":
+        if not actualizaciones:
+            raise ValueError(
+                "hablantes='rol' requiere actualizaciones con canal 'protegida' u 'otra'"
+            )
+        if any(a.canal not in ("protegida", "otra") for a in actualizaciones):
+            raise ValueError(
+                "hablantes='rol' requiere que todas las actualizaciones tengan canal 'protegida' u 'otra'"
+            )
+    elif not actualizaciones:
         return [], []
-
-    # Verificar si hay canales disponibles
-    tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
-    if not tiene_canales and hablantes == "ab":
-        print(
-            "[replay] Aviso: las actualizaciones no contienen canal (canal=null); usando hablantes='sin'.",
-            file=sys.stderr,
-        )
-        hablantes = "sin"
+    else:
+        # Verificar si hay canales disponibles
+        tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
+        if not tiene_canales and hablantes == "ab":
+            print(
+                "[replay] Aviso: las actualizaciones no contienen canal (canal=null); usando hablantes='sin'.",
+                file=sys.stderr,
+            )
+            hablantes = "sin"
 
     # Si el detector es SLM y cambió hablantes, actualizar su propiedad
     slm = getattr(detector, "slm", detector)
@@ -436,6 +452,7 @@ def guardar_manifiesto(
     seed: int | str,
     asr_meta: dict | None = None,
     carga: dict | None = None,
+    indicio: bool | None = None,
 ) -> None:
     manifiesto = {
         "fecha_hora": datetime.now().isoformat(timespec="seconds"),
@@ -458,6 +475,8 @@ def guardar_manifiesto(
         "codigo": info_codigo(),
         "hardware": info_maquina(),
     }
+    if detector_nombre == "tito-slm" and indicio is not None:
+        manifiesto["config"]["indicio"] = indicio
     if detector_nombre in DETECTORES_CON_MODELO:
         manifiesto["carga"] = carga
     if asr_meta:
@@ -544,7 +563,7 @@ def guardar_resumen(
             lineas_md.append("- **Información disponible al momento del aviso:**")
             if ctx.aviso_lineas:
                 for idx_l, l in enumerate(ctx.aviso_lineas, start=1):
-                    prefix = f"{l.hablante}: " if l.hablante and hablantes == "ab" else ""
+                    prefix = f"{l.hablante}: " if l.hablante and hablantes in ("ab", "rol") else ""
                     lineas_md.append(f"  {idx_l}. {prefix}{l.texto}")
             else:
                 lineas_md.append("  (sin líneas acumuladas)")
@@ -632,9 +651,14 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--hablantes",
-        choices=["ab", "sin"],
+        choices=["ab", "rol", "sin"],
         default="ab",
-        help="Modo de hablantes: 'ab' (con canales A/B) o 'sin' (sin etiquetas de hablante).",
+        help="Modo de hablantes: 'ab' (con canales A/B), 'rol' (PROTEGIDA/OTRA) o 'sin' (sin etiquetas de hablante).",
+    )
+    parser.add_argument(
+        "--sin-indicio",
+        action="store_true",
+        help="Con tito-slm: Tito solo decide cuándo consultar; el SLM recibe el mensaje base sin bloque de indicio.",
     )
     parser.add_argument(
         "--disparo",
@@ -684,16 +708,30 @@ def main() -> None:
     else:
         modo = "texto"
         ruta_entrada = args.texto
+        if args.hablantes == "rol":
+            raise ValueError(
+                "Modo hablantes='rol' no es compatible con casos de texto (--texto): tienen A/B, no rol de canal."
+            )
         actualizaciones = cargar_caso_texto(ruta_entrada)
 
     hablantes = args.hablantes
-    tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
-    if not tiene_canales and hablantes == "ab":
-        print(
-            "[replay] Aviso: las actualizaciones no contienen canales de hablante (canal=null); usando hablantes='sin'.",
-            file=sys.stderr,
-        )
-        hablantes = "sin"
+    if hablantes == "rol":
+        if not actualizaciones:
+            raise ValueError(
+                "hablantes='rol' requiere actualizaciones con canal 'protegida' u 'otra'"
+            )
+        if any(a.canal not in ("protegida", "otra") for a in actualizaciones):
+            raise ValueError(
+                "hablantes='rol' requiere que todas las actualizaciones tengan canal 'protegida' u 'otra'"
+            )
+    else:
+        tiene_canales = any(a.canal in ("A", "B", "protegida", "otra") for a in actualizaciones)
+        if not tiene_canales and hablantes == "ab":
+            print(
+                "[replay] Aviso: las actualizaciones no contienen canales de hablante (canal=null); usando hablantes='sin'.",
+                file=sys.stderr,
+            )
+            hablantes = "sin"
 
     detector = construir_detector(
         nombre=args.detector,
@@ -703,6 +741,7 @@ def main() -> None:
         seed=args.seed,
         num_ctx=args.num_ctx,
         ollama_url=args.ollama_url,
+        indicio=not args.sin_indicio,
     )
 
     filas_eventos, contextos = correr_replay(
@@ -725,6 +764,7 @@ def main() -> None:
         seed=args.seed,
         asr_meta=asr_meta,
         carga=getattr(detector, "carga", None),
+        indicio=getattr(detector, "indicio", None),
     )
 
     guardar_resumen(

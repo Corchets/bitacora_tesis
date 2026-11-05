@@ -23,6 +23,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent
 DIR_TEXTO = RAIZ / "casos" / "texto"
 DIR_REFERENCIA = RAIZ / "casos" / "referencia"
+ROLES = RAIZ / "casos" / "roles-protegida.json"
 CATALOGO = RAIZ.parents[1] / "docs" / "corpus" / "CATALOGO-ESCENARIOS.csv"
 MANIFIESTO = RAIZ / "casos" / "MANIFIESTO-CORPUS-V2.json"
 # Solo existe en la copia pública (laboratorio-main): la reserva y sus filas del catálogo
@@ -99,6 +100,15 @@ def cargar_texto(case_id: str) -> list[Linea]:
             raise ValueError(f"{case_id}.txt línea {n}: no empieza con 'A: ' o 'B: ' ({renglon!r})")
         lineas.append(Linea(m.group(1), m.group(2)))
     return lineas
+
+
+def con_roles(case_id: str, lineas: list[Linea]) -> list[Linea]:
+    """Cambia A/B por PROTEGIDA/OTRA según `roles-protegida.json`, para `--hablantes rol`.
+
+    Simula en los casos de texto lo que en la llamada da el canal de cada persona.
+    """
+    protegida = json.loads(ROLES.read_text(encoding="utf-8"))[case_id]["protegida"]
+    return [Linea("PROTEGIDA" if l.hablante == protegida else "OTRA", l.texto) for l in lineas]
 
 
 def cargar_referencia(case_id: str) -> dict:

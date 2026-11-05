@@ -1,12 +1,19 @@
 """Control por /panel y ejemplo sin modelos ni espera real."""
 import asyncio
 import json
+import sys
 import tempfile
 import threading
 import unittest
 from argparse import Namespace
 from pathlib import Path
 from unittest.mock import patch
+
+DIR_TESTS = Path(__file__).resolve().parent
+DIR_VOIP = DIR_TESTS.parent
+for _p in (DIR_TESTS, DIR_VOIP):
+    if str(_p) not in sys.path:
+        sys.path.insert(0, str(_p))
 
 import numpy as np
 import soundfile as sf
@@ -15,7 +22,7 @@ from websockets.asyncio.server import serve
 
 from test_llamada import Reloj, RespuestaFalsa, pcm
 from motores import MotorFalso
-from servidor import ASR_POR_DEFECTO, DIR_VOIP, Servidor, umbral_de_llamada
+from servidor import ASR_POR_DEFECTO, DIR_VOIP, Servidor, parse_args, principal, umbral_de_llamada
 import replay as replay_mod
 from casos import Linea
 
@@ -1166,3 +1173,86 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.assertEqual([m["aviso"] for m in det_eventos], [False, True])
         manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text())
         self.assertEqual(manifiesto["detector"]["aviso"]["t_a"], ev2["t_a"])
+
+    def test_parse_args_hablantes_y_sin_indicio(self):
+        with patch("sys.argv", ["servidor.py"]):
+            args = parse_args()
+            self.assertEqual((args.prompt, args.hablantes, args.sin_indicio), ("v4", "rol", True))
+        with patch("sys.argv", ["servidor.py", "--con-indicio"]):
+            self.assertFalse(parse_args().sin_indicio)
+        with patch("sys.argv", ["servidor.py", "--sin-indicio"]):
+            self.assertTrue(parse_args().sin_indicio)
+        with patch("sys.argv", ["servidor.py", "--prompt", "tarea", "--hablantes", "ab", "--con-indicio"]):
+            args = parse_args()
+            self.assertEqual((args.prompt, args.hablantes, args.sin_indicio), ("tarea", "ab", False))
+
+    def test_parse_args_rechaza_prompt_con_roles_sin_roles(self):
+        with patch("sys.argv", ["servidor.py", "--hablantes", "ab"]), patch("sys.stderr"):
+            with self.assertRaises(SystemExit):
+                parse_args()
+
+    def test_el_slm_por_defecto_recibe_v4_y_los_roles(self):
+        with patch("sys.argv", ["servidor.py"]):
+            args = parse_args()
+        with patch.object(replay_mod.correr, "calentar", return_value={"pensar": False}):
+            slm = replay_mod.construir_slm(modelo=args.modelo, prompt_nombre=args.prompt, hablantes=args.hablantes, seed=args.seed, ollama_url=args.ollama_url)
+        self.assertIn("PROTEGIDA (la persona que cuidás)", slm.prompt)
+        self.assertEqual(slm.hablantes, "rol")
+
+    async def test_configurar_detector_pasa_hablantes_e_indicio(self):
+        self.args_de_modelo()
+        self.servidor.args.hablantes = "rol"
+        self.servidor.args.sin_indicio = True
+        cargado = DetectorFalso()
+        with patch("servidor.replay.construir_detector", return_value=cargado) as construir:
+            await self.servidor.configurar_detector("gemma4:e2b-it-q4_K_M")
+        self.assertEqual(construir.call_count, 1)
+        self.assertEqual(construir.call_args.kwargs["hablantes"], "rol")
+        self.assertIs(construir.call_args.kwargs["indicio"], False)
+
+    async def test_principal_pasa_hablantes_e_indicio_a_construir_detector(self):
+        class PararPrueba(Exception):
+            pass
+
+        with patch("servidor.parse_args") as mock_parse, \
+                patch("servidor.replay.construir_detector") as mock_construir, \
+                patch("servidor.Servidor", side_effect=PararPrueba):
+            mock_parse.return_value = Namespace(
+                detector="tito-slm",
+                modelo="gemma4:e2b-it-q4_K_M",
+                prompt="tarea",
+                hablantes="rol",
+                seed=42,
+                ollama_url="http://127.0.0.1:11434",
+                sin_indicio=True,
+                salida=self.tmp.name,
+            )
+            with self.assertRaises(PararPrueba):
+                await principal()
+            mock_construir.assert_called_once_with(
+                "tito-slm",
+                modelo="gemma4:e2b-it-q4_K_M",
+                prompt_nombre="tarea",
+                hablantes="rol",
+                seed=42,
+                ollama_url="http://127.0.0.1:11434",
+                indicio=False,
+            )
+
+    async def test_preparar_pasa_hablantes_a_la_llamada(self):
+        args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2,
+                         corte_silencio="auto", asr="zipformer", hablantes="rol")
+        servidor = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
+        servidor.preparar()
+        llamada = await servidor.preparada
+        self.assertEqual(llamada.hablantes, "rol")
+
+    async def test_manifiesto_guarda_modo_hablantes(self):
+        async with connect(self.url + "/panel") as panel:
+            for modo in ("ab", "rol"):
+                self.servidor.args.hablantes = modo
+                await panel.send(self.inicio())
+                await self.evento(panel, "inicio")
+                carpeta = await self.terminar(panel)
+                m = self.manifiesto(carpeta)
+                self.assertEqual(m["config"]["hablantes"], modo)

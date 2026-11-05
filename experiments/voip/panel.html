@@ -1671,7 +1671,7 @@ import {montarPruebaASR} from './probar-asr.mjs';
 import {prepararAudio, verificarCaptura, mensajeErrorMicrofono} from './audio-navegador.mjs';
 import {prepararFuentes} from './fuentes.mjs';
 import {crearSelectorCorte} from './corte-silencio.mjs';
-import {plantillaLinea, citaConRoles, montarPresentacion, textoActivacionTito} from './conversacion.mjs';
+import {plantillaLinea, citaConRoles, montarPresentacion, textoActivacionTito, limpiarCita, formatearMotivo} from './conversacion.mjs';
 import {montarHistorial} from './historial-ui.mjs';
 
 /** @typedef {{segmento: number, n: number, canal: string, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
@@ -2245,10 +2245,6 @@ function escapar(texto) {
   return d.innerHTML;
 }
 
-/** @param {string} texto */
-function limpiarCita(texto) {
-  return texto.replace(/^[.\s,;:]+/, "").trim();
-}
 
 /**
  * Resalta la frase citada dentro de la burbuja culpable de la conversación.
@@ -2415,7 +2411,7 @@ function detector(m) {
   barraRiesgo.style.transform = `scaleX(${r})`;
   barraRiesgo.style.background = r >= 0.5 ? "var(--alerta)" : "var(--ok)";
   $("riesgo-pct").textContent = `${pct}%`;
-  $("motivo").textContent = m.motivo || (m.alerta_sugerida ? "alerta" : "sin señales");
+  $("motivo").textContent = formatearMotivo(m.motivo) || (m.alerta_sugerida ? "alerta" : "sin señales");
 
   if (m.aviso) {
     tiempoAviso = m.t_a;
@@ -2423,8 +2419,9 @@ function detector(m) {
     if (!avisoCerrado) {
       $("aviso").classList.add("visible");
     }
-    $("aviso-motivo").textContent = m.motivo;
-    const citaLimpia = citaConRoles(limpiarCita(m.evidencia || ""), rolesPorLetra);
+    $("aviso-motivo").textContent = formatearMotivo(m.motivo);
+    const evidenciaSinPunt = (m.evidencia || "").replace(/^[.\s,;:]+/, "").trim();
+    const citaLimpia = citaConRoles(evidenciaSinPunt, rolesPorLetra);
     $("aviso-cita").textContent = citaLimpia ? `«${citaLimpia}»` : "";
     const tras = m.fin_voz_s == null || m.t_a == null ? null : m.t_a - m.fin_voz_s;
     $("aviso-tiempo").textContent = `a los ${seg(m.t_a)} de la llamada`;
@@ -2565,7 +2562,7 @@ function adjuntarEvaluacionAFrase(m, r, pct) {
       const claseEstado = esAviso ? "aviso-alerta" : (r >= 0.5 ? "riesgo-alto" : "riesgo-bajo");
       evalEl.className = `eval-adjunta ${claseEstado}`;
 
-      const motivoTxt = m.motivo ? `<span class="eval-motivo-txt">${escapar(m.motivo)}</span>` : "";
+      const motivoTxt = m.motivo ? `<span class="eval-motivo-txt">${escapar(formatearMotivo(m.motivo))}</span>` : "";
       const avisoTxt = esAviso ? `<span class="eval-aviso-banner">Aviso emitido</span>` : "";
 
       evalEl.innerHTML = `
