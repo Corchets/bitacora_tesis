@@ -56,6 +56,7 @@ from detectores import (
     huella,
 )
 from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion
+from tito_viejo_2 import PESOS, TitoViejo20
 from reranker import (
     MODOS_ETIQUETAS,
     DetectorReranker,
@@ -453,6 +454,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--sin-reglas", action="store_true", help="no correr el comparador de reglas")
     p.add_argument("--reglas", default="v1", help="versiones del comparador de reglas separadas por coma: v1 (laboratorio) y/o v2 (reglas_v2.py)")
     p.add_argument("--filtro-tito", action="store_true", help="agregar por cada SLM su variante filtrada Tito→SLM (Tito simulado, #69)")
+    p.add_argument("--tito-viejo-2", action="store_true", help="agregar variante experimental Tito viejo 2.0 (requiere --filtro-tito)")
     p.add_argument("--tito-real", action="store_true", help="usar Tito real (RoBERTuito congelado + única logreg seed 42, #70) en vez del guion")
     p.add_argument("--sin-indicio", action="store_true", help="con --filtro-tito: Tito solo decide cuándo consultar; el SLM recibe el mismo mensaje que el SLM solo, sin bloque de indicio")
     p.add_argument("--tito-modelo", type=Path, default=ARTEFACTO_POR_DEFECTO, help="artefacto del clasificador Tito")
@@ -510,6 +512,10 @@ def main(argv: list[str] | None = None) -> int:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b), --solo-reglas o --solo-reranker.")
     if args.filtro_tito and "riesgo" in _lista(args.prompts):
         sys.exit("--filtro-tito no admite --prompts riesgo: el flujo Tito→SLM usa el prompt de un paso.")
+    if args.tito_viejo_2 and not args.filtro_tito:
+        sys.exit("--tito-viejo-2 requiere --filtro-tito.")
+    if args.tito_viejo_2 and args.particion != "desarrollo":
+        sys.exit("Tito viejo 2.0 solo se puede explorar en desarrollo.")
     if args.tito_real and not args.filtro_tito:
         sys.exit("El Tito real (--tito-real) solo actúa con --filtro-tito.")
     if args.sin_indicio and not args.filtro_tito:
@@ -576,6 +582,10 @@ def main(argv: list[str] | None = None) -> int:
                     nombre_f = "tito-slm-sin-indicio" if args.sin_indicio else "tito-slm"
                     etiqueta_f = {"config": f"{nombre_f}|{modelo}|{variante}|{h}", "detector": nombre_f, "modelo": modelo, "prompt": variante, "hablantes": h}
                     detectores.append((etiqueta_f, f))
+                    if args.tito_viejo_2:
+                        f2 = TitoViejo20(tito, d, args.tito_umbral)
+                        etiqueta_2 = {"config": f"tito-viejo-2|{modelo}|{variante}|{h}", "detector": "tito-viejo-2", "modelo": modelo, "prompt": variante, "hablantes": h}
+                        detectores.append((etiqueta_2, f2))
     hipotesis, datos_hipotesis = cargar_hipotesis(args.reranker_etiquetas) if rerankers else ({}, {})
     for modelo_rr in rerankers:
         try:
@@ -634,6 +644,7 @@ def main(argv: list[str] | None = None) -> int:
                 "nota": "simulado sin artefacto: sin arranque medible",
             }
         ),
+        "tito_viejo_2": {"pesos": PESOS, "indicio_a_slm": False, "acumulacion": "una vez por expresion y llamada", "umbral": args.tito_umbral} if args.tito_viejo_2 else None,
         "particion": args.particion,
         **({"lista": args.lista} if args.lista else {}),
         "ollama": None if ollama is None else {"url": args.url, **ollama},
