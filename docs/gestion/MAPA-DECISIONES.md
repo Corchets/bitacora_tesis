@@ -148,6 +148,9 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   la evaluación final, con D07 resuelta y una configuración elegida sobre desarrollo.
 - **Salida:** composición del corpus, particiones, comparadores, política de alerta,
   métricas y criterio de interpretación definidos; test reservado y procedimiento repetible.
+- **Primer ensayo:** contexto acumulado y un aviso por llamada acordados con Mateo,
+  registrados el 2026-10-08 en [arquitectura §5](../ingenieria/ARQUITECTURA.md#5-primer-ensayo-sobre-texto).
+  Son condiciones exploratorias; no cierran D08 ni fijan tolerancia de falsas alarmas.
 - **Antes de ampliar:** acordar separación de semillas y variantes en
   [#55](https://github.com/Corchets/bitacora_tesis/issues/55). Ver
   [método del corpus §9](../corpus/METODO-CREACION-CORPUS.md#9-división-de-datos).
@@ -175,6 +178,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base vigente:** reglas solas. Ningún encoder, modelo generativo, cascada,
   entrenamiento ni conjunto de gamas está impuesto como arquitectura final.
+- **Arranque acordado con Mateo (registro 2026-10-08):** SLM directo sobre texto en
+  [#50](https://github.com/Corchets/bitacora_tesis/issues/50), con reglas como comparador
+  separado. Las condiciones viven en [arquitectura §5](../ingenieria/ARQUITECTURA.md#5-primer-ensayo-sobre-texto);
+  la selección final sigue abierta en #51.
 - **Material para consultar cuando corresponda:**
   [recorte inicial de modelos](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md),
   [estrategia NLP](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md) y

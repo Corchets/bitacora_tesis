@@ -173,22 +173,62 @@ bancario. La adaptación escrita a WhatsApp es asistida; no se atribuye una lect
 de estos diálogos exactos a Mateo ni a los otros integrantes, ni se reemplaza la
 validación de D07 con audio.
 
-## 5. Qué queda abierto
+## 5. Primer ensayo sobre texto
+
+Condiciones acordadas con Mateo y registradas el 2026-10-08 para
+[#50](https://github.com/Corchets/bitacora_tesis/issues/50). Buscan comprobar el
+detector antes de optimizarlo; no eligen la arquitectura final.
+
+- **SLM directo:** recibe el texto disponible de la llamada, sin filtro previo de
+  encoder ni entrenamiento obligatorio. Las reglas simples se ejecutan como
+  comparador separado sobre los mismos casos y actualizaciones.
+- **Contexto:** para estas primeras conversaciones breves se entrega todo el prefijo
+  disponible en cada actualización, sin texto futuro ni referencia humana. Si no
+  entra en el contexto del modelo, se registra el límite; no se recorta en silencio.
+- **Salida breve:** una sugerencia de aviso y su motivo, sin exigir una probabilidad:
+
+  ```json
+  {"alerta_sugerida": true, "motivo": "Solicitan un código que permite acceder a la cuenta."}
+  ```
+
+  Con `false`, el motivo queda vacío: significa evidencia insuficiente hasta ese
+  momento, no llamada legítima confirmada. Una respuesta inválida o un timeout se
+  registra como fallo de ejecución, sin convertirlo en una predicción legítima.
+- **Un aviso por llamada:** se emite ante el primer `true` válido. Las predicciones
+  posteriores se conservan para analizar errores, sin repetir el aviso. El estado se
+  reinicia con la siguiente llamada. La persona puede descartar el aviso y continuar;
+  el sistema no bloquea ni corta. Descartarlo no cambia la referencia humana.
+
+La primera prueba puede hacerse por consola, sin construir la interfaz. Registra
+modelo, prompt, configuración, datos y código, decisiones por actualización y
+avisos por cada detector. Incluye el par contrastante y casos de desarrollo con
+pedidos indirectos, menciones legítimas similares y evidencia separada por texto
+intermedio. No exige acertarlos todos: debe dejar los errores visibles.
+
+Se revisan tanto fraudes omitidos como legítimas con falsas alertas. Preferir prevenir
+no fija una tolerancia numérica ni demuestra que el aviso resulte poco molesto.
+Los tiempos reales se miden al integrar audio en #28; con texto solo se informa la
+actualización. Ventanas, resúmenes, encoder u otras optimizaciones se compararán si
+los resultados justifican su costo.
+
+## 6. Qué queda abierto
 
 - **D07:** probar con audio los criterios de referencia humana y los motivos observables.
-- **D08:** cuánto contexto usar, cuándo procesar, cómo tratar revisiones y cuándo alertar.
-  No quedan fijados niveles de riesgo, umbrales ni dos detecciones consecutivas.
+- **D08:** contexto y política finales, frecuencia de procesamiento y tratamiento de
+  revisiones del ASR. Las condiciones del primer ensayo no congelan el protocolo;
+  no se fijan niveles de riesgo, umbrales ni dos detecciones consecutivas.
 - **D09:** elegir ASR y detector mediante comparaciones. El recorrido puede probarse
   con texto antes de grabar o integrar ASR; un prototipo no elige el detector final.
 
 H1 busca que el equipo entienda este recorrido y pueda preparar el primer par.
 La arquitectura ejecutable y sus ajustes se comprueban en H2–H4.
 
-## 6. Dirección del detector y visualización consolidada
+## 7. Dirección del detector y visualización consolidada
 
 Acordado el 2026-10-08 en el [issue #50](https://github.com/Corchets/bitacora_tesis/issues/50):
-el ensayo corre con un SLM local directo que puntúa cada turno cerrado sobre el
-texto incremental con el contexto de la llamada actual, y emite un aviso único
+el ensayo corre con un SLM local directo que evalúa cada turno cerrado sobre el
+texto incremental con el contexto de la llamada actual (salida breve de
+[§5](#5-primer-ensayo-sobre-texto), sin exigir puntaje), y emite un aviso único
 ante el primer resultado verdadero válido. Las reglas de incendio se ejecutan
 como comparador independiente, no como arquitectura oficial. La cascada
 encoder→SLM queda como alternativa a medir con datos reales; ninguna de las dos
