@@ -6,6 +6,8 @@
 > [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 > La rama no contiene el test reservado. Seguimiento: [#140](https://github.com/Corchets/bitacora_tesis/issues/140).
 
+**Resultados:** [análisis del 2026-11-05](../corridas/2026-11-05_tito-2-v4/analisis.md).
+
 ## Qué se corre
 
 Dos condiciones en la misma sesión, con [`tarea_v4.txt`](../prompts/tarea_v4.txt), hablantes `rol`, `gemma4:e2b-it-q4_K_M`,
