@@ -130,7 +130,7 @@
           "name": "nacho1706/feature-training-data",
           "ref": "bb542e130e7a67a82e376a75a0438a15de32f4a6",
           "purpose": "Conserva el banco argentino de 6.000 textos sintéticos (300 familias) en experiments/laboratorio/entrenamiento_tito/ y scripts de entrenamiento.",
-          "url": "https://github.com/Corchets/bitacora_tesis/tree/nacho1706/feature-training-data"
+          "url": "https://github.com/Corchets/bitacora_tesis/tree/archivo/tito-banco"
         },
         {
           "name": "origin/laboratorio-main",
