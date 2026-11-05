@@ -147,3 +147,10 @@ copia: validación global antes de seleccionar IDs y lectura de referencias ante
 de filtrar partición. No se ejecutó el runner ni la suite completa. Candidato
 separado, sin inferencia, sin modificar demo, Tito, indicio o política; probabilidad
 e impacto sin cambios y ADR 0001 vigente.
+
+R04/R07, análisis de fallas del 2026-11-05: [casos que fallan en v4 y v1](../../experiments/slm-directo/casos/FALLAS-Y-CORPUS-2026-11-05.md).
+R04 se observa en el corpus de desarrollo: los casos `LAB`, `SC` y `TR` avisan 28 de 29 estafas y el corpus v2, 27 de 46, así que
+el porcentaje general depende de la mezcla. Faltan legítimas con maniobras de aislamiento genuinas, estafas donde la víctima
+llama y el campo de quién inició la llamada; sin eso, las reglas que bajan R07 no se pueden validar. Las 11 estafas sin pedido
+chocan con la definición de alerta: es una consulta para D07 y D08. Lectura propia sin revisión humana: probabilidad e impacto
+sin cambios.
