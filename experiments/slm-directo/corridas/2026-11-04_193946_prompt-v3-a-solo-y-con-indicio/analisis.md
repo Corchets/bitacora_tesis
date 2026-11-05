@@ -146,7 +146,7 @@ miraba solo el manifiesto. Con eso, `voip` queda en 100 pruebas de Python y 11 d
   cambio solo cubre al SLM.
 - **Citas de varias líneas:** 1 de 68 en v4 y 3 de 101 en v3 con roles. No coinciden con una sola burbuja, así que el panel marca
   entera la burbuja evaluada. Ya pasaba antes de este commit.
-- **Falta una llamada de prueba** con `--hablantes rol` en la notebook de la demo, mirando el panel.
+- **Falta una llamada de prueba** con los nuevos valores por defecto de la demo (`v4`, `--hablantes rol`, sin indicio, 2026-11-05) en la notebook, mirando el panel.
 
 ## v1 de Evaristo y control de la máquina
 
@@ -455,6 +455,6 @@ Todas las cifras de este documento salen de los CSV, desde esta carpeta y sin co
 1. **Estafas sin pedido:** con el [resultado de v5](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md), la regla de maniobras no las avisa. Luciano planteó que, hasta donde cortan, no hay evidencia suficiente para avisar, e indicó informar el corpus v2 por separado. Falta el acuerdo del equipo (D07 y D08).
 2. **Política de alerta:** primer aviso o persistencia, con [los números de v5](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) (D08).
 3. **Quién inició la llamada:** dejarlo fuera, como dice D03, o reabrir D03.
-4. **Adoptar o no v4:** es la [candidata propuesta](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso). Por ahora ADR 0001 y la demo siguen con v1 y con indicio.
+4. **Adoptar o no v4:** es la [candidata propuesta](../2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso). Por pedido de Luciano del 2026-11-05, la demo ya arranca con v4, roles y sin indicio; falta reabrir ADR 0001, que sigue diciendo v1 con indicio.
 5. **Roles en la demo:** pasar el canal al SLM no cambia el resultado sobre texto (53/12 contra 53/14, con Tito sin indicio). Falta probar una llamada: ver [la revisión](#revisión-del-cambio-en-la-demo).
 6. **Integrar a `laboratorio-main`:** `prompt-v3-colab`, `prompt-v4-colab` y `tanda-roles-colab` ya están en `laboratorio-luciano`; decidir qué pasa de ahí.

@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import casos  # noqa: E402
 import correr_controles  # noqa: E402
-from detectores import PROMPTS, cargar_prompt, esquema_de, huella  # noqa: E402
+from detectores import PROMPTS, cargar_prompt, esquema_de, huella, usa_roles  # noqa: E402
 from test_ensayo import OllamaFalso  # noqa: E402
 
 ORDEN_V1 = ["riesgo", "alerta_sugerida", "motivo", "evidencia"]
@@ -102,6 +102,12 @@ class Prompts(unittest.TestCase):
             for linea in agregadas(prompt):
                 p = palabras(linea)
                 self.assertFalse(corpus & {tuple(p[i:i + 5]) for i in range(len(p) - 4)}, linea)
+
+
+class PromptsConRoles(unittest.TestCase):
+    def test_solo_los_que_nombran_a_protegida_y_otra_exigen_roles(self):
+        for p in PROMPTS:
+            self.assertEqual(usa_roles(p), "PROTEGIDA" in cargar_prompt(p), p)
 
 
 class Controles(unittest.TestCase):

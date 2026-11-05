@@ -618,7 +618,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="tito-slm",
                    help="por defecto, la configuración final: Tito viejo deriva a Gemma 4 E2B (ADR 0001)")
     p.add_argument("--modelo", default=DETECTOR_POR_DEFECTO)
-    p.add_argument("--prompt", default="tarea")
+    p.add_argument("--prompt", default="v4", help="por defecto v4, con roles y sin indicio (pedido de Luciano del 2026-11-05)")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--ollama-url", default=replay.cliente_ollama.URL_POR_DEFECTO,
                    help="Ollama de otra máquina (p. ej. la PC con GPU) para bajar la demora del SLM")
@@ -630,12 +630,17 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--asr", choices=tuple(MODELOS_ASR), default=ASR_POR_DEFECTO,
                    help="modelo de ASR con el que arranca; desde el panel se elige en cada llamada")
     p.add_argument("--hilos", type=int, default=2, help="hilos del ASR por canal")
-    p.add_argument("--hablantes", choices=("ab", "rol"), default="ab",
-                   help="modo de hablantes que ve el SLM: ab (A/B según orden de habla) o rol (PROTEGIDA/OTRA)")
-    p.add_argument("--sin-indicio", action="store_true",
-                   help="omitir el bloque de indicio de Tito en el mensaje al SLM")
+    p.add_argument("--hablantes", choices=("ab", "rol"), default="rol",
+                   help="modo de hablantes que ve el SLM: rol (PROTEGIDA/OTRA) o ab (A/B según orden de habla)")
+    p.add_argument("--sin-indicio", action="store_true", default=True,
+                   help="omitir el bloque de indicio de Tito en el mensaje al SLM (por defecto)")
+    p.add_argument("--con-indicio", dest="sin_indicio", action="store_false",
+                   help="agregar el bloque de indicio de Tito, como en la configuración del ADR 0001")
     p.add_argument("--salida", default=str(DIR_VOIP / "llamadas"))
-    return p.parse_args()
+    args = p.parse_args()
+    if args.hablantes == "ab" and replay.detectores.usa_roles(args.prompt):
+        p.error(f"el prompt {args.prompt} nombra a PROTEGIDA y OTRA: necesita --hablantes rol")
+    return args
 
 
 async def principal() -> None:

@@ -143,12 +143,11 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
 
     def test_parse_args_hablantes_y_sin_indicio(self):
         args = parse_args([])
-        self.assertEqual(args.hablantes, "ab")
-        self.assertFalse(args.sin_indicio)
-
-        args = parse_args(["--hablantes", "rol", "--sin-indicio"])
-        self.assertEqual(args.hablantes, "rol")
-        self.assertTrue(args.sin_indicio)
+        self.assertEqual((args.prompt, args.hablantes, args.sin_indicio), ("v4", "rol", True))
+        self.assertFalse(parse_args(["--con-indicio"]).sin_indicio)
+        self.assertTrue(parse_args(["--sin-indicio"]).sin_indicio)
+        with patch("sys.stderr"), self.assertRaises(SystemExit):
+            parse_args(["--hablantes", "ab"])
 
     async def test_principal_pasa_hablantes_e_indicio_a_construir_detector(self):
         class PararPrueba(Exception):
@@ -164,7 +163,7 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
             mock_construir.assert_called_once_with(
                 "tito-slm",
                 modelo=args.modelo,
-                prompt_nombre="tarea",
+                prompt_nombre="v4",
                 hablantes="rol",
                 seed=42,
                 ollama_url=args.ollama_url,

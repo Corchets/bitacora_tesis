@@ -26,9 +26,9 @@ servidor.py ── Zipformer streaming por canal ── actualizaciones.jsonl (c
 
 - **Cada persona es un canal.** El rol (`protegida` u `otra`) lo dice el cliente al conectarse; cada
   línea del JSONL trae `canal: "protegida" | "otra"`, sin un campo `rol` duplicado. Por defecto el detector
-  usa `--hablantes ab` y sigue viendo A/B por orden del primer texto (incluidos parciales), como en los casos
-  de texto; con `--hablantes rol`, el detector recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR
-  (además, con `--sin-indicio` Tito sigue decidiendo cuándo consultar, pero el SLM no recibe su indicio).
+  corre el prompt `v4` con `--hablantes rol`: recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR, y Tito
+  decide cuándo consultar sin pasarle su indicio al SLM (`--con-indicio` lo agrega). Con `--prompt tarea --hablantes ab`
+  vuelve a ver A/B por orden del primer texto (incluidos parciales), como en la configuración del ADR 0001.
   Replay reconstruye esa asignación por llamada y sigue aceptando los registros anteriores con A/B.
   Los eventos ASR del panel conservan `canal: "A" | "B"` y `rol` por compatibilidad con su interfaz
   (roles «Vos» / «La otra persona» para el detector son del frente 3).
@@ -153,9 +153,9 @@ La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
 
 Los mensajes de transcripción llevan `tipo: "asr"` y `entrega: "parcial" | "final"`.
 `rol` identifica a la persona y `canal` conserva la letra A/B. En el detector, por defecto
-se usa `--hablantes ab` (A/B por orden de habla); con `--hablantes rol`, el detector recibe `PROTEGIDA`
-u `OTRA` según el canal lógico del ASR (y con `--sin-indicio` el SLM no recibe el indicio de Tito, que sigue
-decidiendo cuándo consultar). El JSONL sigue usando
+se usa `--hablantes rol`: recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR, y el SLM no recibe el
+indicio de Tito, que sigue decidiendo cuándo consultar (`--con-indicio` lo agrega). Con `--prompt tarea --hablantes ab`,
+A/B por orden de habla. `v4` rechaza `--hablantes ab`, porque nombra a PROTEGIDA y OTRA. El JSONL sigue usando
 su contrato previo: `tipo: "parcial" | "final"` y `canal` con el rol.
 
 Durante la llamada, el servidor manda una foto de ambos niveles cada 100 ms (aproximadamente
@@ -357,8 +357,8 @@ al fin del pedido (17,6 s, según §4).
 
 El comando precarga el SLM y los dos ASR, reproduce los ~22 s del ejemplo al ritmo
 real con la fuente de #77 y espera la evaluación pendiente al terminar. Conserva
-el disparo `final`, silencio de 0,8 s, prompt `tarea`, seed 42, hablantes A/B
-por defecto (`--hablantes ab`, o `--hablantes rol` para pasar `PROTEGIDA`/`OTRA`, además de `--sin-indicio`),
+el disparo `final`, silencio de 0,8 s, prompt `v4`, seed 42, hablantes `PROTEGIDA`/`OTRA`
+y Tito sin indicio (`--con-indicio` lo agrega),
 foto más reciente sin cola y aviso único del servidor. No abre un puerto ni un panel.
 La carga inicial queda fuera de la mediana; la demora del ASR queda fuera del tiempo
 por evaluación, pero sí influye en el momento del aviso.

@@ -1177,12 +1177,27 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
     def test_parse_args_hablantes_y_sin_indicio(self):
         with patch("sys.argv", ["servidor.py"]):
             args = parse_args()
-            self.assertEqual(args.hablantes, "ab")
-            self.assertFalse(args.sin_indicio)
-        with patch("sys.argv", ["servidor.py", "--hablantes", "rol", "--sin-indicio"]):
+            self.assertEqual((args.prompt, args.hablantes, args.sin_indicio), ("v4", "rol", True))
+        with patch("sys.argv", ["servidor.py", "--con-indicio"]):
+            self.assertFalse(parse_args().sin_indicio)
+        with patch("sys.argv", ["servidor.py", "--sin-indicio"]):
+            self.assertTrue(parse_args().sin_indicio)
+        with patch("sys.argv", ["servidor.py", "--prompt", "tarea", "--hablantes", "ab", "--con-indicio"]):
             args = parse_args()
-            self.assertEqual(args.hablantes, "rol")
-            self.assertTrue(args.sin_indicio)
+            self.assertEqual((args.prompt, args.hablantes, args.sin_indicio), ("tarea", "ab", False))
+
+    def test_parse_args_rechaza_prompt_con_roles_sin_roles(self):
+        with patch("sys.argv", ["servidor.py", "--hablantes", "ab"]), patch("sys.stderr"):
+            with self.assertRaises(SystemExit):
+                parse_args()
+
+    def test_el_slm_por_defecto_recibe_v4_y_los_roles(self):
+        with patch("sys.argv", ["servidor.py"]):
+            args = parse_args()
+        with patch.object(replay_mod.correr, "calentar", return_value={"pensar": False}):
+            slm = replay_mod.construir_slm(modelo=args.modelo, prompt_nombre=args.prompt, hablantes=args.hablantes, seed=args.seed, ollama_url=args.ollama_url)
+        self.assertIn("PROTEGIDA (la persona que cuidás)", slm.prompt)
+        self.assertEqual(slm.hablantes, "rol")
 
     async def test_configurar_detector_pasa_hablantes_e_indicio(self):
         self.args_de_modelo()

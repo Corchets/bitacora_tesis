@@ -103,13 +103,17 @@ def parse_args(argv=None):
     p.add_argument("--audio", type=Path, default=EJEMPLOS[ESCENARIO], help="WAV TTS original estéreo a 16 kHz")
     p.add_argument("--modelo-asr", type=Path, default=DIR_MODELO, help="directorio local de Zipformer")
     p.add_argument("--salida", type=Path, default=DIR_VOIP / "corridas")
-    p.add_argument("--hablantes", choices=("ab", "rol"), default="ab",
-                   help="modo de hablantes que ve el SLM: ab (A/B) o rol (PROTEGIDA/OTRA)")
-    p.add_argument("--sin-indicio", action="store_true",
-                   help="omitir el bloque de indicio de Tito en el mensaje al SLM")
+    p.add_argument("--hablantes", choices=("ab", "rol"), default="rol",
+                   help="modo de hablantes que ve el SLM: rol (PROTEGIDA/OTRA) o ab (A/B)")
+    p.add_argument("--sin-indicio", action="store_true", default=True,
+                   help="omitir el bloque de indicio de Tito en el mensaje al SLM (por defecto)")
+    p.add_argument("--con-indicio", dest="sin_indicio", action="store_false",
+                   help="agregar el bloque de indicio de Tito, como en la configuración del ADR 0001")
     args = p.parse_args(argv)
     # Configuración de la demo (#75); no se negocia otro protocolo desde este comando.
-    args.prompt, args.seed, args.ollama_url = "tarea", 42, replay.cliente_ollama.URL_POR_DEFECTO
+    args.prompt, args.seed, args.ollama_url = "v4", 42, replay.cliente_ollama.URL_POR_DEFECTO
+    if args.hablantes == "ab" and replay.detectores.usa_roles(args.prompt):
+        p.error(f"el prompt {args.prompt} nombra a PROTEGIDA y OTRA: necesita --hablantes rol")
     args.disparo, args.corte_silencio, args.hilos = "final", "auto", 2
     return args
 

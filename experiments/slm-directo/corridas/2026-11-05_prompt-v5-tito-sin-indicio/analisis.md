@@ -98,6 +98,8 @@ tiene v4. Esto no valida la regla, por tres razones:
 - **Persistencia, por ahora no.** Con el corpus v2 como número principal, las falsas alarmas ya están en la franja, y lo que falta es detección. `v5-sin-excepcion` con 2 en la llamada pasa de 28/7 a 25/3
   en ese corpus: saca 4 alarmas y pierde 3 estafas, entre ellas los dos pedidos de credenciales. Además, hoy solo está simulada.
 
+**Actualización del 2026-11-05:** a pedido de Luciano, la demo con ASR ya arranca con v4, roles y sin indicio. Falta reabrir el ADR 0001 y probar una llamada real.
+
 ## Límites
 
 - Prompts, políticas y controles salen de casos ya vistos: elegir acá no estima el rendimiento. Eso sale de la reserva.

@@ -145,6 +145,11 @@ def cargar_prompt(variante: str) -> str:
     return "\n\n".join(partes)
 
 
+def usa_roles(variante: str) -> bool:
+    """True si el prompt nombra a PROTEGIDA y OTRA: necesita `--hablantes rol`, no A/B."""
+    return "PROTEGIDA" in cargar_prompt(variante)
+
+
 def esquema_de(variante: str) -> dict:
     if variante not in ESQUEMAS:
         raise ValueError(f"prompt desconocido {variante!r}; opciones: {sorted(ESQUEMAS)}")
