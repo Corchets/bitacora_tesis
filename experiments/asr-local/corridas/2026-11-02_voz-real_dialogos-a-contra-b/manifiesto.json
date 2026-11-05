@@ -1,0 +1,3208 @@
+{
+  "fecha": "2026-11-02T20:03:22",
+  "comando": "python experiments/asr-local/medir_voz_real.py --solo-parakeet --toma-decision 5 --contra-parakeet parakeet-0.8-rms-0.008-filtro-silero-0.5 --variantes parakeet-0.3-silero-0.9 --etiqueta dialogos-a-contra-b",
+  "datos": {
+    "carpeta_pruebas": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/voip/llamadas",
+    "csv": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/voz-real/pruebas.csv",
+    "pruebas": [
+      {
+        "id": "2026-11-02_191055-519549:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D1",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 72.737
+      },
+      {
+        "id": "2026-11-02_191055-519549:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D1",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 8
+        },
+        "lineas_referencia": 8,
+        "referencia_de": "dialogo",
+        "duracion_s": 72.737
+      },
+      {
+        "id": "2026-11-02_191514-060570:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D2",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 61.434
+      },
+      {
+        "id": "2026-11-02_191514-060570:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D2",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 61.434
+      },
+      {
+        "id": "2026-11-02_191647-577476:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D3",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 65.852
+      },
+      {
+        "id": "2026-11-02_191647-577476:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D3",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 65.852
+      },
+      {
+        "id": "2026-11-02_191850-452328:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D4",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 59.59
+      },
+      {
+        "id": "2026-11-02_191850-452328:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D4",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 59.59
+      },
+      {
+        "id": "2026-11-02_192133-308960:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo-tv",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D1",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 68.474
+      },
+      {
+        "id": "2026-11-02_192133-308960:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo-tv",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D1",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 8
+        },
+        "lineas_referencia": 8,
+        "referencia_de": "dialogo",
+        "duracion_s": 68.474
+      },
+      {
+        "id": "2026-11-02_192425-071975:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo-tv",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D1",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 61.057
+      },
+      {
+        "id": "2026-11-02_192425-071975:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo-tv",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D1",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 8
+        },
+        "lineas_referencia": 8,
+        "referencia_de": "dialogo",
+        "duracion_s": 61.057
+      },
+      {
+        "id": "2026-11-02_192651-299571:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D2",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 71.49
+      },
+      {
+        "id": "2026-11-02_192651-299571:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D2",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 71.49
+      },
+      {
+        "id": "2026-11-02_192931-493331:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D3",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 71.859
+      },
+      {
+        "id": "2026-11-02_192931-493331:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D3",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 71.859
+      },
+      {
+        "id": "2026-11-02_193107-631798:protegida",
+        "toma": 5,
+        "voz": "luciano",
+        "condicion": "dialogo",
+        "canal": "protegida",
+        "bloque": {
+          "bloque": "D4",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 68.843
+      },
+      {
+        "id": "2026-11-02_193107-631798:otra",
+        "toma": 5,
+        "voz": "otra",
+        "condicion": "dialogo",
+        "canal": "otra",
+        "bloque": {
+          "bloque": "D4",
+          "exacto": true,
+          "mezcla": false,
+          "reconocidas": 7
+        },
+        "lineas_referencia": 7,
+        "referencia_de": "dialogo",
+        "duracion_s": 68.843
+      }
+    ],
+    "omitidas": [
+      {
+        "id": "2026-10-29_194923-902062",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_195020-082746",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_195202-772508",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_195256-042759",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_195409-306210",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_200653-308143",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_200832-553834",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_200926-056710",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_201653-688897",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_201733-924805",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_201814-367007",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_202351-657853",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_201921-145948",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_201959-768452",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_204534-495909",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_204616-642444",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_205011-705316",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_205052-595235",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_205127-026460",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-29_205159-170084",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_152838-034658",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_152914-598219",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_152947-712308",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153026-522559",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153102-946340",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153138-212776",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153304-448017",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153335-495862",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153409-995865",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153442-452741",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153528-099127",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153603-648473",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153725-703882",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153759-275232",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153829-326020",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153908-775592",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_153944-081407",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_154018-708912",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      },
+      {
+        "id": "2026-10-30_154331-950817",
+        "motivo": "no existe la carpeta o no tiene manifiesto legible"
+      }
+    ]
+  },
+  "configuracion": {
+    "bloque_ms": 40,
+    "hilos_kroko": 2,
+    "hilos_whisper": 4,
+    "toma_de_decision": 5,
+    "hotwords_score": 1.5,
+    "max_caminos": 4,
+    "modelo": "sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "motores_por_subproceso": true,
+    "contra_parakeet": "parakeet-0.8-rms-0.008-filtro-silero-0.5",
+    "archivos": {
+      "guion": {
+        "ruta": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/voz-real/guion.json",
+        "sha256_16": "5b70f487eeb8cecd"
+      },
+      "hotwords": {
+        "ruta": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/voz-real/hotwords.txt",
+        "sha256_16": "ec007bd8e338bfb6"
+      },
+      "jerga": {
+        "ruta": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/voz-real/jerga.txt",
+        "sha256_16": "0b7ad33ee4f8f25b"
+      },
+      "diccionario": {
+        "ruta": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/voz-real/diccionario.csv",
+        "sha256_16": "3b15996b920268fa"
+      },
+      "pruebas_csv": {
+        "ruta": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/voz-real/pruebas.csv",
+        "sha256_16": "5596baa894a1fe8d"
+      }
+    },
+    "regla": {
+      "min_frases_mas": 2,
+      "max_demora_extra_s": 0.3,
+      "max_wer_extra": 0.02
+    }
+  },
+  "codigo": {
+    "hash": "abe825ecd802e0b49db47f486bafb019989bde3a",
+    "rama": "LucianoGrosso13/tito-gemma-pendientes",
+    "dirty": false
+  },
+  "versiones": {
+    "python": "3.13.15",
+    "sherpa_onnx": "1.13.8",
+    "onnxruntime": "1.31.1",
+    "faster_whisper": "1.2.1",
+    "soundfile": "0.14.0",
+    "numpy": "2.5.4"
+  },
+  "hardware": {
+    "sistema": "Darwin",
+    "release": "27.0.0",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_cpu": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  },
+  "nota": null,
+  "decision": {
+    "toma": 5,
+    "pasos": [],
+    "configuracion_final": "parakeet-0.8-rms-0.008-filtro-silero-0.5",
+    "techo": [],
+    "parakeet": [
+      {
+        "nombre": "parakeet-0.3-silero-0.9",
+        "config": {
+          "corte": 0.3,
+          "umbral_rms": 0.008,
+          "vad": "silero",
+          "umbral_silero": 0.9
+        },
+        "contra": "parakeet-0.8-rms-0.008-filtro-silero-0.5",
+        "regla": {
+          "pasa": false,
+          "criterios": {
+            "etiquetas": {
+              "frases_mas": -1,
+              "minimo": 2,
+              "cumple": false
+            },
+            "negativas": {
+              "etiquetas_nuevas": 0,
+              "maximo": 0,
+              "cumple": true
+            },
+            "demora": {
+              "extra_s": -0.751,
+              "maximo_s": 0.3,
+              "cumple": true
+            },
+            "wer": {
+              "extra": 0.0726,
+              "maximo": 0.02,
+              "cumple": false
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variantes": {
+    "parakeet-0.8-rms-0.008-filtro-silero-0.5": {
+      "motor": "parakeet",
+      "config": {
+        "corte": 0.8,
+        "umbral_rms": 0.008,
+        "vad": "filtro",
+        "umbral_silero": 0.5
+      },
+      "carga_s": 1.719,
+      "metadatos_motor": {
+        "motor": "sherpa-parakeet",
+        "modelo_id": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+        "ruta_modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+        "es_streaming": false,
+        "tipo_entrega": "parciales_y_finales",
+        "version_sherpa": "1.13.8",
+        "hilos": 2,
+        "sample_rate": 16000,
+        "segmentacion": {
+          "tipo": "corte_por_silencio_rms_filtro_silero",
+          "corte_silencio_s": 0.8,
+          "umbral_rms_silencio": 0.008,
+          "previo_s": 0.3,
+          "max_frase_s": 10.0,
+          "min_voz_s": 0.3,
+          "min_voz_parcial_s": 1.0,
+          "parciales_cada_s": 0.5,
+          "filtro_idioma": "parciales_y_muletillas_finales",
+          "vad": {
+            "tipo": "silero_vad_sherpa_onnx",
+            "modelo": "silero_vad.onnx",
+            "sha256_16": "9e2449e1087496d8",
+            "umbral": 0.5,
+            "umbral_para_seguir": 0.35,
+            "ventana": 512,
+            "min_silence_duration": 0.0,
+            "min_speech_duration": 0.0,
+            "hilos": 1,
+            "costo_por_bloque": {
+              "bloques": 30076,
+              "mediana_ms": 0.1093,
+              "p95_ms": 0.2185,
+              "max_ms": 13.2576,
+              "total_s": 4.1713
+            },
+            "modo": "filtro"
+          }
+        },
+        "decodificacion": {
+          "decoding_method": "greedy_search",
+          "model_type": "nemo_transducer"
+        }
+      },
+      "memoria_pico_mb": 1035.7,
+      "alcance_memoria": "subproceso_por_variante",
+      "por_grupo": {
+        "toma5/luciano-dialogo": {
+          "pruebas": 7,
+          "frases": 49,
+          "frases_correctas": 47,
+          "frases_con_etiquetas_ref": 2,
+          "positivas_correctas": 0,
+          "negativas": 47,
+          "negativas_correctas": 47,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 2,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 2,
+            "acertadas": 0,
+            "recall": 0.0,
+            "por_termino": {
+              "token": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 2,
+            "acertadas": 0,
+            "recall": 0.0,
+            "por_termino": {
+              "uala": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 2,
+            "acertadas": 1,
+            "recall": 0.5,
+            "por_termino": {
+              "guaso": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              }
+            }
+          },
+          "wer": 0.2139,
+          "cer": 0.1189,
+          "segmentos_finales": 47,
+          "segmentos_por_frase": 0.959,
+          "demora_final": {
+            "n": 47,
+            "mediana_s": 0.984,
+            "p95_s": 1.09,
+            "max_s": 1.189
+          },
+          "audio_s": 471.805,
+          "proceso_s": 24.037,
+          "rtf": 0.0509,
+          "p95_bloque_ms": {
+            "mediana": 0.22,
+            "max": 0.23
+          },
+          "max_bloque_ms": 430.0
+        },
+        "toma5/luciano-dialogo-tv": {
+          "pruebas": 2,
+          "frases": 14,
+          "frases_correctas": 14,
+          "frases_con_etiquetas_ref": 0,
+          "positivas_correctas": 0,
+          "negativas": 14,
+          "negativas_correctas": 14,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 0,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "wer": 0.1923,
+          "cer": 0.1276,
+          "segmentos_finales": 12,
+          "segmentos_por_frase": 0.857,
+          "demora_final": {
+            "n": 11,
+            "mediana_s": 0.434,
+            "p95_s": 0.704,
+            "max_s": 0.704
+          },
+          "audio_s": 129.531,
+          "proceso_s": 20.424,
+          "rtf": 0.1577,
+          "p95_bloque_ms": {
+            "mediana": 0.28,
+            "max": 0.33
+          },
+          "max_bloque_ms": 487.47
+        },
+        "toma5/otra-dialogo": {
+          "pruebas": 7,
+          "frases": 50,
+          "frases_correctas": 44,
+          "frases_con_etiquetas_ref": 19,
+          "positivas_correctas": 13,
+          "negativas": 31,
+          "negativas_correctas": 31,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 6,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 43,
+            "acertadas": 29,
+            "recall": 0.6744,
+            "por_termino": {
+              "acceso remoto": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "alias": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "anydesk": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "cbu": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "clave": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "codigo": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "compart": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "comparti pantalla": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "configuracion": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "confirmame": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "cvv": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "dame": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "instal": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "instala": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "luca": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "numeros": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "pago": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "pasame": {
+                "ref": 3,
+                "ok": 2,
+                "recall": 0.6667
+              },
+              "token": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "transferencia": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "transferi": {
+                "ref": 4,
+                "ok": 3,
+                "recall": 0.75
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 6,
+            "acertadas": 3,
+            "recall": 0.5,
+            "por_termino": {
+              "banco macro": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "brubank": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "macro": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "mercado pago": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 8,
+            "acertadas": 0,
+            "recall": 0.0,
+            "por_termino": {
+              "al ñudo": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "chango": {
+                "ref": 4,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "ñaño": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "wer": 0.329,
+          "cer": 0.2084,
+          "segmentos_finales": 51,
+          "segmentos_por_frase": 1.02,
+          "demora_final": {
+            "n": 51,
+            "mediana_s": 1.043,
+            "p95_s": 1.099,
+            "max_s": 1.16
+          },
+          "audio_s": 471.805,
+          "proceso_s": 46.636,
+          "rtf": 0.0988,
+          "p95_bloque_ms": {
+            "mediana": 0.24,
+            "max": 0.3
+          },
+          "max_bloque_ms": 360.46
+        },
+        "toma5/otra-dialogo-tv": {
+          "pruebas": 2,
+          "frases": 16,
+          "frases_correctas": 16,
+          "frases_con_etiquetas_ref": 6,
+          "positivas_correctas": 6,
+          "negativas": 10,
+          "negativas_correctas": 10,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 0,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 10,
+            "acertadas": 10,
+            "recall": 1.0,
+            "por_termino": {
+              "clave": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "codigo": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "confirmame": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "numeros": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "pasame": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 4,
+            "acertadas": 4,
+            "recall": 1.0,
+            "por_termino": {
+              "banco macro": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "macro": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "wer": 0.1196,
+          "cer": 0.0561,
+          "segmentos_finales": 17,
+          "segmentos_por_frase": 1.062,
+          "demora_final": {
+            "n": 17,
+            "mediana_s": 1.041,
+            "p95_s": 1.133,
+            "max_s": 1.133
+          },
+          "audio_s": 129.531,
+          "proceso_s": 14.833,
+          "rtf": 0.1145,
+          "p95_bloque_ms": {
+            "mediana": 0.23,
+            "max": 0.23
+          },
+          "max_bloque_ms": 292.69
+        }
+      },
+      "por_toma": {
+        "5": {
+          "pruebas": 18,
+          "frases": 129,
+          "frases_correctas": 121,
+          "frases_con_etiquetas_ref": 27,
+          "positivas_correctas": 19,
+          "negativas": 102,
+          "negativas_correctas": 102,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 8,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 55,
+            "acertadas": 39,
+            "recall": 0.7091,
+            "por_termino": {
+              "acceso remoto": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "alias": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "anydesk": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "cbu": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "clave": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "codigo": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "compart": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "comparti pantalla": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "configuracion": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "confirmame": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "cvv": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "dame": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "instal": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "instala": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "luca": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "numeros": {
+                "ref": 5,
+                "ok": 5,
+                "recall": 1.0
+              },
+              "pago": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "pasame": {
+                "ref": 5,
+                "ok": 4,
+                "recall": 0.8
+              },
+              "token": {
+                "ref": 4,
+                "ok": 2,
+                "recall": 0.5
+              },
+              "transferencia": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "transferi": {
+                "ref": 4,
+                "ok": 3,
+                "recall": 0.75
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 12,
+            "acertadas": 7,
+            "recall": 0.5833,
+            "por_termino": {
+              "banco macro": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "brubank": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "macro": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "mercado pago": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "uala": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 10,
+            "acertadas": 1,
+            "recall": 0.1,
+            "por_termino": {
+              "al ñudo": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "chango": {
+                "ref": 4,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "guaso": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "ñaño": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "wer": 0.2556,
+          "cer": 0.1546,
+          "segmentos_finales": 127,
+          "segmentos_por_frase": 0.984,
+          "demora_final": {
+            "n": 126,
+            "mediana_s": 1.013,
+            "p95_s": 1.1,
+            "max_s": 1.189
+          },
+          "audio_s": 1202.672,
+          "proceso_s": 105.93,
+          "rtf": 0.0881,
+          "p95_bloque_ms": {
+            "mediana": 0.23,
+            "max": 0.33
+          },
+          "max_bloque_ms": 487.47
+        }
+      },
+      "por_prueba": {
+        "2026-11-02_191055-519549:protegida": {
+          "error": {
+            "wer": 0.1731,
+            "wer_distancia": 9,
+            "palabras_ref": 52,
+            "cer": 0.0947,
+            "cer_distancia": 23,
+            "caracteres_ref": 243
+          },
+          "demoras_s": [
+            0.973,
+            1.02,
+            0.964,
+            1.016,
+            1.035,
+            1.016,
+            1.012
+          ],
+          "segmentos": 7,
+          "proceso_s": 3.3099,
+          "audio_s": 72.737,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 219.62,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191055-519549:otra": {
+          "error": {
+            "wer": 0.2935,
+            "wer_distancia": 27,
+            "palabras_ref": 92,
+            "cer": 0.1723,
+            "cer_distancia": 86,
+            "caracteres_ref": 499
+          },
+          "demoras_s": [
+            1.043,
+            1.002,
+            1.017,
+            1.099,
+            1.048,
+            1.093,
+            1.028,
+            1.0
+          ],
+          "segmentos": 8,
+          "proceso_s": 7.2489,
+          "audio_s": 72.737,
+          "p95_bloque_ms": 0.24,
+          "max_bloque_ms": 299.23,
+          "etiquetas": {
+            "n_frases": 8,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 8,
+            "positivas_correctas": 3,
+            "negativas": 5,
+            "negativas_correctas": 5,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191514-060570:protegida": {
+          "error": {
+            "wer": 0.1818,
+            "wer_distancia": 8,
+            "palabras_ref": 44,
+            "cer": 0.045,
+            "cer_distancia": 9,
+            "caracteres_ref": 200
+          },
+          "demoras_s": [
+            0.918,
+            0.915,
+            0.903,
+            1.013,
+            0.996,
+            0.961,
+            0.893
+          ],
+          "segmentos": 7,
+          "proceso_s": 2.3729,
+          "audio_s": 61.434,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 213.34,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191514-060570:otra": {
+          "error": {
+            "wer": 0.3596,
+            "wer_distancia": 32,
+            "palabras_ref": 89,
+            "cer": 0.2033,
+            "cer_distancia": 86,
+            "caracteres_ref": 423
+          },
+          "demoras_s": [
+            1.081,
+            1.046,
+            1.031,
+            1.061,
+            1.071,
+            1.098,
+            1.061
+          ],
+          "segmentos": 7,
+          "proceso_s": 6.4703,
+          "audio_s": 61.434,
+          "p95_bloque_ms": 0.28,
+          "max_bloque_ms": 260.53,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 7,
+            "positivas_correctas": 3,
+            "negativas": 4,
+            "negativas_correctas": 4,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191647-577476:protegida": {
+          "error": {
+            "wer": 0.24,
+            "wer_distancia": 12,
+            "palabras_ref": 50,
+            "cer": 0.1617,
+            "cer_distancia": 38,
+            "caracteres_ref": 235
+          },
+          "demoras_s": [
+            0.916,
+            1.001,
+            0.947,
+            0.993,
+            1.012,
+            0.95
+          ],
+          "segmentos": 6,
+          "proceso_s": 2.5579,
+          "audio_s": 65.852,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 200.76,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191647-577476:otra": {
+          "error": {
+            "wer": 0.3647,
+            "wer_distancia": 31,
+            "palabras_ref": 85,
+            "cer": 0.2931,
+            "cer_distancia": 119,
+            "caracteres_ref": 406
+          },
+          "demoras_s": [
+            1.037,
+            1.052,
+            0.992,
+            0.992,
+            1.16,
+            1.001
+          ],
+          "segmentos": 6,
+          "proceso_s": 6.2053,
+          "audio_s": 65.852,
+          "p95_bloque_ms": 0.27,
+          "max_bloque_ms": 360.46,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191850-452328:protegida": {
+          "error": {
+            "wer": 0.2609,
+            "wer_distancia": 12,
+            "palabras_ref": 46,
+            "cer": 0.0861,
+            "cer_distancia": 18,
+            "caracteres_ref": 209
+          },
+          "demoras_s": [
+            0.974,
+            0.917,
+            0.896,
+            0.991,
+            0.997,
+            0.979,
+            0.987
+          ],
+          "segmentos": 7,
+          "proceso_s": 2.5404,
+          "audio_s": 59.59,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 197.39,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 1,
+            "frases_correctas": 6,
+            "positivas_correctas": 0,
+            "negativas": 6,
+            "negativas_correctas": 6,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 1,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191850-452328:otra": {
+          "error": {
+            "wer": 0.1333,
+            "wer_distancia": 12,
+            "palabras_ref": 90,
+            "cer": 0.0388,
+            "cer_distancia": 18,
+            "caracteres_ref": 464
+          },
+          "demoras_s": [
+            1.07,
+            1.094,
+            1.019,
+            1.032,
+            0.993,
+            1.154,
+            1.048
+          ],
+          "segmentos": 7,
+          "proceso_s": 7.8655,
+          "audio_s": 59.59,
+          "p95_bloque_ms": 0.3,
+          "max_bloque_ms": 353.77,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 5,
+            "frases_correctas": 5,
+            "positivas_correctas": 3,
+            "negativas": 2,
+            "negativas_correctas": 2,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 2,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192133-308960:protegida": {
+          "error": {
+            "wer": 0.1923,
+            "wer_distancia": 10,
+            "palabras_ref": 52,
+            "cer": 0.1276,
+            "cer_distancia": 31,
+            "caracteres_ref": 243
+          },
+          "demoras_s": [
+            0.434,
+            0.487,
+            0.438,
+            0.432,
+            0.431
+          ],
+          "segmentos": 6,
+          "proceso_s": 9.0854,
+          "audio_s": 68.474,
+          "p95_bloque_ms": 0.33,
+          "max_bloque_ms": 487.47,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192133-308960:otra": {
+          "error": {
+            "wer": 0.1087,
+            "wer_distancia": 10,
+            "palabras_ref": 92,
+            "cer": 0.0521,
+            "cer_distancia": 26,
+            "caracteres_ref": 499
+          },
+          "demoras_s": [
+            1.038,
+            1.0,
+            1.043,
+            1.041,
+            0.918,
+            1.037,
+            1.133,
+            1.1,
+            0.986
+          ],
+          "segmentos": 9,
+          "proceso_s": 7.5646,
+          "audio_s": 68.474,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 292.69,
+          "etiquetas": {
+            "n_frases": 8,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 8,
+            "positivas_correctas": 3,
+            "negativas": 5,
+            "negativas_correctas": 5,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192425-071975:protegida": {
+          "error": {
+            "wer": 0.1923,
+            "wer_distancia": 10,
+            "palabras_ref": 52,
+            "cer": 0.1276,
+            "cer_distancia": 31,
+            "caracteres_ref": 243
+          },
+          "demoras_s": [
+            0.435,
+            0.434,
+            0.704,
+            0.499,
+            0.432,
+            0.432
+          ],
+          "segmentos": 6,
+          "proceso_s": 11.3388,
+          "audio_s": 61.057,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 435.59,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192425-071975:otra": {
+          "error": {
+            "wer": 0.1304,
+            "wer_distancia": 12,
+            "palabras_ref": 92,
+            "cer": 0.0601,
+            "cer_distancia": 30,
+            "caracteres_ref": 499
+          },
+          "demoras_s": [
+            1.041,
+            0.994,
+            1.026,
+            1.067,
+            1.042,
+            1.116,
+            1.088,
+            0.974
+          ],
+          "segmentos": 8,
+          "proceso_s": 7.2688,
+          "audio_s": 61.057,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 276.26,
+          "etiquetas": {
+            "n_frases": 8,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 8,
+            "positivas_correctas": 3,
+            "negativas": 5,
+            "negativas_correctas": 5,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192651-299571:protegida": {
+          "error": {
+            "wer": 0.1591,
+            "wer_distancia": 7,
+            "palabras_ref": 44,
+            "cer": 0.065,
+            "cer_distancia": 13,
+            "caracteres_ref": 200
+          },
+          "demoras_s": [
+            0.53,
+            1.189,
+            0.905,
+            1.0,
+            1.014,
+            1.152,
+            0.942
+          ],
+          "segmentos": 7,
+          "proceso_s": 6.7736,
+          "audio_s": 71.49,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 430.0,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192651-299571:otra": {
+          "error": {
+            "wer": 0.5506,
+            "wer_distancia": 49,
+            "palabras_ref": 89,
+            "cer": 0.3688,
+            "cer_distancia": 156,
+            "caracteres_ref": 423
+          },
+          "demoras_s": [
+            1.09,
+            1.024,
+            1.034,
+            1.096,
+            1.019,
+            1.005,
+            1.051
+          ],
+          "segmentos": 7,
+          "proceso_s": 5.9374,
+          "audio_s": 71.49,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 255.71,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 5,
+            "positivas_correctas": 1,
+            "negativas": 4,
+            "negativas_correctas": 4,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 2,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192931-493331:protegida": {
+          "error": {
+            "wer": 0.18,
+            "wer_distancia": 9,
+            "palabras_ref": 50,
+            "cer": 0.1404,
+            "cer_distancia": 33,
+            "caracteres_ref": 235
+          },
+          "demoras_s": [
+            0.954,
+            1.02,
+            1.027,
+            0.957,
+            1.028,
+            0.901
+          ],
+          "segmentos": 6,
+          "proceso_s": 3.0541,
+          "audio_s": 71.859,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 219.66,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192931-493331:otra": {
+          "error": {
+            "wer": 0.3765,
+            "wer_distancia": 32,
+            "palabras_ref": 85,
+            "cer": 0.303,
+            "cer_distancia": 123,
+            "caracteres_ref": 406
+          },
+          "demoras_s": [
+            1.05,
+            1.09,
+            1.069,
+            0.986,
+            1.034,
+            1.005,
+            1.013,
+            0.918,
+            0.926
+          ],
+          "segmentos": 9,
+          "proceso_s": 5.4424,
+          "audio_s": 71.859,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 268.9,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_193107-631798:protegida": {
+          "error": {
+            "wer": 0.3043,
+            "wer_distancia": 14,
+            "palabras_ref": 46,
+            "cer": 0.2297,
+            "cer_distancia": 48,
+            "caracteres_ref": 209
+          },
+          "demoras_s": [
+            0.968,
+            0.918,
+            0.911,
+            0.984,
+            1.09,
+            1.014,
+            1.002
+          ],
+          "segmentos": 7,
+          "proceso_s": 3.4283,
+          "audio_s": 68.843,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 250.31,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 1,
+            "frases_correctas": 6,
+            "positivas_correctas": 0,
+            "negativas": 6,
+            "negativas_correctas": 6,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 1,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_193107-631798:otra": {
+          "error": {
+            "wer": 0.2333,
+            "wer_distancia": 21,
+            "palabras_ref": 90,
+            "cer": 0.1185,
+            "cer_distancia": 55,
+            "caracteres_ref": 464
+          },
+          "demoras_s": [
+            1.052,
+            1.098,
+            1.043,
+            1.013,
+            0.973,
+            1.091,
+            1.027
+          ],
+          "segmentos": 7,
+          "proceso_s": 7.4658,
+          "audio_s": 68.843,
+          "p95_bloque_ms": 0.23,
+          "max_bloque_ms": 297.87,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 5,
+            "frases_correctas": 5,
+            "positivas_correctas": 3,
+            "negativas": 2,
+            "negativas_correctas": 2,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 2,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        }
+      }
+    },
+    "parakeet-0.3-silero-0.9": {
+      "motor": "parakeet",
+      "config": {
+        "corte": 0.3,
+        "umbral_rms": 0.008,
+        "vad": "silero",
+        "umbral_silero": 0.9
+      },
+      "carga_s": 1.355,
+      "metadatos_motor": {
+        "motor": "sherpa-parakeet",
+        "modelo_id": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+        "ruta_modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+        "es_streaming": false,
+        "tipo_entrega": "parciales_y_finales",
+        "version_sherpa": "1.13.8",
+        "hilos": 2,
+        "sample_rate": 16000,
+        "segmentacion": {
+          "tipo": "corte_por_silencio_silero",
+          "corte_silencio_s": 0.3,
+          "umbral_rms_silencio": null,
+          "previo_s": 0.3,
+          "max_frase_s": 10.0,
+          "min_voz_s": 0.3,
+          "min_voz_parcial_s": 1.0,
+          "parciales_cada_s": 0.5,
+          "filtro_idioma": "parciales_y_muletillas_finales",
+          "vad": {
+            "tipo": "silero_vad_sherpa_onnx",
+            "modelo": "silero_vad.onnx",
+            "sha256_16": "9e2449e1087496d8",
+            "umbral": 0.9,
+            "umbral_para_seguir": 0.75,
+            "ventana": 512,
+            "min_silence_duration": 0.0,
+            "min_speech_duration": 0.0,
+            "hilos": 1,
+            "costo_por_bloque": {
+              "bloques": 30076,
+              "mediana_ms": 0.109,
+              "p95_ms": 0.2172,
+              "max_ms": 5.2221,
+              "total_s": 4.1079
+            },
+            "modo": "silero"
+          }
+        },
+        "decodificacion": {
+          "decoding_method": "greedy_search",
+          "model_type": "nemo_transducer"
+        }
+      },
+      "memoria_pico_mb": 997.66,
+      "alcance_memoria": "subproceso_por_variante",
+      "por_grupo": {
+        "toma5/luciano-dialogo": {
+          "pruebas": 7,
+          "frases": 49,
+          "frases_correctas": 49,
+          "frases_con_etiquetas_ref": 2,
+          "positivas_correctas": 2,
+          "negativas": 47,
+          "negativas_correctas": 47,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 0,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 2,
+            "acertadas": 2,
+            "recall": 1.0,
+            "por_termino": {
+              "token": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 2,
+            "acertadas": 0,
+            "recall": 0.0,
+            "por_termino": {
+              "uala": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 2,
+            "acertadas": 1,
+            "recall": 0.5,
+            "por_termino": {
+              "guaso": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              }
+            }
+          },
+          "wer": 0.2319,
+          "cer": 0.1457,
+          "segmentos_finales": 56,
+          "segmentos_por_frase": 1.143,
+          "demora_final": {
+            "n": 56,
+            "mediana_s": 0.416,
+            "p95_s": 0.54,
+            "max_s": 0.665
+          },
+          "audio_s": 471.805,
+          "proceso_s": 14.569,
+          "rtf": 0.0309,
+          "p95_bloque_ms": {
+            "mediana": 0.22,
+            "max": 0.22
+          },
+          "max_bloque_ms": 184.7
+        },
+        "toma5/luciano-dialogo-tv": {
+          "pruebas": 2,
+          "frases": 14,
+          "frases_correctas": 14,
+          "frases_con_etiquetas_ref": 0,
+          "positivas_correctas": 0,
+          "negativas": 14,
+          "negativas_correctas": 14,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 0,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "wer": 0.1827,
+          "cer": 0.1276,
+          "segmentos_finales": 17,
+          "segmentos_por_frase": 1.214,
+          "demora_final": {
+            "n": 17,
+            "mediana_s": 0.097,
+            "p95_s": 0.437,
+            "max_s": 0.437
+          },
+          "audio_s": 129.531,
+          "proceso_s": 4.815,
+          "rtf": 0.0372,
+          "p95_bloque_ms": {
+            "mediana": 0.22,
+            "max": 0.22
+          },
+          "max_bloque_ms": 185.96
+        },
+        "toma5/otra-dialogo": {
+          "pruebas": 7,
+          "frases": 50,
+          "frases_correctas": 44,
+          "frases_con_etiquetas_ref": 19,
+          "positivas_correctas": 13,
+          "negativas": 31,
+          "negativas_correctas": 31,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 6,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 43,
+            "acertadas": 34,
+            "recall": 0.7907,
+            "por_termino": {
+              "acceso remoto": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "alias": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "anydesk": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "cbu": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "clave": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "codigo": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "compart": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "comparti pantalla": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "configuracion": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "confirmame": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "cvv": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "dame": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "instal": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "instala": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "luca": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "numeros": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "pago": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "pasame": {
+                "ref": 3,
+                "ok": 2,
+                "recall": 0.6667
+              },
+              "token": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "transferencia": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "transferi": {
+                "ref": 4,
+                "ok": 4,
+                "recall": 1.0
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 6,
+            "acertadas": 2,
+            "recall": 0.3333,
+            "por_termino": {
+              "banco macro": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "brubank": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "macro": {
+                "ref": 1,
+                "ok": 1,
+                "recall": 1.0
+              },
+              "mercado pago": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 8,
+            "acertadas": 0,
+            "recall": 0.0,
+            "por_termino": {
+              "al ñudo": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "chango": {
+                "ref": 4,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "ñaño": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "wer": 0.4097,
+          "cer": 0.2301,
+          "segmentos_finales": 105,
+          "segmentos_por_frase": 2.1,
+          "demora_final": {
+            "n": 105,
+            "mediana_s": 0.238,
+            "p95_s": 0.473,
+            "max_s": 0.6
+          },
+          "audio_s": 471.805,
+          "proceso_s": 23.671,
+          "rtf": 0.0502,
+          "p95_bloque_ms": {
+            "mediana": 0.22,
+            "max": 0.32
+          },
+          "max_bloque_ms": 198.63
+        },
+        "toma5/otra-dialogo-tv": {
+          "pruebas": 2,
+          "frases": 16,
+          "frases_correctas": 13,
+          "frases_con_etiquetas_ref": 6,
+          "positivas_correctas": 3,
+          "negativas": 10,
+          "negativas_correctas": 10,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 3,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 10,
+            "acertadas": 6,
+            "recall": 0.6,
+            "por_termino": {
+              "clave": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "codigo": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "confirmame": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "numeros": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "pasame": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 4,
+            "acertadas": 4,
+            "recall": 1.0,
+            "por_termino": {
+              "banco macro": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "macro": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 0,
+            "acertadas": 0,
+            "recall": null,
+            "por_termino": {}
+          },
+          "wer": 0.3098,
+          "cer": 0.2224,
+          "segmentos_finales": 27,
+          "segmentos_por_frase": 1.688,
+          "demora_final": {
+            "n": 27,
+            "mediana_s": 0.186,
+            "p95_s": 0.566,
+            "max_s": 0.571
+          },
+          "audio_s": 129.531,
+          "proceso_s": 8.301,
+          "rtf": 0.0641,
+          "p95_bloque_ms": {
+            "mediana": 0.22,
+            "max": 0.22
+          },
+          "max_bloque_ms": 221.11
+        }
+      },
+      "por_toma": {
+        "5": {
+          "pruebas": 18,
+          "frases": 129,
+          "frases_correctas": 120,
+          "frases_con_etiquetas_ref": 27,
+          "positivas_correctas": 18,
+          "negativas": 102,
+          "negativas_correctas": 102,
+          "etiquetas_nuevas_en_negativas": 0,
+          "etiquetas_perdidas": 9,
+          "etiquetas_nuevas_en_positivas": 0,
+          "recall_criticos": {
+            "ocurrencias_ref": 55,
+            "acertadas": 42,
+            "recall": 0.7636,
+            "por_termino": {
+              "acceso remoto": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "alias": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "anydesk": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "cbu": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "clave": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "codigo": {
+                "ref": 3,
+                "ok": 2,
+                "recall": 0.6667
+              },
+              "compart": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "comparti pantalla": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "configuracion": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "confirmame": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "cvv": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "dame": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "instal": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "instala": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "luca": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "numeros": {
+                "ref": 5,
+                "ok": 3,
+                "recall": 0.6
+              },
+              "pago": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "pasame": {
+                "ref": 5,
+                "ok": 3,
+                "recall": 0.6
+              },
+              "token": {
+                "ref": 4,
+                "ok": 4,
+                "recall": 1.0
+              },
+              "transferencia": {
+                "ref": 2,
+                "ok": 2,
+                "recall": 1.0
+              },
+              "transferi": {
+                "ref": 4,
+                "ok": 4,
+                "recall": 1.0
+              }
+            }
+          },
+          "recall_entidades": {
+            "ocurrencias_ref": 12,
+            "acertadas": 6,
+            "recall": 0.5,
+            "por_termino": {
+              "banco macro": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "brubank": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "macro": {
+                "ref": 3,
+                "ok": 3,
+                "recall": 1.0
+              },
+              "mercado pago": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "uala": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "recall_jerga": {
+            "ocurrencias_ref": 10,
+            "acertadas": 1,
+            "recall": 0.1,
+            "por_termino": {
+              "al ñudo": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "chango": {
+                "ref": 4,
+                "ok": 0,
+                "recall": 0.0
+              },
+              "guaso": {
+                "ref": 2,
+                "ok": 1,
+                "recall": 0.5
+              },
+              "ñaño": {
+                "ref": 2,
+                "ok": 0,
+                "recall": 0.0
+              }
+            }
+          },
+          "wer": 0.3282,
+          "cer": 0.1995,
+          "segmentos_finales": 205,
+          "segmentos_por_frase": 1.589,
+          "demora_final": {
+            "n": 205,
+            "mediana_s": 0.262,
+            "p95_s": 0.519,
+            "max_s": 0.665
+          },
+          "audio_s": 1202.672,
+          "proceso_s": 51.355,
+          "rtf": 0.0427,
+          "p95_bloque_ms": {
+            "mediana": 0.22,
+            "max": 0.32
+          },
+          "max_bloque_ms": 221.11
+        }
+      },
+      "por_prueba": {
+        "2026-11-02_191055-519549:protegida": {
+          "error": {
+            "wer": 0.0577,
+            "wer_distancia": 3,
+            "palabras_ref": 52,
+            "cer": 0.0247,
+            "cer_distancia": 6,
+            "caracteres_ref": 243
+          },
+          "demoras_s": [
+            0.376,
+            0.44,
+            0.413,
+            0.452,
+            0.509,
+            0.482,
+            0.443,
+            0.489,
+            0.53
+          ],
+          "segmentos": 9,
+          "proceso_s": 2.5142,
+          "audio_s": 72.737,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 161.88,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191055-519549:otra": {
+          "error": {
+            "wer": 0.3043,
+            "wer_distancia": 28,
+            "palabras_ref": 92,
+            "cer": 0.1423,
+            "cer_distancia": 71,
+            "caracteres_ref": 499
+          },
+          "demoras_s": [
+            0.089,
+            0.25,
+            0.208,
+            0.556,
+            0.125,
+            0.473,
+            0.181,
+            0.088,
+            0.212,
+            0.094,
+            0.456,
+            0.244,
+            0.238,
+            0.114
+          ],
+          "segmentos": 14,
+          "proceso_s": 4.3328,
+          "audio_s": 72.737,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 195.84,
+          "etiquetas": {
+            "n_frases": 8,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 8,
+            "positivas_correctas": 3,
+            "negativas": 5,
+            "negativas_correctas": 5,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191514-060570:protegida": {
+          "error": {
+            "wer": 0.2045,
+            "wer_distancia": 9,
+            "palabras_ref": 44,
+            "cer": 0.085,
+            "cer_distancia": 17,
+            "caracteres_ref": 200
+          },
+          "demoras_s": [
+            0.421,
+            0.411,
+            0.419,
+            0.519,
+            0.089,
+            0.411,
+            0.074,
+            0.402,
+            0.54,
+            0.183
+          ],
+          "segmentos": 10,
+          "proceso_s": 1.4445,
+          "audio_s": 61.434,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 140.01,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191514-060570:otra": {
+          "error": {
+            "wer": 0.4494,
+            "wer_distancia": 40,
+            "palabras_ref": 89,
+            "cer": 0.2151,
+            "cer_distancia": 91,
+            "caracteres_ref": 423
+          },
+          "demoras_s": [
+            0.296,
+            0.08,
+            0.392,
+            0.363,
+            0.084,
+            0.107,
+            0.19,
+            0.186,
+            0.24,
+            0.155,
+            0.275,
+            0.127,
+            0.271,
+            0.09,
+            0.394,
+            0.116
+          ],
+          "segmentos": 16,
+          "proceso_s": 3.0477,
+          "audio_s": 61.434,
+          "p95_bloque_ms": 0.32,
+          "max_bloque_ms": 154.85,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 7,
+            "positivas_correctas": 3,
+            "negativas": 4,
+            "negativas_correctas": 4,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191647-577476:protegida": {
+          "error": {
+            "wer": 0.26,
+            "wer_distancia": 13,
+            "palabras_ref": 50,
+            "cer": 0.1787,
+            "cer_distancia": 42,
+            "caracteres_ref": 235
+          },
+          "demoras_s": [
+            0.539,
+            0.665,
+            0.443,
+            0.443,
+            0.074,
+            0.408,
+            0.366
+          ],
+          "segmentos": 7,
+          "proceso_s": 2.2386,
+          "audio_s": 65.852,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 184.7,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191647-577476:otra": {
+          "error": {
+            "wer": 0.4353,
+            "wer_distancia": 37,
+            "palabras_ref": 85,
+            "cer": 0.3103,
+            "cer_distancia": 126,
+            "caracteres_ref": 406
+          },
+          "demoras_s": [
+            0.199,
+            0.212,
+            0.184,
+            0.122,
+            0.222,
+            0.083,
+            0.17,
+            0.386,
+            0.144,
+            0.405,
+            0.363,
+            0.237,
+            0.217,
+            0.422,
+            0.071
+          ],
+          "segmentos": 15,
+          "proceso_s": 2.5085,
+          "audio_s": 65.852,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 122.74,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191850-452328:protegida": {
+          "error": {
+            "wer": 0.2391,
+            "wer_distancia": 11,
+            "palabras_ref": 46,
+            "cer": 0.0861,
+            "cer_distancia": 18,
+            "caracteres_ref": 209
+          },
+          "demoras_s": [
+            0.08,
+            0.342,
+            0.35,
+            0.443,
+            0.493,
+            0.475,
+            0.576
+          ],
+          "segmentos": 7,
+          "proceso_s": 2.0943,
+          "audio_s": 59.59,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 172.57,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 1,
+            "frases_correctas": 7,
+            "positivas_correctas": 1,
+            "negativas": 6,
+            "negativas_correctas": 6,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_191850-452328:otra": {
+          "error": {
+            "wer": 0.1889,
+            "wer_distancia": 17,
+            "palabras_ref": 90,
+            "cer": 0.0625,
+            "cer_distancia": 29,
+            "caracteres_ref": 464
+          },
+          "demoras_s": [
+            0.265,
+            0.146,
+            0.289,
+            0.559,
+            0.325,
+            0.196,
+            0.278,
+            0.193,
+            0.39,
+            0.226,
+            0.458,
+            0.196
+          ],
+          "segmentos": 12,
+          "proceso_s": 4.9611,
+          "audio_s": 59.59,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 198.63,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 5,
+            "frases_correctas": 5,
+            "positivas_correctas": 3,
+            "negativas": 2,
+            "negativas_correctas": 2,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 2,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192133-308960:protegida": {
+          "error": {
+            "wer": 0.1731,
+            "wer_distancia": 9,
+            "palabras_ref": 52,
+            "cer": 0.1029,
+            "cer_distancia": 25,
+            "caracteres_ref": 243
+          },
+          "demoras_s": [
+            0.097,
+            0.186,
+            0.091,
+            0.146,
+            0.437,
+            0.075,
+            0.075,
+            0.107
+          ],
+          "segmentos": 8,
+          "proceso_s": 2.7419,
+          "audio_s": 68.474,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 185.96,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192133-308960:otra": {
+          "error": {
+            "wer": 0.2391,
+            "wer_distancia": 22,
+            "palabras_ref": 92,
+            "cer": 0.1543,
+            "cer_distancia": 77,
+            "caracteres_ref": 499
+          },
+          "demoras_s": [
+            0.159,
+            0.268,
+            0.106,
+            0.381,
+            0.103,
+            0.355,
+            0.097,
+            0.224,
+            0.472,
+            0.07,
+            0.566,
+            0.244,
+            0.2,
+            0.061
+          ],
+          "segmentos": 14,
+          "proceso_s": 4.5963,
+          "audio_s": 68.474,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 221.11,
+          "etiquetas": {
+            "n_frases": 8,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 7,
+            "positivas_correctas": 2,
+            "negativas": 5,
+            "negativas_correctas": 5,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 1,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192425-071975:protegida": {
+          "error": {
+            "wer": 0.1923,
+            "wer_distancia": 10,
+            "palabras_ref": 52,
+            "cer": 0.1523,
+            "cer_distancia": 37,
+            "caracteres_ref": 243
+          },
+          "demoras_s": [
+            0.102,
+            0.129,
+            0.061,
+            0.087,
+            0.087,
+            0.136,
+            0.083,
+            0.077,
+            0.115
+          ],
+          "segmentos": 9,
+          "proceso_s": 2.0728,
+          "audio_s": 61.057,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 135.54,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192425-071975:otra": {
+          "error": {
+            "wer": 0.3804,
+            "wer_distancia": 35,
+            "palabras_ref": 92,
+            "cer": 0.2906,
+            "cer_distancia": 145,
+            "caracteres_ref": 499
+          },
+          "demoras_s": [
+            0.287,
+            0.137,
+            0.308,
+            0.395,
+            0.571,
+            0.186,
+            0.168,
+            0.101,
+            0.172,
+            0.167,
+            0.051,
+            0.281,
+            0.06
+          ],
+          "segmentos": 13,
+          "proceso_s": 3.7049,
+          "audio_s": 61.057,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 211.34,
+          "etiquetas": {
+            "n_frases": 8,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 6,
+            "positivas_correctas": 1,
+            "negativas": 5,
+            "negativas_correctas": 5,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 2,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192651-299571:protegida": {
+          "error": {
+            "wer": 0.2727,
+            "wer_distancia": 12,
+            "palabras_ref": 44,
+            "cer": 0.19,
+            "cer_distancia": 38,
+            "caracteres_ref": 200
+          },
+          "demoras_s": [
+            0.097,
+            0.328,
+            0.459,
+            0.129,
+            0.141,
+            0.314
+          ],
+          "segmentos": 6,
+          "proceso_s": 1.948,
+          "audio_s": 71.49,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 179.18,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192651-299571:otra": {
+          "error": {
+            "wer": 0.6292,
+            "wer_distancia": 56,
+            "palabras_ref": 89,
+            "cer": 0.3948,
+            "cer_distancia": 167,
+            "caracteres_ref": 423
+          },
+          "demoras_s": [
+            0.173,
+            0.352,
+            0.065,
+            0.304,
+            0.195,
+            0.436,
+            0.204,
+            0.451,
+            0.083,
+            0.078,
+            0.178,
+            0.384,
+            0.213,
+            0.06,
+            0.412,
+            0.262,
+            0.2,
+            0.236,
+            0.082
+          ],
+          "segmentos": 19,
+          "proceso_s": 2.2958,
+          "audio_s": 71.49,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 131.12,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 3,
+            "frases_correctas": 6,
+            "positivas_correctas": 2,
+            "negativas": 4,
+            "negativas_correctas": 4,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 1,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192931-493331:protegida": {
+          "error": {
+            "wer": 0.42,
+            "wer_distancia": 21,
+            "palabras_ref": 50,
+            "cer": 0.3489,
+            "cer_distancia": 82,
+            "caracteres_ref": 235
+          },
+          "demoras_s": [
+            0.408,
+            0.06,
+            0.096,
+            0.502,
+            0.412,
+            0.243,
+            0.456,
+            0.443
+          ],
+          "segmentos": 8,
+          "proceso_s": 2.2845,
+          "audio_s": 71.859,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 163.13,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_192931-493331:otra": {
+          "error": {
+            "wer": 0.5294,
+            "wer_distancia": 45,
+            "palabras_ref": 85,
+            "cer": 0.3793,
+            "cer_distancia": 154,
+            "caracteres_ref": 406
+          },
+          "demoras_s": [
+            0.274,
+            0.268,
+            0.338,
+            0.276,
+            0.43,
+            0.112,
+            0.431,
+            0.21,
+            0.4,
+            0.495,
+            0.395,
+            0.332,
+            0.354
+          ],
+          "segmentos": 13,
+          "proceso_s": 2.7992,
+          "audio_s": 71.859,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 135.27,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 0,
+            "frases_correctas": 7,
+            "positivas_correctas": 0,
+            "negativas": 7,
+            "negativas_correctas": 7,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_193107-631798:protegida": {
+          "error": {
+            "wer": 0.1739,
+            "wer_distancia": 8,
+            "palabras_ref": 46,
+            "cer": 0.0957,
+            "cer_distancia": 20,
+            "caracteres_ref": 209
+          },
+          "demoras_s": [
+            0.516,
+            0.063,
+            0.373,
+            0.343,
+            0.475,
+            0.448,
+            0.471,
+            0.395,
+            0.456
+          ],
+          "segmentos": 9,
+          "proceso_s": 2.0446,
+          "audio_s": 68.843,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 151.16,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 1,
+            "frases_correctas": 7,
+            "positivas_correctas": 1,
+            "negativas": 6,
+            "negativas_correctas": 6,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 0,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        },
+        "2026-11-02_193107-631798:otra": {
+          "error": {
+            "wer": 0.3444,
+            "wer_distancia": 31,
+            "palabras_ref": 90,
+            "cer": 0.1552,
+            "cer_distancia": 72,
+            "caracteres_ref": 464
+          },
+          "demoras_s": [
+            0.07,
+            0.25,
+            0.157,
+            0.204,
+            0.444,
+            0.449,
+            0.45,
+            0.087,
+            0.147,
+            0.37,
+            0.6,
+            0.373,
+            0.463,
+            0.448,
+            0.474,
+            0.469
+          ],
+          "segmentos": 16,
+          "proceso_s": 3.7255,
+          "audio_s": 68.843,
+          "p95_bloque_ms": 0.22,
+          "max_bloque_ms": 159.51,
+          "etiquetas": {
+            "n_frases": 7,
+            "frases_con_etiquetas_ref": 5,
+            "frases_correctas": 4,
+            "positivas_correctas": 2,
+            "negativas": 2,
+            "negativas_correctas": 2,
+            "etiquetas_nuevas_en_negativas": 0,
+            "etiquetas_perdidas": 3,
+            "etiquetas_nuevas_en_positivas": 0
+          }
+        }
+      }
+    }
+  },
+  "sustituciones_toma1": []
+}

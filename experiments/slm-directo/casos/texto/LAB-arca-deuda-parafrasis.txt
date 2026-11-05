@@ -1,0 +1,5 @@
+A: le habla el fisco tiene una intimacion pendiente
+B: de que me hablan
+A: regularice hoy con su homebanking o le embargo la cuenta
+B: no pienso pagar nada por telefono
+A: entonces deme el cbu para frenar esto

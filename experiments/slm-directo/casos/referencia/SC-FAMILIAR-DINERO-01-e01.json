@@ -1,0 +1,24 @@
+{
+  "case_id": "SC-FAMILIAR-DINERO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "SC-FAMILIAR-DINERO-01",
+  "par": "LG-FAMILIAR-LLAMADO-01-e01",
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 6, "evento": "contexto", "etiquetas": ["THREAT_FEAR", "URGENCY_PRESSURE"]},
+    {"linea": 7, "evento": "contexto", "etiquetas": ["ISOLATION_SECRECY"]},
+    {"linea": 9, "evento": "pedido", "etiquetas": ["REQUEST_TRANSFER"]},
+    {"linea": 10, "evento": "rechazo", "etiquetas": []},
+    {"linea": 11, "evento": "contexto", "etiquetas": ["PERSISTENCE_DISTRACTION", "ISOLATION_SECRECY", "URGENCY_PRESSURE"]},
+    {"linea": 12, "evento": "rechazo", "etiquetas": []}
+  ],
+  "que_prueba": "Suplantación de un sobrino que llama desde otro número, con amenaza de denuncia, pedido de secreto y pedido de transferencia. La persona se resiste, propone verificar por otro canal y no cumple; quien llama insiste. Sin T_C.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-FAMILIAR-DINERO-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "El nombre del supuesto sobrino lo aporta A en la línea 3 y quien llama lo adopta en la línea 4; AUTHORITY_CLAIM se anota en la línea 4 porque ahí lo afirma (manual §5). El catálogo lista TRUST_BUILDING, pero acá el respaldo de identidad es débil (solo la excusa del celular roto) y no se etiquetó. «Te escucho raro» (línea 5) remite a una señal de voz que en texto no existe. Vínculo, nombre y monto ficticios. A habla primero y es quien recibe la llamada."
+}

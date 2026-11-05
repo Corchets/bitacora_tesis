@@ -1,0 +1,76 @@
+{
+ "fecha": "2026-10-29",
+ "tipo": "DIAG-8K-SMOKE: variante think=True con num_ctx=8192, smoke pizza 2 pasadas NO supera puerta (pasada2 vacia)",
+ "prompts_version": "v4-contextual-2026-10-29",
+ "firma_prompts": "4ca46101b8558628e5929b3751a2ab75a9cee0c6d225edabc9e4593dd93db044",
+ "modelo": {
+  "tag": "qwen3.5:9b-q4_K_M",
+  "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+  "ollama_version": "0.40.8",
+  "opciones": {
+   "temperature": 1,
+   "seed": 42,
+   "num_predict": 4096,
+   "num_ctx": 8192,
+   "top_p": 0.95,
+   "top_k": 20,
+   "min_p": 0.0,
+   "presence_penalty": 1.5,
+   "repeat_penalty": 1.0
+  },
+  "think": true,
+  "formato": "json-schema etiqueta/fundamento/lineas_soporte"
+ },
+ "url": "http://127.0.0.1:11435",
+ "runtime_observado": "/api/ps con context_length=8192 (Ollama 0.40.8): el contexto ya NO es el tope.",
+ "causa_tecnica": "pasada2 done_reason=length con eval_count=4096=num_predict y contenido vacio; pasada1 stop con eval=2588 y JSON valido. Con contexto 8192 el tope alcanzado es el presupuesto de generacion (maximo autorizado 4096): el thinking (16004 caracteres en pasada2) lo agota antes del JSON. Refina el DIAG-4K: alli prompt+eval=4096 era ambiguo entre contexto y presupuesto; aqui se aisla el presupuesto. Truncamiento observado, no fallo semantico ni bug de transporte inferido.",
+ "controles": [
+  {
+   "control": "pizza_legitima",
+   "lineas": [
+    "A: Hola, llamo a la pizzería para pedir dos pizzas y pagar por transferencia al local.",
+    "B: Tu pedido cuesta diez mil pesos. Transferí al alias del local que ya conocés y retirás en el mostrador.",
+    "A: Perfecto, confirmo que es el alias de la factura del local."
+   ],
+   "esperado": 0,
+   "observado": null,
+   "conforme": false,
+   "registro": {
+    "etiqueta": null,
+    "motivo": "respuesta_invalida",
+    "pasada1": {
+     "etiqueta": 0,
+     "fundamento": "Contenido entendido sin señales de riesgo: el trámite corresponde al pago normal de un pedido ('pedir dos pizzas', 'Transferí al alias del local que ya conocés'). No hay solicitudes de secreto, urgencia ni códigos. La confirmación de 'factura del local' refuerza la legitimidad visible.",
+     "lineas_soporte": [
+      1,
+      2,
+      3
+     ],
+     "error": "",
+     "done_reason": "stop",
+     "eval_count": 2588,
+     "prompt_eval_count": 708,
+     "respuesta_cruda_longitud": 356,
+     "thinking_longitud": 10064,
+     "thinking_sha256": "ea37ddb4ee2c02b1bc86e08e8e8f96c843ff0d89d8210da11c9b2f42bd7017d2"
+    },
+    "pasada2": {
+     "etiqueta": null,
+     "fundamento": "",
+     "lineas_soporte": [],
+     "error": "respuesta no es objeto JSON",
+     "done_reason": "length",
+     "eval_count": 4096,
+     "prompt_eval_count": 720,
+     "respuesta_cruda_longitud": 0,
+     "thinking_longitud": 16004,
+     "thinking_sha256": "21867fead85b8e124255a848896c27d16db759e18d51f86f34a44cf6bbde0893"
+    }
+   }
+  }
+ ],
+ "conformidad": 0,
+ "total": 1,
+ "nota": "Smoke gate no superado: no se completan los 8 (16 llamadas). Puerta de lote completo cerrada por error tecnico comun, no por semantica. Sin reanotacion de 543 ni entrenamiento: gate cerrado.",
+ "revision_humana": false
+}

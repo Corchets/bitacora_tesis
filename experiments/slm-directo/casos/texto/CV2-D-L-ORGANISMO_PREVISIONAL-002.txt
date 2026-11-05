@@ -1,0 +1,24 @@
+A: Hola, llamo porque el depósito de mi papá suele entrar el día 12 y este mes todavía no aparece.
+B: Buenas. ¿El día 12 cae fin de semana o feriado?
+A: Cayó domingo. Pensamos que se iba a adelantar, pero no pasó nada.
+B: En algunos meses el calendario mueve la fecha. ¿Tenés la terminación del beneficio o solo la fecha habitual?
+A: La terminación es 6. Él está conmigo, se llama Ramón Ibarra.
+B: Para ubicar el calendario, con el nombre y la terminación alcanza. ¿En qué localidad cobra?
+A: En Tafí Viejo, por una cuenta del banco.
+B: Según el cronograma publicado, para esa terminación el pago es el lunes 14.
+A: ¿Entonces no hay un problema con la cuenta?
+B: No puedo ver saldos ni movimientos bancarios desde esta línea. Solo puedo confirmar la fecha asignada.
+A: Él fue al cajero ayer y le dijeron que no tenía depósito.
+B: Si fue antes del día indicado, es esperable que todavía no aparezca.
+A: ¿Hay forma de saber el horario exacto?
+B: El organismo no informa una hora, porque depende del procesamiento de cada entidad.
+A: Bueno, le aviso que vuelva el lunes. Está preocupado porque necesita pagar la luz.
+B: Entiendo. ¿La factura vence antes de esa fecha?
+A: El martes. Si se acredita el lunes nos alcanza.
+B: Puede consultar con la empresa si permite pagar un día después sin recargo.
+A: Voy a llamar ahora. ¿Necesitás que te pase el documento para confirmar la fecha?
+B: No, con el nombre, la terminación y la localidad ya consultamos el calendario general.
+A: Perfecto. Me quedo con la fecha del 14.
+B: Sí, lunes 14. Si ese día no figura el pago, consulten nuevamente por el canal que usan normalmente.
+A: Gracias, le transmito eso.
+B: De nada. Buenas tardes.

@@ -1,0 +1,21 @@
+A: Sí, te escucho.
+B: Hola, del área técnica de Mi Taller. ¿Te llegaron los presupuestos que mandaste ayer?
+A: Sí, pero a uno le falta el logo.
+B: Estamos viendo una demora en los archivos de identidad de algunas cuentas.
+A: El logo está cargado desde que abrí el usuario.
+B: Puede haberse vencido el permiso de edición y por eso no lo toma al exportar.
+A: ¿Tengo que subirlo de nuevo?
+B: Antes conviene renovar el acceso al perfil para que conserve los cambios.
+A: ¿Cómo hago eso?
+B: Salí de la sesión y entrá por recuperación de cuenta.
+A: Ya me aparece el formulario.
+B: Escribí el correo con el que te registraste y completá la validación que te pide.
+A: Me pide la contraseña anterior.
+B: La que usabas antes de que te apareciera el cartel de actualización.
+A: ¿La contraseña vieja o la nueva?
+B: La anterior, así recupera el permiso y luego te deja establecer otra.
+A: No tiene sentido dar una contraseña vieja por teléfono.
+B: No la vas a decir, solo ingresala en la ventana de recuperación.
+A: ¿Y si cierro y lo hago desde el sitio?
+B: Puede tardar hasta mañana en sincronizar.
+A: Lo hago por el sitio cuando termine el trabajo.

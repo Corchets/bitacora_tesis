@@ -1,0 +1,21 @@
+A: Hola soy del equipo que está organizando la lista de difusión del centro vecinal Hablo con Sofía
+B: Sí quién te dio mi número
+A: Lo usamos para avisar por WhatsApp sobre la feria del sábado Vos te anotaste para llevar tortas
+B: Le escribí a Marina la coordinadora pero no le confirmé todavía
+A: Justo estamos acomodando los contactos porque se mezclaron dos grupos
+B: Y eso qué tiene que ver conmigo
+A: Se mandó una solicitud de validación a tu cuenta y quedó pendiente de completar
+B: Yo no pedí validar nada
+A: Cuando te llegue el código decime los seis números para asociar tu contacto con la lista
+B: Me llegó un mensage de WhatsApp que dice no compartirlo
+A: Sí es el código de seis dígitos que genera la aplicación
+B: Y para qué lo necesitás vos
+A: Para asociar tu contacto con la lista de voluntarios si no te saca del grupo
+B: No me pueden mandar la invitación de nuevo
+A: No mientras la cuenta figure en revisión
+B: Decime el nombre de Marina y le pregunto a ella
+A: No tengo el listado de coordinadores solo me pasaron los teléfonos
+B: Y si te paso el código ya queda mi nombre en la lista
+A: Sí después te llega la invitación al grupo
+B: El número es 263901
+A: Gracias ya quedó asociado

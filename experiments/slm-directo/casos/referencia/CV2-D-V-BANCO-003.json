@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-BANCO-003",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-003",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 19,
+  "t_c_linea": 26,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 19,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 26,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La llamada presenta el retiro de billetes como recambio y pide entregar efectivo a un mensajero. La persona pregunta por trazabilidad, pero al final confirma la entrega. Prueba transferencia física con cumplimiento observable y diálogo de 26 turnos.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-BANK-BILLETES-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 19, primera instrucción de entregar el efectivo al operador. T_C línea 26, confirmación explícita de entrega y recibo. La ubicación anterior del mensajero (línea 13) no solicita todavía que se entregue dinero.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-BANK-BILLETES-01",
+  "situacion": "El supuesto sector de efectivo transforma una extracción conocida en un recambio a domicilio y termina pidiendo entregar billetes a un mensajero. Prueba cómo el detector interpreta movimiento de dinero físico como REQUEST_TRANSFER aunque no se diga “transferencia”."
+}

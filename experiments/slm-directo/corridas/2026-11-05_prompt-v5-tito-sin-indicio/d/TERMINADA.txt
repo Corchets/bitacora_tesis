@@ -1,0 +1,3 @@
+v4 sin la excepción de datos comunes
+commit 26e1b173a4e6a13d11401dca9325dfad2060ed7a
+minutos 16.8

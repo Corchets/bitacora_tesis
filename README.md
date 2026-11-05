@@ -80,4 +80,56 @@ bitacora_tesis/
 │   │   └── METRICAS.md            # Fórmulas de tiempos, márgenes de anticipación y falsas alarmas
 │   └── tesis/
 │       └── ESQUELETO-INFORME.md   # Estructura capitular e índice orientativo de páginas
+├── experiments/
+│   ├── asr-local/                 # Procedimiento repetible de ASR local streaming/segmentado (#19)
+│   ├── laboratorio/               # UI y exploraciones previas de laboratorio (#44)
+│   ├── metricas/                  # Módulo de cálculo y reporte de métricas según METRICAS.md (#52)
+│   ├── replay/                    # Simulación de streaming, cola secuencial y política de aviso único (#28)
+│   └── slm-directo/               # Ensayo de SLM local directo y reglas sobre texto incremental (#50)
 ```
+
+## 4. Demo local de llamadas (Luciano)
+
+Al 2026-11-05, la copia para probar Meet con Gemma 4 es
+`/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano`, con el último commit de
+`laboratorio-luciano` sin rama propia, porque esa rama está tomada por otra copia. Desde el 2026-11-05 arranca por defecto con el prompt `v4`,
+roles y Tito sin indicio; [ADR 0001](docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) todavía no se reabrió. Las variables y el orden de la corrida están en
+[`PRUEBA-VOZ-REAL-MEET.md`](experiments/voip/PRUEBA-VOZ-REAL-MEET.md).
+
+**Qué se guarda.** Cada llamada deja en `experiments/voip/llamadas/` de la copia donde corre el servidor
+las voces (`estereo.wav`) y sus registros (`actualizaciones.jsonl`, `detector.jsonl`, `manifiesto.json`).
+Esa carpeta está fuera de Git: **borrar la copia borra las voces**, y así se perdió el
+[audio de la corrida por Meet](experiments/voip/corridas/2026-11-02-voz-real-meet.md#audio-original-perdido).
+`git status` no la muestra. Antes de borrar una copia, mirá lo ignorado con `git status --short --ignored`
+y resguardá las llamadas. Además, al arrancar, el servidor borra las pruebas que no se guardaron.
+
+Antes de abrir localhost, comprobá qué proceso ocupa el puerto y desde qué carpeta corre:
+
+```bash
+lsof -nP -iTCP:8765 -sTCP:LISTEN
+lsof -a -p <PID> -d cwd
+git -C /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano status -sb
+```
+
+Si el servidor corresponde a otra copia, terminalo con `kill -TERM <PID>` y esperá
+que libere el puerto: el cierre normal conserva la llamada en curso. Levantá la
+copia actual con el entorno de esta Mac que tiene `torch` y `transformers`, los que Tito necesita:
+
+```bash
+ollama serve   # en otra terminal; solo reglas y Probar el ASR andan sin Ollama
+cd /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip
+/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M --asr parakeet-filtro
+```
+
+`bitacora_tesis-voip/.venv` no tiene `torch`: con ese entorno, elegir Gemma en el panel falla. Los
+modelos y audios de `experiments/asr-local/` son enlaces a `bitacora_tesis-voip`, fuera de Git. En
+otra terminal, comprobá el panel antes de abrirlo:
+
+```bash
+curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip/panel.html
+open http://localhost:8765/
+```
+
+`cmp` termina sin salida y con código 0 si coincide. El puerto **8765** queda para
+esta demo; el tablero de resultados se sirve aparte en **8766**. El arranque no
+inicia una grabación. Servir la versión correcta no valida la captura ni cierra D05, D06, D08 o D09.

@@ -1,0 +1,7 @@
+A: hola soy del banco vimos un gasto que no es tuyo
+B: cual gasto
+A: si no lo frenamos te sacan todo
+B: y que tengo que hacer
+A: decime el codigo que te mandamos al telefono
+B: dice ocho uno nueve dos siete cero
+A: listo ya lo freno desde aca

@@ -1,0 +1,20 @@
+{
+  "case_id": "LAB-mensajeria-no-pases-nada",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "mencion", "etiquetas": []},
+    {"linea": 2, "evento": "contexto", "etiquetas": []},
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Mismo tema que el falso soporte de la aplicación de mensajes, sin las palabras de las reglas y sin pedido.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/legitima/mensajeria-no-pases-nada.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: UFECI, nota del 30 de junio de 2025; consulta 2026-09-23.",
+  "revision_humana": false,
+  "notas": "Pareja en el laboratorio: vishing/whatsapp-codigo.txt (LAB-whatsapp-codigo); par null. Incendio esperado por el laboratorio: ninguno (tabla y comentario); coincide con t_r_linea null. Según el comentario del guion, evita las palabras de la regla (no dice «codigo»). Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

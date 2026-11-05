@@ -1,0 +1,20 @@
+{
+  "case_id": "LAB-giro-sin-plata",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 3,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "pedido", "etiquetas": ["REQUEST_TRANSFER", "URGENCY_PRESSURE"]},
+    {"linea": 4, "evento": "contexto", "etiquetas": []},
+    {"linea": 5, "evento": "contexto", "etiquetas": ["ISOLATION_SECRECY"]}
+  ],
+  "que_prueba": "Pide girar dinero a una cuenta que dicta sin decir «plata», «alias», «cbu» ni «transferencia».",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/dificiles/vishing/giro-sin-plata.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: Ministerio de Justicia, junio de 2026 (redacción propia); consulta 2026-09-24.",
+  "revision_humana": false,
+  "notas": "Incendio esperado por el laboratorio: el guion no fija turno; la etiqueta esperada es REQUEST_TRANSFER y el texto está escrito para que las reglas no disparen (resultados-2026-09-24.csv: sin incendio; goteo con una sola opinión alta en t3, sin disparo). t_r_linea = 3: «necesito que me gires ya a la cuenta que te dicto». La línea 4 («cuanto») muestra disposición, pero no es un cumplimiento observable: t_c_linea null. La identidad («un amigo de tu hermano») no se puede verificar en el diálogo; AUTHORITY_CLAIM se usa en el sentido de persona de confianza del manual. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

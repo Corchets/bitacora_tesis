@@ -1,0 +1,19 @@
+{
+  "case_id": "LAB-banco-gasto-sin-pedido",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 2, "evento": "contexto", "etiquetas": []},
+    {"linea": 3, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Quien llama se presenta como el banco y habla de un gasto que no cierra, igual que un vishing, pero no pide nada y deriva a la aplicación.",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/dificiles/legitima/banco-gasto-sin-pedido.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025 (redacción propia); consulta 2026-09-24.",
+  "revision_humana": false,
+  "notas": "Hablantes: el guion no trae respuestas de la otra parte; las tres líneas se leen como de quien llama por el banco y el caso queda como monólogo de A. Asignación dudosa: si el equipo prefiere, la línea 2 o la 3 podrían ser de otra persona, aunque ambas se dirigen a quien escucha («no hagas», «entra vos»). Incendio esperado por el laboratorio: ninguno (caso difícil fuera del oracle de chequear_casos.py; en resultados/2026-09-24/resultados-2026-09-24.csv no hubo incendio y el goteo tuvo una sola opinión alta en t1, 0,616, sin disparo). Coincide con t_r_linea null. El diálogo no permite saber si la identidad del banco es auténtica: la clase legítima sale del guion (no pide nada y deriva a la aplicación). Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

@@ -1,0 +1,13 @@
+A: Hola, buenas tardes. Los llamo porque la aplicación del banco se me queda con la pantalla en blanco cuando quiero entrar.
+B: Buenas tardes, te atiende Carolina, de atención al cliente. Contame, ¿desde cuándo te pasa?
+A: Desde ayer. En el trabajo, cuando algo no anda, los de sistemas se conectan a mi computadora y lo arreglan. ¿Ustedes pueden hacer lo mismo con el celular?
+B: No, eso no. Nosotros no te vamos a pedir que compartas la pantalla ni que instales nada para que alguien entre a tu celular.
+A: Ah, bueno. ¿Y entonces cómo hacemos?
+B: Lo revisás vos y me vas contando. Fijate en la tienda de aplicaciones si la del banco tiene una actualización pendiente.
+A: Sí, me aparece el botón de actualizar. Ya está, se está bajando.
+B: Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.
+A: Ahora sí carga. Me aparece el inicio de siempre, para poner el usuario.
+B: Perfecto, era la versión vieja. Ingresá como siempre; yo no necesito ver nada.
+A: Entré, ya veo mis movimientos. ¿No hace falta que te pase algún dato?
+B: No, ninguno. Y si algún día te llaman pidiendo que compartas la pantalla en una videollamada, cortá y llamá vos al número que está atrás de la tarjeta.
+A: Buenísimo. Gracias, Carolina.

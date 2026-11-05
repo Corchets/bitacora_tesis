@@ -1,0 +1,5 @@
+A: te hablo de anses tenes un cobro pendiente para retirar
+B: no sabia nada de eso
+A: pasame la contraseña y el alias para habilitarlo
+B: eso no se dice por telefono
+A: si no lo haces hoy se cae el pago

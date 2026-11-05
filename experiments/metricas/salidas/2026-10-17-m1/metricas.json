@@ -1,0 +1,1013 @@
+{
+  "advertencia": "> **Advertencia de validez metodológica:** Material de **desarrollo**: casos escritos sin revisión humana; no es test reservado ni evidencia de rendimiento final. Las decisiones D07 (taxonomía y marcas de referencia) y D08 (política de alerta y protocolo experimental) continúan ABIERTAS en [docs/gestion/MAPA-DECISIONES.md](../../docs/gestion/MAPA-DECISIONES.md).",
+  "evaluaciones": [
+    {
+      "configuracion": "2026-10-17_150516_m1-gguf | slm|qwen3.5:0.8b-q8_0|tarea|ab",
+      "unidad": "lineas",
+      "metadatos": {
+        "origen": "slm-directo",
+        "corrida": "2026-10-17_150516_m1-gguf",
+        "config": "slm|qwen3.5:0.8b-q8_0|tarea|ab"
+      },
+      "casos_totales": 53,
+      "vishing_total": 29,
+      "legitimas_total": 24,
+      "clasificacion": {
+        "tp": 27,
+        "fn": 2,
+        "fp": 9,
+        "tn": 15,
+        "total_vishing": 29,
+        "total_legitimas": 24,
+        "total_conversaciones": 53,
+        "precision": 0.75,
+        "precision_ic95": [
+          0.5892954623327166,
+          0.8624952233700517
+        ],
+        "recall": 0.9310344827586207,
+        "recall_ic95": [
+          0.7803541984972431,
+          0.9808787338305667
+        ],
+        "f1": 0.8307692307692308
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 9,
+        "total_legitimas": 24,
+        "tasa": 0.375,
+        "ic95": [
+          0.21159367559548778,
+          0.5729003755732572
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 26,
+          "mediana": 0.0,
+          "q1": 0.0,
+          "q3": 1.75,
+          "iqr": 1.75,
+          "min": -2.0,
+          "max": 6.0
+        },
+        "l_c": {
+          "n": 13,
+          "mediana": 3.0,
+          "q1": 1.0,
+          "q3": 5.0,
+          "iqr": 4.0,
+          "min": -1.0,
+          "max": 7.0
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 0,
+            "numerador": 20,
+            "denominador": 28,
+            "proporcion": 0.7142857142857143,
+            "ic95": [
+              0.5294071156670428,
+              0.8474600394333092
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_R",
+            "delta": 1,
+            "numerador": 8,
+            "denominador": 28,
+            "proporcion": 0.2857142857142857,
+            "ic95": [
+              0.1525399605666909,
+              0.47059288433295715
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_R",
+            "delta": 2,
+            "numerador": 7,
+            "denominador": 28,
+            "proporcion": 0.25,
+            "ic95": [
+              0.12676494919293316,
+              0.4335567031899896
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 0,
+            "numerador": 12,
+            "denominador": 14,
+            "proporcion": 0.8571428571428571,
+            "ic95": [
+              0.6005862050302965,
+              0.9599060787285351
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_C",
+            "delta": 1,
+            "numerador": 11,
+            "denominador": 14,
+            "proporcion": 0.7857142857142857,
+            "ic95": [
+              0.524107694133997,
+              0.9242861328730683
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_C",
+            "delta": 2,
+            "numerador": 9,
+            "denominador": 14,
+            "proporcion": 0.6428571428571429,
+            "ic95": [
+              0.38764423103907397,
+              0.8365526824644587
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": 0.002479082739386427,
+        "1.0%": 0.024464831804281346,
+        "5.0%": 0.115569823434992,
+        "10.0%": 0.2162162162162162,
+        "50.0%": 0.712871287128713
+      },
+      "desglose_grupos": {
+        "laboratorio": {
+          "total": 26,
+          "vishing": 16,
+          "vishing_con_aviso": 14,
+          "recall": 0.875,
+          "recall_ic95": [
+            0.639771727342413,
+            0.9650225122567595
+          ],
+          "legitimas": 10,
+          "falsas_alarmas": 4,
+          "tasa_fa": 0.4,
+          "tasa_fa_ic95": [
+            0.16818032970623614,
+            0.6873262302663417
+          ],
+          "mediana_lr": 0.0,
+          "iqr_lr": 1.5,
+          "n_lr": 14,
+          "mediana_lc": 3.0,
+          "iqr_lc": 0.5,
+          "n_lc": 4
+        },
+        "piloto_escrito": {
+          "total": 14,
+          "vishing": 7,
+          "vishing_con_aviso": 7,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.6456695649333126,
+            1.0
+          ],
+          "legitimas": 7,
+          "falsas_alarmas": 2,
+          "tasa_fa": 0.2857142857142857,
+          "tasa_fa_ic95": [
+            0.08221892400405678,
+            0.6410655481673808
+          ],
+          "mediana_lr": 0.0,
+          "iqr_lr": 0.5,
+          "n_lr": 7,
+          "mediana_lc": 5.0,
+          "iqr_lc": 4.0,
+          "n_lc": 5
+        },
+        "trampa": {
+          "total": 13,
+          "vishing": 6,
+          "vishing_con_aviso": 6,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.6096657120978346,
+            1.0
+          ],
+          "legitimas": 7,
+          "falsas_alarmas": 3,
+          "tasa_fa": 0.42857142857142855,
+          "tasa_fa_ic95": [
+            0.15821985525146975,
+            0.7495416354723428
+          ],
+          "mediana_lr": -1.0,
+          "iqr_lr": 3.0,
+          "n_lr": 5,
+          "mediana_lc": 3.0,
+          "iqr_lc": 3.25,
+          "n_lc": 4
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 24,
+          "falsas_alarmas": 9,
+          "tasa": 0.375,
+          "ic95": [
+            0.21159367559548778,
+            0.5729003755732572
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 1282.05,
+        "ms_p95": 3462.485,
+        "rtf": null
+      }
+    },
+    {
+      "configuracion": "2026-10-17_150516_m1-gguf | slm|qwen3.5:2b-q8_0|tarea|ab",
+      "unidad": "lineas",
+      "metadatos": {
+        "origen": "slm-directo",
+        "corrida": "2026-10-17_150516_m1-gguf",
+        "config": "slm|qwen3.5:2b-q8_0|tarea|ab"
+      },
+      "casos_totales": 53,
+      "vishing_total": 29,
+      "legitimas_total": 24,
+      "clasificacion": {
+        "tp": 20,
+        "fn": 9,
+        "fp": 2,
+        "tn": 22,
+        "total_vishing": 29,
+        "total_legitimas": 24,
+        "total_conversaciones": 53,
+        "precision": 0.9090909090909091,
+        "precision_ic95": [
+          0.7218505315839417,
+          0.9747045710090046
+        ],
+        "recall": 0.6896551724137931,
+        "recall_ic95": [
+          0.5076986576690685,
+          0.8272438325551679
+        ],
+        "f1": 0.7843137254901961
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 2,
+        "total_legitimas": 24,
+        "tasa": 0.08333333333333333,
+        "ic95": [
+          0.02315881529704332,
+          0.2584880219321068
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 20,
+          "mediana": 0.0,
+          "q1": 0.0,
+          "q3": 0.0,
+          "iqr": 0.0,
+          "min": -6.0,
+          "max": 2.0
+        },
+        "l_c": {
+          "n": 12,
+          "mediana": 1.0,
+          "q1": 1.0,
+          "q3": 3.0,
+          "iqr": 2.0,
+          "min": -1.0,
+          "max": 5.0
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 0,
+            "numerador": 17,
+            "denominador": 28,
+            "proporcion": 0.6071428571428571,
+            "ic95": [
+              0.42409044296597176,
+              0.764343134584204
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_R",
+            "delta": 1,
+            "numerador": 2,
+            "denominador": 28,
+            "proporcion": 0.07142857142857142,
+            "ic95": [
+              0.01981206411530574,
+              0.22645362568399052
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_R",
+            "delta": 2,
+            "numerador": 2,
+            "denominador": 28,
+            "proporcion": 0.07142857142857142,
+            "ic95": [
+              0.01981206411530574,
+              0.22645362568399052
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 0,
+            "numerador": 11,
+            "denominador": 14,
+            "proporcion": 0.7857142857142857,
+            "ic95": [
+              0.524107694133997,
+              0.9242861328730683
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_C",
+            "delta": 1,
+            "numerador": 11,
+            "denominador": 14,
+            "proporcion": 0.7857142857142857,
+            "ic95": [
+              0.524107694133997,
+              0.9242861328730683
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_C",
+            "delta": 2,
+            "numerador": 5,
+            "denominador": 14,
+            "proporcion": 0.35714285714285715,
+            "ic95": [
+              0.1634473175355414,
+              0.612355768960926
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": 0.008216082982438125,
+        "1.0%": 0.07714561234329799,
+        "5.0%": 0.3034134007585335,
+        "10.0%": 0.4790419161676647,
+        "50.0%": 0.8921933085501859
+      },
+      "desglose_grupos": {
+        "laboratorio": {
+          "total": 26,
+          "vishing": 16,
+          "vishing_con_aviso": 10,
+          "recall": 0.625,
+          "recall_ic95": [
+            0.38641040545502714,
+            0.8151876744113636
+          ],
+          "legitimas": 10,
+          "falsas_alarmas": 0,
+          "tasa_fa": 0.0,
+          "tasa_fa_ic95": [
+            0.0,
+            0.2775327998628892
+          ],
+          "mediana_lr": 0.0,
+          "iqr_lr": 0.0,
+          "n_lr": 10,
+          "mediana_lc": 1.0,
+          "iqr_lc": 2.0,
+          "n_lc": 5
+        },
+        "piloto_escrito": {
+          "total": 14,
+          "vishing": 7,
+          "vishing_con_aviso": 6,
+          "recall": 0.8571428571428571,
+          "recall_ic95": [
+            0.4868721707256811,
+            0.9743203756552565
+          ],
+          "legitimas": 7,
+          "falsas_alarmas": 0,
+          "tasa_fa": 0.0,
+          "tasa_fa_ic95": [
+            0.0,
+            0.3543304350666875
+          ],
+          "mediana_lr": 0.0,
+          "iqr_lr": 0.0,
+          "n_lr": 6,
+          "mediana_lc": 4.0,
+          "iqr_lc": 2.5,
+          "n_lc": 4
+        },
+        "trampa": {
+          "total": 13,
+          "vishing": 6,
+          "vishing_con_aviso": 4,
+          "recall": 0.6666666666666666,
+          "recall_ic95": [
+            0.299993315138392,
+            0.9032285888942195
+          ],
+          "legitimas": 7,
+          "falsas_alarmas": 2,
+          "tasa_fa": 0.2857142857142857,
+          "tasa_fa_ic95": [
+            0.08221892400405678,
+            0.6410655481673808
+          ],
+          "mediana_lr": -1.0,
+          "iqr_lr": 1.5,
+          "n_lr": 4,
+          "mediana_lc": 1.0,
+          "iqr_lc": 1.0,
+          "n_lc": 3
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 24,
+          "falsas_alarmas": 2,
+          "tasa": 0.08333333333333333,
+          "ic95": [
+            0.02315881529704332,
+            0.2584880219321068
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 2645.65,
+        "ms_p95": 6036.015,
+        "rtf": null
+      }
+    },
+    {
+      "configuracion": "2026-10-17_150516_m1-gguf | slm|qwen3.5:4b-q4_K_M|tarea|ab",
+      "unidad": "lineas",
+      "metadatos": {
+        "origen": "slm-directo",
+        "corrida": "2026-10-17_150516_m1-gguf",
+        "config": "slm|qwen3.5:4b-q4_K_M|tarea|ab"
+      },
+      "casos_totales": 42,
+      "vishing_total": 24,
+      "legitimas_total": 18,
+      "clasificacion": {
+        "tp": 24,
+        "fn": 0,
+        "fp": 9,
+        "tn": 9,
+        "total_vishing": 24,
+        "total_legitimas": 18,
+        "total_conversaciones": 42,
+        "precision": 0.7272727272727273,
+        "precision_ic95": [
+          0.5578244099712737,
+          0.8493255911457935
+        ],
+        "recall": 1.0,
+        "recall_ic95": [
+          0.8620237953250198,
+          1.0
+        ],
+        "f1": 0.8421052631578948
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 9,
+        "total_legitimas": 18,
+        "tasa": 0.5,
+        "ic95": [
+          0.29031021505169974,
+          0.7096897849483003
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 24,
+          "mediana": 1.5,
+          "q1": 0.0,
+          "q3": 3.0,
+          "iqr": 3.0,
+          "min": 0.0,
+          "max": 7.0
+        },
+        "l_c": {
+          "n": 11,
+          "mediana": 4.0,
+          "q1": 3.0,
+          "q3": 7.5,
+          "iqr": 4.5,
+          "min": 1.0,
+          "max": 10.0
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 0,
+            "numerador": 24,
+            "denominador": 24,
+            "proporcion": 1.0,
+            "ic95": [
+              0.8620237953250198,
+              1.0
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 24
+          },
+          {
+            "referencia": "T_R",
+            "delta": 1,
+            "numerador": 13,
+            "denominador": 24,
+            "proporcion": 0.5416666666666666,
+            "ic95": [
+              0.3507486535891948,
+              0.72108666268789
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 24
+          },
+          {
+            "referencia": "T_R",
+            "delta": 2,
+            "numerador": 12,
+            "denominador": 24,
+            "proporcion": 0.5,
+            "ic95": [
+              0.31427425819573357,
+              0.6857257418042664
+            ],
+            "excluidas": 0,
+            "motivo_exclusion": "ninguna",
+            "total_vishing": 24
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 0,
+            "numerador": 11,
+            "denominador": 11,
+            "proporcion": 1.0,
+            "ic95": [
+              0.7411670330319684,
+              1.0
+            ],
+            "excluidas": 13,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 24
+          },
+          {
+            "referencia": "T_C",
+            "delta": 1,
+            "numerador": 11,
+            "denominador": 11,
+            "proporcion": 1.0,
+            "ic95": [
+              0.7411670330319684,
+              1.0
+            ],
+            "excluidas": 13,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 24
+          },
+          {
+            "referencia": "T_C",
+            "delta": 2,
+            "numerador": 10,
+            "denominador": 11,
+            "proporcion": 0.9090909090909091,
+            "ic95": [
+              0.6226415635484043,
+              0.9837678271141151
+            ],
+            "excluidas": 13,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 24
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": 0.0019980019980019984,
+        "1.0%": 0.019801980198019802,
+        "5.0%": 0.09523809523809523,
+        "10.0%": 0.18181818181818182,
+        "50.0%": 0.6666666666666666
+      },
+      "desglose_grupos": {
+        "laboratorio": {
+          "total": 26,
+          "vishing": 16,
+          "vishing_con_aviso": 16,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.8063923194655637,
+            1.0
+          ],
+          "legitimas": 10,
+          "falsas_alarmas": 6,
+          "tasa_fa": 0.6,
+          "tasa_fa_ic95": [
+            0.31267376973365824,
+            0.8318196702937638
+          ],
+          "mediana_lr": 0.0,
+          "iqr_lr": 2.0,
+          "n_lr": 16,
+          "mediana_lc": 3.0,
+          "iqr_lc": 1.0,
+          "n_lc": 5
+        },
+        "piloto_escrito": {
+          "total": 14,
+          "vishing": 7,
+          "vishing_con_aviso": 7,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.6456695649333126,
+            1.0
+          ],
+          "legitimas": 7,
+          "falsas_alarmas": 3,
+          "tasa_fa": 0.42857142857142855,
+          "tasa_fa_ic95": [
+            0.15821985525146975,
+            0.7495416354723428
+          ],
+          "mediana_lr": 3.0,
+          "iqr_lr": 2.0,
+          "n_lr": 7,
+          "mediana_lc": 7.0,
+          "iqr_lc": 4.0,
+          "n_lc": 5
+        },
+        "trampa": {
+          "total": 2,
+          "vishing": 1,
+          "vishing_con_aviso": 1,
+          "recall": 1.0,
+          "recall_ic95": [
+            0.20654931437723745,
+            1.0
+          ],
+          "legitimas": 1,
+          "falsas_alarmas": 0,
+          "tasa_fa": 0.0,
+          "tasa_fa_ic95": [
+            0.0,
+            0.7934506856227626
+          ],
+          "mediana_lr": 5.0,
+          "iqr_lr": 0.0,
+          "n_lr": 1,
+          "mediana_lc": 8.0,
+          "iqr_lc": 0.0,
+          "n_lc": 1
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 18,
+          "falsas_alarmas": 9,
+          "tasa": 0.5,
+          "ic95": [
+            0.29031021505169974,
+            0.7096897849483003
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 6627.85,
+        "ms_p95": 10186.14,
+        "rtf": null
+      }
+    },
+    {
+      "configuracion": "2026-10-17_150455_m1-reglas | reglas",
+      "unidad": "lineas",
+      "metadatos": {
+        "origen": "slm-directo",
+        "corrida": "2026-10-17_150455_m1-reglas",
+        "config": "reglas"
+      },
+      "casos_totales": 53,
+      "vishing_total": 29,
+      "legitimas_total": 24,
+      "clasificacion": {
+        "tp": 23,
+        "fn": 6,
+        "fp": 14,
+        "tn": 10,
+        "total_vishing": 29,
+        "total_legitimas": 24,
+        "total_conversaciones": 53,
+        "precision": 0.6216216216216216,
+        "precision_ic95": [
+          0.46100430439217654,
+          0.7593600082420173
+        ],
+        "recall": 0.7931034482758621,
+        "recall_ic95": [
+          0.6160990959613211,
+          0.9015392980215897
+        ],
+        "f1": 0.696969696969697
+      },
+      "falsas_alarmas": {
+        "falsas_alarmas": 14,
+        "total_legitimas": 24,
+        "tasa": 0.5833333333333334,
+        "ic95": [
+          0.3883466586522876,
+          0.7553239739018824
+        ]
+      },
+      "margenes": {
+        "l_r": {
+          "n": 23,
+          "mediana": 0.0,
+          "q1": 0.0,
+          "q3": 0.0,
+          "iqr": 0.0,
+          "min": -2.0,
+          "max": 20.0
+        },
+        "l_c": {
+          "n": 12,
+          "mediana": 1.0,
+          "q1": 1.0,
+          "q3": 4.25,
+          "iqr": 3.25,
+          "min": 1.0,
+          "max": 21.0
+        }
+      },
+      "preventive_at": {
+        "t_r": [
+          {
+            "referencia": "T_R",
+            "delta": 0,
+            "numerador": 20,
+            "denominador": 28,
+            "proporcion": 0.7142857142857143,
+            "ic95": [
+              0.5294071156670428,
+              0.8474600394333092
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_R",
+            "delta": 1,
+            "numerador": 5,
+            "denominador": 28,
+            "proporcion": 0.17857142857142858,
+            "ic95": [
+              0.07878501945604274,
+              0.3559142478934295
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_R",
+            "delta": 2,
+            "numerador": 5,
+            "denominador": 28,
+            "proporcion": 0.17857142857142858,
+            "ic95": [
+              0.07878501945604274,
+              0.3559142478934295
+            ],
+            "excluidas": 1,
+            "motivo_exclusion": "llamadas de vishing sin marca T_R en la referencia humana",
+            "total_vishing": 29
+          }
+        ],
+        "t_c": [
+          {
+            "referencia": "T_C",
+            "delta": 0,
+            "numerador": 12,
+            "denominador": 14,
+            "proporcion": 0.8571428571428571,
+            "ic95": [
+              0.6005862050302965,
+              0.9599060787285351
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_C",
+            "delta": 1,
+            "numerador": 12,
+            "denominador": 14,
+            "proporcion": 0.8571428571428571,
+            "ic95": [
+              0.6005862050302965,
+              0.9599060787285351
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          },
+          {
+            "referencia": "T_C",
+            "delta": 2,
+            "numerador": 4,
+            "denominador": 14,
+            "proporcion": 0.2857142857142857,
+            "ic95": [
+              0.11721378644576919,
+              0.5464908432989318
+            ],
+            "excluidas": 15,
+            "motivo_exclusion": "llamadas de vishing sin marca T_C en la referencia humana",
+            "total_vishing": 29
+          }
+        ]
+      },
+      "sensibilidad_prevalencia": {
+        "0.1%": 0.0013591171647634103,
+        "1.0%": 0.013547342070387276,
+        "5.0%": 0.06677957899830632,
+        "10.0%": 0.1312410841654779,
+        "50.0%": 0.5762004175365344
+      },
+      "desglose_grupos": {
+        "laboratorio": {
+          "total": 26,
+          "vishing": 16,
+          "vishing_con_aviso": 13,
+          "recall": 0.8125,
+          "recall_ic95": [
+            0.5699111903802586,
+            0.9340840092857187
+          ],
+          "legitimas": 10,
+          "falsas_alarmas": 1,
+          "tasa_fa": 0.1,
+          "tasa_fa_ic95": [
+            0.017876213095072868,
+            0.4041500267952385
+          ],
+          "mediana_lr": 0.0,
+          "iqr_lr": 0.0,
+          "n_lr": 13,
+          "mediana_lc": 1.0,
+          "iqr_lc": 0.0,
+          "n_lc": 5
+        },
+        "piloto_escrito": {
+          "total": 14,
+          "vishing": 7,
+          "vishing_con_aviso": 6,
+          "recall": 0.8571428571428571,
+          "recall_ic95": [
+            0.4868721707256811,
+            0.9743203756552565
+          ],
+          "legitimas": 7,
+          "falsas_alarmas": 7,
+          "tasa_fa": 1.0,
+          "tasa_fa_ic95": [
+            0.6456695649333126,
+            1.0
+          ],
+          "mediana_lr": 1.5,
+          "iqr_lr": 3.0,
+          "n_lr": 6,
+          "mediana_lc": 2.0,
+          "iqr_lc": 3.25,
+          "n_lc": 4
+        },
+        "trampa": {
+          "total": 13,
+          "vishing": 6,
+          "vishing_con_aviso": 4,
+          "recall": 0.6666666666666666,
+          "recall_ic95": [
+            0.299993315138392,
+            0.9032285888942195
+          ],
+          "legitimas": 7,
+          "falsas_alarmas": 6,
+          "tasa_fa": 0.8571428571428571,
+          "tasa_fa_ic95": [
+            0.4868721707256811,
+            0.9743203756552565
+          ],
+          "mediana_lr": 2.0,
+          "iqr_lr": 8.25,
+          "n_lr": 4,
+          "mediana_lc": 9.0,
+          "iqr_lc": 10.0,
+          "n_lc": 3
+        }
+      },
+      "desglose_legitimas": {
+        "negativo_dificil": {
+          "total": 24,
+          "falsas_alarmas": 14,
+          "tasa": 0.5833333333333334,
+          "ic95": [
+            0.3883466586522876,
+            0.7553239739018824
+          ]
+        },
+        "cotidiana": {
+          "total": 0,
+          "falsas_alarmas": 0,
+          "tasa": null,
+          "ic95": null,
+          "nota": "sin casos cotidianos en este conjunto de desarrollo"
+        }
+      },
+      "rendimiento": {
+        "ms_p50": 4.6,
+        "ms_p95": 13.07,
+        "rtf": null
+      }
+    }
+  ]
+}

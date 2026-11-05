@@ -1,0 +1,29 @@
+A: Hola.
+B: Hola, soy Caro, la hermana de Nico. ¿Él está con vos?
+A: No, estoy en casa. ¿Por qué me preguntás?
+B: Me escribió desde un teléfono prestado, se quedó sin batería al salir del trabajo.
+A: Pero vos no sos la hermana, ¿sos la prima de la que me habló?
+B: Sí, prima, nos decimos hermanos desde chicos. Me expresé mal.
+A: Ah, no tenía este número.
+B: Estoy usando el del local. Nico quedó complicado con el remís.
+A: ¿Qué le pasó?
+B: Le salió nueve mil más de lo que llevaba y el chofer no lo quiere esperar.
+A: ¿Por dónde está?
+B: Cerca de la estación vieja, no me dio la esquina.
+A: Le escribo al teléfono de él.
+B: No te va a entrar, se apagó. A mí me dijo que no sabía cómo volver.
+A: Si me pasás el teléfono prestado lo llamo yo.
+B: El compañero ya se fue, no lo tiene más.
+A: ¿Y vos cómo sabés que sigue ahí?
+B: Fue hace un ratito. Estoy tratando de resolverlo antes de cerrar el local.
+A: Pasame el número del remís, puedo hablar con el chofer.
+B: Es un coche de la parada, no tiene central.
+A: Entonces voy a buscar a Nico. Tardo quince minutos.
+B: Si ahora apareciera esa diferencia en mi cuenta, podría arreglárselo yo y después él te devuelve.
+A: ¿En tu cuenta? Pensé que estabas lejos.
+B: Se la acerco cuando salga, o me arreglo con el chofer. Vos no te muevas.
+A: ¿Qué nombre figura en tu cuenta?
+B: No es mía, es de una amiga que me cubre los cobros del local.
+A: Son demasiadas vueltas. Antes voy a confirmar con Nico.
+B: Para cuando lo ubiques puede haber perdido el viaje.
+A: Igual voy a llamarlo.

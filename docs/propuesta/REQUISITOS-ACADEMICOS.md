@@ -11,9 +11,9 @@
 
 ## 1. Parámetros formales de entrega y defensa
 
-- **Fecha de defensa:** Presencial, durante la última o penúltima semana de diciembre de 2026 (exposición oral).
+- **Fecha de defensa:** Presencial, en la segunda semana de diciembre de 2026 (2026-12-07 a 2026-12-11), junto con la entrega de la documentación; exposición en vivo de 20 a 30 minutos como máximo. Lo fijó el tutor el 2026-10-28 ([minuta](../gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)) y reemplaza a la última o penúltima semana de diciembre. Falta el día exacto.
 - **Entrega previa:** Informe final en formato digital (PDF) para evaluación del tribunal.
-- **Cierre interno del equipo:** 1 de diciembre de 2026 para informe, código, resultados y presentación. No es una exigencia de la cátedra: es el margen que el equipo reserva para correcciones y ensayo. El reparto de semanas está en [PLAN-DE-TRABAJO.md §11](PLAN-DE-TRABAJO.md#11-cronograma) y todavía no fue discutido por los cuatro.
+- **Hitos del tutor (2026-10-28):** todo al 90 % el 2026-11-15 y todo terminado (informe, código, resultados y presentación) el 2026-11-30. Reemplazan al cierre interno del 1 de diciembre. El reparto de semanas está en [PLAN-DE-TRABAJO.md §11](PLAN-DE-TRABAJO.md#11-cronograma).
 - **Extensión orientativa:** Promedio de ~100 páginas en hoja A4 carilla simple (incluyendo anexos, figuras y referencias).
 - **Estructura requerida del informe:**
   - Portada oficial (logo UNSTA, título del proyecto, integrantes, tutor y año).

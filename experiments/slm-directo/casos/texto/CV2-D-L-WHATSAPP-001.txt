@@ -1,0 +1,23 @@
+A: Hola, llamo yo. Mi tía cambió el teléfono y ahora no aparece el grupo del edificio.
+B: ¿Puede entrar a WhatsApp o le quedó la pantalla de registro?
+A: Le pide confirmar el número, pero después sale un aviso de que mandaron un código.
+B: ¿El número sigue siendo el mismo que usaba antes?
+A: Sí, termina en 72. Ella está acá conmigo y me pidió que averigüe.
+B: ¿El aviso es dentro de la aplicación o le llegó por mensaje?
+A: Aparece dentro de la aplicación, dice que revise los SMS. No lo abrimos todavía.
+B: Bien. Para orientarte, ¿qué modelo de teléfono tiene? Con eso cambia un poco la pantalla.
+A: Es uno chico, marca Nuvia, con Android. El anterior se le rompió la pantalla.
+B: Que abra la aplicación oficial y espere a que llegue el mensaje automático. La pantalla de registro muestra cómo seguir.
+A: ¿Y si no llega? Tiene poca señal en el departamento.
+B: Puede revisar si tiene servicio de SMS y pedir un solo reenvío después de que termine la cuenta regresiva.
+A: ¿Le conviene volver a poner el chip en el teléfono viejo?
+B: Si el chip funciona, puede recibir el mensaje en cualquier equipo. Tiene que cargar ese número en la pantalla de registro.
+A: El mensaje ya llegó, dice seis números. Ella no entiende dónde van.
+B: Que los ingrese en la pantalla de la aplicación.
+A: Perfecto, está avanzando. ¿Después le vuelve el grupo?
+B: Si la copia de seguridad está activa, podrá recuperar algunas conversaciones. Los grupos deberían aparecer cuando la cuenta quede habilitada.
+A: La copia la hizo hace bastante, no sé si incluye todo.
+B: Entonces puede faltar lo más reciente. Que espere a que termine la restauración antes de cambiar de teléfono otra vez.
+A: Ya está avanzando, dice preparando mensajes.
+B: Dejala con conexión estable y sin cerrar la aplicación por unos minutos.
+A: Listo, el grupo del consorcio apareció. Muchas gracias.

@@ -1,0 +1,24 @@
+A: Buen día, necesito cambiar la entrega de la mesa que compré. Están pintando el pasillo.
+B: Hola. ¿Tenés el número de pedido?
+A: 44192. La entrega estaba para mañana a la mañana.
+B: Veo una mesa plegable, a nombre de Renzo Lamas. ¿Es esa?
+A: Sí. El pintor dice que no se puede apoyar nada hasta el viernes.
+B: Puedo revisar los próximos turnos. ¿Te sirve el sábado?
+A: Sí, después del mediodía. A la mañana no hay nadie en casa.
+B: Hay una franja entre las dos y las seis.
+A: ¿La mesa viene armada o en caja? Necesito saber si entra por el ascensor.
+B: Viene en caja plana, mide un metro veinte de largo.
+A: Entra. El ascensor es chico, pero no tanto.
+B: ¿Querés agregar una referencia de acceso para el edificio?
+A: Sí, hay que entrar por la puerta de la cochera, porque el frente va a estar cerrado por la pintura.
+B: ¿El repartidor puede llamar al llegar?
+A: Sí, al número asociado al pedido. Estoy en casa desde la una.
+B: Cambio la fecha al sábado y dejo la referencia de la cochera.
+A: ¿Me cobran por reprogramar?
+B: No, el pedido todavía no salió a reparto.
+A: Bien. ¿La factura queda con la fecha original de compra?
+B: Sí, eso no cambia. Solo se modifica la entrega.
+A: Ya me llegó el correo, dice sábado 14. Gracias por confirmarlo.
+B: De nada. ¿Necesitás revisar otro producto?
+A: No, era solo la mesa.
+B: Perfecto, que salga bien la pintura.

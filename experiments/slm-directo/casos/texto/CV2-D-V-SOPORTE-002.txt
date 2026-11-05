@@ -1,0 +1,24 @@
+A: Hola, del equipo de soporte de Servicios Roca. ¿Te anda el sistema de turnos?
+B: Se queda congelado cuando paso de una semana a otra.
+A: ¿Estás en la computadora del consultorio o en tu celular?
+B: En la computadora, uso el navegador.
+A: Puede ser una actualización que quedó a medias. ¿Ves un botón azul abajo a la derecha?
+B: Sí, dice revisar conexión.
+A: Para ver el error necesito habilitar una sesión de asistencia remota.
+B: ¿Eso significa que vas a manejar la computadora?
+A: Solo durante unos minutos, no tocamos los turnos.
+B: ¿No podés indicarme dónde mirar?
+A: El código de error aparece en una ventana que se cierra rápido.
+B: ¿Qué tengo que hacer?
+A: Instalá Visor Roca desde el aviso que te mandé y compartime el código de acceso.
+B: No conozco ese programa.
+A: Es una herramienta de soporte, la usamos para mirar la pantalla.
+B: El navegador me advierte que puede controlar el dispositivo.
+A: Es un aviso estándar; si no aceptás, no voy a poder corregir el calendario.
+B: Bueno, ya instalé Visor Roca.
+A: Decime el código de cuatro cifras que aparece en la ventana.
+B: Es 6047.
+A: Perfecto, ya estoy viendo la pantalla.
+B: ¿Podés revisar solo el calendario?
+A: Sí, la semana ya se mueve correctamente.
+B: Ahora sí aparece el turno del miércoles.

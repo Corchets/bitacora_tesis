@@ -1,0 +1,24 @@
+A: Buenas, estoy llamando por la rifa del club. Compré un número pero no encuentro cuándo se sortea.
+B: Hola, ¿fue la rifa de la cena o la de la camiseta?
+A: La de la camiseta. Me la vendió una chica en la puerta el sábado.
+B: ¿Tenés el talonario o una foto del número?
+A: Sí, el 148. La foto muestra el sello del club y el nombre de mi hijo.
+B: Para ubicar la venta, ¿me confirmás el nombre que aparece en el talón?
+A: Julián Paredes. Está escrito medio torcido, pero se entiende.
+B: Lo encontré en la planilla de la categoría infantil. El sorteo es el domingo después del partido.
+A: ¿En la cancha o lo hacen por redes?
+B: Se anuncia en el buffet y después publican el resultado en el grupo del club.
+A: Yo no estoy en ese grupo. ¿Podés avisarme si sale mi número?
+B: Puedo anotar tu teléfono de contacto, pero solo para informar el resultado. ¿Sigue terminando en 84?
+A: Sí, ese es el mío.
+B: ¿Querés que te agregue al grupo de novedades?
+A: No, prefiero que me manden un mensaje si gano. No uso mucho los grupos.
+B: Está bien. La rifa cuesta 1.500 y ya figura paga.
+A: Sí, le transferí a la tesorera y me dio el talón después.
+B: No hace falta que me pases el comprobante ahora; la planilla ya la marca como abonada.
+A: ¿Si no voy el domingo, puedo retirar la camiseta otro día?
+B: Sí, coordinás con la comisión durante la semana.
+A: Perfecto. Pensé que se sorteaba mañana y estaba por ir al club.
+B: No, es el domingo 22, al terminar el partido de juveniles.
+A: Ahí me queda claro. Gracias por buscarlo.
+B: De nada, que tengan buen partido.

@@ -1,0 +1,27 @@
+A: hola necesito volver a imprimir una constancia de atención de la semana pasada
+B: buen día recordás en qué oficina hiciste la consulta
+A: en la de la terminal vieja por un cambio de domicilio
+B: tenés el comprobante con el número de gestión
+A: sí dice 3021 también tengo una carpeta con papeles de la contadora
+B: qué necesitás que figure en la constancia
+A: la fecha y que presenté el formulario en el trabajo me lo piden para justificar la mañana
+B: puedo revisar si quedó cargada a nombre de quién se hizo la atención
+A: estela masa soy yo
+B: encontré la visita del jueves la constancia se descarga desde el portal de trámites
+A: puedo entrar desde el teléfono la computadora está en el local
+B: sí aunque quizá sea más fácil desde una pantalla grande para imprimir
+A: tengo una clave fiscal guardada en otro lado pero no sé si sirve para ese portal
+B: esa credencial corresponde a otro sistema para este trámite usá el acceso que aparece en la página de turnos
+A: no se vinculan entre sí
+B: no necesariamente el portal te va a indicar qué método de ingreso acepta
+A: bueno no quiero bloquear nada por probar contraseñas distintas
+B: si no recordás el acceso elegí recuperar usuario desde la propia página
+A: y la constancia se manda por correo
+B: Al descargarla queda disponible para guardar o imprimir.
+A: entiendo la oficina me queda cerca quizá pase mañana y pregunte allí
+B: también podés consultar el estado en el portal cuando estés frente a una computadora
+A: me confirmás que la atención aparece registrada
+B: sí aparece con fecha y número 3021
+A: listo con eso ya puedo explicar en el trabajo que tengo que buscarla
+B: perfecto te queda otra consulta
+A: no gracias

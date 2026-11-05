@@ -1,0 +1,1115 @@
+﻿config,detector,modelo,prompt,hablantes,case_id,linea,hablante,texto,valida,error,riesgo,alerta_sugerida,aviso,motivo,evidencia,evidencia_en_texto,ms,tokens_prompt,tokens_salida,crudo,consulta,tito_puntaje,tito_error,indicio_linea,indicio_texto,indicio_puntaje
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,1,A,"Hola, buenas tardes. ¿Hablo con Rubén Aguirre?",true,,0.05,false,false,,,,1361.8,474,42,"{
+  ""riesgo"": 0.05,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,2,B,"Sí, soy yo. ¿Quién habla?",true,,0.1,false,false,,,,903.1,488,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,3,A,"Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina.",true,,0.2,false,false,,,,941.6,527,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,4,B,"Ah, sí, la conozco bien. Voy todos los meses.",true,,0.2,false,false,,,,903.3,546,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,5,A,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",true,,0.2,false,false,,,,938.3,588,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,6,B,"Mirá, yo la tarjeta la uso poco. Saco la plata por ventanilla.",true,,0.2,false,false,,,,904.3,612,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,7,A,"Sí, me figura que venís por ventanilla, a principio de mes. Mucha gente prefiere así, y está bien.",true,,0.2,false,false,,,,931.1,646,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,8,B,"Y sí, a mi edad uno ya no se lleva bien con los cajeros. ¿Vos sos nueva? Antes atendía un muchacho, Ramiro.",true,,0.2,false,false,,,,939.1,684,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,9,A,"Ramiro pasó a otra sucursal, en el centro. Siempre se acuerda de la gente del barrio.",true,,0.2,false,false,,,,909.0,711,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,10,B,Qué bueno. Era muy amable. Me ayudó un montón con los papeles cuando mi señora estuvo enferma.,true,,0.2,false,false,,,,928.2,744,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,11,A,"Lo lamento mucho, Rubén. Debe haber sido un momento difícil.",true,,0.2,false,false,,,,910.8,766,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,12,B,"Sí, ya van tres años. Ahora estoy solo, pero mis hijas vienen seguido.",true,,0.15,false,false,,,,927.3,790,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,13,A,Qué bueno que te acompañen. ¿Viven cerca?,true,,0.2,false,false,,,,909.9,808,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,14,B,"Una sí, a cinco cuadras. La otra se fue a vivir al sur. Me dice que allá todavía nieva.",true,,0.2,false,false,,,,915.5,839,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,15,A,"¡Ni me digas! Acá por suerte ya empezó el calorcito. Mi mamá ya anda con las plantas, dice que es época de trasplantar.",true,,0.1,false,false,,,,953.2,879,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,16,B,Yo tengo unos malvones en el balcón que eran de mi señora. Los cuido como oro.,true,,0.2,false,false,,,,916.7,907,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,17,A,"Qué lindo. Mi mamá también tiene; dice que hay que regarlos poco, que si no se pudren.",true,,0.1,false,false,,,,914.7,936,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,18,B,"Eso mismo decía mi señora. Sos una buena chica, Silvina.",true,,0.2,false,false,,,,908.8,956,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,19,A,"Gracias, Rubén. Bueno, no te quiero robar mucho tiempo, que lo de la tarjeta es cortito.",true,,0.2,false,false,,,,916.8,986,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,20,B,"Decime nomás, no tengo apuro. Estoy con la radio, escuchando el partido.",true,,0.15,false,false,,,,935.2,1012,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,21,A,"La tarjeta nueva te la mandamos a tu casa, así no tenés que hacer la fila. Me figura el domicilio de la calle Las Acacias, ¿seguís ahí?",true,,0.45,false,false,,,,966.5,1055,42,"{
+  ""riesgo"": 0.45,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,22,B,"Sí, sigo ahí. Hace cuarenta años que vivo en esa casa.",true,,0.15,false,false,,,,930.6,1078,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,23,A,Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?,true,,0.9,true,true,Te están pidiendo que leas o confirmes un código de verificación (mensajito) que te llega al celular para validar la operación.,23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?,true,2217.2,1112,105,"{
+  ""riesgo"": 0.9,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas o confirmes un código de verificación (mensajito) que te llega al celular para validar la operación."",
+  ""evidencia"": ""23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,24,B,"Sí, acá está. Esperá que busco los anteojos.",true,,0.95,true,false,Te están pidiendo un código de verificación que te llegará al celular para confirmar el envío de la tarjeta; nunca compartas ese código con nadie.,23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?,true,2236.9,1133,107,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo un código de verificación que te llegará al celular para confirmar el envío de la tarjeta; nunca compartas ese código con nadie."",
+  ""evidencia"": ""23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,25,B,"Ya está. Sí, sonó recién. Dice del banco.",true,,0.95,true,false,Te están pidiendo que leas el código de verificación que llegó al celular para confirmar una supuesta transferencia o envío.,"23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?
+24. B: Sí, acá está. Esperá que busco los anteojos.
+25. B: Ya está. Sí, sonó recién. Dice del banco.",true,2919.3,1152,141,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas el código de verificación que llegó al celular para confirmar una supuesta transferencia o envío."",
+  ""evidencia"": ""23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?\n24. B: Sí, acá está. Esperá que busco los anteojos.\n25. B: Ya está. Sí, sonó recién. Dice del banco.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,26,A,"Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.",true,,0.95,true,false,Te están pidiendo que leas el código de verificación que te llegó por SMS para validar una supuesta renovación de tarjeta.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.",true,2017.3,1180,96,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas el código de verificación que te llegó por SMS para validar una supuesta renovación de tarjeta."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,27,B,"Es uno, dos, tres, cuatro, cinco, seis.",true,,0.95,true,false,Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y robarla.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,2418.9,1199,116,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y robarla."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,28,A,"Perfecto, Rubén. Ya quedó cargado. Te llega en la semana.",true,,0.95,true,false,Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y robarla.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,2418.4,1222,116,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y robarla."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,29,B,"Muchas gracias, Silvina. Y si lo ves a Ramiro, saludalo de mi parte.",true,,1.0,true,false,Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y realizar una acción en falso.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,2445.4,1248,117,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y realizar una acción en falso."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,30,A,"Seguro. Y cuidá esos malvones, eh.",true,,1.0,true,false,Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y robar tus fondos.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,2422.8,1266,116,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas el código de verificación que te llegó por SMS para acceder a tu cuenta y robar tus fondos."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,1,A,"Hola, buenas tardes. ¿Hablo con Julieta Medina?",true,,0.05,false,false,,,,1541.6,472,42,"{
+  ""riesgo"": 0.05,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,2,B,"Sí, soy yo. ¿Quién es?",true,,0.1,false,false,,,,904.2,486,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,3,A,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",true,,0.4,false,false,,,,937.6,522,41,"{
+  ""riesgo"": 0.4,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,4,B,¿Qué consumo?,true,,0.3,false,false,,,,903.1,531,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,5,A,"Una compra de sesenta y dos mil pesos en una tienda en línea, hoy a las once y cuarto. ¿La reconocés?",true,,0.4,false,false,,,,908.7,563,41,"{
+  ""riesgo"": 0.4,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,6,B,"No, no compré nada. ¿Me la anulan ustedes?",true,,0.45,false,false,,,,927.9,582,42,"{
+  ""riesgo"": 0.45,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,7,A,"Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.",true,,0.1,false,false,,,,949.3,622,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,8,B,Bueno. ¿Y entonces cómo la freno?,true,,0.1,false,false,,,,905.6,636,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,9,A,"Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.",true,,0.1,false,false,,,,910.4,667,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,10,B,Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?,true,,0.95,true,true,"El estafador intenta recuperar tu confianza tras advertirte para luego pedirte un código de verificación que él mismo dice haber recibido, lo cual es una táctica clásica para obtener tus datos.",10. B: Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?,true,2250.0,694,108,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""El estafador intenta recuperar tu confianza tras advertirte para luego pedirte un código de verificación que él mismo dice haber recibido, lo cual es una táctica clásica para obtener tus datos."",
+  ""evidencia"": ""10. B: Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,11,A,"No, no me lo pases. Seguramente es del intento de compra, y ese código no se comparte con nadie, tampoco con el banco. Pausá la tarjeta desde la aplicación y, para desconocer la compra, llamá vos al número que está en el dorso.",true,,0.2,false,false,,,,949.8,758,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,12,B,"Listo, ya la pausé. Ahora corto y llamo al del dorso.",true,,0.95,true,false,"El interlocutor está presionando para que realices acciones de seguridad (pausar tarjeta, llamar al número del dorso) y menciona explícitamente códigos de un solo uso, aunque en este caso te aconseja no compartirlos; sin embargo, la dinámica de inducir a realizar cambios en tu cuenta o seguir instrucciones de 'seguridad' guiadas por voz es una táctica clásica de vishing para generar pánico y control.","A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.
+8. B: Bueno. ¿Y entonces cómo la freno?
+9. A: Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.",true,4400.2,783,216,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""El interlocutor está presionando para que realices acciones de seguridad (pausar tarjeta, llamar al número del dorso) y menciona explícitamente códigos de un solo uso, aunque en este caso te aconseja no compartirlos; sin embargo, la dinámica de inducir a realizar cambios en tu cuenta o seguir instrucciones de 'seguridad' guiadas por voz es una táctica clásica de vishing para generar pánico y control."",
+  ""evidencia"": ""A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.\n8. B: Bueno. ¿Y entonces cómo la freno?\n9. A: Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,1,A,"Buenas tardes, ¿Sergio Paz? Te hablo de atención al cliente del banco, me llamo Andrea.",true,,0.2,false,false,,,,1640.5,484,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,2,B,"Sí, soy yo. ¿Qué pasó?",true,,0.1,false,false,,,,906.4,498,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,3,A,"Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?",true,,0.4,false,false,,,,910.8,524,41,"{
+  ""riesgo"": 0.4,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,4,B,"No, yo tengo solo este celular. ¿Me entraron a la cuenta?",true,,0.65,true,true,Te están indicando que hay un dispositivo vinculado desde otra provincia para generar urgencia y posiblemente pedirte datos o códigos.,"A: Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?",true,1890.2,545,90,"{
+  ""riesgo"": 0.65,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están indicando que hay un dispositivo vinculado desde otra provincia para generar urgencia y posiblemente pedirte datos o códigos."",
+  ""evidencia"": ""A: Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,5,A,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",true,,0.85,true,false,"Te están indicando que hay un dispositivo vinculado y sugieren seguir instrucciones del sistema para desvincularlo, lo cual es una táctica común para llevarte a revelar códigos o instalar software malicioso.","A: Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",true,2346.6,577,113,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están indicando que hay un dispositivo vinculado y sugieren seguir instrucciones del sistema para desvincularlo, lo cual es una táctica común para llevarte a revelar códigos o instalar software malicioso."",
+  ""evidencia"": ""A: Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,6,B,"Sí, me entró uno recién. ¿Qué tengo que hacer?",true,,0.85,true,false,"Te están indicando que hay un dispositivo vinculado y te piden actuar para desvincularlo, lo cual es una táctica clásica para obtener códigos o acceder a tu cuenta.","5. A: Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.
+6. B: Sí, me entró uno recién. ¿Qué tengo que hacer?",true,2671.1,596,129,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están indicando que hay un dispositivo vinculado y te piden actuar para desvincularlo, lo cual es una táctica clásica para obtener códigos o acceder a tu cuenta."",
+  ""evidencia"": ""5. A: Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.\n6. B: Sí, me entró uno recién. ¿Qué tengo que hacer?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,7,A,Solamente pasame lo que te llegó,true,,0.95,true,false,Te están pidiendo que le digas el contenido del mensaje de seguridad para desvincular un dispositivo sin verificar tu identidad.,7. A: Solamente pasame lo que te llegó,true,1711.5,609,81,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que le digas el contenido del mensaje de seguridad para desvincular un dispositivo sin verificar tu identidad."",
+  ""evidencia"": ""7. A: Solamente pasame lo que te llegó""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,8,A,"los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",true,,0.95,true,false,Te están pidiendo que le digas el código de un solo uso (SMS) para desvincular un dispositivo y evitar una transferencia.,"Solamente pasame lo que te llegó
+los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",true,2111.7,635,101,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que le digas el código de un solo uso (SMS) para desvincular un dispositivo y evitar una transferencia."",
+  ""evidencia"": ""Solamente pasame lo que te llegó\nlos seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,9,B,"A ver... cero, cero, cero, cero, cero, cero.",true,,0.95,true,false,Te están pidiendo que le digas los números del código de un solo uso para desvincular el dispositivo y evitar una transferencia.,"A: Solamente pasame lo que te llegó
+8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.
+9. B: A ver... cero, cero, cero, cero, cero, cero.",true,2606.8,655,126,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que le digas los números del código de un solo uso para desvincular el dispositivo y evitar una transferencia."",
+  ""evidencia"": ""A: Solamente pasame lo que te llegó\n8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.\n9. B: A ver... cero, cero, cero, cero, cero, cero.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,10,A,"Perfecto, ya quedó desvinculado. Por las dudas no entres a la aplicación hasta mañana, que se está actualizando.",true,,0.95,true,false,Te están pidiendo el código de un solo uso que te llegó por SMS para desbloquear tu cuenta y evitar una supuesta transferencia.,"7. A: Solamente pasame lo que te llegó
+8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",true,2292.5,689,109,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo el código de un solo uso que te llegó por SMS para desbloquear tu cuenta y evitar una supuesta transferencia."",
+  ""evidencia"": ""7. A: Solamente pasame lo que te llegó\n8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,1,A,"Hola, Lu, ¿estás muy ocupada?",true,,0.05,false,false,,,,1370.3,469,42,"{
+  ""riesgo"": 0.05,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,2,B,"No, decime. Estoy saliendo del laburo.",true,,0.1,false,false,,,,909.6,486,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,3,A,Pasame el código,true,,0.95,true,true,Te están pidiendo un código de verificación o acceso a tu cuenta sin haber establecido una identidad confiable.,3. A: Pasame el código,true,1569.0,495,74,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo un código de verificación o acceso a tu cuenta sin haber establecido una identidad confiable."",
+  ""evidencia"": ""3. A: Pasame el código""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,4,A,"del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir.",true,,0.1,false,false,,,,931.5,529,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,5,B,"¡Ay, perdón! Te lo tenía que mandar antes de que salieras. Es uno, dos, tres.",true,,0.1,false,false,,,,912.2,558,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,6,A,"Listo, ya abrió. Gracias, te la devuelvo el lunes.",true,,0.1,false,false,,,,915.3,579,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,7,B,"Dale. Disfrutá, chau.",true,,0.0,false,false,,,,915.8,593,41,"{
+  ""riesgo"": 0.0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,1,A,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",true,,0.3,false,false,,,,1400.4,489,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,2,B,"Sí, soy yo. ¿Qué pasó?",true,,0.3,false,false,,,,915.3,503,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,3,A,"Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.",true,,0.95,true,true,"Te están diciendo que ya te cargaron una transferencia sin pedirte códigos ni contraseñas, pero es una estafa clásica: no firmes nada ni des datos personales hasta verificar con tu banco real.","A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.",true,2565.7,544,121,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están diciendo que ya te cargaron una transferencia sin pedirte códigos ni contraseñas, pero es una estafa clásica: no firmes nada ni des datos personales hasta verificar con tu banco real."",
+  ""evidencia"": ""A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,4,A,"Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.",true,,0.95,true,false,Te están diciendo que ya te cargaron una transferencia y te piden frenarla ahora para evitar que se vaya el dinero.,"Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco. Todavía no salió, pero si no la frenamos ahora, la plata se va...",true,2571.2,579,122,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están diciendo que ya te cargaron una transferencia y te piden frenarla ahora para evitar que se vaya el dinero."",
+  ""evidencia"": ""Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco. Todavía no salió, pero si no la frenamos ahora, la plata se va...""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,5,B,¿Qué? Yo no pedí ningún préstamo. ¿Cómo lo freno?,true,,0.9,true,false,Te están diciendo que ya te cargaron un préstamo y piden frenarlo ahora mismo para evitar que se vaya el dinero.,"A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.
+4. A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.",true,2890.6,599,139,"{
+  ""riesgo"": 0.9,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están diciendo que ya te cargaron un préstamo y piden frenarlo ahora mismo para evitar que se vaya el dinero."",
+  ""evidencia"": ""A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.\n4. A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,6,A,"Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,,0.95,true,false,Te están pidiendo compartir tu pantalla para guiarte en una acción que podría permitirles acceder a tus cuentas o realizar transferencias.,"A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2338.2,643,110,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo compartir tu pantalla para guiarte en una acción que podría permitirles acceder a tus cuentas o realizar transferencias."",
+  ""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,7,B,"¿Compartir la pantalla? No, eso no lo hago. Mañana voy a la sucursal y lo veo ahí.",true,,0.95,true,false,Te están pidiendo compartir la pantalla para guiarte en una acción que te hará perder dinero.,"A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2178.8,674,103,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo compartir la pantalla para guiarte en una acción que te hará perder dinero."",
+  ""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,8,A,"Mañana la transferencia ya salió. Y te pido que no cortes ni llames a nadie, porque si se cierra esta gestión el bloqueo se cae.",true,,0.95,true,false,"Te están presionando para compartir tu pantalla y anular un préstamo que no pediste, lo cual es una táctica común para robar tus datos o instalar malware.","6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2544.0,712,120,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están presionando para compartir tu pantalla y anular un préstamo que no pediste, lo cual es una táctica común para robar tus datos o instalar malware."",
+  ""evidencia"": ""6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,9,B,"Si sos del banco, no te va a molestar que corte y me fije yo en la aplicación si ese préstamo existe.",true,,0.85,true,false,Te están presionando para compartir tu pantalla y guiarte en una acción que podría permitirles acceder a tu cuenta o robar tus datos.,"A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2350.5,743,112,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están presionando para compartir tu pantalla y guiarte en una acción que podría permitirles acceder a tu cuenta o robar tus datos."",
+  ""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,10,A,"Si cortás, el sistema toma el préstamo como autorizado por vos y después no hay reclamo que valga.",true,,0.95,true,false,"Te están presionando para compartir tu pantalla y anular un préstamo que no pediste, lo cual es una táctica común para robar tus datos o instalar malware.","6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2514.6,773,120,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están presionando para compartir tu pantalla y anular un préstamo que no pediste, lo cual es una táctica común para robar tus datos o instalar malware."",
+  ""evidencia"": ""6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,11,B,Lo arreglo con el banco por mi cuenta. No voy a compartir nada. Hasta luego.,true,,0.95,true,false,"Te están presionando para que compartas tu pantalla y no cuelgues, bajo amenaza de que se active un préstamo falso.","6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.
+7. B: ¿Compartir la pantalla? No, eso no lo hago. Mañana voy a la sucursal y lo veo ahí.
+8. A: Mañana la transferencia ya salió. Y te pido que no cortes ni llames a nadie, porque si se cierra esta gestión el bloqueo se cae.
+10. A: Si cortás, el sistema toma el préstamo como autorizado por vos y después no hay reclamo que valga.",true,4287.7,797,209,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están presionando para que compartas tu pantalla y no cuelgues, bajo amenaza de que se active un préstamo falso."",
+  ""evidencia"": ""6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.\n7. B: ¿Compartir la pantalla? No, eso no lo hago. Mañana voy a la sucursal y lo veo ahí.\n8. A: Mañana la transferencia ya salió. Y te pido que no cortes ni llames a nadie, porque si se cierra esta gestión el bloqueo se cae.\n10. A: Si cortás, el sistema toma el préstamo como autorizado por vos y después no hay reclamo que valga.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,1,A,"Hola, buenas tardes. Los llamo porque la aplicación del banco se me queda con la pantalla en blanco cuando quiero entrar.",true,,0.2,false,false,,,,1614.0,484,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,2,B,"Buenas tardes, te atiende Carolina, de atención al cliente. Contame, ¿desde cuándo te pasa?",true,,0.1,false,false,,,,916.4,513,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,3,A,"Desde ayer. En el trabajo, cuando algo no anda, los de sistemas se conectan a mi computadora y lo arreglan. ¿Ustedes pueden hacer lo mismo con el celular?",true,,0.2,false,false,,,,947.0,556,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,4,B,"No, eso no. Nosotros no te vamos a pedir que compartas la pantalla ni que instales nada para que alguien entre a tu celular.",true,,0.1,false,false,,,,934.4,590,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,5,A,"Ah, bueno. ¿Y entonces cómo hacemos?",true,,0.1,false,false,,,,912.4,605,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,6,B,Lo revisás vos y me vas contando. Fijate en la tienda de aplicaciones si la del banco tiene una actualización pendiente.,true,,0.1,false,false,,,,919.0,636,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,7,A,"Sí, me aparece el botón de actualizar. Ya está, se está bajando.",true,,0.1,false,false,,,,915.7,658,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,8,B,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",true,,0.2,false,false,,,,920.5,688,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,9,A,"Ahora sí carga. Me aparece el inicio de siempre, para poner el usuario.",true,,0.2,false,false,,,,913.7,709,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,10,B,"Perfecto, era la versión vieja. Ingresá como siempre; yo no necesito ver nada.",true,,0.2,false,false,,,,922.8,738,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,11,A,"Entré, ya veo mis movimientos. ¿No hace falta que te pase algún dato?",true,,0.2,false,false,,,,917.2,762,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,12,B,"No, ninguno. Y si algún día te llaman pidiendo que compartas la pantalla en una videollamada, cortá y llamá vos al número que está atrás de la tarjeta.",true,,0.05,false,false,,,,972.5,809,42,"{
+  ""riesgo"": 0.05,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,13,A,"Buenísimo. Gracias, Carolina.",true,,0.05,false,false,,,,938.7,822,42,"{
+  ""riesgo"": 0.05,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,1,A,¿Hola?,true,,0.0,false,false,,,,1323.3,461,39,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,2,B,"Hola, tía, ¿cómo andás? Soy yo... ¿no me reconocés?",true,,0.1,false,false,,,,915.6,485,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,3,A,¿Quién habla? ¿Nicolás?,true,,0.1,false,false,,,,913.9,499,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,4,B,"Sí, tía, Nico. Te llamo de otro número porque se me rompió el celular. Estoy en un problema y no sabía a quién llamar.",true,,0.2,false,false,,,,950.9,537,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,5,A,¿Qué pasó? Te escucho raro.,true,,0.2,false,false,,,,919.3,551,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,6,B,"Choqué con el auto de papá y el señor del otro auto dice que si no le pago el arreglo ahora, hace la denuncia y me quedo sin registro. Estoy acá al lado de él.",true,,0.3,false,false,,,,948.9,597,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,7,B,"Por favor, no le digas nada a mamá, que se va a poner como loca. Lo quiero arreglar yo antes de que se entere.",true,,0.2,false,false,,,,947.9,634,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,8,A,Pero ¿qué querés que haga yo?,true,,0.2,false,false,,,,913.4,648,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,9,B,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,,0.95,true,true,Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña para pagar un arreglo de auto.,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2185.6,689,102,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña para pagar un arreglo de auto."",
+  ""evidencia"": ""Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,10,A,"Mirá, Nico, así no. Cortame y te llamo yo a tu número de siempre, o llamo a tu mamá.",true,,0.95,true,false,Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña para pagar un arreglo de auto.,B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2217.8,724,104,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña para pagar un arreglo de auto."",
+  ""evidencia"": ""B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,11,B,"No, tía, no me cortes, que el celular quedó destrozado en el choque. Y si llamás a mamá se arma lío. El señor me está apurando, dame cinco minutos nada más.",true,,0.95,true,false,Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña bajo presión y amenazas.,B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2181.0,775,102,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña bajo presión y amenazas."",
+  ""evidencia"": ""B: Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,12,A,Entonces que tu mamá se ocupe. Yo no transfiero nada sin hablar antes con ella. Te corto y la llamo.,true,,0.95,true,false,Te están pidiendo que transfieras dinero a una cuenta de terceros bajo presión y amenazas.,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2052.1,807,97,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que transfieras dinero a una cuenta de terceros bajo presión y amenazas."",
+  ""evidencia"": ""Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,1,A,¿Hola?,true,,0.0,false,false,,,,1113.3,461,39,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,2,B,"Hola, má. ¿Te agarro en mal momento?",true,,0.05,false,false,,,,937.8,478,42,"{
+  ""riesgo"": 0.05,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,3,A,"No, hijo, estoy acá tomando mate. ¿Qué pasó?",true,,0.1,false,false,,,,723.1,496,31,"{""riesgo"": 0.1, ""alerta_sugerida"": false, ""motivo"": """", ""evidencia"": """"}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,4,B,Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?,true,,0.9,true,true,Te están pidiendo que hagas una transferencia de dinero directamente por teléfono.,B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?,true,1936.2,531,89,"{
+  ""riesgo"": 0.9,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero directamente por teléfono."",
+  ""evidencia"": ""B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,5,A,"Sí, mi amor. ¿A qué cuenta?",true,,0.9,true,false,Te están pidiendo que hagas una transferencia de dinero inmediatamente.,B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?,true,1862.1,546,87,"{
+  ""riesgo"": 0.9,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero inmediatamente."",
+  ""evidencia"": ""B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,6,B,"A la mía de siempre, la que tenés agendada. No hay apuro, eh: hoy o mañana, cuando puedas. El viernes cobro y te los devuelvo.",true,,0.95,true,false,Te están pidiendo que hagas una transferencia de dinero bajo la excusa de pagar una boleta de luz.,B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?,true,2124.2,589,98,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero bajo la excusa de pagar una boleta de luz."",
+  ""evidencia"": ""B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,7,A,"Ay, perdoná, pero con todo lo que se escucha me da no sé qué hacerlo así, por teléfono.",true,,0.85,true,false,Te están pidiendo que hagas una transferencia de dinero sin verificar su identidad ni usar un canal seguro.,B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?,true,2055.0,619,96,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero sin verificar su identidad ni usar un canal seguro."",
+  ""evidencia"": ""B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,8,B,"No, hacés bien. Cortá y llamame vos al celular, al número de siempre, y lo hablamos de nuevo.",true,,0.95,true,false,Te están pidiendo que hagas una transferencia de dinero inmediatamente.,B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?,true,1889.6,650,88,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que hagas una transferencia de dinero inmediatamente."",
+  ""evidencia"": ""B: Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?""
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,9,A,"Dale, te corto y te llamo.",true,,0.2,false,false,,,,923.7,664,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+slm|qwen3.5:9b-q4_K_M|tarea|ab,slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,10,B,"Dale, má. Te espero.",true,,0.2,false,false,,,,924.3,678,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",,,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,1,A,"Hola, buenas tardes. ¿Hablo con Rubén Aguirre?",true,,,false,false,,,,4018.9,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,2,B,"Sí, soy yo. ¿Quién habla?",true,,,false,false,,,,13.3,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,3,A,"Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina.",true,,,false,false,,,,83.4,,,,omitida,0.001,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,4,B,"Ah, sí, la conozco bien. Voy todos los meses.",true,,,false,false,,,,30.8,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,5,A,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",true,,0.2,false,false,,,,1198.0,690,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,0.633,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,6,B,"Mirá, yo la tarjeta la uso poco. Saco la plata por ventanilla.",true,,0.2,false,false,,,,1173.0,714,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,7,A,"Sí, me figura que venís por ventanilla, a principio de mes. Mucha gente prefiere así, y está bien.",true,,0.2,false,false,,,,1206.1,748,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,8,B,"Y sí, a mi edad uno ya no se lleva bien con los cajeros. ¿Vos sos nueva? Antes atendía un muchacho, Ramiro.",true,,0.15,false,false,,,,1289.1,786,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,9,A,"Ramiro pasó a otra sucursal, en el centro. Siempre se acuerda de la gente del barrio.",true,,0.2,false,false,,,,1271.7,813,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,10,B,Qué bueno. Era muy amable. Me ayudó un montón con los papeles cuando mi señora estuvo enferma.,true,,0.15,false,false,,,,1347.4,846,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,11,A,"Lo lamento mucho, Rubén. Debe haber sido un momento difícil.",true,,0.15,false,false,,,,1357.6,868,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,12,B,"Sí, ya van tres años. Ahora estoy solo, pero mis hijas vienen seguido.",true,,0.15,false,false,,,,1396.3,892,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,13,A,Qué bueno que te acompañen. ¿Viven cerca?,true,,0.15,false,false,,,,1421.3,910,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,14,B,"Una sí, a cinco cuadras. La otra se fue a vivir al sur. Me dice que allá todavía nieva.",true,,0.15,false,false,,,,1434.7,941,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,15,A,"¡Ni me digas! Acá por suerte ya empezó el calorcito. Mi mamá ya anda con las plantas, dice que es época de trasplantar.",true,,0.15,false,false,,,,1510.8,981,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,16,B,Yo tengo unos malvones en el balcón que eran de mi señora. Los cuido como oro.,true,,0.15,false,false,,,,1533.3,1009,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,17,A,"Qué lindo. Mi mamá también tiene; dice que hay que regarlos poco, que si no se pudren.",true,,0.15,false,false,,,,1556.8,1038,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,18,B,"Eso mismo decía mi señora. Sos una buena chica, Silvina.",true,,0.15,false,false,,,,1569.3,1058,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,19,A,"Gracias, Rubén. Bueno, no te quiero robar mucho tiempo, que lo de la tarjeta es cortito.",true,,0.15,false,false,,,,1528.7,1088,38,"{
+""riesgo"": 0.15,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,20,B,"Decime nomás, no tengo apuro. Estoy con la radio, escuchando el partido.",true,,0.15,false,false,,,,1644.1,1114,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,21,A,"La tarjeta nueva te la mandamos a tu casa, así no tenés que hacer la fila. Me figura el domicilio de la calle Las Acacias, ¿seguís ahí?",true,,0.45,false,false,,,,1603.3,1157,38,"{
+""riesgo"": 0.45,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,22,B,"Sí, sigo ahí. Hace cuarenta años que vivo en esa casa.",true,,0.15,false,false,,,,1639.7,1180,38,"{
+""riesgo"": 0.15,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,23,A,Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?,true,,0.85,true,true,Te están pidiendo que le confirmes tu domicilio y te van a enviar un mensaje al celular para 'confirmar' el envío de la tarjeta; es una táctica clásica para validar tus datos personales y prepararte para pedirte códigos o instalar programas.,21. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?,true,3430.5,1214,124,"{
+""riesgo"": 0.85,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que le confirmes tu domicilio y te van a enviar un mensaje al celular para 'confirmar' el envío de la tarjeta; es una táctica clásica para validar tus datos personales y prepararte para pedirte códigos o instalar programas."",
+""evidencia"": ""21. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,24,B,"Sí, acá está. Esperá que busco los anteojos.",true,,0.85,true,false,Te están pidiendo que leas un mensaje de confirmación en tu celular para validar una supuesta renovación de tarjeta; eso es la forma clásica de robar tus datos bancarios.,"23. A: La tarjeta nueva te la mandamos a tu casa, así no tenés que hacer la fila. Me figura el domicilio de la calle Las Acacias, ¿seguís ahí?
+24. B: Sí, sigo ahí. Hace cuarenta años que vivo en esa casa.
+[...]
+23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?",true,4621.1,1235,180,"{
+""riesgo"": 0.85,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que leas un mensaje de confirmación en tu celular para validar una supuesta renovación de tarjeta; eso es la forma clásica de robar tus datos bancarios."",
+""evidencia"": ""23. A: La tarjeta nueva te la mandamos a tu casa, así no tenés que hacer la fila. Me figura el domicilio de la calle Las Acacias, ¿seguís ahí?\n24. B: Sí, sigo ahí. Hace cuarenta años que vivo en esa casa.\n[...]\n23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,25,B,"Ya está. Sí, sonó recién. Dice del banco.",true,,0.95,true,false,Te están pidiendo que leas un mensaje de confirmación en tu celular para validar una supuesta renovación de tarjeta; eso es la forma clásica de robar tus datos y acceder a tu cuenta.,"23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?
+24. B: Sí, acá está. Esperá que busco los anteojos.
+25. B: Ya está. Sí, sonó recién. Dice del banco.",true,4070.5,1254,153,"{
+""riesgo"": 0.95,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que leas un mensaje de confirmación en tu celular para validar una supuesta renovación de tarjeta; eso es la forma clásica de robar tus datos y acceder a tu cuenta."",
+""evidencia"": ""23. A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?\n24. B: Sí, acá está. Esperá que busco los anteojos.\n25. B: Ya está. Sí, sonó recién. Dice del banco.""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,26,A,"Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.",true,,0.95,true,false,Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para validar una supuesta transferencia o recambio de tarjeta.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.",true,3057.7,1282,102,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para validar una supuesta transferencia o recambio de tarjeta."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,27,B,"Es uno, dos, tres, cuatro, cinco, seis.",true,,1.0,true,false,Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para validar una supuesta transferencia o recambio de tarjeta.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,3397.3,1301,116,"{
+""riesgo"": 1.0,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para validar una supuesta transferencia o recambio de tarjeta."",
+""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,28,A,"Perfecto, Rubén. Ya quedó cargado. Te llega en la semana.",true,,1.0,true,false,Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para acceder a tu cuenta y robarla.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,3427.1,1324,118,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para acceder a tu cuenta y robarla."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,29,B,"Muchas gracias, Silvina. Y si lo ves a Ramiro, saludalo de mi parte.",true,,1.0,true,false,Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para acceder a tu cuenta y robarla.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,3462.7,1350,118,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para acceder a tu cuenta y robarla."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-04-pedido-tras-charla-larga,30,A,"Seguro. Y cuidá esos malvones, eh.",true,,1.0,true,false,Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para acceder a tu cuenta y robarla.,"26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+27. B: Es uno, dos, tres, cuatro, cinco, seis.",true,3492.0,1368,118,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que leas en voz alta un código de verificación que te llegó por SMS para acceder a tu cuenta y robarla."",
+  ""evidencia"": ""26. A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.\n27. B: Es uno, dos, tres, cuatro, cinco, seis.""
+}",slm_valida,,,5,"Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.",0.633
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,1,A,"Hola, buenas tardes. ¿Hablo con Julieta Medina?",true,,,false,false,,,,16.9,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,2,B,"Sí, soy yo. ¿Quién es?",true,,,false,false,,,,15.9,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,3,A,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",true,,0.85,false,false,,,,1137.5,618,42,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,0.986,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,4,B,¿Qué consumo?,true,,0.85,false,false,,,,1125.9,627,42,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,5,A,"Una compra de sesenta y dos mil pesos en una tienda en línea, hoy a las once y cuarto. ¿La reconocés?",true,,0.85,false,false,,,,1161.7,659,42,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,6,B,"No, no compré nada. ¿Me la anulan ustedes?",true,,0.85,false,false,,,,1160.8,678,42,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,7,A,"Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.",true,,0.1,false,false,,,,1119.8,718,37,"{
+""riesgo"": 0.1,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,8,B,Bueno. ¿Y entonces cómo la freno?,true,,0.1,false,false,,,,1211.7,732,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,9,A,"Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.",true,,0.85,true,true,"Te están indicando una acción específica (entrar a la app y tocar Pausar) para frenar el consumo sin verificar tu identidad primero, lo cual es una táctica común para presionarte a actuar bajo estrés antes de que te den más datos o intenten robarlos después.","A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.
+B: Bueno. ¿Y entonces cómo la freno?
+A: Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.",true,3972.1,763,175,"{
+""riesgo"": 0.85,
+""alerta_sugerida"": true,
+""motivo"": ""Te están indicando una acción específica (entrar a la app y tocar Pausar) para frenar el consumo sin verificar tu identidad primero, lo cual es una táctica común para presionarte a actuar bajo estrés antes de que te den más datos o intenten robarlos después."",
+""evidencia"": ""A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.\nB: Bueno. ¿Y entonces cómo la freno?\nA: Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.""
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,10,B,Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?,true,,0.95,true,false,Te están pidiendo que le facilites un código de verificación que te llegó por SMS para validar una supuesta transacción; eso es lo que buscan los estafadores.,B: Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?,true,2425.7,790,97,"{
+""riesgo"": 0.95,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que le facilites un código de verificación que te llegó por SMS para validar una supuesta transacción; eso es lo que buscan los estafadores."",
+""evidencia"": ""B: Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?""
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,11,A,"No, no me lo pases. Seguramente es del intento de compra, y ese código no se comparte con nadie, tampoco con el banco. Pausá la tarjeta desde la aplicación y, para desconocer la compra, llamá vos al número que está en el dorso.",true,,0.15,false,false,,,,1368.8,854,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-06-banco-alerta-legitima,12,B,"Listo, ya la pausé. Ahora corto y llamo al del dorso.",true,,0.15,false,false,,,,1395.3,879,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,"Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.",0.986
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,1,A,"Buenas tardes, ¿Sergio Paz? Te hablo de atención al cliente del banco, me llamo Andrea.",true,,,false,false,,,,19.2,,,,omitida,0.008,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,2,B,"Sí, soy yo. ¿Qué pasó?",true,,,false,false,,,,20.1,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,3,A,"Esta mañana se vinculó un dispositivo nuevo a tu cuenta, desde otra provincia. ¿Fuiste vos?",true,,,false,false,,,,15.0,,,,omitida,0.027,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,4,B,"No, yo tengo solo este celular. ¿Me entraron a la cuenta?",true,,,false,false,,,,16.7,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,5,A,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",true,,0.85,true,true,Te están creando urgencia falsa para que actúes rápido y te van a pedir un código o enlace para 'desvincular' el dispositivo.,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",true,2356.0,669,99,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están creando urgencia falsa para que actúes rápido y te van a pedir un código o enlace para 'desvincular' el dispositivo."",
+  ""evidencia"": ""Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.""
+}",slm_valida,0.994,,5,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",0.994
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,6,B,"Sí, me entró uno recién. ¿Qué tengo que hacer?",true,,0.85,false,false,,,,1183.7,688,42,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,5,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",0.994
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,7,A,Solamente pasame lo que te llegó,true,,0.95,true,false,Te están pidiendo que le digas el contenido del mensaje de seguridad para desvincular un dispositivo sin verificar tu identidad primero.,A: Solamente pasame lo que te llegó,true,1894.9,701,76,"{
+""riesgo"": 0.95,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que le digas el contenido del mensaje de seguridad para desvincular un dispositivo sin verificar tu identidad primero."",
+""evidencia"": ""A: Solamente pasame lo que te llegó""
+}",slm_valida,,,5,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",0.994
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,8,A,"los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",true,,1.0,true,false,Te están pidiendo que le digas los números del mensaje de seguridad para desvincular un dispositivo y evitar una transferencia.,"Solamente pasame lo que te llegó
+los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",true,2362.7,727,97,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que le digas los números del mensaje de seguridad para desvincular un dispositivo y evitar una transferencia."",
+  ""evidencia"": ""Solamente pasame lo que te llegó\nlos seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.""
+}",slm_valida,,,5,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",0.994
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,9,B,"A ver... cero, cero, cero, cero, cero, cero.",true,,1.0,true,false,Te están pidiendo que le digas los números del código de verificación para desbloquear tu cuenta.,"A: Solamente pasame lo que te llegó
+8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.
+9. B: A ver... cero, cero, cero, cero, cero, cero.",true,2838.7,747,120,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que le digas los números del código de verificación para desbloquear tu cuenta."",
+  ""evidencia"": ""A: Solamente pasame lo que te llegó\n8. A: los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.\n9. B: A ver... cero, cero, cero, cero, cero, cero.""
+}",slm_valida,,,5,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",0.994
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-07-pedido-partido-en-dos-lineas,10,A,"Perfecto, ya quedó desvinculado. Por las dudas no entres a la aplicación hasta mañana, que se está actualizando.",true,,1.0,true,false,Te están pidiendo que le digas los números del código de verificación para desvincular un dispositivo y evitar una transferencia.,"Solamente pasame lo que te llegó
+los seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.",true,2424.0,781,98,"{
+  ""riesgo"": 1.0,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que le digas los números del código de verificación para desvincular un dispositivo y evitar una transferencia."",
+  ""evidencia"": ""Solamente pasame lo que te llegó\nlos seis números del mensaje del banco, así lo desvinculo antes de que te hagan una transferencia.""
+}",slm_valida,,,5,"Todavía no pudieron operar, por eso te llamo ya. El sistema te acaba de mandar un mensaje para desvincularlo.",0.994
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,1,A,"Hola, Lu, ¿estás muy ocupada?",true,,,false,false,,,,20.2,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,2,B,"No, decime. Estoy saliendo del laburo.",true,,,false,false,,,,19.8,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,3,A,Pasame el código,true,,0.95,true,true,Te están pidiendo directamente un código de verificación o acceso a tu cuenta bancaria.,3. A: Pasame el código,true,1682.5,564,69,"{
+  ""riesgo"": 0.95,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo directamente un código de verificación o acceso a tu cuenta bancaria."",
+  ""evidencia"": ""3. A: Pasame el código""
+}",slm_valida,0.999,,3,Pasame el código,0.999
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,4,A,"del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir.",true,,0.0,false,false,,,,1068.6,598,41,"{
+  ""riesgo"": 0.0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,Pasame el código,0.999
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,5,B,"¡Ay, perdón! Te lo tenía que mandar antes de que salieras. Es uno, dos, tres.",true,,0.05,false,false,,,,1125.5,627,42,"{
+  ""riesgo"": 0.05,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,Pasame el código,0.999
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,6,A,"Listo, ya abrió. Gracias, te la devuelvo el lunes.",true,,0.0,false,false,,,,1110.6,648,41,"{
+  ""riesgo"": 0.0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,Pasame el código,0.999
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-08-frase-cortada-candado,7,B,"Dale. Disfrutá, chau.",true,,0.0,false,false,,,,1146.1,662,41,"{
+  ""riesgo"": 0.0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,3,Pasame el código,0.999
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,1,A,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",true,,0.3,false,false,,,,1064.2,586,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,0.558,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,2,B,"Sí, soy yo. ¿Qué pasó?",true,,0.3,false,false,,,,1071.8,600,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,3,A,"Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.",true,,0.85,true,true,Te están diciendo que ya te cargaron una transferencia y piden confirmación o datos para 'regularizar' la situación.,"Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.",true,2400.5,641,104,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están diciendo que ya te cargaron una transferencia y piden confirmación o datos para 'regularizar' la situación."",
+  ""evidencia"": ""Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,4,A,"Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.",true,,0.85,true,false,Te están diciendo que ya te cargaron una transferencia y te piden frenarla ahora para evitar que se vaya el dinero.,"A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.
+4. A: Todavía no salió, pero si no la frenamos ahora, la plata se va...",true,2929.5,676,128,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están diciendo que ya te cargaron una transferencia y te piden frenarla ahora para evitar que se vaya el dinero."",
+  ""evidencia"": ""A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.\n4. A: Todavía no salió, pero si no la frenamos ahora, la plata se va...""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,5,B,¿Qué? Yo no pedí ningún préstamo. ¿Cómo lo freno?,true,,0.85,true,false,Te están diciendo que ya te cargaron una transferencia y te piden frenarla para evitar que se vaya el dinero.,"A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.
+A: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.",true,3146.3,696,137,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están diciendo que ya te cargaron una transferencia y te piden frenarla para evitar que se vaya el dinero."",
+  ""evidencia"": ""A: Hace un rato se pidió a tu nombre un préstamo de cuatrocientos cincuenta mil pesos, y ya quedó cargada una transferencia de esa plata a una cuenta de otro banco.\nA: Todavía no salió, pero si no la frenamos ahora, la plata se va y el préstamo te queda a vos para pagarlo en cuotas.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,6,A,"Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,,0.92,true,false,Te están pidiendo que compartas la pantalla para guiarte en una acción falsa que busca robar tu dinero.,"A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2566.1,740,107,"{
+  ""riesgo"": 0.92,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo que compartas la pantalla para guiarte en una acción falsa que busca robar tu dinero."",
+  ""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,7,B,"¿Compartir la pantalla? No, eso no lo hago. Mañana voy a la sucursal y lo veo ahí.",true,,0.85,true,false,Te están pidiendo compartir la pantalla para guiarte en una acción que podría permitirles acceder a tu cuenta o realizar una transferencia.,"A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2580.4,771,106,"{
+""riesgo"": 0.85,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo compartir la pantalla para guiarte en una acción que podría permitirles acceder a tu cuenta o realizar una transferencia."",
+""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,8,A,"Mañana la transferencia ya salió. Y te pido que no cortes ni llames a nadie, porque si se cierra esta gestión el bloqueo se cae.",true,,0.85,true,false,"Te están presionando para compartir tu pantalla y guiarte por la app, lo cual es una táctica común para robar tus datos o acceder a tu cuenta.","A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2842.4,809,117,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están presionando para compartir tu pantalla y guiarte por la app, lo cual es una táctica común para robar tus datos o acceder a tu cuenta."",
+  ""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,9,B,"Si sos del banco, no te va a molestar que corte y me fije yo en la aplicación si ese préstamo existe.",true,,0.85,true,false,"Te están pidiendo compartir la pantalla para guiarte y anular un préstamo que no existe, una táctica común para robar tus datos o instalar malware.","A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2860.0,840,116,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo compartir la pantalla para guiarte y anular un préstamo que no existe, una táctica común para robar tus datos o instalar malware."",
+  ""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,10,A,"Si cortás, el sistema toma el préstamo como autorizado por vos y después no hay reclamo que valga.",true,,0.92,true,false,"Te están presionando para compartir tu pantalla y guiarte por la app, lo cual es una táctica clásica para robar tus claves o acceder a tu cuenta.","6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2978.2,870,120,"{
+  ""riesgo"": 0.92,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están presionando para compartir tu pantalla y guiarte por la app, lo cual es una táctica clásica para robar tus claves o acceder a tu cuenta."",
+  ""evidencia"": ""6. A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-SOPORTE-REMOTO-01-e01,11,B,Lo arreglo con el banco por mi cuenta. No voy a compartir nada. Hasta luego.,true,,0.92,true,false,"Te están presionando para compartir tu pantalla y anular un préstamo que no pediste, lo cual es una táctica común para robar tus datos o instalar malware.","A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.",true,2968.7,894,118,"{
+  ""riesgo"": 0.92,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están presionando para compartir tu pantalla y anular un préstamo que no pediste, lo cual es una táctica común para robar tus datos o instalar malware."",
+  ""evidencia"": ""A: Yo desde acá no veo la aplicación como la ves vos. Te hago una videollamada, tocás «compartir pantalla» y te voy guiando para anular el préstamo.""
+}",slm_valida,,,1,"Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?",0.558
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,1,A,"Hola, buenas tardes. Los llamo porque la aplicación del banco se me queda con la pantalla en blanco cuando quiero entrar.",true,,,false,false,,,,24.0,,,,omitida,0.01,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,2,B,"Buenas tardes, te atiende Carolina, de atención al cliente. Contame, ¿desde cuándo te pasa?",true,,,false,false,,,,21.8,,,,omitida,0.015,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,3,A,"Desde ayer. En el trabajo, cuando algo no anda, los de sistemas se conectan a mi computadora y lo arreglan. ¿Ustedes pueden hacer lo mismo con el celular?",true,,,false,false,,,,26.9,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,4,B,"No, eso no. Nosotros no te vamos a pedir que compartas la pantalla ni que instales nada para que alguien entre a tu celular.",true,,,false,false,,,,24.2,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,5,A,"Ah, bueno. ¿Y entonces cómo hacemos?",true,,,false,false,,,,19.8,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,6,B,Lo revisás vos y me vas contando. Fijate en la tienda de aplicaciones si la del banco tiene una actualización pendiente.,true,,,false,false,,,,22.7,,,,omitida,0.008,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,7,A,"Sí, me aparece el botón de actualizar. Ya está, se está bajando.",true,,,false,false,,,,14.2,,,,omitida,0.106,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,8,B,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",true,,0.2,false,false,,,,1230.2,778,37,"{
+""riesgo"": 0.2,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,0.909,,8,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",0.909
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,9,A,"Ahora sí carga. Me aparece el inicio de siempre, para poner el usuario.",true,,0.2,false,false,,,,1200.5,799,37,"{
+""riesgo"": 0.2,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,8,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",0.909
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,10,B,"Perfecto, era la versión vieja. Ingresá como siempre; yo no necesito ver nada.",true,,0.2,false,false,,,,1231.4,828,37,"{
+""riesgo"": 0.2,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,8,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",0.909
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,11,A,"Entré, ya veo mis movimientos. ¿No hace falta que te pase algún dato?",true,,0.2,false,false,,,,1274.9,852,37,"{
+""riesgo"": 0.2,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,8,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",0.909
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,12,B,"No, ninguno. Y si algún día te llaman pidiendo que compartas la pantalla en una videollamada, cortá y llamá vos al número que está atrás de la tarjeta.",true,,0.2,false,false,,,,1296.8,899,37,"{
+""riesgo"": 0.2,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,8,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",0.909
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,LG-SUPPORT-INFO-01-e02,13,A,"Buenísimo. Gracias, Carolina.",true,,0.2,false,false,,,,1328.2,912,37,"{
+""riesgo"": 0.2,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": """"
+}",slm_valida,,,8,"Bien. Cuando termine, abrila y contame qué te aparece en la pantalla. Todavía no pongas la clave.",0.909
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,1,A,¿Hola?,true,,,false,false,,,,13.7,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,2,B,"Hola, tía, ¿cómo andás? Soy yo... ¿no me reconocés?",true,,,false,false,,,,13.7,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,3,A,¿Quién habla? ¿Nicolás?,true,,,false,false,,,,13.9,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,4,B,"Sí, tía, Nico. Te llamo de otro número porque se me rompió el celular. Estoy en un problema y no sabía a quién llamar.",true,,,false,false,,,,17.0,,,,omitida,0.019,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,5,A,¿Qué pasó? Te escucho raro.,true,,,false,false,,,,15.1,,,,omitida,0.002,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,6,B,"Choqué con el auto de papá y el señor del otro auto dice que si no le pago el arreglo ahora, hace la denuncia y me quedo sin registro. Estoy acá al lado de él.",true,,,false,false,,,,21.3,,,,omitida,0.001,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,7,B,"Por favor, no le digas nada a mamá, que se va a poner como loca. Lo quiero arreglar yo antes de que se entere.",true,,,false,false,,,,17.0,,,,omitida,0.456,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,8,A,Pero ¿qué querés que haga yo?,true,,,false,false,,,,12.4,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,9,B,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,,0.92,true,true,Te están pidiendo que transfieras dinero inmediatamente a una cuenta de terceros bajo amenaza y promesas falsas.,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2242.7,790,97,"{
+""riesgo"": 0.92,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que transfieras dinero inmediatamente a una cuenta de terceros bajo amenaza y promesas falsas."",
+""evidencia"": ""Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",slm_valida,0.576,,9,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,0.576
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,10,A,"Mirá, Nico, así no. Cortame y te llamo yo a tu número de siempre, o llamo a tu mamá.",true,,0.92,true,false,Te están pidiendo que hagas una transferencia de dinero a una cuenta ajena bajo presión y con la promesa de devolución posterior.,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2330.0,825,102,"{
+""riesgo"": 0.92,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que hagas una transferencia de dinero a una cuenta ajena bajo presión y con la promesa de devolución posterior."",
+""evidencia"": ""Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",slm_valida,,,9,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,0.576
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,11,B,"No, tía, no me cortes, que el celular quedó destrozado en el choque. Y si llamás a mamá se arma lío. El señor me está apurando, dame cinco minutos nada más.",true,,0.92,true,false,Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña bajo presión y te piden no avisar a tu familia.,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2405.5,876,104,"{
+""riesgo"": 0.92,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que hagas una transferencia de dinero a una cuenta extraña bajo presión y te piden no avisar a tu familia."",
+""evidencia"": ""Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",slm_valida,,,9,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,0.576
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,SC-FAMILIAR-DINERO-01-e01,12,A,Entonces que tu mamá se ocupe. Yo no transfiero nada sin hablar antes con ella. Te corto y la llamo.,true,,0.92,true,false,Te están pidiendo que transfieras dinero a una cuenta de terceros bajo presión y amenazas.,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,true,2216.9,908,93,"{
+""riesgo"": 0.92,
+""alerta_sugerida"": true,
+""motivo"": ""Te están pidiendo que transfieras dinero a una cuenta de terceros bajo presión y amenazas."",
+""evidencia"": ""Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.""
+}",slm_valida,,,9,Son ciento ochenta mil pesos. ¿Me los podés transferir ahora a la cuenta del señor? Te paso los datos por mensaje y el lunes te los devuelvo.,0.576
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,1,A,¿Hola?,true,,,false,false,,,,17.2,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,2,B,"Hola, má. ¿Te agarro en mal momento?",true,,,false,false,,,,19.5,,,,omitida,0.001,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,3,A,"No, hijo, estoy acá tomando mate. ¿Qué pasó?",true,,,false,false,,,,19.5,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,4,B,Nada grave. Me vino más alta la boleta de la luz y no llego hasta el viernes. ¿Me podrás transferir veinte mil pesos?,true,,,false,false,,,,22.9,,,,omitida,0.004,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,5,A,"Sí, mi amor. ¿A qué cuenta?",true,,,false,false,,,,14.3,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,6,B,"A la mía de siempre, la que tenés agendada. No hay apuro, eh: hoy o mañana, cuando puedas. El viernes cobro y te los devuelvo.",true,,,false,false,,,,18.4,,,,omitida,0.0,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,7,A,"Ay, perdoná, pero con todo lo que se escucha me da no sé qué hacerlo así, por teléfono.",true,,,false,false,,,,15.6,,,,omitida,0.053,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,8,B,"No, hacés bien. Cortá y llamame vos al celular, al número de siempre, y lo hablamos de nuevo.",true,,,false,false,,,,20.1,,,,omitida,0.188,,,,
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,9,A,"Dale, te corto y te llamo.",true,,0.1,false,false,,,,1471.6,739,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,0.987,,9,"Dale, te corto y te llamo.",0.987
+tito-slm|qwen3.5:9b-q4_K_M|tarea|ab,tito-slm,qwen3.5:9b-q4_K_M,tarea,ab,TR-11-familiar-real-pide-plata,10,B,"Dale, má. Te espero.",true,,0.1,false,false,,,,1238.7,753,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}",slm_valida,,,9,"Dale, te corto y te llamo.",0.987

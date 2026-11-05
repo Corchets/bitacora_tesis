@@ -1,0 +1,20 @@
+A: Buenas soy de producción de Radio Horizonte Hablás con Abril
+B: Sí quién llama
+A: Te ganaste un parlante portátil en la trivia del mediodía
+B: Yo mandé una respuesta por mensaje pero no pensé que hubiera premio
+A: Tu respuesta salió sorteada entre quienes participaron
+B: Cómo me lo entregan
+A: El envío sale hoy a la direcsión que cargaste en la web
+B: Qué empresa lo trae
+A: Mensajería propia de la radio
+B: Tengo que pagar algo
+A: El envío está bonificado pero falta el cargo de activación del premio
+B: De cuánto es
+A: Dos mil setecientos se abona por transferencia a la cuenta de producción
+B: Me mandás una factura
+A: Sí después de confirmar el pago queda el comprobante de entrega
+B: Ya hice la transferencia por ese importe
+A: Listo te va a llegar la confirmación del envío
+B: Hoy lo despachan
+A: Sí está previsto para la tarde
+B: Bueno quedo atenta al mensaje

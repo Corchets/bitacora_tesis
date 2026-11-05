@@ -1,0 +1,3 @@
+{"n": 4, "saltadas": 0, "inicio_eval_s": 5.204, "fin_eval_s": 6.477, "ms_detector": 1272.4, "valida": true, "error": "", "riesgo": 0.0, "alerta_sugerida": false, "motivo": "", "evidencia": "", "aviso": false, "t_a": null, "fin_voz_s": 4.32}
+{"n": 8, "saltadas": 0, "inicio_eval_s": 10.243, "fin_eval_s": 11.466, "ms_detector": 1221.5, "valida": true, "error": "", "riesgo": 0.0, "alerta_sugerida": false, "motivo": "", "evidencia": "", "aviso": false, "t_a": null, "fin_voz_s": 9.44}
+{"n": 11, "saltadas": 0, "inicio_eval_s": 13.419, "fin_eval_s": 14.631, "ms_detector": 1211.8, "valida": true, "error": "", "riesgo": 0.0, "alerta_sugerida": false, "motivo": "", "evidencia": "", "aviso": false, "t_a": null, "fin_voz_s": 12.56}

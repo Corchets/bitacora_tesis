@@ -1,0 +1,12 @@
+A: Hola, buenas tardes. ¿Hablo con Julieta Medina?
+B: Sí, soy yo. ¿Quién es?
+A: Te habla Gastón, del área de seguridad de tarjetas del banco. Te llamo por un consumo que nos llamó la atención en tu tarjeta de crédito.
+B: ¿Qué consumo?
+A: Una compra de sesenta y dos mil pesos en una tienda en línea, hoy a las once y cuarto. ¿La reconocés?
+B: No, no compré nada. ¿Me la anulan ustedes?
+A: Antes que nada: no te voy a pedir ningún código, ni la clave, ni los números de la tarjeta. Si en algún momento alguien te los pide, cortá.
+B: Bueno. ¿Y entonces cómo la freno?
+A: Entrá a la aplicación del banco, en Tarjetas, y tocá Pausar. Eso la frena al instante.
+B: Hace un rato me llegó un mensaje con un código. ¿Te lo paso así lo verificás?
+A: No, no me lo pases. Seguramente es del intento de compra, y ese código no se comparte con nadie, tampoco con el banco. Pausá la tarjeta desde la aplicación y, para desconocer la compra, llamá vos al número que está en el dorso.
+B: Listo, ya la pausé. Ahora corto y llamo al del dorso.

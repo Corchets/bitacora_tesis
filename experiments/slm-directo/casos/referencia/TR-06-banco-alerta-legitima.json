@@ -1,0 +1,23 @@
+{
+  "case_id": "TR-06-banco-alerta-legitima",
+  "grupo": "trampa",
+  "semilla": "LG-BANK-ALERT-01",
+  "par": null,
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 5, "evento": "contexto", "etiquetas": []},
+    {"linea": 7, "evento": "mencion", "etiquetas": []},
+    {"linea": 9, "evento": "contexto", "etiquetas": []},
+    {"linea": 10, "evento": "mencion", "etiquetas": []},
+    {"linea": 11, "evento": "rechazo", "etiquetas": []},
+    {"linea": 12, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Mismo arranque que el fraude de compra sospechosa (SC-BANK-OTP-01): quien llama se presenta como el banco, describe una compra que la persona no hizo y pregunta si la reconoce. La diferencia está en que avisa que no va a pedir código, clave ni números, deriva a pausar la tarjeta desde la aplicación y a llamar al número del dorso, y rechaza el código cuando la propia persona ofrece dictarlo. Prueba que el detector no alerte por la identidad de banco más una compra sospechosa, y que una oferta espontánea del código no se tome como pedido.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla LG-BANK-ALERT-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "La línea 9 indica pausar la tarjeta desde la aplicación oficial: según el manual §5, recomendar una acción de seguridad por el canal oficial no es REQUEST_SECURITY_ACTION, aunque tiene forma de instrucción. En la línea 10 es B quien ofrece el código; A lo rechaza (línea 11). El texto no permite comprobar que quien llama sea realmente el banco: la legitimidad sale de la ficha y de la conducta (no pide nada, deriva a canales que la persona controla). TR-01-pedido-indirecto-digitos tiene un arranque parecido y puede servir de contraste, aunque no se declaró como par. Nombre, monto y hora ficticios."
+}

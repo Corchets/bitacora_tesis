@@ -1,0 +1,19 @@
+{
+  "case_id": "TR-08-frase-cortada-candado",
+  "grupo": "trampa",
+  "semilla": null,
+  "par": "TR-07-pedido-partido-en-dos-lineas",
+  "clase": "legitima_dificil",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": []},
+    {"linea": 5, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Fragmento parcial que, leído solo, parece un pedido de código de un solo uso («Pasame el código», línea 3) y que la línea siguiente del mismo hablante aclara como el código del candado de una valija prestada. Prueba si el detector avisa con información todavía incompleta y si retira o corrige el riesgo cuando llega la aclaración. Es el ejemplo «pasame el código… del candado» de ARQUITECTURA.md §2.",
+  "origen": "Redacción asistida del 2026-10-13 a partir del ejemplo de docs/ingenieria/ARQUITECTURA.md §2 («pasame el código» completado con «del candado»); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Las líneas 3 y 4 son una sola frase partida en dos actualizaciones del mismo hablante; la línea 3 no lleva puntuación final a propósito, como un parcial de ASR. La línea 3 es un pedido real, pero de un código sin riesgo: se anota como contexto, igual que los pedidos de TR-02. B dicta el código del candado (línea 5): es el cumplimiento de un pedido sin riesgo y no se marca como T_C. La política de alerta decide si un aviso en la línea 3 cuenta como falso positivo aunque se retire en la línea 4 (D08). Antes de la línea 3 no hay contexto que anticipe el candado, para que la ambigüedad sea real. Se usó una valija y no una bicicleta para no repetir el escenario de TR-02-codigo-del-candado. Nombre y cifras ficticios."
+}

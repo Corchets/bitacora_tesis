@@ -1,0 +1,1706 @@
+{
+  "m1_corrida": "2026-10-17_150516_m1-gguf",
+  "m1_inicio": "2026-10-17T15:05:16",
+  "m1_fin": "2026-10-17T16:21:26",
+  "modelos": {
+    "0.8b": {
+      "modelo_win": "python correr.py --modelos qwen3.5:0.8b --sin-reglas --detalle --etiqueta demo-qwen3.5-0.8b",
+      "modelo_m1": "qwen3.5:0.8b-q8_0",
+      "total_casos": 53,
+      "casos_incluidos": [
+        "LAB-acceso-remoto",
+        "LAB-acceso-remoto-parafrasis",
+        "LAB-anses-beneficio",
+        "LAB-anses-beneficio-parafrasis",
+        "LAB-anses-canal-oficial",
+        "LAB-arca-canal-oficial",
+        "LAB-arca-deuda",
+        "LAB-arca-deuda-parafrasis",
+        "LAB-banco-app-parafrasis",
+        "LAB-banco-codigo",
+        "LAB-banco-codigo-parafrasis",
+        "LAB-banco-gasto-sin-pedido",
+        "LAB-banco-niega-el-codigo",
+        "LAB-banco-numeros-sin-clave",
+        "LAB-banco-revisa-app",
+        "LAB-digitos-sin-palabra",
+        "LAB-familiar-llama-vos",
+        "LAB-familiar-peligro",
+        "LAB-familiar-peligro-parafrasis",
+        "LAB-giro-sin-plata",
+        "LAB-mensajeria-no-pases-nada",
+        "LAB-no-bajes-nada",
+        "LAB-pantalla-sin-programa",
+        "LAB-portero-codigo-puerta",
+        "LAB-whatsapp-codigo",
+        "LAB-whatsapp-codigo-parafrasis",
+        "LG-BANK-VERIF-01-e01",
+        "LG-FAMILIAR-LLAMADO-01-e01",
+        "LG-ORG-TURNO-01-e01",
+        "LG-PREMIO-CONSULTA-01-e01",
+        "LG-SUPPORT-INFO-01-e01",
+        "LG-SUPPORT-INFO-01-e02",
+        "LG-WA-CONSULTA-01-e01",
+        "SC-CLAVE-CAMBIO-01-e01",
+        "SC-FAMILIAR-DINERO-01-e01",
+        "SC-ORG-BENEFICIO-01-e01",
+        "SC-PREMIO-01-e01",
+        "SC-SOPORTE-CLAVE-01-e01",
+        "SC-SOPORTE-REMOTO-01-e01",
+        "SC-WA-CODE-01-e01",
+        "TR-01-pedido-indirecto-digitos",
+        "TR-02-codigo-del-candado",
+        "TR-03-negacion-y-consejo",
+        "TR-04-pedido-tras-charla-larga",
+        "TR-05-asado-con-transferencia",
+        "TR-06-banco-alerta-legitima",
+        "TR-07-pedido-partido-en-dos-lineas",
+        "TR-08-frase-cortada-candado",
+        "TR-09-victima-se-niega",
+        "TR-10-ofrecimiento-inducido",
+        "TR-11-familiar-real-pide-plata",
+        "TR-12-corta-antes-del-pedido",
+        "TR-13-turno-medico-pide-dni"
+      ],
+      "total_excluidos": 0,
+      "casos_excluidos": [],
+      "coincidencias_aviso": 51,
+      "tasa_coincidencia_aviso": 0.962,
+      "coincidencias_linea": 48,
+      "tasa_coincidencia_linea": 0.906,
+      "total_diferencias": 5,
+      "latencia_win_p50_ms": 276.5,
+      "latencia_win_p95_ms": 705.5,
+      "latencia_m1_p50_ms": 1282.0,
+      "latencia_m1_p95_ms": 3462.5,
+      "diferencias": [
+        {
+          "case_id": "LAB-arca-deuda",
+          "win_aviso": true,
+          "win_linea": 5,
+          "win_motivo": "Te están solicitando un código de verificación o activación para acceder a una cuenta fiscal (embargo), lo cual es una acción directa de robo de datos y dinero.",
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "m1_motivo": "Te están solicitando una clave de acceso fiscal o un pago para realizar una transferencia hoy."
+        },
+        {
+          "case_id": "LG-ORG-TURNO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "win_motivo": "Te están solicitando datos personales (DNI) y una foto de un documento para realizar una transferencia o pago, lo cual es una acción directa de robo de dinero.",
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "m1_motivo": "Te están solicitando datos personales (DNI) y una foto de un documento para verificar si estás en el listado de jubilados. Esto es una acción directa de seguridad guiada que podría permitirles robar tu información o acceder a tus cuentas."
+        },
+        {
+          "case_id": "SC-FAMILIAR-DINERO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "win_motivo": "Te están solicitando transferencias de dinero a una cuenta específica para un pago urgente (ciento ochenta mil pesos) y te están presionando para que hagas algo que permitiría robarle dinero o tomar sus cuentas.",
+          "m1_aviso": true,
+          "m1_linea": 8,
+          "m1_motivo": "Te están pidiendo un código de verificación o activación para acceder a tu cuenta bancaria."
+        },
+        {
+          "case_id": "TR-01-pedido-indirecto-digitos",
+          "win_aviso": false,
+          "win_linea": null,
+          "win_motivo": "",
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "m1_motivo": "Te están solicitando un código de verificación para validar que la persona actual es la titular del servicio y que el consumo en curso corresponde a ella. Esto permite robar datos personales o acceder a cuentas."
+        },
+        {
+          "case_id": "TR-11-familiar-real-pide-plata",
+          "win_aviso": false,
+          "win_linea": null,
+          "win_motivo": "",
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "m1_motivo": "Te están solicitando un código de verificación o activación para acceder a tu cuenta bancaria y transferir dinero."
+        }
+      ],
+      "detalle_casos": [
+        {
+          "case_id": "LAB-acceso-remoto",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-acceso-remoto-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-beneficio",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-beneficio-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-canal-oficial",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-canal-oficial",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-deuda",
+          "win_aviso": true,
+          "win_linea": 5,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "LAB-arca-deuda-parafrasis",
+          "win_aviso": true,
+          "win_linea": 5,
+          "m1_aviso": true,
+          "m1_linea": 5,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-app-parafrasis",
+          "win_aviso": true,
+          "win_linea": 5,
+          "m1_aviso": true,
+          "m1_linea": 5,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-codigo",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-codigo-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-gasto-sin-pedido",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-niega-el-codigo",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-numeros-sin-clave",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-revisa-app",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-digitos-sin-palabra",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-llama-vos",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-peligro",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-peligro-parafrasis",
+          "win_aviso": true,
+          "win_linea": 6,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-giro-sin-plata",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-mensajeria-no-pases-nada",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-no-bajes-nada",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-pantalla-sin-programa",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-portero-codigo-puerta",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-whatsapp-codigo",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-whatsapp-codigo-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-BANK-VERIF-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-FAMILIAR-LLAMADO-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-ORG-TURNO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "LG-PREMIO-CONSULTA-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-SUPPORT-INFO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-SUPPORT-INFO-01-e02",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-WA-CONSULTA-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-CLAVE-CAMBIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 7,
+          "m1_aviso": true,
+          "m1_linea": 7,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-FAMILIAR-DINERO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 8,
+          "coincide_aviso": true,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "SC-ORG-BENEFICIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-PREMIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 8,
+          "m1_aviso": true,
+          "m1_linea": 8,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-SOPORTE-CLAVE-01-e01",
+          "win_aviso": true,
+          "win_linea": 6,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-SOPORTE-REMOTO-01-e01",
+          "win_aviso": true,
+          "win_linea": 6,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-WA-CODE-01-e01",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-01-pedido-indirecto-digitos",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": false,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "TR-02-codigo-del-candado",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-03-negacion-y-consejo",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-04-pedido-tras-charla-larga",
+          "win_aviso": true,
+          "win_linea": 20,
+          "m1_aviso": true,
+          "m1_linea": 20,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-05-asado-con-transferencia",
+          "win_aviso": true,
+          "win_linea": 20,
+          "m1_aviso": true,
+          "m1_linea": 20,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-06-banco-alerta-legitima",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-07-pedido-partido-en-dos-lineas",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-08-frase-cortada-candado",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-09-victima-se-niega",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-10-ofrecimiento-inducido",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-11-familiar-real-pide-plata",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": false,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "TR-12-corta-antes-del-pedido",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-13-turno-medico-pide-dni",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        }
+      ]
+    },
+    "2b": {
+      "modelo_win": "python correr.py --modelos qwen3.5:2b --sin-reglas --detalle --etiqueta demo-qwen3.5-2b",
+      "modelo_m1": "qwen3.5:2b-q8_0",
+      "total_casos": 53,
+      "casos_incluidos": [
+        "LAB-acceso-remoto",
+        "LAB-acceso-remoto-parafrasis",
+        "LAB-anses-beneficio",
+        "LAB-anses-beneficio-parafrasis",
+        "LAB-anses-canal-oficial",
+        "LAB-arca-canal-oficial",
+        "LAB-arca-deuda",
+        "LAB-arca-deuda-parafrasis",
+        "LAB-banco-app-parafrasis",
+        "LAB-banco-codigo",
+        "LAB-banco-codigo-parafrasis",
+        "LAB-banco-gasto-sin-pedido",
+        "LAB-banco-niega-el-codigo",
+        "LAB-banco-numeros-sin-clave",
+        "LAB-banco-revisa-app",
+        "LAB-digitos-sin-palabra",
+        "LAB-familiar-llama-vos",
+        "LAB-familiar-peligro",
+        "LAB-familiar-peligro-parafrasis",
+        "LAB-giro-sin-plata",
+        "LAB-mensajeria-no-pases-nada",
+        "LAB-no-bajes-nada",
+        "LAB-pantalla-sin-programa",
+        "LAB-portero-codigo-puerta",
+        "LAB-whatsapp-codigo",
+        "LAB-whatsapp-codigo-parafrasis",
+        "LG-BANK-VERIF-01-e01",
+        "LG-FAMILIAR-LLAMADO-01-e01",
+        "LG-ORG-TURNO-01-e01",
+        "LG-PREMIO-CONSULTA-01-e01",
+        "LG-SUPPORT-INFO-01-e01",
+        "LG-SUPPORT-INFO-01-e02",
+        "LG-WA-CONSULTA-01-e01",
+        "SC-CLAVE-CAMBIO-01-e01",
+        "SC-FAMILIAR-DINERO-01-e01",
+        "SC-ORG-BENEFICIO-01-e01",
+        "SC-PREMIO-01-e01",
+        "SC-SOPORTE-CLAVE-01-e01",
+        "SC-SOPORTE-REMOTO-01-e01",
+        "SC-WA-CODE-01-e01",
+        "TR-01-pedido-indirecto-digitos",
+        "TR-02-codigo-del-candado",
+        "TR-03-negacion-y-consejo",
+        "TR-04-pedido-tras-charla-larga",
+        "TR-05-asado-con-transferencia",
+        "TR-06-banco-alerta-legitima",
+        "TR-07-pedido-partido-en-dos-lineas",
+        "TR-08-frase-cortada-candado",
+        "TR-09-victima-se-niega",
+        "TR-10-ofrecimiento-inducido",
+        "TR-11-familiar-real-pide-plata",
+        "TR-12-corta-antes-del-pedido",
+        "TR-13-turno-medico-pide-dni"
+      ],
+      "total_excluidos": 0,
+      "casos_excluidos": [],
+      "coincidencias_aviso": 52,
+      "tasa_coincidencia_aviso": 0.981,
+      "coincidencias_linea": 51,
+      "tasa_coincidencia_linea": 0.962,
+      "total_diferencias": 2,
+      "latencia_win_p50_ms": 532.0,
+      "latencia_win_p95_ms": 1118.3,
+      "latencia_m1_p50_ms": 2645.6,
+      "latencia_m1_p95_ms": 6036.0,
+      "diferencias": [
+        {
+          "case_id": "LAB-pantalla-sin-programa",
+          "win_aviso": true,
+          "win_linea": 3,
+          "win_motivo": "Te están pidiendo instalar un programa para ver tu celular",
+          "m1_aviso": false,
+          "m1_linea": null,
+          "m1_motivo": ""
+        },
+        {
+          "case_id": "TR-05-asado-con-transferencia",
+          "win_aviso": true,
+          "win_linea": 17,
+          "win_motivo": "Te están pidiendo un código de verificación para una transferencia antes del viernes",
+          "m1_aviso": true,
+          "m1_linea": 14,
+          "m1_motivo": "Te están pidiendo un código de verificación para una transferencia antes del viernes"
+        }
+      ],
+      "detalle_casos": [
+        {
+          "case_id": "LAB-acceso-remoto",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-acceso-remoto-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-beneficio",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-beneficio-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-canal-oficial",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-canal-oficial",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-deuda",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-deuda-parafrasis",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-app-parafrasis",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-codigo",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-codigo-parafrasis",
+          "win_aviso": true,
+          "win_linea": 5,
+          "m1_aviso": true,
+          "m1_linea": 5,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-gasto-sin-pedido",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-niega-el-codigo",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-numeros-sin-clave",
+          "win_aviso": true,
+          "win_linea": 5,
+          "m1_aviso": true,
+          "m1_linea": 5,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-revisa-app",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-digitos-sin-palabra",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-llama-vos",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-peligro",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-peligro-parafrasis",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-giro-sin-plata",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-mensajeria-no-pases-nada",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-no-bajes-nada",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-pantalla-sin-programa",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": false,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "LAB-portero-codigo-puerta",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-whatsapp-codigo",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-whatsapp-codigo-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-BANK-VERIF-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-FAMILIAR-LLAMADO-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-ORG-TURNO-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-PREMIO-CONSULTA-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-SUPPORT-INFO-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-SUPPORT-INFO-01-e02",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-WA-CONSULTA-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-CLAVE-CAMBIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-FAMILIAR-DINERO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-ORG-BENEFICIO-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-PREMIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 8,
+          "m1_aviso": true,
+          "m1_linea": 8,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-SOPORTE-CLAVE-01-e01",
+          "win_aviso": true,
+          "win_linea": 6,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-SOPORTE-REMOTO-01-e01",
+          "win_aviso": true,
+          "win_linea": 6,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-WA-CODE-01-e01",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-01-pedido-indirecto-digitos",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-02-codigo-del-candado",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-03-negacion-y-consejo",
+          "win_aviso": true,
+          "win_linea": 7,
+          "m1_aviso": true,
+          "m1_linea": 7,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-04-pedido-tras-charla-larga",
+          "win_aviso": true,
+          "win_linea": 26,
+          "m1_aviso": true,
+          "m1_linea": 26,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-05-asado-con-transferencia",
+          "win_aviso": true,
+          "win_linea": 17,
+          "m1_aviso": true,
+          "m1_linea": 14,
+          "coincide_aviso": true,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "TR-06-banco-alerta-legitima",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-07-pedido-partido-en-dos-lineas",
+          "win_aviso": true,
+          "win_linea": 8,
+          "m1_aviso": true,
+          "m1_linea": 8,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-08-frase-cortada-candado",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-09-victima-se-niega",
+          "win_aviso": true,
+          "win_linea": 6,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-10-ofrecimiento-inducido",
+          "win_aviso": true,
+          "win_linea": 14,
+          "m1_aviso": true,
+          "m1_linea": 14,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-11-familiar-real-pide-plata",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-12-corta-antes-del-pedido",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-13-turno-medico-pide-dni",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        }
+      ]
+    },
+    "4b": {
+      "modelo_win": "python correr.py --modelos qwen3.5:4b --sin-reglas --detalle --etiqueta demo-qwen3.5-4b",
+      "modelo_m1": "qwen3.5:4b-q4_K_M",
+      "total_casos": 42,
+      "casos_incluidos": [
+        "LAB-acceso-remoto",
+        "LAB-acceso-remoto-parafrasis",
+        "LAB-anses-beneficio",
+        "LAB-anses-beneficio-parafrasis",
+        "LAB-anses-canal-oficial",
+        "LAB-arca-canal-oficial",
+        "LAB-arca-deuda",
+        "LAB-arca-deuda-parafrasis",
+        "LAB-banco-app-parafrasis",
+        "LAB-banco-codigo",
+        "LAB-banco-codigo-parafrasis",
+        "LAB-banco-gasto-sin-pedido",
+        "LAB-banco-niega-el-codigo",
+        "LAB-banco-numeros-sin-clave",
+        "LAB-banco-revisa-app",
+        "LAB-digitos-sin-palabra",
+        "LAB-familiar-llama-vos",
+        "LAB-familiar-peligro",
+        "LAB-familiar-peligro-parafrasis",
+        "LAB-giro-sin-plata",
+        "LAB-mensajeria-no-pases-nada",
+        "LAB-no-bajes-nada",
+        "LAB-pantalla-sin-programa",
+        "LAB-portero-codigo-puerta",
+        "LAB-whatsapp-codigo",
+        "LAB-whatsapp-codigo-parafrasis",
+        "LG-BANK-VERIF-01-e01",
+        "LG-FAMILIAR-LLAMADO-01-e01",
+        "LG-ORG-TURNO-01-e01",
+        "LG-PREMIO-CONSULTA-01-e01",
+        "LG-SUPPORT-INFO-01-e01",
+        "LG-SUPPORT-INFO-01-e02",
+        "LG-WA-CONSULTA-01-e01",
+        "SC-CLAVE-CAMBIO-01-e01",
+        "SC-FAMILIAR-DINERO-01-e01",
+        "SC-ORG-BENEFICIO-01-e01",
+        "SC-PREMIO-01-e01",
+        "SC-SOPORTE-CLAVE-01-e01",
+        "SC-SOPORTE-REMOTO-01-e01",
+        "SC-WA-CODE-01-e01",
+        "TR-01-pedido-indirecto-digitos",
+        "TR-02-codigo-del-candado"
+      ],
+      "total_excluidos": 11,
+      "casos_excluidos": [
+        {
+          "case_id": "TR-03-negacion-y-consejo",
+          "motivo": "m1_sin_lineas:5,6,7,8,9,10"
+        },
+        {
+          "case_id": "TR-04-pedido-tras-charla-larga",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-05-asado-con-transferencia",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-06-banco-alerta-legitima",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-07-pedido-partido-en-dos-lineas",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-08-frase-cortada-candado",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-09-victima-se-niega",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-10-ofrecimiento-inducido",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-11-familiar-real-pide-plata",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-12-corta-antes-del-pedido",
+          "motivo": "sin_evaluaciones_en_m1"
+        },
+        {
+          "case_id": "TR-13-turno-medico-pide-dni",
+          "motivo": "sin_evaluaciones_en_m1"
+        }
+      ],
+      "coincidencias_aviso": 40,
+      "tasa_coincidencia_aviso": 0.952,
+      "coincidencias_linea": 37,
+      "tasa_coincidencia_linea": 0.881,
+      "total_diferencias": 5,
+      "latencia_win_p50_ms": 896.2,
+      "latencia_win_p95_ms": 1630.0,
+      "latencia_m1_p50_ms": 6627.9,
+      "latencia_m1_p95_ms": 10186.1,
+      "diferencias": [
+        {
+          "case_id": "LAB-banco-codigo-parafrasis",
+          "win_aviso": true,
+          "win_linea": 2,
+          "win_motivo": "Te están simulando ser del banco para pedirte información sobre un gasto que no es tuyo",
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "m1_motivo": "Te están simulando ser del banco para pedirte un gasto que no es tuyo"
+        },
+        {
+          "case_id": "LAB-banco-gasto-sin-pedido",
+          "win_aviso": false,
+          "win_linea": null,
+          "win_motivo": "",
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "m1_motivo": "Te están simulando ser el banco para pedirte un código o datos por un gasto falso"
+        },
+        {
+          "case_id": "LG-BANK-VERIF-01-e01",
+          "win_aviso": true,
+          "win_linea": 2,
+          "win_motivo": "Te están pidiendo que cambies tu clave por un aviso de ingreso sospechoso",
+          "m1_aviso": false,
+          "m1_linea": null,
+          "m1_motivo": ""
+        },
+        {
+          "case_id": "LG-ORG-TURNO-01-e01",
+          "win_aviso": true,
+          "win_linea": 10,
+          "win_motivo": "Te están pidiendo tu número de documento para que te saquen un turno por teléfono.",
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "m1_motivo": "Te están presionando para que des tus datos personales (DNI, domicilio) y una foto del documento."
+        },
+        {
+          "case_id": "SC-WA-CODE-01-e01",
+          "win_aviso": true,
+          "win_linea": 1,
+          "win_motivo": "Te están simulando ser soporte técnico para activar tu cuenta de WhatsApp",
+          "m1_aviso": true,
+          "m1_linea": 2,
+          "m1_motivo": "Te están simulando un soporte técnico para activar tu cuenta de WhatsApp y te piden que compartas un código que no pediste."
+        }
+      ],
+      "detalle_casos": [
+        {
+          "case_id": "LAB-acceso-remoto",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-acceso-remoto-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-beneficio",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-beneficio-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-anses-canal-oficial",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-canal-oficial",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-deuda",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-arca-deuda-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-app-parafrasis",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-codigo",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-codigo-parafrasis",
+          "win_aviso": true,
+          "win_linea": 2,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "LAB-banco-gasto-sin-pedido",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": false,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "LAB-banco-niega-el-codigo",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-numeros-sin-clave",
+          "win_aviso": true,
+          "win_linea": 2,
+          "m1_aviso": true,
+          "m1_linea": 2,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-banco-revisa-app",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-digitos-sin-palabra",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-llama-vos",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-peligro",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-familiar-peligro-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-giro-sin-plata",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-mensajeria-no-pases-nada",
+          "win_aviso": true,
+          "win_linea": 2,
+          "m1_aviso": true,
+          "m1_linea": 2,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-no-bajes-nada",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-pantalla-sin-programa",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-portero-codigo-puerta",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-whatsapp-codigo",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LAB-whatsapp-codigo-parafrasis",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-BANK-VERIF-01-e01",
+          "win_aviso": true,
+          "win_linea": 2,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": false,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "LG-FAMILIAR-LLAMADO-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-ORG-TURNO-01-e01",
+          "win_aviso": true,
+          "win_linea": 10,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "LG-PREMIO-CONSULTA-01-e01",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-SUPPORT-INFO-01-e01",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-SUPPORT-INFO-01-e02",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "LG-WA-CONSULTA-01-e01",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-CLAVE-CAMBIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 2,
+          "m1_aviso": true,
+          "m1_linea": 2,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-FAMILIAR-DINERO-01-e01",
+          "win_aviso": true,
+          "win_linea": 9,
+          "m1_aviso": true,
+          "m1_linea": 9,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-ORG-BENEFICIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 4,
+          "m1_aviso": true,
+          "m1_linea": 4,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-PREMIO-01-e01",
+          "win_aviso": true,
+          "win_linea": 6,
+          "m1_aviso": true,
+          "m1_linea": 6,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-SOPORTE-CLAVE-01-e01",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-SOPORTE-REMOTO-01-e01",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 1,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "SC-WA-CODE-01-e01",
+          "win_aviso": true,
+          "win_linea": 1,
+          "m1_aviso": true,
+          "m1_linea": 2,
+          "coincide_aviso": true,
+          "coincide_linea": false
+        },
+        {
+          "case_id": "TR-01-pedido-indirecto-digitos",
+          "win_aviso": true,
+          "win_linea": 3,
+          "m1_aviso": true,
+          "m1_linea": 3,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        },
+        {
+          "case_id": "TR-02-codigo-del-candado",
+          "win_aviso": false,
+          "win_linea": null,
+          "m1_aviso": false,
+          "m1_linea": null,
+          "coincide_aviso": true,
+          "coincide_linea": true
+        }
+      ]
+    }
+  }
+}

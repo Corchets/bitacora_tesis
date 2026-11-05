@@ -1,0 +1,25 @@
+A: Hola, tengo un control el jueves a las cuatro y me cambiaron el horario en el trabajo.
+B: Buen día. ¿Me decís tu nombre y la fecha del turno?
+A: Ana Luján, jueves 12 de noviembre.
+B: Te encontré. ¿Querés pasarlo para otro día o buscar un horario más temprano?
+A: Si hay algo después de las seis, me sirve. Antes estoy en la oficina.
+B: El jueves no tenemos tarde. Hay un espacio el lunes a las seis y media.
+A: ¿Con la doctora Salvatierra también?
+B: Sí, con la misma profesional.
+A: El lunes tengo que llevar a mi papá a kinesiología. ¿Hay algo el martes?
+B: Martes hay a las cinco, pero la consulta suele durar cuarenta minutos.
+A: Puedo pedirle a una compañera que me cubra hasta las cinco. ¿Lo reservás mientras le pregunto?
+B: Puedo dejarlo tentativo por diez minutos. Si no confirmás, se libera.
+A: Le escribí y puede cubrirme. Tomo el martes.
+B: Listo, queda para las cinco. ¿Tenés que llevar estudios nuevos?
+A: Solo el análisis de sangre que me hice hace dos semanas.
+B: Traé el informe impreso o mostralo desde el teléfono si lo recibiste en PDF.
+A: Me lo mandó el laboratorio por correo. ¿Necesito reenviarlo al consultorio?
+B: No hace falta ahora. La doctora lo revisa durante la consulta.
+A: ¿Y el copago lo pago ahí o por transferencia?
+B: En recepción aceptan efectivo y tarjeta. No hace falta abonar antes.
+A: Perfecto. ¿Me mandan un recordatorio el día anterior?
+B: Sí, suele llegar por mensaje de texto.
+A: Bueno. Ya anoté martes 17 a las cinco.
+B: Te llega la confirmación en unos minutos.
+A: Gracias por encontrarme un horario.

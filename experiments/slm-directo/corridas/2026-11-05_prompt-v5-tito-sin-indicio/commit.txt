@@ -1,0 +1,3 @@
+prompt-v5-colab 26e1b173a4e6a13d11401dca9325dfad2060ed7a
+v5-maniobras, v5, v5-indirectos y v5-sin-excepcion tras el aviso, y controles de maniobras
+IDS=(los 150 y los 18 controles)

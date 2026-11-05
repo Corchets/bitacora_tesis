@@ -1,0 +1,22 @@
+A: Te llamo por el límite de la tarjeta. El viernes me voy unos días y tengo que pagar el hospedaje.
+B: Hola, ¿querés consultar el límite disponible o pedir un aumento temporal?
+A: Las dos cosas, si se puede. La reserva sale como 280 mil y no quiero que rebote.
+B: Primero miro el disponible. ¿La tarjeta termina en 0942 o estás llamando por otra?
+A: En 0942, la de crédito.
+B: Gracias. Para identificarte, ¿me confirmás tu nombre completo y el mes de vencimiento de esa tarjeta?
+A: Tomás Ferreyra, vence en agosto del año que viene.
+B: Coincide. Tenés disponible 310 mil. La compra debería entrar dentro del límite actual.
+A: ¿Aunque sea en dólares? La página muestra el precio en moneda extranjera.
+B: El sistema toma el equivalente al momento de autorizar, así que el margen puede variar. No puedo reservarte una cotización desde acá.
+A: Claro. ¿Me conviene pedir aumento por las dudas?
+B: Puedo iniciar una solicitud temporal, pero requiere evaluación y no necesariamente queda aprobada hoy.
+A: No, entonces prefiero dejarlo así. Si no pasa, pago una parte con débito.
+B: Está bien. ¿Querés que te explique dónde ver el consumo en la aplicación cuando se procese?
+A: Sí, porque después aparecen dos montos y me mareo.
+B: Entrás en tarjetas, tocás la que termina en 0942 y abrís “autorizaciones”. El consumo pendiente suele mostrarse antes del cierre.
+A: Perfecto. ¿Me vas a mandar algo para confirmar la llamada?
+B: Te queda una consulta registrada. En la app vas a ver el número 8821 dentro de movimientos de atención.
+A: Ya lo anoté. No necesito cambiar nada entonces.
+B: Exacto, la consulta no modifica el límite ni la tarjeta.
+A: Bueno, gracias por tomarte el tiempo.
+B: De nada. Buen viaje cuando llegue el viernes.

@@ -1,0 +1,25 @@
+{
+  "case_id": "SC-CLAVE-CAMBIO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "SC-CLAVE-CAMBIO-01",
+  "par": "LG-BANK-VERIF-01-e01",
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": 12,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {"linea": 2, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 4, "evento": "contexto", "etiquetas": []},
+    {"linea": 6, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE", "THREAT_FEAR", "ISOLATION_SECRECY"]},
+    {"linea": 7, "evento": "contexto", "etiquetas": []},
+    {"linea": 8, "evento": "contexto", "etiquetas": ["ISOLATION_SECRECY", "PERSISTENCE_DISTRACTION", "THREAT_FEAR"]},
+    {"linea": 9, "evento": "pedido", "etiquetas": ["REQUEST_SECURITY_ACTION"]},
+    {"linea": 11, "evento": "pedido", "etiquetas": ["REQUEST_SECURITY_ACTION"]},
+    {"linea": 12, "evento": "cumplimiento", "etiquetas": []},
+    {"linea": 13, "evento": "contexto", "etiquetas": ["ISOLATION_SECRECY"]}
+  ],
+  "que_prueba": "Pedido de acción de seguridad (abrir un enlace y cambiar la clave ahí) guiado por quien llama, precedido por amenaza de bloqueo, pedido de no cortar y desaliento a verificar por el número de la tarjeta. Persona dudosa que termina cumpliendo. Comparte vocabulario con su par (dispositivo nuevo, cambiar la clave, enlace, número de la tarjeta).",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-CLAVE-CAMBIO-01 de CATALOGO-ESCENARIOS.csv; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "La línea 6 pide «hacer el procedimiento de resguardo» sin decir cuál; no se tomó como pedido porque la acción concreta aparece en la línea 9. Discutir en D07 si un pedido vago anticipa T_R. La línea 11 pide cargar el usuario y la clave actual en el enlace: podría anotarse también como REQUEST_SECRET, porque la credencial termina en un formulario de quien llama. El enlace es ficticio y no aparece en el texto. A habla primero y es quien recibe la llamada."
+}

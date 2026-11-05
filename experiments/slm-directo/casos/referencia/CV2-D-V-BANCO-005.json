@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-D-V-BANCO-005",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-BANCO-005",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 19,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 19,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "La llamada mezcla una transferencia legítima que la persona inició con un supuesto alta del destinatario; el interlocutor solicita cargar la clave de acceso mientras guía la operación. Prueba que “escribila” sigue siendo un pedido de credencial aun sin dictado verbal.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R se marca donde se solicita cargar la clave en línea 19. La persona no lo hace, por lo que T_C queda nulo.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "La llamada mezcla una transferencia legítima que la persona inició con un supuesto alta del destinatario; el interlocutor solicita cargar la clave de acceso mientras guía la operación. Prueba que “escribila” sigue siendo un pedido de credencial aun sin dictado verbal."
+}

@@ -1,0 +1,5 @@
+A: le habla un inspector hay una deuda de una fiscalizacion y un embargo
+B: yo no tengo nada de eso
+A: tiene que autorizar con su clave fiscal o transferir hoy
+B: no voy a dar la clave
+A: entonces pasame el alias para frenar el embargo

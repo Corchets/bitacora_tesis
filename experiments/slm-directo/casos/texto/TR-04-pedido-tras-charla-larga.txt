@@ -1,0 +1,30 @@
+A: Hola, buenas tardes. ¿Hablo con Rubén Aguirre?
+B: Sí, soy yo. ¿Quién habla?
+A: Te llamo de la sucursal del banco donde cobrás la jubilación, la de la avenida, al lado de la farmacia. Me llamo Silvina.
+B: Ah, sí, la conozco bien. Voy todos los meses.
+A: Por eso te llamo. Estamos llamando uno por uno a los clientes de la sucursal por el recambio de las tarjetas de débito, que vencen a fin de año.
+B: Mirá, yo la tarjeta la uso poco. Saco la plata por ventanilla.
+A: Sí, me figura que venís por ventanilla, a principio de mes. Mucha gente prefiere así, y está bien.
+B: Y sí, a mi edad uno ya no se lleva bien con los cajeros. ¿Vos sos nueva? Antes atendía un muchacho, Ramiro.
+A: Ramiro pasó a otra sucursal, en el centro. Siempre se acuerda de la gente del barrio.
+B: Qué bueno. Era muy amable. Me ayudó un montón con los papeles cuando mi señora estuvo enferma.
+A: Lo lamento mucho, Rubén. Debe haber sido un momento difícil.
+B: Sí, ya van tres años. Ahora estoy solo, pero mis hijas vienen seguido.
+A: Qué bueno que te acompañen. ¿Viven cerca?
+B: Una sí, a cinco cuadras. La otra se fue a vivir al sur. Me dice que allá todavía nieva.
+A: ¡Ni me digas! Acá por suerte ya empezó el calorcito. Mi mamá ya anda con las plantas, dice que es época de trasplantar.
+B: Yo tengo unos malvones en el balcón que eran de mi señora. Los cuido como oro.
+A: Qué lindo. Mi mamá también tiene; dice que hay que regarlos poco, que si no se pudren.
+B: Eso mismo decía mi señora. Sos una buena chica, Silvina.
+A: Gracias, Rubén. Bueno, no te quiero robar mucho tiempo, que lo de la tarjeta es cortito.
+B: Decime nomás, no tengo apuro. Estoy con la radio, escuchando el partido.
+A: La tarjeta nueva te la mandamos a tu casa, así no tenés que hacer la fila. Me figura el domicilio de la calle Las Acacias, ¿seguís ahí?
+B: Sí, sigo ahí. Hace cuarenta años que vivo en esa casa.
+A: Perfecto. Ahora te va a llegar un mensajito del banco al celular para confirmar el envío. ¿Lo tenés a mano?
+B: Sí, acá está. Esperá que busco los anteojos.
+B: Ya está. Sí, sonó recién. Dice del banco.
+A: Bárbaro. Leeme el código que te llegó, así lo cargo y la tarjeta sale mañana mismo.
+B: Es uno, dos, tres, cuatro, cinco, seis.
+A: Perfecto, Rubén. Ya quedó cargado. Te llega en la semana.
+B: Muchas gracias, Silvina. Y si lo ves a Ramiro, saludalo de mi parte.
+A: Seguro. Y cuidá esos malvones, eh.

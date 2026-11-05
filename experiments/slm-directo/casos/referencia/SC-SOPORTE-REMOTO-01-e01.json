@@ -1,0 +1,24 @@
+{
+  "case_id": "SC-SOPORTE-REMOTO-01-e01",
+  "grupo": "piloto_escrito",
+  "semilla": "SC-SOPORTE-REMOTO-01",
+  "par": "LG-SUPPORT-INFO-01-e02",
+  "clase": "vishing",
+  "t_r_linea": 6,
+  "t_c_linea": null,
+  "pedido": "REQUEST_REMOTE_ACCESS",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "contexto", "etiquetas": []},
+    {"linea": 4, "evento": "contexto", "etiquetas": ["THREAT_FEAR", "URGENCY_PRESSURE"]},
+    {"linea": 6, "evento": "pedido", "etiquetas": ["REQUEST_REMOTE_ACCESS"]},
+    {"linea": 7, "evento": "rechazo", "etiquetas": []},
+    {"linea": 8, "evento": "contexto", "etiquetas": ["URGENCY_PRESSURE", "ISOLATION_SECRECY", "PERSISTENCE_DISTRACTION"]},
+    {"linea": 10, "evento": "contexto", "etiquetas": ["THREAT_FEAR", "ISOLATION_SECRECY"]},
+    {"linea": 11, "evento": "rechazo", "etiquetas": []}
+  ],
+  "que_prueba": "Pedido de compartir pantalla por videollamada, precedido de una amenaza de pérdida de dinero (un préstamo a nombre de la persona que ya se está transfiriendo) y seguido de presión para no cortar ni verificar por otro canal. La persona se niega desde el primer pedido: el detector debería alertar por el pedido y la presión aunque no haya cumplimiento.",
+  "origen": "Redacción asistida del 2026-10-13 a partir de la semilla SC-SOPORTE-REMOTO-01 del catálogo; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "Se usa pantalla compartida en videollamada en lugar de instalar una aplicación de acceso remoto para no nombrar aplicaciones reales; las dos variantes caen en REQUEST_REMOTE_ACCESS. La fuente de la semilla describe una continuación (guiar a la aplicación bancaria, copiar credenciales, pedir códigos y transferir) que acá no ocurre porque la persona corta; t_c_linea queda null. La línea 3 informa un hecho negativo sin consecuencias para la persona; la amenaza aparece en la línea 4. El pretexto del préstamo pedido a nombre de la persona reemplaza al de un ingreso desde un celular ajeno, para no repetir la premisa de SC-CLAVE-CAMBIO-01-e01 y TR-07. En la línea 9 la persona propone verificar por su cuenta en la aplicación; la línea 10 lo desalienta."
+}

@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel del proyecto · detección incremental de vishing</title>
+<style>
+:root{--bg:#fbfaf7;--panel:#fff;--fg:#1d2321;--mu:#5f6b66;--bd:#e3e0d8;--pr:#1f5f4a;--pr2:#e8f1ec;--ok:#15803d;--bad:#b91c1c;--warn:#b45309;--vi:#dc2626;--le:#16a34a;
+--c0:#6b7280;--c1:#2563eb;--c2:#d97706;--c3:#7c3aed;--c4:#0891b2;--c5:#db2777;--c6:#65a30d;--c7:#9333ea;--c8:#0f766e;--c9:#ea580c}
+*{box-sizing:border-box}
+body{margin:0;font:14.5px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--fg)}
+header{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--bd)}
+.top{display:flex;align-items:baseline;gap:14px;padding:10px 22px 0;flex-wrap:wrap}
+.top h1{font-size:17px;margin:0}.top .mu{font-size:12.5px}
+nav{display:flex;gap:2px;padding:6px 16px 0;overflow-x:auto}
+nav button{border:0;background:none;padding:8px 12px;font:inherit;font-size:13.5px;color:var(--mu);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+nav button.on{color:var(--pr);border-bottom-color:var(--pr);font-weight:600}
+main{max-width:1240px;margin:0 auto;padding:18px 22px 60px}
+section{display:none}section.on{display:block}
+h2{font-size:19px;margin:6px 0 4px}h3{font-size:15px;margin:22px 0 6px}
+.mu{color:var(--mu)}.chico{font-size:12.5px}
+code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;background:#f0eee8;padding:1px 5px;border-radius:4px}
+pre{font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:#f3f1ea;padding:10px 12px;border-radius:8px;overflow:auto;margin:6px 0}
+.card{background:var(--panel);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:10px 0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+.aviso{border-left:4px solid var(--warn);background:#fff8eb;padding:8px 12px;border-radius:6px;font-size:13px;margin:10px 0}
+.nota{border-left:4px solid var(--pr);background:var(--pr2);padding:8px 12px;border-radius:6px;font-size:13px;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid var(--bd);padding:6px 7px;text-align:left;vertical-align:top}
+th{color:var(--mu);font-weight:600;font-size:12px;background:#f7f5f0;position:sticky;top:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:9px;white-space:nowrap}
+.tv{background:#fde2e2;color:#991b1b}.tl{background:#dcfce7;color:#166534}.tg{background:#eceae4;color:#444}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+details{margin:6px 0}summary{cursor:pointer;font-weight:600}
+.faq summary{font-size:14.5px;padding:4px 0}.faq .card{margin:6px 0}
+button.b,label.b,select,input[type=text],input[type=number],textarea{font:inherit;font-size:13px;border:1px solid var(--bd);border-radius:7px;padding:5px 9px;background:var(--panel);color:var(--fg)}
+button.b,label.b{cursor:pointer;display:inline-block}button.b.pri{background:var(--pr);color:#fff;border-color:var(--pr)}button.b:disabled{opacity:.5;cursor:default}
+.fila{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0}
+label.ctl{display:flex;flex-direction:column;font-size:12px;color:var(--mu);gap:2px}
+.kpi{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}
+.kpi div{background:var(--panel);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;min-width:150px}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}.kpi span{font-size:12px;color:var(--mu)}
+.etapa{border:1px solid var(--bd);border-radius:10px;background:var(--panel);margin:10px 0}
+.etapa>summary{padding:10px 14px;display:flex;gap:10px;align-items:center;list-style:none}
+.etapa>summary::-webkit-details-marker{display:none}
+.etapa .num{background:var(--pr);color:#fff;border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+.etapa .cuerpo{padding:0 16px 12px 52px;font-size:13.5px}
+.etapa ul{margin:4px 0 8px;padding-left:18px}.etapa li{margin:2px 0}
+.prog{height:6px;background:#eceae4;border-radius:3px;overflow:hidden;width:120px;margin-left:auto;flex:none}.prog i{display:block;height:100%;background:var(--pr)}
+.chk{list-style:none;padding-left:0!important}.chk .hecha s{color:var(--mu)}.chk li{display:flex;gap:6px;align-items:flex-start}
+.lista{max-height:560px;overflow:auto;border:1px solid var(--bd);border-radius:8px;background:var(--panel)}
+.it{padding:6px 10px;border-bottom:1px solid var(--bd);cursor:pointer;font-size:12.5px;display:flex;justify-content:space-between;gap:6px}
+.it:hover,.it.sel{background:var(--pr2)}
+.lin{display:grid;grid-template-columns:30px minmax(0,1fr) 150px;gap:6px;padding:4px 6px;border-radius:6px;font-size:13px;align-items:start}
+.caso-hablante{display:block}
+#caso-protegida{width:100%;min-width:0}
+@media(max-width:600px){.lin{grid-template-columns:24px minmax(0,1fr)}.caso-evaluacion{grid-column:2}}
+.lin .n{color:var(--mu);font-variant-numeric:tabular-nums}
+.lin.tr{background:#fff4d6}.lin.tc{background:#fde2e2}.lin.av{outline:2px solid var(--c1);outline-offset:-2px}
+.riesgo{height:8px;border-radius:4px;background:#eceae4;position:relative;margin-top:6px}.riesgo i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.mot{font-size:11.5px;color:var(--mu)}
+.dos{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px}@media(max-width:900px){.dos{grid-template-columns:1fr}}
+svg text{font-family:system-ui,sans-serif}
+.ley{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mu);margin:4px 0}.ley i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.estado{font-size:12.5px;padding:3px 9px;border-radius:9px}.estado.si{background:#dcfce7;color:#166534}.estado.no{background:#fde2e2;color:#991b1b}
+textarea{width:100%;min-height:170px;font:12.5px/1.5 ui-monospace,Menlo,monospace}
+.log{max-height:420px;overflow:auto}
+#s-decisiones p{max-width:75ch}
+.preguntas-tutor{padding-left:24px;max-width:85ch}.preguntas-tutor>li{margin:18px 0}.preguntas-tutor p{margin:5px 0}
+#s-decisiones th[scope=row]{position:static;background:transparent;color:var(--fg);font-size:13px;width:25%}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><h1>Detección incremental de vishing · panel del proyecto</h1>
+  <span class="mu">rama <code>laboratorio-luciano</code> · material de desarrollo (casos escritos sin revisión humana y audio TTS), no test · D07, D08 y D11 abiertas · D09 resuelta el 2026-11-03</span></div>
+  <nav id="nav"></nav>
+</header>
+<main>
+
+<!-- ============================ RESUMEN ============================ -->
+<section id="s-resumen" data-titulo="Resumen y opinión">
+<h2>Cómo va el proyecto</h2>
+<p class="mu">Actualizado al 2026-11-03. La síntesis del detector de abajo conserva su corte del 2026-10-23: es el antecedente de la elección. Este tablero y la demo viven en <code>laboratorio-luciano</code>.</p>
+<div class="card"><b class="ok">Configuración final elegida · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md">ADR 0001</a></b>
+<p><b>ASR:</b> Parakeet TDT 0.6B v3 con corte RMS 0,8 s / 0,008 y filtro Silero (opción B). <b>Detector:</b> Tito viejo como compuerta de Gemma 4 E2B, con aviso único. Es lo que arranca por defecto en el servidor y en el panel.</p>
+<p><b>Lo que la sostiene:</b> 10/10 estafas y 0/10 falsas alarmas en la matriz #101, la única combinación con ese resultado, y 7/7 estafas y 0/2 legítimas en 9 llamadas guionadas por Meet. Son datos de desarrollo: 20 casos sintéticos que sirvieron para elegir entre 10 modelos, y 4 guiones con 2 voces. <b>No estiman el rendimiento final.</b></p>
+<p><b>Lo que no cumple:</b> E2B tarda 3,74 s de mediana por consulta en la M1 (criterio: menos de 2 s), y no hay ninguna medición en teléfono.</p>
+</div>
+<div class="grid3">
+  <div class="card"><b class="ok">✔ Hecho</b><p class="chico">Recorrido de punta a punta con voz real por Meet (#84, #85, #86, #94, cerrados). Veredicto de la familia cross-encoder (#123). Borrador del informe completo, capítulos 0 a 11: ver la pestaña Informe.</p></div>
+  <div class="card"><b class="bad">✘ Falta lo central</b><p class="chico">Test reservado sin correr (#52). Ninguno de los 350 casos tiene revisión humana. Piloto con voz y anotación independiente pendientes (#54, #32). D07 y D08 abiertas (#33).</p></div>
+  <div class="card"><b class="warn">⚠ Fechas</b><p class="chico">Todo al 90 % el 2026-11-15, terminado el 2026-11-30, entrega y presentación del 7 al 11 de diciembre. El audio de la corrida por Meet se perdió; quedan regrabaciones solo en esta Mac y Mateo no tiene copia.</p></div>
+</div>
+<div class="card"><b>Demo de llamada en vivo · avance de Luciano al 2026-10-28</b>
+<p>Implementados: iniciar y terminar desde el navegador; audio por persona desde micrófono, Meet, WhatsApp/BlackHole o ejemplo TTS; ASR incremental, volumen por canal, evaluación del detector por frase y aviso con tono desactivable. El corte de silencio visible es numérico, de 0,1–3,0 s. «Probar el ASR» permite borrar sin cortar el micrófono y guardar «Lo que dije en realidad» por frase; Terminar conserva el último audio pendiente; el Historial compara dos registros y permite borrarlos con confirmación (#75, #87, #89–#93).</p>
+<p><b>Alerta con roles (#104):</b> la cita muestra «Persona protegida» / «Otra persona», según el canal, sin asumir quién habló primero. Conserva el texto y el tiempo del aviso. Verificado con pruebas de JavaScript y Python y con datos sintéticos a 1280 y 1920 px. Integrada en <code>laboratorio-luciano</code> y <code>laboratorio-main</code>.</p>
+<p><b>Al 2026-11-02:</b> se integró Tito→SLM y se hizo la corrida por Meet con dos personas. WhatsApp Desktop quedó afuera y la demo va por pestaña de Chrome. <b>Pendiente:</b> confirmar el ensayo en sala y grabar el video de respaldo.</p>
+<p><a href="http://localhost:8765/">Abrir la demo local</a> · <a href="http://127.0.0.1:4173/?vista=roadmap">Ayuda memoria local</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/experiments/voip/README.md">Código y uso de la demo</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/experiments/voip/corridas/2026-11-02-voz-real-meet.md">Corrida por Meet</a></p>
+</div>
+<div class="grid3">
+  <div class="card"><b class="ok">✔ La base técnica está bien hecha</b><p class="chico">Pipeline incremental (ASR → contexto → cola → detector → aviso único), replay que mide la demora real, métricas con intervalos de confianza, manifiestos reproducibles y 86 tests. Eso es defendible y se reutiliza para todo lo que sigue.</p></div>
+  <div class="card"><b class="bad">✘ La detección todavía no está</b><p class="chico">Ningún modelo llega a 95 % / 5 %. En los 97 casos de corpus_v2, la prueba honesta, con el v1: 9B 40/46 estafas y 10/51 FA, 4B 39/46 y 8/51, 2B 22/46 y 6/51, 0.8B 40/46 pero 46/51 FA. El v2, que en los 53 bajaba las FA, en corpus_v2 pierde estafas: 9B 31/46 y 7/51, 4B 14/46 y 0/51. Se escribió mirando los 53 y no generalizó.</p></div>
+  <div class="card"><b class="warn">⚠ Falta evidencia humana</b><p class="chico">Hay 150 casos de desarrollo (75/75) y 200 reservados, todos sin revisión humana. La auditoría de los 53 encontró legítimas con consejos de seguridad que delatan la clase. 10 de las 75 estafas cortan antes del pedido y ningún modelo las avisa: con ellas en el denominador, el máximo es 87 %. Hay que decidir si el 95 % se mide sobre todas (D07/D08).</p></div>
+  <div class="card"><b>? El 4B casi iguala al 9B</b><p class="chico">En corpus_v2 (Linux de Ignacio, 2026-10-23), el 4B con v1 da casi lo mismo que el 9B (39 contra 40 estafas de 46; 8 contra 10 FA de 51) y pesa la mitad (3,3 GB contra 6,6 GB). Las cifras se repiten en tres máquinas (Windows de Evaristo, Linux y M1): la diferencia está en el detector, no en el equipo.</p></div>
+  <div class="card"><b>⏱ La latencia tiene arreglos de software</b><p class="chico">Además del hardware: aprovechar la caché del prefijo (con Qwen 3.5, Ollama vuelve a procesar los últimos ~512 tokens en cada línea; con <code>--num-batch 32</code>, solo ~50–150), evaluar solo al cerrar el turno, respuesta más corta y un filtro liviano antes del SLM.</p></div>
+  <div class="card"><b>📱 Gama objetivo: alta (propuesta)</b><p class="chico">Luciano propuso el 2026-10-23 apuntar a teléfonos de gama alta: iPhone 16 o posterior, Samsung de gama alta y equivalentes. Reemplaza a la gama media de #24 y falta el acuerdo del equipo. El 9B pesa 6,6 GB y probablemente no entre: si es el único que llega, se documenta como techo y se elige el mejor que sí entra (4B 3,3 GB, 2B 2,7 GB).</p></div>
+</div>
+<div class="aviso"><b>¿Alcanza con mover el umbral o combinar?</b> Con lo que hay en los 150, no: ninguna de 4665 configuraciones da 95/5 ni en la parte de selección. La pasada 0 (<code>analisis/2026-10-21-pasada-0</code>) elige con 53 históricos y media corpus_v2, y mide en la otra mitad (23 estafas, 25 legítimas). Con FA ≤ 5 %: 9B v2 con alerta ≥ 0,85 dos veces, 12/23 y 0/25. Con FA ≤ 10 %: 4B v2 con riesgo ≥ 0,40, 17/23 y 3/25. Con FA ≤ 20 %: el 9B v1 o v2 da 21–23/23 con 3–4/25. Intervalos anchos: la mitad tiene 48 casos.</div>
+<div class="nota"><b>Recomendación (2026-10-23):</b> el prompt solo no alcanza para 95/5, ni con el 9B. Quedarse con el v1 y el 4B como candidato (casi igual al 9B, la mitad de peso) y buscar lo que falta en otro lado: roles por canal («Vos» / «La otra persona»), persistencia y, después, el filtro RoBERTuito. Llevar la meta 95/5, cómo se cuentan las estafas sin pedido y la gama alta al tutor. Ver <a href="#plan">Plan de trabajo</a>.</div>
+<div class="nota"><b>Meta nueva del tutor (2026-10-28):</b> 80–85 % de estafas con 10–15 % de falsas alarmas, sobre todas las estafas. En los 97 de corpus_v2 con el v1, el 4B da 39/46 (85 %) con 8/51 (16 %) y el 9B 40/46 (87 %) con 10/51 (20 %): quedan cerca del borde por el lado de las falsas alarmas. Son datos de desarrollo, no del test.</div>
+
+<p><a href="#decisiones">Ver decisiones abiertas y preguntas para el tutor →</a></p>
+<h3>Tus preguntas</h3>
+<div class="faq" id="faq"></div>
+</section>
+
+<!-- ============================ DECISIONES ============================ -->
+<section id="s-decisiones" data-titulo="Decisiones y tutor">
+<h2>Qué respondió el tutor y qué sigue abierto</h2>
+<p class="mu">Corte documental: 2026-10-29. El tutor respondió las seis consultas el 2026-10-28 (<a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor">minuta</a>).</p>
+<p>Fuentes: <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/MAPA-DECISIONES.md">Mapa de decisiones</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor">Minuta del 2026-10-28</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-09-30.md">Consultas anteriores</a>.</p>
+<div class="aviso"><b>Fechas del tutor.</b> 2026-11-15: todo al 90 %. 2026-11-30: todo terminado. Segunda semana de diciembre (2026-12-07 a 2026-12-11): entrega de la documentación y presentación en vivo de 20 a 30 minutos como máximo. Falta el día exacto.</div>
+<h3>Lo que respondió el tutor (2026-10-28)</h3>
+<ol class="preguntas-tutor">
+<li><b>JEV vía API · D03</b><p>Descartado por completo: no entra ni como techo experimental ni como modo híbrido. La inferencia sigue siendo 100 % local.</p></li>
+<li><b>Demo con Meet/WhatsApp · D05</b><p>Aprobada como demo de la defensa, con la llamada de ejemplo como plan B.</p><p class="chico mu">El ensayo con dos personas por Meet se hizo. WhatsApp Desktop quedó afuera. Falta confirmar el ensayo en sala.</p></li>
+<li><b>Meta de calidad · D08</b><p>80–85 % de estafas avisadas con 10–15 % de falsas alarmas, medido sobre <b>todas</b> las estafas. El aviso no puede saltar por frases sueltas («código», «transferime plata», «decime la contraseña») en conversaciones que no son estafa.</p><p class="chico mu">La configuración final tuvo 0/10 falsas alarmas en desarrollo; se mide en el test reservado.</p></li>
+<li><b>Hardware · D09</b><p>La gama más alta de teléfonos disponible a la fecha, sin escatimar recursos; optimizar para gamas menores después.</p><p class="chico mu">Falta citar la RAM de los modelos de referencia desde el fabricante.</p></li>
+<li><b>Voces del equipo · D06</b><p>Se pueden grabar con el esquema de consentimiento entre adultos y resguardo local.</p><p class="chico mu">Antes, completar fuera de Git el domicilio y contacto de los consentimientos.</p></li>
+<li><b>RoBERTuito · D09</b><p>El tutor no se mete en la arquitectura: retomarlo o no lo decide el equipo.</p></li>
+</ol>
+<h3>Decisión resuelta el 2026-11-03</h3>
+<p><b>D09 · ASR y detector:</b> Parakeet con filtro Silero y Tito viejo con Gemma 4 E2B (<a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md">ADR 0001</a>).</p>
+<h3>Decisiones que siguen abiertas o parciales</h3>
+<table>
+<thead><tr><th scope="col">Decisión</th><th scope="col">Qué falta para cerrarla</th></tr></thead>
+<tbody>
+<tr><th scope="row">D02 · Problema y usuario</th><td>Ratificación del tutor de la formulación acordada por el equipo. Pendiente desde la agenda del 2026-09-30.</td></tr>
+<tr><th scope="row">D07 · Anotación</th><td>Probar el manual entre los cuatro, conservar anotaciones originales, resolver ambigüedades y adjudicar desacuerdos.</td></tr>
+<tr><th scope="row">D08 · Protocolo experimental</th><td>Congelar composición y particiones del corpus, comparadores, ventana de contexto, persistencia, política de alerta, métricas y tratamiento de la incertidumbre antes del test final. Requiere D07 resuelta.</td></tr>
+<tr><th scope="row">D10 · Entrega y defensa</th><td>Acordar con el tutor índice, anexos, paquete reproducible, duración y demo; especificar el aviso y la evaluación de comprensión con usuarios.</td></tr>
+<tr><th scope="row">D11 · Solo transcripción</th><td>Ratificar entre los cuatro transcripción y contexto de la llamada actual como entradas del detector; dejar rasgos acústicos como trabajo futuro.</td></tr>
+<tr><th scope="row">D12 · Adultos mayores</th><td>Terminar de acordar foco y justificación, con participación en evaluación/usabilidad sin convertirlo en requisito del corpus ni promesa de generalización.</td></tr>
+<tr><th scope="row">D13 · Título definitivo</th><td>Definirlo cuando se conozca la cobertura real del corpus. No prometer «español argentino» sin un corpus que lo sostenga.</td></tr>
+</tbody>
+</table>
+<h3>Otros puntos por especificar</h3>
+<ul>
+<li>Día exacto de la entrega y la presentación dentro de la segunda semana de diciembre.</li>
+<li>Android concreto para la demo y mediciones de rendimiento, batería y temperatura.</li>
+<li>Posibilidad y licencia de publicar el corpus, o solo sus metadatos.</li>
+<li>Técnica estadística final según tamaño y distribución del corpus.</li>
+<li>Discutir entre los cuatro si se agrega «cuánto contexto mira el detector» como eje de PI1 (D04).</li>
+</ul>
+<p class="nota"><b>Prioridad sugerida:</b> hacer las llamadas con referencia humana (#54, #32), congelar el protocolo (#33) y correr el test reservado (#52). Es una orientación para conversar.</p>
+<p class="chico mu">Esta pestaña resume las fuentes enlazadas. Las resoluciones se registran en la minuta y en el mapa de decisiones; ninguna casilla del tablero cierra una decisión.</p>
+</section>
+
+<!-- ============================ PLAN ============================ -->
+<section id="s-plan" data-titulo="Plan de trabajo">
+<h2>Plan de trabajo por etapas</h2>
+<p class="mu">Orden propuesto para ir por partes. Lo terminado aparece tachado, con su evidencia, y lo que está en marcha, con ⏳; esas marcas viven en el código del panel. Las demás casillas se guardan solo en este navegador (localStorage). Todo lo que fija un umbral, una gama o una referencia se marca <b>propuesta sin discutir</b> hasta que lo ratifique el equipo, según AGENTS.md.</p>
+<div class="aviso"><b>Meta de calidad del tutor (2026-10-28):</b> 80–85 % de estafas con aviso y 10–15 % de legítimas con falsa alarma, sobre todas las estafas, por conversación, con aviso único, medido una sola vez sobre un test congelado. Reemplaza a la meta 95/5 propuesta el 2026-10-23 (<a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor">minuta</a>).</div>
+<p><a href="#decisiones">Ver decisiones que bloquean y preguntas para el tutor</a>. Las etapas de este plan son propuestas; las fechas en negrita del calendario las fijó el tutor.</p>
+
+<h3>Calendario hasta la entrega (segunda semana de diciembre)</h3>
+<div class="card"><table>
+<tr><th>Semana</th><th>Detector</th><th>ASR y replay</th><th>Llamada en vivo</th><th>RoBERTuito</th><th>Corpus, gestión e informe</th></tr>
+<tr><td>26/10–1/11</td><td>4B y 9B sobre corpus_v2; modo roles</td><td>TTS estéreo de los 24; WER por canal</td><td>Panel y captura implementados; ensayos #80/#86 pendientes</td><td>Acordar y revisar la rama</td><td>Tutor, reparto, issues; campo <code>protegido</code></td></tr>
+<tr><td>2/11–8/11</td><td><b>Congelar configuración</b></td><td>Replay con roles; L_R y L_C</td><td>ASR y detector en vivo</td><td>Datos etiquetados por el SLM</td><td>Revisión humana (kappa)</td></tr>
+<tr><td>9/11–<b>15/11 (90 %)</b></td><td>Test en texto (una vez)</td><td>Grabar los 24 con voces del equipo</td><td><b>Demo andando</b> o plan B</td><td>Entrenar y medir</td><td>Capítulos con resultados</td></tr>
+<tr><td>16/11–22/11</td><td>Análisis de errores del test</td><td>Replay del test (TTS)</td><td>Ensayos</td><td>Cascada en desarrollo</td><td>Capítulos</td></tr>
+<tr><td>23/11–<b>30/11 (todo terminado)</b></td><td colspan="4">Video de la demo, verificación de reproducción y presentación</td><td>Informe completo</td></tr>
+<tr><td>1/12–6/12</td><td colspan="5">Correcciones del tutor y ensayo de la presentación (20–30 min)</td></tr>
+<tr><td><b>7/12–11/12</b></td><td colspan="5"><b>Entrega de la documentación y presentación en vivo</b>; falta el día exacto</td></tr>
+</table><p class="chico mu">Propuesta sin discutir. Si hay atraso, se posterga primero RoBERTuito y después la opción «linda» de la llamada; el replay en vivo queda como plan B.</p></div>
+
+<h3>Llamada en vivo: opciones</h3>
+<div class="card"><table>
+<tr><th>Opción</th><th>Cómo es</th><th>Separa las dos voces</th><th>Costo estimado</th><th>Riesgos</th></tr>
+<tr><td><b>D. Cualquier app de llamada + captura por persona</b> (implementado; aprobado por el tutor el 2026-10-28 como demo de D05)</td><td>El panel recibe micrófono local y audio remoto de una pestaña de Meet o WhatsApp Desktop con BlackHole; también admite dos notebooks con <code>cliente.py</code>. Se usan auriculares. ASR y detector corren localmente.</td><td>Sí, por canal</td><td>Implementado; falta ensayo con dos personas (#80)</td><td>Sin auriculares, cada micrófono capta también la otra voz. El aviso se ve en la notebook, no dentro de la app de llamada.</td></tr>
+<tr><td>A. App web propia con WebRTC</td><td>Una página para llamar entre dos navegadores (teléfono o notebook). El dispositivo de la persona protegida manda al servidor su micrófono y el audio que recibe, como haría la app real.</td><td>Sí, por canal (local y remoto)</td><td>6–10 días</td><td>HTTPS para el micrófono en teléfonos, redes distintas (NAT), control de eco.</td></tr>
+<tr><td>B. LiveKit u otro servidor WebRTC libre, instalado por nosotros</td><td>Usa su app de ejemplo para la llamada y su SDK en Python para recibir el audio de cada participante por separado.</td><td>Sí, por participante</td><td>3–6 días (a confirmar con el spike)</td><td>Docker y claves; aprender el framework; hay que confirmar que deja procesar el audio crudo sin servicios externos.</td></tr>
+<tr><td>C. Telefonía SIP: Asterisk + softphones (Linphone)</td><td>Central telefónica propia; graba cada dirección y puede mandar el audio en vivo a un programa.</td><td>Sí, por dirección</td><td>5–10 días</td><td>Curva de SIP y configuración; poco tiempo.</td></tr>
+<tr><td>E. Sin llamada: replay estéreo en tiempo real</td><td>Se reproduce una llamada grabada al ritmo real con el mismo panel.</td><td>Sí</td><td>Implementado en el panel (#77)</td><td>No es una llamada en vivo: sirve como plan B.</td></tr>
+</table><p class="chico mu">Ninguna opción usa servicios pagos ni manda el audio a terceros para analizarlo (en D el audio de la llamada pasa por la app elegida, pero el análisis corre en la PC). Los costos son estimaciones sin medir. Lo que se arme para la demo graba cada llamada con el formato del replay, así toda llamada en vivo también se puede medir.</p></div>
+
+<p class="aviso"><b>Al 2026-11-03:</b> el detector y el ASR ya se eligieron (ADR 0001), #50 y #19 están cerrados, y Tito sí entró a la configuración final. Lo que sigue en este plan es el armado original: sus etapas de techo de calidad, afinar y RoBERTuito quedan como antecedente. Lo vigente es corpus y referencia humana, evaluación final e informe.</p>
+<div id="plan"></div>
+</section>
+
+<!-- ============================ INFORME ============================ -->
+<section id="s-informe" data-titulo="Informe">
+<h2>Informe final: borrador al 2026-11-03</h2>
+<p class="mu">Los enlaces abren GitHub, en la rama <code>laboratorio-luciano</code>. Lo pendiente está marcado en el texto entre corchetes. <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/README.md">Índice y estado</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md">ADR 0001</a> · <a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md">Comparación de candidatos</a></p>
+<div class="card"><table><thead><tr><th>Capítulo</th><th>Estado</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-00-PRELIMINARES.md">Preliminares</a></td><td>Borrador; falta el resultado final</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-01-INTRODUCCION.md">1. Introducción</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-02-MARCO-CONCEPTUAL-Y-ANTECEDENTES.md">2. Marco conceptual y antecedentes</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-03-REQUISITOS-Y-ANALISIS.md">3. Requisitos y análisis</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-04-METODOLOGIA.md">4. Metodología</a></td><td>Con propuestas: D07 y D08 abiertas</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-05-DISENO-Y-ARQUITECTURA.md">5. Diseño y arquitectura</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-06-IMPLEMENTACION.md">6. Implementación</a></td><td>Borrador completo</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-07-VERIFICACION-Y-PRUEBAS.md">7. Verificación y pruebas</a></td><td>Borrador actualizado</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md">8. Resultados</a></td><td>Solo desarrollo: falta el test (#52)</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-09-DISCUSION.md">9. Discusión</a></td><td>Parcial: falta el test</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-10-GESTION-DEL-PROYECTO.md">10. Gestión del proyecto</a></td><td>Faltan las contribuciones</td></tr>
+<tr><td><a href="https://github.com/Corchets/bitacora_tesis/blob/laboratorio-luciano/docs/tesis/CAP-11-CONCLUSIONES.md">11. Conclusiones</a></td><td>Parcial: falta el test</td></tr>
+</tbody></table></div>
+<p class="nota"><b>Sin escribir:</b> anexos, agradecimientos, índices, referencias unificadas y formato final en A4.</p>
+</section>
+
+<!-- ============================ ARQUITECTURA ============================ -->
+<section id="s-arq" data-titulo="Arquitectura">
+<h2>Arquitectura y archivos</h2>
+<div class="card" id="arq-svg"></div>
+<p class="chico mu">L_R &gt; 0: avisó antes del pedido peligroso. L_C &gt; 0: avisó antes de que la persona cumpliera. Las reglas corren como comparador; el detector final es Tito viejo con Gemma 4 E2B (ADR 0001). El esquema muestra el recorrido. La cascada encoder→SLM del spike #29 quedó como alternativa a medir.</p>
+<h3>Cómo se llegó hasta acá</h3>
+<div class="card"><table id="historia"></table></div>
+<h3>Mapa de archivos</h3>
+<div class="card"><table id="archivos"></table></div>
+</section>
+
+<!-- ============================ RESULTADOS ============================ -->
+<section id="s-res" data-titulo="Resultados">
+<h2>Resultados sobre los casos de desarrollo</h2>
+<div class="card"><b>Matriz #101 · 20 conversaciones sintéticas, sin revisión humana</b>
+<table><thead><tr><th>Modelo</th><th>Directo</th><th>Con Tito viejo</th><th>Con Tito nuevo</th></tr></thead><tbody>
+<tr><td><b>gemma4:e2b (final)</b></td><td>10/10 · 1/10</td><td><b>10/10 · 0/10</b></td><td>2/10 · 0/10</td></tr>
+<tr><td>gemma4:e4b</td><td>10/10 · 1/10</td><td>10/10 · 1/10</td><td>3/10 · 0/10</td></tr>
+<tr><td>qwen3.5:4b</td><td>10/10 · 2/10</td><td>10/10 · 2/10</td><td>3/10 · 0/10</td></tr>
+<tr><td>gemma3n:e2b</td><td>10/10 · 7/10</td><td>10/10 · 4/10</td><td>3/10 · 0/10</td></tr>
+<tr><td>Los 10 modelos juntos</td><td>90/100 · 48/100</td><td>82/100 · 27/100</td><td>23/100 · 0/100</td></tr>
+</tbody></table>
+<p class="chico mu">Estafas con aviso · falsas alarmas. Con esos casos se eligió entre 10 modelos: el 10/10 es optimista.</p></div>
+<div class="card"><b>Voz real · opción B contra A, 129 frases y 2 voces</b>
+<table><thead><tr><th>Criterio</th><th>B (final)</th><th>A</th></tr></thead><tbody>
+<tr><td>Frases con las etiquetas correctas</td><td>121/129</td><td>120/129</td></tr>
+<tr><td>WER</td><td>25,6 %</td><td>32,8 %</td></tr>
+<tr><td>Términos críticos</td><td>70,9 %</td><td>76,4 %</td></tr>
+<tr><td>Demora de la frase final, mediana</td><td>1,01 s</td><td>0,26 s</td></tr>
+<tr><td>Frases con palabras en otro idioma</td><td>4</td><td>25</td></tr>
+</tbody></table></div>
+<h3>Corridas guardadas</h3>
+<div class="fila"><label class="ctl">Casos<select class="sel-grupo"><option value="todos">todo desarrollo (150)</option><option value="historicos">53 históricos</option><option value="corpus_v2">corpus v2 de desarrollo (97)</option></select></label></div>
+<p class="mu"><span id="res-n"></span> Cada corrida se cuenta sobre sus casos completos de ese conjunto: las anteriores al 2026-10-21 solo tienen los 53 históricos, así que para compararlas con las nuevas elegí «53 históricos». Puntos: lo observado. Barras: intervalo de Wilson del 95 %. La zona verde es la meta propuesta (≥ 95 % / ≤ 5 %). Se calcula con la política de la pestaña <a href="#afinar">Afinar</a> (por defecto: primer <code>alerta_sugerida=true</code> válido, igual que las corridas registradas).</p>
+<div class="card"><div id="dispersion"></div><div class="ley" id="ley-disp"></div></div>
+<div class="card"><table id="tabla-res"></table></div>
+<h3>Tiempo por línea: con y sin placa de video</h3>
+<p class="mu chico">p50 y p95 por línea en segundos. Línea punteada: gate de latencia p95 ≤ 1,5 s (máximo 2,0 s) de PREFACTIBILIDAD-TECNICA. «Solo CPU, 2 hilos» corrió en las 14 conversaciones del piloto escrito, con 2 hilos de la CPU de la PC con Windows, para parecerse a lo que el teléfono le reservaría al detector.</p>
+<div class="card"><div id="latencia"></div></div>
+<h3>Memoria del detector más el reconocimiento de voz</h3>
+<div class="card"><div id="memoria"></div><p class="chico mu">Tamaño de modelo informado por Ollama más ~400 MB del ASR Zipformer medido (357–423 MB). No es un pico RSS medido del pipeline completo. Techos de PREFACTIBILIDAD-TECNICA: 256 / 512 / 1024 MB para todo el pipeline.</p></div>
+</section>
+
+<!-- ============================ AFINAR ============================ -->
+<section id="s-afinar" data-titulo="Afinar umbrales">
+<h2>Afinar umbral y política sobre corridas guardadas</h2>
+<p class="mu">Recalcula sin volver a correr nada: cada corrida guardó el <code>riesgo</code> y la <code>alerta_sugerida</code> de cada línea. También aparecen acá las corridas que hagas en el <a href="#probador">Probador</a>.</p>
+<div class="aviso">Afinar sobre los mismos casos de desarrollo que se usan para medir sobreajusta: sirve para explorar, no para reportar. Los números para la tesis tienen que salir de un test que no se usó para elegir el umbral (etapa 1 del plan). El <code>riesgo</code> no está calibrado.</div>
+<div class="card">
+<div class="fila">
+ <label class="ctl">Corrida<select id="af-corrida"></select></label>
+ <label class="ctl">Casos<select class="sel-grupo"><option value="todos">todo desarrollo (150)</option><option value="historicos">53 históricos</option><option value="corpus_v2">corpus v2 de desarrollo (97)</option></select></label>
+ <label class="ctl">Condición de alerta<select id="af-base"><option value="alerta">alerta_sugerida = true y riesgo ≥ τ</option><option value="riesgo">solo riesgo ≥ τ</option></select></label>
+ <label class="ctl">Umbral τ: <b id="af-tau-v">0,00</b><input type="range" id="af-tau" min="0" max="1" step="0.05" value="0"></label>
+ <label class="ctl">Persistencia k (líneas seguidas)<input type="number" id="af-k" min="1" max="5" value="1" style="width:70px"></label>
+ <button class="b" id="af-reset">Volver a la política registrada</button>
+</div>
+<div class="kpi" id="af-kpi"></div>
+</div>
+<div class="grid2">
+ <div class="card"><b>Barrido de τ con k fijo</b><div id="af-barrido"></div><div class="ley"><span><i style="background:var(--vi)"></i>estafas con aviso</span><span><i style="background:var(--le)"></i>legítimas con falsa alarma</span></div></div>
+ <div class="card"><b>Cuándo avisa en las estafas (por línea)</b><div id="af-pos"></div></div>
+</div>
+<div class="card"><b>Caso por caso con esta política</b><div class="mu chico">Primero los errores. Clic en un caso para verlo línea por línea.</div><div style="max-height:480px;overflow:auto"><table id="af-casos"></table></div></div>
+</section>
+
+<!-- ============================ TIEMPOS ============================ -->
+<section id="s-tiempos" data-titulo="Tiempos T_R · T_A · T_C">
+<h2>La pregunta central: ¿avisa a tiempo?</h2>
+<div class="grid2">
+<div class="card">
+<p><b>T_R</b>: el momento en que alguien pide algo peligroso (código, clave, transferencia…). <b>T_C</b>: cuando la persona cumple. <b>T_A</b>: cuando el sistema avisa, con la demora del ASR y del detector incluida.</p>
+<p><b>L_R = T_R − T_A</b> &gt; 0: avisó antes del pedido (anticipación, suele costar falsas alarmas).<br><b>L_C = T_C − T_A</b> &gt; 0: avisó antes de que la persona cumpliera. <b>Es lo que realmente la protege.</b></p>
+<p class="chico mu">Definiciones en <code>docs/evaluacion/METRICAS.md</code>. <code>Preventive@δ</code> = proporción de estafas avisadas al menos δ antes de la referencia; δ y la política se acuerdan en D08.</p>
+</div>
+<div class="card" id="tiempos-svg"></div>
+</div>
+<h3>Replay de punta a punta sobre audio TTS</h3>
+<p class="mu chico">SC-WA-CODE-01 (estafa) y LG-WA-CONSULTA-01 (legítima): audio TTS → Zipformer → replay con cola → detector. Las barras son los turnos del audio; los puntos, el T_A. Cualquier punto en la legítima es una falsa alarma. Fuente: <code>experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md</code>.</p>
+<div class="card"><div id="e2e"></div></div>
+<div class="card"><table id="e2e-tabla"></table></div>
+<div class="nota">Lectura: en texto, el 2B avisa casi siempre en la línea del pedido (L_R ≈ 0) y antes del cumplimiento. Con audio, la demora del ASR y la <b>cola</b> del detector (cada evaluación espera a que termine la anterior) empujan el aviso: el 2B estéreo avisó a 29,1 s, 11 s después del cumplimiento y ya terminado el audio. La latencia por línea no es un detalle: decide si L_C es positivo.</div>
+</section>
+
+<!-- ============================ CASOS ============================ -->
+<section id="s-casos" data-titulo="Casos">
+<h2>Los casos de prueba</h2>
+<div class="nota" id="reserva-corpus"></div>
+<p class="chico">Diseño y límites: <a href="../../casos/DISENO-CORPUS-V2.md">corpus v2</a>. Qué grabar para ASR: <a href="../../casos/GRABACIONES-ASR.md">lista de grabación</a>. El probador y los lotes de este panel contienen únicamente desarrollo.</p>
+<p class="mu">Viven en <code>experiments/slm-directo/casos/texto/&lt;id&gt;.txt</code> (diálogo <code>A: …</code> / <code>B: …</code>) y <code>casos/referencia/&lt;id&gt;.json</code> (clase, líneas de T_R/T_C, evidencia, qué prueba y notas). Formato en <code>casos/README.md</code>; validación con <code>python3 casos.py --listar</code>. Las referencias asistidas siguen pendientes de revisión humana.</p>
+<div class="kpi" id="casos-kpi"></div>
+<div class="dos">
+ <div><div class="fila" id="casos-filtros"></div><div class="lista" id="casos-lista"></div></div>
+ <div>
+  <div class="fila"><label class="ctl">Mostrar respuestas de<select id="casos-corrida"></select></label><button class="b" id="casos-probar">Probar este caso en vivo →</button></div>
+  <div id="casos-det"></div>
+ </div>
+</div>
+</section>
+
+<!-- ============================ PROBADOR ============================ -->
+<section id="s-probador" data-titulo="Probador en vivo">
+<h2>Probador en vivo</h2>
+<p class="mu">Corre las reglas (copia en JavaScript de <code>reglas.py</code>) y un modelo de Ollama línea por línea, con el mismo prompt, esquema JSON y opciones que <code>correr.py</code> (temperatura 0, seed 42, num_ctx 4096, <code>think: false</code>; <code>num_batch</code> 32 como las corridas <code>-nb32</code>, o el valor de Ollama). Las reglas son las v1. Es exploratorio: no escribe manifiesto. Para corridas registrables usá <code>correr.py</code>. Para usarlo con el archivo suelto, ver <a href="#correr">Cómo probar todo</a>.</p>
+<div class="card">
+<div class="fila"><span>Ollama:</span><span id="ol-estado" class="estado no">sin comprobar</span>
+ <input type="text" id="ol-url" value="http://127.0.0.1:11434" style="width:200px">
+ <button class="b" id="ol-check">Comprobar</button>
+ <span class="mu chico" id="ol-ayuda"></span></div>
+<div class="fila">
+ <label class="ctl">Modelo<select id="pr-modelo"><option value="">(comprobá Ollama)</option></select></label>
+ <label class="ctl">Prompt<select id="pr-prompt"></select></label>
+ <label class="ctl">Hablantes<select id="pr-hab"><option value="ab">ab: el modelo ve A/B</option><option value="sin">sin: no los ve</option></select></label>
+ <label class="ctl">num_batch<select id="pr-nb"><option value="32">32 (corridas -nb32)</option><option value="">el de Ollama</option></select></label>
+ <label class="ctl">Solo reglas<select id="pr-soloreglas"><option value="no">no</option><option value="si">sí (sin Ollama)</option></select></label>
+</div>
+</div>
+<div class="grid2">
+<div class="card"><b>Una conversación</b>
+ <div class="fila"><select id="pr-caso"></select><button class="b" id="pr-cargar">Cargar caso</button></div>
+ <textarea id="pr-texto" placeholder="A: Hola, te llamo del banco...&#10;B: Sí, ¿qué pasó?"></textarea>
+ <div class="chico mu" style="margin:6px 0">Una línea por renglón, empezando con <code>A: </code> o <code>B: </code>. Marcá opcionalmente la línea del pedido y del cumplimiento:</div>
+ <div class="fila"><label class="ctl">Línea T_R<input type="number" id="pr-tr" min="1" style="width:80px"></label><label class="ctl">Línea T_C<input type="number" id="pr-tc" min="1" style="width:80px"></label><label class="ctl">Clase<select id="pr-clase"><option value="">sin indicar</option><option value="vishing">vishing</option><option value="legitima">legítima</option></select></label></div>
+ <div class="fila"><button class="b pri" id="pr-correr">▶ Correr línea por línea</button><button class="b" id="pr-parar" disabled>■ Parar</button></div>
+</div>
+<div class="card"><b>Lote de casos</b>
+ <p class="chico mu">Corre el modelo elegido sobre varios casos y suma una corrida nueva a Resultados y Afinar. Solo usa desarrollo. Los casos nuevos tienen más líneas que los históricos; el tiempo depende del lote y del modelo elegido.</p>
+ <div class="fila"><label class="ctl">Casos<select id="lo-grupo"><option value="todos">todo desarrollo</option><option value="corpus_v2">corpus v2 de desarrollo (97)</option><option value="piloto_escrito">piloto escrito (14)</option><option value="trampa">trampa (13)</option><option value="laboratorio">laboratorio (26)</option><option value="par">solo el par de WhatsApp</option></select></label></div>
+ <div class="fila"><button class="b pri" id="lo-correr">▶ Correr lote</button><button class="b" id="lo-parar" disabled>■ Parar</button><button class="b" id="lo-exportar">Exportar corridas en vivo (JSON)</button><label class="b" style="cursor:pointer">Importar JSON<input type="file" id="lo-importar" accept=".json" hidden></label></div>
+ <div id="lo-prog" class="chico mu"></div>
+ <div class="kpi" id="lo-kpi"></div>
+</div>
+</div>
+<div class="card"><b>Resultado línea por línea</b><div id="pr-resumen" class="kpi"></div><div id="pr-salida" class="log"></div></div>
+</section>
+
+<!-- ============================ CÓMO CORRER ============================ -->
+<section id="s-correr" data-titulo="Cómo probar todo">
+<h2>Cómo probar todo</h2>
+<div class="card"><b>Demo de llamada en vivo, con la configuración final</b>
+<p>Desde esta copia, con Ollama abierto y el modelo bajado con su tag completo. Antes de reutilizar el puerto, verificá el PID y su carpeta con <code>lsof -nP -iTCP:8765 -sTCP:LISTEN</code> y <code>lsof -a -p &lt;PID&gt; -d cwd</code>.</p>
+<pre>ollama pull gemma4:e2b-it-q4_K_M
+cd /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip
+../../.venv/bin/python servidor.py --host 127.0.0.1
+open http://localhost:8765/</pre>
+<p class="chico mu">Antes de la demo, hacé una llamada de calentamiento: el modelo frío tarda entre 12 y 16 s. Al terminar una corrida, copiá las voces afuera: Git no las guarda.</p>
+</div>
+<div class="nota"><b>La reserva no se corre ni se mira.</b> Los 200 casos <code>CV2-T-*</code> son el test final: se corren una sola vez, con la configuración congelada y después de acordar D08. Desde el 2026-10-23 están en GitHub (rama <code>laboratorio-luciano</code>), pero ni <code>laboratorio-main</code> ni este panel los traen y <code>correr.py</code> usa solo desarrollo. No uses <code>--particion test_reservado</code> ni abras <code>casos/texto/CV2-T-*</code> (<a href="../../../../docs/gestion/REGISTRO-RIESGOS.md">R05</a>).</div>
+<div class="grid2">
+<div class="card"><b>1. Si te llegó solo este archivo</b>
+<p class="chico">Con doble clic ves todo: resumen, plan, resultados, afinar, tiempos y casos. En el <a href="#probador">Probador</a> anda <b>Solo reglas: sí</b>. Los enlaces a documentos y corridas necesitan el repositorio (tarjeta 2).</p>
+<p class="chico">Para probar modelos hace falta <a href="https://ollama.com/download">Ollama</a> y servir el archivo, porque Ollama rechaza las páginas abiertas con doble clic (HTTP 403). Otros modelos: <code>2b-q8_0</code> (2,7 GB), <code>4b-q4_K_M</code> (3,3 GB) y <code>9b-q4_K_M</code> (6,6 GB).</p>
+<pre>ollama pull qwen3.5:0.8b-q8_0        # 1,0 GB
+cd &lt;carpeta donde guardaste panel.html&gt;
+python3 -m http.server 8765          # en Windows: py -m http.server 8765
+# abrí http://127.0.0.1:8765/panel.html#probador y tocá «Comprobar»</pre>
+<span class="chico mu">Probado el 2026-10-23 con el archivo suelto en la M1: 0.8B con el prompt v2 sobre <code>LAB-whatsapp-codigo</code>, 2,5 s por línea (mediana). En macOS usá etiquetas GGUF (<code>-q8_0</code>, <code>-q4_K_M</code>): la variante MLX devuelve HTTP 501 con salida estructurada (R21).</span></div>
+<div class="card"><b>2. Con el repositorio</b>
+<pre>git clone https://github.com/Corchets/bitacora_tesis.git
+cd bitacora_tesis
+git switch laboratorio-main          # la rama de trabajo de todos
+python3 experiments/slm-directo/analisis/tablero/armar_panel.py --servir
+# abre http://127.0.0.1:8765/experiments/slm-directo/analisis/tablero/panel.html</pre>
+<span class="chico mu"><code>--servir</code> sirve la raíz del repositorio, así también abren los enlaces. Sin <code>--servir</code>, solo regenera el panel (hacelo después de nuevas corridas o casos). <code>laboratorio-main</code> tiene los 150 de desarrollo y no la reserva; <code>laboratorio-luciano</code> queda quieta hasta la evaluación final.</span></div>
+<div class="card"><b>3. Devolver lo que probaste</b>
+<p class="chico"><b>Probador</b> (exploratorio): corré un lote, tocá «Exportar corridas en vivo (JSON)» y mandá el archivo. Quien lo recibe lo carga con «Importar JSON» y aparece en Resultados y Afinar.</p>
+<p class="chico"><b>Corridas registrables</b>: <code>correr.py</code> (tarjeta 5) crea <code>corridas/&lt;fecha&gt;_&lt;hora&gt;_&lt;etiqueta&gt;/</code> con <code>manifiesto.json</code> y <code>actualizaciones.csv</code>. Mandá esa carpeta entera.</p>
+<span class="chico mu">Con Ollama, una sola instancia por máquina: dos a la vez se pisan la memoria y los tiempos.</span></div>
+<div class="card"><b>4. Tests (no necesitan modelos)</b>: 107, todos pasan al 2026-10-23.
+<pre>cd experiments/slm-directo &amp;&amp; python3 casos.py &amp;&amp; python3 -m unittest discover -s tests   # 54
+cd ../replay   &amp;&amp; python3 -m unittest discover -s tests   # 12
+cd ../metricas &amp;&amp; python3 -m unittest discover -s tests   # 28
+cd .. &amp;&amp; uv run --with numpy --with soundfile \
+  python -m unittest discover -s asr-local/tests        # 13</pre>
+<span class="chico mu"><code>casos.py</code> valida textos, referencias, catálogo y huellas SHA-256 del corpus.</span></div>
+<div class="card"><b>5. Detector SLM sobre texto (#50)</b>
+<pre>bash experiments/slm-directo/demo.sh             # instala lo que falte, 8 casos y abre el visor
+bash experiments/slm-directo/demo.sh --completo  # los 150 de desarrollo (en Windows: demo.ps1)
+cd experiments/slm-directo
+python3 casos.py --listar
+python3 correr.py --solo-reglas --reglas v1,v2
+python3 correr.py --modelos qwen3.5:2b-q8_0 --grupo piloto_escrito --detalle
+python3 correr.py --modelos qwen3.5:4b-q4_K_M --prompts tarea,v2 \
+  --grupo corpus_v2 --num-batch 32 --etiqueta linux-4b-cv2-nb32   # como las de Linux
+python3 correr.py --modelos qwen3.5:0.8b-q8_0 --solo-cpu --hilos 2   # cota sin placa
+bash cola_m1.sh                                  # M1 de 8 GB: de a una y corta por memoria
+python3 resumen.py corridas/&lt;carpeta&gt;
+python3 visor.py corridas/&lt;carpeta&gt; [corridas/&lt;otra&gt;] --abrir</pre>
+<span class="chico mu">Prompts: <code>tarea</code> (v1), <code>v2</code> (cita antes de decidir) y <code>tarea+base</code>. <code>--num-batch 32</code> deja reutilizar la caché del prefijo en Qwen3.5.</span></div>
+<div class="card"><b>6. Análisis de lo guardado (sin correr modelos)</b>
+<pre>cd experiments/slm-directo/analisis
+python3 2026-10-21-errores-y-prompt-v2/errores.py    # errores de v1 y v2 por corrida
+python3 2026-10-21-pasada-0/combinar.py              # umbral, persistencia y cascadas (150)
+python3 2026-10-21-pasada-0/combinar.py --casos 53   # con el 4B y el 9B de Linux
+python3 tablero/armar_panel.py                       # regenerar este panel</pre>
+<span class="chico mu">Detalle: <a href="../2026-10-21-errores-y-prompt-v2/README.md">errores y prompt v2</a> · <a href="../2026-10-21-pasada-0/README.md">pasada 0</a>.</span></div>
+<div class="card"><b>7. ASR local (#19)</b>
+<pre>cd experiments/asr-local
+pip install -r requirements.txt
+bash sintetizar_par.sh                       # audios TTS del par (macOS, usa say)
+python3 asr_local.py --help                  # Zipformer o Whisper → actualizaciones.jsonl
+python3 mezclar_canales.py --help            # estéreo A/B ordenado por disponible_s
+python3 wer.py --help</pre></div>
+<div class="card"><b>8. Replay de punta a punta (#28)</b>
+<pre>cd experiments/replay
+python3 replay.py --texto ../slm-directo/casos/texto/LAB-whatsapp-codigo.txt \
+  --detector reglas --salida corridas/demo_texto
+python3 replay.py --actualizaciones tests/datos/ejemplo_actualizaciones.jsonl \
+  --detector slm --modelo qwen3.5:2b-q8_0 --prompt tarea --hablantes ab \
+  --disparo final --salida corridas/demo_slm</pre></div>
+<div class="card"><b>9. Métricas (#52)</b>
+<pre>cd experiments/metricas
+python3 evaluar.py --help   # corridas de slm-directo o replay → metricas.md y metricas.json</pre></div>
+<div class="card"><b>10. Otras interfaces</b>
+<pre># UI Streamlit del laboratorio (#44)
+uv venv /tmp/ui-venv
+uv pip install --python /tmp/ui-venv/bin/python -r experiments/laboratorio/requirements-ui.txt
+/tmp/ui-venv/bin/python -m streamlit run experiments/laboratorio/ui_laboratorio.py
+# Ayuda memoria y arquitectura interactiva
+cd ayuda-memoria &amp;&amp; npm install &amp;&amp; npm run build &amp;&amp; npm run preview</pre>
+<span class="chico mu">Visor guardado: <a href="../../corridas/2026-10-17_145806_demo-qwen3.5-2b-q8_0/visor.html">corrida 2B M1 (8 casos)</a> · <a href="index.html">tablero del ensayo</a> (necesita el entorno donde se creó).</span></div>
+</div>
+</section>
+</main>
+
+<script>
+const D = /*__DATOS__*/null;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const pct = (x, d = 0) => x == null ? '—' : (100 * x).toFixed(d).replace('.', ',') + ' %';
+const num = (x, d = 2) => x == null ? '—' : x.toFixed(d).replace('.', ',');
+const CASOS = Object.fromEntries(D.casos.map(c => [c.id, c]));
+const COLORES = ['var(--c0)','var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)','var(--c6)','var(--c7)','var(--c8)','var(--c9)'];
+
+// ---------------- Navegación ----------------
+const SECC = [...document.querySelectorAll('main>section')];
+const IDS = {resumen:'s-resumen',decisiones:'s-decisiones',plan:'s-plan',informe:'s-informe',arquitectura:'s-arq',resultados:'s-res',afinar:'s-afinar',tiempos:'s-tiempos',casos:'s-casos',probador:'s-probador',correr:'s-correr'};
+$('#nav').innerHTML = Object.entries(IDS).map(([h, id]) => `<button data-h="${h}">${$('#' + id).dataset.titulo}</button>`).join('');
+function ir() {
+  const h = (location.hash || '#resumen').slice(1);
+  const id = IDS[h] || 's-resumen';
+  SECC.forEach(s => s.classList.toggle('on', s.id === id));
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', IDS[b.dataset.h] === id));
+  if (id === 's-res') pintarResultados();
+  if (id === 's-afinar') pintarAfinar();
+  window.scrollTo(0, 0);
+}
+$('#nav').onclick = e => { if (e.target.dataset.h) location.hash = e.target.dataset.h; };
+window.addEventListener('hashchange', ir);
+
+// ---------------- Estadística ----------------
+function wilson(k, n, z = 1.96) {
+  if (!n) return [null, null];
+  const p = k / n, d = 1 + z * z / n, c = p + z * z / (2 * n), m = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+  return [Math.max(0, (c - m) / d), Math.min(1, (c + m) / d)];
+}
+
+// ---------------- Corridas y política ----------------
+// fila: [caso, linea, valida, riesgo, alerta, ms, motivo, evidencia]
+const CORRIDAS = D.corridas.map(c => ({...c, vivo: false}));
+const POLITICA_REGISTRADA = {base: 'alerta', tau: 0, k: 1};
+let politica = {...POLITICA_REGISTRADA};
+function porCaso(corrida) {
+  if (corrida._porCaso) return corrida._porCaso;
+  const m = {};
+  for (const f of corrida.filas) (m[f[0]] ||= []).push(f);
+  Object.values(m).forEach(l => l.sort((a, b) => a[1] - b[1]));
+  return (corrida._porCaso = m);
+}
+function dispara(f, p) {
+  const [, , valida, riesgo, alerta] = f;
+  if (!valida) return false;
+  if (p.base === 'riesgo' && riesgo != null) return riesgo >= p.tau;
+  return alerta && (riesgo == null || riesgo >= p.tau);
+}
+function avisoEn(filas, p) {
+  let racha = 0;
+  for (const f of filas) { racha = dispara(f, p) ? racha + 1 : 0; if (racha >= p.k) return f; }
+  return null;
+}
+function posicion(c, linea) {
+  if (linea == null) return 'sin aviso';
+  if (c.tr == null) return 'sin T_R';
+  if (c.tc != null && linea >= c.tc) return 'ya cumplió';
+  if (linea < c.tr) return 'antes';
+  if (linea === c.tr) return 'en el pedido';
+  return 'después';
+}
+let grupoEval = 'todos';
+const enGrupo = c => grupoEval === 'todos' || (grupoEval === 'corpus_v2') === (c.grupo === 'corpus_v2');
+function nGrupo() {
+  const L = D.casos.filter(enGrupo), v = L.filter(c => c.clase === 'vishing').length;
+  return `${L.length} casos: ${v} estafas y ${L.length - v} legítimas.`;
+}
+document.querySelectorAll('.sel-grupo').forEach(s => s.addEventListener('input', () => {
+  grupoEval = s.value; document.querySelectorAll('.sel-grupo').forEach(o => o.value = grupoEval);
+  pintarResultados(); pintarAfinar();
+}));
+function evaluar(corrida, p = politica) {
+  const pc = porCaso(corrida), filas = [];
+  let tp = 0, nv = 0, fp = 0, nl = 0, fallos = 0, pos = {};
+  for (const [id, lineas] of Object.entries(pc)) {
+    const c = CASOS[id]; if (!c || !enGrupo(c)) continue;
+    const ultima = Math.max(...lineas.map(f => f[1]));
+    const completo = ultima >= c.lineas.length;
+    if (!completo) continue;
+    fallos += lineas.filter(f => !f[2]).length;
+    const av = avisoEn(lineas, p), linea = av ? av[1] : null;
+    if (c.clase === 'vishing') { nv++; if (av) tp++; const ps = posicion(c, linea); pos[ps] = (pos[ps] || 0) + 1; }
+    else { nl++; if (av) fp++; }
+    filas.push({c, linea, av, ok: c.clase === 'vishing' ? !!av : !av, pos: c.clase === 'vishing' ? posicion(c, linea) : (av ? 'falsa alarma' : 'ok')});
+  }
+  const ms = corrida.filas.map(f => f[5]).filter(x => x != null).sort((a, b) => a - b);
+  const q = x => ms.length ? ms[Math.min(ms.length - 1, Math.floor(x * (ms.length - 1) + 0.5))] : null;
+  return {tp, nv, fp, nl, rec: nv ? tp / nv : null, fa: nl ? fp / nl : null, ciR: wilson(tp, nv), ciF: wilson(fp, nl), pos, filas, fallos, p50: q(0.5), p95: q(0.95)};
+}
+
+// ---------------- Gráficos SVG ----------------
+const NS = 'http://www.w3.org/2000/svg';
+function svg(w, h) { const s = document.createElementNS(NS, 'svg'); s.setAttribute('viewBox', `0 0 ${w} ${h}`); s.setAttribute('width', '100%'); return s; }
+function el(s, n, a, t) { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (t != null) e.textContent = t; s.appendChild(e); return e; }
+
+function pintarDispersion() {
+  const W = 760, H = 430, x0 = 60, y0 = 20, w = 640, h = 360;
+  const s = svg(W, H), X = v => x0 + v * w, Y = v => y0 + (1 - v) * h;
+  el(s, 'rect', {x: X(0), y: Y(1), width: X(0.15) - X(0), height: Y(0.80) - Y(1), fill: '#dcfce7', stroke: '#15803d', 'stroke-dasharray': '4 3'});
+  el(s, 'text', {x: X(0.155), y: Y(0.9), 'font-size': 11, fill: '#15803d'}, 'meta del tutor: ≥ 80 % y ≤ 15 %');
+  for (let v = 0; v <= 1.001; v += 0.25) {
+    el(s, 'line', {x1: X(v), x2: X(v), y1: Y(0), y2: Y(1), stroke: '#eceae4'});
+    el(s, 'line', {x1: X(0), x2: X(1), y1: Y(v), y2: Y(v), stroke: '#eceae4'});
+    el(s, 'text', {x: X(v), y: Y(0) + 16, 'text-anchor': 'middle', 'font-size': 11, fill: '#5f6b66'}, pct(v));
+    el(s, 'text', {x: X(0) - 6, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: '#5f6b66'}, pct(v));
+  }
+  el(s, 'text', {x: X(0.5), y: H - 4, 'text-anchor': 'middle', 'font-size': 12, fill: '#1d2321'}, 'Legítimas con falsa alarma →  (menos es mejor)');
+  const ty = el(s, 'text', {x: 14, y: Y(0.5), 'text-anchor': 'middle', 'font-size': 12, fill: '#1d2321', transform: `rotate(-90 14 ${Y(0.5)})`}, 'Estafas con aviso ↑ (más es mejor)');
+  const ley = [];
+  CORRIDAS.forEach((c, i) => {
+    const r = evaluar(c); if (!r.nv || !r.nl) return;
+    const col = COLORES[i % COLORES.length];
+    el(s, 'line', {x1: X(r.ciF[0]), x2: X(r.ciF[1]), y1: Y(r.rec), y2: Y(r.rec), stroke: col, 'stroke-opacity': .45, 'stroke-width': 2});
+    el(s, 'line', {x1: X(r.fa), x2: X(r.fa), y1: Y(r.ciR[0]), y2: Y(r.ciR[1]), stroke: col, 'stroke-opacity': .45, 'stroke-width': 2});
+    const p = el(s, 'circle', {cx: X(r.fa), cy: Y(r.rec), r: 6, fill: col, stroke: '#fff', 'stroke-width': 1.5});
+    el(p, 'title', {}, `${c.nombre}: ${r.tp}/${r.nv} estafas, ${r.fp}/${r.nl} falsas alarmas`);
+    ley.push(`<span><i style="background:${col}"></i>${esc(c.nombre)}${c.vivo ? ' (en vivo)' : ''}</span>`);
+  });
+  $('#dispersion').replaceChildren(s); $('#ley-disp').innerHTML = ley.join('');
+}
+function pintarTablaRes() {
+  const filas = CORRIDAS.map((c, i) => {
+    const r = evaluar(c); if (!r.nv && !r.nl) return '';
+    const okR = r.rec >= 0.95, okF = r.fa != null && r.fa <= 0.05;
+    return `<tr><td><span class="tag" style="background:${COLORES[i % COLORES.length]};color:#fff">&nbsp;</span> ${esc(c.nombre)}${c.vivo ? ' <span class="tag tg">en vivo</span>' : ''}</td>
+      <td class="n ${okR ? 'ok' : ''}">${r.tp}/${r.nv} (${pct(r.rec, 1)})<div class="mot">${pct(r.ciR[0])}–${pct(r.ciR[1])}</div></td>
+      <td class="n ${okF ? 'ok' : ''}">${r.fp}/${r.nl} (${pct(r.fa, 1)})<div class="mot">${pct(r.ciF[0])}–${pct(r.ciF[1])}</div></td>
+      <td class="n">${r.pos['antes'] || 0} / ${r.pos['en el pedido'] || 0} / ${r.pos['después'] || 0} / ${r.pos['ya cumplió'] || 0}</td>
+      <td class="n">${r.p50 == null ? '—' : num(r.p50 / 1000)} / ${r.p95 == null ? '—' : num(r.p95 / 1000)} s</td>
+      <td class="n">${r.fallos}</td><td class="mot">${esc(c.carpeta || '')}</td></tr>`;
+  }).join('');
+  $('#tabla-res').innerHTML = `<tr><th>Detector</th><th class="n">Estafas con aviso (IC 95 %)</th><th class="n">Falsas alarmas (IC 95 %)</th><th class="n">Antes / en / después / ya cumplió</th><th class="n">Latencia p50 / p95</th><th class="n">Fallos</th><th>Corrida</th></tr>${filas}`;
+}
+function pintarLatencia() {
+  const v = D.velocidad.filter(x => x.s_p50 != null);
+  const W = 760, fila = 30, H = 40 + v.length * fila, x0 = 190, w = 520, max = Math.max(14, ...v.map(x => x.s_p95));
+  const s = svg(W, H), X = t => x0 + t / max * w;
+  for (let t = 0; t <= max; t += 2) { el(s, 'line', {x1: X(t), x2: X(t), y1: 10, y2: H - 22, stroke: '#eceae4'}); el(s, 'text', {x: X(t), y: H - 6, 'text-anchor': 'middle', 'font-size': 11, fill: '#5f6b66'}, t + ' s'); }
+  [[1.5, '#15803d'], [2, '#b45309']].forEach(([t, c]) => el(s, 'line', {x1: X(t), x2: X(t), y1: 10, y2: H - 22, stroke: c, 'stroke-dasharray': '4 3'}));
+  v.forEach((x, i) => {
+    const y = 18 + i * fila, cpu = /CPU/.test(x.hardware);
+    el(s, 'text', {x: x0 - 8, y: y + 12, 'text-anchor': 'end', 'font-size': 12}, x.etiqueta);
+    el(s, 'rect', {x: X(0), y, width: X(x.s_p95) - X(0), height: 16, rx: 3, fill: cpu ? '#fca5a5' : '#93c5fd'});
+    el(s, 'rect', {x: X(0), y, width: X(x.s_p50) - X(0), height: 16, rx: 3, fill: cpu ? '#b91c1c' : '#1d4ed8'});
+    el(s, 'text', {x: X(x.s_p95) + 6, y: y + 12, 'font-size': 11}, `p50 ${num(x.s_p50)} · p95 ${num(x.s_p95)} s`);
+  });
+  const m1 = CORRIDAS.filter(c => /M1/.test(c.nombre) && !/Reglas/.test(c.nombre)).map(c => { const r = evaluar(c, POLITICA_REGISTRADA); return `${esc(c.nombre)}: p50 ${num(r.p50 / 1000)} s · p95 ${num(r.p95 / 1000)} s`; });
+  $('#latencia').replaceChildren(s);
+  $('#latencia').insertAdjacentHTML('beforeend', `<div class="ley"><span><i style="background:#1d4ed8"></i>con placa de video (p50 oscuro, p95 claro)</span><span><i style="background:#b91c1c"></i>solo CPU, 2 hilos</span></div><p class="chico mu">Apple M1 (GPU integrada, Metal, 8 GB), sobre los 53 casos: ${m1.join(' · ')}.</p>`);
+}
+function pintarMemoria() {
+  const mods = [['Qwen3.5 0.8B', 545], ['Qwen3.5 2B', 2255], ['Qwen3.5 4B', 2995]], asr = 400;
+  const W = 760, H = 170, x0 = 120, w = 600, max = 3600, s = svg(W, H), X = v => x0 + v / max * w;
+  [[256, 'baja'], [512, 'media (objetivo)'], [1024, 'alta']].forEach(([v, n]) => { el(s, 'line', {x1: X(v), x2: X(v), y1: 8, y2: H - 30, stroke: '#b45309', 'stroke-dasharray': '4 3'}); el(s, 'text', {x: X(v) + 3, y: H - 18, 'font-size': 10.5, fill: '#b45309'}, `${n} ${v} MB`); });
+  mods.forEach(([n, mb], i) => {
+    const y = 14 + i * 32;
+    el(s, 'text', {x: x0 - 8, y: y + 13, 'text-anchor': 'end', 'font-size': 12}, n);
+    el(s, 'rect', {x: X(0), y, width: X(asr) - X(0), height: 18, fill: '#a7f3d0'});
+    el(s, 'rect', {x: X(asr), y, width: X(asr + mb) - X(asr), height: 18, fill: '#93c5fd'});
+    el(s, 'text', {x: X(asr + mb) + 6, y: y + 13, 'font-size': 11}, `${asr + mb} MB`);
+  });
+  $('#memoria').replaceChildren(s);
+  $('#memoria').insertAdjacentHTML('beforeend', '<div class="ley"><span><i style="background:#a7f3d0"></i>ASR Zipformer (~400 MB)</span><span><i style="background:#93c5fd"></i>modelo del detector</span></div>');
+}
+function pintarResultados() { $('#res-n').textContent = nGrupo(); pintarDispersion(); pintarTablaRes(); pintarLatencia(); pintarMemoria(); }
+
+// ---------------- Afinar ----------------
+function opcionesCorridas(sel, conVacia) {
+  const v = sel.value;
+  sel.innerHTML = (conVacia ? '<option value="">(ninguna)</option>' : '') + CORRIDAS.map((c, i) => `<option value="${i}">${esc(c.nombre)}${c.vivo ? ' · en vivo' : ''}</option>`).join('');
+  if (v !== '' && sel.querySelector(`option[value="${v}"]`)) sel.value = v;
+}
+function leerPolitica() { politica = {base: $('#af-base').value, tau: +$('#af-tau').value, k: Math.max(1, +$('#af-k').value || 1)}; $('#af-tau-v').textContent = num(politica.tau); }
+function kpi(r) {
+  const okR = r.rec != null && r.rec >= 0.95, okF = r.fa != null && r.fa <= 0.05;
+  return `<div><span>Estafas con aviso</span><b class="${okR ? 'ok' : 'bad'}">${pct(r.rec, 1)}</b><span>${r.tp}/${r.nv} · IC ${pct(r.ciR[0])}–${pct(r.ciR[1])}</span></div>
+  <div><span>Legítimas con falsa alarma</span><b class="${okF ? 'ok' : 'bad'}">${pct(r.fa, 1)}</b><span>${r.fp}/${r.nl} · IC ${pct(r.ciF[0])}–${pct(r.ciF[1])}</span></div>
+  <div><span>Avisos antes o en el pedido</span><b>${(r.pos['antes'] || 0) + (r.pos['en el pedido'] || 0)}</b><span>de ${r.tp} avisos en estafas</span></div>
+  <div><span>Avisos con la persona ya cumpliendo</span><b>${r.pos['ya cumplió'] || 0}</b><span>tarde: L_C ≤ 0</span></div>`;
+}
+function pintarAfinar() {
+  opcionesCorridas($('#af-corrida'));
+  leerPolitica();
+  const c = CORRIDAS[+$('#af-corrida').value || 0]; if (!c) return;
+  const r = evaluar(c);
+  $('#af-kpi').innerHTML = kpi(r);
+  // barrido
+  const W = 560, H = 260, x0 = 46, y0 = 12, w = 490, h = 210, s = svg(W, H), X = v => x0 + v * w, Y = v => y0 + (1 - v) * h;
+  for (let v = 0; v <= 1.001; v += 0.25) { el(s, 'line', {x1: X(0), x2: X(1), y1: Y(v), y2: Y(v), stroke: '#eceae4'}); el(s, 'text', {x: X(0) - 5, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 10.5, fill: '#5f6b66'}, pct(v)); el(s, 'text', {x: X(v), y: Y(0) + 15, 'text-anchor': 'middle', 'font-size': 10.5, fill: '#5f6b66'}, num(v)); }
+  el(s, 'line', {x1: X(0), x2: X(1), y1: Y(0.95), y2: Y(0.95), stroke: '#dc2626', 'stroke-dasharray': '3 3', 'stroke-opacity': .6});
+  el(s, 'line', {x1: X(0), x2: X(1), y1: Y(0.05), y2: Y(0.05), stroke: '#16a34a', 'stroke-dasharray': '3 3', 'stroke-opacity': .6});
+  const pts = []; for (let t = 0; t <= 1.0001; t += 0.05) { const e = evaluar(c, {...politica, tau: +t.toFixed(2)}); pts.push([t, e.rec, e.fa]); }
+  [[1, '#dc2626'], [2, '#16a34a']].forEach(([j, col]) => el(s, 'polyline', {points: pts.filter(p => p[j] != null).map(p => `${X(p[0])},${Y(p[j])}`).join(' '), fill: 'none', stroke: col, 'stroke-width': 2}));
+  el(s, 'line', {x1: X(politica.tau), x2: X(politica.tau), y1: Y(0), y2: Y(1), stroke: '#1d2321', 'stroke-opacity': .4});
+  el(s, 'text', {x: X(0.5), y: H - 2, 'text-anchor': 'middle', 'font-size': 11}, `umbral τ (k = ${politica.k}${politica.base === 'riesgo' ? ', solo riesgo' : ''})`);
+  $('#af-barrido').replaceChildren(s);
+  if (c.filas.every(f => f[3] == null)) $('#af-barrido').insertAdjacentHTML('beforeend', '<p class="chico mu">Las reglas no dan riesgo: solo cambia k.</p>');
+  // posiciones
+  const cats = [['antes', '#1f2937'], ['en el pedido', '#6b7280'], ['después', '#a3a3a3'], ['ya cumplió', '#fca5a5'], ['sin T_R', '#c4b5fd'], ['sin aviso', '#ffffff']];
+  const tot = r.nv || 1, s2 = svg(560, 70); let acc = 0;
+  cats.forEach(([k, col]) => { const n = r.pos[k] || 0; if (!n) return; const x = 10 + acc / tot * 540, ww = n / tot * 540; el(s2, 'rect', {x, y: 10, width: ww, height: 26, fill: col, stroke: '#9ca3af'}); if (ww > 18) el(s2, 'text', {x: x + ww / 2, y: 28, 'text-anchor': 'middle', 'font-size': 11, fill: k === 'antes' || k === 'en el pedido' ? '#fff' : '#111'}, n); acc += n; });
+  $('#af-pos').replaceChildren(s2);
+  $('#af-pos').insertAdjacentHTML('beforeend', `<div class="ley">${cats.map(([k, col]) => `<span><i style="background:${col};border:1px solid #9ca3af"></i>${k}</span>`).join('')}</div>`);
+  // casos
+  const ref = evaluar(c, POLITICA_REGISTRADA), refm = Object.fromEntries(ref.filas.map(f => [f.c.id, f]));
+  $('#af-casos').innerHTML = `<tr><th>Caso</th><th>Clase</th><th>Grupo</th><th class="n">T_R / T_C</th><th class="n">Aviso (línea)</th><th>Resultado</th><th>Cambio vs registrada</th><th>Motivo del modelo</th></tr>` +
+    r.filas.sort((a, b) => (a.ok - b.ok) || b.c.clase.localeCompare(a.c.clase) || a.c.id.localeCompare(b.c.id)).map(f => {
+      const antes = refm[f.c.id], cambio = antes && antes.linea !== f.linea ? `${antes.linea ?? '—'} → ${f.linea ?? '—'}` : '';
+      return `<tr style="cursor:pointer" onclick="verCaso('${f.c.id}', ${+$('#af-corrida').value})"><td>${f.c.id}</td><td><span class="tag ${f.c.clase === 'vishing' ? 'tv' : 'tl'}">${f.c.clase === 'vishing' ? 'vishing' : 'legítima'}</span></td><td class="mot">${f.c.grupo}</td><td class="n">${f.c.tr ?? '—'} / ${f.c.tc ?? '—'}</td><td class="n">${f.linea ?? '—'}</td><td class="${f.ok ? 'ok' : 'bad'}">${f.pos}</td><td class="warn">${cambio}</td><td class="mot">${esc(f.av ? f.av[6] : '')}</td></tr>`;
+    }).join('');
+}
+['#af-corrida', '#af-base', '#af-tau', '#af-k'].forEach(s => $(s).addEventListener('input', pintarAfinar));
+$('#af-reset').onclick = () => { $('#af-base').value = 'alerta'; $('#af-tau').value = 0; $('#af-k').value = 1; pintarAfinar(); };
+
+// ---------------- Tiempos ----------------
+(function pintarTiempos() {
+  const s = svg(520, 150);
+  el(s, 'line', {x1: 20, x2: 500, y1: 70, y2: 70, stroke: '#9ca3af', 'stroke-width': 2});
+  [[200, 'T_R', 'pedido', '#b45309'], [330, 'T_C', 'cumple', '#dc2626']].forEach(([x, n, d, c]) => { el(s, 'line', {x1: x, x2: x, y1: 40, y2: 100, stroke: c, 'stroke-dasharray': '4 3'}); el(s, 'text', {x, y: 32, 'text-anchor': 'middle', 'font-size': 13, 'font-weight': 700, fill: c}, n); el(s, 'text', {x, y: 116, 'text-anchor': 'middle', 'font-size': 11, fill: c}, d); });
+  [[140, 'T_A temprano', '#15803d', 'L_R > 0'], [270, 'T_A a tiempo', '#2563eb', 'L_C > 0'], [400, 'T_A tarde', '#991b1b', 'L_C < 0']].forEach(([x, n, c, l]) => { el(s, 'circle', {cx: x, cy: 70, r: 7, fill: c}); el(s, 'text', {x, y: 140, 'text-anchor': 'middle', 'font-size': 11, fill: c}, `${n} · ${l}`); });
+  el(s, 'text', {x: 20, y: 60, 'font-size': 11, fill: '#5f6b66'}, 'llamada →');
+  $('#tiempos-svg').replaceChildren(s);
+  // E2E
+  const refs = Object.fromEntries(D.audio_ref.map(r => [r.case_id.replace('-tts', ''), r]));
+  const dets = [...new Set(D.e2e.map(f => f.detector + ' ' + f.variante))].filter(k => D.e2e.some(f => (f.detector + ' ' + f.variante) === k && f.p50 != null));
+  const cols = ['#6b7280', '#2563eb', '#60a5fa', '#d97706', '#f59e0b'];
+  const TM = 34, W = 980, x0 = 170, w = 780, X = t => x0 + t / TM * w, bloque = 40 + dets.length * 22, H = 2 * bloque + 50;
+  const s2 = svg(W, H);
+  for (let t = 0; t <= TM; t += 5) { el(s2, 'line', {x1: X(t), x2: X(t), y1: 14, y2: H - 22, stroke: '#eceae4'}); el(s2, 'text', {x: X(t), y: H - 6, 'text-anchor': 'middle', 'font-size': 11, fill: '#5f6b66'}, t + ' s'); }
+  ['SC-WA-CODE-01', 'LG-WA-CONSULTA-01'].forEach((id, i) => {
+    const r = refs[id], y0 = 24 + i * bloque;
+    el(s2, 'text', {x: 8, y: y0 + 13, 'font-size': 13, 'font-weight': 700}, i ? 'Legítima' : 'Estafa');
+    r.turnos.forEach(t => { el(s2, 'rect', {x: X(t.inicio_s), y: y0, width: X(t.fin_s) - X(t.inicio_s), height: 18, rx: 3, fill: i ? '#bbf7d0' : '#fecaca'}); el(s2, 'text', {x: (X(t.inicio_s) + X(t.fin_s)) / 2, y: y0 + 13, 'text-anchor': 'middle', 'font-size': 10}, t.hablante); });
+    if (r.t_r != null) [[r.t_r, 'T_R', '#b45309'], [r.t_c, 'T_C', '#dc2626']].forEach(([t, n, c]) => { el(s2, 'line', {x1: X(t), x2: X(t), y1: y0 - 4, y2: y0 + bloque - 14, stroke: c, 'stroke-dasharray': '4 3'}); el(s2, 'text', {x: X(t) + 3, y: y0 - 6, 'font-size': 10.5, fill: c}, `${n} ${num(t, 1)} s`); });
+    el(s2, 'line', {x1: X(r.duracion_s), x2: X(r.duracion_s), y1: y0, y2: y0 + bloque - 14, stroke: '#9ca3af'});
+    dets.forEach((k, j) => {
+      const f = D.e2e.find(f => (f.detector + ' ' + f.variante) === k && f.llamada === id), y = y0 + 34 + j * 22;
+      el(s2, 'text', {x: 20, y: y + 4, 'font-size': 11, fill: cols[j]}, k);
+      if (!f || f.ta == null) { el(s2, 'text', {x: X(0) + 4, y: y + 4, 'font-size': 11, fill: '#15803d'}, 'sin aviso'); return; }
+      el(s2, 'line', {x1: X(0), x2: X(f.ta), y1: y, y2: y, stroke: cols[j], 'stroke-opacity': .3});
+      el(s2, 'circle', {cx: X(f.ta), cy: y, r: 5, fill: cols[j]});
+      el(s2, 'text', {x: X(f.ta) + 8, y: y + 4, 'font-size': 10.5}, `${num(f.ta, 1)} s${i ? ' · falsa alarma' : ` · L_C ${f.lc > 0 ? '+' : ''}${num(f.lc, 1)} s`}`);
+    });
+  });
+  $('#e2e').replaceChildren(s2);
+  $('#e2e-tabla').innerHTML = '<tr><th>Detector</th><th>Variante</th><th>Llamada</th><th class="n">T_A</th><th class="n">L_R</th><th class="n">L_C</th><th>Falsa alarma</th><th class="n">p50 detector</th><th class="n">Cola máx.</th></tr>' +
+    D.e2e.filter(f => f.p50 != null).map(f => `<tr><td>${f.detector}</td><td>${f.variante}</td><td>${f.llamada}</td><td class="n">${f.ta == null ? '—' : num(f.ta, 1) + ' s'}</td><td class="n">${num(f.lr, 1)}</td><td class="n ${f.lc > 0 ? 'ok' : f.lc != null ? 'bad' : ''}">${num(f.lc, 1)}</td><td>${f.fa}</td><td class="n">${num(f.p50, 0)} ms</td><td class="n">${num(f.cola, 0)} ms</td></tr>`).join('');
+})();
+
+// ---------------- Casos ----------------
+function protegidaDelCaso(c, elegida) {
+  if (elegida === 'A' || elegida === 'B') return elegida;
+  if (c.clase !== 'vishing') return c.lineas[0]?.[0] || '';
+  const pedido = c.clase === 'vishing' && c.tr ? c.lineas[c.tr - 1]?.[0] : null;
+  return pedido === 'A' ? 'B' : pedido === 'B' ? 'A' : '';
+}
+function nombreEnCaso(c, hablante, protegida) {
+  if (!protegida) return hablante === 'A' ? 'Primera persona' : 'Segunda persona';
+  return hablante === protegida ? 'Persona protegida' : c.clase === 'vishing' ? 'Atacante' : 'Otra persona';
+}
+const rolesElegidos = (() => {
+  try {
+    const guardados = JSON.parse(localStorage.getItem('panel-personas-protegidas') || '{}');
+    return guardados && typeof guardados === 'object' && !Array.isArray(guardados) ? guardados : {};
+  } catch { return {}; }
+})();
+let filtroCasos = 'todos', casoSel = 'SC-WA-CODE-01-e01';
+function pintarCasos() {
+  const n = g => D.casos.filter(c => c.grupo === g || c.clase === g).length;
+  $('#reserva-corpus').textContent = `${D.reserva.desarrollo} de desarrollo y ${D.reserva.test_reservado} reservados. Propuesta sin discutir: D07 y D08 siguen abiertas. El test no está incluido en los datos de este panel. Las corridas históricas siguen describiendo sus casos originales.`;
+  $('#casos-kpi').innerHTML = `<div><b>${D.casos.length}</b><span>casos de desarrollo</span></div><div><b>${n('vishing')}</b><span>vishing</span></div><div><b>${D.casos.length - n('vishing')}</b><span>legítimas</span></div><div><b>${D.casos.filter(c => c.tipo_legitima === 'cotidiana').length}</b><span>legítimas cotidianas nuevas</span></div><div><b>${D.casos.filter(c => c.revision_humana).length}</b><span>con revisión humana</span></div>`;
+  const F = ['todos', 'corpus_v2', 'piloto_escrito', 'trampa', 'laboratorio', 'vishing', 'legitimas'];
+  $('#casos-filtros').innerHTML = F.map(f => `<button class="b ${f === filtroCasos ? 'pri' : ''}" data-f="${f}">${f.replace('_', ' ')}</button>`).join('');
+  const L = D.casos.filter(c => filtroCasos === 'todos' || c.grupo === filtroCasos || c.clase === filtroCasos || (filtroCasos === 'legitimas' && c.clase !== 'vishing'));
+  $('#casos-lista').innerHTML = L.map(c => `<div class="it ${c.id === casoSel ? 'sel' : ''}" data-id="${c.id}"><span>${c.id}</span><span class="tag ${c.clase === 'vishing' ? 'tv' : 'tl'}">${c.clase === 'vishing' ? 'vishing' : 'legítima'}</span></div>`).join('');
+  pintarCaso();
+}
+function pintarCaso() {
+  const c = CASOS[casoSel], ci = $('#casos-corrida').value, corr = ci === '' ? null : CORRIDAS[+ci];
+  const protegida = protegidaDelCaso(c, rolesElegidos[c.id]);
+  const opcionesPersonas = ['A', 'B'].map(h => {
+    const frase = c.lineas.find(([letra]) => letra === h)?.[1] || '';
+    return `<option value="${h}" ${h === protegida ? 'selected' : ''}>Quien dice: «${esc(frase.slice(0, 90))}»</option>`;
+  }).join('');
+  const filas = corr ? (porCaso(corr)[c.id] || []) : [], fm = Object.fromEntries(filas.map(f => [f[1], f]));
+  const av = corr ? avisoEn(filas, politica) : null;
+  const win = Object.entries({reglas: 'Reglas', q08: '0.8B', q2: '2B', q4: '4B'}).map(([k, n]) => `<span class="tag tg">${n}: ${esc(c.win[k] ?? '—')}</span>`).join(' ');
+  $('#casos-det').innerHTML = `<div class="card"><h3 style="margin:0">${c.id}</h3>
+   <div class="mu chico">${c.grupo} · ${c.clase}${c.pedido ? ' · pedido ' + c.pedido : ''} · T_R línea ${c.tr ?? '—'} · T_C línea ${c.tc ?? '—'}</div>
+   <label class="ctl">Persona protegida<select id="caso-protegida"><option value="" disabled ${protegida ? '' : 'selected'}>Elegí su primera frase</option>${opcionesPersonas}</select></label>
+   <p class="chico mu">${!protegida ? 'Este caso no identifica a la persona protegida. Elegí su frase para mostrar los roles.' : rolesElegidos[c.id] ? 'Roles elegidos para leer este caso; se recuerdan en este navegador.' : c.clase !== 'vishing' ? 'Vista de lectura desde quien habla primero como persona protegida. Podés cambiar la perspectiva arriba.' : 'Roles sugeridos: se toma como atacante a quien formula el pedido crítico marcado. Podés corregir la persona protegida arriba.'} Esta elección solo cambia la lectura, no la referencia ni lo que recibe el detector.</p>
+   <div class="fila chico">Windows GPU: ${win}</div>
+   <div class="chico mu">«&lt;R L3»: avisó en la línea 3, antes del pedido · «=R»: en el pedido · «&gt;R»: después · «FA L2»: falsa alarma en la línea 2 · «ok»: sin aviso en una legítima · «—»: no avisó.</div>
+   <div style="margin-top:8px">${c.lineas.map(([h, t], i) => { const n = i + 1, f = fm[n];
+     const r = f && f[3] != null ? `<div class="riesgo" title="riesgo ${num(f[3])}"><i style="width:${f[3] * 100}%;background:${f[3] >= .5 ? '#dc2626' : '#f59e0b'}"></i></div>` : '';
+     const a = f ? (f[2] ? (f[4] ? '<span class="bad">alerta</span>' : '<span class="mu">—</span>') : '<span class="warn">fallo</span>') : '';
+     return `<div class="lin ${n === c.tr ? 'tr' : n === c.tc ? 'tc' : ''} ${av && av[1] === n ? 'av' : ''}"><span class="n">${n}</span><span><b class="caso-hablante">${nombreEnCaso(c, h, protegida)}</b>${esc(t)}${f && f[4] && f[6] ? `<div class="mot">↳ ${esc(f[6])}</div>` : ''}</span><span class="chico caso-evaluacion">${a}${f && f[3] != null ? ' · ' + num(f[3]) : ''}${r}</span></div>`; }).join('')}</div>
+   <div class="ley"><span><i style="background:#fff4d6"></i>línea del pedido (T_R)</span><span><i style="background:#fde2e2"></i>línea del cumplimiento (T_C)</span><span><i style="border:2px solid var(--c1)"></i>aviso con la política actual</span></div></div>
+   <div class="card"><b>Qué prueba</b><p class="chico">${esc(c.prueba)}</p>${c.notas ? `<b>Notas de la referencia</b><p class="chico">${esc(c.notas)}</p>` : ''}</div>`;
+  $('#caso-protegida').onchange = e => {
+    rolesElegidos[c.id] = e.target.value;
+    try { localStorage.setItem('panel-personas-protegidas', JSON.stringify(rolesElegidos)); } catch { /* la elección sigue vigente en esta pestaña */ }
+    pintarCaso();
+  };
+}
+$('#casos-filtros').onclick = e => { if (e.target.dataset.f) { filtroCasos = e.target.dataset.f; pintarCasos(); } };
+$('#casos-lista').onclick = e => { const it = e.target.closest('.it'); if (it) { casoSel = it.dataset.id; pintarCasos(); } };
+$('#casos-corrida').onchange = pintarCaso;
+$('#casos-probar').onclick = () => { $('#pr-caso').value = casoSel; cargarCaso(); location.hash = 'probador'; };
+window.verCaso = (id, corrida) => { casoSel = id; filtroCasos = 'todos'; opcionesCorridas($('#casos-corrida'), true); $('#casos-corrida').value = corrida; pintarCasos(); location.hash = 'casos'; };
+
+// ---------------- Reglas (copia de reglas.py) ----------------
+const PATRONES = {
+  REQUEST_AUTH_CODE: ['codigo', 'otp', 'token', 'verificacion', 'seis digitos', 'numeros'],
+  REQUEST_SECRET: ['clave', 'pin', 'cvv', 'contrasena', 'password'],
+  REQUEST_TRANSFER: ['transferencia', 'transferi', 'pago', 'paga', 'cripto', 'efectivo', 'alias', 'cbu', 'plata'],
+  REQUEST_PERSONAL_DATA: ['dni', 'domicilio', 'identidad', 'cuil'],
+  REQUEST_REMOTE_ACCESS: ['acceso remoto', 'teamviewer', 'anydesk', 'comparti pantalla', 'instala'],
+  REQUEST_SECURITY_ACTION: ['abri el enlace', 'link', 'autoriza', 'configuracion'],
+};
+const MIN_FUZZY = 6, SOLO_EXACTO = new Set(['numeros']);
+const NEGACIONES = ['ningun ', 'ninguna ', 'no te pide', 'no pide ', 'no voy a dar', 'no voy a pasar', 'no te pido', 'no pido ', 'no saques', 'no pienso'];
+const IMPERATIVOS = ['pasame', 'decime', 'dame', 'mandame', 'confirmame', 'transferi', 'autoriz', 'instal', 'compart', 'necesito que', 'tenes que', 'tiene que'];
+const normalizar = t => t.toLowerCase().normalize('NFD').replace(/\p{Mn}/gu, '').split(/\s+/).filter(Boolean).join(' ');
+function edicion1(a, b) {
+  if (a === b) return true;
+  const la = a.length, lb = b.length;
+  if (Math.abs(la - lb) > 1) return false;
+  if (la === lb) {
+    const d = []; for (let i = 0; i < la; i++) if (a[i] !== b[i]) d.push(i);
+    if (d.length <= 1) return true;
+    return d.length === 2 && d[1] === d[0] + 1 && a[d[0]] === b[d[1]] && a[d[1]] === b[d[0]];
+  }
+  const [corta, larga] = la < lb ? [a, b] : [b, a];
+  for (let i = 0; i < larga.length; i++) if (larga.slice(0, i) + larga.slice(i + 1) === corta) return true;
+  return false;
+}
+function cerca(hay, p) {
+  if (hay.includes(p)) return true;
+  if (p.length < MIN_FUZZY || SOLO_EXACTO.has(p)) return false;
+  for (const n of [p.length - 1, p.length, p.length + 1]) for (let i = 0; i < Math.max(0, hay.length - n + 1); i++) if (edicion1(hay.slice(i, i + n), p)) return true;
+  return false;
+}
+function coincidencias(texto) {
+  const norm = normalizar(texto);
+  if (!norm) return [];
+  if (NEGACIONES.some(n => cerca(norm, n)) && !IMPERATIVOS.some(i => norm.includes(i))) return [];
+  const out = []; for (const [et, ps] of Object.entries(PATRONES)) for (const p of ps) if (cerca(norm, p)) out.push([et, p]);
+  return out;
+}
+window.coincidencias = coincidencias;
+
+// ---------------- Ollama ----------------
+let pensarOK = true;
+const urlOllama = () => $('#ol-url').value.replace(/\/$/, '');
+async function comprobarOllama() {
+  const e = $('#ol-estado');
+  try {
+    const r = await fetch(urlOllama() + '/api/tags'); if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json(), mods = j.models.map(m => m.name).sort();
+    e.className = 'estado si'; e.textContent = `conectado · ${mods.length} modelos`;
+    $('#pr-modelo').innerHTML = mods.map(m => `<option>${m}</option>`).join('');
+    $('#ol-ayuda').textContent = '';
+  } catch (err) {
+    e.className = 'estado no'; e.textContent = 'sin conexión';
+    $('#ol-ayuda').innerHTML = location.protocol === 'file:' ? 'Abriste el archivo con doble clic y Ollama lo rechaza. En la carpeta del archivo corré <code>python3 -m http.server 8765</code> y abrí <code>http://127.0.0.1:8765/panel.html</code> (ver <a href="#correr">Cómo probar todo</a>).' : 'Prendé Ollama (<code>ollama serve</code>) y descargá un modelo (<code>ollama pull qwen3.5:2b-q8_0</code>).';
+  }
+}
+$('#ol-check').onclick = comprobarOllama;
+function mensajeUsuario(lineas, hab) {
+  const n = lineas.length;
+  const acl = hab === 'ab' ? 'Cada línea indica quién habla con A o B. A es quien habló primero; las letras no indican quién llamó ni quién es sospechoso.' : 'Las líneas no indican quién habla.';
+  const cuerpo = lineas.map(([h, t], i) => hab === 'ab' ? `${i + 1}. ${h}: ${t}` : `${i + 1}. ${t}`).join('\n');
+  return `Transcripción disponible hasta ahora; la llamada sigue. ${acl}\n\n${cuerpo}\n\nEvaluá la llamada con lo disponible hasta la línea ${n}.`;
+}
+function validar(crudo) {
+  let s; try { s = JSON.parse(crudo); } catch { return [null, 'json_invalido']; }
+  if (!s || typeof s !== 'object' || Array.isArray(s)) return [null, 'json_no_es_objeto'];
+  const faltan = D.esquemas.tarea.required.filter(k => !(k in s)); if (faltan.length) return [null, 'faltan_campos: ' + faltan];
+  if (typeof s.riesgo !== 'number' || !isFinite(s.riesgo)) return [null, 'riesgo_no_numerico'];
+  if (s.riesgo < 0 || s.riesgo > 1) return [null, 'riesgo_fuera_de_rango'];
+  if (typeof s.alerta_sugerida !== 'boolean') return [null, 'alerta_no_booleana'];
+  if (typeof s.motivo !== 'string' || typeof s.evidencia !== 'string') return [null, 'motivo_o_evidencia_no_texto'];
+  if (s.alerta_sugerida && !s.motivo.trim()) return [null, 'alerta_sin_motivo'];
+  return [s, ''];
+}
+async function evaluarSLM(modelo, prompt, hab, lineas, senal) {
+  const cuerpo = {model: modelo, messages: [{role: 'system', content: D.prompts[prompt]}, {role: 'user', content: mensajeUsuario(lineas, hab)}], format: D.esquemas[prompt], options: {...D.opciones, ...($('#pr-nb').value ? {num_batch: +$('#pr-nb').value} : {})}, stream: false};
+  if (pensarOK) cuerpo.think = false;
+  const t0 = performance.now();
+  let r = await fetch(urlOllama() + '/api/chat', {method: 'POST', body: JSON.stringify(cuerpo), signal: senal});
+  if (!r.ok) {
+    const txt = await r.text();
+    if (pensarOK && /think/i.test(txt)) { pensarOK = false; return evaluarSLM(modelo, prompt, hab, lineas, senal); }
+    return {valida: false, error: `HTTP ${r.status}: ${txt.slice(0, 120)}`, ms: performance.now() - t0};
+  }
+  const j = await r.json(), ms = performance.now() - t0, crudo = j.message?.content ?? '';
+  if (j.done_reason === 'length') return {valida: false, error: 'salida_cortada', ms, crudo};
+  const [s, err] = validar(crudo);
+  if (!s) return {valida: false, error: err, ms, crudo};
+  return {valida: true, riesgo: s.riesgo, alerta: s.alerta_sugerida, motivo: s.motivo.trim(), evidencia: s.evidencia.trim(), ms, crudo};
+}
+
+// ---------------- Probador: una conversación ----------------
+$('#pr-prompt').innerHTML = Object.keys(D.prompts).map(p => `<option>${p}</option>`).join('');
+$('#pr-caso').innerHTML = D.casos.map(c => `<option>${c.id}</option>`).join('');
+function cargarCaso() { const c = CASOS[$('#pr-caso').value]; $('#pr-texto').value = c.lineas.map(([h, t]) => `${h}: ${t}`).join('\n'); $('#pr-tr').value = c.tr ?? ''; $('#pr-tc').value = c.tc ?? ''; $('#pr-clase').value = c.clase === 'vishing' ? 'vishing' : 'legitima'; }
+$('#pr-cargar').onclick = cargarCaso;
+function leerTexto() {
+  const out = [];
+  for (const [i, r] of $('#pr-texto').value.split('\n').entries()) { if (!r.trim()) continue; const m = r.trim().match(/^(A|B):\s*(\S.*)$/); if (!m) throw new Error(`Renglón ${i + 1}: tiene que empezar con «A: » o «B: »`); out.push([m[1], m[2]]); }
+  if (!out.length) throw new Error('No hay líneas.');
+  return out;
+}
+let control = null;
+$('#pr-parar').onclick = () => control?.abort();
+$('#pr-correr').onclick = async () => {
+  let lineas; try { lineas = leerTexto(); } catch (e) { alert(e.message); return; }
+  const soloReglas = $('#pr-soloreglas').value === 'si', modelo = $('#pr-modelo').value, prompt = $('#pr-prompt').value, hab = $('#pr-hab').value;
+  if (!soloReglas && !modelo) { alert('Comprobá Ollama y elegí un modelo, o elegí «Solo reglas: sí».'); return; }
+  const tr = +$('#pr-tr').value || null, tc = +$('#pr-tc').value || null, clase = $('#pr-clase').value;
+  control = new AbortController(); $('#pr-correr').disabled = true; $('#pr-parar').disabled = false;
+  const sal = $('#pr-salida'); sal.innerHTML = '';
+  let avR = null, avS = null, msT = [], racha = 0;
+  try {
+    for (let i = 0; i < lineas.length; i++) {
+      const n = i + 1, [h, t] = lineas[i], co = coincidencias(t);
+      if (co.length && avR == null) avR = n;
+      let res = null;
+      const fila = document.createElement('div'); fila.className = `lin ${n === tr ? 'tr' : n === tc ? 'tc' : ''}`;
+      fila.innerHTML = `<span class="n">${n}</span><b>${h}</b><span>${esc(t)}<div class="mot">reglas: ${co.length ? '<span class="bad">' + esc([...new Set(co.map(x => x[0]))].join(', ')) + '</span> (' + esc(co.map(x => x[1]).join(', ')) + ')' : 'sin coincidencias'}</div><div class="mot slm">${soloReglas ? '' : 'SLM: evaluando…'}</div></span><span class="chico est"></span>`;
+      sal.appendChild(fila); fila.scrollIntoView({block: 'nearest'});
+      if (!soloReglas) {
+        res = await evaluarSLM(modelo, prompt, hab, lineas.slice(0, n), control.signal); msT.push(res.ms);
+        racha = dispara([null, n, res.valida, res.riesgo ?? null, !!res.alerta], politica) ? racha + 1 : 0;
+        if (racha >= politica.k && avS == null) avS = n;
+        fila.querySelector('.slm').innerHTML = res.valida ? `SLM: ${res.alerta ? '<span class="bad">alerta</span>' : 'sin alerta'} · riesgo ${num(res.riesgo)}${res.motivo ? ' · ' + esc(res.motivo) : ''}${res.evidencia ? `<br>evidencia: «${esc(res.evidencia)}»` : ''}` : `<span class="warn">SLM: fallo (${esc(res.error)})</span>`;
+        fila.querySelector('.est').innerHTML = `${num(res.ms / 1000)} s${res.valida ? `<div class="riesgo"><i style="width:${res.riesgo * 100}%;background:${res.riesgo >= .5 ? '#dc2626' : '#f59e0b'}"></i></div>` : ''}`;
+        if (avS === n) fila.classList.add('av');
+      }
+    }
+  } catch (e) { if (e.name !== 'AbortError') sal.insertAdjacentHTML('beforeend', `<p class="bad">${esc(e.message)}</p>`); }
+  $('#pr-correr').disabled = false; $('#pr-parar').disabled = true;
+  const pos = l => { if (l == null) return clase.startsWith('legitima') ? '<span class="ok">sin aviso ✓</span>' : 'sin aviso'; if (clase.startsWith('legitima')) return '<span class="bad">falsa alarma</span>'; return posicion({tr, tc}, l); };
+  const ms = msT.sort((a, b) => a - b);
+  $('#pr-resumen').innerHTML = `<div><span>Aviso de reglas (línea)</span><b>${avR ?? '—'}</b><span>${pos(avR)}</span></div>` + (soloReglas ? '' : `<div><span>Aviso del SLM (línea, política actual)</span><b>${avS ?? '—'}</b><span>${pos(avS)}</span></div><div><span>Latencia por línea</span><b>${ms.length ? num(ms[Math.floor(ms.length / 2)] / 1000) : '—'} s</b><span>mediana · máx. ${ms.length ? num(ms[ms.length - 1] / 1000) : '—'} s</span></div>`);
+};
+
+// ---------------- Probador: lote ----------------
+let controlLote = null;
+$('#lo-parar').onclick = () => controlLote?.abort();
+$('#lo-correr').onclick = async () => {
+  const modelo = $('#pr-modelo').value, prompt = $('#pr-prompt').value, hab = $('#pr-hab').value;
+  if (!modelo) { alert('Comprobá Ollama y elegí un modelo.'); return; }
+  const g = $('#lo-grupo').value;
+  const lista = D.casos.filter(c => g === 'todos' || c.grupo === g || (g === 'par' && /^(SC-WA-CODE-01|LG-WA-CONSULTA-01)/.test(c.id)));
+  const total = lista.reduce((a, c) => a + c.lineas.length, 0);
+  const corrida = {id: `vivo|${Date.now()}`, carpeta: `en vivo ${new Date().toLocaleString('es-AR')}`, modelo, nombre: `${modelo} · ${prompt} · ${hab} · en vivo`, filas: [], vivo: true, prompt, hab};
+  CORRIDAS.push(corrida);
+  controlLote = new AbortController(); $('#lo-correr').disabled = true; $('#lo-parar').disabled = false;
+  let hechas = 0; const t0 = performance.now();
+  try {
+    for (const c of lista) for (let n = 1; n <= c.lineas.length; n++) {
+      const r = await evaluarSLM(modelo, prompt, hab, c.lineas.slice(0, n), controlLote.signal);
+      corrida.filas.push([c.id, n, r.valida, r.riesgo ?? null, !!r.alerta, Math.round(r.ms), r.motivo || r.error || '', r.evidencia || '']);
+      corrida._porCaso = null; hechas++;
+      const seg = (performance.now() - t0) / 1000, resta = seg / hechas * (total - hechas);
+      $('#lo-prog').textContent = `${hechas}/${total} líneas · caso ${c.id} · faltan ~${Math.ceil(resta / 60)} min`;
+      if (n === c.lineas.length) { const e = evaluar(corrida); $('#lo-kpi').innerHTML = kpi(e); }
+    }
+  } catch (e) { if (e.name !== 'AbortError') alert(e.message); }
+  $('#lo-correr').disabled = false; $('#lo-parar').disabled = true;
+  $('#lo-prog').textContent += ' · listo: la corrida aparece en Resultados, Afinar y Casos.';
+  guardarVivas();
+};
+function guardarVivas() { try { localStorage.setItem('panel-corridas-vivas', JSON.stringify(CORRIDAS.filter(c => c.vivo).map(({_porCaso, ...c}) => c))); } catch { /* sin espacio: queda exportar */ } }
+(function cargarVivas() { try { (JSON.parse(localStorage.getItem('panel-corridas-vivas') || '[]')).forEach(c => CORRIDAS.push(c)); } catch {} })();
+$('#lo-exportar').onclick = () => { const b = new Blob([JSON.stringify(CORRIDAS.filter(c => c.vivo).map(({_porCaso, ...c}) => c), null, 1)], {type: 'application/json'}); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'corridas-en-vivo.json'; a.click(); };
+$('#lo-importar').onchange = async e => { const f = e.target.files[0]; if (!f) return; JSON.parse(await f.text()).forEach(c => CORRIDAS.push({...c, vivo: true})); guardarVivas(); alert('Corridas importadas.'); };
+
+// ---------------- Contenido: FAQ, plan, arquitectura ----------------
+const FAQ = [
+['¿Ya probaste los ASR? ¿Cómo funcionan?', `<p>Sí, pero solo en una <b>prueba de humo</b>: los dos audios TTS del par de WhatsApp (voces de sistema de macOS), en mono y en estéreo con un canal por hablante. En <code>experiments/asr-local/</code>.</p>
+<table><tr><th>Motor</th><th class="n">WER</th><th class="n">RTF</th><th class="n">Memoria</th><th>Palabras críticas</th></tr>
+<tr><td>Zipformer Kroko (streaming, sherpa-onnx), mono</td><td class="n">4,35 % / 5,00 %</td><td class="n">0,17 / 0,10</td><td class="n">357–423 MB</td><td class="ok">conservó «código», «cero», «SMS»</td></tr>
+<tr><td>Faster-Whisper base (por lotes), mono</td><td class="n">17,4 %</td><td class="n">0,27</td><td class="n">277 MB</td><td class="bad">perdió los seis «cero»; «SMS» → «SMDG»</td></tr>
+<tr><td>Zipformer estéreo (A+B por separado)</td><td class="n">10,9 % / 10,0 %</td><td class="n">0,06</td><td class="n">—</td><td>frases partidas y segmentos «.» al mezclar</td></tr></table>
+<p class="chico">RTF 0,1 = transcribe 10 veces más rápido que el audio. Zipformer anda bien y es el candidato natural para llamada (streaming). Whisper perdió justo los dígitos, que son la evidencia del cumplimiento. <b>Límite:</b> TTS limpio no es voz humana por teléfono; falta audio real (#39, bloqueado por la aprobación del tutor, D06).</p>`],
+['¿Usaste solo SLM o también RoBERTuito?', `<p>En el ensayo #50 solo <b>SLM (Qwen3.5) y reglas</b>. RoBERTuito se probó antes, en el <b>spike #29</b> (septiembre, <code>experiments/laboratorio/</code>): RoBERTuito + regresión logística dio AUROC 0,666 y la cascada RoBERTuito → Llama 3.2 1B <b>empeoró</b> (0,537), con las mismas 5/10 falsas alarmas. Además, la cascada no entraba en 1024 MB (~1,7 GB sin ASR). Tenía pocos datos y semillas con sesgo de dialecto, así que no prueba que no sirva.</p><p class="chico">Retomarlo tiene sentido en la etapa 7: entrenarlo con miles de turnos etiquetados por el mejor SLM (destilación) para tener un filtro liviano. Ojo: los issues #41/#42 de encoder quedaron <code>not_planned</code>, así que hay que replanificarlo con el equipo.</p>`],
+['¿En qué archivo están las conversaciones?', `<ul><li><code>experiments/slm-directo/casos/texto/&lt;id&gt;.txt</code>: el diálogo, una línea por renglón con <code>A: </code> o <code>B: </code>.</li><li><code>experiments/slm-directo/casos/referencia/&lt;id&gt;.json</code>: clase, líneas de T_R y T_C, evidencia con etiquetas, «qué prueba», origen y notas.</li><li><code>experiments/slm-directo/casos/README.md</code>: formato y reglas. <code>python3 casos.py --listar</code> valida el inventario completo y sus huellas de reserva.</li><li>Fuentes: <code>docs/corpus/CATALOGO-ESCENARIOS.csv</code> (19 escenarios) y <code>docs/corpus/METODO-CREACION-CORPUS.md</code>; guiones originales del laboratorio en <code>experiments/laboratorio/casos/</code>; audio TTS en <code>experiments/asr-local/audio-referencia/</code>.</li></ul>
+<p><b>Coincido en que se pueden armar mucho mejor:</b> 26/53 vienen del laboratorio, con 2–7 líneas, en minúscula, y 10 son paráfrasis del mismo guion. El corpus v2 agrega legítimas cotidianas y pedidos razonables de datos y dinero; las corridas históricas todavía usan los 53 originales. Las legítimas del piloto traen consejos de seguridad explícitos («no te vamos a pedir la clave») que facilitan la detección, y ninguno tiene revisión humana. Recorrelos en la pestaña <a href="#casos">Casos</a>.</p>`],
+['¿Por qué solo Qwen?', `<p>Fue a propósito: una «escalera» de <b>una sola familia</b> (0.8B, 2B, 4B) para que la diferencia se deba al tamaño y no al entrenamiento. Qwen3.5 tiene muchos tamaños chicos, buen español y anda con salida JSON en Ollama. El límite es que <b>no sabemos si otra familia</b> (Gemma, Llama, Phi, Mistral…) rinde más con el mismo tamaño, ni cuál es el techo con un modelo grande.</p><p>Tu orden es mejor para decidir: <b>primero el más fuerte</b>. Si ese no llega a 95/5, achicar no tiene sentido y el problema está en los casos, el prompt o la definición. Si llega, se baja de tamaño hasta donde aguante (etapas 2 y 4).</p>`],
+['Tiempo por línea con y sin placa: ¿hace falta sí o sí una placa? ¿Y con una CPU más potente?', `<p>Lo medido (p50 / p95 por línea): 0.8B con placa <b>0,28 / 0,71 s</b>; solo CPU con 2 hilos <b>3,9 / 7,3 s</b>; Apple M1 con GPU integrada <b>1,3 / 3,5 s</b>. El 2B: 0,52 / 1,12 · 8,2 / 13,0 · 2,6 / 6,0 s. El gate es p95 ≤ 1,5 s.</p>
+<p><b>No hace falta una «placa» como tal: hace falta un acelerador o mucho ancho de banda de memoria.</b> Cada línea tiene dos costos. (1) <i>Leer el prompt</i>: hoy se reenvía toda la transcripción en cada línea y es cálculo puro; lo aceleran mucho la GPU o la NPU. (2) <i>Escribir la respuesta</i>: depende del ancho de banda de memoria. Una CPU más potente (más núcleos, AVX-512, más ancho de banda) ayuda, pero rinde bastante menos que una GPU. Los teléfonos de gama alta no tienen placa, pero sí GPU integrada y NPU (Qualcomm Hexagon, Google Tensor, Apple Neural Engine), que se usan con runtimes como llama.cpp, MLC LLM, LiteRT/MediaPipe o Core ML. Los 2 hilos de x86 eran una cota pesimista: el número real sale solo midiendo en el teléfono (R13).</p>
+<p><b>Palancas de software que bajan mucho la latencia sin cambiar hardware:</b> aprovechar la caché del prefijo (Qwen 3.5 es híbrido: Ollama solo retoma desde puntos guardados y por defecto reprocesa los últimos ~512 tokens; <code>--num-batch 32</code> lo baja a ~50–150, ver <code>analisis/2026-10-21-cache-prefijo</code>), evaluar solo al cierre de turno, pedir una respuesta más corta y poner un filtro liviano antes del SLM.</p>`],
+['¿Apuntar solo a gama alta (últimos Samsung, Pixel, iPhone)?', `<p>Coincido como dirección: si los modelos chicos detectan mal, no sirve largarlos. El README del ensayo ya contempla esa conclusión como válida («funciona solo con modelos más grandes: se argumenta qué gama haría falta»). Pero:</p><ul>
+<li>El objetivo aprobado en #24 es <b>Android gama media, 6–8 GB, 512 MB para todo el pipeline</b> (<code>PREFACTIBILIDAD-TECNICA.md</code>). Cambiarlo es <b>decisión del equipo</b> y hay que registrarlo. Lo dejo como <b>propuesta sin discutir</b>.</li>
+<li>El techo de gama alta hoy es 1024 MB para todo. El ASR ya usa ~400 MB: al detector le quedan ~600, así que entra el 0.8B y no el 2B (2,2 GB). Apuntar a 12–16 GB de RAM implica redefinir ese techo (por ejemplo, 2–3 GB).</li>
+<li><b>iPhone:</b> iOS no deja que una app escuche las llamadas telefónicas comunes. Solo funcionaría con la VoIP propia, que es la integración objetivo de D03. No conviene prometer protección de llamadas normales en iPhone.</li></ul>`],
+['¿Dónde están los umbrales?', `<p>Los únicos gates aprobados están en <code>docs/investigacion/PREFACTIBILIDAD-TECNICA.md</code> §2: latencia por turno p95 ≤ 1,5 s (inaceptable si supera 2,0 s), memoria pico ≤ 512 MB en gama media (256 en baja, 1024 en alta), RTF &lt; 1, hilos, batería y temperatura. <b>No hay umbral de calidad</b>: el documento lo deja para D09 con el piloto.</p><p>Tu <b>95/5</b> sería el primer gate de calidad (<b>propuesta sin discutir</b>). Para que se pueda demostrar:</p><ul><li>Hay que definirlo por conversación, con aviso único y sobre un test que no se use para afinar.</li><li>Hacen falta casos. Con 24 legítimas, aun con 0 falsas alarmas, el máximo del IC 95 % es 13,8 %. Para mostrar ≤ 5 % hacen falta ~75 legítimas sin ninguna falsa alarma, Con 100 legítimas y una falsa alarma, Wilson al 95 % llega a 5,45 %, por encima de la meta. Lo mismo vale para las estafas.</li></ul><p>En <a href="#afinar">Afinar</a> se mueven el umbral de riesgo y la persistencia sobre las corridas guardadas. Ya lo barrí entero: ninguna corrida llega a 95/5. Lo mejor es el 2B con riesgo ≥ 0,65 (24/29 y 4/24) o el 4B con riesgo ≥ 0,9 en dos líneas seguidas (24/29 y 3/24).</p>`],
+['¿Y T_R, T_A y T_C?', `<p>Es la pregunta central y está en la pestaña <a href="#tiempos">Tiempos</a>. En texto, el 2B avisa casi siempre <b>en la línea del pedido</b> (15 de 20 avisos) y antes de que la persona cumpla. El 4B anticipa (17 avisos antes del pedido), pero a costa de 15/24 falsas alarmas. Con audio, la demora del ASR y la cola del detector cambian todo: el 0.8B mono avisó 3,1 s antes del cumplimiento, el 2B mono 3,8 s después y el 2B estéreo 11 s después. Por eso la latencia por línea y la cola forman parte de la etapa 5.</p>`],
+];
+$('#faq').innerHTML = FAQ.map(([q, a], i) => `<details><summary>${q}</summary><div class="card">${a}</div></details>`).join('');
+
+const PLAN = [
+ {"t": "Gestión, decisiones y reparto", "cuando": "ya (semana del 26/10)", "quien": "Luciano coordina; los cuatro deciden", "issues": "#53, #57", "obj": "Que el equipo y el tutor acuerden lo que bloquea al resto, y que cada frente tenga dueño e issue.", "tareas": [{"t": "Commit y push de la verificación del 2026-10-17 y del panel", "hecho": "2026-10-21: <code>886cff0</code> en <code>origin/laboratorio-luciano</code>."}, {"t": "Subir el corpus v2 de desarrollo a <code>laboratorio-main</code> sin la reserva", "hecho": "2026-10-23: PR #64. La reserva sigue solo en <code>laboratorio-luciano</code>; <code>casos.py</code> falla si aparece en la copia pública."}, "Leer este plan entre los cuatro y repartir los frentes (la columna «quién» es una propuesta)", "Reunión con el tutor (crear <code>docs/gestion/seguimientos/AAAA-MM-DD.md</code> 24–48 h antes): meta 95/5, si las estafas sin pedido cuentan en el total, gama alta, llamada en vivo como requisito, RoBERTuito y consentimiento para grabar voces del equipo (D06)", "Abrir los issues que faltan: ASR sobre corpus v2, roles por canal, llamada en vivo, RoBERTuito con tope y medición de memoria (GitHub Issues es el backlog; para un Project privado, <code>gh auth refresh -s project</code>)", "Actualizar el Plan de Trabajo cuando haya acuerdo: llamada en vivo de «extensión» a obligatoria, dirección de la llamada solo como dato registrado, gama alta", "Cada viernes: bitácora semanal, riesgos y este plan (tachar lo hecho)"], "sale": "Frentes repartidos, issues abiertos y respuesta del tutor sobre meta, gama y alcance.", "decide": "Equipo y tutor (D06, D08, D09)."},
+ {"t": "Corpus y referencia humana", "cuando": "casi hecho; revisión humana en paralelo hasta el 8/11", "quien": "propuesta: Mateo (revisión) y Luciano (campo de roles)", "issues": "#32, #45, #55", "obj": "Tener conversaciones suficientes y una referencia en la que confíe alguien más que quien la escribió.", "tareas": [{"t": "Auditar los 53: duplicados, guiones cortos, consejos que regalan la respuesta, entidades reales", "hecho": "2026-10-21: <code>casos/AUDITORIA-53-HISTORICOS.md</code>, 45 hallazgos (5 altos)."}, {"t": "Diseñar cuotas por familia, dificultad, largo y región", "hecho": "2026-10-21: <code>casos/DISENO-CORPUS-V2.md</code>."}, {"t": "Legítimas cotidianas, legítimas que piden un dato y estafas sin palabras clave", "hecho": "2026-10-21: 25 cotidianas, 16 con pedido razonable y 18 estafas indirectas en desarrollo."}, {"t": "Variantes «tipo ASR» y conversaciones largas", "hecho": "2026-10-21: 24 en desarrollo y 60 en reserva, escritas a mano."}, {"t": "Tamaño: 150 de desarrollo y 200 reservados", "hecho": "2026-10-21: 75/75 y 100/100, con huellas SHA-256 en <code>MANIFIESTO-CORPUS-V2.json</code>."}, "Campo <code>protegido</code> (quién es la persona que la app cuida, A o B) en los 150: 76 salen solos de quién hace el pedido y 73 hay que marcarlos a mano", "Revisión humana de una muestra (~30 casos) por dos personas por separado y acuerdo medido (kappa) (D07)", "Decidir dónde va T_R en pedidos partidos o indirectos y qué hacer con los hallazgos altos de la auditoría: corregir o informarlos como límite (D07)"], "sale": "Referencia con roles y una muestra revisada por dos personas, con su acuerdo.", "decide": "Equipo: D07 y D08 (particiones)."},
+ {"t": "Techo de calidad con modelos fuertes", "cuando": "hasta el 1/11", "quien": "propuesta: Ignacio (corre en su PC) y Luciano (análisis)", "issues": "#50, #51", "obj": "Saber si 95/5 es alcanzable con algún modelo local antes de elegir uno que entre en el teléfono.", "tareas": [{"t": "Qwen3.5 0.8B, 4B y 9B con v1 y v2 sobre corpus_v2", "curso": "2026-10-22: hechos sobre los 53 en Linux (9B v1 29/29 · 17/24, v2 28/29 · 8/24). Pedido el 2026-10-23 sobre corpus_v2; <code>combinar.py</code> ya junta las carpetas."}, "Otras familias de 7–14B en la PC de Ignacio: Gemma, Llama, Phi y Mistral (verificar las etiquetas en Ollama)", "Registrar la placa de video de la PC de Ignacio en el manifiesto (hoy dice «no informado»)", {"t": "Análisis de errores: ¿falla por capacidad o por casos ambiguos?", "curso": "2026-10-23: <code>errores.py</code> con 0.8B a 9B sobre los 53; falta corpus_v2."}, {"t": "Repetir configuraciones y comparar máquinas", "hecho": "2026-10-23: el 0.8B y el 4B dan lo mismo en Windows (Evaristo) y Linux (Ignacio); el 2B, lo mismo en M1 y Windows."}], "sale": "Curva de calidad por tamaño y familia sobre los 150, con el techo identificado.", "decide": "Nadie aún; alimenta D09."},
+ {"t": "Afinar y congelar el detector", "cuando": "hasta el 8/11 (tope: 3 pasadas)", "quien": "propuesta: Luciano", "issues": "#50, #33", "obj": "Llevar el mejor modelo lo más cerca posible de 95/5 sin tocar el test, y congelarlo.", "tareas": [{"t": "Prompt v2", "curso": "En los 53, el v2 baja las FA del 4B de 15 a 3 y las del 9B de 17 a 8. En corpus_v2 solo está el 2B: 23/46 · 11/51."}, {"t": "Barrer umbral de riesgo τ y persistencia k, y combinar detectores (pasada 0)", "curso": "<code>analisis/2026-10-21-pasada-0</code>: con los 150 y el 2B no llega; en los 53, el 9B v2 con riesgo ≥ 0,25 da 13/14 · 1/12 en la mitad B."}, {"t": "Reglas v2 como segunda opinión", "hecho": "2026-10-21: FA 51/75 → 8/75, estafas 65/75 → 32/75."}, "Modo <code>--hablantes roles</code> en texto («Vos» / «La otra persona») y prompt que solo avisa si la otra persona te pide algo; medir cuántas falsas alarmas ahorra", "Pasadas 1 y 2 si hace falta, un cambio por vez (por ejemplo, que el prompt mire quién inició la llamada y si el pedido encaja con el motivo)", "Comparar con y sin hablantes, y con y sin base institucional", "Congelar la configuración candidata: modelo, prompt, τ y k"], "sale": "Configuración congelada con su desempeño en desarrollo y la mitad B.", "decide": "Equipo: política de aviso (D08)."},
+ {"t": "Gama alta y tamaño", "cuando": "en paralelo, hasta el 8/11", "quien": "propuesta: Mateo o Evaristo", "issues": "#51", "obj": "Decir con datos qué modelo entra en un teléfono de gama alta y cuál no.", "tareas": ["Medir memoria (RSS) y latencia por modelo en la M1 y en la PC, con el ASR al lado", "RAM de iPhone 16 o posterior, Samsung de gama alta y equivalentes, con fuente del fabricante, y cuánta memoria deja usar cada sistema a una app", "Cuantizaciones q8 y q4 y su efecto en la calidad", "Si solo el 9B llega a la meta, documentarlo como techo que no entra y elegir el mejor que sí entra", "Actualizar PREFACTIBILIDAD-TECNICA con el acuerdo del equipo (hoy dice gama media)", "Extensión: medir en un teléfono real (llama.cpp, MLC o LiteRT)"], "sale": "Tabla modelo → memoria → latencia → ¿entra en la gama?, con fuentes.", "decide": "Equipo: gama objetivo (cambia un gate de #24)."},
+ {"t": "ASR sobre los casos nuevos", "cuando": "26/10 al 8/11", "quien": "propuesta: Luciano (M1) con Evaristo", "issues": "#19, #51", "obj": "Saber cuánto empeora la detección cuando el texto sale del reconocimiento de voz y no de un guion.", "tareas": [{"t": "Zipformer (streaming) y Whisper, con prueba de humo TTS mono y estéreo", "hecho": "2026-10-17: <code>experiments/asr-local/</code>, WER 4–5 % en un par TTS."}, "TTS de los 24 casos de <code>GRABACIONES-ASR.md</code>: dos voces, un canal por persona y calidad telefónica (8 kHz o con el códec de la llamada)", "WER por canal y si se pierden palabras críticas («cero», «código», cifras)", "Mismos casos en texto y con ASR: cuántos avisos se pierden o se suman", "Grabar los 24 con voces del equipo, con la misma herramienta de la llamada en vivo (modo guion)", "Elegir ASR (D09)"], "sale": "WER, palabras críticas y efecto en la detección, primero con TTS y después con voces del equipo.", "decide": "D09 (ASR)."},
+ {"t": "Replay, roles por canal y tiempos", "cuando": "2/11 al 15/11", "quien": "propuesta: Luciano y Mateo (métricas)", "issues": "#28, #52, #33", "obj": "Responder la pregunta central: cuántas estafas se avisan antes de que la persona cumpla, y con cuántos segundos de margen.", "tareas": [{"t": "Replay de punta a punta con cola, mono y estéreo", "hecho": "2026-10-17: un par TTS; el 2B quedó hasta 17 s atrasado respecto del audio."}, {"t": "Preventive@δ por líneas en texto", "hecho": "2026-10-21: en <code>errores.py</code>."}, "Replay con roles: canal local = persona protegida, canal remoto = la otra persona", "Evaluar solo cuando la otra persona termina de hablar (fin de segmento del ASR), para bajar la latencia", "L_R, L_C y Preventive@δ en segundos, con intervalos", "Registrar la dirección de la llamada como dato y analizar después si ayuda (no es regla del detector)", "Acordar δ y la política de aviso (D08)"], "sale": "Tabla de L_R, L_C y Preventive@δ en texto y audio para la configuración congelada.", "decide": "Equipo: δ y política (D08)."},
+ {"t": "Llamada en vivo entre dos personas (demo)", "cuando": "Implementado al 2026-10-28; corrida por Meet el 2026-11-02", "quien": "Luciano (implementación); equipo (ensayo)", "issues": "#75, #80, #84, #85, #86, #87, #94, #104", "obj": "Mostrar el detector funcionando durante una llamada real: dos personas hablan, la persona protegida ve el aviso y el público ve la transcripción y el riesgo en vivo.", "tareas": [{"t": "Captura por canal y control de la llamada desde el navegador", "hecho": "#75–#80: micrófono, Meet/WhatsApp-BlackHole, cliente.py y ejemplo TTS; WhatsApp Desktop quedó afuera (2026-10-31) y el tutor aprobó la captura por Meet como demo de D05."}, {"t": "ASR por canal y conversación con roles visibles", "hecho": "Persona protegida / Otra persona; el detector conserva A/B por orden de habla."}, {"t": "Detector en vivo, curva de riesgo, aviso y demoras", "hecho": "#82/#83; cita con roles #104 (91bf6d5), verificada con datos sintéticos e integrada en laboratorio-luciano y laboratorio-main."}, {"t": "Registro de cada llamada en estéreo y JSONL compatible con replay", "hecho": "#76; audio fuera de Git. No acredita todavía una evaluación con voz humana."}, {"t": "Corte elegible, transiciones, prueba de ASR guardable e Historial", "hecho": "#89–#93; corte numérico, referencias por frase, cierre que conserva el audio pendiente, comparación de dos registros y borrado con confirmación (a37b47e)."}, {"t": "Plan B: ejemplo estéreo reproducido en tiempo real por el panel", "hecho": "#77: SC-WA-CODE-01 y LG-WA-CONSULTA-01; no sustituye el ensayo con personas."}, "Ensayar Meet/WhatsApp con dos integrantes y auriculares (#80/#86)", "Medir el detector en la notebook de demo (#84) y evaluar voz real respetando D06 (#94)", "Enchufar Tito→SLM cuando esté validado (#85)", "Modo guion para producir las tomas: pendiente", "Preparar video de respaldo y acordar con el tutor la demostración de D05"], "sale": "Una llamada en vivo que dispara el aviso, grabada y medible con el replay.", "decide": "Equipo: opción de llamada y si pasa a ser obligatoria en el Plan."},
+ {"t": "RoBERTuito: filtro liviano antes del SLM", "cuando": "con el detector congelado: 2/11 al 22/11 (tope 2 semanas)", "quien": "propuesta: Ignacio (su rama <code>nacho1706/feature-training-data</code>)", "issues": "#41, #42, #47, #49 (not_planned: reabrir con acuerdo)", "obj": "Que un clasificador chico corra en cada fragmento y despierte al SLM solo cuando hace falta, para bajar latencia y batería.", "tareas": ["Acordar retomarlo (el spike #29 no mejoró y quedó not_planned) y revisar lo que hay en la rama", "Datos: el SLM congelado etiqueta líneas de desarrollo y sintéticas; nunca del test", "Entrenar la cabeza y medirla sola contra el SLM sobre los mismos 150", "Cascada: el filtro deja pasar y el SLM confirma; medir cuántas llamadas al SLM ahorra, la latencia y la calidad", "Integrarlo en el replay y en la llamada en vivo", "Si no mejora en el tope, documentarlo como probado y cerrarlo"], "sale": "Comparación SLM solo contra filtro + SLM: calidad, llamadas evitadas, latencia y memoria.", "decide": "Equipo: si entra en el alcance."},
+ {"t": "Evaluación final sobre el test reservado", "cuando": "9/11 al 22/11", "quien": "propuesta: Mateo y Luciano", "issues": "#33, #52", "obj": "Medir una sola vez, sin ajustar nada mirando el test.", "tareas": ["Congelar D07 y D08 (#33) y la configuración antes de abrir el test", "Correr una vez en texto sobre los 200 reservados (<code>--particion test_reservado</code>)", "Recién ahí, TTS en estéreo de los reservados y replay con la misma configuración", "Tablas y figuras con intervalos; responder PI1 y PI2 (#52)", "Análisis de errores del test, sin reajustar"], "sale": "Resultados finales con intervalos, en texto y audio.", "decide": "Equipo y tutor."},
+ {"t": "Informe, demo y defensa", "cuando": "se escribe desde ya; 90 % el 15/11, terminado el 30/11, presentación la segunda semana de diciembre", "quien": "los cuatro", "issues": "#53", "obj": "Entregar la tesis con resultados, decisiones cerradas y una demo que se pueda repetir.", "tareas": ["Capítulos 5–8 con los números reales (detector, ASR, tiempos, gama), escritos a medida que salen", "Arquitectura actualizada: roles por canal, llamada en vivo y cascada si entra", "Cerrar D09 (ASR y detector) y D08 (protocolo), con un ADR del pipeline", "Paquete reproducible: comandos, manifiestos y cómo pedir la reserva (no está en el repo público)", "Presentación, video de la demo y ensayo de defensa; correcciones del tutor desde el 2/12"], "sale": "Informe, código, resultados y presentación listos para revisión el 1/12.", "decide": "Equipo y tutor (D10)."},
+];
+// Tarea: texto, o {t, hecho} (tachada, con la evidencia) o {t, curso} (en curso). Las casillas
+// del navegador solo valen para las tareas sin marcar en el código.
+const tarea = x => typeof x === 'string' ? {t: x} : x;
+function itemPlan(x, k, est) {
+  const {t, hecho, curso} = tarea(x);
+  if (hecho) return `<li class="hecha"><input type="checkbox" checked disabled><span><s>${t}</s><br><span class="mu chico">✔ ${hecho}</span></span></li>`;
+  return `<li><input type="checkbox" data-k="${k}" ${est[k] ? 'checked' : ''}><span>${t}${curso ? `<br><span class="chico" style="color:var(--warn)">⏳ ${curso}</span>` : ''}</span></li>`;
+}
+function pintarPlan() {
+  const est = JSON.parse(localStorage.getItem('panel-plan') || '{}');
+  $('#plan').innerHTML = PLAN.map((e, i) => {
+    const hechas = e.tareas.filter((x, j) => tarea(x).hecho || est[`${i}-${j}`]).length;
+    return `<details class="etapa" ${i < 1 ? 'open' : ''}><summary><span class="num">${i}</span><b>${e.t}</b><span class="mu chico">${e.cuando}</span><span class="prog"><i style="width:${hechas / e.tareas.length * 100}%"></i></span><span class="mu chico">${hechas}/${e.tareas.length}</span></summary>
+    <div class="cuerpo"><p><b>Para qué:</b> ${e.obj}</p><ul class="chk">${e.tareas.map((x, j) => itemPlan(x, `${i}-${j}`, est)).join('')}</ul>
+    <p class="chico"><b>Sale cuando:</b> ${e.sale}<br><b>Decide:</b> ${e.decide}${e.quien ? `<br><b>Quién (propuesta):</b> ${e.quien}` : ''}${e.issues ? `<br><b>Issues:</b> ${e.issues}` : ''}</p></div></details>`;
+  }).join('');
+}
+$('#plan').addEventListener('change', e => { const k = e.target.dataset.k; if (!k) return; const est = JSON.parse(localStorage.getItem('panel-plan') || '{}'); est[k] = e.target.checked; localStorage.setItem('panel-plan', JSON.stringify(est)); const abiertas = [...document.querySelectorAll('.etapa')].map(d => d.open); pintarPlan(); document.querySelectorAll('.etapa').forEach((d, i) => d.open = abiertas[i]); });
+
+$('#arq-svg').innerHTML = `<svg viewBox="0 0 1000 370" width="100%"><defs><marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#888"/></marker></defs>
+<style>.bx{fill:#eef4ff;stroke:#2563eb;stroke-width:1.3}.bx2{fill:#fff4e6;stroke:#d97706;stroke-width:1.3}.bx3{fill:#ecfdf3;stroke:#16a34a;stroke-width:1.3}.g{fill:none;stroke:#d6d3cb;stroke-dasharray:4 3}.ar{stroke:#888;stroke-width:1.4;fill:none;marker-end:url(#m)}.f{font:10.5px ui-monospace,Menlo,monospace;fill:#5f6b66}.t{font-weight:600;font-size:13.5px}.s{font-size:11px}</style>
+<rect class="g" x="8" y="8" width="984" height="218" rx="10"/><text x="20" y="26" class="f">PIPELINE (lo que haría el teléfono)</text>
+<rect class="bx" x="22" y="50" width="130" height="66" rx="8"/><text x="87" y="76" text-anchor="middle" class="t">Audio</text><text x="87" y="94" text-anchor="middle" class="s">mono o estéreo A/B</text><text x="87" y="108" text-anchor="middle" class="f">sintetizar_par.sh</text>
+<rect class="bx" x="190" y="50" width="150" height="66" rx="8"/><text x="265" y="76" text-anchor="middle" class="t">ASR local</text><text x="265" y="94" text-anchor="middle" class="s">Zipformer / Whisper</text><text x="265" y="108" text-anchor="middle" class="f">asr-local/asr_local.py</text>
+<rect class="bx" x="378" y="50" width="160" height="66" rx="8"/><text x="458" y="76" text-anchor="middle" class="t">Contexto</text><text x="458" y="94" text-anchor="middle" class="s">lo dicho hasta ahora</text><text x="458" y="108" text-anchor="middle" class="f">replay/contexto.py</text>
+<rect class="bx" x="576" y="50" width="170" height="66" rx="8"/><text x="661" y="76" text-anchor="middle" class="t">Cola + Detector</text><text x="661" y="94" text-anchor="middle" class="s">SLM Qwen3.5 (Ollama) o reglas</text><text x="661" y="108" text-anchor="middle" class="f">replay/replay.py</text>
+<rect class="bx" x="784" y="50" width="196" height="66" rx="8"/><text x="882" y="76" text-anchor="middle" class="t">Política → Aviso</text><text x="882" y="94" text-anchor="middle" class="s">primer true válido = aviso único</text><text x="882" y="108" text-anchor="middle" class="f">T_A = fin de esa evaluación</text>
+<path class="ar" d="M152 83H188"/><path class="ar" d="M340 83H376"/><path class="ar" d="M538 83H574"/><path class="ar" d="M746 83H782"/>
+<text x="265" y="140" text-anchor="middle" class="f">actualizaciones.jsonl</text><text x="265" y="153" text-anchor="middle" class="f">(texto, inicio, fin, disponible_s)</text>
+<text x="661" y="140" text-anchor="middle" class="f">inicio = max(disponible_s, fin_prev)</text><text x="661" y="153" text-anchor="middle" class="f">→ {riesgo, alerta_sugerida, motivo, evidencia}</text>
+<rect class="bx2" x="378" y="168" width="368" height="44" rx="8"/><text x="562" y="187" text-anchor="middle" class="t" style="font-size:12.5px">Atajo sin audio: casos de texto línea por línea</text><text x="562" y="203" text-anchor="middle" class="f">slm-directo/correr.py · casos/texto/*.txt (53)</text>
+<path class="ar" d="M458 168V118"/>
+<rect class="g" x="8" y="240" width="984" height="122" rx="10"/><text x="20" y="258" class="f">EVALUACIÓN (el detector nunca ve esto)</text>
+<rect class="bx3" x="22" y="275" width="230" height="72" rx="8"/><text x="137" y="298" text-anchor="middle" class="t">Referencia</text><text x="137" y="315" text-anchor="middle" class="s">clase, T_R (pedido), T_C (cumplió)</text><text x="137" y="332" text-anchor="middle" class="f">casos/referencia · audio-referencia</text>
+<rect class="bx3" x="300" y="275" width="250" height="72" rx="8"/><text x="425" y="298" text-anchor="middle" class="t">Trazas de la corrida</text><text x="425" y="315" text-anchor="middle" class="s">eventos.csv / actualizaciones.csv</text><text x="425" y="332" text-anchor="middle" class="f">+ manifiesto.json (hardware, hashes)</text>
+<rect class="bx3" x="598" y="275" width="382" height="72" rx="8"/><text x="789" y="298" text-anchor="middle" class="t">Métricas (METRICAS.md)</text><text x="789" y="315" text-anchor="middle" class="s">L_R = T_R − T_A · L_C = T_C − T_A · recall · FA con IC de Wilson · RTF</text><text x="789" y="332" text-anchor="middle" class="f">metricas/evaluar.py → salidas/*/metricas.md</text>
+<path class="ar" d="M252 311H298"/><path class="ar" d="M550 311H596"/><path class="ar" d="M746 108 L790 108 L790 233 L480 233 L480 273"/></svg>`;
+
+$('#historia').innerHTML = '<tr><th>Fecha</th><th>Qué se hizo</th></tr>' + [
+ ['2026-09-02 → 09-17', 'Repositorio, anteproyecto, ventana de contexto y lógica de alerta, recorte de modelos on-device.'],
+ ['2026-09-17 → 09-28', '<b>Spike #29</b> en <code>experiments/laboratorio/</code>: reglas, encoders y cascada RoBERTuito→SLM sobre una suite de 21 casos. Se descartó TF-IDF y se giró hacia un SLM local.'],
+ ['2026-09-22 → 09-24', 'Prefactibilidad técnica y legal (#24), catálogo de escenarios argentinos (#31), piloto inicial (#22).'],
+ ['2026-10-03', '<b>UI Streamlit del laboratorio</b> (#44): texto, comparaciones y manual.'],
+ ['2026-10-07 → 10-08', 'Primer par escrito (WhatsApp); web de arquitectura y gráfico del roadmap en <code>ayuda-memoria</code>.'],
+ ['2026-10-13 → 10-15', '<b>Ensayo SLM directo #50</b>: 53 casos, reglas, escalera Qwen3.5 0.8B/2B/4B en Windows con placa y con solo CPU, demo de un comando, <b>visor</b> y <b>tablero</b>.'],
+ ['2026-10-17', 'Día principal, 28 commits: ASR local (#19), replay incremental con cola (#28), métricas (#52), corridas en Apple M1 (el 4B se cortó por swap), replay de punta a punta mono y estéreo, comparación de candidatos (#51), protocolo (#33) y capítulos 5–8 (#53).'],
+ ['2026-10-17 (cierre)', 'Verificación: el evaluador rechaza referencias ausentes, se corrigieron 43 enlaces y se acotaron R19, R20 y D11.'],
+ ['2026-10-21', 'Este panel y el plan por etapas; corpus v2 (150 de desarrollo y 200 reservados), auditoría de los 53, reglas v2, prompt v2, 2B sobre los 150 y pasada 0.'],
+ ['2026-10-22 → 10-23', 'Ignacio corre el 0.8B, el 4B y el 9B (v1 y v2) en Linux sobre los 53. Comparación con Evaristo: las cifras se repiten entre máquinas. Pasada 0 sobre los 53 y cascada «avisa y confirma».'],
+].map(([f, t]) => `<tr><td style="white-space:nowrap">${f}</td><td>${t}</td></tr>`).join('');
+
+$('#archivos').innerHTML = '<tr><th>Carpeta</th><th>Qué hace</th><th>Piezas clave</th><th>Issue</th></tr>' + [
+ ['experiments/slm-directo/', 'Detector SLM sobre texto incremental y los 53 casos', 'correr.py, detectores.py, cliente_ollama.py, reglas.py, resumen.py, visor.py, demo.sh/.ps1, prompts/, casos/, analisis/ (tablero y este panel)', '#50'],
+ ['experiments/asr-local/', 'Transcripción local repetible con WER y RTF', 'asr_local.py, motores.py, sintetizar_par.sh, mezclar_canales.py, calcular_audio_referencia.py, wer.py', '#19'],
+ ['experiments/replay/', 'Simula la llamada en tiempo real: contexto, cola y aviso único', 'replay.py, contexto.py, corridas/2026-10-17_RESUMEN-E2E.md', '#28'],
+ ['experiments/metricas/', 'T_A, L_R, L_C, recall, FA con IC de Wilson, prevalencia, RTF', 'metricas.py, evaluar.py, salidas/2026-10-17-{desarrollo,m1,e2e-tts}/', '#52'],
+ ['experiments/laboratorio/', 'Spike anterior: reglas, encoders, cascada y UI Streamlit', 'ui_laboratorio.py, ui_resultados.py, pipeline.py, detector_cascada.py, detector_encoder.py', '#29, #44'],
+ ['docs/', 'Decisiones, riesgos, bitácora, evaluación y tesis', 'ingenieria/ARQUITECTURA.md, evaluacion/{METRICAS, PROTOCOLO-EXPERIMENTAL, COMPARACION-CANDIDATOS-DESARROLLO}.md, gestion/{MAPA-DECISIONES, REGISTRO-RIESGOS}.md, investigacion/PREFACTIBILIDAD-TECNICA.md, tesis/', '#33, #51, #53'],
+ ['ayuda-memoria/ + docs/ingenieria/arquitectura-web/', 'Web de roadmap y briefs, y diagrama interactivo con simulador de riesgo', 'npm run build && npm run preview → /arquitectura/', 'R17'],
+].map(([a, b, c, d]) => `<tr><td><code>${a}</code></td><td>${b}</td><td class="mot"><code>${esc(c)}</code></td><td>${d}</td></tr>`).join('');
+
+// ---------------- Inicio ----------------
+pintarPlan(); opcionesCorridas($('#af-corrida')); opcionesCorridas($('#casos-corrida'), true);
+$('#af-corrida').value = String(CORRIDAS.findIndex(c => c.nombre.startsWith('Qwen3.5 2B · Windows GPU (1)')));
+$('#casos-corrida').value = $('#af-corrida').value;
+pintarCasos(); ir(); comprobarOllama();
+</script>
+</body>
+</html>

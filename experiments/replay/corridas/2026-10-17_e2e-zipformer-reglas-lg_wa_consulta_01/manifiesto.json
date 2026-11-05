@@ -1,0 +1,59 @@
+{
+  "fecha_hora": "2026-10-17T13:30:27",
+  "comando": "replay.py --actualizaciones ../asr-local/corridas/2026-10-17_humo_lg_wa_consulta_01_zipformer/actualizaciones.jsonl --detector reglas --salida corridas/2026-10-17_e2e-zipformer-reglas-lg_wa_consulta_01",
+  "entradas": {
+    "ruta": "../asr-local/corridas/2026-10-17_humo_lg_wa_consulta_01_zipformer/actualizaciones.jsonl",
+    "sha256": "b5ddcbc4c2c2ec5137ca78a02092960677276af76fa663e7120b4bc53db8a21c",
+    "tamano_bytes": 3849,
+    "tipo": "actualizaciones_jsonl"
+  },
+  "config": {
+    "detector": "reglas",
+    "modelo": null,
+    "prompt": null,
+    "hablantes": "sin",
+    "disparo": "final",
+    "politica": "aviso_unico_primer_true_valido",
+    "seed": "no-aplica"
+  },
+  "codigo": {
+    "commit": "00ebbdf7b5b48218fd7d8315957c367180d02e64",
+    "cambios_sin_commit": false
+  },
+  "hardware": {
+    "sistema": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.14.3"
+  },
+  "asr_meta": {
+    "motor": "sherpa-zipformer",
+    "modelo": "csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "tipo_entrega": "parciales_y_finales",
+    "es_streaming": true,
+    "sample_rate": 16000,
+    "bloque_ms": 100,
+    "hardware": {
+      "sistema": "Darwin",
+      "release": "25.6.0",
+      "arquitectura": "arm64",
+      "procesador": "arm",
+      "nucleos_cpu": 8,
+      "ram_total_gb": 8.0
+    },
+    "git": {
+      "hash": "b29ff73e863e388904703e0181a2d6f6d773c7f1",
+      "dirty": false
+    },
+    "versiones": {
+      "python": "3.14.3",
+      "sherpa_onnx": "1.13.8",
+      "onnxruntime": "1.31.0",
+      "faster_whisper": "1.2.1",
+      "soundfile": "0.14.0",
+      "numpy": "2.5.4"
+    }
+  }
+}

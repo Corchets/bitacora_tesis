@@ -26,6 +26,10 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Evidencia:** [minuta del 9 de septiembre](seguimientos/2026-09-09.md) y [REQUISITOS-ACADEMICOS.md](../propuesta/REQUISITOS-ACADEMICOS.md).
 - **Desbloquea:** D02, D03, D10 y cronograma definitivo.
 - **Estado:** resuelto (2026-09-09). Defensa presencial a fines de diciembre 2026; tutor asignado; ~100 págs promedio digital; sin comité de ética universitario formal.
+- **Fechas fijadas por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  todo al 90 % el 2026-11-15, todo terminado el 2026-11-30, y en la segunda semana de diciembre
+  (2026-12-07 a 2026-12-11) entrega de la documentación y presentación en vivo de 20 a 30 minutos
+  como máximo. Reemplaza a «fines de diciembre». Falta el día exacto.
 
 ### D02 — Definir problema, usuario y necesidad
 
@@ -53,6 +57,13 @@ Plantilla en [PLANTILLA-ADR.md](../ingenieria/adr/PLANTILLA-ADR.md).
 - **Estado:** resuelto (2026-09-09). Replay como base experimental reproducible obligatoria; llamada VoIP propia como integración objetivo del prototipo; altavoz externo despriorizado (no separa canales); PSTN universal fuera de alcance.
 - **Cómo seguir (consolidación PR #58):** construir el entorno de pruebas VoIP con
   conversaciones simuladas por canal — paso 0 de VENTANA §10.
+- **Demo aprobada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  el panel captura en la notebook de la persona protegida su micrófono y el canal remoto desde
+  Google Meet o WhatsApp Desktop, por canal y en local. Esa es la demo de la defensa, con la
+  llamada de ejemplo en tiempo real como plan B. El ensayo con dos personas por Meet quedó hecho
+  (#80); falta el de sala (#86).
+- **WhatsApp Desktop fuera por ahora (Luciano, 2026-10-31):** BlackHole no funcionó con WhatsApp
+  Desktop y no hace falta para la demo, que queda con Google Meet por pestaña de Chrome.
 
 Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTURA-AUDIO.md](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md):
 
@@ -71,12 +82,16 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
 - **Condiciones operativas (acordadas el 2026-09-24, [PR #35](https://github.com/Corchets/bitacora_tesis/pull/35)):**
   participantes adultos con datos ficticios, consentimiento previo de ambos
   interlocutores, resguardo local a cargo de Mateo, sin permiso de publicar voces.
-  El PR #35 documenta la decisión operativa pero no habilita a grabar: falta la
-  validación del tutor anotada en el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
-  y completar domicilio/contacto reales fuera de Git.
+  La validación del tutor que pedía el [seguimiento del 2026-09-30](seguimientos/2026-09-30.md)
+  llegó el 2026-10-28 (ver abajo). Antes de grabar falta completar fuera de Git el
+  domicilio y contacto reales de los consentimientos.
 - **Desbloquea:** piloto del corpus.
-- **Cómo seguir:** llevar composición, participantes y protocolo al tutor; sin su
-  validación no se graba (consolidación PR #58).
+- **Grabación aprobada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  se pueden grabar las voces del equipo con el esquema de consentimiento entre adultos y
+  resguardo local fuera de Git: las 30 frases de #94 y los 24 diálogos de
+  [`GRABACIONES-ASR.md`](../../experiments/slm-directo/casos/GRABACIONES-ASR.md). Los
+  consentimientos firmados y el audio siguen fuera de Git.
+- **Cómo seguir:** completar y firmar los consentimientos y grabar.
 - **Pendiente en D08:** tamaño y composición final, particiones y criterio de parada.
   El resguardo de los materiales se consulta en el método; no exige otro documento.
 
@@ -102,6 +117,9 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
 - **Contribución defendible (consolidación PR #58):** la arquitectura incremental
   documentada (capas 3 y 4 del [diseño integrado](../investigacion/DISENO-INTEGRADO.md)),
   el hueco que deja la patente de Google US 2024/0388655 A1.
+- **Alternativa con modelo por API (JEV), descartada (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  no entra en la tesis ni como techo experimental ni como modo híbrido. La inferencia sigue siendo
+  100 % local.
 - **Cómo seguir:** toda nueva funcionalidad se contrasta contra la lista de
   exclusiones aprobada.
 
@@ -131,6 +149,11 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   reportando ambos márgenes; `T_A` se define con histéresis (primer cruce que se
   sostiene dos actualizaciones). Queda abierta hasta probarla con el piloto y
   adjudicar ambigüedades.
+- **Prioridad de revisión planteada por Luciano (2026-11-04):** comprobar si los casos
+  son ambiguos o están mal construidos antes de atribuir los errores al prompt o a
+  RoBERTuito. El [panel de lectura](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+  expone diálogos, fichas y dudas originales. Es una hipótesis a contrastar caso por
+  caso; no adjudica referencias, no da por probada la causa ni cambia D09.
 - **Para cerrar:** manual probado en una muestra común por los cuatro integrantes,
   anotaciones originales conservadas y desacuerdos adjudicados.
 - **Fuente:** [MANUAL-ANOTACION.md](../corpus/MANUAL-ANOTACION.md). Sus dos capas de
@@ -148,9 +171,6 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   la evaluación final, con D07 resuelta y una configuración elegida sobre desarrollo.
 - **Salida:** composición del corpus, particiones, comparadores, política de alerta,
   métricas y criterio de interpretación definidos; test reservado y procedimiento repetible.
-- **Primer ensayo:** contexto acumulado y un aviso por llamada acordados con Mateo,
-  registrados el 2026-10-08 en [arquitectura §5](../ingenieria/ARQUITECTURA.md#5-primer-ensayo-sobre-texto).
-  Son condiciones exploratorias; no cierran D08 ni fijan tolerancia de falsas alarmas.
 - **Antes de ampliar:** acordar separación de semillas y variantes en
   [#55](https://github.com/Corchets/bitacora_tesis/issues/55). Ver
   [método del corpus §9](../corpus/METODO-CREACION-CORPUS.md#9-división-de-datos).
@@ -167,37 +187,164 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   acierto requerido derivado), la regla de persistencia del contador (opciones
   A/B/C en VENTANA §11), el reloj de actualización, el conteo de alertas y las
   franjas de duración.
+- **Evidencia nueva disponible (2026-10-17, material de desarrollo, no test):**
+  - Módulo de cálculo según `METRICAS.md` probado en [`experiments/metricas/`](../../experiments/metricas/) y evaluado sobre los 53 casos de `slm-directo` ([`experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md`](../../experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md)); revela alta sensibilidad a falsas alarmas en negativos difíciles (58.3 % en reglas, 62.5 % en Qwen3.5 4B, 33.3 % en 0.8B y 8.3 % en 2B).
+  - Simulación incremental con cola secuencial y política de aviso único implementada en [`experiments/replay/`](../../experiments/replay/) ([#28](https://github.com/Corchets/bitacora_tesis/issues/28)), con corrida de punta a punta sobre ASR de audio sintético TTS ([`experiments/replay/corridas/2026-10-17_e2e-zipformer-reglas-sc_wa_code_01/`](../../experiments/replay/corridas/2026-10-17_e2e-zipformer-reglas-sc_wa_code_01/)).
+  - Cuatro propuestas metodológicas derivadas de literatura para congelar el protocolo experimental en D08 documentadas en [`docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md §7`](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#7-qué-cambia-para-la-evaluación) ([#25](https://github.com/Corchets/bitacora_tesis/issues/25)).
+  - Propuesta de protocolo experimental redactada en [`docs/evaluacion/PROTOCOLO-EXPERIMENTAL.md`](../evaluacion/PROTOCOLO-EXPERIMENTAL.md) ([#33](https://github.com/Corchets/bitacora_tesis/issues/33)), definiendo unidades de análisis (conversación, actualización), instantes de corte y métricas operativas candidatas; corrida replay E2E evaluada con SLM directo (0.8B y 2B GGUF) sobre audio TTS mono y estéreo ([`experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md`](../../experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md)) y métricas formales temporales en [`experiments/metricas/salidas/2026-10-17-e2e-tts/`](../../experiments/metricas/salidas/2026-10-17-e2e-tts/).
+
+- **Meta de trabajo propuesta (2026-10-23, Luciano Grosso):** avisar en al menos el 95 %
+  de las estafas con a lo sumo 5 % de falsas alarmas en legítimas (95/5). Falta el acuerdo
+  del equipo y la aprobación del tutor. Faltaba también decidir el denominador. Corrección del recuento (2026-11-04):
+  11 de las 75 estafas de desarrollo no tienen T_R, contando `TR-12`; si no se avisa en
+  ninguna de esas once, el máximo es 64/75 (85,3 %). La
+  [pasada 0](../../experiments/slm-directo/analisis/2026-10-21-pasada-0/README.md)
+  es el antecedente; el [recuento corregido](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md)
+  incluye `TR-12`.
+
+  Antecedente superado por la meta del tutor que sigue.
+
+- **Meta fijada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  avisar en el **80–85 %** de las estafas con **10–15 %** de falsas alarmas en legítimas.
+  Condición aparte: el aviso no puede salir solo porque aparezca «código», «transferime plata»,
+  «pasame el código» o «decime la contraseña» en una conversación que no es estafa. Ignacio y
+  Evaristo trabajan en esas falsas alarmas. **Denominador: todas las estafas**, incluidas las que
+  no tienen pedido de referencia (11 de las 75 de desarrollo, contando `TR-12`; recuento corregido el 2026-11-04).
+
+- **Diagnóstico del 2026-11-04 ([comparación por caso](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md), #51/#68):**
+  E2B directo avisa en 55/75 estafas con 18/75 falsas alarmas; con Tito viejo,
+  51/75 y 13/75. Ambos cortan al primer aviso. Los 150 son desarrollo sin revisión
+  humana; hay nueve pérdidas con T_R y diez sin T_R compartidas. Se propone
+  adjudicar ambigüedades, aislar compuerta/indicio y separar desarrollo para elegir
+  y comprobar mejoras. No se aprueba ninguna variante, no se reabre D09 ni se
+  cambia el denominador pendiente de falsas alarmas; D07/D08 siguen abiertas.
+
+- **Dirección solicitada por Luciano (2026-11-04):** mejorar SLM y Tito aislando
+  cada cambio; conservar SLM solo como control experimental. La [matriz propuesta
+  prompt × Tito](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md#matriz-para-separar-prompt-y-tito)
+  combina prompt actual/nuevo con SLM solo/Tito viejo/Tito mejorado. Los candidatos,
+  repeticiones, particiones y política siguen como propuesta; no se cierra D08 ni
+  se cambia la configuración vigente de D09.
+
+- **Evidencia para la política de alerta y el denominador (2026-11-05, [análisis](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó)):**
+  v4 da 55/13 con el primer aviso; simulando persistencia, 51/11 con dos alertas en la llamada y 49/8 con dos seguidas.
+  El corpus v2, que es toda la reserva, da 27/46 en estafas y 6/51 en falsas alarmas. Hay 20 estafas sin pedido
+  entre las 100 reservadas, así que un detector que avisa solo por pedidos no puede pasar de 80/100. Son casos ya vistos sin
+  revisión humana. No se elige política ni se cambia el denominador.
+
+- **Dirección de Luciano (2026-11-05):** no esperar una definición del tutor sobre las estafas sin pedido; informar el corpus v2 por
+  separado; seguir probando con pruebas unitarias y recién después congelar la configuración. Primero pidió modificar el detector para
+  avisar esas estafas. Al leer los controles planteó que, hasta donde cortan, no hay evidencia suficiente para avisar, y pidió completar
+  esas llamadas en la reserva (rama `reserva-sin-cortes`, en curso). El [prompt v5](../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) no las avisa ni le gana a v4 con una
+  diferencia defendible; la candidata propuesta es v4 con roles, sin indicio y primer aviso. No cierra D07 ni D08: falta
+  el acuerdo del equipo, y adoptar otro prompt implica reabrir el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
+  La reunión con el tutor es el 2026-11-11.
 
 ### D09 — Elegir ASR y detector
 
 - **Pregunta:** ¿qué combinación satisface la calidad y el presupuesto de cómputo?
 - **Ejecución:** [issue #51](https://github.com/Corchets/bitacora_tesis/issues/51).
-- **Estado:** abierta. La elección final necesita audio y referencia del piloto,
-  comparaciones sobre desarrollo y mediciones del flujo completo.
+- **Estado:** resuelta (Luciano por el equipo, 2026-11-03). ASR: Parakeet con corte RMS 0,8 s / 0,008
+  y filtro Silero. Detector: Tito viejo como compuerta de Gemma 4 E2B. Motivo, alternativas y límites
+  en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Se resolvió sin
+  el piloto revisado que pedía la versión anterior de esta ficha; el rendimiento se mide en el test
+  reservado, con [D07](#d07--aprobar-taxonomía-y-evento-crítico) y
+  [D08](#d08--congelar-protocolo-experimental) todavía abiertas.
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
-- **Línea base vigente:** reglas solas. Ningún encoder, modelo generativo, cascada,
-  entrenamiento ni conjunto de gamas está impuesto como arquitectura final.
-- **Arranque acordado con Mateo (registro 2026-10-08):** SLM directo sobre texto en
-  [#50](https://github.com/Corchets/bitacora_tesis/issues/50), con reglas como comparador
-  separado. Las condiciones viven en [arquitectura §5](../ingenieria/ARQUITECTURA.md#5-primer-ensayo-sobre-texto);
-  la selección final sigue abierta en #51.
+- **Línea base:** reglas solas, también como respaldo sin modelo de la demo.
+- **Detector de la demo (Luciano, 2026-11-02):** el panel ofrece Gemma 4 E2B o E4B con Tito viejo,
+  por la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md).
+  La matriz es exploratoria y sin audio. Antecedente de la resolución del 2026-11-03.
+  Desde el 2026-11-03 el panel ofrece solo Gemma 4 E2B con Tito viejo, o reglas (Luciano).
 - **Material para consultar cuando corresponda:**
   [recorte inicial de modelos](../investigacion/PRIMERA-INVESTIGACION-MODELOS.md),
   [estrategia NLP](../investigacion/ESTRATEGIA-MODELOS-NLP-Y-COMPRESION.md) y
   [contraste con el laboratorio](../investigacion/CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md).
   Son antecedentes de candidatos y pruebas, no requisitos nuevos. La comparación
   debe declarar qué código y datos reutiliza y qué cambió.
+- **Preparación delegada por el usuario (2026-10-29):** el usuario aprobó las veinte
+  conversaciones de #101 y delegó resolver los parámetros técnicos sin nuevas
+  aprobaciones genéricas. [Preparación operativa](../../experiments/slm-directo/DATOS-TITO.md#preparación-técnica-delegada--2026-10-29):
+  particiones por ID/hash, historial acumulado como entrada principal del Tito nuevo,
+  búsqueda acotada y supervisión IA explícita para desarrollo. #98–#102 actualizados
+  en GitHub. La auditoría semántica entre fuentes y las etiquetas de prefijos siguen
+  siendo trabajo técnico antes de entrenar; no se fabrican revisiones humanas ni se
+  habilita el protocolo final por esta delegación. D07/D08/D09 siguen abiertas.
+- **Plan exploratorio acordado con el usuario (2026-10-26):** Tito como filtro
+  que activa al SLM ante sospecha, con contexto completo e indicio falible; ocho
+  conversaciones de desarrollo, todos los SLM previamente ejecutados y umbral
+  inicial 0,5. [Plan y matriz exacta en ARQUITECTURA §7](../ingenieria/ARQUITECTURA.md#7-plan-de-experimento-tito-como-filtro-de-consulta-al-slm).
+  Especificación publicada en [#68](https://github.com/Corchets/bitacora_tesis/issues/68)
+  con `ready-for-agent`, asignada a Ignacio; punto principal de prueba confirmado
+  por el usuario. Descomposición aprobada y publicada en seis subissues de #68,
+  con bloqueos nativos; primera entrega [#69](https://github.com/Corchets/bitacora_tesis/issues/69).
+  Sin entrenamiento ni corridas nuevas; no cierra D09 ni reabre automáticamente
+  los issues históricos retirados.
 - **Antecedentes del laboratorio (spike #29, medidos con semillas provisorias con
   sesgo de dialecto — no cierran D09):** la cascada RoBERTuito+LR→SLM (zona gris
   0,35–0,75) no mejoró al encoder solo en la corrida del 2026-09-28 (goteo
   12/16→7/16, AUROC 0,666→0,537, mismas 5/10 falsas alarmas) y no entra en el
   presupuesto de 1024 MB junto al SLM (~1,7 GB sin ASR). Candidatos de trabajo
-  propuestos: Moonshine tiny-es en gama baja y Zipformer Kroko ONNX en media/alta
-  para ASR; SLM local directo (p. ej. Llama-3.2-1B) como detector. La
+  propuestos en aquel recorte: Moonshine tiny-es en gama baja y Zipformer Kroko ONNX en media/alta
+  para ASR; SLM local directo (p. ej. Llama-3.2-1B) como detector. Zipformer fue retirado de la
+  selección activa el 2026-10-29 (ver actualización debajo). La
   recomendación del laboratorio de retomar datos reales para encoder y cascada
   (#41/#42) está retirada como `not_planned` en GitHub: revivirla exige una
   replanificación acordada; se evalúa como alternativa en #51, no como tarea abierta.
+- **Gama objetivo propuesta (2026-10-23, Luciano Grosso):** teléfonos de gama alta, con
+  iPhone 16 o posterior, Samsung de gama alta y equivalentes de otras marcas como referencia
+  de hardware. Reemplazaría a la gama media de 6–8 GB de
+  [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), que no se modificó
+  hasta que haya acuerdo. iOS sigue [fuera de alcance](#fuera-de-alcance-provisional) como
+  plataforma: el iPhone sirve de referencia de la gama, no de destino de la demo. Si el único
+  detector que llega a la meta no entra en esa gama (el 9B `q4_K_M` pesa 6,6 GB sin ASR ni
+  caché), se documenta como techo de referencia y se elige el mejor que sí entra.
+
+  > **Estado: propuesta sin discutir.** La RAM y los límites de memoria por app de cada
+  > modelo de teléfono deben citarse de fuente del fabricante antes de usarse en la tesis.
+
+- **RoBERTuito (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  el tutor no se mete en la arquitectura; retomarlo o no lo decide el equipo según lo que
+  convenga. Sigue el antecedente del spike #29 (no mejoró al encoder solo).
+- **Gama acordada con el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+  la gama más alta de teléfonos disponible a la fecha, sin escatimar recursos; la optimización
+  para gamas menores queda para después. Confirma la propuesta anterior; sigue pendiente citar la
+  RAM del fabricante y reemplazar la gama media de
+  [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md).
+
+- **Evidencia nueva disponible (2026-10-17, material de desarrollo, no test):**
+  - ASR local repetible en [`experiments/asr-local/`](../../experiments/asr-local/) ([#19](https://github.com/Corchets/bitacora_tesis/issues/19)) con Zipformer Kroko (streaming, RTF 0.10–0.17, RSS ~357–423 MB, WER 4.35–5.00 % sobre audio TTS de humo) y Faster-Whisper base (lotes, RTF 0.27, WER 17.39 % con pérdida de dígitos "cero"); la corrida de entrega espera audio humano de #39.
+  - Ensayo SLM local directo en [`experiments/slm-directo/`](../../experiments/slm-directo/) ([#50](https://github.com/Corchets/bitacora_tesis/issues/50)) sobre 53 casos de texto con Qwen3.5 (0.8B, 2B, 4B); en CPU con 2 hilos la latencia p50 sube a 3.9 s (0.8B) y 8.2 s (2B), superando el presupuesto de tiempo real. Corridas completas comparadas frente a reglas en [`experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md`](../../experiments/metricas/salidas/2026-10-17-desarrollo/metricas.md).
+  - **2026-10-28 (voz real, sin referencia):** Zipformer Kroko transcribe mal la voz de Luciano en el panel. Parakeet TDT 0.6B v3 int8 (`sherpa-onnx`, por frases con borrador cada 0,5 s) se ve mejor en 4 llamadas reales, con ~1,0–1,2 GB de RSS y palabras inventadas en inglés ante ruido; Whisper large-v3-turbo no sirve para vivo. Ambos ASR se eligen en el panel. El 2026-10-29 se agregó un filtro para los borradores en inglés ([§9.1](../../experiments/asr-local/PLAN-VOZ-REAL.md#91-el-borrador-sale-en-inglés-y-después-se-corrige-2026-10-29)). **Estado: propuesta sin discutir**; no cambia el candidato de D09 ([detalle](../../experiments/asr-local/PLAN-VOZ-REAL.md#9-zipformer-anda-mal-con-voz-real-probamos-parakeet-2026-10-28)).
+  - **2026-10-29 (Luciano Grosso):** Zipformer Kroko queda como antecedente histórico, retirado de la selección activa por los errores observados con su voz; se conservan código y corridas para reproducción. Parakeet sigue en prueba, sin seleccionar reemplazo ni cerrar D09. La [auditoría de VAD y preaudio](../../experiments/asr-local/PLAN-VOZ-REAL.md#10-auditoría-de-vad-preaudio-y-comparación-de-modelos-2026-10-29) confirma RMS y preaudio de hasta 300 ms en el motor por frases; no hay Silero en esa ruta ni medición móvil de batería. El valor por defecto del panel sigue siendo Zipformer: la retirada documental no modifica el arranque del software.
+  - **2026-10-30 (Luciano Grosso):** el corte de Parakeet se define comparando en diálogos reales dos opciones: Silero solo (0,9 / 0,3 s) y el RMS 0,8 s / 0,008 con filtro Silero. Sale de las mediciones con voz real del [§12.7–§12.8](../../experiments/asr-local/PLAN-VOZ-REAL.md#128-toma-4-audio-nuevo-para-las-mezclas-y-silero-solo-2026-10-30): con lectura rápida, Silero solo da WER 13,4 % contra 17,0 % del RMS, y el filtro da el mismo texto que el RMS sin transcribir ruido. Hasta esa comparación no cambian los valores por defecto (RMS 0,8 s / 0,008 en «Probar el ASR», 0,9 s / 0,003 en la llamada) ni se cierra D09 ([cómo se graba y se decide](../../experiments/asr-local/PLAN-VOZ-REAL.md#129-dos-candidatos-para-comparar-en-diálogos-reales-2026-10-30)).
+  - **2026-11-02 (voz real, 9 llamadas guionadas por Meet con dos voces, no es rendimiento):** Parakeet con Silero solo (A) y con RMS 0,8 s / 0,008 y filtro Silero (B), con Gemma 4 E2B: aviso en las 7 estafas y ninguno en las 2 legítimas, con las dos. Sobre el mismo audio, B da WER 25,6 % y A 32,8 %, 127 y 205 segmentos para 129 frases, y A saca la frase final 0,75 s antes y mete más palabras en otro idioma. E2B no cumple los 2 s de #84: mediana de 3,74 s por consulta en el M1 de 8 GB. Luciano eligió B para la demo y como valor por defecto del panel; eso no cambia el candidato de D09 ([corrida](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md)). El audio original [se perdió](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#audio-original-perdido) el mismo día: la medición no se puede repetir con esos archivos.
+  - Comparación de candidatos sobre desarrollo en [`docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md`](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md) ([#51](https://github.com/Corchets/bitacora_tesis/issues/51)); corridas en Apple M1 (`2026-10-17_150516_m1-gguf`) con Qwen3.5 0.8B y 2B completas y 4B interrumpida por swap/memoria ([`experiments/slm-directo/corridas/2026-10-17_150516_m1-gguf/resumen.md`](../../experiments/slm-directo/corridas/2026-10-17_150516_m1-gguf/resumen.md)), junto con el estudio de reproducibilidad M1 vs Windows 11 en [`experiments/slm-directo/analisis/2026-10-17-m1-vs-windows/`](../../experiments/slm-directo/analisis/2026-10-17-m1-vs-windows/).
+- Matriz Tito→SLM ejecutada el 2026-10-26 (material de desarrollo, no test): 6 artefactos × 8 conversaciones × 2 variantes = 96 evaluaciones con Tito real único y umbral 0,5; consolidado y regeneración en [`experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/`](../../experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/CONSOLIDADO.md) ([#74](https://github.com/Corchets/bitacora_tesis/issues/74), parte de #68). No cierra D07/D08/D09 ni #51; revisión cruzada pendiente.
+- **Continuación acordada con el usuario (2026-10-27):** [#95](https://github.com/Corchets/bitacora_tesis/issues/95)
+  prioriza evaluación independiente revisada y diagnóstico del Tito actual;
+  mantiene RoBERTuito para este trabajo y permite comparar encoder congelado y
+  fine-tuning condicionado a calidad insuficiente, además de frase aislada y
+  contexto reciente. Después se mide el flujo completo y una política de
+  reconsulta. [Acuerdo y alcance en ARQUITECTURA §7.5](../ingenieria/ARQUITECTURA.md#75-continuación-acordada-validar-tito-antes-de-optimizar-consultas).
+  La especificación tiene `ready-for-agent`, está asignada a Ignacio en H4 y
+  conserva pendientes explícitos de referencia, particiones, criterio de
+  insuficiencia y margen preventivo mínimo. No se ejecutaron nuevas corridas
+  ni se resolvieron D07/D08/D09 por publicar este plan.
+  Descomposición aprobada el 2026-10-27 y publicada en siete subissues (#96–#102)
+  de #95, con seis bloqueos nativos; las primeras entregas disponibles son
+  [#96](https://github.com/Corchets/bitacora_tesis/issues/96) y
+  [#97](https://github.com/Corchets/bitacora_tesis/issues/97), en paralelo.
+
+- **Aceptación de la curación de Tito (2026-10-28):** el usuario revisó los
+  informes y aprobó #96 expresamente; el issue queda cerrado para continuar
+  la secuencia de #95. [Registro de aprobación](../../experiments/slm-directo/CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
+  Codex creó #103 por interpretar incorrectamente que se aprobaban solo informes;
+  se retiró como no planificado y se eliminó su bloqueo de #98. No constituye una
+  nueva condición ni exige otra aprobación de #96. Se conserva la distinción entre
+  revisión IA y aprobación humana, sin atribuir anotaciones inexistentes a otras
+  personas. No resuelve D07/D08/D09 ni implica entrenamiento o inferencia.
 
 ### D10 — Congelar estructura de entrega y defensa
 
@@ -220,6 +367,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Decisión registrada:** detector sobre transcripción y contexto de la llamada
   actual. El audio se usa para ASR y mediciones; los rasgos acústicos quedan como
   trabajo futuro.
+- **Evidencia nueva disponible (2026-10-17, material de desarrollo, no test):** En el replay E2E sobre audio TTS ([`experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md`](../../experiments/replay/corridas/2026-10-17_RESUMEN-E2E.md) y [`docs/evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md`](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md)), se observaron falsas alarmas de 0.8B y 2B en la única legítima mono y una confusión de mención con pedido. Cambian también la segmentación y las latencias entre mono y estéreo: este par TTS no aísla el efecto del hablante ni establece la separación de canales como requisito. D11 sigue abierta.
 - **Cómo seguir:** ratificar entre los cuatro «solo transcripción» para acotar el
   pipeline; seguimiento en
   [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
@@ -265,10 +413,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   como grupo de cuatro.
 - **Formato base:** entrega digital, A4, carilla simple, portada institucional,
   resúmenes español/inglés, cuerpo técnico y unas 100 páginas como referencia.
-- **Horizonte:** entrega hacia fines de diciembre de 2026; falta el día exacto. El
-  equipo trabaja contra un cierre interno propio el 1 de diciembre; el reparto de
-  semanas está en [PLAN-DE-TRABAJO.md §11](../propuesta/PLAN-DE-TRABAJO.md#11-cronograma)
-  y es propuesta sin discutir por los cuatro.
+- **Horizonte (actualizado el 2026-10-28 por el tutor):** 90 % el 2026-11-15, todo
+  terminado el 2026-11-30, entrega de documentación y presentación en vivo de 20–30 min
+  en la segunda semana de diciembre; falta el día exacto. Reparto de semanas en
+  [PLAN-DE-TRABAJO.md §11](../propuesta/PLAN-DE-TRABAJO.md#11-cronograma).
 - **No basar la tesis en capturar cualquier llamada PSTN desde una app Android
   ordinaria:** la plataforma reserva esas fuentes a componentes privilegiados.
 - **Separar motor e integración:** replay en streaming es la base experimental;

@@ -1,0 +1,136 @@
+{
+  "llamada_id": "VIVO-20261026-153153",
+  "asr": {
+    "motor": "sherpa-zipformer",
+    "modelo_id": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "ruta_modelo": "/Users/lucianogrosso/bitacora_tesis-voip/experiments/asr-local/modelos/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06",
+    "es_streaming": true,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "endpoint_detection_nativo",
+      "rule1_silence": 2.4,
+      "rule2_silence": 1.0,
+      "rule3_utterance": 20.0
+    }
+  },
+  "disparo": "parcial",
+  "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
+  "canales": {
+    "protegida": {
+      "letra": "B",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.002,
+        "mediana": -0.001,
+        "p95": 0.022,
+        "max": 0.226
+      },
+      "retraso_parcial_s": {
+        "n": 5,
+        "min": 0.037,
+        "mediana": 0.062,
+        "p95": 0.136,
+        "max": 0.146
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 2,
+        "min": 0.419,
+        "mediana": 0.61,
+        "p95": 0.781,
+        "max": 0.8
+      }
+    },
+    "otra": {
+      "letra": "A",
+      "inicio_s": 0.0,
+      "duracion_s": 22.217,
+      "desfase_llegada_s": {
+        "n": 556,
+        "min": -0.002,
+        "mediana": -0.001,
+        "p95": 0.035,
+        "max": 0.227
+      },
+      "retraso_parcial_s": {
+        "n": 9,
+        "min": 0.036,
+        "mediana": 0.059,
+        "p95": 0.103,
+        "max": 0.11
+      },
+      "retraso_final_desde_voz_s": {
+        "n": 3,
+        "min": 0.802,
+        "mediana": 0.802,
+        "p95": 0.837,
+        "max": 0.841
+      }
+    }
+  },
+  "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)",
+  "detector": {
+    "evaluaciones": 13,
+    "fallos": 0,
+    "actualizaciones_salteadas": 0,
+    "segundos_detector": {
+      "n": 13,
+      "min": 0.778,
+      "mediana": 1.15,
+      "p95": 1.549,
+      "max": 2.106
+    },
+    "aviso": {
+      "n": 13,
+      "saltadas": 0,
+      "inicio_eval_s": 15.414,
+      "fin_eval_s": 17.522,
+      "ms_detector": 2105.9,
+      "valida": true,
+      "error": "",
+      "riesgo": 1.0,
+      "alerta_sugerida": true,
+      "motivo": "Te están solicitando un código de verificación para activar tu cuenta de WhatsApp. Esto es una acción directa que permite robar datos personales o acceder a cuentas privadas.",
+      "evidencia": ". decime el código",
+      "aviso": true,
+      "t_a": 17.522,
+      "fin_voz_s": 12.6,
+      "demora_desde_fin_de_voz_s": 4.922
+    }
+  },
+  "config": {
+    "detector": "slm",
+    "modelo": "qwen3.5:0.8b-q8_0",
+    "prompt": "tarea",
+    "hablantes": "ab",
+    "ollama_url": "http://127.0.0.1:11434",
+    "seed": 42,
+    "corte_silencio_s": 0.8,
+    "hilos_asr": 2,
+    "carga_slm": {
+      "carga_ms": 322,
+      "error": "",
+      "memoria": {
+        "size_bytes": 1067869797,
+        "size_vram_bytes": 1067869797
+      },
+      "pensar": false
+    }
+  },
+  "codigo": {
+    "commit": "b33b1d7a5a6a8f938450f4bf92081e0b997059bc",
+    "cambios_sin_commit": false
+  },
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  }
+}

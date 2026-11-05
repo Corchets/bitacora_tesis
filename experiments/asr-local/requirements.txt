@@ -1,0 +1,6 @@
+# Dependencias para ASR local (#19)
+sherpa-onnx==1.13.8
+huggingface-hub>=2.2.0
+soundfile>=0.14.0
+numpy>=2.0.0
+faster-whisper>=1.2.0

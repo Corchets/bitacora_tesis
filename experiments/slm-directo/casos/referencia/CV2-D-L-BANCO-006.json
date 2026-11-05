@@ -1,0 +1,43 @@
+{
+  "case_id": "CV2-D-L-BANCO-006",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-BANCO-006",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 9,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 15,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 16,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 23,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "En L9 aparece «Eso explica una parte. También me apareció un mensaje con un código cuando abrí la app, pero yo no estaba entrando.» dentro de la consulta, sin que nadie pida repetirlo ni compartirlo. El caso prueba si se distingue una mención de código o clave de una solicitud observable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño mención incidental de un código de verificación recibido durante una consulta de saldo; nadie pide revelarlo.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición de desarrollo según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "SC-BANK-OTP-01",
+  "situacion": "Mención incidental de un código de verificación recibido durante una consulta de saldo; nadie pide revelarlo."
+}

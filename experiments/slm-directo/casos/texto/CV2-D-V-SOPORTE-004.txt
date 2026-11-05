@@ -1,0 +1,30 @@
+A: ¿Hola?
+B: Buenas, soy de mantenimiento de la plataforma de facturación.
+A: Hola, justo tengo una factura que no se termina de emitir.
+B: ¿Es la de la sucursal que figura como Norte?
+A: Sí. Queda en borrador y no me deja imprimirla.
+B: Nos pasa cuando la sesión de caja conserva un comprobante anterior.
+A: La computadora la usan dos turnos. Puede haber quedado algo abierto.
+B: ¿Tenés el importe del comprobante que se trabó?
+A: Dieciocho mil cuatrocientos. Es de una venta que ya cobramos.
+B: Bien, con eso me alcanza para ubicar cuál es. No cierres el borrador todavía.
+A: No lo cerré. ¿Lo pueden anular de su lado?
+B: Primero quiero ver qué ventana quedó tomada. Te llegó una invitación de asistencia.
+A: Acaba de aparecer. Dice que alguien de otro equipo quiere controlar esta computadora.
+B: Dale permiso a esa ventana para mover el cursor; yo sigo desde acá.
+A: ¿Eso te deja escribir también?
+B: Sí, si solo me mostrás la imagen no puedo destrabar el campo.
+A: Nunca había usado esa opción con ustedes.
+B: Es el módulo nuevo. ¿Al lado tenés abierto el banco donde cobraste la venta?
+A: Tengo la cuenta del local en otra pestaña, pero eso no es parte del facturador.
+B: Dejála abierta también, así controlo que el cobro coincida mientras manejo la sesión.
+A: ¿Para qué necesitás operar en el banco si el error está en la factura?
+B: El importe se concilia en los dos lugares; si cerrás esa pestaña no lo puedo comprobar.
+A: Puedo mandarte el número del comprobante de la venta, no dar acceso a la cuenta.
+B: Con el número solo no veo cuál quedó retenido.
+A: Voy a cancelar la invitación. No me avisaron de ningún cambio de soporte.
+B: Si la cancelás, te vuelven a asignar al final de la cola.
+A: Prefiero esperar. La caja del otro turno todavía está funcionando.
+B: No hace falta frenar el local por esto, es un permiso de unos minutos.
+A: No lo acepté. Voy a abrir un reclamo desde el portal de atención.
+B: Bueno, queda pendiente la revisión.

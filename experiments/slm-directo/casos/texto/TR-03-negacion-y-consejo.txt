@@ -1,0 +1,10 @@
+A: Hola, hijo. Te llamo porque en la tele dijeron algo de unas llamadas raras y me quedé preocupada.
+B: Bien que me llames, ma. Escuchame una cosa: nunca le pases la clave del banco a nadie, ni a mí.
+A: ¿Ni aunque me llamen del banco?
+B: Menos. El banco no te va a pedir el código que te llega por mensaje, ni el PIN, ni que instales nada en el celular.
+A: ¿Y si me dicen que tengo que transferir para que no me bloqueen la cuenta?
+B: No transfieras nada. Cortás, y si querés llamás vos al número que está atrás de la tarjeta.
+A: ¿Y si me piden que comparta la pantalla para ayudarme con la aplicación?
+B: Tampoco. Nadie de afuera tiene que ver tu pantalla. Si no entendés algo, me esperás y lo vemos juntos el domingo.
+A: Bueno, lo anoto en el papelito de la heladera.
+B: Eso. Y no anotes la clave en el mismo papel, eh.

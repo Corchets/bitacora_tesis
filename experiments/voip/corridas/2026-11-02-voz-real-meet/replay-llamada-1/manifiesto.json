@@ -1,0 +1,99 @@
+{
+  "fecha_hora": "2026-11-02T20:29:45",
+  "comando": "replay.py --actualizaciones ../voip/llamadas/2026-11-02_191055-519549/actualizaciones.jsonl --detector tito-slm --modelo gemma4:e2b-it-q4_K_M --salida ../voip/corridas/2026-11-02-voz-real-meet/replay-llamada-1",
+  "entradas": {
+    "ruta": "../voip/llamadas/2026-11-02_191055-519549/actualizaciones.jsonl",
+    "sha256": "b6c08f8246bdffd729274f00c09c545b6c261b7f888db11f0d490ac70707bad8",
+    "tamano_bytes": 16815,
+    "tipo": "actualizaciones_jsonl"
+  },
+  "config": {
+    "detector": "tito-slm",
+    "modelo": "gemma4:e2b-it-q4_K_M",
+    "prompt": "tarea",
+    "hablantes": "ab",
+    "disparo": "final",
+    "politica": "aviso_unico_primer_true_valido",
+    "seed": 42
+  },
+  "codigo": {
+    "commit": "f3a047cdeda0b10b96fbc53e13390fbffc2c86c0",
+    "cambios_sin_commit": false
+  },
+  "hardware": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "arquitectura": "arm64",
+    "procesador": "arm",
+    "nucleos_logicos": 8,
+    "ram_total_gb": 8.0,
+    "python": "3.13.15"
+  },
+  "carga": {
+    "carga_ms": 784,
+    "calentamiento_ms": 784,
+    "unidad": "ms",
+    "chequeo_contrato": "ok",
+    "error": "",
+    "memoria": {
+      "size_bytes": 230382632,
+      "size_vram_bytes": 230382632
+    },
+    "pensar": false,
+    "runtime_total_ns": 742375167,
+    "runtime_load_ns": 24071625,
+    "runtime_prompt_eval_ns": 139238000,
+    "runtime_eval_ns": 478014000,
+    "tito": {
+      "artefacto": "tito_logreg.json",
+      "sha256": "fb601eaa8ecb8d51e0d37f1d5af00ec4ca41706ef638fe2780ae276e5098eccd",
+      "umbral": 0.5,
+      "artefacto_ms": 0.6,
+      "artefacto_desde_cache": false,
+      "encoder_ms": 4757.5,
+      "encoder_desde_cache": false,
+      "calentamiento_ms": 1488.9,
+      "error": "",
+      "unidad": "ms"
+    }
+  },
+  "asr_meta": {
+    "motor": "sherpa-parakeet",
+    "modelo_id": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+    "ruta_modelo": "/Users/lucianogrosso/orca/workspaces/bitacora_tesis/tito-gemma-pendientes/experiments/asr-local/modelos/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+    "es_streaming": false,
+    "tipo_entrega": "parciales_y_finales",
+    "version_sherpa": "1.13.8",
+    "hilos": 2,
+    "sample_rate": 16000,
+    "segmentacion": {
+      "tipo": "corte_por_silencio_rms_filtro_silero",
+      "corte_silencio_s": 0.8,
+      "umbral_rms_silencio": 0.008,
+      "previo_s": 0.3,
+      "max_frase_s": 10.0,
+      "min_voz_s": 0.3,
+      "min_voz_parcial_s": 1.0,
+      "parciales_cada_s": 0.5,
+      "filtro_idioma": "parciales_y_muletillas_finales",
+      "vad": {
+        "tipo": "silero_vad_sherpa_onnx",
+        "modelo": "silero_vad.onnx",
+        "sha256_16": "9e2449e1087496d8",
+        "umbral": 0.5,
+        "umbral_para_seguir": 0.35,
+        "ventana": 512,
+        "min_silence_duration": 0.0,
+        "min_speech_duration": 0.0,
+        "hilos": 1,
+        "costo_por_bloque": null,
+        "modo": "filtro"
+      }
+    },
+    "decodificacion": {
+      "decoding_method": "greedy_search",
+      "model_type": "nemo_transducer"
+    },
+    "modo": "en_vivo",
+    "roles": "cada línea trae `canal`: protegida (micrófono de la persona a proteger) u otra"
+  }
+}

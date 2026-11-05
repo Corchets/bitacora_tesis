@@ -1,0 +1,5 @@
+A: hola te llamo de la tarjeta por un cargo que no reconocemos
+B: ah si cual
+A: se cae la operacion si no lo confirmas ahora
+B: y como lo confirmo
+A: leeme lo que te acaba de llegar al telefono, de a uno

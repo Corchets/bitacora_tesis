@@ -1,0 +1,22 @@
+A: Hola, asistencia del portal de trámites. Estamos revisando una firma iniciada con su usuario.
+B: Un segundo, le saco el altavoz que estoy en el colectivo.
+A: Lo escucho.
+B: Ahora sí. ¿Una firma? Yo pedí información para un certificado.
+A: Puede quedar una sesión generada desde esa consulta.
+B: Pero yo no entré al portal, pregunté los requisitos por teléfono.
+A: La oficina carga la consulta y se abre el borrador automáticamente.
+B: ¿Para un certificado de domicilio?
+A: Para ese tipo de certificados, sí.
+B: No le dije qué certificado era. ¿Usted cuál tiene?
+A: El detalle aparece cuando termine de cargar la ficha.
+B: Bueno. ¿Me puede dar el número del reclamo así lo miro más tarde?
+A: Todavía no tiene número, primero se confirma la incidencia.
+B: ¿Y de dónde sacaron mi teléfono?
+A: Está asociado al usuario consultado. A veces el registro queda atrasado.
+B: Tengo dos usuarios viejos, no sé cuál quedó.
+A: Lo vemos en la siguiente pantalla.
+B: Entramos al túnel y se va a cortar, no la escucho bien.
+A: Antes de que pase eso tendría que quedar confirmado el control.
+B: ¿Qué control? Se entrecorta todo.
+A: Me aparece una demora en la carga.
+B: ¿Hola? Cuando tenga el número de caso vuelvo a consultar. Hasta luego.

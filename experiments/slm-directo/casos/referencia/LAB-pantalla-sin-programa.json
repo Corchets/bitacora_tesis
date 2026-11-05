@@ -1,0 +1,19 @@
+{
+  "case_id": "LAB-pantalla-sin-programa",
+  "grupo": "laboratorio",
+  "semilla": null,
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 3,
+  "t_c_linea": null,
+  "pedido": "REQUEST_REMOTE_ACCESS",
+  "evidencia": [
+    {"linea": 1, "evento": "contexto", "etiquetas": ["AUTHORITY_CLAIM"]},
+    {"linea": 3, "evento": "pedido", "etiquetas": ["REQUEST_REMOTE_ACCESS"]},
+    {"linea": 5, "evento": "contexto", "etiquetas": []}
+  ],
+  "que_prueba": "Pide bajar un «programita» y mirar la pantalla del celular sin nombrar un programa de acceso remoto ni decir «instala».",
+  "origen": "Guion del laboratorio experiments/laboratorio/casos/dificiles/vishing/pantalla-sin-programa.txt (rama laboratorio-main, commit a39fca6), inventado por el equipo; convertido al formato del ensayo #50 el 2026-10-13 sin cambiar el texto. Fuente citada en el guion: BCRA, 6 de agosto de 2025 (redacción propia); consulta 2026-09-24.",
+  "revision_humana": false,
+  "notas": "Incendio esperado por el laboratorio: el guion no fija turno; la etiqueta esperada es REQUEST_REMOTE_ACCESS y el texto evita las palabras de la regla (resultados-2026-09-24.csv: sin incendio ni opinión de goteo). t_r_linea = 3: «bajate este programita y dejame mirar lo que ves en el celular». Sin cumplimiento: B dice «no entiendo» y A justifica el pedido en la línea 5. Texto en minúsculas y sin tildes, como en el guion original (estilo salida de ASR), sin corregir; las letras A/B se agregaron en la conversión."
+}

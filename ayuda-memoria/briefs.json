@@ -4,30 +4,30 @@
     {
       "branch": "laboratorio-main",
       "issue": 39,
-      "goal": "Producir un primer par de conversaciones contrastantes con audio utilizable, texto revisado y referencia humana mínima. Este par permite arrancar ASR y reglas sin esperar el piloto completo. La guía de esta rama comienza por verificar diferencias de versión.",
-      "start": "Esta rama conserva versiones anteriores del método y del manual; el contrato actual del issue refiere a H1 y a docs/corpus/ en Main. Localizá esa versión o integrala antes de aplicar el procedimiento. Verificá el par escrito de H1 (SC-WA-CODE-01 / LG-WA-CONSULTA-01), prepará las fichas separadas de cada rol y acordá quién revisa las tomas. Antes de grabar, comprobá las condiciones del método; usá datos y acciones ficticios.",
-      "done": "Otra persona puede revisar la coherencia entre audio, texto y referencia. Quedan identificados semilla, condiciones, esfuerzo y problemas. Audio y materiales vinculables permanecen fuera de Git.",
+      "goal": "Producir el primer par de conversaciones contrastantes (SC-WA-CODE-01 / LG-WA-CONSULTA-01) con audio utilizable, texto revisado contra la toma y referencia mínima. Destraba ASR con voz humana (#19) y el detector (#50) sin esperar el piloto completo (#54).",
+      "start": "El tutor aprobó grabar el 2026-10-28 (D06). Antes de grabar, completá fuera de Git el domicilio y contacto reales de los consentimientos y confirmá que ambos interlocutores adultos firmaron. Después seguí el kit: verificación del par escrito, fichas separadas por rol, checklist previa y procedimiento de toma. Usá datos y acciones ficticios; audio y consentimientos quedan fuera de Git, sin permiso para publicar las voces.",
+      "done": "Otra persona revisa la coherencia entre audio, texto y referencia (clase, T_R/T_C cuando correspondan y evidencia). Quedan registrados semilla, condiciones de grabación, esfuerzo y problemas; método o manual se corrigen si el par descubre ambigüedades.",
       "sources": [
         {
-          "path": "docs/ingenieria/ARQUITECTURA.md",
-          "label": "Arquitectura y primer par",
-          "why": "Arquitectura anterior del spike: no contiene el par H1 vigente de Main. Revisá diferencias, no asumas cumplimiento del contrato."
+          "path": "docs/corpus/KIT-PRIMER-PAR.md",
+          "label": "Kit del primer par",
+          "why": "Pasos de verificación, fichas por rol, checklist previa, toma y revisión."
         },
         {
-          "path": "docs/datos-etica/METODO-CREACION-CORPUS.md",
+          "path": "docs/corpus/METODO-CREACION-CORPUS.md",
           "label": "Método del corpus",
-          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+          "why": "Condiciones de participación, consentimiento y resguardo."
         },
         {
-          "path": "docs/datos-etica/MANUAL-ANOTACION.md",
+          "path": "docs/corpus/MANUAL-ANOTACION.md",
           "label": "Referencia humana mínima",
-          "why": "Documento anterior conservado en laboratorio. Contrastalo con el contrato actual del issue antes de aplicarlo."
+          "why": "Cómo marcar clase, T_R/T_C y evidencia por conversación."
         }
       ],
       "review": {
-        "at": "2026-10-07T23:30:06.970Z",
-        "branchSha": "48882776ccd49560690057b991152862b648f5f4",
-        "fingerprint": "ddffb20b374682c5e2d7325b6acf66d057cf9f31a593748bd8742ca7cf2f3cd6"
+        "at": "2026-10-29T13:00:52.051Z",
+        "branchSha": "e441b2281f6fbc0a6ce384962ff10e8d9f22b110",
+        "fingerprint": "ffe81dc551446d08cf727bdbbcdf048eac41204eae407d6d339626cee35fe8c1"
       }
     },
     {

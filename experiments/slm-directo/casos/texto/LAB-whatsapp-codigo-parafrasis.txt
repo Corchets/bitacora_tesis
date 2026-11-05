@@ -1,0 +1,5 @@
+A: te llamo del soporte de mensajes hay un acceso raro
+B: como que acceso raro
+A: te mandamos un codigo de verificacion pasamelo
+B: te lo dicto uno siete dos nueve
+A: listo ya quedo bloqueado

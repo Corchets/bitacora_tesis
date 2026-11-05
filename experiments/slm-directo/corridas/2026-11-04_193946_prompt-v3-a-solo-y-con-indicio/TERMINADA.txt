@@ -1,0 +1,3 @@
+SLM solo + Tito con indicio, prompt v3
+commit a42e1b5504f0015669997898441dbfb552198b4a
+minutos 31.8

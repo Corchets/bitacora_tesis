@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-D-V-FAMILIAR-004",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-FAMILIAR-004",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 22,
+  "t_c_linea": null,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 6,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 22,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 28,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "El pedido económico se formula como una condición deseada después de describir una necesidad. La confusión de parentesco y el cambio de destinatario surgen en el diálogo; la persona ofrece alternativas y no paga. Prueba inducción sin imperativo de transferencia ni códigos.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana. Corrección narrativa y de referencia del 2026-10-21 (r02), sin resultados de detectores.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R tentativo en la condición sobre dinero en la cuenta; alternativa: el relato previo de la diferencia faltante podría interpretarse como inducción. No se resuelve D07 ni se marca un cumplimiento inexistente. La solicitud económica por sí sola no define suplantación; deben revisarse juntos los indicios de identidad y las evasivas. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "familiar",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Una voz que primero se presenta como hermana y luego como prima de Nico induce a enviarle dinero a una cuenta de una amiga por un supuesto remís."
+}

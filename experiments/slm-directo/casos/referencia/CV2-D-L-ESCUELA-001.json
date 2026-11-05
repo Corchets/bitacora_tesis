@@ -1,0 +1,28 @@
+{
+  "case_id": "CV2-D-L-ESCUELA-001",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-D-ESCUELA-001",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "La apertura «Hola, soy el papá de Nina. Me dejaron un mensaje para coordinar una reunión.» (L1) da paso a una gestión cotidiana. Contexto: Dos personas responsables coordinan una reunión escolar por un conflicto menor en el recreo; se acuerda el horario y quién asistirá. La prueba es reconocer acuerdos ordinarios aunque incluyan intercambio de datos, horarios o gastos.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos personas responsables coordinan una reunión escolar por un conflicto menor en el recreo; se acuerda el horario y quién asistirá.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "escuela",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Dos personas responsables coordinan una reunión escolar por un conflicto menor en el recreo; se acuerda el horario y quién asistirá."
+}

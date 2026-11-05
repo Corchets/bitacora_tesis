@@ -1,0 +1,453 @@
+﻿config,detector,modelo,prompt,hablantes,case_id,linea,hablante,texto,valida,error,riesgo,alerta_sugerida,aviso,motivo,evidencia,evidencia_en_texto,ms,tokens_prompt,tokens_salida,crudo
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-WA-CODE-01-e01,1,A,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.0,false,false,,A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.,,709.3,473,56,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-WA-CODE-01-e01,2,B,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.0,false,false,,"1. A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.
+2. B: Me acaba de llegar un SMS. No pedí activar nada.",,868.6,492,77,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""1. A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.\n2. B: Me acaba de llegar un SMS. No pedí activar nada.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-WA-CODE-01-e01,3,A,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.1,false,false,,,,525.0,508,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-WA-CODE-01-e01,4,A,Decime el código de activación que recibiste por SMS.,true,,0.8,true,true,Te están pidiendo un código de activación que da acceso a tu cuenta,"A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.
+2. B: Me acaba de llegar un SMS. No pedí activar nada.
+3. A: Para cancelar esa activación tenemos que resolverlo ahora.
+4. A: Decime el código de activación que recibiste por SMS.",false,1377.4,526,128,"{
+  ""riesgo"": 0.8,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo un código de activación que da acceso a tu cuenta"",
+  ""evidencia"": ""A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.\n2. B: Me acaba de llegar un SMS. No pedí activar nada.\n3. A: Para cancelar esa activación tenemos que resolverlo ahora.\n4. A: Decime el código de activación que recibiste por SMS.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-WA-CODE-01-e01,5,B,"Es cero, cero, cero, cero, cero, cero.",true,,0.8,true,false,Te están pidiendo un código de activación que da acceso a tu cuenta,"A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.
+2. B: Me acaba de llegar un SMS. No pedí activar nada.
+3. A: Para cancelar esa activación tenemos que resolverlo ahora.
+4. A: Decime el código de activación que recibiste por SMS.",false,1378.9,544,128,"{
+  ""riesgo"": 0.8,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo un código de activación que da acceso a tu cuenta"",
+  ""evidencia"": ""A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.\n2. B: Me acaba de llegar un SMS. No pedí activar nada.\n3. A: Para cancelar esa activación tenemos que resolverlo ahora.\n4. A: Decime el código de activación que recibiste por SMS.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-WA-CONSULTA-01-e01,1,A,Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.,true,,0.2,false,false,,A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.,,707.5,475,60,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-WA-CONSULTA-01-e01,2,B,No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación.,true,,0.1,false,false,,A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.,,713.4,499,60,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-WA-CONSULTA-01-e01,3,A,¿Necesitás verlo para ayudarme?,true,,0.2,false,false,,"1. A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.
+2. B: No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación.
+3. A: ¿Necesitás verlo para ayudarme?",,1102.0,513,100,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""1. A: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí.\n2. B: No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación.\n3. A: ¿Necesitás verlo para ayudarme?""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-WA-CONSULTA-01-e01,4,B,No. No hace falta que me digas ningún código.,true,,0.0,false,false,,,,514.8,530,39,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,1,A,"Hola, buenas tardes. ¿Hablo con Laura Domínguez?",true,,0.0,false,false,,"A: Hola, buenas tardes. ¿Hablo con Laura Domínguez?",,689.6,474,57,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Hola, buenas tardes. ¿Hablo con Laura Domínguez?""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,2,B,"Sí, soy yo. ¿Quién habla?",true,,0.0,false,false,,,,568.8,488,39,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,3,A,"Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino.",true,,0.15,false,false,,"A: Hola, buenas tardes. ¿Hablo con Laura Domínguez?
+2. B: Sí, soy yo. ¿Quién habla?
+3. A: Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino.",,1258.7,530,116,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Hola, buenas tardes. ¿Hablo con Laura Domínguez?\n2. B: Sí, soy yo. ¿Quién habla?\n3. A: Te llamo de la mesa de ayuda de la billetera, soy Gastón. Estamos pasando las cuentas a la plataforma nueva y la tuya quedó trabada a mitad de camino.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,4,B,"Ah, ¿por eso el otro día no me dejaba entrar desde la computadora?",true,,0.15,false,false,,,,555.6,552,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,5,A,"Exacto, es por eso. Ya te abrí un número de gestión, el cero, cero, uno, dos, tres, así queda todo registrado a tu nombre.",true,,0.3,false,false,,,,570.6,592,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,6,A,Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.,true,,0.85,true,true,Te están pidiendo un código de verificación y una contraseña para validar tu acceso a tu cuenta,A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.,true,1002.0,620,88,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo un código de verificación y una contraseña para validar tu acceso a tu cuenta"",
+  ""evidencia"": ""A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,7,B,¿La contraseña? En la aplicación dice que no se la pase a nadie.,true,,0.65,false,false,,,,556.5,641,42,"{
+  ""riesgo"": 0.65,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,8,A,"Está muy bien que lo tengas presente; eso es para que no se la des a desconocidos. Yo estoy del lado del sistema, y en cuanto termina el pase la podés cambiar.",true,,0.65,false,false,,,,558.1,685,42,"{
+  ""riesgo"": 0.65,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,9,B,No sé... ¿No lo puedo hacer yo desde la aplicación?,true,,0.3,false,false,,,,546.0,703,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,10,A,"Desde la aplicación no te va a dejar, porque tu cuenta sigue en la plataforma vieja. Por eso te llamamos nosotros; es un minuto.",true,,0.65,false,false,,,,560.4,740,42,"{
+  ""riesgo"": 0.65,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,11,B,"Bueno, dale. El usuario es laura punto prueba, todo en minúscula.",true,,0.85,false,false,,,,559.6,766,42,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,12,A,Perfecto. ¿Y la contraseña?,true,,0.85,true,false,Te están pidiendo un código de verificación y una contraseña para validar tu acceso a tu cuenta,A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.,true,997.7,780,88,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo un código de verificación y una contraseña para validar tu acceso a tu cuenta"",
+  ""evidencia"": ""A: Para terminar el pase necesito validar tu acceso: decime el usuario con el que entrás y la contraseña.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,13,B,"Prueba uno, dos, tres, cuatro, con la pe mayúscula.",true,,0.85,false,false,,A: Decime el usuario con el que entrás y la contraseña.,,662.0,804,53,"{
+""riesgo"": 0.85,
+""alerta_sugerida"": false,
+""motivo"": """",
+""evidencia"": ""A: Decime el usuario con el que entrás y la contraseña.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,SC-SOPORTE-CLAVE-01-e01,14,A,"Listo, Laura, ya quedó pasada a la plataforma nueva. Cualquier novedad te llamamos nosotros.",true,,0.85,true,false,Te están pidiendo un código de verificación y una contraseña para validar tu acceso a tu cuenta,"A: Listo, Laura, ya quedó pasada a la plataforma nueva. Cualquier novedad te llamamos nosotros.",true,986.5,831,86,"{
+  ""riesgo"": 0.85,
+  ""alerta_sugerida"": true,
+  ""motivo"": ""Te están pidiendo un código de verificación y una contraseña para validar tu acceso a tu cuenta"",
+  ""evidencia"": ""A: Listo, Laura, ya quedó pasada a la plataforma nueva. Cualquier novedad te llamamos nosotros.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,1,A,"Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar?",true,,0.0,false,false,,"A: Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar?",,781.8,483,66,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar?""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,2,B,"Hola, ¿qué tal? Los llamo porque no puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos.",true,,0.1,false,false,,"B: Hola, ¿qué tal? Los llamo porque no puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos.",,825.4,520,75,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""B: Hola, ¿qué tal? Los llamo porque no puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,3,A,"Bien, lo vemos. Antes que nada, no me digas ni tu usuario ni tu contraseña; para esto no los necesito.",true,,0.15,false,false,,"A: Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar?
+B: Hola, ¿qué tal? Los llamo porque no puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos.
+A: Bien, lo vemos. Antes que nada, no me digas ni tu usuario ni tu contraseña; para esto no los necesito.",,1382.2,552,134,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar?\nB: Hola, ¿qué tal? Los llamo porque no puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos.\nA: Bien, lo vemos. Antes que nada, no me digas ni tu usuario ni tu contraseña; para esto no los necesito.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,4,B,"Ah, yo te los iba a pasar para que te fijes vos si están bien.",true,,0.35,false,false,,,,497.5,575,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,5,A,No hace falta. Nosotros no vemos tu clave y nadie de la mesa de ayuda te la va a pedir.,true,,0.3,false,false,,,,494.1,602,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,6,B,¿Y entonces cómo lo arreglo? Tengo que pagar algo hoy.,true,,0.3,false,false,,,,498.8,620,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,7,A,En la pantalla de ingreso tocá «Olvidé mi contraseña». Te va a llegar un correo a la dirección que tenés registrada.,true,,0.3,false,false,,,,513.8,653,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,8,B,Ya me llegó. ¿Te leo lo que dice?,true,,0.3,false,false,,,,527.3,669,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,9,A,"No, ese correo es para vos. Seguí los pasos ahí mismo y elegí una clave nueva que no uses en otro lado.",true,,0.65,false,false,,,,538.8,701,42,"{
+  ""riesgo"": 0.65,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,10,B,"Listo, ya la cambié. ¿Querés que te la diga para que quede anotada?",true,,0.35,false,false,,,,531.9,729,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,11,A,"No, por favor. La clave nueva no se la digas a nadie, tampoco a nosotros. Probá entrar ahora.",true,,0.35,false,false,,,,557.9,760,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,12,B,"Entré. Uy, gracias, pensé que me habían bloqueado la cuenta.",true,,0.35,false,false,,,,539.5,782,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,LG-SUPPORT-INFO-01-e01,13,A,"De nada. Si te vuelve a pasar, escribinos por el chat de la aplicación y lo vemos.",true,,0.25,false,false,,,,544.3,810,42,"{
+  ""riesgo"": 0.25,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,1,A,"Hola, buenas tardes. ¿Hablo con Mariela Sosa?",true,,0.0,false,false,,"A: Hola, buenas tardes. ¿Hablo con Mariela Sosa?",,614.2,473,56,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Hola, buenas tardes. ¿Hablo con Mariela Sosa?""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,2,B,"Sí, ella habla.",true,,0.0,false,false,,,,455.6,483,39,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,3,A,"Mariela, te llamo del área de seguridad de la tarjeta. Estamos viendo un consumo en curso en un local de deportes, por ciento cuarenta mil pesos. ¿Lo estás haciendo vos?",true,,0.15,false,false,,,,487.0,528,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,4,B,"No, para nada. Estoy en el trabajo.",true,,0.15,false,false,,,,490.6,543,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,5,A,"Me imaginaba. Lo tengo retenido, pero si no lo confirmamos en los próximos minutos se termina acreditando.",true,,0.15,false,false,,,,497.3,572,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,6,A,Te mandé un mensaje para validar que la que atiende es la titular. Fijate si ya te entró.,true,,0.3,false,false,,,,513.7,602,41,"{
+  ""riesgo"": 0.3,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,7,B,"Sí, ahí me llegó uno recién.",true,,0.35,false,false,,,,506.1,615,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,8,A,"Perfecto. Abrilo y leeme lo que dice, de a uno, despacito, que lo voy cargando.",true,,0.65,false,false,,,,534.5,646,42,"{
+  ""riesgo"": 0.65,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,9,B,¿Todo? Abajo dice que no lo comparta con nadie.,true,,0.35,false,false,,,,514.7,665,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,10,A,"Eso viene en todos los mensajes, es automático. Lo de arriba nomás, de a uno.",true,,0.35,false,false,,,,519.4,692,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,11,B,Bueno. Uno... dos... tres... cuatro... cinco... seis.,true,,0.35,false,false,,,,528.5,712,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-01-pedido-indirecto-digitos,12,A,"Listo, Mariela. Quedó anulado; en un rato te llega la confirmación.",true,,0.35,false,false,,,,533.6,739,42,"{
+  ""riesgo"": 0.35,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,1,A,"Che, Caro, ya estoy en tu edificio. Vengo a buscar las sillas plegables como quedamos.",true,,0.2,false,false,,"A: Che, Caro, ya estoy en tu edificio. Vengo a buscar las sillas plegables como quedamos.",,721.0,482,67,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Che, Caro, ya estoy en tu edificio. Vengo a buscar las sillas plegables como quedamos.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,2,B,"Genial. Están en la baulera del subsuelo, la última del pasillo. Llevate las blancas, que las de madera están rotas.",true,,0.1,false,false,,"A: Che, Caro, ya estoy en tu edificio. Vengo a buscar las sillas plegables como quedamos.
+2. B: Genial. Están en la baulera del subsuelo, la última del pasillo. Llevate las blancas, que las de madera están rotas.",,1125.5,523,108,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Che, Caro, ya estoy en tu edificio. Vengo a buscar las sillas plegables como quedamos.\n2. B: Genial. Están en la baulera del subsuelo, la última del pasillo. Llevate las blancas, que las de madera están rotas.""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,3,A,Dale. ¿Cuál era el código del candado? Me lo dijiste el otro día y no me acuerdo.,true,,0.1,false,false,,,,487.3,551,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,4,B,"Cero, cero, cero, cero. Nunca lo cambié, ya sé que es un desastre.",true,,0.15,false,false,,,,496.6,578,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,5,A,"Jaja, perfecto. ¿Y la puerta del subsuelo tiene código o está abierta?",true,,0.1,false,false,,,,503.7,602,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,6,B,"Tiene. Es uno, dos, tres, cuatro y numeral. Después cerrá fuerte, que si no queda trabada.",true,,0.15,false,false,,,,508.8,632,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,7,A,"Listo, ya las tengo. El domingo, después del cumple, te las devuelvo.",true,,0.15,false,false,,,,511.7,657,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-02-codigo-del-candado,8,B,"Gracias. Avisame cuando las dejes, así le cambio el código al candado, que ya lo sabe medio edificio.",true,,0.15,false,false,,,,519.7,687,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-08-frase-cortada-candado,1,A,"Hola, Lu, ¿estás muy ocupada?",true,,0.0,false,false,,"A: Hola, Lu, ¿estás muy ocupada?",,576.1,469,52,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": ""A: Hola, Lu, ¿estás muy ocupada?""
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-08-frase-cortada-candado,2,B,"No, decime. Estoy saliendo del laburo.",true,,0.1,false,false,,,,475.4,486,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-08-frase-cortada-candado,3,A,Pasame el código,true,,0.15,false,false,,,,485.8,495,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-08-frase-cortada-candado,4,A,"del candado de la valija que me prestaste. La cerré sin pensar y ahora, en el hotel, no la puedo abrir.",true,,0.15,false,false,,,,491.0,529,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-08-frase-cortada-candado,5,B,"¡Ay, perdón! Te lo tenía que mandar antes de que salieras. Es uno, dos, tres.",true,,0.1,false,false,,,,485.7,558,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-08-frase-cortada-candado,6,A,"Listo, ya abrió. Gracias, te la devuelvo el lunes.",true,,0.15,false,false,,,,496.1,579,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-08-frase-cortada-candado,7,B,"Dale. Disfrutá, chau.",true,,0.15,false,false,,,,502.0,593,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,1,A,¿Hola?,true,,0.0,false,false,,,,447.0,461,39,"{
+  ""riesgo"": 0,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,2,B,"Abu... Abu, ¿me escuchás? Soy yo.",true,,0.1,false,false,,,,469.1,478,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,3,A,¿Quién habla? ¿Martín?,true,,0.1,false,false,,,,474.9,491,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,4,B,"Sí, abu, Martín. Tuve un problema con la moto: atropellé a una señora en una esquina y me trajeron a la comisaría.",true,,0.1,false,false,,,,477.4,529,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,5,A,"¡Ay, Dios mío! ¿Vos estás bien? ¿Y la señora?",true,,0.1,false,false,,,,484.7,552,41,"{
+  ""riesgo"": 0.1,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,6,B,"Yo estoy bien, un poco golpeado. A ella se la llevaron al hospital. Escuchame: no cortes y no le cuentes a nadie, ni al abuelo, que con lo del corazón no se puede enterar.",true,,0.15,false,false,,,,503.3,605,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,7,B,"Esto hay que arreglarlo hoy, antes de que me pasen al juzgado. Te paso con el abogado que me está ayudando, ¿sí?",true,,0.15,false,false,,,,511.4,642,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,8,A,"Esperá, Martín. Antes de nada quiero hablar con tu papá. Te corto y lo llamo.",true,,0.15,false,false,,,,516.9,669,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,9,B,"¡No, abu, no cortes! Si cortás va a ser peor para mí. Quedate en línea un minuto.",true,,0.15,false,false,,,,524.2,700,42,"{
+  ""riesgo"": 0.15,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"
+slm|qwen3.5:2b|tarea|ab,slm,qwen3.5:2b,tarea,ab,TR-12-corta-antes-del-pedido,10,A,"No, querido. Te corto.",true,,0.2,false,false,,,,518.3,714,41,"{
+  ""riesgo"": 0.2,
+  ""alerta_sugerida"": false,
+  ""motivo"": """",
+  ""evidencia"": """"
+}"

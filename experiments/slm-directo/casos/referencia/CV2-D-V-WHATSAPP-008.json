@@ -1,0 +1,44 @@
+{
+  "case_id": "CV2-D-V-WHATSAPP-008",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-D-WHATSAPP-008",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "contexto",
+      "etiquetas": [
+        "ISOLATION_SECRECY"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "contexto",
+      "etiquetas": [
+        "ISOLATION_SECRECY"
+      ]
+    }
+  ],
+  "que_prueba": "La feria y su grupo aportan un contexto comunitario plausible, pero el llamante no identifica a la organizadora y desalienta mensajes independientes. Prueba una escena sospechosa que termina sin pedir el código de registro.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa solicitud de acción crítica ni cumplimiento: T_R y T_C permanecen nulos. La alerta, la autoridad alegada y la presión hacen sospechosa la situación, pero la identidad e intención fraudulenta no son demostrables solo con la transcripción. La etiqueta de clase es una hipótesis de escenario para revisión humana en D07, no un acierto exigible frente a evidencia invisible. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "whatsapp",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Un supuesto administrador de feria anuncia cambios de cuenta en el grupo sin poder identificar a la organizadora; no solicita código ni permiso crítico."
+}

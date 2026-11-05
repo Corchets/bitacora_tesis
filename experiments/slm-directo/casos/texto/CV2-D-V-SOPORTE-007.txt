@@ -1,0 +1,21 @@
+A: Hola, decime.
+B: Buenas, te llamo de soporte de Clima Hogar por una actividad inusual en el perfil de consumo.
+A: ¿Qué actividad?
+B: Se abrió una sesión desde un equipo que no coincide con el domicilio.
+A: Yo estoy en mi casa y solo uso el teléfono.
+B: La consulta quedó en revisión; no cierres la pantalla del medidor por ahora.
+A: No abrí ninguna pantalla.
+B: El sistema mantiene la sesión activa aunque la aplicación esté en segundo plano.
+A: ¿Puedo ver desde dónde se conectaron?
+B: La ubicación aparece cuando termine el diagnóstico.
+A: ¿Qué quieren revisar?
+B: Primero tenemos que dejar el perfil quieto para que no se renueve el acceso.
+A: ¿Eso quiere decir que no use la aplicación?
+B: Por unos minutos, sí. Si se actualiza, se pierde el registro de la incidencia.
+A: No voy a dejar de usarla porque me lo digas por teléfono.
+B: No te estoy pidiendo datos, solo que esperes mientras verifico.
+A: ¿Cuál es el número de reclamo?
+B: Lo estoy buscando en otra pantalla.
+A: Lo voy a consultar desde mi factura.
+B: Esperá, ahora te explico el paso siguiente.
+A: Prefiero cortar y llamar al servicio técnico que figura ahí.

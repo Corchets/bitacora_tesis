@@ -1,0 +1,21 @@
+A: Te llamo del banco por una retención sobre la transferencia que hiciste a Maderas Sur.
+B: ¿Qué retención? El pago fue ayer.
+A: La orden está confirmada, pero el destinatario tiene una validación pendiente.
+B: ¿La plata salió de mi cuenta?
+A: Sí, el movimiento figura debitado. El aviso de confirmación todavía no se emitió.
+B: ¿Qué falta?
+A: El beneficiario tiene que aceptar y vos confirmar que reconocés la operación.
+B: Yo la hice, eso lo puedo confirmar.
+A: Te voy a mandar una notificación de doble control para que la orden no vuelva a borrador.
+B: ¿Me llega por la aplicación?
+A: Como mensaje al celular. En la pantalla hay una serie corta al final.
+B: La veo, dice código de ingreso.
+A: Para esta gestión usás esa misma serie como comprobante de voluntad.
+B: ¿Tengo que pasarte los números?
+A: Decímelos y te leo el nombre del destinatario que quedó asociado.
+B: No, si ya tengo el comprobante puedo verificarlo yo.
+A: El comprobante sale cuando terminamos de validar.
+B: Me habías dicho que la transferencia estaba confirmada.
+A: Lo está, pero el control cierra el expediente.
+B: Voy a llamar por el número oficial antes de seguir.
+A: Bueno, queda pendiente.
