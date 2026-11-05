@@ -32,6 +32,10 @@ PROMPTS = {
     "v3-orden-v1": ("tarea_v3_orden_v1.txt",),
     "v4": ("tarea_v4.txt",),
     "v4-cita-libre": ("tarea_v4_cita_libre.txt",),
+    "v5-maniobras": ("tarea_v5_maniobras.txt",),
+    "v5-indirectos": ("tarea_v5_indirectos.txt",),
+    "v5-sin-excepcion": ("tarea_v5_sin_excepcion.txt",),
+    "v5": ("tarea_v5.txt",),
     "riesgo": ("riesgo.txt",),  # dos etapas: ver DetectorSLMDosEtapas
 }
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
@@ -69,7 +73,7 @@ ESQUEMA_MOTIVO = {
     "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "motivo")},
     "required": ["evidencia", "motivo"],
 }
-ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "v4-cita-libre": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO}
+ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "v4-cita-libre": ESQUEMA_SALIDA, "v5-maniobras": ESQUEMA_SALIDA, "v5-indirectos": ESQUEMA_SALIDA, "v5-sin-excepcion": ESQUEMA_SALIDA, "v5": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO}
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
