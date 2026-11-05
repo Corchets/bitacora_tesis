@@ -269,15 +269,15 @@ v1 control suma además FAMILIAR-005 legítima, `TR-05-asado-con-transferencia`,
 **No conviene reescribir los casos que fallan para que pasen.** Ya los vimos: sería ajustar el corpus al modelo. Lo que sí
 proponemos, en orden:
 
-1. **Llevarle al tutor la contradicción de las estafas sin pedido, con estos ejemplos.** Hay dos salidas: ampliar la definición
-   de alerta a maniobras de aislamiento («no cortes», «no le cuentes», «no lo abras») o informar esas estafas aparte.
+1. **Avisar las maniobras de aislamiento** («no cortes», «no le cuentes», «no lo abras»). Por indicación de Luciano del 2026-11-05 se hace sin esperar
+   una definición del tutor, y se está probando en el [prompt v5](../colab/README-PROMPT-V5.md). Falta el resultado y el acuerdo del equipo.
 2. **Anotar `inicia_llamada` en los 150 casos, solo para separar resultados.** Como entrada del detector, primero hay que reabrir D03.
 3. **Escribir los casos nuevos que hoy faltan, solo en desarrollo y sin tocar la reserva:** legítimas con un «no cortes» genuino y
    estafas donde la víctima llama a un número falso.
-4. **Informar por separado `LAB`, `TR` y `CV2`,** con el corpus v2 como número principal. No acerca a la meta: lo baja a 59 %, pero es lo que más se
-   parece a la reserva.
+4. **Informar por separado `LAB`, `TR` y `CV2`,** con el corpus v2 como número principal, como indicó Luciano. No acerca a la meta: lo baja a 59 %, pero es
+   lo que más se parece a la reserva.
 5. **Decidir en D08 entre primer aviso y persistencia,** con [la simulación](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#las-falsas-alarmas-se-apagan-solas-pero-exigir-persistencia-pierde-estafas): 55/13, 51/11 o 49/8.
-6. **Dejar de probar prompts hasta tener esas respuestas.** Partiendo de v4, la cita libre resuelve uno solo de los 9 errores limpios (BANCO-006).
+6. **Probar solo cambios con una hipótesis concreta,** de a uno y con controles. Partiendo de v4, la cita libre resuelve uno solo de los 9 errores limpios (BANCO-006).
 
 ## Límites
 

@@ -230,7 +230,13 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   v4 da 55/13 con el primer aviso; simulando persistencia, 51/11 con dos alertas en la llamada y 49/8 con dos seguidas.
   El corpus v2, que es toda la reserva, da 27/46 en estafas y 6/51 en falsas alarmas. Hay 20 estafas sin pedido
   entre las 100 reservadas, así que un detector que avisa solo por pedidos no puede pasar de 80/100. Son casos ya vistos sin
-  revisión humana. No se elige política ni se cambia el denominador: es material para la consulta al tutor.
+  revisión humana. No se elige política ni se cambia el denominador.
+
+- **Dirección de Luciano (2026-11-05):** no esperar una definición del tutor sobre las estafas sin pedido; modificar el detector para
+  empezar a avisarlas ([prompt v5](../../experiments/slm-directo/colab/README-PROMPT-V5.md), sin resultados todavía); informar el
+  corpus v2 por separado; seguir probando con pruebas unitarias y recién después congelar la configuración. No cierra D07 ni D08: falta
+  el acuerdo del equipo, y adoptar otro prompt implica reabrir el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
+  La reunión con el tutor es el 2026-11-11.
 
 ### D09 — Elegir ASR y detector
 

@@ -159,4 +159,8 @@ R04/R07, tanda de roles del 2026-11-05: [análisis](../../experiments/slm-direct
 **Riesgo observado para la evaluación final:** el 73 % de desarrollo se apoya en los casos viejos (28/29); el corpus v2, que es toda la reserva, da 27/46. Con esas
 tasas, la reserva daría cerca de 60/100 estafas y 14/100 falsas alarmas, y un detector que avisa solo por pedidos no puede pasar de 80/100. Es una cuenta sobre la
 composición declarada: la reserva no se corrió ni se leyó. **Corrección:** anotar quién inició la llamada no alcanza para validar reglas en el detector, porque
-[D03](MAPA-DECISIONES.md#d03--congelar-alcance-y-contribución) deja la dirección fuera de sus entradas. Probabilidad e impacto sin cambios hasta la consulta al tutor.
+[D03](MAPA-DECISIONES.md#d03--congelar-alcance-y-contribución) deja la dirección fuera de sus entradas. Probabilidad e impacto sin cambios hasta medir el prompt v5.
+
+R07/R05, prompt v5 del 2026-11-05: [Colab](../../experiments/slm-directo/colab/README-PROMPT-V5.md). Avisar maniobras sin pedido puede sumar falsas alarmas que
+los 150 no muestran, porque ninguna legítima tiene un «no cortes» genuino. **Mitigación parcial:** 18 controles aparte, escritos por quien escribió la regla, así que no
+la validan por sí solos. Elegir prompt, persistencia y controles sobre desarrollo no estima el rendimiento: eso sale de la reserva.

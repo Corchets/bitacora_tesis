@@ -268,8 +268,9 @@ continúa alertando. Aunque se mida la corrección, no corrige.
 
 ## Estado de la propuesta anterior
 
-> **Estado: propuesta sin discutir.** La tanda respondió cuatro de las cinco condiciones. No se propone otra tanda de prompts hasta
-> resolver las consultas de D07 y D08.
+> **Estado: propuesta sin discutir.** La tanda respondió cuatro de las cinco condiciones. La próxima prueba, por indicación de Luciano del
+> 2026-11-05, es el [prompt v5](../../colab/README-PROMPT-V5.md): sin esperar una definición del tutor, modifica el detector para avisar las
+> estafas sin pedido, con controles aparte de los 150.
 
 | # | Condición | Estado |
 |---|---|---|
@@ -450,8 +451,8 @@ Todas las cifras de este documento salen de los CSV, desde esta carpeta y sin co
 
 > **Estado: propuesta sin discutir.** Depende de lo que decida el equipo.
 
-1. **Consulta al tutor:** cómo cuentan las estafas sin pedido y si se amplía la definición de alerta a maniobras de aislamiento (D07 y D08).
-2. **Política de alerta:** primer aviso o persistencia; los números de arriba son para discutirla (D08).
+1. **Estafas sin pedido:** Luciano indicó avisar las maniobras de aislamiento e informar el corpus v2 por separado. Falta el resultado de v5 y el acuerdo del equipo (D07 y D08).
+2. **Política de alerta:** primer aviso o persistencia. Se decide con los números de v5, que permiten simular ambas (D08).
 3. **Quién inició la llamada:** dejarlo fuera, como dice D03, o reabrir D03.
 4. **Adoptar o no v4 o v4 con cita libre:** por ahora no. ADR 0001 y la demo siguen con v1 y con indicio.
 5. **Roles en la demo:** pasar el canal al SLM no cambia el resultado sobre texto (53/12 contra 53/14, con Tito sin indicio). Falta probar una llamada: ver [la revisión](#revisión-del-cambio-en-la-demo).
