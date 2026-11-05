@@ -38,13 +38,29 @@ def texto_html(bloque):
 
 
 def empaquetar(datos):
-    crudo = json.dumps(datos, ensure_ascii=False, separators=(",", ":")).encode()
+    copia = datos
+    actual = datos.get("actual") if isinstance(datos, dict) else None
+    if isinstance(actual, dict) and actual.get("corridas") and "resultados" in actual["corridas"][0]:
+        corridas = actual["corridas"]
+        por_caso = {cid: [r["resultados"][cid] for r in corridas] for cid in corridas[0]["resultados"]}
+        copia = dict(datos, actual=dict(
+            actual,
+            corridas=[{k: v for k, v in r.items() if k != "resultados"} for r in corridas],
+            por_caso=por_caso,
+        ))
+    crudo = json.dumps(copia, ensure_ascii=False, separators=(",", ":")).encode()
     return json.dumps({"gzip": base64.b64encode(gzip.compress(crudo, mtime=0)).decode()})
 
 
 def desempaquetar(texto):
     datos = json.loads(texto)
-    return json.loads(gzip.decompress(base64.b64decode(datos["gzip"]))) if "gzip" in datos else datos
+    paquete = json.loads(gzip.decompress(base64.b64decode(datos["gzip"]))) if "gzip" in datos else datos
+    actual = paquete.get("actual") if isinstance(paquete, dict) else None
+    if isinstance(actual, dict) and "por_caso" in actual:
+        por_caso = actual.pop("por_caso")
+        for i, r in enumerate(actual["corridas"]):
+            r["resultados"] = {cid: res[i] for cid, res in por_caso.items()}
+    return paquete
 
 
 def armar(base, datos):

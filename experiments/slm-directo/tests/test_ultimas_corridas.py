@@ -68,6 +68,9 @@ class UltimasCorridasTest(unittest.TestCase):
             pendiente = root / "corridas/2026-11-04_130000_pendiente"
             pendiente.mkdir()
             (pendiente / "manifiesto.json").write_text(json.dumps(dict(m, fin=None)))
+            controles = root / "corridas/2026-11-05_151405_controles"
+            controles.mkdir()
+            (controles / "manifiesto.json").write_text(json.dumps(dict(m, casos={"CTRL-01-V": "1234567890abcdef"})))
             datos = panel.cargar_datos(root)
             self.assertEqual(len(datos["corridas"]), 1)
             self.assertEqual(len(datos["pendientes"]), 1)

@@ -1,6 +1,6 @@
-# v1, v3, v4 y la tanda de roles en Colab, sobre los 150 de desarrollo. Uso: python -I comparar_con_v1_colab.py
+# v1, v3, v4, la tanda de roles y v5 en Colab, sobre los 150 de desarrollo. Uso: python -I comparar_con_v1_colab.py
 # Lee los CSV y las referencias de los IDs de esas corridas; rechaza la reserva. No corre modelos.
-# Las corridas cortan en el primer aviso: un filtro que veta un aviso no sabe qué pasaría después.
+# Las corridas cortan en el primer aviso (salvo v4 siguiendo y v5): un filtro que veta un aviso no sabe qué pasaría después.
 import collections,csv,difflib,json,re,unicodedata
 from pathlib import Path
 csv.field_size_limit(10**9)
@@ -9,8 +9,10 @@ EA=E/'a/2026-11-04_194015_sin-indicio-a-solo-y-con-indicio'; EB=E/'b/2026-11-04_
 LA=C/'2026-11-04_193946_prompt-v3-a-solo-y-con-indicio'; LB=C/'2026-11-04_201116_prompt-v3-b-tito-sin-indicio'
 V=C/'2026-11-04_prompt-v4-tito-sin-indicio'; VA=V/'a/2026-11-04_215231_prompt-v4-a-v4-rol'; VB=V/'b/2026-11-04_220639_prompt-v4-b-v3-rol'; VC=V/'c/2026-11-04_221708_prompt-v4-c-v3-orden-v1-ab'; VD=V/'d/2026-11-04_222802_prompt-v4-d-tarea-ab'
 T=C/'2026-11-04_tanda-roles-tito-sin-indicio'; TA=T/'a/2026-11-04_233513_tanda-roles-a-tarea-rol'; TB=T/'b/2026-11-04_234950_tanda-roles-b-v4-cita-libre-rol'; TC=T/'c/2026-11-05_000133_tanda-roles-c-v3-orden-v1-rol'; TD=T/'d/2026-11-05_001227_tanda-roles-d-v4-rol'
+V5=C/'2026-11-05_prompt-v5-tito-sin-indicio'; V5A=V5/'a/2026-11-05_140022_prompt-v5-a-v5-maniobras-rol'; V5B=V5/'b/2026-11-05_142148_prompt-v5-b-v5-rol'; V5C=V5/'c/2026-11-05_144005_prompt-v5-c-v5-indirectos-rol'; V5D=V5/'d/2026-11-05_145716_prompt-v5-d-v5-sin-excepcion-rol'
 CORRIDAS={'v1 solo':(EA,'slm'),'v1 solo rep':(EC,'slm'),'v1 Tito ind':(EA,'tito-slm'),'v1 Tito sin':(EB,'tito-slm-sin-indicio'),'v3 solo':(LA,'slm'),'v3 Tito ind':(LA,'tito-slm'),'v3 Tito sin':(LB,'tito-slm-sin-indicio'),'v1 control':(VD,'tito-slm-sin-indicio'),'v3 orden v1':(VC,'tito-slm-sin-indicio'),'v3 roles':(VB,'tito-slm-sin-indicio'),'v4 roles':(VA,'tito-slm-sin-indicio'),
  'v1 roles':(TA,'tito-slm-sin-indicio'),'v4 cita libre':(TB,'tito-slm-sin-indicio'),'v3 orden v1 roles':(TC,'tito-slm-sin-indicio'),'v4 siguiendo':(TD,'tito-slm-sin-indicio'),
+ 'v5 maniobras':(V5A,'tito-slm-sin-indicio'),'v5 indirectos':(V5C,'tito-slm-sin-indicio'),'v5 sin excepcion':(V5D,'tito-slm-sin-indicio'),'v5':(V5B,'tito-slm-sin-indicio'),
  'v1 solo Win':(C/'2026-11-04_132229_e2b-directo-150','slm'),'v1 Tito ind Win':(C/'2026-11-04_003715_e2b-tito-viejo-150','tito-slm')}
 def carga(carpeta,det):
     d=collections.defaultdict(list)
@@ -21,12 +23,12 @@ def carga(carpeta,det):
 R={n:carga(*v) for n,v in CORRIDAS.items()}
 ids=sorted(R['v3 Tito sin']); assert len(ids)==150 and not [i for i in ids if 'CV2-T' in i]
 assert all(sorted(c)==ids for c in R.values())
-for carpeta,huella in ((EA,'bf4284996898c45d'),(EB,'bf4284996898c45d'),(EC,'bf4284996898c45d'),(LA,'a944aadc550480b3'),(LB,'a944aadc550480b3'),(VD,'bf4284996898c45d'),(VC,'e1030f8859125834'),(VB,'a944aadc550480b3'),(VA,'92df75a22c2746fb'),(TA,'bf4284996898c45d'),(TB,'5b216792ce0bb9c6'),(TC,'e1030f8859125834'),(TD,'92df75a22c2746fb')):
+for carpeta,huella in ((EA,'bf4284996898c45d'),(EB,'bf4284996898c45d'),(EC,'bf4284996898c45d'),(LA,'a944aadc550480b3'),(LB,'a944aadc550480b3'),(VD,'bf4284996898c45d'),(VC,'e1030f8859125834'),(VB,'a944aadc550480b3'),(VA,'92df75a22c2746fb'),(TA,'bf4284996898c45d'),(TB,'5b216792ce0bb9c6'),(TC,'e1030f8859125834'),(TD,'92df75a22c2746fb'),(V5A,'4d46ccb9c881e37e'),(V5C,'0535596c8b517b10'),(V5D,'8ed94066e673fac4'),(V5B,'e6f62043d0d95cd1')):
     m=json.load(open(carpeta/'manifiesto.json',encoding='utf-8'))
     assert huella in json.dumps(m['prompts']) and m['ollama']['version']=='0.40.14' and m['particion']=='desarrollo'
     assert m['ollama']['digests']['gemma4:e2b-it-q4_K_M'].startswith('b37049369adf')
     if m['filtro_tito']: assert m['filtro_tito']['artefacto_sha256'].startswith('fb601eaa') and m['filtro_tito']['umbral']==0.5
-assert all(json.load(open(x/'manifiesto.json',encoding='utf-8'))['filtro_tito']['indicio'] is False for x in (EB,LB,VA,VB,VC,VD,TA,TB,TC,TD))
+assert all(json.load(open(x/'manifiesto.json',encoding='utf-8'))['filtro_tito']['indicio'] is False for x in (EB,LB,VA,VB,VC,VD,TA,TB,TC,TD,V5A,V5B,V5C,V5D))
 ref={i:json.load(open(W/f'casos/referencia/{i}.json',encoding='utf-8')) for i in ids}
 vis=[i for i in ids if ref[i]['clase']=='vishing']; leg=[i for i in ids if ref[i]['clase']!='vishing']
 com=[i for i in leg if ref[i]['clase']=='legitima']; dif=[i for i in leg if ref[i]['clase']=='legitima_dificil']
@@ -93,11 +95,11 @@ print('\n## Clases de falsa alarma',COL)
 for k,v in CLASES.items(): print(k,[len(v&S[n]) for n in COL])
 print('fuera de las clases',{n:sorted((S[n]&set(leg))-set().union(*CLASES.values())) for n in COL})
 
-# Tanda de roles: efecto de cada factor, caso contra condición, grupos del corpus y persistencia.
-print('\n## Tanda de roles')
-for x,y in (('v4 roles','v4 siguiendo'),('v1 control','v1 roles'),('v4 roles','v4 cita libre'),('v3 orden v1','v3 orden v1 roles')):
+# Tanda de roles y v5: efecto de cada factor, caso contra condición, grupos del corpus y persistencia.
+print('\n## Tanda de roles y v5')
+for x,y in (('v4 roles','v4 siguiendo'),('v1 control','v1 roles'),('v4 roles','v4 cita libre'),('v3 orden v1','v3 orden v1 roles'),('v4 roles','v5 maniobras'),('v4 roles','v5 indirectos'),('v4 roles','v5 sin excepcion'),('v4 roles','v5')):
     print(f"{x} -> {y}: estafas pierde {sorted(S[x]-S[y]&set(vis))} gana {sorted(S[y]-S[x]&set(vis))}; FA quita {sorted(S[x]-S[y]&set(leg))} agrega {sorted(S[y]-S[x]&set(leg))}")
-SIN=('v1 Tito sin','v1 control','v3 Tito sin','v3 orden v1','v3 roles','v4 roles','v1 roles','v4 cita libre','v3 orden v1 roles','v4 siguiendo')
+SIN=('v1 Tito sin','v1 control','v3 Tito sin','v3 orden v1','v3 roles','v4 roles','v1 roles','v4 cita libre','v3 orden v1 roles','v4 siguiendo','v5 maniobras','v5 indirectos','v5 sin excepcion','v5')
 print('\n## Caso contra condición, las',len(SIN),'con Tito sin indicio')
 for nom,g in (('estafas',vis),('legitimas',leg)):
     n=collections.Counter(sum(i in S[x] for x in SIN) for i in g); print(nom,'siempre',n[len(SIN)],'nunca',n[0],'varía',len(g)-n[len(SIN)]-n[0])

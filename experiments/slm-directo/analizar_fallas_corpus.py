@@ -41,26 +41,29 @@ def leer_corridas() -> tuple[list[str], dict[str, dict[str, dict | None]], dict[
     etiquetas: list[str] = []
     avisos: dict[str, dict[str, dict | None]] = defaultdict(dict)
     tito_v4: dict[str, int] = {}
-    for archivo in sorted(CORRIDAS.glob("2026-11-04*/**/actualizaciones.csv")):
-        corrida = archivo.parent.name
-        corrida = corrida[18:] if corrida[:4].isdigit() and len(corrida) > 18 else corrida
-        with archivo.open(encoding="utf-8-sig", newline="") as fh:
-            for fila in csv.DictReader(fh):
-                if fila["config"] == "reglas":
-                    continue
-                etiqueta = f"{corrida} :: {fila['config']}"
-                if etiqueta not in etiquetas:
-                    etiquetas.append(etiqueta)
-                caso = fila["case_id"]
-                avisos[caso].setdefault(etiqueta, None)
-                if fila["aviso"] == "true" and avisos[caso][etiqueta] is None:
-                    avisos[caso][etiqueta] = {
-                        "linea": int(fila["linea"]),
-                        "evidencia": fila["evidencia"],
-                        "motivo": fila["motivo"],
-                    }
-                if corrida == V4 and fila["consulta"] == "slm_valida":
-                    tito_v4.setdefault(caso, int(fila["linea"]))
+    for patron in ("2026-11-04*/**/actualizaciones.csv", "2026-11-05*/**/actualizaciones.csv"):
+        for archivo in sorted(CORRIDAS.glob(patron)):
+            if "controles" in archivo.parts:
+                continue
+            corrida = archivo.parent.name
+            corrida = corrida[18:] if corrida[:4].isdigit() and len(corrida) > 18 else corrida
+            with archivo.open(encoding="utf-8-sig", newline="") as fh:
+                for fila in csv.DictReader(fh):
+                    if fila["config"] == "reglas":
+                        continue
+                    etiqueta = f"{corrida} :: {fila['config']}"
+                    if etiqueta not in etiquetas:
+                        etiquetas.append(etiqueta)
+                    caso = fila["case_id"]
+                    avisos[caso].setdefault(etiqueta, None)
+                    if fila["aviso"] == "true" and avisos[caso][etiqueta] is None:
+                        avisos[caso][etiqueta] = {
+                            "linea": int(fila["linea"]),
+                            "evidencia": fila["evidencia"],
+                            "motivo": fila["motivo"],
+                        }
+                    if corrida == V4 and fila["consulta"] == "slm_valida":
+                        tito_v4.setdefault(caso, int(fila["linea"]))
     return etiquetas, avisos, tito_v4
 
 

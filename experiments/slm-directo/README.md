@@ -58,8 +58,8 @@ numerada, y responde un JSON:
 | Variable | Valores | Pregunta |
 |---|---|---|
 | Modelo (`--modelos`) | Escalera de tamaños, sección 6 | ¿Desde qué tamaño funciona? ¿Cuánto tarda y ocupa? |
-| Prompt (`--prompts`) | `tarea`, `tarea+base`, `v2` | ¿Ayuda darle la «base institucional» del #27? ¿Corrige el v2 los errores del v1? ([prompts](prompts/README.md)) |
-| Hablantes (`--hablantes`) | `ab`, `sin` | ¿Cambia el resultado si sabe quién dice cada línea? |
+| Prompt (`--prompts`) | `tarea`, `tarea+base`, `v2`, `v3`, `v3-orden-v1`, `v4`, `v4-cita-libre`, `v5-maniobras`, `v5-indirectos`, `v5-sin-excepcion`, `v5` | ¿Ayuda darle la «base institucional» del #27? ¿Corrigen v2, v3, v4 o v5 los errores del v1? ([prompts](prompts/README.md)) |
+| Hablantes (`--hablantes`) | `ab`, `rol`, `sin` | ¿Cambia el resultado si sabe quién dice cada línea o qué canal corresponde a `PROTEGIDA` y `OTRA`? |
 | Reglas | Fijas, siempre incluidas | ¿Qué agrega el SLM frente a buscar palabras? |
 
 **Sobre los hablantes.** El SLM no distingue voces: solo sabe quién habla si se lo
@@ -68,7 +68,9 @@ propia cada lado de la llamada llega por un canal separado y se sabe qué dijo c
 uno sin adivinar; con una grabación mezclada habría que separar voces, que es otro
 problema. Este ensayo mide cuánto importa esa información antes de decidir. Las
 letras A/B son neutras: A es quien habla primero, sin indicar quién llamó ni quién
-es sospechoso. Lo que nunca recibe es «atacante» o «víctima», porque eso es la
+es sospechoso. Con `--hablantes rol`, el canal de la persona que usa la app se etiqueta
+como `PROTEGIDA` y el otro extremo como `OTRA` ([`roles-protegida.json`](casos/roles-protegida.json)).
+Lo que nunca recibe es «atacante» o «víctima», porque eso es la
 respuesta.
 
 ## 4. Casos
@@ -141,7 +143,8 @@ python visor.py corridas/<una> corridas/<otra> --abrir
 [`analisis/tablero/revision-casos.html`](analisis/tablero/revision-casos.html) es el panel de
 diferencias y lectura suministrado por Luciano, actualizado conservando su estética,
 sus 88 fichas históricas y sus pestañas originales. En «Últimas pruebas · leer casos»
-permite elegir entre las 15 condiciones completas del 2026-11-04, comparar dos corridas
+permite elegir entre las 23 condiciones completas del 2026-11-04 y 2026-11-05 (v1, v3,
+v4, tanda de roles y v5), comparar dos corridas
 y recorrer pérdidas, falsas alarmas, detecciones y legítimas sin aviso. Cada ficha
 abre el diálogo completo con riesgos y avisos, las notas originales de la referencia
 y, cuando existe, la lectura previa de v1 en Windows.
@@ -514,6 +517,7 @@ afirmar rendimiento móvil.
 | 2026-10-21 | **Caché del prefijo** en M1 con `qwen3.5:0.8b-q8_0` y `TR-04`: [`analisis/2026-10-21-cache-prefijo/`](analisis/2026-10-21-cache-prefijo/README.md). | Qwen 3.5 es híbrido y Ollama 0.40.5 solo retoma desde puntos guardados: cada línea vuelve a procesar ~530–630 tokens (480–1150 ms), no solo la línea nueva. Con `--num-batch 32`, 51–153 tokens (100–175 ms). Sobre los 53 casos, 453 de 464 respuestas idénticas y el mismo aviso en 52 de 53; p50 de 1282 a 1017 ms y p95 de 3465 a 2993 ms. |
 | 2026-10-21 | Análisis de errores del prompt v1 y **prompt v2** (`--prompts v2`): [`analisis/2026-10-21-errores-y-prompt-v2/`](analisis/2026-10-21-errores-y-prompt-v2/README.md). Corrida [`2026-10-21_182201_m1-0.8b-v1v2-nb32`](corridas/2026-10-21_182201_m1-0.8b-v1v2-nb32/resumen.md). | El 2B pierde siempre las mismas estafas: pedidos de dinero con razón creíble o sin palabra clave y pedidos indirectos de código; deja 49 líneas con riesgo ≥ 0,6 sin alerta. Exigir que la cita esté en el texto no ayuda. El v2 con el 0.8B quedó en los 24 casos del laboratorio, cortado por memoria con Docker abierto (el swap llegó a 9,4 GB porque el primer vigilante no podía cortar; corregido): 11/14 estafas y 2/10 falsas alarmas contra 13/14 y 4/10 del v1, sin motivos de «código» inventados. No alcanza para comparar. |
 | 2026-10-26 | Recorrido Tito→SLM con modelos simulados ([#69](https://github.com/Corchets/bitacora_tesis/issues/69)): `filtro_tito.py`, flags `--filtro-tito/--tito-puntajes/--tito-fallo-en/--tito-umbral`, `slm_falso.py`, `demo_tito_slm.sh`, `tests/test_filtro_tito.py` y corrida [`2026-10-26_125526_demo-tito-slm-simulado`](corridas/2026-10-26_125526_demo-tito-slm-simulado/resumen.md). | El par de WhatsApp pasa de punta a punta: Tito simulado deriva en L4, el SLM avisa en L4 del vishing (`=R`) y no avisa en la legítima; 3 consultas y 6 evitadas por configuración. 14 tests nuevos (umbral con igualdad, persistencia, historial íntegro, indicio falible, fallos, aviso único, reinicio, costo y denominadores) y 54 previos en verde. Sin modelos reales: no elige detector ni cierra D07/D08/D09. |
+| 2026-11-04 y 2026-11-05 | **Prompts v1, v3, v4 y v5 con Gemma 4 E2B y Tito sobre los 150 casos de desarrollo** ([#51](https://github.com/Corchets/bitacora_tesis/issues/51)): [análisis unificado](corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md), [análisis de v5](corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) y [fallas del corpus](casos/FALLAS-Y-CORPUS-2026-11-05.md). | En Colab (Tesla T4, `gemma4:e2b-it-q4_K_M`, Tito sin indicio): `v1` da 53–54/75 estafas con aviso y 14/75 falsas alarmas (`ab`) o 53/75 y 12/75 (`rol`); `v3` sube falsas alarmas a 34–35/75 (el orden de campos de v2 explica 16 de esas 21 falsas alarmas extra frente a `v3-orden-v1`, 57/75 y 18/75); `v4` con `--hablantes rol` da **55/75 estafas y 13/75 falsas alarmas** en dos corridas idénticas (`v4-cita-libre` da 55/75 y 12/75); las cuatro variantes de `v5` (`v5-maniobras` 57/16, `v5-indirectos` 55/12, `v5-sin-excepcion` 56/13 y `v5` 57/13) **no mejoran a `v4` de forma consistente** ni detectan las 6 estafas sin pedido del corpus v2. En las 14 condiciones con Tito sin indicio, el caso explica el 82 % de la varianza y la condición el 2 %. La demo en vivo (`experiments/voip`) queda por defecto con `v4`, `--hablantes rol` y `--sin-indicio` (ADR 0001 pendiente de reabrir con el equipo). |
 
 Cada corrida real se anota acá: fecha, quién, máquina, comando, carpeta y una línea
 con lo observado. Las conclusiones van en `resumen.md` de esa corrida y, cuando

@@ -10,9 +10,9 @@ con análisis de Claude Opus 5.5.
 
 ## En dos minutos
 
-Venimos probando prompts (v1, v3, v4), roles, con y sin indicio de Tito, y ninguna combinación llega a la meta del tutor:
-**60–64 estafas avisadas de 75, con 8–11 falsas alarmas de 75**. La mejor es v4 con roles: **55/75 estafas y 13/75 falsas
-alarmas**.
+Venimos probando prompts (v1, v3, v4 y v5), roles, con y sin indicio de Tito, y ninguna combinación llega a la meta del tutor:
+**60–64 estafas avisadas de 75, con 8–11 falsas alarmas de 75**. La candidata más equilibrada sigue siendo v4 con roles: **55/75 estafas y 13/75 falsas
+alarmas** (las cuatro variantes de [v5](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) dan 57/16, 55/12, 56/13 y 57/13: no mejoran a v4 de forma defendible y citan menos el pedido real).
 
 Leímos uno por uno los casos que fallan. La conclusión es que **la mayor parte de los errores ya no se arregla tocando el
 prompt**:
@@ -23,9 +23,9 @@ prompt**:
 - Sobre las estafas que **llegan a pedir algo**, v4 avisa **54 de 64 (84 %)**, pero ese número se apoya en los casos viejos: en el
   corpus v2 es **26 de 36 (72 %)**. No alcanza con decir que la brecha es de definición: las indirectas también fallan (10 de 18).
 
-**Actualización del mismo día, con la [tanda de roles](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó).**
-Cuatro condiciones más confirman que el prompt ya casi no mueve el resultado: entre las 10 con Tito sin indicio, el caso explica el 80 %
-de la variación y la condición, el 3 %. También corrigen cuatro cosas de la primera versión de este documento:
+**Actualización del mismo día, con la [tanda de roles](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó) y el [prompt v5](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md).**
+Ocho condiciones más (cuatro de roles y cuatro de v5) confirman que el prompt ya casi no mueve el resultado: entre las 14 con Tito sin indicio, el caso explica el 82 %
+de la variación y la condición, el 2 %. También corrigen cuatro cosas de la primera versión de este documento:
 
 1. **`TR-08` no es solo culpa del corte en el primer aviso:** siguiendo la llamada, el modelo tampoco corrige. Pasa a los errores del modelo.
 2. **SOPORTE-003 no se pierde por la regla de citar a OTRA:** sin esa regla tampoco vuelve.
@@ -34,9 +34,10 @@ de la variación y la condición, el 3 %. También corrigen cuatro cosas de la p
 
 ## Los resultados que estamos mirando
 
-Todas las condiciones corrieron entre el 2026-11-04 y el 2026-11-05 en Colab con GPU T4, Gemma 4 E2B, Tito sin indicio (umbral 0,5), corte al primer
+Todas las condiciones corrieron entre el 2026-11-04 y el 2026-11-05 en Colab con GPU T4, Gemma 4 E2B, Tito sin indicio (umbral 0,5), primer
 aviso y los 150 casos de desarrollo. El detalle está en el
-[análisis de v3 y v4](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md).
+[análisis de v3, v4 y v5](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md) y en el
+[análisis específico de v5](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md).
 
 | Condición | Estafas (de 75) | Con pedido (de 64) | Falsas alarmas (de 75) |
 |---|---:|---:|---:|
@@ -50,6 +51,10 @@ aviso y los 150 casos de desarrollo. El detalle está en el
 | **v4 con cita libre** | **55** | **54** | **12** |
 | v3 con el orden de v1 y roles | 55 | 54 | 19 |
 | v4 con roles, repetida | 55 | 54 | 13 |
+| `v5-maniobras` con roles | 57 | 56 | 16 |
+| `v5-indirectos` con roles | 55 | 54 | 12 |
+| `v5-sin-excepcion` con roles | 56 | 55 | 13 |
+| `v5` (los tres cambios) con roles | 57 | 55 | 13 |
 
 «Con pedido» son las estafas que tienen una línea `T_R` en la referencia: el momento en que el atacante pide el código, la
 clave, el dato o la plata. Las otras 11 cortan antes.
@@ -108,19 +113,19 @@ sin pedido de cada 100, el techo de ese detector es 80/100, ni acertando todas.
 
 Las otras tres solo apuran (BANCO-012, SOPORTE-008) o postergan sin dar datos (PREMIO-006).
 
-El modelo puede verlas: **BANCO-011 salta en 15 de 17 condiciones** por «no cierres la sesión» o «No cortes», aunque el prompt
-le dice que eso no alcanza.
+El modelo puede verlas en un caso puntual (**BANCO-011 salta en 19 de 21 condiciones** por «no cierres la sesión» o «No cortes», aunque el prompt
+le dice que eso no alcanza), pero agregar la regla explícita en `v5-maniobras` no hizo saltar ninguna de las otras 9 del corpus v2 (y `v5` solo sumó `TR-12`).
 
 **La contracara también es un problema.** Como el corpus no tiene ninguna legítima con un «no cortes» genuino (un operador real
 que te pasa con el área de fraudes, un soporte que te pide no cerrar la sesión mientras resetea), cualquier regla de maniobras
-que agreguemos va a dar perfecto acá y no va a estar probada.
+hay que probarla también con controles externos (como los 18 de `controles-maniobras.json`).
 
 ## Problema 3: falta en el corpus quién inició la llamada
 
 Seis de las falsas alarmas de v4 son el mismo caso: **la persona llamó al banco o al centro de salud y le piden un dato para
 identificarla**. Son BANCO-001, BANCO-002, BANCO-004, BANCO-005 y BANCO-010 (todas `CV2-D-L-`), y
 `TR-13-turno-medico-pide-dni`. Por ejemplo, BANCO-002: «Para identificar la cuenta, decime los últimos cuatro dígitos». Saltan
-en 9 a 17 de las 17 condiciones.
+en 13 a 21 de las 21 condiciones.
 
 Hay tres problemas de corpus:
 
@@ -138,7 +143,7 @@ exige reabrir esa decisión. Además, la demo captura por Meet, donde «quién l
 
 ## Problema 4: el corte en el primer aviso no deja medir correcciones
 
-`TR-08-frase-cortada-candado` **falla en las 17 condiciones**:
+`TR-08-frase-cortada-candado` **falla en las 21 condiciones**:
 
 ```text
 A: Pasame el código
@@ -209,33 +214,33 @@ Con el corpus bien, estos fallan igual:
 
 ## Todos los casos, clasificados
 
-Los nombres sin prefijo son `CV2-D-V-` (estafas) o `CV2-D-L-` (legítimas). «Condiciones» cuenta cuántas de las 17
-configuraciones del 2026-11-04 y el 2026-11-05 avisan en ese caso; v4 está dos veces, porque se repitió.
+Los nombres sin prefijo son `CV2-D-V-` (estafas) o `CV2-D-L-` (legítimas). «Condiciones» cuenta cuántas de las 21
+configuraciones del 2026-11-04 y el 2026-11-05 (incluidas las 4 variantes de v5) avisan en ese caso; v4 está dos veces, porque se repitió.
 
 ### Estafas que v4 no avisa (20)
 
 | Caso | `T_R` | Condiciones | v1 control | Clase de problema |
 |---|---:|---:|---|---|
-| BANCO-012 | — | 1/17 | sin aviso | Sin pedido, solo apuro |
-| ORGANISMO_PREVISIONAL-005 | — | 0/17 | sin aviso | Sin pedido, con maniobra |
-| ORGANISMO_PREVISIONAL-006 | — | 0/17 | sin aviso | Sin pedido, con maniobra |
-| PREMIO-005 | — | 0/17 | sin aviso | Sin pedido, con maniobra |
-| PREMIO-006 | — | 1/17 | sin aviso | Sin pedido, sin maniobra clara |
-| SOPORTE-007 | — | 0/17 | sin aviso | Sin pedido, con maniobra |
-| SOPORTE-008 | — | 0/17 | sin aviso | Sin pedido, solo apuro |
-| WHATSAPP-007 | — | 0/17 | sin aviso | Sin pedido, con maniobra |
-| WHATSAPP-008 | — | 1/17 | sin aviso | Sin pedido, con maniobra |
-| `TR-12-corta-antes-del-pedido` | — | 0/17 | sin aviso | Sin pedido, con maniobra |
-| FAMILIAR-004 | 22 | 4/17 | sin aviso | Plata en familia, pedido en condicional |
-| FAMILIAR-005 | 20 | 4/17 | sin aviso | Plata en familia, pedido en la penúltima línea |
-| FAMILIAR-006 | 22 | 3/17 | sin aviso | Plata en familia, pedido en la penúltima línea |
-| SOPORTE-005 | 16 | 4/17 | sin aviso | «Ingresala vos», pantalla sin indicio de ser falsa |
-| SOPORTE-006 | 15 | 13/17 | con aviso | «Ingresala vos»; v1 sin roles y v4 con cita libre avisan antes del pedido |
-| SOPORTE-003 | 11 | 11/17 | con aviso | Modelo: no reacciona en el pedido |
-| WHATSAPP-004 | 13 | 6/17 | sin aviso | Modelo |
-| PREMIO-001 | 10 | 4/17 | sin aviso | Tito no activa |
-| PREMIO-003 | 13 | 4/17 | sin aviso | Modelo |
-| ORGANISMO_PREVISIONAL-004 | 14 | 6/17 | sin aviso | Modelo |
+| BANCO-012 | — | 1/21 | sin aviso | Sin pedido, solo apuro |
+| ORGANISMO_PREVISIONAL-005 | — | 0/21 | sin aviso | Sin pedido, con maniobra |
+| ORGANISMO_PREVISIONAL-006 | — | 0/21 | sin aviso | Sin pedido, con maniobra |
+| PREMIO-005 | — | 0/21 | sin aviso | Sin pedido, con maniobra |
+| PREMIO-006 | — | 1/21 | sin aviso | Sin pedido, sin maniobra clara |
+| SOPORTE-007 | — | 0/21 | sin aviso | Sin pedido, con maniobra |
+| SOPORTE-008 | — | 0/21 | sin aviso | Sin pedido, solo apuro |
+| WHATSAPP-007 | — | 0/21 | sin aviso | Sin pedido, con maniobra |
+| WHATSAPP-008 | — | 1/21 | sin aviso | Sin pedido, con maniobra |
+| `TR-12-corta-antes-del-pedido` | — | 1/21 | sin aviso | Sin pedido, con maniobra |
+| FAMILIAR-004 | 22 | 4/21 | sin aviso | Plata en familia, pedido en condicional |
+| FAMILIAR-005 | 20 | 4/21 | sin aviso | Plata en familia, pedido en la penúltima línea |
+| FAMILIAR-006 | 22 | 3/21 | sin aviso | Plata en familia, pedido en la penúltima línea |
+| SOPORTE-005 | 16 | 4/21 | sin aviso | «Ingresala vos», pantalla sin indicio de ser falsa |
+| SOPORTE-006 | 15 | 16/21 | con aviso | «Ingresala vos»; v1 sin roles, v4 con cita libre y v5 avisan antes del pedido |
+| SOPORTE-003 | 11 | 14/21 | con aviso | Modelo: no reacciona en el pedido |
+| WHATSAPP-004 | 13 | 6/21 | sin aviso | Modelo |
+| PREMIO-001 | 10 | 4/21 | sin aviso | Tito no activa |
+| PREMIO-003 | 13 | 4/21 | sin aviso | Modelo |
+| ORGANISMO_PREVISIONAL-004 | 14 | 6/21 | sin aviso | Modelo |
 
 v1 control, además, no avisa BANCO-003, ORGANISMO_PREVISIONAL-003, SOPORTE-001 y `TR-04-pedido-tras-charla-larga`, que v4 sí
 avisa.
@@ -244,19 +249,19 @@ avisa.
 
 | Caso | Condiciones | v1 control | Clase de problema |
 |---|---:|---|---|
-| BANCO-001 | 15/17 | falsa alarma | Dato de identificación, llamó la persona |
-| BANCO-002 | 17/17 | falsa alarma | Dato de identificación, llamó la persona |
-| BANCO-004 | 9/17 | sin aviso | Dato de identificación, llamó la persona |
-| BANCO-005 | 11/17 | sin aviso | Dato de identificación, llamó la persona |
-| BANCO-010 | 17/17 | falsa alarma | Dato de identificación; no queda claro quién llamó |
-| `TR-13-turno-medico-pide-dni` | 17/17 | falsa alarma | Dato de identificación, llamó la persona |
-| `TR-08-frase-cortada-candado` | 17/17 | falsa alarma | Modelo: no corrige al leer la aclaración |
-| `LAB-banco-app-parafrasis` | 15/17 | falsa alarma | Fragmento de laboratorio sin contexto |
-| `LAB-banco-revisa-app` | 17/17 | falsa alarma | Fragmento de laboratorio sin contexto |
-| `TR-11-familiar-real-pide-plata` | 17/17 | falsa alarma | Plata en familia: límite de la etiqueta |
-| `LG-BANK-VERIF-01-e01` | 16/17 | falsa alarma | Modelo: la propia persona ofrece |
-| `TR-06-banco-alerta-legitima` | 17/17 | falsa alarma | Modelo: la propia persona ofrece |
-| BANCO-006 | 8/17 | sin aviso | Modelo: avisa por un consejo |
+| BANCO-001 | 19/21 | falsa alarma | Dato de identificación, llamó la persona |
+| BANCO-002 | 21/21 | falsa alarma | Dato de identificación, llamó la persona |
+| BANCO-004 | 13/21 | sin aviso | Dato de identificación, llamó la persona |
+| BANCO-005 | 14/21 | sin aviso | Dato de identificación, llamó la persona |
+| BANCO-010 | 21/21 | falsa alarma | Dato de identificación; no queda claro quién llamó |
+| `TR-13-turno-medico-pide-dni` | 21/21 | falsa alarma | Dato de identificación, llamó la persona |
+| `TR-08-frase-cortada-candado` | 21/21 | falsa alarma | Modelo: no corrige al leer la aclaración |
+| `LAB-banco-app-parafrasis` | 19/21 | falsa alarma | Fragmento de laboratorio sin contexto |
+| `LAB-banco-revisa-app` | 21/21 | falsa alarma | Fragmento de laboratorio sin contexto |
+| `TR-11-familiar-real-pide-plata` | 21/21 | falsa alarma | Plata en familia: límite de la etiqueta |
+| `LG-BANK-VERIF-01-e01` | 18/21 | falsa alarma | Modelo: la propia persona ofrece |
+| `TR-06-banco-alerta-legitima` | 21/21 | falsa alarma | Modelo: la propia persona ofrece |
+| BANCO-006 | 11/21 | sin aviso | Modelo: avisa por un consejo |
 
 v1 control suma además FAMILIAR-005 legítima, `TR-05-asado-con-transferencia`, `LAB-arca-canal-oficial` y `LAB-no-bajes-nada`.
 

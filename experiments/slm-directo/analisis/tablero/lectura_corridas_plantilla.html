@@ -29,7 +29,12 @@ async function leerDatosComprimidos(id) {
   }
   if(!d.gzip) return d;
   const bytes=Uint8Array.from(atob(d.gzip),c=>c.charCodeAt(0));
-  return JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+  const p=JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+  if(p.actual?.por_caso){
+    const pc=p.actual.por_caso;delete p.actual.por_caso;
+    p.actual.corridas.forEach((r,i)=>{r.resultados=Object.fromEntries(Object.entries(pc).map(([k,v])=>[k,v[i]]))});
+  }
+  return p;
 }
 document.addEventListener('DOMContentLoaded',async()=>{
   const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

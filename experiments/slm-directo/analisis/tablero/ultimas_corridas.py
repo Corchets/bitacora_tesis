@@ -50,6 +50,8 @@ def cargar_datos(raiz=SLM):
         m = json.loads(p.read_text(encoding="utf-8"))
         if m.get("particion") != "desarrollo":
             continue
+        if m.get("casos") and all(cid.startswith("CTRL-") for cid in m["casos"]):
+            continue
         if not manifiesto_completo(m):
             pendientes.append(p.parent.relative_to(raiz).as_posix())
             continue
