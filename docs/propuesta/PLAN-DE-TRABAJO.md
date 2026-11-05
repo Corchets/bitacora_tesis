@@ -167,8 +167,8 @@ y en la [minuta del 2026-09-09](../gestion/seguimientos/2026-09-09.md).
 | Hito | Resultado que habilita el siguiente paso | Dependencia |
 |---|---|---|
 | **[H1](https://github.com/Corchets/bitacora_tesis/milestone/2) — Acuerdo mínimo** | Alcance y preguntas claros; un ejemplo contrastante trabajado; reglas iniciales de anotación y entradas/salidas conceptuales acordadas; primeras tareas listas para ejecutar. | Revisión del Plan, corpus, anotación, métricas y arquitectura. |
-| **[H2](https://github.com/Corchets/bitacora_tesis/milestone/3) — Piloto del corpus y primeras pruebas** | Piloto con audio, texto revisado y referencia humana; desacuerdos y costo conocidos. Primer ensayo de SLM directo con contexto, comparado por separado con reglas simples, y prueba de ASR local con errores, tiempos y recursos registrados. | H1. Los primeros textos habilitan el detector; las primeras grabaciones habilitan ASR. No hace falta esperar a completar el piloto para empezar esas pruebas. |
-| **[H3](https://github.com/Corchets/bitacora_tesis/milestone/4) — Primera integración medible** | Un replay recorre audio→ASR→detector→aviso. Otra persona puede repetirlo y comparar alertas con la referencia humana, sin confundir sus marcas. | Primeros casos revisados, detector sobre texto y ASR ejecutable de H2; puede comenzar antes de completar el piloto. |
+| **[H2](https://github.com/Corchets/bitacora_tesis/milestone/3) — Piloto del corpus y primeras pruebas** | Piloto con audio, texto revisado y referencia humana; desacuerdos y costo conocidos. Primer detector con reglas sobre texto incremental y prueba de ASR local con errores, tiempos y recursos registrados. | H1. Los primeros textos habilitan el detector; las primeras grabaciones habilitan ASR. No hace falta esperar a completar el piloto para empezar esas pruebas. |
+| **[H3](https://github.com/Corchets/bitacora_tesis/milestone/4) — Primera integración medible** | Un replay recorre audio→ASR→reglas→aviso. Otra persona puede repetirlo y comparar alertas con la referencia humana, sin confundir sus marcas. | Primeros casos revisados, detector sobre texto y ASR ejecutable de H2; puede comenzar antes de completar el piloto. |
 | **[H4](https://github.com/Corchets/bitacora_tesis/milestone/5) — Desarrollo, comparación y selección del detector** | Candidatos implementados o adaptados y, si corresponde, entrenados. Comparación sobre desarrollo, revisión del contexto y política de alerta, análisis del efecto del ASR y selección por calidad, falsas alarmas y costo. | Primeras exploraciones pueden comenzar en H2. La selección requiere el piloto revisado y una integración medible; alimenta D08 y D09. |
 | **[H5](https://github.com/Corchets/bitacora_tesis/milestone/6) — Evaluación final** | Corpus y particiones versionados; protocolo, configuración y test reservados antes de medir. Resultados reproducibles responden PI1, PI2 y E1 e incluyen errores y límites. | H4 y cierre de las decisiones necesarias para interpretar la evaluación. |
 | **[H6](https://github.com/Corchets/bitacora_tesis/milestone/7) — Entrega y defensa** | Informe coherente con los resultados, paquete reproducible, presentación, demo y video de respaldo revisados. | H5; redacción y bibliografía acompañan los hitos anteriores. |
@@ -178,10 +178,6 @@ existente se evalúa cuando una tarea necesita esa función: se puede reutilizar
 adaptar o reemplazar. Entrenar un modelo, usar una cascada o desarrollar una UI
 completa requieren justificar su aporte a la comparación. No son condiciones para
 obtener la primera ejecución medible.
-
-El arranque con SLM directo fue acordado con Mateo; sus condiciones están en
-[arquitectura §5](../ingenieria/ARQUITECTURA.md#5-primer-ensayo-sobre-texto).
-Es un ensayo inicial, no una elección definitiva de modelo o arquitectura.
 
 **H1 termina cuando** se puede recorrer un ejemplo escrito fraudulento y uno legítimo
 desde su preparación hasta la referencia que se anotaría, distinguir esa referencia
@@ -253,8 +249,8 @@ todas las decisiones de modelos y evaluación final.
 
 | Fechas                  | Resultado verificable esperado                                                                                                                                                 |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 2026-10-05 a 2026-10-11 | H2: probar el procedimiento con un par de casos contrastantes; producir texto, audio y referencia humana. En paralelo, probar SLM directo sobre texto incremental, reglas como comparador separado y ASR local sobre las grabaciones. |
-| 2026-10-12 a 2026-10-18 | Completar y revisar el piloto de H2. H3: obtener el primer replay completo con detector, aviso y tiempos verificables por otra persona. Acordar separación de datos antes de ampliar. |
+| 2026-10-05 a 2026-10-11 | H2: probar el procedimiento con un par de casos contrastantes; producir texto, audio y referencia humana. En paralelo, probar un primer detector con reglas sobre texto incremental y ASR local sobre las grabaciones. |
+| 2026-10-12 a 2026-10-18 | Completar y revisar el piloto de H2. H3: obtener el primer replay completo con reglas, aviso y tiempos verificables por otra persona. Acordar separación de datos antes de ampliar. |
 | 2026-10-19 a 2026-10-25 | H4: comparar reglas y pocos candidatos sobre desarrollo; probar contexto y revisar errores con texto manual y ASR. Decidir qué alternativas merecen continuar. |
 | 2026-10-26 a 2026-11-08 | Continuar H4: corregir y comparar candidatos; completar los datos necesarios según cobertura y costo del piloto. Elegir configuración y cerrar el protocolo para H5; reservar test y verificar reproducción antes de medirlo. |
 | **2026-11-15**          | **Hito del tutor: todo al 90 %.**                                                                                                                                              |
