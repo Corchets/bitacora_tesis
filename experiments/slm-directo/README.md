@@ -642,3 +642,30 @@ pares), el paso a paso y las preguntas abiertas están en
 [`analisis/tablero/`](analisis/tablero/): `python analisis/tablero/armar_datos.py`
 regenera los datos desde las corridas y la clasificación de avisos, e `index.html` es
 la página que los dibuja.
+
+### Variante experimental Tito viejo 2.0 (#140)
+
+> **Estado: propuesta sin discutir.** Variante de desarrollo acordada para prueba;
+> no reemplaza la configuración elegida y no cierra [D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
+Se conserva el modelo Tito viejo sin reentrenar. Una vez por expresión y llamada,
+la variante suma al puntaje de Tito los pesos provisorios definidos en
+[`tito_viejo_2.py`](tito_viejo_2.py): sin distinguir tildes ni mayúsculas, en
+ambos hablantes y priorizando coincidencias superpuestas más largas. Con el
+umbral 0,5 se deriva a Gemma; desde entonces se consulta en cada actualización
+hasta el primer aviso. En el mensaje a Gemma se incluye la conversación disponible,
+sin el bloque de indicio ni puntaje. Si falla Tito se deriva igualmente; el
+error se conserva en el registro. Las señales se reinician entre llamadas.
+
+Para comparar sobre casos de **desarrollo**, con Tito y Gemma reales instalados:
+
+```bash
+python experiments/slm-directo/correr.py --modelos gemma4:e2b-it-q4_K_M --sin-reglas --filtro-tito --tito-real --tito-viejo-2 --casos ID-CASO --etiqueta tito-viejo-2
+```
+
+Reemplazar `ID-CASO` por IDs de desarrollo. El manifiesto registra pesos y
+configuración; `actualizaciones.csv` identifica la variante como `tito-viejo-2`.
+También se incluye la configuración original para comparar. La diferencia observada
+mezcla el efecto de las señales y la eliminación del indicio; las pruebas con dobles
+no miden la calidad del detector. Las expresiones exactas y sus pesos no están
+validados, y las formas no enumeradas, como plurales, no se reconocen automáticamente.
