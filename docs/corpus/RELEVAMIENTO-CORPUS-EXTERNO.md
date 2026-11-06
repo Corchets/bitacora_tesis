@@ -106,34 +106,38 @@ primeros candidatos y, si no había ninguno, el final. En las dudosas hubo una s
 
 | Grupo | Criterio | Llamadas |
 |---|---|---:|
-| **A** | Incluye el comienzo de la llamada (o de esta llamada de la serie) y un pedido de alto riesgo del llamante | 16 |
-| **B** | Tiene pedido, pero la transcripción arranca en medio de la maniobra | 10 |
+| **A** | Incluye el comienzo de la llamada (o de esta llamada de la serie) y un pedido de alto riesgo del llamante | 15 |
+| **B** | Tiene pedido, pero la transcripción arranca en medio de la maniobra | 11 |
 | Dudosa | Puede haber pedido, pero no está claro en el texto | 19 |
 | C | Sin pedido observable, pedido sin construcción previa, víctima que se burla o corta, o cumplimiento anterior al fragmento | 96 |
 
 Lo que muestra el grupo A:
 
-- **Tipos:** 7 de fiscalía o policía, 5 de préstamo, 1 de falso banco (`vishing_540`), 1 de app
+- **Tipos:** 6 de fiscalía o policía, 5 de préstamo, 1 de falso banco (`vishing_540`), 1 de app
   de «seguridad» (`vishing_281`) y 2 de empleo o alquiler de cuentas, donde la víctima termina
   como intermediaria (`vishing_298`, `vishing_538`). Estas dos últimas no tienen fila en el
   catálogo.
-- **Pedido:** en 9 de 16 el primer pedido es `REQUEST_SECURITY_ACTION`. En las de fiscalía casi
+- **Pedido:** en 9 de 15 el primer pedido es `REQUEST_SECURITY_ACTION`. En las de fiscalía casi
   siempre es entrar a un sitio falso del organismo y cargar datos. En el catálogo,
   `SC-POLICIA-RESGUARDO-01` usa la misma suplantación pero termina en mover el dinero: es
   parecida, no igual.
-- **Margen antes del pedido:** en 12 el primer pedido llega a los 2 minutos o más (hasta unos
+- **Margen antes del pedido:** en 11 el primer pedido llega a los 2 minutos o más (hasta unos
   37 minutos en `vishing_637`). En 4 llega antes del minuto (`vishing_448`, `vishing_540`,
   `vishing_577`, `vishing_657`); varias son la segunda llamada de una serie y la construcción
   quedó en la primera.
 
-Con 16 del grupo A y unas 7 de YouTube hay 23 estafas, la mitad de un set de 46 diálogos.
-Para llegar al mínimo de 50 del issue hacen falta algunas del grupo B; con las 10 se llega a
+Con 15 del grupo A y unas 7 de YouTube hay 22 estafas, la mitad de un set de 44 diálogos.
+Para llegar al mínimo de 50 del issue hacen falta algunas del grupo B; con las 11 se llega a
 33 estafas, la mitad de un set de 66.
 
 Límites del filtro: el tiempo es el comienzo del turno que contiene el pedido según la
 diarización automática, no `T_R`. `T_R` se marca a mano en el paso 4 con la [guía de #32](MANUAL-ANOTACION.md).
 Lo leyó una sola persona (asistente de IA); las 19 dudosas y los grupos A y B necesitan una
-segunda lectura humana, idealmente de alguien que lea coreano.
+segunda lectura humana, idealmente de alguien que lea coreano. La lectura completa del piloto de
+traducción (§5.2) ya corrigió dos filas: en `vishing_260` el primer pedido es pagar un
+«depósito» de garantía, no la copia del documento; `vishing_334` es una segunda llamada que pide
+la clave de la cuenta a los 117 s, con una formulación que el filtro no reconoce, y pasó al
+grupo B. Conviene leer completas las del grupo A antes de marcarlas.
 
 ### 3.2. YouTube scam conversations, BothBosu (elegida en parte, solo estafas)
 
@@ -259,8 +263,29 @@ de BothBosu y PIX son triviales o no son llamadas. Opciones, para decidir en equ
 Las estafas elegidas están en coreano e inglés. El issue pide adaptarlas sin cambiar la
 estructura. Con KorCCVi hay que decidir qué se hace con las instituciones (fiscalía de Seúl →
 ¿fiscalía federal?), los montos y los procedimientos que no existen acá (cuentas «seguras» del
-FSS), sin volverlas más explícitas. Conviene probar el prompt de traducción en 2 o 3 llamadas y
-revisarlas a mano antes de traducir el resto.
+FSS), sin volverlas más explícitas.
+
+**Piloto del 2026-11-06.** Se tradujeron tres conversaciones completas: `vishing_260` (préstamo),
+`vishing_334` (falso fiscal) y la fila 3 de YouTube (soporte técnico). El texto queda fuera de Git
+por los derechos de §5.3; tampoco entran al set final, porque ya las leyó gente del equipo. Los
+criterios aplicados, que hacen de *prompt* a registrar:
+
+1. Mismos turnos, mismo orden y mismo contenido. No agregar ni sacar información ni volver más
+   explícito el pedido.
+2. Rioplatense oral, con «usted» donde el original usa trato formal.
+3. Errores evidentes del reconocimiento de voz: se corrigen por contexto. Lo que no se entiende se
+   traduce por lo más probable y se marca solo en la hoja de revisión.
+4. Respuestas de la otra persona pegadas en un turno: se separan en su propio turno.
+5. Regulador financiero coreano → «Banco Central»; fiscal coreano → «fiscal»; bancos, financieras
+   y programas → nombres ficticios.
+6. Montos: misma cifra, de wones a pesos (orden de magnitud parecido en dólares).
+7. Nombres y teléfonos ficticios; las marcas que usa la maniobra (Microsoft, TeamViewer) se dejan.
+8. `A` es quien habla primero; la persona protegida queda solo en la custodia.
+
+Dudas abiertas para la revisión humana: «usted» o «vos» (el corpus propio usa casi siempre
+«vos», y esa diferencia también puede delatar el origen); si corregir o mantener los errores de
+reconocimiento; montos o tasas que en Argentina no son creíbles (una tasa de 5,4 % anual en
+`vishing_260`); y llamadas en las que llama la víctima, como la de YouTube.
 
 ### 5.3. Derechos
 
