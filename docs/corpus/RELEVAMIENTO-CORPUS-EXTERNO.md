@@ -21,6 +21,8 @@ externas sirven para probar si el sistema generaliza fuera de nuestro generador.
   procedencia o sin ficha.
 - **Pendientes, sin muestra:** el honeypot de Traister et al., ES-Port (legítimas reales en
   español) y TeleAntiFraud. No se pudieron abrir desde esta sesión (§4).
+- **Formato del set:** todas van como conversaciones con identificador neutro y en la misma
+  carpeta. La clase y las marcas quedan en una referencia aparte que el detector no ve (§5.4).
 
 ## 2. Qué se miró y cómo
 
@@ -267,6 +269,30 @@ al repo van solo identificadores, commit y procedimiento; el texto adaptado tamp
 mientras no esté claro que el derivado está permitido. Esto es más estricto que lo que pide el
 issue («al repo sube solo el texto adaptado»), porque el `DATA.md` de KorCCVi pide no distribuir
 derivados.
+
+### 5.4. Formato: todas son conversaciones
+
+Pedido del equipo (2026-11-06): el set no separa las conversaciones por clase, porque esa
+separación le daría indicios al detector. Para el paso 3:
+
+- **Una carpeta y un formato para todas.** Nada de carpetas por clase como `vishing/`,
+  `legitima/` y `dificiles/` en [`experiments/laboratorio/casos`](../../experiments/laboratorio/casos).
+- **Identificadores neutros.** `EXT-001`, `EXT-002`, …, asignados por sorteo con semilla
+  registrada. Sin prefijos que delaten la clase, la fuente o el tipo (`SC-`, `LG-`, `vishing_`,
+  `d04j18…`).
+- **El archivo de cada conversación tiene solo los turnos**, con hablantes `A` y `B`. No lleva
+  clase, `T_R`, `T_C`, fuente, tipo, ID original ni comentarios.
+- **La referencia va aparte**: clase, `T_R`, `T_C`, fuente y la correspondencia original →
+  `EXT-NNN`. La guarda quien custodia el set. El detector no la lee; solo la cruza el cálculo de
+  métricas después de la corrida.
+- **El mismo tratamiento para todas**: mismo prompt de adaptación y misma normalización, sin las
+  marcas de cada fuente. Las de YouTube rotulan a los hablantes `Suspect` e `Innocent`, que
+  delatan los roles; las de KorCCVi traen huellas de la diarización. Si las conversaciones de
+  una clase salen de una fuente y las de la otra de otra, el estilo puede delatar el origen; es
+  el mismo problema que `DATA.md` §4 de KorCCVi describe para su propio corpus.
+
+[`FILTRO-KORCCVI.csv`](FILTRO-KORCCVI.csv) y este documento son material de curaduría: no
+entran al set ni se le pasan al detector.
 
 ## 6. Reproducibilidad
 
