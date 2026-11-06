@@ -546,6 +546,6 @@ La compuerta no clasifica la llamada: decide cuándo despertar al SLM, que es el
 
 Una compuerta con ese requisito podría dejar sin consulta alrededor de un tercio de las líneas:
 32 % en los 150 casos, según una simulación que usa las marcas de la referencia. Rediseñarla
-queda como [trabajo futuro](https://github.com/Corchets/bitacora_tesis/issues/TRABAJO-FUTURO),
+queda como [trabajo futuro](https://github.com/Corchets/bitacora_tesis/issues/149),
 después de medir en el teléfono si ese ahorro hace falta
 ([#141](https://github.com/Corchets/bitacora_tesis/issues/141)).

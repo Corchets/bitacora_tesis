@@ -36,7 +36,7 @@
 ## 11.4. Trabajo futuro acotado
 
 - Medir la configuración en un teléfono de gama alta: latencia, memoria, batería y temperatura.
-- Si esa medición muestra que hace falta ahorrar consultas, rediseñar la compuerta como detector de lo sensible. Se entrenaría con líneas de conversación de las dos voces, incluidas las cortas, y se mediría por cobertura antes que por ahorro ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md), [#TRABAJO-FUTURO](https://github.com/Corchets/bitacora_tesis/issues/TRABAJO-FUTURO)).
+- Si esa medición muestra que hace falta ahorrar consultas, rediseñar la compuerta como detector de lo sensible. Se entrenaría con líneas de conversación de las dos voces, incluidas las cortas, y se mediría por cobertura antes que por ahorro ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md), [#149](https://github.com/Corchets/bitacora_tesis/issues/149)).
 - Bajar la demora por consulta, con caché de prefijo o respuestas más cortas.
 - Ampliar el reconocimiento de términos críticos, como «token» y «CVV».
 - Probar la comprensión del aviso con voluntarios, especialmente adultos mayores.

@@ -7,7 +7,7 @@
 - **Afecta a:**
   - [ARQUITECTURA §8.5](../ingenieria/ARQUITECTURA.md#85-qué-tiene-que-cumplir-la-compuerta);
   - el [glosario](../GLOSARIO.md);
-  - el trabajo futuro de [#TRABAJO-FUTURO](https://github.com/Corchets/bitacora_tesis/issues/TRABAJO-FUTURO);
+  - el trabajo futuro de [#149](https://github.com/Corchets/bitacora_tesis/issues/149);
   - los capítulos [5](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md#551-detector), [9](../tesis/CAP-09-DISCUSION.md#93-análisis-de-errores) y [11](../tesis/CAP-11-CONCLUSIONES.md#114-trabajo-futuro-acotado).
 
 ## Para qué estaba Tito
@@ -49,4 +49,4 @@
 - **Cambio de enfoque.** Una compuerta no clasifica: es un detector de lo sensible, de alta cobertura. Se diseña y se mide por cobertura, y recién después por ahorro.
 - La [arquitectura](../ingenieria/ARQUITECTURA.md#85-qué-tiene-que-cumplir-la-compuerta) y el [glosario](../GLOSARIO.md) lo registran.
 - Hay alrededor de un tercio de líneas sin nada sensible (32 % en los 150), así que la idea de una compuerta sigue en pie. Lo que falló es esta implementación.
-- El rediseño queda como trabajo futuro en [#TRABAJO-FUTURO](https://github.com/Corchets/bitacora_tesis/issues/TRABAJO-FUTURO): primero medir en el teléfono si el ahorro hace falta.
+- El rediseño queda como trabajo futuro en [#149](https://github.com/Corchets/bitacora_tesis/issues/149): primero medir en el teléfono si el ahorro hace falta.
