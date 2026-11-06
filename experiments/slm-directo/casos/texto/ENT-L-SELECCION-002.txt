@@ -1,0 +1,23 @@
+A: hola buen día hablo con nahuel giménez
+B: eh sí soy yo quién habla
+A: te habla carolina de lapacho consultores somos una consultora de recursos humanos te llamo por tu postulación para analista contable semi señor
+B: ah sí sí mandé el cv hace como dos semanas
+A: exacto a nuestro cliente le gustó tu perfil así que queremos avanzar con una entrevista por videollamada y una evaluación online
+B: buenísimo y cómo sería
+A: la entrevista sería el jueves doce alas once de la mañana dura más o menos cuarenta minutos te queda bien
+B: el jueves a las once sí me queda bien
+A: perfecto hace un rato te mandamos un mail con el link de la videollamada no tenés que instalar nada se abre desde el navegador
+B: sí lo estoy viendo ahora
+A: en ese mismo mail está el acceso a la evaluación son ejercicios de razonamiento y un cuestionario la podés hacer cuando quieras hasta miércoles a la noche
+B: ah sí hay abajo dice código de acceso son seis números querés que te lo lea así queda confirmado
+A: no no ese código no me lo pases ni a mí ni a nadie es tu clave para entrar a la evaluación la usás vos cuando la vayas a hacer
+B: ah bueno pensé que lo necesitaban para validar algo
+A: no nosotros vemos en el sistema cuando la terminaste no tenés que mandarnos nada
+B: y la evaluación tiene algún costo o hay que pagar algo
+A: no para nada todo el proceso es sin costo para vos lo paga la empresa que nos contrata
+B: buenísimo
+A: te quedó alguna duda
+B: no creo que no haber si entendí jueves doce alas once por videollamada y la evaluación antes del miércoles a la noche
+A: exacto y si te surge algo respondé ese mismo mail y te contestamos
+B: genial muchas gracias carolina
+A: gracias a vos nahuel que tengas buen día

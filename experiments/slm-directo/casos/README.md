@@ -3,7 +3,7 @@
 Conversaciones **escritas y ficticias** para probar el detector sobre texto antes de
 tener audio. Los 53 antecedentes son material de **desarrollo**. Corpus v2 agrega
 97 conversaciones de desarrollo y 200 candidatas reservadas, y
-[`legitimas_cotidianas`](#legítimas-cotidianas) suma 91 legítimas de desarrollo: ver
+[`legitimas_cotidianas`](#legítimas-cotidianas) suma 94 legítimas de desarrollo: ver
 [diseño y límites](DISENO-CORPUS-V2.md), [selección para grabar](GRABACIONES-ASR.md)
 y [revisión técnica](REVISION-CORPUS-V2.md). No reemplazan las grabaciones del piloto
 ([#39](https://github.com/Corchets/bitacora_tesis/issues/39) /
@@ -136,9 +136,9 @@ Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan t
 > al convertir los casos; la composición del corpus sigue abierta en
 > [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-91 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06 en tres tandas. Los
-archivos originales no se guardan en el repositorio: su contenido quedó en `texto/` y
-`referencia/`, y su `id` es el `case_id`.
+94 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06: las 91 de Evaristo,
+en tres tandas, y 3 de selección de personal. Los archivos originales no se guardan en el
+repositorio: su contenido quedó en `texto/` y `referencia/`, y su `id` es el `case_id`.
 
 - **Tanda 1, `LEG-*` (21):** desde `llamadas_legitimas.json`. Llama y habla primero `A`;
   quien atiende es `B`, la persona protegida en `roles-protegida.json`.
@@ -160,6 +160,12 @@ archivos originales no se guardan en el repositorio: su contenido quedó en `tex
   en `ENT-L-BANCO-006`, `ENT-L-VENTAS-005` y `ENT-L-DELIVERY-005` la persona empieza a dictar
   el código y el que llama la frena; en `ENT-L-BANCO-002` y `ENT-L-VENTAS-008` se niega a dar
   el DNI.
+- **Selección de personal, `ENT-L-SELECCION-NNN` (3):** la familia que faltaba en el lote 3. Las
+  pidió Mateo Antenucci, y el 2026-11-06 las escribió un agente que no leyó prompts, corridas,
+  resultados ni casos existentes. Siguen el formato del lote 3: entrantes de un número
+  desconocido, de 18, 23 y 32 líneas, una de cada `tipo_legitima` y una `variante_asr`
+  (`ENT-L-SELECCION-002`). Van en la familia `trabajo`, que en `corpus_v2` son llamadas entre
+  compañeros. Se corren aparte, con `legitimas-seleccion-3`.
 
 > **Sesgo a vigilar ([R29](../../../docs/gestion/REGISTRO-RIESGOS.md)).** La sigla DNI aparece
 > en 34 de las 91 legítimas (37 %) y en 3 de las 46 estafas de desarrollo de `corpus_v2` (7 %).
@@ -172,7 +178,8 @@ archivos originales no se guardan en el repositorio: su contenido quedó en `tex
 > variantes de ASR la escriben «dni». Contando solo «DNI» en mayúsculas dan 25 de 91: quedan
 > afuera 9 variantes de ASR de `ENT-L`. Con el mismo método, «usted» aparece en 3 de las 42
 > `ENT-L` (7 %), en ninguna `LEG` ni `LEG2`, y en 1 de las 46 estafas (2 %). Se reproduce desde
-> `texto/`, por ejemplo `grep -liw dni ENT-L-*.txt | wc -l`.
+> `texto/`, por ejemplo `grep -liw dni LEG2-*.txt | wc -l` (15). En las 3 de selección de
+> personal, agregadas después, la sigla aparece en 1; el patrón `ENT-L-*.txt` también las toma.
 
 | Categoría del original | Casos | `familia` | `tipo_legitima` |
 |---|---|---|---|
@@ -223,11 +230,12 @@ lote, y cada lote tiene su lista en [`listas/`](listas/):
 | `legitimas-leg-21` | `LEG-*` |
 | `legitimas-leg2-28` | `LEG2-*` |
 | `legitimas-ent-l-42` | `ENT-L-*` del lote 3 |
+| `legitimas-seleccion-3` | `ENT-L-SELECCION-*`, aparte de las 91 |
 
 `--lista` acepta varias separadas por coma, por ejemplo
 `python correr.py --lista legitimas-leg-21,legitimas-leg2-28 ...`.
 Las corridas anteriores al 2026-11-06 son sobre 150 casos; `correr.py` usa ahora por
-defecto los 241 de desarrollo. Para repetir una corrida histórica:
+defecto los 244 de desarrollo. Para repetir una corrida histórica:
 `python correr.py --lista desarrollo-150 ...` ([lista](listas/desarrollo-150.txt)).
 
 ## Validar

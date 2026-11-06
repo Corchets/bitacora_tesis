@@ -962,5 +962,17 @@
 "ENT-L-VENTAS-012": {
 "protegida": "A",
 "origen": "redaccion"
+},
+"ENT-L-SELECCION-001": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-SELECCION-002": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-SELECCION-003": {
+"protegida": "A",
+"origen": "redaccion"
 }
 }

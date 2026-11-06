@@ -1,0 +1,37 @@
+{
+  "case_id": "ENT-L-SELECCION-001",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Un número desconocido ofrece trabajo de temporada y pide confirmar en el día porque el cupo es limitado, como en las falsas ofertas de empleo, pero solo coordina una entrevista grupal sin pedir datos ni dinero.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; familia selección de personal, agregada al lote de legítimas entrantes por pedido de Mateo Antenucci. La escribió un agente que no leyó prompts, corridas, resultados ni casos existentes; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Selección de personal, la familia que faltaba en el lote de legítimas entrantes del 2026-11-06. Llamada entrante de un número desconocido: el que llama se presenta. Persona protegida: A. Familia `trabajo`, que en `corpus_v2` son llamadas entre compañeros. Partición de desarrollo, pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "trabajo",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una agencia de personal eventual llama a una postulante a auxiliar de depósito para la temporada de fiestas, le describe el puesto y la cita a una entrevista grupal el martes 10 a las 9, con el pedido de que confirme la asistencia en el día."
+}
