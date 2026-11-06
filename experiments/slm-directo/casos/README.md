@@ -161,11 +161,18 @@ archivos originales no se guardan en el repositorio: su contenido quedó en `tex
   el código y el que llama la frena; en `ENT-L-BANCO-002` y `ENT-L-VENTAS-008` se niega a dar
   el DNI.
 
-> **Sesgo a vigilar ([R27](../../../docs/gestion/REGISTRO-RIESGOS.md)).** Según la revisión de
-> forma del lote 3, «DNI» aparece en el 40 % de esas legítimas y en el 7 % de las estafas de
-> desarrollo de `corpus_v2`, y «usted» en el 14 % contra el 2 %. Un detector podría aprender
-> que pedir el DNI indica una llamada legítima. Hacen falta estafas que pidan DNI o fecha de
-> nacimiento.
+> **Sesgo a vigilar ([R29](../../../docs/gestion/REGISTRO-RIESGOS.md)).** La sigla DNI aparece
+> en 34 de las 91 legítimas (37 %) y en 3 de las 46 estafas de desarrollo de `corpus_v2` (7 %).
+> Por lote: 2 de 21 en `LEG`, 15 de 28 en `LEG2` y 17 de 42 en `ENT-L`. Un detector podría
+> aprender que pedir el DNI indica una llamada legítima. Evaristo propone sumar estafas que
+> pidan el DNI o la fecha de nacimiento ([#154](https://github.com/Corchets/bitacora_tesis/issues/154)).
+>
+> **Método del conteo (2026-11-06):** una llamada cuenta si la sigla aparece al menos una vez
+> como palabra, en cualquiera de los dos hablantes y sin distinguir mayúsculas, porque las
+> variantes de ASR la escriben «dni». Contando solo «DNI» en mayúsculas dan 25 de 91: quedan
+> afuera 9 variantes de ASR de `ENT-L`. Con el mismo método, «usted» aparece en 3 de las 42
+> `ENT-L` (7 %), en ninguna `LEG` ni `LEG2`, y en 1 de las 46 estafas (2 %). Se reproduce desde
+> `texto/`, por ejemplo `grep -liw dni ENT-L-*.txt | wc -l`.
 
 | Categoría del original | Casos | `familia` | `tipo_legitima` |
 |---|---|---|---|
