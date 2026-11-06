@@ -4,7 +4,9 @@
 
 ## 9.1. Respuesta a las preguntas de investigación
 
-**PI1, detección incremental.** Respuesta provisional: en desarrollo, usando solo lo disponible hasta cada línea, la configuración final avisó en 10/10 estafas con 0/10 falsas alarmas. La familia de modelos muestra que el contexto y el modelo importan más que la política: los mismos 10 modelos dan 48/100 falsas alarmas en directo y 27/100 con Tito viejo, a cambio de bajar de 90/100 a 82/100 estafas. **[Responder con #52.]**
+**PI1, detección incremental.** Respuesta provisional: en desarrollo, usando solo lo disponible hasta cada línea, la configuración final avisó en 10/10 estafas con 0/10 falsas alarmas. La familia de modelos muestra que el contexto y el modelo importan más que la política: los mismos 10 modelos dan 48/100 falsas alarmas en directo y 27/100 con Tito viejo, a cambio de bajar de 90/100 a 82/100 estafas. Esa baja no es toda mérito del filtro: de las 24 falsas alarmas que desaparecen, 13 estaban en llamadas sin nada sensible antes del aviso, 6 en líneas sensibles que Tito no vio, y en 5 Tito ya había activado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)). **[Responder con #52.]**
+
+> **Corregir (#51):** «la configuración final» es la del ADR 0001. La respuesta va con la configuración del ADR 0002 y con el test (#52).
 
 **PI2, margen temporal.** Respuesta provisional y **poco favorable**: con voz real y la opción B, el aviso suele llegar después de empezado el pedido, entre 3 y 5 s. Eso no invalida el aviso, porque el daño ocurre cuando la persona cumple, pero deja poco margen. Con 3,74 s de consulta, la demora del modelo es una parte importante de esa diferencia. **[Responder con `L_C` y marcas humanas, #52.]**
 
@@ -19,6 +21,7 @@
 - **Afinar sobre pocos casos no generaliza.** El prompt `v2` mejoró sobre los 53 antecedentes y empeoró sobre corpus v2. Es el motivo para congelar antes del test.
 - **WER y términos críticos.** La opción con peor WER recuperó más términos críticos, lo que concuerda con Balagopalan et al. (2019): el WER agregado no alcanza.
 - **Falsas alarmas y prevalencia.** Con Axelsson (2000) y Williams (2021), ni un 0/10 en un corpus balanceado dice cuántos avisos falsos vería una persona en su uso cotidiano.
+- **Una compuerta no es un clasificador.** Tito se entrenó para distinguir estafas de legítimas. Por eso no despierta al modelo con lo sensible de las legítimas: cuando aparece la primera línea sensible, el SLM ya está despierto en 62 de 64 estafas, pero solo en 14 de 43 legítimas. La baja de falsas alarmas que se le atribuía era un punto ciego ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md), [H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)). Una compuerta se mide por cuánto de lo sensible deja pasar, no por las alarmas que evita.
 
 ## 9.3. Análisis de errores
 
@@ -29,6 +32,7 @@ Errores conocidos, a completar con el test:
 | ASR | «toque» por «token»; «CBB» o «CBO» por «CVV» y «CBU» | Pierde etiquetas; no cambió avisos en estas llamadas |
 | ASR | Inglés o portugués en 4 de 129 frases | Ruido en el contexto |
 | Tito viejo | Deriva legítimas inocuas, como «¿Tenés la notebook gris?» | Solo más consultas: el modelo las descartó en #101 |
+| Tito viejo | No despierta al modelo con lo sensible: «Me llegó por SMS un código para activar WhatsApp» saca 0,234 y «El DNI completo y una foto del frente», 0,024 | Pierde `CV2-D-V-PREMIO-001`, atrasa el aviso de `CV2-D-V-BANCO-007` y produce una baja engañosa de falsas alarmas ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)) |
 | Detector | Aviso por el débito, antes del pedido del código | Aviso correcto por un motivo distinto del esperado |
 | Sistema | Corte de llamada que descartaba la última consulta | Corregido (`7e6b971`) |
 

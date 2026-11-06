@@ -521,3 +521,31 @@ Hay un antecedente parcial: consultar al modelo solo en una zona gris (spike #29
 el SLM descarta la alerta quedó como candidata en
 [§7.5](#75-continuación-acordada-validar-tito-antes-de-optimizar-consultas), y la
 configuración actual no la usa.
+
+### 8.5 Qué tiene que cumplir la compuerta
+
+> **Estado: propuesta sin discutir.** Requisito que sale de [H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md),
+> con el criterio de Mateo del 2026-11-06. No cambia la configuración del
+> [ADR 0001](adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) ni decide
+> [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
+
+La compuerta no clasifica la llamada: decide cuándo despertar al SLM, que es el único que avisa.
+
+- **Cobertura primero.** La compuerta tiene que despertar al SLM ante cualquier
+  [línea sensible](../GLOSARIO.md), la diga quien la diga y aunque sea inocente: un código, una clave,
+  datos personales o de tarjeta, dinero, instalar una aplicación o compartir la pantalla.
+  Solo puede dejar sin consulta lo que no tiene nada sensible.
+- **Se mide por cobertura.** La pregunta es si el SLM ya está despierto en la primera línea
+  sensible, contado por clase. El ahorro de consultas se mira después. Una falsa alarma que
+  desaparece porque la compuerta no vio la línea sensible no cuenta como mérito
+  ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)).
+- **Tito viejo no lo cumple.** En los 150 casos de desarrollo, el SLM está despierto en la primera
+  línea sensible en 62 de 64 estafas, pero solo en 14 de 43 legítimas. Tito se entrenó para
+  distinguir estafas de legítimas con monólogos sintéticos del estafador, así que reacciona a
+  «te llamo del banco» y no a lo sensible.
+
+Una compuerta con ese requisito podría dejar sin consulta alrededor de un tercio de las líneas:
+32 % en los 150 casos, según una simulación que usa las marcas de la referencia. Rediseñarla
+queda como [trabajo futuro](https://github.com/Corchets/bitacora_tesis/issues/149),
+después de medir en el teléfono si ese ahorro hace falta
+([#141](https://github.com/Corchets/bitacora_tesis/issues/141)).

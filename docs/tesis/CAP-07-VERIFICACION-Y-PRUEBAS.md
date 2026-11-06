@@ -184,6 +184,8 @@ Los requisitos no funcionales del sistema fueron contrastados contra los gates d
 | **Configuración final: latencia por consulta** | $p95 \le 1.5\ \text{s}$; $> 2.0\ \text{s}$ inaceptable | Mediana **$3.74\ \text{s}$**, $p95 = \mathbf{4.53\ \text{s}}$ (E2B); unos 30 ms sin consulta (Tito) | Apple M1, 8 GB, 5 corridas ([#84](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84)) | **No cumple**; el aviso llegó a tiempo en esas corridas |
 | **Dependencias y conectividad** | Sin conexiones salientes en la llamada | Inferencia local verificada | Inferencia ASR local en disco y detector conectado a Ollama en `127.0.0.1` (`cliente_ollama.py`); no se midió el tráfico de red | **No evaluado con captura de paquetes** |
 
+> **Corregir (#51):** las filas de «configuración final» cuentan a Tito en memoria y latencia. Cambian si el ADR 0002 deja el SLM solo.
+
 > **Declaración metodológica de procedencia:** Las mediciones de $RTF$, latencia y memoria física fueron obtenidas en estaciones de trabajo de laboratorio (Apple M1 de 8 GB y PC x86_64). En estricto cumplimiento de la regla de conclusión de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), **estos resultados demuestran prefactibilidad en laboratorio, pero no equivalen a mediciones en procesadores móviles ARM Android**. La evaluación de consumo de batería, degradación por calentamiento térmico (`PowerManager`) y rendimiento en dispositivos móviles reales queda supeditada a la ejecución de la demo Android.
 
 ---
