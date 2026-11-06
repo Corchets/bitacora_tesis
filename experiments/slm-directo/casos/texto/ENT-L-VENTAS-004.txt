@@ -1,0 +1,23 @@
+A: Sí, ¿quién habla?
+B: Buen día, te hablo de la compañía de teléfono. ¿Estoy con el titular de la línea, Néstor Ibáñez?
+A: Sí, soy yo. ¿Qué vendés?
+B: Te quería ofrecer internet para tu casa, con...
+A: No, ya tengo. Y me llaman todos los días, eh. Ayer dos veces.
+B: Uh, disculpá. No sabía que te habían llamado.
+A: Desde distintos números. Es una tortura.
+B: Te entiendo. ¿Querés que te saque de la base de llamadas comerciales?
+A: Sí, por favor.
+B: ¿Me confirmás que el número es este, el que termina en cincuenta y siete?
+A: Sí, este.
+B: ¿Tenés otra línea a tu nombre que también quieras sacar?
+A: La de mi señora, pero está a nombre de ella.
+B: Esa la tiene que pedir ella. Si querés, que llame al cero ocho cero cero.
+A: Le digo.
+B: Listo, la tuya quedó registrada. Puede tardar unos días en impactar en todos los sistemas.
+A: ¿Unos días? ¿O sea que me van a seguir llamando?
+B: Puede que te llame alguna campaña que ya estaba programada. Después no.
+A: Bueno.
+B: También te podés anotar en el Registro No Llame, que vale para todas las empresas.
+A: Ya estoy anotado, por eso me sorprende.
+B: Entonces podés hacer el reclamo ahí, con este número y la fecha.
+A: Lo voy a hacer. Chau.

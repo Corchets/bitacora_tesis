@@ -1,0 +1,21 @@
+A: Hola, buenas tardes, ¿Leandro Paz? Te habla Darío, de una agencia de usados, Usados del Jardín.
+B: Sí. ¿Quién?
+A: Usados del Jardín, en la avenida Belgrano. Hace un mes nos dejaste tus datos buscando un sedán diésel.
+B: Ah, sí, me acuerdo. Ya ni me acordaba.
+A: Ayer nos entró uno que te puede interesar. Setenta mil kilómetros, un solo dueño, con todos los services.
+B: ¿De qué año?
+A: dos mil veintiuno. Está en dieciséis millones, con los papeles al día.
+B: Es más de lo que pensaba gastar.
+A: Se puede negociar un poco, y también tomamos tu auto si tenés.
+B: Tengo uno, pero lo quiero vender por mi cuenta.
+A: Como quieras. Te aclaro que el auto tiene el informe de dominio limpio, sin deudas ni prendas.
+B: ¿Y la VTV?
+A: Vigente hasta marzo. Si querés lo venís a ver, o te lo llevamos para que lo pruebes. ¿Por qué zona vivís?
+B: Por el barrio Norte, cerca de la plaza Belgrano.
+A: Estamos a diez cuadras. ¿Te viene bien el sábado a la mañana?
+B: El sábado a la mañana tengo partido. A la tarde puedo.
+A: El sábado cerramos a la una. ¿El viernes a la tarde?
+B: El viernes salgo a las seis.
+A: Abrimos hasta las siete. Te espero a las seis y media.
+B: Bueno. Mandame fotos antes, así no voy al pedo.
+A: Te mando fotos y el informe de dominio por WhatsApp.

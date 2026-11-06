@@ -1,0 +1,44 @@
+{
+  "case_id": "ENT-L-MEDICO-001",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 5,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Pedido de DNI, obra social y número de afiliado en una confirmación de turno.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (turno_confirmacion); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: B. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-MEDICO-001`.",
+  "particion": "desarrollo",
+  "familia": "medico",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "El centro médico confirma un turno con dermatología y pide DNI, obra social y número de afiliado para la admisión."
+}

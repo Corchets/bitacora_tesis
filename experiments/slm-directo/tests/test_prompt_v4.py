@@ -58,10 +58,10 @@ class Prompts(unittest.TestCase):
 
 
 class Roles(unittest.TestCase):
-    def test_cubre_los_199_de_desarrollo_y_ningun_reservado(self):
+    def test_cubre_los_241_de_desarrollo_y_ningun_reservado(self):
         roles = json.loads(casos.ROLES.read_text(encoding="utf-8"))
         self.assertEqual(sorted(roles), casos.ids_de_casos(particion="desarrollo"))
-        self.assertEqual(len(roles), 199)
+        self.assertEqual(len(roles), 241)
         self.assertFalse([c for c in roles if "CV2-T" in c])
         self.assertEqual({r["protegida"] for r in roles.values()}, {"A", "B"})
 

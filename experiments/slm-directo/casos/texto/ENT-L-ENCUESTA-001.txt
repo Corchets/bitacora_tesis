@@ -1,0 +1,21 @@
+A: Hola, buenas tardes, te habla Ana, de FibraSur.
+B: Sí, ¿qué pasó ahora?
+A: Nada, todo bien. Ayer tuviste una visita técnica y te quería hacer una encuesta cortita, tres preguntas.
+B: Bueno, si es corta.
+A: Del uno al diez, ¿cómo calificarías la atención del técnico?
+B: Un nueve. El chico fue re amable y explicó todo.
+A: ¿Se solucionó el problema?
+B: Sí, anda desde ayer. Pero estuve un día entero sin internet y trabajo desde casa.
+A: Te entiendo. ¿Querés que lo deje como reclamo aparte?
+B: ¿Sirve para algo?
+A: Sí, se suma al descuento de los días sin servicio.
+B: Entonces sí, dejalo.
+A: ¿Me confirmás un mail para mandarte el número de reclamo?
+B: El mismo que tienen registrado.
+A: Termina en hotmail, ¿no?
+B: Sí, ese.
+A: Listo, queda cargado. Última pregunta: del uno al diez, ¿qué tan probable es que nos recomiendes?
+B: Un seis. Por la demora.
+A: Lo anoto así. ¿Algún comentario más?
+B: Que el turno sea en el día. Y que no me llamen para encuestas todas las semanas.
+A: Lo dejo anotado también.

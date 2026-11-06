@@ -3,7 +3,7 @@
 Conversaciones **escritas y ficticias** para probar el detector sobre texto antes de
 tener audio. Los 53 antecedentes son material de **desarrollo**. Corpus v2 agrega
 97 conversaciones de desarrollo y 200 candidatas reservadas, y
-[`legitimas_cotidianas`](#legítimas-cotidianas) suma 49 legítimas de desarrollo: ver
+[`legitimas_cotidianas`](#legítimas-cotidianas) suma 91 legítimas de desarrollo: ver
 [diseño y límites](DISENO-CORPUS-V2.md), [selección para grabar](GRABACIONES-ASR.md)
 y [revisión técnica](REVISION-CORPUS-V2.md). No reemplazan las grabaciones del piloto
 ([#39](https://github.com/Corchets/bitacora_tesis/issues/39) /
@@ -136,7 +136,7 @@ Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan t
 > al convertir los casos; la composición del corpus sigue abierta en
 > [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-49 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06 en dos tandas. Los
+91 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06 en tres tandas. Los
 archivos originales no se guardan en el repositorio: su contenido quedó en `texto/` y
 `referencia/`, y su `id` es el `case_id`.
 
@@ -147,6 +147,25 @@ archivos originales no se guardan en el repositorio: su contenido quedó en `tex
   protegida, y el llamante `B` se presenta en sus dos primeros turnos. Todas piden o confirman
   datos (nombre, DNI, mail, dirección, obra social) y 9 nombran un código sin pedirlo. 15 son
   reescrituras de casos de la tanda 1, como dice `notas` en cada una.
+- **Tanda 3, `ENT-L-<FAMILIA>-NNN` (42):** el lote «Legítimas entrantes difíciles» del
+  2026-11-06, que ya venía en este formato. Todas son entrantes: el que llama se presenta;
+  según el caso habla primero A o B, y `roles-protegida.json` dice quién es la protegida.
+  Tienen de 14 a 36 líneas, como las estafas de `corpus_v2`, y 14 son `variante_asr`. Por tipo:
+  21 `pedido_razonable`, 12 `mencion_sin_pedido` y 9 `cotidiana`. El lote proponía entrar a
+  `corpus_v2` con semillas `LG-ENT-*` y separar un test; por decisión de Evaristo van todas a
+  desarrollo y a este grupo, sin semilla (la propuesta queda en `notas`). Su familia `ventas`
+  pasó a `comercial`, y se agregó `tramite` (revisión técnica, licencia de conducir).
+  Casos difíciles: `ENT-L-SOPORTE-005` pide acceso remoto legítimo y recibe el número de
+  conexión; `ENT-L-VENTAS-009` propone una seña por transferencia a la cuenta de la empresa;
+  en `ENT-L-BANCO-006`, `ENT-L-VENTAS-005` y `ENT-L-DELIVERY-005` la persona empieza a dictar
+  el código y el que llama la frena; en `ENT-L-BANCO-002` y `ENT-L-VENTAS-008` se niega a dar
+  el DNI.
+
+> **Sesgo a vigilar ([R27](../../../docs/gestion/REGISTRO-RIESGOS.md)).** Según la revisión de
+> forma del lote 3, «DNI» aparece en el 40 % de esas legítimas y en el 7 % de las estafas de
+> desarrollo de `corpus_v2`, y «usted» en el 14 % contra el 2 %. Un detector podría aprender
+> que pedir el DNI indica una llamada legítima. Hacen falta estafas que pidan DNI o fecha de
+> nacimiento.
 
 | Categoría del original | Casos | `familia` | `tipo_legitima` |
 |---|---|---|---|
@@ -181,7 +200,7 @@ Diferencias con `corpus_v2`:
 - **Sin semilla ni par** (`null`): no hay una contraparte de vishing escrita para cada una.
   Las de banco, `LEG-ST-01` y `LEG2-ST-05` se vinculan con `escenario_base` al escenario
   legítimo del catálogo (`LG-BANK-ALERT-01`, `LG-SUPPORT-INFO-01`); el resto queda en `null`.
-- **De 5 a 16 líneas**: el mínimo de 12 de `corpus_v2` no se exige.
+- **De 5 a 36 líneas**: el mínimo de 12 de `corpus_v2` no se exige.
 - **Fuera de `MANIFIESTO-CORPUS-V2.json`**: el manifiesto protege los 350 casos de corpus v2 y
   sus antecedentes, y `casos.py` no compara las huellas de este grupo. Así la reserva y el
   catálogo no cambian.
@@ -189,7 +208,7 @@ Diferencias con `corpus_v2`:
 
 Para correr solo este grupo: `python correr.py --grupo legitimas_cotidianas ...`.
 Las corridas anteriores al 2026-11-06 son sobre 150 casos; `correr.py` usa ahora por
-defecto los 199 de desarrollo. Para repetir una corrida histórica:
+defecto los 241 de desarrollo. Para repetir una corrida histórica:
 `python correr.py --lista desarrollo-150 ...` ([lista](listas/desarrollo-150.txt)).
 
 ## Validar

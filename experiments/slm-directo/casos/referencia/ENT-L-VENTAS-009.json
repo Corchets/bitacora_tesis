@@ -1,0 +1,37 @@
+{
+  "case_id": "ENT-L-VENTAS-009",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    }
+  ],
+  "que_prueba": "Negociación larga, confirmación de patente y una seña por transferencia a la cuenta de la empresa, con factura; muy parecida a una estafa de cobro anticipado.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (vendedor_vehiculo); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: B. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-VENTAS-009`.",
+  "particion": "desarrollo",
+  "familia": "comercial",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "El vendedor llama con la tasación del usado de un cliente, confirma patente y kilometraje, negocia el valor y le ofrece congelar el precio con una seña transferida a la cuenta de la concesionaria contra factura."
+}
