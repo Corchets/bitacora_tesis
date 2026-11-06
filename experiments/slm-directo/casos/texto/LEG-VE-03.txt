@@ -1,0 +1,9 @@
+A: Hola, ¿Gonzalo? Soy Ezequiel, de Andes Motors. Viniste el sábado con el hatchback para la tasación, ¿te acordás?
+B: Ah, sí, Ezequiel, ¿cómo andás?
+A: Todo bien. Te llamo porque ya tengo la tasación final de tu auto. Con los kilómetros que tiene y el service al día, te lo tomamos en catorce millones doscientos.
+B: Uf, esperaba un poco más, eh.
+A: Te entiendo. Le comenté a mi gerente y lo más que puedo estirar es a catorce y medio, si cerrás la operación este mes.
+B: Mmm. ¿Y el resto cómo sería?
+A: El resto lo podés financiar como vimos, o en contado. Si querés reservar el cero kilómetro, la seña se hace acá en el salón y te damos el recibo con todo. Nada por transferencia a nadie, eh.
+B: Bueno, dejame pensarlo con la cabeza fría y te aviso el lunes.
+A: Dale, perfecto. Cualquier cosa me llamás a este número o al fijo de la concesionaria. Abrazo, Gonzalo.

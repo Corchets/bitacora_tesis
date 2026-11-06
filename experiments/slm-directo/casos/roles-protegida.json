@@ -598,5 +598,89 @@
 "TR-13-turno-medico-pide-dni": {
 "protegida": "B",
 "origen": "lectura"
+},
+"LEG-CC-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CC-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CC-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-BA-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-BA-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-BA-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-VE-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-VE-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-VE-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-ST-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-ST-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-ST-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CO-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CO-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CO-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-EN-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-EN-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-EN-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-TU-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-TU-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-TU-03": {
+"protegida": "B",
+"origen": "lectura"
 }
 }

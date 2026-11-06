@@ -114,8 +114,8 @@ class Controles(unittest.TestCase):
     def setUp(self):
         self.datos = json.loads(correr_controles.CONTROLES.read_text(encoding="utf-8"))
 
-    def test_no_tocan_los_150_de_desarrollo(self):
-        self.assertEqual(len(casos.ids_de_casos(particion="desarrollo")), 150)
+    def test_no_tocan_los_171_de_desarrollo(self):
+        self.assertEqual(len(casos.ids_de_casos(particion="desarrollo")), 171)
         self.assertFalse(set(self.datos) & set(casos.ids_de_casos()))
         self.assertFalse(list((RAIZ / "casos" / "texto").glob("CTRL-*")))
 
@@ -147,7 +147,7 @@ class Controles(unittest.TestCase):
                     roles = casos.con_roles(c, casos.cargar_texto(c))
                     self.assertEqual({l.hablante for l in roles}, {"PROTEGIDA", "OTRA"})
                     self.assertEqual(casos.cargar_referencia(c)["clase"], self.datos[c]["clase"])
-            self.assertEqual(len(casos.ids_de_casos(particion="desarrollo")), 150)
+            self.assertEqual(len(casos.ids_de_casos(particion="desarrollo")), 171)
 
     def test_corre_de_punta_a_punta_con_modelo_falso(self):
         servidor = HTTPServer(("127.0.0.1", 0), OllamaFalso)
