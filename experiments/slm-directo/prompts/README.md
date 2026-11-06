@@ -89,6 +89,15 @@ más en dos de esas líneas para dejar escrita la palabra.
 Criterio de la humo 2, fijado antes de correrla (Mateo, 2026-11-05): `masa_si_no` ≥ 0,9 en al menos
 44 de 48 líneas (≥ 90 %) por variante. Si no se cumple, se ajusta solo la pregunta final y se repite.
 
+### Prueba de humo 2: A1 y A2 pasan
+
+[Resultado](../corridas/2026-11-05_humo-puntaje-token-2/humo.md) (Colab T4, commit `fc254af`, tag
+`colab/143-humo-2`, mismos 3 casos): `tarea-a1`, `v4-a1` y `v4-a2` dan `masa_si_no` ≥ 0,9 en **48 de 48**
+líneas (mínimo 0,999998). Los tokens elegidos son solo «NO» y «S» (con «SI» y «Sí» como alternativas
+lejanas). No hizo falta tocar la pregunta. El diagnóstico confirma la causa de la humo 1: con el prompt
+viejo, en SC-WA-CODE-01-e01 L3 y CV2-D-L-BANCO-001 L12 el modelo escribe «alerta_sugerida: true»
+(`al`, `erta`, `_`, `s`, `uger`, `ida`, `:`, ` true`).
+
 ## Versión 3 — 2026-11-04
 
 > **Estado: propuesta sin discutir.** [Resultados](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md) y [ficha](V3-ATRIBUCION.md), avance de #51
@@ -153,5 +162,5 @@ Los cambios se prueban juntos: no se midió el aporte de cada uno por separado.
 | 2026-11-05 | `v4-cita-libre` (`tarea_v4_cita_libre.txt`) y tanda de roles; v1–v4 intactas | Medir si exigir citar a `OTRA` en `evidencia` frena avisos y separar el efecto de `--hablantes rol` en v1 y `v3-orden-v1`. [Resultados en Colab](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó): `v4-cita-libre` 55/75 y 12/75, `v4` repetida 55/75 y 13/75; no se adopta `v4-cita-libre`. |
 | 2026-11-05 | v5 (`v5-maniobras`, `v5-indirectos`, `v5-sin-excepcion`, `v5`); v1–v4 intactas | Probar sobre v4 la regla de maniobras sin pedido explícito, los pedidos indirectos y quitar la excepción de datos comunes, por separado y juntos, más 18 controles sintéticos. [Resultados en Colab](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md): ninguna mejora a v4 de forma consistente (maniobras 57/16, indirectos 55/12, sin excepción 56/13, las tres 57/13) ni detecta las estafas sin pedido del corpus. No se adopta v5. |
 | 2026-11-05 | `tarea-sino`, `v4-sino` y `v4-sin-reglas-sino`; v1–v5 intactas | #143: leer P(SÍ) del primer token en vez del riesgo escrito, que solo toma 0,1/0,2/0,3/0,5 y da dos puntos de operación. Ver «Pregunta SÍ/NO». |
-| 2026-11-05 | `tarea-a1`, `v4-a1` y `v4-a2` (A1 y A2 de #143); los tres `*-sino` quedan como humo 1, descartados | El issue pasó a definir A1 (sin «Marcá "alerta_sugerida"…», pregunta por el pedido) y A2 (pregunta por la intención). La [humo 1](../corridas/2026-11-05_humo-puntaje-token-1/humo.md) no pasó: masa SÍ+NO ≥ 0,9 en solo 31–38 de 48 líneas, porque el modelo responde «al…» cuando quiere avisar. |
+| 2026-11-05 | `tarea-a1`, `v4-a1` y `v4-a2` (A1 y A2 de #143); los tres `*-sino` quedan como humo 1, descartados | El issue pasó a definir A1 (sin «Marcá "alerta_sugerida"…», pregunta por el pedido) y A2 (pregunta por la intención). La [humo 1](../corridas/2026-11-05_humo-puntaje-token-1/humo.md) no pasó: masa SÍ+NO ≥ 0,9 en solo 31–38 de 48 líneas, porque el modelo responde «al…» («alerta_sugerida: true») cuando quiere avisar. La [humo 2](../corridas/2026-11-05_humo-puntaje-token-2/humo.md) pasa: 48 de 48 en las tres variantes. |
 | 2026-11-05 | `v4` como valor por defecto de la demo en vivo (`servidor.py`, `medir.py`) con `--hablantes rol` y `--sin-indicio` | Por pedido de Luciano tras comparar v1, v3, v4 y v5 sobre los 150 de desarrollo; ADR 0001 sigue pendiente de reabrir con el equipo. |

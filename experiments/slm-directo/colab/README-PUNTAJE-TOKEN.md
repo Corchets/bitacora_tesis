@@ -14,7 +14,8 @@ Verifica que el primer token de `gemma4:e2b-it-q4_K_M` sea un SÍ/NO limpio ante
 [Resultado](../corridas/2026-11-05_humo-puntaje-token-1/humo.md) y causa en
 [`prompts/README.md`](../prompts/README.md#prueba-de-humo-1-descartada-tarea-sino-v4-sino-v4-sin-reglas-sino).
 
-**Humo 2 (tag `colab/143-humo-2`): A1 y A2 como los define #143.** Corre
+**Humo 2 (2026-11-05, tag `colab/143-humo-2`): pasa.** `masa_si_no` ≥ 0,9 en 48 de 48 líneas en las tres variantes
+([resultado](../corridas/2026-11-05_humo-puntaje-token-2/humo.md)). A1 y A2 como los define #143. Corre
 [`humo_puntaje_token.py`](humo_puntaje_token.py) con Ollama 0.40.14 (el de las líneas base), el mismo digest del
 modelo, `num_ctx` 4096, seed 42, temperatura 0 y `think` false:
 
