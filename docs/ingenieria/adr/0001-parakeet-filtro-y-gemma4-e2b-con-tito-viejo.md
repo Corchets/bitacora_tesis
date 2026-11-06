@@ -29,7 +29,7 @@ Esta es la configuración que entra a la evaluación final. No se ajusta mirando
 | Gemma 4 E2B directo | 10/10 estafas; no depende de Tito | 1/10 falsas alarmas y consulta en todas las líneas | Tito evita consultas sin perder estafas en estos 20 casos |
 | Tito nuevo → E2B | 0/10 falsas alarmas | 2/10 estafas | Pierde casi todas las estafas |
 | Qwen3.5 9B con prompt `v2` | 10/10 · 1/10 en GPU | 6,6 GB, no entra en el teléfono | Se conserva como techo, no como candidato |
-| Riesgo primero con `gemma3n:e2b` | 1,9 s por línea | 10/10 con 3–6/10 falsas alarmas, o 2/10 con 0/10 | [No cumple la meta sin contaminar la selección](https://github.com/Corchets/bitacora_tesis/blob/reranker-prueba/experiments/slm-directo/analisis/2026-10-30-reranker-zero-shot/README.md) |
+| Riesgo primero con `gemma3n:e2b` | 1,9 s por línea | 10/10 con 3–6/10 falsas alarmas, o 2/10 con 0/10 | [No cumple la meta sin contaminar la selección](../../../experiments/slm-directo/analisis/2026-10-30-reranker-zero-shot/README.md) |
 | Cross-encoder o NLI (bge, mDeBERTa, Qwen3-Reranker) | Sin generación de texto | Miden tema y no intención; bge tarda 4,6 s por línea en CPU | [Descartados con evidencia en #123](https://github.com/Corchets/bitacora_tesis/issues/123) |
 | Reglas | Instantáneas y explicables | 58,3 % de falsas alarmas en negativos difíciles | Quedan como línea base y respaldo sin modelo |
 | Parakeet con Silero solo (opción A) | La frase final sale 0,75 s antes; más términos críticos (76,4 % contra 70,9 %) | Parte las frases (205 segmentos contra 127) y mete inglés o portugués en 25 de 129 frases, contra 4 | Empata en etiquetas y empeora el texto (WER 32,8 % contra 25,6 %) |

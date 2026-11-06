@@ -271,7 +271,7 @@ Límites: Tito y SLM son simulados con tiempos deterministas de juguete; el umbr
 
 `entrenar_tito.py` ajusta UNA regresión logística (seed 42, `C=1,0`, `lbfgs`)
 sobre los 5.520 textos aceptados de 276 familias del banco histórico
-(`nacho1706/feature-training-data`, commit
+(tag `archivo/tito-banco`, antes rama `nacho1706/feature-training-data`; commit
 `bb542e130e7a67a82e376a75a0438a15de32f4a6`; 480 apartados excluidos, sin
 solapes literales con los 8 casos, test reservado intacto). RoBERTuito
 (revisión `20cb399e…`, tokenizador verificado por hash) queda congelado con
@@ -530,7 +530,7 @@ correspondan, en los documentos de decisión.
 
 | Decisión | Alternativa descartada por ahora | Motivo |
 |---|---|---|
-| Una línea = una actualización (turno cerrado). | Fragmentos de ASR o ventanas de tiempo. | Es lo que fija #50 y la [arquitectura §6](https://github.com/Corchets/bitacora_tesis/blob/feat/ayuda-memoria/docs/ingenieria/ARQUITECTURA.md#6-dirección-del-detector-y-visualización-consolidada). |
+| Una línea = una actualización (turno cerrado). | Fragmentos de ASR o ventanas de tiempo. | Es lo que fija #50 y la [arquitectura §6](../../docs/ingenieria/ARQUITECTURA.md#6-dirección-del-detector-y-visualización-consolidada). |
 | Prefijo completo en cada actualización; fallo si no entra en `num_ctx` (4096). | Recortar historial (el laboratorio usaba 1024 tokens y 300 caracteres por turno). | #50 pide no recortar en silencio. |
 | Temperatura 0 y `seed` 42. | Muestreo con temperatura. | Repetibilidad. |
 | Salida forzada con esquema JSON y validada. | Texto libre. | El laboratorio vio respuestas en prosa sin forzar el formato. |
