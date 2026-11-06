@@ -80,7 +80,7 @@ R08: con la configuración final de [ADR 0001](../ingenieria/adr/0001-parakeet-f
 
 R27: la configuración final se eligió con 20 conversaciones sintéticas sin revisión humana, usadas para elegir entre 10 modelos, y con 4 guiones por voz real. Puede rendir bastante peor en el test reservado. La señal es la caída frente al 10/10 · 0/10 de #101. Mitigación: congelar la configuración antes del test, no ajustarla con sus resultados e informar el resultado aunque sea desfavorable. Contingencia: reportarlo como límite; no se elige otra configuración mirando el test.
 
-R28: el test reservado corre sin referencia humana: ninguno de los 350 casos tiene `revision_humana` en verdadero y D07 sigue abierta. Sin esa referencia, los números finales descansan en marcas de redacción asistida. Mitigación: las llamadas con referencia humana que el equipo va a hacer y una muestra común de anotación (#54, #32).
+R28: el test reservado corre sin referencia humana: ninguno de los 350 casos tiene `revision_humana` en verdadero y D07 sigue abierta. Sin esa referencia, los números finales descansan en marcas de redacción asistida. Mitigación: las llamadas con referencia humana que el equipo va a hacer y una muestra común de anotación (#54, #32). 2026-11-06: la mitigación para la reserva cambió; ver la actualización de esa fecha.
 
 R24: Mateo no tiene copia del audio original (Luciano, 2026-11-03). Las regrabaciones siguen solo en esta Mac.
 
@@ -178,3 +178,8 @@ R25 **se materializó en desarrollo** ([H08](../hallazgos/H08-tito-evita-falsas-
   - Si Tito queda como ablación en la reserva, no contar como acierto una falsa alarma que desaparece sin esa cobertura.
 - **Contingencia.** Corre la que ya estaba escrita: no adoptar el filtro por un beneficio que oculta pérdidas. Lo decide [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
 - **Pendiente.** Probabilidad, impacto y el paso al seguimiento quedan para su dueño (Ignacio / #51), como pide la regla de riesgos materializados.
+
+R28: Mateo Antenucci cambió el 2026-11-06 el plan para corregir la reserva, que se rehace en [#45](https://github.com/Corchets/bitacora_tesis/issues/45).
+
+- **Mitigación.** Las personas no revisan la reserva entera. La corrige un agente distinto del detector, con la guía de [#145](https://github.com/Corchets/bitacora_tesis/issues/145), que absorbe #32: clase, `T_R` y `T_C` de cada caso. El equipo lee una muestra para ver que no haya nada raro. Después se actualizan el manifiesto y las huellas SHA-256, con fecha.
+- **Lo que queda.** El test sigue sin referencia humana completa: lo corrige un agente y las personas leen solo una muestra. Se declara como límite en el informe. La probabilidad y el impacto no cambian.
