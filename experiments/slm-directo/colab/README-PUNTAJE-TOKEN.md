@@ -47,6 +47,46 @@ y se repite. `p_si` en estos 3 casos no se usa para elegir nada.
 
 Sin Drive: el ZIP baja a la máquina local.
 
-## 2. Corrida de los 150
+## 2. Corrida de los 150 (tag `colab/143-150`)
 
-Se prepara después de revisar la prueba de humo.
+Lee P(SÍ) del primer token en **todas las líneas** de los 150 casos de desarrollo (`--seguir-tras-aviso`), para
+simular las políticas de aviso offline sin volver a correr el modelo. Usa
+[`probar_puntaje_token.py`](probar_puntaje_token.py) con lo mismo que las líneas base JSON
+(`2026-11-04_sin-indicio-150` y `2026-11-05_tito-2-v4`): Ollama 0.40.14, el mismo digest, `num_ctx` 4096, seed 42,
+temperatura 0, `--sin-reglas` y los mismos hablantes (`ab` para tarea, `rol` para v4).
+
+1. **Diagnóstico de «S»** (`diagnostico-s.json`). En la humo 2 el token elegido para SÍ fue siempre «S». Se generan
+   3 tokens en tres líneas donde salió «S». Si no sigue como «SÍ», la lectura está mal y el script se detiene antes
+   de gastar la corrida.
+2. **Seis corridas, cada una en su carpeta.** Primero va lo que pide #143, por si Colab se corta:
+
+   | Carpeta | Variante | Prompt | Hablantes |
+   |---|---|---|---|
+   | `v4-a1` | A1 | `v4-a1` | `rol` |
+   | `v4-a2` | A2 | `v4-a2` | `rol` |
+   | `v4-a1-rep` | repetición de A1 | `v4-a1` | `rol` |
+   | `tarea-a1` | A1 con tarea (#51 sigue abierto) | `tarea-a1` | `ab` |
+   | `v4-a2-rep` | repetición de A2 | `v4-a2` | `rol` |
+   | `tarea-a1-rep` | repetición de A1 con tarea | `tarea-a1` | `ab` |
+
+   Cada corrida guarda `actualizaciones.csv` (con `p_si`, `masa_si_no` y `top_logprobs`), `manifiesto.json`,
+   `resumen.md` y `TERMINADA.txt` con los minutos.
+3. **Registro:** `commit.txt`, `pip-freeze.txt`, `ollama-version.txt`, `script-sha256.txt` y `gpu.txt`.
+
+Son 2.773 líneas por corrida, 16.638 consultas en total. Se calcula una hora en T4, más unos 5 minutos de
+instalación.
+
+**Pasos:**
+
+1. Abrir [`COLAB-PUNTAJE-TOKEN.ipynb`](COLAB-PUNTAJE-TOKEN.ipynb) en Colab y elegir Entorno de ejecución → Cambiar
+   tipo → **GPU T4**.
+2. Ejecutar la única celda. El notebook trae el tag `colab/143-150`, comprueba que apunte al commit fijado y corre
+   el script desde ese commit.
+3. Dejar la pestaña abierta. Cada corrida terminada baja como `parcial-puntaje-token-<carpeta>.zip`, y al final
+   baja `resultados-puntaje-token.zip` con todo. La primera vez el navegador pregunta si permite varias descargas:
+   aceptar.
+4. Si Colab se corta, los parciales ya descargados sirven. Si se vuelve a ejecutar la celda en la misma sesión,
+   saltea las corridas terminadas. En una sesión nueva, empieza de cero.
+
+El análisis (políticas, compuerta de Tito simulada y curva) se hace después, desde los CSV, con `analizar.py` en la
+carpeta de la corrida.
