@@ -72,7 +72,8 @@ bitacora_tesis/
 │   │   ├── METODO-CREACION-CORPUS.md    # Fichas de rol, diseño de semillas, negativos difíciles y parada
 │   │   ├── CATALOGO-ESCENARIOS.csv      # Inventario estructurado de semillas de fraude y control
 │   │   ├── MANUAL-ANOTACION.md          # Referencia humana y reglas de anotación
-│   │   └── RELEVAMIENTO-CORPUS-EXTERNO.md # Fuentes externas para la prueba de generalización (#144)
+│   │   ├── RELEVAMIENTO-CORPUS-EXTERNO.md # Fuentes externas para la prueba de generalización (#144)
+│   │   └── FILTRO-KORCCVI.csv           # Decisión por llamada del filtro de KorCCVi (#144)
 │   ├── ingenieria/
 │   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md # Comparación replay vs VoIP vs altavoz vs telefonía
 │   │   ├── ARQUITECTURA.md              # Componentes conceptuales y pipeline de audio a alerta

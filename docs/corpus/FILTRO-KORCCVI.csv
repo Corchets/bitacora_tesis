@@ -1,0 +1,142 @@
+id,grupo,dur_s,turnos,hablantes,tipo,comienzo,etiqueta_pedido,t_pedido_aprox_s,nota
+vishing_2.json,B,758,43,2,fiscalia_policia,no,REQUEST_TRANSFER,651,pide transferir todo el saldo a otro banco; arranca en medio de la llamada
+vishing_15.json,dudosa,750,78,3,prestamo,no,,,préstamo; no se ve un pedido claro a la víctima
+vishing_19.json,dudosa,886,96,3,prestamo,no,,,préstamo; no se ve un pedido claro a la víctima
+vishing_25.json,C,291,24,4,fiscalia_policia,sí,,,sin pedido de alto riesgo
+vishing_26.json,C,404,67,2,prestamo,no,,,sin pedido
+vishing_31.json,C,327,31,2,inversion,no,,,propuesta de inversión; sin pedido claro
+vishing_32.json,dudosa,484,25,3,fiscalia_policia,no,,,pide llamar al banco para levantar un bloqueo; rol de la víctima confuso
+vishing_34.json,C,437,26,3,fiscalia_policia,no,,,sin pedido
+vishing_35.json,C,280,39,2,fiscalia_policia,sí,,,llamada completa que termina sin pedido
+vishing_36.json,C,486,30,2,prestamo,no,,,sin pedido claro
+vishing_71.json,C,1128,103,2,fiscalia_policia,no,,,sin pedido; anuncia envío de citación
+vishing_156.json,C,483,53,2,fiscalia_policia,no,,,sin pedido
+vishing_260.json,A,692,56,2,prestamo,sí,REQUEST_PERSONAL_DATA,489,segunda llamada de la serie; pide copia del documento y de la libreta
+vishing_263.json,B,523,31,2,prestamo,no,REQUEST_TRANSFER,321,pide pagar a una cuenta virtual
+vishing_264.json,C,456,52,3,prestamo,no,,,sin pedido observable
+vishing_276.json,dudosa,568,38,2,fiscalia_policia,parcial,,,sin pedido claro en el fragmento
+vishing_281.json,A,374,50,2,otro,sí,REQUEST_SECURITY_ACTION,175,segunda llamada; pide instalar una app enviada por KakaoTalk
+vishing_282.json,dudosa,1023,131,4,fiscalia_policia,sí,,,la víctima ya pagó y reclama
+vishing_298.json,A,844,77,2,empleo_mula,sí,REQUEST_TRANSFER,202,oferta de empleo para entregar efectivo y cambiar tarjetas; sin equivalente en el catálogo
+vishing_299.json,B,1711,115,4,fiscalia_policia,no,REQUEST_SECURITY_ACTION,1483,sitio falso y luego número de registro (1699 s)
+vishing_300.json,A,3662,442,2,fiscalia_policia,parcial,REQUEST_SECURITY_ACTION,1429,empieza al pasar con el falso fiscal; buscar un sitio y luego TeamViewer (1911 s); 61 min
+vishing_301.json,dudosa,890,52,3,fiscalia_policia,no,,,hubo cumplimiento antes del fragmento (rescate de depósitos)
+vishing_302.json,C,1803,131,2,fiscalia_policia,no,REQUEST_SECURITY_ACTION,12,continuación; el pedido llega a los 12 s sin construcción
+vishing_303.json,B,3104,298,2,fiscalia_policia,no,REQUEST_SECURITY_ACTION,990,sitio falso
+vishing_304.json,A,2371,244,5,fiscalia_policia,sí,REQUEST_SECURITY_ACTION,807,llamada transferida; pide buscar el sitio de la fiscalía
+vishing_305.json,B,2134,194,4,fiscalia_policia,no,REQUEST_SECURITY_ACTION,1656,pide ir al cajero a consultar un préstamo
+vishing_306.json,dudosa,1458,105,3,fiscalia_policia,sí,,,pregunta por certificados y tarjeta de coordenadas sin pedirlos
+vishing_307.json,B,689,76,2,prestamo,no,REQUEST_TRANSFER,164,pide transferir y mover todo el saldo
+vishing_322.json,C,271,30,2,prestamo,sí,,,ofrece un préstamo; sin pedido
+vishing_325.json,C,673,67,3,fiscalia_policia,no,,,sin pedido
+vishing_326.json,C,617,41,3,fiscalia_policia,no,,,sin pedido
+vishing_327.json,C,430,42,2,fiscalia_policia,no,,,sin pedido
+vishing_328.json,C,738,105,2,fiscalia_policia,no,,,pregunta en qué bancos tiene cuentas; no es alto riesgo
+vishing_329.json,C,541,40,2,fiscalia_policia,no,,,sin pedido
+vishing_332.json,C,529,33,2,fiscalia_policia,no,,,sin pedido
+vishing_333.json,C,340,27,3,fiscalia_policia,sí,,,sin pedido
+vishing_334.json,A,1255,89,2,fiscalia_policia,sí,REQUEST_SECRET,254,pide cargar números de la tarjeta de coordenadas
+vishing_337.json,C,522,74,2,fiscalia_policia,sí,,,sin pedido
+vishing_339.json,C,345,37,4,fiscalia_policia,sí,,,termina al pasar con el falso fiscal; sin pedido
+vishing_344.json,C,255,43,2,fiscalia_policia,sí,,,sin pedido
+vishing_346.json,C,1420,122,5,fiscalia_policia,no,,,sin pedido
+vishing_347.json,A,1883,279,4,fiscalia_policia,sí,REQUEST_SECURITY_ACTION,819,sitio falso (ya abierto a los 819 s); luego registro e instalación
+vishing_349.json,B,520,29,2,prestamo,parcial,REQUEST_TRANSFER,250,pide pagar honorarios a la cuenta de un estudio jurídico
+vishing_350.json,dudosa,465,30,3,prestamo,no,,,carga de datos en un sitio sin contexto
+vishing_356.json,dudosa,287,29,2,prestamo,sí,,,la víctima llama tras un SMS; sin pedido claro
+vishing_358.json,dudosa,492,37,2,prestamo,no,,,ofrece visita de un empleado; propósito no claro
+vishing_359.json,dudosa,383,20,2,prestamo,sí,,,rechazo del préstamo; sin pedido claro
+vishing_366.json,C,462,37,2,prestamo,sí,,,sin pedido
+vishing_367.json,C,246,50,2,fiscalia_policia,sí,,,la víctima corta
+vishing_368.json,C,1352,135,3,fiscalia_policia,no,,,sin pedido
+vishing_369.json,C,3281,206,5,fiscalia_policia,no,,,el cumplimiento (retiro de efectivo) ocurrió antes del fragmento
+vishing_371.json,C,1522,49,2,fiscalia_policia,no,,,el cumplimiento ocurrió antes del fragmento
+vishing_388.json,C,826,22,2,fiscalia_policia,no,,,sin pedido
+vishing_392.json,C,303,41,2,prestamo,sí,,,sin pedido
+vishing_396.json,C,462,45,2,fiscalia_policia,no,,,sin pedido
+vishing_397.json,C,494,33,3,fiscalia_policia,no,,,amenaza de un prestamista; no es el patrón de suplantación
+vishing_399.json,C,279,22,2,fiscalia_policia,no,,,sin pedido
+vishing_401.json,C,1134,86,3,fiscalia_policia,sí,,,amenazas; sin pedido claro
+vishing_402.json,C,2082,222,3,fiscalia_policia,no,,,sin pedido
+vishing_404.json,C,2563,328,3,fiscalia_policia,no,,,sin pedido
+vishing_405.json,C,326,26,3,prestamo,sí,,,la víctima se burla
+vishing_406.json,C,2848,246,4,fiscalia_policia,no,,,sin pedido
+vishing_408.json,dudosa,259,31,2,prestamo,no,,,sin pedido claro
+vishing_411.json,C,335,36,2,fiscalia_policia,no,,,sin pedido
+vishing_415.json,C,333,47,3,fiscalia_policia,sí,,,la víctima confronta
+vishing_420.json,dudosa,334,27,2,prestamo,no,,,sin pedido claro
+vishing_430.json,C,1053,72,2,prestamo,no,REQUEST_TRANSFER,1,el pedido está en el primer segundo; sin construcción
+vishing_443.json,A,557,85,3,prestamo,sí,REQUEST_PERSONAL_DATA,194,segunda llamada; pide fotos del documento por KakaoTalk
+vishing_448.json,A,385,44,2,prestamo,sí,REQUEST_TRANSFER,37,segunda llamada; pide pagar a otra cuenta; margen corto
+vishing_449.json,C,1119,122,3,fiscalia_policia,no,,,aclara que no pide claves
+vishing_450.json,C,884,124,3,fiscalia_policia,sí,,,sin pedido
+vishing_453.json,C,535,73,2,fiscalia_policia,no,,,sin pedido
+vishing_458.json,C,571,40,2,fiscalia_policia,sí,,,aclara que no pide claves; sin pedido
+vishing_494.json,dudosa,2641,164,3,fiscalia_policia,no,,,anuncia una «cuenta segura» sin pedido explícito
+vishing_497.json,C,736,77,2,fiscalia_policia,sí,,,sin pedido
+vishing_504.json,C,409,37,2,fiscalia_policia,no,,,sin pedido
+vishing_506.json,C,260,22,2,fiscalia_policia,sí,,,sin pedido
+vishing_509.json,C,1556,149,2,fiscalia_policia,no,,,sin pedido
+vishing_513.json,C,496,27,3,fiscalia_policia,no,,,se corta
+vishing_514.json,C,414,35,2,fiscalia_policia,no,,,sin pedido
+vishing_515.json,C,401,37,3,fiscalia_policia,no,,,sin pedido
+vishing_520.json,C,579,51,2,fiscalia_policia,sí,,,sin pedido; anuncia citación
+vishing_523.json,B,591,32,2,fiscalia_policia,no,REQUEST_TRANSFER,364,pide sacar un préstamo con la tarjeta y depositarlo
+vishing_537.json,C,792,75,3,fiscalia_policia,sí,,,sin pedido
+vishing_538.json,A,1029,149,3,empleo_mula,sí,REQUEST_SECURITY_ACTION,655,alquiler de cuentas: pide abrir dos cuentas; sin equivalente en el catálogo
+vishing_540.json,A,517,51,2,banco,sí,REQUEST_SECURITY_ACTION,23,falso banco: reemitir certificado y luego clave de la cuenta (326 s); margen corto
+vishing_541.json,C,263,50,2,fiscalia_policia,no,,,la víctima insulta
+vishing_545.json,B,301,31,2,prestamo,no,REQUEST_PERSONAL_DATA,246,pide el número de registro de 13 dígitos
+vishing_546.json,C,339,35,2,prestamo,no,REQUEST_AUTH_CODE,0,el código se dicta en el primer segundo; sin construcción
+vishing_548.json,C,286,23,2,fiscalia_policia,no,,,sin pedido
+vishing_550.json,C,376,35,3,fiscalia_policia,no,,,sin pedido
+vishing_552.json,C,295,28,3,fiscalia_policia,parcial,,,sin pedido
+vishing_556.json,C,278,34,2,fiscalia_policia,no,,,sin pedido
+vishing_557.json,C,730,51,2,fiscalia_policia,no,,,construcción larga sin pedido explícito
+vishing_558.json,C,428,48,3,fiscalia_policia,no,,,sin pedido
+vishing_559.json,C,382,44,3,fiscalia_policia,no,,,sin pedido
+vishing_561.json,dudosa,1673,163,3,fiscalia_policia,sí,,,describe maniobras sin pedido claro
+vishing_564.json,C,542,60,2,fiscalia_policia,no,,,sin pedido
+vishing_565.json,C,464,31,2,prestamo,no,,,sin pedido
+vishing_567.json,C,352,33,3,otro,sí,,,sin pedido
+vishing_577.json,A,322,21,2,prestamo,sí,REQUEST_TRANSFER,46,pide pagar parte de otra deuda; margen corto
+vishing_578.json,C,1576,154,2,prestamo,no,,,discute pagos ya hechos
+vishing_581.json,C,403,78,4,fiscalia_policia,no,,,llamada sobre un retiro; no es el patrón
+vishing_583.json,dudosa,406,37,2,prestamo,sí,,,plan de pagar otra deuda; pedido no explícito
+vishing_589.json,C,243,25,2,fiscalia_policia,no,,,sin pedido
+vishing_592.json,C,302,23,2,fiscalia_policia,no,,,sin pedido
+vishing_597.json,C,725,51,2,prestamo,no,,,la víctima ya pagó
+vishing_602.json,C,241,31,2,prestamo,no,,,la víctima llama por un pago hecho
+vishing_608.json,C,1726,134,3,fiscalia_policia,parcial,,,sin pedido
+vishing_614.json,dudosa,673,80,2,fiscalia_policia,parcial,,,pide fecha de nacimiento al inicio; no es claro que sea alto riesgo
+vishing_616.json,C,441,30,2,fiscalia_policia,sí,,,sin pedido
+vishing_617.json,A,2271,176,3,fiscalia_policia,sí,REQUEST_SECURITY_ACTION,1455,pide entrar a un sitio y luego buscar el de la fiscalía (1681 s)
+vishing_619.json,C,339,24,2,fiscalia_policia,no,,,sin pedido
+vishing_623.json,dudosa,2575,223,4,fiscalia_policia,sí,,,la víctima ya fue al banco; pedido no claro
+vishing_629.json,C,1465,59,3,fiscalia_policia,no,,,sin pedido
+vishing_633.json,C,883,63,2,fiscalia_policia,no,,,reclamo posterior
+vishing_634.json,C,339,46,2,fiscalia_policia,no,,,sin pedido
+vishing_635.json,A,887,61,3,fiscalia_policia,sí,REQUEST_SECURITY_ACTION,639,completar un formulario en un sitio; pedido débil
+vishing_636.json,C,704,73,2,fiscalia_policia,no,,,sin pedido
+vishing_637.json,A,2321,155,3,fiscalia_policia,sí,REQUEST_SECURITY_ACTION,2229,portal falso y luego número de registro (2299 s)
+vishing_642.json,C,798,88,3,fiscalia_policia,no,,,sin pedido
+vishing_643.json,C,499,34,2,otro,sí,,,sin pedido
+vishing_647.json,C,588,64,3,fiscalia_policia,no,,,sin pedido
+vishing_648.json,C,1454,110,4,fiscalia_policia,no,,,sin pedido
+vishing_652.json,C,447,39,2,fiscalia_policia,no,,,sin pedido
+vishing_653.json,C,789,71,3,fiscalia_policia,no,,,sin pedido
+vishing_657.json,A,508,37,2,prestamo,sí,REQUEST_TRANSFER,38,segunda llamada; pagar deudas y mandar comprobante; luego descargar un archivo (154 s); margen corto
+vishing_660.json,B,1916,190,4,fiscalia_policia,no,REQUEST_TRANSFER,1278,pide mover el dinero a una «cuenta segura»
+vishing_663.json,C,703,66,2,fiscalia_policia,no,,,sin pedido
+vishing_664.json,C,612,80,4,fiscalia_policia,no,,,sin pedido
+vishing_665.json,C,388,21,3,fiscalia_policia,no,,,sin pedido
+vishing_667.json,C,246,39,2,otro,no,,,sin pedido
+vishing_669.json,C,557,33,3,fiscalia_policia,sí,,,pregunta cuentas y usos; no es alto riesgo
+vishing_675.json,C,3044,269,4,fiscalia_policia,no,,,sin pedido
+vishing_678.json,C,346,64,2,fiscalia_policia,no,,,sin pedido
+vishing_682.json,C,246,24,2,empleo_mula,no,REQUEST_SECRET,15,pide prestar la tarjeta y su clave a los 15 s; sin construcción
+vishing_684.json,C,544,56,3,fiscalia_policia,no,,,sin pedido
+vishing_692.json,C,935,83,2,fiscalia_policia,sí,,,pide solo parte de la fecha de nacimiento; no es alto riesgo
+vishing_693.json,C,415,34,2,prestamo,no,,,sin pedido
+vishing_698.json,C,246,37,2,fiscalia_policia,no,,,sin pedido
+vishing_700.json,dudosa,2266,159,5,fiscalia_policia,no,,,anuncia un «código de seguridad» sin pedido explícito
