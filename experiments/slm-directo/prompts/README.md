@@ -98,6 +98,67 @@ lejanas). No hizo falta tocar la pregunta. El diagnóstico confirma la causa de 
 viejo, en SC-WA-CODE-01-e01 L3 y CV2-D-L-BANCO-001 L12 el modelo escribe «alerta_sugerida: true»
 (`al`, `erta`, `_`, `s`, `uger`, `ida`, `:`, ` true`).
 
+### Segunda vuelta (2026-11-06): alcance, prompt C, pregunta al final y lectura del token
+
+> **Estado: propuesta sin discutir.** Lista cerrada el 2026-11-06, antes de correr. Regla y análisis en
+> [`corridas/2026-11-06_puntaje-token-2/analizar.py`](../corridas/2026-11-06_puntaje-token-2/analizar.py).
+
+La primera vuelta no fue una prueba justa para el token, por dos motivos:
+- A1 preguntaba algo literal («¿le pide algo de la lista?»), y la lista incluye el nombre y el DNI.
+- La pregunta quedaba antes de la transcripción.
+
+En esta vuelta, las preguntas de token van **al final del mensaje del usuario**. Reemplazan «Evaluá la llamada con lo
+disponible hasta la línea n.» y son lo último que lee el modelo; el resto del mensaje no cambia
+(`detectores.PREGUNTAS_FINALES`).
+
+**Alcance, decidido por el equipo el 2026-11-06.** El detector corre solo en **llamadas entrantes de números no
+agendados**, como Scam Detection de Google y el detector de Samsung. Quién inició cada caso de desarrollo quedó
+anotado a ciegas en [`casos/alcance-desarrollo.json`](../casos/alcance-desarrollo.json).
+- **Problema del corpus.** En corpus_v2, las 46 estafas son entrantes y 44 de las 51 legítimas las inicia la persona.
+  Dentro del alcance quedan 7 legítimas, y son familiares y compañeros de trabajo que en un teléfono real estarían
+  agendados.
+- **Dos etapas.** Evaristo genera legítimas entrantes de números desconocidos: ventas, el banco que avisa un
+  movimiento, el correo, turnos y encuestas.
+  - **Etapa 1 (ya):** v4-L contra v4 sobre los 150. Es la prueba de la forma de leer: el mismo prompt y los mismos casos.
+  - **Etapa 2 (con las legítimas nuevas):** el prompt C y `v4-premisa` ([`tarea_v4_premisa.txt`](tarea_v4_premisa.txt):
+    v4 con la oración del alcance), que dicen el alcance como un dato fijo. Se deciden dentro del alcance.
+
+| Variante | Mensaje de sistema | Pregunta final (mensaje del usuario) | Se lee con | Compara con |
+|---|---|---|---|---|
+| `v4-lectura` (v4-L), etapa 1 | [`tarea_v4.txt`](tarea_v4.txt), el mismo de v4 | la de siempre; mismo esquema JSON, cortado después del primer decimal del riesgo | riesgo esperado (entero y primer decimal) | v4 JSON |
+| `v4-premisa`, etapa 2 | [`tarea_v4_premisa.txt`](tarea_v4_premisa.txt): v4 con una sola oración más, la del alcance | la de siempre | JSON | v4 JSON |
+| `c-json`, etapa 2 | [`tarea_c.txt`](tarea_c.txt) + [`salida_json_c.txt`](salida_json_c.txt) | la de siempre | JSON | v4 JSON |
+| `c-sino`, etapa 2 | [`tarea_c.txt`](tarea_c.txt) | [`pregunta_c_sino.txt`](pregunta_c_sino.txt): «¿conviene avisarle ya a PROTEGIDA que esta llamada puede ser una estafa? Respondé solo SÍ o NO.» | P(SÍ) | `c-json` |
+| `c-digito`, etapa 2 | [`tarea_c.txt`](tarea_c.txt) | [`pregunta_c_digito.txt`](pregunta_c_digito.txt): «¿qué tan probable es que esta llamada sea una estafa? Respondé solo con un número del 0 (nada probable) al 9 (casi seguro).» | dígito esperado / 9 | `c-json` |
+
+- **C** es un prompt nuevo, pedido por Mateo:
+  - Dice el alcance: PROTEGIDA recibió la llamada de un número que no tiene agendado.
+  - Describe cómo se arma una estafa: quien llama se presenta como alguien de confianza, plantea algo que preocupa,
+    apura o entusiasma, y lleva a la persona a entregar o hacer algo.
+  - Pide mirar la llamada entera y hacia dónde va, y **avisar aunque todavía no haya un pedido**.
+  - Ya no dice «Marcá "alerta_sugerida": true solo si OTRA le pide…», ni ata el motivo al pedido.
+  - Mantiene la opción (a): pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, o avisar un
+    problema u ofrecer un producto, no vuelve estafa una llamada.
+  - La lista de acciones coincide con las listas de «nunca te vamos a pedir» de los bancos
+    ([fuentes](../corridas/2026-11-06_puntaje-token-2/FUENTES.md)); no sale del corpus.
+- **Antecedentes:** A2 en la primera vuelta y `v5-maniobras` ya buscaron la intención sin pedido y sumaron falsas
+  alarmas. C cambia más cosas a la vez: el encuadre entero, no una regla agregada.
+- **v4-L** no cambia nada del pedido de v4: el mismo prompt, el mismo mensaje y el mismo esquema.
+  - Deja generar solo 12 tokens con `logprobs` y lee la distribución del entero y del primer decimal del riesgo
+    dentro del JSON (`detectores.leer_riesgo_json`). Es la comparación más limpia.
+  - El JSON de v4 escribe el riesgo con un solo decimal: en la línea base, de 0,0 a 0,9, con el 94 % de las líneas entre
+    0,0 y 0,3. v4-L lee la distribución completa (valor esperado), como G-Eval.
+  - Antecedente: en Open-Jev (arXiv 2609.23959, 2026), con un modelo ajustado, leer la probabilidad de la etiqueta en el
+    comienzo del JSON da AUROC 0,95, contra 0,875 de la etiqueta escrita. Sin ajuste fino, leer los logits dio 0,69.
+- **Dígito:** se suman las probabilidades de los dígitos 0–9 entre las 20 alternativas del primer token
+  (`detectores.leer_digito`). Gemma parte los números en dígitos sueltos; la humo controla que el modelo no quiera
+  escribir «10».
+- **Preparadas y reemplazadas antes de correr:**
+  - S ([`tarea_s.txt`](tarea_s.txt): `s-json`, `s-sino`, `s-digito`): C la reemplaza porque mira la intención.
+  - v4-D ([`tarea_v4_d.txt`](tarea_v4_d.txt): `v4-digito`): v4-L la reemplaza como prueba de la lectura con el prompt de
+    v4.
+  - (`v4-premisa` y C no fueron reemplazadas: corren en la etapa 2.)
+
 ## Versión 3 — 2026-11-04
 
 > **Estado: propuesta sin discutir.** [Resultados](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md) y [ficha](V3-ATRIBUCION.md), avance de #51
@@ -164,3 +225,4 @@ Los cambios se prueban juntos: no se midió el aporte de cada uno por separado.
 | 2026-11-05 | `tarea-sino`, `v4-sino` y `v4-sin-reglas-sino`; v1–v5 intactas | #143: leer P(SÍ) del primer token en vez del riesgo escrito, que solo toma 0,1/0,2/0,3/0,5 y da dos puntos de operación. Ver «Pregunta SÍ/NO». |
 | 2026-11-05 | `tarea-a1`, `v4-a1` y `v4-a2` (A1 y A2 de #143); los tres `*-sino` quedan como humo 1, descartados | El issue pasó a definir A1 (sin «Marcá "alerta_sugerida"…», pregunta por el pedido) y A2 (pregunta por la intención). La [humo 1](../corridas/2026-11-05_humo-puntaje-token-1/humo.md) no pasó: masa SÍ+NO ≥ 0,9 en solo 31–38 de 48 líneas, porque el modelo responde «al…» («alerta_sugerida: true») cuando quiere avisar. La [humo 2](../corridas/2026-11-05_humo-puntaje-token-2/humo.md) pasa: 48 de 48 en las tres variantes. |
 | 2026-11-05 | `v4` como valor por defecto de la demo en vivo (`servidor.py`, `medir.py`) con `--hablantes rol` y `--sin-indicio` | Por pedido de Luciano tras comparar v1, v3, v4 y v5 sobre los 150 de desarrollo; ADR 0001 sigue pendiente de reabrir con el equipo. |
+| 2026-11-06 | `v4-lectura` (etapa 1), `v4-premisa`, `c-json`, `c-sino` y `c-digito` (etapa 2, con legítimas entrantes) de la segunda vuelta de #143; `s-*` y `v4-digito` quedan preparados pero no corren; los prompts anteriores quedan intactos | La primera vuelta no fue justa con el token: hacía otra pregunta y la ponía antes de la transcripción. C dice el alcance (llamadas entrantes de números no agendados), mira la intención y hacia dónde va la llamada, no el pedido, y mantiene la opción (a). Se evalúa con las legítimas entrantes nuevas, porque corpus_v2 casi no las tiene. Ver [la segunda vuelta](#segunda-vuelta-2026-11-06-alcance-prompt-c-pregunta-al-final-y-lectura-del-token). |

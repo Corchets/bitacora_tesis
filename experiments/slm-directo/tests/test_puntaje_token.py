@@ -220,8 +220,10 @@ class TestPromptsSiNo(unittest.TestCase):
                 self.assertNotIn("alerta", cargar_prompt(variante).splitlines()[-1])
 
     def test_variantes_registradas_sin_esquema(self):
-        self.assertEqual(PROMPTS_SINO, {"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2"})
-        for variante in PROMPTS_SINO:
+        # `s-sino` y `c-sino` (segunda vuelta) llevan la pregunta al final del mensaje del usuario: ver test_puntaje_token_2.
+        primera_vuelta = PROMPTS_SINO - {"s-sino", "c-sino"}
+        self.assertEqual(primera_vuelta, {"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2"})
+        for variante in primera_vuelta:
             with self.subTest(variante):
                 self.assertTrue(cargar_prompt(variante).endswith("Respondé solo SÍ o NO."))
                 self.assertNotIn("JSON", cargar_prompt(variante))

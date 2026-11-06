@@ -50,13 +50,23 @@ from detectores import (
     DetectorReglas,
     DetectorSLM,
     DetectorSLMDosEtapas,
+    DetectorSLMDigito,
+    DetectorSLMLecturaJSON,
     DetectorSLMSiNo,
+    DIGITOS,
+    MAXIMO_TOKENS_LECTURA,
+    PROMPTS_DIGITO,
+    PROMPTS_LECTURA,
     PROMPTS_SINO,
+    PROMPTS_TOKEN,
     TOP_LOGPROBS,
+    UMBRAL_DIGITO,
+    UMBRAL_LECTURA,
     UMBRAL_SI,
     VARIANTES_NO,
     VARIANTES_SI,
     Respuesta,
+    cargar_pregunta,
     cargar_prompt,
     cargar_prompt_motivo,
     esquema_de,
@@ -126,6 +136,8 @@ COLUMNAS = [
 # Solo si la corrida usa un prompt SÍ/NO (#143): las corridas sin esos prompts conservan
 # exactamente las columnas de antes.
 COLUMNAS_SINO = ["p_si", "masa_si_no", "top_logprobs"]
+# Solo si la corrida usa un prompt de dígito o v4-L (#143, segunda vuelta); van después de COLUMNAS_SINO.
+COLUMNAS_DIGITO = ["digito_esperado", "masa_digitos", "riesgo_esperado"]
 
 
 @dataclass
@@ -449,6 +461,10 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "p_si": "" if r.p_si is None else round(r.p_si, 6),
         "masa_si_no": "" if r.masa_si_no is None else round(r.masa_si_no, 6),
         "top_logprobs": r.top_logprobs,
+        # Se escriben solo si la corrida tiene COLUMNAS_DIGITO (ver main).
+        "digito_esperado": "" if r.digito_esperado is None else round(r.digito_esperado, 6),
+        "masa_digitos": "" if r.masa_digitos is None else round(r.masa_digitos, 6),
+        "riesgo_esperado": "" if r.riesgo_esperado is None else round(r.riesgo_esperado, 6),
     }
 
 
@@ -457,6 +473,9 @@ def _prompt_manifiesto(variante: str) -> dict:
     if variante == "riesgo":
         motivo = cargar_prompt_motivo()
         datos["etapa2"] = {"huella": huella(motivo), "texto": motivo, "esquema": ESQUEMA_MOTIVO}
+    pregunta = cargar_pregunta(variante)
+    if pregunta is not None:  # cierra el mensaje del usuario, después de la transcripción
+        datos["pregunta_final"] = {"huella": huella(pregunta), "texto": pregunta}
     return datos
 
 
@@ -548,8 +567,8 @@ def main(argv: list[str] | None = None) -> int:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b), --solo-reglas o --solo-reranker.")
     if args.filtro_tito and "riesgo" in _lista(args.prompts):
         sys.exit("--filtro-tito no admite --prompts riesgo: el flujo Tito→SLM usa el prompt de un paso.")
-    if args.filtro_tito and PROMPTS_SINO & set(_lista(args.prompts)):
-        sys.exit("--filtro-tito no admite los prompts SÍ/NO: en #143 la compuerta de Tito se simula offline.")
+    if args.filtro_tito and PROMPTS_TOKEN & set(_lista(args.prompts)):
+        sys.exit("--filtro-tito no admite los prompts de token (SÍ/NO o dígito): en #143 la compuerta de Tito se simula offline.")
     if args.tito_viejo_2 and not args.filtro_tito:
         sys.exit("--tito-viejo-2 requiere --filtro-tito.")
     if args.tito_viejo_2 and args.particion != "desarrollo":
@@ -608,8 +627,15 @@ def main(argv: list[str] | None = None) -> int:
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                if variante in PROMPTS_SINO:
-                    d = DetectorSLMSiNo(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra)
+                if variante in PROMPTS_LECTURA:
+                    d = DetectorSLMLecturaJSON(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                               esquema=esquema_de(variante))
+                elif variante in PROMPTS_DIGITO:
+                    d = DetectorSLMDigito(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                          cierre=cargar_pregunta(variante))
+                elif variante in PROMPTS_SINO:
+                    d = DetectorSLMSiNo(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                        cierre=cargar_pregunta(variante))
                 elif variante == "riesgo":
                     d = DetectorSLMDosEtapas(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, umbral=args.umbral)
                 else:
@@ -698,6 +724,18 @@ def main(argv: list[str] | None = None) -> int:
                 "normalizacion": "sin tildes, sin espacios ni signos alrededor, en mayúsculas (detectores.forma_token)",
                 "alerta_sugerida": f"p_si >= {UMBRAL_SI} (solo marca; la política se elige offline)",
             }} if modelos and PROMPTS_SINO & set(prompts) else {}),
+            **({"lectura_digito": {
+                "num_predict": 1, "top_logprobs": TOP_LOGPROBS, "formato": None,
+                "digito_esperado": "Σ d·P(d) / Σ P(d) sobre los dígitos del primer token; el puntaje es digito_esperado / 9",
+                "digitos": sorted(DIGITOS),
+                "normalizacion": "sin tildes, sin espacios ni signos alrededor, en mayúsculas (detectores.forma_token)",
+                "alerta_sugerida": f"digito_esperado >= {UMBRAL_DIGITO} (solo marca; la política se elige offline)",
+            }} if modelos and PROMPTS_DIGITO & set(prompts) else {}),
+            **({"lectura_json": {
+                "num_predict": MAXIMO_TOKENS_LECTURA, "top_logprobs": TOP_LOGPROBS, "formato": "el esquema JSON del prompt",
+                "riesgo_esperado": "P(1) + P(0)·E[d]/10: entero y primer decimal del riesgo dentro del JSON (detectores.leer_riesgo_json)",
+                "alerta_sugerida": f"riesgo_esperado >= {UMBRAL_LECTURA} (solo marca; la política se elige offline)",
+            }} if modelos and PROMPTS_LECTURA & set(prompts) else {}),
         },
         "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},
         "reranker": None if not rerankers else {
@@ -729,8 +767,9 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print("Marcas por línea: . sin alerta · A aviso emitido (la llamada termina acá) · o SLM no consultado · x fallo\n")
 
-    hay_sino = any(c["prompt"] in PROMPTS_SINO for c, _ in detectores if c["detector"] == "slm")
-    columnas = COLUMNAS + (COLUMNAS_SINO if hay_sino else [])
+    hay_token = any(c["prompt"] in PROMPTS_TOKEN for c, _ in detectores if c["detector"] == "slm")
+    hay_digito = any(c["prompt"] in PROMPTS_DIGITO | PROMPTS_LECTURA for c, _ in detectores if c["detector"] == "slm")
+    columnas = COLUMNAS + (COLUMNAS_SINO if hay_token else []) + (COLUMNAS_DIGITO if hay_digito else [])
     try:
         with (carpeta / "actualizaciones.csv").open("w", encoding="utf-8-sig", newline="") as f:
             escritor = csv.DictWriter(f, fieldnames=columnas, extrasaction="ignore")
@@ -751,7 +790,7 @@ def main(argv: list[str] | None = None) -> int:
                     except FalloAlCalentar as e:
                         manifiesto["modelos"][modelo_actual] = {"error": str(e)}
                         raise
-                    if any(c["modelo"] == modelo_actual and c["prompt"] in PROMPTS_SINO for c, _ in detectores):
+                    if any(c["modelo"] == modelo_actual and c["prompt"] in PROMPTS_TOKEN for c, _ in detectores):
                         try:
                             carga["logprobs"] = comprobar_logprobs(cliente_carga, modelo_actual, args.num_ctx, extra, carga["pensar"])
                         except FalloAlCalentar as e:

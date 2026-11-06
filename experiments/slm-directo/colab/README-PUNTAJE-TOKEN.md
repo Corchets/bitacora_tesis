@@ -90,3 +90,41 @@ instalación.
 
 El análisis (políticas, compuerta de Tito simulada y curva) se hace después, desde los CSV, con `analizar.py` en la
 carpeta de la corrida.
+
+## 3. Segunda vuelta, etapa 1 (tag `colab/143-ronda-2`)
+
+> **Estado: propuesta sin discutir.** La lista se cerró el 2026-11-06, antes de correr. La regla y el análisis están en
+> [`analizar.py`](../corridas/2026-11-06_puntaje-token-2/analizar.py); los prompts, en
+> [`prompts/README.md`](../prompts/README.md#segunda-vuelta-2026-11-06-alcance-prompt-c-pregunta-al-final-y-lectura-del-token).
+
+La primera vuelta no fue una prueba justa para el token. A1 preguntaba algo literal, y la pregunta quedaba antes de la
+transcripción. Además, el equipo fijó el **alcance**: el detector corre solo en llamadas entrantes de números no
+agendados. Como en corpus_v2 casi todas las legítimas las inicia la persona, la vuelta va en dos etapas:
+
+- **Etapa 1 (este Colab):** **v4-L** contra v4 JSON sobre los 150. v4-L es el JSON de v4 tal cual, cortado después del
+  primer decimal del riesgo, leyendo la distribución de ese dígito. Prueba la forma de leer con el mismo prompt y los
+  mismos casos que la línea base. La humo controla además el formato de `c-sino` y `c-digito`, sin mirar sus
+  resultados.
+- **Etapa 2 (otro Colab, cuando estén las legítimas entrantes que genera Evaristo):** el prompt C con el alcance
+  (`c-json`, `c-sino`, `c-digito`), `v4-premisa`, y v4 y v4-L sobre las legítimas nuevas.
+
+[`probar_puntaje_token_2.py`](probar_puntaje_token_2.py) hace la etapa 1 en una sesión:
+
+1. **Humo de formato** en los mismos 3 casos de la humo 2 (48 líneas), para `v4-lectura`, `c-sino` y `c-digito`.
+   Criterio fijado antes de correr, en cada variante:
+   - `masa` ≥ 0,9 en al menos 44 de 48 líneas;
+   - con 3 tokens, la respuesta empieza con SÍ/NO o con un solo dígito (no «10») en al menos 44 de 48;
+   - en v4-L, en vez de eso, que se encuentre el decimal del riesgo en al menos 44 de 48 líneas.
+2. **v4-L sobre los 150** en todas las líneas (`--seguir-tras-aviso`) y su repetición. Cada corrida baja como
+   `parcial-puntaje-token-2-<carpeta>.zip`.
+3. **Controles de ventas** ([`casos/controles-ventas.json`](../casos/controles-ventas.json)) con v4-L y v4 JSON, solo para
+   mirar.
+4. Al final baja `resultados-puntaje-token-2.zip` con todo, más `commit.txt`, `pip-freeze.txt`,
+   `ollama-version.txt`, `script-sha256.txt` y `gpu.txt`.
+
+Se calcula alrededor de 35 minutos en T4: unos 8 minutos por corrida de v4-L, más la instalación, la humo y los
+controles.
+
+**Pasos:** abrir [`COLAB-PUNTAJE-TOKEN-2.ipynb`](COLAB-PUNTAJE-TOKEN-2.ipynb) en Colab con **GPU T4**, ejecutar la única
+celda y dejar la pestaña abierta, aceptando las descargas múltiples. Si Colab se corta, los parciales ya descargados
+sirven, y si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.

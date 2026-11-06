@@ -47,8 +47,41 @@ PROMPTS = {
     "tarea-a1": ("tarea_a1.txt",),
     "v4-a1": ("tarea_v4_a1.txt",),
     "v4-a2": ("tarea_v4_a2.txt",),
+    # Segunda vuelta (2026-11-06): el prompt S, más simple, con tres salidas sobre el mismo
+    # cuerpo, y v4 con el riesgo como un dígito. Las preguntas de token van al final del
+    # mensaje del usuario (PREGUNTAS_FINALES), no en el de sistema.
+    "s-json": ("tarea_s.txt", "salida_json_s.txt"),
+    "s-sino": ("tarea_s.txt",),
+    "s-digito": ("tarea_s.txt",),
+    "v4-digito": ("tarea_v4_d.txt",),
+    # v4-L: el JSON de v4 tal cual (mismo prompt, mensaje y esquema), cortado después del primer
+    # decimal del riesgo; se lee la distribución de ese dígito (DetectorSLMLecturaJSON).
+    "v4-lectura": ("tarea_v4.txt",),
+    # Alcance del 2026-11-06: el detector corre solo en llamadas entrantes de números no agendados,
+    # y el prompt lo dice. `v4-premisa` es v4 con esa sola oración más; C mira la llamada entera y
+    # su intención en vez del momento del pedido, con las mismas tres salidas que S.
+    "v4-premisa": ("tarea_v4_premisa.txt",),
+    "c-json": ("tarea_c.txt", "salida_json_c.txt"),
+    "c-sino": ("tarea_c.txt",),
+    "c-digito": ("tarea_c.txt",),
 }
-PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2"})
+PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2", "s-sino", "c-sino"})
+# Se leen con DetectorSLMDigito: un número del 0 al 9 en el primer token.
+PROMPTS_DIGITO = frozenset({"s-digito", "v4-digito", "c-digito"})
+# Se leen con DetectorSLMLecturaJSON: el primer decimal del riesgo dentro del JSON.
+PROMPTS_LECTURA = frozenset({"v4-lectura"})
+PROMPTS_TOKEN = PROMPTS_SINO | PROMPTS_DIGITO | PROMPTS_LECTURA
+# Última oración del mensaje del usuario, después de la transcripción; `{n}` es la última línea.
+# Los prompts de PREGUNTAS_FINALES la reemplazan por su pregunta, para que sea lo último que
+# lee el modelo antes de responder.
+CIERRE_POR_DEFECTO = "Evaluá la llamada con lo disponible hasta la línea {n}."
+PREGUNTAS_FINALES = {
+    "s-sino": "pregunta_s_sino.txt",
+    "s-digito": "pregunta_s_digito.txt",
+    "v4-digito": "pregunta_v4_digito.txt",
+    "c-sino": "pregunta_c_sino.txt",
+    "c-digito": "pregunta_c_digito.txt",
+}
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
 PROMPT_MOTIVO = "riesgo_motivo.txt"
 HABLANTES = ("ab", "rol", "sin")
@@ -84,8 +117,9 @@ ESQUEMA_MOTIVO = {
     "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "motivo")},
     "required": ["evidencia", "motivo"],
 }
-ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "v4-cita-libre": ESQUEMA_SALIDA, "v5-maniobras": ESQUEMA_SALIDA, "v5-indirectos": ESQUEMA_SALIDA, "v5-sin-excepcion": ESQUEMA_SALIDA, "v5": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO}
-ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO))  # sin esquema: respuesta libre de un token
+ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "v4-cita-libre": ESQUEMA_SALIDA, "v5-maniobras": ESQUEMA_SALIDA, "v5-indirectos": ESQUEMA_SALIDA, "v5-sin-excepcion": ESQUEMA_SALIDA, "v5": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO, "s-json": ESQUEMA_SALIDA, "c-json": ESQUEMA_SALIDA, "v4-premisa": ESQUEMA_SALIDA}
+ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO | PROMPTS_DIGITO))  # sin esquema: respuesta libre de un token
+ESQUEMAS["v4-lectura"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después del riesgo
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -110,6 +144,18 @@ VARIANTES_NO = frozenset({"N", "NO"})
 _SIGNOS_TOKEN = " \t\n\r\u2581\"'`*_.,:;!?¡¿«»()[]{}-"
 # Solo para la columna `alerta_sugerida` (P(SÍ) ≥ P(NO)); la política se elige offline.
 UMBRAL_SI = 0.5
+# Dígitos de la escala 0–9, comparados con `forma_token`. El tokenizador de Gemma parte los
+# números en dígitos sueltos: un «10» empezaría con «1» (la humo controla que no pase).
+DIGITOS = frozenset("0123456789")
+# Solo para la columna `alerta_sugerida` (dígito esperado en la mitad de arriba de la escala).
+UMBRAL_DIGITO = 4.5
+# v4-L: tokens que se dejan generar del JSON para llegar al primer decimal del riesgo
+# (`{"riesgo": 0.3` son ~8 tokens), y la marca de `alerta_sugerida` (riesgo esperado ≥ 0,5).
+MAXIMO_TOKENS_LECTURA = 12
+UMBRAL_LECTURA = 0.5
+_ANTES_DEL_ENTERO = re.compile(r'"riesgo"\s*:\s*$')
+_ANTES_DEL_DECIMAL = re.compile(r'"riesgo"\s*:\s*0\.$')
+_RIESGO_ESCRITO = re.compile(r'"riesgo"\s*:\s*([01](?:\.[0-9]+)?)')
 
 
 @dataclass
@@ -164,6 +210,14 @@ class Respuesta:
     p_si: float | None = None
     masa_si_no: float | None = None
     top_logprobs: str = ""
+    # Solo con DetectorSLMDigito (#143, segunda vuelta): digito_esperado = Σ d·P(d) / Σ P(d)
+    # sobre los dígitos del primer token (entre 0 y 9; el puntaje es digito_esperado / 9) y
+    # masa_digitos = Σ P(d). Las alternativas van en top_logprobs.
+    digito_esperado: float | None = None
+    masa_digitos: float | None = None
+    # Solo con DetectorSLMLecturaJSON (v4-L): el riesgo esperado según la distribución del entero
+    # (0 o 1) y del primer decimal dentro del JSON. `riesgo` guarda el que quedó escrito.
+    riesgo_esperado: float | None = None
 
 
 def cargar_prompt(variante: str) -> str:
@@ -171,6 +225,14 @@ def cargar_prompt(variante: str) -> str:
         raise ValueError(f"prompt desconocido {variante!r}; opciones: {sorted(PROMPTS)}")
     partes = [(DIR_PROMPTS / nombre).read_text(encoding="utf-8").strip() for nombre in PROMPTS[variante]]
     return "\n\n".join(partes)
+
+
+def cargar_pregunta(variante: str) -> str | None:
+    """Pregunta que cierra el mensaje del usuario (con `{n}`), o None si el prompt usa el cierre por defecto."""
+    if variante not in PROMPTS:
+        raise ValueError(f"prompt desconocido {variante!r}; opciones: {sorted(PROMPTS)}")
+    nombre = PREGUNTAS_FINALES.get(variante)
+    return None if nombre is None else (DIR_PROMPTS / nombre).read_text(encoding="utf-8").strip()
 
 
 def usa_roles(variante: str) -> bool:
@@ -192,10 +254,12 @@ def huella(texto: str) -> str:
     return hashlib.sha256(texto.encode("utf-8")).hexdigest()[:16]
 
 
-def armar_mensaje_usuario(lineas: list[Linea] | tuple[Linea, ...], hablantes: str) -> str:
+def armar_mensaje_usuario(lineas: list[Linea] | tuple[Linea, ...], hablantes: str, cierre: str | None = None) -> str:
     """Transcripción disponible, numerada. Con `sin`, las letras A/B no llegan al modelo.
 
     Con `rol`, cada línea trae PROTEGIDA u OTRA en vez de la letra (ver `casos.con_roles`).
+    `cierre` reemplaza la última oración (CIERRE_POR_DEFECTO); `{n}` se cambia por la última
+    línea disponible.
     """
     if hablantes not in HABLANTES:
         raise ValueError(f"hablantes desconocido {hablantes!r}; opciones: {HABLANTES}")
@@ -219,7 +283,7 @@ def armar_mensaje_usuario(lineas: list[Linea] | tuple[Linea, ...], hablantes: st
     return (
         f"Transcripción disponible hasta ahora; la llamada sigue. {aclaracion}\n\n"
         f"{cuerpo}\n\n"
-        f"Evaluá la llamada con lo disponible hasta la línea {n}."
+        f"{(cierre or CIERRE_POR_DEFECTO).replace('{n}', str(n))}"
     )
 
 
@@ -285,6 +349,7 @@ class DetectorSLM:
     pensar: bool | None = None  # False: sin razonamiento previo; None: no se envía (ver correr.calentar)
     extra: dict | None = None  # opciones de hardware de Ollama, p. ej. {"num_gpu": 0, "num_thread": 2}
     esquema: dict | None = None  # None: ESQUEMA_SALIDA (prompt v1)
+    cierre: str | None = None  # None: CIERRE_POR_DEFECTO; si no, la pregunta final (cargar_pregunta)
     nombre = "slm"
 
     def opciones(self) -> dict:
@@ -298,7 +363,7 @@ class DetectorSLM:
 
     def mensajes(self, lineas: list[Linea] | tuple[Linea, ...]) -> tuple[list[dict] | None, str]:
         """(mensajes, "") o (None, error) si la transcripción no entra en el contexto."""
-        return self._mensajes_de(armar_mensaje_usuario(lineas, self.hablantes))
+        return self._mensajes_de(armar_mensaje_usuario(lineas, self.hablantes, self.cierre))
 
     def _mensajes_de(self, usuario: str) -> tuple[list[dict] | None, str]:
         estimado = math.ceil((len(self.prompt) + len(usuario)) / CARACTERES_POR_TOKEN)
@@ -308,7 +373,7 @@ class DetectorSLM:
         return [{"role": "system", "content": self.prompt}, {"role": "user", "content": usuario}], ""
 
     def evaluar(self, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
-        return self.evaluar_mensaje(armar_mensaje_usuario(lineas, self.hablantes), lineas)
+        return self.evaluar_mensaje(armar_mensaje_usuario(lineas, self.hablantes, self.cierre), lineas)
 
     def evaluar_mensaje(self, usuario: str, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
         """Evalúa un mensaje ya armado (el filtro agrega el bloque de indicio).
@@ -379,26 +444,103 @@ def leer_si_no(logprobs) -> tuple[float | None, float | None, list, str]:
     suma aparte el token elegido: ya está entre ellas). Sin variantes de SÍ ni de NO,
     p_si no está definido y la línea queda como fallo (`sin_si_no`), con masa 0.
     """
-    if not isinstance(logprobs, list) or not logprobs:
-        return None, None, [], "sin_logprobs"
-    top = logprobs[0].get("top_logprobs") if isinstance(logprobs[0], dict) else None
-    if not isinstance(top, list) or not top:
-        return None, None, [], "sin_top_logprobs"
-    alternativas, p_si, p_no = [], 0.0, 0.0
-    for alt in top:
-        token, logprob = (alt.get("token"), alt.get("logprob")) if isinstance(alt, dict) else (None, None)
-        if not isinstance(token, str) or isinstance(logprob, bool) or not isinstance(logprob, (int, float)) or logprob > 1e-6:
-            return None, None, [], "logprobs_malformados"
-        alternativas.append([token, round(float(logprob), 4)])
-        forma = forma_token(token)
-        if forma in VARIANTES_SI:
-            p_si += math.exp(logprob)
-        elif forma in VARIANTES_NO:
-            p_no += math.exp(logprob)
+    pares, error = _alternativas_primer_token(logprobs)
+    if pares is None:
+        return None, None, [], error
+    p_si = sum(math.exp(lp) for token, lp in pares if forma_token(token) in VARIANTES_SI)
+    p_no = sum(math.exp(lp) for token, lp in pares if forma_token(token) in VARIANTES_NO)
+    alternativas = [[token, round(lp, 4)] for token, lp in pares]
     masa = p_si + p_no
     if masa <= 0:
         return None, 0.0, alternativas, "sin_si_no"
     return p_si / masa, masa, alternativas, ""
+
+
+def leer_digito(logprobs) -> tuple[float | None, float | None, list, str]:
+    """(digito_esperado, masa_digitos, alternativas, error) del primer token generado.
+
+    Como `leer_si_no`, pero suma la probabilidad de cada dígito del 0 al 9 entre las
+    alternativas. `digito_esperado` es el promedio de los dígitos ponderado por esas
+    probabilidades, entre 0 y 9. Sin dígitos, la línea queda como fallo (`sin_digitos`),
+    con masa 0.
+    """
+    pares, error = _alternativas_primer_token(logprobs)
+    if pares is None:
+        return None, None, [], error
+    masa, suma = 0.0, 0.0
+    for token, lp in pares:
+        forma = forma_token(token)
+        if forma in DIGITOS:
+            masa += math.exp(lp)
+            suma += int(forma) * math.exp(lp)
+    alternativas = [[token, round(lp, 4)] for token, lp in pares]
+    if masa <= 0:
+        return None, 0.0, alternativas, "sin_digitos"
+    return suma / masa, masa, alternativas, ""
+
+
+def leer_riesgo_json(logprobs) -> tuple[float | None, float | None, float | None, dict, float | None, str]:
+    """(riesgo_esperado, digito_esperado, masa_digitos, alternativas, riesgo_escrito, error) de v4-L.
+
+    `logprobs` trae un elemento por token generado del JSON. Se busca la posición del entero
+    del riesgo (después de `"riesgo":`) y la del primer decimal (después de `"riesgo": 0.`).
+    En el decimal, `digito_esperado` y `masa_digitos` se calculan como en `leer_digito`.
+    riesgo_esperado = P(1) + P(0)·digito_esperado/10, con P(0) y P(1) normalizadas en el
+    entero; si el entero no queda en un token propio, es digito_esperado/10. Si el modelo
+    escribió 1, no hay decimal que leer y el riesgo esperado es 1.
+    """
+    if not isinstance(logprobs, list) or not logprobs:
+        return None, None, None, {}, None, "sin_logprobs"
+    texto, entero, decimal = "", None, None
+    for paso in logprobs:
+        token = paso.get("token") if isinstance(paso, dict) else None
+        if not isinstance(token, str):
+            return None, None, None, {}, None, "logprobs_malformados"
+        if entero is None and _ANTES_DEL_ENTERO.search(texto) and token.strip()[:1].isdigit():
+            entero = paso  # el primer token con número después de `"riesgo":` (puede venir un espacio antes)
+        if decimal is None and _ANTES_DEL_DECIMAL.search(texto):
+            decimal = paso
+        texto += token
+    escrito = _RIESGO_ESCRITO.search(texto)
+    riesgo_escrito = float(escrito.group(1)) if escrito else None
+    alternativas = {}
+    p0 = p1 = 0.0
+    if entero is not None:
+        pares, error = _alternativas_primer_token([entero])
+        if pares is None:
+            return None, None, None, {}, riesgo_escrito, error
+        alternativas["entero"] = [[t, round(lp, 4)] for t, lp in pares]
+        p0 = sum(math.exp(lp) for t, lp in pares if forma_token(t) == "0")
+        p1 = sum(math.exp(lp) for t, lp in pares if forma_token(t) == "1")
+    if decimal is None:
+        if riesgo_escrito is not None and riesgo_escrito >= 1:
+            return 1.0, None, None, alternativas, riesgo_escrito, ""
+        return None, None, None, alternativas, riesgo_escrito, "sin_decimal_de_riesgo"
+    digito, masa, pares, error = leer_digito([decimal])
+    alternativas["decimal"] = pares
+    if digito is None:
+        return None, None, masa, alternativas, riesgo_escrito, error
+    if p0 + p1 > 0:
+        riesgo = (p1 + p0 * digito / 10) / (p0 + p1)
+    else:
+        riesgo = digito / 10
+    return riesgo, digito, masa, alternativas, riesgo_escrito, ""
+
+
+def _alternativas_primer_token(logprobs) -> tuple[list[tuple[str, float]] | None, str]:
+    """([(token, logprob), ...], "") del primer token generado, o (None, error)."""
+    if not isinstance(logprobs, list) or not logprobs:
+        return None, "sin_logprobs"
+    top = logprobs[0].get("top_logprobs") if isinstance(logprobs[0], dict) else None
+    if not isinstance(top, list) or not top:
+        return None, "sin_top_logprobs"
+    pares = []
+    for alt in top:
+        token, logprob = (alt.get("token"), alt.get("logprob")) if isinstance(alt, dict) else (None, None)
+        if not isinstance(token, str) or isinstance(logprob, bool) or not isinstance(logprob, (int, float)) or logprob > 1e-6:
+            return None, "logprobs_malformados"
+        pares.append((token, float(logprob)))
+    return pares, ""
 
 
 def validar_riesgo(crudo: str) -> tuple[float | None, str]:
@@ -522,8 +664,8 @@ class DetectorSLMDosEtapas(DetectorSLM):
 class DetectorSLMSiNo(DetectorSLM):
     """Puntaje por probabilidad del token «SÍ» (#143).
 
-    Mismos mensajes que DetectorSLM (el prompt termina en una pregunta SÍ/NO), sin
-    esquema JSON, con `num_predict` 1, temperatura 0, sin razonamiento previo y con los
+    Mismos mensajes que DetectorSLM (la pregunta SÍ/NO cierra el prompt de sistema o, con
+    `cierre`, el mensaje del usuario), sin esquema JSON, con `num_predict` 1, temperatura 0, sin razonamiento previo y con los
     `top_logprobs` (20) del primer token. `p_si` es el puntaje continuo para las políticas
     offline; `alerta_sugerida` (P(SÍ) ≥ P(NO)) solo deja una marca en el CSV.
     """
@@ -543,14 +685,70 @@ class DetectorSLMSiNo(DetectorSLM):
         except ErrorOllama as e:
             ms_fallo = (time.perf_counter() - inicio) * 1000
             return Respuesta(valida=False, error=str(e), ms=ms_fallo, slm_ms=ms_fallo)
-        ms = (time.perf_counter() - inicio) * 1000
-        p_si, masa, alternativas, error = leer_si_no(r.get("logprobs"))
         # done_reason "length" es lo esperado: se pide un solo token.
+        return self._leer(r, (time.perf_counter() - inicio) * 1000)
+
+    def _leer(self, r: dict, ms: float) -> Respuesta:
+        p_si, masa, alternativas, error = leer_si_no(r.get("logprobs"))
         comun = dict(**_medidas(r, ms), masa_si_no=masa,
                      top_logprobs=json.dumps(alternativas, ensure_ascii=False) if alternativas else "")
         if p_si is None:
             return Respuesta(valida=False, error=error, **comun)
         return Respuesta(valida=True, p_si=p_si, alerta_sugerida=p_si >= UMBRAL_SI, **comun)
+
+
+@dataclass
+class DetectorSLMDigito(DetectorSLMSiNo):
+    """Puntaje por el dígito del primer token (#143, segunda vuelta).
+
+    El mismo pedido que DetectorSLMSiNo, pero la pregunta final pide un número del 0 al 9
+    y se lee la distribución de los dígitos. `digito_esperado` (0 a 9) es el puntaje
+    continuo para las políticas offline; `alerta_sugerida` (≥ UMBRAL_DIGITO) solo deja una
+    marca en el CSV.
+    """
+
+    def _leer(self, r: dict, ms: float) -> Respuesta:
+        esperado, masa, alternativas, error = leer_digito(r.get("logprobs"))
+        comun = dict(**_medidas(r, ms), masa_digitos=masa,
+                     top_logprobs=json.dumps(alternativas, ensure_ascii=False) if alternativas else "")
+        if esperado is None:
+            return Respuesta(valida=False, error=error, **comun)
+        return Respuesta(valida=True, digito_esperado=esperado, alerta_sugerida=esperado >= UMBRAL_DIGITO, **comun)
+
+
+@dataclass
+class DetectorSLMLecturaJSON(DetectorSLM):
+    """v4-L (#143, segunda vuelta): el riesgo leído dentro del JSON de siempre.
+
+    Mismo prompt, mismo mensaje y mismo esquema que DetectorSLM, y tampoco se envía `think`. Se
+    generan solo MAXIMO_TOKENS_LECTURA tokens, con logprobs, para llegar al primer decimal del
+    riesgo (ver `leer_riesgo_json`). `riesgo_esperado` es el puntaje continuo para las políticas
+    offline; `riesgo`, el que quedó escrito; `alerta_sugerida` (≥ UMBRAL_LECTURA) solo deja una marca.
+    """
+
+    def opciones(self) -> dict:
+        return {**super().opciones(), "num_predict": MAXIMO_TOKENS_LECTURA}
+
+    def evaluar_mensaje(self, usuario: str, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
+        mensajes, error = self._mensajes_de(usuario)
+        if mensajes is None:
+            return Respuesta(valida=False, error=error)
+        inicio = time.perf_counter()
+        try:
+            r = self.cliente.chat(self.modelo, mensajes, self.esquema or ESQUEMA_SALIDA, self.opciones(), self.pensar,
+                                  top_logprobs=TOP_LOGPROBS)
+        except ErrorOllama as e:
+            ms_fallo = (time.perf_counter() - inicio) * 1000
+            return Respuesta(valida=False, error=str(e), ms=ms_fallo, slm_ms=ms_fallo)
+        ms = (time.perf_counter() - inicio) * 1000
+        riesgo, digito, masa, alternativas, escrito, error = leer_riesgo_json(r.get("logprobs"))
+        # done_reason "length" es lo esperado: el JSON se corta después del riesgo.
+        comun = dict(**_medidas(r, ms), masa_digitos=masa,
+                     top_logprobs=json.dumps(alternativas, ensure_ascii=False) if alternativas else "")
+        if riesgo is None:
+            return Respuesta(valida=False, error=error, riesgo=escrito, **comun)
+        return Respuesta(valida=True, riesgo=escrito, riesgo_esperado=riesgo, digito_esperado=digito,
+                         alerta_sugerida=riesgo >= UMBRAL_LECTURA, **comun)
 
 
 class DetectorReglas:
