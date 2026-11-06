@@ -1,0 +1,123 @@
+{
+  "inicio": "2026-11-06T01:44:01",
+  "comando": "python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts v4-sin-reglas-sino --hablantes rol --num-ctx 4096 --seed 42 --sin-reglas --seguir-tras-aviso --casos CV2-D-V-ORGANISMO_PREVISIONAL-004,CV2-D-L-BANCO-001,SC-WA-CODE-01-e01 --etiqueta humo-v4-sin-reglas-sino --salida /content/humo-puntaje-token/v4-sin-reglas-sino",
+  "codigo": {
+    "commit": "9a2692ee4ee9cf526531e96a1f27bdb67552fcc9",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "arquitectura": "x86_64",
+    "procesador": "x86_64",
+    "nucleos_logicos": 2,
+    "ram_total_gb": 12.7,
+    "python": "3.13.16"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "filtro_tito": null,
+  "tito_viejo_2": null,
+  "particion": "desarrollo",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.14",
+    "digests": {
+      "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+    },
+    "arranque_ms": 7,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": null,
+    "lectura_token": {
+      "num_predict": 1,
+      "top_logprobs": 20,
+      "formato": null,
+      "p_si": "P(SÍ) / (P(SÍ) + P(NO)) del primer token, sumando variantes",
+      "variantes_si": [
+        "S",
+        "SI"
+      ],
+      "variantes_no": [
+        "N",
+        "NO"
+      ],
+      "normalizacion": "sin tildes, sin espacios ni signos alrededor, en mayúsculas (detectores.forma_token)",
+      "alerta_sugerida": "p_si >= 0.5 (solo marca; la política se elige offline)"
+    }
+  },
+  "prompts": {
+    "v4-sin-reglas-sino": {
+      "huella": "6451a00ac0b7dc6e",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. Cada línea empieza con PROTEGIDA (la persona que cuidás) u OTRA (con quien habla). La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en esta llamada, OTRA le pide, induce o presiona a PROTEGIDA para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nReconocé también los pedidos indirectos, aunque no usen las palabras de la lista. Una razón que parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta) o presentarse como una entidad oficial no hace segura la acción pedida.\n\nNo alcanza para alertar:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- aconsejarle a PROTEGIDA que corte y entre por su cuenta a la aplicación o a la página oficial, o que llame a un número que ya tiene, si no le dan un plazo, una amenaza, un enlace ni pasos a seguir;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general;\n- que PROTEGIDA ofrezca, pregunte o cuente algo por su cuenta, sin un pedido o inducción previa de OTRA;\n- que PROTEGIDA haya iniciado la gestión y OTRA le pida un dato común para identificarla (nombre, DNI, fecha de nacimiento, últimos dígitos de una cuenta). Las claves, los códigos y los pagos nunca entran en esta excepción.\n\nRevisá las intervenciones anteriores: si PROTEGIDA ofrece o cuenta algo porque OTRA se lo pidió o la indujo antes en esta llamada, eso sí cuenta. Que PROTEGIDA se niegue no borra el pedido, y que OTRA diga que no pide datos no borra lo que efectivamente haya solicitado.\n\nCon lo disponible hasta ahora, ¿corresponde marcar la alerta según estas reglas? Respondé solo SÍ o NO.",
+      "esquema": null
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|v4-sin-reglas-sino|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "v4-sin-reglas-sino",
+      "hablantes": "rol"
+    }
+  ],
+  "casos": {
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": "7872ce24b1edf4fe",
+    "CV2-D-L-BANCO-001": "10d9a2f2d202aa47",
+    "SC-WA-CODE-01-e01": "f13b4b33a64d33d8"
+  },
+  "roles_protegida": "8c5fcb8135d24de5",
+  "modelos": {
+    "gemma4:e2b-it-q4_K_M": {
+      "carga_ms": 608,
+      "calentamiento_ms": 608,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 330783784,
+        "size_vram_bytes": 330783784
+      },
+      "pensar": false,
+      "runtime_total_ns": 606015005,
+      "runtime_load_ns": 1338259,
+      "runtime_prompt_eval_ns": 113543000,
+      "runtime_eval_ns": 465183000,
+      "logprobs": {
+        "chequeo": "ok",
+        "p_si": 0.9999999987082451,
+        "masa_si_no": 0.9999999930205736,
+        "top5": [
+          [
+            "S",
+            -0.0
+          ],
+          [
+            "SI",
+            -12.9477
+          ],
+          [
+            "Sí",
+            -15.2815
+          ],
+          [
+            " S",
+            -20.301
+          ],
+          [
+            "NO",
+            -20.4673
+          ]
+        ]
+      }
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-11-06T01:44:05"
+}

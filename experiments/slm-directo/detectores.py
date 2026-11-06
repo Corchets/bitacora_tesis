@@ -37,13 +37,18 @@ PROMPTS = {
     "v5-sin-excepcion": ("tarea_v5_sin_excepcion.txt",),
     "v5": ("tarea_v5.txt",),
     "riesgo": ("riesgo.txt",),  # dos etapas: ver DetectorSLMDosEtapas
-    # #143: mismo cuerpo que `tarea`/`v4`, con una pregunta SÍ/NO en lugar del JSON.
-    # Se leen con DetectorSLMSiNo (probabilidad del primer token), no con un esquema.
+    # #143: pregunta SÍ/NO en lugar del JSON. Se leen con DetectorSLMSiNo (probabilidad
+    # del primer token), no con un esquema. Ver prompts/README.md.
+    # Humo 1 (descartados: el modelo empieza «al…» en vez de SÍ cuando quiere avisar).
     "tarea-sino": ("tarea_sino.txt",),
     "v4-sino": ("tarea_v4_sino.txt",),
     "v4-sin-reglas-sino": ("tarea_v4_sin_reglas_sino.txt",),
+    # A1 (solo formato) y A2 (intención), como los define #143.
+    "tarea-a1": ("tarea_a1.txt",),
+    "v4-a1": ("tarea_v4_a1.txt",),
+    "v4-a2": ("tarea_v4_a2.txt",),
 }
-PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino"})
+PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2"})
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
 PROMPT_MOTIVO = "riesgo_motivo.txt"
 HABLANTES = ("ab", "rol", "sin")

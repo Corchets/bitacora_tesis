@@ -188,16 +188,48 @@ class TestPromptsSiNo(unittest.TestCase):
         self.assertEqual(v4_sino.count(self.REGLAS), 1)
         self.assertEqual(self.leer("tarea_v4_sin_reglas_sino.txt"), v4_sino.replace(self.REGLAS, ""))
 
+    # A1 y A2 (#143, tabla «Variantes»): la oración que definía alerta_sugerida pasa a
+    # «Lo que importa es si,» (sin «solo si»: la restricción queda en la pregunta).
+    MARCA = 'Marcá "alerta_sugerida": true solo si,'
+    IMPORTA = "Lo que importa es si,"
+    PREGUNTA_A1_V4 = "¿OTRA le está pidiendo o induciendo a PROTEGIDA algo de la lista? Respondé solo SÍ o NO."
+    PREGUNTA_A1_TAREA = "¿Alguien le está pidiendo o induciendo a la otra persona algo de la lista? Respondé solo SÍ o NO."
+    PREGUNTA_A2 = ("Hasta acá, ¿OTRA está intentando estafar a PROTEGIDA, aunque todavía no haya pedido nada? "
+                   "Respondé solo SÍ o NO.")
+
+    def cuerpo_a1(self, original: str) -> str:
+        cuerpo = self.leer(original).split(self.CORTE)[0]
+        self.assertEqual(cuerpo.count(self.MARCA), 1)
+        return cuerpo.replace(self.MARCA, self.IMPORTA)
+
+    def test_a1_solo_cambia_la_oracion_de_alerta_sugerida_y_la_pregunta(self):
+        for original, a1, pregunta in (("tarea_v4.txt", "tarea_v4_a1.txt", self.PREGUNTA_A1_V4),
+                                       ("tarea.txt", "tarea_a1.txt", self.PREGUNTA_A1_TAREA)):
+            with self.subTest(a1):
+                self.assertEqual(self.leer(a1), self.cuerpo_a1(original) + pregunta + "\n")
+
+    def test_a2_es_a1_sin_las_dos_reglas_y_con_la_pregunta_de_intencion(self):
+        cuerpo = self.cuerpo_a1("tarea_v4.txt")
+        self.assertEqual(cuerpo.count(self.REGLAS), 1)
+        self.assertEqual(self.leer("tarea_v4_a2.txt"), cuerpo.replace(self.REGLAS, "") + self.PREGUNTA_A2 + "\n")
+
+    def test_a1_y_a2_no_nombran_el_campo_ni_la_alerta_en_la_pregunta(self):
+        for variante in ("tarea-a1", "v4-a1", "v4-a2"):
+            with self.subTest(variante):
+                self.assertNotIn("alerta_sugerida", cargar_prompt(variante))
+                self.assertNotIn("alerta", cargar_prompt(variante).splitlines()[-1])
+
     def test_variantes_registradas_sin_esquema(self):
-        self.assertEqual(PROMPTS_SINO, {"tarea-sino", "v4-sino", "v4-sin-reglas-sino"})
+        self.assertEqual(PROMPTS_SINO, {"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2"})
         for variante in PROMPTS_SINO:
             with self.subTest(variante):
-                self.assertTrue(cargar_prompt(variante).endswith(PREGUNTA))
+                self.assertTrue(cargar_prompt(variante).endswith("Respondé solo SÍ o NO."))
                 self.assertNotIn("JSON", cargar_prompt(variante))
                 self.assertIsNone(esquema_de(variante))
-        self.assertFalse(usa_roles("tarea-sino"))
-        self.assertTrue(usa_roles("v4-sino"))
-        self.assertTrue(usa_roles("v4-sin-reglas-sino"))
+        for variante in ("tarea-sino", "tarea-a1"):
+            self.assertFalse(usa_roles(variante))
+        for variante in ("v4-sino", "v4-sin-reglas-sino", "v4-a1", "v4-a2"):
+            self.assertTrue(usa_roles(variante))
 
 
 class TestDetectorSiNo(_ConServidor):
@@ -212,7 +244,8 @@ class TestDetectorSiNo(_ConServidor):
 
     def test_solo_cambia_el_mensaje_de_sistema(self):
         """Un cambio por vez: mismo mensaje de usuario que DetectorSLM con los mismos hablantes."""
-        for variante, base, h in (("tarea-sino", "tarea", "ab"), ("v4-sino", "v4", "rol")):
+        for variante, base, h in (("tarea-sino", "tarea", "ab"), ("v4-sino", "v4", "rol"),
+                                  ("tarea-a1", "tarea", "ab"), ("v4-a1", "v4", "rol"), ("v4-a2", "v4", "rol")):
             with self.subTest(variante):
                 lineas = DIALOGO[:3] if h == "ab" else tuple(Linea("OTRA" if l.hablante == "A" else "PROTEGIDA", l.texto) for l in DIALOGO[:3])
                 sino, _ = DetectorSLMSiNo(self.cliente, "m", cargar_prompt(variante), h).mensajes(lineas)
