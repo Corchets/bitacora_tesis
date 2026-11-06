@@ -1,0 +1,24 @@
+A: buenas tardes te llamo del área de de prevención fraudes del banco me llamo veronica
+B: hola sí qué pasó
+A: antes de darte información necesito validar que hablo con el titular me me decís tu dni y tu fecha de nacimiento
+B: para qué paso algo con la cuenta
+A: es por un movimiento de tu tarjeta de crédito crédito prefiero no darte detalles hasta validar
+B: bueno bueno cuarenta millones ciento cinco mil tressientos veintidós nací el catorce de marzo del noventa y siete
+A: gracias coincide hace veinte minutos hubo un intento de compra con la tarjeta terminada en cuatro mil cuatrocientos diecisiete por siento ochenta y siete mil pesos en una tienda online
+B: no yo compré nada tengo la tarjeta acá en la billetera
+A: bien la operación quedó rechazada no se te cobró nada
+B: y cómo pudieron usarla si la tengo yo
+A: seguramente copiaron los datos en alguna compra por internet no hace falta que la tengan físicamente
+B: uh y ahora qué hago
+A: lo que corresponde es bloquearla ahora y mandarte una nueva al domicilio tarda entre siete y diez días hábiles
+B: y mientras tanto me quedo sin tarjeta tengo que que pagar cosas esta semana
+A: te queda la de débito que no está comprometida si querés también podés usar la tarjeta virtual de la app que se genera con otro número
+B: bueno bloqueala
+A: listo ya está bloqueada por precaución también cerré las sesiones abiertas de la app
+B: y cómo vuelvo a entrar
+A: te va a llegar un sms con un código para reactivarla ese código lo ponés vos en la app no se lo digas a nadie tampoco a mí ni a nadie que te llame diciendo que es del banco
+B: ok y la compra esa no me la van a cobrar en el resumen
+A: no quedó rechazada igual revisá vos los últimos movimientos por si ves algo más que no reconozcas
+B: ahí entro y miro
+A: tu número de gestión es cinco ocho dos dos uno cero por si tenés que reclamar algo
+B: cinco ocho dos dos uno cero lo anoto

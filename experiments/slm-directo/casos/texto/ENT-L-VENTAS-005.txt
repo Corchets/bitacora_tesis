@@ -1,0 +1,25 @@
+A: Hola, buenas tardes.
+B: Sí, ¿quién es?
+A: Te habla Micaela, de Telnor. Te llamo porque el viernes empezaste el formulario en la web para pasarte con nosotros manteniendo tu número.
+B: Ah, sí. Lo llené pero se me colgó la página.
+A: Por eso te llamo, te quedó a mitad de camino. Faltaba validar la identidad. ¿Me confirmás tu DNI?
+B: cuarenta y tres millones quinientos diecisiete mil doscientos ocho.
+A: Gracias. ¿Y el mail donde te mandamos el contrato?
+B: nahuel.ortiz arroba hotmail.com.
+A: Bien. ¿Seguís queriendo el plan de veinte gigas que elegiste?
+B: Sí. Bah, ¿cuánto quedaba?
+A: Quince mil por mes los primeros seis meses, después veintiún mil.
+B: Bueno, sí, igual es menos de lo que pago ahora.
+A: Bien. Ahora tu compañía actual te va a mandar un SMS con un PIN de portabilidad.
+B: Ah, ya me llegó uno ayer. ¿Te lo paso?
+A: No, ese no me lo pases. Lo cargás vos en el mismo formulario de la web, donde se te colgó.
+B: ¿Y si se me vuelve a colgar?
+A: Probá desde la computadora y no desde el celular. Si no podés, vas a cualquier local con el DNI y lo cargan ahí con vos.
+B: ¿Y el PIN de ayer sigue sirviendo?
+A: Dura cuarenta y ocho horas. Si venció, desde la web pedís uno nuevo.
+B: Ok. ¿En cuánto se hace el cambio?
+A: Más o menos en dos días hábiles. Vas a estar un rato sin señal ese día, a la madrugada.
+B: ¿Y el chip?
+A: Te lo mandamos a la dirección del formulario, Mendoza cuatrocientos cincuenta y cinco.
+B: Esa es.
+A: Listo, Nahuel. Cualquier cosa respondé el mail del contrato.

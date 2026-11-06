@@ -1,0 +1,20 @@
+A: hola soy facundo el repartidor del pedido de la tienda online estoy saliendo para tu casa
+B: ah genial cuánto tardás
+A: unos veinte minutos es en bolívar 930
+B: bolívar 930 sí casa con portón gris
+A: bien te comento que este pedido tiene código de entrega lo tenés en la app de la tienda
+B: sí me apareció te digo ya es el
+A: no ahora no me lo mostrás en la puerta cuando te doy paquete
+B: por qué
+A: porque el código confirma que te lo di en mano si me lo decís antes no sirve
+B: ah tiene sentido
+A: vas a a estar vos
+B: sí si no estoy está mi hermano
+A: si recibe tu hermano necesita el código también pasáselo vos a él no a mí
+B: bueno le aviso
+A: una cosa cosa más el paquete es grande entra por el portón chico
+B: sí abro el grande si hace falta
+A: tenés perro porque la otra vez me mordieron en esa cuadra
+B: tengo uno pero está atado al fondo
+A: mejor te toco bocina cuando llegue
+B: ok te espero

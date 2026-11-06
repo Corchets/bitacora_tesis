@@ -39,7 +39,8 @@ GRUPOS_V2 = {"corpus_v2", "legitimas_cotidianas"}
 FUERA_DEL_MANIFIESTO = {"legitimas_cotidianas"}
 PARTICIONES = {"desarrollo", "test_reservado"}
 FAMILIAS = {"banco", "whatsapp", "soporte", "organismo_previsional", "premio",
-            "familiar", "trabajo", "delivery", "medico", "escuela", "comercial", "encuesta"}
+            "familiar", "trabajo", "delivery", "medico", "escuela", "comercial", "encuesta",
+            "tramite"}
 TIPOS_LEGITIMA = {"cotidiana", "pedido_razonable", "mencion_sin_pedido"}
 CAMPOS_V2 = {"particion", "familia", "dificultad", "tipo_legitima", "variante_asr",
              "escenario_base", "situacion"}
