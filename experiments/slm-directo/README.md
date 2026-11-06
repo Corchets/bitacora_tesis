@@ -75,7 +75,7 @@ respuesta.
 
 ## 4. Casos
 
-Formato y reglas en [casos/README.md](casos/README.md). Cuatro grupos:
+Formato y reglas en [casos/README.md](casos/README.md). Cinco grupos:
 
 - **`piloto_escrito`:** versión escrita de los 7 pares del
   [piloto](../../docs/corpus/METODO-CREACION-CORPUS.md#selección-inicial-del-piloto).
@@ -87,9 +87,13 @@ Formato y reglas en [casos/README.md](casos/README.md). Cuatro grupos:
 - **`laboratorio`:** los guiones del laboratorio de Ignacio convertidos al formato,
   para comparar con lo que se midió ahí.
 - **`corpus_v2`:** 297 conversaciones nuevas, con datos y transferencias legítimas,
-  cotidianas, pedidos indirectos y variantes de transcripción. El inventario total
-  tiene 150 de desarrollo (75/75) y 200 reservadas (100/100). Ver
+  cotidianas, pedidos indirectos y variantes de transcripción. Con los tres grupos
+  anteriores suman 150 de desarrollo (75/75) y 200 reservadas (100/100). Ver
   [diseño y límites](casos/DISENO-CORPUS-V2.md) y [qué grabar para ASR](casos/GRABACIONES-ASR.md).
+- **`legitimas_cotidianas`:** 94 legítimas de desarrollo, sumadas el 2026-11-06 y escritas
+  como llamadas entrantes de números desconocidos, para medir dentro del alcance
+  ([#151](https://github.com/Corchets/bitacora_tesis/issues/151)). Quedan fuera del
+  manifiesto de la reserva. Ver [la sección del grupo](casos/README.md#legítimas-cotidianas).
 
 > **Estado: propuesta sin discutir.** El runner usa desarrollo por defecto y el
 > panel excluye los textos reservados. La independencia de semillas y la evaluación

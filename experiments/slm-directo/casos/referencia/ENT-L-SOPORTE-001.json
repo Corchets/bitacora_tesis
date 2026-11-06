@@ -1,0 +1,49 @@
+{
+  "case_id": "ENT-L-SOPORTE-001",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 3,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Soporte técnico que pide DNI, dirección y una revisión del equipo, y que da un código de visita en lugar de pedirlo.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (soporte_tecnico_solicitado); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: B. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-SOPORTE-001`. Variante escrita de transcripción generada por script, sin audio medido.",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": null,
+  "situacion": "El soporte del proveedor de internet llama por un reclamo de falta de servicio, valida al titular, diagnostica el módem por teléfono, agenda un técnico y da un código de visita para reconocerlo."
+}

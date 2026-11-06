@@ -1,0 +1,12 @@
+A: ¿Hola?
+B: Hola, ¿Matías? Te habla Ezequiel, de Andes Motors, la concesionaria de avenida Mate de Luna. Dejaste una consulta en la página por la pick-up mediana.
+A: Ah, sí, estaba mirando.
+B: Te cuento: este mes hay tasa cero en doce cuotas para una parte, y el resto en sesenta cuotas fijas. Si querés, te precalifico el crédito ahora y sabés cuánto te aprueban.
+A: ¿Y qué necesitás?
+B: Tu nombre completo y el DNI, nada más. Consulto con la financiera y te digo.
+A: Matías Gómez. DNI treinta y nueve, setecientos dos, ciento quince.
+B: Perfecto. ¿Y un mail para mandarte la cotización?
+A: matigomez arroba gmail punto com.
+B: Listo. En un rato te mando la cotización con lo que te aprueben. Si te cierra, venís al salón, hacés la prueba de manejo y firmamos ahí.
+A: Dale, gracias.
+B: A vos, Matías. Abrazo.

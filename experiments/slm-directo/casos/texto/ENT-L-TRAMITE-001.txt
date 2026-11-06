@@ -1,0 +1,21 @@
+A: hola buen día te habla fernando de la planta de revisión técnica de tafí viejo
+B: sí
+A: te llamo para confirmar el turno viernes a las nueve para la revisión el vehículo es la patente af ciento dieciocho pr
+B: sí esa llamaban para esto no sabía
+A: sí confirmamos los turnos porque mucha gente no viene y se pierde el lugar
+B: ah bueno voy a
+A: traé la cédula verde el seguro vigente y el dni
+B: el seguro en papel o sirve el del celular
+A: sirve el digital
+B: bien cuánto tarda
+A: unos cuarenta minutos si no hay demora
+B: y si no pasa
+A: te dan quince días para corregir y volver sin costo
+B: y si el problema es grande
+A: el plazo es el mismo si no llegas sacás turno nuevo y pagás de nuevo
+B: se paga ahí
+A: sí en caja de la planta con tarjeta o efectivo no se paga nada antes
+B: ok
+A: el código de turno te llegó por mail mostrás en la entrada
+B: sí lo tengo
+A: llegá sinco minutos antes

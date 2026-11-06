@@ -1,0 +1,12 @@
+A: Hola, sí.
+B: Hola, buenas tardes, ¿hablo con Gonzalo Ruiz?
+A: Sí, ¿quién es?
+B: Gonzalo, te habla Micaela, de Telnor. Te llamo porque el viernes completaste el formulario en la web para pasarte con nosotros manteniendo tu número.
+A: Ah, sí, lo llené pero no lo terminé.
+B: Por eso te llamaba. Te faltó validar la identidad. ¿Me confirmás tu DNI?
+A: Cuarenta, ciento cinco, trescientos veintidós.
+B: Perfecto. ¿Y el mail donde te mandamos el contrato?
+A: gonza punto ruiz arroba hotmail punto com.
+B: Listo. Ahora tu compañía actual te va a mandar un SMS con un PIN de portabilidad. Ese PIN lo ponés vos en el mismo formulario de la web, donde te quedó pendiente. No me lo pases a mí.
+A: Ah, ok. ¿Y en cuánto se hace el cambio?
+B: Más o menos en cuarenta y ocho horas hábiles. Te avisamos por SMS. Gracias, Gonzalo.

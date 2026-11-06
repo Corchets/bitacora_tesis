@@ -1,0 +1,21 @@
+A: Buenas tardes, le habla Lorena, de prevención de fraudes del banco.
+B: Sí, buenas tardes.
+A: ¿Me dice su nombre completo, por favor?
+B: Juan Pablo Sosa.
+A: Gracias, señor Sosa. ¿Me confirma los últimos tres números de su documento?
+B: Cuatro, ocho, uno.
+A: Ok. Lo llamo por una compra con su tarjeta de débito de ochenta y nueve dólares en una aerolínea, hace una hora.
+B: Sí, eso lo hice yo. Saqué pasajes por la computadora, me ayudó mi nieto.
+A: Muy bien. Como era en el exterior y en moneda extranjera, el sistema la dejó en revisión.
+B: ¿Y se pagó o no se pagó?
+A: Todavía no. Si usted me confirma que la reconoce, la libero ahora.
+B: Sí, la reconozco. ¿Me van a cobrar algo más por esto?
+A: No, el importe es el mismo. Lo que sí va a ver en el resumen son los impuestos por compra en dólares.
+B: Ah, eso no lo sabía. ¿Cuánto es?
+A: Depende del cambio del día, pero le aparece detallado en el resumen.
+B: Bueno. Ya está liberada entonces.
+A: Sí, ya quedó aprobada. ¿Va a viajar pronto?
+B: En diciembre, a Chile, a ver a mi hija.
+A: Le recomiendo avisar el viaje en la app, en la parte de tarjetas, o en cualquier sucursal. Así no le frenan compras allá.
+B: Eso se lo pido a mi nieto que me lo haga.
+A: Muy bien. Que tenga buen viaje, señor Sosa.

@@ -1,0 +1,60 @@
+{
+  "case_id": "ENT-L-SELECCION-002",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 11,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 12,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 13,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 16,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 17,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Transcripción con ruido de ASR en la que se nombran un link, un código de acceso y el costo del proceso, como en las estafas que piden el código de verificación recibido, pero quien llama frena al postulante cuando ofrece leérselo y aclara que no hay nada que pagar.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; familia selección de personal, agregada al lote de legítimas entrantes por pedido de Mateo Antenucci. La escribió un agente que no leyó prompts, corridas, resultados ni casos existentes; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Selección de personal, la familia que faltaba en el lote de legítimas entrantes del 2026-11-06. Llamada entrante de un número desconocido: el que llama se presenta. Persona protegida: B. Familia `trabajo`, que en `corpus_v2` son llamadas entre compañeros. Partición de desarrollo, pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "desarrollo",
+  "familia": "trabajo",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": true,
+  "escenario_base": null,
+  "situacion": "Una consultora de recursos humanos llama a un postulante a analista contable semi senior para coordinar una entrevista por videollamada el jueves 12 a las 11 y avisarle que el mail que le mandó trae el link y el acceso a una evaluación online; cuando él ofrece leerle el código de acceso, ella lo frena."
+}

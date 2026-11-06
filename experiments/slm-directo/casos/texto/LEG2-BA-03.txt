@@ -1,0 +1,12 @@
+A: ¿Hola, quién es?
+B: Buenas tardes, te habla Lorena, de prevención de fraudes de Banco Andino. ¿Me decís tu nombre completo, por favor?
+A: Juan Pablo Sosa.
+B: Gracias, Juan Pablo. ¿Me confirmás los últimos tres números de tu DNI?
+A: Cuatro, ocho, uno.
+B: Perfecto. Te llamo por una compra con tu tarjeta de débito, ochenta y nueve dólares en una aerolínea. ¿La hiciste vos?
+A: Ah, sí, son unos pasajes que saqué recién.
+B: Bien, entonces la liberamos. Ya queda aprobada. ¿Estás por viajar?
+A: Sí, en diciembre me voy a Chile.
+B: Te recomiendo cargar el aviso de viaje en la app, en tarjetas, así no te frenamos compras allá.
+A: Buenísimo, lo hago. Gracias.
+B: A vos, Juan Pablo. Buen viaje.

@@ -1,0 +1,10 @@
+A: ¿Hola?
+B: Buen día, te habla Ezequiel, de Nubo Telecom. ¿Estoy hablando con el titular de la línea, Néstor Ibáñez?
+A: Sí, soy yo, pero si es para vender algo no me interesa.
+B: Sí, era para ofrecerte un plan de internet para tu casa.
+A: No, gracias, ya tengo. Y me llaman todos los días, eh.
+B: Uh, disculpá. ¿Querés que te saque de la base de llamadas comerciales?
+A: Sí, por favor.
+B: Listo, Néstor, ya quedó registrado. Igual, si querés que no te llame ninguna empresa, te podés anotar en el Registro No Llame, es gratis.
+A: Bueno, gracias.
+B: A vos, perdón la molestia. Buen día.
