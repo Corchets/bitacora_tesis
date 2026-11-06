@@ -76,6 +76,13 @@ modelo y no en cómo se lee el puntaje.
   - El JSON con Tito, en las mismas condiciones, da 28/46 (riesgo ≥ 0,4 o alerta). Es +1, dentro del ruido.
   - Tito baja las consultas al SLM hasta el aviso de unas 2.400 a unas 1.200 en los 150 casos (mediana: 5 por caso
     en lugar de 16–18).
+  - **Nota del 2026-11-06:** la ventaja de la compuerta sale casi toda del punto ciego de Tito. Se probó con un Tito
+    que además despierta en la primera mención o pedido marcados.
+    - Con A2 v4 quedan +4 y +3 estafas sobre el SLM solo, que salen de dos llamadas médicas (`MEDICO-001` y
+      `MEDICO-004`).
+    - Con A1 v4 queda +1, y con `tarea`, 0.
+    - Ver H08 en `docs/hallazgos/` y la tabla 2 del análisis `analisis/2026-11-06-tito-compuerta-sensible/`, que
+      llegan a `laboratorio-main` con el [PR #150](https://github.com/Corchets/bitacora_tesis/pull/150).
 - **α de la EMA (exploración):** ni 0,3 ni 0,7 le ganan a 0,5 por 3 o más estafas, ni en la corrida ni en la
   repetición. α no importa.
 - **Manuales en el punto elegido:**
