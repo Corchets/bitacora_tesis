@@ -63,3 +63,6 @@ experiments/slm-directo/casos/referencia/CV2-T-*
 
 # Llamadas en vivo: transcripciones de voces del equipo; se copian a corridas/ solo si se decide
 experiments/voip/llamadas/
+
+# Handoffs locales para mandar al equipo: su contenido vive en docs/hallazgos o en issues
+HANDOFF-*.md

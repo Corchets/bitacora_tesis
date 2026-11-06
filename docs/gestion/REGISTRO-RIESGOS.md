@@ -166,3 +166,14 @@ prompt y política sobre desarrollo no estima el rendimiento: eso sale de la res
 
 R05, corrección de la reserva pedida por Luciano el 2026-11-05 (rama `reserva-sin-cortes`, en curso): se completan sus llamadas cortadas después de ver resultados de desarrollo. Sube el máximo alcanzable
 y puede dejar los casos sin ceguera para quien los lea. **Mitigación:** otra sesión que no lee prompts ni resultados, registro `r03` con huellas y motivos, y declararlo en el informe. Los casos cortados de desarrollo siguen igual.
+
+## Actualización técnica — 2026-11-06
+
+R25 **se materializó en desarrollo** ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)).
+
+- **Qué pasó.** La baja de falsas alarmas con Tito se leyó como beneficio del filtro: 19 → 14 con v1, 17 → 13 con v4 y 1/10 → 0/10 de E2B en #101. Pero las 7 legítimas que desaparecen en la lectura JSON son punto ciego: el SLM avisaba en una línea sensible que Tito no vio. En #101, Tito había activado en la línea 1 de la legítima que E2B dejó de avisar.
+- **Mitigación propuesta, sin discutir:**
+  - Evaluar la compuerta por su cobertura de la primera línea sensible ([ARQUITECTURA §8.5](../ingenieria/ARQUITECTURA.md#85-qué-tiene-que-cumplir-la-compuerta)).
+  - Si Tito queda como ablación en la reserva, no contar como acierto una falsa alarma que desaparece sin esa cobertura.
+- **Contingencia.** Corre la que ya estaba escrita: no adoptar el filtro por un beneficio que oculta pérdidas. Lo decide [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
+- **Pendiente.** Probabilidad, impacto y el paso al seguimiento quedan para su dueño (Ignacio / #51), como pide la regla de riesgos materializados.

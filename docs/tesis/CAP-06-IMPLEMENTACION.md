@@ -127,6 +127,8 @@ El módulo de reproducción y gestión temporal se implementa en:
 
 ### 6.2.3. Modelos de lenguaje directo y reglas heurísticas (`experiments/slm-directo/`)
 
+> **Corregir (#51):** si el ADR 0002 deja el SLM solo, Tito pasa a ser un componente de ablación. Hay que ajustar este punto, la tabla de §6.1 y el diagrama de §6.2.
+
 La capa de detección lingüística implementa dos variantes complementarias:
 
 1. **Filtro Tito viejo ([`filtro_tito.py`](../../experiments/slm-directo/filtro_tito.py), [`tito_real.py`](../../experiments/slm-directo/tito_real.py)):**

@@ -41,6 +41,9 @@
 4. **Tito sin indicio es la configuración más equilibrada de las tres.** Detecta lo mismo que el
    SLM solo dentro del ruido (54 contra 55), da 5 falsas alarmas menos (14 contra 19) y hace la
    mitad de consultas. Sobre las líneas que consultan los dos, la respuesta cambia en el 0,3 %.
+
+   > **Nota del 2026-11-06:** las 5 falsas alarmas menos no son mérito de Tito. En esas legítimas, el SLM avisaba en una línea
+   > sensible que Tito no vio; en corpus_v2 son 4 = 4. Ver [H08](../../../../docs/hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
 5. **Hay 19 estafas que ninguna configuración detecta**, siempre las mismas: varias de
    organismo previsional, familiar, soporte técnico, WhatsApp y premio, más `CV2-D-V-BANCO-012`
    y `TR-12-corta-antes-del-pedido`. `TR-04-pedido-tras-charla-larga` solo lo detecta Tito con

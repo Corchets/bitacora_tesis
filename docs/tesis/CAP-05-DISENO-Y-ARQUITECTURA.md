@@ -186,11 +186,20 @@ flowchart LR
 
 ### 5.5.1. Detector
 
+> **Corregir (#51):** varias partes del capítulo describen la configuración del ADR 0001, con Tito viejo como compuerta y el indicio en el prompt:
+>
+> - esta sección;
+> - el diagrama de §5.5;
+> - el componente 4 de §5.1;
+> - la fila del detector en la tabla de interfaces.
+>
+> Cuando #51 cierre el ADR 0002, hay que actualizar la compuerta (SLM solo o Tito) y sacar el indicio, que la demo no usa desde el 2026-11-05 ([H07](../hallazgos/H07-indicio-de-tito-pierde-estafas.md)). Si Tito queda, se describe con el requisito de [ARQUITECTURA §8.5](../ingenieria/ARQUITECTURA.md#85-qué-tiene-que-cumplir-la-compuerta) y con su limitación ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)).
+
 **Tito como compuerta, el modelo como decisor.** Tito viejo es un RoBERTuito congelado con una regresión logística, ajustada con 5.520 textos sintéticos de 276 familias de variantes. Puntúa la frase aislada con umbral 0,5. No emite avisos: cuando se activa, el modelo evalúa desde esa misma frase y sigue en cada línea hasta el final de la llamada. Recibe la conversación disponible y, por separado, el fragmento que activó a Tito con su puntaje, con la indicación explícita de que esa sospecha es preliminar y puede descartarse. El puntaje de Tito nunca se presenta como confirmación de fraude.
 
 Las llamadas que Tito nunca deriva quedan en los denominadores: una estafa no derivada cuenta como estafa sin aviso.
 
-**Por qué esta combinación.** En la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md), Tito viejo con E2B fue la única combinación con 10/10 estafas y 0/10 falsas alarmas, sin umbrales ajustados mirando esos casos. Es el resultado de comparar 10 modelos en esos mismos 20 casos, sin revisión humana, por lo que no estima el rendimiento final.
+**Por qué esta combinación.** En la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md), Tito viejo con E2B fue la única combinación con 10/10 estafas y 0/10 falsas alarmas, sin umbrales ajustados mirando esos casos. Es el resultado de comparar 10 modelos en esos mismos 20 casos, sin revisión humana, por lo que no estima el rendimiento final. La diferencia en falsas alarmas con E2B directo (0/10 contra 1/10) no vino del filtro: en esa legítima Tito activó en la línea 1 y el modelo leyó la conversación entera en las dos condiciones ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)). Lo que el filtro aporta es el ahorro de consultas.
 
 | Alternativa | Resultado | Por qué no |
 |---|---|---|

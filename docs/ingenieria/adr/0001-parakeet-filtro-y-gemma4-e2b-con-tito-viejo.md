@@ -7,6 +7,8 @@
 
 > **Nota del 2026-11-05:** a pedido de Luciano, la demo con ASR arranca con el prompt `v4`, roles y Tito sin indicio ([resultados](../../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso)). La [última prueba](../../../experiments/slm-directo/corridas/2026-11-05_tito-2-v4/analisis.md) deja como candidata `v4` con roles, Tito viejo sin indicio y primer aviso (55/75 estafas y 13/75 falsas alarmas); Tito viejo 2.0 da lo mismo. Este ADR todavía no se reabrió: sigue registrando `tarea` con indicio.
 
+> **Nota del 2026-11-06:** en la matriz #101, la falsa alarma que E2B daba solo y no con Tito (`CV2-D-L-BANCO-001`) no la filtró Tito: activó en la línea 1, y el SLM leyó la llamada entera en las dos condiciones. La ventaja de Tito sobre E2B directo es el ahorro de consultas, no las falsas alarmas ([H08](../../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)). El ADR 0002 de [#51](https://github.com/Corchets/bitacora_tesis/issues/51) lo tiene que tener en cuenta.
+
 ## Contexto
 
 [D09](../../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) pedía elegir ASR y detector por calidad, falsas alarmas, tiempos y memoria. El cierre del tutor es el 2026-11-30, y la meta que fijó es avisar en 80–85 % de las estafas con 10–15 % de falsas alarmas, sin saltar por frases sueltas como «decime la contraseña». El hardware de referencia es la gama más alta de teléfonos disponible.
