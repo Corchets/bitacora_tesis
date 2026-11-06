@@ -14,8 +14,8 @@ externas sirven para probar si el sistema generaliza fuera de nuestro generador.
   Las dos fuentes elegidas aportan solo estafas. Faltan legítimas difíciles (ver §5.1); sin
   ellas no se puede armar el set balanceado del paso 3.
 - **Elegidas (propuesta):** las estafas reales de KorCCVi v2 (coreano, publicadas por el FSS de
-  Corea), en especial las llamadas largas, y un subconjunto de las 20 llamadas de *scambaiters*
-  de YouTube.
+  Corea) y un subconjunto de las 20 llamadas de *scambaiters* de YouTube. El filtro de KorCCVi
+  (§3.1.1) deja 16 llamadas con comienzo y pedido, y 10 más con pedido pero sin comienzo.
 - **Descartadas:** PIX Scam BR, porque la conversación no define la clase, y el multi-agente de
   BothBosu y sus parientes sintéticos, porque son demasiado fáciles. También tres fuentes sin
   procedencia o sin ficha.
@@ -82,14 +82,56 @@ Muestra (10 estafas y 4 legítimas): `vishing_512`, `vishing_131`, `vishing_518`
   preaprobado o la refinanciación no tiene fila en el catálogo; habría que decidir si se acepta
   sin semilla local.
 - **`T_R`:** marcable solo en las llamadas que contienen el pedido. En los recortes cortos suele
-  faltar la construcción; en algunas largas falta el pedido. Hay que revisar las 141 una por
-  una antes de saber cuántas quedan.
+  faltar la construcción; en algunas largas falta el pedido. El filtro de §3.1.1 revisa las 141.
 
-**Propuesta:** tomar estafas solo del subconjunto largo, revisar a mano que incluyan el
-comienzo y el pedido, y descartar las de atribución rota. Como no se puede redistribuir,
-versionar solo los identificadores (`vishing_N.json` y el commit) y el procedimiento, como
-indica el issue. Adaptar del coreano al rioplatense es el cambio más grande de todas las fuentes
-(ver §5.2).
+**Propuesta:** tomar las estafas del grupo A del filtro y, si hacen falta más, del grupo B. Como
+no se puede redistribuir, versionar solo los identificadores (`vishing_N.json` y el commit) y
+el procedimiento, como indica el issue. Adaptar del coreano al rioplatense es el cambio más
+grande de todas las fuentes (ver §5.2).
+
+#### 3.1.1. Filtro de las 141 llamadas largas (2026-11-06)
+
+Resultado por llamada: [`FILTRO-KORCCVI.csv`](FILTRO-KORCCVI.csv). Solo trae identificadores,
+duración, grupo, etiqueta y tiempo aproximado del primer pedido y una nota breve; no copia texto.
+
+**Cómo se hizo.** [`filtrar_korccvi.py`](../../experiments/laboratorio/filtrar_korccvi.py) toma las
+llamadas de 4 minutos o más, con 2 hablantes o más y 20 turnos o más. Busca pedidos candidatos
+por palabra clave, agrupados por las etiquetas del [manual](MANUAL-ANOTACION.md#2-cómo-ubicar-las-marcas-y-resolver-dudas),
+y descarta las advertencias del tipo «no le vamos a pedir la clave». Marca 91 con algún candidato
+del hablante que más habla. Después se leyó cada llamada: el comienzo, el contexto de los
+primeros candidatos y, si no había ninguno, el final. En las dudosas hubo una segunda búsqueda
+(cuentas virtuales, «cuentas seguras», visitas, archivos para descargar).
+
+| Grupo | Criterio | Llamadas |
+|---|---|---:|
+| **A** | Incluye el comienzo de la llamada (o de esta llamada de la serie) y un pedido de alto riesgo del llamante | 16 |
+| **B** | Tiene pedido, pero la transcripción arranca en medio de la maniobra | 10 |
+| Dudosa | Puede haber pedido, pero no está claro en el texto | 19 |
+| C | Sin pedido observable, pedido sin construcción previa, víctima que se burla o corta, o cumplimiento anterior al fragmento | 96 |
+
+Lo que muestra el grupo A:
+
+- **Tipos:** 7 de fiscalía o policía, 5 de préstamo, 1 de falso banco (`vishing_540`), 1 de app
+  de «seguridad» (`vishing_281`) y 2 de empleo o alquiler de cuentas, donde la víctima termina
+  como intermediaria (`vishing_298`, `vishing_538`). Estas dos últimas no tienen fila en el
+  catálogo.
+- **Pedido:** en 9 de 16 el primer pedido es `REQUEST_SECURITY_ACTION`. En las de fiscalía casi
+  siempre es entrar a un sitio falso del organismo y cargar datos. En el catálogo,
+  `SC-POLICIA-RESGUARDO-01` usa la misma suplantación pero termina en mover el dinero: es
+  parecida, no igual.
+- **Margen antes del pedido:** en 12 el primer pedido llega a los 2 minutos o más (hasta unos
+  37 minutos en `vishing_637`). En 4 llega antes del minuto (`vishing_448`, `vishing_540`,
+  `vishing_577`, `vishing_657`); varias son la segunda llamada de una serie y la construcción
+  quedó en la primera.
+
+Con 16 del grupo A y unas 7 de YouTube hay 23 estafas, la mitad de un set de 46 diálogos.
+Para llegar al mínimo de 50 del issue hacen falta algunas del grupo B; con las 10 se llega a
+33 estafas, la mitad de un set de 66.
+
+Límites del filtro: el tiempo es el comienzo del turno que contiene el pedido según la
+diarización automática, no `T_R`. `T_R` se marca a mano en el paso 4 con la [guía de #32](MANUAL-ANOTACION.md).
+Lo leyó una sola persona (asistente de IA); las 19 dudosas y los grupos A y B necesitan una
+segunda lectura humana, idealmente de alguien que lea coreano.
 
 ### 3.2. YouTube scam conversations, BothBosu (elegida en parte, solo estafas)
 
