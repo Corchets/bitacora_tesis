@@ -1,0 +1,10 @@
+A: Hola, sí.
+B: Buen día, te habla Lucas, de EnvíosYa. ¿Hablo con Juan Pablo Sosa?
+A: Sí.
+B: Juan Pablo, estoy en tu edificio de Laprida con un pedido y no me atiende nadie.
+A: Uh, estoy en la facultad. ¿Se lo podés dejar al encargado?
+B: Sí. Para el remito necesito el nombre y el DNI de quien lo recibe. ¿El encargado cómo se llama?
+A: Ramón Díaz. El DNI no lo sé, pero él te lo da.
+B: Perfecto, se lo pido a él cuando lo firme. El pedido ya está pago, así que no tiene que abonar nada.
+A: Genial, gracias.
+B: De nada, buen día.

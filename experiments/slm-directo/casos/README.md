@@ -3,7 +3,7 @@
 Conversaciones **escritas y ficticias** para probar el detector sobre texto antes de
 tener audio. Los 53 antecedentes son material de **desarrollo**. Corpus v2 agrega
 97 conversaciones de desarrollo y 200 candidatas reservadas, y
-[`legitimas_cotidianas`](#legítimas-cotidianas) suma 21 legítimas de desarrollo: ver
+[`legitimas_cotidianas`](#legítimas-cotidianas) suma 49 legítimas de desarrollo: ver
 [diseño y límites](DISENO-CORPUS-V2.md), [selección para grabar](GRABACIONES-ASR.md)
 y [revisión técnica](REVISION-CORPUS-V2.md). No reemplazan las grabaciones del piloto
 ([#39](https://github.com/Corchets/bitacora_tesis/issues/39) /
@@ -136,10 +136,17 @@ Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan t
 > al convertir los casos; la composición del corpus sigue abierta en
 > [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
-21 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06 desde
-`llamadas_legitimas.json`. Ese archivo no se guarda en el repositorio: su contenido quedó
-en `texto/` y `referencia/`, y su `id` es el `case_id`. El llamante es `A` y quien atiende
-es `B`, la persona protegida en `roles-protegida.json`.
+49 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06 en dos tandas. Los
+archivos originales no se guardan en el repositorio: su contenido quedó en `texto/` y
+`referencia/`, y su `id` es el `case_id`.
+
+- **Tanda 1, `LEG-*` (21):** desde `llamadas_legitimas.json`. Llama y habla primero `A`;
+  quien atiende es `B`, la persona protegida en `roles-protegida.json`.
+- **Tanda 2, `LEG2-*` (28):** el split `dev` de «Llamadas legítimas v2: negativas difíciles»
+  (`legitimas_dev.jsonl`). Son llamadas entrantes: atiende y habla primero `A`, la persona
+  protegida, y el llamante `B` se presenta en sus dos primeros turnos. Todas piden o confirman
+  datos (nombre, DNI, mail, dirección, obra social) y 9 nombran un código sin pedirlo. 15 son
+  reescrituras de casos de la tanda 1, como dice `notas` en cada una.
 
 | Categoría del original | Casos | `familia` | `tipo_legitima` |
 |---|---|---|---|
@@ -151,11 +158,29 @@ es `B`, la persona protegida en `roles-protegida.json`.
 | Encuestas | `LEG-EN-01`, `03` / `LEG-EN-02` | `encuesta` | `cotidiana` / `pedido_razonable` |
 | Confirmación de turnos | `LEG-TU-01` a `03` | `medico` | `cotidiana` |
 
+En la tanda 2, la familia sigue la misma tabla y el tipo sale del contenido: si nombra un
+código, `mencion_sin_pedido` (9); si pide DNI, mail, dirección u otro dato, `pedido_razonable`
+(14); si solo confirma el nombre, `cotidiana` (5).
+
+#### Test de la tanda 2: fuera del repositorio
+
+El original trae además 14 llamadas de test (2 por categoría, sorteadas con semilla
+`20261106`) para congelar antes de correr detectores. **No están en esta rama**, por la misma
+razón que la [reserva](RESERVA-FUERA-DEL-REPO.md): el repositorio es público y las particiones
+siguen abiertas en [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+Tampoco se guardaron `fuente_llamadas.txt` ni `build.py`, que incluyen el test. Huellas
+SHA-256 para comprobar después que no cambió:
+
+| Archivo | SHA-256 |
+|---|---|
+| `legitimas_test.jsonl` | `6ff4a0e46fc4ac412c6f27b69744d34560c62836650703e4d3add17301488cd9` |
+| `legitimas_test.csv` | `93838036c600b5f7ed6eaa0a292e31e10404523fb2d3669bf9b13e8ec9d9feeb` |
+
 Diferencias con `corpus_v2`:
 
 - **Sin semilla ni par** (`null`): no hay una contraparte de vishing escrita para cada una.
-  Las de banco y `LEG-ST-01` se vinculan con `escenario_base` al escenario legítimo del
-  catálogo (`LG-BANK-ALERT-01`, `LG-SUPPORT-INFO-01`); el resto es cotidiano y queda en `null`.
+  Las de banco, `LEG-ST-01` y `LEG2-ST-05` se vinculan con `escenario_base` al escenario
+  legítimo del catálogo (`LG-BANK-ALERT-01`, `LG-SUPPORT-INFO-01`); el resto queda en `null`.
 - **De 5 a 16 líneas**: el mínimo de 12 de `corpus_v2` no se exige.
 - **Fuera de `MANIFIESTO-CORPUS-V2.json`**: el manifiesto protege los 350 casos de corpus v2 y
   sus antecedentes, y `casos.py` no compara las huellas de este grupo. Así la reserva y el
@@ -164,7 +189,7 @@ Diferencias con `corpus_v2`:
 
 Para correr solo este grupo: `python correr.py --grupo legitimas_cotidianas ...`.
 Las corridas anteriores al 2026-11-06 son sobre 150 casos; `correr.py` usa ahora por
-defecto los 171 de desarrollo. Para repetir una corrida histórica:
+defecto los 199 de desarrollo. Para repetir una corrida histórica:
 `python correr.py --lista desarrollo-150 ...` ([lista](listas/desarrollo-150.txt)).
 
 ## Validar

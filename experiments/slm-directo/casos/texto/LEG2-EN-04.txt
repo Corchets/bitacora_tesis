@@ -1,0 +1,12 @@
+A: Sí, hola.
+B: Hola, buenas tardes. Te habla Gisela, de la obra social Salud Norte, del área de calidad. ¿Hablo con Valeria Paz?
+A: Sí.
+B: Valeria, estamos haciendo una encuesta corta a los afiliados que se atendieron este mes. Para validar que sos afiliada, ¿me confirmás tu DNI?
+A: Treinta y cinco, seiscientos veinte, cero cuarenta y cuatro.
+B: Gracias. ¿Cómo calificarías el tiempo de espera para conseguir turno, del uno al cinco?
+A: Un tres. Tardé dos semanas.
+B: ¿Y la atención en la recepción de la clínica?
+A: Un cuatro, bien.
+B: ¿Algo que quieras que mejoremos?
+A: Que se pueda sacar turno por la app, que siempre se cae.
+B: Lo dejo anotado. Si querés completar la encuesta larga, te llega un mail con un código de participación. Lo cargás vos en la web de la obra social, a mí no me lo tenés que decir. Muchas gracias, Valeria.
