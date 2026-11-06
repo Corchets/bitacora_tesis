@@ -11,7 +11,7 @@ vishing_35.json,C,280,39,2,fiscalia_policia,sí,,,llamada completa que termina s
 vishing_36.json,C,486,30,2,prestamo,no,,,sin pedido claro
 vishing_71.json,C,1128,103,2,fiscalia_policia,no,,,sin pedido; anuncia envío de citación
 vishing_156.json,C,483,53,2,fiscalia_policia,no,,,sin pedido
-vishing_260.json,A,692,56,2,prestamo,sí,REQUEST_PERSONAL_DATA,489,segunda llamada de la serie; pide copia del documento y de la libreta
+vishing_260.json,A,692,56,2,prestamo,sí,REQUEST_TRANSFER,473,segunda llamada de la serie; pide pagar hoy un «depósito» de garantía (cotizado a los 294 s) y luego copia del documento (489 s); corregido en la lectura completa del piloto
 vishing_263.json,B,523,31,2,prestamo,no,REQUEST_TRANSFER,321,pide pagar a una cuenta virtual
 vishing_264.json,C,456,52,3,prestamo,no,,,sin pedido observable
 vishing_276.json,dudosa,568,38,2,fiscalia_policia,parcial,,,sin pedido claro en el fragmento
@@ -35,7 +35,7 @@ vishing_328.json,C,738,105,2,fiscalia_policia,no,,,pregunta en qué bancos tiene
 vishing_329.json,C,541,40,2,fiscalia_policia,no,,,sin pedido
 vishing_332.json,C,529,33,2,fiscalia_policia,no,,,sin pedido
 vishing_333.json,C,340,27,3,fiscalia_policia,sí,,,sin pedido
-vishing_334.json,A,1255,89,2,fiscalia_policia,sí,REQUEST_SECRET,254,pide cargar números de la tarjeta de coordenadas
+vishing_334.json,B,1255,89,2,fiscalia_policia,parcial,REQUEST_SECRET,117,segunda llamada: la víctima ya carga datos en un sitio falso; pide la clave real de la cuenta (117 s) y luego mover todo a una «cuenta virtual» (~655 s); el filtro no vio el pedido de clave; corregido en la lectura completa del piloto
 vishing_337.json,C,522,74,2,fiscalia_policia,sí,,,sin pedido
 vishing_339.json,C,345,37,4,fiscalia_policia,sí,,,termina al pasar con el falso fiscal; sin pedido
 vishing_344.json,C,255,43,2,fiscalia_policia,sí,,,sin pedido
