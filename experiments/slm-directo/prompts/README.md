@@ -15,6 +15,7 @@
 | `v4` | [`tarea_v4.txt`](tarea_v4.txt), pensada para `--hablantes rol` |
 | `v5-maniobras`, `v5-indirectos`, `v5-sin-excepcion`, `v5` | Un cambio cada una sobre v4, y `v5` con los tres. Probadas, no adoptadas: ver el [análisis](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) |
 | `v4-cita-libre` | [`tarea_v4_cita_libre.txt`](tarea_v4_cita_libre.txt): v4 con la instrucción de evidencia de v1, sin exigir citar a OTRA. Probada, no adoptada: 55/75 y 12/75 en el [análisis](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md) |
+| `tarea-sino`, `v4-sino`, `v4-sin-reglas-sino` | [`tarea_sino.txt`](tarea_sino.txt), [`tarea_v4_sino.txt`](tarea_v4_sino.txt) y [`tarea_v4_sin_reglas_sino.txt`](tarea_v4_sin_reglas_sino.txt): pregunta SÍ/NO en lugar del JSON, leída por la probabilidad del primer token (`DetectorSLMSiNo`, #143). Ver «Pregunta SÍ/NO» abajo |
 | `riesgo` | [`riesgo.txt`](riesgo.txt) en la etapa 1 (solo `{"riesgo": x}`); si x > umbral, [`riesgo_motivo.txt`](riesgo_motivo.txt) como pedido de la etapa 2 (`DetectorSLMDosEtapas`) |
 
 El mensaje del usuario lo arma `detectores.py` en cada actualización: la
@@ -35,6 +36,28 @@ comparación concreta**, no el orden histórico.
 | **Versión 3 — probada, no adoptada** | 2026-11-04 | [`tarea_v3.txt`](tarea_v3.txt) | Parte de v2: quita el mínimo de riesgo 0,5, conserva el orden de campos de v2 y agrega reglas de contexto. [Resultados en Colab](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): más estafas con aviso y muchas más falsas alarmas. No se usa en la demo. |
 | **Versión 4 — por defecto en la demo desde el 2026-11-05, ADR 0001 sin reabrir** | 2026-11-04 | [`tarea_v4.txt`](tarea_v4.txt) | Parte de v3: vuelve al orden de campos de v1, nombra a PROTEGIDA y OTRA, y agrega las reglas de canal propio y de datos comunes. [Resultados](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): 55/75 estafas y 13/75 falsas alarmas con Tito sin indicio (55/75 y 13/75 repetido). |
 | **Versión 5 — probada, no adoptada** | 2026-11-05 | [`tarea_v5_maniobras.txt`](tarea_v5_maniobras.txt), [`tarea_v5_indirectos.txt`](tarea_v5_indirectos.txt), [`tarea_v5_sin_excepcion.txt`](tarea_v5_sin_excepcion.txt), [`tarea_v5.txt`](tarea_v5.txt) | Tres cambios probados de a uno sobre v4 (maniobras sin pedido explícito, pedidos indirectos de dinero o cobro, y retiro de la excepción de datos comunes) y los tres juntos (`v5`), más 18 controles sintéticos de maniobras. [Resultados](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md): `v5-maniobras` 57/75 y 16/75, `v5-indirectos` 55/75 y 12/75, `v5-sin-excepcion` 56/75 y 13/75, y `v5` 57/75 y 13/75. Ninguna supera a v4 de forma consistente ni avisa las estafas sin pedido del corpus. No se adopta. |
+
+## Pregunta SÍ/NO (#143) — 2026-11-05
+
+> **Estado: propuesta sin discutir.** En prueba en
+> [#143](https://github.com/Corchets/bitacora_tesis/issues/143); no reemplaza a v1 ni a v4.
+
+Cambia solo cómo se lee la decisión: en vez de pedir el JSON, el prompt termina con una
+pregunta cerrada y se lee P(SÍ) de los `logprobs` del primer token (`num_predict` 1,
+temperatura 0, sin razonamiento, sin esquema). El mensaje del usuario es el mismo de siempre.
+
+- **`tarea-sino` y `v4-sino`:** el cuerpo de `tarea.txt` y de `tarea_v4.txt` queda igual byte
+  a byte, incluido «Marcá "alerta_sugerida": true solo si…». Solo el párrafo final («Respondé solo
+  con un objeto JSON…» y sus cuatro campos) se reemplaza por:
+  «Con lo disponible hasta ahora, ¿corresponde marcar la alerta según estas reglas? Respondé solo SÍ o NO.»
+  La pregunta pide la misma decisión que `alerta_sugerida`, no si la llamada «es una estafa»:
+  así cambia la lectura y no el criterio (elegido por Mateo el 2026-11-05 frente a la redacción
+  de ejemplo del issue, «¿esta llamada es un intento de estafa?»).
+- **`v4-sin-reglas-sino`:** `v4-sino` sin el párrafo «Si para explicar el peligro tenés que suponer
+  algo que no se dijo, no alertes. Que alguien apure, diga ser de una entidad o hable de un problema
+  puede aumentar el riesgo, pero no alcanza por sí solo para alertar.» (variante agregada en #143 el
+  2026-11-05). Se compara contra `v4-sino`: no tiene línea base JSON.
+- `tests/test_puntaje_token.py` comprueba que los tres textos salen de sus originales solo con estos cambios.
 
 ## Versión 3 — 2026-11-04
 
@@ -99,4 +122,5 @@ Los cambios se prueban juntos: no se midió el aporte de cada uno por separado.
 | 2026-11-04 | v4 (`tarea_v4.txt`) y `v3-orden-v1`; v1, v2 y v3 intactas | Bajar las falsas alarmas de v3 y darle al SLM el rol que en la llamada da el canal. [Probadas en Colab](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md): 55/75 estafas y 13/75 falsas alarmas con Tito sin indicio. |
 | 2026-11-05 | `v4-cita-libre` (`tarea_v4_cita_libre.txt`) y tanda de roles; v1–v4 intactas | Medir si exigir citar a `OTRA` en `evidencia` frena avisos y separar el efecto de `--hablantes rol` en v1 y `v3-orden-v1`. [Resultados en Colab](../corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó): `v4-cita-libre` 55/75 y 12/75, `v4` repetida 55/75 y 13/75; no se adopta `v4-cita-libre`. |
 | 2026-11-05 | v5 (`v5-maniobras`, `v5-indirectos`, `v5-sin-excepcion`, `v5`); v1–v4 intactas | Probar sobre v4 la regla de maniobras sin pedido explícito, los pedidos indirectos y quitar la excepción de datos comunes, por separado y juntos, más 18 controles sintéticos. [Resultados en Colab](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md): ninguna mejora a v4 de forma consistente (maniobras 57/16, indirectos 55/12, sin excepción 56/13, las tres 57/13) ni detecta las estafas sin pedido del corpus. No se adopta v5. |
+| 2026-11-05 | `tarea-sino`, `v4-sino` y `v4-sin-reglas-sino`; v1–v5 intactas | #143: leer P(SÍ) del primer token en vez del riesgo escrito, que solo toma 0,1/0,2/0,3/0,5 y da dos puntos de operación. Ver «Pregunta SÍ/NO». Si la prueba de humo obliga a cambiar la instrucción de respuesta, se registra acá. |
 | 2026-11-05 | `v4` como valor por defecto de la demo en vivo (`servidor.py`, `medir.py`) con `--hablantes rol` y `--sin-indicio` | Por pedido de Luciano tras comparar v1, v3, v4 y v5 sobre los 150 de desarrollo; ADR 0001 sigue pendiente de reabrir con el equipo. |

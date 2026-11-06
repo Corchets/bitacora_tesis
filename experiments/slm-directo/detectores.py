@@ -37,7 +37,13 @@ PROMPTS = {
     "v5-sin-excepcion": ("tarea_v5_sin_excepcion.txt",),
     "v5": ("tarea_v5.txt",),
     "riesgo": ("riesgo.txt",),  # dos etapas: ver DetectorSLMDosEtapas
+    # #143: mismo cuerpo que `tarea`/`v4`, con una pregunta SÍ/NO en lugar del JSON.
+    # Se leen con DetectorSLMSiNo (probabilidad del primer token), no con un esquema.
+    "tarea-sino": ("tarea_sino.txt",),
+    "v4-sino": ("tarea_v4_sino.txt",),
+    "v4-sin-reglas-sino": ("tarea_v4_sin_reglas_sino.txt",),
 }
+PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino"})
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
 PROMPT_MOTIVO = "riesgo_motivo.txt"
 HABLANTES = ("ab", "rol", "sin")
@@ -74,6 +80,7 @@ ESQUEMA_MOTIVO = {
     "required": ["evidencia", "motivo"],
 }
 ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "v4-cita-libre": ESQUEMA_SALIDA, "v5-maniobras": ESQUEMA_SALIDA, "v5-indirectos": ESQUEMA_SALIDA, "v5-sin-excepcion": ESQUEMA_SALIDA, "v5": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO}
+ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO))  # sin esquema: respuesta libre de un token
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -87,6 +94,17 @@ MAXIMO_TOKENS_RESPUESTA = 512
 # `{"riesgo": 0.35}` son ~8 tokens; el margen cubre espacios o más decimales.
 MAXIMO_TOKENS_RIESGO = 24
 UMBRAL_POR_DEFECTO = 0.6
+
+# Lectura del token «SÍ» (#143). Ollama acepta hasta 20 alternativas por posición.
+TOP_LOGPROBS = 20
+# Variantes de tokenización, comparadas sin espacios ni signos alrededor, sin tildes y en
+# mayúsculas: «Sí», « SI», «sí.» y «SÍ» dan «SI». «S» y «N» cubren a los tokenizadores
+# que parten la palabra en el primer token.
+VARIANTES_SI = frozenset({"S", "SI"})
+VARIANTES_NO = frozenset({"N", "NO"})
+_SIGNOS_TOKEN = " \t\n\r\u2581\"'`*_.,:;!?¡¿«»()[]{}-"
+# Solo para la columna `alerta_sugerida` (P(SÍ) ≥ P(NO)); la política se elige offline.
+UMBRAL_SI = 0.5
 
 
 @dataclass
@@ -136,6 +154,11 @@ class Respuesta:
     tokens_prompt_etapa2: int | None = None
     tokens_salida_etapa2: int | None = None
     crudo_etapa2: str = ""
+    # Solo con DetectorSLMSiNo (#143): p_si = P(SÍ) / (P(SÍ) + P(NO)) del primer token,
+    # masa_si_no = P(SÍ) + P(NO) y las alternativas leídas, como JSON [[token, logprob], ...].
+    p_si: float | None = None
+    masa_si_no: float | None = None
+    top_logprobs: str = ""
 
 
 def cargar_prompt(variante: str) -> str:
@@ -299,22 +322,7 @@ class DetectorSLM:
             return Respuesta(valida=False, error=str(e), ms=ms_fallo, slm_ms=ms_fallo)
         ms = (time.perf_counter() - inicio) * 1000
         crudo = r.get("message", {}).get("content", "")
-        tokens_prompt, tokens_salida = r.get("prompt_eval_count"), r.get("eval_count")
-
-        def _duracion_ns(clave: str) -> int | None:
-            """Duración del runtime en ns; None si el runtime no la informa."""
-            valor = r.get(clave)
-            if isinstance(valor, bool) or not isinstance(valor, (int, float)):
-                return None
-            return int(valor)
-
-        total_ns = _duracion_ns("total_duration")
-        unidad = "ns" if total_ns is not None else ""
-        comun = dict(crudo=crudo, ms=ms, slm_ms=ms, tokens_prompt=tokens_prompt,
-                     tokens_salida=tokens_salida, runtime_ns=total_ns, runtime_unidad=unidad,
-                     runtime_load_ns=_duracion_ns("load_duration"),
-                     runtime_prompt_eval_ns=_duracion_ns("prompt_eval_duration"),
-                     runtime_eval_ns=_duracion_ns("eval_duration"))
+        comun = _medidas(r, ms)
         if r.get("done_reason") == "length":
             return Respuesta(valida=False, error="salida_cortada", **comun)
         salida, error = validar_salida(crudo)
@@ -330,6 +338,62 @@ class DetectorSLM:
             evidencia_en_texto=evidencia_en_texto(salida["evidencia"], lineas) if alerta else None,
             **comun,
         )
+
+
+def _duracion_ns(r: dict, clave: str) -> int | None:
+    """Duración del runtime en ns; None si el runtime no la informa."""
+    valor = r.get(clave)
+    if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+        return None
+    return int(valor)
+
+
+def _medidas(r: dict, ms: float) -> dict:
+    """Texto crudo, tiempo de pared, tokens y duraciones del runtime de una respuesta de Ollama."""
+    total_ns = _duracion_ns(r, "total_duration")
+    return dict(crudo=r.get("message", {}).get("content", ""), ms=ms, slm_ms=ms,
+                tokens_prompt=r.get("prompt_eval_count"), tokens_salida=r.get("eval_count"),
+                runtime_ns=total_ns, runtime_unidad="ns" if total_ns is not None else "",
+                runtime_load_ns=_duracion_ns(r, "load_duration"),
+                runtime_prompt_eval_ns=_duracion_ns(r, "prompt_eval_duration"),
+                runtime_eval_ns=_duracion_ns(r, "eval_duration"))
+
+
+def forma_token(token: str) -> str:
+    """Token sin tildes, sin espacios ni signos alrededor y en mayúsculas: « Sí.» → «SI»."""
+    sin_tildes = "".join(c for c in unicodedata.normalize("NFD", token) if unicodedata.category(c) != "Mn")
+    return sin_tildes.strip(_SIGNOS_TOKEN).upper()
+
+
+def leer_si_no(logprobs) -> tuple[float | None, float | None, list, str]:
+    """(p_si, masa_si_no, alternativas, error) del primer token generado.
+
+    `logprobs` es el campo de la respuesta de Ollama: una lista con un elemento por token
+    generado, cada uno con sus `top_logprobs` [{token, logprob, bytes}]. Se suman las
+    probabilidades de todas las variantes de SÍ y de NO entre las alternativas (no se
+    suma aparte el token elegido: ya está entre ellas). Sin variantes de SÍ ni de NO,
+    p_si no está definido y la línea queda como fallo (`sin_si_no`), con masa 0.
+    """
+    if not isinstance(logprobs, list) or not logprobs:
+        return None, None, [], "sin_logprobs"
+    top = logprobs[0].get("top_logprobs") if isinstance(logprobs[0], dict) else None
+    if not isinstance(top, list) or not top:
+        return None, None, [], "sin_top_logprobs"
+    alternativas, p_si, p_no = [], 0.0, 0.0
+    for alt in top:
+        token, logprob = (alt.get("token"), alt.get("logprob")) if isinstance(alt, dict) else (None, None)
+        if not isinstance(token, str) or isinstance(logprob, bool) or not isinstance(logprob, (int, float)) or logprob > 1e-6:
+            return None, None, [], "logprobs_malformados"
+        alternativas.append([token, round(float(logprob), 4)])
+        forma = forma_token(token)
+        if forma in VARIANTES_SI:
+            p_si += math.exp(logprob)
+        elif forma in VARIANTES_NO:
+            p_no += math.exp(logprob)
+    masa = p_si + p_no
+    if masa <= 0:
+        return None, 0.0, alternativas, "sin_si_no"
+    return p_si / masa, masa, alternativas, ""
 
 
 def validar_riesgo(crudo: str) -> tuple[float | None, str]:
@@ -447,6 +511,41 @@ class DetectorSLMDosEtapas(DetectorSLM):
             evidencia_en_texto=evidencia_en_texto(salida["evidencia"], lineas),
             **comun,
         )
+
+
+@dataclass
+class DetectorSLMSiNo(DetectorSLM):
+    """Puntaje por probabilidad del token «SÍ» (#143).
+
+    Mismos mensajes que DetectorSLM (el prompt termina en una pregunta SÍ/NO), sin
+    esquema JSON, con `num_predict` 1, temperatura 0, sin razonamiento previo y con los
+    `top_logprobs` (20) del primer token. `p_si` es el puntaje continuo para las políticas
+    offline; `alerta_sugerida` (P(SÍ) ≥ P(NO)) solo deja una marca en el CSV.
+    """
+
+    pensar: bool | None = False
+
+    def opciones(self) -> dict:
+        return {**super().opciones(), "num_predict": 1}
+
+    def evaluar_mensaje(self, usuario: str, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
+        mensajes, error = self._mensajes_de(usuario)
+        if mensajes is None:
+            return Respuesta(valida=False, error=error)
+        inicio = time.perf_counter()
+        try:
+            r = self.cliente.chat(self.modelo, mensajes, None, self.opciones(), self.pensar, top_logprobs=TOP_LOGPROBS)
+        except ErrorOllama as e:
+            ms_fallo = (time.perf_counter() - inicio) * 1000
+            return Respuesta(valida=False, error=str(e), ms=ms_fallo, slm_ms=ms_fallo)
+        ms = (time.perf_counter() - inicio) * 1000
+        p_si, masa, alternativas, error = leer_si_no(r.get("logprobs"))
+        # done_reason "length" es lo esperado: se pide un solo token.
+        comun = dict(**_medidas(r, ms), masa_si_no=masa,
+                     top_logprobs=json.dumps(alternativas, ensure_ascii=False) if alternativas else "")
+        if p_si is None:
+            return Respuesta(valida=False, error=error, **comun)
+        return Respuesta(valida=True, p_si=p_si, alerta_sugerida=p_si >= UMBRAL_SI, **comun)
 
 
 class DetectorReglas:
