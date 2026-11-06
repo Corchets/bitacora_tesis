@@ -180,7 +180,13 @@ class Servidor:
             return motor
 
         self.preparada = asyncio.create_task(
-            asyncio.to_thread(Llamada, crear_motor=crear_configurado, disparo=self.args.disparo, ahora=self.ahora)
+            asyncio.to_thread(
+                Llamada,
+                crear_motor=crear_configurado,
+                disparo=self.args.disparo,
+                hablantes=getattr(self.args, "hablantes", "ab"),
+                ahora=self.ahora,
+            )
         )
 
     async def abrir_llamada(self) -> Llamada:
@@ -264,7 +270,7 @@ class Servidor:
         carga = getattr(self.detector, "carga", None)
         return {
             "config": {"detector": None if self.config_llamada.get("modo") == "asr" else a.detector, "modelo": a.modelo if a.detector in DETECTORES_CON_MODELO else None,
-                       "prompt": a.prompt if a.detector in DETECTORES_CON_MODELO else None, "hablantes": "ab",
+                       "prompt": a.prompt if a.detector in DETECTORES_CON_MODELO else None, "hablantes": getattr(a, "hablantes", "ab"),
                        "ollama_url": a.ollama_url if a.detector in DETECTORES_CON_MODELO else None,
                        "seed": a.seed if a.detector in DETECTORES_CON_MODELO else "no-aplica",
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
@@ -364,8 +370,15 @@ class Servidor:
             return
         try:
             self.detector = await asyncio.to_thread(
-                replay.construir_detector, tipo, modelo=modelo, prompt_nombre=a.prompt, hablantes="ab",
-                seed=a.seed, ollama_url=a.ollama_url)
+                replay.construir_detector,
+                tipo,
+                modelo=modelo,
+                prompt_nombre=a.prompt,
+                hablantes=getattr(a, "hablantes", "ab"),
+                seed=a.seed,
+                ollama_url=a.ollama_url,
+                indicio=not getattr(a, "sin_indicio", False),
+            )
         except (replay.correr.FalloAlCalentar, replay.cliente_ollama.ErrorOllama) as exc:
             raise RuntimeError(f"No se pudo cargar {modelo}: {exc} ¿Está Ollama abierto? Si falta el modelo: ollama pull {modelo}") from exc
         a.detector = tipo
@@ -605,7 +618,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="tito-slm",
                    help="por defecto, la configuración final: Tito viejo deriva a Gemma 4 E2B (ADR 0001)")
     p.add_argument("--modelo", default=DETECTOR_POR_DEFECTO)
-    p.add_argument("--prompt", default="tarea")
+    p.add_argument("--prompt", default="v4", help="por defecto v4, con roles y sin indicio (pedido de Luciano del 2026-11-05)")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--ollama-url", default=replay.cliente_ollama.URL_POR_DEFECTO,
                    help="Ollama de otra máquina (p. ej. la PC con GPU) para bajar la demora del SLM")
@@ -617,14 +630,24 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--asr", choices=tuple(MODELOS_ASR), default=ASR_POR_DEFECTO,
                    help="modelo de ASR con el que arranca; desde el panel se elige en cada llamada")
     p.add_argument("--hilos", type=int, default=2, help="hilos del ASR por canal")
+    p.add_argument("--hablantes", choices=("ab", "rol"), default="rol",
+                   help="modo de hablantes que ve el SLM: rol (PROTEGIDA/OTRA) o ab (A/B según orden de habla)")
+    p.add_argument("--sin-indicio", action="store_true", default=True,
+                   help="omitir el bloque de indicio de Tito en el mensaje al SLM (por defecto)")
+    p.add_argument("--con-indicio", dest="sin_indicio", action="store_false",
+                   help="agregar el bloque de indicio de Tito, como en la configuración del ADR 0001")
     p.add_argument("--salida", default=str(DIR_VOIP / "llamadas"))
-    return p.parse_args()
+    args = p.parse_args()
+    if args.hablantes == "ab" and replay.detectores.usa_roles(args.prompt):
+        p.error(f"el prompt {args.prompt} nombra a PROTEGIDA y OTRA: necesita --hablantes rol")
+    return args
 
 
 async def principal() -> None:
     args = parse_args()
     detector = replay.construir_detector(args.detector, modelo=args.modelo, prompt_nombre=args.prompt,
-                                         hablantes="ab", seed=args.seed, ollama_url=args.ollama_url)
+                                         hablantes=args.hablantes, seed=args.seed, ollama_url=args.ollama_url,
+                                         indicio=not args.sin_indicio)
     servidor = Servidor(args, detector)
     for id_carpeta in historial.descartar_pruebas_no_guardadas(args.salida):
         print(f"[prueba] descartada por no guardada: {id_carpeta}")

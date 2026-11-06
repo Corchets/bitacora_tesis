@@ -1,7 +1,7 @@
 """Entrena Tito una sola vez (#70, parte de #68).
 
 Ajusta UNA regresión logística con seed 42 sobre los 5.520 textos aceptados del
-banco histórico (`nacho1706/feature-training-data`, commit `bb542e1...`), usando
+banco histórico (tag `archivo/tito-banco`, commit `bb542e1...`), usando
 RoBERTuito congelado con promedio enmascarado y límite de 128 tokens. No hay
 fine-tuning del encoder, ni búsqueda de configuraciones, ni calibración sobre
 las ocho conversaciones: el umbral 0,5 vive en el flujo (`filtro_tito.py`), no acá.

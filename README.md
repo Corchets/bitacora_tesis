@@ -90,9 +90,10 @@ bitacora_tesis/
 
 ## 4. Demo local de llamadas (Luciano)
 
-Al 2026-11-02, la copia para probar Meet con Gemma 4 es
-`/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano`, rama
-`laboratorio-luciano`. Las variables y el orden de la corrida están en
+Al 2026-11-05, la copia para probar Meet con Gemma 4 es
+`/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano`, con el último commit de
+`laboratorio-luciano` sin rama propia, porque esa rama está tomada por otra copia. Desde el 2026-11-05 arranca por defecto con el prompt `v4`,
+roles y Tito sin indicio; [ADR 0001](docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) todavía no se reabrió. Las variables y el orden de la corrida están en
 [`PRUEBA-VOZ-REAL-MEET.md`](experiments/voip/PRUEBA-VOZ-REAL-MEET.md).
 
 **Qué se guarda.** Cada llamada deja en `experiments/voip/llamadas/` de la copia donde corre el servidor

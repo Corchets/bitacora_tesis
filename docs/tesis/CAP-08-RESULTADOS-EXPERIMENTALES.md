@@ -64,7 +64,7 @@ Para E2B con Tito viejo, los intervalos de Wilson al 95 % son 72,2–100 % en es
 | Qwen3.5 con prompt `tarea`, 97 de corpus v2 | 9B 40/46 · 10/51; 4B 39/46 · 8/51; 2B 22/46 · 6/51; 0.8B 40/46 · 46/51 | [Tablero](../../experiments/slm-directo/analisis/tablero/panel_plantilla.html) y [pasada 0](../../experiments/slm-directo/analisis/2026-10-21-pasada-0/) |
 | Qwen3.5 con prompt `v2`, mismos casos | 9B 31/46 · 7/51; 4B 14/46 · 0/51 | Ídem. Se escribió mirando los 53 y no generalizó |
 | bge-reranker-v2-m3 | 4/10 · 1/10 | [#123](https://github.com/Corchets/bitacora_tesis/issues/123) |
-| Riesgo primero, `gemma3n:e2b` | 10/10 · 3–6/10, o 2/10 · 0/10 | [Rama `reranker-prueba`](https://github.com/Corchets/bitacora_tesis/blob/reranker-prueba/experiments/slm-directo/analisis/2026-10-30-reranker-zero-shot/README.md) |
+| Riesgo primero, `gemma3n:e2b` | 10/10 · 3–6/10, o 2/10 · 0/10 | [análisis del 2026-10-30](../../experiments/slm-directo/analisis/2026-10-30-reranker-zero-shot/README.md) |
 
 La repetición de Qwen 2B en GPU, con igual configuración y seed 42, cambió la decisión en 2 de 53 casos: la inferencia no es exactamente repetible, y eso afecta a toda comparación por una sola corrida.
 

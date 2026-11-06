@@ -445,7 +445,7 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--modelos", default="", help="modelos de Ollama separados por coma, p. ej. qwen3.5:2b")
     p.add_argument("--prompts", default="tarea", help=f"variantes separadas por coma: {', '.join(PROMPTS)}")
-    p.add_argument("--hablantes", default="ab", help="ab (con A/B), sin (sin hablantes) o ab,sin")
+    p.add_argument("--hablantes", default="ab", help="ab (con A/B), rol (PROTEGIDA/OTRA), sin (sin hablantes) o ab,sin")
     p.add_argument("--casos", default="", help="case_id separados por coma (por defecto, toda la partición)")
     p.add_argument("--lista", default="", help="listas de casos/listas/ separadas por coma (p. ej. seleccion-57,rapida-20)")
     p.add_argument("--particion", choices=sorted(casos.PARTICIONES), default="desarrollo", help="desarrollo por defecto; test_reservado solo para evaluación final tras D08")
@@ -456,6 +456,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--filtro-tito", action="store_true", help="agregar por cada SLM su variante filtrada Tito→SLM (Tito simulado, #69)")
     p.add_argument("--tito-viejo-2", action="store_true", help="agregar variante experimental Tito viejo 2.0 (requiere --filtro-tito)")
     p.add_argument("--tito-real", action="store_true", help="usar Tito real (RoBERTuito congelado + única logreg seed 42, #70) en vez del guion")
+    p.add_argument("--sin-indicio", action="store_true", help="con --filtro-tito: Tito solo decide cuándo consultar; el SLM recibe el mismo mensaje que el SLM solo, sin bloque de indicio")
     p.add_argument("--tito-modelo", type=Path, default=ARTEFACTO_POR_DEFECTO, help="artefacto del clasificador Tito")
     p.add_argument("--seguir-tras-aviso", action="store_true", help="modo diagnóstico: recorrer la conversación completa tras el aviso, identificado en el manifiesto y separado del costo operativo")
     p.add_argument("--tito-umbral", type=float, default=UMBRAL_TITO, help="umbral de derivación al SLM (convención exploratoria, igualdad activa)")
@@ -517,6 +518,8 @@ def main(argv: list[str] | None = None) -> int:
         sys.exit("Tito viejo 2.0 solo se puede explorar en desarrollo.")
     if args.tito_real and not args.filtro_tito:
         sys.exit("El Tito real (--tito-real) solo actúa con --filtro-tito.")
+    if args.sin_indicio and not args.filtro_tito:
+        sys.exit("--sin-indicio solo actúa con --filtro-tito.")
     if args.tito_real and not Path(args.tito_modelo).exists():
         sys.exit(f"No existe el artefacto Tito {args.tito_modelo}: generálo con entrenar_tito.py.")
     prompts = _lista(args.prompts)
@@ -575,8 +578,9 @@ def main(argv: list[str] | None = None) -> int:
                 detectores.append((etiqueta, d))
                 if args.filtro_tito:
                     tito = tito_compartido if tito_compartido is not None else TitoGuion(_puntajes_tito(args.tito_puntajes), _lineas_tito(args.tito_fallo_en))
-                    f = FlujoTitoSLM(tito, d, args.tito_umbral)
-                    etiqueta_f = {"config": f"tito-slm|{modelo}|{variante}|{h}", "detector": "tito-slm", "modelo": modelo, "prompt": variante, "hablantes": h}
+                    f = FlujoTitoSLM(tito, d, args.tito_umbral, indicio=not args.sin_indicio)
+                    nombre_f = "tito-slm-sin-indicio" if args.sin_indicio else "tito-slm"
+                    etiqueta_f = {"config": f"{nombre_f}|{modelo}|{variante}|{h}", "detector": nombre_f, "modelo": modelo, "prompt": variante, "hablantes": h}
                     detectores.append((etiqueta_f, f))
                     if args.tito_viejo_2:
                         f2 = TitoViejo20(tito, d, args.tito_umbral)
@@ -613,6 +617,7 @@ def main(argv: list[str] | None = None) -> int:
             {
                 "tito": "real-robertuito-logreg",
                 "umbral": args.tito_umbral,
+                "indicio": not args.sin_indicio,
                 "modelo": str(args.tito_modelo),
                 "artefacto_sha256": sha_archivo(args.tito_modelo),
                 "encoder": cargar_artefacto(args.tito_modelo)["encoder"],
@@ -630,6 +635,7 @@ def main(argv: list[str] | None = None) -> int:
             else {
                 "tito": "guion-simulado",
                 "umbral": args.tito_umbral,
+                "indicio": not args.sin_indicio,
                 "puntajes": _puntajes_tito(args.tito_puntajes),
                 "fallo_en": sorted(_lineas_tito(args.tito_fallo_en)),
                 "arranque_ms": None,
@@ -660,6 +666,7 @@ def main(argv: list[str] | None = None) -> int:
         },
         "configs": [c for c, _ in detectores],
         "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
+        "roles_protegida": huella(casos.ROLES.read_text(encoding="utf-8")) if "rol" in hablantes else None,
         "modelos": {},
         "interrumpida": False,
         "fin": None,
@@ -704,6 +711,8 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"== {config['config']}")
                 for case_id in ids:
                     lineas = casos.cargar_texto(case_id)
+                    if config["hablantes"] == "rol":
+                        lineas = casos.con_roles(case_id, lineas)
                     marcas = []
                     for n, linea, r, aviso in procesar_caso(detector, lineas, detener_en_aviso=not args.seguir_tras_aviso):
                         escritor.writerow(_fila(config, case_id, n, linea, r, aviso))

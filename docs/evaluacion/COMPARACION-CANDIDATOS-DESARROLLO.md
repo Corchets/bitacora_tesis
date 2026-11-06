@@ -1,6 +1,8 @@
 # Comparación de candidatos para desarrollo
 
 > **Elección registrada el 2026-11-03 en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md):** Parakeet con filtro Silero y Tito viejo con Gemma 4 E2B. Esta comparación es sobre material de desarrollo, sin revisión humana: no estima el rendimiento final. Las secciones con Qwen y Zipformer son el antecedente de octubre; la comparación que sostiene la elección es la [primera sección](#comparación-que-sostiene-la-elección-2026-10-30-a-2026-11-02).
+>
+> **Propuesta para el ADR 0002 (2026-11-05, sin discutir):** [PROPUESTA-CONFIGURACION-DETECTOR.md](PROPUESTA-CONFIGURACION-DETECTOR.md), con los 150 casos de desarrollo.
 
 ## Comparación que sostiene la elección (2026-10-30 a 2026-11-02)
 

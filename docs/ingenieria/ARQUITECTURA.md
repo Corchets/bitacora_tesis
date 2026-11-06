@@ -258,7 +258,7 @@ las reglas conservan su condición de baseline del proyecto.
 ### 7.2 Datos elegidos antes de ejecutar
 
 Banco histórico:
-[`bb542e1`, rama `nacho1706/feature-training-data`](https://github.com/Corchets/bitacora_tesis/tree/bb542e130e7a67a82e376a75a0438a15de32f4a6/experiments/laboratorio/entrenamiento_tito).
+[`bb542e1`, tag `archivo/tito-banco` (antes rama `nacho1706/feature-training-data`)](https://github.com/Corchets/bitacora_tesis/tree/bb542e130e7a67a82e376a75a0438a15de32f4a6/experiments/laboratorio/entrenamiento_tito).
 Contiene 5.520 textos exportados de 276 familias; los 480 apartados no se usan
 para ajustar. Esa entrega produjo datos sintéticos, no un detector entrenado.
 Conservar metadatos de familia y revisar coincidencias con los casos elegidos:

@@ -1,0 +1,3 @@
+tito-2-v4-colab 2136a9f1c71bd94fc585f544d3a1a5470f6eee06
+v4 con roles y primer aviso: Tito viejo 2.0 y SLM solo
+IDS=(los 150)

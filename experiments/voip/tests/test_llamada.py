@@ -17,6 +17,7 @@ import tempfile
 import unittest
 from dataclasses import dataclass
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 
@@ -25,8 +26,9 @@ if str(DIR_VOIP) not in sys.path:
     sys.path.insert(0, str(DIR_VOIP))
 
 from llamada import SAMPLE_RATE, Llamada
+from detectores import armar_mensaje_usuario
 from motores import MotorFalso
-from replay import cargar_actualizaciones_jsonl, correr_replay
+from replay import FlujoTitoEnVivo, cargar_actualizaciones_jsonl, correr_replay
 
 BLOQUE = SAMPLE_RATE // 10  # 100 ms
 
@@ -48,6 +50,7 @@ class RespuestaFalsa:
     evidencia: str = ""
     error: str = ""
     ms: float | None = 5.0
+    tito_ms: float | None = None
 
 
 def programas(*eventos_por_rol):
@@ -69,8 +72,8 @@ class TestLlamada(unittest.TestCase):
     def tearDown(self) -> None:
         self.tmp.cleanup()
 
-    def armar(self, protegida, otra, disparo="final") -> Llamada:
-        llamada = Llamada(crear_motor=programas(protegida, otra), disparo=disparo, ahora=self.reloj)
+    def armar(self, protegida, otra, disparo="final", hablantes="ab") -> Llamada:
+        llamada = Llamada(crear_motor=programas(protegida, otra), disparo=disparo, hablantes=hablantes, ahora=self.reloj)
         llamada.abrir("VIVO-TEST", self.dir)
         return llamada
 
@@ -202,6 +205,100 @@ class TestLlamada(unittest.TestCase):
         llamada.cerrar()
         manifiesto = json.loads((self.dir / "manifiesto.json").read_text())
         self.assertEqual(manifiesto["detector"]["aviso"]["t_a"], 3.4)
+
+    def test_validacion_hablantes(self):
+        with self.assertRaises(ValueError):
+            Llamada(crear_motor=programas([], []), hablantes="invalido")
+
+    def test_hablantes_ab_mensaje_exacto(self):
+        otra = [{"tiempo_audio_s": 0.05, "tipo": "final", "segmento": 1, "texto": "Hola, te llamo del banco."}]
+        protegida = [{"tiempo_audio_s": 0.05, "tipo": "final", "segmento": 1, "texto": "¿Qué código?"}]
+        llamada = self.armar(protegida, otra, hablantes="ab")
+        self.reloj.t += 0.1
+        llamada.recibir("otra", pcm(0.1))
+        self.reloj.t += 0.1
+        llamada.recibir("protegida", pcm(0.1))
+        llamada.cerrar()
+
+        self.assertEqual([l.hablante for l in llamada.foto], ["A", "B"])
+        mensaje = armar_mensaje_usuario(llamada.foto, "ab")
+        esperado = (
+            "Transcripción disponible hasta ahora; la llamada sigue. "
+            "Cada línea indica quién habla con A o B. A es quien habló primero; "
+            "las letras no indican quién llamó ni quién es sospechoso.\n\n"
+            "1. A: Hola, te llamo del banco.\n"
+            "2. B: ¿Qué código?\n\n"
+            "Evaluá la llamada con lo disponible hasta la línea 2."
+        )
+        self.assertEqual(mensaje, esperado)
+
+    def test_hablantes_rol_foto_mensajes_y_tito(self):
+        otra = [
+            {"tiempo_audio_s": 0.05, "tipo": "parcial", "segmento": 1, "texto": "hola"},
+            {"tiempo_audio_s": 0.15, "tipo": "final", "segmento": 1, "texto": "Hola, te llamo del banco."},
+        ]
+        protegida = [
+            {"tiempo_audio_s": 0.15, "tipo": "parcial", "segmento": 1, "texto": "que"},
+            {"tiempo_audio_s": 0.25, "tipo": "final", "segmento": 1, "texto": "¿Qué código?"},
+        ]
+        llamada = self.armar(protegida, otra, hablantes="rol")
+
+        # Primer parcial de 'otra': hablantes ya es OTRA
+        self.reloj.t += 0.1
+        acts_otra = llamada.recibir("otra", pcm(0.1))
+        self.assertEqual(len(acts_otra), 1)
+        self.assertEqual([l.hablante for l in llamada.foto], ["OTRA"])
+        self.assertEqual(acts_otra[0]["canal"], "A")
+        self.assertEqual(acts_otra[0]["rol"], "otra")
+
+        # Primer parcial de 'protegida': hablantes incluye PROTEGIDA
+        self.reloj.t += 0.1
+        acts_prot = llamada.recibir("protegida", pcm(0.1))
+        self.assertEqual(len(acts_prot), 1)
+        self.assertEqual([l.hablante for l in llamada.foto], ["OTRA", "PROTEGIDA"])
+        self.assertEqual(acts_prot[0]["canal"], "B")
+        self.assertEqual(acts_prot[0]["rol"], "protegida")
+
+        # Cierre final de ambas
+        self.reloj.t += 0.1
+        acts_otra_final = llamada.recibir("otra", pcm(0.1))
+        self.assertEqual(len(acts_otra_final), 1)
+        self.assertEqual(acts_otra_final[0]["canal"], "A")
+        self.assertEqual(acts_otra_final[0]["rol"], "otra")
+        self.reloj.t += 0.1
+        acts_prot_final = llamada.recibir("protegida", pcm(0.1))
+        self.assertEqual(len(acts_prot_final), 1)
+        self.assertEqual(acts_prot_final[0]["canal"], "B")
+        self.assertEqual(acts_prot_final[0]["rol"], "protegida")
+
+        self.assertEqual(
+            [(l.hablante, l.texto) for l in llamada.foto],
+            [("OTRA", "Hola, te llamo del banco."), ("PROTEGIDA", "¿Qué código?")],
+        )
+
+        mensaje = armar_mensaje_usuario(llamada.foto, "rol")
+        esperado = (
+            "Transcripción disponible hasta ahora; la llamada sigue. "
+            "Cada línea indica quién habla: PROTEGIDA es la persona que protegés y OTRA es con quien habla.\n\n"
+            "1. OTRA: Hola, te llamo del banco.\n"
+            "2. PROTEGIDA: ¿Qué código?\n\n"
+            "Evaluá la llamada con lo disponible hasta la línea 2."
+        )
+        self.assertEqual(mensaje, esperado)
+
+        # Tito recibe solo el texto de cada línea (sin prefijo de hablante)
+        tito_evaluados = []
+        class TitoMock:
+            def puntuar(self, n, texto):
+                tito_evaluados.append(texto)
+                return 0.1, None, 1.0
+
+        detector_tito = FlujoTitoEnVivo(TitoMock(), slm=None, indicio=False)
+        with patch("filtro_tito.FlujoTitoSLM.evaluar", return_value=RespuestaFalsa()):
+            detector_tito.evaluar(llamada.foto)
+        self.assertEqual(tito_evaluados, ["Hola, te llamo del banco."])
+
+        llamada.cerrar()
 
 
 if __name__ == "__main__":

@@ -149,6 +149,11 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   reportando ambos márgenes; `T_A` se define con histéresis (primer cruce que se
   sostiene dos actualizaciones). Queda abierta hasta probarla con el piloto y
   adjudicar ambigüedades.
+- **Prioridad de revisión planteada por Luciano (2026-11-04):** comprobar si los casos
+  son ambiguos o están mal construidos antes de atribuir los errores al prompt o a
+  RoBERTuito. El [panel de lectura](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+  expone diálogos, fichas y dudas originales. Es una hipótesis a contrastar caso por
+  caso; no adjudica referencias, no da por probada la causa ni cambia D09.
 - **Para cerrar:** manual probado en una muestra común por los cuatro integrantes,
   anotaciones originales conservadas y desacuerdos adjudicados.
 - **Fuente:** [MANUAL-ANOTACION.md](../corpus/MANUAL-ANOTACION.md). Sus dos capas de
@@ -190,9 +195,12 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 
 - **Meta de trabajo propuesta (2026-10-23, Luciano Grosso):** avisar en al menos el 95 %
   de las estafas con a lo sumo 5 % de falsas alarmas en legítimas (95/5). Falta el acuerdo
-  del equipo y la aprobación del tutor. Falta también decidir el denominador: 10 de las 75
-  estafas de desarrollo cortan antes del pedido y ningún detector las avisa, así que con
-  todas en el denominador el máximo es 87 % ([pasada 0](../../experiments/slm-directo/analisis/2026-10-21-pasada-0/README.md)).
+  del equipo y la aprobación del tutor. Faltaba también decidir el denominador. Corrección del recuento (2026-11-04):
+  11 de las 75 estafas de desarrollo no tienen T_R, contando `TR-12`; si no se avisa en
+  ninguna de esas once, el máximo es 64/75 (85,3 %). La
+  [pasada 0](../../experiments/slm-directo/analisis/2026-10-21-pasada-0/README.md)
+  es el antecedente; el [recuento corregido](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md)
+  incluye `TR-12`.
 
   Antecedente superado por la meta del tutor que sigue.
 
@@ -201,7 +209,36 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   Condición aparte: el aviso no puede salir solo porque aparezca «código», «transferime plata»,
   «pasame el código» o «decime la contraseña» en una conversación que no es estafa. Ignacio y
   Evaristo trabajan en esas falsas alarmas. **Denominador: todas las estafas**, incluidas las que
-  cortan antes del pedido (10 de las 75 de desarrollo).
+  no tienen pedido de referencia (11 de las 75 de desarrollo, contando `TR-12`; recuento corregido el 2026-11-04).
+
+- **Diagnóstico del 2026-11-04 ([comparación por caso](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md), #51/#68):**
+  E2B directo avisa en 55/75 estafas con 18/75 falsas alarmas; con Tito viejo,
+  51/75 y 13/75. Ambos cortan al primer aviso. Los 150 son desarrollo sin revisión
+  humana; hay nueve pérdidas con T_R y diez sin T_R compartidas. Se propone
+  adjudicar ambigüedades, aislar compuerta/indicio y separar desarrollo para elegir
+  y comprobar mejoras. No se aprueba ninguna variante, no se reabre D09 ni se
+  cambia el denominador pendiente de falsas alarmas; D07/D08 siguen abiertas.
+
+- **Dirección solicitada por Luciano (2026-11-04):** mejorar SLM y Tito aislando
+  cada cambio; conservar SLM solo como control experimental. La [matriz propuesta
+  prompt × Tito](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md#matriz-para-separar-prompt-y-tito)
+  combina prompt actual/nuevo con SLM solo/Tito viejo/Tito mejorado. Los candidatos,
+  repeticiones, particiones y política siguen como propuesta; no se cierra D08 ni
+  se cambia la configuración vigente de D09.
+
+- **Evidencia para la política de alerta y el denominador (2026-11-05, [análisis](../../experiments/slm-directo/corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md#tanda-de-roles-qué-dejó)):**
+  v4 da 55/13 con el primer aviso; simulando persistencia, 51/11 con dos alertas en la llamada y 49/8 con dos seguidas.
+  El corpus v2, que es toda la reserva, da 27/46 en estafas y 6/51 en falsas alarmas. Hay 20 estafas sin pedido
+  entre las 100 reservadas, así que un detector que avisa solo por pedidos no puede pasar de 80/100. Son casos ya vistos sin
+  revisión humana. No se elige política ni se cambia el denominador.
+
+- **Dirección de Luciano (2026-11-05):** no esperar una definición del tutor sobre las estafas sin pedido; informar el corpus v2 por
+  separado; seguir probando con pruebas unitarias y recién después congelar la configuración. Primero pidió modificar el detector para
+  avisar esas estafas. Al leer los controles planteó que, hasta donde cortan, no hay evidencia suficiente para avisar, y pidió completar
+  esas llamadas en la reserva (rama `reserva-sin-cortes`, en curso). El [prompt v5](../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) no las avisa ni le gana a v4 con una
+  diferencia defendible; la candidata propuesta es v4 con roles, sin indicio y primer aviso. No cierra D07 ni D08: falta
+  el acuerdo del equipo, y adoptar otro prompt implica reabrir el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
+  La reunión con el tutor es el 2026-11-11.
 
 ### D09 — Elegir ASR y detector
 

@@ -1,0 +1,115 @@
+<section id="lectura150">
+<style>
+#lectura150 button{font:inherit;color:var(--foreground,#111);background:var(--background,#fff);border:1px solid var(--border,#bbb);border-radius:5px;padding:5px 9px;cursor:pointer}
+#lectura150 button:hover{background:var(--accent,#eee);color:var(--accent-foreground,#111)}#lectura150 button[aria-pressed=true]{background:var(--muted,#eee);font-weight:600}
+#lectura150 p{max-width:78ch}#lectura150 .cmp-tools select{max-width:100%;width:450px}#lectura150 .c{scroll-margin-top:12px}#lectura150 .cmp-summary{overflow:auto}#lectura150 .cmp-summary table{min-width:700px}#lectura150 .cmp-provenance{overflow-wrap:anywhere}
+</style>
+<p class="cmp-lead"><b>Leer los casos antes de seguir ajustando.</b> Cada resultado de abajo se calcula con la corrida elegida. La clase y las marcas son referencias de trabajo, todavía sin revisión humana: una «falsa alarma» acá significa que hubo aviso en un caso etiquetado como legítimo, no que ya se haya adjudicado el error.</p>
+<p id="rev-corte" class="cmp-count"></p>
+<details><summary>Las condiciones completas y cómo dio cada una</summary><div id="rev-resumen" class="cmp-summary tw2"></div></details>
+<div class="cmp-tools">
+<label>Corrida para leer<select id="rev-corrida"></select></label>
+<label>Comparar con<select id="rev-comparar"></select></label>
+<label>Buscar en los casos y sus notas<input id="rev-buscar" type="search" placeholder="BANCO-003, familiar, ambiguo…" autocomplete="off"></label>
+</div>
+<p id="rev-saldo"></p>
+<div id="rev-filtros" class="cmp-quick" aria-label="Grupos de casos"></div>
+<p class="cmp-count">«Dudas en la ficha» busca menciones explícitas de ambigüedad o revisión pendiente. Es una ayuda para empezar a leer, no una auditoría ni una nueva etiqueta. «Sin pedido de referencia» conserva esos casos en el denominador.</p>
+<p id="rev-count" class="cmp-count" role="status" aria-live="polite"></p>
+<div id="rev-casos"></div>
+<p class="cmp-provenance">Windows y Colab son máquinas distintas. Esta vista no atribuye diferencias solo al prompt ni compara sus tiempos. El resto de las pestañas conserva íntegra la lectura histórica de v1 en Windows. Las corridas en curso e interrumpidas quedan afuera.</p>
+<script id="rev-data" type="application/json">__DATOS_LECTURA__</script>
+<script>
+async function leerDatosComprimidos(id) {
+  const d=JSON.parse(document.getElementById(id).textContent);
+  if(d.usar==='historico'){
+    const paquete=await leerDatosComprimidos('rev-data');
+    for(const c of paquete.historico.casos)c.texto=paquete.actual.casos[c.id].texto;
+    return paquete.historico;
+  }
+  if(!d.gzip) return d;
+  const bytes=Uint8Array.from(atob(d.gzip),c=>c.charCodeAt(0));
+  const p=JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text());
+  if(p.actual?.por_caso){
+    const pc=p.actual.por_caso;delete p.actual.por_caso;
+    p.actual.corridas.forEach((r,i)=>{r.resultados=Object.fromEntries(Object.entries(pc).map(([k,v])=>[k,v[i]]))});
+  }
+  return p;
+}
+document.addEventListener('DOMContentLoaded',async()=>{
+  const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  try {
+    const paquete=await leerDatosComprimidos('rev-data'), d=paquete.actual, casos=Object.values(d.casos).sort((a,b)=>a.id.localeCompare(b.id));
+    const nv=casos.filter(c=>c.clase==='vishing').length, nl=casos.length-nv;
+    let filtro='errores';
+    const actual=()=>d.corridas[+$('rev-corrida').value], otra=()=>d.corridas[+$('rev-comparar').value];
+    const esV=c=>c.clase==='vishing', tiene=r=>r.aviso!==null;
+    const tipo=(c,r)=>!r.completo?'incompleto':esV(c)?(tiene(r)?'detectada':'perdida'):(tiene(r)?'fa':'sin-aviso');
+    const nombres={perdida:'Estafa perdida',fa:'Falsa alarma',detectada:'Estafa detectada','sin-aviso':'Legítima sin aviso',incompleto:'Evaluación incompleta'};
+    const dudas=c=>/ambig|caso límite|duda|revisar la clase|revisar T_R|no permite verificar|no de algo comprobable|pendiente de revisión/i.test(c.prueba+' '+c.notas);
+    function coincide(c,f,r=actual()) {
+      const t=tipo(c,r.resultados[c.id]);
+      return f==='todos'||(f==='errores'?['perdida','fa','incompleto'].includes(t):f==='dudas'?dudas(c):f==='sin-pedido'?esV(c)&&c.tr===null:f==='cambios'?t!==tipo(c,otra().resultados[c.id]):t===f);
+    }
+    function estado(c,r) {
+      const t=tipo(c,r), color=['perdida','fa','incompleto'].includes(t)?'bad':'ok';
+      return `<span class="p ${color}">${nombres[t]}${tiene(r)?' · L'+r.aviso:''}</span>`;
+    }
+    function resumen() {
+      $('rev-resumen').innerHTML='<table><caption>Todos los resultados disponibles · elegir una fila cambia la corrida de lectura</caption><thead><tr><th>Condición</th><th>Detectadas / '+nv+'</th><th>Perdidas</th><th>FA / '+nl+'</th><th>Incompletos</th></tr></thead><tbody>'+d.corridas.map((r,i)=>'<tr><td><button type="button" data-r-corrida="'+i+'">'+esc(r.nombre)+'</button></td>'+['detectada','perdida','fa','incompleto'].map(f=>'<td>'+casos.filter(c=>coincide(c,f,r)).length+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+    }
+    function respuesta(c,r) {
+      const x=r.resultados[c.id];
+      return '<div><h3>'+esc(r.nombre)+'</h3><p>'+estado(c,x)+'</p><dl><dt>Motivo del primer aviso</dt><dd>'+esc(x.motivo||'No hubo aviso; no hay motivo de alerta registrado.')+'</dd><dt>Evidencia citada</dt><dd>'+esc(x.evidencia||'—')+'</dd><dt>Consultas / líneas registradas</dt><dd>'+x.filas.filter(f=>f[1]!=='omitida').length+' / '+x.filas.length+'</dd></dl><p class="cmp-provenance">'+esc(r.modelo)+' · '+esc(r.fin.replace('T',' '))+' · código '+esc(r.commit.slice(0,8))+'</p></div>';
+    }
+    function celda(c,r,i) {
+      const x=r.resultados[c.id], f=x.filas[i];
+      if(!f)return '<span class="cmp-unavailable">Sin evaluar<small>'+(tiene(x)?'Corte tras L'+x.aviso:'Sin registro; evaluación incompleta')+'</small></span>';
+      if(f[1]==='omitida')return '<span class="cmp-unavailable">Omitida por Tito</span>';
+      if(f[1]==='error')return '<span class="tb">Error<small>'+esc(f[2]||'Respuesta inválida')+'</small></span>';
+      return '<span class="cmp-state">'+(x.aviso===i+1?'AVISO':'No avisa')+'<small>Riesgo '+(f[0]===null?'—':String(f[0]).replace('.',','))+'</small></span>';
+    }
+    function dialogo(c) {
+      const a=actual(),b=otra();
+      return '<p class="cmp-count">T_R: pedido anotado. T_C: cumplimiento anotado. Se muestra el diálogo completo; después del corte no se inventan respuestas.</p><div class="dw"><table class="dl"><thead><tr><th>Línea</th><th>Conversación</th><th>Corrida elegida</th><th>Comparación</th></tr></thead><tbody>'+c.texto.map((t,i)=>{
+        const n=i+1,cl=n===c.tr?'pe':a.resultados[c.id].aviso===n||b.resultados[c.id].aviso===n?'al':'';
+        return '<tr class="'+cl+'"><td>'+n+(n===c.tr?'<em class="mr">T_R</em>':'')+(n===c.tc?'<em class="mc">T_C</em>':'')+'</td><td style="white-space:normal">'+esc(t)+'</td><td>'+celda(c,a,i)+'</td><td>'+celda(c,b,i)+'</td></tr>';
+      }).join('')+'</tbody></table></div>';
+    }
+    function tarjeta(c) {
+      const a=actual(),b=otra(),x=a.resultados[c.id];
+      return '<article class="c"><header><code>'+esc(c.id)+'</code>'+estado(c,x)+'<span class="t">'+(esV(c)?'Estafa de referencia':c.clase==='legitima_dificil'?'Legítima difícil':'Legítima común')+'</span><span class="t">'+esc(c.familia||c.grupo)+'</span>'+(dudas(c)?'<span class="p warn">Duda escrita en la ficha</span>':'')+'</header><p class="why"><b>Qué plantea el caso:</b> '+esc(c.prueba||'Sin descripción de prueba en la referencia.')+'</p><div class="cmp-results">'+respuesta(c,a)+respuesta(c,b)+'</div><details><summary>Leer la ficha de referencia y sus dudas (sin revisión humana)</summary><p class="q">La ficha describe la intención de quien redactó el caso; no agrega evidencia que el detector pudiera observar en el diálogo.</p><dl><dt>Pedido / cumplimiento</dt><dd>T_R '+(c.tr===null?'—':'L'+c.tr)+' · T_C '+(c.tc===null?'—':'L'+c.tc)+'</dd><dt>Pedido anotado</dt><dd>'+esc(c.pedido||'Sin pedido anotado')+'</dd><dt>Notas originales</dt><dd>'+esc(c.notas||'Sin notas adicionales')+'</dd></dl></details>'+(d.lecturas_previas[c.id]?'<details><summary>Lectura previa de v1 con Tito en Windows (antecedente)</summary><p class="q">'+esc(d.lecturas_previas[c.id])+'</p></details>':'')+'<details data-r-dialogo="'+esc(c.id)+'"><summary>Leer conversación completa, con riesgos y avisos de ambas corridas</summary><div class="rev-dialogo"></div></details></article>';
+    }
+    function pintar() {
+      const a=actual(),q=$('rev-buscar').value.trim().toLocaleLowerCase('es');
+      const grupos=[['errores','Perdidas y falsas alarmas'],['perdida','Estafas perdidas'],['fa','Falsas alarmas'],['detectada','Estafas detectadas'],['sin-aviso','Legítimas sin aviso'],['dudas','Dudas en la ficha'],['sin-pedido','Estafas sin pedido de referencia'],['cambios','Cambió el resultado'],['todos','Los casos completos']];
+      $('rev-filtros').innerHTML=grupos.map(([f,l])=>'<button type="button" data-r-filtro="'+f+'" aria-pressed="'+(f===filtro)+'">'+l+' ('+casos.filter(c=>coincide(c,f)).length+')</button>').join('');
+      const n=f=>casos.filter(c=>coincide(c,f)).length;
+      $('rev-saldo').textContent='Corrida elegida: '+n('detectada')+'/'+nv+' estafas detectadas · '+n('perdida')+' perdidas · '+n('fa')+'/'+nl+' falsas alarmas · '+n('sin-aviso')+' legítimas sin aviso.'+(n('incompleto')?' '+n('incompleto')+' evaluaciones incompletas.':'');
+      const visibles=casos.filter(c=>coincide(c,filtro)&&(!q||[c.id,c.prueba,c.notas,c.familia,...c.texto].join(' ').toLocaleLowerCase('es').includes(q)));
+      $('rev-count').textContent=visibles.length+' de '+casos.length+' casos · '+grupos.find(([f])=>f===filtro)[1]+'. Abrí la conversación de cada ficha para leerla completa.';
+      $('rev-casos').innerHTML=visibles.map(tarjeta).join('')||'<p class="cmp-empty">No hay casos con estos filtros. Borrá la búsqueda o elegí «Los casos completos».</p>';
+    }
+    const opciones=d.corridas.map((r,i)=>'<option value="'+i+'">'+esc(r.nombre)+'</option>').join('');
+    $('rev-corrida').innerHTML=$('rev-comparar').innerHTML=opciones;
+    const inicial=d.corridas.findIndex(r=>r.carpeta==='corridas/2026-11-04_003715_e2b-tito-viejo-150'&&r.modelo!=='reglas');
+    $('rev-comparar').value=String(Math.max(0,inicial));
+    $('rev-corte').textContent=d.corridas.length+' condiciones completas · hasta '+d.hasta.replace('T',' ')+' (reloj de las corridas).'+(d.pendientes.length?' '+d.pendientes.length+' corridas en curso o interrumpidas excluidas.':'');
+    $('rev-corrida').onchange=$('rev-comparar').onchange=pintar;
+    $('rev-buscar').addEventListener('input',pintar);
+    $('lectura150').addEventListener('click',e=>{
+      const btn=e.target.closest('button');if(!btn)return;
+      if(btn.dataset.rFiltro){filtro=btn.dataset.rFiltro;pintar();}
+      if(btn.dataset.rCorrida!==undefined){$('rev-corrida').value=btn.dataset.rCorrida;pintar();}
+    });
+    $('rev-casos').addEventListener('toggle',e=>{
+      const id=e.target.dataset.rDialogo;
+      if(id&&e.target.open)e.target.querySelector('.rev-dialogo').innerHTML=dialogo(d.casos[id]);
+    },true);
+    resumen();pintar();
+  } catch(error) {
+    $('rev-count').textContent='No se pudieron cargar las corridas: '+error.message+'. Las pestañas históricas se conservan.';
+  }
+});
+</script>
+</section>

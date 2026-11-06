@@ -483,6 +483,165 @@ class TestReplay(unittest.TestCase):
                 self.assertEqual(filas[7]["n"], "8")
                 self.assertEqual(filas[7]["aviso"], "false")
 
+    def test_contexto_aplicar_modo_rol(self):
+        """ContextoLlamada.aplicar asigna PROTEGIDA/OTRA desde el primer turno."""
+        ctx = ContextoLlamada("call_rol")
+        # Parcial asigna PROTEGIDA inmediatamente
+        l1 = ctx.aplicar(
+            Actualizacion("call_rol", 1, "parcial", 1, "Hola", canal="protegida"),
+            "rol",
+        )
+        self.assertEqual(len(l1), 1)
+        self.assertEqual(l1[0].hablante, "PROTEGIDA")
+        self.assertEqual(l1[0].texto, "Hola")
+        self.assertEqual(len(ctx.letras_por_rol), 0)
+
+        # Final del segmento 1
+        l1_fin = ctx.aplicar(
+            Actualizacion("call_rol", 2, "final", 1, "Hola", canal="protegida"),
+            "rol",
+        )
+        self.assertEqual(len(l1_fin), 1)
+        self.assertEqual(l1_fin[0].hablante, "PROTEGIDA")
+
+        # Final del segmento 2 asigna OTRA inmediatamente
+        l2 = ctx.aplicar(
+            Actualizacion("call_rol", 3, "final", 2, "Buen día", canal="otra"),
+            "rol",
+        )
+        self.assertEqual(len(l2), 2)
+        self.assertEqual(l2[0].hablante, "PROTEGIDA")
+        self.assertEqual(l2[1].hablante, "OTRA")
+        self.assertEqual(len(ctx.letras_por_rol), 0)
+
+        # Canales A, B, None o desconocidos deben lanzar ValueError
+        with self.assertRaises(ValueError):
+            ctx.aplicar(
+                Actualizacion("call_rol", 4, "final", 3, "Texto", canal="A"),
+                "rol",
+            )
+        with self.assertRaises(ValueError):
+            ctx.aplicar(
+                Actualizacion("call_rol", 4, "final", 3, "Texto", canal="B"),
+                "rol",
+            )
+        with self.assertRaises(ValueError):
+            ctx.aplicar(
+                Actualizacion("call_rol", 4, "final", 3, "Texto", canal=None),
+                "rol",
+            )
+        with self.assertRaises(ValueError):
+            ctx.aplicar(
+                Actualizacion("call_rol", 4, "final", 3, "Texto", canal="tercero"),
+                "rol",
+            )
+
+    def test_contexto_aplicar_modo_sin_y_validacion_modo(self):
+        """ContextoLlamada.aplicar con modo 'sin' deja hablante='' y valida el modo."""
+        ctx = ContextoLlamada("call_sin")
+        l = ctx.aplicar(
+            Actualizacion("call_sin", 1, "final", 1, "Hola", canal="protegida"),
+            "sin",
+        )
+        self.assertEqual(l[0].hablante, "")
+
+        with self.assertRaises(ValueError):
+            ctx.aplicar(
+                Actualizacion("call_sin", 2, "final", 2, "Hola", canal="protegida"),
+                "modo_inventado",
+            )
+
+    def test_correr_replay_modo_rol_con_slm_y_salidas(self):
+        """correr_replay con hablantes='rol' propaga PROTEGIDA/OTRA al SLM, eventos.csv y resumen.md."""
+        class SlmMock:
+            hablantes = "rol"
+            def __init__(self):
+                self.mensajes = []
+                self.llamadas = 0
+            def evaluar(self, lineas):
+                msg = detectores.armar_mensaje_usuario(lineas, self.hablantes)
+                self.mensajes.append(msg)
+                self.llamadas += 1
+                aviso = (self.llamadas >= 2)
+                return FakeRespuesta(valida=True, alerta_sugerida=aviso, motivo="alerta_rol", evidencia="token")
+
+        slm = SlmMock()
+        actualizaciones = [
+            Actualizacion("call_rol_1", 1, "final", 1, "Buenos días", canal="otra", disponible_s=1.0),
+            Actualizacion("call_rol_1", 2, "final", 2, "Hola qué necesita", canal="protegida", disponible_s=2.0),
+        ]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            salida = Path(tmpdir) / "salida_rol"
+            entrada_dummy = Path(tmpdir) / "dummy.jsonl"
+            entrada_dummy.write_text("{}", encoding="utf-8")
+            filas, contextos = correr_replay(
+                actualizaciones, slm, hablantes="rol", salida_dir=salida
+            )
+            # Verificar formato del mensaje recibido por el SLM
+            self.assertEqual(len(slm.mensajes), 2)
+            self.assertIn("1. OTRA: Buenos días", slm.mensajes[0])
+            self.assertIn("1. OTRA: Buenos días\n2. PROTEGIDA: Hola qué necesita", slm.mensajes[1])
+
+            # Verificar eventos.csv
+            with open(salida / "eventos.csv", encoding="utf-8") as f:
+                lector = list(csv.DictReader(f))
+            self.assertEqual(len(lector), 2)
+            self.assertEqual(lector[0]["texto_disponible_resumido"], "OTRA: Buenos días")
+            self.assertEqual(lector[1]["texto_disponible_resumido"], "OTRA: Buenos días // PROTEGIDA: Hola qué necesita")
+
+            # Verificar resumen.md
+            guardar_resumen(
+                salida / "resumen.md",
+                entrada_dummy,
+                "audio",
+                "slm",
+                "modelo-falso",
+                "tarea",
+                "rol",
+                "final",
+                contextos,
+                filas,
+            )
+            contenido_resumen = (salida / "resumen.md").read_text(encoding="utf-8")
+            self.assertIn("OTRA: Buenos días", contenido_resumen)
+            self.assertIn("PROTEGIDA: Hola qué necesita", contenido_resumen)
+
+    def test_correr_replay_modo_rol_canales_invalidos(self):
+        """correr_replay con hablantes='rol' rechaza actualizaciones con A, B, None o vacías."""
+        detector = FakeDetector()
+        with self.assertRaises(ValueError):
+            correr_replay([], detector, hablantes="rol")
+
+        with self.assertRaises(ValueError):
+            correr_replay(
+                [Actualizacion("c1", 1, "final", 1, "Hola", canal="A")],
+                detector,
+                hablantes="rol",
+            )
+
+        with self.assertRaises(ValueError):
+            correr_replay(
+                [Actualizacion("c1", 1, "final", 1, "Hola", canal=None)],
+                detector,
+                hablantes="rol",
+            )
+
+    def test_cli_texto_con_modo_rol_lanza_error(self):
+        """CLI con --texto y --hablantes rol debe fallar."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            caso_txt = Path(tmpdir) / "caso.txt"
+            caso_txt.write_text("A: hola\nB: chau\n", encoding="utf-8")
+            salida = Path(tmpdir) / "salida"
+            res = subprocess.run([
+                sys.executable, str(DIR_REPLAY / "replay.py"),
+                "--texto", str(caso_txt),
+                "--detector", "reglas",
+                "--hablantes", "rol",
+                "--salida", str(salida),
+            ], capture_output=True, text=True)
+            self.assertNotEqual(res.returncode, 0)
+            self.assertIn("hablantes='rol' no es compatible", res.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
