@@ -72,7 +72,8 @@ bitacora_tesis/
 │   │   ├── PRIVACIDAD-DEL-SISTEMA.md    # Privacy by Design on-device, Ley 25.326 y permisos Android
 │   │   ├── METODO-CREACION-CORPUS.md    # Fichas de rol, diseño de semillas, negativos difíciles y parada
 │   │   ├── CATALOGO-ESCENARIOS.csv      # Inventario estructurado de semillas de fraude y control
-│   │   └── MANUAL-ANOTACION.md          # Referencia humana y reglas de anotación
+│   │   ├── MANUAL-ANOTACION.md          # Referencia humana y reglas de anotación
+│   │   └── RELEVAMIENTO-CORPUS-EXTERNO.md # Fuentes externas para la prueba de generalización (#144)
 │   ├── ingenieria/
 │   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md # Comparación replay vs VoIP vs altavoz vs telefonía
 │   │   ├── ARQUITECTURA.md              # Componentes conceptuales y pipeline de audio a alerta
