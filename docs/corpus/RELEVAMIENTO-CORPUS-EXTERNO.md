@@ -272,27 +272,74 @@ derivados.
 
 ### 5.4. Formato: todas son conversaciones
 
-Pedido del equipo (2026-11-06): el set no separa las conversaciones por clase, porque esa
-separación le daría indicios al detector. Para el paso 3:
+Pedido del equipo (2026-11-06): el detector tiene que recibir solo la conversación, como si
+fuera una llamada cualquiera que está llegando, sin nada que se pueda relacionar con si es o no
+una estafa.
+
+**Lo que ya está resuelto.** El circuito de `experiments/slm-directo` ya separa las dos cosas: el
+detector recibe, en cada paso, solo las líneas de una llamada que llegaron hasta ese momento. No
+recibe el `case_id`, la clase, el escenario ni las marcas ([`detectores.py`](../../experiments/slm-directo/detectores.py),
+encabezado). La referencia la lee el resto del circuito, no el detector. Si el set externo usa el
+mismo formato (`casos/texto/` y `casos/referencia/`), se corre igual que la reserva sin tocar el
+código.
+
+```mermaid
+flowchart LR
+    subgraph custodia["Solo quien custodia el set · fuera de Git"]
+        F["Fuentes originales<br/>KorCCVi, YouTube, legítimas"]
+        M["Correspondencia<br/>original → EXT-NNN"]
+        R["Referencia por EXT-NNN<br/>clase, T_R, T_C, fuente"]
+    end
+    subgraph congelado["Set congelado · hashes SHA-256"]
+        T["texto/EXT-NNN.txt<br/>solo turnos A: / B:"]
+    end
+    F -- "misma adaptación y limpieza para todas<br/>IDs por sorteo" --> T
+    F --> M
+    T -- "marcado a mano con la guía de #32" --> R
+    T --> C["correr.py<br/>entrega línea por línea"]
+    C -- "solo las líneas hasta ahora" --> D(["Detector"])
+    D -- "aviso o sin aviso" --> C
+    C --> A["Registro de avisos<br/>por EXT-NNN"]
+    A --> S["Métricas"]
+    R --> S
+```
+
+**Reglas del set:**
 
 - **Una carpeta y un formato para todas.** Nada de carpetas por clase como `vishing/`,
   `legitima/` y `dificiles/` en [`experiments/laboratorio/casos`](../../experiments/laboratorio/casos).
-- **Identificadores neutros.** `EXT-001`, `EXT-002`, …, asignados por sorteo con semilla
-  registrada. Sin prefijos que delaten la clase, la fuente o el tipo (`SC-`, `LG-`, `vishing_`,
-  `d04j18…`).
-- **El archivo de cada conversación tiene solo los turnos**, con hablantes `A` y `B`. No lleva
-  clase, `T_R`, `T_C`, fuente, tipo, ID original ni comentarios.
-- **La referencia va aparte**: clase, `T_R`, `T_C`, fuente y la correspondencia original →
-  `EXT-NNN`. La guarda quien custodia el set. El detector no la lee; solo la cruza el cálculo de
-  métricas después de la corrida.
-- **El mismo tratamiento para todas**: mismo prompt de adaptación y misma normalización, sin las
-  marcas de cada fuente. Las de YouTube rotulan a los hablantes `Suspect` e `Innocent`, que
-  delatan los roles; las de KorCCVi traen huellas de la diarización. Si las conversaciones de
-  una clase salen de una fuente y las de la otra de otra, el estilo puede delatar el origen; es
-  el mismo problema que `DATA.md` §4 de KorCCVi describe para su propio corpus.
+- **Identificadores neutros**: `EXT-001`, `EXT-002`, …, asignados por sorteo con semilla
+  registrada. Sin prefijos que delaten clase, fuente o tipo. Los del corpus propio sí los tienen
+  (`CV2-D-L-…` para legítimas y `CV2-D-V-…` para estafas). Hoy no llegan al detector, pero se ven
+  en los registros y en las carpetas: para el set externo conviene que ni eso sugiera la clase.
+- **El archivo de cada conversación tiene solo los turnos**, `A:` y `B:`, una línea por turno.
+  Sin encabezados, comentarios ni metadatos. Quién es la persona protegida va en
+  `roles-protegida.json`, que usa el circuito y no el detector.
+- **La referencia, la correspondencia con el original y este documento quedan del lado de la
+  custodia.** [`FILTRO-KORCCVI.csv`](FILTRO-KORCCVI.csv) es material de curaduría y no entra al set.
 
-[`FILTRO-KORCCVI.csv`](FILTRO-KORCCVI.csv) y este documento son material de curaduría: no
-entran al set ni se le pasan al detector.
+**Lo que puede seguir delatando la clase está en el texto mismo**, no en los archivos. Separar
+los archivos no alcanza si las estafas y las legítimas se distinguen por su forma:
+
+| Indicio | Cómo reducirlo |
+|---|---|
+| Rótulos de la fuente: YouTube usa `Suspect` e `Innocent` | Reemplazarlos por `A` y `B` y revisar que no queden dentro de las líneas |
+| Huellas de cada fuente: errores de diarización de KorCCVi, frases cortadas | La misma limpieza para todas; corregir la atribución antes de adaptar |
+| Estilo de la traducción: si solo se traducen las estafas, «suenan traducidas» | Pasar las legítimas por el mismo proceso, idealmente desde otro idioma también |
+| Largo: las estafas de KorCCVi duran minutos | Elegir legítimas de largo parecido y comparar la distribución por clase |
+| Cómo empieza: las estafas arrancan en medio de la maniobra, las legítimas con el saludo | Que todas arranquen igual, o que en las dos clases haya de las dos formas |
+| Orden: todas las estafas juntas, o la estafa siempre en el mismo lugar | Sorteo de IDs y de orden de corrida |
+
+**Prueba de fuga antes de congelar.** Quien custodia el set entrena clasificadores triviales que
+no entienden de estafas: uno solo con el largo y el número de turnos, y otro con TF-IDF y
+regresión logística, con validación dejando una conversación afuera. Si alguno acierta la clase
+bastante más que el azar, hay un atajo de forma: se busca y se corrige antes de congelar. Es lo
+mismo que hizo PIX Scam BR con sus líneas de base (§3.3). Con 50 a 80 conversaciones la prueba
+detecta solo atajos gruesos, y conviene declararla como límite.
+
+**Quién ve qué.** Quien desarrolló el detector no ve las conversaciones ni la referencia antes
+de la corrida ([protocolo, ceguera previa](../evaluacion/PROTOCOLO-EXPERIMENTAL.md)). La custodia
+adapta, marca, prueba la fuga, congela y corre.
 
 ## 6. Reproducibilidad
 
