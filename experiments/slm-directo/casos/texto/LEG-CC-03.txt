@@ -1,0 +1,12 @@
+A: Hola, ¿qué tal? ¿Hablo con Gonzalo?
+B: Sí, él habla.
+A: Gonzalo, ¿cómo andás? Te habla Rodrigo de VisiónNorte, de atención a clientes. Te llamo porque tenés el pack básico y te quiero ofrecer el pack de deportes con un cuarenta por ciento de descuento por tres meses.
+B: Ah, no, no miro mucho deporte la verdad.
+A: Mirá que entra todo el fútbol, eh, y la promo es hasta el viernes nomás. Después vuelve al precio normal.
+B: No sé, ¿y cómo sé yo que sos de la empresa? Porque me llaman de todos lados.
+A: No, está perfecto que preguntes. Hacé una cosa: llamá al cero ochocientos que figura en tu factura, pedí por la promo de deportes para clientes y te la activan ahí. Yo no te voy a pedir ningún dato ni pago por acá.
+B: Bueno, dale, si me interesa llamo yo.
+A: Bárbaro. Y si no te interesa tampoco pasa nada, eh. ¿Te molesto con algo más o te quedó alguna duda del servicio?
+B: No, todo bien.
+A: Listo, Gonzalo, gracias por atender. Que andes bien.
+B: Chau, gracias.

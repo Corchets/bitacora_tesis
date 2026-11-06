@@ -1,0 +1,10 @@
+A: Hola, ¿Lucía Fernández?
+B: Sí, ¿quién habla?
+A: Hola Lucía, te hablo del consultorio de la doctora Paz, la odontóloga. Tenías turno mañana a las cinco, pero la doctora tuvo un imprevisto y no va a poder atender. ¿Te lo podemos pasar?
+B: Uh, bueno. ¿Para cuándo?
+A: Tengo el lunes dieciséis a las seis de la tarde, o el martes a las nueve de la mañana.
+B: El martes a la mañana no puedo, trabajo. El lunes a las seis está bien.
+A: Listo, te queda el lunes dieciséis a las dieciocho. Disculpá el cambio.
+B: No pasa nada. ¿Me mandan recordatorio?
+A: Sí, el día anterior te llega un mensaje por WhatsApp para confirmar. Gracias, Lucía.
+B: Gracias, chau.

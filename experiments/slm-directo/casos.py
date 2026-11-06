@@ -32,10 +32,14 @@ SIN_RESERVA = RAIZ / "casos" / "RESERVA-FUERA-DEL-REPO.md"
 
 LEGITIMAS = {"legitima", "legitima_dificil"}
 CLASES = {"vishing"} | LEGITIMAS
-GRUPOS = {"piloto_escrito", "trampa", "laboratorio", "corpus_v2"}
+GRUPOS = {"piloto_escrito", "trampa", "laboratorio", "corpus_v2", "legitimas_cotidianas"}
+# Grupos con los campos de corpus_v2. `legitimas_cotidianas` no exige semilla ni 12–40 líneas
+# y queda fuera del manifiesto SHA-256 de la reserva (ver casos/README.md).
+GRUPOS_V2 = {"corpus_v2", "legitimas_cotidianas"}
+FUERA_DEL_MANIFIESTO = {"legitimas_cotidianas"}
 PARTICIONES = {"desarrollo", "test_reservado"}
 FAMILIAS = {"banco", "whatsapp", "soporte", "organismo_previsional", "premio",
-            "familiar", "trabajo", "delivery", "medico", "escuela"}
+            "familiar", "trabajo", "delivery", "medico", "escuela", "comercial", "encuesta"}
 TIPOS_LEGITIMA = {"cotidiana", "pedido_razonable", "mencion_sin_pedido"}
 CAMPOS_V2 = {"particion", "familia", "dificultad", "tipo_legitima", "variante_asr",
              "escenario_base", "situacion"}
@@ -166,14 +170,20 @@ def validar_caso(case_id: str, todos: set[str], semillas: set[str]) -> list[str]
         error("particion debe ser desarrollo o test_reservado")
     if lineas and lineas[0].hablante != "A":
         error("A debe ser quien habla primero")
+    if ref["grupo"] == "legitimas_cotidianas":
+        if ref["clase"] != "legitima":
+            error("legitimas_cotidianas solo admite clase legitima")
+        if ref.get("particion") != "desarrollo":
+            error("legitimas_cotidianas va en la partición de desarrollo")
     if ref["grupo"] == "corpus_v2":
-        faltan_v2 = sorted(CAMPOS_V2 - ref.keys())
-        if faltan_v2:
-            error(f"faltan campos de corpus_v2: {faltan_v2}")
         if not 12 <= n <= 40:
             error("corpus_v2 requiere entre 12 y 40 líneas")
         if ref["semilla"] is None:
             error("corpus_v2 requiere una semilla registrada")
+    if ref["grupo"] in GRUPOS_V2:
+        faltan_v2 = sorted(CAMPOS_V2 - ref.keys())
+        if faltan_v2:
+            error(f"faltan campos de corpus_v2: {faltan_v2}")
         if ref.get("familia") not in FAMILIAS:
             error("familia fuera del inventario de corpus_v2")
         if not isinstance(ref.get("variante_asr"), bool):
@@ -272,7 +282,8 @@ def validar_manifiesto() -> list[str]:
         return [f"Manifiesto de reserva inválido: {e}"]
     if not isinstance(esperados, dict) or not isinstance(catalogo, str):
         return ["Manifiesto de reserva inválido: casos debe ser un objeto y catalogo_sha256 texto"]
-    actuales = huellas_de_casos()
+    actuales = {c: h for c, h in huellas_de_casos().items()
+                if cargar_referencia(c)["grupo"] not in FUERA_DEL_MANIFIESTO}
     crudo = CATALOGO.read_bytes()
     if SIN_RESERVA.exists():
         if catalogo_sin_reserva(crudo) != crudo:

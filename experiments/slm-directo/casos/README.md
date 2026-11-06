@@ -2,7 +2,8 @@
 
 Conversaciones **escritas y ficticias** para probar el detector sobre texto antes de
 tener audio. Los 53 antecedentes son material de **desarrollo**. Corpus v2 agrega
-97 conversaciones de desarrollo y 200 candidatas reservadas: ver
+97 conversaciones de desarrollo y 200 candidatas reservadas, y
+[`legitimas_cotidianas`](#legítimas-cotidianas) suma 21 legítimas de desarrollo: ver
 [diseño y límites](DISENO-CORPUS-V2.md), [selección para grabar](GRABACIONES-ASR.md)
 y [revisión técnica](REVISION-CORPUS-V2.md). No reemplazan las grabaciones del piloto
 ([#39](https://github.com/Corchets/bitacora_tesis/issues/39) /
@@ -85,7 +86,7 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
 | Campo | Regla |
 |---|---|
 | `case_id` | Igual al nombre del archivo sin extensión. |
-| `grupo` | `piloto_escrito`, `trampa`, `laboratorio` o `corpus_v2`. |
+| `grupo` | `piloto_escrito`, `trampa`, `laboratorio`, `corpus_v2` o `legitimas_cotidianas`. |
 | `semilla` | `scenario_id` del [catálogo](../../../docs/corpus/CATALOGO-ESCENARIOS.csv) o `null`. |
 | `par` | `case_id` del caso contrastante, o `null`. |
 | `clase` | `vishing`, `legitima` (nuevas) o `legitima_dificil` (antecedentes). Ambas legítimas se cuentan como legítimas al evaluar. |
@@ -105,7 +106,7 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
 | Campo nuevo | Regla |
 |---|---|
 | `particion` | `desarrollo` o `test_reservado`. En los antecedentes ausente equivale a desarrollo. Semillas y pares no cruzan particiones. |
-| `familia` | Familia del catálogo o contexto cotidiano (`trabajo`, `delivery`, `medico`, `escuela`). |
+| `familia` | Familia del catálogo o contexto cotidiano (`trabajo`, `delivery`, `medico`, `escuela`, `comercial`, `encuesta`). |
 | `situacion` | Descripción concreta de la semilla propuesta; debe distinguir el episodio, no solo un nombre o un monto. |
 | `escenario_base` | Antecedente activo del catálogo que respalda la modalidad; `null` en diseños cotidianos sin antecedente. No vuelve independientes sus derivados. |
 | `dificultad` | En vishing: `directo`, `indirecto`, `sin_pedido`. En legítimas coincide con `tipo_legitima`. Es una categoría de diseño, no dificultad medida. |
@@ -127,6 +128,44 @@ Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan t
 | `trampa` | `TR-NN-<descripcion-corta>` | Casos difíciles pedidos por #50: pedidos indirectos, menciones legítimas parecidas, negaciones, evidencia separada por texto intermedio y conversaciones largas. |
 | `laboratorio` | `LAB-<nombre-original>` | Guiones del laboratorio de Ignacio (`laboratorio-main`, `experiments/laboratorio/casos/`), convertidos a este formato. |
 | `corpus_v2` | `CV2-D-<V/L>-<FAMILIA>-NNN` o `CV2-T-<V/L>-<FAMILIA>-NNN` | Nuevas situaciones; el campo `particion`, y no el prefijo, gobierna la selección. |
+| `legitimas_cotidianas` | `LEG-<CATEGORÍA>-NN` (id del archivo original) | Llamadas legítimas cotidianas que comparten rasgos con el vishing. Ver abajo. |
+
+### Legítimas cotidianas
+
+> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia se asignaron
+> al convertir los casos; la composición del corpus sigue abierta en
+> [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
+21 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06 desde
+`llamadas_legitimas.json`. Ese archivo no se guarda en el repositorio: su contenido quedó
+en `texto/` y `referencia/`, y su `id` es el `case_id`. El llamante es `A` y quien atiende
+es `B`, la persona protegida en `roles-protegida.json`.
+
+| Categoría del original | Casos | `familia` | `tipo_legitima` |
+|---|---|---|---|
+| Call center con oferta | `LEG-CC-01` a `03` | `comercial` | `cotidiana` |
+| Vendedor de vehículos | `LEG-VE-01`, `02` / `LEG-VE-03` | `comercial` | `cotidiana` / `mencion_sin_pedido` |
+| Banco, movimientos sospechosos | `LEG-BA-01` a `03` | `banco` | `mencion_sin_pedido` |
+| Soporte técnico pedido por el cliente | `LEG-ST-01` / `LEG-ST-02` / `LEG-ST-03` | `soporte` | `cotidiana` / `pedido_razonable` / `mencion_sin_pedido` |
+| Correo y entregas | `LEG-CO-01` a `03` | `delivery` | `cotidiana` |
+| Encuestas | `LEG-EN-01`, `03` / `LEG-EN-02` | `encuesta` | `cotidiana` / `pedido_razonable` |
+| Confirmación de turnos | `LEG-TU-01` a `03` | `medico` | `cotidiana` |
+
+Diferencias con `corpus_v2`:
+
+- **Sin semilla ni par** (`null`): no hay una contraparte de vishing escrita para cada una.
+  Las de banco y `LEG-ST-01` se vinculan con `escenario_base` al escenario legítimo del
+  catálogo (`LG-BANK-ALERT-01`, `LG-SUPPORT-INFO-01`); el resto es cotidiano y queda en `null`.
+- **De 5 a 16 líneas**: el mínimo de 12 de `corpus_v2` no se exige.
+- **Fuera de `MANIFIESTO-CORPUS-V2.json`**: el manifiesto protege los 350 casos de corpus v2 y
+  sus antecedentes, y `casos.py` no compara las huellas de este grupo. Así la reserva y el
+  catálogo no cambian.
+- Solo partición `desarrollo` y clase `legitima`; `casos.py` falla si no.
+
+Para correr solo este grupo: `python correr.py --grupo legitimas_cotidianas ...`.
+Las corridas anteriores al 2026-11-06 son sobre 150 casos; `correr.py` usa ahora por
+defecto los 171 de desarrollo. Para repetir una corrida histórica:
+`python correr.py --lista desarrollo-150 ...` ([lista](listas/desarrollo-150.txt)).
 
 ## Validar
 
