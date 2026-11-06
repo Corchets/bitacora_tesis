@@ -1,0 +1,12 @@
+A: Hola, ¿quién es?
+B: Hola, buen día, te habla Cristian, de ClimaSur, de instalaciones. ¿Hablo con Eugenia Toledo?
+A: Sí.
+B: Eugenia, te llamo por la instalación del split que compraste el sábado. ¿Me confirmás la dirección?
+A: Crisóstomo Álvarez seiscientos cuarenta.
+B: ¿Es casa o edificio?
+A: Edificio, cuarto piso, departamento C.
+B: ¿Y entre qué calles queda? Así el instalador no se pierde.
+A: Entre Maipú y Jujuy.
+B: Perfecto. ¿El balcón tiene acceso para la unidad de afuera?
+A: Sí, tiene balcón.
+B: Bárbaro. Te queda el lunes a la mañana. La instalación ya está paga con la compra. Gracias, Eugenia.

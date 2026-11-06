@@ -682,5 +682,117 @@
 "LEG-TU-03": {
 "protegida": "B",
 "origen": "lectura"
+},
+"LEG2-CC-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CC-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CC-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CC-06": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-06": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-06": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-06": {
+"protegida": "A",
+"origen": "lectura"
 }
 }

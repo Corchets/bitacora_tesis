@@ -1,0 +1,9 @@
+A: ¿Hola?
+B: Hola, ¿Carla Benítez?
+A: Sí, ¿quién habla?
+B: Hola, Carla, soy Martín, repartidor del Correo Federal. Tengo un paquete para vos. ¿Es en San Martín mil cuatrocientos cincuenta?
+A: Sí, esa.
+B: Bárbaro, estoy a dos cuadras. ¿Estás en tu casa?
+A: Sí, estoy.
+B: Listo, en cinco minutos estoy. Chau.
+A: Dale, gracias.

@@ -1,0 +1,12 @@
+A: Sí, hola.
+B: Buenas tardes, te habla Mariela, del service oficial de Lavatec. ¿Hablo con Carla Benítez?
+A: Sí.
+B: Carla, te llamo por la orden que abriste el martes por el lavarropas que no centrifuga.
+A: ¡Ah, sí! Ya tengo una montaña de ropa.
+B: Jaja, te entiendo. Para validar la garantía necesito el DNI del titular de la factura.
+A: Es el mío, treinta y uno, doscientos cuatro, novecientos noventa.
+B: Perfecto. ¿La visita es en San Martín mil cuatrocientos cincuenta, segundo piso?
+A: Sí, segundo B.
+B: Tengo el jueves de catorce a dieciocho. Como está en garantía no tiene costo. Tené a mano la factura.
+A: Dale, el jueves está bien.
+B: Listo. El técnico te escribe media hora antes. Gracias, Carla.
