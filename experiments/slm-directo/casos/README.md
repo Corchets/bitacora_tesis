@@ -233,7 +233,9 @@ lote, y cada lote tiene su lista en [`listas/`](listas/):
 | `legitimas-seleccion-3` | `ENT-L-SELECCION-*`, aparte de las 91 |
 
 `--lista` acepta varias separadas por coma, por ejemplo
-`python correr.py --lista legitimas-leg-21,legitimas-leg2-28 ...`.
+`python correr.py --lista legitimas-leg-21,legitimas-leg2-28 ...`. La
+[anotación a ciegas del alcance](alcance-legitimas-cotidianas.json), con la regla de
+`alcance-desarrollo.json`, deja las 94 dentro: entrantes de un número no agendado.
 Las corridas anteriores al 2026-11-06 son sobre 150 casos; `correr.py` usa ahora por
 defecto los 244 de desarrollo. Para repetir una corrida histórica:
 `python correr.py --lista desarrollo-150 ...` ([lista](listas/desarrollo-150.txt)).
