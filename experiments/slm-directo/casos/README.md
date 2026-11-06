@@ -128,7 +128,7 @@ Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan t
 | `trampa` | `TR-NN-<descripcion-corta>` | Casos difíciles pedidos por #50: pedidos indirectos, menciones legítimas parecidas, negaciones, evidencia separada por texto intermedio y conversaciones largas. |
 | `laboratorio` | `LAB-<nombre-original>` | Guiones del laboratorio de Ignacio (`laboratorio-main`, `experiments/laboratorio/casos/`), convertidos a este formato. |
 | `corpus_v2` | `CV2-D-<V/L>-<FAMILIA>-NNN` o `CV2-T-<V/L>-<FAMILIA>-NNN` | Nuevas situaciones; el campo `particion`, y no el prefijo, gobierna la selección. |
-| `legitimas_cotidianas` | `LEG-<CATEGORÍA>-NN` (id del archivo original) | Llamadas legítimas cotidianas que comparten rasgos con el vishing. Ver abajo. |
+| `legitimas_cotidianas` | `LEG-<CATEGORÍA>-NN` y `LEG2-<CATEGORÍA>-NN` (id del archivo original), o `ENT-L-<FAMILIA>-NNN` | Llamadas legítimas cotidianas que comparten rasgos con el vishing. Ver abajo. |
 
 ### Legítimas cotidianas
 
@@ -213,7 +213,19 @@ Diferencias con `corpus_v2`:
   catálogo no cambian.
 - Solo partición `desarrollo` y clase `legitima`; `casos.py` falla si no.
 
-Para correr solo este grupo: `python correr.py --grupo legitimas_cotidianas ...`.
+Para correr solo este grupo: `python correr.py --grupo legitimas_cotidianas ...`. La etapa 2
+de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) informa los resultados por
+lote, y cada lote tiene su lista en [`listas/`](listas/):
+
+| Lista | Casos |
+|---|---|
+| `legitimas-91` | Las 91 de Evaristo: los tres lotes juntos |
+| `legitimas-leg-21` | `LEG-*` |
+| `legitimas-leg2-28` | `LEG2-*` |
+| `legitimas-ent-l-42` | `ENT-L-*` del lote 3 |
+
+`--lista` acepta varias separadas por coma, por ejemplo
+`python correr.py --lista legitimas-leg-21,legitimas-leg2-28 ...`.
 Las corridas anteriores al 2026-11-06 son sobre 150 casos; `correr.py` usa ahora por
 defecto los 241 de desarrollo. Para repetir una corrida histórica:
 `python correr.py --lista desarrollo-150 ...` ([lista](listas/desarrollo-150.txt)).
