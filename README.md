@@ -50,6 +50,7 @@ bitacora_tesis/
 │   └── scripts/                   # Generador Node (build, serve, review-brief)
 ├── docs/
 │   ├── GLOSARIO.md                # Términos técnicos con sentido preciso (T_A, T_R, T_C, WER, etc.)
+│   ├── hallazgos/                 # Lo que aprendimos: un archivo por hallazgo (H01…), con evidencia, estado y qué cambia
 │   ├── propuesta/
 │   │   ├── PLAN-DE-TRABAJO.md     # Fuente única de verdad: problema, objetivos, método y cronograma
 │   │   └── REQUISITOS-ACADEMICOS.md # Pautas formales de UNSTA (portada, ~100 págs, defensa)
