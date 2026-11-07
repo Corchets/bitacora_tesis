@@ -167,6 +167,8 @@ prompt y política sobre desarrollo no estima el rendimiento: eso sale de la res
 
 R05, corrección de la reserva pedida por Luciano el 2026-11-05 (rama `reserva-sin-cortes`, en curso): se completan sus llamadas cortadas después de ver resultados de desarrollo. Sube el máximo alcanzable
 y puede dejar los casos sin ceguera para quien los lea. **Mitigación:** otra sesión que no lee prompts ni resultados, registro `r03` con huellas y motivos, y declararlo en el informe. Los casos cortados de desarrollo siguen igual.
+**Descartada el 2026-11-07** por Luciano y Mateo ([#45](https://github.com/Corchets/bitacora_tesis/issues/45)): las estafas de la reserva que terminan antes del pedido se escribieron así a propósito, y completarlas
+ajustaría el test al detector que busca pedidos. Quedan como están y se informan aparte. La rama nunca se subió.
 
 ## Actualización técnica — 2026-11-06
 
