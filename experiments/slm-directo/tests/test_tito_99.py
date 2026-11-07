@@ -76,6 +76,8 @@ class FakeModel:
 
 
 class FakeTorch:
+    float = float  # incrustar_bloques pide torch.float para la máscara
+
     class _Ctx:
         def __enter__(self):
             return None
