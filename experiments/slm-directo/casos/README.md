@@ -171,6 +171,11 @@ publicados antes del 2026-10-23, que no pudieron entrenarse con ella (Qwen3.5, p
 con uno posterior hay que declarar la posible contaminación
 ([R05](../../../docs/gestion/REGISTRO-RIESGOS.md)).
 
+**Excepción planificada en [#45](https://github.com/Corchets/bitacora_tesis/issues/45)** para rehacer la reserva
+según el alcance del detector. La leen agentes que no son detectores y no ven la clase ni resultados. El 2026-11-07,
+cuatro agentes anotaron a ciegas quién inicia cada llamada, y después un agente corrige las referencias. El test suma
+además un lote nuevo de legítimas entrantes. Ver [TEST-ALCANCE.md](TEST-ALCANCE.md).
+
 **No mergear `laboratorio-luciano` en `laboratorio-main`**: traería la reserva en la historia
 de la rama de integración, donde se corre sin pensar. Para integrar se arma un único commit con
 `git merge --squash`, se sacan los `CV2-T-*`, se filtra el catálogo con
