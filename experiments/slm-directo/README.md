@@ -169,6 +169,15 @@ corridas en curso o interrumpidas; los fallos y prefijos incompletos no cuentan 
 negativos. El HTML es autónomo, funciona como archivo local y conserva los datos
 históricos sin pérdida mediante compresión.
 
+### Formularios ciegos de #145
+
+[`analisis/tablero/revision-145.html`](analisis/tablero/revision-145.html) permite completar
+las 42 fichas sin mostrar las referencias ni los resultados del sistema. Incluye casillas,
+marcas por línea, guardado por revisor y descarga/recuperación de respuestas. La
+[guía y reproducción](../../docs/corpus/REVISION-CIEGA-145.md) explica la muestra y la
+custodia de la clave. Para esta revisión, usar ese formulario y evitar el panel de
+resultados anterior hasta terminar la anotación independiente.
+
 ### El panel general del proyecto
 
 `analisis/tablero/panel.html` junta en una página el estado del proyecto, el plan de

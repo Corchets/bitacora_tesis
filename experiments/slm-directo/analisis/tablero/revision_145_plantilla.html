@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Revisar llamadas · #145</title>
+<style>
+:root{color-scheme:light;--paper:#f3f6f5;--ink:#243339;--muted:#53636a;--line:#c9d0cd;--accent:#155e63;--tint:#e7f1ee;--error:#9d2525}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit;color:inherit}button,select,input[type=number],input[type=text],textarea{border:1px solid var(--line);border-radius:6px;background:white}button{min-height:44px;padding:8px 15px;cursor:pointer;font-weight:600}button:hover{background:var(--tint);border-color:var(--accent)}button.primary{background:var(--accent);color:white;border-color:var(--accent)}button.primary:hover{background:#104c50}button:disabled{opacity:.5;cursor:default}input,select,textarea{accent-color:var(--accent);caret-color:var(--accent)}input[type=text],input[type=number],select{padding:9px 11px;min-height:44px}textarea{display:block;width:100%;min-height:85px;padding:10px;resize:vertical}input[type=number]{width:90px}input[type=checkbox],input[type=radio]{width:21px;height:21px;flex-shrink:0;margin:2px 0}input[type=radio]{appearance:none;border:1.5px solid #73847f;border-radius:4px;background:white}input[type=radio]:checked{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 4px white}input::placeholder,textarea::placeholder{color:var(--muted);opacity:1}::selection{background:#cae6df}a{color:var(--accent);text-underline-offset:3px}:focus-visible{outline:3px solid #a75b00;outline-offset:3px}h1{font-size:27px;line-height:1.2;letter-spacing:-.025em;margin:0 0 8px}h2{font-size:21px;margin:0}p{margin:8px 0;max-width:74ch}.muted,small{color:var(--muted)}small{font-size:14px}.wrap{max-width:1430px;margin:auto;padding:28px 28px 60px}.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.identity{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin:24px 0 12px}.identity label{display:grid;gap:4px;font-size:14px;font-weight:600}.identity input{width:240px}.guide{border-block:1px solid var(--line);padding:12px 0;margin-top:18px}.guide summary{cursor:pointer;font-weight:600;min-height:28px}.guide ul{padding-left:22px;max-width:80ch}.guide li{margin:8px 0}.proposal{font-size:14px;color:var(--muted)}#status{min-height:26px;font-size:14px;margin:8px 0;color:var(--accent)}#status.error,#errors{color:var(--error)}#errors{scroll-margin-top:20px}#errors:empty{display:none}.navigation{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 0;border-top:1px solid var(--line)}.navigation label{font-size:14px;font-weight:600}.navigation select{min-width:180px}.progress{margin-left:auto;font-variant-numeric:tabular-nums}progress{accent-color:var(--accent);width:120px;height:8px;margin-left:8px}.workspace{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start}.conversation{position:sticky;top:18px;background:white;border:1px solid var(--line);border-radius:8px;overflow:hidden}.conversation summary{padding:16px 18px;cursor:pointer;font-weight:700}.conversation .hint{padding:0 18px 12px;font-size:14px}.mark-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;background:var(--paper);border-block:1px solid var(--line);font-size:14px}.mark-tools select{padding:6px;min-height:38px}.turns{max-height:68vh;overflow:auto;scrollbar-color:#8da59b var(--paper);scrollbar-width:thin}.turn{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:13px 18px 13px 10px;border-bottom:1px solid #e7eae7;scroll-margin:12px}.turn:last-child{border:0}.turn .line-number{align-self:start;min-height:38px;padding:4px;font-variant-numeric:tabular-nums;border-color:transparent;font-weight:500;font-size:14px;color:var(--muted)}.turn .line-number:hover{border-color:var(--accent)}.speaker{font-size:11px;letter-spacing:.055em;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}.turn.protected{background:#f8faf8}.turn.marked{background:var(--tint)}.tag{font-size:12px;color:var(--accent);font-weight:700;margin-right:8px}.turn p{margin:0;overflow-wrap:anywhere}.sheet{min-width:0}.sheet-head{display:flex;align-items:baseline;gap:10px;margin:2px 0 6px}.sheet-head small{margin-left:auto}fieldset{border:0;border-bottom:1px solid var(--line);margin:22px 0 0;padding:0 0 22px;min-width:0}legend{font-size:17px;font-weight:700;padding:0;margin-bottom:8px}.options{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.option{display:flex;gap:8px;align-items:center;min-height:44px;padding:8px 11px;border:1px solid var(--line);border-radius:6px;background:white;cursor:pointer;font-size:15px}.option:hover{border-color:var(--accent)}.option:has(input:checked){background:var(--tint);border-color:var(--accent);font-weight:600}.line-input{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}.line-input label{font-size:14px}.reason{display:block;margin-top:12px;font-size:14px;font-weight:600}.reason textarea{margin-top:6px;font-weight:400}.finish{display:flex;align-items:center;gap:10px;min-height:52px;font-weight:600;margin:20px 0 8px}.bottom{display:flex;justify-content:space-between;gap:12px;margin-top:20px}.export-note{margin-top:18px;font-size:14px}.exposure{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-top:14px}#welcome{padding:35px 0;max-width:70ch}#welcome h2{margin-bottom:10px}.file-label{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;background:white;border:1px solid var(--line);border-radius:6px;font-size:14px;cursor:pointer}.file-label:hover{background:var(--tint)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}[hidden]{display:none!important}
+@media(max-width:900px){.wrap{padding:22px 18px 45px}.top{display:block}.tools{margin-top:16px}.workspace{grid-template-columns:1fr;gap:24px}.conversation{position:static}.turns{max-height:55vh}.progress{margin-left:0}.navigation{gap:8px}.sheet-head small{font-size:13px}.identity{margin-top:18px}}
+@media print{.tools,.identity,.guide,.navigation,.mark-tools,.bottom,.export-note,#status,#welcome{display:none}.workspace{display:block}.conversation{position:static}.turns{max-height:none;overflow:visible}.wrap{padding:0}.option{padding:4px 8px}fieldset,.turn{break-inside:avoid}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="top"><div><h1>Revisar llamadas</h1><p class="muted">Una conversación por vez. Leé el diálogo y completá tu criterio.</p></div><div class="tools"><button id="export" class="primary" disabled>Descargar mis respuestas</button><label class="file-label">Recuperar respuestas<input id="import" class="sr-only" type="file" accept="application/json,.json"></label></div></header>
+<details class="guide"><summary>Guía breve para completar las fichas</summary>
+<ul>
+<li><b>Leé la conversación completa.</b> PROTEGIDA es la persona que buscamos proteger; OTRA es su interlocutor. Esos roles no indican si hay fraude.</li>
+<li><b>Estafa:</b> evaluá si el texto permite sostener un engaño para obtener dinero, información o acceso. Una palabra, la urgencia o un pedido sensible no bastan por sí solos. Si la identidad o la intención no pueden distinguirse, marcá «Dudoso» y explicalo.</li>
+<li><b>Primera sospecha:</b> la primera línea donde una persona atenta tendría un motivo concreto para sospechar. Puede aparecer antes del pedido. Justificá tu elección con el texto disponible hasta esa línea.</li>
+<li><b>T_R:</b> primera línea del pedido de alto riesgo, leído en contexto. Distinguilo de una mención, un consejo o una descripción. Si es indirecto o condicional y no podés resolverlo, marcá «Dudoso».</li>
+<li><b>T_C:</b> primera línea donde se observa que la persona cumple ese pedido. Si corta, rechaza o no se ve el cumplimiento, no inventes una marca. Estas fichas usan líneas, no segundos.</li>
+<li><b>Sin pedido no significa automáticamente que no sea estafa.</b> Anotá cada respuesta por separado. Una llamada poco creíble también necesita su motivo; no se descarta automáticamente.</li>
+<li>Completá por tu cuenta, sin resultados del detector ni respuestas ajenas. Si ya conocías el caso o sus resultados, dejalo marcado. No cambies de nombre para volver a anotar lo mismo.</li>
+</ul><p class="proposal"><b>Estado: propuesta sin discutir.</b> Guía de trabajo de #145, basada en el manual vigente. Los casos ambiguos se adjudican después; D07 y D08 siguen abiertas.</p></details>
+<div class="identity"><label for="reviewer">Tu nombre<input id="reviewer" type="text" autocomplete="name" placeholder="Nombre y apellido" maxlength="80"></label><button id="start">Abrir mis fichas</button><button id="change" hidden>Cambiar de revisor</button></div>
+<p id="status" role="status" aria-live="polite">Escribí tu nombre para empezar o recuperá un archivo de respuestas.</p>
+<section id="welcome"><h2>42 conversaciones, a tu ritmo</h2><p>Podés dejar una ficha a medias y seguir después. Las opciones están vacías: no hay respuestas sugeridas.</p><p class="muted">El navegador guarda el avance en este equipo cuando lo permite. Descargá tus respuestas al terminar cada sesión para tener una copia y compartirlas con quien coordine la revisión.</p></section>
+<div id="review" hidden>
+<nav class="navigation" aria-label="Navegar las fichas"><label for="case-select">Ir a</label><select id="case-select"></select><button id="pending">Siguiente pendiente</button><span class="progress"><span id="count"></span><progress id="progress" value="0" max="42" aria-label="Fichas completas"></progress></span></nav>
+<main class="workspace"><details class="conversation" open><summary id="dialog-title">Conversación</summary><p class="hint muted">Hacé clic en un número de línea para cargar una marca en la ficha.</p><div class="mark-tools"><label for="mark-target">Cargar al hacer clic</label><select id="mark-target"><option value="sospecha">Primera sospecha</option><option value="pedido">Pedido · T_R</option><option value="cumplimiento">Cumplimiento · T_C</option></select></div><div id="turns" class="turns"></div></details>
+<form id="form" class="sheet" novalidate><div class="sheet-head"><h2 id="sheet-title">Tu ficha</h2><small id="sheet-state"></small></div><p class="muted"><small>Elegí una opción por pregunta. «Dudoso» es una respuesta válida.</small></p><p id="errors" role="alert" tabindex="-1"></p>
+<fieldset><legend>¿Es creíble como llamada?</legend><div class="options"><label class="option"><input type="radio" name="credibilidad" value="si">Sí</label><label class="option"><input type="radio" name="credibilidad" value="dudosa">Dudosa</label><label class="option"><input type="radio" name="credibilidad" value="no">No</label></div><label class="reason">¿Qué la vuelve dudosa o poco creíble?<textarea maxlength="50000" name="motivo_credibilidad" placeholder="Necesario si marcaste Dudosa o No. Podés citar líneas."></textarea></label></fieldset>
+<fieldset><legend>Leyendo todo, ¿es una estafa?</legend><div class="options"><label class="option"><input type="radio" name="estafa" value="si">Sí</label><label class="option"><input type="radio" name="estafa" value="no">No</label><label class="option"><input type="radio" name="estafa" value="dudoso">Dudoso</label></div><label class="reason">¿En qué te basás?<textarea maxlength="50000" name="fundamento" placeholder="Citá el diálogo o las líneas que sostienen tu respuesta, también si marcaste No o Dudoso."></textarea></label></fieldset>
+<fieldset><legend>¿Hay un motivo concreto para sospechar?</legend><div class="options"><label class="option"><input type="radio" name="sospecha" value="si">Sí</label><label class="option"><input type="radio" name="sospecha" value="no">No</label><label class="option"><input type="radio" name="sospecha" value="dudoso">Dudoso</label></div><div class="line-input"><label for="suspicion-line">Primera línea</label><input id="suspicion-line" name="sospecha_linea" type="number" min="1" step="1" inputmode="numeric"></div><label class="reason">¿Qué permite sospechar en ese punto?<textarea maxlength="50000" name="motivo_sospecha" placeholder="Usá solo lo que se sabe hasta esa línea. Si dudás, explicá por qué."></textarea></label></fieldset>
+<fieldset><legend>¿Hay un pedido de alto riesgo?</legend><div class="options"><label class="option"><input type="radio" name="pedido" value="si">Sí</label><label class="option"><input type="radio" name="pedido" value="no">No se observa</label><label class="option"><input type="radio" name="pedido" value="dudoso">Dudoso</label></div><div class="line-input"><label for="request-line">Línea del primer pedido · T_R</label><input id="request-line" name="pedido_linea" type="number" min="1" step="1" inputmode="numeric"></div><label class="reason">¿Qué pide y por qué? ¿O cuál es la duda?<textarea maxlength="50000" name="motivo_pedido" placeholder="Por ejemplo, qué tendría que hacer la persona. No hace falta asignar una etiqueta técnica."></textarea></label></fieldset>
+<fieldset><legend>¿Se observa que cumple ese pedido?</legend><div class="options"><label class="option"><input type="radio" name="cumplimiento" value="si">Sí</label><label class="option"><input type="radio" name="cumplimiento" value="no">No se observa</label><label class="option"><input type="radio" name="cumplimiento" value="dudoso">Dudoso</label><label class="option"><input type="radio" name="cumplimiento" value="no_aplica">No hay pedido</label></div><div class="line-input"><label for="compliance-line">Línea del primer cumplimiento · T_C</label><input id="compliance-line" name="cumplimiento_linea" type="number" min="1" step="1" inputmode="numeric"></div><label class="reason">¿Qué cumple? ¿O cuál es la duda?<textarea maxlength="50000" name="motivo_cumplimiento" placeholder="Diferenciá cumplir, rechazar y decir que lo hará más adelante."></textarea></label></fieldset>
+<label class="reason">Otras observaciones<textarea maxlength="50000" name="observaciones" placeholder="Contradicciones, información que falta o criterios para discutir con el equipo. Opcional."></textarea></label>
+<label class="exposure"><input name="conocido" type="checkbox">Ya conocía esta conversación, sus referencias o algún resultado del detector.</label>
+<label class="finish"><input name="completa" type="checkbox">Terminé de revisar esta ficha</label><small>Podés corregirla después. Marcarla completa comprueba que estén las respuestas y las líneas necesarias.</small>
+<div class="bottom"><button id="prev" type="button">Anterior</button><button id="next" type="button" class="primary">Siguiente llamada</button></div><p class="export-note muted">Las respuestas son personales. Descargá tu copia al terminar cada sesión; no se envía nada por Internet.</p>
+</form></main></div>
+</div><script type="application/json" id="data">__DATOS_REVISION__</script>
+<script>
+'use strict';
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const $=id=>document.getElementById(id), form=$('form');
+const GROUPS={credibilidad:['si','dudosa','no'],estafa:['si','no','dudoso'],sospecha:['si','no','dudoso'],pedido:['si','no','dudoso'],cumplimiento:['si','no','dudoso','no_aplica']};
+const TEXTS=['motivo_credibilidad','fundamento','motivo_sospecha','motivo_pedido','motivo_cumplimiento','observaciones'];
+const MARKS=['sospecha','pedido','cumplimiento'];
+let reviewer='',state={respuestas:{},actual:0},key='',storageOK=true;
+const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function message(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error)}
+function errors(r,n){
+ const out=[];
+ for(const g of Object.keys(GROUPS))if(!r[g])out.push('Respondé: '+({credibilidad:'credibilidad',estafa:'si es estafa',sospecha:'primera sospecha',pedido:'pedido de alto riesgo',cumplimiento:'cumplimiento'}[g])+'.');
+ if(['dudosa','no'].includes(r.credibilidad)&&!r.motivo_credibilidad?.trim())out.push('Explicá por qué la llamada es dudosa o poco creíble.');
+ if(!r.fundamento?.trim())out.push('Agregá el fundamento de tu clasificación.');
+ for(const m of MARKS){
+  const line=r[m+'_linea'];
+  if(r[m]==='si'&&(!Number.isInteger(Number(line))||Number(line)<1||Number(line)>n))out.push('Indicá una línea válida para '+m+'.');
+  if(r[m]!=='si'&&line!=='')out.push('Borrá la línea de '+m+' o marcá Sí.');
+  if(['si','dudoso'].includes(r[m])&&!r['motivo_'+m]?.trim())out.push('Explicá tu respuesta de '+m+'.');
+ }
+ if(r.cumplimiento==='si'&&r.pedido!=='si')out.push('Un cumplimiento necesita un pedido identificado. Si hay duda, explicala y marcá Dudoso.');
+ if(r.cumplimiento==='no_aplica'&&r.pedido!=='no')out.push('«No hay pedido» corresponde a un pedido que no se observa.');
+ if(r.pedido==='si'&&r.cumplimiento==='si'&&Number(r.cumplimiento_linea)<Number(r.pedido_linea))out.push('T_C no puede estar antes de T_R.');
+ return out;
+}
+function readForm(){const r={};for(const g of Object.keys(GROUPS))r[g]=form.elements[g].value;for(const t of TEXTS)r[t]=form.elements[t].value;for(const m of MARKS)r[m+'_linea']=form.elements[m+'_linea'].value;for(const b of ['conocido','completa'])r[b]=form.elements[b].checked;return r}
+function persist(){
+ try{localStorage.setItem(key,JSON.stringify(state));storageOK=true;message('Guardado en este navegador · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})+'. Descargá una copia al terminar.');}
+ catch(e){storageOK=false;message('No se pudo guardar en el navegador. Tu avance sigue en esta pestaña: descargá tus respuestas antes de cerrarla.',true)}
+}
+function overview(){
+ const n=DATA.casos.filter(c=>state.respuestas[c.id]?.completa).length;
+ $('count').textContent=n+' de '+DATA.casos.length+' completas';$('progress').value=n;
+ $('case-select').innerHTML=DATA.casos.map((c,i)=>'<option value="'+i+'">'+c.id+(state.respuestas[c.id]?.completa?' · completa':' · pendiente')+'</option>').join('');$('case-select').value=String(state.actual);
+ $('sheet-state').textContent=state.respuestas[DATA.casos[state.actual].id]?.completa?'Ficha completa':'Pendiente';
+}
+function paintMarks(){const r=state.respuestas[DATA.casos[state.actual].id]||{};document.querySelectorAll('.turn').forEach((el,i)=>{const tags=MARKS.filter(m=>r[m]==='si'&&Number(r[m+'_linea'])===i+1);el.classList.toggle('marked',tags.length>0);el.querySelector('.tags').textContent=tags.map(m=>({sospecha:'Sospecha',pedido:'T_R',cumplimiento:'T_C'}[m])).join(' · ')})}
+function save(){
+ const r=readForm(),bad=errors(r,DATA.casos[state.actual].turnos.length);
+ if(r.completa&&bad.length){r.completa=false;form.elements.completa.checked=false;$('errors').textContent=bad.join(' ');}else $('errors').textContent='';
+ state.respuestas[DATA.casos[state.actual].id]=r;persist();overview();paintMarks();
+}
+function show(){
+ const c=DATA.casos[state.actual],r=state.respuestas[c.id]||{};form.reset();
+ for(const g of Object.keys(GROUPS))for(const el of form.querySelectorAll('[name="'+g+'"]'))el.checked=el.value===r[g];
+ for(const t of TEXTS)form.elements[t].value=r[t]||'';
+ for(const m of MARKS){form.elements[m+'_linea'].value=r[m+'_linea']||'';form.elements[m+'_linea'].max=c.turnos.length}
+ for(const b of ['conocido','completa'])form.elements[b].checked=!!r[b];
+ $('dialog-title').textContent=c.id+' · '+c.turnos.length+' líneas';$('sheet-title').textContent='Tu ficha · '+c.id;$('errors').textContent='';
+ $('turns').innerHTML=c.turnos.map((t,i)=>'<div class="turn '+(t.hablante==='PROTEGIDA'?'protected':'')+'"><button type="button" class="line-number" data-line="'+(i+1)+'" aria-label="Cargar línea '+(i+1)+'">'+(i+1)+'</button><div><span class="speaker">'+t.hablante+'</span><span class="tags tag"></span><p>'+escapeHTML(t.texto)+'</p></div></div>').join('');
+ $('turns').scrollTop=0;$('prev').disabled=state.actual===0;$('next').disabled=state.actual===DATA.casos.length-1;overview();paintMarks();
+}
+function activate(name,imported){
+ reviewer=name.trim();if(!reviewer){message('Escribí tu nombre para separar tus respuestas de las de otro revisor.',true);$('reviewer').focus();return}
+ key='revision145:'+DATA.muestra+':'+encodeURIComponent(reviewer.toLocaleLowerCase('es-AR'));state={respuestas:{},actual:0};storageOK=true;
+ try{const raw=imported?null:localStorage.getItem(key);if(raw)state=validate(JSON.parse(raw));}catch(e){if(e.name!=='SecurityError'&&e.name!=='QuotaExceededError'){message('El guardado anterior no se puede leer. Recuperá tu archivo descargado; no se va a sobrescribir.',true);return}storageOK=false}
+ if(imported)state=imported;
+ $('reviewer').value=reviewer;$('reviewer').disabled=true;$('start').hidden=true;$('change').hidden=false;$('welcome').hidden=true;$('review').hidden=false;$('export').disabled=false;
+ show();if(imported)persist();else message(storageOK?'Tus respuestas se guardan al marcar o escribir. Descargá una copia al terminar.':'El guardado del navegador no está disponible. Descargá tus respuestas antes de cerrar.',!storageOK);
+}
+function validate(s){
+ if(!s||typeof s!=='object'||!s.respuestas||typeof s.respuestas!=='object'||Array.isArray(s.respuestas)||!Number.isInteger(s.actual)||s.actual<0||s.actual>=DATA.casos.length)throw Error('Formato de respuestas inválido.');
+ const clean={respuestas:{},actual:s.actual};
+ for(const [id,r] of Object.entries(s.respuestas)){
+  const c=DATA.casos.find(c=>c.id===id);if(!c||!r||typeof r!=='object')throw Error('El archivo contiene una llamada desconocida.');
+  const v={};for(const g of Object.keys(GROUPS)){if(r[g]!==''&&!GROUPS[g].includes(r[g]))throw Error('Opción inválida.');v[g]=r[g]}
+  for(const t of TEXTS){if(typeof r[t]!=='string'||r[t].length>50000)throw Error('Observación inválida.');v[t]=r[t]}
+  for(const m of MARKS){const val=r[m+'_linea'];if(typeof val!=='string'||val.length>32||(val!==''&&!Number.isFinite(Number(val))))throw Error('Número de línea inválido.');v[m+'_linea']=val}
+  for(const b of ['conocido','completa']){if(typeof r[b]!=='boolean')throw Error('Casilla inválida.');v[b]=r[b]}
+  if(v.completa&&errors(v,c.turnos.length).length)throw Error('Hay una ficha completa con respuestas faltantes.');
+  clean.respuestas[id]=v;
+ }return clean;
+}
+$('start').onclick=()=>activate($('reviewer').value);
+$('reviewer').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();activate(e.target.value)}});
+$('change').onclick=()=>{if(reviewer)persist();reviewer='';$('reviewer').disabled=false;$('start').hidden=false;$('change').hidden=true;$('review').hidden=true;$('welcome').hidden=false;$('export').disabled=true;message('Ingresá el nombre de la persona que va a revisar.');$('reviewer').value='';$('reviewer').focus()};
+form.addEventListener('submit',e=>e.preventDefault());
+form.addEventListener('input',e=>{if(!reviewer)return;const wasFinished=form.elements.completa.checked;if(e.target.name!=='completa'&&wasFinished)form.elements.completa.checked=false;save();if(e.target.name==='completa'&&wasFinished&&!form.elements.completa.checked)$('errors').focus()});
+function go(index){state.actual=index;persist();show();$('sheet-title').scrollIntoView({block:'nearest'})}
+$('prev').onclick=()=>go(Math.max(0,state.actual-1));$('next').onclick=()=>go(Math.min(DATA.casos.length-1,state.actual+1));$('case-select').onchange=e=>go(Number(e.target.value));
+$('pending').onclick=()=>{for(let offset=1;offset<=DATA.casos.length;offset++){const n=(state.actual+offset)%DATA.casos.length;if(!state.respuestas[DATA.casos[n].id]?.completa){go(n);return}}message('Completaste todas las fichas. Descargá tus respuestas para conservarlas.')};
+$('turns').onclick=e=>{const btn=e.target.closest('[data-line]');if(!btn)return;const m=$('mark-target').value;form.querySelector('[name="'+m+'"][value="si"]').checked=true;form.elements[m+'_linea'].value=btn.dataset.line;form.elements.completa.checked=false;save()};
+$('export').onclick=()=>{
+ if(!reviewer)return;
+ const packet={issue:145,version:DATA.version,muestra:DATA.muestra,revisor:reviewer,exportado:new Date().toISOString(),...state};
+ const blob=new Blob([JSON.stringify(packet,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='REVISION-145-'+reviewer.replace(/[^\p{L}\p{N}-]+/gu,'-')+'-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);message('Se solicitó la descarga. Conservá el JSON: incluye todas tus fichas, también las pendientes.');
+};
+$('import').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{
+  if(file.size>5000000)throw Error('El archivo es demasiado grande.');
+  const p=JSON.parse(await file.text());if(p.issue!==145||p.version!==DATA.version||p.muestra!==DATA.muestra)throw Error('El archivo pertenece a otra muestra o versión.');
+  if(typeof p.revisor!=='string'||!p.revisor.trim()||p.revisor.length>80)throw Error('Falta el nombre del revisor.');
+  const incoming=validate(p);const importKey='revision145:'+DATA.muestra+':'+encodeURIComponent(p.revisor.trim().toLocaleLowerCase('es-AR'));
+  let previous;try{previous=localStorage.getItem(importKey)}catch(e){}
+  if(previous&&previous!==JSON.stringify(incoming)&&!confirm('Ya hay respuestas de '+p.revisor+' en este navegador. ¿Reemplazarlas por las del archivo? Descargá primero las actuales si querés conservar ambas.'))return;
+  activate(p.revisor,incoming);
+ }catch(err){message('No se recuperaron respuestas: '+err.message,true)}finally{e.target.value=''}
+};
+window.addEventListener('beforeunload',e=>{if(reviewer&&!storageOK&&Object.keys(state.respuestas).length){e.preventDefault();e.returnValue=''}});
+</script></body></html>
