@@ -24,7 +24,7 @@ Fechas del tutor: **todo al 90 % el 2026-11-15**, todo terminado el 2026-11-30, 
 | 2026-09-09 | Replay como base y VoIP como objetivo; PI1 y PI2 aprobadas; PSTN, deepfakes y biometría afuera | Alcance acotado |
 | 2026-10-04 | Referencia mínima por conversación, sin etiquetar cada turno | Anotación viable |
 | 2026-10-21 | Corpus v2: 297 conversaciones nuevas, 200 reservadas | Desarrollo más grande; sin revisión humana |
-| 2026-10-28 | Tutor: API descartada, demo por Meet aprobada, meta 80–85 / 10–15, gama más alta | Baja la meta original de 95/5 y se define la demo |
+| 2026-10-28 | Tutor: API descartada, demo por Meet aprobada, gama más alta; le parece bien la meta de referencia 80–85 / 10–15 que propone el equipo | Reemplaza la meta de trabajo de 95/5 y se define la demo |
 | 2026-10-29 | Zipformer retirado por sus errores con voz real | Se prueba Parakeet |
 | 2026-10-31 | WhatsApp Desktop fuera, porque BlackHole no funcionó con él | Demo por pestaña de Chrome |
 | 2026-11-02 | Opción B por defecto; corrida por Meet | Primer recorrido con voz real |
