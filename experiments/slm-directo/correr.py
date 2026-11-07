@@ -145,7 +145,7 @@ COLUMNAS = [
 COLUMNAS_SINO = ["p_si", "masa_si_no", "top_logprobs"]
 # Solo si la corrida usa un prompt de dígito o v4-L (#143, segunda vuelta); van después de COLUMNAS_SINO.
 COLUMNAS_DIGITO = ["digito_esperado", "masa_digitos", "riesgo_esperado"]
-# Solo si la corrida usa v4-corte; van al final. `alerta_sugerida` es la regla del detector.
+# Solo si la corrida usa un prompt cortado (PROMPTS_CORTE); van al final. `alerta_sugerida` es la regla del detector.
 COLUMNAS_CORTE = ["alerta_escrita"]
 
 
@@ -577,7 +577,8 @@ def main(argv: list[str] | None = None) -> int:
     if not modelos and not args.solo_reglas and not args.solo_reranker:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b), --solo-reglas o --solo-reranker.")
     if args.filtro_tito and ({"riesgo"} | PROMPTS_CORTE) & set(_lista(args.prompts)):
-        sys.exit("--filtro-tito no admite --prompts riesgo ni v4-corte: el flujo Tito→SLM usa el prompt de un paso.")
+        sys.exit(f"--filtro-tito no admite --prompts riesgo ni los cortados ({', '.join(sorted(PROMPTS_CORTE))}): "
+                 "el flujo Tito→SLM usa el prompt de un paso.")
     if args.filtro_tito and PROMPTS_TOKEN & set(_lista(args.prompts)):
         sys.exit("--filtro-tito no admite los prompts de token (SÍ/NO o dígito): en #143 la compuerta de Tito se simula offline.")
     if args.tito_viejo_2 and not args.filtro_tito:

@@ -406,7 +406,8 @@ class TestControlesVentas(unittest.TestCase):
             self.assertGreaterEqual(len(c["lineas"]), 10, caso)
             self.assertEqual({l[:3] for l in c["lineas"]}, {"A: ", "B: "}, caso)
 
-    def test_no_tocan_los_150_ni_copian_sus_frases(self):
+    def test_no_tocan_los_casos_de_desarrollo_ni_copian_sus_frases(self):
+        import correr
         import correr_controles
         self.assertFalse(set(self.datos) & set(casos.ids_de_casos()))
         vistas = {l.texto.lower() for c in casos.ids_de_casos(particion="desarrollo") for l in casos.cargar_texto(c)}
@@ -423,7 +424,11 @@ class TestControlesVentas(unittest.TestCase):
                 for c in ids:
                     self.assertEqual(casos.cargar_referencia(c)["grupo"], "control_ventas")
                     self.assertEqual({l.hablante for l in casos.con_roles(c, casos.cargar_texto(c))}, {"PROTEGIDA", "OTRA"})
-        self.assertEqual(len(casos.ids_de_casos(particion="desarrollo")), 150)
+        # Al salir vuelven los de desarrollo: los 150 de antes y las 94 legítimas entrantes de #155.
+        desarrollo = sorted(correr.leer_lista("desarrollo-150") + correr.leer_lista("legitimas-91")
+                            + correr.leer_lista("legitimas-seleccion-3"))
+        self.assertEqual(len(desarrollo), 244)
+        self.assertEqual(casos.ids_de_casos(particion="desarrollo"), desarrollo)
 
 
 if __name__ == "__main__":

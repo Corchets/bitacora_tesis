@@ -1,5 +1,6 @@
 """v4-corte (#143, decisión del 2026-11-07): el JSON de v4 cortado después de `alerta_sugerida`, con la
 segunda consulta de motivo y evidencia solo en la línea del aviso. Contra un Ollama falso; no necesita modelo.
+TestOtrosPromptsCortados: lo mismo con `v4-premisa-corte` y `c-json-corte` (etapa 2 de #143).
 
 Uso (desde experiments/slm-directo):
     python3 -B -m unittest tests.test_json_cortado -v
@@ -26,17 +27,23 @@ import resumen  # noqa: E402
 from casos import Linea  # noqa: E402
 from cliente_ollama import ClienteOllama  # noqa: E402
 from detectores import (  # noqa: E402
+    CORTE_DE,
     ESQUEMA_MOTIVO,
     ESQUEMA_SALIDA,
     MAXIMO_TOKENS_CORTE,
     MAXIMO_TOKENS_RESPUESTA,
+    PROMPTS,
+    PROMPTS_CORTE,
     DetectorSLM,
     DetectorSLMJSONCortado,
+    cargar_pregunta,
     cargar_prompt,
     cargar_prompt_motivo,
     PROMPT_MOTIVO_CORTE,
     esquema_de,
+    huella,
     leer_json_cortado,
+    usa_roles,
 )
 
 CASOS = "SC-WA-CODE-01-e01,LG-WA-CONSULTA-01-e01"
@@ -336,10 +343,99 @@ class TestCorrida(_ConServidor):
         self.assertIn("Misma línea de aviso en 2 de 2 casos.", texto)
 
     def test_filtro_tito_no_se_combina_con_el_corte(self):
-        with redirect_stdout(io.StringIO()), self.assertRaises(SystemExit) as salida:
-            correr.main(["--modelos", "modelo-falso:1b", "--prompts", "v4-corte", "--hablantes", "rol",
-                         "--filtro-tito", "--casos", CASOS, "--url", self.url])
-        self.assertIn("v4-corte", str(salida.exception))
+        for prompt in sorted(PROMPTS_CORTE):
+            with self.subTest(prompt), redirect_stdout(io.StringIO()), self.assertRaises(SystemExit) as salida:
+                correr.main(["--modelos", "modelo-falso:1b", "--prompts", prompt, "--hablantes", "rol",
+                             "--filtro-tito", "--casos", CASOS, "--url", self.url])
+            self.assertIn(prompt, str(salida.exception))
+
+
+class TestOtrosPromptsCortados(_ConServidor):
+    """Etapa 2 de #143 (Mateo, 2026-11-07): el corte vale para todos los prompts JSON con ESQUEMA_SALIDA."""
+
+    NUEVOS = {"v4-premisa-corte": "v4-premisa", "c-json-corte": "c-json"}
+
+    def detector(self, prompt: str) -> DetectorSLMJSONCortado:
+        return DetectorSLMJSONCortado(self.cliente, "modelo-falso:1b", cargar_prompt(prompt), "rol",
+                                      esquema=esquema_de(prompt))
+
+    def test_cada_corte_es_su_prompt_base_tal_cual(self):
+        self.assertEqual(CORTE_DE, {"v4-corte": "v4", **self.NUEVOS})
+        self.assertEqual(PROMPTS_CORTE, frozenset(CORTE_DE))
+        for corte, base in CORTE_DE.items():
+            with self.subTest(corte):
+                self.assertEqual(PROMPTS[corte], PROMPTS[base])
+                self.assertEqual(cargar_prompt(corte), cargar_prompt(base))
+                self.assertEqual((esquema_de(corte), esquema_de(base)), (ESQUEMA_SALIDA, ESQUEMA_SALIDA))
+                self.assertIsNone(cargar_pregunta(corte), "cierra con la oración de siempre, como su base")
+                self.assertTrue(usa_roles(corte))
+        self.assertNotEqual(cargar_prompt("v4-premisa-corte"), cargar_prompt("v4-corte"))
+        self.assertNotEqual(cargar_prompt("c-json-corte"), cargar_prompt("v4-corte"))
+
+    def test_el_pedido_de_motivo_no_nombra_a_v4(self):
+        self.assertNotIn("v4", cargar_prompt_motivo(PROMPT_MOTIVO_CORTE).lower())
+
+    def test_mismo_pedido_que_su_base_salvo_num_predict(self):
+        for corte, base in self.NUEVOS.items():
+            OllamaCorte.pedidos.clear()
+            with self.subTest(corte):
+                r = self.detector(corte).evaluar(roles("Hola, ¿qué tal?", "Bien"))
+                (pedido,) = OllamaCorte.pedidos
+                mensajes, _ = DetectorSLM(self.cliente, "m", cargar_prompt(base), "rol").mensajes(roles("Hola, ¿qué tal?", "Bien"))
+                self.assertEqual(pedido["messages"], mensajes)
+                self.assertEqual(pedido["format"], ESQUEMA_SALIDA)
+                self.assertNotIn("think", pedido)
+                self.assertNotIn("logprobs", pedido)
+                self.assertEqual(pedido["options"], {"temperature": 0.0, "seed": 42, "num_ctx": 4096,
+                                                     "num_predict": MAXIMO_TOKENS_CORTE})
+                self.assertEqual((r.riesgo, r.alerta_escrita, r.alerta_sugerida), (0.1, False, False))
+
+    def test_al_avisar_pide_el_mismo_motivo_una_vez_por_llamada(self):
+        for corte in self.NUEVOS:
+            OllamaCorte.pedidos.clear()
+            with self.subTest(corte):
+                d = self.detector(corte)
+                dialogo = roles("Hola", "RIESGO_SIN_ALERTA")
+                r1 = d.evaluar(dialogo)
+                r2 = d.evaluar(dialogo + roles("Decime el código"))
+                self.assertEqual(len(OllamaCorte.pedidos), 3, "primera + segunda, y después solo la primera")
+                p1, p2, _ = OllamaCorte.pedidos
+                self.assertEqual(p2["format"], ESQUEMA_MOTIVO)
+                self.assertEqual(p2["messages"][:2], p1["messages"])
+                self.assertEqual(p2["messages"][2:], [
+                    {"role": "assistant", "content": '{\n  "riesgo": 0.5,\n  "alerta_sugerida": false\n}'},
+                    {"role": "user", "content": cargar_prompt_motivo(PROMPT_MOTIVO_CORTE)}])
+                self.assertEqual((r1.alerta_escrita, r1.alerta_sugerida, r1.motivo), (False, True, "Te piden el código del SMS"))
+                self.assertTrue(r2.alerta_sugerida)
+                self.assertEqual(r2.motivo, "")
+
+    def test_corrida_con_los_tres_cortados(self):
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        prompts = sorted(PROMPTS_CORTE)
+        with redirect_stdout(io.StringIO()):
+            correr.main(["--modelos", "modelo-falso:1b", "--prompts", ",".join(prompts), "--hablantes", "rol",
+                         "--sin-reglas", "--seguir-tras-aviso", "--casos", CASOS, "--url", self.url, "--salida", tmp.name])
+        (carpeta,) = Path(tmp.name).iterdir()
+        manifiesto = json.loads((carpeta / "manifiesto.json").read_text(encoding="utf-8"))
+        with (carpeta / "actualizaciones.csv").open(encoding="utf-8-sig", newline="") as f:
+            lector = csv.DictReader(f)
+            filas = list(lector)
+        self.assertEqual(lector.fieldnames, correr.COLUMNAS + correr.COLUMNAS_CORTE)
+        lineas = sum(len(casos.cargar_texto(c)) for c in CASOS.split(","))
+        for prompt in prompts:
+            with self.subTest(prompt):
+                propias = [f for f in filas if f["config"] == f"slm|modelo-falso:1b|{prompt}|rol"]
+                self.assertEqual(len(propias), lineas)
+                self.assertTrue(all(f["valida"] == "true" and f["alerta_escrita"] for f in propias))
+                self.assertEqual([(f["case_id"], f["linea"]) for f in propias if f["ms_etapa2"]],
+                                 [("SC-WA-CODE-01-e01", "4")])
+                datos = manifiesto["prompts"][prompt]
+                self.assertEqual((datos["texto"], datos["esquema"]), (cargar_prompt(CORTE_DE[prompt]), ESQUEMA_SALIDA))
+                self.assertEqual(datos["huella"], huella(cargar_prompt(CORTE_DE[prompt])))
+                self.assertEqual(datos["etapa2"]["texto"], cargar_prompt_motivo(PROMPT_MOTIVO_CORTE))
+        self.assertEqual(manifiesto["parametros_slm"]["json_cortado"]["num_predict"], MAXIMO_TOKENS_CORTE)
+        resumen.armar_resumen(carpeta)
 
 
 if __name__ == "__main__":

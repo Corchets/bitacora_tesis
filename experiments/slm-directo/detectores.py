@@ -64,11 +64,13 @@ PROMPTS = {
     "c-json": ("tarea_c.txt", "salida_json_c.txt"),
     "c-sino": ("tarea_c.txt",),
     "c-digito": ("tarea_c.txt",),
-    # Decisión del equipo (2026-11-07): el JSON de v4 tal cual (mismo prompt, mensaje y esquema), cortado
-    # con num_predict después del valor de `alerta_sugerida`; avisa con «riesgo ≥ 0,4 o alerta» y pide
-    # motivo y evidencia en una segunda consulta, solo en la línea del aviso (DetectorSLMJSONCortado).
-    "v4-corte": ("tarea_v4.txt",),
 }
+# Decisión del equipo (2026-11-07, ADR 0006): un prompt JSON con ESQUEMA_SALIDA tal cual (mismo prompt, mensaje
+# y esquema), cortado con num_predict después del valor de `alerta_sugerida`; avisa con «riesgo ≥ 0,4 o alerta»
+# y pide motivo y evidencia en una segunda consulta, solo en la línea del aviso (DetectorSLMJSONCortado). Mateo
+# lo adoptó para todas las pruebas, así que la etapa 2 de #143 corta también `v4-premisa` y `c-json`.
+CORTE_DE = {"v4-corte": "v4", "v4-premisa-corte": "v4-premisa", "c-json-corte": "c-json"}
+PROMPTS.update({corte: PROMPTS[base] for corte, base in CORTE_DE.items()})
 PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2", "s-sino", "c-sino"})
 # Se leen con DetectorSLMDigito: un número del 0 al 9 en el primer token.
 PROMPTS_DIGITO = frozenset({"s-digito", "v4-digito", "c-digito"})
@@ -76,7 +78,7 @@ PROMPTS_DIGITO = frozenset({"s-digito", "v4-digito", "c-digito"})
 PROMPTS_LECTURA = frozenset({"v4-lectura"})
 PROMPTS_TOKEN = PROMPTS_SINO | PROMPTS_DIGITO | PROMPTS_LECTURA
 # Se leen con DetectorSLMJSONCortado: riesgo y alerta del JSON cortado, sin logprobs.
-PROMPTS_CORTE = frozenset({"v4-corte"})
+PROMPTS_CORTE = frozenset(CORTE_DE)
 # Última oración del mensaje del usuario, después de la transcripción; `{n}` es la última línea.
 # Los prompts de PREGUNTAS_FINALES la reemplazan por su pregunta, para que sea lo último que
 # lee el modelo antes de responder.
@@ -90,8 +92,8 @@ PREGUNTAS_FINALES = {
 }
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
 PROMPT_MOTIVO = "riesgo_motivo.txt"
-# Pedido de motivo y evidencia de v4-corte: el aviso puede salir por la alerta escrita con riesgo < 0,4,
-# así que no dice que el riesgo superó el umbral.
+# Pedido de motivo y evidencia de los prompts cortados (PROMPTS_CORTE): el aviso puede salir por la alerta
+# escrita con riesgo < 0,4, así que no dice que el riesgo superó el umbral. No nombra a v4.
 PROMPT_MOTIVO_CORTE = "motivo_v4_corte.txt"
 HABLANTES = ("ab", "rol", "sin")
 ROLES_HABLANTE = ("PROTEGIDA", "OTRA")
@@ -129,7 +131,7 @@ ESQUEMA_MOTIVO = {
 ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "v4-cita-libre": ESQUEMA_SALIDA, "v5-maniobras": ESQUEMA_SALIDA, "v5-indirectos": ESQUEMA_SALIDA, "v5-sin-excepcion": ESQUEMA_SALIDA, "v5": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO, "s-json": ESQUEMA_SALIDA, "c-json": ESQUEMA_SALIDA, "v4-premisa": ESQUEMA_SALIDA}
 ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO | PROMPTS_DIGITO))  # sin esquema: respuesta libre de un token
 ESQUEMAS["v4-lectura"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después del riesgo
-ESQUEMAS["v4-corte"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después de alerta_sugerida
+ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_DE.items()})  # el mismo JSON, cortado después de alerta_sugerida
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -170,7 +172,8 @@ _RIESGO_ESCRITO = re.compile(r'"riesgo"\s*:\s*([01](?:\.[0-9]+)?)')
 # `{\n  "riesgo": 0.1,` son 12 tokens en T4 (etapa 1) y el JSON entero con motivo y evidencia
 # vacíos, 41; `\n  "alerta_sugerida": false` suma ~11 (`al|erta|_|s|uger|ida` son 6), así que
 # el valor termina en el token ~23. Uno más cubre un riesgo con dos decimales. La humo de
-# colab/probar_json_cortado.py cuenta los tokens reales y frena si no alcanzan.
+# colab/probar_json_cortado.py cuenta los tokens reales y frena si no alcanzan. Los demás prompts
+# de PROMPTS_CORTE usan el mismo esquema, y su humo (etapa 2 de #143) cuenta los suyos.
 MAXIMO_TOKENS_CORTE = 24
 # Regla de aviso del detector (Mateo, 2026-11-07): riesgo escrito ≥ 0,4 o alerta_sugerida escrita.
 UMBRAL_CORTE = 0.4
@@ -238,7 +241,7 @@ class Respuesta:
     # Solo con DetectorSLMLecturaJSON (v4-L): el riesgo esperado según la distribución del entero
     # (0 o 1) y del primer decimal dentro del JSON. `riesgo` guarda el que quedó escrito.
     riesgo_esperado: float | None = None
-    # Solo con DetectorSLMJSONCortado (v4-corte): la `alerta_sugerida` que escribió el modelo.
+    # Solo con DetectorSLMJSONCortado (PROMPTS_CORTE): la `alerta_sugerida` que escribió el modelo.
     # `alerta_sugerida` es la regla del detector (riesgo ≥ UMBRAL_CORTE o alerta escrita).
     alerta_escrita: bool | None = None
 
@@ -796,18 +799,19 @@ class DetectorSLMLecturaJSON(DetectorSLM):
 
 @dataclass
 class DetectorSLMJSONCortado(DetectorSLM):
-    """v4-corte (#143, decisión del 2026-11-07): el JSON de v4 hasta `alerta_sugerida`, y el motivo aparte.
+    """PROMPTS_CORTE (#143, ADR 0006): el JSON hasta `alerta_sugerida`, y el motivo aparte.
 
-    Primera consulta: el mismo pedido que DetectorSLM con v4 (prompt, mensaje y esquema; tampoco
-    se envía `think` ni se piden logprobs), cortado con `num_predict` = MAXIMO_TOKENS_CORTE, justo
-    después del valor de `alerta_sugerida`. Riesgo y alerta se leen del texto cortado
+    Vale para v4 (`v4-corte`) y para los otros prompts JSON con ESQUEMA_SALIDA (`v4-premisa-corte`,
+    `c-json-corte`; ver CORTE_DE). Primera consulta: el mismo pedido que DetectorSLM con el prompt
+    base (prompt, mensaje y esquema; tampoco se envía `think` ni se piden logprobs), cortado con
+    `num_predict` = MAXIMO_TOKENS_CORTE, justo después del valor de `alerta_sugerida`. Riesgo y alerta se leen del texto cortado
     (`leer_json_cortado`). La regla del detector es riesgo ≥ UMBRAL_CORTE o alerta escrita.
 
     Segunda consulta, solo la primera vez que la regla dispara en la llamada (el aviso es único):
     repite los mensajes, agrega como `assistant` lo que escribió el modelo, cerrado como JSON
     (`{… "alerta_sugerida": false\\n}`), y el pedido de `motivo_v4_corte.txt` con ESQUEMA_MOTIVO.
-    No repite el JSON de v4: si avisa por el riesgo con la alerta en false, v4 deja motivo y
-    evidencia vacíos. El comienzo es idéntico a la primera consulta, así que Ollama reutiliza
+    No repite el JSON del prompt: si avisa por el riesgo con la alerta en false, el prompt deja
+    motivo y evidencia vacíos. El comienzo es idéntico a la primera consulta, así que Ollama reutiliza
     la transcripción ya procesada. Si la segunda consulta falla, el aviso se mantiene y el error
     queda en `error` con el prefijo `etapa2_`. `reiniciar()` (lo llama `correr.procesar_caso`
     al empezar cada caso) la vuelve a habilitar.
