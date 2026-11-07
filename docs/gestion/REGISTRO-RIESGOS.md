@@ -4,6 +4,13 @@ Escala: probabilidad e impacto de 1 (bajo) a 5 (crítico). Revisar semanalmente.
 Los IDs se conservan para que las referencias históricas sigan identificando el mismo riesgo;
 los IDs retirados no se reutilizan.
 
+**Actualización del 2026-11-07, #144/#145:** las [anotaciones de Luciano](../corpus/REVISIONES-HUMANAS-LUCIANO.md)
+se exportaron, respaldaron y, por su pedido, se versionan en `laboratorio-main` para compararlas.
+R24: el estado del navegador dejó de ser su única copia. R04/R05: siguen siendo anotaciones
+de un revisor, sin adjudicación; quien las consulte queda expuesto a ese juicio y debe
+registrarlo si participa de una revisión independiente. No se publican diálogos externos,
+datos de reserva ni la clave de las fichas aún no respondidas; sin baja de probabilidad o impacto.
+
 | ID | Riesgo | P | I | Señal temprana | Mitigación | Contingencia | Dueño | Estado |
 |---|---|---:|---:|---|---|---|---|---|
 | R04 | Corpus pequeño o artificial | 4 | 4 | pocas familias/hablantes, diálogos leídos o solo pedidos directos en conversaciones breves | [catálogo](../corpus/CATALOGO-ESCENARIOS.csv), piloto y fichas semi-estructuradas; comprobar diversidad antes de ampliar; revisar pedidos indirectos y contexto prolongado, sin tomar el [ejemplo conceptual de #20](../ingenieria/ARQUITECTURA.md#4-primer-par-escrito-del-escenario-al-aviso) como prueba de cobertura; la [matriz de fuentes externas](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#23-datasets-y-límites-de-reutilización-recuperación-de-43) registra diferencias de dominio y anotación que revisar antes de reutilizar datos | revisar casos y reportar límites del corpus | equipo / #39 | abierto; el audio de humo TTS de #19 no representa voz humana ni ruido de canal; grabación real de #39 sigue sujeta a D06; ampliación escrita del 2026-10-21: 297 casos nuevos de 17–38 líneas; r02 corrige coherencia de saldos, permisos, desenlaces y hablantes, todavía ficticios y sin revisión humana ([revisión corpus v2](../../experiments/slm-directo/casos/REVISION-CORPUS-V2.md)); no valida diversidad de voces ni generalización Plan del 2026-10-27: [#95](https://github.com/Corchets/bitacora_tesis/issues/95) exige evaluación independiente revisada y diagnóstico antes de nuevos ajustes de Tito; la revisión humana sigue pendiente y no se declara mitigación validada. Curación IA exhaustiva del 2026-10-28: [150 conversaciones y 6.000 realizaciones](../../experiments/slm-directo/CURACION-TITO-2026-10-28.md), con 28 conversaciones y 1.189 realizaciones apartadas (incluye 480 previas) por incoherencia o etiqueta no sustentada; temas ajenos al contenido identificados. Selección trazable, no validación humana ni evidencia de generalización; probabilidad sin reducir. |
