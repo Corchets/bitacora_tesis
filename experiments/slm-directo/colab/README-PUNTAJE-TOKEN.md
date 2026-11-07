@@ -186,3 +186,52 @@ la humo.
 2. Ejecutar la única celda y dejar la pestaña abierta, aceptando las descargas múltiples. Si Colab se corta, los
    parciales ya descargados sirven, y si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
 3. Descomprimir los ZIP en `corridas/2026-11-07_json-cortado/` y correr `python -I analizar.py` desde esa carpeta.
+
+## 5. Segunda vuelta, etapa 2 (tag `colab/143-etapa-2`)
+
+> **Estado: propuesta sin discutir.** Elige entre prompts dentro del alcance. El criterio está escrito antes de correr
+> en [`corridas/2026-11-07_alcance-etapa-2/README.md`](../corridas/2026-11-07_alcance-etapa-2/README.md), y el
+> análisis, en [`analizar.py`](../corridas/2026-11-07_alcance-etapa-2/analizar.py).
+
+**Qué pregunta:** ¿el prompt C o `v4-premisa` le ganan a v4 dentro del alcance? La vista son las 46 estafas de
+corpus_v2 y las 94 legítimas entrantes de #155.
+
+**Decisión de Mateo (2026-11-07):**
+- todos los prompts usan el JSON cortado (ADR 0006): `v4-corte` es la referencia, y `c-json-corte` y
+  `v4-premisa-corte` son las candidatas;
+- cada candidata corre dos veces: la primera sobre los 244 y la repetición sobre los 140 dentro del alcance.
+
+Los prompts cortados son su prompt base tal cual (`CORTE_DE` en `detectores.py`), con `num_predict` 24 y la segunda
+consulta de [`motivo_v4_corte.txt`](../prompts/motivo_v4_corte.txt).
+
+[`probar_etapa_2.py`](probar_etapa_2.py) hace todo en una sesión. Usa Ollama 0.40.14, el digest `b37049369adf…`,
+`num_ctx` 4096, seed 42, temperatura 0, `--sin-reglas`, roles y todas las líneas (`--seguir-tras-aviso`):
+
+1. **Humo de formato** de `c-json-corte` y `v4-premisa-corte`, en los 3 casos de las humos anteriores (48 líneas).
+   Criterio fijado antes de correr, para cada uno:
+   - con el JSON completo del prompt base y logprobs, el valor de `alerta_sugerida` termina a más tardar en el token
+     24 en las 48 líneas;
+   - el cortado lee riesgo y alerta en las 48.
+
+   Se informa también, como dato, en cuántas de las 48 el cortado escribe lo mismo que el completo. El prompt que no
+   pasa no corre, y no se ajusta nada en esa sesión.
+2. **Corridas**, en este orden. Cada candidata va entera antes de la siguiente, así un corte de Colab deja una
+   respuesta:
+   1. `v4-corte` sobre los 244;
+   2. `c-json-corte` sobre los 244, y su repetición sobre [`alcance-140`](../casos/listas/alcance-140.txt);
+   3. `v4-premisa-corte` sobre los 244, y su repetición sobre `alcance-140`.
+3. **Controles de ventas y préstamos** con los tres prompts, solo para mirar.
+4. **Al final** baja `resultados-etapa-2.zip` con todo, más `commit.txt`, `script-sha256.txt`, `ollama-version.txt`,
+   `digest.txt`, `pip-freeze.txt` y `gpu.txt`. La humo y cada corrida bajan antes como `parcial-etapa-2-<carpeta>.zip`.
+
+**Duración estimada:** unas 2 horas en T4. Cada corrida sobre los 244 (4.325 líneas) lleva unos 23 minutos, y cada
+repetición sobre los 140 (2.621 líneas), unos 14.
+
+**Pasos:**
+1. Abrir [`COLAB-ETAPA-2.ipynb`](COLAB-ETAPA-2.ipynb) en Colab con **GPU T4**. El notebook no corre hasta tener el hash
+   del commit del tag.
+2. Ejecutar la única celda y dejar la pestaña abierta, aceptando las descargas múltiples.
+   - Si Colab se corta, los parciales ya descargados sirven.
+   - Si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
+3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiarlo a `corridas/2026-11-07_alcance-etapa-2/`.
+   Después, correr `python -I analizar.py` desde esa carpeta.
