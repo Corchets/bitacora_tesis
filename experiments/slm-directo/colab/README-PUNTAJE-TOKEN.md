@@ -133,7 +133,8 @@ sirven, y si se vuelve a ejecutar la celda en la misma sesión, saltea lo termin
 
 > **Estado: propuesta sin discutir.** Mide una decisión ya tomada; no elige nada. El criterio está escrito antes de
 > correr en [`corridas/2026-11-07_json-cortado/README.md`](../corridas/2026-11-07_json-cortado/README.md), y el
-> análisis, en [`analizar.py`](../corridas/2026-11-07_json-cortado/analizar.py).
+> análisis, en [`analizar.py`](../corridas/2026-11-07_json-cortado/analizar.py). Se corrió el 2026-11-07 y pasa: ver
+> [`analisis.md`](../corridas/2026-11-07_json-cortado/analisis.md).
 
 **Decisión de Mateo (2026-11-07),** después de la etapa 1
 ([`analisis.md`](../corridas/2026-11-06_puntaje-token-2/analisis.md)):

@@ -29,8 +29,8 @@ base. La humo de formato pasó en las tres variantes (48/48) y no se ajustó nad
   - Para bajar la latencia, el JSON se corta después de `alerta_sugerida` (unos 20 tokens en vez de 41). El riesgo y la
     alerta salen del mismo cálculo que en el JSON completo, así que la detección no cambia más que por el ruido entre
     corridas. Se estiman 270 a 320 ms por línea, contra 432.
-  - `motivo` y `evidencia` se piden en una segunda consulta, solo al avisar. Falta medir las dos consultas en Colab y
-    después en el teléfono (#141).
+  - `motivo` y `evidencia` se piden en una segunda consulta, solo al avisar. Las dos consultas ya se midieron en Colab
+    (ver «JSON cortado», abajo); falta el teléfono (#141).
   - La lectura del token queda para después de un ajuste fino: en Open-Jev (arXiv 2609.23959), leer el token dio un
     AUROC de 0,69 sin ajustar y ~0,97 con LoRA.
 - **Solo para mirar:**
@@ -39,6 +39,26 @@ base. La humo de formato pasó en las tres variantes (48/48) y no se ajustó nad
   - En los controles, v4 JSON y v4-L también avisan en las 3 legítimas de ventas y préstamos.
 
 Detalle en `experiments/slm-directo/corridas/2026-11-06_puntaje-token-2/analisis.md`.
+
+### JSON cortado (corrido y analizado el 2026-11-07)
+
+El criterio se escribió antes de correr (tag `colab/143-json-cortado`): entre el cortado y el JSON completo en la misma
+sesión, el riesgo escrito igual en al menos el 93 % de las líneas, y como mucho un 1 % de líneas inválidas. La humo
+pasó: con el JSON completo, la alerta termina en el token 23 en las 48 líneas, y el corte es a los 24.
+
+- **Pasa:** el riesgo escrito coincide en el 93,4 % de las 2.773 líneas (95,0 % hasta el aviso), y no hay inválidas.
+  La regla avisa en la misma línea en los 150 casos. En corpus_v2, las dos corridas dan 29/46, 12 antes del pedido y
+  7/51 FA.
+- **Latencia antes del aviso** (T4, p50 / p95): 288 / 362 ms contra 393 / 482 del JSON completo, 105 ms menos por
+  línea.
+- **En la línea del aviso:**
+  - la decisión se conoce a los 269 ms, y motivo y evidencia llegan con la segunda consulta, 661 / 811 ms después;
+  - si la app espera el motivo, el total es de 938 ms, contra 783 del JSON completo en esas mismas líneas;
+  - la segunda consulta da motivo en 74 de los 78 avisos, y el JSON completo en 59, porque no lo escribe cuando avisa
+    solo por el riesgo.
+- **Falta** medir las dos consultas en el teléfono (#141).
+
+Detalle en `experiments/slm-directo/corridas/2026-11-07_json-cortado/analisis.md`.
 
 ### Por qué hay una segunda vuelta
 
