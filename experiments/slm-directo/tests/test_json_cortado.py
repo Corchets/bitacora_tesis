@@ -34,6 +34,7 @@ from detectores import (  # noqa: E402
     DetectorSLMJSONCortado,
     cargar_prompt,
     cargar_prompt_motivo,
+    PROMPT_MOTIVO_CORTE,
     esquema_de,
     leer_json_cortado,
 )
@@ -217,7 +218,7 @@ class TestSegundaConsulta(_ConServidor):
         self.assertEqual(p2["messages"][:2], p1["messages"], "empieza igual que la primera: reutiliza el prefijo")
         self.assertEqual(p2["messages"][2], {"role": "assistant",
                                              "content": '{\n  "riesgo": 0.5,\n  "alerta_sugerida": false\n}'})
-        self.assertEqual(p2["messages"][3], {"role": "user", "content": cargar_prompt_motivo()})
+        self.assertEqual(p2["messages"][3], {"role": "user", "content": cargar_prompt_motivo(PROMPT_MOTIVO_CORTE)})
         self.assertEqual(len(p2["messages"]), 4)
         self.assertEqual(p2["options"]["num_predict"], MAXIMO_TOKENS_RESPUESTA)
         self.assertEqual({k: v for k, v in p2["options"].items() if k != "num_predict"},
@@ -297,7 +298,7 @@ class TestCorrida(_ConServidor):
         self.assertIn("0.4", corte["alerta_sugerida"])
         prompt = manifiesto["prompts"]["v4-corte"]
         self.assertEqual((prompt["texto"], prompt["esquema"]), (cargar_prompt("v4"), ESQUEMA_SALIDA))
-        self.assertEqual((prompt["etapa2"]["texto"], prompt["etapa2"]["esquema"]), (cargar_prompt_motivo(), ESQUEMA_MOTIVO))
+        self.assertEqual((prompt["etapa2"]["texto"], prompt["etapa2"]["esquema"]), (cargar_prompt_motivo(PROMPT_MOTIVO_CORTE), ESQUEMA_MOTIVO))
         resumen.armar_resumen(carpeta)
 
     def test_en_modo_operativo_la_llamada_termina_en_el_aviso(self):

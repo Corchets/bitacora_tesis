@@ -151,8 +151,9 @@ Para bajar la latencia:
 - **Segunda consulta, solo en la línea de aviso,** que es la primera línea de la llamada en que dispara «riesgo ≥ 0,4 o
   alerta»:
   - repite los mensajes y agrega lo que escribió el modelo, cerrado como JSON, como turno `assistant`;
-  - pide evidencia y motivo con [`riesgo_motivo.txt`](../prompts/riesgo_motivo.txt) y `ESQUEMA_MOTIVO`, los del diseño
-    «riesgo primero»;
+  - pide evidencia y motivo con [`motivo_v4_corte.txt`](../prompts/motivo_v4_corte.txt) y `ESQUEMA_MOTIVO`. Es el pedido de
+    `riesgo_motivo.txt` (diseño «riesgo primero») sin «El riesgo superó el umbral», que es falso cuando el aviso sale por
+    la alerta escrita con riesgo < 0,4;
   - no repite el JSON de v4: cuando avisa por el riesgo con la alerta en false, v4 deja motivo y evidencia vacíos;
   - como empieza igual que la primera, Ollama reutiliza la transcripción ya procesada.
 

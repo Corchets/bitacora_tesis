@@ -74,6 +74,8 @@ from detectores import (
     cargar_pregunta,
     cargar_prompt,
     cargar_prompt_motivo,
+    PROMPT_MOTIVO,
+    PROMPT_MOTIVO_CORTE,
     esquema_de,
     huella,
     leer_si_no,
@@ -480,7 +482,7 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
 def _prompt_manifiesto(variante: str) -> dict:
     datos = {"huella": huella(cargar_prompt(variante)), "texto": cargar_prompt(variante), "esquema": esquema_de(variante)}
     if variante == "riesgo" or variante in PROMPTS_CORTE:
-        motivo = cargar_prompt_motivo()
+        motivo = cargar_prompt_motivo(PROMPT_MOTIVO_CORTE if variante in PROMPTS_CORTE else PROMPT_MOTIVO)
         datos["etapa2"] = {"huella": huella(motivo), "texto": motivo, "esquema": ESQUEMA_MOTIVO}
     pregunta = cargar_pregunta(variante)
     if pregunta is not None:  # cierra el mensaje del usuario, después de la transcripción
@@ -753,7 +755,7 @@ def main(argv: list[str] | None = None) -> int:
                 "lectura": "riesgo y alerta_sugerida del texto cortado (detectores.leer_json_cortado)",
                 "alerta_sugerida": f"riesgo >= {UMBRAL_CORTE} o alerta_sugerida escrita (columna alerta_escrita)",
                 "etapa2": ("solo en la primera línea de la llamada en que dispara la regla: mismos mensajes + lo escrito, "
-                           f"cerrado como JSON, como assistant + riesgo_motivo.txt, con ESQUEMA_MOTIVO y num_predict {MAXIMO_TOKENS_RESPUESTA}"),
+                           f"cerrado como JSON, como assistant + motivo_v4_corte.txt, con ESQUEMA_MOTIVO y num_predict {MAXIMO_TOKENS_RESPUESTA}"),
             }} if modelos and PROMPTS_CORTE & set(prompts) else {}),
         },
         "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},

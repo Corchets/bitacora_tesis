@@ -12,7 +12,7 @@ al avisar. Esta corrida no elige nada; mide esa latencia y comprueba que el cort
 
 - **Primera consulta (`v4-corte`):** el pedido de v4 JSON con `num_predict` 24, sin logprobs. Riesgo y alerta salen
   del texto cortado.
-- **Segunda consulta:** solo en la primera línea de la llamada en que dispara la regla. Usa `riesgo_motivo.txt` y
+- **Segunda consulta:** solo en la primera línea de la llamada en que dispara la regla. Usa `motivo_v4_corte.txt` y
   `ESQUEMA_MOTIVO`, después de lo que escribió el modelo.
 - **Comparación:** el JSON completo de v4 en la misma sesión, sobre las mismas 2.773 líneas.
 

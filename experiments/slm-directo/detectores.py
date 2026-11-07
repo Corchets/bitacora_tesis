@@ -90,6 +90,9 @@ PREGUNTAS_FINALES = {
 }
 # Pedido de la segunda etapa de `riesgo`: va como mensaje del usuario, no de sistema.
 PROMPT_MOTIVO = "riesgo_motivo.txt"
+# Pedido de motivo y evidencia de v4-corte: el aviso puede salir por la alerta escrita con riesgo < 0,4,
+# así que no dice que el riesgo superó el umbral.
+PROMPT_MOTIVO_CORTE = "motivo_v4_corte.txt"
 HABLANTES = ("ab", "rol", "sin")
 ROLES_HABLANTE = ("PROTEGIDA", "OTRA")
 
@@ -266,8 +269,8 @@ def esquema_de(variante: str) -> dict:
     return ESQUEMAS[variante]
 
 
-def cargar_prompt_motivo() -> str:
-    return (DIR_PROMPTS / PROMPT_MOTIVO).read_text(encoding="utf-8").strip()
+def cargar_prompt_motivo(nombre: str = PROMPT_MOTIVO) -> str:
+    return (DIR_PROMPTS / nombre).read_text(encoding="utf-8").strip()
 
 
 def huella(texto: str) -> str:
@@ -802,7 +805,7 @@ class DetectorSLMJSONCortado(DetectorSLM):
 
     Segunda consulta, solo la primera vez que la regla dispara en la llamada (el aviso es único):
     repite los mensajes, agrega como `assistant` lo que escribió el modelo, cerrado como JSON
-    (`{… "alerta_sugerida": false\\n}`), y el pedido de `riesgo_motivo.txt` con ESQUEMA_MOTIVO.
+    (`{… "alerta_sugerida": false\\n}`), y el pedido de `motivo_v4_corte.txt` con ESQUEMA_MOTIVO.
     No repite el JSON de v4: si avisa por el riesgo con la alerta en false, v4 deja motivo y
     evidencia vacíos. El comienzo es idéntico a la primera consulta, así que Ollama reutiliza
     la transcripción ya procesada. Si la segunda consulta falla, el aviso se mantiene y el error
@@ -814,7 +817,7 @@ class DetectorSLMJSONCortado(DetectorSLM):
     pedido_motivo: str = ""
 
     def __post_init__(self) -> None:
-        self.pedido_motivo = self.pedido_motivo or cargar_prompt_motivo()
+        self.pedido_motivo = self.pedido_motivo or cargar_prompt_motivo(PROMPT_MOTIVO_CORTE)
         self.reiniciar()
 
     def reiniciar(self) -> None:
