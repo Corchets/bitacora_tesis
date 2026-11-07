@@ -176,8 +176,7 @@ líneas. Si no puede decidir, el caso va a la muestra del equipo.
 **Cómo se registra cada cambio**, como la corrección `r02` de
 [DISENO-CORPUS-V2.md](DISENO-CORPUS-V2.md#semillas-parentesco-y-reserva):
 - Los cambios los aplica un script, nunca el agente.
-- En `MANIFIESTO-CORPUS-V2.json` entra una revisión técnica nueva: `r03`, o el número que siga si antes se integra
-  `reserva-sin-cortes`. Lleva la fecha, la autorización (el visto bueno del equipo en #45), el estado («propuesta sin
+- En `MANIFIESTO-CORPUS-V2.json` entra una revisión técnica nueva, `r03`. Lleva la fecha, la autorización (el visto bueno del equipo en #45), el estado («propuesta sin
   discutir; corrección con agente, no adjudicación humana»), el manifiesto anterior (commit y SHA-256) y, en
   `casos_modificados`, una línea por campo cambiado: valor anterior, valor nuevo, motivo con las líneas y qué pasada lo
   decidió.
@@ -223,10 +222,13 @@ Con el visto bueno del equipo:
 
 ## Pendiente
 
+**Descartado:** `reserva-sin-cortes`, la corrección que completaba las estafas de la reserva cortadas antes del
+pedido. La descartaron Luciano y Mateo el 2026-11-07: esas llamadas se escribieron cortadas a propósito, y completarlas
+ajustaría el test al detector que busca pedidos. Quedan como están y se informan aparte. La rama nunca se subió.
+
 | Qué | Quién | Fecha |
 |---|---|---|
 | Decidir si la reserva se rehace con este plan | equipo, #45 | antes del 2026-11-11 |
-| `reserva-sin-cortes`: integrarla con su `r03` o registrar que no se aplica | Luciano (se lo pide Mateo, 2026-11-07) | antes de congelar |
 | Las 14 `LEG2` de test, y si apartó otras | Evaristo (se lo pide Mateo, 2026-11-07) | antes de congelar |
 | Guía de revisión | #145 | 2026-11-09 |
 | Corrección con el agente y lectura de la muestra | este procedimiento | después de la guía |
