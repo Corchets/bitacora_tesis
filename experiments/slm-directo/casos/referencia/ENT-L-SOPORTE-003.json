@@ -1,0 +1,35 @@
+{
+  "case_id": "ENT-L-SOPORTE-003",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 15,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Pedido de documento, mención del número de orden y un costo extra que hay que autorizar en la llamada.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (soporte_tecnico_solicitado); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: B. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-SOPORTE-003`.",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "El local de reparación avisa que la notebook está lista, confirma el documento de quien la dejó y pide autorización para cambiar un cargador que también falla, con un costo extra."
+}

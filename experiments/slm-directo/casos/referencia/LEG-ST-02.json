@@ -1,0 +1,45 @@
+{
+  "case_id": "LEG-ST-02",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 5,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 6,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 9,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Comparte con vishing: confirma domicilio; dice ser servicio técnico. Señales de legitimidad: responde a una orden de servicio del cliente; el cliente reconoce el problema; visita sin costo por garantía, sin pago adelantado. El detector no debería avisar.",
+  "origen": "Redacción ficticia, archivo llamadas_legitimas.json (id LEG-ST-02, categoría soporte_tecnico_solicitado), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Duración aproximada del original: 85 s (no se usa: las marcas van por línea).",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Service oficial de electrodomésticos coordina visita por un lavarropas en garantía."
+}

@@ -1,0 +1,93 @@
+{
+  "case_id": "ENT-L-SELECCION-003",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA",
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 10,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 15,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 18,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 19,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 20,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 21,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 22,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Alguien que dice ser de una empresa pide por teléfono y con plazo nombre completo, CUIL, fecha de nacimiento y domicilio, como en el robo de identidad, pero son los datos que exige el alta laboral y, ante la duda, la empleada de Recursos Humanos ofrece verificar llamando al conmutador.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; familia selección de personal, agregada al lote de legítimas entrantes por pedido de Mateo Antenucci. La escribió un agente que no leyó prompts, corridas, resultados ni casos existentes; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Selección de personal, la familia que faltaba en el lote de legítimas entrantes del 2026-11-06. Llamada entrante de un número desconocido: el que llama se presenta. Persona protegida: A. Familia `trabajo`, que en `corpus_v2` son llamadas entre compañeros. Partición de desarrollo, pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). El CUIL que se dicta es inventado y su dígito verificador no valida.",
+  "particion": "desarrollo",
+  "familia": "trabajo",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "La responsable de Recursos Humanos de una distribuidora llama a un chofer de reparto recién contratado para avisarle que el preocupacional dio apto y confirmar sus datos para el alta antes de que empiece el lunes 16; él duda al dar el CUIL y ella le ofrece verificar llamando al conmutador de la empresa."
+}

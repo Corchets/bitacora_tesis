@@ -1,0 +1,49 @@
+{
+  "case_id": "ENT-L-VENTAS-010",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 10,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Pedido de DNI y domicilio para un trámite y mención de un código de reserva que la clienta ya tiene.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (vendedor_vehiculo); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: A. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-VENTAS-010`.",
+  "particion": "desarrollo",
+  "familia": "comercial",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una concesionaria de motos avisa que llegó la moto reservada, confirma DNI y domicilio para el patentamiento y le recuerda el código de reserva que ya le mandaron."
+}

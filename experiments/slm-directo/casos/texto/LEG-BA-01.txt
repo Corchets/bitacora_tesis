@@ -1,0 +1,13 @@
+A: Buenas tardes, ¿hablo con Gonzalo Ruiz?
+B: Sí, ¿quién es?
+A: Gonzalo, te llamo del área de prevención de fraudes de Banco Andino, mi nombre es Verónica. Antes que nada te aclaro: en esta llamada no te voy a pedir claves, códigos ni los números de tu tarjeta. ¿Podés hablar un momento?
+B: Eh, sí, ¿pasó algo?
+A: Detectamos un intento de compra con tu tarjeta de crédito terminada en cuatro cuatro uno siete, por ciento ochenta y siete mil quinientos pesos, en un comercio online, hoy a las dos y media de la tarde. ¿La reconocés?
+B: No, no, yo no compré nada hoy.
+A: Bien. Esa operación ya quedó retenida, no se te cobró. Lo que te propongo es bloquear la tarjeta ahora y te enviamos una nueva a tu domicilio en siete a diez días hábiles. ¿Estás de acuerdo?
+B: Sí, sí, bloqueala. ¿Tengo que hacer algo yo?
+A: No tenés que transferir ni mover nada. Lo único que te recomiendo es que, vos solo, desde la app, cambies la clave de home banking y revises los últimos movimientos. Si ves algo más raro, llamá al número que está atrás de la tarjeta.
+B: Uh, bueno. ¿Y la compra esa se me va a cobrar igual?
+A: No, queda desconocida. Te dejo el número de gestión por si querés consultar: cincuenta y ocho, veintidós diez. Ya está bloqueada la tarjeta, te debería llegar una notificación en la app.
+B: Sí, ahí me llegó. Bueno, muchas gracias.
+A: A vos, Gonzalo. Que tengas buena tarde.

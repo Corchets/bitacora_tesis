@@ -1,0 +1,22 @@
+A: Buen día, le hablo de prevención de fraudes del banco.
+B: Sí, ¿qué pasó?
+A: ¿Me confirma su documento para validar?
+B: Treinta y tres millones novecientos ochenta mil setecientos dos.
+A: Gracias. Su tarjeta de débito se usó ayer a las once de la noche en un cajero de Córdoba. ¿Usted estuvo allá?
+B: No, estoy en Tucumán. Y la tarjeta la tengo acá.
+A: Entonces probablemente la clonaron en algún cajero o en algún posnet.
+B: ¿Cuánto sacaron?
+A: Dos extracciones, de cuarenta mil y de veinte mil.
+B: Sesenta mil pesos. ¿Y eso lo pierdo?
+A: No. Se inicia el desconocimiento y, si se confirma que no fue usted, se le reintegra.
+B: ¿Cuánto tarda?
+A: Normalmente entre diez y quince días hábiles.
+B: Uf. Bueno. ¿Qué tengo que hacer?
+A: Ahora la tarjeta ya quedó bloqueada. Le mandamos una nueva. ¿Se la mandamos a avenida Sarmiento ochocientos veinte?
+B: Sí, ahí vivo.
+A: ¿Algún piso o departamento?
+B: No, es casa.
+A: Bien. También le recomiendo cambiar el PIN cuando le llegue la nueva, en el cajero. Ese PIN no se lo diga a nadie.
+B: Sí, sí.
+A: El número de reclamo le llega por mail. Si no le llega, vaya a cualquier sucursal con el documento.
+B: Está bien. Gracias por avisar.

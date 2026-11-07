@@ -1,0 +1,26 @@
+A: hola buen día te habla leonel de soporte técnico de fibrasur te llamo por el reclamo 3349 de falta de serbicio
+B: sí sigo sin internet desde ayer a la noche
+A: para validar que hablo con la titular me confirmás tu dni
+B: 37 801 240
+A: gracias estás cerca del módem
+B: sí lo tengo acá
+A: qué luces tiene prendidas
+B: la de power en verde la de wifi en verde y una roja que dice los
+A: esa luz roja indica que no llega la señal de la fibra probaste apagarlo y prenderlo
+B: sí tres veces
+A: el cablecito fino que entra al al módem el verde está vien enchufado no lo saques solo fijate
+B: parece que sí no está doblado
+A: bien entonces es algo afuera no es tu equipo te tengo que agendar un técnico
+B: hoy no puede ser trabajo desde casa
+A: hoy la agenda está completa lo mas rápido que tengo es mañana entre las nueve y las trece
+B: bueno no queda otra
+A: la direccion es córdoba 2380 departamento 4
+B: sí es un pasillo el departamento del fondo
+A: lo anoto en las observaciones el código de la visita es 4471 el técnico te lo tiene que decir él a vos cuando llegue así sabés que es de la empresa
+B: ah mirá no sabía que hacían eso
+A: sí desde hace unos meses no le abras a nadie que no te diga ese código
+B: me cobran algo
+A: no es una falla de red los dias sin servicio se te descuentan solos en la próxima factura
+B: bueno por lo menos menos
+A: si se arregla solo antes avisame por whatsapp al número del reclamo y cancelo la visita
+B: ok

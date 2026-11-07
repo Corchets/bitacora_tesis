@@ -1,0 +1,10 @@
+A: ¿Hola?
+B: Hola, buen día. Te hablo del Centro de Emisión de Licencias de la municipalidad, mi nombre es Javier. ¿Hablo con Florencia Ríos?
+A: Sí, soy yo.
+B: Florencia, sacaste un turno para la renovación de la licencia. ¿Me confirmás tu DNI y tu fecha de nacimiento?
+A: Cuarenta y dos, cero once, ochocientos treinta. Nací el dos de agosto del dos mil.
+B: Perfecto. Tu turno es el martes a las ocho. Traé el DNI, la licencia vencida y el certificado del curso.
+A: ¿Y el pago?
+B: Lo hacés ahí, en la caja del centro, antes del examen.
+A: Listo, gracias.
+B: A vos, Florencia. Buen día.

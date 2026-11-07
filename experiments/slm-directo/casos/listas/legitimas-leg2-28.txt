@@ -1,0 +1,30 @@
+# Lote LEG2 de legitimas_cotidianas (tanda 2, split dev, 2026-11-06): 28 llamadas entrantes.
+# Uso: python correr.py --lista legitimas-leg2-28 ...
+LEG2-BA-01
+LEG2-BA-02
+LEG2-BA-03
+LEG2-BA-05
+LEG2-CC-01
+LEG2-CC-04
+LEG2-CC-05
+LEG2-CC-06
+LEG2-CO-01
+LEG2-CO-02
+LEG2-CO-03
+LEG2-CO-06
+LEG2-EN-01
+LEG2-EN-03
+LEG2-EN-04
+LEG2-EN-05
+LEG2-ST-02
+LEG2-ST-03
+LEG2-ST-04
+LEG2-ST-05
+LEG2-TU-01
+LEG2-TU-02
+LEG2-TU-05
+LEG2-TU-06
+LEG2-VE-01
+LEG2-VE-04
+LEG2-VE-05
+LEG2-VE-06

@@ -1,0 +1,26 @@
+A: ¿Hola?
+B: Hola, buen día, te habla Lautaro, de MotoNorte. ¿Florencia Ríos?
+A: Sí, soy yo.
+B: Florencia, te llamo por la moto que reservaste el martes. Ya llegó de fábrica.
+A: ¡Ah, qué bueno! No pensé que iba a llegar tan rápido.
+B: Sí, entró en el primer camión. Para hacer el patentamiento necesito confirmar unos datos.
+A: Decime.
+B: ¿Me confirmás tu DNI?
+A: 42.011.830.
+B: ¿Y el domicilio para el título sigue siendo Junín 600?
+A: Junín 612. El 600 es la esquina.
+B: Uy, menos mal que pregunté. Lo corrijo, porque si sale mal el título hay que rehacerlo.
+A: ¿Eso cuánto tarda?
+B: El patentamiento tarda entre cinco y siete días hábiles.
+A: ¿Y cuándo la puedo retirar?
+B: Cuando tenga la patente. Te aviso por acá.
+A: ¿Y el saldo?
+B: El saldo lo pagás el día que la retirás, en caja. Te acepto transferencia ahí mismo o tarjeta.
+A: Bueno.
+B: El código de tu reserva es R2290. Lo tenés en el mail que te mandé el martes. Con eso y el DNI la retirás.
+A: Sí, lo tengo guardado.
+B: ¿Querés que te la entreguemos con el casco que preguntaste?
+A: Sí, el negro. ¿Eso lo pago aparte?
+B: Sí, sale ciento veinte mil. También en caja.
+A: Bueno, ahí veo.
+B: Te aviso cuando esté la patente.

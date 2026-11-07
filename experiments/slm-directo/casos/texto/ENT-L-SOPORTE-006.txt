@@ -1,0 +1,22 @@
+A: Sí, hola.
+B: Hola, buen día. Te habla Nicolás, de soporte de la compañía de celular, por el reclamo que hiciste porque el chip no te da señal.
+A: Sí. Desde el domingo no tengo señal, solo con wifi.
+B: Revisamos la línea y el problema es el chip, está dañado. Hay que cambiarlo.
+A: ¿No se puede arreglar sin cambiarlo?
+B: No, cuando el chip se daña hay que reemplazarlo. Tenés dos opciones: pasar por un local o que te lo mandemos.
+A: Mandámelo, no tengo tiempo de ir.
+B: Para el envío, ¿me confirmás tu número de documento?
+A: treinta y seis millones cuatrocientos cuarenta mil diecinueve.
+B: ¿Te lo mandamos a Lavalle mil doscientos?
+A: Sí, ahí. Departamento tres.
+B: Lo agrego. Te llega en dos días hábiles. Lo recibe cualquier mayor de edad con documento.
+A: ¿Y pierdo el número?
+B: No, el número es el mismo. Los contactos también, si los tenés guardados en la cuenta del teléfono.
+A: Sí, están en la cuenta.
+B: El chip viene en una tarjeta con un PUK impreso. Guardalo vos, no se lo des a nadie.
+A: ¿Y para qué sirve?
+B: Si un día ponés mal el PIN tres veces, el PUK te desbloquea el chip.
+A: Ah, ok.
+B: ¿Te ayudo con algo más?
+A: ¿Me van a cobrar el chip?
+B: No, por falla no se cobra.

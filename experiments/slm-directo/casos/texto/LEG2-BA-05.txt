@@ -1,0 +1,12 @@
+A: ¿Hola?
+B: Buen día, te habla Silvina, de Banco Andino, de prevención de fraudes. ¿Me comunico con Diego Herrera?
+A: Sí, él habla.
+B: Diego, ¿me confirmás tu DNI para validar?
+A: Treinta y tres, novecientos ochenta, setecientos dos.
+B: Gracias. Tu tarjeta de débito se usó ayer a la noche en un cajero de Córdoba. ¿Estuviste allá?
+A: No, estoy en Tucumán. Y la tarjeta la tengo acá.
+B: Entonces probablemente la clonaron. Ya la bloqueamos y te enviamos una nueva. ¿La mandamos a Avenida Sarmiento ochocientos veinte?
+A: Sí, ahí está bien.
+B: Perfecto. Los movimientos de ayer quedan desconocidos y se te reintegran. Revisá vos la app por si ves algo más.
+A: Uf, bueno. Gracias.
+B: Tu número de reclamo te llega por mail. Gracias, Diego.
