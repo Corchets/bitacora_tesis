@@ -470,3 +470,35 @@ la composición y custodia del set, su separación respecto de toda exploración
 humana y el congelado previo a cualquier detector. La corrida final sigue dependiendo de
 [#143](https://github.com/Corchets/bitacora_tesis/issues/143) y
 [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
+
+### 7.4. Revisión de las 20 llamadas de inglés (YouTube) y armado del set local (2026-11-07)
+
+> **Estado: propuesta sin discutir.** Luciano decidió destinar al test externo las llamadas revisadas con ficha humana (revirtiendo la exclusión de §7.3 para lo revisado con ficha) y mantener separada la entrada para el detector de la referencia con sus fichas para comparar luego sin filtrarla al detector (§5.4). La referencia cuenta por ahora con un solo revisor (Luciano Grosso); sigue pendiente el segundo revisor en casos dudosos previsto en #144 y revisar con el equipo si las cuatro filas donde su juicio difiere de la etiqueta de la fuente se conservan con su etiqueta o se reevalúan.
+
+Luciano completó las fichas de las 20 filas de [BothBosu/youtube-scam-conversations](https://huggingface.co/datasets/BothBosu/youtube-scam-conversations) (revisión `d0b94f1e2a9522af4703154c805d02d5c596110d`): las filas 3 y 4 sobre la primera tanda (`ISSUE-144-INGLES-2026-11-06.md`, traducida con Gemini 3.8 Flash High) y las 18 restantes sobre la segunda tanda (`ISSUE-144-INGLES-18-2026-11-07.md`, traducida por Claude sin argentinizar y conservando marcas de turnos pegados o rótulos invertidos en la fuente).
+
+De las 20 filas se conservaron **16** y se descartaron **4**:
+
+| Fila CSV | Lectura | Canal y tipo (`call`) | Motivo de descarte en la ficha |
+|---|---|---|---|
+| 7 | `EN-06` | Trilogy Media · `support` (`outgoing`) | Parte 2 de la misma serie que la fila 6 (`EN-05`); descartada por ser casi igual a la anterior. |
+| 12 | `EN-11` | Scammer Payback · `support` (`outgoing`) | Descartada por calidad/recorte. |
+| 15 | `EN-14` | Scammer Payback · `refund` (`outgoing`) | Descartada; repite el mismo personaje de quien atiende que la fila 13 (`EN-12`). |
+| 19 | `EN-18` | Trilogy Media · `prize` (`outgoing`) | Descartada porque ya hay una llamada igual en la fila 8 (`EN-07`, mismo alias «Peter Anderson» de PCH). |
+
+A pedido de Luciano se revisaron también en las 20 filas el perfil de edad de quien atiende (en casi todas un *scambaiter* que actúa, muchas veces haciendo de adulto mayor o jubilado) y las repeticiones de personajes o alias entre videos:
+
+| Cruce / serie | Filas involucradas | Observación |
+|---|---|---|
+| Serie en partes (*PART 1* / *PART 2*) | Filas 6 (`EN-05`, conservada) y 7 (`EN-06`, descartada) | Continuación del mismo caso; se conserva solo la fila 6 (`EXT-154`). |
+| Serie en partes (*PART 4*) | Fila 10 (`EN-09`, conservada como `EXT-320`) | La estafa ya venía de partes anteriores del video. |
+| Mismo alias de estafador («Peter Anderson», PCH) | Filas 8 (`EN-07`, conservada como `EXT-750`) y 19 (`EN-18`, descartada) | El apellido Anderson también aparece en las filas 9 (`EN-08`, `EXT-623`) y 16 (`EN-15`, `EXT-074`). |
+| Mismo nombre de quien atiende | Filas 9 (`EN-08`, `EXT-623`, camionero) y 16 (`EN-15`, `EXT-074`, jubilado viudo) | Nombre común en la fuente; los perfiles son distintos. |
+| Mismo personaje de quien atiende («Grandma» / «Granny») | Filas 13 (`EN-12`, conservada como `EXT-223`) y 15 (`EN-14`, descartada) | Mismo nombre y apellido en ambos videos. |
+
+Por §5.3 (derechos de YouTube) y §5.4 (custodia de la referencia del test), ni los textos ni las fichas con referencia se suben a Git. Quedaron armados localmente en `laboratorio-luciano/data/private/issue-144/set-ingles/` (ignorado por Git) en dos partes separadas:
+
+1. **Entrada para el detector (sin las fichas de Luciano):** `texto/EXT-NNN.txt` (16 archivos con IDs sorteados con `Random(20261107)` entre `001` y `999`: `EXT-036`, `EXT-074`, `EXT-154`, `EXT-223`, `EXT-250`, `EXT-319`, `EXT-320`, `EXT-390`, `EXT-453`, `EXT-571`, `EXT-579`, `EXT-623`, `EXT-677`, `EXT-705`, `EXT-750` y `EXT-828`) y `roles-protegida.json` (SHA-256 `390a92f136c2fd8a452fcafe970dbb8094d6d7946e95d92f20aefd252e80c705`). En cada archivo quien abre la llamada es `A:` y quien responde es `B:`; los turnos pegados en la fuente se separaron por hablante, se quitaron las notas entre corchetes y los marcadores de anonimización se reemplazaron por datos ficticios consistentes por caso. Los hashes de los 16 `.txt` están en `MANIFIESTO-TEXTO.json` (SHA-256 `117e34185262db29b545ae9f6b62af0f57dfc876596b033a24b774989b8417d3`).
+2. **Referencia y fichas de Luciano (para comparar después contra la salida del detector):** `FICHAS-LUCIANO-INGLES.md` (SHA-256 `0ce3610e78ad656d9ea43f485d7a18f6be6967d3c684b7b55d4914173ea111d6`, con las 20 fichas tal cual las completó más las columnas de perfil y repeticiones), `referencia/EXT-NNN.json` (16 archivos con `clase`, `t_r_linea`, `t_c_linea`, `sospecha_linea` y `ficha_original`) y `correspondencia.json` (SHA-256 `280a53425ebdf55eb7522a635882715c169455b0d3b119d89aa6b85ff75a1f5d`, mapa entre fila del CSV, código `EN-NN`, `EXT-NNN` y número de turno a línea de `texto/`).
+
+Las lecturas de portugués (`ISSUE-144-PORTUGUES-10-2026-11-07.md`), ES-Port (`ISSUE-144-ESPORT-10-2026-11-07.md`) y coreano (`ISSUE-144-COREANO-TRADUCCION-2026-11-07.md`), junto con las dos primeras de portugués y ES-Port ya completadas en la tanda del 2026-11-06, quedan en `data/private/issue-144/` para continuar su revisión en otro momento.
