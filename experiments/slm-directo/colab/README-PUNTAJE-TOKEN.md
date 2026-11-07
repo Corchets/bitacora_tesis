@@ -128,3 +128,59 @@ controles.
 **Pasos:** abrir [`COLAB-PUNTAJE-TOKEN-2.ipynb`](COLAB-PUNTAJE-TOKEN-2.ipynb) en Colab con **GPU T4**, ejecutar la única
 celda y dejar la pestaña abierta, aceptando las descargas múltiples. Si Colab se corta, los parciales ya descargados
 sirven, y si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
+
+## 4. JSON de v4 cortado después de la alerta (tag `colab/143-json-cortado`)
+
+> **Estado: propuesta sin discutir.** Mide una decisión ya tomada; no elige nada. El criterio está escrito antes de
+> correr en [`corridas/2026-11-07_json-cortado/README.md`](../corridas/2026-11-07_json-cortado/README.md), y el
+> análisis, en [`analizar.py`](../corridas/2026-11-07_json-cortado/analizar.py).
+
+**Decisión de Mateo (2026-11-07),** después de la etapa 1
+([`analisis.md`](../corridas/2026-11-06_puntaje-token-2/analisis.md)):
+- el detector sigue con el JSON de v4 y «riesgo ≥ 0,4 o alerta» (29/46 estafas de corpus_v2, 11 antes del pedido,
+  7/51 FA);
+- la lectura del token (v4-L) queda para después de un ajuste fino.
+
+Para bajar la latencia:
+
+- **Primera consulta (`v4-corte`):**
+  - el mismo prompt (`tarea_v4.txt`), el mismo mensaje y el mismo esquema que v4 JSON, sin logprobs;
+  - solo cambia `num_predict`: 24 tokens (`MAXIMO_TOKENS_CORTE`) en vez de los 41 del JSON entero, que cortan el JSON
+    justo después del valor de `alerta_sugerida`;
+  - el riesgo y la alerta se leen del texto cortado, también `"riesgo": 0`, sin decimal.
+- **Segunda consulta, solo en la línea de aviso,** que es la primera línea de la llamada en que dispara «riesgo ≥ 0,4 o
+  alerta»:
+  - repite los mensajes y agrega lo que escribió el modelo, cerrado como JSON, como turno `assistant`;
+  - pide evidencia y motivo con [`riesgo_motivo.txt`](../prompts/riesgo_motivo.txt) y `ESQUEMA_MOTIVO`, los del diseño
+    «riesgo primero»;
+  - no repite el JSON de v4: cuando avisa por el riesgo con la alerta en false, v4 deja motivo y evidencia vacíos;
+  - como empieza igual que la primera, Ollama reutiliza la transcripción ya procesada.
+
+[`probar_json_cortado.py`](probar_json_cortado.py) hace todo en una sesión. Usa Ollama 0.40.14, el digest
+`b37049369adf…`, `num_ctx` 4096, seed 42, temperatura 0, `--sin-reglas` y roles:
+
+1. **Humo de formato** en los 3 casos de las humos anteriores (48 líneas). Criterio fijado antes de correr:
+   - con el JSON completo de v4 y logprobs, el valor de `alerta_sugerida` termina a más tardar en el token 24 en las
+     48 líneas (`humo/tokens-hasta-alerta.json`);
+   - `v4-corte` lee riesgo y alerta en las 48 líneas.
+
+   Si no pasa, el script se detiene antes de los 150. Se corrige `MAXIMO_TOKENS_CORTE` en `detectores.py` según los
+   tokens medidos, con un tag nuevo, y se repite.
+2. **`v4-corte` sobre los 150** en todas las líneas (`--seguir-tras-aviso`), con la segunda consulta en la línea de
+   aviso de cada llamada. Registra `ms_etapa1`, `ms_etapa2`, los tokens de cada consulta y `alerta_escrita`.
+3. **El JSON completo de v4** sobre los 150 en las mismas condiciones, para comparar línea a línea riesgo, alerta y
+   ms. Va en la misma sesión porque dos corridas iguales coinciden ~96 % en el riesgo escrito si son de la misma
+   sesión, y ~91 % si no.
+4. Al final baja `resultados-json-cortado.zip` con todo, más `commit.txt`, `script-sha256.txt`, `ollama-version.txt`,
+   `digest.txt`, `pip-freeze.txt` y `gpu.txt`. La humo y cada corrida bajan antes como
+   `parcial-json-cortado-<carpeta>.zip`.
+
+Se calcula alrededor de 45 minutos en T4: unos 15 minutos para `v4-corte` y unos 20 para v4 JSON, más la instalación y
+la humo.
+
+**Pasos:**
+1. Abrir [`COLAB-JSON-CORTADO.ipynb`](COLAB-JSON-CORTADO.ipynb) en Colab con **GPU T4**. El notebook no corre hasta
+   tener el hash del commit del tag.
+2. Ejecutar la única celda y dejar la pestaña abierta, aceptando las descargas múltiples. Si Colab se corta, los
+   parciales ya descargados sirven, y si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
+3. Descomprimir los ZIP en `corridas/2026-11-07_json-cortado/` y correr `python -I analizar.py` desde esa carpeta.
