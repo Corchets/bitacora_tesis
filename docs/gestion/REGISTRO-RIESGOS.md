@@ -177,3 +177,19 @@ R25 **se materializó en desarrollo** ([H08](../hallazgos/H08-tito-evita-falsas-
   - Si Tito queda como ablación en la reserva, no contar como acierto una falsa alarma que desaparece sin esa cobertura.
 - **Contingencia.** Corre la que ya estaba escrita: no adoptar el filtro por un beneficio que oculta pérdidas. Lo decide [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
 - **Pendiente.** Probabilidad, impacto y el paso al seguimiento quedan para su dueño (Ignacio / #51), como pide la regla de riesgos materializados.
+
+## Actualización técnica — 2026-11-07
+
+R04/R05: las [lecturas externas de #144](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#7-continuación-lecturas-exploratorias-2026-11-06-a-2026-11-07)
+sirven para revisar calidad y traducción, no para estimar generalización. Se conserva el
+antecedente de Evaristo y se registra la exclusión del futuro test de los casos leídos y de
+las variantes PIX que comparten conversación. La lectura previa del comienzo de todas las
+filas de YouTube impide presentar sus otras filas como reserva ciega nueva. Tampoco se
+certifica la ceguera de datos no incluidos en la lista ni se designa una custodia.
+
+La disponibilidad pública no resuelve los derechos subyacentes: la entrega coreana quedó
+sin traducciones hasta verificar condiciones aplicables con el FSS. ES-Port aporta soporte
+real, pero las dos llamadas leídas son salientes, fuera del alcance aprobado en #151; pedir
+una clave en soporte no adjudica por sí solo fraude ni conducta segura. La revisión humana,
+los derechos de uso, la composición del set y su congelado siguen pendientes. No se corrió
+ningún detector ni se reducen probabilidad o impacto de R04/R05.

@@ -26,6 +26,11 @@ externas sirven para probar si el sistema generaliza fuera de nuestro generador.
 
 ## 2. Qué se miró y cómo
 
+> **Actualización del 2026-11-07:** ES-Port ya se pudo descargar y se prepararon lecturas
+> locales en tres idiomas. La situación «pendiente, sin muestra» de §1 y §4 describe el
+> relevamiento inicial. La continuación, sus límites y el bloqueo de la entrega coreana
+> quedan en [§7](#7-continuación-lecturas-exploratorias-2026-11-06-a-2026-11-07).
+
 Para cada fuente se leyó la ficha y se registraron idioma, tamaño, origen real o sintético,
 licencia, presencia de legítimas y tipos de estafa. Después se leyó una muestra de unos 10
 diálogos con cuatro preguntas del issue:
@@ -385,6 +390,7 @@ adapta, marca, prueba la fuga, congela y corre.
 | YouTube scam conversations | `d0b94f1e2a9522af4703154c805d02d5c596110d` | `youtube_scam_conversations.csv` |
 | Multi-agent scam conversation | `709db2b6c37f424c3070f29138abb33971e21ab9` | `agent_conversation_all.csv` |
 | PIX Scam Challenge BR | `acdc964b67fea50300fa82033af2ca9db86fbe4d` | API de filas de Hugging Face (`datasets-server`), splits `development` y `test` |
+| ES-Port | README `b575ec6d7925ea4f83ef00a302682a6f58ad788d`; ZIP SHA-256 `0017a2d6bbbf57d2971872c7a8eb7c1bf266c76dfb8ba2736c17086a948f1f2c` | [ZIP del proveedor](https://datasets.vicomtech.org/di01-esport-corpus/esport-corpus.zip); extracción de los JSON fuera de Git |
 
 Grupos de PIX leídos, uno por familia: `b87dcd6c3c30c83372dd7a21`, `e24a2dc7241413744ff93451`,
 `0308cae0b082b846d4a240ad`, `451ea20c17d71a1eed595778`, `64240fb870a4bc4eebee0f05`,
@@ -393,3 +399,74 @@ Grupos de PIX leídos, uno por familia: `b87dcd6c3c30c83372dd7a21`, `e24a2dc7241
 
 Los conteos por palabra clave (tipos de KorCCVi, atajos léxicos de BothBosu) son una búsqueda
 de cadenas sobre el texto, no una anotación; sirven para describir la fuente, no como referencia.
+
+## 7. Continuación: lecturas exploratorias (2026-11-06 a 2026-11-07)
+
+### 7.1. Antecedente aprovechado y entrega solicitada
+
+Se revisaron el issue [#144](https://github.com/Corchets/bitacora_tesis/issues/144), sus
+comentarios y las ramas remotas antes de preparar nuevos archivos. El cuerpo actualizado del
+issue atribuye a Evaristo el trabajo de `corpus/144-corpus-externo`, hasta
+`80fbc909088446deb8cd28c4ba379e29c540692b`. Ese relevamiento y sus correcciones del filtro ya
+estaban integrados en `laboratorio-luciano` (`e467c7c`); se reutilizaron. Las traducciones
+registradas en §5.2 no se localizaron en las rutas locales revisadas y el issue no indica una
+ruta de custodia. No se afirma que se hayan perdido ni que se hayan leído sus archivos.
+
+Luciano pidió primero leer dos casos de modalidades distintas por fuente. Para esta lectura
+se conserva el contenido de origen, sin adaptar instituciones, montos ni procedimientos al
+contexto argentino. Inglés presenta el texto fuente y después el español, con turnos
+alineados; portugués se entrega solo en español; ES-Port conserva el español de España.
+Las observaciones son de IA y los campos para conservar, descartar o revisar quedan vacíos.
+No hay anotación humana nueva ni ejecución de detectores.
+
+Se coordinó un worker por idioma: GPT-6.1 Terra High para coreano y Gemini 3.8 Flash High
+para los otros tres. Las entregas locales editables usan el nombre
+`ISSUE-144-{INGLES,PORTUGUES,ESPORT,COREANO}-2026-11-06.md`, con un archivo
+`-PROCEDENCIA.json` por idioma, en `~/Downloads/`, fuera del worktree. Esos JSON registran
+fuente fijada, IDs, hashes de entrada, instrucciones, modelo, sustituciones y comprobaciones.
+Los nombres conservan la fecha de inicio de esta preparación.
+
+| Lectura | Identificadores de origen | Límite que debe verse al leerla |
+|---|---|---|
+| Inglés / YouTube | Filas 3 y 4, índice desde cero del CSV fijado en §6 | Soporte y reintegro; ambas llamadas son salientes según `call`. El texto completo de una fila no demuestra que contenga la llamada audiovisual completa. En la fila 4 no se observa entrega de credenciales, toma de control ni transferencia. |
+| Portugués / PIX | Grupos `b87dcd6c3c30c83372dd7a21` y `e24a2dc7241413744ff93451`, con todas sus variantes | Son sintéticos. Se comprobó la igualdad del diálogo entre las variantes de cada grupo; las evidencias externas se muestran separadas. La recomendación de §3.3 sigue siendo propuesta, no una decisión nueva. |
+| Español / ES-Port | `esport/esport_dialogue.119349.json` y `esport/esport_dialogue.120967.json` | Soporte real según la fuente. Son llamadas iniciadas por el cliente; hay habla simultánea y, en el primer caso, dictado de claves que se sustituye por marcadores. Procedencia de soporte no equivale a conducta segura ni adjudica por sí sola la alerta. |
+| Coreano / KorCCVi | `vishing_540` y `vishing_281` | Entrega incompleta: solo procedencia y ficha vacía, sin conversación traducida. Se detuvo la reproducción por las restricciones de §5.3 hasta verificar con el FSS condiciones aplicables. No se obtuvo permiso ni se contactó al proveedor. |
+
+### 7.2. ES-Port accesible y alcance vigente
+
+La descarga de ES-Port que estaba bloqueada en §4 se obtuvo fuera de Git. El
+[README fijado](https://github.com/Vicomtech/esport-corpus/blob/b575ec6d7925ea4f83ef00a302682a6f58ad788d/README.md)
+declara llamadas reales transcritas y anonimizadas, licencia CC BY-SA 3.0 ES y atribución a
+García-Sardiña, Serras y del Pozo (2018). Los JSON conservan intervenciones por hablante en
+`speakers`; `filtered-text` puede mezclarlas dentro de un solapamiento. Agruparlas para leer
+no permite inventar la cronología interna del habla simultánea. Las claves se sustituyen
+también cuando el otro hablante repite sus caracteres.
+
+El equipo ya decidió el alcance de llamadas entrantes de números no agendados, según
+[#151](https://github.com/Corchets/bitacora_tesis/issues/151); ese issue registra su
+documentación pendiente. Las lecturas salientes se conservan como contraste y se informan
+aparte: no se transforman en entrantes para hacerlas encajar. El trato familiar tampoco
+demuestra por sí solo que el número esté agendado. No se modifica aquí D03 ni se resuelven
+D07 o D08.
+
+### 7.3. Exclusión de exploración y trabajo que sigue pendiente
+
+Por el acuerdo de esta preparación, las conversaciones leídas o discutidas quedan fuera
+del futuro test final. Se excluyen también las variantes que comparten conversación con
+los grupos PIX leídos; no basta con excluir una fila de cada grupo. Las lecturas previas
+de §3 y §5.2 siguen contando: en particular, §3.2 ya registra la lectura del comienzo de
+las veinte filas de YouTube, por lo que no se presentan las filas restantes como reserva
+ciega nueva.
+
+En ES-Port, la exploración previa a esta entrega también leyó los casos `120770`, `119116`,
+`120798`, `119321`, `119715`, `120561`, `119349`, `120620`, `120967` y `119941` (selección
+con `Random(144).sample(sorted(nombres_del_zip), 10)`). Quedan fuera del futuro test.
+Esta lista no certifica la ceguera de otros datos ni designa quién custodia la evaluación.
+
+El issue #144 sigue abierto: estas lecturas no constituyen el set congelado, no tienen
+referencia humana adjudicada ni resultados. Siguen pendientes los derechos de uso coreanos,
+la composición y custodia del set, su separación respecto de toda exploración, la revisión
+humana y el congelado previo a cualquier detector. La corrida final sigue dependiendo de
+[#143](https://github.com/Corchets/bitacora_tesis/issues/143) y
+[#51](https://github.com/Corchets/bitacora_tesis/issues/51).
