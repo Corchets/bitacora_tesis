@@ -1,58 +1,47 @@
-# ADR 0001 — Usamos Parakeet con filtro Silero y Gemma 4 E2B con Tito viejo
+# ADR 0001 — Usamos Parakeet con filtro Silero como ASR
 
 - **Fecha:** 2026-11-03
 - **Estado:** Aceptada
-- **Participantes de la discusión:** equipo; la registra Luciano Grosso. El tutor dejó la arquitectura en manos del equipo ([minuta del 2026-10-28](../../gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)).
+- **Participantes de la discusión:** equipo; la registra Luciano Grosso. El tutor dejó la arquitectura en manos del
+  equipo ([minuta del 2026-10-28](../../gestion/seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)).
 - **Ámbito:** arquitectura
 
-> **Nota del 2026-11-05:** a pedido de Luciano, la demo con ASR arranca con el prompt `v4`, roles y Tito sin indicio ([resultados](../../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md#próximo-paso)). La [última prueba](../../../experiments/slm-directo/corridas/2026-11-05_tito-2-v4/analisis.md) deja como candidata `v4` con roles, Tito viejo sin indicio y primer aviso (55/75 estafas y 13/75 falsas alarmas); Tito viejo 2.0 da lo mismo. Este ADR todavía no se reabrió: sigue registrando `tarea` con indicio.
-
-> **Nota del 2026-11-06:** en la matriz #101, la falsa alarma que E2B daba solo y no con Tito (`CV2-D-L-BANCO-001`) no la filtró Tito: activó en la línea 1, y el SLM leyó la llamada entera en las dos condiciones. La ventaja de Tito sobre E2B directo es el ahorro de consultas, no las falsas alarmas ([H08](../../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)). El ADR 0002 de [#51](https://github.com/Corchets/bitacora_tesis/issues/51) lo tiene que tener en cuenta.
+> **Nota del 2026-11-07:** este ADR también fijaba el detector, con Tito viejo como compuerta de Gemma 4 E2B
+> ([versión anterior](https://github.com/Corchets/bitacora_tesis/blob/624e71d/docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)).
+> Ahora fija solo el ASR. Tito se está descartando
+> ([H08](../../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y el detector lo fija el ADR 0002
+> ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)).
 
 ## Contexto
 
-[D09](../../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) pedía elegir ASR y detector por calidad, falsas alarmas, tiempos y memoria. El cierre del tutor es el 2026-11-30, y la meta que fijó es avisar en 80–85 % de las estafas con 10–15 % de falsas alarmas, sin saltar por frases sueltas como «decime la contraseña». El hardware de referencia es la gama más alta de teléfonos disponible.
-
-La inferencia tiene que ser local: el tutor descartó por completo un modelo por API. Zipformer Kroko, el ASR inicial, transcribía mal la voz real, y ninguna política sobre los Qwen llegó a la meta sin ajustarse sobre los datos de informe.
+[D09](../../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) pedía elegir el ASR. Tiene que correr en el
+dispositivo, porque el tutor descartó usar un modelo por API, y tiene que ir escribiendo mientras se habla. Zipformer
+Kroko, el ASR inicial, transcribía mal la voz real.
 
 ## Decisión
 
-Usamos como **ASR** Parakeet TDT 0.6B v3 int8 por `sherpa-onnx`, con corte RMS 0,008 tras 0,8 s de silencio y Silero 0,5 solo como filtro de voz (`parakeet-filtro`, opción B).
-
-Usamos como **detector** Tito viejo (RoBERTuito congelado con regresión logística, frase aislada, umbral 0,5) como compuerta de `gemma4:e2b-it-q4_K_M`, con el prompt `tarea`, `num_ctx` 4096, seed 42 y aviso único. Tito no avisa: activa al modelo, y el modelo decide.
-
-Esta es la configuración que entra a la evaluación final. No se ajusta mirando el test reservado.
+Usamos Parakeet TDT 0.6B v3 int8 por `sherpa-onnx`, con corte RMS 0,008 tras 0,8 s de silencio y Silero 0,5 solo como
+filtro de voz (`parakeet-filtro`, opción B).
 
 ## Alternativas consideradas
 
 | Alternativa | A favor | En contra | Por qué se descartó |
 |---|---|---|---|
-| Tito viejo → Gemma 4 E4B | 10/10 estafas en #101 | 1/10 falsas alarmas; en la M1 de 8 GB entra en swap y avisó a +49 s | Misma detección, más costo y sin evidencia en vivo. Salió del panel el 2026-11-03; queda solo como antecedente de la matriz |
-| Gemma 4 E2B directo | 10/10 estafas; no depende de Tito | 1/10 falsas alarmas y consulta en todas las líneas | Tito evita consultas sin perder estafas en estos 20 casos |
-| Tito nuevo → E2B | 0/10 falsas alarmas | 2/10 estafas | Pierde casi todas las estafas |
-| Qwen3.5 9B con prompt `v2` | 10/10 · 1/10 en GPU | 6,6 GB, no entra en el teléfono | Se conserva como techo, no como candidato |
-| Riesgo primero con `gemma3n:e2b` | 1,9 s por línea | 10/10 con 3–6/10 falsas alarmas, o 2/10 con 0/10 | [No cumple la meta sin contaminar la selección](../../../experiments/slm-directo/analisis/2026-10-30-reranker-zero-shot/README.md) |
-| Cross-encoder o NLI (bge, mDeBERTa, Qwen3-Reranker) | Sin generación de texto | Miden tema y no intención; bge tarda 4,6 s por línea en CPU | [Descartados con evidencia en #123](https://github.com/Corchets/bitacora_tesis/issues/123) |
-| Reglas | Instantáneas y explicables | 58,3 % de falsas alarmas en negativos difíciles | Quedan como línea base y respaldo sin modelo |
-| Parakeet con Silero solo (opción A) | La frase final sale 0,75 s antes; más términos críticos (76,4 % contra 70,9 %) | Parte las frases (205 segmentos contra 127) y mete inglés o portugués en 25 de 129 frases, contra 4 | Empata en etiquetas y empeora el texto (WER 32,8 % contra 25,6 %) |
-| Zipformer Kroko | Streaming real, parciales rápidos | Errores con voz real | Retirado el 2026-10-29; queda como antecedente |
-| Whisper base | Conocido y fácil de correr | No es streaming; solo transcribe al cerrar la frase | La demo necesita ir escribiendo mientras se habla |
+| Parakeet con Silero solo (opción A) | La frase final sale 0,75 s antes y conserva más términos críticos (76,4 % contra 70,9 %) | Parte las frases (205 segmentos contra 127) y mete inglés o portugués en 25 de 129 frases, contra 4 | Empata en etiquetas y empeora el texto (WER 32,8 % contra 25,6 %) |
+| Zipformer Kroko | Streaming real, con parciales rápidos | Errores con voz real | Se retiró el 2026-10-29 |
+| Whisper base | Conocido y fácil de correr | No es streaming: transcribe recién al cerrar la frase | La demo necesita ir escribiendo mientras se habla |
 
 ## Consecuencias
 
-- La documentación, el panel y las herramientas de medición arrancan con esta configuración.
-- Sigue abierta [D08](../../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental): política de alerta y protocolo se congelan aparte, y la configuración se mide recién en el test reservado.
-- **E2B no cumple el criterio de 2 s de #84** en la M1 de 8 GB: mediana de 3,74 s por consulta, aunque el aviso llegó entre −0,45 y +0,40 s del fin del pedido.
-- **Sin medición en teléfono.** No se midió latencia, memoria, batería ni temperatura en Android. El archivo de E2B pesa 4,59 GB, Tito ocupa unos 0,48 GB y el ASR llega a 1 GB, muy por encima del techo de 512 MB de la prefactibilidad.
-- **La evidencia que respalda la elección es de desarrollo:** 20 conversaciones sintéticas sin revisión humana, de las que salió la elección entre 10 modelos, y 9 llamadas guionadas con 4 guiones y 2 voces. Esos números son optimistas y no estiman el rendimiento final.
-- **La reserva es pública desde el 2026-10-23.** Gemma 4 E2B se publicó antes: el 2026-03-31 según el [registro de versiones de Google](https://ai.google.dev/gemma/docs/releases?hl=en), así que no pudo entrenarse con ella (R05).
-- El ASR sigue confundiendo «token» y «CVV» con ambas opciones, y Parakeet no permite fijar el idioma.
+- El ASR sigue confundiendo «token» y «CVV», y Parakeet no permite fijar el idioma.
+- La elección sale de 9 llamadas guionadas, con 4 guiones y 2 voces. No estima el rendimiento general.
+- No se midió en teléfono. El ASR solo ya llega a 1 GB, por encima del techo de 512 MB de la prefactibilidad.
 
-**Para reconsiderarla:** que el test reservado quede lejos de la meta del tutor, que E2B no pueda correr en el teléfono de referencia, o que los términos críticos perdidos cambien avisos en voz real.
+**Para reconsiderarla:** que los términos críticos perdidos cambien avisos en voz real, o que el ASR no entre en el
+teléfono de referencia.
 
 ## Referencias
 
-- [Matriz #101](../../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md): 10 modelos, 3 condiciones y 20 conversaciones.
-- [Corrida con voz real por Meet](../../../experiments/voip/corridas/2026-11-02-voz-real-meet.md), con la demora de E2B.
-- [Medición de A contra B](../../../experiments/asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md) y [criterio de §12.9](../../../experiments/asr-local/PLAN-VOZ-REAL.md#129-dos-candidatos-para-comparar-en-diálogos-reales-2026-10-30).
-- [Tito viejo y Gemma 4 en el panel](../../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md) y [diagnóstico de Tito](../../../experiments/slm-directo/DIAGNOSTICO-TITO-2026-10-29.md).
+- [Medición de A contra B](../../../experiments/asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md)
+  y [criterio de §12.9](../../../experiments/asr-local/PLAN-VOZ-REAL.md#129-dos-candidatos-para-comparar-en-diálogos-reales-2026-10-30).
+- [Corrida con voz real por Meet](../../../experiments/voip/corridas/2026-11-02-voz-real-meet.md).

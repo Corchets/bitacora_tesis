@@ -110,12 +110,9 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   historial, memoria entre sesiones, reputación y dirección entrante/saliente quedan
   fuera de sus entradas. La ventana y la política de alerta siguen abiertas en D08.
 - **Alcance del detector (2026-11-06, decisión del equipo; [ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md),
-  pendiente de aceptar, y [#151](https://github.com/Corchets/bitacora_tesis/issues/151)):** el detector corre solo en
-  llamadas entrantes de números no agendados, como Scam Detection de Google y el detector de Samsung. La app decide si
-  lo activa según la dirección de la llamada y la agenda; el modelo sigue recibiendo solo la transcripción, y el prompt
-  dice el alcance como un dato fijo. El historial, la memoria entre llamadas y la reputación del número siguen afuera.
-  Agujeros declarados: la devolución de llamada, el contacto robado y el número del banco falsificado. Al tutor se le
-  explica el porqué el 2026-11-11.
+  pendiente de aceptar):** el detector corre solo en llamadas entrantes de números no agendados. La app decide si lo
+  activa, y el modelo sigue recibiendo solo la transcripción. El historial, la memoria entre llamadas y la reputación
+  del número siguen afuera.
 - **Público (2026-10-04, confirmado por Mateo; antecedente superado por la
   consolidación del PR #58):** se registró «sin foco etario específico» y se
   retiró D12 como decisión pendiente. La participación de personas adultas en el
@@ -258,6 +255,8 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   el piloto revisado que pedía la versión anterior de esta ficha; el rendimiento se mide en el test
   reservado, con [D07](#d07--aprobar-taxonomía-y-evento-crítico) y
   [D08](#d08--congelar-protocolo-experimental) todavía abiertas.
+- **Nota del 2026-11-07:** el ADR 0001 ahora fija solo el ASR. Tito se está descartando, y el detector lo fija el
+  ADR 0002 ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)).
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base:** reglas solas, también como respaldo sin modelo de la demo.
