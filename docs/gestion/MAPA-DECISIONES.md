@@ -207,11 +207,14 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   es el antecedente; el [recuento corregido](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md)
   incluye `TR-12`.
 
-  Antecedente superado por la meta del tutor que sigue.
+  Antecedente reemplazado por la meta de referencia que sigue.
 
-- **Meta fijada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+- **Meta de referencia (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
   avisar en el **80–85 %** de las estafas con **10–15 %** de falsas alarmas en legítimas.
-  Condición aparte: el aviso no puede salir solo porque aparezca «código», «transferime plata»,
+  La propuso Luciano y al tutor le pareció bien. No es un criterio de aprobación: se busca el
+  mayor porcentaje posible sin ajustar el sistema solo para llegar a ese número (aclaración de
+  Mateo, 2026-11-07).
+  Pedido del tutor: el aviso no puede salir solo porque aparezca «código», «transferime plata»,
   «pasame el código» o «decime la contraseña» en una conversación que no es estafa. Ignacio y
   Evaristo trabajan en esas falsas alarmas. **Denominador: todas las estafas**, incluidas las que
   no tienen pedido de referencia (11 de las 75 de desarrollo, contando `TR-12`; recuento corregido el 2026-11-04).
