@@ -122,6 +122,11 @@ anotado a ciegas en [`casos/alcance-desarrollo.json`](../casos/alcance-desarroll
   - **Etapa 1 (ya):** v4-L contra v4 sobre los 150. Es la prueba de la forma de leer: el mismo prompt y los mismos casos.
   - **Etapa 2 (con las legítimas nuevas):** el prompt C y `v4-premisa` ([`tarea_v4_premisa.txt`](tarea_v4_premisa.txt):
     v4 con la oración del alcance), que dicen el alcance como un dato fijo. Se deciden dentro del alcance.
+- **Cambio en C el 2026-11-07, antes de correrlo sobre las legítimas nuevas:** la lista de pedidos termina en «…, o
+  cortar y llamar enseguida a otro número que le dictan». Es la opción 1 del estafador que te hace llamar a vos
+  ([ideas pendientes, §0 bis](../corridas/2026-11-06_puntaje-token-2/IDEAS-PENDIENTES.md#0-bis-el-estafador-que-te-hace-llamar-a-vos)).
+  No sale del corpus. El tag `colab/143-ronda-2` tiene la versión anterior, y la etapa 1 solo la usó para la humo de
+  formato. La etapa 2 la repite.
 
 | Variante | Mensaje de sistema | Pregunta final (mensaje del usuario) | Se lee con | Compara con |
 |---|---|---|---|---|

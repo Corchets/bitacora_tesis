@@ -50,11 +50,14 @@ mismo agujero que el soporte falso que aparece en un buscador.
 
 **Decisión: pendiente.** Mateo, el 2026-11-06: las tres quedan anotadas para decidir más adelante cuál se implementa.
 Por ahora:
-- **(1) sí, en el prompt.** Hoy C la cubre solo de costado, con «seguir pasos en el celular». Falta decidir si se nombra.
-  - **Texto propuesto,** al final de la lista de pedidos de C: «…, o cortar y llamar enseguida a otro número que le
-    dictan».
-  - **Cuándo:** antes de mirar las legítimas nuevas y de armar la etapa 2.
-  - **Si C cambia,** la etapa 2 repite la humo de formato de `c-sino` y `c-digito`.
+- **(1) sí, en el prompt.** Agregada a C el 2026-11-07, con el OK de Mateo y antes de correr C sobre las legítimas
+  nuevas. La lista de pedidos de C ahora termina en «…, o cortar y llamar enseguida a otro número que le dictan».
+  - **El «enseguida»** apunta a la urgencia: un banco o el correo de verdad pueden dar un 0800 para consultas, pero no
+    piden cortar y llamar ya.
+  - **De dónde sale:** del caso que planteó Mateo y de los consejos de los bancos (llamar al número oficial, el de la
+    tarjeta), no del corpus.
+  - **Consecuencia:** C cambió después del tag `colab/143-ronda-2`, así que la etapa 2 repite la humo de formato de
+    `c-sino` y `c-digito`.
 - **(2) como diseño propuesto,** sin implementar.
 - **(3) no, por ahora.** En el corpus no hay estafas salientes para medirla.
 
