@@ -183,3 +183,19 @@ R28: Mateo Antenucci cambió el 2026-11-06 el plan para corregir la reserva, que
 
 - **Mitigación.** Las personas no revisan la reserva entera. La corrige un agente distinto del detector, con la guía de [#145](https://github.com/Corchets/bitacora_tesis/issues/145), que absorbe #32: clase, `T_R` y `T_C` de cada caso. El equipo lee una muestra para ver que no haya nada raro. Después se actualizan el manifiesto y las huellas SHA-256, con fecha.
 - **Lo que queda.** El test sigue sin referencia humana completa: lo corrige un agente y las personas leen solo una muestra. Se declara como límite en el informe. La probabilidad y el impacto no cambian.
+
+## Actualización técnica — 2026-11-07
+
+R04/R05: las [lecturas externas de #144](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#7-continuación-lecturas-exploratorias-2026-11-06-a-2026-11-07)
+sirven para revisar calidad y traducción, no para estimar generalización. Se conserva el
+antecedente de Evaristo y se registra la exclusión del futuro test de los casos leídos y de
+las variantes PIX que comparten conversación. La lectura previa del comienzo de todas las
+filas de YouTube impide presentar sus otras filas como reserva ciega nueva. Tampoco se
+certifica la ceguera de datos no incluidos en la lista ni se designa una custodia.
+
+La disponibilidad pública no resuelve los derechos subyacentes: la entrega coreana quedó
+sin traducciones hasta verificar condiciones aplicables con el FSS. ES-Port aporta soporte
+real, pero las dos llamadas leídas son salientes, fuera del alcance aprobado en #151; pedir
+una clave en soporte no adjudica por sí solo fraude ni conducta segura. La revisión humana,
+los derechos de uso, la composición del set y su congelado siguen pendientes. No se corrió
+ningún detector ni se reducen probabilidad o impacto de R04/R05.
