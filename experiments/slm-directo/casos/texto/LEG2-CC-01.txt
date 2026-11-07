@@ -1,0 +1,14 @@
+A: ¿Hola?
+B: Hola, buenas tardes, ¿hablo con Lucía Fernández?
+A: Sí, ¿quién habla?
+B: Lucía, te habla Daiana, de Nubo Telecom, del área de clientes. Te aviso que la llamada queda grabada por calidad. ¿Tenés un minuto?
+A: Eh, sí, decime.
+B: Te llamo porque tenés el plan de cinco gigas y este mes, por ser clienta, te podemos pasar a quince gigas por la misma cuota durante seis meses. Después queda al precio de lista, unos tres mil pesos más, y lo podés bajar cuando quieras.
+A: Ah, mirá. ¿Y qué tengo que hacer?
+B: Si te interesa lo dejamos cargado ahora. Para validar que hablo con la titular, ¿me confirmás tu número de DNI?
+A: Treinta y ocho, cuatrocientos doce, novecientos cinco.
+B: Perfecto, coincide. ¿Y el mail para mandarte las condiciones sigue siendo el que termina en arroba gmail?
+A: Sí, ese.
+B: Listo. Te va a llegar un SMS con un código para aceptar el cambio. Ese código lo cargás vos en la app, en la sección de mi plan. A mí no me lo tenés que decir.
+A: Dale, perfecto.
+B: Bárbaro, Lucía. Cuando lo aceptes se activa en el día. Gracias por atender, buena tarde.

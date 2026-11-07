@@ -1,0 +1,5 @@
+A: Hola, buen día, te llamo de una consultora de investigación de mercado, estamos haciendo una encuesta sobre hábitos de consumo en supermercados. ¿Tenés unos minutos?
+B: No, la verdad que ahora no puedo, estoy manejando.
+A: Ah, no hay problema, perdón. ¿Preferís que te llamemos otro día o que no te llamemos?
+B: Mejor no, gracias.
+A: Perfecto, no te contactamos más. Manejá con cuidado, chau.

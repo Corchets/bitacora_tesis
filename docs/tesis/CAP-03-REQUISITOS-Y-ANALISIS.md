@@ -41,6 +41,8 @@ Los umbrales de latencia y memoria son criterios internos del proyecto ([prefact
 | RNF-05 | Reproducibilidad: cada corrida registra datos, configuración, seed, código, hardware y salidas. | Cumple con manifiestos. Excepción declarada: #101 corrió con cambios sin commit en la carpeta. |
 | RNF-06 | Calidad objetivo: 80–85 % de estafas avisadas con 10–15 % de falsas alarmas, sobre todas las estafas. | Meta del tutor. Se mide en el test reservado. |
 
+> **Corregir (#51):** RNF-02 y RNF-03 cuentan a Tito: 0,48 GB y unos 30 ms por frase. Si el ADR 0002 deja el SLM solo, Tito sale de esas cuentas. Ver [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
+
 ## 3.4. Restricciones de plataforma, privacidad y ética
 
 **Android.** Una app ordinaria no puede acceder a los flujos `VOICE_UPLINK` y `VOICE_DOWNLINK` de una llamada convencional; ese permiso está reservado a apps del sistema. Por eso la captura universal PSTN queda fuera del alcance ([D05](../gestion/MAPA-DECISIONES.md#d05--elegir-la-fuente-de-audio-demostrable)).

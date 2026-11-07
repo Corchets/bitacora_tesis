@@ -50,6 +50,8 @@ Las [particiones de Tito](../../experiments/slm-directo/PARTICIONES-TITO-2026-10
 
 La línea base son las **reglas léxicas**. La configuración evaluada es la de [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md), congelada antes del test. Como comparadores se proponen Gemma 4 E2B directo y las reglas.
 
+> **Corregir (#51):** la configuración evaluada va a ser la del ADR 0002. Si Tito se informa, como configuración o como ablación, el protocolo tiene que decir cómo se lee: una falsa alarma que desaparece cuenta solo si el SLM estaba despierto en la primera línea sensible ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)).
+
 > **Estado: propuesta sin discutir.** El [protocolo](../evaluacion/PROTOCOLO-EXPERIMENTAL.md#5-política-de-alerta-a-congelar-opciones-y-evidencia-observada) propone como política de referencia el aviso único en el primer `true` válido, que es la que usó #101. Se congela en D08.
 
 ## 4.6. Métricas y análisis estadístico

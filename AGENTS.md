@@ -44,18 +44,20 @@ Todo trabajo parte de un issue en GitHub Issues y se ejecuta en tres momentos:
 Al completar el objetivo, sincronizar el repositorio en este orden antes de cerrar:
 
 1. **Fuente de verdad:** verificar cambios, pruebas y enlaces relativos.
-2. **Bitácora semanal (`docs/gestion/bitacora/AAAA-MM-semana-NN.md`):** registrar la fila en la tabla semanal con estado (`☑`) y agregar viñeta en _"Qué existe hoy que no existía la semana pasada"_ con el artefacto real generado.
-3. **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** actualizar estado si se resolvió una decisión abierta. Si congeló una decisión arquitectónica duradera, crear el ADR correspondiente en `docs/ingenieria/adr/`.
-4. **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** registrar mitigaciones o nuevos riesgos descubiertos.
-5. **Comentario para GitHub:** entregar el bloque Markdown listo para copiar y cerrar el issue (`Closes #N`, resumen, evidencia observable, decisiones y próxima acción).
+2. **Hallazgos (`docs/hallazgos/`):** si el trabajo dejó un aprendizaje que cambia una decisión, el diseño o la tesis, registrarlo con la [plantilla](docs/hallazgos/PLANTILLA-HALLAZGO.md), sumar su fila al índice y marcar en la tesis lo que contradice.
+3. **Bitácora semanal (`docs/gestion/bitacora/AAAA-MM-semana-NN.md`):** registrar la fila en la tabla semanal con estado (`☑`) y agregar viñeta en _"Qué existe hoy que no existía la semana pasada"_ con el artefacto real generado.
+4. **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** actualizar estado si se resolvió una decisión abierta. Si congeló una decisión arquitectónica duradera, crear el ADR correspondiente en `docs/ingenieria/adr/`.
+5. **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** registrar mitigaciones o nuevos riesgos descubiertos.
+6. **Comentario para GitHub:** entregar el bloque Markdown listo para copiar y cerrar el issue (`Closes #N`, resumen, evidencia observable, decisiones y próxima acción).
 
 ### Reglas de higiene
 
-- Actualizá la fuente de verdad afectada; nunca mantengas copias paralelas.
+- Cada dato vive en un solo lugar. Los números quedan en la corrida o el análisis que los produjo; lo que significan, en un hallazgo que los enlaza. Actualizá ese lugar en vez de copiarlo.
+- Una conclusión superada se conserva tal como estaba: se le agrega una nota con fecha que enlaza el hallazgo nuevo.
 
 ## Invariantes
 
-- GitHub Issues es el único backlog activo; el roadmap contiene hitos, no tareas.
+- GitHub Issues es el único backlog activo; el roadmap contiene hitos, no tareas. Las ideas para después de la entrega van como issues con el label `trabajo-futuro`, sin milestone, y la tesis las resume en el capítulo 11.
 - Cada afirmación externa material tiene fuente verificable.
 - Cada experimento registra dataset/split, configuración, seed, versión de código, métricas y salida.
 - Audio, consentimientos firmados, datos identificables y secretos permanecen fuera de Git.
@@ -85,7 +87,11 @@ Cada información tiene **una sola fuente de verdad**. Usar esta tabla para sabe
 | **Investigación y papers leídos**                | [`docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md`](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md)                                                      | **Actualiza:** al analizar una fuente primaria siguiendo el [protocolo](docs/investigacion/PROTOCOLO-REVISION.md).                                                                     |
 | **Ventana de contexto y lógica de alerta (D08)** | [`docs/investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md`](docs/investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)                                              | **Lee:** ventana con decaimiento, registro de eventos, margen de falsas alarmas y disparo de la alerta.<br/>**No cierra D08.** Sus números salen de llamadas sintéticas.               |
 | **Recorte de modelos on-device (D09)**           | [`docs/investigacion/PRIMERA-INVESTIGACION-MODELOS.md`](docs/investigacion/PRIMERA-INVESTIGACION-MODELOS.md)                                            | **Lee:** contrato de laboratorio, gamas y catálogo Hugging Face.<br/>**No cierra D09.**                                                                                                |
-| **Texto final del informe de tesis**             | `docs/tesis/`                                                                                                                                           | **Actualiza:** redactando sobre capítulos reales según el [esqueleto](docs/tesis/ESQUELETO-INFORME.md). No crear capítulos vacíos.                                                     |
+| **Texto final del informe de tesis**             | `docs/tesis/`                                                                                                                                           | **Actualiza:** redactando sobre capítulos reales según el [esqueleto](docs/tesis/ESQUELETO-INFORME.md), con cada resultado citando su hallazgo o su corrida. No crear capítulos vacíos. |
+| **Hallazgos, causas y cambios de enfoque**       | [`docs/hallazgos/`](docs/hallazgos/README.md)                                                                                                            | **Lee:** antes de escribir resultados, discusión o conclusiones, o de proponer una configuración.<br/>**Crea:** cuando un análisis deja un aprendizaje que cambia una decisión, el diseño o la tesis. |
+| **Corrección pendiente en la tesis**             | Marca `> **Corregir (#N):**` en el capítulo                                                                                                              | **Crea:** cuando un hallazgo contradice el texto y corregirlo depende de un issue abierto.<br/>**Resuelve:** al cerrar ese issue, reescribiendo el texto y borrando la marca. |
+| **Trabajo futuro**                               | GitHub Issues con label `trabajo-futuro`                                                                                                                 | **Crea:** cuando aparece una mejora que no se va a hacer antes de la entrega.                                                                                                           |
+| **Handoff para mandar al equipo**                | `HANDOFF-*.md` en la raíz, fuera de Git                                                                                                                  | **Crea:** solo como resumen para compartir; lo que dice ya está en hallazgos o issues.                                                                                                  |
 | **Término con significado preciso**              | [`docs/GLOSARIO.md`](docs/GLOSARIO.md)                                                                                                                  | **Actualiza:** cuando surge un término técnico nuevo o ambiguo.                                                                                                                        |
 
 **No crear carpetas nuevas sin que el usuario lo pida.** Si algo no encaja en ninguna, consultá. El [README.md](README.md) mantiene el mapa de la estructura global.

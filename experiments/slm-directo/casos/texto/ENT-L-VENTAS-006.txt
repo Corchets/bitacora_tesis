@@ -1,0 +1,24 @@
+A: Hola, buenas.
+B: Hola, ¿qué tal? Te hablo de VisiónNorte, de atención a clientes. Me llamo Rodrigo.
+A: Sí, decime.
+B: Carolina, te llamo para ofrecerte el pack de deportes con cuarenta por ciento de descuento por tres meses. Entra todo el fútbol.
+A: No miro mucho fútbol, la verdad.
+B: Entra también el tenis y el básquet. Y la promo es hasta el viernes nomás, después vuelve al precio normal.
+A: ¿Y cuánto sería?
+B: Ocho mil quinientos por mes los tres primeros meses.
+A: ¿Y después?
+B: Catorce mil. Lo podés dar de baja cuando quieras.
+A: No sé. Te soy sincera, ¿cómo sé que sos de la empresa? Me llaman de todos lados.
+B: Está perfecto que preguntes. Te paso un número de referencia, PR 4471.
+A: ¿Y eso qué es?
+B: Llamá al 0800 que está en tu factura, decí ese número y te activan la promo ellos. Yo no te pido nada por acá.
+A: ¿Pero vos no ganás comisión si lo hago por el 0800?
+B: Sí, la referencia es para eso. Igual no te preocupes por mí.
+A: Jaja. Bueno. ¿Hay que cambiar el decodificador?
+B: Sí, el tuyo es viejo. Va un técnico. ¿Sigue siendo en Las Piedras 2100?
+A: Sí, ahí.
+B: El técnico va con credencial y no cobra nada.
+A: ¿Y si no llamo antes del viernes?
+B: Se pierde el descuento. Pero no te voy a apurar.
+A: Lo pienso y si me convence llamo.
+B: Bueno. Si tenés dudas, el 0800 atiende hasta las diez.

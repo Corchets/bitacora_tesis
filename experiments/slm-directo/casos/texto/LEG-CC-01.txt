@@ -1,0 +1,12 @@
+A: Hola, buenas tardes, ¿hablo con Lucía Fernández?
+B: Sí, ¿quién habla?
+A: Hola Lucía, mi nombre es Daiana, te llamo de Nubo Telecom, del área comercial. ¿Tenés un minutito?
+B: Eh... sí, decime, pero rápido que estoy en el laburo.
+A: Sí, sí, re rápido. Vemos que tenés la línea con el plan de cinco gigas, y este mes hay una promo para clientes: pasás a quince gigas por la misma cuota durante seis meses.
+B: ¿Y después de los seis meses qué onda?
+A: Después vuelve al precio de lista del plan, que hoy está unos tres mil pesos más. Pero lo podés bajar cuando quieras, sin penalidad.
+B: Mmm, no sé. ¿Me lo podés mandar por escrito?
+A: Sí, obvio. Te mando un mail al correo que tenés registrado con todas las condiciones, y si te interesa lo activás desde la app o respondiendo ese mail. No hace falta que me confirmes nada ahora.
+B: Dale, mandámelo y lo veo a la noche.
+A: Perfecto, Lucía. Te llega en el día. Gracias por tu tiempo, que tengas buena tarde.
+B: Igualmente, chau.

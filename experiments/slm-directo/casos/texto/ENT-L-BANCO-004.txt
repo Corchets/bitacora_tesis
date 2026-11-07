@@ -1,0 +1,35 @@
+A: hola
+B: hola buenas tardes le hablo del banco del área de control de operaciones
+A: sí decime
+B: valeria valeria para validar su identidad me dice su dni
+A: treinta y cinco millones seiscientos veinte mil cuarenta y cuatro pasó algo con la transferencia porque no me llegó la confirmación
+B: justamente por eso la llamo inició una una transferencia de un millón doscientos mil pesos a un cbu que no tenía agendado
+A: sí es la seña un departamento departamento la tengo que mandar hoy sí o sí
+B: entiendo como es un monto alto a un destino nuevo nuevo queda en revisión hasta que titular la confirme
+A: y cuánto tarda eso porque dueño me dijo que si no le llega hoy se lo ofrece a otro
+B: si me confirma unos unos datos la libero ahora mismo a nomvre de quién está cuenta destino
+A: de ricardo molina
+B: coincide y el motivo
+A: seña de alquiler por qué me preguntan todo esto es mi plata
+B: es un control que hacemos en operaciones grandes a a cuentas nuevas muchas estafas son justamente transferencias apuradas a desconosidos
+A: ya sé pero esto lo hice yo fui a ver el departamento ayer
+B: bien usted vio el contrato o algún documento del dueño
+A: sí me mostró la escritura y vamos a firmar el lunes en la inmobiliaria
+B: bien le aclaro una cosa nosotros nunca le vamos a pedir el token ni ningún código para liberar una operación si alguien se lo pide no es el banco
+A: ok entonces ya se manda
+B: ya la liberé en unos minutos se acredita y le llega el comprobante
+A: ahí me me llegó la notificación
+B: entonces quedó hecha necesita algo más
+A: no eso nomás me asusté porque pense que había perdido la plata
+B: no estaba retenida nada más
+A: y la próxima vez que transfiera a esa cuenta me van a volver a frenar
+B: no ahora que la confirmó queda como destino conocido si quiere agéndela
+A: y si tengo que mandar el resto el lunes cuando firme
+B: de cuánto sería
+A: otro millón y medio más o menos
+B: ese monto supera su límite diario lo puede ampliar desde app en límites o pagarlo pagarlo en inmobiliaria de otra forma
+A: ampliar el límite no es peligroso
+B: lo puede ampliar solo por un día se lo recomiendo así y que lo haga usted desde su celular
+A: bueno el lunes lo hago
+B: y antes de mandar el resto pida que la la inmobiliaria le confirme el cbu por escrito no por whatsapp
+A: ok eso no lo havía pensado

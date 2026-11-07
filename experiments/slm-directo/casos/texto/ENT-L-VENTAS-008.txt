@@ -1,0 +1,20 @@
+A: Sí, hola.
+B: Buenas tardes. Le habla Natalia, asesora de planes de ahorro de la concesionaria. ¿Con quién tengo el gusto?
+A: Con Milagros.
+B: Milagros, ¿está pensando en comprarse un cero kilómetro?
+A: No, por ahora no.
+B: Le cuento igual. Este mes hay cupos en el plan setenta treinta con la primera cuota bonificada.
+A: Ya sé cómo es. Mi papá tuvo uno y tardó un montón en adjudicar.
+B: Eso pasa si uno espera el sorteo. Con la licitación se puede adjudicar antes.
+A: Pero hay que tener plata para licitar.
+B: Sí, es opcional. Mire, los cupos de este mes son pocos. Si quiere le dejo uno reservado sin compromiso.
+A: ¿Y qué hay que hacer para reservarlo?
+B: Nada más su nombre completo y el DNI.
+A: No, prefiero no dar el DNI por teléfono.
+B: No hay problema. ¿Le puedo preguntar qué auto tiene ahora?
+A: Uno viejo, pero anda.
+B: Entiendo. La suscripción igual se hace siempre en la oficina, con el contrato en mano. No se paga nada por teléfono.
+A: Bueno, si algún día me interesa voy.
+B: Estamos en la avenida Roca mil doscientos. ¿Le dejo mi WhatsApp?
+A: Bueno, mandalo, pero no me escribas todos los días.
+B: No, se lo mando una sola vez.
