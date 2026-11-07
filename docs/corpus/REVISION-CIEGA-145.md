@@ -1,7 +1,8 @@
 # Formularios de revisión ciega — #145
 
 Preparación del 2026-11-07 para [#145](https://github.com/Corchets/bitacora_tesis/issues/145).
-Las fichas están vacías: este artefacto no acredita revisión humana ni completa el issue.
+El formulario se entrega vacío. Las [respuestas parciales de Luciano](REVISIONES-HUMANAS-LUCIANO.md)
+se conservaron después, separadas de la herramienta. No completan el issue.
 
 ## Cómo completar
 
@@ -15,7 +16,8 @@ servidor de llamadas del puerto 8765.
 - Para cargar una marca, elegir sospecha, pedido o cumplimiento y hacer clic en el número
   de línea del diálogo. También se puede escribir el número.
 - **Terminé de revisar esta ficha** comprueba respuestas, justificaciones y líneas.
-  Una modificación posterior devuelve la ficha a pendiente para que se vuelva a confirmar.
+  Una edición válida conserva esa confirmación; si deja campos necesarios sin completar,
+  vuelve a pendiente. El contador distingue respuestas suficientes de confirmaciones.
 - Las respuestas se guardan por nombre y muestra en ese navegador. **Descargar mis
   respuestas** genera un JSON con las fichas completas y pendientes. Descargar al terminar
   cada sesión: el guardado del navegador puede borrarse y no es una copia de respaldo.

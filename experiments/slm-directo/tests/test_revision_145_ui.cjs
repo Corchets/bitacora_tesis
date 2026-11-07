@@ -27,7 +27,10 @@ test('ficha: guardado, validación, aislamiento, descarga y recuperación',async
   await page.locator('[data-line="1"]').click();await page.locator('#mark-target').selectOption('pedido');await page.locator('[data-line="1"]').click();
   await page.locator('[name=completa]').check();assert.match(await page.locator('#count').textContent(),/1 de 42/);
   await page.reload();await page.locator('#reviewer').fill('Revisor de prueba');await page.locator('#start').click();assert.equal(await page.locator('[name=completa]').isChecked(),true);
-  await page.locator('[name=observaciones]').fill('Una corrección vuelve a pendiente.');assert.equal(await page.locator('[name=completa]').isChecked(),false);
+  await page.locator('[name=observaciones]').fill('Una observación no desmarca una ficha válida.');assert.equal(await page.locator('[name=completa]').isChecked(),true);
+  await page.locator('[name=fundamento]').fill('');assert.equal(await page.locator('[name=completa]').isChecked(),false);
+  await page.locator('[name=fundamento]').fill('Fundamento recuperado.');assert.match(await page.locator('#sheet-state').textContent(),/respondida.*sin confirmar/);
+  assert.match(await page.locator('#count').textContent(),/1 de 42 respondidas/);
   await page.locator('[name=completa]').check();await page.locator('#next').click();assert.equal(await page.locator('[name=estafa]:checked').count(),0);
   const downloading=page.waitForEvent('download');await page.locator('#export').click();const download=await downloading;const exported=JSON.parse(await fs.readFile(await download.path(),'utf8'));
   assert.equal(exported.respuestas['Llamada 01'].completa,true);assert.equal(exported.revisor,'Revisor de prueba');assert.equal(exported.muestra,'fixture-145');

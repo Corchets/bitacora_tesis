@@ -37,7 +37,7 @@
 <fieldset><legend>¿Se observa que cumple ese pedido?</legend><div class="options"><label class="option"><input type="radio" name="cumplimiento" value="si">Sí</label><label class="option"><input type="radio" name="cumplimiento" value="no">No se observa</label><label class="option"><input type="radio" name="cumplimiento" value="dudoso">Dudoso</label><label class="option"><input type="radio" name="cumplimiento" value="no_aplica">No hay pedido</label></div><div class="line-input"><label for="compliance-line">Línea del primer cumplimiento · T_C</label><input id="compliance-line" name="cumplimiento_linea" type="number" min="1" step="1" inputmode="numeric"></div><label class="reason">¿Qué cumple? ¿O cuál es la duda?<textarea maxlength="50000" name="motivo_cumplimiento" placeholder="Diferenciá cumplir, rechazar y decir que lo hará más adelante."></textarea></label></fieldset>
 <label class="reason">Otras observaciones<textarea maxlength="50000" name="observaciones" placeholder="Contradicciones, información que falta o criterios para discutir con el equipo. Opcional."></textarea></label>
 <label class="exposure"><input name="conocido" type="checkbox">Ya conocía esta conversación, sus referencias o algún resultado del detector.</label>
-<label class="finish"><input name="completa" type="checkbox">Terminé de revisar esta ficha</label><small>Podés corregirla después. Marcarla completa comprueba que estén las respuestas y las líneas necesarias.</small>
+<label class="finish"><input name="completa" type="checkbox">Terminé de revisar esta ficha</label><small>Marcarla completa comprueba las respuestas y las líneas. Podés corregirla después; sigue completa si la edición es válida.</small>
 <div class="bottom"><button id="prev" type="button">Anterior</button><button id="next" type="button" class="primary">Siguiente llamada</button></div><p class="export-note muted">Las respuestas son personales. Descargá tu copia al terminar cada sesión; no se envía nada por Internet.</p>
 </form></main></div>
 </div><script type="application/json" id="data">__DATOS_REVISION__</script>
@@ -72,11 +72,18 @@ function persist(){
  try{localStorage.setItem(key,JSON.stringify(state));storageOK=true;message('Guardado en este navegador · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})+'. Descargá una copia al terminar.');}
  catch(e){storageOK=false;message('No se pudo guardar en el navegador. Tu avance sigue en esta pestaña: descargá tus respuestas antes de cerrarla.',true)}
 }
+function captureStatus(c){
+ const r=state.respuestas[c.id];
+ if(!r||!Object.values(r).some(v=>typeof v==='string'?v.trim():v===true))return 'sin empezar';
+ if(errors(r,c.turnos.length).length)return 'en curso';
+ return r.completa?'completa':'respondida · sin confirmar';
+}
 function overview(){
- const n=DATA.casos.filter(c=>state.respuestas[c.id]?.completa).length;
- $('count').textContent=n+' de '+DATA.casos.length+' completas';$('progress').value=n;
- $('case-select').innerHTML=DATA.casos.map((c,i)=>'<option value="'+i+'">'+c.id+(state.respuestas[c.id]?.completa?' · completa':' · pendiente')+'</option>').join('');$('case-select').value=String(state.actual);
- $('sheet-state').textContent=state.respuestas[DATA.casos[state.actual].id]?.completa?'Ficha completa':'Pendiente';
+ const n=DATA.casos.filter(c=>['completa','respondida · sin confirmar'].includes(captureStatus(c))).length;
+ const confirmed=DATA.casos.filter(c=>state.respuestas[c.id]?.completa).length;
+ $('count').textContent=n+' de '+DATA.casos.length+' respondidas · '+confirmed+' confirmadas';$('progress').value=n;
+ $('case-select').innerHTML=DATA.casos.map((c,i)=>'<option value="'+i+'">'+c.id+(' · '+captureStatus(c))+'</option>').join('');$('case-select').value=String(state.actual);
+ $('sheet-state').textContent=captureStatus(DATA.casos[state.actual]);
 }
 function paintMarks(){const r=state.respuestas[DATA.casos[state.actual].id]||{};document.querySelectorAll('.turn').forEach((el,i)=>{const tags=MARKS.filter(m=>r[m]==='si'&&Number(r[m+'_linea'])===i+1);el.classList.toggle('marked',tags.length>0);el.querySelector('.tags').textContent=tags.map(m=>({sospecha:'Sospecha',pedido:'T_R',cumplimiento:'T_C'}[m])).join(' · ')})}
 function save(){
@@ -119,11 +126,11 @@ $('start').onclick=()=>activate($('reviewer').value);
 $('reviewer').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();activate(e.target.value)}});
 $('change').onclick=()=>{if(reviewer)persist();reviewer='';$('reviewer').disabled=false;$('start').hidden=false;$('change').hidden=true;$('review').hidden=true;$('welcome').hidden=false;$('export').disabled=true;message('Ingresá el nombre de la persona que va a revisar.');$('reviewer').value='';$('reviewer').focus()};
 form.addEventListener('submit',e=>e.preventDefault());
-form.addEventListener('input',e=>{if(!reviewer)return;const wasFinished=form.elements.completa.checked;if(e.target.name!=='completa'&&wasFinished)form.elements.completa.checked=false;save();if(e.target.name==='completa'&&wasFinished&&!form.elements.completa.checked)$('errors').focus()});
+form.addEventListener('input',e=>{if(!reviewer)return;const wasFinished=form.elements.completa.checked;save();if(e.target.name==='completa'&&wasFinished&&!form.elements.completa.checked)$('errors').focus()});
 function go(index){state.actual=index;persist();show();$('sheet-title').scrollIntoView({block:'nearest'})}
 $('prev').onclick=()=>go(Math.max(0,state.actual-1));$('next').onclick=()=>go(Math.min(DATA.casos.length-1,state.actual+1));$('case-select').onchange=e=>go(Number(e.target.value));
 $('pending').onclick=()=>{for(let offset=1;offset<=DATA.casos.length;offset++){const n=(state.actual+offset)%DATA.casos.length;if(!state.respuestas[DATA.casos[n].id]?.completa){go(n);return}}message('Completaste todas las fichas. Descargá tus respuestas para conservarlas.')};
-$('turns').onclick=e=>{const btn=e.target.closest('[data-line]');if(!btn)return;const m=$('mark-target').value;form.querySelector('[name="'+m+'"][value="si"]').checked=true;form.elements[m+'_linea'].value=btn.dataset.line;form.elements.completa.checked=false;save()};
+$('turns').onclick=e=>{const btn=e.target.closest('[data-line]');if(!btn)return;const m=$('mark-target').value;form.querySelector('[name="'+m+'"][value="si"]').checked=true;form.elements[m+'_linea'].value=btn.dataset.line;save()};
 $('export').onclick=()=>{
  if(!reviewer)return;
  const packet={issue:145,version:DATA.version,muestra:DATA.muestra,revisor:reviewer,exportado:new Date().toISOString(),...state};
