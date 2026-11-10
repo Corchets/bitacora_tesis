@@ -504,6 +504,23 @@ Por §5.3 (derechos de YouTube) y §5.4 (custodia de la referencia del test), ni
 > por esa autorización. Esta excepción publica las anotaciones individuales; los diálogos,
 > las traducciones y el resto del set privado siguen fuera de Git. No adjudica referencias
 > ni garantiza una revisión ciega para quien consulte las respuestas publicadas.
+>
+> **Actualización del 2026-11-10:** Luciano decidió publicar también las traducciones de
+> inglés y de portugués, para que el equipo las tenga sin pedírselas. Se versionan tal cual
+> estaban en `data/private/issue-144/`:
+> [inglés, filas 3 y 4](ISSUE-144-INGLES-2026-11-06.md) con su [procedencia](ISSUE-144-INGLES-2026-11-06-PROCEDENCIA.json),
+> [inglés, las otras 18](ISSUE-144-INGLES-18-2026-11-07.md),
+> [portugués, 2 grupos](ISSUE-144-PORTUGUES-2026-11-06.md) con su [procedencia](ISSUE-144-PORTUGUES-2026-11-06-PROCEDENCIA.json)
+> y [portugués, 10 grupos](ISSUE-144-PORTUGUES-10-2026-11-07.md). Sus encabezados todavía dicen «fuera de Git»: se
+> conservan como estaban. Portugués es CC BY 4.0, con atribución a AI Safety Brazil.
+> En inglés esto revierte lo de §5.3: los derechos de los videos siguen sin verificar.
+> La clave de portugués, el set local con su referencia y el coreano siguen fuera de Git.
+> El coreano no se publica porque la fuente prohíbe redistribuir derivados.
+>
+> **Estado: propuesta sin discutir.** Publicar el inglés es una decisión de Luciano que el
+> equipo tiene que confirmar o revertir. Con los textos en un repositorio público, las 16
+> conversaciones de inglés y las 12 de portugués dejan de estar en custodia (§5.4). Si van
+> al test, hay que informarlo como límite.
 
 1. **Entrada para el detector (sin las fichas de Luciano):** `texto/EXT-NNN.txt` (16 archivos con IDs sorteados con `Random(20261107)` entre `001` y `999`: `EXT-036`, `EXT-074`, `EXT-154`, `EXT-223`, `EXT-250`, `EXT-319`, `EXT-320`, `EXT-390`, `EXT-453`, `EXT-571`, `EXT-579`, `EXT-623`, `EXT-677`, `EXT-705`, `EXT-750` y `EXT-828`) y `roles-protegida.json` (SHA-256 `390a92f136c2fd8a452fcafe970dbb8094d6d7946e95d92f20aefd252e80c705`). En cada archivo quien abre la llamada es `A:` y quien responde es `B:`; los turnos pegados en la fuente se separaron por hablante, se quitaron las notas entre corchetes y los marcadores de anonimización se reemplazaron por datos ficticios consistentes por caso. Los hashes de los 16 `.txt` están en `MANIFIESTO-TEXTO.json` (SHA-256 `117e34185262db29b545ae9f6b62af0f57dfc876596b033a24b774989b8417d3`).
 2. **Referencia y fichas de Luciano (para comparar después contra la salida del detector):** `FICHAS-LUCIANO-INGLES.md` (SHA-256 `0ce3610e78ad656d9ea43f485d7a18f6be6967d3c684b7b55d4914173ea111d6`, con las 20 fichas tal cual las completó más las columnas de perfil y repeticiones), `referencia/EXT-NNN.json` (16 archivos con `clase`, `t_r_linea`, `t_c_linea`, `sospecha_linea` y `ficha_original`) y `correspondencia.json` (SHA-256 `280a53425ebdf55eb7522a635882715c169455b0d3b119d89aa6b85ff75a1f5d`, mapa entre fila del CSV, código `EN-NN`, `EXT-NNN` y número de turno a línea de `texto/`).

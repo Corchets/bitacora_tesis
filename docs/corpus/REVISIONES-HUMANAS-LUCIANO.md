@@ -56,6 +56,9 @@ y 42, y que la 14 estaba sin confirmar. Esas seis fichas no son ciegas respecto 
 clase y del pedido. La casilla `conocido` quedó en `false` en el original; no se modifica,
 y la correspondencia registra el hecho aparte en `aviso_previo`, que pasa a la vista común.
 La 16 no recibió ese aviso. Al medir el acuerdo, conviene informar esas seis por separado.
+Luciano aclara que el aviso no lo llevó a marcarlas como estafa: en 14, 23, 31 y 41
+respondió «Dudoso» y en 39 y 42, «Sí». Se registra su aclaración; el aviso se mantiene porque
+la ceguera depende de lo que se sabía antes de anotar, no del resultado.
 
 En la **16**, `pedido` y `cumplimiento` son «Dudoso» sin línea marcada, aunque las
 justificaciones nombran las líneas 11 y 20. Se conservan así, sin trasladar las líneas.

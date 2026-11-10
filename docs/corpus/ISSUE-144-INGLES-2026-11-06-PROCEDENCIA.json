@@ -1,0 +1,152 @@
+{
+  "metadata_general": {
+    "idioma": "en",
+    "descripcion_idioma": "Inglés (EE. UU.)",
+    "fecha": "2026-11-06",
+    "tarea_origen": "Issue #144 - Corchets/bitacora_tesis (Muestras exploratorias externas)",
+    "destinatario": "Luciano Grosso",
+    "modelo_exacto_solicitado": "gemini-3.8-flash-high, effort high",
+    "modelo_exacto_usado": "Gemini 3.8 Flash (High)",
+    "evidencia_modelo": "Verificado por coordinador en lanzamiento CLI y entorno de ejecución (gemini-3.8-flash-high, effort high)."
+  },
+  "fuente_primaria": {
+    "nombre_fuente": "youtube-scam-conversations (BothBosu)",
+    "repositorio_url": "https://huggingface.co/datasets/BothBosu/youtube-scam-conversations",
+    "revision_commit": "d0b94f1e2a9522af4703154c805d02d5c596110d",
+    "archivo_evaluado": "youtube_scam_conversations.csv",
+    "tamano_bytes_archivo": 55754,
+    "sha256_archivo": "36771a67fecfc9d6b5b331d8c6f154db1c96369a401b351b6927f9e9620dd937",
+    "licencia_declarada": "Apache-2.0",
+    "limites_uso": "Licencia declarada Apache-2.0 en Hugging Face; no se verificaron de forma independiente los permisos subyacentes de los videos originales de YouTube. Entrega local privada sin publicación en Git. No se garantiza anonimización absoluta ni cumplimiento legal.",
+    "origen_datos": "real_parcial",
+    "descripcion_origen": "Estafador real de call center fraudulento; interlocutor receptor es un scambaiter que actúa un rol pasivo/ingenuo. No constituye llamada auténtica con víctima vulnerable en situación real."
+  },
+  "herramientas_empleadas": {
+    "lectura_fuente": "Lectura local de archivo provisto por coordinador e inspección Python (csv.DictReader)",
+    "procesamiento_y_verificacion": "Python 3 con módulos csv, json, re, hashlib",
+    "metodo_traduccion": "Traducción fiel de comprensión realizada directamente con el modelo Gemini 3.8 Flash (High).",
+    "servicios_adicionales_traduccion": "Ninguno. No se emplearon servicios externos adicionales de traducción. No se atribuye revisión bilingüe humana."
+  },
+  "prompt_e_instrucciones_traduccion": "Traducción fiel de comprensión del inglés al español neutro para revisión técnica de corpus de vishing. Directivas estrictas aplicadas: 1) Conservar exactamente la misma cantidad y numeración de turnos (1..N); 2) Respetar la asignación estricta de roles A/B (A = primer hablante, B = segundo hablante); 3) No resumir, no truncar, no completar partes elididas ni inventar diálogo; 4) No mejorar la gramática ni la formulación del pedido del estafador; 5) No adaptar al dialecto rioplatense (evitar voseo forzado, mantener 'usted' cuando el original es formal); 6) No argentinizar entidades, organismos, procedimientos ni montos monetarios (mantener USD); 7) Preservar de forma exacta negaciones, preguntas, condicionales y fórmulas de cortesía; 8) Aplicar placeholders de anonimización canónicos coherentes en inglés y español sin exponer valores crudos; 9) Si un término resulta incomprensible marcar [traducción incierta] y documentar fuera del texto (no adivinar); 10) No inventar marcas temporales en segundos (T_R/T_C) ante la falta de registro sonoro sincronizado.",
+  "sustituciones_pii": {
+    "fila_3": [
+      {
+        "placeholder": "[NOMBRE_1]",
+        "tipo": "nombre_completo",
+        "turnos": [
+          8
+        ],
+        "motivo": "Datos identificables emitidos en la llamada; anonimizados preventivamente sin exponer valor crudo."
+      },
+      {
+        "placeholder": "[TELEFONO_1]",
+        "tipo": "numero_telefonico",
+        "turnos": [
+          10,
+          11
+        ],
+        "motivo": "Número telefónico emitido en la llamada; anonimizado preventivamente sin exponer valor crudo."
+      },
+      {
+        "placeholder": "[NOMBRE_PILA_1]",
+        "tipo": "nombre_pila",
+        "turnos": [
+          13
+        ],
+        "motivo": "Nombre de pila emitido por el atacante; anonimizado preventivamente sin exponer valor crudo."
+      },
+      {
+        "placeholder": "[ID_REMOTO_1]",
+        "tipo": "credencial_acceso_remoto",
+        "turnos": [
+          36
+        ],
+        "motivo": "Identificador de sesión para acceso remoto; anonimizado preventivamente sin exponer valor crudo."
+      },
+      {
+        "placeholder": "[PASSWORD_REMOTO_1]",
+        "tipo": "credencial_acceso_remoto",
+        "turnos": [
+          36
+        ],
+        "motivo": "Contraseña de sesión para acceso remoto; anonimizada preventivamente sin exponer valor crudo."
+      }
+    ],
+    "fila_4": []
+  },
+  "incidencias_registradas": {
+    "orden_secuencial": "Sin alteraciones. Se mantiene el flujo temporal original turno por turno.",
+    "diarizacion_y_hablantes": "0 turnos fusionados (glued turns = 0). Las etiquetas originales Suspect e Innocent se asignaron unívocamente a A y B según orden de primer habla.",
+    "traduccion_e_incertidumbre": "Ningún pasaje resultó ininteligible; no se requirió la marca [traducción incierta]. En Turno 04 se identificó ambigüedad sintáctica de alcance en la negación inglesa ('Do not close this window and restart your computer'), documentada fuera del diálogo.",
+    "alcance_operativo_issue_151": "Ambas conversaciones son llamadas salientes (outgoing), iniciadas por el scambaiter. Quedan fuera del alcance operativo del detector según Issue #151 (entrantes no agendadas) y se informan como exploración."
+  },
+  "comprobaciones_globales": {
+    "perdida_o_adicion_turnos": false,
+    "cada_turno_no_vacio_tiene_traduccion": true,
+    "negaciones_preservadas": true,
+    "pedidos_preservados": true,
+    "condicionales_preservados": true,
+    "validacion_humana_atribuida": false,
+    "excluido_de_futuro_test": true
+  },
+  "casos": [
+    {
+      "id_caso": "CASO_01",
+      "fila_csv_indice_cero": 3,
+      "modalidad_fuente": "support",
+      "modalidad_real": "soporte_tecnico_falso_virus",
+      "canal_youtube": "Lewis's Tech",
+      "titulo_link": "Tech Support Scammer vs Linux Mint (youtube.com)",
+      "direccion_llamada": "outgoing",
+      "estado_alcance_issue_151": "fuera_de_alcance_operativo_llamada_saliente",
+      "conteo_turnos_original": 37,
+      "conteo_turnos_traducido": 37,
+      "palabras_original": 488,
+      "caracteres_original": 2783,
+      "palabras_traducido": 477,
+      "caracteres_traducido": 3076,
+      "primer_pedido_alto_riesgo_turno_ia": 35,
+      "primer_cumplimiento_turno_ia": 36,
+      "nota_cumplimiento_ia": "Turno 35 solicita ID y contraseña de TeamViewer; Turno 36 los dicta. Turno 37 anuncia conexión futura ('I will now connect'), no confirma conexión establecida. Representa el final de la transcripción disponible.",
+      "marcas_temporales_segundos": null,
+      "motivo_marcas_segundos_nulas": "No se dispone del audio crudo sincronizado; prohibido inventar duraciones temporales.",
+      "verificacion_turnos_1a1": true
+    },
+    {
+      "id_caso": "CASO_02",
+      "fila_csv_indice_cero": 4,
+      "modalidad_fuente": "refund",
+      "modalidad_real": "reintegro_falso_cargo_paypal_bitcoin",
+      "canal_youtube": "Rinoa Poison",
+      "titulo_link": "Telling a Scammer I'm Keeping His $18,000 (youtube.com)",
+      "direccion_llamada": "outgoing",
+      "estado_alcance_issue_151": "fuera_de_alcance_operativo_llamada_saliente",
+      "conteo_turnos_original": 20,
+      "conteo_turnos_traducido": 20,
+      "palabras_original": 460,
+      "caracteres_original": 2418,
+      "palabras_traducido": 446,
+      "caracteres_traducido": 2573,
+      "primer_pedido_alto_riesgo_turno_ia": null,
+      "primer_cumplimiento_turno_ia": null,
+      "nota_pedidos_y_cumplimiento_ia": "Turno 17 menciona formulario sin contenido sensible explícito. Turno 19 pide abrir Chrome para dar una instrucción de conexión, siendo un candidato ambiguo sujeto a revisión D07 (no T_R adjudicado). Turno 18 (estar frente a PC) y Turno 20 (pantalla de código) no constituyen cumplimiento de alto riesgo (sin prueba de credenciales, control ni fondos). Cumplimiento queda no observable / indeterminado en el fragmento disponible.",
+      "marcas_temporales_segundos": null,
+      "motivo_marcas_segundos_nulas": "No se dispone del audio crudo sincronizado; prohibido inventar duraciones temporales.",
+      "verificacion_turnos_1a1": true
+    }
+  ],
+  "consigna_completa_coordinador": "Sos un worker supervisado para el issue #144 de Corchets/bitacora_tesis. El coordinador integra. Objetivo autorizado: preparar muestras exploratorias para que Luciano lea y marque qué fuentes y casos sirven, NO preparar ni ejecutar el test final. Las conversaciones leídas quedan fuera del futuro test. No ejecutar detectores, no cambiar prompts ni elegir configuración, no anotar nada como revisión humana. Trabajás en /Users/lucianogrosso/orca/workspaces/bitacora_tesis/laboratorio-luciano. Leé AGENTS.md, docs/gestion/MAPA-DECISIONES.md (D07/D08/D09), docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md y docs/corpus/MANUAL-ANOTACION.md. Otros workers trabajan por idioma: SOLO podés escribir los DOS archivos de entrega asignados en Downloads; NINGÚN archivo del repositorio, git add/commit/push ni archivos compartidos. Descargá fuentes únicamente fuera de Git, en temporal propio. No crear carpetas del repositorio ni leer la reserva propia CV2-T. No enviar mensajes a GitHub/email/Slack. El usuario pidió 1 agente por idioma, Terra High para coreano y Flash High para los otros; no delegar en otros modelos/agentes.\n\nENTREGA: 1 Markdown legible editable + 1 JSON de procedencia. Incluir enlaces primarios precisos, fecha 2026-11-06, revisión/commit de fuente, IDs originales inequívocos, licencia y límites de uso, origen real/sintético. Explicar que estos 2 casos son exploración y quedan fuera del test; no declarar aprobado nada. Conservar conversación completa, turnos numerados y roles A/B (si hay más, C); NO resumir, truncar, completar, inventar diálogo ni mejorar el pedido; no argentinizar instituciones, montos ni procedimientos. Si un pasaje es indescifrable marcar [traducción incierta] y explicarlo fuera del diálogo; no adivinar. No inventar segundos de T_R/T_C: sin audio usar turno, notas IA separadas y referencia humana vacía. Cada caso termina con campos VACÍOS para que Luciano marque: conservar/descartar/revisar; credibilidad; comienzo y final completos o recorte; hablantes claros; pedido de alto riesgo observable (turno); cumplimiento observable (turno); equivalente local sin reescribirlo; ambigüedades; diferencias respecto del corpus propio; decisión y motivo. No prejuzgar estos campos con casillas marcadas. Se puede añadir observaciones IA separadas, explícitas y breves. Agregar explicación de cualquier sustitución de nombres/datos identificables (mismos placeholders coherentes en original inglés y traducción, sin credenciales reales); no subir datos identificables a Git ni incluir secretos en respuesta al coordinador. Texto íntegro y traducciones restringidos van SOLO en entrega local privada, nunca en Git ni publicación; si derechos prohíben incluso ese uso, detener esa reproducción y documentar la restricción y enlaces sin inventar contenido.\n\nJSON: idioma, modelo exacto solicitado/usado si verificable (no inventar receipt), archivos y SHA256 de entradas, URL/revisión/ID de cada caso, conteos originales/traducidos, herramientas, prompt/instrucciones de traducción empleados (registrar completo), sustituciones, incidencias de orden/diarización/traducción, comprobaciones. Comprobar que no se perdió ni agregó ningún turno, que cada turno no vacío tenga traducción y que negaciones/pedidos/condicionales se conservan. No atribuir validación bilingüe/humana inexistente. Reportar con worker_done rutas, tamaños, IDs, conteos, verificaciones y limitaciones; no pegar diálogos completos en mensaje. Si falla algo, reportarlo como fallo sin declarar tarea completa.\n\nARCHIVOS EXCLUSIVOS: /Users/lucianogrosso/Downloads/ISSUE-144-INGLES-2026-11-06.md y /Users/lucianogrosso/Downloads/ISSUE-144-INGLES-2026-11-06-PROCEDENCIA.json\n\nIDIOMA INGLÉS. Modelo solicitado gemini-3.8-flash-high, effort high. Fuente real parcial: https://huggingface.co/datasets/BothBosu/youtube-scam-conversations revision d0b94f1e2a9522af4703154c805d02d5c596110d, archivo youtube_scam_conversations.csv. 20 conversaciones; estafador real, receptor scambaiter, no víctima auténtica. Licencia declarada Apache-2.0 con derechos subyacentes dudosos, entrega local privada y no Git. Elegir 2 completas de modalidades diferentes de las filas candidatas 3,4,7,11,13,14,15 (índice cero, comprobar modalidad real en la fila). Evitar fila14 si no contiene pedido; preferir soporte y premio o reintegro. Por caso: primero INGLÉS ORIGINAL íntegro (con sustitución consistente de identificadores si corresponde, rotularlo), después TRADUCCIÓN COMPLETA AL ESPAÑOL, con los mismos turnos numerados para que Luciano revise. No adaptar al rioplatense ni cambiar entidades culturales. Corregir etiquetas de hablante solo con evidencia clara y dejar tabla de correcciones; si duda conservar y marcar. Revisar csv y cabeceras para no seleccionar índice desplazado. Registrar source_url/video si existe. No tratar como llamadas entrantes de víctimas reales.\n\nACTUALIZACIÓN DEL COORDINADOR, 2026-11-06: primero se revisó a Evaristo. El issue #144 actualizado atribuye a Evaristo la rama corpus/144-corpus-externo, commits hasta 80fbc909088446deb8cd28c4ba379e29c540692b, YA INTEGRADOS en HEAD e467c7c. Reutilizá relevamiento y correcciones del filtro, no asumas que son decisiones nuevas. Las 22 traducciones constan en el documento pero no encontramos ruta local ni custodia; NO afirmar que las leíste ni reconstruirlas de memoria. Esta entrega es una traducción fiel de comprensión, anterior a adaptación rioplatense; no copiar la política de mejorar ASR o reatribuir hablantes sin evidencia del piloto anterior.\n\nNuevo alcance aprobado por equipo según issue #151: detector solo llamadas ENTRANTES de números NO AGENDADOS. Consultá gh issue view 151 si necesitás detalle. Para esta lectura exploratoria se conservan también llamadas salientes o de dirección incierta, pero se informa dirección observable/indeterminable y si queda fuera del alcance EN UNA NOTA, sin descartar ni reescribir automáticamente. YouTube soporte iniciado por víctima va aparte; ES-Port es contraste exploratorio, no legítimas finales aprobadas. No resolver D03/D07/D08 ni construir el test con estos ejemplos.\n\nEl usuario autorizó expresamente Google Translate u otra traducción si ayuda. Podés usarlo registrando herramienta, pasajes y discrepancias; no enviar datos identificables ni credenciales: anonimizar primero. Usar traducción automática NO es validación humana bilingüe. No tenés obligación de usar un servicio adicional si no aporta. Fuentes primarias deben consultarse efectivamente, no inferirse del handoff.\n",
+  "revision_del_coordinador": {
+    "fecha": "2026-11-07",
+    "run_id": "run_add0f24ad4f8",
+    "dispatch_inicial_utilizado": "ctx_3c9607ddfd28",
+    "comprobaciones": [
+      "37 y 20 turnos originales y roles contrastados con las filas 3 y 4 del CSV fijado, después de sustituciones documentadas.",
+      "Numeración y roles de la traducción alineados con los originales; no acredita revisión bilingüe humana.",
+      "Casillas humanas vacías, fuente y hash contrastados, originales identificables sustituidos también en el registro."
+    ],
+    "validacion_bilingue_humana": false,
+    "decision_humana_casos": "pendiente",
+    "nota": "Registro de comprobaciones técnicas y lectura de IA; no es una anotación humana ni aprobación del set."
+  }
+}
