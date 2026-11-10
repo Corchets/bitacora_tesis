@@ -1,0 +1,30 @@
+A: Hola, soy de asistencia de Archivo Vivo. ¿Se te duplicaron fotos al subirlas?
+B: Sí, aparece el mismo álbum tres veces.
+A: Puede haber quedado una carga en segundo plano.
+B: ¿Se puede borrar una copia?
+A: Primero reviso cómo se distribuyeron los archivos.
+B: ¿Vas a entrar a mi cuenta?
+A: No, solo a la pantalla de sincronización.
+B: ¿Cómo te conectás?
+A: Instalá la aplicación de asistencia que te mando y aceptá compartir pantalla para revisar el historial de carga.
+B: No conozco esa aplicación.
+A: La usan los técnicos de almacenamiento.
+B: ¿Puedo mandarte una captura?
+A: La captura no muestra el estado interno.
+B: El archivo de instalación dice acceso remoto.
+A: Es para compartir pantalla durante unos minutos.
+B: No voy a instalarlo.
+A: Sin acceso no puedo eliminar la copia duplicada.
+B: Lo voy a revisar desde el soporte dentro de la aplicación.
+A: Puede llevar más tiempo.
+B: Está bien, lo hago así.
+B: No voy a instalar una herramienta que permite manejar el equipo.
+A: No voy a tocar nada, solo mirar el registro.
+B: Igual puede mostrar mis otras ventanas.
+A: Podés cerrar la sesión al terminar.
+B: No la voy a iniciar.
+A: ¿Querés que te deje un número de caso?
+B: Voy a abrir el soporte desde la aplicación de almacenamiento.
+A: Ahí pueden tardar en responder.
+B: Prefiero esperar a una respuesta por un canal que reconozco.
+A: Está bien, queda sin cambios.

@@ -1,0 +1,26 @@
+A: Buenas, estoy ordenando los papeles de mi papá y encontré una nota que dice clave de caja.
+B: Hola. ¿La nota tiene algún otro dato, como una sucursal o una fecha?
+A: Dice “caja 4, clave 82”, pero es de hace muchos años.
+B: Puede ser una anotación de una operación vieja. ¿Tu papá tiene alguna cuenta activa en este banco?
+A: Sí, cobra la jubilación en una cuenta, pero no sé si esa nota corresponde a eso.
+B: Podemos revisar qué productos tiene activos, si él está presente para autorizar la consulta.
+A: Está conmigo. Se llama Osvaldo Ledesma.
+B: Buenas tardes, señor Osvaldo. ¿Nos confirma la sucursal donde cobra?
+A: La de la calle Belgrano, aunque hace tiempo que no voy a la caja.
+B: ¿La cuenta la usa con tarjeta o retira por ventanilla?
+A: Con tarjeta. La nota puede ser de cuando retiré en caja hace años.
+B: Es posible que “caja 4” fuera el número de ventanilla, pero no puedo identificar esa clave sin la fecha de la operación.
+A: Mi papá guardaba papeles de todo. También hay recibos de servicios de 2010.
+B: Si no se relaciona con un producto actual, no afecta el acceso a la cuenta.
+A: ¿Hay una forma de confirmar que la tarjeta sigue activa?
+B: Sí, él puede revisar el estado en la aplicación o en un cajero. ¿La usó esta semana?
+A: Sí, retiró dinero el lunes y pudo entrar al menú.
+B: Entonces la tarjeta funcionó en esa operación.
+A: ¿La nota la tiramos o conviene guardarla?
+B: Si es una referencia antigua, pueden conservarla con los documentos históricos o descartarla según prefieran.
+A: No tiene ningún número de cuenta completo, solo esas palabras.
+B: En ese caso no nos permite consultar más datos.
+A: Está bien. Le saco una foto para preguntarle a mi hermana y después la archivamos.
+B: De acuerdo. ¿Necesitan revisar algún movimiento actual?
+A: No, era solo entender la anotación.
+B: Perfecto, que tengan buena tarde.

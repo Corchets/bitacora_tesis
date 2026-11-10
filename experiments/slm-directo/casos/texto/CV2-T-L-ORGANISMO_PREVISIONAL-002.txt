@@ -1,0 +1,26 @@
+A: Hola, me aprobaron un reintegro por medicamentos y no sé cuándo lo depositan.
+B: Buen día. ¿La solicitud la hiciste este mes o el anterior?
+A: El 2 de octubre. Tengo el comprobante de aprobación en el correo.
+B: ¿Podés leerme el número de trámite que aparece en el encabezado?
+A: 772-08.
+B: Gracias. El reintegro está aprobado y figura para la próxima liquidación.
+A: ¿Eso sería este mes o el que viene?
+B: La liquidación cierra el viernes. Si entra antes, se acredita en noviembre.
+A: El médico me dijo que faltaba un formulario, pero después me llegó la aprobación.
+B: Veo que el formulario se incorporó el día 10 y quedó completo.
+A: ¿Tengo que volver a mandar las facturas originales?
+B: No, están adjuntas a la solicitud.
+A: Bien. ¿El dinero llega a la misma cuenta donde cobro el beneficio?
+B: Sí, se utiliza la cuenta que figura para el pago mensual.
+A: ¿Me podés confirmar los últimos cuatro dígitos para saber si sigue igual?
+B: Termina en 4406.
+A: Sí, esa es. La abrí en la sucursal del barrio.
+B: Perfecto. ¿Querés que revisemos si hay otra solicitud pendiente?
+A: No, la de los anteojos la presenté hace poco y todavía no tengo respuesta.
+B: No aparece registrada aún. Si la presentaste ayer, puede tardar algunos días en ingresar.
+A: Fue el lunes en papel, en la sede de la avenida.
+B: Entonces revisá el portal el viernes o volvé a comunicarte con el comprobante.
+A: Lo hago. ¿La aprobación del reintegro de medicamentos ya es definitiva?
+B: Sí, figura aprobado; falta el calendario de pago.
+A: Gracias, era lo que necesitaba confirmar.
+B: De nada.

@@ -1,0 +1,20 @@
+A: Hola, del taller de danza del club. ¿Tu hija sigue viniendo los miércoles?
+B: Sí, salvo que esta semana tenga prueba.
+A: Estamos pasando los horarios al grupo de madres y padres.
+B: Ya estoy en ese grupo.
+A: Sí, pero tu contacto quedó como invitado, no como responsable.
+B: ¿Qué diferencia hay?
+A: El responsable recibe cambios de sala y cancelaciones.
+B: ¿Cómo lo actualizo?
+A: Te va a entrar un aviso con una serie de confirmación.
+B: Dice que es para registrar una cuenta en otro equipo.
+A: Es lo que muestra cuando el grupo cambia de administrador.
+B: ¿Querés que te la mande?
+A: Sí, así actualizo tu perfil de contacto.
+B: No voy a compartir un código de registro.
+A: Si no queda como responsable, los cambios te llegan más tarde.
+B: Le pregunto a la profesora el miércoles.
+A: La lista tiene que quedar cerrada antes.
+B: Entonces que quede como está.
+A: Bueno.
+B: Chau.

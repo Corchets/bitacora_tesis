@@ -1,0 +1,35 @@
+{
+  "case_id": "CV2-T-L-FAMILIAR-011",
+  "grupo": "corpus_v2",
+  "semilla": "LG-CV2-T-FAMILIAR-011",
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 6,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "L6 aporta una comprobación acotada («Correcto. ¿Lo podés mandar esta semana?»). Contexto: Dos hermanos acuerdan reembolsar a quien pagó la cuota anual de una pileta comunitaria; se comparte monto y se verifica la transferencia. La prueba es juzgar el dato por su función, no por la presencia aislada de una solicitud.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; diseño dos hermanos acuerdan reembolsar a quien pagó la cuota anual de una pileta comunitaria; se comparte monto y se verifica la transferencia.; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia provisional; revisar la evidencia y sus límites en D07. Partición test reservada según propuesta pendiente de D08. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-FAMILIAR-LLAMADO-01",
+  "situacion": "Dos hermanos acuerdan reembolsar a quien pagó la cuota anual de una pileta comunitaria; se comparte monto y se verifica la transferencia."
+}

@@ -1,0 +1,20 @@
+A: Buenas tardes, del banco. El pago de la cuota de la cooperadora quedó en estado de revisión.
+B: Lo pagué hoy a la mañana.
+A: Sí, el débito está reflejado, falta confirmar a qué ciclo corresponde.
+B: ¿No dice septiembre?
+A: En la vista corta no aparece el período.
+B: ¿Cómo lo confirmo?
+A: Revisá el último aviso que te llegó por mensaje.
+B: Hay uno que dice operación no reconocida.
+A: Ese aviso tiene una referencia temporal para asignarla a la cuota.
+B: ¿Te la dicto?
+A: Sí, copiame lo que está debajo de la palabra referencia.
+B: ¿Son los seis números?
+A: Los que aparecen ahí, así el sistema identifica el mes correcto.
+B: No voy a compartir ese mensaje.
+A: Sin la referencia no puedo terminar la conciliación.
+B: ¿Puedo llevar el comprobante a la sucursal?
+A: Sí, pero probablemente tarde dos días.
+B: Espero, no tengo apuro.
+A: De acuerdo.
+B: Hasta luego.

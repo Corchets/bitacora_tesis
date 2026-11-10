@@ -1,0 +1,21 @@
+A: Hola, decime.
+B: Te llamo del soporte de Dibujo Sur por una licencia que quedó en modo de prueba.
+A: Yo pagué el plan anual la semana pasada.
+B: El pago se registró, pero la licencia no se enlazó con tu equipo nuevo.
+A: Cambié la computadora ayer.
+B: Para activar la licencia, confirmá el usuario y la clave del programa.
+A: ¿La contraseña de mi cuenta?
+B: Sí, ingresala en el cuadro de activación que te mandé.
+A: ¿Ese cuadro está dentro de la aplicación?
+B: Se abre aparte porque la aplicación todavía no reconoce el equipo.
+A: El sitio tiene otro dominio.
+B: Es el proveedor que gestiona licencias para la región.
+A: ¿Puedo consultar con la tienda donde compré el plan?
+B: Ellos no ven la parte técnica.
+A: No quiero escribir la clave en una página que no conozco.
+B: Si no se completa hoy, la licencia vuelve al modo de prueba.
+A: Voy a abrir un ticket desde la aplicación oficial.
+B: El ticket puede demorar varios días.
+A: Prefiero esperar.
+B: Como quieras.
+A: Chau.

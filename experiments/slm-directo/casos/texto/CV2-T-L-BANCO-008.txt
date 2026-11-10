@@ -1,0 +1,25 @@
+A: hola llamo por una línea del resumen que dice código de servicio y no me suena
+B: buen día te aparece un importe asociado a esa descripción
+A: sí 2830 pesos del día cinco
+B: qué período estás viendo
+A: el resumen que cerró el lunes
+B: voy a revisar los movimientos de ese ciclo me confirmás los últimos cuatro de la cuenta
+A: termina en 5072
+B: gracias veo un débito por 2830 a nombre de agua clara
+A: ah pagué la factura de agua por la página del municipio
+B: entonces puede ser la referencia que usa el proveedor para identificar el pago
+A: el recibo de ellos tiene otro número por eso me confundí
+B: la fecha coincide con la factura que pagaste
+A: sí fue ese mismo día pero el recibo me llegó al correo después
+B: el resumen muestra cómo se envió el movimiento no siempre usa el nombre comercial completo
+A: está bien no hay otro cargo parecido
+B: no en este período aparece uno solo por ese monto
+A: puedo ver si el mes pasado también decía lo mismo
+B: sí cambiá el filtro de fecha y buscá agua clara
+A: me muestra el pago anterior con una descripción distinta
+B: el proveedor puede haber cambiado el texto que manda al banco
+A: bien entonces lo dejo así
+B: querés que te mande el detalle por correo
+A: no ya lo veo en la aplicación
+B: perfecto cualquier diferencia nos llamás con la fecha y el importe
+A: gracias por ayudarme a ubicarlo

@@ -1,0 +1,20 @@
+A: Buenas del soporte de nómina El listado de horas extra se guardó con permiso de solo lectura
+B: Lo cargué ayer desde mi usuario
+A: La sesión se inició con una cuenta de respaldo
+B: Cómo la cambio
+A: Entrá a configuración y revisá los accesos guardados
+B: Hay dos usuarios
+A: El que termina en admin es el de respaldo
+B: Lo elimino
+A: Primero confirmá el acceso habitual con tu contraseña
+B: La pongo acá
+A: Sí ingresala en el campo de comprobación y vemos qué rol quedó activo
+B: El usuario es feriaadmin y la contraseña es Andén-44 ya la cargué
+A: El perfil de administración aparece ahora
+B: Se guardaron las horas
+A: Sí las dos planillas están visibles
+B: Puedo cerrar la ventana
+A: Sí ya quedó sincronizada
+B: Listo gracias
+A: Que tengas buena tarde
+B: Chau

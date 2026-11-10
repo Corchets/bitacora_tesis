@@ -1,0 +1,28 @@
+A: Hola, necesitamos habilitar el tablero de ventas a una compañera que cubre vacaciones.
+B: Buen día. ¿La persona ya tiene una cuenta en el sistema?
+A: Sí, usa el sistema de caja, pero no el tablero.
+B: ¿Qué permisos necesita?
+A: Solo consultar ventas semanales y descargar el reporte de su sucursal.
+B: ¿En qué sucursal va a trabajar?
+A: En el local del centro, del lunes al viernes.
+B: Para crear el acceso, pasame su nombre y el correo laboral.
+A: Emilia Sur, emilia punto sur arroba mercadito punto ejemplo.
+B: Gracias. ¿Hasta qué fecha necesita el acceso?
+A: Hasta el 28 de noviembre, después vuelve el encargado.
+B: ¿Querés que el permiso se active el lunes a primera hora?
+A: Sí, así puede revisar el cierre del fin de semana.
+B: Lo programo para ese día. ¿La empleada necesita exportar a Excel o solo PDF?
+A: Excel, porque arma una tabla para la reunión.
+B: Bien. El perfil va a permitir exportar los datos de esa sucursal, no de las otras.
+A: Exactamente. No quiero que vea ventas de toda la cadena.
+B: La cuenta quedó limitada a Centro. ¿Querés que enviemos el aviso al correo laboral?
+A: Sí, así recibe las instrucciones el domingo.
+B: El mensaje llegará cuando se active el acceso.
+A: ¿Tiene que cambiar la contraseña de caja?
+B: No, el tablero usa el mismo usuario pero conserva los permisos separados.
+A: Bueno. Le explico cómo abrir el enlace interno cuando llegue.
+B: ¿El correo empieza con emilia, sin segundo apellido?
+A: Sí, está bien escrito.
+B: Perfecto, ya quedó la solicitud 6012.
+A: Gracias, así no la hacemos esperar el lunes.
+B: De nada.

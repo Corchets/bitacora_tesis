@@ -1,0 +1,26 @@
+A: Cambié el teléfono y al abrir la aplicación me pidió un código para confirmar la cuenta.
+B: ¿Pudiste completar el registro?
+A: Sí, llegó un mensaje con seis números. Lo puse en la pantalla y siguió.
+B: ¿Después te ofreció restaurar la copia de seguridad?
+A: Sí, encontró una copia del martes, pero no están los mensajes del miércoles.
+B: ¿La copia automática estaba programada para la noche?
+A: Eso creo. El miércoles me quedé sin espacio en la nube.
+B: Entonces puede haber quedado la copia anterior.
+A: ¿Puedo hacer otra copia ahora desde el teléfono nuevo?
+B: Sí, cuando termine de descargar las conversaciones. ¿Ya están cargadas las fotos?
+A: Algunas siguen en gris. Supongo que todavía las está bajando.
+B: Dejalo conectado al wifi y al cargador hasta que termine.
+A: ¿El código que me pidió queda guardado en algún lado?
+B: No, ese paso solo verificó la cuenta en el nuevo teléfono.
+A: Bien. Pensé que lo iba a necesitar cada vez que abra la aplicación.
+B: No, ya quedó registrada. Si instalás la aplicación en otro equipo, puede pedirte una verificación nueva.
+A: ¿Me conviene conservar el teléfono viejo unos días?
+B: Sí, hasta comprobar que están los chats y archivos que necesitás.
+A: El viejo prende, pero tiene la pantalla rayada.
+B: Podés dejarlo conectado a la red mientras terminás de pasar los datos.
+A: Voy a esperar hasta esta noche. Me faltan las fotos de la escuela.
+B: ¿La copia incluye videos también?
+A: No estoy segura, mañana miro el tamaño de la copia.
+B: Está bien. No cambies el ajuste mientras todavía se está restaurando.
+A: Gracias, ahora entiendo por qué faltan los mensajes del miércoles.
+B: De nada, que termine bien la transferencia.

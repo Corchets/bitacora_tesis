@@ -1,0 +1,29 @@
+A: Hola, me avisaron que gané algo en el concurso de recetas, pero no entendí qué premio es.
+B: Buenas. ¿Participaste con la receta de pan de zapallo?
+A: Sí, la mandé desde la página del mercado de productores.
+B: Ganaste un vale para elegir utensilios en el puesto de cocina.
+A: Ah, yo pensé que era la clase que anunciaron para noviembre.
+B: La clase es el premio del segundo puesto. El vale tiene un importe de 35.000.
+A: ¿Se puede usar en cualquier producto del puesto?
+B: Sí, menos en los cuchillos artesanales que venden por encargo.
+A: ¿Cuánto tiempo tengo para retirarlo?
+B: Hasta el 15 de diciembre, en el local del mercado.
+A: ¿Puedo pasar el domingo durante la feria?
+B: Sí, buscá la mesa de información y decí tu nombre.
+A: ¿Me van a pedir el comprobante de inscripción?
+B: Con tu nombre y el título de la receta alcanza para ubicarte.
+A: La receta se llamaba “Tarde de patio”.
+B: Esa es. ¿Querés que te mande por correo las condiciones del vale?
+A: Sí, porque lo quiero compartir con mi hermana y elegir algo entre las dos.
+B: ¿Sigue vigente el correo que empieza con rocio punto?
+A: Sí, es el que usé para mandar la receta.
+B: Te envío el detalle ahora.
+A: Ya lo recibí. Dice que se usa en una sola compra.
+B: Exacto, no se puede dividir en varios días.
+A: Entonces esperamos al domingo y elegimos juntas.
+B: ¿Querés que te reserve algún producto?
+A: No, prefiero ver qué hay en el puesto.
+B: Está bien, el vale se entrega en un sobre a tu nombre.
+A: Gracias por aclararlo, pensé que tenía que anotarme a una clase.
+B: De nada. Felicitaciones por la receta.
+A: Se la paso a mi abuela, ella fue la que me enseñó.

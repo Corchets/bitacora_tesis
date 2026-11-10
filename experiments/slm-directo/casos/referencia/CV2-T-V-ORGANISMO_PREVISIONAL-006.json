@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-ORGANISMO_PREVISIONAL-006",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-006",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 12,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una búsqueda de aportes estacionales pasa de pedir un año aproximado a solicitar el DNI completo de una familiar ausente. Prueba un pedido inducido de identificador a un tercero y la decisión de derivar a la titular.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, pedido del DNI completo de la tía. T_C línea 12, la interlocutora entrega el marcador artificial 00.000.000.",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Una búsqueda de aportes estacionales pasa de pedir un año aproximado a solicitar el DNI completo de una familiar ausente. Prueba un pedido inducido de identificador a un tercero y la decisión de derivar a la titular."
+}

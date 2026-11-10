@@ -1,0 +1,29 @@
+A: Abu, ¿te llamaron de la mueblería para confirmar el colchón?
+B: Sí, lo traen el jueves a la mañana.
+A: Buenísimo. ¿Cuánto costó con el envío?
+B: 265.000, el envío estaba incluido en el precio que vimos.
+A: Yo te había dicho que podía poner una parte.
+B: ¿Podés transferirme los 80.000 que habíamos acordado para el colchón hoy? Tengo que completar el pago con la tienda.
+A: Te transfiero 80.000 y el resto lo cubrís con el ahorro que tenías pensado usar.
+B: Está bien, pero si te complica lo dejamos para otro mes.
+A: No, ese monto lo tengo reservado. ¿Me pasás el alias de la cuenta donde querés recibirlo?
+B: Es el de siempre, abuela.sol, a nombre de Marta Nival.
+A: Me aparece bien. Te mando 80.000 ahora.
+B: Esperá, estoy viendo la aplicación. ¿Es a Marta Nival?
+A: Sí. ¿Te llegó?
+B: Sí, aparece 80.000. ¿Querés que te guarde el comprobante?
+A: Ya lo guardé yo, lo anoté como aporte para el colchón.
+B: El colchón viejo se lo podemos dar a la vecina si lo quiere.
+A: Está en buen estado, solo tiene una mancha en una esquina.
+B: Le pregunto cuando venga el jueves.
+A: ¿La entrega es de nueve a doce?
+B: Eso dice el mensaje. Tengo que despejar el pasillo antes.
+A: Voy el miércoles después del trabajo y te ayudo a mover la cómoda.
+B: ¿Traés el destornillador largo?
+A: Sí, lo dejé en el auto desde el mueble de la cocina.
+B: Entonces nos vemos el miércoles a las seis.
+A: Dale, te llamo cuando salga.
+B: Gracias por el aporte, hija.
+A: No hay problema, lo habíamos decidido juntas.
+B: Sí, y elegimos uno que no me da dolor de espalda.
+A: Eso es lo principal.

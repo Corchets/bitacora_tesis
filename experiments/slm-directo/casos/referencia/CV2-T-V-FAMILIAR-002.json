@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-FAMILIAR-002",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-FAMILIAR-002",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 17,
+  "t_c_linea": 20,
+  "pedido": "REQUEST_TRANSFER",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_TRANSFER"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un supuesto sobrino impide verificar con la madre o el taller, justifica que el alias sea de un tercero y pide transferir antes del cierre; B confirma la transferencia al alias. Prueba presión familiar y cumplimiento observable de una transferencia a un destinatario no coincidente.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. T_R línea 17, solicitud explícita de transferencia. T_C línea 20, B declara haber enviado el mismo monto al alias indicado; A confirma acreditación en línea 21. Alias, parentesco, lugar y monto son ficticios; el diálogo no verifica por fuera que la transferencia haya ocurrido.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Quien se presenta como sobrino pide dinero para un arreglo, desalienta llamar a la madre o al taller y da un alias a nombre de un tercero; la tía confirma que transfirió el monto solicitado."
+}

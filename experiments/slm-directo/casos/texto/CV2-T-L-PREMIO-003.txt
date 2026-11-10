@@ -1,0 +1,31 @@
+A: hola llamo de parte del cuarto grado por el premio de la feria de ciencias
+B: buen día qué proyecto presentaron
+A: el filtro de agua con arena y piedras que armó el grupo
+B: sí ganó una mención para el aula
+A: el premio es el kit de laboratorio que estaba en la mesa
+B: es un set de vasos medidores y lupas
+A: qué bueno lo quieren usar para seguir probando materiales
+B: la escuela puede retirarlo en la biblioteca del barrio
+A: lo puede buscar cualquiera de las familias
+B: necesitamos que lo retire una persona adulta y que firme la planilla de entrega
+A: yo soy la mamá de tomi rojas y estuve en la feria
+B: te encuentro en el listado del curso
+A: a qué hora atienden el viernes
+B: de nueve a doce y de dos a cinco
+A: mi hijo sale de la escuela a las cuatro podemos ir después
+B: sí la biblioteca cierra a las cinco
+A: el set viene en una caja grande
+B: es una caja mediana con divisores de cartón
+A: cabe en la mochila pero mejor llevo una bolsa
+B: querés que deje anotado que pasan el viernes
+A: sí así no se lo dan a otro grupo por error
+B: queda reservado para cuarto grado del colegio del parque
+A: la directora tiene que firmar también
+B: no solo la persona que lo retira y el nombre del curso
+A: perfecto le aviso a la maestra para que me dé la lista de los chicos
+B: no hace falta traer la lista solo confirmar el curso
+A: bien entonces vamos al salir
+B: la entrada es por la calle lateral junto al patio
+A: la conozco estuvimos ahí en la charla de lectura
+B: listo te esperamos el viernes
+A: gracias los chicos se van a poner contentos

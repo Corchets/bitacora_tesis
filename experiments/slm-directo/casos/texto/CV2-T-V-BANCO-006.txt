@@ -1,0 +1,24 @@
+A: Soy de coordinación de retiros del banco. El depósito en efectivo de ayer quedó observado.
+B: ¿Qué observación?
+A: El comprobante marca un monto, pero la caja del autoservicio no cerró el lote.
+B: Yo dejé el sobre en la sucursal.
+A: Sí, figura recibido, pero no quedó el efectivo conciliado.
+B: ¿Y cómo se resuelve?
+A: Primero tengo que verificar el importe declarado en el comprobante.
+B: ¿No lo tienen ustedes?
+A: El sistema muestra ciento ochenta y seis mil, pero no el contenido del sobre.
+B: ¿Qué necesitan de mí?
+A: Prepará ese mismo importe en efectivo para que lo retire el supervisor y lo compare con el registro.
+B: ¿Me estás pidiendo que entregue plata en mi casa?
+A: Sí, lo pasa a buscar un mensajero asignado al cierre.
+B: No voy a darle efectivo a alguien que no conozco.
+A: La visita no genera recibo hasta que termina el cotejo.
+B: Entonces no hay comprobante de entrega.
+A: No por este canal; si esperás a la sucursal, el depósito puede quedar observado hasta la semana que viene.
+B: Yo preferiría ir con el comprobante, me preocupa quedarme sin nada que acredite esto.
+A: La gestión queda registrada acá; si espera hasta mañana el lote se cierra y no puedo sostenerla. No hace falta avisar a la sucursal.
+B: Bueno, si queda registrado como decís, preparo el sobre. ¿El mensajero ya está viniendo?
+A: Sí, está llegando. Quedate en línea; cuando esté en la puerta te va a decir que viene por el cierre.
+B: Llegó alguien que dijo venir por el cierre y le di el efectivo en un sobre.
+A: Ya figura como retirado, gracias.
+A: Te van a llamar cuando terminen el cotejo.

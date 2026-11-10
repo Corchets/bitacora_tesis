@@ -1,0 +1,20 @@
+A: Buenas tardes, del centro de pagos previsionales. Hay una devolución que no se pudo asociar al expediente.
+B: ¿De cuánto es?
+A: Todavía no aparece el importe, solo que el titular cambió de boca de cobro.
+B: Yo no cambié nada.
+A: Puede ser una modificación automática que quedó incompleta.
+B: ¿Qué dato necesitan?
+A: El número de beneficio y el domicilio actual para revisar a qué oficina corresponde.
+B: ¿El domicilio completo?
+A: Sí, calle, altura y código postal.
+B: No lo voy a decir por teléfono.
+A: Si no se confirma, la devolución queda pendiente hasta el próximo pago.
+B: ¿Me pueden enviar una notificación escrita?
+A: No hasta que el domicilio esté actualizado.
+B: Entonces voy a entrar al portal.
+A: El portal no muestra la devolución todavía.
+B: Igual lo reviso por ahí.
+A: Está bien.
+B: Chau.
+A: Hasta luego.
+B: Buenas tardes.

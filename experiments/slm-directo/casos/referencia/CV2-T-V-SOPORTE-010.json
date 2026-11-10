@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-SOPORTE-010",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-SOPORTE-010",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "Un respaldo de fotos ligado a una tablet anterior se usa para solicitar la contraseña pasada en una ventana nueva. Prueba un pedido indirecto de secreto y resistencia ante una posible pérdida de tiempo.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta provisional D07: línea 9 instruye a usar la frase de recuperación, que podría ser el primer secreto solicitado; línea 11 aclara que se refiere a la contraseña anterior, y línea 13 confirma dónde escribirla. Se marca línea 9 hasta acordar el criterio. No hay cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-SOPORTE-CLAVE-01",
+  "situacion": "Un respaldo de fotos ligado a una tablet anterior se usa para solicitar la contraseña pasada en una ventana nueva. Prueba un pedido indirecto de secreto y resistencia ante una posible pérdida de tiempo."
+}

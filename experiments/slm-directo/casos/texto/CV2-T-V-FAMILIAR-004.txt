@@ -1,0 +1,30 @@
+A: Buenas, ¿hablo con la mamá de Abril?
+B: Sí, soy yo.
+A: Soy la coordinadora del viaje de egresados, estoy cerrando la lista del micro.
+B: ¿Qué falta?
+A: Tenemos dos Abril en el curso y necesito confirmar cuál es la que viaja con ustedes.
+B: La de quinto B.
+A: Perfecto. Para corregir el seguro del pasajero, dictame el DNI completo de ella y fecha de nacimiento.
+B: ¿De qué agencia llamás?
+A: Del equipo que está con la escuela, el listado nos llegó incompleto.
+B: La escuela no me avisó de un seguro nuevo.
+A: La directora quiere que salga hoy porque mañana entregan los vouchers.
+B: ¿Me podés mandar un correo institucional?
+A: Estoy con una planilla impresa y no tengo acceso al correo desde acá.
+B: ¿Cómo se llama la directora?
+A: La profe de sociales, la que organizó la reunión.
+B: Hay dos profes de sociales.
+A: Sí, la que usa lentes, disculpá, estoy atendiendo a varios padres.
+B: No voy a dar el documento por teléfono.
+A: Si no lo anotamos, puede quedar sin cobertura.
+B: Voy a consultar directamente con la escuela.
+B: No voy a dar el documento de mi hija sin una nota de la escuela.
+A: La directora pidió cerrar la lista hoy.
+B: Voy a llamar al número que figura en el cuaderno de comunicaciones.
+A: Ahí puede atender otra persona.
+B: Le voy a pedir que me derive con la secretaría.
+A: El micro sale mañana temprano.
+B: Si falta un dato, puedo llevarlo cuando la deje.
+A: No sé si van a aceptar una corrección a último momento.
+B: Primero confirmo con la escuela.
+A: Como prefieras.

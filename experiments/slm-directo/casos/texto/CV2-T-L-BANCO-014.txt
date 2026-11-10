@@ -1,0 +1,27 @@
+A: Buen día, quiero cerrar una cuenta de ahorro que ya no uso.
+B: Hola. ¿Querés cerrar la cuenta en pesos o la cuenta para ahorro programado?
+A: La de ahorro programado. Termina en 3885.
+B: Antes de solicitar el cierre, revisamos si tiene movimientos pendientes o débitos asociados.
+A: No la uso desde el año pasado. ¿Me confirmás si quedó algún cargo?
+B: Veo un débito automático de una aplicación de música, previsto para el viernes.
+A: Ah, pensé que lo había pasado a la tarjeta. ¿Se puede mover primero?
+B: Desde acá no podemos cambiar el medio de pago de otra empresa. Tenés que actualizarlo con ese proveedor.
+A: Si cierro hoy, ¿el débito rebota?
+B: Puede ser rechazado y el proveedor podría cobrar una comisión. Te conviene actualizarlo antes.
+A: Entonces no la cierro todavía. ¿Puedo dejarla sin tarjeta pero activa?
+B: Sí, la cuenta no tiene una tarjeta vinculada. Podés mantenerla sin uso hasta que cambies el débito.
+A: ¿Me cobran mantenimiento?
+B: En este paquete no hay cargo si el saldo está en cero.
+A: Tengo 240 pesos que quedaron de una devolución. ¿Los puedo transferir a mi cuenta principal?
+B: Sí, desde movimientos elegís transferir entre cuentas propias.
+A: La principal termina en 4901, a mi nombre.
+B: La veo. ¿Querés mover los 240 completos?
+A: Sí, así queda en cero y la cierro cuando termine el débito de música.
+B: Te recomiendo esperar a que ese último cargo se procese antes de iniciar el cierre.
+A: ¿Cuándo puedo volver a llamar?
+B: El lunes siguiente al débito ya vas a ver si se cobró.
+A: Lo anoto. La transferencia entre mis cuentas ya quedó hecha.
+B: Sí, la veo completada.
+A: Entonces espero al lunes para cerrar la otra.
+B: Perfecto, queda registrada la consulta pero no modificamos el estado de la cuenta.
+A: Gracias por revisar todo antes.

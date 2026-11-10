@@ -1,0 +1,28 @@
+A: El proveedor de editoriales avisó que pasa a las cuatro, no a las seis.
+B: Yo a las cuatro estoy en caja. ¿Quién revisa las cajas?
+A: Puedo salir diez minutos del mostrador si queda alguien cubriendo.
+B: La nueva está aprendiendo, todavía no maneja devoluciones.
+A: Le pido a Tomi que se quede en caja mientras hacemos el recuento.
+B: ¿Ya tenemos separados los libros de muestra?
+A: Sí, están en la mesa del fondo con una etiqueta verde.
+B: Hay que comparar los títulos con la hoja de préstamo.
+A: La hoja está en la carpeta de editoriales, abajo del mostrador.
+B: ¿La caja vacía para el envío está en el depósito?
+A: Quedan dos, una grande y una mediana.
+B: Usemos la mediana, así no se mueven los libros.
+A: El proveedor dijo que trae el remito impreso.
+B: ¿Firmamos los dos ejemplares?
+A: Uno queda para la librería y otro se lleva él.
+B: ¿Quién guarda la copia después?
+A: Yo la escaneo y la subo a la carpeta del mes.
+B: ¿El depósito está ordenado para mover la caja?
+A: Hay paquetes de cuadernos en el pasillo. Los saco antes del mediodía.
+B: ¿Necesitás que te ayude?
+A: Sí, cuando vuelva del banco. Son pesados.
+B: Salgo a la una y cuarto y vuelvo enseguida.
+A: Gracias. ¿El proveedor pide que le paguemos algo al retirar?
+B: No, esta visita es solo para devolver muestras.
+A: Bien. Entonces nos encontramos a las cuatro en la mesa del fondo.
+B: Listo, le aviso a Tomi del cambio de horario.
+A: Yo actualizo el cartel de atención.
+B: Perfecto.

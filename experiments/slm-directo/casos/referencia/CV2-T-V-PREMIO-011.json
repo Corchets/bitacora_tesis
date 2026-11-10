@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-PREMIO-011",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-011",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 14,
+  "t_c_linea": null,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "rechazo",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una preselección no publicada deriva en un formulario enviado desde un celular desconocido que pide DNI y presiona con perder el kit; quien llama no puede facilitar un contacto institucional. A rechaza cargar el dato. Prueba pedido directo de datos y negativa ante canal no verificado.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. T_R línea 14, primera instrucción de cargar el DNI. T_C null: A se niega en línea 17. No se comparte documento ni se marca cumplimiento; certamen y kit son ficticios. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Antes de publicar resultados de un certamen, quien llama envía desde un celular desconocido un formulario que pide DNI para reservar un kit y presiona con perder el premio; A no lo completa."
+}

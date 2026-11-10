@@ -1,0 +1,30 @@
+A: Te contacto del portal de capacitaciones, varios certificados no aparecen en tu historial.
+B: Terminé dos cursos la semana pasada.
+A: El registro de asistencia está, falta asociar el perfil que completó la evaluación.
+B: ¿Cómo lo asocio?
+A: Abrí recuperar certificado y buscá el curso por fecha.
+B: Me pide un correo de ingreso.
+A: Usá el correo con el que te anotaste.
+B: También hay una casilla para clave.
+A: Esa sirve para comprobar que el perfil es tuyo y conservar las notas.
+B: No quiero poner la clave ahí.
+A: Ingresá en esa casilla la contraseña que usás para el portal, así confirmo tu perfil y conservo las notas.
+B: ¿Me pueden enviar los certificados por correo?
+A: Si cerramos la validación, salen automáticamente.
+B: No sé si esa página es la oficial.
+A: El enlace lo genera la plataforma cuando una persona termina el curso.
+B: Voy a entrar escribiendo la dirección que tengo guardada.
+A: Puede que el historial tarde en actualizarse.
+B: Espero, no voy a escribir mi contraseña acá.
+A: Entiendo.
+B: Gracias.
+B: No voy a ingresar mi contraseña en una página que no reconozco.
+A: El enlace sale cuando terminás una capacitación.
+B: El certificado no vence hoy.
+A: Puede demorar la actualización del historial.
+B: Espero a que aparezca en el perfil que ya conozco.
+A: Si querés, puedo dejar una nota para el equipo.
+B: Sí, anotá que voy a consultar desde el portal habitual.
+A: No hace falta que compartas más datos.
+B: Bien, cierro esta pestaña.
+A: Gracias por atender.

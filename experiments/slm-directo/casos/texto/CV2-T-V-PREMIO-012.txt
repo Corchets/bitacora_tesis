@@ -1,0 +1,18 @@
+A: Buenas, de la campaña de entradas del teatro comunitario.
+B: ¿Qué pasó con el sorteo?
+A: Te salió una entrada doble, pero la fila de retiro quedó a nombre de una persona distinta.
+B: Yo completé la encuesta.
+A: El sistema tiene tu respuesta, pero no el teléfono que confirma la reserva.
+B: ¿Qué hay que hacer?
+A: Abrí el aviso que llegó al celular y aceptá el pase para dos personas.
+B: Me aparece una pantalla de iniciar sesión.
+A: Es para vincular la entrada al perfil de espectador.
+B: ¿Me pide contraseña?
+A: Sí, ingresá la clave que usás en la cuenta del teatro.
+B: Ya ingresé la clave del teatro en la pantalla.
+A: El perfil de espectador quedó vinculado.
+B: ¿Puedo pasar por boletería igual?
+A: Sí, pero el personal está cerrando la lista de hoy.
+B: Bueno, espero la confirmación.
+A: Entiendo.
+B: Chau.

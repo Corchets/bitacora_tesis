@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-ORGANISMO_PREVISIONAL-008",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-008",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 7,
+  "t_c_linea": 14,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 14,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "El cierre de un legajo de una persona fallecida deriva en solicitar documento y domicilio de otra persona. Se divulga el documento completo, pero luego se rechaza la dirección: prueba una entrega parcial del pedido compuesto que una negativa posterior no revierte.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** D07/D08 abiertas. T_R línea 7 solicita documento y domicilio. T_C candidato en línea 14 registra solo el documento completo; el domicilio se rechaza en línea 16. D07 debe revisar la marca de cumplimiento parcial y D08 su tratamiento. El número y las personas son ficticios; no se valida ninguna identidad real. Decisiones abiertas: [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Un supuesto cierre de expediente por fallecimiento pide documento y domicilio de la hija del titular, sin que ella participe; quien llama descarta notificarla y presiona con demoras. B entrega el DNI completo ficticio y se niega a dar la dirección."
+}

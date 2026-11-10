@@ -1,0 +1,31 @@
+A: hola terminé la instalación de la bomba en el vivero
+B: qué tal quedó el caudal
+A: estable pero la presión sube cuando abren las dos mangueras
+B: el cliente probó los dos sectores al mismo tiempo
+A: sí y no escuchamos ruidos en la válvula
+B: anotaste la medición de entrada y salida
+A: entrada cuatro punto dos salida tres punto nueve
+B: el manómetro estaba calibrado
+A: lo revisé antes de salir de la oficina
+B: dejaste la ficha técnica con el encargado
+A: sí firmó la copia azul
+B: traé la otra para archivarla
+A: la tengo en la camioneta junto con las llaves
+B: vas a volver mañana o lo dejamos para la semana que viene
+A: el encargado quiere que pasemos el jueves a la mañana
+B: yo puedo acompañarte así revisamos la presión con las dos líneas abiertas
+A: dale además hay que ajustar el soporte del tanque
+B: tenemos el tornillo largo en el depósito
+A: creo que queda uno en la caja gris
+B: lo busco antes de que vuelvas
+A: a qué hora te queda bien salir
+B: ocho y media así llegamos antes de que abran el vivero
+A: perfecto confirmo la visita con el encargado
+B: la bomba queda funcionando hasta entonces
+A: sí la dejamos con el caudal bajo
+B: anotá ese ajuste en la hoja de mantenimiento
+A: ya lo hice y le saqué una foto al tablero
+B: mandala al correo del proyecto
+A: la envío ahora
+B: cuando vuelvas dejá las herramientas en el estante de entrada
+A: listo

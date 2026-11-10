@@ -1,0 +1,20 @@
+A: Buenas te contacto por una caja de libros que quedó en una lista de premios
+B: Qué premio
+A: Se sorteó entre participantes de la jornada de lectura del sábado
+B: Mi nombre salió
+A: Hay una coincidencia pero el registro todavía no cerró
+B: Dónde puedo ver la lista
+A: Está pendiente de publicación por la organización
+B: Quién organiza
+A: El equipo de la jornada
+B: No me acuerdo de haber dejado mis datos
+A: Puede ser que te anotaran desde una escuela
+B: Qué escuela
+A: La ficha no muestra la institución todavía
+B: Puedo llamar al centro cultural
+A: Esperá a que terminemos la revisión si se duplica la consulta se reinicia el turno
+B: No entiendo por qué me llaman sin poder decirme quién anotó
+A: El sistema está cargando
+B: Voy a consultar directamente con la organización
+A: De acuerdo
+B: Chau

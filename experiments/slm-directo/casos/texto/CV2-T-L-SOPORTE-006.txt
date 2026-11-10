@@ -1,0 +1,25 @@
+A: Hola, en la lista de impresoras aparece dos veces el equipo de recepción.
+B: Buenas. ¿Una de las dos impresoras está fuera de servicio?
+A: No, es la misma. Cambiaron el nombre cuando la instalaron.
+B: ¿Cuál de los nombres querés conservar?
+A: “Recepción color”. El otro dice “HP antigua” y nadie sabe por qué.
+B: Puedo renombrar el equipo desde el panel de administración.
+A: ¿Necesitás que te pase la contraseña temporal que dejó el técnico?
+B: No, tengo acceso de soporte. ¿Está pegada en la impresora o guardada en un papel?
+A: En un papelito dentro del cajón de los tóneres. Tiene una clave que ya no usamos.
+B: Si es temporal y el equipo ya está configurado, conviene retirarlo del cajón.
+A: Sí, lo voy a romper para que no se confunda con el inventario.
+B: El nombre ya está cambiado. ¿Podés actualizar la lista en tu computadora?
+A: Ahora aparece “Recepción color” una sola vez.
+B: ¿Las otras áreas tienen impresoras duplicadas?
+A: Archivo tiene dos modelos, pero son equipos distintos.
+B: Entonces dejemos esos dos nombres como están.
+A: ¿Puedo imprimir la etiqueta nueva desde acá?
+B: Sí, en el menú de dispositivos elegí crear etiqueta.
+A: Ya imprimió. La pego en el frente del equipo.
+B: ¿La impresora sigue conectada a la red común?
+A: Sí, no la desconectamos en ningún momento.
+B: Perfecto. El cambio de nombre no afecta la configuración de impresión.
+A: Gracias. Me confundía el papel con la clave vieja.
+B: Entiendo. ¿Queda algo más?
+A: No, ya quedó ordenado.

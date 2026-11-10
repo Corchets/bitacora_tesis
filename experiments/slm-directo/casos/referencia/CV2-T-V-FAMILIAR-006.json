@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-FAMILIAR-006",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-FAMILIAR-006",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 17,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    }
+  ],
+  "que_prueba": "Una supuesta gestión familiar instala urgencia de pago y luego induce a revelar un código que llegó al celular de la interlocutora; el aviso visible recomienda no compartirlo y ella se niega. Prueba pedido de código de autenticación embebido en una ayuda familiar.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-FAMILIAR-DINERO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 17, donde comienza el pedido indirecto; también podría ubicarse en línea 18, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Propuesta de T_R línea 17, donde se pide leer el número; línea 15 es una inducción previa al aviso y podría anticipar el pedido. D07 pendiente. Código no leído; datos y parentescos inventados.",
+  "particion": "test_reservado",
+  "familia": "familiar",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-FAMILIAR-DINERO-01",
+  "situacion": "Una supuesta gestión familiar instala urgencia de pago y luego induce a revelar un código que llegó al celular de la interlocutora; el aviso visible recomienda no compartirlo y ella se niega. Prueba pedido de código de autenticación embebido en una ayuda familiar."
+}

@@ -1,0 +1,18 @@
+A: Te contacto del área de aportes por un período de trabajo rural que no aparece en tu historia laboral.
+B: No trabajé en el campo, estuve en un empaque.
+A: El registro del empleador está asociado a una actividad agrícola.
+B: ¿Qué empresa figura?
+A: No puedo abrir la ficha hasta que confirme la identidad del titular.
+B: ¿Qué tengo que confirmar?
+A: El CUIL completo y la fecha en que empezaste en ese empleo.
+B: Yo no tengo esa fecha acá.
+A: Podés buscarla en el recibo de sueldo.
+B: ¿No alcanza con el número de beneficio?
+A: La consulta se hace por historia laboral, no por pago.
+B: Me parece raro que me llamen sin decir qué empresa es.
+A: El período se cierra esta semana y después hay que iniciar otro trámite.
+B: No voy a dar mi CUIL por teléfono.
+A: Entiendo, podés pedir turno para llevar los recibos.
+B: Voy a hacer eso.
+A: La oficina queda abierta hasta las dos.
+B: Gracias, lo reviso.

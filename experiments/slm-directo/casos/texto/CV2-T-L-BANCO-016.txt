@@ -1,0 +1,26 @@
+A: Hola, en el resumen aparece “código 07” y una comisión de 1.200 pesos. No sé de qué es.
+B: Buenas. ¿En qué mes aparece el cargo?
+A: En octubre, después del pago de la tarjeta.
+B: ¿Tenés el tipo de cuenta donde lo ves?
+A: La caja de ahorro que abrí cuando empecé a trabajar en la librería.
+B: ¿La cuenta recibe acreditación de sueldo todos los meses?
+A: No desde que cambié de empleo. Ahora cobro por otra entidad.
+B: Puede ser el cargo de mantenimiento del paquete, que depende de la acreditación mensual.
+A: ¿El código 07 es parte de la descripción?
+B: Sí, es una referencia interna del concepto. El detalle completo dice mantenimiento de cuenta.
+A: El mes pasado no me lo cobraron.
+B: En septiembre hubo una bonificación que terminó al cierre del período.
+A: ¿Puedo pasar a un paquete sin costo?
+B: Puedo revisar las opciones disponibles. ¿Usás cheques o una tarjeta adicional?
+A: No, solo pago servicios desde ahí una vez por mes.
+B: Hay una cuenta básica sin cargo, pero no incluye tarjeta de crédito ni beneficios del paquete.
+A: No necesito la tarjeta. La de débito me alcanza.
+B: La tarjeta de débito se mantiene. Si querés, te explico cómo hacer el cambio desde la aplicación.
+A: Prefiero leerlo primero. ¿El cargo de octubre se puede devolver?
+B: No puedo confirmarlo sin revisar las condiciones de la bonificación anterior.
+A: ¿Me mandás la información por correo?
+B: Puedo dejarte un enlace a las condiciones dentro de la aplicación.
+A: Bueno, lo miro después de trabajar.
+B: La comisión ya aparece desglosada en el resumen.
+A: Ahí la veo. Gracias por traducir el código.
+B: A vos, que tengas buen día.

@@ -1,0 +1,33 @@
+A: Hola, en el inventario siguen apareciendo las cantidades de ayer aunque cerramos hace una hora.
+B: Buenas. ¿En qué sucursal estás trabajando?
+A: En el local del paseo, turno de la tarde.
+B: ¿El cierre de caja quedó confirmado en la computadora principal?
+A: Sí, me salió el mensaje verde y guardé el comprobante.
+B: ¿Qué equipo estás usando para consultar el inventario?
+A: La tablet chica que está junto al depósito.
+B: ¿Estás conectada a la red del local o a los datos del teléfono?
+A: A la red del local. El ícono de wifi está normal.
+B: ¿Me confirmás el nombre que figura en la cuenta del inventario?
+A: Sofía Ledesma, encargada de la tarde.
+B: Gracias. Veo una última sincronización a las 16:10. ¿El cierre fue después de esa hora?
+A: A las 17:05. Había tres cajas de yerba, pero el sistema muestra cinco.
+B: El cierre sí entró; la tablet no actualizó la vista.
+A: ¿Tengo que cerrar la aplicación y abrirla otra vez?
+B: Probá actualizar desde el menú de opciones. No hace falta cerrar la sesión.
+A: Ahora cambió, aparecen tres cajas.
+B: ¿También se actualizó el café molido?
+A: Sí, de siete bajó a cuatro. Esos son los números que contamos.
+B: Perfecto. ¿El equipo principal muestra lo mismo?
+A: Sí, acabo de mirar. Coincide con la tablet.
+B: Entonces quedó sincronizado. ¿Querés que revisemos el próximo cierre?
+A: No, con esto alcanza. Pero el martes pasado tardó lo mismo.
+B: ¿Recordás el horario aproximado del cierre anterior?
+A: Cerca de las seis y media, justo antes de que cortaran la luz.
+B: Puede haber quedado en cola cuando volvió la conexión. Voy a dejar esa observación para el soporte del producto.
+A: Gracias. ¿Necesitás que te mande el comprobante de hoy?
+B: Sí, subilo al formulario de asistencia con el número de tienda.
+A: Lo adjunto ahora. ¿El número es el que aparece abajo del recibo?
+B: Exacto, empieza con 44.
+A: Ya lo envié. Te aviso si vuelve a quedar desactualizado.
+B: Dale, queda asociada la consulta 2307.
+A: Muchas gracias.

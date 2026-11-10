@@ -1,0 +1,2493 @@
+{
+  "_meta": {
+    "fecha": "2026-11-07",
+    "para": "#45: quién inicia cada llamada de la reserva, para el alcance del ADR 0003 (entrantes de números no agendados)",
+    "regla": {
+      "inicia": "otra si OTRA hizo esta llamada (PROTEGIDA atiende u OTRA se presenta como quien llama, aunque devuelva un llamado o llame por un trámite previo); protegida si la hizo PROTEGIDA (OTRA atiende con el saludo de una empresa u organismo, o PROTEGIDA dice que llama o devuelve el llamado); no_se_sabe si el texto no alcanza.",
+      "numero": "agendado solo si el texto muestra que OTRA es un contacto que llama desde su teléfono de siempre (PROTEGIDA la reconoce y saluda por el nombre antes de que se presente, o dice que vio que era ella); si no, no_agendado.",
+      "alcance": "dentro si inicia = otra y numero = no_agendado; fuera si inicia = protegida o numero = agendado; dudoso si inicia = no_se_sabe.",
+      "origen": "Copiada de _meta.regla de alcance-desarrollo.json (rama exp/143-puntaje-token, 2026-11-06)."
+    },
+    "roles": "La reserva no tiene roles-protegida.json, así que el mismo agente marcó primero quién es PROTEGIDA, con esta regla escrita antes de anotar: 1) si una parte habla en nombre de una empresa, banco, organismo, comercio, servicio o institución, o dice hacerlo, PROTEGIDA es la otra; 2) si las dos hablan como particulares, PROTEGIDA es a quien le piden, le proponen o le aconsejan algo; 3) si con eso no alcanza, PROTEGIDA es quien atiende la llamada, con rol_dudoso = true (el mismo criterio de roles-protegida.json para desarrollo, 2026-11-04).",
+    "precision_r2": "Precisión de inicia, 2026-11-07. Decidir en este orden: 1) si alguien dice que llama o que devuelve un llamado, o si alguien atiende con el saludo de una empresa u organismo, eso decide, como en la regla; 2) si no, quien abre presentándose o con el motivo de la llamada («te habla…», «te llamo de…», «¿hablo con…?», «quería consultar…», «tengo un problema con…») es quien llamó, y quien responde con una fórmula de atender («hola», «¿sí?», «diga», «¿quién habla?», «¿en qué te puedo ayudar?») es quien atendió, aunque nadie diga literalmente «llamo»; 3) no_se_sabe solo si con 1 y 2 no alcanza o si hay señales de los dos lados que se contradicen.",
+    "metodo": "Anotación a ciegas por cuatro agentes que leyeron solo las transcripciones con A/B y líneas numeradas, renombradas llamada-001…200 y mezcladas (semilla 45): sin case_id, clase, referencia, prompts ni resultados. Cada uno anotó 60: un lote de 50 y los 10 primeros del lote siguiente, así que 40 llamadas tienen dos anotaciones. La sesión que preparó la entrada guardó la clave aparte y procesó la reserva con scripts, sin leer las transcripciones (test_alcance.py). En la primera pasada, inicia coincidió en 30/40 de las llamadas con dos anotaciones y los roles en todas: unos anotadores exigían que alguien dijera literalmente que llama y otros lo deducían de cómo empieza la conversación. Se escribió la precisión r2 sin mirar las llamadas ni la clase, y cada agente volvió a anotar su lote.",
+    "acuerdo": {
+      "inicia_primera_pasada": "30/40",
+      "todo_igual_r2": "40/40"
+    },
+    "desacuerdos": "0; regla escrita antes de unir: si las dos anotaciones no coinciden, inicia = no_se_sabe (alcance dudoso).",
+    "conteo": {
+      "dentro": 126,
+      "fuera": 74
+    },
+    "por_clase": {
+      "estafas": {
+        "casos": 100,
+        "alcance": {
+          "dentro": 100
+        },
+        "inicia": {
+          "otra": 100
+        },
+        "agendado": 0,
+        "rol_dudoso": 0
+      },
+      "legitimas": {
+        "casos": 100,
+        "alcance": {
+          "dentro": 26,
+          "fuera": 74
+        },
+        "inicia": {
+          "otra": 26,
+          "protegida": 74
+        },
+        "agendado": 1,
+        "rol_dudoso": 9
+      }
+    },
+    "advertencia": "Este archivo nombra casos de la reserva y cita frases cortas de sus transcripciones: no va a laboratorio-main. Nadie corrió detectores sobre la reserva para hacerlo."
+  },
+  "casos": {
+    "CV2-T-V-BANCO-020": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como del banco y le avisa a B de una tarjeta duplicada; A origina el contacto.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-014": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L16: A dice 'te contacto por una caja de libros' y B pregunta por qué la llaman.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'hola decime' y B se presenta como de la comisión de la peña.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'te llamo por un obsequio' de una campaña; se presenta como quien llama.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-010": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como pareja del hermano de B y le pregunta si puede atender.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como de prevención del banco y le informa a B un débito rechazado.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Hola.' y B dice 'te llamo por el grupo de la comisión'.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-017": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo de la llamada (la clave del estéreo); por paso 2 llamó A, que es OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2: A le propone a B llevar a la madre y copiar el manual (L13, L21).",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-WHATSAPP-001": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo, pedir el número de la administradora; por paso 2 llamó A, que es OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2 por los pedidos centrales de A (L1, L9); B también aconseja y pide (L6, L16, L20).",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-006": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'te llamo del festival de teatro' por un pase.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-010": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo, si B miró lo del micro; por paso 2 llamó A, que es OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2: A le pide la transferencia a B (L7). Quién le paga a quién es incoherente (L6-L7, L18).",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-006": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L23: A dice 'te llamo por el grupo de intercambio' y B no sabe quién es.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con '¿Sí?' y B, del banco, dice que la llama por un cheque.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-014": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2, L12: A se presenta del banco con el motivo; B no sabe de qué se trata y menciona la llamada recibida.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Hola, decime.' y B dice que llama del soporte de Dibujo Sur.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'te llamo de la administración del edificio'.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'te llamo del área de legajos' por una prestación.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-017": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2, L14: A atiende saludando, B se presenta del soporte y dice que la llamada sale de una central.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-DELIVERY-002": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A abre con su reclamo por el envío y B, del servicio, la atiende saludando y pidiendo el número.",
+      "nota": "Sin 'llamo' explícito: se infiere que A llamó al servicio de envíos.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-TRABAJO-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo, dónde hacer el almuerzo de cierre; por paso 2 llamó A, que es OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2: A propone y le pide a B la transferencia de la seña (L5, L19, L23); B propone menos (L10).",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-TRABAJO-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo, avisar que terminó la instalación; por paso 2 llamó A, que es PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2: B le pide e indica tareas a A (L12, L26, L28, L30).",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-MEDICO-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A dice que 'quería saber cómo llegar' y B la atiende con 'Buen día' preguntando la sede.",
+      "nota": "Sin 'llamo' explícito: se infiere que A llamó al centro de terapia.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-WHATSAPP-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2, L8-L10: A plantea su problema con el grupo y B la atiende saludando y la busca en el listado.",
+      "nota": "Sin 'llamo' explícito; B actúa como quien administra la lista de guardia del taller.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-ESCUELA-005": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como preceptora y dice 'te llamo por una campera'.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como hermana de Pablo y dice que llama desde otro número.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L12: A dice 'te contacto del área de aportes' y B objeta que la llamen.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Hola, buen día.' y B se presenta de la campaña del cine.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-003": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo, el gasto del súper para los padres; por paso 2 llamó A, que es OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2: A le pide a B que le transfiera su mitad (L7); B también aconseja (L16).",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-WHATSAPP-002": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo, si B habló con la voluntaria; por paso 2 llamó A y atendió B.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Roles: pedidos y propuestas en ambos sentidos (L3-L6, L16); por regla 3, PROTEGIDA es B, que atiende.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-PREMIO-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'llamo de parte del cuarto grado' por el premio.",
+      "nota": "A es una madre (L11); B actúa por la organización que entrega el premio (L8-L10).",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'Llamo del centro de límites del banco'.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-022": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L6: A dice que llama por la tarjeta del banco y B pregunta por qué llama de número privado.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-012": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'te llamo del portal de proveedores'.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A dice 'llamo por una constancia de aportes' y B la atiende por el organismo.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-PREMIO-015": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Sí, te escucho.' y B dice que llama del equipo de regalos.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Hola, decime.' y B se presenta de la librería.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'te llamo del banco' por un débito.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A se presenta del centro de pagos y le informa a B un problema de su expediente; B no sabía nada.",
+      "nota": "El saludo institucional de L1 no es de atención: A trae el motivo del contacto.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'sí' y B pregunta si habla con quien lleva las llaves.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-012": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "agendado",
+      "evidencia": "L1: A abre con el motivo, el colchón, así que llamó A; y nombra a B 'Abu' antes de que hable (agendado).",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. numero sigue agendado por el saludo con nombre, aunque llamó A. Regla 2: B le pide la transferencia a A (L6).",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-DELIVERY-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A plantea el problema de su entrega y B, del comercio, la atiende con 'Hola' ofreciendo reprogramar.",
+      "nota": "Sin 'llamo' explícito: se infiere que A llamó al comercio.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2, L14: A atiende con 'Sí, te escucho.' y B dice que llama del organismo previsional.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-012": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L3: A se presenta de la campaña del teatro y, sin pedirle datos, le anuncia a B su premio.",
+      "nota": "L1 podría leerse como saludo de atención, pero A es quien trae la novedad.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'buenas tardes' y B se presenta del soporte; luego diagnostica sin pedirle datos.",
+      "nota": "L2 podría leerse como saludo de atención de una empresa; se toma L1 como saludo de quien atiende.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Hola.' y B se presenta del soporte con el problema del lector.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-SOPORTE-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A plantea el problema del inventario y B, del soporte, la atiende con 'Buenas' pidiendo la sucursal.",
+      "nota": "Sin 'llamo' explícito: se infiere que A llamó al soporte.",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-WHATSAPP-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre contando su problema con el código del teléfono nuevo; por paso 2 llamó A, que es PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2: B le aconseja a A cómo completar la restauración (L12, L18, L24).",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-FAMILIAR-014": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Sí, te escucho.' y B se presenta como amigo de su hija.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con '¿Sí?' y B dice que llama de soporte de Factura Simple.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-010": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice 'Te llamo del servicio de respaldo Nube Clara'.",
+      "nota": "",
+      "lotes": [
+        "lote-1"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'hola' y B dice 'te llamo por el recibo de pensión'.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-MEDICO-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L3: A consulta por su radiografía y B, del centro, la atiende con 'buenas' pidiendo la sede.",
+      "nota": "Sin 'llamo' explícito: se infiere que A llamó al centro de diagnóstico.",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Hola.' y B dice que le habla de tarjetas del banco.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-PREMIO-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A dice 'llamo por el sorteo de la asociación' y B la atiende con 'buen día'.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-SOPORTE-015": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende preguntando quién habla y B se presenta del soporte de cámaras.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-006": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A se presenta como tío de Mica y B, que atendió, pregunta quién habla.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-005": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre con el motivo, el cambio de horario del ensayo; por paso 2 llamó A, que es OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2. Regla 2: A le pide a B que lleve a los chicos (L5) y le ofrece ayuda (L15, L25).",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-013": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A atiende con 'Sí, te escucho.' y B dice que llama de soporte del reloj.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-MEDICO-002": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1-L2: A consulta por su análisis y B, del laboratorio, la atiende con 'buen día' preguntando el tipo.",
+      "nota": "Sin 'llamo' explícito: se infiere que A llamó al laboratorio.",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-FAMILIAR-015": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como secretaria del club y pregunta si habla con la mamá.",
+      "nota": "",
+      "lotes": [
+        "lote-1",
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es OTRA, abre con el motivo (llevar la mesa el sábado) y B responde a eso. Llamó OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). Propuestas en los dos sentidos; tomo la inicial de A a B (L1). Parecen familiares, sin saludo por nombre: no_agendado.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-DELIVERY-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (la pieza que falta en su pedido) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-FAMILIAR-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L8: A pregunta «¿hablo con la mamá de Abril?» y B le pregunta «¿De qué agencia llamás?».",
+      "nota": "A dice coordinar el viaje con la escuela (regla 1).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-019": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con un saludo y B dice «Te llamo del área de actualización de transferencias».",
+      "nota": "B no nombra la entidad, pero habla como un área bancaria (regla 1).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-TRABAJO-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es OTRA, abre con el motivo (la carpeta que dejó en la sede) y B responde a eso. Llamó OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). A le pide a B traer la carpeta (L13), así que PROTEGIDA es B. Son del mismo trabajo, sin saludo por nombre: no_agendado.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-TRABAJO-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (los rollos de tela que faltan) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). B le da indicaciones a A (L12, L18, L30), así que PROTEGIDA es A. Son del mismo trabajo, sin saludo por nombre.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-011": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con un saludo y B se presenta «Hola, del banco».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-015": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con un saludo y B dice «te llamo de conciliación del banco».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-PREMIO-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (su duda sobre el premio) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). A menciona un aviso previo, pero no dice que devuelve un llamado.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-WHATSAPP-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como quien llama: «Te hablo del equipo de organización».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende «¿Sí?» y B dice «llamo del organismo».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-006": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L3: A, que es OTRA, abre con el motivo (ir al vivero mañana o el domingo) y B responde a eso. Llamó OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). Propuestas y consejos en los dos sentidos; tomo la inicial de A a B (L1). Parecen familiares, sin saludo por nombre: no_agendado.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-019": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L15: A atiende «Hola, decime.», B dice «Te llamo del equipo técnico» y A pregunta «por qué me llamás».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende «¿Sí?» y B se presenta: «soy de la producción del festival».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (su duda sobre la constancia) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-SOPORTE-010": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (el problema con el programa) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). B no dice ser de un servicio; igual le aconseja a A (regla 2), así que PROTEGIDA es A.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-016": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A, que es OTRA, abre diciendo «Te llamo por la orden de pago».",
+      "nota": "A habla por el cobro de la cooperativa sin nombrar entidad; además le pide un código a B.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-023": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L13: A atiende «sí te escucho», B se presenta y A pregunta «Por qué me llaman a mí».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-013": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (si se pagaron las inscripciones) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). B le pide a A que le transfiera su parte (L4), así que PROTEGIDA es A. Sin saludo por nombre.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-013": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende «Hola, decime.» y B se presenta «del área de pagos del banco».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-014": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es OTRA, abre con el motivo (la visita a la madre) y B responde a eso. Llamó OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). A le propone a B revisar la luz (L15), así que PROTEGIDA es B. Parecen familiares, sin saludo por nombre: no_agendado.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-MEDICO-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (su turno de kinesiología) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-011": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (el cajero fuera de servicio) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-WHATSAPP-011": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende «¿Hola?» y B dice «Te llamo de la oficina de la liga».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con un saludo y B se presenta: «soy el papá de Nico».",
+      "nota": "Particulares: B le plantea a A el problema del viaje y A le transfiere, así que PROTEGIDA es A.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-015": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es OTRA, abre con el motivo (las fotos del cumpleaños) y B responde a eso. Llamó OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). A le propone a B imprimirlas y pasar por su casa (L17, L29), así que PROTEGIDA es B. Sin saludo por nombre: no_agendado.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-017": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (bajar el límite de compras) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-010": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L6: A dice «te contacto del organismo» y B pregunta «¿Qué oficina está llamando?».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-012": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A, que es OTRA, atiende con el saludo del banco: «Atención del banco, buen día».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-SOPORTE-006": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A, que es OTRA, se presenta «de soporte de la plataforma de videollamadas».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-DELIVERY-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es OTRA, abre con el motivo (la entrega del proveedor) y B responde a eso. Llamó OTRA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). A le pide a B coordinar con Tomás y el proveedor (L21, L25), así que PROTEGIDA es B. Sin saludo por nombre: no_agendado.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-SOPORTE-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (mudar su servicio de internet) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-FAMILIAR-012": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L3: A atiende, B se presenta como sobrino y pregunta por la tía; A pregunta «Quién sos».",
+      "nota": "B dice que usa un teléfono prestado (L8).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-013": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A se presenta («soy del almacén La Esquina») y plantea su motivo; B responde como quien atiende.",
+      "nota": "A habla por el almacén y B por el banco, así que la regla 1 no decide; por regla 3 PROTEGIDA es B, que atiende.",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-MEDICO-008": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (cambiar su sesión del jueves) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-ESCUELA-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (la tarjeta que olvidó su hijo) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-SOPORTE-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (la falla del escáner) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-WHATSAPP-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con un saludo y B dice «llamo del equipo de fotos del jardín».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-011": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende «¿Hola?» y B se presenta: «soporte del proyector del auditorio».",
+      "nota": "",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (el cajero que retuvo su tarjeta) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con un saludo y B dice «llamo por la actualización de la boca».",
+      "nota": "B no nombra el organismo, pero habla por el pago del beneficio (regla 1).",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-ESCUELA-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (la demora del colectivo de su hija) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-PREMIO-011": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con un saludo y B dice «te llamo por el certamen».",
+      "nota": "",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (dónde hacer sus trámites tras mudarse) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-SOPORTE-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L30: A abre con su consulta y B cierra con «gracias por llamar», o sea que llamó A.",
+      "nota": "La señal es el agradecimiento final de B, no una de las listadas. B actúa como soporte sin nombrar la empresa.",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-SOPORTE-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A, que es OTRA, se presenta: «soy de asistencia de Archivo Vivo».",
+      "nota": "",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-ESCUELA-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (si necesitan acompañantes para la salida) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó).",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-SOPORTE-016": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L30: A dice «Te contacto del portal de capacitaciones» y cierra con «Gracias por atender».",
+      "nota": "",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A, que es PROTEGIDA, abre con el motivo (la torta encargada) y B responde a eso. Llamó PROTEGIDA.",
+      "nota": "r2: antes no_se_sabe; decidió el paso 2 (quien abre con el motivo es quien llamó). B le pide a A que le transfiera su parte (L8), así que PROTEGIDA es A. Sin saludo por nombre.",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-DELIVERY-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice «llamo por la guitarra que dejé».",
+      "nota": "",
+      "lotes": [
+        "lote-2",
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-MEDICO-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre contando que encargó una crema y \"quería saber si llegó\"; B es la farmacia.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-MEDICO-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L6: A abre consultando por el control de su hijo; B responde como el consultorio.",
+      "nota": "Paso 2: PROTEGIDA abre con su consulta; nadie dice que llama.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-WHATSAPP-013": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B dice que la contacta por un registro de WhatsApp.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-018": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A se presenta del banco y le plantea a B un problema con su pago.",
+      "nota": "Paso 2: A nombra al banco y enseguida plantea el pago de B; es presentación de quien llama, no saludo de atención.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-006": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que contacta a B desde el centro de orientación previsional.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-020": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama a B de mantenimiento del sistema de sonido.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B se presenta como encargada de la colonia de vacaciones.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L9: A atiende preguntando quién habla y después le pregunta a B por qué llama desde otro número.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama porque su pago figura pendiente; B responde por el banco.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-014": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L21: A abre pidiendo cerrar una cuenta y pregunta cuándo puede volver a llamar.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-012": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama del banco por un pago de B.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-021": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B dice que llama del banco.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-016": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L3: A abre preguntando por el abuelo, a quien venía llamando; B atiende y responde.",
+      "nota": "Regla 3: pedidos y propuestas en ambos sentidos (L13, L22, L23). Quién atiende sale del paso 2: A abre con su motivo.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L17: A abre con su consulta y luego dice que \"solo quería entender el PIN\".",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-ESCUELA-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama de la escuela por la muestra de ciencias.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L4: A atiende; B habla por la organización de la salida y dice que la llaman.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende con el saludo del banco y B plantea su trámite.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-FAMILIAR-011": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A abre avisando que llegó la cuota de la pileta y B responde.",
+      "nota": "Paso 2: PROTEGIDA abre con su motivo; nadie dice que llama. Rol: B le pide a A que transfiera (L6).",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-FAMILIAR-008": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A abre preguntando por las entradas; B atiende y responde.",
+      "nota": "Regla 3: propuestas en ambos sentidos (L6, L7, L11, L15). Quién atiende sale del paso 2: A abre con su motivo.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-010": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L3: A se presenta del equipo organizador y le plantea a B un cambio en su reserva.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-018": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama por una sesión de asistencia abierta en recepción.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-PREMIO-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A abre reclamando por su apellido en el sorteo; B responde por la biblioteca.",
+      "nota": "Paso 2: PROTEGIDA abre con su reclamo; nadie dice que llama.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-008": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama por una línea del resumen; B responde por el banco.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-FAMILIAR-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B se presenta como la prima de Fabi.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama del programa de cocina de la radio.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-ORGANISMO_PREVISIONAL-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L27: A atiende, B dice que llama del organismo previsional y A le agradece la llamada.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-013": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B dice que la llama por una preselección.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-017": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B se presenta del banco planteando una tarjeta de A.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-SOPORTE-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta del soporte de nómina y le plantea a B un problema con su listado.",
+      "nota": "Paso 2: A nombra el soporte y enseguida plantea el listado de B; es presentación de quien llama, no saludo de atención.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-WHATSAPP-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L23: A abre con su duda sobre un aviso y al final dice que buscaba entenderlo.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-WHATSAPP-007": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre pidiéndole a B ayuda con el mensaje de la abuela; B atiende y explica.",
+      "nota": "Regla 3: A le pide algo a B (L1, L21) y B aconseja a A (L8, L12). Quién atiende sale del paso 2: A abre con su pedido.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-014": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llaman a B por la organización del campeonato del club.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende preguntando quién habla y B dice que llama por la feria.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-SOPORTE-002": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L26: A abre con su problema con la planilla y B le pregunta si tiene otra consulta.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende preguntando quién habla y B se presenta del banco.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B se presenta como Meli, hija de una amiga de A.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-002": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L22: A abre con su consulta por el reintegro y B le dice que vuelva a comunicarse.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L24: A abre con su consulta por un depósito y B deja asentada esa consulta.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-SOPORTE-014": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A dice que llama a B por una agenda nueva en el sistema de turnos.",
+      "nota": "",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-TRABAJO-006": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre avisando el cambio de horario del proveedor; B atiende y responde.",
+      "nota": "Regla 3: propuestas en ambos sentidos entre compañeros (L3, L12, L20, L25). Quién atiende sale del paso 2: A abre con su motivo.",
+      "lotes": [
+        "lote-3"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-FAMILIAR-018": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A abre preguntando por el correo del camping; B atiende y responde.",
+      "nota": "Regla 3: consejos y propuestas en ambos sentidos (L10, L13, L20, L23). Quién atiende sale del paso 2: A abre con su motivo.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-WHATSAPP-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta como la mamá de Emma y plantea que no le llegan los avisos.",
+      "nota": "Paso 2: PROTEGIDA abre presentándose y con su problema; no dice que llama.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-FAMILIAR-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A se presenta como Santi, sobrino de B; B usa su nombre recién después.",
+      "nota": "No agendado: B no lo saluda por el nombre antes de que se presente.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-016": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A abre preguntando por un cargo del resumen; B responde por el banco.",
+      "nota": "Paso 2: PROTEGIDA abre con su consulta; nadie dice que llama.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-PREMIO-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L3: A se presenta de la producción del concurso y le anuncia a B su premio.",
+      "nota": "Paso 2: A se presenta por la producción y sabe cuál es la foto de B sin que B se identifique.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-012": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: A se presenta del taller de danza del club y pregunta por la hija de B.",
+      "nota": "Paso 2: A nombra el taller y pregunta por la hija de B; es presentación de quien llama.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-013": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A pregunta si habla con la hermana de Ramiro y B pregunta quién es.",
+      "nota": "",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-FAMILIAR-011": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L10: A atiende; B se presenta del estudio y dice que llama desde archivo.",
+      "nota": "",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-WHATSAPP-008": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A abre con su duda sobre el código de seguridad y B responde.",
+      "nota": "Paso 2: PROTEGIDA abre con su motivo; nadie dice que llama.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-SOPORTE-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: A atiende y B se presenta como soporte preguntando por la impresora de A.",
+      "nota": "Paso 2: A atiende con una fórmula y B nombra la empresa planteando el problema de A; no es saludo de atención.",
+      "lotes": [
+        "lote-3",
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-TRABAJO-001": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: OTRA abre pidiendo que la cubran en un turno, que es el motivo; PROTEGIDA responde.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-008": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: OTRA dice que llama de la asociación de familias de la escuela.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-DELIVERY-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con el motivo, el paquete de la vecina; la llamada que menciona es del repartidor, no esta.",
+      "nota": "r2: antes no_se_sabe; paso 2. OTRA actúa como servicio de envíos.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-006": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: OTRA se presenta como del área de retiros del banco y trae el motivo.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-DELIVERY-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre avisando que no estará para recibir el pan; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-SOPORTE-008": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su problema de conexión; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-TRABAJO-008": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con el motivo, el error de fecha en la tabla, y OTRA responde.",
+      "nota": "r2: antes no_se_sabe; paso 2. Rol por regla 2: B propone y aconseja casi todo.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con el error de su credencial; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-SOPORTE-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su problema, no encuentra una factura; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-FAMILIAR-009": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: OTRA abre con el motivo, la noticia del arreglo del auto, y PROTEGIDA responde.",
+      "nota": "r2: antes no_se_sabe; paso 2. Rol por regla 2: el pedido central es que B transfiera al taller.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-009": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su problema en el cajero; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-015": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su problema en la aplicación; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-FAMILIAR-001": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: OTRA abre con el motivo, el plan del domingo, y PROTEGIDA responde.",
+      "nota": "r2: antes no_se_sabe; paso 2. Rol por regla 3 (propuestas y pedidos mutuos): atiende B.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA atiende con un saludo; OTRA se presenta como soporte de la billetera del banco.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-PREMIO-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA atiende con un saludo; OTRA dice que llama de la organización del torneo.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-020": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su consulta por una nota de su padre; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-010": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: OTRA dice que llama de la mesa de transferencias del banco.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-MEDICO-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con el motivo, cambiar un turno; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-FAMILIAR-004": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: OTRA abre con el motivo, preguntarle al padre por una herramienta, y PROTEGIDA responde.",
+      "nota": "r2: antes no_se_sabe; paso 2. Rol por regla 2: el pedido central va de A a B; que A nombre al padre no cuenta para agendado.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-WHATSAPP-015": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L18: PROTEGIDA atiende preguntando quién habla; OTRA se presenta y dice que su línea es saliente.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-ESCUELA-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su consulta por el horario del taller; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-018": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su duda sobre un cobro; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-PREMIO-010": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L6: OTRA dice que llama del concurso y PROTEGIDA pregunta por qué la llaman.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-010": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su problema de usuario; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-SOPORTE-002": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: OTRA se presenta como soporte de una empresa de recibos y pregunta por el recibo de B.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-SOPORTE-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con el problema de las impresoras; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-ESCUELA-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA pide una entrevista y OTRA atiende identificándose como secretaria de la escuela.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-PREMIO-005": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1: PROTEGIDA dice que llama por el premio de su equipo.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-ESCUELA-002": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su problema, el cuaderno olvidado; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-003": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre pidiendo una constancia; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-024": {
+      "protegida": "B",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1: OTRA dice que le habla del banco por la tarjeta nueva.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-BANCO-019": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su duda sobre un código de compra; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-BANCO-006": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su problema, una transferencia equivocada; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-TRABAJO-003": {
+      "protegida": "B",
+      "rol_dudoso": true,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: OTRA abre con el motivo, la lista de equipos pedida, y PROTEGIDA responde.",
+      "nota": "r2: antes no_se_sabe; paso 2. Rol por regla 3 (pedidos y propuestas mutuos): atiende B.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-SOPORTE-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su pedido de habilitar un acceso; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-DELIVERY-001": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2, L3: PROTEGIDA abre reclamando por un pedido incompleto; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-L-ORGANISMO_PREVISIONAL-004": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con su reclamo por un pago; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    },
+    "CV2-T-V-BANCO-025": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA atiende preguntando quién habla; OTRA se presenta como del banco y trae el motivo.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-V-BANCO-007": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "otra",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA atiende; OTRA dice que la llama de un sector del banco.",
+      "nota": "",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "dentro"
+    },
+    "CV2-T-L-PREMIO-002": {
+      "protegida": "A",
+      "rol_dudoso": false,
+      "inicia": "protegida",
+      "numero": "no_agendado",
+      "evidencia": "L1, L2: PROTEGIDA abre con el error en su certificado; OTRA responde con un saludo.",
+      "nota": "r2: antes no_se_sabe; paso 2.",
+      "lotes": [
+        "lote-4"
+      ],
+      "alcance": "fuera"
+    }
+  }
+}

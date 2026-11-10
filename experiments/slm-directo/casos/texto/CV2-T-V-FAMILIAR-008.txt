@@ -1,0 +1,24 @@
+A: Hola soy la hermana de Pablo te llamo desde otro número porque él está en el trabajo
+B: Sí me dijo que cambió el teléfono
+A: El número viejo sigue figurando como administrador del grupo familiar y puede recibir avisos
+B: Pablo puede entrar cuando vuelva
+A: Está ocupado con la mudanza y me pidió que lo deje resuelto ahora
+B: ¿Por qué no me llama él?
+A: Se quedó sin batería y no quiere perder los mensajes de las cajas
+B: ¿No conviene esperar a que tenga el teléfono nuevo?
+A: No, el grupo tiene que quedar actualizado antes de que le entreguen el chip
+B: ¿Qué aparece en la lista?
+A: El número anterior como administrador y otro perfil que no reconocemos
+B: Eso lo puede revisar Pablo en persona
+A: Me dijo que lo hagamos rápido y que no lo llamemos para no interrumpir la mudanza
+B: ¿Qué querés que haga?
+A: Sacá el número viejo de administradores y agregá el que te voy a pasar como administrador nuevo
+B: ¿Cuál es?
+A: Te lo mandé por mensaje desde este mismo teléfono termina en seis ocho cuatro dos
+B: Me llegó el mensaje con el número pero no es el que me había avisado Pablo
+A: Si esperamos pueden quedar afuera del grupo todos los mensajes de la mudanza
+B: Ya quité el teléfono anterior y agregué el número que me pasaste como administrador
+A: Gracias así puedo volver a invitarlo
+B: Le pregunto a Pablo cuando salga del trabajo
+A: Dale
+B: Chau

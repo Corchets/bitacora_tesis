@@ -1,0 +1,28 @@
+A: Buenas, retiré el certificado de la muestra y mi apellido quedó sin tilde.
+B: Hola. ¿De qué muestra era?
+A: “Postales del río”, la exposición del centro cultural.
+B: ¿Con qué nombre te inscribiste?
+A: Anaís Gaitán. En el papel dice Anais Gaitan.
+B: Voy a revisar la planilla de inscripción. ¿Recordás el título de tu foto?
+A: “Puente al amanecer”, la saqué desde la costanera.
+B: Sí, te encontré. El registro tiene las tildes correctas.
+A: ¿Me pueden reimprimir el certificado o se corrige a mano?
+B: Podemos emitir otro. La firma de la coordinadora queda para el viernes.
+A: No tengo apuro, es para guardarlo con las fotos.
+B: ¿Querés retirarlo en recepción o preferís que lo enviemos al taller de fotografía?
+A: Paso por recepción, me queda de camino al trabajo.
+B: Anoto que vas a buscarlo vos. ¿Tenés el certificado anterior?
+A: Sí, lo llevo para que lo anulen y no queden dos versiones.
+B: Bien. ¿La exposición sigue abierta este fin de semana?
+A: El folleto decía hasta fin de mes, pero no sé si lo extendieron.
+B: La muestra queda abierta hasta el domingo 29.
+A: Entonces llevo a mi hija el sábado. Le gustaron las fotos del puerto.
+B: Hay una visita guiada a las cuatro, no hace falta reservar.
+A: ¿Puede ir una persona más conmigo?
+B: Sí, el espacio admite grupos pequeños.
+A: Perfecto. ¿Me mandan un mensaje cuando esté listo el certificado?
+B: Te escribimos al correo que figura en la inscripción.
+A: Ese todavía lo uso, gracias.
+B: Quedó anotada la corrección del apellido.
+A: Listo, paso el viernes.
+B: Te esperamos.

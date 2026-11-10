@@ -1,0 +1,20 @@
+A: Hola, de la producción del concurso de fotografía barrial.
+B: ¿Salieron los resultados?
+A: Sí, tu foto del puente quedó en segundo lugar.
+B: No sabía que había premio.
+A: Hay una impresión enmarcada y un vale para el laboratorio fotográfico.
+B: ¿Dónde se retira?
+A: En el local de producción, pero primero validamos el nombre del ganador.
+B: ¿Con qué?
+A: Decime tu DNI completo y el domicilio donde querés recibir la impresión.
+B: ¿Por qué el domicilio?
+A: Para completar la etiqueta de envío.
+B: ¿Puedo pasar a buscarla?
+A: La impresión está embalada para despacho.
+B: No quiero dar el documento por teléfono.
+A: Sin el registro no se puede liberar el vale.
+B: Prefiero esperar la lista pública.
+A: La publican mañana.
+B: Entonces la veo mañana.
+A: Está bien.
+B: Chau.

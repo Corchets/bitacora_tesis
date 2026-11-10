@@ -1,0 +1,20 @@
+A: Te llamo de la mesa de transferencias del banco. Se activó un beneficiario de servicios públicos con tu usuario.
+B: Yo pagué la luz ayer, nada más.
+A: La orden figura como permanente, no como pago único.
+B: ¿Puedo verla?
+A: Sí, pero primero hay que entrar al módulo de autorizaciones.
+B: Lo tengo abierto.
+A: Elegí revisar beneficiario y aprobá el cambio de frecuencia para que la orden quede como pago único.
+B: ¿No debería decir cancelar?
+A: En este menú se aprueba la reversión del cambio.
+B: Me aparece autorizar orden recurrente.
+A: Es la pantalla anterior, retrocedé una vez.
+B: Ahora dice confirmar beneficiario.
+A: Confirmá para bloquear la modalidad recurrente.
+B: No entiendo qué estoy aceptando.
+A: Si no lo hacés, el pago se repite el mes que viene.
+B: ¿Me podés decir el nombre del servicio?
+A: No aparece en la vista resumida.
+B: No voy a autorizar un cambio que no puedo identificar.
+A: Entonces queda pendiente.
+B: Lo voy a revisar desde mi cuenta después.

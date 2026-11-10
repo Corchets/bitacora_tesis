@@ -1,0 +1,20 @@
+A: Hola te llamo del banco por el débito de una cuota de Club Náutico Viento
+B: Esa cuota la pago todos los meses
+A: El sistema registró dos intentos este ciclo uno confirmado y otro en espera
+B: Me cobraron dos veces
+A: El segundo todavía no aparece en el resumen pero puede quedar asentado hoy
+B: Puedo ver el detalle
+A: pa abrir el reclamo necesito asociar el celular con la tarjeta
+B: La tarjeta termina en 31 eso alcanza
+A: No falta confirmar el dispositivo con un número que te va a llegar
+B: Me entró un código de inicio de sesión
+A: Leelo y lo vinculo al débito que querés revisar
+B: No es para entrar a la cuenta
+A: Es el mismo sistema no te preocupes por el título del mensaje
+B: Cuándo vence
+A: En menos de un minuto
+B: Después me das el número de reclamo
+A: Sí aparece cuando queda unido el dispositivo
+B: El código es 352464
+A: Ya quedó Ahora te genero el reclamo
+B: Bien espero la constancia

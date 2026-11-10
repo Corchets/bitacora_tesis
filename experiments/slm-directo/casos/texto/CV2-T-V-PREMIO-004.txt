@@ -1,0 +1,20 @@
+A: Te llamo del programa de cocina de la radio Tu receta quedó elegida para el kit de utensilios
+B: La de empanadas de humita
+A: Esa misma la leyó el jurado en el cierre del sábado
+B: Qué trae el kit
+A: Una olla cuchillos y una tabla grande
+B: Lo mandan a casa
+A: Sí pero el seguro de envío se calcula con la tarjeta del ganador
+B: Tengo que pagar el envío
+A: Está cubierto solo necesitamos validar el plástico para completar la etiqueta
+B: Qué dato les paso
+A: Los tres números de seguridad que están detrás de la tarjeta
+B: No alcanza con el domisilio
+A: La empresa de correo solicita la validación del titular
+B: El texto del banco dice que no comparta esos números
+A: No los guardamos los usamos solo para autorizar la cobertura
+B: Bueno el código es 000
+A: Ya quedó aprobada la etiqueta
+B: Cuándo llega
+A: Entre martes y miércoles
+B: Espero el envío

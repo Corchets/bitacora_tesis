@@ -1,0 +1,30 @@
+A: Hola, hoy mi hija sale más tarde por el taller de teatro. ¿A qué hora termina?
+B: Buenas. El taller termina a las cinco y cuarto.
+A: Yo llego a la escuela a las cinco, pero puedo esperar.
+B: La salida de talleres es por la puerta del patio.
+A: ¿No sale por la entrada principal como los otros días?
+B: No, el grupo espera junto al mural hasta que venga una persona autorizada.
+A: ¿Puede salir con su tía si yo me demoro?
+B: ¿La tía está cargada en la lista de retiro?
+A: Sí, es Sonia Bera, la retiró el mes pasado.
+B: La encuentro en el registro. ¿Confirmás que hoy puede retirarla?
+A: Sí, ya le avisé que quizá llegue tarde.
+B: ¿Querés que también le avisemos a tu hija?
+A: Sí, así sabe que espere en el patio.
+B: ¿Ella tiene el taller todos los jueves o es una actividad especial?
+A: Todos los jueves hasta la muestra de diciembre.
+B: Entonces queda con horario extendido en la ficha.
+A: ¿El viernes sigue saliendo a las cuatro?
+B: Sí, solo los jueves tiene teatro.
+A: Perfecto. ¿Hay que traer ropa para cambiarse?
+B: La profesora pidió ropa cómoda y una botella de agua.
+A: Eso lo lleva en la mochila.
+B: ¿La muestra es la semana que viene?
+A: El 28, a las seis de la tarde.
+B: Ya está en el calendario escolar.
+A: ¿Necesitan comprar entradas?
+B: No, la entrada es libre hasta completar la sala.
+A: Entonces voy con los abuelos también.
+B: Que consulten en recepción ese día.
+A: Gracias por confirmarme el horario.
+B: De nada, que disfruten la muestra.

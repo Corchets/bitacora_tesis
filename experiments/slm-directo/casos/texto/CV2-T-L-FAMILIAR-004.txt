@@ -1,0 +1,27 @@
+A: Pa, ¿te quedó la llave francesa que usaste para arreglar la pileta?
+B: Sí, está en el galpón. ¿La necesitás hoy?
+A: La necesita Martín para terminar la canilla del patio.
+B: Puedo pasar por tu casa después de las cuatro.
+A: A las cuatro tengo que llevar a Juana al dentista.
+B: ¿A qué hora terminan?
+A: El turno es a las cuatro y cuarto. Capaz salimos a las cinco.
+B: Entonces puedo ir a las cinco y media.
+A: ¿Te queda cómodo o preferís mañana?
+B: Mañana tengo que cambiar una rueda y no sé cuánto me demora.
+A: Pasá hoy, te dejo la llave en la caja azul de la entrada.
+B: ¿La caja tiene la tapa floja o la que cerramos con el pestillo?
+A: La del pestillo. La otra se moja cuando llueve.
+B: ¿Y la herramienta está limpia o quedó con grasa?
+A: Tiene un poco de pintura seca, pero funciona bien.
+B: Martín la puede limpiar con un cepillo antes de usarla.
+A: Le digo. ¿Querés que te guarde una porción de tarta para cuando vengas?
+B: Sí, si quedó de la cena. No hace falta que cocines otra cosa.
+A: Quedó una de verduras y una de jamón.
+B: Dame la de verduras. Estoy tratando de comer menos sal.
+A: Dale. Juana te va a saludar cuando volvamos del dentista.
+B: ¿Le sigue molestando la muela?
+A: Un poco, pero el turno es de control, no parece algo grave.
+B: Bueno, después me contás qué les dijo la odontóloga.
+A: Sí. Te mando un mensaje cuando salgamos.
+B: Entonces paso a las cinco y media.
+A: Perfecto, dejo todo preparado.

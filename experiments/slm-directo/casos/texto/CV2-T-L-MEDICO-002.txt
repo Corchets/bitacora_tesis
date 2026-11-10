@@ -1,0 +1,29 @@
+A: hola me hice un análisis de sangre el lunes y el portal dice que está listo
+B: buen día qué tipo de análisis era
+A: control general lo pidió la clínica del parque
+B: tenés el número de orden
+A: 6402 lo tengo en el papel que me dieron
+B: gracias ya aparece disponible desde esta mañana
+A: lo puedo ver desde el teléfono o tengo que ir al laboratorio
+B: si tenés el portal habilitado podés descargar el informe
+A: entré pero solo veo una pantalla en blanco
+B: estás usando la aplicación o el navegador
+A: el navegador del celular
+B: probá actualizar la página o abrirla en otro navegador
+A: tengo que llevar el resultado a la consulta de mañana
+B: si no carga podés retirarlo en la sede donde te tomaron la muestra
+A: hasta qué hora atienden hoy
+B: hasta las seis y media
+A: llego cerca de las cinco y cuarenta
+B: llevá el comprobante de la orden para que lo ubiquen rápido
+A: tiene que ir la persona que se hizo el análisis
+B: sí se entrega al paciente o a una persona autorizada en la ficha
+A: voy yo soy marcos andrada
+B: perfecto veo el registro a tu nombre
+A: el informe viene en un sobre
+B: sí en recepción te lo dan cerrado
+A: entonces lo retiro a la tarde
+B: la entrada es por la calle lateral del centro médico
+A: sí ahí fui el lunes
+B: quedó anotado
+A: gracias

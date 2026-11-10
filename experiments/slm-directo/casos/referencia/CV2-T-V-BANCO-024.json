@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-024",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-024",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "TRUST_BUILDING"
+      ]
+    },
+    {
+      "linea": 20,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "La llamada combina envío demorado, domicilio discordante y tarjeta anterior activa, pero termina antes de solicitar una dirección o una acción de seguridad. Prueba una preparación sospechosa sin conversión a un pedido crítico.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. Sin T_R/T_C. El interlocutor no solicita un dato; la preocupación sobre la tarjeta no basta para concluir que haya fraude. Revisar la clase hipotética en D07. No se observa solicitud de acción crítica ni cumplimiento. La clase depende del escenario autoral; identidad e intención fraudulenta no se infieren de modo concluyente del diálogo aislado y requieren revisión humana (D07).",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "La llamada combina envío demorado, domicilio discordante y tarjeta anterior activa, pero termina antes de solicitar una dirección o una acción de seguridad. Prueba una preparación sospechosa sin conversión a un pedido crítico."
+}

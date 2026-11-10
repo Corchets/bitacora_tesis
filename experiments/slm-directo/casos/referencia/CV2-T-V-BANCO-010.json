@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-010",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-010",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 7,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 7,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    }
+  ],
+  "que_prueba": "Un pago de servicios ya efectuado sirve para guiar una autorización ambigua sobre la frecuencia del beneficiario. Prueba un pedido directo de acción de seguridad con interfaz contradictoria; la persona no confirma.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 7, primera instrucción de aprobar el cambio de frecuencia. La explicación posterior contradice el texto de la pantalla; no hay cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Un pago de servicios ya efectuado sirve para guiar una autorización ambigua sobre la frecuencia del beneficiario. Prueba un pedido directo de acción de seguridad con interfaz contradictoria; la persona no confirma."
+}

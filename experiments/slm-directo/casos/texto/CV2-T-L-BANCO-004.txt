@@ -1,0 +1,26 @@
+A: Hola, el cajero se quedó con mi tarjeta y no la devolvió.
+B: Buenas. ¿Era un cajero de este banco o de otra red?
+A: De este banco, el de la sucursal que está sobre la avenida.
+B: ¿A qué hora ocurrió?
+A: Hace diez minutos, alrededor de las cuatro y media.
+B: ¿El equipo mostró algún mensaje antes de quedarse con la tarjeta?
+A: Dijo que la operación no estaba disponible y después cerró la pantalla.
+B: ¿La tarjeta es de débito o crédito?
+A: Débito, la que termina en 9112.
+B: Gracias. Para cuidarte, puedo bloquearla y pedir una reposición. ¿Querés hacerlo ahora?
+A: Sí, no quiero dejarla adentro del cajero hasta mañana.
+B: El bloqueo queda inmediato. ¿Preferís retirarla en sucursal o recibir una nueva en tu domicilio?
+A: En sucursal, así no tengo que estar pendiente del correo.
+B: ¿Te queda cómoda la sede de la calle Mitre?
+A: Sí, paso por ahí cuando salgo del trabajo.
+B: La reposición tarda entre tres y cinco días hábiles. Mientras tanto, podés usar la tarjeta digital.
+A: Nunca la activé. ¿Se hace desde el menú de tarjetas?
+B: Sí, ahí aparece “crear tarjeta digital”. Revisá los datos antes de usarla.
+A: ¿Necesitás que te diga el PIN para bloquear la otra?
+B: No. El bloqueo se hace con los últimos dígitos y la confirmación de titularidad que ya completamos.
+A: Bien. ¿Me das un número para consultar la reposición?
+B: Quedó bajo la referencia 7026.
+A: Lo anoté. ¿El cajero puede devolverla después?
+B: Si el equipo la retuvo, el personal la retira al hacer el cierre. Como ya pediste reposición, no vuelven a habilitarla.
+A: Está bien, prefiero esperar la nueva.
+B: Listo. Te llega el aviso cuando esté disponible.

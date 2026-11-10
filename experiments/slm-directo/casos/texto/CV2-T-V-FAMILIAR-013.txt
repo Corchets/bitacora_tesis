@@ -1,0 +1,20 @@
+A: ¿Hablo con la hermana de Ramiro?
+B: Sí, ¿quién sos?
+A: Soy el compañero de trabajo, estamos en el hospital municipal.
+B: ¿Qué pasó con mi hermano?
+A: Se cayó en el depósito, está consciente pero lo van a dejar en observación.
+B: ¿Por qué no me llamó él?
+A: No le dejan usar el teléfono y yo salí al pasillo para avisar.
+B: ¿En qué sector está?
+A: En guardia, pero no preguntes por la oficina de admisión porque se atrasan todos los papeles.
+B: ¿Cómo te llamás?
+A: Fijate en el grupo del trabajo, soy el que entró hace poco.
+B: No tengo ese grupo.
+A: Te cuento rápido porque el supervisor dijo que no hay que involucrar a más gente todavía.
+B: Voy para allá ahora.
+A: No vengas todavía, primero tenemos que resolver un tema antes de que lo vea el médico.
+B: ¿Qué tema?
+A: No te puedo decir por esta línea, hay gente escuchando.
+B: Voy a llamar a emergencias del hospital.
+A: Esperá, se acerca el encargado.
+B: Corto y verifico con el hospital.

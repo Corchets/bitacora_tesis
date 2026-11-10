@@ -1,0 +1,30 @@
+A: hola después de actualizar el programa ya no encuentro exportar
+B: buenas qué programa estás usando
+A: el de turnos del consultorio desde la computadora de recepción
+B: ves el menú de informes arriba a la derecha
+A: sí aparece un botón que dice compartir
+B: tocá ahí debería estar exportar a archivo
+A: veo guardar como csv y descargar pdf
+B: qué formato usabas antes
+A: el csv lo abríamos con una planilla
+B: entonces elegí csv y guardalo en la carpeta del mes
+A: antes la contraseña estaba anotada en una etiqueta pegada al monitor
+B: la etiqueta era para ingresar al equipo o al programa
+A: al programa creo que la cambiaron cuando instalaron la versión nueva
+B: ahora podés entrar con tu usuario habitual
+A: sí estoy adentro solo cambió la pantalla
+B: la etiqueta vieja ya no hace falta para esta sesión
+A: la saco porque está descolorida y no se lee bien
+B: guardá la etiqueta en un sobre hasta confirmar que el equipo funciona con el acceso nuevo
+A: está bien ya descargué la planilla
+B: la fecha del archivo coincide con el turno de hoy
+A: sí dice 21 de octubre
+B: abrilo y fijate que estén las columnas de horario y profesional
+A: están las dos y también aparece la sala
+B: perfecto se exportó completo
+A: ya lo moví a la carpeta compartida
+B: entonces el equipo de administración puede abrirlo
+A: sí me confirmaron que lo ven
+B: te queda otra consulta
+A: no era solo encontrar exportar
+B: listo gracias por llamar

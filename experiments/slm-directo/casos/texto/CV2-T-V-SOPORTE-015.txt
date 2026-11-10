@@ -1,0 +1,21 @@
+A: buenas quién habla
+B: Hola, soy del soporte del sistema de cámaras del vivero. El historial del sábado no aparece.
+A: Las cámaras estuvieron encendidas.
+B: Sí, pero el almacenamiento quedó asociado a otra cuenta.
+A: ¿Se puede recuperar?
+B: Puedo revisar el estado si abrís el panel de diagnóstico.
+A: ¿Necesitás entrar a la computadora?
+B: La asistencia se inicia desde el botón de soporte.
+A: Me aparece una ventana de permisos.
+B: Leé qué permisos solicita antes de aceptar.
+A: Dice compartir pantalla y permitir control total del equipo.
+B: Para revisar el disco alcanza con ver el estado; no debería pedir control total.
+A: La ventana no me deja seguir sin habilitarlo.
+B: Aceptá los dos permisos para que cargue la consola.
+A: Ya acepté y quedó abierta la sesión.
+B: Bien, voy a exportar primero la lista de usuarios del vivero.
+A: ¿Para recuperar un video necesitás los usuarios?
+B: La copia de seguridad incluye todo. Dejame también abierta la carpeta de administración.
+A: Me apareció un correo nuevo como administrador del grabador, no lo conozco.
+B: Es la cuenta que usamos para extraer el respaldo, después se quita.
+A: Eso no estaba en lo que hablamos. Ya cerré la sesión de asistencia.

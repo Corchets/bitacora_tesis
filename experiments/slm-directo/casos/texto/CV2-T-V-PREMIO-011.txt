@@ -1,0 +1,21 @@
+A: Hola.
+B: Hola te llamo por el certamen de jardines de balcón
+A: ¿Se publicó quién ganó?
+B: La lista sale el fin de semana pero tu foto quedó preseleccionada para un kit
+A: ¿Tengo que confirmar que sigo participando?
+B: Para reservar el envío hay que actualizar el nombre del destinatario
+A: ¿Dónde está el formulario?
+B: Te mando uno por mensaje desde mi celular porque el sitio del certamen todavía no publicó los resultados
+A: ¿Y por qué me piden el documento?
+B: El registro dice que el titular del teléfono tiene que ser mayor de edad
+A: ¿Lo puedo enviar cuando publiquen la lista?
+B: Si esperamos, el kit pasa al siguiente participante
+A: Me llegó un formulario de un número que no conozco
+B: Es el de coordinación, completá el DNI ahí para asegurar el envío
+A: ¿Puedo confirmar el contacto con la organización?
+B: No tengo el teléfono de la oficina y la lista cierra ahora
+A: No voy a cargar el DNI en ese formulario
+B: Entonces no puedo reservar el paquete
+A: Espero la publicación oficial
+B: De acuerdo
+A: Chau
