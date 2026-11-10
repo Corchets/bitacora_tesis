@@ -1,0 +1,257 @@
+{
+  "inicio": "2026-11-10T00:57:05",
+  "comando": "python correr.py --prompts c-sin-alerta --lista alcance-140 --modelos gemma4:e2b-it-q4_K_M --num-ctx 4096 --seed 42 --sin-reglas --seguir-tras-aviso --hablantes rol --etiqueta etapa-3-c-sin-alerta-rep --salida /content/resultados-etapa-3/c-sin-alerta-rep",
+  "codigo": {
+    "commit": "c3c1ffa9b795ae0018d3e6d98d1cef91ae88ac59",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "arquitectura": "x86_64",
+    "procesador": "x86_64",
+    "nucleos_logicos": 2,
+    "ram_total_gb": 12.7,
+    "python": "3.13.16"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "filtro_tito": null,
+  "tito_viejo_2": null,
+  "particion": "desarrollo",
+  "lista": "alcance-140",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.14",
+    "digests": {
+      "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+    },
+    "arranque_ms": 5,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": null,
+    "c_corto": {
+      "num_predict": 48,
+      "formato": "el esquema JSON del prompt",
+      "logprobs": false,
+      "lectura": "el JSON entero, que el modelo cierra solo (detectores.leer_c_corto); al tope es un fallo",
+      "alerta_sugerida": "riesgo >= 0.3 o pedido_critico (columna pedido_critico), en cualquier línea",
+      "etapa2": "solo en la primera alerta fuerte de la llamada (pedido_critico en true; el primer aviso por riesgo usa un texto fijo): mismos mensajes + el JSON escrito, como assistant + motivo_c_corte.txt, con ESQUEMA_MOTIVO y num_predict 512"
+    }
+  },
+  "prompts": {
+    "c-sin-alerta": {
+      "huella": "f96da789d60074ec",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Si ya se parece a una estafa, conviene avisar aunque todavía no haya un pedido.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con este campo:\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "riesgo"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-sin-alerta",
+      "hablantes": "rol"
+    }
+  ],
+  "casos": {
+    "CV2-D-V-BANCO-001": "0affbb8ce80874ba",
+    "CV2-D-V-BANCO-002": "408fa71f0df52a5e",
+    "CV2-D-V-BANCO-003": "efc9897cb609ce1e",
+    "CV2-D-V-BANCO-004": "45c6a92386bf8bee",
+    "CV2-D-V-BANCO-005": "ae1b7410257af507",
+    "CV2-D-V-BANCO-006": "18831328dda6ea0c",
+    "CV2-D-V-BANCO-007": "6aa5fdd522005cf0",
+    "CV2-D-V-BANCO-008": "e6c068d275f987b4",
+    "CV2-D-V-BANCO-009": "3a0af933bc2fe01c",
+    "CV2-D-V-BANCO-010": "5af8b1d901066fbc",
+    "CV2-D-V-BANCO-011": "2e1f43d5829645e5",
+    "CV2-D-V-BANCO-012": "8276300a5773280e",
+    "CV2-D-V-FAMILIAR-001": "5c8809013a80e6a0",
+    "CV2-D-V-FAMILIAR-002": "f77138c8fd31590a",
+    "CV2-D-V-FAMILIAR-003": "b9019aa90aea099a",
+    "CV2-D-V-FAMILIAR-004": "32cec8673724c98c",
+    "CV2-D-V-FAMILIAR-005": "9c0a1b2e5fa4b0ac",
+    "CV2-D-V-FAMILIAR-006": "48d8241dba895f20",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001": "c3a8aab157a40397",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-002": "1d5e8849c7256fbd",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-003": "df7cdeed732f44e8",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": "7872ce24b1edf4fe",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-005": "9a5b67084dd19dc9",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-006": "33fc58457273932a",
+    "CV2-D-V-PREMIO-001": "1c361029eae7092b",
+    "CV2-D-V-PREMIO-002": "7a5f5f017a3fff25",
+    "CV2-D-V-PREMIO-003": "981c6c200b193589",
+    "CV2-D-V-PREMIO-004": "efd49ed9cc707e5d",
+    "CV2-D-V-PREMIO-005": "7a0bb0f8c694b0d2",
+    "CV2-D-V-PREMIO-006": "4fdb909d566f2c06",
+    "CV2-D-V-SOPORTE-001": "2615b852062e8ece",
+    "CV2-D-V-SOPORTE-002": "aff317d0f7c4c8e3",
+    "CV2-D-V-SOPORTE-003": "c7c415cd71d46d70",
+    "CV2-D-V-SOPORTE-004": "8b9704896f784852",
+    "CV2-D-V-SOPORTE-005": "3e8ba6494816b8d1",
+    "CV2-D-V-SOPORTE-006": "0b466b6d69a203f6",
+    "CV2-D-V-SOPORTE-007": "ed1fa97cc65853b8",
+    "CV2-D-V-SOPORTE-008": "74ffd452a121b332",
+    "CV2-D-V-WHATSAPP-001": "c252a11566d56851",
+    "CV2-D-V-WHATSAPP-002": "68caf4afa149904d",
+    "CV2-D-V-WHATSAPP-003": "20133a1b5d0f13c0",
+    "CV2-D-V-WHATSAPP-004": "65ab833af1c63bef",
+    "CV2-D-V-WHATSAPP-005": "db93ee2fc909f09a",
+    "CV2-D-V-WHATSAPP-006": "d108b5f5b91893f6",
+    "CV2-D-V-WHATSAPP-007": "468b3fde01b8d84f",
+    "CV2-D-V-WHATSAPP-008": "1731498528fd5715",
+    "ENT-L-BANCO-001": "792efced9e599841",
+    "ENT-L-BANCO-002": "dca9eb390a57d2a9",
+    "ENT-L-BANCO-003": "3403f7c6f474d1fb",
+    "ENT-L-BANCO-004": "336450152a772733",
+    "ENT-L-BANCO-005": "1b608990837ce5c6",
+    "ENT-L-BANCO-006": "86c1d0989c5fb59d",
+    "ENT-L-DELIVERY-001": "a5c930b2f227eccd",
+    "ENT-L-DELIVERY-002": "5884cc65e0fb2979",
+    "ENT-L-DELIVERY-003": "c6cb648a8ac705e9",
+    "ENT-L-DELIVERY-004": "f09ec8ac9fd69808",
+    "ENT-L-DELIVERY-005": "073300f9910d91cb",
+    "ENT-L-DELIVERY-006": "1244dbb1f7d785b2",
+    "ENT-L-ENCUESTA-001": "5d1ddabc41c6dfc1",
+    "ENT-L-ENCUESTA-002": "fe09ffc623afa4b3",
+    "ENT-L-ENCUESTA-003": "7b2c3237f45c1f51",
+    "ENT-L-ENCUESTA-004": "d833c9f0ab5cae91",
+    "ENT-L-ENCUESTA-005": "1d935758a79b55d9",
+    "ENT-L-ENCUESTA-006": "d0feddf48296ee51",
+    "ENT-L-MEDICO-001": "e5c46c9b6ec3cf37",
+    "ENT-L-MEDICO-002": "84606f814fdb30b4",
+    "ENT-L-MEDICO-003": "4211ee90b3f06b4e",
+    "ENT-L-MEDICO-004": "87b7bb0ae0cde5ee",
+    "ENT-L-SELECCION-001": "24358039e89dc712",
+    "ENT-L-SELECCION-002": "0b924f5f58823b49",
+    "ENT-L-SELECCION-003": "322fac7c3df903b9",
+    "ENT-L-SOPORTE-001": "f4db05f0c650928c",
+    "ENT-L-SOPORTE-002": "10a127c4c4f327c3",
+    "ENT-L-SOPORTE-003": "308fd1d6ffe1f03a",
+    "ENT-L-SOPORTE-004": "a43155ef5c804be3",
+    "ENT-L-SOPORTE-005": "ab4a7d29ce271110",
+    "ENT-L-SOPORTE-006": "536843031d75675f",
+    "ENT-L-TRAMITE-001": "6f7458c4d19f80ea",
+    "ENT-L-TRAMITE-002": "57211e9c58c86c6e",
+    "ENT-L-VENTAS-001": "7f1e1e5e061b28ab",
+    "ENT-L-VENTAS-002": "59186e6c560e51a9",
+    "ENT-L-VENTAS-003": "ce8ac7165727eecc",
+    "ENT-L-VENTAS-004": "973dce98765f05e2",
+    "ENT-L-VENTAS-005": "b323015872fa1413",
+    "ENT-L-VENTAS-006": "b1ded2759ed1a04a",
+    "ENT-L-VENTAS-007": "b8966e00c38ae778",
+    "ENT-L-VENTAS-008": "3d46349ca8e81cda",
+    "ENT-L-VENTAS-009": "c223dfbfd3c861d8",
+    "ENT-L-VENTAS-010": "a54dffe269b909f8",
+    "ENT-L-VENTAS-011": "220515757037e54b",
+    "ENT-L-VENTAS-012": "d3a79efe19a36ca4",
+    "LEG-BA-01": "dd8a1391694a7cc2",
+    "LEG-BA-02": "ab2e7ac43a195ea9",
+    "LEG-BA-03": "7dce0f4d61e6fa33",
+    "LEG-CC-01": "626343dfbb69edd6",
+    "LEG-CC-02": "26bc0c6e062b37dd",
+    "LEG-CC-03": "88b4c557533ff4c2",
+    "LEG-CO-01": "c8602b0eb5ca9ac2",
+    "LEG-CO-02": "4e3f1ab9878cbf20",
+    "LEG-CO-03": "797901901760d213",
+    "LEG-EN-01": "275803dddbf486ae",
+    "LEG-EN-02": "5de68fb4ed875eaa",
+    "LEG-EN-03": "997b1b4ef3763199",
+    "LEG-ST-01": "5336526e404fd713",
+    "LEG-ST-02": "db43d9f92024174f",
+    "LEG-ST-03": "29ca3f45a085a225",
+    "LEG-TU-01": "3569557d741ac151",
+    "LEG-TU-02": "c1961526dcfc52de",
+    "LEG-TU-03": "2fce8e119d85428e",
+    "LEG-VE-01": "b8fd8c572536d6ae",
+    "LEG-VE-02": "6b70d31cf96619fd",
+    "LEG-VE-03": "1ea1f9a224fafda1",
+    "LEG2-BA-01": "79aea2bf5e2de8b9",
+    "LEG2-BA-02": "34cab3e9b5f1c3c7",
+    "LEG2-BA-03": "a12c3204b72b4af6",
+    "LEG2-BA-05": "98921cd8a0d3600c",
+    "LEG2-CC-01": "782bd109653714ec",
+    "LEG2-CC-04": "f0476b6ffe6ee492",
+    "LEG2-CC-05": "8002825745b55ba7",
+    "LEG2-CC-06": "33c4b78223b0a9e2",
+    "LEG2-CO-01": "e1edad1fd7d9dbc8",
+    "LEG2-CO-02": "50f1ecd0c5c8a16e",
+    "LEG2-CO-03": "8c5fd4c137af12f7",
+    "LEG2-CO-06": "28c6ebbab1ec7fe4",
+    "LEG2-EN-01": "08e9411d80f49f65",
+    "LEG2-EN-03": "162cf61bf946f915",
+    "LEG2-EN-04": "d90fb13b42da9350",
+    "LEG2-EN-05": "a759f0e3b6a846ae",
+    "LEG2-ST-02": "bdd9fd80d841bb01",
+    "LEG2-ST-03": "1723cfdc57b7f7cd",
+    "LEG2-ST-04": "7b0f48da17631ba9",
+    "LEG2-ST-05": "79b965230a088270",
+    "LEG2-TU-01": "20d6f9bce61b9c9c",
+    "LEG2-TU-02": "c7bebdeabadb3f62",
+    "LEG2-TU-05": "7359f7c371873141",
+    "LEG2-TU-06": "3d8afae5cdae1acf",
+    "LEG2-VE-01": "a9d54af8c1363b3f",
+    "LEG2-VE-04": "390d4c01719e1455",
+    "LEG2-VE-05": "c24837868e2d3fe5",
+    "LEG2-VE-06": "55ae23034b79aeef"
+  },
+  "roles_protegida": "336bf580ac230a0f",
+  "modelos": {
+    "gemma4:e2b-it-q4_K_M": {
+      "carga_ms": 415,
+      "calentamiento_ms": 415,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 330783784,
+        "size_vram_bytes": 330783784
+      },
+      "pensar": false,
+      "runtime_total_ns": 414014039,
+      "runtime_load_ns": 1046116,
+      "runtime_prompt_eval_ns": 69870000,
+      "runtime_eval_ns": 310390000
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-11-10T01:08:00"
+}

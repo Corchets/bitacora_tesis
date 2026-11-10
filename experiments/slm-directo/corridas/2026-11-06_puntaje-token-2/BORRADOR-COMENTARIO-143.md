@@ -2,6 +2,26 @@
 
 > **Estado: propuesta sin discutir.** Desarrollo; la reserva no se corre.
 
+### Resultado de la etapa 3 (corrida y analizada el 2026-11-09)
+
+La regla se escribió antes de correr, con las decisiones de Mateo: tag `colab/143-etapa-3`, commit `c3c1ffa`.
+- **Qué se probó:** C con un campo `pedido_critico` antes del riesgo, contra C sin alerta (solo el riesgo). Se usó una
+  consulta por línea y la misma vista que en la etapa 2.
+- **La base:** C sin alerta se apartó de la etapa 2 en +3 estafas y +5 FA, así que la base pasó a ser C de la etapa 2
+  cortado tras el riesgo: 36/46 estafas, 17/36 avisos antes del pedido, 25/36 a tiempo y 27/94 FA.
+- **C con campo:** 37/46, 15/36, 21/36 y 18/94 FA. Pierde 4 avisos a tiempo, y 3 en la repetición, así que **no se
+  adopta**.
+- **«Solo OTRA» se adopta:** no empeora ninguna cifra en más de 2.
+- **Queda C de la etapa 2 cortado tras el riesgo, con «riesgo ≥ 0,3» y solo en las líneas de OTRA, provisorio hasta la
+  reserva.**
+- **Diagnóstico, escrito después de ver los resultados:**
+  - el aviso es casi siempre «el modelo escribió 0,3 una vez»: 31 de 36 avisos en estafas y 25 de 27 FA;
+  - la baja de FA de C con campo es sólida (10 pares contra 1, p = 0,012). La alerta fuerte avisa pocas veces (12/30 a
+    tiempo) y salta en 5/94 legítimas;
+  - la base no pide motivo nunca, y eso lo decide el equipo.
+
+Detalle en `experiments/slm-directo/corridas/2026-11-09_pedido-critico-etapa-3/analisis.md`.
+
 ### Resultado de la etapa 2 (corrida el 2026-11-07, analizada el 2026-11-09)
 
 La regla se escribió antes de correr, y Mateo la confirmó (tag `colab/143-etapa-2`, commit `d127953`).

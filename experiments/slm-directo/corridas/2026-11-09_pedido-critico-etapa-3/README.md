@@ -1,8 +1,13 @@
 # #143, segunda vuelta, etapa 3: C con campo contra C sin alerta, una consulta por línea
 
-> **Estado: propuesta sin discutir.** Desarrollo; la reserva no se corre. Preparada el 2026-11-09, sin correr. La regla
-> de abajo está escrita antes de correr, en código en [`analizar.py`](analizar.py), con las decisiones de Mateo del
-> 2026-11-09. El Colab está en
+> **Estado: propuesta sin discutir.** Desarrollo; la reserva no se corre. Preparada, corrida en Colab y analizada el
+> 2026-11-09. **Según la regla, queda la base: C de la etapa 2 cortado tras el riesgo, con «riesgo ≥ 0,3» y solo en
+> las líneas de OTRA, provisoria hasta la reserva.**
+> - C con campo no se adopta: baja las FA de 27 a 18, pero pierde 4 avisos a tiempo, y 3 en la repetición.
+> - C sin alerta se apartó de la etapa 2 en más de ±2, así que no fue la base.
+>
+> Ver [`analisis.md`](analisis.md). La regla de abajo está escrita antes de correr, en código en
+> [`analizar.py`](analizar.py), con las decisiones de Mateo del 2026-11-09. El Colab está en
 > [`colab/README-PUNTAJE-TOKEN.md` §6](../../colab/README-PUNTAJE-TOKEN.md#6-segunda-vuelta-etapa-3-tag-colab143-etapa-3).
 
 ## Qué pregunta
@@ -195,4 +200,9 @@ Alrededor de 1 h en T4:
 |---|---|
 | [`analizar.py`](analizar.py) | La regla de arriba en código, escrita antes de correr. Tests en [`tests/test_etapa3_143.py`](../../tests/test_etapa3_143.py). |
 | [`FUENTES.md`](FUENTES.md) | Fuentes externas de cada ejemplo de la definición, y de la exclusión del DNI. |
+| [`analisis.md`](analisis.md) | Resultado: verificación de los ZIP, la regla paso a paso, qué se aprende y lo que queda abierto. |
+| [`analisis-salida.md`](analisis-salida.md), `curva.csv` | Salida completa de `python -I analizar.py` y la curva de cada corrida. |
+| [`diagnostico.py`](diagnostico.py), [`diagnostico-salida.md`](diagnostico-salida.md) | Diagnóstico fuera de la regla, escrito el 2026-11-09 después de ver los resultados: el riesgo escrito y el escalón del 0,3, McNemar de los pares discordantes, los avisos a tiempo que pierde C con campo, la alerta fuerte en las legítimas y los 22 motivos. |
+| `humo/`, `c-sin-alerta/`, `c-con-campo/`, `c-sin-alerta-rep/`, `c-con-campo-rep/`, `controles-ventas/` | Corridas de Colab, una carpeta por corrida, tal como bajaron. |
+| `commit.txt`, `script-sha256.txt`, `ollama-version.txt`, `digest.txt`, `pip-freeze.txt`, `gpu.txt` | Registro de la corrida. |
 | [`alcance-91`](../../casos/listas/alcance-91.txt) y [`legitimas-escenarios-45`](../../casos/listas/legitimas-escenarios-45.txt) | La vista sin escenarios repetidos ni dudosas. Copiadas tal cual de la rama `corpus/escenarios-y-dudosas` (commit `45e3037`), donde están el manifiesto y el criterio. |
