@@ -20,7 +20,7 @@ import soundfile as sf
 from websockets.asyncio.client import connect
 from websockets.asyncio.server import serve
 
-from test_llamada import Reloj, RespuestaFalsa, pcm
+from test_llamada import MUDO, Reloj, RespuestaFalsa, final, pcm
 from motores import MotorFalso
 from servidor import ASR_POR_DEFECTO, DIR_VOIP, Servidor, parse_args, principal, umbral_de_llamada
 import replay as replay_mod
@@ -1238,6 +1238,83 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 ollama_url="http://127.0.0.1:11434",
                 indicio=False,
             )
+
+    def test_parse_args_consulta_por_turno_con_umbrales_y_modo_de_hoy(self):
+        with patch("sys.argv", ["servidor.py"]):
+            args = parse_args()
+        self.assertEqual((args.disparo, args.turno_palabras, args.turno_voz_s, args.turno_silencio_s, args.turno_tope_s),
+                         ("turno", 3, 1.0, 2.0, 15.0))
+        with patch("sys.argv", ["servidor.py", "--disparo", "final"]):
+            self.assertEqual(parse_args().disparo, "final")
+        with patch("sys.argv", ["servidor.py", "--turno-silencio-s", "1.5", "--turno-tope-s", "20"]):
+            args = parse_args()
+        self.assertEqual((args.turno_silencio_s, args.turno_tope_s), (1.5, 20.0))
+        for invalido in (["--turno-tope-s", "0"], ["--turno-palabras", "0"], ["--disparo", "turnos"]):
+            with self.subTest(invalido=invalido), patch("sys.argv", ["servidor.py", *invalido]), patch("sys.stderr"):
+                with self.assertRaises(SystemExit):
+                    parse_args()
+
+    async def test_preparar_pasa_disparo_y_reglas_de_turno_a_la_llamada(self):
+        args = Namespace(salida=self.tmp.name, disparo="turno", detector="reglas", hilos=2, corte_silencio="auto",
+                         asr="zipformer", turno_palabras=4, turno_voz_s=1.2, turno_silencio_s=1.5, turno_tope_s=30.0)
+        servidor = ServidorFalso(args, DetectorFalso(), ahora=self.reloj)
+        servidor.preparar()
+        llamada = await servidor.preparada
+        self.assertEqual(llamada.disparo, "turno")
+        self.assertEqual((llamada.reglas_turno.palabras, llamada.reglas_turno.voz_s,
+                          llamada.reglas_turno.silencio_s, llamada.reglas_turno.tope_s), (4, 1.2, 1.5, 30.0))
+
+    async def test_turnos_de_otra_disparan_por_silencio_y_se_saltean_mientras_evalua(self):
+        empezo, seguir, vistas = threading.Event(), threading.Event(), []
+
+        class DetectorLento:
+            def evaluar(self, foto):
+                vistas.append(tuple(l.texto for l in foto))
+                if len(vistas) == 1:
+                    empezo.set()
+                    seguir.wait(3)
+                return RespuestaFalsa()
+
+        otra = [final(1.8, 1, "Te llamo del banco."), final(4.8, 2, "Hubo un movimiento raro."),
+                final(7.8, 3, "Pasame el código.")]
+        motores = [MUDO, otra]
+        self.servidor.args.disparo = "turno"
+        self.servidor.detector = DetectorLento()
+        self.addCleanup(seguir.set)
+
+        def hablar(segundos, *con_voz):
+            for _ in range(int(round(segundos * 10))):
+                self.reloj.t += 0.1
+                for rol in ("otra", "protegida"):
+                    self.servidor.recibir_audio(rol, pcm(0.1, 0.1 if rol in con_voz else 0.0))
+
+        with patch.object(self.servidor, "crear_motor", side_effect=lambda: MotorFalso(motores.pop(0) if motores else MUDO)):
+            self.servidor.preparar()
+            await self.servidor.preparada
+            async with connect(self.url + "/panel") as panel:
+                await panel.send(self.inicio())
+                await self.evento(panel, "inicio")
+                hablar(1.0, "otra")
+                hablar(1.9)
+                await asyncio.sleep(0.05)
+                self.assertEqual(vistas, [])  # 1,9 s de silencio: el turno sigue abierto
+                hablar(0.1)  # 2 s: el bloque no trae texto, pero cierra el turno y dispara
+                self.assertTrue(await asyncio.to_thread(empezo.wait, 3))
+                hablar(1.0, "otra")
+                hablar(2.0)
+                hablar(1.0, "otra")
+                hablar(2.0)  # dos turnos más mientras el detector sigue ocupado con el primero
+                seguir.set()
+                await self.evento(panel, "detector")
+                segundo = await self.evento(panel, "detector")
+                await panel.send(json.dumps({"tipo": "terminar"}))
+                fin = await self.evento(panel, "fin")
+        self.assertEqual(vistas, [("Te llamo del banco.",),
+                                  ("Te llamo del banco.", "Hubo un movimiento raro.", "Pasame el código.")])
+        self.assertEqual(segundo["saltadas"], 1)
+        manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifiesto["detector"]["evaluaciones"], 2)
+        self.assertEqual([c["motivo"] for c in manifiesto["turnos"]["cierres"]], ["silencio"] * 3)
 
     async def test_preparar_pasa_hablantes_a_la_llamada(self):
         args = Namespace(salida=self.tmp.name, disparo="final", detector="reglas", hilos=2,

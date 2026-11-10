@@ -7,6 +7,11 @@ frases si se elige en el panel), escribe
 `actualizaciones.jsonl` con el contrato de experiments/asr-local (la llamada se puede
 volver a correr con replay.py), llama al detector y muestra todo en un panel web.
 
+Por defecto se consulta al detector al cerrar cada turno de OTRA (ADR 0007, `turnos.py`): el
+turno se cierra cuando PROTEGIDA empieza a hablar en serio o tras un silencio largo, y un turno
+largo consulta igual al pasar el tope. Los umbrales son provisorios y van por línea de comandos
+(`--turno-*`). `--disparo final` vuelve a consultar en cada frase de los dos lados, para comparar.
+
 El detector evalúa siempre la foto más reciente: si llega texto mientras evalúa, la
 siguiente evaluación toma lo último disponible y las intermedias se saltean. Así la
 demora no crece con la cola, a diferencia del replay, que evalúa todas en orden.
@@ -44,7 +49,8 @@ from websockets.http11 import Response
 
 import guia
 import historial
-from llamada import DIR_VOIP, ROLES, SAMPLE_RATE, Llamada
+from llamada import DIR_VOIP, DISPAROS, ROLES, SAMPLE_RATE, Llamada
+from turnos import ReglasTurno
 
 import replay  # noqa: E402  (rutas de slm-directo y replay ya agregadas por llamada.py)
 from motores import DetectorSilero, MotorASR, MotorSherpaParakeet, MotorSherpaZipformer
@@ -119,6 +125,15 @@ def validar_asr(valor) -> str:
     return valor
 
 
+def reglas_turno(args: argparse.Namespace) -> ReglasTurno:
+    """Las de la línea de comandos; sin ellas (tests, medir.py), las provisorias por defecto."""
+    base = ReglasTurno()
+    return ReglasTurno(palabras=getattr(args, "turno_palabras", base.palabras),
+                       voz_s=getattr(args, "turno_voz_s", base.voz_s),
+                       silencio_s=getattr(args, "turno_silencio_s", base.silencio_s),
+                       tope_s=getattr(args, "turno_tope_s", base.tope_s))
+
+
 def corte_de_linea_de_comandos(texto: str) -> str | float:
     try:
         return validar_corte(CORTE_AUTO if texto == CORTE_AUTO else float(texto))
@@ -186,6 +201,7 @@ class Servidor:
                 disparo=self.args.disparo,
                 hablantes=getattr(self.args, "hablantes", "ab"),
                 ahora=self.ahora,
+                reglas_turno=reglas_turno(self.args),
             )
         )
 
@@ -307,10 +323,14 @@ class Servidor:
 
     def recibir_audio(self, rol: str, pcm: bytes, *, llegada: float | None = None) -> None:
         """Entrada común para cliente.py y el estéreo del ejemplo."""
-        for act in self.llamada.recibir(rol, pcm, llegada=llegada):
+        llamada, consulta = self.llamada, self.config_llamada.get("modo") != "asr"
+        for act in llamada.recibir(rol, pcm, llegada=llegada):
             self.difundir({**act, "tipo": "asr", "entrega": act["tipo"]})
-            if self.config_llamada.get("modo") != "asr" and self.llamada.marcar_disparo(act):
-                self.novedad.set()
+            if consulta:
+                llamada.marcar_disparo(act)
+        # Con turnos el disparo puede llegar sin texto nuevo: lo cierra el silencio del bloque.
+        if consulta and llamada.disparos:
+            self.novedad.set()
 
     async def atender_audio(self, ws, rol: str) -> None:
         if rol not in ROLES:
@@ -622,8 +642,18 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--ollama-url", default=replay.cliente_ollama.URL_POR_DEFECTO,
                    help="Ollama de otra máquina (p. ej. la PC con GPU) para bajar la demora del SLM")
-    p.add_argument("--disparo", choices=("final", "parcial"), default="final",
-                   help="final: evalúa al cerrar cada frase; parcial: también con texto provisorio (menos demora, más falsas alarmas)")
+    p.add_argument("--disparo", choices=DISPAROS, default="turno",
+                   help="turno: consulta al cerrar cada turno de OTRA (ADR 0007); final: en cada frase de los dos "
+                        "lados, como antes; parcial: también con texto provisorio (menos demora, más falsas alarmas)")
+    base = ReglasTurno()
+    p.add_argument("--turno-palabras", type=int, default=base.palabras,
+                   help="con --disparo turno: el otro lado habla en serio con al menos estas palabras…")
+    p.add_argument("--turno-voz-s", type=float, default=base.voz_s,
+                   help="…o con un segmento del ASR de más de estos segundos (un «ajá» no cierra el turno)")
+    p.add_argument("--turno-silencio-s", type=float, default=base.silencio_s,
+                   help="silencio de un canal que cierra su turno, medido con el umbral RMS del ASR")
+    p.add_argument("--turno-tope-s", type=float, default=base.tope_s,
+                   help="un turno de OTRA más largo consulta igual, al cerrar la frase siguiente")
     p.add_argument("--corte-silencio", type=corte_de_linea_de_comandos, default=CORTE_AUTO,
                    help="corte de silencio de las llamadas que abre cliente.py: «auto» (el del modelo, 0,8 s de respaldo) "
                         "o segundos de 0,1 a 3,0; desde el panel se elige en cada llamada")
@@ -640,6 +670,10 @@ def parse_args() -> argparse.Namespace:
     args = p.parse_args()
     if args.hablantes == "ab" and replay.detectores.usa_roles(args.prompt):
         p.error(f"el prompt {args.prompt} nombra a PROTEGIDA y OTRA: necesita --hablantes rol")
+    try:
+        reglas_turno(args)
+    except ValueError as exc:
+        p.error(str(exc))
     return args
 
 

@@ -17,7 +17,7 @@ import json
 import shutil
 import sys
 import time
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
@@ -30,11 +30,14 @@ for _dir in (DIR_VOIP.parent / "asr-local", DIR_VOIP.parent / "replay", DIR_VOIP
 
 from contexto import Actualizacion, ContextoLlamada
 from motores import MotorASR
+from turnos import ReglasTurno, Turnos
 
 SAMPLE_RATE = 16000
 ROLES = ("protegida", "otra")
 # Lo que se manda al ASR y se guarda: PCM 16 bits mono a 16 kHz.
 ESCALA_INT16 = 32768.0
+# turno: al cerrar cada turno de OTRA (ADR 0007); final y parcial: cada frase de los dos lados, como antes.
+DISPAROS = ("turno", "final", "parcial")
 
 
 @dataclass
@@ -76,15 +79,17 @@ class Llamada:
     def __init__(
         self,
         crear_motor: Callable[[], MotorASR],
-        disparo: str = "final",
+        disparo: str = "turno",
         hablantes: str = "ab",
         ahora: Callable[[], float] = time.monotonic,
+        reglas_turno: ReglasTurno = ReglasTurno(),
     ) -> None:
-        if disparo not in ("final", "parcial"):
-            raise ValueError(f"disparo desconocido {disparo!r}; opciones: final, parcial")
+        if disparo not in DISPAROS:
+            raise ValueError(f"disparo desconocido {disparo!r}; opciones: {', '.join(DISPAROS)}")
         if hablantes not in ("ab", "rol"):
             raise ValueError(f"hablantes desconocido {hablantes!r}; opciones: ab, rol")
         self.disparo = disparo
+        self.reglas_turno = reglas_turno
         self.hablantes = hablantes
         self._ahora = ahora
         self.canales: dict[str, Canal] = {}
@@ -108,6 +113,7 @@ class Llamada:
         self.evaluaciones: list[Evaluacion] = []
         self.aviso: Evaluacion | None = None
         self.audio_vaciado = False
+        self.turnos = Turnos(self.reglas_turno)
 
     def abrir(self, llamada_id: str, dir_salida: Path) -> None:
         self.llamada_id = llamada_id
@@ -184,7 +190,12 @@ class Llamada:
             canal.ultima_voz_s = fin_bloque
         eventos = canal.motor.procesar_bloque(flotante, inicio_bloque, fin_bloque)
         # Zipformer a veces cierra un segmento con solo un punto: no es una línea.
-        return [self._registrar(canal, e) for e in eventos if any(c.isalnum() for c in e.texto)]
+        acts = [self._registrar(canal, e) for e in eventos if any(c.isalnum() for c in e.texto)]
+        if self.disparo == "turno":
+            # El mismo silencio que el panel muestra por canal: medido con el umbral RMS del ASR.
+            silencio = fin_bloque - (canal.inicio_s if canal.ultima_voz_s is None else canal.ultima_voz_s)
+            self._sumar_disparos(self.turnos.silencio(rol, silencio, fin_bloque))
+        return acts
 
     def _registrar(self, canal: Canal, evento) -> dict:
         if canal.letra is None:
@@ -212,6 +223,7 @@ class Llamada:
             canal.retrasos_final_s.append(disponible - fin_voz)
             self.ultimo_fin_voz_s = fin_voz
         else:
+            fin_voz = evento.fin_audio_s
             canal.retrasos_parcial_s.append(disponible - evento.fin_audio_s)
         self._escribir(self._jsonl, act)
         campos = {k: v for k, v in act.items() if k != "fin_voz_s"}
@@ -221,20 +233,35 @@ class Llamada:
         else:
             campos["canal"] = canal.letra
             self.foto = self.contexto.aplicar(Actualizacion(**campos), "ab")
+        if self.disparo == "turno":
+            self._sumar_disparos(self.turnos.frase(canal.rol, evento.tipo, evento.texto, evento.inicio_audio_s, fin_voz))
         # El panel conserva el contrato de eventos previo; el JSONL identifica el rol.
         return {**act, "canal": canal.letra, "rol": canal.rol}
 
     def marcar_disparo(self, act: dict) -> bool:
-        """True si esta actualización pide evaluar (según --disparo y si ya hubo aviso)."""
-        if self.aviso is None and (self.disparo == "parcial" or act["tipo"] == "final"):
+        """True si esta actualización pide evaluar por sí sola (--disparo final o parcial, sin aviso previo).
+
+        Con --disparo turno ninguna actualización dispara sola: los disparos los suma el cierre de
+        turnos dentro de `recibir` y `vaciar_audio`, y se leen en `disparos`.
+        """
+        if self.aviso is None and (self.disparo == "parcial" or (self.disparo == "final" and act["tipo"] == "final")):
             self.disparos += 1
             return True
         return False
 
+    def _sumar_disparos(self, consultas: int) -> None:
+        if self.aviso is None:
+            self.disparos += consultas
+
     def tomar_foto(self) -> tuple[int, tuple, int]:
-        """Lo último disponible para el detector y cuántos disparos junta esta evaluación."""
+        """Lo último disponible para el detector y cuántos disparos junta esta evaluación.
+
+        Con turnos, solo las frases cerradas: lo medido en desarrollo son turnos completos, y el
+        borrador del otro lado que acaba de cerrar el turno todavía no es una línea.
+        """
         disparos, self.disparos = self.disparos, 0
-        return self.n, self.foto, disparos
+        foto = tuple(self.contexto.cerrados) if self.disparo == "turno" else self.foto
+        return self.n, foto, disparos
 
     def registrar_evaluacion(self, n: int, disparos: int, respuesta: Any, inicio_s: float, fin_s: float) -> Evaluacion:
         """Aviso único: la primera respuesta válida con alerta. T_A = fin de esa evaluación."""
@@ -290,6 +317,9 @@ class Llamada:
             for e in canal.motor.vaciar_final(canal.fin_s()):
                 if any(c.isalnum() for c in e.texto):
                     ultimas.append(self._registrar(canal, e))
+        if self.disparo == "turno":
+            fin = max((c.fin_s() for c in self.canales.values() if c.inicio_s is not None), default=0.0)
+            self._sumar_disparos(self.turnos.cerrar_todo(fin))
         self.audio_vaciado = True
         return ultimas
 
@@ -304,6 +334,8 @@ class Llamada:
             "llamada_id": self.llamada_id,
             "asr": self.meta_asr,
             "disparo": self.disparo,
+            **({"turnos": {"reglas": asdict(self.reglas_turno), "cierres": self.turnos.cierres}}
+               if self.disparo == "turno" else {}),
             "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",
             "canales": {c.rol: self._resumen_canal(c) for c in self.canales.values() if c.inicio_s is not None},
             "estereo": "estereo.wav (izquierdo = protegida, derecho = otra; fuera de Git)" if guardar_audio else None,
