@@ -8,6 +8,7 @@ Ejemplos:
     python correr.py --modelos qwen3.5:2b --casos SC-WA-CODE-01-e01 --detalle
     python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32
     python correr.py --solo-reranker --reranker MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7 --hilos 4 --seguir-tras-aviso
+    python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts tarea-sino --hablantes ab --sin-reglas --seguir-tras-aviso
 
 Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     manifiesto.json      qué se corrió: modelos, prompts, casos, código, máquina
@@ -49,11 +50,40 @@ from detectores import (
     DetectorReglas,
     DetectorSLM,
     DetectorSLMDosEtapas,
+    DetectorSLMCCorto,
+    DetectorSLMJSONCortado,
+    DetectorSLMDigito,
+    DetectorSLMLecturaJSON,
+    DetectorSLMSiNo,
+    DIGITOS,
+    MAXIMO_TOKENS_C_CORTO,
+    MAXIMO_TOKENS_CORTE,
+    MAXIMO_TOKENS_LECTURA,
+    MAXIMO_TOKENS_RESPUESTA,
+    PROMPTS_C_CORTO,
+    PROMPTS_CORTE,
+    PROMPTS_DIGITO,
+    PROMPTS_LECTURA,
+    PROMPTS_SINO,
+    PROMPTS_TOKEN,
+    TOP_LOGPROBS,
+    UMBRAL_CORTE,
+    UMBRAL_DIGITO,
+    UMBRAL_LECTURA,
+    UMBRAL_SI,
+    VARIANTES_NO,
+    VARIANTES_SI,
     Respuesta,
+    cargar_pregunta,
     cargar_prompt,
     cargar_prompt_motivo,
+    PROMPT_MOTIVO,
+    PROMPT_MOTIVO_C,
+    PROMPT_MOTIVO_CORTE,
+    UMBRAL_C,
     esquema_de,
     huella,
+    leer_si_no,
 )
 from filtro_tito import UMBRAL_TITO, FlujoTitoSLM, TitoGuion
 from tito_viejo_2 import PESOS, TitoViejo20
@@ -115,6 +145,15 @@ COLUMNAS = [
     "tokens_salida_etapa2",
     "crudo_etapa2",
 ]
+# Solo si la corrida usa un prompt SÍ/NO (#143): las corridas sin esos prompts conservan
+# exactamente las columnas de antes.
+COLUMNAS_SINO = ["p_si", "masa_si_no", "top_logprobs"]
+# Solo si la corrida usa un prompt de dígito o v4-L (#143, segunda vuelta); van después de COLUMNAS_SINO.
+COLUMNAS_DIGITO = ["digito_esperado", "masa_digitos", "riesgo_esperado"]
+# Solo si la corrida usa un prompt cortado (PROMPTS_CORTE); van al final. `alerta_sugerida` es la regla del detector.
+COLUMNAS_CORTE = ["alerta_escrita"]
+# Solo si la corrida usa C sin alerta o C con campo (PROMPTS_C_CORTO); van al final. Vacía con `c-sin-alerta`.
+COLUMNAS_CAMPO = ["pedido_critico"]
 
 
 @dataclass
@@ -306,6 +345,27 @@ class FalloAlCalentar(Exception):
     """El modelo no quedó listo para medir: la corrida no debe seguir con él."""
 
 
+def comprobar_logprobs(cliente: ClienteOllama, modelo: str, num_ctx: int, extra: dict | None, pensar: bool | None) -> dict:
+    """Comprueba, antes de medir, que Ollama devuelva logprobs del primer token (#143).
+
+    Hace falta Ollama ≥ 0.12.11; una versión anterior ignora el campo y todas las líneas
+    serían fallos. Guarda las cinco alternativas más probables para el manifiesto.
+    """
+    mensajes = [{"role": "user", "content": "¿Buenos Aires es una ciudad? Respondé solo SÍ o NO."}]
+    opciones = {"temperature": 0, "num_ctx": num_ctx, "num_predict": 1, **(extra or {})}
+    try:
+        r = cliente.chat(modelo, mensajes, None, opciones, pensar, top_logprobs=TOP_LOGPROBS)
+    except ErrorOllama as e:
+        raise FalloAlCalentar(f"{modelo} no respondió al pedir logprobs ({e}).") from e
+    p_si, masa, alternativas, error = leer_si_no(r.get("logprobs"))
+    if error and error != "sin_si_no":
+        raise FalloAlCalentar(
+            f"Ollama no devolvió logprobs utilizables con {modelo} ({error}). "
+            "Hace falta Ollama 0.12.11 o posterior: actualizalo desde https://ollama.com/download."
+        )
+    return {"chequeo": "ok", "p_si": p_si, "masa_si_no": masa, "top5": alternativas[:5]}
+
+
 def _runtime_ns(respuesta: dict, clave: str) -> int | None:
     """Duración del runtime en ns; None si el runtime no la informa (ausencia explícita)."""
     valor = respuesta.get(clave)
@@ -413,14 +473,30 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "tokens_prompt_etapa2": "" if r.tokens_prompt_etapa2 is None else r.tokens_prompt_etapa2,
         "tokens_salida_etapa2": "" if r.tokens_salida_etapa2 is None else r.tokens_salida_etapa2,
         "crudo_etapa2": r.crudo_etapa2,
+        # Se escriben solo si la corrida tiene COLUMNAS_SINO (ver main).
+        "p_si": "" if r.p_si is None else round(r.p_si, 6),
+        "masa_si_no": "" if r.masa_si_no is None else round(r.masa_si_no, 6),
+        "top_logprobs": r.top_logprobs,
+        # Se escriben solo si la corrida tiene COLUMNAS_DIGITO (ver main).
+        "digito_esperado": "" if r.digito_esperado is None else round(r.digito_esperado, 6),
+        "masa_digitos": "" if r.masa_digitos is None else round(r.masa_digitos, 6),
+        "riesgo_esperado": "" if r.riesgo_esperado is None else round(r.riesgo_esperado, 6),
+        # Se escribe solo si la corrida tiene COLUMNAS_CORTE (ver main).
+        "alerta_escrita": bool_(r.alerta_escrita),
+        # Se escribe solo si la corrida tiene COLUMNAS_CAMPO (ver main).
+        "pedido_critico": bool_(r.pedido_critico),
     }
 
 
 def _prompt_manifiesto(variante: str) -> dict:
     datos = {"huella": huella(cargar_prompt(variante)), "texto": cargar_prompt(variante), "esquema": esquema_de(variante)}
-    if variante == "riesgo":
-        motivo = cargar_prompt_motivo()
+    if variante == "riesgo" or variante in PROMPTS_CORTE | PROMPTS_C_CORTO:
+        motivo = cargar_prompt_motivo(PROMPT_MOTIVO_CORTE if variante in PROMPTS_CORTE else
+                                      PROMPT_MOTIVO_C if variante in PROMPTS_C_CORTO else PROMPT_MOTIVO)
         datos["etapa2"] = {"huella": huella(motivo), "texto": motivo, "esquema": ESQUEMA_MOTIVO}
+    pregunta = cargar_pregunta(variante)
+    if pregunta is not None:  # cierra el mensaje del usuario, después de la transcripción
+        datos["pregunta_final"] = {"huella": huella(pregunta), "texto": pregunta}
     return datos
 
 
@@ -510,8 +586,12 @@ def main(argv: list[str] | None = None) -> int:
     modelos = [] if (args.solo_reglas or args.solo_reranker) else _lista(args.modelos)
     if not modelos and not args.solo_reglas and not args.solo_reranker:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b), --solo-reglas o --solo-reranker.")
-    if args.filtro_tito and "riesgo" in _lista(args.prompts):
-        sys.exit("--filtro-tito no admite --prompts riesgo: el flujo Tito→SLM usa el prompt de un paso.")
+    if args.filtro_tito and ({"riesgo"} | PROMPTS_CORTE | PROMPTS_C_CORTO) & set(_lista(args.prompts)):
+        sys.exit(f"--filtro-tito no admite --prompts riesgo ni los cortados "
+                 f"({', '.join(sorted(PROMPTS_CORTE | PROMPTS_C_CORTO))}): "
+                 "el flujo Tito→SLM usa el prompt de un paso.")
+    if args.filtro_tito and PROMPTS_TOKEN & set(_lista(args.prompts)):
+        sys.exit("--filtro-tito no admite los prompts de token (SÍ/NO o dígito): en #143 la compuerta de Tito se simula offline.")
     if args.tito_viejo_2 and not args.filtro_tito:
         sys.exit("--tito-viejo-2 requiere --filtro-tito.")
     if args.tito_viejo_2 and args.particion != "desarrollo":
@@ -570,7 +650,22 @@ def main(argv: list[str] | None = None) -> int:
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                if variante == "riesgo":
+                if variante in PROMPTS_C_CORTO:
+                    d = DetectorSLMCCorto(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                          esquema=esquema_de(variante))
+                elif variante in PROMPTS_CORTE:
+                    d = DetectorSLMJSONCortado(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                               esquema=esquema_de(variante))
+                elif variante in PROMPTS_LECTURA:
+                    d = DetectorSLMLecturaJSON(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                               esquema=esquema_de(variante))
+                elif variante in PROMPTS_DIGITO:
+                    d = DetectorSLMDigito(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                          cierre=cargar_pregunta(variante))
+                elif variante in PROMPTS_SINO:
+                    d = DetectorSLMSiNo(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                        cierre=cargar_pregunta(variante))
+                elif variante == "riesgo":
                     d = DetectorSLMDosEtapas(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, umbral=args.umbral)
                 else:
                     d = DetectorSLM(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra, esquema=esquema_de(variante))
@@ -651,6 +746,40 @@ def main(argv: list[str] | None = None) -> int:
         "parametros_slm": {
             "num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra,
             **({"umbral_etapa2": args.umbral} if "riesgo" in prompts else {}),
+            **({"lectura_token": {
+                "num_predict": 1, "top_logprobs": TOP_LOGPROBS, "formato": None,
+                "p_si": "P(SÍ) / (P(SÍ) + P(NO)) del primer token, sumando variantes",
+                "variantes_si": sorted(VARIANTES_SI), "variantes_no": sorted(VARIANTES_NO),
+                "normalizacion": "sin tildes, sin espacios ni signos alrededor, en mayúsculas (detectores.forma_token)",
+                "alerta_sugerida": f"p_si >= {UMBRAL_SI} (solo marca; la política se elige offline)",
+            }} if modelos and PROMPTS_SINO & set(prompts) else {}),
+            **({"lectura_digito": {
+                "num_predict": 1, "top_logprobs": TOP_LOGPROBS, "formato": None,
+                "digito_esperado": "Σ d·P(d) / Σ P(d) sobre los dígitos del primer token; el puntaje es digito_esperado / 9",
+                "digitos": sorted(DIGITOS),
+                "normalizacion": "sin tildes, sin espacios ni signos alrededor, en mayúsculas (detectores.forma_token)",
+                "alerta_sugerida": f"digito_esperado >= {UMBRAL_DIGITO} (solo marca; la política se elige offline)",
+            }} if modelos and PROMPTS_DIGITO & set(prompts) else {}),
+            **({"lectura_json": {
+                "num_predict": MAXIMO_TOKENS_LECTURA, "top_logprobs": TOP_LOGPROBS, "formato": "el esquema JSON del prompt",
+                "riesgo_esperado": "P(1) + P(0)·E[d]/10: entero y primer decimal del riesgo dentro del JSON (detectores.leer_riesgo_json)",
+                "alerta_sugerida": f"riesgo_esperado >= {UMBRAL_LECTURA} (solo marca; la política se elige offline)",
+            }} if modelos and PROMPTS_LECTURA & set(prompts) else {}),
+            **({"json_cortado": {
+                "num_predict": MAXIMO_TOKENS_CORTE, "formato": "el esquema JSON del prompt", "logprobs": False,
+                "lectura": "riesgo y alerta_sugerida del texto cortado (detectores.leer_json_cortado)",
+                "alerta_sugerida": f"riesgo >= {UMBRAL_CORTE} o alerta_sugerida escrita (columna alerta_escrita)",
+                "etapa2": ("solo en la primera línea de la llamada en que dispara la regla: mismos mensajes + lo escrito, "
+                           f"cerrado como JSON, como assistant + motivo_v4_corte.txt, con ESQUEMA_MOTIVO y num_predict {MAXIMO_TOKENS_RESPUESTA}"),
+            }} if modelos and PROMPTS_CORTE & set(prompts) else {}),
+            **({"c_corto": {
+                "num_predict": MAXIMO_TOKENS_C_CORTO, "formato": "el esquema JSON del prompt", "logprobs": False,
+                "lectura": "el JSON entero, que el modelo cierra solo (detectores.leer_c_corto); al tope es un fallo",
+                "alerta_sugerida": f"riesgo >= {UMBRAL_C} o pedido_critico (columna pedido_critico), en cualquier línea",
+                "etapa2": ("solo en la primera alerta fuerte de la llamada (pedido_critico en true; el primer aviso por "
+                           "riesgo usa un texto fijo): mismos mensajes + el JSON escrito, como assistant + "
+                           f"{PROMPT_MOTIVO_C}, con ESQUEMA_MOTIVO y num_predict {MAXIMO_TOKENS_RESPUESTA}"),
+            }} if modelos and PROMPTS_C_CORTO & set(prompts) else {}),
         },
         "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},
         "reranker": None if not rerankers else {
@@ -682,9 +811,15 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print("Marcas por línea: . sin alerta · A aviso emitido (la llamada termina acá) · o SLM no consultado · x fallo\n")
 
+    hay_token = any(c["prompt"] in PROMPTS_TOKEN for c, _ in detectores if c["detector"] == "slm")
+    hay_digito = any(c["prompt"] in PROMPTS_DIGITO | PROMPTS_LECTURA for c, _ in detectores if c["detector"] == "slm")
+    hay_corte = any(c["prompt"] in PROMPTS_CORTE for c, _ in detectores if c["detector"] == "slm")
+    hay_campo = any(c["prompt"] in PROMPTS_C_CORTO for c, _ in detectores if c["detector"] == "slm")
+    columnas = (COLUMNAS + (COLUMNAS_SINO if hay_token else []) + (COLUMNAS_DIGITO if hay_digito else [])
+                + (COLUMNAS_CORTE if hay_corte else []) + (COLUMNAS_CAMPO if hay_campo else []))
     try:
         with (carpeta / "actualizaciones.csv").open("w", encoding="utf-8-sig", newline="") as f:
-            escritor = csv.DictWriter(f, fieldnames=COLUMNAS)
+            escritor = csv.DictWriter(f, fieldnames=columnas, extrasaction="ignore")
             escritor.writeheader()
             modelo_actual = None
             for config, detector in detectores:
@@ -702,6 +837,12 @@ def main(argv: list[str] | None = None) -> int:
                     except FalloAlCalentar as e:
                         manifiesto["modelos"][modelo_actual] = {"error": str(e)}
                         raise
+                    if any(c["modelo"] == modelo_actual and c["prompt"] in PROMPTS_TOKEN for c, _ in detectores):
+                        try:
+                            carga["logprobs"] = comprobar_logprobs(cliente_carga, modelo_actual, args.num_ctx, extra, carga["pensar"])
+                        except FalloAlCalentar as e:
+                            manifiesto["modelos"][modelo_actual] = {**carga, "error": str(e)}
+                            raise
                     manifiesto["modelos"][modelo_actual] = carga
                     guardar_manifiesto()
                     for c, d in detectores:
@@ -720,6 +861,7 @@ def main(argv: list[str] | None = None) -> int:
                         marcas.append(_marca(r, aviso))
                         if args.detalle:
                             estado = f"FALLO: {r.error}" if not r.valida else (
+                                f"p_si={r.p_si:.3f} masa_si_no={r.masa_si_no:.3f}" if r.p_si is not None else
                                 f"riesgo={r.riesgo if r.riesgo is not None else '-'} alerta={'sí' if r.alerta_sugerida else 'no'}"
                             )
                             print(f"   [{n:>2}] {linea.hablante}: {linea.texto}")

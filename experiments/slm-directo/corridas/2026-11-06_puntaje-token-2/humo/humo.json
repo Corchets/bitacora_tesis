@@ -1,0 +1,26 @@
+{
+  "v4-lectura": {
+    "lineas": 48,
+    "masa_ge_09": 48,
+    "masa_min": 0.999999,
+    "masa_mediana": 1.0,
+    "respuesta_limpia": 48,
+    "pasa": true
+  },
+  "c-sino": {
+    "lineas": 48,
+    "masa_ge_09": 48,
+    "masa_min": 0.999999,
+    "masa_mediana": 1.0,
+    "respuesta_limpia": 48,
+    "pasa": true
+  },
+  "c-digito": {
+    "lineas": 48,
+    "masa_ge_09": 48,
+    "masa_min": 0.999706,
+    "masa_mediana": 0.99995,
+    "respuesta_limpia": 48,
+    "pasa": true
+  }
+}

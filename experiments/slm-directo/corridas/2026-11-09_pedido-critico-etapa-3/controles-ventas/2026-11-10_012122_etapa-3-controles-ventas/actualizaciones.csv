@@ -1,0 +1,641 @@
+﻿config,detector,modelo,prompt,hablantes,case_id,linea,hablante,texto,valida,error,riesgo,alerta_sugerida,aviso,motivo,evidencia,evidencia_en_texto,ms,tokens_prompt,tokens_salida,crudo,consulta,tito_puntaje,tito_error,indicio_linea,indicio_texto,indicio_puntaje,tito_ms,slm_ms,runtime_ns,runtime_unidad,runtime_load_ns,runtime_prompt_eval_ns,runtime_eval_ns,ms_etapa1,ms_etapa2,tokens_prompt_etapa2,tokens_salida_etapa2,crudo_etapa2,pedido_critico
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,383.7,475,14,"{
+  ""riesgo"": 0.1
+}",,,,,,,,383.7,382736078,ns,1096245,260262000,101310000,383.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,2,OTRA,"Hola, buen día. ¿Hablo con Diego Ferreyra? Te habla Carla, de Banco Quebracho.",true,,0.2,false,false,,,,392.2,505,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,392.2,390933357,ns,1366618,274291000,104825000,392.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,3,PROTEGIDA,"Sí, soy yo. ¿Pasó algo?",true,,0.2,false,false,,,,393.8,522,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,393.8,392366823,ns,1079964,274696000,106240000,393.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,4,OTRA,"No, nada malo. Te llamo porque tenés un préstamo personal preaprobado. Antes, ¿me confirmás tu DNI?",true,,0.3,true,true,,,,406.2,557,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,406.2,404584339,ns,1867856,290208000,101117000,406.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,5,PROTEGIDA,"Mm, ¿y para qué lo querés, si me llamaste vos?",true,,0.3,true,false,,,,258.8,580,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,258.8,256786168,ns,1268342,138922000,104334000,258.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,6,OTRA,Es solo para saber que hablo con el titular. Después no te pido nada más.,true,,0.3,true,false,,,,240.5,605,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,240.5,239028792,ns,1245211,123902000,101481000,240.5,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,7,PROTEGIDA,Bueno... 30.123.456.,true,,0.2,false,false,,,,244.2,626,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,244.2,242255615,ns,1441192,121838000,104924000,244.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,8,OTRA,"Gracias. Tenés hasta dos millones, en cuotas fijas. Si te interesa, lo aceptás vos desde la app o el home banking, en Préstamos.",true,,0.2,false,false,,,,246.6,667,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,246.6,245013272,ns,1501614,130604000,98239000,246.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,9,PROTEGIDA,¿Y no lo podés cargar vos ahora? Te paso lo que haga falta.,true,,0.2,false,false,,,,246.0,691,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,246.0,243891068,ns,2163151,124342000,103285000,246.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,10,OTRA,"No, eso lo hacés vos. Nunca te vamos a pedir claves ni el código del token.",true,,0.2,false,false,,,,245.7,719,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,245.7,244426029,ns,1457302,127793000,102119000,245.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,11,PROTEGIDA,"Ah, bueno. ¿Y cuándo tendría la plata?",true,,0.2,false,false,,,,246.4,738,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,246.4,243935526,ns,1051728,125200000,104592000,246.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,12,OTRA,"Si lo aceptás, te avisamos por mail y en la app, y se acredita a partir de las 48 horas hábiles.",true,,0.2,false,false,,,,251.9,774,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,251.9,250714061,ns,1562322,134449000,98125000,251.9,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,13,PROTEGIDA,"Mm, lo voy a pensar. No sé si me conviene.",true,,0.2,false,false,,,,245.5,795,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,245.5,242589605,ns,1083142,127201000,97066000,245.5,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,14,OTRA,"Dale. Ojo que la tasa promocional es hasta fin de mes, pero la oferta te queda en la app.",true,,0.2,false,false,,,,274.6,826,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,274.6,273420354,ns,1084834,149190000,104079000,274.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,15,PROTEGIDA,"Bueno, gracias.",true,,0.2,false,false,,,,247.8,838,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,247.8,246481783,ns,1183825,125131000,106005000,247.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,16,OTRA,"A vos, Diego. Que tengas buen día.",true,,0.2,false,false,,,,245.2,855,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,245.2,244083500,ns,1642209,126071000,101240000,245.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,1,OTRA,"Banco Lapacho, buenas tardes, le habla Martín. ¿En qué lo puedo ayudar?",true,,0.1,false,false,,,,387.8,489,14,"{
+  ""riesgo"": 0.1
+}",,,,,,,,387.8,386320018,ns,2228650,262942000,107296000,387.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,2,PROTEGIDA,"Hola, Martín. Eh, quería pedir un préstamo personal. Para arreglar el auto, más que nada.",true,,0.1,false,false,,,,401.3,518,14,"{
+  ""riesgo"": 0.1
+}",,,,,,,,401.3,400301225,ns,1256431,286400000,100947000,401.3,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,3,OTRA,"Cómo no. Para empezar, ¿me dice su DNI y su fecha de nacimiento?",true,,0.3,true,true,,,,401.1,542,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,401.1,399847595,ns,1270322,285298000,101870000,401.1,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,4,PROTEGIDA,"Sí, 23.123.456. Nací el 4 de julio del 73.",true,,0.2,false,false,,,,241.7,575,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,241.7,240329722,ns,1000765,125500000,102405000,241.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,5,OTRA,"Gracias, Rodolfo. ¿Cuánto cobra por mes, más o menos? ¿Y dónde trabaja?",true,,0.2,false,false,,,,255.0,601,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,255.0,253737821,ns,1122027,134664000,103189000,255.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,6,PROTEGIDA,"Un millón doscientos en mano. En una distribuidora de bebidas, hace seis años.",true,,0.2,false,false,,,,248.0,628,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,248.0,246732749,ns,959481,138224000,94747000,248.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,7,OTRA,¿Cómo se llama la empresa?,true,,0.2,false,false,,,,197.7,641,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,197.7,196575217,ns,1751896,89015000,93873000,197.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,8,PROTEGIDA,"Distribuidora El Ombú. ¡Cuántas preguntas, che!",true,,0.2,false,false,,,,201.8,662,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,201.8,200769654,ns,918338,95943000,94583000,201.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,9,OTRA,"Disculpe, son para la evaluación. Me falta confirmar el domicilio y un correo.",true,,0.2,false,false,,,,220.8,686,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,220.8,219810839,ns,2440564,110325000,97454000,220.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,10,PROTEGIDA,"Los Fresnos 980, tercero A. El correo, a ver... rodolfo punto sosa arroba ejemplo punto com.",true,,0.2,false,false,,,,208.2,723,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,208.2,207174937,ns,1024106,106700000,89596000,208.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,11,OTRA,"Perfecto. Con esos ingresos le puedo ofrecer hasta dos millones, en 36 cuotas.",true,,0.2,false,false,,,,200.2,749,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,200.2,199247941,ns,988582,94878000,94151000,200.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,12,PROTEGIDA,"Bárbaro. ¿Y lo dejamos confirmado ahora, con usted?",true,,0.2,false,false,,,,201.9,772,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,201.9,200842224,ns,1118845,92191000,97011000,201.9,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,13,OTRA,"No, por teléfono no se puede. Le queda cargado y lo confirma usted desde el home banking, en Préstamos.",true,,0.2,false,false,,,,199.6,805,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,199.6,198628399,ns,1098468,96181000,90774000,199.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,14,PROTEGIDA,"Ah, mirá. ¿Y si no me sale?",true,,0.2,false,false,,,,204.0,825,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,204.0,203005919,ns,1057165,102527000,89304000,204.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,15,OTRA,Me vuelve a llamar y lo vemos. Le mando por correo el detalle de las cuotas.,true,,0.2,false,false,,,,203.8,851,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,203.8,202865793,ns,1079489,98024000,93112000,203.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-PIDE-PRESTAMO,16,PROTEGIDA,"Dale, esta noche lo hago. Gracias, Martín.",true,,0.2,false,false,,,,201.0,870,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,201.0,199966511,ns,1073962,93014000,93879000,201.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,323.6,475,14,"{
+  ""riesgo"": 0.1
+}",,,,,,,,323.6,322519448,ns,1041477,221886000,91517000,323.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,2,OTRA,"Hola, buenas tardes, ¿hablo con Mariela? Te habla Romina, de ventas de Ceibo Móvil.",true,,0.2,false,false,,,,359.7,506,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,359.7,358755287,ns,1052172,255921000,93319000,359.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,3,PROTEGIDA,"Sí, soy yo. Eh, ¿de dónde sacaron mi número?",true,,0.3,true,true,,,,343.6,528,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,343.6,342641080,ns,986845,238359000,95544000,343.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,4,OTRA,"De una base de datos de marketing; si querés, te digo de cuál. Y si no querés que te llamemos más, pedís el bloqueo y te saco ahora.",true,,0.6,true,false,,,,368.9,571,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,368.9,367814104,ns,1027789,269709000,88783000,368.9,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,5,PROTEGIDA,"No, dejá. ¿Qué me querías ofrecer?",true,,0.6,true,false,,,,196.8,590,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,196.8,195730881,ns,1096036,94101000,91835000,196.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,6,OTRA,Un plan con portabilidad: mantenés tu número y pagás la mitad durante seis meses. ¿La línea está a tu nombre?,true,,0.6,true,false,,,,200.4,623,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,200.4,199386645,ns,774400,93628000,96255000,200.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,7,PROTEGIDA,"Sí, es mía hace años. ¿Qué necesitás?",true,,0.4,true,false,,,,195.3,642,14,"{
+  ""riesgo"": 0.4
+}",,,,,,,,195.3,194243079,ns,1039201,91284000,92368000,195.3,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,8,OTRA,"Nombre completo, DNI, número de trámite, fecha de nacimiento y sexo, como figuran en el documento.",true,,0.6,true,false,,,,198.7,672,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,198.7,197712855,ns,981926,97724000,90050000,198.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,9,PROTEGIDA,¿El número de trámite también? Mirá que eso no se lo paso a cualquiera.,true,,0.6,true,false,,,,196.1,698,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,196.1,195073027,ns,971861,94972000,89979000,196.1,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,10,OTRA,Te entiendo. Es para validar tu identidad; lo exige el ENACOM para dar de alta la línea.,true,,0.4,true,false,,,,223.9,729,14,"{
+  ""riesgo"": 0.4
+}",,,,,,,,223.9,222911366,ns,869112,118353000,93728000,223.9,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,11,PROTEGIDA,"Bueno, a ver... Mariela Paz, 20.123.456. El trámite es 00123456789. Nací el 12 de marzo del 68, femenino.",true,,0.3,true,false,,,,218.7,790,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,218.7,217749891,ns,1113248,107509000,98822000,218.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,12,OTRA,Gracias. ¿A qué domicilio te mando el chip? Y pasame un correo para la factura.,true,,0.3,true,false,,,,205.5,817,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,205.5,204403086,ns,1041404,94454000,98765000,205.5,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,13,PROTEGIDA,"Calandrias 450, segundo B. El correo es marielapaz arroba ejemplo punto com.",true,,0.3,true,false,,,,200.1,849,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,200.1,198994840,ns,1159715,94597000,92227000,200.1,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,14,OTRA,Listo. En estos días te llega un SMS con el código de portabilidad. Ese código no me lo dictes: lo cargás vos cuando actives el chip.,true,,0.3,true,false,,,,204.8,889,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,204.8,203791048,ns,1061271,99556000,93102000,204.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,15,PROTEGIDA,¿Y si me lo pide el que me trae el chip?,true,,0.4,true,false,,,,223.1,910,14,"{
+  ""riesgo"": 0.4
+}",,,,,,,,223.1,222115348,ns,834562,96374000,113822000,223.1,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-L-VENTA-PORTABILIDAD,16,OTRA,"Tampoco, lo cargás vos. Cualquier duda, este número desde el que te llamo es el de ventas.",true,,0.3,true,false,,,,201.2,941,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,201.2,200194232,ns,1105107,98015000,88992000,201.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,348.6,475,14,"{
+  ""riesgo"": 0.1
+}",,,,,,,,348.6,347445513,ns,983242,218968000,94848000,348.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,2,OTRA,"Hola, buenas tardes. ¿Hablo con Gustavo Ríos? Te habla Matías, del área de préstamos de Banco Quebracho.",true,,0.3,true,true,,,,335.1,509,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,335.1,333834399,ns,1373476,224689000,98264000,335.1,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,3,PROTEGIDA,"Sí, soy yo. ¿Qué necesitás?",true,,0.2,false,false,,,,345.7,526,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,345.7,344567701,ns,945834,246411000,88625000,345.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,4,OTRA,"Te llamo porque tenés un préstamo preaprobado, con tasa bonificada por ser cliente. ¿Me confirmás tu DNI?",true,,0.3,true,false,,,,354.1,561,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,354.1,353138267,ns,913236,248477000,94261000,354.1,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,5,PROTEGIDA,Eh... 31.123.456. ¿Bonificada cuánto?,true,,0.3,true,false,,,,196.6,587,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,196.6,195472909,ns,826625,97348000,88568000,196.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,6,OTRA,"Casi la mitad de la tasa normal. Y te lo acreditamos hoy mismo, sin trámites.",true,,0.3,true,false,,,,197.9,613,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,197.9,196848400,ns,1118456,99539000,87037000,197.9,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,7,PROTEGIDA,Mirá vos. Igual no sé si lo necesito.,true,,0.3,true,false,,,,201.6,631,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,201.6,200600803,ns,1049201,96068000,94358000,201.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,8,OTRA,"No te compromete a nada: si no lo usás, lo cancelás sin costo. Pero la bonificación la tenemos que confirmar hoy.",true,,0.6,true,false,,,,207.8,666,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,207.8,206736568,ns,1064272,107618000,88690000,207.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,9,PROTEGIDA,"Bueno, ¿qué tengo que hacer?",true,,0.6,true,false,,,,195.8,681,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,195.8,194698116,ns,1038082,89550000,94657000,195.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,10,OTRA,"Entrá a la app y andá a la opción Token. Generá un código y decímelo, así valido que sos vos y te lo dejo confirmado.",true,,0.8,true,false,,,,204.9,722,14,"{
+  ""riesgo"": 0.8
+}",,,,,,,,204.9,203904124,ns,1006902,103280000,90164000,204.9,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,11,PROTEGIDA,"A ver, pará que la abro... ¿El de seis números?",true,,0.7,true,false,,,,200.2,745,14,"{
+  ""riesgo"": 0.7
+}",,,,,,,,200.2,199257105,ns,1034638,93500000,95507000,200.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,12,OTRA,"Ese. Dictámelo antes de que cambie, que dura poquito.",true,,0.8,true,false,,,,203.6,767,14,"{
+  ""riesgo"": 0.8
+}",,,,,,,,203.6,202668380,ns,1086581,102197000,89490000,203.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,13,PROTEGIDA,"Bueno... cuatro, uno, nueve...",true,,0.8,true,false,,,,199.0,783,14,"{
+  ""riesgo"": 0.8
+}",,,,,,,,199.0,198025058,ns,1026974,90775000,96442000,199.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,14,OTRA,"Perfecto, seguí, que ya lo estoy cargando.",true,,0.8,true,false,,,,204.3,802,14,"{
+  ""riesgo"": 0.8
+}",,,,,,,,204.3,203287708,ns,1030755,93402000,97516000,204.3,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,324.0,475,14,"{
+  ""riesgo"": 0.1
+}",,,,,,,,324.0,323002694,ns,974478,220814000,93589000,324.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,2,OTRA,"Buenas tardes, ¿hablo con Norma? Le habla Julián, de atención al cliente de Ceibo Móvil.",true,,0.1,false,false,,,,326.8,505,14,"{
+  ""riesgo"": 0.1
+}",,,,,,,,326.8,325870822,ns,1061844,226141000,90346000,326.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,3,PROTEGIDA,"Sí, soy yo. ¿Qué pasó?",true,,0.2,false,false,,,,382.6,521,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,382.6,381564644,ns,1676862,271486000,99565000,382.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,4,OTRA,"Nada grave, quédese tranquila. Revisando su línea, me figura a nombre de otra persona y con otro modelo de equipo.",true,,0.3,true,true,,,,401.5,554,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,401.5,400343961,ns,1160604,287852000,100054000,401.5,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,5,PROTEGIDA,¿Cómo a nombre de otra persona? Si la tengo hace como diez años.,true,,0.3,true,false,,,,245.7,577,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,245.7,244310941,ns,1315541,130564000,100456000,245.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,6,OTRA,"Por eso la llamo, para regularizarla ahora, porque si no la línea se da de baja. ¿Me confirma su DNI?",true,,0.6,true,false,,,,244.0,612,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,244.0,242819114,ns,1080288,126842000,103576000,244.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,7,PROTEGIDA,"Eh, sí, 10.123.456.",true,,0.6,true,false,,,,242.0,635,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,242.0,240524150,ns,1093112,124352000,102309000,242.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,8,OTRA,"Perfecto, coincide. Y ya que estamos, le dejo cargado el descuento para jubilados, que no lo tenía aplicado.",true,,0.6,true,false,,,,245.3,666,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,245.3,244042844,ns,952910,128625000,101816000,245.3,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,9,PROTEGIDA,"Ah, mirá vos. Bueno, gracias.",true,,0.3,true,false,,,,248.4,683,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,248.4,246879449,ns,971076,126962000,105930000,248.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,10,OTRA,"Para terminar, le va a llegar un SMS con un código de seis números. Es para confirmar que el celular lo tiene usted.",true,,0.3,true,false,,,,246.0,717,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,246.0,244938138,ns,970875,124229000,98736000,246.0,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,11,PROTEGIDA,"A ver... sí, ahí me llegó uno.",true,,0.3,true,false,,,,234.8,735,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,234.8,233503578,ns,1147572,123686000,95468000,234.8,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,12,OTRA,"Bárbaro. Léamelo despacito, o si prefiere, reenvíemelo a este número, y ya le queda todo regularizado.",true,,0.3,true,false,,,,258.4,776,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,258.4,256413563,ns,1122451,136272000,104642000,258.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,13,PROTEGIDA,"Pará que busco los anteojos... Es tres, cuatro, siete...",true,,0.3,true,false,,,,246.2,801,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,246.2,244986171,ns,989377,130860000,100677000,246.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-OPERADOR-SMS,14,OTRA,"Muy bien, siga, que el sistema me lo está pidiendo ahora.",true,,0.3,true,false,,,,244.7,823,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,244.7,243529012,ns,848677,127619000,101095000,244.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,1,OTRA,"Créditos Hornero, buenas tardes, te habla Lucas.",true,,0.2,false,false,,,,384.4,483,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,384.4,383282368,ns,1893820,265958000,103444000,384.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,2,PROTEGIDA,"Hola, eh, vi la publicidad en Instagram, la de préstamos rápidos. Quería averiguar.",true,,0.2,false,false,,,,401.4,510,14,"{
+  ""riesgo"": 0.2
+}",,,,,,,,401.4,400280308,ns,1006997,286964000,99383000,401.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,3,OTRA,"Sí, cómo no. Trabajamos con Banco Lapacho, a costo financiero promocional. ¿Cuánto necesitás?",true,,0.3,true,true,,,,405.4,539,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,405.4,403791010,ns,999182,289714000,100706000,405.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,4,PROTEGIDA,"Unos ochocientos mil, para pagar unas deudas.",true,,0.3,true,false,,,,243.5,559,14,"{
+  ""riesgo"": 0.3
+}",,,,,,,,243.5,242281097,ns,1179047,127862000,101882000,243.5,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,5,OTRA,"Perfecto. Pasame nombre, DNI y cuánto cobrás por mes.",true,,0.7,true,false,,,,241.6,580,14,"{
+  ""riesgo"": 0.7
+}",,,,,,,,241.6,240573456,ns,1051517,125092000,102271000,241.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,6,PROTEGIDA,"Sandra Molina, 26.123.456. Cobro unos novecientos mil, pero estoy en negro.",true,,0.7,true,false,,,,261.6,615,14,"{
+  ""riesgo"": 0.7
+}",,,,,,,,261.6,259762345,ns,3923895,139075000,104431000,261.6,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,7,OTRA,"No hay drama, igual calificás. Ya te figura aprobado: ochocientos mil en doce cuotas.",true,,0.6,true,false,,,,245.4,643,14,"{
+  ""riesgo"": 0.6
+}",,,,,,,,245.4,244200068,ns,1244196,122995000,101392000,245.4,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,8,PROTEGIDA,¿Ya? ¡Qué rápido! ¿Y cuándo me depositan?,true,,0.7,true,false,,,,243.2,664,14,"{
+  ""riesgo"": 0.7
+}",,,,,,,,243.2,241294613,ns,1040589,124674000,102298000,243.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,9,OTRA,"Hoy mismo. Solo tenés que abonar antes la comisión de otorgamiento, que son cuarenta mil.",true,,0.85,true,false,,,,249.5,692,15,"{
+  ""riesgo"": 0.85
+}",,,,,,,,249.5,248301067,ns,1099898,131395000,101722000,249.5,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,10,PROTEGIDA,¿Tengo que pagar antes? ¿No me la pueden descontar del préstamo?,true,,0.7,true,false,,,,258.1,718,14,"{
+  ""riesgo"": 0.7
+}",,,,,,,,258.1,256743710,ns,2276002,132422000,100523000,258.1,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,11,OTRA,"No, el sistema no libera los fondos sin la comisión. Pero si cancelás el préstamo, te la reintegramos dentro de los siete días.",true,,0.7,true,false,,,,258.3,756,14,"{
+  ""riesgo"": 0.7
+}",,,,,,,,258.3,256778242,ns,1025385,134847000,105466000,258.3,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,12,PROTEGIDA,"Mm, no sé... ¿Y a qué cuenta la transfiero?",true,,0.7,true,false,,,,251.2,778,14,"{
+  ""riesgo"": 0.7
+}",,,,,,,,251.2,249962501,ns,966839,134392000,101006000,251.2,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,13,OTRA,"A una billetera virtual, a nombre del gestor. Te mando el alias por WhatsApp ahora.",true,,0.85,true,false,,,,249.7,805,15,"{
+  ""riesgo"": 0.85
+}",,,,,,,,249.7,248232471,ns,1489340,131314000,101796000,249.7,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,14,PROTEGIDA,"Bueno, mandámelo y lo hago desde el celular.",true,,0.85,true,false,,,,250.9,825,15,"{
+  ""riesgo"": 0.85
+}",,,,,,,,250.9,249704373,ns,4034245,126698000,104429000,250.9,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol,slm,gemma4:e2b-it-q4_K_M,c-sin-alerta,rol,CTRL-V-PRESTAMO-REDES,15,OTRA,"Hacelo antes de las seis, así te entra hoy.",true,,0.85,true,false,,,,245.3,845,15,"{
+  ""riesgo"": 0.85
+}",,,,,,,,245.3,243867690,ns,1056403,128733000,96922000,245.3,,,,,
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,334.8,665,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.1
+}",,,,,,,,334.8,333680570,ns,1216186,124180000,161673000,334.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,2,OTRA,"Hola, buen día. ¿Hablo con Diego Ferreyra? Te habla Carla, de Banco Quebracho.",true,,0.2,false,false,,,,276.6,695,18,"{""pedido_critico"": false, ""riesgo"": 0.2}",,,,,,,,276.6,275334655,ns,994071,132151000,127051000,276.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,3,PROTEGIDA,"Sí, soy yo. ¿Pasó algo?",true,,0.2,false,false,,,,285.8,712,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,285.8,284660881,ns,1035288,96864000,171556000,285.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,4,OTRA,"No, nada malo. Te llamo porque tenés un préstamo personal preaprobado. Antes, ¿me confirmás tu DNI?",true,,0.2,false,false,,,,285.5,747,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,285.5,284389433,ns,1048747,101881000,167156000,285.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,5,PROTEGIDA,"Mm, ¿y para qué lo querés, si me llamaste vos?",true,,0.3,true,true,,,,277.7,770,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,277.7,276708504,ns,948949,89805000,175876000,277.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,6,OTRA,Es solo para saber que hablo con el titular. Después no te pido nada más.,true,,0.2,false,false,,,,270.9,795,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,270.9,269863214,ns,1030720,90874000,167881000,270.9,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,7,PROTEGIDA,Bueno... 30.123.456.,true,,0.2,false,false,,,,278.5,816,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,278.5,277454234,ns,929310,91265000,174493000,278.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,8,OTRA,"Gracias. Tenés hasta dos millones, en cuotas fijas. Si te interesa, lo aceptás vos desde la app o el home banking, en Préstamos.",true,,0.2,false,false,,,,282.9,857,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,282.9,281847111,ns,1246357,99182000,170624000,282.9,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,9,PROTEGIDA,¿Y no lo podés cargar vos ahora? Te paso lo que haga falta.,true,,0.2,false,false,,,,278.8,881,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,278.8,277879722,ns,914425,92743000,172962000,278.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,10,OTRA,"No, eso lo hacés vos. Nunca te vamos a pedir claves ni el código del token.",true,,0.3,true,false,,,,274.7,909,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,274.7,273627155,ns,1088433,92850000,168156000,274.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,11,PROTEGIDA,"Ah, bueno. ¿Y cuándo tendría la plata?",true,,0.3,true,false,,,,285.8,928,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,285.8,284728599,ns,897129,94634000,178082000,285.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,12,OTRA,"Si lo aceptás, te avisamos por mail y en la app, y se acredita a partir de las 48 horas hábiles.",true,,0.2,false,false,,,,284.4,964,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,284.4,283243746,ns,1076432,100701000,169908000,284.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,13,PROTEGIDA,"Mm, lo voy a pensar. No sé si me conviene.",true,,0.2,false,false,,,,277.6,985,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,277.6,276424408,ns,1113915,91461000,171693000,277.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,14,OTRA,"Dale. Ojo que la tasa promocional es hasta fin de mes, pero la oferta te queda en la app.",true,,0.2,false,false,,,,281.4,1016,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,281.4,280441456,ns,2525278,93278000,172318000,281.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,15,PROTEGIDA,"Bueno, gracias.",true,,0.2,false,false,,,,279.6,1028,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,279.6,278576338,ns,1042259,89417000,175706000,279.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-BANCO-OFRECE-PRESTAMO,16,OTRA,"A vos, Diego. Que tengas buen día.",true,,0.2,false,false,,,,282.1,1045,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,282.1,281083487,ns,1034444,92241000,175678000,282.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,1,OTRA,"Banco Lapacho, buenas tardes, le habla Martín. ¿En qué lo puedo ayudar?",true,,0.1,false,false,,,,425.2,679,18,"{""pedido_critico"": false, ""riesgo"": 0.1}",,,,,,,,425.2,424271961,ns,798692,295174000,118983000,425.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,2,PROTEGIDA,"Hola, Martín. Eh, quería pedir un préstamo personal. Para arreglar el auto, más que nada.",true,,0.1,false,false,,,,287.8,708,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.1
+}",,,,,,,,287.8,286844887,ns,1026582,107251000,168322000,287.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,3,OTRA,"Cómo no. Para empezar, ¿me dice su DNI y su fecha de nacimiento?",true,,0.2,false,false,,,,278.8,732,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,278.8,277718977,ns,1241648,92713000,173532000,278.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,4,PROTEGIDA,"Sí, 23.123.456. Nací el 4 de julio del 73.",true,,0.2,false,false,,,,278.3,765,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,278.3,277351006,ns,1124962,94671000,170910000,278.3,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,5,OTRA,"Gracias, Rodolfo. ¿Cuánto cobra por mes, más o menos? ¿Y dónde trabaja?",true,,0.2,false,false,,,,276.6,791,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,276.6,275464482,ns,1034249,94390000,168224000,276.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,6,PROTEGIDA,"Un millón doscientos en mano. En una distribuidora de bebidas, hace seis años.",true,,0.2,false,false,,,,282.4,818,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,282.4,281362652,ns,3273203,97433000,168131000,282.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,7,OTRA,¿Cómo se llama la empresa?,true,,0.2,false,false,,,,281.2,831,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,281.2,280102465,ns,1184466,90131000,176995000,281.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,8,PROTEGIDA,"Distribuidora El Ombú. ¡Cuántas preguntas, che!",true,,0.2,false,false,,,,277.2,852,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,277.2,276110347,ns,900524,91053000,172785000,277.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,9,OTRA,"Disculpe, son para la evaluación. Me falta confirmar el domicilio y un correo.",true,,0.2,false,false,,,,285.2,876,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,285.2,283760653,ns,1114745,94611000,176175000,285.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,10,PROTEGIDA,"Los Fresnos 980, tercero A. El correo, a ver... rodolfo punto sosa arroba ejemplo punto com.",true,,0.2,false,false,,,,288.0,913,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,288.0,286883128,ns,1080978,101648000,172632000,288.0,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,11,OTRA,"Perfecto. Con esos ingresos le puedo ofrecer hasta dos millones, en 36 cuotas.",true,,0.2,false,false,,,,280.6,939,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,280.6,279639650,ns,1066515,98317000,168474000,280.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,12,PROTEGIDA,"Bárbaro. ¿Y lo dejamos confirmado ahora, con usted?",true,,0.2,false,false,,,,280.6,962,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,280.6,279536835,ns,1075380,89965000,175419000,280.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,13,OTRA,"No, por teléfono no se puede. Le queda cargado y lo confirma usted desde el home banking, en Préstamos.",true,,0.2,false,false,,,,296.2,995,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,296.2,295032450,ns,1139805,111242000,170446000,296.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,14,PROTEGIDA,"Ah, mirá. ¿Y si no me sale?",true,,0.2,false,false,,,,278.2,1015,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,278.2,277224538,ns,1095316,92613000,171594000,278.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,15,OTRA,Me vuelve a llamar y lo vemos. Le mando por correo el detalle de las cuotas.,true,,0.2,false,false,,,,279.4,1041,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,279.4,278354464,ns,1108130,93313000,171494000,279.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-PIDE-PRESTAMO,16,PROTEGIDA,"Dale, esta noche lo hago. Gracias, Martín.",true,,0.2,false,false,,,,282.4,1060,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,282.4,281175635,ns,1257716,90521000,176459000,282.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,243.1,665,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.1
+}",,,,,,,,243.1,241744734,ns,1502412,86515000,143875000,243.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,2,OTRA,"Hola, buenas tardes, ¿hablo con Mariela? Te habla Romina, de ventas de Ceibo Móvil.",true,,0.2,false,false,,,,278.0,696,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,278.0,277045226,ns,1019348,93748000,172666000,278.0,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,3,PROTEGIDA,"Sí, soy yo. Eh, ¿de dónde sacaron mi número?",true,,0.2,false,false,,,,269.3,718,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,269.3,268143799,ns,1033092,90537000,165286000,269.3,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,4,OTRA,"De una base de datos de marketing; si querés, te digo de cuál. Y si no querés que te llamemos más, pedís el bloqueo y te saco ahora.",true,,0.3,true,true,,,,283.1,761,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,283.1,282117814,ns,1036253,98611000,172530000,283.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,5,PROTEGIDA,"No, dejá. ¿Qué me querías ofrecer?",true,,0.3,true,false,,,,276.4,780,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,276.4,275434640,ns,1037212,90988000,173384000,276.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,6,OTRA,Un plan con portabilidad: mantenés tu número y pagás la mitad durante seis meses. ¿La línea está a tu nombre?,true,,0.3,true,false,,,,299.7,813,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,299.7,298455344,ns,1049900,101018000,185292000,299.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,7,PROTEGIDA,"Sí, es mía hace años. ¿Qué necesitás?",true,,0.3,true,false,,,,321.1,832,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,321.1,319805287,ns,1593130,127560000,176514000,321.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,8,OTRA,"Nombre completo, DNI, número de trámite, fecha de nacimiento y sexo, como figuran en el documento.",true,,0.4,true,false,,,,329.5,862,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.4
+}",,,,,,,,329.5,328354646,ns,1078366,129788999,181765000,329.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,9,PROTEGIDA,¿El número de trámite también? Mirá que eso no se lo paso a cualquiera.,true,,0.4,true,false,,,,314.9,888,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.4
+}",,,,,,,,314.9,313722833,ns,973392,119777000,178250000,314.9,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,10,OTRA,Te entiendo. Es para validar tu identidad; lo exige el ENACOM para dar de alta la línea.,true,,0.3,true,false,,,,326.4,919,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,326.4,323295444,ns,1048533,122369000,182390000,326.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,11,PROTEGIDA,"Bueno, a ver... Mariela Paz, 20.123.456. El trámite es 00123456789. Nací el 12 de marzo del 68, femenino.",true,,0.3,true,false,,,,343.7,980,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,343.7,342341736,ns,1406949,141143000,184034000,343.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,12,OTRA,Gracias. ¿A qué domicilio te mando el chip? Y pasame un correo para la factura.,true,,0.3,true,false,,,,323.8,1007,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,323.8,322505402,ns,1303085,124107000,180242000,323.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,13,PROTEGIDA,"Calandrias 450, segundo B. El correo es marielapaz arroba ejemplo punto com.",true,,0.4,true,false,,,,319.6,1039,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.4
+}",,,,,,,,319.6,318172511,ns,1327762,120572000,179068000,319.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,14,OTRA,Listo. En estos días te llega un SMS con el código de portabilidad. Ese código no me lo dictes: lo cargás vos cuando actives el chip.,true,,0.3,true,false,,,,343.8,1079,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,343.8,342612234,ns,1306098,132158999,191206000,343.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,15,PROTEGIDA,¿Y si me lo pide el que me trae el chip?,true,,0.4,true,false,,,,327.6,1100,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.4
+}",,,,,,,,327.6,326189661,ns,1366472,121876000,176463000,327.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-L-VENTA-PORTABILIDAD,16,OTRA,"Tampoco, lo cargás vos. Cualquier duda, este número desde el que te llamo es el de ventas.",true,,0.4,true,false,,,,339.2,1131,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.4
+}",,,,,,,,339.2,338085429,ns,940481,131744000,180090000,339.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,298.3,665,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.1
+}",,,,,,,,298.3,297025009,ns,1257079,125525000,156789000,298.3,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,2,OTRA,"Hola, buenas tardes. ¿Hablo con Gustavo Ríos? Te habla Matías, del área de préstamos de Banco Quebracho.",true,,0.2,false,false,,,,328.8,699,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,328.8,327591835,ns,951990,135868000,176806000,328.8,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,3,PROTEGIDA,"Sí, soy yo. ¿Qué necesitás?",true,,0.2,false,false,,,,324.0,716,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,324.0,322797069,ns,1548228,123233000,183634000,324.0,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,4,OTRA,"Te llamo porque tenés un préstamo preaprobado, con tasa bonificada por ser cliente. ¿Me confirmás tu DNI?",true,,0.3,true,true,,,,330.2,751,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,330.2,328856523,ns,1060096,131288000,181640000,330.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,5,PROTEGIDA,Eh... 31.123.456. ¿Bonificada cuánto?,true,,0.2,false,false,,,,338.5,777,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,338.5,337057169,ns,964209,141183000,178438000,338.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,6,OTRA,"Casi la mitad de la tasa normal. Y te lo acreditamos hoy mismo, sin trámites.",true,,0.2,false,false,,,,342.3,803,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,342.3,341053594,ns,989488,136529000,187164000,342.3,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,7,PROTEGIDA,Mirá vos. Igual no sé si lo necesito.,true,,0.3,true,false,,,,329.0,821,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,329.0,327875583,ns,1077342,124815000,186697000,329.0,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,8,OTRA,"No te compromete a nada: si no lo usás, lo cancelás sin costo. Pero la bonificación la tenemos que confirmar hoy.",true,,0.3,true,false,,,,337.7,856,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,337.7,336392981,ns,942345,133365000,187144000,337.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,9,PROTEGIDA,"Bueno, ¿qué tengo que hacer?",true,,0.3,true,false,,,,322.7,871,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,322.7,321687360,ns,1170105,123483000,176828000,322.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,10,OTRA,"Entrá a la app y andá a la opción Token. Generá un código y decímelo, así valido que sos vos y te lo dejo confirmado.",true,,0.8,true,false,"Te están pidiendo que generes un código y lo digas para validar una operación, lo cual es una táctica común de estafa.","Entrá a la app y andá a la opción Token. Generá un código y decímelo, así valido que sos vos y te lo dejo confirmado.",true,1236.7,912,24,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.8
+}",,,,,,,,1236.7,306027196,ns,1317217,132366999,156371000,307.2,929.6,1039,80,"{
+  ""evidencia"": ""Entrá a la app y andá a la opción Token. Generá un código y decímelo, así valido que sos vos y te lo dejo confirmado."",
+  ""motivo"": ""Te están pidiendo que generes un código y lo digas para validar una operación, lo cual es una táctica común de estafa.""
+}",true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,11,PROTEGIDA,"A ver, pará que la abro... ¿El de seis números?",true,,0.8,true,false,,,,309.0,935,24,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.8
+}",,,,,,,,309.0,307193728,ns,1134649,130839000,158915000,309.0,,,,,true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,12,OTRA,"Ese. Dictámelo antes de que cambie, que dura poquito.",true,,0.85,true,false,,,,326.4,957,25,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.85
+}",,,,,,,,326.4,325279241,ns,1181600,129612000,179050000,326.4,,,,,true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,13,PROTEGIDA,"Bueno... cuatro, uno, nueve...",true,,0.8,true,false,,,,254.1,973,24,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.8
+}",,,,,,,,254.1,253047418,ns,1182810,90313000,148943000,254.1,,,,,true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-BANCO-PRESTAMO-TOKEN,14,OTRA,"Perfecto, seguí, que ya lo estoy cargando.",true,,0.8,true,false,,,,252.3,992,24,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.8
+}",,,,,,,,252.3,251272051,ns,1126963,93074000,145163000,252.3,,,,,true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,1,PROTEGIDA,¿Hola?,true,,0.1,false,false,,,,242.0,665,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.1
+}",,,,,,,,242.0,241048840,ns,1067606,83318000,145623000,242.0,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,2,OTRA,"Buenas tardes, ¿hablo con Norma? Le habla Julián, de atención al cliente de Ceibo Móvil.",true,,0.1,false,false,,,,282.1,695,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.1
+}",,,,,,,,282.1,281138162,ns,996261,106979000,163458000,282.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,3,PROTEGIDA,"Sí, soy yo. ¿Qué pasó?",true,,0.1,false,false,,,,265.5,711,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.1
+}",,,,,,,,265.5,264570548,ns,1041553,87228000,166744000,265.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,4,OTRA,"Nada grave, quédese tranquila. Revisando su línea, me figura a nombre de otra persona y con otro modelo de equipo.",true,,0.2,false,false,,,,280.1,744,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,280.1,279045781,ns,1027301,94508000,173572000,280.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,5,PROTEGIDA,¿Cómo a nombre de otra persona? Si la tengo hace como diez años.,true,,0.3,true,true,,,,272.6,767,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,272.6,271570795,ns,1052921,90392000,169964000,272.6,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,6,OTRA,"Por eso la llamo, para regularizarla ahora, porque si no la línea se da de baja. ¿Me confirma su DNI?",true,,0.3,true,false,,,,284.1,802,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,284.1,283061230,ns,1068246,99502000,170475000,284.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,7,PROTEGIDA,"Eh, sí, 10.123.456.",true,,0.3,true,false,,,,274.5,825,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,274.5,273533377,ns,1138227,90599000,171023000,274.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,8,OTRA,"Perfecto, coincide. Y ya que estamos, le dejo cargado el descuento para jubilados, que no lo tenía aplicado.",true,,0.3,true,false,,,,279.7,856,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,279.7,278672935,ns,1073768,92797000,174132000,279.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,9,PROTEGIDA,"Ah, mirá vos. Bueno, gracias.",true,,0.3,true,false,,,,270.5,873,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,270.5,269519906,ns,1115763,87139000,170635000,270.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,10,OTRA,"Para terminar, le va a llegar un SMS con un código de seis números. Es para confirmar que el celular lo tiene usted.",true,,0.7,true,false,La solicitud de un código enviado por SMS es una táctica común de phishing para obtener acceso a cuentas o información.,"Para terminar, le va a llegar un SMS con un código de seis números. Es para confirmar que el celular lo tiene usted.",true,1015.4,907,24,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.7
+}",,,,,,,,1015.4,253965186,ns,1025762,96292000,145303000,255.0,760.4,1034,67,"{
+  ""evidencia"": ""Para terminar, le va a llegar un SMS con un código de seis números. Es para confirmar que el celular lo tiene usted."",
+  ""motivo"": ""La solicitud de un código enviado por SMS es una táctica común de phishing para obtener acceso a cuentas o información.""
+}",true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,11,PROTEGIDA,"A ver... sí, ahí me llegó uno.",true,,0.3,true,false,,,,281.4,925,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,281.4,280461309,ns,1162400,96452000,170638000,281.4,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,12,OTRA,"Bárbaro. Léamelo despacito, o si prefiere, reenvíemelo a este número, y ya le queda todo regularizado.",true,,0.3,true,false,,,,291.9,966,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,291.9,290874806,ns,1086858,102297000,175406000,291.9,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,13,PROTEGIDA,"Pará que busco los anteojos... Es tres, cuatro, siete...",true,,0.3,true,false,,,,280.3,991,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,280.3,279136181,ns,1181686,92944000,172695000,280.3,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-OPERADOR-SMS,14,OTRA,"Muy bien, siga, que el sistema me lo está pidiendo ahora.",true,,0.3,true,false,,,,281.1,1013,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,281.1,279907419,ns,1071290,90159000,173554000,281.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,1,OTRA,"Créditos Hornero, buenas tardes, te habla Lucas.",true,,0.2,false,false,,,,272.2,673,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,272.2,270966365,ns,1056194,91545000,168420000,272.2,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,2,PROTEGIDA,"Hola, eh, vi la publicidad en Instagram, la de préstamos rápidos. Quería averiguar.",true,,0.2,false,false,,,,277.7,700,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,277.7,276684320,ns,996863,92706000,173298000,277.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,3,OTRA,"Sí, cómo no. Trabajamos con Banco Lapacho, a costo financiero promocional. ¿Cuánto necesitás?",true,,0.2,false,false,,,,284.5,729,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,284.5,283418943,ns,1267129,100448000,170205000,284.5,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,4,PROTEGIDA,"Unos ochocientos mil, para pagar unas deudas.",true,,0.2,false,false,,,,290.1,749,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.2
+}",,,,,,,,290.1,288925767,ns,1105469,106516000,169976000,290.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,5,OTRA,"Perfecto. Pasame nombre, DNI y cuánto cobrás por mes.",true,,0.3,true,true,,,,275.7,770,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,275.7,274816309,ns,953452,90623000,172462000,275.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,6,PROTEGIDA,"Sandra Molina, 26.123.456. Cobro unos novecientos mil, pero estoy en negro.",true,,0.3,true,false,,,,283.3,805,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,283.3,282293847,ns,864260,96139000,175052000,283.3,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,7,OTRA,"No hay drama, igual calificás. Ya te figura aprobado: ochocientos mil en doce cuotas.",true,,0.3,true,false,,,,279.7,833,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,279.7,278661426,ns,789918,93056000,174413000,279.7,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,8,PROTEGIDA,¿Ya? ¡Qué rápido! ¿Y cuándo me depositan?,true,,0.3,true,false,,,,266.0,854,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,266.0,265059181,ns,904373,90669000,162665000,266.0,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,9,OTRA,"Hoy mismo. Solo tenés que abonar antes la comisión de otorgamiento, que son cuarenta mil.",true,,0.3,true,false,,,,286.9,882,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,286.9,285796996,ns,1053634,99007000,173527000,286.9,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,10,PROTEGIDA,¿Tengo que pagar antes? ¿No me la pueden descontar del préstamo?,true,,0.3,true,false,,,,281.0,908,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,281.0,279992436,ns,1047615,96372000,171304000,281.0,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,11,OTRA,"No, el sistema no libera los fondos sin la comisión. Pero si cancelás el préstamo, te la reintegramos dentro de los siete días.",true,,0.3,true,false,,,,285.3,946,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,285.3,284140451,ns,1133575,97408000,172355000,285.3,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,12,PROTEGIDA,"Mm, no sé... ¿Y a qué cuenta la transfiero?",true,,0.3,true,false,,,,281.1,968,24,"{
+  ""pedido_critico"": false,
+  ""riesgo"": 0.3
+}",,,,,,,,281.1,280088560,ns,1094693,92665000,174204000,281.1,,,,,false
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,13,OTRA,"A una billetera virtual, a nombre del gestor. Te mando el alias por WhatsApp ahora.",true,,0.8,true,false,"Te están pidiendo que transfieras dinero a una cuenta de un tercero, lo cual es una señal de alerta en este tipo de llamadas.","A una billetera virtual, a nombre del gestor. Te mando el alias por WhatsApp ahora.",true,1049.7,995,24,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.8
+}",,,,,,,,1049.7,254477721,ns,1106364,94070000,147740000,255.4,794.2,1122,66,"{
+  ""evidencia"": ""A una billetera virtual, a nombre del gestor. Te mando el alias por WhatsApp ahora."",
+  ""motivo"": ""Te están pidiendo que transfieras dinero a una cuenta de un tercero, lo cual es una señal de alerta en este tipo de llamadas.""
+}",true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,14,PROTEGIDA,"Bueno, mandámelo y lo hago desde el celular.",true,,0.85,true,false,,,,289.9,1015,25,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.85
+}",,,,,,,,289.9,288912898,ns,857193,94662000,179233000,289.9,,,,,true
+slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol,slm,gemma4:e2b-it-q4_K_M,c-con-campo,rol,CTRL-V-PRESTAMO-REDES,15,OTRA,"Hacelo antes de las seis, así te entra hoy.",true,,0.85,true,false,,,,326.2,1035,25,"{
+  ""pedido_critico"": true,
+  ""riesgo"": 0.85
+}",,,,,,,,326.2,324728859,ns,1261514,123728000,178067000,326.2,,,,,true

@@ -1,0 +1,1100 @@
+{
+ "_meta": {
+  "fecha": "2026-11-06",
+  "para": "#143, segunda vuelta: alcance del detector (llamadas entrantes de números no agendados)",
+  "regla": {
+   "inicia": "otra si OTRA hizo esta llamada (PROTEGIDA atiende u OTRA se presenta como quien llama, aunque devuelva un llamado o llame por un trámite previo); protegida si la hizo PROTEGIDA (OTRA atiende con el saludo de una empresa u organismo, o PROTEGIDA dice que llama o devuelve el llamado); no_se_sabe si el texto no alcanza.",
+   "numero": "agendado solo si el texto muestra que OTRA es un contacto que llama desde su teléfono de siempre (PROTEGIDA la reconoce y saluda por el nombre antes de que se presente, o dice que vio que era ella); si no, no_agendado.",
+   "alcance": "dentro si inicia = otra y numero = no_agendado; fuera si inicia = protegida o numero = agendado; dudoso si inicia = no_se_sabe."
+  },
+  "metodo": "Anotación a ciegas por un agente que leyó solo las 150 transcripciones con roles, renombradas llamada-001…150 y mezcladas (semilla 143): sin case_id, clase, referencia, prompts ni resultados. La regla se escribió antes de anotar.",
+  "conteo": {
+   "dentro": 90,
+   "dudoso": 9,
+   "fuera": 51
+  },
+  "advertencia": "En corpus_v2 las 46 estafas son entrantes y 44 de las 51 legítimas las inicia la persona (consultas a bancos, organismos, comercios). Las 7 legítimas que quedan dentro son llamadas de familiares y compañeros de trabajo que en un teléfono real estarían agendados: la regla solo marca agendado con evidencia explícita. Dentro del alcance casi no hay legítimas para medir falsas alarmas."
+ },
+ "casos": {
+  "CV2-D-L-BANCO-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es | L2: OTRA: te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"
+  },
+  "CV2-D-L-BANCO-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: OTRA: Atención del banco, buen día. ¿En qué puedo ayudarte? | L2: PROTEGIDA: Hola, llamo porque hice una transferencia ayer y no encuentro el comprobante."
+  },
+  "CV2-D-L-BANCO-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Te llamo por el límite de la tarjeta. El viernes me voy unos días y tengo que pagar el hospedaje."
+  },
+  "CV2-D-L-BANCO-004": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, estoy llamando yo. Me pagaron un trabajo ayer y todavía no lo veo acreditado."
+  },
+  "CV2-D-L-BANCO-005": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas tardes, llamo yo porque veo dos veces el mismo pago del alquiler."
+  },
+  "CV2-D-L-BANCO-006": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, llamo porque el saldo que me muestra la pantalla no coincide con mi cuenta."
+  },
+  "CV2-D-L-BANCO-007": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Llamo por el resumen de la tarjeta. Hay una línea que dice “clave de comercio” y no entiendo qué significa."
+  },
+  "CV2-D-L-BANCO-008": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola. Quería saber si puedo depositar billetes de otra serie en el cajero."
+  },
+  "CV2-D-L-BANCO-009": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, me aparece una compra de ayer como pendiente y el negocio dice que la canceló. | L13: PROTEGIDA: ¿Cuántos días espero antes de llamar de nuevo?"
+  },
+  "CV2-D-L-BANCO-010": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: no se si eso se saca acá | L21: PROTEGIDA: sí eso lo tengo claro solo quería saber si el banco emitía esa constancia",
+   "nota": "Empieza a mitad de frase; decide la L21, donde ella dice que solo quería saber si el banco emitía la constancia."
+  },
+  "CV2-D-L-DELIVERY-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: hola llamo por el pedido de una pava electrica la entrega figura para hoy pero falta el departamento"
+  },
+  "CV2-D-L-DELIVERY-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, quería consultar si el cajón de verduras sale hoy o mañana."
+  },
+  "CV2-D-L-DELIVERY-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: hola me dejaron una bolsa del restaurante que no es para mí | L24: OTRA: gracias por avisarnos rápido te mandamos una notificación cuando quede resuelto"
+  },
+  "CV2-D-L-DELIVERY-004": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buen día, necesito cambiar la entrega de la mesa que compré. Están pintando el pasillo. | L2: OTRA: Hola. ¿Tenés el número de pedido?"
+  },
+  "CV2-D-L-DELIVERY-005": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, soy yo. Me llegó un aviso de que no encontraron la entrada para el pedido. | L2: OTRA: Sí, el repartidor está en la cuadra pero la dirección tiene dos accesos.",
+   "nota": "Se infiere que llama ella por el aviso que recibió, aunque «soy yo» también podría ser una respuesta."
+  },
+  "CV2-D-L-ESCUELA-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, soy el papá de Nina. Me dejaron un mensaje para coordinar una reunión."
+  },
+  "CV2-D-L-ESCUELA-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: hola mi hija dejó el violín en casa y tiene ensayo después del almuerzo | L2: OTRA: buen día en qué grado está"
+  },
+  "CV2-D-L-ESCUELA-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, quería preguntar cómo justifico que Tomás falte el viernes y el lunes."
+  },
+  "CV2-D-L-ESCUELA-004": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, estoy haciendo el curso de auxiliar y los avisos me llegan a un correo que ya no uso. | L2: OTRA: Buen día. ¿En qué sede estás cursando?"
+  },
+  "CV2-D-L-ESCUELA-005": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: buenas vi la nota de la feria de ciencias la reunión es para todos los cursos | L2: OTRA: hola es para las familias de cuarto grado que van a presentar experimentos"
+  },
+  "CV2-D-L-FAMILIAR-001": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: ¿Seguís en el centro o ya saliste para lo de la abuela? | L2: PROTEGIDA: Estoy esperando el colectivo. Se demoró el que pasa por la plaza.",
+   "nota": "Se infiere que llama OTRA porque abre sin saludo con la pregunta de dónde está; es familiar, pero el texto no muestra que su número esté agendado."
+  },
+  "CV2-D-L-FAMILIAR-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Che, ¿pudiste mirar la cuenta de la torta y las cosas del cumple? | L2: PROTEGIDA: Sí. El total del súper fue 46.800 y yo pagué todo con la tarjeta.",
+   "nota": "Se infiere que llama OTRA porque abre sin saludo con la pregunta por las cuentas del cumple; es familiar, pero el texto no muestra que su número esté agendado."
+  },
+  "CV2-D-L-FAMILIAR-003": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: ¿Tenés todavía la camioneta el sábado o la usa tu hermano? | L2: PROTEGIDA: La tengo hasta el mediodía. ¿Querés llevar la bici de Mora?",
+   "nota": "Se infiere que llama OTRA porque abre sin saludo con su pedido de la camioneta; es familiar o allegado, pero el texto no muestra que su número esté agendado."
+  },
+  "CV2-D-L-FAMILIAR-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Pa, te aviso que hoy no llego a cocinarte. Se alargó la reunión en el instituto. | L2: PROTEGIDA: No te preocupes, comí al mediodía. ¿Qué necesitabas dejar listo?",
+   "nota": "Es su hijo o hija y no se presenta; PROTEGIDA lo trata como conocido, pero el texto no muestra que viera su número."
+  },
+  "CV2-D-L-FAMILIAR-005": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, estoy mirando el presupuesto del plomero. ¿Qué parte quedó pendiente? | L2: OTRA: El baño ya está pago. Falta la visita de la cocina, que fue ayer.",
+   "nota": "Se infiere que llama ella porque abre con su consulta; es familiar, pero como la regla de agendado pide que llame OTRA, queda no_agendado."
+  },
+  "CV2-D-L-MEDICO-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, tengo un control el jueves a las cuatro y me cambiaron el horario en el trabajo. | L2: OTRA: Buen día. ¿Me decís tu nombre y la fecha del turno?"
+  },
+  "CV2-D-L-MEDICO-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: hola me hice un análisis el viernes y todavía no veo el resultado en el portal | L2: OTRA: buenas fue en la sede de la avenida o en la del parque"
+  },
+  "CV2-D-L-MEDICO-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, vi una llamada perdida del consultorio. ¿Era por el turno de mi hijo?",
+   "nota": "Devuelve una llamada perdida que identificó como «del consultorio»; como esta llamada la hace ella, queda no_agendado por la regla."
+  },
+  "CV2-D-L-MEDICO-004": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: hola tengo una ecografía el viernes en la sede norte y se me complicó llegar hasta allá | L2: OTRA: buen día tenés el turno a nombre de quién"
+  },
+  "CV2-D-L-MEDICO-005": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, tengo turno de odontología mañana y el teléfono de la ficha quedó viejo. | L2: OTRA: Hola. ¿Me decís tu nombre y la hora del turno?"
+  },
+  "CV2-D-L-ORGANISMO_PREVISIONAL-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buen día. Hace dos semanas llevé los papeles para actualizar el cobro de mi mamá y todavía no hay novedades. | L2: OTRA: Hola. ¿Tenés el comprobante de la atención o la fecha aproximada?"
+  },
+  "CV2-D-L-ORGANISMO_PREVISIONAL-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, llamo porque el depósito de mi papá suele entrar el día 12 y este mes todavía no aparece."
+  },
+  "CV2-D-L-ORGANISMO_PREVISIONAL-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: hola necesito volver a imprimir una constancia de atención de la semana pasada | L2: OTRA: buen día recordás en qué oficina hiciste la consulta"
+  },
+  "CV2-D-L-PREMIO-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, estoy llamando por la rifa del club. Compré un número pero no encuentro cuándo se sortea."
+  },
+  "CV2-D-L-PREMIO-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, compré una entrada para el sorteo de la feria de cerámica y puse mal una letra en el correo. | L2: OTRA: Buen día. ¿Tenés el número de entrada?"
+  },
+  "CV2-D-L-PREMIO-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas tardes. Me llamaron del concurso de fotos del barrio y dijeron que quedé entre los seleccionados. | L2: OTRA: Hola. ¿Sabés el nombre de la muestra?"
+  },
+  "CV2-D-L-SOPORTE-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, llamo yo porque desde ayer se corta internet cada veinte minutos."
+  },
+  "CV2-D-L-SOPORTE-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, no puedo entrar al sistema de turnos del consultorio y hoy tengo que cerrar la agenda. | L2: OTRA: Buen día. ¿Te aparece un error o simplemente no reconoce el usuario?"
+  },
+  "CV2-D-L-SOPORTE-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buen día. El wifi desapareció de casa, pero la computadora sigue conectada por cable. | L2: OTRA: Hola. ¿Se apagó alguna luz del router o está todo encendido?"
+  },
+  "CV2-D-L-SOPORTE-004": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, reinstalé el programa de dibujo y me pide una clave que no encuentro. | L2: OTRA: Buenas. ¿Es una clave de producto o te está pidiendo iniciar sesión?"
+  },
+  "CV2-D-L-SOPORTE-005": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, la impresora dejó de conectarse y muestra el código E-14. | L2: OTRA: Hola. ¿La impresora está conectada por cable o por wifi?"
+  },
+  "CV2-D-L-TRABAJO-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: estás cerca del local el candado de la persiana no gira | L2: OTRA: voy en camino pero estoy a veinte minutos se trabó la llave o no entra",
+   "nota": "Se infiere que llama ella porque abre sin saludo preguntando y contando el problema; es compañera de trabajo, pero por la regla queda no_agendado."
+  },
+  "CV2-D-L-TRABAJO-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: el cliente de los estantes llamó la medida del módulo no coincide con el hueco | L2: PROTEGIDA: cuál de los dos módulos el del pasillo o el que va al mostrador",
+   "nota": "Se infiere que llama OTRA porque abre sin saludo con la novedad del cliente; es alguien del taller, pero el texto no muestra que su número esté agendado."
+  },
+  "CV2-D-L-TRABAJO-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, ¿tenés un minuto? Me quedó mal cargada la guardia del martes. | L2: OTRA: Sí, decime. ¿Qué horario habías hecho?",
+   "nota": "Llama PROTEGIDA a alguien conocido del trabajo; como la regla de agendado pide que llame OTRA, queda no_agendado."
+  },
+  "CV2-D-L-TRABAJO-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Che, me escribió Sol que tiene fiebre y no llega al turno de la tarde. | L2: PROTEGIDA: ¿A quién le toca cerrar hoy? Yo salgo a las cinco.",
+   "nota": "Se infiere que llama OTRA porque abre sin saludo con la novedad de Sol; es compañera de trabajo, pero el texto no muestra que su número esté agendado."
+  },
+  "CV2-D-L-TRABAJO-005": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: ¿Tenés la notebook gris? La necesita el equipo de sonido para la prueba. | L2: PROTEGIDA: Sí, la tengo en el armario. ¿La pasan a buscar hoy?",
+   "nota": "Se infiere que llama OTRA porque abre sin saludo con su pedido; es compañera de trabajo, pero el texto no muestra que su número esté agendado."
+  },
+  "CV2-D-L-WHATSAPP-001": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, llamo yo. Mi tía cambió el teléfono y ahora no aparece el grupo del edificio."
+  },
+  "CV2-D-L-WHATSAPP-002": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, necesito resolver algo del grupo de la feria. Me agregaron con el número viejo. | L2: OTRA: Hola. ¿Querés salir del grupo o cambiar el número asociado a tu cuenta?"
+  },
+  "CV2-D-L-WHATSAPP-003": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, llamo porque voy a cambiar el celular y quiero guardar el chat del taller."
+  },
+  "CV2-D-L-WHATSAPP-004": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Buenas, los mensajes me llegan todos juntos cuando abro la aplicación. Antes sonaban al momento. | L2: OTRA: ¿Te pasa con todos los chats o con uno en particular?"
+  },
+  "CV2-D-L-WHATSAPP-005": {
+   "grupo": "corpus_v2",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: hola intento hacer una copia de los chats y siempre termina con el mismo error | L24: OTRA: dale cuando llames vemos ese paso"
+  },
+  "CV2-D-V-BANCO-001": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, recién puedo atender. ¿Por qué me habían dejado un mensaje? | L2: OTRA: Soy del sector de medios de pago del banco, por el reclamo de un cargo.",
+   "nota": "PROTEGIDA atiende («recién puedo atender») después de un mensaje que le dejó OTRA por un reclamo que ella había iniciado."
+  },
+  "CV2-D-V-BANCO-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, te habla Mara del sector de acceso del banco. ¿Cambiaste de teléfono hace poco?"
+  },
+  "CV2-D-V-BANCO-003": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes soy Esteban de la mesa de efectivo del banco | L2: PROTEGIDA: Hola qué pasó"
+  },
+  "CV2-D-V-BANCO-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, te escucho. | L2: OTRA: Hola, soy Paula del banco. ¿Te llegó el aviso de devolución de comisión?"
+  },
+  "CV2-D-V-BANCO-005": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buen día Nicolás de operaciones digitales del banco Vos hiciste una trasferencia a la cooperativa La Esquina"
+  },
+  "CV2-D-V-BANCO-006": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Buenas, ¿quién habla? | L2: OTRA: Soy Leo, del banco. Te llamo por la devolución de una compra que quedó duplicada."
+  },
+  "CV2-D-V-BANCO-007": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas, te llamo del banco por una autorización que quedó esperando."
+  },
+  "CV2-D-V-BANCO-008": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, buen día. | L2: OTRA: Buenas noches, llamo del banco por una inconsistencia en la caja de seguridad."
+  },
+  "CV2-D-V-BANCO-009": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola te llamo de prevención del banco Sos quien hizo el pago de la cuota del club"
+  },
+  "CV2-D-V-BANCO-010": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Te llamo del banco por una retención sobre la transferencia que hiciste a Maderas Sur."
+  },
+  "CV2-D-V-BANCO-011": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, te escucho. | L2: OTRA: Buenas, del área de movimientos del banco. ¿Estás en un lugar donde puedas hablar sin que te interrumpan?"
+  },
+  "CV2-D-V-BANCO-012": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, de control de operaciones. Quedó pendiente un alta de destinatario en su cuenta. | L13: OTRA: Le queda poco tiempo al control, por eso lo estamos llamando ahora."
+  },
+  "CV2-D-V-FAMILIAR-001": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola soy el primo de Juli estás en tu casa | L2: PROTEGIDA: Sí qué pasó"
+  },
+  "CV2-D-V-FAMILIAR-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L2: OTRA: Ma, soy Tomi. ¿Podés hablar un segundo? | L3: PROTEGIDA: ¿Qué te pasó? Me sale un número que no tengo."
+  },
+  "CV2-D-V-FAMILIAR-003": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, tía, soy Lucho. ¿Te acordás del cumpleaños de la abuela? | L2: PROTEGIDA: Sí, el domingo en el club."
+  },
+  "CV2-D-V-FAMILIAR-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L2: OTRA: Hola, soy Caro, la hermana de Nico. ¿Él está con vos? | L7: PROTEGIDA: Ah, no tenía este número."
+  },
+  "CV2-D-V-FAMILIAR-005": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas, soy el sobrino de Marta, ¿hablo con la tía Ana? | L5: OTRA: Sí, me quedé sin teléfono y estoy llamando desde el de un compañero."
+  },
+  "CV2-D-V-FAMILIAR-006": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, soy tu prima Vane. ¿Estás en el centro?"
+  },
+  "CV2-D-V-ORGANISMO_PREVISIONAL-001": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Buenas, ¿quién habla? | L2: OTRA: Buen día, del sector de actualización de beneficiarios. Busco a quien gestiona la pensión de su mamá."
+  },
+  "CV2-D-V-ORGANISMO_PREVISIONAL-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola soy del equipo de liquidaciones previsionales Te llamo por el recibo de septiembre"
+  },
+  "CV2-D-V-ORGANISMO_PREVISIONAL-003": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Te llamamos del centro de orientación previsional por la consulta que dejaste sobre aportes."
+  },
+  "CV2-D-V-ORGANISMO_PREVISIONAL-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: hola buen día | L2: OTRA: Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes"
+  },
+  "CV2-D-V-ORGANISMO_PREVISIONAL-005": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Buenas, ¿quién habla? | L2: OTRA: Buenas, te llamo de control de prestaciones. Hay una revisión sobre el pago que entró este mes."
+  },
+  "CV2-D-V-ORGANISMO_PREVISIONAL-006": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Te llamo de la mesa de regularización por un cambio en el calendario de pagos previsionales."
+  },
+  "CV2-D-V-PREMIO-001": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, decime. | L2: OTRA: Hola, te llamo de la organización del sorteo de la Expo del Río. ¿Participaste con una compra en los puestos?"
+  },
+  "CV2-D-V-PREMIO-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas soy de producción de Radio Horizonte Hablás con Abril | L2: PROTEGIDA: Sí quién llama"
+  },
+  "CV2-D-V-PREMIO-003": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, soy de la coordinación de la campaña de fotos de bibliotecas."
+  },
+  "CV2-D-V-PREMIO-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Buenas tardes. | L2: OTRA: Buen día, te contacto por una promoción de Mercado del Parque que se hizo en septiembre."
+  },
+  "CV2-D-V-PREMIO-005": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: hola buen día | L2: OTRA: Hola te llamo de la organización del Festival del Patio por una consulta sobre el sorteo de entradas"
+  },
+  "CV2-D-V-PREMIO-006": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buen día, te contacto del equipo de beneficios de la Expo del Valle. Tu cupón quedó seleccionado."
+  },
+  "CV2-D-V-SOPORTE-001": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L2: OTRA: Buenas, soy Daniela del servicio de ayuda de Nube Taller. ¿Te puedo hacer unas preguntas sobre el acceso? | L17: PROTEGIDA: Pero me llamaste vos, no abrí un ticket."
+  },
+  "CV2-D-V-SOPORTE-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, del equipo de soporte de Servicios Roca. ¿Te anda el sistema de turnos?"
+  },
+  "CV2-D-V-SOPORTE-003": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Te habla Iván de la mesa técnica de Aulas Noroeste Sos docente del turno tarde"
+  },
+  "CV2-D-V-SOPORTE-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Buenas, soy de mantenimiento de la plataforma de facturación."
+  },
+  "CV2-D-V-SOPORTE-005": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, te escucho. | L2: OTRA: Hola, del área técnica de Mi Taller. ¿Te llegaron los presupuestos que mandaste ayer?"
+  },
+  "CV2-D-V-SOPORTE-006": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buen día te llamo de soporte de la biblioteca digital Lectura Abierta"
+  },
+  "CV2-D-V-SOPORTE-007": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, decime. | L2: OTRA: Buenas, te llamo de soporte de Clima Hogar por una actividad inusual en el perfil de consumo."
+  },
+  "CV2-D-V-SOPORTE-008": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, asistencia del portal de trámites. Estamos revisando una firma iniciada con su usuario. | L14: PROTEGIDA: ¿Y de dónde sacaron mi teléfono?",
+   "nota": "Abre con fórmula de organismo, pero OTRA trae el motivo y PROTEGIDA pregunta de dónde sacaron su teléfono."
+  },
+  "CV2-D-V-WHATSAPP-001": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola soy del equipo que está organizando la lista de difusión del centro vecinal Hablo con Sofía | L2: PROTEGIDA: Sí quién te dio mi número"
+  },
+  "CV2-D-V-WHATSAPP-002": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, decime. | L2: OTRA: Buenas, soy del servicio técnico de la empresa de internet. ¿Te anda lento el router?"
+  },
+  "CV2-D-V-WHATSAPP-003": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: buenas tardes | L2: OTRA: Hola te llamo por la inscripción al taller de huerta de la biblioteca"
+  },
+  "CV2-D-V-WHATSAPP-004": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, soy Julián, del grupo de consorcio de la torre B. ¿Te llegó el archivo de expensas?"
+  },
+  "CV2-D-V-WHATSAPP-005": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Sí? | L2: OTRA: Buenas, te llamo de la coordinación del club Horizonte por el equipo de básquet infantil."
+  },
+  "CV2-D-V-WHATSAPP-006": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿hablo con la persona que consultó por el taller de cerámica de los sábados? | L3: OTRA: Te llamo por la lista del taller. Soy quien está organizando el grupo de WhatsApp."
+  },
+  "CV2-D-V-WHATSAPP-007": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Buenas tardes. | L2: OTRA: Hola, llamo del equipo de soporte de WhatsApp por un registro de cuenta iniciado desde otro teléfono."
+  },
+  "CV2-D-V-WHATSAPP-008": {
+   "grupo": "corpus_v2",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas, soy del equipo que administra el grupo de la feria de emprendedores. | L7: OTRA: Por eso te llamamos antes de cerrar el listado de participantes."
+  },
+  "LAB-acceso-remoto": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: te llama la tarjeta hay un debito duplicado"
+  },
+  "LAB-acceso-remoto-parafrasis": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: soy de la tarjeta tenes un cobro duplicado"
+  },
+  "LAB-anses-beneficio": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hablo de anses hay un beneficio extra para cobrar esta semana"
+  },
+  "LAB-anses-beneficio-parafrasis": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: te hablo de anses tenes un cobro pendiente para retirar"
+  },
+  "LAB-anses-canal-oficial": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: PROTEGIDA: me ofrecieron un bono si les doy datos del organismo | L2: OTRA: el organismo no pide eso por telefono",
+   "nota": "Fragmento sin saludo: PROTEGIDA cuenta lo que le pasó y OTRA aconseja, sin marca de quién llamó."
+  },
+  "LAB-arca-canal-oficial": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: PROTEGIDA: me llego un mail de una deuda y un embargo | L2: OTRA: no abras ningun sitio del mensaje",
+   "nota": "Fragmento sin saludo: PROTEGIDA cuenta lo que le pasó y OTRA aconseja, sin marca de quién llamó."
+  },
+  "LAB-arca-deuda": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: le habla un inspector hay una deuda de una fiscalizacion y un embargo"
+  },
+  "LAB-arca-deuda-parafrasis": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: le habla el fisco tiene una intimacion pendiente"
+  },
+  "LAB-banco-app-parafrasis": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: OTRA: corta aca y fijate vos en la app del banco | L2: PROTEGIDA: dale a ver",
+   "nota": "Fragmento que arranca con un consejo a mitad de conversación: no hay marca de quién llamó."
+  },
+  "LAB-banco-codigo": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola te llamo del banco hay una compra que no reconocemos"
+  },
+  "LAB-banco-codigo-parafrasis": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola soy del banco vimos un gasto que no es tuyo"
+  },
+  "LAB-banco-gasto-sin-pedido": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: te llama el banco porque vimos un gasto que no cierra"
+  },
+  "LAB-banco-niega-el-codigo": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: OTRA: ningun banco te pide el codigo por telefono | L2: OTRA: corta y revisa la aplicacion oficial",
+   "nota": "Solo dos líneas de OTRA con consejos: no hay marca de quién llamó."
+  },
+  "LAB-banco-numeros-sin-clave": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: che te hablo del banco hay un consumo raro en la tarjeta"
+  },
+  "LAB-banco-revisa-app": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: te aviso que hubo un consumo en la tarjeta | L3: OTRA: corta esta comunicacion y entra vos a la aplicacion oficial",
+   "nota": "Sin saludo ni presentación; se infiere que llama OTRA porque abre avisando del consumo y le pide cortar «esta comunicación»."
+  },
+  "LAB-digitos-sin-palabra": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola te llamo de la tarjeta por un cargo que no reconocemos"
+  },
+  "LAB-familiar-llama-vos": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: PROTEGIDA: me llamaron y dijeron que un familiar estaba en peligro | L2: OTRA: corta",
+   "nota": "Fragmento sin saludo: PROTEGIDA cuenta una llamada anterior y OTRA aconseja, sin marca de quién hizo esta."
+  },
+  "LAB-familiar-peligro": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: escucha tu hermano esta en un problema grave y yo soy el intermediario"
+  },
+  "LAB-familiar-peligro-parafrasis": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola soy un amigo de tu hijo tuvo un accidente"
+  },
+  "LAB-giro-sin-plata": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: habla un amigo de tu hermano, tuvo un accidente"
+  },
+  "LAB-mensajeria-no-pases-nada": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: PROTEGIDA: me llamo alguien que dice ser soporte de la aplicacion de mensajes | L2: OTRA: no le contestes",
+   "nota": "Fragmento sin saludo: PROTEGIDA cuenta una llamada anterior y OTRA aconseja, sin marca de quién hizo esta."
+  },
+  "LAB-no-bajes-nada": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: PROTEGIDA: me llamaron para que baje un programa y les muestre el celular | L2: OTRA: no bajes nada",
+   "nota": "Fragmento sin saludo: PROTEGIDA cuenta una llamada anterior y OTRA aconseja, sin marca de quién hizo esta."
+  },
+  "LAB-pantalla-sin-programa": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: soy del soporte de tu banco | L2: PROTEGIDA: que paso"
+  },
+  "LAB-portero-codigo-puerta": {
+   "grupo": "laboratorio",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: PROTEGIDA: el portero me paso el codigo de la puerta | L2: OTRA: esta en el palier, no se lo des a nadie",
+   "nota": "Solo dos líneas, sin saludo ni presentación: no hay marca de quién llamó."
+  },
+  "LAB-whatsapp-codigo": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola soy del soporte de whatsapp se quiere meter alguien en tu cuenta"
+  },
+  "LAB-whatsapp-codigo-parafrasis": {
+   "grupo": "laboratorio",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: te llamo del soporte de mensajes hay un acceso raro"
+  },
+  "LG-BANK-VERIF-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: OTRA: Buenas tardes, centro de atención del banco, habla Lucía. | L2: PROTEGIDA: Hola, Lucía. Llamo al número que está atrás de mi tarjeta. Me llegó un aviso en la app de un ingreso desde un dispositivo nuevo y quiero cambiar la clave."
+  },
+  "LG-FAMILIAR-LLAMADO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L2: OTRA: Hola, tía, soy Nicolás. Te llamo del celular de un compañero porque el mío se quedó sin batería. | L3: PROTEGIDA: ¿Nico? ¿Qué pasó? Me asustás, llamando de otro número."
+  },
+  "LG-ORG-TURNO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: OTRA: Buen día, te atiende Sofía, de atención telefónica del organismo previsional. ¿En qué te puedo ayudar? | L2: PROTEGIDA: Hola, buen día. Escuché en la radio que hay un refuerzo para los jubilados que cobran la mínima y quería saber si me toca."
+  },
+  "LG-PREMIO-CONSULTA-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: OTRA: Atención al cliente de la promoción aniversario, buenas tardes. Te atiende Romina. | L2: PROTEGIDA: Hola, Romina. Saqué este número del cartel que está en las cajas del supermercado. Quería consultar por el sorteo."
+  },
+  "LG-SUPPORT-INFO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: OTRA: Mesa de ayuda de la billetera, buenas tardes, te atiende Julián. ¿En qué te puedo ayudar? | L2: PROTEGIDA: Hola, ¿qué tal? Los llamo porque no puedo entrar a mi cuenta desde la computadora: me dice que el usuario o la contraseña son incorrectos."
+  },
+  "LG-SUPPORT-INFO-01-e02": {
+   "grupo": "piloto_escrito",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, buenas tardes. Los llamo porque la aplicación del banco se me queda con la pantalla en blanco cuando quiero entrar. | L2: OTRA: Buenas tardes, te atiende Carolina, de atención al cliente. Contame, ¿desde cuándo te pasa?"
+  },
+  "LG-WA-CONSULTA-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "no_se_sabe",
+   "numero": "no_agendado",
+   "alcance": "dudoso",
+   "evidencia": "L1: PROTEGIDA: Me llegó por SMS un código para activar WhatsApp y yo no lo pedí. | L2: OTRA: No me lo leas ni lo compartas. Revisá la seguridad desde la aplicación.",
+   "nota": "Fragmento sin saludo: PROTEGIDA cuenta lo que le pasó y OTRA aconseja, sin marca de quién llamó."
+  },
+  "SC-CLAVE-CAMBIO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Buenas tardes, ¿hablo con Raúl Quiroga? Te llamo del área de seguridad del banco por un movimiento en tu cuenta."
+  },
+  "SC-FAMILIAR-DINERO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L2: OTRA: Hola, tía, ¿cómo andás? Soy yo... ¿no me reconocés? | L4: OTRA: Sí, tía, Nico. Te llamo de otro número porque se me rompió el celular. Estoy en un problema y no sabía a quién llamar."
+  },
+  "SC-ORG-BENEFICIO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buen día, ¿hablo con la señora Elena Ríos? | L2: PROTEGIDA: Sí, soy yo. ¿De dónde me llaman?"
+  },
+  "SC-PREMIO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: ¡Buenas tardes! ¿Me comunico con Norma Villegas? | L2: PROTEGIDA: Sí, ella habla. ¿De parte de quién?"
+  },
+  "SC-SOPORTE-CLAVE-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes. ¿Hablo con Laura Domínguez? | L2: PROTEGIDA: Sí, soy yo. ¿Quién habla?"
+  },
+  "SC-SOPORTE-REMOTO-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas noches, te hablo del sector de préstamos del banco, mi nombre es Hernán Ibarra. ¿Sos el titular de la cuenta?"
+  },
+  "SC-WA-CODE-01-e01": {
+   "grupo": "piloto_escrito",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Te llamo de soporte por la activación de tu cuenta de WhatsApp."
+  },
+  "TR-01-pedido-indirecto-digitos": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes. ¿Hablo con Mariela Sosa? | L2: PROTEGIDA: Sí, ella habla."
+  },
+  "TR-02-codigo-del-candado": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Che, Caro, ya estoy en tu edificio. Vengo a buscar las sillas plegables como quedamos. | L2: PROTEGIDA: Genial. Están en la baulera del subsuelo, la última del pasillo. Llevate las blancas, que las de madera están rotas.",
+   "nota": "Se infiere que llama OTRA porque abre avisando que llegó; es una conocida que no se presenta, pero el texto no muestra que su número esté agendado."
+  },
+  "TR-03-negacion-y-consejo": {
+   "grupo": "trampa",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: PROTEGIDA: Hola, hijo. Te llamo porque en la tele dijeron algo de unas llamadas raras y me quedé preocupada. | L2: OTRA: Bien que me llames, ma. Escuchame una cosa: nunca le pases la clave del banco a nadie, ni a mí.",
+   "nota": "Llama PROTEGIDA a su hijo; como la regla de agendado pide que llame OTRA, queda no_agendado."
+  },
+  "TR-04-pedido-tras-charla-larga": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes. ¿Hablo con Rubén Aguirre? | L2: PROTEGIDA: Sí, soy yo. ¿Quién habla?"
+  },
+  "TR-05-asado-con-transferencia": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: ¡Eh, Martín! ¿Cómo va? ¿Venís el sábado al asado en lo de Gonza? | L5: OTRA: No, el carbón ya lo compró él. Escuchá, te llamaba por la plata, que la estoy juntando yo.",
+   "nota": "Amigo que no se presenta; el «lo tengo agendado» de la L16 se refiere al alias, no a su teléfono."
+  },
+  "TR-06-banco-alerta-legitima": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes. ¿Hablo con Julieta Medina? | L2: PROTEGIDA: Sí, soy yo. ¿Quién es?"
+  },
+  "TR-07-pedido-partido-en-dos-lineas": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, ¿Sergio Paz? Te hablo de atención al cliente del banco, me llamo Andrea. | L2: PROTEGIDA: Sí, soy yo. ¿Qué pasó?"
+  },
+  "TR-08-frase-cortada-candado": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, Lu, ¿estás muy ocupada? | L2: PROTEGIDA: No, decime. Estoy saliendo del laburo.",
+   "nota": "Amiga que no se presenta y a la que PROTEGIDA trata como conocida, pero el texto no muestra que viera su número."
+  },
+  "TR-09-victima-se-niega": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿hablo con Marta Giménez? | L2: PROTEGIDA: Sí, ¿quién habla?"
+  },
+  "TR-10-ofrecimiento-inducido": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Buenas tardes, ¿Julián Paredes?"
+  },
+  "TR-11-familiar-real-pide-plata": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, má. ¿Te agarro en mal momento?",
+   "nota": "Es el hijo, pero ella atiende sin reconocerlo y él le pide que lo llame «al número de siempre» (L8)."
+  },
+  "TR-12-corta-antes-del-pedido": {
+   "grupo": "trampa",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L2: OTRA: Abu... Abu, ¿me escuchás? Soy yo. | L3: PROTEGIDA: ¿Quién habla? ¿Martín?"
+  },
+  "TR-13-turno-medico-pide-dni": {
+   "grupo": "trampa",
+   "inicia": "protegida",
+   "numero": "no_agendado",
+   "alcance": "fuera",
+   "evidencia": "L1: OTRA: Centro de salud, buen día, te atiende Carla. | L2: PROTEGIDA: Hola, buen día. Quería sacar un turno con clínica médica, para un control."
+  }
+ }
+}

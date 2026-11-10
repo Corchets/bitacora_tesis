@@ -1,0 +1,33 @@
+{
+  "num_predict": 24,
+  "lineas": 48,
+  "alcanzan": 48,
+  "tokens_hasta_alerta": {
+    "min": 23,
+    "mediana": 23.0,
+    "max": 23,
+    "sin_alerta": 0
+  },
+  "cortado_lineas": 48,
+  "cortado_leidas": 48,
+  "cortado_errores": [],
+  "segunda_consulta": [
+    {
+      "case_id": "CV2-D-L-BANCO-001",
+      "linea": "6",
+      "ms_etapa2": "597.6",
+      "error": "",
+      "motivo": "No proporciones los últimos cuatro dígitos de tu cuenta, ya que esto puede ser usado para acceder a tus movimientos.",
+      "evidencia": "bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer"
+    },
+    {
+      "case_id": "SC-WA-CODE-01-e01",
+      "linea": "3",
+      "ms_etapa2": "739.8",
+      "error": "",
+      "motivo": "No debes resolver la activación de tu cuenta por teléfono; no compartas información ni realices acciones solicitadas por un desconocido.",
+      "evidencia": "Para cancelar esa activación tenemos que resolverlo ahora."
+    }
+  ],
+  "pasa": true
+}

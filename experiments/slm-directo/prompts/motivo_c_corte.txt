@@ -1,0 +1,3 @@
+Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:
+- "evidencia": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.
+- "motivo": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.

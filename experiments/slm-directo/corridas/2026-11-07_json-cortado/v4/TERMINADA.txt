@@ -1,0 +1,3 @@
+JSON completo de v4 en la misma sesión, para comparar línea a línea
+commit decdff12d482760da8be893a7d94f4e59d19b3a2
+minutos 22.7

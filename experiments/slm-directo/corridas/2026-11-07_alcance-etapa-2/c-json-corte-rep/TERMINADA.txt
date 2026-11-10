@@ -1,0 +1,3 @@
+Repetición de c-json-corte, sobre los 140 dentro del alcance
+commit d127953fcc05389b54b26415fc047ad6f1865a35
+minutos 13.0
