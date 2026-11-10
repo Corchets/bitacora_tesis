@@ -22,7 +22,7 @@
 Lo que dice hoy el ADR 0001 da 50–51 estafas y 12–13 falsas alarmas: la propuesta avisa 4 o 5 estafas más con, como
 mucho, una falsa alarma más, y cita mejor lo que se pidió. La demo con ASR ya arranca así desde el 2026-11-05.
 
-**No llega a la meta del tutor** (80–85 % de estafas con 10–15 % de falsas alarmas, o sea 60–64 y 8–11 de 75). Ninguna
+**No llega a la meta de referencia** (80–85 % de estafas con 10–15 % de falsas alarmas, o sea 60–64 y 8–11 de 75). Ninguna
 de las condiciones probadas llega. Más abajo está [por qué](#qué-no-arregla-ninguna-configuración).
 
 ## Cómo leer las tablas
