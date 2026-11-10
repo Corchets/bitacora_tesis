@@ -14,7 +14,7 @@ Borrador completo al 2026-11-03. **La evaluación final no se corrió:** los cap
 | [5. Diseño y arquitectura](CAP-05-DISENO-Y-ARQUITECTURA.md) | Borrador completo | Revisión del equipo |
 | [6. Implementación](CAP-06-IMPLEMENTACION.md) | Borrador completo | Revisión del equipo |
 | [7. Verificación y pruebas](CAP-07-VERIFICACION-Y-PRUEBAS.md) | Borrador actualizado | Detalle por prueba de la configuración final. #28 se cerró sin reproducción registrada por otra persona |
-| [8. Resultados](CAP-08-RESULTADOS-EXPERIMENTALES.md) | **Solo desarrollo** | Test reservado, E1, PI2 con marcas humanas y E2 (#52) |
+| [8. Resultados](CAP-08-RESULTADOS-EXPERIMENTALES.md) | **Solo desarrollo** | Test reservado, PI2 con marcas humanas y E2 (#52) |
 | [9. Discusión](CAP-09-DISCUSION.md) | **Parcial** | Responder con el test |
 | [10. Gestión](CAP-10-GESTION-DEL-PROYECTO.md) | Borrador | Contribuciones de los cuatro |
 | [11. Conclusiones](CAP-11-CONCLUSIONES.md) | **Parcial** | Resultado final e hipótesis |

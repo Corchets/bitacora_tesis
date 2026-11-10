@@ -96,6 +96,10 @@ Como evaluación diagnóstica se comparará el detector con transcripción manua
 ASR local. La explicación de maniobras será un objetivo secundario. No se presentan
 como preguntas centrales independientes.
 
+> **Nota (2026-11-10, [#54](https://github.com/Corchets/bitacora_tesis/issues/54)):** la comparación con transcripción manual y ASR (E1) quedó
+> fuera y se declara como límite en el
+> [protocolo](../evaluacion/PROTOCOLO-EXPERIMENTAL.md#72-amenazas-a-la-validez).
+
 Las definiciones operativas y métricas están en
 [PREGUNTAS-DE-INVESTIGACION.md](../investigacion/PREGUNTAS-DE-INVESTIGACION.md).
 

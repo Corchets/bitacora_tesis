@@ -10,8 +10,9 @@ Es un estudio experimental sobre un corpus controlado. La llamada se procesa com
 |---|---|---|---|
 | PI1 | Prefijos, clase y tiempos | Configuración final y reglas | Detección y falsas alarmas |
 | PI2 | `T_A`, `T_R`, `T_C` | Márgenes del aviso | `L_R`, `L_C` y `Preventive@δ` |
-| E1 | Audio, texto manual y ASR | Mismo detector, entrada distinta | Degradación, términos críticos perdidos y latencia |
 | E2 | Evidencia seleccionada | Motivo mostrado contra evidencia | Correspondencia y errores de explicación |
+
+No se compara el mismo detector sobre texto manual y sobre ASR (E1, [#54](https://github.com/Corchets/bitacora_tesis/issues/54)): las métricas de detección salen de conversaciones escritas, y el ASR se mide aparte con voz real.
 
 ## 4.2. Construcción del corpus y muestreo
 
