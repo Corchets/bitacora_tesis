@@ -1,8 +1,11 @@
 # Llamada en vivo: ASR por canal, detector y panel (frente 1, spike)
 
-> **Configuración final (2026-11-03, [ADR 0001](../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)):**
-> ASR `parakeet-filtro` y detector Tito viejo con Gemma 4 E2B. El servidor arranca así si no se le
-> pasa nada. Implementa la opción D (cualquier app de llamada + captura por persona) y deja andando
+> **Configuración por defecto (2026-11-10):** ASR `parakeet-filtro`
+> ([ADR 0001](../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)) y la configuración
+> congelada de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) como detector: Gemma 4 E2B directo, sin
+> Tito, con `c-json-corte-riesgo` ([ADR 0006](../../docs/ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md))
+> y solo OTRA ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). El servidor
+> arranca así si no se le pasa nada; el comando para probarlo está en [§3](#demo-con-la-configuración-congelada-de-143). Implementa la opción D (cualquier app de llamada + captura por persona) y deja andando
 > la E (replay estéreo en tiempo real) con el mismo código. No cierra
 > [D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
@@ -26,9 +29,9 @@ servidor.py ── Zipformer streaming por canal ── actualizaciones.jsonl (c
 
 - **Cada persona es un canal.** El rol (`protegida` u `otra`) lo dice el cliente al conectarse; cada
   línea del JSONL trae `canal: "protegida" | "otra"`, sin un campo `rol` duplicado. Por defecto el detector
-  corre el prompt `v4` con `--hablantes rol`: recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR, y Tito
-  decide cuándo consultar sin pasarle su indicio al SLM (`--con-indicio` lo agrega). Con `--prompt tarea --hablantes ab`
-  vuelve a ver A/B por orden del primer texto (incluidos parciales), como en la configuración del ADR 0001.
+  corre `c-json-corte-riesgo` con `--hablantes rol`: recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR.
+  Con `--prompt tarea --hablantes ab` vuelve a ver A/B por orden del primer texto (incluidos parciales), como en la
+  configuración anterior del ADR 0001; Tito viejo queda con `--detector tito-slm --prompt v4`.
   Replay reconstruye esa asignación por llamada y sigue aceptando los registros anteriores con A/B.
   Los eventos ASR del panel conservan `canal: "A" | "B"` y `rol` por compatibilidad con su interfaz
   (roles «Vos» / «La otra persona» para el detector son del frente 3).
@@ -68,10 +71,10 @@ pip install -r experiments/asr-local/requirements.txt -r experiments/voip/requir
 cd experiments/voip
 
 # En la máquina que analiza (la del ASR y el detector):
-python servidor.py   # configuración final: Tito viejo con Gemma 4 E2B y parakeet-filtro
+python servidor.py   # configuración congelada de #143 (Gemma 4 E2B directo) y parakeet-filtro
 python servidor.py --detector reglas
-# Sin Tito, para comparar: python servidor.py --detector slm --modelo qwen3.5:0.8b-q8_0
-# El detector también se elige en el panel, antes de cada llamada: Gemma 4 E2B con Tito viejo, o reglas.
+# Tito viejo, la configuración anterior: python servidor.py --detector tito-slm --prompt v4
+# El detector también se elige en el panel, antes de cada llamada: Gemma 4 E2B directo, o reglas.
 # Bajar el modelo una vez, con el tag completo: ollama pull gemma4:e2b-it-q4_K_M
 # El corte de silencio se elige en el panel (0,1–3,0 s, inicial 0,8); --corte-silencio fija el de
 # las llamadas que abre cliente.py («auto» por defecto): python servidor.py --detector reglas --corte-silencio 0.5
@@ -98,6 +101,39 @@ python cliente.py --rol protegida --wav ../asr-local/audio/SC-WA-CODE-01-tts-est
 
 python -m unittest discover -s tests
 ```
+
+### Demo con la configuración congelada de #143
+
+Para probar la demo con una llamada real. Desde `experiments/voip/`, con el entorno de arriba:
+
+```bash
+python servidor.py --detector slm --modelo gemma4:e2b-it-q4_K_M --prompt c-json-corte-riesgo \
+  --hablantes rol --solo-otra --disparo turno --ollama-url http://<ip-de-ollama>:11434
+```
+
+Son los valores por defecto escritos a mano: `python servidor.py --ollama-url http://<ip-de-ollama>:11434` hace lo
+mismo. Corta la salida tras el riesgo, avisa con riesgo ≥ 0,3, pide el motivo solo en el primer aviso y consulta al
+cerrar cada turno de OTRA. La consulta termina en la última línea de OTRA: lo que dice PROTEGIDA entra en la
+siguiente, como en `correr.py --solo-otra`. Tras el primer aviso no se consulta más. Si la prueba de sensibilidad de
+#143 adopta una variante, solo cambia `--prompt` (`c-ancla-corte-riesgo`, `c-premisa-corte-riesgo` o
+`c-sin-freno-corte-riesgo`).
+
+**De dónde sale Ollama.** El servidor carga el modelo al arrancar. Si no llega a Ollama, no arranca. Hay dos opciones:
+
+- **El Ollama de la misma notebook:** sin `--ollama-url` (usa `http://127.0.0.1:11434`). Antes, `ollama serve` y,
+  una vez, `ollama pull gemma4:e2b-it-q4_K_M`. En la M1 de 8 GB entra justo (R23 del
+  [registro de riesgos](../../docs/gestion/REGISTRO-RIESGOS.md)).
+- **El Ollama de otra máquina de la red**, como la PC con GPU: `--ollama-url http://<ip-de-esa-máquina>:11434`. Ahí
+  Ollama tiene que escuchar en la red (`OLLAMA_HOST=0.0.0.0:11434 ollama serve`) y tener el modelo bajado con el
+  mismo tag.
+
+Los Colab T4 de `slm-directo/colab/` levantan su propio Ollama solo para las corridas por lotes, y no exponen nada al
+panel. Sin un Ollama alcanzable, el panel solo anda con `--detector reglas`.
+
+Para la llamada en sí: [guía de Meet y WhatsApp](GUIA-MEET-WHATSAPP.md) (también en `http://<ip>:8765/guia`) o D1
+con `cliente.py` (§2). En el panel, la caja del detector tiene que decir `SLM (gemma4:e2b-it-q4_K_M)` y
+`prompt c-json-corte-riesgo · consulta solo en OTRA`. El manifiesto de cada llamada guarda `prompt` y `solo_otra`.
+Si la otra voz no es del equipo, antes va el consentimiento ([checklist](PRUEBA-VOZ-REAL-MEET.md#antes-de-citar-a-la-otra-persona)).
 
 ### Ejemplo desde el panel (sin terminales de clientes)
 
@@ -163,9 +199,9 @@ La fuente y el modo elegidos quedan en `inicio_panel` en el manifiesto.
 
 Los mensajes de transcripción llevan `tipo: "asr"` y `entrega: "parcial" | "final"`.
 `rol` identifica a la persona y `canal` conserva la letra A/B. En el detector, por defecto
-se usa `--hablantes rol`: recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR, y el SLM no recibe el
-indicio de Tito, que sigue decidiendo cuándo consultar (`--con-indicio` lo agrega). Con `--prompt tarea --hablantes ab`,
-A/B por orden de habla. `v4` rechaza `--hablantes ab`, porque nombra a PROTEGIDA y OTRA. El JSONL sigue usando
+se usa `--hablantes rol`: recibe `PROTEGIDA` u `OTRA` según el canal lógico del ASR. Con Tito (`--detector tito-slm`),
+el SLM no recibe su indicio (`--con-indicio` lo agrega). Con `--prompt tarea --hablantes ab`, A/B por orden de habla.
+`v4` y `c-json-corte-riesgo` rechazan `--hablantes ab`, porque nombran a PROTEGIDA y OTRA. El JSONL sigue usando
 su contrato previo: `tipo: "parcial" | "final"` y `canal` con el rol.
 
 Durante la llamada, el servidor manda una foto de ambos niveles cada 100 ms (aproximadamente
@@ -351,7 +387,7 @@ Con el entorno Python de §3 activo, Zipformer ya descargado y el TTS original d
 `SC-WA-CODE-01` en `experiments/asr-local/audio/`, corré desde `experiments/voip/`:
 
 ```bash
-python medir.py   # Tito viejo con Gemma 4 E2B
+python medir.py   # configuración congelada de #143; consulta en cada frase final de OTRA (protocolo de #77)
 # Comparación con el respaldo:
 python medir.py --detector reglas
 ```

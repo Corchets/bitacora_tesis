@@ -9,6 +9,7 @@ Ejemplos:
     python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32
     python correr.py --solo-reranker --reranker MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7 --hilos 4 --seguir-tras-aviso
     python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts tarea-sino --hablantes ab --sin-reglas --seguir-tras-aviso
+    python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts c-json-corte-riesgo --hablantes rol --sin-reglas --solo-otra
 
 Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     manifiesto.json      qué se corrió: modelos, prompts, casos, código, máquina
@@ -51,6 +52,7 @@ from detectores import (
     DetectorSLM,
     DetectorSLMDosEtapas,
     DetectorSLMCCorto,
+    DetectorSLMCorteRiesgo,
     DetectorSLMJSONCortado,
     DetectorSLMDigito,
     DetectorSLMLecturaJSON,
@@ -58,10 +60,12 @@ from detectores import (
     DIGITOS,
     MAXIMO_TOKENS_C_CORTO,
     MAXIMO_TOKENS_CORTE,
+    MAXIMO_TOKENS_CORTE_RIESGO,
     MAXIMO_TOKENS_LECTURA,
     MAXIMO_TOKENS_RESPUESTA,
     PROMPTS_C_CORTO,
     PROMPTS_CORTE,
+    PROMPTS_CORTE_RIESGO,
     PROMPTS_DIGITO,
     PROMPTS_LECTURA,
     PROMPTS_SINO,
@@ -178,14 +182,26 @@ class Llamada:
         return False
 
 
-def procesar_caso(detector, lineas: list[casos.Linea], *, detener_en_aviso: bool = True):
+def respuesta_sin_consulta() -> Respuesta:
+    """Una línea de PROTEGIDA con «solo OTRA»: entra al contexto y no consulta (no es fallo ni aviso)."""
+    return Respuesta(valida=True, alerta_sugerida=False, consulta="omitida")
+
+
+def procesar_caso(detector, lineas: list[casos.Linea], *, detener_en_aviso: bool = True, solo_otra: bool = False):
     """Entrega las líneas de a una y devuelve (n, línea, respuesta, aviso) por actualización.
 
     En modo operativo (#97) termina al primer aviso válido, incluida una falsa
     alarma: no se evalúan actualizaciones posteriores. Con
     `detener_en_aviso=False` (modo diagnóstico) recorre la conversación
     completa y conserva las alertas posteriores sin volver a avisar.
+
+    Con `solo_otra` (ADR 0007) consulta al detector solo en las líneas de OTRA:
+    las de PROTEGIDA entran a la transcripción de la consulta siguiente, pero no
+    consultan (`consulta` = "omitida"). Necesita las líneas con roles
+    (`casos.con_roles`).
     """
+    if solo_otra and any(l.hablante not in ("PROTEGIDA", "OTRA") for l in lineas):
+        raise ValueError("solo_otra requiere líneas con PROTEGIDA u OTRA (ver casos.con_roles)")
     reiniciar = getattr(detector, "reiniciar", None)
     if callable(reiniciar):
         reiniciar()  # el filtro reinicia activación e indicio entre llamadas
@@ -194,7 +210,10 @@ def procesar_caso(detector, lineas: list[casos.Linea], *, detener_en_aviso: bool
         detector.reiniciar()
     for n, linea in enumerate(lineas, start=1):
         disponibles = llamada.agregar(linea)
-        respuesta = detector.evaluar(disponibles)
+        if solo_otra and linea.hablante != "OTRA":
+            respuesta = respuesta_sin_consulta()
+        else:
+            respuesta = detector.evaluar(disponibles)
         aviso = llamada.registrar(n, respuesta)
         yield n, linea, respuesta, aviso
         if aviso and detener_en_aviso:
@@ -490,9 +509,10 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
 
 def _prompt_manifiesto(variante: str) -> dict:
     datos = {"huella": huella(cargar_prompt(variante)), "texto": cargar_prompt(variante), "esquema": esquema_de(variante)}
-    if variante == "riesgo" or variante in PROMPTS_CORTE | PROMPTS_C_CORTO:
+    if variante == "riesgo" or variante in PROMPTS_CORTE | PROMPTS_C_CORTO | PROMPTS_CORTE_RIESGO:
         motivo = cargar_prompt_motivo(PROMPT_MOTIVO_CORTE if variante in PROMPTS_CORTE else
-                                      PROMPT_MOTIVO_C if variante in PROMPTS_C_CORTO else PROMPT_MOTIVO)
+                                      PROMPT_MOTIVO_C if variante in PROMPTS_C_CORTO | PROMPTS_CORTE_RIESGO else
+                                      PROMPT_MOTIVO)
         datos["etapa2"] = {"huella": huella(motivo), "texto": motivo, "esquema": ESQUEMA_MOTIVO}
     pregunta = cargar_pregunta(variante)
     if pregunta is not None:  # cierra el mensaje del usuario, después de la transcripción
@@ -535,6 +555,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--sin-indicio", action="store_true", help="con --filtro-tito: Tito solo decide cuándo consultar; el SLM recibe el mismo mensaje que el SLM solo, sin bloque de indicio")
     p.add_argument("--tito-modelo", type=Path, default=ARTEFACTO_POR_DEFECTO, help="artefacto del clasificador Tito")
     p.add_argument("--seguir-tras-aviso", action="store_true", help="modo diagnóstico: recorrer la conversación completa tras el aviso, identificado en el manifiesto y separado del costo operativo")
+    p.add_argument("--solo-otra", action="store_true", help="consultar al SLM solo en las líneas de OTRA (ADR 0007); las de PROTEGIDA entran al contexto sin consultar. Requiere --hablantes rol y --sin-reglas")
     p.add_argument("--tito-umbral", type=float, default=UMBRAL_TITO, help="umbral de derivación al SLM (convención exploratoria, igualdad activa)")
     p.add_argument("--tito-puntajes", default="", help="puntajes simulados por línea, p. ej. '4=0.9,5=0.8' (lo no listado puntúa 0,0)")
     p.add_argument("--tito-fallo-en", default="", help="líneas donde Tito falla técnicamente, p. ej. '2'")
@@ -586,10 +607,17 @@ def main(argv: list[str] | None = None) -> int:
     modelos = [] if (args.solo_reglas or args.solo_reranker) else _lista(args.modelos)
     if not modelos and not args.solo_reglas and not args.solo_reranker:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b), --solo-reglas o --solo-reranker.")
-    if args.filtro_tito and ({"riesgo"} | PROMPTS_CORTE | PROMPTS_C_CORTO) & set(_lista(args.prompts)):
+    if args.filtro_tito and ({"riesgo"} | PROMPTS_CORTE | PROMPTS_C_CORTO | PROMPTS_CORTE_RIESGO) & set(_lista(args.prompts)):
         sys.exit(f"--filtro-tito no admite --prompts riesgo ni los cortados "
-                 f"({', '.join(sorted(PROMPTS_CORTE | PROMPTS_C_CORTO))}): "
+                 f"({', '.join(sorted(PROMPTS_CORTE | PROMPTS_C_CORTO | PROMPTS_CORTE_RIESGO))}): "
                  "el flujo Tito→SLM usa el prompt de un paso.")
+    if args.solo_otra:
+        # «Solo OTRA» es la política de consulta de la app (ADR 0007): necesita saber quién habla, y el SLM es lo único
+        # que consulta. Las reglas y el reranker no reciben roles, y Tito quedó afuera del sistema final.
+        if _lista(args.hablantes) != ["rol"]:
+            sys.exit("--solo-otra requiere --hablantes rol: hace falta saber qué líneas son de OTRA.")
+        if not args.sin_reglas or args.solo_reglas or args.solo_reranker or args.reranker or args.filtro_tito:
+            sys.exit("--solo-otra corre solo el SLM: usá --sin-reglas, sin --reranker ni --filtro-tito.")
     if args.filtro_tito and PROMPTS_TOKEN & set(_lista(args.prompts)):
         sys.exit("--filtro-tito no admite los prompts de token (SÍ/NO o dígito): en #143 la compuerta de Tito se simula offline.")
     if args.tito_viejo_2 and not args.filtro_tito:
@@ -611,6 +639,10 @@ def main(argv: list[str] | None = None) -> int:
         if h not in HABLANTES:
             sys.exit(f"Hablantes desconocido {h!r}. Opciones: {', '.join(HABLANTES)}")
     ids = elegir_casos(args)
+    if "rol" in hablantes:
+        sin_roles = sorted(set(ids) - set(json.loads(casos.ROLES.read_text(encoding="utf-8"))))
+        if sin_roles:
+            sys.exit(f"Casos sin roles en {_mostrar(casos.ROLES)} (hacen falta para --hablantes rol): {sin_roles}")
 
     cliente = ClienteOllama(args.url, args.timeout)
     # La primera carga de un modelo grande desde el disco puede tardar varios minutos.
@@ -650,7 +682,10 @@ def main(argv: list[str] | None = None) -> int:
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                if variante in PROMPTS_C_CORTO:
+                if variante in PROMPTS_CORTE_RIESGO:
+                    d = DetectorSLMCorteRiesgo(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                               esquema=esquema_de(variante))
+                elif variante in PROMPTS_C_CORTO:
                     d = DetectorSLMCCorto(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
                                           esquema=esquema_de(variante))
                 elif variante in PROMPTS_CORTE:
@@ -708,6 +743,7 @@ def main(argv: list[str] | None = None) -> int:
         "maquina": info_maquina(),
         "politica": POLITICA,
         "modo_termino": MODO_DIAGNOSTICO if args.seguir_tras_aviso else MODO_OPERATIVO,
+        "solo_otra": args.solo_otra,
         "filtro_tito": None if not args.filtro_tito else (
             {
                 "tito": "real-robertuito-logreg",
@@ -780,6 +816,14 @@ def main(argv: list[str] | None = None) -> int:
                            "riesgo usa un texto fijo): mismos mensajes + el JSON escrito, como assistant + "
                            f"{PROMPT_MOTIVO_C}, con ESQUEMA_MOTIVO y num_predict {MAXIMO_TOKENS_RESPUESTA}"),
             }} if modelos and PROMPTS_C_CORTO & set(prompts) else {}),
+            **({"corte_riesgo": {
+                "num_predict": MAXIMO_TOKENS_CORTE_RIESGO, "formato": "el esquema JSON del prompt", "logprobs": False,
+                "lectura": "el riesgo del texto cortado, seguido de su coma (detectores.leer_riesgo_cortado)",
+                "alerta_sugerida": f"riesgo >= {UMBRAL_C}",
+                "etapa2": ("solo en el primer aviso de la llamada: mismos mensajes + lo escrito hasta el riesgo, cerrado "
+                           f"como JSON, como assistant + {PROMPT_MOTIVO_C}, con ESQUEMA_MOTIVO y num_predict "
+                           f"{MAXIMO_TOKENS_RESPUESTA}"),
+            }} if modelos and PROMPTS_CORTE_RIESGO & set(prompts) else {}),
         },
         "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},
         "reranker": None if not rerankers else {
@@ -806,6 +850,8 @@ def main(argv: list[str] | None = None) -> int:
 
     guardar_manifiesto()
     print(f"Corrida: {_mostrar(carpeta)}  ({len(ids)} casos, {len(detectores)} configuraciones)")
+    if args.solo_otra:
+        print("Solo OTRA (ADR 0007): las líneas de PROTEGIDA entran al contexto sin consultar (marca o).")
     if args.seguir_tras_aviso:
         print("Marcas por línea: . sin alerta · A aviso emitido · a alerta posterior al aviso (diagnóstico) · o SLM no consultado · x fallo\n")
     else:
@@ -855,7 +901,8 @@ def main(argv: list[str] | None = None) -> int:
                     if config["hablantes"] == "rol":
                         lineas = casos.con_roles(case_id, lineas)
                     marcas = []
-                    for n, linea, r, aviso in procesar_caso(detector, lineas, detener_en_aviso=not args.seguir_tras_aviso):
+                    for n, linea, r, aviso in procesar_caso(detector, lineas, detener_en_aviso=not args.seguir_tras_aviso,
+                                                            solo_otra=args.solo_otra):
                         escritor.writerow(_fila(config, case_id, n, linea, r, aviso))
                         f.flush()
                         marcas.append(_marca(r, aviso))

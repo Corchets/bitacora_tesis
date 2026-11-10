@@ -75,6 +75,20 @@ PROMPTS = {
 # lo adoptó para todas las pruebas, así que la etapa 2 de #143 corta también `v4-premisa` y `c-json`.
 CORTE_DE = {"v4-corte": "v4", "v4-premisa-corte": "v4-premisa", "c-json-corte": "c-json"}
 PROMPTS.update({corte: PROMPTS[base] for corte, base in CORTE_DE.items()})
+# Configuración congelada de #143 (Mateo, 2026-11-09; ADR 0006): el JSON de C de la etapa 2 (`c-json`), con el mismo
+# prompt, mensaje y esquema, cortado justo después del riesgo. Avisa con «riesgo ≥ 0,3» y pide el motivo de C en una
+# segunda consulta, solo en el primer aviso (DetectorSLMCorteRiesgo).
+CORTE_RIESGO_DE = {"c-json-corte-riesgo": "c-json"}
+# Prueba de sensibilidad (Mateo, 2026-11-10): C con un solo cambio cada una, para avisar más estafas. Ver
+# corridas/2026-11-10_sensibilidad-c/. «c-ancla» ancla la punta alta del riesgo; «c-premisa» agrega un párrafo sobre el
+# número no agendado; «c-sin-freno» saca el párrafo de lo que una llamada legítima también puede pedir.
+PROMPTS.update({
+    "c-ancla": ("tarea_c.txt", "salida_json_c_ancla.txt"),
+    "c-premisa": ("tarea_c_premisa.txt", "salida_json_c.txt"),
+    "c-sin-freno": ("tarea_c_sin_freno.txt", "salida_json_c.txt"),
+})
+CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in ("c-ancla", "c-premisa", "c-sin-freno")})
+PROMPTS.update({corte: PROMPTS[base] for corte, base in CORTE_RIESGO_DE.items()})
 PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2", "s-sino", "c-sino"})
 # Se leen con DetectorSLMDigito: un número del 0 al 9 en el primer token.
 PROMPTS_DIGITO = frozenset({"s-digito", "v4-digito", "c-digito"})
@@ -85,6 +99,8 @@ PROMPTS_TOKEN = PROMPTS_SINO | PROMPTS_DIGITO | PROMPTS_LECTURA
 PROMPTS_CORTE = frozenset(CORTE_DE)
 # Se leen con DetectorSLMCCorto: el JSON entero, que el modelo cierra solo, y el motivo de C aparte.
 PROMPTS_C_CORTO = frozenset({"c-sin-alerta", "c-con-campo"})
+# Se leen con DetectorSLMCorteRiesgo: el riesgo del JSON cortado justo después de ese campo, y el motivo de C aparte.
+PROMPTS_CORTE_RIESGO = frozenset(CORTE_RIESGO_DE)
 # Última oración del mensaje del usuario, después de la transcripción; `{n}` es la última línea.
 # Los prompts de PREGUNTAS_FINALES la reemplazan por su pregunta, para que sea lo último que
 # lee el modelo antes de responder.
@@ -148,6 +164,8 @@ ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO | PROMPTS_DIGITO))  # sin esquema: re
 ESQUEMAS["v4-lectura"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después del riesgo
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_DE.items()})  # el mismo JSON, cortado después de alerta_sugerida
 ESQUEMAS.update({"c-sin-alerta": ESQUEMA_RIESGO, "c-con-campo": ESQUEMA_CON_CAMPO})
+ESQUEMAS.update(dict.fromkeys(("c-ancla", "c-premisa", "c-sin-freno"), ESQUEMA_SALIDA))  # el JSON de C
+ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_RIESGO_DE.items()})  # el mismo JSON, cortado tras el riesgo
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -200,6 +218,11 @@ _ALERTA_CORTADA = re.compile(r'"alerta_sugerida"\s*:\s*(true|false)\b')
 # llegue. La regla es la de C en la etapa 2 sin la alerta escrita, «riesgo ≥ 0,3», o `pedido_critico` en true.
 MAXIMO_TOKENS_C_CORTO = 48
 UMBRAL_C = 0.3
+# Configuración congelada: tokens que se dejan generar del JSON de C hasta la coma que cierra el riesgo. En T4,
+# `{\n  "riesgo": 0.1,` son 12 tokens (v4-L, etapa 1: las 2.773 líneas cortadas a 12 terminan en esa coma). C escribe
+# además riesgos con dos decimales (0.05, 0.85, 0.95: 198 de las 4.325 líneas de `c-json-corte` en la etapa 2), que
+# suman un token. Uno más cubre un tercer decimal. La lectura exige la coma: si no llega, la línea es un fallo.
+MAXIMO_TOKENS_CORTE_RIESGO = 14
 
 
 @dataclass
@@ -596,6 +619,22 @@ def leer_json_cortado(crudo: str) -> tuple[float | None, bool | None, int | None
     return riesgo, alerta.group(1) == "true", alerta.end(), ""
 
 
+def leer_riesgo_cortado(crudo: str) -> tuple[float | None, int | None, str]:
+    """(riesgo, fin, error) del JSON cortado justo después del riesgo (configuración congelada).
+
+    `crudo` es el texto que generó el modelo con MAXIMO_TOKENS_CORTE_RIESGO tokens: no es JSON válido. El riesgo cuenta
+    solo si lo sigue la coma, para no leer un número a medias (`0.0` de un `0.05` cortado). `fin` es la posición en
+    `crudo` donde termina el número, sin la coma. Acepta `"riesgo": 0` sin decimal.
+    """
+    escrito = _RIESGO_CORTADO.search(crudo)
+    if escrito is None:
+        return None, None, "sin_riesgo"
+    riesgo = float(escrito.group(1))
+    if not math.isfinite(riesgo) or not 0 <= riesgo <= 1:
+        return riesgo, None, "riesgo_fuera_de_rango"
+    return riesgo, escrito.end(1), ""
+
+
 def leer_c_corto(crudo: str, esquema: dict) -> tuple[float | None, bool | None, str]:
     """(riesgo, pedido_critico, error) del JSON de C sin alerta o de C con campo (PROMPTS_C_CORTO).
 
@@ -967,6 +1006,37 @@ class DetectorSLMCCorto(DetectorSLMJSONCortado):
 
     def _pide_motivo(self, avisa: bool, campos: dict) -> bool:
         return campos.get("pedido_critico") is True
+
+
+@dataclass
+class DetectorSLMCorteRiesgo(DetectorSLMJSONCortado):
+    """Configuración congelada de #143 (Mateo, 2026-11-09; ADR 0006): C de la etapa 2 cortado tras el riesgo.
+
+    Primera consulta: el mismo pedido que `c-json-corte` (prompt de C, mensaje y ESQUEMA_SALIDA; sin `think` ni
+    logprobs), cortado con `num_predict` = MAXIMO_TOKENS_CORTE_RIESGO, justo después de la coma que cierra el riesgo. El
+    riesgo se lee del texto cortado (`leer_riesgo_cortado`), y la regla es «riesgo ≥ UMBRAL_C». No se lee la alerta: el
+    corte llega antes.
+
+    Segunda consulta, solo en el primer aviso de la llamada: repite los mensajes, agrega como `assistant` lo escrito
+    hasta el riesgo, cerrado como JSON (`{\\n  "riesgo": 0.3\\n}`), y el pedido de motivo_c_corte.txt con
+    ESQUEMA_MOTIVO. Si falla, el aviso se mantiene y el error queda con el prefijo `etapa2_`: la app muestra el texto
+    fijo. Hasta la etapa 3 este corte solo se leyó de `c-json-corte`, y el motivo de C solo se pidió en la alerta fuerte
+    de «C con campo».
+    """
+
+    umbral: float = UMBRAL_C
+
+    def __post_init__(self) -> None:
+        self.pedido_motivo = self.pedido_motivo or cargar_prompt_motivo(PROMPT_MOTIVO_C)
+        super().__post_init__()
+
+    def opciones(self) -> dict:
+        return {**DetectorSLM.opciones(self), "num_predict": MAXIMO_TOKENS_CORTE_RIESGO}
+
+    def _leer(self, r1: dict, crudo: str) -> tuple[float | None, dict, int | None, str, bool]:
+        # done_reason "length" es lo esperado: el JSON se corta después del riesgo.
+        riesgo, fin, error = leer_riesgo_cortado(crudo)
+        return riesgo, {}, fin, error, not error and riesgo >= self.umbral - 1e-9
 
 
 class DetectorReglas:

@@ -83,14 +83,20 @@ class Llamada:
         hablantes: str = "ab",
         ahora: Callable[[], float] = time.monotonic,
         reglas_turno: ReglasTurno = ReglasTurno(),
+        solo_otra: bool = False,
     ) -> None:
         if disparo not in DISPAROS:
             raise ValueError(f"disparo desconocido {disparo!r}; opciones: {', '.join(DISPAROS)}")
         if hablantes not in ("ab", "rol"):
             raise ValueError(f"hablantes desconocido {hablantes!r}; opciones: ab, rol")
+        if solo_otra and hablantes != "rol":
+            raise ValueError("solo OTRA requiere hablantes rol: el SLM tiene que saber qué líneas son de OTRA")
         self.disparo = disparo
         self.reglas_turno = reglas_turno
         self.hablantes = hablantes
+        # Como correr.procesar_caso(solo_otra=True): las frases de PROTEGIDA entran al contexto, pero no consultan.
+        # Con --disparo turno ya es así (solo cierran consulta los turnos de OTRA); con final y parcial, filtra.
+        self.solo_otra = solo_otra
         self._ahora = ahora
         self.canales: dict[str, Canal] = {}
         for rol in ROLES:
@@ -109,6 +115,10 @@ class Llamada:
         self.n = 0
         self.disparos = 0
         self.ultimo_fin_voz_s: float | None = None
+        # Con solo OTRA, la foto termina en la última línea de OTRA: su actualización y el fin de su voz.
+        self.n_otra = 0
+        self.n_otra_final = 0
+        self.fin_voz_otra_s: float | None = None
         self.segmentos: dict[tuple[str, int], int] = {}  # (rol, segmento del motor) -> segmento de la llamada
         self.evaluaciones: list[Evaluacion] = []
         self.aviso: Evaluacion | None = None
@@ -225,6 +235,10 @@ class Llamada:
         else:
             fin_voz = evento.fin_audio_s
             canal.retrasos_parcial_s.append(disponible - evento.fin_audio_s)
+        if canal.rol == "otra":
+            self.n_otra = self.n
+            if evento.tipo == "final":
+                self.n_otra_final, self.fin_voz_otra_s = self.n, fin_voz
         self._escribir(self._jsonl, act)
         campos = {k: v for k, v in act.items() if k != "fin_voz_s"}
         if self.hablantes == "rol":
@@ -242,8 +256,11 @@ class Llamada:
         """True si esta actualización pide evaluar por sí sola (--disparo final o parcial, sin aviso previo).
 
         Con --disparo turno ninguna actualización dispara sola: los disparos los suma el cierre de
-        turnos dentro de `recibir` y `vaciar_audio`, y se leen en `disparos`.
+        turnos dentro de `recibir` y `vaciar_audio`, y se leen en `disparos`. Con `solo_otra`, una
+        actualización de PROTEGIDA tampoco dispara.
         """
+        if self.solo_otra and act["rol"] != "otra":
+            return False
         if self.aviso is None and (self.disparo == "parcial" or (self.disparo == "final" and act["tipo"] == "final")):
             self.disparos += 1
             return True
@@ -258,10 +275,18 @@ class Llamada:
 
         Con turnos, solo las frases cerradas: lo medido en desarrollo son turnos completos, y el
         borrador del otro lado que acaba de cerrar el turno todavía no es una línea.
+
+        Con `solo_otra`, como en correr.py, la consulta es de OTRA y termina en su última línea. Lo que PROTEGIDA dijo
+        después (la frase que cerró el turno, o una que llegó con el detector ocupado) entra en la consulta siguiente.
         """
         disparos, self.disparos = self.disparos, 0
         foto = tuple(self.contexto.cerrados) if self.disparo == "turno" else self.foto
-        return self.n, foto, disparos
+        if not self.solo_otra:
+            return self.n, foto, disparos
+        ultima = max((i for i, l in enumerate(foto) if l.hablante == "OTRA"), default=-1)
+        # La última de OTRA es un borrador (final o parcial) o una frase cerrada.
+        n = self.n_otra if ultima >= len(self.contexto.cerrados) else self.n_otra_final
+        return n, foto[: ultima + 1], disparos
 
     def registrar_evaluacion(self, n: int, disparos: int, respuesta: Any, inicio_s: float, fin_s: float) -> Evaluacion:
         """Aviso único: la primera respuesta válida con alerta. T_A = fin de esa evaluación."""
@@ -273,7 +298,7 @@ class Llamada:
             fin_s=fin_s,
             respuesta=respuesta,
             aviso=aviso,
-            fin_voz_s=self.ultimo_fin_voz_s,
+            fin_voz_s=self.fin_voz_otra_s if self.solo_otra else self.ultimo_fin_voz_s,
         )
         self.evaluaciones.append(ev)
         if aviso:
@@ -334,6 +359,7 @@ class Llamada:
             "llamada_id": self.llamada_id,
             "asr": self.meta_asr,
             "disparo": self.disparo,
+            "solo_otra": self.solo_otra,
             **({"turnos": {"reglas": asdict(self.reglas_turno), "cierres": self.turnos.cierres}}
                if self.disparo == "turno" else {}),
             "politica": "aviso_unico_primer_true_valido; el detector evalúa siempre la foto más reciente",

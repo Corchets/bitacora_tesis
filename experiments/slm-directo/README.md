@@ -387,6 +387,13 @@ completa, separado del costo operativo hasta el aviso. Las corridas
 históricas (conversación completa) no se reescriben ni se presentan como
 nuevas mediciones operativas.
 
+`--solo-otra` (con `--hablantes rol` y `--sin-reglas`) consulta al SLM solo en
+las líneas de OTRA, como la app ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)):
+las de PROTEGIDA entran a la transcripción de la consulta siguiente, pero no
+consultan (`consulta` = `omitida`). La configuración congelada de #143 es
+`--prompts c-json-corte-riesgo --hablantes rol --sin-reglas --solo-otra`
+([humo](corridas/2026-11-10_config-congelada-humo/README.md)).
+
 ### Diagnóstico del Tito histórico (#98)
 
 Recorrido real del artefacto histórico sin modificar sobre la partición de

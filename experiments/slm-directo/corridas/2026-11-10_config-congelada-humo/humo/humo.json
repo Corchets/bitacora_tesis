@@ -1,0 +1,38 @@
+{
+  "lineas": 48,
+  "leidas": 48,
+  "igual_a_c_json_corte": 43,
+  "tokens_salida": "14 / 14 / 14",
+  "dos_decimales": 1,
+  "errores": [],
+  "segunda_consulta": [
+    {
+      "case_id": "CV2-D-L-BANCO-001",
+      "linea": 2,
+      "riesgo": "0.3",
+      "ms_etapa2": "744.7",
+      "error": "",
+      "motivo": "No se debe compartir información sensible de la cuenta por teléfono sin verificar la identidad del llamante.",
+      "evidencia": "te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"
+    },
+    {
+      "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-004",
+      "linea": 5,
+      "riesgo": "0.3",
+      "ms_etapa2": "594.6",
+      "error": "",
+      "motivo": "Desconfía de llamadas no solicitadas que prometen devoluciones o beneficios, ya que suelen ser intentos de phishing.",
+      "evidencia": "Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes"
+    },
+    {
+      "case_id": "SC-WA-CODE-01-e01",
+      "linea": 1,
+      "riesgo": "0.3",
+      "ms_etapa2": "688.9",
+      "error": "",
+      "motivo": "Los bancos y servicios legítimos rara vez inician llamadas sin previo aviso o sin verificar la identidad de manera más exhaustiva.",
+      "evidencia": "Te llamo de soporte por la activación de tu cuenta de WhatsApp."
+    }
+  ],
+  "pasa": true
+}
