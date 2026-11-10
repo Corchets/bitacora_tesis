@@ -1,8 +1,11 @@
 # #143, configuración congelada: prueba de humo en desarrollo
 
-> **Estado: propuesta sin discutir.** Desarrollo; no toca la reserva, las legítimas de test ni #144. Preparada el
-> 2026-11-10; todavía no corrió. La regla de abajo está escrita antes de correr, en código en
-> [`analizar.py`](analizar.py). El Colab está en
+> **Estado: propuesta sin discutir.** Desarrollo; no toca la reserva, las legítimas de test ni #144. Preparada, corrida
+> en Colab y analizada el 2026-11-10. **Según la regla, la configuración queda lista para la evaluación final:**
+> 36/46 · 14/36 · 26/36 · FA 25/94, a ±1 de la lectura simulada de la etapa 3, sin líneas inválidas. De los motivos de
+> las 25 FA, 3 engañan. Ver [`analisis.md`](analisis.md).
+>
+> La regla de abajo está escrita antes de correr, en código en [`analizar.py`](analizar.py). El Colab está en
 > [`colab/README-PUNTAJE-TOKEN.md` §7](../../colab/README-PUNTAJE-TOKEN.md#7-configuración-congelada-humo-en-desarrollo-tag-colab143-config-congelada).
 
 ## Qué es
@@ -122,5 +125,8 @@ le avisa a Mateo antes de fijar la evaluación final, y no se ajusta nada.
 | Archivo | Qué es |
 |---|---|
 | [`analizar.py`](analizar.py) | La regla de arriba en código, escrita antes de correr. Usa la vista, las cifras y la medición del motivo de la etapa 3. Tests en [`tests/test_config_congelada_143.py`](../../tests/test_config_congelada_143.py). |
-| `humo/`, `desarrollo/` | Corridas de Colab, tal como bajen. |
+| [`analisis.md`](analisis.md) | Resultado: verificación de los ZIP, la regla paso a paso y la lectura a mano de los motivos de las FA. |
+| [`analisis-salida.md`](analisis-salida.md) | Salida completa de `python -I analizar.py`. |
+| [`diagnostico.py`](diagnostico.py), [`diagnostico-salida.md`](diagnostico-salida.md) | Diagnóstico fuera de la regla, escrito el 2026-11-10 después de ver los resultados: estafas que se escapan, umbral 0,2, FA por tipo de legítima, avisos antes del cumplimiento y una capa de reglas. |
+| `humo/`, `desarrollo/` | Corridas de Colab, tal como bajaron. |
 | `commit.txt`, `script-sha256.txt`, `ollama-version.txt`, `digest.txt`, `pip-freeze.txt`, `gpu.txt` | Registro de la corrida. |
