@@ -9,7 +9,7 @@ Ejemplos:
     python correr.py --modelos gemma3n:e2b --prompts riesgo --solo-cpu --num-batch 32
     python correr.py --solo-reranker --reranker MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7 --hilos 4 --seguir-tras-aviso
     python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts tarea-sino --hablantes ab --sin-reglas --seguir-tras-aviso
-    python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts c-json-corte-riesgo --hablantes rol --sin-reglas --solo-otra
+    python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts c-premisa-corte-riesgo --hablantes rol --sin-reglas --solo-otra
 
 Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     manifiesto.json      qué se corrió: modelos, prompts, casos, código, máquina

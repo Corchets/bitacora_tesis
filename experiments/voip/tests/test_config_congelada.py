@@ -36,7 +36,7 @@ from detectores import ESQUEMA_MOTIVO, MAXIMO_TOKENS_CORTE_RIESGO, DetectorSLMCo
 sys.path.append(str(DIR_VOIP.parent / "slm-directo" / "tests"))
 from test_config_congelada_143 import OllamaCongelada  # noqa: E402
 
-PROMPT = "c-json-corte-riesgo"
+PROMPT = "c-premisa-corte-riesgo"  # la configuración congelada desde la prueba de sensibilidad
 MODELO = OllamaCongelada.modelo
 
 # OTRA saluda (0,1), PROTEGIDA menciona el soporte y OTRA sigue: con «soporte» en la transcripción el falso escribe

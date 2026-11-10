@@ -16,7 +16,7 @@ El detector evalúa siempre la foto más reciente: si llega texto mientras eval�
 siguiente evaluación toma lo último disponible y las intermedias se saltean. Así la
 demora no crece con la cola, a diferencia del replay, que evalúa todas en orden.
 
-Por defecto el detector es la configuración congelada de #143: Gemma 4 E2B directo con `c-json-corte-riesgo`
+Por defecto el detector es la configuración congelada de #143: Gemma 4 E2B directo con `c-premisa-corte-riesgo`
 (cortado tras el riesgo, aviso con riesgo ≥ 0,3 y el motivo solo en el primer aviso), roles y solo OTRA.
 
 Uso:
@@ -114,8 +114,9 @@ DETECTOR_POR_DEFECTO = "gemma4:e2b-it-q4_K_M"
 DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "reglas")
 DETECTORES_CON_MODELO = replay.DETECTORES_CON_MODELO
 # Configuración congelada de #143 (ADR 0006 y 0007): C cortado tras el riesgo, «riesgo ≥ 0,3», el motivo solo en el
-# primer aviso y solo OTRA. Si la prueba de sensibilidad adopta una variante de C, el cambio es --prompt.
-PROMPT_POR_DEFECTO = "c-json-corte-riesgo"
+# primer aviso y solo OTRA. Desde la prueba de sensibilidad (corridas/2026-11-10_sensibilidad-c), con el párrafo del
+# número no agendado (c-premisa); la base anterior sigue disponible con --prompt c-json-corte-riesgo.
+PROMPT_POR_DEFECTO = "c-premisa-corte-riesgo"
 
 
 def validar_detector(valor) -> str:
@@ -677,7 +678,7 @@ def parse_args() -> argparse.Namespace:
                         "tito-slm (ADR 0001, en retiro) necesita --prompt v4")
     p.add_argument("--modelo", default=DETECTOR_POR_DEFECTO)
     p.add_argument("--prompt", default=PROMPT_POR_DEFECTO,
-                   help="por defecto c-json-corte-riesgo, la configuración congelada de #143: C cortado tras el riesgo, "
+                   help="por defecto c-premisa-corte-riesgo, la configuración congelada de #143: C cortado tras el riesgo, "
                         "aviso con riesgo >= 0,3 y el motivo solo en el primer aviso (ADR 0006)")
     p.add_argument("--solo-otra", action=argparse.BooleanOptionalAction, default=None,
                    help="las frases de PROTEGIDA entran al contexto pero no consultan, como correr.py --solo-otra "

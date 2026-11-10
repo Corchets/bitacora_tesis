@@ -401,8 +401,9 @@ nuevas mediciones operativas.
 las líneas de OTRA, como la app ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)):
 las de PROTEGIDA entran a la transcripción de la consulta siguiente, pero no
 consultan (`consulta` = `omitida`). La configuración congelada de #143 es
-`--prompts c-json-corte-riesgo --hablantes rol --sin-reglas --solo-otra`
-([humo](corridas/2026-11-10_config-congelada-humo/README.md)).
+`--prompts c-premisa-corte-riesgo --hablantes rol --sin-reglas --solo-otra`
+([humo](corridas/2026-11-10_config-congelada-humo/README.md) con `c-json-corte-riesgo`, y
+[prueba de sensibilidad](corridas/2026-11-10_sensibilidad-c/analisis.md), que eligió `c-premisa`).
 
 ### Diagnóstico del Tito histórico (#98)
 

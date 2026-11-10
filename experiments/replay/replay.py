@@ -655,7 +655,7 @@ def parse_args() -> argparse.Namespace:
         "--prompt",
         type=str,
         default="tarea",
-        help="Variante de prompt para SLM (por defecto: tarea). Con c-json-corte-riesgo, la configuración congelada de "
+        help="Variante de prompt para SLM (por defecto: tarea). Con c-premisa-corte-riesgo, la configuración congelada de "
              "#143: cortado tras el riesgo, aviso con riesgo >= 0,3 y el motivo solo en el primer aviso.",
     )
     parser.add_argument(
