@@ -10,6 +10,7 @@ Ejemplos:
     python correr.py --solo-reranker --reranker MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7 --hilos 4 --seguir-tras-aviso
     python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts tarea-sino --hablantes ab --sin-reglas --seguir-tras-aviso
     python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts c-premisa-corte-riesgo --hablantes rol --sin-reglas --solo-otra
+    python correr.py --conjunto CONJUNTOS/test_reservado --modelos ... (evaluación final: ver conjuntos.py)
 
 Cada corrida crea corridas/<fecha>_<hora>[_<etiqueta>]/ con:
     manifiesto.json      qué se corrió: modelos, prompts, casos, código, máquina
@@ -42,6 +43,7 @@ from datetime import datetime
 from pathlib import Path
 
 import casos
+import conjuntos
 from cliente_ollama import URL_POR_DEFECTO, ClienteOllama, ErrorOllama
 from detectores import (
     ESQUEMA_MOTIVO,
@@ -316,7 +318,16 @@ def leer_lista(nombre: str) -> list[str]:
     return [l for l in lineas if l and not l.startswith("#")]
 
 
-def elegir_casos(args) -> list[str]:
+def elegir_casos(args, conjunto: conjuntos.Conjunto | None = None) -> list[str]:
+    if conjunto is not None:
+        # Un conjunto armado (evaluación final): todos sus casos, o los de --casos. Sin listas ni grupos de casos/.
+        if getattr(args, "lista", "") or args.grupo:
+            sys.exit("--conjunto no se combina con --lista ni con --grupo.")
+        pedidos = _lista(args.casos) if args.casos else conjunto.ids
+        faltan = [c for c in pedidos if c not in conjunto.ids]
+        if faltan:
+            sys.exit(f"Casos que no están en el conjunto {conjunto.nombre}: {faltan}")
+        return pedidos
     particion = getattr(args, "particion", "desarrollo")
     ids = casos.ids_de_casos(particion=particion)
     lista = getattr(args, "lista", "")
@@ -546,6 +557,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--lista", default="", help="listas de casos/listas/ separadas por coma (p. ej. seleccion-57,rapida-20)")
     p.add_argument("--particion", choices=sorted(casos.PARTICIONES), default="desarrollo", help="desarrollo por defecto; test_reservado solo para evaluación final tras D08")
     p.add_argument("--grupo", choices=sorted(casos.GRUPOS), help="solo un grupo de casos")
+    p.add_argument("--conjunto", type=Path, help="carpeta de un conjunto armado con conjuntos.py (evaluación final): corre sobre sus textos y roles, sin leer su referencia; reemplaza a --particion")
     p.add_argument("--solo-reglas", action="store_true", help="correr solo el comparador de reglas (sin Ollama)")
     p.add_argument("--sin-reglas", action="store_true", help="no correr el comparador de reglas")
     p.add_argument("--reglas", default="v1", help="versiones del comparador de reglas separadas por coma: v1 (laboratorio) y/o v2 (reglas_v2.py)")
@@ -638,11 +650,25 @@ def main(argv: list[str] | None = None) -> int:
     for h in hablantes:
         if h not in HABLANTES:
             sys.exit(f"Hablantes desconocido {h!r}. Opciones: {', '.join(HABLANTES)}")
-    ids = elegir_casos(args)
+    conjunto = None
+    if args.conjunto:
+        if args.particion != "desarrollo":
+            sys.exit("--conjunto no se combina con --particion: la partición es la del conjunto.")
+        conjunto = conjuntos.Conjunto(args.conjunto)
+        errores_conjunto = conjunto.validar(con_referencia=False)  # la referencia no se abre al correr
+        if errores_conjunto:
+            print("\n".join(errores_conjunto))
+            sys.exit(f"El conjunto {conjunto.nombre} tiene errores: armalo de nuevo con conjuntos.py.")
+        args.particion = conjunto.particion
+    ids = elegir_casos(args, conjunto)
+    ruta_roles = conjunto.ruta_roles if conjunto else casos.ROLES
+    cargar_texto = conjunto.cargar_texto if conjunto else casos.cargar_texto
+    con_roles = conjunto.con_roles if conjunto else casos.con_roles
+    crudo = conjunto.crudo if conjunto else (lambda c: (casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8"))
     if "rol" in hablantes:
-        sin_roles = sorted(set(ids) - set(json.loads(casos.ROLES.read_text(encoding="utf-8"))))
+        sin_roles = sorted(set(ids) - set(json.loads(ruta_roles.read_text(encoding="utf-8"))))
         if sin_roles:
-            sys.exit(f"Casos sin roles en {_mostrar(casos.ROLES)} (hacen falta para --hablantes rol): {sin_roles}")
+            sys.exit(f"Casos sin roles en {_mostrar(ruta_roles)} (hacen falta para --hablantes rol): {sin_roles}")
 
     cliente = ClienteOllama(args.url, args.timeout)
     # La primera carga de un modelo grande desde el disco puede tardar varios minutos.
@@ -778,6 +804,8 @@ def main(argv: list[str] | None = None) -> int:
         "tito_viejo_2": {"pesos": PESOS, "indicio_a_slm": False, "acumulacion": "una vez por expresion y llamada", "umbral": args.tito_umbral} if args.tito_viejo_2 else None,
         "particion": args.particion,
         **({"lista": args.lista} if args.lista else {}),
+        **({"conjunto": {"nombre": conjunto.nombre, "ruta": str(conjunto.carpeta), "fuentes": conjunto.datos["fuentes"],
+                         "conjunto_sha256": sha_archivo(conjunto.carpeta / "conjunto.json")}} if conjunto else {}),
         "ollama": None if ollama is None else {"url": args.url, **ollama},
         "parametros_slm": {
             "num_ctx": args.num_ctx, "seed": args.seed, "temperatura": 0.0, "timeout_s": args.timeout, "hardware": extra,
@@ -838,8 +866,8 @@ def main(argv: list[str] | None = None) -> int:
             "modelos": {},
         },
         "configs": [c for c, _ in detectores],
-        "casos": {c: huella((casos.DIR_TEXTO / f"{c}.txt").read_text(encoding="utf-8")) for c in ids},
-        "roles_protegida": huella(casos.ROLES.read_text(encoding="utf-8")) if "rol" in hablantes else None,
+        "casos": {c: huella(crudo(c)) for c in ids},
+        "roles_protegida": huella(ruta_roles.read_text(encoding="utf-8")) if "rol" in hablantes else None,
         "modelos": {},
         "interrumpida": False,
         "fin": None,
@@ -897,9 +925,9 @@ def main(argv: list[str] | None = None) -> int:
                     print(f"listo ({carga['carga_ms'] / 1000:.1f} s).")
                 print(f"== {config['config']}")
                 for case_id in ids:
-                    lineas = casos.cargar_texto(case_id)
+                    lineas = cargar_texto(case_id)
                     if config["hablantes"] == "rol":
-                        lineas = casos.con_roles(case_id, lineas)
+                        lineas = con_roles(case_id, lineas)
                     marcas = []
                     for n, linea, r, aviso in procesar_caso(detector, lineas, detener_en_aviso=not args.seguir_tras_aviso,
                                                             solo_otra=args.solo_otra):
@@ -931,7 +959,10 @@ def main(argv: list[str] | None = None) -> int:
         sys.exit(f"\n{e}\nLo procesado hasta acá quedó en {_mostrar(carpeta)}.")
     manifiesto["fin"] = datetime.now().isoformat(timespec="seconds")
     guardar_manifiesto()
-    print(f"\nListo. Resumen: python resumen.py {_mostrar(carpeta)}")
+    if conjunto:  # resumen.py lee la referencia de casos/: para un conjunto, el análisis de la evaluación final
+        print(f"\nListo. Análisis: corridas/2026-11-12_evaluacion-final/analizar.py ({_mostrar(carpeta)})")
+    else:
+        print(f"\nListo. Resumen: python resumen.py {_mostrar(carpeta)}")
     return 0
 
 

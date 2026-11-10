@@ -405,6 +405,11 @@ consultan (`consulta` = `omitida`). La configuración congelada de #143 es
 ([humo](corridas/2026-11-10_config-congelada-humo/README.md) con `c-json-corte-riesgo`, y
 [prueba de sensibilidad](corridas/2026-11-10_sensibilidad-c/analisis.md), que eligió `c-premisa`).
 
+`--conjunto CARPETA` corre sobre un conjunto armado con [`conjuntos.py`](conjuntos.py), fuera de `casos/`: el test
+reservado (de la rama `reserva/test`) o el set externo de #144. Lee el texto y los roles, nunca la referencia, y deja
+en el manifiesto la partición y las huellas del conjunto. Es la base de la
+[evaluación final](corridas/2026-11-12_evaluacion-final/README.md), que todavía no corrió.
+
 ### Diagnóstico del Tito histórico (#98)
 
 Recorrido real del artefacto histórico sin modificar sobre la partición de
