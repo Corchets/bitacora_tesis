@@ -286,3 +286,40 @@ a él cuenta como fallo.
 3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiarlo a
    `corridas/2026-11-09_pedido-critico-etapa-3/`. Después, correr `python -I analizar.py` desde esa carpeta. Necesita las
    corridas de C de la etapa 2 en `corridas/2026-11-07_alcance-etapa-2/`.
+
+## 7. Configuración congelada: humo en desarrollo (tag `colab/143-config-congelada`)
+
+> **Estado: propuesta sin discutir.** No elige nada: comprueba que la configuración congelada corre como tal y reproduce
+> la lectura de la etapa 3. La regla de lectura está escrita antes de correr en
+> [`corridas/2026-11-10_config-congelada-humo/README.md`](../corridas/2026-11-10_config-congelada-humo/README.md), y en
+> código en [`analizar.py`](../corridas/2026-11-10_config-congelada-humo/analizar.py).
+
+**La configuración** (Mateo, 2026-11-09):
+- C de la etapa 2 (`c-json`) cortado justo después del riesgo: `c-json-corte-riesgo`, con `num_predict` 14;
+- avisa con «riesgo ≥ 0,3»;
+- el motivo de C ([`motivo_c_corte.txt`](../prompts/motivo_c_corte.txt)) en una segunda consulta, solo en el primer
+  aviso;
+- consulta solo en las líneas de OTRA (`correr.py --solo-otra`, ADR 0007), en modo operativo.
+
+[`probar_config_congelada.py`](probar_config_congelada.py) hace todo en una sesión. Usa Ollama 0.40.14, el digest
+`b37049369adf…`, `num_ctx` 4096, seed 42, temperatura 0, `--sin-reglas` y roles:
+
+1. **Humo de formato** en los 3 casos de siempre (48 líneas), en todas las líneas, con `c-json-corte` y
+   `c-json-corte-riesgo` en una corrida. Criterio fijado antes de correr: `c-json-corte-riesgo` lee el riesgo, con su
+   coma, en las 48 líneas. Si no pasa, no corre nada más y no se ajusta nada en esa sesión.
+2. **La configuración congelada sobre los 244,** con `--solo-otra` y en modo operativo.
+3. **Al final** baja `resultados-config-congelada.zip` con todo, más `commit.txt`, `script-sha256.txt`,
+   `ollama-version.txt`, `digest.txt`, `pip-freeze.txt` y `gpu.txt`. La humo y la corrida bajan antes como
+   `parcial-config-congelada-<carpeta>.zip`.
+
+**Duración estimada:** unos 20 minutos en T4.
+
+**Pasos:**
+1. Abrir [`COLAB-CONFIG-CONGELADA.ipynb`](COLAB-CONFIG-CONGELADA.ipynb) en Colab con **GPU T4**. El notebook no corre
+   hasta tener el hash del commit del tag.
+2. Ejecutar la única celda y dejar la pestaña abierta, aceptando las descargas múltiples.
+   - Si Colab se corta, los parciales ya descargados sirven.
+   - Si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
+3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiar `humo/` y `desarrollo/` a
+   `corridas/2026-11-10_config-congelada-humo/`. Después, correr `python -I analizar.py` desde esa carpeta. Necesita la
+   corrida `c-json-corte` de la etapa 2 en `corridas/2026-11-07_alcance-etapa-2/`.
