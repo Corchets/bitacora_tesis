@@ -1,0 +1,9 @@
+A: Buenas tardes, ¿hablo con Juan Pablo Sosa?
+B: Sí, ¿quién habla?
+A: Juan Pablo, te llamo de Banco Andino, de prevención de fraudes. Tenemos una compra en el exterior con tu tarjeta de débito, por ochenta y nueve dólares, en una aerolínea. Solo necesito que me digas si la reconocés o no.
+B: Ah, sí, sí, son unos pasajes que saqué yo recién.
+A: Perfecto, entonces la liberamos. Ya queda aprobada. ¿Estás por viajar?
+B: Sí, en diciembre me voy a Chile.
+A: Bárbaro. Te recomiendo que desde la app, en la parte de tarjetas, cargues el aviso de viaje con las fechas, así no te frenamos compras allá.
+B: Ah, mirá, buenísimo, lo hago. Gracias.
+A: A vos. Que tengas buen viaje, Juan Pablo.

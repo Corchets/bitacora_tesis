@@ -39,7 +39,9 @@ Los umbrales de latencia y memoria son criterios internos del proyecto ([prefact
 | RNF-03 | Respuesta por turno: p95 ≤ 1,5 s (degradado hasta 2 s). | **No cumple.** E2B: mediana de 3,74 s y p95 de 4,53 s por consulta. Las frases que Tito no deriva tardan unos 30 ms. |
 | RNF-04 | Procesamiento local: ni audio ni texto salen del equipo. | Cumple por diseño. El tutor descartó por completo el uso de un modelo por API. |
 | RNF-05 | Reproducibilidad: cada corrida registra datos, configuración, seed, código, hardware y salidas. | Cumple con manifiestos. Excepción declarada: #101 corrió con cambios sin commit en la carpeta. |
-| RNF-06 | Calidad objetivo: 80–85 % de estafas avisadas con 10–15 % de falsas alarmas, sobre todas las estafas. | Meta del tutor. Se mide en el test reservado. |
+| RNF-06 | Calidad objetivo: 80–85 % de estafas avisadas con 10–15 % de falsas alarmas, sobre todas las estafas. | Meta de referencia del equipo, con el visto bueno del tutor; no es criterio de aprobación. Se mide en el test reservado. |
+
+> **Corregir (#51):** RNF-02 y RNF-03 cuentan a Tito: 0,48 GB y unos 30 ms por frase. Si el ADR 0002 deja el SLM solo, Tito sale de esas cuentas. Ver [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
 
 ## 3.4. Restricciones de plataforma, privacidad y ética
 
@@ -51,7 +53,7 @@ Los umbrales de latencia y memoria son criterios internos del proyecto ([prefact
 
 ## 3.5. Criterios de aceptación
 
-El proyecto es exitoso si responde las preguntas con un procedimiento honesto y reproducible, entrega un recorrido demostrable y documenta sus límites. Un resultado que muestre baja anticipación, degradación por ASR o superioridad de un método simple sigue siendo válido si el experimento está bien diseñado. La meta del tutor (RNF-06) es el criterio de calidad, y se informa aunque no se alcance.
+El proyecto es exitoso si responde las preguntas con un procedimiento honesto y reproducible, entrega un recorrido demostrable y documenta sus límites. Un resultado que muestre baja anticipación, degradación por ASR o superioridad de un método simple sigue siendo válido si el experimento está bien diseñado. La meta de RNF-06 es una referencia, no un umbral para aprobar: se busca el mayor porcentaje posible sin ajustar el sistema solo para alcanzarla, y se informa aunque no se alcance.
 
 ## 3.6. Alternativas consideradas
 

@@ -2,7 +2,8 @@
 
 Conversaciones **escritas y ficticias** para probar el detector sobre texto antes de
 tener audio. Los 53 antecedentes son material de **desarrollo**. Corpus v2 agrega
-97 conversaciones de desarrollo y 200 candidatas reservadas: ver
+97 conversaciones de desarrollo y 200 candidatas reservadas, y
+[`legitimas_cotidianas`](#legítimas-cotidianas) suma 94 legítimas de desarrollo: ver
 [diseño y límites](DISENO-CORPUS-V2.md), [selección para grabar](GRABACIONES-ASR.md)
 y [revisión técnica](REVISION-CORPUS-V2.md). No reemplazan las grabaciones del piloto
 ([#39](https://github.com/Corchets/bitacora_tesis/issues/39) /
@@ -85,7 +86,7 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
 | Campo | Regla |
 |---|---|
 | `case_id` | Igual al nombre del archivo sin extensión. |
-| `grupo` | `piloto_escrito`, `trampa`, `laboratorio` o `corpus_v2`. |
+| `grupo` | `piloto_escrito`, `trampa`, `laboratorio`, `corpus_v2` o `legitimas_cotidianas`. |
 | `semilla` | `scenario_id` del [catálogo](../../../docs/corpus/CATALOGO-ESCENARIOS.csv) o `null`. |
 | `par` | `case_id` del caso contrastante, o `null`. |
 | `clase` | `vishing`, `legitima` (nuevas) o `legitima_dificil` (antecedentes). Ambas legítimas se cuentan como legítimas al evaluar. |
@@ -105,7 +106,7 @@ B: Me acaba de llegar un SMS. No pedí activar nada.
 | Campo nuevo | Regla |
 |---|---|
 | `particion` | `desarrollo` o `test_reservado`. En los antecedentes ausente equivale a desarrollo. Semillas y pares no cruzan particiones. |
-| `familia` | Familia del catálogo o contexto cotidiano (`trabajo`, `delivery`, `medico`, `escuela`). |
+| `familia` | Familia del catálogo o contexto cotidiano (`trabajo`, `delivery`, `medico`, `escuela`, `comercial`, `encuesta`). |
 | `situacion` | Descripción concreta de la semilla propuesta; debe distinguir el episodio, no solo un nombre o un monto. |
 | `escenario_base` | Antecedente activo del catálogo que respalda la modalidad; `null` en diseños cotidianos sin antecedente. No vuelve independientes sus derivados. |
 | `dificultad` | En vishing: `directo`, `indirecto`, `sin_pedido`. En legítimas coincide con `tipo_legitima`. Es una categoría de diseño, no dificultad medida. |
@@ -127,6 +128,117 @@ Las posiciones son **líneas**, no segundos. En texto sin audio no se inventan t
 | `trampa` | `TR-NN-<descripcion-corta>` | Casos difíciles pedidos por #50: pedidos indirectos, menciones legítimas parecidas, negaciones, evidencia separada por texto intermedio y conversaciones largas. |
 | `laboratorio` | `LAB-<nombre-original>` | Guiones del laboratorio de Ignacio (`laboratorio-main`, `experiments/laboratorio/casos/`), convertidos a este formato. |
 | `corpus_v2` | `CV2-D-<V/L>-<FAMILIA>-NNN` o `CV2-T-<V/L>-<FAMILIA>-NNN` | Nuevas situaciones; el campo `particion`, y no el prefijo, gobierna la selección. |
+| `legitimas_cotidianas` | `LEG-<CATEGORÍA>-NN` y `LEG2-<CATEGORÍA>-NN` (id del archivo original), o `ENT-L-<FAMILIA>-NNN` | Llamadas legítimas cotidianas que comparten rasgos con el vishing. Ver abajo. |
+
+### Legítimas cotidianas
+
+> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia se asignaron
+> al convertir los casos; la composición del corpus sigue abierta en
+> [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+
+94 llamadas legítimas escritas y ficticias, incorporadas el 2026-11-06: las 91 de Evaristo,
+en tres tandas, y 3 de selección de personal. Los archivos originales no se guardan en el
+repositorio: su contenido quedó en `texto/` y `referencia/`, y su `id` es el `case_id`.
+
+- **Tanda 1, `LEG-*` (21):** desde `llamadas_legitimas.json`. Llama y habla primero `A`;
+  quien atiende es `B`, la persona protegida en `roles-protegida.json`.
+- **Tanda 2, `LEG2-*` (28):** el split `dev` de «Llamadas legítimas v2: negativas difíciles»
+  (`legitimas_dev.jsonl`). Son llamadas entrantes: atiende y habla primero `A`, la persona
+  protegida, y el llamante `B` se presenta en sus dos primeros turnos. Todas piden o confirman
+  datos (nombre, DNI, mail, dirección, obra social) y 9 nombran un código sin pedirlo. 15 son
+  reescrituras de casos de la tanda 1, como dice `notas` en cada una.
+- **Tanda 3, `ENT-L-<FAMILIA>-NNN` (42):** el lote «Legítimas entrantes difíciles» del
+  2026-11-06, que ya venía en este formato. Todas son entrantes: el que llama se presenta;
+  según el caso habla primero A o B, y `roles-protegida.json` dice quién es la protegida.
+  Tienen de 14 a 36 líneas, como las estafas de `corpus_v2`, y 14 son `variante_asr`. Por tipo:
+  21 `pedido_razonable`, 12 `mencion_sin_pedido` y 9 `cotidiana`. El lote proponía entrar a
+  `corpus_v2` con semillas `LG-ENT-*` y separar un test; por decisión de Evaristo van todas a
+  desarrollo y a este grupo, sin semilla (la propuesta queda en `notas`). Su familia `ventas`
+  pasó a `comercial`, y se agregó `tramite` (revisión técnica, licencia de conducir).
+  Casos difíciles: `ENT-L-SOPORTE-005` pide acceso remoto legítimo y recibe el número de
+  conexión; `ENT-L-VENTAS-009` propone una seña por transferencia a la cuenta de la empresa;
+  en `ENT-L-BANCO-006`, `ENT-L-VENTAS-005` y `ENT-L-DELIVERY-005` la persona empieza a dictar
+  el código y el que llama la frena; en `ENT-L-BANCO-002` y `ENT-L-VENTAS-008` se niega a dar
+  el DNI.
+- **Selección de personal, `ENT-L-SELECCION-NNN` (3):** la familia que faltaba en el lote 3. Las
+  pidió Mateo Antenucci, y el 2026-11-06 las escribió un agente que no leyó prompts, corridas,
+  resultados ni casos existentes. Siguen el formato del lote 3: entrantes de un número
+  desconocido, de 18, 23 y 32 líneas, una de cada `tipo_legitima` y una `variante_asr`
+  (`ENT-L-SELECCION-002`). Van en la familia `trabajo`, que en `corpus_v2` son llamadas entre
+  compañeros. Se corren aparte, con `legitimas-seleccion-3`.
+
+> **Sesgo a vigilar ([R29](../../../docs/gestion/REGISTRO-RIESGOS.md)).** La sigla DNI aparece
+> en 34 de las 91 legítimas (37 %) y en 3 de las 46 estafas de desarrollo de `corpus_v2` (7 %).
+> Por lote: 2 de 21 en `LEG`, 15 de 28 en `LEG2` y 17 de 42 en `ENT-L`. Un detector podría
+> aprender que pedir el DNI indica una llamada legítima. Evaristo propone sumar estafas que
+> pidan el DNI o la fecha de nacimiento ([#154](https://github.com/Corchets/bitacora_tesis/issues/154)).
+>
+> **Método del conteo (2026-11-06):** una llamada cuenta si la sigla aparece al menos una vez
+> como palabra, en cualquiera de los dos hablantes y sin distinguir mayúsculas, porque las
+> variantes de ASR la escriben «dni». Contando solo «DNI» en mayúsculas dan 25 de 91: quedan
+> afuera 9 variantes de ASR de `ENT-L`. Con el mismo método, «usted» aparece en 3 de las 42
+> `ENT-L` (7 %), en ninguna `LEG` ni `LEG2`, y en 1 de las 46 estafas (2 %). Se reproduce desde
+> `texto/`, por ejemplo `grep -liw dni LEG2-*.txt | wc -l` (15). En las 3 de selección de
+> personal, agregadas después, la sigla aparece en 1; el patrón `ENT-L-*.txt` también las toma.
+
+| Categoría del original | Casos | `familia` | `tipo_legitima` |
+|---|---|---|---|
+| Call center con oferta | `LEG-CC-01` a `03` | `comercial` | `cotidiana` |
+| Vendedor de vehículos | `LEG-VE-01`, `02` / `LEG-VE-03` | `comercial` | `cotidiana` / `mencion_sin_pedido` |
+| Banco, movimientos sospechosos | `LEG-BA-01` a `03` | `banco` | `mencion_sin_pedido` |
+| Soporte técnico pedido por el cliente | `LEG-ST-01` / `LEG-ST-02` / `LEG-ST-03` | `soporte` | `cotidiana` / `pedido_razonable` / `mencion_sin_pedido` |
+| Correo y entregas | `LEG-CO-01` a `03` | `delivery` | `cotidiana` |
+| Encuestas | `LEG-EN-01`, `03` / `LEG-EN-02` | `encuesta` | `cotidiana` / `pedido_razonable` |
+| Confirmación de turnos | `LEG-TU-01` a `03` | `medico` | `cotidiana` |
+
+En la tanda 2, la familia sigue la misma tabla y el tipo sale del contenido: si nombra un
+código, `mencion_sin_pedido` (9); si pide DNI, mail, dirección u otro dato, `pedido_razonable`
+(14); si solo confirma el nombre, `cotidiana` (5).
+
+#### Test de la tanda 2: fuera del repositorio
+
+El original trae además 14 llamadas de test (2 por categoría, sorteadas con semilla
+`20261106`) para congelar antes de correr detectores. **No están en esta rama**, por la misma
+razón que la [reserva](RESERVA-FUERA-DEL-REPO.md): el repositorio es público y las particiones
+siguen abiertas en [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+Tampoco se guardaron `fuente_llamadas.txt` ni `build.py`, que incluyen el test. Huellas
+SHA-256 para comprobar después que no cambió:
+
+| Archivo | SHA-256 |
+|---|---|
+| `legitimas_test.jsonl` | `6ff4a0e46fc4ac412c6f27b69744d34560c62836650703e4d3add17301488cd9` |
+| `legitimas_test.csv` | `93838036c600b5f7ed6eaa0a292e31e10404523fb2d3669bf9b13e8ec9d9feeb` |
+
+Diferencias con `corpus_v2`:
+
+- **Sin semilla ni par** (`null`): no hay una contraparte de vishing escrita para cada una.
+  Las de banco, `LEG-ST-01` y `LEG2-ST-05` se vinculan con `escenario_base` al escenario
+  legítimo del catálogo (`LG-BANK-ALERT-01`, `LG-SUPPORT-INFO-01`); el resto queda en `null`.
+- **De 5 a 36 líneas**: el mínimo de 12 de `corpus_v2` no se exige.
+- **Fuera de `MANIFIESTO-CORPUS-V2.json`**: el manifiesto protege los 350 casos de corpus v2 y
+  sus antecedentes, y `casos.py` no compara las huellas de este grupo. Así la reserva y el
+  catálogo no cambian.
+- Solo partición `desarrollo` y clase `legitima`; `casos.py` falla si no.
+
+Para correr solo este grupo: `python correr.py --grupo legitimas_cotidianas ...`. La etapa 2
+de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) informa los resultados por
+lote, y cada lote tiene su lista en [`listas/`](listas/):
+
+| Lista | Casos |
+|---|---|
+| `legitimas-91` | Las 91 de Evaristo: los tres lotes juntos |
+| `legitimas-leg-21` | `LEG-*` |
+| `legitimas-leg2-28` | `LEG2-*` |
+| `legitimas-ent-l-42` | `ENT-L-*` del lote 3 |
+| `legitimas-seleccion-3` | `ENT-L-SELECCION-*`, aparte de las 91 |
+
+`--lista` acepta varias separadas por coma, por ejemplo
+`python correr.py --lista legitimas-leg-21,legitimas-leg2-28 ...`. La
+[anotación a ciegas del alcance](alcance-legitimas-cotidianas.json), con la regla de
+`alcance-desarrollo.json`, deja las 94 dentro: entrantes de un número no agendado.
+Las corridas anteriores al 2026-11-06 son sobre 150 casos; `correr.py` usa ahora por
+defecto los 244 de desarrollo. Para repetir una corrida histórica:
+`python correr.py --lista desarrollo-150 ...` ([lista](listas/desarrollo-150.txt)).
 
 ## Validar
 

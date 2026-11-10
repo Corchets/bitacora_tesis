@@ -2,6 +2,8 @@
 
 # Capítulo 8: Resultados experimentales
 
+> **Corregir (#51):** las secciones 8.3.1, 8.5.1, 8.6 y 8.7 llaman «configuración final» a la del ADR 0001: Tito viejo con E2B, `tarea` e indicio. Si el ADR 0002 elige otra, hay que actualizar esas filas, incluida la de Tito en 8.7. Además, la baja de falsas alarmas con Tito no es filtrado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y los resultados se informan con corpus_v2 aparte ([H01](../hallazgos/H01-corpus-v2-se-lee-aparte.md)).
+
 ## 8.1. Descripción del corpus
 
 | Conjunto | Vishing | Legítimas | Total | Uso hasta hoy |
@@ -56,6 +58,14 @@ Para E2B con Tito viejo, los intervalos de Wilson al 95 % son 72,2–100 % en es
 
 **El filtro.** Con Tito viejo, E2B hizo 144 consultas al modelo contra 376 en directo, contando hasta el aviso. Tito derivó las 10 estafas y 5 de las 10 legítimas: las otras 5 no generaron ninguna consulta. El modelo descartó las 5 derivadas. Tito nuevo casi no deriva, y por eso pierde estafas.
 
+La falsa alarma de E2B directo (`CV2-D-L-BANCO-001`, línea 12) no la sacó el filtro. Tito derivó esa llamada en la línea 1, así que el modelo leyó la conversación entera en las dos condiciones. En los 10 modelos, Tito saca 24 falsas alarmas y suma 3:
+
+- 13 estaban en llamadas sin nada sensible antes del aviso, casi todas de modelos chicos que avisan en las primeras líneas;
+- 6 estaban en líneas sensibles que Tito no vio;
+- en 5, Tito ya había activado.
+
+Ver [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
+
 ### 8.3.2. Otras familias
 
 | Candidato | Resultado | Fuente |
@@ -76,7 +86,7 @@ La repetición de Qwen 2B en GPU, con igual configuración y seed 42, cambió la
 
 ### 8.5.1. Sobre texto, en líneas
 
-Con E2B y Tito viejo, en #101, el aviso llegó en la línea del pedido en 8 de 10 estafas, una línea antes en 1 y tres líneas después en 1. En las 6 estafas con cumplimiento marcado, avisó antes de la línea de `T_C`. Las marcas son provisionales, y en texto no hay segundos.
+Con E2B y Tito viejo, en #101, el aviso llegó en la línea del pedido en 8 de 10 estafas, una línea antes en 1 y tres líneas después en 1. En las 6 estafas con cumplimiento marcado, avisó antes de la línea de `T_C`. Las marcas son provisionales, y en texto no hay segundos. E2B directo avisó antes del pedido en 4 de las 10 estafas; con Tito, en 1. #101 prueba la activación y el indicio juntos, así que no separa cuál de los dos atrasó el aviso ([H07](../hallazgos/H07-indicio-de-tito-pierde-estafas.md)).
 
 ### 8.5.2. Con voz real, en segundos
 

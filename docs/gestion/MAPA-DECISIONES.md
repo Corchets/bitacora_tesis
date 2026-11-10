@@ -104,10 +104,15 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
 - **Evidencia:** [Plan de Trabajo §6](../propuesta/PLAN-DE-TRABAJO.md#6-alcance) y [minuta del 9 de septiembre](seguimientos/2026-09-09.md).
 - **Salida:** objetivos, aporte y lista explícita de exclusiones.
 - **Estado:** resuelto (2026-09-09). Núcleo obligatorio y exclusiones (no PSTN, no deepfakes, no biometría) aprobados.
-- **Precisión de alcance (2026-10-04, confirmada por Mateo):** el detector conserva
+- **Precisión de alcance (2026-10-04, confirmada por Mateo; lo de la agenda y la dirección
+  quedó superado el 2026-11-06, ver el punto siguiente):** el detector conserva
   contexto de la llamada actual y recibe solo su contenido transcripto. Agenda,
   historial, memoria entre sesiones, reputación y dirección entrante/saliente quedan
   fuera de sus entradas. La ventana y la política de alerta siguen abiertas en D08.
+- **Alcance del detector (2026-11-06, decisión del equipo; [ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md),
+  pendiente de aceptar):** el detector corre solo en llamadas entrantes de números no agendados. La app decide si lo
+  activa, y el modelo sigue recibiendo solo la transcripción. El historial, la memoria entre llamadas y la reputación
+  del número siguen afuera.
 - **Público (2026-10-04, confirmado por Mateo; antecedente superado por la
   consolidación del PR #58):** se registró «sin foco etario específico» y se
   retiró D12 como decisión pendiente. La participación de personas adultas en el
@@ -202,11 +207,14 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   es el antecedente; el [recuento corregido](../../experiments/slm-directo/corridas/2026-11-04_132229_e2b-directo-150/comparacion-con-tito.md)
   incluye `TR-12`.
 
-  Antecedente superado por la meta del tutor que sigue.
+  Antecedente reemplazado por la meta de referencia que sigue.
 
-- **Meta fijada por el tutor (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
+- **Meta de referencia (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
   avisar en el **80–85 %** de las estafas con **10–15 %** de falsas alarmas en legítimas.
-  Condición aparte: el aviso no puede salir solo porque aparezca «código», «transferime plata»,
+  La propuso Luciano y al tutor le pareció bien. No es un criterio de aprobación: se busca el
+  mayor porcentaje posible sin ajustar el sistema solo para llegar a ese número (aclaración de
+  Mateo, 2026-11-07).
+  Pedido del tutor: el aviso no puede salir solo porque aparezca «código», «transferime plata»,
   «pasame el código» o «decime la contraseña» en una conversación que no es estafa. Ignacio y
   Evaristo trabajan en esas falsas alarmas. **Denominador: todas las estafas**, incluidas las que
   no tienen pedido de referencia (11 de las 75 de desarrollo, contando `TR-12`; recuento corregido el 2026-11-04).
@@ -235,7 +243,8 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Dirección de Luciano (2026-11-05):** no esperar una definición del tutor sobre las estafas sin pedido; informar el corpus v2 por
   separado; seguir probando con pruebas unitarias y recién después congelar la configuración. Primero pidió modificar el detector para
   avisar esas estafas. Al leer los controles planteó que, hasta donde cortan, no hay evidencia suficiente para avisar, y pidió completar
-  esas llamadas en la reserva (rama `reserva-sin-cortes`, en curso). El [prompt v5](../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) no las avisa ni le gana a v4 con una
+  esas llamadas en la reserva (rama `reserva-sin-cortes`). El 2026-11-07, Luciano y Mateo descartaron esa corrección: las
+  estafas cortadas se escribieron así a propósito, y completarlas ajustaría el test al detector que busca pedidos ([#45](https://github.com/Corchets/bitacora_tesis/issues/45)). El [prompt v5](../../experiments/slm-directo/corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) no las avisa ni le gana a v4 con una
   diferencia defendible; la candidata propuesta es v4 con roles, sin indicio y primer aviso. No cierra D07 ni D08: falta
   el acuerdo del equipo, y adoptar otro prompt implica reabrir el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
   La reunión con el tutor es el 2026-11-11.
@@ -250,6 +259,8 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   el piloto revisado que pedía la versión anterior de esta ficha; el rendimiento se mide en el test
   reservado, con [D07](#d07--aprobar-taxonomía-y-evento-crítico) y
   [D08](#d08--congelar-protocolo-experimental) todavía abiertas.
+- **Nota del 2026-11-07:** el ADR 0001 ahora fija solo el ASR. Tito se está descartando, y el detector lo fija el
+  ADR 0002 ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)).
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base:** reglas solas, también como respaldo sin modelo de la demo.

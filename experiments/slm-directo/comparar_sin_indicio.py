@@ -115,7 +115,9 @@ def momento(av: int | None, tr: int | None) -> str:
 def analizar(condiciones: dict[str, dict]) -> tuple[list[dict], list[str]]:
     presentes = [c for c in ORDEN if c in condiciones]
     filas_casos = []
-    for cid in casos.ids_de_casos("desarrollo"):
+    # Solo los casos que tiene alguna corrida: los agregados después no cuentan como no procesados.
+    corridos = {cid for cond in presentes for cid in condiciones[cond]}
+    for cid in (c for c in casos.ids_de_casos("desarrollo") if c in corridos):
         ref = casos.cargar_referencia(cid)
         c = dict(cid=cid, clase=ref["clase"], tr=ref["t_r_linea"])
         for cond in presentes:

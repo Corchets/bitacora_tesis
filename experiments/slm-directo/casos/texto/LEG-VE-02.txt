@@ -1,0 +1,9 @@
+A: Buenas tardes, ¿con Sofía Medina?
+B: Sí, ¿quién habla?
+A: Sofía, te habla Natalia, asesora de planes de ahorro de Andes Motors. ¿Estás pensando en cambiar el auto o comprarte uno cero kilómetro?
+B: La verdad que no, por ahora no.
+A: Te cuento igual en treinta segundos: es un plan setenta treinta, pagás cuotas en pesos y podés adjudicar por sorteo o por licitación. Este mes hay cupos con la primera cuota bonificada.
+B: Ya sé cómo es, mi viejo tuvo uno. Pero no, gracias, no es el momento.
+A: Perfecto, entiendo. Si en algún momento lo pensás, la suscripción se hace siempre en la oficina, con el contrato en mano, así que pasate cuando quieras. ¿Te puedo dejar mi número por WhatsApp?
+B: Bueno, dale, mandámelo.
+A: Listo. Gracias, Sofía, buena tarde.

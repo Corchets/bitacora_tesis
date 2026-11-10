@@ -1,0 +1,11 @@
+A: Hola, buenas tardes, ¿hablo con Sofía Medina?
+B: Sí.
+A: Sofía, te llamo de FibraSur. Ayer tuviste una visita técnica y queríamos hacerte una encuesta cortita, son tres preguntas, menos de un minuto. ¿Puede ser?
+B: Sí, dale.
+A: Gracias. Del uno al diez, ¿cómo calificarías la atención del técnico?
+B: Un nueve. Fue rapidísimo y re amable.
+A: Buenísimo. ¿Se solucionó el problema por el que llamaste?
+B: Sí, desde ayer anda bien.
+A: Y por último, del uno al diez, ¿qué tan probable es que nos recomiendes a un amigo o familiar?
+B: Mmm, un siete. Porque tardaron un día en venir.
+A: Entendido, lo dejo anotado. Muchas gracias por tu tiempo, Sofía. Buena tarde.

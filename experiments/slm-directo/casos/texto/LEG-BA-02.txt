@@ -1,0 +1,9 @@
+A: Hola, buen día, ¿me comunico con Carla Benítez?
+B: Sí, soy yo.
+A: Carla, te llamo de Banco Andino, de seguridad. Registramos dos inicios de sesión en tu home banking desde un dispositivo nuevo esta madrugada y queríamos confirmar si fuiste vos.
+B: Mmm... mirá, no te ofendas, pero me dijeron que no atienda estas llamadas. ¿Cómo sé que sos del banco?
+A: No, hacés muy bien en desconfiar. Hagamos así: cortá, y llamá vos al número que figura en el dorso de tu tarjeta o en la app. Pedí por seguridad y dales el número de caso, que es el siete tres cuatro cuatro cero.
+B: Siete, tres, cuatro, cuatro, cero. ¿Y mientras tanto?
+A: Mientras tanto, por precaución, el acceso desde ese dispositivo nuevo ya quedó suspendido. No tenés que darme ni hacer nada por acá.
+B: Bueno, dale, ahora llamo.
+A: Perfecto, Carla. Gracias y disculpá la molestia.

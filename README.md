@@ -50,6 +50,7 @@ bitacora_tesis/
 │   └── scripts/                   # Generador Node (build, serve, review-brief)
 ├── docs/
 │   ├── GLOSARIO.md                # Términos técnicos con sentido preciso (T_A, T_R, T_C, WER, etc.)
+│   ├── hallazgos/                 # Lo que aprendimos: un archivo por hallazgo (H01…), con evidencia, estado y qué cambia
 │   ├── propuesta/
 │   │   ├── PLAN-DE-TRABAJO.md     # Fuente única de verdad: problema, objetivos, método y cronograma
 │   │   └── REQUISITOS-ACADEMICOS.md # Pautas formales de UNSTA (portada, ~100 págs, defensa)
@@ -71,7 +72,9 @@ bitacora_tesis/
 │   │   ├── PRIVACIDAD-DEL-SISTEMA.md    # Privacy by Design on-device, Ley 25.326 y permisos Android
 │   │   ├── METODO-CREACION-CORPUS.md    # Fichas de rol, diseño de semillas, negativos difíciles y parada
 │   │   ├── CATALOGO-ESCENARIOS.csv      # Inventario estructurado de semillas de fraude y control
-│   │   └── MANUAL-ANOTACION.md          # Referencia humana y reglas de anotación
+│   │   ├── MANUAL-ANOTACION.md          # Referencia humana y reglas de anotación
+│   │   ├── RELEVAMIENTO-CORPUS-EXTERNO.md # Fuentes externas para la prueba de generalización (#144)
+│   │   └── FILTRO-KORCCVI.csv           # Decisión por llamada del filtro de KorCCVi (#144)
 │   ├── ingenieria/
 │   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md # Comparación replay vs VoIP vs altavoz vs telefonía
 │   │   ├── ARQUITECTURA.md              # Componentes conceptuales y pipeline de audio a alerta

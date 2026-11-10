@@ -22,7 +22,7 @@
 Lo que dice hoy el ADR 0001 da 50–51 estafas y 12–13 falsas alarmas: la propuesta avisa 4 o 5 estafas más con, como
 mucho, una falsa alarma más, y cita mejor lo que se pidió. La demo con ASR ya arranca así desde el 2026-11-05.
 
-**No llega a la meta del tutor** (80–85 % de estafas con 10–15 % de falsas alarmas, o sea 60–64 y 8–11 de 75). Ninguna
+**No llega a la meta de referencia** (80–85 % de estafas con 10–15 % de falsas alarmas, o sea 60–64 y 8–11 de 75). Ninguna
 de las condiciones probadas llega. Más abajo está [por qué](#qué-no-arregla-ninguna-configuración).
 
 ## Cómo leer las tablas
@@ -51,6 +51,13 @@ antes o justo en el pedido en 62 de 64. Lo que aporta es no activarse en las leg
 y 4 falsas alarmas netas a cambio de una estafa. Las frases de Tito viejo 2.0 no cambian nada porque aparecen cuando
 Tito ya está casi en cero; habría que multiplicar sus pesos por más de 10 para que muevan algo. Detalle en la
 [corrida del 2026-11-05](../../experiments/slm-directo/corridas/2026-11-05_tito-2-v4/analisis.md).
+
+> **Nota del 2026-11-06 (Mateo):** que Tito no se active en las legítimas no es un acierto. Cuando aparece la primera
+> línea sensible, el SLM está despierto en 62 de 64 estafas, pero solo en 14 de 43 legítimas. Las 5 legítimas que dejan
+> de dar falsa alarma con Tito son casos en que el SLM avisaba en una línea sensible que Tito no vio, y suma una
+> (`BANCO-006`); en corpus_v2 no cambia ninguna. El aporte que queda es la mitad de las consultas, a cambio de
+> `PREMIO-001`. Ver
+> [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
 
 ## Decisión 2: el prompt del modelo
 

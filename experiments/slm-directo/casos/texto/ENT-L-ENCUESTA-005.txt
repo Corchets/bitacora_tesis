@@ -1,0 +1,21 @@
+A: Hola, buen día. Te llamo de la Municipalidad, de la Dirección de Higiene Urbana. Estamos haciendo una encuesta sobre la recolección de residuos.
+B: Ah, justo. ¿Puedo quejarme?
+A: Jaja, para eso es. Para ubicar la zona, ¿en qué calle y a qué altura vivís?
+B: Lavalle al mil doscientos.
+A: Gracias. ¿Cuántas veces por semana pasa el camión por tu cuadra?
+B: Tres, más o menos. Lunes, miércoles y viernes.
+A: ¿Pasa en horario?
+B: A veces se atrasa hasta el otro día y los perros rompen las bolsas.
+A: ¿Eso pasa seguido?
+B: Todas las semanas. La vereda queda llena de basura.
+A: ¿Hay algún contenedor cerca?
+B: No, ninguno. El más cercano está a cinco cuadras.
+A: ¿Estarías de acuerdo con contenedores en la esquina?
+B: Sí, totalmente. Aunque los vecinos se van a quejar del olor.
+A: Es lo que nos dicen bastante. ¿Separás los residuos reciclables?
+B: Los separo, pero el camión se lleva todo junto.
+A: Eso lo anoto también. ¿Querés que deje un reclamo formal por la demora?
+B: Sí, por favor.
+A: Para el reclamo necesito un nombre de contacto. Puede ser solo el nombre.
+B: Ponele Paula.
+A: Listo. El número de reclamo lo podés consultar en la página con la dirección.

@@ -1,0 +1,21 @@
+A: Hola, buen día. Te llamamos del Centro Médico del Parque. ¿Ignacio Quiroga?
+B: Sí.
+A: Te llamo para confirmar tu turno con la doctora Gómez, de dermatología, el jueves doce a las diez y media.
+B: Sí, confirmo. ¿Era a las diez y media?
+A: Sí, diez y media. Para dejar cargada la admisión, ¿me confirmás tu DNI?
+B: cuarenta millones treinta mil cuatrocientos ochenta y uno.
+A: ¿Y seguís con la misma obra social?
+B: Sí, la misma.
+A: ¿Me decís el número de afiliado? Está en la credencial.
+B: Esperá que la busco... Es siete siete tres uno cero cero cuatro cinco cero dos.
+A: Gracias. La primera consulta no necesita orden. Si te indica estudios, te los autoriza la obra social.
+B: ¿Hay que pagar algo?
+A: Un bono de consulta de tres mil pesos, en recepción.
+B: Ok.
+A: Si no podés venir, avisá con veinticuatro horas, así se lo damos a otro paciente.
+B: Sí, aviso.
+A: Llegá diez minutos antes para la admisión. Traé el DNI y la credencial.
+B: ¿Si llego tarde?
+A: Tenés quince minutos de tolerancia. Después hay que reprogramar.
+B: Llego temprano.
+A: Te esperamos el jueves.

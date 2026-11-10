@@ -1,0 +1,18 @@
+A: ¿Hola?
+B: Hola, buenas tardes. ¿Hablo con Micaela Sosa? Te llamo de Mirador, una agencia de personal eventual.
+A: Sí, soy yo. Perdón, ¿de dónde me dijiste?
+B: De Mirador Personal Eventual. Soy Gustavo, del área de selección. Te llamo por la postulación que dejaste para auxiliar de depósito, la búsqueda de temporada para las fiestas.
+A: Ah, sí. Me anoté en un montón de lugares y no me ubicaba. ¿Y de dónde sacaron mi número?
+B: Lo dejaste vos en el formulario de la postulación, junto con el CV. ¿Seguís buscando trabajo?
+A: Sí, sigo buscando. ¿De qué se trata?
+B: Es para un cliente nuestro, el depósito de una distribuidora de juguetes en Garín. Es armado de pedidos, de lunes a sábado de 7 a 15, durante noviembre y diciembre, con posibilidad de seguir en enero.
+A: Ah, bien. ¿Y cómo sigue?
+B: El martes 10 a las 9 hacemos una entrevista grupal en nuestra oficina, en Moreno 845, primer piso, a dos cuadras de la estación. Dura más o menos una hora. ¿Podrías venir?
+A: El martes a las 9... Sí, puedo.
+B: Bárbaro. Eso sí, necesito que me confirmes hoy, porque el grupo es de veinte personas y estamos llamando a varios postulantes.
+A: Sí, sí, te confirmo ahora. ¿Tengo que llevar algo?
+B: El DNI y, si tenés, un CV impreso. Nada más.
+A: Perfecto.
+B: Listo, te anoto: Micaela Sosa, martes 10 a las 9. Si te surge algún problema, avisanos a este mismo número.
+A: Dale, lo agendo. Gracias, Gustavo.
+B: Gracias a vos, Micaela. Nos vemos el martes.

@@ -1,0 +1,10 @@
+A: ¿Hola?
+B: Hola, ¿Matías? Te hablo de TecnoFix, el local de la calle Muñecas. Dejaste una notebook la semana pasada.
+A: Sí, ¿ya está?
+B: Ya está. Le cambiamos el disco y reinstalamos el sistema. Para dejarla registrada a tu nombre, ¿me confirmás el DNI que dejaste?
+A: Treinta y nueve, setecientos dos, ciento quince.
+B: Perfecto. Quedó en lo presupuestado, ochenta y cinco mil. Pagás cuando la retirás.
+A: Dale. ¿Tengo que llevar algo?
+B: El comprobante. Tiene un número de orden arriba, el cero cuatro nueve dos. Con eso y el DNI te la damos.
+A: Perfecto, paso mañana.
+B: Abrimos hasta las ocho. Chau, Matías.

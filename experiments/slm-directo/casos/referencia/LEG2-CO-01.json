@@ -1,0 +1,35 @@
+{
+  "case_id": "LEG2-CO-01",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 5,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Confirma nombre y dirección del destinatario; llamada corta y operativa. Datos pedidos o confirmados: nombre, direccion. El detector no debería avisar.",
+  "origen": "Redacción ficticia, llamadas legítimas v2, legitimas_dev.jsonl (id LEG2-CO-01, categoría correo_entrega), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Split `dev` del archivo original; partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Llamada entrante: atiende primero quien recibe (A). Reescritura de `LEG-CO-01` como llamada entrante con pedido de datos.",
+  "particion": "desarrollo",
+  "familia": "delivery",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Repartidor confirma nombre y dirección y avisa que está llegando."
+}

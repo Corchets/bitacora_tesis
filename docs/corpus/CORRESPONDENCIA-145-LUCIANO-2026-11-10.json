@@ -1,0 +1,117 @@
+{
+  "issue": 145,
+  "muestra": "4872344bf81222554cd7354b187022b02d75f830376b601792b8af0370e0069e",
+  "archivo_original_sha256": "12f19558dc367f91baa51404ee10c45d0e90adc11d760beabfe9dfd4023d763b",
+  "casos": {
+    "Llamada 01": {
+      "case_id": "CV2-D-V-PREMIO-005",
+      "texto_sha256": "884238038027dd67aa5c4ad0c8363d7214873f98b245e98133baa35c2d6bd5a9"
+    },
+    "Llamada 02": {
+      "case_id": "LEG2-CC-06",
+      "texto_sha256": "40950bc3916aca25b581c03e4201e5c661994c5d1042d52086c44f168948e52f"
+    },
+    "Llamada 03": {
+      "case_id": "CV2-D-V-PREMIO-003",
+      "texto_sha256": "226ead57a1a5a0949f06f2ae7eba8f1e05050556b3b14abfd616ef5aa6420fdc"
+    },
+    "Llamada 04": {
+      "case_id": "CV2-D-V-FAMILIAR-004",
+      "texto_sha256": "2a9cccf9164361ce88977812929e3353f7c336066a06534b81959b7f8797854b"
+    },
+    "Llamada 05": {
+      "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-005",
+      "texto_sha256": "0d8a2fae959b1962d4bbcf9d80117d196c4d1de22da829d4a0fea77dfde0c6f2"
+    },
+    "Llamada 06": {
+      "case_id": "CV2-D-V-SOPORTE-005",
+      "texto_sha256": "46fcd7aa17b8601f69a88d40f34c80ef8b5539e3702651074172be13b3bb013c"
+    },
+    "Llamada 07": {
+      "case_id": "LEG-TU-03",
+      "texto_sha256": "1b6807210ddc2cbde29db3bb2603796a4a32668d1843255fd9252b1d29f68bec"
+    },
+    "Llamada 08": {
+      "case_id": "CV2-D-V-SOPORTE-002",
+      "texto_sha256": "492d3e2cb7d03177e551015af24902a6ab74b3c72527a4bede80da62d971c911"
+    },
+    "Llamada 09": {
+      "case_id": "CV2-D-V-WHATSAPP-006",
+      "texto_sha256": "56182ee724b3d3ad7484efeb7dae8d793207ff90b2bbcc09dc8263d74593c930"
+    },
+    "Llamada 10": {
+      "case_id": "CV2-D-V-BANCO-009",
+      "texto_sha256": "080f691f05fa965c93a46d90ca65ff75fbdfc0a63f1166016952b81a1d1470ca"
+    },
+    "Llamada 11": {
+      "case_id": "CV2-D-V-WHATSAPP-008",
+      "texto_sha256": "8fa39015a7e18c089de24b71884512eea5dd65ac9832d2e748c84ade13c6277c"
+    },
+    "Llamada 12": {
+      "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-002",
+      "texto_sha256": "9855c54ca96c7a4a3600f5741e8a8f730d0056430848bc0086cfa42921923879"
+    },
+    "Llamada 13": {
+      "case_id": "LEG-CC-01",
+      "texto_sha256": "3be9ae809df9233bb84b9aa164962ccac8b82644f303b851faf5010894ac3343"
+    },
+    "Llamada 14": {
+      "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-006",
+      "texto_sha256": "fafd7d37ff197d8b7a37e743c0b59c5eadec8d6448c9e1d1ceda66cf8ab6066a",
+      "aviso_previo": "Antes de confirmar la ficha el 2026-11-10 se le informó que era una de las 10 estafas sin pedido de la muestra; las respuestas no cambiaron respecto de la captura del 2026-11-07."
+    },
+    "Llamada 15": {
+      "case_id": "CV2-D-V-WHATSAPP-003",
+      "texto_sha256": "753dcf21f938454bf827a9273b6fa90dbf2f5f71826622ba7596a71e65645be0"
+    },
+    "Llamada 16": {
+      "case_id": "CV2-D-V-WHATSAPP-001",
+      "texto_sha256": "1db59ff18a30d81df0883eafb016523e5b23f9a7bddbefa643de0a8501646f86"
+    },
+    "Llamada 17": {
+      "case_id": "CV2-D-V-ORGANISMO_PREVISIONAL-004",
+      "texto_sha256": "2b5f3de9f03a30911ddc58e5dfc5fbe83a85ac8305f6008c3aae8479e7de43a3"
+    },
+    "Llamada 18": {
+      "case_id": "LEG2-VE-04",
+      "texto_sha256": "f5c010a2ca3c7b3ad608176ede694c21d47053efabbcf7e641723308af416580"
+    },
+    "Llamada 19": {
+      "case_id": "CV2-D-V-SOPORTE-008",
+      "texto_sha256": "cd716342e8697fd20fbaf0742459661ef1755fbd0d14a823dd9fa14134ba85c4"
+    },
+    "Llamada 20": {
+      "case_id": "LEG2-ST-03",
+      "texto_sha256": "9b35e1b6fd21dc3c1d6356586bc527ed87060b7c1d10c608fe584ca414ea727c"
+    },
+    "Llamada 21": {
+      "case_id": "CV2-D-V-PREMIO-002",
+      "texto_sha256": "a3026eb10a535deaf1b7cd8d9176532d578bda09e8b1babdcd9bdf1f56a6a45e"
+    },
+    "Llamada 23": {
+      "case_id": "CV2-D-V-PREMIO-006",
+      "texto_sha256": "1a46efefce8deb4ef660756f2575bd6ba2e5cbac0960ecb8fc2c0831467f3ec9",
+      "aviso_previo": "Antes de anotar el 2026-11-10 se le informó que era una de las 10 estafas sin pedido de la muestra; la casilla conocido quedó en false."
+    },
+    "Llamada 31": {
+      "case_id": "CV2-D-V-WHATSAPP-007",
+      "texto_sha256": "eb3e6dc0442a3eed3e72e83d5e531d7ad40baba21cd8b1d1f257b3704b3d2223",
+      "aviso_previo": "Antes de anotar el 2026-11-10 se le informó que era una de las 10 estafas sin pedido de la muestra; la casilla conocido quedó en false."
+    },
+    "Llamada 39": {
+      "case_id": "CV2-D-V-BANCO-012",
+      "texto_sha256": "6a267b30d94c7c0ca58cfad602430134701fd6dd935c70062ffaeb86e94bf3db",
+      "aviso_previo": "Antes de anotar el 2026-11-10 se le informó que era una de las 10 estafas sin pedido de la muestra; la casilla conocido quedó en false."
+    },
+    "Llamada 41": {
+      "case_id": "CV2-D-V-SOPORTE-007",
+      "texto_sha256": "05a8100c5f3e39dab0735f36e0d75562eb5938722e465128d0d79b28cb9715e6",
+      "aviso_previo": "Antes de anotar el 2026-11-10 se le informó que era una de las 10 estafas sin pedido de la muestra; la casilla conocido quedó en false."
+    },
+    "Llamada 42": {
+      "case_id": "CV2-D-V-BANCO-011",
+      "texto_sha256": "c3b07eeca6f3e144b14bacf81203821cc7e70a9a0e659e070ff055764a9764ec",
+      "aviso_previo": "Antes de anotar el 2026-11-10 se le informó que era una de las 10 estafas sin pedido de la muestra; la casilla conocido quedó en false."
+    }
+  }
+}

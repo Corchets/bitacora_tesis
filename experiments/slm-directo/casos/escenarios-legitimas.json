@@ -1,0 +1,2093 @@
+{
+  "_meta": {
+    "estado": "propuesta sin discutir; lo decide el método de #45; control a ciegas en escenarios-control.json",
+    "escenarios_control": 62,
+    "metodo": "coseno TF-IDF de palabras 1-2 y cobertura de bigramas pesados por IDF (test_alcance.py, #45); enlace si coseno >= umbral o cobertura en cualquier sentido >= umbral; escenario = componente conexa",
+    "listas": [
+      "legitimas-91",
+      "legitimas-seleccion-3"
+    ],
+    "reescrituras_declaradas": 15,
+    "umbral_coseno": 0.347,
+    "umbral_cobertura": 0.246,
+    "escenarios": 47,
+    "unitarios": 15,
+    "sensibilidad": [
+      {
+        "umbrales": "calibrados (mínimo de las reescrituras)",
+        "coseno": 0.347,
+        "cobertura": 0.246,
+        "escenarios": 47
+      },
+      {
+        "umbrales": "solo coseno",
+        "coseno": 0.347,
+        "cobertura": null,
+        "escenarios": 55
+      },
+      {
+        "umbrales": "solo cobertura",
+        "coseno": null,
+        "cobertura": 0.246,
+        "escenarios": 47
+      },
+      {
+        "umbrales": "percentil 25 de las reescrituras",
+        "coseno": 0.472,
+        "cobertura": 0.388,
+        "escenarios": 56
+      },
+      {
+        "umbrales": "mediana de las reescrituras",
+        "coseno": 0.523,
+        "cobertura": 0.45,
+        "escenarios": 59
+      }
+    ],
+    "huella_textos": "384794dfe1da202758cb6006ef6336df5740a76d5f21076361694189df85d815"
+  },
+  "casos": [
+    {
+      "case_id": "ENT-L-BANCO-001",
+      "escenario": "E01",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 24,
+      "situacion": "Prevención de fraudes llama por un intento de compra online que el cliente no hizo, valida identidad con DNI y fecha de nacimiento, bloquea la tarjeta y avisa de un SMS para reactivar la app.",
+      "vecino_coseno": "LEG2-BA-01",
+      "coseno": 0.412,
+      "vecino_cobertura": "LEG2-BA-01",
+      "cobertura": 0.49,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-BA-01",
+        "LEG2-BA-01"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E01b"
+    },
+    {
+      "case_id": "LEG-BA-01",
+      "escenario": "E01",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 13,
+      "situacion": "Prevención de fraudes del banco consulta por una compra que el cliente no reconoce y bloquea la tarjeta.",
+      "vecino_coseno": "LEG2-BA-01",
+      "coseno": 0.383,
+      "vecino_cobertura": "LEG2-BA-01",
+      "cobertura": 0.387,
+      "reescritura_declarada": "LEG2-BA-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-BANCO-001",
+        "LEG2-BA-01"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E01a"
+    },
+    {
+      "case_id": "LEG2-BA-01",
+      "escenario": "E01",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 12,
+      "situacion": "Prevención de fraudes valida identidad con DNI y fecha de nacimiento y bloquea la tarjeta.",
+      "vecino_coseno": "ENT-L-BANCO-001",
+      "coseno": 0.412,
+      "vecino_cobertura": "ENT-L-BANCO-001",
+      "cobertura": 0.49,
+      "reescritura_declarada": "LEG-BA-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-BANCO-001",
+        "LEG-BA-01"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E01b"
+    },
+    {
+      "case_id": "ENT-L-BANCO-002",
+      "escenario": "E02",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 23,
+      "situacion": "Seguridad del banco llama por accesos desde un dispositivo nuevo; la clienta se niega a dar el DNI y la operadora le pide que corte y llame al número oficial.",
+      "vecino_coseno": "LEG2-BA-02",
+      "coseno": 0.447,
+      "vecino_cobertura": "LEG2-BA-02",
+      "cobertura": 0.497,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-BA-02",
+        "LEG2-BA-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E02a"
+    },
+    {
+      "case_id": "LEG-BA-02",
+      "escenario": "E02",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 9,
+      "situacion": "El banco llama por movimientos raros; el cliente desconfía y la operadora le pide que corte y llame al número oficial.",
+      "vecino_coseno": "LEG2-BA-02",
+      "coseno": 0.593,
+      "vecino_cobertura": "LEG2-BA-02",
+      "cobertura": 0.564,
+      "reescritura_declarada": "LEG2-BA-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-BANCO-002",
+        "LEG2-BA-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E02b"
+    },
+    {
+      "case_id": "LEG2-BA-02",
+      "escenario": "E02",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 10,
+      "situacion": "El banco pide el DNI, el cliente desconfía y la operadora le pide que corte y llame al número oficial.",
+      "vecino_coseno": "LEG-BA-02",
+      "coseno": 0.593,
+      "vecino_cobertura": "LEG-BA-02",
+      "cobertura": 0.564,
+      "reescritura_declarada": "LEG-BA-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-BANCO-002",
+        "LEG-BA-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E02a"
+    },
+    {
+      "case_id": "ENT-L-BANCO-003",
+      "escenario": "E03",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 21,
+      "situacion": "El banco consulta a un cliente mayor por una compra en el exterior que sí hizo; pide nombre completo y los últimos números del DNI y le explica cómo avisar viajes.",
+      "vecino_coseno": "LEG2-BA-03",
+      "coseno": 0.303,
+      "vecino_cobertura": "LEG2-BA-03",
+      "cobertura": 0.341,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-BA-03",
+        "LEG2-BA-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E03b"
+    },
+    {
+      "case_id": "LEG-BA-03",
+      "escenario": "E03",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 9,
+      "situacion": "El banco consulta por una compra en el exterior que el cliente sí reconoce.",
+      "vecino_coseno": "LEG2-BA-03",
+      "coseno": 0.58,
+      "vecino_cobertura": "LEG2-BA-03",
+      "cobertura": 0.507,
+      "reescritura_declarada": "LEG2-BA-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-BANCO-003",
+        "LEG2-BA-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E03a"
+    },
+    {
+      "case_id": "LEG2-BA-03",
+      "escenario": "E03",
+      "tamano": 3,
+      "familia": "banco",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 12,
+      "situacion": "El banco consulta por una compra en el exterior que el cliente reconoce, con validación de nombre y DNI.",
+      "vecino_coseno": "LEG-BA-03",
+      "coseno": 0.58,
+      "vecino_cobertura": "LEG-BA-03",
+      "cobertura": 0.507,
+      "reescritura_declarada": "LEG-BA-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-BANCO-003",
+        "LEG-BA-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E03b"
+    },
+    {
+      "case_id": "ENT-L-DELIVERY-002",
+      "escenario": "E04",
+      "tamano": 3,
+      "familia": "delivery",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 20,
+      "situacion": "Nadie atiende en el edificio y el repartidor coordina dejar el paquete con el encargado; pide nombre y DNI de quien lo recibe.",
+      "vecino_coseno": "LEG2-CO-02",
+      "coseno": 0.469,
+      "vecino_cobertura": "LEG2-CO-02",
+      "cobertura": 0.545,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-CO-02",
+        "LEG2-CO-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E04"
+    },
+    {
+      "case_id": "LEG-CO-02",
+      "escenario": "E04",
+      "tamano": 3,
+      "familia": "delivery",
+      "tipo_legitima": "cotidiana",
+      "lineas": 9,
+      "situacion": "Repartidor llama, el destinatario no está y coordina dejarlo con el portero.",
+      "vecino_coseno": "LEG2-CO-02",
+      "coseno": 0.523,
+      "vecino_cobertura": "LEG2-CO-02",
+      "cobertura": 0.465,
+      "reescritura_declarada": "LEG2-CO-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-DELIVERY-002",
+        "LEG2-CO-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E04"
+    },
+    {
+      "case_id": "LEG2-CO-02",
+      "escenario": "E04",
+      "tamano": 3,
+      "familia": "delivery",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 10,
+      "situacion": "El destinatario no está y el repartidor pide nombre y DNI de quien va a recibir.",
+      "vecino_coseno": "LEG-CO-02",
+      "coseno": 0.523,
+      "vecino_cobertura": "ENT-L-DELIVERY-002",
+      "cobertura": 0.545,
+      "reescritura_declarada": "LEG-CO-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-DELIVERY-002",
+        "LEG-CO-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E04"
+    },
+    {
+      "case_id": "ENT-L-DELIVERY-003",
+      "escenario": "E05",
+      "tamano": 3,
+      "familia": "delivery",
+      "tipo_legitima": "cotidiana",
+      "lineas": 21,
+      "situacion": "El repartidor no encuentra el número de la casa y pide referencias; la destinataria le explica el pasillo y pregunta si hay algo que pagar.",
+      "vecino_coseno": "LEG2-CO-03",
+      "coseno": 0.346,
+      "vecino_cobertura": "LEG2-CO-03",
+      "cobertura": 0.458,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-CO-03",
+        "LEG2-CO-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E05"
+    },
+    {
+      "case_id": "LEG-CO-03",
+      "escenario": "E05",
+      "tamano": 3,
+      "familia": "delivery",
+      "tipo_legitima": "cotidiana",
+      "lineas": 7,
+      "situacion": "Repartidor no encuentra la dirección y pide referencias.",
+      "vecino_coseno": "LEG2-CO-03",
+      "coseno": 0.603,
+      "vecino_cobertura": "LEG2-CO-03",
+      "cobertura": 0.569,
+      "reescritura_declarada": "LEG2-CO-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-DELIVERY-003",
+        "LEG2-CO-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E05"
+    },
+    {
+      "case_id": "LEG2-CO-03",
+      "escenario": "E05",
+      "tamano": 3,
+      "familia": "delivery",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 10,
+      "situacion": "Repartidor no encuentra la dirección y pide referencias.",
+      "vecino_coseno": "LEG-CO-03",
+      "coseno": 0.603,
+      "vecino_cobertura": "LEG-CO-03",
+      "cobertura": 0.569,
+      "reescritura_declarada": "LEG-CO-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-DELIVERY-003",
+        "LEG-CO-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E05"
+    },
+    {
+      "case_id": "ENT-L-ENCUESTA-001",
+      "escenario": "E06",
+      "tamano": 3,
+      "familia": "encuesta",
+      "tipo_legitima": "cotidiana",
+      "lineas": 21,
+      "situacion": "Una encuesta de satisfacción después de una visita técnica; el cliente califica la atención, se queja de la demora y pide que no lo vuelvan a encuestar.",
+      "vecino_coseno": "LEG2-EN-01",
+      "coseno": 0.442,
+      "vecino_cobertura": "LEG2-EN-01",
+      "cobertura": 0.585,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-EN-01",
+        "LEG2-EN-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E06b"
+    },
+    {
+      "case_id": "LEG-EN-01",
+      "escenario": "E06",
+      "tamano": 3,
+      "familia": "encuesta",
+      "tipo_legitima": "cotidiana",
+      "lineas": 11,
+      "situacion": "Encuesta de satisfacción después de una visita técnica.",
+      "vecino_coseno": "LEG2-EN-01",
+      "coseno": 0.633,
+      "vecino_cobertura": "LEG2-EN-01",
+      "cobertura": 0.656,
+      "reescritura_declarada": "LEG2-EN-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-ENCUESTA-001",
+        "LEG2-EN-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E06a"
+    },
+    {
+      "case_id": "LEG2-EN-01",
+      "escenario": "E06",
+      "tamano": 3,
+      "familia": "encuesta",
+      "tipo_legitima": "cotidiana",
+      "lineas": 12,
+      "situacion": "Encuesta de satisfacción después de una visita técnica, confirmando el nombre del cliente.",
+      "vecino_coseno": "LEG-EN-01",
+      "coseno": 0.633,
+      "vecino_cobertura": "LEG-EN-01",
+      "cobertura": 0.656,
+      "reescritura_declarada": "LEG-EN-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-ENCUESTA-001",
+        "LEG-EN-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E06a"
+    },
+    {
+      "case_id": "ENT-L-ENCUESTA-003",
+      "escenario": "E07",
+      "tamano": 3,
+      "familia": "encuesta",
+      "tipo_legitima": "cotidiana",
+      "lineas": 14,
+      "situacion": "Una encuestadora de consumo llama a un conductor que no puede hablar; él le pregunta de dónde sacaron su número y ella ofrece no volver a llamarlo.",
+      "vecino_coseno": "LEG2-EN-03",
+      "coseno": 0.342,
+      "vecino_cobertura": "LEG2-EN-03",
+      "cobertura": 0.491,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-EN-03",
+        "LEG2-EN-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E07"
+    },
+    {
+      "case_id": "LEG-EN-03",
+      "escenario": "E07",
+      "tamano": 3,
+      "familia": "encuesta",
+      "tipo_legitima": "cotidiana",
+      "lineas": 5,
+      "situacion": "Encuesta de consumo; el receptor no quiere participar.",
+      "vecino_coseno": "LEG2-EN-03",
+      "coseno": 0.666,
+      "vecino_cobertura": "LEG2-EN-03",
+      "cobertura": 0.677,
+      "reescritura_declarada": "LEG2-EN-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-ENCUESTA-003",
+        "LEG2-EN-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E07"
+    },
+    {
+      "case_id": "LEG2-EN-03",
+      "escenario": "E07",
+      "tamano": 3,
+      "familia": "encuesta",
+      "tipo_legitima": "cotidiana",
+      "lineas": 8,
+      "situacion": "Encuesta de consumo; el receptor no puede y pide que no lo llamen.",
+      "vecino_coseno": "LEG-EN-03",
+      "coseno": 0.666,
+      "vecino_cobertura": "LEG-EN-03",
+      "cobertura": 0.677,
+      "reescritura_declarada": "LEG-EN-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-ENCUESTA-003",
+        "LEG-EN-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E07"
+    },
+    {
+      "case_id": "ENT-L-MEDICO-001",
+      "escenario": "E08",
+      "tamano": 3,
+      "familia": "medico",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 21,
+      "situacion": "El centro médico confirma un turno con dermatología y pide DNI, obra social y número de afiliado para la admisión.",
+      "vecino_coseno": "LEG2-TU-01",
+      "coseno": 0.457,
+      "vecino_cobertura": "LEG2-TU-01",
+      "cobertura": 0.643,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-TU-01",
+        "LEG2-TU-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E08a"
+    },
+    {
+      "case_id": "LEG-TU-01",
+      "escenario": "E08",
+      "tamano": 3,
+      "familia": "medico",
+      "tipo_legitima": "cotidiana",
+      "lineas": 9,
+      "situacion": "Centro médico confirma un turno con especialista.",
+      "vecino_coseno": "LEG2-TU-01",
+      "coseno": 0.508,
+      "vecino_cobertura": "ENT-L-MEDICO-001",
+      "cobertura": 0.483,
+      "reescritura_declarada": "LEG2-TU-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-MEDICO-001",
+        "LEG2-TU-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E08b"
+    },
+    {
+      "case_id": "LEG2-TU-01",
+      "escenario": "E08",
+      "tamano": 3,
+      "familia": "medico",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 10,
+      "situacion": "Centro médico confirma un turno y valida DNI y obra social.",
+      "vecino_coseno": "LEG-TU-01",
+      "coseno": 0.508,
+      "vecino_cobertura": "ENT-L-MEDICO-001",
+      "cobertura": 0.643,
+      "reescritura_declarada": "LEG-TU-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-MEDICO-001",
+        "LEG-TU-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E08a"
+    },
+    {
+      "case_id": "ENT-L-MEDICO-002",
+      "escenario": "E09",
+      "tamano": 3,
+      "familia": "medico",
+      "tipo_legitima": "cotidiana",
+      "lineas": 22,
+      "situacion": "El consultorio odontológico llama para reprogramar un turno por un imprevisto de la doctora y negocia un nuevo horario con la paciente.",
+      "vecino_coseno": "LEG2-TU-02",
+      "coseno": 0.424,
+      "vecino_cobertura": "LEG2-TU-02",
+      "cobertura": 0.639,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-TU-02",
+        "LEG2-TU-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E09"
+    },
+    {
+      "case_id": "LEG-TU-02",
+      "escenario": "E09",
+      "tamano": 3,
+      "familia": "medico",
+      "tipo_legitima": "cotidiana",
+      "lineas": 10,
+      "situacion": "Consultorio odontológico necesita reprogramar un turno.",
+      "vecino_coseno": "LEG2-TU-02",
+      "coseno": 0.749,
+      "vecino_cobertura": "LEG2-TU-02",
+      "cobertura": 0.753,
+      "reescritura_declarada": "LEG2-TU-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-MEDICO-002",
+        "LEG2-TU-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E09"
+    },
+    {
+      "case_id": "LEG2-TU-02",
+      "escenario": "E09",
+      "tamano": 3,
+      "familia": "medico",
+      "tipo_legitima": "cotidiana",
+      "lineas": 10,
+      "situacion": "Consultorio odontológico reprograma un turno.",
+      "vecino_coseno": "LEG-TU-02",
+      "coseno": 0.749,
+      "vecino_cobertura": "LEG-TU-02",
+      "cobertura": 0.753,
+      "reescritura_declarada": "LEG-TU-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-MEDICO-002",
+        "LEG-TU-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E09"
+    },
+    {
+      "case_id": "ENT-L-SOPORTE-002",
+      "escenario": "E10",
+      "tamano": 3,
+      "familia": "soporte",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 22,
+      "situacion": "El service oficial de electrodomésticos llama por una orden de lavarropas en garantía, pide el DNI que figura en la factura, confirma el domicilio y negocia el horario de la visita.",
+      "vecino_coseno": "LEG2-ST-02",
+      "coseno": 0.445,
+      "vecino_cobertura": "LEG2-ST-02",
+      "cobertura": 0.542,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-ST-02",
+        "LEG2-ST-02"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E10a"
+    },
+    {
+      "case_id": "LEG-ST-02",
+      "escenario": "E10",
+      "tamano": 3,
+      "familia": "soporte",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 11,
+      "situacion": "Service oficial de electrodomésticos coordina visita por un lavarropas en garantía.",
+      "vecino_coseno": "LEG2-ST-02",
+      "coseno": 0.498,
+      "vecino_cobertura": "LEG2-ST-02",
+      "cobertura": 0.454,
+      "reescritura_declarada": "LEG2-ST-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-SOPORTE-002",
+        "LEG2-ST-02"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E10b"
+    },
+    {
+      "case_id": "LEG2-ST-02",
+      "escenario": "E10",
+      "tamano": 3,
+      "familia": "soporte",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 12,
+      "situacion": "Service oficial de electrodomésticos valida la garantía con DNI y dirección.",
+      "vecino_coseno": "LEG-ST-02",
+      "coseno": 0.498,
+      "vecino_cobertura": "ENT-L-SOPORTE-002",
+      "cobertura": 0.542,
+      "reescritura_declarada": "LEG-ST-02",
+      "mismo_numero_en_grupo": [
+        "ENT-L-SOPORTE-002",
+        "LEG-ST-02"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E10a"
+    },
+    {
+      "case_id": "ENT-L-SOPORTE-003",
+      "escenario": "E11",
+      "tamano": 3,
+      "familia": "soporte",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 23,
+      "situacion": "El local de reparación avisa que la notebook está lista, confirma el documento de quien la dejó y pide autorización para cambiar un cargador que también falla, con un costo extra.",
+      "vecino_coseno": "LEG2-ST-03",
+      "coseno": 0.379,
+      "vecino_cobertura": "LEG2-ST-03",
+      "cobertura": 0.545,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-ST-03",
+        "LEG2-ST-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E11c"
+    },
+    {
+      "case_id": "LEG-ST-03",
+      "escenario": "E11",
+      "tamano": 3,
+      "familia": "soporte",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 8,
+      "situacion": "Local de reparación avisa que la notebook que el cliente dejó ya está lista.",
+      "vecino_coseno": "LEG2-ST-03",
+      "coseno": 0.472,
+      "vecino_cobertura": "ENT-L-SOPORTE-003",
+      "cobertura": 0.506,
+      "reescritura_declarada": "LEG2-ST-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-SOPORTE-003",
+        "LEG2-ST-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E11a"
+    },
+    {
+      "case_id": "LEG2-ST-03",
+      "escenario": "E11",
+      "tamano": 3,
+      "familia": "soporte",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 10,
+      "situacion": "Local de reparación avisa que la notebook está lista y pide el DNI para retirarla.",
+      "vecino_coseno": "LEG-ST-03",
+      "coseno": 0.472,
+      "vecino_cobertura": "ENT-L-SOPORTE-003",
+      "cobertura": 0.545,
+      "reescritura_declarada": "LEG-ST-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-SOPORTE-003",
+        "LEG-ST-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E11b"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-001",
+      "escenario": "E12",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 27,
+      "situacion": "Una operadora móvil ofrece a una clienta pasar a un plan más grande y lo da de alta en la llamada, validando DNI y mail; la clienta negocia el precio y el alta se acepta con un SMS que ella carga en la app.",
+      "vecino_coseno": "LEG2-CC-01",
+      "coseno": 0.446,
+      "vecino_cobertura": "LEG2-CC-01",
+      "cobertura": 0.491,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-CC-01",
+        "LEG2-CC-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E12a"
+    },
+    {
+      "case_id": "LEG-CC-01",
+      "escenario": "E12",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 12,
+      "situacion": "Operadora de telefonía móvil ofrece upgrade de plan a cliente existente.",
+      "vecino_coseno": "LEG2-CC-01",
+      "coseno": 0.351,
+      "vecino_cobertura": "LEG2-CC-01",
+      "cobertura": 0.298,
+      "reescritura_declarada": "LEG2-CC-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-VENTAS-001",
+        "LEG2-CC-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E12b"
+    },
+    {
+      "case_id": "LEG2-CC-01",
+      "escenario": "E12",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 14,
+      "situacion": "Operadora móvil ofrece upgrade de plan y lo da de alta en la llamada, validando DNI.",
+      "vecino_coseno": "ENT-L-VENTAS-001",
+      "coseno": 0.446,
+      "vecino_cobertura": "ENT-L-VENTAS-001",
+      "cobertura": 0.491,
+      "reescritura_declarada": "LEG-CC-01",
+      "mismo_numero_en_grupo": [
+        "ENT-L-VENTAS-001",
+        "LEG-CC-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E12a"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-004",
+      "escenario": "E13",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 23,
+      "situacion": "Un agente de telefonía confirma el nombre del titular para ofrecerle internet; el titular corta la oferta y pide salir de la base.",
+      "vecino_coseno": "LEG2-CC-04",
+      "coseno": 0.326,
+      "vecino_cobertura": "LEG2-CC-04",
+      "cobertura": 0.421,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-CC-04"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E13"
+    },
+    {
+      "case_id": "LEG-CC-02",
+      "escenario": "E13",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 9,
+      "situacion": "Empresa de fibra óptica ofrece servicio nuevo en el barrio; el receptor rechaza y pide no ser llamado.",
+      "vecino_coseno": "LEG2-CC-04",
+      "coseno": 0.332,
+      "vecino_cobertura": "LEG2-CC-04",
+      "cobertura": 0.318,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E13"
+    },
+    {
+      "case_id": "LEG2-CC-04",
+      "escenario": "E13",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 10,
+      "situacion": "Agente de telefonía confirma titular y el receptor pide que no lo llamen más.",
+      "vecino_coseno": "LEG-CC-02",
+      "coseno": 0.332,
+      "vecino_cobertura": "ENT-L-VENTAS-004",
+      "cobertura": 0.421,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-VENTAS-004"
+      ],
+      "grupo_encadenado": true,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E13"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-006",
+      "escenario": "E14",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 24,
+      "situacion": "Un vendedor de TV por cable ofrece un pack con descuento, insiste con que vence el viernes, la clienta desconfía y él le da un código de referencia y la manda al 0800.",
+      "vecino_coseno": "LEG2-CC-06",
+      "coseno": 0.466,
+      "vecino_cobertura": "LEG2-CC-06",
+      "cobertura": 0.582,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-CC-06"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E14a"
+    },
+    {
+      "case_id": "LEG-CC-03",
+      "escenario": "E14",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 12,
+      "situacion": "Vendedor de TV por cable algo insistente; el receptor desconfía y el vendedor lo deriva al canal oficial.",
+      "vecino_coseno": "LEG2-CC-06",
+      "coseno": 0.378,
+      "vecino_cobertura": "LEG2-CC-06",
+      "cobertura": 0.371,
+      "reescritura_declarada": "LEG2-CC-06",
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E14b"
+    },
+    {
+      "case_id": "LEG2-CC-06",
+      "escenario": "E14",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 12,
+      "situacion": "Vendedor de TV insistente; el receptor desconfía y el vendedor da número de referencia y lo deriva al 0800.",
+      "vecino_coseno": "ENT-L-VENTAS-006",
+      "coseno": 0.466,
+      "vecino_cobertura": "ENT-L-VENTAS-006",
+      "cobertura": 0.582,
+      "reescritura_declarada": "LEG-CC-03",
+      "mismo_numero_en_grupo": [
+        "ENT-L-VENTAS-006"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E14a"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-007",
+      "escenario": "E15",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 27,
+      "situacion": "Una concesionaria hace el seguimiento de una consulta web por una pick-up, precalifica el crédito con DNI e ingresos aproximados y manda la cotización por mail.",
+      "vecino_coseno": "LEG2-VE-01",
+      "coseno": 0.449,
+      "vecino_cobertura": "LEG2-VE-01",
+      "cobertura": 0.593,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E15a"
+    },
+    {
+      "case_id": "LEG-VE-01",
+      "escenario": "E15",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 12,
+      "situacion": "Concesionaria hace seguimiento a una consulta que el cliente dejó en la web.",
+      "vecino_coseno": "LEG2-VE-01",
+      "coseno": 0.347,
+      "vecino_cobertura": "LEG2-VE-01",
+      "cobertura": 0.323,
+      "reescritura_declarada": "LEG2-VE-01",
+      "mismo_numero_en_grupo": [
+        "LEG2-VE-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E15b"
+    },
+    {
+      "case_id": "LEG2-VE-01",
+      "escenario": "E15",
+      "tamano": 3,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 12,
+      "situacion": "Concesionaria hace seguimiento de una consulta web y ofrece precalificar el crédito con el DNI.",
+      "vecino_coseno": "ENT-L-VENTAS-007",
+      "coseno": 0.449,
+      "vecino_cobertura": "ENT-L-VENTAS-007",
+      "cobertura": 0.593,
+      "reescritura_declarada": "LEG-VE-01",
+      "mismo_numero_en_grupo": [
+        "LEG-VE-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E15a"
+    },
+    {
+      "case_id": "ENT-L-BANCO-005",
+      "escenario": "E16",
+      "tamano": 2,
+      "familia": "banco",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 22,
+      "situacion": "La tarjeta de débito de un cliente se usó en un cajero de otra provincia; el banco valida documento, la bloquea y confirma la dirección para mandar la reposición.",
+      "vecino_coseno": "LEG2-BA-05",
+      "coseno": 0.355,
+      "vecino_cobertura": "LEG2-BA-05",
+      "cobertura": 0.437,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-BA-05"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E16"
+    },
+    {
+      "case_id": "LEG2-BA-05",
+      "escenario": "E16",
+      "tamano": 2,
+      "familia": "banco",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 12,
+      "situacion": "El banco detecta uso de la tarjeta en otra provincia y confirma la dirección para enviar la reposición.",
+      "vecino_coseno": "ENT-L-BANCO-005",
+      "coseno": 0.355,
+      "vecino_cobertura": "ENT-L-BANCO-005",
+      "cobertura": 0.437,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-BANCO-005"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E16"
+    },
+    {
+      "case_id": "ENT-L-DELIVERY-006",
+      "escenario": "E17",
+      "tamano": 2,
+      "familia": "delivery",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 26,
+      "situacion": "El flete de una mueblería coordina la entrega de un placard, confirma dirección, piso y ascensor, y pide nombre y DNI del hermano que lo va a recibir.",
+      "vecino_coseno": "LEG2-CO-06",
+      "coseno": 0.372,
+      "vecino_cobertura": "LEG2-CO-06",
+      "cobertura": 0.496,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-CO-06"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E17"
+    },
+    {
+      "case_id": "LEG2-CO-06",
+      "escenario": "E17",
+      "tamano": 2,
+      "familia": "delivery",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 12,
+      "situacion": "Flete de una mueblería coordina la entrega y pide datos de quien recibe.",
+      "vecino_coseno": "ENT-L-DELIVERY-006",
+      "coseno": 0.372,
+      "vecino_cobertura": "ENT-L-DELIVERY-006",
+      "cobertura": 0.496,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-DELIVERY-006"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E17"
+    },
+    {
+      "case_id": "ENT-L-ENCUESTA-002",
+      "escenario": "E18",
+      "tamano": 2,
+      "familia": "encuesta",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 36,
+      "situacion": "Una consultora hace una encuesta anónima sobre transporte público; pide rango de edad, barrio y ocupación, y la persona pregunta para qué son los datos.",
+      "vecino_coseno": "LEG-EN-02",
+      "coseno": 0.469,
+      "vecino_cobertura": "LEG-EN-02",
+      "cobertura": 0.531,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-EN-02"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E18"
+    },
+    {
+      "case_id": "LEG-EN-02",
+      "escenario": "E18",
+      "tamano": 2,
+      "familia": "encuesta",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 16,
+      "situacion": "Consultora hace una encuesta anónima sobre transporte público.",
+      "vecino_coseno": "ENT-L-ENCUESTA-002",
+      "coseno": 0.469,
+      "vecino_cobertura": "ENT-L-ENCUESTA-002",
+      "cobertura": 0.531,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-ENCUESTA-002"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E18"
+    },
+    {
+      "case_id": "ENT-L-ENCUESTA-004",
+      "escenario": "E19",
+      "tamano": 2,
+      "familia": "encuesta",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 21,
+      "situacion": "La obra social hace una encuesta de atención a una afiliada, valida con el documento y le menciona un código para completar una encuesta más larga en la web.",
+      "vecino_coseno": "LEG2-EN-04",
+      "coseno": 0.619,
+      "vecino_cobertura": "LEG2-EN-04",
+      "cobertura": 0.72,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-EN-04"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E19"
+    },
+    {
+      "case_id": "LEG2-EN-04",
+      "escenario": "E19",
+      "tamano": 2,
+      "familia": "encuesta",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 12,
+      "situacion": "Obra social hace una encuesta de atención y valida al afiliado con el DNI.",
+      "vecino_coseno": "ENT-L-ENCUESTA-004",
+      "coseno": 0.619,
+      "vecino_cobertura": "ENT-L-ENCUESTA-004",
+      "cobertura": 0.72,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-ENCUESTA-004"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E19"
+    },
+    {
+      "case_id": "ENT-L-ENCUESTA-005",
+      "escenario": "E20",
+      "tamano": 2,
+      "familia": "encuesta",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 21,
+      "situacion": "La municipalidad hace una encuesta sobre la recolección de residuos, pide calle y altura para ubicar la zona y anota un reclamo por bolsas rotas.",
+      "vecino_coseno": "LEG2-EN-05",
+      "coseno": 0.535,
+      "vecino_cobertura": "LEG2-EN-05",
+      "cobertura": 0.691,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-EN-05"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E20b"
+    },
+    {
+      "case_id": "LEG2-EN-05",
+      "escenario": "E20",
+      "tamano": 2,
+      "familia": "encuesta",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 12,
+      "situacion": "La municipalidad encuesta sobre la recolección de residuos y pide la calle y altura.",
+      "vecino_coseno": "ENT-L-ENCUESTA-005",
+      "coseno": 0.535,
+      "vecino_cobertura": "ENT-L-ENCUESTA-005",
+      "cobertura": 0.691,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-ENCUESTA-005"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E20a"
+    },
+    {
+      "case_id": "ENT-L-MEDICO-003",
+      "escenario": "E21",
+      "tamano": 2,
+      "familia": "medico",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 20,
+      "situacion": "El laboratorio confirma un turno de extracción, valida el documento, recuerda el ayuno y le dice al paciente su número de turno.",
+      "vecino_coseno": "LEG-TU-03",
+      "coseno": 0.43,
+      "vecino_cobertura": "LEG-TU-03",
+      "cobertura": 0.435,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-TU-03"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E21b"
+    },
+    {
+      "case_id": "LEG-TU-03",
+      "escenario": "E21",
+      "tamano": 2,
+      "familia": "medico",
+      "tipo_legitima": "cotidiana",
+      "lineas": 9,
+      "situacion": "Laboratorio de análisis clínicos confirma turno y recuerda el ayuno.",
+      "vecino_coseno": "ENT-L-MEDICO-003",
+      "coseno": 0.43,
+      "vecino_cobertura": "ENT-L-MEDICO-003",
+      "cobertura": 0.435,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-MEDICO-003"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E21a"
+    },
+    {
+      "case_id": "ENT-L-MEDICO-004",
+      "escenario": "E22",
+      "tamano": 2,
+      "familia": "medico",
+      "tipo_legitima": "cotidiana",
+      "lineas": 20,
+      "situacion": "La veterinaria recuerda el turno de la vacuna antirrábica del perro y la dueña pregunta por el costo y el ayuno.",
+      "vecino_coseno": "LEG2-TU-05",
+      "coseno": 0.447,
+      "vecino_cobertura": "LEG2-TU-05",
+      "cobertura": 0.729,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E22"
+    },
+    {
+      "case_id": "LEG2-TU-05",
+      "escenario": "E22",
+      "tamano": 2,
+      "familia": "medico",
+      "tipo_legitima": "cotidiana",
+      "lineas": 8,
+      "situacion": "Veterinaria recuerda el turno de vacunación de la mascota.",
+      "vecino_coseno": "ENT-L-MEDICO-004",
+      "coseno": 0.447,
+      "vecino_cobertura": "ENT-L-MEDICO-004",
+      "cobertura": 0.729,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico"
+      ],
+      "escenario_control": "E22"
+    },
+    {
+      "case_id": "ENT-L-SOPORTE-001",
+      "escenario": "E23",
+      "tamano": 2,
+      "familia": "soporte",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 26,
+      "situacion": "El soporte del proveedor de internet llama por un reclamo de falta de servicio, valida al titular, diagnostica el módem por teléfono, agenda un técnico y da un código de visita para reconocerlo.",
+      "vecino_coseno": "LEG-ST-01",
+      "coseno": 0.332,
+      "vecino_cobertura": "LEG-ST-01",
+      "cobertura": 0.339,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG-ST-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E23b"
+    },
+    {
+      "case_id": "LEG-ST-01",
+      "escenario": "E23",
+      "tamano": 2,
+      "familia": "soporte",
+      "tipo_legitima": "cotidiana",
+      "lineas": 13,
+      "situacion": "Soporte del proveedor de internet llama por un reclamo que el cliente hizo y agenda un técnico.",
+      "vecino_coseno": "ENT-L-SOPORTE-001",
+      "coseno": 0.332,
+      "vecino_cobertura": "ENT-L-SOPORTE-001",
+      "cobertura": 0.339,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-SOPORTE-001"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E23a"
+    },
+    {
+      "case_id": "ENT-L-SOPORTE-004",
+      "escenario": "E24",
+      "tamano": 2,
+      "familia": "soporte",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 20,
+      "situacion": "La empresa de aire acondicionado coordina la instalación de un split comprado, pide dirección completa, piso, entre calles y si hay balcón.",
+      "vecino_coseno": "LEG2-ST-04",
+      "coseno": 0.575,
+      "vecino_cobertura": "LEG2-ST-04",
+      "cobertura": 0.742,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-ST-04"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E24"
+    },
+    {
+      "case_id": "LEG2-ST-04",
+      "escenario": "E24",
+      "tamano": 2,
+      "familia": "soporte",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 12,
+      "situacion": "Empresa de aire acondicionado confirma dirección, piso y entre calles para la instalación.",
+      "vecino_coseno": "ENT-L-SOPORTE-004",
+      "coseno": 0.575,
+      "vecino_cobertura": "ENT-L-SOPORTE-004",
+      "cobertura": 0.742,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-SOPORTE-004"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E24"
+    },
+    {
+      "case_id": "ENT-L-TRAMITE-002",
+      "escenario": "E25",
+      "tamano": 2,
+      "familia": "tramite",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 20,
+      "situacion": "El centro de licencias de conducir confirma un turno de renovación, valida DNI y fecha de nacimiento y le recuerda los requisitos y el pago en el centro.",
+      "vecino_coseno": "LEG2-TU-06",
+      "coseno": 0.503,
+      "vecino_cobertura": "LEG2-TU-06",
+      "cobertura": 0.655,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico",
+        "tramite"
+      ],
+      "escenario_control": "E25"
+    },
+    {
+      "case_id": "LEG2-TU-06",
+      "escenario": "E25",
+      "tamano": 2,
+      "familia": "medico",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 10,
+      "situacion": "Centro de licencias de conducir confirma el turno con DNI y fecha de nacimiento.",
+      "vecino_coseno": "ENT-L-TRAMITE-002",
+      "coseno": 0.503,
+      "vecino_cobertura": "ENT-L-TRAMITE-002",
+      "cobertura": 0.655,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "medico",
+        "tramite"
+      ],
+      "escenario_control": "E25"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-005",
+      "escenario": "E26",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 25,
+      "situacion": "Una nueva operadora llama para terminar una portabilidad que el cliente empezó en la web; valida DNI y mail y le explica que el PIN de portabilidad lo carga él, no se lo dicta al agente.",
+      "vecino_coseno": "LEG2-CC-05",
+      "coseno": 0.43,
+      "vecino_cobertura": "LEG2-CC-05",
+      "cobertura": 0.561,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "LEG2-CC-05"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E26"
+    },
+    {
+      "case_id": "LEG2-CC-05",
+      "escenario": "E26",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 12,
+      "situacion": "Nueva operadora ofrece portabilidad y explica que el PIN lo carga el cliente en la web.",
+      "vecino_coseno": "ENT-L-VENTAS-005",
+      "coseno": 0.43,
+      "vecino_cobertura": "ENT-L-VENTAS-005",
+      "cobertura": 0.561,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [
+        "ENT-L-VENTAS-005"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E26"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-008",
+      "escenario": "E27",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 20,
+      "situacion": "Una vendedora de planes de ahorro llama en frío, insiste dos veces con los cupos del mes y pide nombre y DNI para reservar uno; la persona se niega y la vendedora la invita a la oficina.",
+      "vecino_coseno": "LEG-VE-02",
+      "coseno": 0.325,
+      "vecino_cobertura": "LEG-VE-02",
+      "cobertura": 0.319,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E27b"
+    },
+    {
+      "case_id": "LEG-VE-02",
+      "escenario": "E27",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 9,
+      "situacion": "Vendedor de plan de ahorro llama en frío; el receptor no está interesado.",
+      "vecino_coseno": "ENT-L-VENTAS-008",
+      "coseno": 0.325,
+      "vecino_cobertura": "ENT-L-VENTAS-008",
+      "cobertura": 0.319,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E27a"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-009",
+      "escenario": "E28",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 32,
+      "situacion": "El vendedor llama con la tasación del usado de un cliente, confirma patente y kilometraje, negocia el valor y le ofrece congelar el precio con una seña transferida a la cuenta de la concesionaria contra factura.",
+      "vecino_coseno": "LEG-VE-03",
+      "coseno": 0.269,
+      "vecino_cobertura": "LEG-VE-03",
+      "cobertura": 0.305,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E28b"
+    },
+    {
+      "case_id": "LEG-VE-03",
+      "escenario": "E28",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 9,
+      "situacion": "Vendedor llama para pasar la tasación del usado y la cotización del auto que el cliente fue a ver.",
+      "vecino_coseno": "ENT-L-VENTAS-009",
+      "coseno": 0.269,
+      "vecino_cobertura": "ENT-L-VENTAS-009",
+      "cobertura": 0.305,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E28a"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-010",
+      "escenario": "E29",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 26,
+      "situacion": "Una concesionaria de motos avisa que llegó la moto reservada, confirma DNI y domicilio para el patentamiento y le recuerda el código de reserva que ya le mandaron.",
+      "vecino_coseno": "LEG2-VE-04",
+      "coseno": 0.439,
+      "vecino_cobertura": "LEG2-VE-04",
+      "cobertura": 0.528,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E29"
+    },
+    {
+      "case_id": "LEG2-VE-04",
+      "escenario": "E29",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 12,
+      "situacion": "Concesionaria de motos confirma datos para el patentamiento y la entrega de la moto reservada.",
+      "vecino_coseno": "ENT-L-VENTAS-010",
+      "coseno": 0.439,
+      "vecino_cobertura": "ENT-L-VENTAS-010",
+      "cobertura": 0.528,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E29"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-011",
+      "escenario": "E30",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 21,
+      "situacion": "Una agencia de usados avisa a un cliente que entró un sedán parecido al que buscaba, le pregunta la zona y le ofrece llevárselo para probar.",
+      "vecino_coseno": "LEG2-VE-05",
+      "coseno": 0.491,
+      "vecino_cobertura": "LEG2-VE-05",
+      "cobertura": 0.613,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E30"
+    },
+    {
+      "case_id": "LEG2-VE-05",
+      "escenario": "E30",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 10,
+      "situacion": "Agencia de usados avisa que entró un auto parecido al que el cliente buscaba.",
+      "vecino_coseno": "ENT-L-VENTAS-011",
+      "coseno": 0.491,
+      "vecino_cobertura": "ENT-L-VENTAS-011",
+      "cobertura": 0.613,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E30"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-012",
+      "escenario": "E31",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "cotidiana",
+      "lineas": 16,
+      "situacion": "Una vendedora llama a un cliente que pidió el folleto de un SUV en un stand del shopping y confirma el mail; el cliente está en una reunión y la corta enseguida.",
+      "vecino_coseno": "LEG2-VE-06",
+      "coseno": 0.599,
+      "vecino_cobertura": "LEG2-VE-06",
+      "cobertura": 0.798,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E31"
+    },
+    {
+      "case_id": "LEG2-VE-06",
+      "escenario": "E31",
+      "tamano": 2,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 7,
+      "situacion": "El vendedor confirma el mail para mandar el folleto y el receptor está apurado.",
+      "vecino_coseno": "ENT-L-VENTAS-012",
+      "coseno": 0.599,
+      "vecino_cobertura": "ENT-L-VENTAS-012",
+      "cobertura": 0.798,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E31"
+    },
+    {
+      "case_id": "LEG-CO-01",
+      "escenario": "E32",
+      "tamano": 2,
+      "familia": "delivery",
+      "tipo_legitima": "cotidiana",
+      "lineas": 8,
+      "situacion": "Repartidor avisa que está llegando con un paquete y dice el nombre del destinatario.",
+      "vecino_coseno": "LEG2-CO-01",
+      "coseno": 0.573,
+      "vecino_cobertura": "LEG2-CO-01",
+      "cobertura": 0.533,
+      "reescritura_declarada": "LEG2-CO-01",
+      "mismo_numero_en_grupo": [
+        "LEG2-CO-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E32"
+    },
+    {
+      "case_id": "LEG2-CO-01",
+      "escenario": "E32",
+      "tamano": 2,
+      "familia": "delivery",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 9,
+      "situacion": "Repartidor confirma nombre y dirección y avisa que está llegando.",
+      "vecino_coseno": "LEG-CO-01",
+      "coseno": 0.573,
+      "vecino_cobertura": "LEG-CO-01",
+      "cobertura": 0.533,
+      "reescritura_declarada": "LEG-CO-01",
+      "mismo_numero_en_grupo": [
+        "LEG-CO-01"
+      ],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E32"
+    },
+    {
+      "case_id": "ENT-L-BANCO-004",
+      "escenario": "E33",
+      "tamano": 1,
+      "familia": "banco",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 35,
+      "situacion": "El banco retiene una transferencia grande a un CBU nuevo; la clienta la hizo para pagar la seña de un departamento y el banco pide DNI, nombre del destinatario y motivo antes de liberarla.",
+      "vecino_coseno": "ENT-L-BANCO-006",
+      "coseno": 0.129,
+      "vecino_cobertura": "ENT-L-BANCO-006",
+      "cobertura": 0.104,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E33"
+    },
+    {
+      "case_id": "ENT-L-BANCO-006",
+      "escenario": "E34",
+      "tamano": 1,
+      "familia": "banco",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 21,
+      "situacion": "El banco detecta que la app se vinculó a un celular nuevo; el cliente sí cambió de teléfono y empieza a leer el código de vinculación, pero la operadora lo frena.",
+      "vecino_coseno": "ENT-L-BANCO-004",
+      "coseno": 0.129,
+      "vecino_cobertura": "ENT-L-BANCO-004",
+      "cobertura": 0.104,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "banco"
+      ],
+      "escenario_control": "E34"
+    },
+    {
+      "case_id": "ENT-L-DELIVERY-001",
+      "escenario": "E35",
+      "tamano": 1,
+      "familia": "delivery",
+      "tipo_legitima": "cotidiana",
+      "lineas": 18,
+      "situacion": "El repartidor confirma nombre y dirección, pregunta por el perro y por quién va a recibir, y avisa que está llegando.",
+      "vecino_coseno": "LEG2-CO-01",
+      "coseno": 0.155,
+      "vecino_cobertura": "LEG2-CO-01",
+      "cobertura": 0.188,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E32"
+    },
+    {
+      "case_id": "ENT-L-DELIVERY-004",
+      "escenario": "E36",
+      "tamano": 1,
+      "familia": "delivery",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 21,
+      "situacion": "La sucursal del correo avisa que un paquete quedó retenido después de dos intentos de entrega, confirma el documento del destinatario y le da el número de seguimiento.",
+      "vecino_coseno": "ENT-L-ENCUESTA-006",
+      "coseno": 0.098,
+      "vecino_cobertura": "LEG2-EN-01",
+      "cobertura": 0.084,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E36"
+    },
+    {
+      "case_id": "ENT-L-DELIVERY-005",
+      "escenario": "E37",
+      "tamano": 1,
+      "familia": "delivery",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 20,
+      "situacion": "El repartidor avisa que sale con un pedido que tiene código de entrega; el comprador intenta decírselo por teléfono y el repartidor le pide mostrarlo en la puerta.",
+      "vecino_coseno": "ENT-L-DELIVERY-001",
+      "coseno": 0.105,
+      "vecino_cobertura": "ENT-L-DELIVERY-001",
+      "cobertura": 0.075,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "delivery"
+      ],
+      "escenario_control": "E37"
+    },
+    {
+      "case_id": "ENT-L-ENCUESTA-006",
+      "escenario": "E38",
+      "tamano": 1,
+      "familia": "encuesta",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 21,
+      "situacion": "El banco hace una encuesta de satisfacción a un cliente que fue a la sucursal; el cliente desconfía y el banco aclara que no pide datos de cuentas ni claves.",
+      "vecino_coseno": "LEG2-EN-01",
+      "coseno": 0.129,
+      "vecino_cobertura": "LEG2-EN-01",
+      "cobertura": 0.152,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "encuesta"
+      ],
+      "escenario_control": "E38"
+    },
+    {
+      "case_id": "ENT-L-SELECCION-001",
+      "escenario": "E39",
+      "tamano": 1,
+      "familia": "trabajo",
+      "tipo_legitima": "cotidiana",
+      "lineas": 18,
+      "situacion": "Una agencia de personal eventual llama a una postulante a auxiliar de depósito para la temporada de fiestas, le describe el puesto y la cita a una entrevista grupal el martes 10 a las 9, con el pedido de que confirme la asistencia en el día.",
+      "vecino_coseno": "ENT-L-MEDICO-002",
+      "coseno": 0.094,
+      "vecino_cobertura": "LEG-TU-01",
+      "cobertura": 0.103,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "trabajo"
+      ],
+      "escenario_control": "E39"
+    },
+    {
+      "case_id": "ENT-L-SELECCION-002",
+      "escenario": "E40",
+      "tamano": 1,
+      "familia": "trabajo",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 23,
+      "situacion": "Una consultora de recursos humanos llama a un postulante a analista contable semi senior para coordinar una entrevista por videollamada el jueves 12 a las 11 y avisarle que el mail que le mandó trae el link y el acceso a una evaluación online; cuando él ofrece leerle el código de acceso, ella lo frena.",
+      "vecino_coseno": "ENT-L-BANCO-006",
+      "coseno": 0.1,
+      "vecino_cobertura": "LEG2-ST-05",
+      "cobertura": 0.112,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "trabajo"
+      ],
+      "escenario_control": "E40"
+    },
+    {
+      "case_id": "ENT-L-SELECCION-003",
+      "escenario": "E41",
+      "tamano": 1,
+      "familia": "trabajo",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 32,
+      "situacion": "La responsable de Recursos Humanos de una distribuidora llama a un chofer de reparto recién contratado para avisarle que el preocupacional dio apto y confirmar sus datos para el alta antes de que empiece el lunes 16; él duda al dar el CUIL y ella le ofrece verificar llamando al conmutador de la empresa.",
+      "vecino_coseno": "ENT-L-BANCO-003",
+      "coseno": 0.104,
+      "vecino_cobertura": "LEG2-TU-06",
+      "cobertura": 0.114,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "trabajo"
+      ],
+      "escenario_control": "E41"
+    },
+    {
+      "case_id": "ENT-L-SOPORTE-005",
+      "escenario": "E42",
+      "tamano": 1,
+      "familia": "soporte",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 32,
+      "situacion": "Un técnico de soporte del sistema de facturación que el cliente contrató responde un ticket, le pide instalar el programa de asistencia remota desde la página oficial y dictarle el número de conexión para revisar el error.",
+      "vecino_coseno": "LEG2-ST-05",
+      "coseno": 0.109,
+      "vecino_cobertura": "LEG2-ST-05",
+      "cobertura": 0.136,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E42"
+    },
+    {
+      "case_id": "ENT-L-SOPORTE-006",
+      "escenario": "E43",
+      "tamano": 1,
+      "familia": "soporte",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 22,
+      "situacion": "Soporte de telefonía coordina el envío de un chip nuevo por una falla, pide documento y dirección y le explica que el PUK viene impreso con el chip.",
+      "vecino_coseno": "ENT-L-VENTAS-005",
+      "coseno": 0.123,
+      "vecino_cobertura": "LEG2-VE-06",
+      "cobertura": 0.088,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E43"
+    },
+    {
+      "case_id": "ENT-L-TRAMITE-001",
+      "escenario": "E44",
+      "tamano": 1,
+      "familia": "tramite",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 21,
+      "situacion": "La planta de revisión técnica confirma el turno de un auto, verifica la patente y le recuerda el código de turno que llegó por mail.",
+      "vecino_coseno": "ENT-L-TRAMITE-002",
+      "coseno": 0.101,
+      "vecino_cobertura": "LEG2-TU-01",
+      "cobertura": 0.095,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "tramite"
+      ],
+      "escenario_control": "E44"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-002",
+      "escenario": "E45",
+      "tamano": 1,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 23,
+      "situacion": "Una empresa de fibra óptica ofrece instalación y pide dirección exacta y DNI para ver factibilidad; el vecino duda de dar el DNI y le ofrecen cargarlo él por la web.",
+      "vecino_coseno": "LEG-CC-02",
+      "coseno": 0.123,
+      "vecino_cobertura": "LEG-CC-02",
+      "cobertura": 0.135,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E45"
+    },
+    {
+      "case_id": "ENT-L-VENTAS-003",
+      "escenario": "E46",
+      "tamano": 1,
+      "familia": "comercial",
+      "tipo_legitima": "pedido_razonable",
+      "lineas": 29,
+      "situacion": "La aseguradora del banco ofrece un seguro de hogar, confirma el domicilio, el tipo de vivienda y la cuenta donde se pagarían los reintegros.",
+      "vecino_coseno": "LEG2-CO-01",
+      "coseno": 0.104,
+      "vecino_cobertura": "LEG2-CO-01",
+      "cobertura": 0.177,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "comercial"
+      ],
+      "escenario_control": "E46"
+    },
+    {
+      "case_id": "LEG2-ST-05",
+      "escenario": "E47",
+      "tamano": 1,
+      "familia": "soporte",
+      "tipo_legitima": "mencion_sin_pedido",
+      "lineas": 9,
+      "situacion": "Soporte de una tienda online responde un ticket y menciona el link para cambiar la contraseña.",
+      "vecino_coseno": "ENT-L-SOPORTE-005",
+      "coseno": 0.109,
+      "vecino_cobertura": "ENT-L-SOPORTE-005",
+      "cobertura": 0.136,
+      "reescritura_declarada": null,
+      "mismo_numero_en_grupo": [],
+      "grupo_encadenado": false,
+      "familias_del_grupo": [
+        "soporte"
+      ],
+      "escenario_control": "E47"
+    }
+  ]
+}
