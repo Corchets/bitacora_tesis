@@ -1,0 +1,958 @@
+{
+ "_meta": {
+  "fecha": "2026-11-10",
+  "estado": "propuesta sin discutir: falta que Mateo la acepte",
+  "para": "#143, revisión de producto: qué legítimas de alcance-140 no deberían avisar",
+  "metodo": "Lectura de las 94 transcripciones con roles (PROTEGIDA/OTRA), sin referencia, prompts, corridas ni resultados, con la política de POLITICA.md escrita antes. La razón cita la línea de la conversación.",
+  "etiquetas": {
+   "no_avisar": "Un aviso es una falsa alarma: la llamada no le pide a PROTEGIDA nada que se pueda perder.",
+   "tolerable": "Avisar o no avisar son aceptables: el aviso coincide con un consejo oficial aunque la llamada sea legítima. No cuenta como falsa alarma ni se exige.",
+   "avisar": "Debería avisar: la llamada pide un acto que las fuentes dicen no aceptar de quien llamó. Como legítima está mal anotada para medir falsas alarmas."
+  },
+  "ejemplar": "Marca de realismo: OTRA frena un dictado, enseña seguridad o propone cortar y llamar sin que haga falta. No cambia la etiqueta."
+ },
+ "casos": {
+  "ENT-L-BANCO-001": {
+   "escenario": "E01",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni",
+    "fecha_nacimiento"
+   ],
+   "razon": "A nombre del banco por un consumo; pide el DNI y la fecha de nacimiento antes de decir el motivo (l. 3). No pide credenciales ni actos.",
+   "ejemplar": "enseña: «ese código no se lo digas a nadie» (l. 19)"
+  },
+  "ENT-L-BANCO-002": {
+   "escenario": "E02",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni"
+   ],
+   "razon": "A nombre del banco por ingresos desde otro celular; pide el DNI (l. 6). PROTEGIDA se niega y OTRA le dice que corte y llame (l. 12).",
+   "ejemplar": "propone cortar y llamar (l. 12)"
+  },
+  "ENT-L-BANCO-003": {
+   "escenario": "E03",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "nombre",
+    "dni_parcial"
+   ],
+   "razon": "A nombre del banco; pide el nombre completo y los últimos tres números del documento (l. 3 y 5). Libera una compra que PROTEGIDA reconoce.",
+   "ejemplar": null
+  },
+  "ENT-L-BANCO-004": {
+   "escenario": "E33",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni"
+   ],
+   "razon": "A nombre del banco; pide el DNI (l. 4), el destinatario y el motivo de una transferencia que PROTEGIDA ya había hecho (l. 10–12), y la libera.",
+   "ejemplar": "enseña: «nunca le vamos a pedir el token» (l. 18)"
+  },
+  "ENT-L-BANCO-005": {
+   "escenario": "E16",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni"
+   ],
+   "razon": "A nombre del banco por una extracción; pide el documento (l. 3). Bloquea la tarjeta y confirma el domicilio que ya tiene.",
+   "ejemplar": "enseña: «ese PIN no se lo diga a nadie» (l. 19)"
+  },
+  "ENT-L-BANCO-006": {
+   "escenario": "E34",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni"
+   ],
+   "razon": "A nombre del banco por una vinculación nueva; pide el DNI (l. 4). PROTEGIDA empieza a dictar un código y OTRA la frena (l. 8).",
+   "ejemplar": "frena el dictado de un código (l. 8)"
+  },
+  "ENT-L-DELIVERY-001": {
+   "escenario": "E35",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor coordina la entrega. El documento se dice al firmar, en la puerta (l. 15).",
+   "ejemplar": null
+  },
+  "ENT-L-DELIVERY-002": {
+   "escenario": "E04",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor busca a quién dejarle el pedido. El DNI de quien recibe lo pide en mano (l. 8–10).",
+   "ejemplar": null
+  },
+  "ENT-L-DELIVERY-003": {
+   "escenario": "E05",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor pide referencias para encontrar la casa. Nada para pagar (l. 18).",
+   "ejemplar": null
+  },
+  "ENT-L-DELIVERY-004": {
+   "escenario": "E36",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni"
+   ],
+   "razon": "La sucursal del correo avisa que hay un paquete para retirar. Pide el documento por teléfono (l. 8); no cobra nada (l. 14).",
+   "ejemplar": "enseña: «nunca por transferencia ni por un link» (l. 14)"
+  },
+  "ENT-L-DELIVERY-005": {
+   "escenario": "E37",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor avisa que sale. PROTEGIDA quiere dictarle el código de entrega y él no la deja (l. 7).",
+   "ejemplar": "frena el dictado de un código (l. 7)"
+  },
+  "ENT-L-DELIVERY-006": {
+   "escenario": "E17",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni_tercero"
+   ],
+   "razon": "El flete coordina la entrega de un mueble. Pide el DNI del hermano para el remito (l. 18); el recargo se paga al entregar, contra recibo (l. 12).",
+   "ejemplar": null
+  },
+  "ENT-L-ENCUESTA-001": {
+   "escenario": "E06",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta de satisfacción tras una visita técnica. Confirma un mail que ya tiene (l. 13–15).",
+   "ejemplar": null
+  },
+  "ENT-L-ENCUESTA-002": {
+   "escenario": "E18",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta anónima de transporte: rango de edad, barrio, ocupación. El mail es opcional (l. 34).",
+   "ejemplar": null
+  },
+  "ENT-L-ENCUESTA-003": {
+   "escenario": "E07",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta de mercado. PROTEGIDA pide que la saquen del panel (l. 11–12).",
+   "ejemplar": null
+  },
+  "ENT-L-ENCUESTA-004": {
+   "escenario": "E19",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "encuesta",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Encuesta de la obra social que pide el documento «para validar que sos afiliada» (l. 6). PROTEGIDA lo cuestiona (l. 7): una encuesta no necesita el DNI.",
+   "ejemplar": "enseña: el código «a mí no me lo tenés que decir» (l. 18)"
+  },
+  "ENT-L-ENCUESTA-005": {
+   "escenario": "E20",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta municipal de residuos: calle y altura, y un nombre de pila para un reclamo (l. 19).",
+   "ejemplar": null
+  },
+  "ENT-L-ENCUESTA-006": {
+   "escenario": "E38",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta del banco tras una visita a la sucursal. Solo pide una opinión (l. 6).",
+   "ejemplar": "abre aclarando que no va a pedir claves ni códigos (l. 6)"
+  },
+  "ENT-L-MEDICO-001": {
+   "escenario": "E08",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni",
+    "afiliado"
+   ],
+   "razon": "Confirma un turno. Pide el DNI y el número de afiliado para la admisión (l. 5 y 9).",
+   "ejemplar": null
+  },
+  "ENT-L-MEDICO-002": {
+   "escenario": "E09",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Reprograma un turno que suspendió la odontóloga.",
+   "ejemplar": null
+  },
+  "ENT-L-MEDICO-003": {
+   "escenario": "E21",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Confirma un turno de laboratorio. Pide el documento (l. 3).",
+   "ejemplar": null
+  },
+  "ENT-L-MEDICO-004": {
+   "escenario": "E22",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Recuerda el turno de una vacuna en la veterinaria.",
+   "ejemplar": null
+  },
+  "ENT-L-SELECCION-001": {
+   "escenario": "E39",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Una agencia cita a una entrevista por una postulación que PROTEGIDA reconoce (l. 5–7).",
+   "ejemplar": null
+  },
+  "ENT-L-SELECCION-002": {
+   "escenario": "E40",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Una consultora coordina una entrevista. PROTEGIDA ofrece leer un código de acceso y OTRA no la deja (l. 13).",
+   "ejemplar": "frena el dictado de un código (l. 13)"
+  },
+  "ENT-L-SELECCION-003": {
+   "escenario": "E41",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "tomar_datos",
+   "pide": [
+    "nombre",
+    "cuil",
+    "fecha_nacimiento",
+    "domicilio"
+   ],
+   "razon": "Alta laboral: nombre completo, CUIL, fecha de nacimiento y domicilio (l. 8–20). PROTEGIDA reconoce la entrevista, pero duda (l. 11); es el perfil completo de identidad, dictado a quien llamó.",
+   "ejemplar": "propone cortar y llamar al conmutador (l. 12)"
+  },
+  "ENT-L-SOPORTE-001": {
+   "escenario": "E23",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Soporte por un reclamo de PROTEGIDA. Pide el DNI (l. 3) y da un código de visita (l. 19): darlo no es pedirlo.",
+   "ejemplar": null
+  },
+  "ENT-L-SOPORTE-002": {
+   "escenario": "E10",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Service por una orden de PROTEGIDA. Pide el DNI del titular de la factura (l. 6).",
+   "ejemplar": null
+  },
+  "ENT-L-SOPORTE-003": {
+   "escenario": "E11",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [
+    "dni"
+   ],
+   "razon": "El local avisa que la notebook está lista y ofrece un cargador. Pide el documento que dejó (l. 15); se paga en el mostrador (l. 17).",
+   "ejemplar": null
+  },
+  "ENT-L-SOPORTE-004": {
+   "escenario": "E24",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [],
+   "razon": "Coordina la instalación de un aire: dirección y balcón.",
+   "ejemplar": null
+  },
+  "ENT-L-SOPORTE-005": {
+   "escenario": "E42",
+   "en_alcance_91": false,
+   "etiqueta": "avisar",
+   "intencion": "acto_riesgo",
+   "pide": [
+    "acceso_remoto",
+    "codigo_conexion"
+   ],
+   "razon": "Soporte por un ticket de PROTEGIDA: le hace descargar un programa de asistencia remota (l. 11) y leerle el número de conexión (l. 13), y con la sesión abierta ella escribe su clave fiscal (l. 23). Es el pedido que las fuentes dicen no aceptar de quien llamó (S28).",
+   "ejemplar": null
+  },
+  "ENT-L-SOPORTE-006": {
+   "escenario": "E43",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Soporte por un reclamo de PROTEGIDA; le mandan un chip nuevo a su domicilio. Pide el documento (l. 8).",
+   "ejemplar": "enseña: el PUK «no se lo des a nadie» (l. 16)"
+  },
+  "ENT-L-TRAMITE-001": {
+   "escenario": "E44",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "La planta de revisión técnica confirma un turno. No se paga nada antes (l. 17).",
+   "ejemplar": null
+  },
+  "ENT-L-TRAMITE-002": {
+   "escenario": "E25",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni",
+    "fecha_nacimiento"
+   ],
+   "razon": "La municipalidad confirma un turno de licencia. Pide el DNI y la fecha de nacimiento (l. 4); PROTEGIDA duda (l. 5) y OTRA ofrece confirmarlo por la web.",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-001": {
+   "escenario": "E12",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Oferta de un plan. Pide el DNI para cargar el cambio (l. 13); el código lo carga PROTEGIDA en la app (l. 17).",
+   "ejemplar": "enseña: el código «a mí no me lo tenés que decir» (l. 17)"
+  },
+  "ENT-L-VENTAS-002": {
+   "escenario": "E45",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "nombre",
+    "dni"
+   ],
+   "razon": "Oferta de fibra. Pide nombre y DNI para la solicitud (l. 14); PROTEGIDA no da el DNI y OTRA la manda a la web.",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-003": {
+   "escenario": "E46",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta de un seguro. Confirma datos que ya tiene; no pide tarjeta (l. 21) y la alta la hace PROTEGIDA en el home banking (l. 25).",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-004": {
+   "escenario": "E13",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta que PROTEGIDA corta; pide que lo saquen de la base.",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-005": {
+   "escenario": "E26",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Portabilidad que PROTEGIDA empezó en la web. Pide el DNI (l. 5); PROTEGIDA ofrece el PIN y OTRA no la deja (l. 15).",
+   "ejemplar": "frena el dictado de un código (l. 15)"
+  },
+  "ENT-L-VENTAS-006": {
+   "escenario": "E14",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta de un pack. Ante la duda, OTRA la manda al 0800 de la factura (l. 14).",
+   "ejemplar": "propone llamar al 0800 (l. 14)"
+  },
+  "ENT-L-VENTAS-007": {
+   "escenario": "E15",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "nombre",
+    "dni",
+    "ingresos"
+   ],
+   "razon": "La concesionaria, por una consulta de PROTEGIDA, precalifica un crédito: nombre, DNI e ingreso (l. 11). Se firma en el salón (l. 27).",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-008": {
+   "escenario": "E27",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "vender",
+   "pide": [
+    "nombre",
+    "dni"
+   ],
+   "razon": "Venta en frío de un plan de ahorro, con «cupos pocos» (l. 10); pide nombre y DNI para «reservar» (l. 12). PROTEGIDA no lo da.",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-009": {
+   "escenario": "E28",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "vender",
+   "pide": [
+    "transferencia"
+   ],
+   "razon": "La concesionaria ofrece asegurar el precio con una seña de 500 mil pesos, en caja o por transferencia (l. 15–19). No apura y PROTEGIDA no transfiere, pero es plata que se le pide a quien atendió.",
+   "ejemplar": "enseña: «nunca a nombre de una persona» (l. 19)"
+  },
+  "ENT-L-VENTAS-010": {
+   "escenario": "E29",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "dni",
+    "domicilio"
+   ],
+   "razon": "La moto que PROTEGIDA reservó llegó. Pide el DNI y el domicilio para el patentamiento (l. 8–10); el saldo se paga en caja.",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-011": {
+   "escenario": "E30",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Una agencia ofrece un usado por una búsqueda de PROTEGIDA; coordinan una visita.",
+   "ejemplar": null
+  },
+  "ENT-L-VENTAS-012": {
+   "escenario": "E31",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Manda un folleto que PROTEGIDA pidió.",
+   "ejemplar": null
+  },
+  "LEG-BA-01": {
+   "escenario": "E01",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [],
+   "razon": "A nombre del banco por un consumo; no pide nada y bloquea la tarjeta (l. 5–7).",
+   "ejemplar": "abre aclarando que no va a pedir claves ni códigos (l. 3)"
+  },
+  "LEG-BA-02": {
+   "escenario": "E02",
+   "en_alcance_91": true,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [],
+   "razon": "A nombre del banco por inicios de sesión; no pide nada. PROTEGIDA desconfía y OTRA le dice que corte y llame (l. 5).",
+   "ejemplar": "propone cortar y llamar (l. 5)"
+  },
+  "LEG-BA-03": {
+   "escenario": "E03",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [],
+   "razon": "A nombre del banco; solo pregunta si reconoce una compra (l. 3).",
+   "ejemplar": null
+  },
+  "LEG-CC-01": {
+   "escenario": "E12",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta de un plan; manda las condiciones por mail.",
+   "ejemplar": null
+  },
+  "LEG-CC-02": {
+   "escenario": "E13",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta que PROTEGIDA rechaza.",
+   "ejemplar": null
+  },
+  "LEG-CC-03": {
+   "escenario": "E14",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta de un pack; ante la duda, la manda al 0800.",
+   "ejemplar": "propone llamar al 0800 (l. 7)"
+  },
+  "LEG-CO-01": {
+   "escenario": "E32",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor avisa que está a dos cuadras.",
+   "ejemplar": null
+  },
+  "LEG-CO-02": {
+   "escenario": "E04",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor deja el pedido al encargado.",
+   "ejemplar": null
+  },
+  "LEG-CO-03": {
+   "escenario": "E05",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor pide una referencia para llegar.",
+   "ejemplar": null
+  },
+  "LEG-EN-01": {
+   "escenario": "E06",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta de satisfacción de tres preguntas.",
+   "ejemplar": null
+  },
+  "LEG-EN-02": {
+   "escenario": "E18",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta anónima de transporte.",
+   "ejemplar": null
+  },
+  "LEG-EN-03": {
+   "escenario": "E07",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta que PROTEGIDA rechaza porque maneja.",
+   "ejemplar": null
+  },
+  "LEG-ST-01": {
+   "escenario": "E23",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [],
+   "razon": "Soporte por un reclamo de PROTEGIDA; agenda un técnico.",
+   "ejemplar": null
+  },
+  "LEG-ST-02": {
+   "escenario": "E10",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [],
+   "razon": "Service por una orden de PROTEGIDA; coordina la visita.",
+   "ejemplar": null
+  },
+  "LEG-ST-03": {
+   "escenario": "E11",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [],
+   "razon": "El local avisa que la notebook está lista; se paga en el mostrador.",
+   "ejemplar": null
+  },
+  "LEG-TU-01": {
+   "escenario": "E08",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Confirma un turno médico.",
+   "ejemplar": null
+  },
+  "LEG-TU-02": {
+   "escenario": "E09",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Reprograma un turno.",
+   "ejemplar": null
+  },
+  "LEG-TU-03": {
+   "escenario": "E21",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Confirma un turno de laboratorio y recuerda el ayuno.",
+   "ejemplar": null
+  },
+  "LEG-VE-01": {
+   "escenario": "E15",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "La concesionaria cuenta la financiación por una consulta de PROTEGIDA.",
+   "ejemplar": null
+  },
+  "LEG-VE-02": {
+   "escenario": "E27",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta de un plan de ahorro que PROTEGIDA rechaza; la suscripción es en la oficina.",
+   "ejemplar": null
+  },
+  "LEG-VE-03": {
+   "escenario": "E28",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Tasación de un usado; la seña se hace en el salón.",
+   "ejemplar": "enseña: «nada por transferencia a nadie» (l. 7)"
+  },
+  "LEG2-BA-01": {
+   "escenario": "E01",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni",
+    "fecha_nacimiento"
+   ],
+   "razon": "A nombre del banco; pide el DNI y la fecha de nacimiento antes de decir el motivo (l. 4).",
+   "ejemplar": "enseña: el código «no se lo das a nadie» (l. 10)"
+  },
+  "LEG2-BA-02": {
+   "escenario": "E02",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni"
+   ],
+   "razon": "A nombre del banco por ingresos desde un dispositivo nuevo; pide el DNI (l. 4). PROTEGIDA se niega y OTRA le dice que corte y llame (l. 6).",
+   "ejemplar": "propone cortar y llamar (l. 6)"
+  },
+  "LEG2-BA-03": {
+   "escenario": "E03",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "nombre",
+    "dni_parcial"
+   ],
+   "razon": "A nombre del banco; pide el nombre completo y los últimos tres números del DNI (l. 2 y 4).",
+   "ejemplar": null
+  },
+  "LEG2-BA-05": {
+   "escenario": "E16",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "advertir",
+   "pide": [
+    "dni"
+   ],
+   "razon": "A nombre del banco por una extracción; pide el DNI (l. 4) y confirma el domicilio que ya tiene.",
+   "ejemplar": null
+  },
+  "LEG2-CC-01": {
+   "escenario": "E12",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Oferta de un plan. Pide el DNI para cargarlo (l. 8); el código lo carga PROTEGIDA (l. 12).",
+   "ejemplar": "enseña: el código «a mí no me lo tenés que decir» (l. 12)"
+  },
+  "LEG2-CC-04": {
+   "escenario": "E13",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta que PROTEGIDA corta; pide que lo saquen de la base.",
+   "ejemplar": null
+  },
+  "LEG2-CC-05": {
+   "escenario": "E26",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Portabilidad que PROTEGIDA empezó en la web. Pide el DNI (l. 6); el PIN lo carga ella (l. 10).",
+   "ejemplar": "enseña: el PIN «no me lo pases a mí» (l. 10)"
+  },
+  "LEG2-CC-06": {
+   "escenario": "E14",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Oferta de un pack; la manda al 0800.",
+   "ejemplar": "propone llamar al 0800 (l. 6)"
+  },
+  "LEG2-CO-01": {
+   "escenario": "E32",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor confirma la dirección y avisa que llega.",
+   "ejemplar": null
+  },
+  "LEG2-CO-02": {
+   "escenario": "E04",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor deja el pedido al encargado; el DNI se lo pide a él (l. 6–8).",
+   "ejemplar": null
+  },
+  "LEG2-CO-03": {
+   "escenario": "E05",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "El repartidor pide una referencia para llegar.",
+   "ejemplar": null
+  },
+  "LEG2-CO-06": {
+   "escenario": "E17",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni_tercero"
+   ],
+   "razon": "El flete coordina la entrega. Pide el DNI del hermano para el remito (l. 10).",
+   "ejemplar": null
+  },
+  "LEG2-EN-01": {
+   "escenario": "E06",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta de satisfacción de tres preguntas.",
+   "ejemplar": null
+  },
+  "LEG2-EN-03": {
+   "escenario": "E07",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta que PROTEGIDA rechaza porque maneja.",
+   "ejemplar": null
+  },
+  "LEG2-EN-04": {
+   "escenario": "E19",
+   "en_alcance_91": false,
+   "etiqueta": "tolerable",
+   "intencion": "encuesta",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Encuesta de la obra social que pide el DNI «para validar que sos afiliada» (l. 4): una encuesta no necesita el DNI.",
+   "ejemplar": "enseña: el código «a mí no me lo tenés que decir» (l. 12)"
+  },
+  "LEG2-EN-05": {
+   "escenario": "E20",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "encuesta",
+   "pide": [],
+   "razon": "Encuesta municipal de residuos: calle y altura.",
+   "ejemplar": null
+  },
+  "LEG2-ST-02": {
+   "escenario": "E10",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Service por una orden de PROTEGIDA. Pide el DNI del titular de la factura (l. 6).",
+   "ejemplar": null
+  },
+  "LEG2-ST-03": {
+   "escenario": "E11",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [
+    "dni"
+   ],
+   "razon": "El local avisa que la notebook está lista. Pide el DNI que dejó (l. 4).",
+   "ejemplar": null
+  },
+  "LEG2-ST-04": {
+   "escenario": "E24",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [],
+   "razon": "Coordina la instalación de un aire: dirección.",
+   "ejemplar": null
+  },
+  "LEG2-ST-05": {
+   "escenario": "E47",
+   "en_alcance_91": true,
+   "etiqueta": "no_avisar",
+   "intencion": "gestion_propia",
+   "pide": [],
+   "razon": "Soporte por un ticket de PROTEGIDA: le manda un link para crear la contraseña.",
+   "ejemplar": "enseña: «a mí no me tenés que decir nada» (l. 6)"
+  },
+  "LEG2-TU-01": {
+   "escenario": "E08",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni"
+   ],
+   "razon": "Confirma un turno. Pide el DNI para la admisión (l. 6).",
+   "ejemplar": null
+  },
+  "LEG2-TU-02": {
+   "escenario": "E09",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Reprograma un turno.",
+   "ejemplar": null
+  },
+  "LEG2-TU-05": {
+   "escenario": "E22",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [],
+   "razon": "Recuerda el turno de una vacuna en la veterinaria.",
+   "ejemplar": null
+  },
+  "LEG2-TU-06": {
+   "escenario": "E25",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "informar_coordinar",
+   "pide": [
+    "dni",
+    "fecha_nacimiento"
+   ],
+   "razon": "La municipalidad confirma un turno de licencia. Pide el DNI y la fecha de nacimiento (l. 4): pide de más, pero con eso solo no se pierde nada.",
+   "ejemplar": null
+  },
+  "LEG2-VE-01": {
+   "escenario": "E15",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "nombre",
+    "dni"
+   ],
+   "razon": "La concesionaria precalifica un crédito por una consulta de PROTEGIDA: nombre y DNI (l. 6).",
+   "ejemplar": null
+  },
+  "LEG2-VE-04": {
+   "escenario": "E29",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [
+    "dni",
+    "domicilio"
+   ],
+   "razon": "La moto que PROTEGIDA reservó llegó. Pide el DNI y confirma el domicilio (l. 6–8).",
+   "ejemplar": null
+  },
+  "LEG2-VE-05": {
+   "escenario": "E30",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Una agencia ofrece un usado por una búsqueda de PROTEGIDA.",
+   "ejemplar": null
+  },
+  "LEG2-VE-06": {
+   "escenario": "E31",
+   "en_alcance_91": false,
+   "etiqueta": "no_avisar",
+   "intencion": "vender",
+   "pide": [],
+   "razon": "Manda un folleto que PROTEGIDA pidió.",
+   "ejemplar": null
+  }
+ }
+}
