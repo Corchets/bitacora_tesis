@@ -144,7 +144,7 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
     def test_parse_args_hablantes_y_sin_indicio(self):
         args = parse_args([])
         self.assertEqual((args.detector, args.prompt, args.hablantes, args.sin_indicio, args.solo_otra),
-                         ("slm", "c-json-corte-riesgo", "rol", True, True))
+                         ("slm", "c-premisa-corte-riesgo", "rol", True, True))
         self.assertFalse(parse_args(["--con-indicio"]).sin_indicio)
         self.assertTrue(parse_args(["--sin-indicio"]).sin_indicio)
         with patch("sys.stderr"), self.assertRaises(SystemExit):

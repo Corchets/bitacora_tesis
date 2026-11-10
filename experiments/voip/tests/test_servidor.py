@@ -1183,7 +1183,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         with patch("sys.argv", ["servidor.py"]):
             args = parse_args()
             self.assertEqual((args.detector, args.prompt, args.hablantes, args.sin_indicio, args.solo_otra),
-                             ("slm", "c-json-corte-riesgo", "rol", True, True))
+                             ("slm", "c-premisa-corte-riesgo", "rol", True, True))
         with patch("sys.argv", ["servidor.py", "--con-indicio"]):
             self.assertFalse(parse_args().sin_indicio)
         with patch("sys.argv", ["servidor.py", "--sin-indicio"]):
@@ -1203,7 +1203,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         with patch.object(replay_mod.correr, "calentar", return_value={"pensar": False}):
             slm = replay_mod.construir_slm(modelo=args.modelo, prompt_nombre=args.prompt, hablantes=args.hablantes, seed=args.seed, ollama_url=args.ollama_url)
         self.assertIs(type(slm), replay_mod.detectores.DetectorSLMCorteRiesgo)
-        self.assertEqual(slm.prompt, replay_mod.detectores.cargar_prompt("c-json-corte-riesgo"))
+        self.assertEqual(slm.prompt, replay_mod.detectores.cargar_prompt("c-premisa-corte-riesgo"))
         self.assertIn("PROTEGIDA", slm.prompt)
         self.assertEqual(slm.hablantes, "rol")
 
