@@ -64,6 +64,10 @@ PROMPTS = {
     "c-json": ("tarea_c.txt", "salida_json_c.txt"),
     "c-sino": ("tarea_c.txt",),
     "c-digito": ("tarea_c.txt",),
+    # Etapa 3 de #143 (Mateo, 2026-11-09): el mismo texto de tarea de C con un JSON más corto, en una sola consulta por
+    # línea. «C sin alerta» pide solo el riesgo; «C con campo» pide `pedido_critico` y después el riesgo.
+    "c-sin-alerta": ("tarea_c.txt", "salida_json_c_sin_alerta.txt"),
+    "c-con-campo": ("tarea_c.txt", "salida_json_c_con_campo.txt"),
 }
 # Decisión del equipo (2026-11-07, ADR 0006): un prompt JSON con ESQUEMA_SALIDA tal cual (mismo prompt, mensaje
 # y esquema), cortado con num_predict después del valor de `alerta_sugerida`; avisa con «riesgo ≥ 0,4 o alerta»
@@ -79,6 +83,8 @@ PROMPTS_LECTURA = frozenset({"v4-lectura"})
 PROMPTS_TOKEN = PROMPTS_SINO | PROMPTS_DIGITO | PROMPTS_LECTURA
 # Se leen con DetectorSLMJSONCortado: riesgo y alerta del JSON cortado, sin logprobs.
 PROMPTS_CORTE = frozenset(CORTE_DE)
+# Se leen con DetectorSLMCCorto: el JSON entero, que el modelo cierra solo, y el motivo de C aparte.
+PROMPTS_C_CORTO = frozenset({"c-sin-alerta", "c-con-campo"})
 # Última oración del mensaje del usuario, después de la transcripción; `{n}` es la última línea.
 # Los prompts de PREGUNTAS_FINALES la reemplazan por su pregunta, para que sea lo último que
 # lee el modelo antes de responder.
@@ -95,6 +101,9 @@ PROMPT_MOTIVO = "riesgo_motivo.txt"
 # Pedido de motivo y evidencia de los prompts cortados (PROMPTS_CORTE): el aviso puede salir por la alerta
 # escrita con riesgo < 0,4, así que no dice que el riesgo superó el umbral. No nombra a v4.
 PROMPT_MOTIVO_CORTE = "motivo_v4_corte.txt"
+# Motivo propio de C (Mateo, 2026-11-09), para PROMPTS_C_CORTO: la frase de OTRA que más lo muestra y por qué puede ser
+# una estafa. Nombra un pedido solo si ya ocurrió, porque C avisa antes del pedido.
+PROMPT_MOTIVO_C = "motivo_c_corte.txt"
 HABLANTES = ("ab", "rol", "sin")
 ROLES_HABLANTE = ("PROTEGIDA", "OTRA")
 
@@ -128,10 +137,17 @@ ESQUEMA_MOTIVO = {
     "properties": {c: ESQUEMA_SALIDA["properties"][c] for c in ("evidencia", "motivo")},
     "required": ["evidencia", "motivo"],
 }
+# «C con campo» (etapa 3 de #143): primero si hay un pedido crítico y después el riesgo.
+ESQUEMA_CON_CAMPO = {
+    "type": "object",
+    "properties": {"pedido_critico": {"type": "boolean"}, "riesgo": ESQUEMA_SALIDA["properties"]["riesgo"]},
+    "required": ["pedido_critico", "riesgo"],
+}
 ESQUEMAS = {"tarea": ESQUEMA_SALIDA, "tarea+base": ESQUEMA_SALIDA, "v2": ESQUEMA_SALIDA_V2, "v3": ESQUEMA_SALIDA_V2, "v3-orden-v1": ESQUEMA_SALIDA, "v4": ESQUEMA_SALIDA, "v4-cita-libre": ESQUEMA_SALIDA, "v5-maniobras": ESQUEMA_SALIDA, "v5-indirectos": ESQUEMA_SALIDA, "v5-sin-excepcion": ESQUEMA_SALIDA, "v5": ESQUEMA_SALIDA, "riesgo": ESQUEMA_RIESGO, "s-json": ESQUEMA_SALIDA, "c-json": ESQUEMA_SALIDA, "v4-premisa": ESQUEMA_SALIDA}
 ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO | PROMPTS_DIGITO))  # sin esquema: respuesta libre de un token
 ESQUEMAS["v4-lectura"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después del riesgo
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_DE.items()})  # el mismo JSON, cortado después de alerta_sugerida
+ESQUEMAS.update({"c-sin-alerta": ESQUEMA_RIESGO, "c-con-campo": ESQUEMA_CON_CAMPO})
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
 # en español, los tokenizadores de estos modelos usan más de 3 caracteres por token.
@@ -179,6 +195,11 @@ MAXIMO_TOKENS_CORTE = 24
 UMBRAL_CORTE = 0.4
 _RIESGO_CORTADO = re.compile(r'"riesgo"\s*:\s*(-?[0-9]+(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?)\s*,')
 _ALERTA_CORTADA = re.compile(r'"alerta_sugerida"\s*:\s*(true|false)\b')
+# Etapa 3 de #143: C sin alerta y C con campo escriben un JSON corto que el modelo cierra solo (`{"riesgo": 0.3}` son
+# unos 13 tokens, y con `pedido_critico`, unos 25). El tope solo frena a un modelo en bucle: la humo comprueba que no se
+# llegue. La regla es la de C en la etapa 2 sin la alerta escrita, «riesgo ≥ 0,3», o `pedido_critico` en true.
+MAXIMO_TOKENS_C_CORTO = 48
+UMBRAL_C = 0.3
 
 
 @dataclass
@@ -244,6 +265,8 @@ class Respuesta:
     # Solo con DetectorSLMJSONCortado (PROMPTS_CORTE): la `alerta_sugerida` que escribió el modelo.
     # `alerta_sugerida` es la regla del detector (riesgo ≥ UMBRAL_CORTE o alerta escrita).
     alerta_escrita: bool | None = None
+    # Solo con DetectorSLMCCorto y `c-con-campo`: el `pedido_critico` que escribió el modelo (la alerta fuerte).
+    pedido_critico: bool | None = None
 
 
 def cargar_prompt(variante: str) -> str:
@@ -573,6 +596,31 @@ def leer_json_cortado(crudo: str) -> tuple[float | None, bool | None, int | None
     return riesgo, alerta.group(1) == "true", alerta.end(), ""
 
 
+def leer_c_corto(crudo: str, esquema: dict) -> tuple[float | None, bool | None, str]:
+    """(riesgo, pedido_critico, error) del JSON de C sin alerta o de C con campo (PROMPTS_C_CORTO).
+
+    `pedido_critico` es None si el esquema no lo pide. Con el riesgo fuera de rango o el campo mal, la línea es un fallo.
+    """
+    try:
+        salida = json.loads(crudo)
+    except json.JSONDecodeError:
+        return None, None, "json_invalido"
+    if not isinstance(salida, dict):
+        return None, None, "json_no_es_objeto"
+    faltan = [c for c in esquema["required"] if c not in salida]
+    if faltan:
+        return None, None, f"faltan_campos: {','.join(faltan)}"
+    riesgo = salida["riesgo"]
+    if isinstance(riesgo, bool) or not isinstance(riesgo, (int, float)) or not math.isfinite(riesgo):
+        return None, None, "riesgo_no_numerico"
+    campo = salida.get("pedido_critico") if "pedido_critico" in esquema["required"] else None
+    if "pedido_critico" in esquema["required"] and not isinstance(campo, bool):
+        return float(riesgo), None, "pedido_critico_no_booleano"
+    if not 0 <= riesgo <= 1:
+        return float(riesgo), campo, "riesgo_fuera_de_rango"
+    return float(riesgo), campo, ""
+
+
 def _alternativas_primer_token(logprobs) -> tuple[list[tuple[str, float]] | None, str]:
     """([(token, logprob), ...], "") del primer token generado, o (None, error)."""
     if not isinstance(logprobs, list) or not logprobs:
@@ -830,6 +878,20 @@ class DetectorSLMJSONCortado(DetectorSLM):
     def opciones(self) -> dict:
         return {**super().opciones(), "num_predict": MAXIMO_TOKENS_CORTE}
 
+    def _leer(self, r1: dict, crudo: str) -> tuple[float | None, dict, int | None, str, bool]:
+        """(riesgo, campos para Respuesta, fin, error, avisa) de la primera consulta."""
+        # done_reason "length" es lo esperado: el JSON se corta después de la alerta.
+        riesgo, alerta, fin, error = leer_json_cortado(crudo)
+        return riesgo, {"alerta_escrita": alerta}, fin, error, not error and (riesgo >= self.umbral - 1e-9 or alerta)
+
+    def _asistente(self, crudo: str, fin: int | None) -> str:
+        """Lo que escribió el modelo, cerrado como JSON, para el turno `assistant` de la segunda consulta."""
+        return crudo[:fin] + "\n}"
+
+    def _pide_motivo(self, avisa: bool, campos: dict) -> bool:
+        """True si esta línea dispara la segunda consulta (solo la primera vez en la llamada): el aviso."""
+        return avisa
+
     def evaluar_mensaje(self, usuario: str, lineas: list[Linea] | tuple[Linea, ...]) -> Respuesta:
         mensajes, error = self._mensajes_de(usuario)
         if mensajes is None:
@@ -842,19 +904,17 @@ class DetectorSLMJSONCortado(DetectorSLM):
             return Respuesta(valida=False, error=str(e), ms=ms_fallo, slm_ms=ms_fallo, ms_etapa1=ms_fallo)
         ms1 = (time.perf_counter() - inicio) * 1000
         comun = dict(**_medidas(r1, ms1), ms_etapa1=ms1)
-        # done_reason "length" es lo esperado: el JSON se corta después de la alerta.
-        riesgo, alerta, fin, error = leer_json_cortado(comun["crudo"])
+        riesgo, campos, fin, error, avisa = self._leer(r1, comun["crudo"])
         if error:
             return Respuesta(valida=False, error=error, riesgo=riesgo, **comun)
-        avisa = riesgo >= self.umbral - 1e-9 or alerta
-        if not avisa or self._aviso_hecho:
-            return Respuesta(valida=True, riesgo=riesgo, alerta_escrita=alerta, alerta_sugerida=avisa, **comun)
+        if not self._pide_motivo(avisa, campos) or self._aviso_hecho:
+            return Respuesta(valida=True, riesgo=riesgo, alerta_sugerida=avisa, **campos, **comun)
         self._aviso_hecho = True
 
-        asistente = comun["crudo"][:fin] + "\n}"
+        asistente = self._asistente(comun["crudo"], fin)
         mensajes2 = mensajes + [{"role": "assistant", "content": asistente}, {"role": "user", "content": self.pedido_motivo}]
         opciones2 = {**super().opciones(), "num_predict": MAXIMO_TOKENS_RESPUESTA}
-        base = dict(valida=True, riesgo=riesgo, alerta_escrita=alerta, alerta_sugerida=True)
+        base = dict(valida=True, riesgo=riesgo, alerta_sugerida=True, **campos)
         inicio2 = time.perf_counter()
         try:
             r2 = self.cliente.chat(self.modelo, mensajes2, ESQUEMA_MOTIVO, opciones2, self.pensar)
@@ -871,6 +931,42 @@ class DetectorSLMJSONCortado(DetectorSLM):
             return Respuesta(**base, error=f"etapa2_{error}", **comun)
         return Respuesta(**base, motivo=salida["motivo"].strip(), evidencia=salida["evidencia"].strip(),
                          evidencia_en_texto=evidencia_en_texto(salida["evidencia"], lineas), **comun)
+
+
+@dataclass
+class DetectorSLMCCorto(DetectorSLMJSONCortado):
+    """PROMPTS_C_CORTO (etapa 3 de #143): C sin alerta o C con campo, en una consulta por línea, y el motivo de C aparte.
+
+    Primera consulta: el pedido de DetectorSLM con el prompt y el esquema propios (`c-sin-alerta`: solo el riesgo;
+    `c-con-campo`: `pedido_critico` y después el riesgo), sin `think` ni logprobs, con `num_predict` =
+    MAXIMO_TOKENS_C_CORTO de tope. El modelo cierra el JSON solo: si llega al tope, la línea es un fallo. La regla es
+    «riesgo ≥ UMBRAL_C o pedido_critico» en cualquier línea; la lectura solo en las de OTRA se simula después.
+
+    Segunda consulta (Mateo, 2026-11-09): solo en la primera alerta fuerte de la llamada (`pedido_critico` en true), con
+    el JSON tal como lo escribió el modelo en el turno `assistant` y el pedido de motivo_c_corte.txt. El primer aviso por
+    riesgo no consulta nada: la app muestra un texto fijo. `c-sin-alerta` no tiene alerta fuerte y nunca la pide.
+    """
+
+    umbral: float = UMBRAL_C
+
+    def __post_init__(self) -> None:
+        self.pedido_motivo = self.pedido_motivo or cargar_prompt_motivo(PROMPT_MOTIVO_C)
+        super().__post_init__()
+
+    def opciones(self) -> dict:
+        return {**DetectorSLM.opciones(self), "num_predict": MAXIMO_TOKENS_C_CORTO}
+
+    def _leer(self, r1: dict, crudo: str) -> tuple[float | None, dict, int | None, str, bool]:
+        if r1.get("done_reason") == "length":
+            return None, {}, None, "salida_cortada", False
+        riesgo, campo, error = leer_c_corto(crudo, self.esquema or ESQUEMA_RIESGO)
+        return riesgo, {"pedido_critico": campo}, None, error, not error and (riesgo >= self.umbral - 1e-9 or campo is True)
+
+    def _asistente(self, crudo: str, fin: int | None) -> str:
+        return crudo.strip()
+
+    def _pide_motivo(self, avisa: bool, campos: dict) -> bool:
+        return campos.get("pedido_critico") is True
 
 
 class DetectorReglas:

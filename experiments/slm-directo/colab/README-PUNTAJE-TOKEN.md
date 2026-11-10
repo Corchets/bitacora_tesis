@@ -235,3 +235,54 @@ repetición sobre los 140 (2.621 líneas), unos 14.
    - Si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
 3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiarlo a `corridas/2026-11-07_alcance-etapa-2/`.
    Después, correr `python -I analizar.py` desde esa carpeta.
+
+## 6. Segunda vuelta, etapa 3 (tag `colab/143-etapa-3`)
+
+> **Estado: propuesta sin discutir.** Elige entre dos versiones de C dentro del alcance. La regla está escrita antes de
+> correr en [`corridas/2026-11-09_pedido-critico-etapa-3/README.md`](../corridas/2026-11-09_pedido-critico-etapa-3/README.md),
+> y el análisis, en [`analizar.py`](../corridas/2026-11-09_pedido-critico-etapa-3/analizar.py).
+
+**Qué pregunta:** ¿un campo `pedido_critico` en el JSON de C le suma avisos a C sin sumar más de 5 FA? La vista son las
+46 estafas de corpus_v2 y las 94 legítimas entrantes.
+
+**Decisiones de Mateo (2026-11-09):**
+- dos versiones con el texto de tarea de C y una sola consulta por línea:
+  - «C sin alerta» (`c-sin-alerta`), la base, pide solo el riesgo;
+  - «C con campo» (`c-con-campo`) pide `pedido_critico` y después el riesgo;
+- avisan con «riesgo ≥ 0,3», o `pedido_critico` en C con campo, en cualquier línea. «Solo OTRA» se simula después;
+- el primer aviso muestra un texto fijo. El motivo propio de C ([`motivo_c_corte.txt`](../prompts/motivo_c_corte.txt))
+  se pide solo en la primera alerta fuerte, una vez por llamada;
+- cada versión corre dos veces: sobre los 244 y sobre los 140 dentro del alcance.
+
+**El JSON es corto y el modelo lo cierra solo.** `num_predict` 48 (`MAXIMO_TOKENS_C_CORTO`) es solo un tope, y llegar
+a él cuenta como fallo.
+
+[`probar_etapa_3.py`](probar_etapa_3.py) hace todo en una sesión. Usa Ollama 0.40.14, el digest `b37049369adf…`,
+`num_ctx` 4096, seed 42, temperatura 0, `--sin-reglas`, roles y todas las líneas (`--seguir-tras-aviso`):
+
+1. **Humo de formato** en los 3 casos de siempre (48 líneas), con `c-json-corte`, `c-sin-alerta` y `c-con-campo` en una
+   corrida. Criterio fijado antes de correr: cada versión lee el JSON en las 48 líneas, sin llegar al tope.
+
+   **Si una versión no pasa:**
+   - la que no pasa no corre;
+   - si no pasa ninguna, no corre nada.
+
+   No se ajusta nada en esa sesión.
+2. **Corridas**, en este orden:
+   1. `c-sin-alerta` y `c-con-campo` sobre los 244;
+   2. sus repeticiones sobre [`alcance-140`](../casos/listas/alcance-140.txt).
+3. **Controles de ventas y préstamos** con las dos, solo para mirar.
+4. **Al final** baja `resultados-etapa-3.zip` con todo, más `commit.txt`, `script-sha256.txt`, `ollama-version.txt`,
+   `digest.txt`, `pip-freeze.txt` y `gpu.txt`. La humo y cada corrida bajan antes como `parcial-etapa-3-<carpeta>.zip`.
+
+**Duración estimada:** alrededor de 1 h en T4.
+
+**Pasos:**
+1. Abrir [`COLAB-ETAPA-3.ipynb`](COLAB-ETAPA-3.ipynb) en Colab con **GPU T4**. El notebook no corre hasta tener el hash
+   del commit del tag.
+2. Ejecutar la única celda y dejar la pestaña abierta, aceptando las descargas múltiples.
+   - Si Colab se corta, los parciales ya descargados sirven.
+   - Si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
+3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiarlo a
+   `corridas/2026-11-09_pedido-critico-etapa-3/`. Después, correr `python -I analizar.py` desde esa carpeta. Necesita las
+   corridas de C de la etapa 2 en `corridas/2026-11-07_alcance-etapa-2/`.

@@ -50,14 +50,17 @@ from detectores import (
     DetectorReglas,
     DetectorSLM,
     DetectorSLMDosEtapas,
+    DetectorSLMCCorto,
     DetectorSLMJSONCortado,
     DetectorSLMDigito,
     DetectorSLMLecturaJSON,
     DetectorSLMSiNo,
     DIGITOS,
+    MAXIMO_TOKENS_C_CORTO,
     MAXIMO_TOKENS_CORTE,
     MAXIMO_TOKENS_LECTURA,
     MAXIMO_TOKENS_RESPUESTA,
+    PROMPTS_C_CORTO,
     PROMPTS_CORTE,
     PROMPTS_DIGITO,
     PROMPTS_LECTURA,
@@ -75,7 +78,9 @@ from detectores import (
     cargar_prompt,
     cargar_prompt_motivo,
     PROMPT_MOTIVO,
+    PROMPT_MOTIVO_C,
     PROMPT_MOTIVO_CORTE,
+    UMBRAL_C,
     esquema_de,
     huella,
     leer_si_no,
@@ -147,6 +152,8 @@ COLUMNAS_SINO = ["p_si", "masa_si_no", "top_logprobs"]
 COLUMNAS_DIGITO = ["digito_esperado", "masa_digitos", "riesgo_esperado"]
 # Solo si la corrida usa un prompt cortado (PROMPTS_CORTE); van al final. `alerta_sugerida` es la regla del detector.
 COLUMNAS_CORTE = ["alerta_escrita"]
+# Solo si la corrida usa C sin alerta o C con campo (PROMPTS_C_CORTO); van al final. Vacía con `c-sin-alerta`.
+COLUMNAS_CAMPO = ["pedido_critico"]
 
 
 @dataclass
@@ -476,13 +483,16 @@ def _fila(config: dict, case_id: str, n: int, linea: casos.Linea, r: Respuesta, 
         "riesgo_esperado": "" if r.riesgo_esperado is None else round(r.riesgo_esperado, 6),
         # Se escribe solo si la corrida tiene COLUMNAS_CORTE (ver main).
         "alerta_escrita": bool_(r.alerta_escrita),
+        # Se escribe solo si la corrida tiene COLUMNAS_CAMPO (ver main).
+        "pedido_critico": bool_(r.pedido_critico),
     }
 
 
 def _prompt_manifiesto(variante: str) -> dict:
     datos = {"huella": huella(cargar_prompt(variante)), "texto": cargar_prompt(variante), "esquema": esquema_de(variante)}
-    if variante == "riesgo" or variante in PROMPTS_CORTE:
-        motivo = cargar_prompt_motivo(PROMPT_MOTIVO_CORTE if variante in PROMPTS_CORTE else PROMPT_MOTIVO)
+    if variante == "riesgo" or variante in PROMPTS_CORTE | PROMPTS_C_CORTO:
+        motivo = cargar_prompt_motivo(PROMPT_MOTIVO_CORTE if variante in PROMPTS_CORTE else
+                                      PROMPT_MOTIVO_C if variante in PROMPTS_C_CORTO else PROMPT_MOTIVO)
         datos["etapa2"] = {"huella": huella(motivo), "texto": motivo, "esquema": ESQUEMA_MOTIVO}
     pregunta = cargar_pregunta(variante)
     if pregunta is not None:  # cierra el mensaje del usuario, después de la transcripción
@@ -576,8 +586,9 @@ def main(argv: list[str] | None = None) -> int:
     modelos = [] if (args.solo_reglas or args.solo_reranker) else _lista(args.modelos)
     if not modelos and not args.solo_reglas and not args.solo_reranker:
         sys.exit("Indicá --modelos (p. ej. --modelos qwen3.5:2b), --solo-reglas o --solo-reranker.")
-    if args.filtro_tito and ({"riesgo"} | PROMPTS_CORTE) & set(_lista(args.prompts)):
-        sys.exit(f"--filtro-tito no admite --prompts riesgo ni los cortados ({', '.join(sorted(PROMPTS_CORTE))}): "
+    if args.filtro_tito and ({"riesgo"} | PROMPTS_CORTE | PROMPTS_C_CORTO) & set(_lista(args.prompts)):
+        sys.exit(f"--filtro-tito no admite --prompts riesgo ni los cortados "
+                 f"({', '.join(sorted(PROMPTS_CORTE | PROMPTS_C_CORTO))}): "
                  "el flujo Tito→SLM usa el prompt de un paso.")
     if args.filtro_tito and PROMPTS_TOKEN & set(_lista(args.prompts)):
         sys.exit("--filtro-tito no admite los prompts de token (SÍ/NO o dígito): en #143 la compuerta de Tito se simula offline.")
@@ -639,7 +650,10 @@ def main(argv: list[str] | None = None) -> int:
     for modelo in modelos:
         for variante in prompts:
             for h in hablantes:
-                if variante in PROMPTS_CORTE:
+                if variante in PROMPTS_C_CORTO:
+                    d = DetectorSLMCCorto(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
+                                          esquema=esquema_de(variante))
+                elif variante in PROMPTS_CORTE:
                     d = DetectorSLMJSONCortado(cliente, modelo, cargar_prompt(variante), h, args.num_ctx, args.seed, extra=extra,
                                                esquema=esquema_de(variante))
                 elif variante in PROMPTS_LECTURA:
@@ -758,6 +772,14 @@ def main(argv: list[str] | None = None) -> int:
                 "etapa2": ("solo en la primera línea de la llamada en que dispara la regla: mismos mensajes + lo escrito, "
                            f"cerrado como JSON, como assistant + motivo_v4_corte.txt, con ESQUEMA_MOTIVO y num_predict {MAXIMO_TOKENS_RESPUESTA}"),
             }} if modelos and PROMPTS_CORTE & set(prompts) else {}),
+            **({"c_corto": {
+                "num_predict": MAXIMO_TOKENS_C_CORTO, "formato": "el esquema JSON del prompt", "logprobs": False,
+                "lectura": "el JSON entero, que el modelo cierra solo (detectores.leer_c_corto); al tope es un fallo",
+                "alerta_sugerida": f"riesgo >= {UMBRAL_C} o pedido_critico (columna pedido_critico), en cualquier línea",
+                "etapa2": ("solo en la primera alerta fuerte de la llamada (pedido_critico en true; el primer aviso por "
+                           "riesgo usa un texto fijo): mismos mensajes + el JSON escrito, como assistant + "
+                           f"{PROMPT_MOTIVO_C}, con ESQUEMA_MOTIVO y num_predict {MAXIMO_TOKENS_RESPUESTA}"),
+            }} if modelos and PROMPTS_C_CORTO & set(prompts) else {}),
         },
         "prompts": {v: _prompt_manifiesto(v) for v in prompts} if modelos else {},
         "reranker": None if not rerankers else {
@@ -792,8 +814,9 @@ def main(argv: list[str] | None = None) -> int:
     hay_token = any(c["prompt"] in PROMPTS_TOKEN for c, _ in detectores if c["detector"] == "slm")
     hay_digito = any(c["prompt"] in PROMPTS_DIGITO | PROMPTS_LECTURA for c, _ in detectores if c["detector"] == "slm")
     hay_corte = any(c["prompt"] in PROMPTS_CORTE for c, _ in detectores if c["detector"] == "slm")
+    hay_campo = any(c["prompt"] in PROMPTS_C_CORTO for c, _ in detectores if c["detector"] == "slm")
     columnas = (COLUMNAS + (COLUMNAS_SINO if hay_token else []) + (COLUMNAS_DIGITO if hay_digito else [])
-                + (COLUMNAS_CORTE if hay_corte else []))
+                + (COLUMNAS_CORTE if hay_corte else []) + (COLUMNAS_CAMPO if hay_campo else []))
     try:
         with (carpeta / "actualizaciones.csv").open("w", encoding="utf-8-sig", newline="") as f:
             escritor = csv.DictWriter(f, fieldnames=columnas, extrasaction="ignore")
