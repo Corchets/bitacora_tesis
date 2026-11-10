@@ -1505,7 +1505,7 @@
     <div class="campo" id="campo-detector">
       <label for="detector-elegido">Detector</label>
       <select id="detector-elegido" title="Quién decide el aviso. Se aplica a la próxima llamada; cambiarlo tarda porque carga el modelo.">
-        <option value="gemma4:e2b-it-q4_K_M">Gemma 4 E2B con Tito viejo · final</option>
+        <option value="gemma4:e2b-it-q4_K_M">Gemma 4 E2B · configuración congelada</option>
         <option value="reglas">Reglas · respaldo sin modelo</option>
       </select>
     </div>
@@ -1677,7 +1677,7 @@ import {montarHistorial} from './historial-ui.mjs';
 /** @typedef {{segmento: number, n: number, canal: string, rol: string, tipo: "asr", entrega: "parcial"|"final", texto: string, disponible_s: number, fin_audio_s: number, fin_voz_s: number}} EventoASR */
 /** @typedef {{llamada_id: string, t_s: number, canales: Record<string, {rms: number, fin_audio_s: number|null}>}} EventoNiveles */
 /** @typedef {{n: number, saltadas: number, ms_detector: number|null, valida: boolean, error: string, riesgo: number|null, alerta_sugerida: boolean, motivo: string, aviso: boolean, evidencia: string, fin_voz_s: number|null, fin_eval_s: number, t_a: number|null}} EventoDetector */
-/** @typedef {{tipo: string, modelo: string|null}} DetectorInfo */
+/** @typedef {{tipo: string, modelo: string|null, prompt?: string|null, solo_otra?: boolean}} DetectorInfo */
 
 const vista = new URLSearchParams(location.search).get("vista");
 if (vista === "protegida") document.body.classList.add("protegida");
@@ -2665,10 +2665,10 @@ function actualizarDetectorVisual(detector) {
     : esSlm ? `SLM (${detector.modelo || "local"})` : "Reglas";
   $("detector-sub").textContent = esTito
     ? "Tito deriva las frases; el modelo local decide el aviso"
-    : esSlm ? "Evaluación con modelo de lenguaje local"
+    : esSlm ? `Modelo local · prompt ${detector.prompt || "—"}${detector.solo_otra ? " · consulta solo en OTRA" : ""}`
     : "Heurística de códigos de verificación y urgencia";
-  // Un detector que no está en la lista (--detector slm) deja el selector vacío.
-  detectorElegido.value = esTito ? detector.modelo : esSlm ? "" : "reglas";
+  // Tito o un modelo que no está en la lista dejan el selector vacío: sin elegir, sigue el del servidor.
+  detectorElegido.value = esSlm ? detector.modelo || "" : esTito ? "" : "reglas";
   presentacion?.fijarDetector?.(detector);
 }
 

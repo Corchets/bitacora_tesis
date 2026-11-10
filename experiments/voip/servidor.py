@@ -16,9 +16,13 @@ El detector evalúa siempre la foto más reciente: si llega texto mientras eval�
 siguiente evaluación toma lo último disponible y las intermedias se saltean. Así la
 demora no crece con la cola, a diferencia del replay, que evalúa todas en orden.
 
+Por defecto el detector es la configuración congelada de #143: Gemma 4 E2B directo con `c-json-corte-riesgo`
+(cortado tras el riesgo, aviso con riesgo ≥ 0,3 y el motivo solo en el primer aviso), roles y solo OTRA.
+
 Uso:
+    python servidor.py --ollama-url http://<ip-de-ollama>:11434
     python servidor.py --detector reglas
-    python servidor.py --detector tito-slm --modelo gemma4:e2b-it-q4_K_M
+    python servidor.py --detector tito-slm --prompt v4 --modelo gemma4:e2b-it-q4_K_M
     Panel: http://<ip>:8765/   ·   vista de la persona protegida: http://<ip>:8765/?vista=protegida
 
 Una llamada empieza desde el panel o con el primer bloque de cliente.py. Termina con
@@ -103,18 +107,49 @@ def validar_corte(valor) -> str | float:
     return round(float(valor), 1)
 
 
-# Detectores que se pueden elegir desde el panel: la configuración final (ADR 0001), Gemma 4 E2B con
-# Tito viejo, más las reglas como respaldo sin modelo.
+# Detectores que se pueden elegir desde el panel: Gemma 4 E2B directo, sin Tito (la configuración congelada de #143
+# con el prompt por defecto), más las reglas como respaldo sin modelo. Tito viejo queda solo por línea de comandos.
 # Tags completos: «gemma4:e2b» a secas baja otro artefacto según la plataforma (MLX en Mac), no el medido.
 DETECTOR_POR_DEFECTO = "gemma4:e2b-it-q4_K_M"
 DETECTORES_PANEL = ("gemma4:e2b-it-q4_K_M", "reglas")
 DETECTORES_CON_MODELO = replay.DETECTORES_CON_MODELO
+# Configuración congelada de #143 (ADR 0006 y 0007): C cortado tras el riesgo, «riesgo ≥ 0,3», el motivo solo en el
+# primer aviso y solo OTRA. Si la prueba de sensibilidad adopta una variante de C, el cambio es --prompt.
+PROMPT_POR_DEFECTO = "c-json-corte-riesgo"
 
 
 def validar_detector(valor) -> str:
     if valor not in DETECTORES_PANEL:
         raise ValueError(f"Detector desconocido; opciones: {', '.join(DETECTORES_PANEL)}.")
     return valor
+
+
+def info_detector(args: argparse.Namespace) -> dict:
+    """Lo que el panel muestra del detector activo."""
+    con_modelo = args.detector in DETECTORES_CON_MODELO
+    return {"tipo": args.detector, "modelo": args.modelo if con_modelo else None,
+            "prompt": getattr(args, "prompt", None) if con_modelo else None,
+            "solo_otra": getattr(args, "solo_otra", False)}
+
+
+def validar_configuracion(p: argparse.ArgumentParser, args: argparse.Namespace) -> None:
+    """Prompt, hablantes, Tito y solo OTRA: lo comparten servidor.py y medir.py.
+
+    Sin --solo-otra ni --no-solo-otra, «solo OTRA» va con el SLM directo y los roles (la configuración congelada), y
+    no con reglas ni Tito, como en correr.py.
+    """
+    detectores = replay.detectores
+    if args.prompt not in detectores.PROMPTS:
+        p.error(f"prompt desconocido {args.prompt!r}; opciones: {', '.join(detectores.PROMPTS)}")
+    if args.hablantes == "ab" and detectores.usa_roles(args.prompt):
+        p.error(f"el prompt {args.prompt} nombra a PROTEGIDA y OTRA: necesita --hablantes rol")
+    if args.detector == "tito-slm" and args.prompt in detectores.PROMPTS_CORTE_RIESGO:
+        p.error(f"tito-slm usa un prompt de un paso, no {args.prompt}: pasá --prompt v4 "
+                "(la configuración congelada de #143 va sin Tito: --detector slm)")
+    if args.solo_otra is None:
+        args.solo_otra = args.detector == "slm" and args.hablantes == "rol"
+    elif args.solo_otra and (args.detector != "slm" or args.hablantes != "rol"):
+        p.error("--solo-otra corre solo el SLM y tiene que saber quién habla: usá --detector slm --hablantes rol")
 
 
 def validar_asr(valor) -> str:
@@ -202,6 +237,7 @@ class Servidor:
                 hablantes=getattr(self.args, "hablantes", "ab"),
                 ahora=self.ahora,
                 reglas_turno=reglas_turno(self.args),
+                solo_otra=getattr(self.args, "solo_otra", False),
             )
         )
 
@@ -233,8 +269,7 @@ class Servidor:
         self.historial = []
         self.difundir({"tipo": "inicio", "llamada_id": llamada.llamada_id,
                        "modo": self.config_llamada.get("modo", "llamada"),
-                       "detector": {"tipo": self.args.detector,
-                                    "modelo": self.args.modelo if self.args.detector in DETECTORES_CON_MODELO else None},
+                       "detector": info_detector(self.args),
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
                        "asr": self.asr})
 
@@ -287,6 +322,7 @@ class Servidor:
         return {
             "config": {"detector": None if self.config_llamada.get("modo") == "asr" else a.detector, "modelo": a.modelo if a.detector in DETECTORES_CON_MODELO else None,
                        "prompt": a.prompt if a.detector in DETECTORES_CON_MODELO else None, "hablantes": getattr(a, "hablantes", "ab"),
+                       "solo_otra": getattr(a, "solo_otra", False),
                        "ollama_url": a.ollama_url if a.detector in DETECTORES_CON_MODELO else None,
                        "seed": a.seed if a.detector in DETECTORES_CON_MODELO else "no-aplica",
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
@@ -383,8 +419,11 @@ class Servidor:
         self.preparar()
 
     async def configurar_detector(self, elegido: str) -> None:
-        """Carga el detector que eligió el panel; si falla, sigue el que estaba."""
-        tipo, modelo = ("reglas", None) if elegido == "reglas" else ("tito-slm", elegido)
+        """Carga el detector que eligió el panel; si falla, sigue el que estaba.
+
+        El modelo va directo, sin Tito, con el prompt de la línea de comandos. «Solo OTRA» lo fija la línea de comandos.
+        """
+        tipo, modelo = ("reglas", None) if elegido == "reglas" else ("slm", elegido)
         a = self.args
         if tipo == a.detector and (modelo is None or modelo == a.modelo):
             return
@@ -609,9 +648,7 @@ def servir_panel(connection, request, args: argparse.Namespace | None = None):
     """GET / devuelve el panel; /guia la guía de Meet y WhatsApp; /detector informa el detector activo; las rutas de WebSocket siguen de largo."""
     ruta = urlparse(request.path).path
     if ruta == "/detector" and args is not None:
-        cuerpo = json.dumps({"tipo": args.detector,
-                             "modelo": getattr(args, "modelo", None) if args.detector in DETECTORES_CON_MODELO else None},
-                            ensure_ascii=False).encode("utf-8")
+        cuerpo = json.dumps(info_detector(args), ensure_ascii=False).encode("utf-8")
         encabezados = Headers([("Content-Type", "application/json; charset=utf-8"),
                                ("Content-Length", str(len(cuerpo)))])
         return Response(HTTPStatus.OK, "OK", encabezados, cuerpo)
@@ -635,10 +672,17 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Servidor de llamada en vivo con ASR por canal y detector.")
     p.add_argument("--host", default="0.0.0.0", help="0.0.0.0 para recibir de otras notebooks de la red")
     p.add_argument("--puerto", type=int, default=8765)
-    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="tito-slm",
-                   help="por defecto, la configuración final: Tito viejo deriva a Gemma 4 E2B (ADR 0001)")
+    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="slm",
+                   help="por defecto, la configuración congelada de #143: Gemma 4 E2B directo, sin Tito; "
+                        "tito-slm (ADR 0001, en retiro) necesita --prompt v4")
     p.add_argument("--modelo", default=DETECTOR_POR_DEFECTO)
-    p.add_argument("--prompt", default="v4", help="por defecto v4, con roles y sin indicio (pedido de Luciano del 2026-11-05)")
+    p.add_argument("--prompt", default=PROMPT_POR_DEFECTO,
+                   help="por defecto c-json-corte-riesgo, la configuración congelada de #143: C cortado tras el riesgo, "
+                        "aviso con riesgo >= 0,3 y el motivo solo en el primer aviso (ADR 0006)")
+    p.add_argument("--solo-otra", action=argparse.BooleanOptionalAction, default=None,
+                   help="las frases de PROTEGIDA entran al contexto pero no consultan, como correr.py --solo-otra "
+                        "(ADR 0007), y la consulta termina en la última línea de OTRA; por defecto, sí con --detector slm "
+                        "y --hablantes rol")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--ollama-url", default=replay.cliente_ollama.URL_POR_DEFECTO,
                    help="Ollama de otra máquina (p. ej. la PC con GPU) para bajar la demora del SLM")
@@ -668,8 +712,7 @@ def parse_args() -> argparse.Namespace:
                    help="agregar el bloque de indicio de Tito, como en la configuración del ADR 0001")
     p.add_argument("--salida", default=str(DIR_VOIP / "llamadas"))
     args = p.parse_args()
-    if args.hablantes == "ab" and replay.detectores.usa_roles(args.prompt):
-        p.error(f"el prompt {args.prompt} nombra a PROTEGIDA y OTRA: necesita --hablantes rol")
+    validar_configuracion(p, args)
     try:
         reglas_turno(args)
     except ValueError as exc:

@@ -268,10 +268,15 @@ def construir_slm(
     num_ctx: int = 4096,
     ollama_url: str = cliente_ollama.URL_POR_DEFECTO,
 ) -> Any:
-    """DetectorSLM calentado, con la negociación de `think` compartida con slm-directo."""
+    """Detector SLM calentado, con la negociación de `think` compartida con slm-directo.
+
+    Los prompts de PROMPTS_CORTE_RIESGO (la configuración congelada de #143) arman DetectorSLMCorteRiesgo, como
+    correr.py: cortado tras el riesgo, «riesgo ≥ 0,3» y el motivo solo en el primer aviso. Los demás, DetectorSLM.
+    """
     prompt_str = detectores.cargar_prompt(prompt_nombre)
     cliente = cliente_ollama.ClienteOllama(ollama_url)
-    detector = detectores.DetectorSLM(
+    clase = detectores.DetectorSLMCorteRiesgo if prompt_nombre in detectores.PROMPTS_CORTE_RIESGO else detectores.DetectorSLM
+    detector = clase(
         cliente=cliente,
         modelo=modelo,
         prompt=prompt_str,
@@ -299,6 +304,9 @@ def construir_detector(
     """Instancia el detector correspondiente de slm-directo."""
     if nombre == "reglas":
         return detectores.DetectorReglas()
+    elif nombre == "tito-slm" and prompt_nombre in detectores.PROMPTS_CORTE_RIESGO:
+        # Como correr.py --filtro-tito: el flujo Tito→SLM usa el prompt de un paso.
+        raise ValueError(f"tito-slm no admite el prompt cortado {prompt_nombre!r}: usá --detector slm o --prompt v4")
     elif nombre in ("slm", "tito-slm"):
         slm = construir_slm(modelo=modelo, prompt_nombre=prompt_nombre, hablantes=hablantes,
                             seed=seed, num_ctx=num_ctx, ollama_url=ollama_url)
@@ -368,8 +376,8 @@ def correr_replay(
             # Reinicio de contexto y cola secuencial entre llamadas distintas
             ctx_actual = ContextoLlamada(llamada_id=act.llamada_id)
             contextos.append(ctx_actual)
-            if solo_cerradas:
-                detector.reiniciar()
+            # Tito reinicia su activación; el corte tras el riesgo, el motivo del primer aviso.
+            getattr(detector, "reiniciar", lambda: None)()
 
         # 1. Aplicar al contexto incremental
         lineas_disponibles = ctx_actual.aplicar(act, hablantes)
@@ -647,7 +655,8 @@ def parse_args() -> argparse.Namespace:
         "--prompt",
         type=str,
         default="tarea",
-        help="Variante de prompt para SLM: 'tarea' o 'tarea+base' (por defecto: tarea).",
+        help="Variante de prompt para SLM (por defecto: tarea). Con c-json-corte-riesgo, la configuración congelada de "
+             "#143: cortado tras el riesgo, aviso con riesgo >= 0,3 y el motivo solo en el primer aviso.",
     )
     parser.add_argument(
         "--hablantes",

@@ -87,21 +87,24 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
     async def test_inicio_informa_detector_fijo_del_servidor(self):
         from servidor import servir_panel
         resp = servir_panel(None, Namespace(path="/detector"), self.servidor.args)
-        self.assertEqual(json.loads(resp.body.decode("utf-8")), {"tipo": "reglas", "modelo": None})
+        self.assertEqual(json.loads(resp.body.decode("utf-8")),
+                         {"tipo": "reglas", "modelo": None, "prompt": None, "solo_otra": False})
         async with connect(self.url + "/panel") as panel:
             await panel.send(self.inicio())
             inicio = await self.evento(panel, "inicio")
-            self.assertEqual(inicio["detector"], {"tipo": "reglas", "modelo": None})
+            self.assertEqual(inicio["detector"], {"tipo": "reglas", "modelo": None, "prompt": None, "solo_otra": False})
             await panel.send(json.dumps({"tipo": "terminar"}))
             await self.evento(panel, "fin")
             self.servidor.args.detector = "slm"
             self.servidor.args.modelo = "modelo-local-de-prueba"
+            self.servidor.args.prompt, self.servidor.args.solo_otra = "c-json-corte-riesgo", True
+            esperado = {"tipo": "slm", "modelo": "modelo-local-de-prueba", "prompt": "c-json-corte-riesgo", "solo_otra": True}
             resp_slm = servir_panel(None, Namespace(path="/detector"), self.servidor.args)
-            self.assertEqual(json.loads(resp_slm.body.decode("utf-8")),
-                             {"tipo": "slm", "modelo": "modelo-local-de-prueba"})
+            self.assertEqual(json.loads(resp_slm.body.decode("utf-8")), esperado)
             await panel.send(self.inicio())
             inicio = await self.evento(panel, "inicio")
-            self.assertEqual(inicio["detector"], {"tipo": "slm", "modelo": "modelo-local-de-prueba"})
+            self.assertEqual(inicio["detector"], esperado)
+            self.servidor.args.solo_otra = False
             self.servidor.args.detector = "reglas"
 
     async def test_guia_de_meet_y_whatsapp_se_sirve_desde_el_panel(self):
@@ -127,7 +130,9 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             async with connect(self.url + "/panel") as panel:
                 await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e2b-it-q4_K_M"}))
                 inicio = await self.evento(panel, "inicio")
-                self.assertEqual(inicio["detector"], {"tipo": "tito-slm", "modelo": "gemma4:e2b-it-q4_K_M"})
+                # Gemma va directo, sin Tito: la configuración congelada de #143 con el prompt del servidor.
+                self.assertEqual(inicio["detector"], {"tipo": "slm", "modelo": "gemma4:e2b-it-q4_K_M", "prompt": "tarea",
+                                                      "solo_otra": False})
                 await panel.send(json.dumps({"tipo": "terminar"}))
                 await self.evento(panel, "fin")
                 await panel.send(json.dumps({**json.loads(self.inicio()), "detector": "gemma4:e2b-it-q4_K_M"}))
@@ -136,7 +141,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 await self.evento(panel, "fin")
         self.assertIs(self.servidor.detector, cargado)
         self.assertEqual(construir.call_count, 1, "elegir el mismo no vuelve a cargarlo")
-        self.assertEqual(construir.call_args.args[0], "tito-slm")
+        self.assertEqual(construir.call_args.args[0], "slm")
         self.assertEqual(construir.call_args.kwargs["modelo"], "gemma4:e2b-it-q4_K_M")
 
     async def test_detector_desconocido_o_que_no_carga_avisa_y_no_cambia_el_actual(self):
@@ -1177,7 +1182,8 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
     def test_parse_args_hablantes_y_sin_indicio(self):
         with patch("sys.argv", ["servidor.py"]):
             args = parse_args()
-            self.assertEqual((args.prompt, args.hablantes, args.sin_indicio), ("v4", "rol", True))
+            self.assertEqual((args.detector, args.prompt, args.hablantes, args.sin_indicio, args.solo_otra),
+                             ("slm", "c-json-corte-riesgo", "rol", True, True))
         with patch("sys.argv", ["servidor.py", "--con-indicio"]):
             self.assertFalse(parse_args().sin_indicio)
         with patch("sys.argv", ["servidor.py", "--sin-indicio"]):
@@ -1191,12 +1197,14 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
             with self.assertRaises(SystemExit):
                 parse_args()
 
-    def test_el_slm_por_defecto_recibe_v4_y_los_roles(self):
+    def test_el_slm_por_defecto_es_la_configuracion_congelada_con_roles(self):
         with patch("sys.argv", ["servidor.py"]):
             args = parse_args()
         with patch.object(replay_mod.correr, "calentar", return_value={"pensar": False}):
             slm = replay_mod.construir_slm(modelo=args.modelo, prompt_nombre=args.prompt, hablantes=args.hablantes, seed=args.seed, ollama_url=args.ollama_url)
-        self.assertIn("PROTEGIDA (la persona que cuidás)", slm.prompt)
+        self.assertIs(type(slm), replay_mod.detectores.DetectorSLMCorteRiesgo)
+        self.assertEqual(slm.prompt, replay_mod.detectores.cargar_prompt("c-json-corte-riesgo"))
+        self.assertIn("PROTEGIDA", slm.prompt)
         self.assertEqual(slm.hablantes, "rol")
 
     async def test_configurar_detector_pasa_hablantes_e_indicio(self):
