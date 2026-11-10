@@ -231,6 +231,8 @@ Se usa **Parakeet TDT 0.6B v3 int8** por frases, con la opción B: la energía R
 | **Silero solo (opción A)** | WER 32,8 %; 205 segmentos para 129 frases; inglés o portugués en 25 frases | Parte las frases. Es 0,75 s más rápida y recupera más términos críticos, pero empata en etiquetas. |
 | **Zipformer Kroko** | WER de 4–5 % con TTS, malo con voz real | El resultado con TTS no se sostuvo. Retirado el 2026-10-29. |
 | **Whisper base** | RTF 0,27 con TTS | No es streaming y solo transcribe al cerrar la frase. |
+| **Gemma 4 E2B como ASR** | Con TTS, WER 8,5 % contra 4,9 % de Parakeet; 2,7 s por turno en CPU contra 0,18 s | Transcribe peor, pierde cifras dictadas y no ahorra memoria con claridad. Además, al ser el mismo modelo que detecta, su demora se suma al aviso ([corrida](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md)). |
+| **Gemma 4 E2B escuchando el audio** | No se midió | Acepta 30 s de audio por entrada, a 25 tokens por segundo: una llamada de 5 minutos no entra en el contexto, y sin texto no hay motivo ni registro. Medirla exigía rehacer la evaluación en audio. |
 
 **Riesgo aceptado.** Parakeet es multilingüe y no permite fijar el idioma. Además, confunde «token» con «toque» y «CVV» con «CBB» o «CBU», en ambas opciones.
 
