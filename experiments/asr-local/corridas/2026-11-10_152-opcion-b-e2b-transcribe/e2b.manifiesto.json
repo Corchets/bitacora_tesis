@@ -1,0 +1,33 @@
+{
+  "servidor": "b12110-cd959bae9",
+  "modelo": "/private/tmp/claude-501/-Users-mateoantenucci--claude-spares-spare-fHPJe9/55fd90e5-5536-49ac-83f0-8d20cc2846ff/scratchpad/modelos/gemma-4-E2B-it-Q4_K_M.gguf",
+  "prompt": "Transcribí textualmente este audio en español. Respondé solo con la transcripción, sin comentarios.",
+  "rss_pico_mb": 5866,
+  "footprint_pico_mb": 4206,
+  "rss_inicio_mb": 5421,
+  "footprint_inicio_mb": 2385,
+  "nota": "cpu: llama-server -c 4096 -np 1 --seed 42 -ngl 0 --no-mmproj-offload -t 4",
+  "casos": [
+    "CV2-D-V-WHATSAPP-006",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-V-SOPORTE-002",
+    "CV2-D-L-BANCO-002",
+    "CV2-D-L-DELIVERY-004",
+    "CV2-D-L-FAMILIAR-002"
+  ],
+  "voces": {
+    "A": "Paulina",
+    "B": "Eddy (Spanish (Mexico))"
+  },
+  "condiciones": [
+    "16k",
+    "8k"
+  ],
+  "git": "f2450fa3a27fc4f431a56bc2c6ecbd4de455305f",
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "cpu": "arm",
+    "chip": "Apple M4"
+  },
+  "fecha": "2026-11-10 12:34"
+}

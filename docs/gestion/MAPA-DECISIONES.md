@@ -261,6 +261,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [D08](#d08--congelar-protocolo-experimental) todavía abiertas.
 - **Nota del 2026-11-07:** el ADR 0001 ahora fija solo el ASR. Tito se está descartando, y el detector lo fija el
   ADR 0002 ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)).
+- **Nota del 2026-11-10 ([#152](https://github.com/Corchets/bitacora_tesis/issues/152)):** E2B como ASR transcribe
+  peor que Parakeet y más lento sobre el mismo audio TTS, y E2B escuchando directo queda afuera sin medir
+  ([corrida](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md)).
+  > **Estado: propuesta sin discutir.** Seguir con Parakeet; se decide en la reunión del equipo del 2026-11-11.
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base:** reglas solas, también como respaldo sin modelo de la demo.
