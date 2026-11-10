@@ -12,13 +12,15 @@ from pathlib import Path
 import re
 
 CORPUS = Path(__file__).resolve().parents[2] / "docs/corpus"
-ORIGINAL_145 = "REVISION-145-LUCIANO-2026-11-07.json"
-MAPA_145 = "CORRESPONDENCIA-145-LUCIANO-2026-11-07.json"
+# Captura vigente de #145; la del 2026-11-07 queda versionada como antecedente.
+FECHA_145 = "2026-11-10"
+ORIGINAL_145 = f"REVISION-145-LUCIANO-{FECHA_145}.json"
+MAPA_145 = f"CORRESPONDENCIA-145-LUCIANO-{FECHA_145}.json"
 ORIGINAL_144 = "FICHAS-144-LUCIANO-INGLES-2026-11-07.md"
-SALIDA = "REVISIONES-LUCIANO-2026-11-07.jsonl"
+SALIDA = f"REVISIONES-LUCIANO-{FECHA_145}.jsonl"
 
 
-def filas_145(original: bytes, mapa: dict) -> list[dict]:
+def filas_145(original: bytes, mapa: dict, archivo: str = ORIGINAL_145, fecha: str = FECHA_145) -> list[dict]:
     fuente = json.loads(original)
     if fuente.get("issue") != 145 or fuente["muestra"] != mapa["muestra"]:
         raise ValueError("Muestra de #145 diferente de su correspondencia.")
@@ -32,15 +34,16 @@ def filas_145(original: bytes, mapa: dict) -> list[dict]:
         if not caso["case_id"].startswith(("CV2-D-", "LEG-", "LEG2-")):
             raise ValueError("Solo se publican anotaciones de desarrollo en #145.")
         salida.append({
-            "issue": 145, "fecha": "2026-11-07", "revisor": fuente["revisor"],
+            "issue": 145, "fecha": fecha, "revisor": fuente["revisor"],
             "case_id": caso["case_id"], "alias_revision": alias,
-            "archivo_original": ORIGINAL_145, "selector_original": f"/respuestas/{alias}",
+            "archivo_original": archivo, "selector_original": f"/respuestas/{alias}",
             "texto_sha256": caso["texto_sha256"], "juicio_estafa": respuesta["estafa"],
             "credibilidad": respuesta["credibilidad"], "unidad_marcas": "linea_dialogo",
             "sospecha": respuesta["sospecha"], "sospecha_marca": respuesta["sospecha_linea"] or None,
             "pedido": respuesta["pedido"], "pedido_marca": respuesta["pedido_linea"] or None,
             "cumplimiento": respuesta["cumplimiento"], "cumplimiento_marca": respuesta["cumplimiento_linea"] or None,
             "confirmada_en_formulario": respuesta["completa"],
+            "conocido_en_formulario": respuesta["conocido"], "aviso_previo": caso.get("aviso_previo"),
             "estado_revision": "anotacion_individual_sin_adjudicar",
         })
     return salida
