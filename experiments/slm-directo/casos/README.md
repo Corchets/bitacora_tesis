@@ -1,5 +1,8 @@
 # Casos de prueba del ensayo #50
 
+> **Qué conversaciones hay, dónde están y con qué lista se corre cada conjunto:**
+> [CATALOGO-CONVERSACIONES.md](CATALOGO-CONVERSACIONES.md).
+
 Conversaciones **escritas y ficticias** para probar el detector sobre texto antes de
 tener audio. Los 53 antecedentes son material de **desarrollo**. Corpus v2 agrega
 97 conversaciones de desarrollo y 200 candidatas reservadas, y
@@ -282,6 +285,12 @@ correrla ni mirarla, ni con personas ni con modelos, hasta la evaluación final 
 publicados antes del 2026-10-23, que no pudieron entrenarse con ella (Qwen3.5, por ejemplo);
 con uno posterior hay que declarar la posible contaminación
 ([R05](../../../docs/gestion/REGISTRO-RIESGOS.md)).
+
+> **Nota del 2026-11-10 (Mateo):** `laboratorio-luciano` se retira. La reserva, sus filas del catálogo, las 56
+> legítimas de test y el alcance anotado a ciegas de [#45](https://github.com/Corchets/bitacora_tesis/issues/45)
+> pasan a la rama `reserva/test`: `laboratorio-main` más un commit con la reserva y sin esta marca. Esa rama nunca
+> se mergea a `laboratorio-main` ni a `main`; para la evaluación final se mergea `laboratorio-main` en ella. Qué hay
+> en cada lado: [catálogo de conversaciones](CATALOGO-CONVERSACIONES.md).
 
 **No mergear `laboratorio-luciano` en `laboratorio-main`**: traería la reserva en la historia
 de la rama de integración, donde se corre sin pensar. Para integrar se arma un único commit con

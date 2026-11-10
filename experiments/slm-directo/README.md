@@ -75,7 +75,8 @@ respuesta.
 
 ## 4. Casos
 
-Formato y reglas en [casos/README.md](casos/README.md). Cinco grupos:
+Formato y reglas en [casos/README.md](casos/README.md); qué hay, dónde y con qué lista se corre, en el
+[catálogo de conversaciones](casos/CATALOGO-CONVERSACIONES.md). Cinco grupos:
 
 - **`piloto_escrito`:** versión escrita de los 7 pares del
   [piloto](../../docs/corpus/METODO-CREACION-CORPUS.md#selección-inicial-del-piloto).
@@ -172,6 +173,15 @@ El actualizador toma IDs y huellas de manifiestos completos de desarrollo desde 
 corridas en curso o interrumpidas; los fallos y prefijos incompletos no cuentan como
 negativos. El HTML es autónomo, funciona como archivo local y conserva los datos
 históricos sin pérdida mediante compresión.
+
+### Formularios ciegos de #145
+
+[`analisis/tablero/revision-145.html`](analisis/tablero/revision-145.html) permite completar
+las 42 fichas sin mostrar las referencias ni los resultados del sistema. Incluye casillas,
+marcas por línea, guardado por revisor y descarga/recuperación de respuestas. La
+[guía y reproducción](../../docs/corpus/REVISION-CIEGA-145.md) explica la muestra y la
+custodia de la clave. Para esta revisión, usar ese formulario y evitar el panel de
+resultados anterior hasta terminar la anotación independiente.
 
 ### El panel general del proyecto
 

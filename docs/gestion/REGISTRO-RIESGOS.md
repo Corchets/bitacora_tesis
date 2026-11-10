@@ -216,3 +216,12 @@ real, pero las dos llamadas leídas son salientes, fuera del alcance aprobado en
 una clave en soporte no adjudica por sí solo fraude ni conducta segura. La revisión humana,
 los derechos de uso, la composición del set y su congelado siguen pendientes. No se corrió
 ningún detector ni se reducen probabilidad o impacto de R04/R05.
+
+## Preparación de la revisión ciega — 2026-11-07 (#145)
+
+R04/R05: los [formularios de #145](../corpus/REVISION-CIEGA-145.md) mezclan fallos y controles,
+ocultan IDs, referencias y resultados, y excluyen el test. La clave queda separada y
+respaldada fuera del worktree. La exposición previa se registra por caso; el renombrado
+no garantiza ceguera si el revisor ya conoce la conversación. Preparación técnica verificada,
+sin revisión humana ni adjudicación todavía; no se reducen probabilidad ni impacto.
+Las respuestas se exportan como JSON porque el almacenamiento del navegador no es un respaldo.
