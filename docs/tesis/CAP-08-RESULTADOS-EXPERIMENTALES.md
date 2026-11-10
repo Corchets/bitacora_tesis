@@ -2,7 +2,7 @@
 
 # Capítulo 8: Resultados experimentales
 
-> **Corregir (#51):** las secciones 8.3.1, 8.5.1, 8.6 y 8.7 llaman «configuración final» a la del ADR 0001: Tito viejo con E2B, `tarea` e indicio. Si el ADR 0002 elige otra, hay que actualizar esas filas, incluida la de Tito en 8.7. Además, la baja de falsas alarmas con Tito no es filtrado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y los resultados se informan con corpus_v2 aparte ([H01](../hallazgos/H01-corpus-v2-se-lee-aparte.md)).
+> **Corregir (#51):** las secciones 8.3.1, 8.4.1, 8.5 y 8.6 llaman «configuración final» a la del ADR 0001: Tito viejo con E2B, `tarea` e indicio. Si el ADR 0002 elige otra, hay que actualizar esas filas, incluida la de Tito en 8.6. Además, la baja de falsas alarmas con Tito no es filtrado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y los resultados se informan con corpus_v2 aparte ([H01](../hallazgos/H01-corpus-v2-se-lee-aparte.md)).
 
 ## 8.1. Descripción del corpus
 
@@ -78,17 +78,13 @@ Ver [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
 
 La repetición de Qwen 2B en GPU, con igual configuración y seed 42, cambió la decisión en 2 de 53 casos: la inferencia no es exactamente repetible, y eso afecta a toda comparación por una sola corrida.
 
-## 8.4. Texto manual frente a ASR (E1)
+## 8.4. Detección temprana y latencia
 
-**Sin medir para la configuración final.** La única comparación disponible es la de octubre, con Qwen y Zipformer sobre un par TTS. **[Completar con #52: mismo detector sobre texto manual y ASR.]**
-
-## 8.5. Detección temprana y latencia
-
-### 8.5.1. Sobre texto, en líneas
+### 8.4.1. Sobre texto, en líneas
 
 Con E2B y Tito viejo, en #101, el aviso llegó en la línea del pedido en 8 de 10 estafas, una línea antes en 1 y tres líneas después en 1. En las 6 estafas con cumplimiento marcado, avisó antes de la línea de `T_C`. Las marcas son provisionales, y en texto no hay segundos. E2B directo avisó antes del pedido en 4 de las 10 estafas; con Tito, en 1. #101 prueba la activación y el indicio juntos, así que no separa cuál de los dos atrasó el aviso ([H07](../hallazgos/H07-indicio-de-tito-pierde-estafas.md)).
 
-### 8.5.2. Con voz real, en segundos
+### 8.4.2. Con voz real, en segundos
 
 [Nueve llamadas guionadas por Meet](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md), con Gemma 4 E2B y Tito viejo. La columna «Respecto del pedido» es la diferencia entre `T_A` y la primera frase con el pedido, **ubicada por palabras clave y no por anotación humana**: negativo significa que el aviso llegó antes.
 
@@ -110,11 +106,11 @@ Esto no mide rendimiento: son 4 guiones y 2 voces, y sin marcas `T_C` no hay `L_
 
 **[Completar con #52: `L_R`, `L_C` y `Preventive@δ` con marcas humanas.]**
 
-### 8.5.3. Demora del detector
+### 8.4.3. Demora del detector
 
 En 5 corridas de `SC-WA-CODE-01` con `medir.py` en la M1, E2B dio una mediana de **3,74 s** por consulta, mínimo de 2,04 s y p95 de 4,53 s, sin fallos ni frases salteadas. **No cumple el criterio de menos de 2 s**, aunque el aviso llegó entre −0,45 y +0,40 s respecto del fin del pedido. Es una medición con Zipformer, sin Chrome ni Meet. En las llamadas con voz real, las medianas por llamada fueron de 1,4 a 5,6 s.
 
-## 8.6. Falsas alarmas y negativos difíciles
+## 8.5. Falsas alarmas y negativos difíciles
 
 | Conjunto | Resultado de la configuración final |
 |---|---|
@@ -124,7 +120,7 @@ En 5 corridas de `SC-WA-CODE-01` con `medir.py` en la M1, E2B dio una mediana de
 
 La condición del tutor es que no salte por frases sueltas. D3 («amigos arreglando un cumple: palabras parecidas») se diseñó para eso, pero es un solo guion. **[Completar con #52, con el desglose entre legítimas cotidianas, con pedido razonable y con mención sin pedido.]**
 
-## 8.7. Rendimiento y límites del hardware
+## 8.6. Rendimiento y límites del hardware
 
 Todas son mediciones en computadora; **ninguna en teléfono**.
 
@@ -137,11 +133,10 @@ Todas son mediciones en computadora; **ninguna en teléfono**.
 
 La [corrida de E4B](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md) en la misma máquina dio 46,3 s y 15,8 s por evaluación, y avisó a +49,0 s del pedido. **[Sin ablaciones ni medición en Android.]**
 
-## 8.8. Pendientes del capítulo
+## 8.7. Pendientes del capítulo
 
 1. Correr el test reservado una sola vez con la configuración congelada (#33, #52).
-2. E1, con el mismo detector sobre texto manual y ASR.
-3. PI2 con marcas humanas.
-4. E2, revisando motivos contra evidencia.
-5. Sensibilidad de la precisión a la prevalencia.
-6. Tablas y figuras regeneradas desde salidas crudas.
+2. PI2 con marcas humanas.
+3. E2, revisando motivos contra evidencia.
+4. Sensibilidad de la precisión a la prevalencia.
+5. Tablas y figuras regeneradas desde salidas crudas.

@@ -10,7 +10,7 @@
 
 **PI2, margen temporal.** Respuesta provisional y **poco favorable**: con voz real y la opción B, el aviso suele llegar después de empezado el pedido, entre 3 y 5 s. Eso no invalida el aviso, porque el daño ocurre cuando la persona cumple, pero deja poco margen. Con 3,74 s de consulta, la demora del modelo es una parte importante de esa diferencia. **[Responder con `L_C` y marcas humanas, #52.]**
 
-**E1, efecto del ASR.** No se midió. Se sabe que se pierden términos críticos, y que en estas 9 llamadas eso no cambió ningún aviso.
+**E1, efecto del ASR.** Quedó fuera ([#54](https://github.com/Corchets/bitacora_tesis/issues/54)). Se sabe que el ASR pierde términos críticos y que en las 9 llamadas con voz real el detector igual avisó en todas las estafas y en ninguna legítima, pero no se pasó el mismo detector por el texto del guion.
 
 **E2, explicación.** Sin revisión sistemática. El caso de D1, donde el aviso cita el débito y no el pedido, muestra por qué hay que revisar la cita y no solo el instante.
 
@@ -52,6 +52,7 @@ Errores conocidos, a completar con el test:
 **Externa.**
 - El corpus es simulado y de redacción asistida, y las llamadas tienen 4 guiones y 2 voces.
 - Las mediciones son en computadora, no en teléfono.
+- Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo.
 - Meet entrega un audio más limpio que una llamada celular en la calle.
 - No se puede prometer rendimiento para adultos mayores ni para Argentina en general.
 

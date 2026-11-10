@@ -28,6 +28,7 @@
 
 - Sin medición en teléfono, y con la latencia y la memoria por encima de los criterios de prefactibilidad.
 - Corpus simulado, de redacción asistida y sin referencia humana validada.
+- Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo, sin comparar el mismo detector sobre las dos entradas.
 - Voz real limitada a 4 guiones y 2 voces, con el audio original perdido.
 - El contenido de una llamada no permite verificar la identidad de quien habla.
 - Sin prueba con usuarios: no se sabe si el aviso cambia la conducta de una persona.

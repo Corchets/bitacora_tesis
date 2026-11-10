@@ -41,7 +41,7 @@ Los 20 casos sirvieron para elegir entre 10 modelos, así que el 10/10 es optimi
 | Segmentos finales | 127 | 205 |
 | RTF / memoria pico | 0,088 / 1.036 MB | 0,043 / 998 MB |
 
-El WER se mide contra el guion y hubo palabras cambiadas al hablar: sirve para comparar A con B, no como valor absoluto. **Falta la comparación de la misma detección con texto manual y con ASR (E1)**, que se hace en la evaluación final.
+El WER se mide contra el guion y hubo palabras cambiadas al hablar: sirve para comparar A con B, no como valor absoluto. La comparación de la misma detección con texto manual y con ASR (E1) quedó fuera el 2026-11-10 ([#54](https://github.com/Corchets/bitacora_tesis/issues/54)).
 
 ## Alcance y lectura
 

@@ -133,6 +133,7 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
 - **Pregunta:** ¿qué afirmaciones se evaluarán y qué observación podría refutarlas?
 - **Evidencia:** [Plan de Trabajo §5](../propuesta/PLAN-DE-TRABAJO.md#5-preguntas-de-investigación) y [PREGUNTAS-DE-INVESTIGACION.md](../investigacion/PREGUNTAS-DE-INVESTIGACION.md).
 - **Salida:** PI1–PI2 aprobadas, evaluación E1 diagnóstica y E2 secundaria.
+  - **2026-11-10 ([#54](https://github.com/Corchets/bitacora_tesis/issues/54)):** E1 queda fuera y se declara como límite en el [protocolo §7.2](../evaluacion/PROTOCOLO-EXPERIMENTAL.md#72-amenazas-a-la-validez).
 - **Estado:** resuelto (2026-09-09).
 - **Candidata nueva (consolidación PR #58):** discutir entre los cuatro agregar
   «cuánto contexto mira el detector» como eje de PI1 (VENTANA §9).

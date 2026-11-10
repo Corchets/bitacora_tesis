@@ -46,46 +46,19 @@ La definición matemática rigurosa, el tratamiento estadístico y el ejemplo te
 
 El objetivo es obtener una distribución honesta de márgenes y no forzar números arbitrarios.
 
-## E1 — Impacto del ASR, evaluación diagnóstica obligatoria
+## E1 — Efecto del ASR: fuera de la evaluación
 
-### No es una pregunta central
+> **Decisión (2026-11-10, [#54](https://github.com/Corchets/bitacora_tesis/issues/54)):** E1 no se mide. Hacían falta llamadas grabadas con
+> transcripción manual revisada y no hay tiempo de grabarlas antes de la entrega. Con las
+> pocas llamadas que se podrían grabar, un cambio en la detección difícilmente se notaría.
 
-El producto recibe audio; por eso hay que separar errores del detector de errores de transcripción. Esta comparación es una evaluación del pipeline y puede aparecer como subpregunta de PI1/PI2 o como experimento de ablación.
-
-### ¿Requiere llamadas reales?
-
-No. Requiere que las conversaciones simuladas tengan:
-
-1. audio grabado;
-2. transcripción manual revisada;
-3. transcripción producida por el ASR local.
-
-Se ejecuta el mismo detector dos veces:
-
-```text
-Transcripción manual ─┐
-                     ├→ mismo detector → comparar
-Audio → ASR local ───┘
-```
-
-### Qué resultado se busca
-
-- WER global y recall de términos críticos.
-- Diferencia de F1/AUPRC entre transcripción manual y ASR.
-- Diferencia de falsas alarmas.
-- Segundos de anticipación ganados o perdidos.
-- Latencia y real-time factor.
-
-Interpretaciones posibles:
-
-- buen resultado manual y malo con ASR: el cuello de botella es la transcripción;
-- ambos malos: falta señal temprana, datos o capacidad del detector;
-- ambos similares: el ASR elegido es suficiente para este corpus;
-- ASR mejora algún caso: revisar si normalización o ruido del texto manual explica el efecto, sin asumir que la mejora es general.
-
-Si el alcance cambiara a un detector que recibe texto y no audio, E1 dejaría de ser
-necesaria. Mientras el producto prometa escuchar voz, esta comparación es parte de
-una evaluación responsable.
+E1 comparaba el mismo detector sobre la transcripción manual y sobre la del ASR, para separar
+los errores del detector de los de transcripción. En su lugar queda un límite: las métricas
+de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió
+aparte, con voz real del equipo, contra el guion y con ruido de fondo
+([PLAN-VOZ-REAL.md](../../experiments/asr-local/PLAN-VOZ-REAL.md)), y el recorrido completo se probó en 9 llamadas guionadas
+([corrida del 2026-11-02](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md)). El límite está en el
+[protocolo §7.2](../evaluacion/PROTOCOLO-EXPERIMENTAL.md#72-amenazas-a-la-validez).
 
 ## E2 — Explicación, objetivo secundario
 
@@ -103,5 +76,4 @@ Una prueba con usuarios es una extensión condicionada al avance de PI1/PI2.
 | -------- | ---------------------------- | --------------------------------- | ---------------------------------------- |
 | PI1      | prefijos, clase y timestamps | reglas vs modelo; prefijos        | curvas desempeño-tiempo y falsas alarmas |
 | PI2      | `T_A`, `T_R`, `T_C`          | políticas de alerta               | márgenes y Preventive@δ                  |
-| E1       | audio, texto manual y ASR    | misma detección, entrada distinta | degradación, errores críticos y latencia |
 | E2       | evidencia seleccionada       | motivo mostrado vs evidencia     | correspondencia y errores de explicación |
