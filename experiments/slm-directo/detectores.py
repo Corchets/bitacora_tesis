@@ -79,6 +79,15 @@ PROMPTS.update({corte: PROMPTS[base] for corte, base in CORTE_DE.items()})
 # prompt, mensaje y esquema, cortado justo después del riesgo. Avisa con «riesgo ≥ 0,3» y pide el motivo de C en una
 # segunda consulta, solo en el primer aviso (DetectorSLMCorteRiesgo).
 CORTE_RIESGO_DE = {"c-json-corte-riesgo": "c-json"}
+# Prueba de sensibilidad (Mateo, 2026-11-10): C con un solo cambio cada una, para avisar más estafas. Ver
+# corridas/2026-11-10_sensibilidad-c/. «c-ancla» ancla la punta alta del riesgo; «c-premisa» agrega un párrafo sobre el
+# número no agendado; «c-sin-freno» saca el párrafo de lo que una llamada legítima también puede pedir.
+PROMPTS.update({
+    "c-ancla": ("tarea_c.txt", "salida_json_c_ancla.txt"),
+    "c-premisa": ("tarea_c_premisa.txt", "salida_json_c.txt"),
+    "c-sin-freno": ("tarea_c_sin_freno.txt", "salida_json_c.txt"),
+})
+CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in ("c-ancla", "c-premisa", "c-sin-freno")})
 PROMPTS.update({corte: PROMPTS[base] for corte, base in CORTE_RIESGO_DE.items()})
 PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2", "s-sino", "c-sino"})
 # Se leen con DetectorSLMDigito: un número del 0 al 9 en el primer token.
@@ -155,6 +164,7 @@ ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO | PROMPTS_DIGITO))  # sin esquema: re
 ESQUEMAS["v4-lectura"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después del riesgo
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_DE.items()})  # el mismo JSON, cortado después de alerta_sugerida
 ESQUEMAS.update({"c-sin-alerta": ESQUEMA_RIESGO, "c-con-campo": ESQUEMA_CON_CAMPO})
+ESQUEMAS.update(dict.fromkeys(("c-ancla", "c-premisa", "c-sin-freno"), ESQUEMA_SALIDA))  # el JSON de C
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_RIESGO_DE.items()})  # el mismo JSON, cortado tras el riesgo
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:

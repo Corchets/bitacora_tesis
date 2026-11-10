@@ -138,7 +138,7 @@ def roles(*pares: tuple[str, str]) -> tuple[Linea, ...]:
 
 class TestConfiguracion(unittest.TestCase):
     def test_es_c_de_la_etapa_2_con_su_prompt_y_su_esquema(self):
-        self.assertEqual(PROMPTS_CORTE_RIESGO, {VARIANTE})
+        self.assertIn(VARIANTE, PROMPTS_CORTE_RIESGO)
         self.assertEqual(cargar_prompt(VARIANTE), cargar_prompt("c-json"))
         self.assertEqual(cargar_prompt(VARIANTE), cargar_prompt("c-json-corte"))
         self.assertEqual(esquema_de(VARIANTE), ESQUEMA_SALIDA)
