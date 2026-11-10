@@ -20,3 +20,5 @@ Es una propiedad de E2B con estos prompts. Otro modelo puede escribir el número
 ## Qué cambia
 
 No se puede elegir un umbral intermedio sobre el riesgo escrito. Por eso #143 prueba leer la probabilidad del token «SÍ»: la primera vuelta no lo adoptó y la segunda está en curso.
+
+> **Nota (2026-11-10):** la segunda vuelta tampoco lo adoptó. Leer la distribución del dígito del riesgo (v4-L) da un puntaje continuo, pero empata con el número escrito (+1); la latencia que ganaba venía de cortar el JSON ([ADR 0006](../ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md)). Con C, el amontonamiento sigue: 31 de 36 avisos en estafas y 25 de 27 FA salen de un 0,3 exacto ([etapa 3](../../experiments/slm-directo/corridas/2026-11-09_pedido-critico-etapa-3/analisis.md#qué-se-aprende-diagnóstico-después-de-ver-los-resultados)). #143 se cerró, y el token queda atado a un ajuste fino en [#176](https://github.com/Corchets/bitacora_tesis/issues/176), trabajo futuro.
