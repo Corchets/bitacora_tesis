@@ -35,6 +35,14 @@ servidor.py ── Zipformer streaming por canal ── actualizaciones.jsonl (c
 - **Reloj de la llamada.** Empieza con el primer bloque que llega. Cada canal se ubica según cuándo llegó
   su primer bloque y desde ahí cuenta muestras: los dos quedan alineados aunque vengan de notebooks
   distintas, y el estéreo guardado tiene el mismo reloj que el JSONL.
+- **Se consulta al cerrar cada turno de OTRA** (ADR 0007, `turnos.py`). Las frases del ASR de cada canal
+  se juntan en turnos. Un turno se cierra cuando el otro lado habla en serio (al menos 3 palabras o un segmento
+  de más de 1 s; un «ajá» no cuenta) o tras 2 s de silencio en su canal, medido con el umbral RMS del ASR. Si
+  ese lado todavía tiene una frase abierta, el cierre espera a que termine. Los turnos de PROTEGIDA entran en el
+  contexto, pero no consultan. Un turno de OTRA de más de 15 s consulta igual al cerrar la frase siguiente. La
+  consulta ve solo las frases cerradas. Los umbrales son provisorios: van por `--turno-palabras`,
+  `--turno-voz-s`, `--turno-silencio-s` y `--turno-tope-s`, y el manifiesto guarda las reglas y cada cierre
+  (`turnos`) para fijarlos con grabaciones. `--disparo final` vuelve a consultar en cada frase de los dos lados.
 - **El detector nunca hace cola.** Si llega texto mientras evalúa, la siguiente evaluación toma lo último
   disponible y las intermedias se saltean (`saltadas` en `detector.jsonl`). En el replay se evalúan
   todas en orden; acá eso haría crecer la demora en una llamada larga.
@@ -73,6 +81,8 @@ python servidor.py --detector reglas
 # ../asr-local/modelos/silero-vad/silero_vad.onnx (release asr-models de sherpa-onnx). En la llamada, el umbral RMS es
 # 0,003, salvo parakeet-filtro: 0,008 (../asr-local/PLAN-VOZ-REAL.md §12.9).
 # Ficha de las llamadas, desde sus registros: python resumen_llamada.py --desde <id>
+# Consulta al cerrar cada turno de OTRA (ADR 0007); umbrales provisorios por línea de comandos:
+# python servidor.py --turno-silencio-s 2.0 --turno-tope-s 15 · como antes, en cada frase: --disparo final
 
 # Panel para el público:   http://<ip-del-servidor>:8765/
 # Pantalla de la protegida: http://<ip-del-servidor>:8765/?vista=protegida
