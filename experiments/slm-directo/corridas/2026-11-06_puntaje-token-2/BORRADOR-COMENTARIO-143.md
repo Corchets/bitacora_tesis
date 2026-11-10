@@ -2,6 +2,45 @@
 
 > **Estado: propuesta sin discutir.** Desarrollo; la reserva no se corre.
 
+### Resultado de la etapa 2 (corrida el 2026-11-07, analizada el 2026-11-09)
+
+La regla se escribió antes de correr, y Mateo la confirmó (tag `colab/143-etapa-2`, commit `d127953`).
+- **Prompts:** los tres usan el JSON cortado (ADR 0006).
+- **Vista, la del alcance:** las 46 estafas de corpus_v2 (36 con pedido) y las 94 legítimas entrantes de #155.
+- **Punto de comparación:** las FA de `v4-corte` con «riesgo ≥ 0,4 o alerta», F = 42/94. Cada configuración usa su
+  regla con FA ≤ F que avisa más estafas.
+- **Humo:** pasó en los dos prompts nuevos (48/48), y no se ajustó nada.
+
+| configuración | regla | estafas (de 46) | antes del pedido (de 36) | FA (de 94) | repetición, misma regla |
+|---|---|---|---|---|---|
+| `v4-corte` (referencia) | riesgo ≥ 0,4 o alerta | 28 | 10 | 42 | — |
+| C (`c-json-corte`) | riesgo ≥ 0,3 o alerta | 36 | 17 | 27 | 36 / 16 / 26 |
+| `v4-premisa-corte` | riesgo ≥ 0,4 o alerta | 27 | 11 | 41 | 27 / 11 / 42 |
+
+- **Según la regla, se adopta C con «riesgo ≥ 0,3 o alerta», provisorio hasta la reserva.**
+  - Avisa 8 estafas más y 7 avisos más antes del pedido, con 15 FA menos, y la repetición lo sostiene.
+  - `v4-premisa` queda dentro de ±2: la oración del alcance sola no cambia a v4.
+- **Dónde gana** (diagnóstico, escrito después de ver los resultados):
+  - las 8 de más son todas estafas sin pedido: C avisa 9 de 10, y v4 1;
+  - con pedido, los dos detectan 27/36, pero C avisa antes: la mediana del adelanto es de 4 líneas, contra 0. La
+    detección útil (antes o en el pedido) queda en 25/36 para los dos;
+  - las FA bajan porque C deja de alertar por el DNI: 35 de las 42 FA de v4 caen justo en la línea en que la legítima
+    pide un dato personal, y 6 de las de C.
+- **Lo que le queda a C:**
+  - 14 de sus 27 FA caen al comienzo de llamadas legítimas del banco o de soporte, que empiezan igual que una estafa;
+  - no ve pedidos explícitos de un código o una contraseña cuando el contexto no parece estafa (un taller, un club, un
+    curso): son 7 de sus 12 errores de detección.
+- **Cuidados:**
+  - el punto de C está en un solo escalón: con 0,4 da 15/46 y 9/94;
+  - 59 de sus 63 avisos son solo por riesgo, y el motivo de esos avisos no se midió;
+  - fuera del alcance avisa más: 13/51 FA en corpus_v2 entero.
+- **Propuesta para seguir (la decide el equipo):**
+  - avisar en dos niveles: precaución con C ≥ 0,3 y alerta con un pedido crítico;
+  - probar C más una pregunta literal de pedidos críticos, sin datos personales. Con la referencia como oráculo, el
+    techo de esa suma es de 44/46 estafas y 35/36 avisos a tiempo, sin FA nuevas.
+
+Detalle en `experiments/slm-directo/corridas/2026-11-07_alcance-etapa-2/analisis.md`.
+
 ### Resultado de la etapa 1 (corrida el 2026-11-06, analizada el 2026-11-07)
 
 La regla de más abajo se escribió antes de correr: está en `analizar.py` desde el commit `b9fd09a` (tag
@@ -101,14 +140,16 @@ sus resultados.
 |---|---|---|
 | `v4-lectura` (v4-L): el JSON de v4 tal cual, cortado después del primer decimal del riesgo | ¿Leer la distribución del riesgo dentro del mismo JSON le gana al riesgo escrito? | v4 JSON |
 
-**Etapa 2 (con las legítimas nuevas):**
-- **Configuraciones:** el prompt C con el alcance (`c-json`, `c-sino`, `c-digito`: mira la intención y permite avisar
-  antes del pedido) y `v4-premisa`, que es v4 con la oración del alcance. v4 y v4-L se corren también sobre las
-  legítimas nuevas.
-- **Vista principal:** las 46 estafas de corpus_v2 y las legítimas nuevas de desarrollo, con FA ≤ 15 % de esas
-  legítimas.
-- **Línea base:** el mejor JSON entre v4, `v4-premisa` y `c-json`.
-- El código de esa vista se escribe antes de correrla.
+**Etapa 2 (con las legítimas nuevas; lo que se corrió, según las decisiones de Mateo del 2026-11-07):**
+- **Configuraciones:** solo JSON, todos cortados.
+  - `v4-corte` es la referencia.
+  - `c-json-corte` (el prompt C con el alcance: mira la intención y permite avisar antes del pedido) y
+    `v4-premisa-corte` (v4 con la oración del alcance) son las candidatas.
+  - Cada candidata corrió dos veces; la repetición, sobre los 140 dentro del alcance.
+  - Sin `c-sino`, `c-digito` ni v4-L: la lectura del token quedó para después de LoRA.
+- **Vista:** las 46 estafas de corpus_v2 y las 94 legítimas entrantes de desarrollo.
+- **FA:** no hay un límite fijo. Se compara en la curva, con las FA de `v4-corte` como punto (ver arriba).
+- El código de esa vista se escribió antes de correrla.
 
 ### Regla (las dos etapas)
 

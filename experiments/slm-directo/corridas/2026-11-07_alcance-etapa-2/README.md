@@ -1,7 +1,15 @@
 # #143, segunda vuelta, etapa 2: C y v4-premisa contra v4 dentro del alcance
 
-> **Estado: propuesta sin discutir.** Desarrollo; la reserva no se corre. Se preparó el 2026-11-07. El criterio de
-> abajo se escribió antes de correr, y está en código en [`analizar.py`](analizar.py). El Colab está en
+> **Estado: propuesta sin discutir.** Desarrollo; la reserva no se corre. Se preparó y se corrió en Colab el
+> 2026-11-07, y se analizó el 2026-11-09. **Según la regla, se adopta C con «riesgo ≥ 0,3 o alerta», provisorio hasta
+> la reserva.**
+> - Contra `v4-corte`: +8 estafas y +7 avisos antes del pedido, con 27/94 FA contra 42/94.
+> - La repetición lo sostiene.
+> - `v4-premisa` queda dentro de ±2.
+>
+> Ver [`analisis.md`](analisis.md), y para seguir, [`PROPUESTA-SIGUIENTE.md`](PROPUESTA-SIGUIENTE.md). El criterio
+> de abajo se escribió antes de correr, y está en código en
+> [`analizar.py`](analizar.py). El Colab está en
 > [`colab/README-PUNTAJE-TOKEN.md` §5](../../colab/README-PUNTAJE-TOKEN.md#5-segunda-vuelta-etapa-2-tag-colab143-etapa-2).
 
 ## Qué pregunta
@@ -89,8 +97,35 @@ El prompt que no pasa no corre, y no se ajusta nada en esa sesión.
 
 La meta 80/15 no es criterio.
 
+## Humo de formato y verificación de los ZIP
+
+**Humo:** se corrió en Colab T4 el 2026-11-07 a las 23:33 UTC, con el commit `d127953`, sobre los 3 casos de siempre
+(48 líneas). **Pasa en los dos prompts, así que no se ajustó nada.**
+
+| prompt | tokens hasta la alerta (mín / mediana / máx) | líneas que alcanzan | cortado, líneas leídas | resultado |
+|---|---|---|---|---|
+| `c-json-corte` | 23 / 23 / 23 | 48/48 | 48/48 | PASA |
+| `v4-premisa-corte` | 23 / 23 / 23 | 48/48 | 48/48 | PASA |
+
+El detalle está en [`humo/humo.md`](humo/humo.md).
+
+**Verificación de los ZIP (2026-11-09):**
+- cada uno de los 8 se descomprimió en un directorio vacío nuevo, y los 7 parciales coinciden byte a byte con su
+  carpeta en el final;
+- `commit.txt`, los 6 `TERMINADA.txt` y los 7 manifiestos dan `d127953`, sin cambios sin commitear;
+- el sha256 de `colab/probar_etapa_2.py` en el tag coincide con `script-sha256.txt` (`3966e0ac…`);
+- el digest del modelo coincide en los manifiestos y en `digest.txt` (`b37049369adf…`), con Ollama 0.40.14;
+- el texto de la segunda consulta es el de `motivo_v4_corte.txt`, y no hay casos de la reserva.
+
 ## Archivos
 
 | Archivo | Qué es |
 |---|---|
 | [`analizar.py`](analizar.py) | El criterio de arriba en código, escrito antes de correr: `python -I analizar.py` desde esta carpeta, con los ZIP descomprimidos acá. Tests en [`tests/test_etapa2_143.py`](../../tests/test_etapa2_143.py). |
+| [`analisis.md`](analisis.md) | Resultado: el veredicto, qué mejoró, dónde y por qué, lo que le queda a C y una propuesta para seguir. |
+| [`analisis-salida.md`](analisis-salida.md), `curva.csv` | Salida completa de `python -I analizar.py` y la curva de cada corrida. |
+| [`diagnostico.py`](diagnostico.py), [`diagnostico-salida.md`](diagnostico-salida.md) | Diagnóstico fuera del criterio, escrito el 2026-11-09 después de ver los resultados. Cubre: estafas por tipo de pedido, FA por lote y por momento, uso del riesgo escrito, errores de C, la segunda consulta, la exploración del riesgo sostenido y del pedido crítico con oráculo, y los controles línea por línea. |
+| [`exploracion.py`](exploracion.py), [`exploracion-salida.md`](exploracion-salida.md) | Exploración del 2026-11-09, después de ver los resultados, para decidir cómo seguir: `alerta_sugerida` y el corte tras el riesgo, subidas y bajadas del riesgo, frases tranquilizadoras, consultar solo en las líneas de OTRA, aperturas, y FA según el pedido de datos y por escenario. |
+| [`PROPUESTA-SIGUIENTE.md`](PROPUESTA-SIGUIENTE.md) | Propuesta para seguir: qué se concluye, respuestas a las preguntas de Mateo, decisiones pendientes, pasos, sesiones y trabajo para repartir. |
+| `humo/`, `v4-corte/`, `c-json-corte/`, `c-json-corte-rep/`, `v4-premisa-corte/`, `v4-premisa-corte-rep/`, `controles-ventas/` | Corridas de Colab, una carpeta por corrida, tal como bajaron. |
+| `commit.txt`, `script-sha256.txt`, `ollama-version.txt`, `digest.txt`, `pip-freeze.txt`, `gpu.txt` | Registro de la corrida. |
