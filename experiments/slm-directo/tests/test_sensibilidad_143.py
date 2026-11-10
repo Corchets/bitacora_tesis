@@ -32,7 +32,7 @@ class TestUnSoloCambio(unittest.TestCase):
         self.base = cargar_prompt("c-json-corte-riesgo")
 
     def test_registradas_como_la_configuracion_congelada(self):
-        self.assertEqual(PROMPTS_CORTE_RIESGO, {"c-json-corte-riesgo", *VARIANTES})
+        self.assertLessEqual({"c-json-corte-riesgo", *VARIANTES}, PROMPTS_CORTE_RIESGO)  # después se sumaron las de la revisión de producto
         for v in VARIANTES:
             self.assertEqual(esquema_de(v), ESQUEMA_SALIDA, v)
 

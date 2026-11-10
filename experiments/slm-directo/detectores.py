@@ -88,6 +88,13 @@ PROMPTS.update({
     "c-sin-freno": ("tarea_c_sin_freno.txt", "salida_json_c.txt"),
 })
 CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in ("c-ancla", "c-premisa", "c-sin-freno")})
+# Revisión de producto (Mateo, 2026-11-10): la configuración congelada (`c-premisa`) con un solo párrafo cambiado cada
+# una. Ver corridas/2026-11-10_revision-producto/. «c-codigo» pone la regla del código y la clave por intención, no por
+# quién llama; «c-consejos» cambia ese párrafo por los consejos oficiales de siempre; «c-freno» reescribe por intención
+# el párrafo de lo que una llamada legítima también puede pedir.
+VARIANTES_REVISION_PRODUCTO = ("c-codigo", "c-consejos", "c-freno")
+PROMPTS.update({v: (f"tarea_{v.replace('-', '_')}.txt", "salida_json_c.txt") for v in VARIANTES_REVISION_PRODUCTO})
+CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in VARIANTES_REVISION_PRODUCTO})
 PROMPTS.update({corte: PROMPTS[base] for corte, base in CORTE_RIESGO_DE.items()})
 PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2", "s-sino", "c-sino"})
 # Se leen con DetectorSLMDigito: un número del 0 al 9 en el primer token.
@@ -164,7 +171,7 @@ ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO | PROMPTS_DIGITO))  # sin esquema: re
 ESQUEMAS["v4-lectura"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después del riesgo
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_DE.items()})  # el mismo JSON, cortado después de alerta_sugerida
 ESQUEMAS.update({"c-sin-alerta": ESQUEMA_RIESGO, "c-con-campo": ESQUEMA_CON_CAMPO})
-ESQUEMAS.update(dict.fromkeys(("c-ancla", "c-premisa", "c-sin-freno"), ESQUEMA_SALIDA))  # el JSON de C
+ESQUEMAS.update(dict.fromkeys(("c-ancla", "c-premisa", "c-sin-freno", *VARIANTES_REVISION_PRODUCTO), ESQUEMA_SALIDA))  # el JSON de C
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_RIESGO_DE.items()})  # el mismo JSON, cortado tras el riesgo
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
