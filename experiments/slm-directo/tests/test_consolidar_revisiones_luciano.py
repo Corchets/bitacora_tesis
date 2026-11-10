@@ -50,6 +50,16 @@ class ConsolidacionTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             revision.filas_144(original.replace("## Fila 0 ·", "## Ausente 0 ·"))
 
+    def test_fichas_coreanas_conservan_segmentos_textuales(self):
+        texto = (revision.CORPUS / revision.COREANO_144).read_text()
+        filas = revision.filas_144_coreano(texto)
+        self.assertEqual([f["fuente_id"] for f in filas], ["vishing_540", "vishing_281"])
+        self.assertEqual(filas[0]["pedido_marca"], "57 y 59")
+        self.assertTrue(filas[1]["pedido_marca"].startswith("que pida que instale"))
+        self.assertTrue(all(f["unidad_marcas"] == "segmento_fuente" for f in filas))
+        with self.assertRaises(ValueError):
+            revision.filas_144_coreano(texto.replace("### Ficha KO-02", "### Otra"))
+
 
 if __name__ == "__main__":
     unittest.main()

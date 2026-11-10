@@ -13,7 +13,8 @@ ninguna se promueve automáticamente a referencia adjudicada.
 | [Correspondencia de #145, vigente](CORRESPONDENCIA-145-LUCIANO-2026-11-10.json) | Alias de esas 26 fichas → `case_id` de desarrollo y hash del diálogo, más el aviso previo de seis fichas (ver abajo). No publica la clave de las otras 16 fichas, las referencias anteriores ni resultados del detector. |
 | [Original de #145 del 2026-11-07](REVISION-145-LUCIANO-2026-11-07.json) y [su correspondencia](CORRESPONDENCIA-145-LUCIANO-2026-11-07.json) | Captura anterior: 20 fichas, 17 confirmadas y 3 sin confirmar. Se conserva sin cambios. |
 | [Fichas originales de inglés de #144](FICHAS-144-LUCIANO-INGLES-2026-11-07.md) | Copia exacta de las 20 fichas que estaban en custodia local: 16 casos conservados y 4 descartados. Las columnas atribuidas a Claude siguen separadas del juicio humano. |
-| [Vista común JSONL](REVISIONES-LUCIANO-2026-11-10.jsonl) | 46 registros derivados (20 de #144 y 26 de #145 vigentes) con issue, revisor, identificador, respuesta de clase literal, marcas y enlace al original. Se regenera; no se edita a mano. |
+| [Fichas de coreano de #144](FICHAS-144-LUCIANO-COREANO-2026-11-10.md) | KO-01 y KO-02 (`vishing_540` y `vishing_281`), completadas el 2026-11-10. Solo las fichas: la traducción queda privada por las condiciones de la fuente. Marcas en segmentos de la fuente. |
+| [Vista común JSONL](REVISIONES-LUCIANO-2026-11-10.jsonl) | 48 registros derivados (20 de inglés y 2 de coreano de #144, y 26 de #145) con issue, revisor, identificador, respuesta de clase literal, marcas y enlace al original. Se regenera; no se edita a mano. |
 
 SHA-256 del original vigente de #145:
 `12f19558dc367f91baa51404ee10c45d0e90adc11d760beabfe9dfd4023d763b`; del original del 2026-11-07:
@@ -73,7 +74,8 @@ Para #144, usar `case_id = EXT-NNN` y el mapa local de turnos a líneas; las cua
 descartadas conservan fila de origen pero no tienen `case_id` del set.
 `archivo_original` y `selector_original` permiten volver a las explicaciones literales.
 
-**Las unidades no se mezclan:** #145 usa líneas del diálogo; #144 conserva los turnos de
+**Las unidades no se mezclan:** #145 usa líneas del diálogo; el coreano de #144 usa
+segmentos de la fuente; el inglés de #144 conserva los turnos de
 las lecturas y respuestas textuales como «13 17» o «nunca nombra que abre el anydesk».
 No se convierten esas frases en números ni se imputan datos faltantes. La vista común
 no contiene transcripciones ni predicciones del detector.
