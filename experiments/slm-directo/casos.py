@@ -27,7 +27,7 @@ ROLES = RAIZ / "casos" / "roles-protegida.json"
 CATALOGO = RAIZ.parents[1] / "docs" / "corpus" / "CATALOGO-ESCENARIOS.csv"
 MANIFIESTO = RAIZ / "casos" / "MANIFIESTO-CORPUS-V2.json"
 # Solo existe en la copia pública (laboratorio-main): la reserva y sus filas del catálogo
-# quedaron fuera de esa rama a propósito. Ver casos/README.md.
+# quedaron fuera de esa rama a propósito. Viven en la rama reserva/test. Ver casos/README.md.
 SIN_RESERVA = RAIZ / "casos" / "RESERVA-FUERA-DEL-REPO.md"
 
 LEGITIMAS = {"legitima", "legitima_dificil"}
