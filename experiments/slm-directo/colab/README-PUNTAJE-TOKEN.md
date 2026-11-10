@@ -359,3 +359,14 @@ OTRA (`--seguir-tras-aviso`):
    - Si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
 3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiar las carpetas a
    `corridas/2026-11-10_sensibilidad-c/`. Después, correr `python -I analizar.py` desde esa carpeta.
+
+## 9. Evaluación final (tag `colab/143-evaluacion-final`, todavía sin crear)
+
+> **Estado: propuesta sin discutir.** Corre una sola vez la configuración congelada y las referencias simples sobre
+> desarrollo, el test reservado y, si está, #144. Todo está en
+> [`corridas/2026-11-12_evaluacion-final/README.md`](../corridas/2026-11-12_evaluacion-final/README.md): qué corre, el
+> control de reproducibilidad antes del test y los criterios, que decide Mateo antes del tag.
+
+[`probar_evaluacion_final.py`](probar_evaluacion_final.py) se abre desde
+[`COLAB-EVALUACION-FINAL.ipynb`](COLAB-EVALUACION-FINAL.ipynb). El notebook no corre hasta tener el hash del commit del
+tag (`COMMIT = 'PENDIENTE'`). Si hay set externo, su carpeta se sube a Colab antes y su ruta va en `EXTERNO`.
