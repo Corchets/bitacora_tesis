@@ -143,7 +143,8 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
 
     def test_parse_args_hablantes_y_sin_indicio(self):
         args = parse_args([])
-        self.assertEqual((args.prompt, args.hablantes, args.sin_indicio), ("v4", "rol", True))
+        self.assertEqual((args.detector, args.prompt, args.hablantes, args.sin_indicio, args.solo_otra),
+                         ("slm", "c-json-corte-riesgo", "rol", True, True))
         self.assertFalse(parse_args(["--con-indicio"]).sin_indicio)
         self.assertTrue(parse_args(["--sin-indicio"]).sin_indicio)
         with patch("sys.stderr"), self.assertRaises(SystemExit):
@@ -153,7 +154,7 @@ class TestMedir(unittest.IsolatedAsyncioTestCase):
         class PararPrueba(Exception):
             pass
 
-        args = parse_args(["--detector", "tito-slm", "--hablantes", "rol", "--sin-indicio"])
+        args = parse_args(["--detector", "tito-slm", "--prompt", "v4", "--hablantes", "rol", "--sin-indicio"])
         with patch.object(Path, "is_file", return_value=True), \
                 patch("medir.replay.construir_detector") as mock_construir, \
                 patch("medir.replay.correr.preparar_ollama", return_value=None), \

@@ -15,15 +15,45 @@ con_reserva_no_regenera = unittest.skipIf(
     any((curacion.AQUI / 'casos/texto').glob('CV2-T-*')), 'la reserva está en esta rama')
 
 
+def revision_con_cierre_97_actual(revision: dict) -> dict:
+    """La revisión selló CIERRE-97.md tal como estaba en el commit auditado.
+
+    El 2026-10-30 (ee78f6e) se renumeró su riesgo de R23 a R25 y nada más. Se
+    comprueba que esa sea la única diferencia antes de aceptar el hash actual: si
+    el documento vuelve a cambiar, las pruebas fallan acá en lugar de esconderlo.
+    """
+    auditado = curacion.codigo_git(curacion.REVISION_CODIGO_COMMIT, 'CIERRE-97.md')
+    actual = (curacion.AQUI / 'CIERRE-97.md').read_bytes()
+    arte = next(a for a in revision['artefactos'] if a['ruta'] == 'CIERRE-97.md')
+    if curacion.sha(auditado) != arte['sha256']:
+        raise AssertionError('CIERRE-97.md del commit auditado no coincide con la revisión')
+    if auditado.replace(b'(R05, R23)', b'(R05, R25)') != actual:
+        raise AssertionError('CIERRE-97.md cambió más allá de la renumeración R23 a R25')
+    revision = copy.deepcopy(revision)
+    arte = next(a for a in revision['artefactos'] if a['ruta'] == 'CIERRE-97.md')
+    arte['sha256'] = curacion.sha(actual)
+    return revision
+
+
+def generar(revision: dict) -> dict:
+    """Modo histórico: el código derivado se lee del commit auditado.
+
+    Así la línea base genera sin error y cada prueba negativa falla solo por lo
+    que altera, no por la deriva del código actual.
+    """
+    return curacion.generar_seleccion(
+        revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
+
+
 class CuracionTitoTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.revision = json.loads(curacion.REVISION.read_text(encoding='utf-8'))
+        cls.revision = revision_con_cierre_97_actual(
+            json.loads(curacion.REVISION.read_text(encoding='utf-8')))
 
     @con_reserva_no_regenera
     def test_cada_registro_tiene_destino_y_conserva_regresiones(self):
-        paquete = curacion.generar_seleccion(
-            self.revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
+        paquete = generar(self.revision)
         _, originales, _, _ = curacion.leer_banco()
         por_id = {r['id']: r for r in paquete['banco']}
         self.assertEqual(set(por_id), {r['id'] for r in originales})
@@ -41,16 +71,21 @@ class CuracionTitoTest(unittest.TestCase):
         self.assertEqual(por_id['cotidiano_002_01']['seleccion'], 'apartar')
 
     def test_rechaza_cobertura_incompleta_o_duplicada(self):
-        for campo in ('familias_banco', 'conversaciones'):
-            for duplicar in (False, True):
-                with self.subTest(campo=campo, duplicar=duplicar):
-                    revision = copy.deepcopy(self.revision)
-                    if duplicar:
-                        revision[campo].append(copy.deepcopy(revision[campo][0]))
-                    else:
-                        revision[campo].pop()
-                    with self.assertRaises(ValueError):
-                        curacion.generar_seleccion(revision)
+        mensajes = {
+            ('familias_banco', False): 'Faltan/sobran familias',
+            ('familias_banco', True): 'Identificadores repetidos: familia',
+            ('conversaciones', False): 'Faltan/sobran conversaciones',
+            ('conversaciones', True): 'Identificadores repetidos: case_id',
+        }
+        for (campo, duplicar), mensaje in mensajes.items():
+            with self.subTest(campo=campo, duplicar=duplicar):
+                revision = copy.deepcopy(self.revision)
+                if duplicar:
+                    revision[campo].append(copy.deepcopy(revision[campo][0]))
+                else:
+                    revision[campo].pop()
+                with self.assertRaisesRegex(ValueError, mensaje):
+                    generar(revision)
 
     def test_no_reintroduce_exclusiones_historicas(self):
         revision = copy.deepcopy(self.revision)
@@ -61,17 +96,17 @@ class CuracionTitoTest(unittest.TestCase):
 
     def test_rechaza_referencias_de_otro_texto_o_revision_humana_ficticia(self):
         cambios = (
-            ('conversaciones', 'texto_sha256', 'alterado'),
-            ('familias_banco', 'familia_sha256', 'alterado'),
-            ('conversaciones', 'revision_humana', True),
-            ('familias_banco', 'revision_humana', True),
+            ('conversaciones', 'texto_sha256', 'alterado', 'Cambió el caso revisado'),
+            ('familias_banco', 'familia_sha256', 'alterado', 'Familia distinta de la leída'),
+            ('conversaciones', 'revision_humana', True, 'Revisión IA inválida'),
+            ('familias_banco', 'revision_humana', True, 'presentado como humano'),
         )
-        for campo, clave, valor in cambios:
+        for campo, clave, valor, mensaje in cambios:
             with self.subTest(campo=campo, clave=clave):
                 revision = copy.deepcopy(self.revision)
                 revision[campo][0][clave] = valor
-                with self.assertRaises(ValueError):
-                    curacion.generar_seleccion(revision)
+                with self.assertRaisesRegex(ValueError, mensaje):
+                    generar(revision)
 
     def test_no_habilita_una_seleccion_ia(self):
         revision = copy.deepcopy(self.revision)
@@ -81,13 +116,15 @@ class CuracionTitoTest(unittest.TestCase):
 
     @con_reserva_no_regenera
     def test_modo_estricto_rechaza_fuente_actual_cambiada(self):
-        with self.assertRaisesRegex(ValueError, 'Artefacto cambiado: filtro_tito.py'):
+        # entrenar_tito.py y filtro_tito.py cambiaron después de la revisión; cuál
+        # aparece primero depende del orden de los artefactos, no del control.
+        with self.assertRaisesRegex(ValueError,
+                                    r'Artefacto cambiado: (entrenar_tito|filtro_tito)\.py'):
             curacion.generar_seleccion(self.revision)
 
     @con_reserva_no_regenera
     def test_historico_reporta_deriva_sin_reetiquetar(self):
-        paquete = curacion.generar_seleccion(
-            self.revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
+        paquete = generar(self.revision)
         bloque = paquete['codigo_historico']
         self.assertEqual(bloque['commit'], curacion.REVISION_CODIGO_COMMIT)
         deriva = bloque['deriva_codigo_actual']['filtro_tito.py']
@@ -106,9 +143,8 @@ class CuracionTitoTest(unittest.TestCase):
         for arte in revision['artefactos']:
             if arte['ruta'] == 'tito_logreg.json':
                 arte['sha256'] = 'alterado'
-        with self.assertRaises(ValueError):
-            curacion.generar_seleccion(
-                revision, codigo_historico=curacion.REVISION_CODIGO_COMMIT)
+        with self.assertRaisesRegex(ValueError, 'Artefacto cambiado: tito_logreg.json'):
+            generar(revision)
 
     def test_reserva_se_rechaza_por_id_antes_de_abrir_contenido(self):
         banco_historico = curacion.leer_banco()

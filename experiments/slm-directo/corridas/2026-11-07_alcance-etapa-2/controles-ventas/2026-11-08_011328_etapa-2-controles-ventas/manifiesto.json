@@ -1,0 +1,244 @@
+{
+  "inicio": "2026-11-08T01:13:28",
+  "comando": "python correr.py --prompts v4-corte,c-json-corte,v4-premisa-corte --modelos gemma4:e2b-it-q4_K_M --num-ctx 4096 --seed 42 --sin-reglas --seguir-tras-aviso --hablantes rol --etiqueta etapa-2-controles-ventas --salida /content/resultados-etapa-2/controles-ventas",
+  "codigo": {
+    "commit": "d127953fcc05389b54b26415fc047ad6f1865a35",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "arquitectura": "x86_64",
+    "procesador": "x86_64",
+    "nucleos_logicos": 2,
+    "ram_total_gb": 12.7,
+    "python": "3.13.16"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "filtro_tito": null,
+  "tito_viejo_2": null,
+  "particion": "desarrollo",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.14",
+    "digests": {
+      "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+    },
+    "arranque_ms": 6,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": null,
+    "json_cortado": {
+      "num_predict": 24,
+      "formato": "el esquema JSON del prompt",
+      "logprobs": false,
+      "lectura": "riesgo y alerta_sugerida del texto cortado (detectores.leer_json_cortado)",
+      "alerta_sugerida": "riesgo >= 0.4 o alerta_sugerida escrita (columna alerta_escrita)",
+      "etapa2": "solo en la primera línea de la llamada en que dispara la regla: mismos mensajes + lo escrito, cerrado como JSON, como assistant + motivo_v4_corte.txt, con ESQUEMA_MOTIVO y num_predict 512"
+    }
+  },
+  "prompts": {
+    "v4-corte": {
+      "huella": "92df75a22c2746fb",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. Cada línea empieza con PROTEGIDA (la persona que cuidás) u OTRA (con quien habla). La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en esta llamada, OTRA le pide, induce o presiona a PROTEGIDA para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nReconocé también los pedidos indirectos, aunque no usen las palabras de la lista. Una razón que parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta) o presentarse como una entidad oficial no hace segura la acción pedida.\n\nNo alcanza para alertar:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- aconsejarle a PROTEGIDA que corte y entre por su cuenta a la aplicación o a la página oficial, o que llame a un número que ya tiene, si no le dan un plazo, una amenaza, un enlace ni pasos a seguir;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general;\n- que PROTEGIDA ofrezca, pregunte o cuente algo por su cuenta, sin un pedido o inducción previa de OTRA;\n- que PROTEGIDA haya iniciado la gestión y OTRA le pida un dato común para identificarla (nombre, DNI, fecha de nacimiento, últimos dígitos de una cuenta). Las claves, los códigos y los pagos nunca entran en esta excepción.\n\nRevisá las intervenciones anteriores: si PROTEGIDA ofrece o cuenta algo porque OTRA se lo pidió o la indujo antes en esta llamada, eso sí cuenta. Que PROTEGIDA se niegue no borra el pedido, y que OTRA diga que no pide datos no borra lo que efectivamente haya solicitado.\n\nSi para explicar el peligro tenés que suponer algo que no se dijo, no alertes. Que alguien apure, diga ser de una entidad o hable de un problema puede aumentar el riesgo, pero no alcanza por sí solo para alertar.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": número entre 0 y 1 que indica qué tan riesgosa te parece la llamada con lo disponible hasta ahora.\n- \"alerta_sugerida\": true o false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que nombre lo que OTRA le está pidiendo; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente el fragmento donde OTRA lo pide o lo induce; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "0adcc01b0b5e66a7",
+        "texto": "Se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.\n- \"motivo\": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "c-json-corte": {
+      "huella": "6ee30d38fa9d812c",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Si ya se parece a una estafa, conviene avisar aunque todavía no haya un pedido.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.\n- \"alerta_sugerida\": true si ya conviene avisarle a PROTEGIDA que puede ser una estafa; si no, false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que diga por qué puede ser una estafa; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente la frase de OTRA que más lo muestra; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "0adcc01b0b5e66a7",
+        "texto": "Se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.\n- \"motivo\": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "v4-premisa-corte": {
+      "huella": "951a37bf8e377449",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. Cada línea empieza con PROTEGIDA (la persona que cuidás) u OTRA (con quien habla). PROTEGIDA recibió esta llamada de un número que no tiene agendado: la llamó OTRA. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en esta llamada, OTRA le pide, induce o presiona a PROTEGIDA para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nReconocé también los pedidos indirectos, aunque no usen las palabras de la lista. Una razón que parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta) o presentarse como una entidad oficial no hace segura la acción pedida.\n\nNo alcanza para alertar:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- aconsejarle a PROTEGIDA que corte y entre por su cuenta a la aplicación o a la página oficial, o que llame a un número que ya tiene, si no le dan un plazo, una amenaza, un enlace ni pasos a seguir;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general;\n- que PROTEGIDA ofrezca, pregunte o cuente algo por su cuenta, sin un pedido o inducción previa de OTRA;\n- que PROTEGIDA haya iniciado la gestión y OTRA le pida un dato común para identificarla (nombre, DNI, fecha de nacimiento, últimos dígitos de una cuenta). Las claves, los códigos y los pagos nunca entran en esta excepción.\n\nRevisá las intervenciones anteriores: si PROTEGIDA ofrece o cuenta algo porque OTRA se lo pidió o la indujo antes en esta llamada, eso sí cuenta. Que PROTEGIDA se niegue no borra el pedido, y que OTRA diga que no pide datos no borra lo que efectivamente haya solicitado.\n\nSi para explicar el peligro tenés que suponer algo que no se dijo, no alertes. Que alguien apure, diga ser de una entidad o hable de un problema puede aumentar el riesgo, pero no alcanza por sí solo para alertar.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": número entre 0 y 1 que indica qué tan riesgosa te parece la llamada con lo disponible hasta ahora.\n- \"alerta_sugerida\": true o false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que nombre lo que OTRA le está pidiendo; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente el fragmento donde OTRA lo pide o lo induce; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "0adcc01b0b5e66a7",
+        "texto": "Se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.\n- \"motivo\": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|v4-corte|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "v4-corte",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-json-corte|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-json-corte",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|v4-premisa-corte|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "v4-premisa-corte",
+      "hablantes": "rol"
+    }
+  ],
+  "casos": {
+    "CTRL-L-BANCO-OFRECE-PRESTAMO": "cb630f551b48325c",
+    "CTRL-L-PIDE-PRESTAMO": "bd1180f89d4735fc",
+    "CTRL-L-VENTA-PORTABILIDAD": "212afa51372a57eb",
+    "CTRL-V-BANCO-PRESTAMO-TOKEN": "19ab1bf2b43d5725",
+    "CTRL-V-OPERADOR-SMS": "1bfb1fe0070d44c2",
+    "CTRL-V-PRESTAMO-REDES": "082c55b38cd96a57"
+  },
+  "roles_protegida": "c166549e140b4340",
+  "modelos": {
+    "gemma4:e2b-it-q4_K_M": {
+      "carga_ms": 437,
+      "calentamiento_ms": 437,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 330783784,
+        "size_vram_bytes": 330783784
+      },
+      "pensar": false,
+      "runtime_total_ns": 435120023,
+      "runtime_load_ns": 898229,
+      "runtime_prompt_eval_ns": 71165000,
+      "runtime_eval_ns": 335734000
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-11-08T01:15:01"
+}

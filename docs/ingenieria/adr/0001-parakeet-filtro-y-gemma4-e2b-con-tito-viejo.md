@@ -30,12 +30,16 @@ filtro de voz (`parakeet-filtro`, opción B).
 | Parakeet con Silero solo (opción A) | La frase final sale 0,75 s antes y conserva más términos críticos (76,4 % contra 70,9 %) | Parte las frases (205 segmentos contra 127) y mete inglés o portugués en 25 de 129 frases, contra 4 | Empata en etiquetas y empeora el texto (WER 32,8 % contra 25,6 %) |
 | Zipformer Kroko | Streaming real, con parciales rápidos | Errores con voz real | Se retiró el 2026-10-29 |
 | Whisper base | Conocido y fácil de correr | No es streaming: transcribe recién al cerrar la frase | La demo necesita ir escribiendo mientras se habla |
+| Gemma 4 E2B transcribe ([#152](https://github.com/Corchets/bitacora_tesis/issues/152), B; agregada el 2026-11-10) | Un modelo menos | Con TTS, WER 8,5 % contra 4,9 %, pierde cifras dictadas y tarda 2,7 s por turno en CPU contra 0,18 s. No ahorra memoria con claridad | Peor y más lenta sobre el mismo audio ([corrida](../../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md)) |
+| Gemma 4 E2B escucha directo (#152, C; agregada el 2026-11-10) | Sin transcripción intermedia | 30 s de audio por entrada, a 25 tokens por segundo: la llamada no entra en el contexto. Sin texto no hay motivo ni registro | No se midió: exige rehacer la evaluación en audio. Trabajo futuro |
 
 ## Consecuencias
 
 - El ASR sigue confundiendo «token» y «CVV», y Parakeet no permite fijar el idioma.
 - La elección sale de 9 llamadas guionadas, con 4 guiones y 2 voces. No estima el rendimiento general.
-- No se midió en teléfono. El ASR solo ya llega a 1 GB, por encima del techo de 512 MB de la prefactibilidad.
+- No se midió en teléfono. El ASR solo ya llega a 1 GB, por encima del techo de 512 MB de la prefactibilidad. En la
+  M4 de Mateo (2026-11-10, `sherpa-onnx` 1.13.8) llegó a 2,0 GB de huella física
+  ([corrida de #152](../../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#memoria-en-cpu)).
 
 **Para reconsiderarla:** que los términos críticos perdidos cambien avisos en voz real, o que el ASR no entre en el
 teléfono de referencia.

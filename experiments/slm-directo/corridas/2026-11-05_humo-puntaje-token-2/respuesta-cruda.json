@@ -1,0 +1,210 @@
+{
+  "pedido": {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. Cada línea empieza con PROTEGIDA (la persona que cuidás) u OTRA (con quien habla). La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nLo que importa es si, en esta llamada, OTRA le pide, induce o presiona a PROTEGIDA para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- leer, dictar o reenviar un código o un mensaje que le llegó (SMS, token, código de verificación o de activación);\n- decir claves, PIN, contraseñas o usuarios;\n- dar datos personales (DNI, CUIL, fecha de nacimiento, domicilio, foto de un documento o de su cara);\n- transferir, pagar, girar, depositar o entregar dinero o efectivo;\n- instalar un programa, compartir la pantalla o dejar que otro vea o maneje su celular o su computadora;\n- seguir instrucciones en el celular, el cajero o el banco (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nReconocé también los pedidos indirectos, aunque no usen las palabras de la lista. Una razón que parezca válida (una deuda, un accidente, un beneficio, la seguridad de la cuenta) o presentarse como una entidad oficial no hace segura la acción pedida.\n\nNo alcanza para alertar:\n- mencionar esas cosas, explicarlas o aconsejar no compartirlas;\n- aconsejarle a PROTEGIDA que corte y entre por su cuenta a la aplicación o a la página oficial, o que llame a un número que ya tiene, si no le dan un plazo, una amenaza, un enlace ni pasos a seguir;\n- contar que alguien las pidió en otra llamada, en otro momento o por otro medio;\n- plantearlas como hipótesis o como pregunta general;\n- que PROTEGIDA ofrezca, pregunte o cuente algo por su cuenta, sin un pedido o inducción previa de OTRA;\n- que PROTEGIDA haya iniciado la gestión y OTRA le pida un dato común para identificarla (nombre, DNI, fecha de nacimiento, últimos dígitos de una cuenta). Las claves, los códigos y los pagos nunca entran en esta excepción.\n\nRevisá las intervenciones anteriores: si PROTEGIDA ofrece o cuenta algo porque OTRA se lo pidió o la indujo antes en esta llamada, eso sí cuenta. Que PROTEGIDA se niegue no borra el pedido, y que OTRA diga que no pide datos no borra lo que efectivamente haya solicitado.\n\nSi para explicar el peligro tenés que suponer algo que no se dijo, no alertes. Que alguien apure, diga ser de una entidad o hable de un problema puede aumentar el riesgo, pero no alcanza por sí solo para alertar.\n\n¿OTRA le está pidiendo o induciendo a PROTEGIDA algo de la lista? Respondé solo SÍ o NO."
+      },
+      {
+        "role": "user",
+        "content": "Transcripción disponible hasta ahora; la llamada sigue. Cada línea indica quién habla: PROTEGIDA es la persona que protegés y OTRA es con quien habla.\n\n1. OTRA: Te llamo de soporte por la activación de tu cuenta de WhatsApp.\n2. PROTEGIDA: Me acaba de llegar un SMS. No pedí activar nada.\n3. OTRA: Para cancelar esa activación tenemos que resolverlo ahora.\n4. OTRA: Decime el código de activación que recibiste por SMS.\n\nEvaluá la llamada con lo disponible hasta la línea 4."
+      }
+    ],
+    "options": {
+      "temperature": 0.0,
+      "seed": 42,
+      "num_ctx": 4096,
+      "num_predict": 1
+    },
+    "stream": false,
+    "think": false,
+    "logprobs": true,
+    "top_logprobs": 20
+  },
+  "respuesta": {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "created_at": "2026-11-06T02:20:52.82885366Z",
+    "message": {
+      "role": "assistant",
+      "content": "S"
+    },
+    "done": true,
+    "done_reason": "length",
+    "logprobs": [
+      {
+        "token": "S",
+        "logprob": 0,
+        "bytes": [
+          83
+        ],
+        "top_logprobs": [
+          {
+            "token": "S",
+            "logprob": 0,
+            "bytes": [
+              83
+            ]
+          },
+          {
+            "token": "SI",
+            "logprob": -16.64121437072754,
+            "bytes": [
+              83,
+              73
+            ]
+          },
+          {
+            "token": "Sí",
+            "logprob": -18.339067459106445,
+            "bytes": [
+              83,
+              195,
+              173
+            ]
+          },
+          {
+            "token": "NO",
+            "logprob": -19.162221908569336,
+            "bytes": [
+              78,
+              79
+            ]
+          },
+          {
+            "token": " S",
+            "logprob": -20.088144302368164,
+            "bytes": [
+              32,
+              83
+            ]
+          },
+          {
+            "token": "SIN",
+            "logprob": -20.86228370666504,
+            "bytes": [
+              83,
+              73,
+              78
+            ]
+          },
+          {
+            "token": "SIP",
+            "logprob": -23.12151527404785,
+            "bytes": [
+              83,
+              73,
+              80
+            ]
+          },
+          {
+            "token": "SII",
+            "logprob": -23.22747230529785,
+            "bytes": [
+              83,
+              73,
+              73
+            ]
+          },
+          {
+            "token": "YES",
+            "logprob": -24.075780868530273,
+            "bytes": [
+              89,
+              69,
+              83
+            ]
+          },
+          {
+            "token": "\n",
+            "logprob": -24.524505615234375,
+            "bytes": [
+              10
+            ]
+          },
+          {
+            "token": "",
+            "logprob": -25.7044677734375
+          },
+          {
+            "token": "N",
+            "logprob": -25.988601684570312,
+            "bytes": [
+              78
+            ]
+          },
+          {
+            "token": "**",
+            "logprob": -26.027679443359375,
+            "bytes": [
+              42,
+              42
+            ]
+          },
+          {
+            "token": "¿",
+            "logprob": -26.454729080200195,
+            "bytes": [
+              194,
+              191
+            ]
+          },
+          {
+            "token": "sí",
+            "logprob": -26.485660552978516,
+            "bytes": [
+              115,
+              195,
+              173
+            ]
+          },
+          {
+            "token": "SON",
+            "logprob": -26.83371353149414,
+            "bytes": [
+              83,
+              79,
+              78
+            ]
+          },
+          {
+            "token": "SE",
+            "logprob": -26.924728393554688,
+            "bytes": [
+              83,
+              69
+            ]
+          },
+          {
+            "token": "",
+            "logprob": -27.01456069946289
+          },
+          {
+            "token": " Sí",
+            "logprob": -27.172527313232422,
+            "bytes": [
+              32,
+              83,
+              195,
+              173
+            ]
+          },
+          {
+            "token": "O",
+            "logprob": -27.220645904541016,
+            "bytes": [
+              79
+            ]
+          }
+        ]
+      }
+    ],
+    "total_duration": 166654689888,
+    "load_duration": 118540882873,
+    "prompt_eval_count": 807,
+    "prompt_eval_cached_count": 0,
+    "prompt_eval_duration": 48098103000,
+    "eval_count": 1,
+    "eval_duration": 1000
+  }
+}

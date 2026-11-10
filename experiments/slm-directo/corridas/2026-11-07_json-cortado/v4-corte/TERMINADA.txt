@@ -1,0 +1,3 @@
+JSON de v4 cortado después de alerta_sugerida, con la segunda consulta en la línea de aviso
+commit decdff12d482760da8be893a7d94f4e59d19b3a2
+minutos 14.7

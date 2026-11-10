@@ -42,3 +42,4 @@
 - Probar la comprensión del aviso con voluntarios, especialmente adultos mayores.
 - Evaluar con más voces, ruido real y códecs telefónicos.
 - Explorar rasgos acústicos, hoy excluidos ([D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico)).
+- Que el SLM escuche el audio del turno, con lo anterior como texto, en vez de leer la transcripción. Antes hay que resolver cómo se arma el contexto, porque la llamada entera no entra, y evaluar con audio de todos los casos ([corrida de #152](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#por-qué-la-opción-c-queda-afuera-sin-medirla)).

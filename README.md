@@ -121,7 +121,7 @@ copia actual con el entorno de esta Mac que tiene `torch` y `transformers`, los 
 ```bash
 ollama serve   # en otra terminal; solo reglas y Probar el ASR andan sin Ollama
 cd /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip
-/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M --asr parakeet-filtro
+/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --prompt v4 --modelo gemma4:e2b-it-q4_K_M --asr parakeet-filtro
 ```
 
 `bitacora_tesis-voip/.venv` no tiene `torch`: con ese entorno, elegir Gemma en el panel falla. Los

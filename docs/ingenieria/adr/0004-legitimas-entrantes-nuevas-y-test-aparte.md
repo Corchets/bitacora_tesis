@@ -1,7 +1,7 @@
 # ADR 0004 — Sumamos legítimas entrantes de números desconocidos y las medimos con un test aparte
 
-- **Fecha:** 2026-11-06
-- **Estado:** propuesta sin discutir
+- **Fecha:** 2026-11-06, actualizada el 2026-11-09
+- **Estado:** Aceptada (Mateo Antenucci, por el equipo, 2026-11-09)
 - **Participantes de la discusión:** el equipo, con Mateo Antenucci, en la segunda vuelta de
   [#143](https://github.com/Corchets/bitacora_tesis/issues/143). Evaristo Villalobo generó las legítimas de desarrollo.
   Cómo se rehace la reserva se define en [#45](https://github.com/Corchets/bitacora_tesis/issues/45). Se registra en
@@ -28,12 +28,13 @@ WhatsApp, que en un teléfono real estarían agendados. El sesgo salió del gene
 1. **No se sacan casos.** El alcance se aplica en el análisis, con la anotación a ciegas.
 2. **Desarrollo suma 94 legítimas entrantes de números desconocidos:** las 91 de Evaristo, en los lotes `LEG`, `LEG2` y
    `ENT-L`, y 3 de selección de personal ([PR #155](https://github.com/Corchets/bitacora_tesis/pull/155)).
-3. **El test es la reserva rehecha:** sus 100 estafas, que ningún detector corrió, y un lote nuevo de 50 o más
-   legítimas entrantes. El lote se genera a ciegas, con un largo parecido al de las estafas y sin reescribir casos de
-   desarrollo. El test queda en `laboratorio-luciano`, con la reserva, y no entra en `laboratorio-main`.
-4. **Un agente distinto del detector corrige el test** con la guía de
-   [#145](https://github.com/Corchets/bitacora_tesis/issues/145). El equipo lee una muestra, y después el test se
-   congela con SHA-256.
+3. **El test es la reserva rehecha:** sus 100 estafas, que ningún detector corrió, y 56 legítimas entrantes nuevas.
+   Las 56 se generaron a ciegas el 2026-11-07, con un largo parecido al de las estafas y sin reescribir casos de
+   desarrollo (`legitimas-entrantes-test.jsonl`). El test queda en `laboratorio-luciano`, con la reserva, y no entra en
+   `laboratorio-main`.
+4. **Antes de correr nada, un agente distinto del detector corrige el test** con la guía de
+   [#145](https://github.com/Corchets/bitacora_tesis/issues/145), sin ver prompts ni resultados. El equipo lee una
+   muestra, y después el test se congela con SHA-256.
 
 La evaluación final se informa en dos partes. La principal es dentro del alcance, con las estafas de la reserva y las
 legítimas nuevas de test. Aparte se informan las 100 legítimas viejas de la reserva.
@@ -61,7 +62,7 @@ legítimas nuevas de test. Aparte se informan las 100 legítimas viejas de la re
 - El test no tiene referencia humana completa (R28), y la reserva es pública desde el 2026-10-23 (R05).
 - **Limitación declarada:** el corpus es sintético y sale de un solo generador.
 
-**Para reconsiderarla:** que el lote de test no llegue a 50 legítimas antes de congelarlo.
+**Para reconsiderarla:** que, después de la corrección, queden menos de 50 legítimas de test.
 
 ## Referencias
 

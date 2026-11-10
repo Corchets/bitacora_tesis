@@ -1,0 +1,1 @@
+Con lo dicho hasta la línea {n}, ¿qué tan probable es que esta llamada sea una estafa? Respondé solo con un número del 0 (nada probable) al 9 (casi seguro).
