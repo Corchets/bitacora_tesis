@@ -1,0 +1,3 @@
+c-ancla-corte-riesgo, solo OTRA, todas las líneas, sobre los 244
+commit ca4fab05d7e67b221ce42c6497980ab8fa7758e4
+minutos 9.7
