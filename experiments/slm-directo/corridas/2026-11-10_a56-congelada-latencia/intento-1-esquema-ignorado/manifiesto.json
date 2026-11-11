@@ -1,0 +1,39 @@
+{
+  "experimento": "a56-congelada-latencia",
+  "configuracion": {
+    "prompt": "c-json-corte-riesgo",
+    "modelo": "gemma4:e2b-it-q4_K_M",
+    "detector": "DetectorSLMCorteRiesgo",
+    "hablantes": "rol",
+    "solo_otra": true,
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "num_predict": 14,
+    "umbral": 0.3,
+    "recorrido": "todas las líneas, sin detener al primer aviso; PROTEGIDA no consulta"
+  },
+  "casos": [
+    "EN-07",
+    "EN-09",
+    "EN-13"
+  ],
+  "conversaciones_sha256": "27a68b98c492c4a4753471f461745c9bf0b3742956278118ea5341c88db83f24",
+  "prompt_sha256": "6ee30d38fa9d812c18338fd58b2ca71dd602017b08331398b30e62ac47db8470",
+  "motivo_sha256": "fefd4c7e9314ae547f9682bfd63e84dc84bd4eff041614864050a2c7c2f5e1c6",
+  "codigo_sha256": {
+    "correr_android_congelada.py": "0a410c75b1bb044042bd1e7401231432c17da5051ac0904aaa92a38c0be01d28",
+    "detectores.py": "af19d68fbbca957304fcf08c5dd5f99c85fe2487ecf344d4489f735fffe5e75b",
+    "casos.py": "28f0b7f615eed144a081f087a586335ecc003bfd1dd5fd5813a8d05d59cb7f7f"
+  },
+  "calentamiento": {
+    "valida": false,
+    "error": "sin_riesgo",
+    "ms": 13118.105508008739
+  },
+  "sistema": "Android-16-aarch64-64bit-ELF",
+  "python": "3.14.10",
+  "pid": 24406,
+  "inicio": "2026-11-10T17:29:21-0300",
+  "fin": "2026-11-10T17:31:44-0300"
+}
