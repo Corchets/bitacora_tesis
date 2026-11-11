@@ -1,0 +1,838 @@
+2026-11-11T12:03:06-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 3039564 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+PID=8581 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3104 kB
+VmRSS:	    3104 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   20512 kB
+VmRSS:	   20512 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+PID=8581 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3104 kB
+VmRSS:	    3104 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   28704 kB
+VmRSS:	   28704 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 374
+2026-11-11T12:03:22-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1773056 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   11040 kB
+PID=9974 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   11040 kB
+PID=9974 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 374
+2026-11-11T12:03:38-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1726680 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16928 kB
+PID=10591 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2688 kB
+VmRSS:	    2688 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16928 kB
+PID=10591 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2688 kB
+VmRSS:	    2688 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 374
+2026-11-11T12:03:54-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1721380 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16928 kB
+PID=10701 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3132 kB
+VmRSS:	    3132 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16928 kB
+PID=10701 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3132 kB
+VmRSS:	    3132 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 374
+2026-11-11T12:04:10-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1710920 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16160 kB
+PID=10899 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3072 kB
+VmRSS:	    3072 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16160 kB
+PID=10899 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3072 kB
+VmRSS:	    3072 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 374
+2026-11-11T12:04:26-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1729520 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16160 kB
+PID=11092 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2688 kB
+VmRSS:	    2688 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16160 kB
+PID=11092 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2688 kB
+VmRSS:	    2688 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 374
+2026-11-11T12:04:42-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1714868 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16160 kB
+PID=11380 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2868 kB
+VmRSS:	    2868 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   16160 kB
+PID=11380 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2868 kB
+VmRSS:	    2868 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 374
+2026-11-11T12:04:59-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1722800 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15776 kB
+PID=11566 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2944 kB
+VmRSS:	    2944 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15776 kB
+PID=11566 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2944 kB
+VmRSS:	    2944 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 375
+2026-11-11T12:05:14-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1750112 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15776 kB
+PID=11706 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3108 kB
+VmRSS:	    3108 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15776 kB
+PID=11706 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3108 kB
+VmRSS:	    3108 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 375
+2026-11-11T12:05:30-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1770804 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15776 kB
+PID=11827 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15776 kB
+PID=11827 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 375
+2026-11-11T12:05:47-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1770472 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15904 kB
+PID=12092 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3064 kB
+VmRSS:	    3064 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   15648 kB
+PID=12092 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3064 kB
+VmRSS:	    3064 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 375
+2026-11-11T12:06:02-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1764892 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   14752 kB
+PID=12354 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3236 kB
+VmRSS:	    3236 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2460 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   14752 kB
+PID=12354 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3236 kB
+VmRSS:	    3236 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 376
+2026-11-11T12:06:19-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1761548 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   13344 kB
+PID=12773 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2668 kB
+VmRSS:	    2668 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	   13344 kB
+PID=12773 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2668 kB
+VmRSS:	    2668 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 376
+2026-11-11T12:06:35-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1731584 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    8608 kB
+PID=13381 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2980 kB
+VmRSS:	    2980 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    8608 kB
+PID=13381 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2980 kB
+VmRSS:	    2980 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 377
+2026-11-11T12:06:51-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1731904 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    8608 kB
+PID=13525 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2980 kB
+VmRSS:	    2980 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    8608 kB
+PID=13525 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2980 kB
+VmRSS:	    2980 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 377
+2026-11-11T12:07:07-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1663184 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    8224 kB
+PID=13925 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3200 kB
+VmRSS:	    3200 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    8224 kB
+PID=13925 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3200 kB
+VmRSS:	    3200 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 377
+2026-11-11T12:07:23-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1665148 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14118 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3300 kB
+VmRSS:	    3300 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14118 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3300 kB
+VmRSS:	    3300 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 376
+2026-11-11T12:07:39-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1691932 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14330 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3200 kB
+VmRSS:	    3200 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14330 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3200 kB
+VmRSS:	    3200 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 376
+2026-11-11T12:07:56-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1687484 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14582 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2716 kB
+VmRSS:	    2716 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14582 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2716 kB
+VmRSS:	    2716 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 376
+2026-11-11T12:08:12-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1656868 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14747 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2980 kB
+VmRSS:	    2980 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14747 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2980 kB
+VmRSS:	    2980 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 376
+2026-11-11T12:08:28-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1657684 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14800 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3108 kB
+VmRSS:	    3108 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=14800 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3108 kB
+VmRSS:	    3108 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 375
+2026-11-11T12:08:44-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1669852 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15035 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15035 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3100 kB
+VmRSS:	    3100 kB
+  AC powered: false
+  USB powered: true
+  level: 70
+  temperature: 375
+2026-11-11T12:09:00-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1648640 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15259 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2768 kB
+VmRSS:	    2768 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15259 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2768 kB
+VmRSS:	    2768 kB
+  AC powered: false
+  USB powered: true
+  level: 71
+  temperature: 375
+2026-11-11T12:09:16-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1649988 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15431 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3008 kB
+VmRSS:	    3008 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15431 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3008 kB
+VmRSS:	    3008 kB
+  AC powered: false
+  USB powered: true
+  level: 71
+  temperature: 375
+2026-11-11T12:09:32-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1676428 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15593 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3072 kB
+VmRSS:	    3072 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7968 kB
+PID=15593 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3072 kB
+VmRSS:	    3072 kB
+  AC powered: false
+  USB powered: true
+  level: 71
+  temperature: 375
+2026-11-11T12:09:47-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1630920 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=15886 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2848 kB
+VmRSS:	    2848 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=15886 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    2848 kB
+VmRSS:	    2848 kB
+  AC powered: false
+  USB powered: true
+  level: 71
+  temperature: 375
+2026-11-11T12:10:03-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1648280 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=16167 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3228 kB
+VmRSS:	    3228 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=16167 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3228 kB
+VmRSS:	    3228 kB
+  AC powered: false
+  USB powered: true
+  level: 71
+  temperature: 375
+2026-11-11T12:10:20-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1651912 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=16343 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3108 kB
+VmRSS:	    3108 kB
+PID=27681 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	  700716 kB
+VmRSS:	    7068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=16343 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3108 kB
+VmRSS:	    3108 kB
+  AC powered: false
+  USB powered: true
+  level: 71
+  temperature: 375
+2026-11-11T12:10:36-03:00
+PID=8518 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1
+VmHWM:	 3361740 kB
+VmRSS:	 1665944 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=16489 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3068 kB
+VmRSS:	    3068 kB
+PID=8579 /system/bin/sh -c run-as com.termux env HOME=/data/data/com.termux/fil
+VmHWM:	    3100 kB
+VmRSS:	    2332 kB
+PID=8584 python correr_android_latencia.py --conversaciones conversaciones-sub-
+VmHWM:	   29984 kB
+VmRSS:	    7840 kB
+PID=16489 /system/bin/sh -c date -Iseconds; for p in $(pgrep -f llama-server) $(
+VmHWM:	    3068 kB
+VmRSS:	    3068 kB
+  AC powered: false
+  USB powered: true
+  level: 71
+  temperature: 375

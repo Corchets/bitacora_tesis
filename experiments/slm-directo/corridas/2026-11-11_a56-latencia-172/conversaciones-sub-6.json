@@ -1,0 +1,861 @@
+{
+ "lista": "sub-6",
+ "roles": {
+  "OTRA": "OTRA",
+  "PROTEGIDA": "PROTEGIDA"
+ },
+ "casos": {
+  "CV2-D-V-BANCO-001": [
+   {
+    "n": 1,
+    "hablante": "PROTEGIDA",
+    "texto": "Sí, recién puedo atender. ¿Por qué me habían dejado un mensaje?"
+   },
+   {
+    "n": 2,
+    "hablante": "OTRA",
+    "texto": "Soy del sector de medios de pago del banco, por el reclamo de un cargo."
+   },
+   {
+    "n": 3,
+    "hablante": "PROTEGIDA",
+    "texto": "¿El del abono de la cochera? Porque eso ya lo hablé con el encargado."
+   },
+   {
+    "n": 4,
+    "hablante": "OTRA",
+    "texto": "Me aparece una gestión vinculada con un cobro mensual que se repitió."
+   },
+   {
+    "n": 5,
+    "hablante": "PROTEGIDA",
+    "texto": "El encargado dice que uno corresponde a septiembre y el otro a octubre."
+   },
+   {
+    "n": 6,
+    "hablante": "OTRA",
+    "texto": "Puede ser. Si son dos períodos distintos no corresponde hacer una devolución."
+   },
+   {
+    "n": 7,
+    "hablante": "PROTEGIDA",
+    "texto": "Eso quería saber. En el resumen figuran los dos con fecha de octubre."
+   },
+   {
+    "n": 8,
+    "hablante": "OTRA",
+    "texto": "La fecha que ves puede ser la de presentación, distinta del período del abono."
+   },
+   {
+    "n": 9,
+    "hablante": "PROTEGIDA",
+    "texto": "Claro, porque en septiembre se les había roto la terminal."
+   },
+   {
+    "n": 10,
+    "hablante": "OTRA",
+    "texto": "¿Llegaron a cobrarte ese mes por otro medio?"
+   },
+   {
+    "n": 11,
+    "hablante": "PROTEGIDA",
+    "texto": "Lo pagué en efectivo. Me dejaron un recibo de papel en el auto."
+   },
+   {
+    "n": 12,
+    "hablante": "OTRA",
+    "texto": "Entonces podría haber una duplicación de ese primer período."
+   },
+   {
+    "n": 13,
+    "hablante": "PROTEGIDA",
+    "texto": "El recibo lo tengo en casa, ahora estoy saliendo de trabajar."
+   },
+   {
+    "n": 14,
+    "hablante": "OTRA",
+    "texto": "Te explico las alternativas y después ves si querés mantener el reclamo."
+   },
+   {
+    "n": 15,
+    "hablante": "PROTEGIDA",
+    "texto": "Bueno, decime. No quiero que le retengan plata al encargado si no corresponde."
+   },
+   {
+    "n": 16,
+    "hablante": "OTRA",
+    "texto": "Si el comercio reconoce el cobro, presenta una anulación y queda compensado en el cierre."
+   },
+   {
+    "n": 17,
+    "hablante": "PROTEGIDA",
+    "texto": "Me dijo que podía tardar hasta el próximo resumen."
+   },
+   {
+    "n": 18,
+    "hablante": "OTRA",
+    "texto": "Es una posibilidad. También puede quedar un saldo a favor para el período siguiente."
+   },
+   {
+    "n": 19,
+    "hablante": "PROTEGIDA",
+    "texto": "Pero si yo doy de baja la cochera no me sirve un saldo a favor."
+   },
+   {
+    "n": 20,
+    "hablante": "OTRA",
+    "texto": "En ese caso la discusión sería sobre la devolución del importe."
+   },
+   {
+    "n": 21,
+    "hablante": "PROTEGIDA",
+    "texto": "Ya le avisé que dejo el lugar en noviembre porque me mudo más cerca del trabajo."
+   },
+   {
+    "n": 22,
+    "hablante": "OTRA",
+    "texto": "Entiendo. No hace falta que resuelvas ahora cómo seguís con el abono."
+   },
+   {
+    "n": 23,
+    "hablante": "PROTEGIDA",
+    "texto": "¿El reclamo que hice ayer sigue abierto entonces?"
+   },
+   {
+    "n": 24,
+    "hablante": "OTRA",
+    "texto": "Sí, mientras el comercio no presente la respuesta queda en revisión."
+   },
+   {
+    "n": 25,
+    "hablante": "PROTEGIDA",
+    "texto": "Perfecto. Cuando llegue busco el recibo y hablo con él otra vez."
+   },
+   {
+    "n": 26,
+    "hablante": "OTRA",
+    "texto": "Antes de cerrar la consulta me apareció una verificación pendiente del teléfono."
+   },
+   {
+    "n": 27,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Eso es por la cochera también?"
+   },
+   {
+    "n": 28,
+    "hablante": "OTRA",
+    "texto": "Se adjunta al expediente, para que no se separen las dos gestiones."
+   },
+   {
+    "n": 29,
+    "hablante": "PROTEGIDA",
+    "texto": "Acaba de entrar un mensaje. Dice que alguien quiere acceder a mi cuenta."
+   },
+   {
+    "n": 30,
+    "hablante": "OTRA",
+    "texto": "Es el aviso automático que genera la vinculación. Tiene una vigencia corta."
+   },
+   {
+    "n": 31,
+    "hablante": "PROTEGIDA",
+    "texto": "No entiendo qué tiene que ver entrar a mi cuenta con un recibo de la cochera."
+   },
+   {
+    "n": 32,
+    "hablante": "OTRA",
+    "texto": "Ahora sí, decime el código de seis cifras del mensaje y lo asocio al reclamo."
+   },
+   {
+    "n": 33,
+    "hablante": "PROTEGIDA",
+    "texto": "No. Una cosa es discutir el cobro y otra darte lo que permite entrar."
+   },
+   {
+    "n": 34,
+    "hablante": "OTRA",
+    "texto": "Si vence, esta revisión vuelve al final de la cola y puede llegar al cierre sin respuesta."
+   },
+   {
+    "n": 35,
+    "hablante": "PROTEGIDA",
+    "texto": "Que vuelva a la cola. Prefiero llevar el recibo a la sucursal."
+   },
+   {
+    "n": 36,
+    "hablante": "OTRA",
+    "texto": "Puedo dejar constancia de que no completaste la verificación."
+   },
+   {
+    "n": 37,
+    "hablante": "PROTEGIDA",
+    "texto": "Dejá constancia también de que voy a consultar yo. Corto acá."
+   },
+   {
+    "n": 38,
+    "hablante": "OTRA",
+    "texto": "Bueno, queda pendiente."
+   }
+  ],
+  "CV2-D-V-BANCO-002": [
+   {
+    "n": 1,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Hola?"
+   },
+   {
+    "n": 2,
+    "hablante": "OTRA",
+    "texto": "Hola, te habla Mara del sector de acceso del banco. ¿Cambiaste de teléfono hace poco?"
+   },
+   {
+    "n": 3,
+    "hablante": "PROTEGIDA",
+    "texto": "Hace un mes. ¿Por qué?"
+   },
+   {
+    "n": 4,
+    "hablante": "OTRA",
+    "texto": "Quedó una solicitud pendiente entre el equipo anterior y el nuevo."
+   },
+   {
+    "n": 5,
+    "hablante": "PROTEGIDA",
+    "texto": "A mí la aplicación me funciona. Entré recién a mirar una transferencia de mi hermana."
+   },
+   {
+    "n": 6,
+    "hablante": "OTRA",
+    "texto": "Puede funcionar y quedar pendiente esa asociación. Por eso te llamo antes del cierre."
+   },
+   {
+    "n": 7,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Y qué pasa con el teléfono viejo? Lo borré antes de venderlo."
+   },
+   {
+    "n": 8,
+    "hablante": "OTRA",
+    "texto": "El borrado no siempre actualiza lo que figura en la cuenta."
+   },
+   {
+    "n": 9,
+    "hablante": "PROTEGIDA",
+    "texto": "Pensé que con cerrar la sesión alcanzaba."
+   },
+   {
+    "n": 10,
+    "hablante": "OTRA",
+    "texto": "Hay una solicitud en el apartado de dispositivos. La podés mirar desde la aplicación que ya tenés."
+   },
+   {
+    "n": 11,
+    "hablante": "PROTEGIDA",
+    "texto": "La abrí. Dice que se pidió asociar un equipo de escritorio."
+   },
+   {
+    "n": 12,
+    "hablante": "OTRA",
+    "texto": "Es la consola con la que terminamos la baja del anterior."
+   },
+   {
+    "n": 13,
+    "hablante": "PROTEGIDA",
+    "texto": "Pero yo no estoy entrando desde ninguna computadora."
+   },
+   {
+    "n": 14,
+    "hablante": "OTRA",
+    "texto": "La identificamos de esa manera mientras se hace la migración."
+   },
+   {
+    "n": 15,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Me estás diciendo que es un equipo del banco?"
+   },
+   {
+    "n": 16,
+    "hablante": "OTRA",
+    "texto": "Sí, es el que tenemos asignado al trámite. Después se elimina solo."
+   },
+   {
+    "n": 17,
+    "hablante": "PROTEGIDA",
+    "texto": "Debajo dice que va a poder consultar saldos y autorizar operaciones."
+   },
+   {
+    "n": 18,
+    "hablante": "OTRA",
+    "texto": "Autorizá ese equipo nuevo para que desde acá podamos desvincular el anterior."
+   },
+   {
+    "n": 19,
+    "hablante": "PROTEGIDA",
+    "texto": "¿No tendría que rechazarlo si no es mío?"
+   },
+   {
+    "n": 20,
+    "hablante": "OTRA",
+    "texto": "Si lo rechazás, me cerrás la única sesión con la que puedo terminar la baja."
+   },
+   {
+    "n": 21,
+    "hablante": "PROTEGIDA",
+    "texto": "Me preocupa dejar entrar otra máquina a mi cuenta."
+   },
+   {
+    "n": 22,
+    "hablante": "OTRA",
+    "texto": "El permiso dura lo que lleva esta gestión. Cuando terminamos, desaparece del listado."
+   },
+   {
+    "n": 23,
+    "hablante": "PROTEGIDA",
+    "texto": "La pantalla no muestra ningún plazo."
+   },
+   {
+    "n": 24,
+    "hablante": "OTRA",
+    "texto": "Ese plazo se carga en el expediente interno, no en la aplicación."
+   },
+   {
+    "n": 25,
+    "hablante": "PROTEGIDA",
+    "texto": "Está bien, confío en que lo saques cuando termines."
+   },
+   {
+    "n": 26,
+    "hablante": "OTRA",
+    "texto": "Confirmá donde dice dar acceso al dispositivo y espero de este lado."
+   },
+   {
+    "n": 27,
+    "hablante": "PROTEGIDA",
+    "texto": "Ya confirmé. Ahora el equipo de escritorio aparece habilitado para operar."
+   },
+   {
+    "n": 28,
+    "hablante": "OTRA",
+    "texto": "Perfecto, dejá abierta la aplicación un momento."
+   },
+   {
+    "n": 29,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Vos me avisás cuando ya no tenga permiso?"
+   },
+   {
+    "n": 30,
+    "hablante": "OTRA",
+    "texto": "Sí, quedate en línea mientras cierro la asociación."
+   },
+   {
+    "n": 31,
+    "hablante": "PROTEGIDA",
+    "texto": "Espero, pero quiero comprobar que salga del listado."
+   }
+  ],
+  "CV2-D-V-BANCO-007": [
+   {
+    "n": 1,
+    "hablante": "OTRA",
+    "texto": "Buenas, te llamo del banco por una autorización que quedó esperando."
+   },
+   {
+    "n": 2,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Una compra? No hice ninguna hoy."
+   },
+   {
+    "n": 3,
+    "hablante": "OTRA",
+    "texto": "No es una compra, es un cambio en la cuenta. ¿Te entró un aviso?"
+   },
+   {
+    "n": 4,
+    "hablante": "PROTEGIDA",
+    "texto": "Veo uno, pero no lo abrí todavía."
+   },
+   {
+    "n": 5,
+    "hablante": "OTRA",
+    "texto": "Lo podés consultar desde la aplicación, en las operaciones pendientes."
+   },
+   {
+    "n": 6,
+    "hablante": "PROTEGIDA",
+    "texto": "Ahí está. Dice que quieren cambiar el teléfono que recibe los avisos de acceso."
+   },
+   {
+    "n": 7,
+    "hablante": "OTRA",
+    "texto": "Ese es el registro viejo que estamos retirando."
+   },
+   {
+    "n": 8,
+    "hablante": "PROTEGIDA",
+    "texto": "El número que aparece termina en 804. Nunca tuve ese número."
+   },
+   {
+    "n": 9,
+    "hablante": "OTRA",
+    "texto": "Es el número temporal que usa el área de recuperación durante el cambio."
+   },
+   {
+    "n": 10,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Y por qué los avisos de mi cuenta irían a otro teléfono?"
+   },
+   {
+    "n": 11,
+    "hablante": "OTRA",
+    "texto": "Van a pasar por ahí mientras el sistema libera el anterior."
+   },
+   {
+    "n": 12,
+    "hablante": "PROTEGIDA",
+    "texto": "Yo no pedí cambiar el que tengo ahora."
+   },
+   {
+    "n": 13,
+    "hablante": "OTRA",
+    "texto": "Se abrió por una diferencia entre el padrón de atención y tu perfil."
+   },
+   {
+    "n": 14,
+    "hablante": "PROTEGIDA",
+    "texto": "¿No pueden corregir ese padrón sin tocar mi cuenta?"
+   },
+   {
+    "n": 15,
+    "hablante": "OTRA",
+    "texto": "El cambio tiene que quedar autorizado desde tu sesión."
+   },
+   {
+    "n": 16,
+    "hablante": "PROTEGIDA",
+    "texto": "La pantalla dice que el destinatario va a recibir verificaciones de acceso."
+   },
+   {
+    "n": 17,
+    "hablante": "OTRA",
+    "texto": "Entonces elegí ese número terminado en 804 y confirmá que reciba las verificaciones."
+   },
+   {
+    "n": 18,
+    "hablante": "PROTEGIDA",
+    "texto": "Eso parece reemplazar mi teléfono, no retirar uno viejo."
+   },
+   {
+    "n": 19,
+    "hablante": "OTRA",
+    "texto": "Primero se pasa al temporal y después lo volvemos a dejar como estaba."
+   },
+   {
+    "n": 20,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Me mandan una constancia de que van a devolverlo al mío?"
+   },
+   {
+    "n": 21,
+    "hablante": "OTRA",
+    "texto": "Te queda el número de gestión; la constancia sale al final."
+   },
+   {
+    "n": 22,
+    "hablante": "PROTEGIDA",
+    "texto": "Preferiría esperar hasta mañana y hablar con la sucursal."
+   },
+   {
+    "n": 23,
+    "hablante": "OTRA",
+    "texto": "Si vence la solicitud, queda una revisión manual y durante ese tiempo podés perder los avisos."
+   },
+   {
+    "n": 24,
+    "hablante": "PROTEGIDA",
+    "texto": "Bueno, pero dejá anotado que quiero mantener mi número."
+   },
+   {
+    "n": 25,
+    "hablante": "OTRA",
+    "texto": "Lo dejo asentado. Ahora confirmá el destinatario temporal."
+   },
+   {
+    "n": 26,
+    "hablante": "PROTEGIDA",
+    "texto": "Ya lo acepté. La aplicación muestra el 804 como receptor de verificaciones."
+   },
+   {
+    "n": 27,
+    "hablante": "OTRA",
+    "texto": "Bien, estoy terminando la parte interna."
+   },
+   {
+    "n": 28,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Cuándo vuelve a quedar el mío?"
+   },
+   {
+    "n": 29,
+    "hablante": "OTRA",
+    "texto": "Cuando cierre la gestión. No cortes todavía."
+   },
+   {
+    "n": 30,
+    "hablante": "PROTEGIDA",
+    "texto": "Espero unos minutos, después voy a consultar por la otra línea."
+   }
+  ],
+  "CV2-D-L-BANCO-001": [
+   {
+    "n": 1,
+    "hablante": "PROTEGIDA",
+    "texto": "buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es"
+   },
+   {
+    "n": 2,
+    "hablante": "OTRA",
+    "texto": "te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"
+   },
+   {
+    "n": 3,
+    "hablante": "PROTEGIDA",
+    "texto": "en la caja de ahorro terminada en 4821 la otra no la uso casi nunca"
+   },
+   {
+    "n": 4,
+    "hablante": "OTRA",
+    "texto": "bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer"
+   },
+   {
+    "n": 5,
+    "hablante": "PROTEGIDA",
+    "texto": "hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo"
+   },
+   {
+    "n": 6,
+    "hablante": "OTRA",
+    "texto": "puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo"
+   },
+   {
+    "n": 7,
+    "hablante": "PROTEGIDA",
+    "texto": "dice débito tarjeta pero abajo aparece un código que no entiendo"
+   },
+   {
+    "n": 8,
+    "hablante": "OTRA",
+    "texto": "¿Recordás si usaste la tarjeta física o la virtual en los últimos días?"
+   },
+   {
+    "n": 9,
+    "hablante": "PROTEGIDA",
+    "texto": "la física azul la tengo guardada no la perdí"
+   },
+   {
+    "n": 10,
+    "hablante": "OTRA",
+    "texto": "perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre"
+   },
+   {
+    "n": 11,
+    "hablante": "PROTEGIDA",
+    "texto": "compré comida pero fueron siete mil y algo esto es otra cosa"
+   },
+   {
+    "n": 12,
+    "hablante": "OTRA",
+    "texto": "entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular"
+   },
+   {
+    "n": 13,
+    "hablante": "PROTEGIDA",
+    "texto": "no y el documento también lo tengo acá"
+   },
+   {
+    "n": 14,
+    "hablante": "OTRA",
+    "texto": "no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación"
+   },
+   {
+    "n": 15,
+    "hablante": "PROTEGIDA",
+    "texto": "bueno la tarjeta queda bloqueada ahora"
+   },
+   {
+    "n": 16,
+    "hablante": "OTRA",
+    "texto": "puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas"
+   },
+   {
+    "n": 17,
+    "hablante": "PROTEGIDA",
+    "texto": "hacé eso porque la uso para el súper"
+   },
+   {
+    "n": 18,
+    "hablante": "OTRA",
+    "texto": "te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles"
+   },
+   {
+    "n": 19,
+    "hablante": "PROTEGIDA",
+    "texto": "y el débito se devuelve mientras tanto"
+   },
+   {
+    "n": 20,
+    "hablante": "OTRA",
+    "texto": "no te lo puedo prometer primero revisan el comercio y el comprobante"
+   },
+   {
+    "n": 21,
+    "hablante": "PROTEGIDA",
+    "texto": "está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online"
+   },
+   {
+    "n": 22,
+    "hablante": "OTRA",
+    "texto": "dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta"
+   }
+  ],
+  "CV2-D-L-BANCO-007": [
+   {
+    "n": 1,
+    "hablante": "PROTEGIDA",
+    "texto": "Llamo por el resumen de la tarjeta. Hay una línea que dice “clave de comercio” y no entiendo qué significa."
+   },
+   {
+    "n": 2,
+    "hablante": "OTRA",
+    "texto": "Buenas, ¿la ves dentro del detalle de un consumo?"
+   },
+   {
+    "n": 3,
+    "hablante": "PROTEGIDA",
+    "texto": "Sí, al lado de una compra en una librería. Dice CLAVE 04, nada más."
+   },
+   {
+    "n": 4,
+    "hablante": "OTRA",
+    "texto": "Eso puede ser la descripción que envió el local. ¿Qué importe figura?"
+   },
+   {
+    "n": 5,
+    "hablante": "PROTEGIDA",
+    "texto": "6.240 pesos. El sábado compré cuadernos y una carpeta."
+   },
+   {
+    "n": 6,
+    "hablante": "OTRA",
+    "texto": "¿Coincide con lo que pagaste?"
+   },
+   {
+    "n": 7,
+    "hablante": "PROTEGIDA",
+    "texto": "Más o menos. Creo que eran seis mil y algo."
+   },
+   {
+    "n": 8,
+    "hablante": "OTRA",
+    "texto": "Entonces probablemente sea el mismo consumo. Estamos mirando solo el texto del resumen."
+   },
+   {
+    "n": 9,
+    "hablante": "PROTEGIDA",
+    "texto": "Claro, yo no estaba pensando en la clave de la cuenta. Me llamó la atención la palabra."
+   },
+   {
+    "n": 10,
+    "hablante": "OTRA",
+    "texto": "Tiene sentido. A veces el nombre del comercio se corta o muestra una abreviatura interna."
+   },
+   {
+    "n": 11,
+    "hablante": "PROTEGIDA",
+    "texto": "¿Puedo cambiar cómo se ve eso en la aplicación?"
+   },
+   {
+    "n": 12,
+    "hablante": "OTRA",
+    "texto": "No desde el banco. La descripción viene informada por el negocio."
+   },
+   {
+    "n": 13,
+    "hablante": "PROTEGIDA",
+    "texto": "Bueno. Aprovecho y te pregunto por el pago mínimo, porque me cambió bastante."
+   },
+   {
+    "n": 14,
+    "hablante": "OTRA",
+    "texto": "El mes pasado tenías menos compras en cuotas. ¿Querés que comparemos el detalle?"
+   },
+   {
+    "n": 15,
+    "hablante": "PROTEGIDA",
+    "texto": "Sí, me gustaría entenderlo antes del vencimiento."
+   },
+   {
+    "n": 16,
+    "hablante": "OTRA",
+    "texto": "Veo dos cuotas nuevas de la heladera y una compra en tres pagos de la farmacia."
+   },
+   {
+    "n": 17,
+    "hablante": "PROTEGIDA",
+    "texto": "La heladera sí, pero la farmacia la pagué de una. ¿Puede estar mal?"
+   },
+   {
+    "n": 18,
+    "hablante": "OTRA",
+    "texto": "La farmacia aparece como un solo consumo, sin cuotas. Capaz estás viendo el total financiado de otra compra."
+   },
+   {
+    "n": 19,
+    "hablante": "PROTEGIDA",
+    "texto": "Ahí encontré la línea, dice ferretería, no farmacia. Es por una caja de herramientas."
+   },
+   {
+    "n": 20,
+    "hablante": "OTRA",
+    "texto": "Entonces coincide con lo que recordás. El resumen cierra el jueves."
+   },
+   {
+    "n": 21,
+    "hablante": "PROTEGIDA",
+    "texto": "Listo. Gracias por ayudarme a leerlo."
+   },
+   {
+    "n": 22,
+    "hablante": "OTRA",
+    "texto": "De nada. ¿Queda alguna otra consulta?"
+   },
+   {
+    "n": 23,
+    "hablante": "PROTEGIDA",
+    "texto": "No, eso era todo."
+   }
+  ],
+  "CV2-D-L-DELIVERY-001": [
+   {
+    "n": 1,
+    "hablante": "PROTEGIDA",
+    "texto": "hola llamo por el pedido de una pava electrica la entrega figura para hoy pero falta el departamento"
+   },
+   {
+    "n": 2,
+    "hablante": "OTRA",
+    "texto": "buen día tenés el número de compra"
+   },
+   {
+    "n": 3,
+    "hablante": "PROTEGIDA",
+    "texto": "es 63018 lo hice con el correo de mi pareja pero el domicilio es el mío"
+   },
+   {
+    "n": 4,
+    "hablante": "OTRA",
+    "texto": "encontré el pedido la dirección dice calle lapacho 220 sin piso ni departamento"
+   },
+   {
+    "n": 5,
+    "hablante": "PROTEGIDA",
+    "texto": "es segundo b edificio del portón gris entre la farmacia y la plaza"
+   },
+   {
+    "n": 6,
+    "hablante": "OTRA",
+    "texto": "el timbre tiene tu apellido o el de tu pareja"
+   },
+   {
+    "n": 7,
+    "hablante": "PROTEGIDA",
+    "texto": "tiene el de mi pareja ocampo yo estoy en el trabajo hasta las cuatro"
+   },
+   {
+    "n": 8,
+    "hablante": "OTRA",
+    "texto": "la entrega está asignada entre las dos y las seis"
+   },
+   {
+    "n": 9,
+    "hablante": "PROTEGIDA",
+    "texto": "puedo cambiarla para después de las cinco mi vecina puede recibirla si la autorizo"
+   },
+   {
+    "n": 10,
+    "hablante": "OTRA",
+    "texto": "puedo dejar asentado que consulten en portería pero el repartidor define el recorrido"
+   },
+   {
+    "n": 11,
+    "hablante": "PROTEGIDA",
+    "texto": "en el edificio no hay portería te paso el número de la vecina"
+   },
+   {
+    "n": 12,
+    "hablante": "OTRA",
+    "texto": "si ella acepta podemos agregar un teléfono de contacto para esta entrega"
+   },
+   {
+    "n": 13,
+    "hablante": "PROTEGIDA",
+    "texto": "sí me dijo que está en casa hasta las seis termina en 63"
+   },
+   {
+    "n": 14,
+    "hablante": "OTRA",
+    "texto": "lo agrego como referencia temporal querés que la llamen antes de subir"
+   },
+   {
+    "n": 15,
+    "hablante": "PROTEGIDA",
+    "texto": "sí así baja a abrirles no le dejen el paquete en el pasillo"
+   },
+   {
+    "n": 16,
+    "hablante": "OTRA",
+    "texto": "queda indicado el paquete requiere firma de quien lo recibe"
+   },
+   {
+    "n": 17,
+    "hablante": "PROTEGIDA",
+    "texto": "puede firmar con su nombre aunque la compra esté a nombre de ocampo"
+   },
+   {
+    "n": 18,
+    "hablante": "OTRA",
+    "texto": "sí anotamos que es una persona autorizada por vos"
+   },
+   {
+    "n": 19,
+    "hablante": "PROTEGIDA",
+    "texto": "bueno me llega el cambio por correo"
+   },
+   {
+    "n": 20,
+    "hablante": "OTRA",
+    "texto": "sí mandamos una actualización al correo de la compra"
+   },
+   {
+    "n": 21,
+    "hablante": "PROTEGIDA",
+    "texto": "ya entró dice que agregaron segundo b y el contacto"
+   },
+   {
+    "n": 22,
+    "hablante": "OTRA",
+    "texto": "perfecto querés que revise algo más"
+   },
+   {
+    "n": 23,
+    "hablante": "PROTEGIDA",
+    "texto": "no con eso alcanza gracias por la ayuda"
+   },
+   {
+    "n": 24,
+    "hablante": "OTRA",
+    "texto": "que llegue bien el pedido"
+   }
+  ]
+ }
+}

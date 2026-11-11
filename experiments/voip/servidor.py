@@ -342,6 +342,9 @@ class Servidor:
             broadcast(self.paneles, json.dumps({"tipo": "niveles", **llamada.niveles()}))
 
     async def trabajar_detector(self, llamada: Llamada) -> None:
+        # #172: el aviso sale con la primera consulta y un texto fijo; el motivo se pide después y se manda aparte.
+        if hasattr(self.detector, "motivo_diferido"):
+            self.detector.motivo_diferido = True
         while True:
             await self.novedad.wait()
             self.novedad.clear()
@@ -355,6 +358,10 @@ class Servidor:
                 self.difundir({"tipo": "detector", **llamada.evento_detector(ev)})
                 if ev.aviso:
                     print(f"[AVISO] t={ev.fin_s:.2f}s · {respuesta.motivo}")
+                if ev.aviso and getattr(respuesta, "motivo_pendiente", False):
+                    completa = await asyncio.to_thread(self.detector.completar_motivo, respuesta)
+                    self.difundir({"tipo": "detector", **llamada.registrar_motivo(ev, completa, llamada.reloj())})
+                    print(f"[MOTIVO] t={llamada.reloj():.2f}s · {completa.motivo or completa.error}")
             if self.audio_terminado and not self.novedad.is_set():
                 return
 

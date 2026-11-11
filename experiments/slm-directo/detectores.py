@@ -290,6 +290,8 @@ class Respuesta:
     alerta_escrita: bool | None = None
     # Solo con DetectorSLMCCorto y `c-con-campo`: el `pedido_critico` que escribió el modelo (la alerta fuerte).
     pedido_critico: bool | None = None
+    # Solo con `motivo_diferido` (#172): el aviso salió sin la segunda consulta; `completar_motivo` la corre.
+    motivo_pendiente: bool = False
 
 
 def cargar_prompt(variante: str) -> str:
@@ -906,6 +908,9 @@ class DetectorSLMJSONCortado(DetectorSLM):
 
     umbral: float = UMBRAL_CORTE
     pedido_motivo: str = ""
+    # #172: True devuelve el aviso apenas lo decide la primera consulta, con `motivo_pendiente`, y deja la segunda
+    # para `completar_motivo`. La interfaz muestra el aviso con un texto fijo y completa el motivo cuando llega.
+    motivo_diferido: bool = False
 
     def __post_init__(self) -> None:
         self.pedido_motivo = self.pedido_motivo or cargar_prompt_motivo(PROMPT_MOTIVO_CORTE)
@@ -913,6 +918,7 @@ class DetectorSLMJSONCortado(DetectorSLM):
 
     def reiniciar(self) -> None:
         self._aviso_hecho = False
+        self._pendiente = None
 
     def opciones(self) -> dict:
         return {**super().opciones(), "num_predict": MAXIMO_TOKENS_CORTE}
@@ -952,8 +958,26 @@ class DetectorSLMJSONCortado(DetectorSLM):
 
         asistente = self._asistente(comun["crudo"], fin)
         mensajes2 = mensajes + [{"role": "assistant", "content": asistente}, {"role": "user", "content": self.pedido_motivo}]
-        opciones2 = {**super().opciones(), "num_predict": MAXIMO_TOKENS_RESPUESTA}
         base = dict(valida=True, riesgo=riesgo, alerta_sugerida=True, **campos)
+        if self.motivo_diferido:
+            self._pendiente = (mensajes2, lineas)
+            return Respuesta(**base, motivo_pendiente=True, **comun)
+        return self._segunda(mensajes2, lineas, base, comun)
+
+    def completar_motivo(self, respuesta: Respuesta) -> Respuesta:
+        """Con `motivo_diferido`: corre la segunda consulta del aviso que dejó pendiente `respuesta`."""
+        if self._pendiente is None or not respuesta.motivo_pendiente:
+            raise ValueError("no hay motivo pendiente")
+        (mensajes2, lineas), self._pendiente = self._pendiente, None
+        base = {c: getattr(respuesta, c) for c in ("valida", "riesgo", "alerta_sugerida", "alerta_escrita", "pedido_critico")}
+        comun = {c: getattr(respuesta, c) for c in ("crudo", "ms", "slm_ms", "ms_etapa1", "tokens_prompt", "tokens_salida",
+                                                     "runtime_ns", "runtime_unidad", "runtime_load_ns",
+                                                     "runtime_prompt_eval_ns", "runtime_eval_ns")}
+        return self._segunda(mensajes2, lineas, base, comun)
+
+    def _segunda(self, mensajes2: list[dict], lineas, base: dict, comun: dict) -> Respuesta:
+        ms1 = comun["ms_etapa1"]
+        opciones2 = {**super().opciones(), "num_predict": MAXIMO_TOKENS_RESPUESTA}
         inicio2 = time.perf_counter()
         try:
             r2 = self.cliente.chat(self.modelo, mensajes2, ESQUEMA_MOTIVO, opciones2, self.pensar)
