@@ -10,6 +10,9 @@ externas sirven para probar si el sistema generaliza fuera de nuestro generador.
 
 ## 1. Resultado en breve
 
+> **Actualización del 2026-11-11:** el set externo quedó congelado con 33 estafas coreanas y
+> sin legítimas; el inglés queda fuera. Ver [§8](#8-set-coreano-congelado-2026-11-11).
+
 - **Ninguna fuente trae a la vez estafas y legítimas parecidas a una estafa en llamadas reales.**
   Las dos fuentes elegidas aportan solo estafas. Faltan legítimas difíciles (ver §5.1); sin
   ellas no se puede armar el set balanceado del paso 3.
@@ -526,3 +529,85 @@ Por §5.3 (derechos de YouTube) y §5.4 (custodia de la referencia del test), ni
 2. **Referencia y fichas de Luciano (para comparar después contra la salida del detector):** `FICHAS-LUCIANO-INGLES.md` (SHA-256 `0ce3610e78ad656d9ea43f485d7a18f6be6967d3c684b7b55d4914173ea111d6`, con las 20 fichas tal cual las completó más las columnas de perfil y repeticiones), `referencia/EXT-NNN.json` (16 archivos con `clase`, `t_r_linea`, `t_c_linea`, `sospecha_linea` y `ficha_original`) y `correspondencia.json` (SHA-256 `280a53425ebdf55eb7522a635882715c169455b0d3b119d89aa6b85ff75a1f5d`, mapa entre fila del CSV, código `EN-NN`, `EXT-NNN` y número de turno a línea de `texto/`).
 
 Las lecturas de portugués (`ISSUE-144-PORTUGUES-10-2026-11-07.md`), ES-Port (`ISSUE-144-ESPORT-10-2026-11-07.md`) y coreano (`ISSUE-144-COREANO-TRADUCCION-2026-11-07.md`), junto con las dos primeras de portugués y ES-Port ya completadas en la tanda del 2026-11-06, quedan en `data/private/issue-144/` para continuar su revisión en otro momento.
+
+## 8. Set coreano congelado (2026-11-11)
+
+Cierre de los pasos 3 y 4 de #144. El set externo que corre #52 queda congelado con **33
+estafas reales de KorCCVi** traducidas al español. No se corrió ningún detector sobre ellas.
+
+> **Estado: propuesta sin discutir.** Que el set externo sea solo de estafas (las falsas alarmas
+> se miden con las legítimas entrantes de #45) y que el inglés quede fuera del set, como se
+> explica abajo, tiene que confirmarlo el equipo.
+
+### 8.1. Qué tiene
+
+| | Casos |
+|---|---:|
+| Grupo A del [filtro](FILTRO-KORCCVI.csv) (con comienzo y con pedido) | 12 |
+| Grupo B (con pedido; la transcripción arranca en medio de la llamada) | 11 |
+| Grupo «dudosa» (puede haber pedido; se eligieron las que no arrancan con la víctima que ya pagó) | 10 |
+| **Total** | **33** |
+| Con `T_R` (pedido de alto riesgo) | 27 |
+| Estafas sin pedido observable (#52 las informa con los dos denominadores) | 6 |
+| Con `T_C` (cumplimiento observable) | 16 |
+
+6238 líneas en total, entre 48 y 603 por caso (mediana 113). De los grupos A y B se usaron
+todas, menos `vishing_260` y `vishing_334`, que el equipo ya había leído en el piloto.
+
+### 8.2. Cómo se hizo
+
+1. **Traducción.** KO-01 a KO-12, con Claude (Opus 5.5) entre el 2026-11-07 y el 2026-11-10.
+   KO-13 a KO-33, el 2026-11-11, con seis agentes `gpt-6.1-sol` coordinados con Orca. El modelo, los
+   prompts y el reparto están en [PROMPTS-144-COREANO-2026-11-11.md](PROMPTS-144-COREANO-2026-11-11.md).
+   Las fuentes se extrajeron con [`extraer_korccvi.py`](../../experiments/laboratorio/extraer_korccvi.py)
+   de la misma revisión fijada de §6.
+   **Cambio respecto de §5.2:** la traducción es fiel, en español neutro, con wones y nombres
+   coreanos, y **no se adaptó al rioplatense**. Luciano lo decidió para que la IA no sesgara el texto
+   al adaptarlo: así se conserva la estructura de la llamada real.
+2. **Marcas.** Ver la tabla de abajo.
+3. **Formato** (§5.4). [`armar_set_coreano.py`](../../experiments/laboratorio/armar_set_coreano.py)
+   genera `texto/EXT-NNN.txt` (solo `A:`/`B:`, una línea por segmento de la fuente, sin notas de
+   traducción; se sacaron dos segmentos ininteligibles de una llamada), `referencia/EXT-NNN.json`,
+   `roles-protegida.json` y `correspondencia.json`. Los IDs salen de un sorteo con
+   `Random(20261111)` que no repite los 16 de inglés. Las etiquetas de hablante de más de la
+   diarización (C, D, E) se asignan a la víctima o al estafador. `A` es quien habla primero.
+4. **Congelado.** El [manifiesto](MANIFIESTO-144-SET-COREANO-2026-11-11.json) tiene el SHA-256 de los 68
+   archivos (SHA-256 del manifiesto: `4056ad5659404c81c58e67b9800a57bfee2486f9be26aba62b01a5e985c6e2d8`).
+   Correr el script sobre los archivos privados reproduce el mismo manifiesto. El set queda en
+   `data/private/issue-144/set-coreano/`, fuera de Git: la fuente prohíbe redistribuir derivados (§5.3).
+
+| Quién marcó | Casos | `revision_humana` |
+|---|---|---|
+| Luciano, con su ficha (`T_R`, `T_C` y quién es la víctima) | KO-01 y KO-03 a KO-09 | `true` |
+| Luciano, salvo el `T_R`, que la ficha no traía como número y marcó Claude con los criterios de abajo | KO-02 | `true`, con `marcado_por.t_r` |
+| Pre-marcado de IA (`gpt-6.1-sol`), ajustado con los criterios de Luciano y aprobado por él como lista, sin leer las conversaciones | KO-10 a KO-33 | `false`, con la confirmación en `marcado_por` |
+
+Criterios que fijó Luciano el 2026-11-11 para el pre-marcado: pedir el nombre, la ciudad o la
+fecha de nacimiento no es un pedido de alto riesgo; y cuando el estafador pide entrar a un
+sitio, `T_R` es el sitio falso (cuando dicta la dirección), no abrir un portal como Naver.
+Cuando una ficha marca varios pedidos, `T_R` es el primero y la referencia guarda todos en
+`pedidos_lineas`.
+
+### 8.3. Límites para informar en #52
+
+- **24 de 33 referencias las marcó la IA.** La aprobación de Luciano fue sobre la lista de marcas,
+  con la frase citada, y no sobre la conversación completa. Hay un solo revisor humano, sin
+  adjudicación: el segundo revisor de los casos dudosos que pedía el issue se descartó.
+- **Sin revisión bilingüe humana** de ninguna traducción.
+- **Español neutro, no rioplatense,** y con nombres, montos e instituciones coreanas. El detector
+  se probó sobre rioplatense: parte de lo que falle puede deberse al idioma y no a la maniobra.
+- **Solo estafas, de una sola fuente y de pocas familias:** sobre todo falsa fiscalía o policía y
+  préstamos. Sin legítimas, la prueba de fuga de §5.4 no aplica.
+- **Las fichas de KO-01 a KO-09 son públicas** ([10-11](FICHAS-144-LUCIANO-COREANO-2026-11-10.md),
+  [11-11](FICHAS-144-LUCIANO-COREANO-2026-11-11.md)). Las conversaciones no lo son. La tabla entre KO y
+  EXT queda en la custodia.
+- **Diarización automática:** la asignación de hablantes que separa a la víctima del estafador
+  tiene errores. En el pre-marcado se corrigió alrededor de las marcas, no en toda la llamada.
+
+### 8.4. Inglés y portugués
+
+Las 16 conversaciones de inglés armadas en §7.4 quedan **fuera del set**. Son llamadas en las que
+llama la víctima, que #151 saca del alcance, y se informan aparte. Además, sus textos son públicos
+desde el 2026-11-10, y la corrida de latencia del A56 ya pasó por EN-07, EN-09 y EN-13. Portugués
+y ES-Port no entran: la conversación de PIX no define la clase (§3.3) y ES-Port son legítimas
+salientes.

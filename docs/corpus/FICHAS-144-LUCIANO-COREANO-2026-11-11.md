@@ -14,6 +14,11 @@ tanda y sin revisión bilingüe humana. KO-03 a KO-07 son del grupo A del
 transcripción arranca en medio de la llamada). KO-10, KO-11 y KO-12 están traducidas pero sus fichas
 siguen vacías; no se publican.
 
+> **Actualización del 2026-11-11:** las fichas de KO-10 a KO-12 no se llenaron. Sus marcas, y las de
+> KO-13 a KO-33, salen de un pre-marcado de IA aprobado por Luciano como lista
+> ([relevamiento §8](RELEVAMIENTO-CORPUS-EXTERNO.md#8-set-coreano-congelado-2026-11-11)). La ficha de
+> KO-02 no trae número de `T_R`; en el set lo marcó Claude con los mismos criterios.
+
 | Caso | Fuente | SHA-256 de la transcripción | Segmentos |
 |---|---|---|---|
 | KO-03 | `vishing_577` | `8d5bb12f0e2eea91bfa7974e321bdabd8f5d2dcb103b67e4998f53d605ecacd4` | 53 |
