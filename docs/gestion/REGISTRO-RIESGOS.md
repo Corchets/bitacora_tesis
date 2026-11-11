@@ -225,3 +225,18 @@ respaldada fuera del worktree. La exposición previa se registra por caso; el re
 no garantiza ceguera si el revisor ya conoce la conversación. Preparación técnica verificada,
 sin revisión humana ni adjudicación todavía; no se reducen probabilidad ni impacto.
 Las respuestas se exportan como JSON porque el almacenamiento del navegador no es un respaldo.
+
+## Actualización técnica — 2026-11-11 (ADR 0002)
+
+R07: el [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) congela una configuración con 26/94 falsas alarmas en
+desarrollo, cerca del 28 %, contra el 10–15 % de referencia de RNF-06. El aviso sale casi siempre de un 0,3 exacto
+([H04](../hallazgos/H04-riesgo-escrito-no-es-puntaje.md)). Cómo se lee ese límite en la reserva lo decide el protocolo
+(#33). No se reducen probabilidad ni impacto.
+
+R25: Tito sale de la configuración y de la evaluación final, también como ablación. La evaluación ya no puede
+sobrestimar el beneficio del filtro porque no lo mide; Tito se cita solo como evidencia de lo que se probó.
+
+R08: E2B solo, sin Tito, tarda 3,60 s de mediana por línea de OTRA en el A56 y usa 3,39 GiB de pico
+([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)).
+Falta medirlo junto con el ASR en el teléfono. No se reducen probabilidad ni impacto.
+

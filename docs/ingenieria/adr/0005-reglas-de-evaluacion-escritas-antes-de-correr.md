@@ -18,7 +18,7 @@ Elegimos sobre casos sintéticos de desarrollo, y hay una sola reserva. Decidir 
 
 Para comparar y elegir configuraciones aplicamos estas reglas:
 
-1. **La reserva se mira una sola vez,** con la configuración congelada en el ADR 0002. Todo lo demás se elige sobre
+1. **La reserva se mira una sola vez,** con la configuración congelada en el [ADR 0002](0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md). Todo lo demás se elige sobre
    desarrollo.
 2. **Las reglas se escriben antes de correr:** la vista, el límite de falsas alarmas, la política, los desempates y la
    regla de adopción. Lo que no estaba escrito se informa como exploración y no decide.

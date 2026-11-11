@@ -158,13 +158,15 @@ Se ejecutó la integración de punta a punta sobre la simulación de streaming e
 
 ### 7.4.3. Configuración final con voz real
 
-Sobre la configuración final hubo tres comprobaciones, todas en la M1 de 8 GB:
+Sobre la configuración del ADR 0001, con Tito viejo, hubo tres comprobaciones, todas en la M1 de 8 GB:
 
 - **[Tito viejo con Gemma 4 en el panel](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md):** con ejemplos TTS, dos estafas con aviso y una legítima sin aviso.
 - **[Corrida por Meet](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md):** nueve llamadas guionadas con dos voces, sin fallos del detector y con una sola frase salteada en 18 pasadas.
 - **[Replay de la llamada 1](../../experiments/voip/corridas/2026-11-02-voz-real-meet/replay-llamada-1/resumen.md):** misma activación de Tito y misma frase citada que en vivo. La diferencia de 1,9 s en `T_A` es la demora de la consulta.
 
 Según informó Luciano Grosso, participó otro integrante del equipo. La integración (#28) se cerró el 2026-11-03 por decisión de Luciano Grosso con esa corrida como evidencia. **No quedó registrado** que otra persona reproduzca una estafa y una legítima por replay, revise un error y contraste el aviso con una referencia: solo se hizo replay de una estafa y todavía no hay marcas humanas.
+
+**La configuración del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) no se probó con voz real.** El panel ya arranca con ella y sus pruebas automáticas pasan, pero no hay ninguna llamada grabada con ese detector ni con los turnos del ADR 0007, cuyos umbrales se fijan con grabaciones.
 
 **Sin automatizar:** la captura real por Meet, el ensayo en la sala de la defensa y cualquier medición en teléfono.
 
@@ -180,13 +182,11 @@ Los requisitos no funcionales del sistema fueron contrastados contra los gates d
 | **Latencia por turno (SLM en CPU)** | $p95 \le 1.5\ \text{s}$ (objetivo); $> 2.0\ \text{s}$ inaceptable | Mediana **$3.9\ \text{s}$**, $p95 = \mathbf{7.3\ \text{s}}$ (0.8B); Mediana **$8.2\ \text{s}$**, $p95 = \mathbf{13.0\ \text{s}}$ (2B) | PC x86_64 CPU 2 hilos (`experiments/slm-directo/corridas/2026-10-14_191429_cpu-2hilos/`) | **No cumple** (degradado, excede techo) |
 | **Latencia por turno (Reglas)** | $p95 \le 1.5\ \text{s}$ | Mediana **$7\ \text{ms}$**, $p95 = \mathbf{18\ \text{ms}}$ | PC Windows x86_64 (`2026-10-13_224418_linea-base-reglas`) | **Cumple con holgura** |
 | **Configuración final: ritmo del ASR** | $RTF < 1.00$ | **$0.088$** (Parakeet, opción B) | Offline en Apple M1, 8 GB ([medición](../../experiments/asr-local/corridas/2026-11-02_voz-real_dialogos-a-contra-b/resumen.md)) | **Cumple** |
-| **Configuración final: memoria** | $\le 512\ \text{MB}$ a $1024\ \text{MB}$ | ASR **$1036\ \text{MB}$**; Tito **$0.48\ \text{GB}$**; archivo de E2B **$4.59\ \text{GB}$**; swap de 4,5–4,7 GB | Apple M1, 8 GB | **No cumple**; el tutor reorientó la referencia a la gama más alta |
-| **Configuración final: latencia por consulta** | $p95 \le 1.5\ \text{s}$; $> 2.0\ \text{s}$ inaceptable | Mediana **$3.74\ \text{s}$**, $p95 = \mathbf{4.53\ \text{s}}$ (E2B); unos 30 ms sin consulta (Tito) | Apple M1, 8 GB, 5 corridas ([#84](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84)) | **No cumple**; el aviso llegó a tiempo en esas corridas |
+| **Configuración final: memoria** | $\le 512\ \text{MB}$ a $1024\ \text{MB}$ | ASR **$1036\ \text{MB}$**; archivo de E2B **$4.59\ \text{GB}$**; swap de 4,5–4,7 GB en la M1. E2B en el teléfono: **$3.39\ \text{GiB}$** de pico | Apple M1, 8 GB, y Samsung A56 ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)) | **No cumple**; el tutor reorientó la referencia a la gama más alta |
+| **Configuración final: latencia por consulta** | $p95 \le 1.5\ \text{s}$; $> 2.0\ \text{s}$ inaceptable | En el A56, mediana **$3.60\ \text{s}$** y $p95 = \mathbf{4.90\ \text{s}}$ por línea de OTRA, más unos 11 s de motivo en el primer aviso. En la M1, con el JSON completo del ADR 0001: mediana $3.74\ \text{s}$, $p95 = 4.53\ \text{s}$ | Samsung A56, una pasada, prompt base sin la premisa ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)); Apple M1, 5 corridas ([#84](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84)) | **No cumple**; bajarlo es [#172](https://github.com/Corchets/bitacora_tesis/issues/172) |
 | **Dependencias y conectividad** | Sin conexiones salientes en la llamada | Inferencia local verificada | Inferencia ASR local en disco y detector conectado a Ollama en `127.0.0.1` (`cliente_ollama.py`); no se midió el tráfico de red | **No evaluado con captura de paquetes** |
 
-> **Corregir (#51):** las filas de «configuración final» cuentan a Tito en memoria y latencia. Cambian si el ADR 0002 deja el SLM solo.
-
-> **Declaración metodológica de procedencia:** Las mediciones de $RTF$, latencia y memoria física fueron obtenidas en estaciones de trabajo de laboratorio (Apple M1 de 8 GB y PC x86_64). En estricto cumplimiento de la regla de conclusión de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), **estos resultados demuestran prefactibilidad en laboratorio, pero no equivalen a mediciones en procesadores móviles ARM Android**. La evaluación de consumo de batería, degradación por calentamiento térmico (`PowerManager`) y rendimiento en dispositivos móviles reales queda supeditada a la ejecución de la demo Android.
+> **Declaración metodológica de procedencia:** Las mediciones de $RTF$, latencia y memoria física fueron obtenidas en estaciones de trabajo de laboratorio (Apple M1 de 8 GB y PC x86_64). En estricto cumplimiento de la regla de conclusión de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md), **estos resultados demuestran prefactibilidad en laboratorio, pero no equivalen a mediciones en procesadores móviles ARM Android**. La evaluación de consumo de batería, degradación por calentamiento térmico (`PowerManager`) y rendimiento en dispositivos móviles reales queda supeditada a la ejecución de la demo Android. La excepción es el detector solo, medido una vez en un Samsung A56 el 2026-11-10, sin el ASR ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)).
 
 ---
 

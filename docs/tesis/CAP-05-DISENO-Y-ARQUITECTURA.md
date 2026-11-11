@@ -1,4 +1,4 @@
-> **Estado: borrador del 2026-11-03**, actualizado con la configuración final de [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Requiere revisión del equipo.
+> **Estado: borrador del 2026-11-03**, actualizado el 2026-11-11 con el detector del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) y el ASR del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Requiere revisión del equipo.
 
 # Capítulo 5: Diseño y arquitectura del sistema
 
@@ -14,7 +14,7 @@ El sistema se estructura en seis componentes funcionales con responsabilidades d
 flowchart LR
     A["1. Ingesta de audio<br/>(Replay / Meet por canal)"] -->|"Bloques PCM 16 kHz"| B["2. ASR local<br/>(Parakeet con filtro Silero)"]
     B -->|"Actualizaciones<br/>(JSONL)"| C["3. Contexto incremental<br/>(Memoria volátil)"]
-    C -->|"Líneas disponibles<br/>(Prefijo temporal)"| D["4. Detector<br/>(Tito viejo → Gemma 4 E2B)"]
+    C -->|"Líneas disponibles<br/>(Prefijo temporal)"| D["4. Detector<br/>(Gemma 4 E2B)"]
     D -->|"Respuesta tipada<br/>(Riesgo, alerta, motivo)"| E["5. Política de alerta<br/>(Aviso único)"]
     E -->|"Advertencia validada"| F["6. Interfaz de usuario<br/>(Aviso preventivo)"]
 ```
@@ -24,7 +24,7 @@ La responsabilidad de cada uno de los componentes se define con precisión:
 1. **Ingesta de audio:** Suministra el flujo de audio en bloques temporales uniformes sin entregar información del futuro de la llamada. En la base experimental obligatoria del proyecto, este componente consiste en un motor de reproducción (*replay*) de archivos de audio que simula la llegada secuencial de fragmentos PCM; en la demostración, un panel web captura en la notebook de la persona protegida su micrófono y el canal remoto desde una pestaña de Google Meet, con la llamada de ejemplo como plan B (ver [Alternativas para obtener el audio](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)).
 2. **Reconocimiento automático del habla (ASR local):** Transforma el flujo continuo de audio en actualizaciones de texto estructuradas. Opera de forma local con Parakeet TDT 0.6B v3 y emite segmentos con sus marcas temporales de inicio, fin y momento de disponibilidad en el reloj de la llamada. Cada persona es un canal.
 3. **Gestor de contexto incremental:** Mantiene en memoria de acceso aleatorio el estado conversacional de la llamada en curso. Su función es incorporar el texto emitido por el ASR, reemplazar los borradores preliminares cuando se recibe una transcripción más precisa y consolidar los segmentos cerrados, asegurando que el detector reciba en todo instante únicamente el prefijo de diálogo disponible hasta ese momento.
-4. **Detector:** Tiene dos etapas. Tito viejo puntúa cada frase cerrada y, cuando llega al umbral, activa a Gemma 4 E2B, que analiza el diálogo acumulado (sin etiquetas externas ni acceso a señales futuras) y produce una inferencia tipada compuesta por un puntaje numérico, una bandera de recomendación de alerta, un motivo explicativo y la evidencia textual que sustenta el juicio. El acceso al modelo es un recurso secuencial.
+4. **Detector:** Gemma 4 E2B analiza el diálogo acumulado, con cada línea marcada como `PROTEGIDA` u `OTRA` según el canal, sin etiquetas externas ni acceso a señales futuras. Se lo consulta al cerrar cada turno de OTRA y escribe solo el riesgo, un número entre 0 y 1. En el primer aviso, una segunda consulta escribe el motivo y la evidencia textual que lo sustenta. El acceso al modelo es un recurso secuencial.
 5. **Política de emisión de alerta:** Evalúa la secuencia de respuestas producidas por el detector a lo largo del tiempo y decide el instante en que se emite la advertencia. Emite un único aviso por llamada.
 6. **Módulo de aviso al usuario:** Transforma la decisión de alerta en una comunicación no obstructiva, clara y orientada a la acción inmediata (interrumpir la entrega de información o verificar por un canal alternativo), sin emitir afirmaciones categóricas ni revelar credenciales sensibles.
 
@@ -49,7 +49,7 @@ En la siguiente tabla se resumen las entradas, salidas y restricciones críticas
 | **ASR local** | Bloques de PCM de 40 ms en vivo, 100 ms en las corridas offline. | Eventos de transcripción (`parcial` o `final`). | $t_{\text{disp}} \ge \tau_{\text{fin}}$. La latencia de cómputo se suma hacia adelante; no se reasignan marcas al pasado. |
 | **Contexto** | Actualización de ASR (`tipo`, `segmento`, `texto`). | Tupla inmutable de líneas de diálogo cerradas y abiertas. | Aislamiento estricto entre llamadas: al cambiar de sesión el estado se vacía totalmente. |
 | **Cola de evaluación** | Líneas de diálogo en $t_{\text{disp}}$ y estado del detector. | Turno de cómputo secuencial con inicio y fin de evaluación. | Recurso secuencial (una inferencia a la vez): en replay se evalúan todas en orden; en vivo se toma lo último disponible (§5.4.2). |
-| **Detector** | Frase cerrada para Tito; prefijo conversacional acumulado hasta la línea actual para el SLM. | Objeto de respuesta tipado (`riesgo`, `alerta_sugerida`, `motivo`, `evidencia`). | Ceguera hacia el futuro y ausencia de datos de referencia humana (clase, rol, marcas $T_R$/$T_C$). |
+| **Detector** | Prefijo conversacional acumulado hasta el cierre de un turno de OTRA, con el rol de cada línea. | `riesgo` en cada consulta; `motivo` y `evidencia` solo en el primer aviso. | Ceguera hacia el futuro y ausencia de datos de referencia humana (clase, marcas $T_R$/$T_C$). El rol sale del canal capturado, no de la referencia. |
 | **Política de alerta** | Respuesta del detector y estado de avisos previos. | Disparo del aviso definitivo y marca $T_A$. | Principio de aviso único: a lo sumo un aviso principal por sesión para prevenir fatiga. |
 
 ---
@@ -80,7 +80,7 @@ La semántica de los campos de cada actualización se especifica a continuación
 - `inicio_audio_s` y `fin_audio_s` (flotantes): Estampas temporales en segundos del reloj de audio que delimitan el tramo acústico de origen.
 - `disponible_s` (flotante): Instante en el reloj de audio en el que la transcripción estuvo efectivamente lista para consumo del pipeline. Incorpora la latencia acumulada de decodificación y garantiza $disponible\_s \ge fin\_audio\_s$.
 - `proceso_ms` (flotante): Tiempo de CPU/GPU en milisegundos que consumió el motor para decodificar ese bloque específico.
-- `canal` (cadena opcional): Identificador del canal. En la llamada en vivo vale `"protegida"` u `"otra"`; en grabaciones estéreo de dos vías, `"A"` o `"B"`; en audio monoaural o mezclas de altavoz, `null`. El detector ve las letras A y B por orden de aparición, sin que indiquen quién llamó ni quién es sospechoso.
+- `canal` (cadena opcional): Identificador del canal. En la llamada en vivo vale `"protegida"` u `"otra"`; en grabaciones estéreo de dos vías, `"A"` o `"B"`; en audio monoaural o mezclas de altavoz, `null`. El detector ve `PROTEGIDA` u `OTRA` según el canal ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)). En la configuración del ADR 0001 veía las letras A y B por orden de aparición, sin que indicaran quién llamó ni quién es sospechoso.
 
 ### 5.3.2. Traza unificada de ejecución del Replay (`eventos.csv`)
 
@@ -136,13 +136,13 @@ Donde $t_{\text{disp}, n}$ es el instante de disponibilidad de la actualización
 
 Si el detector procesa con holgura ($\text{ms} < \Delta t_{\text{audio}}$), la espera en cola se mantiene en cero y la evaluación inicia inmediatamente en $t_{\text{disp}, n}$. Si el detector se degrada o experimenta picos de latencia, $\text{inicio\_eval}_n$ queda dominado por $\text{fin\_eval}_{n-1}$, acumulando un atraso temporal medible en `espera_cola_ms`.
 
-**En vivo, el detector no hace cola.** Si llega texto mientras evalúa, la siguiente evaluación toma lo último disponible y las intermedias se saltean, registradas como `saltadas`; en una llamada larga, evaluarlas todas haría crecer la demora. Tito puntúa igual cada frase salteada, de modo que una frase sospechosa no se pierde por llegar mientras el modelo está ocupado. Al cortar la llamada, lo pendiente se evalúa con un tope de 30 s (corrección `7e6b971`). Toda llamada en vivo se puede volver a medir después con `replay.py`.
+**En vivo, el detector no hace cola.** Si llega texto mientras evalúa, la siguiente evaluación toma lo último disponible y las intermedias se saltean, registradas como `saltadas`; en una llamada larga, evaluarlas todas haría crecer la demora. Cada consulta ve toda la transcripción, así que una frase que llegó mientras el modelo estaba ocupado no se pierde: entra en la consulta siguiente. Al cortar la llamada, lo pendiente se evalúa con un tope de 30 s (corrección `7e6b971`). Toda llamada en vivo se puede volver a medir después con `replay.py`.
 
 ### 5.4.3. Política de aviso único
 
 La política de alerta adoptada en el núcleo del sistema es la de **aviso único ante la primera respuesta válida positiva** (`aviso_unico_primer_true_valido`). 
 
-Bajo esta regla, el instante de alerta de la conversación ($T_A$) se congela en el momento de finalización de cómputo de la primera actualización que retorne un resultado válido con $\text{alerta\_sugerida} == \text{True}$:
+Bajo esta regla, el instante de alerta de la conversación ($T_A$) se congela en el momento de finalización de cómputo de la primera actualización que retorne un resultado válido positivo. En la configuración del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md), positivo es un riesgo mayor o igual a 0,3: la salida se corta después del riesgo, antes de `alerta_sugerida`, que no se lee ([ADR 0006](../ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md)):
 
 $$T_A = \text{fin\_eval}_n$$
 
@@ -150,8 +150,8 @@ Esta formulación garantiza que $T_A$ refleje la totalidad del tiempo transcurri
 
 El tratamiento de excepciones e inconsistencias sigue reglas rigurosas:
 - **Invalidez no es predicción:** Si el modelo genera un JSON malformado, omite campos obligatorios, produce un valor numérico de riesgo fuera del rango $[0, 1]$, supera el límite de contexto o agota el tiempo de espera (*timeout*), el evento se califica como **fallo técnico** (`valida == False`). Un fallo **jamás** se computa como voto negativo ni bloquea la emisión de alertas en turnos subsiguientes.
-- **Fallo de Tito:** Si Tito falla técnicamente, se activa el modelo y se registra el fallo: un error del filtro no suprime la revisión de la llamada.
-- **Inhibición de fatiga:** Una vez que la llamada emite su primer aviso ($T_A$), las actualizaciones posteriores continúan registrándose con sus respectivos niveles de riesgo y motivos a efectos de análisis retrospectivo, pero su bandera `aviso` se fuerza a `False`. El sistema no repite alertas para un mismo nivel de riesgo, protegiendo a la persona usuaria de la saturación cognitiva durante una llamada bajo estrés.
+- **Fallo del motivo:** Si la segunda consulta falla, el aviso se mantiene con un texto fijo y el error queda registrado.
+- **Inhibición de fatiga:** Una vez que la llamada emite su primer aviso ($T_A$), las actualizaciones posteriores continúan registrándose con sus respectivos niveles de riesgo y motivos a efectos de análisis retrospectivo, pero su bandera `aviso` se fuerza a `False`. En la llamada en vivo, después del aviso no se consulta más. El sistema no repite alertas para un mismo nivel de riesgo, protegiendo a la persona usuaria de la saturación cognitiva durante una llamada bajo estrés.
 
 ### 5.4.4. Problemática del contexto en llamadas extensas (D08 abierta)
 
@@ -172,46 +172,34 @@ Para mitigar estas patologías, se investigaron dos familias de alternativas arq
 
 ## 5.5. Decisiones arquitectónicas y análisis de alternativas
 
-El diseño sintetiza elecciones donde se priorizó la defensa metodológica, la factibilidad técnica y la reproducibilidad. La elección de ASR y detector está registrada en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
+El diseño sintetiza elecciones donde se priorizó la defensa metodológica, la factibilidad técnica y la reproducibilidad. El ASR está registrado en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) y el detector, en [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md).
 
 ```mermaid
 flowchart LR
-    F["Frase cerrada"] --> T["Tito viejo<br/>RoBERTuito congelado + regresión logística"]
-    T -->|"puntaje < 0,5"| S["Sin consulta"]
-    T -->|"puntaje ≥ 0,5 o fallo"| A["Compuerta abierta<br/>hasta el fin de la llamada"]
-    A --> G["Gemma 4 E2B<br/>toda la conversación + indicio falible"]
-    G -->|"alerta_sugerida = true, válida"| V["Aviso único<br/>motivo y cita"]
-    G -->|"false"| E["Sigue escuchando"]
+    P["Turno de PROTEGIDA"] -.->|"entra al contexto,<br/>no consulta"| G
+    F["Turno de OTRA cerrado"] --> G["Gemma 4 E2B<br/>toda la conversación, con roles"]
+    G -->|"riesgo ≥ 0,3, válido"| V["Aviso único"]
+    V --> M["Segunda consulta:<br/>motivo y cita"]
+    G -->|"riesgo < 0,3 o inválido"| E["Sigue escuchando"]
 ```
 
 ### 5.5.1. Detector
 
-> **Corregir (#51):** varias partes del capítulo describen la configuración del ADR 0001, con Tito viejo como compuerta y el indicio en el prompt:
->
-> - esta sección;
-> - el diagrama de §5.5;
-> - el componente 4 de §5.1;
-> - la fila del detector en la tabla de interfaces.
->
-> Cuando #51 cierre el ADR 0002, hay que actualizar la compuerta (SLM solo o Tito) y sacar el indicio, que la demo no usa desde el 2026-11-05 ([H07](../hallazgos/H07-indicio-de-tito-pierde-estafas.md)). Si Tito queda, se describe con el requisito de [ARQUITECTURA §8.5](../ingenieria/ARQUITECTURA.md#85-qué-tiene-que-cumplir-la-compuerta) y con su limitación ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)).
+**El modelo decide solo.** Gemma 4 E2B (`gemma4:e2b-it-q4_K_M`) recibe la conversación disponible con el prompt `c-premisa-corte-riesgo`. El prompt le explica cómo se arma una estafa telefónica y le pide mirar hacia dónde va la llamada, no solo la última frase: si OTRA va llevando a PROTEGIDA a dictar un código, decir una clave, transferir o seguir pasos en el celular, conviene avisar aunque todavía no haya un pedido. Un párrafo agrega la premisa del alcance ([ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md)): la llamada viene de un número no agendado, y un banco, una empresa o un organismo no pide por teléfono el código ni las claves. Otro aclara que una legítima también puede pedir el nombre o el DNI. Las líneas de PROTEGIDA entran en el contexto, pero solo consultan los turnos de OTRA ([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). No hay componente entrenado: el detector es un modelo general con un prompt.
 
-**Tito como compuerta, el modelo como decisor.** Tito viejo es un RoBERTuito congelado con una regresión logística, ajustada con 5.520 textos sintéticos de 276 familias de variantes. Puntúa la frase aislada con umbral 0,5. No emite avisos: cuando se activa, el modelo evalúa desde esa misma frase y sigue en cada línea hasta el final de la llamada. Recibe la conversación disponible y, por separado, el fragmento que activó a Tito con su puntaje, con la indicación explícita de que esa sospecha es preliminar y puede descartarse. El puntaje de Tito nunca se presenta como confirmación de fraude.
+**Por qué esta configuración.** La configuración del ADR 0001 ponía a Tito viejo como compuerta y le pasaba al modelo su indicio. Las dos cosas salieron. La baja de falsas alarmas que se le atribuía al filtro era casi toda punto ciego ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), porque Tito se entrenó como clasificador de estafas y no como compuerta de lo sensible ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)), y el indicio le hacía perder estafas al modelo ([H07](../hallazgos/H07-indicio-de-tito-pierde-estafas.md)). El prompt C pregunta por la intención y no por el pedido. Por eso avisa antes del pedido y suma las estafas sin pedido ([H10](../hallazgos/H10-c-avisa-antes-del-pedido.md)). Entre las variantes de C, la [prueba de sensibilidad](../../experiments/slm-directo/corridas/2026-11-10_sensibilidad-c/analisis.md) eligió la de la premisa con una regla escrita antes de correr. En desarrollo, dentro del alcance, avisó 40 de 46 estafas, 19 de 36 antes del pedido, con 26 falsas alarmas en 94 legítimas. Es una búsqueda a mano sobre los mismos casos, sin revisión humana: el número que vale es el del test (#52).
 
-Las llamadas que Tito nunca deriva quedan en los denominadores: una estafa no derivada cuenta como estafa sin aviso.
-
-**Por qué esta combinación.** En la [matriz #101](../../experiments/slm-directo/corridas/2026-10-30_112956_101_informe_101.md), Tito viejo con E2B fue la única combinación con 10/10 estafas y 0/10 falsas alarmas, sin umbrales ajustados mirando esos casos. Es el resultado de comparar 10 modelos en esos mismos 20 casos, sin revisión humana, por lo que no estima el rendimiento final. La diferencia en falsas alarmas con E2B directo (0/10 contra 1/10) no vino del filtro: en esa legítima Tito activó en la línea 1 y el modelo leyó la conversación entera en las dos condiciones ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)). Lo que el filtro aporta es el ahorro de consultas.
-
-| Alternativa | Resultado | Por qué no |
-|---|---|---|
 | **Reglas léxicas** | 58,3 % de falsas alarmas en 24 negativos difíciles | No distinguen mencionar de pedir. Quedan como línea base y respaldo sin modelo. |
-| **Cascada con zona gris (spike #29)** | Bajó de 12/16 a 7/16 aciertos | Consultaba al modelo solo en una zona gris. Es distinta de la compuerta actual, que queda abierta una vez activada. |
-| **Gemma 4 E2B directo** | 10/10 · 1/10 | Consulta en todas las líneas. Queda como comparador. |
-| **Gemma 4 E4B con Tito viejo** | 10/10 · 1/10 | En la M1 de 8 GB avisó a +49 s. Salió del panel el 2026-11-03; queda solo como antecedente de la matriz. |
+| **Cascada con zona gris (spike #29)** | Bajó de 12/16 a 7/16 aciertos | Consultaba al modelo solo en una zona gris. |
+| **Tito viejo como compuerta de E2B (ADR 0001)** | 10/10 · 0/10 en #101, con la mitad de las consultas | Las falsas alarmas que evita son punto ciego (H08) y pierde una estafa en desarrollo. Salió el 2026-11-06, también como ablación. |
+| **E2B con `v4`, cortado tras la alerta** | Contra C, 8 estafas menos y 42/94 falsas alarmas contra 27/94 ([etapa 2](../../experiments/slm-directo/corridas/2026-11-07_alcance-etapa-2/analisis.md)) | Pregunta por el pedido, así que avisa en el pedido y no en las estafas sin él. |
+| **Leer la probabilidad del token** | Empata con el riesgo escrito | Sin ajuste fino no sirve. Trabajo futuro (#176). |
+| **Gemma 4 E4B con Tito viejo** | 10/10 · 1/10 | En la M1 de 8 GB avisó a +49 s. No se corrió sobre los 244 casos de desarrollo; se compara como referencia en #173. |
 | **Tito nuevo con E2B** | 2/10 · 0/10 | Pierde casi todas las estafas. Se probó sin ajuste fino del encoder. |
 | **Qwen3.5 9B con `v2`** | 10/10 · 1/10 | 6,6 GB: techo experimental, no entra en el teléfono. |
 | **Riesgo primero (`gemma3n:e2b`)** | 10/10 · 3–6/10, o 2/10 · 0/10 | Lo elegido en selección no se transfiere al informe. |
 | **Cross-encoder y NLI** | bge: 4/10 · 1/10 | Miden tema, no intención ([#123](https://github.com/Corchets/bitacora_tesis/issues/123)). |
-| **Modelo por API** | Sin medir | Lo descartó el tutor, por la restricción de privacidad. |
+| **Modelo por API** | Sin medir | Lo descartó el tutor, por la restricción de privacidad. Se mide como techo, solo en desarrollo, en #174. |
 
 ### 5.5.2. Captura de audio
 

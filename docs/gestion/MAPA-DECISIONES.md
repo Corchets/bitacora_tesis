@@ -266,6 +266,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   peor que Parakeet y más lento sobre el mismo audio TTS, y E2B escuchando directo queda afuera sin medir
   ([corrida](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md)).
   > **Estado: propuesta sin discutir.** Seguir con Parakeet; se decide en la reunión del equipo del 2026-11-11.
+- **Nota del 2026-11-11 ([#51](https://github.com/Corchets/bitacora_tesis/issues/51)):** el detector queda fijado en el
+  [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md): Gemma 4 E2B solo, sin Tito, con
+  `c-premisa-corte-riesgo`, aviso con riesgo ≥ 0,3 y consulta solo en las líneas de OTRA. La configuración está
+  elegida; el protocolo con que se corre la reserva sigue en [D08](#d08--congelar-protocolo-experimental).
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base:** reglas solas, también como respaldo sin modelo de la demo.

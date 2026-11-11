@@ -10,9 +10,7 @@
 - Una evaluación centrada en el tiempo de intervención, con una separación estricta entre lo que el detector puede ver y la referencia.
 - Una comparación de detectores que incluye resultados negativos: reglas, cascadas, cross-encoders, prompts que no generalizaron y una compuerta entrenada como clasificador, que no ve lo sensible ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)).
 - Un corpus controlado en español, con contexto argentino y legítimas difíciles, todavía sin revisión humana.
-- Una configuración justificada con alternativas descartadas: Parakeet con filtro Silero, y Tito viejo con Gemma 4 E2B.
-
-> **Corregir (#51):** la configuración del detector la fija el ADR 0002.
+- Una configuración justificada con alternativas descartadas: Parakeet con filtro Silero ([ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)) y Gemma 4 E2B solo, con un prompt que pregunta por la intención de quien llama ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)).
 
 **[Completar con el resultado del test reservado.]**
 
@@ -26,7 +24,7 @@
 
 ## 11.3. Limitaciones
 
-- Sin medición en teléfono, y con la latencia y la memoria por encima de los criterios de prefactibilidad.
+- Sin medición del recorrido completo en teléfono: en un Samsung A56 se midió solo el detector, y la latencia y la memoria quedan por encima de los criterios de prefactibilidad.
 - Corpus simulado, de redacción asistida y sin referencia humana validada.
 - Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo, sin comparar el mismo detector sobre las dos entradas.
 - Voz real limitada a 4 guiones y 2 voces, con el audio original perdido.
