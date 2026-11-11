@@ -60,6 +60,15 @@ class ConsolidacionTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             revision.filas_144_coreano(texto.replace("### Ficha KO-02", "### Otra"))
 
+    def test_segunda_tanda_coreana_publica_solo_las_fichas_llenas(self):
+        texto = (revision.CORPUS / revision.COREANO_144_B).read_text()
+        filas = revision.filas_144_coreano(texto, revision.FUENTES_COREANO_B, revision.COREANO_144_B, "2026-11-11")
+        self.assertEqual([f["alias_revision"] for f in filas], [f"KO-0{n}" for n in range(3, 10)])
+        self.assertEqual(filas[2]["pedido_marca"], "46 81 83")
+        self.assertEqual(filas[0]["juicio_estafa"], "dudoso")
+        self.assertTrue(all(f["fecha"] == "2026-11-11" and f["unidad_marcas"] == "segmento_fuente" for f in filas))
+        self.assertNotIn("### Ficha KO-10", texto)
+
 
 if __name__ == "__main__":
     unittest.main()
