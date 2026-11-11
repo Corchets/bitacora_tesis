@@ -2,7 +2,7 @@
 
 # Capítulo 8: Resultados experimentales
 
-> **Corregir (#51):** las secciones 8.3.1, 8.4.1, 8.5 y 8.6 llaman «configuración final» a la del ADR 0001: Tito viejo con E2B, `tarea` e indicio. Si el ADR 0002 elige otra, hay que actualizar esas filas, incluida la de Tito en 8.6. Además, la baja de falsas alarmas con Tito no es filtrado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y los resultados se informan con corpus_v2 aparte ([H01](../hallazgos/H01-corpus-v2-se-lee-aparte.md)).
+> **Configuración (2026-11-11).** La configuración final es la del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md): Gemma 4 E2B solo, con `c-premisa-corte-riesgo`. Sus resultados de desarrollo están en §8.3.3. Lo que este capítulo atribuye a Tito viejo con E2B es la configuración del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md), que queda como antecedente. La baja de falsas alarmas con Tito no es filtrado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y los resultados se informan con corpus_v2 aparte ([H01](../hallazgos/H01-corpus-v2-se-lee-aparte.md)).
 
 ## 8.1. Descripción del corpus
 
@@ -78,11 +78,23 @@ Ver [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
 
 La repetición de Qwen 2B en GPU, con igual configuración y seed 42, cambió la decisión en 2 de 53 casos: la inferencia no es exactamente repetible, y eso afecta a toda comparación por una sola corrida.
 
+### 8.3.3. Configuración del ADR 0002 en desarrollo
+
+[Prueba de sensibilidad](../../experiments/slm-directo/corridas/2026-11-10_sensibilidad-c/analisis.md), en Colab T4 el 2026-11-10. Son los 140 casos de desarrollo dentro del alcance: 46 estafas, 36 de ellas con pedido, y 94 legítimas entrantes (29 cotidianas, y 65 con un pedido razonable o con una mención sensible). «A tiempo» es `T_A ≤ T_R`.
+
+| Corrida | Estafas | Antes del pedido | A tiempo | Falsas alarmas |
+|---|---:|---:|---:|---:|
+| Base, sin la premisa | 37/46 | 15/36 | 25/36 | 26/94 |
+| **`c-premisa`, la configuración final** | **40/46** | **19/36** | **29/36** | **26/94** |
+| `c-premisa`, repetición | 39/46 | 18/36 | 28/36 | 28/94 |
+
+Con Wilson al 95 %, en la primera corrida: estafas 87 % [74–94], a tiempo 81 % [65–90] y falsas alarmas 28 % [20–37]. De las 26 falsas alarmas, 2 son cotidianas. La regla escrita antes de correr eligió esta variante entre tres, sobre los mismos casos, y las marcas no tienen revisión humana: el valor es optimista. Qué significan las cifras está en [H10](../hallazgos/H10-c-avisa-antes-del-pedido.md).
+
 ## 8.4. Detección temprana y latencia
 
 ### 8.4.1. Sobre texto, en líneas
 
-Con E2B y Tito viejo, en #101, el aviso llegó en la línea del pedido en 8 de 10 estafas, una línea antes en 1 y tres líneas después en 1. En las 6 estafas con cumplimiento marcado, avisó antes de la línea de `T_C`. Las marcas son provisionales, y en texto no hay segundos. E2B directo avisó antes del pedido en 4 de las 10 estafas; con Tito, en 1. #101 prueba la activación y el indicio juntos, así que no separa cuál de los dos atrasó el aviso ([H07](../hallazgos/H07-indicio-de-tito-pierde-estafas.md)).
+Con la configuración del ADR 0001, E2B y Tito viejo, en #101, el aviso llegó en la línea del pedido en 8 de 10 estafas, una línea antes en 1 y tres líneas después en 1. En las 6 estafas con cumplimiento marcado, avisó antes de la línea de `T_C`. Las marcas son provisionales, y en texto no hay segundos. E2B directo avisó antes del pedido en 4 de las 10 estafas; con Tito, en 1. #101 prueba la activación y el indicio juntos, así que no separa cuál de los dos atrasó el aviso ([H07](../hallazgos/H07-indicio-de-tito-pierde-estafas.md)). Con la configuración del ADR 0002 el aviso se adelanta: 19 de 36 estafas con pedido avisan antes del pedido (§8.3.3, [H10](../hallazgos/H10-c-avisa-antes-del-pedido.md)).
 
 ### 8.4.2. Con voz real, en segundos
 
@@ -112,26 +124,27 @@ En 5 corridas de `SC-WA-CODE-01` con `medir.py` en la M1, E2B dio una mediana de
 
 ## 8.5. Falsas alarmas y negativos difíciles
 
-| Conjunto | Resultado de la configuración final |
+| Conjunto | Resultado de la configuración del ADR 0001 |
 |---|---|
 | 10 legítimas de #101 | 0/10 (Wilson: 0–27,8 %) |
 | D3 con voz real, mismo guion dos veces | 0/2 |
 | `LG-SUPPORT-INFO-01` con TTS | Sin aviso |
 
-La condición del tutor es que no salte por frases sueltas. D3 («amigos arreglando un cumple: palabras parecidas») se diseñó para eso, pero es un solo guion. **[Completar con #52, con el desglose entre legítimas cotidianas, con pedido razonable y con mención sin pedido.]**
+Con la configuración del ADR 0002, en desarrollo, saltó en 26 de las 94 legítimas dentro del alcance: 2 de 29 cotidianas y 24 de 65 con un pedido razonable o una mención sensible (§8.3.3). La condición del tutor es que no salte por frases sueltas. D3 («amigos arreglando un cumple: palabras parecidas») se diseñó para eso, pero es un solo guion. **[Completar con #52, con el desglose entre legítimas cotidianas, con pedido razonable y con mención sin pedido.]**
 
 ## 8.6. Rendimiento y límites del hardware
 
-Todas son mediciones en computadora; **ninguna en teléfono**.
+En computadora, con la configuración del ADR 0001:
 
 | Dato | M1 de 8 GB |
 |---|---|
 | Parakeet con filtro | RTF 0,088; 1.036 MB de memoria pico |
-| Tito viejo | Unos 30 ms por frase; 0,48 GB |
-| Gemma 4 E2B | Archivo de 4,59 GB; 3,74 s de mediana por consulta |
+| Gemma 4 E2B, JSON completo | Archivo de 4,59 GB; 3,74 s de mediana por consulta |
 | Conjunto | 28–30 % de memoria libre y 4,5–4,7 GB de swap en la medición |
 
-La [corrida de E4B](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md) en la misma máquina dio 46,3 s y 15,8 s por evaluación, y avisó a +49,0 s del pedido. **[Sin ablaciones ni medición en Android.]**
+La [corrida de E4B](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md) en la misma máquina dio 46,3 s y 15,8 s por evaluación, y avisó a +49,0 s del pedido.
+
+**En el teléfono, solo el detector.** Con la salida cortada del ADR 0002 y el prompt base, en un Samsung A56 con `llama-server` en CPU: 3,60 s de mediana y 4,90 s de p95 por línea de OTRA, unos 11 s más para el motivo del primer aviso y 3,39 GiB de pico ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)). Es una pasada sobre tres conversaciones, sin ASR. **[Sin ablaciones; falta el recorrido completo en Android.]**
 
 ## 8.7. Pendientes del capítulo
 

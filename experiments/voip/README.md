@@ -2,7 +2,8 @@
 
 > **Configuración por defecto (2026-11-10):** ASR `parakeet-filtro`
 > ([ADR 0001](../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)) y la configuración
-> congelada de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) como detector: Gemma 4 E2B directo, sin
+> congelada de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) como detector
+> ([ADR 0002](../../docs/ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)): Gemma 4 E2B directo, sin
 > Tito, con `c-premisa-corte-riesgo` ([ADR 0006](../../docs/ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md))
 > y solo OTRA ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). El servidor
 > arranca así si no se le pasa nada; el comando para probarlo está en [§3](#demo-con-la-configuración-congelada-de-143). Implementa la opción D (cualquier app de llamada + captura por persona) y deja andando

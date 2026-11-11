@@ -11,6 +11,8 @@
 > Ahora fija solo el ASR. Tito se está descartando
 > ([H08](../../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y el detector lo fija el ADR 0002
 > ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)).
+>
+> **Nota del 2026-11-11:** el detector quedó fijado en el [ADR 0002](0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md): Gemma 4 E2B solo, sin Tito.
 
 ## Contexto
 

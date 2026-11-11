@@ -32,16 +32,14 @@ Los escenarios salen del [catálogo](../corpus/CATALOGO-ESCENARIOS.csv): falso e
 
 Los umbrales de latencia y memoria son criterios internos del proyecto ([prefactibilidad](../investigacion/PREFACTIBILIDAD-TECNICA.md)), no límites universales.
 
-| ID | Requisito | Situación de la configuración final (M1 de 8 GB, no teléfono) |
+| ID | Requisito | Situación de la configuración final (ADR 0001 y ADR 0002) |
 |---|---|---|
 | RNF-01 | Seguir el ritmo del audio: `RTF` < 1. | ASR: cumple, 0,088. Falta el `RTF` conjunto del recorrido. |
-| RNF-02 | Memoria del recorrido acotada. | **No cumple el techo original de 512–1024 MB.** ASR 1,0 GB, Tito 0,48 GB y archivo de E2B de 4,59 GB. El tutor reorientó la referencia a la gama más alta disponible; falta citar su RAM desde el fabricante. |
-| RNF-03 | Respuesta por turno: p95 ≤ 1,5 s (degradado hasta 2 s). | **No cumple.** E2B: mediana de 3,74 s y p95 de 4,53 s por consulta. Las frases que Tito no deriva tardan unos 30 ms. |
+| RNF-02 | Memoria del recorrido acotada. | **No cumple el techo original de 512–1024 MB.** En la M1 de 8 GB, el ASR usa 1,0 GB y el archivo de E2B pesa 4,59 GB. En el Samsung A56, E2B solo llegó a 3,39 GiB de pico ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)); el ASR no se midió en el teléfono. El tutor reorientó la referencia a la gama más alta disponible; falta citar su RAM desde el fabricante. |
+| RNF-03 | Respuesta por turno: p95 ≤ 1,5 s (degradado hasta 2 s). | **No cumple.** En el Samsung A56, E2B tarda 3,60 s de mediana y 4,90 s de p95 por línea de OTRA, y el motivo suma unos 11 s en el primer aviso ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)). Se midió con el prompt base, sin la premisa. Bajarlo es [#172](https://github.com/Corchets/bitacora_tesis/issues/172). |
 | RNF-04 | Procesamiento local: ni audio ni texto salen del equipo. | Cumple por diseño. El tutor descartó por completo el uso de un modelo por API. |
 | RNF-05 | Reproducibilidad: cada corrida registra datos, configuración, seed, código, hardware y salidas. | Cumple con manifiestos. Excepción declarada: #101 corrió con cambios sin commit en la carpeta. |
 | RNF-06 | Calidad objetivo: 80–85 % de estafas avisadas con 10–15 % de falsas alarmas, sobre todas las estafas. | Meta de referencia del equipo, con el visto bueno del tutor; no es criterio de aprobación. Se mide en el test reservado. |
-
-> **Corregir (#51):** RNF-02 y RNF-03 cuentan a Tito: 0,48 GB y unos 30 ms por frase. Si el ADR 0002 deja el SLM solo, Tito sale de esas cuentas. Ver [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
 
 ## 3.4. Restricciones de plataforma, privacidad y ética
 
@@ -62,4 +60,4 @@ El proyecto es exitoso si responde las preguntas con un procedimiento honesto y 
 | Fuente de audio | Replay; altavoz; VoIP propia; captura por canal en notebook; integración privilegiada | Replay para experimentar y captura por canal con Meet para la demo | [§5.5.2](CAP-05-DISENO-Y-ARQUITECTURA.md#552-captura-de-audio) y [alternativas](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md) |
 | Entrada del detector | Texto; texto y rasgos acústicos | Texto ([D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico), a ratificar) | [§5.5.4](CAP-05-DISENO-Y-ARQUITECTURA.md#554-enfoque-lingüístico-frente-a-acústico-d11-abierta) |
 | Inferencia | Local; API | Local | Minuta del 2026-10-28 |
-| ASR y detector | Ver [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) | Parakeet con filtro Silero y Tito viejo con Gemma 4 E2B | [§5.5.1](CAP-05-DISENO-Y-ARQUITECTURA.md#551-detector) y [§5.5.3](CAP-05-DISENO-Y-ARQUITECTURA.md#553-reconocimiento-de-voz) |
+| ASR y detector | Ver [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) y [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) | Parakeet con filtro Silero, y Gemma 4 E2B solo con `c-premisa-corte-riesgo` | [§5.5.1](CAP-05-DISENO-Y-ARQUITECTURA.md#551-detector) y [§5.5.3](CAP-05-DISENO-Y-ARQUITECTURA.md#553-reconocimiento-de-voz) |

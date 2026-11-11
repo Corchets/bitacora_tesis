@@ -22,7 +22,7 @@ y en el teléfono eso es lo que más pesa ([#141](https://github.com/Corchets/bi
    enseguida y el motivo se agrega cuando llega.
 3. Vale para todos los prompts JSON que escriben primero el campo con el que se decide.
 
-No cambia el prompt ni la política de aviso: eso lo fija el ADR 0002.
+No cambia el prompt ni la política de aviso: eso lo fija el [ADR 0002](0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md).
 
 ## Alternativas consideradas
 

@@ -49,11 +49,11 @@ Las [particiones de Tito](../../experiments/slm-directo/PARTICIONES-TITO-2026-10
 
 ## 4.5. Línea base, modelos y protocolo
 
-La línea base son las **reglas léxicas**. La configuración evaluada es la de [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md), congelada antes del test. Como comparadores se proponen Gemma 4 E2B directo y las reglas.
-
-> **Corregir (#51):** la configuración evaluada va a ser la del ADR 0002. Si Tito se informa, como configuración o como ablación, el protocolo tiene que decir cómo se lee: una falsa alarma que desaparece cuenta solo si el SLM estaba despierto en la primera línea sensible ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)).
+La línea base son las **reglas léxicas**. La configuración evaluada es la del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md), sobre el ASR del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md): Gemma 4 E2B solo, con el prompt `c-premisa-corte-riesgo`, aviso con riesgo ≥ 0,3 y consulta solo en las líneas de OTRA. Se congela antes del test y se corre una sola vez ([#52](https://github.com/Corchets/bitacora_tesis/issues/52)). Tito no se evalúa, ni como configuración ni como ablación: se cita solo como evidencia de lo que se probó ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md), [H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)).
 
 > **Estado: propuesta sin discutir.** El [protocolo](../evaluacion/PROTOCOLO-EXPERIMENTAL.md#5-política-de-alerta-a-congelar-opciones-y-evidencia-observada) propone como política de referencia el aviso único en el primer `true` válido, que es la que usó #101. Se congela en D08.
+
+> **Nota del 2026-11-11:** el [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) fija el aviso: uno solo por llamada, en la primera consulta con riesgo ≥ 0,3. Lo que sigue abierto en D08 es cómo se mide.
 
 ## 4.6. Métricas y análisis estadístico
 
