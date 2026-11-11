@@ -611,3 +611,15 @@ llama la víctima, que #151 saca del alcance, y se informan aparte. Además, sus
 desde el 2026-11-10, y la corrida de latencia del A56 ya pasó por EN-07, EN-09 y EN-13. Portugués
 y ES-Port no entran: la conversación de PIX no define la clase (§3.3) y ES-Port son legítimas
 salientes.
+
+> **Actualización del 2026-11-11:** Luciano decidió publicar las dos lecturas de ES-Port que
+> tienen ficha, para probarlas aparte como legítimas: [119349 y 120967](ISSUE-144-ESPORT-2026-11-06.md),
+> con su [procedencia](ISSUE-144-ESPORT-2026-11-06-PROCEDENCIA.json). Se versionan tal cual
+> estaban en `data/private/issue-144/`, con las claves dictadas ya reemplazadas por marcadores;
+> el encabezado todavía dice «fuera de Git». La licencia es CC BY-SA 3.0 ES, con atribución a
+> García-Sardiña, Serras y del Pozo (2018). La ficha de 120967 la completó Claude con los
+> criterios de Luciano, a partir de lo que él ya había marcado. Las diez de
+> `ISSUE-144-ESPORT-10-2026-11-07.md` se descartan: en las diez llama el cliente a soporte, y
+> no tienen ficha. Las dos publicadas también son salientes; no suman legítimas entrantes al
+> set ni lo cambian. Sirven para ver si el detector da falsas alarmas en soporte real, sobre
+> todo en 119349, donde soporte pide la contraseña (T9) y el cliente la dicta (T10).
