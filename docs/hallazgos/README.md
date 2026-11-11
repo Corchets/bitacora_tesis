@@ -40,3 +40,4 @@ Es la capa entre la evidencia y la tesis:
 | [H08](H08-tito-evita-falsas-alarmas-por-punto-ciego.md) | 2026-11-06 | Las falsas alarmas que Tito «evita» son casi todas punto ciego | resultado | vigente |
 | [H09](H09-tito-clasificador-en-vez-de-compuerta.md) | 2026-11-06 | Tito se entrenó como clasificador de estafas; tenía que ser una compuerta de lo sensible | cambio de enfoque | vigente |
 | [H10](H10-c-avisa-antes-del-pedido.md) | 2026-11-10 | Con el prompt de intención (C), el SLM avisa antes del pedido y suma las estafas sin pedido | resultado | vigente |
+| [H11](H11-el-riesgo-cambia-con-el-runtime.md) | 2026-11-11 | Con la misma configuración el riesgo se repite, pero cualquier cambio del runtime lo mueve en una de cada diez líneas | método | vigente |

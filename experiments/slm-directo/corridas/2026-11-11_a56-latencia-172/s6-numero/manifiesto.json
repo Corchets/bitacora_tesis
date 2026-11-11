@@ -1,0 +1,80 @@
+{
+  "experimento": "a56-latencia-172",
+  "configuracion": {
+    "prompt": "c-premisa-corte-riesgo",
+    "modelo": "gemma4:e2b-it-q4_K_M",
+    "detector": "DetectorSLMCorteRiesgo",
+    "consulta": "numero",
+    "prefijo": "{\n  \"riesgo\":",
+    "hablantes": "rol",
+    "solo_otra": true,
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "num_predict": 14,
+    "umbral": 0.3,
+    "recorrido": "todas las líneas, sin detener al primer aviso; PROTEGIDA no consulta"
+  },
+  "servidor": "./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1 --port 18080 -c 4096 -np 1 --no-webui -t 4",
+  "props": {
+    "total_slots": 1,
+    "model_alias": "/data/local/tmp/a56-lab/gemma.gguf",
+    "model_ftype": "Q4_K - Medium",
+    "model_path": "/data/local/tmp/a56-lab/gemma.gguf",
+    "modalities": {
+      "vision": false,
+      "video": false,
+      "audio": false
+    },
+    "media_marker": "<__media_HUSAJuwge3oSeVjiG5A3mlsbA99Mx5aR__>",
+    "endpoint_slots": true,
+    "endpoint_props": false,
+    "endpoint_metrics": false,
+    "ui": false,
+    "ui_settings": {},
+    "chat_template_caps": {
+      "supports_object_arguments": true,
+      "supports_parallel_tool_calls": true,
+      "supports_preserve_reasoning": false,
+      "supports_reasoning_effort": false,
+      "supports_string_content": true,
+      "supports_system_role": true,
+      "supports_tool_calls": true,
+      "supports_tools": true,
+      "supports_typed_content": true,
+      "reasoning_effort_levels": []
+    },
+    "bos_token": "<bos>",
+    "eos_token": "<eos>",
+    "build_info": "b1-6c01da6",
+    "is_sleeping": false,
+    "cors_proxy_enabled": false
+  },
+  "casos": [
+    "CV2-D-V-BANCO-001",
+    "CV2-D-V-BANCO-002",
+    "CV2-D-V-BANCO-007",
+    "CV2-D-L-BANCO-001",
+    "CV2-D-L-BANCO-007",
+    "CV2-D-L-DELIVERY-001"
+  ],
+  "conversaciones_sha256": "f941633f5218bd8aa6deb5be2d252f3979f05464268e3b75368fb5c62870da88",
+  "prompt_sha256": "3311c08336a84d28bf320fb800c2a2ced317bd5774ed208c71b45b52715b0657",
+  "motivo_sha256": "fefd4c7e9314ae547f9682bfd63e84dc84bd4eff041614864050a2c7c2f5e1c6",
+  "codigo_sha256": {
+    "correr_android_latencia.py": "cdeccdf83875e0faedf3c6fbed9fc9184e3dc05853ce7b38db691240d7365625",
+    "correr_android_congelada.py": "33c8716eb17a03425690c143133bc4e88fc2a290379ddd3173f2233566b09915",
+    "detectores.py": "e843199be208d1e83a2498e3f9d2e3a288ca30e20bdb678a0139c701503a3c6c",
+    "casos.py": "e12531a55c99e6c821339f295e5b3991333b4317a1d5280760ffc48b52e9fd7e"
+  },
+  "calentamiento": {
+    "valida": true,
+    "error": "",
+    "ms": 15030.004530999577
+  },
+  "sistema": "Android-16-aarch64-64bit-ELF",
+  "python": "3.14.10",
+  "pid": 16628,
+  "inicio": "2026-11-11T11:21:20-0300",
+  "fin": "2026-11-11T11:26:11-0300"
+}

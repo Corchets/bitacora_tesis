@@ -1,0 +1,8 @@
+{
+  "lista": "sub-6",
+  "servidor": "./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host 127.0.0.1 --port 18080 -c 4096 -np 1 --no-webui -t 4 -ub 128",
+  "binarios": "/data/local/tmp/a56-lab/llama",
+  "antes": "",
+  "carga_hasta_health_s": 3.03,
+  "salida_ejecutor": 0
+}

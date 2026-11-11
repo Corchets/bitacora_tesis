@@ -226,6 +226,34 @@ class TestDetector(_ConServidor):
         self.assertTrue(r.valida and r.alerta_sugerida)
         self.assertEqual((r.error, r.motivo), ("etapa2_json_invalido", ""))
 
+    def test_motivo_diferido_avisa_sin_esperar_y_completa_igual(self):
+        # #172: el aviso sale con la primera consulta; el motivo, con la misma segunda consulta, después.
+        lineas = roles(("O", "Te llamo de soporte"))
+        r_junto = self.detector().evaluar(lineas)
+        pedidos_junto = list(OllamaCongelada.pedidos)
+        OllamaCongelada.pedidos.clear()
+        d = self.detector()
+        d.motivo_diferido = True
+        r = d.evaluar(lineas)
+        self.assertEqual((r.valida, r.alerta_sugerida, r.motivo_pendiente, r.motivo), (True, True, True, ""))
+        self.assertEqual(self.motivos(), [], "la segunda consulta todavía no corrió")
+        completa = d.completar_motivo(r)
+        self.assertEqual(OllamaCongelada.pedidos, pedidos_junto, "los mismos pedidos, en el mismo orden")
+        self.assertFalse(completa.motivo_pendiente)
+        for campo in ("riesgo", "alerta_sugerida", "motivo", "evidencia", "evidencia_en_texto", "crudo", "error"):
+            self.assertEqual(getattr(completa, campo), getattr(r_junto, campo), campo)
+        self.assertEqual(completa.ms_etapa1, r.ms_etapa1)
+        with self.assertRaises(ValueError):
+            d.completar_motivo(r)
+
+    def test_motivo_diferido_solo_en_el_primer_aviso(self):
+        d = self.detector()
+        d.motivo_diferido = True
+        lineas = roles(("O", "Te llamo de soporte"), ("O", "Decime el código"))
+        r1 = d.evaluar(lineas[:1])
+        r2 = d.evaluar(lineas)
+        self.assertEqual((r1.motivo_pendiente, r2.motivo_pendiente, r2.alerta_sugerida), (True, False, True))
+
     def test_sin_la_coma_es_fallo_y_no_avisa(self):
         r = self.detector().evaluar(roles(("O", "Decime el código SIN_COMA")))
         self.assertEqual((r.valida, r.error, r.alerta_sugerida), (False, "sin_riesgo", None))
