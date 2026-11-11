@@ -19,6 +19,14 @@ están verificados y se revierte §5.3. Además, esas conversaciones dejan de es
 si se usan como test. El coreano sigue privado. Propuesta sin discutir: la confirma o revierte
 el equipo.
 
+**Actualización del 2026-11-11, #144:** el set externo quedó congelado con hashes
+([relevamiento §8](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#8-set-coreano-congelado-2026-11-11)).
+R05 mitigado para ese set: el manifiesto en Git fija las conversaciones y las referencias antes
+de cualquier corrida, y el texto coreano sigue privado. Si después se cambia un archivo, deja de
+coincidir con su hash. R04 sube: son 33 estafas de una sola fuente, sin legítimas, en español
+neutro, y 24 de las 33 referencias las marcó la IA (con la aprobación de un solo revisor). Va
+como límite en #52; sin baja de probabilidad.
+
 | ID | Riesgo | P | I | Señal temprana | Mitigación | Contingencia | Dueño | Estado |
 |---|---|---:|---:|---|---|---|---|---|
 | R04 | Corpus pequeño o artificial | 4 | 4 | pocas familias/hablantes, diálogos leídos o solo pedidos directos en conversaciones breves | [catálogo](../corpus/CATALOGO-ESCENARIOS.csv), piloto y fichas semi-estructuradas; comprobar diversidad antes de ampliar; revisar pedidos indirectos y contexto prolongado, sin tomar el [ejemplo conceptual de #20](../ingenieria/ARQUITECTURA.md#4-primer-par-escrito-del-escenario-al-aviso) como prueba de cobertura; la [matriz de fuentes externas](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#23-datasets-y-límites-de-reutilización-recuperación-de-43) registra diferencias de dominio y anotación que revisar antes de reutilizar datos | revisar casos y reportar límites del corpus | equipo / #39 | abierto; el audio de humo TTS de #19 no representa voz humana ni ruido de canal; grabación real de #39 sigue sujeta a D06; ampliación escrita del 2026-10-21: 297 casos nuevos de 17–38 líneas; r02 corrige coherencia de saldos, permisos, desenlaces y hablantes, todavía ficticios y sin revisión humana ([revisión corpus v2](../../experiments/slm-directo/casos/REVISION-CORPUS-V2.md)); no valida diversidad de voces ni generalización Plan del 2026-10-27: [#95](https://github.com/Corchets/bitacora_tesis/issues/95) exige evaluación independiente revisada y diagnóstico antes de nuevos ajustes de Tito; la revisión humana sigue pendiente y no se declara mitigación validada. Curación IA exhaustiva del 2026-10-28: [150 conversaciones y 6.000 realizaciones](../../experiments/slm-directo/CURACION-TITO-2026-10-28.md), con 28 conversaciones y 1.189 realizaciones apartadas (incluye 480 previas) por incoherencia o etiqueta no sustentada; temas ajenos al contenido identificados. Selección trazable, no validación humana ni evidencia de generalización; probabilidad sin reducir. |
