@@ -1,0 +1,29 @@
+{
+ "case_id": "EXT-147",
+ "grupo": "externo",
+ "clase": "vishing",
+ "clase_fuente": "vishing",
+ "t_r_linea": 195,
+ "t_c_linea": 198,
+ "pedidos_lineas": [
+  195,
+  206,
+  303,
+  376
+ ],
+ "cumplimientos_lineas": [
+  198
+ ],
+ "sospecha_linea": null,
+ "con_pedido": true,
+ "revision_humana": false,
+ "marcado_por": {
+  "t_r": "pre-marcado de IA (gpt-6.1-sol, esfuerzo medio, con Orca)",
+  "t_c": "pre-marcado de IA (gpt-6.1-sol, esfuerzo medio, con Orca)",
+  "roles": "pre-marcado de IA (gpt-6.1-sol, esfuerzo medio, con Orca)",
+  "confirmacion": "Luciano Grosso aprobó la lista de marcas el 2026-11-11, sin leer la conversación completa",
+  "ajuste": "Ajustado con los criterios de Luciano del 2026-11-11 (pedir nombre, ciudad o fecha de nacimiento no es T_R; el pedido de sitio es el sitio falso, no el portal): agente 108: entrar a Naver"
+ },
+ "premarcado": "tanda3/premarcado/KO-20.json",
+ "notas": "T_R y T_C son el primer pedido y el primer cumplimiento; pedidos_lineas y cumplimientos_lineas guardan todos los marcados (una línea por segmento de la fuente). Traducción fiel al español neutro, sin adaptar al rioplatense, con wones y nombres coreanos: se decidió no adaptarla para que la IA no sesgara el texto; se conserva la estructura de la llamada real."
+}

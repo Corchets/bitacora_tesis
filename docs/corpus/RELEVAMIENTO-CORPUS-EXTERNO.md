@@ -635,3 +635,16 @@ salientes.
 >
 > **Estado: propuesta sin discutir.** El equipo tiene que confirmar la publicación y decidir si esas
 > 9 conversaciones se informan en #52 como test, con el límite de que ya no están en custodia.
+
+> **Actualización posterior del 2026-11-18:** Luciano decidió publicar también KO-10 a KO-33, para que
+> el set congelado esté completo en [`casos/externo/coreano/`](../../experiments/slm-directo/casos/externo/README.md).
+> Los 68 archivos coinciden con el manifiesto. Lo anterior vale ahora para las 33 conversaciones:
+> ninguna está en custodia y la tabla entre KO y EXT es pública. **Las 24 nuevas no tienen ficha:** su
+> referencia es el pre-marcado de IA de §8.2 (`revision_humana: false`). Antes de publicarlas se buscaron
+> teléfonos, documentos y nombres de la víctima, y no aparecieron: esos datos son los ficticios del
+> armado. Quedan detalles indirectos que trae la fuente, como una universidad (KO-14), un barrio
+> (KO-20) y cuatro dígitos que da quien llama al confirmar la identidad (KO-27). No se tocaron para no
+> romper los hashes.
+>
+> **Estado: propuesta sin discutir.** El equipo tiene que confirmar la publicación y decidir cómo
+> informa en #52 un test cuyas conversaciones y referencias son públicas desde antes de correrlo.

@@ -1,0 +1,53 @@
+A: Sí, Welcome Savings Bank.
+B: Sí, recibí un mensaje y por eso llamo.
+A: Sí, ¿cuándo recibió el mensaje?
+A: ¿Cuándo recibió el mensaje? ¿Hace un momento, señor? Sí. ¿Cómo se llama?
+A: Sí, sí.
+A: Sí, ya lo confirmé. Le enviamos un mensaje diciendo que puede disponer de hasta 12 millones de wones. Si lo solicita ahora, es posible.
+A: Este producto es una alternativa al préstamo: expedimos a los clientes una cuenta con línea de descubierto para que la utilicen a un interés bajo. ¿Ha utilizado alguna vez una cuenta con línea de descubierto?
+A: Sí.
+A: Entonces se utiliza igual. El límite y la tasa pueden variar un poco según la calificación crediticia del cliente.
+B: ¿Cómo consultaron mis datos y me enviaron el mensaje?
+A: Usted solicitó un préstamo y se lo denegaron, ¿verdad? Lo contactamos porque tenemos un producto que puede utilizar. Sí.
+A: Sí, ¿qué quiere que hagamos ahora?
+B: Sí, si se puede tramitar, hágalo.
+A: Entonces, para verificar su identidad y ayudarlo con el trámite, volveré a preguntarle sus datos personales básicos. ¿Actualmente trabaja por cuenta ajena?
+A: ¿Tiene los cuatro seguros sociales? Sí. ¿En qué sector trabaja?
+B: En el sector médico.
+A: Entonces, ¿es enfermero o a qué se dedica? Sí.
+A: Sí. ¿Cuáles son aproximadamente sus ingresos?
+B: Unos 28 millones al año.
+A: 28 millones. ¿Cuánto tiene actualmente en préstamos?
+B: ¿Tengo que decirle banco por banco?
+A: No. Dígame el importe total.
+B: En total, 29 millones.
+A: ¿29 millones de wones? No está en mora ni tiene antecedentes de mora, ¿verdad?
+A: Sí. Como aquí no tiene los cuatro seguros sociales, puede disponer de hasta 6 millones de wones. La tasa le sale del 09 %.
+A: Tramitamos las cuentas con línea de descubierto de dos maneras, según la calificación crediticia de los clientes.
+A: Si su calificación es de categoría 3 o superior, podemos expedirle una cuenta nueva con línea de descubierto.
+A: Para los clientes de categoría 4 o inferior, vinculamos una cuenta que ya utilizan para que esa cuenta existente pueda funcionar como cuenta con línea de descubierto.
+A: Entonces, ¿con qué banco quiere hacer la vinculación de la cuenta con línea de descubierto?
+B: Eso también lo recibí de una caja de ahorros...
+A: Sí, sí.
+B: ¿Eso influye?
+A: No, eso no importa. Sí.
+B: Pero no sé exactamente si es una cuenta con línea de descubierto.
+A: ¿Qué quiere decir? ¿Que recibió un préstamo de una caja de ahorros?
+A: Entonces, ¿el importe utilizado aparecía como saldo negativo?
+B: Creo que no.
+A: Entonces es una cuenta normal. La cuenta con línea de descubierto... No hace mucho que le dieron la aprobación, que se la autorizaron de nuestro lado.
+A: Sí, entonces eso es una cuenta normal. ¿Con qué banco quiere solicitar la vinculación?
+B: Woori Bank.
+A: ¿Woori Bank? Sí. Entonces utiliza una tarjeta de débito de Woori Bank, ¿verdad?
+A: ¿Cuánto es el límite diario de retirada con la tarjeta de débito?
+B: ¿Unos 6 millones de wones?
+A: Sí. ¿Cuándo lo comprobó?
+B: Hace tiempo lo configuré así.
+A: 6 millones de wones. Y sigue usando la tarjeta de débito regularmente, ¿verdad?
+A: Porque, si deja de utilizar la tarjeta de débito durante cierto tiempo, con la tarjeta...
+A: ...si no la utiliza, el límite se reduce automáticamente cada seis meses. Usted sigue usando regularmente la tarjeta de débito de Woori Bank, ¿verdad?
+A: Sí, entonces se puede. Para vincular la tarjeta de débito de Woori Bank, Woori Bank, tenemos que comprobar el número de cuenta. ¿Puede consultar el número de cuenta?
+A: Sí, dígamelo. Un momento. Voy a comprobarlo.
+A: ¿Es correcto?
+A: Sí, de acuerdo. Presentaremos la solicitud de aprobación de la vinculación a esa cuenta. La aprobación tarda aproximadamente una hora. En cuanto esté completa lo contactaremos.
+A: Sí.

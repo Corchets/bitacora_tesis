@@ -1,0 +1,603 @@
+A: Sí, buenas. ¿Puede tomar nota? ¿Puede tomar nota?
+A: Sí, sí. Anote. Soy el fiscal a cargo de su caso.
+A: Sí, soy el fiscal a cargo de su caso. Equipo 1 de Investigación de Delitos de Alta Tecnología.
+B: ¿Cómo? No oigo bien.
+A: Equipo 1 de Investigación de Delitos.
+A: Al empezar, al principio, al empezar.
+A: Equipo 1 de Investigación de Delitos de Alta Tecnología.
+B: ¿Equipo 1 de Investigación de Delitos?
+A: Me llamo Park Chan-ho.
+B: ¿Park Chan-ho, el jugador de béisbol?
+A: Sí, sí. No soy jugador de béisbol. ¿Lo ha hecho?
+B: Sí. Lo anoté.
+B: ¿Dice que es el fiscal Park Chan-ho?
+A: Sí. No soy jugador de béisbol. Tiene que saber mi nombre para consultar después el resultado de su caso.
+A: Dígame exactamente su nombre y el número de expediente.
+B: ¿El número de expediente?
+A: Dígame el número de expediente y su nombre.
+B: Antes, el número... ¿Cómo voy a saberlo? Me dijeron que investigarían algo, pero no me dieron ningún número de expediente.
+A: ¿No? ¿Cómo se llama?
+A: Sí. Anote el número de expediente. 2014, 014.
+B: 2014.
+A: Sí, «josa», como en investigación.
+B: ¿2014, «joja»?
+A: «Josa».
+B: 2014, «josa».
+A: Sí. Y 2005.
+B: 2005.
+A: Sí, sí. ¿Lo anotó?
+A: El investigador me transfirió la llamada por la extensión interna. ¿Comprende bien el contenido del caso que le explicaron?
+B: Sí. Antes me dijeron que en alguna comisaría lo mío y algo igual....
+B: Que estaban investigando y que donde yo había operado...
+B: Que había quedado relacionado de alguna manera y me iban a clasificar como víctima, algo así.
+A: En este caso no está implicado solamente usted; hay cerca de 200 personas.
+A: Entre ellas hay cómplices que realmente cobraron por vender sus libretas bancarias.
+A: Y muchas personas a las que les usurparon la identidad y les abrieron cuentas sin que lo supieran.
+A: Si realmente le usurparon la identidad, ¿no se le ocurre por dónde pudo ocurrir?
+B: Antes me preguntaron eso, pero no se me ocurre nada.
+A: ¿Utiliza Internet con frecuencia?
+B: A veces, lo de antes, la banca por teléfono...
+A: ¿Alguna vez se le infectó con un virus el certificado digital?
+B: ¿El certificado digital?
+A: Sí, el certificado digital.
+B: Eso, eso...
+A: ¿O alguna vez se le infectó el teléfono con un virus?
+B: Eso no me ha pasado.
+A: Entiendo. En otros casos se filtra mucha información personal por Internet.
+A: Como esto tiene consecuencias legales, tenemos que explicárselo conforme a la ley. Lo importante es que al detener a los delincuentes incautamos muchas libretas bancarias y tarjetas de crédito.
+A: Entre las libretas incautadas encontramos cuentas de NongHyup y de Industrial Bank of Korea a su nombre.
+A: Tenemos que investigar si usted abrió esas dos cuentas y se las cedió a los delincuentes a cambio de una compensación, o si es una víctima. Por eso, a su nombre...
+B: Antes también dije que no hice nada de eso.
+A: Entiendo. Entonces declara que no ha cedido ninguna cuenta bancaria, ¿verdad?
+B: Sí. Antes estaban grabando algo, antes...
+A: Entiendo. Ahora viene una parte importante. Tiene que escuchar bien.
+A: Sí. En la cuenta a su nombre quedan 40 millones de wones, pero el perjuicio inicial fue de 76 millones de wones.
+A: Como hubo víctimas por la cuenta abierta a su nombre, esas personas lo denunciaron colectivamente.
+A: Hay que resolver este caso. Lo que va a hacer hoy... Usted también es una víctima, ¿verdad?
+A: Hay que acreditarlo como víctima, ¿verdad? Necesita que se determine su condición de víctima y le expidan el certificado de víctima.
+A: Tiene que obtener esa determinación y acreditación de su condición de víctima.
+B: ¿Que se acredite que soy víctima?
+A: Sí. Le explicaré las cuatro medidas previstas si no se lo reconoce como víctima.
+A: Primero, citación para declarar en la fiscalía. Anótelo.
+B: ¿Citación para declarar en la fiscalía?
+A: Sí, citación para declarar en la fiscalía.
+B: ¿Quiere decir que tengo que ir a la fiscalía? ¿Que van a hacerme ir a declarar?
+A: Sí, así es. Anótelo. Sabe lo que es una citación de la fiscalía, ¿verdad?
+B: Citación, investigación....
+A: Sí. Si en la investigación de la fiscalía no colabora o por cualquier otro motivo...
+A: ...no se lo reconoce como víctima, tendrá que presentarse personalmente en nuestra fiscalía y someterse a un interrogatorio más exhaustivo.
+A: ¿Entiende?
+A: Sí. Segundo, el próximo jueves por la tarde se celebrará la primera audiencia del caso de Kim Yong-su. El jueves...
+A: Sí, cuando se celebre la audiencia, tendrá que asistir. Pero no puede venir solo.
+A: Debe contratar un abogado particular y reunir la documentación a través de él. Con esa documentación tendrá que demostrar que es víctima.
+A: Eso es lo segundo.
+A: Sí. Tercero, todavía queda dinero en la cuenta de NongHyup, ¿verdad? Quedan 40 millones de wones. A través de su abogado debe contactar con las víctimas...
+A: ...y conseguir los documentos de retiro de la denuncia. Tiene que entregárnoslos.
+B: Retiro de la denuncia...
+A: Sí, el documento de retiro de la denuncia. Hable con su abogado.
+A: Cuarto, se van a congelar temporalmente todas las entidades financieras que utiliza.
+A: Una vez congeladas, se tomarán medidas para que vuelva a utilizarlas cuando terminen todas las audiencias de este caso. El plazo será de unos cuatro a seis meses.
+B: ¿Ahora no voy a poder operar ni sacar un poco de dinero?
+A: Sí, así es.
+B: ¿Desde cuándo?
+A: Desde ahora... No, desde ahora no. Estas cuatro medidas, si la determinación de víctima y...
+B: ¿Hola? Lo estoy escuchando.
+A: Sí. Son las cuatro medidas previstas si no obtiene el reconocimiento y la acreditación de su condición de víctima.
+A: Si hoy no logra acreditarse como víctima, tendrá que hacer esto.
+A: Sí. Al mismo tiempo que se expida el certificado de víctima se expedirá una solicitud de seguro patrimonial. Esa solicitud... Usted declaró que no abrió cuentas en NongHyup ni en Industrial Bank of Korea, ¿verdad?
+B: Dije que nunca he operado con Industrial Bank of Korea.
+A: Sí. Si no es una cuenta que abrió usted, parece que la abrieron usurpando su identidad. Yo también voy a creer que no la abrió usted.
+A: Pero no hay pruebas. Por eso tiene que aclararlo usted mismo.
+A: Nosotros, en realidad, no vamos a tomar ninguna medida coercitiva contra usted.
+A: Sí. Como va a declarar por Internet, tiene que poder consultar debidamente el expediente. Sin poder consultarlo no podemos tomarle declaración.
+B: ¿Dónde puedo verlo yo? Ahora, esto... Espere.
+A: Sí, el expediente. Primero salió un documento oficial a su nombre; le mostraré ese documento. ¿Tiene Internet? ¿Tiene una computadora?
+A: Sí, abra la computadora.
+B: Tengo que encenderla.
+B: Espere un momento.
+A: Sí, espero.
+B: ¿Hola?
+A: Sí, sí.
+B: Ahora está arrancando, espere un momento.
+A: Sí, de acuerdo.
+B: ¿Hola? Ya está la pantalla de Naver.
+A: ¿Está la pantalla de Naver? Está la barra de direcciones, donde pone HTTP, WWW, la dirección en letras.
+A: Sí, HTTP, WWW, punto.
+B: Eso, ¿arriba?
+A: Arriba, arriba. Borre todo lo que hay en la barra de direcciones. Déjela vacía.
+A: Sí, borre también lo de HTTP.
+A: Sí, bórrelo todo.
+B: Ahí ahora solo está el globo y una «n».
+A: ¿Lo borró? Le dictaré la dirección IP vinculada a la Fiscalía de Distrito de Seúl y al Servicio de Supervisión Financiera. Ahí estará su expediente.
+A: No, no en coreano. Escriba números. Cien, punto.
+A: Cien, punto, cuarenta y tres, punto.
+A: Sí, 43. Y 168, punto.
+A: Diez, y 134.
+B: 139.
+A: Sí, Enter.
+B: Hasta 130, punto...
+A: Sí, sí, 134.
+B: 100 punto 43 punto 68 punto 134.
+A: Sí, no, ahí no hay punto. No lleva punto. Ya está. Enter.
+B: Sin quitar nada... Espere, fiscalía, ahora algo...
+A: ¿Es la pantalla de la fiscalía?
+B: La pantalla, sí, parece la de la fiscalía.
+A: ¿Es la pantalla de la policía?
+A: Sí, señor, mire hacia las once. Hacia las once.
+A: Mire hacia las once. Las once.
+B: ¿Hacia las once es donde dice «Servicio rápido de atención»?
+A: Hacia las once dice «Consulta de mi expediente».
+A: Consulta de expediente. Sí, haga clic. «Consulta de mi expediente».
+B: Mi expediente... Parece que no veo bien. Sale para iniciar sesión.
+A: Al hacer clic en «Consulta de mi expediente» cambió la pantalla, ¿verdad? ¿Alguna vez declaró por Internet ante la fiscalía?
+B: No.
+A: ¿Nunca? Entonces hagamos esto. No use el inicio de sesión; entre mediante «Verificación de identidad para no registrados».
+B: Verificación de identidad para no registrados...
+A: Sí, entre por «Verificación de identidad para no registrados». Si nunca declaró por ahí, entre por ese lado.
+A: Introduzca ahí su nombre; es el número de verificación de su certificado.
+A: Escriba su nombre y su número de identificación personal, marque abajo «Acepto» y pulse «Verificar identidad».
+B: El número de identificación...
+A: Escriba el número de identificación.
+A: Sí, sí.
+B: Espere.
+A: Sí, sí.
+B: Espere.
+A: Sí, sí.
+A: ¿Marcó «Acepto» en la verificación de identidad?
+B: No puedo marcar «Acepto». En lo de no registrados, aceptar la identificación o algo así, ¿no? Sí, marqué «Acepto».
+A: Sí, márquelo y pulse «Verificar identidad».
+B: ¿Verificar identidad?
+A: Sí, pulse «Verificar identidad».
+A: ¿Lo comprobó?
+B: ¿No se pone solo la primera parte del número de identificación?
+A: No solo la primera parte; también están los números de atrás. Tiene que escribir los de atrás.
+B: ¿Hola?
+A: Sí, sí.
+B: Vi en la televisión o en algún sitio que no piden estas cosas. Vi un anuncio en algún sitio...
+B: Que el Servicio de Supervisión Financiera y sitios así no piden el número de identificación.
+A: Sí. No se lo estoy pidiendo. ¿Alguna vez ha entrado en algún sitio web?
+A: Para verificar su identidad en un sitio tiene que introducir su nombre y su número de identificación. Hace falta verificarla, ¿no?
+A: Introdúzcalos y saldrá el documento oficial. Revíselo. Habrá un documento oficial a su nombre, con el contenido de la investigación.
+B: Espere un momento. Ahora la computadora dejó de funcionar de repente.
+B: La computadora de repente se ha.... Espere un momento. ¿Por qué ahora no funciona?
+B: ¿Hola? La computadora de repente no funciona. Espere un momento.
+A: Sí, hágalo con calma. No pasa nada.
+B: De repente no responde el inicio de sesión. Tal vez porque entró café y....
+A: Sí, hágalo con calma. No pasa nada. Espero.
+B: Parece que tiene que haber algo bien puesto. ¿Dónde se hace? No pregunta....
+A: ¿Hola? ¿La computadora es portátil?
+B: No, casi no la uso; la encendí de repente y ahora sale algo...
+B: Se ha.... Dice que hay un error en la página. Hay un error en la página.
+A: Vuelva a introducirlo ahí. En la barra de direcciones, cien, punto... Vuelva a introducirlo.
+B: Tendré que intentarlo otra vez. Apagarla...
+A: Sí, inténtelo otra vez.
+B: Tendré que apagarla y encenderla. Cuando no funciona, la apago y enciendo.
+A: Sí, sí, sí.
+A: Y Kim Yeong-su, sabe...
+A: Kim Yong-su, el cabecilla de este caso, se lo mencioné hace un momento, ¿verdad?
+A: ¿Hola?
+B: Sí, me lo dijo.
+A: Y lo importante es que Kim Yong-su era empleado bancario.
+A: Durante su empleo reunió información y la utilizó para delinquir.
+A: Además, entre los cómplices de esa banda hay empleados de Kookmin Bank, Hana Bank y Citibank, con los que usted opera.
+B: ¿Entre los delincuentes?
+A: Sí, así es. También están implicados empleados de distintas prestamistas y compañías de tarjetas.
+A: Por eso pudieron abrir fácilmente cuentas a su nombre. Por esas personas no podemos hacerlo público y lo llamamos como parte de una investigación interna.
+A: Como puede haber otros cómplices, todavía no hemos podido informar al sector financiero.
+B: Sí, entiendo. Eso...
+A: Cuando termine la primera audiencia registraremos todas las entidades financieras. Mientras declara, las entidades no deben enterarse.
+B: ¿Me dice que no debo avisarle nada al banco?
+A: ¿Comprende lo que le digo?
+B: No lo he entendido bien. Ahora, así...
+A: ¿Hola?
+B: Dice que no puedo operar con el banco, y la computadora se está reiniciando. ¿Hola? ¿Hola?
+B: ¿Hola?
+A: Sí, sí.
+B: Ahora la computadora no funciona. ¿No puede llamarme más tarde?
+A: ¿Hay alguien a su lado?
+B: No, ¿por qué?
+A: Le pregunto porque se ha oído la voz de otra persona.
+B: Estoy en la oficina y hay otros empleados trabajando por allá.
+A: ¿La computadora no funciona?
+B: Sí. Creo que tendré que pedirle a otro empleado que la revise; no puedo solucionarlo.
+A: ¿No tiene otra computadora?
+B: La estaba usando otra persona.
+B: Sigue saliendo «Error en la página».
+A: Se lo dictaré otra vez. Borre todo lo de HTTP.
+B: Ya borré todo lo de HTTP.
+A: Sí, ahí: 174, punto.
+A: Sí, 139, punto.
+A: 174.
+B: O sea, 174, 174, 174 y...
+A: 174, punto, y 139, punto.
+B: 74, punto.
+A: Un momento.
+B: 74, punto, 74, punto.
+A: No es 74; es 139.
+B: 24, punto, 139, punto.
+A: Sí, 28, punto.
+B: 28, punto.
+A: Sí, 165.
+B: 165. Eso también, fiscal, 14.... ¿Pulso Enter? ¿Aquí también?
+A: Pulse Enter.
+B: Sale la misma pantalla de antes.
+A: Sí, haga clic en «Consulta de mi expediente».
+B: Antes, el número de expediente, 2014 «josa», eso que hicimos, sí...
+B: Antes me dio el número de expediente.
+B: Ahora arriba solo sale «Atención en línea», «Espacio ciudadano», «Avisos». Abajo todavía está cargando; la computadora no funciona muy bien.
+A: Sí, sí, espero. Hágalo con calma.
+B: 274, punto.
+A: 139, punto.
+B: Solo sale el reloj de arena, en el mismo sitio. ¿Hola? Solo sale el reloj de arena, y la pantalla arriba...
+B: Antes había algo como una máquina, pero hasta ahí no carga. Solo sale arriba una franja de la fiscalía; la computadora no avanza. Ahora yo...
+A: Abra una ventana de Naver. Una ventana de Naver. Abra una ventana de Naver.
+B: ¿Una ventana de Naver?
+A: ¿Se abrió? Busque ahí «Fiscalía del Distrito Central de Seúl».
+A: Fiscalía del Distrito Central.
+B: ¿Fiscalía, fiscal jefe? ¿Fiscalía Central de Seúl? ¿Escribo eso? Seúl...
+B: Fiscalía Central de Seúl.
+B: ¿Busco Fiscalía Central de Seúl?
+B: Sí, Fiscalía Central de Seúl, y...
+A: ¿Se ve toda la página?
+B: Ahora aparece. Antes...
+A: Sí. Ahí está «Atención en línea», ¿verdad?
+B: Ha salido algo de visita....
+A: «Atención en línea».
+B: ¿Antes dijo hacia las once? Sí, hacia las once, once...
+A: Sí, haga clic. «Atención en línea».
+B: Está «Atención en línea» y «Portal de peticiones ciudadanas». Antes estaba «Mi expediente». ¿Por qué salta la pantalla?
+A: No, no, espere. «Atención en línea» sirve para presentar un caso. «Consulta de mi expediente» sirve para consultar su caso.
+A: Primero haga clic en «Atención en línea»; ahí hay un enlace directo al Portal de peticiones ciudadanas.
+B: Está «Denuncia de interés público» y el enlace.
+A: Sí, haga clic.
+B: Entonces, «Presentar una petición», «Tramitación», sí, está ahí.
+A: Sí, primero verifique su identidad.
+A: Si hace clic en el nombre no responde, ¿verdad?
+B: Ahora sale algo para aceptar y algo de verificar la identidad.
+A: Sí, puede verificar su identidad, ¿verdad?
+B: ¿Tengo que aceptar todo también?
+A: Sí, sí.
+B: Aquí, para verificar hay teléfono móvil y...
+A: Hágalo con el teléfono móvil.
+B: ¿Entonces hago clic?
+A: Sí, haga clic. Pulse «Verificar».
+B: No responde al clic. Dije «Siguiente»... Hago clic y paso a lo siguiente.
+A: Sí, siguiente.
+B: No aparecen las letras del nombre, donde dice nombre del solicitante.
+A: No es pulsar las letras ni introducirlo; verifique su identidad con el móvil. Verificación por móvil.
+B: Estoy con la verificación por móvil. Pulso «Verificar» y pone «Verificar», abre paréntesis...
+B: ...«ventana nueva», y no responde.
+A: ¿La computadora no estará infectada con un virus?
+B: No la he usado mucho, no sé. No entiendo bien. Para verificar tengo que hacer esto...
+B: ...y después pasa a lo siguiente.
+A: Eso, eso. Tiene que verificar su identidad.
+B: Eso es lo que hay que hacer.
+B: ¿Será porque antes pulsé dos veces? Parece que pulsé dos veces, o será porque hay una ventana abierta...
+B: ¿Salió algo de la verificación por móvil?
+A: Sí, sí. Haga la verificación.
+B: ¿Tengo que aceptar las condiciones ahí?
+A: Sí, márquelas. Si no, ¿cómo va a verificar la identidad?
+B: Ya lo solicité, ¿sí?
+A: ¿Lo hizo? ¿Y qué pantalla sale?
+B: Dice que introduzca el código de verificación. Dice que introduzca el código.
+A: Le habrá llegado el código al teléfono. Mire el mensaje del móvil.
+B: Espere, voy a mirar el mensaje. Entonces pongo esto, estos números.
+A: Sí.
+B: Sí, ya lo confirmé. Parece que se verificó.
+A: ¿Se verificó? ¿Y qué pantalla sale?
+A: Sí, sí.
+B: Hice lo que me dijo. Entonces ahora...
+A: ¿Qué ventana sale ahora?
+B: Dice que está hecho y «Solicitante», «Petición»...
+A: Información del solicitante. Introduzca primero sus datos personales.
+B: Número de teléfono móvil...
+B: Sí, ahí... Ya introduje los datos básicos del solicitante.
+A: Sí, haga clic en «Siguiente».
+B: Parece que también tengo que poner toda la dirección.
+A: Sí, tiene que poner toda la dirección.
+A: Un momento, ¿hola?
+B: Sí, dígame.
+A: ¿Podría abrir otra ventana de Naver? Deje esta tal como está.
+B: Todavía no lo introduje.
+A: Sí, no lo introduzca; abra otra ventana de Naver. Detenga esto un momento.
+A: Le digo que abra otra ventana.
+B: Sí, ya se abrió.
+A: Como ya se abrió, busque TeamViewer ahí. TeamViewer.
+B: ¿Cómo? ¿«Teamja»?
+A: «Team», como en jefe de equipo.
+B: «Him jiuo».
+A: Sí, «TeamViewer».
+B: ¿Viewer? TeamViewer.
+A: Sí, correcto. Viewer.
+B: Ah, está en los sitios, TeamViewer.
+A: Le digo que busque TeamViewer en el buscador.
+B: A nosotros esto, eso... no nos funciona.
+A: No, no. ¿Buscó TeamViewer?
+B: A nosotros no nos abre.
+A: No se trata de abrirlo. ¿Salieron resultados de búsqueda?
+A: No tiene que abrir el sitio. ¿Salieron resultados? Si salieron, desplácese hacia abajo. Está la versión en coreano. Versión en coreano, ¿está «Descarga gratuita» ahí?
+B: Descarga gratuita...
+A: Sí. Descarga gratuita.
+B: Arriba, arriba está.
+A: ¿Está? Haga clic. Descárguelo.
+B: En la empresa no nos permiten hacer estas cosas.
+A: ¿Lo tienen configurado para impedirlo? ¿Lo tienen configurado así? Inténtelo una vez. Veamos si se puede.
+B: Para esto tiene que venir el técnico. Nos enseñaron que no debemos hacer estas cosas.
+A: Esto no se puede, aquello tampoco; ¿qué pretende hacer ahora? ¿Eh?
+A: Esto no se puede, aquello tampoco; ¿qué pretende hacer ahora?
+B: ¿Hola?
+A: Sí, sí, sí.
+A: ¿No puede hacer la búsqueda?
+B: Es que en la empresa no permiten estas cosas. ¿Voy a buscar al técnico, entonces?
+A: No está bloqueado. Espere. No introduzca nada; cierre todas las ventanas. Abra una nueva ventana de Naver.
+A: ¿La abrió?
+B: Sí, sí. ¿Hola? La abrí.
+A: Sí, ahí...
+A: ¿Chrome, Chrome? ¿Tiene Chrome? Busque Chrome.
+B: ¿Chrome?
+A: Sí, Chrome.
+B: Chrome, Chrome.
+B: Sí, ¿qué es eso?
+A: ¿Buscó Chrome? Sí, búsquelo y descárguelo.
+B: Tenemos bloqueado el uso de programas; esto también...
+A: ¿Esto tampoco se puede? ¿Chrome tampoco?
+B: Si vienen los técnicos se puede; nosotros...
+A: Entonces, en el sitio...
+A: Vuelva a introducirlo en el sitio. Borre todo lo de HTTP.
+A: Se lo digo por última vez: si va a hacerlo, hágalo; si no, venga a nuestra oficina. ¿Entiende?
+B: ¿Borro todo lo de HTTP?
+A: Sí, bórrelo. 174, punto.
+B: Antes, antes, creo que lo dictó diferente.
+A: Introduzca 174, punto. Primero 174, punto, 139, punto.
+B: 9, punto.
+A: 28, punto, 165.
+B: 2265. ¿Son dos cincos o uno?
+A: Uno, uno. 165.
+B: Enter. Parece que sale la pantalla que vi antes. Una parecida a la de antes.
+A: ¿Qué ventana apareció?
+B: «Servicio rápido de atención en línea».
+A: Sí. ¿Está «Consulta de mi expediente»?
+A: Sí, haga clic. Si está «Consulta de mi expediente», haga clic. Sí, haga clic y...
+A: Use «Verificación de identidad para no registrados». Introduzca ahí su nombre y su número de identificación, marque «Acepto» y pulse «Verificar identidad». Saldrá el documento oficial a su nombre.
+B: ¿El documento oficial?
+A: Dese prisa. No tenemos tiempo.
+B: ¿Por qué no pasa a lo siguiente?
+B: Puse el nombre y el número de identificación. ¿Por qué no pasa? Antes...
+A: ¿No está «Verificar identidad»? Ahí, debajo, ¿no está «Acepto»?
+A: ¿No tiene una casilla para marcar «Acepto»?
+B: Sí, la marqué. Pero la página es igual que antes, y abajo dice que hay un error en la página. Nosotros...
+B: Abajo del todo sale «Hay un error en la página». Creo que antes tampoco funcionaba por esto.
+B: ¿Hola? Como antes, sigue saliendo «Hay un error en la página». Sí.
+A: ¿Error en la página?
+B: Abajo dice «Hay un error en la página». En coreano, con un signo de exclamación. Sale «Hay un error en la página». Sí.
+B: Por eso no responde bien.
+A: Un momento.
+B: ¿Hola? ¿Hola? Ya salió. Sale mi nombre, como antes.
+A: Sí, léalo.
+B: Está «Destinatario» y «Fiscalía Central de Seúl».
+B: 2014 «josa» 2005, asunto. Después destinatario, mi nombre. Fecha de recepción...
+B: Expedido el 28 de diciembre de 2013, número de emisión, Departamento de Investigación de la Fiscalía de Seúl.
+A: Sí, ¿salió? Si mira la clasificación, ¿qué categoría dice?
+B: ¿Hola? Sí, dice «Especial». Especial.
+B: Especial, y número de expediente, y delante que tal persona debe aclarar la cesión, así...
+A: ¿Podría leerlo todo?
+B: No lo he leído todo. Espere.
+B: Espere un momento.
+B: ¿Hola? Ya lo leí.
+A: ¿Lo leyó? Le explicaré brevemente el punto 4.
+B: ¿El punto 4?
+A: Sí, el 4. En la operación para detener a Kim Gyeong-su estimamos que hay más de una persona, pero como solo hemos detenido a seis, los daños secundarios...
+A: Sí, sí, el 4. El contenido del punto 4.
+B: ¿Qué es «yeosang»? «Yeosang».
+A: El contenido del punto 4.
+B: Aquí, en el 4, «El sospechoso intervenido, dentro del plazo de publicación de la orden de ejecución...».
+A: Lo leyó, ¿verdad? Entonces entiende qué quiere decir, ¿no?
+A: Así que, hasta que acredite su condición de víctima, no debe divulgar nada de este caso a terceros. ¿Entiende?
+A: De acuerdo. ¿Hay alguien cerca que escuche nuestra conversación?
+B: Un empleado que trabaja por allá; hay gente trabajando por allá. Aparte de ellos no hay nadie. Los que trabajan...
+A: ¿No hay? ¿Nadie puede oír?. Porque...
+A: En la operación para detener a Kim Myeong-su estimamos que hay 14 personas, pero solo hemos detenido a seis.
+A: Hay muchas posibilidades de daños secundarios y terciarios. Si usted cuelga y deja de comunicarse durante más de tres minutos, o...
+A: ...se considerará que ha colaborado en ocultar, encubrir o facilitar la fuga de la banda de Kim Yong-su.
+A: En cuanto cuelgue, se procederá a recuperar el cien por ciento de todos sus fondos para el Tesoro.
+A: Y la policía local procederá a su detención de urgencia, seguida, en principio, de 48 horas de investigación bajo custodia.
+A: ¿Comprende lo que le digo? Hasta que se acredite como víctima, no debe divulgar el contenido del caso a terceros. ¿Entiende?
+B: Sí.
+A: Sí. Si ya lo leyó todo, abajo estará «Inicio». Haga clic en «Inicio».
+B: ¿Cómo? ¿Inicio?
+A: Sí, abajo. Mire más abajo.
+B: Sí, está.
+A: Haga clic y vaya hacia las cuatro.
+B: Espere, ¿las cuatro? Un momento. Antes...
+A: Abajo a la derecha, hacia las cuatro, estará el «Centro de denuncias de vulneración de datos personales».
+B: Datos personales...
+A: Centro de denuncias de vulneración de datos. Sí, haga clic. Sí, sí.
+A: ¿Ve los datos personales del solicitante?
+B: Solicitante, sí.
+A: Uno, 64, apartado.
+B: ¿Es para presentar una petición?
+A: Sí.
+A: Opera con CT Bank, Kookmin Bank y Hana Bank, ¿verdad? ¿Cuál es el banco con el que opera?
+B: ¿Eso? Utilizo CT Bank.
+A: ¿CT Bank? Utiliza la banca por Internet de CT Bank, ¿verdad?
+B: Sí, la utilizo a veces.
+A: ¿A veces? ¿Cómo la utiliza? ¿O utiliza una tarjeta de seguridad?
+B: También uso OTP, sí.
+A: ¿OTP? Lo tiene ahora, ¿verdad? Lo tiene, ¿verdad, el OTP?
+A: ¿Cuál fue la fecha de su última operación en Kookmin Bank?
+B: ¿Sacar dinero o qué?
+A: Sacar dinero, depositar, depositar y retirar.
+B: Creo que una vez la semana pasada, una vez la semana pasada.
+A: ¿Cuánto dinero quedó en la cuenta corriente después de su última operación?
+A: Dígame aproximadamente.
+B: ¿Ahora, ahora qué dijo?
+A: Aproximadamente, ¿cuánto dinero quedó en la cuenta corriente después de su última operación?
+B: Es una cuenta con descubierto...
+A: ¿Utiliza descubierto? ¿Qué límite tiene fijado?
+B: 30.000 wones.
+A: ¿10 millones de wones? ¿Ya los utilizó todos?
+B: Queda un poco, sí.
+A: ¿Cuánto le queda?
+B: Creo que unos 800.
+A: ¿Unos 200?
+A: 800. Y en la cuenta corriente de CT Bank, ¿cuándo fue su última operación? ¿Esta semana?
+A: Después de la operación de esta semana, ¿cuánto debería quedar normalmente?
+B: Ahí hay aproximadamente un millón de wones.
+A: ¿Un millón de wones? No tiene ahorro a plazos ni depósitos, ¿verdad?
+B: No tengo ahorro a plazos, pero sí un fondo...
+A: Entiendo. ¿Cuánto tiene ahora en Hana Bank?
+B: En Hana Bank, un ahorro a plazos de unos 200... Como lleva unos dos años, debe de haber doscientos y algo.
+A: Sí, ¿cuánto?
+B: Creo que doscientos y algo, pero no lo sé bien.
+A: Entiendo. Utiliza la banca por Internet para su cuenta corriente de Kookmin Bank, ¿verdad?
+B: Casi no la utilizo. Ahora...
+A: Sí, quiere decir que la usa a veces, ¿verdad? Todavía puede utilizarla, ¿no?
+B: Hace bastante, hace mucho que no...
+A: No ha pasado un año, ¿verdad?
+B: Creo que no ha pasado un año.
+A: Entonces puede utilizarla.
+A: ¿Cuándo fue su última compra por banca en línea de Kookmin Bank? Su última operación, operación.
+B: No lo recuerdo bien.
+A: ¿No recuerda? En Industrial Bank of Korea, en Kookmin Bank, ¿cómo...?
+B: No tengo ninguna relación con Industrial Bank of Korea.
+A: Kookmin Bank, Kookmin Bank. ¿En Kookmin Bank utiliza OTP o tarjeta de seguridad?
+B: OTP, sí, el mismo.
+A: Entiendo. ¿Ya rellenó todos los datos personales del solicitante?
+A: ¿Ya rellenó todos los datos personales?
+B: Sí, ya los rellené.
+A: Sí, hágalo, y ahora espere. Señor, deténgase un momento.
+A: Voy a hacerle una última pregunta. Si usted en el pasado, por alguna circunstancia que no pueda contar...
+A: ...tuvo operaciones de dinero con los encargados de Kim Gi-yong, declárelo y lo tendremos en cuenta como atenuante.
+B: Antes le dije que no.
+A: ¿Ninguna? Entiendo. Como toda esta conversación está grabada, después no puede retractarse. ¿No hay ninguna?
+B: No, ninguna.
+A: Sí. Si no hubo ninguna, ahora mismo comenzaremos el rastreo de las cuentas. Haga clic en «Siguiente».
+A: Haga clic en «Siguiente». ¿Lo hizo?
+B: Todavía está esperando...
+B: Espera.
+A: ¿Cambió la ventana?
+B: Esto es una solicitud de datos personales, una petición...
+A: Sí, sí. Es la pantalla de registro de seguridad, ¿verdad? ¿Es la pantalla de registro de seguridad?
+B: ¿La pantalla de registro de seguridad? Sí, hay algo que dice «Registro de seguridad de datos personales».
+A: Primero, ¿por qué banco quiere empezar la denuncia? Empiece por Kookmin Bank. Seleccione Kookmin Bank.
+B: ¿Dice que seleccione Kookmin Bank?
+A: Sí, marque el banco. Dijo que empezaría la denuncia por Kookmin Bank.
+A: Sí, empiece por Kookmin Bank y los demás bancos quedarán registrados normalmente aunque no los denuncie.
+B: ¿Que lo haga con Kookmin Bank?
+A: Sí. Introduzca el número de cuenta.
+B: Número de cuenta...
+A: Sí, sí.
+B: Está en el coche, un momento.
+A: Sí, entiendo. ¿No lo recuerda?
+B: Sí, no lo recuerdo. Tendré que sacarlo del bolso.
+A: Sí, mírelo sin colgar.
+B: Haz lo del banco y mira el saldo, sube. Pero ahí se puede entrar; esto ya está....
+B: Lo importante es la contraseña y la contraseña del certificado. Se pueden expedir todos estos consentimientos. Con el número de cuenta y el número de identificación, el número de cuenta, se puede volver a expedir el certificado.
+B: Pero ¿cómo se pasa al siguiente paso para que no salga?
+B: ¿Hola? El número de cuenta, un momento.
+A: Sí.
+A: ¿Lo introdujo? Los guiones... Introduzca solo números.
+B: Sí, y después sale «Datos de tarjeta de crédito». ¿Por qué pide la tarjeta de crédito?
+A: No es la tarjeta de crédito; ¿introdujo el número de cuenta y la contraseña de la cuenta completos?
+B: Sí, hice eso y después le di a confirmar...
+A: En la tarjeta de crédito escriba todo con el número 1.
+B: ¿Todo con uno, sigo escribiendo unos?
+A: Sí. Uno, uno, uno. Escriba todo con unos.
+A: Entonces...
+A: Sí, ¿lo está rellenando con el número 1?
+B: Ya lo hice todo.
+A: Ah, sí, sí.
+B: ¿Dice que escriba todos los unos y le dé a registrar?
+A: Sí. Escriba unos y regístrelo.
+B: Ya lo hice.
+A: Bien, cierre esa ventana y abra otra vez una ventana de Naver.
+B: ¿Hola? ¿Ahora vuelvo a abrir Naver?
+A: Sí. Ábralo y prepare un bolígrafo y papel. Un bolígrafo y papel, sí.
+B: ¿Otra vez Naver? Espere, tengo que estar yendo y viniendo.
+A: Ah, sí, antes....
+B: ¿Puedo cerrarlo todo?
+A: Sí, sí. Dos se pueden.
+B: Sí, ahí antes puse Fiscalía Central.
+A: Sí. Bórrelo todo y a partir de ahora...
+A: ...vamos a comprobar si el OTP que le expidieron es seguro.
+A: Le comprobaré si el OTP que le expidieron es seguro o no. Primero anote los números que voy a dictarle.
+A: Número uno, número uno, sí.
+B: 7, 48, 78.
+A: 457. Número dos, 604.
+B: 604.
+A: 7, 1, 3.
+B: 7, 1, 3.
+A: Sí, número tres.
+B: Número uno.
+A: 8, 24.
+A: 6, 7, 6.
+B: 676. ¿Qué es esto?
+A: Sí, primero anótelo. Número cuatro: 1, 7, 1.
+B: Uno, «jip», uno.
+A: Sí, 4, 67.
+B: 4, 6, 7.
+A: Número cinco, 584.
+A: 3, 4, 7.
+A: Estos números son los números de OTP clonados que utilizó realmente la banda de Kim Yeong-su.
+A: No debe aparecer ninguno de estos números en su OTP ni coincidir las dos primeras cifras.
+B: ¿Qué quiere decir eso?
+A: Anote los números cuyas primeras dos cifras salgan iguales. ¿Entiende?
+A: Con estos números comprobaremos si están implicados los empleados financieros que hicieron las operaciones y si este OTP es seguro. ¿Entiende?
+A: Cuando pulse el OTP, si el número es igual, si ha salido el mismo número...
+A: Al pulsar el OTP, dígame exactamente si el número es igual. ¿Es igual?
+A: Si coincide, quiere decir que su OTP está clonado. Los delincuentes también...
+B: No es igual.
+A: No es igual, ¿verdad? Entiendo. Y vuelva a anotar el número uno. Número uno: certificado de víctima.
+A: Víctima, certificado de víctima. Ahí figura mi número personal.
+A: Figuran mi número de móvil y el número de nuestra oficina.
+A: Si después tiene dudas sobre el caso o cualquier inconveniente, llámenos.
+A: Como es una investigación nacional, cuando se haya detenido a parte de la banda de Kim Yong-su, puede que lo llamen otras comisarías o fiscalías.
+A: Entonces diga que ya fue reconocido como víctima y ellos se encargarán de tramitarlo todo.
+B: Señor fiscal, ¿no puedo llamar ahí? Dígame la oficina para llamar.
+A: El día 30. Sí, dentro de un momento se lo enviaré por fax. Sí, por fax.
+A: Sí. Y ¿no tiene banca por Internet en Kookmin Bank?
+A: Internet...
+B: No lo he... no lo he hecho. Por eso...
+A: ¿Nunca la utilizó? ¿La tiene solicitada?
+B: Sí. La solicité hace tiempo, pero creo que hace bastante.
+A: Dicen que ahora no está registrado. Esta vez registre CT Bank. CT Bank.
+A: Sí, registre CT Bank. En aquella dirección de antes, la dirección que le di.
+A: Fiscalía de Distrito de Seúl, en su número de expediente, ¿escribió en coreano?
+B: Sí, esto...
+B: ¿Hola? Ahora estoy confundido. ¿Quiere que vuelva a abrir lo mismo que antes hicimos con Kookmin Bank?
+A: Sí, sí, sí.
+B: ¿Era aquello de 274 y algo?
+A: 174, 139, 28, 65.
+B: Ahora, registrar lo de CT Bank...
+A: Sí, registre CT Bank. Lo de Kookmin Bank ya se completó correctamente.
+A: El rastreo ya terminó. Consultamos un año de movimientos de Kookmin Bank y no aparece ningún resultado.
+A: Lo de Kookmin Bank se tramitó correctamente. Ahora hagámoslo con CT Bank. CT Bank.
+B: ¿Que registre lo de CT Bank? ¿No dijo que ya lo sabía?
+A: Lo acabamos de consultar y no es lo mismo. Porque no se expidió el certificado en Kookmin Bank. Su primer certificado lo obtuvo de PT, CT Bank, ¿verdad?
+A: Nunca obtuvo un certificado de Kookmin Bank, ¿verdad? Ni una vez.
+B: Un momento, dígame el teléfono de la oficina. Voy a llamar. Esto me resulta un poco extraño.
+B: ¿Hola?
+A: Sí, sí.
+B: Antes... ¿A dónde llamo ahora? ¿Puedo llamar al Servicio de Supervisión Financiera?
+A: ¿Quiere llamarnos a nosotros? El teléfono, sin prefijo, sin prefijo, 010-8781-3375.
+B: ¿010-8781-3375? Entonces, sí, ¿hay operadora, operadora, algo así?
+A: Sí, hay de todo. Pida a la policía que lo transfieran a la Fiscalía de Distrito de Seúl.
+B: Entonces llamo...
+A: No cuelgue; llame desde otro teléfono. Yo atenderé.
+B: No tengo otro teléfono; tendría que colgar este.
+A: ¿No tiene otro teléfono? ¿No tiene teléfono de oficina...?
+B: Es que hay otros empleados.
+A: ¿No podría registrar CT Bank?
+B: Pero ¿por qué ahora...? ¿No es un poco extraño?
+A: ¿Qué tiene de extraño?
+B: Dije que no hay ningún problema, ¿por qué...?
+A: Pero ya se lo expliqué.
+A: Consultamos los movimientos de Kookmin Bank y no hay ninguna irregularidad en el rastreo de esa cuenta. Pero todavía no hemos consultado CT Bank ni una vez.
+A: Registre también CT Bank y consultaremos un año de movimientos. Si no aparece nada de esto, se expedirá el certificado de víctima a su nombre. ¿Entiende?
+B: Pero antes, yo, al principio, la persona que vi....
+B: Si ya se hizo Kookmin Bank, ya quedó demostrado. ¿Antes no dijo que no había problema? ¿Que no había problema? Yo, lo de Kookmin Bank...
+B: Dijo que lo iban a investigar.
+A: Sí, no hay problema, pero....
+B: Por eso, como me resulta extraño, voy a llamar para comprobarlo.
+A: Llame. Entonces llame al número que aparece en pantalla.
+B: Sí, entendido. Sí, sí.

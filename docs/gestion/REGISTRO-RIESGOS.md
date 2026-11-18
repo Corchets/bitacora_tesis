@@ -25,6 +25,9 @@ se versionan en el repositorio público, en formato de casos y con su referencia
 la fuente coreana pide no redistribuir derivados y no hay permiso, y esas 9 de las 33 conversaciones
 del set congelado dejan de estar en custodia. Lo publicado queda en el historial de Git y puede
 haberse copiado. Propuesta sin discutir: la confirma o revierte el equipo.
+El mismo día se sumaron KO-10 a KO-33: las 33 conversaciones del set y sus referencias son públicas
+antes de la corrida, y la mitigación de R05 del 2026-11-11 queda solo en que los hashes fijan el
+contenido. 24 referencias son pre-marcado de IA, sin ficha.
 
 **Actualización del 2026-11-11, #144:** el set externo quedó congelado con hashes
 ([relevamiento §8](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#8-set-coreano-congelado-2026-11-11)).
