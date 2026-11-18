@@ -1,8 +1,8 @@
 # Las 94 legítimas de desarrollo, con la política de producto
 
-> **Estado: propuesta sin discutir.** Es una propuesta para Mateo: **falta que la acepte, la corrija o la descarte.**
-> Si la acepta, la regla de la prueba la usa y se informan las dos versiones ([README](README.md#regla-escrita-antes-de-correr)).
-> No cambia `texto/` ni `referencia/`.
+> **Estado: aceptada por Mateo el 2026-11-18,** sin cambios, para la regla de la prueba
+> ([README](README.md#regla-escrita-antes-de-correr)), que informa las dos versiones. La anotó un agente, no un humano,
+> y no la revisó nadie más del equipo. No cambia `texto/` ni `referencia/`.
 
 ## Cómo se hizo
 

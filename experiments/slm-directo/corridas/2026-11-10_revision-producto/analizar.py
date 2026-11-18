@@ -5,17 +5,15 @@ los ZIP de Colab descomprimidos acá (humo/, base/, c-codigo/, c-consejos/, c-fr
     python -I analizar.py                       # todo
     python -I analizar.py --datos OTRA_CARPETA  # corridas en otra carpeta (pruebas)
 
-Escrito el 2026-11-10, antes de correr la prueba. Aplica tal cual la regla de README.md («Regla, escrita antes de
-correr»). La regla se calcula en dos versiones y decide una sola (DECIDE):
+Escrito el 2026-11-10, antes de correr la prueba, y cerrado el 2026-11-18 con las dos decisiones de Mateo: acepta las
+etiquetas (decide «producto») y no quiere una vía para pasar solo por bajar las FA. Aplica tal cual la regla de
+README.md («Regla, escrita antes de correr»). La regla se calcula en dos versiones y decide una sola (DECIDE):
 - «producto»: las FA que cuentan son los avisos en las 75 legítimas «no debería avisar» de etiquetas-producto.json;
 - «original»: las FA que cuentan son las de las 29 cotidianas, y el total es sobre las 94, como en la sensibilidad.
-En las dos, una variante pasa por detección si (1) suma 3 o más en una cifra de detección, (2) no pierde 3 o más en
-ninguna, (3) no suma 3 o más FA de las que cuentan, y (4) su repetición, contra la de la base, suma 3 o más en una cifra
-en que ganó la primera corrida, sin perder 3 o más en ninguna y sin sumar 3 o más FA. Si ninguna pasa por detección,
-pasa por FA la que baja 3 o más el total de FA de su versión (/75 o /94) sin perder 3 o más en ninguna cifra de
-detección, en la corrida y en la repetición. Si pasan varias por detección, la que más suma en estafas y a tiempo,
-juntas, en la primera corrida, y si empatan, la de menos FA; si pasan varias por FA, la que más baja, y si empatan, la
-que más suma en estafas y a tiempo. Si no pasa ninguna, queda la base.
+En las dos, una variante pasa si (1) suma 3 o más en una cifra de detección, (2) no pierde 3 o más en ninguna, (3) no
+suma 3 o más FA de las que cuentan, y (4) su repetición, contra la de la base, suma 3 o más en una cifra en que ganó la
+primera corrida, sin perder 3 o más en ninguna y sin sumar 3 o más FA. Si pasan varias, la que más suma en estafas y a
+tiempo, juntas, en la primera corrida, y si empatan, la de menos FA. Si no pasa ninguna, queda la base.
 """
 
 import argparse, collections, importlib.util, json, sys
@@ -35,7 +33,7 @@ def _cargar(nombre, ruta):
 s = _cargar('analizar_sensibilidad_para_revision', AQUI.parent / '2026-11-10_sensibilidad-c' / 'analizar.py')
 e3, IDS, REF, VISTA, num, tabla, p50_p95, celda = s.e3, s.IDS, s.REF, s.VISTA, s.num, s.tabla, s.p50_p95, s.h.celda
 
-# 'producto' si Mateo acepta las etiquetas de etiquetas-producto.json; 'original' si no. Se fija en el commit del tag.
+# Mateo aceptó las etiquetas de etiquetas-producto.json el 2026-11-18: decide «producto». La «original» se informa.
 DECIDE = 'producto'
 BASE = 'c-premisa-corte-riesgo'
 VARIANTES = {'c-codigo': 'c-codigo-corte-riesgo', 'c-consejos': 'c-consejos-corte-riesgo', 'c-freno': 'c-freno-corte-riesgo'}
@@ -55,7 +53,7 @@ CODIGO_O_CLAVE = [i for i in e3.ESTAFAS if REF[i].get('pedido') in ('REQUEST_AUT
 DATOS_PERSONALES = [i for i in e3.ESTAFAS if REF[i].get('pedido') == 'REQUEST_PERSONAL_DATA']
 assert (len(CODIGO_O_CLAVE), len(DATOS_PERSONALES)) == (17, 6), 'la vista no es la anotada'
 
-# Por versión de la regla: la FA con tope (no puede sumar 3 o más) y la FA total (para pasar por FA y desempatar).
+# Por versión de la regla: la FA con tope (no puede sumar 3 o más) y la FA total (para desempatar).
 VERSIONES = {'producto': ('FA estrictas', 'FA estrictas'), 'original': ('FA cotidianas', 'FA')}
 DENOMINADORES = {**s.DENOMINADORES, 'FA estrictas': 75, 'FA tolerables': 18, 'debería avisar': 1, 'código o clave': 17,
                  'código o clave, a tiempo': 17}
@@ -87,48 +85,38 @@ def diferencias(c, ref):
 
 
 def veredicto(c, base, cr, base_r, version):
-    """('pasa por detección' / 'pasa por FA' / 'no pasa', razón) de una variante contra la base, con la repetición."""
-    tope, total = VERSIONES[version]
+    """('pasa' / 'no pasa', razón) de una variante contra la base, con la repetición."""
+    tope, _ = VERSIONES[version]
     d = diferencias(c, base)
     gana = [k for k, x in d.items() if x >= MARGEN]
     pierde = [k for k, x in d.items() if x <= -MARGEN]
-    texto = ', '.join(f'{x:+d} {k}' for k, x in d.items()) + f', {tope} {c[tope] - base[tope]:+d}' \
-        + (f', {total} {c[total] - base[total]:+d}' if total != tope else '')
+    texto = ', '.join(f'{x:+d} {k}' for k, x in d.items()) + f', {tope} {c[tope] - base[tope]:+d}'
+    if not gana:
+        return 'no pasa', f'no suma 3 o más en ninguna cifra de detección ({texto})'
     if pierde:
         return 'no pasa', f'pierde 3 o más en {", ".join(pierde)} ({texto})'
+    if c[tope] - base[tope] >= MARGEN:
+        return 'no pasa', f'suma 3 o más en {tope} ({texto})'
     if cr is None or base_r is None:
         return 'no pasa', 'falta la repetición (de la variante o de la base)'
     dr = diferencias(cr, base_r)
     texto_r = ', '.join(f'{x:+d} {k}' for k, x in dr.items()) + f', {tope} {cr[tope] - base_r[tope]:+d}'
+    if not any(dr[k] >= MARGEN for k in gana):
+        return 'no pasa', f'la repetición no sostiene la ganancia ({texto_r})'
     if any(x <= -MARGEN for x in dr.values()):
         return 'no pasa', f'la repetición pierde 3 o más en alguna cifra ({texto_r})'
-    if gana:
-        if c[tope] - base[tope] >= MARGEN:
-            return 'no pasa', f'suma 3 o más en {tope} ({texto})'
-        if not any(dr[k] >= MARGEN for k in gana):
-            return 'no pasa', f'la repetición no sostiene la ganancia ({texto_r})'
-        if cr[tope] - base_r[tope] >= MARGEN:
-            return 'no pasa', f'la repetición suma 3 o más en {tope} ({texto_r})'
-        return 'pasa por detección', f'{texto}; repetición: {texto_r}'
-    if base[total] - c[total] >= MARGEN and base_r[total] - cr[total] >= MARGEN:
-        return 'pasa por FA', f'{texto}; repetición: {texto_r}, {total} {cr[total] - base_r[total]:+d}'
-    return 'no pasa', f'no suma 3 o más en ninguna cifra de detección ni baja 3 o más en {total} ({texto})'
+    if cr[tope] - base_r[tope] >= MARGEN:
+        return 'no pasa', f'la repetición suma 3 o más en {tope} ({texto_r})'
+    return 'pasa', f'{texto}; repetición: {texto_r}'
 
 
 def elegir(resultados, cs, base, version):
     """La variante que queda, según la regla, o None si queda la base."""
     _, total = VERSIONES[version]
-
-    def suma(v):
-        return cs[v]['estafas'] - base['estafas'] + cs[v]['a tiempo'] - base['a tiempo']
-
-    por_deteccion = [v for v, (estado, _) in resultados.items() if estado == 'pasa por detección']
-    if por_deteccion:
-        return min(por_deteccion, key=lambda v: (-suma(v), cs[v][total]))
-    por_fa = [v for v, (estado, _) in resultados.items() if estado == 'pasa por FA']
-    if por_fa:
-        return min(por_fa, key=lambda v: (cs[v][total], -suma(v)))
-    return None
+    pasan = [v for v, (estado, _) in resultados.items() if estado == 'pasa']
+    if not pasan:
+        return None
+    return min(pasan, key=lambda v: (-(cs[v]['estafas'] - base['estafas'] + cs[v]['a tiempo'] - base['a tiempo']), cs[v][total]))
 
 
 def aplicar(cs, pasa_humo, version):

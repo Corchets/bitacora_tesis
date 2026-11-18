@@ -1,7 +1,8 @@
 # Las tres variantes: textos, porqué y fuentes
 
-> **Estado: propuesta sin discutir.** Textos para que Mateo los lea **antes del tag**: se pueden cambiar hasta ese
-> commit. Cada uno es `c-premisa-corte-riesgo` con un solo párrafo cambiado
+> **Estado: textos aceptados por Mateo el 2026-11-18,** sin cambios, antes del tag. Su lectura, antes de correr: la que
+> más le gusta es `c-consejos`; `c-codigo` suma restricciones que pueden hacer que el modelo se comporte peor; y la
+> oración final de `c-freno` («que OTRA ya sepa esos datos no prueba quién es») le parece bien. Cada uno es `c-premisa-corte-riesgo` con un solo párrafo cambiado
 > ([`test_revision_producto_143.py`](../../tests/test_revision_producto_143.py) lo comprueba). Las fuentes S son las de
 > [`FUENTES.md`](../2026-11-09_pedido-critico-etapa-3/FUENTES.md) y las P, las de [`FUENTES-PRODUCTO.md`](FUENTES-PRODUCTO.md).
 

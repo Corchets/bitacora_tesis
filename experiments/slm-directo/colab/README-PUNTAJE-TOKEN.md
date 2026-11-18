@@ -364,8 +364,8 @@ OTRA (`--seguir-tras-aviso`):
 
 > **Estado: propuesta sin discutir.** Tres variantes de la configuración congelada (`c-premisa-corte-riesgo`), con un
 > solo párrafo cambiado cada una. La regla está escrita antes de correr en
-> [`corridas/2026-11-10_revision-producto/README.md`](../corridas/2026-11-10_revision-producto/README.md). **El tag
-> todavía no existe:** falta el OK de Mateo a las etiquetas y a los textos, y el notebook no corre hasta tener el hash.
+> [`corridas/2026-11-10_revision-producto/README.md`](../corridas/2026-11-10_revision-producto/README.md). Mateo dio el
+> OK a las etiquetas, a los textos y a correr el 2026-11-18.
 
 **Las variantes:**
 - `c-codigo-corte-riesgo` pone la regla del código y la clave por intención, no por quién llama;
@@ -390,10 +390,9 @@ otra base y otras variantes. Usa Ollama 0.40.14, el digest `b37049369adf…`, `n
 **Duración estimada:** alrededor de 1 h 10 en T4.
 
 **Pasos:**
-1. Con el OK de Mateo: crear el tag `colab/143-revision-producto`, poner su hash en `COMMIT` de
-   [`COLAB-REVISION-PRODUCTO.ipynb`](COLAB-REVISION-PRODUCTO.ipynb) y subir las dos cosas.
-2. Abrir el notebook en Colab, elegir **GPU T4**, ejecutar la única celda y dejar la pestaña abierta, aceptando las
-   descargas múltiples.
+1. Abrir [`COLAB-REVISION-PRODUCTO.ipynb`](COLAB-REVISION-PRODUCTO.ipynb) en Colab y elegir **GPU T4**. El notebook
+   está fijado al commit del tag.
+2. Ejecutar la única celda y dejar la pestaña abierta, aceptando las descargas múltiples.
    - Si Colab se corta, los parciales ya descargados sirven.
    - Si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
 3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiar las carpetas a

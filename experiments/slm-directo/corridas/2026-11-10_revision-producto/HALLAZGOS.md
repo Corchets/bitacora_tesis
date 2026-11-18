@@ -2,7 +2,7 @@
 
 > **Estado: propuesta sin discutir.** Escrito el 2026-11-10 **después de ver los resultados**: no decide nada. Cruza las
 > ocho corridas de [`2026-11-10_sensibilidad-c`](../2026-11-10_sensibilidad-c/analisis.md) con las
-> [etiquetas de producto](REVISION-LEGITIMAS.md), que son anteriores (commit `6c1fca0`) y que Mateo todavía no aceptó.
+> [etiquetas de producto](REVISION-LEGITIMAS.md), que son anteriores (commit `6c1fca0`) y que Mateo aceptó el 2026-11-18.
 > Las cifras de `c-premisa` salen de correr [`analizar.py`](analizar.py) con esa corrida como base.
 
 ## 1. La mitad de las falsas alarmas no lo son

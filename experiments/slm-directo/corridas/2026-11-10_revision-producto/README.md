@@ -2,8 +2,9 @@
 
 > **Estado: propuesta sin discutir.** Desarrollo; la reserva, las legítimas de test y #144 no se tocan. Preparada el
 > 2026-11-10, a pedido de Mateo, sobre la configuración congelada `c-premisa-corte-riesgo`
-> ([análisis de la sensibilidad](../2026-11-10_sensibilidad-c/analisis.md)). **Nada corrió todavía:** faltan el OK de
-> Mateo a las etiquetas y a los textos, y el tag.
+> ([análisis de la sensibilidad](../2026-11-10_sensibilidad-c/analisis.md)). El 2026-11-18 Mateo aceptó las etiquetas y
+> los tres textos, sacó de la regla la vía para pasar solo por bajar las FA, y dio el OK para correr. La regla de abajo
+> es la del tag `colab/143-revision-producto`, anterior a cualquier resultado.
 
 ## Qué hay en esta carpeta
 
@@ -68,9 +69,8 @@ Dura alrededor de 1 h 10. El Colab está en
 
 ## Regla, escrita antes de correr
 
-> **Borrador hasta la respuesta de Mateo.** La regla se calcula en dos versiones y se informan las dos. Decide una
-> sola: **«producto»** si Mateo acepta las [etiquetas](REVISION-LEGITIMAS.md), **«original»** si no. Lo que decida queda
-> escrito acá y en `DECIDE` de `analizar.py`, en el commit del tag. La propuesta es «producto».
+> La regla se calcula en dos versiones y se informan las dos. **Decide «producto»:** Mateo aceptó las
+> [etiquetas](REVISION-LEGITIMAS.md) el 2026-11-18 (`DECIDE` en `analizar.py`). La «original» no decide.
 
 **Vista:** dentro del alcance, `alcance-140`. Son 46 estafas (36 con pedido y 15 con cumplimiento) y 94 legítimas.
 
@@ -84,25 +84,26 @@ Dura alrededor de 1 h 10. El Colab está en
 
 | versión | FA con tope | FA total | lo que no cuenta |
 |---|---|---|---|
-| **producto** | **FA estrictas:** avisos en las 75 «no debería avisar» | las mismas, /75 | Los avisos en las 18 tolerables y en ENT-L-SOPORTE-005 («debería avisar») se informan aparte |
-| **original** | FA en las 29 cotidianas (`tipo_legitima`) | FA en las 94 | — |
+| **producto** (decide) | **FA estrictas:** avisos en las 75 «no debería avisar» | las mismas, /75 | Los avisos en las 18 tolerables y en ENT-L-SOPORTE-005 («debería avisar») se informan aparte |
+| **original** (se informa) | FA en las 29 cotidianas (`tipo_legitima`) | FA en las 94 | — |
 
 Cada variante se compara con la base de la misma sesión.
 
-**Pasa por detección** si cumple las cuatro condiciones:
+**Pasa** si cumple las cuatro condiciones:
 1. suma 3 o más en al menos una cifra de detección;
 2. no pierde 3 o más en ninguna cifra de detección;
 3. no suma 3 o más en las FA con tope;
 4. en la repetición, contra la repetición de la base, suma 3 o más en una cifra en que ganó la primera corrida, sin
    perder 3 o más en ninguna y sin sumar 3 o más en las FA con tope.
 
-**Pasa por FA,** solo si ninguna pasa por detección: baja 3 o más la FA total de su versión, sin perder 3 o más en
-ninguna cifra de detección, en la corrida y en la repetición. Es el criterio escrito de antemano para cuando la
-detección queda dentro del ruido (ADR 0005, regla 3).
+**Bajar las FA no alcanza para pasar** (Mateo, 2026-11-18): una variante que no suma 3 o más en ninguna cifra de
+detección no pasa, aunque avise menos. Lo que baje se informa aparte.
 
-**Si pasan varias por detección,** se elige la que más suma en estafas y a tiempo, juntas, en la primera corrida. Si
-empatan, la de menos FA total. **Si pasan varias por FA,** la que más baja; si empatan, la que más suma en estafas y a
-tiempo. **Si no pasa ninguna,** queda `c-premisa-corte-riesgo`.
+**Si pasan varias,** se elige la que más suma en estafas y a tiempo, juntas, en la primera corrida. Si empatan, la de
+menos FA total. **Si no pasa ninguna,** queda `c-premisa-corte-riesgo`.
+
+**La preferencia de Mateo no decide.** El 2026-11-18 dijo que la que más le gusta es `c-consejos`, y que `c-codigo`
+suma restricciones que pueden hacer que el modelo se comporte peor. Queda anotado antes de correr; elige la regla.
 
 Lo que se adopte reemplaza a la base en la evaluación final, con todo lo demás igual. Es provisorio, como siempre, hasta
 la reserva y #144.

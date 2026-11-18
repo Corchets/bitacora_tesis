@@ -194,22 +194,19 @@ class TestRegla(unittest.TestCase):
     def test_veredicto_con_las_etiquetas_de_producto(self):
         b = self.BASE
         casos_ = [
-            (self.con(estafas=33), self.con(estafas=33), "pasa por detección"),
-            (self.con(**{"antes del cumplimiento": 13}), self.con(**{"antes del cumplimiento": 13}), "pasa por detección"),
+            (self.con(estafas=33), self.con(estafas=33), "pasa"),
+            (self.con(**{"antes del cumplimiento": 13}), self.con(**{"antes del cumplimiento": 13}), "pasa"),
             (self.con(estafas=32), self.con(estafas=33), "no pasa"),
             (self.con(estafas=33, **{"a tiempo": 17}), self.con(estafas=33), "no pasa"),
             (self.con(estafas=33, **{"FA estrictas": 13}), self.con(estafas=33), "no pasa"),
-            (self.con(estafas=33, **{"FA estrictas": 12}), self.con(estafas=33, **{"FA estrictas": 12}), "pasa por detección"),
+            (self.con(estafas=33, **{"FA estrictas": 12}), self.con(estafas=33, **{"FA estrictas": 12}), "pasa"),
             (self.con(estafas=33), self.con(estafas=32), "no pasa"),
             (self.con(estafas=33), self.con(estafas=33, **{"antes del pedido": 7}), "no pasa"),
             (self.con(estafas=33), self.con(estafas=33, **{"FA estrictas": 13}), "no pasa"),
             # Las tolerables no tienen tope, y las cotidianas de la anotación original no deciden en esta versión.
-            (self.con(estafas=33, **{"FA tolerables": 18, "FA cotidianas": 9, "FA": 40}), self.con(estafas=33), "pasa por detección"),
-            # Sin ganar en detección, pasa por FA si baja 3 o más las estrictas, también en la repetición.
-            (self.con(**{"FA estrictas": 7}), self.con(**{"FA estrictas": 7}), "pasa por FA"),
-            (self.con(**{"FA estrictas": 8}), self.con(**{"FA estrictas": 7}), "no pasa"),
-            (self.con(**{"FA estrictas": 7}), self.con(**{"FA estrictas": 8}), "no pasa"),
-            (self.con(**{"FA estrictas": 7, "estafas": 27}), self.con(**{"FA estrictas": 7}), "no pasa"),
+            (self.con(estafas=33, **{"FA tolerables": 18, "FA cotidianas": 9, "FA": 40}), self.con(estafas=33), "pasa"),
+            # Bajar las FA sin ganar en detección no alcanza (Mateo, 2026-11-18).
+            (self.con(**{"FA estrictas": 3}), self.con(**{"FA estrictas": 3}), "no pasa"),
         ]
         for c, cr, esperado in casos_:
             with self.subTest(c=c, cr=cr):
@@ -219,11 +216,10 @@ class TestRegla(unittest.TestCase):
     def test_veredicto_con_la_anotacion_original(self):
         b = self.BASE
         casos_ = [
-            (self.con(estafas=33, **{"FA estrictas": 30}), self.con(estafas=33), "pasa por detección"),
+            (self.con(estafas=33, **{"FA estrictas": 30}), self.con(estafas=33), "pasa"),
             (self.con(estafas=33, **{"FA cotidianas": 4}), self.con(estafas=33), "no pasa"),
-            (self.con(estafas=33, **{"FA cotidianas": 3}), self.con(estafas=33, **{"FA cotidianas": 3}), "pasa por detección"),
-            (self.con(FA=17), self.con(FA=17), "pasa por FA"),
-            (self.con(FA=18), self.con(FA=17), "no pasa"),
+            (self.con(estafas=33, **{"FA cotidianas": 3}), self.con(estafas=33, **{"FA cotidianas": 3}), "pasa"),
+            (self.con(FA=10), self.con(FA=10), "no pasa"),
         ]
         for c, cr, esperado in casos_:
             with self.subTest(c=c, cr=cr):
@@ -233,14 +229,11 @@ class TestRegla(unittest.TestCase):
         b = self.BASE
         cs = {"c-codigo": self.con(estafas=34, **{"FA estrictas": 12}), "c-consejos": self.con(estafas=33),  # +3, menos que +4
               "c-freno": self.con(estafas=34, **{"FA estrictas": 11})}
-        todas = {v: ("pasa por detección", "") for v in cs}
+        todas = {v: ("pasa", "") for v in cs}
         self.assertEqual(an.elegir(todas, cs, b, "producto"), "c-freno", "empatan en +4: la de menos FA estrictas")
         self.assertIsNone(an.elegir({v: ("no pasa", "") for v in cs}, cs, b, "producto"))
-        # La detección va antes que las FA: una que pasa por FA no le gana a una que pasa por detección.
-        self.assertEqual(an.elegir({"c-codigo": ("no pasa", ""), "c-consejos": ("pasa por detección", ""), "c-freno": ("pasa por FA", "")},
+        self.assertEqual(an.elegir({"c-codigo": ("no pasa", ""), "c-consejos": ("pasa", ""), "c-freno": ("no pasa", "")},
                                    cs, b, "producto"), "c-consejos")
-        fa = {"c-codigo": self.con(**{"FA estrictas": 7}), "c-consejos": self.con(**{"FA estrictas": 6}), "c-freno": self.con(**{"FA estrictas": 6}, estafas=31)}
-        self.assertEqual(an.elegir({v: ("pasa por FA", "") for v in fa}, fa, b, "producto"), "c-freno", "la que más baja; si empatan, la que más suma")
 
     def test_la_vista_las_etiquetas_y_las_cifras(self):
         self.assertEqual((len(an.NO_AVISAR), len(an.TOLERABLES), len(an.AVISAR)), (75, 18, 1))
@@ -275,12 +268,12 @@ class TestRegla(unittest.TestCase):
             escribir_todo(Path(tmp), {"c-codigo": con_mas(3, an.TOLERABLES, con_mas(4, ESTAFAS)),
                                       # +4 estafas y +3 FA en cotidianas «no debería avisar»: no pasa en ninguna versión.
                                       "c-consejos": con_mas(3, cotidianas, con_mas(4, ESTAFAS)),
-                                      # sin ganar en detección, baja 3 FA estrictas: pasa por FA.
+                                      # sin ganar en detección, baja 3 FA estrictas: no pasa.
                                       "c-freno": con_menos(3, an.NO_AVISAR)})
             texto = salida(Path(tmp))
-        self.assertIn("| `c-codigo` | pasa por detección |", texto)
+        self.assertIn("| `c-codigo` | pasa |", texto)
         self.assertIn("| `c-consejos` | no pasa | suma 3 o más en FA estrictas", texto)
-        self.assertIn("| `c-freno` | pasa por FA |", texto)
+        self.assertIn("| `c-freno` | no pasa | no suma 3 o más en ninguna cifra de detección", texto)
         self.assertIn("**Resultado: queda `c-codigo`.**", texto)
 
     def test_sin_ganancia_queda_la_base(self):
