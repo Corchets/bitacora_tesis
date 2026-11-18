@@ -451,9 +451,9 @@ la zona gris, y entre `legitima` y `legitima_agresiva` en las legítimas.
   checkout principal, que Git ignora: las zip, la carpeta de trabajo y `sets/set-legitimas` y
   `sets/set-zona-gris`. `correspondencia.json` lleva el nombre de archivo de la fuente, que es el teléfono de la
   persona, así que no sale de ahí.
-- Los dos sets tienen el formato del set coreano. Se comprobó que cargan sin errores con
-  `conjuntos.preparar_externo(carpeta, destino, manifiesto=…)` de la rama local `claude/happy-austin-e0e0c3`
-  (`3507fa0`): 33 legítimas y 42 `legitima_dificil`.
+- Los dos sets tienen el formato del set coreano. Se comprobó que cargan sin errores con el código de #52: primero
+  con `conjuntos.preparar_externo(carpeta, destino, manifiesto=…)` de la rama local de entonces, y después con
+  `conjuntos.preparar_legitimas_reales`: 33 legítimas y 42 `legitima_dificil`.
 - **Sumados a #52 el 2026-11-18** (Mateo: «sumalos»), en la rama `exp/52-legitimas-reales`.
   `conjuntos.preparar_legitimas_reales` arma un conjunto `legitimas_reales`, con las 33 en la vista principal y la zona
   gris en una vista aparte. El Colab lo corre si se sube la carpeta `sets/` y se pone su ruta en `LEGITIMAS_REALES`.
