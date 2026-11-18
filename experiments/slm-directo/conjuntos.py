@@ -275,31 +275,36 @@ def preparar_test(reserva: Path, destino: Path, *, manifiesto: Path | None = Non
 
 
 def preparar_externo(origen: Path, destino: Path, *, manifiesto: Path | None = None) -> Conjunto:
-    """El set externo de #144 desde la carpeta de la custodia: las 33 estafas coreanas de KorCCVi.
+    """El set externo de #144: estafas coreanas de KorCCVi, traducidas y marcadas.
 
     Formato del set congelado (experiments/laboratorio/armar_set_coreano.py): texto/EXT-NNN.txt,
-    roles-protegida.json y referencia/EXT-NNN.json. Cada archivo se comprueba contra
-    docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json; correspondencia.json no hace falta.
-    Todo es estafa y va a la vista principal. Los textos no se pueden redistribuir: el conjunto queda fuera de Git.
+    roles-protegida.json y referencia/EXT-NNN.json. En el repo están las 9 con ficha de Luciano
+    (casos/externo/coreano, PR #184); las 33 las tiene la custodia. Sirve cualquiera de las dos carpetas:
+    cada texto y cada referencia se comprueban contra docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json,
+    y roles-protegida.json tiene que cubrir exactamente esos casos (en el repo es un recorte, con otro hash).
+    Todo es estafa y va a la vista principal.
     """
     origen = Path(origen).resolve()
     man = json.loads((manifiesto or MANIFIESTO_EXTERNO).read_text(encoding="utf-8"))
-    usados = {k: v for k, v in man.items() if k != "correspondencia.json"}
-    problemas = [k for k, h in sorted(usados.items())
-                 if not (origen / k).exists() or sha256((origen / k).read_bytes()) != h]
-    sobran = sorted(str(q.relative_to(origen)) for d in ("texto", "referencia") for q in (origen / d).glob("*")
-                    if str(q.relative_to(origen)) not in usados)
-    if problemas or sobran:
-        raise ValueError("El set externo no es el congelado: "
-                         + "; ".join([*(f"{k} falta o no coincide" for k in problemas), *(f"{k} sobra" for k in sobran)]))
-    textos = {q.stem: q.read_text(encoding="utf-8") for q in sorted((origen / "texto").glob("*.txt"))}
+    presentes = sorted(str(q.relative_to(origen)) for d in ("texto", "referencia") for q in (origen / d).glob("*"))
+    ids = sorted(Path(k).stem for k in presentes if k.startswith("texto/"))
     roles_todos = json.loads((origen / "roles-protegida.json").read_text(encoding="utf-8"))
-    roles = {c: {"protegida": roles_todos[c]["protegida"]} for c in textos}
+    problemas = [f"{k} no está en el manifiesto o no coincide" for k in presentes
+                 if k not in man or sha256((origen / k).read_bytes()) != man[k]]
+    problemas += [f"falta referencia/{c}.json" for c in ids if f"referencia/{c}.json" not in presentes]
+    if sorted(roles_todos) != ids:
+        problemas.append("roles-protegida.json no cubre exactamente los textos")
+    if not ids or problemas:
+        raise ValueError("El set externo no es el congelado: " + ("; ".join(problemas) or "no hay textos"))
+    textos = {c: (origen / "texto" / f"{c}.txt").read_text(encoding="utf-8") for c in ids}
+    roles = {c: {"protegida": roles_todos[c]["protegida"]} for c in ids}
     referencia = {}
-    for c in textos:
+    for c in ids:
         r = json.loads((origen / "referencia" / f"{c}.json").read_text(encoding="utf-8"))
         referencia[c] = {k: r.get(k) for k in CAMPOS_REFERENCIA} | {"alcance": "dentro", "vista": PRINCIPAL}
-    fuentes = {"MANIFIESTO-144-SET-COREANO": sha256((manifiesto or MANIFIESTO_EXTERNO).read_bytes())}
+    total = sum(k.startswith("texto/") for k in man)
+    fuentes = {"MANIFIESTO-144-SET-COREANO": sha256((manifiesto or MANIFIESTO_EXTERNO).read_bytes()),
+               "casos": f"{len(ids)} de {total} del set congelado"}
     return _escribir(destino, "externo", "externo", textos, roles, referencia, fuentes)
 
 
