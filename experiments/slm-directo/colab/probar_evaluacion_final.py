@@ -7,7 +7,8 @@
 #    - desarrollo, desde este commit;
 #    - el test reservado, desde la rama reserva/test, traída por ruta (git worktree en /content/reserva-test), con las
 #      huellas comprobadas: no entra al checkout del tag;
-#    - #144: las 33 estafas coreanas, desde la carpeta de la custodia (COLAB_EXTERNO), con sus huellas comprobadas
+#    - #144: las estafas coreanas. Por defecto, las 9 de casos/externo/coreano (en el repo); con COLAB_EXTERNO, la
+#      carpeta de la custodia con las 33. En los dos casos, con sus huellas comprobadas
 #      contra docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json.
 # 2. Humo de formato en los 3 casos de siempre (48 líneas), con la configuración y v4-corte. Si no pasa la
 #    configuración, no corre nada; si no pasa v4-corte, esa referencia no corre.
@@ -23,7 +24,7 @@ import csv, hashlib, importlib.util, json, os, pathlib, shutil, subprocess, sys,
 REPO = pathlib.Path(os.environ.get('COLAB_REPO', '/content/bitacora_tesis'))
 COMMIT = os.environ['COLAB_COMMIT']
 CONFIG = os.environ.get('COLAB_CONFIG', 'c-premisa-corte-riesgo')
-EXTERNO = os.environ.get('COLAB_EXTERNO', '')
+EXTERNO = os.environ.get('COLAB_EXTERNO') or str(REPO / 'experiments/slm-directo/casos/externo/coreano')
 head = subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip()
 print('Commit:', head, '· configuración:', CONFIG)
 if head != COMMIT:
@@ -109,8 +110,6 @@ if EXTERNO and not (CONJ / 'externo' / 'conjunto.json').exists():
 ORDEN = ['desarrollo', 'test_reservado'] + (['externo'] if EXTERNO else [])
 for nombre in ORDEN:
     print(conjuntos.resumen(conjuntos.Conjunto(CONJ / nombre)), flush=True)
-if not EXTERNO:
-    print('#144 no está (COLAB_EXTERNO vacío): corre aparte, con el mismo tag, cuando la custodia lo entregue.')
 
 COMUNES = ['--modelos', MODEL, '--num-ctx', '4096', '--seed', '42', '--hablantes', 'rol']
 DETECTORES = {
