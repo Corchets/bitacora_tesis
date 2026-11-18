@@ -401,9 +401,10 @@ nuevas mediciones operativas.
 las líneas de OTRA, como la app ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)):
 las de PROTEGIDA entran a la transcripción de la consulta siguiente, pero no
 consultan (`consulta` = `omitida`). La configuración congelada de #143 es
-`--prompts c-premisa-corte-riesgo --hablantes rol --sin-reglas --solo-otra`
-([humo](corridas/2026-11-10_config-congelada-humo/README.md) con `c-json-corte-riesgo`, y
-[prueba de sensibilidad](corridas/2026-11-10_sensibilidad-c/analisis.md), que eligió `c-premisa`).
+`--prompts c-consejos-corte-riesgo --hablantes rol --sin-reglas --solo-otra`
+([humo](corridas/2026-11-10_config-congelada-humo/README.md) con `c-json-corte-riesgo`,
+[prueba de sensibilidad](corridas/2026-11-10_sensibilidad-c/analisis.md), que eligió `c-premisa`, y
+[ADR 0008](../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md), que la cambió por `c-consejos`).
 
 `--conjunto CARPETA` corre sobre un conjunto armado con [`conjuntos.py`](conjuntos.py), fuera de `casos/`: el test
 reservado (de la rama `reserva/test`) o el set externo de #144. Lee el texto y los roles, nunca la referencia, y deja

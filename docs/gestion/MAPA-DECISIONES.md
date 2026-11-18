@@ -270,6 +270,9 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md): Gemma 4 E2B solo, sin Tito, con
   `c-premisa-corte-riesgo`, aviso con riesgo ≥ 0,3 y consulta solo en las líneas de OTRA. La configuración está
   elegida; el protocolo con que se corre la reserva sigue en [D08](#d08--congelar-protocolo-experimental).
+- **Nota del 2026-11-18 ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)):** el prompt pasa a
+  `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)). Lo eligió Mateo después de la revisión de
+  producto, por fuera de la regla escrita antes de correr, que dejaba `c-premisa-corte-riesgo`.
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base:** reglas solas, también como respaldo sin modelo de la demo.

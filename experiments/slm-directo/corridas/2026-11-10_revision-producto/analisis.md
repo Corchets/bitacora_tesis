@@ -14,6 +14,9 @@
 esa versión mira solo las 29 cotidianas (+1), y las FA totales suben de 24 a 36. Decide «producto» porque Mateo aceptó
 las etiquetas el 2026-11-18, antes de correr.
 
+**Decisión posterior (Mateo, 2026-11-18):** igual se adopta `c-consejos-corte-riesgo`, por fuera de esta regla y después de ver los
+resultados ([ADR 0008](../../../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md)). El resultado de la regla no cambia.
+
 La salida completa está en [`analisis-salida.md`](analisis-salida.md).
 
 ## Verificación de los ZIP
@@ -104,9 +107,9 @@ las estafas avisadas caen a 14–17. La latencia no cambia: alrededor de 220 ms 
 
 ## Qué queda
 
-- **La configuración de la evaluación final es `c-premisa-corte-riesgo`,** sin cambios. Con esto no queda ninguna
-  prueba de prompt pendiente en #143.
-- **Para la tesis:** con las etiquetas de producto, la congelada da 11 a 13 FA sobre 75 llamadas que no deberían
+- **Por la regla, la configuración seguía siendo `c-premisa-corte-riesgo`.** Mateo eligió `c-consejos-corte-riesgo` igual (ADR 0008), y con
+  esa corre la evaluación final. No queda ninguna prueba de prompt pendiente en #143.
+- **Para la tesis:** con las etiquetas de producto, `c-premisa` da 11 a 13 FA sobre 75 llamadas que no deberían
   avisar, y avisa en 11 o 12 de las 18 donde el aviso coincide con un consejo oficial. Es más informativo que «24 a 26
   de 94».
 - **Límite:** es la segunda búsqueda a mano sobre los mismos 140 casos, y no encontró mejora. El número honesto lo dan

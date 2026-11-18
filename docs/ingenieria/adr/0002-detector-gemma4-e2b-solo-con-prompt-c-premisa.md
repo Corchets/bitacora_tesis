@@ -9,6 +9,8 @@
   registrada en [#52](https://github.com/Corchets/bitacora_tesis/issues/52). Lo registra Luciano Grosso.
 - **Ámbito:** arquitectura
 
+> **Nota del 2026-11-18:** el prompt pasó a `c-consejos-corte-riesgo` ([ADR 0008](0008-prompt-del-detector-c-consejos.md)). Lo demás sigue vigente.
+
 ## Contexto
 
 [D09](../../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector) pedía elegir ASR y detector antes de correr la

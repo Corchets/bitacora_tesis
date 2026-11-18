@@ -52,7 +52,7 @@ e3 = h.e3
 mcnemar = _cargar('diagnostico_etapa_3', AQUI.parent / '2026-11-09_pedido-critico-etapa-3' / 'diagnostico.py').mcnemar
 num, tabla, wilson, p50_p95, celda = e3.num, e3.tabla, e3.wilson, e3.p50_p95, h.celda
 
-CONFIG = 'c-premisa-corte-riesgo'  # la congelada (PR #171); --config si la revisión de producto elige otra antes del tag
+CONFIG = 'c-consejos-corte-riesgo'  # la que eligió Mateo el 2026-11-18 tras la revisión de producto (ADR 0008)
 V4 = 'v4-corte'                    # v4 sin alcance, cortado tras la alerta (ADR 0006), en todas las líneas
 CONJUNTOS = ['desarrollo', 'test_reservado', 'externo', 'legitimas_reales']
 NOMBRES = {'desarrollo': 'Desarrollo', 'test_reservado': 'Test reservado', 'externo': 'Set externo (#144)',
@@ -65,6 +65,7 @@ MAXIMO_INVALIDAS = 0.01
 # Cada configuración candidata, sobre desarrollo (alcance-140), ya medida: el control de reproducibilidad del Colab
 # antes de tocar el test. Una configuración nueva entra acá con sus cifras de desarrollo antes del tag.
 CIFRAS_DESARROLLO = {
+    'c-consejos-corte-riesgo': {'estafas': 41, 'antes del pedido': 19, 'a tiempo': 28, 'FA': 22},  # revisión de producto
     'c-premisa-corte-riesgo': {'estafas': 40, 'antes del pedido': 19, 'a tiempo': 29, 'FA': 26},  # sensibilidad
     'c-json-corte-riesgo': {'estafas': 36, 'antes del pedido': 14, 'a tiempo': 26, 'FA': 25},     # humo
 }

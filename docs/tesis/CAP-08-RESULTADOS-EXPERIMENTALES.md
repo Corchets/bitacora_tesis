@@ -2,7 +2,7 @@
 
 # Capítulo 8: Resultados experimentales
 
-> **Configuración (2026-11-11).** La configuración final es la del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md): Gemma 4 E2B solo, con `c-premisa-corte-riesgo`. Sus resultados de desarrollo están en §8.3.3. Lo que este capítulo atribuye a Tito viejo con E2B es la configuración del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md), que queda como antecedente. La baja de falsas alarmas con Tito no es filtrado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y los resultados se informan con corpus_v2 aparte ([H01](../hallazgos/H01-corpus-v2-se-lee-aparte.md)).
+> **Configuración (2026-11-11).** La configuración final es la del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md): Gemma 4 E2B solo, con `c-premisa-corte-riesgo`. Sus resultados de desarrollo están en §8.3.3. **Nota del 2026-11-18:** el prompt pasó a `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)), elegido por Mateo por fuera de la regla de la [revisión de producto](../../experiments/slm-directo/corridas/2026-11-10_revision-producto/analisis.md); las cifras de §8.3.3 son de `c-premisa`. Lo que este capítulo atribuye a Tito viejo con E2B es la configuración del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md), que queda como antecedente. La baja de falsas alarmas con Tito no es filtrado ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md)), y los resultados se informan con corpus_v2 aparte ([H01](../hallazgos/H01-corpus-v2-se-lee-aparte.md)).
 
 ## 8.1. Descripción del corpus
 

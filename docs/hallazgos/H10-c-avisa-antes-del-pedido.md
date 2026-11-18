@@ -15,6 +15,7 @@
   - sin pedido, C avisa 9 de 10 y v4 1 de 10;
   - las FA bajan de 42 a 27 de 94.
 - **La configuración congelada** (`c-premisa-corte-riesgo`, «≥ 0,3», solo OTRA) da 40/46 estafas, 19 de 36 antes del pedido, 29 de 36 a tiempo y 26/94 FA. La repetición queda dentro de ±2.
+  - **Nota del 2026-11-18:** el prompt pasó a `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)), que en desarrollo da cifras equivalentes ([análisis](../../experiments/slm-directo/corridas/2026-11-10_revision-producto/analisis.md)).
 - Confirma la causa que daba H03: el aviso caía en el pedido porque el prompt definía el aviso como «hay un pedido».
 
 ## Qué tan seguro es

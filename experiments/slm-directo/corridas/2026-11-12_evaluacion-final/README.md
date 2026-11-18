@@ -2,21 +2,21 @@
 
 > **Estado: propuesta sin discutir.** El código está listo y probado en seco, pero **no corrió**: nadie corrió nada
 > sobre el test. Decisiones de Mateo del 2026-11-18: sin criterios de aprobación (se informan cifras con intervalo y la
-> comparación pareada), el set externo es solo de estafas, y los resultados del test van a `reserva/test`. Falta fijar la
-> configuración, que sale de la revisión de producto, antes del tag `colab/143-evaluacion-final`
+> comparación pareada), el set externo es solo de estafas, y los resultados del test van a `reserva/test`. La configuración quedó fijada el
+> 2026-11-18: `c-consejos-corte-riesgo` ([ADR 0008](../../../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md)), antes del tag `colab/143-evaluacion-final`
 > ([ADR 0005](../../../../docs/ingenieria/adr/0005-reglas-de-evaluacion-escritas-antes-de-correr.md)).
 
 ## Qué corre
 
 Corre una sola vez, fijada por tag, en modo operativo: cada llamada termina en su primer aviso.
 
-**La configuración:** `c-premisa-corte-riesgo`, la congelada del [PR #171](https://github.com/Corchets/bitacora_tesis/pull/171).
-- Es C con el párrafo del número no agendado, con la salida cortada tras el riesgo (`num_predict` 14).
+**La configuración:** `c-consejos-corte-riesgo`, la que eligió Mateo tras la revisión de producto (ADR 0008).
+- Es C con un párrafo de consejos oficiales sobre el número no agendado, con la salida cortada tras el riesgo (`num_predict` 14).
 - Avisa con «riesgo ≥ 0,3».
 - Muestra el motivo en el primer aviso y consulta solo en las líneas de OTRA.
 
-Es un parámetro (`CONFIG` en el notebook, `--config` en el análisis). Si la revisión de producto la cambia, la nueva
-entra en `CIFRAS_DESARROLLO` de `analizar.py`, con sus cifras de desarrollo, antes del tag.
+Es un parámetro (`CONFIG` en el notebook, `--config` en el análisis). Sus cifras de desarrollo (41, 19, 28 y 22 FA)
+ya están en `CIFRAS_DESARROLLO` de `analizar.py`.
 
 **Las referencias simples:**
 - **v4 sin alcance:** `v4-corte`, el JSON de v4 cortado tras la alerta
@@ -111,8 +111,7 @@ diferencia de detección con las reglas queda dentro del ruido (2 a 5 pares, p =
 `laboratorio-main` va solo `analisis.md`, con identificadores y cifras. Lo del set externo no se sube a ningún lado: la
 fuente prohíbe redistribuir derivados. Lo mismo con las legítimas reales: CallCenterEN prohíbe redistribuir.
 
-**Lo que falta antes del tag:** la configuración, que sale de la revisión de producto. Si no es `c-premisa-corte-riesgo`,
-va en `CONFIG` del notebook y en `CIFRAS_DESARROLLO` de `analizar.py`, con sus cifras de desarrollo.
+**La configuración ya está fijada:** `c-consejos-corte-riesgo`, en `CONFIG` del notebook y en `CIFRAS_DESARROLLO` de `analizar.py`.
 
 ## Anotación alternativa de legítimas
 
@@ -129,7 +128,7 @@ La revisión de producto puede reanotar legítimas. El análisis acepta
 - **`vista`:** cualquier valor distinto de `principal` saca el caso de la vista principal.
 - La anotación se valida igual que una referencia: una legítima no lleva `T_R`.
 - **También acepta tal cual `etiquetas-producto.json`,** el de la revisión de producto
-  (`corridas/2026-11-10_revision-producto/`, rama `exp/143-revision-producto`, sin integrar).
+  (`corridas/2026-11-10_revision-producto/`).
   - Cuentan como FA solo las legítimas `no_avisar`.
   - Las `tolerable` y la `avisar` pasan a vistas aparte, como en su versión «producto».
   - Solo etiqueta las 94 legítimas de desarrollo, así que el test no cambia.

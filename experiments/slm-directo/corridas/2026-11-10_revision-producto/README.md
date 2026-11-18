@@ -6,7 +6,8 @@
 > los tres textos, sacó de la regla la vía para pasar solo por bajar las FA, y dio el OK para correr. La regla de abajo
 > es la del tag `colab/143-revision-producto`, anterior a cualquier resultado.
 >
-> **Resultado (2026-11-18): no pasa ninguna, queda `c-premisa-corte-riesgo`.** Está en [`analisis.md`](analisis.md).
+> **Resultado (2026-11-18): no pasa ninguna.** Está en [`analisis.md`](analisis.md). Mateo adoptó igual `c-consejos-corte-riesgo`,
+> por fuera de la regla ([ADR 0008](../../../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md)).
 
 ## Qué hay en esta carpeta
 

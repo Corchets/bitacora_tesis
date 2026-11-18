@@ -365,8 +365,9 @@ OTRA (`--seguir-tras-aviso`):
 > **Estado: propuesta sin discutir.** Tres variantes de la configuración congelada (`c-premisa-corte-riesgo`), con un
 > solo párrafo cambiado cada una. La regla está escrita antes de correr en
 > [`corridas/2026-11-10_revision-producto/README.md`](../corridas/2026-11-10_revision-producto/README.md). Mateo dio el
-> OK a las etiquetas, a los textos y a correr el 2026-11-18. **Corrida el 2026-11-18: no pasa ninguna y queda
-> `c-premisa-corte-riesgo`** ([análisis](../corridas/2026-11-10_revision-producto/analisis.md)).
+> OK a las etiquetas, a los textos y a correr el 2026-11-18. **Corrida el 2026-11-18: no pasa ninguna**
+> ([análisis](../corridas/2026-11-10_revision-producto/analisis.md)). Mateo adoptó igual `c-consejos-corte-riesgo`
+> ([ADR 0008](../../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md)).
 
 **Las variantes:**
 - `c-codigo-corte-riesgo` pone la regla del código y la clave por intención, no por quién llama;
