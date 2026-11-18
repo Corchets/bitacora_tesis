@@ -216,18 +216,32 @@ class TestConjuntos(_ConReserva):
                          conj.roles()["CV2-D-L-BANCO-001"]["protegida"])
         self.assertTrue(all(conj.crudo(i) == (casos.DIR_TEXTO / f"{i}.txt").read_text(encoding="utf-8") for i in conj.ids))
 
-    def test_el_externo_viene_de_la_custodia_con_el_mismo_formato(self):
+    def test_el_externo_es_el_set_congelado_de_144(self):
         custodia = self.tmp / "custodia"
         (custodia / "texto").mkdir(parents=True)
+        (custodia / "referencia").mkdir()
         (custodia / "texto" / "EXT-001.txt").write_text("A: Hola.\nB: Decime el código que te llegó.\n", encoding="utf-8")
-        (custodia / "roles.json").write_text(json.dumps({"EXT-001": {"protegida": "A"}}), encoding="utf-8")
-        (custodia / "referencia.json").write_text(json.dumps({"EXT-001": {
-            "clase": "vishing", "t_r_linea": 2, "t_c_linea": None, "vista": "principal"}}), encoding="utf-8")
-        conj = conjuntos.preparar_externo(custodia, self.tmp / "ext")
+        (custodia / "roles-protegida.json").write_text(json.dumps({"EXT-001": {"protegida": "A", "origen": "externo"}}),
+                                                       encoding="utf-8")
+        (custodia / "referencia" / "EXT-001.json").write_text(json.dumps({
+            "case_id": "EXT-001", "grupo": "externo", "clase": "vishing", "t_r_linea": 2, "t_c_linea": None,
+            "notas": "x"}), encoding="utf-8")
+        manifiesto = self.tmp / "manifiesto-144.json"
+        archivos = ["texto/EXT-001.txt", "roles-protegida.json", "referencia/EXT-001.json"]
+        huellas = {a: conjuntos.sha256((custodia / a).read_bytes()) for a in archivos}
+        manifiesto.write_text(json.dumps({**huellas, "correspondencia.json": "0" * 64}), encoding="utf-8")
+        conj = conjuntos.preparar_externo(custodia, self.tmp / "ext", manifiesto=manifiesto)
         self.assertEqual((conj.nombre, conj.particion, conj.ids), ("externo", "externo", ["EXT-001"]))
-        (custodia / "roles.json").write_text(json.dumps({}), encoding="utf-8")
+        self.assertEqual(conj.roles(), {"EXT-001": {"protegida": "A"}})
+        self.assertEqual(conj.referencia()["EXT-001"]["vista"], conjuntos.PRINCIPAL)
+        self.assertEqual(conj.referencia()["EXT-001"]["t_r_linea"], 2)
+        (custodia / "texto" / "EXT-001.txt").write_text("A: Hola.\nB: Otra cosa.\n", encoding="utf-8")
         with self.assertRaises(ValueError):
-            conjuntos.preparar_externo(custodia, self.tmp / "ext2")
+            conjuntos.preparar_externo(custodia, self.tmp / "ext2", manifiesto=manifiesto)
+        with self.assertRaises(ValueError):  # la carpeta sintética no es el set congelado real
+            conjuntos.preparar_externo(custodia, self.tmp / "ext3")
+        self.assertEqual(len([k for k in json.loads(conjuntos.MANIFIESTO_EXTERNO.read_text(encoding="utf-8"))
+                              if k.startswith("texto/")]), 33)
 
 
 class _ConServidor(_ConReserva):
@@ -346,47 +360,6 @@ class TestCifras(unittest.TestCase):
         self.assertAlmostEqual(an.discordantes(a, b)[2], 2 / 2 ** 7)
         self.assertEqual(an.discordantes(a, a)[2], 1.0)
 
-    def _ex(self, aciertos, fa, n=40):
-        """Éxitos de una vista con n estafas con pedido (a tiempo las de `aciertos`) y 10 legítimas (FA las < fa)."""
-        estafas = {i: i in aciertos for i in range(n)}
-        return {"estafas": estafas, "a tiempo": estafas, "FA": {f"l{i}": i < fa for i in range(10)}}
-
-    def resultado(self, test, externo=None):
-        return {c: ok for c, _, ok in an.criterios(test, externo)}
-
-    def test_le_gana_a_una_referencia_si_gana_en_una_cifra_y_no_pierde_en_ninguna(self):
-        cfg = self._ex(set(range(30)), fa=2)
-        nombre = "le gana a {} sin perder (estafas, a tiempo, FA)"
-        casos_ = {
-            "detecta 10 más, mismas FA": (self._ex(set(range(20)), fa=2), True),
-            "detecta 3 menos (ruido) y tiene 7 FA menos": (self._ex(set(range(33)), fa=9), True),
-            "empata en todo": (self._ex(set(range(30)), fa=2), False),
-            "detecta 10 menos aunque tenga 7 FA menos": (self._ex(set(range(40)), fa=9), False),
-            "detecta 10 más y suma 2 FA (ruido)": (self._ex(set(range(20)), fa=0), True),
-        }
-        for descripcion, (ref, esperado) in casos_.items():
-            with self.subTest(descripcion):
-                test = {"config": cfg, an.V4: ref, "reglas v1": ref}
-                self.assertIs(self.resultado(test)[nombre.format(an.V4)], esperado)
-        # 7 FA de más con p < 0,05 es perder, aunque detecte 10 más.
-        test = {"config": self._ex(set(range(30)), fa=9), an.V4: self._ex(set(range(20)), fa=2),
-                "reglas v1": self._ex(set(range(20)), fa=2)}
-        self.assertFalse(self.resultado(test)[nombre.format(an.V4)])
-
-    def test_pisos_y_externo(self):
-        test = {"config": self._ex(set(range(30)), fa=2), an.V4: self._ex(set(range(20)), fa=2),
-                "reglas v1": self._ex(set(range(20)), fa=2)}
-        r = self.resultado(test)
-        self.assertTrue(r["límite inferior de a tiempo ≥ 50%"])               # 30/40 → [60–86]
-        self.assertIsNone(r["#144 cae como mucho 20% en estafas avisadas"])   # no corrió
-        externo = {"config": {"estafas": {i: i < 10 for i in range(20)}}}      # 50 % contra 75 %
-        self.assertFalse(self.resultado(test, externo)["#144 cae como mucho 20% en estafas avisadas"])
-        externo = {"config": {"estafas": {i: i < 12 for i in range(20)}}}      # 60 % contra 75 %
-        self.assertTrue(self.resultado(test, externo)["#144 cae como mucho 20% en estafas avisadas"])
-        bajo = {**test, "config": self._ex(set(range(22)), fa=2)}              # 22/40 → [40–69]
-        self.assertFalse(self.resultado(bajo)["límite inferior de a tiempo ≥ 50%"])
-        self.assertIsNone(self.resultado({})["la configuración en el test"])
-
 
 class TestAnalisis(_ConServidor):
     def test_informe_entero_con_la_anotacion_alternativa(self):
@@ -409,7 +382,7 @@ class TestAnalisis(_ConServidor):
         self.assertIn("3/4", fila)
         self.assertIn("2/3", fila)
         self.assertIn("1/3", fila)
-        self.assertIn("## Criterios", texto)
+        self.assertNotIn("## Criterios", texto)
         self.assertIn("## Con la anotación alternativa", texto)
         alternativa = texto.split("## Con la anotación alternativa")[1]
         fila_alt = next(l for l in alternativa.splitlines() if l.startswith(f"| `{CONFIG}` |"))

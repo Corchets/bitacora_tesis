@@ -7,7 +7,8 @@
 #    - desarrollo, desde este commit;
 #    - el test reservado, desde la rama reserva/test, traída por ruta (git worktree en /content/reserva-test), con las
 #      huellas comprobadas: no entra al checkout del tag;
-#    - #144, desde la carpeta de la custodia (COLAB_EXTERNO), si se la pasa.
+#    - #144: las 33 estafas coreanas, desde la carpeta de la custodia (COLAB_EXTERNO), con sus huellas comprobadas
+#      contra docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json.
 # 2. Humo de formato en los 3 casos de siempre (48 líneas), con la configuración y v4-corte. Si no pasa la
 #    configuración, no corre nada; si no pasa v4-corte, esa referencia no corre.
 # 3. Desarrollo: la configuración (roles, solo OTRA), v4-corte (roles, todas las líneas) y las reglas v1 y v2, en modo
@@ -15,7 +16,7 @@
 #    analizar.control_desarrollo). Si no, para y no corre el test.
 # 4. El test reservado y después #144, con lo mismo. Cada corrida terminada baja como ZIP; el análisis va después, con
 #    corridas/2026-11-12_evaluacion-final/analizar.py.
-# COLAB_REPO, COLAB_SALIDA, COLAB_RESERVA y COLAB_PRUEBA_RESERVA solo existen para la prueba en seco.
+# COLAB_REPO, COLAB_SALIDA, COLAB_RESERVA, COLAB_PRUEBA_RESERVA y COLAB_PRUEBA_EXTERNO solo existen para la prueba en seco.
 
 import csv, hashlib, importlib.util, json, os, pathlib, shutil, subprocess, sys, time, urllib.request
 
@@ -101,7 +102,10 @@ if not (CONJ / 'desarrollo' / 'conjunto.json').exists():
 if not (CONJ / 'test_reservado' / 'conjunto.json').exists():
     conjuntos.preparar_test(RESERVA, CONJ, **PRUEBA)
 if EXTERNO and not (CONJ / 'externo' / 'conjunto.json').exists():
-    conjuntos.preparar_externo(pathlib.Path(EXTERNO), CONJ)
+    PRUEBA_EXT = {}
+    if os.environ.get('COLAB_PRUEBA_EXTERNO'):  # solo la prueba en seco: un set sintético con su propio manifiesto
+        PRUEBA_EXT = {'manifiesto': pathlib.Path(os.environ['COLAB_PRUEBA_EXTERNO'])}
+    conjuntos.preparar_externo(pathlib.Path(EXTERNO), CONJ, **PRUEBA_EXT)
 ORDEN = ['desarrollo', 'test_reservado'] + (['externo'] if EXTERNO else [])
 for nombre in ORDEN:
     print(conjuntos.resumen(conjuntos.Conjunto(CONJ / nombre)), flush=True)
