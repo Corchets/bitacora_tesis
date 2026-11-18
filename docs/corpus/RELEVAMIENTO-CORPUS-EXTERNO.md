@@ -623,3 +623,15 @@ salientes.
 > no tienen ficha. Las dos publicadas también son salientes; no suman legítimas entrantes al
 > set ni lo cambian. Sirven para ver si el detector da falsas alarmas en soporte real, sobre
 > todo en 119349, donde soporte pide la contraseña (T9) y el cliente la dicta (T10).
+
+> **Actualización del 2026-11-18:** Luciano decidió publicar, para que #52 pueda correrlas, las
+> conversaciones con ficha que seguían fuera de Git, en [`casos/externo/`](../../experiments/slm-directo/casos/externo/README.md):
+> las 16 de inglés de §7.4 y KO-01 a KO-09 del set coreano, con sus referencias. **Esto revierte §5.3
+> y §8.2 para esas 9 conversaciones:** el `DATA.md` de KorCCVi pide no redistribuir derivados y no hay
+> permiso de la fuente ni del FSS. También deja de valer, para ellas, lo que dice §8.3 sobre que las
+> conversaciones no son públicas y que la tabla entre KO y EXT queda en custodia. KO-10 a KO-33 no
+> tienen ficha y siguen fuera de Git. El manifiesto no cambia: los 18 archivos publicados coinciden
+> con sus hashes.
+>
+> **Estado: propuesta sin discutir.** El equipo tiene que confirmar la publicación y decidir si esas
+> 9 conversaciones se informan en #52 como test, con el límite de que ya no están en custodia.
