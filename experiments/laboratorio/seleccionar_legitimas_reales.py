@@ -101,5 +101,50 @@ def main() -> None:
     print(f"{n} candidatos; SHA-256 de candidatos.json: {hashlib.sha256(texto.encode()).hexdigest()}")
 
 
+def segunda_tanda(origen: Path, salida: Path) -> None:
+    """Segunda tanda, decidida el 2026-11-18 después de anotar la primera y antes de correr ningún detector.
+
+    En la primera, las 42 de seguros y equipamiento médico resultaron captación de Medicare o esquemas que el
+    OIG describe como fraude; solo las de telecomunicaciones son legítimas. Se sortean 28 más de ese estrato,
+    con el mismo filtro, entre las elegibles que no salieron en la primera (`Random(20261119)`), como CAND-51
+    a CAND-78. No se reemplaza ni se vuelve a sortear nada de la primera tanda.
+    """
+    datos = json.loads((salida / "candidatos.json").read_text(encoding="utf-8"))
+    if "segunda_tanda" in datos:
+        sys.exit("la segunda tanda ya se sorteó")
+    zf, patron, _ = ESTRATOS["telecomunicaciones"]
+    z = zipfile.ZipFile(origen / zf)
+    ya = {c["archivo"] for c in datos["candidatos"].values()}
+    elegibles = []
+    for nombre in sorted(z.namelist()):
+        if "__MACOSX" in nombre or not patron.match(nombre.split("/")[-1]) or nombre in ya:
+            continue
+        j = json.loads(z.read(nombre))
+        if 60 <= j["audio_duration"] <= 900 and len(j["words"]) >= 80:
+            elegibles.append(nombre)
+    elegidos = random.Random(20261119).sample(elegibles, 28)
+    print(f"telecomunicaciones, segunda tanda: {len(elegibles)} elegibles, 28 sorteados")
+    nuevos = {}
+    for i, nombre in enumerate(elegidos, 51):
+        alias = f"CAND-{i:02d}"
+        crudo = z.read(nombre)
+        j = json.loads(crudo)
+        segs = segmentos(j["words"])
+        nuevos[alias] = {"estrato": "telecomunicaciones", "zip": zf, "archivo": nombre,
+                         "sha256_fuente": hashlib.sha256(crudo).hexdigest(),
+                         "duracion_s": j["audio_duration"], "palabras": len(j["words"]), "segmentos": len(segs)}
+        lineas = [f"# {alias} · {j['audio_duration']} s · {len(segs)} segmentos", ""]
+        lineas += [f"[{k} | {t:.1f} s] {texto}" for k, (t, texto) in enumerate(segs, 1)]
+        (salida / "fuente" / f"{alias}.md").write_text("\n".join(lineas) + "\n", encoding="utf-8")
+    datos["candidatos"].update(nuevos)
+    datos["segunda_tanda"] = {"semilla": 20261119, "alias": sorted(nuevos)}
+    texto = json.dumps(datos, ensure_ascii=False, indent=1) + "\n"
+    (salida / "candidatos.json").write_text(texto, encoding="utf-8")
+    print(f"SHA-256 de candidatos.json: {hashlib.sha256(texto.encode()).hexdigest()}")
+
+
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 4 and sys.argv[1] == "segunda":
+        segunda_tanda(Path(sys.argv[2]), Path(sys.argv[3]))
+    else:
+        main()
