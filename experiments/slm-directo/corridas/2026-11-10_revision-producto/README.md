@@ -5,6 +5,8 @@
 > ([análisis de la sensibilidad](../2026-11-10_sensibilidad-c/analisis.md)). El 2026-11-18 Mateo aceptó las etiquetas y
 > los tres textos, sacó de la regla la vía para pasar solo por bajar las FA, y dio el OK para correr. La regla de abajo
 > es la del tag `colab/143-revision-producto`, anterior a cualquier resultado.
+>
+> **Resultado (2026-11-18): no pasa ninguna, queda `c-premisa-corte-riesgo`.** Está en [`analisis.md`](analisis.md).
 
 ## Qué hay en esta carpeta
 
@@ -16,6 +18,7 @@
 | [`HALLAZGOS.md`](HALLAZGOS.md) | Los resultados de la sensibilidad cruzados con las etiquetas, y la revisión del prompt | Después de ver resultados: no decide |
 | [`VARIANTES.md`](VARIANTES.md) | Los tres textos, con su porqué y sus fuentes | Después de ver resultados; los textos salen de la política y de las fuentes |
 | [`analizar.py`](analizar.py) | Aplica la regla de abajo | Antes de correr |
+| [`analisis.md`](analisis.md) y [`analisis-salida.md`](analisis-salida.md) | El resultado de la regla, la verificación de los ZIP y la lectura | Después de correr (2026-11-18) |
 
 ## Por qué
 
