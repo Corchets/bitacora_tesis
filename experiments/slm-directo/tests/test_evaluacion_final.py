@@ -242,9 +242,9 @@ class TestConjuntos(_ConReserva):
             conjuntos.preparar_externo(custodia, self.tmp / "ext3")
         self.assertEqual(len([k for k in json.loads(conjuntos.MANIFIESTO_EXTERNO.read_text(encoding="utf-8"))
                               if k.startswith("texto/")]), 33)
-        # Las 9 coreanas con ficha que están en el repo (PR #184) son parte del set congelado.
+        # Las 33 coreanas del repo (PR #185) son el set congelado entero.
         repo = conjuntos.preparar_externo(RAIZ / "casos/externo/coreano", self.tmp / "ext-repo")
-        self.assertEqual((len(repo.ids), repo.datos["fuentes"]["casos"]), (9, "9 de 33 del set congelado"))
+        self.assertEqual((len(repo.ids), repo.datos["fuentes"]["casos"]), (33, "33 de 33 del set congelado"))
 
 
 class _ConServidor(_ConReserva):

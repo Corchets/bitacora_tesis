@@ -7,8 +7,7 @@
 #    - desarrollo, desde este commit;
 #    - el test reservado, desde la rama reserva/test, traída por ruta (git worktree en /content/reserva-test), con las
 #      huellas comprobadas: no entra al checkout del tag;
-#    - #144: las estafas coreanas. Por defecto, las 9 de casos/externo/coreano (en el repo); con COLAB_EXTERNO, la
-#      carpeta de la custodia con las 33. En los dos casos, con sus huellas comprobadas
+#    - #144: las estafas coreanas. Las 33 de casos/externo/coreano (en el repo); COLAB_EXTERNO cambia la carpeta. En los dos casos, con sus huellas comprobadas
 #      contra docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json.
 # 2. Humo de formato en los 3 casos de siempre (48 líneas), con la configuración y v4-corte. Si no pasa la
 #    configuración, no corre nada; si no pasa v4-corte, esa referencia no corre.

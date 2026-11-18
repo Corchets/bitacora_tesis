@@ -34,7 +34,7 @@ como `desarrollo`.
 |---|---|---|---|
 | `desarrollo` | Los 244 de `laboratorio-main` | [`alcance-140`](../../casos/listas/alcance-140.txt): 46 estafas (36 con pedido y 15 con cumplimiento) y 94 legítimas (29 cotidianas, 38 con pedido razonable y 27 con mención sin pedido) | Los otros 104, por grupo |
 | `test_reservado` | La rama `reserva/test` (9089b19), traída por ruta en Colab | 100 estafas `CV2-T-V` (80 con pedido, 32 con cumplimiento y 20 sin pedido) y las 56 legítimas `ENT-T` (14 cotidianas, 26 con pedido razonable y 16 con mención sin pedido) | Las 100 legítimas viejas `CV2-T-L`: 26 dentro del alcance y 74 fuera |
-| `externo` (#144) | El set coreano congelado ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)). Por defecto, las 9 con ficha que están en [`casos/externo/coreano`](../../casos/externo/coreano) ([PR #184](https://github.com/Corchets/bitacora_tesis/pull/184)); si Luciano pasa la carpeta con las 33, esas | Las estafas coreanas de KorCCVi: 9 (7 con pedido, 5 con cumplimiento) o 33 (27 con pedido y 6 sin pedido) | — |
+| `externo` (#144) | El set coreano congelado ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)), entero en [`casos/externo/coreano`](../../casos/externo/coreano) ([PR #185](https://github.com/Corchets/bitacora_tesis/pull/185)) | Las 33 estafas coreanas de KorCCVi (27 con pedido, 16 con cumplimiento y 6 sin pedido) | — |
 
 - **Las huellas del test se comprueban antes de armarlo:**
   - cada `CV2-T`, contra [`MANIFIESTO-CORPUS-V2.json`](../../casos/MANIFIESTO-CORPUS-V2.json);
@@ -147,8 +147,8 @@ Se miraron solo el formato, las claves, los manifiestos y las huellas, sin leer 
 
 ### El set externo: nada
 
-#144 lo dejó congelado el 2026-11-11: formato de casos, roles y `T_R`/`T_C`, con las huellas en el manifiesto. Las 9
-con ficha están en el repo desde el 2026-11-18 y corren solas; las otras 24 están en la carpeta de Luciano. El inglés
+#144 lo dejó congelado el 2026-11-11: formato de casos, roles y `T_R`/`T_C`, con las huellas en el manifiesto. Las 33
+están en el repo desde el 2026-11-18 (PR #185) y corren solas. El inglés
 (`casos/externo/ingles`) queda afuera: solo 2 de las 16 son entrantes (#151). Algunas llamadas reales son largas: las líneas que no entran en `num_ctx` 4096
 son inválidas (`contexto_excedido`) y no avisan. Se informa.
 
