@@ -1,0 +1,289 @@
+{
+  "fecha": "2026-11-06",
+  "idioma": "Español (España, es-ES)",
+  "modelo_solicitado": "gemini-3.8-flash-high",
+  "modelo_usado": "Gemini 3.8 Flash (High)",
+  "effort": "high",
+  "evidencia_modelo": "Modelo verificado por evidencia del coordinador por lanzamiento CLI y pantalla (gemini-3.8-flash-high, effort high). No constituye validación humana.",
+  "tarea": {
+    "issue": "Corchets/bitacora_tesis#144",
+    "descripcion": "Muestras exploratorias de corpus externo ES-Port para evaluación de Luciano Grosso",
+    "objetivo_autorizado": "Preparar muestras exploratorias para que Luciano lea y marque qué fuentes y casos sirven; NO preparar ni ejecutar el test final",
+    "condicion_exclusion_test_futuro": "Las conversaciones leídas en este trabajo exploratorio quedan estrictamente fuera del futuro test de generalización",
+    "politica_decisiones": "No se declara aprobado ningún caso, no se ejecutan detectores, no se cierran D07 ni D08. D09 permanece resuelta en el mapa (ADR 0001).",
+    "alcance_detector_issue_151": "El alcance vigente aprobado del detector es sobre llamadas entrantes de números no agendados (#151). Se documenta que ambas llamadas son iniciadas por el usuario (salientes desde la perspectiva de la persona protegida) y quedarían fuera del alcance operativo en tiempo real."
+  },
+  "archivos_entrega": {
+    "markdown": "/Users/lucianogrosso/Downloads/ISSUE-144-ESPORT-2026-11-06.md",
+    "json_procedencia": "/Users/lucianogrosso/Downloads/ISSUE-144-ESPORT-2026-11-06-PROCEDENCIA.json"
+  },
+  "fuente_primaria": {
+    "corpus": "Spanish Technical Support (ES-Port) Corpus",
+    "autores": "Laura García-Sardiña, Manex Serras, and Arantza del Pozo",
+    "ano": 2018,
+    "publicacion": "Proceedings of the Eleventh International Conference on Language Resources and Evaluation (LREC 2018), Miyazaki, Japan. European Language Resources Association (ELRA)",
+    "paper_url": "https://aclanthology.org/L18-1125.pdf",
+    "repositorio_github": "https://github.com/Vicomtech/esport-corpus",
+    "revision_commit_readme": "b575ec6d7925ea4f83ef00a302682a6f58ad788d",
+    "descarga_url": "https://datasets.vicomtech.org/di01-esport-corpus/esport-corpus.zip",
+    "archivo_zip_local": "/var/folders/jb/z9g4zrkd4w770rfrl3brsj800000gn/T/issue-144-esport-corpus.zip",
+    "sha256_zip": "0017a2d6bbbf57d2971872c7a8eb7c1bf266c76dfb8ba2736c17086a948f1f2c",
+    "tamano_zip_bytes": 3681616,
+    "archivos_json_coordinador": [
+      {
+        "ruta": "/var/folders/jb/z9g4zrkd4w770rfrl3brsj800000gn/T/issue144-inputs-coordinador/esport-119349-raw-private.json",
+        "sha256": "3f5e25222f488f485dcfca31cec37a73ced4a0d17a3ee957ebf6eae94f4c43bd"
+      },
+      {
+        "ruta": "/var/folders/jb/z9g4zrkd4w770rfrl3brsj800000gn/T/issue144-inputs-coordinador/esport-120967-raw-private.json",
+        "sha256": "44cded45e8db6645bac2ec0598d88beca0cf6a88eb88022eafd5e8488a0433cc"
+      }
+    ],
+    "licencia": "Creative Commons Attribution-ShareAlike 3.0 Spain (CC BY-SA 3.0 ES)",
+    "licencia_url": "http://creativecommons.org/licenses/by-sa/3.0/es/",
+    "origen_datos": "Real (grabaciones directas de soporte técnico corporativo en España, transcritas y anonimizadas)",
+    "aclaracion_etimologica": "Corpus de soporte técnico en español (Spanish Technical Support). No debe confundirse con portugués por la similitud del nombre."
+  },
+  "casos": [
+    {
+      "id_caso": "esport_dialogue.119349.json",
+      "file_id": "dialogue.119349.json",
+      "ruta_en_zip": "esport/esport_dialogue.119349.json",
+      "sha256": "3f5e25222f488f485dcfca31cec37a73ced4a0d17a3ee957ebf6eae94f4c43bd",
+      "tamano_bytes": 31321,
+      "origen": "Real (soporte técnico corporativo)",
+      "idioma_original": "es-ES",
+      "idioma_presentado": "es-ES (conservado original sin traducir ni adaptar a rioplatense)",
+      "hablante_a": "spk1 (Soporte técnico Augusto, Fabricacuatro)",
+      "hablante_b": "spk2 (Cliente Ramiro, Agencia Tend Companyname)",
+      "direccion_observable": "Saliente (el cliente llama a soporte)",
+      "alcance_151_evaluacion": "Quedaría fuera de activación en tiempo real por ser saliente del usuario",
+      "conteos": {
+        "total_turnos_json": 38,
+        "turnos_hablados": 37,
+        "turnos_vacios_acusticos": 1,
+        "indices_turnos_vacios": [
+          38
+        ],
+        "turnos_con_solapamiento": 1,
+        "indices_solapamientos": [
+          14
+        ],
+        "total_utterances": 71,
+        "utterances_hablante_a": 22,
+        "utterances_hablante_b": 49,
+        "palabras_original_raw": 398,
+        "palabras_limpio": 402,
+        "palabras_hablante_a_limpio": 122,
+        "palabras_hablante_b_limpio": 280
+      },
+      "sustituciones_seguridad": [
+        {
+          "marcador": "[CREDENCIAL-1]",
+          "turnos_afectados": [
+            10
+          ],
+          "tipo": "contraseña_cliente_preexistente",
+          "justificacion": "El cliente dicta su contraseña de correo letra por letra y número por número. Se sustituye para evitar registro o fuga de credenciales potenciales."
+        },
+        {
+          "marcador": "[CREDENCIAL-2]",
+          "turnos_afectados": [
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34
+          ],
+          "tipo": "contraseña_nueva_dictada_por_soporte",
+          "agrupacion_letra_a_letra": {
+            "descripcion": "El operador dicta 8 caracteres uno a uno (turnos 19-33 impares) y el cliente confirma cada uno (turnos 20-32 pares, y turno 34 inicial). En el turno 34 el cliente realiza además la verificación completa de los 8 caracteres probándolos. Se omite cualquier carácter crudo.",
+            "turnos_dictado_operador": [
+              19,
+              21,
+              23,
+              25,
+              27,
+              29,
+              31,
+              33
+            ],
+            "turnos_confirmacion_cliente": [
+              20,
+              22,
+              24,
+              26,
+              28,
+              30,
+              32,
+              34
+            ]
+          },
+          "justificacion": "Se reemplaza cada carácter dictado y la corroboración final para evitar almacenamiento de contraseñas."
+        }
+      ],
+      "incidencias_diarizacion_orden": [
+        {
+          "turno": 14,
+          "tipo": "solapamiento_multihablante",
+          "descripcion": "spk1 completa oración ('compañero mío.') y spk2 emite 'Ah,'. Segmentado en subturnos 14a y 14b agrupados por hablante; la alternancia microtemporal exacta es indeterminable sin audio."
+        },
+        {
+          "turno": 38,
+          "tipo": "turno_acustico_vacio",
+          "descripcion": "Solo contiene eventos de ruido ambiental (noise-b). Documentado como vacío sin generar línea hablada."
+        }
+      ],
+      "observaciones_ia": {
+        "tema": "Bloqueo de cuenta de correo y reseteo de clave",
+        "ambiguedad_d07": "Contiene solicitud observable de contraseña en Turno 9 (candidata REQUEST_SECRET) y dictado en Turno 10 en una llamada de soporte empresarial. Evidencia que el pedido de clave se manifiesta en soporte real y no puede catalogarse a priori como falsa alarma ni como acierto sin adjudicación humana colegiada."
+      }
+    },
+    {
+      "id_caso": "esport_dialogue.120967.json",
+      "file_id": "dialogue.120967.json",
+      "ruta_en_zip": "esport/esport_dialogue.120967.json",
+      "sha256": "44cded45e8db6645bac2ec0598d88beca0cf6a88eb88022eafd5e8488a0433cc",
+      "tamano_bytes": 50310,
+      "origen": "Real (soporte técnico corporativo)",
+      "idioma_original": "es-ES",
+      "idioma_presentado": "es-ES (conservado original sin traducir ni adaptar a rioplatense)",
+      "hablante_a": "spk1 (Soporte técnico Newentere)",
+      "hablante_b": "spk2 (Cliente titular del dominio Aranjuez tres mil punto com)",
+      "direccion_observable": "Saliente (el cliente llama a soporte)",
+      "alcance_151_evaluacion": "Quedaría fuera de activación en tiempo real por ser saliente del usuario",
+      "conteos": {
+        "total_turnos_json": 76,
+        "turnos_hablados": 74,
+        "turnos_vacios_acusticos": 2,
+        "indices_turnos_vacios": [
+          17,
+          76
+        ],
+        "turnos_con_solapamiento": 17,
+        "indices_solapamientos": [
+          7,
+          21,
+          24,
+          26,
+          28,
+          34,
+          36,
+          46,
+          48,
+          50,
+          54,
+          58,
+          61,
+          63,
+          69,
+          72,
+          75
+        ],
+        "total_utterances": 130,
+        "utterances_hablante_a": 66,
+        "utterances_hablante_b": 64,
+        "palabras_original_raw": 721,
+        "palabras_limpio": 734,
+        "palabras_hablante_a_limpio": 363,
+        "palabras_hablante_b_limpio": 371
+      },
+      "sustituciones_seguridad": [
+        {
+          "marcador": "Pre-anonimizado en fuente",
+          "turnos_afectados": [
+            1,
+            12,
+            51
+          ],
+          "tipo": "nombres_y_dominios_anonimizados_por_autores",
+          "justificacion": "El corpus original contiene sustituciones automáticas para entidades y dominios ('Newentere', 'Aranjuez tres mil punto com'). No se solicitaron ni dictaron credenciales sensibles en este caso."
+        }
+      ],
+      "incidencias_diarizacion_orden": [
+        {
+          "turnos": [
+            7,
+            21,
+            24,
+            26,
+            28,
+            34,
+            36,
+            46,
+            48,
+            50,
+            54,
+            58,
+            61,
+            63,
+            69,
+            72,
+            75
+          ],
+          "tipo": "solapamiento_multihablante",
+          "descripcion": "17 turnos presentan habla simultánea entre spk1 y spk2 desglosados en subturnos a y b por hablante. El orden no expresa cronología de habla simultánea y la alternancia exacta es indeterminable sin audio (especialmente en T24, T72, T75)."
+        },
+        {
+          "turno": 17,
+          "tipo": "turno_acustico_vacio",
+          "descripcion": "Pausa técnica en espera con música de fondo (noise-musique). Sin habla."
+        },
+        {
+          "turno": 76,
+          "tipo": "turno_acustico_vacio",
+          "descripcion": "Cierre de comunicación con ruido de desconexión (noise-b). Sin habla."
+        }
+      ],
+      "observaciones_ia": {
+        "tema": "Recepción masiva de spam y migración de cuentas a nuevo hosting",
+        "ambiguedad_d07": "Llamada legítima de soporte sin solicitudes de alto riesgo ni credenciales. No constituye una referencia humana decidida; campos de evaluación vacíos para Luciano."
+      }
+    }
+  ],
+  "herramientas_utilizadas": [
+    "python3 (procesamiento JSON, conteo de palabras, desambiguación y limpieza documental)",
+    "unzip (extracción de archivos de zip fuera de git)",
+    "shasum -a 256 (verificación criptográfica de integridad)"
+  ],
+  "prompt_instrucciones_registrado_completo": "Sos un worker supervisado para el issue #144 de Corchets/bitacora_tesis. El coordinador integra. Objetivo autorizado: preparar muestras exploratorias para que Luciano lea y marque qué fuentes y casos sirven, NO preparar ni ejecutar el test final. Las conversaciones leídas quedan fuera del futuro test. No ejecutar detectores, no cambiar prompts ni elegir configuración, no anotar nada como revisión humana. Trabajás en /Users/lucianogrosso/orca/workspaces/bitacora_tesis/laboratorio-luciano. Leé AGENTS.md, docs/gestion/MAPA-DECISIONES.md (D07/D08/D09), docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md y docs/corpus/MANUAL-ANOTACION.md. Otros workers trabajan por idioma: SOLO podés escribir los DOS archivos de entrega asignados en Downloads; NINGÚN archivo del repositorio, git add/commit/push ni archivos compartidos. Descargá fuentes únicamente fuera de Git, en temporal propio. No crear carpetas del repositorio ni leer la reserva propia CV2-T. No enviar mensajes a GitHub/email/Slack. El usuario pidió 1 agente por idioma, Terra High para coreano y Flash High para los otros; no delegar en otros modelos/agentes.\n\nENTREGA: 1 Markdown legible editable + 1 JSON de procedencia. Incluir enlaces primarios precisos, fecha 2026-11-06, revisión/commit de fuente, IDs originales inequívocos, licencia y límites de uso, origen real/sintético. Explicar que estos 2 casos son exploración y quedan fuera del test; no declarar aprobado nada. Conservar conversación completa, turnos numerados y roles A/B (si hay más, C); NO resumir, truncar, completar, inventar diálogo ni mejorar el pedido; no argentinizar instituciones, montos ni procedimientos. Si un pasaje es indescifrable marcar [traducción incierta] y explicarlo fuera del diálogo; no adivinar. No inventar segundos de T_R/T_C: sin audio usar turno, notas IA separadas y referencia humana vacía. Cada caso termina con campos VACÍOS para que Luciano marque: conservar/descartar/revisar; credibilidad; comienzo y final completos o recorte; hablantes claros; pedido de alto riesgo observable (turno); cumplimiento observable (turno); equivalente local sin reescribirlo; ambigüedades; diferencias respecto del corpus propio; decisión y motivo. No prejuzgar estos campos con casillas marcadas. Se puede añadir observaciones IA separadas, explícitas y breves. Agregar explicación de cualquier sustitución de nombres/datos identificables (mismos placeholders coherentes en original inglés y traducción, sin credenciales reales); no subir datos identificables a Git ni incluir secretos en respuesta al coordinador. Texto íntegro y traducciones restringidos van SOLO en entrega local privada, nunca en Git ni publicación; si derechos prohíben incluso ese uso, detener esa reproducción y documentar la restricción y enlaces sin inventar contenido.\n\nJSON: idioma, modelo exacto solicitado/usado si verificable (no inventar receipt), archivos y SHA256 de entradas, URL/revisión/ID de cada caso, conteos originales/traducidos, herramientas, prompt/instrucciones de traducción empleados (registrar completo), sustituciones, incidencias de orden/diarización/traducción, comprobaciones. Comprobar que no se perdió ni agregó ningún turno, que cada turno no vacío tenga traducción y que negaciones/pedidos/condicionales se conservan. No atribuir validación bilingüe/humana inexistente. Reportar con worker_done rutas, tamaños, IDs, conteos, verificaciones y limitaciones; no pegar diálogos completos en mensaje. Si falla algo, reportarlo como fallo sin declarar tarea completa.\n\nARCHIVOS EXCLUSIVOS: /Users/lucianogrosso/Downloads/ISSUE-144-ESPORT-2026-11-06.md y /Users/lucianogrosso/Downloads/ISSUE-144-ESPORT-2026-11-06-PROCEDENCIA.json\n\nIDIOMA ESPAÑOL / ES-PORT. Modelo solicitado gemini-3.8-flash-high, effort high. Fuente https://github.com/Vicomtech/esport-corpus revision README b575ec6d7925ea4f83ef00a302682a6f58ad788d; descarga https://datasets.vicomtech.org/di01-esport-corpus/esport-corpus.zip SHA256 esperado 0017a2d6bbbf57d2971872c7a8eb7c1bf266c76dfb8ba2736c17086a948f1f2c. Puede ya existir zip /var/folders/jb/z9g4zrkd4w770rfrl3brsj800000gn/T/issue-144-esport-corpus.zip (verificar hash). 1170 diálogos reales anonimizados de soporte empresarial español. CC BY-SA 3.0 ES, incluir atribución de autores/corpus/URL/licencia y explicar cambios; no confundir con portugués por nombre. Elegir esport/esport_dialogue.119349.json (soporte con pedido y dictado de contraseña: no copiar credenciales potenciales, reemplazarlas coherentemente por [CREDENCIAL-1]/[CREDENCIAL-2], documentar qué turnos se agrupan si dictado letra a letra) y esport/esport_dialogue.120967.json (spam/migración de correo). Mantener ESPAÑOL ORIGINAL de España, no traducir ni adaptar aún. Leer JSON real: speakers contiene utterances por hablante, filtered-text mezcla hablantes en solapamientos; no reasignar todo a un solo hablante. Numerar con turno original y subturno si hace falta; conservar orden observable y señalar orden indeterminable en solapamientos. Remover marcas puramente acústicas/muletillas anotadas solo si se documenta; preservar repeticiones con información semántica, negaciones y condicionales. No tratar cada turno vacío como línea hablada. Caso119349: procedencia de soporte real no convierte compartir clave en práctica segura ni prueba fraude; nota de ambigüedad para adjudicación D07, no etiquetar automáticamente T_R de fraude ni resolver definición de alerta. Datos/credenciales aunque se anuncien anonimizados no van al repositorio. Entrega 2 casos completos en español con campos humanos vacíos.\n\nACTUALIZACIÓN DEL COORDINADOR, 2026-11-06: primero se revisó a Evaristo. El issue #144 actualizado atribuye a Evaristo la rama corpus/144-corpus-externo, commits hasta 80fbc909088446deb8cd28c4ba379e29c540692b, YA INTEGRADOS en HEAD e467c7c. Reutilizá relevamiento y correcciones del filtro, no asumas que son decisiones nuevas. Las 22 traducciones constan en el documento pero no encontramos ruta local ni custodia; NO afirmar que las leíste ni reconstruirlas de memoria. Esta entrega es una traducción fiel de comprensión, anterior a adaptación rioplatense; no copiar la política de mejorar ASR o reatribuir hablantes sin evidencia del piloto anterior.\n\nNuevo alcance aprobado por equipo según issue #151: detector solo llamadas ENTRANTES de números NO AGENDADOS. Consultá gh issue view 151 si necesitás detalle. Para esta lectura exploratoria se conservan también llamadas salientes o de dirección incierta, pero se informa dirección observable/indeterminable y si queda fuera del alcance EN UNA NOTA, sin descartar ni reescribir automáticamente. YouTube soporte iniciado por víctima va aparte; ES-Port es contraste exploratorio, no legítimas finales aprobadas. No resolver D03/D07/D08 ni construir el test con estos ejemplos.",
+  "comprobaciones_integridad": {
+    "turnos_totales_conservados": true,
+    "ningun_turno_perdido_o_agregado": true,
+    "turnos_no_vacios_todos_presentes": true,
+    "negaciones_preservadas": true,
+    "condicionales_preservados": true,
+    "pedidos_preservados": true,
+    "repeticiones_semanticas_preservadas": true,
+    "sin_argentinizacion_prematura": true,
+    "sin_referencia_humana_atribuida": true,
+    "declaracion_exclusion_de_test_futuro": true,
+    "campos_humanos_deliberadamente_vacios": true,
+    "sustitucion_completa_credenciales": true
+  },
+  "consigna_completa_coordinador": "Sos un worker supervisado para el issue #144 de Corchets/bitacora_tesis. El coordinador integra. Objetivo autorizado: preparar muestras exploratorias para que Luciano lea y marque qué fuentes y casos sirven, NO preparar ni ejecutar el test final. Las conversaciones leídas quedan fuera del futuro test. No ejecutar detectores, no cambiar prompts ni elegir configuración, no anotar nada como revisión humana. Trabajás en /Users/lucianogrosso/orca/workspaces/bitacora_tesis/laboratorio-luciano. Leé AGENTS.md, docs/gestion/MAPA-DECISIONES.md (D07/D08/D09), docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md y docs/corpus/MANUAL-ANOTACION.md. Otros workers trabajan por idioma: SOLO podés escribir los DOS archivos de entrega asignados en Downloads; NINGÚN archivo del repositorio, git add/commit/push ni archivos compartidos. Descargá fuentes únicamente fuera de Git, en temporal propio. No crear carpetas del repositorio ni leer la reserva propia CV2-T. No enviar mensajes a GitHub/email/Slack. El usuario pidió 1 agente por idioma, Terra High para coreano y Flash High para los otros; no delegar en otros modelos/agentes.\n\nENTREGA: 1 Markdown legible editable + 1 JSON de procedencia. Incluir enlaces primarios precisos, fecha 2026-11-06, revisión/commit de fuente, IDs originales inequívocos, licencia y límites de uso, origen real/sintético. Explicar que estos 2 casos son exploración y quedan fuera del test; no declarar aprobado nada. Conservar conversación completa, turnos numerados y roles A/B (si hay más, C); NO resumir, truncar, completar, inventar diálogo ni mejorar el pedido; no argentinizar instituciones, montos ni procedimientos. Si un pasaje es indescifrable marcar [traducción incierta] y explicarlo fuera del diálogo; no adivinar. No inventar segundos de T_R/T_C: sin audio usar turno, notas IA separadas y referencia humana vacía. Cada caso termina con campos VACÍOS para que Luciano marque: conservar/descartar/revisar; credibilidad; comienzo y final completos o recorte; hablantes claros; pedido de alto riesgo observable (turno); cumplimiento observable (turno); equivalente local sin reescribirlo; ambigüedades; diferencias respecto del corpus propio; decisión y motivo. No prejuzgar estos campos con casillas marcadas. Se puede añadir observaciones IA separadas, explícitas y breves. Agregar explicación de cualquier sustitución de nombres/datos identificables (mismos placeholders coherentes en original inglés y traducción, sin credenciales reales); no subir datos identificables a Git ni incluir secretos en respuesta al coordinador. Texto íntegro y traducciones restringidos van SOLO en entrega local privada, nunca en Git ni publicación; si derechos prohíben incluso ese uso, detener esa reproducción y documentar la restricción y enlaces sin inventar contenido.\n\nJSON: idioma, modelo exacto solicitado/usado si verificable (no inventar receipt), archivos y SHA256 de entradas, URL/revisión/ID de cada caso, conteos originales/traducidos, herramientas, prompt/instrucciones de traducción empleados (registrar completo), sustituciones, incidencias de orden/diarización/traducción, comprobaciones. Comprobar que no se perdió ni agregó ningún turno, que cada turno no vacío tenga traducción y que negaciones/pedidos/condicionales se conservan. No atribuir validación bilingüe/humana inexistente. Reportar con worker_done rutas, tamaños, IDs, conteos, verificaciones y limitaciones; no pegar diálogos completos en mensaje. Si falla algo, reportarlo como fallo sin declarar tarea completa.\n\nARCHIVOS EXCLUSIVOS: /Users/lucianogrosso/Downloads/ISSUE-144-ESPORT-2026-11-06.md y /Users/lucianogrosso/Downloads/ISSUE-144-ESPORT-2026-11-06-PROCEDENCIA.json\n\nIDIOMA ESPAÑOL / ES-PORT. Modelo solicitado gemini-3.8-flash-high, effort high. Fuente https://github.com/Vicomtech/esport-corpus revision README b575ec6d7925ea4f83ef00a302682a6f58ad788d; descarga https://datasets.vicomtech.org/di01-esport-corpus/esport-corpus.zip SHA256 esperado 0017a2d6bbbf57d2971872c7a8eb7c1bf266c76dfb8ba2736c17086a948f1f2c. Puede ya existir zip /var/folders/jb/z9g4zrkd4w770rfrl3brsj800000gn/T/issue-144-esport-corpus.zip (verificar hash). 1170 diálogos reales anonimizados de soporte empresarial español. CC BY-SA 3.0 ES, incluir atribución de autores/corpus/URL/licencia y explicar cambios; no confundir con portugués por nombre. Elegir esport/esport_dialogue.119349.json (soporte con pedido y dictado de contraseña: no copiar credenciales potenciales, reemplazarlas coherentemente por [CREDENCIAL-1]/[CREDENCIAL-2], documentar qué turnos se agrupan si dictado letra a letra) y esport/esport_dialogue.120967.json (spam/migración de correo). Mantener ESPAÑOL ORIGINAL de España, no traducir ni adaptar aún. Leer JSON real: speakers contiene utterances por hablante, filtered-text mezcla hablantes en solapamientos; no reasignar todo a un solo hablante. Numerar con turno original y subturno si hace falta; conservar orden observable y señalar orden indeterminable en solapamientos. Remover marcas puramente acústicas/muletillas anotadas solo si se documenta; preservar repeticiones con información semántica, negaciones y condicionales. No tratar cada turno vacío como línea hablada. Caso119349: procedencia de soporte real no convierte compartir clave en práctica segura ni prueba fraude; nota de ambigüedad para adjudicación D07, no etiquetar automáticamente T_R de fraude ni resolver definición de alerta. Datos/credenciales aunque se anuncien anonimizados no van al repositorio. Entrega 2 casos completos en español con campos humanos vacíos.\n\nACTUALIZACIÓN DEL COORDINADOR, 2026-11-06: primero se revisó a Evaristo. El issue #144 actualizado atribuye a Evaristo la rama corpus/144-corpus-externo, commits hasta 80fbc909088446deb8cd28c4ba379e29c540692b, YA INTEGRADOS en HEAD e467c7c. Reutilizá relevamiento y correcciones del filtro, no asumas que son decisiones nuevas. Las 22 traducciones constan en el documento pero no encontramos ruta local ni custodia; NO afirmar que las leíste ni reconstruirlas de memoria. Esta entrega es una traducción fiel de comprensión, anterior a adaptación rioplatense; no copiar la política de mejorar ASR o reatribuir hablantes sin evidencia del piloto anterior.\n\nNuevo alcance aprobado por equipo según issue #151: detector solo llamadas ENTRANTES de números NO AGENDADOS. Consultá gh issue view 151 si necesitás detalle. Para esta lectura exploratoria se conservan también llamadas salientes o de dirección incierta, pero se informa dirección observable/indeterminable y si queda fuera del alcance EN UNA NOTA, sin descartar ni reescribir automáticamente. YouTube soporte iniciado por víctima va aparte; ES-Port es contraste exploratorio, no legítimas finales aprobadas. No resolver D03/D07/D08 ni construir el test con estos ejemplos.\n\nEl usuario autorizó expresamente Google Translate u otra traducción si ayuda. Podés usarlo registrando herramienta, pasajes y discrepancias; no enviar datos identificables ni credenciales: anonimizar primero. Usar traducción automática NO es validación humana bilingüe. No tenés obligación de usar un servicio adicional si no aporta. Fuentes primarias deben consultarse efectivamente, no inferirse del handoff.\n",
+  "revision_del_coordinador": {
+    "fecha": "2026-11-07",
+    "run_id": "run_add0f24ad4f8",
+    "dispatch_inicial_utilizado": "ctx_4e96db6105e0",
+    "comprobaciones": [
+      "38 y 91 bloques por hablante contrastados con los campos speakers de los JSON de origen; los bloques no afirman cronología interna de solapamientos.",
+      "Conteos, tamaños y hashes de los JSON contrastados con el ZIP; textos sin credenciales conservados después de retirar delimitadores de anotación acústica documentados.",
+      "Credenciales y repeticiones de caracteres sustituidas, incluido el bloque T34; campos humanos vacíos y enlaces del repositorio comprobados."
+    ],
+    "validacion_bilingue_humana": false,
+    "decision_humana_casos": "pendiente",
+    "nota": "Registro de comprobaciones técnicas y lectura de IA; no es una anotación humana ni aprobación del set."
+  }
+}

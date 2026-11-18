@@ -2,7 +2,7 @@
 
 - **Fecha:** 2026-11-05
 - **Tipo:** resultado
-- **Estado:** en revisión. La segunda vuelta de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) prueba prompts nuevos.
+- **Estado:** superado por [H10](H10-c-avisa-antes-del-pedido.md).
 - **Evidencia:**
   - [Cuadro de `2026-11-05_tito-2-v4`](../../experiments/slm-directo/corridas/2026-11-05_tito-2-v4/analisis.md#resultados).
   - [Comentario de Mateo en #51](https://github.com/Corchets/bitacora_tesis/issues/51) del 2026-11-05.
@@ -28,3 +28,5 @@ Es un empate en detección y un intercambio real entre anticipación y calidad d
 ## Qué cambia
 
 La elección de prompt en #51 es un intercambio, no un empate. Hay que esperar la segunda vuelta de #143.
+
+> **Nota (2026-11-10):** la segunda vuelta de #143 eligió C (`c-premisa-corte-riesgo`), ni v1 ni v4: avisa antes del pedido y suma las estafas sin pedido ([H10](H10-c-avisa-antes-del-pedido.md)). La comparación entre v1 y v4 queda como antecedente.

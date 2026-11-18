@@ -1,0 +1,32 @@
+A: Hola.
+B: ¿Sí?
+A: Sí, habla con el señor Peter Anderson. ¿Cómo está hoy?
+B: Bueno, estoy muy bien. ¿Y usted?
+A: Bien, gracias. ¿Con quién lo comunico?
+B: Eh, ¿gané? ¿Gané el premio?
+A: ¿Y con quién estoy hablando? ¿Tiene un número de confirmación?
+B: Sí, soy Joe Carter.
+A: Joe Carter. ¿Y cuál es su número de confirmación?
+B: ¿Dónde lo veo?
+A: ¿No recibió un mensaje automático que le decía que tenía que comunicarse con nuestra oficina central con su confirmación?
+B: Sí, pero estaba trabajando. Trabajo 90 horas por día, así que no lo pude anotar.
+A: Muy bien, entonces lo que puede hacer es darme un segundo mientras reviso el sistema a ver si encuentro su número de confirmación. ¿Me puede decir su nombre una vez más, por favor?
+B: Joe Carter.
+A: Joe Carter. No corte.
+A: ¿Hola, señor Joe Carter?
+B: Sí.
+A: Muy bien, señor Joe Carter. Lo que veo acá es que su confirmación es 1108 U.S. Tiene que anotar esa confirmación, porque la próxima vez que llame y la pida no se la podemos volver a dar. Así que la tiene que anotar para tenerla siempre presente, ¿sí?
+B: Bueno, déjeme buscar una lapicera y un papel. Tengo que abrir el cajón del escritorio. Bueno... listo, esta lapicera anda.
+A: Bueno, entonces lo primero que va a anotar es mi nombre. Busque un papel de buen tamaño para escribir, así le doy toda la información, ¿sí?
+B: Ah, ya lo tengo. ¿Sirve un bloc tamaño oficio?
+A: Ah, está bien. Muy bien, lo primero que va a anotar es mi nombre: señor Peter Anderson.
+B: Peter Anderson.
+A: Exacto, y después va a anotar mi número de placa, el que llevo en la camisa en el trabajo. Es 454 P.A.
+B: Peter Anderson, 454 P.A.
+A: Perfecto, es correcto.
+B: Entonces, ¿cuánto dinero gané?
+A: Ay, por Dios, ya vamos a llegar a eso. Por eso le estoy dando toda esta información, para que entienda que esto no es una vuelta. Recuerde que hay muchas estafas y fraudes dando vueltas, así que queremos asegurarnos...
+B: Ay, no, pensé que había ganado...
+A: Lo voy a llamar por una línea mejor, porque parece que no me está escuchando bien.
+B: Solo le repito lo que usted dijo: dijo que usted es una estafa y un fraude, ¿no es eso lo que dijo? Escucho un poco mal.
+A: No, le estaba diciendo que esto no es ninguna estafa ni fraude.

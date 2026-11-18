@@ -1,0 +1,26 @@
+A: Gracias por llamar a la Administración del Seguro Social. ¿En qué lo puedo ayudar?
+B: Sí, estaba hablando con un hombre y me dijo que mi número de seguridad social estaba suspendido. Después, debe haber tenido mala conexión, se me cortó el teléfono.
+A: Ah, disculpe. Déjeme revisar qué está pasando exactamente. ¿Me podría dar su nombre así busco sus datos?
+B: Sí, es Paul Walker.
+A: Gracias, Paul Walker. Permítame entrar al sistema y revisar los datos. Aguarde.
+A: Hola, Paul Walker. Gracias por seguir en línea. ¿Sigue ahí conmigo?
+B: Sí.
+A: Tengo algunos datos para usted. ¿Tiene a mano una lapicera y un papel?
+B: Sí.
+A: Sí, ¿podría anotar algunos datos que le voy a dar ahora?
+B: Sí.
+A: Entonces, está hablando con el oficial Donald Jefferson, a cargo de su caso.
+B: Se le cortó el teléfono. ¿Qué dijo? ¿Oficial qué?
+A: Sí, habla el oficial jefe Donald Jefferson. Estoy a cargo del departamento de investigaciones acá en la Administración del Seguro Social. ¿Me escucha?
+B: Sí, lo escucho.
+A: Muy bien, pensé que lo había perdido. Bueno, por favor anote mi identificación federal.
+B: Ajá.
+A: G de General, R de Romeo, S de Sierra, A de Alpha, y el número 51185. Esa es mi placa federal. El número de expediente que le voy a dar es F de Frank, R de Romeo, L de Larry.
+B: Ahora se le cortó el teléfono otra vez. Deben ser las líneas cruzadas o algo. ¿Lo puede repetir una vez más?
+A: Claro. El número de expediente es F de Frank, R de Romeo, L de Larry, R de Romeo, y el número 6374.
+B: Ajá.
+A: Es un expediente que aparece a su nombre, Paul Walker. Lo que pasó es que nuestros alguaciles federales que patrullan la frontera sur de Texas encontraron un auto abandonado registrado con su número de seguridad social. Ese auto tenía manchas de sangre y restos de droga. ¿Viajó por casualidad al estado de Texas?
+B: No, nunca estuve ahí.
+A: Eso es bastante sorprendente, porque ese auto estaba registrado a su nombre y con su número de seguridad social. Así que creo que hay actividades sospechosas. Por eso, como equipo del departamento de investigaciones, abrimos un expediente y pensamos en informarle. Por eso lo estamos llamando, porque de inmediato vamos a suspender su número de seguridad social.
+B: Se le cortó el teléfono otra vez. ¿Cuántas cuentas dijo?
+A: Se abrieron como 50 cuentas bancarias a su nombre.

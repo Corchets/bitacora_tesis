@@ -2,7 +2,7 @@
 
 - **Fecha:** 2026-11-05
 - **Tipo:** resultado
-- **Estado:** vigente. La segunda vuelta de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) prueba un prompt que mira la intención.
+- **Estado:** superado por [H10](H10-c-avisa-antes-del-pedido.md).
 - **Evidencia:**
   - [Descripción de #143](https://github.com/Corchets/bitacora_tesis/issues/143), sección «Variantes».
   - Líneas base de `corridas/2026-11-05_puntaje-token-150/analisis-salida.md`, en la rama `exp/143-puntaje-token` hasta su merge.
@@ -24,3 +24,5 @@ Las marcas de `T_R` son provisionales, sin revisión humana. Las posiciones est�
 ## Qué cambia
 
 El margen preventivo está limitado por cómo definimos el aviso, no solo por la latencia. Hay que contarlo así al responder PI2.
+
+> **Nota (2026-11-10):** la segunda vuelta de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) confirmó la causa. Con C, que pregunta por la intención, el aviso llega antes del pedido en 17 de 36 estafas contra 10 con v4, con una mediana de 4 líneas en los avisos a tiempo. Vale para v1 a v5; para la configuración congelada, ver [H10](H10-c-avisa-antes-del-pedido.md).

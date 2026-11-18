@@ -14,7 +14,8 @@ ninguna se promueve automáticamente a referencia adjudicada.
 | [Original de #145 del 2026-11-07](REVISION-145-LUCIANO-2026-11-07.json) y [su correspondencia](CORRESPONDENCIA-145-LUCIANO-2026-11-07.json) | Captura anterior: 20 fichas, 17 confirmadas y 3 sin confirmar. Se conserva sin cambios. |
 | [Fichas originales de inglés de #144](FICHAS-144-LUCIANO-INGLES-2026-11-07.md) | Copia exacta de las 20 fichas que estaban en custodia local: 16 casos conservados y 4 descartados. Las columnas atribuidas a Claude siguen separadas del juicio humano. |
 | [Fichas de coreano de #144](FICHAS-144-LUCIANO-COREANO-2026-11-10.md) | KO-01 y KO-02 (`vishing_540` y `vishing_281`), completadas el 2026-11-10. Solo las fichas: la traducción queda privada por las condiciones de la fuente. Marcas en segmentos de la fuente. |
-| [Vista común JSONL](REVISIONES-LUCIANO-2026-11-10.jsonl) | 48 registros derivados (20 de inglés y 2 de coreano de #144, y 26 de #145) con issue, revisor, identificador, respuesta de clase literal, marcas y enlace al original. Se regenera; no se edita a mano. |
+| [Fichas de coreano de #144, segunda tanda](FICHAS-144-LUCIANO-COREANO-2026-11-11.md) | KO-03 a KO-09 (`vishing_577`, `657`, `443`, `635`, `298`, `545` y `349`), completadas el 2026-11-11. KO-08 y KO-09 arrancan en medio de la llamada. KO-10 a KO-12 están traducidas pero sin ficha y no se publican. Solo las fichas; la traducción queda privada. |
+| [Vista común JSONL](REVISIONES-LUCIANO-2026-11-10.jsonl) | 55 registros derivados (20 de inglés y 9 de coreano de #144, y 26 de #145) con issue, revisor, identificador, respuesta de clase literal, marcas y enlace al original. Se regenera; no se edita a mano. |
 
 SHA-256 del original vigente de #145:
 `12f19558dc367f91baa51404ee10c45d0e90adc11d760beabfe9dfd4023d763b`; del original del 2026-11-07:

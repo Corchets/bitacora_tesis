@@ -1,0 +1,26 @@
+{
+  "case_id": "EXT-579",
+  "grupo": "externo",
+  "clase": "vishing",
+  "clase_fuente": "vishing",
+  "t_r_linea": 19,
+  "t_c_linea": null,
+  "sospecha_linea": 10,
+  "revision_humana": true,
+  "revisor": "Luciano Grosso",
+  "fecha": "2026-11-07",
+  "ficha_original": {
+    "conservar": "conservar",
+    "creible": "si aunq llame la abuela",
+    "es_estafa": "si",
+    "sospecha_turno": "10 aprox",
+    "t_r_turno": "19",
+    "t_c_turno": "nunca nombra que abre el anydesk",
+    "comienzo_final": "completo",
+    "hablantes": "si",
+    "equivalente_local": "",
+    "dudas": "",
+    "decision": "dejar"
+  },
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de un solo revisor; #144 pide un segundo revisor en los casos dudosos. Las líneas salen de traducir los números de turno de la ficha al archivo de texto (un turno pegado en la fuente se separa en dos líneas: T_R va a la línea del estafador y T_C a la de quien atiende). Si la ficha no trae un número, el campo queda en null y la respuesta literal está en ficha_original."
+}

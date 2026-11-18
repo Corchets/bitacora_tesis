@@ -1,0 +1,385 @@
+A: Le voy a pedir que confirme si tampoco usted tenía conocimiento.
+A: ¿Conoce sitios de Internet como Junggonara, 11st, Gmarket y Auction? ¿Está registrada en todos esos sitios?
+A: Entonces, ¿ha comprado o vendido allí? ¿Es correcto que no ha vendido nada?
+A: En este caso, la banda de Kim Tae-hwan engañaba en esos sitios diciendo que vendía artículos caros a precios bajos y se quedaba con el dinero. Este caso...
+A: Se han confirmado depósitos en esas dos cuentas que usted desconoce, y hay personas perjudicadas que hicieron esos depósitos.
+A: Esas personas consideran que usted tenía conocimiento y alguna relación con Kim Tae-hwan, y se han presentado 26 denuncias respecto de esas dos cuentas que usted desconoce.
+A: Por eso tiene que demostrar que es una víctima y que no colaboró ni actuó en complicidad con la banda de Kim Tae-hwan.
+A: En nuestra primera investigación de Kim Tae-hwan revisamos todas las llamadas, mensajes de texto y conversaciones de mensajería, y como no encontramos indicios contra usted, su caso se clasificó para una declaración grabada.
+A: Esta grabación se presentará ante el juez como prueba en la primera audiencia, en lugar de su comparecencia. ¿Entiende?
+A: Además, no es un caso que la involucre solamente a usted. Actualmente hay más de 200 personas perjudicadas.
+A: Por eso no podemos citar a cada una, y solo a quienes no presentan indicios, como usted, les tomamos declaración grabada de esta manera. ¿Entiende?
+A: Ahora ya tiene una idea de este caso, ¿verdad?
+A: Como ya está al tanto del caso, ahora vamos a hacer la grabación definitiva.
+A: Volveré a tomarle declaración sobre lo que sabe. ¿Entiende?
+A: Tenga en cuenta que, si interviene un tercero o hay ruido alrededor durante la declaración, tenemos que volver a grabar desde el principio. ¿Desde dónde está hablando ahora?
+A: ¿Vive sola ahora?
+A: Antes de grabar, le informo la normativa. Si por miedo oculta o encubre algo, se agregarían el delito de destrucción de pruebas del artículo 153, apartado 12, del Código Penal, y el de obstrucción de funciones públicas del artículo 152, apartado 1. Se lo aclaro una vez más.
+A: Simplemente volveré a tomarle declaración sobre lo que sabe. ¿Entiende? Espere un momento, por favor.
+A: Soy el investigador Lee Gi-cheol, de la División 1 de Investigación de Delitos de Alta Tecnología de la Fiscalía del Distrito Central de Seúl. ¿Es usted la titular?
+A: Es estudiante, ¿verdad? Disculpe, ¿a qué se dedica?
+A: Es enfermera. ¿En qué zona está ahora? Seúl, vive en Seúl.
+A: Se lo confirmo por última vez. Es un hombre de unos cuarenta años que vivía en Paldal-gu, Suwon, provincia de Gyeonggi. ¿No conoce en absoluto a Kim Tae-hwan? ¿Seguro que no lo conoce?
+A: Durante el último año, ¿perdió o le robaron documentos, pasaporte, billetera u otros elementos con información personal? No le ocurrió.
+A: ¿Le han hackeado el correo, Facebook, una tableta o la computadora que utiliza de manera personal?
+A: Tampoco. ¿Ha viajado al extranjero durante el último año? ¿Cuándo y adónde fue?
+A: ¿En octubre de este año? ¿Y antes? Antes de marzo no había ido.
+A: Se lo pregunto porque hay muchas personas que viajaron al extranjero, utilizaron la tarjeta de crédito, las hackearon allí y sufrieron perjuicios.
+A: El 17 de marzo de 2017, ¿usted no abrió personalmente las dos cuentas de NongHyup e IBK utilizadas en este caso, en la sucursal de Mullae-dong, Yeongdeungpo-gu, Seúl?
+A: No las abrió en absoluto. De las cuentas que usted abrió, ¿hay alguna que utilicen conocidos o familiares?
+A: Tampoco hay ninguna.
+A: En las dos cuentas utilizadas en este caso se produjeron pérdidas de 25 millones de wones en NongHyup y 8,5 millones en IBK, unos 33,5 millones en total.
+A: Hubo 26 depósitos. ¿Es correcto que usted desconoce por completo esas dos cuentas?
+A: Nosotros también las consideramos cuentas ilegales y procedimos a congelarlas.
+A: Y durante todas esas operaciones ilegales usted no tuvo conocimiento alguno.
+A: Por lo tanto, existe una posibilidad considerable de que haya daños adicionales y se descubra una tercera cuenta ilegal.
+A: Por eso, a través de la supervisión financiera, se van a rastrear sus cuentas para comprobar si hay cuentas que usted desconoce y si hubo operaciones de dinero con Kim Tae-hwan.
+A: ¿Entiende? Vamos a cotejarlas, a ver si realmente las utiliza usted. Por eso tiene que declarar brevemente los nombres de las entidades donde abrió cuentas que utiliza actualmente y para qué las usa.
+A: Aquí debe tener cuidado con sus datos personales. No debe decir nunca números de cuenta ni contraseñas. ¿Entiende?
+A: Solo tiene que mencionar brevemente la entidad de las cuentas que abrió y utiliza, y su uso: para depósitos y retiros, para ahorro a plazo, así, de manera sencilla. ¿Entiende?
+A: ¿De qué banco son y para qué las utiliza?
+B: La de NongHyup es para depósitos y retiros, también tengo ahorro a plazo.
+A: Sí.
+B: La de IBK...
+A: Sí. ¿Y tiene alguna otra entidad? ¿Es correcto que solo utiliza esas dos?
+A: Si aparece alguna cuenta adicional, la cotejaremos con usted y procederemos a congelarla. Téngalo en cuenta. ¿Qué medio de seguridad utiliza?
+A: Sí, sí, seguridad... No, cuando consulta sus cuentas, ¿lo hace desde el móvil...?
+A: ...¿o por Internet?
+A: Utiliza el móvil. ¿Y qué medio de seguridad utiliza? ¿Tarjeta de claves o un OTP?
+A: Tarjeta de claves. Más adelante... ¿Sabe lo que es un OTP? Cámbiela por eso. El OTP... La tarjeta de claves tiene formato de tarjeta, ¿verdad?
+A: ¿Verdad? Sí. Y últimamente hemos recibido muchas copias de esas, entre lo incautado.
+A: Si va al banco, hay un dispositivo electrónico que se llama OTP. Actualmente le resultaría más seguro cambiarse a eso. ¿Entiende?
+A: ¿Utiliza tarjetas de crédito? No utiliza.
+A: Esto es importante. Si tiene productos de seguro, de ahorro o similares, ¿hubo préstamos o consultas de préstamos sobre esos productos?
+A: ¿Tampoco hubo consultas de préstamos en otros bancos, correcto?
+A: Porque se han filtrado muchos de sus datos personales, y si aparecen préstamos o consultas que usted no hizo, también tenemos que comprobarlo, ¿verdad?
+A: Entendido. Con esto vamos a rastrear sus cuentas.
+A: A día de hoy. En cuanto a los fondos que tiene, si entre lo que consulta el Servicio de Supervisión Financiera y lo que usted declara hay una diferencia superior o inferior a 500.000 wones, consideraremos que no utiliza esa cuenta y la congelaremos.
+A: Téngalo en cuenta. Es a día de hoy. ¿Cuánto dinero tiene ahora en la cuenta de depósitos y retiros de NongHyup?
+B: ¿Tengo que decir el monto?
+A: Sí, basta con una cifra aproximada. Solo tiene que evitar una diferencia de unos 500.000 wones. Pero nunca debe decir números de cuenta ni contraseñas.
+A: Si utiliza banca móvil, compruébelo y responda con exactitud; así podremos tramitarlo más rápido, ¿verdad? Sí, sí.
+A: ¿Hola?
+A: Sí, dígame. Ya le dijimos que solo... Ya le dijimos que vamos a cotejar los datos. Si le preguntan el número de cuenta o algo así, simplemente cuelgue.
+B: Sí, tengo 20.772.695 wones en NongHyup.
+A: ¿Depósitos y retiros? Sí, la de depósitos y retiros.
+A: No. Tiene que decirlas por separado. Sí, sí, así, al rastrear las cuentas, tenemos que comprobar también si hay movimientos de lavado de dinero.
+B: Se las voy a decir una por una.
+A: Sí, sí, dígame. Tiene que decir todas las que estén a su nombre.
+A: Porque si congelamos algo que usted no declaró, para demostrar que es víctima tendría que esperar otros dos o tres meses, en lugar de resolverlo hoy, y mientras tanto no podría utilizarlo.
+A: Le pido que lo declare.
+B: 18.399.667 wones.
+A: ¿Tiene alguna otra? ¿De qué banco es?
+A: Utiliza bastante NongHyup. Siga diciéndome. Sí, entendido. Con esto vamos a rastrear las cuentas.
+A: ¿Tiene otra de NongHyup?
+B: Pero además de esto tengo un seguro de vida...
+A: ¿Tiene patrimonio en ese seguro de vida?
+B: Sigo depositando allí.
+A: ¿Cuánto cada vez? Entonces, aproximadamente, ¿cuánto tiene? Voy a dejarlo calculado en unos 5,5 millones de wones.
+A: ¿Así estaría bien?
+B: Ponga unos 6 millones.
+A: 6 millones, entendido. Con esto vamos a rastrear las cuentas.
+A: Ahora, por último, la voy a comunicar con el fiscal.
+A: El fiscal la ayudará con las pruebas para la primera audiencia y con el rastreo de sus cuentas. ¿Entiende?
+A: ¿Puede anotar ahora?
+A: Se le ha asignado un número de expediente. Con eso el fiscal le mostrará el documento oficial. Sí, sí.
+A: No, a partir de ahora, si no se puede hablar con usted, se la citará. Entonces...
+A: Entonces tendrá que venir personalmente...
+B: La persona que va a volver a llamarme...
+A: Primero lo revisará el fiscal y le mostrará el documento oficial...
+B: ...después.
+A: Así es. Bueno, yo no le he dicho nada más, ¿verdad? El fiscal, por último, esto...
+A: ...va a revisar esa parte.
+B: Creo que ahora no puedo porque no tengo tiempo. Entonces, si no vuelven a comunicarse conmigo, ¿tengo que ir a algún sitio?
+A: No, le dije que se emitiría una citación.
+A: Puede explicarle al fiscal que tiene estas circunstancias. Al fin y al cabo, yo soy investigador.
+A: Mi función es informarle del caso, registrar estos datos y presentárselos al fiscal.
+A: Si espera un momento, la comunico enseguida con el fiscal.
+A: Creo que sería mejor hablar con el fiscal y decidir. Él también tiene que tomar medidas al respecto. ¿Entiende?
+A: Sí, espere un momento.
+A: Sí, he atendido. ¿Hola? Sí, diga su nombre y fecha de nacimiento.
+B: Sí, mucho gusto.
+A: Soy el fiscal Woo Nam-jun, a cargo de este caso. Fiscal Woo Nam-jun.
+A: Jun, jun, como en «junbi», preparar. Sí.
+A: ¿Cómo se abrieron sus cuentas en este caso? Creo que declaró que usted no las abrió.
+A: Si no las abrió usted, para que otra persona las abra tiene que presentar una copia del registro de residencia o un certificado de relaciones familiares.
+A: A través de algún conocido, al contratar un seguro o...
+A: ...una tarjeta de crédito, ¿presentó alguna vez una copia del registro de residencia o un certificado de relaciones familiares? Nunca.
+A: Bueno, entendido. Ahora, ¿desde dónde está hablando?
+B: ¿Tengo que decirle dónde estoy?
+A: Sí.
+B: ¿Por qué?
+A: Claro que tiene que decirme dónde está. Porque puede ser sancionada por revelarlo a terceros, y si lo divulga sin cuidado... Todavía investigamos cómo se filtraron sus datos personales.
+A: Últimamente se filtran muchos datos personales a través de amigos, compañeros de trabajo, parientes o familiares, y su seguridad personal también puede estar en riesgo. Por eso le pregunto. ¿Cree que le pregunto porque sí?
+B: Si no, hay una comisaría cerca. ¿No puedo ir y atender allí?
+A: Mire, si tiene tantas dudas, venga directamente a nuestra fiscalía. Dijo que estaba en Seúl, ¿verdad?
+A: ¿Dónde está ahora?
+B: Estoy en Suwon.
+A: Ah, en Suwon. Venga a nuestra fiscalía. La policía y la fiscalía son organismos distintos.
+A: Le vamos a mostrar todos los documentos oficiales de su caso.
+A: Al decir eso, parece que está preocupada por delitos financieros como las estafas telefónicas o el smishing de hoy en día, ¿verdad?
+A: Sí, tengo intención de darle suficientes comprobaciones al respecto.
+A: Pero también tiene que responder con un mínimo de educación a lo que le pregunto. ¿Está comiendo algo ahora?
+B: Estaba comiendo.
+A: Sí, tiene que mantener un mínimo de educación. Usted es del año del Mono, ¿verdad?
+A: Yo soy del año del Mono. Nací en el 89, soy bastante mayor que usted; tiene que mantener un mínimo de educación, ¿no? ¿Verdad?
+A: Está bien que coma, pero podría avisar antes. ¿Le dijo al investigador que iba a seguir con el trámite de su caso mientras comía?
+A: ¿Sabe por qué nos comunicamos con usted?
+B: Porque allí, la cuenta...
+A: Para empezar, intentamos comunicarnos con usted desde alrededor de marzo. Usted no atendió.
+A: Su juicio es la semana que viene. Tenemos que presentar como prueba la grabación, los resultados del rastreo de cuentas y de la investigación de comunicaciones.
+A: La llamamos porque parece más bien una víctima. ¿Cree que estoy haciendo esto para que me trate de estafador?
+B: Es la primera vez que recibo una llamada así.
+A: Ya le dije que le mostraría el documento oficial. Sí. No le va a beneficiar actuar así.
+A: ¿Le he exigido algo?
+A: ¿Hasta dónde le informó el investigador? Primero diga desde dónde habla.
+A: Puede decir que habla desde Suwon. ¿Habla desde su casa o desde el trabajo?
+A: ¿Adónde va?
+B: Sí, tengo un compromiso en otro sitio.
+A: ¿A qué hora?
+A: ¿Tiene un compromiso a las cuatro? No va a poder ir. ¿Es un compromiso importante?
+B: Había quedado en ver a mi familia más tarde, tengo un compromiso breve con unos parientes.
+A: Primero, el investigador le dio el número de expediente, ¿verdad? Sí, vamos a comprobar primero ese número.
+A: Ah, ¿no le dieron el número de expediente? ¿Dice que no?
+A: ¿Hasta dónde le informaron sobre este caso?
+B: Que mi cuenta, cómo era, desde el 17 de marzo o por esas fechas, que, cómo se dice, alguien la está usando sin autorización en otro sitio.
+A: Solo le dijeron eso.
+A: Bueno, al detener a la banda de Kim Tae-hwan, incautamos grandes cantidades de tarjetas de claves, tarjetas de crédito y cuentas prestanombres.
+A: Actualmente detuvimos a seis personas, incluido el cabecilla Kim Tae-hwan, y seguimos investigando a empleados bancarios, de telecomunicaciones y de tarjetas que aún no han sido detenidos.
+A: El mayor problema son los cómplices que siguen libres: causan pérdidas cancelando y retirando ahorros a plazo o depósitos y lavan el dinero enviándolo al extranjero; son delitos muy sofisticados.
+A: Pero si usted sufre una pérdida económica mientras está bajo investigación de nuestra fiscalía...
+A: ...el Estado le indemniza hasta un máximo de 50 millones de wones.
+A: Kim Tae-hwan y varios cómplices de este caso no tenían antecedentes. Al detener a empleados del sector financiero, nuestra fiscalía y el Servicio de Supervisión Financiera iniciaron una investigación reservada conjunta de todo el sector.
+A: ¿Sabe qué significa investigación reservada? No lo sabe en absoluto.
+A: Se llama investigación especial reservada a la que se lleva en secreto porque aún no hay pruebas claras de los delitos de los cómplices no detenidos.
+A: La diferencia entre la investigación policial y la de la fiscalía es que no se pueden invocar los derechos del sospechoso.
+A: Aunque vaya a una comisaría, no podrá declarar por nuestro caso. Y dentro de la fiscalía, somos la Fiscalía Central.
+A: ¿Sabe que los delitos financieros están entre los cuatro grandes tipos de delitos? No lo sabía.
+A: Lo esencial de este caso es que se incautaron dos cuentas a su nombre, ¿verdad? Hubo perjuicios a través de sus cuentas.
+A: Usted tiene que dar explicaciones directamente sobre las 26 denuncias presentadas en su contra, y si participa en la investigación diciendo las cosas tal como son, puede quedar libre de cargos.
+A: Le declaró brevemente al investigador qué entidades financieras utiliza.
+A: Voy a tomarle el resto de la declaración, mostrarle el documento oficial y seguir con la investigación. Primero, ¿cuántas cuentas abrió para depósitos y retiros en NongHyup?
+B: Tengo unas ocho.
+A: Las de depósitos y retiros son dos, y las abrió usted, en Suwon...
+A: En Ansan.
+B: Un momento. Pero las de NongHyup son bastante antiguas.
+A: ¿Es correcto que las abrió usted?
+B: Las dos las abrí yo.
+A: Y las otras cuentas...
+B: Las otras también las abrí todas yo.
+A: ¿Qué cuentas son las otras? Sí, declare una por una cada cuenta.
+A: Basta con que declare cada cuenta por separado. Dígame.
+B: Las ocho de NongHyup...
+A: ¿Para qué las utiliza?
+B: Dos, dos las abrí para depósitos y retiros. Las otras seis las abrí para ahorro a plazo.
+A: Abrió seis para ahorro a plazo. Declare el patrimonio de cada una. Una cuenta por vez, sí.
+A: Utiliza tantas cuentas de NongHyup, ¿y no sabía que se había abierto una cuenta a su nombre?
+A: Se abrió el 17 de marzo por la mañana y se congeló por la tarde, hacia la noche.
+B: Pero cuando uno mira desde el móvil, aparecen todas, ¿no?
+A: Sí, claro.
+B: Pero esas cuentas que yo no abrí no aparecen en el móvil.
+A: Por eso no lo sabía. Entendido. ¿Solo utiliza banca móvil de NongHyup?
+A: ¿Tiene un OTP? ¿Tiene una tarjeta de claves? ¿Guarda una foto de la tarjeta de claves? Nunca debe guardarla fotografiada.
+A: Sí, en cuanto a los datos personales, recientemente o cuando sea... ¿A quién se le ocurre guardar una foto de la tarjeta de claves?.
+A: La filtración de datos personales es de una gravedad considerable.
+A: Primero declare lo de los ahorros a plazo. Sí.
+B: ¿Hola?
+A: Mañana.
+B: ¿Puedo decirle primero los ahorros a plazo?
+A: Sí.
+B: Se las diré una por una. Una tiene 16 millones de wones, no, 1,6 millones. Otra, 18.399.667 wones; otra, 5,6 millones.
+B: ...720.000 wones, y luego 280.000 wones. ¿Le digo también las cuentas comunes de depósitos y retiros?
+A: Sí.
+B: Una tiene 6.780.000... 679.982 wones.
+A: Sí.
+B: 444.046.
+A: Y en IBK, el banco IBK...
+B: En IBK tengo unos 6 millones de wones, no, no, no, unos 1,2 millones. Y no le dije una, esa tiene 6 millones. ¿Depósitos y retiros? No, ahorro a plazo, de vida...
+B: Es como un seguro, ese...
+A: Entendido. La investigación se hará con lo que declaró. ¿Ha oído hablar del rastreo de cuentas?
+A: El rastreo de cuentas determina su condición a partir del flujo de fondos ilegales de origen desconocido, que no son fondos que usted haya obtenido legalmente.
+A: Para explicárselo de manera sencilla, usted...
+A: Encontramos todo un historial de compra y venta de datos personales de Kim Tae-hwan y sus cómplices, con operaciones desde 10 millones hasta cientos de millones de wones.
+A: Si usted también recibió ese tipo de fondos...
+A: ...según los resultados, hoy mismo se determinará si es víctima o sospechosa. El rastreo de cuentas...
+A: Sí, se determinará si es víctima o sospechosa. En primer lugar, el rastreo de cuentas, según la ley de transacciones financieras con nombre real y...
+A: ...protección de depositantes, puede entenderse como una disposición excepcional porque exige el historial de operaciones de un titular determinado con una entidad financiera.
+A: Desde 2012 no se puede entregar a terceros el historial financiero sin solicitar la firma o el consentimiento del titular. Lo sabe, ¿verdad?
+A: Además, si la fiscalía obtiene una orden y solicita la información para presentarla ante un tribunal, se pueden rastrear las cuentas.
+A: Pero como usted no está detenida por una orden emitida por nosotros, tenemos que rastrearlas con su consentimiento, ¿verdad?
+A: Sí, diga con su propia voz su fecha de nacimiento, su nombre y «doy mi consentimiento al rastreo de cuentas».
+B: Espere. Mi fecha de nacimiento, ¿y qué más?
+A: Sí, nombre y fecha de nacimiento.
+B: Doy mi consentimiento al rastreo de transferencias de cuentas.
+A: Doy mi consentimiento. Sí.
+A: Ya dio su consentimiento. Si nuestra fiscalía determina, mediante el rastreo, que no recibió una contraprestación económica, además de ser una víctima inocente sin relación con el caso, después... habrá oído hablar de Hanguk Jinheungwon.
+A: Puede solicitar una indemnización por los perjuicios sufridos a través del Centro de Denuncias de Vulneraciones de Información de Hanguk Jinheungwon.
+A: Puede solicitar el sistema de indemnización de Hanguk Jinheungwon.
+A: Primero, antes de avanzar con la investigación, como no es destinataria de una orden en este caso...
+A: ...le mostraré el documento oficial emitido a su nombre y seguiremos con el resto de la investigación. Parece que eso es lo que más le preocupa, así que primero le dejaré consultar el documento.
+A: ¿Puede conectarse a Internet? Con el teléfono que utiliza. Sí, conéctese y avíseme.
+A: Ya se conectó. ¿Qué pantalla ve ahora?
+A: Arriba verá una barra de direcciones que dice algo como naver.com.
+A: Deje la barra de direcciones vacía y avíseme.
+A: Antes le dije que era un caso especial bajo investigación reservada.
+A: Sí, por eso se le asignó una IP personal. Le digo su IP personal: uno punto ciento sesenta punto...
+A: ...ciento sesenta y cuatro punto ciento sesenta y dos. Pulse Intro, sí.
+A: Sí, ¿qué pantalla aparece?
+A: En la parte inferior central verá un recuadro azul que dice «Consultar mi caso». Sí, cuando lo vea, tóquelo.
+A: ¿Está registrada en nuestra Fiscalía Suprema? Si no, puede consultar el documento oficial mediante la verificación de identidad para no registrados.
+B: Ahora, aquí...
+A: Sí, sí. Avíseme cuando pueda consultar el documento oficial.
+A: Ya lo abrió. Primero, ¿ve que su número de expediente es 2017-jo-40588?
+A: Sí. Segundo, ¿qué dice en la categoría? Especial. Antes le dije que está entre los cuatro grandes tipos de delitos.
+A: Sí. Los casos que se designan especiales son los de drogas, política, crimen organizado y delitos financieros.
+A: Como está involucrada en un caso de delito financiero, se lo clasificó como especial; si hoy, según el rastreo de cuentas, demuestra que es víctima...
+B: ...pasa a ordinario. Sí.
+A: Sí.
+B: Pero, ¿es normal que aparezca el número de registro de residente?
+A: Sí, sí, aparece todo. Usted dio su consentimiento, ¿no? Identificador único...
+B: Porque está todo escrito aquí, en el resumen.
+A: Sí, ¿qué dice en el resumen?
+B: Solo dice persona registrada, Lim Ji-won, y el número de registro de residente; me preguntaba si era normal que apareciera todo.
+A: Aparece todo. Normalmente aparece todo.
+A: Se lo clasificó como especial porque está involucrada en un caso de delito financiero.
+A: Si hoy demuestra que es víctima según los resultados del rastreo de cuentas, pasará a ordinario y se la declarará víctima y libre de cargos.
+A: Debajo del documento oficial verá los puntos uno a cuatro del resumen.
+A: Es el contenido del documento oficial del caso; léalo con atención y, si no entiende algo, dígamelo.
+A: ¿Lo leyó todo? Primero le explicaré lo más importante.
+A: El punto cuatro del resumen es importante: «persona registrada» se refiere a la persona investigada.
+A: Sí, una persona investigada no puede revelarlo a terceros hasta que se determinen los indicios.
+A: En este caso de suplantación de identidad, las víctimas sufrieron perjuicios por empleados del sector financiero, ¿verdad?
+A: Como la magnitud del daño es enorme, le dije claramente que se trata de un caso especial bajo investigación reservada.
+A: Si lo revela irresponsablemente a terceros, puede estar sujeta a una sanción severa. También puede haber problemas para su seguridad personal.
+A: Sí, tiene que tenerlo muy presente; es el contenido del documento oficial del caso.
+A: Haga una captura de pantalla y cierre la consulta del documento.
+B: ¿Simplemente cierro esto?
+A: Sí.
+B: ¿Simplemente salgo?
+A: Sí, y se hará la investigación de comunicaciones.
+B: Ya salí.
+A: ¿Hizo la captura? Le dije que hiciera una captura.
+B: Espere.
+B: Disculpe, esto normalmente...
+A: Sí, sí.
+B: ...si entro desde el móvil...
+A: Sí, sí.
+B: ...¿tengo que instalar una aplicación?
+A: ¿De qué aplicación...?
+A: ...¿habla? Lo anterior era en la computadora. Pero al hacerlo desde el móvil dice que tengo que instalar una aplicación.
+A: ¿Adónde entró?
+B: Escribí el nombre, Portal de Justicia Penal.
+A: Le voy a decir su IP personal.
+B: Sí, lo anoto. ¿Me la vuelve a decir?
+A: Sí, uno punto ciento sesenta punto ciento sesenta y cuatro punto...
+A: ...ciento sesenta y dos. Pulse Intro.
+B: Pero, ¿qué es todo esto? ¿Existe una IP personal?
+A: Como es un caso bajo investigación reservada... Hay muchos departamentos, también en la Fiscalía Central de Seúl.
+A: Está la División 1 de Investigación de Delitos de Alta Tecnología, donde estoy yo, y hay hasta la División 3.
+A: Nuestra División 1 no puede conocer los casos que llevan las divisiones 2 y 3. Los casos de investigación reservada...
+A: Creo que eso debería saberlo por sentido común.
+A: Sí, puede cerrarlo. Se hará la investigación de comunicaciones.
+A: Primero desactive el wifi y los datos. La investigación de comunicaciones consiste en comprobar si usted y la banda de Kim Tae-hwan...
+A: ...tienen antecedentes de comunicaciones. Eso es lo que se investiga.
+A: Si están activados el wifi y los datos, se producen errores de comunicación. Si se produce un error...
+A: ...puede agregarse el delito de obstrucción a la función pública. ¿Entiende?
+A: Porque está siendo investigada como persona investigada, ¿verdad? Primero desactívelos. ¿Qué modelo de teléfono utiliza?
+B: KT, KT, Samsung.
+A: ¿Utiliza un Galaxy? Si utiliza un Galaxy, desactive el wifi y los datos.
+A: Si hoy hace lo que quiere y usa el wifi y los datos por su cuenta, le aseguro que recibirá una sanción por eso.
+B: Aunque después.
+A: Le digo que desactive tanto el wifi como los datos.
+B: Si los apago, ¿tienen que estar apagados todo el día?.
+A: Primero, si no hay indicios contra usted, quedará libre de cargos en dos o tres horas.
+A: Durante ese tiempo no podrá utilizar el wifi ni los datos.
+B: Esto...
+A: Dígame.
+B: Si apago esto...
+A: Sí.
+B: ¿Hoy dos o tres horas? ¿Hoy, todo el día?
+A: Hoy, dos o tres horas; si es breve, tardará dos o tres horas, y si se alarga, hasta unas cinco horas.
+A: No la citamos porque usted es joven y tiene que hacer su vida laboral; si viene, quedará un registro del caso y de su visita.
+A: Como eso puede causarle problemas durante los próximos cinco años si cambia de empresa o prepara oposiciones para un puesto público, nos comunicamos con usted.
+A: Si le estoy dando esas facilidades, ¿no debería colaborar?
+A: Si le pedimos que colabore y se niega, tendrá que recibir la sanción correspondiente, ¿no? ¿Verdad?
+B: Pero yo...
+B: Tengo que apagar los datos...
+A: Si están activados el wifi y los datos, se producen errores de comunicación. ¿Entiende?
+B: Es que ahora tengo mucho miedo.
+A: Sí, ¿qué le da miedo?
+A: ¿Qué le da miedo? Y antes me habló con esa insolencia, sin pensar en eso...
+A: Francamente, no quiero seguir con esto, pero lo estoy haciendo. ¿Sabe por qué?
+A: Porque yo también soy humano. Aunque sea bastante mayor que usted, soy humano. No le beneficia hablar así.
+A: ¿Entiende? Le estoy dando todas las facilidades posibles. Colabore bien.
+A: Diga claramente qué es lo que le da miedo.
+B: Estoy sola y me dice que apague todo esto... ¿No podemos hacerlo más tarde, cuando esté con mi familia?
+A: Primero, puede ser sancionada por revelarlo a terceros. Si está dispuesta a asumirlo, dígalo.
+A: Y si está preocupada, tome un taxi y venga a nuestra fiscalía. Así no tendrá motivos para preocuparse, ¿verdad?
+B: ¿Entonces puedo ir mañana?
+A: Tiene que venir ahora. Ya se le notificó el caso y consultó el documento oficial; ¿qué sentido tiene decir que viene mañana? ¿Cómo voy a hacerme responsable de que usted oculte el caso?
+A: Si usted oculta el caso...
+A: No sabe nada del mundo. ¿Cuál es la dirección? Banpo-daero 158.
+A: En el piso 14, junto a la División 3 de Juicios de Asuntos Exteriores, está la División 1 de Investigación de Delitos de Alta Tecnología. ¿Le programo una cita?
+A: ¿Va a comparecer?
+B: Espere, ¿Banpo-daero, piso 13?
+A: Es el número 158.
+A: En el piso 14, junto a la División 3 de Juicios de Asuntos Exteriores, está la División 1 de Investigación de Delitos de Alta Tecnología; para entrar, de todos modos, tiene que presentar su documento.
+A: Y yo también tengo que presentar unos papeles; entonces quedará un registro del caso y de su visita.
+A: Aunque después quede libre de cargos, no podrá objetarlo. Aunque pida que borremos el registro del caso y de la visita...
+A: ¿Entiende?
+A: ¿Por qué no habla?
+B: Porque tengo mucho miedo.
+A: Pero ¿de qué tiene tanto miedo? ¿Eh? Después de hablarme con tanta insolencia, ¿qué le da miedo para ponerse así?
+B: ¿Tengo que ir sola o puede acompañarme alguien responsable de mí?
+A: Un abogado sí, pero un acompañante no. Porque legalmente es mayor de edad.
+A: Con esas cosas insolentes que suelta, ¿cree que a mí, que también soy una persona, no me ha molestado?
+B: Creo que le ha molestado.
+A: ¿Cree que eso le va a beneficiar?
+B: Entonces, ¿basta con dejarlos apagados unas dos horas?
+A: Para empezar, ahora me cuesta querer seguir con la investigación.
+A: Las cosas que sigue soltando...
+A: En pocas palabras, como esto queda grabado no puedo decirlo claramente, pero tiene muy poca educación.
+A: ¿Podría comparecer? A pesar de todas las facilidades que le doy...
+A: No entiendo en absoluto por qué me habla así.
+B: Es la primera vez que recibo una llamada como esta.
+A: Por eso, no le pido mucho, ya le dije que hablara manteniendo un mínimo de educación.
+A: Tiene que hablar con un mínimo de educación, ¿no?
+A: Hay dos métodos de investigación; puede elegir. El primero es la investigación coercitiva: a partir de este momento no tiene que hacer nada.
+A: Se procederá a congelar todas sus cuentas. No podrá utilizarlas hasta que termine la investigación, durante entre seis y doce meses; pueden cancelarse productos como ahorros a plazo, depósitos, cuentas de suscripción, cuentas con descubierto, fondos de inversión o seguros de ahorro.
+A: Sobre eso, cuando después quede libre de cargos, puede demandar a nuestra fiscalía o hacer lo que quiera. Tendrá que venir entre tres y cinco veces; se le prohibirá salir del país y no podrá apagar el teléfono que utiliza.
+A: Si lo apaga, se procederá a detenerla. Como está sujeta a investigación, se investigarán las comunicaciones; y por el riesgo de fuga y destrucción de pruebas, no podrá salir al extranjero.
+A: El segundo método es la investigación cooperativa: se le pagarán 82.000 wones por los gastos de colaboración, y como usted misma hará las gestiones bancarias, tardará entre una y dos horas. Según el caso, puede quedar acreditado hoy mismo.
+A: Además, para una cuenta por persona en las entidades que utiliza, le asignaremos el nivel máximo de seguridad y durante los próximos cinco años...
+A: ...la configuraremos como cuenta segura para que pueda utilizarla sin riesgo. Pero si, después de aceptar colaborar, se niega u oculta algo, le quedará un registro del caso.
+A: Y será sancionada por eso. Se le prohibirá salir del país y quedarán registros del caso y de sus visitas. Piénselo bien y decida.
+A: Dígalo claramente, señora.
+B: Voy a colaborar y hacerlo bien.
+A: Desactive el wifi y los datos.
+B: Espere. ¿Lo hago ahora? O sea, ¿los apago ahora?
+A: Sí, hágalo ahora.
+A: ¿Cree que es la primera o segunda vez que me encuentro con alguien como usted? Sí, yo también tengo mal carácter.
+A: Siendo tan joven, por mucho que se enfade...
+A: ...no le va a servir de nada; por eso intento avanzar de esta manera. ¿Entiende?
+B: Pero, cómo era, hay un sitio del que estoy esperando que me contacten...
+A: Sí.
+B: Un momento, un momento.
+A: ¿De dónde la van a contactar?
+B: Estoy esperando que me contacten del hospital.
+A: Sí, envíe un mensaje de texto. Sí.
+B: Espere.
+A: Antes de recibir o enviar mensajes de texto tiene que avisarme.
+A: Está siendo investigada como persona investigada; tiene que colaborar con las restricciones de movimiento, ¿no? Ahora también tiene que hacer gestiones bancarias.
+A: Los bancos van a cerrar dentro de poco. Si no puede hacer las gestiones hoy, se la citará.
+A: ¿Entiende? ¿Qué comunicación está esperando?
+B: Estoy esperando que me contacten del hospital, así que al jefe del equipo, un momento...
+A: ¿Cuándo la van a contactar?
+B: Creo que enseguida, espere.
+A: Envíe un mensaje de texto. Por mensaje.
+A: No estamos jugando.
+A: ¿Entiende?
+A: ¿Ya envió el mensaje?
+B: Sí, lo estoy escribiendo.
+A: Intentaré avanzar lo más rápido posible. Ahora también están las gestiones del sistema bancario y el rastreo de sus cuentas...
+A: Y que se cancelen sus activos y se envíen al extranjero... Los cómplices de Kim Tae-hwan tienen antecedentes de ese tipo.
+A: También tenemos que proteger sus bienes, ¿no? ¿Verdad? Hay que resolverlo antes de que cierre el sistema, así que intentaré avanzar lo más rápido posible.
+B: Sí, espere.

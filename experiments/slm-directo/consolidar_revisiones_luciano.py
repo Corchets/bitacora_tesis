@@ -19,6 +19,12 @@ MAPA_145 = f"CORRESPONDENCIA-145-LUCIANO-{FECHA_145}.json"
 ORIGINAL_144 = "FICHAS-144-LUCIANO-INGLES-2026-11-07.md"
 COREANO_144 = "FICHAS-144-LUCIANO-COREANO-2026-11-10.md"
 FUENTES_COREANO = {"KO-01": "vishing_540", "KO-02": "vishing_281"}
+# Segunda tanda: solo las fichas llenadas; KO-10 a KO-12 siguen vacías y no se publican.
+COREANO_144_B = "FICHAS-144-LUCIANO-COREANO-2026-11-11.md"
+FUENTES_COREANO_B = {
+    "KO-03": "vishing_577", "KO-04": "vishing_657", "KO-05": "vishing_443", "KO-06": "vishing_635",
+    "KO-07": "vishing_298", "KO-08": "vishing_545", "KO-09": "vishing_349",
+}
 SALIDA = f"REVISIONES-LUCIANO-{FECHA_145}.jsonl"
 
 
@@ -79,18 +85,19 @@ def filas_144(texto: str) -> list[dict]:
     return salida
 
 
-def filas_144_coreano(texto: str) -> list[dict]:
-    bloques = list(re.finditer(r"^### Ficha (KO-0\d)\s*$", texto, re.M))
-    if [b[1] for b in bloques] != list(FUENTES_COREANO):
-        raise ValueError("No se localizaron las dos fichas de coreano.")
+def filas_144_coreano(texto: str, fuentes: dict = FUENTES_COREANO, archivo: str = COREANO_144,
+                      fecha: str = "2026-11-10") -> list[dict]:
+    bloques = list(re.finditer(r"^### Ficha (KO-\d+)\s*$", texto, re.M))
+    if [b[1] for b in bloques] != list(fuentes):
+        raise ValueError("Las fichas de coreano no coinciden con las esperadas.")
     salida = []
     for i, match in enumerate(bloques):
         cuerpo = texto[match.end():bloques[i + 1].start() if i + 1 < len(bloques) else len(texto)]
         campos = {k.split(" (")[0].strip(): v.strip() or None for k, v in re.findall(r"^- (.+?):(.*)$", cuerpo, re.M)}
         salida.append({
-            "issue": 144, "fecha": "2026-11-10", "revisor": "Luciano Grosso",
-            "case_id": None, "alias_revision": match[1], "fuente_id": FUENTES_COREANO[match[1]],
-            "archivo_original": COREANO_144, "selector_original": match[0],
+            "issue": 144, "fecha": fecha, "revisor": "Luciano Grosso",
+            "case_id": None, "alias_revision": match[1], "fuente_id": fuentes[match[1]],
+            "archivo_original": archivo, "selector_original": match[0],
             "juicio_estafa": campos["Leyendo la conversación entera, ¿es estafa?"],
             "credibilidad": campos["¿Es creíble como llamada?"], "unidad_marcas": "segmento_fuente",
             "sospecha_marca": campos["¿En qué segmento"], "pedido_marca": campos["Primer pedido de alto riesgo"],
@@ -104,6 +111,8 @@ def filas_144_coreano(texto: str) -> list[dict]:
 def main() -> None:
     registros = filas_144((CORPUS / ORIGINAL_144).read_text(encoding="utf-8"))
     registros += filas_144_coreano((CORPUS / COREANO_144).read_text(encoding="utf-8"))
+    registros += filas_144_coreano((CORPUS / COREANO_144_B).read_text(encoding="utf-8"),
+                                   FUENTES_COREANO_B, COREANO_144_B, "2026-11-11")
     registros += filas_145((CORPUS / ORIGINAL_145).read_bytes(), json.loads((CORPUS / MAPA_145).read_text()))
     (CORPUS / SALIDA).write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in registros), encoding="utf-8")
     print(f"{len(registros)} anotaciones individuales; sin adjudicar ni modificar los originales.")

@@ -1,0 +1,26 @@
+{
+  "case_id": "EXT-320",
+  "grupo": "externo",
+  "clase": "vishing",
+  "clase_fuente": "vishing",
+  "t_r_linea": 12,
+  "t_c_linea": 13,
+  "sospecha_linea": 3,
+  "revision_humana": true,
+  "revisor": "Luciano Grosso",
+  "fecha": "2026-11-07",
+  "ficha_original": {
+    "conservar": "conservar",
+    "creible": "si",
+    "es_estafa": "creeria que si",
+    "sospecha_turno": "3",
+    "t_r_turno": "12",
+    "t_c_turno": "13",
+    "comienzo_final": "finla cortado creo",
+    "hablantes": "",
+    "equivalente_local": "",
+    "dudas": "",
+    "decision": "si"
+  },
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de un solo revisor; #144 pide un segundo revisor en los casos dudosos. Las líneas salen de traducir los números de turno de la ficha al archivo de texto (un turno pegado en la fuente se separa en dos líneas: T_R va a la línea del estafador y T_C a la de quien atiende). Si la ficha no trae un número, el campo queda en null y la respuesta literal está en ficha_original."
+}

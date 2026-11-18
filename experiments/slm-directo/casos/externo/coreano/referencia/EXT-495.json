@@ -1,0 +1,27 @@
+{
+ "case_id": "EXT-495",
+ "grupo": "externo",
+ "clase": "vishing",
+ "clase_fuente": "vishing",
+ "t_r_linea": 202,
+ "t_c_linea": 215,
+ "pedidos_lineas": [
+  202,
+  222,
+  236
+ ],
+ "cumplimientos_lineas": [
+  215
+ ],
+ "sospecha_linea": null,
+ "con_pedido": true,
+ "revision_humana": false,
+ "marcado_por": {
+  "t_r": "pre-marcado de IA (gpt-6.1-sol, esfuerzo medio, con Orca)",
+  "t_c": "pre-marcado de IA (gpt-6.1-sol, esfuerzo medio, con Orca)",
+  "roles": "pre-marcado de IA (gpt-6.1-sol, esfuerzo medio, con Orca)",
+  "confirmacion": "Luciano Grosso aprobó la lista de marcas el 2026-11-11, sin leer la conversación completa"
+ },
+ "premarcado": "tanda3/premarcado/KO-17.json",
+ "notas": "T_R y T_C son el primer pedido y el primer cumplimiento; pedidos_lineas y cumplimientos_lineas guardan todos los marcados (una línea por segmento de la fuente). Traducción fiel al español neutro, sin adaptar al rioplatense, con wones y nombres coreanos: se decidió no adaptarla para que la IA no sesgara el texto; se conserva la estructura de la llamada real."
+}

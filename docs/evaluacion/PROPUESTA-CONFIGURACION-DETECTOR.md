@@ -2,6 +2,10 @@
 
 **Fecha:** 2026-11-05. **Issue:** [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
 
+> **Nota del 2026-11-11:** superada por el [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md). El equipo sacó a Tito
+> el 2026-11-06 y la segunda vuelta de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) eligió el prompt C
+> con la premisa del alcance en lugar de `v4`. Lo de abajo queda como estaba.
+
 > **Estado: propuesta sin discutir.** La propone Luciano para que el equipo decida si vamos con esta configuración u
 > otra. Todos los números son de los 150 casos de desarrollo, ya vistos y con referencias sin revisión humana: sirven
 > para elegir, no estiman el rendimiento final. No decide

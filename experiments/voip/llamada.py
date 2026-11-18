@@ -306,6 +306,13 @@ class Llamada:
         self._escribir(self._detector, self.evento_detector(ev))
         return ev
 
+    def registrar_motivo(self, ev: Evaluacion, respuesta: Any, fin_s: float) -> dict:
+        """El motivo del aviso llegó después del aviso (#172): completa la evaluación y lo registra aparte."""
+        ev.respuesta = respuesta
+        evento = {**self.evento_detector(ev), "entrega": "motivo", "fin_motivo_s": round(fin_s, 3)}
+        self._escribir(self._detector, evento)
+        return evento
+
     def evento_detector(self, ev: Evaluacion) -> dict:
         r = ev.respuesta
         tito = {} if not getattr(r, "consulta", "") else {
@@ -325,6 +332,7 @@ class Llamada:
             "alerta_sugerida": r.alerta_sugerida,
             "motivo": r.motivo,
             "evidencia": r.evidencia,
+            "motivo_pendiente": getattr(r, "motivo_pendiente", False),
             "aviso": ev.aviso,
             "t_a": round(ev.fin_s, 3) if ev.aviso else None,
             "fin_voz_s": None if ev.fin_voz_s is None else round(ev.fin_voz_s, 3),

@@ -1,4 +1,4 @@
-> **Estado: borrador del 2026-11-03**, actualizado con la configuración final de [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Requiere revisión del equipo.
+> **Estado: borrador del 2026-11-03**, actualizado el 2026-11-11 con el detector del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) y el ASR del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Requiere revisión del equipo.
 
 # Capítulo 6: Implementación del sistema
 
@@ -18,18 +18,16 @@ Las bibliotecas y runtimes utilizados, con sus números de versión reales extra
 | **ASR** | `sherpa-onnx` | `1.13.8` | Decodificación de Parakeet y Silero, sobre ONNX Runtime. |
 | **Modelo de ASR** | `sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8` | v3, int8 | Transcripción por frases, búsqueda *greedy*, 2 hilos. |
 | **Filtro de voz** | `silero_vad.onnx` | Release `asr-models` de `sherpa-onnx` | Decide qué cuenta como voz (umbral 0,5). |
-| **Servidor de SLM** | `ollama` | `0.40.5` (M1), `0.40.8` (Ryzen) | Inferencia local con API HTTP. |
-| **Modelo de lenguaje** | `gemma4:e2b-it-q4_K_M` | Digest `b37049369adf…`, 4,59 GB | Decisión del aviso, con temperatura 0, seed 42 y `num_ctx` 4096. |
-| **Filtro Tito viejo** | `tito_logreg.json` | sha256 `fb601eaa…5098eccd` | Regresión logística `C=1.0` sobre el encoder. |
-| **Encoder de Tito** | `pysentimiento/robertuito-base-uncased` | Revisión `20cb399e…`, congelado | Representación de la frase, 128 tokens como máximo. |
-| **Inferencia de Tito** | `torch`, `transformers` | `2.14.1`, `5.20.2` | Solo para Tito; el resto no los necesita. |
+| **Servidor de SLM** | `ollama` | `0.40.5` (M1), `0.40.8` (Ryzen), `0.40.14` (Colab T4) | Inferencia local con API HTTP. |
+| **Servidor en el teléfono** | `llama-server` (llama.cpp) | `6c01da62` | Medición en el Samsung A56, en CPU con 4 hilos. |
+| **Modelo de lenguaje** | `gemma4:e2b-it-q4_K_M` | Digest `b37049369adf…`, 4,59 GB | Decisión del aviso, con temperatura 0, seed 42 y `num_ctx` 4096; la salida se corta a los 14 tokens. |
 | **Llamada en vivo** | `websockets` | `>=15.0` | Audio y control entre el panel y el servidor. |
 | **Panel** | HTML y módulos JavaScript | Sin dependencias externas | Captura por AudioWorklet, conversación y Presentación. |
 | **Pruebas** | `unittest`, `node --test` | Bibliotecas estándar | Pruebas sin red ni modelos reales. |
 
 Whisper y Zipformer siguen en el código como antecedentes reproducibles, así como la síntesis TTS con `say` de macOS para los ejemplos sin voz humana.
 
-La elección de `sherpa-onnx` obedece al requerimiento de despliegue local: permite ejecutar el modelo de voz en CPU sin un framework de entrenamiento. Tito sí usa PyTorch para su encoder, lo que suma unos 0,48 GB de memoria; es un costo declarado de la configuración final.
+La elección de `sherpa-onnx` obedece al requerimiento de despliegue local: permite ejecutar el modelo de voz en CPU sin un framework de entrenamiento. La configuración final tampoco usa PyTorch. Sí lo usa Tito viejo, el filtro del ADR 0001, que sigue en el repositorio como antecedente: la regresión logística `tito_logreg.json` (sha256 `fb601eaa…5098eccd`) sobre `pysentimiento/robertuito-base-uncased` congelado (revisión `20cb399e…`), con `torch` 2.14.1 y `transformers` 5.20.2, y unos 0,48 GB de memoria.
 
 ---
 
@@ -49,6 +47,7 @@ flowchart TD
     subgraph VOIP["experiments/voip/"]
         SRV["servidor.py<br/>(ASR por canal y detector)"]
         PAN["panel.html<br/>(Captura, Presentación e Historial)"]
+        TUR["turnos.py<br/>(Turnos por canal)"]
     end
 
     subgraph REPLAY["experiments/replay/"]
@@ -58,7 +57,6 @@ flowchart TD
 
     subgraph SLM["experiments/slm-directo/"]
         DET["detectores.py<br/>(DetectorSLM / DetectorReglas)"]
-        TIT["filtro_tito.py + tito_real.py<br/>(Tito viejo)"]
         OLL["cliente_ollama.py<br/>(Cliente HTTP)"]
         REG["reglas.py<br/>(Reglas de incendio)"]
         CAS["casos.py<br/>(Carga de casos)"]
@@ -72,8 +70,8 @@ flowchart TD
     AL -->|"actualizaciones.jsonl"| RP
     PAN -->|"PCM 16 kHz, 40 ms"| SRV
     SRV -->|"actualizaciones.jsonl"| RP
-    SRV --> TIT
-    TIT --> DET
+    SRV --> TUR
+    TUR -->|"Turno de OTRA cerrado"| DET
     RP --> CTX
     CTX -->|"Líneas disponibles"| DET
     DET --> OLL
@@ -127,23 +125,26 @@ El módulo de reproducción y gestión temporal se implementa en:
 
 ### 6.2.3. Modelos de lenguaje directo y reglas heurísticas (`experiments/slm-directo/`)
 
-> **Corregir (#51):** si el ADR 0002 deja el SLM solo, Tito pasa a ser un componente de ablación. Hay que ajustar este punto, la tabla de §6.1 y el diagrama de §6.2.
+La capa de detección lingüística implementa el detector del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) y las reglas que sirven de línea base. El filtro Tito viejo del ADR 0001 queda descrito al final, como antecedente.
 
-La capa de detección lingüística implementa dos variantes complementarias:
-
-1. **Filtro Tito viejo ([`filtro_tito.py`](../../experiments/slm-directo/filtro_tito.py), [`tito_real.py`](../../experiments/slm-directo/tito_real.py)):**
+1. **Configuración final (`DetectorSLMCorteRiesgo`, en [`detectores.py`](../../experiments/slm-directo/detectores.py)):**
+   - Arma el mismo pedido que el resto de los detectores JSON: el prompt [`tarea_c_premisa.txt`](../../experiments/slm-directo/prompts/tarea_c_premisa.txt), la salida [`salida_json_c.txt`](../../experiments/slm-directo/prompts/salida_json_c.txt) y la transcripción con los roles `PROTEGIDA` y `OTRA`.
+   - Corta la salida con `num_predict` 14, justo después de la coma que cierra el riesgo, y lo lee del texto cortado. La regla es riesgo ≥ 0,3; `alerta_sugerida` no llega a escribirse.
+   - En el primer aviso hace una segunda consulta con [`motivo_c_corte.txt`](../../experiments/slm-directo/prompts/motivo_c_corte.txt), que repite los mensajes, agrega lo ya escrito y pide motivo y evidencia. Si falla, el aviso se mantiene y el error queda con el prefijo `etapa2_`.
+   - Con `--solo-otra`, las líneas de PROTEGIDA entran en el contexto y no consultan.
+2. **Antecedente: filtro Tito viejo ([`filtro_tito.py`](../../experiments/slm-directo/filtro_tito.py), [`tito_real.py`](../../experiments/slm-directo/tito_real.py)):**
    - `TitoReal` obtiene la representación de RoBERTuito congelado (promedio enmascarado de la última capa, dimensión 768) y aplica la regresión logística del artefacto. Tarda unos 30 ms por frase en la M1.
    - `FlujoTitoSLM` activa al modelo ante el primer puntaje mayor o igual a 0,5 o ante un fallo de Tito, y le entrega el indicio como bloque separado, marcado como falible. El estado se reinicia entre llamadas.
    - `FlujoTitoEnVivo` ([`replay.py`](../../experiments/replay/replay.py)) adapta ese flujo a la llamada: recibe solo frases cerradas y puntúa también las que se juntaron mientras el detector estaba ocupado.
    - El ajuste del artefacto está en [`entrenar_tito.py`](../../experiments/slm-directo/entrenar_tito.py) y su [diagnóstico](../../experiments/slm-directo/DIAGNOSTICO-TITO-2026-10-29.md). En esas 10 conversaciones, Tito derivó 4 de 8 legítimas y las 2 estafas: el filtro ahorra consultas, pero es el modelo el que descarta.
-2. **Detector con modelo de lenguaje local ([`detectores.py`](../../experiments/slm-directo/detectores.py) - `DetectorSLM`):**
+3. **Detector con modelo de lenguaje local, clase base ([`detectores.py`](../../experiments/slm-directo/detectores.py) - `DetectorSLM`):**
    - Se comunica con el demonio de Ollama mediante llamadas HTTP POST a la ruta `/api/chat` implementadas en [`cliente_ollama.py`](../../experiments/slm-directo/cliente_ollama.py).
-   - Configura las opciones del modelo: temperatura fija $0.0$, semilla pseudoaleatoria $42$, límite de ventana de contexto `num_ctx = 4096`, límite de predicción `num_predict = 512` y bandera de inhibición de razonamiento verbalizado (`think: false`).
+   - Configura las opciones del modelo: temperatura fija $0.0$, semilla pseudoaleatoria $42$, límite de ventana de contexto `num_ctx = 4096`, límite de predicción `num_predict = 512`. No envía `think`.
    - **Control de desborde de contexto:** Debido a que Ollama trunca silenciosamente los textos que exceden la ventana sin arrojar error, el método `evaluar()` estima previamente la longitud en tokens ($(\text{longitud\_prompt} + \text{longitud\_usuario}) / 3$). Si supera el $90\ \%$ de `num_ctx`, detiene la invocación y emite una respuesta no válida con el error `contexto_excedido`.
-   - **Prompt:** Se usa `tarea`, que pide marcar la alerta solo si alguien pide, induce o presiona para entregar códigos, claves, datos personales o dinero, instalar acceso remoto o hacer acciones de seguridad guiadas, y aclara que no alcanza con mencionarlas.
+   - **Prompt:** En la configuración del ADR 0001 se usaba `tarea`, que pide marcar la alerta solo si alguien pide, induce o presiona para entregar códigos, claves, datos personales o dinero, instalar acceso remoto o hacer acciones de seguridad guiadas, y aclara que no alcanza con mencionarlas. La configuración final usa C con la premisa del alcance (punto 1).
    - **Forzado y validación de esquema:** Envía a la API el esquema estructurado `ESQUEMA_SALIDA` exigiendo un objeto JSON con cuatro propiedades obligatorias (`riesgo`, `alerta_sugerida`, `motivo`, `evidencia`). La función `validar_salida()` verifica exhaustivamente que el texto devuelto parsee como JSON, que los tipos coincidan, que `riesgo` esté acotado entre $0$ y $1$ y que una alerta sugerida posea obligatoriamente un motivo en texto.
    - **Verificación adversarial de evidencia:** La función `evidencia_en_texto()` normaliza la cita devuelta por el modelo y comprueba si cada uno de sus renglones existe literalmente dentro de la transcripción histórica disponible. Si el modelo inventa o parafrasea frases que no se pronunciaron, la bandera `evidencia_en_texto` se fija en `False`.
-3. **Comparador de reglas de laboratorio ([`reglas.py`](../../experiments/slm-directo/reglas.py) / `DetectorReglas`):**
+4. **Comparador de reglas de laboratorio ([`reglas.py`](../../experiments/slm-directo/reglas.py) / `DetectorReglas`):**
    - Reproduce fielmente las reglas heurísticas desarrolladas por Ignacio en el laboratorio (`experiments/laboratorio/rules.py`, commit `a39fca6`).
    - Agrupa los términos sospechosos en seis familias de patrones (`REQUEST_AUTH_CODE`, `REQUEST_SECRET`, `REQUEST_TRANSFER`, `REQUEST_PERSONAL_DATA`, `REQUEST_REMOTE_ACCESS`, `REQUEST_SECURITY_ACTION`).
    - La función `_cerca()` implementa coincidencia exacta para patrones cortos ($\le 5$ caracteres, como `pin`, `otp`, `cbu` o el término sensible `numeros`) y tolera una distancia Damerau-Levenshtein de hasta 1 edición (`_edicion1()`) en términos de 6 o más caracteres para absorber errores tipográficos o de transcripción ASR.
@@ -152,7 +153,7 @@ La capa de detección lingüística implementa dos variantes complementarias:
 
 ### 6.2.4. Llamada en vivo y panel (`experiments/voip/`)
 
-[`servidor.py`](../../experiments/voip/servidor.py) recibe el audio de cada persona por WebSocket y arranca, salvo que se le indique otra cosa, con la configuración final: `parakeet-filtro` y Tito viejo con E2B. El panel ofrece también las otras opciones para comparar, y reglas como respaldo sin modelo.
+[`servidor.py`](../../experiments/voip/servidor.py) recibe el audio de cada persona por WebSocket y arranca, salvo que se le indique otra cosa, con la configuración final: `parakeet-filtro` y E2B solo con `c-premisa-corte-riesgo`, consultando al cerrar cada turno de OTRA ([`turnos.py`](../../experiments/voip/turnos.py), ADR 0007). El panel ofrece también las reglas como respaldo sin modelo. Tito viejo queda solo por línea de comandos, como antecedente.
 
 - **Captura ([`audio-navegador.mjs`](../../experiments/voip/audio-navegador.mjs), [`fuentes.mjs`](../../experiments/voip/fuentes.mjs)):** el AudioWorklet mezcla a mono, remuestrea a 16 kHz y envía bloques PCM16 de 40 ms. La persona protegida usa su micrófono y la otra persona llega desde una pestaña de Meet, cuyo audio se comparte en Chrome. El video que exige el selector no se transmite ni se guarda.
 - **Reloj:** empieza con el primer bloque que llega; cada canal se ubica según su llegada y cuenta muestras desde ahí, de modo que los canales y el estéreo guardado quedan alineados.
@@ -238,7 +239,7 @@ Los resultados empíricos mostraron un incremento sustancial de los tiempos de r
 - En el modelo `qwen3.5:0.8b`, la latencia mediana por línea se elevó a 3.9 s (con un percentil 95 de 7.3 s y un máximo de 9.1 s).
 - En el modelo `qwen3.5:2b`, la latencia mediana trepó a 8.2 s por línea (con un percentil 95 de 13.0 s y un máximo de 20.9 s).
 
-Estas mediciones son de Qwen. Con la configuración final, E2B dio en la M1 de 8 GB una **mediana de 3,74 s por consulta y un p95 de 4,53 s** ([#84](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84)), con 4,5–4,7 GB de swap: no cumple el criterio de 2 s, aunque el aviso llegó entre −0,45 y +0,40 s del fin del pedido. Esa medición usó Zipformer, sin Chrome ni Meet.
+Estas mediciones son de Qwen. Con la configuración del ADR 0001 (JSON completo), E2B dio en la M1 de 8 GB una **mediana de 3,74 s por consulta y un p95 de 4,53 s** ([#84](../../experiments/voip/corridas/2026-11-02-voz-real-meet.md#demora-de-e2b-84)), con 4,5–4,7 GB de swap: no cumple el criterio de 2 s, aunque el aviso llegó entre −0,45 y +0,40 s del fin del pedido. Esa medición usó Zipformer, sin Chrome ni Meet. Con la salida cortada del ADR 0002, en el Samsung A56 tardó 3,60 s de mediana por línea de OTRA ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)).
 
 Bajo este régimen de operación, la cola secuencial del detector acumula un atraso creciente respecto al ritmo natural del habla. Con el modelo de 2B parámetros, el aviso llega con una demora acumulada superior a 11.7 segundos después de pronunciada la frase crítica. En esa PC de escritorio x86 evaluada, solo con CPU y 2 hilos, el modelo de 2B incumple ampliamente el gate operativo de latencia de [PREFACTIBILIDAD-TECNICA.md](../investigacion/PREFACTIBILIDAD-TECNICA.md) ($p95 \le 1.5\ \text{s}$). Como señala la propia documentación del ensayo, se trata de una medición de cota en una PC de escritorio y no en un teléfono: la viabilidad y rendimiento en dispositivos móviles reales continúa sin medirse.
 

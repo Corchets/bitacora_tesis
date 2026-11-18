@@ -75,7 +75,7 @@ Los 5, 10 y 20 segundos del borrador anterior son candidatos, sin aprobación re
 | ¿Distingue fraude de llamadas legítimas? | Precision, recall y F1 sobre decisiones tomadas con prefijos de la conversación. Se define qué instante y qué unidad se comparan. |
 | ¿Cuántas legítimas reciben un aviso incorrecto? | Llamadas legítimas con al menos una alerta / total de llamadas legítimas evaluadas. |
 | ¿Cuándo avisa? | Llamadas detectadas y sin alerta; márgenes `L_R` y `L_C`; alertas con margen suficiente. |
-| ¿Qué cambia por el ASR? | Mismo detector sobre texto manual y texto reconocido: errores de transcripción (WER), términos críticos perdidos y cambios en detección, falsas alarmas y márgenes. |
+| ¿Qué cambia por el ASR? | Errores de transcripción (WER) y términos críticos perdidos, medidos aparte con voz real contra el guion. El mismo detector sobre texto manual y reconocido (E1) quedó fuera ([#54](https://github.com/Corchets/bitacora_tesis/issues/54)). |
 | ¿Sigue el ritmo del audio? | Tiempo de cómputo / duración del audio (`RTF`), demora entre evidencia disponible y aviso, y memoria usada. Se registra el hardware. |
 | ¿Explica el motivo correctamente? | Revisión del motivo mostrado contra los fragmentos humanos de referencia; declarar qué casos se revisaron. Una anotación parcial no permite medir todas las etiquetas como presentes/ausentes. |
 

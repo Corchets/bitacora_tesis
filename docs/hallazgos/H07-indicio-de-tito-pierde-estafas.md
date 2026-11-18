@@ -29,3 +29,5 @@ Una corrida por condición, en los 150 casos de desarrollo. 4 estafas son más q
 ## Qué cambia
 
 La demo ya corre sin indicio desde el 2026-11-05. El ADR 0002 de #51 y el capítulo 5 tienen que registrarlo.
+
+> **Nota del 2026-11-11:** registrado en el [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) y en el capítulo 5: el detector no usa Tito ni indicio.

@@ -233,6 +233,45 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(manifiesto["detector"]["evaluaciones"], 2)
         self.assertEqual(manifiesto["detector"]["aviso"]["motivo"], "pidió el código")
 
+    async def test_el_aviso_sale_antes_que_su_motivo(self):
+        # #172: con un detector que difiere el motivo, el panel recibe el aviso sin motivo y después el motivo aparte.
+        seguir = threading.Event()
+
+        class RespuestaPendiente(RespuestaFalsa):
+            motivo_pendiente = True
+
+        class Diferido:
+            motivo_diferido = False
+
+            def evaluar(self, foto):
+                return RespuestaPendiente(alerta_sugerida=True, riesgo=0.5, ms=5.0)
+
+            def completar_motivo(self, respuesta):
+                assert seguir.wait(3)
+                return RespuestaFalsa(alerta_sugerida=True, riesgo=0.5, motivo="pidió el código", ms=9.0)
+
+        detector = Diferido()
+        self.servidor.detector = detector
+        async with connect(self.url + "/panel") as panel:
+            await panel.send(self.inicio())
+            await self.evento(panel, "inicio")
+            self.assertTrue(detector.motivo_diferido)
+            self.frase_cerrada(self.servidor.llamada, "decime el código")
+            self.servidor.novedad.set()
+            aviso = await self.evento(panel, "detector")
+            self.assertEqual((aviso["aviso"], aviso["motivo"], aviso["motivo_pendiente"]), (True, "", True))
+            seguir.set()
+            motivo = await self.evento(panel, "detector")
+            self.assertEqual((motivo["entrega"], motivo["aviso"], motivo["motivo"]), ("motivo", True, "pidió el código"))
+            self.assertEqual(motivo["t_a"], aviso["t_a"], "el aviso no se mueve")
+            await panel.send(json.dumps({"tipo": "terminar"}))
+            fin = await self.evento(panel, "fin")
+        manifiesto = json.loads((Path(fin["dir"]) / "manifiesto.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifiesto["detector"]["evaluaciones"], 1)
+        self.assertEqual(manifiesto["detector"]["aviso"]["motivo"], "pidió el código")
+        lineas = (Path(fin["dir"]) / "detector.jsonl").read_text(encoding="utf-8").splitlines()
+        self.assertEqual([json.loads(l).get("entrega") for l in lineas], [None, "motivo"])
+
     async def test_al_cerrar_evalua_la_frase_que_el_corte_deja_abierta(self):
         vistas = []
 

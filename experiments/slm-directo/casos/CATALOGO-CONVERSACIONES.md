@@ -30,6 +30,7 @@ se cuentan por clase acá.
 | Reserva del corpus v2 (`CV2-T-*`) | 200 | rama `reserva/test`: `casos/texto/` y `casos/referencia/` | `--particion test_reservado` en esa rama, solo en la evaluación final |
 | Legítimas de test de #45 | 56 | rama `reserva/test`: `casos/legitimas-entrantes-test.jsonl` | todavía no está en el formato de casos: hay que convertirla antes de la evaluación final |
 | Corpus externo real de #144 | — | `docs/corpus/ISSUE-144-*` y `docs/corpus/FICHAS-144-*` ([relevamiento](../../../docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md)) | lecturas y fichas, no casos: test externo previsto |
+| Sets externos de #144 | 49 | [`casos/externo/`](externo/README.md): 16 de inglés y 33 de coreano (24 sin ficha, con pre-marcado de IA) | formato de casos, pero `correr.py` todavía no los lee: falta el cargador de #52 |
 | Ejemplos del panel VoIP | 4 | `experiments/asr-local/audio/*-tts-estereo.wav`, fuera de Git (`asr-local/sintetizar_par.py`) | desde el panel; son audio sintético, sin valor de evaluación |
 | Llamadas con voz real (#94) | — | `experiments/voip/llamadas/` de la copia que corrió el servidor, fuera de Git | `replay.py --actualizaciones <llamada>/actualizaciones.jsonl` |
 
@@ -154,5 +155,27 @@ cambió.
 | [`2026-11-09_pedido-critico-etapa-3/c-sin-alerta-rep/2026-11-10_005705_etapa-3-c-sin-alerta-rep`](../corridas/2026-11-09_pedido-critico-etapa-3/c-sin-alerta-rep/2026-11-10_005705_etapa-3-c-sin-alerta-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-sin-alerta` |
 | [`2026-11-09_pedido-critico-etapa-3/controles-ventas/2026-11-10_012122_etapa-3-controles-ventas`](../corridas/2026-11-09_pedido-critico-etapa-3/controles-ventas/2026-11-10_012122_etapa-3-controles-ventas/) | 2026-11-10 | 6 | 6 casos sin lista (6 ya no están en desarrollo) | `c-sin-alerta`, `c-con-campo` |
 | [`2026-11-09_pedido-critico-etapa-3/humo/corrida/2026-11-10_001236_etapa-3-humo`](../corridas/2026-11-09_pedido-critico-etapa-3/humo/corrida/2026-11-10_001236_etapa-3-humo/) | 2026-11-10 | 3 | 3 casos sin lista | `c-json-corte`, `c-sin-alerta`, `c-con-campo` |
+| [`2026-11-10_a56-congelada-latencia/intento-1-esquema-ignorado`](../corridas/2026-11-10_a56-congelada-latencia/intento-1-esquema-ignorado/) | 2026-11-10 | 3 | 3 casos sin lista (3 ya no están en desarrollo) |  |
+| [`2026-11-10_a56-congelada-latencia`](../corridas/2026-11-10_a56-congelada-latencia/) | 2026-11-10 | 3 | 3 casos sin lista (3 ya no están en desarrollo) |  |
 | [`2026-11-10_config-congelada-humo/desarrollo/2026-11-10_152954_config-congelada-desarrollo`](../corridas/2026-11-10_config-congelada-humo/desarrollo/2026-11-10_152954_config-congelada-desarrollo/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-json-corte-riesgo` |
 | [`2026-11-10_config-congelada-humo/humo/corrida/2026-11-10_152633_config-congelada-humo`](../corridas/2026-11-10_config-congelada-humo/humo/corrida/2026-11-10_152633_config-congelada-humo/) | 2026-11-10 | 3 | 3 casos sin lista | `c-json-corte`, `c-json-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/base/2026-11-10_191406_sensibilidad-base`](../corridas/2026-11-10_sensibilidad-c/base/2026-11-10_191406_sensibilidad-base/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-json-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/base-rep/2026-11-10_195308_sensibilidad-base-rep`](../corridas/2026-11-10_sensibilidad-c/base-rep/2026-11-10_195308_sensibilidad-base-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-json-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/c-ancla/2026-11-10_192350_sensibilidad-c-ancla`](../corridas/2026-11-10_sensibilidad-c/c-ancla/2026-11-10_192350_sensibilidad-c-ancla/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-ancla-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/c-ancla-rep/2026-11-10_195844_sensibilidad-c-ancla-rep`](../corridas/2026-11-10_sensibilidad-c/c-ancla-rep/2026-11-10_195844_sensibilidad-c-ancla-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-ancla-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/c-premisa/2026-11-10_193330_sensibilidad-c-premisa`](../corridas/2026-11-10_sensibilidad-c/c-premisa/2026-11-10_193330_sensibilidad-c-premisa/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-premisa-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/c-premisa-rep/2026-11-10_200424_sensibilidad-c-premisa-rep`](../corridas/2026-11-10_sensibilidad-c/c-premisa-rep/2026-11-10_200424_sensibilidad-c-premisa-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-premisa-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/c-sin-freno/2026-11-10_194311_sensibilidad-c-sin-freno`](../corridas/2026-11-10_sensibilidad-c/c-sin-freno/2026-11-10_194311_sensibilidad-c-sin-freno/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-sin-freno-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/c-sin-freno-rep/2026-11-10_201007_sensibilidad-c-sin-freno-rep`](../corridas/2026-11-10_sensibilidad-c/c-sin-freno-rep/2026-11-10_201007_sensibilidad-c-sin-freno-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-sin-freno-corte-riesgo` |
+| [`2026-11-10_sensibilidad-c/humo/corrida/2026-11-10_191012_sensibilidad-humo`](../corridas/2026-11-10_sensibilidad-c/humo/corrida/2026-11-10_191012_sensibilidad-humo/) | 2026-11-10 | 3 | 3 casos sin lista | `c-json-corte-riesgo`, `c-ancla-corte-riesgo`, `c-premisa-corte-riesgo`, `c-sin-freno-corte-riesgo` |
+| [`2026-11-11_a56-latencia-172/contaminadas/s6-kv-q8`](../corridas/2026-11-11_a56-latencia-172/contaminadas/s6-kv-q8/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/contaminadas/s6-ub128`](../corridas/2026-11-11_a56-latencia-172/contaminadas/s6-ub128/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-base-t4`](../corridas/2026-11-11_a56-latencia-172/s6-base-t4/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-i8mm`](../corridas/2026-11-11_a56-latencia-172/s6-i8mm/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-kv-q8`](../corridas/2026-11-11_a56-latencia-172/s6-kv-q8/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-numero`](../corridas/2026-11-11_a56-latencia-172/s6-numero/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-rendimiento`](../corridas/2026-11-11_a56-latencia-172/s6-rendimiento/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-t6`](../corridas/2026-11-11_a56-latencia-172/s6-t6/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-t8`](../corridas/2026-11-11_a56-latencia-172/s6-t8/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-ub128`](../corridas/2026-11-11_a56-latencia-172/s6-ub128/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-11_a56-latencia-172/s6-vk`](../corridas/2026-11-11_a56-latencia-172/s6-vk/) | 2026-11-11 | 6 | 6 casos sin lista |  |
