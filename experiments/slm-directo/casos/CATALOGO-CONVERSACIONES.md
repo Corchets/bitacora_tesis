@@ -30,7 +30,7 @@ se cuentan por clase acá.
 | Reserva del corpus v2 (`CV2-T-*`) | 200 | rama `reserva/test`: `casos/texto/` y `casos/referencia/` | `--particion test_reservado` en esa rama, solo en la evaluación final |
 | Legítimas de test de #45 | 56 | rama `reserva/test`: `casos/legitimas-entrantes-test.jsonl` | todavía no está en el formato de casos: hay que convertirla antes de la evaluación final |
 | Corpus externo real de #144 | — | `docs/corpus/ISSUE-144-*` y `docs/corpus/FICHAS-144-*` ([relevamiento](../../../docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md)) | lecturas y fichas, no casos: test externo previsto |
-| Sets externos de #144 con ficha | 25 | [`casos/externo/`](externo/README.md): 16 de inglés y 9 de coreano | formato de casos, pero `correr.py` todavía no los lee: falta el cargador de #52 |
+| Sets externos de #144 | 49 | [`casos/externo/`](externo/README.md): 16 de inglés y 33 de coreano (24 sin ficha, con pre-marcado de IA) | formato de casos, pero `correr.py` todavía no los lee: falta el cargador de #52 |
 | Ejemplos del panel VoIP | 4 | `experiments/asr-local/audio/*-tts-estereo.wav`, fuera de Git (`asr-local/sintetizar_par.py`) | desde el panel; son audio sintético, sin valor de evaluación |
 | Llamadas con voz real (#94) | — | `experiments/voip/llamadas/` de la copia que corrió el servidor, fuera de Git | `replay.py --actualizaciones <llamada>/actualizaciones.jsonl` |
 

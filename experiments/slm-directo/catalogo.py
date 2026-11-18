@@ -36,8 +36,8 @@ FUERA_DE_DESARROLLO = [
      "`docs/corpus/ISSUE-144-*` y `docs/corpus/FICHAS-144-*` "
      "([relevamiento](../../../docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md))",
      "lecturas y fichas, no casos: test externo previsto"),
-    ("Sets externos de #144 con ficha", "25",
-     "[`casos/externo/`](externo/README.md): 16 de inglés y 9 de coreano",
+    ("Sets externos de #144", "49",
+     "[`casos/externo/`](externo/README.md): 16 de inglés y 33 de coreano (24 sin ficha, con pre-marcado de IA)",
      "formato de casos, pero `correr.py` todavía no los lee: falta el cargador de #52"),
     ("Ejemplos del panel VoIP", "4",
      "`experiments/asr-local/audio/*-tts-estereo.wav`, fuera de Git (`asr-local/sintetizar_par.py`)",

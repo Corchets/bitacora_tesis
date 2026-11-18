@@ -1,0 +1,353 @@
+A: Sí, ya se conectó la llamada.
+B: ¿Hola?
+A: Sí, diga su nombre, por favor.
+A: Sí, recibió su número de expediente, ¿verdad? Sí, diga el número.
+B: 2015, en coreano «josa», 3668.
+A: Sí, ya confirmamos su identidad. ¿Puede anotar ahora?
+B: Sí, puedo.
+A: Primero anote nuestra dependencia y mi nombre.
+B: Espere. Sí, dígame.
+A: Sí, soy el fiscal Ha Ji-su, jefe del Equipo 1 de la División de Investigación de Delitos de Alta Tecnología de la Fiscalía de Seúl.
+B: ¿Fiscal Ji-su? Sí.
+A: Sí, anótelo porque después podrá consultar el resultado de su caso.
+A: Hoy el investigador le habrá explicado los detalles de la investigación. ¿Entendió de qué trata el caso?
+B: Sí, lo entendí.
+A: Explíqueme lo que haya entendido.
+B: Me dijeron que abrieron una cuenta de NongHyup a mi nombre y la utilizaron como cuenta prestanombres. Entonces comprobaron qué cuentas utilizo.
+A: ¿Solo le explicaron hasta ahí?.
+B: Sí, hablamos hasta ahí.
+A: Primero volveré a explicarlo y llevaré a cabo la investigación con detalle.
+A: Detuvimos a Kim Ho-cheol y en el lugar de la detención se encontraron esas dos cuentas, una de NongHyup y otra de Hana Bank.
+A: Usted dijo que no conocía en absoluto al detenido Kim Woo-cheol ni las dos cuentas encontradas, ¿correcto?
+B: Sí, no sé nada. Ni siquiera sé quién es esa persona.
+A: Tampoco había oído hablar de él.
+B: Tampoco he ido allí.
+A: Se comprobó que se abrieron en la sucursal de Cheolsan, Gwangmyeong, provincia de Gyeonggi. ¿Tiene algún vínculo con esa zona, algún pariente cercano...?
+B: Ni siquiera sabía dónde estaba Gwangmyeong, en Gyeonggi.
+A: O sea, que nunca ha ido.
+B: No lo conocía en absoluto.
+A: Lo importante ahora es que se abrió una cuenta a su nombre, se utilizó como cuenta prestanombres y hubo otras personas perjudicadas.
+A: Las personas que depositaron dinero en su cuenta han presentado denuncias contra usted.
+A: Por esas denuncias está previsto fijar para el mes que viene el juicio de unas diez personas, incluido usted.
+A: Por eso, solo si hoy demuestra que es víctima no tendrá que comparecer ante el tribunal ni venir aquí.
+A: Entre los más de 200 perjudicados, igual que usted, algunos realmente vendieron sus cuentas, pero afirman que no tienen relación con este caso.
+A: Pero no podemos confiar al cien por cien en las declaraciones verbales de cada uno.
+A: Durante la investigación de hoy se consultará el rastreo de sus cuentas en las entidades financieras, desde 2012 hasta la actualidad.
+A: Si al hacerlo encontramos operaciones de dinero entre usted y Kim Woo-cheol o los cómplices relacionados...
+A: ...o si se comprueba que sus fondos no fueron obtenidos legalmente, sino que son ilegales, tendrá que comparecer ante el tribunal y dar explicaciones directamente a las víctimas de este caso.
+A: Sí, también deberá comparecer en nuestra fiscalía para una investigación presencial aparte. ¿No hay nada de eso, verdad?
+B: No, nada en absoluto. Yo solo trabajo a tiempo parcial y voy a la universidad... vacaciones... Solo he vivido así.
+A: El procedimiento para acreditar que es víctima se hará basándose en las pruebas que confirmemos. Si no hubo nada de eso, ¿entiende? Entonces, ¿ahora es estudiante?
+B: Sí, soy estudiante de la Universidad Nacional de Chungnam.
+A: Estudia en la Universidad Nacional de Chungnam y sigue cursando, ¿verdad?
+B: Ahora estoy en período de clases.
+A: En marzo no hacía ningún otro trabajo, solo seguía...
+B: En marzo también estaba en la universidad. Desde diciembre del año pasado trabajo como estudiante empleado, en la oficina del departamento, y mientras hacía eso iba a clase.
+A: Iba a clase. Voy a confirmar otra vez lo que le declaró al investigador.
+A: Las entidades donde usted fue personalmente al banco a abrir cuentas son Kookmin Bank, NongHyup, el correo, Hana Bank y Shinhan Bank. ¿Son esas cinco?
+B: Sobre Shinhan no puedo decirlo con certeza; no recuerdo bien si abrí una cuenta allí o no. No tengo por qué ir a Shinhan. En cualquier caso, las otras cuatro sí las abrí yo con seguridad.
+A: En el caso de Kookmin Bank, ¿en qué zona abrió la cuenta personalmente?
+B: La abrí hacia octubre de 2013, más o menos, en mi pueblo, Buyeo, en Chungnam.
+A: La abrió en Chungnam. ¿Y la de NongHyup?
+B: En Buyeo, Chungnam, justo después del examen de ingreso a la universidad, para trabajar a tiempo parcial.
+A: En Chungnam. ¿Y dónde abrió la del correo?
+B: Recuerdo que me la abrieron cuando estaba en primaria. La escuela me la abrió, algo como. Como la abrieron en la escuela, la he seguido usando.
+A: ¿La abrió en? ¿Esta también en Chungnam?
+B: Fue en Seongnam.
+A: Y la de Hana Bank también en Chungnam.
+B: Fue en Daejeon. Al hacer el carné de estudiante estaba vinculado con Hana Bank. Así que no tuve más remedio que...
+A: Entonces, para que sean sus cuentas, tiene que haber una cuenta abierta por usted en cada entidad.
+B: Sí, tiene que haber una en cada una. No abrí dos o más.
+A: Para reconocerlas como sus cuentas, tienen que coincidir en cierta medida con lo que declaró.
+A: Si se encuentran otras cuentas además de esas, las consideraremos ilegales y las congelaremos. Usted declaró que abrió personalmente la de Kookmin para depósitos y retiros.
+A: Y declaró que para que sea su cuenta tiene que haber unos 2,5 millones de wones de su dinero. ¿Es correcto?
+B: ¿En total o en Kookmin? Espere.
+A: En Kookmin.
+B: Sí, ahora mismo tiene unos 2,22 millones. Pero puede entrar el pago del trabajo a tiempo parcial, así que ahora... menos de 2,2 millones.
+A: 2,22 millones de wones. Son fondos que tiene simplemente para depósitos y retiros...
+B: Sí, lo ahorré trabajando a tiempo parcial para usarlo como dinero para mis gastos durante el semestre.
+A: Siendo estudiante, ¿cuánto cobra al mes por su trabajo a tiempo parcial?
+B: Al mes... Pero esos 2 millones los fui ahorrando porque en 2013 dejé la universidad durante un año. Mientras estudiaba y todo eso se fue acumulando. Y ahora, por mes, como son vacaciones, unos 500.000 y...
+B: ...además trabajo en BP solo los fines de semana, así que entran 900.000. Es decir, en total entran 500.000 y 400.000.
+A: O sea que dice que casi todo es dinero acumulado por trabajos a tiempo parcial u otros trabajos propios.
+B: Yo de nuevo.
+A: En NongHyup también dijo que abrió una cuenta para depósitos y retiros, y declaró que para que sea su cuenta tendría que haber unos 500.000 wones. ¿Es correcto?
+B: Sí, ahora mismo hay 9.000 wones, pero hoy es el día en que cobro por el trabajo como estudiante empleado, así que deberían entrar unos 500.000.
+A: Ahora, o sea, hable tomando como referencia el momento de esta llamada.
+B: Ahora mismo, cuando lo comprobé hace un momento, había 9.000 wones. Así que ahora debe haber 9.000. Pero...
+A: Tiene que haber menos de 10.000 wones para que sea su cuenta.
+B: Pero puede que ya haya entrado, así que no puedo darle una respuesta exacta.
+A: No lo sabe con certeza.
+B: Sí, en cualquier caso, son menos de 500.000 wones. Aun así.
+A: Y sobre el correo, declaró que hacía mucho que la utilizaba.
+B: Sí, hace muchísimo tiempo. Esa...
+A: ¿Más de un año?
+B: Más de un año. Le dije que abrí la del correo en primaria, ¿no? Pero en 2013, en el correo... Hay una oficina de correos en la universidad, así que...
+B: ...decían que si uno volvía a registrarse o algo así le daban un vale cultural, así que fui...
+B: ...y volví a abrir una cuenta, o reactivé la que tenía, algo así. No recuerdo si activé la banca por Internet...
+A: En Hana Bank no tiene fondos acumulados, ¿verdad? Igual que en Shinhan Bank.
+B: Sí, en Hana solo hay mil. Fue por lo del carné de estudiante.
+A: En esta también tiene que haber menos de 10.000 wones para que sea su cuenta. De las entidades que utiliza ahora, ¿en cuáles solicitó banca por Internet o banca móvil?
+B: Kookmin y solo esa otra, NongHyup.
+A: Solo esas dos.
+B: Borré el certificado. Si borro el certificado, no puedo usarla, ¿verdad? Sí, como borré el certificado, ahora solo uso Kookmin y NongHyup.
+A: Mientras las utilizaba, ¿hubo conexiones simultáneas desde otro lugar, o ha fotografiado su tarjeta de claves para guardarla en el álbum?
+B: No, llevo la tarjeta de claves conmigo, en la billetera. No le tomo fotos.
+A: Tampoco la perdió.
+B: Tampoco la perdí. Nunca.
+A: Sí, entendido. Lo transmitiremos al Servicio de Supervisión Financiera y se procederá a cotejar sus datos.
+A: Le dije que antes de acreditar que es víctima se rastrearán sus cuentas desde 2012 hasta la actualidad.
+A: Así que también se comprobará financieramente si sus fondos son legales.
+A: En este caso, las cuentas de NongHyup y Hana Bank a su nombre... Son entidades que usted utiliza.
+A: ¿La contactaron o le notificaron alguna vez que se habían filtrado sus datos personales?
+B: No. Si hubiera pasado, sin duda habría llamado a la policía. Pero no hubo nada, es la primera vez. Nunca.
+A: Porque Kim Ho-cheol, el cabecilla de este caso, trabajó unos diez años en el sector financiero.
+A: Y como se ha confirmado que la mayoría de los cómplices son empleados que trabajan actualmente en bancos, empresas de tarjetas y otras entidades financieras...
+A: ...le pregunté para comprobar si sus datos personales se filtraron a través de esas entidades.
+A: De los diez cómplices del caso, detuvimos a unos seis, pero unos cuatro siguen sin ser detenidos.
+A: Y usted todavía no ha acreditado que es víctima. Como aún no podemos descartar que también sea responsable...
+A: ...hasta que acredite que es víctima no puede revelar ni difundir a sus compañeros mayores ningún detalle de este caso.
+A: Sí, sí, una vez que acredite que es víctima no hay problema en contarlo. ¿Entiende?
+B: Si necesita algún dato, vuelva a llamarme. Yo también...
+A: Antes de mostrarle el documento oficial, los cómplices detenidos en esta ocasión...
+A: ...Kim Ho-cheol, incluidos todos los cómplices no detenidos... Usted puede decir que hasta ahora no sufrió daños adicionales; me refiero a daños económicos.
+A: Le dije que, además de usted, hay unas 200 personas involucradas en todo el país.
+A: A algunas otras víctimas les cancelaron depósitos y cuentas de ahorro para vivienda sin que lo supieran, y hasta les retiraron el dinero.
+A: Y también hay víctimas que sufrieron pérdidas económicas directas porque se obtuvieron préstamos con tarjetas de crédito copiando solo la banda magnética.
+A: Por eso, aunque usted no haya sufrido daños hasta ahora, consideramos que sus fondos no están seguros durante la investigación ni después de que acredite que es víctima.
+A: Mientras se rastrean sus cuentas, también se tomarán medidas de seguridad para ellas.
+A: Sobre eso volveremos a hablarle más adelante.
+A: Como le dije antes, todavía no tenemos completamente identificado en qué entidades financieras trabajan Kim Ho-cheol y los cómplices relacionados.
+A: Por eso estamos llevando una investigación reservada conjunta con el Servicio de Supervisión Financiera sobre empleados de todo el sector, y hace falta confidencialidad. Como le dije, si usted, voluntariamente o no, entorpece la investigación...
+A: ...o lo revela o difunde a otras personas y da a los cómplices la oportunidad de ocultar fondos o huir al extranjero...
+A: ...según la ley penal puede recibir hasta tres años de prisión o una multa de hasta 20 millones de wones. Sí, le estoy informando la normativa penal.
+A: Primero voy a mostrarle el documento oficial. ¿Puede utilizar Internet donde está?
+B: Espere. Sí, puedo. Había salido un momento para hablar por teléfono. Pero...
+A: ¿Está en un lugar donde un tercero podría ver el documento mientras lo consulta?
+B: Puedo; los profesores ayudantes con los que trabajo salieron a comer, así que, si entro ahora, solo estoy yo.
+A: Entonces abra una ventana de Naver y avíseme.
+B: Espere. Naver... Ya abrí Naver.
+A: Sí, busque «Fiscalía Suprema» en el buscador.
+B: Sí, ¿Fiscalía Suprema?
+A: Sí, avíseme cuando entre en la página de la Fiscalía Suprema.
+B: Ya entré, ahora.
+A: ¿Ya entró en la página? Arriba a la derecha verá el campo de búsqueda general.
+B: El campo de búsqueda general, sí, lo veo...
+A: Busque allí «delitos de alta tecnología».
+B: Sí, ya lo hice.
+A: Sí, ¿qué aparece en pantalla?
+B: Primero dice «Comunicado de prensa: caso de filtración de tecnología avanzada de una pequeña o mediana empresa prometedora»; luego aparecen cosas de filtración tecnológica y economía.
+A: Sí, ¿ve también las actividades principales de la policía y todo eso?
+B: Sí, se ve. Abajo, como...
+A: Sí, esa es la pantalla. Hacia el centro a la derecha verá una fila de enlaces con las direcciones de los equipos 1 a 7 de Investigación de Delitos de Alta Tecnología.
+B: Espere. ¿Dónde? ¿En el centro? ¿Me lo repite?
+A: Arriba a la derecha, pero no del todo arriba.
+A: Un poco por encima del centro, verá la fila de enlaces de los equipos 1 a 7 de Investigación de Delitos de Alta Tecnología. Entre en el Equipo 1.
+B: Está hacia el centro, ¿no? En el centro... ¿Por qué no lo veo? ¿Tengo que entrar por algún banner o buscarlo en esa pantalla?
+A: En esa pantalla, sí.
+A: ¿Qué ve arriba a la derecha?
+B: ¿Arriba a la derecha?
+A: Sí, sí.
+B: Veo cosas como las búsquedas en tiempo real. ¿Al lado de eso?
+A: Sí, debajo de eso...
+B: Espere. Veo delitos de alta tecnología; ¿se entra por relaciones de investigación de la fiscalía?.
+A: No, habrá una fila de enlaces con las direcciones de los equipos 1 a 7 de Investigación de Delitos de Alta Tecnología.
+B: Espere. ¿Por qué no lo veo? Delitos de...
+A: En la computadora que utiliza ahora, ¿están bloqueadas las ventanas emergentes o tiene instalados todos los programas de seguridad?
+B: Espere. Lo intentaré de nuevo. Antes lo de las ventanas emergentes... acabo de poner permitir una vez.
+A: Vuelva a intentarlo y avíseme.
+B: Entendido. Voy a entrar de nuevo.
+B: Pero es la computadora de la universidad. ¿Estará bien?
+A: ¿Le apareció ya?
+B: Delitos de alta tecnología, otra vez, espere. En delitos de alta tecnología...
+B: ¿Se refiere a debajo de «Avisos»? ¿O no es en «Información»? ¿O en el banner de al lado...?
+A: Se lo preguntaba para comprobar que está en la pantalla correcta. Si mira a la derecha...
+B: No se refiere a las búsquedas en tiempo real, ¿verdad?
+A: Debajo de eso, sí.
+B: Tampoco son las búsquedas populares generales...
+A: Si mira debajo, ¿tampoco hay una fila de enlaces de los equipos 1 a 7 de Investigación de Delitos de Alta Tecnología?
+B: Pero ahora no consigo verlo.
+A: Bueno, por cuestión de tiempo le daré nuestra dirección IP, con la que puede entrar directamente en la página del Equipo 1. Borre por completo la barra de direcciones.
+A: Se la digo. ¿Ya borró todo? Ya borró todo. Sí, cien punto diez punto cuarenta y tres punto tres.
+A: Sí, cuarenta y tres punto ciento sesenta y uno punto...
+B: Dieciséis... uno punto...
+A: Treinta y siete, treinta y siete.
+A: Hola.
+A: Avíseme cuando se abra la ventana.
+B: Sí, al hacerlo aquí apareció «Agencia de Policía del Distrito Central de Seúl».
+A: En el centro ve «Consultar mi caso», ¿verdad?
+A: Haga clic. ¿Alguna vez fue investigado por nuestra fiscalía...?
+B: No.
+A: ¿Le ha pasado? Como no podrá iniciar sesión como registrado, verifique su identidad y avíseme cuando se abra el documento.
+B: Entendido. El número de registro de residente...
+B: Sí, pulsé verificación de identidad.
+A: ¿Ya puede consultar su documento oficial? Primero compruebe que el número de expediente y su nombre sean correctos.
+B: Sí, son correctos.
+A: Sí, debajo verá la categoría, ¿verdad?
+B: Sí, dice especial.
+A: Sí. Generalmente se clasifican como especiales los casos no públicos. Como le dije antes, este caso se volvió reservado porque todavía no se ha detenido a todos los cómplices.
+A: Y como aún no tenemos completamente identificado en qué entidades financieras trabajan todos los cómplices, le dije que hace falta confidencialidad.
+A: Debajo verá los puntos uno, dos, tres y cuatro del resumen.
+A: Resumí brevemente todo el procedimiento de investigación de hoy para que lo comprenda. Léalo y, si hay algo que no entiende, pregúnteme.
+B: Sí, entendí todo lo que acaba de explicarme.
+A: Sí, deje esa ventana como está. A partir de ahora vamos a consultar el rastreo de cuentas.
+A: ¿Ha oído hablar del rastreo de cuentas por Internet o en los medios de comunicación?
+B: No, es la primera vez. ¿Hay que entrar en algún sitio?.
+A: Le pregunto si ha oído hablar del rastreo de cuentas.
+B: Sí, he oído hablar del rastreo de cuentas, en las noticias de Internet, pero nunca lo he hecho.
+A: Como le dije antes, mediante la consulta del rastreo de cuentas...
+A: ...se investiga de manera general si hubo operaciones de dinero con Kim Woo-cheol o con los cómplices relacionados y si sus fondos se obtuvieron legalmente.
+A: Es una investigación para determinar si hubo operaciones ilegales relacionadas con este caso.
+A: Sí. Como todavía no es ni responsable ni víctima, sino una persona investigada...
+A: ...no podemos consultar ni rastrear sus fondos a nuestro antojo; por eso usted tiene que declarar personalmente su cuenta al Servicio de Supervisión Financiera mediante el procedimiento de registro.
+A: Después de someterse a supervisión, tiene que confirmarse que obtuvo legalmente esos fondos para poder acreditar que es víctima. Si mira debajo del documento, verá «Inicio».
+B: Sí, lo veo.
+A: Sí, púlselo y vaya a la pantalla principal.
+B: Ya fui.
+A: Sí, abajo a la derecha verá «Centro de Vulneraciones de Datos Personales».
+B: Sí, lo veo.
+A: Púlselo para entrar.
+B: Ya entré. ¿Tengo que escribir todo esto?
+A: No escriba todavía. Por último le haré una pregunta del procedimiento. No lo malinterprete, solo responda claramente.
+A: Si, incluso ahora, por circunstancias inevitables tuvo algún tipo de operación económica con Kim Ho-cheol o los cómplices relacionados...
+A: ...si me lo dice con sinceridad, intentaré que se tengan en cuenta sus circunstancias dentro de los límites legales. ¿Hubo algo así?
+B: No, de verdad que no, yo...
+A: ¿Absolutamente nada?
+B: Estaba haciendo mi vida y ahora pienso: ¿de dónde salió este golpe de la nada?
+A: Entendido. Esto ha quedado grabado y no puede retractarse de su declaración inicial.
+B: Dije la verdad.
+A: Sí, escriba sus datos personales y, si no tiene teléfono fijo en casa, ponga solo el prefijo de zona en el campo de teléfono de casa; después pasaremos a la siguiente pantalla.
+B: El prefijo, ¿simplemente el del lugar donde vivo ahora...?
+A: Y espere un momento.
+B: ¿Esto tarda mucho? Ahora llegaron visitas al departamento, así que...
+A: Primero tiene que hacer el registro para que podamos rastrear las cuentas...
+A: ...porque así se puede continuar. Ya entré. ¿Hay que escribir todo esto de los bancos?
+A: No escriba todavía, no tiene que escribirlo todo. El nombre del banco... Incluso después de que acredite que es víctima, hasta que termine el caso, sus fondos aún no estarán seguros.
+A: Durante un tiempo, hasta que termine el caso, registrará una sola cuenta de depósitos y retiros y utilizará únicamente esa cuenta.
+A: Como le dije que estamos llevando una investigación reservada de los bancos...
+A: ...no puede registrar NongHyup ni Hana Bank porque son las entidades de las cuentas encontradas a su nombre.
+A: Como de todos modos utiliza principalmente Kookmin Bank, le resultará cómodo Kookmin, ¿verdad?
+B: Kookmin me resulta cómodo.
+A: Si registra la de Kookmin Bank, vincularemos por completo esa cuenta registrada e iniciaremos el rastreo en todas las entidades financieras.
+A: Y para comprobar si sus fondos son legales o ilegales, durante un momento se trasladarán al Servicio de Supervisión Financiera...
+A: ...con el propósito de recuperación estatal; cuando se confirme que obtuvo esos fondos legalmente, se devolverán a su situación original.
+A: En el centro verá «ID de usuario».
+B: Sí, veo el ID de usuario.
+A: Escriba allí su número de expediente.
+B: ¿Aquí el número de expediente?
+A: Espere.
+A: Estará en. Relacionado con Jeong Jae-yong...
+B: Sí, lo escribí.
+A: Debajo, donde está la contraseña de usuario, puede escribir la contraseña del certificado digital que utiliza.
+B: Ya la escribí.
+A: En cuanto al certificado digital, para saber si fue copiado externamente, se filtró y hay rastros de uso...
+A: ...le pedí que la escribiera para poder investigarlo. Si encontramos rastros de uso en otra web que no haya utilizado usted...
+A: ...tendrá que revocar su certificado digital. Si aparecen esos rastros, se lo comunicaré enseguida.
+A: Escriba el número de la cuenta de Kookmin Bank que utilizará y la contraseña.
+B: El número de cuenta está en el teléfono, así que espere. No sé cómo salir; espere.
+A: Sí, ¿ni siquiera puede comprobar las últimas cuatro cifras?
+B: ¿Las últimas cuatro? Espere, el número de cuenta... No puedo darle simplemente el número de tarjeta, ¿verdad?
+A: Así es.
+B: El de NongHyup lo sé de memoria, pero el de Kookmin todavía no. Espere. ¿No puedo salir de esta llamada?
+A: ¿Utiliza un teléfono inteligente?.
+B: Sí, utilizo uno.
+A: Si pulsa el botón de inicio, irá al escritorio. Si puede comprobar el número de cuenta, compruébelo y escribiremos solo las últimas cuatro cifras.
+B: Espere. Ya está.
+B: Sí, cómo era, ¿tengo que introducir esto?
+A: Sí, introdúzcalo, escriba el número de cuenta completo.
+B: Lo introduzco, y la contraseña...
+B: 192478.
+B: Espere.
+A: Fiscal, después de una semana, cuántos días....
+B: Pero ya lo escribí todo.
+A: Sí, si ya lo escribió todo, pasaremos a la siguiente pantalla.
+B: Sí, voy a pulsar registrar. Espere.
+B: En medio de seguridad, selecciono tarjeta de claves, ¿verdad?
+A: Si utiliza una tarjeta de claves, selecciónela. Como incautamos más de dos mil tarjetas de claves copiadas en hojas A4...
+A: ...también investigaremos de manera general si su tarjeta de claves fue copiada y filtrada al exterior. Y hasta que se investigue el certificado digital, no podrá utilizar el suyo durante un tiempo.
+A: Si no hay rastros externos, entonces podrá utilizarlo; pero si se comprueba un solo rastro de uso externo, tendrá que desecharlo y solicitar uno nuevo para utilizarlo.
+B: Ahora está cargando.
+A: ¿Ya pasó a la otra pantalla?
+B: No, todavía dice «Revisando datos personales. Espere un momento».
+A: ¿Dice que está revisando? Sí. Lo que introdujo se ha enviado al Servicio de Supervisión Financiera.
+A: Como nosotros no podemos consultar directamente sus fondos, un jefe de equipo del Servicio de Supervisión Financiera se hará cargo de usted para rastrear sus cuentas y consultar sus fondos.
+A: Vamos a comprobar si se transmitió, así que espere un momento.
+A: Sí, ¿hola?
+B: ¿Hola?
+A: Sí, dicen que se transmitió. Como también se cotejará con lo que declaró, parece que tardará un poco.
+A: Entonces, ¿puede seguir hablando ahora?
+B: Ahora... sí, puedo hasta la una y media. A partir de la una también tengo que seguir atendiendo este trabajo.
+A: ¿Tiene tareas que atender?
+B: Solo preparar café y cosas así, pequeños recados.
+A: Sí, sí. Para admitir las grabaciones por unidades de una hora, vamos a cortar y grabar en intervalos de una hora. Como hasta ahora llevamos unos cuarenta minutos grabados...
+B: No, sí, puede hacerlo. Ahora, si hace...
+A: Sí, cortaremos antes de la hora para seguir grabando. Al rastrear sus cuentas, para comprobar si sus fondos se obtuvieron legalmente o son ilegales, al Servicio de Supervisión Financiera...
+A: ...directamente con el jefe de equipo encargado...
+A: ...en coordinación con él, usted trasladará personalmente los fondos. Aunque afirme que son fondos que obtuvo trabajando...
+A: ...si aparece una sola operación económica sospechosa, algún registro de depósitos de las víctimas relacionadas en su cuenta o algo así, tendrá que ser citado para que lo investiguemos aquí.
+A: Si lo citamos para investigar, se congelarán conjuntamente todas sus cuentas en todas las entidades financieras hasta que termine el caso.
+A: Si durante este procedimiento se niega a continuar por teléfono porque sus circunstancias personales se lo dificultan, también se emitirá una citación.
+A: Si se emite esa citación y lo investigamos así, también, hasta que termine su caso...
+A: ...se congelará todo en todas las entidades financieras. Téngalo en cuenta.
+B: Mi padre... ¿También se considera ilegal que un conocido me dé dinero para mis gastos? A veces me dan 100.000 wones, pequeñas cantidades, porque dicen que trabajo mucho.
+A: Para investigarlo, sean 100.000 o un millón de wones, se investigarán todos los fondos que haya a su nombre.
+A: Si usted no tiene nada que ocultar, no tendrá motivos para negarse al rastreo de cuentas ni a la consulta de sus fondos.
+A: En el caso de NongHyup, entre en la aplicación y compruebe si hay fondos.
+B: ¿Comprobar si entró el sueldo?
+A: Espere.
+A: Sí, aquí está. Es bastante alto. Entendido.
+B: Sí, todavía no entró. Hay 984 wones.
+A: Entonces, ¿tiene 984 wones en NongHyup?
+B: Acabo de comprobarlo.
+A: Sí, sí, espere un momento.
+A: Sí, ¿hola? Sobre la cuenta de Kookmin que registró, después de acreditar que es sospechoso...
+A: ...si después de devolver todo a su estado original se produce algún perjuicio económico...
+A: ...para la cuenta registrada le emitiremos un formulario de solicitud de seguro de terceros que permite indemnizar el cien por cien. Hasta que termine el caso.
+A: De todos modos no podrá utilizar las otras entidades financieras, pero durante un tiempo utilice la de Kookmin que registró.
+A: Si solicita una nueva y utiliza otra entidad financiera, y sufre otro perjuicio económico...
+A: ...como no es la cuenta registrada, no podrá recibir indemnización por eso. Téngalo en cuenta.
+B: Entonces ahora solo utilizo Kookmin, para usar...
+A: Así es, solo Kookmin. Cuando acredite que es víctima y se compruebe que sus fondos son legales, los devolveremos a su situación original.
+A: Después de esa restitución, si mientras utiliza sus fondos sufre algún perjuicio económico...
+A: ...si presenta en la sucursal de Kookmin correspondiente el formulario de solicitud de seguro de terceros que le emitamos, podrá recibir una indemnización del cien por cien del importe asegurado del perjuicio. Eso es lo que le digo.
+A: Si entra en la aplicación de Kookmin, tendrá configurado un límite de transferencias.
+A: Ahora tiene 2,22 millones, unos 2,5 millones de wones, que es el importe que debe protegerse.
+A: Así que el límite tiene que estar fijado en un máximo de 2,5 millones; cuando se emita, la indemnización del cien por cien se tramitará solo hasta ese límite.
+A: Si puede comprobar en cuánto tiene fijado su límite de transferencias, compruébelo ahora mismo.
+B: ¿Lo cambio ahora a 2,5 millones? ¿O solo lo compruebo?
+A: Primero compruébelo; si el límite de transferencias es menor que el monto que debe protegerse, tendrá que ir al banco a configurarlo.
+B: Ah, sí.
+A: ¿No tiene aparte seguros a su nombre, cuentas con descubierto, depósitos, ahorros a plazo, acciones, fondos de inversión o cuentas CMA en entidades financieras?
+B: En casa, mi padre contrató un seguro de cáncer cuando yo era pequeño.
+B: Yo tampoco sé bien lo del seguro. Mi padre...
+A: No sabe bien lo del seguro, pero no ha contratado ninguno por su cuenta, ¿verdad?
+B: No contraté ningún seguro aparte.
+B: Antes pagaba primas mientras trabajaba a tiempo parcial.
+B: En 2013, cuando abrí la de Kookmin y trabajaba en un complejo turístico, me descontaban del sueldo por el seguro. Pero eso no tiene que ver, ¿verdad?
+A: Sí, eso no tiene que ver...
+B: Aparte de eso no pagué nada por separado. Tampoco contraté nada.
+A: No tiene. Como el formulario de solicitud de seguro patrimonial se emitirá según el límite de transferencias, si puede comprobarlo en la aplicación, compruébelo primero.
+A: Si es menor que el monto que tiene que protegerse, puede ir a Kookmin y fijarlo en los 2,5 millones de wones que deben protegerse.
+A: Una vez fijado, cuando termine el rastreo de cuentas y todos estos procedimientos, se emitirá el formulario de solicitud de seguro patrimonial. Primero compruébelo.
+B: Entendido.
+B: ¿Hola?
+A: Sí, ¿hola?
+B: ¿Dónde se comprueba el límite de transferencias? Nunca lo he comprobado en la aplicación.
+A: Si no, ¿puede ir al banco ahora?
+B: ¿Ahora? Después de la una puedo avisar al profesor y salir un momento al banco, pero no puedo irme sin permiso. Tengo que quedarme atendiendo.
+A: Entonces, cuando vaya al banco, lo primero es comprobar su límite de transferencias.
+A: Si es menor que el monto que tiene que protegerse, como de todos modos no tiene más de 2,5 millones, no puede fijarlo...
+A: ...por encima de eso. El dinero que vaya entrando... Se protegerán los fondos que tiene actualmente.
+A: Después de fijarlo en 2,5 millones de wones y terminar todas sus gestiones bancarias, llámenos y pida por el investigador Ha Ji-su.
+B: Sí, ¿puedo volver a llamar a este número?
+A: Sí, llame y pida por el investigador que lo atendió antes.
+A: El investigador se pondrá en contacto conmigo y yo lo llamaré personalmente. Cuando termine todas sus gestiones en el banco, llame.
+B: Cuando salga, ¿tengo que pedir por el fiscal Ha Ji-su? ¿Cómo lo pido?
+A: Puede pedir por mí o por el investigador que lo atendió antes, ¿recuerda?
+B: Es que no anoté su nombre por separado.
+A: De todos modos, si dice su número de expediente, se puede comprobar todo.
+A: Sí. Llame, diga su nombre y número de expediente, y pida que lo comuniquen; así podrán conectarle la llamada. Vaya a Kookmin Bank, configure el límite de transferencias y después llame, por favor.
+B: Sí, entendido. ¿Necesita algún otro dato? Yo...
+A: Si hace falta algo más, se lo pediremos después. Aparte.
+B: Sí, entendido.
+A: Sí.
