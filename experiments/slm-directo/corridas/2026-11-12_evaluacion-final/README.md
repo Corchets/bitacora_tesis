@@ -35,11 +35,14 @@ como `desarrollo`.
 | `desarrollo` | Los 244 de `laboratorio-main` | [`alcance-140`](../../casos/listas/alcance-140.txt): 46 estafas (36 con pedido y 15 con cumplimiento) y 94 legítimas (29 cotidianas, 38 con pedido razonable y 27 con mención sin pedido) | Los otros 104, por grupo |
 | `test_reservado` | La rama `reserva/test` (9089b19), traída por ruta en Colab | 100 estafas `CV2-T-V` (80 con pedido, 32 con cumplimiento y 20 sin pedido) y las 56 legítimas `ENT-T` (14 cotidianas, 26 con pedido razonable y 16 con mención sin pedido) | Las 100 legítimas viejas `CV2-T-L`: 26 dentro del alcance y 74 fuera |
 | `externo` (#144) | El set coreano congelado ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)). Por defecto, las 9 con ficha que están en [`casos/externo/coreano`](../../casos/externo/coreano) ([PR #184](https://github.com/Corchets/bitacora_tesis/pull/184)); si Luciano pasa la carpeta con las 33, esas | Las estafas coreanas de KorCCVi: 9 (7 con pedido, 5 con cumplimiento) o 33 (27 con pedido y 6 sin pedido) | — |
+| `legitimas_reales` | Las salientes reales de CallCenterEN ([FUENTES-LEGITIMAS-REALES.md §8](../../../../docs/investigacion/FUENTES-LEGITIMAS-REALES.md#8-set-armado-el-2026-11-18)). Los textos no están en el repo: corre solo si se sube la carpeta `sets/` de la custodia | 33 legítimas de telecomunicaciones (19 cotidianas, 4 con pedido razonable y 10 con mención sin pedido) | Las 42 de la zona gris de Medicare: no son FA ni estafas |
 
 - **Las huellas del test se comprueban antes de armarlo:**
   - cada `CV2-T`, contra [`MANIFIESTO-CORPUS-V2.json`](../../casos/MANIFIESTO-CORPUS-V2.json);
   - el JSONL de las 56 y `alcance-reserva.json`, contra su SHA-256;
-  - cada archivo del externo, contra [`MANIFIESTO-144-SET-COREANO-2026-11-11.json`](../../../../docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json).
+  - cada archivo del externo, contra [`MANIFIESTO-144-SET-COREANO-2026-11-11.json`](../../../../docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json);
+  - cada archivo de las legítimas reales, contra [`MANIFIESTO-LEGITIMAS-REALES-2026-11-18.json`](../../../../docs/corpus/MANIFIESTO-LEGITIMAS-REALES-2026-11-18.json)
+    y [`MANIFIESTO-ZONA-GRIS-MEDICARE-2026-11-18.json`](../../../../docs/corpus/MANIFIESTO-ZONA-GRIS-MEDICARE-2026-11-18.json).
 - **Los roles del test:**
   - los `CV2-T`, de `alcance-reserva.json`, anotado a ciegas;
   - las `ENT-T`, del campo `protegida` del JSONL.
@@ -96,7 +99,8 @@ de la FA de las 56 `ENT-T`, con su intervalo.
 
 Mateo lo decidió el 2026-11-18: no hay aprobado ni desaprobado. Se informan las cifras de arriba con su intervalo, y la
 comparación pareada (McNemar exacto) de la configuración contra `v4-corte` y las reglas. El set externo es solo de
-estafas: las FA del test salen de las 56 `ENT-T`.
+estafas: las FA del test salen de las 56 `ENT-T`. Aparte, las FA en llamadas reales salen de las 33 legítimas de
+CallCenterEN (Mateo, 2026-11-18): se leen contra las 56 generadas, no se suman.
 
 **Cómo leer la comparación con las reglas.** [`previa_desarrollo.py`](previa_desarrollo.py) arma las mismas tablas sobre
 desarrollo, con corridas que ya existen ([salida](previa-desarrollo-salida.md)). Las reglas v1 avisan casi todo: a
@@ -105,7 +109,7 @@ diferencia de detección con las reglas queda dentro del ruido (2 a 5 pares, p =
 
 **Dónde quedan los resultados.** Los CSV del test traen el texto de la reserva: van a la rama `reserva/test`. A
 `laboratorio-main` va solo `analisis.md`, con identificadores y cifras. Lo del set externo no se sube a ningún lado: la
-fuente prohíbe redistribuir derivados.
+fuente prohíbe redistribuir derivados. Lo mismo con las legítimas reales: CallCenterEN prohíbe redistribuir.
 
 **Lo que falta antes del tag:** la configuración, que sale de la revisión de producto. Si no es `c-premisa-corte-riesgo`,
 va en `CONFIG` del notebook y en `CIFRAS_DESARROLLO` de `analizar.py`, con sus cifras de desarrollo.
@@ -144,6 +148,13 @@ Se miraron solo el formato, las claves, los manifiestos y las huellas, sin leer 
   - las huellas coinciden con el manifiesto de `laboratorio-main`;
   - los roles salen de `alcance-reserva.json`: 9 con `rol_dudoso`;
   - `T_R` y `T_C` salen de la referencia.
+
+### Las legítimas reales: nada
+
+Quedaron congeladas el 2026-11-18, con roles y tipo de legítima anotados a ciegas por IA y los manifiestos en
+`docs/corpus/`. Están en `data/private/legitimas-reales/sets/` del checkout de Mateo: para correrlas, subir esa carpeta a
+Colab y poner su ruta en `LEGITIMAS_REALES`. Son español neutro, con contexto de EE. UU., y los roles los infirió un
+modelo a partir de un ASR sin hablantes: se informa con las cifras. La zona gris tiene llamadas de hasta 104 líneas.
 
 ### El set externo: nada
 

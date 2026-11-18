@@ -146,6 +146,46 @@ DETECTORES = {
 }
 
 
+# Legítimas reales sintéticas, en el formato de la custodia (sets/set-legitimas y sets/set-zona-gris).
+LEGITIMAS_REALES = {
+    "set-legitimas": {
+        "EXT-1001": ("B", "legitima", "pedido_razonable",
+                     ["A: Hola, le hablo de la compañía de internet.", "B: Sí, ¿qué pasó?", "A: Decime el código que te llegó.",
+                      "B: Ya se lo paso."]),
+        "EXT-1002": ("B", "legitima", "cotidiana",
+                     ["A: Hola, llamo para coordinar la visita del técnico.", "B: Perfecto, el jueves.", "A: Anotado."]),
+    },
+    "set-zona-gris": {
+        "EXT-2001": ("B", "legitima_dificil", None,
+                     ["A: Hola, le llamo por su beneficio de Medicare.", "B: ¿Qué beneficio?",
+                      "A: Decime el código que te llegó."]),
+    },
+}
+
+
+def armar_legitimas_reales(base: Path) -> tuple[Path, dict]:
+    """Escribe sets/ con los dos sets sintéticos y sus manifiestos; devuelve la carpeta y los kwargs de los manifiestos."""
+    sets, manifiestos = base / "sets", {}
+    for sub, casos_set in LEGITIMAS_REALES.items():
+        carpeta = sets / sub
+        (carpeta / "texto").mkdir(parents=True)
+        (carpeta / "referencia").mkdir()
+        roles = {}
+        for c, (protegida, clase, tipo, lineas) in casos_set.items():
+            (carpeta / "texto" / f"{c}.txt").write_text("\n".join(lineas) + "\n", encoding="utf-8")
+            (carpeta / "referencia" / f"{c}.json").write_text(json.dumps({
+                "case_id": c, "grupo": "externo_" + sub, "clase": clase, "t_r_linea": None, "t_c_linea": None,
+                "pedido": None, "tipo_legitima": tipo, "familia": "comercial"}), encoding="utf-8")
+            roles[c] = {"protegida": protegida, "origen": "externo"}
+        (carpeta / "roles-protegida.json").write_text(json.dumps(roles), encoding="utf-8")
+        man = {str(q.relative_to(carpeta)): conjuntos.sha256(q.read_bytes()) for q in sorted(carpeta.rglob("*"))
+               if q.is_file()}
+        ruta = base / f"manifiesto-{sub}.json"
+        ruta.write_text(json.dumps(man), encoding="utf-8")
+        manifiestos["manifiesto_legitimas" if sub == "set-legitimas" else "manifiesto_zona_gris"] = ruta
+    return sets, manifiestos
+
+
 class _ConReserva(unittest.TestCase):
     """Una reserva sintética armada como conjunto en un directorio temporal."""
 
@@ -245,6 +285,27 @@ class TestConjuntos(_ConReserva):
         # Las 9 coreanas con ficha que están en el repo (PR #184) son parte del set congelado.
         repo = conjuntos.preparar_externo(RAIZ / "casos/externo/coreano", self.tmp / "ext-repo")
         self.assertEqual((len(repo.ids), repo.datos["fuentes"]["casos"]), (9, "9 de 33 del set congelado"))
+
+
+    def test_las_legitimas_reales_son_los_dos_sets_congelados(self):
+        sets, mans = armar_legitimas_reales(self.tmp / "custodia-leg")
+        conj = conjuntos.preparar_legitimas_reales(sets, self.tmp / "leg", **mans)
+        self.assertEqual((conj.nombre, conj.particion, conj.ids),
+                         ("legitimas_reales", "externo", ["EXT-1001", "EXT-1002", "EXT-2001"]))
+        ref = conj.referencia()
+        self.assertEqual({c: ref[c]["vista"] for c in conj.ids},
+                         {"EXT-1001": conjuntos.PRINCIPAL, "EXT-1002": conjuntos.PRINCIPAL,
+                          "EXT-2001": conjuntos.VISTA_ZONA_GRIS})
+        self.assertEqual(ref["EXT-1001"]["tipo_legitima"], "pedido_razonable")
+        self.assertEqual(conj.roles()["EXT-2001"], {"protegida": "B"})
+        self.assertEqual(conj.validar(), [])
+        (sets / "set-zona-gris" / "texto" / "EXT-2001.txt").write_text("A: Hola.\nB: Otra cosa.\n", encoding="utf-8")
+        with self.assertRaises(ValueError):
+            conjuntos.preparar_legitimas_reales(sets, self.tmp / "leg2", **mans)
+        with self.assertRaises(ValueError):  # la carpeta sintética no es el set congelado real
+            conjuntos.preparar_legitimas_reales(sets, self.tmp / "leg3")
+        textos = lambda ruta: sum(k.startswith("texto/") for k in json.loads(ruta.read_text(encoding="utf-8")))
+        self.assertEqual((textos(conjuntos.MANIFIESTO_LEGITIMAS), textos(conjuntos.MANIFIESTO_ZONA_GRIS)), (33, 42))
 
 
 class _ConServidor(_ConReserva):
@@ -365,6 +426,29 @@ class TestCifras(unittest.TestCase):
 
 
 class TestAnalisis(_ConServidor):
+    def test_informe_de_las_legitimas_reales(self):
+        datos = self.tmp / "datos"
+        sets, mans = armar_legitimas_reales(self.tmp / "custodia-leg")
+        conj = conjuntos.preparar_legitimas_reales(sets, self.tmp / "conj-leg", **mans)
+        for carpeta in DETECTORES:
+            self.correr(carpeta, conj, datos)
+        shutil.copytree(conj.carpeta, datos / "conjuntos" / "legitimas_reales")
+        salida = io.StringIO()
+        with redirect_stdout(salida):
+            an.main(["--datos", str(datos)])
+        texto = salida.getvalue()
+        self.assertIn("## Legítimas reales (CallCenterEN)", texto)
+        self.assertIn("| legitimas_reales | config |", texto)
+        seccion = texto.split("## Legítimas reales (CallCenterEN)")[1]
+        self.assertIn("0 estafas", seccion)
+        fila = next(l for l in seccion.splitlines() if l.startswith(f"| `{CONFIG}` |"))
+        self.assertIn("1/2", fila, "EXT-1001 avisa: 1 FA en 2 legítimas; la zona gris no cuenta")
+        self.assertIn(conjuntos.VISTA_ZONA_GRIS, seccion)
+        for casos_set in LEGITIMAS_REALES.values():
+            for _, _, _, lineas in casos_set.values():
+                for linea in lineas:
+                    self.assertNotIn(linea.split(": ", 1)[1], texto, "el informe no muestra textos de los casos")
+
     def test_informe_entero_con_la_anotacion_alternativa(self):
         datos = self.tmp / "datos"
         for carpeta in DETECTORES:

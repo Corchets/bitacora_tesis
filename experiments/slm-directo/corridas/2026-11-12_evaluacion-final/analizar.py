@@ -2,7 +2,7 @@
 el set externo (#144), una sola vez.
 
 No corre modelos; solo biblioteca estándar y el código del laboratorio. Uso, desde esta carpeta, con los ZIP de Colab
-descomprimidos acá (conjuntos/, humo/, desarrollo/, test_reservado/ y, si corrió, externo/):
+descomprimidos acá (conjuntos/, humo/, desarrollo/, test_reservado/ y, si corrieron, externo/ y legitimas_reales/):
     python -I analizar.py                                     # todo
     python -I analizar.py --anotacion-legitimas RUTA.json     # además, las cifras con la anotación alternativa
     python -I analizar.py --motivos                           # además, los motivos de las FA (texto del modelo)
@@ -20,6 +20,8 @@ intervalo y la comparación pareada con las referencias (README.md).
   pares discordantes, la configuración contra cada referencia, en los mismos casos.
 - Con --anotacion-legitimas, todo lo de la vista principal se informa también con esa anotación, aparte.
 - Set externo: solo estafas; las FA del test salen de las 56 ENT-T (Mateo, 2026-11-18).
+- Legítimas reales (CallCenterEN, Mateo, 2026-11-18): FA en 33 salientes reales de telecomunicaciones, en su vista
+  principal; las 42 de la zona gris de Medicare van aparte y no son FA (docs/investigacion/FUENTES-LEGITIMAS-REALES.md).
 """
 
 import argparse, collections, csv, importlib.util, json, math, sys
@@ -52,8 +54,9 @@ num, tabla, wilson, p50_p95, celda = e3.num, e3.tabla, e3.wilson, e3.p50_p95, h.
 
 CONFIG = 'c-premisa-corte-riesgo'  # la congelada (PR #171); --config si la revisión de producto elige otra antes del tag
 V4 = 'v4-corte'                    # v4 sin alcance, cortado tras la alerta (ADR 0006), en todas las líneas
-CONJUNTOS = ['desarrollo', 'test_reservado', 'externo']
-NOMBRES = {'desarrollo': 'Desarrollo', 'test_reservado': 'Test reservado', 'externo': 'Set externo (#144)'}
+CONJUNTOS = ['desarrollo', 'test_reservado', 'externo', 'legitimas_reales']
+NOMBRES = {'desarrollo': 'Desarrollo', 'test_reservado': 'Test reservado', 'externo': 'Set externo (#144)',
+           'legitimas_reales': 'Legítimas reales (CallCenterEN)'}
 CARPETAS = ['config', 'v4', 'reglas']
 REGLAS = {'reglas v1': 'reglas', 'reglas v2': 'reglas_v2'}  # nombre → `config` en el CSV
 PRINCIPAL = conjuntos.PRINCIPAL

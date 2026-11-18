@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Ejecutar en Google Colab desde COLAB-EVALUACION-FINAL.ipynb: ver corridas/2026-11-12_evaluacion-final/README.md.
 # Estado: propuesta sin discutir. #143, evaluación final: la configuración congelada y las referencias simples, una sola
-# vez, sobre desarrollo, el test reservado y, si la custodia lo entrega, el set externo de #144.
+# vez, sobre desarrollo, el test reservado, el set externo de #144 y, si se sube su carpeta, las legítimas reales.
 #
 # 1. Arma los conjuntos fuera del repositorio, con conjuntos.py:
 #    - desarrollo, desde este commit;
@@ -10,14 +10,17 @@
 #    - #144: las estafas coreanas. Por defecto, las 9 de casos/externo/coreano (en el repo); con COLAB_EXTERNO, la
 #      carpeta de la custodia con las 33. En los dos casos, con sus huellas comprobadas
 #      contra docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json.
+#    - Legítimas reales de CallCenterEN: solo con COLAB_LEGITIMAS_REALES, la carpeta sets/ de la custodia (los textos
+#      no están en el repo). 33 legítimas en la vista principal y 42 de zona gris aparte, con sus manifiestos.
 # 2. Humo de formato en los 3 casos de siempre (48 líneas), con la configuración y v4-corte. Si no pasa la
 #    configuración, no corre nada; si no pasa v4-corte, esa referencia no corre.
 # 3. Desarrollo: la configuración (roles, solo OTRA), v4-corte (roles, todas las líneas) y las reglas v1 y v2, en modo
 #    operativo. Antes de tocar el test, la configuración tiene que reproducir sus cifras de desarrollo (±2,
 #    analizar.control_desarrollo). Si no, para y no corre el test.
-# 4. El test reservado y después #144, con lo mismo. Cada corrida terminada baja como ZIP; el análisis va después, con
+# 4. El test reservado, después #144 y las legítimas reales, con lo mismo. Cada corrida terminada baja como ZIP; el análisis va después, con
 #    corridas/2026-11-12_evaluacion-final/analizar.py.
-# COLAB_REPO, COLAB_SALIDA, COLAB_RESERVA, COLAB_PRUEBA_RESERVA y COLAB_PRUEBA_EXTERNO solo existen para la prueba en seco.
+# COLAB_REPO, COLAB_SALIDA, COLAB_RESERVA, COLAB_PRUEBA_RESERVA, COLAB_PRUEBA_EXTERNO y COLAB_PRUEBA_LEGITIMAS solo
+# existen para la prueba en seco.
 
 import csv, hashlib, importlib.util, json, os, pathlib, shutil, subprocess, sys, time, urllib.request
 
@@ -25,6 +28,7 @@ REPO = pathlib.Path(os.environ.get('COLAB_REPO', '/content/bitacora_tesis'))
 COMMIT = os.environ['COLAB_COMMIT']
 CONFIG = os.environ.get('COLAB_CONFIG', 'c-premisa-corte-riesgo')
 EXTERNO = os.environ.get('COLAB_EXTERNO') or str(REPO / 'experiments/slm-directo/casos/externo/coreano')
+LEGITIMAS = os.environ.get('COLAB_LEGITIMAS_REALES', '')
 head = subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip()
 print('Commit:', head, '· configuración:', CONFIG)
 if head != COMMIT:
@@ -107,7 +111,13 @@ if EXTERNO and not (CONJ / 'externo' / 'conjunto.json').exists():
     if os.environ.get('COLAB_PRUEBA_EXTERNO'):  # solo la prueba en seco: un set sintético con su propio manifiesto
         PRUEBA_EXT = {'manifiesto': pathlib.Path(os.environ['COLAB_PRUEBA_EXTERNO'])}
     conjuntos.preparar_externo(pathlib.Path(EXTERNO), CONJ, **PRUEBA_EXT)
-ORDEN = ['desarrollo', 'test_reservado'] + (['externo'] if EXTERNO else [])
+if LEGITIMAS and not (CONJ / 'legitimas_reales' / 'conjunto.json').exists():
+    PRUEBA_LEG = {}
+    if os.environ.get('COLAB_PRUEBA_LEGITIMAS'):  # solo la prueba en seco: 'manifiesto_legítimas,manifiesto_zona_gris'
+        _ml, _mg = os.environ['COLAB_PRUEBA_LEGITIMAS'].split(',')
+        PRUEBA_LEG = {'manifiesto_legitimas': pathlib.Path(_ml), 'manifiesto_zona_gris': pathlib.Path(_mg)}
+    conjuntos.preparar_legitimas_reales(pathlib.Path(LEGITIMAS), CONJ, **PRUEBA_LEG)
+ORDEN = ['desarrollo', 'test_reservado'] + (['externo'] if EXTERNO else []) + (['legitimas_reales'] if LEGITIMAS else [])
 for nombre in ORDEN:
     print(conjuntos.resumen(conjuntos.Conjunto(CONJ / nombre)), flush=True)
 

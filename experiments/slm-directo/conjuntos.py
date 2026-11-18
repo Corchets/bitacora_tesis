@@ -1,4 +1,4 @@
-"""Conjuntos de la evaluación final de #143: desarrollo, el test reservado y el set externo (#144).
+"""Conjuntos de la evaluación final de #143: desarrollo, el test reservado, el set externo (#144) y las legítimas reales.
 
 Un conjunto es una carpeta, fuera de casos/, con:
     conjunto.json     nombre, partición, de dónde sale cada parte (con su SHA-256) y la huella de cada texto
@@ -12,6 +12,7 @@ relevamiento (docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md, §5.4).
 
 Uso (desde experiments/slm-directo):
     python conjuntos.py preparar --destino DIR [--reserva CHECKOUT_DE_RESERVA_TEST] [--externo CARPETA]
+                                 [--legitimas-reales CARPETA_SETS]
     python conjuntos.py validar DIR/test_reservado
 
 `preparar` comprueba las huellas de cada fuente y escribe solo conteos: no imprime textos ni referencias.
@@ -39,6 +40,10 @@ SHA_ALCANCE_RESERVA = "ce2101553c8ee6bafc9c87fcccd01c91b740cd995c49fb967f1dd58b0
 PRINCIPAL = "principal"
 # Huellas del set externo congelado de #144 (PR #181); los textos quedan en custodia, fuera de Git.
 MANIFIESTO_EXTERNO = RAIZ.parents[1] / "docs" / "corpus" / "MANIFIESTO-144-SET-COREANO-2026-11-11.json"
+# Legítimas reales de CallCenterEN (docs/investigacion/FUENTES-LEGITIMAS-REALES.md §8); los textos, en custodia.
+MANIFIESTO_LEGITIMAS = RAIZ.parents[1] / "docs" / "corpus" / "MANIFIESTO-LEGITIMAS-REALES-2026-11-18.json"
+MANIFIESTO_ZONA_GRIS = RAIZ.parents[1] / "docs" / "corpus" / "MANIFIESTO-ZONA-GRIS-MEDICARE-2026-11-18.json"
+VISTA_ZONA_GRIS = "aparte: zona gris de Medicare (avisos, no son FA)"
 CLASES = casos.CLASES
 TIPOS_LEGITIMA = casos.TIPOS_LEGITIMA
 # Lo que el análisis usa de cada referencia. El resto de la referencia original no se copia.
@@ -274,6 +279,28 @@ def preparar_test(reserva: Path, destino: Path, *, manifiesto: Path | None = Non
     return _escribir(destino, "test_reservado", "test_reservado", textos, roles, referencia, fuentes)
 
 
+def _leer_congelado(origen: Path, manifiesto: Path, que: str) -> tuple[list[str], dict, dict, dict, int]:
+    """Lee una carpeta en el formato del set congelado (texto/, referencia/, roles-protegida.json) y comprueba cada
+    texto y cada referencia contra el manifiesto. Sirve una parte del set: roles-protegida.json tiene que cubrir
+    exactamente los textos presentes. Devuelve ids, textos, roles, referencias crudas y el total del manifiesto."""
+    origen = Path(origen).resolve()
+    man = json.loads(manifiesto.read_text(encoding="utf-8"))
+    presentes = sorted(str(q.relative_to(origen)) for d in ("texto", "referencia") for q in (origen / d).glob("*"))
+    ids = sorted(Path(k).stem for k in presentes if k.startswith("texto/"))
+    roles_todos = json.loads((origen / "roles-protegida.json").read_text(encoding="utf-8"))
+    problemas = [f"{k} no está en el manifiesto o no coincide" for k in presentes
+                 if k not in man or sha256((origen / k).read_bytes()) != man[k]]
+    problemas += [f"falta referencia/{c}.json" for c in ids if f"referencia/{c}.json" not in presentes]
+    if sorted(roles_todos) != ids:
+        problemas.append("roles-protegida.json no cubre exactamente los textos")
+    if not ids or problemas:
+        raise ValueError(f"{que} no es el congelado: " + ("; ".join(problemas) or "no hay textos"))
+    textos = {c: (origen / "texto" / f"{c}.txt").read_text(encoding="utf-8") for c in ids}
+    roles = {c: {"protegida": roles_todos[c]["protegida"]} for c in ids}
+    crudas = {c: json.loads((origen / "referencia" / f"{c}.json").read_text(encoding="utf-8")) for c in ids}
+    return ids, textos, roles, crudas, sum(k.startswith("texto/") for k in man)
+
+
 def preparar_externo(origen: Path, destino: Path, *, manifiesto: Path | None = None) -> Conjunto:
     """El set externo de #144: estafas coreanas de KorCCVi, traducidas y marcadas.
 
@@ -284,28 +311,40 @@ def preparar_externo(origen: Path, destino: Path, *, manifiesto: Path | None = N
     y roles-protegida.json tiene que cubrir exactamente esos casos (en el repo es un recorte, con otro hash).
     Todo es estafa y va a la vista principal.
     """
-    origen = Path(origen).resolve()
-    man = json.loads((manifiesto or MANIFIESTO_EXTERNO).read_text(encoding="utf-8"))
-    presentes = sorted(str(q.relative_to(origen)) for d in ("texto", "referencia") for q in (origen / d).glob("*"))
-    ids = sorted(Path(k).stem for k in presentes if k.startswith("texto/"))
-    roles_todos = json.loads((origen / "roles-protegida.json").read_text(encoding="utf-8"))
-    problemas = [f"{k} no está en el manifiesto o no coincide" for k in presentes
-                 if k not in man or sha256((origen / k).read_bytes()) != man[k]]
-    problemas += [f"falta referencia/{c}.json" for c in ids if f"referencia/{c}.json" not in presentes]
-    if sorted(roles_todos) != ids:
-        problemas.append("roles-protegida.json no cubre exactamente los textos")
-    if not ids or problemas:
-        raise ValueError("El set externo no es el congelado: " + ("; ".join(problemas) or "no hay textos"))
-    textos = {c: (origen / "texto" / f"{c}.txt").read_text(encoding="utf-8") for c in ids}
-    roles = {c: {"protegida": roles_todos[c]["protegida"]} for c in ids}
-    referencia = {}
-    for c in ids:
-        r = json.loads((origen / "referencia" / f"{c}.json").read_text(encoding="utf-8"))
-        referencia[c] = {k: r.get(k) for k in CAMPOS_REFERENCIA} | {"alcance": "dentro", "vista": PRINCIPAL}
-    total = sum(k.startswith("texto/") for k in man)
+    ids, textos, roles, crudas, total = _leer_congelado(origen, manifiesto or MANIFIESTO_EXTERNO, "El set externo")
+    referencia = {c: {k: crudas[c].get(k) for k in CAMPOS_REFERENCIA} | {"alcance": "dentro", "vista": PRINCIPAL}
+                  for c in ids}
     fuentes = {"MANIFIESTO-144-SET-COREANO": sha256((manifiesto or MANIFIESTO_EXTERNO).read_bytes()),
                "casos": f"{len(ids)} de {total} del set congelado"}
     return _escribir(destino, "externo", "externo", textos, roles, referencia, fuentes)
+
+
+def preparar_legitimas_reales(origen: Path, destino: Path, *, manifiesto_legitimas: Path | None = None,
+                              manifiesto_zona_gris: Path | None = None) -> Conjunto:
+    """Las llamadas salientes reales de CallCenterEN, desde la carpeta `sets/` de la custodia (fuera de Git: la fuente
+    prohíbe redistribuir). Ver docs/investigacion/FUENTES-LEGITIMAS-REALES.md §8.
+
+    - `set-legitimas`: 33 legítimas de telecomunicaciones; vista principal, cuentan como FA.
+    - `set-zona-gris`: 42 de Medicare (seguros y equipamiento médico) que ningún anotador marcó legítimas; van a una
+      vista aparte y no cuentan como FA ni como estafa. `legitima_dificil` es solo para que el formato valide.
+    Cada archivo se comprueba contra su manifiesto en docs/corpus/.
+    """
+    origen = Path(origen).resolve()
+    textos, roles, referencia, fuentes = {}, {}, {}, {}
+    for sub, man, vista, etiqueta in (
+            ("set-legitimas", manifiesto_legitimas or MANIFIESTO_LEGITIMAS, PRINCIPAL, "MANIFIESTO-LEGITIMAS-REALES"),
+            ("set-zona-gris", manifiesto_zona_gris or MANIFIESTO_ZONA_GRIS, VISTA_ZONA_GRIS,
+             "MANIFIESTO-ZONA-GRIS-MEDICARE")):
+        ids, t, r, crudas, total = _leer_congelado(origen / sub, man, sub)
+        if set(ids) & set(textos):
+            raise ValueError("set-legitimas y set-zona-gris repiten casos")
+        textos.update(t)
+        roles.update(r)
+        for c in ids:
+            referencia[c] = {k: crudas[c].get(k) for k in CAMPOS_REFERENCIA} | {"alcance": "dentro", "vista": vista}
+        fuentes[etiqueta] = sha256(man.read_bytes())
+        fuentes[sub] = f"{len(ids)} de {total}"
+    return _escribir(destino, "legitimas_reales", "externo", textos, roles, referencia, fuentes)
 
 
 def resumen(conjunto: Conjunto) -> str:
@@ -324,6 +363,8 @@ def main(argv: list[str] | None = None) -> int:
     pp.add_argument("--destino", type=Path, required=True)
     pp.add_argument("--reserva", type=Path, help="checkout de la rama reserva/test (sin esto, no arma el test)")
     pp.add_argument("--externo", type=Path, help="carpeta de la custodia de #144 (sin esto, no arma el externo)")
+    pp.add_argument("--legitimas-reales", type=Path,
+                    help="carpeta sets/ de la custodia de las legítimas reales (sin esto, no arma ese conjunto)")
     pv = sub.add_parser("validar", help="valida un conjunto ya armado")
     pv.add_argument("carpeta", type=Path)
     args = p.parse_args(argv)
@@ -337,6 +378,8 @@ def main(argv: list[str] | None = None) -> int:
         armados.append(preparar_test(args.reserva, args.destino))
     if args.externo:
         armados.append(preparar_externo(args.externo, args.destino))
+    if args.legitimas_reales:
+        armados.append(preparar_legitimas_reales(args.legitimas_reales, args.destino))
     for c in armados:
         print(resumen(c))
     return 0
