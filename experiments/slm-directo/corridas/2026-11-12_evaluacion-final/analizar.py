@@ -8,8 +8,8 @@ descomprimidos acá (conjuntos/, humo/, desarrollo/, test_reservado/ y, si corri
     python -I analizar.py --motivos                           # además, los motivos de las FA (texto del modelo)
     python -I analizar.py --datos OTRA_CARPETA --conjuntos OTRA  # corridas y conjuntos en otro lado (pruebas)
 
-Escrito el 2026-11-10, antes de correr. Los criterios son los de README.md («Criterios, escritos antes de correr»), que
-es un borrador: decide Mateo, y los números de CRITERIOS se cambian antes del tag, nunca después.
+Escrito el 2026-11-10, antes de correr. Sin criterios de aprobación (Mateo, 2026-11-18): se informan las cifras con su
+intervalo y la comparación pareada con las referencias (README.md).
 - En cada conjunto, la vista principal es la de referencia.json (conjuntos.py): alcance-140 en desarrollo; las 100
   estafas CV2-T-V y las 56 legítimas ENT-T en el test; las estafas que la custodia deja en la vista en #144.
 - La configuración avisa en la primera línea de OTRA con «riesgo ≥ 0,3» (solo OTRA, modo operativo); v4 sin alcance
@@ -19,6 +19,7 @@ es un borrador: decide Mateo, y los números de CRITERIOS se cambian antes del t
   cumplimiento (T_A < T_C); FA, en total y por `tipo_legitima`. Intervalos de Wilson al 95 %. McNemar exacto con los
   pares discordantes, la configuración contra cada referencia, en los mismos casos.
 - Con --anotacion-legitimas, todo lo de la vista principal se informa también con esa anotación, aparte.
+- Set externo: solo estafas; las FA del test salen de las 56 ENT-T (Mateo, 2026-11-18).
 """
 
 import argparse, collections, csv, importlib.util, json, math, sys
@@ -55,7 +56,6 @@ CONJUNTOS = ['desarrollo', 'test_reservado', 'externo']
 NOMBRES = {'desarrollo': 'Desarrollo', 'test_reservado': 'Test reservado', 'externo': 'Set externo (#144)'}
 CARPETAS = ['config', 'v4', 'reglas']
 REGLAS = {'reglas v1': 'reglas', 'reglas v2': 'reglas_v2'}  # nombre → `config` en el CSV
-REFERENCIAS = [V4, 'reglas v1']    # las de los criterios; reglas v2 se informa
 PRINCIPAL = conjuntos.PRINCIPAL
 TOLERANCIA = 2                     # ±2 es ruido (ADR 0005)
 MAXIMO_INVALIDAS = 0.01
@@ -64,14 +64,6 @@ MAXIMO_INVALIDAS = 0.01
 CIFRAS_DESARROLLO = {
     'c-premisa-corte-riesgo': {'estafas': 40, 'antes del pedido': 19, 'a tiempo': 29, 'FA': 26},  # sensibilidad
     'c-json-corte-riesgo': {'estafas': 36, 'antes del pedido': 14, 'a tiempo': 26, 'FA': 25},     # humo
-}
-# Borrador de los criterios (README.md). Estado: propuesta sin discutir; decide Mateo antes del tag.
-CRITERIOS = {
-    'margen': 3,            # pares discordantes de más a favor de la configuración (ADR 0005)
-    'p': 0.05,              # McNemar exacto, dos colas
-    'piso_a_tiempo': 0.50,  # límite inferior de Wilson de la detección útil en el test
-    'piso_estafas': 0.50,   # límite inferior de Wilson de las estafas avisadas en el test
-    'caida_externo': 0.20,  # cuánto puede caer la detección del externo respecto de la del test
 }
 TIPOS = ['cotidiana', 'pedido_razonable', 'mencion_sin_pedido']
 CIFRAS = ['estafas', 'antes del pedido', 'a tiempo', 'antes del cumplimiento', 'FA', *(f'FA {t}' for t in TIPOS)]
@@ -282,62 +274,6 @@ def aplicar(ref, cambios):
     return {i: {**r, **cambios.get(i, {})} for i, r in ref.items()}
 
 
-# --- Criterios (borrador) ---
-DIMENSIONES = {'estafas': 'más', 'a tiempo': 'más', 'FA': 'menos'}  # qué es ganar en cada cifra del criterio 1
-
-
-def contra(cfg, ref, c=CRITERIOS):
-    """(gana, pierde, texto) de la configuración contra una referencia en las cifras de DIMENSIONES.
-
-    En cada cifra, con los pares discordantes: gana si tiene `margen` o más a favor y p < `p` (McNemar exacto); pierde
-    si los tiene en contra. En las FA, a favor es que la referencia avise y la configuración no.
-    """
-    gana, pierde, partes = [], [], []
-    for cifra, mejor in DIMENSIONES.items():
-        solo_cfg, solo_ref, p = discordantes(cfg[cifra], ref[cifra])
-        a_favor, en_contra = (solo_cfg, solo_ref) if mejor == 'más' else (solo_ref, solo_cfg)
-        if a_favor - en_contra >= c['margen'] and p < c['p']:
-            gana.append(cifra)
-        elif en_contra - a_favor >= c['margen'] and p < c['p']:
-            pierde.append(cifra)
-        partes.append(f'{cifra} {a_favor} a {en_contra} (p = {p:.3f})')
-    return gana, pierde, '; '.join(partes)
-
-
-def criterios(test, externo=None, c=CRITERIOS):
-    """[(criterio, valor, cumple)] sobre la vista principal; cumple es None si falta el dato.
-
-    `test` y `externo`: detector → exitos(); la configuración se llama 'config'.
-    1. Contra cada referencia: gana con margen en alguna de las cifras de DIMENSIONES y no pierde en ninguna.
-    2. Límite inferior de Wilson de la detección útil (a tiempo) y de las estafas avisadas, sobre un piso.
-    3. #144: las estafas avisadas no caen más de `caida_externo` respecto del test.
-    """
-    salida = []
-    if not test or 'config' not in test:
-        return [('la configuración en el test', 'no corrió o tiene problemas', None)]
-    cfg = test['config']
-    for ref in REFERENCIAS:
-        nombre = f'le gana a {ref} sin perder (estafas, a tiempo, FA)'
-        if ref not in test:
-            salida.append((nombre, 'falta la referencia', None))
-            continue
-        gana, pierde, texto = contra(cfg, test[ref], c)
-        salida.append((nombre, f'a favor y en contra: {texto}', bool(gana) and not pierde))
-    for cifra, piso in (('a tiempo', 'piso_a_tiempo'), ('estafas', 'piso_estafas')):
-        k, n = kn(cfg[cifra])
-        lo, _ = limites(k, n)
-        salida.append((f'límite inferior de {cifra} ≥ {c[piso]:.0%}', wilson(k, n), None if lo is None else lo >= c[piso]))
-    nombre = f'#144 cae como mucho {c["caida_externo"]:.0%} en estafas avisadas'
-    if externo and 'config' in externo:
-        kt, nt = kn(cfg['estafas'])
-        ke, ne = kn(externo['config']['estafas'])
-        salida.append((nombre, f'{ke}/{ne} en #144 contra {kt}/{nt} en el test',
-                       None if not ne or not nt else ke / ne >= kt / nt - c['caida_externo']))
-    else:
-        salida.append((nombre, 'no corrió', None))
-    return salida
-
-
 # --- Informe ---
 def etiqueta(d, config):
     return f'`{config}`' if d == 'config' else d
@@ -470,8 +406,8 @@ def main(argv=None):
     assert V4 in PROMPTS_CORTE
     print('# #143, evaluación final — análisis offline\n')
     print(f'Configuración: `{config}` (solo OTRA, «riesgo ≥ 0,3», modo operativo). Referencias: `{V4}` (v4 sin alcance, '
-          '«riesgo ≥ 0,4 o alerta», todas las líneas) y las reglas de palabras clave v1 y v2. Criterios: README.md, '
-          'borrador.\n')
+          '«riesgo ≥ 0,4 o alerta», todas las líneas) y las reglas de palabras clave v1 y v2. Sin criterios de '
+          'aprobación: cifras con intervalo y comparación pareada.\n')
     humo(datos)
     conjs = {n: conjuntos.Conjunto(dir_conj / n) for n in CONJUNTOS if (dir_conj / n / 'conjunto.json').exists()}
     print('## Control de las corridas\n')
@@ -513,10 +449,6 @@ def main(argv=None):
         principales[n] = informe_conjunto(n, conj, ref, avs, {d: f for d, (f, _) in leidas[n].items()}, config,
                                           args.motivos)
 
-    print('## Criterios (borrador de README.md: decide Mateo)\n')
-    tabla([[c, v, '—' if ok is None else ('cumple' if ok else 'no cumple')]
-           for c, v, ok in criterios(principales.get('test_reservado'), principales.get('externo'))],
-          ['criterio', 'valor', 'resultado'])
     test = principales.get('test_reservado', {}).get('config')
     if test and kn(test['FA'])[1]:
         print('### FA por volumen de llamadas (test, vista principal; sin umbral)\n')
@@ -544,10 +476,6 @@ def main(argv=None):
             print(f'### {NOMBRES[n]}, vista principal con la anotación alternativa\n')
             cifras_tabla(ex, config)
             mcnemar_tabla(ex, config)
-        print('### Criterios con la anotación alternativa\n')
-        tabla([[c, v, '—' if ok is None else ('cumple' if ok else 'no cumple')]
-               for c, v, ok in criterios(alternativas.get('test_reservado'), alternativas.get('externo'))],
-              ['criterio', 'valor', 'resultado'])
     return 0
 
 

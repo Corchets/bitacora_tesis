@@ -1,8 +1,9 @@
 # #143, evaluación final
 
-> **Estado: propuesta sin discutir.** El código está listo y probado en seco (2026-11-10), pero **no corrió**: nadie
-> corrió nada sobre el test. Los criterios de abajo son un borrador y los decide Mateo. Lo que decida se fija en este
-> README y en `CRITERIOS` de [`analizar.py`](analizar.py) **antes** del tag `colab/143-evaluacion-final`, nunca después
+> **Estado: propuesta sin discutir.** El código está listo y probado en seco, pero **no corrió**: nadie corrió nada
+> sobre el test. Decisiones de Mateo del 2026-11-18: sin criterios de aprobación (se informan cifras con intervalo y la
+> comparación pareada), el set externo es solo de estafas, y los resultados del test van a `reserva/test`. Falta fijar la
+> configuración, que sale de la revisión de producto, antes del tag `colab/143-evaluacion-final`
 > ([ADR 0005](../../../../docs/ingenieria/adr/0005-reglas-de-evaluacion-escritas-antes-de-correr.md)).
 
 ## Qué corre
@@ -33,11 +34,12 @@ como `desarrollo`.
 |---|---|---|---|
 | `desarrollo` | Los 244 de `laboratorio-main` | [`alcance-140`](../../casos/listas/alcance-140.txt): 46 estafas (36 con pedido y 15 con cumplimiento) y 94 legítimas (29 cotidianas, 38 con pedido razonable y 27 con mención sin pedido) | Los otros 104, por grupo |
 | `test_reservado` | La rama `reserva/test` (9089b19), traída por ruta en Colab | 100 estafas `CV2-T-V` (80 con pedido, 32 con cumplimiento y 20 sin pedido) y las 56 legítimas `ENT-T` (14 cotidianas, 26 con pedido razonable y 16 con mención sin pedido) | Las 100 legítimas viejas `CV2-T-L`: 26 dentro del alcance y 74 fuera |
-| `externo` (#144) | La carpeta de la custodia, si la entrega | Las estafas que la custodia deje en la vista | Las que deje aparte |
+| `externo` (#144) | El set congelado de #144 ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)), desde la carpeta de la custodia: los textos no están en Git | Las 33 estafas coreanas de KorCCVi (27 con pedido y 6 sin pedido) | — |
 
 - **Las huellas del test se comprueban antes de armarlo:**
   - cada `CV2-T`, contra [`MANIFIESTO-CORPUS-V2.json`](../../casos/MANIFIESTO-CORPUS-V2.json);
-  - el JSONL de las 56 y `alcance-reserva.json`, contra su SHA-256.
+  - el JSONL de las 56 y `alcance-reserva.json`, contra su SHA-256;
+  - cada archivo del externo, contra [`MANIFIESTO-144-SET-COREANO-2026-11-11.json`](../../../../docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json).
 - **Los roles del test:**
   - los `CV2-T`, de `alcance-reserva.json`, anotado a ciegas;
   - las `ENT-T`, del campo `protegida` del JSONL.
@@ -90,81 +92,28 @@ de la FA de las 56 `ENT-T`, con su intervalo.
 
 **80/15** se informa solo como referencia ([PR #159](https://github.com/Corchets/bitacora_tesis/pull/159)).
 
-## Criterios, escritos antes de correr (borrador)
+## Sin criterios de aprobación
 
-> **Estado: propuesta sin discutir.** Mateo propuso las ideas el 2026-11-07: ganarle con margen a referencias simples,
-> mirar el límite inferior del intervalo, la detección útil y la tolerancia en el set externo. Las cifras son una
-> propuesta de esta sesión.
+Mateo lo decidió el 2026-11-18: no hay aprobado ni desaprobado. Se informan las cifras de arriba con su intervalo, y la
+comparación pareada (McNemar exacto) de la configuración contra `v4-corte` y las reglas. El set externo es solo de
+estafas: las FA del test salen de las 56 `ENT-T`.
 
-Se aplican sobre el **test reservado, en la vista principal**. Si un criterio no se cumple, se informa tal cual.
+**Cómo leer la comparación con las reglas.** [`previa_desarrollo.py`](previa_desarrollo.py) arma las mismas tablas sobre
+desarrollo, con corridas que ya existen ([salida](previa-desarrollo-salida.md)). Las reglas v1 avisan casi todo: a
+tiempo 32/36, pero con 69/94 FA. La configuración avisa a tiempo 29/36 con 26/94 FA. No hay que leer una sola cifra: la
+diferencia de detección con las reglas queda dentro del ruido (2 a 5 pares, p = 0,45) y la de FA es enorme (4 a 47).
 
-1. **Le gana a cada referencia sin perder** (contra `v4-corte` y contra las reglas v1).
-   - **Ganar:** en alguna de las tres cifras (estafas avisadas, a tiempo, FA), la configuración tiene 3 pares
-     discordantes o más a favor, con McNemar p < 0,05.
-   - **No perder:** no tiene eso en contra en ninguna.
-   - En las FA, a favor quiere decir que la referencia avisa y la configuración no.
-2. **El límite inferior de Wilson de «a tiempo» es ≥ 50 %.** Con 95 % de confianza, avisa a tiempo en más de la mitad
-   de las estafas con pedido. Con 80 casos, eso pide un punto de alrededor del 61 %.
-3. **El límite inferior de Wilson de las estafas avisadas es ≥ 50 %.**
-4. **#144 no se derrumba:** las estafas avisadas en #144 caen como mucho 20 puntos respecto del test.
-   - Con unas 20 estafas, cada caso vale 5 puntos y el ruido de ±2 vale 10.
-   - Si #144 no corre, el criterio queda sin dato.
+**Dónde quedan los resultados.** Los CSV del test traen el texto de la reserva: van a la rama `reserva/test`. A
+`laboratorio-main` va solo `analisis.md`, con identificadores y cifras. Lo del set externo no se sube a ningún lado: la
+fuente prohíbe redistribuir derivados.
 
-**No deciden, se informan:**
-- antes del pedido y antes del cumplimiento;
-- las FA por tipo y por volumen;
-- 80/15;
-- las reglas v2;
-- las vistas de aparte;
-- la latencia;
-- todo lo de desarrollo.
-
-### Por qué el criterio 1 no mira solo la detección
-
-[`previa_desarrollo.py`](previa_desarrollo.py) aplica estos criterios a desarrollo, con corridas que ya existen:
-- la configuración, de la sensibilidad;
-- `v4-corte`, de la etapa 2;
-- las reglas, que no usan modelo.
-
-No mira el test ni decide nada. La salida está en [`previa-desarrollo-salida.md`](previa-desarrollo-salida.md).
-
-| alcance-140 | estafas | a tiempo | FA | FA cotidianas |
-|---|---|---|---|---|
-| `c-premisa-corte-riesgo` | 40/46 | 29/36 | 26/94 | 2/29 |
-| `v4-corte` | 28/46 | 25/36 | 42/94 | 1/29 |
-| reglas v1 | 42/46 | 32/36 | 69/94 | 13/29 |
-
-- **Con un criterio solo de detección útil, la configuración no le ganaría a ninguna de las dos.**
-  - Contra `v4-corte` suma 7 pares contra 3 (p = 0,34).
-  - Contra las reglas pierde 2 a 5 (p = 0,45): las reglas avisan casi todo, con 73 % de FA.
-- **Con el criterio 1 cumple contra las dos, y también en la repetición.**
-  - Contra `v4-corte` gana en estafas (14 a 2) y en FA (24 a 8).
-  - Contra las reglas gana en FA (47 a 4) y la detección queda dentro del ruido.
-- **Riesgo para el test.** Con 80 estafas con pedido, la ventaja de detección de las reglas puede volverse
-  significativa (p < 0,05). Entonces el criterio diría «pierde», aunque las reglas tengan 73 % de FA en desarrollo.
-
-### Lo que decide Mateo antes del tag
-
-1. **El criterio 1 contra las reglas.** Hay tres opciones:
-   - dejarlo así;
-   - contra las reglas, exigir solo «gana en FA sin perder más de X estafas a tiempo»;
-   - comparar a FA parecida, que con un punto por detector no se puede.
-2. **Los pisos de los criterios 2 y 3.** La propuesta es 50 %; la alternativa más exigente, 60 %.
-3. **La tolerancia de #144.** La propuesta son 20 puntos. La otra opción es que los intervalos de #144 y del test no se
-   separen.
-4. **La configuración,** si la revisión de producto la cambia, y sus cifras de desarrollo.
-5. **Dónde quedan los resultados del test.**
-   - El CSV trae el texto de cada línea, y la reserva no puede entrar en `laboratorio-main`.
-   - Propuesta: los CSV del test van a `reserva/test`, y a `laboratorio-main` solo `analisis.md`, que muestra
-     identificadores y cifras, sin textos.
-   - Lo de #144 en coreano no se sube a ningún lado: la fuente prohíbe redistribuir derivados.
-6. **#144:** anotarlo como se propone abajo, o correr la evaluación sin #144.
+**Lo que falta antes del tag:** la configuración, que sale de la revisión de producto. Si no es `c-premisa-corte-riesgo`,
+va en `CONFIG` del notebook y en `CIFRAS_DESARROLLO` de `analizar.py`, con sus cifras de desarrollo.
 
 ## Anotación alternativa de legítimas
 
 La revisión de producto puede reanotar legítimas. El análisis acepta
-`python -I analizar.py --anotacion-legitimas RUTA.json` e informa las dos versiones, cada una con sus cifras, su
-McNemar y sus criterios:
+`python -I analizar.py --anotacion-legitimas RUTA.json` e informa las dos versiones, cada una con sus cifras y su McNemar:
 
 ```json
 {"_meta": {"fecha": "2026-11-11", "autor": "…", "motivo": "…"},
@@ -196,40 +145,11 @@ Se miraron solo el formato, las claves, los manifiestos y las huellas, sin leer 
   - los roles salen de `alcance-reserva.json`: 9 con `rol_dudoso`;
   - `T_R` y `T_C` salen de la referencia.
 
-### #144: falta casi todo
+### El set externo: nada
 
-Lo que hay hoy:
-- **Formato:** no está en formato de casos.
-  - Las traducciones de inglés y portugués están dentro de `docs/corpus/ISSUE-144-*.md`, en secciones con encabezados.
-  - El inglés conserva turnos pegados y rótulos invertidos de la fuente.
-  - El coreano no está en el repositorio.
-- **Roles:** no hay. Falta decir, en cada llamada, quién es PROTEGIDA.
-- **`T_R` y `T_C`:** solo están las fichas de Luciano de las 16 llamadas de inglés que se conservan (y 2 de coreano).
-  - Las marcas son «turno de lectura», en texto libre («10 aprox», «nunca nombra…»).
-  - Son de un solo revisor y no están adjudicadas.
-  - En 4 llamadas, su juicio no coincide con la etiqueta de la fuente.
-- **Portugués:** no tiene fichas de Luciano. PIX se había descartado como fuente porque la conversación no define la
-  clase (relevamiento, §3.3), y su clave está fuera de Git.
-
-**Propuesta para anotar a ciegas.** Sigue el formato del
-[relevamiento, §5.4](../../../../docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#54-formato-todas-son-conversaciones).
-Nadie del lado del detector lee las llamadas.
-
-1. **Luciano, la custodia, que ya las leyó, arma una carpeta por script:**
-   - `texto/EXT-NNN.txt` con `A:`/`B:`, un turno por línea, sin rótulos de la fuente;
-   - identificadores por sorteo, con semilla registrada;
-   - `roles.json`, donde PROTEGIDA es quien atiende;
-   - `referencia.json`.
-2. **`T_R` y `T_C`:** los marca un agente nuevo, que no vio prompts, corridas ni resultados. Usa la guía de #145 y
-   METRICAS.md, como la pasada 1 de `TEST-ALCANCE.md` §4. Donde no coincide con la ficha, decide Luciano.
-3. **La vista:**
-   - en la principal, las llamadas que Luciano juzga estafa;
-   - aparte, aquellas en las que su juicio difiere de la fuente.
-4. **El coreano** corre solo si la custodia tiene la traducción fuera de Git. Sus resultados no se suben.
-5. **El portugués** queda afuera, salvo que Mateo decida otra cosa y la custodia aporte la clave.
-
-**Aviso:** algunas llamadas reales son largas. Las líneas que no entran en `num_ctx` 4096 son inválidas
-(`contexto_excedido`) y no avisan. Es el comportamiento de la configuración, y se informa.
+#144 lo dejó congelado el 2026-11-11: formato de casos, roles y `T_R`/`T_C`, con las huellas en el manifiesto. Hace
+falta la carpeta de la custodia en Colab. Algunas llamadas reales son largas: las líneas que no entran en `num_ctx` 4096
+son inválidas (`contexto_excedido`) y no avisan. Se informa.
 
 ## Archivos
 
@@ -237,12 +157,12 @@ Nadie del lado del detector lee las llamadas.
 |---|---|
 | [`conjuntos.py`](../../conjuntos.py) | Arma y valida los conjuntos; comprueba huellas; no imprime textos |
 | [`correr.py --conjunto`](../../correr.py) | Corre sobre un conjunto armado, sin leer su referencia |
-| [`analizar.py`](analizar.py) | Controles, cifras, Wilson, McNemar, criterios, anotación alternativa y control de reproducibilidad |
-| [`previa_desarrollo.py`](previa_desarrollo.py) | Los criterios sobre desarrollo, para ver que estén bien planteados |
+| [`analizar.py`](analizar.py) | Controles, cifras, Wilson, McNemar, anotación alternativa y control de reproducibilidad |
+| [`previa_desarrollo.py`](previa_desarrollo.py) | Las mismas tablas sobre desarrollo, para ver cómo se leen |
 | [`colab/probar_evaluacion_final.py`](../../colab/probar_evaluacion_final.py) y su notebook | La corrida en Colab |
 | [`tests/test_evaluacion_final.py`](../../tests/test_evaluacion_final.py) | Reserva sintética, Ollama falso y corridas sintéticas |
 
-**Prueba en seco (2026-11-10):**
+**Prueba en seco (2026-11-10, repetida el 2026-11-18 con un externo sintético en el formato del set coreano):**
 - Corrió el Colab entero en una Mac, con binarios falsos de Colab y Ollama.
 - El Ollama falso repetía los riesgos de la sensibilidad en desarrollo.
 - Se usaron una reserva sintética y un #144 sintético.

@@ -365,8 +365,9 @@ OTRA (`--seguir-tras-aviso`):
 > **Estado: propuesta sin discutir.** Corre una sola vez la configuración congelada y las referencias simples sobre
 > desarrollo, el test reservado y, si está, #144. Todo está en
 > [`corridas/2026-11-12_evaluacion-final/README.md`](../corridas/2026-11-12_evaluacion-final/README.md): qué corre, el
-> control de reproducibilidad antes del test y los criterios, que decide Mateo antes del tag.
+> control de reproducibilidad antes del test y qué se informa (sin criterios de aprobación).
 
 [`probar_evaluacion_final.py`](probar_evaluacion_final.py) se abre desde
 [`COLAB-EVALUACION-FINAL.ipynb`](COLAB-EVALUACION-FINAL.ipynb). El notebook no corre hasta tener el hash del commit del
-tag (`COMMIT = 'PENDIENTE'`). Si hay set externo, su carpeta se sube a Colab antes y su ruta va en `EXTERNO`.
+tag (`COMMIT = 'PENDIENTE'`). La carpeta del set externo de #144 (las 33 coreanas, fuera de Git) se sube a Colab antes y su ruta va en
+`EXTERNO`.
