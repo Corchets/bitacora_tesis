@@ -8,6 +8,11 @@ y no corre detectores.
 > [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Nada de esto cambia la configuración
 > congelada ni el test de [#45](https://github.com/Corchets/bitacora_tesis/issues/45).
 
+> **Actualización del 2026-11-18:** el set está armado (§8). Son **33 legítimas reales de telecomunicaciones** y
+> **42 llamadas de zona gris**, que no cuentan como falsas alarmas. Lo que cambió respecto de este relevamiento: las
+> salientes de seguros y de equipamiento médico de CallCenterEN **no son legítimas**. Son captación de Medicare y
+> esquemas que el OIG de EE. UU. describe como fraude. Solo las de telecomunicaciones sirven.
+
 ## 1. Resultado en breve
 
 - **Vale la pena, acotado a ventas y telemarketing.** Hoy todas las FA salen de legítimas generadas: la configuración
@@ -96,9 +101,11 @@ inferido; **NV**, no verificado.
 - **Legitimidad.** Viene de los registros de BPO con los que AIxBlock tenía convenio, sin etiqueta de legitimidad ni de
   resultado. Parte de las salientes puede ser telemarketing agresivo. En EE. UU., por ejemplo, está prohibido llamar en
   frío a jubilados de Medicare para venderles equipamiento médico (I). Agresivo no es estafa, pero hay que anotarlo.
+  **Lo que mostró la anotación (2026-11-18, §8):** en seguros y equipamiento médico ningún anotador marcó legítima
+  ninguna de las 42 llamadas. Solo las de telecomunicaciones son legítimas.
 - **Formato.** JSON con el texto, la duración y marcas de tiempo por palabra, salido del ASR de AssemblyAI, sin
-  muletillas y con los números en cifras. La ficha no habla de hablantes. Una copia de terceros dice que el campo
-  `speaker` viene vacío (NV): si es así, hay que separar turnos y roles.
+  muletillas y con los números en cifras. La ficha no habla de hablantes. **Confirmado el 2026-11-18:** el campo
+  `speaker` viene vacío en todas las palabras de los tres archivos, así que hay que separar turnos y roles.
 - **Esfuerzo:** medio-alto.
   1. Separar turnos y asignar roles: el agente es `OTRA` y el cliente, `PROTEGIDA`.
   2. En el archivo mezclado, separar telecomunicaciones salientes de servicios para el hogar entrantes.
@@ -242,7 +249,9 @@ legítimas generadas, con otra mano. Su licencia prohíbe publicar el dataset, i
   `PROTEGIDA`, el cliente. Importa porque la configuración consulta solo en las líneas de `OTRA`.
 - Se traduce con los criterios de #144
   ([relevamiento §5.2](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#52-traducción-y-adaptación)): mismos turnos y orden,
-  sin agregar ni sacar información, rioplatense oral, «usted» si el original es formal.
+  sin agregar ni sacar información, rioplatense oral, «usted» si el original es formal. **Cambio aplicado en §8:**
+  como en el set coreano ([relevamiento §8.2](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#82-cómo-se-hizo)), la traducción
+  es fiel, en español neutro, y sin adaptar el contexto de EE. UU.
 - Lo propio de las legítimas: **no hacerlas más ni menos parecidas a una estafa.** Si el vendedor pide la tarjeta, la
   traducción pide la tarjeta. Las instituciones se cambian solo cuando no existen acá. Los marcadores de datos tapados
   se reemplazan por datos ficticios con una tabla fija.
@@ -342,3 +351,126 @@ después del 30 o como trabajo futuro.
 - **TeleAntiFraud:** cuántas normales salen de grabaciones reales.
 - **LDC y ELRA:** los plazos de entrega, y el resto del catálogo de ELRA, porque el buscador devolvió errores.
 - **Proveedores:** cuántas salientes tiene cada uno y si FutureBeeAI es real o actuada.
+
+## 8. Set armado el 2026-11-18
+
+> **Estado: propuesta sin discutir.** Mateo delegó el armado el 2026-11-18. Si y cómo se informa en
+> [#52](https://github.com/Corchets/bitacora_tesis/issues/52) lo decide el equipo. Ningún detector corrió sobre estas
+> llamadas.
+
+### 8.1. Qué quedó
+
+| Set | Llamadas | Qué son | Cómo se lee |
+|---|---:|---|---|
+| **Legítimas reales** | 33 | Telecomunicaciones salientes a negocios que ya son clientes o habían pedido algo: instalaciones, visitas técnicas, mejoras de plan | Falsas alarmas: `k/33` con Wilson |
+| **Zona gris de Medicare** | 42 | 24 de seguros y 18 de equipamiento médico | Aparte: ni falsa alarma ni estafa |
+
+De las 33 legítimas, 19 son `cotidiana`, 10 `mencion_sin_pedido` y 4 `pedido_razonable`. Cuatro tienen un pedido
+sensible de datos personales. Tienen de 13 a 38 líneas, con mediana de 22, parecido a las estafas de desarrollo.
+26 están completas, a 5 les falta el final y a 2 el comienzo.
+
+Quedaron afuera tres llamadas de telecomunicaciones: dos entrantes (`CAND-49` y `CAND-60`) y una que inicia la
+persona (`CAND-51`).
+
+Con n = 33, el intervalo de Wilson al 95 % es ancho:
+
+| FA | Intervalo |
+|---|---|
+| 0/33 | 0–10,4 % |
+| 3/33 | 3,1–23,6 % |
+| 8/33 | 12,8–41,0 % |
+
+Alcanza para ver una diferencia grande con las 25/94 de desarrollo, no una chica (§5).
+
+### 8.2. Por qué hay una zona gris
+
+En seguros y equipamiento médico ningún anotador marcó legítima ninguna de las 42 llamadas:
+
+- el anotador `a1` marcó las 42 como estafa;
+- `a2` marcó 30 dudosas y 12 estafas.
+
+Lo que describe `a2` coincide con dos esquemas documentados en EE. UU.:
+
+- **Seguros:** prometen una «mejora» de Medicare con reembolso, confirman fecha de nacimiento y domicilio, y
+  transfieren a otro agente que va a pedir el número de Medicare. Las aseguradoras de Medicare Advantage no pueden
+  llamar en frío ([42 CFR 422.2264(a)(2)(iv)](https://www.law.cornell.edu/cfr/text/42/422.2264)).
+- **Equipamiento médico:** ofrecen una prueba genética o rodilleras «gratis» a cambio del número de Medicare o del
+  Seguro Social, y arman una «contraseña de verificación». En una llamada el agente le dice a la persona que mienta
+  en las preguntas que siguen. Es el esquema de la
+  [alerta de fraude del OIG](https://oig.hhs.gov/fraud/consumer-alerts/fraud-alert-genetic-testing-scam).
+
+Contarlas como legítimas inflaría las falsas alarmas. Tampoco son estafas con referencia: no hay marcas ni se sabe
+cómo terminó cada una. Por eso van aparte. Si el detector avisa ahí, probablemente avisa bien.
+
+Lo que esto le cambia al relevamiento: «viene de un BPO real» no es verdad de base de legitimidad (§2). Sirvió el
+tercer criterio, la anotación.
+
+### 8.3. Cómo se hizo
+
+1. **Descarga.** Tres archivos de la revisión `9d40ca13f3e1` de CallCenterEN, 128 MB, con el SHA-256 de Hugging
+   Face. Se revisó la estructura con un script que no imprime texto. El campo `speaker` viene vacío.
+2. **Sorteo.** [`seleccionar_legitimas_reales.py`](../../experiments/laboratorio/seleccionar_legitimas_reales.py)
+   se commiteó antes de abrir ninguna llamada. Elige por nombre de archivo y duración, de 60 a 900 s, con
+   `Random(20261118)`: 24 de seguros, 18 de equipamiento médico y 8 de telecomunicaciones. Parte el texto en cada
+   pausa de 600 ms o más. La segunda tanda, de 28 llamadas de telecomunicaciones con `Random(20261119)`, se decidió
+   después de anotar la primera y antes de correr ningún detector, y también se commiteó antes de traducir.
+3. **Turnos y traducción.** Doce subagentes Claude Sonnet 5.5 en paralelo, con el prompt de
+   [PROMPTS-LEGITIMAS-REALES-2026-11-18.md §1](../corpus/PROMPTS-LEGITIMAS-REALES-2026-11-18.md#1-turnos-roles-y-traducción).
+   La traducción es fiel, en español neutro, con el contexto de EE. UU., como el set coreano. Se comprobó con
+   script que cada traducción cubre todos los segmentos de su fuente y entre 84 y 98 % de su vocabulario.
+4. **Texto final.** [`armar_set_legitimas_reales.py`](../../experiments/laboratorio/armar_set_legitimas_reales.py)
+   arma una línea por turno, con `A` como quien habla primero. Los marcadores de datos tapados se reemplazan por un
+   valor ficticio fijo por tipo y por llamada.
+5. **Anotación a ciegas.** Dos subagentes Sonnet por tanda, sin ver el inglés, el estrato ni al otro anotador (§2 de
+   los prompts). Los desacuerdos de las llamadas que algún anotador marcó legítimas los resolvió un tercero (§3).
+6. **Congelado.** IDs `EXT-NNNN` de cuatro cifras, para no chocar con los de tres del set coreano. Los manifiestos
+   tienen el SHA-256 de cada archivo:
+   - [`MANIFIESTO-LEGITIMAS-REALES-2026-11-18.json`](../corpus/MANIFIESTO-LEGITIMAS-REALES-2026-11-18.json): su
+     SHA-256 es `f1f6631a968321b5d897adcb9ff1a58109efb077b75460efcb51d05a0e91e0de`;
+   - [`MANIFIESTO-ZONA-GRIS-MEDICARE-2026-11-18.json`](../corpus/MANIFIESTO-ZONA-GRIS-MEDICARE-2026-11-18.json): su
+     SHA-256 es `3f2d79370ca472a7e27d75a9cf2007242e4c32b3b1caa666204cdc9f20261d2d`.
+
+**Acuerdo entre anotadores** (76 llamadas, las dos tandas juntas):
+
+| Campo | Acuerdo | Kappa |
+|---|---:|---:|
+| Quién inicia | 76/76 | 1,00 |
+| Legítima sí o no | 76/76 | 1,00 |
+| Hay pedido sensible | 75/76 | 0,97 |
+| `completa` | 70/76 | 0,86 |
+| `tipo_legitima` | 68/76 | 0,83 |
+| Legitimidad, con sus cuatro valores | 43/76 | 0,42 |
+| Motivo | 30/76 | 0,32 |
+
+Lo que decide qué entra al set tiene acuerdo total. Los desacuerdos de legitimidad son entre `estafa` y `dudosa` en
+la zona gris, y entre `legitima` y `legitima_agresiva` en las legítimas.
+
+### 8.4. Custodia y cómo se corre
+
+- Los textos no se versionan: la ficha prohíbe redistribuir. Todo queda en `data/private/legitimas-reales/` del
+  checkout principal, que Git ignora: las zip, la carpeta de trabajo y `sets/set-legitimas` y
+  `sets/set-zona-gris`. `correspondencia.json` lleva el nombre de archivo de la fuente, que es el teléfono de la
+  persona, así que no sale de ahí.
+- Los dos sets tienen el formato del set coreano. Se comprobó que cargan sin errores con
+  `conjuntos.preparar_externo(carpeta, destino, manifiesto=…)` de la rama local `claude/happy-austin-e0e0c3`
+  (`3507fa0`): 33 legítimas y 42 `legitima_dificil`.
+- Para correrlos en #52 falta que `conjuntos.py` llame a esa función con cada manifiesto y otro nombre de conjunto.
+  En la zona gris, `legitima_dificil` es solo para que el formato valide: no se cuenta como falsa alarma.
+
+### 8.5. Límites para informar
+
+- **Todo es B2B y de un solo rubro.** Quien atiende es el dueño o un empleado de un negocio, y en general ya es
+  cliente o había pedido algo. Por la regla de alcance entra, porque llama la empresa a un número que no está
+  agendado, pero no es un particular al que lo llama un desconocido. No hay entregas, turnos, bancos ni cobranzas.
+- **Español neutro y contexto de EE. UU.,** como el set coreano. El detector se ajustó sobre rioplatense.
+- **Roles inseguros.** La fuente no trae hablantes. Los traductores marcaron con duda 530 turnos de las dos tandas,
+  sobre todo en telecomunicaciones, donde hay pocas pausas. Un error de rol importa porque la configuración consulta
+  solo en las líneas de `OTRA`.
+- **Ningún humano leyó las llamadas.** Traducción, anotación y adjudicación son de IA. La sesión que coordinó no
+  leyó llamadas: vio conteos y las justificaciones de una línea. `a1` repitió la misma justificación en 42 llamadas,
+  así que esa anotación es de baja calidad. No cambia el set, porque la otra anotación también deja esas 42 fuera de
+  las legítimas.
+- **Duración acotada:** se dejaron afuera las llamadas de más de 15 minutos. En telecomunicaciones la mediana es de 19
+  minutos, así que el set queda sesgado hacia las cortas.
+- **Datos ficticios:** hay un valor por tipo de marcador y por llamada. Si se nombra al agente y al cliente, los dos
+  pueden quedar con el mismo nombre.
