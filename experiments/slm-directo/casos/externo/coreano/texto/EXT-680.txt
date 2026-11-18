@@ -1,0 +1,71 @@
+A: Sí, cliente.
+A: Sí, le habla el asesor Kim Jong-ho. Como el préstamo sale con la sola garantía de sus ingresos, en el contrato del préstamo se van a incluir 2 cláusulas especiales.
+A: Ahora le voy a explicar las dos cláusulas especiales. Si mientras escucha hay algo que no sabe o no entiende, pregúnteme en el momento.
+A: Primera: si después de recibir el préstamo usted se atrasa 3 meses seguidos o más, o evita pagar a propósito durante 3 meses o más...
+A: ...nuestro banco, con solo una orden judicial, puede hacer un cobro forzoso sobre sus ingresos.
+A: O sea, entra una cláusula que dice que puede haber embargo. ¿Entendió la primera cláusula?
+A: Sí. Segunda: aunque después de recibir el préstamo usted pida un concurso personal, una reestructuración de deudas o la quiebra...
+A: ...el préstamo que se otorga ahora no puede quedar incluido en eso; también entra esa cláusula. ¿Entendió la segunda cláusula también?
+A: Sí. Para darles efecto legal a estas dos cláusulas especiales vamos a hacer una certificación. Y hay dos formas de hacer la certificación. Usted elige.
+A: Una es que usted designe directamente a un abogado. La otra es delegarlo en nuestro banco. ¿Con cuál de las dos le explico?
+B: Por teléfono...
+A: La certificación se hace porque es un préstamo que se otorga con la sola garantía de sus ingresos...
+A: ...así que nos tiene que dar a nosotros, el Banco de Ahorro Haetsal, la facultad de cobro en primer lugar sobre sus ingresos.
+B: Entonces hágalo con la segunda.
+A: Sí. ¿Entendió para qué se hace la certificación? Sí, entonces le explico el caso en que se delega en nuestro banco.
+A: Lo va a llamar un abogado de un estudio jurídico que tiene contrato con nuestro banco.
+A: Todo lo que hable con nuestro abogado va a ser, como ahora, por teléfono y grabado. Con lo grabado, el abogado va a hacer la certificación de la grabación.
+A: Como la certificación es telefónica, escuche bien las preguntas que le haga el abogado...
+B: ...si es correcto, «correcto»...
+A: ...y si no, «no es correcto»: si contesta con precisión, la certificación queda terminada. El documento certificado se lo mandamos por correo certificado a la dirección que usted indique. ¿Entendió cómo es la certificación?
+A: Ahora está grabando la llamada, ¿no? Lo hizo. Hizo bien. El préstamo que pidió es de 10 millones de wones, ¿no? Un momento.
+A: Sí, por 10 millones el honorario de delegación de la certificación es de 120.030 wones, 120.030 wones. Ese honorario lo cubre íntegramente nuestro banco.
+A: Eso sí, según el procedimiento de esa cobertura, creo que hace falta una explicación más para que no haya malentendidos.
+A: Nuestro banco, en una primera instancia, le cubre 20.030 wones. Por los 100.000 restantes...
+A: ...tiene que constar un pago a su nombre en la cuenta del abogado que le va a hacer el trámite.
+A: Como la certificación se hace para que haya efecto legal entre usted y el abogado, tiene que haber un comprobante de que usted, con su nombre real, pagó una vez a la cuenta de cobro del abogado; solo así se hace la certificación.
+A: Con el comprobante de su pago se logra el efecto legal entre usted y el abogado. Solo así se puede emitir el documento de reserva de la certificación a su nombre. Los 100.000 wones del honorario que paga...
+A: ...si sale aprobado, se le pagan junto con los 10 millones que pidió: se le entregan 10,1 millones. Y si lo rechazan, ya no hay motivo para hacer la certificación, ¿no?
+A: En ese caso, el abogado a cargo le devuelve los 100.000 wones a su cuenta.
+B: ¿O sea que yo tengo que pagar 100.000 wones?
+A: Así es.
+A: Igual, si paga hoy, se preparan los papeles, se suben al área de evaluación y entre una hora y media y dos horas después lo llaman. Pero por más rápido que se armen y se suban los papeles...
+A: ...el jefe del área de evaluación lo llama recién a eso de las 6 y media.
+A: Y así, hoy no va a poder recibir el préstamo de todos modos. Los préstamos salen por orden solo para los que se aprueban entre las 5 y las 7. Antes de que salga el préstamo...
+A: ...el abogado que le dije también tiene que tomar la certificación, así que hoy no llega.
+A: Pero si usted tiene intención de hacerlo, me parece que lo correcto es hacerlo mañana.
+A: Y como hay 4 abogados en total, cada uno tiene un horario distinto. Me tiene que decir cuándo puede pagar...
+A: ...y a esa hora le mandamos la cuenta de cobro del estudio jurídico que esté atendiendo. Antes de eso no se la puedo dar.
+B: Esto de los 100.000 wones... usted es asesor y quizás lo escuchó, pero dicen que en un trámite de préstamo nadie pide algo así. Pero esto...
+A: Le agradezco que me lo pregunte con sinceridad. Hay clientes que le preguntan al gerente: «¿Ustedes no son un voice phishing?», ¿no?
+A: Es así. Yo hace 5 años que trabajo acá, y sinceramente hay quienes le preguntan al gerente como expertos, y hay quienes insultan. ¿Dónde no insultan? ¿Dónde?
+A: Le explico.
+A: No sé si le va a convencer, pero en Corea hay más de 500 bancos de ahorro. Hay cientos que ni yo conozco.
+B: Ajá.
+A: Entonces, en el caso de nuestro banco, el Banco de Ahorro Haetsal...
+A: ...si aparece en portales privados, como Naver o Daum, nuestra casa central paga para que lo bajen, para que lo borren. Porque...
+A: ...hay muchísima gente que se hace pasar por el Banco de Ahorro Haetsal y lo usa para el voice phishing que a usted le preocupa o para negocios turbios.
+A: Por eso, a propósito, nuestro sitio web solo se lo informamos a los clientes que ya lo son.
+A: Sí, si de verdad le preocupa, está la primera forma. Puede designar usted mismo a un abogado. Aunque lo haga así, el honorario de certificación que salga se lo cubrimos íntegramente. Sí.
+B: Entonces, si hago la primera, ¿cómo...?
+A: ¿Le explico?
+A: Elige el tribunal que corresponde a su domicilio, elige un estudio jurídico de ahí y designa directamente a un abogado de ese estudio.
+A: Nos pasa el teléfono del abogado de ese estudio y coordinamos la agenda con nuestro estudio jurídico.
+A: Me parece que hacerlo así es lo más prolijo.
+B: Sí. ¿Y eso es en mi zona, donde trabajo, dice?
+A: Donde le quede cómodo.
+B: Donde trabajo me queda cómodo, así que en la zona del trabajo...
+A: Designe directamente a un abogado de un estudio jurídico.
+B: Abogado... y cuando lo designe, ¿qué le tengo que explicar al abogado?
+A: Dígale lo mismo, garantía de ingresos: «Quiero sacar un préstamo con garantía de ingresos en el Banco de Ahorro Haetsal, con la sola garantía de mis ingresos...
+A: ...y para eso me dicen que hace falta una certificación; ¿me puede ayudar?». Si se lo encarga así, ellos le van a decir: «El honorario de certificación va a ser tanto».
+A: Entonces páguelo primero, y si de nuestro lado sale aprobado...
+A: ...nos manda el pedido de 10 millones y el recibo del honorario de certificación, y se lo reintegramos también.
+B: Entendido. Ya entendí el contenido.
+A: Sí, véalo y mañana vuelva a llamar. Si de verdad tiene intención...
+B: Sí, sí, entendido. Entonces voy a llamar por ahí.
+A: Los documentos los tiene que mandar. Los documentos... por ahora, el certificado de trabajo, nuestro encargado...
+B: Bueno. Entendido. Ahora estoy agregando. Sí, entendido, entendido. Cuando tenga estos 2 listos, el fax es el 010-7710-6648, ¿no?
+A: 010-7710-6648, correcto. 6919, 6919.
+B: Entendido.
+A: Sí, gracias. Le habló el asesor Kim Jong-ho. Sí.

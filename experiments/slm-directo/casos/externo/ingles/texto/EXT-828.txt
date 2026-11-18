@@ -1,0 +1,20 @@
+A: Gracias por llamar a PayPal, ¿cómo puedo ayudarlo?
+B: Eh, estoy llamando con respecto a un correo electrónico que ustedes me enviaron. Es por $629. No estoy del todo segura de qué es esto de Bitcoin.
+A: Bien, usted tiene un cargo que se estuvo realizando bajo su cuenta de PayPal comprando algunos Bitcoins. Me está diciendo que eso parece ser, sí,$629.99. Entonces, ¿usted me está diciendo que no realizó esa compra?
+B: Bueno, definitivamente yo no hice la compra. ¿Qué tengo que hacer para que se cancele?
+A: Entonces, ¿inició sesión en su cuenta de PayPal en algún lugar?
+B: Ni siquiera tengo una cuenta de PayPal.
+A: Bien, acabo de hablar con mi departamento y me informaron que han estado recibiendo este tipo de reclamos. Algunas personas están haciendo un uso indebido de la información de otros y creando cuentas en PayPal, comprando algo a veces en eBay, a veces en Amazon, y en su caso, esto es Bitcoin. En primer lugar, quiero asegurarme de que desea que ponga una retención sobre esa transacción, ¿correcto? ¿No quiere que la deje pasar?
+B: Sí, por favor póngale una retención.
+A: Puedo verlo aquí, está bajo revisión y bajo su nombre, pero todavía no está procesada. Le estamos poniendo una retención, y ya lo he hecho. He puesto una retención en la transacción.
+B: Gracias, se lo agradezco.
+A: Como usted me dijo, nunca ha creado una cuenta de PayPal, ¿correcto?
+B: No señor, nunca. Ni una sola vez he tenido una cuenta de PayPal.
+A: Ahora, le pregunto, ¿ha usado su información recientemente en algún lugar, como en un sitio web, algunos sitios web malos, comprando algo como ropa o algo así, recientemente, dentro de una semana o dos?
+B: Compré algunos artículos en eBay hace quizá unos dos meses.
+A: Qué bueno para usted que lo hayamos detenido. El dinero que le estaban quitando está con nosotros ahora. Le hemos puesto una retención, por lo que no va a ir a esas personas. Los Bitcoins no se comprarían y se vería reflejado en su resumen dentro de las próximas 10 a 12 horas. Si lo desea, podemos revertir los fondos que le han sido quitados.
+B: Sí, por favor, eso sería genial, sería un encanto.
+A: Bien, de acuerdo. Así que para hacer eso, tendría que completar un formulario de cancelación. Eso funcionaría como comprobante de que le hemos ayudado a cancelar la compra y devolverle su dinero. Entonces, ¿está cerca de una computadora en este momento?
+B: De hecho estoy frente a mi computadora ahora mismo mientras hablamos.
+A: Solo abra su Google Chrome y le daré un comando que le ayudará a conectarse a nuestro servidor seguro.
+B: Me está pidiendo que ingrese un código de servicio. ¿Dónde encuentro esto?

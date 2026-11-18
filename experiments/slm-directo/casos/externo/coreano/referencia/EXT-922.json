@@ -1,0 +1,36 @@
+{
+ "case_id": "EXT-922",
+ "grupo": "externo",
+ "clase": "vishing",
+ "clase_fuente": "vishing",
+ "t_r_linea": 29,
+ "t_c_linea": 58,
+ "pedidos_lineas": [
+  29
+ ],
+ "cumplimientos_lineas": [
+  58
+ ],
+ "sospecha_linea": null,
+ "con_pedido": true,
+ "revision_humana": true,
+ "marcado_por": {
+  "t_r": "Claude (Opus 5.5), con los criterios del pre-marcado; la ficha no traía un número",
+  "t_c": "Luciano Grosso (ficha)",
+  "roles": "Luciano Grosso (ficha)"
+ },
+ "ficha_original": {
+  "conservar": "conservar",
+  "creible": "si",
+  "es_estafa": "si",
+  "sospecha": "cuando pide que instale una app y otras cosas mas al principio",
+  "t_r": "que pida que instale la app esa, tiene toda la pinta de troyano. nose cual es la linea exacta porque construye el pedido no lo hace en una sola",
+  "t_c": "58 parece que lo instala",
+  "comienzo_final": "completa",
+  "hablantes": "si",
+  "direccion": "estafador",
+  "dudas": "",
+  "decision": "dejar"
+ },
+ "notas": "T_R y T_C son el primer pedido y el primer cumplimiento; pedidos_lineas y cumplimientos_lineas guardan todos los marcados (una línea por segmento de la fuente). Traducción fiel al español neutro, sin adaptar al rioplatense, con wones y nombres coreanos: se decidió no adaptarla para que la IA no sesgara el texto; se conserva la estructura de la llamada real."
+}

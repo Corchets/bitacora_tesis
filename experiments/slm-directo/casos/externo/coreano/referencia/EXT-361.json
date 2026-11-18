@@ -1,0 +1,38 @@
+{
+ "case_id": "EXT-361",
+ "grupo": "externo",
+ "clase": "vishing",
+ "clase_fuente": "vishing",
+ "t_r_linea": 15,
+ "t_c_linea": 16,
+ "pedidos_lineas": [
+  15,
+  25
+ ],
+ "cumplimientos_lineas": [
+  16,
+  31
+ ],
+ "sospecha_linea": 12,
+ "con_pedido": true,
+ "revision_humana": true,
+ "marcado_por": {
+  "t_r": "Luciano Grosso (ficha)",
+  "t_c": "Luciano Grosso (ficha)",
+  "roles": "Luciano Grosso (ficha)"
+ },
+ "ficha_original": {
+  "conservar": "conservar",
+  "creible": "si",
+  "es_estafa": "si",
+  "sospecha": "12",
+  "t_r": "15 25",
+  "t_c": "16 31",
+  "comienzo_final": "completo",
+  "hablantes": "si",
+  "direccion": "llama estafador",
+  "dudas": "",
+  "decision": "dejar"
+ },
+ "notas": "T_R y T_C son el primer pedido y el primer cumplimiento; pedidos_lineas y cumplimientos_lineas guardan todos los marcados (una línea por segmento de la fuente). Traducción fiel al español neutro, sin adaptar al rioplatense, con wones y nombres coreanos: se decidió no adaptarla para que la IA no sesgara el texto; se conserva la estructura de la llamada real."
+}

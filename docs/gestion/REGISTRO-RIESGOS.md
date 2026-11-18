@@ -19,6 +19,13 @@ están verificados y se revierte §5.3. Además, esas conversaciones dejan de es
 si se usan como test. El coreano sigue privado. Propuesta sin discutir: la confirma o revierte
 el equipo.
 
+**Actualización del 2026-11-18, #144:** por decisión de Luciano, KO-01 a KO-09 y las 16 de inglés
+se versionan en el repositorio público, en formato de casos y con su referencia
+([relevamiento §8.4](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#84-inglés-y-portugués)). R04/R05 suben:
+la fuente coreana pide no redistribuir derivados y no hay permiso, y esas 9 de las 33 conversaciones
+del set congelado dejan de estar en custodia. Lo publicado queda en el historial de Git y puede
+haberse copiado. Propuesta sin discutir: la confirma o revierte el equipo.
+
 **Actualización del 2026-11-11, #144:** el set externo quedó congelado con hashes
 ([relevamiento §8](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md#8-set-coreano-congelado-2026-11-11)).
 R05 mitigado para ese set: el manifiesto en Git fija las conversaciones y las referencias antes

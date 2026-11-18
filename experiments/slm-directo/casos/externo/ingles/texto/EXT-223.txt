@@ -1,0 +1,24 @@
+A: Se comunicó con la Administración de Seguridad. ¿En qué la puedo ayudar?
+B: Ah, sí, ¿cómo le va hoy?
+A: Sí, estoy bien. Gracias por preguntar, señora. ¿Cómo está usted hoy?
+B: Eh, podría estar mejor. Recibí una llamada de ustedes hace un rato y estoy tratando de entender de qué se trata.
+A: Muy bien, señora. Entonces, ¿recibió algún número de caso?
+B: No, no, solo me dijeron que devolviera la llamada, así que estoy llamando ahora.
+A: Muy bien, muy bien. Entonces, ¿me puede dar su nombre y su número de seguridad social así reviso en mi sistema por qué recibió una llamada de nuestro departamento, señora? ¿Me ayuda con eso?
+B: Sí, mi nombre es Linda Harper.
+A: ¿Y cuál es su número de seguridad social?
+B: Los últimos cuatro son 4417.
+A: Señora, ¿le pedí los últimos cuatro dígitos? Le pedí que verificara su número de seguridad social completo.
+B: Bueno, escuché en las noticias que no tengo que dar mi número de seguridad social; solo los últimos cuatro, que es lo que la gente necesita.
+A: No, señora. No la puedo ayudar sin el número completo. Gracias, que tenga un buen día.
+B: Entonces, ¿está todo bien?
+A: No, señora. Está bajo investigación en Seattle. Hay acciones de aplicación de la ley contra su nombre y su número de seguridad social. Tenemos una orden para suspender su número de seguridad social de inmediato, porque se lo encontró sospechoso de cometer actividades fraudulentas en Seattle. No la estoy culpando, señorita. Mi deber es informarle sobre su caso.
+B: Muy bien, ¿y recibió mi apellido? Es Harper.
+A: Muy bien, señorita Harper, ¿recibió alguna llamada de su departamento de policía local por este caso? Señorita Harper, no la estoy culpando. Mi deber es informarle sobre su caso. Ahora busque una lapicera y un papel así le doy información preliminar sobre este caso para que la anote. Cuando tenga la lapicera y el papel, avíseme, señora. Yo espero en línea.
+B: Sí, espere. Déjeme buscar una hoja y una lapicera rapidito.
+A: Mi nombre es oficial Robert Wilson. Mi nombre es Robert y mi apellido es Wilson. Muy bien, primero anote su número de caso. Señora, acá veo que hay 22 cuentas bancarias a su nombre y 13 tarjetas de crédito. ¿Tiene 22 cuentas bancarias y 13 tarjetas de crédito a su nombre?
+B: ¿Una o dos cuentas bancarias? ¡Dios, no! Tengo una sola.
+A: Muy bien, muy bien. Entonces, señora, primero déjeme sacar su formulario de verificación de bienes para diferenciar cuál es su cuenta y cuál es falsa. Vamos a congelar todas las cuentas falsas a su nombre y su número de seguridad social. Solo necesito hacerle unas preguntas básicas. No le voy a pedir información personal como su número de cuenta bancaria, número de ruta bancaria o número de tarjeta de crédito. Solo necesito información básica para diferenciar cuál es su cuenta y cuál es falsa. ¿Fui claro?
+B: Sí, tiene sentido, pero ¿quién hizo todo esto? ¿Sabe?
+A: Señora, en este momento no sabemos quién es el verdadero sospechoso detrás de este caso. Podría ser cualquiera cerca suyo, porque alguien tiene acceso a su información personal.
+B: Ni siquiera conozco a nadie en Seattle.
