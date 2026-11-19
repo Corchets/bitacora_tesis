@@ -34,7 +34,7 @@ como `desarrollo`.
 |---|---|---|---|
 | `desarrollo` | Los 244 de `laboratorio-main` | [`alcance-140`](../../casos/listas/alcance-140.txt): 46 estafas (36 con pedido y 15 con cumplimiento) y 94 legítimas (29 cotidianas, 38 con pedido razonable y 27 con mención sin pedido) | Los otros 104, por grupo |
 | `test_reservado` | La rama `reserva/test` (9089b19), traída por ruta en Colab | 100 estafas `CV2-T-V` (80 con pedido, 32 con cumplimiento y 20 sin pedido) y las 56 legítimas `ENT-T` (14 cotidianas, 26 con pedido razonable y 16 con mención sin pedido) | Las 100 legítimas viejas `CV2-T-L`: 26 dentro del alcance y 74 fuera |
-| `externo` (#144) | El set coreano congelado ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)). Por defecto, las 9 con ficha que están en [`casos/externo/coreano`](../../casos/externo/coreano) ([PR #184](https://github.com/Corchets/bitacora_tesis/pull/184)); si Luciano pasa la carpeta con las 33, esas | Las estafas coreanas de KorCCVi: 9 (7 con pedido, 5 con cumplimiento) o 33 (27 con pedido y 6 sin pedido) | — |
+| `externo` (#144) | El set coreano congelado ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)). Las 33 están en [`casos/externo/coreano`](../../casos/externo/coreano) desde el 2026-11-18 | Las estafas coreanas de KorCCVi: 33 (27 con pedido y 6 sin pedido) | — |
 | `legitimas_reales` | Las salientes reales de CallCenterEN ([FUENTES-LEGITIMAS-REALES.md §8](../../../../docs/investigacion/FUENTES-LEGITIMAS-REALES.md#8-set-armado-el-2026-11-18)). Los textos no están en el repo: corre solo si se sube la carpeta `sets/` de la custodia | 33 legítimas de telecomunicaciones (19 cotidianas, 4 con pedido razonable y 10 con mención sin pedido) | Las 42 de la zona gris de Medicare: no son FA ni estafas |
 
 - **Las huellas del test se comprueban antes de armarlo:**
@@ -104,8 +104,8 @@ CallCenterEN (Mateo, 2026-11-18): se leen contra las 56 generadas, no se suman.
 
 **Cómo leer la comparación con las reglas.** [`previa_desarrollo.py`](previa_desarrollo.py) arma las mismas tablas sobre
 desarrollo, con corridas que ya existen ([salida](previa-desarrollo-salida.md)). Las reglas v1 avisan casi todo: a
-tiempo 32/36, pero con 69/94 FA. La configuración avisa a tiempo 29/36 con 26/94 FA. No hay que leer una sola cifra: la
-diferencia de detección con las reglas queda dentro del ruido (2 a 5 pares, p = 0,45) y la de FA es enorme (4 a 47).
+tiempo 32/36, pero con 69/94 FA. La configuración avisa a tiempo 28/36 con 22/94 FA. No hay que leer una sola cifra: la
+diferencia de detección con las reglas queda dentro del ruido (1 a 5 pares, p = 0,22) y la de FA es enorme (4 a 51).
 
 **Dónde quedan los resultados.** Los CSV del test traen el texto de la reserva: van a la rama `reserva/test`. A
 `laboratorio-main` va solo `analisis.md`, con identificadores y cifras. Lo del set externo no se sube a ningún lado: la

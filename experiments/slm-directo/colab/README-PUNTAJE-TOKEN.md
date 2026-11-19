@@ -400,7 +400,7 @@ otra base y otras variantes. Usa Ollama 0.40.14, el digest `b37049369adf…`, `n
 3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiar las carpetas a
    `corridas/2026-11-10_revision-producto/`. Después, correr `python -I analizar.py` desde esa carpeta.
 
-## 10. Evaluación final (tag `colab/143-evaluacion-final`, todavía sin crear)
+## 10. Evaluación final (tag `colab/143-evaluacion-final`)
 
 > **Estado: propuesta sin discutir.** Corre una sola vez la configuración congelada y las referencias simples sobre
 > desarrollo, el test reservado y, si está, #144. Todo está en
@@ -408,6 +408,5 @@ otra base y otras variantes. Usa Ollama 0.40.14, el digest `b37049369adf…`, `n
 > control de reproducibilidad antes del test y qué se informa (sin criterios de aprobación).
 
 [`probar_evaluacion_final.py`](probar_evaluacion_final.py) se abre desde
-[`COLAB-EVALUACION-FINAL.ipynb`](COLAB-EVALUACION-FINAL.ipynb). El notebook no corre hasta tener el hash del commit del
-tag (`COMMIT = 'PENDIENTE'`). La carpeta del set externo de #144 (las 33 coreanas, fuera de Git) se sube a Colab antes y su ruta va en
-`EXTERNO`.
+[`COLAB-EVALUACION-FINAL.ipynb`](COLAB-EVALUACION-FINAL.ipynb). El notebook está fijado al commit del tag. El set externo de #144 (las 33 coreanas) sale del repo; las legítimas reales
+de CallCenterEN, fuera de Git, se suben a Colab antes y su ruta va en `LEGITIMAS_REALES`.

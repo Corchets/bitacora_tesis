@@ -305,8 +305,8 @@ def preparar_externo(origen: Path, destino: Path, *, manifiesto: Path | None = N
     """El set externo de #144: estafas coreanas de KorCCVi, traducidas y marcadas.
 
     Formato del set congelado (experiments/laboratorio/armar_set_coreano.py): texto/EXT-NNN.txt,
-    roles-protegida.json y referencia/EXT-NNN.json. En el repo están las 9 con ficha de Luciano
-    (casos/externo/coreano, PR #184); las 33 las tiene la custodia. Sirve cualquiera de las dos carpetas:
+    roles-protegida.json y referencia/EXT-NNN.json. Las 33 están en el repo desde el 2026-11-18
+    (casos/externo/coreano); también sirve la carpeta de la custodia:
     cada texto y cada referencia se comprueban contra docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json,
     y roles-protegida.json tiene que cubrir exactamente esos casos (en el repo es un recorte, con otro hash).
     Todo es estafa y va a la vista principal.

@@ -7,8 +7,8 @@
 #    - desarrollo, desde este commit;
 #    - el test reservado, desde la rama reserva/test, traída por ruta (git worktree en /content/reserva-test), con las
 #      huellas comprobadas: no entra al checkout del tag;
-#    - #144: las estafas coreanas. Por defecto, las 9 de casos/externo/coreano (en el repo); con COLAB_EXTERNO, la
-#      carpeta de la custodia con las 33. En los dos casos, con sus huellas comprobadas
+#    - #144: las estafas coreanas. Por defecto, las 33 de casos/externo/coreano (en el repo); con COLAB_EXTERNO,
+#      la carpeta de la custodia. En los dos casos, con sus huellas comprobadas
 #      contra docs/corpus/MANIFIESTO-144-SET-COREANO-2026-11-11.json.
 #    - Legítimas reales de CallCenterEN: solo con COLAB_LEGITIMAS_REALES, la carpeta sets/ de la custodia (los textos
 #      no están en el repo). 33 legítimas en la vista principal y 42 de zona gris aparte, con sus manifiestos.
