@@ -153,7 +153,7 @@ La capa de detección lingüística implementa el detector del [ADR 0002](../ing
 
 ### 6.2.4. Llamada en vivo y panel (`experiments/voip/`)
 
-[`servidor.py`](../../experiments/voip/servidor.py) recibe el audio de cada persona por WebSocket y arranca, salvo que se le indique otra cosa, con la configuración final: `parakeet-filtro` y E2B solo con `c-premisa-corte-riesgo`, consultando al cerrar cada turno de OTRA ([`turnos.py`](../../experiments/voip/turnos.py), ADR 0007). El panel ofrece también las reglas como respaldo sin modelo. Tito viejo queda solo por línea de comandos, como antecedente.
+[`servidor.py`](../../experiments/voip/servidor.py) recibe el audio de cada persona por WebSocket y arranca, salvo que se le indique otra cosa, con la configuración final: `parakeet-filtro` y E2B solo con `c-consejos-corte-riesgo`, consultando al cerrar cada turno de OTRA ([`turnos.py`](../../experiments/voip/turnos.py), ADR 0007). El panel ofrece también las reglas como respaldo sin modelo. Tito viejo queda solo por línea de comandos, como antecedente.
 
 - **Captura ([`audio-navegador.mjs`](../../experiments/voip/audio-navegador.mjs), [`fuentes.mjs`](../../experiments/voip/fuentes.mjs)):** el AudioWorklet mezcla a mono, remuestrea a 16 kHz y envía bloques PCM16 de 40 ms. La persona protegida usa su micrófono y la otra persona llega desde una pestaña de Meet, cuyo audio se comparte en Chrome. El video que exige el selector no se transmite ni se guarda.
 - **Reloj:** empieza con el primer bloque que llega; cada canal se ubica según su llegada y cuenta muestras desde ahí, de modo que los canales y el estéreo guardado quedan alineados.

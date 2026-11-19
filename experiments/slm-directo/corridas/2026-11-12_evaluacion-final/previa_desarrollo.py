@@ -1,7 +1,7 @@
 """#143, evaluación final: las mismas tablas sobre desarrollo, con corridas que ya existen.
 
 Solo sirve para ver de antemano cómo se leen las tablas; no decide nada ni mira el test. Usa:
-- la configuración: `c-premisa-corte-riesgo` de la prueba de sensibilidad (2026-11-10) y su repetición;
+- la configuración: `c-consejos-corte-riesgo` de la revisión de producto (2026-11-18) y su repetición;
 - v4 sin alcance: `v4-corte` de la etapa 2 (2026-11-07), sobre los 244 con roles y en todas las líneas;
 - las reglas v1 y v2, que corren acá mismo, sin modelo.
 Vista: alcance-140. El primer aviso de una corrida en todas las líneas es el del modo operativo. Uso, desde esta carpeta:
@@ -30,9 +30,9 @@ def avisos_reglas(version, ids):
 
 def main():
     vista = e3.VISTA
-    sens = CORRIDAS / '2026-11-10_sensibilidad-c'
-    avs = {'config': an.avisos_config(e3.leer(sens, 'c-premisa')[0], vista),
-           'config (repetición)': an.avisos_config(e3.leer(sens, 'c-premisa-rep')[0], vista),
+    rev = CORRIDAS / '2026-11-10_revision-producto'
+    avs = {'config': an.avisos_config(e3.leer(rev, 'c-consejos')[0], vista),
+           'config (repetición)': an.avisos_config(e3.leer(rev, 'c-consejos-rep')[0], vista),
            an.V4: an.avisos_v4(e3.leer(CORRIDAS / '2026-11-07_alcance-etapa-2', 'v4-corte')[0], vista),
            'reglas v1': avisos_reglas('v1', vista), 'reglas v2': avisos_reglas('v2', vista)}
     ex = {d: an.exitos(av, vista, e3.REF) for d, av in avs.items()}

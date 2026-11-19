@@ -540,8 +540,8 @@ class TestControlDesarrollo(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = Path(tempfile.mkdtemp())
         cls.conj = conjuntos.preparar_desarrollo(cls.tmp / "conjuntos")
-        # Los avisos de c-premisa en la prueba de sensibilidad (2026-11-10), leídos de su corrida.
-        filas, _ = an.e3.leer(RAIZ / "corridas/2026-11-10_sensibilidad-c", "c-premisa")
+        # Los avisos de c-consejos en la revisión de producto (2026-11-18), leídos de su corrida.
+        filas, _ = an.e3.leer(RAIZ / "corridas/2026-11-10_revision-producto", "c-consejos")
         cls.avisa = an.avisos_config(filas, cls.conj.ids)
 
     @classmethod
@@ -553,11 +553,11 @@ class TestControlDesarrollo(unittest.TestCase):
         escribir_corrida_config(datos, self.conj, avisa, config)
         return an.control_desarrollo(datos, self.conj, config)
 
-    def test_la_corrida_de_la_sensibilidad_reproduce_sus_cifras(self):
+    def test_la_corrida_de_la_revision_de_producto_reproduce_sus_cifras(self):
         ok, texto = self.control(self.avisa)
         self.assertTrue(ok, texto)
-        self.assertIn("estafas 40 (antes 40)", texto)
-        self.assertIn("FA 26 (antes 26)", texto)
+        self.assertIn("estafas 41 (antes 41)", texto)
+        self.assertIn("FA 22 (antes 22)", texto)
 
     def test_tres_estafas_menos_no_reproduce(self):
         ref = self.conj.referencia()

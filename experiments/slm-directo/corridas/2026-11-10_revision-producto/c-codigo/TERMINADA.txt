@@ -1,0 +1,3 @@
+c-codigo-corte-riesgo, solo OTRA, todas las líneas, sobre los 244
+commit 30746d3f3889cb047e9639b1fc9cde50cad2f3ec
+minutos 9.8

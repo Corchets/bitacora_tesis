@@ -1,0 +1,38 @@
+{
+  "c-premisa-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 48,
+    "altos_03": 43,
+    "altos_06": 7,
+    "errores": [],
+    "pasa": true
+  },
+  "c-codigo-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 23,
+    "altos_03": 35,
+    "altos_06": 3,
+    "errores": [],
+    "pasa": true
+  },
+  "c-consejos-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 40,
+    "altos_03": 41,
+    "altos_06": 11,
+    "errores": [],
+    "pasa": true
+  },
+  "c-freno-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 32,
+    "altos_03": 45,
+    "altos_06": 3,
+    "errores": [],
+    "pasa": true
+  }
+}

@@ -26,7 +26,7 @@ import csv, hashlib, importlib.util, json, os, pathlib, shutil, subprocess, sys,
 
 REPO = pathlib.Path(os.environ.get('COLAB_REPO', '/content/bitacora_tesis'))
 COMMIT = os.environ['COLAB_COMMIT']
-CONFIG = os.environ.get('COLAB_CONFIG', 'c-premisa-corte-riesgo')
+CONFIG = os.environ.get('COLAB_CONFIG', 'c-consejos-corte-riesgo')
 EXTERNO = os.environ.get('COLAB_EXTERNO') or str(REPO / 'experiments/slm-directo/casos/externo/coreano')
 LEGITIMAS = os.environ.get('COLAB_LEGITIMAS_REALES', '')
 head = subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip()

@@ -360,7 +360,47 @@ OTRA (`--seguir-tras-aviso`):
 3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiar las carpetas a
    `corridas/2026-11-10_sensibilidad-c/`. Después, correr `python -I analizar.py` desde esa carpeta.
 
-## 9. Evaluación final (tag `colab/143-evaluacion-final`, todavía sin crear)
+## 9. Revisión de producto (tag `colab/143-revision-producto`)
+
+> **Estado: propuesta sin discutir.** Tres variantes de la configuración congelada (`c-premisa-corte-riesgo`), con un
+> solo párrafo cambiado cada una. La regla está escrita antes de correr en
+> [`corridas/2026-11-10_revision-producto/README.md`](../corridas/2026-11-10_revision-producto/README.md). Mateo dio el
+> OK a las etiquetas, a los textos y a correr el 2026-11-18. **Corrida el 2026-11-18: no pasa ninguna**
+> ([análisis](../corridas/2026-11-10_revision-producto/analisis.md)). Mateo adoptó igual `c-consejos-corte-riesgo`
+> ([ADR 0008](../../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md)).
+
+**Las variantes:**
+- `c-codigo-corte-riesgo` pone la regla del código y la clave por intención, no por quién llama;
+- `c-consejos-corte-riesgo` cambia ese párrafo por los consejos oficiales de siempre;
+- `c-freno-corte-riesgo` reescribe por intención el párrafo de lo que una llamada legítima también puede pedir.
+
+Todas cortan tras el riesgo (`num_predict` 14), avisan con «riesgo ≥ 0,3», piden el motivo de C en el primer aviso y
+consultan solo en las líneas de OTRA.
+
+[`probar_revision_producto.py`](probar_revision_producto.py) es [`probar_sensibilidad.py`](probar_sensibilidad.py) con
+otra base y otras variantes. Usa Ollama 0.40.14, el digest `b37049369adf…`, `num_ctx` 4096, seed 42, temperatura 0,
+`--sin-reglas`, roles, `--solo-otra` y todas las líneas de OTRA (`--seguir-tras-aviso`):
+
+1. **Humo de formato** en los 3 casos de siempre (48 líneas), con las cuatro. Pasa la que lee el riesgo, con su coma,
+   en las 48. La que no pasa no corre; si no pasa la base, no corre nada.
+2. **Corridas,** en este orden:
+   1. la base (`c-premisa-corte-riesgo`), `c-codigo`, `c-consejos` y `c-freno` sobre los 244;
+   2. sus repeticiones sobre [`alcance-140`](../casos/listas/alcance-140.txt).
+3. **Al final** baja `resultados-revision-producto.zip`, y antes cada parte como
+   `parcial-revision-producto-<carpeta>.zip`.
+
+**Duración estimada:** alrededor de 1 h 10 en T4.
+
+**Pasos:**
+1. Abrir [`COLAB-REVISION-PRODUCTO.ipynb`](COLAB-REVISION-PRODUCTO.ipynb) en Colab y elegir **GPU T4**. El notebook
+   está fijado al commit del tag.
+2. Ejecutar la única celda y dejar la pestaña abierta, aceptando las descargas múltiples.
+   - Si Colab se corta, los parciales ya descargados sirven.
+   - Si se vuelve a ejecutar la celda en la misma sesión, saltea lo terminado.
+3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiar las carpetas a
+   `corridas/2026-11-10_revision-producto/`. Después, correr `python -I analizar.py` desde esa carpeta.
+
+## 10. Evaluación final (tag `colab/143-evaluacion-final`, todavía sin crear)
 
 > **Estado: propuesta sin discutir.** Corre una sola vez la configuración congelada y las referencias simples sobre
 > desarrollo, el test reservado y, si está, #144. Todo está en
