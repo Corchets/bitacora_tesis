@@ -556,13 +556,13 @@ class TestControlDesarrollo(unittest.TestCase):
     def test_la_corrida_de_la_revision_de_producto_reproduce_sus_cifras(self):
         ok, texto = self.control(self.avisa)
         self.assertTrue(ok, texto)
-        self.assertIn("estafas 41 (antes 41)", texto)
-        self.assertIn("FA 22 (antes 22)", texto)
+        self.assertIn("estafas 41 (antes 40–42)", texto)
+        self.assertIn("FA 22 (antes 18–22)", texto)
 
-    def test_tres_estafas_menos_no_reproduce(self):
+    def test_seis_estafas_menos_no_reproduce(self):
         ref = self.conj.referencia()
         perdidas = [i for i in self.conj.ids if ref[i]["vista"] == "principal" and ref[i]["clase"] == "vishing"
-                    and self.avisa[i] is not None][:3]
+                    and self.avisa[i] is not None][:6]
         ok, texto = self.control({**self.avisa, **dict.fromkeys(perdidas)})
         self.assertFalse(ok)
         self.assertIn("no reproduce", texto)
@@ -577,7 +577,7 @@ class TestColab(unittest.TestCase):
     def test_el_notebook_y_el_script(self):
         nb = json.loads((RAIZ / "colab/COLAB-EVALUACION-FINAL.ipynb").read_text(encoding="utf-8"))
         codigo = "".join(nb["cells"][1]["source"])
-        self.assertIn("TAG = 'colab/143-evaluacion-final'", codigo)
+        self.assertIn("TAG = 'colab/143-evaluacion-final-2'", codigo)
         self.assertIn(f"CONFIG = '{CONFIG}'", codigo)
         self.assertIn("probar_evaluacion_final.py", codigo)
         script = (RAIZ / "colab/probar_evaluacion_final.py").read_text(encoding="utf-8")

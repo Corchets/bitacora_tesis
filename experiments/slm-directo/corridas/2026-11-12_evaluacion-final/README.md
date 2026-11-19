@@ -15,8 +15,15 @@ Corre una sola vez, fijada por tag, en modo operativo: cada llamada termina en s
 - Avisa con «riesgo ≥ 0,3».
 - Muestra el motivo en el primer aviso y consulta solo en las líneas de OTRA.
 
-Es un parámetro (`CONFIG` en el notebook, `--config` en el análisis). Sus cifras de desarrollo (41, 19, 28 y 22 FA)
-ya están en `CIFRAS_DESARROLLO` de `analizar.py`.
+Es un parámetro (`CONFIG` en el notebook, `--config` en el análisis). Sus cifras de desarrollo están en
+`CIFRAS_DESARROLLO` de `analizar.py`, como rango de las tres corridas ya medidas: 40–42 estafas, 16–19 antes del pedido,
+26–28 a tiempo y 18–22 FA.
+
+**Nota del 2026-11-19.** La primera pasada del Colab (tag `colab/143-evaluacion-final`) cortó en el control de
+desarrollo, antes de tocar el test: dio 40, 16, 26 y 20 contra una referencia de un solo punto (41, 19, 28 y 22), y
+«antes del pedido» quedó a 3. Mateo decidió ese día que es variación entre sesiones y que la referencia sea el rango,
+con el mismo ±2. La corrida vale con el tag `colab/143-evaluacion-final-2`. Los ZIP de esa primera pasada no se
+guardaron.
 
 **Las referencias simples:**
 - **v4 sin alcance:** `v4-corte`, el JSON de v4 cortado tras la alerta

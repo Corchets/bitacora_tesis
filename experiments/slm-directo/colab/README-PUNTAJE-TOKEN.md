@@ -400,7 +400,7 @@ otra base y otras variantes. Usa Ollama 0.40.14, el digest `b37049369adf…`, `n
 3. Descomprimir cada ZIP en un directorio vacío nuevo, verificarlo y copiar las carpetas a
    `corridas/2026-11-10_revision-producto/`. Después, correr `python -I analizar.py` desde esa carpeta.
 
-## 10. Evaluación final (tag `colab/143-evaluacion-final`)
+## 10. Evaluación final (tag `colab/143-evaluacion-final-2`)
 
 > **Estado: propuesta sin discutir.** Corre una sola vez la configuración congelada y las referencias simples sobre
 > desarrollo, el test reservado y, si está, #144. Todo está en
