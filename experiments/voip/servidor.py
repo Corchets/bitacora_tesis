@@ -89,6 +89,9 @@ ESPERA_DETECTOR_AL_CERRAR_S = 30.0
 CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el modelo no cierra la frase solo
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
 UMBRAL_LLAMADA = 0.003
+# Con 4096 tokens (la evaluación final) el detector deja de consultar a los ~10 minutos de conversación; Gemma 4 E2B
+# admite 131.072. Con 16.384 entran ~50 minutos (experiments/voip/README.md §3).
+NUM_CTX_DEMO = 16384
 # Opción B de asr-local/PLAN-VOZ-REAL.md §12.9: con filtro Silero, el RMS corta a 0,008 también en la llamada.
 UMBRAL_RMS_POR_ASR = {"parakeet-filtro": 0.008}
 
@@ -326,6 +329,7 @@ class Servidor:
                        "solo_otra": getattr(a, "solo_otra", False),
                        "ollama_url": a.ollama_url if a.detector in DETECTORES_CON_MODELO else None,
                        "seed": a.seed if a.detector in DETECTORES_CON_MODELO else "no-aplica",
+                       "num_ctx": getattr(a, "num_ctx", NUM_CTX_DEMO) if a.detector in DETECTORES_CON_MODELO else None,
                        "corte_silencio_s": self.config_asr[0], "umbral_rms_silencio": self.config_asr[1],
                        "endpoint_nativo": self.config_asr[0] == CORTE_AUTO, "asr": self.asr, "hilos_asr": a.hilos, "carga_slm": carga},
             "inicio_panel": self.config_llamada,
@@ -444,6 +448,7 @@ class Servidor:
                 hablantes=getattr(a, "hablantes", "ab"),
                 seed=a.seed,
                 ollama_url=a.ollama_url,
+                num_ctx=getattr(a, "num_ctx", NUM_CTX_DEMO),
                 indicio=not getattr(a, "sin_indicio", False),
             )
         except (replay.correr.FalloAlCalentar, replay.cliente_ollama.ErrorOllama) as exc:
@@ -692,6 +697,9 @@ def parse_args() -> argparse.Namespace:
                         "(ADR 0007), y la consulta termina en la última línea de OTRA; por defecto, sí con --detector slm "
                         "y --hablantes rol")
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--num-ctx", type=int, default=NUM_CTX_DEMO,
+                   help="contexto del modelo en tokens. La evaluación final usó 4096, que alcanza para unos 10 minutos de "
+                        "conversación; la demo usa más para que una llamada larga no deje al detector sin consultar")
     p.add_argument("--ollama-url", default=replay.cliente_ollama.URL_POR_DEFECTO,
                    help="Ollama de otra máquina (p. ej. la PC con GPU) para bajar la demora del SLM")
     p.add_argument("--disparo", choices=DISPAROS, default="turno",
@@ -732,7 +740,7 @@ async def principal() -> None:
     args = parse_args()
     detector = replay.construir_detector(args.detector, modelo=args.modelo, prompt_nombre=args.prompt,
                                          hablantes=args.hablantes, seed=args.seed, ollama_url=args.ollama_url,
-                                         indicio=not args.sin_indicio)
+                                         num_ctx=args.num_ctx, indicio=not args.sin_indicio)
     servidor = Servidor(args, detector)
     for id_carpeta in historial.descartar_pruebas_no_guardadas(args.salida):
         print(f"[prueba] descartada por no guardada: {id_carpeta}")
