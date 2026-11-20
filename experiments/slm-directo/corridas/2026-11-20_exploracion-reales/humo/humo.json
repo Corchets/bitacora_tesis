@@ -1,0 +1,44 @@
+{
+  "c-consejos-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  },
+  "p-lista-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  },
+  "p-escalera-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  },
+  "p-niveles-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  },
+  "c-rumbo-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  },
+  "p-sino-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  },
+  "p-minimo-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  }
+}

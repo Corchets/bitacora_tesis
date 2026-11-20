@@ -1,0 +1,7 @@
+7c52850c7d1c338fe2b13f41fd3d8a2171766f83
+#52, exploración con los conjuntos reales: c-consejos-corte-riesgo, p-lista-corte-riesgo, p-escalera-corte-riesgo, p-niveles-corte-riesgo, c-rumbo-corte-riesgo, p-sino-corte-riesgo, p-minimo-corte-riesgo en la fase 1 (externo, legitimas_reales, desarrollo) y base en la fase 2 (zona_gris, test_reservado), solo OTRA, en todas las líneas
+reserva/test 8d563ad8fca7c57165536ef58fa23a3c158d0de7
+externo conjunto.json sha256 0150a5e023ab371f6a5a367a1a2eaeeb355b113835cc067a6be9049c2ccd6075
+legitimas_reales conjunto.json sha256 b04565d0ce60a96546480e89ee56ed6801d61bbce369c88098bc5cc3f0a14698
+desarrollo conjunto.json sha256 5e6316759453eb599e56001208271036b19ab8bbd690543121951bfb15864ab8
+test_reservado conjunto.json sha256 0d709a33fb268a15b3db5551be53ca2ae93d7b81758f7f9041310e1c5e5fbd4a
