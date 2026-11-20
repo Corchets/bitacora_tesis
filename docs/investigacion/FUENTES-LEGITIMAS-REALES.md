@@ -459,6 +459,12 @@ la zona gris, y entre `legitima` y `legitima_agresiva` en las legítimas.
   gris en una vista aparte. El Colab lo corre si se sube la carpeta `sets/` y se pone su ruta en `LEGITIMAS_REALES`.
   En la zona gris, `legitima_dificil` es solo para que el formato valide: no se cuenta como falsa alarma.
 
+> **Nota del 2026-11-20:** por decisión de Mateo, los dos sets se publican en
+> [`casos/externo/legitimas-reales/`](../../experiments/slm-directo/casos/externo/legitimas-reales/), aunque la ficha
+> prohíbe redistribuir, para que el equipo los vea y las corridas no dependan de subirlos a mano. Se publican texto,
+> referencia y roles; `correspondencia.json` sigue fuera de Git por los teléfonos. El resto de esta sección queda
+> como estaba.
+
 ### 8.5. Límites para informar
 
 - **Todo es B2B y de un solo rubro.** Quien atiende es el dueño o un empleado de un negocio, y en general ya es

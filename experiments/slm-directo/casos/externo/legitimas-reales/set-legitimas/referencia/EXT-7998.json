@@ -1,0 +1,59 @@
+{
+ "case_id": "EXT-7998",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "cotidiana",
+ "dificultad": "cotidiana",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "seguimiento",
+ "legitimidad": "legitima",
+ "pedido_sensible": [],
+ "primer_pedido_linea": null,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-66",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Confirma un pedido que otro empleado ya levantó con el cliente, repasa precio y vigencia y solo pide el sí; los datos los lee ella.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "El cliente cuestiona el plazo de seis meses y la llamante aclara que se puede renovar."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Confirma un pedido hecho por un colega, con precio por seis meses, dirección del negocio y correo; pide consentimiento verbal pero no datos sensibles.",
+   "motivo": "cliente",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "Incluye aviso de grabación y renovación del precio."
+  },
+  "adjudicado": {
+   "motivo": {
+    "valor": "seguimiento",
+    "motivo": "Confirma un pedido que otro empleado ya levantó con el cliente."
+   }
+  }
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

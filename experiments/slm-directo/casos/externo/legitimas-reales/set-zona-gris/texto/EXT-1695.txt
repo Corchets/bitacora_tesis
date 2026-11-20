@@ -1,0 +1,104 @@
+A: Hola, buenos días, le habla Susan White Susan White, de Contoso Telecom Contoso Telecom. ¿Cómo está hoy?
+B: Estoy bien.
+A: Qué bueno, señor. Esta llamada es por sus beneficios sin costo para usted. Tengo entendido que usted tiene tarjeta de Medicare con partes A y B. ¿Es correcto?
+B: Sí.
+A: Muy bien. ¿Hablo con el Sr. Susan White Susan White? ¿Correcto?
+B: Sí.
+A: Bien, perfecto. Sr. Susan White, quiero preguntarle, y por favor no me malinterprete, señor: ¿le han diagnosticado presión alta, presión alta presión alta presión alta, presión alta presión alta, o algún presión alta presión alta en el pasado o incluso en el presente? Entonces presión alta presión alta presión alta, ¿eh? ¿Y qué otra cosa tuvo, además de presión alta presión alta presión alta? ¿Tiene también presión alta presión alta o presión alta presión alta o...
+B: No. En el pasado.
+A: Perdón, ¿en el pasado?
+B: Sí.
+A: En el pasado tuvo presión alta presión alta.
+B: Correcto.
+A: Ah, entiendo. Pero ¿toma medicación, señor, para su presión alta presión alta presión alta y su presión alta presión alta?
+B: Sí, sí. Ahora no. Tomo presión alta presión alta presión alta lisinopril.
+A: ¿lisinopril presión alta presión alta lisinopril o lisinopril presión alta presión alta lisinopril?
+B: Correcto.
+A: Bien. Sr. Susan White, ¿a qué edad se enteró de que le habían diagnosticado presión alta presión alta presión alta y presión alta presión alta en el pasado? ¿Fue a los 64 64 64 64, 64, 64 o 64? ¿64? A los 64, correcto. Bien. Sr. Susan White, ¿tiene algún familiar o antecedentes familiares a quienes también les hayan diagnosticado presión alta presión alta presión alta, presión alta presión alta o presión alta presión alta en el pasado, como sus padres, hermanos y hermanas? ¿Quién en su familia, señor?
+B: Mi madre.
+A: Su madre. ¿Y qué condiciones médicas tuvo su madre antes, señor, si no le molesta que le pregunte?
+B: Disculpe, ¿podría repetirlo una vez más? Perdón,
+A: Perdón. ¿También es presión alta presión alta presión alta lo que hay en su familia?
+B: Sí.
+A: Ah, entiendo. Muy bien. Sr. Susan White, como le diagnosticaron presión alta presión alta presión alta y presión alta presión alta en el pasado, más adelante le voy a dar sus beneficios, señor, sin costo para usted. Esto lo cubre su seguro de salud. Y Sr. Susan White, ¿sigue ubicado en Albany, es Albany Albany, Albany, Albany Albany? ¿Correcto?
+B: Sí.
+A: Bien, perfecto. Muy bien. Sr. Susan White, la fecha de nacimiento que tengo aquí es 21 de octubre de 1958. 21 de octubre de 1958 21 de octubre de 1958, 21 de octubre de 1958, ¿correcto?
+B: Correcto.
+A: ¿Y cuánto mide y cuánto pesa, Sr. Susan White, ahora?
+B: Quizá bajé unos unos 75 kilos unos 75 kilos. Probablemente ahora estoy en unos 75 kilos unos 75 kilos. unos 75 kilos unos 75 kilos, unos 75 kilos, unos 75 kilos, unos 75 kilos.
+A: Bien, está perfectamente bien, señor. ¿Y cuánto pe...
+B: unos 75 kilos.
+A: Perdón, ¿cuánto mide?
+B: ¿La altura?
+A: Sí, su estatura. ¿Cuánto mide?
+B: unos 75 kilos unos 75 kilos. Es unos 75 kilos unos 75 kilos.
+A: Es alto. ¿Y cuál es su origen étnico, Sr. Susan White? ¿Es unos 75 kilos estadounidense, estadounidense estadounidense o unos 75 kilos?
+B: estadounidense estadounidense. Como estadounidense estadounidense.
+A: Bien, ya lo anoté, señor. No hay problema. Muy bien. Sr. Susan White, ¿cómo se llama su enfermero enfermero que lo atiende ahora? Usted es un buen enfermero,
+B: Susan White. Susan White.
+A: Perdón, ¿cuál es el nombre de pila?
+B: Susan White Susan White. Susan White Susan White.
+A: Correcto. Espere, déjeme revisar en mi sistema la información de su enfermero. ¿Y en qué ciudad está ubicado su enfermero enfermero?
+B: Aquí en Albany también.
+A: Correcto, bien. Ya tengo la información de su enfermero. Es Susan White. Susan White Susan White y está ubicado en el consultorio. La ubicación de su enfermero aquí es Albany Albany Albany Albany Albany, Albany Albany, Albany, Albany, Albany. ¿Correcto?
+B: Correcto.
+A: Bien, perfecto. Sr. Susan White, ¿cuándo fue la última vez que vio a su enfermero enfermero, Susan White. Susan White Susan White?
+B: Probablemente hace unos diez minutos unos diez minutos. Hace unos diez minutos unos diez minutos.
+A: Correcto. Bien, perfecto. Muy bien, ya lo tengo. Estoy sacando la información de su enfermero en mi sistema. Bien, ¿y cuál es la mejor hora para volver a llamarlo, señor, por si tenemos un problema de sistema? ¿A cualquier hora? ¿Mañana, tarde o noche?
+B: Por la tarde.
+A: Por la tarde. Correcto. Bien, anotado. ¿Y cuál es su color favorito, Sr. Susan White?
+B: Diría que azul. Es clave1234 clave1234.
+A: Bien, perfecto. Muy bien. Sr. Susan White, ¿tiene su tarjeta roja, unos 75 kilos y azul de Medicare para que yo verifique su elegibilidad en mi sistema? Con gusto espero en la línea.
+B: Sí.
+A: Bien, perfecto. Tómese su tiempo, señor. Dígame cuando esté listo. Bien, sigo en la línea.
+B: Bien. Ah, ¿me lo pregunta a mí? ¿Quiere que traiga mi tarjeta?
+A: Sí, señor. Con gusto espero en la línea.
+B: Todavía estoy acostado. No estoy... todavía estoy en la cama.
+A: Bien. Está perfectamente bien, señor. Ya que usted puede darme el número de identificación de su tarjeta de Medicare, tenemos una segunda opción para que yo ubique su número de Medicare. ¿Pero se sabe de memoria su número de Seguro Social, señor?
+B: Sí. Sí, sí.
+A: Bien, ¿me lo puede dar?
+B: 000-12-3456.
+A: Bien, es 000-12-3456. ¿Correcto?
+B: Correcto.
+A: Bien, ya lo tengo. Muy bien, espere un segundo, señor. Estoy revisando su información. Muy bien. Sr. Susan White, como ya me dio su información, nuevamente, le habla Susan White Susan White de Contoso Telecom Contoso Telecom Contoso Telecom, en línea grabada. Esta es una llamada de seguimiento, señor, sobre sus beneficios a través de su seguro sin costo para usted. ¿De acuerdo? Y recientemente hay nuevos beneficios disponibles para los que usted podría calificar. Usted me dijo antes que le diagnosticaron presión alta presión alta presión alta y presión alta presión alta a los 64, y que su madre también tuvo un diagnóstico de presión alta presión alta presión alta en el pasado. ¿Es todo correcto?
+B: Correcto. Sí.
+A: Bien, anotado. Lamento mucho oír eso otra vez. Sr. Susan White, hay un una cirugía de rodilla una cirugía de rodilla para el que usted podría calificar, para determinar si su presión alta presión alta presión alta, presión alta presión alta o presión alta presión alta vienen de sus genes o de condiciones externas. ¿De acuerdo? Y si tiene su presión alta presión alta presión alta, presión alta presión alta o presión alta presión alta por sus genes, puede avisar a sus familiares que es algo que hay en su familia y también tomar medidas de atención preventiva con su enfermero. ¿De acuerdo? Esta prueba es un una cirugía de rodilla una cirugía de rodilla sencillo que revisa muchos tipos de presión alta presión alta a los que usted podría estar genéticamente predispuesto. Muy bien. Sr. Susan White, el kit para recolectar saliva se envía por correo a su casa. Solo tiene que frotar el interior de la boca para recoger saliva y devolverlo en el sobre preparado que se incluye. Y de nuevo, señor, esto es sin costo para usted. Sr. Susan White, quiero preguntarle: ¿se ha hecho antes un una cirugía de rodilla una cirugía de rodilla una cirugía de rodilla con saliva? ¿Sí o no?
+B: Creo que sí. Hace unos diez minutos, unos diez minutos.
+A: Bien, déjeme revisar en mi sistema, señor. Espere un segundo. Bien. Muy bien. ¿Cómo está el clima por allá, señor, en su estado, en Albany?
+B: Disculpe, no entiendo.
+A: Sí. ¿Cómo está el clima por allá, señor, en su estado?
+B: Bueno. Bastante frío.
+A: Muy bien. Bien, ya lo tengo. Estoy verificando su elegibilidad. Y según veo en mi sistema, usted tiene un PPO, Contoso Telecom Contoso Telecom, como seguro, ¿correcto?
+B: Sí.
+A: Tiene su PPO, Contoso Telecom Contoso Telecom, como seguro, ¿es correcto?
+B: Sí.
+A: Bien, perfecto. Sr. Susan White, ya casi terminamos. No hay nada de qué preocuparse, porque. Muy bien, parece que tenemos toda la información necesaria para procesar su solicitud. Y ahora, al enviar esta información, señor, ¿acepta hacerse un una cirugía de rodilla una cirugía de rodilla una cirugía de rodilla como beneficio a través de su seguro? ¿Es correcto?
+B: Sí.
+A: ¿Correcto?
+B: Sí.
+A: Bien, perfecto. Sr. Susan White, el siguiente paso es que nuestro Contoso Telecom Contoso Telecom lo llame, y lo llamarán al número al que acabo de llamarlo. ¿De acuerdo? Además, Sr. Susan White, quiero confirmar con usted que acepta oficialmente recibir información y una llamada de seguimiento sobre una cirugía de rodilla una cirugía de rodilla una cirugía de rodilla. ¿De acuerdo? Entonces, al decir que sí, usted acepta una llamada de seguimiento sobre este tema, ¿es correcto?
+B: Está bien. Es correcto.
+A: Bien, perfecto. Y para su seguridad y la verificación de su aceptación, señor, ¿puedo preguntarle de nuevo cuál es su color favorito?
+B: clave1234. clave1234.
+A: Bien, perfecto. Y usted sabrá, señor, que es nuestro Contoso Telecom Contoso Telecom el que lo llama, porque sabrán su color favorito, que es azul. De nuevo, Sr. Susan White, voy a enviar su información y el Contoso Telecom Contoso Telecom lo llamará en breve para procesar su pedido. ¿Está bien? Muy bien. Sr. Susan White, uno de mis Contoso Telecom Contoso Telecom lo llamará quizá este el 14 de mayo las tres de la tarde. ¿De acuerdo? Por favor mantenga su línea libre. Y uno de mis Contoso Telecom Contoso Telecom le dirá cuándo y cómo recibirá su una cirugía de rodilla una cirugía de rodilla una cirugía de rodilla una cirugía de rodilla para su presión alta presión alta presión alta y su presión alta presión alta sin costo para usted. Y su contraseña allí es clave1234 clave1234, y no lo olvide, ¿de acuerdo? Porque más adelante, señor, quizá en unos diez minutos unos diez minutos, lo voy a volver a llamar para avisarle que una de mis verificaciones lo llamará en breve. ¿De acuerdo? ¿Tiene alguna pregunta para mí, Sr. Susan White, antes de que ingrese su solicitud?
+B: Ah, no, no, no, ninguna.
+A: Bien, perfecto. Sr. Susan White Susan White, de nuevo, le habla Susan White Susan White. Muchas gracias por su tiempo, me alegra haber llamado para ayudarlo hoy. ¿De acuerdo? Muchas gracias, Sr.
+B: ¿Cómo se llama?
+A: Sí, mi nombre es Susan White Susan White, señor, pero
+B: quizá pueda hacerme un favor. ¿Por qué me enviarían una tarjeta de débito?
+A: ¿Perdón?
+B: ¿Me van a enviar una tarjeta de débito?
+A: Sí, más adelante, señor, lo voy a volver a llamar para saber más sobre su inquietud, ¿de acuerdo?
+B: ¿Lo va a hacer?
+A: Sí, claro. Más adelante, señor, lo voy a volver a llamar, ¿de acuerdo?
+B: ¿Me va a enviar una tarjeta de débito?
+A: Sí, señor, lo haré.
+B: ¿Cuándo?
+A: Muy bien. Gracias, Sr. Susan White. Que tenga un buen día por ahora. Mantenga su línea libre.
+B: Muy bien. Ah, pero no. Nunca respondió la pregunta. ¿Me va a enviar una tarjeta de débito?
+A: Sí, señor.
+B: ¿Cuánto tarda?
+A: Sí, solo tarda unos diez minutos unos diez minutos unos diez minutos unos diez minutos. Bien.
+B: Tarjeta de débito,
+A: sí.
+B: ¿Sabe usted qué es eso?

@@ -1,0 +1,60 @@
+{
+ "case_id": "EXT-7192",
+ "grupo": "externo_zona_gris_medicare",
+ "clase": "legitima_dificil",
+ "clase_fuente": "zona_gris",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": null,
+ "dificultad": null,
+ "familia": "medico",
+ "estrato": "equipamiento_medico",
+ "motivo": null,
+ "legitimidad": null,
+ "pedido_sensible": [
+  "datos_personales"
+ ],
+ "primer_pedido_linea": 14,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-28",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "estafa",
+   "justificacion": "Oferta falsa de mejora de Medicare con beneficios gratis; pide datos personales para verificar y deriva a otro agente.",
+   "motivo": "venta_en_frio",
+   "tipo_legitima": null,
+   "pedido_sensible": [
+    "datos_personales"
+   ],
+   "primer_pedido_linea": 14,
+   "completa": "si",
+   "notas": "Pide número de Medicare y antecedentes familiares; usa color favorito como verificación."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "estafa",
+   "justificacion": "Consigue fecha de nacimiento y número de Medicare con pretexto de una prueba gratis, e instala una contraseña falsa de verificación.",
+   "motivo": "otro",
+   "tipo_legitima": null,
+   "pedido_sensible": [
+    "datos_personales"
+   ],
+   "primer_pedido_linea": 14,
+   "completa": "si",
+   "notas": "La persona dice que no quiere que le hagan nada y aun así sigue el trámite."
+  },
+  "adjudicado": {}
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "ZONA GRIS: ninguno de los dos anotadores la marcó legítima (captación de Medicare o esquema que el OIG describe como fraude). No se cuenta como falsa alarma ni como estafa: se informa aparte. Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

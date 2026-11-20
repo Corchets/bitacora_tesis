@@ -1,0 +1,16 @@
+A: ¿Hola? Sí, habla Susan White, ¿en qué puedo ayudarle?
+B: Sí, habla Susan White, llamo en nombre de Contoso Telecom. ¿Cómo está, Susan White?
+A: Muy bien. ¿Qué pasa?
+B: Perfecto. Bueno, esta llamada es sobre sus servicios de Internet y líneas telefónicas del negocio, así que.
+A: Bien.
+B: Necesito hablar con la persona autorizada para tomar decisiones sobre los servicios.
+A: Soy Susan White. ¿Por qué?
+B: Ah, perfecto. Bueno, el motivo de esta breve llamada es avisarle que Contoso Telecom Contoso Telecom Contoso Telecom tiene su nueva línea de fibra en la ubicación de su negocio. Le ofrecemos Internet de alta velocidad de hasta un giga por un giga, con la misma velocidad de subida y de bajada. Como usted ya tiene Contoso Telecom en su negocio para Internet y también para las líneas telefónicas.
+A: Sí, así es.
+B: Sí. La velocidad de Internet que tiene ahora es una velocidad básica, y está en los planes de Internet antiguos. Esos planes antiguos están por vencer. Ahora tenemos fibra disponible y podemos ofrecerle velocidad de fibra. Y la buena noticia es que la fibra está en promoción. Podemos darle Internet de alta velocidad a precios mucho más baratos y con una velocidad 10 veces mayor que antes. El nuevo precio que podemos ofrecerle es 1.500 dólares. Y además su velocidad aumentará de 25 a 300 por 300 Mbps. Y esto.
+A: ¿Cuánto estoy pagando ahora, señor?
+B: Soy de Contoso Telecom Contoso Telecom. No estoy muy seguro de cuánto paga usted, pero
+A: entonces después. Gracias.
+B: Promoción. Promoción.
+A: Susan White. Apellido Susan White.
+B: El apellido, Withi nombre de pila.

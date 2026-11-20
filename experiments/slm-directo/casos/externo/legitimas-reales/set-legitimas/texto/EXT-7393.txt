@@ -1,0 +1,20 @@
+A: Contoso Telecom puede ayudarlo. Buenos días, ¿me escucha?
+B: Sí, lo escucho. ¿Cómo está? ¿Puedo hablar con el señor Mary Johnson Mary Johnson?
+A: Estupendo, señor, en realidad mi camionero camionero quiere hablar con usted. Lo llamo de Contoso Telecom. Bien, estupendo. Quédese en la línea.
+B: Bien.
+A: Hola. ¿Me escucha? Sí, señor Mary Johnson, ¿cómo está?
+B: Bien, ¿y usted cómo está?
+A: Bien, gracias por preguntar. Disculpe que lo llame de nuevo, señor. Soy el camionero camionero camionero de Contoso Telecom.
+B: Bien.
+A: La última vez hubo un pedido para instalar Internet en la ubicación de su negocio, pero no se cumplió. Así que queremos reprogramar la cita para el próximo dos años dos años. ¿Le parece bien, señor?
+B: Sí, el camionero, explíqueme eso.
+A: Bien, ¿podemos enviar al camionero a instalar un nuevo Internet el el 14 de mayo el 14 de mayo el 14 de mayo?
+B: el 14 de mayo el 14 de mayo. Sí.
+A: Bien.
+B: Siempre que sea después de las diez de la mañana las diez de la mañana las diez de la mañana las diez de la mañana.
+A: Sí, la franja horaria es alrededor de las diez de la mañana. Correcto.
+B: Muchas gracias. Sí. Bien. ¿Puede llamarme de vuelta? Ahora estoy muy ocupado. Llámeme de vuelta, hablamos de esto, ¿cuándo puede llamarme?
+A: Le devuelvo la llamada después de las las diez de la mañana las diez de la mañana.
+B: Me parece bien.
+A: Mary Johnson.
+B: Gracias. Adiós.

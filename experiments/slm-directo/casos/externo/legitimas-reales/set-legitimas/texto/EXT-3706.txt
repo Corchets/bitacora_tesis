@@ -1,0 +1,31 @@
+A: ¿Hola? ¿Hola?
+B: Hola, le habla Mary Johnson Mary Johnson de Contoso Telecom Contoso Telecom Contoso Telecom. ¿Cómo está hoy?
+A: Bastante bien.
+B: Qué bueno escuchar eso. Se trata de sus líneas y de su Internet, que está en Contoso Telecom Contoso Telecom, y el motivo de esta llamada es avisarle que Contoso Telecom Contoso Telecom está en proceso de cambiar las líneas de analógicas a la nueva fibra óptica. Y lo que queremos es enviar a un camionero a su local para esta mejora, en la fecha que acordemos. ¿Usted es la persona encargada de las líneas telefónicas y el Internet de este negocio?
+A: Sí.
+B: Bien, señor. ¿Podemos enviar al camionero el próximo miércoles dos años? ¿Le queda bien ese dos años?
+A: Sí, sí, está bien. El próximo miércoles dos años.
+B: Y la fecha sería el 14 de mayo el 14 de mayo el 14 de mayo.
+A: Sí.
+B: Tenemos dos franjas horarias disponibles ese dos años. La primera es de las diez de la mañana a las diez de la mañana y la otra de las diez de la mañana a las diez de la mañana. ¿Cuál le queda mejor?
+A: ¿De las diez de la mañana a las diez de la mañana? De las diez de la mañana a las diez de la mañana. La de la tarde.
+B: Bien, ¿me puede dar su nombre y apellido, por favor, señor?
+A: Pueden venir. ¿Cuál era la de la mañana? ¿De las diez de la mañana a qué hora? ¿Perdón? ¿De las diez de la mañana a qué hora era la última?
+B: La de la mañana es de las diez de la mañana a las diez de la mañana.
+A: Bueno, lo que sea. No importa. Lo que ustedes quieran.
+B: Bien, podemos hacer ambas, y supongo que le viene bien. De las diez de la mañana a las diez de la mañana le viene bien, supongo.
+A: Sí, está bien.
+B: Bien, perfecto. Entonces su nombre. ¿Me puede dar su nombre y apellido, por favor, señor?
+A: El nombre es Mary Johnson. Mary Johnson. Sí, Mary Johnson. Es Mary Johnson, Mary Johnson, Mary Johnson, Mary Johnson Mary Johnson Mary Johnson, Mary Johnson Mary Johnson. Sí. Sí, Mary Johnson.
+B: ¿Y el apellido, señor?
+A: Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson
+B: Bien. ¿Y usted es el camionero de este negocio, señor?
+A: camionero. Sí.
+B: ¿Usted es el camionero de este negocio?
+A: Sí, señor.
+B: Bien. Entonces el camionero, antes de ir a su local, lo llamará y le pedirá una contraseña de las diez de la mañana dígitos, que son los últimos las diez de la mañana dígitos de su línea telefónica principal. Es (555) 013-2741. Bien, señor.
+A: Sí, lo anoté.
+B: Puede que se la pidan para saber que se están comunicando con la persona correcta. Y la dirección que tengo es Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa, Tulsa Tulsa.
+A: Sí.
+B: Bien, señor, lo que vamos a hacer es mejorar su Internet a una velocidad de 1000 por 1000 MB por dos años, lo que reducirá sus facturas, del monto más alto que paga ahora, a $45 dólares por dos años. Bien, señor. Gracias.
+A: Gracias, señor. Bien, señor.

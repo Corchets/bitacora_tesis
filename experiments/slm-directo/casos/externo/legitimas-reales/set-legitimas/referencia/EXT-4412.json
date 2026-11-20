@@ -1,0 +1,67 @@
+{
+ "case_id": "EXT-4412",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "mencion_sin_pedido",
+ "dificultad": "mencion_sin_pedido",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "seguimiento",
+ "legitimidad": "legitima",
+ "pedido_sensible": [],
+ "primer_pedido_linea": null,
+ "completa": "falta_comienzo",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-74",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "La agente retoma un pedido ya iniciado con una clienta atareada, aclara cuánto incluye el precio fijo y solo pide un sí para el cambio.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "falta_comienzo",
+   "notas": "Arranca con el pedido de transferencia sin saludo; la clienta pregunta si le enviarán un acuerdo y le dicen que solo un correo."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima_agresiva",
+   "justificacion": "Insiste con una mejora de velocidad y factura fija, reitera el precio y exige un «sí» verbal repetido; no pide datos ni plata, solo menciona número de cuenta y correo.",
+   "motivo": "cliente",
+   "tipo_legitima": "mencion_sin_pedido",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "falta_comienzo",
+   "notas": "Retoma una llamada ya transferida («otra vez»); la persona estaba apurada."
+  },
+  "adjudicado": {
+   "legitimidad": {
+    "valor": "legitima",
+    "motivo": "Retoma el pedido en curso, aclara el precio y pide un sí; la persona accede sin objetar la oferta."
+   },
+   "motivo": {
+    "valor": "seguimiento",
+    "motivo": "Continúa la gestión ya iniciada en la misma conversación («otra vez»)."
+   },
+   "tipo_legitima": {
+    "valor": "mencion_sin_pedido",
+    "motivo": "Dice el número de cuenta y el correo en archivo, pero no pide datos ni pago."
+   }
+  }
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

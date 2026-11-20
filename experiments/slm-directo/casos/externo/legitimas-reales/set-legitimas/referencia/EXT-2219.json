@@ -1,0 +1,59 @@
+{
+ "case_id": "EXT-2219",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "cotidiana",
+ "dificultad": "cotidiana",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "seguimiento",
+ "legitimidad": "legitima_agresiva",
+ "pedido_sensible": [],
+ "primer_pedido_linea": null,
+ "completa": "falta_final",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-02",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima_agresiva",
+   "justificacion": "Oferta de mejora de internet para negocio con cita previa alegada; insiste en que el hijo la apruebe.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "falta_final",
+   "notas": "Hijo del dueño no puede decidir; termina pidiendo el nombre."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Quiere reprogramar una cita de instalación ya pactada con el dueño; solo pide un permiso y el nombre.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "falta_final",
+   "notas": "La persona atiende dice ser el hijo y se niega a aprobar; corta al pedir su nombre."
+  },
+  "adjudicado": {
+   "legitimidad": {
+    "valor": "legitima_agresiva",
+    "motivo": "Insiste tres veces en que el hijo apruebe lo que dice no poder decidir; sin engaño para sacar datos."
+   }
+  }
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

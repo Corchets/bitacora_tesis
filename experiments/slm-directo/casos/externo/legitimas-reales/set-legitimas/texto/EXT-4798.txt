@@ -1,0 +1,21 @@
+A: Paso una llamada.
+B: Contoso Telecom Contoso Telecom, le habla. ¿En qué puedo ayudarle?
+A: Buenos días, le habla Mary Johnson Mary Johnson de Contoso Telecom Contoso Telecom Contoso Telecom. ¿Hablo con usted?
+B: Mary Johnson Mary Johnson, soy yo.
+A: Sí, señor. Hablé con usted hace un momento por las conexiones de Internet y se cortó la llamada por problemas técnicos. Acabo de transferir la llamada a mi maestra maestra, que le tomará solo dos años dos años para confirmar los detalles, y nos encargaremos de su conexión de Internet, señor.
+B: Bien.
+A: Hola, le habla Mary Johnson, maestra de Contoso Telecom Contoso Telecom. ¿Cómo está, señor?
+B: Bien, ¿y usted?
+A: Perfecto. Bueno, señor Mary Johnson, estuve revisando su cuenta y encontré un par de cosas, así que lo molesto otra vez, pero no le voy a quitar mucho tiempo. Abrí su cuenta: usted tiene Internet con Contoso Telecom de 25 megabits. Lo que vamos a hacer es mejorarlo a 300 por 300 megabits. Por otro lado, veo que actualmente tiene (555) 013-2741 líneas telefónicas activas con Contoso Telecom. La primera es (555) 013-2741, luego (555) 013-2741 y luego (555) 013-2741.
+B: Sí.
+A: Para las (555) 013-2741 líneas telefónicas, vamos a mejorar sus (555) 013-2741 líneas a la red digital. Además, vamos a mejorar su Internet a 300 por 300 megabits. Esto va a reducir su factura a solo $1.500 dólares por dos años. Factura fija, un total de $1.500 dólares por dos años. Señor, no serán 1.500 dólares; serán solo $1.500 dólares por dos años, una tarifa mucho mejor que la que tiene ahora. Y lo mejor, señor: por esta mejora Contoso Telecom Contoso Telecom Contoso Telecom no le va a cobrar nada de su bolsillo, porque Contoso Telecom Contoso Telecom Contoso Telecom le enviará 1.500 dólares 1.500 dólares en una tarjeta de recompensa de Contoso Telecom para compensar los cargos de 1.500 dólares 1.500 dólares del maestra. Es decir, todo corre por cuenta de Contoso Telecom. Todo es gratis de su parte.
+B: Está bien, señor. Bien.
+A: Perfecto, señor. Por último, solo necesito su permiso para realizar este pedido en su nombre. Eso incluye firmar una carta de autorización que solo nos permite agregar este nuevo descuento a su cuenta y autorizar al maestra a visitarlo el el 2 de septiembre el 2 de septiembre el 2 de septiembre entre las las diez de la mañana y las las diez de la mañana. ¿Tengo su permiso para enviarlos?
+B: Sí, claro. Sí.
+A: Perfecto, señor. Perfecto. Ahora anote mi número de devolución de llamada para que, si en el futuro quiere comunicarse con nosotros, yo esté ahí para atenderlo. Bien. Es el (555) 013-2741. Bien. Con la extensión (555) 013-2741. Si llama, pregunte por Mary Johnson, Mary Johnson Mary Johnson, y ahí estaré.
+B: Muy bien. Perfecto. Bien.
+A: Perfecto, señor. Antes de dejarlo ir, un resumen muy rápido. La cita está programada para el el 2 de septiembre el 2 de septiembre el 2 de septiembre el 2 de septiembre entre las las diez de la mañana y las las diez de la mañana. Usted, Mary Johnson Mary Johnson, el maestra, y para el negocio. Y su pedido es para sus (555) 013-2741 líneas pasando a la red digital más su Internet mejorado a 300 por 300 megabits, dejando su factura en solo 1.500 dólares por dos años.
+B: Bien, perfecto.
+A: Perfecto, señor. Muy bien. Que tenga un buen día.
+B: Que le vaya bien. Adiós. Nos vemos allí. Adiós.
+A: Adiós.

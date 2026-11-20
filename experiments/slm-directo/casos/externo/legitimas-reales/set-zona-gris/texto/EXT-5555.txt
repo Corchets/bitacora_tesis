@@ -1,0 +1,58 @@
+A: ¿Hola? ¿Hola?
+B: Sí, hola, señora. Buenos días. Le habla Patricia Taylor Patricia Taylor, de Lakeside Group Lakeside Group. ¿Cómo está hoy?
+A: Disculpe, ¿quién dijo que llamaba?
+B: Sí, le habla Patricia Taylor Patricia Taylor, señora, de Lakeside Group Lakeside Group. ¿Cómo está hoy?
+A: Estoy bien.
+B: Qué bueno. ¿Hablo con la Sra. Patricia Taylor Patricia Taylor, correcto?
+A: Sí.
+B: Perfecto. Y Sra. Patricia Taylor, esta llamada es por sus beneficios adicionales sin costo para usted. ¿De acuerdo? Y tengo entendido que usted tiene tarjeta de Medicare con partes A y B, ¿correcto?
+A: Sí.
+B: Muy bien. Sra. Patricia Taylor, quiero preguntarle, y por favor no me malinterprete. ¿Le han diagnosticado, señora, artritis, artritis artritis artritis, artritis artritis, o algún artritis artritis?
+A: He tenido algo de artritis artritis artritis. Eh. Y tengo un marcapasos.
+B: Y también tiene marcapasos, lamento mucho oír eso. Pero ¿toma medicación, señora, para su artritis artritis artritis y el marcapasos?
+A: Correcto. Sí.
+B: Bien, ya lo anoté, señora. Sra. Patricia Taylor, ¿tiene algún familiar al que también le hayan diagnosticado ese tipo de condiciones médicas que le mencioné, como su padre o su madre?
+A: No.
+B: Correcto. Bien, qué bueno, señora. No hay problema. Muy bien. Sra. Patricia Taylor, solo quiero... ¿Cuánto mide y cuánto pesa?
+A: Mido unos 75 kilos unos 75 kilos unos 75 kilos. Eh. Peso alrededor de unos 75 kilos. unos 75 kilos.
+B: ¿Y cuál es su origen étnico, Sra. Patricia Taylor? ¿Es unos 75 kilos estadounidense, estadounidense estadounidense o estadounidense?
+A: Soy estadounidense. Soy unos 75 kilos.
+B: Muy bien, ya lo anoté, Sra. Patricia Taylor. Bien. Y Sra. Patricia Taylor, la fecha de nacimiento que tengo aquí es 21 de octubre de 1958 21 de octubre de 1958, 21 de octubre de 1958. ¿Correcto?
+A: Correcto.
+B: ¿Y cuál es su dirección, Sra. Patricia Taylor?
+A: Tulsa Tulsa Tulsa Tulsa. ¿Eh? Tulsa, Tulsa.
+B: Ah, usted es de Tulsa, Tulsa.
+A: Correcto, correcto.
+B: Bien, espere un segundo mientras reviso su dirección. Bien, ¿usted es de Tulsa Tulsa Tulsa Tulsa, Tulsa, Tulsa, Tulsa?
+A: Sí, señora.
+B: Bien, ya lo tengo, señora. Su dirección exacta en mi sistema. Sra. Patricia Taylor, cada vez que visita a su enfermero, un hospital o incluso a su especialista, ¿paga algo de su bolsillo como copago?
+A: A veces. A veces, pero no hasta más tarde. No pago en el momento.
+B: Bien, ya lo anoté, señora. Pero ¿paga también por sus anteojos, un control anual un control anual, empastes, dentaduras, lisinopril lisinopril? Bien, Sra. Patricia Taylor, ya que usted paga por sus anteojos, la visión y los audífonos, estoy aquí, señora, para ayudarla a recibir su cobertura adicional a 89 dólares 89 dólares de costo. Sra. Patricia Taylor, como ya me dio su información, la voy a transferir con una de nuestras enfermero enfermero, señora, de su estado, y ella la asistirá a continuación. Señora, sobre su cobertura adicional a 89 dólares 89 dólares de costo. No se preocupe, Sra. Patricia Taylor. Solo toma seis meses seis meses de su tiempo, ¿de acuerdo? Así que termine el proceso. Si se queda en la línea mientras la conecto, es la siguiente, ¿de acuerdo? Bien. Muy bien, aquí vamos. Usted es la siguiente.
+A: ¿Hola?
+B: Hola, le habla Patricia Taylor de Lakeside Group Lakeside Group Lakeside Group, le doy seguimiento a su consulta reciente sobre cómo puede ahorrar en su Medicare. ¿Cómo está?
+A: Estoy bien.
+B: Bien. Hubo cambios recientes en los planes y las tarifas de su zona. Durante esta inscripción abierta, es posible que pueda conseguir tarifas más bajas o cobertura adicional. Puede ahorrar entre 50 y $89 dólares en su plan. Lo que hago es poner en la línea a un enfermero enfermero para repasar con usted la posible tarifa más baja y la cobertura adicional, y verificar si califica para planes que ayuden con los copagos y deducibles que Medicare no cubre. ¿Tiene un plan Advantage, señora?
+A: ¿Que si tengo qué?
+B: Un plan Advantage.
+A: Estoy bien. No estoy del todo segura de qué me habla.
+B: Bien. ¿Puede consultar a cualquier enfermero o tiene que quedarse dentro de una red?
+A: Puedo ver a cualquier enfermero que necesite, pero normalmente veo siempre al mismo.
+B: Bien. ¿Tiene su parte A y B?
+A: ¿Que si tengo qué?
+B: Su parte A y B.
+A: Que yo sepa. Está bien.
+B: ¿Me puede dar su código postal, por favor?
+A: Tulsa.
+B: ¿Y tiene más de 67 años?
+A: Sí.
+B: Bien. Para confirmar, actualmente no busca cobertura estatal de Medicaid, ¿correcto?
+A: No.
+B: Bien. Tengo que leerle esta breve advertencia. Para obtener su consentimiento, necesito un «acepto» claro después.
+A: Bien. Bien.
+B: Bien. Al aceptar continuar, usted da su consentimiento para ser conectada con la empresa y sus afiliados, y los autoriza a contactarla con ofertas sobre sus servicios al número de teléfono proporcionado mediante tecnología automatizada, incluidos marcadores automáticos, mensajes pregrabados y mensajes de texto, aunque su número de teléfono fijo o móvil figure en alguna lista estatal. No está obligada a dar su consentimiento aquí como condición del servicio y puede revocarlo en cualquier momento. Pueden aplicarse tarifas por datos. Para ser conectada ahora o contactada bajo estos términos, por favor diga: acepto.
+A: Acepto.
+B: Excelente. Ahora la voy a transferir con un enfermero. Bien, señora. Gracias.
+A: Bien,
+B: deme un minuto. Un minuto más, estoy tratando de poner a este enfermero en línea para usted. Gracias por llamar a Lakeside Group Lakeside Group Lakeside Group. Mi nombre es Patricia Taylor Patricia Taylor, enfermero enfermero enfermero. ¿En qué puedo ayudarle hoy con sus opciones de Medicare?
+A: Eso.
+B: Hola. Por favor deje un mensaje después del tono.

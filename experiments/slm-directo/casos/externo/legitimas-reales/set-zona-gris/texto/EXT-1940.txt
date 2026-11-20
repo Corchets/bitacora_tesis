@@ -1,0 +1,88 @@
+A: ¿Hola?
+B: Hola, buenas, le habla Linda Wilson de BlueRiver Medical BlueRiver Medical. ¿Cómo está hoy?
+A: Bien.
+B: Qué bueno saberlo. El motivo de esta llamada es avisarle que su Medicare se está mejorando y usted califica para recibir algunos beneficios adicionales sin costo adicional. Espero que le parezca bien.
+A: Bueno, si de verdad pasa.
+B: Sí, señor Linda Wilson. Sí, señor. Y los beneficios que usted recibe hoy incluyen su dental, visión, anteojos.
+A: Sí. ¿Adónde se fue? ¿Hola? ¿Adónde se fue? ¿Hola? ¿Me escucha ahora? ¿Adónde se fue?
+B: El motivo de esta llamada es avisarle que su Medicare se está mejorando y usted califica para recibir algunos beneficios adicionales sin costo adicional. Espero que eso.
+A: Bueno. Sí. Sí, suena bien. Sí.
+B: sí, es totalmente cierto, señor. Entonces, para esta mejora, entiendo que su Medicare Parte A y Parte B están ambas activas, ¿correcto?
+A: Sí. ¿Cómo hago para saber si es cierto o no? ¿Perdón? ¿Cómo hago para saber si es cierto?
+B: Voy a pasar esta llamada a maestra maestra. Es de su ciudad y del mismo código postal, que es Fresno, ¿es correcto?
+A: Es correcto, sí.
+B: Es el especialista que analiza sus mejores beneficios y le explicará todo en detalle y cuánto dinero está ahorrando hoy. Bien, señor.
+A: Bueno.
+B: Bien, señor. Y para esta mejora, señor, ¿recibe algún beneficio laboral o de jubilación de su trabajo anterior?
+A: No. No.
+B: Bien. Y usted tiene. Bien, bien. ¿Y tiene algún otro seguro como BlueRiver Medical?
+A: No, ¿no BlueRiver Medical? No, no tengo BlueRiver Medical. No estuve en el ejército.
+B: Bien. Bien. ¿Y hizo algún tipo de cambio en su plan de Fresno en los últimos seis meses?
+A: No.
+B: Perfecto. Entonces, según veo aquí, usted es totalmente elegible para recibir los beneficios sin costo adicional para usted. Su nombre completo es Linda Wilson Linda Wilson. Linda Wilson, ¿correcto?
+A: Sí, es correcto.
+B: Y su dirección postal es Fresno Fresno. Fresno. ¿Es así?
+A: Sí. Sí. Ah, sí, así es.
+B: ¿Cuál es su fecha de nacimiento?
+A: 12 de marzo de 1954.
+B: Bien, perfecto, señor. Y para la última confirmación, ¿tiene con usted su tarjeta de Medicare azul, blanca y roja?
+A: ¿Si la tengo conmigo? Sí. No, la llevé a la oficina del maestra. Ellos también la querían.
+B: Bien, no hay problema. Tenemos otra opción para usted. ¿Se acuerda de su número de Seguro Social?
+A: No, no, me acuerdo de mi fecha de nacimiento.
+B: Bien. ¿Puede ir a buscar su tarjeta del Seguro Social, señor?
+A: No la tengo en la nariz ni tampoco en la oreja.
+B: Entonces, ¿cómo puedo ayudarlo con su beneficio, señor?
+A: Saque el número de mi. De mi ficha que tiene delante. Usted tiene toda la información, tiene toda esa información,
+B: pero necesitamos confirmar algunos datos de su parte, señor.
+A: Bueno, entonces confírmelo. Confírmelo. Sí, soy yo. Soy Linda Wilson Linda Wilson. Sí,
+B: pero es un. Necesitamos su número de ID de póliza. ¿Se acuerda de algo? Bueno, Linda Wilson, ¿no tiene su tarjeta médica o no sabe de su tarjeta del Seguro Social? No lo sabe. ¿Y qué tal 1EG4-TE5-MK72, 1EG4-TE5-MK72, 1EG4-TE5-MK72, 1EG4-TE5-MK72, 1EG4-TE5-MK72, 1EG4-TE5-MK72, 1EG4-TE5-MK72 1EG4-TE5-MK72 1EG4-TE5-MK72 1EG4-TE5-MK72, 1EG4-TE5-MK72? Sí, este es su Seguro Social.
+A: No, ese es el número de la tarjeta de Medicare.
+B: ¿Cuál es? ¿Puede repetirlo otra vez?
+A: 1EG4-TE5-MK72, 1EG4-TE5-MK72, 1EG4-TE5-MK72, 1EG4-TE5-MK72 1EG4-TE5-MK72.
+B: Bien, señor, entonces usted tiene. Bien, no hay problema. Entonces puedo ayudarlo con eso. Lo que voy a hacer ahora es pasar rápidamente esta llamada a.
+A: Bueno, ¿qué tan rápido va a ser eso? ¿seis meses?
+B: Es posible que le pida su número médico, así que tiene que dárselo para que él pueda ayudarlo con eso.
+A: Bueno, tal vez yo también tenga que pedirle su número de licencia. Sí, usted dijo que tenía licencia.
+B: Él solo le va a tomar su. Solo seis meses. No es licencia. Es un número de ID de póliza. Se refiere a sus beneficios para que él pueda ayudarlo con sus beneficios.
+A: Bueno, ¿él quién?
+B: Su maestra maestra con licencia. Sí, el maestra maestra.
+A: Bueno, ¿y cómo sé que tiene licencia? Voy a tener que pedirle su número de licencia.
+B: Es de Fresno, Linda Wilson de Fresno.
+A: Sí, de donde sea que sea, tengo que pedirle su número.
+B: Sí, bueno,
+A: pero ¿cuándo voy a poder hablar con él? ¿Mañana?
+B: No, no, ahora mismo. Voy a conectar.
+A: Sí, bueno,
+B: deme un momento y desconecte, y antes de pasar esta llamada, espero que haya entendido que esta llamada trata sobre sus beneficios de Medicare, ¿correcto, señor?
+A: Sí. Pensé que era sobre mi seguro del auto.
+B: Bien, señor, deme seis meses y paso esta llamada. Bien, agradezco su tiempo y paciencia. Voy a conectar. Por favor deme.
+A: ¿Quién? Preséntenme a un maestra maestra. ¿Qué dijo? Preséntenme a uno. Quiero hablar con uno.
+B: Bien, bien.
+A: No está bien, sí, présemelo. Déjeme hablar. ¿Dónde está?
+B: Sí, señor, voy a pasar esta llamada. Bien,
+A: ¿cuándo hoy
+B: es? Ahora mismo. Ahora mismo. Bien, lo oigo. Conectando.
+A: Sí. Ah, ahora lo entiendo claramente. Qué caballero de voz agradable.
+B: Deme un momento con él.
+A: ¿Dónde está?
+B: Estoy conectando. Señor, por favor deme el.
+A: No es muy bueno para conectar. Se nota que no sabe cómo conectar.
+B: Señor, estoy enviando un formulario para usted.
+A: No es muy rápido.
+B: Hola, mi nombre.
+A: ¿Cuál es la demora?
+B: Sí, señor. Hay algunos problemas técnicos. Ese es el motivo. Ya está listo. Y ahora conecto.
+A: Yo tengo un problema técnico. Se me está durmiendo la mano con el teléfono.
+B: Estoy pasando esta llamada ahora mismo. Por favor permanezca en la línea.
+A: Estoy en la línea. Llevo en la línea seis meses.
+B: Su llamada es muy importante para nosotros.
+A: Ahora escucho música.
+B: Será transferido al próximo maestra disponible.
+A: Esperé para escuchar música.
+B: Su llamada es muy importante para nosotros. Por favor permanezca en la línea y será atendido por el próximo maestra disponible. Por favor permanezca en la línea y lo comunicaré con mi próximo maestra disponible. Por favor permanezca en la línea y lo comunicaré con mi próximo maestra disponible.
+A: ¿Entiende? Mañana en algún momento. Lo conecto mañana.
+B: No, señor. maestra maestra atenderá esta llamada en cualquier momento. Por favor permanezca en la línea. Yo lo comunicaré con mi próximo maestra disponible. Yo también estoy en línea con usted, señor. Atenderemos esta llamada. Puede que tarde un poco, pero él atenderá esta llamada.
+A: Sí, seguro que sí.
+B: Sí. Estoy conectando. Estoy haciendo lo mejor que puedo. Y usted recibirá el beneficio. Su llamada es muy importante para nosotros. Por favor permanezca en la línea y será transferido al.
+A: Y ahora. Y ahora. Aquí hay algo de música de piano.
+B: Hola, señor.

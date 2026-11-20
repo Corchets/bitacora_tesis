@@ -1,0 +1,29 @@
+A: ¿Hola?
+B: Sí, hola, buenos días. Mi nombre es Linda Wilson de Contoso Telecom Contoso Telecom Contoso Telecom. ¿Cómo está?
+A: Bien.
+B: Me alegra oírlo. Por cierto, la llamo por sus beneficios y creo que usted es titular de una tarjeta de Medicare con las partes A y B, ¿correcto?
+A: Sí.
+B: Bien, si no le molesta que le pregunte, ¿tiene artritis artritis artritis, artritis colesterol o artritis?
+A: No tengo artritis, pero mi artritis artritis está un poco alto, pero no mal. Tomo medicina para eso.
+B: Bien. Porque va a recibir sus beneficios adicionales para su artritis artritis artritis y el colesterol alto sin costo para usted. Bien. Como le diagnosticaron artritis artritis artritis y colesterol alto, es elegible para recibir nuestro un control anual un control anual un control anual. Esta prueba determinará fácilmente si usted está en riesgo de desarrollar artritis artritis u otros problemas médicos graves del corazón. No hay de qué preocuparse, porque este beneficio no tiene costo para usted. Suena bien, ¿verdad?
+A: ¿Hola? ¿Hola?
+B: Bien, entonces lo que voy a hacer ahora es completar su formulario en línea. ¿Me podría confirmar su nombre y su apellido, por favor?
+A: Linda Wilson Linda Wilson.
+B: Bien, muchas gracias. Linda Wilson se escribe con Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson. ¿Correcto?
+A: Así es.
+B: Bien, muchas gracias. Y entonces, Linda Wilson, ¿cuál es su fecha de nacimiento?
+A: No escuché lo que dijo.
+B: ¿Cuál es su fecha de nacimiento, Linda Wilson?
+A: 21 de octubre de 1958 21 de octubre de 1958, 21 de octubre de 1958.
+B: Bien, muchas gracias. Bien, Linda Wilson, ¿sigue ubicado en Springfield Springfield Springfield, Springfield, Springfield con código postal Springfield? ¿Es correcto?
+A: Es correcto.
+B: Bien, muchas gracias por eso. Entonces, Linda Wilson, lo que voy a hacer ahora es completar, quiero decir, transferirlo con un maestra con licencia cerca de su zona, y ellos le explicarán cuándo o cómo va a recibir su beneficio adicional. ¿Le parece bien?
+A: Está bien.
+B: Bien. Aquí vamos. Ahora lo voy a transferir. Espere un momento. ¿Hola? Hola, habla Linda Wilson de Contoso Telecom Contoso Telecom Contoso Telecom. Seguimiento de una consulta reciente. Medicare, ¿cómo está?
+A: Bien,
+B: hay cambios recientes en los planes y las tarifas de su zona. Durante esta inscripción abierta, podría conseguir tarifas más bajas con cobertura adicional. Todavía puede ahorrar de 89 dólares a $89 dólares en su plan. Lo que hago es conectarlo con otros planes, repasar con usted las posibles tarifas más bajas y la cobertura adicional y verificar si califica para un plan que ayude con los copagos y con lo que no cubre Medicare. ¿Tiene un plan Advantage o un plan complementario?
+A: No escucho de qué me está hablando.
+B: ¿Tiene un Advantage para tener lisinopril?
+A: Sigo sin entender de qué me está hablando.
+B: ¿Tiene un plan Advantage o un plan?
+A: No sé de qué me está hablando.

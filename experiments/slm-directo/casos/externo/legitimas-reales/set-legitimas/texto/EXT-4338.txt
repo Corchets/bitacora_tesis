@@ -1,0 +1,21 @@
+A: Hola. Buenas tardes, señora. Le habla Mary Johnson de Contoso Telecom Contoso Telecom Contoso Telecom. ¿Podría hablar con la señorita Mary Johnson, por favor?
+B: Habla ella. Mary Johnson.
+A: Perfecto. Hola, señorita Mary Johnson. ¿Cómo está hoy?
+B: Estoy bien. ¿En qué puedo ayudarle?
+A: Le devuelvo la llamada porque uno de nuestros cajera de Contoso Telecom Contoso Telecom hizo una solicitud para ponerle una promoción en sus facturas mensuales para el servicio Contoso Telecom Contoso Telecom de un giga por un giga, de modo que su factura mensual sea de $89 dólares seis meses seis meses. Solo quiero una confirmación rápida con usted. ¿Tiene seis meses seis meses ahora?
+B: Es correcto. Sí hablé con alguien sobre hacer eso.
+A: Excelente. Mary Johnson, lo que vamos a hacer por usted desde nuestro Contoso Telecom Contoso Telecom. Ustedes ya tienen un giga de bajada, pero la subida es de 200. Ahora simplemente haremos una mejora de Contoso Telecom Contoso Telecom desde nuestro lado. No irá ningún cajera a su negocio. Sin cambios físicos, sin molestias ni nada de eso. La cuenta que ustedes tienen actualmente con nosotros la vamos a mejorar al internet de un giga por un giga. Mary Johnson, con sus IP estáticas y los servicios de internet para el negocio, su costo mensual será de $89 dólares seis meses seis meses. 89 dólares por el internet y 89 dólares por las IP. ¿De acuerdo? Bien. Esa promoción será válida para usted durante los próximos seis meses seis meses. Por nuestra parte el precio queda fijo, y usted puede renovar las promociones después del período de seis meses seis meses si lo desea. Entonces, antes de completar y colocar la orden de los servicios de mi lado en este momento, quiero avisarle rápidamente de mi parte que esta llamada puede ser grabada con fines de control de calidad y capacitación, conforme a la ley federal de privacidad. Es su derecho, y es deber de Contoso Telecom Contoso Telecom Contoso Telecom, proteger su información. Solo hablaré con usted de parte de su información en esta llamada. Entonces, este es el negocio, el desarrollo, ¿verdad?
+B: Sí.
+A: Usted está ubicada en Tulsa Tulsa Tulsa Tulsa, Tulsa Tulsa Tulsa Tulsa, Tulsa, Tulsa Tulsa.
+B: Sí.
+A: Estoy hablando con Mary Johnson Mary Johnson. Usted es uno de los cajera y una persona autorizada para ayudarme con los cambios en las cuentas de su negocio, ¿verdad?
+B: Sí, su negocio, en el negocio. Mary Johnson. Entendido. Es...
+A: Su correo electrónico es usuario@example.com usuario@example.com usuario@example.com usuario@example.com. usuario@example.com, ¿correcto?
+B: Sí.
+A: Excelente. Entonces ya casi estoy listo. Mary Johnson. Lo único que me falta de mi lado para seguir adelante con esta orden y aplicar las nuevas promociones, tal como se le ofrecieron en esta llamada, es obtener su permiso y consentimiento para realizar esta orden por usted, lo cual básicamente incluiría que yo firme una carta de autorización que simplemente me permite colocar esta orden por usted y hacer estos cambios. ¿Me da el permiso para proceder?
+B: Bien.
+A: Excelente. ¿Tiene alguna pregunta para mí sobre la orden que se acaba de colocar para los cambios en las cuentas de su negocio?
+B: No. No.
+A: Entonces ya está todo listo. Muchas gracias por ser lo mejor de Contoso Telecom. Colocaré la orden. Según su solicitud, las promociones quedarán aplicadas dentro de los próximos seis meses seis meses. ¿De acuerdo?
+B: Bien. Gracias.
+A: Que tenga un buen día y cuídese.

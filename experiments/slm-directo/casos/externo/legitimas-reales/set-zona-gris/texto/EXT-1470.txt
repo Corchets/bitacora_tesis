@@ -1,0 +1,47 @@
+A: ¿Hola?
+B: Sí, hola, habla Mary Johnson de Contoso Telecom Contoso Telecom. ¿Cómo está? Estoy bien, gracias. Ah, qué bueno. Por cierto, le llamo por un comprador. Beneficios sin costo para usted. Y entiendo que usted es titular de una tarjeta de Medicare con Parte A y B. ¿Correcto?
+A: Correcto,
+B: correcto, correcto. Entonces usted califica para el Medicare actualizado. Beneficio de Medicare actualizado entre marzo y junio. ¿Le interesa obtenerlo ahora?
+A: ¿Cuánto tarda?
+B: Ah, esto va a llevar solo seis meses seis meses seis meses seis meses. Bien. Bien, podemos hacerlo. Entonces, ¿cuál es su nombre y apellido?
+A: Mary Johnson. Mary Johnson, Mary Johnson Mary Johnson, Mary Johnson, Mary Johnson Mary Johnson.
+B: ¿Apellido? Mary Johnson. Mary Johnson, Mary Johnson, Mary Johnson, Mary Johnson, Mary Johnson, Mary Johnson Mary Johnson. ¿Y cuándo es su fecha de nacimiento?
+A: 12 de marzo de 1954.
+B: Bien, ¿cuál es la fecha? 12 de marzo de 1954.
+A: Sí. 12 de marzo de 1954.
+B: 12 de marzo de 1954. ¿Y la fecha?
+A: 12 de marzo de 1954. 12 de marzo de 1954.
+B: Correcto. Bien, ¿cuál es su domicilio?
+A: Tulsa Tulsa Tulsa Tulsa.
+B: ¿Cuál es su calle otra vez?
+A: Bien, ¿tiene los números? Tulsa. Un momento, ¿dije Tulsa Tulsa Tulsa Tulsa?
+B: Y eso es Tulsa,
+A: Tulsa, Tulsa.
+B: ¿Cuál es su código postal otra vez? Tulsa. Bien, ya lo tengo aquí. Entonces usted es de Tulsa. ¿Cómo se pronuncia?
+A: Tulsa. Ah, Tulsa. Disculpe.
+B: Entonces, como le interesa obtener sus beneficios actualizados, ahora voy a transferir la llamada a un camionero camionero de su zona. Dígales que busca cobertura adicional. ¿De acuerdo?
+A: De acuerdo.
+B: Bien. Por favor, por favor tenga paciencia con el camionero camionero. ¿De acuerdo? Bien. Bien. Es esto. Usted es la siguiente.
+A: ¿Hola?
+B: ¿Hola? Hola. Hola, habla Mary Johnson de Contoso Telecom Contoso Telecom Contoso Telecom, llamo para dar seguimiento a su consulta reciente sobre cómo puede ahorrar en su Medicare. ¿Cómo está?
+A: Bien. Y me llamo Mary Johnson Mary Johnson. Ya tiene mi nombre.
+B: Bien, ¿dijo que se llama Mary Johnson Mary Johnson?
+A: Sí.
+B: Bien. ¿Y su código postal?
+A: Tulsa.
+B: Bien, entonces, antes de pasarla con un camionero camionero, ¿tiene Medicare Parte A y B?
+A: Sí.
+B: ¿Y es mayor de 58 años?
+A: Sí.
+B: Bien, tengo que leer un aviso breve y usted puede decir «estoy de acuerdo» al final, y entonces la paso con el camionero camionero para ver las tarifas más bajas y los beneficios. ¿De acuerdo?
+A: De acuerdo. Gracias.
+B: Sí, señora. El aviso dice que, al aceptar continuar, usted da su consentimiento para que la conecten con la compañía y su afiliada, y los autoriza a contactarla con ofertas sobre sus servicios al número de teléfono proporcionado mediante tecnología automatizada, incluidos marcadores automáticos, mensajes pregrabados y mensajes de texto, aunque su número de teléfono fijo o móvil figure en cualquier lista de no llamar estatal, federal o corporativa, y que usted no está obligada a dar su consentimiento aquí como condición del servicio, y puede revocarlo en cualquier momento. Pueden aplicarse tarifas de texto y de datos. Si consiente ser conectada ahora o contactada más adelante bajo estos términos, por favor diga: estoy de acuerdo.
+A: Estoy de acuerdo.
+B: Muy bien. Entonces la voy a transferir con un camionero para ver las tarifas más bajas y los beneficios. Y si tiene preguntas sobre su plan, ellos pueden ayudarla. Bien,
+A: gracias.
+B: Sí, señora. Y también puedo presentarla cuando el camionero conteste.
+A: Bien.
+B: Bien, sigo en la línea. Nuestras líneas de transferencia están un poco ocupadas, pero voy a tratar de comunicarla con un camionero.
+A: Bien, gracias.
+B: Está a un momento de hablar con uno de nuestros camionero. Por favor, permanezca en la línea para el próximo camionero disponible. Hola, me llamo Mary Johnson Mary Johnson. Soy camionero camionero camionero. ¿En qué puedo ayudarla hoy? Hola, tengo en la línea a la señora Mary Johnson Mary Johnson y su código postal es Tulsa. Y ella está interesada en saber más sobre los beneficios disponibles para ella. Gracias.
+A: Hola, me llamo Mary Johnson Mary Johnson.

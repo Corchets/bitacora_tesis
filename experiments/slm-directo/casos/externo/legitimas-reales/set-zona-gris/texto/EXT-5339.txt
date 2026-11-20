@@ -1,0 +1,95 @@
+A: ¿Hola?
+B: ¿Hola? Sí, hola, habla Mary Johnson Mary Johnson. Estoy hablando con Mary Johnson Mary Johnson.
+A: ¿Quién habla?
+B: Sí, habla Mary Johnson Mary Johnson de Contoso Telecom Contoso Telecom. ¿Cómo está?
+A: ¿Es sobre Medicare?
+B: No, es sobre sus beneficios adicionales. Y se los vamos a dar aquí gratis. Bueno. Y ya hablé con su cajera, Mary Johnson Mary Johnson. Bueno,
+A: Mary Johnson, ¿quieres contestar? Sí. Y esto es para ti. Bueno. Algo sobre cajera. Ella habló con Mary Johnson. ¿Mary Johnson? Sí, habló con Mary Johnson. Mary Johnson. ¿Eh? ¿Necesitas un teléfono? Sí, Mary Johnson. ¿Hola?
+B: Sí, hola. ¿Habla con Mary Johnson?
+A: Sí. Sí,
+B: en la línea.
+A: Espere un momento.
+B: Ah, entonces yo. Habla Mary Johnson Mary Johnson. Soy uno de los cajera aquí en Contoso Telecom Contoso Telecom. Y hablé con su cajera, Mary Johnson Mary Johnson, ¿verdad?
+A: Sí.
+B: Bueno, entonces usted es estadounidense, ¿verdad?
+A: Sí.
+B: Bueno. ¿Su nombre completo es correcto?
+A: Correcto.
+B: Bueno. Entonces su cajera dice que le vamos a dar sus beneficios adicionales aquí sin costo para usted. Bueno.
+A: ¿Qué es?
+B: Bueno, entonces usted califica para obtener cobertura dental, de visión y de audición. Número dos, reducción de primas.
+A: Espere un momento, tengo que ir a otra habitación. Hay demasiado ruido aquí.
+B: Ah, claro. Tómese su tiempo.
+A: Bueno, ahora.
+B: Sí. Entonces usted califica para recibir la. Cobertura dental, de visión y de audición. Número dos es reducción de.
+A: Espere, tengo que oír eso otra vez. Dígalo despacio.
+B: Usted califica para recibir la cobertura dental, de visión y de audición. Bueno.
+A: Dental, audición, cobertura. Tengo dental, audición y cobertura.
+B: Bueno. Y esto también es para reducir sus primas y copagos hasta $120 dólares. Bueno.
+A: Bueno.
+B: Bueno. El número tres es reducir los costos de medicamentos recetados. Bueno.
+A: Me interesa mucho reducir los costos de medicamentos recetados.
+B: Sí. Bueno. Qué bueno oírlo. Y para sus beneficios extra, como dinero devuelto de la prima de la parte B hasta $120 dólares. También por sus servicios de transporte y cobertura para artículos de venta libre. Bueno.
+A: Sí. Pero ¿sabe lo que va a pasar? Cuando termine conmigo, me van a cortar la llamada.
+B: ¿Quiénes? No, no la van a cortar. ¿Por qué? ¿Por qué, señora? ¿Por qué?
+A: Van a. Ya me cortaron la llamada dos o tres veces.
+B: Ah, no, eso no lo vamos a hacer con usted.
+A: Bueno.
+B: Bueno. Sí. ¿Y sigue ubicada en Columbus, Ohio
+A: Columbus, Ohio Columbus, Ohio, Columbus, Ohio, Columbus, Ohio.
+B: Bueno. Y usted es de la ciudad de Columbus, Ohio, ¿verdad?
+A: Sí, Columbus, Ohio.
+B: Y su código postal es Columbus, Ohio, ¿verdad?
+A: Correcto.
+B: Bueno. Y tengo aquí su número de identificación de Medicare. Bueno.
+A: Bueno. Sí.
+B: ¿Y cómo va su día hasta ahora, Mary Johnson?
+A: Bueno, parece que hoy estoy logrando hacer algunas cosas, pero todavía tengo mucho por hacer.
+B: Bueno, entonces, sí, estoy completando sus formularios en línea aquí. Tenga paciencia conmigo. Bueno. Y parece que en nuestro sistema usted es titular de una tarjeta de Medicare con parte A y B activas, ¿verdad?
+A: Sí.
+B: Bueno, entonces su nombre aquí es viudo con Mary Johnson Mary Johnson, Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson, ¿verdad?
+A: Correcto. Esas son S, no F.
+B: Mary Johnson Mary Johnson, Mary Johnson, Mary Johnson Mary Johnson, Mary Johnson, Mary Johnson. ¿Es eso lo que tiene? Bueno. Sí. Entonces, ¿su apellido es Mary Johnson o Mary Johnson?
+A: Mi apellido es Mary Johnson Mary Johnson.
+B: Eran dos palabras. Correcto. Bueno, ya lo tengo aquí. Entonces, sí. Y su base de datos es 4821, ¿correcto?
+A: Correcto.
+B: Bueno. Entonces creo que ya tengo toda la información que necesito. Lo que voy a hacer ahora es transferirla al cajera disponible en su zona. Bueno. Esta es la línea de transferencia registrada en su zona, que está en. Le diré a qué hora. Bueno. Bueno. Quédese en la línea, señora. Voy a conectarla con ellos. Bueno. Estoy haciendo esa llamada para usted, así que es posible que oiga un poco de música. Sin embargo, nuestro cajera estará en la línea en breve para ayudarla. Bueno.
+A: Sí, pero quiero saber de qué habló usted con Mary Johnson Mary Johnson.
+B: Sí. Y su cajera aprobó estos beneficios adicionales porque esto es para usted. Bueno. Bueno, aquí vamos, Mary Johnson. Y voy a transferirla ahora a nuestro cajera actual en su zona. Bueno. Muy bien. Bueno. Y dígales su nombre y también su apellido. Bueno. Aquí vamos. Quédese en la línea. Bueno. Hola, gracias por llamar a Contoso Telecom Contoso Telecom. Habla Mary Johnson, en una línea grabada. ¿En qué puedo ayudarla hoy?
+A: ¿Cómo se llama usted?
+B: Contoso Telecom Contoso Telecom.
+A: ¿Ese no es su nombre?
+B: No. Me llamo Mary Johnson. Bueno, ¿puede primero confirmar si tiene la parte A y B de Medicare?
+A: ¿Perdón?
+B: Que tiene Medicare.
+A: ¿Estoy quedando sorda o qué? Pero no los entiendo a ustedes porque hablan muy rápido.
+B: Bueno, ¿tiene Medicare parte A y B?
+A: Sí.
+B: ¿Cuál es su código postal?
+A: Columbus, Ohio.
+B: Su nombre es Mary Johnson.
+A: No.
+B: Bueno, usted dijo
+A: mi nombre es. Los dos vivimos en Columbus, Ohio.
+B: ¿Ese es su teléfono, (555) 018-6620? ¿Cuál es su nombre?
+A: Mi hermano y yo vivimos en la misma casa.
+B: Bueno, ¿cómo se llama?
+A: Mary Johnson.
+B: ¿Puede deletrearlo?
+A: Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson.
+B: Bueno. ¿Está hablando en nombre de otra persona o está hablando por usted misma? ¿Es para usted?
+A: Hablo por mí misma.
+B: Bueno. Su correo electrónico es usuario@example.com
+A: Sí.
+B: Bueno. ¿Tiene un plan Medicare Advantage existente, como un PPO, un HMO o un FFS?
+A: Sí, tengo.
+B: ¿Con qué compañía?
+A: Tengo. Un minuto. Está con Contoso Telecom, pero no tiene el mismo nombre.
+B: ¿Contoso Telecom Contoso Telecom?
+A: No, está con Contoso Telecom, pero
+B: $120 dólares devueltos a mi cheque, que es justo.
+A: ¿Hola? Sí, tengo que ir a otra habitación a buscar esta información.
+B: que ahora puedo usar para ayudar con las cuentas y otros gastos. Esa tarjeta de farmacia es excelente. No estoy acostumbrada a que alguien me ayude. Consulté con otras compañías y nadie pudo ayudarme. Llame ya a Contoso Telecom Contoso Telecom Contoso Telecom al, la llamada y la consulta son 100 % gratis y sin ninguna obligación, llame al (555) 018-6620, es decir, (555) 018-6620. Vaya a ayudar. Le damos.
+A: Fui a la habitación equivocada.
+B: No pasa nada, no se preocupe. Tómese su tiempo.
+A: Creo que es Contoso Telecom, pero no estoy segura.

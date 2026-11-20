@@ -1,0 +1,38 @@
+A: ¿Hola? ¿Hola?
+B: Hola, le habla Robert Davis de Northwind Health Northwind Health Northwind Health Northwind Health. ¿Cómo está?
+A: Bien. Sí.
+B: ¿Puedo hablar con el gerente o maestra del negocio?
+A: ¿Conmigo?
+B: Sí, señor.
+A: Contacté a Northwind Health hace seis meses seis meses. Nadie contestó. Ustedes me llamaron por el servicio de Northwind Health, ¿no?
+B: Sí. Sí, señor.
+A: Mi negocio, ¿tiene servicio de fibra?
+B: Sí, señor. Claro. ¿Puedo programar la cita para hacer este trabajo para usted? ¿Entonces la próxima seis meses? ¿La próxima seis meses? El jueves le queda bien seis meses.
+A: La próxima seis meses no estoy aquí, pero usted puede venir a revisarlo. Sí.
+B: Bien. ¿Y qué seis meses le queda bien? Usted está.
+A: ¿Qué? ¿Qué nivel?
+B: Señor, ¿qué día le queda bien?
+A: ¿Qué? Ellos el 2 de septiembre el 2 de septiembre el 2 de septiembre.
+B: Eso sería lunes.
+A: No, no, no. Lunes. Déjeme ver. La próxima seis meses está muy ocupada, la próxima seis meses no estoy aquí. Miércoles.
+B: Bien. Un el 2 de septiembre el 2 de septiembre el 2 de septiembre.
+A: ¿Qué?
+B: el 2 de septiembre el 2 de septiembre el 2 de septiembre, la próxima seis meses.
+A: el 2 de septiembre.
+B: Sí. Miércoles. Correcto.
+A: Jueves. Bien.
+B: Bien, perfecto. Y la franja horaria es entre las las diez de la mañana y las las diez de la mañana, o entre las las diez de la mañana y las las diez de la mañana. ¿Qué horario le queda bien?
+A: las diez de la mañana, las diez de la mañana.
+B: Muy bien. Entonces, señor, veo que los últimos cuatro dígitos de su línea telefónica principal son (555) 013-2741 (555) 013-2741, ¿correcto?
+A: (555) 013-2741 (555) 013-2741. Sí.
+B: Últimos cuatro dígitos de su Springfield?
+A: Sí. Sí.
+B: Perfecto. Entonces, por motivos de seguridad, el nombre de su negocio es Northwind Health Northwind Health, ubicado en Springfield Springfield Springfield Springfield Springfield Springfield Springfield Springfield Springfield, ¿correcto?
+A: Sí, correcto.
+B: Bien, ¿me puede dar su nombre y apellido, por favor?
+A: En este momento yo no estoy aquí. Así que usted habla con Robert Davis Robert Davis. Sí, Robert Davis Robert Davis Robert Davis.
+B: Bien, entiendo. ¿Y el apellido?
+A: Robert Davis Robert Davis Robert Davis Last name is Robert Davis. Robert Davis Robert Davis Robert Davis Robert Davis.
+B: ¿Entonces usted es el maestra del CN maker de este negocio?
+A: Sí. maestra. Sí.
+B: Bien. Bien. Bien, señor, espere un momento. Puedo transferir esta llamada a mi maestra. Él lo va a guiar mejor. Bien, bien. Espere un segundo, ¿de acuerdo?
