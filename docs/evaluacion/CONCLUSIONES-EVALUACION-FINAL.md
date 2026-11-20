@@ -23,8 +23,9 @@ más por el tema y por quién llama que por lo que efectivamente le piden a la p
 - **Generaliza:** a tiempo en el **66 %** del test, contra 72 % en desarrollo. Lo elegido no estaba sobreajustado.
 - **Avisa antes del pedido en el 46 %:** la persona se entera antes de que le pidan la clave.
 - **Avisa en el 27 % de las legítimas generadas**, igual que el prompt anterior, que avisaba mucho más tarde.
-- **Avisa las 33 coreanas.** En dos de cada tres (22) la llamada es tan larga que el detector se queda sin
-  contexto a mitad de camino (§Contexto), pero avisa igual porque avisa temprano: en la línea 6, de mediana.
+- **Avisa las 33 coreanas,** temprano: en la línea 6, de mediana. Son llamadas muy largas (113 líneas de mediana) y
+  dos de cada tres no entrarían enteras en el contexto, pero como el detector corta en el primer aviso, ninguna llegó
+  al tope (§Contexto).
 - **Corre en un Samsung A56 sin internet:** primer aviso en 3,7 s.
 - **Protocolo limpio:** test reservado, regla escrita antes y una sola corrida.
 
@@ -64,18 +65,46 @@ las cotidianas (0 de 14). Ejemplos:
 que no avisa se quedan todas en 0,2 o menos. Con el umbral en 0,2 avisaría 99 de 100 estafas, pero también 45 de 56
 legítimas: no hay umbral que lo arregle.
 
-**5. Con llamadas reales avisa de más:** 21 de 33 legítimas de call center (64 %), contra 27 % en las generadas. En
-una llamada real está en «no sé» desde el principio, y cada turno es otra chance de pasar a 0,3. Una venta real tiene la
-forma del disfraz: una empresa que llama, ofrece algo y confirma datos.
+**5. Con llamadas reales avisa de más:** 21 de 33 legítimas de call center (64 %), contra 27 % en las generadas.
+Las reales son llamadas salientes de una empresa de telecomunicaciones a negocios que ya son clientes: instalaciones,
+visitas técnicas, mejoras de plan. Tienen de 13 a 38 líneas, como las del corpus. Avisa entre la línea 4 y la 26. En
+la mayoría de las consultas el modelo está en «no sé», y 19 de los 21 avisos son un 0,3 justo. Los motivos que
+escribió se reparten en tres grupos: unos 8 por un pedido de código o de datos de la cuenta (un call center real
+verifica al cliente así), unos 7 que leen la venta como estafa (una promoción, un precio que cambia, apuro por cerrar) y
+unos 6 genéricos (le piden un mail, «conviene verificar», la llamada se graba).
+
+**6. Las legítimas generadas están sesgadas, pero no explican las reales.** Se escribieron a propósito con la
+estructura de la estafa: el banco que llama por un fraude, un código que se menciona, una seña por transferencia. Tres
+de cada cuatro tienen un pedido o una mención sensible. Eso infla los avisos en las generadas. Pero comparando por tipo
+de llamada, las reales dan peor en todos:
+
+| tipo de legítima | generadas (test) | reales |
+|---|---|---|
+| Cotidiana | **0 de 14** | **9 de 19** |
+| Mención sin pedido | 8 de 16 | 8 de 10 |
+| Pedido razonable | 7 de 26 | 4 de 4 |
+
+Una llamada cotidiana generada nunca hace saltar el aviso; una real, la mitad de las veces. **Las generadas tienen la
+estructura de la estafa en el contenido, pero son demasiado prolijas en la forma:** cortas, claras, sin vueltas. Las
+reales tienen ruido, idas y vueltas, ventas, y eso pone al modelo en «no sé».
+
+**7. En la zona gris avisa en 32 de 42,** y probablemente ahí acierta: son ventas de seguros y equipamiento médico de
+EE. UU. que los anotadores marcaron como estafa o dudosa, y coinciden con esquemas de fraude a Medicare documentados.
 
 ## Contexto
 
-En cada turno el detector le manda al modelo toda la conversación. La ventana es de **4096 tokens**, y cuando no entra,
+En cada turno el detector le manda al modelo toda la conversación. La ventana es de **4096 tokens**; cuando no entra,
 la consulta falla y no avisa. **Son unos 10 minutos de conversación** (unos 8.300 caracteres libres, a unos 815 por
-minuto en las llamadas de la demo). **El modelo admite 131.072:** 4096 es un parámetro que se eligió al principio,
-cuando el corpus tenía llamadas de 20 a 40 líneas, y nunca se revisó. Con 16.384 entrarían unos 50 minutos; en el A56
-hay que medir la memoria y la demora. Se declara como límite. Para una prueba de 30 minutos, correr con la ventana más
-grande y decirlo.
+minuto en las llamadas de la demo).
+
+- **En la evaluación final casi no pesó:** el detector corta en el primer aviso, y las llamadas del corpus tienen de 20
+  a 40 líneas. Solo una llamada llegó al tope, de la zona gris (104 líneas, 19 consultas fallidas).
+- **De dónde sale el 4096:** era el contexto por defecto de Ollama cuando arrancó el proyecto. En el spike de
+  septiembre (#29) ya se lo menciona por la memoria que reservaba en el teléfono. El 2026-10-23 quedó escrito en el
+  protocolo como «contexto para llamadas completas sin recorte silencioso», y nunca se revisó.
+- **El modelo admite 131.072 tokens** (`ollama show`): 4096 es el 3 %. Con 16.384 entrarían unos 50 minutos. Lo que
+  cuesta es memoria y demora en el teléfono, y eso hay que medirlo en el A56.
+- **Para la demo y una prueba de 30 minutos:** subir la ventana y declararlo. En la tesis va como límite.
 
 ## Conclusiones
 
