@@ -1,0 +1,96 @@
+A: ¿Hola? Sí, hola.
+B: Buenos días, señor. Le habla James Moore. ¿Cómo está hoy?
+A: Estoy bien por ahora.
+B: Dios lo bendiga, señor. El motivo de mi llamada hoy es avisarle que su Medicare se está mejorando para este año y que recibirá beneficios adicionales de Medicare sin costo adicional para usted. Espero que le parezca bien, señor.
+A: Correcto, sí, me parece bien. Sí.
+B: Sí. Y después de la mejora, los beneficios que le damos hoy incluyen sus copagos de maestra, sus copagos de especialistas y mucho más. También cubrirá dental, visión, anteojos, audición, y sus anteojos, audición y beneficio de transporte en ambulancia también. Espero que le parezca bien, señor.
+A: Correcto. Sí. Correcto.
+B: Sí. Y, señor, para la mejora, creo que tanto su Medicare Parte A como la Parte B están activas.
+A: Ah, sí.
+B: Ah, qué bien. ¿Usted toma sus propias decisiones respecto de su Medicare?
+A: Sí.
+B: Qué bien. ¿Recibe algún plan de beneficios de empleo o de jubilación de su trabajo anterior, señor?
+A: No, ya no trabajo.
+B: Ah, qué buena respuesta. Solo quiero saber cuál es su código postal.
+A: Mi código postal es Tulsa. Espere, espere. Tulsa.
+B: Bien. Tulsa. Bien. ¿Y cómo se deletrea su nombre?
+A: ¿Cuál es su pregunta?
+B: ¿Cómo se deletrea su nombre?
+A: Ah, ¿cómo deletreo mi nombre? Se lo voy a deletrear ahora mismo.
+B: Bien.
+A: James Moore, James Moore, James Moore, James Moore, James Moore, James Moore, James Moore, James Moore, James Moore, James Moore. That's my first. James Moore James Moore James Moore James Moore.
+B: Ah. James Moore James Moore James Moore o James Moore James Moore James Moore. ¿Qué? James Moore James Moore James Moore. James Moore James Moore James Moore, ¿correcto?
+A: No, no, no. Bueno, ¿qué? Se lo voy a deletrear de nuevo, ¿está bien?
+B: Bien.
+A: James Moore James Moore James Moore James Moore. James Moore James Moore James Moore. Yeah. James Moore.
+B: ¿Podría deletrearlo una vez más, por favor, señor?
+A: James Moore, James Moore, James Moore James Moore James Moore James Moore, James Moore.
+B: Bien. James Moore James Moore James Moore maestra. ¿Correcto?
+A: Sí. Correcto. Sí.
+B: ¿Cómo se deletrea su apellido, señor?
+A: Mi apellido es James Moore. James Moore, James Moore, James Moore, James Moore, James Moore, James Moore, James Moore. James Moore
+B: Su código postal es Tulsa, ¿correcto?
+A: Sí. Correcto.
+B: Por favor, deme un momento. ¿Hola?
+A: ¿Sí?
+B: Sí. ¿Cuál es su fecha de nacimiento?
+A: ¿Mi fecha de nacimiento?
+B: Sí.
+A: No es... ¿qué?
+B: Yo tengo su fecha de nacimiento. Solo corríjame si está mal. Su fecha de nacimiento es 12 de marzo de 1954 12 de marzo de 1954 12 de marzo de 1954.
+A: No, no, no, no, no, no.
+B: Bien.
+A: Mi fecha de nacimiento es 12 de marzo de 1954 12 de marzo de 1954, 12 de marzo de 1954. 12 de marzo de 1954.
+B: Bien, bien, bien. Espere, señor, tengo aquí su dirección postal. Solo corríjame si está mal. Es Tulsa Tulsa, Tulsa Tulsa Tulsa, Tulsa Tulsa Tulsa. Y su código postal es Tulsa. ¿Correcto?
+A: No, no, mi dirección es. Mi dirección.
+B: Sí, espere, espere, un minuto por favor.
+A: Bueno, mi dirección es Tulsa Tulsa. Sí. Tulsa. Sí, Tulsa.
+B: Bien, bien. Tulsa Tulsa. Tulsa Tulsa. Tulsa.
+A: Sí, sí, Tulsa Tulsa Tulsa Tulsa Tulsa.
+B: Espere, señor, espere, ya me estoy conectando. Espere, señor. ¿Hola? Sí, un momento, señor, un momento.
+A: Bien.
+B: ¿Hola?
+A: Hola.
+B: ¿Cuál es su dirección postal?
+A: Mi dirección postal es Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa.
+B: Bien.
+A: Mi código postal es Tulsa.
+B: Bien. Y creo que usted tiene con usted una tarjeta médica roja, blanca y azul.
+A: Sí.
+B: ¿Puede traer su tarjeta, por favor?
+A: Sí, un momento, por favor.
+B: ¿Hola?
+A: ¿Hola? Ya la tengo.
+B: ¿Hola? Sí, ya tiene su tarjeta. ¿Cómo se deletrea su apellido?
+A: Es James Moore James Moore James Moore James Moore James Moore James Moore James Moore.
+B: ¿Qué?
+A: No.
+B: ¿Y cuál es su apellido entonces?
+A: My last name is James Moore James Moore James Moore James Moore James Moore James Moore James Moore James Moore.
+B: Bien. Y como le dije, usted califica para recibir todos estos beneficios con una prima de 1.500 dólares 1.500 dólares para usted. Sí. Y como se indicó, usted tiene Medicare A y B y toma sus propias decisiones de atención médica, ¿correcto?
+A: Tiene razón.
+B: Bien, perfecto. ¿Y ha hecho algún tipo de cambio en su plan Medicare en los últimos unos diez minutos unos diez minutos? ¿Algún tipo de cambio?
+A: No.
+B: Bien, perfecto. Y aparte de Medicare, ¿tiene algún beneficio de empleador o de jubilación de un trabajo anterior?
+A: No.
+B: Bien, aparte de Medicare, ¿tiene algún seguro como Contoso Telecom o Contoso Telecom?
+A: No.
+B: Bien, perfecto. Entonces, señor, como le dije, usted califica para recibir todos estos beneficios con una prima de 1.500 dólares 1.500 dólares para usted. Ahora voy a conectar su llamada con uno de mis maestra maestra. Él va a verificar algunos de sus datos y la licencia. Él es el de la licencia. ¿De acuerdo?
+A: Le digo uno de mi número de tarjeta Medicare.
+B: No, no hace falta. No necesito el número de su tarjeta. Usted tiene que dárselo al maestra maestra. ¿De acuerdo?
+A: Ah, bien.
+B: Correcto. Sí. Entonces, querido, antes de conectar su llamada, creo que usted entendió que esta llamada trata de beneficios adicionales de Medicare, ¿correcto?
+A: Correcto.
+B: Y ellos van a tomar sus preciosos unos diez minutos unos diez minutos unos diez minutos unos diez minutos de tiempo para explicarle todo en detalle. ¿De acuerdo?
+A: Bien.
+B: Aquí vamos. Su llamada se está conectando. Por favor, tenga paciencia con ellos. Ahí vamos. Sí. Por favor, quédese en línea, querido. Bien. Usted tiene Contoso Telecom Contoso Telecom maestra maestra como base de Medicare. ¿Tengo el gusto de hablar con James Moore? James Moore James Moore.
+A: Sí.
+B: Hola, James Moore. ¿Cómo está hoy?
+A: Bien por ahora, gracias. ¿Hola? ¿Hola?
+B: Hola. Sí, señor, por favor quédese en línea. Su llamada es muy importante para nosotros. Por favor, permanezca en la línea y será transferido al próximo maestra disponible. Señor, solo tomará unos unos diez minutos unos diez minutos unos diez minutos unos diez minutos conectar su llamada. Señor, quédese en línea. ¿De acuerdo? Su llamada es muy importante para nosotros. Por favor, permanezca en la línea y será transferido al próximo maestra disponible. Su llamada es muy importante para nosotros. Por favor, permanezca en la línea y será transferido al próximo maestra disponible. Se comunicó con Medicare Basics. Le habla maestra maestra maestra James Moore James Moore. ¿Tengo el gusto de hablar con James Moore? Ay, no quiero decirlo mal. James Moore James Moore. James Moore James Moore.
+A: Sí, sí.
+B: ¿Cómo está?
+A: ¿Estuvo bien la primera vez?
+B: Me alegra oírlo. Mi número de productor nacional es 4821. Esta llamada se graba con fines de control de calidad. Y tengo que preguntar: ¿usted toma sus propias decisiones médicas o las toma otra persona por usted? ¿Señor?
+A: No, yo tomo las mías.
+B: Excelente. Excelente. Ahora, yo no ofrezco todo.

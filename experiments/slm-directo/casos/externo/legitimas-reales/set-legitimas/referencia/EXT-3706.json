@@ -1,0 +1,59 @@
+{
+ "case_id": "EXT-3706",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "mencion_sin_pedido",
+ "dificultad": "mencion_sin_pedido",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "cliente",
+ "legitimidad": "legitima",
+ "pedido_sensible": [],
+ "primer_pedido_linea": null,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-71",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Avisa el cambio de líneas analógicas a fibra y fija la visita del técnico; menciona una contraseña de verificación que él mismo anticipa.",
+   "motivo": "cliente",
+   "tipo_legitima": "mencion_sin_pedido",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "falta_final",
+   "notas": "Hay un pedido de nombre y apellido, pero no está entre los datos sensibles de la regla; la llamada se corta sin despedida."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Coordina una visita técnica de migración a fibra y pide nombre y rol en el negocio; avisa de una contraseña de verificación futura, pero no la pide en la llamada.",
+   "motivo": "cliente",
+   "tipo_legitima": "mencion_sin_pedido",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "Promete 1000 por 1000 a 45 dólares; la persona responde sin atención y casi sin entender."
+  },
+  "adjudicado": {
+   "completa": {
+    "valor": "si",
+    "motivo": "Tiene saludo, desarrollo y cierre con agradecimientos de ambos lados."
+   }
+  }
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

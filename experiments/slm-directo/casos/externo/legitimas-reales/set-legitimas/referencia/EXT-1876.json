@@ -1,0 +1,60 @@
+{
+ "case_id": "EXT-1876",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "pedido_razonable",
+ "dificultad": "pedido_razonable",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "seguimiento",
+ "legitimidad": "legitima",
+ "pedido_sensible": [
+  "datos_personales"
+ ],
+ "primer_pedido_linea": 4,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-73",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Llamada por un pedido de dos sedes que no se puede completar por un número de cuenta que figura cancelado; piden que lo busque en la factura.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "pedido_razonable",
+   "pedido_sensible": [
+    "datos_personales"
+   ],
+   "primer_pedido_linea": 4,
+   "completa": "si",
+   "notas": "El dato pedido es el número de cuenta de Internet, visible en su factura; la persona no lo da y dice que consultará."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Llama por un pedido de dos sedes y pide el número de cuenta de Internet, que figura en la factura, para poder completarlo; es un dato razonable del trámite y no pide pago.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "pedido_razonable",
+   "pedido_sensible": [
+    "datos_personales"
+   ],
+   "primer_pedido_linea": 4,
+   "completa": "si",
+   "notas": "La persona no lo da y dice que consultará con la oficina; deja número de devolución."
+  },
+  "adjudicado": {}
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

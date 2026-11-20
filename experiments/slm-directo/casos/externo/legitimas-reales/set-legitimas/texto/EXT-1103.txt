@@ -1,0 +1,19 @@
+A: ¿Hola? ¿Hola?
+B: Sí, ¿me escucha? Habla Michael Anderson.
+A: ¿Cómo está, señora? Ah, soy yo. Hola. Sí, señora. Sí, señora Michael Anderson, solo necesito seis meses seis meses más de su tiempo. Le llamo de vuelta de Contoso Telecom Contoso Telecom Contoso Telecom Contoso Telecom. Usted habló conmigo y estábamos fijando una cita para agregar una promoción a la cuenta para el el 2 de septiembre el 2 de septiembre el 2 de septiembre entre las las tres de la tarde y las las tres de la tarde. ¿Correcto, señora?
+B: No, ¿qué quiere? ¿Qué necesita hacer, señora?
+A: Llamo de Contoso Telecom. Hablé con usted hace seis meses seis meses para avisarle de una promoción pendiente en la cuenta, con la que sus facturas quedarían fijas en $120 dólares. ¿Habla con la señora Michael Anderson?
+B: Sí. ¿Y para qué es la cita? ¿Van a hacer todo el cableado de nuevo, o...?
+A: No, no, señora, déjeme explicarle. Básicamente, ahora usted ya tiene Internet de fibra de Contoso Telecom. Lo que vamos a hacer para el negocio es que mañana haremos una mejora remota desde nuestro lado. No viene ningún camionero, ninguna molestia, ningún cambio de equipos. O sea que simplemente mejoramos desde nuestro lado mañana. Actualmente usted tiene Internet de fibra óptica a una velocidad de 100 megabits por seis meses. Lo vamos a mejorar de forma remota a 300 megabits por seis meses, de subida y de bajada. Una buena noticia: va a mantener el mejor y más barato precio de la fibra de Contoso Telecom, $120 dólares por seis meses, fijo y bloqueado, y la factura empieza mañana, por los próximos seis meses seis meses seis meses seis meses el precio del camionero sigue igual. ¿De acuerdo?
+B: Entonces seis meses seis meses, ¿tengo que hacer un contrato?
+A: No, sin contrato. No hay contrato. Pero de nuestra parte el precio seguirá igual durante seis meses seis meses. ¿De acuerdo? Entonces, señora, antes de continuar con ese pedido, quiero avisarle que esta llamada puede ser grabada por motivos de control de calidad y capacitación, y que según la ley federal de privacidad es derecho y deber de Contoso Telecom proteger la confirmación de su cuenta. ¿Esto es un negocio, un salón, verdad?
+B: Sí. ¿Sabe qué estoy haciendo ahora? Estoy trabajando, así que ustedes llaman demasiado.
+A: Lo sé, señora, solo necesito seis meses seis meses seis meses.
+B: Ya sé, es la cuarta vez.
+A: Lo sé, señora, lo lamento mucho. Esta es la última vez. No volveré a llamar, solo para confirmar los datos de su negocio como Contoso Telecom Contoso Telecom y Albany Contoso Telecom Contoso Telecom Michael Anderson. Todo está correcto. Excelente. Y su nueva factura mensual, le dije que va a ser de $120 dólares por seis meses por esa velocidad de Internet.
+B: Sí, escuché todo.
+A: Tres, esa va a ser su factura fija y bloqueada desde mañana para el Internet. Entonces solo necesito su permiso y consentimiento para hacer el pedido en su nombre, lo que básicamente incluye que yo firme una carta de autorización que me permite aplicar la nueva promoción a su cuenta desde mañana. ¿Puedo tener su sí para eso?
+B: Bien.
+A: Bien, estupendo. Les agradezco mucho su tiempo, señora. Mañana mejoraremos el ancho de banda. Mejoraremos la velocidad de 100 a 300. Nuevo precio, $120 dólares. 120 dólares desde mañana para su servicio, para el negocio, para el Internet. Empezamos eso mañana. Bien, muchas gracias.
+B: Adiós. Adiós.
+A: Bien, adiós. Adiós, señora Michael Anderson.

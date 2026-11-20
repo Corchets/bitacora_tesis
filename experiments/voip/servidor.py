@@ -90,7 +90,7 @@ CORTE_RESPALDO_S = 0.8  # corte del motor cuando el corte es «auto» y el model
 CORTE_MIN_S, CORTE_MAX_S = 0.1, 3.0
 UMBRAL_LLAMADA = 0.003
 # Con 4096 tokens (la evaluación final) el detector deja de consultar a los ~10 minutos de conversación; Gemma 4 E2B
-# admite 131.072. Con 16.384 entran ~50 minutos (docs/evaluacion/CONCLUSIONES-EVALUACION-FINAL.md#contexto).
+# admite 131.072. Con 16.384 entran ~50 minutos (experiments/voip/README.md §3).
 NUM_CTX_DEMO = 16384
 # Opción B de asr-local/PLAN-VOZ-REAL.md §12.9: con filtro Silero, el RMS corta a 0,008 también en la llamada.
 UMBRAL_RMS_POR_ASR = {"parakeet-filtro": 0.008}

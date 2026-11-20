@@ -1,0 +1,60 @@
+{
+ "case_id": "EXT-8726",
+ "grupo": "externo_zona_gris_medicare",
+ "clase": "legitima_dificil",
+ "clase_fuente": "zona_gris",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": null,
+ "dificultad": null,
+ "familia": "comercial",
+ "estrato": "seguros",
+ "motivo": null,
+ "legitimidad": null,
+ "pedido_sensible": [
+  "datos_personales"
+ ],
+ "primer_pedido_linea": 18,
+ "completa": "falta_final",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-01",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "estafa",
+   "justificacion": "Oferta falsa de mejora de Medicare con beneficios gratis; pide datos personales para verificar y deriva a otro agente.",
+   "motivo": "venta_en_frio",
+   "tipo_legitima": null,
+   "pedido_sensible": [
+    "datos_personales"
+   ],
+   "primer_pedido_linea": 18,
+   "completa": "falta_final",
+   "notas": "Promete 89 dólares mensuales; corta en la transferencia."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "dudosa",
+   "justificacion": "Anuncia mejora de Medicare con reembolso mensual, confirma domicilio, pide fecha de nacimiento y transfiere a otro agente; no se ve el cierre.",
+   "motivo": "otro",
+   "tipo_legitima": null,
+   "pedido_sensible": [
+    "datos_personales"
+   ],
+   "primer_pedido_linea": 18,
+   "completa": "falta_final",
+   "notas": "Corta al comenzar el segundo agente."
+  },
+  "adjudicado": {}
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "ZONA GRIS: ninguno de los dos anotadores la marcó legítima (captación de Medicare o esquema que el OIG describe como fraude). No se cuenta como falsa alarma ni como estafa: se informa aparte. Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

@@ -40,7 +40,8 @@ SHA_ALCANCE_RESERVA = "ce2101553c8ee6bafc9c87fcccd01c91b740cd995c49fb967f1dd58b0
 PRINCIPAL = "principal"
 # Huellas del set externo congelado de #144 (PR #181); los textos quedan en custodia, fuera de Git.
 MANIFIESTO_EXTERNO = RAIZ.parents[1] / "docs" / "corpus" / "MANIFIESTO-144-SET-COREANO-2026-11-11.json"
-# Legítimas reales de CallCenterEN (docs/investigacion/FUENTES-LEGITIMAS-REALES.md §8); los textos, en custodia.
+# Legítimas reales de CallCenterEN (docs/investigacion/FUENTES-LEGITIMAS-REALES.md §8); desde el 2026-11-20, también en
+# casos/externo/legitimas-reales.
 MANIFIESTO_LEGITIMAS = RAIZ.parents[1] / "docs" / "corpus" / "MANIFIESTO-LEGITIMAS-REALES-2026-11-18.json"
 MANIFIESTO_ZONA_GRIS = RAIZ.parents[1] / "docs" / "corpus" / "MANIFIESTO-ZONA-GRIS-MEDICARE-2026-11-18.json"
 VISTA_ZONA_GRIS = "aparte: zona gris de Medicare (avisos, no son FA)"
@@ -321,8 +322,8 @@ def preparar_externo(origen: Path, destino: Path, *, manifiesto: Path | None = N
 
 def preparar_legitimas_reales(origen: Path, destino: Path, *, manifiesto_legitimas: Path | None = None,
                               manifiesto_zona_gris: Path | None = None) -> Conjunto:
-    """Las llamadas salientes reales de CallCenterEN, desde la carpeta `sets/` de la custodia (fuera de Git: la fuente
-    prohíbe redistribuir). Ver docs/investigacion/FUENTES-LEGITIMAS-REALES.md §8.
+    """Las llamadas salientes reales de CallCenterEN, desde la carpeta `sets/` de la custodia o desde
+    casos/externo/legitimas-reales (publicadas el 2026-11-20 aunque la fuente prohíbe redistribuir). Ver docs/investigacion/FUENTES-LEGITIMAS-REALES.md §8.
 
     - `set-legitimas`: 33 legítimas de telecomunicaciones; vista principal, cuentan como FA.
     - `set-zona-gris`: 42 de Medicare (seguros y equipamiento médico) que ningún anotador marcó legítimas; van a una
@@ -364,7 +365,7 @@ def main(argv: list[str] | None = None) -> int:
     pp.add_argument("--reserva", type=Path, help="checkout de la rama reserva/test (sin esto, no arma el test)")
     pp.add_argument("--externo", type=Path, help="carpeta de la custodia de #144 (sin esto, no arma el externo)")
     pp.add_argument("--legitimas-reales", type=Path,
-                    help="carpeta sets/ de la custodia de las legítimas reales (sin esto, no arma ese conjunto)")
+                    help="casos/externo/legitimas-reales o la carpeta sets/ de la custodia (sin esto, no arma ese conjunto)")
     pv = sub.add_parser("validar", help="valida un conjunto ya armado")
     pv.add_argument("carpeta", type=Path)
     args = p.parse_args(argv)
