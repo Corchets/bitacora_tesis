@@ -1,0 +1,54 @@
+{
+ "case_id": "EXT-4560",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "cotidiana",
+ "dificultad": "cotidiana",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "seguimiento",
+ "legitimidad": "legitima",
+ "pedido_sensible": [],
+ "primer_pedido_linea": null,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-62",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Reprograma una cita de instalación para la oficina que la persona atiende, confirma que está autorizada a decidir y cierra con un sí al pedido.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "Confirma negocio y correo leyéndolos; no solicita ningún dato nuevo."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Reprograma una cita técnica que ya existía, confirma dirección y correo y pide autorización verbal; no solicita datos de pago ni claves.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "Promete tarjeta de regalo y deja un número de devolución."
+  },
+  "adjudicado": {}
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

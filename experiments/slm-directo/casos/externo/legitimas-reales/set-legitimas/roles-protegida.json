@@ -1,0 +1,134 @@
+{
+ "EXT-1056": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-1103": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-1296": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-1744": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-1839": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-1876": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-2219": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-2580": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-2754": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-3361": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-3706": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-4338": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-4412": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-4414": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-4514": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-4541": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-4560": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-4688": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-4755": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-4798": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-5512": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-6178": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-6617": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-6825": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-7062": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-7247": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-7393": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-7938": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-7998": {
+  "protegida": "B",
+  "origen": "externo"
+ },
+ "EXT-9095": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-9104": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-9491": {
+  "protegida": "A",
+  "origen": "externo"
+ },
+ "EXT-9907": {
+  "protegida": "A",
+  "origen": "externo"
+ }
+}

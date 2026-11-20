@@ -1,0 +1,60 @@
+{
+ "case_id": "EXT-9907",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "pedido_razonable",
+ "dificultad": "pedido_razonable",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "cliente",
+ "legitimidad": "legitima",
+ "pedido_sensible": [
+  "codigo_o_clave"
+ ],
+ "primer_pedido_linea": 12,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-59",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Llamada por una caída de Internet del cliente: ofrece subir la velocidad y le pide que recite un código de cuatro dígitos para verificar una llamada futura.",
+   "motivo": "cliente",
+   "tipo_legitima": "pedido_razonable",
+   "pedido_sensible": [
+    "codigo_o_clave"
+   ],
+   "primer_pedido_linea": 20,
+   "completa": "si",
+   "notas": "Caso límite: el código es un identificador acordado de antemano y derivado de la línea, por eso lo dejo como razonable."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Explica una mejora tras una caída del servicio y pide el código de seguridad que ya había anunciado, formado con dígitos del teléfono del propio negocio; es parte del trámite.",
+   "motivo": "cliente",
+   "tipo_legitima": "pedido_razonable",
+   "pedido_sensible": [
+    "codigo_o_clave"
+   ],
+   "primer_pedido_linea": 12,
+   "completa": "si",
+   "notas": "El precio anunciado es confuso; el código es el de verificación del pedido."
+  },
+  "adjudicado": {}
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

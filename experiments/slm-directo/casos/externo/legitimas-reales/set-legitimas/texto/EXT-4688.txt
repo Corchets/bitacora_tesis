@@ -1,0 +1,23 @@
+A: ¿Hola? Sí, hola.
+B: ¿Cómo está? Buenas tardes. Le habla Robert Davis de Lakeside Group Lakeside Group Lakeside Group. ¿Hablo con el señor Robert Davis?
+A: Sí, soy yo.
+B: Excelente. Hola, Robert Davis. ¿Cómo está hoy, señor?
+A: Estoy bien. ¿Y usted?
+B: No tan mal. Muchas gracias por preguntar. No le voy a quitar mucho tiempo, Robert Davis. Uno de mis camionero llamó hace como dos años dos años y colocó un pedido para usted sobre unas promociones que se agregarían a su cuenta. Solo llamo para hacer una confirmación rápida. El pedido que vamos a colocar es básicamente para ofrecerles una mejora de la velocidad actual de fibra. Usted ya es cliente de Lakeside Group en este momento. Ya tiene Fibra Extra Business, ¿correcto? Veo en su cuenta que tiene Lakeside Group fibra de 100 megabytes de subida y bajada. Lo que les ofrecíamos como cliente es pasarse a las nuevas promociones con el nuevo plan, con la mejora a 1.000 megabytes de subida y 1.000 megabytes de bajada. Eso va a dejar sus facturas mensuales fijas, bloqueadas en $89 dólares dos años dos años por sus servicios de internet con nosotros. Esa promoción va a ser válida durante los próximos dos años dos años de nuestra parte para el negocio.
+A: Bien.
+B: Excelente. Entonces lo iba a colocar a partir del el 20 de enero el 20 de enero el 20 de enero. Eso se hace desde nuestro lado interno; no hay instrucciones que hacer de nuestra parte por ese motivo. Es una mejora de oficina interna. Antes de seguir adelante y completar ese pedido de mi lado, quiero avisarle que esta llamada puede ser grabada con fines de control de calidad y capacitación, según la ley federal de privacidad. Es su derecho y el deber de AT&T proteger su información. Solo usaré parte de su información con usted en esta llamada. Entonces, este es el negocio Lakeside Group Lakeside Group Lakeside Group Lakeside Group, ¿correcto?
+A: Sí.
+B: Su dirección de servicio actual es Springfield Springfield Springfield, Springfield Springfield, Springfield Springfield.
+A: Sí.
+B: Su nombre es Robert Davis y su apellido es Robert Davis. Creo que usted es el dueño y que alguien lo autorizó para ayudarme con los cambios en sus cuentas, ¿correcto?
+A: Sí.
+B: Excelente. Señor Robert Davis, aquí tengo su correo electrónico. Es usuario@example.com usuario@example.com usuario@example.com, ¿correcto?
+A: Sí, lo voy a recibir.
+B: Le envié los detalles del pedido a su correo. Con eso, de mi lado ya estoy prácticamente listo. Lo único que me falta, Robert Davis, es obtener su permiso y consentimiento para continuar con esta parte, que básicamente incluye que yo firme una carta de autorización que me permite colocar el pedido con los cambios en sus servicios para el negocio, como lo conversamos en esta llamada. ¿Me puede dar un sí para eso, Robert Davis?
+A: Sí.
+B: ¿Tiene alguna pregunta para mí sobre el pedido y los cambios que acabo de colocar en sus servicios para el negocio, Robert Davis?
+A: No.
+B: Excelente. Si le surge alguna pregunta, siempre es bienvenido a comunicarse de nuevo con AT&T. Voy a colocar este pedido, a pedido suyo, para la mejora, y se completará en los próximos dos años dos años dos años dos años dos años.
+A: Bien, gracias.
+B: Excelente. Muchas gracias por ser una parte tan importante de Lakeside Group, señor. Que tenga un buen día, señor.
+A: Igualmente. Adiós.

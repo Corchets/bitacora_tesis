@@ -1,0 +1,54 @@
+{
+ "case_id": "EXT-3361",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "cotidiana",
+ "dificultad": "cotidiana",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "cliente",
+ "legitimidad": "legitima",
+ "pedido_sensible": [],
+ "primer_pedido_linea": null,
+ "completa": "falta_final",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-68",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Anuncia una mejora remota al negocio, pregunta nombre y correo y acepta que el cliente se los niegue; no hay presión ni pedido sensible.",
+   "motivo": "cliente",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "falta_final",
+   "notas": "Termina con la transferencia a otra área; el cliente rehusó dar el correo y no insistió."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Informa de una promoción de fibra y confirma nombre del negocio, ciudad y rol; pide un correo, que la persona rechaza, y avisa de una transferencia; sin datos de pago ni claves.",
+   "motivo": "cliente",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "falta_final",
+   "notas": "Queda cortado al anunciar la transferencia a otro departamento."
+  },
+  "adjudicado": {}
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

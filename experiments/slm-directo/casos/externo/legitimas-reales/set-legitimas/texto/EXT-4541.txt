@@ -1,0 +1,26 @@
+A: ¿Hola? ¿Hola?
+B: Sí, hola, buenos días. Habla Susan White de Contoso Telecom. ¿Cómo está?
+A: Estoy bien, Susan White. Tenemos Contoso Telecom.
+B: Lo sé, señora. Esta llamada es básicamente por la cuenta que usted usa para la línea telefónica o la facturación de Internet del negocio. Solo quiero confirmar los detalles de la cuenta. Debido a eso, su promoción está un poco desactualizada, así que su factura va a seguir fluctuando. Por eso solo quiero confirmar que es Contoso Telecom Contoso Telecom Contoso Telecom Contoso Telecom. ¿Estoy en lo correcto?
+A: Más o menos. Sí.
+B: Sí. Y ustedes están ubicados en Springfield Springfield Springfield Springfield y el código postal es Springfield.
+A: Es correcto. Sí.
+B: Bien. Y además, señora, el motivo es que vamos a hacer simplemente una mejora remota y agregar la nueva promoción a su cuenta. Entonces, solo como referencia de la llamada, esta llamada se graba con fines de calidad y capacitación, conforme a la ley federal de privacidad. Es su derecho y mi deber proteger la información de su cuenta. Entonces, Susan White, ¿con quién tengo el gusto de hablar hoy?
+A: Susan White.
+B: Susan White. ¿Y el apellido?
+A: Usted debería tenerlo en el registro.
+B: Bien, perfecto, señora. Entonces el motivo es que, señora, justo después de esta llamada, me gustaría enviarle todos los detalles también en un formulario reciente. Y esta llamada se graba con fines de calidad y capacitación, conforme a la ley federal de privacidad. Es su derecho y su deber proteger la información de su cuenta. Tengo su dirección de correo electrónico en el archivo de su cuenta. Es usuario@example.com usuario@example.com. usuario@example.com. ¿Es correcto?
+A: Es correcto. Sí.
+B: Y su nombre completo es Susan White Susan White Susan White, ¿cierto?
+A: Sí.
+B: Perfecto, señora. Y usted es la maestra y la maestra del negocio. ¿Estoy en lo correcto?
+A: Sí.
+B: Perfecto, señora. Entonces lo único, señora, es que si nuestro Contoso Telecom Contoso Telecom la llama por casualidad para confirmar los detalles de la cuenta, le va a pedir un código de seguridad, para saber que está llamando a la persona correcta. Entonces el código es... Espero que recuerde los últimos cuatro dígitos de su línea telefónica principal. Eso es clave1234 clave1234 por ahora. ¿Correcto?
+A: Bien.
+B: Perfecto, señora. Ya estoy listo. Terminé de mi parte. Vamos a hacer simplemente una mejora remota de su velocidad de 100 a 300. Su promoción sigue al precio más barato. Es $89 dólares tres semanas tres semanas durante los próximos tres semanas tres semanas. Bien. Señora Susan White,
+A: ¿No va a subir mi prima... digo, mis costos?
+B: No, no. Su cuenta sigue con el precio más barato. Su costo no va a subir respecto de los precios actuales.
+A: ¿De verdad? ¿Cómo?
+B: Eso es 89 dólares 89 dólares. Entonces sigue con el precio más barato. ¿Qué tiene, como 95 tres semanas tres semanas fijo y?
+A: Tengo que irme. Adiós.
+B: ¿Hola?

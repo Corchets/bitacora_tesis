@@ -1,0 +1,48 @@
+A: ¿Hola? ¿Hola?
+B: Hola. Hola, le habla Linda Wilson. ¿Cómo está hoy? Bien, el motivo de mi llamada es avisarle que su seguro Medicare se está mejorando y usted es elegible para algunos beneficios adicionales en su plan Medicare actual. Y eso sin costo adicional para usted. Espero que le parezca bien.
+A: Me parece muy bien.
+B: Bueno, señor, después de esta mejora, todos sus gastos van a quedar cubiertos por su Medicare Parte A y Medicare Parte Linda Wilson.
+A: Qué día feliz.
+B: Bueno, señor, para esta mejora creo que usted tiene activas tanto la Parte A como la Parte Linda Wilson. ¿Correcto?
+A: Correcto, correcto.
+B: Bien. Y también creo que usted toma sus propias decisiones respecto de Medicare.
+A: Correcto.
+B: Bien. Bien. ¿Recibe algún tipo de bono complementario o beneficio de jubilación de su trabajo anterior?
+A: No.
+B: Bien. Lo último que necesito verificar: ¿hizo algún cambio en su plan Medicare en los últimos dos años dos años?
+A: No.
+B: Bien, entonces usted es totalmente elegible para recibir todos estos beneficios con una prima de 1.500 dólares 1.500 dólares. ¿Me puede ayudar con el código postal de su zona?
+A: ¿Código postal? Señor, ¿mi código postal? Springfield.
+B: Bien. Es Springfield. Bien. Correcto. Bien. ¿Y cómo se deletrea su nombre?
+A: Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson. No.
+B: Bien. ¿Es Linda Wilson?
+A: Linda Wilson fraude.
+B: Y su inicial del segundo nombre es Linda Wilson. ¿Estoy en lo cierto?
+A: Sí.
+B: Bien. Y tengo aquí su fecha de nacimiento. Corríjame si me equivoco. Es 12 de marzo de 1954 12 de marzo de 1954, 12 de marzo de 1954. ¿Correcto?
+A: Correcto.
+B: Bien.
+A: 12 de marzo de 1954 12 de marzo de 1954, 12 de marzo de 1954, 12 de marzo de 1954.
+B: Y señora, tengo su dirección postal. Es Springfield
+A: Springfield Springfield Springfield Springfield.
+B: Y de nuevo, su código postal es Springfield, ¿correcto, señora?
+A: Correcto.
+B: Bien, está perfecto, señora. Bien, solo un momento. Usted nació en 12 de marzo de 1954. Bien, señora, lo que voy a hacer es conectar esta llamada con este cajera cajera, señora, que será de su misma zona y con el mismo código postal. Él será la persona indicada para contarle sobre este beneficio actualizado y cuándo y cómo recibirá los papeles. Bien, señora. Bien. Estoy en línea conectando su llamada. Y asegúrese, señora, de tener a mano su tarjeta de Medicare mientras habla con todos los agentes con licencia. De acuerdo. Bien, ¿tiene a mano su tarjeta de Medicare? ¿Podría buscarla? Estoy en línea.
+A: No. Ah, aquí está. Espere un momento. Estoy buscando mi libreta. La moví.
+B: Bien. Para usted. Yo estoy aquí en línea nada más. Tómese su tiempo.
+A: Como ganador del la feria del condado la feria del condado en Springfield, ¿conoció al señor Linda Wilson y a su cajera cuando estuvieron en Springfield?
+B: ¿Hola? Sí, señora, ¿consiguió su tarjeta?
+A: Sí, la tengo. Bien. ¿Quiere un número o algo?
+B: No, no, no lo quiero. Señora, tiene que ayudarme con este cajera cajera con licencia de su zona.
+A: Bien. Bien.
+B: Usted tiene esa tarjeta de color rojo, blanco y azul, ¿correcto?
+A: Correcto. La estoy mirando ahora mismo.
+B: Sí. Quédese en línea, señora. Estoy conectando su llamada con cajera cajera ahora mismo. Bien. Bien. Le agradezco mucho su amabilidad y paciencia, señora.
+A: Aquí también y miembros de la Contoso Telecom y ellos también muy fuertemente. Dos de ellos especialmente muy.
+B: Su llamada es muy importante para nosotros. Por favor, permanezca en la línea y será transferida al próximo cajera disponible. Bien, solo espere un momento. Estoy conectando su llamada. Bien. Bien, solo un momento.
+A: Sí, ¿tiene cómo votaron? Tenemos toda la información. ¿Puede conseguirme esa información? ¿La trajo con usted?
+B: Bien, señora Linda Wilson, creo que nuestro cajera cajera está ocupado ahora, ¿puedo devolverle la llamada?
+A: Sí.
+B: Bien, entonces señora, ¿qué hora es? ¿Le parece bien si le devuelvo la llamada en dos años dos años dos años? dos años dos años dos años?
+A: Está bien, siempre que no me llame después de las las diez de la mañana las diez de la mañana las diez de la mañana las diez de la mañana las diez de la mañana.
+B: Bien. Seguro, señora. Antes de eso nada más. Voy a llamar. Bien. Bien. Le agradezco mucho su amabilidad y paciencia, señora. Que tenga un buen día. Hasta entonces, ¿de acuerdo?

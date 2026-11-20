@@ -1,0 +1,68 @@
+A: Hola.
+B: Hola, señora, me llamo Linda Wilson. La llamo de BlueRiver Medical BlueRiver Medical. ¿Cómo está hoy?
+A: Estoy un poco... Estoy mejor ahora.
+B: Ah, qué bueno. Entonces, querida, el motivo de mi llamada es avisarle que hoy se está actualizando su Medicare y que usted además califica para recibir algunos beneficios adicionales de Medicare sin costo adicional para usted. Espero que le parezca bien, señorita.
+A: Sí.
+B: Para esta actualización creo que usted tiene tanto la Parte A como la Parte B de Medicare.
+A: Sí, la tengo, no hace mucho que la tengo, creo.
+B: Bien. ¿Y usted toma sus propias decisiones sobre su Medicare? ¿Estoy en lo correcto?
+A: Bueno.
+B: Bien. Señora, para confirmar, ¿me puede ayudar? ¿Cuál es su código postal?
+A: Espere un momento, un momento. Sí.
+B: ¿Está bien ahora, señora?
+A: Sí. Albany.
+B: ¿Me lo puede repetir?
+A: Es Albany. Albany Resurrection.
+B: Su código postal, señora, es Albany.
+A: Sí. Albany Albany.
+B: Bien. Bien, por favor. Albany. ¿Y usted vive en Albany? ¿Estoy en lo correcto, señora?
+A: ¿Eh?
+B: ¿Usted vive en Albany? Albany, Albany.
+A: Sí.
+B: Bien, ¿y cómo se escribe su apellido?
+A: Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson.
+B: Bien, ¿y cómo se escribe su nombre?
+A: Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson, Linda Wilson.
+B: ¿Linda Wilson?
+A: Sí.
+B: Bien, y señorita Linda Wilson... Bien, y señora, los beneficios a los que usted tiene derecho hoy incluyen sus copagos de maestra, sus copagos de especialistas y muchos más. También cubrirá sus beneficios dentales, de visión, de audición y de transporte. Y también recibirá un beneficio de copago de medicamentos, así que cuando vaya a la farmacia no tendrá que pagar por sus recetas. Y lo mejor de todo, señora, es que 1.500 dólares 1.500 dólares de prima para usted. No tiene que pagar nada. Espero que le parezca bien, señorita Linda Wilson.
+A: Ah, me parece muy bien. Gracias, gracias, gracias. La quiero por esto.
+B: Bien, señora, para esta confirmación creo que su residencia principal es Albany Albany Albany Albany Albany Albany, con el código postal Albany, ¿correcto?
+A: Correcto. Sí.
+B: Bien. Y señora Linda Wilson, ¿cuál es su fecha de nacimiento?
+A: El dos años dos años, el dos años dos años. 21 de octubre de 1958 dos años. 21 de octubre de 1958 21 de octubre de 1958 21 de octubre de 1958.
+B: ¿Y tiene algún beneficio de empleador o de jubilación de su trabajo anterior?
+A: No.
+B: Bien. ¿Y hizo algún cambio en su Medicare en los últimos dos años dos años?
+A: No.
+B: Bien. Entonces, querida, por lo que veo aquí, usted califica totalmente para recibir todos estos beneficios. Entonces, señora, lo que voy a hacer es pasar rápidamente su llamada a mi maestra maestra maestra, que va a verificar algunos datos básicos suyos. Y van a pasar su llamada al maestra maestra que es de su misma ciudad, con el mismo código postal. Solo se van a tomar sus dos años dos años dos años dos años anteriores para explicarle todo en detalle y le dirán cuándo y cómo va a recibir la documentación para que pueda leer sobre los beneficios. Espero que le parezca bien, señorita.
+A: Sí.
+B: Y señora, lo último que tengo que preguntarle: ¿tiene con usted su tarjeta de Medicare roja, blanca y azul? ¿Puede traerla, si le es posible, para que yo pueda pasar esta llamada al maestra maestra?
+A: ¿Cuánto tiempo?
+B: Sí, señora, ya la agregamos. ¿Ya la tiene?
+A: Bueno. Bueno.
+B: Ya la tiene, señora. Entonces, señora, por lo que veo aquí, usted califica totalmente. Así que voy a pasar su llamada al maestra maestra que es de su misma ciudad, con el mismo código postal. Y señora, solo se van a tomar sus dos años dos años dos años dos años anteriores para explicarle todo en detalle y le enviarán su documentación. ¿De acuerdo?
+A: Sí. De acuerdo, gracias.
+B: Y antes de pasar esta llamada, creo que usted entendió bien que esta llamada trata de sus beneficios adicionales de Medicare. ¿De acuerdo?
+A: De acuerdo, gracias. Sí.
+B: Entonces, señora, de verdad aprecio su tiempo y su paciencia, su llamada se está transfiriendo. Por favor, permanezca en la línea. Sí, señora, por favor quédese en línea.
+A: De acuerdo. ¿Hola?
+B: Por favor, quédese en línea. Señora, de verdad aprecio su tiempo y su paciencia. Gracias. Que tenga un buen día.
+A: Sí.
+B: ¿Hola, señorita?
+A: ¿Hola, señor? ¿maestra?
+B: Sí. Espere, señora, por favor quédese en línea. Hola, se comunicó con BlueRiver Medical BlueRiver Medical. Le habla maestra maestra Linda Wilson Linda Wilson. ¿Tengo el gusto de hablar con Linda Wilson?
+A: Sí.
+B: Hola, Linda Wilson. Veo que usted está en Albany, ¿es correcto?
+A: Sí.
+B: Bien, en realidad no tengo licencia en Albany, así que haré que un maestra con licencia en Albany se comunique con usted.
+A: Bueno. Está bien. Gracias.
+B: De nada. Que esté bien.
+A: Usted también.
+B: Por favor, quédese en línea. Señora, de verdad aprecio su tiempo y su paciencia. Por favor, quédese en línea. Hola, Linda Wilson, disculpe, pero no podemos completar.
+A: Hola.
+B: Por favor, por favor, quédese en línea.
+A: Estoy en línea.
+B: Bien, señora. Entonces lo que voy a hacer, señora, es devolverle la llamada, porque el maestra maestra de Albany no está disponible.
+A: Ah, bueno.
+B: Sí, señora. Que tenga un día bendecido. Gracias por su amabilidad.

@@ -1,0 +1,95 @@
+A: ¿Aló? ¿Aló?
+B: Sí, hola, buenos días. Por cierto, me llamo Susan White. Llamo de Contoso Telecom Contoso Telecom. ¿Cómo va su día?
+A: Bien, gracias.
+B: Muy bien, me alegra oírlo, señora. Y por cierto, señora, el motivo por el que la llamamos ahora es que esta es solo una llamada rápida de seguimiento sobre sus beneficios adicionales sin costo para usted. Creo que usted es titular de Medicare con la Parte A y... Muy bien, señora, como usted es titular de Medicare, ahora califica plenamente para recibir sus beneficios adicionales de Medicare. Y para poder procesarlo, solo tengo que verificar rápidamente su información que se envió. ¿De acuerdo?
+A: Bien.
+B: Muy bien, para verificar, señora, el mejor número de teléfono al que puedo llamarla si se corta la llamada es el (555) 013-2741, ¿correcto?
+A: Sí.
+B: Muy bien, aparte de este número, señora, ¿tiene algún otro número de teléfono? Muy bien, entonces, ¿me puede dar su nombre, por favor?
+A: Susan White.
+B: Bien, Susan White, Susan White se escribe con Susan White Susan White, Susan White Susan White Susan White Susan White, ¿correcto?
+A: Sí.
+B: Muy bien, Susan White, ¿y su apellido? ¿Cómo se escribe el apellido?
+A: Susan White.
+B: Muy bien, se escribe con Susan White Susan White, Susan White Susan White Susan White Susan White Susan White este Susan White Susan White Susan White Susan White Susan White Susan White Susan White Susan White Susan White Susan White Susan White, ¿correcto?
+A: Sí.
+B: Muy bien, Susan White, solo para saber, ¿cuántos años tiene?
+A: 58.
+B: Ah, 58, Susan White. Pero créame o no, su voz suena muy joven. No suena como si lo fuera. Y es mejor que lo tome como un cumplido. ¿Bien?
+A: Gracias.
+B: Muy bien, Susan White, ¿me puede dar también su fecha de nacimiento, por favor? ¿Su cumpleaños?
+A: 21 de octubre de 1958 21 de octubre de 1958, 21 de octubre de 1958.
+B: Muy bien, ya lo tengo. Entonces, Susan White, aparte de Medicare, ¿tiene algún otro seguro médico además? Como Contoso Telecom, Contoso Telecom Contoso Telecom, Contoso Telecom Contoso Telecom o Contoso Telecom Contoso Telecom, Contoso Telecom y Medicaid. Muy bien, Susan White, por supuesto necesito revisar su elegibilidad en mi sistema para asegurarnos de cuáles son los mejores beneficios para usted. Entonces, Susan White, como puedo ver aquí, usted tiene presión alta presión alta presión alta, ¿correcto?
+A: Sí.
+B: Muy bien, Susan White, ¿tiene a mano su tarjeta de Medicare? ¿Su tarjeta roja, blanca y azul?
+A: No, no la tengo.
+B: ¿Pero hay alguna forma de que pueda conseguirla? Esperaré con paciencia en la línea.
+A: No la tengo conmigo ahora.
+B: Muy bien, está bien, Susan White. Tenemos otra opción para revisar su elegibilidad, Susan White, no se preocupe. Podemos usar su número de identificación antiguo de Medicare, que es su número de Seguro Social. ¿Se lo sabe de memoria?
+A: 5KQ9-RT2-WN41. Perdón, es 5KQ9-RT2-WN41. 5KQ9-RT2-WN41. 5KQ9-RT2-WN41.
+B: Sí. Muy bien, es 5KQ9-RT2-WN41, ¿correcto?
+A: Sí.
+B: Muy bien, Susan White, permanezca en la línea. Estoy revisando su elegibilidad en mi sistema. Bien. Muy bien, Susan White, como usted tiene presión alta presión alta presión alta, permítame preguntarle quién es su buen maestra que la está atendiendo ahora. Su maestra maestra maestra,
+A: Susan White. Susan White.
+B: ¿Perdón?
+A: Susan White.
+B: Susan White, Susan White Susan White Susan White, Susan White, Susan White Susan White. Susan White. Susan White Susan White.
+A: Susan White.
+B: Susan White Susan White
+A: Susan White Susan White, Susan White.
+B: Muy bien, este es el apellido, ¿correcto?
+A: Sí.
+B: ¿Y de qué estado es usted ahora, señora?
+A: Springfield.
+B: Muy bien, permanezca en la línea. Muy bien, permanezca en la línea, señora. Estoy revisando. Bien, ¿su maestra es mujer o mujer?
+A: mujer.
+B: mujer. Bien, ¿en qué ciudad está? ¿En qué ciudad está? ¿En Springfield?
+A: Springfield. Springfield. Bien.
+B: Muy bien, ¿es...? Su maestra es Susan White. Susan White Susan White?
+A: Sí.
+B: Muy bien, ya lo tengo. Entonces, señora Susan White, quiero confirmar que usted tiene presión alta presión alta presión alta y que toma medicamentos para eso, ¿correcto?
+A: Sí.
+B: Muy bien, señora, para verificar, usted está ubicada en Springfield
+A: Springfield Springfield Springfield, Springfield, Springfield Springfield.
+B: Muy bien, señora, como usted tiene presión alta presión alta presión alta, ahora califica plenamente para recibir un presión alta una cirugía de rodilla una cirugía de rodilla cubierto por Medicare. Este presión alta una cirugía de rodilla una cirugía de rodilla, señora, sirve para determinar si usted está potencialmente en riesgo de desarrollar presión alta, dado que tiene presión alta presión alta presión alta y toma medicamentos para eso. Entonces, señora Susan White, lo bueno de esto es que es gratis. Lo cubre su seguro, así que no tiene que pagar nada. Y al mismo tiempo es beneficioso para usted y su familia, porque puede avisarles que, si esto es algo que corre en la sangre de la familia, ellos también podrían tenerlo en un futuro cercano, ¿verdad?
+A: Sí.
+B: Bien, entonces hagamos esto en línea grabada. Solo tiene que responderme sí o no. Entonces, de nuevo, Susan White, me llamo Susan White y llamo de Contoso Telecom Contoso Telecom Contoso Telecom en una línea grabada. Esta es una llamada de seguimiento sobre sus beneficios a través de su seguro, sin costo para usted. Hace poco se habilitaron algunos beneficios nuevos para los que usted califica. Lamento mucho preguntarle otra vez, señora, pero usted tiene presión alta presión alta presión alta, ¿correcto?
+A: Sí.
+B: Y lamento mucho oír eso. Pero hay un una cirugía de rodilla una cirugía de rodilla para el que usted califica, para determinar si su presión alta presión alta viene de los genes o de una condición externa. Si tiene presión alta presión alta por los genes, puede avisar a sus familiares que esto es algo que corre en la familia y también tomar medidas de atención preventiva con su maestra. Entonces, Susan White, esta prueba es un una cirugía de rodilla una cirugía de rodilla sencillo que busca muchos tipos de presión alta presión alta a los que usted podría estar genéticamente predispuesta. ¿Bien?
+A: Me han prometido esto durante seis meses y nunca lo he recibido.
+B: No se preocupe, señora, porque esta vez se lo vamos a dar. ¿De acuerdo? Muy bien. Solo muestre interés en esto. ¿Bien, Susan White?
+A: Sí.
+B: Sí. Entonces, Susan White, este kit de una cirugía de rodilla una cirugía de rodilla se enviará por correo a su casa. Solo tiene que pasar un hisopo por el interior de la boca para tomar saliva y devolverlo en el sobre prepago que se incluye. Y de nuevo, no tiene costo para usted. Entonces, si le pregunto, Susan White, ¿alguna vez se ha hecho un presión alta una cirugía de rodilla una cirugía de rodilla? ¿Sí o no?
+A: No.
+B: Muy bien. Y permítame verificar su información en la línea grabada. Nombre y apellido: Susan White Susan White. Fecha de nacimiento: 21 de octubre de 1958, 21 de octubre de 1958, ¿correcto?
+A: Sí.
+B: Y de nuevo, Susan White, usted está ubicada en Springfield Springfield Springfield Springfield, Springfield, Springfield Springfield, ¿correcto?
+A: Sí.
+B: Puede que le pregunten, Susan White, qué edad tenía cuando le diagnosticaron presión alta presión alta presión alta. Aproximadamente algo como 58, 58, 58, 58. Bien. ¿Y hay alguien en su familia a quien le hayan diagnosticado presión alta presión alta presión alta, presión alta presión alta o presión alta presión alta, como su hija? Y aparte de su hija, ¿qué hay de su mamá y su papá, sus hermanos y hermanas, sus abuelos?
+A: ¿Mi mamá?
+B: Bien, lo lamento mucho. Entonces déjeme anotar eso. Y para verificar de nuevo, el nombre de su maestra es Susan White. Susan White Susan White. Este maestra está ubicado en Springfield Springfield Springfield Springfield, Springfield, Springfield Springfield. ¿Correcto?
+A: Sí.
+B: Muy bien. Y si le pregunto, señora, ¿cuál es su color favorito?
+A: Verde.
+B: Verde. Bien. Y permítame preguntarle, por si se corta la llamada, ¿cuál es el mejor momento para volver a llamarla? ¿En la mañana, la tarde, la noche o a cualquier hora?
+A: En la tarde.
+B: En la tarde. Bien. Muy bien. Muy bien, perfecto. Ya casi terminamos. Entonces, muy bien. Parece que tenemos toda la información que necesitamos para procesar su solicitud. Ahora, al enviar esta información, usted acepta hacerse un presión alta una cirugía de rodilla una cirugía de rodilla como beneficio a través de su seguro. ¿Es correcto?
+A: Sí.
+B: El siguiente paso es recibir una llamada de Contoso Telecom Contoso Telecom. Le llamarán a este número al que acabo de llamarla. ¿De acuerdo?
+A: Sí.
+B: Entonces quiero confirmar con usted que se está inscribiendo oficialmente para recibir información y una llamada de seguimiento sobre este presión alta y una llamada de seguimiento sobre presión alta una cirugía de rodilla una cirugía de rodilla. ¿Bien? Bien. Entonces, al decir sí ahora, usted acepta una llamada de seguimiento sobre este tema, Susan White?
+A: Sí.
+B: Entonces, para su seguridad y verificación, su color favorito aquí es clave1234, ¿correcto?
+A: Sí.
+B: Así sabrá que son nuestros Contoso Telecom Contoso Telecom los que la llaman, porque ellos sabrán su color favorito, que es clave1234. Considere clave1234 como la contraseña de esta conversación. ¿De acuerdo?
+A: Bien.
+B: Muy bien. Ahora voy a enviar su información y Contoso Telecom Contoso Telecom la llamará en breve para procesar su pedido. Entonces, señora, ¿tiene alguna pregunta para mí antes de dejar su solicitud en curso?
+A: No, no tengo.
+B: Muy bien, Susan White, antes de dejarla en la línea, permítame recordarle de nuevo que alguien la llamará. Y son nuestros Contoso Telecom Contoso Telecom. La llamarán después de esta llamada. Así que mantenga su línea libre, ¿de acuerdo?
+A: Bien.
+B: Así sabrá que son Contoso Telecom Contoso Telecom porque ellos sabrán su color favorito, que es clave1234. Usted solo dígales que le interesa recibir un presión alta una cirugía de rodilla una cirugía de rodilla. ¿De acuerdo?
+A: Bien.
+B: Muchas gracias por su tiempo, señora. Que tenga un buen día, y mantenga las piernas en alto, y felices fiestas.
+A: Felices fiestas.
+B: Y espere una llamada de nuestro Contoso Telecom Contoso Telecom. ¿De acuerdo?
+A: Bien. Muy bien. Gracias, señora.

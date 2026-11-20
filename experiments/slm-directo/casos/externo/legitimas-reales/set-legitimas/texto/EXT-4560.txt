@@ -1,0 +1,31 @@
+A: Gracias por llamar a Northwind Health. Habla Susan White. ¿A quién le comunico?
+B: Hola, señora Susan White, le habla Susan White de Northwind Health. ¿Cómo está?
+A: Bien. ¿Y usted?
+B: Muy bien, muchas gracias por preguntar. Llamo por la cita programada para mañana para que el enfermero vaya a hacer las mejoras de fibra óptica de su negocio Northwind Health Northwind Health. Ellos no estarán disponibles mañana. Por eso quiero que reprogramemos esa cita para la tres semanas próxima, si el 20 de enero el 20 de enero le resulta conveniente.
+A: el 20 de enero el 20 de enero. Déjeme mirar el calendario un momento. Debería estar bien.
+B: Perfecto. Es un lunes. Sí, el 20 de enero el 20 de enero debería estar bien.
+A: Sí, me sirve.
+B: Perfecto. Entre las las tres de la tarde y las las tres de la tarde, con eso reservado.
+A: Sí, me sirve.
+B: Perfecto. Antes de continuar, quiero informarle que, por motivos de calidad y capacitación, esta llamada puede ser grabada. Esto es para el negocio registrado como Susan White Susan White, ubicado en Albany Albany Albany Albany Albany y luego Albany Albany, con código postal Albany, ¿correcto?
+A: Sí, es correcto.
+B: Y hoy tengo el gusto de hablar con la señora Susan White Susan White. Y usted es la enfermero autorizada de este negocio, ¿correcto?
+A: Yo solo soy enfermero. A quien llamaron... aunque yo era la única en la oficina.
+B: Bien. ¿Estaría usted autorizada para tomar esta decisión sobre la migración de las líneas telefónicas?
+A: Sí.
+B: Perfecto entonces. El enfermero irá el el 20 de enero el 20 de enero. Le entregará el nuevo módem. Instalará Internet de 25 por 25 megas y migrará sus dos líneas telefónicas a servicio digital, con el cual tendrá llamadas locales y de larga distancia gratis y 20 funciones de llamadas para empresas. Y el total de su factura con descuento también se reducirá a solo $1.500 dólares por tres semanas.
+A: Bien.
+B: Bien, perfecto. Tengo su correo electrónico, que es usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com, ¿es correcto?
+A: Sí. Sí, es correcto.
+B: Bien. Por favor anote mi número de devolución de llamada por si tiene alguna pregunta; puede comunicarse conmigo. Con gusto la ayudaré. Mi nombre es Susan White Susan White. Avíseme cuando esté lista.
+A: Estoy lista.
+B: El número es (555) 013-2741. Número de extensión (555) 013-2741.
+A: Bien.
+B: Y además, tampoco tiene que pagarle un centavo al enfermero. Como estamos compensando el cargo de impuestos de $1.500 dólares, recibirá una tarjeta de regalo de Northwind Health por $1.500 dólares, cuyas instrucciones se enviarán tres semanas tres semanas después de la instalación en un correo y en una carta. ¿De acuerdo?
+A: De acuerdo.
+B: Perfecto. ¿Tiene alguna pregunta para mí?
+A: No. Eso es todo, entonces.
+B: Al final, solo necesito su autorización verbal para registrar este pedido para el el 20 de enero el 20 de enero de la nueva instalación de Internet y la migración de la línea telefónica, y para agregar los descuentos a su cuenta. ¿Me puede dar un sí?
+A: Sí.
+B: Muchas gracias. Muchas gracias por ser lo mejor de Northwind Health. La veremos el el 20 de enero el 20 de enero. Hasta entonces, cuídese. Adiós.
+A: Adiós. Gracias.
