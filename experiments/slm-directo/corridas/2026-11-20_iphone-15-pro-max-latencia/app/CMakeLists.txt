@@ -15,7 +15,7 @@ endif()
 add_executable(DetectorLab MACOSX_BUNDLE main.mm)
 target_compile_features(DetectorLab PRIVATE cxx_std_17)
 target_link_libraries(DetectorLab PRIVATE ${BIBLIOTECAS}
-    "-framework UIKit" "-framework Foundation" "-framework Metal" "-framework MetalKit" "-framework Accelerate")
+    "-framework UIKit" "-framework Foundation" "-framework CoreGraphics" "-framework Metal" "-framework MetalKit" "-framework Accelerate")
 set_target_properties(DetectorLab PROPERTIES
     MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist"
     XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER "${BUNDLE_ID}"

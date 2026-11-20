@@ -40,6 +40,11 @@ static void * muestrear(void *) {
     FILE * f = fopen("recursos.log", "w");
     NSISO8601DateFormatter * fecha = [NSISO8601DateFormatter new];
     fecha.timeZone = NSTimeZone.localTimeZone;
+    if (f) {
+        fprintf(f, "# memoria_fisica_kb=%llu nucleos=%lu sistema=%s\n", NSProcessInfo.processInfo.physicalMemory / 1024,
+                (unsigned long) NSProcessInfo.processInfo.processorCount,
+                NSProcessInfo.processInfo.operatingSystemVersionString.UTF8String);
+    }
     while (f) {
         task_vm_info_data_t v = {};
         mach_msg_type_number_t n = TASK_VM_INFO_COUNT;

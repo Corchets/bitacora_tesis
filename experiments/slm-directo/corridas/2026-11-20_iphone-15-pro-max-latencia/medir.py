@@ -32,7 +32,8 @@ def devicectl(*args, salida_json=False):
     """`xcrun devicectl ...`; con salida_json devuelve el JSON que escribe devicectl."""
     with tempfile.NamedTemporaryFile(suffix=".json") as tmp:
         extra = ["--json-output", tmp.name] if salida_json else []
-        r = subprocess.run(["xcrun", "devicectl", *args, *extra], text=True, capture_output=True)
+        # --json-output va antes del resto: en `launch`, lo que sigue a `--` es para la app.
+        r = subprocess.run(["xcrun", "devicectl", *extra, *args], text=True, capture_output=True)
         if r.returncode:
             raise SystemExit(f"devicectl {' '.join(args)}: {r.stdout}{r.stderr}")
         return json.loads(Path(tmp.name).read_text()) if salida_json else r.stdout
@@ -63,7 +64,7 @@ def main():
     proxy = None
     if not a.local:
         lanzada = devicectl("device", "process", "launch", "--device", a.dispositivo, "--terminate-existing",
-                            a.bundle, *BASE_SERVIDOR, *extra, salida_json=True)
+                            "--", a.bundle, *BASE_SERVIDOR, *extra, salida_json=True)
         medir["pid"] = lanzada["result"]["process"]["processIdentifier"]
         proxy = subprocess.Popen(["iproxy", "-u", a.dispositivo, f"{PUERTO}:{PUERTO}"],
                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -108,8 +109,7 @@ def main():
             "tipo": detalles.get("hardwareProperties", {}).get("productType"),
             "sistema": detalles.get("deviceProperties", {}).get("osVersionNumber"),
             "compilacion": detalles.get("deviceProperties", {}).get("osBuildUpdate"),
-            "memoria_bytes": detalles.get("hardwareProperties", {}).get("physicalMemory"),
-        }
+        }  # la memoria física la anota la app en la primera línea de recursos.log
         devicectl("device", "process", "terminate", "--device", a.dispositivo, "--pid", str(medir["pid"]))
 
     # El ejecutor es el del A56: corrige en el manifiesto lo que es de esta corrida.

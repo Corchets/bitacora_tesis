@@ -6,9 +6,10 @@ Max de Mateo, comparable con las del Samsung Galaxy A56
 ([2026-11-10](../2026-11-10_a56-congelada-latencia/README.md) y [2026-11-11](../2026-11-11_a56-latencia-172/README.md)).
 **Mide latencia y memoria, no detección.** No cierra D08 ni D09.
 
-> **Estado al 2026-11-20: preparado y probado en seco en la Mac. Falta la corrida en el teléfono.** No hay ningún
-> número del iPhone todavía. Para compilar e instalar la app hace falta Xcode en la Mac, que no estaba instalado, y
-> varios pasos que solo puede hacer Mateo ([lista](#qué-tiene-que-hacer-mateo-a-mano)).
+> **Estado al 2026-11-20: la app compila para iOS, sin firmar. Falta la corrida en el teléfono.** No hay ningún número
+> del iPhone todavía. Xcode 27.2 ya está instalado y el iPhone (iOS 27.0.1) está emparejado por cable con el modo de
+> desarrollador activo; falta el certificado de desarrollo de la cuenta de Apple de Mateo para firmar e instalar
+> ([lista](#qué-tiene-que-hacer-mateo-a-mano)).
 
 ## Cómo se mide
 
@@ -97,8 +98,8 @@ resumen funcionan. **No es una medición del teléfono** y sus tiempos no van a 
 - **Temperatura:** iOS no da la temperatura a una app; se anota el estado térmico (`nominal`, `fair`, `serious`,
   `critical`) cada 5 s.
 - Seis conversaciones y una pasada por configuración: alcanza para diferencias grandes, no para estimar variabilidad.
-- **Sin probar todavía:** el build para iOS, `iproxy` contra este teléfono y las llamadas a `devicectl` de `medir.py`.
-  El build para macOS con las mismas opciones sí compila.
+- **Sin probar todavía:** la firma, `iproxy` contra este teléfono y las llamadas a `devicectl` de `medir.py`. El
+  build para iOS compila y enlaza sin firmar.
 
 ## Archivos
 
