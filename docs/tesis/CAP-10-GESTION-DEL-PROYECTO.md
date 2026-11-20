@@ -12,7 +12,7 @@ El trabajo se organizó por hitos de resultado, sin fijar de antemano una arquit
 | H2 · Piloto y primeras pruebas | Piloto con audio y referencia humana | **Atrasado:** faltan #54, #32 y #39 |
 | H3 · Primera integración | Replay de punta a punta | Hecho (#28, cerrado el 2026-11-03); sin reproducción registrada por otra persona |
 | H4 · Desarrollo y selección | Comparación y elección | Elección tomada; faltan #33, #55 y #45 |
-| H5 · Evaluación final | Test reservado | Sin correr (#52) |
+| H5 · Evaluación final | Test reservado | Sin correr (#52). **Al 2026-11-20:** corrió el 2026-11-19 ([§8.3.4](CAP-08-RESULTADOS-EXPERIMENTALES.md#834-evaluación-final)) |
 | H6 · Entrega y defensa | Informe, demo y video | En curso (#53) |
 
 Fechas del tutor: **todo al 90 % el 2026-11-15**, todo terminado el 2026-11-30, y entrega con presentación de 20 a 30 minutos entre el 2026-12-07 y el 2026-12-11. Falta el día exacto.

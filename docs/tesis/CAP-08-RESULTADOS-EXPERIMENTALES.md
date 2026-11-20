@@ -126,7 +126,7 @@ La latencia en la T4 fue de 210 ms de mediana por consulta (p95 de 266 ms).
 
 **Cuánto se mueve al repetir.** La misma configuración volvió a correr el 2026-11-20 como base de la exploración de §8.3.5: 76/100 estafas avisadas, 43/80 antes del pedido, 56/80 a tiempo y 15/56 falsas alarmas. El 92 % de las consultas dio el mismo riesgo; el resto cambió 0,1 y cae sobre el umbral. Las cifras que valen son las del 2026-11-19, y esa diferencia es el margen entre pasadas ([H13](../hallazgos/H13-la-misma-configuracion-corrida-de-otro-modo.md)).
 
-**Límites.** Las marcas de pedido y cumplimiento no tienen revisión humana. Las estafas del test salen del mismo generador que las de desarrollo: miden generalización dentro de ese estilo. Los conjuntos reales son de 33 casos, traducidos y de otros países. Todo corre sobre texto limpio, sin reconocimiento de voz.
+**Límites.** Las marcas de pedido y cumplimiento no tienen revisión humana. Las estafas del test salen del mismo generador que las de desarrollo: miden generalización dentro de ese estilo. Los conjuntos reales son de 33 casos, traducidos y de otros países. Todo corre sobre texto limpio y con turnos perfectos, sin reconocimiento de voz: en vivo los turnos se arman con umbrales que no se calibraron con grabaciones ([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)).
 
 ### 8.3.5. Exploración posterior con los conjuntos reales
 
