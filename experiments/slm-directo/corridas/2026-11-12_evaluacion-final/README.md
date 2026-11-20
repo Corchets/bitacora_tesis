@@ -15,8 +15,15 @@ Corre una sola vez, fijada por tag, en modo operativo: cada llamada termina en s
 - Avisa con «riesgo ≥ 0,3».
 - Muestra el motivo en el primer aviso y consulta solo en las líneas de OTRA.
 
-Es un parámetro (`CONFIG` en el notebook, `--config` en el análisis). Sus cifras de desarrollo (41, 19, 28 y 22 FA)
-ya están en `CIFRAS_DESARROLLO` de `analizar.py`.
+Es un parámetro (`CONFIG` en el notebook, `--config` en el análisis). Sus cifras de desarrollo están en
+`CIFRAS_DESARROLLO` de `analizar.py`, como rango de las tres corridas ya medidas: 40–42 estafas, 16–19 antes del pedido,
+26–28 a tiempo y 18–22 FA.
+
+**Nota del 2026-11-19.** La primera pasada del Colab (tag `colab/143-evaluacion-final`) cortó en el control de
+desarrollo, antes de tocar el test: dio 40, 16, 26 y 20 contra una referencia de un solo punto (41, 19, 28 y 22), y
+«antes del pedido» quedó a 3. Mateo decidió ese día que es variación entre sesiones y que la referencia sea el rango,
+con el mismo ±2. La corrida vale con el tag `colab/143-evaluacion-final-2`. Los ZIP de esa primera pasada no se
+guardaron.
 
 **Las referencias simples:**
 - **v4 sin alcance:** `v4-corte`, el JSON de v4 cortado tras la alerta
@@ -34,7 +41,7 @@ como `desarrollo`.
 |---|---|---|---|
 | `desarrollo` | Los 244 de `laboratorio-main` | [`alcance-140`](../../casos/listas/alcance-140.txt): 46 estafas (36 con pedido y 15 con cumplimiento) y 94 legítimas (29 cotidianas, 38 con pedido razonable y 27 con mención sin pedido) | Los otros 104, por grupo |
 | `test_reservado` | La rama `reserva/test` (9089b19), traída por ruta en Colab | 100 estafas `CV2-T-V` (80 con pedido, 32 con cumplimiento y 20 sin pedido) y las 56 legítimas `ENT-T` (14 cotidianas, 26 con pedido razonable y 16 con mención sin pedido) | Las 100 legítimas viejas `CV2-T-L`: 26 dentro del alcance y 74 fuera |
-| `externo` (#144) | El set coreano congelado ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)). Por defecto, las 9 con ficha que están en [`casos/externo/coreano`](../../casos/externo/coreano) ([PR #184](https://github.com/Corchets/bitacora_tesis/pull/184)); si Luciano pasa la carpeta con las 33, esas | Las estafas coreanas de KorCCVi: 9 (7 con pedido, 5 con cumplimiento) o 33 (27 con pedido y 6 sin pedido) | — |
+| `externo` (#144) | El set coreano congelado ([PR #181](https://github.com/Corchets/bitacora_tesis/pull/181)). Las 33 están en [`casos/externo/coreano`](../../casos/externo/coreano) desde el 2026-11-18 | Las estafas coreanas de KorCCVi: 33 (27 con pedido y 6 sin pedido) | — |
 | `legitimas_reales` | Las salientes reales de CallCenterEN ([FUENTES-LEGITIMAS-REALES.md §8](../../../../docs/investigacion/FUENTES-LEGITIMAS-REALES.md#8-set-armado-el-2026-11-18)). Los textos no están en el repo: corre solo si se sube la carpeta `sets/` de la custodia | 33 legítimas de telecomunicaciones (19 cotidianas, 4 con pedido razonable y 10 con mención sin pedido) | Las 42 de la zona gris de Medicare: no son FA ni estafas |
 
 - **Las huellas del test se comprueban antes de armarlo:**
@@ -104,8 +111,8 @@ CallCenterEN (Mateo, 2026-11-18): se leen contra las 56 generadas, no se suman.
 
 **Cómo leer la comparación con las reglas.** [`previa_desarrollo.py`](previa_desarrollo.py) arma las mismas tablas sobre
 desarrollo, con corridas que ya existen ([salida](previa-desarrollo-salida.md)). Las reglas v1 avisan casi todo: a
-tiempo 32/36, pero con 69/94 FA. La configuración avisa a tiempo 29/36 con 26/94 FA. No hay que leer una sola cifra: la
-diferencia de detección con las reglas queda dentro del ruido (2 a 5 pares, p = 0,45) y la de FA es enorme (4 a 47).
+tiempo 32/36, pero con 69/94 FA. La configuración avisa a tiempo 28/36 con 22/94 FA. No hay que leer una sola cifra: la
+diferencia de detección con las reglas queda dentro del ruido (1 a 5 pares, p = 0,22) y la de FA es enorme (4 a 51).
 
 **Dónde quedan los resultados.** Los CSV del test traen el texto de la reserva: van a la rama `reserva/test`. A
 `laboratorio-main` va solo `analisis.md`, con identificadores y cifras. Lo del set externo no se sube a ningún lado: la

@@ -282,9 +282,9 @@ class TestConjuntos(_ConReserva):
             conjuntos.preparar_externo(custodia, self.tmp / "ext3")
         self.assertEqual(len([k for k in json.loads(conjuntos.MANIFIESTO_EXTERNO.read_text(encoding="utf-8"))
                               if k.startswith("texto/")]), 33)
-        # Las 9 coreanas con ficha que están en el repo (PR #184) son parte del set congelado.
+        # Las 33 coreanas que están en el repo desde el 2026-11-18 (e58c5dc) son el set congelado entero.
         repo = conjuntos.preparar_externo(RAIZ / "casos/externo/coreano", self.tmp / "ext-repo")
-        self.assertEqual((len(repo.ids), repo.datos["fuentes"]["casos"]), (9, "9 de 33 del set congelado"))
+        self.assertEqual((len(repo.ids), repo.datos["fuentes"]["casos"]), (33, "33 de 33 del set congelado"))
 
 
     def test_las_legitimas_reales_son_los_dos_sets_congelados(self):
@@ -556,13 +556,13 @@ class TestControlDesarrollo(unittest.TestCase):
     def test_la_corrida_de_la_revision_de_producto_reproduce_sus_cifras(self):
         ok, texto = self.control(self.avisa)
         self.assertTrue(ok, texto)
-        self.assertIn("estafas 41 (antes 41)", texto)
-        self.assertIn("FA 22 (antes 22)", texto)
+        self.assertIn("estafas 41 (antes 40–42)", texto)
+        self.assertIn("FA 22 (antes 18–22)", texto)
 
-    def test_tres_estafas_menos_no_reproduce(self):
+    def test_seis_estafas_menos_no_reproduce(self):
         ref = self.conj.referencia()
         perdidas = [i for i in self.conj.ids if ref[i]["vista"] == "principal" and ref[i]["clase"] == "vishing"
-                    and self.avisa[i] is not None][:3]
+                    and self.avisa[i] is not None][:6]
         ok, texto = self.control({**self.avisa, **dict.fromkeys(perdidas)})
         self.assertFalse(ok)
         self.assertIn("no reproduce", texto)
@@ -577,7 +577,7 @@ class TestColab(unittest.TestCase):
     def test_el_notebook_y_el_script(self):
         nb = json.loads((RAIZ / "colab/COLAB-EVALUACION-FINAL.ipynb").read_text(encoding="utf-8"))
         codigo = "".join(nb["cells"][1]["source"])
-        self.assertIn("TAG = 'colab/143-evaluacion-final'", codigo)
+        self.assertIn("TAG = 'colab/143-evaluacion-final-2'", codigo)
         self.assertIn(f"CONFIG = '{CONFIG}'", codigo)
         self.assertIn("probar_evaluacion_final.py", codigo)
         script = (RAIZ / "colab/probar_evaluacion_final.py").read_text(encoding="utf-8")

@@ -65,7 +65,9 @@ MAXIMO_INVALIDAS = 0.01
 # Cada configuración candidata, sobre desarrollo (alcance-140), ya medida: el control de reproducibilidad del Colab
 # antes de tocar el test. Una configuración nueva entra acá con sus cifras de desarrollo antes del tag.
 CIFRAS_DESARROLLO = {
-    'c-consejos-corte-riesgo': {'estafas': 41, 'antes del pedido': 19, 'a tiempo': 28, 'FA': 22},  # revisión de producto
+    # El rango de las tres corridas ya medidas: la revisión de producto, su repetición y la primera pasada de este
+    # Colab (2026-11-19: 40, 16, 26 y 20, que cortó con la referencia de un solo punto). Mateo, 2026-11-19, antes del test.
+    'c-consejos-corte-riesgo': {'estafas': (40, 42), 'antes del pedido': (16, 19), 'a tiempo': (26, 28), 'FA': (18, 22)},
     'c-premisa-corte-riesgo': {'estafas': 40, 'antes del pedido': 19, 'a tiempo': 29, 'FA': 26},  # sensibilidad
     'c-json-corte-riesgo': {'estafas': 36, 'antes del pedido': 14, 'a tiempo': 26, 'FA': 25},     # humo
 }
@@ -359,6 +361,7 @@ def informe_conjunto(nombre, conj, ref, avs, leidas, config, motivos):
 
 def control_desarrollo(datos, conj, config):
     """(lista, texto): si la configuración reproduce en desarrollo sus cifras ya medidas, ±2, antes de tocar el test.
+    Una cifra medida puede ser un número o el rango (mínimo, máximo) de varias corridas; el ±2 va alrededor del rango.
     Lo usa el Colab después de la corrida de desarrollo."""
     if config not in CIFRAS_DESARROLLO:
         return False, f'faltan las cifras de desarrollo de {config} en CIFRAS_DESARROLLO: no se corre el test'
@@ -378,8 +381,9 @@ def control_desarrollo(datos, conj, config):
         return False, f'{invalidas} líneas inválidas de {len(con)} consultadas: más del {MAXIMO_INVALIDAS:.0%}'
     ex = exitos(avisos_config(filas, principal), principal, ref)
     medidas = {c: kn(ex[c])[0] for c in CIFRAS_DESARROLLO[config]}
-    fuera = {c: medidas[c] - v for c, v in CIFRAS_DESARROLLO[config].items() if abs(medidas[c] - v) > TOLERANCIA}
-    texto = ', '.join(f'{c} {medidas[c]} (antes {v})' for c, v in CIFRAS_DESARROLLO[config].items())
+    rangos = {c: v if isinstance(v, tuple) else (v, v) for c, v in CIFRAS_DESARROLLO[config].items()}
+    fuera = [c for c, (lo, hi) in rangos.items() if not lo - TOLERANCIA <= medidas[c] <= hi + TOLERANCIA]
+    texto = ', '.join(f'{c} {medidas[c]} (antes {lo}' + (f'–{hi})' if hi != lo else ')') for c, (lo, hi) in rangos.items())
     if fuera:
         return False, f'no reproduce desarrollo (±{TOLERANCIA}): {texto}'
     return True, f'reproduce desarrollo (±{TOLERANCIA}): {texto}'
