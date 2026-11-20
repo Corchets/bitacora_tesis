@@ -1,0 +1,386 @@
+{
+ "corridas": {
+  "metal": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 793.1152295204811,
+   "linea_p95": 1031.3276670640334,
+   "linea_max": 1095.2777500497177,
+   "procesar_med": 205.353,
+   "procesar_p95": 303.47,
+   "generar_med": 564.528,
+   "generar_p95": 708.137,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 3216.080875019543,
+   "aviso_con_motivo_max": 4481.524290982634,
+   "aviso_sin_esperar_med": 723.7868750235066,
+   "aviso_sin_esperar_max": 923.6167500494048,
+   "memoria_gib": {
+    "footprint_pico": 0.5833015441894531,
+    "residente_pico": 2.9792938232421875
+   },
+   "termico": [
+    "fair",
+    "serious"
+   ]
+  },
+  "cpu-t4": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 2007.6034789672121,
+   "linea_p95": 2413.0167909897864,
+   "linea_max": 3316.9806249206886,
+   "procesar_med": 947.829,
+   "procesar_p95": 1207.164,
+   "generar_med": 1026.816,
+   "generar_p95": 1227.33,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 6499.791749985889,
+   "aviso_con_motivo_max": 8893.512874958105,
+   "aviso_sin_esperar_med": 1680.9724170016125,
+   "aviso_sin_esperar_max": 2383.431709022261,
+   "memoria_gib": {
+    "footprint_pico": 0.6313056945800781,
+    "residente_pico": 3.1591339111328125
+   },
+   "termico": [
+    "nominal",
+    "fair",
+    "serious"
+   ]
+  },
+  "metal-premisa": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 936.2407915177755,
+   "linea_p95": 1024.7907500015572,
+   "linea_max": 1103.4044589614496,
+   "procesar_med": 245.243,
+   "procesar_p95": 305.476,
+   "generar_med": 670.572,
+   "generar_p95": 709.268,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 911,
+   "avisos": 5,
+   "aviso_con_motivo_med": 4278.477999963798,
+   "aviso_con_motivo_max": 5323.943917057477,
+   "aviso_sin_esperar_med": 869.9612920172513,
+   "aviso_sin_esperar_max": 1025.1440840074793,
+   "memoria_gib": {
+    "footprint_pico": 0.7145423889160156,
+    "residente_pico": 3.1998291015625
+   },
+   "termico": [
+    "serious"
+   ]
+  },
+  "cpu-t4-premisa": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 2162.682791473344,
+   "linea_p95": 2316.5229170117527,
+   "linea_max": 2388.15783301834,
+   "procesar_med": 1055.646999,
+   "procesar_p95": 1196.798,
+   "generar_med": 1086.707,
+   "generar_p95": 1121.063,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 911,
+   "avisos": 5,
+   "aviso_con_motivo_med": 7509.3319159932435,
+   "aviso_con_motivo_max": 9487.730959081091,
+   "aviso_sin_esperar_med": 2028.9877919713035,
+   "aviso_sin_esperar_max": 2219.166541006416,
+   "memoria_gib": {
+    "footprint_pico": 0.7421760559082031,
+    "residente_pico": 3.2167816162109375
+   },
+   "termico": [
+    "serious"
+   ]
+  },
+  "../2026-11-11_a56-latencia-172/s6-base-t4": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 3735.501543007558,
+   "linea_p95": 4155.329453002196,
+   "linea_max": 5493.317890010076,
+   "procesar_med": 1939.26,
+   "procesar_p95": 2183.464,
+   "generar_med": 1753.043,
+   "generar_p95": 2050.699,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 911,
+   "avisos": 5,
+   "aviso_con_motivo_med": 13837.170234997757,
+   "aviso_con_motivo_max": 16076.771719002863,
+   "aviso_sin_esperar_med": 3682.2689449909376,
+   "aviso_sin_esperar_max": 4009.0508199937176,
+   "memoria_gib": {
+    "vmhwm": 3.5348052978515625
+   },
+   "termico": []
+  }
+ },
+ "riesgo": {
+  "metal-premisa vs ../2026-11-11_a56-latencia-172/s6-base-t4": {
+   "lineas": 83,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 8,
+     "metal-premisa": 0.4,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 10,
+     "metal-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.4
+    },
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 20,
+     "metal-premisa": 0.6,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-L-BANCO-007",
+     "linea": 18,
+     "metal-premisa": 0.2,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.1
+    },
+    {
+     "caso": "CV2-D-L-DELIVERY-001",
+     "linea": 14,
+     "metal-premisa": 0.2,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.1
+    },
+    {
+     "caso": "CV2-D-V-BANCO-001",
+     "linea": 34,
+     "metal-premisa": 0.6,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 3,
+     "metal-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 9,
+     "metal-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 19,
+     "metal-premisa": 0.6,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 21,
+     "metal-premisa": 0.6,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 23,
+     "metal-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 29,
+     "metal-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    }
+   ],
+   "primer_aviso_en_otra_linea": []
+  },
+  "cpu-t4-premisa vs ../2026-11-11_a56-latencia-172/s6-base-t4": {
+   "lineas": 83,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 8,
+     "cpu-t4-premisa": 0.4,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 10,
+     "cpu-t4-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.4
+    },
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 20,
+     "cpu-t4-premisa": 0.6,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-L-BANCO-007",
+     "linea": 16,
+     "cpu-t4-premisa": 0.2,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.1
+    },
+    {
+     "caso": "CV2-D-L-BANCO-007",
+     "linea": 18,
+     "cpu-t4-premisa": 0.2,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.1
+    },
+    {
+     "caso": "CV2-D-L-DELIVERY-001",
+     "linea": 14,
+     "cpu-t4-premisa": 0.2,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.1
+    },
+    {
+     "caso": "CV2-D-L-DELIVERY-001",
+     "linea": 16,
+     "cpu-t4-premisa": 0.1,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.2
+    },
+    {
+     "caso": "CV2-D-V-BANCO-001",
+     "linea": 34,
+     "cpu-t4-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 3,
+     "cpu-t4-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 9,
+     "cpu-t4-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 19,
+     "cpu-t4-premisa": 0.6,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 21,
+     "cpu-t4-premisa": 0.6,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 29,
+     "cpu-t4-premisa": 0.5,
+     "../2026-11-11_a56-latencia-172/s6-base-t4": 0.3
+    }
+   ],
+   "primer_aviso_en_otra_linea": []
+  },
+  "metal vs cpu-t4": {
+   "lineas": 83,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 20,
+     "metal": 0.6,
+     "cpu-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-V-BANCO-001",
+     "linea": 20,
+     "metal": 0.3,
+     "cpu-t4": 0.2
+    },
+    {
+     "caso": "CV2-D-V-BANCO-002",
+     "linea": 18,
+     "metal": 0.5,
+     "cpu-t4": 0.4
+    },
+    {
+     "caso": "CV2-D-V-BANCO-002",
+     "linea": 20,
+     "metal": 0.5,
+     "cpu-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-002",
+     "linea": 30,
+     "metal": 0.2,
+     "cpu-t4": 0.3
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 9,
+     "metal": 0.3,
+     "cpu-t4": 0.5
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 29,
+     "metal": 0.5,
+     "cpu-t4": 0.4
+    }
+   ],
+   "primer_aviso_en_otra_linea": []
+  },
+  "metal-premisa vs cpu-t4-premisa": {
+   "lineas": 83,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-007",
+     "linea": 16,
+     "metal-premisa": 0.1,
+     "cpu-t4-premisa": 0.2
+    },
+    {
+     "caso": "CV2-D-L-DELIVERY-001",
+     "linea": 16,
+     "metal-premisa": 0.2,
+     "cpu-t4-premisa": 0.1
+    },
+    {
+     "caso": "CV2-D-V-BANCO-001",
+     "linea": 34,
+     "metal-premisa": 0.6,
+     "cpu-t4-premisa": 0.5
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 23,
+     "metal-premisa": 0.5,
+     "cpu-t4-premisa": 0.3
+    }
+   ],
+   "primer_aviso_en_otra_linea": []
+  },
+  "metal vs seco-mac": {
+   "lineas": 83,
+   "riesgo_distinto": [],
+   "primer_aviso_en_otra_linea": []
+  }
+ }
+}

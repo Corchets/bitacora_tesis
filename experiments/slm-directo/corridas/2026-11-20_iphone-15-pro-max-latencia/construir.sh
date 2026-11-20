@@ -1,12 +1,13 @@
 #!/bin/sh
 # Compila llama-server (llama.cpp 6c01da62, el commit del A56) para iOS y arma la app firmada.
 #
-#   ./construir.sh CARPETA_DE_TRABAJO TEAM_ID BUNDLE_ID
+#   ./construir.sh CARPETA_DE_TRABAJO TEAM_ID BUNDLE_ID UDID
 #
 # Necesita Xcode con el componente de iOS, cmake y una cuenta de Apple con sesión iniciada en Xcode. Deja la app en
-# CARPETA_DE_TRABAJO/app/Release-iphoneos/DetectorLab.app. No instala nada en el teléfono: eso lo hace medir.py.
+# CARPETA_DE_TRABAJO/app/Release-iphoneos/DetectorLab.app. El UDID es el del iPhone conectado: con la cuenta gratuita,
+# Xcode solo arma el perfil si puede registrar un dispositivo en el equipo. No instala nada en el teléfono.
 set -eu
-TRABAJO=$1 EQUIPO=$2 BUNDLE=$3
+TRABAJO=$1 EQUIPO=$2 BUNDLE=$3 UDID=$4
 AQUI=$(cd "$(dirname "$0")" && pwd)
 COMMIT=6c01da6278ab6c69ed67d9124806b50d2b299ba7
 
@@ -28,5 +29,5 @@ cmake --build "$TRABAJO/llama-ios" --target llama-server-impl -j 8
 cmake -S "$AQUI/app" -B "$TRABAJO/app" -G Xcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=16.4 \
     -DLLAMA_BUILD="$TRABAJO/llama-ios" -DEQUIPO="$EQUIPO" -DBUNDLE_ID="$BUNDLE"
 xcodebuild -project "$TRABAJO/app/DetectorLab.xcodeproj" -scheme DetectorLab -configuration Release \
-    -destination generic/platform=iOS -allowProvisioningUpdates build
+    -destination "id=$UDID" -allowProvisioningUpdates -allowProvisioningDeviceRegistration build
 ls -d "$TRABAJO/app/Release-iphoneos/DetectorLab.app"
