@@ -1271,6 +1271,7 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 hablantes="rol",
                 seed=42,
                 ollama_url="http://127.0.0.1:11434",
+                num_ctx=16384,
                 sin_indicio=True,
                 salida=self.tmp.name,
             )
@@ -1283,8 +1284,15 @@ class TestServidor(unittest.IsolatedAsyncioTestCase):
                 hablantes="rol",
                 seed=42,
                 ollama_url="http://127.0.0.1:11434",
+                num_ctx=16384,
                 indicio=False,
             )
+
+    def test_parse_args_contexto_de_la_demo(self):
+        with patch("sys.argv", ["servidor.py"]):
+            self.assertEqual(parse_args().num_ctx, 16384)
+        with patch("sys.argv", ["servidor.py", "--num-ctx", "4096"]):
+            self.assertEqual(parse_args().num_ctx, 4096)
 
     def test_parse_args_consulta_por_turno_con_umbrales_y_modo_de_hoy(self):
         with patch("sys.argv", ["servidor.py"]):

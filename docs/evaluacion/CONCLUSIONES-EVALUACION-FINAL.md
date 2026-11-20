@@ -104,7 +104,8 @@ minuto en las llamadas de la demo).
   protocolo como «contexto para llamadas completas sin recorte silencioso», y nunca se revisó.
 - **El modelo admite 131.072 tokens** (`ollama show`): 4096 es el 3 %. Con 16.384 entrarían unos 50 minutos. Lo que
   cuesta es memoria y demora en el teléfono, y eso hay que medirlo en el A56.
-- **Para la demo y una prueba de 30 minutos:** subir la ventana y declararlo. En la tesis va como límite.
+- **La demo ya usa 16.384** (`servidor.py --num-ctx`, desde el 2026-11-20). En tres llamadas de desarrollo (28
+  consultas) las dos ventanas dieron el mismo riesgo en todas. En la tesis va como límite de la configuración evaluada.
 
 ## Conclusiones
 
