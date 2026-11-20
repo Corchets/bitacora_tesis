@@ -121,6 +121,11 @@ El prompt es `c-consejos-corte-riesgo`, el C de la etapa 2 con un párrafo de co
 Mateo el 2026-11-18, por fuera de la regla de la revisión de producto
 ([ADR 0008](../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md)). El anterior se corre con `--prompt c-premisa-corte-riesgo`.
 
+**Contexto: 16.384 tokens, no los 4096 de la evaluación final.** Con 4096 el detector deja de consultar a los ~10
+minutos de conversación; con 16.384 entran ~50 (Gemma 4 E2B admite 131.072). El 2026-11-20, en tres llamadas de
+desarrollo (28 consultas), las dos ventanas dieron el mismo riesgo en todas. `--num-ctx 4096` vuelve a la de la
+evaluación, y el manifiesto guarda `num_ctx`. En la M1 de 8 GB la ventana grande pide algo más de memoria.
+
 **De dónde sale Ollama.** El servidor carga el modelo al arrancar. Si no llega a Ollama, no arranca. Hay dos opciones:
 
 - **El Ollama de la misma notebook:** sin `--ollama-url` (usa `http://127.0.0.1:11434`). Antes, `ollama serve` y,
