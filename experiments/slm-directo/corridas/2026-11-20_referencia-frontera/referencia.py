@@ -1,16 +1,18 @@
 """#174, referencia: el detector `c-consejos-corte-riesgo` con un modelo de frontera por API (OpenAI).
 
 Tandas, en este orden: desarrollo (alcance-140), las 33 legítimas reales de CallCenterEN, las 33 estafas coreanas de
-#144 y la zona gris de Medicare. Nunca la reserva de test.
+#144 y la zona gris de Medicare. Nunca la reserva de test. Para gastar poco (Mateo, 2026-11-20), desarrollo consulta
+todas sus líneas de OTRA y las otras tres cortan en el primer aviso, como el detector en el teléfono; las coreanas,
+además, solo hasta la línea del pedido (T_R), o hasta la línea TOPE_SIN_PEDIDO si no tienen T_R.
 
 Solo biblioteca estándar y el código del laboratorio, como cliente_ollama.py. No toca el detector ni su valor por
 defecto: arma el mismo pedido (prompt, mensaje con roles, ESQUEMA_SALIDA) y lee el riesgo con leer_riesgo_cortado.
 Uso, desde esta carpeta (README.md):
-    python3 -I referencia.py correr --clave ARCHIVO_FUERA_DEL_REPO   # escribe resultados.csv y manifiesto.json
+    OPENAI_API_KEY=... python3 -I referencia.py correr   # o --clave ARCHIVO; escribe resultados.csv y manifiesto.json
     python3 -I referencia.py analizar                                 # sin API; imprime el análisis en Markdown
 """
 
-import argparse, csv, datetime, importlib.util, json, statistics, subprocess, sys, tempfile, time
+import argparse, csv, os, datetime, importlib.util, json, statistics, subprocess, sys, tempfile, time
 import urllib.error, urllib.request
 from pathlib import Path
 
@@ -42,6 +44,9 @@ RESULTADOS = AQUI / 'resultados.csv'
 MANIFIESTO = AQUI / 'manifiesto.json'
 CAMPOS = ['tanda', 'case_id', 'linea', 'hablante', 'valida', 'riesgo', 'error', 'ms', 'intentos', 'tokens_entrada',
           'tokens_cache', 'tokens_salida', 'estado', 'crudo']
+# Las tandas que cortan en el primer aviso (modo operativo); desarrollo sigue tras el aviso, para mirar otros cortes.
+OPERATIVO = {'legitimas_reales', 'externo', 'zona_gris'}
+TOPE_SIN_PEDIDO = 60  # las coreanas sin T_R se leen hasta esta línea
 # Tanda → (conjunto, qué casos): la vista principal o la aparte.
 TANDAS = {'desarrollo': ('desarrollo', 'principal'), 'legitimas_reales': ('legitimas_reales', 'principal'),
           'externo': ('externo', 'principal'), 'zona_gris': ('legitimas_reales', 'aparte')}
@@ -157,26 +162,63 @@ def commit():
     return {'commit': s.stdout.strip(), 'cambios_sin_commit_en_la_carpeta': bool(d.stdout.strip())}
 
 
-def pendientes(todas, hechas):
-    """(tanda, caso, línea, líneas con roles) de cada línea de OTRA que falta, en el orden de TANDAS."""
-    for tanda, (conj, ids, _) in todas.items():
-        for i in ids:
-            lineas = conj.con_roles(i, conj.cargar_texto(i))
-            for n, l in enumerate(lineas, 1):
-                if l.hablante == 'OTRA' and (tanda, i, n) not in hechas:
-                    yield tanda, i, n, lineas
+def tope(tanda, ref_caso, largo):
+    """Hasta qué línea se lee un caso: las coreanas, hasta el pedido (o TOPE_SIN_PEDIDO); el resto, entero."""
+    if tanda != 'externo':
+        return largo
+    return min(largo, ref_caso.get('t_r_linea') or TOPE_SIN_PEDIDO)
+
+
+def esperadas_de(tanda, conj, i, ref_caso, riesgos_leidos):
+    """Las líneas de OTRA que tiene que tener un caso, dados los riesgos que ya se leyeron ({línea: riesgo o None})."""
+    lineas = conj.con_roles(i, conj.cargar_texto(i))
+    salida = []
+    for n, l in enumerate(lineas[:tope(tanda, ref_caso, len(lineas))], 1):
+        if l.hablante != 'OTRA':
+            continue
+        salida.append(n)
+        r = riesgos_leidos.get(n)
+        if tanda in OPERATIVO and r is not None and r >= expl.UMBRAL:
+            break
+    return salida
+
+
+def consulta(w, clave, sistema, temperatura, tanda, i, n, lineas):
+    """Consulta una línea, escribe su fila y devuelve el riesgo leído (None si la línea es inválida)."""
+    fila = {'tanda': tanda, 'case_id': i, 'linea': n, 'hablante': 'OTRA', 'valida': 'false', 'riesgo': ''}
+    riesgo = None
+    try:
+        r, ms, intentos = consultar(clave, sistema, armar_mensaje_usuario(lineas[:n], 'rol'), temperatura)
+    except ErrorAPI as e:
+        fila.update(error=str(e)[:200])
+    else:
+        crudo = texto_de(r)
+        riesgo, _, error = leer_riesgo_cortado(crudo)
+        u = r.get('usage') or {}
+        fila.update(valida='true' if not error else 'false', riesgo='' if riesgo is None else riesgo, error=error,
+                    ms=f'{ms:.0f}', intentos=intentos, tokens_entrada=u.get('input_tokens'),
+                    tokens_cache=(u.get('input_tokens_details') or {}).get('cached_tokens'),
+                    tokens_salida=u.get('output_tokens'), estado=r.get('status'), crudo=crudo)
+        if error:
+            riesgo = None
+    w.writerow(fila)
+    return riesgo
 
 
 def correr(args):
-    clave = Path(args.clave).expanduser().read_text(encoding='utf-8').strip()
+    clave = (Path(args.clave).expanduser().read_text(encoding='utf-8') if args.clave
+             else os.environ.get('OPENAI_API_KEY', '')).strip()
+    if not clave:
+        sys.exit('Falta la clave: OPENAI_API_KEY o --clave ARCHIVO (fuera del repositorio).')
     assert PROMPT in PROMPTS_CORTE_RIESGO and esquema_de(PROMPT) == ESQUEMA_SALIDA
     sistema = cargar_prompt(PROMPT)
     todas = tandas()
     conj, ids, _ = todas['desarrollo']
-    hechas = set()
+    hechas = {}  # (tanda, caso, línea) → riesgo válido o None
     if RESULTADOS.exists():
         with open(RESULTADOS, encoding='utf-8', newline='') as f:
-            hechas = {(r['tanda'], r['case_id'], int(r['linea'])) for r in csv.DictReader(f)}
+            hechas = {(r['tanda'], r['case_id'], int(r['linea'])): float(r['riesgo']) if r['valida'] == 'true' else None
+                      for r in csv.DictReader(f)}
     man = json.loads(MANIFIESTO.read_text(encoding='utf-8')) if MANIFIESTO.exists() else None
     if man is None:
         primera = conj.con_roles(ids[0], conj.cargar_texto(ids[0]))
@@ -184,7 +226,8 @@ def correr(args):
         man = {'modelo': MODELO, 'url': URL, 'prompt': PROMPT, 'prompt_huella': huella(sistema),
                'esfuerzo': ESFUERZO, 'max_output_tokens': MAXIMO_TOKENS, 'esquema': esquema_estricto(),
                'temperatura': temperatura_admitida(clave, sistema, usuario0), 'hablantes': 'rol', 'solo_otra': True,
-               'seguir_tras_aviso': True, 'precios_usd_por_millon': PRECIOS, 'red_antes': red(),
+               'seguir_tras_aviso': sorted(set(TANDAS) - OPERATIVO), 'cortan_en_el_aviso': sorted(OPERATIVO),
+               'coreanas_hasta': f'T_R, o la línea {TOPE_SIN_PEDIDO} sin T_R', 'precios_usd_por_millon': PRECIOS, 'red_antes': red(),
                'casos': {t: {i: huella(c.crudo(i)) for i in ii} for t, (c, ii, _) in todas.items()},
                'inicio': datetime.datetime.now().isoformat(), 'codigo': commit()}
         MANIFIESTO.write_text(json.dumps(man, ensure_ascii=False, indent=1), encoding='utf-8')
@@ -194,26 +237,21 @@ def correr(args):
         if nuevo:
             w.writeheader()
         hechas_ahora = 0
-        for tanda, i, n, lineas in pendientes(todas, hechas):
-            usuario = armar_mensaje_usuario(lineas[:n], 'rol')
-            fila = {'tanda': tanda, 'case_id': i, 'linea': n, 'hablante': 'OTRA', 'valida': 'false', 'riesgo': ''}
-            try:
-                r, ms, intentos = consultar(clave, sistema, usuario, man['temperatura'])
-            except ErrorAPI as e:
-                fila.update(error=str(e)[:200])
-            else:
-                crudo = texto_de(r)
-                riesgo, _, error = leer_riesgo_cortado(crudo)
-                u = r.get('usage') or {}
-                fila.update(valida='true' if not error else 'false', riesgo='' if riesgo is None else riesgo,
-                            error=error, ms=f'{ms:.0f}', intentos=intentos, tokens_entrada=u.get('input_tokens'),
-                            tokens_cache=(u.get('input_tokens_details') or {}).get('cached_tokens'),
-                            tokens_salida=u.get('output_tokens'), estado=r.get('status'), crudo=crudo)
-            w.writerow(fila)
-            f.flush()
-            hechas_ahora += 1
-            if hechas_ahora % 50 == 0:
-                print(f'{hechas_ahora} consultas', file=sys.stderr, flush=True)
+        for tanda, (conj, ids, ref) in todas.items():
+            for i in ids:
+                lineas = conj.con_roles(i, conj.cargar_texto(i))
+                for n, l in enumerate(lineas[:tope(tanda, ref[i], len(lineas))], 1):
+                    if l.hablante != 'OTRA':
+                        continue
+                    if (tanda, i, n) not in hechas:
+                        hechas[(tanda, i, n)] = consulta(w, clave, sistema, man['temperatura'], tanda, i, n, lineas)
+                        f.flush()
+                        hechas_ahora += 1
+                        if hechas_ahora % 50 == 0:
+                            print(f'{hechas_ahora} consultas', file=sys.stderr, flush=True)
+                    r = hechas[(tanda, i, n)]
+                    if tanda in OPERATIVO and r is not None and r >= expl.UMBRAL:
+                        break
     man['fin'] = datetime.datetime.now().isoformat()
     man['red_despues'] = red()
     MANIFIESTO.write_text(json.dumps(man, ensure_ascii=False, indent=1), encoding='utf-8')
@@ -245,8 +283,9 @@ def analizar(args):
     for tanda, (conj, ids, ref) in todas.items():
         propias = [r for r in filas if r['tanda'] == tanda]
         por_caso = {i: sorted((r for r in propias if r['case_id'] == i), key=lambda r: int(r['linea'])) for i in ids}
-        esperadas = {i: [n for n, l in enumerate(conj.con_roles(i, conj.cargar_texto(i)), 1) if l.hablante == 'OTRA']
-                     for i in ids}
+        leidos = {i: {int(r['linea']): float(r['riesgo']) if r['valida'] == 'true' else None for r in por_caso[i]}
+                  for i in ids}
+        esperadas = {i: esperadas_de(tanda, conj, i, ref[i], leidos[i]) for i in ids}
         problemas = []
         if any(man['casos'].get(tanda, {}).get(i) != huella(conj.crudo(i)) for i in ids):
             problemas.append('el texto de algún caso no es el del manifiesto')
@@ -289,16 +328,18 @@ def analizar(args):
             print(f'Línea del aviso en las estafas avisadas: mediana {statistics.median(est):g}.\n')
 
     print('## Solo para mirar\n')
-    print('**Otros cortes** (todas las cifras de la tanda, en el orden de arriba):\n')
+    print('**Otros cortes, solo en desarrollo** (las otras tandas cortan en el primer aviso; cifras en el orden de '
+          'arriba):\n')
     print('| tanda | riesgo ≥ 0,3 | riesgo ≥ 0,5 | riesgo ≥ 0,7 |\n|---|---|---|---|')
-    for tanda in todas:
+    for tanda in ['desarrollo']:
         print(f'| {NOMBRES[tanda]} | ' + ' | '.join(' · '.join(cifras(tanda, u)[0].values()) for u in (0.3, 0.5, 0.7)) + ' |')
     print('\n**Igualando el largo a las primeras 12 consultas de cada llamada** (E2B en la exploración: coreanas 28/33, '
           'legítimas reales 22/33):\n')
     for tanda in ('externo', 'legitimas_reales'):
         c, _ = cifras(tanda, expl.UMBRAL, primeras=12)
         print(f"- {NOMBRES[tanda]}: {c.get('estafas') or c.get('FA')}.")
-    print('\n**Valores de riesgo que escribe** (porcentaje de las consultas válidas):\n')
+    print('\n**Valores de riesgo que escribe** (porcentaje de las consultas válidas; fuera de desarrollo, solo hasta el '
+          'primer aviso):\n')
     for tanda in todas:
         validos = [r for l in datos[tanda][3].values() for _, r in l]
         cuenta = {}
@@ -347,7 +388,7 @@ def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     sub = p.add_subparsers(dest='orden', required=True)
     c = sub.add_parser('correr')
-    c.add_argument('--clave', required=True, help='archivo con la clave de OpenAI, fuera del repositorio')
+    c.add_argument('--clave', help='archivo con la clave de OpenAI, fuera del repositorio (si no, OPENAI_API_KEY)')
     sub.add_parser('analizar')
     args = p.parse_args(argv)
     return correr(args) if args.orden == 'correr' else analizar(args)

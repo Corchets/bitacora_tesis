@@ -31,11 +31,17 @@ pierde por correr Gemma 4 E2B en el teléfono, y cuánto tarda y cuesta la alter
 - **Cambio de alcance del 2026-11-20:** al principio iba solo desarrollo, porque las fuentes de las coreanas y de
   CallCenterEN no permiten redistribuir. Mateo decidió ese día mandarlas a la API: «es info publica que encontramos en
   internet». **La reserva de test sigue afuera:** no se manda ni se lee.
-- **Consulta en todas las líneas de OTRA** (7.032), sin cortar en el primer aviso, una por vez y en orden. Así se
-  aplica la misma regla que en la [exploración del 2026-11-20](../2026-11-20_exploracion-reales/README.md).
-- **El modelo ve la llamada entera.** E2B corre con `num_ctx` 4096: en las coreanas, 2.359 de sus 4.193 líneas de OTRA
-  fueron inválidas por contexto excedido. Las cifras de las coreanas no comparan lo mismo después de la línea 70 a 130;
-  por eso se mira también el aviso dentro de las primeras 12 consultas.
+- **Recorte para gastar poco** (Mateo, 2026-11-20: no hay créditos de sobra). Se consulta una línea de OTRA por vez,
+  en orden:
+  - **desarrollo:** todas sus líneas de OTRA (1.313), sin cortar en el aviso, para mirar también otros cortes;
+  - **legítimas reales, coreanas y zona gris:** se corta en el primer aviso, como el detector en el teléfono. Para
+    avisar o no avisar alcanza;
+  - **coreanas:** además, solo hasta la línea del pedido (`T_R`), o hasta la 60 en las 6 que no tienen `T_R`. Un
+    aviso después del pedido no cuenta como a tiempo, así que «antes del pedido» y «a tiempo» no cambian. «Estafas
+    avisadas» pasa a ser «avisadas antes del pedido o de la línea 60», y así se lee.
+- **El modelo ve todo lo que se le manda.** E2B corre con `num_ctx` 4096: en las coreanas, 2.359 de sus 4.193 líneas
+  de OTRA fueron inválidas por contexto excedido, pero E2B avisó todas antes de eso. Se mira también el aviso dentro
+  de las primeras 12 consultas, que iguala el largo entre coreanas y legítimas reales.
 - **Una sola pasada.** Si una consulta falla por red o por límite de la API, se reintenta; la latencia que cuenta es
   la del intento que respondió, y los reintentos se anotan.
 - **La clave** se lee de un archivo fuera del repositorio y no se imprime ni se guarda.
@@ -72,7 +78,7 @@ Las FA estrictas son las de las 75 legítimas que no deberían avisar según las
   el prompt no le sirve igual.
 - **Es una sola pasada.** Desarrollo es donde se ajustó el prompt; las coreanas y las legítimas reales ya se usaron
   para elegir en la exploración. Nada de esto es un test.
-- Aparte, solo para mirar: qué valores de riesgo escribe, y las cifras con «riesgo ≥ 0,5» y «≥ 0,7».
+- Aparte, solo para mirar: qué valores de riesgo escribe y, en desarrollo, las cifras con «riesgo ≥ 0,5» y «≥ 0,7».
 
 **Latencia** por consulta: mediana y p95 del tiempo de pared de cada pedido, desde esta Mac, con la conexión anotada
 (`networkQuality` de macOS antes de correr). En el teléfono el detector tarda 3,60 s de mediana y 4,90 s de p95 por
@@ -83,24 +89,45 @@ de magnitud: una conexión de oficina no es la de un celular en la calle.
 precios del 2026-11-20 de [developers.openai.com/api/docs/pricing](https://developers.openai.com/api/docs/pricing):
 US$ 1 por millón de tokens de entrada, US$ 0,05 en caché y US$ 5 de salida.
 
-**Estimado antes de correr** (caracteres contados sobre los pedidos, unos 3,3 por token): unos 20 M de tokens de
-entrada, 18 de ellos en las coreanas, que son largas y se consultan línea por línea con la llamada entera. Sin caché,
-unos US$ 20 (US$ 18 las coreanas); con la caché automática del prefijo, que comparten las consultas sucesivas de una
-misma llamada, unos US$ 5. Unas 2 horas, una consulta por vez.
+**Estimado antes de correr,** con el recorte (caracteres contados sobre los pedidos, unos 3,3 por token):
+- **Tope, si el modelo no avisara nunca:** 10,8 M de tokens de entrada (desarrollo 1,5; legítimas reales 0,6;
+  coreanas 6,6; zona gris 2,1), unos US$ 11 sin caché y unos US$ 3 con la caché automática del prefijo, que comparten
+  las consultas sucesivas de una misma llamada.
+- **Lo esperable:** si avisa en las coreanas tan temprano como E2B (en la línea 6), casi todo el costo es desarrollo:
+  entre US$ 1 y 3 en total. Entre 30 minutos y 1 hora.
 
 ## Cómo correr
 
-Desde `experiments/slm-directo/corridas/2026-11-20_referencia-frontera/`, con la clave en un archivo fuera del
-repositorio:
+Lo corre Ignacio (2026-11-20), con su clave de OpenAI. Hace falta Python 3.10 o más nuevo, sin paquetes extra. Desde
+esta carpeta (`experiments/slm-directo/corridas/2026-11-20_referencia-frontera/`), en la rama
+`exp/174-referencia-frontera`:
 
 ```bash
-python3 -I referencia.py correr --clave ~/.config/bitacora/openai-key
+export OPENAI_API_KEY='...'
 ```
+
+```bash
+python3 -I referencia.py correr
+```
+
+En Windows: `$env:OPENAI_API_KEY='...'` y `py -I referencia.py correr`. La clave no se escribe en ningún archivo del
+repositorio; también sirve `--clave ARCHIVO` con un archivo fuera del repositorio.
+
+- `correr` arma los conjuntos en un directorio temporal (`conjuntos.preparar_desarrollo`, `preparar_externo` y
+  `preparar_legitimas_reales`, desde lo que ya está en el repositorio) y escribe `resultados.csv` y `manifiesto.json`
+  acá. Cada 50 consultas avisa por pantalla.
+- **Si se corta** (red, `Ctrl+C`, la máquina se duerme), se vuelve a correr el mismo comando: sigue desde la última
+  línea escrita. No hay que borrar nada.
+- **Si se acaban los créditos** o la API devuelve un error que no se reintenta, la línea queda inválida con el error en
+  el CSV. Si son muchas, cortar con `Ctrl+C` y avisar.
+- La conexión se mide sola con `networkQuality` en macOS; en otro sistema queda anotado que no se pudo, y conviene
+  escribir a mano en el análisis cómo era la conexión (wifi o cable, y velocidad aproximada).
+
+Cuando termina, sin API:
 
 ```bash
 python3 -I referencia.py analizar > analisis-salida.md
 ```
 
-`correr` arma los conjuntos en un directorio temporal (`conjuntos.preparar_desarrollo`, `preparar_externo` y
-`preparar_legitimas_reales`, desde lo que ya está en el repositorio), escribe `resultados.csv` y
-`manifiesto.json` acá y, si se corta, sigue desde la última línea escrita. `analizar` no llama a la API.
+y se commitean `resultados.csv`, `manifiesto.json` y `analisis-salida.md` en la misma rama. El `analisis.md`, con la
+lectura, se escribe después a partir de esa salida.
