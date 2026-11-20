@@ -247,7 +247,7 @@ class TestColab(unittest.TestCase):
     def test_el_notebook_y_el_script(self):
         nb = json.loads((RAIZ / "colab/COLAB-EXPLORACION-REALES.ipynb").read_text(encoding="utf-8"))
         codigo = "".join(nb["cells"][1]["source"])
-        self.assertIn("TAG = 'colab/52-exploracion-reales'", codigo)
+        self.assertIn("TAG = 'colab/52-exploracion-reales-2'", codigo)
         self.assertIn("probar_exploracion_reales.py", codigo)
         self.assertNotIn("COLAB_CONFIG", codigo)
         script = (RAIZ / "colab/probar_exploracion_reales.py").read_text(encoding="utf-8")
@@ -256,7 +256,8 @@ class TestColab(unittest.TestCase):
         self.assertIn("fase(ex.FASE_1, list(CARPETAS))", script, "la fase 1 corre con todos los prompts")
         self.assertIn("ex.para_fase_2(SALIDA)", script, "la regla decide qué prompts tocan el test")
         self.assertIn("fase(ex.FASE_2, siguen)", script)
-        self.assertIn("necesita las legítimas reales", script, "sin las legítimas reales no corre nada")
+        self.assertIn("prep.ubicar_legitimas_reales(", script, "busca sola las legítimas reales que se subieron")
+        self.assertIn("LEGITIMAS_REALES = ''", codigo, "en el notebook la ruta es opcional")
 
 
 if __name__ == "__main__":

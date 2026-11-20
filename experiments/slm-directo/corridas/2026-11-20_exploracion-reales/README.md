@@ -137,7 +137,9 @@ En Colab T4, con Ollama 0.40.14, el digest `b37049369adf…`, `num_ctx` 4096, se
 **No corre todo con todos a propósito.** Lo que decide son los reales y nuestras estafas de desarrollo; el test y la
 zona gris son para medir el costo de lo elegido, y así no se los mira trece veces.
 
-Las legítimas reales son obligatorias: hay que subir a Colab la carpeta `sets/` de la custodia.
+Las legítimas reales son obligatorias: hay que subir a Colab el ZIP de la custodia (`legitimas-reales-sets.zip`) o la
+carpeta `sets/`. El script las busca solo en `/content`, descomprime el ZIP y arma una copia sin archivos de más; si
+faltan, corta en los primeros segundos, antes de instalar nada.
 
 **Duración:** alrededor de 2 h 40, estimado y sin medir. La fase 1 son unas 3.500 consultas por prompt (16 minutos) y
 la fase 2, unas 2.900 (13 minutos), para tres prompts como mucho.

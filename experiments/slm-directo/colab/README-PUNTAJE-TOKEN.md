@@ -411,7 +411,7 @@ otra base y otras variantes. Usa Ollama 0.40.14, el digest `b37049369adf…`, `n
 [`COLAB-EVALUACION-FINAL.ipynb`](COLAB-EVALUACION-FINAL.ipynb). El notebook está fijado al commit del tag. El set externo de #144 (las 33 coreanas) sale del repo; las legítimas reales
 de CallCenterEN, fuera de Git, se suben a Colab antes y su ruta va en `LEGITIMAS_REALES`.
 
-## 11. Exploración con los conjuntos reales (tag `colab/52-exploracion-reales`)
+## 11. Exploración con los conjuntos reales (tag `colab/52-exploracion-reales-2`)
 
 > **Estado: propuesta sin discutir.** Posterior a la evaluación final: no la reemplaza. La regla está escrita antes de
 > correr en [`corridas/2026-11-20_exploracion-reales/README.md`](../corridas/2026-11-20_exploracion-reales/README.md).
@@ -430,8 +430,10 @@ corre `c-consejos-corte-riesgo` y seis prompts más (`p-lista`, `p-escalera`, `p
    Los conjuntos armados bajan al principio, en `parcial-exploracion-conjuntos.zip`: si Colab se corta, con los parciales
    alcanza para analizar lo que corrió.
 
-**Antes de ejecutar** hay que subir a Colab la carpeta `sets/` de las legítimas reales y poner su ruta en
-`LEGITIMAS_REALES`: sin eso no corre. **Duración estimada:** alrededor de 2 h 40 en T4.
+**Antes de ejecutar** hay que subir a Colab las legítimas reales: el ZIP `legitimas-reales-sets.zip` o la carpeta
+`sets/`. No hace falta descomprimir ni escribir la ruta: [`preparar_colab.py`](preparar_colab.py) las busca en
+`/content` y deja una copia limpia. Ese módulo también instala `zstd` y Ollama con reintentos; el primer tag
+(`colab/52-exploracion-reales`) no lo tenía. **Duración estimada:** alrededor de 2 h 40 en T4.
 
 Los ZIP traen texto del test, de las coreanas y de las legítimas reales: se descomprimen fuera del repositorio y se
 analizan con `python -I analizar.py --datos CARPETA`.
