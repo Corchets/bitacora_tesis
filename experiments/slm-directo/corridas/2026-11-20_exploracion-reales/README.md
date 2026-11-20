@@ -4,6 +4,9 @@
 > [evaluación final](../2026-11-12_evaluacion-final/analisis.md): una última prueba para mantener la detección en las
 > estafas reales y avisar menos en las llamadas reales de call center. **Es exploración y no reemplaza a la evaluación
 > final:** lo que salga se informa aparte, y si se integra, se avisa que se eligió mirando estos conjuntos.
+>
+> **Resultado (2026-11-20):** corrió con el tag `colab/52-exploracion-reales-2` y ningún candidato pasó la regla. La
+> configuración queda como en la evaluación final. Ver el [análisis](analisis.md).
 
 ## Por qué
 
@@ -195,7 +198,9 @@ conjuntos reales.
    coreanas y de las legítimas reales. Correr todo Python con `-I`.
 2. Verificar: los parciales coinciden con el final; el commit es el del tag, sin cambios sin commitear; el sha256 de
    `colab/probar_exploracion_reales.py` y el digest coinciden; `fase-2.json` dice lo mismo que el análisis.
-3. Correr `python -I analizar.py --datos CARPETA` desde acá.
+3. Correr `python -I analizar.py --datos CARPETA` desde acá. [`aparte.py`](aparte.py) suma cuentas para leer el
+   resultado y, con `--final`, compara la base con la pasada de la evaluación final. Se escribió después de correr y no
+   toca la regla.
 4. Acá va solo `analisis.md`, con cifras e identificadores. Las corridas del test van a `reserva/test`; las de las
    coreanas y las legítimas reales no se suben.
 

@@ -437,3 +437,6 @@ corre `c-consejos-corte-riesgo` y seis prompts más (`p-lista`, `p-escalera`, `p
 
 Los ZIP traen texto del test, de las coreanas y de las legítimas reales: se descomprimen fuera del repositorio y se
 analizan con `python -I analizar.py --datos CARPETA`.
+
+**Resultado (2026-11-20):** corrió entera con este tag y ningún candidato pasó la regla, así que la fase 2 corrió solo
+con la base. Ver el [análisis](../corridas/2026-11-20_exploracion-reales/analisis.md).

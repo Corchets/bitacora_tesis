@@ -15,6 +15,9 @@
 
 Es una sola repetición, con E2B, `tarea` y GPU T4. Otro modelo u otro hardware pueden tener más variación.
 
+> **Nota del 2026-11-20:** entre dos corridas de la misma configuración que no se lanzaron igual, el margen fue mayor:
+> hasta 3 casos en una cifra del test y 6 en «antes del pedido». Ver [H13](H13-la-misma-configuracion-corrida-de-otro-modo.md).
+
 ## Qué cambia
 
 - Una diferencia de 1 o 2 casos entre configuraciones no se atribuye a la configuración.
