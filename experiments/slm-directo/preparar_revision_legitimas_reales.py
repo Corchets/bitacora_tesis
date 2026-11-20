@@ -1,7 +1,6 @@
 """Fichas ciegas de las 33 legítimas reales de CallCenterEN, con la política de producto de #143.
 
-Uso desde la raíz, con la carpeta `sets/` de la custodia en data/private/legitimas-reales/sets (la fuente prohíbe
-redistribuir los textos: no van a Git):
+Uso desde la raíz. Por defecto lee casos/externo/legitimas-reales, donde están publicadas desde el 2026-11-20:
     python3 experiments/slm-directo/preparar_revision_legitimas_reales.py fichas
     python3 experiments/slm-directo/preparar_revision_legitimas_reales.py etiquetas data/private/REVISION-LEGITIMAS-REALES-….json
 
@@ -25,7 +24,7 @@ sys.path.insert(0, str(BASE))
 from conjuntos import MANIFIESTO_LEGITIMAS, _leer_congelado  # noqa: E402
 
 PRIVADO = REPO / "data/private"
-SETS = PRIVADO / "legitimas-reales/sets"
+SETS = BASE / "casos/externo/legitimas-reales"
 PLANTILLA = BASE / "analisis/tablero/revision_legitimas_reales_plantilla.html"
 FORMULARIO = PRIVADO / "REVISION-LEGITIMAS-REALES.html"
 CLAVE = PRIVADO / "CLAVE-REVISION-LEGITIMAS-REALES.json"
