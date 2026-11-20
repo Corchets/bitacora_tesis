@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 # Ejecutar en Google Colab desde COLAB-EXPLORACION-REALES.ipynb: ver corridas/2026-11-20_exploracion-reales/README.md.
 # Estado: propuesta sin discutir. #52, exploración con los conjuntos reales, posterior a la evaluación final: no la
-# reemplaza. La configuración de la evaluación final (c-consejos-corte-riesgo) y dos variantes con un párrafo cambiado
-# (c-comercial y c-rumbo), solo en las líneas de OTRA y en todas ellas (--seguir-tras-aviso), para aplicar después las
-# dos políticas de aviso sobre los mismos riesgos.
+# reemplaza. La configuración de la evaluación final (c-consejos-corte-riesgo) y los prompts de analizar.VARIANTES, solo
+# en las líneas de OTRA y en todas ellas (--seguir-tras-aviso), para aplicar después las dos políticas de aviso sobre
+# los mismos riesgos.
 #
 # 1. Arma los conjuntos fuera del repositorio, con conjuntos.py, igual que la evaluación final: desarrollo, el test
 #    reservado (rama reserva/test, traída por ruta), las 33 coreanas de #144 y las legítimas reales de CallCenterEN.
 #    Las legítimas reales son obligatorias: sin COLAB_LEGITIMAS_REALES no corre nada.
-# 2. Humo de formato en los 3 casos de siempre (48 líneas), con las tres. Si no pasa la base, no corre nada; la
-#    variante que no pasa no corre.
-# 3. Las tres sobre cada conjunto, en este orden: las coreanas, las legítimas reales (con la zona gris), desarrollo
-#    (alcance-140) y el test (su vista principal). Cada corrida terminada baja como ZIP; el análisis va después, con
-#    corridas/2026-11-20_exploracion-reales/analizar.py.
+# 2. Humo de formato en los 3 casos de siempre (48 líneas), con todos los prompts. Si no pasa la base, no corre nada;
+#    el prompt que no pasa no corre.
+# 3. Fase 1, con todos: las coreanas, las 33 legítimas reales y desarrollo (alcance-140). Es lo que usa la regla.
+# 4. La regla (analizar.para_fase_2) dice qué prompts sirven. Fase 2, solo con la base y con esos: la zona gris de
+#    Medicare y la vista principal del test. Así el test lo toca solo lo que ya se eligió sin mirarlo.
+# Cada corrida terminada baja como ZIP; el análisis va después, con corridas/2026-11-20_exploracion-reales/analizar.py.
 # COLAB_REPO, COLAB_SALIDA, COLAB_RESERVA, COLAB_PRUEBA_RESERVA, COLAB_PRUEBA_EXTERNO y COLAB_PRUEBA_LEGITIMAS solo
 # existen para la prueba en seco.
 
@@ -45,7 +46,7 @@ _spec = importlib.util.spec_from_file_location('analizar_exploracion', exp / 'co
 ex = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(ex)
 an = ex.fin  # el análisis de la evaluación final: la humo, Ollama y el digest
-BASE, CARPETAS = ex.BASE, ex.PROMPTS  # carpeta → prompt: base, c-comercial y c-rumbo
+BASE, CARPETAS = ex.BASE, ex.PROMPTS  # carpeta → prompt: la base y las variantes
 TODAS = list(CARPETAS.values())
 if not set(TODAS) <= PROMPTS_CORTE_RIESGO:
     raise RuntimeError('Algún prompt no está cortado tras el riesgo (PROMPTS_CORTE_RIESGO); detener y revisar.')
@@ -114,9 +115,12 @@ if LEGITIMAS and not (CONJ / 'legitimas_reales' / 'conjunto.json').exists():
         _ml, _mg = os.environ['COLAB_PRUEBA_LEGITIMAS'].split(',')
         PRUEBA_LEG = {'manifiesto_legitimas': pathlib.Path(_ml), 'manifiesto_zona_gris': pathlib.Path(_mg)}
     conjuntos.preparar_legitimas_reales(pathlib.Path(LEGITIMAS), CONJ, **PRUEBA_LEG)
-ORDEN = ex.CONJUNTOS  # primero los reales: si Colab se corta, queda lo que decide
+ORDEN = ['externo', 'legitimas_reales', 'desarrollo', 'test_reservado']  # los cuatro conjuntos armados
 for nombre in ORDEN:
     print(conjuntos.resumen(conjuntos.Conjunto(CONJ / nombre)), flush=True)
+if not (CONJ / 'DESCARGADOS.txt').exists():  # el análisis los necesita: si Colab se corta, alcanzan los parciales
+    descargar(CONJ, 'parcial-exploracion-conjuntos')
+    (CONJ / 'DESCARGADOS.txt').write_text('ok\n', encoding='utf-8')
 
 COMUNES = ['--modelos', MODEL, '--num-ctx', '4096', '--seed', '42', '--sin-reglas', '--hablantes', 'rol']
 CORRIDA = ['--solo-otra', '--seguir-tras-aviso']  # todas las líneas de OTRA: las dos políticas salen de los mismos riesgos
@@ -158,34 +162,57 @@ if not humo[BASE]['pasa']:
     raise RuntimeError('La base no pasó la humo de formato: no se corre nada. Ver humo/humo.json.')
 pasan = [p for p in TODAS if humo[p]['pasa']]
 
-# 3. Las tres sobre cada conjunto, primero los reales.
-for nombre in ORDEN:
-    ids = ex.casos_de(conjuntos.Conjunto(CONJ / nombre))
-    for carpeta, prompt in CARPETAS.items():
-        destino = SALIDA / nombre / carpeta
-        if prompt not in pasan:
-            print(f'[{nombre}/{carpeta}] no corre: {prompt} no pasó la humo.', flush=True)
-            continue
-        if (destino / 'TERMINADA.txt').exists():
-            print(f'[{nombre}/{carpeta}] ya terminada en esta sesión; no se repite.', flush=True)
-            continue
-        inicio = time.time()
-        correr(destino, f'exploracion-{nombre}-{carpeta}', '--conjunto', str(CONJ / nombre), '--casos', ','.join(ids),
-               '--prompts', prompt, *CORRIDA)
-        (destino / 'TERMINADA.txt').write_text(
-            f'{nombre} ({len(ids)} casos) · {prompt} · {" ".join(CORRIDA)}\ncommit {COMMIT}\n'
-            f'minutos {(time.time() - inicio) / 60:.1f}\n', encoding='utf-8')
-        print(f'[{nombre}/{carpeta}] terminada en {(time.time() - inicio) / 60:.1f} min', flush=True)
-        descargar(destino, f'parcial-exploracion-{nombre}-{carpeta}')
 
-# 4. Inventario y empaquetado. El análisis se hace después, desde los CSV.
+
+def fase(tandas, carpetas):
+    """Corre cada prompt de `carpetas` sobre cada tanda (un conjunto y sus casos), prompt por prompt: si Colab se
+    corta, los primeros quedan completos. Lo terminado en la sesión no se repite."""
+    for carpeta in carpetas:
+        prompt = CARPETAS[carpeta]
+        if prompt not in pasan:
+            print(f'[{carpeta}] no corre: {prompt} no pasó la humo.', flush=True)
+            continue
+        for nombre in tandas:
+            conj_nombre, destino = ex.TANDAS[nombre][0], SALIDA / nombre / carpeta
+            if (destino / 'TERMINADA.txt').exists():
+                print(f'[{nombre}/{carpeta}] ya terminada en esta sesión; no se repite.', flush=True)
+                continue
+            ids = ex.casos_de(nombre, conjuntos.Conjunto(CONJ / conj_nombre))
+            inicio = time.time()
+            correr(destino, f'exploracion-{nombre}-{carpeta}', '--conjunto', str(CONJ / conj_nombre), '--casos', ','.join(ids),
+                   '--prompts', prompt, *CORRIDA)
+            (destino / 'TERMINADA.txt').write_text(
+                f'{nombre} ({len(ids)} casos de {conj_nombre}) · {prompt} · {" ".join(CORRIDA)}\ncommit {COMMIT}\n'
+                f'minutos {(time.time() - inicio) / 60:.1f}\n', encoding='utf-8')
+            print(f'[{nombre}/{carpeta}] terminada en {(time.time() - inicio) / 60:.1f} min', flush=True)
+            descargar(destino, f'parcial-exploracion-{nombre}-{carpeta}')
+
+
+# 3. Fase 1: todos los prompts sobre lo que usa la regla (en cada uno, primero los reales).
+fase(ex.FASE_1, list(CARPETAS))
+
+# 4. La regla dice qué prompts siguen. Fase 2: la zona gris y el test, solo con la base y con esos.
+fase_2 = SALIDA / 'fase-2.json'
+if fase_2.exists():
+    siguen = json.loads(fase_2.read_text(encoding='utf-8'))['carpetas']
+else:
+    try:
+        siguen, orden = ex.para_fase_2(SALIDA)
+        nota = 'sirven, en orden: ' + (', '.join(f'{c} · {p}' for c, p in orden) or 'ninguno')
+    except Exception as error:  # si la regla no se puede aplicar acá, corren todos y se decide en el análisis
+        siguen, nota = list(CARPETAS), f'no se pudo aplicar la regla en Colab ({error!r}): corren todos'
+    fase_2.write_text(json.dumps({'carpetas': siguen, 'nota': nota}, ensure_ascii=False, indent=2), encoding='utf-8')
+    print('Fase 2 con:', siguen, '·', nota, flush=True)
+fase(ex.FASE_2, siguen)
+
+# 5. Inventario y empaquetado. El análisis se hace después, desde los CSV.
 subprocess.run([sys.executable, '-m', 'pip', 'freeze'], stdout=(SALIDA / 'pip-freeze.txt').open('w'), check=True)
 (SALIDA / 'ollama-version.txt').write_text(version, encoding='utf-8')
 (SALIDA / 'script-sha256.txt').write_text(
     hashlib.sha256((exp / 'colab/probar_exploracion_reales.py').read_bytes()).hexdigest() + '\n', encoding='utf-8')
 (SALIDA / 'commit.txt').write_text(
-    f'{COMMIT}\n#52, exploración con los conjuntos reales: {", ".join(TODAS)} sobre {", ".join(ORDEN)}, solo OTRA, en todas '
-    f'las líneas\nreserva/test {reserva_commit}{" (PRUEBA EN SECO)" if PRUEBA else ""}\n'
+    f'{COMMIT}\n#52, exploración con los conjuntos reales: {", ".join(TODAS)} en la fase 1 ({", ".join(ex.FASE_1)}) y '
+    f'{", ".join(siguen)} en la fase 2 ({", ".join(ex.FASE_2)}), solo OTRA, en todas las líneas\nreserva/test {reserva_commit}{" (PRUEBA EN SECO)" if PRUEBA else ""}\n'
     + ''.join(f'{n} conjunto.json sha256 {conjuntos.sha256((CONJ / n / "conjunto.json").read_bytes())}\n' for n in ORDEN),
     encoding='utf-8')
 zip_local = shutil.make_archive(str(SALIDA.parent / 'resultados-exploracion-reales'), 'zip', SALIDA)

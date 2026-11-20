@@ -418,17 +418,20 @@ de CallCenterEN, fuera de Git, se suben a Colab antes y su ruta va en `LEGITIMAS
 
 [`probar_exploracion_reales.py`](probar_exploracion_reales.py) se abre desde
 [`COLAB-EXPLORACION-REALES.ipynb`](COLAB-EXPLORACION-REALES.ipynb). Arma los conjuntos igual que la evaluación final y
-corre `c-consejos-corte-riesgo`, `c-comercial-corte-riesgo` y `c-rumbo-corte-riesgo` en todas las líneas de OTRA
-(`--solo-otra --seguir-tras-aviso`), con Ollama 0.40.14, el digest `b37049369adf…`, `num_ctx` 4096, seed 42 y
-temperatura 0:
+corre `c-consejos-corte-riesgo` y seis prompts más (`p-lista`, `p-escalera`, `p-niveles`, `c-rumbo`, `p-sino` y
+`p-minimo`) en todas las líneas de OTRA (`--solo-otra --seguir-tras-aviso`), con Ollama 0.40.14, el digest
+`b37049369adf…`, `num_ctx` 4096, seed 42 y temperatura 0:
 
-1. **Humo de formato** en los 3 casos de siempre (48 líneas), con las tres.
-2. **Las tres sobre cada conjunto,** en este orden: las 33 coreanas, las legítimas reales con la zona gris,
-   `alcance-140` y la vista principal del test.
-3. Cada parte baja como `parcial-exploracion-<conjunto>-<prompt>.zip`, y al final `resultados-exploracion-reales.zip`.
+1. **Humo de formato** en los 3 casos de siempre (48 líneas), con los siete.
+2. **Fase 1, con los siete:** las 33 coreanas, las 33 legítimas reales y `alcance-140`.
+3. **La regla se aplica en Colab** y deja en `fase-2.json` qué prompts siguen.
+4. **Fase 2, con la base y lo elegido:** la zona gris de Medicare y la vista principal del test.
+5. Cada parte baja como `parcial-exploracion-<tanda>-<prompt>.zip`, y al final `resultados-exploracion-reales.zip`.
+   Los conjuntos armados bajan al principio, en `parcial-exploracion-conjuntos.zip`: si Colab se corta, con los parciales
+   alcanza para analizar lo que corrió.
 
 **Antes de ejecutar** hay que subir a Colab la carpeta `sets/` de las legítimas reales y poner su ruta en
-`LEGITIMAS_REALES`: sin eso no corre. **Duración estimada:** alrededor de 1 h 45 en T4.
+`LEGITIMAS_REALES`: sin eso no corre. **Duración estimada:** alrededor de 2 h 40 en T4.
 
 Los ZIP traen texto del test, de las coreanas y de las legítimas reales: se descomprimen fuera del repositorio y se
 analizan con `python -I analizar.py --datos CARPETA`.

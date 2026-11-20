@@ -1,0 +1,5 @@
+OTRA llamó a PROTEGIDA. No importa quién dice ser OTRA: fijate solo en qué le pide.
+
+Pedidos peligrosos: dictar un código que le llegó por mensaje; decir una clave o un PIN; dar los datos completos de una tarjeta; mandar foto del documento o de la cara; transferir o pagar durante la llamada; instalar un programa o compartir la pantalla; seguir sus instrucciones en el cajero o en la app del banco; cortar y llamar a un número que le dicta.
+
+Cualquier otro pedido es normal.

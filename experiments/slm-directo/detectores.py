@@ -95,13 +95,26 @@ CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in ("c-ancla", "c-
 VARIANTES_REVISION_PRODUCTO = ("c-codigo", "c-consejos", "c-freno")
 PROMPTS.update({v: (f"tarea_{v.replace('-', '_')}.txt", "salida_json_c.txt") for v in VARIANTES_REVISION_PRODUCTO})
 CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in VARIANTES_REVISION_PRODUCTO})
-# Exploración con los conjuntos reales (corridas/2026-11-20_exploracion-reales/), posterior a la evaluación final: dos
-# variantes de la configuración congelada (c-consejos), con un solo párrafo cambiado cada una. «c-comercial» suma al
-# párrafo final que una llamada comercial no es una estafa por serlo; «c-rumbo» ata el aviso anticipado a que OTRA vaya
-# hacia un pedido.
-VARIANTES_EXPLORACION_REALES = ("c-comercial", "c-rumbo")
+# Exploración con los conjuntos reales (corridas/2026-11-20_exploracion-reales/), posterior a la evaluación final.
+# «c-rumbo» es la configuración congelada (c-consejos) con un solo párrafo cambiado: ata el aviso anticipado a que OTRA
+# vaya hacia un pedido. Los «p-» están escritos desde cero y preguntan por el pedido, no por la probabilidad de estafa;
+# cada uno redefine el riesgo como una escala de pocos niveles con un criterio observable:
+# - «p-lista»: la lista de pedidos, qué es prepararlos y tres niveles (nada, lo prepara, lo hizo);
+# - «p-minimo»: lo mismo en menos de 500 caracteres, sin definir «preparar»;
+# - «p-niveles»: cuatro niveles, con uno propio para la llamada comercial;
+# - «p-escalera»: seis escalones sobre los valores que el modelo ya escribe, acumulados en toda la llamada;
+# - «p-sino»: una sola pregunta de sí o no sobre dónde termina PROTEGIDA si sigue en la llamada.
+VARIANTES_EXPLORACION_REALES = ("c-rumbo",)
 PROMPTS.update({v: (f"tarea_{v.replace('-', '_')}.txt", "salida_json_c.txt") for v in VARIANTES_EXPLORACION_REALES})
-CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in VARIANTES_EXPLORACION_REALES})
+PROMPTS_POR_PEDIDO = {
+    "p-lista": ("tarea_p_lista.txt", "salida_json_p_tres.txt"),
+    "p-minimo": ("tarea_p_minimo.txt", "salida_json_p_tres.txt"),
+    "p-niveles": ("tarea_p_niveles.txt", "salida_json_p_niveles.txt"),
+    "p-escalera": ("tarea_p_escalera.txt", "salida_json_p_escalera.txt"),
+    "p-sino": ("tarea_p_sino.txt", "salida_json_p_sino.txt"),
+}
+PROMPTS.update(PROMPTS_POR_PEDIDO)
+CORTE_RIESGO_DE.update({f"{base}-corte-riesgo": base for base in (*VARIANTES_EXPLORACION_REALES, *PROMPTS_POR_PEDIDO)})
 PROMPTS.update({corte: PROMPTS[base] for corte, base in CORTE_RIESGO_DE.items()})
 PROMPTS_SINO = frozenset({"tarea-sino", "v4-sino", "v4-sin-reglas-sino", "tarea-a1", "v4-a1", "v4-a2", "s-sino", "c-sino"})
 # Se leen con DetectorSLMDigito: un número del 0 al 9 en el primer token.
@@ -178,8 +191,8 @@ ESQUEMAS.update(dict.fromkeys(PROMPTS_SINO | PROMPTS_DIGITO))  # sin esquema: re
 ESQUEMAS["v4-lectura"] = ESQUEMA_SALIDA  # el mismo JSON que v4, cortado después del riesgo
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_DE.items()})  # el mismo JSON, cortado después de alerta_sugerida
 ESQUEMAS.update({"c-sin-alerta": ESQUEMA_RIESGO, "c-con-campo": ESQUEMA_CON_CAMPO})
-ESQUEMAS.update(dict.fromkeys(("c-ancla", "c-premisa", "c-sin-freno", *VARIANTES_REVISION_PRODUCTO, *VARIANTES_EXPLORACION_REALES),
-                              ESQUEMA_SALIDA))  # el JSON de C
+ESQUEMAS.update(dict.fromkeys(("c-ancla", "c-premisa", "c-sin-freno", *VARIANTES_REVISION_PRODUCTO, *VARIANTES_EXPLORACION_REALES,
+                               *PROMPTS_POR_PEDIDO), ESQUEMA_SALIDA))  # el JSON de C
 ESQUEMAS.update({corte: ESQUEMAS[base] for corte, base in CORTE_RIESGO_DE.items()})  # el mismo JSON, cortado tras el riesgo
 
 # Estimación conservadora para no mandar más texto del que entra en el contexto:
