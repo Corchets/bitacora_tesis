@@ -233,17 +233,21 @@ def aplicar(ex):
     return res, res[REFERENCIA], ordenar(res, res[REFERENCIA])
 
 
-def para_fase_2(datos):
-    """Las carpetas (prompts) que corren la fase 2: la base y los prompts de los primeros candidatos que sirven.
-    Lo usa el script de Colab al terminar la fase 1."""
-    conjs, leidas, _ = cargar(datos)
-    _, ex = calcular(conjs, leidas)
-    _, _, orden = aplicar(ex)
+def carpetas_fase_2(orden):
+    """La base y los prompts de los primeros PASAN_A_FASE_2 candidatos que sirven, sin repetir."""
     carpetas = ['base']
     for carpeta, _ in orden[:PASAN_A_FASE_2]:
         if carpeta not in carpetas:
             carpetas.append(carpeta)
-    return carpetas, orden
+    return carpetas
+
+
+def para_fase_2(datos):
+    """(carpetas que corren la fase 2, candidatos que sirven en orden). Lo usa el script de Colab al terminar la fase 1."""
+    conjs, leidas, _ = cargar(datos)
+    _, ex = calcular(conjs, leidas)
+    _, _, orden = aplicar(ex)
+    return carpetas_fase_2(orden), orden
 
 
 # --- Informe ---

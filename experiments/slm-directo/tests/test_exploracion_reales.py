@@ -210,6 +210,19 @@ class TestRegla(unittest.TestCase):
         self.assertEqual(ex.costo_alto(cifras(**{"test a tiempo": None, "test estafas": None}), cifras()), [], "sin test no marca")
 
 
+class TestFase2(unittest.TestCase):
+    def test_sin_candidatos_que_sirvan_corre_solo_la_base(self):
+        self.assertEqual(ex.carpetas_fase_2([]), ["base"])
+
+    def test_pasan_los_prompts_de_los_dos_primeros_sin_repetir(self):
+        orden = [("p-lista", "primer aviso"), ("p-lista", "confirmación"), ("c-rumbo", "primer aviso")]
+        self.assertEqual(ex.carpetas_fase_2(orden), ["base", "p-lista"])
+        orden = [("p-escalera", "confirmación"), ("base", "confirmación"), ("c-rumbo", "primer aviso")]
+        self.assertEqual(ex.carpetas_fase_2(orden), ["base", "p-escalera"])
+        orden = [("p-sino", "primer aviso"), ("c-rumbo", "primer aviso"), ("p-lista", "primer aviso")]
+        self.assertEqual(ex.carpetas_fase_2(orden), ["base", "p-sino", "c-rumbo"])
+
+
 class TestTandas(unittest.TestCase):
     def test_de_desarrollo_corre_solo_la_vista_principal(self):
         tmp = Path(tempfile.mkdtemp())
