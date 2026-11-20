@@ -410,3 +410,33 @@ otra base y otras variantes. Usa Ollama 0.40.14, el digest `b37049369adf…`, `n
 [`probar_evaluacion_final.py`](probar_evaluacion_final.py) se abre desde
 [`COLAB-EVALUACION-FINAL.ipynb`](COLAB-EVALUACION-FINAL.ipynb). El notebook está fijado al commit del tag. El set externo de #144 (las 33 coreanas) sale del repo; las legítimas reales
 de CallCenterEN, fuera de Git, se suben a Colab antes y su ruta va en `LEGITIMAS_REALES`.
+
+## 11. Exploración con los conjuntos reales (tag `colab/52-exploracion-reales-2`)
+
+> **Estado: propuesta sin discutir.** Posterior a la evaluación final: no la reemplaza. La regla está escrita antes de
+> correr en [`corridas/2026-11-20_exploracion-reales/README.md`](../corridas/2026-11-20_exploracion-reales/README.md).
+
+[`probar_exploracion_reales.py`](probar_exploracion_reales.py) se abre desde
+[`COLAB-EXPLORACION-REALES.ipynb`](COLAB-EXPLORACION-REALES.ipynb). Arma los conjuntos igual que la evaluación final y
+corre `c-consejos-corte-riesgo` y seis prompts más (`p-lista`, `p-escalera`, `p-niveles`, `c-rumbo`, `p-sino` y
+`p-minimo`) en todas las líneas de OTRA (`--solo-otra --seguir-tras-aviso`), con Ollama 0.40.14, el digest
+`b37049369adf…`, `num_ctx` 4096, seed 42 y temperatura 0:
+
+1. **Humo de formato** en los 3 casos de siempre (48 líneas), con los siete.
+2. **Fase 1, con los siete:** las 33 coreanas, las 33 legítimas reales y `alcance-140`.
+3. **La regla se aplica en Colab** y deja en `fase-2.json` qué prompts siguen.
+4. **Fase 2, con la base y lo elegido:** la zona gris de Medicare y la vista principal del test.
+5. Cada parte baja como `parcial-exploracion-<tanda>-<prompt>.zip`, y al final `resultados-exploracion-reales.zip`.
+   Los conjuntos armados bajan al principio, en `parcial-exploracion-conjuntos.zip`: si Colab se corta, con los parciales
+   alcanza para analizar lo que corrió.
+
+**Antes de ejecutar** hay que subir a Colab las legítimas reales: el ZIP `legitimas-reales-sets.zip` o la carpeta
+`sets/`. No hace falta descomprimir ni escribir la ruta: [`preparar_colab.py`](preparar_colab.py) las busca en
+`/content` y deja una copia limpia. Ese módulo también instala `zstd` y Ollama con reintentos; el primer tag
+(`colab/52-exploracion-reales`) no lo tenía. **Duración estimada:** alrededor de 2 h 40 en T4.
+
+Los ZIP traen texto del test, de las coreanas y de las legítimas reales: se descomprimen fuera del repositorio y se
+analizan con `python -I analizar.py --datos CARPETA`.
+
+**Resultado (2026-11-20):** corrió entera con este tag y ningún candidato pasó la regla, así que la fase 2 corrió solo
+con la base. Ver el [análisis](../corridas/2026-11-20_exploracion-reales/analisis.md).

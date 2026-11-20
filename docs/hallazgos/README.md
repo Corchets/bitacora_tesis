@@ -41,3 +41,5 @@ Es la capa entre la evidencia y la tesis:
 | [H09](H09-tito-clasificador-en-vez-de-compuerta.md) | 2026-11-06 | Tito se entrenó como clasificador de estafas; tenía que ser una compuerta de lo sensible | cambio de enfoque | vigente |
 | [H10](H10-c-avisa-antes-del-pedido.md) | 2026-11-10 | Con el prompt de intención (C), el SLM avisa antes del pedido y suma las estafas sin pedido | resultado | vigente |
 | [H11](H11-el-riesgo-cambia-con-el-runtime.md) | 2026-11-11 | Con la misma configuración el riesgo se repite, pero cualquier cambio del runtime lo mueve en una de cada diez líneas | método | vigente |
+| [H12](H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md) | 2026-11-20 | Cambiar el prompt mueve cuánto avisa el detector, no a quién: ninguno baja las falsas alarmas en llamadas reales sin perder estafas | resultado | vigente |
+| [H13](H13-la-misma-configuracion-corrida-de-otro-modo.md) | 2026-11-20 | La misma configuración, corrida en otro orden, cambia el riesgo en el 8 % de las consultas y hasta 6 casos de una cifra | método | vigente |

@@ -143,6 +143,11 @@ mucho menor que en los generados.
   cuenta. Cuántas serían FA estrictas no se sabe sin que alguien las etiquete a ciegas.
 - **No se sabe por qué avisa en las coreanas ni por qué falla en las 27 de test:** no se leyeron.
 - **Es una sola corrida.** Entre sesiones, la misma configuración cambia hasta 3 casos en una cifra de desarrollo.
+
+  > **Nota del 2026-11-20:** la [exploración con los conjuntos reales](../2026-11-20_exploracion-reales/analisis.md#5-la-misma-configuración-corrida-otra-vez-mueve-hasta-6-casos)
+  > volvió a correr esta configuración en el test: 76/100 estafas avisadas, 43/80 antes del pedido, 56/80 a tiempo y
+  > 15/56 FA. Las cifras que valen son las de arriba; la diferencia es el margen entre pasadas
+  > ([H13](../../../../docs/hallazgos/H13-la-misma-configuracion-corrida-de-otro-modo.md)).
 - Todo supone texto limpio y turnos perfectos: no se midió con ASR (#54).
 
 ## Qué queda
@@ -155,3 +160,7 @@ mucho menor que en los generados.
   ni sumar las legítimas viejas.
 - **Informar las coreanas junto con las legítimas reales,** como el par de datos reales: 33/33 contra 21/33.
 - Los CSV del test van a `reserva/test`. Lo del set externo y las legítimas reales no se sube.
+
+> **Nota del 2026-11-20:** Mateo pidió una última exploración sobre los conjuntos reales. Ningún candidato pasó la
+> regla y la configuración no cambió. Ver su [análisis](../2026-11-20_exploracion-reales/analisis.md) y
+> [H12](../../../../docs/hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md).

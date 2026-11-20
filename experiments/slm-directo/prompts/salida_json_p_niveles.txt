@@ -1,0 +1,6 @@
+Respondé solo con un objeto JSON, con estos cuatro campos en este orden:
+{"riesgo": número, "alerta_sugerida": booleano, "motivo": texto, "evidencia": texto}
+- "riesgo": el nivel de la llamada. Solo puede valer 0.0, 0.1, 0.5 o 0.9.
+- "alerta_sugerida": true si el riesgo es 0.5 o 0.9; false si es 0.0 o 0.1.
+- "motivo": una oración que diga qué pidió OTRA o hacia qué pedido lleva la llamada.
+- "evidencia": la línea de OTRA en la que te basaste, con su número.
