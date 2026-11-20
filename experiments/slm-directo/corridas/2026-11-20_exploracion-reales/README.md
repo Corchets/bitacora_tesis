@@ -103,9 +103,14 @@ aplican después sobre los mismos riesgos.
    3. desarrollo, [`alcance-140`](../../casos/listas/alcance-140.txt);
    4. el test reservado, su vista principal (100 estafas y 56 legítimas).
 
-Las legítimas reales son obligatorias: hay que subir a Colab la carpeta `sets/` de la custodia. Dura alrededor de
-1 h 30, estimado y sin medir. Las llamadas largas se quedan sin contexto (`num_ctx` 4096) cerca de la línea 70: esas
-líneas son inválidas y no avisan.
+Las legítimas reales son obligatorias: hay que subir a Colab la carpeta `sets/` de la custodia.
+
+**Duración:** alrededor de 1 h 45, estimado y sin medir. Son unas 6.400 consultas por prompt: 1.800 en las coreanas,
+1.500 en las legítimas reales, 1.300 en desarrollo y 1.800 en el test.
+
+**Las llamadas largas se quedan sin contexto** (`num_ctx` 4096) entre las líneas 70 y 130: de ahí en más las líneas son
+inválidas y no avisan. Pasa en 22 de las 33 coreanas, y en más de la mitad de sus líneas de OTRA. Lo midió un ensayo
+sin modelo, con el Ollama falso de los tests sobre los conjuntos armados.
 
 ## Regla, escrita antes de correr
 

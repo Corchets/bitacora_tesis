@@ -428,7 +428,7 @@ temperatura 0:
 3. Cada parte baja como `parcial-exploracion-<conjunto>-<prompt>.zip`, y al final `resultados-exploracion-reales.zip`.
 
 **Antes de ejecutar** hay que subir a Colab la carpeta `sets/` de las legítimas reales y poner su ruta en
-`LEGITIMAS_REALES`: sin eso no corre. **Duración estimada:** alrededor de 1 h 30 en T4.
+`LEGITIMAS_REALES`: sin eso no corre. **Duración estimada:** alrededor de 1 h 45 en T4.
 
 Los ZIP traen texto del test, de las coreanas y de las legítimas reales: se descomprimen fuera del repositorio y se
 analizan con `python -I analizar.py --datos CARPETA`.
