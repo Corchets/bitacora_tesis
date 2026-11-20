@@ -45,7 +45,7 @@ Errores conocidos. Los de la evaluación final van por categoría, porque no se 
 | Detector | Por familia, en el test: banco 24/25; soporte 11/20, WhatsApp 9/15 y premio 9/15 | Fuera de banco y previsional pierde cerca de la mitad |
 | Detector | Llamadas legítimas «del banco»: avisan 5 de 7 en el test | Un tercio de las falsas alarmas en legítimas generadas |
 | Detector | Llamadas reales de call center: verificación con un código o con datos, venta con apuro | Avisa en 21 de 33, y no se corrige con el prompt ([H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md)) |
-| Detector | El contexto de 4.096 tokens se llena entre las líneas 70 y 130 de una llamada larga | Deja de mirar más de la mitad de los turnos de las coreanas. No cambió el resultado porque avisa antes |
+| Detector | El contexto de 4.096 tokens se llena entre las líneas 70 y 130 de una llamada larga | Deja de mirar más de la mitad de los turnos de las coreanas (2.359 de 4.193) y de ahí en más no avisa. No cambió el resultado porque avisa antes, pero una estafa que pida algo después de ese punto quedaría sin aviso |
 | Sistema | Corte de llamada que descartaba la última consulta | Corregido (`7e6b971`) |
 
 ## 9.4. Amenazas a la validez
@@ -71,6 +71,7 @@ Errores conocidos. Los de la evaluación final van por categoría, porque no se 
 - Las cifras de detección salen de Colab. En el teléfono se midieron solo la latencia y la memoria del detector, y ahí el cálculo no es idéntico ([H11](../hallazgos/H11-el-riesgo-cambia-con-el-runtime.md)).
 - Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo.
 - Meet entrega un audio más limpio que una llamada celular en la calle.
+- Las llamadas generadas son cortas, de unos 10 turnos de quien llama, y no ejercitan el límite del contexto. En una llamada real larga el detector deja de mirar después de unos 55 turnos (§9.3).
 - No se puede prometer rendimiento para adultos mayores ni para Argentina en general.
 
 **De conclusión.** Con 20 casos, los intervalos son muy anchos: 10/10 es compatible con 72 %, y 0/10 con 28 % de falsas alarmas, ya por encima de la meta. En la evaluación final los intervalos siguen siendo anchos: el 73 % de estafas avisadas es compatible con 64 a 81 %, y el 64 % de falsas alarmas en llamadas reales, con 47 a 78 %.

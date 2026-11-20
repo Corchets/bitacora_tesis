@@ -39,6 +39,7 @@ En desarrollo:
 
 - Sin medición del recorrido completo en teléfono: en un Samsung A56 se midió solo el detector, y la latencia y la memoria quedan por encima de los criterios de prefactibilidad.
 - Corpus simulado, de redacción asistida y sin referencia humana validada.
+- **El detector deja de mirar las llamadas largas.** Con el contexto de 4.096 tokens que fija el [protocolo](../evaluacion/PROTOCOLO-EXPERIMENTAL.md), una llamada lo llena después de unos 55 turnos de quien llama (entre 33 y 77 en las estafas reales coreanas). De ahí en más no consulta al modelo y no avisa. En la evaluación final no pesó, porque las estafas avisaron antes de ese punto. Pero una estafa que pida algo recién después quedaría sin aviso, y no se midió otro tamaño de contexto.
 - Sin estafas reales argentinas: los dos conjuntos reales tienen 33 llamadas cada uno, están traducidos y son de otros países.
 - La evaluación final es una sola corrida. Al repetirla, la misma configuración movió hasta 6 casos de una cifra ([H13](../hallazgos/H13-la-misma-configuracion-corrida-de-otro-modo.md)).
 - Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo, sin comparar el mismo detector sobre las dos entradas.
@@ -52,6 +53,7 @@ En desarrollo:
 - Medir la configuración en un teléfono de gama alta: latencia, memoria, batería y temperatura.
 - Si esa medición muestra que hace falta ahorrar consultas, rediseñar la compuerta como detector de lo sensible. Se entrenaría con líneas de conversación de las dos voces, incluidas las cortas, y se mediría por cobertura antes que por ahorro ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md), [#149](https://github.com/Corchets/bitacora_tesis/issues/149)).
 - Bajar la demora por consulta, con caché de prefijo o respuestas más cortas.
+- Que una llamada larga no quede sin mirar: agrandar el contexto midiendo memoria y demora en el teléfono, y que la aplicación recorte lo que le manda al modelo (el comienzo de la llamada y los últimos turnos) en vez de dejar de consultar.
 - Ajustar el modelo para las llamadas reales, en vez de seguir cambiando el prompt ([H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md), [#176](https://github.com/Corchets/bitacora_tesis/issues/176)).
 - Un aviso en dos niveles, uno suave y uno fuerte según el riesgo, para que una llamada comercial no reciba el mismo aviso que una estafa clara.
 - Conseguir estafas y llamadas legítimas reales de Argentina, y etiquetarlas a ciegas con la política de producto.
