@@ -50,3 +50,5 @@ y 23/33 falsas alarmas (FA).
 > ([#176](https://github.com/Corchets/bitacora_tesis/issues/176)) o un aviso en dos niveles en la app, uno suave con
 > «riesgo ≥ 0,3» y uno fuerte con «riesgo ≥ 0,5». Las dos son trabajo futuro. `p-niveles` es el único candidato que
 > cambia mucho los conjuntos reales; integrarlo o no lo decide Mateo.
+>
+> **Nota del 2026-11-20:** Mateo lo descartó, sin medirlo en el test.

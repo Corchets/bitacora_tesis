@@ -162,6 +162,10 @@ aviso; la exploración pasó solo la vista principal y siguió hasta el final.
 
 ## Qué queda
 
+> **Decisión de Mateo (2026-11-20):** `p-niveles` se descarta, sin medirlo en el test. No se integra nada y la
+> configuración queda como en la evaluación final. Lo que sigue abajo es la propuesta tal como se escribió antes de esa
+> decisión.
+
 > **Estado: propuesta sin discutir.**
 
 - **No se integra nada y no hace falta un ADR:** la configuración no cambia.
