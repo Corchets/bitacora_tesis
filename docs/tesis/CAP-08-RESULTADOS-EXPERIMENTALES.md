@@ -216,7 +216,37 @@ En computadora, con la configuración del ADR 0001:
 
 La [corrida de E4B](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel.md) en la misma máquina dio 46,3 s y 15,8 s por evaluación, y avisó a +49,0 s del pedido.
 
-**En el teléfono, solo el detector.** Con la salida cortada del ADR 0002 y el prompt base, en un Samsung A56 con `llama-server` en CPU: 3,60 s de mediana y 4,90 s de p95 por línea de OTRA, unos 11 s más para el motivo del primer aviso y 3,39 GiB de pico ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)). Es una pasada sobre tres conversaciones, sin ASR. **[Sin ablaciones; falta el recorrido completo en Android.]**
+**En el teléfono, solo el detector.** Con la salida cortada del ADR 0002 y el prompt base, en un Samsung A56 con `llama-server` en CPU: 3,60 s de mediana y 4,90 s de p95 por línea de OTRA, unos 11 s más para el motivo del primer aviso y 3,39 GiB de pico ([a56-congelada-latencia](../../experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/README.md)). Es una pasada sobre tres conversaciones, sin ASR.
+
+**En dos teléfonos, con el mismo servidor.** El 2026-11-20 se midió la configuración final en un iPhone 15 Pro Max, con el mismo `llama-server`, el mismo archivo del modelo y el mismo ejecutor que en el A56 ([iphone-15-pro-max-latencia](../../experiments/slm-directo/corridas/2026-11-20_iphone-15-pro-max-latencia/README.md)). Son seis conversaciones de desarrollo y 83 consultas, todas válidas, con una pasada por fila. Mide latencia y memoria, no detección.
+
+| Teléfono | Prompt | Por línea de OTRA: mediana / p95 | Primer aviso, sin esperar el motivo | Memoria residente, pico |
+|---|---|---:|---:|---:|
+| Samsung A56, CPU con 4 hilos | `c-premisa` | 3,74 / 4,16 s | 3,68 s | 3,53 GiB |
+| iPhone, CPU con 4 hilos | `c-premisa` | 2,16 / 2,32 s | 2,03 s | 3,22 GiB |
+| iPhone, GPU | `c-premisa` | 0,94 / 1,02 s | 0,87 s | 3,20 GiB |
+| iPhone, CPU con 4 hilos | final | 2,01 / 2,41 s | 1,68 s | 3,16 GiB |
+| iPhone, GPU | final | 0,79 / 1,03 s | 0,72 s | 2,98 GiB |
+
+- Con el mismo prompt, el iPhone con GPU tarda unas 4 veces menos por línea que el A56. Con CPU y 4 hilos, como el A56, tarda 1,7 veces menos.
+- Con la configuración final y GPU, la actualización por línea queda dentro del criterio de p95 ≤ 1,5 s ([RNF-03](CAP-03-REQUISITOS-Y-ANALISIS.md#33-requisitos-no-funcionales)). El primer aviso con su motivo tarda 3,22 s de mediana.
+- El A56 todavía no tiene una corrida con el prompt final: entre teléfonos solo se compara `c-premisa`.
+- El iPhone estuvo enchufado y llegó al estado térmico `serious` en las cuatro corridas.
+
+**Detector y ASR a la vez.** El 2026-11-21 corrieron juntos en el iPhone, sin cable, el detector con la configuración final y el ASR del proyecto, Parakeet con filtro ([iphone-15-pro-max-asr-y-detector](../../experiments/slm-directo/corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/README.md)). El audio es sintético: las mismas seis conversaciones a ritmo de conversación, 12 min 18 s. La segunda pasada repite el ritmo sin el ASR.
+
+| Pasada | Detector, por línea: mediana / p95 | Memoria que iOS le cuenta a la app, pico | Libre antes del límite, mínimo | Estado térmico |
+|---|---:|---:|---:|---|
+| Detector y ASR | 0,66 / 0,70 s | 1,39 GiB | 1,92 GiB | `nominal` y `fair` |
+| Solo el detector | 0,69 / 0,72 s | 0,58 GiB | 2,73 GiB | `nominal` |
+
+Los tiempos de esta tabla son los del servidor, sin la red. La memoria que cuenta iOS no incluye el archivo del modelo; el pico residente con los dos fue de 2,62 GiB.
+
+- iOS no cerró la app.
+- El ASR no demoró al detector en esta pasada.
+- El ASR fue a tiempo real: su atraso fue de 0,17 s de p95 y 0,48 s de máximo.
+
+**Límites de las mediciones en el iPhone.** Es una pasada por condición. El audio es sintético y se lee de un archivo, no de una llamada. El detector consultó sobre el texto original, no sobre lo que transcribió el ASR. No se midió el consumo de batería. Una app de iOS no tiene una interfaz para el audio de una llamada telefónica, así que el iPhone mide el hardware, no un producto. **Falta el recorrido completo en Android.**
 
 ## 8.7. Pendientes del capítulo
 
@@ -225,5 +255,5 @@ La [corrida de E4B](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel
 3. E2, revisando motivos contra evidencia: no se hizo.
 4. Sensibilidad de la precisión a la prevalencia: están las falsas alarmas por volumen de llamadas (§8.5); la precisión según la prevalencia no se calculó.
 5. Tablas y figuras regeneradas desde salidas crudas: las de §8.3.4 y §8.3.5 salen de los `analizar.py` de cada corrida. Las anteriores, no.
-6. El detector en el teléfono con la configuración final ([#141](https://github.com/Corchets/bitacora_tesis/issues/141)): §8.6 tiene la medición con el prompt anterior.
+6. El detector en el teléfono con la configuración final ([#141](https://github.com/Corchets/bitacora_tesis/issues/141)): §8.6 la tiene en un iPhone 15 Pro Max, también con el ASR a la vez. En el A56 sigue la medición con el prompt anterior, y falta el recorrido completo en Android.
 7. La referencia con un modelo de frontera ([#174](https://github.com/Corchets/bitacora_tesis/issues/174)).
