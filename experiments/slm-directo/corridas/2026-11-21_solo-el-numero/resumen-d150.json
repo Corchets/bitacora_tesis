@@ -1,0 +1,293 @@
+{
+ "base": "d150-hoy-1",
+ "corridas": {
+  "d150-hoy-1": {
+   "consultas": 1392,
+   "validas": 1392,
+   "linea_n": 1301,
+   "linea_med": 433.28266590833664,
+   "linea_p95": 527.3508331738412,
+   "linea_max": 670.1970000285655,
+   "procesar_med": 113.304,
+   "procesar_p95": 146.045,
+   "generar_med": 316.5635,
+   "generar_p95": 380.336,
+   "tokens_gen_med": 14.0,
+   "tokens_nuevos_med": 60.0,
+   "tokens_cache_med": 883.0,
+   "avisos": 91,
+   "aviso_con_motivo_med": 2083.2855419721454,
+   "aviso_con_motivo_max": 2881.529500009492,
+   "aviso_sin_esperar_med": 440.92837488278747,
+   "aviso_sin_esperar_max": 608.1624592188746,
+   "memoria_gib": {},
+   "termico": []
+  },
+  "d150-numero": {
+   "consultas": 1392,
+   "validas": 1392,
+   "linea_n": 1301,
+   "linea_med": 260.5201250407845,
+   "linea_p95": 345.0539589393884,
+   "linea_max": 547.693874919787,
+   "procesar_med": 109.85849999999999,
+   "procesar_p95": 145.594,
+   "generar_med": 151.1875,
+   "generar_p95": 196.351,
+   "tokens_gen_med": 6.0,
+   "tokens_nuevos_med": 67.0,
+   "tokens_cache_med": 883.0,
+   "avisos": 91,
+   "aviso_con_motivo_med": 1967.612916836515,
+   "aviso_con_motivo_max": 3015.346874948591,
+   "aviso_sin_esperar_med": 267.2645840793848,
+   "aviso_sin_esperar_max": 356.8632921669632,
+   "memoria_gib": {},
+   "termico": []
+  },
+  "d150-hoy-2": {
+   "consultas": 1392,
+   "validas": 1392,
+   "linea_n": 1301,
+   "linea_med": 521.0311659611762,
+   "linea_p95": 606.6240831278265,
+   "linea_max": 934.7954590339214,
+   "procesar_med": 142.284,
+   "procesar_p95": 178.339,
+   "generar_med": 366.4875,
+   "generar_p95": 430.317,
+   "tokens_gen_med": 14.0,
+   "tokens_nuevos_med": 60.0,
+   "tokens_cache_med": 883.0,
+   "avisos": 91,
+   "aviso_con_motivo_med": 2391.294791130349,
+   "aviso_con_motivo_max": 3210.389666026458,
+   "aviso_sin_esperar_med": 497.4178341217339,
+   "aviso_sin_esperar_max": 641.0259159747511,
+   "memoria_gib": {},
+   "termico": []
+  }
+ },
+ "contra_base": {
+  "d150-numero": {
+   "lineas": 1392,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 22,
+     "base": 0.5,
+     "otra": 0.6
+    },
+    {
+     "caso": "CV2-D-L-BANCO-002",
+     "linea": 5,
+     "base": 0.2,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-BANCO-005",
+     "linea": 6,
+     "base": 0.2,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-BANCO-006",
+     "linea": 8,
+     "base": 0.3,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-L-BANCO-008",
+     "linea": 12,
+     "base": 0.1,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-L-BANCO-009",
+     "linea": 14,
+     "base": 0.2,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-BANCO-010",
+     "linea": 10,
+     "base": 0.5,
+     "otra": 0.3
+    },
+    {
+     "caso": "CV2-D-L-ESCUELA-002",
+     "linea": 8,
+     "base": 0.0,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-ESCUELA-005",
+     "linea": 20,
+     "base": 0.05,
+     "otra": 0.0
+    },
+    {
+     "caso": "CV2-D-L-MEDICO-003",
+     "linea": 20,
+     "base": 0.1,
+     "otra": 0.05
+    },
+    {
+     "caso": "CV2-D-L-ORGANISMO_PREVISIONAL-003",
+     "linea": 6,
+     "base": 0.1,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-L-TRABAJO-003",
+     "linea": 16,
+     "base": 0.05,
+     "otra": 0.0
+    },
+    {
+     "caso": "CV2-D-L-TRABAJO-003",
+     "linea": 18,
+     "base": 0.05,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-V-BANCO-004",
+     "linea": 22,
+     "base": 0.5,
+     "otra": 0.6
+    },
+    {
+     "caso": "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+     "linea": 20,
+     "base": 0.5,
+     "otra": 0.3
+    },
+    {
+     "caso": "CV2-D-V-WHATSAPP-004",
+     "linea": 15,
+     "base": 0.2,
+     "otra": 0.3
+    },
+    {
+     "caso": "LAB-familiar-peligro-parafrasis",
+     "linea": 1,
+     "base": 0.3,
+     "otra": 0.5
+    },
+    {
+     "caso": "LAB-familiar-peligro-parafrasis",
+     "linea": 3,
+     "base": 0.5,
+     "otra": 0.6
+    },
+    {
+     "caso": "LG-SUPPORT-INFO-01-e01",
+     "linea": 5,
+     "base": 0.2,
+     "otra": 0.1
+    },
+    {
+     "caso": "SC-ORG-BENEFICIO-01-e01",
+     "linea": 5,
+     "base": 0.4,
+     "otra": 0.5
+    }
+   ],
+   "primer_aviso_en_otra_linea": [],
+   "cruzan_umbral": [
+    {
+     "caso": "CV2-D-L-BANCO-006",
+     "linea": 8,
+     "base": 0.3,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-V-WHATSAPP-004",
+     "linea": 15,
+     "base": 0.2,
+     "otra": 0.3
+    }
+   ]
+  },
+  "d150-hoy-2": {
+   "lineas": 1392,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-002",
+     "linea": 5,
+     "base": 0.2,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-BANCO-002",
+     "linea": 19,
+     "base": 0.1,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-L-BANCO-005",
+     "linea": 6,
+     "base": 0.2,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-BANCO-006",
+     "linea": 8,
+     "base": 0.3,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-L-BANCO-008",
+     "linea": 12,
+     "base": 0.1,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-L-BANCO-009",
+     "linea": 14,
+     "base": 0.2,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-BANCO-010",
+     "linea": 10,
+     "base": 0.5,
+     "otra": 0.3
+    },
+    {
+     "caso": "CV2-D-L-ESCUELA-002",
+     "linea": 8,
+     "base": 0.0,
+     "otra": 0.1
+    },
+    {
+     "caso": "CV2-D-L-ORGANISMO_PREVISIONAL-003",
+     "linea": 6,
+     "base": 0.1,
+     "otra": 0.2
+    },
+    {
+     "caso": "CV2-D-L-TRABAJO-003",
+     "linea": 16,
+     "base": 0.05,
+     "otra": 0.0
+    },
+    {
+     "caso": "CV2-D-L-TRABAJO-003",
+     "linea": 18,
+     "base": 0.05,
+     "otra": 0.1
+    }
+   ],
+   "primer_aviso_en_otra_linea": [],
+   "cruzan_umbral": [
+    {
+     "caso": "CV2-D-L-BANCO-006",
+     "linea": 8,
+     "base": 0.3,
+     "otra": 0.2
+    }
+   ]
+  }
+ }
+}
