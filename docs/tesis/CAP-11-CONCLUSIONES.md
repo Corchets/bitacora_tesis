@@ -12,7 +12,7 @@
 - Un corpus controlado en español, con contexto argentino y legítimas difíciles, todavía sin revisión humana.
 - Una configuración justificada con alternativas descartadas: Parakeet con filtro Silero ([ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)) y Gemma 4 E2B solo, con un prompt que pregunta por la intención de quien llama ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)) y lleva los consejos oficiales ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)).
 - Un registro de hallazgos, de [H01 a H13](../hallazgos/README.md), que deja a la vista qué se creía, qué se midió y qué se cambió.
-- Mediciones del detector en dos teléfonos con el mismo servidor. En un iPhone 15 Pro Max con GPU, la configuración final tarda 0,8 s por turno, también con el ASR corriendo a la vez. En un Samsung A56, con el prompt anterior, 3,7 s; con ese mismo prompt, el iPhone tarda 0,9 s ([§8.6](CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)).
+- Mediciones del detector en dos teléfonos con el mismo servidor. En un iPhone 15 Pro Max con GPU, la configuración final tarda 0,8 s por turno, también con el ASR corriendo a la vez. Si el modelo genera solo el número del riesgo, tarda 0,5 s, contra 0,9 a 1,0 s medidos el mismo día, y en 150 conversaciones de desarrollo no cambió ningún aviso ([ADR 0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)). En un Samsung A56, con el prompt anterior, 3,7 s; con ese mismo prompt, el iPhone tarda 0,9 s ([§8.6](CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)).
 
 **De la evaluación final:**
 
@@ -43,6 +43,7 @@ En desarrollo:
 - **El detector deja de mirar las llamadas largas.** Con el contexto de 4.096 tokens que fija el [protocolo](../evaluacion/PROTOCOLO-EXPERIMENTAL.md), una llamada lo llena después de unos 55 turnos de quien llama (entre 33 y 77 en las estafas reales coreanas). De ahí en más no consulta al modelo y no avisa. En la evaluación final no pesó, porque las estafas avisaron antes de ese punto. Pero una estafa que pida algo recién después quedaría sin aviso. Desde el 2026-11-20 la demo usa un contexto de 16.384 tokens, que alcanza para unos 50 minutos ([README de la demo](../../experiments/voip/README.md)). La evaluación no se repitió con ese tamaño, y su costo en un teléfono no se midió.
 - Sin estafas reales argentinas: los dos conjuntos reales tienen 33 llamadas cada uno, están traducidos y son de otros países.
 - La evaluación final es una sola corrida. Al repetirla, la misma configuración movió hasta 6 casos de una cifra ([H13](../hallazgos/H13-la-misma-configuracion-corrida-de-otro-modo.md)).
+- Lo que corre en el teléfono no es exactamente lo evaluado. Es otro runtime ([H11](../hallazgos/H11-el-riesgo-cambia-con-el-runtime.md)) y, desde el 2026-11-21, el modelo genera solo el número del riesgo ([ADR 0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)). En desarrollo, cambiar el runtime movió el primer aviso en 1 o 2 de 6 conversaciones, y generar solo el número, en ninguna de 150. En el test no se probó ninguna de las dos cosas.
 - Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo, sin comparar el mismo detector sobre las dos entradas.
 - Voz real limitada a 4 guiones y 2 voces, con el audio original perdido.
 - El contenido de una llamada no permite verificar la identidad de quien habla.
@@ -53,7 +54,7 @@ En desarrollo:
 
 - Medir el recorrido completo en un Android de gama alta, con la transcripción del ASR como entrada del detector: latencia, memoria, batería y temperatura. En el iPhone se midieron la latencia, la memoria y el estado térmico, no el consumo.
 - Si esa medición muestra que hace falta ahorrar consultas, rediseñar la compuerta como detector de lo sensible. Se entrenaría con líneas de conversación de las dos voces, incluidas las cortas, y se mediría por cobertura antes que por ahorro ([H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md), [#149](https://github.com/Corchets/bitacora_tesis/issues/149)).
-- Bajar la demora por consulta, con caché de prefijo o respuestas más cortas.
+- Seguir bajando la demora por consulta. Generar solo el número ya la bajó en el iPhone; falta medirlo en el A56 con el prompt final y probar si Ollama, que usa la demo, permite ese prellenado.
 - Que una llamada larga no quede sin mirar: medir en el teléfono la memoria y la demora del contexto más grande que ya usa la demo, y que la aplicación recorte lo que le manda al modelo (el comienzo de la llamada y los últimos turnos) en vez de dejar de consultar.
 - Ajustar el modelo para las llamadas reales, en vez de seguir cambiando el prompt ([H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md), [#176](https://github.com/Corchets/bitacora_tesis/issues/176)).
 - Un aviso en dos niveles, uno suave y uno fuerte según el riesgo, para que una llamada comercial no reciba el mismo aviso que una estafa clara.
