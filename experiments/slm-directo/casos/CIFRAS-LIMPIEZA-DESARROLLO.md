@@ -37,7 +37,7 @@ ventaja de C en FA viene de legítimas poco realistas.
 - avisadas sobre las 46 y sobre las 36 con pedido;
 - avisos antes del pedido (`T_A < T_R`) sobre las 36;
 - avisadas entre las 10 sin pedido.
-- **Sin las incoherentes** (letra `c` de la [pregunta 5 de #145](../../../docs/corpus/PREGUNTA-145-ESTAFAS-SIN-PEDIDO.md)):
+- **Sin las incoherentes** (letra `c` de la [pregunta 5 de #145](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/corpus/PREGUNTA-145-ESTAFAS-SIN-PEDIDO.md)):
   queda pendiente hasta que respondan los revisores. Acá no se calcula, porque exigiría juzgar esas llamadas.
 
 **Comparación:** la diferencia entre C y v4 en cada vista. Para las estafas vale el margen de 3 casos del ADR 0005; en

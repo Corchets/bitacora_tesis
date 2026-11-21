@@ -2,7 +2,7 @@
 
 Guiones **inventados** para correr el modo `--texto` del laboratorio. Una línea es un turno. Las líneas `#` se ignoran.
 
-No son el corpus, no son fichas de rol y no entran en [CATALOGO-ESCENARIOS.csv](../../../docs/datos-etica/CATALOGO-ESCENARIOS.csv). Las fuentes oficiales justifican la modalidad; el diálogo lo escribimos nosotros, con datos ficticios. Consulta de las páginas: **2026-09-23**.
+No son el corpus, no son fichas de rol y no entran en [CATALOGO-ESCENARIOS.csv](../../../docs/corpus/CATALOGO-ESCENARIOS.csv). Las fuentes oficiales justifican la modalidad; el diálogo lo escribimos nosotros, con datos ficticios. Consulta de las páginas: **2026-09-23**.
 
 > **Estado: propuesta sin discutir.** No cierra D09 ni D07.
 >

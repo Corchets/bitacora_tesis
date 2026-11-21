@@ -37,7 +37,7 @@ Criterio de propuesta: diversidad de situaciones, solicitudes de códigos, permi
 
 ## Antes de ejecutar
 
-Los veinte IDs están conservados en la [selección de #96](SELECCION-TITO-2026-10-28.json). Cuatro tienen observaciones de curación: WhatsApp-006, soporte-004, familiar-002 y organismo previsional-001 (todos `CV2-D-V-*`); sus detalles y ajustes propuestos se consultan en la [curación](CURACION-TITO-2026-10-28.md). La aprobación no cambia los textos ni las referencias.
+Los veinte IDs están conservados en la [selección de #96](SELECCION-TITO-2026-10-28.json). Cuatro tienen observaciones de curación: WhatsApp-006, soporte-004, familiar-002 y organismo previsional-001 (todos `CV2-D-V-*`); sus detalles y ajustes propuestos se consultan en la [curación](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/CURACION-TITO-2026-10-28.md). La aprobación no cambia los textos ni las referencias.
 
 El manifiesto los identifica como `desarrollo_sin_independencia_acreditada`. Antes de habilitarlos como evaluación independiente, auditar exposición histórica y relaciones con entrenamiento/validación/diagnóstico, mantener juntos los grupos relacionados y separar estos casos de los usados para ajustar o seleccionar al Tito nuevo. La aprobación visual de esta lista no acredita por sí sola independencia ni nuevas anotaciones. No se accedió a la reserva final.
 

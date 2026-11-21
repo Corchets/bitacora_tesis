@@ -53,7 +53,7 @@ La matriz completa está en el [registro de riesgos](../gestion/REGISTRO-RIESGOS
 
 ## 10.4. Herramientas
 
-Se usaron Git y GitHub para código e issues, y copias de trabajo separadas por tarea. La [ayuda memoria visual](../../ayuda-memoria/README.md) y un tablero personal resumen el estado.
+Se usaron Git y GitHub para código e issues, y copias de trabajo separadas por tarea. La [ayuda memoria visual](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/README.md) y un tablero personal resumen el estado.
 
 **Uso de asistentes de IA.** Según registra la bitácora, participaron Claude, Codex y Gemini en implementación, revisión técnica y redacción. Corpus v2 es de redacción asistida. Una revisión por IA no sustituye a la revisión humana. **[Acordar cómo se declara en el informe final.]**
 

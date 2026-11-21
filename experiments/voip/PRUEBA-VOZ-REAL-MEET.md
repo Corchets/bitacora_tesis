@@ -103,7 +103,7 @@ En D3, un aviso es una **falsa alarma**: anotala tal cual. En D1, D2 y D4, la fa
 - [ ] `llamadas/` no se sube. A `corridas/` van solo `manifiesto.json`, `actualizaciones.jsonl` y `detector.jsonl`, sin el WAV. Comprobá con `git status` que no entre audio.
 - [ ] Por #85, repetí una llamada con `python replay.py --actualizaciones <llamada>/actualizaciones.jsonl --detector tito-slm --modelo gemma4:e2b-it-q4_K_M`.
 - [ ] Sacá una captura de Presentación con la marca de Tito y una frase «Sin consulta», sin datos personales en pantalla.
-- [ ] Problemas nuevos, a riesgos o a un issue (#86). Después, completá y publicá el [comentario de cierre de #85](corridas/2026-11-02-pendientes-tito-gemma.md#borrador-comentario-de-cierre-de-85).
+- [ ] Problemas nuevos, a riesgos o a un issue (#86). Después, completá y publicá el [comentario de cierre de #85](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-11-02-pendientes-tito-gemma.md#borrador-comentario-de-cierre-de-85).
 
 ## Al terminar la corrida
 

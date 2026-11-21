@@ -12,6 +12,7 @@ import hashlib
 import json
 import sys
 import tempfile
+import importlib.util
 import unittest
 from pathlib import Path
 
@@ -76,6 +77,8 @@ def _filas(ids, configs, con_aviso_vishing=True):
     return filas
 
 
+@unittest.skipUnless(importlib.util.find_spec("matplotlib"),
+                     "falta matplotlib: pip install -r requirements-informe-101.txt")
 class TestGraficosInforme(unittest.TestCase):
     def _corrida(self, tmp, con_tito_nuevo=False):
         ids = _ids()

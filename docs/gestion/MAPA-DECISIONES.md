@@ -120,7 +120,7 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   para un grupo etario. El encuadre vigente de D12 quedó parcial: ver
   [D12](#d12--encuadre-del-foco-en-adultos-mayores).
 - **Contribución defendible (consolidación PR #58):** la arquitectura incremental
-  documentada (capas 3 y 4 del [diseño integrado](../investigacion/DISENO-INTEGRADO.md)),
+  documentada (capas 3 y 4 del [diseño integrado](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/investigacion/DISENO-INTEGRADO.md)),
   el hueco que deja la patente de Google US 2024/0388655 A1.
 - **Alternativa con modelo por API (JEV), descartada (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
   no entra en la tesis ni como techo experimental ni como modo híbrido. La inferencia sigue siendo
@@ -167,7 +167,7 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   adjudicar ambigüedades.
 - **Prioridad de revisión planteada por Luciano (2026-11-04):** comprobar si los casos
   son ambiguos o están mal construidos antes de atribuir los errores al prompt o a
-  RoBERTuito. El [panel de lectura](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+  RoBERTuito. El [panel de lectura](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/revision-casos.html)
   expone diálogos, fichas y dudas originales. Es una hipótesis a contrastar caso por
   caso; no adjudica referencias, no da por probada la causa ni cambia D09.
 - **Para cerrar:** manual probado en una muestra común por los cuatro integrantes,
@@ -199,7 +199,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [METRICAS.md](../evaluacion/METRICAS.md#5-pendientes-para-congelar-la-evaluación).
   Las preguntas caracterizan desempeño; no requieren inventar un umbral de éxito.
 - **Antecedentes:** [ventana y alerta](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)
-  y [diseño integrado](../investigacion/DISENO-INTEGRADO.md) proponen mecanismos.
+  y [diseño integrado](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/investigacion/DISENO-INTEGRADO.md) proponen mecanismos.
   Sus números sintéticos no prueban rendimiento ni congelan el protocolo.
 - **Por fijar antes de medir (consolidación PR #58):** la restricción de falsos
   positivos por revisión (VENTANA §7.1: máximo de llamadas legítimas con alerta y
@@ -330,7 +330,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   debe declarar qué código y datos reutiliza y qué cambió.
 - **Preparación delegada por el usuario (2026-10-29):** el usuario aprobó las veinte
   conversaciones de #101 y delegó resolver los parámetros técnicos sin nuevas
-  aprobaciones genéricas. [Preparación operativa](../../experiments/slm-directo/DATOS-TITO.md#preparación-técnica-delegada--2026-10-29):
+  aprobaciones genéricas. [Preparación operativa](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/DATOS-TITO.md#preparación-técnica-delegada--2026-10-29):
   particiones por ID/hash, historial acumulado como entrada principal del Tito nuevo,
   búsqueda acotada y supervisión IA explícita para desarrollo. #98–#102 actualizados
   en GitHub. La auditoría semántica entre fuentes y las etiquetas de prefijos siguen
@@ -404,7 +404,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 
 - **Aceptación de la curación de Tito (2026-10-28):** el usuario revisó los
   informes y aprobó #96 expresamente; el issue queda cerrado para continuar
-  la secuencia de #95. [Registro de aprobación](../../experiments/slm-directo/CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
+  la secuencia de #95. [Registro de aprobación](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
   Codex creó #103 por interpretar incorrectamente que se aprobaban solo informes;
   se retiró como no planificado y se eliminó su bloqueo de #98. No constituye una
   nueva condición ni exige otra aprobación de #96. Se conserva la distinción entre
@@ -463,13 +463,13 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Pregunta:** ¿cómo facilitar al equipo de cuatro la reincorporación al trabajo, la consulta de hitos y la entrada a los issues sin añadir sobrecarga de gestión en GitHub ni crear un segundo backlog?
 - **Tipo:** herramienta de coordinación interna y consulta del repositorio.
 - **Responsable:** Mateo Antenucci / Equipo.
-- **Evidencia:** [issue #57](https://github.com/Corchets/bitacora_tesis/issues/57), [README de ayuda-memoria](../../ayuda-memoria/README.md), [sistema de diseño](../../ayuda-memoria/DESIGN.md) y [skill de proyecto](../../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
+- **Evidencia:** [issue #57](https://github.com/Corchets/bitacora_tesis/issues/57), [README de ayuda-memoria](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/README.md), [sistema de diseño](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/DESIGN.md) y [skill de proyecto](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/.agents/skills/actualizar-ayuda-memoria/SKILL.md).
 - **Desbloquea:** incorporación fluida del equipo al hito H2 sin fricción ni reconstrucción del repositorio.
 - **Estado:** resuelta (2026-10-07).
 - **Conclusión:** sitio web estático (`ayuda-memoria/`, HTML/CSS/JS con generador Node) con vistas para `laboratorio-main` (entrada principal) y `main`. Muestra hitos, issues abiertos agrupados, roadmap, glosario y briefs de arranque para H2 (#19, #32, #39, #50, #54). Los briefs son orientaciones mantenidas en la web, no campos obligatorios de los issues en GitHub ni un segundo backlog. Se actualizan mediante la skill explícita `$actualizar-ayuda-memoria` a nivel proyecto. El build consulta datos de GitHub y archivos de cada commit sin publicar copias viejas. Publicación por enlace en Vercel alimentada por workflow ante pushes y cambios en issues (requiere secrets de despliegue). No altera el alcance de tesis, no ejecuta IA desatendida y no cierra D07/D08/D09.
-- **Evolución (2026-10-08):** por pedido del usuario, el roadmap local pasa a un grafo navegable de dependencias reales con filtros, zoom, panel de contexto y alternativa accesible en lista. [Diseño y fuentes de la librería](../../ayuda-memoria/DESIGN.md#24-componentes-del-mapa-de-entregas-roadmap). Bundle y licencia servidos localmente, versión fijada en lockfile. PR #58 agrega la vista de arquitectura y simulador ilustrativo, con decisiones cargadas desde el mapa adoptado. Estas mejoras están en el árbol local; falta integrar y publicar la rama.
-- **Evolución (2026-10-21):** por pedido del usuario, el roadmap se organiza por componentes con avances, pendientes e issues relacionados, sin modificar la visualización de arquitectura; deja de requerir Cytoscape. Integrado en `main` mediante [PR #60](https://github.com/Corchets/bitacora_tesis/pull/60), con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39687885945). Integrado también en `laboratorio-main` mediante [PR #61](https://github.com/Corchets/bitacora_tesis/pull/61), sin conflictos, con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39688319419). Se corrigió el workflow de laboratorio para descargar el SHA del evento; los pushes de ambas ramas publican al mismo proyecto Vercel. Configuración y límites en [README](../../ayuda-memoria/README.md#publicar-y-automatizar).
-- **Skill de cierre (2026-10-21):** el usuario pidió ampliar `$actualizar-ayuda-memoria` para que el equipo invoque el circuito de actualización de seguimiento y preparación del PR después de trabajar un issue. Conserva invocación explícita y modo solo briefs; integrar y comprobar Vercel requiere que ese sea el alcance solicitado. Procedimiento y límites en su [SKILL.md](../../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
+- **Evolución (2026-10-08):** por pedido del usuario, el roadmap local pasa a un grafo navegable de dependencias reales con filtros, zoom, panel de contexto y alternativa accesible en lista. [Diseño y fuentes de la librería](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/DESIGN.md#24-componentes-del-mapa-de-entregas-roadmap). Bundle y licencia servidos localmente, versión fijada en lockfile. PR #58 agrega la vista de arquitectura y simulador ilustrativo, con decisiones cargadas desde el mapa adoptado. Estas mejoras están en el árbol local; falta integrar y publicar la rama.
+- **Evolución (2026-10-21):** por pedido del usuario, el roadmap se organiza por componentes con avances, pendientes e issues relacionados, sin modificar la visualización de arquitectura; deja de requerir Cytoscape. Integrado en `main` mediante [PR #60](https://github.com/Corchets/bitacora_tesis/pull/60), con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39687885945). Integrado también en `laboratorio-main` mediante [PR #61](https://github.com/Corchets/bitacora_tesis/pull/61), sin conflictos, con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39688319419). Se corrigió el workflow de laboratorio para descargar el SHA del evento; los pushes de ambas ramas publican al mismo proyecto Vercel. Configuración y límites en [README](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/README.md#publicar-y-automatizar).
+- **Skill de cierre (2026-10-21):** el usuario pidió ampliar `$actualizar-ayuda-memoria` para que el equipo invoque el circuito de actualización de seguimiento y preparación del PR después de trabajar un issue. Conserva invocación explícita y modo solo briefs; integrar y comprobar Vercel requiere que ese sea el alcance solicitado. Procedimiento y límites en su [SKILL.md](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/.agents/skills/actualizar-ayuda-memoria/SKILL.md).
 
 ## Decisiones cerradas
 

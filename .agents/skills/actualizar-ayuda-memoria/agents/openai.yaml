@@ -1,6 +1,0 @@
-interface:
-  display_name: "Actualizar ayuda memoria"
-  short_description: "Actualiza seguimiento y prepara el PR de un issue"
-  default_prompt: "Usá $actualizar-ayuda-memoria para actualizar el seguimiento del issue terminado en esta sesión y preparar su PR hacia laboratorio-main."
-policy:
-  allow_implicit_invocation: false

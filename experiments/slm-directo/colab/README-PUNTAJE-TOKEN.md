@@ -11,12 +11,12 @@ Verifica que el primer token de `gemma4:e2b-it-q4_K_M` sea un SÍ/NO limpio ante
 
 **Humo 1 (2026-11-05, tag `colab/143-humo`): no pasó.** Con los prompts `*-sino`, `masa_si_no` ≥ 0,9 en solo 35,
 31 y 38 de 48 líneas: cuando el modelo quería avisar, empezaba a escribir «al…» en vez de «SÍ».
-[Resultado](../corridas/2026-11-05_humo-puntaje-token-1/humo.md) y causa en
+[Resultado](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/corridas/2026-11-05_humo-puntaje-token-1/humo.md) y causa en
 [`prompts/README.md`](../prompts/README.md#prueba-de-humo-1-descartada-tarea-sino-v4-sino-v4-sin-reglas-sino).
 
 **Humo 2 (2026-11-05, tag `colab/143-humo-2`): pasa.** `masa_si_no` ≥ 0,9 en 48 de 48 líneas en las tres variantes
-([resultado](../corridas/2026-11-05_humo-puntaje-token-2/humo.md)). A1 y A2 como los define #143. Corre
-[`humo_puntaje_token.py`](humo_puntaje_token.py) con Ollama 0.40.14 (el de las líneas base), el mismo digest del
+([resultado](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/corridas/2026-11-05_humo-puntaje-token-2/humo.md)). A1 y A2 como los define #143. Corre
+[`humo_puntaje_token.py`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/colab/humo_puntaje_token.py) con Ollama 0.40.14 (el de las líneas base), el mismo digest del
 modelo, `num_ctx` 4096, seed 42, temperatura 0 y `think` false:
 
 1. Un pedido directo a `/api/chat` con `logprobs` y `top_logprobs` 20 (`v4-a1`), guardado entero en
@@ -37,7 +37,7 @@ y se repite. `p_si` en estos 3 casos no se usa para elegir nada.
 
 **Pasos:**
 
-1. Abrir [`COLAB-HUMO-PUNTAJE-TOKEN.ipynb`](COLAB-HUMO-PUNTAJE-TOKEN.ipynb) en Colab (Archivo → Abrir notebook →
+1. Abrir [`COLAB-HUMO-PUNTAJE-TOKEN.ipynb`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/colab/COLAB-HUMO-PUNTAJE-TOKEN.ipynb) en Colab (Archivo → Abrir notebook →
    GitHub, o subiendo el archivo) y elegir Entorno de ejecución → Cambiar tipo → **GPU T4**.
 2. Ejecutar la única celda. El notebook clona el repositorio, trae el tag `colab/143-humo-2`, comprueba que apunte
    al commit fijado y corre el script desde ese commit, no desde una rama.

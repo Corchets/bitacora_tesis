@@ -13,8 +13,8 @@ El código está en `experiments/laboratorio/`, sin Markdown adentro.
 ## UI local para texto y resultados (#44)
 
 Implementación del [issue #44](https://github.com/Corchets/bitacora_tesis/issues/44) en
-[ui_laboratorio.py](../../experiments/laboratorio/ui_laboratorio.py) y
-[ui_resultados.py](../../experiments/laboratorio/ui_resultados.py). Permite explorar y
+[ui_laboratorio.py](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/laboratorio/ui_laboratorio.py) y
+[ui_resultados.py](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/laboratorio/ui_resultados.py). Permite explorar y
 contrastar visualmente los CSV de corridas existentes en `experiments/laboratorio/resultados/`,
 probar la lógica del pipeline sobre secuencias de texto y entrenar un clasificador lineal en memoria
 para experimentación rápida.
@@ -366,7 +366,7 @@ las decisiones metodológicas clave del proyecto**:
 - **[D08 — Congelar protocolo experimental](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental):**
   Los umbrales (ej. 0.50) y la ventana móvil de 3 opiniones provienen del spike #29 y no constituyen la política
   temporal congelada. La UI no reemplaza la evaluación con particiones sin fuga de información
-  ([METODO-CREACION-CORPUS.md §9](../datos-etica/METODO-CREACION-CORPUS.md#9-división-de-datos)).
+  ([METODO-CREACION-CORPUS.md §9](../corpus/METODO-CREACION-CORPUS.md#9-división-de-datos)).
 - **[D09 — Elegir ASR y detector](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector):**
   Ni RoBERTuito ni la cascada con Llama 3.2 1B representan la selección final de la tesis. En los ensayos provisorios
   la cascada no mejoró al encoder solo ([CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md](CONTRASTE-NLP-TEORIA-Y-LABORATORIO.md)).
@@ -456,7 +456,7 @@ Definiciones de `T_A` y márgenes: [METRICAS.md](../evaluacion/METRICAS.md).
 ## Gamas y techos
 
 Una sola lógica, tres configs (`GAMA` + `mem_limit` en
-[docker-compose.yml](../../experiments/laboratorio/docker-compose.yml)):
+[docker-compose.yml](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/laboratorio/docker-compose.yml)):
 
 | `GAMA` | `mem_limit` | Hilos ASR/detector | Estado en #29 |
 |---|---|---|---|

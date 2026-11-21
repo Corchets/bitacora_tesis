@@ -487,8 +487,8 @@ Se repiten con cualquier corte y umbral; son del modelo con esta voz.
 
 Corridas: [`parakeet-silero-vs-rms`](corridas/2026-10-29_voz-real_parakeet-silero-vs-rms/resumen.md) (WER, CER y etiquetas,
 regla del §2) y [`vad-extras`](corridas/2026-10-29_voz-real_vad-extras/resumen.md) (lo que el WER no muestra y simulación
-del umbral). Informe en PDF con gráficos: [`INFORME-SILERO-VS-RMS.pdf`](corridas/2026-10-29_voz-real_vad-extras/INFORME-SILERO-VS-RMS.pdf),
-generado con [`informe_silero_vs_rms.py`](informe_silero_vs_rms.py).
+del umbral). Informe en PDF con gráficos: [`INFORME-SILERO-VS-RMS.pdf`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/asr-local/corridas/2026-10-29_voz-real_vad-extras/INFORME-SILERO-VS-RMS.pdf),
+generado con [`informe_silero_vs_rms.py`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/asr-local/informe_silero_vs_rms.py).
 
 ### 12.1 Condiciones
 

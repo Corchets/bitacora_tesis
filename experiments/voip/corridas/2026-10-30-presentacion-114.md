@@ -53,9 +53,9 @@ python -m unittest discover -s experiments/voip/tests -p 'test_*.py' -q
 
 Capturas con datos sintéticos:
 
-- [Escena final conservada tras reconectar, 1920 × 1080](2026-10-30-presentacion-114-fin-conservado-1920x1080.png).
-- [Falla de fuente y error del detector, 1920 × 1080](2026-10-30-presentacion-114-fallo-1920x1080.png).
-- [Notebook, 1366 × 768](2026-10-30-presentacion-114-notebook-1366x768.png).
+- [Escena final conservada tras reconectar, 1920 × 1080](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-114-fin-conservado-1920x1080.png).
+- [Falla de fuente y error del detector, 1920 × 1080](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-114-fallo-1920x1080.png).
+- [Notebook, 1366 × 768](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-114-notebook-1366x768.png).
 
 ## Límites
 
