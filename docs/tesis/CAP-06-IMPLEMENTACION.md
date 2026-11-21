@@ -19,7 +19,7 @@ Las bibliotecas y runtimes utilizados, con sus números de versión reales extra
 | **Modelo de ASR** | `sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8` | v3, int8 | Transcripción por frases, búsqueda *greedy*, 2 hilos. |
 | **Filtro de voz** | `silero_vad.onnx` | Release `asr-models` de `sherpa-onnx` | Decide qué cuenta como voz (umbral 0,5). |
 | **Servidor de SLM** | `ollama` | `0.40.5` (M1), `0.40.8` (Ryzen), `0.40.14` (Colab T4) | Inferencia local con API HTTP. |
-| **Servidor en el teléfono** | `llama-server` (llama.cpp) | `6c01da62` | Medición en el Samsung A56, en CPU con 4 hilos. |
+| **Servidor en el teléfono** | `llama-server` (llama.cpp) | `6c01da62` | Medición en el Samsung A56, en CPU con 4 hilos, y en un iPhone 15 Pro Max, con GPU y con CPU, dentro de una app mínima. |
 | **Modelo de lenguaje** | `gemma4:e2b-it-q4_K_M` | Digest `b37049369adf…`, 4,59 GB | Decisión del aviso, con temperatura 0, seed 42 y `num_ctx` 4096; la salida se corta a los 14 tokens. |
 | **Llamada en vivo** | `websockets` | `>=15.0` | Audio y control entre el panel y el servidor. |
 | **Panel** | HTML y módulos JavaScript | Sin dependencias externas | Captura por AudioWorklet, conversación y Presentación. |

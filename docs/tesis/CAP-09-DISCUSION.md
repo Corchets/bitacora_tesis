@@ -68,8 +68,8 @@ Errores conocidos. Los de la evaluación final van por categoría, porque no se 
 **Externa.**
 - El corpus es simulado y de redacción asistida, y las llamadas tienen 4 guiones y 2 voces.
 - Los dos conjuntos reales tienen 33 llamadas cada uno, son de Corea y de Estados Unidos y están traducidos. No hay estafas reales argentinas.
-- Las cifras de detección salen de Colab. En el teléfono se midieron solo la latencia y la memoria del detector, y ahí el cálculo no es idéntico ([H11](../hallazgos/H11-el-riesgo-cambia-con-el-runtime.md)).
-- Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo.
+- Las cifras de detección salen de Colab. En los teléfonos se midieron la latencia y la memoria, no la detección, y ahí el cálculo no es idéntico ([H11](../hallazgos/H11-el-riesgo-cambia-con-el-runtime.md)). Entre el iPhone y el A56, con el mismo prompt, el riesgo cambió en 12 de 83 líneas, sin mover el primer aviso de ninguna conversación ([medición](../../experiments/slm-directo/corridas/2026-11-20_iphone-15-pro-max-latencia/README.md)).
+- Las métricas de detección salen de conversaciones escritas, no de audio transcripto. El ASR se midió aparte, con voz real y ruido de fondo. En el iPhone corrieron a la vez, pero el detector leyó el texto original y no la transcripción.
 - Meet entrega un audio más limpio que una llamada celular en la calle.
 - Las llamadas generadas son cortas, de unos 10 turnos de quien llama, y no ejercitan el límite del contexto. En una llamada real larga el detector deja de mirar después de unos 55 turnos (§9.3).
 - No se puede prometer rendimiento para adultos mayores ni para Argentina en general.
@@ -78,7 +78,7 @@ Errores conocidos. Los de la evaluación final van por categoría, porque no se 
 
 ## 9.5. Implicaciones de ingeniería, éticas y de uso
 
-- **Ingeniería.** E2B no cumple el presupuesto de latencia ni el de memoria de la prefactibilidad. El camino para bajar la demora fue la caché de prefijo y pedir menos texto, no un modelo mayor: con la salida cortada después del riesgo, en un A56 tarda 3,6 s por turno, y mostrar el aviso sin esperar el motivo baja el primero de 13,8 s a 3,7 s ([#172](https://github.com/Corchets/bitacora_tesis/issues/172)).
-- **Producto.** En Android no se puede capturar una llamada común. El prototipo muestra el análisis en una llamada por Meet, no una protección universal.
+- **Ingeniería.** En la notebook y en el A56, E2B no cumple el presupuesto de latencia ni el de memoria de la prefactibilidad. El camino para bajar la demora fue la caché de prefijo y pedir menos texto, no un modelo mayor: con la salida cortada después del riesgo, en un A56 tarda 3,6 s por turno, y mostrar el aviso sin esperar el motivo baja el primero de 13,8 s a 3,7 s ([#172](https://github.com/Corchets/bitacora_tesis/issues/172)). En un iPhone 15 Pro Max con GPU, la configuración final tarda 0,8 s por turno, dentro del presupuesto de latencia, y el ASR corre a la vez sin demorarla ([§8.6](CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). Es una pasada, con audio sintético.
+- **Producto.** En Android no se puede capturar una llamada común, y en iOS una app tampoco tiene una interfaz para el audio de una llamada. El prototipo muestra el análisis en una llamada por Meet, no una protección universal.
 - **Ética.** Una falsa alarma en una llamada legítima también tiene costo, y un detector no verifica identidades: el aviso debe sugerir verificar, no afirmar fraude. Con dos de cada tres llamadas comerciales reales avisadas, no puede presentarse como una alarma. La [política de producto](../../experiments/slm-directo/corridas/2026-11-10_revision-producto/POLITICA.md) ya trata como tolerable el aviso que coincide con un consejo oficial, aunque la llamada sea legítima.
 - **Datos.** El audio perdido muestra que el resguardo de voces requiere un procedimiento explícito.

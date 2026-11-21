@@ -44,7 +44,7 @@ La matriz completa está en el [registro de riesgos](../gestion/REGISTRO-RIESGOS
 |---|---|---|
 | R28 | Test sin referencia humana | Abierto; lo mitigan las llamadas y la muestra común |
 | R27 | La configuración rinde peor en el test | Abierto; se informa aunque sea desfavorable |
-| R08 | Modelo pesado para el móvil | Materializado en computadora; sin medir en teléfono |
+| R08 | Modelo pesado para el móvil | Materializado en computadora y en el A56 (3,7 s por línea, con el prompt anterior). En un iPhone 15 Pro Max con GPU la latencia entra (0,8 s con la configuración final). Falta el recorrido completo en Android |
 | R23 | La demo falla en la sala | Mitigado con plan B y video; falta confirmar el ensayo en sala |
 | R24 | Pérdida de grabaciones | **Materializado** el 2026-11-02; sigue abierto |
 | R17 | Desincronización entre ramas y copias | Recurrente; se corrigen citas al cerrar issues |
