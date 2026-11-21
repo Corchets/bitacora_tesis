@@ -1,6 +1,10 @@
 # #143, evaluación final
 
-> **Estado: propuesta sin discutir.** El código está listo y probado en seco, pero **no corrió**: nadie corrió nada
+> **Estado: corrió el 2026-11-19,** una sola pasada sobre el test, con el tag `colab/143-evaluacion-final-2`. Las
+> cifras están en [`analisis.md`](analisis.md) y los CSV del test, en la rama `reserva/test`. Lo que sigue describe
+> cómo se preparó.
+>
+> **Estado anterior (hasta el 2026-11-19): propuesta sin discutir.** El código está listo y probado en seco, pero **no corrió**: nadie corrió nada
 > sobre el test. Decisiones de Mateo del 2026-11-18: sin criterios de aprobación (se informan cifras con intervalo y la
 > comparación pareada), el set externo es solo de estafas, y los resultados del test van a `reserva/test`. La configuración quedó fijada el
 > 2026-11-18: `c-consejos-corte-riesgo` ([ADR 0008](../../../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md)), antes del tag `colab/143-evaluacion-final`
