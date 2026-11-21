@@ -92,12 +92,7 @@ cambió.
 | [`2026-10-26_135746_qwen2b-q8-comparacion`](../corridas/2026-10-26_135746_qwen2b-q8-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
 | [`2026-10-26_135930_qwen9b-comparacion`](../corridas/2026-10-26_135930_qwen9b-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
 | [`2026-10-26_141023_llama1b-comparacion`](../corridas/2026-10-26_141023_llama1b-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-29_170921`](../corridas/2026-10-29_170921/) | 2026-10-29 | 2 | 2 casos sin lista | `riesgo` |
-| [`2026-10-29_171810_win-gemma3n-e2b-riesgo-cpu`](../corridas/2026-10-29_171810_win-gemma3n-e2b-riesgo-cpu/) | 2026-10-29 | 150 | lista desarrollo-150 | `riesgo` |
-| [`2026-10-29_173937_win-gemma3n-e2b-riesgo-cv2-cpu`](../corridas/2026-10-29_173937_win-gemma3n-e2b-riesgo-cv2-cpu/) | 2026-10-29 | 97 | grupo corpus_v2 | `riesgo` |
 | [`2026-10-29_182016_rapida-gemma3n-e2b`](../corridas/2026-10-29_182016_rapida-gemma3n-e2b/) | 2026-10-29 | 20 | lista rapida-20 | `riesgo`, `v2` |
-| [`2026-10-30_192609`](../corridas/2026-10-30_192609/) | 2026-10-30 | 2 | 2 casos sin lista | `reranker pedidos` |
-| [`2026-10-30_193159`](../corridas/2026-10-30_193159/) | 2026-10-30 | 2 | 2 casos sin lista | `reranker pedidos` |
 | [`2026-10-30_200421_r1-bge`](../corridas/2026-10-30_200421_r1-bge/) | 2026-10-30 | 77 | 77 casos sin lista | `reranker pedidos` |
 | [`2026-10-31_021253_r1-bge-resto`](../corridas/2026-10-31_021253_r1-bge-resto/) | 2026-10-31 | 57 | 57 casos sin lista | `reranker pedidos` |
 | [`2026-10-31_105542_r3-riesgo-seleccion`](../corridas/2026-10-31_105542_r3-riesgo-seleccion/) | 2026-10-31 | 57 | lista seleccion-57 | `riesgo` |
@@ -159,6 +154,15 @@ cambió.
 | [`2026-11-10_a56-congelada-latencia`](../corridas/2026-11-10_a56-congelada-latencia/) | 2026-11-10 | 3 | 3 casos sin lista (3 ya no están en desarrollo) |  |
 | [`2026-11-10_config-congelada-humo/desarrollo/2026-11-10_152954_config-congelada-desarrollo`](../corridas/2026-11-10_config-congelada-humo/desarrollo/2026-11-10_152954_config-congelada-desarrollo/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-json-corte-riesgo` |
 | [`2026-11-10_config-congelada-humo/humo/corrida/2026-11-10_152633_config-congelada-humo`](../corridas/2026-11-10_config-congelada-humo/humo/corrida/2026-11-10_152633_config-congelada-humo/) | 2026-11-10 | 3 | 3 casos sin lista | `c-json-corte`, `c-json-corte-riesgo` |
+| [`2026-11-10_revision-producto/base/2026-11-18_220141_revision-producto-base`](../corridas/2026-11-10_revision-producto/base/2026-11-18_220141_revision-producto-base/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-premisa-corte-riesgo` |
+| [`2026-11-10_revision-producto/base-rep/2026-11-18_224124_revision-producto-base-rep`](../corridas/2026-11-10_revision-producto/base-rep/2026-11-18_224124_revision-producto-base-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-premisa-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-codigo/2026-11-18_221122_revision-producto-c-codigo`](../corridas/2026-11-10_revision-producto/c-codigo/2026-11-18_221122_revision-producto-c-codigo/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-codigo-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-codigo-rep/2026-11-18_224717_revision-producto-c-codigo-rep`](../corridas/2026-11-10_revision-producto/c-codigo-rep/2026-11-18_224717_revision-producto-c-codigo-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-codigo-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-consejos/2026-11-18_222108_revision-producto-c-consejos`](../corridas/2026-11-10_revision-producto/c-consejos/2026-11-18_222108_revision-producto-c-consejos/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-consejos-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-consejos-rep/2026-11-18_225308_revision-producto-c-consejos-rep`](../corridas/2026-11-10_revision-producto/c-consejos-rep/2026-11-18_225308_revision-producto-c-consejos-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-consejos-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-freno/2026-11-18_223059_revision-producto-c-freno`](../corridas/2026-11-10_revision-producto/c-freno/2026-11-18_223059_revision-producto-c-freno/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-freno-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-freno-rep/2026-11-18_225856_revision-producto-c-freno-rep`](../corridas/2026-11-10_revision-producto/c-freno-rep/2026-11-18_225856_revision-producto-c-freno-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-freno-corte-riesgo` |
+| [`2026-11-10_revision-producto/humo/corrida/2026-11-18_215756_revision-producto-humo`](../corridas/2026-11-10_revision-producto/humo/corrida/2026-11-18_215756_revision-producto-humo/) | 2026-11-18 | 3 | 3 casos sin lista | `c-premisa-corte-riesgo`, `c-codigo-corte-riesgo`, `c-consejos-corte-riesgo`, `c-freno-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/base/2026-11-10_191406_sensibilidad-base`](../corridas/2026-11-10_sensibilidad-c/base/2026-11-10_191406_sensibilidad-base/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-json-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/base-rep/2026-11-10_195308_sensibilidad-base-rep`](../corridas/2026-11-10_sensibilidad-c/base-rep/2026-11-10_195308_sensibilidad-base-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-json-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/c-ancla/2026-11-10_192350_sensibilidad-c-ancla`](../corridas/2026-11-10_sensibilidad-c/c-ancla/2026-11-10_192350_sensibilidad-c-ancla/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-ancla-corte-riesgo` |
@@ -179,3 +183,11 @@ cambió.
 | [`2026-11-11_a56-latencia-172/s6-t8`](../corridas/2026-11-11_a56-latencia-172/s6-t8/) | 2026-11-11 | 6 | 6 casos sin lista |  |
 | [`2026-11-11_a56-latencia-172/s6-ub128`](../corridas/2026-11-11_a56-latencia-172/s6-ub128/) | 2026-11-11 | 6 | 6 casos sin lista |  |
 | [`2026-11-11_a56-latencia-172/s6-vk`](../corridas/2026-11-11_a56-latencia-172/s6-vk/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/cpu-t4`](../corridas/2026-11-20_iphone-15-pro-max-latencia/cpu-t4/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/cpu-t4-premisa`](../corridas/2026-11-20_iphone-15-pro-max-latencia/cpu-t4-premisa/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/metal`](../corridas/2026-11-20_iphone-15-pro-max-latencia/metal/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/metal-premisa`](../corridas/2026-11-20_iphone-15-pro-max-latencia/metal-premisa/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/seco-mac`](../corridas/2026-11-20_iphone-15-pro-max-latencia/seco-mac/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_iphone-15-pro-max-asr-y-detector/asr-y-detector`](../corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/asr-y-detector/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_iphone-15-pro-max-asr-y-detector/seco-mac`](../corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/seco-mac/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_iphone-15-pro-max-asr-y-detector/solo-detector`](../corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/solo-detector/) | 2026-11-21 | 6 | 6 casos sin lista |  |
