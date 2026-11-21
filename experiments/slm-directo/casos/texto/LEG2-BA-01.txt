@@ -1,0 +1,12 @@
+A: ¿Hola?
+B: Buenas tardes, te habla Verónica, del área de prevención de fraudes de Banco Andino. ¿Hablo con Gonzalo Ruiz?
+A: Sí, ¿qué pasó?
+B: Gonzalo, necesito validar tu identidad antes de darte información. ¿Me decís tu DNI y tu fecha de nacimiento?
+A: Cuarenta, ciento cinco, trescientos veintidós. Y nací el catorce de marzo del noventa y siete.
+B: Gracias, coincide. Registramos un intento de compra con tu tarjeta de crédito terminada en cuatro cuatro uno siete, por ciento ochenta y siete mil pesos, en un comercio online. ¿La reconocés?
+A: No, no, yo no compré nada.
+B: Ok. La operación quedó rechazada, no se te cobró. Voy a bloquear la tarjeta y te mandamos una nueva a tu domicilio en siete a diez días hábiles.
+A: Sí, bloqueala.
+B: Listo. Por precaución también suspendimos la app. Te va a llegar un SMS con un código para reactivarla. Ese código lo ponés vos en la app y no se lo das a nadie, ni a mí ni a nadie que te llame del banco.
+A: Ok, entendido.
+B: Tu número de gestión es cincuenta y ocho veintidós diez. Gracias, Gonzalo, buena tarde.

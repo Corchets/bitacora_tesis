@@ -1,0 +1,3 @@
+Base: C sin alerta (el JSON pide solo el riesgo), sobre los 244
+commit c3c1ffa9b795ae0018d3e6d98d1cef91ae88ac59
+minutos 18.3

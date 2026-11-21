@@ -1,0 +1,6 @@
+# Las 3 ENT-L de selección de personal (legitimas_cotidianas), agregadas el 2026-11-06 para completar
+# las familias del lote 3. Formato de ENT-L, pero las escribió otro agente después: van aparte de legitimas-91.
+# Uso: python correr.py --lista legitimas-seleccion-3 ...
+ENT-L-SELECCION-001
+ENT-L-SELECCION-002
+ENT-L-SELECCION-003

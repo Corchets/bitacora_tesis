@@ -1,0 +1,297 @@
+{
+  "pasadas_previstas_originalmente": 3,
+  "pasadas_solicitadas": 1,
+  "turnos": 475,
+  "esperados": 475,
+  "completa": true,
+  "pasadas_extra_turnos": 1,
+  "consultas": {
+    "omitida": 54,
+    "slm_valida": 421
+  },
+  "salidas_invalidas": 0,
+  "casos": [
+    {
+      "id": "CV2-D-V-BANCO-001",
+      "clase": "vishing",
+      "familia": "banco",
+      "referencia_revisada": false,
+      "t_r_linea": 32,
+      "turnos_esperados": 38,
+      "turnos_registrados": 38,
+      "primer_aviso": 32,
+      "consulta_gemma": 37,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-BANCO-006",
+      "clase": "vishing",
+      "familia": "banco",
+      "referencia_revisada": false,
+      "t_r_linea": 14,
+      "turnos_esperados": 21,
+      "turnos_registrados": 21,
+      "primer_aviso": 10,
+      "consulta_gemma": 17,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-WHATSAPP-001",
+      "clase": "vishing",
+      "familia": "whatsapp",
+      "referencia_revisada": false,
+      "t_r_linea": 9,
+      "turnos_esperados": 21,
+      "turnos_registrados": 21,
+      "primer_aviso": 9,
+      "consulta_gemma": 20,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-WHATSAPP-004",
+      "clase": "vishing",
+      "familia": "whatsapp",
+      "referencia_revisada": false,
+      "t_r_linea": 13,
+      "turnos_esperados": 21,
+      "turnos_registrados": 21,
+      "primer_aviso": null,
+      "consulta_gemma": 15,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-SOPORTE-001",
+      "clase": "vishing",
+      "familia": "soporte",
+      "referencia_revisada": false,
+      "t_r_linea": 14,
+      "turnos_esperados": 21,
+      "turnos_registrados": 21,
+      "primer_aviso": 14,
+      "consulta_gemma": 19,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-SOPORTE-007",
+      "clase": "vishing",
+      "familia": "soporte",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 21,
+      "turnos_registrados": 21,
+      "primer_aviso": null,
+      "consulta_gemma": 20,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-ORGANISMO_PREVISIONAL-003",
+      "clase": "vishing",
+      "familia": "organismo_previsional",
+      "referencia_revisada": false,
+      "t_r_linea": 11,
+      "turnos_esperados": 20,
+      "turnos_registrados": 20,
+      "primer_aviso": null,
+      "consulta_gemma": 19,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-ORGANISMO_PREVISIONAL-005",
+      "clase": "vishing",
+      "familia": "organismo_previsional",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 23,
+      "turnos_registrados": 23,
+      "primer_aviso": null,
+      "consulta_gemma": 22,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-PREMIO-003",
+      "clase": "vishing",
+      "familia": "premio",
+      "referencia_revisada": false,
+      "t_r_linea": 13,
+      "turnos_esperados": 28,
+      "turnos_registrados": 28,
+      "primer_aviso": null,
+      "consulta_gemma": 26,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-V-FAMILIAR-001",
+      "clase": "vishing",
+      "familia": "familiar",
+      "referencia_revisada": false,
+      "t_r_linea": 15,
+      "turnos_esperados": 20,
+      "turnos_registrados": 20,
+      "primer_aviso": 15,
+      "consulta_gemma": 17,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-BANCO-006",
+      "clase": "legitima",
+      "familia": "banco",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 24,
+      "turnos_registrados": 24,
+      "primer_aviso": 15,
+      "consulta_gemma": 24,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-DELIVERY-001",
+      "clase": "legitima",
+      "familia": "delivery",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 24,
+      "turnos_registrados": 24,
+      "primer_aviso": null,
+      "consulta_gemma": 20,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-ESCUELA-001",
+      "clase": "legitima",
+      "familia": "escuela",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 24,
+      "turnos_registrados": 24,
+      "primer_aviso": null,
+      "consulta_gemma": 23,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-FAMILIAR-001",
+      "clase": "legitima",
+      "familia": "familiar",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 24,
+      "turnos_registrados": 24,
+      "primer_aviso": null,
+      "consulta_gemma": 19,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-MEDICO-001",
+      "clase": "legitima",
+      "familia": "medico",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 25,
+      "turnos_registrados": 25,
+      "primer_aviso": null,
+      "consulta_gemma": 14,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-ORGANISMO_PREVISIONAL-001",
+      "clase": "legitima",
+      "familia": "organismo_previsional",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 24,
+      "turnos_registrados": 24,
+      "primer_aviso": 4,
+      "consulta_gemma": 23,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-PREMIO-001",
+      "clase": "legitima",
+      "familia": "premio",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 24,
+      "turnos_registrados": 24,
+      "primer_aviso": null,
+      "consulta_gemma": 18,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-SOPORTE-004",
+      "clase": "legitima",
+      "familia": "soporte",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 24,
+      "turnos_registrados": 24,
+      "primer_aviso": null,
+      "consulta_gemma": 24,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-TRABAJO-001",
+      "clase": "legitima",
+      "familia": "trabajo",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 23,
+      "turnos_registrados": 23,
+      "primer_aviso": null,
+      "consulta_gemma": 23,
+      "errores": 0
+    },
+    {
+      "id": "CV2-D-L-WHATSAPP-004",
+      "clase": "legitima",
+      "familia": "whatsapp",
+      "referencia_revisada": false,
+      "t_r_linea": null,
+      "turnos_esperados": 25,
+      "turnos_registrados": 25,
+      "primer_aviso": null,
+      "consulta_gemma": 21,
+      "errores": 0
+    }
+  ],
+  "total_ms": {
+    "n": 475,
+    "mediana": 7854.57496100571,
+    "p95": 14631.086132954806,
+    "maximo": 22024.494881974533
+  },
+  "tito_ms": {
+    "n": 74,
+    "mediana": 200.8694729884155,
+    "p95": 340.38750000763685,
+    "maximo": 497.5796090438962
+  },
+  "slm_ms": {
+    "n": 421,
+    "mediana": 7937.792889890261,
+    "p95": 14756.76914001815,
+    "maximo": 21847.25398395676
+  },
+  "runtime_prompt_eval_ns": {
+    "n": 421,
+    "mediana": 1486438000,
+    "p95": 2078922999,
+    "maximo": 15653827000
+  },
+  "runtime_eval_ns": {
+    "n": 421,
+    "mediana": 6328792000,
+    "p95": 13246063000,
+    "maximo": 18183041000
+  },
+  "tokens_cache": {
+    "n": 421,
+    "mediana": 1098,
+    "p95": 1364,
+    "maximo": 1679
+  },
+  "tokens_salida": {
+    "n": 421,
+    "mediana": 46,
+    "p95": 95,
+    "maximo": 134
+  }
+}

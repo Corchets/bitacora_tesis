@@ -1,0 +1,14 @@
+A: Hola, buen día, te habla Camila, de una consultora de investigación de mercado. ¿Joaquín?
+B: Sí. ¿Quién?
+A: Camila, de una consultora. Estamos haciendo una encuesta sobre compras en supermercados. ¿Tenés unos minutos?
+B: No, ahora estoy manejando.
+A: Ah, perdón. ¿Te llamo en otro momento?
+B: Pará, ¿de dónde sacaste mi número?
+A: Los números se generan al azar dentro de la provincia. No tengo tu nombre en una lista, solo el que me dijiste vos.
+B: Pero me dijiste Joaquín antes de que yo te dijera nada.
+A: Sí, tenés razón, perdón. Tu número figura en un panel de personas que alguna vez aceptaron encuestas. Puede ser de hace años.
+B: No me acuerdo de haber aceptado nada.
+A: Si querés, te saco del panel y no te llamamos más.
+B: Sí, sacame.
+A: Listo, ya está. Disculpá la molestia y manejá con cuidado.
+B: Chau.

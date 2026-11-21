@@ -1,0 +1,71 @@
+A: Sí, hola.
+B: Sí, señora, ¿está ahí?
+A: ¿Está Kelvin?
+B: Sí, señora, habla Kevin, el de la computadora. ¿Se acuerda de mí?
+A: Eh, creo que sí. Puede que haya hablado con usted el otro día.
+B: Sí, señora. Entonces, antes que nada, quiero que se sume a esta llamada. Es por su computadora. Como ya le dije, la dirección IP de su computadora quedó comprometida de alguna forma.
+A: Sí, eso es lo que estaba tratando de hacer.
+B: Y, señora, por eso, todos los datos que tiene en la computadora están totalmente hackeados por los hackers, y le están descargando un montón de errores, informes de advertencia y virus no deseados en la computadora.
+A: Espere, ¿no estaba hablando con usted anoche?
+B: Sí, señora, sí. Entonces, señora, primero quiero que se ponga frente a su computadora un momento para que pueda mostrarle el problema.
+A: No suena tan cansado como ayer.
+B: No, señora, no hay problema. Señora, quiero que se ponga frente a su computadora otra vez un momento.
+A: Sí, sí, sí, sí. Adelante, préndala.
+B: Bueno.
+B: Señora, ¿me escucha?
+A: Sí.
+A: ¿Quién es Babu?
+B: Señora, es uno de nuestros... es uno de mis colegas.
+B: Muy bien, señora. Entonces ahora, primero, prenda la computadora y abra su AnyDesk. Ahora haga clic en aceptar. ¿Ve «aceptar» en la pantalla?
+A: Eh, no, no lo vi. Espere, querido. Espere, va demasiado rápido. ¿Quién es Prahlad?
+B: Sí, sí, soy yo, soy yo. No, señora, mi nombre es Kevin. Muy bien, abuela. Ahora mire la esquina inferior derecha de la pantalla. ¿Ve que está conectada con éxito al departamento de informática de Microsoft?
+A: Eh, espere, querido.
+B: Mire acá, en la esquina inferior derecha de la pantalla.
+A: Sí, ya veo. Bueno, espere, querido. Espere, mi nieta me está mandando mensajes. Deme dos segundos, ¿sí? Espere, querido. Deme dos segundos. Listo. Espere, querido. ¿Está teniendo un buen día?
+B: No. ¿Todavía no?
+A: ¿Por qué no?
+B: Porque la estuve esperando mucho tiempo.
+A: No quise decir que no hubiera problema, ¿sabe?
+B: Sí, sí.
+B: Y, señora, ¿vive sola o vive con su familia?
+A: Bueno, vivo sola.
+B: Ah, qué bien. Muy bien, señora. Entonces ahora, primero, lo que voy a hacer es mostrarle el problema que está afectando su computadora, ¿sí? Muy bien, señora. Deme un momento. En realidad su computadora está funcionando un poco más lenta, por eso.
+A: Sí.
+B: Pero no se tiene que preocupar, señora. Después de hoy su computadora va a andar como una máquina nueva, ¿sí?
+A: Ay, qué amable, querido.
+B: Señora, déjeme decirle algo, señora. Esos errores en rojo, cada uno contiene entre 700 y 800 virus. Y tienen la capacidad de seguir multiplicándose solos, esté la computadora prendida o apagada, ¿sí?
+A: Ay, Dios mío.
+B: Entonces, primero, lo que voy a hacer es cerrar esta página porque ya no es segura para su computadora. Ahora le voy a mostrar las conexiones activas de su computadora, ¿sí?
+A: Bueno.
+B: Entonces, señora, estas son las direcciones IP locales con las que usa internet, señora. Y si mira acá, ¿ve estas direcciones extranjeras?
+A: Sí, ¿cómo vio todo esto?
+B: Señora, le voy a mostrar el problema, señora, porque somos técnicos, señora. Entonces, estas son las direcciones IP extranjeras que están conectadas ahora a su computadora, señora. Y si mira el estado, ¿ve que todas están establecidas en su computadora? ¿Lo ve?
+A: Sí.
+B: Entonces acá lo que le voy a mostrar es cómo nos enteramos de su problema, ¿sí?
+A: Muy bien.
+B: Entonces abajo, ¿ve esto de «falla de transmisión, falla general»? ¿Lo ve, no?
+A: Sí.
+B: Y, señora, si mira acá, ¿ve «paquetes enviados cuatro, recibidos cero, perdidos 400 %»? ¿Lo ve?
+A: Sí.
+B: Eso significa, señora, que estamos intentando mandarle actualizaciones de seguridad periódicas a su computadora, pero su computadora no recibió ninguna actualización de seguridad de nuestra parte. Eso es lo principal.
+A: ¿Es por algo que hice yo?
+B: No, señora, no es su culpa, ni culpa de su computadora. En realidad hay algunos problemas en el servidor. Por eso hackearon su computadora. Por eso. En realidad, por eso su computadora no recibió a tiempo las actualizaciones de seguridad. Esa es la razón, señora. Y ahora déjeme mostrarle cuántas personas están conectadas ahora a su computadora, ¿sí?
+A: Bueno, estoy un poco nerviosa.
+B: No se tiene que preocupar por nada, abuela. Hoy la llamo solo para resolver todos sus problemas. No se preocupe por nada, abuela, ¿sí?
+A: Bueno, querido. Por cierto, ¿cómo aprendió a hacer todo esto?
+B: Somos técnicos senior certificados de Microsoft. Entonces, señora, primero dígame: aparte de esta computadora, ¿cuántos dispositivos tiene? ¿Tiene otra computadora, una laptop o algo?
+A: Solo tengo esta.
+B: Muy bien, señora. Pero si mira acá, ¿ve «conexión actual»?
+A: Sí, lo veo.
+B: Sí, y eso significa... ¿ve «solicitudes de router»? ¿«Solicitudes de vecino del router»? Significa que, con ayuda de su dirección IP, también están intentando mandar solicitudes y publicidades no deseadas a la dirección IP de sus vecinos. También quieren hackear la dirección IP de sus vecinos con ayuda de su dirección IP. Y todo ese tipo de hackeo, señora, a usted ya la hackearon. Con ayuda de su dirección IP también están intentando mandar solicitudes y publicidades no deseadas a la dirección IP de sus vecinos, solo para hackearlos. Lo que voy a hacer es correr un escaneo rápido en su computadora. Y con ese escaneo vamos a recibir una respuesta de nuestro servidor principal sobre qué está pasando realmente con la computadora, ¿sí?
+A: Bueno, ¿y cuánto tarda eso?
+B: El escaneo apenas va a tardar dos o tres minutos. Bueno, ¿ve esto? La mayoría de los servicios que brinda Microsoft Corporation dejaron de funcionar en su computadora. ¿Lo ve, señora?
+A: Sí.
+B: Otra vez, voy a correr un escaneo rápido en su computadora.
+A: Bueno.
+B: Muy bien, con ese escaneo vamos a recibir una respuesta de nuestro servidor principal sobre qué hay que hacer para arreglar esta computadora, ¿sí?
+A: Bueno, querido.
+B: Muy bien, señora, deme un momento. Déjeme correr el escaneo y, cuando termine, vamos a recibir una respuesta sobre qué hay que hacer para arreglar esta computadora, ¿sí?
+A: Bueno, querido.
+B: Muy bien, señora, ¿ve que empezó el escaneo?
+A: Sí.

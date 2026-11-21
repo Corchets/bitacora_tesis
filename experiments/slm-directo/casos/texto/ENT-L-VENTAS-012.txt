@@ -1,0 +1,16 @@
+A: ¿Sí?
+B: Hola, buen día, te habla Brenda, de Andes Motors. ¿Hablo con Ramiro Juárez?
+A: Sí, pero estoy en una reunión.
+B: Uh, perdón, te robo diez segundos.
+A: Rápido.
+B: Pediste el folleto del SUV nuevo en el stand del shopping. ¿Te lo mando al mail que dejaste, ramijuarez arroba yahoo?
+A: Sí, ahí.
+B: ¿Querés también la lista de precios?
+A: Sí, todo junto.
+B: ¿Te puedo llamar la semana que viene para ver si tenés dudas?
+A: Escribime mejor, no puedo atender llamadas en el trabajo.
+B: Perfecto, te escribo por WhatsApp.
+A: Tampoco todos los días.
+B: No, una vez y si te interesa me contestás.
+A: Bueno. Tengo que cortar.
+B: Listo.

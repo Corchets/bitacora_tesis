@@ -1,0 +1,29 @@
+A: hola buenas tardes nombre es romina te llamo de la aseguradora del banco banco hablo con carla benítez
+B: sí soy yo qué necesitás
+A: te llamo porque como clienta tenés un seguro de hogar con el primer mes bonificado cubre incendio robo y daños por agua te cuento dos minutos
+B: a ver contame pero no prometo nada
+A: el seguro sería para el domicilio que tenemos registrado san martín mil cuatrocientos cincuenta seguís seguís viviendo ahí
+B: sí sigo sigo ahí
+A: es casa o departamento
+B: departamento segundo piso
+A: sos propietaria o alquilás
+B: alquilo eso cambia algo
+A: sí si alquilás el seguro cubre tus cosas no el edificio por ejemplo la heladera la tele la ropa
+B: y si me entran a robar
+A: te cubre hasta un millón y medio en objetos presentando la denuncia
+B: cuánto sale
+A: doce mil pesos por mes el primer mes es gratis
+B: es caro
+A: hay una versión básica de ocho mil que cubre incendio y daños por agua sin robo
+B: mmm y si tengo un problema cómo me pagan
+A: el reintegro se deposita en tu cuenta banco figura la caja de ahorro terminada en dos doscientos treinta y uno es esa la que usás
+B: sí esa es es la del sueldo
+A: bien la cuota también se debita de esa cuenta no tenés que darme ningún dato de tarjeta
+B: mandame la póliza de las dos versiones y lo pienso
+A: te la mando al mail mail registrado sigue siendo carla benitez arroba hotmail
+B: sí
+A: si te convence lo aceptás vos desde el home banking en la sección seguros yo no lo dejo dado de alta
+B: perfecto así lo prefiero
+A: dentro de una semana te vuelvo a llamar para ver si tenés dudas te parece
+B: si no lo contraté es porque no me interesó no hace falta que me llames
+A: ok lo dejo anotado entonces

@@ -95,7 +95,7 @@
       "tag": "Frente D · H5 y H6",
       "state": "espera",
       "stateLabel": "Previsto (más adelante)",
-      "purpose": "Ejecutar la evaluación final sobre test reservado para responder PI1, PI2 y E1; redactar el informe digital (~100 págs), demo y defensa ante UNSTA.",
+      "purpose": "Ejecutar la evaluación final sobre test reservado para responder PI1 y PI2; redactar el informe digital (~100 págs), demo y defensa ante UNSTA.",
       "whatExists": "Borradores preliminares de capítulos del informe en docs/tesis/ (#53: Capítulos 5, 6, 7 y 8); módulo ejecutable de cálculo y reporte de métricas en experiments/metricas/ (#52) conforme a docs/evaluacion/METRICAS.md (márgenes L_R/L_C, Preventive@δ, falsas alarmas con Wilson 95%, RTF y sensibilidad a prevalencia), evaluado sobre corridas de desarrollo; requisitos académicos y esqueleto aprobados.",
       "nextStep": "Esperar protocolo congelado (#33) y test reservado (#45) con audio real para ejecutar la evaluación formal en #52 sin sesgo ni fuga; iterar redacción de capítulos de tesis en #53 con el tutor.",
       "evidence": {

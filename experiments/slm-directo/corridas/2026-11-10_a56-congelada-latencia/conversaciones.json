@@ -1,0 +1,396 @@
+{
+ "fuente": "docs/corpus/ISSUE-144-INGLES-18-2026-11-07.md",
+ "fuente_sha256": "5c6de944e454e6c2c8f2ed8bb95970842ee3f062c68b7a4db3596c0699bbb03a",
+ "roles": {
+  "A": "OTRA",
+  "B": "PROTEGIDA"
+ },
+ "casos": {
+  "EN-07": [
+   {
+    "n": 1,
+    "hablante": "A",
+    "texto": "Hola."
+   },
+   {
+    "n": 2,
+    "hablante": "B",
+    "texto": "¿Sí?"
+   },
+   {
+    "n": 3,
+    "hablante": "A",
+    "texto": "Sí, habla con el señor Peter Anderson. ¿Cómo está hoy?"
+   },
+   {
+    "n": 4,
+    "hablante": "B",
+    "texto": "Bueno, estoy muy bien. ¿Y usted?"
+   },
+   {
+    "n": 5,
+    "hablante": "A",
+    "texto": "Bien, gracias. ¿Con quién lo comunico?"
+   },
+   {
+    "n": 6,
+    "hablante": "B",
+    "texto": "Eh, ¿gané? ¿Gané el premio?"
+   },
+   {
+    "n": 7,
+    "hablante": "A",
+    "texto": "¿Y con quién estoy hablando? ¿Tiene un número de confirmación?"
+   },
+   {
+    "n": 8,
+    "hablante": "B",
+    "texto": "Sí, soy [NOMBRE_B]."
+   },
+   {
+    "n": 9,
+    "hablante": "A",
+    "texto": "[NOMBRE_B]. ¿Y cuál es su número de confirmación?"
+   },
+   {
+    "n": 10,
+    "hablante": "B",
+    "texto": "¿Dónde lo veo? ¿No recibió un mensaje automático que le decía que tenía que comunicarse con nuestra oficina central con su confirmación?"
+   },
+   {
+    "n": 11,
+    "hablante": "B",
+    "texto": "Sí, pero estaba trabajando. Trabajo 90 horas por día, así que no lo pude anotar."
+   },
+   {
+    "n": 12,
+    "hablante": "A",
+    "texto": "Muy bien, entonces lo que puede hacer es darme un segundo mientras reviso el sistema a ver si encuentro su número de confirmación. ¿Me puede decir su nombre una vez más, por favor?"
+   },
+   {
+    "n": 13,
+    "hablante": "B",
+    "texto": "[NOMBRE_B]."
+   },
+   {
+    "n": 14,
+    "hablante": "A",
+    "texto": "[NOMBRE_B]. No corte."
+   },
+   {
+    "n": 15,
+    "hablante": "A",
+    "texto": "¿Hola, señor [NOMBRE_B]?"
+   },
+   {
+    "n": 16,
+    "hablante": "B",
+    "texto": "Sí."
+   },
+   {
+    "n": 17,
+    "hablante": "A",
+    "texto": "Muy bien, señor [NOMBRE_B]. Lo que veo acá es que su confirmación es 1108 U.S. Tiene que anotar esa confirmación, porque la próxima vez que llame y la pida no se la podemos volver a dar. Así que la tiene que anotar para tenerla siempre presente, ¿sí?"
+   },
+   {
+    "n": 18,
+    "hablante": "B",
+    "texto": "Bueno, déjeme buscar una lapicera y un papel. Tengo que abrir el cajón del escritorio. Bueno... listo, esta lapicera anda."
+   },
+   {
+    "n": 19,
+    "hablante": "A",
+    "texto": "Bueno, entonces lo primero que va a anotar es mi nombre. Busque un papel de buen tamaño para escribir, así le doy toda la información, ¿sí?"
+   },
+   {
+    "n": 20,
+    "hablante": "B",
+    "texto": "Ah, ya lo tengo. ¿Sirve un bloc tamaño oficio?"
+   },
+   {
+    "n": 21,
+    "hablante": "A",
+    "texto": "Ah, está bien. Muy bien, lo primero que va a anotar es mi nombre: señor Peter Anderson."
+   },
+   {
+    "n": 22,
+    "hablante": "B",
+    "texto": "Peter Anderson."
+   },
+   {
+    "n": 23,
+    "hablante": "A",
+    "texto": "Exacto, y después va a anotar mi número de placa, el que llevo en la camisa en el trabajo. Es 454 P.A."
+   },
+   {
+    "n": 24,
+    "hablante": "B",
+    "texto": "Peter Anderson, 454 P.A."
+   },
+   {
+    "n": 25,
+    "hablante": "A",
+    "texto": "Perfecto, es correcto."
+   },
+   {
+    "n": 26,
+    "hablante": "B",
+    "texto": "Entonces, ¿cuánto dinero gané?"
+   },
+   {
+    "n": 27,
+    "hablante": "A",
+    "texto": "Ay, por Dios, ya vamos a llegar a eso. Por eso le estoy dando toda esta información, para que entienda que esto no es una vuelta. Recuerde que hay muchas estafas y fraudes dando vueltas, así que queremos asegurarnos..."
+   },
+   {
+    "n": 28,
+    "hablante": "B",
+    "texto": "Ay, no, pensé que había ganado..."
+   },
+   {
+    "n": 29,
+    "hablante": "A",
+    "texto": "Lo voy a llamar por una línea mejor, porque parece que no me está escuchando bien. / B: Solo le repito lo que usted dijo: dijo que usted es una estafa y un fraude, ¿no es eso lo que dijo? Escucho un poco mal."
+   },
+   {
+    "n": 30,
+    "hablante": "A",
+    "texto": "No, le estaba diciendo que esto no es ninguna estafa ni fraude."
+   }
+  ],
+  "EN-09": [
+   {
+    "n": 1,
+    "hablante": "A",
+    "texto": "Sí, entonces, ¿me escucha?"
+   },
+   {
+    "n": 2,
+    "hablante": "B",
+    "texto": "¿Quién habla?"
+   },
+   {
+    "n": 3,
+    "hablante": "A",
+    "texto": "Sí, el señor Asleepy, de Publishers Clearing House. ¿Recibió mi premio con el cheque grande?"
+   },
+   {
+    "n": 4,
+    "hablante": "B",
+    "texto": "Claro, por eso estaba preguntando. ¿Cómo le va? Traté de llamarlo."
+   },
+   {
+    "n": 5,
+    "hablante": "A",
+    "texto": "Ahora lo escucho. ¿Me escucha mejor ahora?"
+   },
+   {
+    "n": 6,
+    "hablante": "B",
+    "texto": "Sí."
+   },
+   {
+    "n": 7,
+    "hablante": "A",
+    "texto": "Muy bien, entonces lo que vamos a hacer hoy es conseguirle un cheque de caja certificado. Lo vamos a hacer a nombre del contador, ¿sí?"
+   },
+   {
+    "n": 8,
+    "hablante": "B",
+    "texto": "No, no escuché nada de un certificado... ¿qué? Esta mañana fui al médico y me dijeron que parece que tengo fascitis necrotizante y que quizás me tengan que sacar las falanges."
+   },
+   {
+    "n": 9,
+    "hablante": "A",
+    "texto": "Ay, por Dios. ¿Todavía puede usar la mano?"
+   },
+   {
+    "n": 10,
+    "hablante": "B",
+    "texto": "Ah, sí, tengo la cirugía programada para el 29 de febrero. Ahí me van a sacar las falanges, así que tengo tiempo."
+   },
+   {
+    "n": 11,
+    "hablante": "A",
+    "texto": "Bueno, entonces lo que vamos a hacer hoy, amigo, es mandarle al contador un cheque de caja certificado, así puede recibir su premio el lunes, ¿sí?"
+   },
+   {
+    "n": 12,
+    "hablante": "B",
+    "texto": "Sí. Usted dijo que le tenía que dar la tarjeta Spartan, la que tiene olor a vainilla, ¿no? Pude raspar más el cartón. Fue mucha sangre y mucho trabajo, pero pude sacar más números de la tarjeta para usted. ¿Tiene [NÚMEROS_DE_TARJETA]? ¿Llegó a anotar eso? Pude ver otro nueve."
+   },
+   {
+    "n": 13,
+    "hablante": "A",
+    "texto": "Ah, ¿entonces sacó todos los cartones de...?"
+   },
+   {
+    "n": 14,
+    "hablante": "B",
+    "texto": "No, sigo raspando el resto. Pero pude limpiar un nueve. Ahora veo un nueve."
+   },
+   {
+    "n": 15,
+    "hablante": "A",
+    "texto": "Bueno, deje la tarjeta. Hoy nos vamos a enfocar en otra cosa. Nos vamos a enfocar en el cheque certificado que hay que mandarle al contador para que reciba su premio. En eso estamos trabajando hoy."
+   },
+   {
+    "n": 16,
+    "hablante": "B",
+    "texto": "¿Perdón? ¿Mandar qué?"
+   },
+   {
+    "n": 17,
+    "hablante": "A",
+    "texto": "El cheque certificado. Recuerde que va a sacar un cheque certificado de 25.000 dólares para mandarle a un contador. Entonces, lo que va a hacer es avisarme cuando esté vestido y listo para salir."
+   },
+   {
+    "n": 18,
+    "hablante": "B",
+    "texto": "Ah, bueno."
+   },
+   {
+    "n": 19,
+    "hablante": "A",
+    "texto": "Muy bien, avíseme cuando esté listo, porque hoy le vamos a dejar todo hecho."
+   },
+   {
+    "n": 20,
+    "hablante": "B",
+    "texto": "Muy bien, solo me tengo que poner el bata y las botas de goma."
+   }
+  ],
+  "EN-13": [
+   {
+    "n": 1,
+    "hablante": "A",
+    "texto": "Gracias por llamar a la Administración del Seguro Social. ¿En qué lo puedo ayudar?"
+   },
+   {
+    "n": 2,
+    "hablante": "B",
+    "texto": "Sí, estaba hablando con un hombre y me dijo que mi número de seguridad social estaba suspendido. Después, debe haber tenido mala conexión, se me cortó el teléfono."
+   },
+   {
+    "n": 3,
+    "hablante": "A",
+    "texto": "Ah, disculpe. Déjeme revisar qué está pasando exactamente. ¿Me podría dar su nombre así busco sus datos?"
+   },
+   {
+    "n": 4,
+    "hablante": "B",
+    "texto": "Sí, es [NOMBRE_B]."
+   },
+   {
+    "n": 5,
+    "hablante": "A",
+    "texto": "Gracias, [NOMBRE_B]. Permítame entrar al sistema y revisar los datos. Aguarde."
+   },
+   {
+    "n": 6,
+    "hablante": "A",
+    "texto": "Hola, [NOMBRE_B]. Gracias por seguir en línea. ¿Sigue ahí conmigo?"
+   },
+   {
+    "n": 7,
+    "hablante": "B",
+    "texto": "Sí."
+   },
+   {
+    "n": 8,
+    "hablante": "A",
+    "texto": "Tengo algunos datos para usted. ¿Tiene a mano una lapicera y un papel?"
+   },
+   {
+    "n": 9,
+    "hablante": "B",
+    "texto": "Sí."
+   },
+   {
+    "n": 10,
+    "hablante": "A",
+    "texto": "Sí, ¿podría anotar algunos datos que le voy a dar ahora?"
+   },
+   {
+    "n": 11,
+    "hablante": "B",
+    "texto": "Sí."
+   },
+   {
+    "n": 12,
+    "hablante": "A",
+    "texto": "Entonces, está hablando con el oficial Donald Jefferson, a cargo de su caso."
+   },
+   {
+    "n": 13,
+    "hablante": "B",
+    "texto": "Se le cortó el teléfono. ¿Qué dijo? ¿Oficial qué?"
+   },
+   {
+    "n": 14,
+    "hablante": "A",
+    "texto": "Sí, habla el oficial jefe Donald Jefferson. Estoy a cargo del departamento de investigaciones acá en la Administración del Seguro Social. ¿Me escucha?"
+   },
+   {
+    "n": 15,
+    "hablante": "B",
+    "texto": "Sí, lo escucho."
+   },
+   {
+    "n": 16,
+    "hablante": "A",
+    "texto": "Muy bien, pensé que lo había perdido. Bueno, por favor anote mi identificación federal."
+   },
+   {
+    "n": 17,
+    "hablante": "B",
+    "texto": "Ajá."
+   },
+   {
+    "n": 18,
+    "hablante": "A",
+    "texto": "G de General, R de Romeo, S de Sierra, A de Alpha, y el número 51185. Esa es mi placa federal. El número de expediente que le voy a dar es F de Frank, R de Romeo, L de Larry."
+   },
+   {
+    "n": 19,
+    "hablante": "B",
+    "texto": "Ahora se le cortó el teléfono otra vez. Deben ser las líneas cruzadas o algo. ¿Lo puede repetir una vez más?"
+   },
+   {
+    "n": 20,
+    "hablante": "A",
+    "texto": "Claro. El número de expediente es F de Frank, R de Romeo, L de Larry, R de Romeo, y el número 6374."
+   },
+   {
+    "n": 21,
+    "hablante": "B",
+    "texto": "Ajá."
+   },
+   {
+    "n": 22,
+    "hablante": "A",
+    "texto": "Es un expediente que aparece a su nombre, [NOMBRE_B]. Lo que pasó es que nuestros alguaciles federales que patrullan la frontera sur de Texas encontraron un auto abandonado registrado con su número de seguridad social. Ese auto tenía manchas de sangre y restos de droga. ¿Viajó por casualidad al estado de Texas?"
+   },
+   {
+    "n": 23,
+    "hablante": "B",
+    "texto": "No, nunca estuve ahí."
+   },
+   {
+    "n": 24,
+    "hablante": "A",
+    "texto": "Eso es bastante sorprendente, porque ese auto estaba registrado a su nombre y con su número de seguridad social. Así que creo que hay actividades sospechosas. Por eso, como equipo del departamento de investigaciones, abrimos un expediente y pensamos en informarle. Por eso lo estamos llamando, porque de inmediato vamos a suspender su número de seguridad social."
+   },
+   {
+    "n": 25,
+    "hablante": "B",
+    "texto": "Se le cortó el teléfono otra vez. ¿Cuántas cuentas dijo?"
+   },
+   {
+    "n": 26,
+    "hablante": "A",
+    "texto": "Se abrieron como 50 cuentas bancarias a su nombre."
+   }
+  ]
+ }
+}

@@ -1,0 +1,8 @@
+A: Hola, sí.
+B: Hola, buenas tardes, te llamo de la veterinaria Patitas, me llamo Sol. ¿Hablo con Paula Ledesma?
+A: Sí.
+B: Paula, te llamo para recordarte el turno de Rocco para la vacuna antirrábica, el sábado a las diez.
+A: Ah, sí, lo tenía anotado.
+B: Bárbaro. Traé la libreta sanitaria, así le ponemos el sello.
+A: Dale. ¿Tiene que ir en ayunas?
+B: No, no hace falta. Nos vemos el sábado, Paula.

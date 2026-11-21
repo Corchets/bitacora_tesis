@@ -1,0 +1,12 @@
+A: Hola, ¿Matías?
+B: Sí, ¿quién es?
+A: Matías, ¿cómo va? Soy Ezequiel, de Andes Motors, la concesionaria de avenida Mate de Luna. Te llamo porque el fin de semana dejaste una consulta en la página por la pick-up mediana.
+B: Ah, sí, sí, estaba mirando nomás.
+A: Perfecto, te cuento rápido. Este mes tenemos financiación a tasa cero en doce cuotas para una parte del valor, y el resto en sesenta cuotas con tasa fija. Y si tenés un usado, te lo tomamos.
+B: Tengo un auto, sí, pero no sé cuánto me darían.
+A: Eso te lo tasamos acá en el momento, sin compromiso. Si querés, coordinamos un día y de paso hacés una prueba de manejo.
+B: Mmm, ¿me podés mandar los números por WhatsApp primero?
+A: Sí, claro. Te mando una cotización con las dos opciones de financiación, y si te cierra te pasás por el salón. Atendemos de lunes a sábado hasta las siete.
+B: Dale, mandame y lo veo con mi señora.
+A: Bárbaro, Matías. Cualquier cosa me escribís a ese mismo número. Abrazo.
+B: Gracias, chau.

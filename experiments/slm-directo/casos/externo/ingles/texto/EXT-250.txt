@@ -1,0 +1,20 @@
+A: Gracias por llamar. ¿En qué lo puedo ayudar?
+B: Sí, me transfirieron la llamada. Me dijeron que gané una tarjeta de regalo de Walmart de 100 dólares.
+A: Bueno, no se preocupe. Lo puedo ayudar con eso, seguro. Quédese en línea así busco la información. Su número califica para recibir una tarjeta de regalo de Walmart de 100 dólares. No solo la puede usar en Walmart, sino también en Target, Home Depot, Best Buy y otras tiendas. Es una tarjeta de 100 dólares. Puede ir a cualquier lado y comprar cualquier cosa. No tiene que pagar nada en el mostrador. Solo tiene que mostrar esta tarjeta de regalo de 100 dólares y el monto se le descuenta automáticamente de la tarjeta.
+B: Sí, es una tarjeta de regalo de Walmart de 100 dólares. Es solo para Walmart, ¿no?
+A: Claro, se puede usar en Walmart, pero también en Target, Home Depot, Best Buy y otras tiendas. Así que la puede usar en Walmart y en otros lugares también.
+B: Sí, está bien. Solo me preocupaba que diga Walmart, y si voy a Target me miren como si estuviera medio loco.
+A: Ah, no, la puede usar en Target, Walmart, Best Buy o cualquier tienda. Esta tarjeta de regalo de 100 dólares se puede usar en cualquier lado.
+B: Bueno.
+A: Entonces, señor, lo que podemos hacer es mandarle esta tarjeta de regalo ahora, en cuatro o cinco días hábiles, a su dirección postal. ¿Es del estado de Vermont?
+B: No, de ahí es mi celular.
+A: ¿Me podría dar su dirección postal real, empezando por el número de casa?
+B: Sí, es 1420 Maple Street, Brownsville, Texas, 78520.
+A: Es Maple Street, Brownsville, Texas, ¿no?
+B: Sí.
+A: Bueno, un segundo. Ya está. Es 1420 Maple Street, Brownsville, Texas, 78520, ¿no?
+B: Sí.
+A: Entonces esta tarjeta de regalo va a estar a su nombre, así nadie la puede usar mal. ¿Me podría deletrear su nombre y apellido?
+B: Sí, mi nombre es Frank. F-R-A-N-K.
+A: ¿Y su apellido?
+B: Miller. M-I-L-L-E-R.

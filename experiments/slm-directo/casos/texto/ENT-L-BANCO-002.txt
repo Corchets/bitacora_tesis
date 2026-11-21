@@ -1,0 +1,23 @@
+A: ¿Hola?
+B: Hola, buen día. Te llamo del banco, del sector de seguridad.
+A: Sí, ¿quién es?
+B: Mi nombre es Pablo. Registramos dos ingresos a tu home banking desde un celular que no tenías registrado, esta madrugada.
+A: ¿Esta madrugada? Yo estaba durmiendo.
+B: Por eso te llamamos. Antes de seguir necesito que me confirmes tu DNI.
+A: No, mirá, no te ofendas, pero no le doy el DNI a nadie que me llama.
+B: Está bien, entiendo.
+A: ¿Cómo sé que sos del banco?
+B: No tenés forma de saberlo por esta llamada, y está bien que desconfíes.
+A: ¿Entonces?
+B: Cortá y llamá vos al número que está en el dorso de tu tarjeta. Pedí por seguridad y dales el número de caso siete tres cuatro cuatro cero.
+A: ¿Y si mientras tanto me sacan la plata?
+B: El acceso desde ese celular ya quedó suspendido. No hace falta que hagas nada más por acá.
+A: Bueno. siete tres cuatro cuatro cero, ¿no?
+B: Sí, siete tres cuatro cuatro cero.
+A: ¿Y por qué me llaman y no me mandan un aviso a la app?
+B: También te mandamos una notificación. Fijate en la app, en avisos.
+A: Ahí veo una que dice acceso desde dispositivo nuevo. ¿Esa es?
+B: Esa misma. Si no fuiste vos, en ese mismo aviso tenés el botón No fui yo.
+A: Igual prefiero llamar.
+B: Hacés bien.
+A: Corto y llamo yo.

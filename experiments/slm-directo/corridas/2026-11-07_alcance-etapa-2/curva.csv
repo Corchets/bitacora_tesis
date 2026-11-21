@@ -1,0 +1,56 @@
+corrida,regla,umbral,estafas,antes,en,fa,n_estafas,n_con_pedido,n_legitimas
+v4-corte,alerta sola,,28,10,15,42,46,36,94
+v4-corte,riesgo ≥ 0.1 o alerta,0.1,46,36,0,94,46,36,94
+v4-corte,riesgo ≥ 0.2 o alerta,0.2,46,32,3,77,46,36,94
+v4-corte,riesgo ≥ 0.3 o alerta,0.3,39,22,6,52,46,36,94
+v4-corte,riesgo ≥ 0.4 o alerta,0.4,28,10,15,42,46,36,94
+v4-corte,riesgo ≥ 0.5 o alerta,0.5,28,10,15,42,46,36,94
+v4-corte,riesgo ≥ 0.6 o alerta,0.6,28,10,15,42,46,36,94
+v4-corte,riesgo ≥ 0.7 o alerta,0.7,28,10,15,42,46,36,94
+v4-corte,riesgo ≥ 0.8 o alerta,0.8,28,10,15,42,46,36,94
+v4-corte,riesgo ≥ 0.9 o alerta,0.9,28,10,15,42,46,36,94
+v4-corte,riesgo ≥ 1 o alerta,1.0,28,10,15,42,46,36,94
+c-json-corte,alerta sola,,10,4,3,9,46,36,94
+c-json-corte,riesgo ≥ 0.1 o alerta,0.1,46,36,0,94,46,36,94
+c-json-corte,riesgo ≥ 0.2 o alerta,0.2,46,36,0,72,46,36,94
+c-json-corte,riesgo ≥ 0.3 o alerta,0.3,36,17,8,27,46,36,94
+c-json-corte,riesgo ≥ 0.4 o alerta,0.4,15,6,4,9,46,36,94
+c-json-corte,riesgo ≥ 0.5 o alerta,0.5,15,5,5,9,46,36,94
+c-json-corte,riesgo ≥ 0.6 o alerta,0.6,14,5,5,9,46,36,94
+c-json-corte,riesgo ≥ 0.7 o alerta,0.7,10,4,3,9,46,36,94
+c-json-corte,riesgo ≥ 0.8 o alerta,0.8,10,4,3,9,46,36,94
+c-json-corte,riesgo ≥ 0.9 o alerta,0.9,10,4,3,9,46,36,94
+c-json-corte,riesgo ≥ 1 o alerta,1.0,10,4,3,9,46,36,94
+c-json-corte-rep,alerta sola,,12,5,4,9,46,36,94
+c-json-corte-rep,riesgo ≥ 0.1 o alerta,0.1,46,36,0,94,46,36,94
+c-json-corte-rep,riesgo ≥ 0.2 o alerta,0.2,46,36,0,69,46,36,94
+c-json-corte-rep,riesgo ≥ 0.3 o alerta,0.3,36,16,9,26,46,36,94
+c-json-corte-rep,riesgo ≥ 0.4 o alerta,0.4,15,6,5,9,46,36,94
+c-json-corte-rep,riesgo ≥ 0.5 o alerta,0.5,15,5,6,9,46,36,94
+c-json-corte-rep,riesgo ≥ 0.6 o alerta,0.6,14,5,6,9,46,36,94
+c-json-corte-rep,riesgo ≥ 0.7 o alerta,0.7,12,5,4,9,46,36,94
+c-json-corte-rep,riesgo ≥ 0.8 o alerta,0.8,12,5,4,9,46,36,94
+c-json-corte-rep,riesgo ≥ 0.9 o alerta,0.9,12,5,4,9,46,36,94
+c-json-corte-rep,riesgo ≥ 1 o alerta,1.0,12,5,4,9,46,36,94
+v4-premisa-corte,alerta sola,,27,9,16,41,46,36,94
+v4-premisa-corte,riesgo ≥ 0.1 o alerta,0.1,46,36,0,94,46,36,94
+v4-premisa-corte,riesgo ≥ 0.2 o alerta,0.2,46,32,3,75,46,36,94
+v4-premisa-corte,riesgo ≥ 0.3 o alerta,0.3,39,20,9,46,46,36,94
+v4-premisa-corte,riesgo ≥ 0.4 o alerta,0.4,27,11,14,41,46,36,94
+v4-premisa-corte,riesgo ≥ 0.5 o alerta,0.5,27,11,14,41,46,36,94
+v4-premisa-corte,riesgo ≥ 0.6 o alerta,0.6,27,9,16,41,46,36,94
+v4-premisa-corte,riesgo ≥ 0.7 o alerta,0.7,27,9,16,41,46,36,94
+v4-premisa-corte,riesgo ≥ 0.8 o alerta,0.8,27,9,16,41,46,36,94
+v4-premisa-corte,riesgo ≥ 0.9 o alerta,0.9,27,9,16,41,46,36,94
+v4-premisa-corte,riesgo ≥ 1 o alerta,1.0,27,9,16,41,46,36,94
+v4-premisa-corte-rep,alerta sola,,27,9,16,41,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.1 o alerta,0.1,46,36,0,94,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.2 o alerta,0.2,46,32,3,74,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.3 o alerta,0.3,39,20,9,47,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.4 o alerta,0.4,27,11,14,42,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.5 o alerta,0.5,27,11,14,42,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.6 o alerta,0.6,27,9,16,41,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.7 o alerta,0.7,27,9,16,41,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.8 o alerta,0.8,27,9,16,41,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 0.9 o alerta,0.9,27,9,16,41,46,36,94
+v4-premisa-corte-rep,riesgo ≥ 1 o alerta,1.0,27,9,16,41,46,36,94

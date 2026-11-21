@@ -20,6 +20,10 @@ Las dos corridas dieron lo que se había escrito antes de correr, en el [README 
 3. **Tito viejo sigue sirviendo como filtro:** cuesta una estafa y evita 4 falsas alarmas netas y la mitad de las consultas. Con v1 había
    pasado lo mismo (54/14 con Tito, 55/19 sin Tito).
 
+> **Nota del 2026-11-06:** las falsas alarmas que «evita» Tito son punto ciego, no filtrado. En las 7 legítimas que desaparecen, el SLM
+> avisaba en una línea sensible que Tito puntuó casi en cero, y en corpus_v2 no cambia ninguna. Su aporte medido es la mitad de las
+> consultas, a cambio de una estafa. Ver [H08](../../../../docs/hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
+
 Lo que queda como candidata es **v4 con roles, Tito viejo sin indicio y primer aviso (55/13)**. Tito viejo 2.0 da lo mismo con una pieza
 más, así que no hay motivo para preferirlo. Adoptarla va en un ADR 0002, como pide [#51](https://github.com/Corchets/bitacora_tesis/issues/51); la [propuesta para el equipo](../../../../docs/evaluacion/PROPUESTA-CONFIGURACION-DETECTOR.md) reúne todas las comparaciones.
 

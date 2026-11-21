@@ -1,0 +1,32 @@
+A: ¿Hola?
+B: Hola, buenas tardes. ¿Hablo con el señor Héctor Quiroga?
+A: Sí, él habla. ¿Quién es?
+B: Le habla Analía Ríos, de Recursos Humanos de Distribuidora Los Aromos. Lo llamo por su ingreso como chofer de reparto.
+A: Ah, sí, señorita. Dígame.
+B: Primero, una buena noticia: ya nos llegó el resultado del examen preocupacional y salió apto, así que el lunes 16 empieza con nosotros.
+A: Ah, qué bueno. Me alegro mucho.
+B: Para que pueda arrancar ese día tengo que hacer su alta antes del viernes, así que necesito confirmar algunos datos. ¿Me dice su nombre completo, tal cual figura en el documento?
+A: Héctor Daniel Quiroga.
+B: Perfecto. ¿Y su número de CUIL?
+A: Mire, disculpe, pero a mí siempre me dijeron que esos números no se dan por teléfono. ¿Cómo sé que usted es de la empresa?
+B: Hace muy bien en preguntar. Usted tuvo la entrevista con Marcelo Ibarra, el jefe de logística, y el preocupacional lo hizo el jueves en el centro médico de la calle Sarmiento. Si prefiere, corte y llame usted al conmutador de la empresa, al número que figura en la página o en la tarjeta que le dio Marcelo, y pida por mí, Analía Ríos, interno 214.
+A: No, está bien, si sabe lo de Marcelo y lo del examen... Pero el CUIL no me lo acuerdo de memoria. Espere que lo busco.
+B: Sí, cómo no, lo espero.
+A: Acá está, en un recibo de sueldo viejo: 20-23518476-5.
+B: Se lo leo para confirmar: 20-23518476-5. ¿Es correcto?
+A: Sí, es ese.
+B: ¿Y su fecha de nacimiento?
+A: El 2 de agosto del 73.
+B: Gracias. ¿Me confirma el domicilio? Lo necesito para la ART, que también lo cubre en el trayecto de su casa al trabajo.
+A: Los Paraísos 2270, en Ituzaingó. Es casa, no departamento.
+B: Perfecto. Por último, ¿tiene algún mail donde le pueda mandar una copia del contrato y del reglamento interno?
+A: Mail no uso mucho. ¿Puede ser el de mi hija?
+B: Puede ser, pero si no lo va a revisar usted, mejor se lo damos impreso el lunes. Como le quede más cómodo.
+A: Mejor impreso, entonces.
+B: Perfecto, el lunes lo tiene impreso. Ese día preséntese a las 7 en la planta, calle Los Tilos 3150, y pregunte por mí en la entrada. Traiga el documento y el registro de conducir.
+A: ¿A las 7 en punto?
+B: Sí, porque a las 7:30 sale el primer reparto y Marcelo quiere que la primera semana vaya acompañado en el camión.
+A: Perfecto, ahí voy a estar.
+B: Cualquier duda antes del lunes, llame al conmutador y pida por el interno 214.
+A: Muchas gracias, Analía.
+B: Gracias a usted, señor Quiroga. Bienvenido a la empresa.

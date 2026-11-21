@@ -1,0 +1,2181 @@
+corrida,compuerta,politica,umbral,estafas,antes,en,despues,lr_mediana,lr_media,lr_ge3,fa
+v4-L,SLM solo,umbral,0.0001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.0005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.002,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.01,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.02,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.03,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.04,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.05,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.06,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.07,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.08,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,umbral,0.09,46,36,0,0,13.0,14.222,36,51
+v4-L,SLM solo,umbral,0.1,46,36,0,0,12.0,13.917,36,48
+v4-L,SLM solo,umbral,0.11,46,35,1,0,12.0,12.194,33,42
+v4-L,SLM solo,umbral,0.12,46,34,1,1,12.0,11.278,32,41
+v4-L,SLM solo,umbral,0.13,46,32,3,1,12.0,10.778,31,41
+v4-L,SLM solo,umbral,0.14,46,32,3,1,12.0,10.528,31,41
+v4-L,SLM solo,umbral,0.15,46,32,3,1,12.0,10.0,31,41
+v4-L,SLM solo,umbral,0.16,45,31,3,1,12,9.429,28,40
+v4-L,SLM solo,umbral,0.17,45,31,3,1,12,9.429,28,39
+v4-L,SLM solo,umbral,0.18,45,30,4,1,12,9.0,26,37
+v4-L,SLM solo,umbral,0.19,45,29,5,1,10,8.8,25,34
+v4-L,SLM solo,umbral,0.2,45,28,6,1,10,8.029,23,32
+v4-L,SLM solo,umbral,0.21,45,26,8,1,10,7.857,23,29
+v4-L,SLM solo,umbral,0.22,42,25,9,0,10.0,8.0,21,28
+v4-L,SLM solo,umbral,0.23,42,25,9,0,9.0,7.794,21,25
+v4-L,SLM solo,umbral,0.24,41,24,8,1,8,7.303,20,23
+v4-L,SLM solo,umbral,0.25,41,23,8,2,4,6.697,19,22
+v4-L,SLM solo,umbral,0.26,40,22,8,2,4.0,6.625,17,21
+v4-L,SLM solo,umbral,0.27,39,22,8,2,4.0,6.438,17,20
+v4-L,SLM solo,umbral,0.28,38,22,7,3,4.0,6.094,17,18
+v4-L,SLM solo,umbral,0.29,37,20,8,3,4,6.097,17,16
+v4-L,SLM solo,umbral,0.3,37,20,8,3,4,5.71,16,15
+v4-L,SLM solo,umbral,0.31,34,20,7,3,2.5,5.367,15,14
+v4-L,SLM solo,umbral,0.32,32,19,7,4,2.0,5.133,13,14
+v4-L,SLM solo,umbral,0.33,32,17,9,4,2.0,3.967,12,12
+v4-L,SLM solo,umbral,0.34,30,15,11,3,1,3.138,11,12
+v4-L,SLM solo,umbral,0.35,30,14,12,3,0,2.931,11,11
+v4-L,SLM solo,umbral,0.36,30,13,13,3,0,2.759,10,10
+v4-L,SLM solo,umbral,0.37,29,13,12,3,0.0,2.857,10,10
+v4-L,SLM solo,umbral,0.38,27,12,12,2,0.0,3.077,9,8
+v4-L,SLM solo,umbral,0.39,27,12,12,2,0.0,3.0,9,8
+v4-L,SLM solo,umbral,0.4,27,11,13,2,0.0,2.808,9,7
+v4-L,SLM solo,umbral,0.41,26,11,12,2,0,2.92,9,7
+v4-L,SLM solo,umbral,0.42,26,10,13,2,0,2.68,8,7
+v4-L,SLM solo,umbral,0.43,26,10,13,2,0,2.6,8,7
+v4-L,SLM solo,umbral,0.44,25,10,13,1,0.0,2.625,7,7
+v4-L,SLM solo,umbral,0.45,25,9,14,1,0.0,2.125,6,6
+v4-L,SLM solo,umbral,0.46,25,9,14,1,0.0,2.125,6,6
+v4-L,SLM solo,umbral,0.47,25,7,16,1,0.0,1.958,6,6
+v4-L,SLM solo,umbral,0.48,25,7,15,2,0.0,1.708,6,5
+v4-L,SLM solo,umbral,0.49,24,7,14,2,0,1.696,6,5
+v4-L,SLM solo,umbral,0.5,24,7,14,2,0,1.565,6,5
+v4-L,SLM solo,umbral,0.51,24,7,13,3,0,1.522,6,5
+v4-L,SLM solo,umbral,0.52,24,6,13,4,0,1.261,5,5
+v4-L,SLM solo,umbral,0.53,23,6,12,4,0.0,1.227,5,5
+v4-L,SLM solo,umbral,0.54,23,5,12,5,0.0,1.0,4,5
+v4-L,SLM solo,umbral,0.55,21,5,12,3,0.0,1.2,4,5
+v4-L,SLM solo,umbral,0.56,20,5,11,3,0,1.263,4,4
+v4-L,SLM solo,umbral,0.57,20,4,11,4,0,1.053,4,4
+v4-L,SLM solo,umbral,0.58,20,4,11,4,0,1.053,4,4
+v4-L,SLM solo,umbral,0.59,20,4,11,4,0,1.053,4,4
+v4-L,SLM solo,umbral,0.6,19,4,10,4,0.0,0.556,3,4
+v4-L,SLM solo,umbral,0.61,19,4,10,4,0.0,0.278,3,4
+v4-L,SLM solo,umbral,0.62,19,3,11,4,0.0,0.222,3,4
+v4-L,SLM solo,umbral,0.63,18,3,11,3,0,0.471,3,2
+v4-L,SLM solo,umbral,0.64,17,3,11,3,0,0.471,3,2
+v4-L,SLM solo,umbral,0.65,17,3,11,3,0,0.471,3,1
+v4-L,SLM solo,umbral,0.66,17,3,11,3,0,0.471,3,1
+v4-L,SLM solo,umbral,0.67,17,3,11,3,0,0.471,3,1
+v4-L,SLM solo,umbral,0.68,16,3,11,2,0.0,0.875,3,1
+v4-L,SLM solo,umbral,0.69,16,3,11,2,0.0,0.875,3,1
+v4-L,SLM solo,umbral,0.7,16,3,10,3,0.0,0.5,3,1
+v4-L,SLM solo,umbral,0.71,16,3,10,3,0.0,0.5,3,1
+v4-L,SLM solo,umbral,0.72,15,2,10,3,0,0.133,2,1
+v4-L,SLM solo,umbral,0.73,14,2,10,2,0.0,0.429,2,1
+v4-L,SLM solo,umbral,0.74,13,2,10,1,0,0.923,2,1
+v4-L,SLM solo,umbral,0.75,13,2,9,2,0,0.538,2,0
+v4-L,SLM solo,umbral,0.76,11,2,9,0,0,1.0,2,0
+v4-L,SLM solo,umbral,0.77,10,1,9,0,0.0,0.8,1,0
+v4-L,SLM solo,umbral,0.78,9,0,9,0,0,0.0,0,0
+v4-L,SLM solo,umbral,0.79,8,0,6,2,0.0,-1.375,0,0
+v4-L,SLM solo,umbral,0.8,8,0,6,2,0.0,-1.375,0,0
+v4-L,SLM solo,umbral,0.81,6,0,6,0,0.0,0.0,0,0
+v4-L,SLM solo,umbral,0.82,5,0,5,0,0,0.0,0,0
+v4-L,SLM solo,umbral,0.83,3,0,3,0,0,0.0,0,0
+v4-L,SLM solo,umbral,0.84,2,0,2,0,0.0,0.0,0,0
+v4-L,SLM solo,umbral,0.85,2,0,2,0,0.0,0.0,0,0
+v4-L,SLM solo,umbral,0.86,2,0,2,0,0.0,0.0,0,0
+v4-L,SLM solo,umbral,0.87,2,0,2,0,0.0,0.0,0,0
+v4-L,SLM solo,umbral,0.88,2,0,2,0,0.0,0.0,0,0
+v4-L,SLM solo,umbral,0.89,1,0,1,0,0,0.0,0,0
+v4-L,SLM solo,umbral,0.9,1,0,0,1,-4,-4.0,0,0
+v4-L,SLM solo,umbral,0.91,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.92,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.93,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.94,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.95,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.96,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.97,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.98,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.99,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.995,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.998,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.999,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.9995,0,0,0,0,,,0,0
+v4-L,SLM solo,umbral,0.9999,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.0001,46,36,0,0,12.0,13.25,36,51
+v4-L,SLM solo,dos seguidas,0.0005,46,36,0,0,12.0,13.25,36,51
+v4-L,SLM solo,dos seguidas,0.001,46,36,0,0,12.0,13.25,36,51
+v4-L,SLM solo,dos seguidas,0.002,46,36,0,0,12.0,13.25,36,51
+v4-L,SLM solo,dos seguidas,0.005,46,36,0,0,12.0,13.25,36,51
+v4-L,SLM solo,dos seguidas,0.01,46,36,0,0,12.0,13.194,36,51
+v4-L,SLM solo,dos seguidas,0.02,46,36,0,0,12.0,13.194,36,51
+v4-L,SLM solo,dos seguidas,0.03,46,36,0,0,12.0,13.194,36,51
+v4-L,SLM solo,dos seguidas,0.04,46,36,0,0,12.0,13.194,36,51
+v4-L,SLM solo,dos seguidas,0.05,46,36,0,0,12.0,13.194,36,51
+v4-L,SLM solo,dos seguidas,0.06,46,36,0,0,12.0,13.194,36,51
+v4-L,SLM solo,dos seguidas,0.07,46,36,0,0,12.0,13.194,36,51
+v4-L,SLM solo,dos seguidas,0.08,46,36,0,0,12.0,12.667,35,51
+v4-L,SLM solo,dos seguidas,0.09,46,36,0,0,12.0,12.639,35,49
+v4-L,SLM solo,dos seguidas,0.1,46,34,1,1,11.0,11.722,34,44
+v4-L,SLM solo,dos seguidas,0.11,46,33,1,2,11.0,9.556,30,36
+v4-L,SLM solo,dos seguidas,0.12,46,31,1,4,11.0,8.694,28,35
+v4-L,SLM solo,dos seguidas,0.13,45,31,0,4,9,8.229,26,34
+v4-L,SLM solo,dos seguidas,0.14,45,30,1,4,9,7.829,25,32
+v4-L,SLM solo,dos seguidas,0.15,45,30,0,5,9,7.771,25,32
+v4-L,SLM solo,dos seguidas,0.16,45,28,1,6,7,6.943,24,32
+v4-L,SLM solo,dos seguidas,0.17,45,28,1,6,7,6.943,24,29
+v4-L,SLM solo,dos seguidas,0.18,45,28,1,6,7,6.743,24,27
+v4-L,SLM solo,dos seguidas,0.19,45,25,2,8,5,6.057,22,27
+v4-L,SLM solo,dos seguidas,0.2,43,24,2,8,5.0,6.029,21,27
+v4-L,SLM solo,dos seguidas,0.21,40,23,2,8,7,6.455,19,22
+v4-L,SLM solo,dos seguidas,0.22,39,22,2,8,6.0,6.031,19,17
+v4-L,SLM solo,dos seguidas,0.23,39,22,2,8,3.5,5.719,17,17
+v4-L,SLM solo,dos seguidas,0.24,39,21,3,8,3.0,5.25,17,15
+v4-L,SLM solo,dos seguidas,0.25,37,20,1,10,3,5.097,17,15
+v4-L,SLM solo,dos seguidas,0.26,37,20,1,10,3,4.806,16,14
+v4-L,SLM solo,dos seguidas,0.27,36,20,1,9,3.0,4.9,16,14
+v4-L,SLM solo,dos seguidas,0.28,36,18,3,9,1.5,3.533,14,14
+v4-L,SLM solo,dos seguidas,0.29,31,18,2,8,2.5,3.714,14,12
+v4-L,SLM solo,dos seguidas,0.3,29,17,2,9,2.0,3.393,14,12
+v4-L,SLM solo,dos seguidas,0.31,29,17,2,9,1.0,2.536,11,11
+v4-L,SLM solo,dos seguidas,0.32,28,13,2,12,0,2.111,9,10
+v4-L,SLM solo,dos seguidas,0.33,28,10,3,14,-1,1.778,9,9
+v4-L,SLM solo,dos seguidas,0.34,27,10,3,13,-0.5,1.885,9,8
+v4-L,SLM solo,dos seguidas,0.35,25,10,3,11,0.0,2.042,9,7
+v4-L,SLM solo,dos seguidas,0.36,25,10,2,12,-0.5,2.0,9,7
+v4-L,SLM solo,dos seguidas,0.37,25,10,2,12,-0.5,1.875,8,7
+v4-L,SLM solo,dos seguidas,0.38,25,10,2,12,-0.5,1.792,8,7
+v4-L,SLM solo,dos seguidas,0.39,25,9,2,13,-1.0,1.542,8,7
+v4-L,SLM solo,dos seguidas,0.4,25,8,1,15,-1.0,0.958,7,6
+v4-L,SLM solo,dos seguidas,0.41,24,8,1,14,-1,1.174,7,5
+v4-L,SLM solo,dos seguidas,0.42,24,8,1,14,-1,1.0,7,4
+v4-L,SLM solo,dos seguidas,0.43,24,7,2,14,-1,0.652,6,4
+v4-L,SLM solo,dos seguidas,0.44,23,7,2,13,-1.0,1.0,6,4
+v4-L,SLM solo,dos seguidas,0.45,23,7,2,13,-1.0,0.909,6,4
+v4-L,SLM solo,dos seguidas,0.46,23,7,2,13,-1.0,0.909,6,4
+v4-L,SLM solo,dos seguidas,0.47,22,7,0,14,-1,0.762,6,4
+v4-L,SLM solo,dos seguidas,0.48,22,7,0,14,-1,0.762,6,4
+v4-L,SLM solo,dos seguidas,0.49,22,6,0,15,-1,0.524,5,3
+v4-L,SLM solo,dos seguidas,0.5,22,5,0,16,-1,0.286,4,2
+v4-L,SLM solo,dos seguidas,0.51,21,5,0,15,-1.0,0.35,4,2
+v4-L,SLM solo,dos seguidas,0.52,20,5,0,14,-1,0.421,4,2
+v4-L,SLM solo,dos seguidas,0.53,19,5,0,13,-1.0,0.611,4,1
+v4-L,SLM solo,dos seguidas,0.54,18,4,0,13,-1,0.529,4,1
+v4-L,SLM solo,dos seguidas,0.55,18,4,0,13,-1,-0.294,3,1
+v4-L,SLM solo,dos seguidas,0.56,17,4,0,12,-1.0,0.125,3,1
+v4-L,SLM solo,dos seguidas,0.57,17,4,0,12,-1.0,-0.188,2,1
+v4-L,SLM solo,dos seguidas,0.58,17,4,0,12,-1.0,-0.562,2,1
+v4-L,SLM solo,dos seguidas,0.59,15,4,0,10,-1.0,0.071,2,1
+v4-L,SLM solo,dos seguidas,0.6,15,3,1,10,-1.0,0.0,2,1
+v4-L,SLM solo,dos seguidas,0.61,15,3,1,10,-1.0,-0.214,2,1
+v4-L,SLM solo,dos seguidas,0.62,15,3,0,11,-1.0,-0.429,2,1
+v4-L,SLM solo,dos seguidas,0.63,14,3,0,11,-1.0,-0.429,2,1
+v4-L,SLM solo,dos seguidas,0.64,14,2,1,11,-1.0,-0.786,2,1
+v4-L,SLM solo,dos seguidas,0.65,13,2,1,10,-1,-0.462,2,1
+v4-L,SLM solo,dos seguidas,0.66,13,2,0,11,-1,-0.692,2,1
+v4-L,SLM solo,dos seguidas,0.67,12,2,0,10,-1.0,-0.333,2,1
+v4-L,SLM solo,dos seguidas,0.68,12,2,0,10,-1.0,-0.667,2,1
+v4-L,SLM solo,dos seguidas,0.69,11,1,0,10,-1,-1.0,1,1
+v4-L,SLM solo,dos seguidas,0.7,11,1,0,10,-1,-1.182,1,1
+v4-L,SLM solo,dos seguidas,0.71,9,1,0,8,-1,-1.0,1,1
+v4-L,SLM solo,dos seguidas,0.72,8,1,0,7,-1.0,-1.0,1,1
+v4-L,SLM solo,dos seguidas,0.73,5,0,0,5,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.74,4,0,0,4,-1.0,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.75,4,0,0,4,-1.0,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.76,3,0,0,3,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.77,3,0,0,3,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.78,3,0,0,3,-1,-2.667,0,0
+v4-L,SLM solo,dos seguidas,0.79,3,0,0,3,-1,-2.667,0,0
+v4-L,SLM solo,dos seguidas,0.8,3,0,0,3,-1,-2.667,0,0
+v4-L,SLM solo,dos seguidas,0.81,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.82,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.83,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.84,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.85,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.86,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.87,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.88,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,dos seguidas,0.89,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,dos seguidas,0.9,1,0,0,1,-5,-5.0,0,0
+v4-L,SLM solo,dos seguidas,0.91,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.92,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.93,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.94,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.95,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.96,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.97,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.98,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.99,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.995,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.998,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.999,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.9995,0,0,0,0,,,0,0
+v4-L,SLM solo,dos seguidas,0.9999,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.0001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.0005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.002,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.01,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.02,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.03,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.04,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.5,0.05,46,36,0,0,12.0,13.917,36,51
+v4-L,SLM solo,EMA α=0.5,0.06,46,36,0,0,12.0,13.611,36,51
+v4-L,SLM solo,EMA α=0.5,0.07,46,36,0,0,12.0,13.528,36,51
+v4-L,SLM solo,EMA α=0.5,0.08,46,36,0,0,12.0,12.722,35,49
+v4-L,SLM solo,EMA α=0.5,0.09,46,36,0,0,12.0,12.278,34,47
+v4-L,SLM solo,EMA α=0.5,0.1,46,35,0,1,12.0,11.417,33,42
+v4-L,SLM solo,EMA α=0.5,0.11,46,33,2,1,11.0,10.056,31,39
+v4-L,SLM solo,EMA α=0.5,0.12,46,32,3,1,10.0,9.111,30,37
+v4-L,SLM solo,EMA α=0.5,0.13,45,30,4,1,10,8.8,29,37
+v4-L,SLM solo,EMA α=0.5,0.14,45,30,4,1,10,8.6,27,35
+v4-L,SLM solo,EMA α=0.5,0.15,45,30,3,2,10,8.286,25,33
+v4-L,SLM solo,EMA α=0.5,0.16,45,28,5,2,8,7.514,23,33
+v4-L,SLM solo,EMA α=0.5,0.17,45,27,6,2,7,7.029,23,31
+v4-L,SLM solo,EMA α=0.5,0.18,45,27,6,2,7,6.8,22,26
+v4-L,SLM solo,EMA α=0.5,0.19,45,25,6,4,5,6.257,22,26
+v4-L,SLM solo,EMA α=0.5,0.2,41,25,6,3,5.0,6.441,21,23
+v4-L,SLM solo,EMA α=0.5,0.21,40,23,6,4,5,6.121,20,20
+v4-L,SLM solo,EMA α=0.5,0.22,40,22,7,4,4,5.818,18,18
+v4-L,SLM solo,EMA α=0.5,0.23,38,22,5,4,4,5.935,17,17
+v4-L,SLM solo,EMA α=0.5,0.24,38,22,5,4,4,5.581,17,15
+v4-L,SLM solo,EMA α=0.5,0.25,37,20,7,4,4,5.29,17,14
+v4-L,SLM solo,EMA α=0.5,0.26,37,20,7,4,3,5.129,16,14
+v4-L,SLM solo,EMA α=0.5,0.27,36,19,7,4,2.0,4.133,14,13
+v4-L,SLM solo,EMA α=0.5,0.28,33,18,7,3,2.5,4.286,14,12
+v4-L,SLM solo,EMA α=0.5,0.29,33,18,7,3,2.0,4.036,13,11
+v4-L,SLM solo,EMA α=0.5,0.3,29,18,7,3,1.5,3.786,12,10
+v4-L,SLM solo,EMA α=0.5,0.31,29,15,10,3,1.5,3.071,11,9
+v4-L,SLM solo,EMA α=0.5,0.32,29,13,12,3,0.0,2.821,10,9
+v4-L,SLM solo,EMA α=0.5,0.33,28,13,12,2,0,2.889,9,9
+v4-L,SLM solo,EMA α=0.5,0.34,28,12,12,3,0,2.667,9,9
+v4-L,SLM solo,EMA α=0.5,0.35,27,11,13,2,0.0,2.731,9,7
+v4-L,SLM solo,EMA α=0.5,0.36,26,10,11,4,0,2.48,9,7
+v4-L,SLM solo,EMA α=0.5,0.37,26,10,11,4,0,2.36,9,7
+v4-L,SLM solo,EMA α=0.5,0.38,25,9,11,4,0.0,2.0,8,6
+v4-L,SLM solo,EMA α=0.5,0.39,25,9,11,4,0.0,1.875,8,6
+v4-L,SLM solo,EMA α=0.5,0.4,25,9,11,4,0.0,1.75,8,6
+v4-L,SLM solo,EMA α=0.5,0.41,24,8,11,4,0,1.87,7,4
+v4-L,SLM solo,EMA α=0.5,0.42,24,8,10,5,0,1.565,7,4
+v4-L,SLM solo,EMA α=0.5,0.43,23,8,10,4,0.0,1.636,6,4
+v4-L,SLM solo,EMA α=0.5,0.44,23,8,9,5,0.0,1.5,6,4
+v4-L,SLM solo,EMA α=0.5,0.45,23,6,10,6,0.0,1.091,4,4
+v4-L,SLM solo,EMA α=0.5,0.46,22,5,10,6,0,1.048,4,3
+v4-L,SLM solo,EMA α=0.5,0.47,21,5,10,5,0.0,1.1,4,3
+v4-L,SLM solo,EMA α=0.5,0.48,21,5,10,5,0.0,1.05,4,3
+v4-L,SLM solo,EMA α=0.5,0.49,20,4,9,6,0,0.947,4,3
+v4-L,SLM solo,EMA α=0.5,0.5,20,4,9,6,0,0.842,4,2
+v4-L,SLM solo,EMA α=0.5,0.51,20,4,9,6,0,0.789,4,1
+v4-L,SLM solo,EMA α=0.5,0.52,19,4,8,6,0.0,0.889,4,1
+v4-L,SLM solo,EMA α=0.5,0.53,19,4,7,7,0.0,0.333,3,1
+v4-L,SLM solo,EMA α=0.5,0.54,19,4,5,9,-0.5,0.0,3,1
+v4-L,SLM solo,EMA α=0.5,0.55,18,4,5,8,0,0.235,3,1
+v4-L,SLM solo,EMA α=0.5,0.56,17,4,4,8,-0.5,0.312,3,1
+v4-L,SLM solo,EMA α=0.5,0.57,17,4,3,9,-1.0,0.25,3,1
+v4-L,SLM solo,EMA α=0.5,0.58,17,4,3,9,-1.0,0.25,3,1
+v4-L,SLM solo,EMA α=0.5,0.59,17,3,3,10,-1.0,-0.125,3,1
+v4-L,SLM solo,EMA α=0.5,0.6,17,3,2,11,-1.0,-0.188,3,1
+v4-L,SLM solo,EMA α=0.5,0.61,17,3,2,11,-1.0,-0.562,2,1
+v4-L,SLM solo,EMA α=0.5,0.62,16,3,2,10,-1,-0.667,2,1
+v4-L,SLM solo,EMA α=0.5,0.63,13,2,3,8,-1,-0.154,2,1
+v4-L,SLM solo,EMA α=0.5,0.64,13,2,2,9,-1,-0.308,2,1
+v4-L,SLM solo,EMA α=0.5,0.65,13,2,2,9,-1,-0.769,2,1
+v4-L,SLM solo,EMA α=0.5,0.66,13,2,2,9,-1,-1.077,2,1
+v4-L,SLM solo,EMA α=0.5,0.67,13,2,2,9,-1,-1.308,2,1
+v4-L,SLM solo,EMA α=0.5,0.68,12,2,2,8,-1.0,-1.083,2,1
+v4-L,SLM solo,EMA α=0.5,0.69,11,2,1,8,-2,-1.455,2,0
+v4-L,SLM solo,EMA α=0.5,0.7,9,1,1,7,-2,-1.444,1,0
+v4-L,SLM solo,EMA α=0.5,0.71,9,1,1,7,-2,-1.667,1,0
+v4-L,SLM solo,EMA α=0.5,0.72,8,0,1,7,-2.0,-3.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.73,6,0,1,5,-2.0,-2.5,0,0
+v4-L,SLM solo,EMA α=0.5,0.74,3,0,0,3,-2,-2.667,0,0
+v4-L,SLM solo,EMA α=0.5,0.75,3,0,0,3,-2,-2.667,0,0
+v4-L,SLM solo,EMA α=0.5,0.76,3,0,0,3,-2,-2.667,0,0
+v4-L,SLM solo,EMA α=0.5,0.77,2,0,0,2,-4.0,-4.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.78,2,0,0,2,-4.0,-4.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.79,1,0,0,1,-2,-2.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.8,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.81,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.82,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.83,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.84,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.85,1,0,0,1,-4,-4.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.86,1,0,0,1,-4,-4.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.87,1,0,0,1,-4,-4.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.88,1,0,0,1,-5,-5.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.89,1,0,0,1,-6,-6.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.9,1,0,0,1,-11,-11.0,0,0
+v4-L,SLM solo,EMA α=0.5,0.91,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.92,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.93,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.94,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.95,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.96,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.97,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.98,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.99,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.995,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.998,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.999,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.9995,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.5,0.9999,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.0001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.3,0.0005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.3,0.001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.3,0.002,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.3,0.005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.3,0.01,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.3,0.02,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.3,0.03,46,36,0,0,12.0,13.917,36,51
+v4-L,SLM solo,EMA α=0.3,0.04,46,36,0,0,12.0,13.556,36,51
+v4-L,SLM solo,EMA α=0.3,0.05,46,36,0,0,12.0,13.5,36,51
+v4-L,SLM solo,EMA α=0.3,0.06,46,36,0,0,12.0,13.139,36,49
+v4-L,SLM solo,EMA α=0.3,0.07,46,36,0,0,12.0,12.111,35,49
+v4-L,SLM solo,EMA α=0.3,0.08,46,35,1,0,11.5,11.667,34,47
+v4-L,SLM solo,EMA α=0.3,0.09,46,34,2,0,11.0,10.833,33,44
+v4-L,SLM solo,EMA α=0.3,0.1,46,33,2,1,10.5,9.694,32,40
+v4-L,SLM solo,EMA α=0.3,0.11,46,33,2,1,9.5,8.861,31,35
+v4-L,SLM solo,EMA α=0.3,0.12,46,31,4,1,9.0,8.167,29,35
+v4-L,SLM solo,EMA α=0.3,0.13,45,29,4,2,8,7.429,24,33
+v4-L,SLM solo,EMA α=0.3,0.14,45,28,4,3,7,6.943,23,32
+v4-L,SLM solo,EMA α=0.3,0.15,45,28,4,3,7,6.657,23,31
+v4-L,SLM solo,EMA α=0.3,0.16,45,27,3,5,6,6.086,23,28
+v4-L,SLM solo,EMA α=0.3,0.17,45,25,5,5,5,5.6,22,26
+v4-L,SLM solo,EMA α=0.3,0.18,45,24,6,5,4,5.371,22,22
+v4-L,SLM solo,EMA α=0.3,0.19,43,24,6,4,3.5,5.647,20,21
+v4-L,SLM solo,EMA α=0.3,0.2,39,21,6,5,4.0,5.375,17,19
+v4-L,SLM solo,EMA α=0.3,0.21,38,21,6,4,4,5.258,17,16
+v4-L,SLM solo,EMA α=0.3,0.22,38,21,5,5,3,5.0,17,15
+v4-L,SLM solo,EMA α=0.3,0.23,38,19,7,5,2,3.968,15,14
+v4-L,SLM solo,EMA α=0.3,0.24,34,19,7,2,3.5,4.393,15,12
+v4-L,SLM solo,EMA α=0.3,0.25,34,18,7,3,3.0,4.036,14,12
+v4-L,SLM solo,EMA α=0.3,0.26,34,18,7,3,2.0,3.643,13,12
+v4-L,SLM solo,EMA α=0.3,0.27,33,17,7,4,2.0,3.286,12,11
+v4-L,SLM solo,EMA α=0.3,0.28,32,16,7,5,1.5,3.0,11,9
+v4-L,SLM solo,EMA α=0.3,0.29,29,13,9,6,0.0,2.643,11,9
+v4-L,SLM solo,EMA α=0.3,0.3,28,12,10,5,0,2.593,10,9
+v4-L,SLM solo,EMA α=0.3,0.31,28,12,10,5,0,2.333,9,8
+v4-L,SLM solo,EMA α=0.3,0.32,28,11,10,6,0,2.185,9,7
+v4-L,SLM solo,EMA α=0.3,0.33,25,11,9,4,0.0,2.458,9,7
+v4-L,SLM solo,EMA α=0.3,0.34,25,9,10,5,0.0,1.917,8,6
+v4-L,SLM solo,EMA α=0.3,0.35,25,9,10,5,0.0,1.792,8,6
+v4-L,SLM solo,EMA α=0.3,0.36,25,9,9,6,0.0,1.542,8,6
+v4-L,SLM solo,EMA α=0.3,0.37,24,9,7,7,0,1.435,8,6
+v4-L,SLM solo,EMA α=0.3,0.38,24,9,6,8,0,1.043,7,5
+v4-L,SLM solo,EMA α=0.3,0.39,24,7,7,9,0,0.652,6,5
+v4-L,SLM solo,EMA α=0.3,0.4,23,7,5,10,0.0,0.682,4,4
+v4-L,SLM solo,EMA α=0.3,0.41,23,7,4,11,-0.5,0.364,4,3
+v4-L,SLM solo,EMA α=0.3,0.42,22,7,4,10,0,0.619,4,3
+v4-L,SLM solo,EMA α=0.3,0.43,20,5,4,10,-1,0.737,4,3
+v4-L,SLM solo,EMA α=0.3,0.44,20,4,5,10,-1,0.579,4,3
+v4-L,SLM solo,EMA α=0.3,0.45,20,4,5,10,-1,0.526,4,2
+v4-L,SLM solo,EMA α=0.3,0.46,20,4,4,11,-1,0.263,4,2
+v4-L,SLM solo,EMA α=0.3,0.47,20,4,3,12,-1,0.053,4,2
+v4-L,SLM solo,EMA α=0.3,0.48,20,4,3,12,-1,-0.105,4,2
+v4-L,SLM solo,EMA α=0.3,0.49,18,4,3,10,-1,0.412,4,1
+v4-L,SLM solo,EMA α=0.3,0.5,18,4,3,10,-1,0.176,4,1
+v4-L,SLM solo,EMA α=0.3,0.51,17,4,2,10,-1.0,-0.062,3,1
+v4-L,SLM solo,EMA α=0.3,0.52,17,4,1,11,-1.5,-0.5,3,1
+v4-L,SLM solo,EMA α=0.3,0.53,17,4,1,11,-2.0,-0.688,3,1
+v4-L,SLM solo,EMA α=0.3,0.54,17,4,1,11,-2.0,-0.875,3,1
+v4-L,SLM solo,EMA α=0.3,0.55,16,4,0,11,-2,-1.0,2,1
+v4-L,SLM solo,EMA α=0.3,0.56,15,3,1,10,-2.0,-0.786,2,1
+v4-L,SLM solo,EMA α=0.3,0.57,15,3,1,10,-2.0,-1.071,2,1
+v4-L,SLM solo,EMA α=0.3,0.58,15,3,1,10,-2.0,-1.214,2,1
+v4-L,SLM solo,EMA α=0.3,0.59,13,3,1,9,-2,-1.0,2,1
+v4-L,SLM solo,EMA α=0.3,0.6,13,2,2,9,-2,-1.615,2,0
+v4-L,SLM solo,EMA α=0.3,0.61,12,2,2,8,-2.0,-1.5,2,0
+v4-L,SLM solo,EMA α=0.3,0.62,12,2,2,8,-2.0,-1.583,2,0
+v4-L,SLM solo,EMA α=0.3,0.63,12,2,2,8,-3.0,-1.917,2,0
+v4-L,SLM solo,EMA α=0.3,0.64,10,2,1,7,-2.5,-1.6,2,0
+v4-L,SLM solo,EMA α=0.3,0.65,9,1,2,6,-2,-1.667,1,0
+v4-L,SLM solo,EMA α=0.3,0.66,8,0,2,6,-2.5,-2.625,0,0
+v4-L,SLM solo,EMA α=0.3,0.67,8,0,1,7,-2.5,-2.75,0,0
+v4-L,SLM solo,EMA α=0.3,0.68,8,0,0,8,-2.5,-3.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.69,6,0,0,6,-4.0,-4.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.7,4,0,0,4,-2.5,-3.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.71,3,0,0,3,-4,-3.667,0,0
+v4-L,SLM solo,EMA α=0.3,0.72,2,0,0,2,-5.0,-5.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.73,2,0,0,2,-5.0,-5.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.74,2,0,0,2,-5.0,-5.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.75,1,0,0,1,-4,-4.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.76,1,0,0,1,-4,-4.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.77,1,0,0,1,-5,-5.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.78,1,0,0,1,-5,-5.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.79,1,0,0,1,-5,-5.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.8,1,0,0,1,-5,-5.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.81,1,0,0,1,-6,-6.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.82,1,0,0,1,-6,-6.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.83,1,0,0,1,-6,-6.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.84,1,0,0,1,-7,-7.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.85,1,0,0,1,-7,-7.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.86,1,0,0,1,-8,-8.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.87,1,0,0,1,-9,-9.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.88,1,0,0,1,-10,-10.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.89,1,0,0,1,-11,-11.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.9,1,0,0,1,-13,-13.0,0,0
+v4-L,SLM solo,EMA α=0.3,0.91,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.92,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.93,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.94,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.95,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.96,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.97,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.98,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.99,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.995,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.998,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.999,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.9995,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.3,0.9999,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.0001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.0005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.001,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.002,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.005,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.01,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.02,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.03,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.04,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.05,46,36,0,0,13.0,14.25,36,51
+v4-L,SLM solo,EMA α=0.7,0.06,46,36,0,0,13.0,14.222,36,51
+v4-L,SLM solo,EMA α=0.7,0.07,46,36,0,0,12.0,13.917,36,51
+v4-L,SLM solo,EMA α=0.7,0.08,46,36,0,0,12.0,13.556,36,51
+v4-L,SLM solo,EMA α=0.7,0.09,46,36,0,0,12.0,13.028,35,49
+v4-L,SLM solo,EMA α=0.7,0.1,46,35,0,1,12.0,11.944,33,45
+v4-L,SLM solo,EMA α=0.7,0.11,46,34,1,1,12.0,11.028,32,42
+v4-L,SLM solo,EMA α=0.7,0.12,46,32,3,1,12.0,10.111,30,39
+v4-L,SLM solo,EMA α=0.7,0.13,46,32,3,1,12.0,9.722,30,38
+v4-L,SLM solo,EMA α=0.7,0.14,45,30,4,1,11,9.143,28,38
+v4-L,SLM solo,EMA α=0.7,0.15,45,30,4,1,11,9.114,27,38
+v4-L,SLM solo,EMA α=0.7,0.16,45,30,4,1,10,8.686,25,35
+v4-L,SLM solo,EMA α=0.7,0.17,45,30,4,1,10,8.229,24,33
+v4-L,SLM solo,EMA α=0.7,0.18,45,27,6,2,8,7.571,23,32
+v4-L,SLM solo,EMA α=0.7,0.19,45,27,6,2,7,7.114,22,30
+v4-L,SLM solo,EMA α=0.7,0.2,44,25,8,2,7,6.857,22,28
+v4-L,SLM solo,EMA α=0.7,0.21,42,25,8,1,5.5,6.971,20,25
+v4-L,SLM solo,EMA α=0.7,0.22,40,24,7,2,6,6.697,20,23
+v4-L,SLM solo,EMA α=0.7,0.23,40,23,7,3,4,6.394,19,19
+v4-L,SLM solo,EMA α=0.7,0.24,39,22,7,3,4.0,6.312,18,17
+v4-L,SLM solo,EMA α=0.7,0.25,38,21,6,4,4,5.774,17,15
+v4-L,SLM solo,EMA α=0.7,0.26,37,21,6,4,4,5.645,17,14
+v4-L,SLM solo,EMA α=0.7,0.27,37,20,7,4,4,5.452,17,14
+v4-L,SLM solo,EMA α=0.7,0.28,36,20,7,3,2.5,5.367,15,14
+v4-L,SLM solo,EMA α=0.7,0.29,35,19,8,3,2.0,4.233,14,13
+v4-L,SLM solo,EMA α=0.7,0.3,34,18,8,4,2.0,3.9,13,13
+v4-L,SLM solo,EMA α=0.7,0.31,29,18,7,3,2.0,4.036,12,10
+v4-L,SLM solo,EMA α=0.7,0.32,29,16,9,3,1.5,3.714,12,10
+v4-L,SLM solo,EMA α=0.7,0.33,29,15,10,3,1.0,3.036,10,9
+v4-L,SLM solo,EMA α=0.7,0.34,29,14,11,3,0.5,2.857,10,9
+v4-L,SLM solo,EMA α=0.7,0.35,28,12,13,2,0,2.889,9,9
+v4-L,SLM solo,EMA α=0.7,0.36,27,12,12,2,0.0,3.0,9,8
+v4-L,SLM solo,EMA α=0.7,0.37,27,12,12,2,0.0,2.885,9,7
+v4-L,SLM solo,EMA α=0.7,0.38,26,11,12,2,0,2.84,9,7
+v4-L,SLM solo,EMA α=0.7,0.39,26,11,12,2,0,2.8,9,7
+v4-L,SLM solo,EMA α=0.7,0.4,26,9,14,2,0,2.16,8,6
+v4-L,SLM solo,EMA α=0.7,0.41,25,9,14,1,0.0,2.292,8,6
+v4-L,SLM solo,EMA α=0.7,0.42,25,8,15,1,0.0,2.125,7,6
+v4-L,SLM solo,EMA α=0.7,0.43,24,8,13,2,0,2.087,7,5
+v4-L,SLM solo,EMA α=0.7,0.44,24,8,13,2,0,1.913,6,5
+v4-L,SLM solo,EMA α=0.7,0.45,23,8,11,3,0.0,1.818,6,5
+v4-L,SLM solo,EMA α=0.7,0.46,23,7,11,4,0.0,1.5,6,5
+v4-L,SLM solo,EMA α=0.7,0.47,23,7,10,5,0.0,1.455,6,5
+v4-L,SLM solo,EMA α=0.7,0.48,23,6,11,5,0.0,1.273,5,4
+v4-L,SLM solo,EMA α=0.7,0.49,23,5,11,6,0.0,1.0,4,4
+v4-L,SLM solo,EMA α=0.7,0.5,23,5,11,6,0.0,1.0,4,4
+v4-L,SLM solo,EMA α=0.7,0.51,21,5,10,5,0.0,1.1,4,4
+v4-L,SLM solo,EMA α=0.7,0.52,20,5,10,4,0,1.158,4,2
+v4-L,SLM solo,EMA α=0.7,0.53,20,4,10,5,0,1.0,4,1
+v4-L,SLM solo,EMA α=0.7,0.54,20,4,10,5,0,0.947,4,1
+v4-L,SLM solo,EMA α=0.7,0.55,19,4,10,4,0.0,0.611,3,1
+v4-L,SLM solo,EMA α=0.7,0.56,19,4,10,4,0.0,0.611,3,1
+v4-L,SLM solo,EMA α=0.7,0.57,19,4,10,4,0.0,0.278,3,1
+v4-L,SLM solo,EMA α=0.7,0.58,19,4,9,5,0.0,0.111,3,1
+v4-L,SLM solo,EMA α=0.7,0.59,18,4,9,4,0,0.235,3,1
+v4-L,SLM solo,EMA α=0.7,0.6,17,4,9,3,0.0,0.562,3,1
+v4-L,SLM solo,EMA α=0.7,0.61,17,3,10,3,0.0,0.5,3,1
+v4-L,SLM solo,EMA α=0.7,0.62,17,3,10,3,0.0,0.5,3,1
+v4-L,SLM solo,EMA α=0.7,0.63,17,3,10,3,0.0,0.5,3,1
+v4-L,SLM solo,EMA α=0.7,0.64,16,3,8,5,0.0,0.312,3,1
+v4-L,SLM solo,EMA α=0.7,0.65,16,3,6,7,0.0,0.125,3,1
+v4-L,SLM solo,EMA α=0.7,0.66,16,2,7,7,0.0,-0.25,2,1
+v4-L,SLM solo,EMA α=0.7,0.67,14,2,3,9,-1.0,-0.357,2,1
+v4-L,SLM solo,EMA α=0.7,0.68,14,2,3,9,-1.0,-0.357,2,1
+v4-L,SLM solo,EMA α=0.7,0.69,12,2,3,7,-1.0,-0.417,2,1
+v4-L,SLM solo,EMA α=0.7,0.7,12,2,3,7,-1.0,-0.667,2,1
+v4-L,SLM solo,EMA α=0.7,0.71,12,2,3,7,-1.0,-0.667,2,1
+v4-L,SLM solo,EMA α=0.7,0.72,10,1,1,8,-1.0,-1.1,1,0
+v4-L,SLM solo,EMA α=0.7,0.73,9,1,1,7,-1,-1.222,1,0
+v4-L,SLM solo,EMA α=0.7,0.74,8,0,1,7,-2.0,-1.875,0,0
+v4-L,SLM solo,EMA α=0.7,0.75,5,0,1,4,-2,-2.4,0,0
+v4-L,SLM solo,EMA α=0.7,0.76,4,0,1,3,-1.5,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.77,4,0,1,3,-1.5,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.78,3,0,1,2,-1,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.79,3,0,1,2,-1,-2.333,0,0
+v4-L,SLM solo,EMA α=0.7,0.8,2,0,1,1,-0.5,-0.5,0,0
+v4-L,SLM solo,EMA α=0.7,0.81,1,0,0,1,-1,-1.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.82,1,0,0,1,-2,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.83,1,0,0,1,-2,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.84,1,0,0,1,-2,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.85,1,0,0,1,-2,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.86,1,0,0,1,-2,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.87,1,0,0,1,-2,-2.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.88,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.89,1,0,0,1,-3,-3.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.9,1,0,0,1,-5,-5.0,0,0
+v4-L,SLM solo,EMA α=0.7,0.91,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.92,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.93,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.94,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.95,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.96,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.97,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.98,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.99,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.995,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.998,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.999,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.9995,0,0,0,0,,,0,0
+v4-L,SLM solo,EMA α=0.7,0.9999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.0001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,umbral,0.0005,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,umbral,0.001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,umbral,0.002,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,umbral,0.005,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.01,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.02,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.03,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.04,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.05,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.06,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.07,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.08,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,umbral,0.09,45,31,3,1,6,6.714,26,32
+v4-L,Tito→SLM,umbral,0.1,45,31,3,1,6,6.571,24,30
+v4-L,Tito→SLM,umbral,0.11,45,29,4,2,6,5.771,22,28
+v4-L,Tito→SLM,umbral,0.12,45,29,4,2,6,5.714,22,26
+v4-L,Tito→SLM,umbral,0.13,45,27,6,2,4,5.457,21,26
+v4-L,Tito→SLM,umbral,0.14,45,27,6,2,4,5.457,21,26
+v4-L,Tito→SLM,umbral,0.15,45,27,6,2,4,5.371,21,26
+v4-L,Tito→SLM,umbral,0.16,44,26,6,2,4.5,5.147,20,25
+v4-L,Tito→SLM,umbral,0.17,44,26,6,2,4.0,5.029,20,24
+v4-L,Tito→SLM,umbral,0.18,44,25,7,2,3.0,4.618,18,23
+v4-L,Tito→SLM,umbral,0.19,44,24,8,2,2.5,4.471,17,22
+v4-L,Tito→SLM,umbral,0.2,44,24,8,2,2.0,4.382,16,19
+v4-L,Tito→SLM,umbral,0.21,44,23,9,2,2.0,4.176,16,18
+v4-L,Tito→SLM,umbral,0.22,39,21,10,1,2.0,4.719,15,18
+v4-L,Tito→SLM,umbral,0.23,39,21,10,1,2.0,4.5,15,16
+v4-L,Tito→SLM,umbral,0.24,39,21,9,2,2.0,4.375,15,14
+v4-L,Tito→SLM,umbral,0.25,39,20,9,3,2.0,4.281,15,13
+v4-L,Tito→SLM,umbral,0.26,38,20,8,3,2,4.226,14,12
+v4-L,Tito→SLM,umbral,0.27,37,20,8,3,2,4.0,14,12
+v4-L,Tito→SLM,umbral,0.28,37,20,7,4,2,3.806,14,12
+v4-L,Tito→SLM,umbral,0.29,36,19,7,4,2.0,3.767,14,10
+v4-L,Tito→SLM,umbral,0.3,36,18,8,4,1.5,3.033,12,9
+v4-L,Tito→SLM,umbral,0.31,33,18,7,4,2,2.862,11,8
+v4-L,Tito→SLM,umbral,0.32,30,17,8,4,2,2.724,9,8
+v4-L,Tito→SLM,umbral,0.33,30,16,9,4,1,2.517,9,7
+v4-L,Tito→SLM,umbral,0.34,29,14,11,3,0.5,2.357,9,7
+v4-L,Tito→SLM,umbral,0.35,29,13,12,3,0.0,2.179,9,7
+v4-L,Tito→SLM,umbral,0.36,29,11,14,3,0.0,1.964,8,7
+v4-L,Tito→SLM,umbral,0.37,28,11,13,3,0,2.037,8,7
+v4-L,Tito→SLM,umbral,0.38,26,11,12,2,0,2.36,8,7
+v4-L,Tito→SLM,umbral,0.39,26,11,12,2,0,2.28,8,7
+v4-L,Tito→SLM,umbral,0.4,26,10,13,2,0,2.08,8,6
+v4-L,Tito→SLM,umbral,0.41,25,10,12,2,0.0,2.167,8,6
+v4-L,Tito→SLM,umbral,0.42,25,9,13,2,0.0,1.917,7,6
+v4-L,Tito→SLM,umbral,0.43,25,9,13,2,0.0,1.875,7,6
+v4-L,Tito→SLM,umbral,0.44,24,9,13,1,0,1.87,6,6
+v4-L,Tito→SLM,umbral,0.45,24,9,13,1,0,1.87,6,5
+v4-L,Tito→SLM,umbral,0.46,24,9,13,1,0,1.87,6,5
+v4-L,Tito→SLM,umbral,0.47,24,7,15,1,0,1.609,6,5
+v4-L,Tito→SLM,umbral,0.48,24,7,14,2,0,1.348,6,4
+v4-L,Tito→SLM,umbral,0.49,23,7,13,2,0.0,1.318,6,4
+v4-L,Tito→SLM,umbral,0.5,23,7,13,2,0.0,1.182,6,4
+v4-L,Tito→SLM,umbral,0.51,23,7,12,3,0.0,1.136,6,4
+v4-L,Tito→SLM,umbral,0.52,23,6,12,4,0.0,0.864,5,4
+v4-L,Tito→SLM,umbral,0.53,22,6,11,4,0,0.81,5,4
+v4-L,Tito→SLM,umbral,0.54,22,4,11,6,0,0.429,4,4
+v4-L,Tito→SLM,umbral,0.55,20,4,11,4,0,0.474,3,4
+v4-L,Tito→SLM,umbral,0.56,19,4,10,4,0.0,0.5,3,3
+v4-L,Tito→SLM,umbral,0.57,19,4,10,4,0.0,0.5,3,3
+v4-L,Tito→SLM,umbral,0.58,19,4,10,4,0.0,0.5,3,3
+v4-L,Tito→SLM,umbral,0.59,19,4,10,4,0.0,0.5,3,3
+v4-L,Tito→SLM,umbral,0.6,18,4,9,4,0,0.471,3,3
+v4-L,Tito→SLM,umbral,0.61,18,4,9,4,0,0.176,3,3
+v4-L,Tito→SLM,umbral,0.62,18,3,10,4,0,0.118,3,3
+v4-L,Tito→SLM,umbral,0.63,17,3,10,3,0.0,0.375,3,1
+v4-L,Tito→SLM,umbral,0.64,16,3,10,3,0.0,0.375,3,1
+v4-L,Tito→SLM,umbral,0.65,16,3,10,3,0.0,0.375,3,0
+v4-L,Tito→SLM,umbral,0.66,16,3,10,3,0.0,0.375,3,0
+v4-L,Tito→SLM,umbral,0.67,16,3,10,3,0.0,0.375,3,0
+v4-L,Tito→SLM,umbral,0.68,15,3,10,2,0,0.8,3,0
+v4-L,Tito→SLM,umbral,0.69,15,3,10,2,0,0.8,3,0
+v4-L,Tito→SLM,umbral,0.7,15,3,9,3,0,0.4,3,0
+v4-L,Tito→SLM,umbral,0.71,15,3,9,3,0,0.4,3,0
+v4-L,Tito→SLM,umbral,0.72,14,2,9,3,0.0,0.0,2,0
+v4-L,Tito→SLM,umbral,0.73,13,2,9,2,0,0.462,2,0
+v4-L,Tito→SLM,umbral,0.74,12,2,9,1,0.0,1.0,2,0
+v4-L,Tito→SLM,umbral,0.75,12,2,8,2,0.0,0.583,2,0
+v4-L,Tito→SLM,umbral,0.76,10,2,8,0,0.0,1.1,2,0
+v4-L,Tito→SLM,umbral,0.77,9,1,8,0,0,0.889,1,0
+v4-L,Tito→SLM,umbral,0.78,8,0,8,0,0.0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.79,7,0,5,2,0,-1.571,0,0
+v4-L,Tito→SLM,umbral,0.8,7,0,5,2,0,-1.571,0,0
+v4-L,Tito→SLM,umbral,0.81,5,0,5,0,0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.82,4,0,4,0,0.0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.83,3,0,3,0,0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.84,2,0,2,0,0.0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.85,2,0,2,0,0.0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.86,2,0,2,0,0.0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.87,2,0,2,0,0.0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.88,2,0,2,0,0.0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.89,1,0,1,0,0,0.0,0,0
+v4-L,Tito→SLM,umbral,0.9,1,0,0,1,-4,-4.0,0,0
+v4-L,Tito→SLM,umbral,0.91,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.92,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.93,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.94,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.95,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.96,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.97,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.98,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.99,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.998,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.9995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,umbral,0.9999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.0001,45,29,2,4,7,5.886,24,33
+v4-L,Tito→SLM,dos seguidas,0.0005,45,29,2,4,7,5.886,24,32
+v4-L,Tito→SLM,dos seguidas,0.001,45,29,2,4,7,5.886,24,32
+v4-L,Tito→SLM,dos seguidas,0.002,45,29,2,4,7,5.829,24,32
+v4-L,Tito→SLM,dos seguidas,0.005,45,29,2,4,7,5.829,24,32
+v4-L,Tito→SLM,dos seguidas,0.01,45,29,2,4,6,5.8,24,32
+v4-L,Tito→SLM,dos seguidas,0.02,45,29,2,4,6,5.8,24,32
+v4-L,Tito→SLM,dos seguidas,0.03,45,29,2,4,6,5.8,24,32
+v4-L,Tito→SLM,dos seguidas,0.04,45,29,2,4,6,5.8,24,32
+v4-L,Tito→SLM,dos seguidas,0.05,45,29,2,4,6,5.8,24,32
+v4-L,Tito→SLM,dos seguidas,0.06,45,29,2,4,6,5.8,24,32
+v4-L,Tito→SLM,dos seguidas,0.07,45,29,2,4,5,5.714,24,32
+v4-L,Tito→SLM,dos seguidas,0.08,45,29,2,4,5,5.714,24,32
+v4-L,Tito→SLM,dos seguidas,0.09,45,29,2,4,5,5.714,24,32
+v4-L,Tito→SLM,dos seguidas,0.1,45,27,3,5,5,5.486,23,30
+v4-L,Tito→SLM,dos seguidas,0.11,45,26,3,6,3,4.543,18,24
+v4-L,Tito→SLM,dos seguidas,0.12,45,24,3,8,2,4.0,17,24
+v4-L,Tito→SLM,dos seguidas,0.13,44,24,2,8,2.5,4.029,17,23
+v4-L,Tito→SLM,dos seguidas,0.14,44,23,3,8,2.5,3.912,17,22
+v4-L,Tito→SLM,dos seguidas,0.15,44,23,2,9,2.5,3.882,17,22
+v4-L,Tito→SLM,dos seguidas,0.16,44,21,3,10,2.0,3.441,16,22
+v4-L,Tito→SLM,dos seguidas,0.17,44,21,3,10,2.0,3.441,16,19
+v4-L,Tito→SLM,dos seguidas,0.18,44,21,3,10,2.0,3.441,16,17
+v4-L,Tito→SLM,dos seguidas,0.19,44,19,4,11,1.0,3.147,15,17
+v4-L,Tito→SLM,dos seguidas,0.2,42,18,4,11,1,3.121,14,17
+v4-L,Tito→SLM,dos seguidas,0.21,39,18,4,10,1.5,3.688,14,16
+v4-L,Tito→SLM,dos seguidas,0.22,38,17,4,10,1,3.548,14,11
+v4-L,Tito→SLM,dos seguidas,0.23,38,17,4,10,1,3.323,13,11
+v4-L,Tito→SLM,dos seguidas,0.24,38,16,5,10,1,2.903,13,9
+v4-L,Tito→SLM,dos seguidas,0.25,36,16,3,11,1.0,2.833,13,9
+v4-L,Tito→SLM,dos seguidas,0.26,36,16,3,11,1.0,2.6,12,9
+v4-L,Tito→SLM,dos seguidas,0.27,34,16,3,10,1,2.621,12,8
+v4-L,Tito→SLM,dos seguidas,0.28,33,16,3,10,1,2.448,11,8
+v4-L,Tito→SLM,dos seguidas,0.29,29,16,3,8,1,2.407,11,8
+v4-L,Tito→SLM,dos seguidas,0.3,28,15,3,9,1,1.926,11,8
+v4-L,Tito→SLM,dos seguidas,0.31,28,15,3,9,1,1.704,9,7
+v4-L,Tito→SLM,dos seguidas,0.32,26,11,3,11,0,1.72,8,7
+v4-L,Tito→SLM,dos seguidas,0.33,26,8,4,13,-1,1.36,8,7
+v4-L,Tito→SLM,dos seguidas,0.34,25,8,4,12,-0.5,1.458,8,7
+v4-L,Tito→SLM,dos seguidas,0.35,24,8,4,11,0,1.435,8,6
+v4-L,Tito→SLM,dos seguidas,0.36,24,8,3,12,-1,1.391,8,6
+v4-L,Tito→SLM,dos seguidas,0.37,24,8,3,12,-1,1.391,8,6
+v4-L,Tito→SLM,dos seguidas,0.38,24,8,3,12,-1,1.304,8,6
+v4-L,Tito→SLM,dos seguidas,0.39,24,8,3,12,-1,1.174,8,6
+v4-L,Tito→SLM,dos seguidas,0.4,24,7,2,14,-1,0.565,7,5
+v4-L,Tito→SLM,dos seguidas,0.41,23,7,2,13,-1.0,0.773,7,4
+v4-L,Tito→SLM,dos seguidas,0.42,23,7,1,14,-1.0,0.455,7,3
+v4-L,Tito→SLM,dos seguidas,0.43,23,6,2,14,-1.0,0.227,6,3
+v4-L,Tito→SLM,dos seguidas,0.44,22,6,2,13,-1,0.571,6,3
+v4-L,Tito→SLM,dos seguidas,0.45,22,6,2,13,-1,0.476,6,3
+v4-L,Tito→SLM,dos seguidas,0.46,22,6,2,13,-1,0.476,6,3
+v4-L,Tito→SLM,dos seguidas,0.47,21,6,0,14,-1.0,0.2,6,3
+v4-L,Tito→SLM,dos seguidas,0.48,21,6,0,14,-1.0,0.2,6,3
+v4-L,Tito→SLM,dos seguidas,0.49,20,5,0,14,-1,0.105,5,2
+v4-L,Tito→SLM,dos seguidas,0.5,20,4,0,15,-1,-0.158,4,1
+v4-L,Tito→SLM,dos seguidas,0.51,19,4,0,14,-1.0,-0.111,4,1
+v4-L,Tito→SLM,dos seguidas,0.52,18,4,0,13,-1,-0.176,3,1
+v4-L,Tito→SLM,dos seguidas,0.53,17,4,0,12,-1.0,0.0,3,0
+v4-L,Tito→SLM,dos seguidas,0.54,17,4,0,12,-1.0,-0.062,3,0
+v4-L,Tito→SLM,dos seguidas,0.55,17,4,0,12,-1.0,-0.375,3,0
+v4-L,Tito→SLM,dos seguidas,0.56,16,4,0,11,-1,0.067,3,0
+v4-L,Tito→SLM,dos seguidas,0.57,16,4,0,11,-1,-0.267,2,0
+v4-L,Tito→SLM,dos seguidas,0.58,16,4,0,11,-1,-0.667,2,0
+v4-L,Tito→SLM,dos seguidas,0.59,14,4,0,9,-1,0.154,2,0
+v4-L,Tito→SLM,dos seguidas,0.6,14,3,1,9,-1,0.077,2,0
+v4-L,Tito→SLM,dos seguidas,0.61,14,3,1,9,-1,-0.154,2,0
+v4-L,Tito→SLM,dos seguidas,0.62,14,3,0,10,-1,-0.385,2,0
+v4-L,Tito→SLM,dos seguidas,0.63,13,3,0,10,-1,-0.385,2,0
+v4-L,Tito→SLM,dos seguidas,0.64,13,2,1,10,-1,-0.615,2,0
+v4-L,Tito→SLM,dos seguidas,0.65,12,2,1,9,-1.0,-0.25,2,0
+v4-L,Tito→SLM,dos seguidas,0.66,12,2,0,10,-1.0,-0.5,2,0
+v4-L,Tito→SLM,dos seguidas,0.67,11,2,0,9,-1,-0.091,2,0
+v4-L,Tito→SLM,dos seguidas,0.68,11,2,0,9,-1,-0.455,2,0
+v4-L,Tito→SLM,dos seguidas,0.69,10,1,0,9,-1.0,-0.8,1,0
+v4-L,Tito→SLM,dos seguidas,0.7,10,1,0,9,-1.0,-1.0,1,0
+v4-L,Tito→SLM,dos seguidas,0.71,9,1,0,8,-1,-1.0,1,0
+v4-L,Tito→SLM,dos seguidas,0.72,8,1,0,7,-1.0,-1.0,1,0
+v4-L,Tito→SLM,dos seguidas,0.73,5,0,0,5,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.74,4,0,0,4,-1.0,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.75,4,0,0,4,-1.0,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.76,3,0,0,3,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.77,3,0,0,3,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.78,3,0,0,3,-1,-2.667,0,0
+v4-L,Tito→SLM,dos seguidas,0.79,3,0,0,3,-1,-2.667,0,0
+v4-L,Tito→SLM,dos seguidas,0.8,3,0,0,3,-1,-2.667,0,0
+v4-L,Tito→SLM,dos seguidas,0.81,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.82,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.83,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.84,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.85,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.86,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.87,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.88,1,0,0,1,-1,-1.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.89,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.9,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,dos seguidas,0.91,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.92,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.93,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.94,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.95,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.96,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.97,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.98,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.99,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.998,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.9995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,dos seguidas,0.9999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.0001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.5,0.0005,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.5,0.001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.5,0.002,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.5,0.005,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.5,0.01,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.5,0.02,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.5,0.03,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.5,0.04,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.5,0.05,45,31,3,1,6,6.743,25,32
+v4-L,Tito→SLM,EMA α=0.5,0.06,45,31,3,1,6,6.6,25,32
+v4-L,Tito→SLM,EMA α=0.5,0.07,45,31,3,1,6,6.486,25,32
+v4-L,Tito→SLM,EMA α=0.5,0.08,45,31,3,1,6,6.314,24,32
+v4-L,Tito→SLM,EMA α=0.5,0.09,45,31,3,1,6,6.171,23,31
+v4-L,Tito→SLM,EMA α=0.5,0.1,45,29,4,2,6,5.743,22,28
+v4-L,Tito→SLM,EMA α=0.5,0.11,45,27,6,2,3,4.943,20,26
+v4-L,Tito→SLM,EMA α=0.5,0.12,45,26,7,2,3,4.657,19,24
+v4-L,Tito→SLM,EMA α=0.5,0.13,44,25,7,2,3.0,4.647,19,23
+v4-L,Tito→SLM,EMA α=0.5,0.14,44,25,7,2,3.0,4.471,19,23
+v4-L,Tito→SLM,EMA α=0.5,0.15,44,25,6,3,2.0,4.118,16,21
+v4-L,Tito→SLM,EMA α=0.5,0.16,44,22,9,3,2.0,4.029,16,19
+v4-L,Tito→SLM,EMA α=0.5,0.17,43,21,10,3,1.5,3.735,16,19
+v4-L,Tito→SLM,EMA α=0.5,0.18,43,21,10,3,1.5,3.618,15,17
+v4-L,Tito→SLM,EMA α=0.5,0.19,43,21,8,5,1.0,3.412,14,17
+v4-L,Tito→SLM,EMA α=0.5,0.2,40,21,8,4,1,3.818,13,16
+v4-L,Tito→SLM,EMA α=0.5,0.21,38,19,7,5,1,3.677,13,14
+v4-L,Tito→SLM,EMA α=0.5,0.22,38,17,9,5,1,3.419,13,12
+v4-L,Tito→SLM,EMA α=0.5,0.23,36,17,8,5,1.0,3.4,13,9
+v4-L,Tito→SLM,EMA α=0.5,0.24,36,17,7,6,1.0,3.133,13,9
+v4-L,Tito→SLM,EMA α=0.5,0.25,36,16,8,6,1.0,2.733,13,9
+v4-L,Tito→SLM,EMA α=0.5,0.26,36,16,8,6,1.0,2.633,12,9
+v4-L,Tito→SLM,EMA α=0.5,0.27,34,14,8,7,0,2.414,11,9
+v4-L,Tito→SLM,EMA α=0.5,0.28,31,14,8,5,1,2.556,10,8
+v4-L,Tito→SLM,EMA α=0.5,0.29,31,14,8,5,1,2.407,10,8
+v4-L,Tito→SLM,EMA α=0.5,0.3,27,14,8,4,1.0,2.462,9,7
+v4-L,Tito→SLM,EMA α=0.5,0.31,27,12,10,4,0.0,2.192,9,7
+v4-L,Tito→SLM,EMA α=0.5,0.32,27,10,12,4,0.0,2.0,9,7
+v4-L,Tito→SLM,EMA α=0.5,0.33,26,10,12,3,0,2.08,8,7
+v4-L,Tito→SLM,EMA α=0.5,0.34,26,9,12,4,0,1.88,8,6
+v4-L,Tito→SLM,EMA α=0.5,0.35,25,9,11,4,0.0,1.667,8,6
+v4-L,Tito→SLM,EMA α=0.5,0.36,24,8,10,5,0,1.609,8,5
+v4-L,Tito→SLM,EMA α=0.5,0.37,24,8,10,5,0,1.478,8,5
+v4-L,Tito→SLM,EMA α=0.5,0.38,24,7,8,8,0,1.043,7,5
+v4-L,Tito→SLM,EMA α=0.5,0.39,24,7,8,8,0,0.913,7,5
+v4-L,Tito→SLM,EMA α=0.5,0.4,24,7,8,8,0,0.783,7,4
+v4-L,Tito→SLM,EMA α=0.5,0.41,23,7,8,7,0.0,0.909,7,3
+v4-L,Tito→SLM,EMA α=0.5,0.42,23,7,8,7,0.0,0.682,6,2
+v4-L,Tito→SLM,EMA α=0.5,0.43,22,7,7,7,0,0.857,6,2
+v4-L,Tito→SLM,EMA α=0.5,0.44,22,7,7,7,0,0.857,6,2
+v4-L,Tito→SLM,EMA α=0.5,0.45,21,5,6,9,0.0,0.4,4,2
+v4-L,Tito→SLM,EMA α=0.5,0.46,21,4,7,9,0.0,0.3,4,2
+v4-L,Tito→SLM,EMA α=0.5,0.47,20,4,7,8,0,0.211,4,2
+v4-L,Tito→SLM,EMA α=0.5,0.48,19,4,7,7,0.0,0.333,4,2
+v4-L,Tito→SLM,EMA α=0.5,0.49,19,4,7,7,0.0,0.167,3,1
+v4-L,Tito→SLM,EMA α=0.5,0.5,18,4,7,6,0,0.353,3,1
+v4-L,Tito→SLM,EMA α=0.5,0.51,18,4,7,6,0,0.235,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.52,18,4,6,7,0,0.176,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.53,18,4,6,7,0,0.118,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.54,18,4,5,8,0,-0.235,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.55,16,4,5,6,0,0.333,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.56,16,4,4,7,0,0.267,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.57,16,4,3,8,-1,0.2,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.58,16,3,4,8,-1,0.067,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.59,16,3,3,9,-1,-0.133,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.6,16,3,2,10,-1,-0.333,3,0
+v4-L,Tito→SLM,EMA α=0.5,0.61,16,3,2,10,-1,-0.667,2,0
+v4-L,Tito→SLM,EMA α=0.5,0.62,14,3,2,9,-1.0,-0.786,2,0
+v4-L,Tito→SLM,EMA α=0.5,0.63,12,2,3,7,-1.0,-0.25,2,0
+v4-L,Tito→SLM,EMA α=0.5,0.64,12,2,2,8,-1.0,-0.583,2,0
+v4-L,Tito→SLM,EMA α=0.5,0.65,12,2,2,8,-1.0,-0.667,2,0
+v4-L,Tito→SLM,EMA α=0.5,0.66,12,2,2,8,-1.0,-0.917,2,0
+v4-L,Tito→SLM,EMA α=0.5,0.67,12,2,2,8,-1.5,-1.25,2,0
+v4-L,Tito→SLM,EMA α=0.5,0.68,11,1,3,7,-1,-1.273,1,0
+v4-L,Tito→SLM,EMA α=0.5,0.69,10,1,2,7,-2.0,-1.4,1,0
+v4-L,Tito→SLM,EMA α=0.5,0.7,9,0,2,7,-2,-1.778,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.71,9,0,1,8,-2,-2.111,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.72,8,0,1,7,-2.0,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.73,6,0,1,5,-2.0,-2.5,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.74,3,0,0,3,-2,-2.667,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.75,3,0,0,3,-2,-2.667,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.76,3,0,0,3,-2,-2.667,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.77,2,0,0,2,-4.0,-4.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.78,2,0,0,2,-4.0,-4.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.79,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.8,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.81,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.82,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.83,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.84,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.85,1,0,0,1,-4,-4.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.86,1,0,0,1,-4,-4.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.87,1,0,0,1,-4,-4.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.88,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.89,1,0,0,1,-6,-6.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.9,1,0,0,1,-11,-11.0,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.91,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.92,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.93,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.94,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.95,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.96,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.97,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.98,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.99,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.998,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.9995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.5,0.9999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.0001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.3,0.0005,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.3,0.001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.3,0.002,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.3,0.005,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.3,0.01,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.3,0.02,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.3,0.03,45,31,3,1,6,6.743,25,32
+v4-L,Tito→SLM,EMA α=0.3,0.04,45,31,3,1,6,6.571,25,32
+v4-L,Tito→SLM,EMA α=0.3,0.05,45,31,3,1,6,6.486,25,32
+v4-L,Tito→SLM,EMA α=0.3,0.06,45,31,3,1,6,6.229,24,32
+v4-L,Tito→SLM,EMA α=0.3,0.07,45,31,3,1,6,5.914,23,32
+v4-L,Tito→SLM,EMA α=0.3,0.08,45,30,4,1,5,5.657,23,31
+v4-L,Tito→SLM,EMA α=0.3,0.09,45,28,5,2,5,5.2,20,30
+v4-L,Tito→SLM,EMA α=0.3,0.1,45,25,8,2,3,4.6,19,27
+v4-L,Tito→SLM,EMA α=0.3,0.11,45,24,9,2,3,4.257,18,23
+v4-L,Tito→SLM,EMA α=0.3,0.12,44,23,8,3,3.0,4.147,18,21
+v4-L,Tito→SLM,EMA α=0.3,0.13,43,23,8,3,2.0,3.853,16,20
+v4-L,Tito→SLM,EMA α=0.3,0.14,43,22,8,4,2.0,3.618,15,20
+v4-L,Tito→SLM,EMA α=0.3,0.15,43,21,7,6,1.0,3.235,15,19
+v4-L,Tito→SLM,EMA α=0.3,0.16,43,21,4,9,1.0,2.882,13,18
+v4-L,Tito→SLM,EMA α=0.3,0.17,42,18,7,8,1,2.758,13,17
+v4-L,Tito→SLM,EMA α=0.3,0.18,42,15,9,9,0,2.455,13,15
+v4-L,Tito→SLM,EMA α=0.3,0.19,38,15,9,7,0,2.935,13,15
+v4-L,Tito→SLM,EMA α=0.3,0.2,38,14,9,8,0,2.677,13,12
+v4-L,Tito→SLM,EMA α=0.3,0.21,36,14,9,7,0.0,2.633,13,9
+v4-L,Tito→SLM,EMA α=0.3,0.22,35,14,8,8,0.0,2.433,13,9
+v4-L,Tito→SLM,EMA α=0.3,0.23,34,14,8,7,0,2.345,12,9
+v4-L,Tito→SLM,EMA α=0.3,0.24,32,14,7,6,1,2.407,11,8
+v4-L,Tito→SLM,EMA α=0.3,0.25,32,13,8,6,0,2.185,11,8
+v4-L,Tito→SLM,EMA α=0.3,0.26,31,13,8,6,0,1.815,10,8
+v4-L,Tito→SLM,EMA α=0.3,0.27,30,13,5,8,0.5,1.885,9,7
+v4-L,Tito→SLM,EMA α=0.3,0.28,29,12,4,10,0.0,1.577,9,6
+v4-L,Tito→SLM,EMA α=0.3,0.29,27,10,5,11,0.0,1.346,9,6
+v4-L,Tito→SLM,EMA α=0.3,0.3,26,9,6,10,0,1.44,9,6
+v4-L,Tito→SLM,EMA α=0.3,0.31,26,9,6,10,0,1.16,8,6
+v4-L,Tito→SLM,EMA α=0.3,0.32,26,9,4,12,0,1.04,8,6
+v4-L,Tito→SLM,EMA α=0.3,0.33,24,9,4,10,0,1.043,8,5
+v4-L,Tito→SLM,EMA α=0.3,0.34,24,7,6,10,0,0.696,7,4
+v4-L,Tito→SLM,EMA α=0.3,0.35,23,7,5,10,0.0,0.636,7,4
+v4-L,Tito→SLM,EMA α=0.3,0.36,23,7,5,10,0.0,0.318,7,3
+v4-L,Tito→SLM,EMA α=0.3,0.37,23,7,4,11,-0.5,0.045,7,3
+v4-L,Tito→SLM,EMA α=0.3,0.38,23,7,4,11,-0.5,-0.136,7,3
+v4-L,Tito→SLM,EMA α=0.3,0.39,23,6,5,11,-0.5,-0.545,5,2
+v4-L,Tito→SLM,EMA α=0.3,0.4,21,6,4,10,-0.5,-0.3,3,2
+v4-L,Tito→SLM,EMA α=0.3,0.41,20,6,4,9,0,-0.158,3,2
+v4-L,Tito→SLM,EMA α=0.3,0.42,20,6,4,9,0,-0.158,3,1
+v4-L,Tito→SLM,EMA α=0.3,0.43,19,4,5,9,-0.5,-0.167,3,1
+v4-L,Tito→SLM,EMA α=0.3,0.44,19,4,5,9,-0.5,-0.167,3,1
+v4-L,Tito→SLM,EMA α=0.3,0.45,18,4,5,8,0,-0.118,3,1
+v4-L,Tito→SLM,EMA α=0.3,0.46,18,4,4,9,-1,-0.412,3,1
+v4-L,Tito→SLM,EMA α=0.3,0.47,17,4,3,9,-1.0,-0.125,3,1
+v4-L,Tito→SLM,EMA α=0.3,0.48,17,4,3,9,-1.0,-0.188,3,1
+v4-L,Tito→SLM,EMA α=0.3,0.49,16,4,3,8,-1,0.067,3,0
+v4-L,Tito→SLM,EMA α=0.3,0.5,16,3,4,8,-1,-0.067,3,0
+v4-L,Tito→SLM,EMA α=0.3,0.51,16,3,3,9,-1,-0.4,3,0
+v4-L,Tito→SLM,EMA α=0.3,0.52,16,3,2,10,-1,-0.733,3,0
+v4-L,Tito→SLM,EMA α=0.3,0.53,16,3,2,10,-2,-0.867,3,0
+v4-L,Tito→SLM,EMA α=0.3,0.54,16,3,2,10,-2,-0.933,3,0
+v4-L,Tito→SLM,EMA α=0.3,0.55,15,3,1,10,-2.0,-1.214,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.56,14,3,1,9,-2,-1.0,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.57,14,3,1,9,-2,-1.231,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.58,13,2,2,9,-2,-1.462,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.59,12,2,2,8,-2.0,-1.417,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.6,12,1,3,8,-2.5,-1.833,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.61,12,1,3,8,-2.5,-1.833,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.62,12,1,2,9,-2.5,-2.0,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.63,10,1,2,7,-2.5,-1.7,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.64,10,1,1,8,-2.5,-2.0,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.65,9,1,0,8,-2,-1.889,1,0
+v4-L,Tito→SLM,EMA α=0.3,0.66,8,0,1,7,-2.5,-2.75,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.67,8,0,0,8,-2.5,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.68,8,0,0,8,-2.5,-3.25,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.69,6,0,0,6,-4.5,-4.333,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.7,2,0,0,2,-4.5,-4.5,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.71,2,0,0,2,-4.5,-4.5,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.72,2,0,0,2,-5.0,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.73,2,0,0,2,-5.0,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.74,2,0,0,2,-5.0,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.75,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.76,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.77,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.78,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.79,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.8,1,0,0,1,-6,-6.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.81,1,0,0,1,-6,-6.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.82,1,0,0,1,-6,-6.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.83,1,0,0,1,-7,-7.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.84,1,0,0,1,-7,-7.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.85,1,0,0,1,-8,-8.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.86,1,0,0,1,-8,-8.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.87,1,0,0,1,-9,-9.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.88,1,0,0,1,-10,-10.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.89,1,0,0,1,-11,-11.0,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.9,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.91,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.92,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.93,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.94,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.95,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.96,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.97,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.98,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.99,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.998,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.9995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.3,0.9999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.0001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.7,0.0005,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.7,0.001,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.7,0.002,45,31,3,1,8,6.886,26,33
+v4-L,Tito→SLM,EMA α=0.7,0.005,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.7,0.01,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.7,0.02,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.7,0.03,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.7,0.04,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.7,0.05,45,31,3,1,8,6.886,26,32
+v4-L,Tito→SLM,EMA α=0.7,0.06,45,31,3,1,6,6.771,26,32
+v4-L,Tito→SLM,EMA α=0.7,0.07,45,31,3,1,6,6.743,25,32
+v4-L,Tito→SLM,EMA α=0.7,0.08,45,31,3,1,6,6.543,25,32
+v4-L,Tito→SLM,EMA α=0.7,0.09,45,31,3,1,6,6.486,25,32
+v4-L,Tito→SLM,EMA α=0.7,0.1,45,30,3,2,6,6.057,22,30
+v4-L,Tito→SLM,EMA α=0.7,0.11,45,29,4,2,6,5.686,22,28
+v4-L,Tito→SLM,EMA α=0.7,0.12,45,27,6,2,3,5.057,20,24
+v4-L,Tito→SLM,EMA α=0.7,0.13,45,27,6,2,3,4.943,20,24
+v4-L,Tito→SLM,EMA α=0.7,0.14,44,25,7,2,3.5,4.824,19,23
+v4-L,Tito→SLM,EMA α=0.7,0.15,44,25,7,2,3.5,4.765,19,23
+v4-L,Tito→SLM,EMA α=0.7,0.16,44,25,7,2,2.5,4.412,17,23
+v4-L,Tito→SLM,EMA α=0.7,0.17,44,25,7,2,2.5,4.382,17,21
+v4-L,Tito→SLM,EMA α=0.7,0.18,44,23,8,3,2.5,4.176,17,19
+v4-L,Tito→SLM,EMA α=0.7,0.19,43,22,9,3,2.0,3.941,16,17
+v4-L,Tito→SLM,EMA α=0.7,0.2,42,22,9,3,2.0,3.882,16,17
+v4-L,Tito→SLM,EMA α=0.7,0.21,41,22,9,2,2,4.212,14,16
+v4-L,Tito→SLM,EMA α=0.7,0.22,39,20,9,3,2.0,4.062,14,16
+v4-L,Tito→SLM,EMA α=0.7,0.23,39,19,9,4,1.5,3.844,13,11
+v4-L,Tito→SLM,EMA α=0.7,0.24,38,18,9,4,1,3.806,13,10
+v4-L,Tito→SLM,EMA α=0.7,0.25,36,18,7,5,1.0,3.433,13,9
+v4-L,Tito→SLM,EMA α=0.7,0.26,36,18,7,5,1.0,3.367,13,9
+v4-L,Tito→SLM,EMA α=0.7,0.27,36,17,8,5,1.0,3.033,13,9
+v4-L,Tito→SLM,EMA α=0.7,0.28,35,17,8,4,1,2.862,11,9
+v4-L,Tito→SLM,EMA α=0.7,0.29,34,17,8,4,1,2.724,11,8
+v4-L,Tito→SLM,EMA α=0.7,0.3,32,16,9,4,1,2.552,10,8
+v4-L,Tito→SLM,EMA α=0.7,0.31,28,16,8,3,1,2.667,9,7
+v4-L,Tito→SLM,EMA α=0.7,0.32,27,15,9,2,1.0,2.615,9,7
+v4-L,Tito→SLM,EMA α=0.7,0.33,27,13,11,2,0.5,2.423,9,7
+v4-L,Tito→SLM,EMA α=0.7,0.34,27,12,11,3,0.0,2.154,9,7
+v4-L,Tito→SLM,EMA α=0.7,0.35,26,11,12,2,0,2.28,8,7
+v4-L,Tito→SLM,EMA α=0.7,0.36,25,11,11,2,0.0,2.375,8,7
+v4-L,Tito→SLM,EMA α=0.7,0.37,25,11,10,3,0.0,2.208,8,6
+v4-L,Tito→SLM,EMA α=0.7,0.38,24,9,11,3,0,2.13,8,6
+v4-L,Tito→SLM,EMA α=0.7,0.39,24,9,11,3,0,1.739,8,6
+v4-L,Tito→SLM,EMA α=0.7,0.4,24,7,13,3,0,1.435,7,5
+v4-L,Tito→SLM,EMA α=0.7,0.41,24,7,12,4,0,1.261,7,5
+v4-L,Tito→SLM,EMA α=0.7,0.42,23,7,12,3,0.0,1.591,7,5
+v4-L,Tito→SLM,EMA α=0.7,0.43,23,7,11,4,0.0,1.5,7,4
+v4-L,Tito→SLM,EMA α=0.7,0.44,22,7,10,4,0,1.381,6,3
+v4-L,Tito→SLM,EMA α=0.7,0.45,22,7,9,5,0,1.19,6,3
+v4-L,Tito→SLM,EMA α=0.7,0.46,22,6,10,5,0,0.952,6,3
+v4-L,Tito→SLM,EMA α=0.7,0.47,22,6,9,6,0,0.905,6,3
+v4-L,Tito→SLM,EMA α=0.7,0.48,22,5,10,6,0,0.714,5,2
+v4-L,Tito→SLM,EMA α=0.7,0.49,22,4,10,7,0,0.476,4,2
+v4-L,Tito→SLM,EMA α=0.7,0.5,22,4,10,7,0,0.476,4,2
+v4-L,Tito→SLM,EMA α=0.7,0.51,20,4,9,6,0,0.526,4,2
+v4-L,Tito→SLM,EMA α=0.7,0.52,19,4,9,5,0.0,0.444,3,1
+v4-L,Tito→SLM,EMA α=0.7,0.53,19,4,9,5,0.0,0.389,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.54,18,4,9,4,0,0.471,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.55,18,4,8,5,0,0.412,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.56,18,4,8,5,0,0.412,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.57,18,4,8,5,0,0.0,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.58,18,4,8,5,0,-0.059,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.59,17,4,8,4,0.0,0.188,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.6,16,4,8,3,0,0.467,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.61,16,3,9,3,0,0.4,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.62,16,3,9,3,0,0.4,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.63,16,3,8,4,0,0.333,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.64,15,3,6,6,0,0.133,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.65,15,3,4,8,-1,-0.067,3,0
+v4-L,Tito→SLM,EMA α=0.7,0.66,15,2,5,8,-1,-0.533,2,0
+v4-L,Tito→SLM,EMA α=0.7,0.67,13,2,3,8,-1,-0.462,2,0
+v4-L,Tito→SLM,EMA α=0.7,0.68,13,2,3,8,-1,-0.462,2,0
+v4-L,Tito→SLM,EMA α=0.7,0.69,11,2,3,6,-1,-0.455,2,0
+v4-L,Tito→SLM,EMA α=0.7,0.7,11,2,3,6,-1,-0.455,2,0
+v4-L,Tito→SLM,EMA α=0.7,0.71,11,2,3,6,-1,-0.455,2,0
+v4-L,Tito→SLM,EMA α=0.7,0.72,10,1,1,8,-1.0,-1.1,1,0
+v4-L,Tito→SLM,EMA α=0.7,0.73,9,1,1,7,-1,-1.222,1,0
+v4-L,Tito→SLM,EMA α=0.7,0.74,8,0,1,7,-2.0,-1.875,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.75,5,0,1,4,-2,-2.4,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.76,4,0,1,3,-1.5,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.77,4,0,1,3,-1.5,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.78,3,0,1,2,-1,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.79,3,0,1,2,-1,-2.333,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.8,2,0,1,1,-0.5,-0.5,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.81,1,0,0,1,-2,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.82,1,0,0,1,-2,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.83,1,0,0,1,-2,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.84,1,0,0,1,-2,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.85,1,0,0,1,-2,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.86,1,0,0,1,-2,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.87,1,0,0,1,-2,-2.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.88,1,0,0,1,-3,-3.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.89,1,0,0,1,-4,-4.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.9,1,0,0,1,-5,-5.0,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.91,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.92,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.93,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.94,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.95,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.96,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.97,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.98,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.99,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.998,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.999,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.9995,0,0,0,0,,,0,0
+v4-L,Tito→SLM,EMA α=0.7,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.0001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.0005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.002,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.01,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.02,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.03,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.04,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.05,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.06,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.07,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.08,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,umbral,0.09,46,36,0,0,13.0,14.222,36,51
+"v4-L, repetición",SLM solo,umbral,0.1,46,36,0,0,12.0,13.917,36,48
+"v4-L, repetición",SLM solo,umbral,0.11,46,35,1,0,12.0,12.194,33,42
+"v4-L, repetición",SLM solo,umbral,0.12,46,34,1,1,12.0,11.278,32,42
+"v4-L, repetición",SLM solo,umbral,0.13,46,32,3,1,12.0,10.778,31,41
+"v4-L, repetición",SLM solo,umbral,0.14,46,32,3,1,12.0,10.528,31,41
+"v4-L, repetición",SLM solo,umbral,0.15,46,32,3,1,12.0,10.0,31,40
+"v4-L, repetición",SLM solo,umbral,0.16,45,31,3,1,12,9.429,28,38
+"v4-L, repetición",SLM solo,umbral,0.17,45,31,3,1,12,9.429,28,36
+"v4-L, repetición",SLM solo,umbral,0.18,45,30,4,1,12,9.0,26,36
+"v4-L, repetición",SLM solo,umbral,0.19,45,29,5,1,10,8.8,25,36
+"v4-L, repetición",SLM solo,umbral,0.2,45,28,6,1,10,8.029,23,31
+"v4-L, repetición",SLM solo,umbral,0.21,45,26,8,1,10,7.857,23,30
+"v4-L, repetición",SLM solo,umbral,0.22,42,25,9,0,10.0,8.0,21,27
+"v4-L, repetición",SLM solo,umbral,0.23,42,25,9,0,9.0,7.794,21,27
+"v4-L, repetición",SLM solo,umbral,0.24,41,24,8,1,8,7.303,20,25
+"v4-L, repetición",SLM solo,umbral,0.25,41,23,8,2,4,6.697,19,22
+"v4-L, repetición",SLM solo,umbral,0.26,40,22,8,2,4.0,6.625,17,20
+"v4-L, repetición",SLM solo,umbral,0.27,39,22,8,2,4.0,6.438,17,18
+"v4-L, repetición",SLM solo,umbral,0.28,38,22,7,3,4.0,6.094,17,16
+"v4-L, repetición",SLM solo,umbral,0.29,37,20,8,3,4,6.097,17,16
+"v4-L, repetición",SLM solo,umbral,0.3,37,20,8,3,4,5.71,16,15
+"v4-L, repetición",SLM solo,umbral,0.31,34,20,7,3,2.5,5.367,15,14
+"v4-L, repetición",SLM solo,umbral,0.32,32,18,8,4,2.0,4.133,12,13
+"v4-L, repetición",SLM solo,umbral,0.33,32,17,9,4,2.0,3.967,12,13
+"v4-L, repetición",SLM solo,umbral,0.34,30,15,11,3,1,3.138,11,13
+"v4-L, repetición",SLM solo,umbral,0.35,30,14,12,3,0,2.931,11,11
+"v4-L, repetición",SLM solo,umbral,0.36,30,13,13,3,0,2.759,10,11
+"v4-L, repetición",SLM solo,umbral,0.37,29,13,12,3,0.0,2.857,10,11
+"v4-L, repetición",SLM solo,umbral,0.38,27,12,12,2,0.0,3.077,9,9
+"v4-L, repetición",SLM solo,umbral,0.39,27,12,12,2,0.0,3.0,9,9
+"v4-L, repetición",SLM solo,umbral,0.4,27,11,13,2,0.0,2.808,9,8
+"v4-L, repetición",SLM solo,umbral,0.41,26,11,12,2,0,2.92,9,7
+"v4-L, repetición",SLM solo,umbral,0.42,26,10,13,2,0,2.68,8,7
+"v4-L, repetición",SLM solo,umbral,0.43,26,10,13,2,0,2.6,8,7
+"v4-L, repetición",SLM solo,umbral,0.44,25,10,13,1,0.0,2.625,7,6
+"v4-L, repetición",SLM solo,umbral,0.45,25,9,14,1,0.0,2.125,6,6
+"v4-L, repetición",SLM solo,umbral,0.46,25,9,14,1,0.0,2.125,6,6
+"v4-L, repetición",SLM solo,umbral,0.47,25,7,16,1,0.0,1.958,6,6
+"v4-L, repetición",SLM solo,umbral,0.48,25,7,15,2,0.0,1.708,6,5
+"v4-L, repetición",SLM solo,umbral,0.49,24,7,14,2,0,1.696,6,5
+"v4-L, repetición",SLM solo,umbral,0.5,24,7,14,2,0,1.565,6,5
+"v4-L, repetición",SLM solo,umbral,0.51,24,7,13,3,0,1.522,6,5
+"v4-L, repetición",SLM solo,umbral,0.52,24,6,13,4,0,1.261,5,5
+"v4-L, repetición",SLM solo,umbral,0.53,23,6,12,4,0.0,1.227,5,5
+"v4-L, repetición",SLM solo,umbral,0.54,23,5,12,5,0.0,1.0,4,5
+"v4-L, repetición",SLM solo,umbral,0.55,21,5,12,3,0.0,1.2,4,4
+"v4-L, repetición",SLM solo,umbral,0.56,20,5,11,3,0,1.263,4,4
+"v4-L, repetición",SLM solo,umbral,0.57,20,4,11,4,0,1.053,4,4
+"v4-L, repetición",SLM solo,umbral,0.58,20,4,11,4,0,1.053,4,4
+"v4-L, repetición",SLM solo,umbral,0.59,20,4,11,4,0,1.053,4,4
+"v4-L, repetición",SLM solo,umbral,0.6,19,4,10,4,0.0,0.556,3,3
+"v4-L, repetición",SLM solo,umbral,0.61,19,4,10,4,0.0,0.278,3,3
+"v4-L, repetición",SLM solo,umbral,0.62,19,3,11,4,0.0,0.222,3,3
+"v4-L, repetición",SLM solo,umbral,0.63,18,3,11,3,0,0.471,3,3
+"v4-L, repetición",SLM solo,umbral,0.64,17,3,11,3,0,0.471,3,3
+"v4-L, repetición",SLM solo,umbral,0.65,17,3,11,3,0,0.471,3,2
+"v4-L, repetición",SLM solo,umbral,0.66,17,3,11,3,0,0.471,3,2
+"v4-L, repetición",SLM solo,umbral,0.67,17,3,11,3,0,0.471,3,1
+"v4-L, repetición",SLM solo,umbral,0.68,16,3,11,2,0.0,0.875,3,1
+"v4-L, repetición",SLM solo,umbral,0.69,16,3,11,2,0.0,0.875,3,1
+"v4-L, repetición",SLM solo,umbral,0.7,16,3,10,3,0.0,0.5,3,1
+"v4-L, repetición",SLM solo,umbral,0.71,16,3,10,3,0.0,0.5,3,1
+"v4-L, repetición",SLM solo,umbral,0.72,15,2,10,3,0,0.133,2,1
+"v4-L, repetición",SLM solo,umbral,0.73,14,2,10,2,0.0,0.429,2,0
+"v4-L, repetición",SLM solo,umbral,0.74,13,2,10,1,0,0.923,2,0
+"v4-L, repetición",SLM solo,umbral,0.75,13,2,9,2,0,0.538,2,0
+"v4-L, repetición",SLM solo,umbral,0.76,11,2,9,0,0,1.0,2,0
+"v4-L, repetición",SLM solo,umbral,0.77,10,1,9,0,0.0,0.8,1,0
+"v4-L, repetición",SLM solo,umbral,0.78,9,0,9,0,0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.79,8,0,6,2,0.0,-1.375,0,0
+"v4-L, repetición",SLM solo,umbral,0.8,8,0,6,2,0.0,-1.375,0,0
+"v4-L, repetición",SLM solo,umbral,0.81,6,0,6,0,0.0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.82,5,0,5,0,0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.83,4,0,4,0,0.0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.84,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.85,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.86,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.87,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.88,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.89,1,0,1,0,0,0.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.9,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",SLM solo,umbral,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,umbral,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.0001,46,36,0,0,12.0,13.25,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.0005,46,36,0,0,12.0,13.25,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.001,46,36,0,0,12.0,13.25,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.002,46,36,0,0,12.0,13.25,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.005,46,36,0,0,12.0,13.25,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.01,46,36,0,0,12.0,13.194,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.02,46,36,0,0,12.0,13.194,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.03,46,36,0,0,12.0,13.194,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.04,46,36,0,0,12.0,13.194,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.05,46,36,0,0,12.0,13.194,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.06,46,36,0,0,12.0,13.194,36,51
+"v4-L, repetición",SLM solo,dos seguidas,0.07,46,36,0,0,12.0,13.194,36,50
+"v4-L, repetición",SLM solo,dos seguidas,0.08,46,36,0,0,12.0,12.667,35,48
+"v4-L, repetición",SLM solo,dos seguidas,0.09,46,36,0,0,12.0,12.639,35,48
+"v4-L, repetición",SLM solo,dos seguidas,0.1,46,34,1,1,11.0,11.722,34,44
+"v4-L, repetición",SLM solo,dos seguidas,0.11,46,33,1,2,11.0,9.556,30,37
+"v4-L, repetición",SLM solo,dos seguidas,0.12,46,31,1,4,11.0,8.694,28,35
+"v4-L, repetición",SLM solo,dos seguidas,0.13,45,31,0,4,9,8.229,26,33
+"v4-L, repetición",SLM solo,dos seguidas,0.14,45,30,1,4,9,7.829,25,33
+"v4-L, repetición",SLM solo,dos seguidas,0.15,45,30,0,5,9,7.771,25,33
+"v4-L, repetición",SLM solo,dos seguidas,0.16,45,28,1,6,7,6.943,24,31
+"v4-L, repetición",SLM solo,dos seguidas,0.17,45,28,1,6,7,6.943,24,30
+"v4-L, repetición",SLM solo,dos seguidas,0.18,45,28,1,6,7,6.743,24,28
+"v4-L, repetición",SLM solo,dos seguidas,0.19,45,25,2,8,5,6.057,22,27
+"v4-L, repetición",SLM solo,dos seguidas,0.2,43,24,2,8,5.0,6.029,21,25
+"v4-L, repetición",SLM solo,dos seguidas,0.21,40,23,2,8,7,6.455,19,23
+"v4-L, repetición",SLM solo,dos seguidas,0.22,39,22,2,8,6.0,6.031,19,18
+"v4-L, repetición",SLM solo,dos seguidas,0.23,39,22,2,8,3.5,5.719,17,16
+"v4-L, repetición",SLM solo,dos seguidas,0.24,39,21,3,8,3.0,5.25,17,16
+"v4-L, repetición",SLM solo,dos seguidas,0.25,37,20,1,10,3,5.097,17,15
+"v4-L, repetición",SLM solo,dos seguidas,0.26,37,20,1,10,3,4.806,16,14
+"v4-L, repetición",SLM solo,dos seguidas,0.27,36,20,1,9,3.0,4.9,16,14
+"v4-L, repetición",SLM solo,dos seguidas,0.28,36,17,3,10,1.0,3.433,14,14
+"v4-L, repetición",SLM solo,dos seguidas,0.29,31,17,2,9,2.0,3.607,14,13
+"v4-L, repetición",SLM solo,dos seguidas,0.3,29,17,2,9,2.0,3.393,14,11
+"v4-L, repetición",SLM solo,dos seguidas,0.31,29,17,2,9,1.0,2.536,11,11
+"v4-L, repetición",SLM solo,dos seguidas,0.32,28,13,2,12,0,2.111,9,10
+"v4-L, repetición",SLM solo,dos seguidas,0.33,28,10,3,14,-1,1.778,9,9
+"v4-L, repetición",SLM solo,dos seguidas,0.34,27,10,3,13,-0.5,1.885,9,7
+"v4-L, repetición",SLM solo,dos seguidas,0.35,25,10,3,11,0.0,2.042,9,7
+"v4-L, repetición",SLM solo,dos seguidas,0.36,25,10,2,12,-0.5,2.0,9,7
+"v4-L, repetición",SLM solo,dos seguidas,0.37,25,10,2,12,-0.5,1.875,8,7
+"v4-L, repetición",SLM solo,dos seguidas,0.38,25,10,2,12,-0.5,1.792,8,6
+"v4-L, repetición",SLM solo,dos seguidas,0.39,25,9,2,13,-1.0,1.542,8,6
+"v4-L, repetición",SLM solo,dos seguidas,0.4,25,8,1,15,-1.0,0.958,7,5
+"v4-L, repetición",SLM solo,dos seguidas,0.41,24,8,1,14,-1,1.174,7,4
+"v4-L, repetición",SLM solo,dos seguidas,0.42,24,8,1,14,-1,1.0,7,4
+"v4-L, repetición",SLM solo,dos seguidas,0.43,24,7,2,14,-1,0.652,6,4
+"v4-L, repetición",SLM solo,dos seguidas,0.44,23,7,2,13,-1.0,1.0,6,4
+"v4-L, repetición",SLM solo,dos seguidas,0.45,23,7,2,13,-1.0,0.909,6,4
+"v4-L, repetición",SLM solo,dos seguidas,0.46,23,7,2,13,-1.0,0.909,6,4
+"v4-L, repetición",SLM solo,dos seguidas,0.47,22,7,0,14,-1,0.762,6,4
+"v4-L, repetición",SLM solo,dos seguidas,0.48,22,7,0,14,-1,0.762,6,4
+"v4-L, repetición",SLM solo,dos seguidas,0.49,22,6,0,15,-1,0.524,5,2
+"v4-L, repetición",SLM solo,dos seguidas,0.5,22,5,0,16,-1,0.286,4,2
+"v4-L, repetición",SLM solo,dos seguidas,0.51,21,5,0,15,-1.0,0.35,4,2
+"v4-L, repetición",SLM solo,dos seguidas,0.52,20,5,0,14,-1,0.421,4,1
+"v4-L, repetición",SLM solo,dos seguidas,0.53,19,5,0,13,-1.0,0.611,4,1
+"v4-L, repetición",SLM solo,dos seguidas,0.54,18,4,0,13,-1,0.529,4,1
+"v4-L, repetición",SLM solo,dos seguidas,0.55,18,4,0,13,-1,-0.294,3,1
+"v4-L, repetición",SLM solo,dos seguidas,0.56,17,4,0,12,-1.0,0.125,3,1
+"v4-L, repetición",SLM solo,dos seguidas,0.57,17,4,0,12,-1.0,-0.188,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.58,17,4,0,12,-1.0,-0.562,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.59,15,4,0,10,-1.0,0.071,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.6,15,3,1,10,-1.0,0.0,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.61,15,3,1,10,-1.0,-0.214,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.62,15,3,0,11,-1.0,-0.429,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.63,14,3,0,11,-1.0,-0.429,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.64,14,2,1,11,-1.0,-0.786,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.65,13,2,1,10,-1,-0.462,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.66,13,2,0,11,-1,-0.692,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.67,12,2,0,10,-1.0,-0.333,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.68,12,2,0,10,-1.0,-0.667,2,1
+"v4-L, repetición",SLM solo,dos seguidas,0.69,10,1,0,9,-1.0,-1.0,1,1
+"v4-L, repetición",SLM solo,dos seguidas,0.7,10,1,0,9,-1.0,-1.2,1,1
+"v4-L, repetición",SLM solo,dos seguidas,0.71,8,1,0,7,-1.0,-1.0,1,0
+"v4-L, repetición",SLM solo,dos seguidas,0.72,7,1,0,6,-1,-1.0,1,0
+"v4-L, repetición",SLM solo,dos seguidas,0.73,4,0,0,4,-1.0,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.74,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.75,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.76,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.77,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.78,3,0,0,3,-1,-2.667,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.79,3,0,0,3,-1,-2.667,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.8,3,0,0,3,-1,-2.667,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.81,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.82,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.83,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.84,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.85,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.86,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.87,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.88,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.89,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.9,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,dos seguidas,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.0001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.0005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.002,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.01,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.02,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.03,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.04,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.05,46,36,0,0,12.0,13.917,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.06,46,36,0,0,12.0,13.611,36,51
+"v4-L, repetición",SLM solo,EMA α=0.5,0.07,46,36,0,0,12.0,13.528,36,50
+"v4-L, repetición",SLM solo,EMA α=0.5,0.08,46,36,0,0,12.0,12.722,35,49
+"v4-L, repetición",SLM solo,EMA α=0.5,0.09,46,36,0,0,12.0,12.278,34,46
+"v4-L, repetición",SLM solo,EMA α=0.5,0.1,46,35,0,1,12.0,11.417,33,42
+"v4-L, repetición",SLM solo,EMA α=0.5,0.11,46,33,2,1,11.0,10.056,31,39
+"v4-L, repetición",SLM solo,EMA α=0.5,0.12,46,32,3,1,10.0,9.111,30,38
+"v4-L, repetición",SLM solo,EMA α=0.5,0.13,45,30,4,1,10,8.8,29,36
+"v4-L, repetición",SLM solo,EMA α=0.5,0.14,45,30,4,1,10,8.6,27,35
+"v4-L, repetición",SLM solo,EMA α=0.5,0.15,45,30,3,2,10,8.286,25,34
+"v4-L, repetición",SLM solo,EMA α=0.5,0.16,45,28,5,2,8,7.514,23,33
+"v4-L, repetición",SLM solo,EMA α=0.5,0.17,45,27,6,2,7,7.029,23,30
+"v4-L, repetición",SLM solo,EMA α=0.5,0.18,45,27,6,2,7,6.8,22,28
+"v4-L, repetición",SLM solo,EMA α=0.5,0.19,45,25,6,4,5,6.257,22,26
+"v4-L, repetición",SLM solo,EMA α=0.5,0.2,41,25,6,3,5.0,6.412,21,24
+"v4-L, repetición",SLM solo,EMA α=0.5,0.21,40,23,6,4,5,6.121,20,21
+"v4-L, repetición",SLM solo,EMA α=0.5,0.22,40,22,7,4,4,5.818,18,18
+"v4-L, repetición",SLM solo,EMA α=0.5,0.23,38,22,5,4,4,5.935,17,16
+"v4-L, repetición",SLM solo,EMA α=0.5,0.24,38,22,5,4,4,5.581,17,16
+"v4-L, repetición",SLM solo,EMA α=0.5,0.25,37,20,7,4,4,5.29,17,14
+"v4-L, repetición",SLM solo,EMA α=0.5,0.26,37,20,7,4,3,5.129,16,14
+"v4-L, repetición",SLM solo,EMA α=0.5,0.27,36,19,7,4,2.0,4.133,14,14
+"v4-L, repetición",SLM solo,EMA α=0.5,0.28,33,18,7,3,2.5,4.286,14,12
+"v4-L, repetición",SLM solo,EMA α=0.5,0.29,33,18,7,3,2.0,4.036,13,11
+"v4-L, repetición",SLM solo,EMA α=0.5,0.3,29,18,7,3,1.5,3.786,12,10
+"v4-L, repetición",SLM solo,EMA α=0.5,0.31,29,15,10,3,1.5,3.071,11,10
+"v4-L, repetición",SLM solo,EMA α=0.5,0.32,29,13,12,3,0.0,2.821,10,9
+"v4-L, repetición",SLM solo,EMA α=0.5,0.33,28,13,12,2,0,2.889,9,9
+"v4-L, repetición",SLM solo,EMA α=0.5,0.34,28,12,12,3,0,2.667,9,8
+"v4-L, repetición",SLM solo,EMA α=0.5,0.35,27,11,13,2,0.0,2.731,9,8
+"v4-L, repetición",SLM solo,EMA α=0.5,0.36,26,10,11,4,0,2.48,9,8
+"v4-L, repetición",SLM solo,EMA α=0.5,0.37,26,10,11,4,0,2.36,9,7
+"v4-L, repetición",SLM solo,EMA α=0.5,0.38,25,9,11,4,0.0,2.0,8,7
+"v4-L, repetición",SLM solo,EMA α=0.5,0.39,25,9,11,4,0.0,1.875,8,6
+"v4-L, repetición",SLM solo,EMA α=0.5,0.4,25,9,11,4,0.0,1.75,8,5
+"v4-L, repetición",SLM solo,EMA α=0.5,0.41,24,8,11,4,0,1.87,7,4
+"v4-L, repetición",SLM solo,EMA α=0.5,0.42,24,8,10,5,0,1.565,7,4
+"v4-L, repetición",SLM solo,EMA α=0.5,0.43,23,8,10,4,0.0,1.636,6,4
+"v4-L, repetición",SLM solo,EMA α=0.5,0.44,23,8,9,5,0.0,1.5,6,4
+"v4-L, repetición",SLM solo,EMA α=0.5,0.45,23,6,10,6,0.0,1.091,4,4
+"v4-L, repetición",SLM solo,EMA α=0.5,0.46,22,5,10,6,0,1.048,4,3
+"v4-L, repetición",SLM solo,EMA α=0.5,0.47,21,5,10,5,0.0,1.1,4,3
+"v4-L, repetición",SLM solo,EMA α=0.5,0.48,21,5,10,5,0.0,1.05,4,3
+"v4-L, repetición",SLM solo,EMA α=0.5,0.49,20,4,9,6,0,0.947,4,3
+"v4-L, repetición",SLM solo,EMA α=0.5,0.5,20,4,9,6,0,0.842,4,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.51,20,4,9,6,0,0.789,4,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.52,19,4,8,6,0.0,0.889,4,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.53,19,4,7,7,0.0,0.333,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.54,19,4,5,9,-0.5,0.0,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.55,18,4,5,8,0,0.235,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.56,17,4,4,8,-0.5,0.312,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.57,17,4,3,9,-1.0,0.25,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.58,17,4,3,9,-1.0,0.25,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.59,17,3,3,10,-1.0,-0.125,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.6,17,3,2,11,-1.0,-0.188,3,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.61,17,3,2,11,-1.0,-0.625,2,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.62,16,3,2,10,-1,-0.733,2,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.63,12,2,3,7,-1.0,-0.083,2,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.64,12,2,2,8,-1.0,-0.25,2,1
+"v4-L, repetición",SLM solo,EMA α=0.5,0.65,12,2,2,8,-1.0,-0.667,2,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.66,12,2,2,8,-1.0,-1.0,2,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.67,12,2,2,8,-1.0,-1.25,2,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.68,11,2,2,7,-1,-1.0,2,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.69,10,2,1,7,-1.5,-1.2,2,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.7,9,1,1,7,-2,-1.444,1,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.71,9,1,1,7,-2,-1.667,1,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.72,8,0,1,7,-2.0,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.73,6,0,1,5,-2.0,-2.5,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.74,3,0,0,3,-2,-2.667,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.75,3,0,0,3,-2,-2.667,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.76,3,0,0,3,-2,-2.667,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.77,2,0,0,2,-4.0,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.78,2,0,0,2,-4.0,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.79,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.8,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.81,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.82,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.83,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.84,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.85,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.86,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.87,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.88,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.89,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.9,1,0,0,1,-11,-11.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.5,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.0001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.0005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.002,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.01,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.02,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.03,46,36,0,0,12.0,13.917,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.04,46,36,0,0,12.0,13.556,36,51
+"v4-L, repetición",SLM solo,EMA α=0.3,0.05,46,36,0,0,12.0,13.5,36,50
+"v4-L, repetición",SLM solo,EMA α=0.3,0.06,46,36,0,0,12.0,13.139,36,50
+"v4-L, repetición",SLM solo,EMA α=0.3,0.07,46,36,0,0,12.0,12.111,35,48
+"v4-L, repetición",SLM solo,EMA α=0.3,0.08,46,35,1,0,11.5,11.667,34,46
+"v4-L, repetición",SLM solo,EMA α=0.3,0.09,46,34,2,0,11.0,10.833,33,44
+"v4-L, repetición",SLM solo,EMA α=0.3,0.1,46,33,2,1,10.5,9.694,32,40
+"v4-L, repetición",SLM solo,EMA α=0.3,0.11,46,33,2,1,9.5,8.861,31,35
+"v4-L, repetición",SLM solo,EMA α=0.3,0.12,46,31,4,1,9.0,8.167,29,34
+"v4-L, repetición",SLM solo,EMA α=0.3,0.13,45,29,4,2,8,7.429,24,33
+"v4-L, repetición",SLM solo,EMA α=0.3,0.14,45,28,4,3,7,6.943,23,33
+"v4-L, repetición",SLM solo,EMA α=0.3,0.15,45,28,4,3,7,6.657,23,30
+"v4-L, repetición",SLM solo,EMA α=0.3,0.16,45,27,3,5,6,6.086,23,28
+"v4-L, repetición",SLM solo,EMA α=0.3,0.17,45,25,5,5,5,5.6,22,26
+"v4-L, repetición",SLM solo,EMA α=0.3,0.18,45,24,6,5,4,5.371,22,24
+"v4-L, repetición",SLM solo,EMA α=0.3,0.19,43,24,6,4,3.5,5.647,20,22
+"v4-L, repetición",SLM solo,EMA α=0.3,0.2,39,21,6,5,4.0,5.375,17,19
+"v4-L, repetición",SLM solo,EMA α=0.3,0.21,38,21,6,4,4,5.258,17,17
+"v4-L, repetición",SLM solo,EMA α=0.3,0.22,38,21,5,5,3,4.839,17,15
+"v4-L, repetición",SLM solo,EMA α=0.3,0.23,38,19,7,5,2,3.968,15,14
+"v4-L, repetición",SLM solo,EMA α=0.3,0.24,34,19,7,2,3.5,4.393,15,14
+"v4-L, repetición",SLM solo,EMA α=0.3,0.25,34,18,7,3,3.0,4.036,14,12
+"v4-L, repetición",SLM solo,EMA α=0.3,0.26,34,18,7,3,2.0,3.643,13,12
+"v4-L, repetición",SLM solo,EMA α=0.3,0.27,33,17,7,4,2.0,3.286,12,11
+"v4-L, repetición",SLM solo,EMA α=0.3,0.28,32,16,7,5,1.5,3.0,11,11
+"v4-L, repetición",SLM solo,EMA α=0.3,0.29,29,13,9,6,0.0,2.643,11,9
+"v4-L, repetición",SLM solo,EMA α=0.3,0.3,28,12,10,5,0,2.593,10,9
+"v4-L, repetición",SLM solo,EMA α=0.3,0.31,28,12,10,5,0,2.333,9,8
+"v4-L, repetición",SLM solo,EMA α=0.3,0.32,28,11,10,6,0,2.185,9,8
+"v4-L, repetición",SLM solo,EMA α=0.3,0.33,25,11,9,4,0.0,2.458,9,7
+"v4-L, repetición",SLM solo,EMA α=0.3,0.34,25,9,10,5,0.0,1.917,8,6
+"v4-L, repetición",SLM solo,EMA α=0.3,0.35,25,9,10,5,0.0,1.792,8,6
+"v4-L, repetición",SLM solo,EMA α=0.3,0.36,25,9,9,6,0.0,1.542,8,6
+"v4-L, repetición",SLM solo,EMA α=0.3,0.37,24,9,7,7,0,1.435,8,5
+"v4-L, repetición",SLM solo,EMA α=0.3,0.38,24,9,6,8,0,1.043,7,5
+"v4-L, repetición",SLM solo,EMA α=0.3,0.39,24,7,6,10,0,0.609,6,4
+"v4-L, repetición",SLM solo,EMA α=0.3,0.4,23,7,5,10,0.0,0.682,4,3
+"v4-L, repetición",SLM solo,EMA α=0.3,0.41,23,7,4,11,-0.5,0.364,4,3
+"v4-L, repetición",SLM solo,EMA α=0.3,0.42,22,7,4,10,0,0.619,4,3
+"v4-L, repetición",SLM solo,EMA α=0.3,0.43,20,5,4,10,-1,0.737,4,3
+"v4-L, repetición",SLM solo,EMA α=0.3,0.44,20,4,5,10,-1,0.579,4,2
+"v4-L, repetición",SLM solo,EMA α=0.3,0.45,20,4,5,10,-1,0.526,4,2
+"v4-L, repetición",SLM solo,EMA α=0.3,0.46,20,4,4,11,-1,0.263,4,2
+"v4-L, repetición",SLM solo,EMA α=0.3,0.47,20,4,3,12,-1,0.053,4,2
+"v4-L, repetición",SLM solo,EMA α=0.3,0.48,20,4,3,12,-1,-0.158,4,2
+"v4-L, repetición",SLM solo,EMA α=0.3,0.49,18,4,3,10,-1,0.353,4,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.5,18,4,3,10,-1,0.118,4,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.51,17,4,2,10,-1.0,-0.062,3,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.52,17,4,1,11,-1.5,-0.5,3,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.53,17,4,1,11,-2.0,-0.75,3,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.54,17,4,1,11,-2.0,-1.0,3,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.55,16,4,0,11,-2,-1.133,2,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.56,15,3,1,10,-2.0,-0.929,2,1
+"v4-L, repetición",SLM solo,EMA α=0.3,0.57,14,3,1,9,-2,-0.923,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.58,14,3,1,9,-2,-1.077,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.59,12,3,1,8,-2.0,-0.833,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.6,12,2,2,8,-2.0,-1.417,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.61,11,2,2,7,-2,-1.273,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.62,11,2,2,7,-2,-1.364,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.63,11,2,2,7,-3,-1.727,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.64,10,2,1,7,-2.5,-1.6,2,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.65,9,1,2,6,-2,-1.667,1,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.66,8,0,2,6,-2.5,-2.625,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.67,8,0,1,7,-2.5,-2.75,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.68,8,0,0,8,-2.5,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.69,6,0,0,6,-4.0,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.7,4,0,0,4,-2.5,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.71,3,0,0,3,-4,-3.667,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.72,2,0,0,2,-5.0,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.73,2,0,0,2,-5.0,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.74,2,0,0,2,-5.0,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.75,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.76,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.77,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.78,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.79,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.8,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.81,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.82,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.83,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.84,1,0,0,1,-7,-7.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.85,1,0,0,1,-7,-7.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.86,1,0,0,1,-8,-8.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.87,1,0,0,1,-9,-9.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.88,1,0,0,1,-10,-10.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.89,1,0,0,1,-11,-11.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.9,1,0,0,1,-13,-13.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.3,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.0001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.0005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.001,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.002,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.005,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.01,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.02,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.03,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.04,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.05,46,36,0,0,13.0,14.25,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.06,46,36,0,0,13.0,14.222,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.07,46,36,0,0,12.0,13.917,36,51
+"v4-L, repetición",SLM solo,EMA α=0.7,0.08,46,36,0,0,12.0,13.556,36,50
+"v4-L, repetición",SLM solo,EMA α=0.7,0.09,46,36,0,0,12.0,13.028,35,49
+"v4-L, repetición",SLM solo,EMA α=0.7,0.1,46,35,0,1,12.0,11.944,33,45
+"v4-L, repetición",SLM solo,EMA α=0.7,0.11,46,34,1,1,12.0,11.028,32,40
+"v4-L, repetición",SLM solo,EMA α=0.7,0.12,46,32,3,1,12.0,10.111,30,38
+"v4-L, repetición",SLM solo,EMA α=0.7,0.13,46,32,3,1,12.0,9.722,30,38
+"v4-L, repetición",SLM solo,EMA α=0.7,0.14,45,30,4,1,11,9.143,28,37
+"v4-L, repetición",SLM solo,EMA α=0.7,0.15,45,30,4,1,11,9.114,27,36
+"v4-L, repetición",SLM solo,EMA α=0.7,0.16,45,30,4,1,10,8.686,25,35
+"v4-L, repetición",SLM solo,EMA α=0.7,0.17,45,30,4,1,10,8.229,24,34
+"v4-L, repetición",SLM solo,EMA α=0.7,0.18,45,27,6,2,8,7.571,23,33
+"v4-L, repetición",SLM solo,EMA α=0.7,0.19,45,27,6,2,7,7.114,22,30
+"v4-L, repetición",SLM solo,EMA α=0.7,0.2,44,25,8,2,7,6.857,22,28
+"v4-L, repetición",SLM solo,EMA α=0.7,0.21,42,25,8,1,5.5,6.971,20,24
+"v4-L, repetición",SLM solo,EMA α=0.7,0.22,40,24,7,2,6,6.697,20,21
+"v4-L, repetición",SLM solo,EMA α=0.7,0.23,40,23,7,3,4,6.394,19,18
+"v4-L, repetición",SLM solo,EMA α=0.7,0.24,39,22,7,3,4.0,6.312,18,16
+"v4-L, repetición",SLM solo,EMA α=0.7,0.25,38,21,6,4,4,5.774,17,16
+"v4-L, repetición",SLM solo,EMA α=0.7,0.26,37,21,6,4,4,5.645,17,15
+"v4-L, repetición",SLM solo,EMA α=0.7,0.27,37,20,7,4,4,5.452,17,14
+"v4-L, repetición",SLM solo,EMA α=0.7,0.28,36,20,7,3,2.5,5.367,15,14
+"v4-L, repetición",SLM solo,EMA α=0.7,0.29,35,19,8,3,2.0,4.233,14,13
+"v4-L, repetición",SLM solo,EMA α=0.7,0.3,34,18,8,4,2.0,3.9,13,12
+"v4-L, repetición",SLM solo,EMA α=0.7,0.31,29,18,7,3,2.0,4.036,12,11
+"v4-L, repetición",SLM solo,EMA α=0.7,0.32,29,16,9,3,1.5,3.714,12,10
+"v4-L, repetición",SLM solo,EMA α=0.7,0.33,29,15,10,3,1.0,3.036,10,10
+"v4-L, repetición",SLM solo,EMA α=0.7,0.34,29,14,11,3,0.5,2.857,10,9
+"v4-L, repetición",SLM solo,EMA α=0.7,0.35,28,12,13,2,0,2.889,9,9
+"v4-L, repetición",SLM solo,EMA α=0.7,0.36,27,12,12,2,0.0,3.0,9,9
+"v4-L, repetición",SLM solo,EMA α=0.7,0.37,27,12,12,2,0.0,2.885,9,8
+"v4-L, repetición",SLM solo,EMA α=0.7,0.38,26,11,12,2,0,2.84,9,7
+"v4-L, repetición",SLM solo,EMA α=0.7,0.39,26,11,12,2,0,2.8,9,7
+"v4-L, repetición",SLM solo,EMA α=0.7,0.4,26,9,14,2,0,2.16,8,7
+"v4-L, repetición",SLM solo,EMA α=0.7,0.41,25,9,14,1,0.0,2.292,8,6
+"v4-L, repetición",SLM solo,EMA α=0.7,0.42,25,8,15,1,0.0,2.125,7,5
+"v4-L, repetición",SLM solo,EMA α=0.7,0.43,24,8,13,2,0,2.087,7,5
+"v4-L, repetición",SLM solo,EMA α=0.7,0.44,24,8,13,2,0,1.913,6,5
+"v4-L, repetición",SLM solo,EMA α=0.7,0.45,23,8,11,3,0.0,1.818,6,5
+"v4-L, repetición",SLM solo,EMA α=0.7,0.46,23,7,11,4,0.0,1.5,6,5
+"v4-L, repetición",SLM solo,EMA α=0.7,0.47,23,7,10,5,0.0,1.455,6,4
+"v4-L, repetición",SLM solo,EMA α=0.7,0.48,23,6,11,5,0.0,1.273,5,4
+"v4-L, repetición",SLM solo,EMA α=0.7,0.49,23,5,11,6,0.0,1.0,4,4
+"v4-L, repetición",SLM solo,EMA α=0.7,0.5,23,5,11,6,0.0,1.0,4,4
+"v4-L, repetición",SLM solo,EMA α=0.7,0.51,21,5,10,5,0.0,1.1,4,3
+"v4-L, repetición",SLM solo,EMA α=0.7,0.52,20,5,10,4,0,1.158,4,3
+"v4-L, repetición",SLM solo,EMA α=0.7,0.53,20,4,10,5,0,1.0,4,2
+"v4-L, repetición",SLM solo,EMA α=0.7,0.54,20,4,10,5,0,0.947,4,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.55,19,4,10,4,0.0,0.611,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.56,19,4,10,4,0.0,0.611,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.57,19,4,10,4,0.0,0.278,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.58,19,4,9,5,0.0,0.111,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.59,18,4,9,4,0,0.235,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.6,17,4,9,3,0.0,0.562,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.61,17,3,10,3,0.0,0.5,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.62,17,3,10,3,0.0,0.5,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.63,17,3,10,3,0.0,0.5,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.64,16,3,8,5,0.0,0.312,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.65,16,3,6,7,0.0,0.125,3,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.66,16,2,7,7,0.0,-0.25,2,1
+"v4-L, repetición",SLM solo,EMA α=0.7,0.67,14,2,3,9,-1.0,-0.357,2,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.68,13,2,3,8,-1,-0.308,2,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.69,11,2,3,6,-1,-0.364,2,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.7,11,2,3,6,-1,-0.636,2,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.71,11,2,3,6,-1,-0.636,2,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.72,9,1,1,7,-1,-1.111,1,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.73,9,1,1,7,-1,-1.222,1,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.74,8,0,1,7,-2.0,-1.875,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.75,5,0,1,4,-2,-2.4,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.76,4,0,1,3,-1.5,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.77,4,0,1,3,-1.5,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.78,3,0,1,2,-1,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.79,3,0,1,2,-1,-2.333,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.8,2,0,1,1,-0.5,-0.5,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.81,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.82,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.83,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.84,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.85,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.86,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.87,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.88,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.89,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.9,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",SLM solo,EMA α=0.7,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.0001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,umbral,0.0005,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,umbral,0.001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,umbral,0.002,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,umbral,0.005,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.01,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.02,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.03,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.04,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.05,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.06,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.07,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.08,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.09,45,31,3,1,6,6.714,26,32
+"v4-L, repetición",Tito→SLM,umbral,0.1,45,31,3,1,6,6.571,24,30
+"v4-L, repetición",Tito→SLM,umbral,0.11,45,29,4,2,6,5.771,22,28
+"v4-L, repetición",Tito→SLM,umbral,0.12,45,29,4,2,6,5.714,22,28
+"v4-L, repetición",Tito→SLM,umbral,0.13,45,27,6,2,4,5.457,21,27
+"v4-L, repetición",Tito→SLM,umbral,0.14,45,27,6,2,4,5.457,21,27
+"v4-L, repetición",Tito→SLM,umbral,0.15,45,27,6,2,4,5.371,21,26
+"v4-L, repetición",Tito→SLM,umbral,0.16,44,26,6,2,4.5,5.147,20,26
+"v4-L, repetición",Tito→SLM,umbral,0.17,44,26,6,2,4.0,5.029,20,23
+"v4-L, repetición",Tito→SLM,umbral,0.18,44,25,7,2,3.0,4.618,18,23
+"v4-L, repetición",Tito→SLM,umbral,0.19,44,24,8,2,2.5,4.471,17,23
+"v4-L, repetición",Tito→SLM,umbral,0.2,44,24,8,2,2.0,4.382,16,20
+"v4-L, repetición",Tito→SLM,umbral,0.21,44,23,9,2,2.0,4.176,16,20
+"v4-L, repetición",Tito→SLM,umbral,0.22,39,21,10,1,2.0,4.719,15,16
+"v4-L, repetición",Tito→SLM,umbral,0.23,39,21,10,1,2.0,4.5,15,16
+"v4-L, repetición",Tito→SLM,umbral,0.24,39,21,9,2,2.0,4.375,15,16
+"v4-L, repetición",Tito→SLM,umbral,0.25,39,20,9,3,2.0,4.281,15,13
+"v4-L, repetición",Tito→SLM,umbral,0.26,38,20,8,3,2,4.226,14,11
+"v4-L, repetición",Tito→SLM,umbral,0.27,37,20,8,3,2,4.0,14,11
+"v4-L, repetición",Tito→SLM,umbral,0.28,37,19,8,4,1,3.71,13,10
+"v4-L, repetición",Tito→SLM,umbral,0.29,36,18,8,4,1.5,3.667,13,10
+"v4-L, repetición",Tito→SLM,umbral,0.3,36,18,8,4,1.5,3.033,12,10
+"v4-L, repetición",Tito→SLM,umbral,0.31,33,18,7,4,2,2.862,11,10
+"v4-L, repetición",Tito→SLM,umbral,0.32,30,17,8,4,2,2.724,9,7
+"v4-L, repetición",Tito→SLM,umbral,0.33,30,16,9,4,1,2.517,9,7
+"v4-L, repetición",Tito→SLM,umbral,0.34,29,14,11,3,0.5,2.357,9,7
+"v4-L, repetición",Tito→SLM,umbral,0.35,29,13,12,3,0.0,2.179,9,7
+"v4-L, repetición",Tito→SLM,umbral,0.36,29,11,14,3,0.0,1.964,8,7
+"v4-L, repetición",Tito→SLM,umbral,0.37,28,11,13,3,0,2.037,8,7
+"v4-L, repetición",Tito→SLM,umbral,0.38,26,11,12,2,0,2.36,8,7
+"v4-L, repetición",Tito→SLM,umbral,0.39,26,11,12,2,0,2.28,8,7
+"v4-L, repetición",Tito→SLM,umbral,0.4,26,10,13,2,0,2.08,8,6
+"v4-L, repetición",Tito→SLM,umbral,0.41,25,10,12,2,0.0,2.167,8,6
+"v4-L, repetición",Tito→SLM,umbral,0.42,25,9,13,2,0.0,1.917,7,6
+"v4-L, repetición",Tito→SLM,umbral,0.43,25,9,13,2,0.0,1.875,7,6
+"v4-L, repetición",Tito→SLM,umbral,0.44,24,9,13,1,0,1.87,6,5
+"v4-L, repetición",Tito→SLM,umbral,0.45,24,9,13,1,0,1.87,6,5
+"v4-L, repetición",Tito→SLM,umbral,0.46,24,9,13,1,0,1.87,6,5
+"v4-L, repetición",Tito→SLM,umbral,0.47,24,7,15,1,0,1.609,6,5
+"v4-L, repetición",Tito→SLM,umbral,0.48,24,7,14,2,0,1.348,6,4
+"v4-L, repetición",Tito→SLM,umbral,0.49,23,7,13,2,0.0,1.318,6,4
+"v4-L, repetición",Tito→SLM,umbral,0.5,23,7,13,2,0.0,1.182,6,4
+"v4-L, repetición",Tito→SLM,umbral,0.51,23,7,12,3,0.0,1.136,6,4
+"v4-L, repetición",Tito→SLM,umbral,0.52,23,6,12,4,0.0,0.864,5,4
+"v4-L, repetición",Tito→SLM,umbral,0.53,22,6,11,4,0,0.81,5,4
+"v4-L, repetición",Tito→SLM,umbral,0.54,22,4,11,6,0,0.429,4,4
+"v4-L, repetición",Tito→SLM,umbral,0.55,20,4,11,4,0,0.474,3,3
+"v4-L, repetición",Tito→SLM,umbral,0.56,19,4,10,4,0.0,0.5,3,3
+"v4-L, repetición",Tito→SLM,umbral,0.57,19,4,10,4,0.0,0.5,3,3
+"v4-L, repetición",Tito→SLM,umbral,0.58,19,4,10,4,0.0,0.5,3,3
+"v4-L, repetición",Tito→SLM,umbral,0.59,19,4,10,4,0.0,0.5,3,3
+"v4-L, repetición",Tito→SLM,umbral,0.6,18,4,9,4,0,0.471,3,2
+"v4-L, repetición",Tito→SLM,umbral,0.61,18,4,9,4,0,0.176,3,2
+"v4-L, repetición",Tito→SLM,umbral,0.62,18,3,10,4,0,0.118,3,2
+"v4-L, repetición",Tito→SLM,umbral,0.63,17,3,10,3,0.0,0.375,3,2
+"v4-L, repetición",Tito→SLM,umbral,0.64,16,3,10,3,0.0,0.375,3,2
+"v4-L, repetición",Tito→SLM,umbral,0.65,16,3,10,3,0.0,0.375,3,1
+"v4-L, repetición",Tito→SLM,umbral,0.66,16,3,10,3,0.0,0.375,3,1
+"v4-L, repetición",Tito→SLM,umbral,0.67,16,3,10,3,0.0,0.375,3,0
+"v4-L, repetición",Tito→SLM,umbral,0.68,15,3,10,2,0,0.8,3,0
+"v4-L, repetición",Tito→SLM,umbral,0.69,15,3,10,2,0,0.8,3,0
+"v4-L, repetición",Tito→SLM,umbral,0.7,15,3,9,3,0,0.4,3,0
+"v4-L, repetición",Tito→SLM,umbral,0.71,15,3,9,3,0,0.4,3,0
+"v4-L, repetición",Tito→SLM,umbral,0.72,14,2,9,3,0.0,0.0,2,0
+"v4-L, repetición",Tito→SLM,umbral,0.73,13,2,9,2,0,0.462,2,0
+"v4-L, repetición",Tito→SLM,umbral,0.74,12,2,9,1,0.0,1.0,2,0
+"v4-L, repetición",Tito→SLM,umbral,0.75,12,2,8,2,0.0,0.583,2,0
+"v4-L, repetición",Tito→SLM,umbral,0.76,10,2,8,0,0.0,1.1,2,0
+"v4-L, repetición",Tito→SLM,umbral,0.77,9,1,8,0,0,0.889,1,0
+"v4-L, repetición",Tito→SLM,umbral,0.78,8,0,8,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.79,7,0,5,2,0,-1.571,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.8,7,0,5,2,0,-1.571,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.81,5,0,5,0,0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.82,4,0,4,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.83,4,0,4,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.84,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.85,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.86,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.87,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.88,2,0,2,0,0.0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.89,1,0,1,0,0,0.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.9,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,umbral,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.0001,45,29,2,4,7,5.886,24,33
+"v4-L, repetición",Tito→SLM,dos seguidas,0.0005,45,29,2,4,7,5.886,24,33
+"v4-L, repetición",Tito→SLM,dos seguidas,0.001,45,29,2,4,7,5.886,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.002,45,29,2,4,7,5.829,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.005,45,29,2,4,7,5.829,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.01,45,29,2,4,6,5.8,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.02,45,29,2,4,6,5.8,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.03,45,29,2,4,6,5.8,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.04,45,29,2,4,6,5.8,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.05,45,29,2,4,6,5.8,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.06,45,29,2,4,6,5.8,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.07,45,29,2,4,5,5.714,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.08,45,29,2,4,5,5.714,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.09,45,29,2,4,5,5.714,24,32
+"v4-L, repetición",Tito→SLM,dos seguidas,0.1,45,27,3,5,5,5.486,23,30
+"v4-L, repetición",Tito→SLM,dos seguidas,0.11,45,26,3,6,3,4.543,18,26
+"v4-L, repetición",Tito→SLM,dos seguidas,0.12,45,24,3,8,2,4.0,17,25
+"v4-L, repetición",Tito→SLM,dos seguidas,0.13,44,24,2,8,2.5,4.029,17,22
+"v4-L, repetición",Tito→SLM,dos seguidas,0.14,44,23,3,8,2.5,3.912,17,22
+"v4-L, repetición",Tito→SLM,dos seguidas,0.15,44,23,2,9,2.5,3.882,17,22
+"v4-L, repetición",Tito→SLM,dos seguidas,0.16,44,21,3,10,2.0,3.441,16,21
+"v4-L, repetición",Tito→SLM,dos seguidas,0.17,44,21,3,10,2.0,3.441,16,20
+"v4-L, repetición",Tito→SLM,dos seguidas,0.18,44,21,3,10,2.0,3.441,16,18
+"v4-L, repetición",Tito→SLM,dos seguidas,0.19,44,19,4,11,1.0,3.147,15,17
+"v4-L, repetición",Tito→SLM,dos seguidas,0.2,42,18,4,11,1,3.121,14,17
+"v4-L, repetición",Tito→SLM,dos seguidas,0.21,39,18,4,10,1.5,3.688,14,15
+"v4-L, repetición",Tito→SLM,dos seguidas,0.22,38,17,4,10,1,3.548,14,12
+"v4-L, repetición",Tito→SLM,dos seguidas,0.23,38,17,4,10,1,3.323,13,11
+"v4-L, repetición",Tito→SLM,dos seguidas,0.24,38,16,5,10,1,2.903,13,9
+"v4-L, repetición",Tito→SLM,dos seguidas,0.25,36,16,3,11,1.0,2.833,13,9
+"v4-L, repetición",Tito→SLM,dos seguidas,0.26,36,15,3,12,0.5,2.5,12,9
+"v4-L, repetición",Tito→SLM,dos seguidas,0.27,34,15,3,11,1,2.517,12,9
+"v4-L, repetición",Tito→SLM,dos seguidas,0.28,33,15,3,11,1,2.345,11,9
+"v4-L, repetición",Tito→SLM,dos seguidas,0.29,29,15,3,9,1,2.296,11,8
+"v4-L, repetición",Tito→SLM,dos seguidas,0.3,28,15,3,9,1,1.926,11,7
+"v4-L, repetición",Tito→SLM,dos seguidas,0.31,28,15,3,9,1,1.704,9,7
+"v4-L, repetición",Tito→SLM,dos seguidas,0.32,26,11,3,11,0,1.72,8,7
+"v4-L, repetición",Tito→SLM,dos seguidas,0.33,26,8,4,13,-1,1.36,8,7
+"v4-L, repetición",Tito→SLM,dos seguidas,0.34,25,8,4,12,-0.5,1.458,8,6
+"v4-L, repetición",Tito→SLM,dos seguidas,0.35,24,8,4,11,0,1.435,8,6
+"v4-L, repetición",Tito→SLM,dos seguidas,0.36,24,8,3,12,-1,1.391,8,6
+"v4-L, repetición",Tito→SLM,dos seguidas,0.37,24,8,3,12,-1,1.391,8,6
+"v4-L, repetición",Tito→SLM,dos seguidas,0.38,24,8,3,12,-1,1.304,8,5
+"v4-L, repetición",Tito→SLM,dos seguidas,0.39,24,8,3,12,-1,1.174,8,5
+"v4-L, repetición",Tito→SLM,dos seguidas,0.4,24,7,2,14,-1,0.565,7,4
+"v4-L, repetición",Tito→SLM,dos seguidas,0.41,23,7,2,13,-1.0,0.773,7,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.42,23,7,1,14,-1.0,0.455,7,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.43,23,6,2,14,-1.0,0.227,6,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.44,22,6,2,13,-1,0.571,6,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.45,22,6,2,13,-1,0.476,6,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.46,22,6,2,13,-1,0.476,6,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.47,21,6,0,14,-1.0,0.2,6,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.48,21,6,0,14,-1.0,0.2,6,3
+"v4-L, repetición",Tito→SLM,dos seguidas,0.49,20,5,0,14,-1,0.105,5,1
+"v4-L, repetición",Tito→SLM,dos seguidas,0.5,20,4,0,15,-1,-0.158,4,1
+"v4-L, repetición",Tito→SLM,dos seguidas,0.51,19,4,0,14,-1.0,-0.111,4,1
+"v4-L, repetición",Tito→SLM,dos seguidas,0.52,18,4,0,13,-1,-0.176,3,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.53,17,4,0,12,-1.0,0.0,3,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.54,17,4,0,12,-1.0,-0.062,3,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.55,17,4,0,12,-1.0,-0.375,3,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.56,16,4,0,11,-1,0.067,3,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.57,16,4,0,11,-1,-0.267,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.58,16,4,0,11,-1,-0.667,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.59,14,4,0,9,-1,0.154,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.6,14,3,1,9,-1,0.077,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.61,14,3,1,9,-1,-0.154,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.62,14,3,0,10,-1,-0.385,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.63,13,3,0,10,-1,-0.385,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.64,13,2,1,10,-1,-0.615,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.65,12,2,1,9,-1.0,-0.25,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.66,12,2,0,10,-1.0,-0.5,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.67,11,2,0,9,-1,-0.091,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.68,11,2,0,9,-1,-0.455,2,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.69,9,1,0,8,-1,-0.778,1,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.7,9,1,0,8,-1,-1.0,1,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.71,8,1,0,7,-1.0,-1.0,1,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.72,7,1,0,6,-1,-1.0,1,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.73,4,0,0,4,-1.0,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.74,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.75,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.76,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.77,3,0,0,3,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.78,3,0,0,3,-1,-2.667,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.79,3,0,0,3,-1,-2.667,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.8,3,0,0,3,-1,-2.667,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.81,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.82,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.83,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.84,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.85,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.86,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.87,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.88,1,0,0,1,-1,-1.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.89,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.9,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,dos seguidas,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.0001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.0005,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.002,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.005,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.01,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.02,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.03,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.04,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.05,45,31,3,1,6,6.743,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.06,45,31,3,1,6,6.6,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.07,45,31,3,1,6,6.486,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.08,45,31,3,1,6,6.314,24,32
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.09,45,31,3,1,6,6.171,23,31
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.1,45,29,4,2,6,5.743,22,28
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.11,45,27,6,2,3,4.943,20,26
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.12,45,26,7,2,3,4.657,19,24
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.13,44,25,7,2,3.0,4.647,19,24
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.14,44,25,7,2,3.0,4.441,18,22
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.15,44,25,6,3,2.0,4.118,16,20
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.16,44,22,9,3,2.0,4.029,16,19
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.17,43,21,10,3,1.5,3.735,16,19
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.18,43,21,10,3,1.5,3.618,15,18
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.19,43,21,8,5,1.0,3.412,14,18
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.2,40,21,8,4,1,3.788,13,15
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.21,38,18,8,5,1,3.613,13,13
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.22,38,17,9,5,1,3.419,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.23,36,17,8,5,1.0,3.4,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.24,36,17,7,6,1.0,3.133,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.25,36,16,8,6,1.0,2.733,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.26,36,16,8,6,1.0,2.633,12,9
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.27,34,14,8,7,0,2.414,11,9
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.28,31,14,8,5,1,2.556,10,9
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.29,31,14,8,5,1,2.407,10,7
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.3,27,14,8,4,1.0,2.462,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.31,27,12,10,4,0.0,2.192,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.32,27,10,12,4,0.0,2.0,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.33,26,10,12,3,0,2.08,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.34,26,9,12,4,0,1.88,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.35,25,9,11,4,0.0,1.667,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.36,24,8,10,5,0,1.609,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.37,24,8,10,5,0,1.478,8,5
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.38,24,7,8,8,0,1.043,7,5
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.39,24,7,8,8,0,0.913,7,5
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.4,24,7,8,8,0,0.783,7,3
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.41,23,7,8,7,0.0,0.909,7,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.42,23,7,8,7,0.0,0.682,6,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.43,22,7,7,7,0,0.857,6,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.44,22,7,7,7,0,0.857,6,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.45,21,5,6,9,0.0,0.4,4,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.46,21,4,7,9,0.0,0.3,4,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.47,20,4,7,8,0,0.211,4,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.48,19,4,7,7,0.0,0.333,4,2
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.49,19,4,7,7,0.0,0.167,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.5,18,4,7,6,0,0.353,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.51,18,4,7,6,0,0.235,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.52,18,4,6,7,0,0.176,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.53,18,4,6,7,0,0.118,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.54,18,4,5,8,0,-0.235,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.55,16,4,5,6,0,0.333,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.56,16,4,4,7,0,0.267,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.57,16,4,3,8,-1,0.2,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.58,16,3,4,8,-1,0.067,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.59,16,3,3,9,-1,-0.133,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.6,16,3,2,10,-1,-0.4,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.61,16,3,2,10,-1,-0.733,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.62,14,3,2,9,-1.0,-0.857,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.63,11,2,3,6,-1,-0.182,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.64,11,2,2,7,-1,-0.455,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.65,11,2,2,7,-1,-0.545,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.66,11,2,2,7,-1,-0.818,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.67,11,2,2,7,-1,-1.182,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.68,10,1,3,6,-1.0,-1.2,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.69,9,1,2,6,-2,-1.111,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.7,9,0,2,7,-2,-1.778,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.71,9,0,1,8,-2,-2.111,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.72,8,0,1,7,-2.0,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.73,6,0,1,5,-2.0,-2.5,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.74,3,0,0,3,-2,-2.667,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.75,3,0,0,3,-2,-2.667,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.76,3,0,0,3,-2,-2.667,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.77,2,0,0,2,-4.0,-4.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.78,2,0,0,2,-4.0,-4.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.79,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.8,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.81,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.82,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.83,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.84,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.85,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.86,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.87,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.88,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.89,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.9,1,0,0,1,-11,-11.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.5,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.0001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.0005,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.002,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.005,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.01,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.02,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.03,45,31,3,1,6,6.743,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.04,45,31,3,1,6,6.571,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.05,45,31,3,1,6,6.486,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.06,45,31,3,1,6,6.229,24,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.07,45,31,3,1,6,5.914,23,32
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.08,45,30,4,1,5,5.657,23,31
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.09,45,28,5,2,5,5.2,20,30
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.1,45,25,8,2,3,4.6,19,27
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.11,45,24,9,2,3,4.257,18,23
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.12,44,23,8,3,3.0,4.147,18,20
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.13,43,23,8,3,2.0,3.853,16,20
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.14,43,22,8,4,1.5,3.588,15,20
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.15,43,21,7,6,1.0,3.235,15,19
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.16,43,20,5,9,1.0,2.853,13,18
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.17,42,18,7,8,1,2.758,13,17
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.18,42,15,9,9,0,2.455,13,15
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.19,38,15,9,7,0,2.935,13,14
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.2,38,14,9,8,0,2.677,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.21,36,14,9,7,0.0,2.633,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.22,35,14,8,8,0.0,2.433,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.23,34,14,8,7,0,2.345,12,9
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.24,32,14,7,6,1,2.407,11,9
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.25,32,13,8,6,0,2.185,11,8
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.26,31,13,8,6,0,1.815,10,8
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.27,30,13,5,8,0.5,1.885,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.28,29,12,4,10,0.0,1.577,9,6
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.29,27,10,5,11,0.0,1.346,9,6
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.3,26,9,6,10,0,1.44,9,6
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.31,26,9,6,10,0,1.16,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.32,26,9,4,12,0,1.04,8,5
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.33,24,9,4,10,0,1.043,8,5
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.34,24,7,6,10,0,0.696,7,4
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.35,23,7,5,10,0.0,0.636,7,3
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.36,23,7,4,11,-0.5,0.273,7,3
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.37,23,7,4,11,-0.5,0.045,7,3
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.38,23,7,4,11,-0.5,-0.136,7,2
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.39,23,6,5,11,-0.5,-0.545,5,2
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.4,21,6,4,10,-0.5,-0.3,3,2
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.41,20,6,4,9,0,-0.158,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.42,20,6,4,9,0,-0.158,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.43,19,4,5,9,-0.5,-0.167,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.44,19,4,5,9,-0.5,-0.167,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.45,18,4,5,8,0,-0.118,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.46,18,4,4,9,-1,-0.471,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.47,17,4,3,9,-1.0,-0.188,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.48,17,4,3,9,-1.0,-0.25,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.49,16,4,3,8,-1,0.067,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.5,16,3,4,8,-1,-0.067,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.51,16,3,3,9,-1,-0.4,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.52,16,3,2,10,-1,-0.8,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.53,16,3,2,10,-2,-1.0,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.54,16,3,2,10,-2,-1.067,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.55,15,3,1,10,-2.0,-1.357,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.56,13,3,1,8,-1.5,-0.833,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.57,13,3,1,8,-1.5,-1.083,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.58,12,2,2,8,-1.5,-1.333,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.59,11,2,2,7,-2,-1.182,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.6,11,1,3,7,-2,-1.636,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.61,11,1,3,7,-2,-1.636,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.62,11,1,2,8,-2,-1.818,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.63,10,1,2,7,-2.5,-1.7,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.64,10,1,1,8,-2.5,-2.0,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.65,9,1,0,8,-2,-1.889,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.66,8,0,1,7,-2.5,-2.75,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.67,8,0,0,8,-2.5,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.68,8,0,0,8,-2.5,-3.25,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.69,6,0,0,6,-4.5,-4.333,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.7,2,0,0,2,-4.5,-4.5,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.71,2,0,0,2,-4.5,-4.5,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.72,2,0,0,2,-5.0,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.73,2,0,0,2,-5.0,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.74,2,0,0,2,-5.0,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.75,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.76,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.77,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.78,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.79,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.8,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.81,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.82,1,0,0,1,-6,-6.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.83,1,0,0,1,-7,-7.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.84,1,0,0,1,-7,-7.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.85,1,0,0,1,-8,-8.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.86,1,0,0,1,-8,-8.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.87,1,0,0,1,-9,-9.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.88,1,0,0,1,-10,-10.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.89,1,0,0,1,-11,-11.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.9,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.3,0.9999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.0001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.0005,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.001,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.002,45,31,3,1,8,6.886,26,33
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.005,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.01,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.02,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.03,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.04,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.05,45,31,3,1,8,6.886,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.06,45,31,3,1,6,6.771,26,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.07,45,31,3,1,6,6.743,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.08,45,31,3,1,6,6.543,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.09,45,31,3,1,6,6.486,25,32
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.1,45,30,3,2,6,6.057,22,30
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.11,45,29,4,2,6,5.686,22,27
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.12,45,27,6,2,3,5.057,20,25
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.13,45,27,6,2,3,4.943,20,24
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.14,44,25,7,2,3.5,4.824,19,24
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.15,44,25,7,2,3.5,4.765,19,23
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.16,44,25,7,2,2.5,4.412,17,23
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.17,44,25,7,2,2.5,4.382,17,21
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.18,44,23,8,3,2.5,4.176,17,19
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.19,43,22,9,3,2.0,3.941,16,18
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.2,42,22,9,3,2.0,3.853,15,18
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.21,41,22,9,2,2,4.212,14,15
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.22,39,20,9,3,2.0,4.062,14,13
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.23,39,19,9,4,1.5,3.844,13,11
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.24,38,17,10,4,1,3.742,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.25,36,17,8,5,1.0,3.367,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.26,36,17,8,5,1.0,3.3,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.27,36,17,8,5,1.0,3.033,13,9
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.28,35,17,8,4,1,2.862,11,9
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.29,34,17,8,4,1,2.724,11,9
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.3,32,16,9,4,1,2.552,10,8
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.31,28,16,8,3,1,2.667,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.32,27,15,9,2,1.0,2.615,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.33,27,13,11,2,0.5,2.423,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.34,27,12,11,3,0.0,2.154,9,7
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.35,26,11,12,2,0,2.28,8,7
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.36,25,11,11,2,0.0,2.375,8,7
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.37,25,11,10,3,0.0,2.208,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.38,24,9,11,3,0,2.13,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.39,24,9,11,3,0,1.739,8,6
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.4,24,7,13,3,0,1.435,7,6
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.41,24,7,12,4,0,1.261,7,5
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.42,23,7,12,3,0.0,1.591,7,3
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.43,23,7,11,4,0.0,1.5,7,3
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.44,22,7,10,4,0,1.381,6,3
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.45,22,7,9,5,0,1.19,6,3
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.46,22,6,10,5,0,0.952,6,3
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.47,22,6,9,6,0,0.905,6,3
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.48,22,5,10,6,0,0.714,5,2
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.49,22,4,10,7,0,0.476,4,2
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.5,22,4,10,7,0,0.476,4,2
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.51,20,4,9,6,0,0.526,4,1
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.52,19,4,9,5,0.0,0.444,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.53,19,4,9,5,0.0,0.389,3,1
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.54,18,4,9,4,0,0.471,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.55,18,4,8,5,0,0.412,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.56,18,4,8,5,0,0.412,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.57,18,4,8,5,0,0.0,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.58,18,4,8,5,0,-0.059,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.59,17,4,8,4,0.0,0.188,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.6,16,4,8,3,0,0.467,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.61,16,3,9,3,0,0.4,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.62,16,3,9,3,0,0.4,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.63,16,3,8,4,0,0.333,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.64,15,3,6,6,0,0.133,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.65,15,3,4,8,-1,-0.067,3,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.66,15,2,5,8,-1,-0.533,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.67,13,2,3,8,-1,-0.462,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.68,12,2,3,7,-1.0,-0.417,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.69,10,2,3,5,-0.5,-0.4,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.7,10,2,3,5,-0.5,-0.4,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.71,10,2,3,5,-0.5,-0.4,2,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.72,9,1,1,7,-1,-1.111,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.73,9,1,1,7,-1,-1.222,1,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.74,8,0,1,7,-2.0,-1.875,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.75,5,0,1,4,-2,-2.4,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.76,4,0,1,3,-1.5,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.77,4,0,1,3,-1.5,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.78,3,0,1,2,-1,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.79,3,0,1,2,-1,-2.333,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.8,2,0,1,1,-0.5,-0.5,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.81,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.82,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.83,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.84,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.85,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.86,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.87,1,0,0,1,-2,-2.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.88,1,0,0,1,-3,-3.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.89,1,0,0,1,-4,-4.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.9,1,0,0,1,-5,-5.0,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.91,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.92,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.93,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.94,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.95,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.96,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.97,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.98,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.99,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.998,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.999,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.9995,0,0,0,0,,,0,0
+"v4-L, repetición",Tito→SLM,EMA α=0.7,0.9999,0,0,0,0,,,0,0

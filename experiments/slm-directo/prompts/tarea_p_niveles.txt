@@ -1,0 +1,19 @@
+Vas a leer la transcripción de una llamada que PROTEGIDA recibe de un número que no tiene agendado. OTRA es quien la llamó. No se puede comprobar quién es: importa qué le pide a PROTEGIDA, no quién dice ser.
+
+Pedidos críticos:
+- dictar un código que le llegó por mensaje;
+- decir una clave o un PIN;
+- dar los datos completos de una tarjeta;
+- mandar una foto del documento o de la cara;
+- transferir, pagar o mandar plata ahora;
+- instalar un programa o compartir la pantalla;
+- operar en el cajero o en la app del banco siguiendo instrucciones;
+- cortar y llamar enseguida a un número que OTRA le dicta.
+
+Con lo dicho hasta ahora, ubicá la llamada en uno de estos cuatro niveles. Elegí el más alto que se cumpla:
+- 0.9: OTRA ya le pidió algo de la lista, o le avisó que se lo va a pedir.
+- 0.5: todavía no pidió nada de la lista, pero ya dijo algo que lleva a eso: que hay un problema de seguridad con la plata, la cuenta del banco, la tarjeta o las claves de PROTEGIDA; que ella tiene plata para cobrar que no esperaba; o que es un familiar o conocido que llama desde otro número y necesita ayuda.
+- 0.1: OTRA vende, ofrece, encuesta, cobra, da soporte o coordina un turno, una entrega o un reclamo. Sigue siendo 0.1 aunque insista, apure o pida datos para identificarla o contactarla (nombre, DNI, dirección, correo, número de cliente).
+- 0.0: OTRA todavía no dijo para qué llama.
+
+Para elegir 0.5 o 0.9 tiene que haber una línea de OTRA que lo diga. Si no la hay, es 0.1 o 0.0.

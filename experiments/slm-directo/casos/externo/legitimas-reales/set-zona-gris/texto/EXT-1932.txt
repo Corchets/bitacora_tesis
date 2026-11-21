@@ -1,0 +1,26 @@
+A: ¿Hola?
+B: Hola, señora. Buenas tardes. Me llamo John Miller y llamo de Northwind Health Northwind Health. ¿Cómo está?
+A: Hola, aquí estoy.
+B: Bien, señora. Esta llamada es por sus beneficios adicionales sin costo. Y solo quiero preguntarle si le interesa. Bien. Señora, ¿tiene diabetes diabetes diabetes, diabetes diabetes, o algún diabetes diabetes? Vaya. Bien, qué buena noticia. Señora, ¿le interesa también obtener beneficios en anteojos, un control anual un control anual?
+A: ¿Lo oí bien?
+B: Bien. Bien. Si los quiere, definitivamente puedo ayudarla con eso. Puedo transferirla a nuestro contador con licencia para que la atienda. ¿Me puede dar su nombre y apellido, por favor?
+A: Disculpe. Es...
+B: Bien. John Miller, ¿correcto?
+A: Sí.
+B: Bien, John Miller. Voy a intentar decir esta palabra. John Miller.
+A: 21 de octubre de 1958. Sí.
+B: Bien. ¿Cuál era el mes otra vez? Disculpe.
+A: de enero a abril.
+B: Ah, bien. Bien. Y señora, ¿tiene también...? Quiero decir, ¿puedo tener también una dirección física, por favor?
+A: (555) 018-6620.
+B: Entendido. Bien. Bien. Gracias por toda la información, John Miller. Entonces, señora, una vez que la transfiera a nuestro contador contador, solo dígale su código postal, ¿de acuerdo?
+A: Bueno. Bueno.
+B: Entonces, por favor quédese en la línea conmigo. Voy a estar aquí hasta que un contador contador conteste la llamada. ¿De acuerdo? Quédese conmigo. Bien. Muchas gracias, John Miller. Hola, le habla John Miller de Northwind Health Northwind Health Northwind Health. ¿Cómo está hoy?
+A: Bien, gracias. ¿Y usted cómo está?
+B: Estoy muy bien. Muchas gracias por preguntar. Ha habido cambios recientes con Northwind Health Northwind Health en su zona. Durante esta inscripción abierta, usted podría obtener una tarifa más baja por cobertura adicional. Puede ahorrar hasta 120 dólares a $120 dólares en su plan. Lo que yo hago es poner en la línea a un contador para revisar con usted las tarifas y la cobertura adicional, y ver si califica para planes que ayuden con los copagos y deducibles que Medicare no cubre. Bien. ¿Tiene un plan Advantage o un plan complementario?
+A: Ahora mismo no. Tengo que pensarlo.
+B: Ahora no. Bien. No está muy segura.
+A: Sí, no estoy muy segura. Sí.
+B: Bien. Eso es. Bien. ¿Tiene sus partes A y B?
+A: Sí, señora, las tengo. Y también la D, solo que no tengo muchas. Quiero decir, solo que no tengo la de enero a abril. No, tengo Medicare y Medicaid. Pero ¿tengo la parte C, la parte C de Medicare, o son solo A y B? Bueno, yo solo sé de la A y la B. Pero escucho que mucha gente habla de la C y la D, aunque no estoy muy segura de eso.
+B: Bien, pues cuando la C cubre lo que la A y la B no.

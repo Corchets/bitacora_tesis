@@ -1,0 +1,38 @@
+{
+  "c-json-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 48,
+    "altos_03": 43,
+    "altos_06": 13,
+    "errores": [],
+    "pasa": true
+  },
+  "c-ancla-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 32,
+    "altos_03": 45,
+    "altos_06": 3,
+    "errores": [],
+    "pasa": true
+  },
+  "c-premisa-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 37,
+    "altos_03": 42,
+    "altos_06": 7,
+    "errores": [],
+    "pasa": true
+  },
+  "c-sin-freno-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "igual_a_la_base": 33,
+    "altos_03": 43,
+    "altos_06": 8,
+    "errores": [],
+    "pasa": true
+  }
+}

@@ -1,0 +1,5 @@
+Respondé solo con un objeto JSON con estos campos, en este orden:
+- "riesgo": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.
+- "alerta_sugerida": true si hay que avisarle a PROTEGIDA que puede ser una estafa; si no, false.
+- "motivo": si alerta_sugerida es true, una frase breve dirigida a la persona que nombre lo que OTRA le está pidiendo; si es false, "".
+- "evidencia": si alerta_sugerida es true, copiá textualmente el fragmento donde OTRA lo pide o lo induce; si es false, "".

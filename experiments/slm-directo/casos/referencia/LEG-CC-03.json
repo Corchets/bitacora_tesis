@@ -1,0 +1,46 @@
+{
+  "case_id": "LEG-CC-03",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 5,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE",
+        "PERSISTENCE_DISTRACTION"
+      ]
+    },
+    {
+      "linea": 6,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 7,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Comparte con vishing: insistencia comercial; descuento que vence; receptor desconfía. Señales de legitimidad: invita a verificar llamando al 0800 de la factura; no pide pago ni tarjeta por teléfono; no pide datos sensibles. El detector no debería avisar.",
+  "origen": "Redacción ficticia, archivo llamadas_legitimas.json (id LEG-CC-03, categoría call_center_oferta), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Duración aproximada del original: 95 s (no se usa: las marcas van por línea).",
+  "particion": "desarrollo",
+  "familia": "comercial",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Vendedor de TV por cable algo insistente; el receptor desconfía y el vendedor lo deriva al canal oficial."
+}

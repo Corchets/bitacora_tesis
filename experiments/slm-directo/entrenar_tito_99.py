@@ -651,7 +651,6 @@ def incrustar_bloques(textos: list[str], tokenizer, modelo, torch,
     descarta lineas. Conserva contenido, pero no hay atencion conjunta
     entre bloques: se registra el limite.
     """
-    import torch as _t  # noqa: F401 (verificacion de presencia)
     vectores, bloques_total, tokens_total, t0 = [], 0, 0, time.perf_counter()
     cls_id = tokenizer.cls_token_id
     sep_id = tokenizer.sep_token_id
@@ -666,8 +665,8 @@ def incrustar_bloques(textos: list[str], tokenizer, modelo, torch,
                       for i in range(0, len(contenido), CONTENIDO_POR_BLOQUE)]
             suma, peso = None, 0
             for parte in partes:
-                ids = _t.tensor([[cls_id, *parte, sep_id]])
-                mask = _t.ones_like(ids, dtype=_t.float)
+                ids = torch.tensor([[cls_id, *parte, sep_id]])
+                mask = torch.ones_like(ids, dtype=torch.float)
                 h = modelo(input_ids=ids, attention_mask=mask).last_hidden_state[0]
                 estados = h[1:1 + len(parte)]
                 bloque = estados.mean(dim=0)

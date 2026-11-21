@@ -1,0 +1,40 @@
+{
+  "case_id": "LEG-VE-03",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 5,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    },
+    {
+      "linea": 7,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Comparte con vishing: montos de dinero; habla de una seña. Señales de legitimidad: el cliente fue en persona antes; la seña se hace en la concesionaria con recibo; no hay apuro artificial. El detector no debería avisar.",
+  "origen": "Redacción ficticia, archivo llamadas_legitimas.json (id LEG-VE-03, categoría vendedor_vehiculo), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Duración aproximada del original: 90 s (no se usa: las marcas van por línea).",
+  "particion": "desarrollo",
+  "familia": "comercial",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Vendedor llama para pasar la tasación del usado y la cotización del auto que el cliente fue a ver."
+}

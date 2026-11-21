@@ -41,7 +41,7 @@ así A y B se comparan sobre el mismo audio y sin efecto de orden. `resumen_llam
 
 ```bash
 # Otro servidor, con la opción que la llamada no usó; izquierdo = protegida, derecho = otra
-python servidor.py --host 127.0.0.1 --puerto 8771 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M \
+python servidor.py --host 127.0.0.1 --puerto 8771 --detector tito-slm --prompt v4 --modelo gemma4:e2b-it-q4_K_M \
   --asr parakeet-silero --corte-silencio 0.3 --salida <carpeta fuera de Git>
 python cliente.py --servidor ws://localhost:8771 --rol protegida --wav <llamada>/estereo.wav --canal izq &
 python cliente.py --servidor ws://localhost:8771 --rol otra --wav <llamada>/estereo.wav --canal der

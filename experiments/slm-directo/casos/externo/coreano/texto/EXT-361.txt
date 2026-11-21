@@ -1,0 +1,70 @@
+A: Sí, ¿hola? Sí, cliente, le habla Kim Min-gi, asesor de Hanam Capital, que lo atendió en la consulta.
+A: Sí, cliente, ¿cómo lo ayudo a avanzar con el trámite? Sí, sí, ¿cómo lo ayudo con el trámite, cliente?
+A: Hace un rato, después de explicarle, le dije que lo llamaba en 30 minutos. Entonces, el pago para cancelar lo puede hacer, ¿no?
+A: Sí, entonces, ¿lo hacemos con Sanwa Money o con Je21?
+B: Primero, de nuestro lado, cliente, en el caso de Sanwa hay comisión por cancelación anticipada.
+A: No se preocupe por la comisión de cancelación anticipada. Esa comisión la vamos a cubrir nosotros, cliente.
+A: Y entonces, si hoy mismo recibe nuestros fondos del préstamo, los 98 millones de wones, y se cancelan los 4 millones de Sanwa, le quedan 15 millones en Sanwa y en Daewon...
+A: ...le quedan 50 millones, ¿no? Eso lo paga después de recibir nuestros fondos; como hay fin de semana, páguelo hasta el martes y mándenos el certificado de cancelación total que diga que lo pagó completo.
+A: Y además tiene un préstamo con garantía en Daewon, pero como lo nuestro es un préstamo de refinanciación, la garantía no vuelve a quedar a nuestro nombre.
+B: La garantía va a desaparecer. Qué bien. Eso es mucho mejor.
+A: Sí, lo nuestro no es con garantía sino un préstamo de refinanciación, así que se va a hacer así. Ahora, ya es un poco tarde, pero lo voy a ayudar rápido para que pueda recibir los fondos del préstamo hoy mismo.
+A: Como está en la llamada conmigo, primero lo voy a guiar en la verificación de identidad. ¿El celular que usa está a su nombre?
+A: Sí. ¿Con qué compañía telefónica? Sí, está a su nombre y usa SK.
+A: Sí, entonces, mientras está en la llamada conmigo, ¿podría entrar a Naver desde el celular, cliente?
+A: Sí, entre a Naver móvil desde el celular y avíseme, por favor.
+B: Ya entré.
+A: Sí, si entró, ¿ve el campo de búsqueda de Naver, cliente? En el campo de búsqueda escriba con números: 1 2 2 punto...
+B: Uno, dos, dos.
+A: Sí, uno dos dos punto, uno uno ocho punto, uno uno ocho punto, y ocho punto...
+B: Ocho punto.
+A: Sí, sí, 110. Sí, ¿me repite si lo escribió bien, cliente?
+B: Uno dos dos punto, uno uno ocho punto, ocho punto, 11.
+A: 110, sí, está bien. Entonces apriete «Buscar».
+A: Un momento. Sí, cuando apriete «Buscar» le va a aparecer «No hay resultados», ¿no? Sí, entonces, un momento.
+A: Sí, entonces: «Haga clic en la dirección de abajo para ir a la página web que ingresó». Apriete «Ir a la URL».
+A: Sí, cuando lo apriete, ¿le apareció la página de verificación de identidad de Hana Capital?
+A: Apriete «Verificación de identidad». Le va a aparecer «¿Desea descargar? ¿Desea descargar el archivo?», ¿no?
+A: Sí, entonces apriete «Guardar» o «Iniciar». Sí, entonces, cliente, un momento. Sí.
+A: ¿Apretó «Guardar» o «Iniciar»? Sí, entonces, cliente, ¿sabe bajar la barra de arriba, la que se baja de arriba hacia abajo para prender el wifi?
+A: Cuando baje la barra, ¿ve que se completó la descarga de un archivo que se llama «hana apk»?
+B: El archivo descargado... ya lo ejecuté.
+A: Sí, sí, lo ejecutó. Un momento: ¿le apareció «¿Desea instalar?»? Sí, apriete «Instalar», cliente.
+A: Sí, cuando termine de instalarse, apriete «Abrir». Cliente, «Abrir»... un momento. Sí.
+A: Sí, cuando apriete «Abrir», avíseme.
+B: Sí, ya lo abrí.
+A: Sí, si lo abrió, cliente, ¿ve «Solicitud de consulta Mobile Direct Loan»?
+B: Sí, dice «Mobile Direct... solicitud».
+A: «Solicitud Mobile Direct Loan»: apriete eso. Cuando lo apriete, cliente, un momento. Sí, cuando lo apriete, cliente...
+A: ...no hace falta completar todo. La parte del nombre, la del teléfono: por ahora ponga su nombre y su teléfono.
+A: Sí, y en «Monto necesario», cliente, el límite que le di, 98 millones de wones; como va en unidades de 10.000 wones, escriba «9800». 90...
+A: Sí, 9800, señor. Y la tasa no hace falta que la escriba, pero recuérdela, cliente: es 7,3 %. ¿Entendido?
+A: Sí, un momento.
+B: ¿También hay que poner el sueldo anual y la facturación anual?
+A: No, no. Eso no, porque usted ahora está con licencia y yo ya tengo todo registrado. Por ahora ponga tres cosas: nombre, teléfono y monto necesario; y en «Tipo de solicitud» escriba «Préstamo de refinanciación».
+B: Préstamo de refinanciación.
+A: Sí, préstamo de refinanciación. Entonces, cliente, un momento. Sí, apriete «Solicitar» o «Enviar».
+B: Sí, «Solicitar».
+A: Sí, «La solicitud fue recibida». Sí, entonces su solicitud ya quedó registrada con nosotros. Ahora, hoy mismo...
+A: ...cliente, cuando salgan los fondos del préstamo, el área de evaluación probablemente le pida que abra nuestra aplicación para la firma electrónica; si abre la aplicación que recién instaló conmigo...
+A: ...le va a aparecer el campo de firma electrónica. Firma electrónicamente, es simple, y los fondos le salen hoy mismo, así que eso...
+A: ...téngalo presente. Va a seguir así, sin cambios, al 7,3 %. Y, cliente, veo que... un momento.
+A: Sí, para pagar capital e intereses hay opciones: a 5 años, 60 meses, ¿prefiere pagar cuotas mensuales con el sistema de cuota fija de capital e intereses, o pagar solo intereses?
+B: Por ahora voy a pagar solo intereses.
+A: Entonces, solo intereses se puede configurar por un máximo de 2 o 3 años. ¿Con cuántos años se lo configuro al principio?
+B: Al principio configúrelo con intereses por 3 años.
+A: Sí, se lo hago a 3 años, y más adelante, a partir de los 2 años, lo puede cambiar. Cuando pasen 2 años, cliente...
+A: ...si nos llama y nos dice que quiere pasar a pagar capital e intereses, lo podemos hacer, así que llámenos cuando quiera y cambia la forma de pago.
+A: Sí, entonces ahora mismo le mando el documento oficial a Sanwa Money y hago una llamada. Cuando recibió el préstamo de Sanwa Money, estos 18 millones, ¿los recibió en la casa central o en una sucursal? Probablemente...
+A: ¿Sabe el teléfono de la sucursal?
+B: El teléfono no lo sé... es la de Gyeyang. Debe ser la de Gyeyang, en Incheon.
+A: Gyeyang, Incheon. Un momento, cliente.
+A: No hay sucursal Gyeyang... solo la de Gyesan.
+B: Debe ser Gyesan, entonces.
+A: La que está sobre la avenida Gyeongmyeong, en Gyeyang-gu, Incheon, ¿es esa? ¿El 010-1678-5964, es ese?
+B: Sí, ese me parece que es.
+A: Bien. Entonces yo llamo ahí, consigo la aprobación del documento oficial y lo llamo. Cuando recibió el préstamo de Sanwa Money no le informaron nada de comisión por cancelación anticipada, ¿no?
+B: ¿La comisión por cancelación anticipada?
+A: Sí. ¿Hace cuánto que lo tiene? ...Más o menos. Unos 6 meses. Un momento. Un momento.
+A: Sí, cliente, entonces yo mando el documento oficial y apenas salga la aprobación lo llamo. La cancelación la puede hacer hoy mismo, ¿no?
+A: Sí, entendido. Entonces mando el documento oficial y apenas lo aprueben lo llamo. Sí.

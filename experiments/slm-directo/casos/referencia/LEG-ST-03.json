@@ -1,0 +1,33 @@
+{
+  "case_id": "LEG-ST-03",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 5,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Comparte con vishing: dice ser soporte técnico; habla de un pago. Señales de legitimidad: el cliente dejó el equipo en persona; el pago se hace en el local; el monto coincide con el presupuesto aceptado. El detector no debería avisar.",
+  "origen": "Redacción ficticia, archivo llamadas_legitimas.json (id LEG-ST-03, categoría soporte_tecnico_solicitado), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Duración aproximada del original: 60 s (no se usa: las marcas van por línea).",
+  "particion": "desarrollo",
+  "familia": "soporte",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Local de reparación avisa que la notebook que el cliente dejó ya está lista."
+}

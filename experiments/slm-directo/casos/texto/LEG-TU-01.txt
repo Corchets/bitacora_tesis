@@ -1,0 +1,9 @@
+A: Hola, buen día, ¿hablo con Juan Pablo Sosa?
+B: Sí.
+A: Juan Pablo, te llamamos del Centro Médico del Parque para confirmar tu turno con la doctora Gómez, de dermatología, el jueves doce a las diez y media.
+B: Sí, sí, confirmo.
+A: Perfecto. Recordá traer la credencial de la obra social y llegar diez minutos antes para la admisión.
+B: Dale. ¿Tengo que llevar la orden?
+A: Para la primera consulta no hace falta, solo la credencial y el DNI.
+B: Bárbaro, gracias.
+A: A vos, nos vemos el jueves.

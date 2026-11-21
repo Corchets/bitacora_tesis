@@ -1,0 +1,20 @@
+A: Hola, ¿quién es?
+B: Hola, buen día, te hablo de ClimaSur, de instalaciones.
+A: Sí.
+B: Eugenia, te llamo por la instalación del split que compraste el sábado. ¿Me confirmás la dirección?
+A: Crisóstomo Álvarez seiscientos cuarenta.
+B: ¿Es casa o edificio?
+A: Edificio, cuarto piso, departamento C.
+B: ¿Y entre qué calles queda? Así el instalador no se pierde.
+A: Entre Maipú y Jujuy.
+B: ¿El departamento tiene balcón? Necesitamos dónde poner la unidad de afuera.
+A: Sí, tiene un balcón chico.
+B: ¿Y la consorcio deja poner la unidad en el balcón? Algunos edificios piden autorización.
+A: No sé. Le pregunto al encargado.
+B: Si no deja, se puede poner en la fachada, pero eso tiene un costo extra por la altura.
+A: ¿Cuánto?
+B: Depende, entre sesenta y ochenta mil. Lo ve el instalador ese día y te lo dice antes de hacer nada.
+A: Bueno, le pregunto hoy al encargado.
+B: Te dejo el lunes a la mañana, entre las ocho y las doce. La instalación básica ya está paga con la compra.
+A: Bien.
+B: Cualquier cambio avisame a este número.

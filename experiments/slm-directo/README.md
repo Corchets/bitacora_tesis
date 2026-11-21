@@ -75,7 +75,8 @@ respuesta.
 
 ## 4. Casos
 
-Formato y reglas en [casos/README.md](casos/README.md). Cuatro grupos:
+Formato y reglas en [casos/README.md](casos/README.md); qué hay, dónde y con qué lista se corre, en el
+[catálogo de conversaciones](casos/CATALOGO-CONVERSACIONES.md). Cinco grupos:
 
 - **`piloto_escrito`:** versión escrita de los 7 pares del
   [piloto](../../docs/corpus/METODO-CREACION-CORPUS.md#selección-inicial-del-piloto).
@@ -87,9 +88,13 @@ Formato y reglas en [casos/README.md](casos/README.md). Cuatro grupos:
 - **`laboratorio`:** los guiones del laboratorio de Ignacio convertidos al formato,
   para comparar con lo que se midió ahí.
 - **`corpus_v2`:** 297 conversaciones nuevas, con datos y transferencias legítimas,
-  cotidianas, pedidos indirectos y variantes de transcripción. El inventario total
-  tiene 150 de desarrollo (75/75) y 200 reservadas (100/100). Ver
+  cotidianas, pedidos indirectos y variantes de transcripción. Con los tres grupos
+  anteriores suman 150 de desarrollo (75/75) y 200 reservadas (100/100). Ver
   [diseño y límites](casos/DISENO-CORPUS-V2.md) y [qué grabar para ASR](casos/GRABACIONES-ASR.md).
+- **`legitimas_cotidianas`:** 94 legítimas de desarrollo, sumadas el 2026-11-06 y escritas
+  como llamadas entrantes de números desconocidos, para medir dentro del alcance
+  ([#151](https://github.com/Corchets/bitacora_tesis/issues/151)). Quedan fuera del
+  manifiesto de la reserva. Ver [la sección del grupo](casos/README.md#legítimas-cotidianas).
 
 > **Estado: propuesta sin discutir.** El runner usa desarrollo por defecto y el
 > panel excluye los textos reservados. La independencia de semillas y la evaluación
@@ -168,6 +173,15 @@ El actualizador toma IDs y huellas de manifiestos completos de desarrollo desde 
 corridas en curso o interrumpidas; los fallos y prefijos incompletos no cuentan como
 negativos. El HTML es autónomo, funciona como archivo local y conserva los datos
 históricos sin pérdida mediante compresión.
+
+### Formularios ciegos de #145
+
+[`analisis/tablero/revision-145.html`](analisis/tablero/revision-145.html) permite completar
+las 42 fichas sin mostrar las referencias ni los resultados del sistema. Incluye casillas,
+marcas por línea, guardado por revisor y descarga/recuperación de respuestas. La
+[guía y reproducción](../../docs/corpus/REVISION-CIEGA-145.md) explica la muestra y la
+custodia de la clave. Para esta revisión, usar ese formulario y evitar el panel de
+resultados anterior hasta terminar la anotación independiente.
 
 ### El panel general del proyecto
 
@@ -382,6 +396,20 @@ válido; `--seguir-tras-aviso` conserva el diagnóstico de conversación
 completa, separado del costo operativo hasta el aviso. Las corridas
 históricas (conversación completa) no se reescriben ni se presentan como
 nuevas mediciones operativas.
+
+`--solo-otra` (con `--hablantes rol` y `--sin-reglas`) consulta al SLM solo en
+las líneas de OTRA, como la app ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)):
+las de PROTEGIDA entran a la transcripción de la consulta siguiente, pero no
+consultan (`consulta` = `omitida`). La configuración congelada de #143 es
+`--prompts c-consejos-corte-riesgo --hablantes rol --sin-reglas --solo-otra`
+([humo](corridas/2026-11-10_config-congelada-humo/README.md) con `c-json-corte-riesgo`,
+[prueba de sensibilidad](corridas/2026-11-10_sensibilidad-c/analisis.md), que eligió `c-premisa`, y
+[ADR 0008](../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md), que la cambió por `c-consejos`).
+
+`--conjunto CARPETA` corre sobre un conjunto armado con [`conjuntos.py`](conjuntos.py), fuera de `casos/`: el test
+reservado (de la rama `reserva/test`) o el set externo de #144. Lee el texto y los roles, nunca la referencia, y deja
+en el manifiesto la partición y las huellas del conjunto. Es la base de la
+[evaluación final](corridas/2026-11-12_evaluacion-final/README.md), que todavía no corrió.
 
 ### Diagnóstico del Tito histórico (#98)
 

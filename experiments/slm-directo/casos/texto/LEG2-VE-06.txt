@@ -1,0 +1,7 @@
+A: ¿Sí?
+B: Hola, buen día, te habla Brenda, de Andes Motors. ¿Hablo con Ramiro Juárez?
+A: Sí, pero estoy en una reunión.
+B: Uh, perdón, te robo diez segundos. Pediste el folleto del SUV nuevo en el stand del shopping. ¿Te lo mando al mail que dejaste, ramijuarez arroba yahoo?
+A: Sí, mandámelo ahí.
+B: Listo, te llega hoy. Gracias, Ramiro.
+A: Chau.

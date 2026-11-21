@@ -1,0 +1,12 @@
+A: ¿Hola?
+B: Hola, buen día. Te llamo de la Municipalidad de San Miguel de Tucumán, de la Dirección de Higiene Urbana, mi nombre es Patricia. Estamos haciendo una encuesta sobre la recolección de residuos. ¿Tenés dos minutos?
+A: Sí, dale.
+B: Para ubicar la zona, ¿en qué calle y a qué altura aproximada vivís?
+A: Lavalle al mil doscientos.
+B: Gracias. ¿Cuántas veces por semana pasa el camión por tu cuadra?
+A: Tres, más o menos. Lunes, miércoles y viernes.
+B: ¿Y pasa en horario?
+A: A veces se atrasa, y los perros rompen las bolsas.
+B: Entiendo. ¿Estarías de acuerdo con contenedores en la esquina?
+A: Sí, totalmente.
+B: Listo, eso es todo. Gracias por tu tiempo.

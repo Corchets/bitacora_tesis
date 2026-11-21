@@ -1,0 +1,20 @@
+A: Buenas tardes, te llamo del laboratorio Bioanálisis.
+B: Sí.
+A: Santiago, tenés turno mañana a las siete y media para extracción. Para confirmarlo, ¿me decís tu número de documento?
+B: 41.882.903.
+A: Gracias. Recordá que son ocho horas de ayuno. Podés tomar agua.
+B: ¿Ocho horas? Yo ceno tarde.
+A: Si cenás a las once, estás bien.
+B: ¿Y el mate a la mañana?
+A: No, nada de mate ni café. Solo agua.
+B: Uf, bueno.
+A: Tampoco hagas actividad física fuerte antes.
+B: ¿Qué tengo que llevar?
+A: La orden médica original, el documento y la credencial.
+B: ¿Pago algo?
+A: Si la orden está autorizada, no. Si no, se abona el coseguro en recepción.
+B: Creo que la autoricé por la app.
+A: Entonces está bien. Tu número de turno es el 0352, lo tenés también en el mail de confirmación.
+B: Sí, lo vi.
+A: ¿Te mando la ubicación?
+B: No, sé dónde es.

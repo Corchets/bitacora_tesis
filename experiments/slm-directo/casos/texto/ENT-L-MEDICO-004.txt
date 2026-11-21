@@ -1,0 +1,20 @@
+A: Hola, sí.
+B: Hola, buenas tardes. Te llamo de la veterinaria Patitas, me llamo Sol.
+A: Sí.
+B: Te llamo para recordarte el turno de Rocco para la vacuna antirrábica, el sábado a las diez.
+A: Ah, sí. Lo tenía anotado, pero me había olvidado la hora.
+B: A las diez. Traé la libreta sanitaria, así le ponemos el sello.
+A: ¿Tiene que ir en ayunas?
+B: No, no hace falta.
+A: ¿Cuánto sale?
+B: La antirrábica son quince mil. Si querés, le hacemos también el control general, que son diez mil más.
+A: No, solo la vacuna por ahora.
+B: El año pasado también le tocaba la desparasitación. ¿Se la diste?
+A: Sí, le di las pastillas en septiembre.
+B: Bien, lo anoto en la ficha.
+B: Bien. ¿Sigue pesando lo mismo? La última vez eran veinte kilos.
+A: Creo que engordó un poco.
+B: Lo pesamos acá. ¿Va con correa?
+A: Sí, con correa y bozal, porque se pone nervioso.
+B: Mejor. Si llegás tarde, avisá, que los sábados hay mucha gente.
+A: Llego a horario.

@@ -12,7 +12,7 @@ El trabajo se organizó por hitos de resultado, sin fijar de antemano una arquit
 | H2 · Piloto y primeras pruebas | Piloto con audio y referencia humana | **Atrasado:** faltan #54, #32 y #39 |
 | H3 · Primera integración | Replay de punta a punta | Hecho (#28, cerrado el 2026-11-03); sin reproducción registrada por otra persona |
 | H4 · Desarrollo y selección | Comparación y elección | Elección tomada; faltan #33, #55 y #45 |
-| H5 · Evaluación final | Test reservado | Sin correr (#52) |
+| H5 · Evaluación final | Test reservado | Sin correr (#52). **Al 2026-11-20:** corrió el 2026-11-19 ([§8.3.4](CAP-08-RESULTADOS-EXPERIMENTALES.md#834-evaluación-final)) |
 | H6 · Entrega y defensa | Informe, demo y video | En curso (#53) |
 
 Fechas del tutor: **todo al 90 % el 2026-11-15**, todo terminado el 2026-11-30, y entrega con presentación de 20 a 30 minutos entre el 2026-12-07 y el 2026-12-11. Falta el día exacto.
@@ -24,7 +24,7 @@ Fechas del tutor: **todo al 90 % el 2026-11-15**, todo terminado el 2026-11-30, 
 | 2026-09-09 | Replay como base y VoIP como objetivo; PI1 y PI2 aprobadas; PSTN, deepfakes y biometría afuera | Alcance acotado |
 | 2026-10-04 | Referencia mínima por conversación, sin etiquetar cada turno | Anotación viable |
 | 2026-10-21 | Corpus v2: 297 conversaciones nuevas, 200 reservadas | Desarrollo más grande; sin revisión humana |
-| 2026-10-28 | Tutor: API descartada, demo por Meet aprobada, meta 80–85 / 10–15, gama más alta | Baja la meta original de 95/5 y se define la demo |
+| 2026-10-28 | Tutor: API descartada, demo por Meet aprobada, gama más alta; le parece bien la meta de referencia 80–85 / 10–15 que propone el equipo | Reemplaza la meta de trabajo de 95/5 y se define la demo |
 | 2026-10-29 | Zipformer retirado por sus errores con voz real | Se prueba Parakeet |
 | 2026-10-31 | WhatsApp Desktop fuera, porque BlackHole no funcionó con él | Demo por pestaña de Chrome |
 | 2026-11-02 | Opción B por defecto; corrida por Meet | Primer recorrido con voz real |
@@ -44,7 +44,7 @@ La matriz completa está en el [registro de riesgos](../gestion/REGISTRO-RIESGOS
 |---|---|---|
 | R28 | Test sin referencia humana | Abierto; lo mitigan las llamadas y la muestra común |
 | R27 | La configuración rinde peor en el test | Abierto; se informa aunque sea desfavorable |
-| R08 | Modelo pesado para el móvil | Materializado en computadora; sin medir en teléfono |
+| R08 | Modelo pesado para el móvil | Materializado en computadora y en el A56 (3,7 s por línea, con el prompt anterior). En un iPhone 15 Pro Max con GPU la latencia entra (0,8 s con la configuración final). Falta el recorrido completo en Android |
 | R23 | La demo falla en la sala | Mitigado con plan B y video; falta confirmar el ensayo en sala |
 | R24 | Pérdida de grabaciones | **Materializado** el 2026-11-02; sigue abierto |
 | R17 | Desincronización entre ramas y copias | Recurrente; se corrigen citas al cerrar issues |

@@ -1,0 +1,32 @@
+A: Hola, buenas tardes. Te hablo de soporte de Factura Simple, por el ticket que abriste esta mañana.
+B: Ah, sí. Gracias por llamar tan rápido.
+A: En el ticket pusiste que no te deja emitir facturas desde ayer.
+B: Exacto. Me sale un error de certificado y no puedo facturar nada. Tengo clientes esperando.
+A: ¿Me confirmás el mail con el que estás registrado?
+B: andresromero arroba gmail punto com.
+A: Gracias. Ese error suele ser del certificado fiscal vencido o de una actualización que quedó a medias.
+B: ¿Y cómo lo arreglo?
+A: Lo más rápido es que lo vea yo en tu computadora. ¿Podés entrar a la página de Factura Simple, a la sección Ayuda?
+B: Sí, ya estoy.
+A: Abajo hay un botón que dice Asistencia remota. Descargá ese programa, solo desde ahí.
+B: Ya lo descargué. ¿Lo abro?
+A: Sí. Te va a mostrar un número de conexión de nueve cifras. ¿Me lo leés?
+B: ¿No es peligroso eso? Leí que hay estafas así.
+A: Es buena pregunta. Hay estafas así, por eso solo lo hacemos cuando el cliente abrió un ticket. Vos ves todo lo que hago y lo podés cortar cuando quieras.
+B: Bueno. Es siete tres uno dos cero cuatro cinco cinco ocho.
+A: Listo, me aparece el pedido. Tenés que aceptar en la ventanita.
+B: Ya acepté.
+A: Bien. Estoy viendo la configuración. El certificado venció el día tres.
+B: Ah, ¿y eso cómo se renueva?
+A: Se genera en la página del organismo de recaudación, con tu clave fiscal. Eso lo tenés que hacer vos, yo no la necesito ni la quiero ver.
+B: ¿Ahora?
+A: Si querés, entrás vos, yo miro y te voy guiando. Cuando te pida la clave, la escribís vos y yo miro para otro lado, por decirlo así.
+B: Jaja, bueno. Ya entré.
+A: Andá a Certificados digitales y generá uno nuevo con el archivo que te dejé en el escritorio.
+B: Listo, me dice que se generó.
+A: Ahora lo subo yo al sistema. Probá emitir una factura de prueba.
+B: ¡Salió!
+A: Bueno. Ahora cierro la sesión. Fijate que desaparece la ventanita.
+B: Sí, se cerró.
+A: Si querés, desinstalá el programa de asistencia. La próxima vez lo descargás de nuevo.
+B: Lo desinstalo. Muchas gracias, eh.

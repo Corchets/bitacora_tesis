@@ -1,0 +1,21 @@
+A: Hola, ¿Abril? Soy Lucas, del correo. Tengo un paquete para Abril Gutiérrez.
+B: Sí, soy yo.
+A: Estoy en la calle Salta y no encuentro el 1720. Los números saltan del 1700 al 1750.
+B: Sí, es un pasillo. Está al lado de la verdulería.
+A: Hay dos verdulerías en esta cuadra.
+B: La del toldo verde, en la mitad de la cuadra.
+A: Ah, frente a la parada del colectivo.
+B: Esa. Al lado hay una puerta de chapa, no es esa, es la reja.
+A: Ok.
+A: Ya la veo. ¿Y el pasillo tiene puerta?
+B: Una reja negra. Suele estar abierta.
+A: Está cerrada.
+B: Uh. Esperá que salgo.
+A: ¿Qué departamento sos?
+B: El 4, al fondo. Pero salgo yo, no te preocupes.
+A: Bueno. Mientras te aviso: el paquete es de un remitente de Buenos Aires, viene por una tienda.
+B: Sí, unas zapatillas. ¿Tengo que pagar algo?
+A: No, está todo pago. Solo me firmás.
+B: Ya salgo.
+A: Estoy en la camioneta blanca, enfrente.
+B: Te veo.

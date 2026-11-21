@@ -1,0 +1,13 @@
+A: ¿Hola?
+B: Hola, señora John Miller, le habla John Miller del equipo de BlueRiver Medical BlueRiver Medical BlueRiver Medical, uno de los cajera cajera del piso. ¿Cómo está hoy?
+A: Bien.
+B: Espero no molestarla en un mal momento y que también me recuerde. He estado hablando con usted sobre su cuenta de BlueRiver Medical. Sus dos cuentas: la primera, hace unos tres semanas tres semanas, ya la mejoramos a Internet de fibra de mil por mil. Y le dije, si lo recuerda, que volvería a llamar en unos tres semanas tres semanas, tres semanas más o menos, para mejorar también su segunda cuenta de BlueRiver Medical. ¿Lo recuerda, para BlueRiver Medical BlueRiver Medical BlueRiver Medical?
+A: Sí, yo. Está bien. Puede continuar y.
+B: Exacto. Ese es básicamente el motivo de mi llamada, señora John Miller: un resumen rápido de los cambios y la razón de mi llamada. El precio de BlueRiver Medical BlueRiver Medical bajó. Usted es una clienta leal que ya tiene servicios de BlueRiver Medical BlueRiver Medical en su negocio. Ya tiene una cuenta de Internet de fibra, en ambas, y califica para un buen descuento en su cuenta. Para su cuenta número 000123456, usted tiene una velocidad de Internet de 300 de subida y 300 de bajada. Queríamos avisarle, como ya le había dicho, que vamos a mejorar esa cuenta a Internet de fibra: 1000 megabytes de subida y 1000 de bajada, lo cual se hará de forma remota, sin que venga ningún cajera, sin interrupciones del servicio y sin costo extra. Además, como también les mencioné, su factura quedaría fija en 150, así que no tendrá un gran aumento en su precio. Y todo lo demás lo hago yo de mi lado. ¿De acuerdo?
+A: Bien.
+B: Pensamos programarlo para ustedes el el 14 de mayo el 14 de mayo el 14 de mayo. Se hará de nuestro lado sin que venga ningún cajera. ¿Puedo confirmar que el nombre de su negocio es BlueRiver Medical BlueRiver Medical BlueRiver Medical, ubicado en Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa Tulsa, y que el correo electrónico que tengo es John Miller usuario@example.com, correcto?
+A: Sí.
+B: Lo único que me queda de mi lado es pedirle su permiso para aplicar este descuento. ¿Tenemos su aprobación y consentimiento para realizar este pedido para ustedes? ¿Me da su permiso para seguir adelante con eso el día uno?
+A: Sí,
+B: perfecto, fue un gusto hablar con usted otra vez, señora John Miller. Todo listo. Ahora tiene los mejores servicios posibles que BlueRiver Medical puede ofrecer en sus dos cuentas. Así que tendrá noticias nuestras el día uno. Cuídese y que tenga un día verdaderamente excelente, señora.
+A: Gracias. Adiós.

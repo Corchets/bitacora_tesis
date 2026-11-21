@@ -1,0 +1,24 @@
+{
+  "lineas": 76,
+  "consultas": 40,
+  "validas": 40,
+  "consultas_con_motivo": 3,
+  "por_caso": {
+    "EN-07": 16,
+    "EN-09": 10,
+    "EN-13": 14
+  },
+  "tabla": [
+    "| Medición | n | Mediana | p95 | Máximo |",
+    "|---|---:|---:|---:|---:|",
+    "| Actualización completa (todas las consultas) | 40 | 3,66 s | 12,31 s | 17,71 s |",
+    "| Actualización sin motivo | 37 | 3,60 s | 4,90 s | 4,91 s |",
+    "| Primera consulta (riesgo, 14 tokens) | 40 | 3,61 s | 4,90 s | 4,92 s |",
+    "| Segunda consulta (motivo, primer aviso) | 3 | 10,99 s | 12,78 s | 12,78 s |",
+    "| Procesar prompt, runtime (1.ª consulta) | 40 | 1,95 s | 3,05 s | 3,27 s |",
+    "| Generar, runtime (1.ª consulta) | 40 | 1,61 s | 1,76 s | 1,81 s |",
+    "| Tokens de prompt (1.ª consulta) | 40 | 63 | 114 | 132 |",
+    "| Tokens de prefijo reutilizados (sin motivo) | 37 | 813 | 1241 | 1313 |",
+    "| Tokens generados (1.ª consulta) | 40 | 14 | 14 | 14 |"
+  ]
+}

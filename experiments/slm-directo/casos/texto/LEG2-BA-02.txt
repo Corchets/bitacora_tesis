@@ -1,0 +1,10 @@
+A: Sí, hola.
+B: Hola, buen día. Te llamo de Banco Andino, de seguridad, mi nombre es Pablo. ¿Me comunico con Carla Benítez?
+A: Sí, soy yo.
+B: Carla, registramos dos ingresos a tu homebanking desde un dispositivo nuevo esta madrugada. Antes de seguir, ¿me confirmás tu DNI?
+A: Mmm, no, mirá, no te ofendas, pero no voy a dar el DNI por teléfono. ¿Cómo sé que sos del banco?
+B: No, está muy bien que desconfíes. Hagamos así: cortá y llamá vos al número del dorso de tu tarjeta. Pedí por seguridad y dales el número de caso siete tres cuatro cuatro cero.
+A: Siete, tres, cuatro, cuatro, cero.
+B: Exacto. Mientras tanto, el acceso desde ese dispositivo ya quedó suspendido por precaución.
+A: Bueno, ahora llamo.
+B: Perfecto, Carla. Gracias.

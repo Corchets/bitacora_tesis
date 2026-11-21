@@ -1,0 +1,10 @@
+A: ¿Hola, quién es?
+B: Hola, soy Lucas, del correo. Tengo un paquete para Sofía Medina. ¿Sos vos?
+A: Sí, soy yo.
+B: Estoy en la calle Córdoba y no encuentro el dos mil trescientos ochenta. ¿Me das una referencia?
+A: Es un pasillo al lado de la verdulería del toldo verde.
+B: Ah, sí, la veo. ¿Qué departamento?
+A: El cuatro, al fondo.
+B: Listo. ¿Tengo que tocar timbre?
+A: Tocá, que salgo. ¿Tengo que pagar algo?
+B: No, está todo pago. Solo me firmás. Ahí voy.

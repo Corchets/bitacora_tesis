@@ -1,0 +1,16 @@
+A: Hola, buenas tardes. Te llamo de la consultora Opina Norte. Estamos haciendo una encuesta sobre el transporte público en San Miguel de Tucumán. Es anónima y dura unos cinco minutos. ¿Me podés ayudar?
+B: Eh... bueno, dale, si es cortita.
+A: Gracias. Primero, para clasificar: ¿en qué rango de edad estás? Dieciocho a treinta, treinta y uno a cincuenta, o más de cincuenta.
+B: Dieciocho a treinta.
+A: ¿Y en qué barrio vivís, más o menos?
+B: Por el barrio Sur.
+A: Bien. ¿Usás colectivo habitualmente?
+B: Sí, todos los días, para ir a la facu y al trabajo.
+A: Del uno al cinco, ¿cómo calificarías la frecuencia de los colectivos?
+B: Un dos. A la noche tenés que esperar banda.
+A: ¿Y la seguridad en las paradas?
+B: Un dos también, hay paradas que no tienen ni luz.
+A: Entiendo. Última: si tuvieras que elegir una sola mejora, ¿cuál sería? ¿Más frecuencia, mejores unidades, o paradas más seguras?
+B: Más frecuencia, sin dudas.
+A: Perfecto, eso es todo. Muchas gracias por participar, que tengas buena tarde.
+B: De nada, chau.

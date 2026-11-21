@@ -1,0 +1,20 @@
+A: Hola, sí, ¿quién es?
+B: Hola, buen día. Te hablo del Centro de Emisión de Licencias de la municipalidad. ¿Lourdes Ibarra?
+A: Sí, soy yo.
+B: Lourdes, sacaste un turno para la renovación de la licencia. ¿Me confirmás tu DNI y tu fecha de nacimiento?
+A: ¿La municipalidad llama por teléfono? Nunca me había pasado.
+B: Sí, estamos confirmando los turnos de la semana porque hay mucho ausentismo. Si preferís, lo confirmás en la página con el número de turno.
+A: No, está bien. treinta y nueve millones cuatrocientos cincuenta mil seiscientos setenta y dos. Nací el dos de agosto del dos mil.
+B: Gracias. Tu turno es el martes a las ocho.
+A: ¿Qué tengo que llevar?
+B: El DNI, la licencia vencida y el certificado del curso de educación vial.
+A: ¿El curso es el online?
+B: Sí, el online sirve. Imprimí el certificado.
+A: ¿Y el pago?
+B: Lo hacés ahí, en la caja del centro, antes del examen. No se paga nada por adelantado.
+A: ¿Cuánto es?
+B: Depende de la categoría. Para auto, unos veinte mil.
+A: Bueno. ¿El examen médico se hace ahí también?
+B: Sí, el mismo día. Traé anteojos si usás.
+A: Uso, sí.
+B: Entonces traelos. Nos vemos el martes.

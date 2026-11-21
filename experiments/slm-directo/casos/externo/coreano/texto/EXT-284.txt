@@ -1,0 +1,273 @@
+A: Sí, ¿hola? Soy la investigadora Kim Yeon-hwa de la Policía Metropolitana de Seúl. ¿Hablo con el titular? Le llamo porque, ¿por casualidad...?
+A: ¿Conoce a cierta persona?.
+B: ¿A quién? No lo conozco.
+A: Es de Busan, un hombre de 42 años. ¿No lo conoce en absoluto? Sí....
+B: No lo conozco.
+A: La semana pasada nuestro equipo detuvo a una banda de fraude financiero encabezada por Lee. En el lugar incautamos muchas cuentas bancarias de prestanombres...
+A: Entre ellas encontramos dos libretas bancarias a su nombre, de Hana Bank y Nonghyup, por eso lo llamo.
+B: Sí.
+A: ¿Abrió por casualidad una cuenta de Nonghyup el 7 de enero, el 7 de enero de este año, en...?
+A: Sí, sí.
+B: No sé, no lo recuerdo. Si trabajo....
+A: El 7 de enero de este año.
+B: Creo que no.
+A: ¿Ah, sí? Ahora mismo se han ingresado y retirado ilegalmente 49 millones de wones en esas dos cuentas, y hay personas perjudicadas.
+A: ¿Acaso...?
+B: ¿Dice que en esa cuenta a mi nombre hay 47 millones de wones? ¿Como cuenta de prestanombres?
+A: Sí, se ingresó y retiró dinero usándola como cuenta de prestanombres.
+A: ¿No recibió ningún mensaje de aviso de ese banco?
+B: No, no recibí.
+A: No recibió ninguno. Entonces, ¿cuánto tardaría en venir a nuestra jefatura?
+A: Es la Policía Metropolitana de Seúl.
+B: La Fiscalía de Seúl...
+B: ¿Por qué tendría que ir yo allí?
+A: Ahora, como hay personas perjudicadas por una cuenta a su nombre....
+A: Si es una víctima, tiene que demostrarlo. Si no, esto quiere decir que abrieron una cuenta con sus datos personales filtrados.
+A: El problema no es solo la apertura de la cuenta. También descubrimos perjuicios económicos causados mediante empleados de bancos y emisoras de tarjetas. Por eso lo llamé.
+B: ¿De dónde dijo que era? ¿Desde dónde me llama ahora?
+A: Sí. Soy la investigadora Kim Hyeon-a del Equipo 1 de Investigación de Delitos Económicos de la Policía Metropolitana de Seúl.
+B: ¿La investigadora Kim Hyeon-a?
+A: Sí, sí.
+B: ¿No me está mintiendo?
+A: ¿Qué mentira?
+B: ¿Esto no es eso? ¿No me está llamando desde China o algo así?.
+A: ¿Dice que es vishing?. Como no me cree, le digo que venga personalmente a la jefatura.
+A: ¿Tiene ahora un teléfono fijo?
+B: No.
+A: ¿No tiene teléfono fijo? Es el 182, sin prefijo. ¿A qué hora podría venir?
+B: ¿Por qué tengo que ir allí sin ningún motivo?
+A: No es sin motivo. Le dije que hay personas perjudicadas, ¿no? Ahora se encuentra en una situación en la que debe reintegrar 49 millones de wones.
+A: Le pedimos que comparezca para declarar en calidad de testigo de la investigación. ¿Entiende?
+B: No, no entiendo.
+A: ¿Entonces le emitimos directamente una orden de comparecencia?.
+B: Haga lo que quiera. Yo no hice nada malo. Dice que usaron mi cuenta como cuenta de prestanombres... ¿Cuál es ese número de cuenta? ¿Puede decírmelo?
+A: Sobre el número de cuenta, estamos citando a unas trescientas personas y es difícil interrogarlas una por una presencialmente. Primero hacemos una investigación preliminar por teléfono y, cuando lo comuniquemos con el jefe del equipo, él le dirá la cuenta.
+B: Pero dice que es mi cuenta. Puede decirme mi número de cuenta, ¿no?
+A: Cuando lo comuniquemos con el jefe del equipo, él se lo va a decir.
+B: Entonces comuníqueme con el jefe del equipo.
+A: No puedo pasarlo directamente con él porque tiene que haber una grabación para poder comunicarlo. Si acepta que lo interroguemos...
+A: El jefe del equipo está aquí al lado.
+B: ¿Qué tiene que haber?.
+A: Es lo que le dije antes. Grabamos sobre este caso.
+A: Para ver si es cierto o no. Es decir, si usted, señor Han Dong-hyun, es víctima o sospechoso. Nuestro objetivo es acreditar el perjuicio. Si de verdad...
+A: ...usted, señor Han Dong-hyun, es una víctima, tiene que demostrarlo y recibir medidas para evitar más perjuicios.
+A: Pero si durante la investigación se determina que es responsable, además de la sanción legal, tendrá que indemnizar por los 49 millones de wones operados en las cuentas halladas. ¿Entiende?
+B: No sabía ni que existiera esa cuenta. Dice que la usaron, pero ¿cómo se produjeron víctimas? ¿Por qué paso a ser yo el responsable?
+A: Sí, por eso. Todavía no le expliqué cómo ocurrió el caso, ¿no? Cuando entremos en la investigación....
+A: Le vamos a contar todo. Y, de hecho, ahora...
+A: Como es un caso con empleados bancarios involucrados, el Servicio de Supervisión Financiera incautó.... Usted no puede comprobarlo por su cuenta. Por eso nosotros ahora...
+A: Primero le estamos preguntando si usted, señor Han Dong-hyun, la abrió personalmente.
+A: Los detalles se los explicará el jefe del equipo cuando lo comuniquemos con él.
+B: ¿Qué van a investigar? Entonces explíquemelo.
+A: Sí. Le voy a explicar brevemente el caso. Al citar e interrogar a muchas personas, resultó que muchas habían recibido dinero...
+A: ...por vender sus cuentas. Y también había algunas a las que les abrieron una cuenta sin que lo supieran.
+A: Por eso investigamos si la vendieron o si se usurpó su identidad por una filtración de datos personales.
+A: Sí. Si se descubre que usted está involucrado, tendrá que reintegrar 49 millones de wones. Por eso estamos clasificando cuanto antes si es víctima o sospechoso...
+A: Estamos haciendo esa clasificación. Sí. Por eso, los empleados del sector financiero...
+A: Como también hay empleados bancarios involucrados, hacemos la investigación. Entonces, ¿podría por teléfono, con grabación...?
+A: ¿Podría declarar?
+B: Adelante. Yo no hice nada malo, así que claro.
+A: Sí, sí. Tiene que demostrar que es víctima.
+A: Entonces, como también tenemos procedimientos de investigación, haremos una investigación básica mediante una grabación individual. La grabación quedará como prueba, así que tiene que responder conforme a los hechos...
+A: Eso ayudará a demostrar que es víctima. Durante la grabación puede contestar brevemente sí o no. Vamos a empezar ahora.
+A: Soy la investigadora Kim Hyeon-a del Equipo 1 de Investigación de Delitos Económicos de la Policía Metropolitana de Seúl. ¿Su nombre es Han Dong-hyun?
+A: ¿Conoce a Lee, un hombre de 42 años de Busan?. ¿Abrió una cuenta en Nonghyup el 7 de enero de este año en Estados Unidos?.
+B: No.
+A: ¿Y el 16 de junio de ese mismo año abrió una cuenta de Hana Bank en la sucursal...?
+B: No.
+A: Entonces, como las cuentas de Nonghyup y Hana Bank encontradas se usaron ilegalmente, se procederá a cerrarlas, independientemente de su voluntad. ¿Entiende?
+B: ¿Qué es lo que van a cerrar?
+A: Las cuentas. Vamos a bloquear los pagos.
+B: Sí.
+A: Sí, sí. Entonces, aparte de las cuentas encontradas, dígame únicamente los nombres de los bancos donde usted abrió personalmente cuentas que usa y que necesitan protección.
+A: Shinhan Bank, ¿verdad? Sí. ¿Suele usar banca por Internet u OTP para sus operaciones bancarias?
+B: Lo uso de vez en cuando.
+B: De vez en cuando, no muy seguido.
+A: ¿Y suele cuidar bien su certificado digital y su tarjeta de seguridad?
+B: Claro, los cuido bien.
+A: Sí. Si después encontramos cuentas o tarjetas en otros bancos distintos del que nos indicó, ¿podemos considerarlas ilegales y congelarlas?
+B: Sí.
+A: Sí. Además, de acuerdo con el principio de operaciones financieras con nombre real, a partir de ahora el Servicio de Supervisión Financiera...
+A: ...va a cotejar una por una las cuentas encontradas con las de los bancos que usted indicó.
+A: Si durante la consulta se encuentran registros de lavado de dinero por parte de..., o importes directamente relacionados con este caso, esa cuenta se congelará automáticamente. ¿Entiende?
+B: Sí.
+A: Sí. ¿Puede anotar?
+A: Eh...
+B: Sí, dígame.
+A: Sí. El número de caso es 2015...
+B: Sí.
+A: ...guion 0730.
+B: Sí.
+A: El nombre del caso es «Fraude financiero».
+B: Sí.
+A: Lo voy a comunicar directamente por teléfono con el jefe del equipo encargado de este caso. Cuando hable con él, dígale el número y el nombre del caso.
+B: ¿2015-0730, caso financiero?
+A: Sí, caso de fraude financiero.
+B: Sí.
+A: Sí. Y solo tiene que decir, como ahora, que es una víctima inocente. Entonces el jefe del equipo...
+A: ...le explicará el procedimiento de denuncia y lo ayudará a que se lo clasifique como víctima y no sufra perjuicios.
+B: Sí.
+A: Sí. No cuelgue y espere un momento, por favor.
+A: ¿Hola? Sí, quedó comunicada la llamada.
+B: Dijeron que me pasaban con el jefe del equipo. ¿Es usted...?
+A: Así es. Sí, sí.
+B: Kim Hyeon-a, de la Policía Metropolitana de Seúl...
+A: Es la Unidad de Investigaciones Cibernéticas. Sí. ¿La investigadora Kim Hyeon-a le pasó la llamada?
+B: Sí, sí.
+A: Lo comunicó... Primero, ¿tiene un número de caso? ¿Por qué caso le pasaron la llamada?
+B: 20... 2015-0730... 2. Dice que es un caso de fraude financiero.
+A: Sí, es eso. Es un caso de fraude financiero.... ¿0730, verdad? ¿Su nombre es Han Dong-hyun?
+A: Los primeros dígitos del número de identificación son esos, ¿verdad? ¿Esta dirección es la actual o una anterior?.
+B: Es la actual.
+A: Su dirección actual. Señor, primero me voy a identificar. Soy del Equipo 2 de Investigación de Delitos Económicos de la Unidad de Investigaciones Cibernéticas. Soy Lee Seo-hyeon, el jefe del equipo a cargo. Mi rango es inspector.
+A: Sí, sí. ¿Le explicaron de qué trata el caso?
+B: No lo entendí en detalle, pero parece que dicen que se creó una cuenta a mi nombre y hubo personas perjudicadas, algo de cuentas de prestanombres.
+A: ¿Ah, sí? Entonces, ¿hay algo que no haya entendido o que quiera preguntar?
+B: Dice que abrieron una cuenta a mi nombre y que a través de esa cuenta de prestanombres hubo personas perjudicadas...
+A: Sí.
+B: Yo no soy una víctima...
+A: Creo que nuestra investigadora se lo explicó mal. Si ya supiéramos que es víctima, no tendríamos por qué llamarlo. Lo investigaríamos nosotros, ¿verdad?
+A: Sí. Lo llamamos para determinar si es víctima o sospechoso.
+A: Ahora no está determinado si es víctima o sospechoso; tampoco nosotros sabemos exactamente la situación. Por eso, de momento lo estamos interrogando como testigo de la investigación y sospechoso.
+A: Si es realmente inocente y víctima de una usurpación de identidad, tiene que explicárnoslo conforme a los hechos. Tiene que demostrarlo.
+A: Si hay algo más que quiera preguntar o no entienda, dígamelo.
+B: ¿Cuándo ocurrió el fraude financiero? Es la primera vez que lo oigo. ¿Cuántas víctimas hay en total?
+A: Unas trescientas, hasta ahora.
+B: ¿Cuánto perdieron esas trescientas personas?
+B: ¿Cuánto es el importe total de los daños?
+A: Decenas de miles de millones de wones. La cifra exacta la conocen nuestros superiores.
+A: Por eso estamos investigando de esta manera.
+B: ¿Cuánto perdí yo? ¿Cuánto dinero salió de mi cuenta?
+A: Yo no soy del Servicio de Supervisión Financiera. No trabajo en el sector financiero, así que no conozco esos detalles. Yo soy policía, señor.
+B: Sí, como dijo que era el jefe del equipo...
+A: No.... El hecho de haber encontrado una cuenta, ya sea su cuenta de prestanombres o la cuenta que usa actualmente...
+A: ...no me autoriza a rastrearla ni consultarla libremente. Por eso le pedimos colaboración al Servicio de Supervisión Financiera y hacemos una investigación conjunta.
+A: Sí. Como usted sabe, ya le explicó el sargento Lee, ¿no? Hay empleados de bancos, emisoras de tarjetas y aseguradoras involucrados.
+A: Por eso ahora no podemos confiar en ellos y pedimos la colaboración del Servicio de Supervisión Financiera. ¿Entiende?
+B: Sí, sí.
+A: Sí. Entonces, esas dudas, dentro de un momento...
+A: Cuando el Servicio de Supervisión Financiera haga el rastreo individual de las cuentas y estén los resultados, sabremos cuánto dinero perdió usted o si usted directamente...
+A: ...estuvo implicado y se determina que todo ese dinero obtenido era ilegal....
+A: ...esas cuentas se congelarán. ¿Se lo explicó el sargento? Sí, sí. ¿Hay algo más que no entienda?
+B: No. Entonces, ¿qué tengo que hacer ahora?
+A: Le voy a explicar otra vez brevemente cómo va a ser la investigación y de qué trata este caso.
+A: Sí. Este caso es un fraude financiero organizado en torno a....
+A: Ese hombre no se limitaba a comerciar cuentas de prestanombres; administraba sitios ilegales y utilizaba muchas de esas cuentas para....
+A: Es decir, sale mucho en los medios, ¿verdad? Habrá oído hablar del vishing y las estafas de préstamos. Sí, entonces...
+A: Si se descubre una relación directa con esa persona, tendrá que comparecer personalmente para declarar. ¿Entiende?
+A: Sí. Le voy a preguntar otra vez. Es de Busan, un hombre de 42 años. ¿No conoce en absoluto a Lee Su-hyeok?
+B: No lo conozco.
+A: ¿Hola?
+B: Sí, no lo conozco. Esto...
+A: ¿Hay algo que le resulte incómodo, señor?
+B: No, no hay nada incómodo.
+A: ¿Está dentro de la oficina ahora?
+B: Sí, en la oficina.
+A: ¿Puede hablar bien por teléfono?
+B: No, salí un momento al pasillo.
+A: Entendido. Al hacer esta investigación, bueno...
+A: Hubo algunas personas que empezaron declarando como testigos de la investigación, como usted, y terminaron clasificadas como sospechosas.
+A: Por dificultades económicas, algunas vendieron sus cuentas a cambio de 800.000 o 900.000 wones por cuenta.
+B: Sí.
+A: Por supuesto, no estoy afirmando con esto que usted, señor Han Dong-hyun, lo haya hecho. De todos modos, en el lugar de los hechos...
+A: ...se encontraron dos cuentas a su nombre real. Por eso se lo digo. ¿Entiende?
+B: Sí, pero yo no abrí esas cuentas y dicen que las abrieron. Entonces, ¿no soy evidentemente una víctima?
+A: Entonces pongámonos en el lugar del otro. Usted es policía y yo estoy declarando como usted ahora.
+A: Encontraron dos cuentas a mi nombre, a mi nombre real. Usted hizo la detención, ¿verdad?
+A: Las encontraron en el lugar de la detención. En ellas se ingresaron y retiraron ilegalmente 22 millones y 27 millones de wones. Entonces me llama y me pregunta. Si yo simplemente digo «no fui yo», ¿puede creerme sin más y colgar?
+A: ¿Puede creer sin más que soy una víctima...?
+A: ...solo porque yo lo digo? Encontraron pruebas, ¿verdad?
+B: Sí.
+A: Por supuesto que no. Yo tampoco afirmé que usted sea o no sea víctima, ¿no? ¿Verdad?
+B: Sí, sí.
+A: En cualquier caso, si es víctima, como dice, solo tiene que dejar claramente demostrado que lo es.
+A: ¿Qué hace falta para demostrarlo? Tiene que haber pruebas para que quede claro que usted es víctima, ¿verdad?
+A: Sí. Tiene que haber pruebas de su inocencia para que, si después llega a juicio, el juez también pueda determinar que usted es una víctima, ¿verdad?
+A: Sí. Por eso lo llamamos, para llevar adelante ese proceso. Si puede, venga a la jefatura y, si no puede...
+A: Como hay personas que están trabajando y otras que están en otras provincias, en una reunión se decidió que también se podía proceder mediante esta grabación. Eso fue lo que le explicó la investigadora.
+A: ¿Entiende? Entiendo. Sí. Entonces, como dijo antes, ¿usted sostiene que es una víctima?
+B: Por supuesto que soy una víctima.
+A: Claro, usted dice que evidentemente es víctima, pero...
+A: Si de verdad es víctima, como afirma, las cuentas que encontramos, es decir, esas dos cuentas de prestanombres...
+A: ...ya son un problema, pero además es muy probable que en adelante sufra otros perjuicios económicos, por segunda o tercera vez.
+B: Sí.
+A: ¿Me oye?
+B: Se oye bien.
+A: Sí. Primero le voy a explicar eso, los perjuicios por segunda o tercera vez. Usted, antes...
+A: Como sigue afirmando que es víctima, es una situación en la que podría verse afectado, así que escuche con atención. Si hay algo que no entiende o quiere saber, pregunte como antes.
+A: Sí, sí. Primero, cuando detuvimos a Lee, en el lugar había más de cinco mil dispositivos OTP duplicados en total. ¿Sabe qué son?
+A: Sí. Y también se encontraron muchas tarjetas de seguridad y de crédito, certificados digitales, memorias USB y teléfonos clonados.
+A: Sí. Como usted sabe, señor Han Dong-hyun, también incautamos esas cuentas de prestanombres.
+A: Durante la investigación, empleados de bancos, emisoras de tarjetas y aseguradoras que actuaban en complicidad con Lee Su-hyeok...
+A: Todos estaban involucrados; incluso hay policías en actividad implicados, ¿no? Entonces...
+B: Disculpe, entonces Lee no es el único que tiene un problema. No es él solo el delincuente. Todos los implicados están en problemas, ¿no?
+A: ¿Qué quiere decir? ¿Puede explicarse con precisión?
+B: Dijo que estaban implicados aseguradoras, entidades financieras y hasta policías relacionados con Lee.
+A: Sí, sí, sí.
+B: No se puede tratar por separado.
+A: Así es. Por eso no podemos hacer una investigación pública y tenemos que investigar en profundidad. Porque, si fueran solo ciudadanos comunes... Dígame.
+B: No, no. Sí, sí.
+A: ¿Tiene a alguien al lado ahora?.
+B: No, estoy solo. Sigo en el pasillo. Me piden que vuelva a entrar. Salí un momento de una reunión y me dicen que vuelva...
+A: Entendido. Por eso la investigación nos resulta tan difícil.
+A: Si solo hubiera ciudadanos comunes involucrados, sería mucho más sencillo. Podríamos pedir colaboración a policías locales de todo el país o a los bancos y hacer una investigación conjunta. Nos sería más fácil, ¿verdad?
+B: Claro.
+A: Sí, pero ahora, como usted sabe, no solo están involucrados empleados de bancos, emisoras de tarjetas y aseguradoras, sino también policías. Por eso no podemos hacer una investigación conjunta con ellos.
+A: Sí. Con los empleados de la propia Unidad de Investigaciones Cibernéticas ocurre lo mismo. Están involucrados, así que este caso lo lleva de forma independiente nuestro equipo de investigación de delitos económicos.
+B: Sí.
+A: Sí. Además, nos falta personal, pero...
+A: Como es un asunto del sector financiero, lo único en lo que podemos confiar es en el Servicio de Supervisión Financiera. Lo mismo le pasa a usted.
+A: Por eso estamos trabajando conjuntamente con el Servicio de Supervisión Financiera. Lo que tiene que tener bien claro es que, de ahora en adelante, solo puede confiar en el Servicio de Supervisión Financiera.
+B: En el sector financiero...
+A: Usted sabe qué es el Servicio de Supervisión Financiera, ¿no? Es el organismo que supervisa todos los bancos, ¿verdad?
+A: Sí. Por eso les pedimos colaboración. Al investigar, como usted sabe...
+A: Estas personas no se limitan a usurpar identidades. Por eso ahora voy a explicarle lo de los perjuicios económicos por segunda o tercera vez.
+A: Primero usan las identidades de los testigos de la investigación y las cuentas y tarjetas de seguridad bancarias que utilizaban...
+A: Y duplican ilegalmente hasta las tarjetas de crédito. Se usan mucho para acceder a ahorros, depósitos, seguros y demás que hay en esas cuentas.
+B: Sí, sí.
+A: ¿Entiende?
+B: Sí.
+A: Sí, sí. Si miramos las tarjetas de crédito, están los préstamos con tarjeta y los adelantos de efectivo. Es decir, de antemano....
+A: Antes de que esos testigos o víctimas lo descubran, sacan de antemano muchos préstamos con tarjeta y adelantos de efectivo. Y los transfieren a cuentas de prestanombres.
+A: Es decir, los titulares no lo saben, porque hay muchos empleados financieros en actividad involucrados, ¿no? Entonces...
+A: Si los empleados bancarios que trabajan allí borran esos ingresos y retiros, claro que no se enteran. Después, cuando llega la fecha de devolución...
+A: Por ejemplo, le llega a su casa un estado de cuenta que dice «devuelva el dinero tal día de tal mes». Recién entonces lo descubren.
+A: Pero ya es tarde, ¿verdad? Por eso hacemos esto. Y si terminara solo en eso no habría más, pero lo importante...
+A: También estas personas, a los ciudadanos comunes....
+A: ...usan sus identidades para sacar préstamos ilegales en el sector financiero no regulado, y eso es lo que le dije antes que llegó a 10.000 millones de wones.
+A: Es decir, los empleados bancarios ahora...
+A: Son personas que lavan decenas de miles de millones de wones. Naturalmente, ni se fijan en un sueldo mensual. Tienen capacidad de sobra para sacar datos de ciudadanos comunes y usar cuentas de prestanombres, cancelar seguros o sacar adelantos de efectivo y préstamos con tarjeta...
+A: ...y operar con depósitos y ahorros. Tienen capacidad de sobra, porque trabajan precisamente allí, ¿verdad?
+A: Sí, por eso yo...
+B: Hay que detener pronto a esas personas.
+A: Por supuesto. Sospechamos de esas personas, pero ellas manejan los ingresos y retiros. Nosotros somos policías, como usted sabe.
+A: No podemos intervenir libremente en el banco. Del mismo modo, ¿ellos podrían intervenir como quisieran en asuntos de la policía? No, ¿verdad? Es la misma situación.
+A: Por eso, aunque sospechamos de ellos, no tenemos pruebas concretas y no podemos detenerlos para interrogarlos personalmente.
+B: ¿No dijo que lo habían detenido? A través de él, a los implicados....
+A: ¿Cree que nos lo van a decir? ¿Que nos van a contar todo? Solo entre los subordinados de ese hombre ya hay...
+A: Sí, hablo de los delincuentes que actuaron en complicidad con él. No son uno o dos. ¿Cree que Lee Su-hyeok nos va a contar todo?
+A: Como no habla, investigamos así. ¿No es cierto, señor?
+B: Pero si detuvieron a ese Lee, ¿no tienen las cuentas que usaba y cosas así?
+A: Precisamente esas cuentas las encontramos en el lugar de la detención, ¿no?.
+A: Hace un momento le expliqué lo de las cinco mil. Dispositivos OTP, tarjetas de seguridad, tarjetas de crédito, certificados digitales, teléfonos clonados...
+A: Consultamos los movimientos y rastreamos esas cuentas de prestanombres, y así apareció su nombre, ¿no?
+A: Por eso, en realidad, si parto de creer que usted es víctima, Lee Su-hyeok le usurpó la identidad, ¿no? Por poner un ejemplo, ¿verdad?.
+A: Pero, en los documentos, usted está implicado en una complicidad con Lee. Porque...
+A: ...en el lugar encontramos una cuenta a su nombre.
+A: Por eso tenemos que contactarlo, para saber si realmente cometió este delito en complicidad con esa persona o si usted directamente...
+A: ...sufrió una usurpación de identidad y por eso él tiene su cuenta. Lo llamamos para aclarar eso, ¿no?
+A: Sí. No se lo tome a mal. Se lo digo por lo que figura en los documentos. Ahora se sospecha de usted igual que de los empleados de bancos, emisoras de tarjetas y aseguradoras. Todos tienen la misma condición de sospechosos.
+A: La condición...
+A: ¿Entiende? Pero como usted sigue la conversación y coopera de forma activa y abierta, le expliqué con precisión el motivo y el contenido de todo esto.
+B: Sí, sí.
+A: ¿Entiende?
+A: Sí. Si hay algo más que no entienda, dígamelo.
+B: No. Tengo curiosidad, pero hay que encontrarlos rápido. Hay que detener a todos los implicados, ¿no?.
+A: Así es. Por eso, sobre esta parte nosotros...
+B: Voy a colaborar activamente con la investigación.
+A: Sí, basta con que coopere así. Y nosotros también, cuando llamamos o consultamos sobre esos testigos de la investigación, los ciudadanos comunes...
+A: ...los que trabajan normalmente, los empleados de prestamistas o los directores de bancos, podemos consultar todo eso, ¿no? ¿Verdad?
+A: Por eso, lo más importante para nosotros ahora es detener a quienes trabajan actualmente en bancos, emisoras de tarjetas y aseguradoras...
+A: Eso es lo más importante. Como sabe, solo si detenemos primero a estas personas podremos...
+A: ...evitar que los ciudadanos comunes sufran más perjuicios por segunda o tercera vez, ¿no? ¿Hola?
+B: Sí, sí, así es.

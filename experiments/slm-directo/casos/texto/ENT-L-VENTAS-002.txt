@@ -1,0 +1,23 @@
+A: sí hola
+B: hola buen día te hablo de fibrasur estamos terminando el tendido de fibra en tu zona y te quería ofrecer el servicio
+A: de de dónde sacaron mi número
+B: llamamos a los numeros fijos y celulares de la zona de cobertura si no querés que te llamemos te saco de lista
+A: no a ver contame primero
+B: son trescientos megas con la instalación sin cargo si contratás este mes qué tenés ahora
+A: tengo cable con internet anda más o menos a la noche se corta
+B: con la fibra eso no pasa porque no depende del cable coaxil para ver si tu cuadra ya tiene factibilidad me decís tu dirección
+A: aconquija al mil ochocientos
+B: qué altura exacta y entre qué calles
+A: mil ochocientos cuarenta entre perú y guillermina
+B: ahí sí llegamos es casa o departamento
+A: casa
+B: si querés te dejo la solicitud cargada para eso necesito tu nombre completo y tu dni
+A: martín aguirre el dni prefiero no darlo por teléfono
+B: te entiendo igual sin el dni no puedo cargar la solicitud porque la verificación de identidad es obligatoria
+A: bueno entonces no
+B: no hay problema podés entrar a la web poner la dirección y cargar los datos vos el precio es el mismo
+A: la promo sigue después de este mes
+B: hasta fin de mes seguro después no te lo puedo asegurar
+A: lo veo con mi señora y si nos interesa lo hacemos por la
+B: te mando mando el link de la promo por whatsapp a este número
+A: mandalo

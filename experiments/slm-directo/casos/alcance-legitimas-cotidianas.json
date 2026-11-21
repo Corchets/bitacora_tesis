@@ -1,0 +1,676 @@
+{
+ "_meta": {
+  "fecha": "2026-11-06",
+  "para": "#143, etapa 2: alcance de las legítimas nuevas de desarrollo (grupo legitimas_cotidianas), con la regla de alcance-desarrollo.json",
+  "regla": {
+   "inicia": "otra si OTRA hizo esta llamada (PROTEGIDA atiende u OTRA se presenta como quien llama, aunque devuelva un llamado o llame por un trámite previo); protegida si la hizo PROTEGIDA (OTRA atiende con el saludo de una empresa u organismo, o PROTEGIDA dice que llama o devuelve el llamado); no_se_sabe si el texto no alcanza.",
+   "numero": "agendado solo si el texto muestra que OTRA es un contacto que llama desde su teléfono de siempre (PROTEGIDA la reconoce y saluda por el nombre antes de que se presente, o dice que vio que era ella); si no, no_agendado.",
+   "alcance": "dentro si inicia = otra y numero = no_agendado; fuera si inicia = protegida o numero = agendado; dudoso si inicia = no_se_sabe."
+  },
+  "metodo": "Anotación a ciegas por un agente que leyó solo las 94 transcripciones con roles, renombradas llamada-001…094 y mezcladas (semilla 20261106): sin case_id, clase, referencia, prompts ni resultados. La regla se copió tal cual de alcance-desarrollo.json (rama exp/143-puntaje-token) antes de anotar. Un script armó el material y guardó la clave aparte; otro volvió a unir la anotación con los case_id y comprobó que el alcance siga la regla.",
+  "conteo": {
+   "dentro": 94
+  },
+  "advertencia": "Las 94 quedan dentro, como se escribieron: entrantes de un número que la persona no tiene agendado. Ninguna quedó fuera ni dudosa. El caso más flojo, según el anotador, es ENT-L-BANCO-005 (llamada-056): OTRA arranca con «le hablo de prevención de fraudes del banco», sin decir que llama, y PROTEGIDA contesta «Sí, ¿qué pasó?»."
+ },
+ "casos": {
+  "ENT-L-BANCO-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: buenas tardes te llamo del área de de prevención fraudes del banco me llamo veronica"
+  },
+  "ENT-L-BANCO-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buen día. Te llamo del banco, del sector de seguridad."
+  },
+  "ENT-L-BANCO-003": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, le habla Lorena, de prevención de fraudes del banco. | L7: OTRA: Ok. Lo llamo por una compra con su tarjeta de débito de ochenta y nueve dólares en una aerolínea, hace una hora."
+  },
+  "ENT-L-BANCO-004": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: hola | L6: OTRA: justamente por eso la llamo inició una una transferencia de un millón doscientos mil pesos a un cbu que no tenía agendado"
+  },
+  "ENT-L-BANCO-005": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buen día, le hablo de prevención de fraudes del banco. | L2: PROTEGIDA: Sí, ¿qué pasó?"
+  },
+  "ENT-L-BANCO-006": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, ¿quién habla? | L6: OTRA: Gracias. Te llamo porque hoy se vinculó tu app desde un celular nuevo. ¿Fuiste vos?"
+  },
+  "ENT-L-DELIVERY-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Antonella Ruiz? | L3: OTRA: Soy Hugo, repartidor del correo. Tengo un paquete para vos."
+  },
+  "ENT-L-DELIVERY-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: hola sí | L2: OTRA: buen día te habla lucas de envíosya"
+  },
+  "ENT-L-DELIVERY-003": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Abril? Soy Lucas, del correo. Tengo un paquete para Abril Gutiérrez."
+  },
+  "ENT-L-DELIVERY-004": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buenas tardes. Te habla Gabriela, de la sucursal centro del correo."
+  },
+  "ENT-L-DELIVERY-005": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola soy facundo el repartidor del pedido de la tienda online estoy saliendo para tu casa"
+  },
+  "ENT-L-DELIVERY-006": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Sí? Hola. | L4: OTRA: Te llamo para coordinar la entrega del placard que compraste. ¿Es en Rivadavia 980, tercero A?"
+  },
+  "ENT-L-ENCUESTA-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes, te habla Ana, de FibraSur. | L3: OTRA: Nada, todo bien. Ayer tuviste una visita técnica y te quería hacer una encuesta cortita, tres preguntas."
+  },
+  "ENT-L-ENCUESTA-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: hola quién habla | L2: OTRA: hola buenas tardes te habla bruno de la consultora opina norte estamos haciendo una encuesta sobre el transporte público en san miguel de tucumán dura cinco minutos me ayudás"
+  },
+  "ENT-L-ENCUESTA-003": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buen día, te habla Camila, de una consultora de investigación de mercado. ¿Joaquín?"
+  },
+  "ENT-L-ENCUESTA-004": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, hola. | L2: OTRA: Hola, buenas tardes. Te habla Gisela, de la obra social, del área de calidad."
+  },
+  "ENT-L-ENCUESTA-005": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buen día. Te llamo de la Municipalidad, de la Dirección de Higiene Urbana. Estamos haciendo una encuesta sobre la recolección de residuos."
+  },
+  "ENT-L-ENCUESTA-006": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: hola quién habla | L2: OTRA: hola buenas tardes te habla martina del banco del área de experiencia de clientes"
+  },
+  "ENT-L-MEDICO-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buen día. Te llamamos del Centro Médico del Parque. ¿Ignacio Quiroga?"
+  },
+  "ENT-L-MEDICO-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: sí hola | L2: OTRA: hola te hablo del consultorio de la doctora paz la odontóloga me llamo belén"
+  },
+  "ENT-L-MEDICO-003": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, te llamo del laboratorio Bioanálisis."
+  },
+  "ENT-L-MEDICO-004": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, sí. | L2: OTRA: Hola, buenas tardes. Te llamo de la veterinaria Patitas, me llamo Sol."
+  },
+  "ENT-L-SELECCION-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buenas tardes. ¿Hablo con Micaela Sosa? Te llamo de Mirador, una agencia de personal eventual."
+  },
+  "ENT-L-SELECCION-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola buen día hablo con nahuel giménez | L3: OTRA: te habla carolina de lapacho consultores somos una consultora de recursos humanos te llamo por tu postulación para analista contable semi señor"
+  },
+  "ENT-L-SELECCION-003": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L4: OTRA: Le habla Analía Ríos, de Recursos Humanos de Distribuidora Los Aromos. Lo llamo por su ingreso como chofer de reparto."
+  },
+  "ENT-L-SOPORTE-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola buen día te habla leonel de soporte técnico de fibrasur te llamo por el reclamo 3349 de falta de serbicio"
+  },
+  "ENT-L-SOPORTE-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: sí hola | L4: OTRA: seleste te llamo por la orden que abriste el martes el lavarropas que no centrifuga"
+  },
+  "ENT-L-SOPORTE-003": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Tobías? Te hablo de TecnoFix, el local de la calle Muñecas. Dejaste una notebook la semana pasada. | L7: OTRA: Te llamo por otra cosa. Probando la máquina vimos que el cargador recalienta y a veces corta."
+  },
+  "ENT-L-SOPORTE-004": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, ¿quién es? | L4: OTRA: Eugenia, te llamo por la instalación del split que compraste el sábado. ¿Me confirmás la dirección?"
+  },
+  "ENT-L-SOPORTE-005": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes. Te hablo de soporte de Factura Simple, por el ticket que abriste esta mañana. | L2: PROTEGIDA: Ah, sí. Gracias por llamar tan rápido."
+  },
+  "ENT-L-SOPORTE-006": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, hola. | L2: OTRA: Hola, buen día. Te habla Nicolás, de soporte de la compañía de celular, por el reclamo que hiciste porque el chip no te da señal."
+  },
+  "ENT-L-TRAMITE-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola buen día te habla fernando de la planta de revisión técnica de tafí viejo | L3: OTRA: te llamo para confirmar el turno viernes a las nueve para la revisión el vehículo es la patente af ciento dieciocho pr"
+  },
+  "ENT-L-TRAMITE-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, sí, ¿quién es? | L2: OTRA: Hola, buen día. Te hablo del Centro de Emisión de Licencias de la municipalidad. ¿Lourdes Ibarra?"
+  },
+  "ENT-L-VENTAS-001": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola buenas tardes lucía fernández te habla daiana de la compañía de celular la llamada queda grabada | L3: OTRA: nada malo te llamo por una promo para clientes tenés el plan de cinco gigas y te podemos pasar a quince por la misma cuota durante seis meses"
+  },
+  "ENT-L-VENTAS-002": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: sí hola | L2: OTRA: hola buen día te hablo de fibrasur estamos terminando el tendido de fibra en tu zona y te quería ofrecer el servicio"
+  },
+  "ENT-L-VENTAS-003": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola buenas tardes nombre es romina te llamo de la aseguradora del banco banco hablo con carla benítez"
+  },
+  "ENT-L-VENTAS-004": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, ¿quién habla? | L2: OTRA: Buen día, te hablo de la compañía de teléfono. ¿Estoy con el titular de la línea, Néstor Ibáñez?"
+  },
+  "ENT-L-VENTAS-005": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L2: PROTEGIDA: Sí, ¿quién es? | L3: OTRA: Te habla Micaela, de Telnor. Te llamo porque el viernes empezaste el formulario en la web para pasarte con nosotros manteniendo tu número."
+  },
+  "ENT-L-VENTAS-006": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, buenas. | L4: OTRA: Carolina, te llamo para ofrecerte el pack de deportes con cuarenta por ciento de descuento por tres meses. Entra todo el fútbol."
+  },
+  "ENT-L-VENTAS-007": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: hola matías te habla ezequiel de andes motors la concesionaria de avenida mate de luna | L3: OTRA: bien te llamo porque el fin de semana dejaste una consulta en la página por la pick-up mediana"
+  },
+  "ENT-L-VENTAS-008": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, hola. | L2: OTRA: Buenas tardes. Le habla Natalia, asesora de planes de ahorro de la concesionaria. ¿Con quién tengo el gusto?"
+  },
+  "ENT-L-VENTAS-009": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Emiliano? Soy Ezequiel, de Andes Motors. El sábado viniste con el hatchback para la tasación. | L3: OTRA: Bien, ¿vos? Te llamo porque ya tengo la tasación final. Para confirmar que estoy con el auto correcto, ¿la patente era AE 432 JK?"
+  },
+  "ENT-L-VENTAS-010": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L4: OTRA: Florencia, te llamo por la moto que reservaste el martes. Ya llegó de fábrica."
+  },
+  "ENT-L-VENTAS-011": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes, ¿Leandro Paz? Te habla Darío, de una agencia de usados, Usados del Jardín."
+  },
+  "ENT-L-VENTAS-012": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Sí? | L2: OTRA: Hola, buen día, te habla Brenda, de Andes Motors. ¿Hablo con Ramiro Juárez?"
+  },
+  "LEG-BA-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, ¿hablo con Gonzalo Ruiz? | L3: OTRA: Gonzalo, te llamo del área de prevención de fraudes de Banco Andino, mi nombre es Verónica. Antes que nada te aclaro: en esta llamada no te voy a pedir claves, códigos ni los números de tu tarjeta. ¿Podés hablar un momento?"
+  },
+  "LEG-BA-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buen día, ¿me comunico con Carla Benítez? | L3: OTRA: Carla, te llamo de Banco Andino, de seguridad. Registramos dos inicios de sesión en tu home banking desde un dispositivo nuevo esta madrugada y queríamos confirmar si fuiste vos."
+  },
+  "LEG-BA-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, ¿hablo con Juan Pablo Sosa? | L3: OTRA: Juan Pablo, te llamo de Banco Andino, de prevención de fraudes. Tenemos una compra en el exterior con tu tarjeta de débito, por ochenta y nueve dólares, en una aerolínea. Solo necesito que me digas si la reconocés o no."
+  },
+  "LEG-CC-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes, ¿hablo con Lucía Fernández? | L3: OTRA: Hola Lucía, mi nombre es Daiana, te llamo de Nubo Telecom, del área comercial. ¿Tenés un minutito?"
+  },
+  "LEG-CC-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buen día, ¿estoy hablando con el titular de la línea? | L3: OTRA: Te hablo de FibraSur, estamos terminando el tendido de fibra óptica en tu zona, en Yerba Buena, y queríamos contarte de los planes de lanzamiento..."
+  },
+  "LEG-CC-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿qué tal? ¿Hablo con Gonzalo? | L3: OTRA: Gonzalo, ¿cómo andás? Te habla Rodrigo de VisiónNorte, de atención a clientes. Te llamo porque tenés el pack básico y te quiero ofrecer el pack de deportes con un cuarenta por ciento de descuento por tres meses."
+  },
+  "LEG-CO-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Carla? | L3: OTRA: Hola, Carla, soy Martín, del Correo Federal. Tengo un paquete para vos, estoy a dos cuadras de tu casa. ¿Estás?"
+  },
+  "LEG-CO-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buen día, ¿hablo con Juan Pablo Sosa? | L3: OTRA: Juan Pablo, te llamo de EnvíosYa, estoy en la puerta de tu edificio en calle Laprida con un pedido para vos y no me atiende nadie en el portero eléctrico."
+  },
+  "LEG-CO-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Sofía? Soy Lucas, del correo. Estoy en la calle Córdoba pero no encuentro el dos mil trescientos ochenta. ¿Me das una referencia?"
+  },
+  "LEG-EN-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes, ¿hablo con Sofía Medina? | L3: OTRA: Sofía, te llamo de FibraSur. Ayer tuviste una visita técnica y queríamos hacerte una encuesta cortita, son tres preguntas, menos de un minuto. ¿Puede ser?"
+  },
+  "LEG-EN-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buenas tardes. Te llamo de la consultora Opina Norte. Estamos haciendo una encuesta sobre el transporte público en San Miguel de Tucumán. Es anónima y dura unos cinco minutos. ¿Me podés ayudar?"
+  },
+  "LEG-EN-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buen día, te llamo de una consultora de investigación de mercado, estamos haciendo una encuesta sobre hábitos de consumo en supermercados. ¿Tenés unos minutos?"
+  },
+  "LEG-ST-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buen día, ¿hablo con Sofía Medina? | L3: OTRA: Sofía, te llamo de FibraSur, soporte técnico, por el reclamo que hiciste ayer a la noche, el número tres tres cuatro nueve, por falta de servicio."
+  },
+  "LEG-ST-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, ¿hablo con Carla Benítez? | L3: OTRA: Carla, te llamo del service oficial de Lavatec, por la orden que abriste el martes por el lavarropas que no centrifuga."
+  },
+  "LEG-ST-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Matías? Te hablo de TecnoFix, el local de la calle Muñecas. Dejaste una notebook la semana pasada."
+  },
+  "LEG-TU-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, buen día, ¿hablo con Juan Pablo Sosa? | L3: OTRA: Juan Pablo, te llamamos del Centro Médico del Parque para confirmar tu turno con la doctora Gómez, de dermatología, el jueves doce a las diez y media."
+  },
+  "LEG-TU-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Lucía Fernández? | L3: OTRA: Hola Lucía, te hablo del consultorio de la doctora Paz, la odontóloga. Tenías turno mañana a las cinco, pero la doctora tuvo un imprevisto y no va a poder atender. ¿Te lo podemos pasar?"
+  },
+  "LEG-TU-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, ¿me comunico con Matías? | L3: OTRA: Matías, te llamo del laboratorio Bioanálisis Tucumán. Tenés turno para extracción mañana a las siete y media. ¿Lo confirmás?"
+  },
+  "LEG-VE-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Matías? | L3: OTRA: Matías, ¿cómo va? Soy Ezequiel, de Andes Motors, la concesionaria de avenida Mate de Luna. Te llamo porque el fin de semana dejaste una consulta en la página por la pick-up mediana."
+  },
+  "LEG-VE-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Buenas tardes, ¿con Sofía Medina? | L3: OTRA: Sofía, te habla Natalia, asesora de planes de ahorro de Andes Motors. ¿Estás pensando en cambiar el auto o comprarte uno cero kilómetro?"
+  },
+  "LEG-VE-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: OTRA: Hola, ¿Gonzalo? Soy Ezequiel, de Andes Motors. Viniste el sábado con el hatchback para la tasación, ¿te acordás? | L3: OTRA: Todo bien. Te llamo porque ya tengo la tasación final de tu auto. Con los kilómetros que tiene y el service al día, te lo tomamos en catorce millones doscientos."
+  },
+  "LEG2-BA-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Buenas tardes, te habla Verónica, del área de prevención de fraudes de Banco Andino. ¿Hablo con Gonzalo Ruiz?"
+  },
+  "LEG2-BA-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, hola. | L2: OTRA: Hola, buen día. Te llamo de Banco Andino, de seguridad, mi nombre es Pablo. ¿Me comunico con Carla Benítez?"
+  },
+  "LEG2-BA-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola, quién es? | L6: OTRA: Perfecto. Te llamo por una compra con tu tarjeta de débito, ochenta y nueve dólares en una aerolínea. ¿La hiciste vos?"
+  },
+  "LEG2-BA-05": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Buen día, te habla Silvina, de Banco Andino, de prevención de fraudes. ¿Me comunico con Diego Herrera?"
+  },
+  "LEG2-CC-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L6: OTRA: Te llamo porque tenés el plan de cinco gigas y este mes, por ser clienta, te podemos pasar a quince gigas por la misma cuota durante seis meses. Después queda al precio de lista, unos tres mil pesos más, y lo podés bajar cuando quieras."
+  },
+  "LEG2-CC-04": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Buen día, te habla Ezequiel, de Nubo Telecom. ¿Estoy hablando con el titular de la línea, Néstor Ibáñez?"
+  },
+  "LEG2-CC-05": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, sí. | L4: OTRA: Gonzalo, te habla Micaela, de Telnor. Te llamo porque el viernes completaste el formulario en la web para pasarte con nosotros manteniendo tu número."
+  },
+  "LEG2-CC-06": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, ¿qué tal? Te habla Rodrigo, de VisiónNorte, de atención a clientes. ¿Hablo con Sofía Medina?"
+  },
+  "LEG2-CO-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L4: OTRA: Hola, Carla, soy Martín, repartidor del Correo Federal. Tengo un paquete para vos. ¿Es en San Martín mil cuatrocientos cincuenta?"
+  },
+  "LEG2-CO-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, sí. | L2: OTRA: Buen día, te habla Lucas, de EnvíosYa. ¿Hablo con Juan Pablo Sosa?"
+  },
+  "LEG2-CO-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola, quién es? | L2: OTRA: Hola, soy Lucas, del correo. Tengo un paquete para Sofía Medina. ¿Sos vos?"
+  },
+  "LEG2-CO-06": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L4: OTRA: Eugenia, te llamo para coordinar la entrega del placard. ¿Es en Crisóstomo Álvarez seiscientos cuarenta, cuarto C?"
+  },
+  "LEG2-EN-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buenas tardes. Te habla Ana, de FibraSur. ¿Hablo con Sofía Medina?"
+  },
+  "LEG2-EN-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buen día, te habla Camila, de una consultora de investigación de mercado. ¿Hablo con Ramiro?"
+  },
+  "LEG2-EN-04": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, hola. | L2: OTRA: Hola, buenas tardes. Te habla Gisela, de la obra social Salud Norte, del área de calidad. ¿Hablo con Valeria Paz?"
+  },
+  "LEG2-EN-05": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buen día. Te llamo de la Municipalidad de San Miguel de Tucumán, de la Dirección de Higiene Urbana, mi nombre es Patricia. Estamos haciendo una encuesta sobre la recolección de residuos. ¿Tenés dos minutos?"
+  },
+  "LEG2-ST-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, hola. | L4: OTRA: Carla, te llamo por la orden que abriste el martes por el lavarropas que no centrifuga."
+  },
+  "LEG2-ST-03": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, ¿Matías? Te hablo de TecnoFix, el local de la calle Muñecas. Dejaste una notebook la semana pasada."
+  },
+  "LEG2-ST-04": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, ¿quién es? | L4: OTRA: Eugenia, te llamo por la instalación del split que compraste el sábado. ¿Me confirmás la dirección?"
+  },
+  "LEG2-ST-05": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buenas tardes, te habla Julieta, de soporte de Tiendita Online. Te llamo por el ticket que abriste porque no podías entrar a tu cuenta. ¿Hablo con Andrés Romero?"
+  },
+  "LEG2-TU-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buen día. Te llamamos del Centro Médico del Parque, mi nombre es Elena. ¿Hablo con Juan Pablo Sosa?"
+  },
+  "LEG2-TU-02": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Sí, hola. | L2: OTRA: Hola, te hablo del consultorio de la doctora Paz, la odontóloga, me llamo Belén. ¿Hablo con Lucía Fernández?"
+  },
+  "LEG2-TU-05": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, sí. | L2: OTRA: Hola, buenas tardes, te llamo de la veterinaria Patitas, me llamo Sol. ¿Hablo con Paula Ledesma?"
+  },
+  "LEG2-TU-06": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, buen día. Te hablo del Centro de Emisión de Licencias de la municipalidad, mi nombre es Javier. ¿Hablo con Florencia Ríos?"
+  },
+  "LEG2-VE-01": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L2: OTRA: Hola, ¿Matías? Te habla Ezequiel, de Andes Motors, la concesionaria de avenida Mate de Luna. Dejaste una consulta en la página por la pick-up mediana."
+  },
+  "LEG2-VE-04": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Hola? | L4: OTRA: Florencia, te llamo por la moto que reservaste el martes. Ya llegó de fábrica. Para hacer el patentamiento necesito confirmar unos datos."
+  },
+  "LEG2-VE-05": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: Hola, ¿quién habla? | L2: OTRA: Hola, buenas tardes. Te habla Darío, de Usados del Jardín. ¿Hablo con Leandro Paz?"
+  },
+  "LEG2-VE-06": {
+   "grupo": "legitimas_cotidianas",
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "alcance": "dentro",
+   "evidencia": "L1: PROTEGIDA: ¿Sí? | L2: OTRA: Hola, buen día, te habla Brenda, de Andes Motors. ¿Hablo con Ramiro Juárez?"
+  }
+ }
+}

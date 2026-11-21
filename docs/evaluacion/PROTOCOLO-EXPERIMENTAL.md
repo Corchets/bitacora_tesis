@@ -21,27 +21,23 @@ flowchart TD
     subgraph Preguntas["Preguntas de Investigación"]
         PI1["PI1: Detección incremental<br/>(¿Cuán bien distingue en prefijos?)"]
         PI2["PI2: Utilidad temporal<br/>(¿Con cuánto margen avisa?)"]
-        E1["E1: Impacto diagnóstico del ASR<br/>(¿Cuánto degrada la transcripción?)"]
         E2["E2: Explicación contextual<br/>(¿El motivo corresponde a la evidencia?)"]
     end
 
     subgraph Variables["Variables Medidas"]
         V1["Decisión binaria y riesgo por prefijo/conversación"]
         V2["Instantes T_A vs marcas humanas T_R y T_C"]
-        V3["Salida sobre texto manual vs ASR local"]
         V4["Motivo y cita textual emitida vs referencia humana"]
     end
 
     subgraph Metricas["Métricas (METRICAS.md)"]
         M1["Precision, Recall, F1, Tasa FA legítimas, Wilson 95%"]
         M2["Márgenes L_R, L_C, Preventive@δ(X)"]
-        M3["WER/CER, omisión de términos críticos, Δ L_R/L_C, RTF"]
         M4["Cita verificada en texto y correspondencia de maniobra"]
     end
 
     PI1 --> V1 --> M1
     PI2 --> V2 --> M2
-    E1 --> V3 --> M3
     E2 --> V4 --> M4
 ```
 
@@ -71,22 +67,11 @@ flowchart TD
   - Siguiendo los antecedentes de literatura primaria analizados en [SINTESIS-ESTADO-DEL-ARTE.md §2.4.1 y §7](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#7-qué-cambia-para-la-evaluación), este protocolo descarta las funciones de penalización abstractas tipo ERDE (Losada & Crestani 2016, [S003](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s003--losada-crestani-y-parapar-2016-2017-early-risk-detection-error-erde)) y las métricas de precocidad normalizada por duración total ($\tau / T$ de Mori et al. 2018, [S004](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s004--mori-mendiburu-dasgupta-y-lozano-2018-earliness-accuracy-trade-off-en-series-temporales)). En telefonía la duración total $T$ es desconocida durante la llamada y penalizar turnos iniciales inocuos carece de anclaje operativo.
   - Los márgenes físicos en segundos ($L_R, L_C$) y $\text{Preventive}@\delta$ constituyen las medidas directas de utilidad preventiva propuestas. Un aviso con $L_C > 0$ indica que la alerta llegó antes de que la víctima revelara el código o ejecutara la transferencia; $L_R > 0$ indica que advirtió antes de que el atacante formulara la exigencia explícita.
 
-### 1.3. E1 — Impacto diagnóstico del ASR local
+### 1.3. E1 — Impacto diagnóstico del ASR local: fuera
 
-- **Pregunta formal:** ¿Cuánto degrada el canal de reconocimiento automático de voz (ASR) el desempeño y los márgenes temporales de la detección?
-- **Variable medida:** La comparación pareada del comportamiento del mismo detector alimentado con dos entradas alternativas para la misma conversación:
-  1. Transcripción manual humana revisada (oráculo sin errores de reconocimiento).
-  2. Transcripción emitida por el pipeline de ASR local en streaming o por lotes.
-- **Métricas asociadas ([METRICAS.md §4](METRICAS.md#4-qué-se-mide)):**
-  - **Word Error Rate (WER) y Character Error Rate (CER):** Tasa de error léxico y de caracteres agregada por llamada.
-  - **Tasa de omisión / eliminación (*deletions*) de términos críticos:** Proporción de palabras clave del vocabulario de vishing (`código`, `token`, `clave`, `transferencia`, `banco`, `seguridad`) que fueron omitidas por el ASR respecto del texto de referencia.
-  - **Variación temporal de alerta ($\Delta T_A$):** Diferencia $T_A^{\text{ASR}} - T_A^{\text{manual}}$ en segundos.
-  - **Variación de márgenes ($\Delta L_R, \Delta L_C$) y $\text{Preventive}@\delta$:** Impacto en la precocidad efectiva atribuible puramente al canal acústico.
-  - **Variación de falsas alarmas:** Llamadas legítimas que no disparan alerta en texto manual pero alertan bajo ASR (o viceversa) debido a alucinaciones o sustituciones fonéticas.
-  - **Factor de tiempo real (RTF) y latencia:** $\text{RTF} = \text{tiempo\_cómputo} / \text{duración\_audio}$ y percentil 95 de latencia por actualización.
-- **Criterio de lectura:** 
-  - Siguiendo a Balagopalan et al. (2019, [S007](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s007--balagopalan-shkaruta-y-novikova-2019-asimetría-de-errores-de-asr)) y Zhou et al. (2022, [S008](../investigacion/SINTESIS-ESTADO-DEL-ARTE.md#s008--zhou-chong-wang-y-zeng-2022-deriva-semántica-por-errores-de-asr-en-slu)), el WER agregado es insuficiente para evaluar el reconocedor en seguridad: las eliminaciones de palabras clave provocan fallas severas o demoras en el clasificador posterior.
-  - E1 permite aislar las causas de fallo: si el detector rinde bien con texto manual y colapsa con ASR, el cuello de botella radica en la deriva semántica del transcriptor acústico; si rinde mal en ambos, la debilidad reside en la representación semántica o en la política de alerta.
+E1 no se mide desde el 2026-11-10 ([#54](https://github.com/Corchets/bitacora_tesis/issues/54); motivo en
+[PREGUNTAS-DE-INVESTIGACION.md](../investigacion/PREGUNTAS-DE-INVESTIGACION.md#e1--efecto-del-asr-fuera-de-la-evaluación)).
+El límite que deja está en el [§7.2](#72-amenazas-a-la-validez).
 
 ### 1.4. E2 — Explicabilidad contextual (objetivo secundario)
 
@@ -238,7 +223,7 @@ flowchart LR
 1. **Motores ASR candidatos ([D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)):**
    - `sherpa-zipformer`: `csukuangfj/sherpa-onnx-streaming-zipformer-es-kroko-2025-08-06` (streaming online con segmentación por endpoint de silencio y purga de lookahead).
    - `whisper`: `faster-whisper-base` cuantizado en int8 (no-streaming, segmentado por lotes mediante VAD integrado).
-   - `oraculo`: Transcripción manual limpia revisada (control pareado para la evaluación E1).
+   - `oraculo`: Transcripción manual limpia revisada. La comparación pareada con el ASR (E1) quedó fuera ([#54](https://github.com/Corchets/bitacora_tesis/issues/54)).
 2. **Detectores candidatos ([D09](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)):**
    - **Línea base de reglas:** Reglas de palabras clave del laboratorio de Ignacio aplicadas sobre la última línea cerrada; actúa como comparador propuesto para justificar si un modelo neuronal aporta valor frente a heurísticas léxicas simples.
    - **Escalera de Small Language Models (SLM) locales:** Inferencia local sobre Ollama (ver [`experiments/slm-directo/README.md §6`](../../experiments/slm-directo/README.md#6-escalera-de-modelos-y-gamas-de-celular)):
@@ -368,6 +353,7 @@ Debido a que la producción de grabaciones de voz estructuradas con dos actores 
   - *Fuga por guion o dialecto:* El uso de modismos exclusivamente rioplatenses o la reutilización de estructuras dramáticas puede inducir sobreajuste al estilo de redacción del equipo.
 - **Validez externa:**
   - *Desajuste entre PC y hardware móvil (R13):* Medir latencias y consumo de memoria en una computadora de escritorio con procesador x86/Apple Silicon proporciona cotas teóricas de viabilidad, pero no equivale a una ejecución en el SoC ARM de un teléfono Android bajo restricciones térmicas y de batería ([PREFACTIBILIDAD-TECNICA.md §1 y §3](../investigacion/PREFACTIBILIDAD-TECNICA.md#1-hardware-objetivo-y-entorno-de-referencia)).
+  - *Texto escrito en lugar de audio transcripto:* las métricas de detección salen de conversaciones escritas. El ASR se midió aparte, con voz real del equipo, contra el guion y con ruido de fondo ([PLAN-VOZ-REAL.md](../../experiments/asr-local/PLAN-VOZ-REAL.md)), pero el mismo detector no se pasó por las dos entradas: E1 quedó fuera ([#54](https://github.com/Corchets/bitacora_tesis/issues/54)).
   - *Canal de audio limpio vs red telefónica:* Las grabaciones del piloto en entorno VoIP controlado poseen mayor relación señal a ruido que una llamada celular real en vía pública con códecs de compresión restrictivos (AMR-WB).
 
 ---

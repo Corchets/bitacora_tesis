@@ -1,0 +1,49 @@
+A: ¿Hola?
+B: Hola, le habla Mary Johnson de BlueRiver Medical BlueRiver Medical. ¿Cómo está?
+A: Bien, gracias.
+B: Ah, qué bueno. ¿Hablo con Mary Johnson Mary Johnson?
+A: Sí.
+B: Hola, Mary Johnson. Vemos aquí que usted califica para obtener beneficios de Medicare mejorados entre marzo y junio. ¿Le interesa obtenerlos ahora?
+A: ¿Qué es lo que voy a obtener?
+B: Va a obtener sus beneficios de Medicare mejorados entre marzo y junio.
+A: Bueno. Bueno. Sí. Sí.
+B: Qué bueno. Entonces vemos aquí toda la información que necesitábamos. Su fecha de nacimiento es 12 de marzo de 1954. 12 de marzo de 1954. ¿Correcto?
+A: Sí.
+B: Bien. Y usted vive en Tulsa Tulsa Tulsa Tulsa.
+A: Sí, Tulsa. En Tulsa, con el código postal Tulsa.
+B: Bien, perfecto. Entonces le interesa obtener esto, ¿verdad?
+A: ¿Cómo dice?
+B: ¿Le interesa obtener este beneficio adicional?
+A: Sí, entonces.
+B: Y creo que usted está autorizado para tomar decisiones sobre su Medicare, ¿correcto?
+A: Sí, yo tomo todas mis decisiones.
+B: Perfecto. ¿Y tiene con usted su tarjeta de Medicare?
+A: No, no la tengo. Probablemente me estén enviando una tarjeta nueva.
+B: Bien.
+A: He estado usando mi número de Seguro Social.
+B: Ah, perfecto. Pero usted se sabe de memoria su número de Seguro Social, ¿verdad?
+A: Sí.
+B: Bien, perfecto. Está bien. Entonces ahora voy a transferir la llamada a un camionero camionero para que le informe sobre sus beneficios adicionales de Medicare. ¿De acuerdo?
+A: De acuerdo, gracias.
+B: Bien. Espere en la línea. Hola, le habla Mary Johnson. Soy de BlueRiver Medical BlueRiver Medical BlueRiver Medical. Le llamo por su consulta reciente y por cómo puede ahorrar en su Medicare. ¿Cómo está?
+A: Bien, gracias. ¿Y usted, cómo está hoy?
+B: Me alegra oír eso. Estoy bien, gracias por preguntar. Le comparto que ha habido cambios recientes en las tarifas y los planes en su zona. Durante esta inscripción abierta, usted podría recibir tarifas más bajas, cobertura adicional y ahorrar 89 dólares a $89 dólares en su plan. Lo que yo hago es conectarlo con un camionero camionero que puede ayudarle a revisar la posible tarifa más baja y la cobertura adicional, y a ver si califica para planes que ayuden con los copagos y deducibles que Medicare no cubre.
+A: Sí.
+B: ¿Tiene un plan Advantage o un plan complementario?
+A: No.
+B: Bien. ¿Y visita a algún camionero o tiene que quedarse dentro de una red?
+A: Tengo. Sí, tengo mi camionero camionero habitual al que voy.
+B: Tiene las partes A y B de Medicare, ¿correcto?
+A: Sí, sí, tengo Medicare.
+B: Y tiene 64 años o más, ¿correcto?
+A: Ah, sí. Ojalá no los tuviera.
+B: Gracias. Bien, perfecto. Por favor, deme el código postal de la zona donde está.
+A: La zona donde estoy. Tulsa, Tulsa. Sí. Tulsa. Sí.
+B: ¿Sabe el código postal de Tulsa, Tulsa?
+A: Bueno, mi código es Tulsa Tulsa.
+B: Bien, Tulsa Tulsa. Y para confirmar, usted no está buscando por ahora cobertura estatal de Medicaid, ¿correcto?
+A: No sé. Tengo algo, no sé qué es. ¿Qué tengo?
+B: ¿Es Medicaid o Medicare?
+A: Tengo Medicare. Medicare. Tengo Medicare. No, no estoy buscando nada. No estoy buscando nada. Si tiene algo para mí, lo tomo. Pero no he estado buscando nada.
+B: Bien, claro, no hay problema. Bueno, en este momento solo estamos compartiendo información y tengo una breve advertencia que debo leerle para obtener su consentimiento. Dice así: al aceptar continuar, usted da su consentimiento para que lo conecten con la empresa y su afiliada, y las autoriza a contactarlo con ofertas sobre sus servicios al número de teléfono proporcionado, usando tecnología automatizada, incluidos marcadores automáticos, mensajes pregrabados y mensajes de texto, incluso si su número de teléfono fijo o móvil está en alguna lista estatal, federal o corporativa de no llamar. No está obligado a dar su consentimiento aquí como condición del servicio y puede revocarlo en cualquier momento. Pueden aplicarse tarifas de mensajes y de datos. Si usted consiente en que lo conecten ahora o en que lo contacten después bajo estos términos, por favor diga: estoy de acuerdo. Perfecto. ¿Me puede dar su nombre y apellido para que podamos empezar a conectarlo con un camionero camionero?
+A: Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson. Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson Mary Johnson. Estas cosas no son Mary Johnson Mary Johnson.

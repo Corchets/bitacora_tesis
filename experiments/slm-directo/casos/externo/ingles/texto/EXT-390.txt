@@ -1,0 +1,19 @@
+A: Departamento de cancelaciones, ¿en qué lo puedo ayudar? Ah, sí, esta llamada es por el servicio de su computadora que acaba de vencer, por eso se le cobraron 400 dólares en su cuenta. Entonces, ¿quiere cancelarlo o renovarlo?
+B: Eh, no, quiero cancelarlo.
+A: Bueno, no hay problema. Si quiere cancelar el servicio y frenar el cargo, lo que tiene que hacer es seguir el proceso corporativo, así lo ayudo a cancelar el servicio y le podemos devolver el dinero. Antes que nada, para cancelar tiene que llenar el formulario de cancelación en su computadora. Entonces, ¿tiene la computadora prendida ahora? ¿Está frente a la computadora?
+B: Sí, ¿a qué sitio entro?
+A: Bueno, ¿y me puede confirmar qué ve ahora en la computadora? ¿Qué ve?
+B: Bueno, veo mi escritorio.
+A: Haga una cosa, señor: ¿puede mirar el teclado? En el teclado, del lado izquierdo, en la esquina de abajo, ¿ve la tecla Ctrl?
+B: Bueno, obvio.
+A: ¿Y al lado de la tecla Ctrl qué tecla ve?
+B: ¿Estamos jugando a algo? ¿Qué necesita?
+A: Ve la tecla Ctrl, ¿no? En el teclado, del lado izquierdo. Y después, a la derecha de la tecla Ctrl, ¿me confirma qué tecla ve?
+B: Veo la tecla Windows. Ahora me toca a mí: ¿qué tecla ve usted al lado de la tecla Windows?
+A: Tiene que apretar la tecla Windows y la letra R, R de Romeo. Apriete la tecla Windows y la letra R al mismo tiempo. ¿Y después qué ve?
+B: Me está cambiando el juego. Bueno, pensé que íbamos a jugar. Usted tenía que decir «¿Ve la tecla Tab?», y yo decía que sí. Usted tenía que decir «¿La ve? ¿Qué hay al lado de Tab?», y yo iba a decir Q, y después usted iba a decir W, E, y después...
+A: Bueno, volvamos a lo nuestro. Tiene abierta la ventana Ejecutar, ¿no?
+B: Sí, tengo abierta la ventana Ejecutar.
+A: Y puede escribir en la ventana Ejecutar. Escriba www.techsupport.us.
+B: ¿www.techsupport.us?
+A: Sí, correcto. T-E-C-H-S-U-P-P-O-R-T punto U-S. Después apriete Enter.

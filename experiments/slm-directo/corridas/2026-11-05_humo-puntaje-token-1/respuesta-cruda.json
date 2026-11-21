@@ -1,0 +1,241 @@
+{
+  "pedido": {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nMarcá \"alerta_sugerida\": true solo si, en lo dicho hasta ahora, alguien pide, induce o presiona a la otra persona para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- códigos de un solo uso (SMS, token, código de verificación o de activación);\n- claves, PIN, contraseñas o usuarios;\n- datos personales (DNI, CUIL, domicilio, foto de un documento);\n- transferencias, pagos o entregas de dinero o efectivo;\n- instalar programas de acceso remoto o compartir la pantalla;\n- acciones de seguridad guiadas (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nNo alcanza con mencionar esas cosas, aconsejar no compartirlas, negarse a hacerlas o hablar de ellas sin pedirlas.\n\nCon lo disponible hasta ahora, ¿corresponde marcar la alerta según estas reglas? Respondé solo SÍ o NO."
+      },
+      {
+        "role": "user",
+        "content": "Transcripción disponible hasta ahora; la llamada sigue. Cada línea indica quién habla con A o B. A es quien habló primero; las letras no indican quién llamó ni quién es sospechoso.\n\n1. A: Te llamo de soporte por la activación de tu cuenta de WhatsApp.\n2. B: Me acaba de llegar un SMS. No pedí activar nada.\n3. A: Para cancelar esa activación tenemos que resolverlo ahora.\n4. A: Decime el código de activación que recibiste por SMS.\n\nEvaluá la llamada con lo disponible hasta la línea 4."
+      }
+    ],
+    "options": {
+      "temperature": 0.0,
+      "seed": 42,
+      "num_ctx": 4096,
+      "num_predict": 1
+    },
+    "stream": false,
+    "think": false,
+    "logprobs": true,
+    "top_logprobs": 20
+  },
+  "respuesta": {
+    "model": "gemma4:e2b-it-q4_K_M",
+    "created_at": "2026-11-06T01:43:35.533908288Z",
+    "message": {
+      "role": "assistant",
+      "content": "al"
+    },
+    "done": true,
+    "done_reason": "length",
+    "logprobs": [
+      {
+        "token": "al",
+        "logprob": -0.001262806123122573,
+        "bytes": [
+          97,
+          108
+        ],
+        "top_logprobs": [
+          {
+            "token": "al",
+            "logprob": -0.001262806123122573,
+            "bytes": [
+              97,
+              108
+            ]
+          },
+          {
+            "token": "alert",
+            "logprob": -6.6823530197143555,
+            "bytes": [
+              97,
+              108,
+              101,
+              114,
+              116
+            ]
+          },
+          {
+            "token": "sí",
+            "logprob": -11.943950653076172,
+            "bytes": [
+              115,
+              195,
+              173
+            ]
+          },
+          {
+            "token": "S",
+            "logprob": -13.439399719238281,
+            "bytes": [
+              83
+            ]
+          },
+          {
+            "token": "aler",
+            "logprob": -15.126131057739258,
+            "bytes": [
+              97,
+              108,
+              101,
+              114
+            ]
+          },
+          {
+            "token": "ALERT",
+            "logprob": -15.175883293151855,
+            "bytes": [
+              65,
+              76,
+              69,
+              82,
+              84
+            ]
+          },
+          {
+            "token": "AL",
+            "logprob": -15.182561874389648,
+            "bytes": [
+              65,
+              76
+            ]
+          },
+          {
+            "token": "s",
+            "logprob": -15.39162826538086,
+            "bytes": [
+              115
+            ]
+          },
+          {
+            "token": "als",
+            "logprob": -15.616379737854004,
+            "bytes": [
+              97,
+              108,
+              115
+            ]
+          },
+          {
+            "token": "alur",
+            "logprob": -16.600933074951172,
+            "bytes": [
+              97,
+              108,
+              117,
+              114
+            ]
+          },
+          {
+            "token": "알",
+            "logprob": -16.742773056030273,
+            "bytes": [
+              236,
+              149,
+              140
+            ]
+          },
+          {
+            "token": "Al",
+            "logprob": -16.7647647857666,
+            "bytes": [
+              65,
+              108
+            ]
+          },
+          {
+            "token": "alarm",
+            "logprob": -16.869449615478516,
+            "bytes": [
+              97,
+              108,
+              97,
+              114,
+              109
+            ]
+          },
+          {
+            "token": "SI",
+            "logprob": -17.357181549072266,
+            "bytes": [
+              83,
+              73
+            ]
+          },
+          {
+            "token": " alerta",
+            "logprob": -17.5107421875,
+            "bytes": [
+              32,
+              97,
+              108,
+              101,
+              114,
+              116,
+              97
+            ]
+          },
+          {
+            "token": "mar",
+            "logprob": -17.62958526611328,
+            "bytes": [
+              109,
+              97,
+              114
+            ]
+          },
+          {
+            "token": "alt",
+            "logprob": -17.807863235473633,
+            "bytes": [
+              97,
+              108,
+              116
+            ]
+          },
+          {
+            "token": "alin",
+            "logprob": -18.12805938720703,
+            "bytes": [
+              97,
+              108,
+              105,
+              110
+            ]
+          },
+          {
+            "token": "alsa",
+            "logprob": -18.417987823486328,
+            "bytes": [
+              97,
+              108,
+              115,
+              97
+            ]
+          },
+          {
+            "token": "true",
+            "logprob": -18.895584106445312,
+            "bytes": [
+              116,
+              114,
+              117,
+              101
+            ]
+          }
+        ]
+      }
+    ],
+    "total_duration": 160240138730,
+    "load_duration": 112670094420,
+    "prompt_eval_count": 410,
+    "prompt_eval_cached_count": 0,
+    "prompt_eval_duration": 47555617000,
+    "eval_count": 1,
+    "eval_duration": 1000
+  }
+}

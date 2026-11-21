@@ -1,0 +1,60 @@
+A: No quiero renovarlo.
+B: Bueno, dígame su número de pedido, señor.
+A: Hay un número de factura y el número de cliente. ¿Cuál necesita? Y después hay otro número de identificación más.
+B: El número de factura, señor.
+A: Norton 220744198CX.
+B: Bueno, espere un momento. Tengo que revisar mis registros. Deme un momento.
+A: Sí, ¿hola?
+B: Sí, gracias por esperar, señor. Su número de factura es totalmente correcto. Tiene un formulario de cancelación en línea en su computadora. ¿Está frente a su computadora ahora, señor?
+A: Sí, por eso estaba leyendo eso.
+B: Bueno, ¿qué navegador usa? ¿Tiene Google Chrome o Microsoft Edge?
+A: Sí, Chrome.
+B: Abra Google Chrome, por favor.
+A: Listo.
+B: Ahora, ¿ve el cuadro de búsqueda bien arriba, a la izquierda? Escriba ahí.
+A: Bueno.
+B: Después escriba «T» de Tiger.
+A: «T» de Tiger, ya está.
+B: Es la letra «T», «T» de Tiger.
+A: «T» de Tiger, listo.
+B: Después «A» de Apple.
+A: Listo.
+B: Después «M» de Michael.
+A: Bueno.
+B: Después «V» de Victoria.
+A: Listo.
+B: Después «I» de Ice cream.
+A: Listo.
+B: Después «E» de Edward.
+A: Bueno.
+B: Después «W» como en William.
+A: Listo.
+B: Después «E» de Edward.
+A: Bueno.
+B: Después «R» de Roger, después ponga punto «com», C-O-M.
+A: Ah, usted dijo... llegué hasta «Team» y después estaba hablando rápido. Escribo despacio.
+B: Bueno, vamos de nuevo. «T» de Tiger.
+A: Ya está.
+B: «E» de Edward.
+A: Bueno.
+B: «A» de Apple.
+A: Listo.
+B: «M» de Michael.
+A: Bueno.
+B: «V» de Victoria.
+A: Ya está.
+B: «I» de Ice cream.
+A: Listo.
+B: «E» de Edward.
+A: Bueno.
+B: «W» como en William.
+A: Ya está.
+B: «E» de Edward.
+A: Bueno.
+B: «R» de Roger.
+A: Ya está.
+B: Después punto «com».
+A: Ya está. TeamViewer.com, ¿no?
+B: Sí, apriete la tecla Enter del teclado, señor.
+A: Listo. ¿Es algo para descargar?
+B: Sí, ¿ve ese software de conexión remota? ¿Lo ve?

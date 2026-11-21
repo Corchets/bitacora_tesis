@@ -1,0 +1,8 @@
+A: Hola, ¿Matías? Te hablo de TecnoFix, el local de la calle Muñecas. Dejaste una notebook la semana pasada.
+B: Sí, sí, ¿ya está?
+A: Sí, ya está lista. Le cambiamos el disco por uno sólido, como habíamos quedado, y le reinstalamos el sistema. Tus archivos los pasamos a la carpeta de documentos.
+B: Genial. ¿Cuánto quedó al final?
+A: Quedó en lo presupuestado, ochenta y cinco mil. Pagás cuando la retirás, en efectivo, débito o transferencia acá en el mostrador.
+B: Dale, paso mañana a la tarde.
+A: Perfecto, traete el comprobante que te dimos. Abrimos hasta las ocho. Chau, Matías.
+B: Gracias, chau.

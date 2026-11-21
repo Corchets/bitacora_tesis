@@ -1,0 +1,36 @@
+A: hola quién habla
+B: hola buenas tardes te habla bruno de la consultora opina norte estamos haciendo una encuesta sobre el transporte público en san miguel de tucumán dura cinco minutos me ayudás
+A: es para algún partido político
+B: no la encarga la universidad para un estudio de movilidad anónima
+A: bueno si es cortita
+B: primero unos datos para clasificar en rango de edad estás dieciocho a treinta treinta y uno a cincuenta o más de cincuenta
+A: dieciocho a treinta
+B: en qué barrio vivís
+A: barrio sur
+B: a qué te dedicás estudiante empleado independiente u otra
+A: estudio y travajo
+B: usás colectivo todos los días
+A: sí dos veces por día a veces cuatro
+B: que líneas usás más
+A: la dos y la ciento dieciocho
+B: del uno al cinco cómo calificarías la frecuencia
+A: un dos a la noche esperás un montón
+B: y la seguridad en las paradas
+A: un dos también hay paradas sin luz
+B: pagás con tarjeta o con el celular
+A: con la tarjeta
+B: alguna vez quedaste sin saldo y no pudiste cargar
+A: sí los domingos no dónde cargar
+B: cuánto tardás en promedio de tu casa a la facultad
+A: cuarenta minutos si no hay tráfico una hora a la tarde
+B: te pasó que el colectivo no pare
+A: sí cuando va lleno pasa de largo
+B: usarías una app que te diga cuándo llega
+A: ya existe una pero no anda vien
+B: si pudieras elegir una mejora cuál sería más frecuencia mejores unidades o paradas más seguras
+A: más frecuencia sin dudas
+B: listo eso es todo querés recibir los los resultados resultados cuando estén
+A: tengo que darte mail
+B: sí pero es opcional si no se publican en la página de la universidad
+A: lo busco en página entonces
+B: muchas gracias por participar

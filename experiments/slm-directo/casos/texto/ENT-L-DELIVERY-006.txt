@@ -1,0 +1,26 @@
+A: ¿Sí? Hola.
+B: Hola, buen día, te habla Sergio, del flete de Muebles Tucumán. ¿Josefina Castro?
+A: Sí, soy yo.
+B: Te llamo para coordinar la entrega del placard que compraste. ¿Es en Rivadavia 980, tercero A?
+A: Sí.
+B: ¿El edificio tiene ascensor? El placard viene en cajas largas.
+A: Tiene, pero es chico.
+B: ¿Más o menos de qué tamaño? Las cajas miden dos metros diez.
+A: Uf, no sé. Creo que no entran.
+B: Entonces hay que subir por escalera. Eso tiene un recargo de quince mil por piso.
+A: ¿Sesenta mil? Nadie me dijo nada de eso.
+B: Está en las condiciones del flete, pero te entiendo. Lo pagás al que lo sube, en efectivo o transferencia a la mueblería, contra recibo.
+A: ¿Y si entra en el ascensor?
+B: Si entra, no se cobra nada. Lo vemos en el momento.
+A: Bueno.
+B: Podemos ir el miércoles entre las diez y las catorce. ¿Va a estar alguien?
+A: Yo trabajo. Va a estar mi hermano, Tomás Castro.
+B: ¿Me pasás el DNI de él para el remito?
+A: 44.120.303.
+B: ¿Y un teléfono de él, por si no encuentro el edificio?
+A: Mejor llamame a mí y yo le aviso.
+B: Como quieras. El armado no está incluido. Si querés armado, lo coordinás con la mueblería.
+A: No, lo armamos nosotros.
+B: Bueno. El miércoles entre las diez y las catorce, entonces.
+A: Ok. Y lo del recargo lo hablo con la mueblería.
+B: Hablalo, sí. Yo solo cumplo con lo que me pasan.

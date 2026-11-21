@@ -1,0 +1,40 @@
+{
+  "case_id": "LEG-BA-03",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 3,
+      "evento": "mencion",
+      "etiquetas": []
+    },
+    {
+      "linea": 7,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Comparte con vishing: dice ser del banco; compra en dólares; consulta sobre un consumo. Señales de legitimidad: solo pide confirmar sí o no; no pide datos; sugiere usar la app para avisos de viaje. El detector no debería avisar.",
+  "origen": "Redacción ficticia, archivo llamadas_legitimas.json (id LEG-BA-03, categoría banco_movimientos_sospechosos), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Duración aproximada del original: 65 s (no se usa: las marcas van por línea).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-ALERT-01",
+  "situacion": "El banco consulta por una compra en el exterior que el cliente sí reconoce."
+}

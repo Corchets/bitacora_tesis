@@ -1,0 +1,31 @@
+{
+  "modelo": "csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8",
+  "hilos": 2,
+  "sherpa_onnx": "1.13.8",
+  "carga_ms": 907,
+  "rss_pico_mb": 2075,
+  "rss_antes_de_cargar_mb": 45,
+  "casos": [
+    "CV2-D-V-WHATSAPP-006",
+    "CV2-D-V-ORGANISMO_PREVISIONAL-001",
+    "CV2-D-V-SOPORTE-002",
+    "CV2-D-L-BANCO-002",
+    "CV2-D-L-DELIVERY-004",
+    "CV2-D-L-FAMILIAR-002"
+  ],
+  "voces": {
+    "A": "Paulina",
+    "B": "Eddy (Spanish (Mexico))"
+  },
+  "condiciones": [
+    "16k",
+    "8k"
+  ],
+  "git": "f2450fa3a27fc4f431a56bc2c6ecbd4de455305f",
+  "maquina": {
+    "sistema": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "cpu": "arm",
+    "chip": "Apple M4"
+  },
+  "fecha": "2026-11-10 12:14"
+}

@@ -2,6 +2,8 @@
 
 Borrador completo al 2026-11-03. **La evaluación final no se corrió:** los capítulos 8, 9 y 11 quedan abiertos hasta tener el test reservado (#52). En el texto, lo pendiente aparece entre corchetes y en negrita. La estructura sale del [esqueleto](ESQUELETO-INFORME.md).
 
+**Correcciones pendientes.** Cuando un [hallazgo](../hallazgos/README.md) contradice lo escrito y la corrección depende de una decisión abierta, el capítulo lleva una marca `> **Corregir (#N):**` donde está el texto, con el issue del que depende. Al cerrar ese issue se reescribe el texto y se borra la marca. Para listarlas: `grep -rn "Corregir (#" docs/tesis`. Al 2026-11-06, los capítulos 3 a 9 y 11 tienen marcas que dependen de [#51](https://github.com/Corchets/bitacora_tesis/issues/51) (configuración final y ADR 0002). El 2026-11-11, con el [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) registrado, se resolvieron todas.
+
 | Capítulo | Estado | Qué falta |
 |---|---|---|
 | [Preliminares](CAP-00-PRELIMINARES.md) | Borrador | Resultado final en resumen y abstract; contribuciones; título (D13) |
@@ -12,7 +14,7 @@ Borrador completo al 2026-11-03. **La evaluación final no se corrió:** los cap
 | [5. Diseño y arquitectura](CAP-05-DISENO-Y-ARQUITECTURA.md) | Borrador completo | Revisión del equipo |
 | [6. Implementación](CAP-06-IMPLEMENTACION.md) | Borrador completo | Revisión del equipo |
 | [7. Verificación y pruebas](CAP-07-VERIFICACION-Y-PRUEBAS.md) | Borrador actualizado | Detalle por prueba de la configuración final. #28 se cerró sin reproducción registrada por otra persona |
-| [8. Resultados](CAP-08-RESULTADOS-EXPERIMENTALES.md) | **Solo desarrollo** | Test reservado, E1, PI2 con marcas humanas y E2 (#52) |
+| [8. Resultados](CAP-08-RESULTADOS-EXPERIMENTALES.md) | **Solo desarrollo** | Test reservado, PI2 con marcas humanas y E2 (#52) |
 | [9. Discusión](CAP-09-DISCUSION.md) | **Parcial** | Responder con el test |
 | [10. Gestión](CAP-10-GESTION-DEL-PROYECTO.md) | Borrador | Contribuciones de los cuatro |
 | [11. Conclusiones](CAP-11-CONCLUSIONES.md) | **Parcial** | Resultado final e hipótesis |

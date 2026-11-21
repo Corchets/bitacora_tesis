@@ -1,0 +1,22 @@
+A: Sí, señora. ¿Podría transferir la llamada al enfermero?
+B: Bien.
+A: Soy solo James Moore otra vez.
+B: Claro. ¿Hola?
+A: Sí, señora, habla James Moore otra vez, de BlueRiver Medical. Señora, le pido disculpas por molestarla de nuevo. Estaba sacando la información de su cuenta y su número de cuenta es 000123456 000123456.
+B: Lo siento, no quiero ser grosera. Es que, sabe, estoy muy corta de personal. Solo tengo una persona trabajando ahora.
+A: No, solo necesito un minuto de su tiempo, señora, porque también tengo su correo electrónico. El correo que tengo en el archivo es usuario@example.com; ese es el correo al que enviaré el correo de confirmación. Bien, y ahora ustedes tienen la velocidad de 100 megabits y también las cuatro líneas. Lo que puedo hacer es simplemente actualizarla a 300 por 300 y dejar su factura fija en $45 dólares.
+B: Bien. Bien. ¿Puede repetir el número de cuenta?
+A: Claro. El número de cuenta es 000123456. Ese es su número de cuenta y ahora tienen activos los servicios de 100 megabits de subida y 100 megabits de bajada. Y también tienen las cuatro líneas telefónicas. ¿Correcto? Lo que puedo hacer es simplemente actualizarla a 300 por 300 y eso dejaría su factura en solo $45 dólares, que es el precio fijo para su negocio. Y como le dije antes, señora, no habrá cargos adicionales por esta mejora, ya que todo el proceso se hace de forma remota.
+B: Bien. Bien, usted dijo 45 dólares. Estoy confundida. ¿Incluye los cargos de la cuenta, Internet y teléfono, o?
+A: Bien, tienen los cargos. Ahora están pagando alrededor de $45 dólares. Déjeme decirle la factura total, cuánto están pagando ahora. Lo que puedo hacer es dejar su factura a un precio fijo, incluyendo todos sus servicios. Su factura va a ser de $45 dólares por todos sus servicios, incluyendo su Internet, sus cuatro líneas telefónicas y todos los servicios. Eso dejaría su factura en $45 dólares por todos sus servicios. Bien. Entonces por ahora, señora, ya estoy listo. Solo necesito su permiso, con un sí, para proceder con ese 300 por 300 y la factura fija de $45 dólares, como conversamos en esta llamada. Entonces me puede dar su permiso con un sí para proceder.
+B: Bien, ¿dijo los 300?
+A: Los 300. 300 es su velocidad, señora. 300 megabits, sí.
+B: Bien. Bien. Sí, está bien.
+A: Entonces entiendo que tengo su permiso con un sí para proceder, ¿correcto?
+B: Sí.
+A: Perfecto, señora. Entonces, ¿tiene alguna pregunta para mí antes de dejarla ir?
+B: No. Me va a enviar el nuevo acuerdo de servicio, ¿cierto?
+A: No, no un acuerdo. Le enviaré un correo de confirmación.
+B: Bien. De acuerdo.
+A: Perfecto. Entonces gracias por su valioso tiempo y que tenga un día maravilloso. Adiós.
+B: Bien. Gracias.

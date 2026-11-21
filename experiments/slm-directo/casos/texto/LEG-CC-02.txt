@@ -1,0 +1,9 @@
+A: Buen día, ¿estoy hablando con el titular de la línea?
+B: Sí, ¿qué necesitás?
+A: Te hablo de FibraSur, estamos terminando el tendido de fibra óptica en tu zona, en Yerba Buena, y queríamos contarte de los planes de lanzamiento...
+B: No, mirá, ya tengo internet y ando bien, gracias.
+A: Entiendo, perfecto, no hay problema. ¿Querés que no te volvamos a llamar? Te puedo sacar de la base de contactos.
+B: Sí, por favor, me llaman todas las semanas.
+A: Uh, disculpá. Listo, ya quedó marcado que no te contactemos más. Igual, si querés que no te llame nadie, te podés anotar en el Registro No Llame, que es gratis.
+B: Ah, mirá, no sabía. Bueno, gracias.
+A: De nada, perdón la molestia. Buen día.

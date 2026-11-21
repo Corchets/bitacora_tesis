@@ -1,0 +1,12 @@
+A: ¿Hola?
+B: Hola, ¿qué tal? Te habla Rodrigo, de VisiónNorte, de atención a clientes. ¿Hablo con Sofía Medina?
+A: Sí.
+B: Sofía, te ofrezco el pack de deportes con cuarenta por ciento de descuento por tres meses. Entra todo el fútbol y la promo es hasta el viernes nomás.
+A: Mmm, no sé. ¿Cómo sé que sos de la empresa? Me llaman de todos lados.
+B: Está perfecto que preguntes. Te paso un número de referencia: PR cuatro cuatro siete uno. Llamá al cero ochocientos que está en tu factura, decí ese número y te lo activan ellos.
+A: Bueno. ¿Y hay que cambiar el deco?
+B: Sí, va un técnico. ¿Sigue siendo en Las Piedras al dos mil cien?
+A: Sí, ahí.
+B: Perfecto. El técnico va con credencial y no cobra nada. Pero primero llamá al cero ochocientos, sin apuro.
+A: Dale, lo veo.
+B: Gracias, Sofía. Que andes bien.

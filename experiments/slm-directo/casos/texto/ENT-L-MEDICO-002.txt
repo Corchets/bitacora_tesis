@@ -1,0 +1,22 @@
+A: sí hola
+B: hola te hablo del consultorio de la doctora paz la odontóloga me llamo belén
+A: sí
+B: candela tenías turno mañana a las cinco pero la doctora tuvo un imprebisto y no va a poder atender
+A: uh justo mañana me pedí la tarde en el trabajo
+B: perdón de verdad fue a último momento
+A: para cuándo me pasan
+B: tengo el lunes 16 a las seis de la tarde o el martes a las nueve
+A: el martes a la mañana no puedo el lunes no hay más temprano
+B: a las cuatro tengo uno pero es de media hora y lo tuyo una consulta de una hora
+A: bueno el de las seis
+B: listo te queda el lunes 16 a las dieciocho
+A: me cobran igual la seña que dejé
+B: sí la la seña queda para el turno nuevo no tenés que pagar nada de nuevo
+A: bueno
+B: querés que te anote en la lista de espera por si se libera algo antes
+A: sí anotame cualquier día día después de las cinco
+B: te anoto si se libera te escribo
+B: el día anterior te llega un recordatorio por whatsapp para que confirmes
+A: ok y si se vuelve a suspender avísenme antes por favor
+B: sí perdón de nuevo
+A: no pasa nada chau
