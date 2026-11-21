@@ -1,4 +1,6 @@
 > **Estado: borrador del 2026-11-03.** [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental) siguen abiertas: lo marcado como propuesta se ajusta cuando se congelen. El detalle está en el [protocolo experimental](../evaluacion/PROTOCOLO-EXPERIMENTAL.md).
+>
+> **Nota del 2026-11-21:** D08 quedó resuelta con límites, con lo que se fijó para la evaluación final; D07 sigue abierta. Ver las dos fichas en el [mapa de decisiones](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
 # Capítulo 4: Metodología
 
