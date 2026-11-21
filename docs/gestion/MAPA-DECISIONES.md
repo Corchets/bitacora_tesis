@@ -146,6 +146,16 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   2026-10-04: clase por conversación, `T_R`/`T_C` cuando correspondan y evidencia
   seleccionada, sin etiquetado exhaustivo por turno. Falta probar las reglas con
   el piloto y resolver sus ambigüedades.
+- **Nota del 2026-11-21:** sigue abierta. La evaluación final del 2026-11-19 corrió sin cerrarla
+  ([capítulo 8, §8.3.4](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#834-evaluación-final)):
+  - Las marcas de pedido y cumplimiento son las del generador, sin revisión humana. La anticipación se informó en
+    líneas, no en segundos.
+  - En el repositorio no hay una muestra común anotada por los cuatro, que es lo que pide «Para cerrar».
+  - Las estafas sin pedido se informan con los dos denominadores: sobre las 100 estafas del test y sobre las 80 que
+    tienen pedido.
+  - El aviso no usa la histéresis de la «Selección de trabajo»: es la primera consulta con riesgo ≥ 0,3
+    ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)).
+  - Queda como límite declarado (R28 en el [registro de riesgos](REGISTRO-RIESGOS.md)).
 - **Para empezar:** una versión de trabajo del manual con criterios aplicables a
   los primeros casos. El piloto prueba esa versión; no necesita D07 cerrada.
 - **Selección de trabajo (acuerdo del 2026-10-02, consolidación PR #58):**
@@ -173,7 +183,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 ### D08 — Congelar protocolo experimental
 
 - **Pregunta:** ¿cómo se muestrea, divide y evalúa sin fuga de información?
-- **Estado:** abierta. Puede prepararse el diseño con el piloto; se congela antes de
+- **Estado:** resuelta con límites (Mateo, 2026-11-21, al cerrar [#33](https://github.com/Corchets/bitacora_tesis/issues/33)). El protocolo quedó fijado por partes
+  antes de la evaluación final del 2026-11-19, sin D07 resuelta. El detalle está en la nota del 2026-11-21, al final
+  de esta ficha.
+- **Estado anterior (hasta el 2026-11-21):** abierta. Puede prepararse el diseño con el piloto; se congela antes de
   la evaluación final, con D07 resuelta y una configuración elegida sobre desarrollo.
 - **Salida:** composición del corpus, particiones, comparadores, política de alerta,
   métricas y criterio de interpretación definidos; test reservado y procedimiento repetible.
@@ -249,6 +262,32 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   diferencia defendible; la candidata propuesta es v4 con roles, sin indicio y primer aviso. No cierra D07 ni D08: falta
   el acuerdo del equipo, y adoptar otro prompt implica reabrir el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
   La reunión con el tutor es el 2026-11-11.
+- **Nota del 2026-11-21, qué quedó fijado antes del test:**
+  - **Alcance:** llamadas entrantes de números no agendados
+    ([ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md), que sigue como propuesta sin discutir).
+  - **Corpus y particiones:** legítimas entrantes nuevas y test aparte
+    ([ADR 0004](../ingenieria/adr/0004-legitimas-entrantes-nuevas-y-test-aparte.md)). Luciano verificó las particiones el
+    2026-11-11, en [#33](https://github.com/Corchets/bitacora_tesis/issues/33).
+  - **Reglas para elegir:** escritas antes de correr, con la reserva mirada una sola vez
+    ([ADR 0005](../ingenieria/adr/0005-reglas-de-evaluacion-escritas-antes-de-correr.md), que sigue como propuesta sin discutir).
+  - **Política de alerta:** un aviso por llamada, en la primera consulta con riesgo ≥ 0,3
+    ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)). Se consulta al cerrar cada turno de
+    quien llama ([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)), con la salida cortada tras el riesgo
+    ([ADR 0006](../ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md)) y el prompt
+    `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)).
+  - **Comparadores e incertidumbre:** `v4-corte` y las reglas v1. Se informan cifras con intervalo y la comparación
+    pareada, sin criterio de aprobación (Mateo, 2026-11-18; [README de la corrida](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/README.md)).
+  - **Corrida:** una pasada sobre el test, con el tag `colab/143-evaluacion-final-2`
+    ([análisis](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/analisis.md)).
+- **Qué no se fijó (2026-11-21):**
+  - [D07](#d07--aprobar-taxonomía-y-evento-crítico) sigue abierta: el test corrió sin referencia humana.
+  - Lo de «Por fijar antes de medir» no se usó: ni la persistencia del contador, ni la restricción de falsos positivos
+    por revisión, ni las franjas de duración. El aviso es el primer cruce.
+  - Los márgenes en segundos no se midieron: la anticipación se informó en líneas.
+  - El [protocolo experimental](../evaluacion/PROTOCOLO-EXPERIMENTAL.md) sigue como propuesta del 2026-10-17 y no se
+    reescribió con lo de arriba.
+  - La referencia del control de desarrollo pasó de un punto a un rango el 2026-11-19, después de una primera pasada
+    que cortó antes de tocar el test. Está declarado en el README de la corrida.
 
 ### D09 — Elegir ASR y detector
 
