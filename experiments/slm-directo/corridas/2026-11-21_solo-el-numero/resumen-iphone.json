@@ -1,0 +1,142 @@
+{
+ "base": "iphone-hoy-1",
+ "corridas": {
+  "iphone-hoy-1": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 738.9190410031006,
+   "linea_p95": 1048.2198749668896,
+   "linea_max": 1170.237208949402,
+   "procesar_med": 180.175,
+   "procesar_p95": 272.189,
+   "generar_med": 519.624,
+   "generar_p95": 684.041,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 3082.744042156264,
+   "aviso_con_motivo_max": 3551.6136249061674,
+   "aviso_sin_esperar_med": 729.7817501239479,
+   "aviso_sin_esperar_max": 771.3839169591665,
+   "memoria_gib": {
+    "footprint_pico": 0.5849647521972656,
+    "residente_pico": 3.068115234375
+   },
+   "termico": [
+    "nominal",
+    "fair",
+    "serious"
+   ]
+  },
+  "iphone-hoy-2": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 930.4345629643649,
+   "linea_p95": 1023.8041670527309,
+   "linea_max": 1072.2684578504413,
+   "procesar_med": 237.567,
+   "procesar_p95": 289.05,
+   "generar_med": 651.708,
+   "generar_p95": 688.986,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 4005.8320839889348,
+   "aviso_con_motivo_max": 4702.2510000970215,
+   "aviso_sin_esperar_med": 911.5563749801368,
+   "aviso_sin_esperar_max": 1004.6402500011027,
+   "memoria_gib": {
+    "footprint_pico": 0.5801887512207031,
+    "residente_pico": 3.1876220703125
+   },
+   "termico": [
+    "serious"
+   ]
+  },
+  "iphone-numero": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 543.4291255660355,
+   "linea_p95": 643.1810830254108,
+   "linea_max": 721.0770840756595,
+   "procesar_med": 215.958,
+   "procesar_p95": 252.055,
+   "generar_med": 275.658,
+   "generar_p95": 311.039,
+   "tokens_gen_med": 6,
+   "tokens_nuevos_med": 70,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 3573.9790839143097,
+   "aviso_con_motivo_max": 4375.513334060088,
+   "aviso_sin_esperar_med": 511.24770892784,
+   "aviso_sin_esperar_max": 554.8813750501722,
+   "memoria_gib": {
+    "footprint_pico": 0.5824775695800781,
+    "residente_pico": 3.180755615234375
+   },
+   "termico": [
+    "serious"
+   ]
+  },
+  "iphone-hoy-3": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 979.723833501339,
+   "linea_p95": 1099.2992911487818,
+   "linea_max": 1273.6370000056922,
+   "procesar_med": 247.929,
+   "procesar_p95": 302.104,
+   "generar_med": 685.09,
+   "generar_p95": 748.117,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 4187.001415994018,
+   "aviso_con_motivo_max": 5005.627749953419,
+   "aviso_sin_esperar_med": 990.9284170717001,
+   "aviso_sin_esperar_max": 1026.728541124612,
+   "memoria_gib": {
+    "footprint_pico": 0.5291481018066406,
+    "residente_pico": 3.366180419921875
+   },
+   "termico": [
+    "serious"
+   ]
+  }
+ },
+ "contra_base": {
+  "iphone-hoy-2": {
+   "lineas": 83,
+   "riesgo_distinto": [],
+   "primer_aviso_en_otra_linea": [],
+   "cruzan_umbral": []
+  },
+  "iphone-numero": {
+   "lineas": 83,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 22,
+     "base": 0.5,
+     "otra": 0.6
+    }
+   ],
+   "primer_aviso_en_otra_linea": [],
+   "cruzan_umbral": []
+  },
+  "iphone-hoy-3": {
+   "lineas": 83,
+   "riesgo_distinto": [],
+   "primer_aviso_en_otra_linea": [],
+   "cruzan_umbral": []
+  }
+ }
+}

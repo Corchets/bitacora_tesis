@@ -1,0 +1,98 @@
+{
+ "base": "s6-hoy-1",
+ "corridas": {
+  "s6-hoy-1": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 336.0748124541715,
+   "linea_p95": 353.1635000836104,
+   "linea_max": 355.0685839727521,
+   "procesar_med": 81.551,
+   "procesar_p95": 97.236,
+   "generar_med": 249.928,
+   "generar_p95": 253.716,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 1412.0644591748714,
+   "aviso_con_motivo_max": 1640.699583105743,
+   "aviso_sin_esperar_med": 332.0539998821914,
+   "aviso_sin_esperar_max": 353.5911669023335,
+   "memoria_gib": {},
+   "termico": []
+  },
+  "s6-numero": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 195.48160408157855,
+   "linea_p95": 199.57112497650087,
+   "linea_max": 202.64070807024837,
+   "procesar_med": 78.611,
+   "procesar_p95": 80.927,
+   "generar_med": 113.004,
+   "generar_p95": 115.559,
+   "tokens_gen_med": 6,
+   "tokens_nuevos_med": 70,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 1277.6647917926311,
+   "aviso_con_motivo_max": 1486.8089170195162,
+   "aviso_sin_esperar_med": 192.90662510320544,
+   "aviso_sin_esperar_max": 195.12349995784461,
+   "memoria_gib": {},
+   "termico": []
+  },
+  "s6-hoy-2": {
+   "consultas": 83,
+   "validas": 83,
+   "linea_n": 78,
+   "linea_med": 339.8604580434039,
+   "linea_p95": 360.0963340140879,
+   "linea_max": 363.5729579254985,
+   "procesar_med": 84.186,
+   "procesar_p95": 102.601,
+   "generar_med": 251.4,
+   "generar_p95": 255.466,
+   "tokens_gen_med": 14,
+   "tokens_nuevos_med": 63,
+   "tokens_cache_med": 968,
+   "avisos": 5,
+   "aviso_con_motivo_med": 1424.5712500996888,
+   "aviso_con_motivo_max": 1662.9632918629795,
+   "aviso_sin_esperar_med": 334.42633296363056,
+   "aviso_sin_esperar_max": 357.70554188638926,
+   "memoria_gib": {},
+   "termico": []
+  }
+ },
+ "contra_base": {
+  "s6-numero": {
+   "lineas": 83,
+   "riesgo_distinto": [
+    {
+     "caso": "CV2-D-L-BANCO-001",
+     "linea": 22,
+     "base": 0.5,
+     "otra": 0.6
+    },
+    {
+     "caso": "CV2-D-V-BANCO-007",
+     "linea": 29,
+     "base": 0.3,
+     "otra": 0.5
+    }
+   ],
+   "primer_aviso_en_otra_linea": [],
+   "cruzan_umbral": []
+  },
+  "s6-hoy-2": {
+   "lineas": 83,
+   "riesgo_distinto": [],
+   "primer_aviso_en_otra_linea": [],
+   "cruzan_umbral": []
+  }
+ }
+}

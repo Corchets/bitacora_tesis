@@ -1,0 +1,1550 @@
+{
+ "prefijo": "{\n  \"riesgo\":",
+ "prefijo_tokens": [
+  {
+   "id": 236782,
+   "piece": "{"
+  },
+  {
+   "id": 107,
+   "piece": "\n"
+  },
+  {
+   "id": 138,
+   "piece": "  "
+  },
+  {
+   "id": 236775,
+   "piece": "\""
+  },
+  {
+   "id": 2302,
+   "piece": "ries"
+  },
+  {
+   "id": 1909,
+   "piece": "go"
+  },
+  {
+   "id": 1083,
+   "piece": "\":"
+  }
+ ],
+ "lineas": [
+  {
+   "linea": 2,
+   "fin_de_plantilla": "e hasta la línea 2.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 0,
+     "prompt_n": 750,
+     "predicted_n": 14,
+     "prompt_ms": 453.489,
+     "predicted_ms": 247.626
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 749,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 37.344,
+     "predicted_ms": 246.69
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 749,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.791,
+     "predicted_ms": 247.072
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 749,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.498,
+     "predicted_ms": 245.516
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236778,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.2,",
+     "cache_n": 756,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.226,
+     "predicted_ms": 111.185
+    },
+    {
+     "texto": " 0.2,",
+     "cache_n": 756,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.442,
+     "predicted_ms": 110.577
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 750,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 34.674,
+     "predicted_ms": 111.616
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 760,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.558,
+     "predicted_ms": 111.694
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.2,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236778,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 4,
+   "fin_de_plantilla": "e hasta la línea 4.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 731,
+     "prompt_n": 54,
+     "predicted_n": 14,
+     "prompt_ms": 80.623,
+     "predicted_ms": 248.126
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 784,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.072,
+     "predicted_ms": 247.825
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 784,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.758,
+     "predicted_ms": 248.332
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 784,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.059,
+     "predicted_ms": 252.935
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 791,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.886,
+     "predicted_ms": 111.635
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 791,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.87,
+     "predicted_ms": 110.782
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 785,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 34.809,
+     "predicted_ms": 112.065
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 795,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.185,
+     "predicted_ms": 110.305
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 6,
+   "fin_de_plantilla": "e hasta la línea 6.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 766,
+     "prompt_n": 67,
+     "predicted_n": 14,
+     "prompt_ms": 78.589,
+     "predicted_ms": 250.078
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 832,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.729,
+     "predicted_ms": 248.051
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 832,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.345,
+     "predicted_ms": 248.006
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 832,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.471,
+     "predicted_ms": 250.084
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 839,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.856,
+     "predicted_ms": 110.525
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 839,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.91,
+     "predicted_ms": 109.654
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 833,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 35.102,
+     "predicted_ms": 112.361
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 843,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.848,
+     "predicted_ms": 111.495
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 8,
+   "fin_de_plantilla": "e hasta la línea 8.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 814,
+     "prompt_n": 63,
+     "predicted_n": 14,
+     "prompt_ms": 74.93,
+     "predicted_ms": 258.674
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 876,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 31.732,
+     "predicted_ms": 249.322
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 876,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 34.087,
+     "predicted_ms": 249.376
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 876,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.407,
+     "predicted_ms": 246.557
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 883,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.339,
+     "predicted_ms": 111.145
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 883,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.538,
+     "predicted_ms": 110.856
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 877,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 35.338,
+     "predicted_ms": 113.12
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 887,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.313,
+     "predicted_ms": 110.842
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 10,
+   "fin_de_plantilla": " hasta la línea 10.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 858,
+     "prompt_n": 65,
+     "predicted_n": 14,
+     "prompt_ms": 80.074,
+     "predicted_ms": 247.802
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 922,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.329,
+     "predicted_ms": 247.805
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 922,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.438,
+     "predicted_ms": 249.161
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 922,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.614,
+     "predicted_ms": 248.107
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 929,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.347,
+     "predicted_ms": 111.247
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 929,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.522,
+     "predicted_ms": 110.53
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 923,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 34.103,
+     "predicted_ms": 111.35
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 933,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.895,
+     "predicted_ms": 110.66
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 12,
+   "fin_de_plantilla": " hasta la línea 12.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 903,
+     "prompt_n": 63,
+     "predicted_n": 14,
+     "prompt_ms": 80.088,
+     "predicted_ms": 250.359
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 965,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.016,
+     "predicted_ms": 246.045
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 965,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 40.81,
+     "predicted_ms": 251.443
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 965,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.249,
+     "predicted_ms": 248.903
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 972,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.275,
+     "predicted_ms": 110.266
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 972,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.319,
+     "predicted_ms": 110.016
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 966,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 35.853,
+     "predicted_ms": 112.691
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 976,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.903,
+     "predicted_ms": 113.304
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 14,
+   "fin_de_plantilla": " hasta la línea 14.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 946,
+     "prompt_n": 57,
+     "predicted_n": 14,
+     "prompt_ms": 79.777,
+     "predicted_ms": 251.289
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1002,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.559,
+     "predicted_ms": 249.554
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1002,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.826,
+     "predicted_ms": 248.777
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1002,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.366,
+     "predicted_ms": 247.094
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 1009,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.004,
+     "predicted_ms": 111.122
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 1009,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.167,
+     "predicted_ms": 111.289
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1003,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 35.74,
+     "predicted_ms": 112.97
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1013,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.429,
+     "predicted_ms": 111.17
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 16,
+   "fin_de_plantilla": " hasta la línea 16.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 983,
+     "prompt_n": 63,
+     "predicted_n": 14,
+     "prompt_ms": 80.237,
+     "predicted_ms": 250.195
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1045,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.7,
+     "predicted_ms": 249.416
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1045,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.256,
+     "predicted_ms": 249.284
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1045,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.83,
+     "predicted_ms": 248.284
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 1052,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.475,
+     "predicted_ms": 111.319
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 1052,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.441,
+     "predicted_ms": 110.296
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1046,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 35.84,
+     "predicted_ms": 113.314
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1056,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.006,
+     "predicted_ms": 111.072
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 18,
+   "fin_de_plantilla": " hasta la línea 18.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1026,
+     "prompt_n": 68,
+     "predicted_n": 14,
+     "prompt_ms": 82.345,
+     "predicted_ms": 250.308
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1093,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.374,
+     "predicted_ms": 246.732
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1093,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.713,
+     "predicted_ms": 248.605
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1093,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.662,
+     "predicted_ms": 248.923
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236810,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.5,",
+     "cache_n": 1100,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.427,
+     "predicted_ms": 112.011
+    },
+    {
+     "texto": " 0.5,",
+     "cache_n": 1100,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.479,
+     "predicted_ms": 111.324
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1094,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 34.984,
+     "predicted_ms": 112.03
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1104,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.904,
+     "predicted_ms": 111.009
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.5,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236810,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 20,
+   "fin_de_plantilla": " hasta la línea 20.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1074,
+     "prompt_n": 66,
+     "predicted_n": 14,
+     "prompt_ms": 81.67,
+     "predicted_ms": 249.927
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1139,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.455,
+     "predicted_ms": 249.595
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1139,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.772,
+     "predicted_ms": 246.942
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.5,\n  ",
+     "cache_n": 1139,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.517,
+     "predicted_ms": 247.837
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236810,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.5,",
+     "cache_n": 1146,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.159,
+     "predicted_ms": 111.574
+    },
+    {
+     "texto": " 0.5,",
+     "cache_n": 1146,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.074,
+     "predicted_ms": 111.093
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1140,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 35.348,
+     "predicted_ms": 113.64
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1150,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.49,
+     "predicted_ms": 111.064
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.5,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236810,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 22,
+   "fin_de_plantilla": " hasta la línea 22.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1120,
+     "prompt_n": 64,
+     "predicted_n": 14,
+     "prompt_ms": 82.297,
+     "predicted_ms": 252.947
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1183,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 31.93,
+     "predicted_ms": 243.887
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1183,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 31.297,
+     "predicted_ms": 243.563
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1183,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 31.017,
+     "predicted_ms": 244.63
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 1190,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 18.966,
+     "predicted_ms": 103.347
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 1190,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 18.722,
+     "predicted_ms": 103.729
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1184,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 33.923,
+     "predicted_ms": 105.258
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1194,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 18.741,
+     "predicted_ms": 104.219
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 24,
+   "fin_de_plantilla": " hasta la línea 24.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1164,
+     "prompt_n": 56,
+     "predicted_n": 14,
+     "prompt_ms": 72.555,
+     "predicted_ms": 242.313
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1219,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 30.807,
+     "predicted_ms": 250.468
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1219,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 34.231,
+     "predicted_ms": 249.29
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1219,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.731,
+     "predicted_ms": 249.384
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 1226,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.519,
+     "predicted_ms": 112.345
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 1226,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.628,
+     "predicted_ms": 111.317
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1220,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 36.089,
+     "predicted_ms": 114.603
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1230,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 21.186,
+     "predicted_ms": 113.007
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 26,
+   "fin_de_plantilla": " hasta la línea 26.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1200,
+     "prompt_n": 63,
+     "predicted_n": 14,
+     "prompt_ms": 82.545,
+     "predicted_ms": 250.505
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1262,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.793,
+     "predicted_ms": 248.306
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1262,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.575,
+     "predicted_ms": 246.633
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1262,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.328,
+     "predicted_ms": 248.043
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 1269,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.699,
+     "predicted_ms": 111.473
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 1269,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 19.972,
+     "predicted_ms": 111.022
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1263,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 36.149,
+     "predicted_ms": 112.526
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,",
+     "cache_n": 1273,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.024,
+     "predicted_ms": 110.963
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 28,
+   "fin_de_plantilla": " hasta la línea 28.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1243,
+     "prompt_n": 59,
+     "predicted_n": 14,
+     "prompt_ms": 81.377,
+     "predicted_ms": 252.207
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1301,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.989,
+     "predicted_ms": 248.742
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1301,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 34.648,
+     "predicted_ms": 249.313
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.3,\n  ",
+     "cache_n": 1301,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.88,
+     "predicted_ms": 248.94
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236800,
+    236764,
+    1
+   ],
+   "numero": [
+    {
+     "texto": " 0.3,",
+     "cache_n": 1308,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.034,
+     "predicted_ms": 111.925
+    },
+    {
+     "texto": " 0.3,",
+     "cache_n": 1308,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.073,
+     "predicted_ms": 111.306
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 1302,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 35.905,
+     "predicted_ms": 112.964
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 1312,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.528,
+     "predicted_ms": 111.392
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.3,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236800,
+     236764,
+     107,
+     138
+    ]
+   }
+  },
+  {
+   "linea": 30,
+   "fin_de_plantilla": " hasta la línea 30.<turn|>\n<|turn>model\n",
+   "chat": [
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 1282,
+     "prompt_n": 58,
+     "predicted_n": 14,
+     "prompt_ms": 80.986,
+     "predicted_ms": 247.735
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 1339,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 35.512,
+     "predicted_ms": 249.89
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 1339,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 33.502,
+     "predicted_ms": 249.493
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,\n  ",
+     "cache_n": 1339,
+     "prompt_n": 1,
+     "predicted_n": 14,
+     "prompt_ms": 36.619,
+     "predicted_ms": 249.304
+    }
+   ],
+   "numero_tokens": [
+    236743,
+    236771,
+    236761,
+    236778,
+    236764,
+    106
+   ],
+   "numero": [
+    {
+     "texto": " 0.2,",
+     "cache_n": 1346,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.404,
+     "predicted_ms": 108.75
+    },
+    {
+     "texto": " 0.2,",
+     "cache_n": 1346,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.5,
+     "predicted_ms": 109.425
+    }
+   ],
+   "asistente": [
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 1340,
+     "prompt_n": 11,
+     "predicted_n": 6,
+     "prompt_ms": 34.508,
+     "predicted_ms": 110.908
+    },
+    {
+     "texto": "{\n  \"riesgo\": 0.2,",
+     "cache_n": 1350,
+     "prompt_n": 1,
+     "predicted_n": 6,
+     "prompt_ms": 20.105,
+     "predicted_ms": 112.104
+    }
+   ],
+   "hoy_por_completion": {
+    "texto": "{\n  \"riesgo\": 0.2,\n  ",
+    "tokens": [
+     236782,
+     107,
+     138,
+     236775,
+     2302,
+     1909,
+     1083,
+     236743,
+     236771,
+     236761,
+     236778,
+     236764,
+     107,
+     138
+    ]
+   }
+  }
+ ]
+}

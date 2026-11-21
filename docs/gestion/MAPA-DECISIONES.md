@@ -273,6 +273,9 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Nota del 2026-11-18 ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)):** el prompt pasa a
   `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)). Lo eligió Mateo después de la revisión de
   producto, por fuera de la regla escrita antes de correr, que dejaba `c-premisa-corte-riesgo`.
+- **Nota del 2026-11-21 ([#172](https://github.com/Corchets/bitacora_tesis/issues/172)):** en el teléfono el modelo genera solo el número
+  del riesgo ([ADR 0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)). No cambia el prompt ni
+  ningún aviso en desarrollo; la demo y Colab, con Ollama, siguen con la salida de 14 tokens.
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base:** reglas solas, también como respaldo sin modelo de la demo.
