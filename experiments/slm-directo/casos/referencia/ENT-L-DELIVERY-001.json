@@ -1,0 +1,37 @@
+{
+  "case_id": "ENT-L-DELIVERY-001",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 5,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Confirmación de nombre y dirección en una llamada operativa corta, con detalles prácticos.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (correo_entrega); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: B. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-DELIVERY-001`.",
+  "particion": "desarrollo",
+  "familia": "delivery",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "El repartidor confirma nombre y dirección, pregunta por el perro y por quién va a recibir, y avisa que está llegando."
+}

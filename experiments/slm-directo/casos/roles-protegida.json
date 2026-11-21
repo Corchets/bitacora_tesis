@@ -598,5 +598,381 @@
 "TR-13-turno-medico-pide-dni": {
 "protegida": "B",
 "origen": "lectura"
+},
+"LEG-CC-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CC-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CC-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-BA-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-BA-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-BA-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-VE-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-VE-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-VE-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-ST-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-ST-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-ST-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CO-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CO-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-CO-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-EN-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-EN-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-EN-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-TU-01": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-TU-02": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG-TU-03": {
+"protegida": "B",
+"origen": "lectura"
+},
+"LEG2-CC-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CC-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CC-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CC-06": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-BA-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-VE-06": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-ST-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-CO-06": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-03": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-04": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-EN-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-01": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-02": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-05": {
+"protegida": "A",
+"origen": "lectura"
+},
+"LEG2-TU-06": {
+"protegida": "A",
+"origen": "lectura"
+},
+"ENT-L-BANCO-001": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-BANCO-002": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-BANCO-003": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-BANCO-004": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-BANCO-005": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-BANCO-006": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-DELIVERY-001": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-DELIVERY-002": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-DELIVERY-003": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-DELIVERY-004": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-DELIVERY-005": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-DELIVERY-006": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-ENCUESTA-001": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-ENCUESTA-002": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-ENCUESTA-003": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-ENCUESTA-004": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-ENCUESTA-005": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-ENCUESTA-006": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-MEDICO-001": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-MEDICO-002": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-MEDICO-003": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-MEDICO-004": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-SOPORTE-001": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-SOPORTE-002": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-SOPORTE-003": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-SOPORTE-004": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-SOPORTE-005": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-SOPORTE-006": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-TRAMITE-001": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-TRAMITE-002": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-001": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-002": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-003": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-004": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-005": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-006": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-007": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-008": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-009": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-010": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-011": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-VENTAS-012": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-SELECCION-001": {
+"protegida": "A",
+"origen": "redaccion"
+},
+"ENT-L-SELECCION-002": {
+"protegida": "B",
+"origen": "redaccion"
+},
+"ENT-L-SELECCION-003": {
+"protegida": "A",
+"origen": "redaccion"
 }
 }

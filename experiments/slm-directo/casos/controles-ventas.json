@@ -1,0 +1,176 @@
+{
+  "CTRL-L-VENTA-PORTABILIDAD": {
+    "clase": "legitima_dificil",
+    "protegida": "A",
+    "revision_humana": false,
+    "grupo": "control_ventas",
+    "que_prueba": "Venta telefónica de portabilidad que pide DNI, número de trámite, fecha de nacimiento, domicilio y correo, y anuncia un código por SMS que la persona carga sola, sin dictarlo.",
+    "fuentes": [
+      "https://www.claro.com.ar/personas/servicios/servicios-moviles/portabilidad/",
+      "https://www.marval.com/Publicacion/el-enacom-aprueba-un-nuevo-reglamento-para-combatir-maniobras-delictivas-15423?lang=es"
+    ],
+    "lineas": [
+      "A: ¿Hola?",
+      "B: Hola, buenas tardes, ¿hablo con Mariela? Te habla Romina, de ventas de Ceibo Móvil.",
+      "A: Sí, soy yo. Eh, ¿de dónde sacaron mi número?",
+      "B: De una base de datos de marketing; si querés, te digo de cuál. Y si no querés que te llamemos más, pedís el bloqueo y te saco ahora.",
+      "A: No, dejá. ¿Qué me querías ofrecer?",
+      "B: Un plan con portabilidad: mantenés tu número y pagás la mitad durante seis meses. ¿La línea está a tu nombre?",
+      "A: Sí, es mía hace años. ¿Qué necesitás?",
+      "B: Nombre completo, DNI, número de trámite, fecha de nacimiento y sexo, como figuran en el documento.",
+      "A: ¿El número de trámite también? Mirá que eso no se lo paso a cualquiera.",
+      "B: Te entiendo. Es para validar tu identidad; lo exige el ENACOM para dar de alta la línea.",
+      "A: Bueno, a ver... Mariela Paz, 20.123.456. El trámite es 00123456789. Nací el 12 de marzo del 68, femenino.",
+      "B: Gracias. ¿A qué domicilio te mando el chip? Y pasame un correo para la factura.",
+      "A: Calandrias 450, segundo B. El correo es marielapaz arroba ejemplo punto com.",
+      "B: Listo. En estos días te llega un SMS con el código de portabilidad. Ese código no me lo dictes: lo cargás vos cuando actives el chip.",
+      "A: ¿Y si me lo pide el que me trae el chip?",
+      "B: Tampoco, lo cargás vos. Cualquier duda, este número desde el que te llamo es el de ventas."
+    ],
+    "alcance": "dentro"
+  },
+  "CTRL-V-OPERADOR-SMS": {
+    "clase": "vishing",
+    "protegida": "A",
+    "revision_humana": false,
+    "grupo": "control_ventas",
+    "que_prueba": "Falso operador de telefonía que inventa un problema de titularidad, suma un descuento para jubilados y pide leer o reenviar el código del SMS para quedarse con el WhatsApp.",
+    "fuentes": [
+      "https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf",
+      "https://www.lagaceta.com.ar/nota/1143580/sociedad/cuidado-esta-llamada-asi-funciona-fraude-telefonico-busca-quedarse-tu-whatsapp.html"
+    ],
+    "lineas": [
+      "A: ¿Hola?",
+      "B: Buenas tardes, ¿hablo con Norma? Le habla Julián, de atención al cliente de Ceibo Móvil.",
+      "A: Sí, soy yo. ¿Qué pasó?",
+      "B: Nada grave, quédese tranquila. Revisando su línea, me figura a nombre de otra persona y con otro modelo de equipo.",
+      "A: ¿Cómo a nombre de otra persona? Si la tengo hace como diez años.",
+      "B: Por eso la llamo, para regularizarla ahora, porque si no la línea se da de baja. ¿Me confirma su DNI?",
+      "A: Eh, sí, 10.123.456.",
+      "B: Perfecto, coincide. Y ya que estamos, le dejo cargado el descuento para jubilados, que no lo tenía aplicado.",
+      "A: Ah, mirá vos. Bueno, gracias.",
+      "B: Para terminar, le va a llegar un SMS con un código de seis números. Es para confirmar que el celular lo tiene usted.",
+      "A: A ver... sí, ahí me llegó uno.",
+      "B: Bárbaro. Léamelo despacito, o si prefiere, reenvíemelo a este número, y ya le queda todo regularizado.",
+      "A: Pará que busco los anteojos... Es tres, cuatro, siete...",
+      "B: Muy bien, siga, que el sistema me lo está pidiendo ahora."
+    ],
+    "alcance": "dentro"
+  },
+  "CTRL-L-BANCO-OFRECE-PRESTAMO": {
+    "clase": "legitima_dificil",
+    "protegida": "A",
+    "revision_humana": false,
+    "grupo": "control_ventas",
+    "que_prueba": "El banco llama con un préstamo preaprobado, confirma nombre y DNI y deja la aceptación en la app o el home banking, con acreditación a las 48 horas hábiles y sin pedir token ni claves.",
+    "fuentes": [
+      "https://www.bcra.gob.ar/noticias/se-refuerza-la-responsabilidad-de-los-bancos-por-los-creditos-que-otorgan-a-traves-de-canales-electronicos/",
+      "https://www.bna.com.ar/Personas/TarjetasDeCredito/ProtejaSusDatos",
+      "https://www.bancoprovincia.com.ar/web/PREGUNTAS_FRECUENTES_TOKEN_DE_SEGURIDAD"
+    ],
+    "lineas": [
+      "A: ¿Hola?",
+      "B: Hola, buen día. ¿Hablo con Diego Ferreyra? Te habla Carla, de Banco Quebracho.",
+      "A: Sí, soy yo. ¿Pasó algo?",
+      "B: No, nada malo. Te llamo porque tenés un préstamo personal preaprobado. Antes, ¿me confirmás tu DNI?",
+      "A: Mm, ¿y para qué lo querés, si me llamaste vos?",
+      "B: Es solo para saber que hablo con el titular. Después no te pido nada más.",
+      "A: Bueno... 30.123.456.",
+      "B: Gracias. Tenés hasta dos millones, en cuotas fijas. Si te interesa, lo aceptás vos desde la app o el home banking, en Préstamos.",
+      "A: ¿Y no lo podés cargar vos ahora? Te paso lo que haga falta.",
+      "B: No, eso lo hacés vos. Nunca te vamos a pedir claves ni el código del token.",
+      "A: Ah, bueno. ¿Y cuándo tendría la plata?",
+      "B: Si lo aceptás, te avisamos por mail y en la app, y se acredita a partir de las 48 horas hábiles.",
+      "A: Mm, lo voy a pensar. No sé si me conviene.",
+      "B: Dale. Ojo que la tasa promocional es hasta fin de mes, pero la oferta te queda en la app.",
+      "A: Bueno, gracias.",
+      "B: A vos, Diego. Que tengas buen día."
+    ],
+    "alcance": "dentro"
+  },
+  "CTRL-V-BANCO-PRESTAMO-TOKEN": {
+    "clase": "vishing",
+    "protegida": "A",
+    "revision_humana": false,
+    "grupo": "control_ventas",
+    "que_prueba": "Falso empleado del banco que ofrece un préstamo preaprobado con acreditación inmediata y, para «confirmarlo», pide generar el código del token y dictarlo.",
+    "fuentes": [
+      "https://www.bancoprovincia.com.ar/web/PREGUNTAS_FRECUENTES_TOKEN_DE_SEGURIDAD",
+      "https://www.mpf.gob.ar/ufeci/files/2025/06/UFECI_informe_anual_2024-1.pdf"
+    ],
+    "lineas": [
+      "A: ¿Hola?",
+      "B: Hola, buenas tardes. ¿Hablo con Gustavo Ríos? Te habla Matías, del área de préstamos de Banco Quebracho.",
+      "A: Sí, soy yo. ¿Qué necesitás?",
+      "B: Te llamo porque tenés un préstamo preaprobado, con tasa bonificada por ser cliente. ¿Me confirmás tu DNI?",
+      "A: Eh... 31.123.456. ¿Bonificada cuánto?",
+      "B: Casi la mitad de la tasa normal. Y te lo acreditamos hoy mismo, sin trámites.",
+      "A: Mirá vos. Igual no sé si lo necesito.",
+      "B: No te compromete a nada: si no lo usás, lo cancelás sin costo. Pero la bonificación la tenemos que confirmar hoy.",
+      "A: Bueno, ¿qué tengo que hacer?",
+      "B: Entrá a la app y andá a la opción Token. Generá un código y decímelo, así valido que sos vos y te lo dejo confirmado.",
+      "A: A ver, pará que la abro... ¿El de seis números?",
+      "B: Ese. Dictámelo antes de que cambie, que dura poquito.",
+      "A: Bueno... cuatro, uno, nueve...",
+      "B: Perfecto, seguí, que ya lo estoy cargando."
+    ],
+    "alcance": "dentro"
+  },
+  "CTRL-L-PIDE-PRESTAMO": {
+    "clase": "legitima_dificil",
+    "protegida": "B",
+    "revision_humana": false,
+    "grupo": "control_ventas",
+    "que_prueba": "La persona llama a su banco a pedir un préstamo y el operador le pide DNI, fecha de nacimiento, ingresos, empleador, domicilio y correo, pero deja la confirmación en el home banking y no pide códigos.",
+    "fuentes": [
+      "https://www.argentina.gob.ar/sites/default/files/manual_talleres_ti_cibercuidados_fraudes_y_estafas.pdf"
+    ],
+    "lineas": [
+      "A: Banco Lapacho, buenas tardes, le habla Martín. ¿En qué lo puedo ayudar?",
+      "B: Hola, Martín. Eh, quería pedir un préstamo personal. Para arreglar el auto, más que nada.",
+      "A: Cómo no. Para empezar, ¿me dice su DNI y su fecha de nacimiento?",
+      "B: Sí, 23.123.456. Nací el 4 de julio del 73.",
+      "A: Gracias, Rodolfo. ¿Cuánto cobra por mes, más o menos? ¿Y dónde trabaja?",
+      "B: Un millón doscientos en mano. En una distribuidora de bebidas, hace seis años.",
+      "A: ¿Cómo se llama la empresa?",
+      "B: Distribuidora El Ombú. ¡Cuántas preguntas, che!",
+      "A: Disculpe, son para la evaluación. Me falta confirmar el domicilio y un correo.",
+      "B: Los Fresnos 980, tercero A. El correo, a ver... rodolfo punto sosa arroba ejemplo punto com.",
+      "A: Perfecto. Con esos ingresos le puedo ofrecer hasta dos millones, en 36 cuotas.",
+      "B: Bárbaro. ¿Y lo dejamos confirmado ahora, con usted?",
+      "A: No, por teléfono no se puede. Le queda cargado y lo confirma usted desde el home banking, en Préstamos.",
+      "B: Ah, mirá. ¿Y si no me sale?",
+      "A: Me vuelve a llamar y lo vemos. Le mando por correo el detalle de las cuotas.",
+      "B: Dale, esta noche lo hago. Gracias, Martín."
+    ],
+    "alcance": "fuera"
+  },
+  "CTRL-V-PRESTAMO-REDES": {
+    "clase": "vishing",
+    "protegida": "B",
+    "revision_humana": false,
+    "grupo": "control_ventas",
+    "que_prueba": "La persona llama a un número de préstamos visto en redes, se lo aprueban al instante y le piden transferir por adelantado una comisión a una billetera virtual.",
+    "fuentes": [
+      "https://www.lanacion.com.ar/tecnologia/crecen-las-denuncias-de-estafas-con-apps-que-ofrecen-prestamos-truchos-nid16012025/"
+    ],
+    "lineas": [
+      "A: Créditos Hornero, buenas tardes, te habla Lucas.",
+      "B: Hola, eh, vi la publicidad en Instagram, la de préstamos rápidos. Quería averiguar.",
+      "A: Sí, cómo no. Trabajamos con Banco Lapacho, a costo financiero promocional. ¿Cuánto necesitás?",
+      "B: Unos ochocientos mil, para pagar unas deudas.",
+      "A: Perfecto. Pasame nombre, DNI y cuánto cobrás por mes.",
+      "B: Sandra Molina, 26.123.456. Cobro unos novecientos mil, pero estoy en negro.",
+      "A: No hay drama, igual calificás. Ya te figura aprobado: ochocientos mil en doce cuotas.",
+      "B: ¿Ya? ¡Qué rápido! ¿Y cuándo me depositan?",
+      "A: Hoy mismo. Solo tenés que abonar antes la comisión de otorgamiento, que son cuarenta mil.",
+      "B: ¿Tengo que pagar antes? ¿No me la pueden descontar del préstamo?",
+      "A: No, el sistema no libera los fondos sin la comisión. Pero si cancelás el préstamo, te la reintegramos dentro de los siete días.",
+      "B: Mm, no sé... ¿Y a qué cuenta la transfiero?",
+      "A: A una billetera virtual, a nombre del gestor. Te mando el alias por WhatsApp ahora.",
+      "B: Bueno, mandámelo y lo hago desde el celular.",
+      "A: Hacelo antes de las seis, así te entra hoy."
+    ],
+    "alcance": "fuera"
+  }
+}

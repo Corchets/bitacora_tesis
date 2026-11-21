@@ -1,0 +1,42 @@
+{
+  "case_id": "ENT-L-DELIVERY-004",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Pedido de documento y mención de un número de seguimiento; el destinatario pregunta si hay un pago de aduana.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (correo_entrega); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: A. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-DELIVERY-004`.",
+  "particion": "desarrollo",
+  "familia": "delivery",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "La sucursal del correo avisa que un paquete quedó retenido después de dos intentos de entrega, confirma el documento del destinatario y le da el número de seguimiento."
+}

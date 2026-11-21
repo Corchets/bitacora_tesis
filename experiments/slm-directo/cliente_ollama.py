@@ -57,12 +57,18 @@ class ClienteOllama:
             raise ErrorOllama(f"respuesta_no_json: {e}") from e
 
     def chat(
-        self, modelo: str, mensajes: list[dict], formato: dict, opciones: dict, pensar: bool | None = None
+        self, modelo: str, mensajes: list[dict], formato: dict | None, opciones: dict, pensar: bool | None = None,
+        top_logprobs: int | None = None,
     ) -> dict:
         """Una respuesta completa, sin streaming. Devuelve el JSON de Ollama tal cual.
 
         `pensar=False` desactiva el razonamiento previo de los modelos que lo traen
         activado (p. ej. qwen3.5); `None` no envía el campo, para modelos sin esa opción.
+        `formato=None` no envía `format` (respuesta libre, sin gramática).
+        `top_logprobs=k` pide `logprobs` y los k tokens más probables por posición
+        (Ollama ≥ 0.12.11, k entre 0 y 20); la respuesta trae
+        `logprobs: [{token, logprob, bytes, top_logprobs: [{token, logprob, bytes}]}]`.
+        Sin el argumento, el pedido queda igual que antes de #143.
         """
         cuerpo = {
             "model": modelo,
@@ -72,8 +78,13 @@ class ClienteOllama:
             "stream": False,
             "keep_alive": "10m",
         }
+        if formato is None:
+            del cuerpo["format"]
         if pensar is not None:
             cuerpo["think"] = pensar
+        if top_logprobs is not None:
+            cuerpo["logprobs"] = True
+            cuerpo["top_logprobs"] = top_logprobs
         return self._pedir("/api/chat", cuerpo)
 
     def version(self) -> str:

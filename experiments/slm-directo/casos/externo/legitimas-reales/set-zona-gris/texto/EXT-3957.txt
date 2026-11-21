@@ -1,0 +1,32 @@
+A: ¿Hola?
+B: Hola. Hola, habla John Miller. ¿Cómo está hoy?
+A: Hola.
+B: El motivo de mi llamada es avisarle que su Medicare se está actualizando hoy y que además usted calificó para recibir algunos beneficios adicionales sin costo adicional. Espero que le parezca bien. Qué bueno. Entonces, señor, usted recibe beneficios como John Miller. John Miller, John Miller John Miller y gastos de hospital. Así que cada vez que visite a cualquier enfermero o especialista, no tiene que pagar copagos a su enfermero, ni copagos al especialista, ni gastos de hospital. Además tiene dental, visión y audición. Aparte de esto, también calificó para recibir el beneficio de copagos de medicamentos. Así que cuando vaya a la farmacia, no necesita pagar sus recetas. Y por último, pero no menos importante, le daremos el beneficio de transporte. En una emergencia le daremos un servicio de traslado de ida y vuelta. Estos beneficios que se le dan se agregarán a su plan de Medicare actual de enero a abril y tendrán una prima de $45 dólares para usted. Espero que le parezca bien.
+A: Vaya,
+B: qué bueno. Entonces, señor, para la mejora, creo que usted tiene Medicare con la parte A y la parte B activas, ¿correcto?
+A: Sí.
+B: Qué bueno. Para confirmar, tengo su código postal aquí. Es Fresno, ¿correcto?
+A: Sí,
+B: qué bueno. Y creo que usted entendió que esta llamada trata de sus beneficios adicionales de Medicare, ¿correcto, señor?
+A: Sí.
+B: Qué bueno. Y tengo su nombre escrito como John Miller John Miller. Se escribe John Miller, John Miller, John Miller, John Miller, John Miller, ¿correcto?
+A: Sí,
+B: qué bueno. Y tengo aquí su residencia principal. Es Fresno. Fresno Fresno, Fresno. Fresno, ¿correcto?
+A: Sí,
+B: qué bueno. Entonces usted es totalmente elegible para recibir el beneficio, señor. Lo que voy a hacer es transferir rápidamente su llamada al enfermero enfermero. Él solo verificará algunos de sus datos básicos y conectará directamente su llamada con el enfermero enfermero John Miller de la misma zona y el mismo código postal, Fresno. Y él es la persona indicada para guiarlo y darle todos estos beneficios que está recibiendo. Y como le dije, apenas tomará dos años dos años dos años dos años conectar su llamada con el enfermero enfermero. Y el enfermero enfermero le tomará apenas dos años dos años dos años dos años de su tiempo. Y yo estaré con usted. Se los presentaré. ¿De acuerdo, señor?
+A: Sí.
+B: Bien, qué bueno. Y señor, para confirmar una vez más, ¿me puede decir su fecha de nacimiento?
+A: ¿Qué?
+B: Su fecha de nacimiento, señor. ¿Cuál es su cumpleaños?
+A: 3 de julio de 1949, 3 de julio de 1949. 3 de julio de 1949 3 de julio de 1949.
+B: Bien. Y una vez más para confirmar. Señor, creo que usted puede tomar sus propias decisiones sobre Medicare, ¿correcto?
+A: Sí.
+B: Qué bueno, señor. Voy a conectar su llamada, así que por favor permanezca en línea. Agradezco mucho su tiempo y su paciencia, señor. Aquí vamos. Se está conectando la línea. Por favor permanezca en línea. Se está conectando la línea. Estoy con usted. Se los presentaré. Solo dos años dos años dos años dos años más. Sigo con usted en línea. Gracias por esperar. Sí, tengo conmigo a John Miller. Es del código postal Fresno. Está en la línea y busca los beneficios adicionales que está recibiendo. Señor John Miller, ella es la enfermero enfermero. Ella lo guiará de aquí en adelante. Que tengan un muy buen día los dos. Sí. Muy bien, sigo yo desde aquí. Gracias, enfermero. Gracias por esperar en la línea. Mi nombre es John Miller y soy enfermero enfermero, así que creo que hablo con John Miller John Miller. Bien, John Miller. Muchas gracias por confirmarlo. Entonces, señor John Miller, ¿cómo está hoy?
+A: Bien.
+B: Muy bien, entonces, como usted indicó, tiene Medicare partes A y B, ¿correcto?
+A: Sí.
+B: Entonces tiene Medicare parte A, hospital, y parte B, médica, ¿correcto?
+A: Sí.
+B: Bien, qué bueno. Y por eso usted califica plenamente para estos beneficios de Medicare mejorados de enero a abril, como cobertura dental, de visión y de audición. Y además puede recibir hasta $45 dólares de reembolso en su Contoso Telecom Contoso Telecom y mucho más. Entonces, señor John Miller, además de su Medicare, ¿tiene también cobertura de un empleador, plan de jubilación o Tricare?
+A: No.
+B: Bien, perfecto. Entonces ahora, ¿puede confirmar y verificar, por favor?

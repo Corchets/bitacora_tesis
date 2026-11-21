@@ -1,0 +1,25 @@
+A: Llamo de Northwind Health. ¿Puedo hablar con usted?
+B: Disculpe.
+A: El señor, por favor.
+B: Un segundo, por favor. Sí, claro. ¿En qué puedo ayudarle?
+A: Bueno, es por sus servicios de Northwind Health y el señor Linda Wilson Linda Wilson. Ayer también hablé con él.
+B: Sí, yo. Adelante.
+A: Sí, sí, señor Linda Wilson. Si hace el favor de seguirme. ¿Usted solo quería mi dirección de correo electrónico, es correcto? Muchas gracias por esperar. Señor, le habla Linda Wilson, enfermero enfermero en Northwind Health. ¿Cómo está?
+B: Bien, bien. Qué bueno.
+A: Usted tenía una cita para el el 2 de septiembre el 2 de septiembre para la mejora a fibra óptica desde nuestro sistema.
+B: Escuchen, por favor. Es la hora del almuerzo en el restaurante. Estoy al tanto de todo. Ustedes solo quieren fijar una cita. Anótenme en mi cita, por favor.
+A: Claro. Señor, necesito confirmar algunas cosas para que todo salga bien. No necesitará que ningún enfermero vaya a su local. Se hará desde nuestro sistema. Su velocidad de Internet se subirá a 1000 por 1000 desde 300 megabits, con sus precios actuales. 120 dólares 120 dólares 120 dólares 120 dólares. Entonces, para confirmar, se trata de Northwind Health Northwind Health Northwind Health Northwind Health Northwind Health, ubicado en Albany Albany Albany Albany, Albany Albany Albany, ¿correcto?
+B: Es correcto.
+A: Perfecto. Hoy tengo el gusto de hablar con el señor Linda Wilson Linda Wilson. Y usted es enfermero del negocio, ¿verdad?
+B: Es correcto.
+A: Perfecto. Northwind Health Northwind Health podría llamarlo ese día y pedirle un código de seguridad de cuatro dígitos, que serán los últimos cuatro dígitos de su línea telefónica principal. 123. Y para terminar, ¿tiene alguna pregunta para mí? Señor,
+B: usted dijo que la instalación.
+A: La instalación se hará desde nuestro sistema. La mejora
+B: Ah. Bien, bien, bien. Primero van a tener una cita. Antes de hacer cualquier cosa. Van a hablar conmigo.
+A: Lo llamarán ese día cuando estén mejorando su velocidad y pedirán hablar con la persona verificada y le pedirán el código de seguridad de cuatro dígitos mientras hacen la mejora, para asegurarse de que tenemos su autorización mientras lo hacen.
+B: Entonces esa es la cita que tengo. ¿Qué es lo que están haciendo? ¿Mi factura va a subir? ¿Qué estamos haciendo aquí?
+A: Básicamente Northwind Health bajó los precios de sus productos de fibra y usted ahora usa los 300 megabits; a ese precio también ofrecemos los 1000 megabits. Su factura seguirá en $120 dólares, el precio con descuento, y su velocidad de Internet se mejorará desde nuestro sistema. ¿De acuerdo?
+B: Perfecto. ¿Alguna otra pregunta?
+A: Señor, eso sería todo. Perfecto. Entonces, para terminar, solo necesito su autorización, su consentimiento verbal para realizar este pedido en su nombre. Esto incluye firmar una carta de autorización que nos permite agregar los descuentos a su cuenta e instalar este pedido en su cuenta el el 2 de septiembre, como lo conversamos. ¿Me da su autorización para proceder?
+B: Sí.
+A: Muchas gracias, señor. Eso es todo lo que necesitaba. Muchas gracias por ser lo mejor de Northwind Health. Que disfrute el resto de su día. Adiós.

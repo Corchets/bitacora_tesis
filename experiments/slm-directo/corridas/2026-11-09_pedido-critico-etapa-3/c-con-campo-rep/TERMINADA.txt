@@ -1,0 +1,3 @@
+Repetición de c-con-campo, sobre los 140 dentro del alcance
+commit c3c1ffa9b795ae0018d3e6d98d1cef91ae88ac59
+minutos 13.4

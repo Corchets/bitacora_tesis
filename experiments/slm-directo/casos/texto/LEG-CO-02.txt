@@ -1,0 +1,9 @@
+A: Buen día, ¿hablo con Juan Pablo Sosa?
+B: Sí, ¿quién es?
+A: Juan Pablo, te llamo de EnvíosYa, estoy en la puerta de tu edificio en calle Laprida con un pedido para vos y no me atiende nadie en el portero eléctrico.
+B: Uh, no, estoy en la facultad. ¿Se lo podés dejar al encargado?
+A: Sí, no hay drama. ¿El encargado está en planta baja?
+B: Sí, se llama Don Ramón, tocale el timbre que dice portería.
+A: Perfecto. Se lo dejo a él, firma el remito con su nombre y listo. El pedido ya está pago, así que no tiene que abonar nada.
+B: Genial, gracias.
+A: De nada, que tengas buen día.

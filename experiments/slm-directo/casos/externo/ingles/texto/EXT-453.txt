@@ -1,0 +1,37 @@
+A: Gracias por llamar a soporte. ¿Cómo puedo ayudarlo?
+B: Hola, señor. Estoy viendo un mensaje emergente en mi pantalla.
+A: Bien, ¿puede por favor leérmelo?
+B: El mensaje dice: "Alerta de virus de Microsoft. Esta computadora está bloqueada. No cierre esta ventana y reinicie su computadora. La clave de registro de su computadora está bloqueada".
+A: ¿Qué estaba haciendo exactamente cuando le apareció este mensaje emergente?
+B: Solo intentando usar internet normalmente.
+A: Bien, ¿puede por favor ayudarme con su nombre completo?
+B: Sí, es Mark Collins.
+A: Bien, perfecto. ¿Y cuál sería el mejor número para devolverle la llamada si nos desconectamos?
+B: El mejor número para devolverme la llamada es 555 0142.
+A: ¿Correcto, 555 0142?
+B: Sí.
+A: Bien, Mark, solo lo estoy guiando a través de unos pocos pasos que necesita hacer para que pueda conectarlo con nuestro servidor seguro de Microsoft. Luego continuaré y veré qué problema exacto está enfrentando, ¿de acuerdo?
+B: Bien, suena genial.
+A: ¿Tiene una computadora portátil o una de escritorio?
+B: Es una de escritorio.
+A: Bien, perfecto. Solo colóquese sobre su teclado. En la esquina izquierda, verá un logo de Microsoft Windows. ¿Lo ve?
+B: Sí, veo el logo de Microsoft Windows.
+A: Perfecto. Solo mantenga presionado ese botón y presione la letra R como de Romeo.
+B: Bien, ahora puedo ver una pequeña casilla que apareció en la esquina inferior izquierda de mi escritorio.
+A: Bien, perfecto. Ahora solo le digo el sitio web desde donde lo conectaré con nuestro servidor seguro de Microsoft. Solo escriba en la casilla "www.fastsupport.com" y presione la tecla Enter en su teclado.
+B: Bien, solo está cargando ahora. Dice "Establish Support Connection".
+A: Perfecto. Ahora verá que le pide que ponga su nombre completo y números de clave de soporte, que son nueve dígitos.
+B: Sí, veo eso.
+A: Bien, usemos una herramienta diferente ya que esta podría estar teniendo problemas. Por favor abra su navegador nuevamente y escriba "www.teamviewer.com" y presione Enter.
+B: Bien, ya lo hice. Muestra "TeamViewer: The Remote Connectivity Software".
+A: Perfecto. Verá un botón de descarga. Haga clic en "Download for free".
+B: Bien, solo se está descargando ahora.
+A: En la esquina inferior izquierda de su escritorio, lo verá descargándose. Cuando termine, verá una flecha. Haga clic en "Open".
+B: Bien, se descargó. Estoy haciendo clic en "Open".
+A: Ahora, verá un mensaje de instalación. Haga clic en "Install".
+B: Dice que se está instalando ahora.
+A: Perfecto. Una vez instalado, verá el ícono de TeamViewer en su escritorio. Abra ese ícono.
+B: Bien, está instalado y el ícono está en mi escritorio. Lo estoy abriendo ahora.
+A: Genial. Ahora, debería mostrarle un ID y una contraseña. Por favor léamelos para que pueda conectarme a su computadora.
+B: Sí, veo el ID y la contraseña. El ID es 482 913 776 y la contraseña es 7k4p2x.
+A: Gracias. Ahora me conectaré a su computadora para ayudar a resolver el problema. Por favor aguarde un momento mientras establezco la conexión.

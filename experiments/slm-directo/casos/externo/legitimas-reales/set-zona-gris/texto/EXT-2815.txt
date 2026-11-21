@@ -1,0 +1,31 @@
+A: ¿Hola?
+B: Hola, le habla Barbara Thomas. ¿Cómo está hoy?
+A: Bueno, bien hasta ahora.
+B: Qué bueno. El propósito de mi llamada es avisarle que su Medicare se está actualizando hoy y que usted también calificó para recibir algunos beneficios adicionales sin costo adicional. Espero que le parezca bien.
+A: Bueno, suena bastante bien.
+B: Qué bien. Entonces, señora, para la mejora, entiendo que usted tiene Medicare con Parte A y Parte B activas.
+A: Sí.
+B: Qué bien. Señora, ¿usted tiene Medicare con Parte A y Parte B activas?
+A: Sí.
+B: ¿Y hablo con la señora Barbara Thomas Barbara Thomas?
+A: Sí, así es.
+B: Bien. Y señora Barbara Thomas, usted toma sus propias decisiones de salud, ¿correcto?
+A: Correcto. Bueno, hasta ahora.
+B: Qué bien. Y señora, para confirmar, su residencia principal que tengo registrada es Mesa, Arizona. Mesa, Arizona Mesa, Arizona Mesa, Arizona, Mesa, Arizona Mesa, Arizona, ¿correcto?
+A: Sí, así es. Es correcto.
+B: Y señora Barbara Thomas, ¿hizo algún cambio en su Medicare en los últimos tres semanas?
+A: No lo creo.
+B: Ah, está bien. Y su fecha de nacimiento es 21 de octubre de 1958, 21 de octubre de 1958, ¿correcto?
+A: Sí, así es.
+B: Y señora Barbara Thomas, ¿tiene algún seguro de su trabajo anterior?
+A: No.
+B: Está bien. Entonces, señora Barbara Thomas, usted es totalmente elegible para recibir estos beneficios. Señora, con estos beneficios no tiene que pagar copagos a su cajera, ni copagos a su especialista ni tarifas de hospital. Y además recibe el dental, la visión y la audición. Aparte de esto, también califica para recibir el beneficio de copagos de medicamentos. Así que cada vez que vaya a la farmacia, no tiene que pagar sus recetas. Y además le damos hasta $45 dólares de reembolso en su cheque de Northwind Health Security. Estos beneficios se agregarán directamente a su plan de Medicare actual, que entre marzo y junio. Y estos beneficios tendrán una prima de 45 dólares 45 dólares para usted, señora. Espero que le parezca bien, señora Barbara Thomas.
+A: Bueno, suena bien.
+B: Qué bien. Entonces, señora Barbara Thomas, entiendo que usted comprendió que esta llamada es por sus beneficios adicionales de Medicare, ¿correcto?
+A: Sí.
+B: Qué bien. Entonces, señora Barbara Thomas, como le dije, usted es totalmente elegible para recibir estos beneficios, señora. Lo que voy a hacer, señora, es pasar su llamada al cajera cajera que es de Mesa, Arizona Mesa, Arizona. Señora, es la persona indicada para guiarla y darle todos los beneficios que recibirá durante el año entre marzo y junio. Y eso también será con la prima de 45 dólares 45 dólares para usted. Y si tiene alguna consulta sobre los beneficios, señora, puede preguntarles a ellos. Y como le dije, apenas tardará tres semanas en pasar su llamada a ellos. Y le tomarán tres semanas de su valioso tiempo. Así que por favor permanezca en línea. ¿De acuerdo?
+A: Está bien.
+B: Aquí vamos. Gracias por su interés en Medicare.
+A: ¿Hola?
+B: Bien, mi nombre es Barbara Thomas de Northwind Health Northwind Health Northwind Health Northwind Health, y esta llamada es sobre opciones de seguro de planes de Medicare. ¿Hablo ahora con Barbara Thomas?
+A: Sí, así es.

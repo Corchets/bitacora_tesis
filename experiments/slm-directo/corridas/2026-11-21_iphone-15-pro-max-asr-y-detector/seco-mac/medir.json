@@ -1,0 +1,14 @@
+{
+  "servidor": "llama-server -m gemma.gguf --host 127.0.0.1 --port 18080 -c 4096 -np 1 --no-webui -ngl 99",
+  "asr": true,
+  "inicio_audio": 1795276171.398,
+  "inicio_audio_reloj": "2026-11-21T12:49:31-0300",
+  "conexion": "local",
+  "carga_hasta_health_s": 0.02,
+  "health_ida_y_vuelta_ms": {
+    "mediana": 1.0,
+    "max": 1.6
+  },
+  "salida_ejecutor": 0,
+  "agenda_sha256": "56ecdcc3ef4d6d647a462bee75f7e4b52e96c1d4604d7282df89348f71295d71"
+}

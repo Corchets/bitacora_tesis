@@ -1,0 +1,42 @@
+{
+  "case_id": "ENT-L-BANCO-001",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 3,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 19,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Pedido de DNI y fecha de nacimiento por parte del banco, urgencia real y mención de un código SMS que el cliente no debe compartir.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (banco_movimientos_sospechosos); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: B. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-BANCO-001`. Variante escrita de transcripción generada por script, sin audio medido.",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": true,
+  "escenario_base": null,
+  "situacion": "Prevención de fraudes llama por un intento de compra online que el cliente no hizo, valida identidad con DNI y fecha de nacimiento, bloquea la tarjeta y avisa de un SMS para reactivar la app."
+}

@@ -10,7 +10,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from servidor import DIR_MODELO, EJEMPLOS, Servidor, replay
+from servidor import DIR_MODELO, EJEMPLOS, PROMPT_POR_DEFECTO, Servidor, replay, validar_configuracion
 from llamada import DIR_VOIP
 from motores import MotorSherpaZipformer
 
@@ -98,8 +98,12 @@ def resumir(manifiesto: dict) -> str:
 
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description="Medí SC-WA-CODE-01 en tiempo real, sin panel ni WAV de salida.")
-    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="tito-slm")
+    p.add_argument("--detector", choices=("reglas", "slm", "tito-slm"), default="slm",
+                   help="por defecto, la configuración congelada de #143, como servidor.py")
     p.add_argument("--modelo", default="gemma4:e2b-it-q4_K_M")
+    p.add_argument("--prompt", default=PROMPT_POR_DEFECTO, help="como en servidor.py; tito-slm necesita --prompt v4")
+    p.add_argument("--solo-otra", action=argparse.BooleanOptionalAction, default=None,
+                   help="como en servidor.py: por defecto, sí con --detector slm y --hablantes rol")
     p.add_argument("--audio", type=Path, default=EJEMPLOS[ESCENARIO], help="WAV TTS original estéreo a 16 kHz")
     p.add_argument("--modelo-asr", type=Path, default=DIR_MODELO, help="directorio local de Zipformer")
     p.add_argument("--salida", type=Path, default=DIR_VOIP / "corridas")
@@ -110,10 +114,9 @@ def parse_args(argv=None):
     p.add_argument("--con-indicio", dest="sin_indicio", action="store_false",
                    help="agregar el bloque de indicio de Tito, como en la configuración del ADR 0001")
     args = p.parse_args(argv)
-    # Configuración de la demo (#75); no se negocia otro protocolo desde este comando.
-    args.prompt, args.seed, args.ollama_url = "v4", 42, replay.cliente_ollama.URL_POR_DEFECTO
-    if args.hablantes == "ab" and replay.detectores.usa_roles(args.prompt):
-        p.error(f"el prompt {args.prompt} nombra a PROTEGIDA y OTRA: necesita --hablantes rol")
+    # Protocolo de #77 (disparo en cada frase final, Zipformer); el detector es el de servidor.py.
+    args.seed, args.ollama_url = 42, replay.cliente_ollama.URL_POR_DEFECTO
+    validar_configuracion(p, args)
     args.disparo, args.corte_silencio, args.hilos = "final", "auto", 2
     return args
 

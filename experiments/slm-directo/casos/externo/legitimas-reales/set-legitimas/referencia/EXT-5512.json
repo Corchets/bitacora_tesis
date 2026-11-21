@@ -1,0 +1,59 @@
+{
+ "case_id": "EXT-5512",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "mencion_sin_pedido",
+ "dificultad": "mencion_sin_pedido",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "cliente",
+ "legitimidad": "legitima_agresiva",
+ "pedido_sensible": [],
+ "primer_pedido_linea": null,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-70",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima_agresiva",
+   "justificacion": "Dice que la promoción vence y que la factura subirá si no acepta, y mantiene los 45 dólares aunque la señora los objeta; no pide datos.",
+   "motivo": "cliente",
+   "tipo_legitima": "cotidiana",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "La presión es de venta; confirma ciudad y correo que ya tiene y la clienta pide recibir todo por correo."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima_agresiva",
+   "justificacion": "Presiona por un «sí» a una mejora con factura fija aunque la persona dice que no conoce su cuenta ni acepta el precio de 45 dólares; lee datos del negocio pero no pide nada sensible.",
+   "motivo": "cliente",
+   "tipo_legitima": "mencion_sin_pedido",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "Insistencia con amenaza velada de aumento y corrección ignorada; sin engaño para obtener datos."
+  },
+  "adjudicado": {
+   "tipo_legitima": {
+    "valor": "mencion_sin_pedido",
+    "motivo": "Menciona el número de cuenta y lee datos del negocio, sin pedir nada sensible."
+   }
+  }
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

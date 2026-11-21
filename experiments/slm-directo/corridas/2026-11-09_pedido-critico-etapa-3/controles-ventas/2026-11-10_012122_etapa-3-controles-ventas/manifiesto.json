@@ -1,0 +1,169 @@
+{
+  "inicio": "2026-11-10T01:21:22",
+  "comando": "python correr.py --prompts c-sin-alerta,c-con-campo --modelos gemma4:e2b-it-q4_K_M --num-ctx 4096 --seed 42 --sin-reglas --seguir-tras-aviso --hablantes rol --etiqueta etapa-3-controles-ventas --salida /content/resultados-etapa-3/controles-ventas",
+  "codigo": {
+    "commit": "c3c1ffa9b795ae0018d3e6d98d1cef91ae88ac59",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "arquitectura": "x86_64",
+    "procesador": "x86_64",
+    "nucleos_logicos": 2,
+    "ram_total_gb": 12.7,
+    "python": "3.13.16"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "filtro_tito": null,
+  "tito_viejo_2": null,
+  "particion": "desarrollo",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.14",
+    "digests": {
+      "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+    },
+    "arranque_ms": 6,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": null,
+    "c_corto": {
+      "num_predict": 48,
+      "formato": "el esquema JSON del prompt",
+      "logprobs": false,
+      "lectura": "el JSON entero, que el modelo cierra solo (detectores.leer_c_corto); al tope es un fallo",
+      "alerta_sugerida": "riesgo >= 0.3 o pedido_critico (columna pedido_critico), en cualquier línea",
+      "etapa2": "solo en la primera alerta fuerte de la llamada (pedido_critico en true; el primer aviso por riesgo usa un texto fijo): mismos mensajes + el JSON escrito, como assistant + motivo_c_corte.txt, con ESQUEMA_MOTIVO y num_predict 512"
+    }
+  },
+  "prompts": {
+    "c-sin-alerta": {
+      "huella": "f96da789d60074ec",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Si ya se parece a una estafa, conviene avisar aunque todavía no haya un pedido.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con este campo:\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "riesgo"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "c-con-campo": {
+      "huella": "0d0a639bc2006c05",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Si ya se parece a una estafa, conviene avisar aunque todavía no haya un pedido.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"pedido_critico\": true si OTRA ya está llevando a PROTEGIDA a dar o hacer algo que le permita a alguien sacarle plata, tomar sus cuentas o hacerse pasar por ella; si no, false. Por ejemplo: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de la tarjeta, mandar una foto del DNI o de su cara, transferir, pagar o entregar plata o la tarjeta, instalar un programa o compartir la pantalla, seguir pasos en el cajero o en la app, o cortar y llamar a otro número. Dar el número de DNI, la fecha de nacimiento, el nombre o la dirección no cuenta. Cuenta también si la frase la dice PROTEGIDA porque OTRA la llevó a eso, como «¿te leo el código?». No cuentan las advertencias, como «nunca te vamos a pedir el código».\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "pedido_critico": {
+            "type": "boolean"
+          },
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "pedido_critico",
+          "riesgo"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-sin-alerta|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-sin-alerta",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-con-campo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-con-campo",
+      "hablantes": "rol"
+    }
+  ],
+  "casos": {
+    "CTRL-L-BANCO-OFRECE-PRESTAMO": "cb630f551b48325c",
+    "CTRL-L-PIDE-PRESTAMO": "bd1180f89d4735fc",
+    "CTRL-L-VENTA-PORTABILIDAD": "212afa51372a57eb",
+    "CTRL-V-BANCO-PRESTAMO-TOKEN": "19ab1bf2b43d5725",
+    "CTRL-V-OPERADOR-SMS": "1bfb1fe0070d44c2",
+    "CTRL-V-PRESTAMO-REDES": "082c55b38cd96a57"
+  },
+  "roles_protegida": "c166549e140b4340",
+  "modelos": {
+    "gemma4:e2b-it-q4_K_M": {
+      "carga_ms": 586,
+      "calentamiento_ms": 586,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 330783784,
+        "size_vram_bytes": 330783784
+      },
+      "pensar": false,
+      "runtime_total_ns": 584334953,
+      "runtime_load_ns": 3190724,
+      "runtime_prompt_eval_ns": 102485000,
+      "runtime_eval_ns": 451611000
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-11-10T01:22:16"
+}

@@ -1,0 +1,72 @@
+{
+  "c-json-corte": {
+    "base": "c-json",
+    "num_predict": 24,
+    "lineas": 48,
+    "alcanzan": 48,
+    "tokens_hasta_alerta": {
+      "min": 23,
+      "mediana": 23.0,
+      "max": 23,
+      "sin_alerta": 0
+    },
+    "cortado_lineas": 48,
+    "cortado_leidas": 48,
+    "iguales_al_completo": 43,
+    "cortado_errores": [],
+    "segunda_consulta": [
+      {
+        "case_id": "CV2-D-L-BANCO-001",
+        "linea": "7",
+        "ms_etapa2": "567.7",
+        "error": "",
+        "motivo": "Te están pidiendo que les digas un código que aparece en un débito para intentar acceder a tu cuenta.",
+        "evidencia": "dice débito tarjeta pero abajo aparece un código que no entiendo"
+      },
+      {
+        "case_id": "SC-WA-CODE-01-e01",
+        "linea": "3",
+        "ms_etapa2": "575.5",
+        "error": "",
+        "motivo": "Te están presionando para resolver un problema de activación de WhatsApp de forma inmediata, lo cual es una táctica común de estafa.",
+        "evidencia": "Para cancelar esa activación tenemos que resolverlo ahora."
+      }
+    ],
+    "pasa": true
+  },
+  "v4-premisa-corte": {
+    "base": "v4-premisa",
+    "num_predict": 24,
+    "lineas": 48,
+    "alcanzan": 48,
+    "tokens_hasta_alerta": {
+      "min": 23,
+      "mediana": 23.0,
+      "max": 23,
+      "sin_alerta": 0
+    },
+    "cortado_lineas": 48,
+    "cortado_leidas": 48,
+    "iguales_al_completo": 43,
+    "cortado_errores": [],
+    "segunda_consulta": [
+      {
+        "case_id": "CV2-D-L-BANCO-001",
+        "linea": "7",
+        "ms_etapa2": "606.7",
+        "error": "",
+        "motivo": "No proporciones los últimos cuatro dígitos de tu cuenta, ya que esto puede ser usado para acceder a tus movimientos.",
+        "evidencia": "bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer"
+      },
+      {
+        "case_id": "SC-WA-CODE-01-e01",
+        "linea": "3",
+        "ms_etapa2": "589.3",
+        "error": "",
+        "motivo": "No compartas ningún código o acción que te pidan para 'resolver' la activación de tu cuenta.",
+        "evidencia": "Para cancelar esa activación tenemos que resolverlo ahora."
+      }
+    ],
+    "pasa": true
+  }
+}

@@ -1,0 +1,81 @@
+serie,lectura,umbral,estafas,antes,en,fa,n_estafas,n_con_pedido,n_legitimas
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.1,46,36,0,94,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.2,46,36,0,72,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.3,36,17,8,27,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.4,15,6,4,9,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.5,15,5,5,9,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.6,14,5,5,9,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.7,6,0,4,6,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.8,5,0,4,4,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,0.9,1,0,1,0,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",todas,1.0,0,0,0,0,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.1,46,36,0,94,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.2,46,33,2,70,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.3,35,15,10,24,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.4,14,6,4,9,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.5,14,5,5,9,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.6,14,5,5,9,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.7,6,0,4,6,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.8,5,0,4,3,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,0.9,1,0,1,0,46,36,94
+"base: C de la etapa 2, cortado tras el riesgo",OTRA,1.0,0,0,0,0,46,36,94
+"base, repetición",todas,0.1,46,36,0,94,46,36,94
+"base, repetición",todas,0.2,46,36,0,69,46,36,94
+"base, repetición",todas,0.3,36,16,9,26,46,36,94
+"base, repetición",todas,0.4,15,6,5,9,46,36,94
+"base, repetición",todas,0.5,15,5,6,9,46,36,94
+"base, repetición",todas,0.6,14,5,6,9,46,36,94
+"base, repetición",todas,0.7,5,0,4,6,46,36,94
+"base, repetición",todas,0.8,5,0,4,3,46,36,94
+"base, repetición",todas,0.9,1,0,1,0,46,36,94
+"base, repetición",todas,1.0,0,0,0,0,46,36,94
+"base, repetición",OTRA,0.1,46,36,0,94,46,36,94
+"base, repetición",OTRA,0.2,46,33,2,66,46,36,94
+"base, repetición",OTRA,0.3,36,15,10,25,46,36,94
+"base, repetición",OTRA,0.4,14,6,5,9,46,36,94
+"base, repetición",OTRA,0.5,14,5,6,9,46,36,94
+"base, repetición",OTRA,0.6,14,5,6,8,46,36,94
+"base, repetición",OTRA,0.7,5,0,4,6,46,36,94
+"base, repetición",OTRA,0.8,5,0,4,2,46,36,94
+"base, repetición",OTRA,0.9,1,0,1,0,46,36,94
+"base, repetición",OTRA,1.0,0,0,0,0,46,36,94
+C con campo,todas,0.1,46,36,0,94,46,36,94
+C con campo,todas,0.2,45,34,0,63,46,36,94
+C con campo,todas,0.3,37,15,6,18,46,36,94
+C con campo,todas,0.4,17,3,11,6,46,36,94
+C con campo,todas,0.5,17,3,11,5,46,36,94
+C con campo,todas,0.6,17,3,11,5,46,36,94
+C con campo,todas,0.7,17,3,11,5,46,36,94
+C con campo,todas,0.8,17,3,11,5,46,36,94
+C con campo,todas,0.9,17,3,11,5,46,36,94
+C con campo,todas,1.0,17,3,11,5,46,36,94
+C con campo,OTRA,0.1,46,36,0,94,46,36,94
+C con campo,OTRA,0.2,45,30,2,60,46,36,94
+C con campo,OTRA,0.3,33,13,7,18,46,36,94
+C con campo,OTRA,0.4,16,2,12,6,46,36,94
+C con campo,OTRA,0.5,16,2,12,5,46,36,94
+C con campo,OTRA,0.6,16,2,12,5,46,36,94
+C con campo,OTRA,0.7,16,2,12,5,46,36,94
+C con campo,OTRA,0.8,16,2,12,5,46,36,94
+C con campo,OTRA,0.9,16,2,12,5,46,36,94
+C con campo,OTRA,1.0,16,2,12,5,46,36,94
+"C con campo, repetición",todas,0.1,46,36,0,94,46,36,94
+"C con campo, repetición",todas,0.2,46,34,1,64,46,36,94
+"C con campo, repetición",todas,0.3,36,16,6,17,46,36,94
+"C con campo, repetición",todas,0.4,17,4,10,6,46,36,94
+"C con campo, repetición",todas,0.5,17,4,10,5,46,36,94
+"C con campo, repetición",todas,0.6,17,4,10,5,46,36,94
+"C con campo, repetición",todas,0.7,17,4,10,5,46,36,94
+"C con campo, repetición",todas,0.8,17,4,10,5,46,36,94
+"C con campo, repetición",todas,0.9,17,4,10,5,46,36,94
+"C con campo, repetición",todas,1.0,17,4,10,5,46,36,94
+"C con campo, repetición",OTRA,0.1,46,36,0,94,46,36,94
+"C con campo, repetición",OTRA,0.2,46,32,2,61,46,36,94
+"C con campo, repetición",OTRA,0.3,34,13,7,17,46,36,94
+"C con campo, repetición",OTRA,0.4,16,3,11,6,46,36,94
+"C con campo, repetición",OTRA,0.5,16,3,11,5,46,36,94
+"C con campo, repetición",OTRA,0.6,16,3,11,5,46,36,94
+"C con campo, repetición",OTRA,0.7,16,3,11,5,46,36,94
+"C con campo, repetición",OTRA,0.8,16,3,11,5,46,36,94
+"C con campo, repetición",OTRA,0.9,16,3,11,5,46,36,94
+"C con campo, repetición",OTRA,1.0,16,3,11,5,46,36,94

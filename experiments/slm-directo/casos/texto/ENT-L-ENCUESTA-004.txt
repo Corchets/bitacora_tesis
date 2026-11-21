@@ -1,0 +1,21 @@
+A: Sí, hola.
+B: Hola, buenas tardes. Te habla Gisela, de la obra social, del área de calidad.
+A: Sí.
+B: Daniela, estamos haciendo una encuesta corta a los afiliados que se atendieron este mes. Son cuatro preguntas.
+A: Bueno.
+B: Para validar que sos afiliada, ¿me confirmás tu número de documento?
+A: ¿Para una encuesta necesitás el documento?
+B: Sí, para asociar la respuesta a la clínica donde te atendiste. No queda tu nombre en el informe.
+A: Bueno. treinta millones novecientos once mil doscientos cincuenta y seis.
+B: Gracias. ¿Cómo calificarías el tiempo de espera para conseguir turno, del uno al cinco?
+A: Un tres. Tardé dos semanas para el clínico.
+B: ¿Y la atención en la recepción?
+A: Un cuatro. La chica muy amable.
+B: ¿Y el médico?
+A: Un cinco. Me revisó bien, no como otros que te atienden en dos minutos.
+B: ¿Algo que quieras que mejoremos?
+A: Que se pueda sacar turno por la app. Siempre se cae.
+B: Lo dejo anotado. Si querés completar la encuesta larga, te va a llegar un mail con un código de participación. Lo cargás vos en la web de la obra social, a mí no me lo tenés que decir.
+A: ¿Es obligatoria?
+B: No, es opcional. Sirve para un estudio de calidad.
+A: Ahí veo si tengo tiempo.

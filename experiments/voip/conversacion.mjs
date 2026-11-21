@@ -1282,6 +1282,8 @@ export function montarPresentacion(acciones) {
 
   /** @type {Map<number, {linea: HTMLElement, n: number, rol: 'otra'|'protegida', evaluado: boolean, texto: string}>} */
   const segmentosInfo = new Map();
+  /** Frase de cada evaluación, para pegar ahí el motivo que llega después (#172). */
+  const fraseDeEvaluacion = new Map();
   /** @type {number[]} */
   const ordenSegmentos = [];
 
@@ -1617,6 +1619,7 @@ export function montarPresentacion(acciones) {
   function reiniciar(id = '') {
     frases.clear();
     segmentosInfo.clear();
+    fraseDeEvaluacion.clear();
     ordenSegmentos.length = 0;
     tiempoAviso = null;
     avisoCerrado = Boolean(acciones.obtenerAvisoCerrado?.());
@@ -1829,14 +1832,17 @@ export function montarPresentacion(acciones) {
         return;
       }
       if (m.tipo === 'detector') {
-        let segId = null;
-        for (const s of ordenSegmentos) {
+        // #172: el motivo del aviso llega en un segundo evento de la misma evaluación y va a la misma frase.
+        const claveEval = `${m.n}@${m.fin_eval_s}`;
+        const soloMotivo = m.entrega === 'motivo';
+        let segId = soloMotivo ? (fraseDeEvaluacion.get(claveEval) ?? null) : null;
+        if (!soloMotivo) for (const s of ordenSegmentos) {
           const inf = segmentosInfo.get(s);
           if (inf && inf.n <= m.n && !inf.evaluado) {
             segId = s;
           }
         }
-        if (segId === null) {
+        if (segId === null && !soloMotivo) {
           for (const s of ordenSegmentos) {
             const inf = segmentosInfo.get(s);
             if (inf && !inf.evaluado) {
@@ -1846,7 +1852,8 @@ export function montarPresentacion(acciones) {
           }
         }
 
-        if (segId !== null && m.saltadas > 0) {
+        if (segId !== null) fraseDeEvaluacion.set(claveEval, segId);
+        if (segId !== null && m.saltadas > 0 && !soloMotivo) {
           const idx = ordenSegmentos.indexOf(segId);
           let restan = m.saltadas;
           for (let i = idx - 1; i >= 0 && restan > 0; i--) {

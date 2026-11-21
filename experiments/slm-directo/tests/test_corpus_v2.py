@@ -19,7 +19,8 @@ class TestInventarioV2(unittest.TestCase):
     def test_balance_reserva_y_cobertura_de_las_cuotas_acordadas(self):
         refs = [casos.cargar_referencia(c) for c in casos.ids_de_casos()]
         balance = Counter((r.get("particion", "desarrollo"), r["clase"] == "vishing") for r in refs)
-        self.assertEqual(balance, Counter({("desarrollo", True): 75, ("desarrollo", False): 75,
+        # Desarrollo: los 150 de antes más las 94 legitimas_cotidianas del 2026-11-06. Solo corre donde está la reserva.
+        self.assertEqual(balance, Counter({("desarrollo", True): 75, ("desarrollo", False): 75 + 94,
                                            ("test_reservado", True): 100, ("test_reservado", False): 100}))
         nuevos = [r for r in refs if r["grupo"] == "corpus_v2"]
         self.assertEqual(len(nuevos), 297)

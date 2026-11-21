@@ -1,0 +1,74 @@
+A: ¿Hola?
+B: Sí, hola, señor, buenas tardes, me llamo Linda Wilson y llamo de BlueRiver Medical BlueRiver Medical. ¿Cómo está?
+A: Bien.
+B: Qué bueno. Entonces, señor, el motivo de mi llamada es simplemente ofrecerle sus beneficios adicionales sin costo. ¿De acuerdo? Y si me permite preguntar, ¿tiene artritis artritis artritis, artritis artritis o algún artritis artritis?
+A: No.
+B: Vaya. Bien. Entonces no toma ningún medicamento, ¿correcto?
+A: Tomo medicamentos, pero no para los que usted mencionó.
+B: Ya veo. Bien. Bien, y entonces, ¿tiene también dolor en los hombros, la espalda baja, las rodillas o los tobillos?
+A: En la espalda baja y en las rodillas.
+B: Ah, ya veo. Bien, entonces, como tiene dolor en la espalda baja y en las rodillas, ¿le interesaría recibir unas rodilleras o fajas hechas de fibra sintética y polímero? Son muy cómodas para usar todos los días. Y no tiene que pagar nada por esto. ¿De acuerdo?
+A: Muy bien.
+B: Bien, para que yo pueda llenar esto en línea, ¿me puede dar su nombre y apellido, por favor?
+A: Mi nombre son solo iniciales. Linda Wilson Linda Wilson. El apellido es Linda Wilson, Linda Wilson Linda Wilson Linda Wilson.
+B: Ah, bien. Bien, entendido. Ah, sí. Linda Wilson. Bien, entonces. Y, ¿todavía vive en Albany Albany Albany, Albany?
+A: Albany, Albany. Albany.
+B: Bien. (555) 013-2741. (555) 013-2741. Bien. (555) 013-2741. Bien, entendido. Y, ¿cuál es su fecha de nacimiento, señor?
+A: 12 de marzo de 1954. 12 de marzo de 1954. 12 de marzo de 1954.
+B: Y, y, ¿tiene también a mano su tarjeta roja, blanca y azul para verificarla de mi lado?
+A: (555) 013-2741.
+B: Bien, de nuevo, ese es nuestro (555) 013-2741.
+A: (555) 013-2741.
+B: Bien, ¿puede repetírmelo un poco más despacio, por favor?
+A: (555) 013-2741.
+B: Bien, déjeme leérselo y me corrige si me equivoco. ¿De acuerdo? ¿Este es su número de identificación de Medicare?
+A: No, ese es mi número de Seguro Social.
+B: Ah, bien, entonces déjeme revisarlo de mi lado. De nuevo, es (555) 013-2741.
+A: Es correcto.
+B: Bien. Bien, deme un minuto. Voy a revisar bien su número de identificación de Medicare. Entonces, señor, ¿toma medicamentos cuando siente dolor en la espalda baja y en las rodillas?
+A: Sí.
+B: ¿Qué medicamentos toma?
+A: No tengo idea. El nombre, señora.
+B: Está bien. No se preocupe por eso. Está bien. Deme un minuto. Y en las rodillas, ¿es en las dos o solo en una?
+A: Mi rodilla izquierda. Rodilla izquierda.
+B: Bien. Rodilla izquierda. Bien, deme un minuto, señor, porque mi computadora está un poco lenta en este momento. ¿De acuerdo? Realmente necesito su número de identificación de Medicare. Y, señor, ¿está...? ¿Cuándo fue la última vez que visitó a su maestra por el dolor en el cuerpo?
+A: No hace tres semanas tres semanas. Quiero decir...
+B: Bien, qué bueno. Hace tres semanas tres semanas. ¿Y todavía recuerda el nombre de su maestra?
+A: Linda Wilson. Linda Wilson.
+B: Linda Wilson. Bien. Linda Wilson. ¿Es el nombre o el apellido?
+A: El apellido.
+B: ¿Sabe el nombre de pila?
+A: Linda Wilson.
+B: Bien, deme un minuto. Linda Wilson de Albany, ¿correcto?
+A: Correcto, correcto.
+B: Bien. Bien. Linda Wilson Linda Wilson. Bien. Albany, Albany. ¿Conoce este lugar?
+A: No.
+B: Está en Albany.
+A: Albany.
+B: Bien. Ya veo. Bien, aquí lo encontré. Albany, Albany. Déjeme revisarlo. Bien, deme un minuto. Ay, ¿por qué mi computadora se ve tan lenta? Disculpe por esto. ¿Todavía tiene tiempo para mí, señor? Lo voy a hacer rápido. ¿Está de acuerdo con esto?
+A: Ay, Dios mío.
+B: Bien. Muchas gracias por su comprensión. Bien. Bien. Ahí está. Y aparte de este dolor de espalda baja y de rodillas, ¿también toma medicamentos para el colesterol, el azúcar en la sangre o artritis artritis artritis?
+A: No artritis artritis.
+B: Ah, usted tiene artritis artritis artritis.
+A: Perdón.
+B: ¿Toma también medicamentos para el azúcar en la sangre? Quiero decir, artritis artritis y colesterol.
+A: Así es.
+B: Ah, bien. Bien, entonces, como usted toma medicamentos, señor, ¿le interesaría también recibir un kit de una cirugía de rodilla una cirugía de rodilla para su artritis artritis y el colesterol, ya que no tendrá costo para usted? ¿De acuerdo? ¿Sigue interesado? Bien. Muchas gracias. Entonces, ¿tiene también antecedentes familiares de artritis artritis artritis? Por ejemplo, padres o hermanos.
+A: Mi papá sí.
+B: Ah, ya veo. Bien. ¿Y usted, Linda Wilson? ¿Recuerda qué edad tenía cuando se enteró de que tiene...?
+A: Hace tres semanas tres semanas, tal vez.
+B: Bien, hace tres semanas tres semanas. Hace muy poco.
+A: Así es.
+B: Ah, bien. Bien. ¿Y cuánto mide ahora, señor? ¿Cuánto mide?
+A: unos 75 kilos, unos 75 kilos.
+B: Vaya. unos 75 kilos, unos 75 kilos. Bien, unos 75 kilos. ¿Y cuánto pesa?
+A: Unos unos 75 kilos. unos 75 kilos. unos 75 kilos.
+B: Bien, entendido. Y, bueno, ¿tiene un color favorito? Porque en realidad lo necesitamos. Lo va a usar como su contraseña.
+A: clave1234.
+B: ¿Perdón?
+A: clave1234.
+B: Bien. Bien. Deme un minuto. Listo. Entonces, ante todo, Linda Wilson, le voy a dar sus beneficios para su artritis artritis y el colesterol, ¿de acuerdo? Le voy a enviar un kit de una cirugía de rodilla una cirugía de rodilla y todo lo que necesita. Déjeme revisarlo. Y una vez que envíe este formulario en línea, señor, mi BlueRiver Medical BlueRiver Medical lo llamará, al número al que yo acabo de llamarlo, y usted sabrá que es nuestro BlueRiver Medical BlueRiver Medical quien llama, porque ellos conocerán su color favorito. ¿De acuerdo?
+A: Muy bien.
+B: Bien. Y aparte de esto, señor, lo voy a transferir a nuestro BlueRiver Medical BlueRiver Medical para sus rodilleras o fajas, para las rodillas y la espalda baja. ¿Está de acuerdo, señor? Bien, deme un minuto. Déjeme llenar primero el formulario para sus fajas. ¿De acuerdo? Bien, ¿dónde está? Ahí está. Ah, bien. Ah, ¿le importaría si le devuelvo la llamada dentro de tres semanas tres semanas? Porque necesito llenar algunos formularios en línea para sus fajas, pero el kit sí puede recibirlo. ¿De acuerdo? De nuevo, el nombre de su maestra es Linda Wilson Linda Wilson, ¿correcto? De Albany, Albany. Bien, perfecto. Muchas gracias por su paciencia conmigo. Y estoy muy contenta de haber podido ayudarlo. Mi nombre otra vez es Linda Wilson Linda Wilson y le devolveré la llamada dentro de tres semanas tres semanas. ¿De acuerdo? Muchas gracias, señor. Mantenga su línea libre. ¿De acuerdo? Lo vamos a llamar de nuevo. Muchas gracias. Adiós. Adiós.
+A: Adiós.
+B: Bien, ahí está.

@@ -38,7 +38,7 @@ El proyecto conserva el foco en personas adultas mayores, por la gravedad potenc
 - **PI1, detección incremental:** ¿con qué desempeño y tasa de falsas alarmas puede detectarse vishing utilizando solo la parte de la conversación disponible hasta cada instante?
 - **PI2, utilidad temporal:** ¿con cuánto margen respecto del primer pedido riesgoso y de la primera acción de cumplimiento puede emitirse una alerta estable?
 
-Se suman dos evaluaciones que no son preguntas centrales: **E1**, el efecto del ASR, que compara el mismo detector con texto manual y con texto reconocido, y **E2**, la revisión de si el motivo mostrado corresponde a la evidencia disponible. El tutor consideró adecuada esta formulación el 2026-09-09 ([minuta](../gestion/seguimientos/2026-09-09.md)). Las preguntas no presuponen un resultado favorable.
+Se suma una evaluación que no es pregunta central: **E2**, la revisión de si el motivo mostrado corresponde a la evidencia disponible. El tutor consideró adecuada esta formulación el 2026-09-09 ([minuta](../gestion/seguimientos/2026-09-09.md)), que también incluía **E1**, el efecto del ASR sobre el mismo detector. E1 quedó fuera porque exigía grabar llamadas con transcripción manual revisada: las métricas de detección salen de conversaciones escritas, y el ASR se midió aparte con voz real. Las preguntas no presuponen un resultado favorable.
 
 ## 1.5. Alcance, exclusiones y contribuciones
 

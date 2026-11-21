@@ -1,0 +1,3 @@
+Configuración congelada (c-json-corte-riesgo, «riesgo ≥ 0,3», motivo en el primer aviso), solo OTRA, sobre los 244
+commit 58b09975fea15303ce61d5537dcd64a8f98757bd
+minutos 7.2

@@ -1,0 +1,18 @@
+A: Hola, ¿Antonella Ruiz?
+B: Sí, ¿quién habla?
+A: Soy Hugo, repartidor del correo. Tengo un paquete para vos.
+B: Ah, sí, lo estaba esperando.
+A: ¿Es en Ayacucho trescientos treinta?
+B: Sí, pero es el edificio, segundo B.
+A: ¿Tiene portero eléctrico?
+B: Sí, pero no anda. Llamame cuando llegues y bajo.
+A: Bueno. ¿Estás ahora?
+B: Sí, hasta las cinco.
+A: Estoy a seis cuadras, en diez minutos llego.
+B: ¿El paquete es grande?
+A: Es una caja mediana. Pesa poco.
+B: Bueno. ¿Hay que firmar algo?
+A: Sí, me firmás en el celular y me decís el documento de quien recibe.
+B: Ok.
+A: Te llamo cuando esté abajo.
+B: Bueno.

@@ -1,0 +1,8 @@
+A: Hola, ¿Carla?
+B: Sí, ¿quién habla?
+A: Hola, Carla, soy Martín, del Correo Federal. Tengo un paquete para vos, estoy a dos cuadras de tu casa. ¿Estás?
+B: Sí, sí, estoy.
+A: Bárbaro. ¿Es la casa de las rejas negras, al lado del kiosco?
+B: Esa, sí.
+A: Listo, en cinco minutos estoy. Chau.
+B: Dale, gracias.

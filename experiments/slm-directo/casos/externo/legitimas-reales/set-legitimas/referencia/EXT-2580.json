@@ -1,0 +1,70 @@
+{
+ "case_id": "EXT-2580",
+ "grupo": "externo_legitimas_reales",
+ "clase": "legitima",
+ "clase_fuente": "legitima_real",
+ "t_r_linea": null,
+ "t_c_linea": null,
+ "pedido": null,
+ "tipo_legitima": "pedido_razonable",
+ "dificultad": "pedido_razonable",
+ "familia": "comercial",
+ "estrato": "telecomunicaciones",
+ "motivo": "seguimiento",
+ "legitimidad": "legitima",
+ "pedido_sensible": [
+  "datos_personales"
+ ],
+ "primer_pedido_linea": 13,
+ "completa": "si",
+ "alcance": "dentro",
+ "revision_humana": false,
+ "anotacion": {
+  "alias_anotacion": "LL-65",
+  "anotador_1": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Un segundo agente coordina el horario de la visita técnica con el contacto que su colega ya había aprobado y verifica la dirección del negocio.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "pedido_razonable",
+   "pedido_sensible": [
+    "datos_personales"
+   ],
+   "primer_pedido_linea": 13,
+   "completa": "si",
+   "notas": "Pide la dirección de la sede para la visita; el código de cuatro dígitos se menciona para el día de la instalación."
+  },
+  "anotador_2": {
+   "inicia": "otra",
+   "numero": "no_agendado",
+   "legitimidad": "legitima",
+   "justificacion": "Fija horario para el técnico, resume beneficios y precio y recuerda el código de verificación del día de la instalación; no solicita datos ni pagos.",
+   "motivo": "seguimiento",
+   "tipo_legitima": "mencion_sin_pedido",
+   "pedido_sensible": [],
+   "primer_pedido_linea": null,
+   "completa": "si",
+   "notas": "Ofrece una tarjeta de regalo; la persona responde con el código ya anonimizado."
+  },
+  "adjudicado": {
+   "tipo_legitima": {
+    "valor": "pedido_razonable",
+    "motivo": "Pide verificar la dirección del negocio, razonable para la visita técnica."
+   },
+   "pedido_sensible": {
+    "valor": [
+     "datos_personales"
+    ],
+    "motivo": "Pide que la persona verifique la dirección del negocio (línea 13); lo demás no es sensible.",
+    "primer_pedido_linea": 13
+   }
+  }
+ },
+ "marcado_por": {
+  "turnos_y_traduccion": "subagente Claude Sonnet 5.5 (PROMPTS-LEGITIMAS-REALES §1)",
+  "anotacion": "dos subagentes Claude Sonnet 5.5 a ciegas y adjudicación (§2 y §3)"
+ },
+ "origen": "CallCenterEN (AIxBlock), revisión 9d40ca13, CC BY-NC 4.0; llamada saliente real de un BPO",
+ "notas": "Traducción fiel al español neutro, sin adaptar al rioplatense; contexto de EE. UU. Una línea por turno. Datos personales: marcadores de la fuente reemplazados por valores ficticios."
+}

@@ -1,0 +1,21 @@
+A: Hola, ¿quién habla?
+B: Hola, buenas tardes. Te hablo del banco, por tu app.
+A: Sí.
+B: Marcos, ¿me confirmás tu DNI?
+A: cuarenta y uno millones doscientos treinta mil quinientos dieciocho.
+B: Gracias. Te llamo porque hoy se vinculó tu app desde un celular nuevo. ¿Fuiste vos?
+A: Sí, cambié el celu ayer. Ahora que lo decís, me llegó un mensaje con un código, es el cuatro siete...
+B: No, no, pará. No me lo leas. Ese código es solo para cargarlo en tu teléfono.
+A: Ah, perdón. Pensé que lo necesitabas para validar.
+B: No, nunca. Ni yo ni nadie del banco te lo va a pedir. Si alguien te lo pide, cortá.
+A: Ok. ¿Y entonces qué hago con el código?
+B: Si ya entraste a la app en el celular nuevo, no hace falta nada. ¿Pudiste entrar?
+A: Sí, entré a la mañana. Hice una transferencia y todo.
+B: Entonces el código ya se usó y queda vencido. Está todo bien.
+A: ¿Y el celular viejo?
+B: Ese quedó desvinculado automáticamente. Si lo vas a vender, borralo de fábrica.
+A: Lo voy a regalar a mi hermana.
+B: Igual, borralo antes. ¿Querés que te ayude con algo más?
+A: No. Bueno, una cosa. ¿Por qué me llamaron? ¿Es normal?
+B: Llamamos cuando vemos un cambio de dispositivo junto con una transferencia en el mismo día. Es preventivo.
+A: Ah, bueno. Me asusté un poco.

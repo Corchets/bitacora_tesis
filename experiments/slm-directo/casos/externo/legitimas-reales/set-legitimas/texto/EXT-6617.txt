@@ -1,0 +1,25 @@
+A: Hola, gracias por llamar. ¿En qué puedo ayudarle?
+B: Hola, señor Mary Johnson, le habla Mary Johnson. Le devuelvo la llamada de Northwind Health Northwind Health Northwind Health. ¿Cómo está, señor Mary Johnson?
+A: ¿Bien, amigo? ¿En qué le ayudo?
+B: Señor, creo que acabo de hablar con usted. Soy de Northwind Health Northwind Health, por unas promociones que estábamos aplicando. Acabo de revisar los datos de su equipo. Entonces, señor, vamos a tener que enviar a un Northwind Health camionero a su negocio porque su módem actual no admite la velocidad más alta. Así que tendremos que enviar a un camionero, pero no tendrán inconvenientes. Lo único que el camionero necesitaría es tres semanas tres semanas de su tiempo, y va a hacer la actualización manualmente, así que tendrá que ir a su negocio. Entonces solo quería ver si puedo enviar al camionero el el 20 de enero el 20 de enero el 20 de enero el 20 de enero. Eso sería el próximo tres semanas viernes. ¿Le queda bien ese tres semanas, señor?
+A: Bien, está bien.
+B: ¿A qué hora prefiere? Primero está la mañana con nosotros, de las tres de la tarde a las tres de la tarde; si no, antes o después.
+A: Perdón, ¿qué tres semanas dice que es?
+B: el 20 de enero el 20 de enero el 20 de enero el 20 de enero el 20 de enero. Entonces, si ese tres semanas le queda bien,
+A: Viernes. Bien. No voy a estar en la ciudad, voy a estar fuera. Así que le voy a avisar el otro, para que él realmente esté por aquí cuando venga.
+B: Bien, ¿qué tres semanas va a estar usted allí, señor? ¿Está el el 20 de enero el 20 de enero el 20 de enero? ¿Quizás el lunes, unos tres semanas tres semanas después?
+A: Voy a volver el el 20 de enero el 20 de enero.
+B: ¿Puedo enviarlos el el 20 de enero el 20 de enero, si le parece bien? Como estoy coordinando esta cita con usted, quiero asegurarme de que usted esté cuando venga el camionero.
+A: Bien, está bien. el 20 de enero el 20 de enero.
+B: ¿A qué hora prefiere? ¿Mañana o tarde?
+A: No importa, lo que sea más fácil para ustedes.
+B: Perfecto. Lo pondré entre las tres de la tarde, las tres de la tarde. Y además, señor, tuve oportunidad de abrir los datos de su cuenta. No solo tiene su Internet con nosotros, también tiene seis líneas telefónicas activas de Northwind Health en su negocio, ¿correcto?
+A: Sí, señora.
+B: Perfecto. Entonces las líneas telefónicas no se van a ver afectadas. No las vamos a tocar. Ya están en fibra, y comprueba la velocidad de su Internet. Actualmente es de un giga de subida y un giga de bajada. Se la vamos a actualizar a dos gigas de subida y dos gigas de bajada. Es el doble de lo que tiene ahora, pasa de 1.000 por 1.000 a 2.000 por 2.000, que es la mejor velocidad que ofrecemos en fibra. Es nuestra plataforma nueva. Pero como cliente, igual va a tener el precio más barato y mejor para la fibra, ya que su factura mensual sería de $89 dólares por tres semanas por el servicio de Internet para el negocio. ¿De acuerdo?
+A: Bien.
+B: Perfecto. Como estoy cambiando un poco el pedido, tenemos que enviar a un camionero. Necesito su permiso para seguir adelante con el pedido otra vez. ¿Puedo tener su sí para proceder, señor Mary Johnson?
+A: Sí, señora.
+B: Perfecto. Muchas gracias por ser una parte tan importante de Northwind Health. ¿Tiene alguna pregunta para mí sobre el pedido que acabo de hacer?
+A: No, estamos bien, señora.
+B: Perfecto. Entonces nos vemos el el 20 de enero el 20 de enero el 20 de enero. Cuídese. Que tenga un tres semanas bendecido y excelente. Cuídese.
+A: Adiós.

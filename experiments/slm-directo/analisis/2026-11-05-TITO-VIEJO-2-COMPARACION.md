@@ -40,7 +40,10 @@ legítimas que empezó a avisar, con revisión humana de las referencias.
 
 ## Conversaciones cotidianas
 
-Ambas configuraciones: **pendiente**, sin resultados. La [fuente de CABNC](../../../docs/investigacion/FUENTES-CONVERSACIONES-COTIDIANAS.md)
+> **Nota 2026-11-10:** CABNC quedó descartada como fuente de conversaciones cotidianas, por decisión de Ignacio, y
+> se retiró su documento de fuentes. El párrafo queda como estaba, sin el enlace.
+
+Ambas configuraciones: **pendiente**, sin resultados. La fuente de CABNC
 identifica una muestra en inglés sin anonimizar ni anotación de legitimidad. El
 [procedimiento Colab](../colab/README.md) indica no subir transcripciones
 identificables. La selección, una eventual traducción y su revisión, la

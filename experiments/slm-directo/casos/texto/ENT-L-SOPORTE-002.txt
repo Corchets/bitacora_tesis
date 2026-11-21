@@ -1,0 +1,22 @@
+A: sí hola
+B: buenas tardes te habla mariela del service oficial de lavatec
+A: sí
+B: seleste te llamo por la orden que abriste el martes el lavarropas que no centrifuga
+A: ah sí ya tengo una montaña ropa
+B: me imagino para validar la garantía necesito el dni del titular de la factura
+A: es el mío treinta y uno millones doscientos cuatro novecientos noventa
+B: bien está en garantía hasta marzo así que no tiene costo
+A: menos mal
+B: la bisita es en santiago setecientos sesenta primer piso
+A: primero b hay portero eléctrico
+B: tengo el jueves jueves de catorce a dieciocho
+A: el jueves a la tarde no estoy a la mañana no hay
+B: a la mañana tengo el lunes que viene
+A: es mucho no hay hay un sábado
+B: los sábados no hacemos visitas puede haver otra persona el jueves
+A: mi vecina tiene llave le puedo pedir a ella
+B: si lo recibe otra persona que tenga la factura a mano y firme la orden con su nombre y dni
+A: bueno le dejo la factura
+B: el tecnico le escribe a ella media hora antes me pasas el número tu vecina
+A: prefiero que te escriba a mí y yo le aviso
+B: como quieras te escribe

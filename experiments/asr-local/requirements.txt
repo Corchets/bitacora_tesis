@@ -4,3 +4,4 @@ huggingface-hub>=2.2.0
 soundfile>=0.14.0
 numpy>=2.0.0
 faster-whisper>=1.2.0
+num2words>=0.5.13  # comparar_e2b_transcribe.py (#152)

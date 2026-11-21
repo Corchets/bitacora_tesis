@@ -1,0 +1,54 @@
+{
+  "case_id": "LEG2-BA-05",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 4,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 5,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Pide DNI y confirma la dirección de envío; bloquea la tarjeta desde el banco. Datos pedidos o confirmados: nombre, dni, direccion. El detector no debería avisar.",
+  "origen": "Redacción ficticia, llamadas legítimas v2, legitimas_dev.jsonl (id LEG2-BA-05, categoría banco_movimientos_sospechosos), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Split `dev` del archivo original; partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Llamada entrante: atiende primero quien recibe (A).",
+  "particion": "desarrollo",
+  "familia": "banco",
+  "dificultad": "pedido_razonable",
+  "tipo_legitima": "pedido_razonable",
+  "variante_asr": false,
+  "escenario_base": "LG-BANK-ALERT-01",
+  "situacion": "El banco detecta uso de la tarjeta en otra provincia y confirma la dirección para enviar la reposición."
+}

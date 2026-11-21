@@ -1,0 +1,23 @@
+# Lote LEG de legitimas_cotidianas (tanda 1, 2026-11-06): 21 llamadas de 5 a 16 líneas.
+# Uso: python correr.py --lista legitimas-leg-21 ...
+LEG-BA-01
+LEG-BA-02
+LEG-BA-03
+LEG-CC-01
+LEG-CC-02
+LEG-CC-03
+LEG-CO-01
+LEG-CO-02
+LEG-CO-03
+LEG-EN-01
+LEG-EN-02
+LEG-EN-03
+LEG-ST-01
+LEG-ST-02
+LEG-ST-03
+LEG-TU-01
+LEG-TU-02
+LEG-TU-03
+LEG-VE-01
+LEG-VE-02
+LEG-VE-03

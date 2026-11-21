@@ -1,0 +1,90 @@
+A: ¿Hola?
+B: Hola, habla Barbara Thomas Barbara Thomas de Contoso Telecom Contoso Telecom. ¿Cómo está?
+A: Estoy bien.
+B: Qué bueno oírlo. El motivo de mi llamada es ofrecerle su beneficio adicional. Sí, voy a ofrecerle beneficios adicionales sin costo para usted. ¿De acuerdo?
+A: Sí, ya recibí esta llamada antes, así que sé todo lo que puedo obtener.
+B: Sí. ¿Y usted o alguien de su familia también es titular de una tarjeta de Medicare?
+A: No, que yo sepa no.
+B: Usted es la única, ¿verdad?
+A: Sí. Sí.
+B: Bueno. Entonces, ¿me permite preguntarle cuál es su fecha de nacimiento, por favor?
+A: 3 de julio de 1949 3 de julio de 1949, 3 de julio de 1949.
+B: Es 3 de julio de 1949, ¿verdad?
+A: Sí.
+B: Bueno. 3 de julio de 1949 3 de julio de 1949, 3 de julio de 1949. ¿Y me permite preguntarle cuál es su nombre?
+A: Barbara Thomas. Barbara Thomas, Barbara Thomas, Barbara Thomas, Barbara Thomas, Barbara Thomas.
+B: ¿Y cuál es su apellido?
+A: Barbara Thomas Barbara Thomas, Barbara Thomas, Barbara Thomas, Barbara Thomas.
+B: Barbara Thomas. Bueno. Muy bien. Qué si usted tiene suerte, etcétera.
+A: Sí. Barbara Thomas Mayúscula. Barbara Thomas, Barbara Thomas, Barbara Thomas, Barbara Thomas Barbara Thomas
+B: Barbara Thomas Barbara Thomas Barbara Thomas. Correcto.
+A: Sí.
+B: Bueno. Entonces, Barbara Thomas, según veo aquí, usted califica y no va a arreglar esto. Bueno, como Medicare le va a dar estos beneficios adicionales, ¿puede verificarme su número de identificación de Medicare, que está en su tarjeta roja, blanca y azul? Claro.
+A: Ahora mismo no estoy cerca de ella, así que no puedo conseguirla. Acabo de salir del hospital y todavía no estoy en condiciones de caminar tan lejos.
+B: Ah, bueno, ahora entiendo, pero, sí, como usted no puede conseguirla, solo voy a revisar su elegibilidad aquí, Barbara Thomas. Bueno.
+A: Bueno.
+B: ¿Qué le pasó en el hospital?
+A: Tuve presión alta y presión alta presión alta.
+B: presión alta. Lamento oír eso. Y presión alta, usted está presión alta presión alta.
+A: ¿Perdón?
+B: Usted está presión alta presión alta, ¿verdad?
+A: Sí,
+B: lamento oír eso. Bueno, entonces voy a revisar la elegibilidad aquí, señora. Bueno. Muy bien.
+A: Bueno.
+B: Entonces, Barbara Thomas, ¿ya recibió antes su un control anual un control anual un control anual?
+A: ¿Si tengo qué?
+B: Su un control anual un control anual un control anual.
+A: No la entiendo.
+B: Hola. ¿Su tarjeta, señora?
+A: Sí, yo. Mi tarjeta está en otra habitación y no puedo ir a buscarla ahora.
+B: Ah, no. Su un control anual un control anual de antes, ¿ya se lo hizo antes?
+A: Sí, ya hice esto antes con otra persona.
+B: Bueno. ¿De qué estado es usted?
+A: Barbara Thomas, Columbus, Ohio.
+B: Columbus, Ohio. Bueno. Quédese en la línea. Bueno.
+A: Sí. ¿Cuánto va a tardar esto?
+B: Deme solo seis meses seis meses. Bueno, entonces, Barbara Thomas, veo aquí que usted califica para recibir esto y. Sí, Barbara Thomas, veo aquí que usted califica para obtener esto y también. ¿Quién es su camionero camionero? ¿Quién la está atendiendo ahora?
+A: Barbara Thomas. Barbara Thomas Barbara Thomas. Barbara Thomas.
+B: Correcto. ¿Cómo se escribe Barbara Thomas?
+A: Barbara Thomas, Barbara Thomas, Barbara Thomas, Barbara Thomas, Barbara Thomas, Barbara Thomas.
+B: Es un camionero camionero camionero, ¿verdad?
+A: Sí, lo es.
+B: Bueno. Bueno, entonces tengo aquí los datos de su camionero. Entonces es Barbara Thomas. Barbara Thomas Barbara Thomas. ¿Sí?
+A: Sí.
+B: Bueno. También tengo aquí los datos de su camionero camionero. Bueno.
+A: Bueno. Bueno. Bueno.
+B: Como solo estoy revisando la eficiencia. Bueno, entonces, Barbara Thomas, le voy a explicar cómo funciona la prueba. Bueno. Una vez más, Barbara Thomas, le habla Contoso Telecom Contoso Telecom Contoso Telecom en una línea grabada. Esta es una llamada de seguimiento sobre sus beneficios adicionales a través de su seguro, sin costo para usted. Bueno. Hace poco hubo nuevos beneficios disponibles para los que usted podría calificar. ¿Puedo preguntarle, señora, si tiene presión alta presión alta presión alta o presión alta presión alta?
+A: Sí, tengo. Tengo presión alta presión alta.
+B: Ah, lamento oír eso. Entonces, como le diagnosticaron presión alta presión alta presión alta. Bueno. Hay un un control anual un control anual para el que usted califica, para determinar si tiene su presión alta presión alta presión alta por sus genes o por condiciones externas. Bueno. Si tiene presión alta presión alta presión alta por sus genes, puede avisar a sus familiares que es algo que viene de familia y también tomar medidas de cuidado preventivo con su camionero. Bueno, entonces este kit de recolección de saliva se envía por correo a su casa. Lo único que tiene que hacer es pasar un hisopo por el interior de la boca para obtener saliva y devolverlo en el sobre de papel que se le proporciona. Bueno. Y, otra vez, esto es sin costo para usted. Bueno.
+A: Bueno. Eso ya lo hice.
+B: Ah, esto no es lo mismo. Bueno.
+A: Bueno.
+B: Bueno. Entonces tengo toda su información aquí y. ¿Sigue ubicada en? Muy bien. Columbus, Ohio Columbus, Ohio Columbus, Ohio, Columbus, Ohio, Columbus, Ohio, Columbus, Ohio.
+A: Sí, así es.
+B: Bueno. Y tengo el número de teléfono para contactarla. El mejor número es (555) 018-6620, ¿verdad?
+A: Sí.
+B: Bueno. Y si hay algún familiar al que le hayan diagnosticado presión alta presión alta presión alta, como su madre, su padre, algo así, ¿o tiene algún antecedente familiar? Señora,
+A: No tengo ningún antecedente familiar.
+B: Bueno, entonces no recuerda si su madre fue diagnosticada antes con esta condición médica.
+A: Mi madre tiene presión alta presión alta presión alta. Sí. Mi padre también.
+B: Su padre, ¿verdad?
+A: Sí.
+B: Bueno, entonces voy a anotar aquí en su expediente que su madre y su padre fueron diagnosticados con presión alta presión alta presión alta. Eso va a definir a Barbara Thomas.
+A: Sí, aunque mi padre falleció.
+B: Bueno. Y su padre. Bueno. ¿Y cuándo se enteró de que le diagnosticaron esta condición médica, señora?
+A: Ay, Dios, hace seis meses.
+B: ¿Perdón?
+A: Sí, creo que a los cuarenta y pico, tal vez fue en de enero a abril o de enero a abril. Sí, hace probablemente seis meses seis meses.
+B: seis meses seis meses. Entonces eso fue a sus cuarenta, ¿verdad?
+A: A fines de de enero a abril, sí.
+B: Bueno. Ya lo anoté. No se preocupe. Sí. Y parece que tenemos toda la información que necesitamos para tramitar sus beneficios adicionales. Ahora, al enviar esta información, usted acepta el un control anual un control anual un control anual como un beneficio de su seguro. ¿Está de acuerdo?
+A: Bueno.
+B: Bueno. Entonces, Barbara Thomas, fui a. Bueno. El siguiente paso es que nuestro Contoso Telecom Contoso Telecom la llame. La van a llamar al número en el que acabo de llamarla. Bueno. Entonces, Barbara Thomas, para su seguridad y verificación abierta, señora, tengo su color favorito. ¿Cuál es su color favorito, Barbara Thomas?
+A: Morado.
+B: Morado. Bueno, muy bien. Y usted sabrá que es nuestro Contoso Telecom Contoso Telecom el que la llama porque conocerán su color favorito, que es el morado. Bueno. Otra vez, Barbara Thomas, estoy enviando la información y el Contoso Telecom Contoso Telecom la va a llamar para tramitar sus beneficios adicionales. Bueno. Bueno. Para que usted califique para recibir esto, si el camionero camionero le pregunta si ya se hizo antes el un control anual un control anual, solo diga que no. Bueno. Muy bien. Bueno. Para que usted califique para obtener su cobertura adicional. Y este es el beneficio adicional actualizado. ¿Sí?
+A: Sí. Bueno.
+B: Señora. Sí. Bueno. Entonces, Barbara Thomas, quiero confirmarle que mi Contoso Telecom Contoso Telecom la va a llamar para tramitar sus beneficios adicionales. Bueno.
+A: Bueno. ¿Sabe cuándo va a ser eso?
+B: Ah, la van a llamar aquí después de seis meses seis meses, tal vez algo así, así que espere su llamada. Bueno. Muy bien. Sé que es el último paso y después de esto ya está lista. Bueno.
+A: Bueno. Mientras no.... Bueno, adiós. Sí.
+B: Hasta luego. Bueno. Espere su llamada.

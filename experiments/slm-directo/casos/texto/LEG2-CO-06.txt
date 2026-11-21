@@ -1,0 +1,12 @@
+A: ¿Hola?
+B: Hola, buen día, te habla Sergio, del flete de Muebles Tucumán. ¿Hablo con Eugenia Toledo?
+A: Sí.
+B: Eugenia, te llamo para coordinar la entrega del placard. ¿Es en Crisóstomo Álvarez seiscientos cuarenta, cuarto C?
+A: Sí, esa.
+B: ¿El edificio tiene ascensor? Porque el placard viene en cajas grandes.
+A: Sí, tiene, y es amplio.
+B: Bárbaro. Podemos ir el miércoles entre las diez y las catorce. ¿Va a estar alguien?
+A: Va a estar mi hermano, Tomás Toledo.
+B: Perfecto. ¿Me pasás el DNI de él para el remito?
+A: Cuarenta y cuatro, ciento veinte, trescientos tres.
+B: Listo. Ya está todo pago. Gracias, Eugenia.

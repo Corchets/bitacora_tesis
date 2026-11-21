@@ -1,0 +1,176 @@
+2026-11-10T17:29:05-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3167568 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 323
+2026-11-10T17:29:35-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3298396 kB
+PID=24406 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   32932 kB
+VmRSS:	   32932 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 324
+2026-11-10T17:30:06-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3350088 kB
+PID=24406 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   32932 kB
+VmRSS:	   32932 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 325
+2026-11-10T17:30:36-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3428244 kB
+PID=24406 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   32932 kB
+VmRSS:	   32932 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 325
+2026-11-10T17:31:06-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3498440 kB
+PID=24406 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   32932 kB
+VmRSS:	   32932 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 326
+2026-11-10T17:31:36-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3489356 kB
+PID=24406 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   32932 kB
+VmRSS:	   32932 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 327
+2026-11-10T17:32:07-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3375224 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 328
+2026-11-10T17:32:37-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3217600 kB
+PID=25187 python sonda.py
+VmHWM:	   29348 kB
+VmRSS:	   29348 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 329
+2026-11-10T17:33:08-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3156004 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 330
+2026-11-10T17:33:38-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3156004 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 331
+2026-11-10T17:34:08-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3059344 kB
+PID=25531 python sonda2.py
+VmHWM:	   28964 kB
+VmRSS:	   28964 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 333
+=== intento 2 2026-11-10T17:34:20-03:00
+2026-11-10T17:34:39-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3049836 kB
+PID=25879 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   30880 kB
+VmRSS:	   30880 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 333
+2026-11-10T17:35:09-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3086032 kB
+PID=25879 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   31008 kB
+VmRSS:	   31008 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 334
+2026-11-10T17:35:39-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3069500 kB
+PID=25879 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   31008 kB
+VmRSS:	   31008 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 335
+2026-11-10T17:36:10-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3094572 kB
+PID=25879 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   31008 kB
+VmRSS:	   31008 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 336
+2026-11-10T17:36:40-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3169500 kB
+PID=25879 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   31008 kB
+VmRSS:	   31008 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 338
+2026-11-10T17:37:10-03:00
+PID=22313 ./llama-server -m /data/local/tmp/a56-lab/gemma.gguf --host
+VmHWM:	 3558480 kB
+VmRSS:	 3199780 kB
+PID=25879 python correr_android_congelada.py --conversaciones corridas
+VmHWM:	   31008 kB
+VmRSS:	   31008 kB
+  AC powered: false
+  USB powered: true
+  level: 92
+  temperature: 339

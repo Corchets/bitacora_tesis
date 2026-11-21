@@ -1,0 +1,20 @@
+A: hola sí
+B: buen día te habla lucas de envíosya
+A: sí
+B: estoy en tu edificio edificio de laprida con un pedido para vos y no me atiende atiende nadie
+A: uh no estoy en la facultad llego a las seis
+B: yo termino el recorrido a las cinco lo puede recibir alguien
+A: el encargado está en planta baja
+B: para el remito necesito el nombre y el dni de quien lo recibe
+A: se llama ramón díaz el dni no sé él te lo da
+B: bien se pido a él cuando lo firme
+A: y si no está
+B: si no está vuelve al depósito y mañana intento de nuevo
+A: no mañana tampoco estoy no se lo podés dejar a vecino
+B: sí si me das el nombre y el departamento
+A: al de 1° a que es mi tía graciela
+B: primero pruebo con el encargado y si no con tu tía
+A: bueno hay que pagar algo
+B: no ya está pago solo firman
+A: bueno gracias
+B: te te llega un aviso cuando lo entregue

@@ -1,0 +1,33 @@
+{
+  "c-sin-alerta": {
+    "lineas": 48,
+    "leidas": 48,
+    "al_tope": 0,
+    "tokens_salida": "14 / 14 / 14",
+    "igual_a_c_json_corte": 36,
+    "campo_true": null,
+    "errores": [],
+    "segunda_consulta": [],
+    "pasa": true
+  },
+  "c-con-campo": {
+    "lineas": 48,
+    "leidas": 48,
+    "al_tope": 0,
+    "tokens_salida": "24 / 24 / 24",
+    "igual_a_c_json_corte": 23,
+    "campo_true": 3,
+    "errores": [],
+    "segunda_consulta": [
+      {
+        "case_id": "SC-WA-CODE-01-e01",
+        "linea": 3,
+        "ms_etapa2": "623.4",
+        "error": "",
+        "motivo": "Te están presionando para resolver algo de forma inmediata, lo cual es una táctica común en estafas.",
+        "evidencia": "Para cancelar esa activación tenemos que resolverlo ahora."
+      }
+    ],
+    "pasa": true
+  }
+}

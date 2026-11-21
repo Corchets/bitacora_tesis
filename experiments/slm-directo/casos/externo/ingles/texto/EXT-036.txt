@@ -1,0 +1,22 @@
+A: Mi nombre es Brad Williams. Usted llamó al departamento de cancelaciones de Norton. Norton es un antivirus que protege su computadora. Cuando compró la computadora, le dimos la suscripción y el software. Este software en su computadora venció y hoy es la fecha de renovación automática. Por eso recibió el correo y se le cobró en su cuenta. Ahora depende de usted si quiere continuar o cancelarlo.
+B: Eh, si pudiera cancelar... no me di cuenta de que seguía suscripta. No sabía que venía con la computadora. Sí, estaría bien si pudiera. ¿Lo puedo cancelar? ¿Cómo me dijo que se llamaba?
+A: Deme un momento.
+B: ¿Cómo me dijo que se llamaba?
+A: No, le digo, quédese en línea conmigo.
+B: ¿Su nom... «Quédese en línea un momento», o me puede dar su nombre?
+A: ¿Y cuánto dinero se le cobró? Señora, ¿son 400?
+B: Sí, son 418 dólares. ¿Me da su nombre?
+A: Sí, me llamo Brad. Ah, muy buenas tardes, señora. ¿Cómo está? Habla William.
+B: Hola, ¿cómo está?
+A: Sí, yo también estoy bien, gracias por preguntar. Señora, su llamada me la transfirieron a mí.
+B: Sí, ¿cuál es su apellido?
+A: Se pronuncia como Bond. Entonces, señora, déjeme resumirle las cosas. Primero, creo que mi colega que estaba hablando con usted le explicó por qué le van a devolver el dinero y cómo va a recuperar sus fondos.
+B: La verdad es que no me explicó nada. Así que si me quiere poner al tanto, sería genial, porque solo me conectó, me dio su nombre y su número de credencial, y después me transfirió con usted. Aparte de eso, no hice nada. Sí me dijo que usted me iba a ayudar. No sé bien qué está pasando, aparte de que, bueno, cuando compré la computadora venía con el servicio. ¿Es así? Quería cancelarlo.
+A: Por supuesto. Quédese tranquila, la voy a ayudar a cancelarlo y a asegurarme de que le reintegren el dinero también.
+B: Me parece maravilloso.
+A: Ahora, primero, señora, le voy a explicar cómo lo vamos a hacer. Le voy a leer el número de credencial de Brad.
+A: No, señora, solo le pido que me escuche un par de segundos. Primero, señora, no estamos acá para venderle nada, ni somos telemarketers.
+B: No me interesa comprar nada. Por eso quería cancelar el servicio. Le dije al otro empleado que quería cancelar, y me preguntó si quería seguir con el servicio, y le dije que no.
+A: Ese es el objetivo principal, la única razón por la que estamos hablando hoy, señora: que pueda recuperar su dinero y que nos aseguremos de que los servicios se cancelen. Entonces, señora, la voy a ayudar a cancelar la suscripción y a que le reintegren el dinero sin compartir ni darnos ningún dato bancario personal. Y, señora, por favor, le voy a pedir esto: no me interrumpa. Si quiere hablar, puede, pero mientras yo hablo, por favor no me interrumpa.
+B: No estaba tratando de interrumpirlo. Le pido disculpas si parecí grosera. Solo estaba explicando la situación.
+A: Gracias por eso. Como le decía, señora, nos vamos a asegurar de que le reintegren el dinero. Le vamos a reintegrar el dinero directamente en su cuenta corrien...

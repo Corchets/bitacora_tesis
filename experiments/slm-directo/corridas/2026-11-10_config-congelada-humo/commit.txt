@@ -1,0 +1,3 @@
+58b09975fea15303ce61d5537dcd64a8f98757bd
+#143, configuración congelada: humo de formato y c-json-corte-riesgo con --solo-otra sobre los 244
+IDS=(los 244)

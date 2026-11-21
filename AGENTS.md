@@ -44,18 +44,20 @@ Todo trabajo parte de un issue en GitHub Issues y se ejecuta en tres momentos:
 Al completar el objetivo, sincronizar el repositorio en este orden antes de cerrar:
 
 1. **Fuente de verdad:** verificar cambios, pruebas y enlaces relativos.
-2. **Bitácora semanal (`docs/gestion/bitacora/AAAA-MM-semana-NN.md`):** registrar la fila en la tabla semanal con estado (`☑`) y agregar viñeta en _"Qué existe hoy que no existía la semana pasada"_ con el artefacto real generado.
-3. **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** actualizar estado si se resolvió una decisión abierta. Si congeló una decisión arquitectónica duradera, crear el ADR correspondiente en `docs/ingenieria/adr/`.
-4. **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** registrar mitigaciones o nuevos riesgos descubiertos.
-5. **Comentario para GitHub:** entregar el bloque Markdown listo para copiar y cerrar el issue (`Closes #N`, resumen, evidencia observable, decisiones y próxima acción).
+2. **Hallazgos (`docs/hallazgos/`):** si el trabajo dejó un aprendizaje que cambia una decisión, el diseño o la tesis, registrarlo con la [plantilla](docs/hallazgos/PLANTILLA-HALLAZGO.md), sumar su fila al índice y marcar en la tesis lo que contradice.
+3. **Bitácora semanal (`docs/gestion/bitacora/AAAA-MM-semana-NN.md`):** registrar la fila en la tabla semanal con estado (`☑`) y agregar viñeta en _"Qué existe hoy que no existía la semana pasada"_ con el artefacto real generado.
+4. **Decisiones (`docs/gestion/MAPA-DECISIONES.md`):** actualizar estado si se resolvió una decisión abierta. Si congeló una decisión arquitectónica duradera, crear el ADR correspondiente en `docs/ingenieria/adr/`.
+5. **Riesgos (`docs/gestion/REGISTRO-RIESGOS.md`):** registrar mitigaciones o nuevos riesgos descubiertos.
+6. **Comentario para GitHub:** entregar el bloque Markdown listo para copiar y cerrar el issue (`Closes #N`, resumen, evidencia observable, decisiones y próxima acción).
 
 ### Reglas de higiene
 
-- Actualizá la fuente de verdad afectada; nunca mantengas copias paralelas.
+- Cada dato vive en un solo lugar. Los números quedan en la corrida o el análisis que los produjo; lo que significan, en un hallazgo que los enlaza. Actualizá ese lugar en vez de copiarlo.
+- Una conclusión superada se conserva tal como estaba: se le agrega una nota con fecha que enlaza el hallazgo nuevo.
 
 ## Invariantes
 
-- GitHub Issues es el único backlog activo; el roadmap contiene hitos, no tareas.
+- GitHub Issues es el único backlog activo; el roadmap contiene hitos, no tareas. Las ideas para después de la entrega van como issues con el label `trabajo-futuro`, sin milestone, y la tesis las resume en el capítulo 11.
 - Cada afirmación externa material tiene fuente verificable.
 - Cada experimento registra dataset/split, configuración, seed, versión de código, métricas y salida.
 - Audio, consentimientos firmados, datos identificables y secretos permanecen fuera de Git.
@@ -79,18 +81,25 @@ Cada información tiene **una sola fuente de verdad**. Usar esta tabla para sabe
 | **Privacidad del sistema y normativa**           | [`docs/corpus/PRIVACIDAD-DEL-SISTEMA.md`](docs/corpus/PRIVACIDAD-DEL-SISTEMA.md)                                                              | **Lee:** para fundamentar inferencia _on-device_, descarte de audio y Ley 25.326.                                                                                                      |
 | **Diseño del corpus y llamadas**                 | [`docs/corpus/METODO-CREACION-CORPUS.md`](docs/corpus/METODO-CREACION-CORPUS.md)                                                              | **Lee:** para crear semillas, fichas de rol y negativos difíciles.<br/>**Actualiza:** si cambia la metodología de recolección o parada.                                                |
 | **Catálogo de escenarios y fraudes**             | [`docs/corpus/CATALOGO-ESCENARIOS.csv`](docs/corpus/CATALOGO-ESCENARIOS.csv)                                                                  | **Actualiza:** al incorporar, modificar o descartar una semilla de llamada.                                                                                                            |
+| **Conversaciones: qué hay, dónde y con qué lista** | [`experiments/slm-directo/casos/CATALOGO-CONVERSACIONES.md`](experiments/slm-directo/casos/CATALOGO-CONVERSACIONES.md) | **Lee:** antes de elegir casos para una corrida (`correr.py --lista`).<br/>**Actualiza:** con `python catalogo.py` al sumar casos, listas o corridas. |
 | **Taxonomía y reglas de anotación**              | [`docs/corpus/MANUAL-ANOTACION.md`](docs/corpus/MANUAL-ANOTACION.md)                                                                          | **Actualiza:** si se ajustan la referencia por conversación, las marcas o las etiquetas de evidencia (`URGENCY_PRESSURE`, `REQUEST_AUTH_CODE`).                                                                              |
 | **Definición de métricas y marcas**              | [`docs/evaluacion/METRICAS.md`](docs/evaluacion/METRICAS.md)                                                                                            | **Fuente única:** para fórmulas de `T_A`, `T_R`, `T_C`, márgenes `L_R`, `L_C` y falsas alarmas.                                                                                        |
 | **Captura de audio y hardware**                  | [`docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md`](docs/ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md) y [`ARQUITECTURA.md`](docs/ingenieria/ARQUITECTURA.md) | **Lee:** para diseñar interfaces de audio, ASR y prototipo.                                                                                                                            |
 | **Investigación y papers leídos**                | [`docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md`](docs/investigacion/SINTESIS-ESTADO-DEL-ARTE.md)                                                      | **Actualiza:** al analizar una fuente primaria siguiendo el [protocolo](docs/investigacion/PROTOCOLO-REVISION.md).                                                                     |
 | **Ventana de contexto y lógica de alerta (D08)** | [`docs/investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md`](docs/investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)                                              | **Lee:** ventana con decaimiento, registro de eventos, margen de falsas alarmas y disparo de la alerta.<br/>**No cierra D08.** Sus números salen de llamadas sintéticas.               |
 | **Recorte de modelos on-device (D09)**           | [`docs/investigacion/PRIMERA-INVESTIGACION-MODELOS.md`](docs/investigacion/PRIMERA-INVESTIGACION-MODELOS.md)                                            | **Lee:** contrato de laboratorio, gamas y catálogo Hugging Face.<br/>**No cierra D09.**                                                                                                |
-| **Texto final del informe de tesis**             | `docs/tesis/`                                                                                                                                           | **Actualiza:** redactando sobre capítulos reales según el [esqueleto](docs/tesis/ESQUELETO-INFORME.md). No crear capítulos vacíos.                                                     |
+| **Texto final del informe de tesis**             | `docs/tesis/`                                                                                                                                           | **Actualiza:** redactando sobre capítulos reales según el [esqueleto](docs/tesis/ESQUELETO-INFORME.md), con cada resultado citando su hallazgo o su corrida. No crear capítulos vacíos. |
+| **Hallazgos, causas y cambios de enfoque**       | [`docs/hallazgos/`](docs/hallazgos/README.md)                                                                                                            | **Lee:** antes de escribir resultados, discusión o conclusiones, o de proponer una configuración.<br/>**Crea:** cuando un análisis deja un aprendizaje que cambia una decisión, el diseño o la tesis. |
+| **Corrección pendiente en la tesis**             | Marca `> **Corregir (#N):**` en el capítulo                                                                                                              | **Crea:** cuando un hallazgo contradice el texto y corregirlo depende de un issue abierto.<br/>**Resuelve:** al cerrar ese issue, reescribiendo el texto y borrando la marca. |
+| **Trabajo futuro**                               | GitHub Issues con label `trabajo-futuro`                                                                                                                 | **Crea:** cuando aparece una mejora que no se va a hacer antes de la entrega.                                                                                                           |
+| **Handoff para mandar al equipo**                | `HANDOFF-*.md` en la raíz, fuera de Git                                                                                                                  | **Crea:** solo como resumen para compartir; lo que dice ya está en hallazgos o issues.                                                                                                  |
 | **Término con significado preciso**              | [`docs/GLOSARIO.md`](docs/GLOSARIO.md)                                                                                                                  | **Actualiza:** cuando surge un término técnico nuevo o ambiguo.                                                                                                                        |
 
 **No crear carpetas nuevas sin que el usuario lo pida.** Si algo no encaja en ninguna, consultá. El [README.md](README.md) mantiene el mapa de la estructura global.
 
 ## Convenciones
+
+- **Ramas:** `laboratorio-main` es el tronco de trabajo: ahí se integra todo y desde ahí se levanta la demo. A `main` llega, por PR de sincronización, lo que el equipo ya definió. `reserva/test` es `laboratorio-main` más la reserva de test: los merges van solo de `laboratorio-main` hacia ella, para la evaluación final. Integrar siempre con merge commit: los Colab fijan commits por SHA o tag y tienen que seguir alcanzables.
 
 - **Abrir o levantar la demo local:** leer primero [README.md §4](README.md#4-demo-local-de-llamadas-luciano), verificar la copia de trabajo del proceso que ocupa el puerto y contrastar el HTML servido con el de la copia indicada antes de entregar el enlace.
 

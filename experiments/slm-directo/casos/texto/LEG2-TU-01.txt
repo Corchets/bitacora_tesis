@@ -1,0 +1,10 @@
+A: ¿Hola?
+B: Hola, buen día. Te llamamos del Centro Médico del Parque, mi nombre es Elena. ¿Hablo con Juan Pablo Sosa?
+A: Sí.
+B: Te llamo para confirmar tu turno con la doctora Gómez, de dermatología, el jueves doce a las diez y media.
+A: Sí, confirmo.
+B: Para dejar cargada la admisión, ¿me confirmás tu DNI?
+A: Cuarenta, cero treinta, cuatrocientos ochenta y uno.
+B: ¿Y seguís con Salud Norte?
+A: Sí, la misma.
+B: Perfecto. Traé la credencial y llegá diez minutos antes. Gracias, Juan Pablo.

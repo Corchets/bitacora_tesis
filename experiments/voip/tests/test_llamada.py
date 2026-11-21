@@ -7,6 +7,7 @@ Verifica:
 4. Un segmento que es solo puntuación no se registra.
 5. Un canal que llega tarde queda en su lugar en el estéreo.
 6. El detector junta los disparos acumulados y el aviso es único.
+7. Con --disparo turno (ADR 0007) se consulta al cerrar cada turno de OTRA, con el silencio del audio.
 """
 
 from __future__ import annotations
@@ -26,6 +27,7 @@ if str(DIR_VOIP) not in sys.path:
     sys.path.insert(0, str(DIR_VOIP))
 
 from llamada import SAMPLE_RATE, Llamada
+from turnos import ReglasTurno
 from detectores import armar_mensaje_usuario
 from motores import MotorFalso
 from replay import FlujoTitoEnVivo, cargar_actualizaciones_jsonl, correr_replay
@@ -299,6 +301,106 @@ class TestLlamada(unittest.TestCase):
         self.assertEqual(tito_evaluados, ["Hola, te llamo del banco."])
 
         llamada.cerrar()
+
+
+# Canal mudo: MotorFalso con una lista vacía usa su guion por defecto; un punto solo no es una línea.
+MUDO = [{"tiempo_audio_s": 1e9, "tipo": "final", "segmento": 1, "texto": "."}]
+
+
+def final(t: float, segmento: int, texto: str) -> dict:
+    """Final del MotorFalso: sale 0,8 s después de que el canal se calla, como el corte del ASR."""
+    return {"tiempo_audio_s": t, "tipo": "final", "segmento": segmento, "texto": texto}
+
+
+class TestTurnosEnLlamada(unittest.TestCase):
+    """--disparo turno: los disparos salen del cierre de turnos, no de cada frase."""
+
+    def setUp(self) -> None:
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name) / "llamada"
+        self.reloj = Reloj()
+
+    def tearDown(self) -> None:
+        self.tmp.cleanup()
+
+    def armar(self, protegida, otra, **reglas) -> Llamada:
+        llamada = Llamada(crear_motor=programas(protegida, otra), disparo="turno", hablantes="rol",
+                          ahora=self.reloj, reglas_turno=ReglasTurno(**reglas))
+        llamada.abrir("VIVO-TEST", self.dir)
+        self.addCleanup(llamada.descartar)
+        return llamada
+
+    def hablar(self, llamada: Llamada, segundos: float, *con_voz: str) -> list[float]:
+        """Bloques de 100 ms en los dos canales, con voz solo en `con_voz`. Devuelve cuándo hubo disparos."""
+        disparos = []
+        for _ in range(int(round(segundos * 10))):
+            self.reloj.t += 0.1
+            antes = llamada.disparos
+            for rol in ("otra", "protegida"):
+                acts = llamada.recibir(rol, pcm(0.1, 0.1 if rol in con_voz else 0.0))
+                self.assertFalse(any(llamada.marcar_disparo(a) for a in acts))  # ninguna frase dispara sola
+            disparos += [round(llamada.reloj(), 1)] * (llamada.disparos - antes)
+        return disparos
+
+    def test_silencio_del_audio_cierra_el_turno_de_otra(self):
+        llamada = self.armar(MUDO, [final(1.8, 1, "Te llamo del banco.")])
+        self.assertEqual(self.hablar(llamada, 1.0, "otra"), [])
+        # Se calla en 1,0 s: el ASR cierra la frase en 1,8 s y el turno, con 2 s de silencio.
+        self.assertEqual(self.hablar(llamada, 3.0), [3.0])
+        llamada.cerrar()
+        manifiesto = json.loads((self.dir / "manifiesto.json").read_text())
+        self.assertEqual(manifiesto["disparo"], "turno")
+        self.assertEqual(manifiesto["turnos"]["reglas"], {"palabras": 3, "voz_s": 1.0, "silencio_s": 2.0, "tope_s": 15.0})
+        self.assertEqual([(c["rol"], c["motivo"], c["consulta"]) for c in manifiesto["turnos"]["cierres"]],
+                         [("otra", "silencio", True)])
+
+    def test_aja_no_cierra_y_protegida_en_serio_si_sin_consultar_por_su_turno(self):
+        otra = [final(1.8, 1, "Te llamo del banco."), final(3.6, 2, "Necesito validar tu identidad.")]
+        protegida = [final(2.6, 1, "Ajá."), final(4.6, 2, "¿Y para qué necesitás eso?")]
+        llamada = self.armar(protegida, otra)
+        disparos = self.hablar(llamada, 1.0, "otra")
+        disparos += self.hablar(llamada, 0.2)
+        disparos += self.hablar(llamada, 0.6, "protegida")  # «Ajá.»: sale en 2,6 s y no cierra
+        disparos += self.hablar(llamada, 1.0, "otra")
+        disparos += self.hablar(llamada, 0.2)
+        disparos += self.hablar(llamada, 0.8, "protegida")
+        disparos += self.hablar(llamada, 0.8)  # en 4,6 s OTRA lleva 1,8 s callada: cierra el cambio, no el silencio
+        self.assertEqual(disparos, [4.6])
+        n, foto, juntos = llamada.tomar_foto()
+        self.assertEqual(juntos, 1)
+        self.assertEqual([l.hablante for l in foto], ["OTRA", "PROTEGIDA", "OTRA", "PROTEGIDA"])
+        # PROTEGIDA se calla: su turno cierra por silencio y no consulta.
+        self.assertEqual(self.hablar(llamada, 3.0), [])
+        cierres = [(c["rol"], c["motivo"], c["consulta"]) for c in llamada.turnos.cierres]
+        self.assertEqual(cierres, [("protegida", "cambio", False), ("otra", "cambio", True), ("protegida", "silencio", False)])
+
+    def test_foto_del_turno_sin_borradores_y_salteo_de_intermedias(self):
+        otra = [final(1.8, 1, "Te llamo del banco."), final(5.8, 2, "Pasame el código.")]
+        protegida = [{"tiempo_audio_s": 6.0, "tipo": "parcial", "segmento": 1, "texto": "eh"}]
+        llamada = self.armar(protegida, otra)
+        self.hablar(llamada, 1.0, "otra")
+        self.hablar(llamada, 3.0)  # primer turno cerrado por silencio en 3,0 s
+        self.hablar(llamada, 1.0, "otra")
+        self.assertEqual(self.hablar(llamada, 3.0, "protegida"), [7.0])  # segundo turno, sin evaluar el primero
+        n, foto, juntos = llamada.tomar_foto()
+        self.assertEqual([l.texto for l in foto], ["Te llamo del banco.", "Pasame el código."])
+        self.assertEqual("eh", llamada.foto[-1].texto)  # el panel sí ve el borrador
+        ev = llamada.registrar_evaluacion(n, juntos, RespuestaFalsa(), 7.0, 7.5)
+        self.assertEqual(ev.saltadas, 1)
+
+    def test_al_vaciar_consulta_el_turno_abierto_y_no_despues_del_aviso(self):
+        llamada = self.armar(MUDO, [final(0.9, 1, "Te llamo del banco."), final(9.0, 2, "Decime el código.")])
+        self.hablar(llamada, 1.0, "otra")
+        self.assertEqual(llamada.disparos, 0)
+        self.assertEqual([a["texto"] for a in llamada.vaciar_audio()], ["Decime el código."])
+        self.assertEqual(llamada.disparos, 1)
+        self.assertEqual(llamada.turnos.cierres[-1]["motivo"], "fin")
+
+        llamada = self.armar(MUDO, [final(0.9, 1, "Te llamo del banco.")])
+        llamada.aviso = object()  # ya avisó: los turnos se siguen anotando, pero no disparan
+        self.hablar(llamada, 3.5, "otra")
+        llamada.vaciar_audio()
+        self.assertEqual(llamada.disparos, 0)
 
 
 if __name__ == "__main__":

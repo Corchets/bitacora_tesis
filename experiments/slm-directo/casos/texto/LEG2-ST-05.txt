@@ -1,0 +1,9 @@
+A: ¿Hola?
+B: Hola, buenas tardes, te habla Julieta, de soporte de Tiendita Online. Te llamo por el ticket que abriste porque no podías entrar a tu cuenta. ¿Hablo con Andrés Romero?
+A: Sí, sí, ayer abrí el ticket.
+B: Perfecto. ¿El mail de la cuenta es andresromero arroba gmail?
+A: Sí, ese.
+B: Bien. Encontré el problema: la cuenta quedó bloqueada por muchos intentos. Ya la desbloqueé y te mandé un mail con un link para crear una contraseña nueva. Esa contraseña la elegís vos, a mí no me tenés que decir nada.
+A: Ah, ahí me llegó, sí.
+B: Bárbaro. Si no te funciona, respondé ese mismo mail. Gracias, Andrés.
+A: Gracias.

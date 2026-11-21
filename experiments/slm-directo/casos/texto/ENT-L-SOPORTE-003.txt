@@ -1,0 +1,23 @@
+A: Hola, ¿Tobías? Te hablo de TecnoFix, el local de la calle Muñecas. Dejaste una notebook la semana pasada.
+B: Sí, ¿ya está?
+A: Casi. Le cambiamos el disco por uno sólido, como habíamos quedado, y reinstalamos el sistema.
+B: Buenísimo. ¿Y los archivos?
+A: Están todos en la carpeta Documentos. Revisalos cuando la retires.
+B: Bárbaro.
+A: Te llamo por otra cosa. Probando la máquina vimos que el cargador recalienta y a veces corta.
+B: ¿En serio? Yo no me había dado cuenta.
+A: Te puede quemar la batería. Te recomiendo cambiarlo. El original sale veinticinco mil.
+B: Mmm. ¿No hay uno más barato?
+A: Hay uno alternativo de doce mil, pero no te lo garantizo igual.
+B: Poné el original, entonces.
+A: Bien. Queda en ochenta y cinco más veinticinco, ciento diez mil en total.
+B: Ok.
+A: Para dejarla registrada a tu nombre, ¿me confirmás el documento que dejaste?
+B: 38.066.417.
+A: Bien. Pagás cuando la retirás, en efectivo, débito o transferencia acá en el mostrador.
+B: ¿Tengo que llevar algo?
+A: El comprobante. Arriba tiene un número de orden, el 0492. Con eso y el documento te la damos.
+B: ¿Y si perdí el comprobante?
+A: Con el documento también, pero tarda un poco más.
+B: Lo tengo, creo. Paso mañana después del trabajo.
+A: Abrimos hasta las ocho.

@@ -50,6 +50,7 @@ bitacora_tesis/
 │   └── scripts/                   # Generador Node (build, serve, review-brief)
 ├── docs/
 │   ├── GLOSARIO.md                # Términos técnicos con sentido preciso (T_A, T_R, T_C, WER, etc.)
+│   ├── hallazgos/                 # Lo que aprendimos: un archivo por hallazgo (H01…), con evidencia, estado y qué cambia
 │   ├── propuesta/
 │   │   ├── PLAN-DE-TRABAJO.md     # Fuente única de verdad: problema, objetivos, método y cronograma
 │   │   └── REQUISITOS-ACADEMICOS.md # Pautas formales de UNSTA (portada, ~100 págs, defensa)
@@ -71,7 +72,9 @@ bitacora_tesis/
 │   │   ├── PRIVACIDAD-DEL-SISTEMA.md    # Privacy by Design on-device, Ley 25.326 y permisos Android
 │   │   ├── METODO-CREACION-CORPUS.md    # Fichas de rol, diseño de semillas, negativos difíciles y parada
 │   │   ├── CATALOGO-ESCENARIOS.csv      # Inventario estructurado de semillas de fraude y control
-│   │   └── MANUAL-ANOTACION.md          # Referencia humana y reglas de anotación
+│   │   ├── MANUAL-ANOTACION.md          # Referencia humana y reglas de anotación
+│   │   ├── RELEVAMIENTO-CORPUS-EXTERNO.md # Fuentes externas para la prueba de generalización (#144)
+│   │   └── FILTRO-KORCCVI.csv           # Decisión por llamada del filtro de KorCCVi (#144)
 │   ├── ingenieria/
 │   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md # Comparación replay vs VoIP vs altavoz vs telefonía
 │   │   ├── ARQUITECTURA.md              # Componentes conceptuales y pipeline de audio a alerta
@@ -90,11 +93,11 @@ bitacora_tesis/
 
 ## 4. Demo local de llamadas (Luciano)
 
-Al 2026-11-05, la copia para probar Meet con Gemma 4 es
-`/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano`, con el último commit de
-`laboratorio-luciano` sin rama propia, porque esa rama está tomada por otra copia. Desde el 2026-11-05 arranca por defecto con el prompt `v4`,
-roles y Tito sin indicio; [ADR 0001](docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) todavía no se reabrió. Las variables y el orden de la corrida están en
-[`PRUEBA-VOZ-REAL-MEET.md`](experiments/voip/PRUEBA-VOZ-REAL-MEET.md).
+Desde el 2026-11-10 la demo se levanta desde una copia de `laboratorio-main`, con la configuración congelada de
+[#143](https://github.com/Corchets/bitacora_tesis/issues/143) por defecto. Comando, de dónde sale Ollama y opciones:
+[`experiments/voip/README.md` §3](experiments/voip/README.md#demo-con-la-configuración-congelada-de-143). Hasta esa
+fecha corría desde la copia de `laboratorio-luciano` de Luciano, con Tito y el prompt `v4`; esa rama se retira. Las
+variables y el orden de la prueba con voz real están en [`PRUEBA-VOZ-REAL-MEET.md`](experiments/voip/PRUEBA-VOZ-REAL-MEET.md).
 
 **Qué se guarda.** Cada llamada deja en `experiments/voip/llamadas/` de la copia donde corre el servidor
 las voces (`estereo.wav`) y sus registros (`actualizaciones.jsonl`, `detector.jsonl`, `manifiesto.json`).
@@ -108,25 +111,24 @@ Antes de abrir localhost, comprobá qué proceso ocupa el puerto y desde qué ca
 ```bash
 lsof -nP -iTCP:8765 -sTCP:LISTEN
 lsof -a -p <PID> -d cwd
-git -C /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano status -sb
+git -C <copia> status -sb   # tiene que estar en laboratorio-main
 ```
 
 Si el servidor corresponde a otra copia, terminalo con `kill -TERM <PID>` y esperá
-que libere el puerto: el cierre normal conserva la llamada en curso. Levantá la
-copia actual con el entorno de esta Mac que tiene `torch` y `transformers`, los que Tito necesita:
+que libere el puerto: el cierre normal conserva la llamada en curso. Levantá la copia de `laboratorio-main`:
 
 ```bash
-ollama serve   # en otra terminal; solo reglas y Probar el ASR andan sin Ollama
-cd /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip
-/Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/.venv/bin/python servidor.py --host 127.0.0.1 --detector tito-slm --modelo gemma4:e2b-it-q4_K_M --asr parakeet-filtro
+ollama serve   # en otra terminal, o --ollama-url a otra máquina; solo reglas y Probar el ASR andan sin Ollama
+cd <copia>/experiments/voip
+<copia>/.venv/bin/python servidor.py --host 127.0.0.1
 ```
 
-`bitacora_tesis-voip/.venv` no tiene `torch`: con ese entorno, elegir Gemma en el panel falla. Los
-modelos y audios de `experiments/asr-local/` son enlaces a `bitacora_tesis-voip`, fuera de Git. En
-otra terminal, comprobá el panel antes de abrirlo:
+Sin Tito no hacen falta `torch` ni `transformers`: solo los pide `--detector tito-slm --prompt v4`. Los modelos y
+audios de `experiments/asr-local/` están fuera de Git: en una copia nueva hay que enlazarlos o bajarlos. En otra
+terminal, comprobá el panel antes de abrirlo:
 
 ```bash
-curl --fail --silent http://localhost:8765/ | cmp - /Users/lucianogrosso/bitacora_tesis-laboratorio-luciano/experiments/voip/panel.html
+curl --fail --silent http://localhost:8765/ | cmp - <copia>/experiments/voip/panel.html
 open http://localhost:8765/
 ```
 

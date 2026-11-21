@@ -3,6 +3,8 @@
 > **Elección registrada el 2026-11-03 en [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md):** Parakeet con filtro Silero y Tito viejo con Gemma 4 E2B. Esta comparación es sobre material de desarrollo, sin revisión humana: no estima el rendimiento final. Las secciones con Qwen y Zipformer son el antecedente de octubre; la comparación que sostiene la elección es la [primera sección](#comparación-que-sostiene-la-elección-2026-10-30-a-2026-11-02).
 >
 > **Propuesta para el ADR 0002 (2026-11-05, sin discutir):** [PROPUESTA-CONFIGURACION-DETECTOR.md](PROPUESTA-CONFIGURACION-DETECTOR.md), con los 150 casos de desarrollo.
+>
+> **Nota del 2026-11-11:** el detector quedó fijado en el [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md): Gemma 4 E2B solo, con `c-premisa-corte-riesgo`, elegido en [#143](https://github.com/Corchets/bitacora_tesis/issues/143) sobre los 244 casos de desarrollo. La elección de Tito viejo con E2B de abajo queda como antecedente.
 
 ## Comparación que sostiene la elección (2026-10-30 a 2026-11-02)
 
@@ -41,7 +43,7 @@ Los 20 casos sirvieron para elegir entre 10 modelos, así que el 10/10 es optimi
 | Segmentos finales | 127 | 205 |
 | RTF / memoria pico | 0,088 / 1.036 MB | 0,043 / 998 MB |
 
-El WER se mide contra el guion y hubo palabras cambiadas al hablar: sirve para comparar A con B, no como valor absoluto. **Falta la comparación de la misma detección con texto manual y con ASR (E1)**, que se hace en la evaluación final.
+El WER se mide contra el guion y hubo palabras cambiadas al hablar: sirve para comparar A con B, no como valor absoluto. La comparación de la misma detección con texto manual y con ASR (E1) quedó fuera el 2026-11-10 ([#54](https://github.com/Corchets/bitacora_tesis/issues/54)).
 
 ## Alcance y lectura
 

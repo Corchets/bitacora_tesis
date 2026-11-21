@@ -1,0 +1,10 @@
+A: Hola, ¿quién habla?
+B: Hola, buenas tardes. Te habla Darío, de Usados del Jardín. ¿Hablo con Leandro Paz?
+A: Sí.
+B: Leandro, hace un mes nos dejaste tus datos buscando un sedán diésel. Ayer nos entró uno que te puede interesar, con setenta mil kilómetros y un solo dueño.
+A: Ah, mirá. ¿Qué precio?
+B: Está en dieciséis millones, con el papeleo al día. Si querés lo venís a ver, o te lo llevamos para que lo pruebes. ¿Por qué zona vivís?
+A: Por el barrio Norte, cerca de la plaza Belgrano.
+B: Perfecto, estamos cerca. ¿Te viene bien el sábado a la mañana en la agencia?
+A: Sí, el sábado puedo.
+B: Listo, te espero. Te mando la ubicación por WhatsApp. Gracias, Leandro.

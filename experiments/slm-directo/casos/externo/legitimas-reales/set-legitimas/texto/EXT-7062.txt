@@ -1,0 +1,25 @@
+A: ¿Puedo? Hola, ¿puedo hablar con James Moore?
+B: Sí, habla James Moore.
+A: Hola James Moore, le habla James Moore de at. ¿Cómo está? ¿Cómo le va?
+B: Estoy bien, gracias.
+A: Bueno, señora, abrí sus datos y todo eso. Con la oferta que tenemos disponible ahora: usted tiene 50 Mbps y paga, como usted me dijo, $120 dólares. ¿Correcto?
+B: Correcto.
+A: La oferta que tenemos disponible es de menos de $120 dólares. También puede tener Internet en línea de $120 dólares $120 dólares al doble de velocidad. Además obtendrá la velocidad adicional, que es de 100 Mbps tanto de bajada como de subida. Y le bajará el precio. Eso es $120 dólares durante seis meses seis meses. Y no hay... será un total de $120 dólares.
+B: ¿Ese es el total, señora?
+A: Sí, esa es la factura total por su línea telefónica y un Internet al doble de velocidad. Usted usa 50. También vamos a aumentar la velocidad, 200 Mbps, 100 de subida y de bajada. Eso es fibra pura. Y su precio va a quedar fijo por seis meses seis meses. Va a ser $120 dólares por seis meses. No hay cargos ocultos ni nada más. Además no hay visita del maestra. Simplemente activaremos esta promoción dentro de seis meses seis meses. Solo necesito confirmar algunas cosas de su parte para asegurarnos de que estamos de acuerdo. ¿Está bien?
+B: Bien.
+A: No, señora, es un servicio de seis meses a seis meses. Si le gusta, puede quedárselo. Si no le gusta, puede cancelar en cualquier momento. Y el precio que le damos queda fijo solo por seis meses seis meses.
+B: Bien. Bien.
+A: Y el nombre de su negocio es Contoso Telecom Contoso Telecom. Están ubicados en Albany Albany Albany Albany Albany Albany Albany, con código postal Albany, ¿correcto?
+B: Sí.
+A: ¿Y cuál es su correo electrónico activo para enviarle toda esta información?
+B: Está en mi cuenta. James Moore usuario@example.com usuario@example.com usuario@example.com usuario@example.com James Moore James Moore James Moore James Moore James Moore James Moore James Moore James Moore James Moore James Moore y luego usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com usuario@example.com
+A: Y creo que usted es la propietaria de este negocio, señora.
+B: Sí.
+A: Perfecto. Entonces estamos listos. Al final, lo único que necesitamos de su parte es su permiso para hacer esta mejora y fijar su precio en solo $120 dólares. ¿Contamos con su permiso?
+B: Sí. Sí.
+A: Además, señora, esta llamada puede ser grabada por motivos de calidad y capacitación, y según la ley federal es su derecho y nuestro deber proteger la confirmación de su cuenta. ¿Tiene alguna pregunta antes de despedirnos?
+B: No.
+A: Perfecto. Y es posible que reciba otra llamada más de Contoso Telecom Contoso Telecom, quizás después de seis meses seis meses seis meses seis meses. Por favor, quédese en la llamada y simplemente le harán un resumen. Confirmarán el nombre de su negocio y la dirección, y listo. ¿De acuerdo?
+B: Bien.
+A: Muy bien. Que le vaya bien.

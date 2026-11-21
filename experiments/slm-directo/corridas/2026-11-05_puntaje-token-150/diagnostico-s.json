@@ -1,0 +1,345 @@
+[
+  {
+    "prompt": "tarea-a1",
+    "hablantes": "ab",
+    "case_id": "SC-WA-CODE-01-e01",
+    "hasta_linea": 4,
+    "num_predict": 3,
+    "texto": "SÍ",
+    "tokens": [
+      "S",
+      "Í"
+    ],
+    "logprobs": [
+      {
+        "token": "S",
+        "logprob": -3.576279254957626e-07,
+        "bytes": [
+          83
+        ],
+        "top_logprobs": [
+          {
+            "token": "S",
+            "logprob": -3.576279254957626e-07,
+            "bytes": [
+              83
+            ]
+          },
+          {
+            "token": "SI",
+            "logprob": -15.774073600769043,
+            "bytes": [
+              83,
+              73
+            ]
+          },
+          {
+            "token": "Sí",
+            "logprob": -16.041776657104492,
+            "bytes": [
+              83,
+              195,
+              173
+            ]
+          },
+          {
+            "token": "NO",
+            "logprob": -16.070444107055664,
+            "bytes": [
+              78,
+              79
+            ]
+          },
+          {
+            "token": " S",
+            "logprob": -19.544639587402344,
+            "bytes": [
+              32,
+              83
+            ]
+          }
+        ]
+      },
+      {
+        "token": "Í",
+        "logprob": 0,
+        "bytes": [
+          195,
+          141
+        ],
+        "top_logprobs": [
+          {
+            "token": "Í",
+            "logprob": 0,
+            "bytes": [
+              195,
+              141
+            ]
+          },
+          {
+            "token": "İ",
+            "logprob": -19.358102798461914,
+            "bytes": [
+              196,
+              176
+            ]
+          },
+          {
+            "token": "IST",
+            "logprob": -20.1071834564209,
+            "bytes": [
+              73,
+              83,
+              84
+            ]
+          },
+          {
+            "token": "í",
+            "logprob": -20.467041015625,
+            "bytes": [
+              195,
+              173
+            ]
+          },
+          {
+            "token": "Ì",
+            "logprob": -20.83737564086914,
+            "bytes": [
+              195,
+              140
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "prompt": "v4-a1",
+    "hablantes": "rol",
+    "case_id": "SC-WA-CODE-01-e01",
+    "hasta_linea": 4,
+    "num_predict": 3,
+    "texto": "SÍ",
+    "tokens": [
+      "S",
+      "Í"
+    ],
+    "logprobs": [
+      {
+        "token": "S",
+        "logprob": 0,
+        "bytes": [
+          83
+        ],
+        "top_logprobs": [
+          {
+            "token": "S",
+            "logprob": 0,
+            "bytes": [
+              83
+            ]
+          },
+          {
+            "token": "SI",
+            "logprob": -16.64121437072754,
+            "bytes": [
+              83,
+              73
+            ]
+          },
+          {
+            "token": "Sí",
+            "logprob": -18.339067459106445,
+            "bytes": [
+              83,
+              195,
+              173
+            ]
+          },
+          {
+            "token": "NO",
+            "logprob": -19.162221908569336,
+            "bytes": [
+              78,
+              79
+            ]
+          },
+          {
+            "token": " S",
+            "logprob": -20.088144302368164,
+            "bytes": [
+              32,
+              83
+            ]
+          }
+        ]
+      },
+      {
+        "token": "Í",
+        "logprob": 0,
+        "bytes": [
+          195,
+          141
+        ],
+        "top_logprobs": [
+          {
+            "token": "Í",
+            "logprob": 0,
+            "bytes": [
+              195,
+              141
+            ]
+          },
+          {
+            "token": "İ",
+            "logprob": -21.641218185424805,
+            "bytes": [
+              196,
+              176
+            ]
+          },
+          {
+            "token": "ÍN",
+            "logprob": -22.212947845458984,
+            "bytes": [
+              195,
+              141,
+              78
+            ]
+          },
+          {
+            "token": "Ì",
+            "logprob": -23.08318519592285,
+            "bytes": [
+              195,
+              140
+            ]
+          },
+          {
+            "token": "IST",
+            "logprob": -23.13508415222168,
+            "bytes": [
+              73,
+              83,
+              84
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "prompt": "v4-a2",
+    "hablantes": "rol",
+    "case_id": "CV2-D-L-BANCO-001",
+    "hasta_linea": 12,
+    "num_predict": 3,
+    "texto": "SÍ",
+    "tokens": [
+      "S",
+      "Í"
+    ],
+    "logprobs": [
+      {
+        "token": "S",
+        "logprob": -0.0031148376874625683,
+        "bytes": [
+          83
+        ],
+        "top_logprobs": [
+          {
+            "token": "S",
+            "logprob": -0.0031148376874625683,
+            "bytes": [
+              83
+            ]
+          },
+          {
+            "token": "NO",
+            "logprob": -5.773992538452148,
+            "bytes": [
+              78,
+              79
+            ]
+          },
+          {
+            "token": "SI",
+            "logprob": -13.483247756958008,
+            "bytes": [
+              83,
+              73
+            ]
+          },
+          {
+            "token": "SIN",
+            "logprob": -14.488025665283203,
+            "bytes": [
+              83,
+              73,
+              78
+            ]
+          },
+          {
+            "token": "N",
+            "logprob": -14.491399765014648,
+            "bytes": [
+              78
+            ]
+          }
+        ]
+      },
+      {
+        "token": "Í",
+        "logprob": 0,
+        "bytes": [
+          195,
+          141
+        ],
+        "top_logprobs": [
+          {
+            "token": "Í",
+            "logprob": 0,
+            "bytes": [
+              195,
+              141
+            ]
+          },
+          {
+            "token": "İ",
+            "logprob": -16.648483276367188,
+            "bytes": [
+              196,
+              176
+            ]
+          },
+          {
+            "token": "ÍN",
+            "logprob": -16.94683837890625,
+            "bytes": [
+              195,
+              141,
+              78
+            ]
+          },
+          {
+            "token": "IST",
+            "logprob": -17.077774047851562,
+            "bytes": [
+              73,
+              83,
+              84
+            ]
+          },
+          {
+            "token": "Ì",
+            "logprob": -18.171749114990234,
+            "bytes": [
+              195,
+              140
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

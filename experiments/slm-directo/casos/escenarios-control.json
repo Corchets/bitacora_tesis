@@ -1,0 +1,329 @@
+{
+  "_meta": {
+    "estado": "propuesta sin discutir; control a ciegas del agrupamiento; no lo reemplaza",
+    "fecha": "2026-11-09",
+    "quien": "un subagente (Claude) que leyó solo las 94 transcripciones agrupadas, renombradas xNN y mezcladas con semilla 4511; no vio case_id, referencia, dudosas ni resultados",
+    "paquete_sha256": "5f2716102214ac8579433aae6589116b2ac94b9c97561eb8510b49208b6cf649",
+    "respuesta_sha256": "ddd091d0caacd58472cec1f3f69a3bf44f3439f077ea94f61f0b34ad677bfd83"
+  },
+  "grupos": [
+    {
+      "escenario": "E01",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-BA-01"
+        ],
+        [
+          "ENT-L-BANCO-001",
+          "LEG2-BA-01"
+        ]
+      ],
+      "motivo": "Mismo aviso de compra online no reconocida y bloqueo, pero `LEG-BA-01` aclara que no pide datos y no valida identidad; `ENT-L-BANCO-001` y `LEG2-BA-01` piden DNI y fecha de nacimiento y suspenden la app con código SMS."
+    },
+    {
+      "escenario": "E02",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG2-BA-02",
+          "ENT-L-BANCO-002"
+        ],
+        [
+          "LEG-BA-02"
+        ]
+      ],
+      "motivo": "Accesos desde dispositivo nuevo y derivación al número del dorso en las tres, pero en `LEG2-BA-02` y `ENT-L-BANCO-002` el banco pide el DNI (se niega); en `LEG-BA-02` no pide ningún dato."
+    },
+    {
+      "escenario": "E03",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-BA-03"
+        ],
+        [
+          "ENT-L-BANCO-003",
+          "LEG2-BA-03"
+        ]
+      ],
+      "motivo": "Compra en aerolínea reconocida y liberada en las tres; `ENT-L-BANCO-003` y `LEG2-BA-03` validan identidad pidiendo nombre y últimos dígitos del DNI, `LEG-BA-03` no pide ningún dato."
+    },
+    {
+      "escenario": "E04",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Repartidor de EnvíosYa en el edificio, nadie atiende, se deja al encargado y ya está pago. El DNI del encargado se pide en persona, no a la protegida; la tía en `ENT-L-DELIVERY-002` es detalle menor."
+    },
+    {
+      "escenario": "E05",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Repartidor del correo no encuentra la numeración, pide referencia (pasillo junto a la verdulería), departamento cuatro, todo pago y solo firma. `ENT-L-DELIVERY-003` cambia nombres y agrega detalles menores."
+    },
+    {
+      "escenario": "E06",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-EN-01",
+          "LEG2-EN-01"
+        ],
+        [
+          "ENT-L-ENCUESTA-001"
+        ]
+      ],
+      "motivo": "Encuesta tras visita técnica en las tres, pero `ENT-L-ENCUESTA-001` agrega un reclamo por los días sin servicio (descuento) y pide confirmar el mail; `LEG-EN-01` y `LEG2-EN-01` son solo la encuesta sin datos."
+    },
+    {
+      "escenario": "E07",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Encuesta de consumo en supermercados, la persona está manejando y pide no ser contactada. La discusión en `ENT-L-ENCUESTA-003` sobre el origen del número no cambia el desenlace ni pide datos."
+    },
+    {
+      "escenario": "E08",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG2-TU-01",
+          "ENT-L-MEDICO-001"
+        ],
+        [
+          "LEG-TU-01"
+        ]
+      ],
+      "motivo": "Confirmación del turno de dermatología en las tres; `LEG2-TU-01` y `ENT-L-MEDICO-001` piden DNI y obra social (`ENT-L-MEDICO-001` también número de afiliado), `LEG-TU-01` no pide ningún dato."
+    },
+    {
+      "escenario": "E09",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Consultorio odontológico reprograma el turno por imprevisto de la doctora al lunes dieciséis a las dieciocho, recordatorio por WhatsApp. La seña y la lista de espera en `ENT-L-MEDICO-002` son detalles menores."
+    },
+    {
+      "escenario": "E10",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG2-ST-02",
+          "ENT-L-SOPORTE-002"
+        ],
+        [
+          "LEG-ST-02"
+        ]
+      ],
+      "motivo": "Coordinación de visita técnica por el lavarropas en garantía; `LEG2-ST-02` y `ENT-L-SOPORTE-002` piden el DNI del titular de la factura, `LEG-ST-02` no pide ningún dato."
+    },
+    {
+      "escenario": "E11",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-ST-03"
+        ],
+        [
+          "LEG2-ST-03"
+        ],
+        [
+          "ENT-L-SOPORTE-003"
+        ]
+      ],
+      "motivo": "Aviso de notebook reparada en las tres; `LEG-ST-03` sin datos, `LEG2-ST-03` pide DNI, `ENT-L-SOPORTE-003` pide DNI y además llama por otro motivo: cargador defectuoso y venta de uno nuevo que sube el total."
+    },
+    {
+      "escenario": "E12",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "ENT-L-VENTAS-001",
+          "LEG2-CC-01"
+        ],
+        [
+          "LEG-CC-01"
+        ]
+      ],
+      "motivo": "Oferta de más gigas de Nubo Telecom; `ENT-L-VENTAS-001` y `LEG2-CC-01` cargan el cambio pidiendo DNI, mail y código SMS en la app; `LEG-CC-01` solo manda las condiciones por mail sin pedir datos."
+    },
+    {
+      "escenario": "E13",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Telefónica ofrece internet, la persona ya tiene y se queja de llamadas, la sacan de la base y le sugieren el Registro No Llame. Cambia la empresa pero no los hechos."
+    },
+    {
+      "escenario": "E14",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG2-CC-06",
+          "ENT-L-VENTAS-006"
+        ],
+        [
+          "LEG-CC-03"
+        ]
+      ],
+      "motivo": "Oferta de pack de deportes y derivación al 0800 en las tres; `LEG2-CC-06` y `ENT-L-VENTAS-006` dan referencia, confirman domicilio y anuncian técnico para cambiar el deco; `LEG-CC-03` no pide ni confirma datos."
+    },
+    {
+      "escenario": "E15",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "ENT-L-VENTAS-007",
+          "LEG2-VE-01"
+        ],
+        [
+          "LEG-VE-01"
+        ]
+      ],
+      "motivo": "Seguimiento de consulta por la pick-up con financiación; `ENT-L-VENTAS-007` y `LEG2-VE-01` precalifican el crédito pidiendo nombre, DNI y mail (`ENT-L-VENTAS-007` también ingresos); `LEG-VE-01` solo manda cotización por WhatsApp sin datos."
+    },
+    {
+      "escenario": "E16",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Banco valida DNI, avisa extracciones en cajero de Córdoba con débito clonada, bloquea, envía tarjeta nueva a Sarmiento 820 y desconoce los movimientos con reintegro."
+    },
+    {
+      "escenario": "E17",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Flete coordina entrega del placard, confirma dirección y ascensor, recibe el hermano y piden su DNI para el remito. El posible recargo por escalera en `ENT-L-DELIVERY-006` es condicional y se define en el momento."
+    },
+    {
+      "escenario": "E18",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Encuesta anónima de transporte público en Tucumán con rango de edad, barrio y calificaciones. `ENT-L-ENCUESTA-002` tiene más preguntas y ofrece un mail opcional que no se da."
+    },
+    {
+      "escenario": "E19",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Obra social hace encuesta de calidad, pide DNI para validar afiliación, califica espera y recepción, y ofrece la encuesta larga con código por mail que no hay que dictar."
+    },
+    {
+      "escenario": "E20",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG2-EN-05"
+        ],
+        [
+          "ENT-L-ENCUESTA-005"
+        ]
+      ],
+      "motivo": "Encuesta municipal de recolección en ambas, pero `ENT-L-ENCUESTA-005` agrega un reclamo formal por la demora y pide un nombre de contacto; `LEG2-EN-05` es solo la encuesta."
+    },
+    {
+      "escenario": "E21",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-TU-03"
+        ],
+        [
+          "ENT-L-MEDICO-003"
+        ]
+      ],
+      "motivo": "Confirmación de turno de extracción con ayuno en ambas; `ENT-L-MEDICO-003` pide el número de documento para confirmar, `LEG-TU-03` no pide ningún dato."
+    },
+    {
+      "escenario": "E22",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Veterinaria recuerda turno de Rocco para la antirrábica el sábado a las diez, traer libreta, sin ayuno. `ENT-L-MEDICO-004` agrega precios y peso como detalles menores."
+    },
+    {
+      "escenario": "E23",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-ST-01"
+        ],
+        [
+          "ENT-L-SOPORTE-001"
+        ]
+      ],
+      "motivo": "Soporte de FibraSur por el reclamo 3349, luz LOS y técnico mañana en ambas; `ENT-L-SOPORTE-001` pide el DNI para validar y da código de visita, `LEG-ST-01` no pide datos."
+    },
+    {
+      "escenario": "E24",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "ClimaSur coordina instalación del split: confirma dirección, entrecalles, balcón, lunes a la mañana, ya pago. El posible costo extra por fachada en `ENT-L-SOPORTE-004` es condicional."
+    },
+    {
+      "escenario": "E25",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Centro de licencias confirma turno de renovación pidiendo DNI y fecha de nacimiento; martes a las ocho, documentación y pago en caja. `ENT-L-TRAMITE-002` agrega desconfianza y detalles."
+    },
+    {
+      "escenario": "E26",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Telnor retoma formulario de portabilidad incompleto, valida DNI, pide mail para el contrato y aclara que el PIN de portabilidad se carga en la web sin dictarlo."
+    },
+    {
+      "escenario": "E27",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-VE-02"
+        ],
+        [
+          "ENT-L-VENTAS-008"
+        ]
+      ],
+      "motivo": "Oferta de plan de ahorro rechazada en ambas, pero en `ENT-L-VENTAS-008` la asesora pide nombre y DNI para reservar un cupo (se niega); `LEG-VE-02` no pide datos."
+    },
+    {
+      "escenario": "E28",
+      "misma_situacion": "no",
+      "separar": [
+        [
+          "LEG-VE-03"
+        ],
+        [
+          "ENT-L-VENTAS-009"
+        ]
+      ],
+      "motivo": "Tasación final del hatchback en ambas; `LEG-VE-03` dice que la seña es solo en el salón y nada por transferencia; `ENT-L-VENTAS-009` confirma patente y ofrece seña de 500 mil por transferencia con CBU en proforma."
+    },
+    {
+      "escenario": "E29",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "MotoNorte avisa que llegó la moto, pide DNI y domicilio para el patentamiento, código de reserva y saldo en caja. La corrección de dirección y el casco en `ENT-L-VENTAS-010` son detalles."
+    },
+    {
+      "escenario": "E30",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Agencia de usados ofrece un sedán diésel a quien dejó datos, pregunta la zona y coordina visita. `ENT-L-VENTAS-011` agrega negociación y cambia el día como detalle."
+    },
+    {
+      "escenario": "E31",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Andes Motors confirma el mail para enviar el folleto del SUV a alguien en una reunión. `ENT-L-VENTAS-012` agrega lista de precios y seguimiento por WhatsApp."
+    },
+    {
+      "escenario": "E32",
+      "misma_situacion": "si",
+      "separar": null,
+      "motivo": "Repartidor del Correo Federal a dos cuadras confirma la casa y que la persona esté; llega en cinco minutos."
+    }
+  ],
+  "unir": [
+    {
+      "escenarios": [
+        "E32",
+        "E35"
+      ],
+      "motivo": "Ambos son un repartidor del correo que llama antes de llegar, confirma la dirección y que la persona esté, y avisa que llega en minutos. El documento en E35 se da en la entrega."
+    }
+  ]
+}

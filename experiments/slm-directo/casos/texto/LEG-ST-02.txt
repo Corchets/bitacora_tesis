@@ -1,0 +1,11 @@
+A: Buenas tardes, ¿hablo con Carla Benítez?
+B: Sí, ¿quién habla?
+A: Carla, te llamo del service oficial de Lavatec, por la orden que abriste el martes por el lavarropas que no centrifuga.
+B: ¡Ah, sí! Por fin, ya tengo una montaña de ropa.
+A: Jaja, te entiendo. Te quería coordinar la visita del técnico. ¿Seguís en la dirección que figura en la orden, en calle San Martín al mil cuatrocientos?
+B: Sí, la misma.
+A: Bien. Tengo disponible el jueves a la tarde, entre las catorce y las dieciocho. ¿Te sirve?
+B: Sí, el jueves está bien.
+A: Listo. Como está en garantía, la visita y la reparación no tienen costo. Tené a mano la factura de compra, que el técnico la tiene que ver.
+B: Dale, la busco.
+A: Perfecto. El técnico te va a escribir media hora antes de llegar. Gracias, Carla.

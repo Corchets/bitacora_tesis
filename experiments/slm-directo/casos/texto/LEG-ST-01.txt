@@ -1,0 +1,13 @@
+A: Hola, buen día, ¿hablo con Sofía Medina?
+B: Sí.
+A: Sofía, te llamo de FibraSur, soporte técnico, por el reclamo que hiciste ayer a la noche, el número tres tres cuatro nueve, por falta de servicio.
+B: Ah, sí, sí, sigo sin internet desde ayer.
+A: Bien. ¿Me podés decir qué luces tiene prendidas el módem?
+B: A ver... está la de power en verde y una roja que dice L O S.
+A: Ok, esa luz roja indica que no llega señal de fibra. No es tu equipo, es algo afuera. Te agendo un técnico. ¿Mañana a la mañana hay alguien en tu casa?
+B: Sí, estoy hasta la una.
+A: Perfecto, te queda mañana entre las nueve y las trece. El técnico va con credencial y en la camioneta de la empresa, y no te cobra nada porque es una falla de red. Te va a llegar un SMS con la confirmación.
+B: Bárbaro. ¿Y me van a descontar los días sin servicio?
+A: Sí, cuando se cierre el reclamo se te acredita automáticamente en la próxima factura.
+B: Buenísimo, gracias.
+A: De nada, Sofía. Buen día.

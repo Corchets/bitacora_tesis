@@ -1,0 +1,21 @@
+A: ¿Hola?
+B: Hola, buenas tardes. Te habla Gabriela, de la sucursal centro del correo.
+A: Sí, ¿qué pasó?
+B: Gustavo, ayer intentaron entregarte un paquete dos veces y no había nadie, así que quedó en la sucursal.
+A: Raro, yo estuve todo el día en casa.
+B: El cartero dejó constancia de que no atendió nadie. ¿Puede ser que el timbre no ande?
+A: Puede ser, sí, anda cuando quiere.
+B: ¿Me confirmás tu número de documento para dejarlo asentado a tu nombre?
+A: veintiocho millones quinientos cuarenta mil ciento diecinueve.
+B: Gracias. Lo podés retirar en la sucursal de calle Mendoza, de lunes a viernes de nueve a dieciocho.
+A: ¿Viene de afuera? Porque compré algo en una página de China.
+B: Sí, es internacional.
+A: ¿Hay que pagar aduana? Me dijeron que a veces te cobran.
+B: En este caso no figura ningún cargo. Si hubiera algo para pagar, se paga acá en la ventanilla, nunca por transferencia ni por un link.
+A: Bueno, eso me dijeron también.
+B: El número de seguimiento es CF cero cero ocho tres dos uno. Lo podés consultar en la página del correo.
+A: CF cero cero ocho tres dos uno.
+B: Exacto. Llevá el documento. Si va otra persona, necesita una autorización firmada por vos y su documento.
+A: Voy yo.
+B: Tenés diez días hábiles para retirarlo. Después vuelve al remitente.
+A: Mañana paso.

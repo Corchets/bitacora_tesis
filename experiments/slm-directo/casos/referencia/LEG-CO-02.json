@@ -1,0 +1,33 @@
+{
+  "case_id": "LEG-CO-02",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 3,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 7,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Comparte con vishing: conoce nombre y dirección; llamada no esperada. Señales de legitimidad: el paquete ya está pago; no pide códigos ni datos por teléfono; la firma se hace en persona. El detector no debería avisar.",
+  "origen": "Redacción ficticia, archivo llamadas_legitimas.json (id LEG-CO-02, categoría correo_entrega), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Duración aproximada del original: 50 s (no se usa: las marcas van por línea).",
+  "particion": "desarrollo",
+  "familia": "delivery",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Repartidor llama, el destinatario no está y coordina dejarlo con el portero."
+}

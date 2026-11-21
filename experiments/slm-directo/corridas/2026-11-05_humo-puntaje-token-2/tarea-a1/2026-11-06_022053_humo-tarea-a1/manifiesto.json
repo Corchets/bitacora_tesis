@@ -1,0 +1,123 @@
+{
+  "inicio": "2026-11-06T02:20:53",
+  "comando": "python correr.py --modelos gemma4:e2b-it-q4_K_M --prompts tarea-a1 --hablantes ab --num-ctx 4096 --seed 42 --sin-reglas --seguir-tras-aviso --casos CV2-D-V-ORGANISMO_PREVISIONAL-004,CV2-D-L-BANCO-001,SC-WA-CODE-01-e01 --etiqueta humo-tarea-a1 --salida /content/humo-puntaje-token-2/tarea-a1",
+  "codigo": {
+    "commit": "fc254afdcb2b2f14ff3edea636b87e22403666dc",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "arquitectura": "x86_64",
+    "procesador": "x86_64",
+    "nucleos_logicos": 2,
+    "ram_total_gb": 12.7,
+    "python": "3.13.16"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "filtro_tito": null,
+  "tito_viejo_2": null,
+  "particion": "desarrollo",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.14",
+    "digests": {
+      "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+    },
+    "arranque_ms": 5,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": null,
+    "lectura_token": {
+      "num_predict": 1,
+      "top_logprobs": 20,
+      "formato": null,
+      "p_si": "P(SÍ) / (P(SÍ) + P(NO)) del primer token, sumando variantes",
+      "variantes_si": [
+        "S",
+        "SI"
+      ],
+      "variantes_no": [
+        "N",
+        "NO"
+      ],
+      "normalizacion": "sin tildes, sin espacios ni signos alrededor, en mayúsculas (detectores.forma_token)",
+      "alerta_sugerida": "p_si >= 0.5 (solo marca; la política se elige offline)"
+    }
+  },
+  "prompts": {
+    "tarea-a1": {
+      "huella": "509a768d96bf609c",
+      "texto": "Sos un detector de estafas telefónicas (vishing) que protege a una persona durante una llamada en curso, en español de Argentina.\n\nRecibís la transcripción disponible hasta este momento. La llamada puede seguir: no sabés qué viene después. No podés verificar la identidad de nadie: juzgá solo por lo que se dice.\n\nLo que importa es si, en lo dicho hasta ahora, alguien pide, induce o presiona a la otra persona para que entregue o haga algo que permitiría robarle dinero o tomar sus cuentas:\n- códigos de un solo uso (SMS, token, código de verificación o de activación);\n- claves, PIN, contraseñas o usuarios;\n- datos personales (DNI, CUIL, domicilio, foto de un documento);\n- transferencias, pagos o entregas de dinero o efectivo;\n- instalar programas de acceso remoto o compartir la pantalla;\n- acciones de seguridad guiadas (abrir un enlace, cambiar una clave, autorizar un dispositivo).\n\nNo alcanza con mencionar esas cosas, aconsejar no compartirlas, negarse a hacerlas o hablar de ellas sin pedirlas.\n\n¿Alguien le está pidiendo o induciendo a la otra persona algo de la lista? Respondé solo SÍ o NO.",
+      "esquema": null
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|tarea-a1|ab",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "tarea-a1",
+      "hablantes": "ab"
+    }
+  ],
+  "casos": {
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": "7872ce24b1edf4fe",
+    "CV2-D-L-BANCO-001": "10d9a2f2d202aa47",
+    "SC-WA-CODE-01-e01": "f13b4b33a64d33d8"
+  },
+  "roles_protegida": null,
+  "modelos": {
+    "gemma4:e2b-it-q4_K_M": {
+      "carga_ms": 411,
+      "calentamiento_ms": 411,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 330783784,
+        "size_vram_bytes": 330783784
+      },
+      "pensar": false,
+      "runtime_total_ns": 409499786,
+      "runtime_load_ns": 2844116,
+      "runtime_prompt_eval_ns": 77000000,
+      "runtime_eval_ns": 315941000,
+      "logprobs": {
+        "chequeo": "ok",
+        "p_si": 0.999999998170775,
+        "masa_si_no": 1.0000000945025658,
+        "top5": [
+          [
+            "S",
+            -0.0
+          ],
+          [
+            "SI",
+            -12.2185
+          ],
+          [
+            "Sí",
+            -14.7379
+          ],
+          [
+            " S",
+            -20.0234
+          ],
+          [
+            "NO",
+            -20.1194
+          ]
+        ]
+      }
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-11-06T02:21:00"
+}

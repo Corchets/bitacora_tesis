@@ -1,0 +1,238 @@
+{
+  "metadata_general": {
+    "idioma": "pt-BR",
+    "descripcion_idioma": "Portugués de Brasil",
+    "fecha": "2026-11-06",
+    "tarea_origen": "Issue #144 - Corchets/bitacora_tesis (Muestras exploratorias externas)",
+    "destinatario": "Luciano Grosso",
+    "modelo_exacto_solicitado": "gemini-3.8-flash-high, effort high",
+    "modelo_exacto_usado": "Gemini 3.8 Flash (High)",
+    "evidencia_modelo": "Modelo verificado por lanzamiento CLI y pantalla por parte del coordinador: gemini-3.8-flash-high, effort high. No se afirma validación humana."
+  },
+  "fuente_primaria": {
+    "nombre_fuente": "pix-scam-challenge-br-synthetic (AI Safety Brazil)",
+    "repositorio_url": "https://huggingface.co/datasets/ai-safety-brazil/pix-scam-challenge-br-synthetic",
+    "revision_commit": "acdc964b67fea50300fa82033af2ca9db86fbe4d",
+    "version_fuente": "1.0.0 (2026-10-28)",
+    "licencia_datos": "CC BY 4.0 (Creative Commons Attribution 4.0 International)",
+    "licencia_codigo": "MIT",
+    "atribucion_cc_by": "AI Safety Brazil, 2026. pix-scam-challenge-br-synthetic (v1.0.0, 2026-10-28). Dataset URL: https://huggingface.co/datasets/ai-safety-brazil/pix-scam-challenge-br-synthetic. Licencia: CC BY 4.0. Cambios: selección y traducción de 2 grupos de escenarios emparejados al español para exploración de viabilidad técnica.",
+    "restricciones_uso_y_derechos": "Sin datos oficiales del BCB, registros bancarios reales, mensajes de víctimas reales ni pesos de modelos. Reproducción restringida estrictamente a entrega local privada fuera de Git (Downloads), sin distribución pública en repositorio ni en publicaciones externas.",
+    "origen_datos": "sintetico_total",
+    "descripcion_origen": "100 % sintético (silver synthetic). Generado con Qwen/Qwen3.6-35B-A3B a través de Tinker; clasificado por nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16; auditoría de coherencia por Qwen/Qwen3.6-35B-A3B. El registro de metadatos declara human_reviewed: false (sin revisión humana declarada por el registro de la fuente). Sin audio sonoro ni víctimas reales.",
+    "archivos_evaluados": [
+      {
+        "archivo": "data/development.parquet",
+        "tamano_bytes": 352457,
+        "sha256": "2162b9926169d20dcd45716e83f8c18ae8036e27521a670b00ee56e32d839cbc"
+      },
+      {
+        "archivo": "data/test.parquet",
+        "tamano_bytes": 1705450,
+        "sha256": "9895d46880af4e5f076afb7cea191ca7805f5ac3f7507496eac30b5dcf24b5d5"
+      },
+      {
+        "archivo": "README.md",
+        "tamano_bytes": 8090,
+        "sha256": "f3711fbf9b25bc6a8d7f8e978df11d68dc1bace37f3eddf84184dcd9ed131f8c"
+      },
+      {
+        "archivo": "LICENSE",
+        "tamano_bytes": 345,
+        "sha256": "5064e35be2c3f019458100bb3f9b9d270bfbbd09f7950752b0afecd11ac50339"
+      },
+      {
+        "archivo": "manifest.json",
+        "tamano_bytes": 19355,
+        "sha256": "83bde1a249923414c5b055873379daf90b60d52334cfaefdbf46753e05b4cab7"
+      }
+    ]
+  },
+  "alcance_y_exclusiones": {
+    "issue_151_alcance": "Detector de llamadas entrantes de números no agendados (acordado el 2026-11-06 por el equipo).",
+    "evaluacion_caso_1_alcance": "Entrante de número no agendado según el contexto. Compatible con la dirección de #151, aunque carece de construcción gradual y audio real.",
+    "evaluacion_caso_2_alcance": "Medio, dirección y estado del número no están demostrados por el diálogo. La evidencia externa sugiere chat y relación previa; alcance incierto respecto de #151, sin descarte automático.",
+    "estado_casos": "Muestras exploratorias; quedan formalmente excluidas del conjunto de evaluación/test futuro para evitar contaminación por exposición previa de estos casos específicos."
+  },
+  "herramientas_empleadas": {
+    "archivos_preparados_coordinador": [
+      "/var/folders/jb/z9g4zrkd4w770rfrl3brsj800000gn/T/issue144-inputs-coordinador/portugues-b87dcd6c3c30c83372dd7a21.json",
+      "/var/folders/jb/z9g4zrkd4w770rfrl3brsj800000gn/T/issue144-inputs-coordinador/portugues-e24a2dc7241413744ff93451.json"
+    ],
+    "procesamiento_y_verificacion": "Python 3 con módulos json, hashlib, os",
+    "metodo_traduccion": "Traducción literal fiel orientada a comprensión mediante modelo LLM (Gemini 3.8 Flash High) con prompt explícito de preservación estructural y prohibición de modismos regionales o argentinización.",
+    "servicios_externos": "Ninguno. No se enviaron datos personales a APIs externas de traducción para garantizar higiene de datos y cumplimiento de Ley 25.326."
+  },
+  "prompt_e_instrucciones_traduccion": "Traducción fiel de comprensión del portugués de Brasil al español para revisión técnica de corpus de vishing. Directivas estrictas aplicadas: 1) Conservar exactamente la misma cantidad y numeración secuencial de turnos (1..N); 2) Respetar la asignación estricta de roles A/B (A = primer hablante, B = segundo hablante); 3) No resumir, no truncar, no completar partes elididas ni inventar diálogo; 4) No mejorar la gramática ni la formulación del pedido del llamante/estafador; 5) No argentinizar entidades (Banco Neon), sistemas de pago (Pix), monedas/montos (2.500 reales / reais) ni registros tributarios (CPF); 6) Preservar de forma exacta negaciones, preguntas, condicionales y fórmulas de cortesía; 7) Mantener placeholders sintéticos coherentes (CONTA_LUA, CONTA_PRINCIPAL, CONTA_FANTASMA, Pessoa_a, Pessoa_b); 8) Si un término resulta anómalo o incomprensible marcar [pasaje de traducción incierta] y documentar fuera del texto (no adivinar ni forzar corrección); 9) No inventar marcas temporales en segundos (T_R/T_C) ante la falta de registro sonoro sincronizado; 10) Mantener separada la evidencia externa del diálogo conversacional; 11) En la entrega no reproducir bloques de texto en portugués.",
+  "sustituciones_y_entidades": {
+    "CONTA_LUA": {
+      "tipo": "placeholder_cuenta_sintetica",
+      "traduccion": "CONTA_LUA",
+      "justificacion": "Identificador sintético en mayúsculas de cuenta bancaria de destino."
+    },
+    "CONTA_PRINCIPAL": {
+      "tipo": "placeholder_cuenta_sintetica",
+      "traduccion": "CONTA_PRINCIPAL",
+      "justificacion": "Identificador sintético en mayúsculas de la cuenta legítima asociada al CPF del usuario."
+    },
+    "CONTA_FANTASMA": {
+      "tipo": "placeholder_cuenta_sintetica",
+      "traduccion": "CONTA_FANTASMA",
+      "justificacion": "Identificador sintético en mayúsculas de la cuenta fraudulenta vinculada a un CPF ajeno."
+    },
+    "CPF": {
+      "tipo": "identificador_fiscal_brasil",
+      "traduccion": "CPF",
+      "justificacion": "Se conserva el acrónimo original del registro tributario brasileño sin convertir a CUIT/CUIL/DNI."
+    },
+    "Banco Neon": {
+      "tipo": "entidad_financiera",
+      "traduccion": "Banco Neon",
+      "justificacion": "Se conserva el nombre original de la entidad bancaria sin argentinizar."
+    },
+    "Pix": {
+      "tipo": "sistema_pagos_instantaneos",
+      "traduccion": "Pix",
+      "justificacion": "Se mantiene la denominación oficial del sistema de pagos instantáneos brasileño."
+    }
+  },
+  "incidencias_traduccion": [
+    {
+      "caso": "Caso 2 (Identidad familiar)",
+      "turno": 5,
+      "tratamiento": "[pasaje de traducción incierta] y hazlo ya, por favor.",
+      "diagnostico": "Locución verbal de la fuente que la lectura asistida por IA no pudo resolver en un sentido contextual unívoco en español; no se cuenta con validación humana bilingüe. Se rotula como [pasaje de traducción incierta] sin conjeturar intenciones de redacción ni reescribir."
+    },
+    {
+      "caso": "Caso 1 (Contacto de banco)",
+      "turno": 4,
+      "tratamiento": "Yo tengo una factura pendiente allí",
+      "diagnostico": "Referencia a factura o comprobante pendiente en contexto comercial."
+    },
+    {
+      "caso": "Caso 1 (Contacto de banco)",
+      "turno": 5,
+      "tratamiento": "Escriba SÍ para bloquear.",
+      "diagnostico": "Indicación operativa que refleja estilo híbrido entre llamada telefónica y chat/teclado."
+    },
+    {
+      "caso": "Caso 1 (Contacto de banco)",
+      "turno": 6,
+      "tratamiento": "interno",
+      "diagnostico": "Extensión o interno telefónico corporativo."
+    }
+  ],
+  "comprobaciones_realizadas": {
+    "perdida_o_agregado_turnos": false,
+    "detalle_turnos": "Caso 1: 6 turnos originales -> 6 turnos traducidos. Caso 2: 5 turnos originales -> 5 turnos traducidos.",
+    "turnos_no_vacios_traducidos": true,
+    "preservacion_negaciones": true,
+    "preservacion_pedidos": true,
+    "preservacion_condicionales": true,
+    "validacion_humana_bilingue": false,
+    "declaracion_humana": "Esta traducción fue realizada mediante asistencia de IA (Gemini 3.8 Flash High) y no constituye validación humana bilingüe. Queda pendiente para revisión de Luciano Grosso."
+  },
+  "casos": [
+    {
+      "identificador_caso": "Caso 1 (Contacto de banco)",
+      "group_id": "b87dcd6c3c30c83372dd7a21",
+      "split": "test",
+      "family": "bank_contact",
+      "shared_context_es": "Persona B recibió una llamada de un número desconocido atribuido al banco. El interlocutor alega una transacción Pix pendiente de 2.500 reales hacia CONTA_LUA y solicita confirmación verbal inmediata para el bloqueo. No hubo envío de enlaces ni solicitud de contraseñas, solo presión temporal y confirmación del destinatario.",
+      "invariancia_conversacional_comprobada": true,
+      "detalle_invariancia": "Las 3 variantes (scam_like, legitimate, insufficient_evidence) contienen el diálogo idéntico de 6 turnos carácter por carácter en el campo conversation.",
+      "estadisticas_texto": {
+        "turnos": 6,
+        "palabras_original_pt": 164,
+        "caracteres_original_pt": 893,
+        "palabras_traduccion_es": 167,
+        "caracteres_traduccion_es": 935
+      },
+      "variantes": [
+        {
+          "row_index_zero_based": 1505,
+          "row_id": "d9b35e80071c28a002c1dba6",
+          "label": "scam_like",
+          "teacher_confidence": 0.9,
+          "available_evidence_es": "La verificación independiente en la aplicación oficial del banco revela que no hay ninguna transacción pendiente hacia CONTA_LUA en la cuenta de Persona B, y el número de teléfono de la llamada no figura en el registro de canales oficiales del banco.",
+          "teacher_reason_es": "La verificación independiente contradice directamente la afirmación del interlocutor sobre una transacción Pix pendiente. El número no consta en canales oficiales."
+        },
+        {
+          "row_index_zero_based": 694,
+          "row_id": "504e0f2f8dbba0694ddfeac8",
+          "label": "legitimate",
+          "teacher_confidence": 0.85,
+          "available_evidence_es": "La verificación independiente en la aplicación oficial del banco confirma la existencia de una transacción Pix pendiente de 2.500 reales hacia CONTA_LUA, y el número de teléfono de la llamada corresponde a una central de atención autorizada registrada por el banco.",
+          "teacher_reason_es": "La información disponible sustenta la transacción Pix pendiente y la legitimidad del número telefónico según registro oficial."
+        },
+        {
+          "row_index_zero_based": 1924,
+          "row_id": "fe9745f31eb95b5cadcdd7ac",
+          "label": "insufficient_evidence",
+          "teacher_confidence": 0.75,
+          "available_evidence_es": "La verificación independiente en la aplicación oficial del banco indica que hay una transacción Pix pendiente, pero el número de teléfono de la llamada no puede ser cruzado con la lista de canales oficiales disponibles públicamente, permaneciendo el origen de la llamada sin confirmación de legitimidad.",
+          "teacher_reason_es": "Se confirma la transacción Pix pendiente, pero no es posible validar la legitimidad del contacto telefónico al no cruzarse con canales oficiales."
+        }
+      ]
+    },
+    {
+      "identificador_caso": "Caso 2 (Identidad familiar)",
+      "group_id": "e24a2dc7241413744ff93451",
+      "split": "development",
+      "family": "family_identity",
+      "shared_context_es": "Persona A solicita una transferencia urgente mediante Pix para saldar una deuda con un proveedor, alegando el bloqueo temporal de su aplicación bancaria. Persona B cuestiona el cambio de clave, pero Persona A insiste en que es la misma clave de siempre y demuestra impaciencia ante la verificación detallada. No hay mención a contraseñas ni tokens.",
+      "invariancia_conversacional_comprobada": true,
+      "detalle_invariancia": "Las 3 variantes (insufficient_evidence, legitimate, scam_like) contienen el diálogo idéntico de 5 turnos carácter por carácter en el campo conversation.",
+      "estadisticas_texto": {
+        "turnos": 5,
+        "palabras_original_pt": 131,
+        "caracteres_original_pt": 676,
+        "palabras_traduccion_es": 141,
+        "caracteres_traduccion_es": 758
+      },
+      "variantes": [
+        {
+          "row_index_zero_based": 507,
+          "row_id": "22bda30be723ecfb8ec8250f",
+          "label": "scam_like",
+          "teacher_confidence": 0.95,
+          "available_evidence_es": "La verificación del destinatario en la operación revela que la clave Pix informada corresponde a CONTA_FANTASMA, vinculada a un CPF diferente del CPF real de Persona A presente en el registro antiguo de la red social donde conversan.",
+          "teacher_reason_es": "La clave Pix informada corresponde a una cuenta no vinculada al titular legítimo, indicando desvío de pago."
+        },
+        {
+          "row_index_zero_based": 28,
+          "row_id": "2e638c0b85ffb6a796bad809",
+          "label": "legitimate",
+          "teacher_confidence": 0.9,
+          "available_evidence_es": "La verificación del destinatario en la operación confirma que la clave Pix informada corresponde exactamente a CONTA_PRINCIPAL, vinculada al CPF de Persona A, quien posee historial de transacciones con el mismo proveedor mencionado.",
+          "teacher_reason_es": "La clave Pix corresponde a la cuenta principal de Persona A y existe historial con el proveedor."
+        },
+        {
+          "row_index_zero_based": 9,
+          "row_id": "312021bce5a2f5b046dff3e9",
+          "label": "insufficient_evidence",
+          "teacher_confidence": 0.6,
+          "available_evidence_es": "La verificación del destinatario en la operación indica que la clave Pix informada pertenece a una cuenta activa, pero el nombre del titular mostrado en el sistema interno y el CPF asociado no se visualizan con claridad para una comparación inmediata con el perfil de Persona A.",
+          "teacher_reason_es": "No hay confirmación clara de titularidad; la falta de datos concluyentes impide clasificar como legítima o estafa."
+        }
+      ]
+    }
+  ],
+  "consigna_completa_coordinador": "Sos un worker supervisado para el issue #144 de Corchets/bitacora_tesis. El coordinador integra. Objetivo autorizado: preparar muestras exploratorias para que Luciano lea y marque qué fuentes y casos sirven, NO preparar ni ejecutar el test final. Las conversaciones leídas quedan fuera del futuro test. No ejecutar detectores, no cambiar prompts ni elegir configuración, no anotar nada como revisión humana. Trabajás en /Users/lucianogrosso/orca/workspaces/bitacora_tesis/laboratorio-luciano. Leé AGENTS.md, docs/gestion/MAPA-DECISIONES.md (D07/D08/D09), docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md y docs/corpus/MANUAL-ANOTACION.md. Otros workers trabajan por idioma: SOLO podés escribir los DOS archivos de entrega asignados en Downloads; NINGÚN archivo del repositorio, git add/commit/push ni archivos compartidos. Descargá fuentes únicamente fuera de Git, en temporal propio. No crear carpetas del repositorio ni leer la reserva propia CV2-T. No enviar mensajes a GitHub/email/Slack. El usuario pidió 1 agente por idioma, Terra High para coreano y Flash High para los otros; no delegar en otros modelos/agentes.\n\nENTREGA: 1 Markdown legible editable + 1 JSON de procedencia. Incluir enlaces primarios precisos, fecha 2026-11-06, revisión/commit de fuente, IDs originales inequívocos, licencia y límites de uso, origen real/sintético. Explicar que estos 2 casos son exploración y quedan fuera del test; no declarar aprobado nada. Conservar conversación completa, turnos numerados y roles A/B (si hay más, C); NO resumir, truncar, completar, inventar diálogo ni mejorar el pedido; no argentinizar instituciones, montos ni procedimientos. Si un pasaje es indescifrable marcar [traducción incierta] y explicarlo fuera del diálogo; no adivinar. No inventar segundos de T_R/T_C: sin audio usar turno, notas IA separadas y referencia humana vacía. Cada caso termina con campos VACÍOS para que Luciano marque: conservar/descartar/revisar; credibilidad; comienzo y final completos o recorte; hablantes claros; pedido de alto riesgo observable (turno); cumplimiento observable (turno); equivalente local sin reescribirlo; ambigüedades; diferencias respecto del corpus propio; decisión y motivo. No prejuzgar estos campos con casillas marcadas. Se puede añadir observaciones IA separadas, explícitas y breves. Agregar explicación de cualquier sustitución de nombres/datos identificables (mismos placeholders coherentes en original inglés y traducción, sin credenciales reales); no subir datos identificables a Git ni incluir secretos en respuesta al coordinador. Texto íntegro y traducciones restringidos van SOLO en entrega local privada, nunca en Git ni publicación; si derechos prohíben incluso ese uso, detener esa reproducción y documentar la restricción y enlaces sin inventar contenido.\n\nJSON: idioma, modelo exacto solicitado/usado si verificable (no inventar receipt), archivos y SHA256 de entradas, URL/revisión/ID de cada caso, conteos originales/traducidos, herramientas, prompt/instrucciones de traducción empleados (registrar completo), sustituciones, incidencias de orden/diarización/traducción, comprobaciones. Comprobar que no se perdió ni agregó ningún turno, que cada turno no vacío tenga traducción y que negaciones/pedidos/condicionales se conservan. No atribuir validación bilingüe/humana inexistente. Reportar con worker_done rutas, tamaños, IDs, conteos, verificaciones y limitaciones; no pegar diálogos completos en mensaje. Si falla algo, reportarlo como fallo sin declarar tarea completa.\n\nARCHIVOS EXCLUSIVOS: /Users/lucianogrosso/Downloads/ISSUE-144-PORTUGUES-2026-11-06.md y /Users/lucianogrosso/Downloads/ISSUE-144-PORTUGUES-2026-11-06-PROCEDENCIA.json\n\nIDIOMA PORTUGUÉS. Modelo solicitado gemini-3.8-flash-high, effort high. Fuente https://huggingface.co/datasets/ai-safety-brazil/pix-scam-challenge-br-synthetic revision acdc964b67fea50300fa82033af2ca9db86fbe4d (CC BY 4.0). Es SINTÉTICA, NO fuente real. El usuario quiere verla igualmente. El relevamiento explica que 3 clases de un grupo tienen la misma conversación y difieren en evidencia externa; verificarlo con los datos antes de afirmar. Elegir 2 grupos de familias distintas (preferencia banco e identidad familiar, IDs b87dcd6c3c30c83372dd7a21 y e24a2dc7241413744ff93451 si son correctos). Entregar 2 conversaciones completas SOLO EN ESPAÑOL, sin portugués original como bloque o archivo. Para cada conversación mostrar FUERA DEL DIÁLOGO cómo la fuente la etiqueta según la evidencia externa de las variantes, con traducción/explicación de esa evidencia claramente separada de lo que podría oír el detector. NO inyectar evidencia en los turnos, NO inventar diferencias para hacerla útil. Mostrar que revisar la fuente no revoca su descarte propuesto para detector de solo conversación. Registrar split y row IDs de todas las variantes y revision. Atribuir dataset/autores/link/licencia/cambios según CC BY 4.0.\n\nACTUALIZACIÓN DEL COORDINADOR, 2026-11-06: primero se revisó a Evaristo. El issue #144 actualizado atribuye a Evaristo la rama corpus/144-corpus-externo, commits hasta 80fbc909088446deb8cd28c4ba379e29c540692b, YA INTEGRADOS en HEAD e467c7c. Reutilizá relevamiento y correcciones del filtro, no asumas que son decisiones nuevas. Las 22 traducciones constan en el documento pero no encontramos ruta local ni custodia; NO afirmar que las leíste ni reconstruirlas de memoria. Esta entrega es una traducción fiel de comprensión, anterior a adaptación rioplatense; no copiar la política de mejorar ASR o reatribuir hablantes sin evidencia del piloto anterior.\n\nNuevo alcance aprobado por equipo según issue #151: detector solo llamadas ENTRANTES de números NO AGENDADOS. Consultá gh issue view 151 si necesitás detalle. Para esta lectura exploratoria se conservan también llamadas salientes o de dirección incierta, pero se informa dirección observable/indeterminable y si queda fuera del alcance EN UNA NOTA, sin descartar ni reescribir automáticamente. YouTube soporte iniciado por víctima va aparte; ES-Port es contraste exploratorio, no legítimas finales aprobadas. No resolver D03/D07/D08 ni construir el test con estos ejemplos.\n\nEl usuario autorizó expresamente Google Translate u otra traducción si ayuda. Podés usarlo registrando herramienta, pasajes y discrepancias; no enviar datos identificables ni credenciales: anonimizar primero. Usar traducción automática NO es validación humana bilingüe. No tenés obligación de usar un servicio adicional si no aporta. Fuentes primarias deben consultarse efectivamente, no inferirse del handoff.\n",
+  "revision_del_coordinador": {
+    "fecha": "2026-11-07",
+    "run_id": "run_add0f24ad4f8",
+    "dispatch_inicial_utilizado": "ctx_7564045527c9",
+    "dispatch_correccion": "ctx_1c1b63ba49c1",
+    "comprobaciones": [
+      "Fuente, tamaños y hashes de ambos Parquet contrastados con la revisión fijada.",
+      "IDs, índices desde cero, clases y teacher_confidence de las seis variantes contrastados con Parquet.",
+      "Igualdad del diálogo entre las tres variantes de cada uno de los dos grupos comprobada.",
+      "11 turnos y roles alineados, evidencia externa separada, español en la entrega, pasaje incierto marcado sin inventar sentido ni causa.",
+      "Campos humanos vacíos; no se atribuye número agendado a partir de vínculo familiar ni descarte definitivo."
+    ],
+    "integracion_final": "Se agregó el enlace y estado explícito de propuesta D08 y se aclaró que D09 ya figura resuelta; no se cambió el diálogo.",
+    "validacion_bilingue_humana": false,
+    "decision_humana_casos": "pendiente"
+  }
+}

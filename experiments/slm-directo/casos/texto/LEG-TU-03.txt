@@ -1,0 +1,9 @@
+A: Buenas tardes, ¿me comunico con Matías?
+B: Sí, él habla.
+A: Matías, te llamo del laboratorio Bioanálisis Tucumán. Tenés turno para extracción mañana a las siete y media. ¿Lo confirmás?
+B: Sí, confirmo. Era en ayunas, ¿no?
+A: Sí, justamente por eso te llamaba. Son ocho horas de ayuno, podés tomar agua nomás. Y no hagas actividad física fuerte antes.
+B: Dale. ¿Qué tengo que llevar?
+A: La orden médica original, el DNI y la credencial de la obra social. Si la orden está autorizada no pagás nada; si no, se abona el coseguro ahí en recepción.
+B: Perfecto, gracias.
+A: A vos. Hasta mañana, Matías.

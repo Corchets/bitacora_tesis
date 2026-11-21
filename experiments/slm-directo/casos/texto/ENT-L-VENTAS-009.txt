@@ -1,0 +1,32 @@
+A: Hola, ¿Emiliano? Soy Ezequiel, de Andes Motors. El sábado viniste con el hatchback para la tasación.
+B: Ah, sí, Ezequiel, ¿cómo andás?
+A: Bien, ¿vos? Te llamo porque ya tengo la tasación final. Para confirmar que estoy con el auto correcto, ¿la patente era AE 432 JK?
+B: Sí, esa.
+A: Y tenía ochenta y dos mil kilómetros, con el service al día.
+B: Ochenta y dos, sí. El service lo hice en la oficial.
+A: Bien. La tasación final es de catorce millones doscientos.
+B: Uf, esperaba más. En internet vi que están a dieciséis.
+A: Te entiendo. Esos son precios de publicación entre particulares. Nosotros tenemos que reacondicionarlo y darle garantía.
+B: Igual es mucha diferencia.
+A: Hablé con mi gerente y lo más que puedo estirar es a catorce y medio si cerramos este mes.
+B: ¿Y el cero kilómetro sigue al mismo precio?
+A: Hasta fin de mes sí. En diciembre viene un aumento de lista, todavía no sé cuánto.
+B: Mmm. No lo puedo decidir hoy.
+A: No hace falta. Si querés asegurarte el precio, se puede dejar una seña.
+B: ¿De cuánto?
+A: Quinientos mil pesos. Podés venir y pagarla en caja, o transferirla a la cuenta de la concesionaria.
+B: ¿A qué cuenta?
+A: A la cuenta de Andes Motors S.A. Te mando por mail la factura proforma con el CBU y el CUIT. Si transferís, que sea a esa cuenta, nunca a nombre de una persona.
+B: ¿Y si después me arrepiento?
+A: La seña se devuelve si no se aprueba el crédito. Si te arrepentís por otro motivo, se pierde.
+B: Eso no me gusta mucho.
+A: Por eso te digo que lo pienses. No te quiero apurar.
+B: Prefiero ir el lunes y hablarlo en persona con el gerente.
+A: Me parece bien. ¿A qué hora te queda cómodo?
+B: Después de las seis.
+A: El lunes a las seis y media te espero. Traé la cédula verde.
+B: ¿Llevo el auto?
+A: No hace falta, ya lo vimos. Solo los papeles.
+B: Bueno, el lunes nos vemos.
+A: Te mando igual la proforma, para que la tengas.
+B: Mandala, pero no transfiero nada hasta el lunes.

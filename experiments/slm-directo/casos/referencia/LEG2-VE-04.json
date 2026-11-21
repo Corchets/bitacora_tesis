@@ -1,0 +1,57 @@
+{
+  "case_id": "LEG2-VE-04",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 4,
+      "evento": "contexto",
+      "etiquetas": []
+    },
+    {
+      "linea": 6,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 7,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 8,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    },
+    {
+      "linea": 10,
+      "evento": "mencion",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Pide DNI y dirección para el patentamiento; menciona el código de reserva que ya le dieron, sin pedirlo. Datos pedidos o confirmados: nombre, dni, direccion. Menciona un código sin pedirlo. El detector no debería avisar.",
+  "origen": "Redacción ficticia, llamadas legítimas v2, legitimas_dev.jsonl (id LEG2-VE-04, categoría vendedor_vehiculo), incorporado el 2026-11-06; sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Familia, `tipo_legitima` y evidencia asignadas en la conversión; revisar en [D07](../../../../docs/gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico). Split `dev` del archivo original; partición de desarrollo según propuesta pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Sin par: no hay una contraparte de vishing escrita. Llamada entrante: atiende primero quien recibe (A).",
+  "particion": "desarrollo",
+  "familia": "comercial",
+  "dificultad": "mencion_sin_pedido",
+  "tipo_legitima": "mencion_sin_pedido",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Concesionaria de motos confirma datos para el patentamiento y la entrega de la moto reservada."
+}

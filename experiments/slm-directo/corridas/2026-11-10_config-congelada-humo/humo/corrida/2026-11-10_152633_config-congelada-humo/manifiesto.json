@@ -1,0 +1,195 @@
+{
+  "inicio": "2026-11-10T15:26:33",
+  "comando": "python correr.py --casos CV2-D-V-ORGANISMO_PREVISIONAL-004,CV2-D-L-BANCO-001,SC-WA-CODE-01-e01 --prompts c-json-corte,c-json-corte-riesgo --seguir-tras-aviso --modelos gemma4:e2b-it-q4_K_M --num-ctx 4096 --seed 42 --sin-reglas --hablantes rol --etiqueta config-congelada-humo --salida /content/resultados-config-congelada/humo/corrida",
+  "codigo": {
+    "commit": "58b09975fea15303ce61d5537dcd64a8f98757bd",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "arquitectura": "x86_64",
+    "procesador": "x86_64",
+    "nucleos_logicos": 2,
+    "ram_total_gb": 12.7,
+    "python": "3.13.16"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "solo_otra": false,
+  "filtro_tito": null,
+  "tito_viejo_2": null,
+  "particion": "desarrollo",
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.14",
+    "digests": {
+      "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+    },
+    "arranque_ms": 5,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": null,
+    "json_cortado": {
+      "num_predict": 24,
+      "formato": "el esquema JSON del prompt",
+      "logprobs": false,
+      "lectura": "riesgo y alerta_sugerida del texto cortado (detectores.leer_json_cortado)",
+      "alerta_sugerida": "riesgo >= 0.4 o alerta_sugerida escrita (columna alerta_escrita)",
+      "etapa2": "solo en la primera línea de la llamada en que dispara la regla: mismos mensajes + lo escrito, cerrado como JSON, como assistant + motivo_v4_corte.txt, con ESQUEMA_MOTIVO y num_predict 512"
+    },
+    "corte_riesgo": {
+      "num_predict": 14,
+      "formato": "el esquema JSON del prompt",
+      "logprobs": false,
+      "lectura": "el riesgo del texto cortado, seguido de su coma (detectores.leer_riesgo_cortado)",
+      "alerta_sugerida": "riesgo >= 0.3",
+      "etapa2": "solo en el primer aviso de la llamada: mismos mensajes + lo escrito hasta el riesgo, cerrado como JSON, como assistant + motivo_c_corte.txt, con ESQUEMA_MOTIVO y num_predict 512"
+    }
+  },
+  "prompts": {
+    "c-json-corte": {
+      "huella": "6ee30d38fa9d812c",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Si ya se parece a una estafa, conviene avisar aunque todavía no haya un pedido.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.\n- \"alerta_sugerida\": true si ya conviene avisarle a PROTEGIDA que puede ser una estafa; si no, false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que diga por qué puede ser una estafa; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente la frase de OTRA que más lo muestra; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "0adcc01b0b5e66a7",
+        "texto": "Se va a avisar a la persona protegida. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de la transcripción donde se hace el pedido; si no hay una sola frase, la más clara.\n- \"motivo\": una frase breve dirigida a la persona protegida que nombre lo que le están pidiendo.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "c-json-corte-riesgo": {
+      "huella": "6ee30d38fa9d812c",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Si ya se parece a una estafa, conviene avisar aunque todavía no haya un pedido.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.\n- \"alerta_sugerida\": true si ya conviene avisarle a PROTEGIDA que puede ser una estafa; si no, false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que diga por qué puede ser una estafa; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente la frase de OTRA que más lo muestra; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-json-corte|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-json-corte",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-json-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-json-corte-riesgo",
+      "hablantes": "rol"
+    }
+  ],
+  "casos": {
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": "7872ce24b1edf4fe",
+    "CV2-D-L-BANCO-001": "10d9a2f2d202aa47",
+    "SC-WA-CODE-01-e01": "f13b4b33a64d33d8"
+  },
+  "roles_protegida": "336bf580ac230a0f",
+  "modelos": {
+    "gemma4:e2b-it-q4_K_M": {
+      "carga_ms": 159080,
+      "calentamiento_ms": 159080,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 330783784,
+        "size_vram_bytes": 330783784
+      },
+      "pensar": false,
+      "runtime_total_ns": 159078501149,
+      "runtime_load_ns": 111721633088,
+      "runtime_prompt_eval_ns": 46901149000,
+      "runtime_eval_ns": 450666000
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-11-10T15:29:53"
+}

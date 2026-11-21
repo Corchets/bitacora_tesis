@@ -1,0 +1,30 @@
+{
+  "case_id": "ENT-L-VENTAS-011",
+  "grupo": "legitimas_cotidianas",
+  "semilla": null,
+  "par": null,
+  "clase": "legitima",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 13,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    }
+  ],
+  "que_prueba": "Oferta con datos que el cliente dejó hace un mes y pregunta por su barrio para un traslado.",
+  "origen": "Redacción ficticia asistida, 2026-11-06; lote de legítimas entrantes difíciles (vendedor_vehiculo); sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Lote entrantes 2026-11-06. Llamada entrante: el que llama se presenta. Persona protegida: B. Partición de desarrollo asignada al integrar, por decisión de Evaristo; pendiente de [D08](../../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental). Semilla propuesta en el lote, sin registrar en el catálogo: `LG-ENT-VENTAS-011`.",
+  "particion": "desarrollo",
+  "familia": "comercial",
+  "dificultad": "cotidiana",
+  "tipo_legitima": "cotidiana",
+  "variante_asr": false,
+  "escenario_base": null,
+  "situacion": "Una agencia de usados avisa a un cliente que entró un sedán parecido al que buscaba, le pregunta la zona y le ofrece llevárselo para probar."
+}

@@ -1,0 +1,21 @@
+A: hola quién habla
+B: hola buenas tardes te habla martina del banco del área de experiencia de clientes
+A: sí pasó algo con la cuenta
+B: no nada ayer estuviste en la sucursal centro y te queremos hacer una encuesta de tres preguntas
+A: mmm con todo lo que se escucha ya no sé si atender al banco
+B: te entiendo te aclaro que no voy a pedir datos tus cuentas ni claves ni códigos solo tu opinión
+A: bueno dale
+B: del uno al diez cómo te atendieron
+A: un ocho tardé casi una hora pero la chica fue fue muy amable
+B: pudiste resolver lo que fuiste a hacer
+A: sí cambié la tarjeta me la habían clonado
+B: lamento lo de la tarjeta te dieron toda la información del reintegro
+A: sí me dijeron que tarda unos quince días
+B: te explicaron que podés seguir el reclamo desde la app
+A: no no dónde está
+B: en la sección reclamos con el número que te dieron en la sucursal
+A: ah lo tengo en el papel después lo busco
+B: si no lo encontrás en la sucursal te lo vuelven a dar
+B: bien última preferís que te atiendan con turno o por orden de llegada
+A: con turno obvio una hora es mucho
+B: lo dejo anotado eso era todo

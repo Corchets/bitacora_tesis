@@ -1,0 +1,11 @@
+Respondé solo con un objeto JSON con estos campos, en este orden:
+- "riesgo": un número que marca hasta dónde llegó OTRA en toda la llamada. Usá el escalón más alto que se haya alcanzado:
+  0.0 si OTRA todavía no le pidió nada a PROTEGIDA;
+  0.1 si solo hubo ofertas, avisos, gestiones o pedidos que no son críticos;
+  0.2 si OTRA planteó un problema, un movimiento o un beneficio que toca la plata, las cuentas o las tarjetas de PROTEGIDA, pero no pidió ni anunció nada crítico;
+  0.3 si OTRA anunció o está preparando un pedido crítico y todavía no lo hizo;
+  0.5 si OTRA ya hizo un pedido crítico;
+  0.8 si además insistió con ese pedido o PROTEGIDA ya empezó a cumplirlo.
+- "alerta_sugerida": true si riesgo es 0.3 o más; si no, false.
+- "motivo": si alerta_sugerida es true, una frase breve dirigida a PROTEGIDA que nombre el pedido y diga por qué conviene frenar; si es false, "".
+- "evidencia": si alerta_sugerida es true, copiá textualmente la frase de OTRA donde aparece el pedido; si es false, "".

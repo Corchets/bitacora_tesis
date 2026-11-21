@@ -1,0 +1,41 @@
+A: Hola.
+B: Hola, señora. Muy buenas tardes. Mi nombre es John Miller y la llamo de Northwind Health Northwind Health. ¿Cómo está hoy?
+A: Bastante bien. Esperando que llegue la tormenta.
+B: Entiendo, señora. El motivo de mi llamada es informarle que su Medicare ha sido mejorado y que usted califica para recibir algunos beneficios adicionales de Medicare con un costo de $89 dólares para usted. Espero que le parezca bien.
+A: Sí, sí me parece bien.
+B: Entonces, señora, los beneficios que recibe hoy incluyen los copagos de su enfermero, los copagos de su especialista, y también cubrirá su dental, visión, audición y sus beneficios de transporte. Y señora, lo mejor es que no tiene que pagar nada. Todos estos beneficios tienen una prima de $89 dólares para usted. Espero que le parezca bien.
+A: Claro que sí.
+B: Ah, qué bueno, señora. Entonces, señora, para esta mejora, creo que usted tiene Medicare parte A y parte B. Las dos están activas.
+A: Sí, señor.
+B: Y señora, también creo que usted toma sus propias decisiones sobre su Medicare, ¿correcto?
+A: Sí, señor.
+B: Qué bueno. Y señora, ¿recibe algún beneficio de empleo o de jubilación de su trabajo anterior o.
+A: No.
+B: Bien, señora. Y señora, tengo aquí su dirección postal. Por favor corríjame si me equivoco. ¿Es Columbus, Ohio Columbus, Ohio Columbus, Ohio, Columbus, Ohio, Columbus, Ohio Columbus, Ohio?
+A: Sí, señor.
+B: Bien, señora. Y su apellido se escribe John Miller John Miller, John Miller, John Miller, John Miller, John Miller, John Miller, John Miller.
+A: Usted es muy listo.
+B: Bien, señora. Y señora, ¿cómo se escribe su nombre de pila?
+A: John Miller John Miller, John Miller, John Miller.
+B: Ah, es John Miller John Miller. Entendido, señora. Y señora, tengo aquí su fecha de nacimiento. Por favor corríjame si me equivoco. ¿Es 21 de octubre de 1958 21 de octubre de 1958, 21 de octubre de 1958?
+A: No, es 21 de octubre de 1958 21 de octubre de 1958, 21 de octubre de 1958.
+B: Ah, disculpe, señora. Permítame corregirlo, señora. Bien, señora, ¿usted recibe algún seguro como Northwind Health o Northwind Health?
+A: No.
+B: Bien, señora. Y señora, como puedo ver aquí, usted califica en todo. Y señora, ¿hizo algún tipo de cambio en su plan de Medicare en los últimos dos años dos años?
+A: No.
+B: Bien, señora, como puedo ver aquí, usted califica para recibir estos beneficios adicionales de Medicare con una prima de 89 dólares 89 dólares para usted. Señora, solo para la última confirmación, ¿tiene con usted la tarjeta de Medicare roja, azul y blanca?
+A: Espere un minuto.
+B: Bien, señora, sigo en la línea. Señora John Miller, hola. ¿Tiene a mano su tarjeta del seguro de salud Medicare roja, azul y blanca? Señora,
+A: Un minuto más.
+B: Sí, sí, señora, tómese su tiempo. ¿Consiguió su tarjeta? ¿Señora John Miller? ¿Hola? Señora John Miller, ¿está ahí? ¿Hola? La información de quien llama era. Hola, señora John Miller, ¿está ahí? ¿Hola?
+A: Sí, señor, sigo aquí. No encuentro mi tarjeta de Medicare.
+B: Bien, señora, no hay problema. Tenemos otra opción para usted. ¿Se acuerda de su número de Northwind Health Northwind Health?
+A: Bien.
+B: Bien, señora. Qué bueno. Señora. Ahora lo que voy a hacer es conectar su llamada con uno de mis compañeros. ¿De acuerdo? Bien, señora. Ahora lo que voy a hacer es conectar su llamada con uno de mis enfermero enfermero. Él verificará rápidamente algunos de sus datos, señora. Y luego transferirá su llamada al enfermero enfermero que es de su misma ciudad y con el mismo código postal, Columbus, Ohio. Y señora. Y señora, él le pedirá su número de ID de Medicare. No se preocupe, si no tiene su tarjeta de Medicare, usted tiene que darle su número de Northwind Health Northwind Health al enfermero enfermero. Porque, señora, con ayuda de su número él buscará cuáles son los otros beneficios adicionales de Medicare que usted puede recibir en su plan de Medicare actual. ¿De acuerdo?
+A: Bien.
+B: Y señora John Miller, probablemente le tomará un valioso mínimo de dos años dos años dos años dos años y le enviaremos todos los papeles sobre estos beneficios a su dirección postal. ¿Está bien? Bien, gracias. Señora, por favor permanezca en la línea antes de que conecte la llamada con el enfermero enfermero, un enfermero enfermero. Creo que entendió que esta llamada trata de sus beneficios adicionales de Medicare, ¿correcto?
+A: Bien. Sí.
+B: Por favor permanezca en la línea, señora. Estoy conectando su llamada. Aquí vamos.
+A: Está bien, lo haré, gracias.
+B: Gracias por esperar. Tengo en la línea a la señora John Miller. Su código postal es Columbus, Ohio y es de Columbus, Ohio Columbus, Ohio. Bien, sigo yo desde aquí. Hola, es un gusto tenerla en la línea. Mi nombre es John Miller John Miller. Soy enfermero enfermero y hablo en una línea grabada. Usted indicó que tiene Medicare A y B, ¿correcto?
+A: Sí, señor.

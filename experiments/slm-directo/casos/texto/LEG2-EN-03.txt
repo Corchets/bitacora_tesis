@@ -1,0 +1,8 @@
+A: ¿Hola?
+B: Hola, buen día, te habla Camila, de una consultora de investigación de mercado. ¿Hablo con Ramiro?
+A: Sí.
+B: Ramiro, estamos haciendo una encuesta sobre hábitos de compra en supermercados. ¿Tenés unos minutos?
+A: No, ahora estoy manejando.
+B: Ah, perdón. ¿Preferís que te llame otro día o que no te llame?
+A: Mejor no, gracias.
+B: Perfecto, no te contactamos más. Manejá con cuidado, chau.
