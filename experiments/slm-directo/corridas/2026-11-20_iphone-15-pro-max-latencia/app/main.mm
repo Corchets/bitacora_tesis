@@ -5,6 +5,9 @@
 //   - llama a `llama_server(argc, argv)` con los argumentos con que se lanzó la app (los de `llama-server`);
 //   - cada 5 s anota memoria y estado térmico en Documents/recursos.log.
 // La pantalla queda encendida: iOS suspende la app, y con ella el servidor, si pasa a segundo plano.
+//
+// Compilada con CON_ASR (la app de ../../2026-11-21_iphone-15-pro-max-asr-y-detector/app/), si se lanza con la
+// variable ASR_WAV corre además el ASR sobre ese WAV en otro hilo (asr.cpp), con ASR_MODELOS y ASR_INICIO.
 
 #import <UIKit/UIKit.h>
 
@@ -16,6 +19,10 @@
 #include <vector>
 
 int llama_server(int argc, char ** argv);  // tools/server/server.cpp (biblioteca llama-server-impl)
+#ifdef CON_ASR
+#include <cstdlib>
+#include "asr.h"
+#endif
 
 static std::vector<std::string> g_args;
 static UILabel * g_etiqueta;
@@ -72,6 +79,14 @@ static void * servir(void *) {
     return nullptr;
 }
 
+#ifdef CON_ASR
+static void * escuchar(void *) {
+    int salida = asr_correr(getenv("ASR_WAV"), getenv("ASR_MODELOS"), atof(getenv("ASR_INICIO")), "asr.jsonl");
+    mostrar([NSString stringWithFormat:@"llama-server corriendo; el ASR terminó con %d.\nDejar esta pantalla abierta.", salida]);
+    return nullptr;
+}
+#endif
+
 @interface Escena : UIResponder <UIWindowSceneDelegate>
 @property(nonatomic, strong) UIWindow * window;
 @end
@@ -103,6 +118,12 @@ static void * servir(void *) {
     pthread_attr_init(&atributos);
     pthread_attr_setstacksize(&atributos, 8 << 20);
     pthread_create(&hilo, &atributos, servir, nullptr);
+#ifdef CON_ASR
+    if (getenv("ASR_WAV") && getenv("ASR_MODELOS") && getenv("ASR_INICIO")) {
+        g_etiqueta.text = @"llama-server y ASR corriendo.\nDejar esta pantalla abierta.";
+        pthread_create(&hilo, &atributos, escuchar, nullptr);
+    }
+#endif
 }
 @end
 
