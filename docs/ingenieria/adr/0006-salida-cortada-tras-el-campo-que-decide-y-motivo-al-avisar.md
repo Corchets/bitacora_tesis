@@ -6,6 +6,9 @@
   [#143](https://github.com/Corchets/bitacora_tesis/issues/143).
 - **Ámbito:** arquitectura
 
+> **Nota del 2026-11-21:** en el teléfono el modelo genera solo el número del riesgo
+> ([ADR 0009](0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)).
+
 ## Contexto
 
 El SLM responde cada consulta con un JSON: primero el campo con el que se decide (el riesgo y, en v4, la alerta) y

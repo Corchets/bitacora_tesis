@@ -134,7 +134,11 @@ python3 medir_iphone.py iphone-hoy-3 --consulta chat --ip IP --dispositivo UDID 
 python3 -I resumir.py --base iphone-hoy-1 iphone-hoy-2 iphone-numero iphone-hoy-3 --salida resumen-iphone.json
 ```
 
-## 4. Qué habría que tocar para adoptarlo (no se tocó nada)
+## 4. Qué habría que tocar para adoptarlo
+
+Escrito antes de la decisión. De esta lista se hicieron el ADR y los documentos; el código no se tocó: en el
+teléfono la variante se pide con `--consulta numero --prefijo salto`.
+
 
 - **Con `llama-server` (teléfono):** el cliente ya existe, `Cliente` con `consulta="numero"` en
   `correr_android_latencia.py`. Habría que hacerlo el valor por defecto ahí y en lo que mida de acá en adelante.
@@ -154,12 +158,11 @@ python3 -I resumir.py --base iphone-hoy-1 iphone-hoy-2 iphone-numero iphone-hoy-
   [ADR 0006](../../../../docs/ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md),
   `prompts/README.md`, la tabla de latencia de las corridas del iPhone y el punto 2 de #172.
 
-## Recomendación
+## Decisión
 
-> **Estado: propuesta sin discutir.** Adoptarlo en el teléfono: baja la línea unos 0,4 s en el iPhone, cumple el
-> criterio en 150 conversaciones y no mueve más el riesgo que repetir la corrida de hoy. Dejar la demo con Ollama como
-> está hasta probar si Ollama lo permite. Toca D09 en
-> [MAPA-DECISIONES.md](../../../../docs/gestion/MAPA-DECISIONES.md).
+Mateo lo adoptó para el teléfono el 2026-11-21:
+[ADR 0009](../../../../docs/ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md). La demo y las
+corridas con Ollama siguen con los 14 tokens hasta probar si Ollama permite el prellenado.
 
 ## Límites
 

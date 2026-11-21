@@ -233,6 +233,8 @@ La [corrida de E4B](../../experiments/voip/corridas/2026-11-02-tito-gemma4-panel
 - El A56 todavía no tiene una corrida con el prompt final: entre teléfonos solo se compara `c-premisa`.
 - El iPhone estuvo enchufado y llegó al estado térmico `serious` en las cuatro corridas.
 
+**Generar solo el número.** El 2026-11-21 se probó escribir `{\n  "riesgo":` en el turno del modelo y que genere solo el número: 6 tokens en vez de 14 ([solo-el-numero](../../experiments/slm-directo/corridas/2026-11-21_solo-el-numero/README.md), [ADR 0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)). En el iPhone con GPU, por Wi-Fi y con el teléfono en estado `serious`, la línea bajó de 0,93–0,98 s a 0,54 s de mediana, y el p95 de 1,02–1,10 s a 0,64 s. Es una pasada sobre las mismas seis conversaciones. En la Mac, sobre 150 conversaciones de desarrollo, todas avisaron igual y en la misma línea; el riesgo cambió en 11 a 20 de 1.392 líneas, lo mismo que al repetir la configuración anterior (11).
+
 **Detector y ASR a la vez.** El 2026-11-21 corrieron juntos en el iPhone, sin cable, el detector con la configuración final y el ASR del proyecto, Parakeet con filtro ([iphone-15-pro-max-asr-y-detector](../../experiments/slm-directo/corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/README.md)). El audio es sintético: las mismas seis conversaciones a ritmo de conversación, 12 min 18 s. La segunda pasada repite el ritmo sin el ASR.
 
 | Pasada | Detector, por línea: mediana / p95 | Memoria que iOS le cuenta a la app, pico | Libre antes del límite, mínimo | Estado térmico |
