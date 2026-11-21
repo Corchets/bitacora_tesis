@@ -10,6 +10,8 @@ en PC con techo. Evidencia del [issue #29](https://github.com/Corchets/bitacora_
 
 El código está en `experiments/laboratorio/`, sin Markdown adentro.
 
+> **Nota del 2026-11-21:** antecedente del spike de septiembre. La UI Streamlit (#44) y el Docker (`Dockerfile`, `docker-compose.yml`) salieron del repo; quedan en el tag [`archivo/pre-informe`](https://github.com/Corchets/bitacora_tesis/tree/archivo/pre-informe/experiments/laboratorio). Las instrucciones de abajo se conservan como estaban.
+
 ## UI local para texto y resultados (#44)
 
 Implementación del [issue #44](https://github.com/Corchets/bitacora_tesis/issues/44) en

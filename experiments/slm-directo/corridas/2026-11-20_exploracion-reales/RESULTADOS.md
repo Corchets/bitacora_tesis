@@ -1,5 +1,7 @@
 # #52, exploración con los conjuntos reales: corridas con texto de la reserva
 
+> **Nota del 2026-11-21:** después de la evaluación final, la rama `reserva/test` se unió al tronco y se borró: estos CSV ahora están en esta carpeta de la rama principal (y en el tag `archivo/reserva-test`).
+
 Corrida del 2026-11-20 en Colab T4, con el tag `colab/52-exploracion-reales-2` (`7c52850`). Es posterior a la
 evaluación final y no la reemplaza. Estos CSV traen el texto del test reservado, por eso viven en `reserva/test` y no
 en `laboratorio-main`.

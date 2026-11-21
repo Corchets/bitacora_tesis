@@ -7,6 +7,8 @@ A ratificar por los cuatro.
 
 Este archivo es la fuente de verdad de esta investigación. Los docs principales solo enlazan acá.
 
+> **Nota del 2026-11-21:** antecedente, no fuente de verdad. D09 está resuelta ([ficha](../gestion/MAPA-DECISIONES.md#d09--elegir-asr-y-detector)): el ASR en el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md) y el detector en los [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md), [0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md) y [0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md).
+
 ---
 
 ## En criollo

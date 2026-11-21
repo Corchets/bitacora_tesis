@@ -75,7 +75,7 @@ Ver [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md).
 | Candidato | Resultado | Fuente |
 |---|---|---|
 | Reglas | 23/29 · 14/24 sobre los 53 antecedentes | [Comparación](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md#tabla-maestra-de-detectores) |
-| Qwen3.5 con prompt `tarea`, 97 de corpus v2 | 9B 40/46 · 10/51; 4B 39/46 · 8/51; 2B 22/46 · 6/51; 0.8B 40/46 · 46/51 | [Tablero](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/panel_plantilla.html) y [pasada 0](../../experiments/slm-directo/analisis/2026-10-21-pasada-0/) |
+| Qwen3.5 con prompt `tarea`, 97 de corpus v2 | 9B 40/46 · 10/51; 4B 39/46 · 8/51; 2B 22/46 · 6/51; 0.8B 40/46 · 46/51 | Corridas de [9B](../../experiments/slm-directo/corridas/2026-10-23_115920_linux-9b-v1v2-cv2-nb32/), [4B](../../experiments/slm-directo/corridas/2026-10-23_144554_linux-4b-v1v2-cv2-nb32/), [2B](../../experiments/slm-directo/corridas/2026-10-21_201039_m1-2b-v1v2-nb32/) y [0.8B](../../experiments/slm-directo/corridas/2026-10-23_153722_linux-0.8b-v1v2-nb32/) |
 | Qwen3.5 con prompt `v2`, mismos casos | 9B 31/46 · 7/51; 4B 14/46 · 0/51 | Ídem. Se escribió mirando los 53 y no generalizó |
 | bge-reranker-v2-m3 | 4/10 · 1/10 | [#123](https://github.com/Corchets/bitacora_tesis/issues/123) |
 | Riesgo primero, `gemma3n:e2b` | 10/10 · 3–6/10, o 2/10 · 0/10 | [análisis del 2026-10-30](../../experiments/slm-directo/analisis/2026-10-30-reranker-zero-shot/README.md) |
@@ -89,10 +89,12 @@ La repetición de Qwen 2B en GPU, con igual configuración y seed 42, cambió la
 | Corrida | Estafas | Antes del pedido | A tiempo | Falsas alarmas |
 |---|---:|---:|---:|---:|
 | Base, sin la premisa | 37/46 | 15/36 | 25/36 | 26/94 |
-| **`c-premisa`, la configuración final** | **40/46** | **19/36** | **29/36** | **26/94** |
+| **`c-premisa`, la que eligió la regla del ADR 0002** | **40/46** | **19/36** | **29/36** | **26/94** |
 | `c-premisa`, repetición | 39/46 | 18/36 | 28/36 | 28/94 |
 
 Con Wilson al 95 %, en la primera corrida: estafas 87 % [74–94], a tiempo 81 % [65–90] y falsas alarmas 28 % [20–37]. De las 26 falsas alarmas, 2 son cotidianas. La regla escrita antes de correr eligió esta variante entre tres, sobre los mismos casos, y las marcas no tienen revisión humana: el valor es optimista. Qué significan las cifras está en [H10](../hallazgos/H10-c-avisa-antes-del-pedido.md).
+
+La configuración final no es esta variante sino `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)), elegida después sobre los mismos casos; sus cifras de desarrollo están en la [revisión de producto](../../experiments/slm-directo/corridas/2026-11-10_revision-producto/analisis.md) y las de la reserva, en §8.3.4.
 
 ### 8.3.4. Evaluación final
 

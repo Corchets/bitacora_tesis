@@ -5,7 +5,7 @@
 - **Estado:** superado por [H10](H10-c-avisa-antes-del-pedido.md).
 - **Evidencia:**
   - [Descripción de #143](https://github.com/Corchets/bitacora_tesis/issues/143), sección «Variantes».
-  - Líneas base de `corridas/2026-11-05_puntaje-token-150/analisis-salida.md`, en la rama `exp/143-puntaje-token` hasta su merge.
+  - Líneas base de [`corridas/2026-11-05_puntaje-token-150/analisis-salida.md`](../../experiments/slm-directo/corridas/2026-11-05_puntaje-token-150/analisis-salida.md).
 - **Afecta a:** PI2 (margen temporal) en el [capítulo 9](../tesis/CAP-09-DISCUSION.md#91-respuesta-a-las-preguntas-de-investigación).
 
 ## Qué encontramos

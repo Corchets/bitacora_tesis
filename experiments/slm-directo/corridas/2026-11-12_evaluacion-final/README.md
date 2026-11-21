@@ -4,6 +4,8 @@
 > cifras están en [`analisis.md`](analisis.md) y los CSV del test, en la rama `reserva/test`. Lo que sigue describe
 > cómo se preparó.
 >
+> **Nota del 2026-11-21:** `reserva/test` se unió al tronco; los CSV del test están en [`test_reservado/`](test_reservado/).
+>
 > **Estado anterior (hasta el 2026-11-19): propuesta sin discutir.** El código está listo y probado en seco, pero **no corrió**: nadie corrió nada
 > sobre el test. Decisiones de Mateo del 2026-11-18: sin criterios de aprobación (se informan cifras con intervalo y la
 > comparación pareada), el set externo es solo de estafas, y los resultados del test van a `reserva/test`. La configuración quedó fijada el

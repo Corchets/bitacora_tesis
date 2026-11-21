@@ -67,6 +67,8 @@ anexos. Sirve para evitar que el marco teórico ocupe la mitad del trabajo.
 - Métricas y análisis estadístico.
 - Consideraciones éticas y plan de datos.
 
+> **Nota del 2026-11-21:** «Taxonomía, anotación y acuerdo» supone [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) cerrada, y sigue abierta: la evaluación final corrió sin referencia humana revisada ni medida de acuerdo.
+
 ## 5. Diseño y arquitectura
 
 - Contexto y componentes.
@@ -98,6 +100,8 @@ anexos. Sirve para evitar que el marco teórico ocupe la mitad del trabajo.
 - Detección temprana y latencia.
 - Falsas alarmas y hard negatives.
 - Ablations y rendimiento móvil.
+
+> **Nota del 2026-11-21:** «Gold transcript frente a ASR» es E1, que quedó fuera de la evaluación el 2026-11-10 ([decisión](../investigacion/PREGUNTAS-DE-INVESTIGACION.md#e1--efecto-del-asr-fuera-de-la-evaluación)).
 
 ## 9. Discusión
 

@@ -99,6 +99,9 @@ Formato y reglas en [casos/README.md](casos/README.md); qué hay, dónde y con q
 > **Estado: propuesta sin discutir.** El runner usa desarrollo por defecto y el
 > panel excluye los textos reservados. La independencia de semillas y la evaluación
 > final siguen pendientes de D08; las referencias siguen pendientes de D07.
+>
+> **Nota del 2026-11-21:** D08 se resolvió con límites y la evaluación final corrió el 2026-11-19
+> ([ficha de D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)); D07 sigue abierta.
 
 `python casos.py --listar` muestra todos. Fueron redactados con asistencia y
 **ninguno tiene revisión humana todavía** (`revision_humana: false`).
@@ -143,61 +146,13 @@ mandar al equipo. Para armarlo con cualquier conjunto de corridas:
 python visor.py corridas/<una> corridas/<otra> --abrir
 ```
 
-### El panel de lectura de casos
+### Paneles del tablero
 
-[`analisis/tablero/revision-casos.html`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/revision-casos.html) es el panel de
-diferencias y lectura suministrado por Luciano, actualizado conservando su estética,
-sus 88 fichas históricas y sus pestañas originales. En «Últimas pruebas · leer casos»
-permite elegir entre las 23 condiciones completas del 2026-11-04 y 2026-11-05 (v1, v3,
-v4, tanda de roles y v5), comparar dos corridas
-y recorrer pérdidas, falsas alarmas, detecciones y legítimas sin aviso. Cada ficha
-abre el diálogo completo con riesgos y avisos, las notas originales de la referencia
-y, cuando existe, la lectura previa de v1 en Windows.
-
-«Dudas en la ficha» busca menciones explícitas de ambigüedad o revisión pendiente,
-sin adjudicar la clase. La descripción de quien redactó el caso se distingue de la
-evidencia observable en el diálogo. Las etiquetas, T_R y T_C siguen sin revisión
-humana; el panel no las modifica ni cambia el detector.
-
-Para incorporar resultados ya guardados, sin inferencia ni recorrer el corpus o la
-reserva, desde la raíz:
-
-```bash
-python3 -I experiments/slm-directo/analisis/tablero/actualizar_panel_lectura.py \
-  --base experiments/slm-directo/analisis/tablero/revision-casos.html \
-  --salida experiments/slm-directo/analisis/tablero/revision-casos.html
-```
-
-El actualizador toma IDs y huellas de manifiestos completos de desarrollo desde el
-2026-11-04 y exige las mismas conversaciones en todas las condiciones. Excluye las
-corridas en curso o interrumpidas; los fallos y prefijos incompletos no cuentan como
-negativos. El HTML es autónomo, funciona como archivo local y conserva los datos
-históricos sin pérdida mediante compresión.
-
-### Formularios ciegos de #145
-
-[`analisis/tablero/revision-145.html`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/revision-145.html) permite completar
-las 42 fichas sin mostrar las referencias ni los resultados del sistema. Incluye casillas,
-marcas por línea, guardado por revisor y descarga/recuperación de respuestas. La
-[guía y reproducción](../../docs/corpus/REVISION-CIEGA-145.md) explica la muestra y la
-custodia de la clave. Para esta revisión, usar ese formulario y evitar el panel de
-resultados anterior hasta terminar la anotación independiente.
-
-### El panel general del proyecto
-
-`analisis/tablero/panel.html` junta en una página el estado del proyecto, el plan de
-trabajo, las corridas históricas sobre los 53 antecedentes, los 150 casos de desarrollo
-y un probador en vivo contra Ollama. En
-«Afinar» recalcula estafas con aviso y falsas alarmas al mover el umbral de `riesgo` y
-la persistencia, sin volver a correr nada. Se arma desde la raíz del repositorio:
-
-```bash
-python3 experiments/slm-directo/analisis/tablero/armar_panel.py --servir
-```
-
-`--servir` hace falta porque Ollama rechaza páginas abiertas como archivo. Las reglas del
-probador son una copia en JavaScript de `reglas.py`; las corridas que se hacen ahí son
-exploratorias y no escriben manifiesto.
+> **Nota del 2026-11-21:** el panel de lectura de casos, los formularios ciegos de #145, el panel general y la
+> comparación de corridas de 150 eran herramientas para leer resultados, no evidencia. Salieron del repo con sus
+> tests y quedan en el tag [`archivo/pre-informe`](https://github.com/Corchets/bitacora_tesis/tree/archivo/pre-informe/experiments/slm-directo/analisis/tablero).
+> El resultado de la revisión ciega de #145 está en [REVISION-CIEGA-145.md](../../docs/corpus/REVISION-CIEGA-145.md).
+> Para comparar dos corridas sigue el [visor](#el-visor).
 
 ### Paso a paso, sin el script
 
@@ -411,6 +366,10 @@ reservado (de la rama `reserva/test`) o el set externo de #144. Lee el texto y l
 en el manifiesto la partición y las huellas del conjunto. Es la base de la
 [evaluación final](corridas/2026-11-12_evaluacion-final/README.md), que todavía no corrió.
 
+> **Nota del 2026-11-21:** la evaluación final corrió el 2026-11-19 ([análisis](corridas/2026-11-12_evaluacion-final/analisis.md)).
+> Después, `reserva/test` se unió al tronco: el test reservado está en `casos/`, partición `test_reservado`
+> ([nota](casos/README.md#copia-pública-laboratorio-main)), y ya se miró.
+
 ### Diagnóstico del Tito histórico (#98)
 
 Recorrido real del artefacto histórico sin modificar sobre la partición de
@@ -546,6 +505,9 @@ afirmar rendimiento móvil.
 | 2026-10-21 | Análisis de errores del prompt v1 y **prompt v2** (`--prompts v2`): [`analisis/2026-10-21-errores-y-prompt-v2/`](analisis/2026-10-21-errores-y-prompt-v2/README.md). Corrida [`2026-10-21_182201_m1-0.8b-v1v2-nb32`](corridas/2026-10-21_182201_m1-0.8b-v1v2-nb32/resumen.md). | El 2B pierde siempre las mismas estafas: pedidos de dinero con razón creíble o sin palabra clave y pedidos indirectos de código; deja 49 líneas con riesgo ≥ 0,6 sin alerta. Exigir que la cita esté en el texto no ayuda. El v2 con el 0.8B quedó en los 24 casos del laboratorio, cortado por memoria con Docker abierto (el swap llegó a 9,4 GB porque el primer vigilante no podía cortar; corregido): 11/14 estafas y 2/10 falsas alarmas contra 13/14 y 4/10 del v1, sin motivos de «código» inventados. No alcanza para comparar. |
 | 2026-10-26 | Recorrido Tito→SLM con modelos simulados ([#69](https://github.com/Corchets/bitacora_tesis/issues/69)): `filtro_tito.py`, flags `--filtro-tito/--tito-puntajes/--tito-fallo-en/--tito-umbral`, `slm_falso.py`, `demo_tito_slm.sh`, `tests/test_filtro_tito.py` y corrida [`2026-10-26_125526_demo-tito-slm-simulado`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/corridas/2026-10-26_125526_demo-tito-slm-simulado/resumen.md). | El par de WhatsApp pasa de punta a punta: Tito simulado deriva en L4, el SLM avisa en L4 del vishing (`=R`) y no avisa en la legítima; 3 consultas y 6 evitadas por configuración. 14 tests nuevos (umbral con igualdad, persistencia, historial íntegro, indicio falible, fallos, aviso único, reinicio, costo y denominadores) y 54 previos en verde. Sin modelos reales: no elige detector ni cierra D07/D08/D09. |
 | 2026-11-04 y 2026-11-05 | **Prompts v1, v3, v4 y v5 con Gemma 4 E2B y Tito sobre los 150 casos de desarrollo** ([#51](https://github.com/Corchets/bitacora_tesis/issues/51)): [análisis unificado](corridas/2026-11-04_193946_prompt-v3-a-solo-y-con-indicio/analisis.md), [análisis de v5](corridas/2026-11-05_prompt-v5-tito-sin-indicio/analisis.md) y [fallas del corpus](casos/FALLAS-Y-CORPUS-2026-11-05.md). | En Colab (Tesla T4, `gemma4:e2b-it-q4_K_M`, Tito sin indicio): `v1` da 53–54/75 estafas con aviso y 14/75 falsas alarmas (`ab`) o 53/75 y 12/75 (`rol`); `v3` sube falsas alarmas a 34–35/75 (el orden de campos de v2 explica 16 de esas 21 falsas alarmas extra frente a `v3-orden-v1`, 57/75 y 18/75); `v4` con `--hablantes rol` da **55/75 estafas y 13/75 falsas alarmas** en dos corridas idénticas (`v4-cita-libre` da 55/75 y 12/75); las cuatro variantes de `v5` (`v5-maniobras` 57/16, `v5-indirectos` 55/12, `v5-sin-excepcion` 56/13 y `v5` 57/13) **no mejoran a `v4` de forma consistente** ni detectan las 6 estafas sin pedido del corpus v2. En las 14 condiciones con Tito sin indicio, el caso explica el 82 % de la varianza y la condición el 2 %. La demo en vivo (`experiments/voip`) queda por defecto con `v4`, `--hablantes rol` y `--sin-indicio` (ADR 0001 pendiente de reabrir con el equipo). |
+
+> **Nota del 2026-11-21:** este registro termina el 2026-11-05. Para el resto del proceso, hasta la evaluación final,
+> ver el [mapa del proceso](../../docs/tesis/MAPA-DEL-PROCESO.md).
 
 Cada corrida real se anota acá: fecha, quién, máquina, comando, carpeta y una línea
 con lo observado. Las conclusiones van en `resumen.md` de esa corrida y, cuando

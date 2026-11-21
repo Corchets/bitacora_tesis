@@ -3,7 +3,7 @@
 - **Fecha:** 2026-11-05
 - **Tipo:** resultado
 - **Estado:** vigente
-- **Evidencia:** [descripción de #143](https://github.com/Corchets/bitacora_tesis/issues/143), sección «Pregunta y comparación», con la corrida de `tarea` del 2026-11-04.
+- **Evidencia:** [descripción de #143](https://github.com/Corchets/bitacora_tesis/issues/143), sección «Pregunta y comparación», con la corrida de `tarea` del 2026-11-04 ([`sin-indicio-150`, corrida a, SLM solo](../../experiments/slm-directo/corridas/2026-11-04_sin-indicio-150/a/2026-11-04_194015_sin-indicio-a-solo-y-con-indicio/)).
 - **Afecta a:** la política de aviso ([#33](https://github.com/Corchets/bitacora_tesis/issues/33), D08) y [#143](https://github.com/Corchets/bitacora_tesis/issues/143).
 
 ## Qué encontramos

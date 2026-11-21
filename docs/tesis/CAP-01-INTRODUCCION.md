@@ -46,6 +46,8 @@ Se suma una evaluación que no es pregunta central: **E2**, la revisión de si e
 
 **Fuera del alcance:** captura universal de llamadas PSTN desde una app Android ordinaria; biometría y detección de voces clonadas; agenda, historial, memoria entre sesiones, reputación de números y detección de spoofing; rasgos acústicos para detectar fraude; app iOS, múltiples idiomas y análisis de mensajes; backend de producción y publicación comercial; y estudio poblacional con víctimas reales.
 
+> **Nota del 2026-11-21:** la evaluación final usó otro alcance: el detector corre solo en llamadas entrantes de números no agendados ([ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md)), lo que contradice la exclusión de la agenda y la dirección. Ese ADR sigue como propuesta sin discutir: su aceptación está pendiente.
+
 El contenido de la llamada permite evaluar señales de riesgo, pero no verificar la identidad del interlocutor. Si dos llamadas tienen el mismo contenido observable, el detector dispone de la misma evidencia aunque una sea legítima y la otra no.
 
 **Contribución.** No es una primicia: el análisis durante la llamada ya existe, comercial y académicamente. El aporte es la combinación de vishing en español, contexto argentino, procesamiento incremental, intervención explicable, evento crítico anotado, evaluación temporal, ejecución local y reproducibilidad.

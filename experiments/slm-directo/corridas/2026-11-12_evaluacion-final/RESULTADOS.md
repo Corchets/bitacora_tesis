@@ -1,5 +1,7 @@
 # #52, evaluación final: corridas con texto de la reserva
 
+> **Nota del 2026-11-21:** después de la evaluación final, la rama `reserva/test` se unió al tronco y se borró: estos CSV ahora están en esta carpeta de la rama principal (y en el tag `archivo/reserva-test`).
+
 Corrida única del 2026-11-19 en Colab T4, con el tag `colab/143-evaluacion-final-2` (`87bb745`) y la configuración
 `c-consejos-corte-riesgo`. Estos CSV traen el texto del test reservado, por eso viven en `reserva/test` y no en
 `laboratorio-main`.

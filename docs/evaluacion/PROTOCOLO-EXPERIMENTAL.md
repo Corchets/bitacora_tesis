@@ -10,6 +10,8 @@
 > **D08 permanece ABIERTA y este documento no la cierra por sí mismo.** Su propósito es proveer al equipo de trabajo (Albarracín, Antenucci, Grosso, Villalobo) y al tutor (Ing. Ernesto Rico) una base rigurosa, trazable y reproducible para discutir, ajustar y congelar formalmente las condiciones de evaluación antes de ejecutar cualquier medición sobre el conjunto de test reservado ([#45](https://github.com/Corchets/bitacora_tesis/issues/45)).
 > Cada parámetro o regla que requiera ratificación colegiada se señala explícitamente en el texto con su enlace al mapa de decisiones.
 
+> **Nota del 2026-11-21:** D08 se resolvió con límites al cerrar #33. Qué quedó fijado antes de la evaluación final del 2026-11-19 y qué no (persistencia del contador, márgenes en segundos) está en la [ficha de D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental); este documento no se reescribió. La corrida y su protocolo efectivo están en el [README de la evaluación final](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/README.md).
+
 ---
 
 ## 1. Preguntas de investigación, variables y criterios de lectura

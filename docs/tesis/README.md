@@ -1,8 +1,10 @@
 # Informe final: índice y estado
 
-Borrador completo al 2026-11-03. **La evaluación final no se corrió:** los capítulos 8, 9 y 11 quedan abiertos hasta tener el test reservado (#52). En el texto, lo pendiente aparece entre corchetes y en negrita. La estructura sale del [esqueleto](ESQUELETO-INFORME.md).
+**Para redactar:** empezá por el [mapa del proceso](MAPA-DEL-PROCESO.md), la guía de las etapas del trabajo y de dónde está la evidencia de cada una. Antes de escribir resultados, discusión o conclusiones, leé los [hallazgos](../hallazgos/README.md).
 
-**Nota del 2026-11-21:** la evaluación final corrió el 2026-11-19 (#52, cerrado) y los capítulos 8, 9 y 11 ya la incorporan. La tabla de abajo se actualizó ese día en las filas de Preliminares y de los capítulos 4, 8, 9 y 11.
+> **Nota del 2026-11-21:** la evaluación final corrió el 2026-11-19 (#52, cerrado) y los capítulos 8, 9 y 11 ya la incorporan; el párrafo siguiente es el estado al 2026-11-03. La tabla de abajo se actualizó ese día en las filas de Preliminares y de los capítulos 4, 8, 9 y 11.
+
+Borrador completo al 2026-11-03. **La evaluación final no se corrió:** los capítulos 8, 9 y 11 quedan abiertos hasta tener el test reservado (#52). En el texto, lo pendiente aparece entre corchetes y en negrita. La estructura sale del [esqueleto](ESQUELETO-INFORME.md).
 
 **Correcciones pendientes.** Cuando un [hallazgo](../hallazgos/README.md) contradice lo escrito y la corrección depende de una decisión abierta, el capítulo lleva una marca `> **Corregir (#N):**` donde está el texto, con el issue del que depende. Al cerrar ese issue se reescribe el texto y se borra la marca. Para listarlas: `grep -rn "Corregir (#" docs/tesis`. Al 2026-11-06, los capítulos 3 a 9 y 11 tienen marcas que dependen de [#51](https://github.com/Corchets/bitacora_tesis/issues/51) (configuración final y ADR 0002). El 2026-11-11, con el [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) registrado, se resolvieron todas.
 
@@ -23,4 +25,4 @@ Borrador completo al 2026-11-03. **La evaluación final no se corrió:** los cap
 
 **Sin escribir:** anexos (manual de anotación, consentimiento sin datos identificables, configuraciones, manual de instalación), agradecimientos, índices, referencias unificadas y formato final en A4.
 
-Decisión técnica: [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md). Comparación: [candidatos de desarrollo](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md).
+Decisiones técnicas: el ASR, en el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md); el detector, en los [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md), [0006](../ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md), [0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md), [0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md) y [0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md); el alcance y la evaluación, en los [ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md) y [0005](../ingenieria/adr/0005-reglas-de-evaluacion-escritas-antes-de-correr.md) (propuestas sin discutir) y [0004](../ingenieria/adr/0004-legitimas-entrantes-nuevas-y-test-aparte.md). Comparación: [candidatos de desarrollo](../evaluacion/COMPARACION-CANDIDATOS-DESARROLLO.md). Evaluación final: [análisis](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/analisis.md) y [qué concluir](../evaluacion/CONCLUSIONES-EVALUACION-FINAL.md).
