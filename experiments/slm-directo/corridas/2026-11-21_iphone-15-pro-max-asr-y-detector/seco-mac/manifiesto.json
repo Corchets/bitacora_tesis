@@ -20,9 +20,9 @@
   "inicio_audio": 1795276171.398,
   "props": {
     "total_slots": 1,
-    "model_alias": "/private/tmp/claude-501/-Users-mateoantenucci-Developer-bitacora-tesis--claude-worktrees-happy-austin-e0e0c3/410babea-e763-4999-8f30-4569aa30a147/scratchpad/modelo/gemma4-e2b-it-q4_K_M.gguf",
+    "model_alias": "gemma.gguf",
     "model_ftype": "Q4_K - Medium",
-    "model_path": "/private/tmp/claude-501/-Users-mateoantenucci-Developer-bitacora-tesis--claude-worktrees-happy-austin-e0e0c3/410babea-e763-4999-8f30-4569aa30a147/scratchpad/modelo/gemma4-e2b-it-q4_K_M.gguf",
+    "model_path": "gemma.gguf",
     "modalities": {
       "vision": false,
       "video": false,
@@ -80,5 +80,6 @@
   "python": "3.15.2",
   "pid": 24515,
   "inicio": "2026-11-21T12:48:51-0300",
-  "fin": "2026-11-21T13:01:46-0300"
+  "fin": "2026-11-21T13:01:46-0300",
+  "nota": "model_alias y model_path decían la ruta del GGUF en una carpeta temporal de la Mac; se reemplazaron por gemma.gguf"
 }
