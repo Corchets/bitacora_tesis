@@ -1,0 +1,22 @@
+{
+  "servidor": "llama-server -m gemma.gguf --host 0.0.0.0 --port 18080 -c 4096 -np 1 --no-webui -ngl 99",
+  "asr": true,
+  "inicio_audio": 1795277569.822,
+  "inicio_audio_reloj": "2026-11-21T13:12:49-0300",
+  "conexion": "wifi",
+  "pid": 1617,
+  "carga_hasta_health_s": 18.23,
+  "health_ida_y_vuelta_ms": {
+    "mediana": 16.4,
+    "max": 17.9
+  },
+  "salida_ejecutor": 0,
+  "dispositivo": {
+    "modelo": "iPhone 15 Pro Max",
+    "tipo": "iPhone16,2",
+    "sistema": "27.0.1",
+    "compilacion": "24A446"
+  },
+  "app_viva_al_final": true,
+  "agenda_sha256": "56ecdcc3ef4d6d647a462bee75f7e4b52e96c1d4604d7282df89348f71295d71"
+}
