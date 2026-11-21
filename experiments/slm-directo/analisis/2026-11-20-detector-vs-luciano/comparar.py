@@ -1,10 +1,9 @@
 """#52: dónde avisó el detector de la evaluación final y dónde marcó Luciano en sus fichas de #145.
 
-No corre modelos. Uso desde la raíz, con las corridas de desarrollo de la evaluación final (rama reserva/test) sacadas
-a una carpeta aparte; no hace falta nada del test:
-    git archive origin/reserva/test experiments/slm-directo/corridas/2026-11-12_evaluacion-final/desarrollo \
-        | tar -x -C /tmp/eval-final-dev --strip-components=4
-    python3 -I experiments/slm-directo/analisis/2026-11-20-detector-vs-luciano/comparar.py /tmp/eval-final-dev
+No corre modelos ni usa nada del test. Uso desde la raíz, con las corridas de desarrollo de la evaluación final (desde
+el 2026-11-21 están en el árbol; antes había que sacarlas de la rama reserva/test con git archive):
+    python3 -I experiments/slm-directo/analisis/2026-11-20-detector-vs-luciano/comparar.py \
+        experiments/slm-directo/corridas/2026-11-12_evaluacion-final
 
 Fichas: docs/corpus/REVISION-145-LUCIANO-2026-11-10.json y su correspondencia (26 llamadas de desarrollo). El aviso de
 cada detector sale con la misma regla que analizar.py de la evaluación final.

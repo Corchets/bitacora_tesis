@@ -1,13 +1,10 @@
 """Exploración: el modelo de la evaluación final más la regla de pedido crítico, sin correr el modelo.
 
 El aviso del modelo sale de las corridas de la evaluación final (primer aviso, la regla de analizar.py); la regla se
-aplica sobre los textos. El híbrido avisa en la primera de las dos líneas. Uso desde la raíz:
-    git archive origin/reserva/test experiments/slm-directo/corridas/2026-11-12_evaluacion-final/desarrollo \
-        | tar -x -C /tmp/eval-final-dev --strip-components=4
-    git archive origin/reserva/test experiments/slm-directo/corridas/2026-11-12_evaluacion-final/test_reservado \
-        experiments/slm-directo/casos/legitimas-entrantes-test.jsonl experiments/slm-directo/casos/alcance-reserva.json \
-        experiments/slm-directo/casos/texto experiments/slm-directo/casos/referencia | tar -x -C /tmp/eval-final-test
-    python3 -I experiments/slm-directo/analisis/2026-11-20-regla-pedido-critico/evaluar.py /tmp/eval-final-dev /tmp/eval-final-test
+aplica sobre los textos. El híbrido avisa en la primera de las dos líneas. Uso desde la raíz (desde el 2026-11-21
+la reserva está en el árbol; antes había que sacarla de la rama reserva/test con git archive):
+    python3 -I experiments/slm-directo/analisis/2026-11-20-regla-pedido-critico/evaluar.py \
+        experiments/slm-directo/corridas/2026-11-12_evaluacion-final .
 
 Las legítimas reales no tienen corrida publicada: el aviso del modelo sale de la lista de FA de
 corridas/2026-11-12_evaluacion-final/analisis-salida.md (las otras 12 no avisaron).

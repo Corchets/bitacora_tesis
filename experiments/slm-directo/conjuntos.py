@@ -31,7 +31,7 @@ from pathlib import Path
 import casos
 
 RAIZ = Path(__file__).resolve().parent
-# Dentro de un checkout de la rama reserva/test (ver casos/RESERVA-EN-ESTA-RAMA.md en esa rama).
+# Dentro de un checkout con la reserva: desde el 2026-11-21, la raíz de este repo (ver casos/RESERVA-EN-ESTA-RAMA.md).
 RESERVA_CASOS = Path("experiments") / "slm-directo" / "casos"
 # SHA-256 de las fuentes de la reserva que no están en MANIFIESTO-CORPUS-V2.json. El del JSONL es el de
 # TEST-ALCANCE.md (2026-11-07); el de alcance-reserva.json, el del commit 9089b19 de reserva/test.
@@ -215,7 +215,7 @@ def _lista(nombre: str) -> list[str]:
 
 def preparar_test(reserva: Path, destino: Path, *, manifiesto: Path | None = None,
                   sha_legitimas: str = SHA_LEGITIMAS_TEST, sha_alcance: str = SHA_ALCANCE_RESERVA) -> Conjunto:
-    """El test reservado desde un checkout de reserva/test: los 200 CV2-T y las 56 legítimas entrantes (ENT-T).
+    """El test reservado desde un checkout con la reserva (la raíz del repo; antes, la rama reserva/test): los 200 CV2-T y las 56 legítimas entrantes (ENT-T).
 
     - Comprueba cada CV2-T contra las huellas de MANIFIESTO-CORPUS-V2.json de esta rama, y el JSONL de las 56 y
       alcance-reserva.json contra sus SHA-256.
@@ -362,7 +362,7 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="orden", required=True)
     pp = sub.add_parser("preparar", help="arma los conjuntos en --destino")
     pp.add_argument("--destino", type=Path, required=True)
-    pp.add_argument("--reserva", type=Path, help="checkout de la rama reserva/test (sin esto, no arma el test)")
+    pp.add_argument("--reserva", type=Path, help="raíz de un checkout con la reserva, hoy este repo (sin esto, no arma el test)")
     pp.add_argument("--externo", type=Path, help="carpeta de la custodia de #144 (sin esto, no arma el externo)")
     pp.add_argument("--legitimas-reales", type=Path,
                     help="casos/externo/legitimas-reales o la carpeta sets/ de la custodia (sin esto, no arma ese conjunto)")

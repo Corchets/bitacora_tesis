@@ -1,5 +1,9 @@
 # La reserva está en esta rama
 
+> **Nota del 2026-11-21 (Mateo):** la rama `reserva/test` se unió al tronco después de la evaluación final y se borró;
+> su última versión queda en el tag `archivo/reserva-test`. Este archivo cuenta cómo se custodió la reserva hasta
+> entonces; hoy la reserva está en `casos/` de la rama principal.
+
 `reserva/test` es `laboratorio-main` más un commit con la reserva de test. Se armó el 2026-11-10, al retirar
 `laboratorio-luciano`, por decisión de Mateo. Qué hay en cada rama: [catálogo de conversaciones](CATALOGO-CONVERSACIONES.md).
 
