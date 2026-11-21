@@ -1,0 +1,30 @@
+A: Hola, vi el resultado del sorteo de la biblioteca y parece que mi apellido está mal escrito.
+B: Buenas. ¿Qué aparece en la lista?
+A: Pusieron “Marelo” y mi apellido es “Marello”, con doble ele.
+B: ¿Cuál era el número del cupón?
+A: 90. Lo saqué cuando devolví un libro el lunes.
+B: Veo el cupón 90, a nombre de Noelia Marello.
+A: Sí, soy yo. ¿El premio es un vale para la librería?
+B: Es un vale de 28.000 pesos para libros de lectura.
+A: ¿Lo puedo usar para comprar cuadernos también?
+B: No, el organizador indicó libros, pero podés elegir cualquier título disponible.
+A: ¿Tiene fecha de vencimiento?
+B: Se puede usar hasta el 20 de diciembre.
+A: ¿Dónde lo retiro?
+B: En la mesa de préstamos, durante el horario de la biblioteca.
+A: ¿Hay que llevar el cupón o alcanza con el nombre?
+B: Llevá el cupón para que lo marquen como entregado.
+A: ¿Podés corregir la lista antes de que la impriman para la cartelera?
+B: Sí. Voy a modificar una letra y conservar el resto como está.
+A: Gracias. No quiero que después otra persona piense que es suyo.
+B: El número de cupón es el que determina el premio, pero lo corregimos igual.
+A: ¿Me mandás la lista nueva por correo?
+B: La lista se publica en la cartelera y en la página de la biblioteca.
+A: La miro cuando pase a buscar el vale.
+B: ¿Querés que quede reservado para mañana?
+A: Sí, voy después de las cinco.
+B: A esa hora estamos hasta las siete.
+A: Perfecto, paso por ahí.
+B: Quedó anotado el retiro para Noelia Marello.
+A: Muchas gracias.
+B: De nada.

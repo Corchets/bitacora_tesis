@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Legítimas reales · ¿debería avisar?</title>
+<style>
+:root{color-scheme:light;--paper:#f3f6f5;--ink:#243339;--muted:#53636a;--line:#c9d0cd;--accent:#155e63;--tint:#e7f1ee;--error:#9d2525}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit;color:inherit}button,select,input[type=number],input[type=text],textarea{border:1px solid var(--line);border-radius:6px;background:white}button{min-height:44px;padding:8px 15px;cursor:pointer;font-weight:600}button:hover{background:var(--tint);border-color:var(--accent)}button.primary{background:var(--accent);color:white;border-color:var(--accent)}button.primary:hover{background:#104c50}button:disabled{opacity:.5;cursor:default}input,select,textarea{accent-color:var(--accent);caret-color:var(--accent)}input[type=text],input[type=number],select{padding:9px 11px;min-height:44px}textarea{display:block;width:100%;min-height:85px;padding:10px;resize:vertical}input[type=number]{width:90px}input[type=checkbox],input[type=radio]{width:21px;height:21px;flex-shrink:0;margin:2px 0}input[type=radio]{appearance:none;border:1.5px solid #73847f;border-radius:4px;background:white}input[type=radio]:checked{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 4px white}input::placeholder,textarea::placeholder{color:var(--muted);opacity:1}::selection{background:#cae6df}a{color:var(--accent);text-underline-offset:3px}:focus-visible{outline:3px solid #a75b00;outline-offset:3px}h1{font-size:27px;line-height:1.2;letter-spacing:-.025em;margin:0 0 8px}h2{font-size:21px;margin:0}p{margin:8px 0;max-width:74ch}.muted,small{color:var(--muted)}small{font-size:14px}.wrap{max-width:1430px;margin:auto;padding:28px 28px 60px}.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.identity{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin:24px 0 12px}.identity label{display:grid;gap:4px;font-size:14px;font-weight:600}.identity input{width:240px}.guide{border-block:1px solid var(--line);padding:12px 0;margin-top:18px}.guide summary{cursor:pointer;font-weight:600;min-height:28px}.guide ul{padding-left:22px;max-width:80ch}.guide li{margin:8px 0}.proposal{font-size:14px;color:var(--muted)}#status{min-height:26px;font-size:14px;margin:8px 0;color:var(--accent)}#status.error,#errors{color:var(--error)}#errors{scroll-margin-top:20px}#errors:empty{display:none}.navigation{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 0;border-top:1px solid var(--line)}.navigation label{font-size:14px;font-weight:600}.navigation select{min-width:180px}.progress{margin-left:auto;font-variant-numeric:tabular-nums}progress{accent-color:var(--accent);width:120px;height:8px;margin-left:8px}.workspace{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:start}.conversation{position:sticky;top:18px;background:white;border:1px solid var(--line);border-radius:8px;overflow:hidden}.conversation summary{padding:16px 18px;cursor:pointer;font-weight:700}.conversation .hint{padding:0 18px 12px;font-size:14px}.mark-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;background:var(--paper);border-block:1px solid var(--line);font-size:14px}.mark-tools select{padding:6px;min-height:38px}.turns{max-height:68vh;overflow:auto;scrollbar-color:#8da59b var(--paper);scrollbar-width:thin}.turn{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:13px 18px 13px 10px;border-bottom:1px solid #e7eae7;scroll-margin:12px}.turn:last-child{border:0}.turn .line-number{align-self:start;min-height:38px;padding:4px;font-variant-numeric:tabular-nums;border-color:transparent;font-weight:500;font-size:14px;color:var(--muted)}.turn .line-number:hover{border-color:var(--accent)}.speaker{font-size:11px;letter-spacing:.055em;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}.turn.protected{background:#f8faf8}.turn.marked{background:var(--tint)}.tag{font-size:12px;color:var(--accent);font-weight:700;margin-right:8px}.turn p{margin:0;overflow-wrap:anywhere}.sheet{min-width:0}.sheet-head{display:flex;align-items:baseline;gap:10px;margin:2px 0 6px}.sheet-head small{margin-left:auto}fieldset{border:0;border-bottom:1px solid var(--line);margin:22px 0 0;padding:0 0 22px;min-width:0}legend{font-size:17px;font-weight:700;padding:0;margin-bottom:8px}.options{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.option{display:flex;gap:8px;align-items:center;min-height:44px;padding:8px 11px;border:1px solid var(--line);border-radius:6px;background:white;cursor:pointer;font-size:15px}.option:hover{border-color:var(--accent)}.option:has(input:checked){background:var(--tint);border-color:var(--accent);font-weight:600}.line-input{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}.line-input label{font-size:14px}.reason{display:block;margin-top:12px;font-size:14px;font-weight:600}.reason textarea{margin-top:6px;font-weight:400}.finish{display:flex;align-items:center;gap:10px;min-height:52px;font-weight:600;margin:20px 0 8px}.bottom{display:flex;justify-content:space-between;gap:12px;margin-top:20px}.export-note{margin-top:18px;font-size:14px}.exposure{display:flex;gap:10px;align-items:flex-start;font-size:14px;margin-top:14px}#welcome{padding:35px 0;max-width:70ch}#welcome h2{margin-bottom:10px}.file-label{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;background:white;border:1px solid var(--line);border-radius:6px;font-size:14px;cursor:pointer}.file-label:hover{background:var(--tint)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.checks{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.checks .option input{border-radius:4px}[hidden]{display:none!important}
+@media(max-width:900px){.wrap{padding:22px 18px 45px}.top{display:block}.tools{margin-top:16px}.workspace{grid-template-columns:1fr;gap:24px}.conversation{position:static}.turns{max-height:55vh}.progress{margin-left:0}.navigation{gap:8px}.sheet-head small{font-size:13px}.identity{margin-top:18px}}
+@media print{.tools,.identity,.guide,.navigation,.mark-tools,.bottom,.export-note,#status,#welcome{display:none}.workspace{display:block}.conversation{position:static}.turns{max-height:none;overflow:visible}.wrap{padding:0}.option{padding:4px 8px}fieldset,.turn{break-inside:avoid}}
+</style></head>
+<body><div class="wrap">
+<header class="top"><div><h1>Legítimas reales: ¿debería avisar?</h1><p class="muted">Una llamada por vez. Leé el diálogo y decidí, con la política de producto, si un aviso ahí sería una falsa alarma.</p></div><div class="tools"><button id="export" class="primary" disabled>Descargar mis respuestas</button><label class="file-label">Recuperar respuestas<input id="import" class="sr-only" type="file" accept="application/json,.json"></label></div></header>
+<details class="guide" open><summary>Guía breve para completar las fichas</summary>
+<ul>
+<li><b>Qué son.</b> Llamadas reales de un call center de telecomunicaciones de EE. UU., traducidas al español neutro. La empresa llama a un negocio, que en general ya es cliente. Todas se anotaron como legítimas.</li>
+<li><b>Los roles los infirió un modelo:</b> la fuente no separa hablantes. PROTEGIDA es quien atiende; OTRA, quien llama. Si están invertidos o mezclados, marcalo: el detector solo consulta en las líneas de OTRA.</li>
+<li><b>La pregunta no es si la empresa es real.</b> Dentro de la llamada eso no se puede comprobar. Es: <b>¿qué le pide OTRA que haga o que diga, y qué pierde PROTEGIDA si OTRA mentía sobre quién es?</b></li>
+<li><b>No debería avisar:</b> no le pide nada que se pueda perder. Informar, coordinar, vender u ofrecer (aunque insista o apure), una encuesta, seguir una gestión que PROTEGIDA reconoce. El nombre, el mail o el número de DNI solos no disparan.</li>
+<li><b>Está bien que avise (tolerable):</b> el aviso repite un consejo oficial aunque la llamada sea legítima. Por ejemplo, una advertencia de seguridad sobre la cuenta, o datos pedidos con un pretexto flojo.</li>
+<li><b>Debería avisar:</b> pide algo que las fuentes dicen no darle nunca a quien llamó: dictar un código que llegó, una clave o un PIN; los datos de la tarjeta; pagar o transferir; instalar un programa o compartir la pantalla; el número de trámite o una foto del documento. Vale aunque la empresa sea real.</li>
+<li><b>Lo que OTRA promete no cuenta; cuenta lo que pide.</b> Que OTRA dé un número (de reclamo, de pedido) o diga «no comparta su clave» no es un pedido.</li>
+<li>Completá sin mirar resultados del detector ni respuestas ajenas. Si ya conocías la llamada o en qué avisó el detector, dejalo marcado.</li>
+</ul><p class="proposal">Criterio: <code>corridas/2026-11-10_revision-producto/POLITICA.md</code> (#143), escrito antes de estas fichas. Las mismas tres etiquetas que se usaron en las 94 legítimas de desarrollo.</p></details>
+<div class="identity"><label for="reviewer">Tu nombre<input id="reviewer" type="text" autocomplete="name" placeholder="Nombre y apellido" maxlength="80"></label><button id="start">Abrir mis fichas</button><button id="change" hidden>Cambiar de revisor</button></div>
+<p id="status" role="status" aria-live="polite">Escribí tu nombre para empezar o recuperá un archivo de respuestas.</p>
+<section id="welcome"><h2 id="welcome-title">Llamadas a tu ritmo</h2><p>Podés dejar una ficha a medias y seguir después. Las opciones están vacías: no hay respuestas sugeridas.</p><p class="muted">El navegador guarda el avance en este equipo cuando lo permite. Descargá tus respuestas al terminar cada sesión.</p></section>
+<div id="review" hidden>
+<nav class="navigation" aria-label="Navegar las fichas"><label for="case-select">Ir a</label><select id="case-select"></select><button id="pending">Siguiente pendiente</button><span class="progress"><span id="count"></span><progress id="progress" value="0" aria-label="Fichas completas"></progress></span></nav>
+<main class="workspace"><details class="conversation" open><summary id="dialog-title">Conversación</summary><p class="hint muted">Hacé clic en un número de línea para cargar la línea del pedido en la ficha.</p><div id="turns" class="turns"></div></details>
+<form id="form" class="sheet" novalidate><div class="sheet-head"><h2 id="sheet-title">Tu ficha</h2><small id="sheet-state"></small></div><p class="muted"><small>Elegí una opción por pregunta. «Dudoso» es una respuesta válida.</small></p><p id="errors" role="alert" tabindex="-1"></p>
+<fieldset><legend>¿PROTEGIDA y OTRA están bien asignados?</legend><div class="options"><label class="option"><input type="radio" name="roles" value="si">Sí</label><label class="option"><input type="radio" name="roles" value="dudoso">Dudoso o mezclados</label><label class="option"><input type="radio" name="roles" value="no">No, están invertidos</label></div><label class="reason">¿Qué líneas están mal?<textarea maxlength="50000" name="motivo_roles" placeholder="Necesario si no marcaste Sí."></textarea></label></fieldset>
+<fieldset><legend>¿Es una llamada legítima?</legend><div class="options"><label class="option"><input type="radio" name="legitima" value="si">Sí</label><label class="option"><input type="radio" name="legitima" value="dudosa">Dudosa</label><label class="option"><input type="radio" name="legitima" value="no">No</label></div><label class="reason">¿Qué te hace dudar?<textarea maxlength="50000" name="motivo_legitima" placeholder="Necesario si no marcaste Sí. Citá líneas."></textarea></label></fieldset>
+<fieldset><legend>¿Para qué llama OTRA, sobre todo?</legend><div class="options">
+<label class="option"><input type="radio" name="intencion" value="informar_coordinar">Informar o coordinar</label>
+<label class="option"><input type="radio" name="intencion" value="vender">Ofrecer o vender</label>
+<label class="option"><input type="radio" name="intencion" value="encuesta">Preguntar una opinión</label>
+<label class="option"><input type="radio" name="intencion" value="gestion_propia">Seguir una gestión de PROTEGIDA</label>
+<label class="option"><input type="radio" name="intencion" value="advertir">Advertir</label>
+<label class="option"><input type="radio" name="intencion" value="tomar_datos">Tomar datos que identifican</label>
+<label class="option"><input type="radio" name="intencion" value="acto_riesgo">Obtener una credencial o un acto sin vuelta atrás</label></div></fieldset>
+<fieldset><legend>¿Qué le pide OTRA que haga o que diga?</legend><p class="muted"><small>Marcá todo lo que pida, no lo que mencione.</small></p><div class="checks">
+<label class="option"><input type="checkbox" name="pide" value="nada">Nada de esto</label>
+<label class="option"><input type="checkbox" name="pide" value="nombre_contacto">Nombre, mail, teléfono o dirección</label>
+<label class="option"><input type="checkbox" name="pide" value="dni">Número de documento (o del fiscal, SSN)</label>
+<label class="option"><input type="checkbox" name="pide" value="datos_cuenta">Número de cuenta o datos de la cuenta</label>
+<label class="option"><input type="checkbox" name="pide" value="codigo_clave">Un código que llegó, una clave o un PIN</label>
+<label class="option"><input type="checkbox" name="pide" value="tarjeta">Datos de la tarjeta</label>
+<label class="option"><input type="checkbox" name="pide" value="pago">Pagar o transferir</label>
+<label class="option"><input type="checkbox" name="pide" value="acceso_remoto">Instalar algo o compartir la pantalla</label>
+<label class="option"><input type="checkbox" name="pide" value="otro">Otro (explicalo en la razón)</label></div></fieldset>
+<fieldset><legend>Si el detector avisara en esta llamada, ¿qué sería?</legend><div class="options"><label class="option"><input type="radio" name="etiqueta" value="no_avisar">Falsa alarma: no debería avisar</label><label class="option"><input type="radio" name="etiqueta" value="tolerable">Está bien que avise (tolerable)</label><label class="option"><input type="radio" name="etiqueta" value="avisar">Debería avisar</label></div><div class="line-input"><label for="label-line">Línea del pedido que lo justifica</label><input id="label-line" name="etiqueta_linea" type="number" min="1" step="1" inputmode="numeric"></div><label class="reason">¿Por qué? Citá la línea.<textarea maxlength="50000" name="razon" placeholder="Qué pide OTRA y qué perdería PROTEGIDA si OTRA mentía. También si marcaste falsa alarma."></textarea></label></fieldset>
+<label class="reason">Otras observaciones<textarea maxlength="50000" name="observaciones" placeholder="Traducción rara, llamada cortada, criterio para discutir. Opcional."></textarea></label>
+<label class="exposure"><input name="conocido" type="checkbox">Ya conocía esta llamada o en qué avisó el detector.</label>
+<label class="finish"><input name="completa" type="checkbox">Terminé de revisar esta ficha</label><small>Marcarla completa comprueba las respuestas. Podés corregirla después.</small>
+<div class="bottom"><button id="prev" type="button">Anterior</button><button id="next" type="button" class="primary">Siguiente llamada</button></div><p class="export-note muted">No se envía nada por Internet. Descargá tu copia al terminar cada sesión.</p>
+</form></main></div>
+</div><script type="application/json" id="data">__DATOS_REVISION__</script>
+<script>
+'use strict';
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const $=id=>document.getElementById(id), form=$('form'), N=DATA.casos.length;
+const GROUPS={roles:['si','dudoso','no'],legitima:['si','dudosa','no'],intencion:['informar_coordinar','vender','encuesta','gestion_propia','advertir','tomar_datos','acto_riesgo'],etiqueta:['no_avisar','tolerable','avisar']};
+const PIDE=['nada','nombre_contacto','dni','datos_cuenta','codigo_clave','tarjeta','pago','acceso_remoto','otro'];
+const TEXTS=['motivo_roles','motivo_legitima','razon','observaciones'];
+const NAMES={roles:'los roles',legitima:'si es legítima',intencion:'para qué llama',etiqueta:'qué sería un aviso'};
+let reviewer='',state={respuestas:{},actual:0},key='',storageOK=true;
+const escapeHTML=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function message(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error)}
+function errors(r,n){
+ const out=[];
+ for(const g of Object.keys(GROUPS))if(!r[g])out.push('Respondé '+NAMES[g]+'.');
+ if(['dudoso','no'].includes(r.roles)&&!r.motivo_roles?.trim())out.push('Indicá qué líneas tienen mal el rol.');
+ if(['dudosa','no'].includes(r.legitima)&&!r.motivo_legitima?.trim())out.push('Explicá por qué dudás de que sea legítima.');
+ if(!r.pide.length)out.push('Marcá qué pide OTRA, o «Nada de esto».');
+ if(r.pide.includes('nada')&&r.pide.length>1)out.push('«Nada de esto» no va con otros pedidos.');
+ const line=r.etiqueta_linea;
+ if(['tolerable','avisar'].includes(r.etiqueta)&&(!Number.isInteger(Number(line))||Number(line)<1||Number(line)>n))out.push('Indicá la línea del pedido que justifica el aviso.');
+ if(line!==''&&(!Number.isInteger(Number(line))||Number(line)<1||Number(line)>n))out.push('La línea no existe.');
+ if(!r.razon?.trim())out.push('Escribí la razón, también si es falsa alarma.');
+ return out;
+}
+function readForm(){const r={};for(const g of Object.keys(GROUPS))r[g]=form.elements[g].value;r.pide=[...form.querySelectorAll('[name="pide"]:checked')].map(e=>e.value);for(const t of TEXTS)r[t]=form.elements[t].value;r.etiqueta_linea=form.elements.etiqueta_linea.value;for(const b of ['conocido','completa'])r[b]=form.elements[b].checked;return r}
+function persist(){
+ try{localStorage.setItem(key,JSON.stringify(state));storageOK=true;message('Guardado en este navegador · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})+'. Descargá una copia al terminar.');}
+ catch(e){storageOK=false;message('No se pudo guardar en el navegador. Descargá tus respuestas antes de cerrar la pestaña.',true)}
+}
+function captureStatus(c){
+ const r=state.respuestas[c.id];
+ if(!r||!Object.values(r).some(v=>Array.isArray(v)?v.length:typeof v==='string'?v.trim():v===true))return 'sin empezar';
+ if(errors(r,c.turnos.length).length)return 'en curso';
+ return r.completa?'completa':'respondida · sin confirmar';
+}
+function overview(){
+ const n=DATA.casos.filter(c=>['completa','respondida · sin confirmar'].includes(captureStatus(c))).length;
+ const confirmed=DATA.casos.filter(c=>state.respuestas[c.id]?.completa).length;
+ $('count').textContent=n+' de '+N+' respondidas · '+confirmed+' confirmadas';$('progress').max=N;$('progress').value=n;
+ $('case-select').innerHTML=DATA.casos.map((c,i)=>'<option value="'+i+'">'+c.id+' · '+captureStatus(c)+'</option>').join('');$('case-select').value=String(state.actual);
+ $('sheet-state').textContent=captureStatus(DATA.casos[state.actual]);
+}
+function paintMarks(){const r=state.respuestas[DATA.casos[state.actual].id]||{};document.querySelectorAll('.turn').forEach((el,i)=>{const on=Number(r.etiqueta_linea)===i+1;el.classList.toggle('marked',on);el.querySelector('.tags').textContent=on?'Pedido':''})}
+function save(){
+ const r=readForm(),bad=errors(r,DATA.casos[state.actual].turnos.length);
+ if(r.completa&&bad.length){r.completa=false;form.elements.completa.checked=false;$('errors').textContent=bad.join(' ');}else $('errors').textContent='';
+ state.respuestas[DATA.casos[state.actual].id]=r;persist();overview();paintMarks();
+}
+function show(){
+ const c=DATA.casos[state.actual],r=state.respuestas[c.id]||{};form.reset();
+ for(const g of Object.keys(GROUPS))for(const el of form.querySelectorAll('[name="'+g+'"]'))el.checked=el.value===r[g];
+ for(const el of form.querySelectorAll('[name="pide"]'))el.checked=(r.pide||[]).includes(el.value);
+ for(const t of TEXTS)form.elements[t].value=r[t]||'';
+ form.elements.etiqueta_linea.value=r.etiqueta_linea||'';form.elements.etiqueta_linea.max=c.turnos.length;
+ for(const b of ['conocido','completa'])form.elements[b].checked=!!r[b];
+ $('dialog-title').textContent=c.id+' · '+c.turnos.length+' líneas';$('sheet-title').textContent='Tu ficha · '+c.id;$('errors').textContent='';
+ $('turns').innerHTML=c.turnos.map((t,i)=>'<div class="turn '+(t.hablante==='PROTEGIDA'?'protected':'')+'"><button type="button" class="line-number" data-line="'+(i+1)+'" aria-label="Cargar línea '+(i+1)+'">'+(i+1)+'</button><div><span class="speaker">'+t.hablante+'</span><span class="tags tag"></span><p>'+escapeHTML(t.texto)+'</p></div></div>').join('');
+ $('turns').scrollTop=0;$('prev').disabled=state.actual===0;$('next').disabled=state.actual===N-1;overview();paintMarks();
+}
+function activate(name,imported){
+ reviewer=name.trim();if(!reviewer){message('Escribí tu nombre para separar tus respuestas de las de otro revisor.',true);$('reviewer').focus();return}
+ key='revisionLegitimasReales:'+DATA.muestra+':'+encodeURIComponent(reviewer.toLocaleLowerCase('es-AR'));state={respuestas:{},actual:0};storageOK=true;
+ try{const raw=imported?null:localStorage.getItem(key);if(raw)state=validate(JSON.parse(raw));}catch(e){if(e.name!=='SecurityError'&&e.name!=='QuotaExceededError'){message('El guardado anterior no se puede leer. Recuperá tu archivo descargado; no se va a sobrescribir.',true);return}storageOK=false}
+ if(imported)state=imported;
+ $('reviewer').value=reviewer;$('reviewer').disabled=true;$('start').hidden=true;$('change').hidden=false;$('welcome').hidden=true;$('review').hidden=false;$('export').disabled=false;
+ show();if(imported)persist();else message(storageOK?'Tus respuestas se guardan al marcar o escribir. Descargá una copia al terminar.':'El guardado del navegador no está disponible. Descargá tus respuestas antes de cerrar.',!storageOK);
+}
+function validate(s){
+ if(!s||typeof s!=='object'||!s.respuestas||typeof s.respuestas!=='object'||Array.isArray(s.respuestas)||!Number.isInteger(s.actual)||s.actual<0||s.actual>=N)throw Error('Formato de respuestas inválido.');
+ const clean={respuestas:{},actual:s.actual};
+ for(const [id,r] of Object.entries(s.respuestas)){
+  const c=DATA.casos.find(c=>c.id===id);if(!c||!r||typeof r!=='object')throw Error('El archivo contiene una llamada desconocida.');
+  const v={};for(const g of Object.keys(GROUPS)){if(r[g]!==''&&!GROUPS[g].includes(r[g]))throw Error('Opción inválida.');v[g]=r[g]}
+  if(!Array.isArray(r.pide)||r.pide.some(p=>!PIDE.includes(p)))throw Error('Pedido inválido.');v.pide=r.pide;
+  for(const t of TEXTS){if(typeof r[t]!=='string'||r[t].length>50000)throw Error('Texto inválido.');v[t]=r[t]}
+  if(typeof r.etiqueta_linea!=='string'||r.etiqueta_linea.length>32)throw Error('Número de línea inválido.');v.etiqueta_linea=r.etiqueta_linea;
+  for(const b of ['conocido','completa']){if(typeof r[b]!=='boolean')throw Error('Casilla inválida.');v[b]=r[b]}
+  if(v.completa&&errors(v,c.turnos.length).length)throw Error('Hay una ficha completa con respuestas faltantes.');
+  clean.respuestas[id]=v;
+ }return clean;
+}
+$('welcome-title').textContent=N+' llamadas, a tu ritmo';
+$('start').onclick=()=>activate($('reviewer').value);
+$('reviewer').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();activate(e.target.value)}});
+$('change').onclick=()=>{if(reviewer)persist();reviewer='';$('reviewer').disabled=false;$('start').hidden=false;$('change').hidden=true;$('review').hidden=true;$('welcome').hidden=false;$('export').disabled=true;message('Ingresá el nombre de la persona que va a revisar.');$('reviewer').value='';$('reviewer').focus()};
+form.addEventListener('submit',e=>e.preventDefault());
+form.addEventListener('input',e=>{if(!reviewer)return;const wasFinished=form.elements.completa.checked;save();if(e.target.name==='completa'&&wasFinished&&!form.elements.completa.checked)$('errors').focus()});
+function go(index){state.actual=index;persist();show();$('sheet-title').scrollIntoView({block:'nearest'})}
+$('prev').onclick=()=>go(Math.max(0,state.actual-1));$('next').onclick=()=>go(Math.min(N-1,state.actual+1));$('case-select').onchange=e=>go(Number(e.target.value));
+$('pending').onclick=()=>{for(let offset=1;offset<=N;offset++){const n=(state.actual+offset)%N;if(!state.respuestas[DATA.casos[n].id]?.completa){go(n);return}}message('Completaste todas las fichas. Descargá tus respuestas para conservarlas.')};
+$('turns').onclick=e=>{const btn=e.target.closest('[data-line]');if(!btn)return;form.elements.etiqueta_linea.value=btn.dataset.line;save()};
+$('export').onclick=()=>{
+ if(!reviewer)return;
+ const packet={issue:DATA.issue,version:DATA.version,muestra:DATA.muestra,revisor:reviewer,exportado:new Date().toISOString(),...state};
+ const blob=new Blob([JSON.stringify(packet,null,2)+'\n'],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='REVISION-LEGITIMAS-REALES-'+reviewer.replace(/[^\p{L}\p{N}-]+/gu,'-')+'-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);message('Se solicitó la descarga. Conservá el JSON: incluye todas tus fichas, también las pendientes.');
+};
+$('import').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{
+  if(file.size>5000000)throw Error('El archivo es demasiado grande.');
+  const p=JSON.parse(await file.text());if(p.issue!==DATA.issue||p.version!==DATA.version||p.muestra!==DATA.muestra)throw Error('El archivo pertenece a otra muestra o versión.');
+  if(typeof p.revisor!=='string'||!p.revisor.trim()||p.revisor.length>80)throw Error('Falta el nombre del revisor.');
+  const incoming=validate(p);const importKey='revisionLegitimasReales:'+DATA.muestra+':'+encodeURIComponent(p.revisor.trim().toLocaleLowerCase('es-AR'));
+  let previous;try{previous=localStorage.getItem(importKey)}catch(e){}
+  if(previous&&previous!==JSON.stringify(incoming)&&!confirm('Ya hay respuestas de '+p.revisor+' en este navegador. ¿Reemplazarlas por las del archivo?'))return;
+  activate(p.revisor,incoming);
+ }catch(err){message('No se recuperaron respuestas: '+err.message,true)}finally{e.target.value=''}
+};
+window.addEventListener('beforeunload',e=>{if(reviewer&&!storageOK&&Object.keys(state.respuestas).length){e.preventDefault();e.returnValue=''}});
+</script></body></html>

@@ -6,7 +6,7 @@ se conservaron después, separadas de la herramienta. No completan el issue.
 
 ## Cómo completar
 
-Abrir el [formulario HTML](../../experiments/slm-directo/analisis/tablero/revision-145.html)
+Abrir el [formulario HTML](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/revision-145.html)
 en Chrome, escribir nombre y apellido y elegir **Abrir mis fichas**. El archivo funciona
 sin conexión. También puede servirse con el tablero local en el puerto 8766; no usa el
 servidor de llamadas del puerto 8765.
@@ -38,7 +38,7 @@ anteriores; la comparación con las referencias originales se hace después con 
 
 ## Muestra y separación de la clave
 
-El [generador](../../experiments/slm-directo/preparar_revision_145.py) selecciona y mezcla con
+El [generador](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/preparar_revision_145.py) selecciona y mezcla con
 semilla 145 las 16 estafas de desarrollo que no avisó ninguna de las cinco condiciones de
 #145, 16 estafas con aviso elegidas al azar y 10 legítimas entrantes nuevas de desarrollo.
 Comprueba también las nueve estafas sin pedido entre las 16 pérdidas. Las condiciones son

@@ -1,0 +1,26 @@
+A: buenas llamo porque pagué la cuota el martes y todavía aparece como pendiente
+B: hola la pagaste desde una cuenta de este banco o desde otra entidad
+A: desde la billetera del trabajo a la cuenta del préstamo
+B: tenés el comprobante con fecha e importe
+A: sí 74200 pesos el martes a las once y veinte
+B: para ubicar el crédito me confirmás el número de operación que aparece en el resumen
+A: termina en 516 no veo los primeros dígitos en el papel
+B: con los últimos tres y tu nombre puedo revisar los préstamos vigentes a nombre de quién está
+A: nilda correa
+B: encontré un crédito personal con vencimiento el día 15 el pago salió de una cuenta a tu nombre
+A: sí es la cuenta donde cobro el sueldo
+B: figura recibido por 74200 pero todavía no se aplicó a la cuota
+A: puede ser porque lo hice después del horario del banco
+B: puede demorar hasta dos días hábiles si se envía desde otra entidad
+A: me cobran interés mientras queda pendiente
+B: si la fecha de pago coincide con el vencimiento el sistema toma la fecha de recepción que figura en el comprobante
+A: la cuota vencía ayer lo pagué un día antes
+B: entonces está dentro del plazo te recomiendo conservar el comprobante hasta que se actualice
+A: lo puedo subir desde la aplicación del préstamo
+B: sí en pagos tenés adjuntar comprobante también podés esperar a que se impute automáticamente
+A: prefiero subirlo así queda relacionado
+B: te aparece el crédito terminado en 516 y el importe coincide
+A: sí ya lo veo
+B: listo quedó asociada la constancia no debería hacer falta otro trámite
+A: gracias mañana reviso si cambió el estado
+B: de nada buen día

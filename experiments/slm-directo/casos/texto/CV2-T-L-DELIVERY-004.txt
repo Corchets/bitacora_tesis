@@ -1,0 +1,28 @@
+A: Buen día, la heladera llega mañana pero el ascensor no va a funcionar.
+B: Hola. ¿Querés cambiar la entrega para otro día?
+A: Sí, el técnico del edificio dijo que termina el jueves.
+B: Puedo revisar el próximo recorrido. Hay lugar el viernes por la tarde.
+A: ¿Entre qué horarios?
+B: De una a cinco, no se puede precisar más.
+A: ¿Los repartidores suben por escalera si la heladera va embalada?
+B: Para ese tamaño necesitan ascensor o montacargas. No la suben por la escalera.
+A: Entonces espero al viernes. ¿El camión puede entrar por la cochera?
+B: ¿La dirección es Lapacho 705?
+A: Sí, departamento ocho, torre uno.
+B: En la ficha aparece entrada por la calle principal.
+A: La cochera tiene una rampa ancha y el camión puede detenerse ahí.
+B: Anoto el acceso por cochera. ¿Hay que avisar al encargado?
+A: Sí, lo llamo hoy para reservar el espacio.
+B: ¿La heladera vieja se retira en el mismo momento?
+A: No, la va a buscar mi hermano el sábado.
+B: Entonces dejamos solo la nueva. ¿La conexión de agua está preparada?
+A: No tiene dispenser, así que no necesita conexión.
+B: Bien. El cambio no modifica el importe del producto.
+A: ¿Me llega la nueva fecha al correo?
+B: Sí, en unos minutos.
+A: Ya la veo, viernes de una a cinco.
+B: ¿Querés que anote un teléfono alternativo?
+A: No, el mío está activo y voy a estar en casa.
+B: Perfecto, quedó actualizado.
+A: Gracias, así no tienen que volver con la heladera.
+B: A vos.

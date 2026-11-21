@@ -19,7 +19,7 @@ El criterio es el de Mateo para una compuerta. Tito no decide: solo despierta al
   - v4 con Tito viejo 2.0;
   - reglas v1;
   - la [matriz #101](../../corridas/2026-10-30_112956_101_informe_101.md);
-  - las seis corridas por token de #143 (por ahora solo en la rama `exp/143-puntaje-token`).
+  - las seis corridas por token de #143, en [`2026-11-05_puntaje-token-150`](../../corridas/2026-11-05_puntaje-token-150/).
 - **Activación de Tito:** sale de la corrida `2026-11-04_tanda-roles-tito-sin-indicio/d`, que sigue después del aviso. Es la misma con v1 y con v4, y el script lo comprueba.
 - **Línea sensible:** la primera que la referencia marca como `mencion` o `pedido`, o `T_R`. Es una aproximación: las marcas no tienen revisión humana y no cubren todo lo sensible. Por ejemplo, `MEDICO-004` pide la fecha de nacimiento sin marca.
 - **Veredicto de cada falsa alarma que desaparece:**
@@ -126,7 +126,7 @@ Desde esta carpeta, con Python 3 y sin dependencias:
 ```bash
 python3 revisar.py                          # tablas 1, 3, 4 y 5, con controles de los números
 python3 revisar.py LG-WA-CONSULTA-01-e01    # detalle línea por línea de uno o más casos
-python3 compuerta_honesta_143.py            # tabla 2; necesita la rama exp/143-puntaje-token
+python3 compuerta_honesta_143.py            # tabla 2; lee corridas/2026-11-05_puntaje-token-150
 ```
 
 `revisar.py` termina en error si los números principales de las tablas 1, 3, 4 y 5 dejan de coincidir con las corridas. Lee solo los 150 casos de desarrollo y nunca la reserva.

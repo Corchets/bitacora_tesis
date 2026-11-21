@@ -10,6 +10,8 @@
 > pero no cierran el issue #24 hasta que al menos otra persona los revise y el equipo ratifique los
 > umbrales operativos.
 
+> **Nota del 2026-11-21:** [#24](https://github.com/Corchets/bitacora_tesis/issues/24) está cerrado y los capítulos usan estos umbrales como criterio interno del proyecto ([capítulo 3](../tesis/CAP-03-REQUISITOS-Y-ANALISIS.md#33-requisitos-no-funcionales), [capítulo 7](../tesis/CAP-07-VERIFICACION-Y-PRUEBAS.md)).
+
 Este documento define cómo decidir si el pipeline incremental `audio → ASR → detector → alerta`
 es técnicamente prefactible. Fija umbrales de aceptación; no afirma que los modelos ya los cumplan.
 La evidencia de cumplimiento debe provenir de un benchmark reproducible.

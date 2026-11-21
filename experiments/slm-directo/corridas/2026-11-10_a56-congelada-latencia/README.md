@@ -70,7 +70,7 @@ Esto deja dos casos especiales en EN-07:
 
 ## Primer intento: esquema ignorado por `llama-server`
 
-El [primer intento](intento-1-esquema-ignorado/) dio 0/40 consultas válidas (`sin_riesgo`). La causa:
+El [primer intento](https://github.com/Corchets/bitacora_tesis/tree/archivo/pre-informe/experiments/slm-directo/corridas/2026-11-10_a56-congelada-latencia/intento-1-esquema-ignorado) dio 0/40 consultas válidas (`sin_riesgo`). La causa:
 
 - `llama-server` recibía el esquema como `response_format`, y con la plantilla de Gemma lo aplica de forma perezosa.
 - Por eso dejaba pasar un bloque ` ```json\n ` (3 tokens) antes del `{`, y la coma del riesgo quedaba fuera de los 14

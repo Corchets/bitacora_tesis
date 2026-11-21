@@ -76,7 +76,7 @@ Cada audio pasó por la opción que la llamada no usó, a ritmo real y con el mi
 
 ## Demora de E2B (#84)
 
-**Resultado: NO CUMPLE el criterio de < 2 s.** Protocolo de [la propuesta](2026-11-02-pendientes-tito-gemma.md#propuesta-medir-la-demora-de-e2b), con el servidor de 8765 cerrado y sin usar el panel: una corrida de calentamiento descartada y 5 válidas con `SC-WA-CODE-01`, en [`2026-11-02-medicion-84-e2b/`](2026-11-02-medicion-84-e2b).
+**Resultado: NO CUMPLE el criterio de < 2 s.** Protocolo de [la propuesta](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-11-02-pendientes-tito-gemma.md#propuesta-medir-la-demora-de-e2b), con el servidor de 8765 cerrado y sin usar el panel: una corrida de calentamiento descartada y 5 válidas con `SC-WA-CODE-01`, en [`2026-11-02-medicion-84-e2b/`](2026-11-02-medicion-84-e2b).
 
 | Dato | Valor |
 |---|---|

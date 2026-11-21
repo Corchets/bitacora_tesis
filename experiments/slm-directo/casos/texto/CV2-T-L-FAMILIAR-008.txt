@@ -1,0 +1,29 @@
+A: ¿Compraste las entradas para el teatro de títeres?
+B: Sí, quedan tres juntas para la función de las cinco.
+A: ¿Los asientos son en la fila de adelante o al medio?
+B: En la fila seis, cerca del pasillo.
+A: Mejor, así el más chico puede salir si se inquieta.
+B: ¿Querés que te pase el comprobante para que lo guardes?
+A: Sí, mandámelo por el grupo de los primos.
+B: Ya está. ¿Vamos en auto o en colectivo?
+A: En auto, el teatro queda lejos de la parada.
+B: Yo puedo manejar, pero no tengo silla para el más chico.
+A: Tengo una en el garaje. Te la llevo el sábado.
+B: ¿A qué hora pasás por casa?
+A: A las cuatro menos cuarto. La función empieza a las cinco.
+B: Tenemos que salir con tiempo porque hay partido en la cancha de enfrente.
+A: Es verdad. ¿Dejamos el auto en el estacionamiento del mercado?
+B: Sí, después caminamos dos cuadras.
+A: ¿Los chicos ya comieron?
+B: Les doy una merienda antes de salir. En el teatro venden pochoclos, pero nada más.
+A: ¿Llevamos una botella de agua?
+B: Sí, hay dispenser en el hall.
+A: ¿Tu hija quiere invitar a una amiga?
+B: Me preguntó, pero las entradas juntas ya están completas.
+A: Puedo fijarme si quedan dos en la fila de atrás.
+B: No hace falta, se van a ver en la escuela el lunes.
+A: ¿El comprobante quedó a tu nombre?
+B: Sí, con el correo que uso para las compras.
+A: Bueno, nos vemos el sábado a las cuatro menos cuarto.
+B: Te espero en la puerta, así cargamos todo rápido.
+A: Dale.

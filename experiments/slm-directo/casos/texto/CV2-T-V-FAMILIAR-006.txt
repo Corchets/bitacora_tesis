@@ -1,0 +1,20 @@
+A: Hola soy el tío de Mica Ella está con vos
+B: Sí está en el colegio Quién habla
+A: El hermano de tu cuñada nos vimos en el cumpleaños de Lili
+B: Ah sí Qué pasó
+A: Estoy ayudando a la abuela a recuperar el acceso al teléfono cambió de aparato y no le aparecen los contactos
+B: La llevaste a un local
+A: No puede salir hoy está esperando un estudio en casa
+B: Y vos la estás ayudando desde ahí
+A: Sí me pidió que le reinstale la aplicación del banco pa pagar una factura
+B: No sabe su clave
+A: La recuerda pero el sistema le pide validar que es ella y no tiene el teléfono anterior
+B: Que llame al banco desde el número de siempre
+A: No quiere esperar está preocupada por el vencimiento
+B: Qué querés que haga yo
+A: En tu celular todavía aparece como contacto de recuperación seguro te llegó un aviso para aprobar el acceso
+B: Me acaba de llegar una notificación
+A: Si me leés el número que muestra termino el trámite y después que cambie todo tranquila
+B: El aviso dice que no comparta ese número con nadie
+A: Es porque no reconocen que estoy con ella pero es para que no pierda la cuenta
+B: No te lo voy a leer llamo a la abuela

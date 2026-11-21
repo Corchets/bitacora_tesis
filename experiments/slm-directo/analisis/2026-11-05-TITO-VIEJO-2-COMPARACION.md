@@ -81,7 +81,7 @@ condición intermedia en otra muestra de desarrollo independiente.
 La [salida cruda de Colab](../corridas/2026-11-05_TITO-VIEJO-2-COLAB.zip)
 contiene manifiesto, CSV e inventario. SHA-256:
 `9e5b90b2b259bd076afc9af867ddafaa81aaecce9174c6d04217ccc3186bc1c3`.
-[Notebook ejecutado](../colab/TITO-VIEJO-2-COLAB.ipynb): commit base
+[Notebook ejecutado](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/colab/TITO-VIEJO-2-COLAB.ipynb): commit base
 `2c01da2f8a6f457095f7e0b71ce2ba2b9365de0f`, con dos archivos locales
 incorporados; sus SHA-256 figuran en el ZIP. El manifiesto registra parámetros,
 Tito, modelo, máquina y tiempos. Se usó T4, seed 42, temperatura 0, prompt

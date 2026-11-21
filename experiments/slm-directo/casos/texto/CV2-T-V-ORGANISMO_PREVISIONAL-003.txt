@@ -1,0 +1,24 @@
+A: ¿Sí?
+B: Hola, llamo del organismo por el complemento de escolaridad de una persona a cargo.
+A: ¿El de mi hija?
+B: Sí. La constancia quedó marcada para revisión porque cambió de escuela.
+A: Cambió este año y tengo el certificado.
+B: Para destrabarlo necesito que me dictes el nombre completo de la menor y la fecha de nacimiento.
+A: ¿No alcanza con el certificado que presenté?
+B: No lo tengo abierto y por este teléfono lo puedo cargar ahora.
+A: La ficha dice Mili Sosa, nacida el tres de abril de 2014.
+B: También necesito el documento de la persona que cobra el beneficio.
+A: ¿Para qué si estamos hablando de la escolaridad?
+B: El sistema vincula a la menor con quien recibe el pago.
+A: Prefiero llevar el certificado a una oficina.
+B: No lo cargues por el portal porque puede duplicar el trámite.
+A: ¿Dónde dice eso?
+B: No tengo un aviso escrito para mandarte.
+A: Entonces voy a consultar el portal por mi cuenta.
+B: Si esperás, puede quedar pendiente el próximo pago.
+A: Igual no te voy a dar el documento por teléfono.
+B: Ya anoté los datos de la menor.
+A: No cargues nada más, voy a verificarlo por un canal oficial.
+B: Está bien, queda pendiente.
+A: Chau.
+B: Chau.

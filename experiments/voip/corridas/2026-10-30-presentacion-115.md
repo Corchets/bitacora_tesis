@@ -34,10 +34,10 @@ curl --fail --silent http://127.0.0.1:51122/ | cmp - experiments/voip/panel.html
 - **Pruebas de regresión**: 6/6 pruebas Node y 73/73 pruebas Python unittest pasando sin fallos.
 
 Capturas generadas:
-- [Notebook con aviso y detalles desplegados, 1366 × 768](2026-10-30-presentacion-115-notebook-1366x768.png).
-- [Proyección horizontal con aviso y detalles desplegados, 1920 × 1080](2026-10-30-presentacion-115-proyeccion-1920x1080.png).
-- [Escena final conservada en notebook, 1366 × 768](2026-10-30-presentacion-115-notebook-fin-1366x768.png).
-- [Escena final conservada en proyección, 1920 × 1080](2026-10-30-presentacion-115-fin-conservado-1920x1080.png).
+- [Notebook con aviso y detalles desplegados, 1366 × 768](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-115-notebook-1366x768.png).
+- [Proyección horizontal con aviso y detalles desplegados, 1920 × 1080](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-115-proyeccion-1920x1080.png).
+- [Escena final conservada en notebook, 1366 × 768](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-115-notebook-fin-1366x768.png).
+- [Escena final conservada en proyección, 1920 × 1080](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-115-fin-conservado-1920x1080.png).
 
 ## Límites
 

@@ -1,0 +1,28 @@
+A: ¿Viste cuánto gastamos ayer en la compra para mamá y papá?
+B: Sí, el súper dio 68.400 con los artículos de limpieza.
+A: Yo pensé que eran unos cincuenta mil. ¿Qué se sumó?
+B: Compramos el aceite, las bolsas de alimento del gato y el detergente grande.
+A: Claro, eso no estaba en la lista original.
+B: Si dividimos los alimentos y las cosas de la casa, mi parte son 34.200.
+A: Yo pagué en caja con la tarjeta. ¿Me transferís tu mitad cuando puedas?
+B: Sí, te la mando ahora desde la cuenta de gastos.
+A: ¿Usás el alias que te pasé el mes pasado?
+B: Sí, termina en mesa.rio, a tu nombre.
+A: Ese mismo. ¿Me avisás cuando salga para revisar que lo reciba?
+B: Ya está, te transferí 34.200.
+A: Me aparece. Gracias, así cierro la cuenta del súper.
+B: ¿Las bolsas de alimento fueron para el gato de papá o para el de mamá?
+A: Para el de papá. El de mamá usa una comida distinta.
+B: Entonces anotá la compra separada en la planilla, así después no les cobramos de más.
+A: Sí, tengo el ticket digital en el correo.
+B: ¿Querés que te reenvíe el comprobante de transferencia?
+A: No hace falta, lo veo en movimientos. Igual guardalo vos por las dudas.
+B: La próxima compra la hago yo si me mandan la lista a tiempo.
+A: Dale. Mamá me dijo que todavía tiene arroz para varias semanas.
+B: Entonces compro solo verduras y leche.
+A: ¿Pasás por la casa esta tarde?
+B: Sí, llevo también los remedios que quedaron en mi auto.
+A: Perfecto. Preguntale a papá si necesita algo para el taller.
+B: Lo llamo cuando salga del trabajo.
+A: Gracias por ordenar los gastos conmigo.
+B: De nada, así no lo llevamos de memoria.

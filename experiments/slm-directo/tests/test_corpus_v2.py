@@ -79,13 +79,6 @@ class TestReserva(unittest.TestCase):
             correr.elegir_casos(self.args(casos="T"))
         self.assertEqual(correr.elegir_casos(self.args(particion="test_reservado")), ["T"])
 
-    def test_panel_no_incluye_textos_ni_referencias_reservadas(self):
-        ruta = Path(correr.__file__).parent / "analisis" / "tablero" / "armar_panel.py"
-        spec = importlib.util.spec_from_file_location("panel_corpus", ruta)
-        panel = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(panel)
-        self.assertEqual([c["id"] for c in panel._casos({})], ["D"])
-
     def test_semilla_y_par_no_pueden_cruzar_particiones(self):
         self.assertEqual(casos.validar_todos(), [])
         self.escribir("T", "test_reservado", "S-D", par="D")

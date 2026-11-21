@@ -24,21 +24,22 @@ DIR_CORRIDAS = RAIZ / "corridas"
 SALIDA = RAIZ / "casos" / "CATALOGO-CONVERSACIONES.md"
 MANIFIESTO_DESARROLLO = RAIZ / "casos" / "MANIFIESTO-DESARROLLO.json"
 
-# Lo que no está en casos/texto de esta rama: se describe a mano y no se cuenta por clase.
+# Lo que no está en casos/texto con formato de casos: se describe a mano y no se cuenta por clase.
 FUERA_DE_DESARROLLO = [
     ("Reserva del corpus v2 (`CV2-T-*`)", "200",
-     "rama `reserva/test`: `casos/texto/` y `casos/referencia/`",
-     "`--particion test_reservado` en esa rama, solo en la evaluación final"),
+     "`casos/texto/` y `casos/referencia/`, partición `test_reservado`",
+     "`--particion test_reservado`; se miró una sola vez, en la evaluación final del 2026-11-19"),
     ("Legítimas de test de #45", "56",
-     "rama `reserva/test`: `casos/legitimas-entrantes-test.jsonl`",
-     "todavía no está en el formato de casos: hay que convertirla antes de la evaluación final"),
-    ("Corpus externo real de #144", "—",
+     "`casos/legitimas-entrantes-test.jsonl`",
+     "no está en formato de casos: `conjuntos.py preparar --reserva <raíz del repo>` la arma para la evaluación final"),
+    ("Lecturas del corpus externo real de #144", "—",
      "`docs/corpus/ISSUE-144-*` y `docs/corpus/FICHAS-144-*` "
      "([relevamiento](../../../docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md))",
-     "lecturas y fichas, no casos: test externo previsto"),
-    ("Sets externos de #144", "49",
-     "[`casos/externo/`](externo/README.md): 16 de inglés y 33 de coreano (24 sin ficha, con pre-marcado de IA)",
-     "formato de casos, pero `correr.py` todavía no los lee: falta el cargador de #52"),
+     "lecturas y fichas, no casos; lo que se corrió está en `casos/externo/`"),
+    ("Sets externos", "124",
+     "[`casos/externo/`](externo/README.md): 33 estafas coreanas (#144), 16 de inglés, "
+     "33 legítimas reales y 42 de zona gris de CallCenterEN",
+     "`conjuntos.py` los arma; las coreanas y las legítimas reales entraron en la evaluación final"),
     ("Ejemplos del panel VoIP", "4",
      "`experiments/asr-local/audio/*-tts-estereo.wav`, fuera de Git (`asr-local/sintetizar_par.py`)",
      "desde el panel; son audio sintético, sin valor de evaluación"),

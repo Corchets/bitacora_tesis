@@ -1,0 +1,30 @@
+A: hola tengo kinesiología mañana en la sede del centro y se me complicó el traslado
+B: buen día querés cambiar el horario o la sede
+A: la sede si hay un lugar en el consultorio del barrio norte
+B: me confirmás tu nombre y la fecha de nacimiento para ubicar la agenda
+A: nadia funes el 12 de marzo de 1980
+B: gracias veo la sesión de mañana a las ocho en el centro
+A: hay algo después de las cinco en el barrio norte
+B: hay un espacio a las seis y cuarto con la misma kinesióloga
+A: la sede tiene entrada sin escalones
+B: sí hay una rampa desde la vereda y ascensor al primer piso
+A: perfecto puedo mantener la frecuencia semanal si cambio de lugar
+B: sí la profesional atiende en ambas sedes los martes
+A: la orden que ya presenté sirve para el nuevo consultorio
+B: el sistema la comparte entre las dos sedes
+A: necesito volver a llevar el estudio de la rodilla
+B: no queda adjunto a tu ficha
+A: entonces tomo el martes a las seis y cuarto
+B: querés que cancele el turno de mañana en el centro
+A: sí por favor no llegaría a las ocho
+B: lo liberé y reservé el de barrio norte
+A: hay estacionamiento cerca
+B: hay un espacio público al lado pero suele llenarse después de las seis
+A: voy en taxi entonces
+B: te mando la dirección completa al teléfono
+A: ya me llegó calle mitre 63
+B: exacto el consultorio está en el primer piso
+A: me recordás si llevo la banda elástica
+B: sí si todavía la tenés si no te prestan una en la sala
+A: la llevo gracias por el cambio
+B: de nada quedó confirmado

@@ -409,7 +409,7 @@ tercer criterio, la anotación.
 
 1. **Descarga.** Tres archivos de la revisión `9d40ca13f3e1` de CallCenterEN, 128 MB, con el SHA-256 de Hugging
    Face. Se revisó la estructura con un script que no imprime texto. El campo `speaker` viene vacío.
-2. **Sorteo.** [`seleccionar_legitimas_reales.py`](../../experiments/laboratorio/seleccionar_legitimas_reales.py)
+2. **Sorteo.** [`seleccionar_legitimas_reales.py`](../../experiments/slm-directo/seleccionar_legitimas_reales.py)
    se commiteó antes de abrir ninguna llamada. Elige por nombre de archivo y duración, de 60 a 900 s, con
    `Random(20261118)`: 24 de seguros, 18 de equipamiento médico y 8 de telecomunicaciones. Parte el texto en cada
    pausa de 600 ms o más. La segunda tanda, de 28 llamadas de telecomunicaciones con `Random(20261119)`, se decidió
@@ -418,7 +418,7 @@ tercer criterio, la anotación.
    [PROMPTS-LEGITIMAS-REALES-2026-11-18.md §1](../corpus/PROMPTS-LEGITIMAS-REALES-2026-11-18.md#1-turnos-roles-y-traducción).
    La traducción es fiel, en español neutro, con el contexto de EE. UU., como el set coreano. Se comprobó con
    script que cada traducción cubre todos los segmentos de su fuente y entre 84 y 98 % de su vocabulario.
-4. **Texto final.** [`armar_set_legitimas_reales.py`](../../experiments/laboratorio/armar_set_legitimas_reales.py)
+4. **Texto final.** [`armar_set_legitimas_reales.py`](../../experiments/slm-directo/armar_set_legitimas_reales.py)
    arma una línea por turno, con `A` como quien habla primero. Los marcadores de datos tapados se reemplazan por un
    valor ficticio fijo por tipo y por llamada.
 5. **Anotación a ciegas.** Dos subagentes Sonnet por tanda, sin ver el inglés, el estrato ni al otro anotador (§2 de

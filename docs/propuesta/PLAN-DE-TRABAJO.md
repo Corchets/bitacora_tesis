@@ -143,6 +143,8 @@ Las definiciones operativas y métricas están en
 - Backend de producción o publicación comercial en Play Store.
 - Estudio poblacional representativo con víctimas reales.
 
+> **Nota del 2026-11-21:** la exclusión de la agenda y la dirección no es el alcance que usó la evaluación final: el detector corre solo en llamadas entrantes de números no agendados ([ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md)). Ese ADR sigue como propuesta sin discutir: su aceptación está pendiente.
+
 El contenido de la llamada permite evaluar señales de riesgo, pero no verificar la
 identidad del interlocutor. Si dos llamadas tienen el mismo contenido observable,
 el detector dispone de la misma evidencia aunque una sea legítima y la otra no.

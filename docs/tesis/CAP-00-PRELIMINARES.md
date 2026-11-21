@@ -1,4 +1,4 @@
-> **Estado: borrador del 2026-11-03.** Falta el resultado de la evaluación final, que completa el resumen. El título sigue abierto en [D13](../gestion/MAPA-DECISIONES.md#d13--título-definitivo).
+> **Estado: borrador del 2026-11-03.** Falta el resultado de la evaluación final, que completa el resumen. **Al 2026-11-21:** el resumen y el abstract ya llevan la evaluación final del 2026-11-19. El título sigue abierto en [D13](../gestion/MAPA-DECISIONES.md#d13--título-definitivo).
 
 # Preliminares
 

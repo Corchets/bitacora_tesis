@@ -1,0 +1,20 @@
+A: Hola de soporte de la plataforma de videollamadas La sala de mañana quedó sin anfitrión
+B: Yo organicé el encuentro qué pasó
+A: La cuenta principal aparece asociada a un teléfono que ya no usás
+B: Cambié el aparato hace poco
+A: pa recuperar el rol de anfitrión te va a llegar un token de seis cifras
+B: Lo pongo en la plataforma
+A: Decímelo y lo vinculo desde la consola de soporte
+B: El aviso dice inicio de sesión
+A: El token sirve también para recuperar anfitriones
+B: Me das el identificador de la sala
+A: La sala todavía no se creó estamos preparando el evento
+B: No puedo usar otra cuenta
+A: Sí pero perderías la lista de invitados
+B: El token es 822061
+A: Ya recuperé el rol
+B: Puedo crear la sala ahora
+A: Sí debería aparecer en el panel
+B: La veo
+A: Quedó habilitada
+B: Gracias

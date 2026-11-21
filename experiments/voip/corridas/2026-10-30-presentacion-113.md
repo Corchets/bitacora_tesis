@@ -59,11 +59,11 @@ alternancia de vistas.
 
 Capturas con datos sintéticos:
 
-- [Aviso activo, 1920 × 1080](2026-10-30-presentacion-113-aviso-1920x1080.png).
-- [Notebook, 1366 × 768](2026-10-30-presentacion-113-notebook-1366x768.png) y
-  [proyección, 1920 × 1080](2026-10-30-presentacion-113-proyeccion-1920x1080.png):
+- [Aviso activo, 1920 × 1080](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-113-aviso-1920x1080.png).
+- [Notebook, 1366 × 768](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-113-notebook-1366x768.png) y
+  [proyección, 1920 × 1080](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-113-proyeccion-1920x1080.png):
   escena final de una llamada sin aviso, sin tarjeta.
-- [Movimiento reducido, 1920 × 1080](2026-10-30-presentacion-113-reducido-1920x1080.png).
+- [Movimiento reducido, 1920 × 1080](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-30-presentacion-113-reducido-1920x1080.png).
 
 ## Límites
 

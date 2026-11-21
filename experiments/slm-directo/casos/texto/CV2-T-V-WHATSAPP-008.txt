@@ -1,0 +1,20 @@
+A: Te llamo de la asociación de familias de la escuela por el listado de autorizados para retirar materiales.
+B: ¿Qué materiales?
+A: Los cuadernillos que se entregan la semana que viene.
+B: Yo no estoy en la comisión.
+A: Tu teléfono aparece como contacto alternativo de una familia.
+B: ¿De quién?
+A: No me muestra el nombre hasta que cierre el registro.
+B: ¿Me podés decir el grado?
+A: Sexto, turno tarde.
+B: Conozco a varias familias de sexto.
+A: Te llegó un mensaje de confirmación para autorizar el retiro.
+B: Solo veo un código de inicio de WhatsApp.
+A: Es el número que usa la lista para comprobar que el teléfono coincide.
+B: ¿Me lo estás pidiendo?
+A: Sí, necesito los dígitos que aparecen debajo del aviso.
+B: No voy a compartirlo.
+A: Si no, el sistema deja a esa familia sin contacto alternativo.
+B: Decime el nombre y llamo a la escuela.
+A: No puedo abrirlo desde esta pantalla.
+B: Entonces no sigo.

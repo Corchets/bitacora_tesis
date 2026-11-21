@@ -1,0 +1,30 @@
+A: Hola, tengo una limpieza el viernes a las cuatro y me cambiaron la guardia.
+B: Buen día. ¿Querés reprogramar el turno?
+A: Sí, si hay algo después de las seis me sirve.
+B: El viernes no tenemos atención tarde. Hay un lugar el lunes a las seis y media.
+A: El lunes llevo a mi hija a música. ¿El martes tienen algo?
+B: Martes hay a las cinco y cuarto.
+A: ¿Con el mismo odontólogo que me atendió la última vez?
+B: Sí, con el doctor Mena.
+A: Entonces me sirve. ¿El turno sigue siendo de cuarenta minutos?
+B: Para una limpieza reservamos media hora.
+A: Llego desde el trabajo, quizá esté cinco minutos tarde.
+B: Si te demorás, llamá a recepción. Podemos avisarle al profesional.
+A: ¿Hay que llevar la radiografía anterior?
+B: No, ya está en tu ficha y no venció.
+A: La hice en mayo, ¿no?
+B: Sí, el informe entró el 12 de mayo.
+A: Perfecto. ¿Me cobran si cambio el horario?
+B: No, mientras avises con un día de anticipación.
+A: Lo estoy cambiando con tiempo.
+B: Sí. Entonces libero viernes y te reservo martes 24 a las cinco y cuarto.
+A: ¿El copago es el mismo?
+B: El valor lo confirman en recepción el día de la consulta.
+A: Está bien. ¿Me llega un recordatorio?
+B: Sí, te mandamos uno el lunes por mensaje.
+A: Ya anoté el martes en el calendario.
+B: ¿Querés que te repita la dirección?
+A: No, es la sede de la plaza, conozco.
+B: Listo, quedó el cambio.
+A: Gracias por acomodarme.
+B: De nada, que tengas buena tarde.

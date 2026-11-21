@@ -1,0 +1,26 @@
+A: Hola te llamo del festival de teatro por un pase para dos funciones
+B: ¿Cómo me encontraron?
+A: Completaste una encuesta de salida después de una obra
+B: Me acuerdo de responderla
+A: La encuesta quedó asociada a tu correo y el sistema marcó que ganaste un pase
+B: ¿Qué tengo que hacer para recibirlo?
+A: Te llamo para activar el beneficio antes de que cierre la lista de hoy
+B: ¿Hay un formulario del festival?
+A: La página está en mantenimiento y por eso estamos resolviendo por teléfono
+B: ¿Qué dato necesitan?
+A: Dictame la contraseña que ya usás para entrar a ese correo, así vinculo el pase al perfil
+B: No quiero que otra persona conozca mi clave
+A: No me la mandes por mensaje, decímela y la cargo en el registro
+B: ¿Me pueden mandar una invitación al correo?
+A: La invitación sale después de confirmar que la cuenta es tuya
+B: ¿No alcanza con mi nombre?
+A: Sin la contraseña no puedo asociar el pase y vence esta noche
+B: No voy a dictar la contraseña de mi correo para recibir una entrada
+A: Es un perfil separado solo para el festival
+B: Si es separado puedo crear una clave desde la página cuando vuelva a funcionar
+A: La página no va a estar disponible antes del cierre
+B: Entonces espero a que publiquen la información oficial
+A: Puede quedar sin activar
+B: Prefiero perder el pase antes que entregar mi clave
+A: Está bien queda pendiente
+B: Chau

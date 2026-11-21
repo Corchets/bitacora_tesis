@@ -104,7 +104,7 @@ grande de todas las fuentes (ver §5.2).
 Resultado por llamada: [`FILTRO-KORCCVI.csv`](FILTRO-KORCCVI.csv). Solo trae identificadores,
 duración, grupo, etiqueta y tiempo aproximado del primer pedido y una nota breve; no copia texto.
 
-**Cómo se hizo.** [`filtrar_korccvi.py`](../../experiments/laboratorio/filtrar_korccvi.py) toma las
+**Cómo se hizo.** [`filtrar_korccvi.py`](../../experiments/slm-directo/filtrar_korccvi.py) toma las
 llamadas de 4 minutos o más, con 2 hablantes o más y 20 turnos o más. Busca pedidos candidatos
 por palabra clave, agrupados por las etiquetas del [manual](MANUAL-ANOTACION.md#2-cómo-ubicar-las-marcas-y-resolver-dudas),
 y descarta las advertencias del tipo «no le vamos a pedir la clave». Marca 91 con algún candidato
@@ -513,8 +513,8 @@ Por §5.3 (derechos de YouTube) y §5.4 (custodia de la referencia del test), ni
 > estaban en `data/private/issue-144/`:
 > [inglés, filas 3 y 4](ISSUE-144-INGLES-2026-11-06.md) con su [procedencia](ISSUE-144-INGLES-2026-11-06-PROCEDENCIA.json),
 > [inglés, las otras 18](ISSUE-144-INGLES-18-2026-11-07.md),
-> [portugués, 2 grupos](ISSUE-144-PORTUGUES-2026-11-06.md) con su [procedencia](ISSUE-144-PORTUGUES-2026-11-06-PROCEDENCIA.json)
-> y [portugués, 10 grupos](ISSUE-144-PORTUGUES-10-2026-11-07.md). Sus encabezados todavía dicen «fuera de Git»: se
+> [portugués, 2 grupos](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/corpus/ISSUE-144-PORTUGUES-2026-11-06.md) con su [procedencia](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/corpus/ISSUE-144-PORTUGUES-2026-11-06-PROCEDENCIA.json)
+> y [portugués, 10 grupos](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/corpus/ISSUE-144-PORTUGUES-10-2026-11-07.md). Sus encabezados todavía dicen «fuera de Git»: se
 > conservan como estaban. Portugués es CC BY 4.0, con atribución a AI Safety Brazil.
 > En inglés esto revierte lo de §5.3: los derechos de los videos siguen sin verificar.
 > La clave de portugués, el set local con su referencia y el coreano siguen fuera de Git.
@@ -559,13 +559,13 @@ todas, menos `vishing_260` y `vishing_334`, que el equipo ya había leído en el
 1. **Traducción.** KO-01 a KO-12, con Claude (Opus 5.5) entre el 2026-11-07 y el 2026-11-10.
    KO-13 a KO-33, el 2026-11-11, con seis agentes `gpt-6.1-sol` coordinados con Orca. El modelo, los
    prompts y el reparto están en [PROMPTS-144-COREANO-2026-11-11.md](PROMPTS-144-COREANO-2026-11-11.md).
-   Las fuentes se extrajeron con [`extraer_korccvi.py`](../../experiments/laboratorio/extraer_korccvi.py)
+   Las fuentes se extrajeron con [`extraer_korccvi.py`](../../experiments/slm-directo/extraer_korccvi.py)
    de la misma revisión fijada de §6.
    **Cambio respecto de §5.2:** la traducción es fiel, en español neutro, con wones y nombres
    coreanos, y **no se adaptó al rioplatense**. Luciano lo decidió para que la IA no sesgara el texto
    al adaptarlo: así se conserva la estructura de la llamada real.
 2. **Marcas.** Ver la tabla de abajo.
-3. **Formato** (§5.4). [`armar_set_coreano.py`](../../experiments/laboratorio/armar_set_coreano.py)
+3. **Formato** (§5.4). [`armar_set_coreano.py`](../../experiments/slm-directo/armar_set_coreano.py)
    genera `texto/EXT-NNN.txt` (solo `A:`/`B:`, una línea por segmento de la fuente, sin notas de
    traducción; se sacaron dos segmentos ininteligibles de una llamada), `referencia/EXT-NNN.json`,
    `roles-protegida.json` y `correspondencia.json`. Los IDs salen de un sorteo con
@@ -613,8 +613,8 @@ y ES-Port no entran: la conversación de PIX no define la clase (§3.3) y ES-Por
 salientes.
 
 > **Actualización del 2026-11-11:** Luciano decidió publicar las dos lecturas de ES-Port que
-> tienen ficha, para probarlas aparte como legítimas: [119349 y 120967](ISSUE-144-ESPORT-2026-11-06.md),
-> con su [procedencia](ISSUE-144-ESPORT-2026-11-06-PROCEDENCIA.json). Se versionan tal cual
+> tienen ficha, para probarlas aparte como legítimas: [119349 y 120967](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/corpus/ISSUE-144-ESPORT-2026-11-06.md),
+> con su [procedencia](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/corpus/ISSUE-144-ESPORT-2026-11-06-PROCEDENCIA.json). Se versionan tal cual
 > estaban en `data/private/issue-144/`, con las claves dictadas ya reemplazadas por marcadores;
 > el encabezado todavía dice «fuera de Git». La licencia es CC BY-SA 3.0 ES, con atribución a
 > García-Sardiña, Serras y del Pozo (2018). La ficha de 120967 la completó Claude con los

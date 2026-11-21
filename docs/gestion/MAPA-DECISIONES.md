@@ -120,7 +120,7 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   para un grupo etario. El encuadre vigente de D12 quedó parcial: ver
   [D12](#d12--encuadre-del-foco-en-adultos-mayores).
 - **Contribución defendible (consolidación PR #58):** la arquitectura incremental
-  documentada (capas 3 y 4 del [diseño integrado](../investigacion/DISENO-INTEGRADO.md)),
+  documentada (capas 3 y 4 del [diseño integrado](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/investigacion/DISENO-INTEGRADO.md)),
   el hueco que deja la patente de Google US 2024/0388655 A1.
 - **Alternativa con modelo por API (JEV), descartada (2026-10-28, [minuta](seguimientos/2026-10-28.md#3-minuta-y-resoluciones-del-profesor)):**
   no entra en la tesis ni como techo experimental ni como modo híbrido. La inferencia sigue siendo
@@ -146,6 +146,16 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   2026-10-04: clase por conversación, `T_R`/`T_C` cuando correspondan y evidencia
   seleccionada, sin etiquetado exhaustivo por turno. Falta probar las reglas con
   el piloto y resolver sus ambigüedades.
+- **Nota del 2026-11-21:** sigue abierta. La evaluación final del 2026-11-19 corrió sin cerrarla
+  ([capítulo 8, §8.3.4](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#834-evaluación-final)):
+  - Las marcas de pedido y cumplimiento son las del generador, sin revisión humana. La anticipación se informó en
+    líneas, no en segundos.
+  - En el repositorio no hay una muestra común anotada por los cuatro, que es lo que pide «Para cerrar».
+  - Las estafas sin pedido se informan con los dos denominadores: sobre las 100 estafas del test y sobre las 80 que
+    tienen pedido.
+  - El aviso no usa la histéresis de la «Selección de trabajo»: es la primera consulta con riesgo ≥ 0,3
+    ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)).
+  - Queda como límite declarado (R28 en el [registro de riesgos](REGISTRO-RIESGOS.md)).
 - **Para empezar:** una versión de trabajo del manual con criterios aplicables a
   los primeros casos. El piloto prueba esa versión; no necesita D07 cerrada.
 - **Selección de trabajo (acuerdo del 2026-10-02, consolidación PR #58):**
@@ -157,7 +167,7 @@ Las cinco opciones con el detalle técnico se encuentran en [ALTERNATIVAS-CAPTUR
   adjudicar ambigüedades.
 - **Prioridad de revisión planteada por Luciano (2026-11-04):** comprobar si los casos
   son ambiguos o están mal construidos antes de atribuir los errores al prompt o a
-  RoBERTuito. El [panel de lectura](../../experiments/slm-directo/analisis/tablero/revision-casos.html)
+  RoBERTuito. El [panel de lectura](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/revision-casos.html)
   expone diálogos, fichas y dudas originales. Es una hipótesis a contrastar caso por
   caso; no adjudica referencias, no da por probada la causa ni cambia D09.
 - **Para cerrar:** manual probado en una muestra común por los cuatro integrantes,
@@ -173,7 +183,10 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 ### D08 — Congelar protocolo experimental
 
 - **Pregunta:** ¿cómo se muestrea, divide y evalúa sin fuga de información?
-- **Estado:** abierta. Puede prepararse el diseño con el piloto; se congela antes de
+- **Estado:** resuelta con límites (Mateo, 2026-11-21, al cerrar [#33](https://github.com/Corchets/bitacora_tesis/issues/33)). El protocolo quedó fijado por partes
+  antes de la evaluación final del 2026-11-19, sin D07 resuelta. El detalle está en la nota del 2026-11-21, al final
+  de esta ficha.
+- **Estado anterior (hasta el 2026-11-21):** abierta. Puede prepararse el diseño con el piloto; se congela antes de
   la evaluación final, con D07 resuelta y una configuración elegida sobre desarrollo.
 - **Salida:** composición del corpus, particiones, comparadores, política de alerta,
   métricas y criterio de interpretación definidos; test reservado y procedimiento repetible.
@@ -186,7 +199,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   [METRICAS.md](../evaluacion/METRICAS.md#5-pendientes-para-congelar-la-evaluación).
   Las preguntas caracterizan desempeño; no requieren inventar un umbral de éxito.
 - **Antecedentes:** [ventana y alerta](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md)
-  y [diseño integrado](../investigacion/DISENO-INTEGRADO.md) proponen mecanismos.
+  y [diseño integrado](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/investigacion/DISENO-INTEGRADO.md) proponen mecanismos.
   Sus números sintéticos no prueban rendimiento ni congelan el protocolo.
 - **Por fijar antes de medir (consolidación PR #58):** la restricción de falsos
   positivos por revisión (VENTANA §7.1: máximo de llamadas legítimas con alerta y
@@ -249,6 +262,32 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   diferencia defendible; la candidata propuesta es v4 con roles, sin indicio y primer aviso. No cierra D07 ni D08: falta
   el acuerdo del equipo, y adoptar otro prompt implica reabrir el [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
   La reunión con el tutor es el 2026-11-11.
+- **Nota del 2026-11-21, qué quedó fijado antes del test:**
+  - **Alcance:** llamadas entrantes de números no agendados
+    ([ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md), que sigue como propuesta sin discutir).
+  - **Corpus y particiones:** legítimas entrantes nuevas y test aparte
+    ([ADR 0004](../ingenieria/adr/0004-legitimas-entrantes-nuevas-y-test-aparte.md)). Luciano verificó las particiones el
+    2026-11-11, en [#33](https://github.com/Corchets/bitacora_tesis/issues/33).
+  - **Reglas para elegir:** escritas antes de correr, con la reserva mirada una sola vez
+    ([ADR 0005](../ingenieria/adr/0005-reglas-de-evaluacion-escritas-antes-de-correr.md), que sigue como propuesta sin discutir).
+  - **Política de alerta:** un aviso por llamada, en la primera consulta con riesgo ≥ 0,3
+    ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)). Se consulta al cerrar cada turno de
+    quien llama ([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)), con la salida cortada tras el riesgo
+    ([ADR 0006](../ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md)) y el prompt
+    `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)).
+  - **Comparadores e incertidumbre:** `v4-corte` y las reglas v1. Se informan cifras con intervalo y la comparación
+    pareada, sin criterio de aprobación (Mateo, 2026-11-18; [README de la corrida](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/README.md)).
+  - **Corrida:** una pasada sobre el test, con el tag `colab/143-evaluacion-final-2`
+    ([análisis](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/analisis.md)).
+- **Qué no se fijó (2026-11-21):**
+  - [D07](#d07--aprobar-taxonomía-y-evento-crítico) sigue abierta: el test corrió sin referencia humana.
+  - Lo de «Por fijar antes de medir» no se usó: ni la persistencia del contador, ni la restricción de falsos positivos
+    por revisión, ni las franjas de duración. El aviso es el primer cruce.
+  - Los márgenes en segundos no se midieron: la anticipación se informó en líneas.
+  - El [protocolo experimental](../evaluacion/PROTOCOLO-EXPERIMENTAL.md) sigue como propuesta del 2026-10-17 y no se
+    reescribió con lo de arriba.
+  - La referencia del control de desarrollo pasó de un punto a un rango el 2026-11-19, después de una primera pasada
+    que cortó antes de tocar el test. Está declarado en el README de la corrida.
 
 ### D09 — Elegir ASR y detector
 
@@ -273,6 +312,9 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Nota del 2026-11-18 ([#143](https://github.com/Corchets/bitacora_tesis/issues/143)):** el prompt pasa a
   `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)). Lo eligió Mateo después de la revisión de
   producto, por fuera de la regla escrita antes de correr, que dejaba `c-premisa-corte-riesgo`.
+- **Nota del 2026-11-21 ([#172](https://github.com/Corchets/bitacora_tesis/issues/172)):** en el teléfono el modelo genera solo el número
+  del riesgo ([ADR 0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)). No cambia el prompt ni
+  ningún aviso en desarrollo; la demo y Colab, con Ollama, siguen con la salida de 14 tokens.
 - **Salida:** ASR, detector y configuración elegidos según errores de transcripción,
   detección, falsas alarmas, tiempos y memoria, con límites del hardware medido.
 - **Línea base:** reglas solas, también como respaldo sin modelo de la demo.
@@ -288,7 +330,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
   debe declarar qué código y datos reutiliza y qué cambió.
 - **Preparación delegada por el usuario (2026-10-29):** el usuario aprobó las veinte
   conversaciones de #101 y delegó resolver los parámetros técnicos sin nuevas
-  aprobaciones genéricas. [Preparación operativa](../../experiments/slm-directo/DATOS-TITO.md#preparación-técnica-delegada--2026-10-29):
+  aprobaciones genéricas. [Preparación operativa](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/DATOS-TITO.md#preparación-técnica-delegada--2026-10-29):
   particiones por ID/hash, historial acumulado como entrada principal del Tito nuevo,
   búsqueda acotada y supervisión IA explícita para desarrollo. #98–#102 actualizados
   en GitHub. La auditoría semántica entre fuentes y las etiquetas de prefijos siguen
@@ -362,7 +404,7 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 
 - **Aceptación de la curación de Tito (2026-10-28):** el usuario revisó los
   informes y aprobó #96 expresamente; el issue queda cerrado para continuar
-  la secuencia de #95. [Registro de aprobación](../../experiments/slm-directo/CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
+  la secuencia de #95. [Registro de aprobación](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/CURACION-TITO-2026-10-28.md#aprobación-del-usuario--2026-10-28).
   Codex creó #103 por interpretar incorrectamente que se aprobaban solo informes;
   se retiró como no planificado y se eliminó su bloqueo de #98. No constituye una
   nueva condición ni exige otra aprobación de #96. Se conserva la distinción entre
@@ -421,13 +463,13 @@ D07 precisa cómo observar `T_R` y `T_C`; D08 fija la política que produce `T_A
 - **Pregunta:** ¿cómo facilitar al equipo de cuatro la reincorporación al trabajo, la consulta de hitos y la entrada a los issues sin añadir sobrecarga de gestión en GitHub ni crear un segundo backlog?
 - **Tipo:** herramienta de coordinación interna y consulta del repositorio.
 - **Responsable:** Mateo Antenucci / Equipo.
-- **Evidencia:** [issue #57](https://github.com/Corchets/bitacora_tesis/issues/57), [README de ayuda-memoria](../../ayuda-memoria/README.md), [sistema de diseño](../../ayuda-memoria/DESIGN.md) y [skill de proyecto](../../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
+- **Evidencia:** [issue #57](https://github.com/Corchets/bitacora_tesis/issues/57), [README de ayuda-memoria](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/README.md), [sistema de diseño](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/DESIGN.md) y [skill de proyecto](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/.agents/skills/actualizar-ayuda-memoria/SKILL.md).
 - **Desbloquea:** incorporación fluida del equipo al hito H2 sin fricción ni reconstrucción del repositorio.
 - **Estado:** resuelta (2026-10-07).
 - **Conclusión:** sitio web estático (`ayuda-memoria/`, HTML/CSS/JS con generador Node) con vistas para `laboratorio-main` (entrada principal) y `main`. Muestra hitos, issues abiertos agrupados, roadmap, glosario y briefs de arranque para H2 (#19, #32, #39, #50, #54). Los briefs son orientaciones mantenidas en la web, no campos obligatorios de los issues en GitHub ni un segundo backlog. Se actualizan mediante la skill explícita `$actualizar-ayuda-memoria` a nivel proyecto. El build consulta datos de GitHub y archivos de cada commit sin publicar copias viejas. Publicación por enlace en Vercel alimentada por workflow ante pushes y cambios en issues (requiere secrets de despliegue). No altera el alcance de tesis, no ejecuta IA desatendida y no cierra D07/D08/D09.
-- **Evolución (2026-10-08):** por pedido del usuario, el roadmap local pasa a un grafo navegable de dependencias reales con filtros, zoom, panel de contexto y alternativa accesible en lista. [Diseño y fuentes de la librería](../../ayuda-memoria/DESIGN.md#24-componentes-del-mapa-de-entregas-roadmap). Bundle y licencia servidos localmente, versión fijada en lockfile. PR #58 agrega la vista de arquitectura y simulador ilustrativo, con decisiones cargadas desde el mapa adoptado. Estas mejoras están en el árbol local; falta integrar y publicar la rama.
-- **Evolución (2026-10-21):** por pedido del usuario, el roadmap se organiza por componentes con avances, pendientes e issues relacionados, sin modificar la visualización de arquitectura; deja de requerir Cytoscape. Integrado en `main` mediante [PR #60](https://github.com/Corchets/bitacora_tesis/pull/60), con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39687885945). Integrado también en `laboratorio-main` mediante [PR #61](https://github.com/Corchets/bitacora_tesis/pull/61), sin conflictos, con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39688319419). Se corrigió el workflow de laboratorio para descargar el SHA del evento; los pushes de ambas ramas publican al mismo proyecto Vercel. Configuración y límites en [README](../../ayuda-memoria/README.md#publicar-y-automatizar).
-- **Skill de cierre (2026-10-21):** el usuario pidió ampliar `$actualizar-ayuda-memoria` para que el equipo invoque el circuito de actualización de seguimiento y preparación del PR después de trabajar un issue. Conserva invocación explícita y modo solo briefs; integrar y comprobar Vercel requiere que ese sea el alcance solicitado. Procedimiento y límites en su [SKILL.md](../../.agents/skills/actualizar-ayuda-memoria/SKILL.md).
+- **Evolución (2026-10-08):** por pedido del usuario, el roadmap local pasa a un grafo navegable de dependencias reales con filtros, zoom, panel de contexto y alternativa accesible en lista. [Diseño y fuentes de la librería](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/DESIGN.md#24-componentes-del-mapa-de-entregas-roadmap). Bundle y licencia servidos localmente, versión fijada en lockfile. PR #58 agrega la vista de arquitectura y simulador ilustrativo, con decisiones cargadas desde el mapa adoptado. Estas mejoras están en el árbol local; falta integrar y publicar la rama.
+- **Evolución (2026-10-21):** por pedido del usuario, el roadmap se organiza por componentes con avances, pendientes e issues relacionados, sin modificar la visualización de arquitectura; deja de requerir Cytoscape. Integrado en `main` mediante [PR #60](https://github.com/Corchets/bitacora_tesis/pull/60), con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39687885945). Integrado también en `laboratorio-main` mediante [PR #61](https://github.com/Corchets/bitacora_tesis/pull/61), sin conflictos, con [deploy exitoso](https://github.com/Corchets/bitacora_tesis/actions/runs/39688319419). Se corrigió el workflow de laboratorio para descargar el SHA del evento; los pushes de ambas ramas publican al mismo proyecto Vercel. Configuración y límites en [README](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/ayuda-memoria/README.md#publicar-y-automatizar).
+- **Skill de cierre (2026-10-21):** el usuario pidió ampliar `$actualizar-ayuda-memoria` para que el equipo invoque el circuito de actualización de seguimiento y preparación del PR después de trabajar un issue. Conserva invocación explícita y modo solo briefs; integrar y comprobar Vercel requiere que ese sea el alcance solicitado. Procedimiento y límites en su [SKILL.md](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/.agents/skills/actualizar-ayuda-memoria/SKILL.md).
 
 ## Decisiones cerradas
 

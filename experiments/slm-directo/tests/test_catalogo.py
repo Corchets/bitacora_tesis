@@ -70,7 +70,7 @@ class TestCatalogo(unittest.TestCase):
         self.assertIn("| `corpus_v2` | 2 | 1 | 1 |", md)
         self.assertIn("| **Total** | **4** | **1** | **3** |", md)
         self.assertIn("| `dos` | 2 | 1 | 1 | Dos casos. |", md)
-        self.assertIn("rama `reserva/test`", md)
+        self.assertIn("partición `test_reservado`", md)
         self.assertIn("| Legítimas de test de #45 | 56 |", md)
 
     def test_el_catalogo_de_la_rama_no_nombra_casos_de_la_reserva(self):

@@ -6,12 +6,12 @@ el 2026-10-26 en la PC Linux de Ignacio (Ollama 0.40.8, GPU RTX 3060 12 GB).
 Tito real único (`tito_logreg.json`, sha256
 `fb601eaa…5098eccd`, umbral 0,5) para las seis comparaciones.
 
-Tablas cruzadas generadas desde las salidas crudas: [TABLAS.md](TABLAS.md).
-Vista interactiva por modelo, conversación y ticket: [informe visual](graficos/index.html)
-([regeneración](graficos/README.md)). Usa las salidas guardadas, sin nueva inferencia.
-Manifiesto auditable: [cobertura.json](cobertura.json).
-Procedimiento: [consolidar.py](consolidar.py) (solo lee CSV, sin inferencia) y
-[regenerar.sh](regenerar.sh) (re-ejecuta `comparar.py` × 6 y verifica
+Tablas cruzadas generadas desde las salidas crudas: [TABLAS.md](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/TABLAS.md).
+Vista interactiva por modelo, conversación y ticket: [informe visual](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/graficos/index.html)
+([regeneración](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/graficos/README.md)). Usa las salidas guardadas, sin nueva inferencia.
+Manifiesto auditable: [cobertura.json](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/cobertura.json).
+Procedimiento: [consolidar.py](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/consolidar.py) (solo lee CSV, sin inferencia) y
+[regenerar.sh](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/regenerar.sh) (re-ejecuta `comparar.py` × 6 y verifica
 identidad byte a byte). Detalle por modelo y conversación en cada
 `corridas/<fecha>_<modelo>-comparacion/comparacion.md`.
 
@@ -141,6 +141,6 @@ del autor del reporte, no del manual; ningún caso tiene revisión humana):
 
 ## 7. Revisión por otra persona
 
-Pendiente al cierre de este reporte: ver [REVISION.md](REVISION.md) (lista de
+Pendiente al cierre de este reporte: ver [REVISION.md](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/2026-10-26-tito-slm-consolidado/REVISION.md) (lista de
 verificación y alcance declarado). No se atribuye ninguna reproducción de
 inferencia no realizada.

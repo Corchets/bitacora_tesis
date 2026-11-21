@@ -1,0 +1,3 @@
+desarrollo · v4 · --prompts v4-corte --sin-reglas
+commit 87bb7459f5f7154f0b0cd68dbd025b1f9e60ec8c
+minutos 17.0

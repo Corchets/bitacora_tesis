@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-SOPORTE-016",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-SOPORTE-016",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "La recuperación de certificados conduce al ingreso de contraseña en una página de validación. Prueba un pedido de secreto inducido por una promesa de conservar calificaciones; la persona no lo ingresa.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-SOPORTE-CLAVE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, instrucción de ingresar la contraseña existente en la casilla; líneas 9 y 10 son contexto previo. No hay cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "soporte",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-SOPORTE-CLAVE-01",
+  "situacion": "La recuperación de certificados conduce al ingreso de contraseña en una página de validación. Prueba un pedido de secreto inducido por una promesa de conservar calificaciones; la persona no lo ingresa."
+}

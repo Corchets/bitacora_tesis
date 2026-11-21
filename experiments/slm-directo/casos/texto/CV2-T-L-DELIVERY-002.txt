@@ -1,0 +1,29 @@
+A: hola el seguimiento dice que no había nadie pero estuve en casa todo el día
+B: buenas qué número de envío tenés
+A: 84216 lo espero desde el lunes
+B: veo que fueron a la calle los paraísos 114
+A: es los paraísos 141 se invirtieron los números
+B: gracias me confirmás localidad y código postal
+A: villa nueva código 4107
+B: la referencia dice casa al fondo portón verde
+A: sí pero se entra por el pasillo de la izquierda
+B: hay timbre en la puerta de calle
+A: hay uno pero no anda desde la tormenta
+B: anoto que golpeen las manos en la reja interior
+A: puedo pasar a retirarlo en la sucursal
+B: sí pero la visita de hoy todavía está en reparto
+A: mañana me voy a trabajar temprano
+B: puedo pedir que lo dejen en el punto de retiro de la plaza
+A: me queda bien paso después de las cinco
+B: querés que cambie el destino ahora
+A: sí así no vuelve a salir a reparto
+B: queda para retirar desde mañana a las cuatro
+A: necesito llevar algo además del número de envío
+B: el documento y el aviso de seguimiento
+A: el aviso lo tengo en el celular
+B: podés mostrarlo en pantalla
+A: perfecto entonces paso mañana
+B: el local cierra a las siete
+A: llego antes de las seis
+B: listo quedó actualizado
+A: gracias

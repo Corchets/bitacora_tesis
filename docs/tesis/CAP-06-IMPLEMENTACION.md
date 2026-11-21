@@ -20,7 +20,7 @@ Las bibliotecas y runtimes utilizados, con sus números de versión reales extra
 | **Filtro de voz** | `silero_vad.onnx` | Release `asr-models` de `sherpa-onnx` | Decide qué cuenta como voz (umbral 0,5). |
 | **Servidor de SLM** | `ollama` | `0.40.5` (M1), `0.40.8` (Ryzen), `0.40.14` (Colab T4) | Inferencia local con API HTTP. |
 | **Servidor en el teléfono** | `llama-server` (llama.cpp) | `6c01da62` | Medición en el Samsung A56, en CPU con 4 hilos, y en un iPhone 15 Pro Max, con GPU y con CPU, dentro de una app mínima. |
-| **Modelo de lenguaje** | `gemma4:e2b-it-q4_K_M` | Digest `b37049369adf…`, 4,59 GB | Decisión del aviso, con temperatura 0, seed 42 y `num_ctx` 4096; la salida se corta a los 14 tokens. |
+| **Modelo de lenguaje** | `gemma4:e2b-it-q4_K_M` | Digest `b37049369adf…`, 4,59 GB | Decisión del aviso, con temperatura 0, seed 42 y `num_ctx` 4096; la salida se corta a los 14 tokens. En el teléfono genera solo el número del riesgo, 6 tokens ([ADR 0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)). |
 | **Llamada en vivo** | `websockets` | `>=15.0` | Audio y control entre el panel y el servidor. |
 | **Panel** | HTML y módulos JavaScript | Sin dependencias externas | Captura por AudioWorklet, conversación y Presentación. |
 | **Pruebas** | `unittest`, `node --test` | Bibliotecas estándar | Pruebas sin red ni modelos reales. |
@@ -130,6 +130,7 @@ La capa de detección lingüística implementa el detector del [ADR 0002](../ing
 1. **Configuración final (`DetectorSLMCorteRiesgo`, en [`detectores.py`](../../experiments/slm-directo/detectores.py)):**
    - Arma el mismo pedido que el resto de los detectores JSON: el prompt [`tarea_c_premisa.txt`](../../experiments/slm-directo/prompts/tarea_c_premisa.txt), la salida [`salida_json_c.txt`](../../experiments/slm-directo/prompts/salida_json_c.txt) y la transcripción con los roles `PROTEGIDA` y `OTRA`.
    - Corta la salida con `num_predict` 14, justo después de la coma que cierra el riesgo, y lo lee del texto cortado. La regla es riesgo ≥ 0,3; `alerta_sugerida` no llega a escribirse.
+   - En el teléfono, con `llama-server`, el cliente escribe `{\n  "riesgo":` en el turno del modelo y el modelo genera solo el número y la coma: 6 tokens en vez de 14 ([ADR 0009](../ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md)). No está en esta clase: es el modo `--consulta numero --prefijo salto` de [`correr_android_latencia.py`](../../experiments/slm-directo/correr_android_latencia.py). La demo y las corridas con Ollama siguen con `num_predict` 14.
    - En el primer aviso hace una segunda consulta con [`motivo_c_corte.txt`](../../experiments/slm-directo/prompts/motivo_c_corte.txt), que repite los mensajes, agrega lo ya escrito y pide motivo y evidencia. Si falla, el aviso se mantiene y el error queda con el prefijo `etapa2_`.
    - Con `--solo-otra`, las líneas de PROTEGIDA entran en el contexto y no consultan.
 2. **Antecedente: filtro Tito viejo ([`filtro_tito.py`](../../experiments/slm-directo/filtro_tito.py), [`tito_real.py`](../../experiments/slm-directo/tito_real.py)):**

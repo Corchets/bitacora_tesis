@@ -1,0 +1,30 @@
+A: Buenas, el internet se corta y en el router aparece “código de error 4”.
+B: Hola. ¿Qué luces quedan prendidas cuando ocurre?
+A: La de energía sigue verde, pero la de conexión parpadea en rojo.
+B: ¿El equipo se reinicia solo o tenés que apagarlo?
+A: Se reinicia solo después de unos minutos.
+B: ¿Desde cuándo empezó?
+A: Anoche, después de una tormenta. Hoy pasó tres veces.
+B: ¿También se corta cuando conectás por cable?
+A: Sí. La computadora pierde la red y el televisor también.
+B: Entonces parece afectar el servicio completo, no solo la señal wifi.
+A: El mensaje dice código de error 4. ¿Eso identifica el problema?
+B: Es una referencia general del equipo. La línea muestra una caída intermitente desde las 22:30.
+A: ¿Puede ser el cable que entra por la ventana?
+B: ¿Está doblado o suelto?
+A: No, lo fijaron hace unos meses. La caja de afuera quedó mojada.
+B: Voy a pedir una revisión técnica. ¿Qué domicilio tiene la instalación?
+A: Lapacho 420, casa del fondo, portón de chapa.
+B: ¿Hay alguien disponible mañana por la mañana?
+A: Yo trabajo, pero mi hijo está estudiando desde casa.
+B: ¿Puede abrirle a la persona técnica?
+A: Sí, es mayor y tiene autorización para atender en casa.
+B: Puedo agendar entre las nueve y la una.
+A: Mejor después de las diez, antes está en clase virtual.
+B: Anoto la preferencia, aunque la franja no garantiza una hora exacta.
+A: ¿Nos avisan antes de llegar?
+B: Sí, llaman al contacto de la cuenta.
+A: El número termina en 44, sigue siendo el mismo.
+B: Perfecto, quedó para mañana.
+A: Gracias, ojalá dejen de cortarse las clases.
+B: Lo revisan en el domicilio.

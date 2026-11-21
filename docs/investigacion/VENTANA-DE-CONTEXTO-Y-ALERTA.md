@@ -13,6 +13,8 @@ verdad de esta investigación; los documentos principales solo enlazan acá.
 Convertido del documento de trabajo `Ventana de contexto - consolidacion v3 2026-09-16.docx`
 sin cambios de contenido: solo se reemplazó la portada por este encabezado.
 
+> **Nota del 2026-11-21:** antecedente, no fuente de verdad. D08 se resolvió con límites ([ficha](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)) sin la ventana con decaimiento ni la persistencia que se proponen acá: el aviso es la primera consulta con riesgo ≥ 0,3 ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)). El contexto en llamadas largas se trata en el [capítulo 5, §5.4.4](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md#544-problemática-del-contexto-en-llamadas-extensas).
+
 > **Estado de este documento**
 > **Borrador de trabajo del 16 de septiembre de 2026.** Todo lo que se propone acá es **propuesta sin discutir**: no fue validado por el grupo completo ni por el profesor.
 > Los resultados numéricos salen de **llamadas sintéticas construidas a mano**. Sirven para probar si un diseño falla y por qué; **no miden rendimiento**.

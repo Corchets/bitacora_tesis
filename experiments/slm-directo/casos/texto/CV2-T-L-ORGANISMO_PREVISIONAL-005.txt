@@ -1,0 +1,26 @@
+A: Hola, me mudé a otra localidad y quiero saber dónde tengo que hacer los próximos trámites.
+B: Buen día. ¿Ya cambiaste el domicilio en tu registro?
+A: No todavía. Estoy en casa de mi hija hasta que termine la mudanza.
+B: ¿La dirección nueva va a ser permanente?
+A: Sí, en Villa Nueva, calle Las Moras 88.
+B: ¿Me confirmás el barrio para asignar la sede?
+A: Barrio del Molino, a dos cuadras de la estación.
+B: Gracias. La sede que te corresponde es la de la plaza central.
+A: ¿Puedo actualizar el domicilio desde el portal o tengo que ir?
+B: Podés iniciar el cambio en línea y presentar una factura o contrato cuando te lo pidan.
+A: El contrato está a nombre de mi hija. ¿Sirve una constancia de residencia?
+B: La sede revisa qué comprobante acepta para tu caso. Podés pedir turno de actualización.
+A: ¿Hay que cambiar también el lugar donde me llega la correspondencia?
+B: Sí, si querés recibir avisos impresos en la nueva dirección.
+A: Yo prefiero que los avisos lleguen por correo electrónico.
+B: El portal permite elegir un correo de contacto. ¿Sigue vigente el que termina en la palabra “rio”?
+A: Sí, ese lo uso todos los días.
+B: Bien. Hay un turno el jueves a las diez en la sede central.
+A: Me sirve. ¿Qué documento llevo?
+B: Documento y el comprobante de domicilio que tengas. En la oficina te indican si hace falta otro.
+A: Llevo el contrato de mi hija y una factura de luz.
+B: Perfecto, el personal revisa cuál es suficiente.
+A: ¿Me confirmás que el turno quedó para el jueves?
+B: Sí, a las diez, a nombre de Nora Rivarola.
+A: Correcto. Gracias por ayudarme a organizarlo antes de la mudanza.
+B: De nada, te esperamos.

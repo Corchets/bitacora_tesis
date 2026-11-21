@@ -1,0 +1,28 @@
+A: Hola, el proveedor de oficina dijo que llega mañana con las cajas de papel.
+B: ¿A qué hora suele pasar?
+A: Entre las diez y la una. Pero recepción cierra para almorzar a las doce.
+B: ¿Puede firmar alguien de administración si llega durante esa pausa?
+A: Sí, siempre que toque la puerta lateral.
+B: ¿La que da al estacionamiento o la que está junto a la rampa?
+A: Junto a la rampa. El acceso del estacionamiento queda cerrado con llave.
+B: ¿Quién queda de guardia mañana?
+A: Tomás, de nueve a dos. Le dejo la planilla de entrega.
+B: ¿El pedido incluye las tintas de la impresora grande?
+A: Sí, dos negras y una azul. El papel viene en tres cajas.
+B: ¿La oficina tiene espacio para guardarlo hasta que lo distribuya?
+A: El depósito está lleno. Podemos dejar una caja en cada piso.
+B: ¿La caja del tercer piso va junto a la sala de reuniones?
+A: No, ahí hay una auditoría. Déjenla en archivo.
+B: Lo anoto en la hoja para que Tomás sepa dónde acomodarla.
+A: ¿Necesitamos devolver los cartuchos usados?
+B: El proveedor retira solo los de la marca que figura en el contrato.
+A: Los viejos son de otra marca, así que quedan acá.
+B: ¿Querés que pida una caja de reciclaje para esos?
+A: Sí, preguntale si puede dejarla la semana que viene.
+B: Te confirmo cuando responda.
+A: ¿La factura llega con el pedido o por correo?
+B: El proveedor manda factura electrónica después de la entrega.
+A: Perfecto. ¿Le avisás a Tomás que firme solo cuando cuente las cajas?
+B: Sí, se lo escribo ahora.
+A: Gracias. Así queda todo ordenado.
+B: De nada.

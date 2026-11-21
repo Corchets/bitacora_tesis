@@ -235,7 +235,7 @@ Al terminar, iniciar otra llamada o perder la conexión, limpia los medidores.
 La verificación de #79 está en [la evidencia de niveles](corridas/2026-10-26-niveles-79.md).
 
 Verificación real del 2026-10-26, commit `3dc9269` con árbol limpio
-([manifiestos y salidas sin audio](corridas/2026-10-26-panel-77/README.md)),
+([manifiestos y salidas sin audio](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-26-panel-77/README.md)),
 con Zipformer local y `--detector reglas`, sin Ollama:
 la estafa avisó a **18,455 s** (referencia `reglas-final`: 18,457 s; diferencia −0,002 s).
 Ambos canales comenzaron en 0,000 s y conservaron 22,217 s de audio.
@@ -258,7 +258,7 @@ El modelo de Zipformer se baja solo la primera vez (149 MB, a `experiments/asr-l
 
 ## 4. Dónde está la demora (TTS, una llamada, M1 8 GB)
 
-Corridas en [`corridas/2026-10-26-spike-tts/`](corridas/2026-10-26-spike-tts/), commit `b33b1d7`,
+Corridas en [`corridas/2026-10-26-spike-tts/`](https://github.com/Corchets/bitacora_tesis/tree/archivo/pre-informe/experiments/voip/corridas/2026-10-26-spike-tts), commit `b33b1d7`,
 audio `SC-WA-CODE-01-tts-estereo.wav` (canal izquierdo = estafador, derecho = protegida), Ollama 0.40.5,
 seed 42. «Pedido» = la frase «decime el código de activación que recibiste por SMS», cuya voz termina
 en el segundo 17,6.
@@ -386,7 +386,7 @@ voz a pantalla. Anotá hardware, versiones, commit, dispositivo, configuración 
 fuera del repo. Confirmá visualmente que al terminar se apague el indicador de micrófono.
 Voz real, Meet, BlackHole y segunda notebook requieren ensayo humano.
 
-La [evidencia de #78](corridas/2026-10-26-microfono-78/README.md) conserva la prueba con
+La [evidencia de #78](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/voip/corridas/2026-10-26-microfono-78/README.md) conserva la prueba con
 micrófono falso, el contraste con `cliente.py`, los casos de error simulados y cómo repetirla.
 
 ## 9. Medir la notebook sin panel (#84)

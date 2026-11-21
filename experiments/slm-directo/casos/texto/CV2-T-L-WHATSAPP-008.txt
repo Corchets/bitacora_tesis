@@ -1,0 +1,26 @@
+A: hola el chat con mi amiga dice que cambió el código de seguridad
+B: buen día te apareció cuando abriste la conversación
+A: sí abajo del último mensaje hay un aviso gris
+B: tu amiga cambió de teléfono o reinstaló la aplicación
+A: cambió la pantalla pero usó el mismo teléfono
+B: puede que haya vuelto a registrar la cuenta después de reparar el equipo
+A: eso quiere decir que alguien más tiene el chat
+B: no el aviso indica que cambió un dato de cifrado de esa conversación
+A: ella me escribió que se le borraron varios mensajes
+B: la copia de seguridad estaba activa antes de la reparación
+A: no sé la dejó en un servicio técnico dos días
+B: entonces quizá se restauró desde una copia anterior
+A: el código de seguridad es el que aparece en la pantalla de información
+B: sí se puede comparar con la otra persona si ambos quieren comprobar el cambio
+A: Lo comparo con ella cuando nos veamos.
+B: Claro, con eso alcanza para ver si hubo un cambio.
+A: no es urgente tenemos que organizar el cumpleaños nomás
+B: ya definieron el lugar
+A: sí el quincho de mi hermano el sábado a la tarde
+B: querés que te reenvíe la dirección
+A: la tengo guardada en el grupo familiar
+B: entonces el aviso no cambia la dirección del encuentro
+A: bien pensé que se había borrado algo importante
+B: revisá si el historial vuelve después de terminar la restauración
+A: lo miro esta noche gracias
+B: de nada

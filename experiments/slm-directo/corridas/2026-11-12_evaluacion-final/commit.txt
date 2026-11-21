@@ -1,0 +1,7 @@
+87bb7459f5f7154f0b0cd68dbd025b1f9e60ec8c
+#143, evaluación final: c-consejos-corte-riesgo, config, v4, reglas sobre desarrollo, test_reservado, externo, legitimas_reales, en modo operativo
+reserva/test 9089b19226c19a572a0e6b34df9b70a233024812
+desarrollo conjunto.json sha256 5e6316759453eb599e56001208271036b19ab8bbd690543121951bfb15864ab8
+test_reservado conjunto.json sha256 0d709a33fb268a15b3db5551be53ca2ae93d7b81758f7f9041310e1c5e5fbd4a
+externo conjunto.json sha256 0150a5e023ab371f6a5a367a1a2eaeeb355b113835cc067a6be9049c2ccd6075
+legitimas_reales conjunto.json sha256 b04565d0ce60a96546480e89ee56ed6801d61bbce369c88098bc5cc3f0a14698
