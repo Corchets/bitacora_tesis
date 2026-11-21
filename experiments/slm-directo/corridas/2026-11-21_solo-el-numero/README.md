@@ -19,7 +19,8 @@ Con el mismo servidor y el mismo runtime para las dos variantes:
 En la Mac, generar solo el número baja la línea de 0,34 a 0,20 s (generar: de 14 tokens a 6) y **cumple el criterio**:
 las 150 conversaciones de desarrollo avisan igual y en la misma línea. El riesgo no es idéntico: cambia en 11 a 20 de
 1.392 líneas, lo mismo que cambia la configuración de hoy cuando se corre dos veces (11 de 1.392). **En el iPhone
-todavía no se midió.**
+15 Pro Max la línea baja de 0,93–0,98 a 0,54 s** (generar: de 0,65–0,69 a 0,28 s), con el mismo aviso en las seis
+conversaciones.
 
 ## Qué se probó
 
@@ -79,7 +80,9 @@ Tres corridas seguidas en el mismo servidor: hoy, solo el número y hoy otra vez
   (`{"riesgo": 0.1, "alerta_s`) y con el cambio le imponemos el del salto. El riesgo dio lo mismo en las tres.
 - Las líneas, una por una, están en [`resumen-s6.json`](resumen-s6.json) y [`resumen-d150.json`](resumen-d150.json).
 
-## 3. Cuánto baja la latencia (Mac, no el teléfono)
+## 3. Cuánto baja la latencia
+
+### En la Mac
 
 Segundos. «Por línea» es la actualización de una línea de OTRA sin motivo; procesar y generar, lo que informa el
 servidor.
@@ -98,20 +101,37 @@ servidor.
 - Las corridas de `desarrollo-150` son más lentas y más dispersas que las de `s6` (0,43 y 0,52 s para la misma
   configuración): la Mac tenía otros procesos durante esos 36 minutos. Para tiempos, la comparación limpia es `s6`.
 - El motivo del primer aviso no cambia: es la misma segunda consulta.
-- **Estimación para el iPhone, sin medir:** el 2026-11-20 generar 14 tokens tardó 0,56 s de una línea de 0,79 s. Si
-  generar 6 tokens cuesta en proporción lo mismo que en la Mac (0,11/0,25), la línea quedaría cerca de 0,5 s.
 
-### Para medirlo en el iPhone
+### En el iPhone 15 Pro Max
 
-[`medir_iphone.py`](medir_iphone.py) está escrito y **no se corrió**. La app no cambia: es `llama-server`, que ya trae
-`/apply-template` y `/completion`. Al 2026-11-21 la app `ar.lab.detectorlab` sigue instalada y el teléfono aparece
-emparejado. Hace falta el teléfono desbloqueado, con la app en pantalla, en la misma Wi-Fi que la Mac, y su IP:
+Las seis conversaciones, por Wi-Fi, con [`medir_iphone.py`](medir_iphone.py): la app de siempre (`llama-server`
+`6c01da62` con Metal, `-ngl 99`), relanzada en cada pasada. Cuatro pasadas seguidas entre las 16:16 y las 16:24 del
+2026-11-21, en este orden. Teléfono desenchufado, batería 50–45 %, sin modo de bajo consumo; ida y vuelta de
+`/health`, 17 ms de mediana.
+
+| Corrida | Estado térmico | Por línea: mediana / p95 / máx. | Procesar: mediana / p95 | Generar: mediana / p95 (tokens) | Primer aviso sin esperar el motivo: mediana / máx. | Riesgo distinto | Primer aviso en otra línea |
+|---|---|---:|---:|---:|---:|---:|---:|
+| `iphone-hoy-1` | `nominal` → `serious` | 0,74 / 1,05 / 1,17 | 0,18 / 0,27 | 0,52 / 0,68 (14) | 0,73 / 0,77 | — | — |
+| `iphone-hoy-2` | `serious` | 0,93 / 1,02 / 1,07 | 0,24 / 0,29 | 0,65 / 0,69 (14) | 0,91 / 1,00 | 0/83 | 0/6 |
+| `iphone-numero` | `serious` | 0,54 / 0,64 / 0,72 | 0,22 / 0,25 | 0,28 / 0,31 (6) | 0,51 / 0,55 | 1/83 | 0/6 |
+| `iphone-hoy-3` | `serious` | 0,98 / 1,10 / 1,27 | 0,25 / 0,30 | 0,69 / 0,75 (14) | 0,99 / 1,03 | 0/83 | 0/6 |
+
+- **Con el teléfono en el mismo estado térmico, la línea baja de 0,93–0,98 a 0,54 s** (unos 0,4 s, 43 %), y el p95 de
+  1,02–1,10 a 0,64 s. `iphone-numero` corrió entre `iphone-hoy-2` e `iphone-hoy-3`, las tres enteras en `serious`.
+- `iphone-hoy-1` arrancó con el teléfono frío y por eso es más rápida (0,74 s); no hay pasada del número en frío.
+- **Riesgo:** una línea distinta de 83 (CV2-D-L-BANCO-001 línea 22, 0,5 → 0,6, la misma que en la Mac), sin cruzar 0,3;
+  mismo aviso y misma línea en las seis. Las tres pasadas de hoy dan el mismo riesgo en las 83 líneas.
+- Las 83 consultas válidas en las cuatro. Pico de `footprint`: 0,53 a 0,58 GiB, igual con y sin el cambio.
+- La primera vez, `iphone-numero` no arrancó: `devicectl` no pudo relanzar la app (error 10004). Se repitió y por eso
+  hay una tercera pasada de hoy. En `medir.json` y en los registros no queda la IP del teléfono.
+
+Repetir, con el teléfono desbloqueado, la app en pantalla y en la misma Wi-Fi que la Mac:
 
 ```sh
-python3 medir_iphone.py iphone-hoy-1 --consulta chat --ip IP --dispositivo UDID --bundle ar.lab.detectorlab
-python3 medir_iphone.py iphone-numero --consulta numero --ip IP --dispositivo UDID --bundle ar.lab.detectorlab
-python3 medir_iphone.py iphone-hoy-2 --consulta chat --ip IP --dispositivo UDID --bundle ar.lab.detectorlab
-python3 -I resumir.py --base iphone-hoy-1 iphone-numero iphone-hoy-2 --salida resumen-iphone.json
+python3 medir_iphone.py iphone-hoy-2 --consulta chat --ip IP --dispositivo UDID --bundle ID.DE.LA.APP
+python3 medir_iphone.py iphone-numero --consulta numero --ip IP --dispositivo UDID --bundle ID.DE.LA.APP
+python3 medir_iphone.py iphone-hoy-3 --consulta chat --ip IP --dispositivo UDID --bundle ID.DE.LA.APP
+python3 -I resumir.py --base iphone-hoy-1 iphone-hoy-2 iphone-numero iphone-hoy-3 --salida resumen-iphone.json
 ```
 
 ## 4. Qué habría que tocar para adoptarlo (no se tocó nada)
@@ -136,14 +156,15 @@ python3 -I resumir.py --base iphone-hoy-1 iphone-numero iphone-hoy-2 --salida re
 
 ## Recomendación
 
-> **Estado: propuesta sin discutir.** Adoptarlo en el teléfono si la medición en el iPhone confirma la baja: cumple el
+> **Estado: propuesta sin discutir.** Adoptarlo en el teléfono: baja la línea unos 0,4 s en el iPhone, cumple el
 > criterio en 150 conversaciones y no mueve más el riesgo que repetir la corrida de hoy. Dejar la demo con Ollama como
 > está hasta probar si Ollama lo permite. Toca D09 en
 > [MAPA-DECISIONES.md](../../../../docs/gestion/MAPA-DECISIONES.md).
 
 ## Límites
 
-- **Latencia solo en la Mac.** El teléfono no se midió; la cifra del iPhone es una estimación.
+- **En el iPhone, una pasada del número y seis conversaciones,** con el teléfono caliente (`serious`). Las 150 solo
+  corrieron en la Mac.
 - Una serie por conjunto (hoy, número, hoy), en un solo runtime: `llama-server` con Metal en macOS. En CPU o en
   Ollama puede dar otra cosa (en el A56, con `c-premisa`, cambió 8 de 83 líneas).
 - 150 conversaciones de desarrollo (`desarrollo-150`: 1.392 consultas), que incluyen las seis de `s6`. Nada de la
@@ -161,7 +182,8 @@ python3 -I resumir.py --base iphone-hoy-1 iphone-numero iphone-hoy-2 --salida re
   [`conversaciones-desarrollo-150.json`](conversaciones-desarrollo-150.json).
 - `s6-*/` y `d150-*/`: `turnos.jsonl`, `manifiesto.json` y `ejecucion.log` de cada corrida.
 - [`resumir.py`](resumir.py) → [`resumen-s6.json`](resumen-s6.json) y [`resumen-d150.json`](resumen-d150.json).
-- [`medir_iphone.py`](medir_iphone.py): preparado, sin correr.
+- [`medir_iphone.py`](medir_iphone.py) → `iphone-*/` (además `medir.json`, `recursos.log` y `runtime.log`) y
+  [`resumen-iphone.json`](resumen-iphone.json).
 
 ## Repetir
 
