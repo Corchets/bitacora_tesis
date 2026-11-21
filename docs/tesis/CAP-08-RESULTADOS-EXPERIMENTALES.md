@@ -248,7 +248,7 @@ Los tiempos de esta tabla son los del servidor, sin la red. La memoria que cuent
 - El ASR no demoró al detector en esta pasada.
 - El ASR fue a tiempo real: su atraso fue de 0,17 s de p95 y 0,48 s de máximo.
 
-**Límites de las mediciones en el iPhone.** Es una pasada por condición. El audio es sintético y se lee de un archivo, no de una llamada. El detector consultó sobre el texto original, no sobre lo que transcribió el ASR. No se midió el consumo de batería. Una app de iOS no tiene una interfaz para el audio de una llamada telefónica, así que el iPhone mide el hardware, no un producto. **Falta el recorrido completo en Android.**
+**Límites de las mediciones en el iPhone.** Es una pasada por condición. El audio es sintético y se lee de un archivo, no de una llamada. El detector consultó sobre el texto original, no sobre lo que transcribió el ASR. La pasada con el ASR corrió con la salida de 14 tokens: generar solo el número no se midió con el ASR a la vez, ni en el A56 con el prompt final. No se midió el consumo de batería. Una app de iOS no tiene una interfaz para el audio de una llamada telefónica, así que el iPhone mide el hardware, no un producto. **Falta el recorrido completo en Android.**
 
 ## 8.7. Pendientes del capítulo
 
