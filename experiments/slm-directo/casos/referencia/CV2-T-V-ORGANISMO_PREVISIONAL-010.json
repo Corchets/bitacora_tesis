@@ -1,0 +1,51 @@
+{
+  "case_id": "CV2-T-V-ORGANISMO_PREVISIONAL-010",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-ORGANISMO_PREVISIONAL-010",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": null,
+  "t_c_linea": null,
+  "pedido": null,
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 5,
+      "evento": "contexto",
+      "etiquetas": [
+        "THREAT_FEAR"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "contexto",
+      "etiquetas": [
+        "ISOLATION_SECRECY"
+      ]
+    },
+    {
+      "linea": 17,
+      "evento": "contexto",
+      "etiquetas": [
+        "URGENCY_PRESSURE"
+      ]
+    }
+  ],
+  "que_prueba": "Una invitación a un taller previsional incluye orientación para leer el recibo, pero no solicita datos ni acciones de alto riesgo. Prueba evitar alertas por mera referencia a prestaciones y documentación.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-ORG-BENEFICIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. No se observa pedido de datos o acción crítica ni cumplimiento. La presión por el cierre y el desaliento a verificar hacen sospechosa la llamada, pero no demuestran su identidad ni intención. T_R/T_C nulos; revisión humana pendiente en D07.",
+  "particion": "test_reservado",
+  "familia": "organismo_previsional",
+  "dificultad": "sin_pedido",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-ORG-BENEFICIO-01",
+  "situacion": "Una invitación a un taller previsional incluye orientación para leer el recibo, pero no solicita datos ni acciones de alto riesgo. Prueba evitar alertas por mera referencia a prestaciones y documentación."
+}

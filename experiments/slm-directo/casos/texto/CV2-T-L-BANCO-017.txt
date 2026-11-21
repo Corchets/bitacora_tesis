@@ -1,0 +1,26 @@
+A: Hola, quiero saber si puedo bajar el límite diario de compras con débito.
+B: Buenas. ¿Querés cambiar el límite de compra o el de extracción en cajero?
+A: El de compra. Mi sobrina me mostró que se puede poner un monto más bajo.
+B: Sí, podés ajustarlo desde tarjetas, en límites de compra.
+A: ¿Se aplica enseguida o recién al día siguiente?
+B: Normalmente se actualiza en unos minutos. La aplicación te muestra la confirmación.
+A: La última vez que compré una heladera tuve que usar el PIN. Lo había anotado en una hoja porque no me acordaba.
+B: ¿Pudiste completar esa compra?
+A: Sí, salió bien. Después guardé el papel en un cajón y ahora no sé dónde está.
+B: Entiendo. Para el límite no necesitamos ese dato. Entrá en tarjetas y seleccioná la que usás en el comercio.
+A: Me aparece una tarjeta que termina en 1220.
+B: ¿Es la de débito física?
+A: Sí, la que llevo en la billetera.
+B: Elegí “límites”, y luego compras presenciales.
+A: Ahora está en 500 mil por día. Quiero dejarlo en 120 mil.
+B: Escribí ese importe y revisá antes de confirmar.
+A: Me pregunta si quiero aplicar el cambio a pagos sin contacto también.
+B: Sí, así el límite cubre las dos formas de compra presencial.
+A: Lo confirmé. Dice actualizado a las 15:12.
+B: ¿Querés bajar también las compras online?
+A: No, esas las uso para pagar los servicios del mes.
+B: Está bien. El límite online queda como estaba.
+A: Listo, ya está. No necesitaba encontrar el PIN para hacer esto.
+B: Correcto, son opciones distintas de configuración.
+A: Gracias. Ahora dejo de buscar el papelito.
+B: Que tengas buena tarde.

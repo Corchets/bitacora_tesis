@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-PREMIO-004",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-004",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 16,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    },
+    {
+      "linea": 16,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Un premio de cocina conduce a pedir el código de seguridad de una tarjeta bajo el pretexto de cubrir el envío. La persona entrega el marcador 000. Prueba cumplimiento de un secreto financiero dentro de una recompensa tangible.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 11, pedido directo de los tres números. T_C línea 16, entrega del marcador artificial 000, no un CVV real.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Un premio de cocina conduce a pedir el código de seguridad de una tarjeta bajo el pretexto de cubrir el envío. La persona entrega el marcador 000. Prueba cumplimiento de un secreto financiero dentro de una recompensa tangible."
+}

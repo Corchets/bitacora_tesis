@@ -1,0 +1,22 @@
+A: Buenas, ayer pagué con el teléfono y el local me pidió que pusiera el PIN. ¿Eso es normal?
+B: Hola. ¿La compra superaba el límite de pago sin contacto?
+A: Sí, eran 31 mil en una tienda de herramientas.
+B: En algunas terminales se solicita validar con el código de la tarjeta cuando el importe es alto.
+A: Yo pensé que el teléfono ya tenía todo configurado. Me quedé esperando y la fila se hizo larga.
+B: ¿La operación finalmente se aprobó?
+A: Sí, después de ingresar el PIN. No me acuerdo de memoria, lo tengo anotado en otro lado.
+B: ¿El comprobante muestra el pago aprobado?
+A: Sí, aparece aprobado y el importe es correcto.
+B: Entonces no hay un cargo duplicado. ¿Querés que revisemos el movimiento en tu cuenta?
+A: Sí, porque en la pantalla del teléfono apareció dos veces y me asusté.
+B: Veo una sola autorización por 31 mil, a las 18:42.
+A: Perfecto. Capaz la pantalla volvió al inicio mientras imprimían el papel.
+B: Puede ser. Si te vuelve a pasar, esperá a que la terminal confirme antes de acercar el teléfono otra vez.
+A: ¿Puedo desactivar el pago sin contacto desde la aplicación?
+B: Sí, está dentro de la configuración de la tarjeta. El pago con chip sigue funcionando.
+A: No lo voy a cambiar por ahora. Solo quería entender el PIN.
+B: Está bien. El pedido depende del importe y de la terminal, no significa que haya un problema con la cuenta.
+A: Genial. Me llevo la factura por si tengo que devolver la herramienta.
+B: Sí, guardá el comprobante de compra.
+A: Gracias por la explicación.
+B: A vos.

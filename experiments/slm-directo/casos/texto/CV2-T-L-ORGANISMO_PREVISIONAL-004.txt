@@ -1,0 +1,29 @@
+A: hola en el recibo de este mes no aparece el pago familiar que suelo cobrar
+B: buen día qué mes estás consultando
+A: octubre el recibo cerró el viernes
+B: cambió algo en la situación laboral o familiar
+A: empecé en otro trabajo pero presenté el alta en agosto
+B: me decís el nombre del empleador que figura en el alta
+A: taller del norte sociedad simple en la planta de la ruta
+B: gracias encuentro tu registro pero el alta nueva todavía está en revisión
+A: falta algún papel
+B: el sistema pide constancia de vínculo para actualizar el grupo familiar
+A: la presenté cuando hice el trámite de agosto
+B: aparece el formulario pero no el archivo adjunto
+A: capaz no terminó de cargar desde el teléfono
+B: puede ser si tenés una copia podés subirla desde el portal
+A: tengo una foto clara en la computadora
+B: querés que te indique la sección donde se adjunta
+A: sí estoy en el apartado de prestaciones
+B: abrí documentos y elegí agregar archivo a solicitud
+A: me muestra alta de agosto y un botón que dice editar
+B: entrá ahí y fijate si aparece constancia de vínculo
+A: no aparece voy a cargar la foto ahora
+B: revisá que se vean las cuatro esquinas y la fecha
+A: listo quedó cargada a las 11:42
+B: bien puede tardar unos días en validarse
+A: el importe se paga junto con el próximo mes si se aprueba
+B: la liquidación siguiente puede incluir el retroactivo según el período
+A: perfecto me fijo el lunes
+B: te queda asociada la referencia 7730
+A: gracias

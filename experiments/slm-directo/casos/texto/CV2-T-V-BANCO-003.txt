@@ -1,0 +1,25 @@
+A: Hola.
+B: Te hablo de tarjetas del banco. ¿Te dio error el chip al pagar estos días?
+A: Ayer me rechazó una compra, después la pude hacer.
+B: Quedó una reposición pendiente por ese error.
+A: No pedí que la repusieran. La tarjeta todavía la tengo.
+B: El pedido lo generó la red de pagos cuando falló la lectura.
+A: ¿Me van a mandar otra a casa?
+B: Hay un domicilio cargado en la solicitud. Lo podés ver en la aplicación.
+A: Estoy mirando: dice que la nueva tarjeta se entrega en un punto de retiro.
+B: Ese punto es el paso intermedio antes de que salga a tu domicilio.
+A: No conozco esa dirección. Queda en otro barrio.
+B: Es la ubicación del operador que arma la distribución.
+A: También dice que habilita el retiro por un tercero.
+B: Confirmá esa autorización para que el operador retire la tarjeta y la pueda llevar.
+A: ¿No debería retirarla yo con mi documento?
+B: Si la retirás vos no entra en el circuito de envío que quedó abierto.
+A: Pero no pedí ningún envío ni autoricé a otra persona.
+B: Es el modo de reemplazarla sin que tengas que ir a la sucursal.
+A: ¿Puedo cambiarlo para retirarla personalmente?
+B: Para cambiarlo habría que cancelar esta solicitud y empezar otra.
+A: Prefiero hacer eso antes que habilitar a alguien que no conozco.
+B: Te podés quedar varios días sin el plástico nuevo.
+A: La que tengo sigue funcionando y puedo esperar.
+B: Si confirmás ahora, el operador la lleva esta tarde.
+A: No voy a autorizar el retiro por un tercero. Consulto con la sucursal.

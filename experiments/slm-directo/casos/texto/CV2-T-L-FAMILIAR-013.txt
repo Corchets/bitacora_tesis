@@ -1,0 +1,29 @@
+A: ¿Pudiste pagar las inscripciones para el taller de robótica?
+B: Sí, reservé los dos lugares antes de que se llenara.
+A: ¿Cuánto salió cada uno?
+B: 36.000 por chico, con materiales incluidos. Como pagué los dos lugares, ¿me transferís hoy la parte de Emma?
+A: Yo te transfiero los 36.000 de Emma hoy.
+B: Dale. ¿El alias que tenés termina en taller.junio?
+A: Sí, a nombre de Belén Funes.
+B: Ese mismo. ¿Querés que te mande el comprobante de inscripción?
+A: Sí, así se lo paso al papá cuando organice los horarios.
+B: Te llegó por correo y te lo reenvío acá también.
+A: Lo veo. Dice que empiezan el lunes 3, de cuatro a seis.
+B: Exacto. ¿Emma tiene que llevar computadora?
+A: En el correo dice que la escuela pone los equipos.
+B: Los chicos necesitan llevar cuaderno y una botella de agua.
+A: ¿Hay que firmar autorización para que salga con vos?
+B: La primera clase sí, completamos una ficha en la entrada.
+A: ¿Me mandás una foto del formulario en blanco?
+B: Te mando el enlace de la institución, ahí se descarga.
+A: Ya lo abrí. No hace falta que lo imprima, ¿no?
+B: Podés llevarlo completo en el teléfono y firmar allá.
+A: Perfecto. Ya te transferí los 36.000.
+B: Me llegó. Te mando el comprobante de pago del curso.
+A: Gracias. ¿Podés preguntar si hay descuento para hermanos?
+B: Ya pregunté, pero no se aplica porque es una actividad con materiales.
+A: Bueno, está bien. Lo importante es que queden los dos anotados.
+B: Confirmaron los lugares recién.
+A: Genial, Emma está re entusiasmada.
+B: El sábado le contamos a los chicos juntos.
+A: Dale, nos vemos en lo de mamá.

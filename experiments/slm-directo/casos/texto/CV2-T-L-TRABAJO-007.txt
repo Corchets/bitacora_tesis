@@ -1,0 +1,31 @@
+A: Llegó la tela para los uniformes, pero faltan dos rollos del color gris.
+B: ¿El remito dice que los mandaron en otro vehículo?
+A: Dice cuatro rollos entregados. Nosotros recibimos dos azules y dos negros.
+B: ¿El pedido compartido con el local de la otra cuadra era de dos grises?
+A: Sí, capaz los dejaron allá por error.
+B: Llamo a la encargada y le pregunto qué recibió.
+A: Yo reviso la etiqueta de los rollos. A veces el gris oscuro figura como grafito.
+B: Acá dice grafito en uno de los negros.
+A: Entonces uno de esos puede ser el que falta en la lista.
+B: ¿La muestra de color está en el cajón de corte?
+A: Sí, es la tira pegada en un cartón.
+B: Compará bajo la luz del taller, no al lado de la ventana.
+A: Este coincide. Entonces solo falta un rollo.
+B: Me contestó la encargada, recibió uno gris y uno azul.
+A: El proveedor quizá dividió el pedido.
+B: ¿Le mandaron otro remito a ese local?
+A: Dice que sí, pero no lo encuentra en el correo.
+B: Pedile una foto de la etiqueta del paquete.
+A: Ya la mandó. El gris está etiquetado como grafito.
+B: Entonces la diferencia es solo un rollo.
+A: El proveedor confirmó que lo trae mañana a la mañana.
+B: ¿Podemos empezar con lo que llegó?
+A: Sí, alcanza para cortar las mangas y los cuellos.
+B: ¿Quién recibe mañana el paquete?
+A: Yo estoy en el taller desde las ocho.
+B: Anoto que debe tocar el timbre lateral.
+A: ¿El local vecino necesita que le devolvamos algo?
+B: No, el pedido quedó bien de su lado.
+A: Perfecto. Actualizo el inventario con dos rollos usados.
+B: Y guardá el remito hasta que llegue el último.
+A: Lo pongo en la carpeta de compras.

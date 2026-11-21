@@ -1,0 +1,30 @@
+A: buen día llamo por una constancia de aportes que no me aparece en el portal
+B: hola la pediste desde la oficina o desde la página
+A: desde la página hace una semana me salió un número de solicitud
+B: me confirmás el período que estás consultando
+A: de enero a junio de este año en el trabajo de la cooperativa
+B: tenés el número de solicitud
+A: sí es 4106
+B: gracias veo que está en proceso porque falta revisar un período
+A: yo presenté los recibos junto con el formulario
+B: aparece cargada la documentación de marzo y abril
+A: faltan enero febrero mayo y junio entonces
+B: el sistema todavía no los asoció a la solicitud
+A: tengo que volver a subirlos
+B: si conservás los recibos podés agregarlos desde el detalle del trámite
+A: me pide elegir archivo o sacar una foto
+B: podés adjuntar un archivo por mes y revisar que se lean las fechas
+A: los tengo en pdf en la computadora del trabajo
+B: querés guardar esta consulta y retomarla después desde esa computadora
+A: sí prefiero no hacerlo ahora desde el teléfono
+B: queda guardada como borrador durante siete días
+A: también puedo llevarlos a la oficina
+B: sí con turno para documentación pero desde el portal suele ser más rápido
+A: no me molesta ir tengo que pasar por ahí el jueves
+B: hay un turno a las nueve y cuarto en la sede de la plaza
+A: tomalo por favor salgo temprano ese día
+B: para reservarlo confirmame tu nombre completo y localidad
+A: marina lescano de villa norte
+B: listo quedó el turno para el jueves
+A: gracias llevo los recibos impresos
+B: perfecto que tengas buen día

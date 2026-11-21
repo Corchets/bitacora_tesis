@@ -1,0 +1,30 @@
+A: Buenas, mi hijo tiene control mañana y hoy empezó con tos. No sé si conviene llevarlo.
+B: Hola. ¿Tiene fiebre o se siente decaído?
+A: No, está jugando normal. Solo tose cada tanto.
+B: La consulta es de rutina, ¿verdad?
+A: Sí, el control anual con la pediatra.
+B: El consultorio pide que nos avisen antes si hay síntomas respiratorios.
+A: ¿Puedo mantener el horario y entrar con barbijo?
+B: Puedo consultar con la profesional. ¿A qué hora era el turno?
+A: Mañana a las diez y media.
+B: Hay lugar por videollamada a las cuatro, si les resulta más cómodo.
+A: Para el control de peso prefiero ir en persona.
+B: Entonces puedo ofrecerte el viernes a las nueve, cuando hay menos pacientes en sala.
+A: El viernes él tiene escuela. ¿Hay algo después del mediodía?
+B: El lunes a las tres y cuarto.
+A: Ese horario me sirve. ¿Se pierde el turno si lo cambio?
+B: No, lo reprogramamos sin costo.
+A: Bueno, pasalo para el lunes.
+B: ¿Querés dejarlo con la misma doctora?
+A: Sí, ella conoce su historia.
+B: Listo, lunes 16 a las tres y cuarto.
+A: ¿Tengo que llevar la libreta de vacunas?
+B: Sí, si la encontrás. La última vez no estaba actualizada.
+A: La busco esta noche.
+B: Si no la encontrás, la escuela puede tener una copia de algunas vacunas.
+A: Le pregunto a la secretaria mañana.
+B: Perfecto. ¿Te llega la confirmación al mismo teléfono?
+A: Sí, termina en 38.
+B: Quedó enviado el mensaje.
+A: Gracias por orientarme.
+B: De nada.

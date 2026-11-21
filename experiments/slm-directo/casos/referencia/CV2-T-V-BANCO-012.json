@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-012",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-012",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    }
+  ],
+  "que_prueba": "Un comprobante de pago de patente se usa para solicitar la contraseña del portal en una supuesta recuperación. Prueba pedido de secreto distinto del código de autenticación; la persona se niega.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, primera solicitud de ingresar la clave actual. La referencia al dispositivo en línea 12 no es el pedido crítico. Sin cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Una gestión de patente lleva a iniciar el cambio de dispositivo para recuperar un comprobante. Prueba una acción de seguridad inducida en lugar de pedir directamente una credencial."
+}

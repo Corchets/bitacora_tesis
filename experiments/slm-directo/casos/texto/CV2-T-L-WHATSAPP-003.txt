@@ -1,0 +1,27 @@
+A: hola no me aparece el grupo de guardia en el teléfono nuevo
+B: buen día te mandaron la invitación al número que termina en 19
+A: ese era el del aparato viejo ahora uso otro
+B: el número nuevo ya está activo en whatsapp
+A: sí lo cambié el sábado y puedo escribirle a todos
+B: querés que actualicemos el contacto de la lista de guardia
+A: por favor el número termina en 64
+B: para anotarlo me decís el nombre como figura en el listado
+A: franco beira del turno tarde
+B: gracias franco te ubico
+A: me mandás de nuevo el enlace del grupo
+B: sí pero antes saco el número anterior de la lista
+A: dale porque ahí ya no recibo mensajes
+B: te llegó la invitación al nuevo
+A: ahora sí aparece guardia taller
+B: fijate que sea el grupo con el logo amarillo del taller
+A: sí hay cinco personas y está fijado el cronograma
+B: bueno ya estás agregado
+A: veo los mensajes desde el domingo
+B: te falta el aviso de cambio de turno
+A: sí el de mañana
+B: está en el mensaje fijado dice que arrancamos media hora antes
+A: lo encontré gracias
+B: querés que te pase también el contacto de la supervisora
+A: no ya lo tengo guardado
+B: listo entonces actualizo la lista del equipo
+A: perfecto

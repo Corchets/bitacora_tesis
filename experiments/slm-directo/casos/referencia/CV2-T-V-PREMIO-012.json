@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-PREMIO-012",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-012",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": 12,
+  "pedido": "REQUEST_SECRET",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECRET"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "cumplimiento",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una entrada doble se usa para inducir el ingreso de la contraseña de la cuenta del teatro desde un aviso. Prueba un pedido indirecto de secreto permanente como paso para vincular una recompensa.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nT_R línea 11, instrucción de ingresar la contraseña del teatro. T_C línea 12, la persona confirma que la ingresó; sin dato real de cuenta.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Una entrada doble se usa para inducir el ingreso de la contraseña de la cuenta del teatro desde un aviso. Prueba un pedido indirecto de secreto permanente como paso para vincular una recompensa."
+}

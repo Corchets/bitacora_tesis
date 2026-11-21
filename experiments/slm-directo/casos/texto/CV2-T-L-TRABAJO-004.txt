@@ -1,0 +1,29 @@
+A: ¿Ya definieron dónde hacemos el almuerzo de cierre?
+B: La sala grande queda libre el viernes, pero hay que pedir catering.
+A: ¿Cuántas personas confirmaron?
+B: Somos once, dos todavía no respondieron.
+A: ¿Pedimos comida para doce por si viene alguien más?
+B: Podríamos, pero primero escribo al grupo para cerrar la cantidad.
+A: ¿Hay opciones sin gluten?
+B: El proveedor tiene una bandeja aparte, pero pide avisar con un día.
+A: Paula y Ramiro habían pedido esa opción en la reunión anterior.
+B: Sí, lo anoto. ¿Querés que hagamos una lista de platos?
+A: Mejor que cada persona elija entre dos opciones, así no compramos de más.
+B: El menú cuesta 14.500 por persona con bebida.
+A: ¿Lo paga la oficina o cada uno pone su parte?
+B: El presupuesto cubre una parte. El resto lo dividimos entre quienes asistan.
+A: Entonces esperamos las dos respuestas y confirmamos el número.
+B: Ya contestó una persona, viene. La otra está de vacaciones.
+A: Quedamos doce conmigo.
+B: La oficina aporta 90.000, el resto suma 84.000.
+A: ¿Querés que mande una planilla con el importe por persona?
+B: Sí, así todos ven cuánto corresponde y pueden marcar si ya pagaron.
+A: La preparo ahora. ¿El proveedor necesita una seña hoy?
+B: Sí, 30.000 para reservar la fecha.
+A: La cuenta de gastos tiene suficiente. ¿La transferencia la hacés vos?
+B: La hago desde administración y te mando el comprobante.
+A: Listo, yo confirmo el menú con las opciones especiales.
+B: ¿Lo servimos a la una o a la una y media?
+A: A la una y media, así termina la reunión de equipo.
+B: Bien, ya le escribo al proveedor.
+A: Gracias por coordinarlo.

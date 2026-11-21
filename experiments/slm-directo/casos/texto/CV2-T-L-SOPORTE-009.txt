@@ -1,0 +1,26 @@
+A: Hola, no encuentro la factura de la reparación de la notebook.
+B: Buenas. ¿La emitiste desde el portal o te la mandaron por correo?
+A: Desde el portal, el viernes. Recuerdo el código 830, pero no el resto.
+B: ¿La factura está a nombre de tu estudio?
+A: Sí, Taller Nube. Era por un cambio de batería.
+B: ¿Tenés acceso al portal desde la computadora?
+A: Sí, la sesión quedó abierta.
+B: Entrá en comprobantes emitidos y buscá por fecha, no hace falta recordar todo el código.
+A: Veo una factura del viernes por 64 mil.
+B: ¿Coincide con lo que cobraste?
+A: Sí. El código termina en 830 y el cliente aparece como Estudio Ladera.
+B: Entonces es la factura correcta. ¿Querés descargarla de nuevo?
+A: Sí, la necesito para la carpeta del mes.
+B: Elegí “descargar PDF” en el detalle.
+A: Me muestra una vista previa, pero no sé en qué carpeta queda guardada.
+B: El navegador la guarda en descargas salvo que selecciones otra ubicación.
+A: Ahí la encontré. ¿Puedo cambiarle el nombre para ubicarla más rápido?
+B: Sí, por ejemplo “factura batería viernes”. El nombre no cambia el documento original.
+A: Ya lo hice y la moví a octubre.
+B: ¿La carpeta está respaldada?
+A: Sí, se sincroniza con mi disco externo al final del día.
+B: Perfecto. El portal también conserva el comprobante si necesitás volver a bajarlo.
+A: Bueno, ya no tengo que buscar entre los correos.
+B: ¿Querés revisar otro comprobante?
+A: No, era solo ese. Gracias.
+B: A vos.

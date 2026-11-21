@@ -1,0 +1,42 @@
+{
+  "case_id": "CV2-T-V-PREMIO-001",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-PREMIO-001",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 12,
+  "t_c_linea": null,
+  "pedido": "REQUEST_PERSONAL_DATA",
+  "evidencia": [
+    {
+      "linea": 2,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 12,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_PERSONAL_DATA"
+      ]
+    },
+    {
+      "linea": 21,
+      "evento": "rechazo",
+      "etiquetas": []
+    }
+  ],
+  "que_prueba": "Una supuesta preselección todavía no publicada se usa para pedir DNI y fecha por teléfono, desalentar el correo general y presionar con perder el lugar, sin aportar convocatoria escrita. A no entrega los datos y decide verificar con la escuela. Prueba un pedido directo de datos bajo urgencia y canal no verificable.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-PREMIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md) y [D08](../../../../docs/gestion/MAPA-DECISIONES.md) siguen abiertas. T_R línea 12, pedido directo de DNI y fecha. T_C null: A se niega en línea 21 y propone verificar por contactos conocidos. No se divulgan datos. La feria y el beneficio son ficticios. En r02, A atiende primero y B desarrolla las intervenciones del supuesto llamante; las letras no codifican identidad ni clase.",
+  "particion": "test_reservado",
+  "familia": "premio",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-PREMIO-01",
+  "situacion": "Antes de publicar resultados de una feria, quien llama pide DNI y fecha de nacimiento por teléfono, desalienta usar el correo general y presiona con perder una beca; no ofrece una convocatoria escrita y la persona se niega."
+}

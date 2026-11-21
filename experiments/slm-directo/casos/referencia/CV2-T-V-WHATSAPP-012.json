@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-WHATSAPP-012",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-WHATSAPP-012",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 13,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 13,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    }
+  ],
+  "que_prueba": "Un cambio en el rol del grupo escolar lleva a mandar una serie de registro al supuesto administrador. Prueba cómo un pedido de código se presenta como actualización de destinatarios, sin evidencia de que esa función exista.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 13, donde comienza el pedido indirecto; también podría ubicarse en línea 14, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. T_R línea 13, instrucción de enviar la serie para actualizar el perfil; sin cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Un cambio en el rol del grupo escolar lleva a mandar una serie de registro al supuesto administrador. Prueba cómo un pedido de código se presenta como actualización de destinatarios, sin evidencia de que esa función exista."
+}

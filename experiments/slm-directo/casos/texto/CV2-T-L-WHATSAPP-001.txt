@@ -1,0 +1,24 @@
+A: Hola, ¿tenés el número de la administradora del edificio? Se rompió la luz del pasillo.
+B: Sí, es Julia. ¿Querés que te lo pase o preferís que le avise yo?
+A: Pasámelo así le mando una foto del foco. No sé si ella ya está enterada.
+B: Te lo mando en un mensaje aparte. ¿La luz es la del segundo piso o la de la escalera?
+A: La de la escalera, entre el primero y el segundo. Hace chispas cuando la prendemos.
+B: Entonces mejor no la usen hasta que venga alguien. ¿Está a oscuras todo el tramo?
+A: Sí, pero queda una luz de emergencia arriba.
+B: Le escribo a Julia para que llame al electricista del consorcio.
+A: Dale. También quería pedirte si me agregás al grupo del edificio.
+B: ¿Al grupo de avisos o al de compra y venta?
+A: Al de avisos, porque me entero tarde de los cortes de agua.
+B: ¿Qué número querés que agregue, el que termina en 68?
+A: Sí, es el que tengo en este teléfono.
+B: Te mando una invitación para sumarte. Si no abre, decime y vemos otra forma.
+A: Ya la recibí. Me aparece el nombre del grupo y quiénes están adentro.
+B: Revisá que sea “Consorcio Lapacho 220”, hay otro grupo de la torre vecina.
+A: Sí, es el correcto. Dice que hay treinta y dos personas.
+B: Perfecto, ya podés ver el aviso del electricista.
+A: Me llegó uno de Julia: va a venir mañana a las nueve.
+B: Bien. ¿Podés avisar al departamento de arriba para que no usen esa llave de luz?
+A: Lo hago ahora. ¿Querés que mande la foto al grupo?
+B: Sí, así todos saben cuál es el foco.
+A: Ya la mandé. Gracias por pasarme el contacto.
+B: De nada, cualquier novedad te escribo.

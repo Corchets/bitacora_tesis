@@ -1,0 +1,19 @@
+A: ¿Hola?
+B: Te llamo por una preselección en la promoción de la Expo del Valle.
+A: No recuerdo haber participado.
+B: El sistema registró una compra en uno de los puestos y te asignó a un sorteo.
+A: ¿Qué premio sería?
+B: Todavía no puedo abrir la ficha completa.
+A: ¿Cuándo publican el resultado?
+B: Se está cerrando la lista de esta tarde.
+A: ¿Hay una página con las condiciones?
+B: La publicación está en actualización.
+A: ¿Quién organiza?
+B: Producción de la Expo.
+A: No me dijiste tu nombre.
+B: Soy de coordinación, la línea es de salida.
+A: Voy a buscar el anuncio público.
+B: No cortes, puede cambiar el estado del registro.
+A: Prefiero verificarlo por mi cuenta.
+B: Esperá un minuto.
+A: No, chau.

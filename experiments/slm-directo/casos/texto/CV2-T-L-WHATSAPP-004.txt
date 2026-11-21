@@ -1,0 +1,25 @@
+A: Hola, soy la mamá de Emma. No me llegan los avisos del equipo sub doce.
+B: Buenas. ¿Estás en el grupo de familias o solo en el de viajes?
+A: Solo en el de viajes, me agregó otra mamá para la salida del domingo.
+B: El grupo informativo es distinto. ¿Querés que te agregue?
+A: Sí, así veo los cambios de cancha y los horarios.
+B: Decime tu nombre como aparece en la lista de contactos de la escuela.
+A: Valeria Luján. Emma juega con la camiseta número 8.
+B: La encontré. ¿El número de teléfono que termina en 05 es tuyo?
+A: No, ese era el teléfono de mi hermana. El mío termina en 71.
+B: Gracias por aclararlo. Te mando la invitación al que me confirmaste.
+A: Me llegó un mensaje con el nombre “Hockey sub 12”.
+B: Sí, ese es. El grupo tiene a las familias y a la entrenadora.
+A: ¿También está el grupo de los lunes?
+B: No, este se usa para los partidos y avisos generales. El lunes tienen otro chat de coordinación.
+A: Está bien. ¿Podés mandarme el horario de la semana que viene?
+B: Martes y jueves, de seis a siete y media, en la cancha chica.
+A: ¿El jueves llevan camiseta azul o blanca?
+B: Azul. El sábado juegan un amistoso y ese día llevan la blanca.
+A: Lo anoto. Me había confundido con el grupo de viajes.
+B: ¿Querés que te pase el contacto del delegado para el amistoso?
+A: Sí, por favor. ¿Está en el mensaje fijado?
+B: Lo dejé fijado recién, junto con el punto de encuentro.
+A: Ya lo veo. Salimos desde el club a las ocho.
+B: Exacto. Bienvenida al grupo.
+A: Gracias, así no dependo de que Emma se acuerde de contarme todo.

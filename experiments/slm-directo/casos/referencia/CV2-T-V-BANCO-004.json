@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-BANCO-004",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-BANCO-004",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 9,
+  "t_c_linea": null,
+  "pedido": "REQUEST_SECURITY_ACTION",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 9,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_SECURITY_ACTION"
+      ]
+    }
+  ],
+  "que_prueba": "Una solicitud no reconocida de aumento se usa para inducir la confirmación de un límite mayor, bajo la falsa explicación de que el mismo botón lo cancela. Prueba un pedido de seguridad engañoso con contradicción observable en la pantalla; no hay cumplimiento.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-CLAVE-CAMBIO-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** Referencia de trabajo D07 y reserva D08; sin revisión humana. T_R línea 9, instrucción de confirmar un aumento a pesar de que el llamante lo presenta como baja. La pantalla que ve la persona contradice el supuesto propósito; no hay cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "banco",
+  "dificultad": "directo",
+  "tipo_legitima": null,
+  "variante_asr": false,
+  "escenario_base": "SC-CLAVE-CAMBIO-01",
+  "situacion": "Una solicitud no reconocida de aumento de límite se usa para guiar la confirmación de un cambio en la aplicación. Prueba una petición de acción de seguridad con instrucciones contradictorias; la persona no acepta."
+}

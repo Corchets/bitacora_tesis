@@ -1,0 +1,30 @@
+A: Llamo del centro de límites del banco. ¿Vos pediste aumentar el monto diario?
+B: No, el que tengo me alcanza.
+A: Apareció una solicitud de cuarenta mil adicionales.
+B: ¿Desde dónde se pidió?
+A: Desde un equipo que todavía figura como autorizado.
+B: Tengo un teléfono viejo asociado.
+A: Para cerrarla abrí la app y entrá en límites.
+B: Veo el monto que uso ahora.
+A: Confirmá el cambio a un límite mayor para darlo de baja; la pantalla usa el mismo botón.
+B: Me aparece “autorizar aumento”, no “rechazar”.
+A: El sistema lo muestra así antes de revertirlo.
+B: ¿No debería reducir el límite para cancelarlo?
+A: Primero se registra la operación y después se elimina.
+B: Eso suena al revés.
+A: Si no queda cerrado ahora, el monto mayor puede activarse esta noche.
+B: No voy a autorizar un aumento que no pedí.
+A: No es un aumento real, es el paso de cancelación.
+B: Voy a consultar al banco desde la aplicación.
+A: Sin terminar el paso no puedo generar el reclamo.
+B: Corto y lo verifico.
+B: No voy a confirmar un límite mayor para después pedir que lo bajes.
+A: Es el único botón que habilita la revisión.
+B: La pantalla dice aumento de límite, no baja.
+A: El texto tarda en actualizarse cuando hay muchas solicitudes.
+B: No voy a seguir tocando opciones.
+A: ¿Querés que te comunique con el área de tarjetas?
+B: Voy a llamar al número que figura atrás de mi tarjeta.
+A: La línea puede tener demora.
+B: Espero, así confirmo que estoy hablando con el banco.
+A: Entiendo.
