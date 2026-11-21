@@ -1,0 +1,231 @@
+{
+ "metal (2026-11-20, sin ASR, sin ritmo)": {
+  "consultas": 83,
+  "validas": 83,
+  "linea_n": 78,
+  "linea_med": 793.1152295204811,
+  "linea_p95": 1031.3276670640334,
+  "linea_max": 1095.2777500497177,
+  "procesar_med": 205.353,
+  "procesar_p95": 303.47,
+  "generar_med": 564.528,
+  "generar_p95": 708.137,
+  "tokens_gen_med": 14,
+  "tokens_nuevos_med": 63,
+  "tokens_cache_med": 968,
+  "avisos": 5,
+  "aviso_con_motivo_med": 3216.080875019543,
+  "aviso_con_motivo_max": 4481.524290982634,
+  "aviso_sin_esperar_med": 723.7868750235066,
+  "aviso_sin_esperar_max": 923.6167500494048,
+  "memoria_gib": {
+   "footprint_pico": 0.5833015441894531,
+   "residente_pico": 2.9792938232421875
+  },
+  "termico": [
+   "fair",
+   "serious"
+  ],
+  "servidor_med": 774.8689999999999,
+  "servidor_p95": 1011.557,
+  "servidor_max": 1074.082,
+  "termico_muestras": {
+   "fair": 12,
+   "serious": 10
+  },
+  "cargando_muestras": {
+   "1": 22
+  },
+  "bateria_inicio_fin": [
+   0.85,
+   0.85
+  ],
+  "recursos_desde_hasta": [
+   "2026-11-20T20:08:31-03:00",
+   "2026-11-20T20:10:16-03:00"
+  ],
+  "disponible_min_gib": 2.7135725021362305
+ },
+ "asr-y-detector": {
+  "consultas": 83,
+  "validas": 83,
+  "linea_n": 78,
+  "linea_med": 747.0904795918614,
+  "linea_p95": 841.2083329167217,
+  "linea_max": 1150.2545829862356,
+  "procesar_med": 152.261,
+  "procesar_p95": 181.389,
+  "generar_med": 504.966,
+  "generar_p95": 520.222,
+  "tokens_gen_med": 14,
+  "tokens_nuevos_med": 63,
+  "tokens_cache_med": 968,
+  "avisos": 5,
+  "aviso_con_motivo_med": 2967.422334011644,
+  "aviso_con_motivo_max": 3544.3586671026424,
+  "aviso_sin_esperar_med": 747.2712090238929,
+  "aviso_sin_esperar_max": 762.1669160434976,
+  "memoria_gib": {
+   "footprint_pico": 1.390812873840332,
+   "residente_pico": 2.6245269775390625
+  },
+  "termico": [
+   "nominal",
+   "fair"
+  ],
+  "servidor_med": 657.4390000000001,
+  "servidor_p95": 700.135,
+  "servidor_max": 1089.55,
+  "retraso_med_s": 0.005,
+  "retraso_max_s": 0.006,
+  "retrasadas_mas_de_1s": 0,
+  "termico_muestras": {
+   "nominal": 95,
+   "fair": 86
+  },
+  "cargando_muestras": {
+   "0": 181
+  },
+  "bateria_inicio_fin": [
+   0.75,
+   0.7
+  ],
+  "recursos_desde_hasta": [
+   "2026-11-21T13:10:20-03:00",
+   "2026-11-21T13:25:21-03:00"
+  ],
+  "disponible_min_gib": 1.917825698852539,
+  "asr": {
+   "terminado": true,
+   "carga_ms": 4426,
+   "faltaban_s_al_cargar": 144.467,
+   "finales": 167,
+   "parciales": 851,
+   "final_proceso_ms_med": 230.1,
+   "final_proceso_ms_max": 470.2,
+   "parcial_proceso_ms_med": 151.8,
+   "final_atraso_s_med": 0.235,
+   "final_atraso_s_max": 0.475,
+   "audio_s": 737.94,
+   "bloques": 18449,
+   "atraso_mediana_s": 0.006,
+   "atraso_p95_s": 0.172,
+   "atraso_max_s": 0.475,
+   "bloques_mas_de_1s": 0,
+   "ultimo_evento": {
+    "tipo": "fin",
+    "reloj": "2026-11-21T13:25:07.759",
+    "audio_s": 737.94,
+    "bloques": 18449,
+    "atraso_mediana_s": 0.006,
+    "atraso_p95_s": 0.172,
+    "atraso_max_s": 0.475,
+    "bloques_mas_de_1s": 0
+   }
+  }
+ },
+ "solo-detector": {
+  "consultas": 83,
+  "validas": 83,
+  "linea_n": 78,
+  "linea_med": 818.2068954920396,
+  "linea_p95": 927.2149159805849,
+  "linea_max": 939.1516658943146,
+  "procesar_med": 177.685,
+  "procesar_p95": 205.459,
+  "generar_med": 508.578,
+  "generar_p95": 513.342,
+  "tokens_gen_med": 14,
+  "tokens_nuevos_med": 63,
+  "tokens_cache_med": 968,
+  "avisos": 5,
+  "aviso_con_motivo_med": 3294.3061250261962,
+  "aviso_con_motivo_max": 3549.7747079934925,
+  "aviso_sin_esperar_med": 861.3210420589894,
+  "aviso_sin_esperar_max": 895.629332982935,
+  "memoria_gib": {
+   "footprint_pico": 0.5755043029785156,
+   "residente_pico": 3.02630615234375
+  },
+  "termico": [
+   "nominal"
+  ],
+  "servidor_med": 686.8205,
+  "servidor_p95": 715.336,
+  "servidor_max": 719.705,
+  "retraso_med_s": 0.005,
+  "retraso_max_s": 0.01,
+  "retrasadas_mas_de_1s": 0,
+  "termico_muestras": {
+   "nominal": 181
+  },
+  "cargando_muestras": {
+   "0": 181
+  },
+  "bateria_inicio_fin": [
+   0.7,
+   0.65
+  ],
+  "recursos_desde_hasta": [
+   "2026-11-21T13:45:42-03:00",
+   "2026-11-21T14:00:43-03:00"
+  ],
+  "disponible_min_gib": 2.729060173034668
+ },
+ "seco-mac": {
+  "consultas": 83,
+  "validas": 83,
+  "linea_n": 78,
+  "linea_med": 355.2291459636763,
+  "linea_p95": 389.25162504892796,
+  "linea_max": 567.5670000491664,
+  "procesar_med": 97.798,
+  "procesar_p95": 110.783,
+  "generar_med": 247.953,
+  "generar_p95": 268.806,
+  "tokens_gen_med": 14,
+  "tokens_nuevos_med": 63,
+  "tokens_cache_med": 968,
+  "avisos": 5,
+  "aviso_con_motivo_med": 1423.0787080014125,
+  "aviso_con_motivo_max": 1692.5869999686256,
+  "aviso_sin_esperar_med": 360.9919589944184,
+  "aviso_sin_esperar_max": 371.5328749967739,
+  "memoria_gib": {},
+  "termico": [],
+  "servidor_med": 346.522,
+  "servidor_p95": 374.657,
+  "servidor_max": 556.853,
+  "retraso_med_s": 0.005,
+  "retraso_max_s": 0.01,
+  "retrasadas_mas_de_1s": 0,
+  "asr": {
+   "terminado": true,
+   "carga_ms": 926,
+   "faltaban_s_al_cargar": 44.059,
+   "finales": 167,
+   "parciales": 851,
+   "final_proceso_ms_med": 191.3,
+   "final_proceso_ms_max": 602.1,
+   "parcial_proceso_ms_med": 124.8,
+   "final_atraso_s_med": 0.195,
+   "final_atraso_s_max": 0.607,
+   "audio_s": 737.94,
+   "bloques": 18449,
+   "atraso_mediana_s": 0.006,
+   "atraso_p95_s": 0.137,
+   "atraso_max_s": 0.607,
+   "bloques_mas_de_1s": 0,
+   "ultimo_evento": {
+    "tipo": "fin",
+    "reloj": "2026-11-21T13:01:49.338",
+    "audio_s": 737.94,
+    "bloques": 18449,
+    "atraso_mediana_s": 0.006,
+    "atraso_p95_s": 0.137,
+    "atraso_max_s": 0.607,
+    "bloques_mas_de_1s": 0
+   }
+  }
+ }
+}
