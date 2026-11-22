@@ -79,6 +79,7 @@ bitacora_tesis/
 │   ├── ingenieria/
 │   │   ├── ALTERNATIVAS-CAPTURA-AUDIO.md # Comparación replay vs VoIP vs altavoz vs telefonía
 │   │   ├── ARQUITECTURA.md              # Arquitectura conceptual de septiembre a noviembre (con notas)
+│   │   ├── PROPUESTA-APP-ANDROID.md     # Propuesta sin discutir: la app Android completa en una llamada
 │   │   └── adr/                         # Decisiones de arquitectura duraderas (0001…0009)
 │   ├── evaluacion/
 │   │   ├── METRICAS.md            # Fórmulas de tiempos, márgenes de anticipación y falsas alarmas

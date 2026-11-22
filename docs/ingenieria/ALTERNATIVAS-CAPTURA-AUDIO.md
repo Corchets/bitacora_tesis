@@ -28,6 +28,10 @@ Las fuentes `VOICE_CALL`, `VOICE_UPLINK` y `VOICE_DOWNLINK` requieren ese permis
 que no está disponible para aplicaciones de terceros:
 [`MediaRecorder.AudioSource`](https://developer.android.com/reference/android/media/MediaRecorder.AudioSource).
 
+> **Nota del 2026-11-22:** cómo sería la app Android completa con la llamada VoIP propia, y por qué las otras
+> opciones no sirven en un teléfono, está en [PROPUESTA-APP-ANDROID.md](PROPUESTA-APP-ANDROID.md) (propuesta sin
+> discutir).
+
 ## Implementación escalonada tras D05
 
 ### Nivel 1 — Base científica, obligatoria
