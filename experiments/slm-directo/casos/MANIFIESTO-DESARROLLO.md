@@ -15,7 +15,7 @@ Fecha: 2026-11-09. Lo preparó un agente con las decisiones de Mateo Antenucci d
 2. **Un solo manifiesto de desarrollo** que diga qué cuenta y qué queda como histórico: este archivo y
    [`MANIFIESTO-DESARROLLO.json`](MANIFIESTO-DESARROLLO.json).
 3. **Las estafas sin pedido no llevan una hoja aparte.** La pregunta a/b/c se suma al formulario de #145
-   ([`PREGUNTA-145-ESTAFAS-SIN-PEDIDO.md`](../../../docs/corpus/PREGUNTA-145-ESTAFAS-SIN-PEDIDO.md)).
+   ([`PREGUNTA-145-ESTAFAS-SIN-PEDIDO.md`](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/docs/corpus/PREGUNTA-145-ESTAFAS-SIN-PEDIDO.md)).
 
 ## Qué cuenta
 

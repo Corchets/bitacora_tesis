@@ -1,0 +1,20 @@
+A: Te hablo del equipo de organización del viaje de egresados de adultos del centro cultural.
+B: ¿Cambió el horario de la combi?
+A: No, pero estamos confirmando a quién se le manda la ubicación final.
+B: Yo tengo el punto de encuentro guardado.
+A: El lugar se movió una cuadra por una obra.
+B: ¿A qué calle?
+A: Te la paso cuando confirmemos el contacto de cada pasajero.
+B: ¿Cómo se confirma?
+A: Te llega un código de WhatsApp, decímelo para dejar tu número habilitado.
+B: ¿No alcanza con el teléfono que puse en la reserva?
+A: La empresa necesita comprobar que el número esté activo.
+B: ¿Qué empresa?
+A: Transporte Ruta Clara.
+B: No me figura esa empresa en el recibo.
+A: La contratación se hizo con un proveedor nuevo después de la mudanza de parada.
+B: ¿Puedo llamar al centro cultural?
+A: La oficina ya cerró por hoy.
+B: No voy a dar un código sin poder verificar la salida.
+A: Sin confirmar, no puedo garantizar que te llegue la ubicación.
+B: La busco mañana con la coordinadora.

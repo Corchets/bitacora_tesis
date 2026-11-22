@@ -181,3 +181,8 @@ aviso; la exploración pasó solo la vista principal y siguió hasta el final.
 - **Falta lo que ningún conjunto tiene: estafas reales argentinas.** Las generadas piden un umbral bajo y las coreanas
   aguantan uno alto. Cuál se parece más a una estafa real de acá no se puede saber con estos datos.
 - Las corridas del test y de desarrollo van a `reserva/test`. Las de las coreanas y las legítimas reales no se suben.
+
+> **Nota del 2026-11-20:** esta restricción ya no corre. Los dos conjuntos están publicados en el repositorio (el coreano
+> en el PR #185 y las legítimas reales en el PR #190, con el aviso de derechos en
+> [`casos/externo/README.md`](../../casos/externo/README.md)), y Mateo decidió que se pueden leer, mandar a una API y
+> subir sus corridas. La reserva de test sigue aparte, en `reserva/test`.

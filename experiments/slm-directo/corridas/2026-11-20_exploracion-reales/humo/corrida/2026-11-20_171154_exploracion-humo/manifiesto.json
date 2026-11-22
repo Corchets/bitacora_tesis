@@ -1,0 +1,472 @@
+{
+  "inicio": "2026-11-20T17:11:54",
+  "comando": "python correr.py --conjunto /content/resultados-exploracion-reales/conjuntos/desarrollo --casos CV2-D-V-ORGANISMO_PREVISIONAL-004,CV2-D-L-BANCO-001,SC-WA-CODE-01-e01 --prompts c-consejos-corte-riesgo,p-lista-corte-riesgo,p-escalera-corte-riesgo,p-niveles-corte-riesgo,c-rumbo-corte-riesgo,p-sino-corte-riesgo,p-minimo-corte-riesgo --seguir-tras-aviso --modelos gemma4:e2b-it-q4_K_M --num-ctx 4096 --seed 42 --sin-reglas --hablantes rol --etiqueta exploracion-humo --salida /content/resultados-exploracion-reales/humo/corrida",
+  "codigo": {
+    "commit": "7c52850c7d1c338fe2b13f41fd3d8a2171766f83",
+    "cambios_sin_commit_en_la_carpeta": false
+  },
+  "maquina": {
+    "sistema": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "arquitectura": "x86_64",
+    "procesador": "x86_64",
+    "nucleos_logicos": 2,
+    "ram_total_gb": 12.7,
+    "python": "3.13.16"
+  },
+  "politica": "aviso_unico_hasta_aviso",
+  "modo_termino": "diagnostico-completo",
+  "solo_otra": false,
+  "filtro_tito": null,
+  "tito_viejo_2": null,
+  "particion": "desarrollo",
+  "conjunto": {
+    "nombre": "desarrollo",
+    "ruta": "/content/resultados-exploracion-reales/conjuntos/desarrollo",
+    "fuentes": {
+      "alcance-140.txt": "5dd1eb8899dbbd54f0b43fe1f4fdf674b88bfa5b00a534dff24d9a213a450145",
+      "casos": "experiments/slm-directo/casos (partición desarrollo)",
+      "roles-protegida.json": "336bf580ac230a0f1db0729c27630181daec64c704a0654a5b7c911dab31fbcd"
+    },
+    "conjunto_sha256": "5e6316759453eb599e56001208271036b19ab8bbd690543121951bfb15864ab8"
+  },
+  "ollama": {
+    "url": "http://127.0.0.1:11434",
+    "version": "0.40.14",
+    "digests": {
+      "gemma4:e2b-it-q4_K_M": "b37049369adfe3d2b653af0ab301a062ca5cbe96ace6aa0d3f2559ee9b563fc2"
+    },
+    "arranque_ms": 11,
+    "unidad": "ms"
+  },
+  "parametros_slm": {
+    "num_ctx": 4096,
+    "seed": 42,
+    "temperatura": 0.0,
+    "timeout_s": 120.0,
+    "hardware": null,
+    "corte_riesgo": {
+      "num_predict": 14,
+      "formato": "el esquema JSON del prompt",
+      "logprobs": false,
+      "lectura": "el riesgo del texto cortado, seguido de su coma (detectores.leer_riesgo_cortado)",
+      "alerta_sugerida": "riesgo >= 0.3",
+      "etapa2": "solo en el primer aviso de la llamada: mismos mensajes + lo escrito hasta el riesgo, cerrado como JSON, como assistant + motivo_c_corte.txt, con ESQUEMA_MOTIVO y num_predict 512"
+    }
+  },
+  "prompts": {
+    "c-consejos-corte-riesgo": {
+      "huella": "80d5c9b5154db618",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nQue el número no esté agendado pesa. Valen los consejos de siempre de los bancos y los organismos: a quien llamó no se le dicta un código que llegó por mensaje, una clave ni los datos de una tarjeta; ningún banco ni organismo pide por teléfono transferir plata, instalar un programa ni operar en el cajero o en la app siguiendo sus instrucciones; y un familiar o un conocido que llama desde un número desconocido para pedir plata es una de las estafas más comunes. Ante la duda, lo que corresponde es cortar y llamar uno mismo al número oficial. Si OTRA va hacia alguno de esos pedidos, tenelo en cuenta en el riesgo, aunque la charla sea amable.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Si ya se parece a una estafa, conviene avisar aunque todavía no haya un pedido.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.\n- \"alerta_sugerida\": true si ya conviene avisarle a PROTEGIDA que puede ser una estafa; si no, false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que diga por qué puede ser una estafa; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente la frase de OTRA que más lo muestra; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "p-lista-corte-riesgo": {
+      "huella": "77155bf5fde094aa",
+      "texto": "Cuidás a PROTEGIDA, que atendió una llamada de un número desconocido. OTRA es quien la llamó. La llamada sigue: ves lo dicho hasta ahora.\n\nNo se puede saber quién es OTRA: lo que dice ser no cuenta, ni a favor ni en contra. Fijate solo en qué le pide a PROTEGIDA.\n\nPedidos peligrosos:\n- dictar un código que le llegó por mensaje\n- decir una clave o un PIN\n- dar los datos completos de una tarjeta\n- mandar foto del documento o de la cara\n- transferir o pagar durante la llamada\n- mandarle o prestarle plata, aunque diga ser un familiar o un conocido\n- instalar un programa o compartir la pantalla\n- seguir sus instrucciones en el cajero o en la app del banco\n- cortar y llamar a un número que le dicta\n\nOTRA prepara un pedido peligroso cuando todavía no lo hizo pero ya lo anunció, o le hace dar el paso previo: esperar un código, buscar la tarjeta, abrir la app del banco, ir al cajero.\n\nCualquier otro pedido es normal.\n\nRespondé solo con un objeto JSON, con estos cuatro campos en este orden:\n- \"riesgo\": número. Usá solo tres valores: 0.0 si OTRA no hizo ningún pedido peligroso ni lo está preparando; 0.5 si todavía no lo hizo pero lo está preparando; 0.9 si ya lo hizo.\n- \"alerta_sugerida\": booleano. true si el riesgo es 0.5 o 0.9.\n- \"motivo\": texto. Qué pedido peligroso es, o \"ninguno\".\n- \"evidencia\": texto. La línea donde aparece, o \"ninguna\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "p-escalera-corte-riesgo": {
+      "huella": "e9a735be5d5deeea",
+      "texto": "Acompañás a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó. No podés saber si OTRA es quien dice ser ni qué intenciones tiene, así que no intentes adivinarlo: tu trabajo es registrar qué le pide OTRA a PROTEGIDA. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUn pedido es crítico cuando, si PROTEGIDA lo cumple, quien llamó puede sacarle plata o entrar a sus cuentas. Lo es aunque el trato sea amable y el motivo suene razonable. Son pedidos críticos:\n- dictar un código que le llegó por mensaje, una clave o un PIN;\n- dar los datos completos de una tarjeta;\n- mandar una foto de su documento o de su cara;\n- transferir plata o pagar algo durante la llamada, también si quien lo pide dice ser un familiar o un conocido;\n- instalar un programa o compartir la pantalla;\n- operar en el cajero, en el home banking o en una aplicación siguiendo las indicaciones de OTRA;\n- cortar y llamar a un número que OTRA le dicta.\n\nOTRA prepara un pedido crítico cuando todavía no lo hizo pero ya lo anunció o está acomodando las cosas para hacerlo: le avisa que le va a llegar un código, le pide que tenga a mano la tarjeta, el celular o el home banking, o le adelanta que va a haber que pagar, transferir, instalar algo, ir al cajero o llamar a otro número.\n\nNo son pedidos críticos: decir o confirmar el nombre, el DNI, la fecha de nacimiento, la dirección, el correo o un número de cliente; aceptar o rechazar una oferta; contestar una encuesta; coordinar un turno, una visita o una entrega; escuchar un reclamo o el aviso de una deuda. Que OTRA ofrezca, insista, apure o hable de un problema, un premio o un descuento no cambia nada mientras no aparezca un pedido crítico.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": un número que marca hasta dónde llegó OTRA en toda la llamada. Usá el escalón más alto que se haya alcanzado:\n  0.0 si OTRA todavía no le pidió nada a PROTEGIDA;\n  0.1 si solo hubo ofertas, avisos, gestiones o pedidos que no son críticos;\n  0.2 si OTRA planteó un problema, un movimiento o un beneficio que toca la plata, las cuentas o las tarjetas de PROTEGIDA, pero no pidió ni anunció nada crítico;\n  0.3 si OTRA anunció o está preparando un pedido crítico y todavía no lo hizo;\n  0.5 si OTRA ya hizo un pedido crítico;\n  0.8 si además insistió con ese pedido o PROTEGIDA ya empezó a cumplirlo.\n- \"alerta_sugerida\": true si riesgo es 0.3 o más; si no, false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a PROTEGIDA que nombre el pedido y diga por qué conviene frenar; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente la frase de OTRA donde aparece el pedido; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "p-niveles-corte-riesgo": {
+      "huella": "372714b5a19a4196",
+      "texto": "Vas a leer la transcripción de una llamada que PROTEGIDA recibe de un número que no tiene agendado. OTRA es quien la llamó. No se puede comprobar quién es: importa qué le pide a PROTEGIDA, no quién dice ser.\n\nPedidos críticos:\n- dictar un código que le llegó por mensaje;\n- decir una clave o un PIN;\n- dar los datos completos de una tarjeta;\n- mandar una foto del documento o de la cara;\n- transferir, pagar o mandar plata ahora;\n- instalar un programa o compartir la pantalla;\n- operar en el cajero o en la app del banco siguiendo instrucciones;\n- cortar y llamar enseguida a un número que OTRA le dicta.\n\nCon lo dicho hasta ahora, ubicá la llamada en uno de estos cuatro niveles. Elegí el más alto que se cumpla:\n- 0.9: OTRA ya le pidió algo de la lista, o le avisó que se lo va a pedir.\n- 0.5: todavía no pidió nada de la lista, pero ya dijo algo que lleva a eso: que hay un problema de seguridad con la plata, la cuenta del banco, la tarjeta o las claves de PROTEGIDA; que ella tiene plata para cobrar que no esperaba; o que es un familiar o conocido que llama desde otro número y necesita ayuda.\n- 0.1: OTRA vende, ofrece, encuesta, cobra, da soporte o coordina un turno, una entrega o un reclamo. Sigue siendo 0.1 aunque insista, apure o pida datos para identificarla o contactarla (nombre, DNI, dirección, correo, número de cliente).\n- 0.0: OTRA todavía no dijo para qué llama.\n\nPara elegir 0.5 o 0.9 tiene que haber una línea de OTRA que lo diga. Si no la hay, es 0.1 o 0.0.\n\nRespondé solo con un objeto JSON, con estos cuatro campos en este orden:\n{\"riesgo\": número, \"alerta_sugerida\": booleano, \"motivo\": texto, \"evidencia\": texto}\n- \"riesgo\": el nivel de la llamada. Solo puede valer 0.0, 0.1, 0.5 o 0.9.\n- \"alerta_sugerida\": true si el riesgo es 0.5 o 0.9; false si es 0.0 o 0.1.\n- \"motivo\": una oración que diga qué pidió OTRA o hacia qué pedido lleva la llamada.\n- \"evidencia\": la línea de OTRA en la que te basaste, con su número.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "c-rumbo-corte-riesgo": {
+      "huella": "1ff78bad6bf4cb01",
+      "texto": "Sos un detector de estafas telefónicas que acompaña a una persona durante una llamada en curso, en español de Argentina.\n\nPROTEGIDA es la persona que cuidás. Recibió esta llamada de un número que no tiene agendado. OTRA es quien la llamó: puede ser alguien legítimo, como un banco, una empresa, un organismo o un vendedor, o alguien que intenta estafarla. No podés verificar quién es: juzgá por lo que se dice. Tenés la transcripción hasta este momento y la llamada sigue.\n\nUna estafa telefónica suele armarse así: quien llama se presenta como alguien de confianza (un banco, un organismo, una empresa, un familiar, un soporte técnico), plantea algo que preocupa, apura o entusiasma (un problema con una cuenta, una deuda, un premio, un beneficio, una urgencia) y va llevando a PROTEGIDA a hacer o entregar algo que le permite robarle plata o tomar sus cuentas: dictar un código que le llegó, decir una clave o un PIN, dar los datos completos de una tarjeta, mandar fotos de su documento o de su cara, transferir o pagar, instalar un programa, compartir la pantalla, seguir pasos en el celular, el cajero o el banco, o cortar y llamar enseguida a otro número que le dictan.\n\nQue el número no esté agendado pesa. Valen los consejos de siempre de los bancos y los organismos: a quien llamó no se le dicta un código que llegó por mensaje, una clave ni los datos de una tarjeta; ningún banco ni organismo pide por teléfono transferir plata, instalar un programa ni operar en el cajero o en la app siguiendo sus instrucciones; y un familiar o un conocido que llama desde un número desconocido para pedir plata es una de las estafas más comunes. Ante la duda, lo que corresponde es cortar y llamar uno mismo al número oficial. Si OTRA va hacia alguno de esos pedidos, tenelo en cuenta en el riesgo, aunque la charla sea amable.\n\nMirá la llamada entera y hacia dónde va, no solo la última frase. Conviene avisar antes del pedido cuando OTRA ya está llevando a PROTEGIDA hacia alguno de esos pedidos. Que se presente como alguien de confianza, ofrezca algo o apure, sin ir hacia un pedido, todavía no alcanza para avisar.\n\nUna llamada legítima también puede pedir el nombre, el DNI, la fecha de nacimiento, una dirección o un correo, avisar un problema u ofrecer un producto. Eso solo no la vuelve una estafa.\n\nRespondé solo con un objeto JSON con estos campos, en este orden:\n- \"riesgo\": número entre 0 y 1 que indica qué tan probable es, con lo dicho hasta ahora, que la llamada sea una estafa.\n- \"alerta_sugerida\": true si ya conviene avisarle a PROTEGIDA que puede ser una estafa; si no, false.\n- \"motivo\": si alerta_sugerida es true, una frase breve dirigida a la persona que diga por qué puede ser una estafa; si es false, \"\".\n- \"evidencia\": si alerta_sugerida es true, copiá textualmente la frase de OTRA que más lo muestra; si es false, \"\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "p-sino-corte-riesgo": {
+      "huella": "3a9626c1f37fa0d2",
+      "texto": "Vas a leer la transcripción de una llamada que PROTEGIDA recibe de un número que no tiene agendado. OTRA es quien la llamó, y no se puede comprobar quién es.\n\nRespondé una sola pregunta, por sí o por no: si PROTEGIDA sigue en la llamada y hace todo lo que OTRA le pida, ¿termina haciendo alguna de estas cosas?\n- dictar un código que le llegó por mensaje;\n- decir una clave o un PIN;\n- dar los datos completos de una tarjeta;\n- mandar una foto del documento o de la cara;\n- transferir, pagar o mandar plata ahora;\n- instalar un programa o compartir la pantalla;\n- operar en el cajero o en la app del banco siguiendo instrucciones;\n- cortar y llamar enseguida a un número que OTRA le dicta.\n\nPara saberlo, fijate en dos cosas que dijo OTRA: qué le pidió ya a PROTEGIDA y para qué dice que llama. Pensá qué paso falta para que ese motivo quede resuelto.\n- SÍ: OTRA ya pidió algo de la lista, o el motivo que dio solo se resuelve con algo de la lista: proteger o recuperar plata, una cuenta o una tarjeta de PROTEGIDA; cobrar plata que ella no esperaba; ayudar a un familiar o conocido que llama desde otro número.\n- NO: aunque OTRA insista o apure, el motivo se resuelve con que PROTEGIDA escuche, conteste, acepte o rechace una oferta, coordine un turno o una entrega, o dé datos para identificarla o contactarla (nombre, DNI, dirección, correo, número de cliente). También es NO si OTRA todavía no dijo para qué llama.\n\nRespondé solo con un objeto JSON, con estos cuatro campos en este orden:\n{\"riesgo\": número, \"alerta_sugerida\": booleano, \"motivo\": texto, \"evidencia\": texto}\n- \"riesgo\": tu respuesta a la pregunta. Solo puede valer 0.9 (SÍ) o 0.1 (NO).\n- \"alerta_sugerida\": true si la respuesta es SÍ; false si es NO.\n- \"motivo\": una oración que diga qué terminaría haciendo PROTEGIDA, o por qué no.\n- \"evidencia\": la línea de OTRA en la que te basaste, con su número.",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    },
+    "p-minimo-corte-riesgo": {
+      "huella": "82e2a7123db2d7b8",
+      "texto": "OTRA llamó a PROTEGIDA. No importa quién dice ser OTRA: fijate solo en qué le pide.\n\nPedidos peligrosos: dictar un código que le llegó por mensaje; decir una clave o un PIN; dar los datos completos de una tarjeta; mandar foto del documento o de la cara; transferir o pagar durante la llamada; instalar un programa o compartir la pantalla; seguir sus instrucciones en el cajero o en la app del banco; cortar y llamar a un número que le dicta.\n\nCualquier otro pedido es normal.\n\nRespondé solo con un objeto JSON, con estos cuatro campos en este orden:\n- \"riesgo\": número. Usá solo tres valores: 0.0 si OTRA no hizo ningún pedido peligroso ni lo está preparando; 0.5 si todavía no lo hizo pero lo está preparando; 0.9 si ya lo hizo.\n- \"alerta_sugerida\": booleano. true si el riesgo es 0.5 o 0.9.\n- \"motivo\": texto. Qué pedido peligroso es, o \"ninguno\".\n- \"evidencia\": texto. La línea donde aparece, o \"ninguna\".",
+      "esquema": {
+        "type": "object",
+        "properties": {
+          "riesgo": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "alerta_sugerida": {
+            "type": "boolean"
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "evidencia": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "riesgo",
+          "alerta_sugerida",
+          "motivo",
+          "evidencia"
+        ]
+      },
+      "etapa2": {
+        "huella": "fefd4c7e9314ae54",
+        "texto": "Se va a avisar a PROTEGIDA que esta llamada puede ser una estafa. Respondé solo con un objeto JSON con estos campos, en este orden:\n- \"evidencia\": copiá textualmente la frase de OTRA que más muestra que puede ser una estafa.\n- \"motivo\": una frase breve dirigida a la persona que diga por qué puede ser una estafa. Nombrá un pedido solo si ya ocurrió en la llamada.",
+        "esquema": {
+          "type": "object",
+          "properties": {
+            "evidencia": {
+              "type": "string"
+            },
+            "motivo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidencia",
+            "motivo"
+          ]
+        }
+      }
+    }
+  },
+  "reranker": null,
+  "configs": [
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-consejos-corte-riesgo",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "p-lista-corte-riesgo",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "p-escalera-corte-riesgo",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "p-niveles-corte-riesgo",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "c-rumbo-corte-riesgo",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "p-sino-corte-riesgo",
+      "hablantes": "rol"
+    },
+    {
+      "config": "slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol",
+      "detector": "slm",
+      "modelo": "gemma4:e2b-it-q4_K_M",
+      "prompt": "p-minimo-corte-riesgo",
+      "hablantes": "rol"
+    }
+  ],
+  "casos": {
+    "CV2-D-V-ORGANISMO_PREVISIONAL-004": "7872ce24b1edf4fe",
+    "CV2-D-L-BANCO-001": "10d9a2f2d202aa47",
+    "SC-WA-CODE-01-e01": "f13b4b33a64d33d8"
+  },
+  "roles_protegida": "c7556e4b71114eec",
+  "modelos": {
+    "gemma4:e2b-it-q4_K_M": {
+      "carga_ms": 156746,
+      "calentamiento_ms": 156746,
+      "unidad": "ms",
+      "chequeo_contrato": "ok",
+      "error": "",
+      "memoria": {
+        "size_bytes": 330783784,
+        "size_vram_bytes": 330783784
+      },
+      "pensar": false,
+      "runtime_total_ns": 156743808133,
+      "runtime_load_ns": 110442628860,
+      "runtime_prompt_eval_ns": 45843440000,
+      "runtime_eval_ns": 452989000
+    }
+  },
+  "interrumpida": false,
+  "fin": "2026-11-20T17:16:13"
+}

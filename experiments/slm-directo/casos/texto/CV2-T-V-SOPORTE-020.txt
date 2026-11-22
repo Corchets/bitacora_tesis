@@ -1,0 +1,20 @@
+A: Buenas, te llamo de mantenimiento del sistema de sonido del salón.
+B: ¿Se cortó otra vez?
+A: El panel muestra un ajuste remoto de volumen que nadie reportó.
+B: Yo no toqué nada.
+A: El control sigue en modo de revisión.
+B: ¿Pueden bajar el volumen desde ahí?
+A: No veo ninguna modificación aplicada todavía.
+B: ¿Qué equipo aparece conectado?
+A: El registro está actualizándose.
+B: ¿Puedo desconectar la consola?
+A: Mejor esperá a que termine la lectura del estado.
+B: No quiero que alguien la controle desde afuera.
+A: Todavía no hay una sesión abierta, solo un aviso.
+B: Voy a llamar al encargado de sonido.
+A: Él está en camino al salón.
+B: ¿Me das el nombre del técnico que hizo el cambio?
+A: No aparece ningún nombre.
+B: Prefiero cortar y revisar en persona.
+A: Entiendo.
+B: Chau.

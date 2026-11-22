@@ -1,0 +1,26 @@
+A: Buenas, recibí la credencial nueva y mi apellido tiene una letra cambiada.
+B: Hola. ¿Qué error ves en el apellido?
+A: Dice “Serrano” y debería ser “Serano”, con una sola erre.
+B: ¿La credencial está emitida a tu nombre o al de otra persona?
+A: A nombre mío, Ema Serano. El número de beneficio termina en 3.
+B: Para registrar la corrección, necesitamos comparar con el documento original en una oficina.
+A: ¿Puedo mandar una foto por el portal?
+B: Por ahora el sistema pide presentar el documento en persona.
+A: ¿Tengo que pedir un turno especial?
+B: Sí, en “actualización de datos personales”. Hay disponibilidad el miércoles a las once.
+A: El miércoles trabajo por la mañana. ¿Tienen algo después de las tres?
+B: El jueves a las tres y media en la sede del parque.
+A: Esa sede me queda bien, puedo ir después de buscar a mi hijo.
+B: ¿Querés reservar ese horario?
+A: Sí. ¿Llevo la credencial impresa y el documento?
+B: Llevá ambos para que revisen la letra y te indiquen el plazo de reimpresión.
+A: ¿La credencial sigue sirviendo mientras tanto?
+B: La atención va a confirmar si podés seguir usándola durante la corrección.
+A: Entiendo. ¿Me mandan una constancia de que pedí el cambio?
+B: Sí, te dan un comprobante en la sede.
+A: Bueno, ya anoté jueves 3:30.
+B: Queda reservado a nombre de Ema Serano.
+A: Así aparece en mi documento, sí.
+B: Perfecto. ¿Te queda alguna otra duda?
+A: No, gracias por explicarme qué tengo que llevar.
+B: Hasta luego.

@@ -1,0 +1,29 @@
+A: ¿El estéreo del auto de mamá sigue pidiendo una clave cada vez que se prende?
+B: Desde que cambiaron la batería. En el manual hay una tarjeta con el código de fábrica.
+A: ¿La encontraste en la guantera?
+B: Sí, está atrás de las instrucciones de mantenimiento.
+A: ¿Se puede poner el código una sola vez y dejarlo guardado?
+B: El mecánico dijo que depende del modelo. Lo vemos cuando llevemos el auto.
+A: ¿A qué taller lo vas a llevar?
+B: Al de la esquina de la plaza, el que revisó los frenos.
+A: ¿Te dieron turno?
+B: El jueves a las ocho y media.
+A: Mamá tiene el control con la cardióloga ese día.
+B: Puedo pedir que lo reciban después de las diez.
+A: ¿Querés que la lleve yo y después la acompaño al consultorio?
+B: Sí, así no tiene que esperar en el taller.
+A: ¿El auto necesita nafta o tiene suficiente?
+B: Está por la mitad. Le puse ayer cuando volví del centro.
+A: ¿Llevás el manual y la tarjeta del estéreo?
+B: Sí, los dejé en el bolsillo de la puerta.
+A: ¿La clave está escrita también en la tarjeta del seguro?
+B: No, solo en el manual del equipo.
+A: Bueno. ¿Querés que haga una copia del manual antes de ir?
+B: No hace falta, saco una foto para tenerla en el teléfono.
+A: Así no queda el original dando vueltas en el taller.
+B: Exacto. Después guardamos el manual en el cajón de casa.
+A: ¿A qué hora paso por mamá?
+B: A las diez, ya va a estar lista.
+A: Perfecto, le aviso que no prepare el desayuno.
+B: Ella siempre se levanta temprano igual.
+A: Nos vemos el jueves.

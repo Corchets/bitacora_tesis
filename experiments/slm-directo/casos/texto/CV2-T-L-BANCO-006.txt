@@ -1,0 +1,25 @@
+A: Hola, transferí plata a un alias parecido y me di cuenta recién cuando revisé el comprobante.
+B: Buenas. ¿La transferencia ya figura completada?
+A: Sí, fue hace media hora. Eran 19.800 pesos.
+B: ¿La cuenta de origen es la tuya y el alias lo cargaste manualmente?
+A: Sí. Quería mandar a patio.luna y puse patio.lunas.
+B: ¿Reconocés el nombre del destinatario que aparece?
+A: No, figura Marcos Tiral. No lo conozco.
+B: Puedo registrar el reclamo por transferencia equivocada. El banco receptor debe contactar a esa persona para pedir devolución.
+A: ¿Y si no la devuelve?
+B: No puedo asegurar el resultado. El reclamo deja constancia y permite que el otro banco gestione el contacto.
+A: ¿Necesitás el comprobante completo?
+B: Confirmame el importe, la fecha y los últimos cuatro de la cuenta de destino.
+A: El importe es 19.800, hoy a las 14:06, y la cuenta termina en 7719.
+B: Gracias. ¿Querés adjuntar el comprobante desde la aplicación?
+A: Sí, lo tengo guardado. ¿En qué parte aparece el reclamo?
+B: Entrá en movimientos, abrí la transferencia y elegí “informar un problema”.
+A: Ya veo el botón. ¿Puedo cancelar desde ahí?
+B: No, la operación se completó. El formulario inicia el pedido de devolución.
+A: Entiendo. No quiero enviar otra transferencia para intentar corregirlo.
+B: Está bien. Esperá la respuesta del banco receptor antes de tomar otra decisión.
+A: Lo envío ahora. ¿Me dan una referencia?
+B: Queda como 1183. Conservá ese número para consultar el estado.
+A: Listo, recibí un correo de confirmación.
+B: Perfecto. ¿Hay algo más que necesites revisar?
+A: No, gracias por explicarme el alcance.

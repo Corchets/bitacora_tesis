@@ -1,0 +1,28 @@
+A: Hola, ayer encargué la crema que usa mi papá y quería saber si llegó.
+B: Buenas. ¿Recordás el nombre o la presentación?
+A: La de 30 gramos, caja blanca, para la piel sensible.
+B: ¿La reservaste a nombre de Ricardo Olarte?
+A: Sí, es mi papá.
+B: Veo que llegó esta mañana. La tenemos guardada en la heladera chica del mostrador.
+A: ¿Se la puedo retirar yo o tiene que ir él?
+B: Si es de venta libre, podés retirarla con el número de reserva.
+A: ¿El número está en el mensaje que me mandaron?
+B: Sí, termina en 407.
+A: Lo tengo acá. ¿Hasta cuándo la guardan?
+B: Hasta mañana a la noche.
+A: Paso hoy después de las seis, salgo tarde del consultorio.
+B: Cerramos a las ocho.
+A: ¿Hay otra sucursal que cierre más tarde?
+B: La de la terminal, hasta las nueve.
+A: Me queda lejos, pero si no llego voy ahí.
+B: ¿Querés que mueva la reserva a esa sede?
+A: No, primero intento pasar por esta.
+B: Está bien. ¿Tu papá necesita también las gasas que pidió la semana pasada?
+A: Sí, pero le quedan unas pocas. Las compro el sábado.
+B: Tenemos el mismo paquete que llevó la otra vez.
+A: Perfecto. ¿Puedo pagar con tarjeta al retirar?
+B: Sí, aceptamos débito y crédito.
+A: Bueno, voy después de las seis.
+B: Te esperamos. La crema ya está separada.
+A: Gracias por confirmarme.
+B: De nada.

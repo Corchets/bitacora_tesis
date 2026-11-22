@@ -1,0 +1,26 @@
+A: Buen día, hice un depósito en efectivo ayer y todavía no aparece en la cuenta de mi hermano.
+B: Hola. ¿Lo hiciste por caja o en el cajero automático?
+A: Por caja, en la sucursal del mercado. Era para pagarle una reparación.
+B: ¿Tenés el comprobante con hora e importe?
+A: Sí, fueron 51.600 pesos cerca del mediodía.
+B: ¿La cuenta de destino es de este banco?
+A: Sí, termina en 2701. El titular es Elías Nuar.
+B: Encontré un depósito pendiente de validación, con ese importe.
+A: ¿Hay algún problema con los billetes?
+B: No aparece observación. La caja cerró la operación a las 12:14.
+A: ¿Cuándo se acredita normalmente?
+B: Si el depósito fue en efectivo, debería reflejarse durante el día hábil siguiente.
+A: Hoy ya es el día siguiente. ¿Espero hasta el cierre?
+B: Podés esperar hasta las seis. Si no se actualiza, hacemos un reclamo con el comprobante.
+A: ¿Te dicto el número de operación?
+B: Sí, el que está debajo de la fecha, por favor.
+A: 86-1409.
+B: Gracias. Lo anoté en la consulta. No figura rechazado ni devuelto.
+A: Mi hermano me preguntó si podía pagar la reparación. Le aviso que todavía está en proceso.
+B: Sí, todavía no está disponible para el titular.
+A: ¿El banco le manda una notificación cuando llegue?
+B: Si tiene avisos activados, recibe una notificación de depósito.
+A: Los tiene. Entonces reviso más tarde.
+B: Quedó asentada la consulta con referencia 4590.
+A: Muchas gracias, ya me quedo más tranquila.
+B: De nada.

@@ -27,10 +27,10 @@ se cuentan por clase acá.
 
 | Conjunto | Conversaciones | Dónde | Cómo se usa |
 |---|---:|---|---|
-| Reserva del corpus v2 (`CV2-T-*`) | 200 | rama `reserva/test`: `casos/texto/` y `casos/referencia/` | `--particion test_reservado` en esa rama, solo en la evaluación final |
-| Legítimas de test de #45 | 56 | rama `reserva/test`: `casos/legitimas-entrantes-test.jsonl` | todavía no está en el formato de casos: hay que convertirla antes de la evaluación final |
-| Corpus externo real de #144 | — | `docs/corpus/ISSUE-144-*` y `docs/corpus/FICHAS-144-*` ([relevamiento](../../../docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md)) | lecturas y fichas, no casos: test externo previsto |
-| Sets externos de #144 | 49 | [`casos/externo/`](externo/README.md): 16 de inglés y 33 de coreano (24 sin ficha, con pre-marcado de IA) | formato de casos, pero `correr.py` todavía no los lee: falta el cargador de #52 |
+| Reserva del corpus v2 (`CV2-T-*`) | 200 | `casos/texto/` y `casos/referencia/`, partición `test_reservado` | `--particion test_reservado`; se miró una sola vez, en la evaluación final del 2026-11-19 |
+| Legítimas de test de #45 | 56 | `casos/legitimas-entrantes-test.jsonl` | no está en formato de casos: `conjuntos.py preparar --reserva <raíz del repo>` la arma para la evaluación final |
+| Lecturas del corpus externo real de #144 | — | `docs/corpus/ISSUE-144-*` y `docs/corpus/FICHAS-144-*` ([relevamiento](../../../docs/corpus/RELEVAMIENTO-CORPUS-EXTERNO.md)) | lecturas y fichas, no casos; lo que se corrió está en `casos/externo/` |
+| Sets externos | 124 | [`casos/externo/`](externo/README.md): 33 estafas coreanas (#144), 16 de inglés, 33 legítimas reales y 42 de zona gris de CallCenterEN | `conjuntos.py` los arma; las coreanas y las legítimas reales entraron en la evaluación final |
 | Ejemplos del panel VoIP | 4 | `experiments/asr-local/audio/*-tts-estereo.wav`, fuera de Git (`asr-local/sintetizar_par.py`) | desde el panel; son audio sintético, sin valor de evaluación |
 | Llamadas con voz real (#94) | — | `experiments/voip/llamadas/` de la copia que corrió el servidor, fuera de Git | `replay.py --actualizaciones <llamada>/actualizaciones.jsonl` |
 
@@ -62,42 +62,24 @@ cambió.
 | Corrida | Fecha | Casos | Conjunto | Prompts o detectores |
 |---|---|---:|---|---|
 | [`2026-10-13_224418_linea-base-reglas`](../corridas/2026-10-13_224418_linea-base-reglas/) | 2026-10-13 | 53 | estado `historico` del manifiesto | `reglas` |
-| [`2026-10-14_172248_demo-qwen3.5-2b`](../corridas/2026-10-14_172248_demo-qwen3.5-2b/) | 2026-10-14 | 8 | 8 casos sin lista | `tarea` |
 | [`2026-10-14_172930_demo-qwen3.5-2b`](../corridas/2026-10-14_172930_demo-qwen3.5-2b/) | 2026-10-14 | 53 | estado `historico` del manifiesto | `tarea` |
 | [`2026-10-14_173532_demo-qwen3.5-0.8b`](../corridas/2026-10-14_173532_demo-qwen3.5-0.8b/) | 2026-10-14 | 53 | estado `historico` del manifiesto | `tarea` |
 | [`2026-10-14_174602_demo-qwen3.5-4b`](../corridas/2026-10-14_174602_demo-qwen3.5-4b/) | 2026-10-14 | 53 | estado `historico` del manifiesto | `tarea` |
 | [`2026-10-14_175451_demo-qwen3.5-2b`](../corridas/2026-10-14_175451_demo-qwen3.5-2b/) | 2026-10-14 | 53 | estado `historico` del manifiesto | `tarea` |
-| [`2026-10-14_182137_demo-qwen3.5-4b`](../corridas/2026-10-14_182137_demo-qwen3.5-4b/) | 2026-10-14 | 8 | 8 casos sin lista | `tarea` |
 | [`2026-10-14_191429_cpu-2hilos`](../corridas/2026-10-14_191429_cpu-2hilos/) | 2026-10-14 | 14 | grupo piloto_escrito | `reglas`, `tarea` |
-| [`2026-10-17_145806_demo-qwen3.5-2b-q8_0`](../corridas/2026-10-17_145806_demo-qwen3.5-2b-q8_0/) | 2026-10-17 | 8 | 8 casos sin lista | `tarea` |
 | [`2026-10-17_150455_m1-reglas`](../corridas/2026-10-17_150455_m1-reglas/) | 2026-10-17 | 53 | estado `historico` del manifiesto | `reglas` |
 | [`2026-10-17_150516_m1-gguf`](../corridas/2026-10-17_150516_m1-gguf/) | 2026-10-17 | 53 | estado `historico` del manifiesto | `tarea` |
 | [`2026-10-21_182201_m1-0.8b-v1v2-nb32`](../corridas/2026-10-21_182201_m1-0.8b-v1v2-nb32/) | 2026-10-21 | 53 | estado `historico` del manifiesto | `tarea`, `v2` |
 | [`2026-10-21_200147_m1-reglas-150`](../corridas/2026-10-21_200147_m1-reglas-150/) | 2026-10-21 | 150 | lista desarrollo-150 | `reglas` |
 | [`2026-10-21_201039_m1-2b-v1v2-nb32`](../corridas/2026-10-21_201039_m1-2b-v1v2-nb32/) | 2026-10-21 | 150 | lista desarrollo-150 | `tarea`, `v2` |
 | [`2026-10-21_201914_m1-reglas-v2-150`](../corridas/2026-10-21_201914_m1-reglas-v2-150/) | 2026-10-21 | 150 | lista desarrollo-150 | `reglas` |
-| [`2026-10-22_102514_win-9b-piloto-nb32`](../corridas/2026-10-22_102514_win-9b-piloto-nb32/) | 2026-10-22 | 14 | grupo piloto_escrito | `tarea`, `v2` |
 | [`2026-10-22_103341_win-4b-v1v2-nb32`](../corridas/2026-10-22_103341_win-4b-v1v2-nb32/) | 2026-10-22 | 53 | estado `historico` del manifiesto | `tarea`, `v2` |
 | [`2026-10-22_111736_win-0.8b-v1v2-nb32`](../corridas/2026-10-22_111736_win-0.8b-v1v2-nb32/) | 2026-10-22 | 53 | estado `historico` del manifiesto | `tarea`, `v2` |
 | [`2026-10-22_112250_win-9b-v1v2-nb32`](../corridas/2026-10-22_112250_win-9b-v1v2-nb32/) | 2026-10-22 | 53 | estado `historico` del manifiesto | `tarea`, `v2` |
 | [`2026-10-23_115920_linux-9b-v1v2-cv2-nb32`](../corridas/2026-10-23_115920_linux-9b-v1v2-cv2-nb32/) | 2026-10-23 | 97 | grupo corpus_v2 | `tarea`, `v2` |
 | [`2026-10-23_144554_linux-4b-v1v2-cv2-nb32`](../corridas/2026-10-23_144554_linux-4b-v1v2-cv2-nb32/) | 2026-10-23 | 97 | grupo corpus_v2 | `tarea`, `v2` |
 | [`2026-10-23_153722_linux-0.8b-v1v2-nb32`](../corridas/2026-10-23_153722_linux-0.8b-v1v2-nb32/) | 2026-10-23 | 150 | lista desarrollo-150 | `tarea`, `v2` |
-| [`2026-10-26_125526_demo-tito-slm-simulado`](../corridas/2026-10-26_125526_demo-tito-slm-simulado/) | 2026-10-26 | 2 | 2 casos sin lista | `reglas`, `tarea`, `tito-slm tarea` |
-| [`2026-10-26_132027_tito-real-8casos`](../corridas/2026-10-26_132027_tito-real-8casos/) | 2026-10-26 | 8 | 8 casos sin lista | `reglas`, `tarea`, `tito-slm tarea` |
-| [`2026-10-26_132916_qwen4b-comparacion`](../corridas/2026-10-26_132916_qwen4b-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-26_133838_qwen4b-comparacion`](../corridas/2026-10-26_133838_qwen4b-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-26_135518_qwen08b-q8-comparacion`](../corridas/2026-10-26_135518_qwen08b-q8-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-26_135640_qwen08b-comparacion`](../corridas/2026-10-26_135640_qwen08b-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-26_135746_qwen2b-q8-comparacion`](../corridas/2026-10-26_135746_qwen2b-q8-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-26_135930_qwen9b-comparacion`](../corridas/2026-10-26_135930_qwen9b-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-26_141023_llama1b-comparacion`](../corridas/2026-10-26_141023_llama1b-comparacion/) | 2026-10-26 | 8 | 8 casos sin lista | `tarea`, `tito-slm tarea` |
-| [`2026-10-29_170921`](../corridas/2026-10-29_170921/) | 2026-10-29 | 2 | 2 casos sin lista | `riesgo` |
-| [`2026-10-29_171810_win-gemma3n-e2b-riesgo-cpu`](../corridas/2026-10-29_171810_win-gemma3n-e2b-riesgo-cpu/) | 2026-10-29 | 150 | lista desarrollo-150 | `riesgo` |
-| [`2026-10-29_173937_win-gemma3n-e2b-riesgo-cv2-cpu`](../corridas/2026-10-29_173937_win-gemma3n-e2b-riesgo-cv2-cpu/) | 2026-10-29 | 97 | grupo corpus_v2 | `riesgo` |
 | [`2026-10-29_182016_rapida-gemma3n-e2b`](../corridas/2026-10-29_182016_rapida-gemma3n-e2b/) | 2026-10-29 | 20 | lista rapida-20 | `riesgo`, `v2` |
-| [`2026-10-30_192609`](../corridas/2026-10-30_192609/) | 2026-10-30 | 2 | 2 casos sin lista | `reranker pedidos` |
-| [`2026-10-30_193159`](../corridas/2026-10-30_193159/) | 2026-10-30 | 2 | 2 casos sin lista | `reranker pedidos` |
 | [`2026-10-30_200421_r1-bge`](../corridas/2026-10-30_200421_r1-bge/) | 2026-10-30 | 77 | 77 casos sin lista | `reranker pedidos` |
 | [`2026-10-31_021253_r1-bge-resto`](../corridas/2026-10-31_021253_r1-bge-resto/) | 2026-10-31 | 57 | 57 casos sin lista | `reranker pedidos` |
 | [`2026-10-31_105542_r3-riesgo-seleccion`](../corridas/2026-10-31_105542_r3-riesgo-seleccion/) | 2026-10-31 | 57 | lista seleccion-57 | `riesgo` |
@@ -116,12 +98,6 @@ cambió.
 | [`2026-11-04_tanda-roles-tito-sin-indicio/b/2026-11-04_234950_tanda-roles-b-v4-cita-libre-rol`](../corridas/2026-11-04_tanda-roles-tito-sin-indicio/b/2026-11-04_234950_tanda-roles-b-v4-cita-libre-rol/) | 2026-11-04 | 150 | lista desarrollo-150 | `tito-slm-sin-indicio v4-cita-libre` |
 | [`2026-11-04_tanda-roles-tito-sin-indicio/c/2026-11-05_000133_tanda-roles-c-v3-orden-v1-rol`](../corridas/2026-11-04_tanda-roles-tito-sin-indicio/c/2026-11-05_000133_tanda-roles-c-v3-orden-v1-rol/) | 2026-11-05 | 150 | lista desarrollo-150 | `tito-slm-sin-indicio v3-orden-v1` |
 | [`2026-11-04_tanda-roles-tito-sin-indicio/d/2026-11-05_001227_tanda-roles-d-v4-rol`](../corridas/2026-11-04_tanda-roles-tito-sin-indicio/d/2026-11-05_001227_tanda-roles-d-v4-rol/) | 2026-11-05 | 150 | lista desarrollo-150 | `tito-slm-sin-indicio v4` |
-| [`2026-11-05_humo-puntaje-token-1/tarea-sino/2026-11-06_014335_humo-tarea-sino`](../corridas/2026-11-05_humo-puntaje-token-1/tarea-sino/2026-11-06_014335_humo-tarea-sino/) | 2026-11-06 | 3 | 3 casos sin lista | `tarea-sino` |
-| [`2026-11-05_humo-puntaje-token-1/v4-sin-reglas-sino/2026-11-06_014401_humo-v4-sin-reglas-sino`](../corridas/2026-11-05_humo-puntaje-token-1/v4-sin-reglas-sino/2026-11-06_014401_humo-v4-sin-reglas-sino/) | 2026-11-06 | 3 | 3 casos sin lista | `v4-sin-reglas-sino` |
-| [`2026-11-05_humo-puntaje-token-1/v4-sino/2026-11-06_014342_humo-v4-sino`](../corridas/2026-11-05_humo-puntaje-token-1/v4-sino/2026-11-06_014342_humo-v4-sino/) | 2026-11-06 | 3 | 3 casos sin lista | `v4-sino` |
-| [`2026-11-05_humo-puntaje-token-2/tarea-a1/2026-11-06_022053_humo-tarea-a1`](../corridas/2026-11-05_humo-puntaje-token-2/tarea-a1/2026-11-06_022053_humo-tarea-a1/) | 2026-11-06 | 3 | 3 casos sin lista | `tarea-a1` |
-| [`2026-11-05_humo-puntaje-token-2/v4-a1/2026-11-06_022101_humo-v4-a1`](../corridas/2026-11-05_humo-puntaje-token-2/v4-a1/2026-11-06_022101_humo-v4-a1/) | 2026-11-06 | 3 | 3 casos sin lista | `v4-a1` |
-| [`2026-11-05_humo-puntaje-token-2/v4-a2/2026-11-06_022120_humo-v4-a2`](../corridas/2026-11-05_humo-puntaje-token-2/v4-a2/2026-11-06_022120_humo-v4-a2/) | 2026-11-06 | 3 | 3 casos sin lista | `v4-a2` |
 | [`2026-11-05_prompt-v5-tito-sin-indicio/a/2026-11-05_140022_prompt-v5-a-v5-maniobras-rol`](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/a/2026-11-05_140022_prompt-v5-a-v5-maniobras-rol/) | 2026-11-05 | 150 | lista desarrollo-150 | `tito-slm-sin-indicio v5-maniobras` |
 | [`2026-11-05_prompt-v5-tito-sin-indicio/b/2026-11-05_142148_prompt-v5-b-v5-rol`](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/b/2026-11-05_142148_prompt-v5-b-v5-rol/) | 2026-11-05 | 150 | lista desarrollo-150 | `tito-slm-sin-indicio v5` |
 | [`2026-11-05_prompt-v5-tito-sin-indicio/c/2026-11-05_144005_prompt-v5-c-v5-indirectos-rol`](../corridas/2026-11-05_prompt-v5-tito-sin-indicio/c/2026-11-05_144005_prompt-v5-c-v5-indirectos-rol/) | 2026-11-05 | 150 | lista desarrollo-150 | `tito-slm-sin-indicio v5-indirectos` |
@@ -155,10 +131,18 @@ cambió.
 | [`2026-11-09_pedido-critico-etapa-3/c-sin-alerta-rep/2026-11-10_005705_etapa-3-c-sin-alerta-rep`](../corridas/2026-11-09_pedido-critico-etapa-3/c-sin-alerta-rep/2026-11-10_005705_etapa-3-c-sin-alerta-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-sin-alerta` |
 | [`2026-11-09_pedido-critico-etapa-3/controles-ventas/2026-11-10_012122_etapa-3-controles-ventas`](../corridas/2026-11-09_pedido-critico-etapa-3/controles-ventas/2026-11-10_012122_etapa-3-controles-ventas/) | 2026-11-10 | 6 | 6 casos sin lista (6 ya no están en desarrollo) | `c-sin-alerta`, `c-con-campo` |
 | [`2026-11-09_pedido-critico-etapa-3/humo/corrida/2026-11-10_001236_etapa-3-humo`](../corridas/2026-11-09_pedido-critico-etapa-3/humo/corrida/2026-11-10_001236_etapa-3-humo/) | 2026-11-10 | 3 | 3 casos sin lista | `c-json-corte`, `c-sin-alerta`, `c-con-campo` |
-| [`2026-11-10_a56-congelada-latencia/intento-1-esquema-ignorado`](../corridas/2026-11-10_a56-congelada-latencia/intento-1-esquema-ignorado/) | 2026-11-10 | 3 | 3 casos sin lista (3 ya no están en desarrollo) |  |
 | [`2026-11-10_a56-congelada-latencia`](../corridas/2026-11-10_a56-congelada-latencia/) | 2026-11-10 | 3 | 3 casos sin lista (3 ya no están en desarrollo) |  |
 | [`2026-11-10_config-congelada-humo/desarrollo/2026-11-10_152954_config-congelada-desarrollo`](../corridas/2026-11-10_config-congelada-humo/desarrollo/2026-11-10_152954_config-congelada-desarrollo/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-json-corte-riesgo` |
 | [`2026-11-10_config-congelada-humo/humo/corrida/2026-11-10_152633_config-congelada-humo`](../corridas/2026-11-10_config-congelada-humo/humo/corrida/2026-11-10_152633_config-congelada-humo/) | 2026-11-10 | 3 | 3 casos sin lista | `c-json-corte`, `c-json-corte-riesgo` |
+| [`2026-11-10_revision-producto/base/2026-11-18_220141_revision-producto-base`](../corridas/2026-11-10_revision-producto/base/2026-11-18_220141_revision-producto-base/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-premisa-corte-riesgo` |
+| [`2026-11-10_revision-producto/base-rep/2026-11-18_224124_revision-producto-base-rep`](../corridas/2026-11-10_revision-producto/base-rep/2026-11-18_224124_revision-producto-base-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-premisa-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-codigo/2026-11-18_221122_revision-producto-c-codigo`](../corridas/2026-11-10_revision-producto/c-codigo/2026-11-18_221122_revision-producto-c-codigo/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-codigo-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-codigo-rep/2026-11-18_224717_revision-producto-c-codigo-rep`](../corridas/2026-11-10_revision-producto/c-codigo-rep/2026-11-18_224717_revision-producto-c-codigo-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-codigo-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-consejos/2026-11-18_222108_revision-producto-c-consejos`](../corridas/2026-11-10_revision-producto/c-consejos/2026-11-18_222108_revision-producto-c-consejos/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-consejos-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-consejos-rep/2026-11-18_225308_revision-producto-c-consejos-rep`](../corridas/2026-11-10_revision-producto/c-consejos-rep/2026-11-18_225308_revision-producto-c-consejos-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-consejos-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-freno/2026-11-18_223059_revision-producto-c-freno`](../corridas/2026-11-10_revision-producto/c-freno/2026-11-18_223059_revision-producto-c-freno/) | 2026-11-18 | 244 | todo el desarrollo (244) | `c-freno-corte-riesgo` |
+| [`2026-11-10_revision-producto/c-freno-rep/2026-11-18_225856_revision-producto-c-freno-rep`](../corridas/2026-11-10_revision-producto/c-freno-rep/2026-11-18_225856_revision-producto-c-freno-rep/) | 2026-11-18 | 140 | lista alcance-140 | `c-freno-corte-riesgo` |
+| [`2026-11-10_revision-producto/humo/corrida/2026-11-18_215756_revision-producto-humo`](../corridas/2026-11-10_revision-producto/humo/corrida/2026-11-18_215756_revision-producto-humo/) | 2026-11-18 | 3 | 3 casos sin lista | `c-premisa-corte-riesgo`, `c-codigo-corte-riesgo`, `c-consejos-corte-riesgo`, `c-freno-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/base/2026-11-10_191406_sensibilidad-base`](../corridas/2026-11-10_sensibilidad-c/base/2026-11-10_191406_sensibilidad-base/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-json-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/base-rep/2026-11-10_195308_sensibilidad-base-rep`](../corridas/2026-11-10_sensibilidad-c/base-rep/2026-11-10_195308_sensibilidad-base-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-json-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/c-ancla/2026-11-10_192350_sensibilidad-c-ancla`](../corridas/2026-11-10_sensibilidad-c/c-ancla/2026-11-10_192350_sensibilidad-c-ancla/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-ancla-corte-riesgo` |
@@ -168,8 +152,6 @@ cambió.
 | [`2026-11-10_sensibilidad-c/c-sin-freno/2026-11-10_194311_sensibilidad-c-sin-freno`](../corridas/2026-11-10_sensibilidad-c/c-sin-freno/2026-11-10_194311_sensibilidad-c-sin-freno/) | 2026-11-10 | 244 | todo el desarrollo (244) | `c-sin-freno-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/c-sin-freno-rep/2026-11-10_201007_sensibilidad-c-sin-freno-rep`](../corridas/2026-11-10_sensibilidad-c/c-sin-freno-rep/2026-11-10_201007_sensibilidad-c-sin-freno-rep/) | 2026-11-10 | 140 | lista alcance-140 | `c-sin-freno-corte-riesgo` |
 | [`2026-11-10_sensibilidad-c/humo/corrida/2026-11-10_191012_sensibilidad-humo`](../corridas/2026-11-10_sensibilidad-c/humo/corrida/2026-11-10_191012_sensibilidad-humo/) | 2026-11-10 | 3 | 3 casos sin lista | `c-json-corte-riesgo`, `c-ancla-corte-riesgo`, `c-premisa-corte-riesgo`, `c-sin-freno-corte-riesgo` |
-| [`2026-11-11_a56-latencia-172/contaminadas/s6-kv-q8`](../corridas/2026-11-11_a56-latencia-172/contaminadas/s6-kv-q8/) | 2026-11-11 | 6 | 6 casos sin lista |  |
-| [`2026-11-11_a56-latencia-172/contaminadas/s6-ub128`](../corridas/2026-11-11_a56-latencia-172/contaminadas/s6-ub128/) | 2026-11-11 | 6 | 6 casos sin lista |  |
 | [`2026-11-11_a56-latencia-172/s6-base-t4`](../corridas/2026-11-11_a56-latencia-172/s6-base-t4/) | 2026-11-11 | 6 | 6 casos sin lista |  |
 | [`2026-11-11_a56-latencia-172/s6-i8mm`](../corridas/2026-11-11_a56-latencia-172/s6-i8mm/) | 2026-11-11 | 6 | 6 casos sin lista |  |
 | [`2026-11-11_a56-latencia-172/s6-kv-q8`](../corridas/2026-11-11_a56-latencia-172/s6-kv-q8/) | 2026-11-11 | 6 | 6 casos sin lista |  |
@@ -179,3 +161,37 @@ cambió.
 | [`2026-11-11_a56-latencia-172/s6-t8`](../corridas/2026-11-11_a56-latencia-172/s6-t8/) | 2026-11-11 | 6 | 6 casos sin lista |  |
 | [`2026-11-11_a56-latencia-172/s6-ub128`](../corridas/2026-11-11_a56-latencia-172/s6-ub128/) | 2026-11-11 | 6 | 6 casos sin lista |  |
 | [`2026-11-11_a56-latencia-172/s6-vk`](../corridas/2026-11-11_a56-latencia-172/s6-vk/) | 2026-11-11 | 6 | 6 casos sin lista |  |
+| [`2026-11-12_evaluacion-final/desarrollo/config/2026-11-19_160000_final-desarrollo-config`](../corridas/2026-11-12_evaluacion-final/desarrollo/config/2026-11-19_160000_final-desarrollo-config/) | 2026-11-19 | 244 | todo el desarrollo (244) | `c-consejos-corte-riesgo` |
+| [`2026-11-12_evaluacion-final/desarrollo/reglas/2026-11-19_162412_final-desarrollo-reglas`](../corridas/2026-11-12_evaluacion-final/desarrollo/reglas/2026-11-19_162412_final-desarrollo-reglas/) | 2026-11-19 | 244 | todo el desarrollo (244) | `reglas` |
+| [`2026-11-12_evaluacion-final/desarrollo/v4/2026-11-19_160712_final-desarrollo-v4`](../corridas/2026-11-12_evaluacion-final/desarrollo/v4/2026-11-19_160712_final-desarrollo-v4/) | 2026-11-19 | 244 | todo el desarrollo (244) | `v4-corte` |
+| [`2026-11-12_evaluacion-final/humo/corrida/2026-11-19_155634_final-humo`](../corridas/2026-11-12_evaluacion-final/humo/corrida/2026-11-19_155634_final-humo/) | 2026-11-19 | 3 | 3 casos sin lista | `c-consejos-corte-riesgo`, `v4-corte` |
+| [`2026-11-12_evaluacion-final/test_reservado/config/2026-11-19_162435_final-test_reservado-config`](../corridas/2026-11-12_evaluacion-final/test_reservado/config/2026-11-19_162435_final-test_reservado-config/) | 2026-11-19 | 256 | incluye la reserva | `c-consejos-corte-riesgo` |
+| [`2026-11-12_evaluacion-final/test_reservado/reglas/2026-11-19_170106_final-test_reservado-reglas`](../corridas/2026-11-12_evaluacion-final/test_reservado/reglas/2026-11-19_170106_final-test_reservado-reglas/) | 2026-11-19 | 256 | incluye la reserva | `reglas` |
+| [`2026-11-12_evaluacion-final/test_reservado/v4/2026-11-19_163437_final-test_reservado-v4`](../corridas/2026-11-12_evaluacion-final/test_reservado/v4/2026-11-19_163437_final-test_reservado-v4/) | 2026-11-19 | 256 | incluye la reserva | `v4-corte` |
+| [`2026-11-20_exploracion-reales/desarrollo/base/2026-11-20_172558_exploracion-desarrollo-base`](../corridas/2026-11-20_exploracion-reales/desarrollo/base/2026-11-20_172558_exploracion-desarrollo-base/) | 2026-11-20 | 140 | lista alcance-140 | `c-consejos-corte-riesgo` |
+| [`2026-11-20_exploracion-reales/desarrollo/c-rumbo/2026-11-20_182714_exploracion-desarrollo-c-rumbo`](../corridas/2026-11-20_exploracion-reales/desarrollo/c-rumbo/2026-11-20_182714_exploracion-desarrollo-c-rumbo/) | 2026-11-20 | 140 | lista alcance-140 | `c-rumbo-corte-riesgo` |
+| [`2026-11-20_exploracion-reales/desarrollo/p-escalera/2026-11-20_175702_exploracion-desarrollo-p-escalera`](../corridas/2026-11-20_exploracion-reales/desarrollo/p-escalera/2026-11-20_175702_exploracion-desarrollo-p-escalera/) | 2026-11-20 | 140 | lista alcance-140 | `p-escalera-corte-riesgo` |
+| [`2026-11-20_exploracion-reales/desarrollo/p-lista/2026-11-20_174141_exploracion-desarrollo-p-lista`](../corridas/2026-11-20_exploracion-reales/desarrollo/p-lista/2026-11-20_174141_exploracion-desarrollo-p-lista/) | 2026-11-20 | 140 | lista alcance-140 | `p-lista-corte-riesgo` |
+| [`2026-11-20_exploracion-reales/desarrollo/p-minimo/2026-11-20_185816_exploracion-desarrollo-p-minimo`](../corridas/2026-11-20_exploracion-reales/desarrollo/p-minimo/2026-11-20_185816_exploracion-desarrollo-p-minimo/) | 2026-11-20 | 140 | lista alcance-140 | `p-minimo-corte-riesgo` |
+| [`2026-11-20_exploracion-reales/desarrollo/p-niveles/2026-11-20_181226_exploracion-desarrollo-p-niveles`](../corridas/2026-11-20_exploracion-reales/desarrollo/p-niveles/2026-11-20_181226_exploracion-desarrollo-p-niveles/) | 2026-11-20 | 140 | lista alcance-140 | `p-niveles-corte-riesgo` |
+| [`2026-11-20_exploracion-reales/desarrollo/p-sino/2026-11-20_184228_exploracion-desarrollo-p-sino`](../corridas/2026-11-20_exploracion-reales/desarrollo/p-sino/2026-11-20_184228_exploracion-desarrollo-p-sino/) | 2026-11-20 | 140 | lista alcance-140 | `p-sino-corte-riesgo` |
+| [`2026-11-20_exploracion-reales/humo/corrida/2026-11-20_171154_exploracion-humo`](../corridas/2026-11-20_exploracion-reales/humo/corrida/2026-11-20_171154_exploracion-humo/) | 2026-11-20 | 3 | 3 casos sin lista | `c-consejos-corte-riesgo`, `p-lista-corte-riesgo`, `p-escalera-corte-riesgo`, `p-niveles-corte-riesgo` … |
+| [`2026-11-20_exploracion-reales/test_reservado/base/2026-11-20_190944_exploracion-test_reservado-base`](../corridas/2026-11-20_exploracion-reales/test_reservado/base/2026-11-20_190944_exploracion-test_reservado-base/) | 2026-11-20 | 156 | incluye la reserva | `c-consejos-corte-riesgo` |
+| [`2026-11-20_iphone-15-pro-max-latencia/cpu-t4`](../corridas/2026-11-20_iphone-15-pro-max-latencia/cpu-t4/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/cpu-t4-premisa`](../corridas/2026-11-20_iphone-15-pro-max-latencia/cpu-t4-premisa/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/metal`](../corridas/2026-11-20_iphone-15-pro-max-latencia/metal/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/metal-premisa`](../corridas/2026-11-20_iphone-15-pro-max-latencia/metal-premisa/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-20_iphone-15-pro-max-latencia/seco-mac`](../corridas/2026-11-20_iphone-15-pro-max-latencia/seco-mac/) | 2026-11-20 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_iphone-15-pro-max-asr-y-detector/asr-y-detector`](../corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/asr-y-detector/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_iphone-15-pro-max-asr-y-detector/seco-mac`](../corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/seco-mac/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_iphone-15-pro-max-asr-y-detector/solo-detector`](../corridas/2026-11-21_iphone-15-pro-max-asr-y-detector/solo-detector/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_solo-el-numero/d150-hoy-1`](../corridas/2026-11-21_solo-el-numero/d150-hoy-1/) | 2026-11-21 | 150 | lista desarrollo-150 |  |
+| [`2026-11-21_solo-el-numero/d150-hoy-2`](../corridas/2026-11-21_solo-el-numero/d150-hoy-2/) | 2026-11-21 | 150 | lista desarrollo-150 |  |
+| [`2026-11-21_solo-el-numero/d150-numero`](../corridas/2026-11-21_solo-el-numero/d150-numero/) | 2026-11-21 | 150 | lista desarrollo-150 |  |
+| [`2026-11-21_solo-el-numero/iphone-hoy-1`](../corridas/2026-11-21_solo-el-numero/iphone-hoy-1/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_solo-el-numero/iphone-hoy-2`](../corridas/2026-11-21_solo-el-numero/iphone-hoy-2/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_solo-el-numero/iphone-hoy-3`](../corridas/2026-11-21_solo-el-numero/iphone-hoy-3/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_solo-el-numero/iphone-numero`](../corridas/2026-11-21_solo-el-numero/iphone-numero/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_solo-el-numero/s6-hoy-1`](../corridas/2026-11-21_solo-el-numero/s6-hoy-1/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_solo-el-numero/s6-hoy-2`](../corridas/2026-11-21_solo-el-numero/s6-hoy-2/) | 2026-11-21 | 6 | 6 casos sin lista |  |
+| [`2026-11-21_solo-el-numero/s6-numero`](../corridas/2026-11-21_solo-el-numero/s6-numero/) | 2026-11-21 | 6 | 6 casos sin lista |  |

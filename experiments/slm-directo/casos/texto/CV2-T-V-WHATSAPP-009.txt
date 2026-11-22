@@ -1,0 +1,21 @@
+A: Hola.
+B: Buenas, te llamo por el grupo de la comisión que organiza la kermés.
+A: Hola, ¿cambió algo?
+B: El grupo se va a cerrar porque una persona publicó un enlace de reventa.
+A: Yo no vi ese mensaje.
+B: Lo borramos rápido para que no se confunda nadie.
+A: ¿Cómo entro al nuevo?
+B: Primero hay que confirmar quiénes estaban en la comisión original.
+A: ¿No tienen la lista?
+B: Sí, pero los números se importaron sin el nombre de cada integrante.
+A: ¿Y cómo se identifica cada uno?
+B: Abrí el aviso que te llegó; tiene una serie que corresponde a tu cuenta.
+A: ¿La serie de seis números?
+B: Esa misma, mandámela y la cruzo con el registro de la comisión.
+A: El mensaje habla de registrar un teléfono nuevo.
+B: Es el formato que usa WhatsApp para vincular el grupo.
+A: No quiero pasar nada hasta hablar con la tesorera.
+B: Ella está atendiendo el buffet y no puede revisar mensajes.
+A: Espero a que termine.
+B: Bueno, la lista se va a cerrar de todos modos.
+A: Prefiero verificarlo.

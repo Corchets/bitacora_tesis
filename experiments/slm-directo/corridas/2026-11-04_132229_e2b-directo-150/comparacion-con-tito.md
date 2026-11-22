@@ -103,8 +103,8 @@ las 19 compartidas, las nueve compartidas con pedido, las 21 falsas alarmas y lo
 17 cambios de resultado. Las pestañas históricas conservan su lectura con Tito;
 las conversaciones se consultan en una única vista comparativa.
 
-Fuentes de la vista: [generador](../../analisis/tablero/comparar_corridas_150.py) y
-[plantilla](../../analisis/tablero/comparacion_150_plantilla.html). No hay un tercer
+Fuentes de la vista: [generador](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/comparar_corridas_150.py) y
+[plantilla](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/analisis/tablero/comparacion_150_plantilla.html). No hay un tercer
 experimento ni nuevas respuestas del modelo. La pestaña «Pasos recomendados»
 explica el orden de prueba propuesto, incluido preparar acceso seguro antes de
 volver a ejecutar inferencia en una copia que contiene la reserva.

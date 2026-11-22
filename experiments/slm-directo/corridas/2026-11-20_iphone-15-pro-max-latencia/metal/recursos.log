@@ -1,0 +1,23 @@
+# memoria_fisica_kb=7839264 nucleos=6 sistema=Version 27.0.1 (Build 24A446)
+2026-11-20T20:08:31-03:00 footprint_kb=6641 footprint_pico_kb=6641 residente_kb=25600 residente_pico_kb=25600 disponible_kb=3450110 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:08:36-03:00 footprint_kb=37553 footprint_pico_kb=38897 residente_kb=75056 residente_pico_kb=75952 disponible_kb=3419470 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:08:41-03:00 footprint_kb=44417 footprint_pico_kb=52609 residente_kb=99488 residente_pico_kb=105424 disponible_kb=3412606 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:08:46-03:00 footprint_kb=221940 footprint_pico_kb=221940 residente_kb=2889248 residente_pico_kb=2889248 disponible_kb=3235083 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:08:51-03:00 footprint_kb=314276 footprint_pico_kb=319012 residente_kb=2987136 residente_pico_kb=2990672 disponible_kb=3142747 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:08:56-03:00 footprint_kb=355972 footprint_pico_kb=355972 residente_kb=3029488 residente_pico_kb=3029488 disponible_kb=3101051 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:01-03:00 footprint_kb=423348 footprint_pico_kb=423348 residente_kb=3024320 residente_pico_kb=3067520 disponible_kb=3033675 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:06-03:00 footprint_kb=506932 footprint_pico_kb=506932 residente_kb=3080928 residente_pico_kb=3080928 disponible_kb=2950091 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:11-03:00 footprint_kb=535220 footprint_pico_kb=535220 residente_kb=3109168 residente_pico_kb=3109168 disponible_kb=2921803 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:16-03:00 footprint_kb=592724 footprint_pico_kb=592724 residente_kb=3105248 residente_pico_kb=3124016 disponible_kb=2864299 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:21-03:00 footprint_kb=505156 footprint_pico_kb=609156 residente_kb=3013584 residente_pico_kb=3124016 disponible_kb=2951867 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:26-03:00 footprint_kb=554212 footprint_pico_kb=609156 residente_kb=3063280 residente_pico_kb=3124016 disponible_kb=2902811 termico=fair bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:31-03:00 footprint_kb=611636 footprint_pico_kb=611636 residente_kb=3007984 residente_pico_kb=3124016 disponible_kb=2845387 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:36-03:00 footprint_kb=494292 footprint_pico_kb=611636 residente_kb=2752080 residente_pico_kb=3124016 disponible_kb=2962731 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:41-03:00 footprint_kb=543332 footprint_pico_kb=611636 residente_kb=2801616 residente_pico_kb=3124016 disponible_kb=2913691 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:46-03:00 footprint_kb=576116 footprint_pico_kb=611636 residente_kb=2834800 residente_pico_kb=3124016 disponible_kb=2880907 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:51-03:00 footprint_kb=518596 footprint_pico_kb=611636 residente_kb=2777776 residente_pico_kb=3124016 disponible_kb=2938427 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:09:56-03:00 footprint_kb=559572 footprint_pico_kb=611636 residente_kb=2819280 residente_pico_kb=3124016 disponible_kb=2897451 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:10:01-03:00 footprint_kb=518564 footprint_pico_kb=611636 residente_kb=2778624 residente_pico_kb=3124016 disponible_kb=2938459 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:10:06-03:00 footprint_kb=551332 footprint_pico_kb=611636 residente_kb=2811712 residente_pico_kb=3124016 disponible_kb=2905691 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:10:11-03:00 footprint_kb=584068 footprint_pico_kb=611636 residente_kb=2844496 residente_pico_kb=3124016 disponible_kb=2872955 termico=serious bateria=0.85 cargando=1 bajo_consumo=0
+2026-11-20T20:10:16-03:00 footprint_kb=554196 footprint_pico_kb=611636 residente_kb=2844496 residente_pico_kb=3124016 disponible_kb=2902827 termico=serious bateria=0.85 cargando=1 bajo_consumo=0

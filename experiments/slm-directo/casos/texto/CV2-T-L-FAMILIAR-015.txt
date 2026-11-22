@@ -1,0 +1,31 @@
+A: ¿Te quedaron las fotos del cumpleaños en el teléfono o las pasaste a la computadora?
+B: Todavía están en el teléfono. Quiero imprimir algunas para el álbum.
+A: La impresora de casa puede sacar fotos en papel brillante.
+B: ¿La conectaste al wifi nuevo?
+A: Sí, cuando cambiamos el router apareció un código en la pantalla de la impresora.
+B: ¿Era para emparejarla con el teléfono?
+A: Eso decía el menú. Después me mostró el nombre de la red.
+B: ¿Pudiste conectarla?
+A: Sí, imprime los documentos. Todavía no probé las fotos.
+B: ¿Tenés papel brillante o hay que comprar?
+A: Me queda un paquete chico, alcanza para diez.
+B: Elegimos diez de la fiesta, las que salen todos juntos.
+A: Hay una donde faltás vos porque estabas preparando la torta.
+B: Esa quiero, aunque salga de costado.
+A: ¿La imprimimos en tamaño postal o más grande?
+B: Postal, así entran varias en el álbum.
+A: ¿Querés que recorte las fotos antes de imprimir?
+B: No, primero veamos cómo quedan sin editar.
+A: El teléfono tiene una aplicación que arma un collage.
+B: Prefiero guardar las originales también.
+A: Sí, hago una carpeta que diga cumpleaños de Lolo.
+B: ¿La impresora deja fecha al pie?
+A: Se puede activar desde el menú de impresión.
+B: Mejor sin fecha, la ponemos a mano en el álbum.
+A: ¿La tinta negra está baja?
+B: El aviso amarillo apareció la semana pasada, pero todavía imprime bien.
+A: Entonces hagamos dos pruebas en papel común.
+B: Dale, y después usamos el brillante.
+A: ¿Querés que pase por tu casa con la impresora portátil?
+B: Sí, así las vemos con todos el domingo.
+A: Listo, te aviso cuando termine.

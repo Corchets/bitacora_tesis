@@ -1,0 +1,28 @@
+A: ¿Podés explicarle a la abuela cómo encontrar el mensaje de la farmacia?
+B: Sí, está fijado arriba del chat. Ella tiene que tocar el nombre del grupo.
+A: No ve el grupo porque tiene muchos archivados.
+B: Buscá “Familia Sur” en la lupa y aparece enseguida.
+A: Ya lo encontré. Hay un mensaje que dice que el remedio está listo.
+B: ¿De qué día es?
+A: Del lunes a la tarde. La farmacia dijo que lo guardaba hasta mañana.
+B: Entonces conviene ir hoy después de almorzar.
+A: Yo puedo pasar, pero no tengo el código para desbloquearle el teléfono.
+B: Ella lo sabe, suele ser el mismo que usa para desbloquear la pantalla.
+A: Sí, me lo dijo una vez, pero no lo tengo anotado.
+B: Mejor preguntale cuando la veas, así lo ingresa ella.
+A: Está bien. Ahora está durmiendo y no quiero llamarla.
+B: ¿El mensaje tiene el horario de atención?
+A: Dice de nueve a siete, con pausa al mediodía.
+B: Podemos ir a las cuatro, cuando baja menos gente.
+A: Yo salgo del trabajo a las tres y media. Paso por ella y vamos juntas.
+B: ¿La farmacia está cerca de la plaza o la de la avenida?
+A: La de la plaza, frente a la parada del colectivo.
+B: Ahí estacionamos en la calle lateral.
+A: ¿Querés que compre también las vendas que pidió el médico?
+B: Sí, anotá las medianas. Las chicas le quedan apretadas.
+A: Ya lo puse en la lista.
+B: Cuando la veas, que abra ella el teléfono y nos muestra el mensaje.
+A: Dale, le pregunto cuando lleguemos.
+B: Sí, que nos muestre el mensaje de la farmacia.
+A: Te aviso cuando vuelva de la farmacia.
+B: Gracias.

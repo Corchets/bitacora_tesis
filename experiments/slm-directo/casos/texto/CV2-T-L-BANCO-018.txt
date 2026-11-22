@@ -1,0 +1,28 @@
+A: Buen día, pagué el estacionamiento del hospital y en la app aparece “clave comercio 12”.
+B: Hola. ¿El importe coincide con lo que pagaste?
+A: Sí, 3.200 pesos por dos horas.
+B: ¿La fecha del movimiento es la de ayer?
+A: Sí, salí tarde de la consulta y pagué antes de buscar el auto.
+B: La descripción puede incluir referencias que envía el estacionamiento al procesar el cobro.
+A: Me preocupó la palabra clave porque pensé que era la de mi cuenta.
+B: ¿El cargo aparece dentro de los movimientos de la tarjeta?
+A: Sí, y termina en los últimos cuatro de mi tarjeta habitual.
+B: Entonces estás viendo el detalle de la compra. ¿Aparece algún segundo importe?
+A: No, uno solo. El ticket del estacionamiento también tiene 3.200.
+B: Está conciliado. La frase “clave comercio” no indica que se haya cambiado tu clave personal.
+A: Bien. ¿Y por qué tiene el número doce al lado?
+B: Puede ser una referencia de caja o de terminal del comercio.
+A: ¿Eso lo puedo consultar con ellos?
+B: Sí, el banco no tiene el detalle interno del estacionamiento.
+A: No hace falta, era para entender el resumen. No tengo reclamo por el importe.
+B: Perfecto. ¿Querés que te muestre cómo descargar el comprobante?
+A: Ya lo guardé junto al ticket médico.
+B: Entonces está todo en orden.
+A: Sí. Mañana tengo otra consulta y quería llevar el registro de gastos.
+B: Podés exportar los movimientos del mes desde la sección de tarjetas.
+A: Lo voy a probar. ¿Descarga en PDF?
+B: Podés elegir PDF o una planilla.
+A: Mejor PDF, así lo imprimo.
+B: Listo. ¿Queda alguna duda más?
+A: No, gracias por la atención.
+B: Buen día.

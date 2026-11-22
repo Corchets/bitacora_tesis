@@ -1,0 +1,37 @@
+{
+  "case_id": "CV2-T-V-WHATSAPP-010",
+  "grupo": "corpus_v2",
+  "semilla": "SC-CV2-T-WHATSAPP-010",
+  "par": null,
+  "clase": "vishing",
+  "t_r_linea": 11,
+  "t_c_linea": null,
+  "pedido": "REQUEST_AUTH_CODE",
+  "evidencia": [
+    {
+      "linea": 1,
+      "evento": "contexto",
+      "etiquetas": [
+        "AUTHORITY_CLAIM"
+      ]
+    },
+    {
+      "linea": 11,
+      "evento": "pedido",
+      "etiquetas": [
+        "REQUEST_AUTH_CODE"
+      ]
+    }
+  ],
+  "que_prueba": "Una reserva de museo se usa para pedir una serie de registro como si identificara el grupo de visitantes. Prueba pedido inducido vinculado al tamaño de una reserva y presión por cierre de lista.",
+  "origen": "Redacción ficticia asistida, 2026-10-21; modalidad base SC-WA-CODE-01, sin revisión humana.",
+  "revision_humana": false,
+  "notas": "> **Estado: propuesta sin discutir.** [D07](../../../../docs/gestion/MAPA-DECISIONES.md)\nPropuesta de T_R en línea 11, donde comienza el pedido indirecto; también podría ubicarse en línea 12, donde se completa o vuelve inequívoco. Ambas lecturas cambian el instante evaluado; queda pendiente de D07. Duda D07: línea 9 atribuye a la serie una función en la reserva y línea 11 solicita dictarla; T_R provisional en 11, primera petición verbal. No hay cumplimiento.",
+  "particion": "test_reservado",
+  "familia": "whatsapp",
+  "dificultad": "indirecto",
+  "tipo_legitima": null,
+  "variante_asr": true,
+  "escenario_base": "SC-WA-CODE-01",
+  "situacion": "Una reserva de museo se usa para pedir una serie de registro como si identificara el grupo de visitantes. Prueba pedido inducido vinculado al tamaño de una reserva y presión por cierre de lista."
+}

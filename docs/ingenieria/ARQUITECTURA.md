@@ -6,6 +6,8 @@ se decidirán al implementar y comparar alternativas.
 
 ## 1. Restricciones acordadas
 
+> **Nota del 2026-11-21:** en la evaluación final, la agenda y la dirección delimitaron cuándo corre el detector: corrió solo en llamadas entrantes de números no agendados, el alcance del [ADR 0003](adr/0003-detector-solo-en-entrantes-de-no-agendados.md) (su aceptación sigue pendiente). Además, el detector recibe quién habla según el canal, `PROTEGIDA` u `OTRA`, no si es atacante o víctima ([ADR 0002](adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md), [ADR 0007](adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). El diseño vigente está en el [capítulo 5](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md).
+
 - El replay de grabaciones es la base reproducible. VoIP propia es la integración
   objetivo, condicionada por la factibilidad; captura PSTN universal queda fuera.
 - ASR y detector se ejecutan localmente. El detector analiza texto y conserva contexto
@@ -24,6 +26,7 @@ presenta una adaptación al par de WhatsApp seleccionado para el piloto.
 
 > **Estado: propuesta sin discutir.** El flujo define responsabilidades conceptuales;
 > la ventana y política siguen abiertas en [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+> **Nota del 2026-11-21:** D08 ya se resolvió con límites; ver su [ficha](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 > Los modelos se eligieron el 2026-11-03 en [ADR 0001](adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md).
 
 ```mermaid
@@ -199,6 +202,8 @@ variantes elige el detector final de D09.
 > propuestos en [VENTANA-DE-CONTEXTO-Y-ALERTA.md](../investigacion/VENTANA-DE-CONTEXTO-Y-ALERTA.md);
 > su congelamiento corresponde a D08.
 
+> **Nota del 2026-11-21:** `arquitectura-web/` y el sitio ayuda-memoria salieron del repo; quedan en el tag [`archivo/pre-informe`](https://github.com/Corchets/bitacora_tesis/tree/archivo/pre-informe/docs/ingenieria/arquitectura-web).
+
 Además, el 2026-10-08 se adoptó en esta rama la consolidación del PR #58: una
 visualización estática del pipeline propuesto y un simulador de riesgo en
 `docs/ingenieria/arquitectura-web/`, publicados dentro del sitio de
@@ -210,6 +215,8 @@ rendimiento y no cierran D08. Esta adopción no resuelve D07, D08, D09 ni D11
 (abierta hasta que los cuatro ratifiquen «solo transcripción»).
 
 ## 7. Plan de experimento: Tito como filtro de consulta al SLM
+
+> **Nota del 2026-11-21:** §7 y §8 describen el detector con Tito, que ya no es el del proyecto. Tito salió el 2026-11-06 y el detector es Gemma 4 E2B solo ([ADR 0002](adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)); el porqué está en [H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md) y [H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md), y el diseño vigente, en el [capítulo 5](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md#551-detector).
 
 **Fecha:** 2026-10-26. **Issue de implementación:** [#68](https://github.com/Corchets/bitacora_tesis/issues/68),
 relacionado con [#51](https://github.com/Corchets/bitacora_tesis/issues/51).
@@ -424,6 +431,8 @@ conservaron; publicar los subissues no ejecuta el experimento.
 
 ## 8. Cómo funciona el detector durante una llamada
 
+> **Nota del 2026-11-21:** describe la configuración del ADR 0001, superada por el [ADR 0002](adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) (ver la nota de §7). El detector vigente está en el [capítulo 5](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md#551-detector).
+
 Describe el código de la configuración aceptada en el
 [ADR 0001](adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md), al 2026-11-04.
 La política de alerta sigue abierta en
@@ -473,7 +482,7 @@ llamada, y Tito no vuelve a correr.
 ### 8.2 Ejemplo: `CV2-D-V-BANCO-003`
 
 Una estafa de 26 líneas de la
-[corrida de 150 casos](https://github.com/Corchets/bitacora_tesis/blob/corrida-e2b-tito-viejo-150/experiments/slm-directo/corridas/2026-11-04_003715_e2b-tito-viejo-150/resumen.md):
+[corrida de 150 casos](../../experiments/slm-directo/corridas/2026-11-04_003715_e2b-tito-viejo-150/resumen.md):
 
 | Línea | Qué pasa | Tito | SLM |
 |---|---|---|---|

@@ -1,0 +1,24 @@
+A: Hola, en la computadora me apareció un aviso con un número mientras vinculaba el navegador.
+B: ¿Estabas en la aplicación del teléfono o en la página de la computadora?
+A: En la computadora. Mostró un código grande para leerlo con el celular.
+B: ¿Pudiste escanearlo desde la opción de dispositivos vinculados?
+A: Sí, después me mostró los chats en la pantalla grande.
+B: ¿La computadora es la tuya o la del trabajo?
+A: Es la de casa, la usamos mi pareja y yo.
+B: Si comparten el equipo, acordate de cerrar la sesión cuando termines.
+A: ¿Se cierra desde el teléfono?
+B: Sí. Entrás en dispositivos vinculados y elegís la computadora de escritorio.
+A: Me muestra una conexión de hoy y otra de hace tres semanas.
+B: ¿Reconocés las dos?
+A: La de hoy es la mía. La otra puede ser la notebook de mi hijo.
+B: Preguntale si sigue usando esa notebook. Si ya no, podés cerrar esa sesión.
+A: Está estudiando con la notebook del colegio, esa otra quedó guardada.
+B: Entonces podés cerrar la conexión vieja sin afectar tus mensajes del teléfono.
+A: ¿El número que apareció al principio sirve para volver a entrar?
+B: No, era solo para vincular esa sesión en ese momento.
+A: Ah, pensé que era el código de mi cuenta.
+B: La pantalla decía “vincular dispositivo”, así que correspondía a esa acción.
+A: Ya cerré la sesión vieja. Ahora solo queda la de esta tarde.
+B: Perfecto. ¿Querés que revisemos algo más?
+A: No, era entender el aviso. Gracias.
+B: A vos.

@@ -1,0 +1,1070 @@
+{
+ "conversaciones": "conversaciones-sub-6.json",
+ "conversaciones_sha256": "f941633f5218bd8aa6deb5be2d252f3979f05464268e3b75368fb5c62870da88",
+ "wav_sha256": "07682ffee1ee9b1ed8338af6a43c7d6b890ec5d7fe0c76d6306e26d3fa376720",
+ "sample_rate": 16000,
+ "canales": {
+  "0": "OTRA",
+  "1": "PROTEGIDA"
+ },
+ "voces": {
+  "OTRA": "Paulina",
+  "PROTEGIDA": "Mónica"
+ },
+ "pausa_s": 0.6,
+ "entre_casos_s": 4.0,
+ "duracion_s": 737.937,
+ "sistema": "macOS 27.0.1",
+ "casos": [
+  {
+   "caso": "CV2-D-V-BANCO-001",
+   "inicio_s": 1.0,
+   "fin_s": 165.514,
+   "lineas": [
+    {
+     "n": 1,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 1.0,
+     "fin_s": 4.441
+    },
+    {
+     "n": 2,
+     "hablante": "OTRA",
+     "inicio_s": 5.041,
+     "fin_s": 9.381
+    },
+    {
+     "n": 3,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 9.981,
+     "fin_s": 13.193
+    },
+    {
+     "n": 4,
+     "hablante": "OTRA",
+     "inicio_s": 13.793,
+     "fin_s": 17.912
+    },
+    {
+     "n": 5,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 18.512,
+     "fin_s": 21.679
+    },
+    {
+     "n": 6,
+     "hablante": "OTRA",
+     "inicio_s": 22.279,
+     "fin_s": 27.289
+    },
+    {
+     "n": 7,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 27.889,
+     "fin_s": 31.505
+    },
+    {
+     "n": 8,
+     "hablante": "OTRA",
+     "inicio_s": 32.105,
+     "fin_s": 36.862
+    },
+    {
+     "n": 9,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 37.462,
+     "fin_s": 40.337
+    },
+    {
+     "n": 10,
+     "hablante": "OTRA",
+     "inicio_s": 40.937,
+     "fin_s": 43.501
+    },
+    {
+     "n": 11,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 44.101,
+     "fin_s": 47.37
+    },
+    {
+     "n": 12,
+     "hablante": "OTRA",
+     "inicio_s": 47.969,
+     "fin_s": 51.62
+    },
+    {
+     "n": 13,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 52.22,
+     "fin_s": 55.453
+    },
+    {
+     "n": 14,
+     "hablante": "OTRA",
+     "inicio_s": 56.053,
+     "fin_s": 60.386
+    },
+    {
+     "n": 15,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 60.986,
+     "fin_s": 65.155
+    },
+    {
+     "n": 16,
+     "hablante": "OTRA",
+     "inicio_s": 65.755,
+     "fin_s": 71.492
+    },
+    {
+     "n": 17,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 72.092,
+     "fin_s": 74.743
+    },
+    {
+     "n": 18,
+     "hablante": "OTRA",
+     "inicio_s": 75.343,
+     "fin_s": 80.575
+    },
+    {
+     "n": 19,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 81.175,
+     "fin_s": 84.054
+    },
+    {
+     "n": 20,
+     "hablante": "OTRA",
+     "inicio_s": 84.654,
+     "fin_s": 88.476
+    },
+    {
+     "n": 21,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 89.076,
+     "fin_s": 92.765
+    },
+    {
+     "n": 22,
+     "hablante": "OTRA",
+     "inicio_s": 93.365,
+     "fin_s": 97.816
+    },
+    {
+     "n": 23,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 98.416,
+     "fin_s": 100.735
+    },
+    {
+     "n": 24,
+     "hablante": "OTRA",
+     "inicio_s": 101.335,
+     "fin_s": 105.741
+    },
+    {
+     "n": 25,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 106.341,
+     "fin_s": 109.409
+    },
+    {
+     "n": 26,
+     "hablante": "OTRA",
+     "inicio_s": 110.009,
+     "fin_s": 114.831
+    },
+    {
+     "n": 27,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 115.431,
+     "fin_s": 116.853
+    },
+    {
+     "n": 28,
+     "hablante": "OTRA",
+     "inicio_s": 117.453,
+     "fin_s": 121.919
+    },
+    {
+     "n": 29,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 122.519,
+     "fin_s": 126.201
+    },
+    {
+     "n": 30,
+     "hablante": "OTRA",
+     "inicio_s": 126.801,
+     "fin_s": 131.898
+    },
+    {
+     "n": 31,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 132.498,
+     "fin_s": 135.758
+    },
+    {
+     "n": 32,
+     "hablante": "OTRA",
+     "inicio_s": 136.358,
+     "fin_s": 141.347
+    },
+    {
+     "n": 33,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 141.947,
+     "fin_s": 145.378
+    },
+    {
+     "n": 34,
+     "hablante": "OTRA",
+     "inicio_s": 145.978,
+     "fin_s": 151.358
+    },
+    {
+     "n": 35,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 151.958,
+     "fin_s": 155.076
+    },
+    {
+     "n": 36,
+     "hablante": "OTRA",
+     "inicio_s": 155.676,
+     "fin_s": 159.309
+    },
+    {
+     "n": 37,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 159.909,
+     "fin_s": 163.2
+    },
+    {
+     "n": 38,
+     "hablante": "OTRA",
+     "inicio_s": 163.8,
+     "fin_s": 165.514
+    }
+   ]
+  },
+  {
+   "caso": "CV2-D-V-BANCO-002",
+   "inicio_s": 169.514,
+   "fin_s": 292.971,
+   "lineas": [
+    {
+     "n": 1,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 169.514,
+     "fin_s": 169.771
+    },
+    {
+     "n": 2,
+     "hablante": "OTRA",
+     "inicio_s": 170.371,
+     "fin_s": 175.998
+    },
+    {
+     "n": 3,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 176.598,
+     "fin_s": 177.935
+    },
+    {
+     "n": 4,
+     "hablante": "OTRA",
+     "inicio_s": 178.535,
+     "fin_s": 182.382
+    },
+    {
+     "n": 5,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 182.982,
+     "fin_s": 187.186
+    },
+    {
+     "n": 6,
+     "hablante": "OTRA",
+     "inicio_s": 187.786,
+     "fin_s": 193.159
+    },
+    {
+     "n": 7,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 193.759,
+     "fin_s": 196.919
+    },
+    {
+     "n": 8,
+     "hablante": "OTRA",
+     "inicio_s": 197.519,
+     "fin_s": 200.871
+    },
+    {
+     "n": 9,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 201.471,
+     "fin_s": 203.526
+    },
+    {
+     "n": 10,
+     "hablante": "OTRA",
+     "inicio_s": 204.126,
+     "fin_s": 210.324
+    },
+    {
+     "n": 11,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 210.924,
+     "fin_s": 214.019
+    },
+    {
+     "n": 12,
+     "hablante": "OTRA",
+     "inicio_s": 214.619,
+     "fin_s": 217.815
+    },
+    {
+     "n": 13,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 218.415,
+     "fin_s": 220.82
+    },
+    {
+     "n": 14,
+     "hablante": "OTRA",
+     "inicio_s": 221.42,
+     "fin_s": 224.987
+    },
+    {
+     "n": 15,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 225.587,
+     "fin_s": 227.525
+    },
+    {
+     "n": 16,
+     "hablante": "OTRA",
+     "inicio_s": 228.125,
+     "fin_s": 232.957
+    },
+    {
+     "n": 17,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 233.557,
+     "fin_s": 237.033
+    },
+    {
+     "n": 18,
+     "hablante": "OTRA",
+     "inicio_s": 237.633,
+     "fin_s": 242.25
+    },
+    {
+     "n": 19,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 242.85,
+     "fin_s": 244.689
+    },
+    {
+     "n": 20,
+     "hablante": "OTRA",
+     "inicio_s": 245.289,
+     "fin_s": 250.135
+    },
+    {
+     "n": 21,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 250.735,
+     "fin_s": 253.182
+    },
+    {
+     "n": 22,
+     "hablante": "OTRA",
+     "inicio_s": 253.782,
+     "fin_s": 259.462
+    },
+    {
+     "n": 23,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 260.062,
+     "fin_s": 261.869
+    },
+    {
+     "n": 24,
+     "hablante": "OTRA",
+     "inicio_s": 262.469,
+     "fin_s": 266.813
+    },
+    {
+     "n": 25,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 267.413,
+     "fin_s": 270.046
+    },
+    {
+     "n": 26,
+     "hablante": "OTRA",
+     "inicio_s": 270.646,
+     "fin_s": 274.875
+    },
+    {
+     "n": 27,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 275.475,
+     "fin_s": 279.267
+    },
+    {
+     "n": 28,
+     "hablante": "OTRA",
+     "inicio_s": 279.867,
+     "fin_s": 283.145
+    },
+    {
+     "n": 29,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 283.745,
+     "fin_s": 285.72
+    },
+    {
+     "n": 30,
+     "hablante": "OTRA",
+     "inicio_s": 286.32,
+     "fin_s": 289.669
+    },
+    {
+     "n": 31,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 290.269,
+     "fin_s": 292.971
+    }
+   ]
+  },
+  {
+   "caso": "CV2-D-V-BANCO-007",
+   "inicio_s": 296.971,
+   "fin_s": 417.897,
+   "lineas": [
+    {
+     "n": 1,
+     "hablante": "OTRA",
+     "inicio_s": 296.971,
+     "fin_s": 301.284
+    },
+    {
+     "n": 2,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 301.884,
+     "fin_s": 303.752
+    },
+    {
+     "n": 3,
+     "hablante": "OTRA",
+     "inicio_s": 304.352,
+     "fin_s": 308.68
+    },
+    {
+     "n": 4,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 309.28,
+     "fin_s": 311.198
+    },
+    {
+     "n": 5,
+     "hablante": "OTRA",
+     "inicio_s": 311.798,
+     "fin_s": 316.424
+    },
+    {
+     "n": 6,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 317.024,
+     "fin_s": 321.025
+    },
+    {
+     "n": 7,
+     "hablante": "OTRA",
+     "inicio_s": 321.625,
+     "fin_s": 324.541
+    },
+    {
+     "n": 8,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 325.141,
+     "fin_s": 329.021
+    },
+    {
+     "n": 9,
+     "hablante": "OTRA",
+     "inicio_s": 329.621,
+     "fin_s": 333.864
+    },
+    {
+     "n": 10,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 334.464,
+     "fin_s": 337.027
+    },
+    {
+     "n": 11,
+     "hablante": "OTRA",
+     "inicio_s": 337.627,
+     "fin_s": 341.116
+    },
+    {
+     "n": 12,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 341.716,
+     "fin_s": 343.421
+    },
+    {
+     "n": 13,
+     "hablante": "OTRA",
+     "inicio_s": 344.021,
+     "fin_s": 347.776
+    },
+    {
+     "n": 14,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 348.376,
+     "fin_s": 350.765
+    },
+    {
+     "n": 15,
+     "hablante": "OTRA",
+     "inicio_s": 351.365,
+     "fin_s": 354.59
+    },
+    {
+     "n": 16,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 355.19,
+     "fin_s": 358.954
+    },
+    {
+     "n": 17,
+     "hablante": "OTRA",
+     "inicio_s": 359.553,
+     "fin_s": 365.798
+    },
+    {
+     "n": 18,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 366.398,
+     "fin_s": 369.62
+    },
+    {
+     "n": 19,
+     "hablante": "OTRA",
+     "inicio_s": 370.22,
+     "fin_s": 374.391
+    },
+    {
+     "n": 20,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 374.991,
+     "fin_s": 377.434
+    },
+    {
+     "n": 21,
+     "hablante": "OTRA",
+     "inicio_s": 378.034,
+     "fin_s": 381.651
+    },
+    {
+     "n": 22,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 382.251,
+     "fin_s": 385.01
+    },
+    {
+     "n": 23,
+     "hablante": "OTRA",
+     "inicio_s": 385.61,
+     "fin_s": 391.719
+    },
+    {
+     "n": 24,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 392.319,
+     "fin_s": 395.066
+    },
+    {
+     "n": 25,
+     "hablante": "OTRA",
+     "inicio_s": 395.666,
+     "fin_s": 399.552
+    },
+    {
+     "n": 26,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 400.152,
+     "fin_s": 404.983
+    },
+    {
+     "n": 27,
+     "hablante": "OTRA",
+     "inicio_s": 405.583,
+     "fin_s": 408.379
+    },
+    {
+     "n": 28,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 408.979,
+     "fin_s": 410.312
+    },
+    {
+     "n": 29,
+     "hablante": "OTRA",
+     "inicio_s": 410.912,
+     "fin_s": 413.836
+    },
+    {
+     "n": 30,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 414.435,
+     "fin_s": 417.897
+    }
+   ]
+  },
+  {
+   "caso": "CV2-D-L-BANCO-001",
+   "inicio_s": 421.897,
+   "fin_s": 531.102,
+   "lineas": [
+    {
+     "n": 1,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 421.897,
+     "fin_s": 427.627
+    },
+    {
+     "n": 2,
+     "hablante": "OTRA",
+     "inicio_s": 428.228,
+     "fin_s": 433.531
+    },
+    {
+     "n": 3,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 434.131,
+     "fin_s": 438.585
+    },
+    {
+     "n": 4,
+     "hablante": "OTRA",
+     "inicio_s": 439.185,
+     "fin_s": 444.569
+    },
+    {
+     "n": 5,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 445.169,
+     "fin_s": 448.905
+    },
+    {
+     "n": 6,
+     "hablante": "OTRA",
+     "inicio_s": 449.505,
+     "fin_s": 455.333
+    },
+    {
+     "n": 7,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 455.933,
+     "fin_s": 459.055
+    },
+    {
+     "n": 8,
+     "hablante": "OTRA",
+     "inicio_s": 459.655,
+     "fin_s": 464.06
+    },
+    {
+     "n": 9,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 464.66,
+     "fin_s": 466.897
+    },
+    {
+     "n": 10,
+     "hablante": "OTRA",
+     "inicio_s": 467.497,
+     "fin_s": 472.791
+    },
+    {
+     "n": 11,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 473.392,
+     "fin_s": 476.311
+    },
+    {
+     "n": 12,
+     "hablante": "OTRA",
+     "inicio_s": 476.911,
+     "fin_s": 484.087
+    },
+    {
+     "n": 13,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 484.687,
+     "fin_s": 486.497
+    },
+    {
+     "n": 14,
+     "hablante": "OTRA",
+     "inicio_s": 487.096,
+     "fin_s": 494.555
+    },
+    {
+     "n": 15,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 495.155,
+     "fin_s": 497.105
+    },
+    {
+     "n": 16,
+     "hablante": "OTRA",
+     "inicio_s": 497.705,
+     "fin_s": 503.56
+    },
+    {
+     "n": 17,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 504.16,
+     "fin_s": 505.996
+    },
+    {
+     "n": 18,
+     "hablante": "OTRA",
+     "inicio_s": 506.596,
+     "fin_s": 513.363
+    },
+    {
+     "n": 19,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 513.963,
+     "fin_s": 515.852
+    },
+    {
+     "n": 20,
+     "hablante": "OTRA",
+     "inicio_s": 516.452,
+     "fin_s": 520.54
+    },
+    {
+     "n": 21,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 521.14,
+     "fin_s": 524.856
+    },
+    {
+     "n": 22,
+     "hablante": "OTRA",
+     "inicio_s": 525.456,
+     "fin_s": 531.102
+    }
+   ]
+  },
+  {
+   "caso": "CV2-D-L-BANCO-007",
+   "inicio_s": 535.102,
+   "fin_s": 638.366,
+   "lineas": [
+    {
+     "n": 1,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 535.102,
+     "fin_s": 540.288
+    },
+    {
+     "n": 2,
+     "hablante": "OTRA",
+     "inicio_s": 540.888,
+     "fin_s": 543.953
+    },
+    {
+     "n": 3,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 544.553,
+     "fin_s": 549.006
+    },
+    {
+     "n": 4,
+     "hablante": "OTRA",
+     "inicio_s": 549.606,
+     "fin_s": 553.851
+    },
+    {
+     "n": 5,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 554.452,
+     "fin_s": 558.671
+    },
+    {
+     "n": 6,
+     "hablante": "OTRA",
+     "inicio_s": 559.271,
+     "fin_s": 560.965
+    },
+    {
+     "n": 7,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 561.565,
+     "fin_s": 563.957
+    },
+    {
+     "n": 8,
+     "hablante": "OTRA",
+     "inicio_s": 564.557,
+     "fin_s": 570.454
+    },
+    {
+     "n": 9,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 571.054,
+     "fin_s": 575.46
+    },
+    {
+     "n": 10,
+     "hablante": "OTRA",
+     "inicio_s": 576.06,
+     "fin_s": 581.613
+    },
+    {
+     "n": 11,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 582.213,
+     "fin_s": 584.325
+    },
+    {
+     "n": 12,
+     "hablante": "OTRA",
+     "inicio_s": 584.925,
+     "fin_s": 588.956
+    },
+    {
+     "n": 13,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 589.556,
+     "fin_s": 593.759
+    },
+    {
+     "n": 14,
+     "hablante": "OTRA",
+     "inicio_s": 594.359,
+     "fin_s": 599.496
+    },
+    {
+     "n": 15,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 600.096,
+     "fin_s": 602.768
+    },
+    {
+     "n": 16,
+     "hablante": "OTRA",
+     "inicio_s": 603.368,
+     "fin_s": 607.869
+    },
+    {
+     "n": 17,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 608.469,
+     "fin_s": 611.924
+    },
+    {
+     "n": 18,
+     "hablante": "OTRA",
+     "inicio_s": 612.524,
+     "fin_s": 619.939
+    },
+    {
+     "n": 19,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 620.539,
+     "fin_s": 625.492
+    },
+    {
+     "n": 20,
+     "hablante": "OTRA",
+     "inicio_s": 626.092,
+     "fin_s": 630.447
+    },
+    {
+     "n": 21,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 631.047,
+     "fin_s": 633.367
+    },
+    {
+     "n": 22,
+     "hablante": "OTRA",
+     "inicio_s": 633.967,
+     "fin_s": 636.624
+    },
+    {
+     "n": 23,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 637.224,
+     "fin_s": 638.366
+    }
+   ]
+  },
+  {
+   "caso": "CV2-D-L-DELIVERY-001",
+   "inicio_s": 642.366,
+   "fin_s": 733.937,
+   "lineas": [
+    {
+     "n": 1,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 642.366,
+     "fin_s": 646.986
+    },
+    {
+     "n": 2,
+     "hablante": "OTRA",
+     "inicio_s": 647.586,
+     "fin_s": 649.708
+    },
+    {
+     "n": 3,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 650.308,
+     "fin_s": 654.659
+    },
+    {
+     "n": 4,
+     "hablante": "OTRA",
+     "inicio_s": 655.259,
+     "fin_s": 660.933
+    },
+    {
+     "n": 5,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 661.533,
+     "fin_s": 664.815
+    },
+    {
+     "n": 6,
+     "hablante": "OTRA",
+     "inicio_s": 665.415,
+     "fin_s": 668.036
+    },
+    {
+     "n": 7,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 668.636,
+     "fin_s": 671.762
+    },
+    {
+     "n": 8,
+     "hablante": "OTRA",
+     "inicio_s": 672.362,
+     "fin_s": 675.393
+    },
+    {
+     "n": 9,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 675.993,
+     "fin_s": 679.843
+    },
+    {
+     "n": 10,
+     "hablante": "OTRA",
+     "inicio_s": 680.443,
+     "fin_s": 685.471
+    },
+    {
+     "n": 11,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 686.071,
+     "fin_s": 688.934
+    },
+    {
+     "n": 12,
+     "hablante": "OTRA",
+     "inicio_s": 689.534,
+     "fin_s": 694.031
+    },
+    {
+     "n": 13,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 694.631,
+     "fin_s": 697.802
+    },
+    {
+     "n": 14,
+     "hablante": "OTRA",
+     "inicio_s": 698.402,
+     "fin_s": 702.32
+    },
+    {
+     "n": 15,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 702.92,
+     "fin_s": 705.857
+    },
+    {
+     "n": 16,
+     "hablante": "OTRA",
+     "inicio_s": 706.457,
+     "fin_s": 709.838
+    },
+    {
+     "n": 17,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 710.438,
+     "fin_s": 713.406
+    },
+    {
+     "n": 18,
+     "hablante": "OTRA",
+     "inicio_s": 714.006,
+     "fin_s": 717.276
+    },
+    {
+     "n": 19,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 717.876,
+     "fin_s": 719.557
+    },
+    {
+     "n": 20,
+     "hablante": "OTRA",
+     "inicio_s": 720.157,
+     "fin_s": 723.402
+    },
+    {
+     "n": 21,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 724.002,
+     "fin_s": 726.537
+    },
+    {
+     "n": 22,
+     "hablante": "OTRA",
+     "inicio_s": 727.137,
+     "fin_s": 729.324
+    },
+    {
+     "n": 23,
+     "hablante": "PROTEGIDA",
+     "inicio_s": 729.924,
+     "fin_s": 732.012
+    },
+    {
+     "n": 24,
+     "hablante": "OTRA",
+     "inicio_s": 732.612,
+     "fin_s": 733.937
+    }
+   ]
+  }
+ ]
+}

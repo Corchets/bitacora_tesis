@@ -1,0 +1,27 @@
+A: Atención del banco, buen día. ¿En qué puedo ayudarte?
+B: Hola, quiero cambiar dónde me mandan el resumen impreso. Me mudé hace un mes.
+A: Buen día. ¿Querés actualizar también el domicilio que figura para la tarjeta?
+B: Sí, ya no vivo en la calle Pino. Estoy en un departamento por la avenida Norte.
+A: Para actualizarlo necesito que me confirmes el domicilio completo nuevo.
+B: Avenida Norte 1580, piso tres, departamento A.
+A: Gracias. ¿Desde qué fecha estás viviendo ahí?
+B: Desde el 1 de octubre. Tengo contrato y servicio a mi nombre.
+A: El cambio puede demorar unos días en reflejarse. ¿Querés que te enviemos el resumen de este mes al domicilio anterior?
+B: No, ya no tengo acceso al buzón. Prefiero recibirlo en la aplicación.
+A: La versión digital ya está activa en tu cuenta. Puedo dejar de emitir el papel.
+B: Sí, mejor. ¿Eso afecta las notificaciones de compras?
+A: No, son avisos distintos. Solo se modifica el envío del resumen.
+B: ¿Necesitás que te mande una factura de servicio?
+A: No hace falta para este cambio de correspondencia. Si otro trámite requiere comprobar domicilio, te lo van a indicar por el canal habitual.
+B: Perfecto. ¿Me confirmás que el domicilio quedó escrito correctamente?
+A: Avenida Norte 1580, tercer piso, A.
+B: Sí. El portero recibe cartas, así que no hay problema.
+A: ¿Querés conservar el domicilio anterior como referencia secundaria?
+B: No, ya entregué las llaves del departamento.
+A: Lo quito de correspondencia y dejo el nuevo como principal.
+B: Listo, gracias por hacerlo ahora. La próxima semana vence el resumen.
+A: Vas a poder consultarlo desde la aplicación aunque el cambio postal siga procesándose.
+B: Bien, eso me alcanza.
+A: Te queda registrada la actualización con referencia 1804.
+B: La anoté. Gracias.
+A: A vos.

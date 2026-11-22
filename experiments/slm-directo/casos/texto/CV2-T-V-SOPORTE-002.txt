@@ -1,0 +1,20 @@
+A: Buen día, del soporte de Sueldos Claros. ¿Te aparece el recibo de este mes?
+B: Me aparece el anterior, el nuevo no.
+A: Hubo un cambio en el acceso al portal de recibos.
+B: ¿Tengo que pedirle algo a administración?
+A: No, puedo revisar si el perfil está sincronizado.
+B: ¿Qué necesitás?
+A: Abrí el sitio desde el navegador de la oficina.
+B: Ya estoy en la pantalla de inicio.
+A: Ingresá con tu usuario y tu contraseña habitual para que vea si reconoce la sesión.
+B: ¿No la tengo que compartir por teléfono?
+A: No, escribila en el portal y decime qué mensaje aparece.
+B: Me da desconfianza.
+A: Si no carga hoy, el recibo puede quedar para el próximo período.
+B: El portal abrió la cuenta con mi usuario.
+A: Bien, ahora veo que falta el comprobante.
+B: ¿Ya está cargado?
+A: Sí, actualizá la página.
+B: Apareció el recibo.
+A: Entonces quedó resuelto.
+B: Gracias.

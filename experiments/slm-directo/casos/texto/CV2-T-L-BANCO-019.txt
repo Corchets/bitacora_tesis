@@ -1,0 +1,24 @@
+A: Hola, tengo una compra aprobada pero el comercio me pregunta por un código de autorización.
+B: Buenas. ¿Qué importe tiene la compra?
+A: 21.500 pesos en una casa de repuestos, ayer a la tarde.
+B: ¿El comercio te pidió el número que aparece en el comprobante o uno distinto?
+A: Me dijo “código de autorización”, y yo veo un número de operación de seis cifras.
+B: Ese número del detalle puede ser la referencia de la compra. ¿La operación ya se asentó en la cuenta?
+A: Sí, aparece completada. El repuesto me lo entregaron en el momento.
+B: Podés mostrarles el comprobante desde la aplicación. A veces el comercio necesita esa referencia para conciliación.
+A: ¿Tengo que leerla por teléfono o puedo pasar por el local?
+B: El banco no puede decirte qué canal usa ese comercio. Consultales por el medio habitual.
+A: Pensaba ir mañana con la factura. La pieza no encajó y la voy a cambiar.
+B: Entonces llevá también el comprobante de compra.
+A: ¿La tarjeta está bien? No quiero que el código signifique que quedó bloqueada.
+B: No hay bloqueo en tu tarjeta. Las compras posteriores aparecen normalmente.
+A: Sí, pagué el combustible esta mañana.
+B: Ese movimiento también se aprobó.
+A: ¿El código cambia si hacen una devolución?
+B: La devolución aparece como otro movimiento, asociado a la compra original.
+A: Entiendo. Lo que yo llamaba código era el número de autorización.
+B: Exactamente, es una referencia de esa operación.
+A: Bueno, lo llevo impreso para que no tengan que buscarlo.
+B: Si querés, el PDF queda disponible en el detalle del movimiento.
+A: Ya lo guardé. Gracias por aclararlo.
+B: A vos.

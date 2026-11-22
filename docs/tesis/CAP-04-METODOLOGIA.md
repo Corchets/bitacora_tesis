@@ -1,4 +1,6 @@
 > **Estado: borrador del 2026-11-03.** [D07](../gestion/MAPA-DECISIONES.md#d07--aprobar-taxonomía-y-evento-crítico) y [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental) siguen abiertas: lo marcado como propuesta se ajusta cuando se congelen. El detalle está en el [protocolo experimental](../evaluacion/PROTOCOLO-EXPERIMENTAL.md).
+>
+> **Nota del 2026-11-21:** D08 quedó resuelta con límites, con lo que se fijó para la evaluación final; D07 sigue abierta. Ver las dos fichas en el [mapa de decisiones](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
 # Capítulo 4: Metodología
 
@@ -24,7 +26,9 @@ El material disponible es el siguiente:
 |---|---|---|
 | 53 antecedentes | 29 vishing y 24 negativos difíciles, escritos | Desarrollo; se conservan para reproducir corridas |
 | [Corpus v2](../../experiments/slm-directo/casos/DISENO-CORPUS-V2.md), desarrollo | 46 vishing y 51 legítimas, de redacción asistida | Desarrollo |
-| Corpus v2, reserva | 100 vishing y 100 legítimas, de redacción asistida | Test reservado candidato, sin correr |
+| Corpus v2, reserva | 100 vishing y 100 legítimas, de redacción asistida | Test reservado. Corrió una sola vez, el 2026-11-19 ([§8.3.4](CAP-08-RESULTADOS-EXPERIMENTALES.md#834-evaluación-final)) |
+| Legítimas entrantes | 94 de desarrollo y 56 de test, de redacción asistida | Escritas para el alcance de llamadas entrantes de no agendados ([ADR 0004](../ingenieria/adr/0004-legitimas-entrantes-nuevas-y-test-aparte.md)) |
+| Conjuntos externos reales | 33 estafas coreanas y 33 legítimas de call center de Estados Unidos, traducidas | Solo evaluación ([§8.1](CAP-08-RESULTADOS-EXPERIMENTALES.md#81-descripción-del-corpus)) |
 | Diálogos con voz real | 4 guiones (3 estafas y 1 legítima), 9 llamadas y 2 voces | Prueba del recorrido, fuera de `corpus_v2` |
 
 Ninguno de los 350 casos escritos tiene `revision_humana` en verdadero. Corpus v2 incluye 30 estafas que terminan antes del pedido y legítimas con pedidos razonables o menciones sin pedido, para no reducir el problema a palabras clave.
@@ -49,7 +53,7 @@ Las [particiones de Tito](../../experiments/slm-directo/PARTICIONES-TITO-2026-10
 
 ## 4.5. Línea base, modelos y protocolo
 
-La línea base son las **reglas léxicas**. La configuración evaluada es la del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md), sobre el ASR del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md): Gemma 4 E2B solo, con el prompt `c-premisa-corte-riesgo`, aviso con riesgo ≥ 0,3 y consulta solo en las líneas de OTRA. Se congela antes del test y se corre una sola vez ([#52](https://github.com/Corchets/bitacora_tesis/issues/52)). Tito no se evalúa, ni como configuración ni como ablación: se cita solo como evidencia de lo que se probó ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md), [H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)).
+La línea base son las **reglas léxicas**. La configuración evaluada es la del [ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md), sobre el ASR del [ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md): Gemma 4 E2B solo, con el prompt `c-premisa-corte-riesgo`, aviso con riesgo ≥ 0,3 y consulta solo en las líneas de OTRA. Se congela antes del test y se corre una sola vez ([#52](https://github.com/Corchets/bitacora_tesis/issues/52)). **Nota del 2026-11-20:** el prompt con el que corrió la evaluación final, el 2026-11-19, es `c-consejos-corte-riesgo` ([ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)); lo demás no cambió. Tito no se evalúa, ni como configuración ni como ablación: se cita solo como evidencia de lo que se probó ([H08](../hallazgos/H08-tito-evita-falsas-alarmas-por-punto-ciego.md), [H09](../hallazgos/H09-tito-clasificador-en-vez-de-compuerta.md)).
 
 > **Estado: propuesta sin discutir.** El [protocolo](../evaluacion/PROTOCOLO-EXPERIMENTAL.md#5-política-de-alerta-a-congelar-opciones-y-evidencia-observada) propone como política de referencia el aviso único en el primer `true` válido, que es la que usó #101. Se congela en D08.
 

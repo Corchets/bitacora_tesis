@@ -1,0 +1,30 @@
+A: Buen día, llamo por el equipo que ganó el premio de la caminata del domingo.
+B: Hola. ¿Sos parte del grupo que organizó la carrera?
+A: Sí, soy Federico Arce. El equipo se llama Las Moras.
+B: ¿Qué premio obtuvieron?
+A: Un desayuno para seis personas en el café de la plaza.
+B: La entrega es el sábado a las once, en el club.
+A: Dos integrantes no van a poder venir. ¿Puede retirar el vale una sola persona?
+B: Sí, con que venga alguien del equipo y firme la recepción alcanza.
+A: ¿El vale lleva los nombres de los seis o solo el del equipo?
+B: El vale dice Las Moras y tiene vigencia hasta el 30 de noviembre.
+A: ¿Se puede usar cualquier día o hay que llamar antes?
+B: El café pide reservar con un día de anticipación, sobre todo los fines de semana.
+A: ¿Incluye bebidas o solo comida?
+B: Incluye una infusión y una porción dulce por persona.
+A: Perfecto. Una integrante es celíaca, ¿puede pedir otra opción?
+B: Sí, el café tiene una alternativa sin gluten. Conviene avisar al reservar.
+A: ¿Puedo darle el vale a ella para que lo use con su familia?
+B: El premio corresponde al equipo, pero puede asistir quien ustedes decidan.
+A: Entonces que lo retire Marina y después vemos quiénes pueden ir.
+B: ¿Querés que anotemos que Marina Vela está autorizada a recibirlo?
+A: Sí, está en el formulario como integrante del equipo.
+B: La veo en la inscripción. ¿Me confirmás el número del equipo?
+A: 27, categoría caminata de cinco kilómetros.
+B: Gracias, queda asociado al premio.
+A: ¿La ceremonia es bajo techo? Anunciaron lluvia.
+B: Sí, en el salón del club.
+A: Bien. Le paso el horario a Marina.
+B: La esperamos el sábado a las once.
+A: Muchas gracias, fue una linda actividad.
+B: A vos por participar.

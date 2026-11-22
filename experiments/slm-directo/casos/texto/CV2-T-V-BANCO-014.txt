@@ -1,0 +1,18 @@
+A: Hola, del banco, por la autorización de una devolución en cuotas.
+B: ¿Qué devolución?
+A: La compra de un horno que pagaste en tres veces.
+B: La tienda me devolvió una cuota, eso sí.
+A: El reintegro quedó en revisión porque el perfil de tarjeta no coincide con el actual.
+B: ¿Tengo que pedirlo de nuevo?
+A: No, hay que actualizar el permiso de compras desde el menú de tarjetas.
+B: Lo estoy viendo.
+A: Abrí la pantalla de devolución y completá el PIN de la tarjeta para identificar la compra.
+B: ¿El PIN del cajero?
+A: Sí, el mismo que usás para autorizar operaciones.
+B: No quiero escribirlo en una pantalla que abrí por una llamada.
+A: No me lo estás diciendo a mí, solo lo compara el sistema.
+B: ¿Me podés mandar el número de reclamo?
+A: Se genera una vez que queda autorizada la devolución.
+B: Lo voy a consultar desde atención al cliente.
+A: Si llamás a otro sector, quizá no vean la devolución.
+B: Igual no voy a ingresar mi PIN.

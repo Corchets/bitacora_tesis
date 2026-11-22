@@ -6,6 +6,8 @@
 > y la política de alerta y evaluación en
 > [D08](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
+> **Nota del 2026-11-21:** D08 se resolvió con límites ([ficha](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental)). En la [evaluación final](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/README.md) la anticipación se informó en líneas y sobre texto (`T_A < T_R` y `T_A ≤ T_R`); `L_R`, `L_C` y `Preventive@δ`, que dependen de segundos, no se midieron. Las definiciones siguen como estaban.
+
 Define las mediciones de las [preguntas del proyecto](../investigacion/PREGUNTAS-DE-INVESTIGACION.md):
 detección incremental (PI1) y margen temporal de la alerta (PI2).
 

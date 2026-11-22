@@ -1,0 +1,14 @@
+{
+  "c-consejos-corte-riesgo": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  },
+  "v4-corte": {
+    "lineas": 48,
+    "leidas": 48,
+    "errores": [],
+    "pasa": true
+  }
+}

@@ -1,0 +1,32 @@
+A: Buenas, mi hijo dice que dejó la tarjeta de biblioteca en el comedor.
+B: Hola. ¿En qué curso está?
+A: Tercero B, turno mañana. Se llama Julián Funes.
+B: ¿Se dio cuenta hoy o ayer?
+A: Hoy al volver a casa. La usó en el recreo grande.
+B: Voy a preguntar a la persona que ordena el comedor.
+A: ¿La tarjeta tiene su foto o solo el nombre?
+B: Las tarjetas nuevas tienen foto y curso.
+A: La suya es verde y tiene una esquina doblada.
+B: Encontramos una verde en la mesa junto a la ventana.
+A: Debe ser esa. ¿La guardaron en secretaría?
+B: Sí, en el cajón de objetos encontrados.
+A: ¿Puede ir a buscarla mañana antes de entrar?
+B: Puede pasar por recepción desde las siete y media.
+A: Él llega con el transporte escolar a las ocho.
+B: Entonces le da el tiempo para retirarla antes de formar.
+A: ¿Tiene que llevar el cuaderno de biblioteca?
+B: No, solo confirmar su nombre y curso.
+A: Bien, se lo digo esta noche.
+B: Si no llega a pasar, puede buscarla en el recreo y pedir ayuda a la bibliotecaria.
+A: ¿La escuela permite que tenga otra tarjeta mientras tanto?
+B: No hace falta, la guardamos hasta que la retire.
+A: Perfecto. ¿La biblioteca abre mañana?
+B: Sí, después del primer recreo.
+A: Tiene un libro que vence el viernes.
+B: Puede devolverlo cuando pase a buscar la tarjeta.
+A: Bueno, así no tiene que acordarse de dos cosas.
+B: ¿Querés que le deje una nota en el cuaderno?
+A: Sí, por favor, para que no se olvide.
+B: Se la mandamos hoy.
+A: Gracias por encontrarla.
+B: De nada.

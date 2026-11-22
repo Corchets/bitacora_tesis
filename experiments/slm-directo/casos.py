@@ -26,8 +26,9 @@ DIR_REFERENCIA = RAIZ / "casos" / "referencia"
 ROLES = RAIZ / "casos" / "roles-protegida.json"
 CATALOGO = RAIZ.parents[1] / "docs" / "corpus" / "CATALOGO-ESCENARIOS.csv"
 MANIFIESTO = RAIZ / "casos" / "MANIFIESTO-CORPUS-V2.json"
-# Solo existe en la copia pública (laboratorio-main): la reserva y sus filas del catálogo
-# quedaron fuera de esa rama a propósito. Viven en la rama reserva/test. Ver casos/README.md.
+# Marca de una copia sin la reserva. Hasta el 2026-11-21 la reserva vivía aparte, en la rama reserva/test, y esta
+# marca estaba en el tronco; después de la evaluación final la reserva se unió al tronco y la marca ya no existe.
+# Sigue sirviendo para validar una copia vieja. Ver casos/README.md, «Copia pública».
 SIN_RESERVA = RAIZ / "casos" / "RESERVA-FUERA-DEL-REPO.md"
 
 LEGITIMAS = {"legitima", "legitima_dificil"}

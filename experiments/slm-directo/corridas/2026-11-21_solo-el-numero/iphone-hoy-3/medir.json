@@ -1,0 +1,13 @@
+{
+  "servidor": "llama-server -m gemma.gguf --host 0.0.0.0 --port 18080 -c 4096 -np 1 --no-webui -ngl 99",
+  "consulta": "chat",
+  "conexion": "wifi",
+  "pid": 2064,
+  "carga_hasta_health_s": 2.11,
+  "health_ida_y_vuelta_ms": {
+    "mediana": 17.4,
+    "max": 325.5
+  },
+  "salida_ejecutor": 0,
+  "app_viva_al_final": true
+}

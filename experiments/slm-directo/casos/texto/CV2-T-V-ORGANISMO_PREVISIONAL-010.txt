@@ -1,0 +1,20 @@
+A: Buenas, te contacto del organismo por una diferencia que apareció en el calendario de pagos.
+B: ¿Qué diferencia?
+A: La prestación figura en el lote de la semana próxima, pero el expediente quedó sin validar.
+B: ¿Me la van a suspender?
+A: No puedo asegurarlo hasta que termine una revisión de identidad.
+B: ¿Qué oficina está llamando?
+A: La mesa central de prestaciones.
+B: ¿Hay un número de caso?
+A: Se genera cuando se asigna un analista.
+B: ¿Puedo entrar al portal y ver el estado?
+A: Ahora aparece una demora y conviene no abrir otra consulta.
+B: ¿Por qué no puedo llamar al teléfono que figura en mi recibo?
+A: Si duplicás la consulta, el sistema puede reiniciar el turno.
+B: No me dijiste qué período están revisando.
+A: Estoy esperando que cargue el detalle.
+B: ¿Cuánto tiempo tengo?
+A: El lote se cierra hoy a las cinco.
+B: Voy a buscar el número del organismo y verificar por mi cuenta.
+A: Esperá, todavía no terminé de revisar.
+B: No, corto y llamo al canal que conozco.

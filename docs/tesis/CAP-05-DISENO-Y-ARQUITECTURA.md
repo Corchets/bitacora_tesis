@@ -153,7 +153,7 @@ El tratamiento de excepciones e inconsistencias sigue reglas rigurosas:
 - **Fallo del motivo:** Si la segunda consulta falla, el aviso se mantiene con un texto fijo y el error queda registrado.
 - **Inhibición de fatiga:** Una vez que la llamada emite su primer aviso ($T_A$), las actualizaciones posteriores continúan registrándose con sus respectivos niveles de riesgo y motivos a efectos de análisis retrospectivo, pero su bandera `aviso` se fuerza a `False`. En la llamada en vivo, después del aviso no se consulta más. El sistema no repite alertas para un mismo nivel de riesgo, protegiendo a la persona usuaria de la saturación cognitiva durante una llamada bajo estrés.
 
-### 5.4.4. Problemática del contexto en llamadas extensas (D08 abierta)
+### 5.4.4. Problemática del contexto en llamadas extensas
 
 En llamadas de duración prolongada (de 10 a 20 minutos), la estrategia ingenua de concatenar la totalidad del diálogo acumulado introduce dos patologías severas:
 
@@ -167,6 +167,8 @@ Para mitigar estas patologías, se investigaron dos familias de alternativas arq
 - **Registro de eventos estructurado:** Sustituir el arrastre de texto libre por un buffer de entidades tipadas y ordenadas temporalmente (quién habló, qué maniobra intentó y cómo reaccionó la contraparte), el cual consume una cantidad ínfima de tokens.
 
 > **Estado: propuesta sin discutir.** El modelo final de estado temporal, el tamaño óptimo de la ventana y el criterio definitivo de persistencia (evaluación de cruces consecutivos frente a histéresis con doble umbral) continúan abiertos en [D08 — Congelar protocolo experimental](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
+>
+> **Nota del 2026-11-21:** D08 quedó [resuelta con límites](../gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental) sin elegir ninguna de estas alternativas; hasta ese día el título de esta sección decía «D08 abierta». La evaluación final corrió con la llamada acumulada en un contexto de 4.096 tokens y con el aviso en la primera consulta con riesgo ≥ 0,3, sin persistencia ni histéresis ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)). No se implementó la ventana con decaimiento ni el registro de eventos. Cuando el contexto se llena, el detector deja de consultar ([§11.3](CAP-11-CONCLUSIONES.md#113-limitaciones)).
 
 ---
 

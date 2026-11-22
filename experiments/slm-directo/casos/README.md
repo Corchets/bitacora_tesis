@@ -202,7 +202,7 @@ código, `mencion_sin_pedido` (9); si pide DNI, mail, dirección u otro dato, `p
 
 El original trae además 14 llamadas de test (2 por categoría, sorteadas con semilla
 `20261106`) para congelar antes de correr detectores. **No están en esta rama**, por la misma
-razón que la [reserva](RESERVA-FUERA-DEL-REPO.md): el repositorio es público y las particiones
+razón que la [reserva](https://github.com/Corchets/bitacora_tesis/blob/archivo/pre-informe/experiments/slm-directo/casos/RESERVA-FUERA-DEL-REPO.md): el repositorio es público y las particiones
 siguen abiertas en [D08](../../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 Tampoco se guardaron `fuente_llamadas.txt` ni `build.py`, que incluyen el test. Huellas
 SHA-256 para comprobar después que no cambió:
@@ -266,6 +266,11 @@ final una vez acordado D08, no un recurso para afinar. El panel excluye de sus d
 los textos y las referencias reservadas.
 
 ## Copia pública (`laboratorio-main`)
+
+> **Nota del 2026-11-21 (Mateo):** después de la evaluación final (2026-11-19), la rama `reserva/test` se unió al
+> tronco: los 200 `CV2-T-*`, sus filas del catálogo, las 56 legítimas de test y el alcance anotado a ciegas están en
+> `casos/`, y la marca `RESERVA-FUERA-DEL-REPO.md` ya no existe. La reserva ya se miró: cualquier corrida nueva
+> sobre ella es exploración, no evaluación. Lo de abajo cuenta cómo se custodió hasta entonces.
 
 El repositorio es público. `laboratorio-main` lleva los 150 de desarrollo, pero no los 200
 reservados (`CV2-T-*`) ni sus filas del catálogo (`*-CV2-T-*`), que resumen cada escenario.

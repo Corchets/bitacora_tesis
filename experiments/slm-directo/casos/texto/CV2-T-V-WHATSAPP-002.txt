@@ -1,0 +1,30 @@
+A: Buenas, te llamo de la administración del edificio por el grupo de avisos.
+B: ¿Qué pasó con el grupo?
+A: Se migró a una cuenta nueva porque la anterior llegó al límite de participantes.
+B: Yo sigo viendo el grupo de siempre.
+A: Lo vamos a cerrar esta noche para evitar mensajes duplicados.
+B: ¿Tengo que unirme al otro?
+A: Sí, te mando el código de alta al WhatsApp.
+B: ¿No es un enlace?
+A: La invitación se confirma con un código de seis cifras.
+B: Me entró un mensaje de registro.
+A: Leeme los números y te dejo en el grupo nuevo.
+B: Dice que alguien está intentando registrar mi cuenta.
+A: Es el modo en que la aplicación valida un grupo migrado.
+B: ¿Quién administra la cuenta nueva?
+A: El consejo de administración.
+B: ¿Puedo verificarlo con el encargado?
+A: Está de vacaciones y la migración se cierra hoy.
+B: No te voy a leer el código.
+A: Entonces vas a dejar de recibir avisos de corte de agua.
+B: Prefiero preguntarle al encargado mañana.
+B: No te voy a leer un código que llegó a mi teléfono.
+A: Sin eso no puedo completar el cambio de grupo.
+B: La administradora ya está en el grupo original.
+A: Capaz no vio que se abrió una lista nueva.
+B: Le escribo desde la conversación que ya tengo guardada.
+A: Esperá a que te responda antes de salir.
+B: No voy a abandonar ningún grupo todavía.
+A: Si no se mueve ahora, se puede perder el cupo.
+B: Lo confirmo con las demás familias.
+A: Bueno, hacelo así.

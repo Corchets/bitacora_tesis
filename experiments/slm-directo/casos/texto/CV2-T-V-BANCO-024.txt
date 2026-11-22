@@ -1,0 +1,20 @@
+A: Hola, te hablo del banco por el estado de la tarjeta nueva.
+B: Todavía no me llegó.
+A: El envío figura detenido porque el domicilio no coincide con la última operación.
+B: ¿Qué dirección tienen?
+A: El sistema no me deja mostrarla desde esta pantalla.
+B: ¿Puedo actualizarla en la aplicación?
+A: Hoy está en mantenimiento la sección de datos.
+B: ¿Y en una sucursal?
+A: El trámite presencial puede demorar varios días.
+B: No me importa, prefiero hacerlo ahí.
+A: La tarjeta vieja sigue habilitada mientras tanto.
+B: ¿No se bloquea cuando mandan una nueva?
+A: Se bloquea cuando el envío queda confirmado.
+B: ¿Podés decirme el número de seguimiento?
+A: Está en otra plataforma, ahora no me carga.
+B: No te voy a dar mi domicilio por teléfono.
+A: Todavía no te pedí que me lo digas.
+B: Voy a llamar a la sucursal cuando abra.
+A: Está bien, queda pendiente.
+B: Chau.

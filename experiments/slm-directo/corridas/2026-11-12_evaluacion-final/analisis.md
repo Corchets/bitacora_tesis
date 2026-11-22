@@ -164,3 +164,8 @@ mucho menor que en los generados.
 > **Nota del 2026-11-20:** Mateo pidió una última exploración sobre los conjuntos reales. Ningún candidato pasó la
 > regla y la configuración no cambió. Ver su [análisis](../2026-11-20_exploracion-reales/analisis.md) y
 > [H12](../../../../docs/hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md).
+
+> **Nota del 2026-11-20:** esta restricción ya no corre. Los dos conjuntos están publicados en el repositorio (el coreano
+> en el PR #185 y las legítimas reales en el PR #190, con el aviso de derechos en
+> [`casos/externo/README.md`](../../casos/externo/README.md)), y Mateo decidió que se pueden leer, mandar a una API y
+> subir sus corridas. La reserva de test sigue aparte, en `reserva/test`.

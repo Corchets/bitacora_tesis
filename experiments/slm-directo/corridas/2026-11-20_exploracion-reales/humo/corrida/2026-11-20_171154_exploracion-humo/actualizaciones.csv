@@ -1,0 +1,860 @@
+﻿config,detector,modelo,prompt,hablantes,case_id,linea,hablante,texto,valida,error,riesgo,alerta_sugerida,aviso,motivo,evidencia,evidencia_en_texto,ms,tokens_prompt,tokens_salida,crudo,consulta,tito_puntaje,tito_error,indicio_linea,indicio_texto,indicio_puntaje,tito_ms,slm_ms,runtime_ns,runtime_unidad,runtime_load_ns,runtime_prompt_eval_ns,runtime_eval_ns,ms_etapa1,ms_etapa2,tokens_prompt_etapa2,tokens_salida_etapa2,crudo_etapa2
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,1,PROTEGIDA,hola buen día,true,,0.1,false,false,,,,439.9,723,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,439.9,438959843,ns,989534,342131000,84768000,439.9,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,2,OTRA,Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,,0.2,false,false,,,,183.0,747,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,183.0,181961729,ns,870491,88944000,81038000,183.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,3,PROTEGIDA,No sabía que había una devolución,true,,0.2,false,false,,,,192.4,760,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,192.4,191320016,ns,976474,95381000,83647000,192.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,4,OTRA,Es una revisión de períodos viejos no se acredita automáticamente,true,,0.2,false,false,,,,180.7,777,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,180.7,179646186,ns,893719,85416000,81763000,180.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,5,PROTEGIDA,De qué período hablan,true,,0.3,true,true,"Aunque el tema de pensiones puede ser legítimo, es una táctica común para generar confianza y presionar a la víctima.",Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,833.9,788,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,833.9,181353544,ns,884012,85600000,81977000,182.4,651.5,905,63,"{
+  ""evidencia"": ""Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes"",
+  ""motivo"": ""Aunque el tema de pensiones puede ser legítimo, es una táctica común para generar confianza y presionar a la víctima.""
+}"
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,6,OTRA,Entre el primer trabajo y el alta de la prestación,true,,0.2,false,false,,,,14665.0,804,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,14665.0,14664089515,ns,1072255,113620000,14533817000,14665.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,7,PROTEGIDA,Eso fue hace muchos años,true,,0.2,false,false,,,,345.3,816,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,345.3,343010523,ns,1142705,155418000,161746000,345.3,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,8,OTRA,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,,0.3,true,false,,,,266.1,839,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,266.1,264839452,ns,4151669,129577000,114108000,266.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,9,PROTEGIDA,Sí pero no quiero mandar una foto por mensaje,true,,0.3,true,false,,,,258.4,855,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,258.4,257306326,ns,1149109,127838000,112116000,258.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,10,OTRA,No hace falta foto Podés mirar el reverso donde está impreso el número de trámite,true,,0.3,true,false,,,,240.8,882,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,240.8,239693979,ns,1089824,124311000,95015000,240.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,11,PROTEGIDA,Ese número sirve pa la devolución,true,,0.3,true,false,,,,228.0,896,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,228.0,226271401,ns,1260159,115487000,93408000,228.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,12,OTRA,Identifica al titular y habilita a consultar la liquidación provisoria,true,,0.3,true,false,,,,231.8,918,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,231.8,230584215,ns,1497286,116479000,94322000,231.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,13,PROTEGIDA,El número es largo no lo leo bien,true,,0.3,true,false,,,,202.5,934,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,202.5,201322647,ns,1232053,98532000,84269000,202.5,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,14,OTRA,Decime los últimos cuatro y la fecha de emisión que figura abajo,true,,0.3,true,false,,,,193.8,954,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,193.8,192873792,ns,1184788,90393000,86933000,193.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,15,PROTEGIDA,No es un dato personal,true,,0.3,true,false,,,,189.6,967,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,189.6,188342434,ns,2091866,88979000,85179000,189.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,16,OTRA,Es una referencia administrativa no un código de acceso,true,,0.3,true,false,,,,187.3,983,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,187.3,186283463,ns,1236751,85717000,85608000,187.3,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,17,PROTEGIDA,Si es una devolución no debería recibir una carta,true,,0.3,true,false,,,,190.5,1000,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,190.5,189568939,ns,974590,91333000,85120000,190.5,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,18,OTRA,La carta se genera cuando el titular confirma la liquidación,true,,0.3,true,false,,,,196.2,1018,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,196.2,195114395,ns,1166919,90671000,84814000,196.2,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,19,PROTEGIDA,No quiero confirmar algo que no vi,true,,0.3,true,false,,,,187.4,1033,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,187.4,186411709,ns,907345,90677000,76511000,187.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,20,OTRA,La cifra se puede leer una vez que se abre el legajo,true,,0.3,true,false,,,,200.4,1053,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,200.4,199440306,ns,829073,90051000,89678000,200.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,21,PROTEGIDA,Entonces prefiero pedir turno y revisarlo en persona,true,,0.3,true,false,,,,203.1,1071,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,203.1,202081847,ns,1120919,93141000,86115000,203.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,1,PROTEGIDA,buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es,true,,0.2,false,false,,,,190.7,748,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,190.7,189777592,ns,773530,93561000,84176000,190.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,2,OTRA,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,,0.3,true,true,"No se debe compartir información de cuentas bancarias por teléfono, incluso si se presenta como personal del banco.",te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,773.2,776,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,773.2,191643021,ns,1143867,94224000,84909000,192.8,580.4,893,62,"{
+  ""evidencia"": ""te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"",
+  ""motivo"": ""No se debe compartir información de cuentas bancarias por teléfono, incluso si se presenta como personal del banco.""
+}"
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,3,PROTEGIDA,en la caja de ahorro terminada en 4821 la otra no la uso casi nunca,true,,0.3,true,false,,,,207.1,803,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,207.1,206096742,ns,1060498,105060000,88976000,207.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,4,OTRA,bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer,true,,0.3,true,false,,,,182.0,826,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,182.0,181074768,ns,1120922,86972000,81435000,182.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,5,PROTEGIDA,hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo,true,,0.3,true,false,,,,181.3,848,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,181.3,180280648,ns,1042429,84701000,82629000,181.3,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,6,OTRA,puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo,true,,0.3,true,false,,,,184.3,871,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,184.3,183241608,ns,2193841,85653000,82854000,184.3,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,7,PROTEGIDA,dice débito tarjeta pero abajo aparece un código que no entiendo,true,,0.5,true,false,,,,177.0,891,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,177.0,176064784,ns,840713,86682000,75494000,177.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,8,OTRA,¿Recordás si usaste la tarjeta física o la virtual en los últimos días?,true,,0.4,true,false,,,,187.7,914,14,"{
+  ""riesgo"": 0.4,
+  ",,,,,,,,187.7,186616881,ns,1143380,87989000,81540000,187.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,9,PROTEGIDA,la física azul la tengo guardada no la perdí,true,,0.4,true,false,,,,189.0,932,14,"{
+  ""riesgo"": 0.4,
+  ",,,,,,,,189.0,187984810,ns,1168300,90016000,83986000,189.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,10,OTRA,perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre,true,,0.4,true,false,,,,189.9,957,14,"{
+  ""riesgo"": 0.4,
+  ",,,,,,,,189.9,188754822,ns,1111276,88050000,86916000,189.9,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,11,PROTEGIDA,compré comida pero fueron siete mil y algo esto es otra cosa,true,,0.4,true,false,,,,185.6,977,14,"{
+  ""riesgo"": 0.4,
+  ",,,,,,,,185.6,184612253,ns,1027051,87426000,83148000,185.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,12,OTRA,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,,0.6,true,false,,,,199.8,1006,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,199.8,198827188,ns,762802,97186000,83595000,199.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,13,PROTEGIDA,no y el documento también lo tengo acá,true,,0.5,true,false,,,,203.9,1022,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,203.9,202870736,ns,941095,100336000,83087000,203.9,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,14,OTRA,no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación,true,,0.5,true,false,,,,201.8,1056,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,201.8,200718058,ns,1055586,98430000,81860000,201.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,15,PROTEGIDA,bueno la tarjeta queda bloqueada ahora,true,,0.6,true,false,,,,197.0,1071,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,197.0,195990178,ns,956194,89867000,85049000,197.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,16,OTRA,puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas,true,,0.6,true,false,,,,201.4,1095,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,201.4,200484992,ns,1185537,89169000,89137000,201.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,17,PROTEGIDA,hacé eso porque la uso para el súper,true,,0.6,true,false,,,,194.0,1112,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,194.0,192920176,ns,1078864,88842000,84057000,194.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,18,OTRA,te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles,true,,0.6,true,false,,,,210.1,1142,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,210.1,209131773,ns,1103160,97319000,90546000,210.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,19,PROTEGIDA,y el débito se devuelve mientras tanto,true,,0.6,true,false,,,,194.0,1158,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,194.0,192921534,ns,991076,88022000,83884000,194.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,20,OTRA,no te lo puedo prometer primero revisan el comercio y el comprobante,true,,0.6,true,false,,,,194.7,1180,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,194.7,193733994,ns,881593,90540000,82919000,194.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,21,PROTEGIDA,está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online,true,,0.5,true,false,,,,201.6,1208,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,201.6,200598839,ns,1046210,95300000,82412000,201.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,CV2-D-L-BANCO-001,22,OTRA,dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta,true,,0.5,true,false,,,,200.1,1235,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,200.1,199175416,ns,827102,96523000,81609000,200.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,SC-WA-CODE-01-e01,1,OTRA,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.3,true,true,Los bancos y organismos legítimos no suelen iniciar llamadas de soporte de esta manera sin una previa verificación.,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,884.5,733,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,884.5,346943982,ns,1186024,252180000,83213000,348.0,536.5,850,52,"{
+  ""evidencia"": ""Te llamo de soporte por la activación de tu cuenta de WhatsApp."",
+  ""motivo"": ""Los bancos y organismos legítimos no suelen iniciar llamadas de soporte de esta manera sin una previa verificación.""
+}"
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,SC-WA-CODE-01-e01,2,PROTEGIDA,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.3,true,false,,,,191.0,753,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,191.0,189945145,ns,916367,94648000,83082000,191.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,SC-WA-CODE-01-e01,3,OTRA,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.6,true,false,,,,184.5,769,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,184.5,183431482,ns,1134056,84741000,85892000,184.5,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,SC-WA-CODE-01-e01,4,OTRA,Decime el código de activación que recibiste por SMS.,true,,0.9,true,false,,,,184.6,787,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,184.6,183613468,ns,888093,87661000,84358000,184.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-consejos-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-consejos-corte-riesgo,rol,SC-WA-CODE-01-e01,5,PROTEGIDA,"Es cero, cero, cero, cero, cero, cero.",true,,0.9,true,false,,,,193.9,807,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,193.9,192813581,ns,1173771,92246000,88025000,193.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,1,PROTEGIDA,hola buen día,true,,0.0,false,false,,,,320.2,438,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,320.2,319177591,ns,1214823,214444000,77298000,320.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,2,OTRA,Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,,0.0,false,false,,,,310.0,462,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,310.0,309028716,ns,730549,219873000,81455000,310.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,3,PROTEGIDA,No sabía que había una devolución,true,,0.0,false,false,,,,308.8,475,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,308.8,307849603,ns,1801433,219348000,78321000,308.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,4,OTRA,Es una revisión de períodos viejos no se acredita automáticamente,true,,0.0,false,false,,,,304.2,492,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,304.2,303208434,ns,1027666,219910000,75280000,304.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,5,PROTEGIDA,De qué período hablan,true,,0.0,false,false,,,,310.8,503,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,310.8,309758090,ns,831410,223444000,78046000,310.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,6,OTRA,Entre el primer trabajo y el alta de la prestación,true,,0.0,false,false,,,,344.9,519,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,344.9,343842601,ns,1094862,246673000,88216000,344.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,7,PROTEGIDA,Eso fue hace muchos años,true,,0.0,false,false,,,,383.5,531,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,383.5,382373248,ns,1518713,282920000,84264000,383.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,8,OTRA,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,,0.0,false,false,,,,215.2,554,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,215.2,214043431,ns,1121110,115716000,87102000,215.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,9,PROTEGIDA,Sí pero no quiero mandar una foto por mensaje,true,,0.0,false,false,,,,219.0,570,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,219.0,217839931,ns,1059632,116966000,90071000,219.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,10,OTRA,No hace falta foto Podés mirar el reverso donde está impreso el número de trámite,true,,0.0,false,false,,,,227.0,597,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,227.0,225932499,ns,2898769,124448000,88253000,227.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,11,PROTEGIDA,Ese número sirve pa la devolución,true,,0.0,false,false,,,,224.5,611,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,224.5,223444718,ns,981818,121628000,84175000,224.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,12,OTRA,Identifica al titular y habilita a consultar la liquidación provisoria,true,,0.0,false,false,,,,218.5,633,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,218.5,217303634,ns,939202,119194000,86097000,218.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,13,PROTEGIDA,El número es largo no lo leo bien,true,,0.5,true,true,La solicitud de tener un documento físico en lugar de enviarlo por mensaje puede ser una táctica para obtener información o para dirigir a la víctima a un sitio web o persona no segura.,Tenés una copia del documento a mano,true,1042.2,649,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,1042.2,227223027,ns,1040077,121610000,92482000,228.4,813.8,766,64,"{
+  ""evidencia"": ""Tenés una copia del documento a mano"",
+  ""motivo"": ""La solicitud de tener un documento físico en lugar de enviarlo por mensaje puede ser una táctica para obtener información o para dirigir a la víctima a un sitio web o persona no segura.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,14,OTRA,Decime los últimos cuatro y la fecha de emisión que figura abajo,true,,0.5,true,false,,,,233.9,669,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,233.9,232593363,ns,1090376,122853000,96054000,233.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,15,PROTEGIDA,No es un dato personal,true,,0.5,true,false,,,,238.1,682,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,238.1,236946406,ns,1021847,121360000,99827000,238.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,16,OTRA,Es una referencia administrativa no un código de acceso,true,,0.0,false,false,,,,245.5,698,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,245.5,242123859,ns,958111,127067000,90590000,245.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,17,PROTEGIDA,Si es una devolución no debería recibir una carta,true,,0.0,false,false,,,,243.9,715,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,243.9,242641656,ns,1094231,141096000,87610000,243.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,18,OTRA,La carta se genera cuando el titular confirma la liquidación,true,,0.0,false,false,,,,192.8,733,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,192.8,191590543,ns,1113161,95330000,79897000,192.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,19,PROTEGIDA,No quiero confirmar algo que no vi,true,,0.0,false,false,,,,180.2,748,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,180.2,179194033,ns,1231103,87929000,80050000,180.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,20,OTRA,La cifra se puede leer una vez que se abre el legajo,true,,0.0,false,false,,,,187.3,768,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,187.3,186290431,ns,1168256,91431000,83315000,187.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,21,PROTEGIDA,Entonces prefiero pedir turno y revisarlo en persona,true,,0.0,false,false,,,,182.5,786,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,182.5,181463977,ns,4030681,89337000,75937000,182.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,1,PROTEGIDA,buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es,true,,0.0,false,false,,,,296.6,463,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,296.6,295641526,ns,976238,208904000,78698000,296.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,2,OTRA,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,,0.0,false,false,,,,305.8,491,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,305.8,304770621,ns,1011705,218850000,77374000,305.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,3,PROTEGIDA,en la caja de ahorro terminada en 4821 la otra no la uso casi nunca,true,,0.5,true,true,"La llamada solicita información sensible sobre cuentas bancarias, lo cual es una táctica común en estafas.",te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,900.4,518,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,900.4,343988290,ns,1077650,243487000,91765000,345.0,555.4,635,63,"{
+  ""evidencia"": ""te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"",
+  ""motivo"": ""La llamada solicita información sensible sobre cuentas bancarias, lo cual es una táctica común en estafas.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,4,OTRA,bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer,true,,0.5,true,false,,,,338.2,541,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,338.2,337059211,ns,983433,245637000,82629000,338.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,5,PROTEGIDA,hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo,true,,0.5,true,false,,,,186.2,563,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,186.2,185176473,ns,1003770,93084000,82833000,186.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,6,OTRA,puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo,true,,0.5,true,false,,,,177.6,586,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,177.6,176543785,ns,1066103,86582000,80521000,177.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,7,PROTEGIDA,dice débito tarjeta pero abajo aparece un código que no entiendo,true,,0.5,true,false,,,,172.4,606,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,172.4,171395694,ns,813664,85021000,77229000,172.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,8,OTRA,¿Recordás si usaste la tarjeta física o la virtual en los últimos días?,true,,0.5,true,false,,,,180.1,629,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,180.1,179182366,ns,833416,88170000,81827000,180.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,9,PROTEGIDA,la física azul la tengo guardada no la perdí,true,,0.5,true,false,,,,192.7,647,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,192.7,191603483,ns,819527,92635000,88988000,192.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,10,OTRA,perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre,true,,0.5,true,false,,,,189.7,672,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,189.7,188657236,ns,963383,92753000,85770000,189.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,11,PROTEGIDA,compré comida pero fueron siete mil y algo esto es otra cosa,true,,0.5,true,false,,,,192.1,692,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,192.1,190890251,ns,1811104,89701000,89108000,192.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,12,OTRA,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,,0.5,true,false,,,,181.8,721,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,181.8,180715696,ns,1037827,92883000,77313000,181.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,13,PROTEGIDA,no y el documento también lo tengo acá,true,,0.5,true,false,,,,180.8,737,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,180.8,179788660,ns,921979,91047000,77976000,180.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,14,OTRA,no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación,true,,0.5,true,false,,,,184.6,771,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,184.6,183684404,ns,997370,94467000,77988000,184.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,15,PROTEGIDA,bueno la tarjeta queda bloqueada ahora,true,,0.5,true,false,,,,180.3,786,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,180.3,179201636,ns,1111539,88889000,78890000,180.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,16,OTRA,puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas,true,,0.5,true,false,,,,202.0,810,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,202.0,201000324,ns,781627,110347000,78894000,202.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,17,PROTEGIDA,hacé eso porque la uso para el súper,true,,0.5,true,false,,,,180.4,827,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,180.4,179367751,ns,838346,91050000,76881000,180.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,18,OTRA,te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles,true,,0.5,true,false,,,,183.2,857,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,183.2,182096878,ns,965105,93858000,76991000,183.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,19,PROTEGIDA,y el débito se devuelve mientras tanto,true,,0.5,true,false,,,,179.3,873,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,179.3,178169236,ns,830713,88370000,77750000,179.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,20,OTRA,no te lo puedo prometer primero revisan el comercio y el comprobante,true,,0.5,true,false,,,,187.8,895,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,187.8,186764826,ns,1120355,94658000,79318000,187.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,21,PROTEGIDA,está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online,true,,0.0,false,false,,,,195.2,923,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,195.2,193761790,ns,1100387,98024000,82944000,195.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,CV2-D-L-BANCO-001,22,OTRA,dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta,true,,0.0,false,false,,,,207.8,950,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,207.8,205715099,ns,1126520,98963000,89433000,207.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,SC-WA-CODE-01-e01,1,OTRA,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.0,false,false,,,,371.6,448,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,371.6,370660750,ns,1098916,202263000,82678000,371.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,SC-WA-CODE-01-e01,2,PROTEGIDA,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.0,false,false,,,,298.9,468,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,298.9,297952524,ns,1091875,209547000,79879000,298.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,SC-WA-CODE-01-e01,3,OTRA,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.5,true,true,La insistencia para resolver un problema urgente y la presión para actuar de inmediato son tácticas comunes en estafas.,Para cancelar esa activación tenemos que resolverlo ahora.,true,988.4,484,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,988.4,310008057,ns,1067215,222367000,79232000,311.0,677.3,601,52,"{
+  ""evidencia"": ""Para cancelar esa activación tenemos que resolverlo ahora."",
+  ""motivo"": ""La insistencia para resolver un problema urgente y la presión para actuar de inmediato son tácticas comunes en estafas.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,SC-WA-CODE-01-e01,4,OTRA,Decime el código de activación que recibiste por SMS.,true,,0.9,true,false,,,,326.8,502,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,326.8,325667388,ns,1134933,236305000,80622000,326.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-lista-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-lista-corte-riesgo,rol,SC-WA-CODE-01-e01,5,PROTEGIDA,"Es cero, cero, cero, cero, cero, cero.",true,,0.9,true,false,,,,315.5,522,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,315.5,314506471,ns,1134770,229184000,76747000,315.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,1,PROTEGIDA,hola buen día,true,,0.0,false,false,,,,431.8,803,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,431.8,430924224,ns,1043608,334869000,79245000,431.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,2,OTRA,Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,,0.1,false,false,,,,195.2,827,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,195.2,194132952,ns,1127492,89525000,91641000,195.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,3,PROTEGIDA,No sabía que había una devolución,true,,0.1,false,false,,,,185.5,840,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,185.5,184420467,ns,1487867,85273000,86523000,185.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,4,OTRA,Es una revisión de períodos viejos no se acredita automáticamente,true,,0.1,false,false,,,,176.8,857,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,176.8,175768811,ns,1064702,83488000,80614000,176.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,5,PROTEGIDA,De qué período hablan,true,,0.1,false,false,,,,188.1,868,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,188.1,187073405,ns,1025645,89261000,85134000,188.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,6,OTRA,Entre el primer trabajo y el alta de la prestación,true,,0.1,false,false,,,,182.2,884,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,182.2,181138433,ns,1062686,84139000,84733000,182.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,7,PROTEGIDA,Eso fue hace muchos años,true,,0.1,false,false,,,,182.9,896,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,182.9,181875261,ns,1028847,87400000,82478000,182.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,8,OTRA,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,,0.1,false,false,,,,201.7,919,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,201.7,200736925,ns,961226,103339000,83979000,201.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,9,PROTEGIDA,Sí pero no quiero mandar una foto por mensaje,true,,0.3,true,true,Es sospechoso que te pidan una copia de tu documento a mano para una supuesta devolución de aportes.,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,895.1,935,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,895.1,230317483,ns,788534,124070000,93149000,231.4,663.7,1052,60,"{
+  ""evidencia"": ""Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano"",
+  ""motivo"": ""Es sospechoso que te pidan una copia de tu documento a mano para una supuesta devolución de aportes.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,10,OTRA,No hace falta foto Podés mirar el reverso donde está impreso el número de trámite,true,,0.1,false,false,,,,239.2,962,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,239.2,237834547,ns,997848,127961000,93291000,239.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,11,PROTEGIDA,Ese número sirve pa la devolución,true,,0.1,false,false,,,,226.7,976,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,226.7,225593296,ns,1158338,117716000,90253000,226.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,12,OTRA,Identifica al titular y habilita a consultar la liquidación provisoria,true,,0.1,false,false,,,,236.4,998,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,236.4,234882545,ns,966226,119486000,98150000,236.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,13,PROTEGIDA,El número es largo no lo leo bien,true,,0.3,true,false,,,,242.0,1014,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,242.0,240806600,ns,1239653,123081000,99111000,242.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,14,OTRA,Decime los últimos cuatro y la fecha de emisión que figura abajo,true,,0.3,true,false,,,,257.8,1034,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,257.8,256541852,ns,1193029,134933000,102717000,257.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,15,PROTEGIDA,No es un dato personal,true,,0.3,true,false,,,,242.5,1047,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,242.5,241142371,ns,1370131,121085000,101113000,242.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,16,OTRA,Es una referencia administrativa no un código de acceso,true,,0.1,false,false,,,,247.8,1063,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,247.8,246580013,ns,1349723,123063000,95875000,247.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,17,PROTEGIDA,Si es una devolución no debería recibir una carta,true,,0.1,false,false,,,,245.0,1080,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,245.0,242587502,ns,1401696,122895000,92355000,245.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,18,OTRA,La carta se genera cuando el titular confirma la liquidación,true,,0.1,false,false,,,,259.5,1098,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,259.5,258223821,ns,1266225,125751000,98597000,259.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,19,PROTEGIDA,No quiero confirmar algo que no vi,true,,0.1,false,false,,,,263.1,1113,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,263.1,260859603,ns,1132603,118322000,100518000,263.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,20,OTRA,La cifra se puede leer una vez que se abre el legajo,true,,0.1,false,false,,,,255.5,1133,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,255.5,254368989,ns,1253909,127568000,98470000,255.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,21,PROTEGIDA,Entonces prefiero pedir turno y revisarlo en persona,true,,0.1,false,false,,,,202.8,1151,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,202.8,201773536,ns,1123048,93235000,89096000,202.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,1,PROTEGIDA,buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es,true,,0.0,false,false,,,,182.4,828,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,182.4,181473269,ns,802725,93005000,76728000,182.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,2,OTRA,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,,0.1,false,false,,,,190.4,856,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,190.4,189340943,ns,1012870,91888000,85761000,190.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,3,PROTEGIDA,en la caja de ahorro terminada en 4821 la otra no la uso casi nunca,true,,0.2,false,false,,,,193.5,883,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,193.5,192458350,ns,1036633,90755000,87491000,193.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,4,OTRA,bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer,true,,0.2,false,false,,,,182.3,906,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,182.3,181415190,ns,1108415,86677000,82205000,182.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,5,PROTEGIDA,hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo,true,,0.2,false,false,,,,176.6,928,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,176.6,175539423,ns,1117656,86702000,76168000,176.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,6,OTRA,puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo,true,,0.2,false,false,,,,185.6,951,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,185.6,184505810,ns,1057935,87845000,84002000,185.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,7,PROTEGIDA,dice débito tarjeta pero abajo aparece un código que no entiendo,true,,0.3,true,true,"Tené cuidado, te están pidiendo que le des un código que te llegó por mensaje o por el débito para verificar el movimiento.",dice débito tarjeta pero abajo aparece un código que no entiendo,true,976.8,971,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,976.8,184664720,ns,1089123,88484000,82724000,185.8,791.0,1088,60,"{
+  ""evidencia"": ""dice débito tarjeta pero abajo aparece un código que no entiendo"",
+  ""motivo"": ""Tené cuidado, te están pidiendo que le des un código que te llegó por mensaje o por el débito para verificar el movimiento.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,8,OTRA,¿Recordás si usaste la tarjeta física o la virtual en los últimos días?,true,,0.3,true,false,,,,196.6,994,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,196.6,195540530,ns,808427,92735000,89385000,196.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,9,PROTEGIDA,la física azul la tengo guardada no la perdí,true,,0.1,false,false,,,,199.6,1012,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,199.6,198624334,ns,2644567,90012000,92934000,199.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,10,OTRA,perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre,true,,0.1,false,false,,,,191.4,1037,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,191.4,190415680,ns,1119863,91415000,84629000,191.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,11,PROTEGIDA,compré comida pero fueron siete mil y algo esto es otra cosa,true,,0.2,false,false,,,,189.7,1057,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,189.7,188800932,ns,1221296,92153000,77403000,189.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,12,OTRA,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,,0.3,true,false,,,,192.2,1086,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,192.2,191137875,ns,1069515,90715000,81692000,192.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,13,PROTEGIDA,no y el documento también lo tengo acá,true,,0.3,true,false,,,,196.4,1102,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,196.4,195370076,ns,1105539,89856000,86493000,196.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,14,OTRA,no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación,true,,0.3,true,false,,,,206.3,1136,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,206.3,205251781,ns,1101351,97088000,89193000,206.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,15,PROTEGIDA,bueno la tarjeta queda bloqueada ahora,true,,0.3,true,false,,,,198.5,1151,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,198.5,197459628,ns,983722,87983000,86496000,198.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,16,OTRA,puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas,true,,0.3,true,false,,,,206.4,1175,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,206.4,205277327,ns,1059120,99690000,85886000,206.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,17,PROTEGIDA,hacé eso porque la uso para el súper,true,,0.3,true,false,,,,199.4,1192,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,199.4,198260137,ns,1348009,90760000,86260000,199.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,18,OTRA,te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles,true,,0.2,false,false,,,,197.3,1222,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,197.3,196224851,ns,1126430,93464000,79453000,197.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,19,PROTEGIDA,y el débito se devuelve mientras tanto,true,,0.2,false,false,,,,200.4,1238,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,200.4,199358937,ns,1213296,91146000,84147000,200.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,20,OTRA,no te lo puedo prometer primero revisan el comercio y el comprobante,true,,0.2,false,false,,,,202.3,1260,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,202.3,201068879,ns,1032786,92233000,79622000,202.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,21,PROTEGIDA,está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online,true,,0.2,false,false,,,,204.6,1288,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,204.6,203492894,ns,1060473,103709000,78124000,204.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,CV2-D-L-BANCO-001,22,OTRA,dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta,true,,0.2,false,false,,,,201.8,1315,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,201.8,200900347,ns,896833,99001000,79000000,201.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,SC-WA-CODE-01-e01,1,OTRA,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.1,false,false,,,,365.7,813,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,365.7,364727858,ns,1170893,262064000,90093000,365.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,SC-WA-CODE-01-e01,2,PROTEGIDA,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.1,false,false,,,,203.9,833,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,203.9,202891454,ns,1035272,106578000,84041000,203.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,SC-WA-CODE-01-e01,3,OTRA,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.3,true,true,Desconfía de la urgencia y la exigencia para resolver un problema de activación de cuenta.,Para cancelar esa activación tenemos que resolverlo ahora.,true,764.0,849,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,764.0,181631605,ns,1239930,86528000,82730000,182.7,581.3,966,48,"{
+  ""evidencia"": ""Para cancelar esa activación tenemos que resolverlo ahora."",
+  ""motivo"": ""Desconfía de la urgencia y la exigencia para resolver un problema de activación de cuenta.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,SC-WA-CODE-01-e01,4,OTRA,Decime el código de activación que recibiste por SMS.,true,,0.5,true,false,,,,186.6,867,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,186.6,185589859,ns,1202306,87957000,85033000,186.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-escalera-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-escalera-corte-riesgo,rol,SC-WA-CODE-01-e01,5,PROTEGIDA,"Es cero, cero, cero, cero, cero, cero.",true,,0.5,true,false,,,,185.1,887,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,185.1,184044175,ns,1156931,87548000,84471000,185.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,1,PROTEGIDA,hola buen día,true,,0.0,false,false,,,,392.0,646,14,"{""riesgo"": 0.0, ""alerta_s",,,,,,,,392.0,390990118,ns,800923,288052000,78762000,392.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,2,OTRA,Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,,0.1,false,false,,,,181.1,670,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,181.1,180127146,ns,853083,87860000,82532000,181.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,3,PROTEGIDA,No sabía que había una devolución,true,,0.1,false,false,,,,179.2,683,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,179.2,178281039,ns,970652,86271000,82735000,179.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,4,OTRA,Es una revisión de períodos viejos no se acredita automáticamente,true,,0.1,false,false,,,,191.8,700,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,191.8,190783271,ns,874088,104232000,76557000,191.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,5,PROTEGIDA,De qué período hablan,true,,0.1,false,false,,,,174.4,711,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,174.4,173284381,ns,1003362,85179000,78631000,174.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,6,OTRA,Entre el primer trabajo y el alta de la prestación,true,,0.1,false,false,,,,180.9,727,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,180.9,179856637,ns,1248164,84624000,83468000,180.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,7,PROTEGIDA,Eso fue hace muchos años,true,,0.1,false,false,,,,183.0,739,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,183.0,182130781,ns,972089,88996000,83250000,183.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,8,OTRA,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,,0.1,false,false,,,,184.3,762,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,184.3,183147819,ns,1019166,90578000,82660000,184.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,9,PROTEGIDA,Sí pero no quiero mandar una foto por mensaje,true,,0.1,false,false,,,,189.3,778,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,189.3,188342108,ns,992663,87071000,90415000,189.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,10,OTRA,No hace falta foto Podés mirar el reverso donde está impreso el número de trámite,true,,0.1,false,false,,,,190.9,805,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,190.9,188888712,ns,994651,92834000,83553000,190.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,11,PROTEGIDA,Ese número sirve pa la devolución,true,,0.1,false,false,,,,183.7,819,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,183.7,182599452,ns,1010172,88300000,83878000,183.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,12,OTRA,Identifica al titular y habilita a consultar la liquidación provisoria,true,,0.1,false,false,,,,185.1,841,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,185.1,184001797,ns,1225250,94479000,77882000,185.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,13,PROTEGIDA,El número es largo no lo leo bien,true,,0.1,false,false,,,,182.2,857,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,182.2,181119235,ns,1188318,92402000,77434000,182.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,14,OTRA,Decime los últimos cuatro y la fecha de emisión que figura abajo,true,,0.1,false,false,,,,180.2,877,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,180.2,179294935,ns,2224225,89258000,77225000,180.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,15,PROTEGIDA,No es un dato personal,true,,0.1,false,false,,,,207.1,890,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,207.1,206124108,ns,1027667,97107000,97846000,207.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,16,OTRA,Es una referencia administrativa no un código de acceso,true,,0.1,false,false,,,,231.2,906,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,231.2,230160890,ns,1134256,127122000,88217000,231.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,17,PROTEGIDA,Si es una devolución no debería recibir una carta,true,,0.1,false,false,,,,237.1,923,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,237.1,236079150,ns,934752,126771000,93330000,237.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,18,OTRA,La carta se genera cuando el titular confirma la liquidación,true,,0.1,false,false,,,,225.3,941,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,225.3,224007667,ns,1003999,122437000,86134000,225.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,19,PROTEGIDA,No quiero confirmar algo que no vi,true,,0.1,false,false,,,,217.4,956,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,217.4,216141070,ns,931333,115501000,85138000,217.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,20,OTRA,La cifra se puede leer una vez que se abre el legajo,true,,0.1,false,false,,,,239.9,976,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,239.9,238706418,ns,1261922,134498000,88021000,239.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,21,PROTEGIDA,Entonces prefiero pedir turno y revisarlo en persona,true,,0.1,false,false,,,,243.9,994,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,243.9,242805931,ns,790521,132958000,91172000,243.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,1,PROTEGIDA,buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es,true,,0.0,false,false,,,,247.2,671,14,"{""riesgo"": 0.0, ""alerta_s",,,,,,,,247.2,244665829,ns,2035306,135474000,91335000,247.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,2,OTRA,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,,0.5,true,true,"La llamada solicita información sensible sobre movimientos bancarios, lo cual es una táctica común en estafas.",te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,933.4,699,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,933.4,236742592,ns,1103268,127140000,96379000,237.9,695.4,813,57,"{""evidencia"": ""te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"", ""motivo"": ""La llamada solicita información sensible sobre movimientos bancarios, lo cual es una táctica común en estafas.""}"
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,3,PROTEGIDA,en la caja de ahorro terminada en 4821 la otra no la uso casi nunca,true,,0.5,true,false,,,,216.3,726,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,216.3,215158032,ns,992145,116019000,87289000,216.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,4,OTRA,bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer,true,,0.1,false,false,,,,230.3,749,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,230.3,228737947,ns,1177155,119364000,95959000,230.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,5,PROTEGIDA,hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo,true,,0.5,true,false,,,,241.3,771,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,241.3,240080802,ns,1194279,134785000,91307000,241.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,6,OTRA,puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo,true,,0.5,true,false,,,,238.4,794,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,238.4,237087899,ns,1113471,128175000,92143000,238.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,7,PROTEGIDA,dice débito tarjeta pero abajo aparece un código que no entiendo,true,,0.5,true,false,,,,217.4,814,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,217.4,216076886,ns,3936125,116977000,79046000,217.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,8,OTRA,¿Recordás si usaste la tarjeta física o la virtual en los últimos días?,true,,0.5,true,false,,,,180.4,837,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,180.4,179457510,ns,852520,90467000,77291000,180.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,9,PROTEGIDA,la física azul la tengo guardada no la perdí,true,,0.5,true,false,,,,182.4,855,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,182.4,181340563,ns,1038928,91585000,79035000,182.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,10,OTRA,perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre,true,,0.5,true,false,,,,185.6,880,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,185.6,184666632,ns,1004242,90428000,83558000,185.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,11,PROTEGIDA,compré comida pero fueron siete mil y algo esto es otra cosa,true,,0.5,true,false,,,,182.5,900,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,182.5,181354256,ns,1249778,91312000,78016000,182.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,12,OTRA,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,,0.5,true,false,,,,180.6,929,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,180.6,179547300,ns,1095085,91791000,75594000,180.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,13,PROTEGIDA,no y el documento también lo tengo acá,true,,0.5,true,false,,,,182.1,945,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,182.1,181217422,ns,861164,86778000,83022000,182.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,14,OTRA,no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación,true,,0.5,true,false,,,,192.1,979,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,192.1,191044807,ns,997570,97889000,79790000,192.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,15,PROTEGIDA,bueno la tarjeta queda bloqueada ahora,true,,0.5,true,false,,,,178.1,994,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,178.1,176999537,ns,847249,87120000,77254000,178.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,16,OTRA,puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas,true,,0.5,true,false,,,,201.4,1018,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,201.4,200267271,ns,1051935,108062000,79497000,201.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,17,PROTEGIDA,hacé eso porque la uso para el súper,true,,0.5,true,false,,,,183.1,1035,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,183.1,182037435,ns,1021987,90641000,78717000,183.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,18,OTRA,te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles,true,,0.5,true,false,,,,191.1,1065,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,191.1,189963070,ns,831738,94568000,82515000,191.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,19,PROTEGIDA,y el débito se devuelve mientras tanto,true,,0.5,true,false,,,,190.9,1081,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,190.9,189956733,ns,1237243,92144000,83858000,190.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,20,OTRA,no te lo puedo prometer primero revisan el comercio y el comprobante,true,,0.5,true,false,,,,183.1,1103,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,183.1,182158662,ns,891810,91634000,77655000,183.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,21,PROTEGIDA,está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online,true,,0.5,true,false,,,,201.9,1131,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,201.9,200902129,ns,1086029,92505000,88670000,201.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,CV2-D-L-BANCO-001,22,OTRA,dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta,true,,0.5,true,false,,,,199.5,1158,14,"{""riesgo"": 0.5, ""alerta_s",,,,,,,,199.5,198551191,ns,864753,94458000,83373000,199.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,SC-WA-CODE-01-e01,1,OTRA,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.1,false,false,,,,346.8,656,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,346.8,345803419,ns,977036,257106000,79650000,346.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,SC-WA-CODE-01-e01,2,PROTEGIDA,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.1,false,false,,,,181.2,676,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,181.2,180209206,ns,967618,91963000,78605000,181.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,SC-WA-CODE-01-e01,3,OTRA,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.1,false,false,,,,181.9,692,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,181.9,180931420,ns,1012024,85366000,86213000,181.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,SC-WA-CODE-01-e01,4,OTRA,Decime el código de activación que recibiste por SMS.,true,,0.9,true,true,La solicitud de un código de activación por SMS es un indicio común de intentos de phishing o estafa.,Decime el código de activación que recibiste por SMS.,true,762.3,710,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,762.3,189012838,ns,1097288,99250000,79174000,190.0,572.2,824,46,"{""evidencia"": ""Decime el código de activación que recibiste por SMS."", ""motivo"": ""La solicitud de un código de activación por SMS es un indicio común de intentos de phishing o estafa.""}"
+slm|gemma4:e2b-it-q4_K_M|p-niveles-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-niveles-corte-riesgo,rol,SC-WA-CODE-01-e01,5,PROTEGIDA,"Es cero, cero, cero, cero, cero, cero.",true,,0.9,true,false,,,,184.5,730,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,184.5,183528190,ns,1060072,88426000,83682000,184.5,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,1,PROTEGIDA,hola buen día,true,,0.1,false,false,,,,375.9,756,14,"{
+  ""riesgo"": 0.1,
+  ",,,,,,,,375.9,374958090,ns,723694,256630999,85864000,375.9,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,2,OTRA,Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,,0.2,false,false,,,,185.1,780,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,185.1,184183593,ns,1058850,87545000,84616000,185.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,3,PROTEGIDA,No sabía que había una devolución,true,,0.2,false,false,,,,182.9,793,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,182.9,181872088,ns,839616,86289000,83438000,182.9,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,4,OTRA,Es una revisión de períodos viejos no se acredita automáticamente,true,,0.2,false,false,,,,194.1,810,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,194.1,193068396,ns,1060529,90055000,90179000,194.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,5,PROTEGIDA,De qué período hablan,true,,0.3,true,true,"Aunque el tema de pensiones puede ser legítimo, es una táctica común para generar confianza y presionar a la víctima.",Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,852.8,821,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,852.8,188260119,ns,999008,90377000,85131000,189.4,663.4,938,63,"{
+  ""evidencia"": ""Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes"",
+  ""motivo"": ""Aunque el tema de pensiones puede ser legítimo, es una táctica común para generar confianza y presionar a la víctima.""
+}"
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,6,OTRA,Entre el primer trabajo y el alta de la prestación,true,,0.3,true,false,,,,186.2,837,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,186.2,185204723,ns,1044689,87283000,83924000,186.2,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,7,PROTEGIDA,Eso fue hace muchos años,true,,0.2,false,false,,,,183.6,849,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,183.6,182599512,ns,1056359,85301000,85016000,183.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,8,OTRA,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,,0.3,true,false,,,,199.4,872,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,199.4,198330179,ns,1070422,98187000,86564000,199.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,9,PROTEGIDA,Sí pero no quiero mandar una foto por mensaje,true,,0.3,true,false,,,,192.0,888,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,192.0,190962056,ns,1094414,89849000,87637000,192.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,10,OTRA,No hace falta foto Podés mirar el reverso donde está impreso el número de trámite,true,,0.3,true,false,,,,200.5,915,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,200.5,199448709,ns,1038782,99705000,86003000,200.5,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,11,PROTEGIDA,Ese número sirve pa la devolución,true,,0.3,true,false,,,,186.0,929,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,186.0,184942015,ns,1036960,91662000,79958000,186.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,12,OTRA,Identifica al titular y habilita a consultar la liquidación provisoria,true,,0.3,true,false,,,,183.3,951,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,183.3,182263026,ns,1054635,89364000,80218000,183.3,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,13,PROTEGIDA,El número es largo no lo leo bien,true,,0.3,true,false,,,,191.1,967,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,191.1,190230879,ns,1107676,86441000,90638000,191.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,14,OTRA,Decime los últimos cuatro y la fecha de emisión que figura abajo,true,,0.3,true,false,,,,200.6,987,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,200.6,199492413,ns,2567532,92055000,91192000,200.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,15,PROTEGIDA,No es un dato personal,true,,0.3,true,false,,,,194.7,1000,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,194.7,193786234,ns,1189128,90334000,88806000,194.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,16,OTRA,Es una referencia administrativa no un código de acceso,true,,0.3,true,false,,,,200.9,1016,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,200.9,199955504,ns,1042344,91618000,89672000,200.9,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,17,PROTEGIDA,Si es una devolución no debería recibir una carta,true,,0.3,true,false,,,,196.4,1033,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,196.4,195530009,ns,1065636,90527000,85907000,196.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,18,OTRA,La carta se genera cuando el titular confirma la liquidación,true,,0.3,true,false,,,,194.1,1051,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,194.1,192926823,ns,1084359,94312000,79454000,194.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,19,PROTEGIDA,No quiero confirmar algo que no vi,true,,0.3,true,false,,,,200.4,1066,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,200.4,199400573,ns,1062380,96181000,78779000,200.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,20,OTRA,La cifra se puede leer una vez que se abre el legajo,true,,0.3,true,false,,,,206.4,1086,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,206.4,205299003,ns,897075,91080000,92041000,206.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,21,PROTEGIDA,Entonces prefiero pedir turno y revisarlo en persona,true,,0.3,true,false,,,,201.9,1104,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,201.9,200923455,ns,1054559,94685000,85887000,201.9,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,1,PROTEGIDA,buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es,true,,0.2,false,false,,,,202.3,781,14,"{
+  ""riesgo"": 0.2,
+  ",,,,,,,,202.3,201258639,ns,1034966,98704000,90760000,202.3,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,2,OTRA,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,,0.3,true,true,"No se puede verificar la identidad de quien llama, por lo que es prudente no dar información de cuenta por teléfono.",te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,806.8,809,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,806.8,196858455,ns,1106955,93198000,90994000,197.9,608.9,926,65,"{
+  ""evidencia"": ""te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"",
+  ""motivo"": ""No se puede verificar la identidad de quien llama, por lo que es prudente no dar información de cuenta por teléfono.""
+}"
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,3,PROTEGIDA,en la caja de ahorro terminada en 4821 la otra no la uso casi nunca,true,,0.3,true,false,,,,231.8,836,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,231.8,230590228,ns,1143699,119344000,94079000,231.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,4,OTRA,bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer,true,,0.3,true,false,,,,242.5,859,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,242.5,240144164,ns,1119478,120929000,101021000,242.5,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,5,PROTEGIDA,hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo,true,,0.3,true,false,,,,237.8,881,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,237.8,236560140,ns,1102750,120161000,99773000,237.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,6,OTRA,puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo,true,,0.3,true,false,,,,243.6,904,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,243.6,242402013,ns,1003565,124597000,98297000,243.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,7,PROTEGIDA,dice débito tarjeta pero abajo aparece un código que no entiendo,true,,0.5,true,false,,,,243.2,924,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,243.2,241805221,ns,1297244,124492000,98577000,243.2,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,8,OTRA,¿Recordás si usaste la tarjeta física o la virtual en los últimos días?,true,,0.5,true,false,,,,246.2,947,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,246.2,244988290,ns,1086139,130854000,94972000,246.2,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,9,PROTEGIDA,la física azul la tengo guardada no la perdí,true,,0.5,true,false,,,,241.5,965,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,241.5,240288486,ns,1192142,123599000,97162000,241.5,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,10,OTRA,perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre,true,,0.5,true,false,,,,253.6,990,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,253.6,252270528,ns,1213993,132705000,100161000,253.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,11,PROTEGIDA,compré comida pero fueron siete mil y algo esto es otra cosa,true,,0.5,true,false,,,,256.4,1010,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,256.4,255172304,ns,1131275,129503999,98050000,256.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,12,OTRA,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,,0.6,true,false,,,,256.7,1039,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,256.7,255490868,ns,1279997,127694000,99348000,256.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,13,PROTEGIDA,no y el documento también lo tengo acá,true,,0.6,true,false,,,,255.8,1055,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,255.8,253776378,ns,1411551,126562000,98688000,255.8,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,14,OTRA,no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación,true,,0.6,true,false,,,,273.0,1089,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,273.0,269782136,ns,1128005,134962000,101156000,273.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,15,PROTEGIDA,bueno la tarjeta queda bloqueada ahora,true,,0.6,true,false,,,,239.1,1104,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,239.1,237192955,ns,2970481,115677000,87055000,239.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,16,OTRA,puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas,true,,0.6,true,false,,,,202.1,1128,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,202.1,200981979,ns,1192541,94500000,86645000,202.1,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,17,PROTEGIDA,hacé eso porque la uso para el súper,true,,0.7,true,false,,,,199.2,1145,14,"{
+  ""riesgo"": 0.7,
+  ",,,,,,,,199.2,198212374,ns,1131759,92034000,83743000,199.2,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,18,OTRA,te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles,true,,0.6,true,false,,,,220.4,1175,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,220.4,219233858,ns,930643,105844000,91734000,220.4,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,19,PROTEGIDA,y el débito se devuelve mientras tanto,true,,0.6,true,false,,,,202.0,1191,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,202.0,201005097,ns,1182816,89262000,90414000,202.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,20,OTRA,no te lo puedo prometer primero revisan el comercio y el comprobante,true,,0.6,true,false,,,,202.3,1213,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,202.3,201295587,ns,1197253,92623000,86474000,202.3,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,21,PROTEGIDA,está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online,true,,0.6,true,false,,,,205.7,1241,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,205.7,204575721,ns,1101782,95615000,86091000,205.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,CV2-D-L-BANCO-001,22,OTRA,dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta,true,,0.6,true,false,,,,207.7,1268,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,207.7,206443957,ns,1240126,93726000,88128000,207.7,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,SC-WA-CODE-01-e01,1,OTRA,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.3,true,true,"Aunque puede ser legítima, no se puede verificar la identidad de quien llama, por lo que es prudente tener precaución.",Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,961.9,766,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,961.9,374796443,ns,936914,264392000,95185000,375.9,586.0,883,58,"{
+  ""evidencia"": ""Te llamo de soporte por la activación de tu cuenta de WhatsApp."",
+  ""motivo"": ""Aunque puede ser legítima, no se puede verificar la identidad de quien llama, por lo que es prudente tener precaución.""
+}"
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,SC-WA-CODE-01-e01,2,PROTEGIDA,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.3,true,false,,,,191.2,786,14,"{
+  ""riesgo"": 0.3,
+  ",,,,,,,,191.2,190171668,ns,875068,88541000,89367000,191.2,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,SC-WA-CODE-01-e01,3,OTRA,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.6,true,false,,,,194.0,802,14,"{
+  ""riesgo"": 0.6,
+  ",,,,,,,,194.0,192879142,ns,1097460,90762000,85123000,194.0,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,SC-WA-CODE-01-e01,4,OTRA,Decime el código de activación que recibiste por SMS.,true,,0.9,true,false,,,,190.6,820,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,190.6,189565196,ns,815090,89464000,88494000,190.6,,,,
+slm|gemma4:e2b-it-q4_K_M|c-rumbo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,c-rumbo-corte-riesgo,rol,SC-WA-CODE-01-e01,5,PROTEGIDA,"Es cero, cero, cero, cero, cero, cero.",true,,0.9,true,false,,,,199.4,840,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,199.4,198420554,ns,1176156,97731000,87197000,199.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,1,PROTEGIDA,hola buen día,true,,0.1,false,false,,,,394.5,581,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,394.5,393561748,ns,1138958,277018000,86728000,394.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,2,OTRA,Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,,0.1,false,false,,,,201.9,605,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,201.9,201023818,ns,981485,100731000,88436000,201.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,3,PROTEGIDA,No sabía que había una devolución,true,,0.1,false,false,,,,177.6,618,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,177.6,176594014,ns,1118820,86503000,79643000,177.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,4,OTRA,Es una revisión de períodos viejos no se acredita automáticamente,true,,0.1,false,false,,,,184.9,635,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,184.9,183934409,ns,986719,84602000,89050000,184.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,5,PROTEGIDA,De qué período hablan,true,,0.1,false,false,,,,182.8,646,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,182.8,181738348,ns,1031432,85830000,85953000,182.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,6,OTRA,Entre el primer trabajo y el alta de la prestación,true,,0.1,false,false,,,,181.6,662,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,181.6,180479573,ns,1097455,91898000,78367000,181.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,7,PROTEGIDA,Eso fue hace muchos años,true,,0.1,false,false,,,,192.5,674,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,192.5,191483782,ns,1049957,92165000,88659000,192.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,8,OTRA,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,,0.1,false,false,,,,185.5,697,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,185.5,184486309,ns,1030565,91826000,82406000,185.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,9,PROTEGIDA,Sí pero no quiero mandar una foto por mensaje,true,,0.1,false,false,,,,183.9,713,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,183.9,182932492,ns,1043330,88763000,84086000,183.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,10,OTRA,No hace falta foto Podés mirar el reverso donde está impreso el número de trámite,true,,0.1,false,false,,,,189.7,740,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,189.7,188609742,ns,1077111,96920000,80459000,189.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,11,PROTEGIDA,Ese número sirve pa la devolución,true,,0.1,false,false,,,,191.9,754,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,191.9,190847612,ns,1133763,93400000,86288000,191.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,12,OTRA,Identifica al titular y habilita a consultar la liquidación provisoria,true,,0.1,false,false,,,,185.1,776,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,185.1,184183139,ns,991322,92278000,80179000,185.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,13,PROTEGIDA,El número es largo no lo leo bien,true,,0.1,false,false,,,,206.3,792,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,206.3,205282172,ns,1165426,102319000,91756000,206.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,14,OTRA,Decime los últimos cuatro y la fecha de emisión que figura abajo,true,,0.1,false,false,,,,200.7,812,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,200.7,199696974,ns,1135479,98924000,88727000,200.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,15,PROTEGIDA,No es un dato personal,true,,0.1,false,false,,,,185.9,825,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,185.9,184952645,ns,1081078,90606000,83249000,185.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,16,OTRA,Es una referencia administrativa no un código de acceso,true,,0.1,false,false,,,,181.5,841,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,181.5,180476675,ns,1098229,88891000,79026000,181.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,17,PROTEGIDA,Si es una devolución no debería recibir una carta,true,,0.1,false,false,,,,192.7,858,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,192.7,191631974,ns,1113826,94685000,84958000,192.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,18,OTRA,La carta se genera cuando el titular confirma la liquidación,true,,0.1,false,false,,,,194.0,876,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,194.0,192977453,ns,1207325,96354000,82981000,194.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,19,PROTEGIDA,No quiero confirmar algo que no vi,true,,0.1,false,false,,,,186.5,891,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,186.5,185414524,ns,1186787,89004000,84028000,186.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,20,OTRA,La cifra se puede leer una vez que se abre el legajo,true,,0.1,false,false,,,,188.8,911,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,188.8,187775339,ns,1220208,92722000,82516000,188.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,21,PROTEGIDA,Entonces prefiero pedir turno y revisarlo en persona,true,,0.1,false,false,,,,189.1,929,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,189.1,188104510,ns,1079421,92327000,83248000,189.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,1,PROTEGIDA,buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es,true,,0.1,false,false,,,,199.8,606,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,199.8,198851356,ns,977985,105167000,84514000,199.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,2,OTRA,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,,0.1,false,false,,,,196.6,634,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,196.6,195602732,ns,1090406,96443000,88883000,196.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,3,PROTEGIDA,en la caja de ahorro terminada en 4821 la otra no la uso casi nunca,true,,0.1,false,false,,,,187.8,661,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,187.8,186835523,ns,2021201,92928000,80423000,187.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,4,OTRA,bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer,true,,0.1,false,false,,,,185.3,684,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,185.3,184363265,ns,1091549,88650000,85591000,185.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,5,PROTEGIDA,hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo,true,,0.1,false,false,,,,195.6,706,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,195.6,194549283,ns,2600036,91176000,90598000,195.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,6,OTRA,puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo,true,,0.1,false,false,,,,187.4,729,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,187.4,186386845,ns,1154608,92864000,82415000,187.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,7,PROTEGIDA,dice débito tarjeta pero abajo aparece un código que no entiendo,true,,0.1,false,false,,,,189.2,749,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,189.2,187974080,ns,1098479,90789000,86506000,189.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,8,OTRA,¿Recordás si usaste la tarjeta física o la virtual en los últimos días?,true,,0.1,false,false,,,,210.9,772,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,210.9,209802510,ns,1117017,103726000,94339000,210.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,9,PROTEGIDA,la física azul la tengo guardada no la perdí,true,,0.1,false,false,,,,187.7,790,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,187.7,186650980,ns,1092622,91862000,83149000,187.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,10,OTRA,perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre,true,,0.1,false,false,,,,195.8,815,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,195.8,194800819,ns,1071203,91659000,90970000,195.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,11,PROTEGIDA,compré comida pero fueron siete mil y algo esto es otra cosa,true,,0.1,false,false,,,,188.7,835,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,188.7,187756221,ns,1073547,92455000,84014000,188.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,12,OTRA,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,,0.9,true,true,La solicitud de confirmar el nombre para cargar un desconocimiento es una táctica común de estafa.,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,875.3,864,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,875.3,193509018,ns,852715,93270000,88959000,194.4,680.8,978,56,"{""evidencia"": ""entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular"", ""motivo"": ""La solicitud de confirmar el nombre para cargar un desconocimiento es una táctica común de estafa.""}"
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,13,PROTEGIDA,no y el documento también lo tengo acá,true,,0.9,true,false,,,,257.6,880,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,257.6,256460760,ns,974360,152069000,88554000,257.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,14,OTRA,no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación,true,,0.1,false,false,,,,244.3,914,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,244.3,242908243,ns,1056142,131029000,95245000,244.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,15,PROTEGIDA,bueno la tarjeta queda bloqueada ahora,true,,0.9,true,false,,,,242.7,929,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,242.7,241438956,ns,1350204,126230000,95216000,242.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,16,OTRA,puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas,true,,0.9,true,false,,,,238.6,953,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,238.6,237451335,ns,1098355,130697000,89265000,238.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,17,PROTEGIDA,hacé eso porque la uso para el súper,true,,0.9,true,false,,,,244.1,970,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,244.1,242958477,ns,1084586,130469000,94516000,244.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,18,OTRA,te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles,true,,0.9,true,false,,,,242.6,1000,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,242.6,241245934,ns,1431938,133561000,87435000,242.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,19,PROTEGIDA,y el débito se devuelve mientras tanto,true,,0.9,true,false,,,,249.4,1016,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,249.4,248218669,ns,973969,134754000,92064000,249.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,20,OTRA,no te lo puedo prometer primero revisan el comercio y el comprobante,true,,0.9,true,false,,,,242.2,1038,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,242.2,240992596,ns,998680,132604999,91135000,242.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,21,PROTEGIDA,está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online,true,,0.1,false,false,,,,251.8,1066,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,251.8,250532744,ns,1305545,132900000,98755000,251.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,CV2-D-L-BANCO-001,22,OTRA,dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta,true,,0.9,true,false,,,,254.0,1093,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,254.0,252700463,ns,1293718,135659000,90482000,254.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,SC-WA-CODE-01-e01,1,OTRA,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.1,false,false,,,,436.2,591,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,436.2,435050896,ns,1203312,334534000,89031000,436.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,SC-WA-CODE-01-e01,2,PROTEGIDA,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.1,false,false,,,,221.9,611,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,221.9,220383986,ns,1076978,118887000,85843000,221.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,SC-WA-CODE-01-e01,3,OTRA,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.1,false,false,,,,192.5,627,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,192.5,191491987,ns,1353053,93418000,85670000,192.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,SC-WA-CODE-01-e01,4,OTRA,Decime el código de activación que recibiste por SMS.,true,,0.1,false,false,,,,188.6,645,14,"{""riesgo"": 0.1, ""alerta_s",,,,,,,,188.6,187591161,ns,898405,87460000,88952000,188.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-sino-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-sino-corte-riesgo,rol,SC-WA-CODE-01-e01,5,PROTEGIDA,"Es cero, cero, cero, cero, cero, cero.",true,,0.9,true,true,La solicitud de un código de activación por SMS es una táctica común de phishing o estafa.,Para cancelar esa activación tenemos que resolverlo ahora.,true,694.2,665,14,"{""riesgo"": 0.9, ""alerta_s",,,,,,,,694.2,177322185,ns,800634,88490000,79176000,178.4,515.8,779,42,"{""evidencia"": ""Para cancelar esa activación tenemos que resolverlo ahora."", ""motivo"": ""La solicitud de un código de activación por SMS es una táctica común de phishing o estafa.""}"
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,1,PROTEGIDA,hola buen día,true,,0.0,false,false,,,,289.9,321,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,289.9,288903229,ns,1054073,175901000,79234000,289.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,2,OTRA,Buenas te contacto de la oficina de regularización de pensiones por una devolución de aportes,true,,0.0,false,false,,,,269.2,345,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,269.2,268196513,ns,937309,183220000,77913000,269.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,3,PROTEGIDA,No sabía que había una devolución,true,,0.0,false,false,,,,276.3,358,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,276.3,275353732,ns,980231,185334000,83279000,276.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,4,OTRA,Es una revisión de períodos viejos no se acredita automáticamente,true,,0.0,false,false,,,,283.9,375,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,283.9,282946513,ns,927908,190355000,85425000,283.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,5,PROTEGIDA,De qué período hablan,true,,0.0,false,false,,,,283.5,386,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,283.5,282435704,ns,965969,188573000,86128000,283.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,6,OTRA,Entre el primer trabajo y el alta de la prestación,true,,0.0,false,false,,,,306.6,402,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,306.6,305389612,ns,1127927,214668000,82621000,306.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,7,PROTEGIDA,Eso fue hace muchos años,true,,0.0,false,false,,,,299.0,414,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,299.0,298061461,ns,990806,209795000,80473000,299.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,8,OTRA,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,,0.5,true,true,La solicitud de reconstruir un legajo y pedir una copia de un documento a mano puede ser un intento de obtener información personal o financiera bajo el pretexto de una devolución de aportes.,Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano,true,1047.7,437,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,1047.7,308599805,ns,829811,213251000,87390000,309.6,738.1,554,74,"{
+  ""evidencia"": ""Por eso pedimos reconstruir el legajo Tenés una copia del documento a mano"",
+  ""motivo"": ""La solicitud de reconstruir un legajo y pedir una copia de un documento a mano puede ser un intento de obtener información personal o financiera bajo el pretexto de una devolución de aportes.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,9,PROTEGIDA,Sí pero no quiero mandar una foto por mensaje,true,,0.5,true,false,,,,333.7,453,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,333.7,332659748,ns,1073755,229298000,94261000,333.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,10,OTRA,No hace falta foto Podés mirar el reverso donde está impreso el número de trámite,true,,0.0,false,false,,,,324.4,480,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,324.4,323378518,ns,859406,233997000,80883000,324.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,11,PROTEGIDA,Ese número sirve pa la devolución,true,,0.5,true,false,,,,340.9,494,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,340.9,339885378,ns,1028716,243137000,87439000,340.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,12,OTRA,Identifica al titular y habilita a consultar la liquidación provisoria,true,,0.5,true,false,,,,354.2,516,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,354.2,353264521,ns,1029754,255417000,89134000,354.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,13,PROTEGIDA,El número es largo no lo leo bien,true,,0.5,true,false,,,,357.4,532,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,357.4,356390779,ns,945137,262272000,85335000,357.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,14,OTRA,Decime los últimos cuatro y la fecha de emisión que figura abajo,true,,0.5,true,false,,,,199.2,552,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,199.2,198146686,ns,4142122,93230000,89904000,199.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,15,PROTEGIDA,No es un dato personal,true,,0.5,true,false,,,,181.2,565,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,181.2,180303148,ns,1004447,84354000,87043000,181.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,16,OTRA,Es una referencia administrativa no un código de acceso,true,,0.0,false,false,,,,175.1,581,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,175.1,174118930,ns,1026878,86360000,78848000,175.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,17,PROTEGIDA,Si es una devolución no debería recibir una carta,true,,0.5,true,false,,,,189.4,598,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,189.4,188485300,ns,1203052,88285000,90168000,189.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,18,OTRA,La carta se genera cuando el titular confirma la liquidación,true,,0.5,true,false,,,,188.7,616,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,188.7,187651503,ns,801969,90316000,88131000,188.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,19,PROTEGIDA,No quiero confirmar algo que no vi,true,,0.5,true,false,,,,199.1,631,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,199.1,198116211,ns,1098681,101180000,87236000,199.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,20,OTRA,La cifra se puede leer una vez que se abre el legajo,true,,0.5,true,false,,,,196.3,651,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,196.3,195382768,ns,1065476,91016000,93604000,196.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-V-ORGANISMO_PREVISIONAL-004,21,PROTEGIDA,Entonces prefiero pedir turno y revisarlo en persona,true,,0.0,false,false,,,,178.6,669,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,178.6,177590841,ns,981701,90699000,77533000,178.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,1,PROTEGIDA,buen día llamo yo me aparece un débito de 18430 pesos que dice colectivo sur y no sé de qué es,true,,0.0,false,false,,,,298.3,346,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,298.3,297367843,ns,941888,174326000,85083000,298.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,2,OTRA,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,,0.0,false,false,,,,275.4,374,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,275.4,274237039,ns,948690,184221000,82705000,275.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,3,PROTEGIDA,en la caja de ahorro terminada en 4821 la otra no la uso casi nunca,true,,0.5,true,true,La solicitud de información sobre cuentas bancarias puede ser un intento de phishing o fraude.,te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro,true,874.1,401,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,874.1,292577482,ns,1087029,190283000,92432000,293.5,580.7,518,58,"{
+  ""evidencia"": ""te atiendo soy mara del sector de movimientos lo ves en la cuenta sueldo o en la caja de ahorro"",
+  ""motivo"": ""La solicitud de información sobre cuentas bancarias puede ser un intento de phishing o fraude.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,4,OTRA,bien con esos últimos cuatro dígitos ya ubico cuál mirar el movimiento figura hoy o ayer,true,,0.5,true,false,,,,313.9,424,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,313.9,312853013,ns,1004100,212956000,92175000,313.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,5,PROTEGIDA,hoy a las seis y pico justo cuando estaba trabajando yo no tomo ese colectivo,true,,0.5,true,false,,,,316.9,446,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,316.9,315784800,ns,1087764,216006000,91480000,316.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,6,OTRA,puede ser una compra con tarjeta o una transferencia te figura como débito automático o consumo,true,,0.5,true,false,,,,323.6,469,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,323.6,322577491,ns,886706,230282000,83516000,323.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,7,PROTEGIDA,dice débito tarjeta pero abajo aparece un código que no entiendo,true,,0.5,true,false,,,,345.4,489,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,345.4,344054142,ns,1052065,244000000,90446000,345.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,8,OTRA,¿Recordás si usaste la tarjeta física o la virtual en los últimos días?,true,,0.5,true,false,,,,389.6,512,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,389.6,388350515,ns,1782450,281932000,91772000,389.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,9,PROTEGIDA,la física azul la tengo guardada no la perdí,true,,0.5,true,false,,,,401.2,530,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,401.2,399926165,ns,1130199,296727000,88136000,401.2,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,10,OTRA,perfecto recordás si hiciste alguna compra online anoche a veces entra con otro nombre,true,,0.5,true,false,,,,222.1,555,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,222.1,220976215,ns,1031310,121174000,88397000,222.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,11,PROTEGIDA,compré comida pero fueron siete mil y algo esto es otra cosa,true,,0.5,true,false,,,,223.1,575,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,223.1,222009090,ns,1186605,123766000,86215000,223.1,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,12,OTRA,entonces cargo el desconocimiento por el importe completo te voy a pedir que confirmes el nombre que figura como titular,true,,0.5,true,false,,,,231.7,604,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,231.7,229829435,ns,960541,125682000,90371000,231.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,13,PROTEGIDA,no y el documento también lo tengo acá,true,,0.5,true,false,,,,226.3,620,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,226.3,225069864,ns,1093672,120427000,91938000,226.3,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,14,OTRA,no para iniciar alcanza con el nombre y los últimos cuatro de la cuenta si el área pide algo más te va a aparecer en la aplicación,true,,0.5,true,false,,,,227.5,654,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,227.5,226353564,ns,956155,122872000,91417000,227.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,15,PROTEGIDA,bueno la tarjeta queda bloqueada ahora,true,,0.5,true,false,,,,250.4,669,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,250.4,249189235,ns,1716516,134438000,101039000,250.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,16,OTRA,puedo dejar apagadas las compras por internet mientras revisan las presenciales siguen habilitadas,true,,0.5,true,false,,,,237.8,693,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,237.8,236639630,ns,1081632,135184000,88259000,237.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,17,PROTEGIDA,hacé eso porque la uso para el súper,true,,0.5,true,false,,,,242.0,710,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,242.0,240541464,ns,1058126,132526999,89416000,242.0,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,18,OTRA,te doy el número de gestión 730-16 la respuesta suele estar dentro de cinco días hábiles,true,,0.5,true,false,,,,224.8,740,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,224.8,223340018,ns,1123805,120767000,88588000,224.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,19,PROTEGIDA,y el débito se devuelve mientras tanto,true,,0.5,true,false,,,,226.4,756,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,226.4,225260258,ns,1163695,120478000,89642000,226.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,20,OTRA,no te lo puedo prometer primero revisan el comercio y el comprobante,true,,0.5,true,false,,,,244.8,778,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,244.8,243391731,ns,1032312,135169000,93711000,244.8,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,21,PROTEGIDA,está bien anoté el trámite voy a mirar en la app si quedó apagada la compra online,true,,0.5,true,false,,,,231.5,806,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,231.5,230275734,ns,1102731,128151999,86994000,231.5,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,CV2-D-L-BANCO-001,22,OTRA,dale si no aparece en unos minutos volvé a comunicarte desde el número que está en tu tarjeta,true,,0.5,true,false,,,,193.9,833,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,193.9,192821166,ns,955824,99977000,80785000,193.9,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,SC-WA-CODE-01-e01,1,OTRA,Te llamo de soporte por la activación de tu cuenta de WhatsApp.,true,,0.0,false,false,,,,310.6,331,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,310.6,309638212,ns,727410,167146000,80252000,310.6,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,SC-WA-CODE-01-e01,2,PROTEGIDA,Me acaba de llegar un SMS. No pedí activar nada.,true,,0.0,false,false,,,,295.4,351,14,"{
+  ""riesgo"": 0.0,
+  ",,,,,,,,295.4,294543116,ns,923224,209468000,78230000,295.4,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,SC-WA-CODE-01-e01,3,OTRA,Para cancelar esa activación tenemos que resolverlo ahora.,true,,0.5,true,true,La insistencia para resolver un problema de activación de cuenta de WhatsApp de forma inmediata es una táctica común de estafa.,Para cancelar esa activación tenemos que resolverlo ahora.,true,957.2,367,14,"{
+  ""riesgo"": 0.5,
+  ",,,,,,,,957.2,281769173,ns,2331948,187055000,86112000,282.7,674.5,484,53,"{
+  ""evidencia"": ""Para cancelar esa activación tenemos que resolverlo ahora."",
+  ""motivo"": ""La insistencia para resolver un problema de activación de cuenta de WhatsApp de forma inmediata es una táctica común de estafa.""
+}"
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,SC-WA-CODE-01-e01,4,OTRA,Decime el código de activación que recibiste por SMS.,true,,0.9,true,false,,,,277.7,385,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,277.7,276584832,ns,1070764,189467000,78544000,277.7,,,,
+slm|gemma4:e2b-it-q4_K_M|p-minimo-corte-riesgo|rol,slm,gemma4:e2b-it-q4_K_M,p-minimo-corte-riesgo,rol,SC-WA-CODE-01-e01,5,PROTEGIDA,"Es cero, cero, cero, cero, cero, cero.",true,,0.9,true,false,,,,300.8,405,14,"{
+  ""riesgo"": 0.9,
+  ",,,,,,,,300.8,299786029,ns,1033036,209263000,82946000,300.8,,,,

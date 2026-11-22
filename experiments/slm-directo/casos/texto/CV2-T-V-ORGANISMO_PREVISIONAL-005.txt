@@ -1,0 +1,24 @@
+A: hola
+B: Hola te llamo por el recibo de pensión de este mes
+A: Salió con una diferencia
+B: En el resumen figura una retención que vos no reconocés
+A: No tengo retenciones nuevas
+B: La ficha muestra un período viejo pero no puedo abrir el detalle desde acá
+A: Cómo lo revisamos
+B: Primero necesito validar el número completo que aparece debajo del código de barras del recibo
+A: Ese número no está en el resumen digital
+B: Fijate en el papel y dictámelo para que no quede observada la consulta
+A: No puedo leerlo entero ahora
+B: Decime al menos los primeros y los últimos dígitos
+A: empieza con treinta y siete y termina en ochocientos cuarenta y dos
+B: Con eso ya puedo buscar el período
+A: Qué figura
+B: La retención es del mes pasado y no modifica este pago
+A: Me mandás una constancia de la consulta
+B: No se emite constancia por teléfono
+A: Entonces lo voy a revisar entrando yo al portal
+B: No hace falta, ya lo dejamos como consulta informativa
+A: Igual no voy a dictar el resto del número
+B: Como prefieras
+A: Chau
+B: Hasta luego

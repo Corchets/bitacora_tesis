@@ -1,0 +1,22 @@
+A: Hola, soy la pareja de tu hermano. ¿Podés atender?
+B: Sí, estoy esperando el colectivo.
+A: Se pinchó una cubierta cuando volvíamos de la casa de mi mamá.
+B: ¿Están bien?
+A: Sí, pero quedamos en una banquina y el auxilio tarda bastante.
+B: ¿No tienen la rueda de repuesto?
+A: Está puesta, pero el crique se dobló y no podemos mover el auto.
+B: ¿Llamaron a la aseguradora?
+A: Nos dijeron que el servicio no cubre la zona después de las diez.
+B: ¿Y qué van a hacer?
+A: Un vecino nos ofreció acercarnos una herramienta, pero necesita cargar combustible para salir.
+B: ¿Cuánto necesita?
+A: Quince mil, y nosotros se los devolvemos mañana.
+B: ¿Tu hermano tiene plata en la billetera?
+A: Se le cayó al bajar del auto y no encuentra las tarjetas.
+B: ¿No llamás a la policía caminera?
+A: Si me transferís a mí, saco el efectivo y se lo alcanzo al vecino.
+B: Pasame tu alias y confirmame el importe.
+A: camino.viejo.21, se llama Damián; son quince mil.
+B: Ya te mandé quince mil.
+A: Me confirmó que salió para acá.
+B: Avisame cuando estén fuera de la ruta.

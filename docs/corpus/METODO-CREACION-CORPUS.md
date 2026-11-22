@@ -6,6 +6,8 @@ el corpus. Las modalidades y sus fuentes viven en el
 [catálogo de escenarios](CATALOGO-ESCENARIOS.csv); las etiquetas, en el
 [manual de anotación](MANUAL-ANOTACION.md); las medidas, en [METRICAS.md](../evaluacion/METRICAS.md).
 
+> **Nota del 2026-11-21:** el piloto grabado de §6 no ocurrió: E1 quedó fuera y #54 se cerró sin grabar ([decisión](../investigacion/PREGUNTAS-DE-INVESTIGACION.md#e1--efecto-del-asr-fuera-de-la-evaluación)). El corpus que se usó es corpus v2, escrito con asistencia ([diseño](../../experiments/slm-directo/casos/DISENO-CORPUS-V2.md)), las legítimas entrantes y el test aparte del [ADR 0004](../ingenieria/adr/0004-legitimas-entrantes-nuevas-y-test-aparte.md), y los conjuntos externos ([relevamiento](RELEVAMIENTO-CORPUS-EXTERNO.md) y [legítimas reales](../investigacion/FUENTES-LEGITIMAS-REALES.md)).
+
 ## 1. Unidad del corpus
 
 - **Familia:** modalidad amplia, por ejemplo banco o soporte técnico.
