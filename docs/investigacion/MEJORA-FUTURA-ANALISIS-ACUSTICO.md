@@ -82,9 +82,8 @@ puede atribuir la mejora al tono.
 | Solapamiento | Habla simultánea al inicio de la respuesta, según la definición de §2.2 | Por verificar. El eco puede simular solapamientos |
 
 Altura, intensidad y ritmo salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE; las pausas, de las regiones
-no sonoras con un cálculo propio. Ninguno de estos rasgos indica
-estafa por sí mismo: también cambian por el contenido de lo que se dice, el ruido, el canal y la dinámica normal de una
-conversación. Qué dirección se espera en una estafa es parte de lo que el piloto tiene que observar, no un supuesto.
+no sonoras con un cálculo propio. Ninguno de estos rasgos indica estafa por sí mismo: también cambian por el contenido
+de lo que se dice, el ruido, el canal y la dinámica normal de una conversación. Qué dirección se espera en una estafa es parte de lo que el piloto tiene que observar, no un supuesto.
 
 ### 2.4. De dónde sale cada cosa
 
@@ -136,8 +135,8 @@ automáticamente, porque en el teléfono no habrá anotación.
 El riesgo que escribe Gemma no es un puntaje continuo ([H04](../hallazgos/H04-riesgo-escrito-no-es-puntaje.md)): se
 concentra en pocos valores. En desarrollo, con `c-premisa`, 57 de 66 avisos salieron de exactamente 0,3
 ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md),
-[corrida de sensibilidad](../../experiments/slm-directo/corridas/2026-11-10_sensibilidad-c/analisis.md)). Una regresión logística común sobre ese puntaje tampoco garantiza
-conservar la decisión del texto. Para el piloto conviene una regla explícita:
+[corrida de sensibilidad](../../experiments/slm-directo/corridas/2026-11-10_sensibilidad-c/analisis.md)). Una
+regresión logística común sobre ese puntaje tampoco garantiza conservar la decisión del texto. Para el piloto conviene una regla explícita:
 
 - **Conserva los avisos existentes.** Cada llamada que el texto solo avisa sigue avisando, en el mismo turno o antes.
 - **Puede agregar o adelantar avisos** cuando, después de una objeción, los tiempos o la prosodia de la respuesta
@@ -162,6 +161,9 @@ denominadores explícitos:
 - cuántas legítimas reciben un aviso nuevo, con un horizonte común;
 - la incertidumbre de cada cifra, teniendo en cuenta que las llamadas de una misma persona o familia de guiones no son
   independientes.
+
+Además:
+
 - Todo separado por tipo de llamada (§4.2). Un método que mejora el total pero empeora un tipo se informa así.
 - Por llamada, un gráfico con el riesgo de cada método turno a turno, la marca de la objeción, `T_R` y `T_A`, y
   **cuándo estuvo disponible cada señal**: la prosodia de un turno llega después de que el turno termina.
