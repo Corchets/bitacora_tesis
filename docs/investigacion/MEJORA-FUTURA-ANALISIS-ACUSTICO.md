@@ -161,7 +161,7 @@ señales se equivocan de forma independiente y se combinan de la mejor forma lin
 | Escenario | Separación del tono solo | Separación combinada | Falsas alarmas en 33 legítimas reales |
 | --- | --- | --- | --- |
 | Hoy, solo texto | — | 0,73 | ~22 |
-| Pesimista: el tono casi no distingue, o el códec lo borra | 0,55 | 0,74 | ~22 |
+| Pesimista: el tono casi no distingue, o el códec lo borra | 0,55 | 0,73 | ~22 |
 | Intermedio | 0,65 | 0,77 | ~20 |
 | Optimista: el tono distingue tanto como el texto | 0,75 | 0,82 | ~16 |
 | Muy optimista: la reacción a la duda distingue mucho | 0,85 | 0,89 | ~11 |
