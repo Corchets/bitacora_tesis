@@ -1,4 +1,4 @@
-# Mejora futura: escuchar cómo habla quien llama, además de qué dice
+# Trabajo futuro: ¿la reacción de quien llama ante una objeción aporta algo que el texto no tiene?
 
 > **Estado: propuesta sin discutir.** Es trabajo futuro: no se implementó ni se midió nada de lo que sigue. El detector
 > actual trabaja solo sobre la transcripción, y la decisión de sumar rasgos acústicos sigue abierta en
@@ -6,349 +6,248 @@
 > del tutor, que pidió desarrollar las mejoras futuras en vez de dejarlas como viñetas
 > ([§11.4](../tesis/CAP-11-CONCLUSIONES.md#114-trabajo-futuro-acotado)).
 
-## En corto
+## 1. La pregunta
 
-- **La idea:** que el detector, además de leer lo que dice quien llama, escuche cómo lo dice: si se agita, si se pone
-  imperativo, si acelera y, sobre todo, cómo reacciona cuando la persona duda.
-- **Para qué:** para mejorar el detector en general. Puede servir para avisar más estafas, para avisar antes o para
-  avisar menos en llamadas legítimas. El texto solo ya mostró un techo: cambiar el prompt mueve cuánto avisa, no a
-  quién.
-- **Cómo se combina:** la voz solo puede sumar al riesgo del texto, nunca restarle. Una voz tranquila no prueba nada:
-  muchos estafadores son tranquilos y profesionales. Una voz agitada tampoco: un familiar con una emergencia real
-  también se agita. Cuánto suma la voz se aprende de datos, no se fija a mano, y se evalúa sobre los casos que salen
-  mal, no sobre el caso típico.
-- **Qué se podría ganar:** sobre todo, avisar más estafas o avisarlas antes, en las que quien llama aprieta cuando la
-  persona duda. Una estimación aproximada da de 2 a 6 estafas más de cada 100. Bajar falsas alarmas es más difícil:
-  cualquier forma de usar la voz para avisar menos pone en riesgo al estafador tranquilo.
-- **Qué hace falta:** audio real grabado con consentimiento, del orden de 150 llamadas legítimas. El audio sintético
-  no sirve: el tono es el del sintetizador.
-- **Qué no se hace:** juzgar a nadie por su acento ni decir que alguien miente.
+Cuando la persona protegida (`PROTEGIDA`) duda o se niega, ¿la forma en que responde quien llama (`OTRA`) le da al
+detector información que la transcripción todavía no tiene?
 
-## 1. Por qué
+**Objetivo.** Evaluar si los tiempos de interacción y los cambios prosódicos de `OTRA` después de una objeción permiten
+al detector avisar antes del primer pedido de alto riesgo (`T_R`, [métricas](../evaluacion/METRICAS.md#1-marcas-temporales)),
+con un margen de falsas alarmas acordado antes de evaluar. El piloto usa conversaciones recreadas por personas, en
+español argentino y con los dos canales separados. Los métodos se comparan sobre las mismas llamadas y con la
+información disponible en cada instante. El aviso se fecha cuando el sistema lo emite efectivamente (`T_A`).
 
-El detector actual solo lee. Le va bien cuando la estafa se dice con palabras claras, y la evaluación final le marcó
-tres límites ([§11.1](../tesis/CAP-11-CONCLUSIONES.md#111-aportes-y-resultados-principales)):
+**Por qué interesa.** Ninguno de los candidatos probados en
+[H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md) mejoró claramente la separación entre
+estafas y legítimas reales: los que bajaron las falsas alarmas perdieron estafas. Eso no prueba que el texto haya
+llegado a un techo, pero sugiere buscar información que el detector no tiene, en vez de otra forma de pedirle lo mismo.
+La reacción ante una objeción es un buen lugar para buscar: es el momento en que una estafa necesita insistir y una
+llamada legítima puede aflojar.
 
-- **Se le escapan estafas.** Avisó 73 de 100 estafas del test.
-- **Avisa tarde.** De las 80 estafas con un pedido, avisó antes de que empezara el pedido en 37.
-- **Avisa de más en llamadas reales.** Avisó en 21 de 33 llamadas legítimas de call center.
+**Antecedente directo.** En 100 llamadas en turco, siete modelos de lenguaje clasificaron mejor las estafas a partir de
+la transcripción que escuchando el audio directo (Eren et al., 2026). Es un argumento a favor del enfoque actual, pero
+ese estudio clasifica la llamada entera; no prueba sumar la voz al texto turno a turno ni mira la reacción a una
+objeción.
 
-Y el texto parece tener un techo. Siete prompts distintos movieron cuánto avisa el detector, pero no mejoraron a quién
-le avisa ([H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md)): los que bajan las falsas
-alarmas pierden estafas, y al revés. Para separar mejor hace falta información nueva, no otra forma de pedirle lo mismo
-al modelo.
+**Qué no se afirma.** No se anticipa una ganancia. Si el piloto da negativo, la conclusión defendible es acotada: estos
+rasgos, en estas condiciones y con esta política de aviso, no mostraron un aporte medible. Eso también responde la
+pregunta.
 
-La voz es información que el sistema ya captura y hoy descarta. Un operador que pide el DNI y un estafador que lo pide
-dicen lo mismo; lo que puede cambiar es cómo lo dicen y qué hacen cuando la otra persona duda.
+## 2. Qué se mide
 
-**Hipótesis:** el tono de quien llama (`OTRA`) y cómo cambia a lo largo de la llamada, combinado con el riesgo del
-texto, separa mejor estafas de legítimas que el texto solo. Esa mejor separación se puede usar para avisar más estafas,
-para avisar antes o para avisar menos en legítimas (§6).
+### 2.1. Tres señales que hay que separar
 
-Es una hipótesis, no un resultado. Los dos conjuntos reales de H12 son texto traducido, sin audio, así que no sirven
-para probarla: hace falta audio nuevo (§9).
+«Reacción a la objeción» junta tres cosas distintas. Si un detector combinado mejora, hay que poder decir cuál de ellas
+lo explica:
 
-## 2. Qué se escucharía: el tono
+1. **Que hubo una objeción.** Es información del texto. El detector actual la lee, pero no se le marca.
+2. **Los tiempos de la respuesta.** Cuánto tarda `OTRA` en contestar, si empieza a hablar encima, cuánto habla. Salen
+   de la actividad de voz de cada canal.
+3. **Cómo suena la respuesta.** Los cambios prosódicos de `OTRA` frente a cómo venía hablando.
 
-Es el centro de la mejora.
+Si la mejora viene de 1, alcanza con texto; si viene de 2, alcanza con tiempos. Solo si 3 suma algo sobre 1 y 2 se
+puede atribuir la mejora al tono.
 
-### 2.1. Qué se mide de la voz
+### 2.2. Definiciones para el piloto
 
-Hay cinco cosas de la voz que se pueden medir y explicar una por una:
+- **Objeción:** un turno de `PROTEGIDA` que duda, se niega, pide verificar o posterga: «prefiero llamar al banco»,
+  «no tengo el código a mano», «¿por qué me lo pide?». Los ejemplos y los casos dudosos se fijan en una guía de
+  anotación antes de grabar, y se anotan a mano en el piloto.
+- **Respuesta medida:** el primer turno de `OTRA` después de la objeción.
+- **Ventana útil:** solo cuentan para anticipar las objeciones anteriores a `T_R`. Una reacción posterior al pedido
+  puede aportar a la detección, pero ya perdió la oportunidad de adelantar el aviso. Las dos se informan por separado.
+- **Referencia de la propia voz:** la prosodia de la respuesta se compara con los turnos anteriores de la misma
+  persona en la misma llamada. Hay que definir cuánta voz previa hace falta (en segundos) y qué pasa si falta: en ese
+  caso no hay señal prosódica y decide el texto solo. La referencia puede fallar en llamadas cortas, cuando la presión
+  empieza desde el saludo o cuando cambia la ganancia del micrófono.
+- **Tiempos:** no todo solapamiento es una interrupción. Hay asentimientos («ajá»), eco y retrasos del canal. Se
+  define qué cuenta como interrupción y se revisa a mano una muestra.
 
-| Qué se mide | Qué es | Qué se esperaría en una estafa | Resiste el códec telefónico |
-| --- | --- | --- | --- |
-| Altura ($F_0$) | Qué tan aguda es la voz y cómo sube o baja | Sube cuando aprieta; las órdenes cierran hacia abajo | Sí, en buena medida |
-| Intensidad | El volumen | Sube cuando la persona duda | Sí, en términos relativos |
-| Velocidad | Sílabas por segundo de voz | Acelera cuando presiona | Sí |
-| Pausas | Cuánto silencio hay dentro de un turno | Menos pausas: no deja lugar para pensar | Sí |
-| Calidad de voz (*jitter*, *shimmer*, HNR) | Qué tan regular o ronca suena | Poco clara; se asocia al estrés, no al fraude | No: el códec la deforma |
+### 2.3. Pocos rasgos, definidos de antemano
 
-Todas salen del estándar eGeMAPS (Eyben et al., 2016), un conjunto de 88 valores pensado para describir la voz en
-investigación. Se calculan con openSMILE, un programa liviano en C++ que también corre en Android.
+| Rasgo | Qué es | Resistencia al canal telefónico |
+| --- | --- | --- |
+| Altura ($F_0$) relativa | Nivel y rango de la altura de la voz frente a la referencia | Por verificar. En voz por VoIP, $F_0$ estuvo entre las medidas más estables (Xu et al., 2024) |
+| Intensidad relativa | Volumen frente a la referencia | Por verificar. Depende de la ganancia y del control automático del canal |
+| Ritmo | Tasa de regiones sonoras por segundo. Es una aproximación, no un conteo de sílabas | Por verificar |
+| Pausas | Proporción de silencio dentro del turno | Por verificar |
+| Demora de respuesta | Tiempo entre el fin de la objeción y el inicio de la respuesta | Por verificar. Le suma el retraso del canal |
+| Solapamiento | Habla simultánea al inicio de la respuesta, según la definición de §2.2 | Por verificar. El eco puede simular solapamientos |
 
-Además, la voz se puede resumir en tres dimensiones de tono que usa la psicología:
+Los cuatro primeros salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE. Ninguno de estos rasgos indica
+estafa por sí mismo: también cambian por el contenido de lo que se dice, el ruido, el canal y la dinámica normal de una
+conversación. Qué dirección se espera en una estafa es parte de lo que el piloto tiene que observar, no un supuesto.
 
-- **Activación:** de calmo a agitado. Es la más fácil de estimar por la voz.
-- **Dominancia:** de sumiso a imperativo. Es la que más se acerca a «está dando órdenes».
-- **Valencia:** de agradable a desagradable. Es la más difícil de estimar por la voz sola.
+### 2.4. De dónde sale cada cosa
 
-Hay modelos ya entrenados que estiman las tres a partir del audio, como el de audEERING (Wagner et al., 2023). La
-ventaja es que no hay que entrenar un modelo de voz con nuestros datos para tener el tono. Lo que falta saber es si
-funciona igual en español rioplatense y por teléfono, porque se entrenó con podcasts en inglés.
-
-### 2.2. Contra qué se compara
-
-Cada valor se compara con los primeros turnos de la misma persona en la misma llamada. Lo que importa es que acelere o
-se agite, no cómo habla de base. Así no se compara a una persona contra otra, y se neutralizan las diferencias de voz
-entre hombres y mujeres, entre edades y entre regiones.
-
-### 2.3. Qué patrones se buscan
-
-Un tono suelto no dice nada: hay operadores enérgicos y estafadores tranquilos. Se buscan cambios:
-
-1. **Escalada.** Quien llama se agita y se pone más imperativo a medida que avanza la llamada.
-2. **Cambio de registro.** Empieza con la calma de un operador y pasa a la urgencia cuando llega al pedido.
-3. **Reacción a la duda.** Cuando la persona dice «prefiero llamar al banco», quien llama se endurece en vez de
-   aflojar. Es el patrón más prometedor, porque junta las dos señales: el texto marca la duda y la voz muestra cómo se
-   respondió.
-
-En una legítima se esperaría lo contrario: un tono estable y, si la persona dice que no, un operador que afloja.
-
-## 3. Complemento: cómo se reparte la conversación
-
-No mira el tono sino los tiempos: quién habla, cuánto y cuándo. Es lo más barato, porque Silero ya marca cuándo habla
-cada uno y los canales están separados, y es lo que mejor resiste el teléfono.
-
-| Qué se mide | Qué se esperaría en una estafa |
-| --- | --- |
-| Cuánto del tiempo habla quien llama | Lleva la conversación: habla mucho más |
-| Interrupciones | Empieza a hablar mientras la persona todavía habla, sobre todo cuando duda |
-| Cuánto tarda en contestar una objeción | Responde enseguida, como con un guion |
-| Largo de los turnos de la persona protegida | Se acortan: queda reducida a «sí» y «ajá» |
-
-Además de sumar como señal propia, le dice al tono cuándo mirar: marca los momentos de duda o de interrupción en los
-que conviene medir la reacción de quien llama (§2.3, patrón 3).
-
-## 4. De dónde sale: el espectrograma
-
-Todo lo anterior se calcula a partir del espectrograma, que es la forma estándar de ver el audio: muestra cuánta
-energía hay en cada frecuencia a lo largo del tiempo. Una variante, el log-mel, ordena las frecuencias como las
-percibe el oído. El sistema ya lo calcula: Parakeet lo usa para transcribir, y el modelo de audio de Gemma 4 E2B
-también. Lo que no existe todavía es algo que lo mire para otra cosa que transcribir.
-
-Hay cuatro formas de aprovecharlo:
-
-| | Qué se saca | A favor | En contra |
-| --- | --- | --- | --- |
-| **A. Las cinco medidas de la voz** (§2.1) | Los 88 valores de eGeMAPS | Pocos datos, se explica, liviano | Pierde matices |
-| **B. Las tres dimensiones de tono** (§2.1) | Activación, dominancia y valencia por turno | No hay que entrenar el modelo de voz; se explica | Pesado para un teléfono; sin verificar en español ni por teléfono |
-| **C. Una red propia sobre el espectrograma** | Lo que la red aprenda | Aprende sola qué mirar | Muchos datos, no se sabe qué miró y aprende atajos (§10) |
-| **D. Que E2B escuche el turno** | El audio del último turno, con lo anterior como texto | Un solo modelo | Ya se analizó y quedó afuera sin medir ([corrida de #152](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#por-qué-la-opción-c-queda-afuera-sin-medirla)); probablemente necesite ajuste fino ([#176](https://github.com/Corchets/bitacora_tesis/issues/176)) |
-
-**Recomendación:** A y B en laboratorio, porque se explican y casi no necesitan entrenamiento. C solo si hay mucho
-audio. D depende de resolver antes lo que dice la corrida de #152.
-
-## 5. Cómo se combinan los dos riesgos
-
-### 5.1. Las dos señales
-
-En cada turno cerrado de quien llama habría dos lecturas:
-
-- **El riesgo del texto**, que ya existe: Gemma 4 E2B lee la conversación y escribe un número entre 0 y 1. Hoy se
-  avisa cuando llega a 0,3 ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)).
-- **La escalada de la voz**, nueva: cuánto se apartó quien llama de cómo hablaba al principio, y cómo reaccionó
-  cuando la persona dudó, con las medidas de §2 y §3. Si no cambió, vale cero.
+El espectrograma, que muestra cuánta energía hay en cada frecuencia a lo largo del tiempo, es la base de los rasgos
+prosódicos. Pero no todo sale de ahí ni del log-mel que ya calcula Parakeet:
 
 ```mermaid
 flowchart LR
-    A["Audio por canal"] --> V["Silero"] --> P["Parakeet"] --> T["Turno en texto"] --> G["Gemma 4 E2B"] --> R["Riesgo del texto"]
-    V --> Q["Tiempos de cada canal"] --> N
-    V --> X["Tono del turno<br/>de quien llama"] --> N["Comparar con los<br/>primeros turnos"] --> S["Lo que suma la voz"]
-    R --> F["Combinación"]
-    S --> F
-    F --> AV["Aviso"]
+    C["Captura por canal<br/>(PROTEGIDA / OTRA)"] --> S["Silero: actividad de voz<br/>por bloque, en cada canal"]
+    S --> T["Tiempos: demora,<br/>solapamiento"]
+    S --> P["Parakeet: texto"] --> G["Gemma 4 E2B: riesgo"]
+    C --> O["openSMILE sobre el audio<br/>de OTRA: rasgos prosódicos"]
+    P --> A["Objeción anotada<br/>(en el piloto, a mano)"]
+    T --> R["Regla de combinación"]
+    O --> R
+    A --> R
+    G --> R
+    R --> AV["Aviso, fechado al emitirse"]
 ```
 
-La voz corre en paralelo y no toca el texto: si se apaga, el detector queda como hoy.
+La atribución de cada turno a una persona viene de la captura por canal, no de Silero. Por eso el canal objetivo (la
+forma real de capturar la llamada) se prueba desde el piloto.
 
-### 5.2. Lo que se descarta: umbrales fijos según la voz
+## 3. La comparación
 
-La primera idea que aparece es mover el umbral según la voz: más exigente si quien llama está tranquilo, menos si se
-agita. Se descarta, porque está pensada para el caso típico, y los casos que importan son los otros:
+### 3.1. Una escalera de cuatro métodos
 
-- **El estafador tranquilo.** Muchos se hacen pasar por un banco o un organismo y hablan con calma de operador. Con un
-  umbral más alto para las voces tranquilas, una estafa que el detector de hoy avisa dejaría de avisarse. Es el peor
-  error posible: empeora justo en las estafas mejor hechas.
-- **El familiar agitado.** Alguien que llama de un número desconocido por una emergencia real habla agitado. Con un
-  umbral más bajo para las voces agitadas, se suma una falsa alarma en el peor momento.
-- **El cuento del tío.** El estafador se hace pasar por un familiar desesperado: la agitación es parte del engaño, no
-  una reacción. Tampoco dice nada por sí sola.
+Todos sobre los mismos prefijos de conversación y con la información disponible en cada instante:
 
-En los tres, el nivel de la voz no indica estafa ni legitimidad. Los umbrales puestos a mano, además, se eligen
-mirando ejemplos, y H12 ya mostró que elegir el corte con unos datos no se sostiene en otros.
+| Método | Qué ve | Qué aísla |
+| --- | --- | --- |
+| 0. Texto actual | La configuración congelada ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) y [ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)) | La base |
+| 1. Texto con la objeción explícita | Lo mismo, más la marca de que hubo una objeción | Si alcanza con señalar la objeción |
+| 2. Texto con tiempos | 1, más los tiempos de la respuesta | Si los tiempos suman sobre el texto |
+| 3. Texto con prosodia | 2, más los rasgos prosódicos de la respuesta | Si el tono suma sobre todo lo anterior |
 
-### 5.3. Tres reglas para combinar
+En el piloto las objeciones se anotan a mano. Aparte se mide cuánto se pierde cuando hay que detectarlas
+automáticamente, porque en el teléfono no habrá anotación.
 
-1. **La voz solo suma.** La ausencia de señal no prueba nada: una voz tranquila deja el riesgo del texto como está.
-   Así, la voz nunca hace perder una estafa que el texto solo ya avisaba. El estafador tranquilo queda como hoy: la voz
-   no lo ve, pero tampoco lo tapa.
-2. **Lo que suma son cambios, no niveles.** No cuenta estar agitado, sino agitarse durante la llamada respecto de cómo
-   empezó, y sobre todo endurecerse justo después de que la persona dudó (§2.3). El familiar que llama agitado desde
-   el primer segundo, o el estafador del cuento del tío, no escalan respecto de su propio comienzo, así que la voz no
-   suma. Si escalan igual, suma poco, porque es una señal débil.
-3. **Cuánto suma se aprende y se evalúa en los casos difíciles.** Un modelo chico (por ejemplo, una regresión
-   logística) recibe el riesgo del texto y las medidas de cambio de la voz, con la restricción de que la voz solo
-   pueda sumar. Los pesos salen de un conjunto aparte. Y el resultado se informa separado por tipo de llamada, no solo
-   en total (§5.5).
+### 3.2. La regla de combinación del piloto
 
-En fórmula, la idea es: riesgo final = riesgo del texto + lo que suma la voz, donde lo que suma la voz es cero si
-quien llama no cambió y crece con la escalada. El aviso sale con el mismo umbral para todas las llamadas.
+El riesgo que escribe Gemma no es un puntaje continuo ([H04](../hallazgos/H04-riesgo-escrito-no-es-puntaje.md)): se
+concentra en pocos valores, y 57 de 66 avisos salen de exactamente 0,3
+([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)). Una regresión logística común sobre ese puntaje tampoco garantiza
+conservar la decisión del texto. Para el piloto conviene una regla explícita:
 
-Hay además un uso que no toca qué llamadas avisan: **que la voz elija entre un aviso suave y uno fuerte**, cuando el
-texto ya avisó. Es el más seguro y encaja con el aviso en dos niveles que ya está en el §11.4.
+- **Conserva los avisos existentes.** Cada llamada que el texto solo avisa sigue avisando, en el mismo turno o antes.
+- **Puede agregar o adelantar avisos** cuando, después de una objeción, los tiempos o la prosodia de la respuesta
+  cumplen una condición escrita antes de evaluar.
+- **Vuelve al texto solo cuando falta señal:** sin objeción, sin voz previa suficiente o con el canal degradado.
 
-### 5.4. Qué pasa en cada caso
+Con esta regla las falsas alarmas quedan iguales o aumentan; no pueden bajar. «Avisar antes con las mismas falsas
+alarmas» es un resultado que hay que demostrar, no una propiedad de la regla. Por eso se miden las dos cosas: cuántos
+avisos agrega y cuánto los adelanta, y cuántos de los agregados caen en legítimas. Subir el umbral común para
+compensar sería otro experimento, porque puede eliminar avisos que hoy sí salen.
 
-| Situación | Hoy (solo texto) | Umbrales fijos según la voz (descartado) | Con las tres reglas |
-| --- | --- | --- | --- |
-| Estafador tranquilo, se hace pasar por el banco | Avisa si el texto llega | Puede dejar de avisar | Igual que hoy |
-| Familiar real, agitado por una emergencia | Depende del texto | Más falsas alarmas | Igual que hoy si está agitado desde el principio |
-| Cuento del tío, estafador agitado desde el principio | Depende del texto | Avisa por la voz, por casualidad | Igual que hoy: decide el texto |
-| Estafa que aprieta cuando la persona duda | Avisa tarde, o no avisa | Avisa antes | Avisa antes: es donde la voz aporta |
-| Cobrador o vendedor que se enoja cuando le dicen que no | A veces avisa | Más falsas alarmas | Puede sumar falsas alarmas: hay que medirlo |
+Qué tan fuerte es el aviso (suave o fuerte) es otra pregunta: si cambiar la intensidad mejora lo que hace la persona
+frente a la alerta. Se responde con usuarios, no con este piloto.
 
-La tabla deja ver que la voz no mejora todo: aporta en un tipo de estafa (la que aprieta cuando la persona duda), es
-neutra en la mayoría de los casos y tiene un riesgo claro (el que se enoja sin ser estafador). Por eso la ganancia
-esperada es moderada (§6).
+### 3.3. Qué se informa
 
-### 5.5. Cómo verlo
+- Estafas con aviso antes de `T_R` (`T_A < T_R`), por método, y cuántos turnos o segundos se adelantó cada una.
+- Avisos agregados en legítimas, por método.
+- Todo separado por tipo de llamada (§4.2). Un método que mejora el total pero empeora un tipo se informa así.
+- Por llamada, un gráfico con el riesgo de cada método turno a turno, la marca de la objeción, `T_R` y `T_A`, y
+  **cuándo estuvo disponible cada señal**: la prosodia de un turno llega después de que el turno termina.
+- Entre llamadas, comparaciones con un horizonte común (por ejemplo, hasta `T_R` o las primeras N consultas), no con el
+  máximo de la llamada entera, que favorece a las más largas.
 
-- **En una llamada:** un gráfico con el riesgo del texto turno a turno, lo que suma la voz debajo y el riesgo final,
-  con la marca de cuándo empezó el pedido, cuándo dudó la persona y cuándo avisó. Permite ver si la voz anticipó algo
-  que el texto todavía no decía.
-- **En un conjunto de llamadas:** cada llamada es un punto, con el riesgo del texto en un eje y la escalada de la voz
-  en el otro, en un color para las estafas y otro para las legítimas. Si en la zona donde hoy se mezclan los colores
-  se separan por la voz, la voz aporta.
-- **Por tipo de llamada:** una tabla como la de §5.4, pero medida: estafas y falsas alarmas separadas por estafador
-  tranquilo, estafador agitado, estafa que aprieta, familiar agitado, cobrador o vendedor que se enoja, y legítima
-  tranquila. La regla para adoptar la voz exige que no empeore ningún tipo más allá de un margen escrito antes, aunque
-  mejore el total.
-- **En la demo:** el panel podría mostrar las curvas en vivo durante la llamada.
+## 4. El piloto
 
-## 6. Qué se podría ganar
+### 4.1. Antes de grabar: contar objeciones en lo que ya hay
 
-### 6.1. La mejora se puede usar de dos maneras, y no cuestan lo mismo
+Sin audio se puede estimar algo que decide si vale la pena seguir: cuántas llamadas tienen una objeción antes del
+pedido. Se revisan las 33 legítimas reales, no solo las 21 que avisaron, para ver qué distingue a unas de otras, y las
+33 estafas reales. Son textos traducidos, pero alcanzan para contar objeciones y ver dónde caen respecto de `T_R`.
 
-Si la voz ayuda, lo que mejora es la separación: qué tan seguido una estafa puntúa más alto que una legítima. Esa
-mejora se puede usar de dos maneras:
+### 4.2. Cómo grabar
 
-- **Avisar más estafas, o antes, con las mismas falsas alarmas.** Es lo que da la regla de que la voz solo suma: las
-  estafas que aprietan cruzan el umbral antes, y el resto queda como hoy. El costo posible son las legítimas que se
-  enojan (§5.4), que hay que medir.
-- **Avisar las mismas estafas con menos falsas alarmas.** Con una voz que solo suma, la única forma es subir el umbral
-  común para todas las llamadas y dejar que la voz devuelva por encima a las que escalan. Pero el estafador tranquilo
-  no escala: si el texto lo dejaba justo en el umbral, se pierde. Y es frecuente: 57 de 66 avisos de la configuración
-  salen de un riesgo de exactamente 0,3 ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)).
+- **Las dos clases recreadas, en las mismas condiciones.** «Voz humana» y «llamada real» son cosas distintas. Si las
+  estafas se actúan y las legítimas son naturales, el modelo puede aprender la actuación aunque se use el mismo
+  micrófono. En el piloto, estafas y legítimas se recrean por igual; la validación con llamadas naturales va después,
+  por separado.
+- **Participantes en las dos clases** cuando se pueda, para que la voz de una persona no delate la clase.
+- **Reserva agrupada por personas y por familias de guiones:** nadie ni ningún guion aparece a la vez en lo que se usa
+  para definir la regla y en lo que se usa para evaluarla.
+- **Los tipos que pueden refutar la idea**, además de los típicos: estafas con tono tranquilo, estafas con presión
+  desde el saludo, emergencias legítimas con un familiar agitado, vendedores y cobradores insistentes, legítimas
+  tranquilas, y llamadas con y sin objeción antes del pedido.
+- **El canal real.** Si se prueba banda telefónica, se codifica y decodifica con AMR-NB o G.711. Remuestrear a 8 kHz no
+  equivale a pasar por el códec.
 
-No hay forma de usar la voz para avisar menos sin arriesgar al estafador tranquilo. Por eso la propuesta empieza por la
-primera, y la segunda queda como una decisión de producto, con la medición por tipo de llamada (§5.5) a la vista.
+### 4.3. Para qué sirve el piloto
 
-### 6.2. Estimación
+No fija un tamaño de muestra: lo estima. Sirve para saber:
 
-No hay datos para predecir la mejora. Lo que sigue es una cuenta aproximada, con supuestos simples, para saber qué
-orden de mejora esperar.
+- con qué frecuencia aparecen objeciones aprovechables, antes de `T_R`;
+- si los rasgos son estables: la misma persona, en las mismas condiciones, ¿da valores parecidos?;
+- cuántas llamadas cambian de decisión entre un método y el siguiente.
 
-El punto de partida es H12: con el mismo largo de llamada, una estafa real puntúa más que una legítima real el 73 % de
-las veces (50 % sería azar; 100 %, separación perfecta). La cuenta supone que las dos señales se reparten como curvas
-normales, que se equivocan en llamadas distintas y que se combinan de la mejor forma posible. Con el texto solo, la
-cuenta da 66 % de falsas alarmas al avisar el 90 % de las estafas, cerca del 64 % medido.
+Con eso se dimensiona una evaluación posterior: cuántas estafas con objeción antes del pedido y cuántas legítimas hacen
+falta, teniendo en cuenta cuántas llamadas comparten participantes y qué precisión se quiere.
 
-| Escenario | Separación de la voz sola | Separación combinada | Falsas alarmas, avisando el 90 % de las estafas | Estafas avisadas de cada 100, con las falsas alarmas de hoy |
-| --- | --- | --- | --- | --- |
-| Hoy, solo texto | — | 73 % | 66 % (~22 de 33) | 90 |
-| Pesimista: la voz casi no distingue, o el códec la borra | 55 % | 73 % | 65 % (~22) | 90 |
-| Intermedio | 65 % | 77 % | 60 % (~20) | 92 |
-| Optimista: la voz distingue tanto como el texto | 75 % | 82 % | 50 % (~16) | 96 |
-| Muy optimista: la reacción a la duda distingue mucho | 85 % | 89 % | 34 % (~11) | 98 |
+## 5. Criterio para avanzar
 
-### 6.3. Cómo leerla
+> **Estado: propuesta sin discutir.** Los valores concretos se acuerdan entre los cuatro y con el tutor antes de grabar.
 
-- **Lo realista es una mejora moderada:** de 2 a 6 estafas más de cada 100 o, si se elige usarla así y se acepta el
-  riesgo de §6.1, de 2 a 6 falsas alarmas menos en 33. Es el mejor caso de cada fila: supone que la voz se equivoca en
-  otras llamadas que el texto. Si se equivoca en las mismas, la ganancia baja.
-- **La cuenta es pareja y la realidad no.** La tabla supone que la voz aporta un poco en todas las llamadas. Según
-  §5.4, aporta mucho en un tipo (la estafa que aprieta) y nada en los demás. La ganancia total depende de cuántas
-  estafas son de ese tipo, y eso no se sabe.
-- **Avisar antes.** La escalada del tono puede aparecer antes que el pedido en el texto, y ahí la voz empuja el riesgo
-  por encima del umbral. No se puede estimar sin audio.
-- **No depende del reconocedor.** Si Parakeet transcribe mal «token» o «CVV», el texto pierde la pista, pero la voz no.
-- **El tipo de llamada pone un límite.** La voz no puede sacar falsas alarmas de venta insistente ni de cobradores
-  que se enojan, y podría sumarlas. H12 no leyó los textos, así que no se sabe cuántas de las 21 falsas alarmas son de
-  cada tipo. Leerlas da una idea sin grabar nada.
-- **Con 33 llamadas no se podría medir.** Tres llamadas son 9 puntos (H12). Para distinguir una baja de 64 % a 55 %
-  comparando el mismo conjunto con y sin voz, harían falta del orden de 150 legítimas con audio.
-- **Si la voz sola separa mejor que el texto, primero hay que sospechar** que aprendió de dónde salió la grabación y
-  no la estafa (§10).
-- **Si no mejora nada, también es un resultado.** Respalda que el fraude telefónico se reconoce sobre todo por lo que
-  se dice, que es lo que hoy afirma el
-  [§5.5.4](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md#554-enfoque-lingüístico-frente-a-acústico-d11-abierta) sin
-  haberlo medido.
+El piloto justifica una evaluación más grande si se cumplen las tres condiciones:
 
-## 7. Qué no se mide
+1. **Hay de dónde sacar.** Una proporción acordada de las estafas tiene una objeción antes de `T_R`. Si casi nunca
+   ocurre, la señal no puede adelantar avisos aunque exista.
+2. **Los rasgos son estables** en la misma persona y las mismas condiciones, dentro de un margen acordado.
+3. **El método 3 adelanta avisos sobre el método 2** en alguna estafa, sin agregar en legítimas más falsas alarmas que
+   el margen acordado, con la incertidumbre informada.
 
-- **Acento, región o nivel socioeconómico.** No tienen relación con el fraude y penalizarían a personas legítimas por
-  cómo hablan. Choca con la minimización de datos de la Ley 25.326
+Si falla 1 o 2, se escribe por qué y se cierra. Si falla 3 pero 1 o 2 mejoran sobre 0, el resultado sigue valiendo:
+la objeción o los tiempos aportan, el tono no.
+
+## 6. Límites
+
+- **Recreado no es natural.** Un resultado positivo en el piloto no prueba nada sobre llamadas reales; hace falta una
+  validación aparte.
+- **Que aprenda la grabación y no la estafa.** Un modelo de audio puede apoyarse en diferencias de grabación: en
+  detección de voces falsas, modelos entrenados en ASVspoof 2019 se apoyaban en cuánto silencio había al principio
+  (Müller et al., 2021). Grabar las dos clases igual y agrupar la reserva por personas apunta a eso.
+- **Sesgo por grupos.** Las falsas alarmas se informan por región o tonada, género y edad, con márgenes fijados antes e
+  incertidumbre. Con grupos chicos, una diferencia puede ser ruido, y no observar diferencias tampoco demuestra que no
+  haya sesgo.
+- **Qué no se mide.** Ni acento, región o nivel socioeconómico: no tienen relación con el fraude y chocan con la
+  minimización de datos de la Ley 25.326
   ([privacidad del sistema](../corpus/PRIVACIDAD-DEL-SISTEMA.md#2-marco-legal-argentino-ley-25326-de-protección-de-datos-personales)).
-  Comparar a cada persona consigo misma (§2.2) apunta justamente a eso.
-- **Si alguien miente.** Los analizadores de estrés vocal que prometen detectar mentiras rinden cerca del azar
-  (Horvath, 1982; National Research Council, 2003), y la fonética forense los considera charlatanería (Eriksson y
-  Lacerda, 2007). Además, una persona apurada se estresa sin mentir. El aviso nunca dice que alguien miente.
-- **Si la voz es sintética.** Detectar voces generadas (*deepfakes*) es otra línea, con otros datos y otro objetivo
-  (por ejemplo AASIST, Jung et al., 2022). Queda fuera.
+  Ni si alguien miente: los analizadores de estrés vocal rinden cerca del azar (Horvath, 1982; National Research
+  Council, 2003) y la fonética forense los considera charlatanería (Eriksson y Lacerda, 2007). Ni si la voz es
+  sintética, que es otra línea con otros datos (por ejemplo AASIST, Jung et al., 2022).
+- **Privacidad en el producto.** La comparación con la propia voz necesita conservar en memoria un resumen de los
+  rasgos de `OTRA` hasta el final de la llamada, no solo durante el turno. Ese resumen se descarta al cortar y nunca se
+  guarda.
+- **Privacidad en la investigación.** Las grabaciones del piloto requieren consentimiento informado, acceso restringido
+  y un plazo de retención explícito, y quedan fuera de Git ([invariantes](../../AGENTS.md#invariantes)).
+- **Costo en el teléfono, sin medir.** La única medición en un Android (Samsung A56, 3,60 s de mediana por consulta)
+  es del detector solo, con otro prompt y sin ASR
+  ([§8.6](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). Cuánto suma extraer
+  rasgos no se sabe.
 
-## 8. Paso a paso
+## 7. Alternativas posteriores
 
-1. **Acordar el encuadre** entre los cuatro y con el tutor, y decidir si D11 se reabre para esta línea.
-2. **Leer las 21 falsas alarmas reales** y separarlas en servicio tranquilo y venta insistente. Da una idea del techo
-   sin grabar nada.
-3. **Grabar audio real** con consentimiento (§9). Sin esto no hay nada que medir.
-4. **Medir en laboratorio** (Python): los tiempos de cada canal, las medidas de la voz con `opensmile` y las tres
-   dimensiones con el modelo de audEERING, comparadas con el comienzo de cada llamada.
-5. **Mirar antes de combinar.** Hacer los gráficos de §5.5 y ver si aparecen la escalada y la reacción a la duda. Si
-   no se ven a ojo, es difícil que una combinación las encuentre.
-6. **Comparar sobre las mismas llamadas:** el detector de hoy contra el texto más la voz (§5.3), con tiempos, con
-   tono y con los dos. Se informa por tipo de llamada (§5.5). La regla de adopción se escribe antes de correr, como en
-   H12: por ejemplo, más estafas a tiempo sin sumar falsas alarmas y sin empeorar ningún tipo más allá de un margen.
-7. **Revisar el sesgo.** Separar las falsas alarmas por región o tonada, género y edad. Si la voz las sube en algún
-   grupo, no se adopta, aunque mejore el total.
-8. **Probar por teléfono.** Repetir 6 con el audio degradado a 8 kHz (AMR-NB y G.711). Si el tono desaparece y quedan
-   solo los tiempos, se escribe así.
-9. **Medir en el teléfono.** Llevar lo que funcione a Android y medir memoria, demora, batería y temperatura con
-   Parakeet y E2B corriendo a la vez.
+Quedan fuera del piloto y solo tienen sentido si el método 3 muestra algo:
 
-## 9. Datos que harían falta
+- **Dimensiones de tono preentrenadas.** El modelo de audEERING estima activación, dominancia y valencia a partir de la
+  onda de audio (Wagner et al., 2023). Dos cuidados: «dominancia» no equivale a dar órdenes, y los mismos autores
+  muestran que el modelo capta información léxica al estimar la valencia. Si mejora la clasificación, es más difícil
+  atribuir la mejora al tono y no a las palabras.
+- **Una red propia sobre el espectrograma.** Necesita mucho audio y es la más expuesta a aprender la grabación.
+- **Que E2B escuche el turno.** Quedó afuera sin medir en la
+  [corrida de #152](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#por-qué-la-opción-c-queda-afuera-sin-medirla)
+  y probablemente necesite ajuste fino ([#176](https://github.com/Corchets/bitacora_tesis/issues/176)).
 
-- **Llamadas reales en español argentino, grabadas con consentimiento:** estafas actuadas por personas y legítimas
-  difíciles. Del orden de 150 legítimas (§6.3).
-- **Que estén los casos que salen mal**, no solo los típicos (§5.4): estafadores tranquilos, estafadores agitados
-  desde el principio, estafas que aprietan cuando la persona duda, familiares agitados por una emergencia, cobradores y
-  vendedores que se enojan, y legítimas tranquilas. Si un tipo falta, no se puede saber si la voz lo empeora. El audio sintético del corpus
-  no sirve: el tono es el del sintetizador, no el de una persona presionando a otra.
-- **Las dos clases grabadas en las mismas condiciones** (mismo canal, mismos equipos), para que la voz no aprenda de
-  dónde salió cada grabación (§10).
-- **Varias personas por rol**, para no aprender a reconocer a un actor.
-- **De apoyo, no para evaluar:** conjuntos públicos de emoción en español (EmoMatchSpanishDB, MESD, EMOVOME) o en
-  inglés (MSP-Podcast), para verificar que el modelo de dimensiones responde en español. VISHGUARD
-  ([estado del arte](SINTESIS-ESTADO-DEL-ARTE.md#23-datasets-y-límites-de-reutilización-recuperación-de-43)) anota
-  persuasión y emoción, pero no tiene español y su acceso es restringido.
-- El audio queda fuera de Git, como el resto del corpus ([invariantes](../../AGENTS.md#invariantes)).
+VISHGUARD ([estado del arte](SINTESIS-ESTADO-DEL-ARTE.md#23-datasets-y-límites-de-reutilización-recuperación-de-43))
+sirve como antecedente de anotación de persuasión y emoción en llamadas sintéticas, no como datos para este piloto: no
+tiene español.
 
-## 10. Riesgos
+## 8. Fuentes
 
-- **Que aprenda la grabación y no la estafa.** Un modelo de voz aprende lo que distingue a los conjuntos: el
-  micrófono, el códec, el ruido o el silencio. En detección de voces falsas se mostró que modelos entrenados en
-  ASVspoof 2019 se apoyaban en cuánto silencio había al principio (Müller et al., 2021). Pesa más en una red propia
-  (C) que en A y B, pero ninguna está libre.
-- **La venta insistente y el que se enoja.** Suenan a presión como una estafa (§5.4), y las llamadas de números no agendados, que son el
-  alcance del detector ([ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md)), tienen
-  muchas.
-- **Pocos datos.** Con decenas de llamadas, cualquier combinación aprendida se ajusta a esas llamadas y no generaliza.
-  Por eso la combinación es chica, con la voz restringida a sumar, y se informa por tipo de llamada.
-- **El códec.** AMR-NB a 8 kHz recorta los agudos y deforma la calidad de voz; es uno de los motivos de la exclusión
-  actual (§5.5.4). La altura, la velocidad y los tiempos resisten mejor.
-- **El teléfono.** E2B ya tarda 3,7 s por turno en el Samsung A56
-  ([§8.6](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). openSMILE y los
-  tiempos son baratos; el modelo de audEERING no.
-- **Identificar a la persona.** Lo que calcula un modelo de voz puede servir para reconocer a alguien. Todo se procesa
-  en memoria y se descarta al terminar el turno; no se guarda nada de la voz.
-
-## 11. Fuentes
-
+- Eren, A., Cheung, M., Zhang, Y., Ngai, G. y Fu, E. Y. (2026). Exploring the Limits of Audio-Based Detection of
+  Turkish Phone Call Scams. Póster, *IEEE Symposium on Security and Privacy 2026*.
+  [PDF](https://www.ieee-security.org/TC/SP2026/downloads/posters/sp2026posters-final95.pdf).
 - Eriksson, A. y Lacerda, F. (2007). Charlatanry in forensic speech science: A problem to be taken seriously.
   *International Journal of Speech, Language and the Law*, 14(2), 169–193.
 - Eyben, F. et al. (2016). The Geneva Minimalistic Acoustic Parameter Set (GeMAPS) for Voice Research and Affective
   Computing. *IEEE Transactions on Affective Computing*, 7(2), 190–202.
+  [doi:10.1109/TAFFC.2015.2457417](https://doi.org/10.1109/TAFFC.2015.2457417).
 - Horvath, F. (1982). Detecting deception: the promise and the reality of voice stress analysis. *Journal of Forensic
   Sciences*, 27(2), 340–351.
 - Jung, J. et al. (2022). AASIST: Audio Anti-Spoofing using Integrated Spectro-Temporal Graph Attention Networks.
@@ -357,5 +256,8 @@ cuenta da 66 % de falsas alarmas al avisar el 90 % de las estafas, cerca del 64 
   *ASVspoof 2021 Workshop*.
 - National Research Council (2003). *The Polygraph and Lie Detection*. Washington, DC: The National Academies Press.
 - Wagner, J. et al. (2023). Dawn of the Transformer Era in Speech Emotion Recognition: Closing the Valence Gap. *IEEE
-  Transactions on Pattern Analysis and Machine Intelligence*, 45(9), 10745–10759. Modelo:
-  [`audeering/wav2vec2-large-robust-12-ft-emotion-msp-dim`](https://huggingface.co/audeering/wav2vec2-large-robust-12-ft-emotion-msp-dim).
+  Transactions on Pattern Analysis and Machine Intelligence*, 45(9), 10745–10759.
+  [arXiv:2203.07378](https://arxiv.org/abs/2203.07378).
+- Xu, C. et al. (2024). Voice quality in telephone speech: Comparing acoustic measures between VoIP telephone and
+  high-quality recordings. *Interspeech 2024*, 1570–1574.
+  [doi:10.21437/Interspeech.2024-2240](https://www.isca-archive.org/interspeech_2024/xu24j_interspeech.html).
