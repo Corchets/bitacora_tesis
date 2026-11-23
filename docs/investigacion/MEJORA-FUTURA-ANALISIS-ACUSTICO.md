@@ -2,9 +2,9 @@
 
 > **Estado: propuesta sin discutir.** Es trabajo futuro: no se implementó ni se midió nada de lo que sigue. El detector
 > actual trabaja solo sobre la transcripción, y la decisión de sumar rasgos acústicos sigue abierta en
-> [D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico). Redactado el 2026-11-23 a pedido
-> del tutor, que pidió desarrollar las mejoras futuras en vez de dejarlas como viñetas
-> ([§11.4](../tesis/CAP-11-CONCLUSIONES.md#114-trabajo-futuro-acotado)).
+> [D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico). Documenta una mejora futura y
+> cómo se aplicaría; la tesis la resume en el [§11.4](../tesis/CAP-11-CONCLUSIONES.md#114-trabajo-futuro-acotado).
+> Redactado el 2026-11-23.
 
 ## 1. La pregunta
 
@@ -19,15 +19,19 @@ información disponible en cada instante. El aviso se fecha cuando el sistema lo
 
 **Por qué interesa.** Ninguno de los candidatos probados en
 [H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md) mejoró claramente la separación entre
-estafas y legítimas reales: los que bajaron las falsas alarmas perdieron estafas. Eso no prueba que el texto haya
-llegado a un techo, pero sugiere buscar información que el detector no tiene, en vez de otra forma de pedirle lo mismo.
-La reacción ante una objeción es un buen lugar para buscar: es el momento en que una estafa necesita insistir y una
-llamada legítima puede aflojar.
+estafas y legítimas reales: los que bajaron las falsas alarmas perdieron detección o avisos a tiempo. Eso no prueba
+que el texto haya llegado a un techo, pero sugiere buscar información que el detector no tiene, en vez de otra forma de
+pedirle lo mismo.
 
-**Antecedente directo.** En 100 llamadas en turco, siete modelos de lenguaje clasificaron mejor las estafas a partir de
-la transcripción que escuchando el audio directo (Eren et al., 2026). Es un argumento a favor del enfoque actual, pero
-ese estudio clasifica la llamada entera; no prueba sumar la voz al texto turno a turno ni mira la reacción a una
-objeción.
+**Hipótesis.** Algunas estafas cambian la forma de responder ante una objeción, y ese cambio aporta información una
+vez considerado el texto. Una llamada legítima también puede insistir, y una estafa puede cambiar de táctica; por eso
+el piloto incluye llamadas legítimas insistentes y estafas con tono tranquilo, para poner a prueba la hipótesis.
+
+**Antecedente directo.** En 100 llamadas completas en turco, los siete modelos de lenguaje evaluados obtuvieron en
+promedio mayor F1 con la transcripción que con el audio directo; GPT-4o empató con las tres entradas (Eren et al.,
+2026). Los autores atribuyen buena parte de la diferencia a que los modelos se negaron a procesar el audio de llamadas
+con insultos o intimidación. Es un antecedente para usar el texto como referencia. Queda abierta la pregunta de si
+combinar el texto con rasgos acústicos aporta al aviso incremental.
 
 **Qué no se afirma.** No se anticipa una ganancia. Si el piloto da negativo, la conclusión defendible es acotada: estos
 rasgos, en estas condiciones y con esta política de aviso, no mostraron un aporte medible. Eso también responde la
@@ -56,6 +60,9 @@ puede atribuir la mejora al tono.
 - **Respuesta medida:** el primer turno de `OTRA` después de la objeción.
 - **Ventana útil:** solo cuentan para anticipar las objeciones anteriores a `T_R`. Una reacción posterior al pedido
   puede aportar a la detección, pero ya perdió la oportunidad de adelantar el aviso. Las dos se informan por separado.
+  `T_R` marca el inicio del pedido, aunque caiga dentro de un turno, así que una objeción puede ser anterior a `T_R` y
+  su respuesta terminar después. Ese caso sirve para estudiar la reacción, pero el resumen prosódico del turno solo
+  puede contribuir cuando esté disponible, y el aviso se fecha entonces.
 - **Referencia de la propia voz:** la prosodia de la respuesta se compara con los turnos anteriores de la misma
   persona en la misma llamada. Hay que definir cuánta voz previa hace falta (en segundos) y qué pasa si falta: en ese
   caso no hay señal prosódica y decide el texto solo. La referencia puede fallar en llamadas cortas, cuando la presión
@@ -70,18 +77,18 @@ puede atribuir la mejora al tono.
 | Altura ($F_0$) relativa | Nivel y rango de la altura de la voz frente a la referencia | Por verificar. En voz por VoIP, $F_0$ estuvo entre las medidas más estables (Xu et al., 2024) |
 | Intensidad relativa | Volumen frente a la referencia | Por verificar. Depende de la ganancia y del control automático del canal |
 | Ritmo | Tasa de regiones sonoras por segundo. Es una aproximación, no un conteo de sílabas | Por verificar |
-| Pausas | Proporción de silencio dentro del turno | Por verificar |
+| Pausas | Proporción de silencio dentro del turno. eGeMAPS da la duración de las regiones no sonoras; la proporción se define y se calcula aparte | Por verificar |
 | Demora de respuesta | Tiempo entre el fin de la objeción y el inicio de la respuesta | Por verificar. Le suma el retraso del canal |
 | Solapamiento | Habla simultánea al inicio de la respuesta, según la definición de §2.2 | Por verificar. El eco puede simular solapamientos |
 
-Los cuatro primeros salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE. Ninguno de estos rasgos indica
+Altura, intensidad y ritmo salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE; las pausas, de las regiones
+no sonoras con un cálculo propio. Ninguno de estos rasgos indica
 estafa por sí mismo: también cambian por el contenido de lo que se dice, el ruido, el canal y la dinámica normal de una
 conversación. Qué dirección se espera en una estafa es parte de lo que el piloto tiene que observar, no un supuesto.
 
 ### 2.4. De dónde sale cada cosa
 
-El espectrograma, que muestra cuánta energía hay en cada frecuencia a lo largo del tiempo, es la base de los rasgos
-prosódicos. Pero no todo sale de ahí ni del log-mel que ya calcula Parakeet:
+Cada señal sale de un lugar distinto del recorrido:
 
 ```mermaid
 flowchart LR
@@ -113,14 +120,23 @@ Todos sobre los mismos prefijos de conversación y con la información disponibl
 | 2. Texto con tiempos | 1, más los tiempos de la respuesta | Si los tiempos suman sobre el texto |
 | 3. Texto con prosodia | 2, más los rasgos prosódicos de la respuesta | Si el tono suma sobre todo lo anterior |
 
+Los cuatro métodos comparten la misma transcripción incremental, el mismo calendario de consultas y una única
+ejecución del detector base. Cada método conserva los disparos del anterior y puede emitir un aviso adicional con la
+señal que incorpora. El aviso base sale sin esperar el cálculo adicional. La objeción marcada entra cuando su texto ya
+está disponible. Los rasgos del turno completo entran al cerrarse la respuesta y terminar su cálculo. Si faltan rasgos
+prosódicos, el método 3 conserva la decisión del método 2. Compartir la ejecución importa: la misma configuración,
+corrida de otro modo, pasó de 37 a 43 avisos antes del pedido
+([H13](../hallazgos/H13-la-misma-configuracion-corrida-de-otro-modo.md)).
+
 En el piloto las objeciones se anotan a mano. Aparte se mide cuánto se pierde cuando hay que detectarlas
 automáticamente, porque en el teléfono no habrá anotación.
 
 ### 3.2. La regla de combinación del piloto
 
 El riesgo que escribe Gemma no es un puntaje continuo ([H04](../hallazgos/H04-riesgo-escrito-no-es-puntaje.md)): se
-concentra en pocos valores, y 57 de 66 avisos salen de exactamente 0,3
-([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)). Una regresión logística común sobre ese puntaje tampoco garantiza
+concentra en pocos valores. En desarrollo, con `c-premisa`, 57 de 66 avisos salieron de exactamente 0,3
+([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md),
+[corrida de sensibilidad](../../experiments/slm-directo/corridas/2026-11-10_sensibilidad-c/analisis.md)). Una regresión logística común sobre ese puntaje tampoco garantiza
 conservar la decisión del texto. Para el piloto conviene una regla explícita:
 
 - **Conserva los avisos existentes.** Cada llamada que el texto solo avisa sigue avisando, en el mismo turno o antes.
@@ -138,8 +154,14 @@ frente a la alerta. Se responde con usuarios, no con este piloto.
 
 ### 3.3. Qué se informa
 
-- Estafas con aviso antes de `T_R` (`T_A < T_R`), por método, y cuántos turnos o segundos se adelantó cada una.
-- Avisos agregados en legítimas, por método.
+Cada método se compara con el anterior (1 contra 0, 2 contra 1, 3 contra 2), sobre llamadas pareadas y con
+denominadores explícitos:
+
+- cuántas estafas pasan a recibir un aviso antes de `T_R` (`T_A < T_R`);
+- cuánto cambia el margen `L_R` en las estafas que ya avisaban con los dos métodos;
+- cuántas legítimas reciben un aviso nuevo, con un horizonte común;
+- la incertidumbre de cada cifra, teniendo en cuenta que las llamadas de una misma persona o familia de guiones no son
+  independientes.
 - Todo separado por tipo de llamada (§4.2). Un método que mejora el total pero empeora un tipo se informa así.
 - Por llamada, un gráfico con el riesgo de cada método turno a turno, la marca de la objeción, `T_R` y `T_A`, y
   **cuándo estuvo disponible cada señal**: la prosodia de un turno llega después de que el turno termina.
@@ -150,9 +172,13 @@ frente a la alerta. Se responde con usuarios, no con este piloto.
 
 ### 4.1. Antes de grabar: contar objeciones en lo que ya hay
 
-Sin audio se puede estimar algo que decide si vale la pena seguir: cuántas llamadas tienen una objeción antes del
-pedido. Se revisan las 33 legítimas reales, no solo las 21 que avisaron, para ver qué distingue a unas de otras, y las
-33 estafas reales. Son textos traducidos, pero alcanzan para contar objeciones y ver dónde caen respecto de `T_R`.
+Sin audio se puede estimar algo que decide si vale la pena seguir: con qué frecuencia aparece una objeción antes del
+pedido en llamadas que no se escribieron para esto. En las 27 estafas reales con pedido de alto riesgo registrado se
+revisan los turnos y se cuenta cuántas tienen una objeción antes del primer pedido; las seis sin pedido se describen
+aparte. En las 33 legítimas reales, no solo las 21 que avisaron, se cuentan las objeciones hasta un horizonte común,
+para ver también qué distingue a unas de otras. Son textos traducidos, las marcas requieren revisión y los roles de las
+legítimas se infirieron sobre una transcripción sin hablantes
+([procedencia](FUENTES-LEGITIMAS-REALES.md#85-límites-para-informar)); alcanzan para un recuento exploratorio.
 
 ### 4.2. Cómo grabar
 
@@ -161,8 +187,9 @@ pedido. Se revisan las 33 legítimas reales, no solo las 21 que avisaron, para v
   micrófono. En el piloto, estafas y legítimas se recrean por igual; la validación con llamadas naturales va después,
   por separado.
 - **Participantes en las dos clases** cuando se pueda, para que la voz de una persona no delate la clase.
-- **Reserva agrupada por personas y por familias de guiones:** nadie ni ningún guion aparece a la vez en lo que se usa
-  para definir la regla y en lo que se usa para evaluarla.
+- **Reserva agrupada por personas y por familias de guiones:** se asigna antes de ajustar la regla, y cada
+  participante y cada familia completa de guiones queda en un solo conjunto, el que se usa para definir la regla o el
+  que se usa para evaluarla.
 - **Los tipos que pueden refutar la idea**, además de los típicos: estafas con tono tranquilo, estafas con presión
   desde el saludo, emergencias legítimas con un familiar agitado, vendedores y cobradores insistentes, legítimas
   tranquilas, y llamadas con y sin objeción antes del pedido.
@@ -173,7 +200,8 @@ pedido. Se revisan las 33 legítimas reales, no solo las 21 que avisaron, para v
 
 No fija un tamaño de muestra: lo estima. Sirve para saber:
 
-- con qué frecuencia aparecen objeciones aprovechables, antes de `T_R`;
+- cuántas de las objeciones grabadas dejan una respuesta aprovechable antes de `T_R`. Cuántas llamadas tienen
+  objeción lo fija el diseño de los guiones, así que esa frecuencia sale de §4.1, no del piloto;
 - si los rasgos son estables: la misma persona, en las mismas condiciones, ¿da valores parecidos?;
 - cuántas llamadas cambian de decisión entre un método y el siguiente.
 
@@ -182,18 +210,19 @@ falta, teniendo en cuenta cuántas llamadas comparten participantes y qué preci
 
 ## 5. Criterio para avanzar
 
-> **Estado: propuesta sin discutir.** Los valores concretos se acuerdan entre los cuatro y con el tutor antes de grabar.
+> **Estado: propuesta sin discutir.** Los valores concretos se fijan por escrito antes de grabar.
 
+Antes de abrir la reserva se fijan una mejora mínima que justifique seguir y un máximo de falsas alarmas adicionales.
 El piloto justifica una evaluación más grande si se cumplen las tres condiciones:
 
-1. **Hay de dónde sacar.** Una proporción acordada de las estafas tiene una objeción antes de `T_R`. Si casi nunca
-   ocurre, la señal no puede adelantar avisos aunque exista.
-2. **Los rasgos son estables** en la misma persona y las mismas condiciones, dentro de un margen acordado.
-3. **El método 3 adelanta avisos sobre el método 2** en alguna estafa, sin agregar en legítimas más falsas alarmas que
-   el margen acordado, con la incertidumbre informada.
+1. **Hay de dónde sacar.** En el recuento de §4.1, una proporción fijada de antemano de las estafas tiene una objeción
+   antes de `T_R`. Si casi nunca ocurre, la señal no puede adelantar avisos aunque exista.
+2. **Los rasgos son estables** en la misma persona y las mismas condiciones, dentro de un margen fijado.
+3. **El método 3 supera al método 2 por la mejora mínima** en estafas que pasan a avisarse antes de `T_R` o en margen
+   ganado, sin pasar el máximo de falsas alarmas adicionales, con la incertidumbre informada.
 
-Si falla 1 o 2, se escribe por qué y se cierra. Si falla 3 pero 1 o 2 mejoran sobre 0, el resultado sigue valiendo:
-la objeción o los tiempos aportan, el tono no.
+Si falla 1 o 2, se escribe por qué y se cierra. Si falla 3, el resultado sigue valiendo para lo que muestren las otras
+comparaciones: si 1 supera a 0, aporta marcar la objeción; si 2 supera a 1, aportan los tiempos; el tono no.
 
 ## 6. Límites
 
@@ -205,21 +234,21 @@ la objeción o los tiempos aportan, el tono no.
 - **Sesgo por grupos.** Las falsas alarmas se informan por región o tonada, género y edad, con márgenes fijados antes e
   incertidumbre. Con grupos chicos, una diferencia puede ser ruido, y no observar diferencias tampoco demuestra que no
   haya sesgo.
-- **Qué no se mide.** Ni acento, región o nivel socioeconómico: no tienen relación con el fraude y chocan con la
-  minimización de datos de la Ley 25.326
+- **Qué no se mide.** Ni acento, región o nivel socioeconómico: no son pertinentes para la finalidad, penalizarían a
+  hablantes legítimos por cómo hablan, y la Ley 25.326 exige que los datos sean pertinentes y no excesivos para la
+  finalidad
   ([privacidad del sistema](../corpus/PRIVACIDAD-DEL-SISTEMA.md#2-marco-legal-argentino-ley-25326-de-protección-de-datos-personales)).
   Ni si alguien miente: los analizadores de estrés vocal rinden cerca del azar (Horvath, 1982; National Research
-  Council, 2003) y la fonética forense los considera charlatanería (Eriksson y Lacerda, 2007). Ni si la voz es
+  Council, 2003), y Eriksson y Lacerda (2007) califican de charlatanería a dos de esos detectores. Ni si la voz es
   sintética, que es otra línea con otros datos (por ejemplo AASIST, Jung et al., 2022).
 - **Privacidad en el producto.** La comparación con la propia voz necesita conservar en memoria un resumen de los
   rasgos de `OTRA` hasta el final de la llamada, no solo durante el turno. Ese resumen se descarta al cortar y nunca se
   guarda.
 - **Privacidad en la investigación.** Las grabaciones del piloto requieren consentimiento informado, acceso restringido
   y un plazo de retención explícito, y quedan fuera de Git ([invariantes](../../AGENTS.md#invariantes)).
-- **Costo en el teléfono, sin medir.** La única medición en un Android (Samsung A56, 3,60 s de mediana por consulta)
-  es del detector solo, con otro prompt y sin ASR
-  ([§8.6](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). Cuánto suma extraer
-  rasgos no se sabe.
+- **Costo en el teléfono, sin medir.** En el Samsung A56 se midió el detector con un prompt anterior
+  ([§8.6](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). Falta medir el
+  recorrido con ASR y el costo adicional de extraer los rasgos.
 
 ## 7. Alternativas posteriores
 
@@ -231,8 +260,7 @@ Quedan fuera del piloto y solo tienen sentido si el método 3 muestra algo:
   atribuir la mejora al tono y no a las palabras.
 - **Una red propia sobre el espectrograma.** Necesita mucho audio y es la más expuesta a aprender la grabación.
 - **Que E2B escuche el turno.** Quedó afuera sin medir en la
-  [corrida de #152](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#por-qué-la-opción-c-queda-afuera-sin-medirla)
-  y probablemente necesite ajuste fino ([#176](https://github.com/Corchets/bitacora_tesis/issues/176)).
+  [corrida de #152](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#por-qué-la-opción-c-queda-afuera-sin-medirla).
 
 VISHGUARD ([estado del arte](SINTESIS-ESTADO-DEL-ARTE.md#23-datasets-y-límites-de-reutilización-recuperación-de-43))
 sirve como antecedente de anotación de persuasión y emoción en llamadas sintéticas, no como datos para este piloto: no
