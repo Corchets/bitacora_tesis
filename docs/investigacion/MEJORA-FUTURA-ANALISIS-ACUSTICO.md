@@ -13,11 +13,13 @@
 - **Para qué:** para mejorar el detector en general. Puede servir para avisar más estafas, para avisar antes o para
   avisar menos en llamadas legítimas. El texto solo ya mostró un techo: cambiar el prompt mueve cuánto avisa, no a
   quién.
-- **Cómo se combina:** el texto sigue decidiendo si hay riesgo; la voz mueve la vara. Con una voz tranquila, el texto
-  necesita más evidencia para avisar; con una voz que escala, menos.
-- **Qué se podría ganar:** con nuestros números, si la voz fuera perfecta para elegir esa vara, las falsas alarmas en
-  llamadas reales bajarían de 23 a 5 de 33 sin perder estafas. Una estimación realista está bastante por debajo: de 2
-  a 6 falsas alarmas menos, o de 2 a 6 estafas más de cada 100.
+- **Cómo se combina:** la voz solo puede sumar al riesgo del texto, nunca restarle. Una voz tranquila no prueba nada:
+  muchos estafadores son tranquilos y profesionales. Una voz agitada tampoco: un familiar con una emergencia real
+  también se agita. Cuánto suma la voz se aprende de datos, no se fija a mano, y se evalúa sobre los casos que salen
+  mal, no sobre el caso típico.
+- **Qué se podría ganar:** sobre todo, avisar más estafas o avisarlas antes, en las que quien llama aprieta cuando la
+  persona duda. Una estimación aproximada da de 2 a 6 estafas más de cada 100. Bajar falsas alarmas es más difícil:
+  cualquier forma de usar la voz para avisar menos pone en riesgo al estafador tranquilo.
 - **Qué hace falta:** audio real grabado con consentimiento, del orden de 150 llamadas legítimas. El audio sintético
   no sirve: el tono es el del sintetizador.
 - **Qué no se hace:** juzgar a nadie por su acento ni decir que alguien miente.
@@ -135,14 +137,14 @@ En cada turno cerrado de quien llama habría dos lecturas:
 
 - **El riesgo del texto**, que ya existe: Gemma 4 E2B lee la conversación y escribe un número entre 0 y 1. Hoy se
   avisa cuando llega a 0,3 ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)).
-- **El nivel de la voz**, nuevo: cuánto se apartó quien llama de cómo hablaba al principio, con las medidas de §2 y
-  §3. Para empezar alcanza con tres niveles: **tranquila**, **neutra** o **escala**.
+- **La escalada de la voz**, nueva: cuánto se apartó quien llama de cómo hablaba al principio, y cómo reaccionó
+  cuando la persona dudó, con las medidas de §2 y §3. Si no cambió, vale cero.
 
 ```mermaid
 flowchart LR
     A["Audio por canal"] --> V["Silero"] --> P["Parakeet"] --> T["Turno en texto"] --> G["Gemma 4 E2B"] --> R["Riesgo del texto"]
     V --> Q["Tiempos de cada canal"] --> N
-    V --> X["Tono del turno<br/>de quien llama"] --> N["Comparar con los<br/>primeros turnos"] --> S["Nivel de la voz"]
+    V --> X["Tono del turno<br/>de quien llama"] --> N["Comparar con los<br/>primeros turnos"] --> S["Lo que suma la voz"]
     R --> F["Combinación"]
     S --> F
     F --> AV["Aviso"]
@@ -150,72 +152,87 @@ flowchart LR
 
 La voz corre en paralelo y no toca el texto: si se apaga, el detector queda como hoy.
 
-### 5.2. Tres formas de combinarlas, de la más prudente a la más ambiciosa
+### 5.2. Lo que se descarta: umbrales fijos según la voz
 
-**1. La voz decide qué tan fuerte es el aviso.** El texto decide si se avisa, como hoy. La voz solo elige entre un
-aviso suave y uno fuerte. No cambia qué llamadas avisan, así que no gana estafas ni saca falsas alarmas, pero una
-venta tranquila recibe un aviso suave y no el mismo que una estafa clara. Es la versión más segura y la primera que se
-probaría. Encaja con el aviso en dos niveles que ya está en el §11.4.
+La primera idea que aparece es mover el umbral según la voz: más exigente si quien llama está tranquilo, menos si se
+agita. Se descarta, porque está pensada para el caso típico, y los casos que importan son los otros:
 
-**2. La voz mueve la vara del texto.** Es la propuesta principal. En vez de un umbral fijo de 0,3, el umbral depende
-de la voz:
+- **El estafador tranquilo.** Muchos se hacen pasar por un banco o un organismo y hablan con calma de operador. Con un
+  umbral más alto para las voces tranquilas, una estafa que el detector de hoy avisa dejaría de avisarse. Es el peor
+  error posible: empeora justo en las estafas mejor hechas.
+- **El familiar agitado.** Alguien que llama de un número desconocido por una emergencia real habla agitado. Con un
+  umbral más bajo para las voces agitadas, se suma una falsa alarma en el peor momento.
+- **El cuento del tío.** El estafador se hace pasar por un familiar desesperado: la agitación es parte del engaño, no
+  una reacción. Tampoco dice nada por sí sola.
 
-| Nivel de la voz | Umbral del riesgo del texto |
-| --- | --- |
-| Tranquila | 0,5: el texto tiene que ser más claro para avisar |
-| Neutra | 0,3: como hoy |
-| Escala | 0,2: alcanza con menos evidencia en el texto |
+En los tres, el nivel de la voz no indica estafa ni legitimidad. Los umbrales puestos a mano, además, se eligen
+mirando ejemplos, y H12 ya mostró que elegir el corte con unos datos no se sostiene en otros.
 
-Los valores son ilustrativos; los definitivos se calibran en un conjunto aparte. La voz nunca dispara un aviso sola:
-con un riesgo del texto de 0,1, ninguna voz avisa. Urgencia no es estafa.
+### 5.3. Tres reglas para combinar
 
-Esta forma tiene una ventaja: con nuestros datos se puede calcular cuánto podría ganar, como máximo. En H12, con
-umbral 0,3, el detector avisó las 33 estafas reales y 23 de 33 legítimas reales; con umbral 0,5, 28 estafas y 5
-legítimas. Si la voz acertara siempre (tranquila en las legítimas, escala en las estafas), las estafas usarían 0,3 y
-las legítimas 0,5: **las 33 estafas y solo 5 falsas alarmas, en vez de 23**. Ninguna voz va a acertar siempre, y esas
-llamadas no tienen audio para probarlo, pero muestra que el margen existe: el texto ya ordena bastante bien, y lo que
-falta es saber dónde poner el corte en cada llamada.
+1. **La voz solo suma.** La ausencia de señal no prueba nada: una voz tranquila deja el riesgo del texto como está.
+   Así, la voz nunca hace perder una estafa que el texto solo ya avisaba. El estafador tranquilo queda como hoy: la voz
+   no lo ve, pero tampoco lo tapa.
+2. **Lo que suma son cambios, no niveles.** No cuenta estar agitado, sino agitarse durante la llamada respecto de cómo
+   empezó, y sobre todo endurecerse justo después de que la persona dudó (§2.3). El familiar que llama agitado desde
+   el primer segundo, o el estafador del cuento del tío, no escalan respecto de su propio comienzo, así que la voz no
+   suma. Si escalan igual, suma poco, porque es una señal débil.
+3. **Cuánto suma se aprende y se evalúa en los casos difíciles.** Un modelo chico (por ejemplo, una regresión
+   logística) recibe el riesgo del texto y las medidas de cambio de la voz, con la restricción de que la voz solo
+   pueda sumar. Los pesos salen de un conjunto aparte. Y el resultado se informa separado por tipo de llamada, no solo
+   en total (§5.5).
 
-**3. Una combinación aprendida.** Un modelo chico, por ejemplo una regresión logística, recibe el riesgo del texto y
-las medidas de la voz y devuelve un riesgo único. Es la más flexible, pero necesita datos etiquetados para aprender los
-pesos y es la menos explicable. Va después, si 2 funciona y hay audio suficiente.
+En fórmula, la idea es: riesgo final = riesgo del texto + lo que suma la voz, donde lo que suma la voz es cero si
+quien llama no cambió y crece con la escalada. El aviso sale con el mismo umbral para todas las llamadas.
 
-### 5.3. Cómo quedaría en casos concretos
+Hay además un uso que no toca qué llamadas avisan: **que la voz elija entre un aviso suave y uno fuerte**, cuando el
+texto ya avisó. Es el más seguro y encaja con el aviso en dos niveles que ya está en el §11.4.
 
-Con la forma 2:
+### 5.4. Qué pasa en cada caso
 
-| Situación | Riesgo del texto | Voz | Umbral | Resultado | Frente a hoy |
-| --- | --- | --- | --- | --- | --- |
-| Estafa clásica: pide el código con apuro | 0,8 | Escala | 0,2 | Avisa | Igual |
-| Estafa con voz tranquila y profesional | 0,6 | Tranquila | 0,5 | Avisa | Igual: el texto alcanza |
-| Legítima: el banco pide el DNI con calma | 0,35 | Tranquila | 0,5 | No avisa | Una falsa alarma menos |
-| Estafa que todavía no pidió nada, pero apura | 0,25 | Escala | 0,2 | Avisa | Una estafa más, o un aviso antes |
-| Venta insistente | 0,35 | Escala | 0,2 | Avisa | Sigue siendo falsa alarma |
+| Situación | Hoy (solo texto) | Umbrales fijos según la voz (descartado) | Con las tres reglas |
+| --- | --- | --- | --- |
+| Estafador tranquilo, se hace pasar por el banco | Avisa si el texto llega | Puede dejar de avisar | Igual que hoy |
+| Familiar real, agitado por una emergencia | Depende del texto | Más falsas alarmas | Igual que hoy si está agitado desde el principio |
+| Cuento del tío, estafador agitado desde el principio | Depende del texto | Avisa por la voz, por casualidad | Igual que hoy: decide el texto |
+| Estafa que aprieta cuando la persona duda | Avisa tarde, o no avisa | Avisa antes | Avisa antes: es donde la voz aporta |
+| Cobrador o vendedor que se enoja cuando le dicen que no | A veces avisa | Más falsas alarmas | Puede sumar falsas alarmas: hay que medirlo |
 
-La última fila es el límite de la idea: una venta insistente suena a presión igual que una estafa, y la voz no la
-separa.
+La tabla deja ver que la voz no mejora todo: aporta en un tipo de estafa (la que aprieta cuando la persona duda), es
+neutra en la mayoría de los casos y tiene un riesgo claro (el que se enoja sin ser estafador). Por eso la ganancia
+esperada es moderada (§6).
 
-### 5.4. Cómo verlo
+### 5.5. Cómo verlo
 
-- **En una llamada:** un gráfico con el riesgo del texto turno a turno, el nivel de la voz debajo y el umbral que se
-  mueve, con la marca de cuándo empezó el pedido y cuándo avisó. Permite ver si la voz anticipó algo que el texto
-  todavía no decía.
-- **En un conjunto de llamadas:** cada llamada es un punto, con el riesgo del texto en un eje y el nivel de la voz en
-  el otro, en un color para las estafas y otro para las legítimas. Lo que interesa es la franja del texto entre 0,3 y
-  0,5, donde hoy se mezclan. Si ahí los colores se separan por la voz, la voz aporta.
-- **En la demo:** el panel podría mostrar las dos curvas en vivo durante la llamada.
+- **En una llamada:** un gráfico con el riesgo del texto turno a turno, lo que suma la voz debajo y el riesgo final,
+  con la marca de cuándo empezó el pedido, cuándo dudó la persona y cuándo avisó. Permite ver si la voz anticipó algo
+  que el texto todavía no decía.
+- **En un conjunto de llamadas:** cada llamada es un punto, con el riesgo del texto en un eje y la escalada de la voz
+  en el otro, en un color para las estafas y otro para las legítimas. Si en la zona donde hoy se mezclan los colores
+  se separan por la voz, la voz aporta.
+- **Por tipo de llamada:** una tabla como la de §5.4, pero medida: estafas y falsas alarmas separadas por estafador
+  tranquilo, estafador agitado, estafa que aprieta, familiar agitado, cobrador o vendedor que se enoja, y legítima
+  tranquila. La regla para adoptar la voz exige que no empeore ningún tipo más allá de un margen escrito antes, aunque
+  mejore el total.
+- **En la demo:** el panel podría mostrar las curvas en vivo durante la llamada.
 
 ## 6. Qué se podría ganar
 
-### 6.1. La mejora se puede usar de dos maneras
+### 6.1. La mejora se puede usar de dos maneras, y no cuestan lo mismo
 
 Si la voz ayuda, lo que mejora es la separación: qué tan seguido una estafa puntúa más alto que una legítima. Esa
-mejora se puede usar de dos maneras, y elegir entre ellas es una decisión de producto:
+mejora se puede usar de dos maneras:
 
-- **Avisar las mismas estafas con menos falsas alarmas.**
-- **Avisar más estafas con las mismas falsas alarmas.**
+- **Avisar más estafas, o antes, con las mismas falsas alarmas.** Es lo que da la regla de que la voz solo suma: las
+  estafas que aprietan cruzan el umbral antes, y el resto queda como hoy. El costo posible son las legítimas que se
+  enojan (§5.4), que hay que medir.
+- **Avisar las mismas estafas con menos falsas alarmas.** Con una voz que solo suma, la única forma es subir el umbral
+  común para todas las llamadas y dejar que la voz devuelva por encima a las que escalan. Pero el estafador tranquilo
+  no escala: si el texto lo dejaba justo en el umbral, se pierde. Y es frecuente: 57 de 66 avisos de la configuración
+  salen de un riesgo de exactamente 0,3 ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)).
 
-También se puede repartir entre las dos.
+No hay forma de usar la voz para avisar menos sin arriesgar al estafador tranquilo. Por eso la propuesta empieza por la
+primera, y la segunda queda como una decisión de producto, con la medición por tipo de llamada (§5.5) a la vista.
 
 ### 6.2. Estimación
 
@@ -237,15 +254,18 @@ cuenta da 66 % de falsas alarmas al avisar el 90 % de las estafas, cerca del 64 
 
 ### 6.3. Cómo leerla
 
-- **Lo realista es una mejora moderada:** de 2 a 6 falsas alarmas menos en 33, o de 2 a 6 estafas más de cada 100.
-  Es el mejor caso de cada fila: si la voz se equivoca en las mismas llamadas que el texto, la ganancia baja.
-- **El máximo de §5.2 (de 23 a 5) es un techo, no una expectativa.** Supone una voz que nunca se equivoca.
-- **Avisar antes.** La escalada del tono puede aparecer antes que el pedido en el texto, y la forma 2 bajaría la vara
-  justo ahí. No se puede estimar sin audio, y adelantar suele costar falsas alarmas.
+- **Lo realista es una mejora moderada:** de 2 a 6 estafas más de cada 100 o, si se elige usarla así y se acepta el
+  riesgo de §6.1, de 2 a 6 falsas alarmas menos en 33. Es el mejor caso de cada fila: supone que la voz se equivoca en
+  otras llamadas que el texto. Si se equivoca en las mismas, la ganancia baja.
+- **La cuenta es pareja y la realidad no.** La tabla supone que la voz aporta un poco en todas las llamadas. Según
+  §5.4, aporta mucho en un tipo (la estafa que aprieta) y nada en los demás. La ganancia total depende de cuántas
+  estafas son de ese tipo, y eso no se sabe.
+- **Avisar antes.** La escalada del tono puede aparecer antes que el pedido en el texto, y ahí la voz empuja el riesgo
+  por encima del umbral. No se puede estimar sin audio.
 - **No depende del reconocedor.** Si Parakeet transcribe mal «token» o «CVV», el texto pierde la pista, pero la voz no.
-- **El tipo de falsa alarma pone un límite.** La voz puede sacar las de servicio tranquilo, no las de venta insistente.
-  H12 no leyó los textos, así que no se sabe cuántas de las 21 son de cada tipo. Leerlas da una idea del techo sin
-  grabar nada.
+- **El tipo de llamada pone un límite.** La voz no puede sacar falsas alarmas de venta insistente ni de cobradores
+  que se enojan, y podría sumarlas. H12 no leyó los textos, así que no se sabe cuántas de las 21 falsas alarmas son de
+  cada tipo. Leerlas da una idea sin grabar nada.
 - **Con 33 llamadas no se podría medir.** Tres llamadas son 9 puntos (H12). Para distinguir una baja de 64 % a 55 %
   comparando el mismo conjunto con y sin voz, harían falta del orden de 150 legítimas con audio.
 - **Si la voz sola separa mejor que el texto, primero hay que sospechar** que aprendió de dónde salió la grabación y
@@ -275,11 +295,11 @@ cuenta da 66 % de falsas alarmas al avisar el 90 % de las estafas, cerca del 64 
 3. **Grabar audio real** con consentimiento (§9). Sin esto no hay nada que medir.
 4. **Medir en laboratorio** (Python): los tiempos de cada canal, las medidas de la voz con `opensmile` y las tres
    dimensiones con el modelo de audEERING, comparadas con el comienzo de cada llamada.
-5. **Mirar antes de combinar.** Hacer los gráficos de §5.4 y ver si aparecen la escalada y la reacción a la duda. Si
+5. **Mirar antes de combinar.** Hacer los gráficos de §5.5 y ver si aparecen la escalada y la reacción a la duda. Si
    no se ven a ojo, es difícil que una combinación las encuentre.
-6. **Comparar sobre las mismas llamadas:** el detector de hoy, la voz como vara (forma 2) con tiempos, con tono y con
-   los dos. La regla de adopción se escribe antes de correr, como en H12: por ejemplo, menos falsas alarmas sin perder
-   estafas a tiempo, o más estafas sin sumar falsas alarmas.
+6. **Comparar sobre las mismas llamadas:** el detector de hoy contra el texto más la voz (§5.3), con tiempos, con
+   tono y con los dos. Se informa por tipo de llamada (§5.5). La regla de adopción se escribe antes de correr, como en
+   H12: por ejemplo, más estafas a tiempo sin sumar falsas alarmas y sin empeorar ningún tipo más allá de un margen.
 7. **Revisar el sesgo.** Separar las falsas alarmas por región o tonada, género y edad. Si la voz las sube en algún
    grupo, no se adopta, aunque mejore el total.
 8. **Probar por teléfono.** Repetir 6 con el audio degradado a 8 kHz (AMR-NB y G.711). Si el tono desaparece y quedan
@@ -290,7 +310,10 @@ cuenta da 66 % de falsas alarmas al avisar el 90 % de las estafas, cerca del 64 
 ## 9. Datos que harían falta
 
 - **Llamadas reales en español argentino, grabadas con consentimiento:** estafas actuadas por personas y legítimas
-  difíciles (cobranzas, reclamos, ventas insistentes). Del orden de 150 legítimas (§6.3). El audio sintético del corpus
+  difíciles. Del orden de 150 legítimas (§6.3).
+- **Que estén los casos que salen mal**, no solo los típicos (§5.4): estafadores tranquilos, estafadores agitados
+  desde el principio, estafas que aprietan cuando la persona duda, familiares agitados por una emergencia, cobradores y
+  vendedores que se enojan, y legítimas tranquilas. Si un tipo falta, no se puede saber si la voz lo empeora. El audio sintético del corpus
   no sirve: el tono es el del sintetizador, no el de una persona presionando a otra.
 - **Las dos clases grabadas en las mismas condiciones** (mismo canal, mismos equipos), para que la voz no aprenda de
   dónde salió cada grabación (§10).
@@ -307,11 +330,11 @@ cuenta da 66 % de falsas alarmas al avisar el 90 % de las estafas, cerca del 64 
   micrófono, el códec, el ruido o el silencio. En detección de voces falsas se mostró que modelos entrenados en
   ASVspoof 2019 se apoyaban en cuánto silencio había al principio (Müller et al., 2021). Pesa más en una red propia
   (C) que en A y B, pero ninguna está libre.
-- **La venta insistente.** Suena a presión como una estafa (§5.3), y las llamadas de números no agendados, que son el
+- **La venta insistente y el que se enoja.** Suenan a presión como una estafa (§5.4), y las llamadas de números no agendados, que son el
   alcance del detector ([ADR 0003](../ingenieria/adr/0003-detector-solo-en-entrantes-de-no-agendados.md)), tienen
   muchas.
 - **Pocos datos.** Con decenas de llamadas, cualquier combinación aprendida se ajusta a esas llamadas y no generaliza.
-  Por eso primero la forma 2, que solo calibra tres umbrales.
+  Por eso la combinación es chica, con la voz restringida a sumar, y se informa por tipo de llamada.
 - **El códec.** AMR-NB a 8 kHz recorta los agudos y deforma la calidad de voz; es uno de los motivos de la exclusión
   actual (§5.5.4). La altura, la velocidad y los tiempos resisten mejor.
 - **El teléfono.** E2B ya tarda 3,7 s por turno en el Samsung A56
