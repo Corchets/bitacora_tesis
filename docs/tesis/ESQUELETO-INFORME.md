@@ -340,7 +340,10 @@ Git), que ya explica cómo implementar cada mejora; el comentario de trabajo fut
 - La evolución del proyecto va en las etapas (7); las mediciones lado a lado, en las comparaciones (8).
 - El prompt final va en un anexo.
 - El uso de asistentes de IA se menciona en la metodología.
-- Se redacta en Markdown, versionado en este repositorio.
+- Se redacta en Markdown, versionado en este repositorio: un archivo por capítulo, `INFORME-NN-TITULO.md` en esta
+  carpeta, y las referencias de todos los capítulos en [`INFORME-REFERENCIAS.md`](INFORME-REFERENCIAS.md).
+- Lo que el equipo tiene que resolver queda dentro del capítulo como marca (`> **Estado: propuesta sin discutir.**`,
+  `> **Corregir:**` o `> **Falta fuente:**`). Las marcas se borran antes de armar el PDF.
 
 ## 5. Lo que el texto no puede dar por resuelto
 
@@ -357,5 +360,5 @@ Mientras sigan así, describir lo que pasó sin presentarlo como decisión tomad
   abierta: no hay referencia humana revisada ni medida de acuerdo.
 - [Qué concluir de la evaluación final](../evaluacion/CONCLUSIONES-EVALUACION-FINAL.md) y la regla de pedido crítico no
   se discutieron en equipo.
-- El título ([D13](../gestion/MAPA-DECISIONES.md#d13--título-definitivo)) y la forma de armar el PDF (archivos por capítulo, conversión y
-  carátula) no están definidos.
+- El título ([D13](../gestion/MAPA-DECISIONES.md#d13--título-definitivo)) y la forma de convertir los capítulos a PDF
+  con la carátula no están definidos.
