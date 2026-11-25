@@ -354,8 +354,6 @@ Quedan fuera del piloto y solo tienen sentido si el método 2 muestra algo:
   muestran que el modelo capta información léxica al estimar la valencia. Si mejora la clasificación, es más difícil
   atribuir la mejora al tono y no a las palabras.
 - **Una red propia sobre el espectrograma.** Necesita mucho audio y es la más expuesta a aprender la grabación.
-- **Que E2B escuche el turno.** Quedó afuera sin medir en la
-  [corrida de #152](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#por-qué-la-opción-c-queda-afuera-sin-medirla).
 
 VISHGUARD ([estado del arte](SINTESIS-ESTADO-DEL-ARTE.md#23-datasets-y-límites-de-reutilización-recuperación-de-43))
 sirve como antecedente de anotación de persuasión y emoción en llamadas sintéticas, no como datos para este piloto: no
