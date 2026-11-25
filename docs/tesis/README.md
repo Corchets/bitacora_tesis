@@ -1,5 +1,7 @@
 # Informe final: índice y estado
 
+> **Nota del 2026-11-25:** el informe se reescribe con la estructura nueva del [esqueleto](ESQUELETO-INFORME.md) (11 capítulos, ordenados por tema y no por fecha). Los `CAP-*.md` de esta carpeta y la tabla de abajo quedan como material de partida, no como base a corregir.
+
 **Para redactar:** empezá por el [mapa del proceso](MAPA-DEL-PROCESO.md), la guía de las etapas del trabajo y de dónde está la evidencia de cada una. Antes de escribir resultados, discusión o conclusiones, leé los [hallazgos](../hallazgos/README.md).
 
 > **Nota del 2026-11-21:** la evaluación final corrió el 2026-11-19 (#52, cerrado) y los capítulos 8, 9 y 11 ya la incorporan; el párrafo siguiente es el estado al 2026-11-03. La tabla de abajo se actualizó ese día en las filas de Preliminares y de los capítulos 4, 8, 9 y 11.
