@@ -14,16 +14,16 @@ información que la transcripción no tiene?
 **Objetivo.** Evaluar si los rasgos prosódicos de `OTRA` y los tiempos de interacción, medidos turno a turno a lo largo
 de la llamada, permiten al detector avisar antes del primer pedido de alto riesgo (`T_R`,
 [métricas](../evaluacion/METRICAS.md#1-marcas-temporales)) o avisar estafas que el texto solo no avisa, con un margen de
-falsas alarmas fijado antes de evaluar. El piloto usa conversaciones recreadas por personas, en español argentino y con
-los dos canales separados. Los métodos se comparan sobre las mismas llamadas y con la información disponible en cada
-instante. El aviso se fecha cuando el sistema lo emite efectivamente (`T_A`).
+falsas alarmas fijado antes de evaluar.
 
 **Por qué interesa.** Ninguno de los candidatos probados en
 [H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md) mejoró claramente la separación entre
 estafas y legítimas reales: los que bajaron las falsas alarmas perdieron detección o avisos a tiempo. Eso no prueba
 que el texto haya llegado a un techo, pero sugiere buscar información que el detector no tiene, en vez de otra forma de
 pedirle lo mismo. La voz es información que el sistema ya captura y hoy descarta: un operador y un estafador pueden
-decir lo mismo, y lo que cambia es cómo lo dicen y cómo llevan la conversación.
+decir lo mismo, y lo que cambia es cómo lo dicen y cómo llevan la conversación. Además, la voz y los tiempos no
+dependen de que el reconocedor transcriba bien: si Parakeet pierde una palabra clave, como «token», el texto pierde la
+pista, pero cómo se dijo sigue ahí.
 
 **Hipótesis.** En algunas estafas, la forma de hablar de quien llama y la manera en que lleva la conversación cambian
 de un modo que el texto no registra, y esos cambios aportan información una vez considerado el texto. No pasa en todas:
@@ -47,18 +47,19 @@ Las dos se calculan por turno y están disponibles recién cuando el turno termi
 
 ### 2.2. Patrones a observar
 
-Son hipótesis sobre qué podría distinguir una estafa, no supuestos:
+Son hipótesis sobre qué podría distinguir una estafa, no supuestos. Cada uno tiene una versión legítima que lo imita:
 
-1. **Escalada.** Quien llama se agita, acelera o sube la intensidad a medida que avanza la llamada.
-2. **Cambio de registro.** Empieza con la calma de un operador y pasa a la urgencia al acercarse al pedido.
-3. **Reacción ante una duda.** Cuando `PROTEGIDA` duda o se niega («prefiero llamar al banco»), la respuesta de quien
-   llama se endurece en vez de aflojar.
-4. **Dominio de la conversación.** Quien llama habla mucho más, interrumpe, contesta enseguida, y los turnos de
-   `PROTEGIDA` se acortan hasta quedar en «sí» y «ajá».
+| Patrón | Cómo se vería en una estafa | Qué lo puede imitar en una llamada legítima |
+| --- | --- | --- |
+| **1. Escalada** | Quien llama habla cada vez más rápido y más fuerte a medida que avanza la llamada | Un vendedor que insiste para cerrar la venta |
+| **2. Cambio de registro** | Empieza con calma de operador («le hablamos del área de seguridad») y pasa a la urgencia al acercarse al pedido («tiene que hacerlo ahora») | Un aviso legítimo de un problema real con la cuenta |
+| **3. Reacción ante una duda** | La persona dice «prefiero llamar al banco» y quien llama contesta enseguida, le habla encima y sube el tono | Un cobrador que se enoja cuando le dicen que no |
+| **4. Dominio de la conversación** | Quien llama habla casi todo el tiempo, interrumpe, y la persona queda reducida a «sí» y «ajá» | Un operador que explica un trámite largo |
 
-Ninguno es exclusivo de las estafas: un vendedor insistente puede escalar, un familiar en una emergencia habla agitado
-desde el primer segundo, y un estafador profesional puede mantener la calma toda la llamada. El patrón 3 depende de un
-hecho del texto (la duda); para saber si la voz agrega algo sobre ese hecho, la comparación incluye un control (§3.1).
+Del otro lado, hay casos donde el patrón no aparece aunque sea estafa: un estafador profesional puede mantener la calma
+toda la llamada, y en el cuento del tío la agitación es parte del engaño desde el primer segundo, así que no escala. El
+patrón 3 depende de un hecho del texto (la duda); para saber si la voz agrega algo sobre ese hecho, la evaluación
+incluye un control (§4.1).
 
 ### 2.3. Definiciones para el piloto
 
@@ -88,12 +89,27 @@ hecho del texto (la duda); para saber si la voz agrega algo sobre ese hecho, la 
 | Solapamiento | Habla simultánea de los dos canales, según la definición de §2.3 | Por verificar. El eco puede simular solapamientos |
 | Largo de los turnos de `PROTEGIDA` | Duración de cada turno frente a sus turnos anteriores | Por verificar |
 
-Altura, intensidad y ritmo salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE; las pausas, de las regiones
-no sonoras con un cálculo propio; el resto, de la actividad de voz de cada canal. Ninguno de estos rasgos indica estafa
-por sí mismo: también cambian por el contenido de lo que se dice, el ruido, el canal y la dinámica normal de una
-conversación. Qué dirección se espera en una estafa es parte de lo que el piloto tiene que observar, no un supuesto.
+Altura, intensidad y ritmo salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE, un programa liviano en C++
+que también corre en Android; las pausas, de las regiones no sonoras con un cálculo propio; el resto, de la actividad
+de voz de cada canal. Ninguno de estos rasgos indica estafa por sí mismo: también cambian por el contenido de lo que se
+dice, el ruido, el canal y la dinámica normal de una conversación. Qué dirección se espera en una estafa es parte de lo
+que el piloto tiene que observar, no un supuesto.
 
-### 2.5. De dónde sale cada cosa
+## 3. Cómo se aplicaría en el detector
+
+### 3.1. Turno a turno
+
+Hoy, al cerrarse cada turno de `OTRA`, Parakeet lo transcribe y Gemma 4 E2B escribe el riesgo de la conversación hasta
+ahí ([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). Con la mejora, en ese mismo momento:
+
+1. **El texto sigue como hoy.** Si el riesgo del texto llega al umbral, el aviso sale sin esperar nada más.
+2. **En paralelo se miden la voz y los tiempos.** openSMILE calcula los rasgos prosódicos del audio de ese turno, que
+   ya está en memoria, y la actividad de voz de los dos canales da los tiempos.
+3. **Se comparan con la referencia de la llamada.** Los primeros turnos de `OTRA` fijan cómo habla esa persona; cada
+   turno nuevo se guarda como cuánto se apartó de ahí.
+4. **La regla decide si adelanta o agrega un aviso** (§3.2).
+5. **Al cortar, se borra todo.** La referencia y los resúmenes por turno viven en memoria hasta el final de la llamada
+   y no se guardan.
 
 ```mermaid
 flowchart LR
@@ -101,18 +117,51 @@ flowchart LR
     S --> T["Tiempos de la<br/>conversación"]
     S --> P["Parakeet: texto"] --> G["Gemma 4 E2B: riesgo"]
     C --> O["openSMILE sobre el audio<br/>de OTRA: rasgos prosódicos"]
-    T --> R["Regla de combinación"]
-    O --> R
+    O --> N["Comparar con la<br/>referencia de la llamada"]
+    T --> N
+    N --> R["Regla de combinación"]
     G --> R
     R --> AV["Aviso, fechado al emitirse"]
 ```
 
-La atribución de cada turno a una persona viene de la captura por canal, no de Silero. Por eso el canal objetivo (la
-forma real de capturar la llamada) se prueba desde el piloto.
+La atribución de cada turno a una persona viene de la captura por canal, no de Silero. La mejora necesita los dos
+canales separados: en la integración objetivo, una llamada VoIP controlada por la aplicación, se pueden separar si se
+diseña así ([alternativas de captura](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)). Por eso el canal objetivo se
+prueba desde el piloto.
 
-## 3. La comparación
+### 3.2. La regla de combinación
 
-### 3.1. Métodos
+El riesgo que escribe Gemma no es un puntaje continuo ([H04](../hallazgos/H04-riesgo-escrito-no-es-puntaje.md)): se
+concentra en pocos valores. En desarrollo, con `c-premisa`, 57 de 66 avisos salieron de exactamente 0,3
+([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md),
+[corrida de sensibilidad](../../experiments/slm-directo/corridas/2026-11-10_sensibilidad-c/analisis.md)). Una
+regresión logística común sobre ese puntaje tampoco garantiza conservar la decisión del texto. Por eso, una regla
+explícita:
+
+- **Conserva los avisos existentes.** Cada llamada que el texto solo avisa sigue avisando, en el mismo turno o antes.
+- **Puede agregar o adelantar un aviso** cuando se cumplen dos cosas a la vez: la voz o los tiempos muestran un cambio
+  sostenido respecto de la referencia (en más de un turno, no un pico suelto), y el texto ya marca algún riesgo, aunque
+  no llegue al umbral. La voz y los tiempos nunca avisan solos: urgencia no es estafa. Cuánto cambio, cuántos turnos y
+  qué piso de riesgo del texto se fijan con los datos de definición del piloto, no a mano.
+- **Vuelve al texto solo cuando falta señal:** sin voz previa suficiente o con el canal degradado.
+
+Con esta regla las falsas alarmas quedan iguales o aumentan; no pueden bajar. «Avisar antes con las mismas falsas
+alarmas» es un resultado que hay que demostrar, no una propiedad de la regla. Usar la voz para bajar falsas alarmas,
+por ejemplo subiendo el umbral común, sería otro experimento, porque puede eliminar avisos que hoy sí salen.
+
+### 3.3. Qué cambia y qué no
+
+- **El motivo del aviso** sigue saliendo del texto
+  ([ADR 0006](../ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md)). Se le podría
+  sumar una frase sobre la forma de hablar («le habló cada vez más rápido»), nunca sobre la persona.
+- **Qué tan fuerte es el aviso** (suave o fuerte) es otra pregunta: si cambiar la intensidad mejora lo que hace la
+  persona frente a la alerta. Se responde con usuarios, no con este piloto.
+- **El costo** es openSMILE por turno y un resumen chico por turno en memoria. Cuánto suma en el teléfono no se midió
+  (§8).
+
+## 4. Cómo se evaluaría
+
+### 4.1. Métodos
 
 Todos sobre los mismos prefijos de conversación y con la información disponible en cada instante:
 
@@ -133,28 +182,7 @@ la ejecución importa: la misma configuración, corrida de otro modo, pasó de 3
 En el piloto las dudas se anotan a mano. Si el control resulta necesario en el teléfono, aparte se mide cuánto se
 pierde cuando hay que detectarlas automáticamente.
 
-### 3.2. La regla de combinación del piloto
-
-El riesgo que escribe Gemma no es un puntaje continuo ([H04](../hallazgos/H04-riesgo-escrito-no-es-puntaje.md)): se
-concentra en pocos valores. En desarrollo, con `c-premisa`, 57 de 66 avisos salieron de exactamente 0,3
-([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md),
-[corrida de sensibilidad](../../experiments/slm-directo/corridas/2026-11-10_sensibilidad-c/analisis.md)). Una
-regresión logística común sobre ese puntaje tampoco garantiza conservar la decisión del texto. Para el piloto conviene
-una regla explícita:
-
-- **Conserva los avisos existentes.** Cada llamada que el texto solo avisa sigue avisando, en el mismo turno o antes.
-- **Puede agregar o adelantar avisos** cuando los tiempos o la voz cumplen una condición escrita antes de evaluar.
-- **Vuelve al texto solo cuando falta señal:** sin voz previa suficiente o con el canal degradado.
-
-Con esta regla las falsas alarmas quedan iguales o aumentan; no pueden bajar. «Avisar antes con las mismas falsas
-alarmas» es un resultado que hay que demostrar, no una propiedad de la regla. Por eso se miden las dos cosas: cuántos
-avisos agrega y cuánto los adelanta, y cuántos de los agregados caen en legítimas. Usar la voz para bajar falsas
-alarmas, por ejemplo subiendo el umbral común, sería otro experimento, porque puede eliminar avisos que hoy sí salen.
-
-Qué tan fuerte es el aviso (suave o fuerte) es otra pregunta: si cambiar la intensidad mejora lo que hace la persona
-frente a la alerta. Se responde con usuarios, no con este piloto.
-
-### 3.3. Qué se informa
+### 4.2. Qué se informa
 
 Cada método se compara con el anterior (1 contra 0, 2 contra 1, y el control contra 0), sobre llamadas pareadas y con
 denominadores explícitos:
@@ -168,17 +196,18 @@ denominadores explícitos:
 
 Además:
 
-- Todo separado por tipo de llamada (§4.1). Un método que mejora el total pero empeora un tipo se informa así.
+- Todo separado por tipo de llamada (§5.1). Un método que mejora el total pero empeora un tipo se informa así.
 - Por llamada, un gráfico con el riesgo de cada método turno a turno, los rasgos de la voz y los tiempos, las dudas,
   `T_R` y `T_A`, y **cuándo estuvo disponible cada señal**: los rasgos de un turno llegan después de que el turno
   termina.
 - Entre llamadas, comparaciones con un horizonte común (por ejemplo, hasta `T_R` o las primeras N consultas), no con el
   máximo de la llamada entera, que favorece a las más largas.
 
-## 4. El piloto
+## 5. El piloto
 
-### 4.1. Cómo grabar
+### 5.1. Cómo grabar
 
+- **Conversaciones recreadas por personas**, en español argentino y con los dos canales separados.
 - **Las dos clases recreadas, en las mismas condiciones.** «Voz humana» y «llamada real» son cosas distintas. Si las
   estafas se actúan y las legítimas son naturales, el modelo puede aprender la actuación aunque se use el mismo
   micrófono. En el piloto, estafas y legítimas se recrean por igual; la validación con llamadas naturales va después,
@@ -192,8 +221,9 @@ Además:
   insistentes, legítimas tranquilas, y llamadas con y sin dudas antes del pedido.
 - **El canal real.** Si se prueba banda telefónica, se codifica y decodifica con AMR-NB o G.711. Remuestrear a 8 kHz no
   equivale a pasar por el códec.
+- El audio sintético (TTS) del corpus no sirve: su voz es la del sintetizador, no la de una persona presionando a otra.
 
-### 4.2. Lo que se puede mirar sin audio
+### 5.2. Lo que se puede mirar sin audio
 
 Los conjuntos reales de la evaluación final son texto traducido, sin audio: no sirven para la voz ni para los tiempos.
 Sí permiten contar con qué frecuencia la persona duda antes del pedido en llamadas que no se escribieron para esto, que
@@ -203,7 +233,7 @@ que avisaron, se cuentan hasta un horizonte común. Las marcas requieren revisi�
 infirieron sobre una transcripción sin hablantes
 ([procedencia](FUENTES-LEGITIMAS-REALES.md#85-límites-para-informar)); alcanzan para un recuento exploratorio.
 
-### 4.3. Para qué sirve el piloto
+### 5.3. Para qué sirve el piloto
 
 No fija un tamaño de muestra: lo estima. Sirve para saber:
 
@@ -211,12 +241,25 @@ No fija un tamaño de muestra: lo estima. Sirve para saber:
 - si los patrones de §2.2 aparecen, y en qué tipos de llamada;
 - cuántas llamadas cambian de decisión entre un método y el siguiente;
 - para el patrón 3, cuántas de las dudas grabadas dejan una respuesta aprovechable antes de `T_R`. Cuántas llamadas
-  tienen dudas lo fija el diseño de los guiones, así que esa frecuencia sale de §4.2, no del piloto.
+  tienen dudas lo fija el diseño de los guiones, así que esa frecuencia sale de §5.2, no del piloto.
 
 Con eso se dimensiona una evaluación posterior: cuántas estafas y cuántas legítimas hacen falta, teniendo en cuenta
 cuántas llamadas comparten participantes y qué precisión se quiere.
 
-## 5. Criterio para avanzar
+## 6. Paso a paso
+
+1. **Escribir la guía de anotación** de dudas e interrupciones y las definiciones de §2.3.
+2. **Contar dudas en los textos reales** (§5.2).
+3. **Grabar el piloto** (§5.1), con la reserva asignada antes de mirar nada.
+4. **Extraer los rasgos y los tiempos**, y revisar a mano una muestra de interrupciones.
+5. **Mirar los patrones** en los datos de definición, con los gráficos por llamada de §4.2.
+6. **Fijar la regla** (§3.2) y los valores del criterio (§7) con esos mismos datos.
+7. **Correr los métodos sobre la reserva** y comparar (§4).
+8. **Si pasa el criterio:** repetir con el códec telefónico y medir el costo en el teléfono, con Parakeet y E2B
+   corriendo a la vez.
+9. **Validar con llamadas naturales**, aparte.
+
+## 7. Criterio para avanzar
 
 > **Estado: propuesta sin discutir.** Los valores concretos se fijan por escrito antes de grabar.
 
@@ -233,7 +276,7 @@ El piloto justifica una evaluación más grande si se cumplen las tres condicion
 Si falla 1 o 2, se escribe por qué y se cierra. Si 1 supera a 0 y 2 no supera a 1, aportan los tiempos y no la voz. Si
 el control explica la mejora del patrón 3, aporta notar la duda en el texto, no cómo se respondió.
 
-## 6. Límites
+## 8. Límites
 
 - **Recreado no es natural.** Un resultado positivo en el piloto no prueba nada sobre llamadas reales; hace falta una
   validación aparte.
@@ -250,16 +293,15 @@ el control explica la mejora del patrón 3, aporta notar la duda en el texto, no
   Ni si alguien miente: los analizadores de estrés vocal rinden cerca del azar (Horvath, 1982; National Research
   Council, 2003), y Eriksson y Lacerda (2007) califican de charlatanería a dos de esos detectores. Ni si la voz es
   sintética, que es otra línea con otros datos (por ejemplo AASIST, Jung et al., 2022).
-- **Privacidad en el producto.** La comparación con la propia voz necesita conservar en memoria un resumen de los
-  rasgos de `OTRA` hasta el final de la llamada, no solo durante el turno. Ese resumen se descarta al cortar y nunca se
-  guarda.
+- **Privacidad en el producto.** La referencia y los resúmenes por turno se conservan en memoria hasta el final de la
+  llamada, no solo durante el turno. Se descartan al cortar y nunca se guardan.
 - **Privacidad en la investigación.** Las grabaciones del piloto requieren consentimiento informado, acceso restringido
   y un plazo de retención explícito, y quedan fuera de Git ([invariantes](../../AGENTS.md#invariantes)).
 - **Costo en el teléfono, sin medir.** En el Samsung A56 se midió el detector con un prompt anterior
   ([§8.6](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). Falta medir el
   recorrido con ASR y el costo adicional de extraer los rasgos.
 
-## 7. Alternativas posteriores
+## 9. Alternativas posteriores
 
 Quedan fuera del piloto y solo tienen sentido si el método 2 muestra algo:
 
@@ -275,7 +317,7 @@ VISHGUARD ([estado del arte](SINTESIS-ESTADO-DEL-ARTE.md#23-datasets-y-límites-
 sirve como antecedente de anotación de persuasión y emoción en llamadas sintéticas, no como datos para este piloto: no
 tiene español.
 
-## 8. Fuentes
+## 10. Fuentes
 
 - Eriksson, A. y Lacerda, F. (2007). Charlatanry in forensic speech science: A problem to be taken seriously.
   *International Journal of Speech, Language and the Law*, 14(2), 169–193.
