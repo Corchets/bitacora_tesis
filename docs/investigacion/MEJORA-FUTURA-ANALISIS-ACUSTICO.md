@@ -16,14 +16,22 @@ de la llamada, permiten al detector avisar antes del primer pedido de alto riesg
 [métricas](../evaluacion/METRICAS.md#1-marcas-temporales)) o avisar estafas que el texto solo no avisa, con un margen de
 falsas alarmas fijado antes de evaluar.
 
-**Por qué interesa.** Ninguno de los candidatos probados en
-[H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md) mejoró claramente la separación entre
-estafas y legítimas reales: los que bajaron las falsas alarmas perdieron detección o avisos a tiempo. Eso no prueba
-que el texto haya llegado a un techo, pero sugiere buscar información que el detector no tiene, en vez de otra forma de
-pedirle lo mismo. La voz es información que el sistema ya captura y hoy descarta: un operador y un estafador pueden
-decir lo mismo, y lo que cambia es cómo lo dicen y cómo llevan la conversación. Además, la voz y los tiempos no
-dependen de que el reconocedor transcriba bien: si Parakeet pierde una palabra clave, como «token», el texto pierde la
-pista, pero cómo se dijo sigue ahí.
+**Por qué interesa.** En la evaluación final, el detector avisó 73 de 100 estafas del test, y 26 de las 27 que no
+avisó se quedaron en riesgo 0,2, a un escalón del umbral de 0,3. Bajar el umbral no sirve: con 0,2 avisaría 99 de 100
+estafas, pero también 45 de 56 legítimas. Además, en 43 de las 80 estafas con pedido el aviso no llegó antes de que
+empezara el pedido ([análisis](../../experiments/slm-directo/corridas/2026-11-12_evaluacion-final/analisis.md),
+[conclusiones](../evaluacion/CONCLUSIONES-EVALUACION-FINAL.md#qué-no-ve-y-lo-más-interesante)). Y ninguno de los
+candidatos probados en [H12](../hallazgos/H12-cambiar-el-prompt-mueve-el-corte-no-la-separacion.md) mejoró claramente
+la separación entre estafas y legítimas reales: los que bajaron las falsas alarmas perdieron detección o avisos a
+tiempo. Eso no prueba que el texto haya llegado a un techo, pero sugiere buscar información que el detector no tiene,
+en vez de otra forma de pedirle lo mismo. La voz es información que el sistema ya captura y hoy descarta: un operador y
+un estafador pueden decir lo mismo, y lo que cambia es cómo lo dicen y cómo llevan la conversación. Además, la voz y
+los tiempos no dependen de que el reconocedor transcriba bien: si Parakeet pierde una palabra clave, como «token», y el
+riesgo del texto queda en duda en vez de avisar, cómo se dijo sigue ahí.
+
+**A qué apunta.** La regla que se propone (§3.2) solo agrega o adelanta avisos. Apunta a las estafas que el texto deja
+en duda y a los avisos tardíos. Las falsas alarmas en llamadas reales de H12 no bajan con esta regla; bajarlas con la
+voz sería otro experimento, con el costo que se explica en §3.2.
 
 **Hipótesis.** En algunas estafas, la forma de hablar de quien llama y la manera en que lleva la conversación cambian
 de un modo que el texto no registra, y esos cambios aportan información una vez considerado el texto. No pasa en todas:
@@ -63,9 +71,11 @@ incluye un control (§4.1).
 
 ### 2.3. Definiciones para el piloto
 
-- **Referencia de la propia voz:** cada turno de `OTRA` se compara con sus turnos anteriores en la misma llamada. Hay
-  que definir cuánta voz previa hace falta (en segundos) y qué pasa si falta: en ese caso no hay señal prosódica y
-  decide el texto solo. La referencia puede fallar en llamadas cortas, cuando la presión empieza desde el saludo o
+- **Referencia de la propia voz:** una línea base fija, armada con los primeros segundos de voz de `OTRA` en la
+  llamada; cuántos, se define antes de grabar. Para los patrones 1, 2 y 4, cada turno se compara con esa línea base.
+  Para el patrón 3, la respuesta a la duda se compara además con el turno anterior de `OTRA`. Una referencia que se
+  actualizara con cada turno amortiguaría la escalada, porque subiría junto con ella. Si no hay voz previa suficiente,
+  no hay señal prosódica y decide el texto solo. La referencia puede fallar en llamadas cortas, cuando la presión empieza desde el saludo o
   cuando cambia la ganancia del micrófono.
 - **Tiempos:** no todo solapamiento es una interrupción. Hay asentimientos («ajá»), eco y retrasos del canal. Se
   define qué cuenta como interrupción y se revisa a mano una muestra.
@@ -83,15 +93,18 @@ incluye un control (§4.1).
 | Altura ($F_0$) relativa | Nivel y rango de la altura de la voz frente a la referencia | Por verificar. En voz por VoIP, $F_0$ estuvo entre las medidas más estables (Xu et al., 2024) |
 | Intensidad relativa | Volumen frente a la referencia | Por verificar. Depende de la ganancia y del control automático del canal |
 | Ritmo | Tasa de regiones sonoras por segundo. Es una aproximación, no un conteo de sílabas | Por verificar |
-| Pausas | Proporción de silencio dentro del turno. eGeMAPS da la duración de las regiones no sonoras; la proporción se define y se calcula aparte | Por verificar |
+| Pausas | Proporción de pausas internas: tramos sin voz de al menos una duración mínima (por ejemplo, 200 ms) entre el primer y el último tramo de voz del turno. No se usan las regiones no sonoras de eGeMAPS, que incluyen consonantes como la s o la f | Por verificar |
 | Proporción de habla | Qué parte del tiempo habla cada canal hasta el momento | Por verificar |
 | Demora de respuesta | Tiempo entre el fin de un turno y el inicio del siguiente | Por verificar. Le suma el retraso del canal |
 | Solapamiento | Habla simultánea de los dos canales, según la definición de §2.3 | Por verificar. El eco puede simular solapamientos |
 | Largo de los turnos de `PROTEGIDA` | Duración de cada turno frente a sus turnos anteriores | Por verificar |
 
-Altura, intensidad y ritmo salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE, un programa liviano en C++
-que también corre en Android; las pausas, de las regiones no sonoras con un cálculo propio; el resto, de la actividad
-de voz de cada canal. Ninguno de estos rasgos indica estafa por sí mismo: también cambian por el contenido de lo que se
+Altura, intensidad y ritmo salen del conjunto eGeMAPS (Eyben et al., 2016) con openSMILE (Eyben, Wöllmer y Schuller,
+2010), un programa en C++ que también corre en Android. Su versión abierta es para investigación y educación; usarlo en
+un producto requiere la licencia comercial de audEERING ([repositorio](https://github.com/audeering/opensmile)). Las
+pausas y el resto salen de la actividad de voz de cada canal. Todos se calculan sobre el turno recortado entre el
+primer y el último tramo de voz, sin el audio previo ni el silencio que cerró el turno: si no, un turno corto parecería
+tener más pausas que uno largo, y el modelo aprendería el silencio (§8). Ninguno de estos rasgos indica estafa por sí mismo: también cambian por el contenido de lo que se
 dice, el ruido, el canal y la dinámica normal de una conversación. Qué dirección se espera en una estafa es parte de lo
 que el piloto tiene que observar, no un supuesto.
 
@@ -99,24 +112,32 @@ que el piloto tiene que observar, no un supuesto.
 
 ### 3.1. Turno a turno
 
-Hoy, al cerrarse cada turno de `OTRA`, Parakeet lo transcribe y Gemma 4 E2B escribe el riesgo de la conversación hasta
-ahí ([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). Con la mejora, en ese mismo momento:
+Hoy, en cada canal, un corte por volumen (RMS) parte el audio en frases, Silero descarta las que no tienen voz y
+Parakeet transcribe el resto ([ADR 0001](../ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)). Las
+frases se agrupan en turnos, que se cierran cuando el otro canal habla en serio (más de 1 s o 3 palabras) o tras unos
+2 s de silencio; al cerrarse un turno de `OTRA`, Gemma 4 E2B escribe el riesgo de la conversación hasta ahí
+([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). Con la mejora, en ese mismo momento:
 
 1. **El texto sigue como hoy.** Si el riesgo del texto llega al umbral, el aviso sale sin esperar nada más.
-2. **En paralelo se miden la voz y los tiempos.** openSMILE calcula los rasgos prosódicos del audio de ese turno, que
-   ya está en memoria, y la actividad de voz de los dos canales da los tiempos.
-3. **Se comparan con la referencia de la llamada.** Los primeros turnos de `OTRA` fijan cómo habla esa persona; cada
-   turno nuevo se guarda como cuánto se apartó de ahí.
+2. **En paralelo se miden la voz y los tiempos.** openSMILE calcula los rasgos prosódicos del audio de ese turno,
+   recortado como se explica en §2.4, y una detección de voz continua en los dos canales da los tiempos. Hoy el audio
+   del turno no queda guardado aparte, porque el ASR descarta cada frase al transcribirla: hay que conservar el audio
+   del turno en curso hasta que se cierre.
+3. **Se comparan con la referencia de la llamada** (§2.3), y se guarda cuánto se apartó cada turno.
 4. **La regla decide si adelanta o agrega un aviso** (§3.2).
 5. **Al cortar, se borra todo.** La referencia y los resúmenes por turno viven en memoria hasta el final de la llamada
    y no se guardan.
 
+En vivo, si el detector sigue ocupado, saltea consultas intermedias
+([§5.4.2](../tesis/CAP-05-DISENO-Y-ARQUITECTURA.md#542-modelado-de-la-cola-secuencial-del-detector)). Los rasgos y los
+tiempos se calculan igual para todos los turnos, para no romper la línea base ni el conteo de turnos.
+
 ```mermaid
 flowchart LR
-    C["Captura por canal<br/>(PROTEGIDA / OTRA)"] --> S["Silero: actividad de voz<br/>por bloque, en cada canal"]
-    S --> T["Tiempos de la<br/>conversación"]
-    S --> P["Parakeet: texto"] --> G["Gemma 4 E2B: riesgo"]
-    C --> O["openSMILE sobre el audio<br/>de OTRA: rasgos prosódicos"]
+    C["Captura por canal<br/>(PROTEGIDA / OTRA)"] --> V["Corte por volumen, filtro Silero<br/>y armado de turnos"]
+    V --> P["Parakeet: texto"] --> G["Gemma 4 E2B: riesgo"]
+    C --> S["Detección de voz continua<br/>en los dos canales"] --> T["Tiempos de la<br/>conversación"]
+    C --> B["Audio del turno de OTRA,<br/>recortado"] --> O["openSMILE:<br/>rasgos prosódicos"]
     O --> N["Comparar con la<br/>referencia de la llamada"]
     T --> N
     N --> R["Regla de combinación"]
@@ -124,7 +145,7 @@ flowchart LR
     R --> AV["Aviso, fechado al emitirse"]
 ```
 
-La atribución de cada turno a una persona viene de la captura por canal, no de Silero. La mejora necesita los dos
+La atribución de cada turno a una persona viene de la captura por canal. La mejora necesita los dos
 canales separados: en la integración objetivo, una llamada VoIP controlada por la aplicación, se pueden separar si se
 diseña así ([alternativas de captura](../ingenieria/ALTERNATIVAS-CAPTURA-AUDIO.md)). Por eso el canal objetivo se
 prueba desde el piloto.
@@ -140,9 +161,12 @@ explícita:
 
 - **Conserva los avisos existentes.** Cada llamada que el texto solo avisa sigue avisando, en el mismo turno o antes.
 - **Puede agregar o adelantar un aviso** cuando se cumplen dos cosas a la vez: la voz o los tiempos muestran un cambio
-  sostenido respecto de la referencia (en más de un turno, no un pico suelto), y el texto ya marca algún riesgo, aunque
-  no llegue al umbral. La voz y los tiempos nunca avisan solos: urgencia no es estafa. Cuánto cambio, cuántos turnos y
-  qué piso de riesgo del texto se fijan con los datos de definición del piloto, no a mano.
+  respecto de la referencia, y el texto ya marca algún riesgo, aunque no llegue al umbral. Para los patrones graduales
+  (1, 2 y 4), el cambio tiene que sostenerse en más de un turno, no ser un pico suelto. Para la reacción ante una duda
+  (patrón 3) alcanza el turno que responde a la duda: si tuviera que esperar otro, llegaría tarde. La voz y los tiempos
+  nunca avisan solos: urgencia no es estafa. Como el riesgo escrito casi siempre es 0,1, 0,2 o 0,3, el piso natural es
+  0,2, donde quedaron las estafas no avisadas. Cuánto cambio, cuántos turnos y qué piso se fijan con los datos de
+  definición del piloto, no a mano.
 - **Vuelve al texto solo cuando falta señal:** sin voz previa suficiente o con el canal degradado.
 
 Con esta regla las falsas alarmas quedan iguales o aumentan; no pueden bajar. «Avisar antes con las mismas falsas
@@ -170,14 +194,16 @@ Todos sobre los mismos prefijos de conversación y con la información disponibl
 | 0. Texto actual | La configuración congelada ([ADR 0002](../ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) y [ADR 0008](../ingenieria/adr/0008-prompt-del-detector-c-consejos.md)) | La base |
 | 1. Texto con tiempos | 0, más los tiempos de la conversación | Si los tiempos suman sobre el texto |
 | 2. Texto con tiempos y voz | 1, más los rasgos prosódicos de `OTRA` | Si la voz suma sobre todo lo anterior |
-| Control. Texto con la duda marcada | 0, más la marca de que `PROTEGIDA` dudó u objetó | Si para el patrón 3 alcanza con señalar la duda, sin escuchar la respuesta |
+| Control. Texto con la duda marcada | 0, más la regla de §3.2 con «hubo una duda de `PROTEGIDA` en el turno anterior» en lugar del cambio en la voz, sin tocar el prompt | Si para el patrón 3 alcanza con señalar la duda, sin escuchar la respuesta |
 
 Los métodos comparten la misma transcripción incremental, el mismo calendario de consultas y una única ejecución del
-detector base. Cada método conserva los disparos del anterior y puede emitir un aviso adicional con la señal que
+detector base. Esa ejecución corre sobre todos los turnos de `OTRA`, sin cortar en el primer aviso como hace la
+configuración congelada, para tener las curvas completas; el `T_A` de cada método es su primer disparo. Cada método conserva los disparos del anterior y puede emitir un aviso adicional con la señal que
 incorpora. El aviso base sale sin esperar el cálculo adicional. Los tiempos y los rasgos de un turno entran al cerrarse
 el turno y terminar su cálculo. Si faltan rasgos prosódicos, el método 2 conserva la decisión del método 1. Compartir
-la ejecución importa: la misma configuración, corrida de otro modo, pasó de 37 a 43 avisos antes del pedido
-([H13](../hallazgos/H13-la-misma-configuracion-corrida-de-otro-modo.md)).
+la ejecución importa: la misma configuración, corrida en otra sesión y sin cortar en el primer aviso, pasó de 37 a 43
+avisos antes del pedido ([H13](../hallazgos/H13-la-misma-configuracion-corrida-de-otro-modo.md)). Por eso el modo de
+ejecución se declara y es el mismo para todos los métodos.
 
 En el piloto las dudas se anotan a mano. Si el control resulta necesario en el teléfono, aparte se mide cuánto se
 pierde cuando hay que detectarlas automáticamente.
@@ -197,8 +223,8 @@ denominadores explícitos:
 Además:
 
 - Todo separado por tipo de llamada (§5.1). Un método que mejora el total pero empeora un tipo se informa así.
-- Por llamada, un gráfico con el riesgo de cada método turno a turno, los rasgos de la voz y los tiempos, las dudas,
-  `T_R` y `T_A`, y **cuándo estuvo disponible cada señal**: los rasgos de un turno llegan después de que el turno
+- Por llamada, un gráfico con el riesgo del texto turno a turno, los rasgos de la voz y los tiempos, las dudas, los
+  disparos de cada método, `T_R` y `T_A`, y **cuándo estuvo disponible cada señal**: los rasgos de un turno llegan después de que el turno
   termina.
 - Entre llamadas, comparaciones con un horizonte común (por ejemplo, hasta `T_R` o las primeras N consultas), no con el
   máximo de la llamada entera, que favorece a las más largas.
@@ -213,6 +239,9 @@ Además:
   micrófono. En el piloto, estafas y legítimas se recrean por igual; la validación con llamadas naturales va después,
   por separado.
 - **Participantes en las dos clases** cuando se pueda, para que la voz de una persona no delate la clase.
+- **Un piso de participantes por conjunto,** fijado antes de grabar, para que la reserva no quede con dos o tres voces
+  y la incertidumbre se pueda estimar. Las pruebas anteriores con voz real tuvieron solo dos voces
+  ([§8.2.1](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#821-con-voz-real)).
 - **Reserva agrupada por personas y por familias de guiones:** se asigna antes de ajustar la regla, y cada
   participante y cada familia completa de guiones queda en un solo conjunto, el que se usa para definir la regla o el
   que se usa para evaluarla.
@@ -225,13 +254,17 @@ Además:
 
 ### 5.2. Lo que se puede mirar sin audio
 
-Los conjuntos reales de la evaluación final son texto traducido, sin audio: no sirven para la voz ni para los tiempos.
-Sí permiten contar con qué frecuencia la persona duda antes del pedido en llamadas que no se escribieron para esto, que
-es lo que necesita el patrón 3. En las 27 estafas reales con pedido de alto riesgo registrado se cuenta cuántas tienen
+Es una nota de factibilidad, opcional y fuera del camino principal. Los conjuntos reales de la evaluación final son
+texto traducido, sin audio: no sirven para la voz ni para los tiempos. Sí permiten ver si la persona duda antes del
+pedido en llamadas que no se escribieron para esto, que es lo que necesita el patrón 3. En las 27 estafas reales con pedido de alto riesgo registrado se cuenta cuántas tienen
 una duda antes del primer pedido; las seis sin pedido se describen aparte. En las 33 legítimas reales, no solo las 21
-que avisaron, se cuentan hasta un horizonte común. Las marcas requieren revisión y los roles de las legítimas se
-infirieron sobre una transcripción sin hablantes
-([procedencia](FUENTES-LEGITIMAS-REALES.md#85-límites-para-informar)); alcanzan para un recuento exploratorio.
+que avisaron, se cuentan hasta un horizonte común. Los límites son varios. En las estafas, 11
+llamadas empiezan con la grabación avanzada, lo que puede cortar dudas del comienzo, la mayoría de las marcas las
+propuso una IA sin revisión humana y la separación de hablantes tiene errores
+([relevamiento](../corpus/RELEVAMIENTO-CORPUS-EXTERNO.md)). Las legítimas son llamadas comerciales entre empresas en
+Estados Unidos, con los roles inferidos sobre una transcripción sin hablantes
+([procedencia](FUENTES-LEGITIMAS-REALES.md#85-límites-para-informar)). Alcanzan para un recuento exploratorio, no para
+estimar la frecuencia en llamadas a particulares en Argentina.
 
 ### 5.3. Para qué sirve el piloto
 
@@ -241,23 +274,29 @@ No fija un tamaño de muestra: lo estima. Sirve para saber:
 - si los patrones de §2.2 aparecen, y en qué tipos de llamada;
 - cuántas llamadas cambian de decisión entre un método y el siguiente;
 - para el patrón 3, cuántas de las dudas grabadas dejan una respuesta aprovechable antes de `T_R`. Cuántas llamadas
-  tienen dudas lo fija el diseño de los guiones, así que esa frecuencia sale de §5.2, no del piloto.
+  tienen dudas lo fija el diseño de los guiones, así que el piloto no mide esa frecuencia. §5.2 solo muestra si esas
+  dudas aparecen en llamadas no guionadas; su frecuencia en llamadas a particulares en Argentina requiere datos
+  locales.
 
 Con eso se dimensiona una evaluación posterior: cuántas estafas y cuántas legítimas hacen falta, teniendo en cuenta
 cuántas llamadas comparten participantes y qué precisión se quiere.
 
 ## 6. Paso a paso
 
-1. **Escribir la guía de anotación** de dudas e interrupciones y las definiciones de §2.3.
-2. **Contar dudas en los textos reales** (§5.2).
-3. **Grabar el piloto** (§5.1), con la reserva asignada antes de mirar nada.
-4. **Extraer los rasgos y los tiempos**, y revisar a mano una muestra de interrupciones.
-5. **Mirar los patrones** en los datos de definición, con los gráficos por llamada de §4.2.
-6. **Fijar la regla** (§3.2) y los valores del criterio (§7) con esos mismos datos.
-7. **Correr los métodos sobre la reserva** y comparar (§4).
-8. **Si pasa el criterio:** repetir con el códec telefónico y medir el costo en el teléfono, con Parakeet y E2B
-   corriendo a la vez.
-9. **Validar con llamadas naturales**, aparte.
+1. **Antes de grabar, escribir** la guía de anotación de dudas e interrupciones, las definiciones de §2.3 y los
+   valores del criterio para avanzar (§7): margen de estabilidad, mejora mínima y máximo de falsas alarmas adicionales.
+2. **Grabar el piloto** (§5.1), sorteando antes qué participantes y familias de guiones van a la reserva.
+3. **Extraer los rasgos y los tiempos,** con el audio original y pasado por el códec telefónico. Verificar la
+   estabilidad (§7, condición 1) y revisar a mano una muestra de interrupciones y de cortes de turno.
+4. **Mirar los patrones** solo en los datos de definición, con los gráficos por llamada de §4.2 (§7, condición 2).
+5. **Fijar la regla** (§3.2: cuánto cambio, cuántos turnos y qué piso de riesgo del texto) solo con los datos de
+   definición.
+6. **Correr los métodos una sola vez sobre la reserva** y comparar con el criterio escrito en el paso 1 (§4 y §7).
+7. **Si pasa el criterio:** medir latencia, memoria, batería y temperatura en un Android de gama alta, con Parakeet,
+   openSMILE y E2B corriendo a la vez.
+8. **Validar con llamadas naturales**, aparte.
+
+El recuento sin audio de §5.2 se puede hacer en cualquier momento; no condiciona los pasos.
 
 ## 7. Criterio para avanzar
 
@@ -283,9 +322,13 @@ el control explica la mejora del patrón 3, aporta notar la duda en el texto, no
 - **Que aprenda la grabación y no la estafa.** Un modelo de audio puede apoyarse en diferencias de grabación: en
   detección de voces falsas, modelos entrenados en ASVspoof 2019 se apoyaban en cuánto silencio había al principio
   (Müller et al., 2021). Grabar las dos clases igual y agrupar la reserva por personas apunta a eso.
-- **Sesgo por grupos.** Las falsas alarmas se informan por región o tonada, género y edad, con márgenes fijados antes e
-  incertidumbre. Con grupos chicos, una diferencia puede ser ruido, y no observar diferencias tampoco demuestra que no
-  haya sesgo.
+- **Sesgo por grupos.** En el piloto se registran la región o tonada, el género y la edad de quienes graban. El
+  análisis de falsas alarmas por grupo, con márgenes fijados antes e incertidumbre, va en la evaluación posterior: en
+  un piloto chico cada grupo tendría una o dos personas. Aun así, una diferencia en un grupo chico puede ser ruido, y
+  no observar diferencias tampoco demuestra que no haya sesgo.
+- **Turnos armados por una heurística.** Las reglas que cierran los turnos no se calibraron con grabaciones
+  ([ADR 0007](../ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). Si parten o pegan turnos de más,
+  afectan al texto y a los rasgos por turno. El piloto también sirve para revisarlas.
 - **Qué no se mide.** Ni acento, región o nivel socioeconómico: no son pertinentes para la finalidad, penalizarían a
   hablantes legítimos por cómo hablan, y la Ley 25.326 exige que los datos sean pertinentes y no excesivos para la
   finalidad
@@ -297,9 +340,10 @@ el control explica la mejora del patrón 3, aporta notar la duda en el texto, no
   llamada, no solo durante el turno. Se descartan al cortar y nunca se guardan.
 - **Privacidad en la investigación.** Las grabaciones del piloto requieren consentimiento informado, acceso restringido
   y un plazo de retención explícito, y quedan fuera de Git ([invariantes](../../AGENTS.md#invariantes)).
-- **Costo en el teléfono, sin medir.** En el Samsung A56 se midió el detector con un prompt anterior
-  ([§8.6](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). Falta medir el
-  recorrido con ASR y el costo adicional de extraer los rasgos.
+- **Costo en el teléfono, sin medir.** En un iPhone 15 Pro Max corrieron juntos el detector con la configuración
+  final y Parakeet con filtro, con audio sintético; en el Samsung A56 solo se midió el detector, con un prompt anterior
+  ([§8.6](../tesis/CAP-08-RESULTADOS-EXPERIMENTALES.md#86-rendimiento-y-límites-del-hardware)). Falta medir en un
+  Android de gama alta el recorrido completo con la extracción de rasgos.
 
 ## 9. Alternativas posteriores
 
@@ -321,6 +365,9 @@ tiene español.
 
 - Eriksson, A. y Lacerda, F. (2007). Charlatanry in forensic speech science: A problem to be taken seriously.
   *International Journal of Speech, Language and the Law*, 14(2), 169–193.
+- Eyben, F., Wöllmer, M. y Schuller, B. (2010). openSMILE: the Munich versatile and fast open-source audio feature
+  extractor. *Proceedings of the 18th ACM International Conference on Multimedia*, 1459–1462.
+  [doi:10.1145/1873951.1874246](https://doi.org/10.1145/1873951.1874246).
 - Eyben, F. et al. (2016). The Geneva Minimalistic Acoustic Parameter Set (GeMAPS) for Voice Research and Affective
   Computing. *IEEE Transactions on Affective Computing*, 7(2), 190–202.
   [doi:10.1109/TAFFC.2015.2457417](https://doi.org/10.1109/TAFFC.2015.2457417).
@@ -336,4 +383,4 @@ tiene español.
   [arXiv:2203.07378](https://arxiv.org/abs/2203.07378).
 - Xu, C. et al. (2024). Voice quality in telephone speech: Comparing acoustic measures between VoIP telephone and
   high-quality recordings. *Interspeech 2024*, 1570–1574.
-  [doi:10.21437/Interspeech.2024-2240](https://www.isca-archive.org/interspeech_2024/xu24j_interspeech.html).
+  [doi:10.21437/Interspeech.2024-2240](https://doi.org/10.21437/Interspeech.2024-2240).
