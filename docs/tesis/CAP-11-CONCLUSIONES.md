@@ -62,5 +62,5 @@ En desarrollo:
 - Ampliar el reconocimiento de términos críticos, como «token» y «CVV».
 - Probar la comprensión del aviso con voluntarios, especialmente adultos mayores.
 - Evaluar con más voces, ruido real y códecs telefónicos.
-- Explorar rasgos acústicos, hoy excluidos ([D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico)).
+- Explorar el análisis acústico de la llamada, hoy excluido ([D11](../gestion/MAPA-DECISIONES.md#d11--análisis-lingüístico-o-también-acústico)): cómo habla quien llama y cómo se reparten los tiempos de la conversación. Apuntaría a las estafas que el texto deja en duda y a los avisos tardíos. Se propone un piloto con llamadas recreadas que aísle qué aportan los tiempos y la voz sobre la transcripción, sin usar el acento ni detectar mentiras ([propuesta](../investigacion/MEJORA-FUTURA-ANALISIS-ACUSTICO.md)).
 - Que el SLM escuche el audio del turno, con lo anterior como texto, en vez de leer la transcripción. Antes hay que resolver cómo se arma el contexto, porque la llamada entera no entra, y evaluar con audio de todos los casos ([corrida de #152](../../experiments/asr-local/corridas/2026-11-10_152-opcion-b-e2b-transcribe/resumen.md#por-qué-la-opción-c-queda-afuera-sin-medirla)).
