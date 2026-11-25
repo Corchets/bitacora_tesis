@@ -1,0 +1,82 @@
+{
+  "piloto": {
+    "estimacion": {
+      "consultas": 83,
+      "tokens_entrada_estimados": 186341,
+      "usd_estimados": 0.12216787500000001
+    },
+    "estado": "validating",
+    "modelo": "google/gemini-3.8-flash",
+    "proveedor_solicitado": "google-vertex",
+    "max_tokens": 336,
+    "razonamiento": "low",
+    "seed_solicitada": 42,
+    "temperatura": "predeterminada",
+    "commit_base": "653fc0be5b7a68c5d80a9da529df7c444d0cef72",
+    "huellas": {
+      "conversaciones-desarrollo-150.json": "bfa2baac33434e136ade9d435b5750be559d0c55593b1d6e951334c9f2faaf91",
+      "turnos.jsonl": "70119b545a13ed5ced7c2a6dea555ddfc8cd6cff203bcce5cf352fb8897f9a10",
+      "correr.py": "8173f2dfb5eca11fbfb04501dd8806fdfdf008717d26a33098f1195309228045",
+      "detectores.py": "2a3ede9855fd47ad6b81caa36bb0c7a24007e4d72f20ba85c928afd94cb93a3c"
+    },
+    "payload_sha256": "161b5153e646b2623b036016a8041316ddb9c2f96ffc1db9019cfd5ecc12315b",
+    "id": "batch-1795449985-IXUhxkYvmA0nqeZXndDO",
+    "status": "completed",
+    "provider": "Google",
+    "usage": {
+      "prompt_tokens": 97297,
+      "completion_tokens": 4637,
+      "total_tokens": 101934,
+      "cost": 0.04518075,
+      "is_byok": false
+    },
+    "request_counts": {
+      "total": 83,
+      "completed": 83,
+      "failed": 0
+    },
+    "created_at": 1795449985,
+    "completed_at": null,
+    "error": null
+  },
+  "resto": {
+    "estimacion": {
+      "consultas": 1309,
+      "tokens_entrada_estimados": 2692213,
+      "usd_estimados": 1.834249875
+    },
+    "estado": "validating",
+    "modelo": "google/gemini-3.8-flash",
+    "proveedor_solicitado": "google-vertex",
+    "max_tokens": 336,
+    "razonamiento": "low",
+    "seed_solicitada": 42,
+    "temperatura": "predeterminada",
+    "commit_base": "653fc0be5b7a68c5d80a9da529df7c444d0cef72",
+    "huellas": {
+      "conversaciones-desarrollo-150.json": "bfa2baac33434e136ade9d435b5750be559d0c55593b1d6e951334c9f2faaf91",
+      "turnos.jsonl": "70119b545a13ed5ced7c2a6dea555ddfc8cd6cff203bcce5cf352fb8897f9a10",
+      "correr.py": "c85c1f1fc6605e387c14ba50db8b3af4bca1149b7cd2370ffd97af3e454fd245",
+      "detectores.py": "2a3ede9855fd47ad6b81caa36bb0c7a24007e4d72f20ba85c928afd94cb93a3c"
+    },
+    "payload_sha256": "5b9bb1019ba489f627a63e062ed84fb523f9a7b646e065118b0c39da2719048d",
+    "id": "batch-1795450434-kYiR1yNggMl54bdcAPlR",
+    "status": "completed",
+    "provider": "Google",
+    "usage": {
+      "prompt_tokens": 1409911,
+      "completion_tokens": 70055,
+      "total_tokens": 1479966,
+      "cost": 0.66006975,
+      "is_byok": false
+    },
+    "request_counts": {
+      "total": 1309,
+      "completed": 1309,
+      "failed": 0
+    },
+    "created_at": 1795450434,
+    "completed_at": null,
+    "error": null
+  }
+}
