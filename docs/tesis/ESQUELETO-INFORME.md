@@ -2,7 +2,7 @@
 
 **Institución:** UNSTA — Ingeniería en Informática, Plan 2008
 **Formato:** digital (PDF), A4, carilla simple, unas 100 páginas. Sin código.
-**Redacción:** en Markdown, versionado en este repositorio.
+**Redacción:** en Markdown, en un solo archivo ([`INFORME.md`](INFORME.md)), versionado en este repositorio.
 
 Reemplaza al esqueleto del 2026-09, que está en el historial de Git. Lo acordó el equipo el 2026-11-25, partiendo
 de lo que propuso el profesor. El borrador anterior (`INFORME-FINAL.md`, fuera de Git) y los `CAP-*.md` de esta
@@ -340,8 +340,8 @@ Git), que ya explica cómo implementar cada mejora; el comentario de trabajo fut
 - La evolución del proyecto va en las etapas (7); las mediciones lado a lado, en las comparaciones (8).
 - El prompt final va en un anexo.
 - El uso de asistentes de IA se menciona en la metodología.
-- Se redacta en Markdown, versionado en este repositorio: un archivo por capítulo, `INFORME-NN-TITULO.md` en esta
-  carpeta, y las referencias de todos los capítulos en [`INFORME-REFERENCIAS.md`](INFORME-REFERENCIAS.md).
+- Se redacta en Markdown, versionado en este repositorio: todo el informe en un solo archivo,
+  [`INFORME.md`](INFORME.md), con las referencias al final.
 - Lo que el equipo tiene que resolver queda dentro del capítulo como marca (`> **Estado: propuesta sin discutir.**`,
   `> **Corregir:**` o `> **Falta fuente:**`). Las marcas se borran antes de armar el PDF.
 
