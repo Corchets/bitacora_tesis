@@ -1,12 +1,14 @@
 # Llamada en vivo: ASR por canal, detector y panel (frente 1, spike)
 
-> **Configuración por defecto (2026-11-10):** ASR `parakeet-filtro`
+> **Configuración por defecto (2026-11-10; prompt del 2026-11-18, revisada el 2026-11-25):** ASR `parakeet-filtro`
 > ([ADR 0001](../../docs/ingenieria/adr/0001-parakeet-filtro-y-gemma4-e2b-con-tito-viejo.md)) y la configuración
 > congelada de [#143](https://github.com/Corchets/bitacora_tesis/issues/143) como detector
 > ([ADR 0002](../../docs/ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md)): Gemma 4 E2B directo, sin
 > Tito, con `c-consejos-corte-riesgo` ([ADR 0008](../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md), [ADR 0006](../../docs/ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md))
-> y solo OTRA ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)). El servidor
-> arranca así si no se le pasa nada; el comando para probarlo está en [§3](#demo-con-la-configuración-congelada-de-143). Implementa la opción D (cualquier app de llamada + captura por persona) y deja andando
+> y solo OTRA ([ADR 0007](../../docs/ingenieria/adr/0007-consulta-al-cerrar-cada-turno-de-otra.md)), con contexto de
+> 16.384 tokens. Sigue generando los 14 tokens hasta el riesgo: el prellenado del
+> [ADR 0009](../../docs/ingenieria/adr/0009-en-el-telefono-el-modelo-genera-solo-el-numero.md) es del teléfono
+> (`llama-server`) y con Ollama no se probó. El servidor arranca así si no se le pasa nada; el comando para probarlo está en [§3](#demo-con-la-configuración-congelada-de-143). Implementa la opción D (cualquier app de llamada + captura por persona) y deja andando
 > la E (replay estéreo en tiempo real) con el mismo código. No cierra
 > [D08](../../docs/gestion/MAPA-DECISIONES.md#d08--congelar-protocolo-experimental).
 
@@ -22,7 +24,7 @@ notebook de la otra persona ──────── micrófono ─┤
    (o BlackHole: lo que sale de la app de llamada en la misma notebook)
    (o un canal de un WAV al ritmo real: plan B y pruebas)
                                                 ▼
-servidor.py ── Zipformer streaming por canal ── actualizaciones.jsonl (contrato de asr-local)
+servidor.py ── ASR por canal (parakeet-filtro) ── actualizaciones.jsonl (contrato de asr-local)
             ── detector (reglas o SLM) sobre la foto más reciente ── detector.jsonl
             ── panel web: transcripción, riesgo, aviso y demoras
             ── al cortar: estereo.wav (fuera de Git) y manifiesto.json
@@ -411,8 +413,8 @@ al fin del pedido (17,6 s, según §4).
 
 El comando precarga el SLM y los dos ASR, reproduce los ~22 s del ejemplo al ritmo
 real con la fuente de #77 y espera la evaluación pendiente al terminar. Conserva
-el disparo `final`, silencio de 0,8 s, prompt `v4`, seed 42, hablantes `PROTEGIDA`/`OTRA`
-y Tito sin indicio (`--con-indicio` lo agrega),
+el disparo `final` con Zipformer y silencio de 0,8 s; el detector es el de `servidor.py` (`c-consejos-corte-riesgo`,
+seed 42, hablantes `PROTEGIDA`/`OTRA`),
 foto más reciente sin cola y aviso único del servidor. No abre un puerto ni un panel.
 La carga inicial queda fuera de la mediana; la demora del ASR queda fuera del tiempo
 por evaluación, pero sí influye en el momento del aviso.

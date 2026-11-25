@@ -1,5 +1,22 @@
 # Prueba con voz real por Meet: checklist
 
+> **Nota del 2026-11-25:** este checklist es el de la corrida del 2026-11-02, con Tito viejo, prompt `tarea` y
+> `num_ctx` 4096. Esa configuración quedó superada. Para una prueba nueva, el detector es el de los
+> [ADR 0002](../../docs/ingenieria/adr/0002-detector-gemma4-e2b-solo-con-prompt-c-premisa.md) y
+> [0006](../../docs/ingenieria/adr/0006-salida-cortada-tras-el-campo-que-decide-y-motivo-al-avisar.md)–[0008](../../docs/ingenieria/adr/0008-prompt-del-detector-c-consejos.md),
+> que es lo que corre `servidor.py` sin opciones ([README §3](README.md#demo-con-la-configuración-congelada-de-143)).
+> Cambian estos pasos:
+>
+> - **Servidor:** `python servidor.py` (más `--host`, `--puerto`, `--asr`, `--corte-silencio` y `--salida` si hacen
+>   falta), sin `--detector tito-slm --prompt v4`.
+> - **Comprobación:** `curl http://localhost:8765/detector` dice `slm`, `gemma4:e2b-it-q4_K_M`,
+>   `c-consejos-corte-riesgo` y `"solo_otra": true`.
+> - **Sin Tito:** no hay marca «Tito activó al modelo» ni frases «Sin consulta». Se consulta al cerrar cada turno de
+>   OTRA y, tras el primer aviso, no se consulta más. Las filas y la captura que piden esa marca no se aplican.
+> - **Replay (#85):** `python ../replay/replay.py --actualizaciones <llamada>/actualizaciones.jsonl --detector slm
+>   --prompt c-consejos-corte-riesgo --hablantes rol --num-ctx 16384 --salida <carpeta fuera de Git>`. Replay consulta en cada frase final, de los
+>   dos lados, y no por turno de OTRA: comprueba que el recorrido anda, no repite el momento del aviso.
+
 Para Luciano y otra persona. Cubre [#84](https://github.com/Corchets/bitacora_tesis/issues/84),
 [#85](https://github.com/Corchets/bitacora_tesis/issues/85),
 [#86](https://github.com/Corchets/bitacora_tesis/issues/86) y
